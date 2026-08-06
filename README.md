@@ -1,1 +1,1 @@
-Sorry for the architecture of the repo, I will change later on
+I'm currently making a Discord bot
