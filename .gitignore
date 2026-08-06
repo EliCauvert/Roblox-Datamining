@@ -8,8 +8,8 @@
 # ...but let git traverse into directories to find what's allowed below...
 !*/
 
-# ...and allow only locale CSV exports, wherever a "Locales" folder appears.
-!/**/Locales/*.csv
+# ...and allow only the flat locale CSV exports at the repo root.
+!/Locales/*.csv
 
 # Keep this file itself tracked.
 !/.gitignore
