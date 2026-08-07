@@ -1,6 +1,6 @@
 ﻿Key,Value
 AccountIdentity.AgeCheck.Label.AgeBandOver13,13+
-AccountIdentity.AgeCheck.Label.AgeBandOver13Checked,13+ Age Checked (test changed)
+AccountIdentity.AgeCheck.Label.AgeBandOver13Checked,13+ Age Checked
 AccountIdentity.AgeCheck.Label.AgeBandOver18,18+
 AccountIdentity.AgeCheck.Label.AgeBandOver18Checked,18+ Age Checked
 AccountIdentity.AgeCheck.Label.AgeBandUnder13,<13
