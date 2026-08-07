@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatSignalsReplyStore", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatSignalsMessageStore)

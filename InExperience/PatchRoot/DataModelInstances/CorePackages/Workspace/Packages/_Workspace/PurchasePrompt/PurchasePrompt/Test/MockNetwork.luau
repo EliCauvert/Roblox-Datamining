@@ -1,0 +1,312 @@
+﻿local parent = script.Parent.Parent
+local promiseModule = require(parent.Promise)
+local purchaseWarningModule = require(parent.Enums.PurchaseWarning)
+local fFlagRefreshPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
+
+local function getABTestGroup() --[[ line: 13 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve(false)
+end
+
+local function getProductInfo(_, _) --[[ line: 17 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		AssetId = 1,
+		AssetTypeId = 2,
+		ContentRatingTypeId = 0,
+		Description = "This item isn't real!",
+		IconImageAssetId = 1,
+		IsForSale = true,
+		IsLimited = false,
+		IsLimitedUnique = false,
+		IsNew = false,
+		IsPublicDomain = false,
+		MinimumMembershipLevel = 0,
+		Name = "Test Item",
+		PriceInRobux = 100,
+		ProductId = 1,
+		Creator = {
+			CreatorType = "Group",
+			CreatorTargetId = 1,
+			Name = "ROBLOX",
+			Id = 1
+		}
+	})
+end
+
+local function getPlayerOwns(_, _, _) --[[ line: 42 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve(false)
+end
+
+local function performPurchase(_, _, _, _) --[[ line: 46 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		success = true,
+		purchased = true,
+		receipt = "fake-receipt-hash"
+	})
+end
+
+local function loadAssetForEquip(_) --[[ line: 54 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve(Instance.new("Tool"))
+end
+
+local function getAccountInfo() --[[ line: 58 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({ isPremium = false })
+end
+
+local function getBalanceInfo() --[[ line: 64 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({ robux = 2147483647 })
+end
+
+local function getBundleDetails(_) --[[ line: 70 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		id = 1,
+		name = "mock-name",
+		description = "mock-description",
+		items = {
+			[1] = { id = 1, name = "outfit-name", type = "UserOutfit" }
+		},
+		creator = { id = 1, name = "ROBLOX", type = "User" },
+		product = { id = 1, isForSale = true, priceInRobux = 100 }
+	})
+end
+
+local function getProductPurchasableDetails(_) --[[ line: 95 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({ purchasable = false, reason = "mock-reason", price = 100 })
+end
+
+local function getCatalogItemDetails(_, _) --[[ line: 103 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		bundleType = 1,
+		collectibleItemId = "random-collectible-item-id-123",
+		creatorHasVerifiedBadge = true,
+		creatorName = "mockRobloxCreator",
+		creatorTargetId = 123,
+		creatorType = "User",
+		description = "Mock bundle",
+		expectedSellerId = 123,
+		favoriteCount = 908,
+		hasReseller = false,
+		id = 123456,
+		isPurchasable = true,
+		itemType = "Bundle",
+		lowestPrice = 175,
+		lowestResalePrice = 0,
+		name = "Roblox Collectible Bundle",
+		owned = false,
+		price = 175,
+		productId = 1234567890123456,
+		purchaseCount = 0,
+		saleLocationType = "ShopAndAllExperiences",
+		totalQuantity = 0,
+		unitsAvailableForConsumption = 0,
+		bundledItems = {
+			[1] = {
+				id = 10001,
+				name = "Mock bundle - Left Arm",
+				owned = true,
+				type = "Asset"
+			},
+			[2] = {
+				id = 1002,
+				name = "Mock bundle - Right Leg",
+				owned = true,
+				type = "Asset"
+			},
+			[3] = {
+				id = 1003,
+				name = "Mock bundle - Right Arm",
+				owned = true,
+				type = "Asset"
+			},
+			[4] = {
+				id = 1004,
+				name = "Mock bundle - Left Leg",
+				owned = true,
+				type = "Asset"
+			},
+			[5] = {
+				id = 1005,
+				name = "Mock bundle - Dynamic Head",
+				owned = true,
+				type = "Asset"
+			},
+			[6] = {
+				id = 1006,
+				name = "Default Mood",
+				owned = true,
+				type = "Asset"
+			},
+			[7] = {
+				id = 1007,
+				name = "Mock bundle - Torso",
+				owned = true,
+				type = "Asset"
+			},
+			[8] = {
+				id = 1008,
+				name = "Mock item",
+				owned = true,
+				type = "UserOutfit"
+			},
+			[9] = {
+				id = 1009,
+				name = "Mock bundle Head",
+				owned = true,
+				type = "UserOutfit"
+			}
+		},
+		itemRestrictions = {},
+		itemStatus = {}
+	})
+end
+
+local function getResellers(_, _) --[[ line: 189 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({ nextPageCursor = nil, data = {} })
+end
+
+local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _) --[[ line: 196 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		roblox_product_id = 50,
+		provider_product_id = "robux50",
+		roblox_product_name = "providerRobux50",
+		robux_amount = 500
+	})
+end
+
+local function postPremiumImpression() --[[ line: 212 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve()
+end
+
+local function getPremiumUpsellPrecheck() --[[ line: 216 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve(true)
+end
+
+local function getPurchaseWarning(_) --[[ line: 220 ]]
+	-- upvalues: promiseModule (ref), purchaseWarningModule (ref)
+	return promiseModule.resolve({ action = purchaseWarningModule.NoAction })
+end
+
+local function postPurchaseWarningAcknowledge() --[[ line: 226 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve()
+end
+
+local function checkUserPurchaseSettings() --[[ line: 230 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({ isEligible = false, failureReason = "PurchaseNotEnabled" })
+end
+
+local function getUnifiedPurchaseFlowUserEligibility() --[[ line: 237 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		isUserEligibleForUnifiedPurchaseFlow = true,
+		expiresInSeconds = 120
+	})
+end
+
+local function getSubscriptionProductInfo(_) --[[ line: 244 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		Name = "Mock Subscription",
+		Description = "A mock developer subscription",
+		IconImageAssetId = 12345,
+		IsForSale = true,
+		DisplayPrice = "$4.99",
+		DisplaySubscriptionPeriod = "/month",
+		SubscriptionProviderName = "MockGame",
+		PriceTier = 499,
+		PriceInRobux = 0
+	})
+end
+
+local function GetLookDetailsV2ProductInfo(_) --[[ line: 258 ]]
+	-- upvalues: promiseModule (ref)
+	return promiseModule.resolve({
+		look = {
+			items = { { id = 1, itemType = "Asset", priceInRobux = 100 } }
+		}
+	})
+end
+
+local t = {}
+t.__index = t
+
+function t.new(p0, p1) --[[ line: 275 ]]
+	-- upvalues: promiseModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), getCatalogItemDetails (ref), getResellers (ref), getRobuxUpsellProductWithUniverseItemInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getUnifiedPurchaseFlowUserEligibility (ref), getSubscriptionProductInfo (ref), GetLookDetailsV2ProductInfo (ref)
+	local t
+	local _ = nil
+	
+	if p1 or p0 then
+		local var25 = function() --[[ line: 279 ]]
+			-- upvalues: p0 (ref), promiseModule (copy), p1 (ref)
+			return if p0 then promiseModule.resolve(p0) else promiseModule.reject(p1)
+		end
+		
+		t = {
+			getABTestGroup = var25,
+			getProductInfo = var25,
+			getPlayerOwns = var25,
+			performPurchase = var25,
+			loadAssetForEquip = var25,
+			getAccountInfo = var25,
+			getBalanceInfo = var25,
+			getBundleDetails = var25,
+			getProductPurchasableDetails = var25,
+			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then var25 else nil,
+			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then var25 else nil,
+			getRobuxUpsellProductWithUniverseItemInfo = var25,
+			postPremiumImpression = var25,
+			getPremiumUpsellPrecheck = var25,
+			getPurchaseWarning = var25,
+			postPurchaseWarningAcknowledge = var25,
+			checkUserPurchaseSettings = var25,
+			getUnifiedPurchaseFlowUserEligibility = var25,
+			getSubscriptionProductInfo = var25
+		}
+	else
+		t = {
+			getABTestGroup = getABTestGroup,
+			getProductInfo = getProductInfo,
+			getPlayerOwns = getPlayerOwns,
+			performPurchase = performPurchase,
+			loadAssetForEquip = loadAssetForEquip,
+			getAccountInfo = getAccountInfo,
+			getBalanceInfo = getBalanceInfo,
+			getBundleDetails = getBundleDetails,
+			getProductPurchasableDetails = getProductPurchasableDetails,
+			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
+			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then getResellers else nil,
+			getRobuxUpsellProductWithUniverseItemInfo = getRobuxUpsellProductWithUniverseItemInfo,
+			postPremiumImpression = postPremiumImpression,
+			getPremiumUpsellPrecheck = getPremiumUpsellPrecheck,
+			getPurchaseWarning = getPurchaseWarning,
+			postPurchaseWarningAcknowledge = postPurchaseWarningAcknowledge,
+			checkUserPurchaseSettings = checkUserPurchaseSettings,
+			getUnifiedPurchaseFlowUserEligibility = getUnifiedPurchaseFlowUserEligibility,
+			getSubscriptionProductInfo = getSubscriptionProductInfo,
+			GetLookDetailsV2ProductInfo = GetLookDetailsV2ProductInfo
+		}
+	end
+	setmetatable(t, {
+		__tostring = function() --[[ line: 333 ]]
+			return "MockService(Network)"
+		end
+	})
+	
+	return t
+end
+
+return t

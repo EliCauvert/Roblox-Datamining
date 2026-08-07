@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagTCUpsellModalEnabled_DEV) and (game:DefineFastFlag("DebugEnableTCDoubleOptIn_DEV", false) and require(script.Parent.FFlagAppChatEnableDoubleOptIn))

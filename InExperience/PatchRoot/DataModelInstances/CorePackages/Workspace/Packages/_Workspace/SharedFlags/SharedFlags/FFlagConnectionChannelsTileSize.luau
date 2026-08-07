@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ConnectionChannelsTileSize", false) and require(script.Parent.FFlagEnableSchoolEntry)

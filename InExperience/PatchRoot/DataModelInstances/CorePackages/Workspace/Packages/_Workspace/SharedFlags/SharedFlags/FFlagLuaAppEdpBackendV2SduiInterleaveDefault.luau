@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppEdpBackendV2SduiInterleaveDefault3", false) and require(script.Parent.FFlagSduiGetItemCollectionKeys)

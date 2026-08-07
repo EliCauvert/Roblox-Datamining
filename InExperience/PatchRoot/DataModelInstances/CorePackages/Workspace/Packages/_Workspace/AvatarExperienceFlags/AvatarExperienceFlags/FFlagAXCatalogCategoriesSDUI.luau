@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXRemoveCatalogCategoryNavKey) and (require(script.Parent.FFlagAXCatalogSupportDisableFilters) and (require(script.Parent.FFlagAXMigrateCategoryTooltip) and (require(script.Parent.FFlagAXFixHydratedWidgetsParams) and (require(script.Parent.FFlagAXUnifiedMarketplaceResultsFetcher) and game:DefineFastFlag("AXCatalogCategoriesSDUI14", false)))))

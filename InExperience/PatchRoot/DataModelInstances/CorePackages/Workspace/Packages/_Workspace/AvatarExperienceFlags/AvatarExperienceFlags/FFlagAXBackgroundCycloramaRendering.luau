@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXBackgroundsRoot) and game:DefineFastFlag("AXBackgroundCycloramaRendering", false)

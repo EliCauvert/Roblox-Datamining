@@ -1,0 +1,18 @@
+﻿return function(p0, p1) --[[ line: 2 | named "map" ]]
+	local var0 = type(p0)
+	assert(var0 == "table", "expected a table for first argument, got " .. var0)
+	local var1 = type(p1)
+	assert(var1 == "function", "expected a function for second argument, got " .. var1)
+	local t = {}
+	local var3 = 1
+	
+	for i = 1, #p0 do
+		local var4 = p1(p0[i], i)
+		
+		if var4 ~= nil then
+			t[var3] = var4
+			var3 += 1
+		end
+	end
+	return t
+end

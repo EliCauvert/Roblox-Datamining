@@ -1,0 +1,60 @@
+﻿local parent = script:FindFirstAncestor("AppChat").Parent
+local reactModule = require(parent.React)
+local foundationModule = require(parent.Foundation)
+local flatList = require(parent.VirtualizedList).FlatList
+local appChatPerfChatMembersPaginationWindowSize = game:DefineFastInt("AppChatPerfChatMembersPaginationWindowSize", 2)
+local appChatPerfChatMembersPaginationInitialRender = game:DefineFastInt("AppChatPerfChatMembersPaginationInitialRender", 8)
+local appChatPerfChatMembersPaginationOnEndReachedUnits = game:DefineFastInt("AppChatPerfChatMembersPaginationOnEndReachedUnits", 1)
+
+local var5 = function(p0, p1) --[[ line: 22 ]]
+	return tostring(p0 or p1)
+end
+
+local t = {
+	ScrollBarThickness = 0,
+	Name = "PaginatedChatMembers",
+	BackgroundTransparency = 1
+}
+local t_1 = { BackgroundTransparency = 1 }
+
+return reactModule.memo(function(p2) --[[ line: 35 | named "PaginatedChatMembers" ]]
+	-- upvalues: reactModule (ref), appChatPerfChatMembersPaginationWindowSize (ref), appChatPerfChatMembersPaginationInitialRender (ref), appChatPerfChatMembersPaginationOnEndReachedUnits (ref), foundationModule (ref), flatList (ref), t (ref), t_1 (ref), var5 (ref)
+	local var8 = reactModule.useRef(nil)
+	reactModule.useEffect(function() --[[ line: 38 ]]
+		-- upvalues: var8 (ref)
+		if var8.current then
+			local nativeScrollRef = var8.current:getNativeScrollRef()
+			
+			if nativeScrollRef and nativeScrollRef._nativeRef and nativeScrollRef._nativeRef.current then
+				nativeScrollRef._nativeRef.current.Selectable = false
+			end
+		end
+	end, {})
+	
+	return reactModule.createElement(foundationModule.View, { tag = "size-full col gap-small" }, {
+		Header = if p2.headerText then reactModule.createElement(foundationModule.Text, {
+			tag = "size-full-0 auto-y text-align-x-left text-align-y-bottom text-title-large padding-x-medium",
+			LayoutOrder = 1,
+			Text = p2.headerText
+		}) else nil,
+		ListContainer = reactModule.createElement(foundationModule.View, { LayoutOrder = 2, tag = "size-full-0 fill" }, {
+			List = reactModule.createElement(flatList, {
+				style = t,
+				contentContainerStyle = t_1,
+				renderItem = p2.renderItem,
+				data = p2.userIds,
+				windowSize = appChatPerfChatMembersPaginationWindowSize,
+				initialNumToRender = appChatPerfChatMembersPaginationInitialRender,
+				onEndReachedThreshold = appChatPerfChatMembersPaginationOnEndReachedUnits,
+				onEndReached = reactModule.useCallback(function() --[[ line: 51 ]]
+					-- upvalues: p2 (ref)
+					if p2.fetchMoreFriends then
+						p2.fetchMoreFriends()
+					end
+				end, { p2.fetchMoreFriends }),
+				keyExtractor = var5,
+				ref = var8
+			})
+		})
+	})
+end)

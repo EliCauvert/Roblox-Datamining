@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableResponsiveHeadRefinementMenu", false) and require(script.Parent.FFlagDynamicHeadsMigration)

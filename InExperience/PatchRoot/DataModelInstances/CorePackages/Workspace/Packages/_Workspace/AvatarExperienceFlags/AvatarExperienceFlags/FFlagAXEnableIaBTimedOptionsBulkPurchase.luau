@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableIaBTimedOptionsBulkPurchase3", false) and game:GetEngineFeature("EconomyBulkPurchaseOptionsEnabled")

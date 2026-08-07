@@ -1,0 +1,1 @@
+﻿return require(script.Parent._Index.InlineLayout.InlineLayout)

@@ -1,0 +1,3 @@
+﻿local sharedFlagsModule = require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags)
+
+return sharedFlagsModule.FFlagPurchasePromptFetchCartPricing and (sharedFlagsModule.FFlagEnableUnifiedProductPurchaseFlow and require(script.Parent.FFlagPurchasePromptPriceShouldUseProductInfoPrice))

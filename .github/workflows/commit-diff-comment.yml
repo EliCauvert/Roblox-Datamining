@@ -100,7 +100,7 @@ jobs:
             const after = process.env.DIFF_AFTER;
 
             const section = (title, files) =>
-              files.length ? `## ${title}\n` + files.map((f) => `- \`${f}\``).join('\n') + '\n\n' : '';
+              files.length ? `### ${title}\n` + files.map((f) => `- \`${f}\``).join('\n') + '\n\n' : '';
 
             const readAtRef = (ref, file) => {
               try {
@@ -160,32 +160,58 @@ jobs:
               return lines.join('\n');
             };
 
-            const localeFiles = [...added, ...removed, ...modified]
-              .filter((f) => f.startsWith('Locales/'))
-              .sort();
+            const isLocaleFile = (f) => /^[^/]+\/Locales\//.test(f) || f.startsWith('Locales/');
 
-            let localesSection = '';
-            for (const file of localeFiles) {
-              const oldText = readAtRef(before, file);
-              const newText = readAtRef(after, file);
-              const csvDiff = diffCsv(
-                oldText ? parseCsv(oldText) : new Map(),
-                newText ? parseCsv(newText) : new Map(),
-              );
-              const body = formatCsvDiff(csvDiff);
-              if (!body) continue;
-              localesSection += `\n**\`${file}\`**\n\`\`\`diff\n${body}\n\`\`\`\n`;
+            const buildLocalesSection = (files) => {
+              let out = '';
+              for (const file of files.filter(isLocaleFile).sort()) {
+                const oldText = readAtRef(before, file);
+                const newText = readAtRef(after, file);
+                const csvDiff = diffCsv(
+                  oldText ? parseCsv(oldText) : new Map(),
+                  newText ? parseCsv(newText) : new Map(),
+                );
+                const body = formatCsvDiff(csvDiff);
+                if (!body) continue;
+                out += `\n**\`${file}\`**\n\`\`\`diff\n${body}\n\`\`\`\n`;
+              }
+              return out;
+            };
+
+            // Each top-level folder is a separate app (UniversalApp, InExperience, ...
+            // future ones need no workflow change). Anything with no top-level
+            // folder (e.g. README.md) is bucketed as "Other".
+            const appOf = (path) => (path.includes('/') ? path.split('/')[0] : 'Other');
+
+            const groups = new Map();
+            const groupFor = (app) => {
+              if (!groups.has(app)) groups.set(app, { added: [], removed: [], modified: [] });
+              return groups.get(app);
+            };
+            for (const f of added) groupFor(appOf(f)).added.push(f);
+            for (const f of removed) groupFor(appOf(f)).removed.push(f);
+            for (const f of modified) groupFor(appOf(f)).modified.push(f);
+
+            const apps = [...groups.keys()].sort((a, b) =>
+              a === 'Other' ? 1 : b === 'Other' ? -1 : a.localeCompare(b),
+            );
+
+            for (const app of apps) {
+              const g = groups.get(app);
+              const localesSection = buildLocalesSection([...g.added, ...g.removed, ...g.modified]);
+
+              const body =
+                `## ${app}\n\n` +
+                section('Added files', g.added) +
+                section('Removed files', g.removed) +
+                section('Modified files', g.modified) +
+                (localesSection ? `### Locales Diffs\n${localesSection}` : '');
+
+              await postComment(body.trim());
+              await sleep(500);
             }
 
-            const summary =
-              section('Added files', added) +
-              section('Removed files', removed) +
-              section('Modified files', modified) +
-              (localesSection ? `## Locales Diffs\n${localesSection}` : '');
-
-            await postComment(summary.trim());
-
-            const nonLocaleModified = modified.filter((f) => !f.startsWith('Locales/'));
+            const nonLocaleModified = modified.filter((f) => !isLocaleFile(f));
             const filesToDiff = nonLocaleModified.slice(0, MAX_FILE_COMMENTS);
             const skipped = nonLocaleModified.slice(MAX_FILE_COMMENTS);
 

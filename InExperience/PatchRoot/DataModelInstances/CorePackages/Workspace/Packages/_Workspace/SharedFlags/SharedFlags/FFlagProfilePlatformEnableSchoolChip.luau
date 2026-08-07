@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfilePlatformEnableSchoolChip", false) and require(script.Parent.FFlagEnableSchoolEntry)

@@ -1,0 +1,166 @@
+﻿local appStorageService = game:GetService("AppStorageService")
+local IXPService = game:GetService("IXPService")
+local httpService = game:GetService("HttpService")
+local eventIngestService = game:GetService("EventIngestService")
+local parent = script:FindFirstAncestor("ExperimentCacheManager").Parent
+local eventIngest = require(parent.Analytics).AnalyticsReporters.EventIngest
+local memoize = require(parent.AppCommonLib).memoize
+local appStorageJsonCacheUtils = require(parent.AppCommonLib).Utils.AppStorageJsonCacheUtils
+local mutedError = require(parent.Loggers).mutedError
+local localStorageKey = require(parent.LocalStorage).Enums.LocalStorageKey
+local getExperimentCacheLayersModule = require(script.Parent.GetExperimentCacheLayers)
+local enableAppStorageJsonDecodeCache = game:DefineFastFlag("EnableAppStorageJsonDecodeCache", false)
+local t = {}
+t.__index = t
+
+function t.new(p0, p1, p2) --[[ line: 73 ]]
+	-- upvalues: IXPService (ref), eventIngest (ref), eventIngestService (ref), getExperimentCacheLayersModule (ref), t (ref)
+	local t_1 = {
+		_loadingStatusChanged = nil,
+		_hasLoggedMissingLayerError = nil,
+		_ixpService = p0 or IXPService,
+		_eventIngest = p1 or eventIngest.new(eventIngestService),
+		_cache = {},
+		_layersToCache = p2 or getExperimentCacheLayersModule(),
+		_exposureLoggingTable = {}
+	}
+	setmetatable(t_1, t)
+	
+	return t_1
+end
+
+function t._getCachedVariables(_) --[[ line: 88 ]]
+	-- upvalues: enableAppStorageJsonDecodeCache (ref), appStorageJsonCacheUtils (ref), localStorageKey (ref), appStorageService (ref), httpService (ref)
+	if enableAppStorageJsonDecodeCache then
+		local experimentCacheCachedJsonForKey = appStorageJsonCacheUtils.default:getCachedJsonForKey(localStorageKey.ExperimentCache, true)
+		
+		return if experimentCacheCachedJsonForKey == nil then {} else experimentCacheCachedJsonForKey
+	end
+	local ok, status = pcall(function() --[[ line: 98 ]]
+		-- upvalues: appStorageService (copy), localStorageKey (copy)
+		return appStorageService:GetItem(localStorageKey.ExperimentCache)
+	end)
+	
+	if ok then
+		local ok_1, status_1 = pcall(function() --[[ line: 103 ]]
+			-- upvalues: httpService (copy), status (ref)
+			return httpService:JSONDecode(status)
+		end)
+		
+		return if ok_1 then status_1 else {}
+	end
+end
+
+function t._flushToCache(_, p3) --[[ line: 115 ]]
+	-- upvalues: httpService (ref), appStorageService (ref), localStorageKey (ref)
+	assert(type(p3) == "table", "expected table type for cache to persist")
+	local ok, status = pcall(function() --[[ line: 119 ]]
+		-- upvalues: httpService (copy), p3 (ref)
+		return httpService:JSONEncode(p3)
+	end)
+	
+	if ok then
+		local ok_1, status_1 = pcall(function() --[[ line: 124 ]]
+			-- upvalues: appStorageService (copy), localStorageKey (copy), status (ref)
+			appStorageService:SetItem(localStorageKey.ExperimentCache, status)
+			appStorageService:Flush()
+		end)
+		
+		if not ok_1 then
+			warn(status_1)
+		end
+	end
+end
+
+function t:_onIXPInitialized() --[[ line: 135 ]]
+	local userLayerLoadingStatus = self._ixpService:GetUserLayerLoadingStatus()
+	
+	if userLayerLoadingStatus ~= Enum.IXPLoadingStatus.Pending and self._loadingStatusChanged then
+		self._loadingStatusChanged:disconnect()
+		self._loadingStatusChanged = nil
+	end
+	if userLayerLoadingStatus == Enum.IXPLoadingStatus.Initialized then
+		local t = {}
+		
+		for i, v in ipairs(self._layersToCache) do
+			local var11 = nil
+			pcall(function() --[[ line: 151 ]]
+				-- upvalues: var11 (write), self (ref), v (ref)
+				var11 = self._ixpService:GetUserLayerVariables(v)
+			end)
+			t[v] = var11
+		end
+		self:_flushToCache(t)
+	end
+end
+
+function t:_logCustomExposure(p4) --[[ line: 163 ]]
+	assert(type(p4) == "string", "expected layerName to be a string")
+	self._eventIngest:setRBXEventStream("experimentCacheManager", "exposureLog", { layerName = p4 })
+end
+
+function t._containsLayer(p5, p6) --[[ line: 170 ]]
+	-- upvalues: memoize (ref)
+	return memoize(function(p7) --[[ line: 171 ]]
+		-- upvalues: p5 (ref)
+		for i, v in ipairs(p5._layersToCache) do
+			if v == p7 then
+				return true
+			end
+		end
+		return false
+	end)(p6)
+end
+
+function t:initialize() --[[ line: 183 ]]
+	self._cache = self:_getCachedVariables()
+	
+	if self._ixpService:GetUserLayerLoadingStatus() == Enum.IXPLoadingStatus.Initialized then
+		self:_onIXPInitialized()
+		
+		return
+	end
+	self._loadingStatusChanged = self._ixpService.OnUserLayerLoadingStatusChanged:Connect(function(p8) --[[ line: 191 ]]
+		-- upvalues: self (ref)
+		if p8 == Enum.IXPLoadingStatus.Initialized then
+			self:_onIXPInitialized()
+		end
+	end)
+end
+
+function t:getLayerVariables(p9, _) --[[ line: 199 ]]
+	-- upvalues: mutedError (ref)
+	assert(type(p9) == "string", "expected layerName to be a string")
+	
+	if not self:_containsLayer(p9) and not self._hasLoggedMissingLayerError then
+		self._hasLoggedMissingLayerError = true
+		mutedError("Layer " .. p9 .. " has not been configured to be cached, please add layer to `GetExperimentCacheLayers`")
+	end
+	return self._cache[p9] or nil
+end
+
+function t:clearCache() --[[ line: 215 ]]
+	-- upvalues: appStorageService (ref), localStorageKey (ref)
+	self._cache = {}
+	self._exposureLoggingTable = {}
+	pcall(function() --[[ line: 219 ]]
+		-- upvalues: appStorageService (copy), localStorageKey (copy)
+		appStorageService:SetItem(localStorageKey.ExperimentCache, "")
+		appStorageService:Flush()
+	end)
+end
+
+function t:sendCustomExposureLog(p10) --[[ line: 225 ]]
+	if self._exposureLoggingTable[p10] == nil then
+		self:_logCustomExposure(p10)
+		self._exposureLoggingTable[p10] = true
+	end
+end
+
+function t:logLayerExposure(p11) --[[ line: 233 ]]
+	self._ixpService:LogUserLayerExposure(p11)
+end
+
+t.default = t.new()
+
+return t

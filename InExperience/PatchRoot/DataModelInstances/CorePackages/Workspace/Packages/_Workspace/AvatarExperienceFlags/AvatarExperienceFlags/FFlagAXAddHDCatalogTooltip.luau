@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXAddHDCatalogTooltip", false) and require(script.Parent.FFlagAXAddHDCatalogTab)

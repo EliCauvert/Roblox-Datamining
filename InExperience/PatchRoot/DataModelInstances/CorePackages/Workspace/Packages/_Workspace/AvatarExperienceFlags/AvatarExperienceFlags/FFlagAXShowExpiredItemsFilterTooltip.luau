@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXShowExpiredItemsFilterTooltip", false) and require(script.Parent.FFlagAXInventoryDurablesExpiredFilter)

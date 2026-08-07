@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXFixHandAndArmWidgetApiContext", false) and require(script.Parent.FFlagAXCatalogM41HandAndArm)

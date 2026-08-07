@@ -1,0 +1,3 @@
+﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(p0) --[[ line: 6 ]]
+	return { index = p0 }
+end)

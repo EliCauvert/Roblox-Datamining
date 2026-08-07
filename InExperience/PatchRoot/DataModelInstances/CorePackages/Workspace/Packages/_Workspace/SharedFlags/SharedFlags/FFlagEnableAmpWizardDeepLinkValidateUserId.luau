@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableAmpWizardDeepLinkValidateUserId", false) and require(script.Parent.FFlagEnableAmpWizardDeepLink)

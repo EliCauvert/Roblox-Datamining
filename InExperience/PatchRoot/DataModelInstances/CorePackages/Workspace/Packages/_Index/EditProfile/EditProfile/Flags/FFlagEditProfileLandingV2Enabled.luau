@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EditProfileLandingV2Enabled", false)

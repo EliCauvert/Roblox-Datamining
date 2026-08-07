@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagEnablePlayWithRewardComponent) and (require(script.Parent.FFlagLuaAppEdpUseHidePlayWithRewardVisibilityVariable) and game:DefineFastFlag("LuaAppExtendPlayWithRewardPeekView", false))

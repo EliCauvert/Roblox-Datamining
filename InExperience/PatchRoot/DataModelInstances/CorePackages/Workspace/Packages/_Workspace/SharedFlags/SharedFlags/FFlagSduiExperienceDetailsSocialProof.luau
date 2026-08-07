@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagLuaAppDataHydrationConnectionsPlayedStore) and (require(script.Parent.FFlagEnableSocialProofVerticalUserListSheet) and (require(script.Parent.FFlagSduiChipAccessoryProps) and game:DefineFastFlag("SduiExperienceDetailsSocialProof_3", false)))

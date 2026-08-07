@@ -1,0 +1,1 @@
+﻿return game:GetEngineFeature("PrivatePartyJoin") and (require(script.Parent.GetFFlagIsSquadEnabled)() and game:DefineFastFlag("EnablePrivatePartyAcceptInvite", false))

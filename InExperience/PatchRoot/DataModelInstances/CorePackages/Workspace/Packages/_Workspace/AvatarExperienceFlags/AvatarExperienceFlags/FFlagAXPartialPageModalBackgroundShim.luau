@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXPartialPageModalBackgroundShim2", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagMarketplaceOffersRoot

@@ -1,0 +1,1 @@
+﻿return require(script.Parent["events.impl"])(require(script:FindFirstAncestor("VirtualEventsState").network).NetworkingVirtualEvents)

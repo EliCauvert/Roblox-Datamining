@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("PlayerListUseMobileOnSmallDisplay2", false) and require(script.Parent.FFlagAddNewPlayerListMobileFocusNav)

@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("LoadingScreenQueuedStateButtonClickThrottleHundredthsPercent", 10000)

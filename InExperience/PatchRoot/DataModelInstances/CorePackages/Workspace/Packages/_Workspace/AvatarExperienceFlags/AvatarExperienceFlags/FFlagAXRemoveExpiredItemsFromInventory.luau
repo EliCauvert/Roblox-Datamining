@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXRemoveExpiredItemsFromInventory", false) and require(script.Parent.FFlagAXInventoryDurablesSupport)

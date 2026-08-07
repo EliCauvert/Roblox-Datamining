@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXRootRFYMigration) and (require(script.Parent.FFlagAXMoveAllTabToWidgetOnly) and game:DefineFastFlag("AXFixWidgetOnlyTabNoItemsFound", false))

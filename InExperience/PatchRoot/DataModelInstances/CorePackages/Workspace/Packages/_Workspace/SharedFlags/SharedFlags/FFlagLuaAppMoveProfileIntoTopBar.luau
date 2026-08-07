@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppMoveProfileIntoTopBar", false) or require(script.Parent.FFlagLuaAppMoveProfileIntoTopBarIXP)

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagSkipBuyDelayForExperienceShop and require(script.Parent.FFlagPromptPurchaseClearStateOnCompletion)

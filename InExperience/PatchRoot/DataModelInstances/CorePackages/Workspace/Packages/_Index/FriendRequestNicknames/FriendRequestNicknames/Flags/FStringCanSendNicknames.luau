@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("FriendRequestNicknamesCanSendNicknames", "can_send_nickname")

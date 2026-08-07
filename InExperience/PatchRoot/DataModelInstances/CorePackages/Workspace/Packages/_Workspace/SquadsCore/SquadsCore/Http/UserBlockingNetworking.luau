@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("SquadsCore").Parent.UserBlockingNetworking).config({ roduxNetworking = require(script.Parent.RoduxNetworking) })

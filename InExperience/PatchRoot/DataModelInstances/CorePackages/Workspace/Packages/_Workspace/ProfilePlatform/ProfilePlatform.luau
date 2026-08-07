@@ -1,0 +1,40 @@
+﻿local profileWrapperContextModule = require(script.Contexts.ProfileWrapperContext)
+local enumsModule = require(script.Common.Enums)
+local typesModule = require(script.Common.Types)
+local getProfilePlatformModule = require(script.Networking.getProfilePlatform)
+local refreshProfilePlatformActionInfoModule = require(script.Networking.refreshProfilePlatformActionInfo)
+local sharedFlagsModule = require(script.Parent.SharedFlags)
+local fFlagMoveInExperienceModeToEditProfile = sharedFlagsModule.FFlagMoveInExperienceModeToEditProfile
+local fFlagAddIEMProfilePage = sharedFlagsModule.FFlagAddIEMProfilePage
+
+return {
+	["jest.config"] = script["jest.config"],
+	RoduxKey = require(script.Common.Constants).RODUX_KEY,
+	installReducer = require(script.Rodux.installReducer),
+	EnableCommunityProfilePageIXP = require(script.Flags.EnableCommunityProfilePageIXP),
+	EventNames = require(script.Analytics.EventNames),
+	LoadingStagesExtension = require(script.Analytics.LoadingStagesExtension),
+	initializeProfileAnalytics = require(script.Analytics.initializeProfileAnalytics),
+	ProfilePlatformNavigator = require(script.Navigation.ProfilePlatformNavigatorWithProviders),
+	ProfileWrapperContext = profileWrapperContextModule,
+	ProfileTypes = enumsModule.ProfileTypes,
+	Components = enumsModule.Components,
+	CurrentlyWearing = if fFlagAddIEMProfilePage then require(script.Components.CurrentlyWearing) else nil,
+	UserLists = require(script.Components.UserProfileHeader.SocialChipCountsRow.UserLists),
+	AvatarHeadshotComponent = if fFlagAddIEMProfilePage then require(script.Components.UserProfileHeader.AvatarHeadshotComponent) else nil,
+	SocialChipCountsRow = if fFlagAddIEMProfilePage then require(script.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer else nil,
+	AboutDetailsSheet = require(script.Components.AboutDetailsSheet),
+	MomentsFeedPage = if require(script.Flags.FFlagProfilePlatformEnableMoments) then require(script.Components.Moments.MomentsFeedPage) else nil,
+	useDynamicSizeMargin = if fFlagAddIEMProfilePage then require(script.Hooks.useDynamicSizeMargin) else nil,
+	useProfileJsonComponent = if fFlagAddIEMProfilePage then require(script.Hooks.useProfileJsonComponent) else nil,
+	Screens = enumsModule.Screens,
+	Sources = enumsModule.Sources,
+	DisabledReasons = enumsModule.DisabledReasons,
+	ProfileActions = enumsModule.ProfileActions,
+	getProfilePlatform = if fFlagMoveInExperienceModeToEditProfile or fFlagAddIEMProfilePage then getProfilePlatformModule else nil,
+	refreshProfilePlatformActionInfo = if sharedFlagsModule.FFlagTCUpdateProfileCTAButton then refreshProfilePlatformActionInfoModule else nil,
+	ProfilePlatformTypes = if fFlagMoveInExperienceModeToEditProfile then typesModule else nil,
+	FFlagProfilePlatformEnableEditAppearanceMenu = require(script.Flags.FFlagProfilePlatformEnableEditAppearanceMenu),
+	FFlagProfilePlatformEditBackgroundMenuItem = require(script.Flags.FFlagProfilePlatformEditBackgroundMenuItem),
+	FFlagProfilePlatformEnableMoments = require(script.Flags.FFlagProfilePlatformEnableMoments)
+}

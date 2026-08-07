@@ -1,0 +1,8 @@
+﻿local getUserProfileFromIdModule = require(script.Parent.getUserProfileFromId)
+
+return function(p0, p1) --[[ line: 3 ]]
+	-- upvalues: getUserProfileFromIdModule (ref)
+	local var1 = getUserProfileFromIdModule(p0, p1)
+	
+	return if var1.names then var1.names.platformName else nil
+end

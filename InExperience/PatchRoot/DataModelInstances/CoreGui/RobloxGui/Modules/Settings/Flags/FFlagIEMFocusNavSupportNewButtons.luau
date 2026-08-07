@@ -1,0 +1,1 @@
+﻿return require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagIEMFocusNavToButtons and game:DefineFastFlag("IEMFocusNavSupportNewButtons2", false)

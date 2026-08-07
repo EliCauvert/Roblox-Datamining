@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXLogFacialAnimationOnHeadChange2", false) and require(script.Parent.FFlagAXLogFacialAnimationToggle)

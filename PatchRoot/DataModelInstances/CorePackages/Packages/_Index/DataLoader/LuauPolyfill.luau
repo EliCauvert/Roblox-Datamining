@@ -1,4 +1,0 @@
-﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
--- Decompiled at Fri Aug 7 0:47:58 2026 Pacific Standard Time.
-
-return require(script.Parent.Parent.Parent._Index["LuauPolyfill-31ab8d40-1.2.3"].LuauPolyfill)

@@ -1,0 +1,12 @@
+﻿local jestConfigsModule = require(game:GetService("CorePackages").Workspace.Packages.JestConfigs)
+
+return {
+	displayName = "CoreScripts-Chrome",
+	testMatch = { "**/*.test" },
+	setupFilesAfterEnv = {
+		jestConfigsModule.setupFiles.LogHandler,
+		jestConfigsModule.setupFiles.UIBloxInitializer,
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		jestConfigsModule.setupFiles.RetryTimes
+	}
+}

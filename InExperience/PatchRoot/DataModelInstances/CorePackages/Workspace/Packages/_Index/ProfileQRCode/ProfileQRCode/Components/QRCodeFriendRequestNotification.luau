@@ -1,0 +1,1 @@
+﻿return if require(script:FindFirstAncestor("ProfileQRCode").Flags.FFlagQRCodeFriendRequestNotificationV2) then require(script.QRCodeFriendRequestNotificationV2) else require(script.QRCodeFriendRequestNotification)

@@ -1,0 +1,21 @@
+﻿return {
+	AnalyticsEvent = require(script.Parent.VirtualEventsState).enums.AnalyticsEvent,
+	requests = require(script.requests),
+	EventDetailsPageLoader = require(script.Components.EventDetailsPageLoader),
+	SduiEventDetailsPage = require(script.Components.SduiEventDetailsPage.SduiEventDetailsPage),
+	ShareEventModal = require(script.Components.ShareEventModal),
+	EventNotificationsModal = require(script.Components.EventNotificationsModal),
+	EventsListCarousel = require(script.Components.EventsListCarousel.EventsListCarousel),
+	EventsInExperienceApp = require(script.EventsInExperienceApp),
+	fireEventDetailsPageVisit = require(script.Analytics.fireEventDetailsPageVisit),
+	fireShareVirtualEventIconClicked = require(script.Analytics.fireShareVirtualEventIconClicked),
+	fireVirtualEventJoined = require(script.Analytics.fireVirtualEventJoined),
+	fireVirtualEventLinkCopied = require(script.Analytics.fireVirtualEventLinkCopied),
+	fireVirtualEventRSVP = require(script.Analytics.fireVirtualEventRSVP),
+	fireEventNotificationEnabled = require(script.Analytics.fireEventNotificationEnabled),
+	enablePushNotifications = require(script.Common.enablePushNotifications),
+	neverShowNotificationsModalAgain = require(script.Common.neverShowNotificationsModalAgain),
+	fireVirtualEventImpression = require(script.Analytics.fireVirtualEventImpression),
+	navigateToEventDetails = require(script.Components.SduiEventDetailsPage.navigateToEventDetails),
+	["jest.config"] = script["jest.config"]
+}

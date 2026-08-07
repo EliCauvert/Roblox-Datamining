@@ -1,0 +1,1 @@
+﻿return require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls")) and game:DefineFastFlag("ChromeShortcutRemoveLeaveOnRespawnPage", false)

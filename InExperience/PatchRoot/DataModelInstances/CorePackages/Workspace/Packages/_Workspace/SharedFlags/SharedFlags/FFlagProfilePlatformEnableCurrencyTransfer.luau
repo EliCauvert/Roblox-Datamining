@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfilePlatformEnableCurrencyTransferV1", false) and require(script.Parent.GetFFlagEnableCurrencyTransferFlow)()

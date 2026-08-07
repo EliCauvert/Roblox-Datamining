@@ -1,0 +1,14 @@
+﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+
+return function(p0) --[[ line: 16 | named "createUseModalNavigation" ]]
+	-- upvalues: reactModule (ref)
+	return function() --[[ line: 17 ]]
+		-- upvalues: reactModule (copy), p0 (ref)
+		local var1 = reactModule.useContext(p0)
+		
+		return {
+			closeAffordanceRef = var1.closeAffordanceRef,
+			setContentStartRef = var1.setContentStartRef
+		}
+	end
+end

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("PurchasePromptUnifiedEventsUseOfferAdjustedPrice", false) and require(script.Parent.FFlagMarketplaceOffersRoot)

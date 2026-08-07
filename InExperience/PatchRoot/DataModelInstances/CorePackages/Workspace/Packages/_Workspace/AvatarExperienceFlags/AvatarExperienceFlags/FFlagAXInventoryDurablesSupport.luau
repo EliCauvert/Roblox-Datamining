@@ -1,0 +1,23 @@
+﻿local fFlagAXRootSlotBasedEditorFlagModule = require(script.Parent.FFlagAXRootSlotBasedEditorFlag)
+local fFlagAXModeratedItemsFlowModule = require(script.Parent.FFlagAXModeratedItemsFlow)
+local fFlagAXEnableModeratedItemsFlowForDurablesModule = require(script.Parent.FFlagAXEnableModeratedItemsFlowForDurables)
+local fFlagAXEditorSubcategoryFiltersModule = require(script.Parent.FFlagAXEditorSubcategoryFilters)
+local AXInventoryDurablesSupport5 = game:DefineFastFlag("AXInventoryDurablesSupport5", false)
+
+if AXInventoryDurablesSupport5 then
+	AXInventoryDurablesSupport5 = fFlagAXRootSlotBasedEditorFlagModule
+	
+	if AXInventoryDurablesSupport5 and not fFlagAXEnableModeratedItemsFlowForDurablesModule then
+		AXInventoryDurablesSupport5 = fFlagAXModeratedItemsFlowModule and fFlagAXEditorSubcategoryFiltersModule
+	end
+end
+local AXStandaloneInventoryDurablesSupport = game:DefineFastFlag("AXStandaloneInventoryDurablesSupport", false)
+
+if AXStandaloneInventoryDurablesSupport then
+	AXStandaloneInventoryDurablesSupport = fFlagAXRootSlotBasedEditorFlagModule
+	
+	if AXStandaloneInventoryDurablesSupport and not fFlagAXEnableModeratedItemsFlowForDurablesModule then
+		AXStandaloneInventoryDurablesSupport = fFlagAXModeratedItemsFlowModule and fFlagAXEditorSubcategoryFiltersModule
+	end
+end
+return AXInventoryDurablesSupport5 or AXStandaloneInventoryDurablesSupport

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppEdpMediaGalleryRedesign5", false) or require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesignIxp)

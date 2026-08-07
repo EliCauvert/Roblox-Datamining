@@ -1,0 +1,1 @@
+﻿return if require(script.Parent.isConnectDropdownEnabled)() then require(script.Parent.registerConnectIntegration)("connect_dropdown", require(script:FindFirstAncestor("Chrome").Service).AvailabilitySignal.Available) else nil

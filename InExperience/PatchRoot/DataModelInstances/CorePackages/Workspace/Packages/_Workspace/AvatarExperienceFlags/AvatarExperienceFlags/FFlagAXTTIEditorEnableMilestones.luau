@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXTTIEditorEnableMilestones3", false)

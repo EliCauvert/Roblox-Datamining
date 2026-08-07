@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMigrateCatalogPageInputBindings2", false)

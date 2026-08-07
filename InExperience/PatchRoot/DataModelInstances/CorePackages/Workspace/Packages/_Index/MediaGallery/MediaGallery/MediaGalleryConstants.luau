@@ -1,0 +1,17 @@
+﻿local _ = require(script:FindFirstAncestor("MediaGallery").Parent.Otter)
+
+return {
+	ITEM_ASPECT_RATIO = 1.777777777778,
+	SLIDING_WINDOW_SIZE = 3,
+	AUTO_ADVANCE_DURATION_SECONDS = 5,
+	LARGE_GALLERY_BREAKPOINT = 500,
+	VIDEO_DWELL_TIME_HUNDREDTHS_SEC = 0,
+	VIDEO_VISIBLE_PERCENT = 50,
+	VISIBILITY_SCAN_DEBOUNCE_SEC = 0.5,
+	MAX_VISIBLE_INDICATORS = 5,
+	SPRING_CONFIG = {
+		frequency = 3,
+		dampingRatio = 1,
+		restingVelocityLimit = 0.05
+	}
+}

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXUnifiedPurchasePromptMakeupLooksSaveLookType", false) and require(script.Parent.FFlagAXCatalogMakeupSupport)

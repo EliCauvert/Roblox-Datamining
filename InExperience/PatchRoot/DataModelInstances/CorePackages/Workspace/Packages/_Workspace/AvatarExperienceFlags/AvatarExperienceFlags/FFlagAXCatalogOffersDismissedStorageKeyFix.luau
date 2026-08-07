@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXCatalogOffersDismissedStorageKeyFix", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagMarketplaceOffersRoot

@@ -1,0 +1,19 @@
+﻿return {
+	ExpChatLocalChatEnabledMessageExperimentation = require(script.ExpChatLocalChatEnabledMessageExperimentation),
+	ArgoPartyExperimentation = require(script.ArgoPartyExperimentation),
+	ExpChatNewSystemMessagesExperimentation = require(script.ExpChatNewSystemMessagesExperimentation),
+	QueueExperimentation = require(script.QueueExperimentation),
+	ScheduledSquadsListExperimentation = require(script.ScheduledSquadsListExperimentation),
+	SquadCoordinationExperienceJoinExperimentation = require(script.SquadCoordinationExperienceJoinExperimentation),
+	SquadCoordinationUIChangesExperimentation = require(script.SquadCoordinationUIChangesExperimentation),
+	SquadUnifyCoplayExperimentation = require(script.SquadUnifyCoplayExperimentation),
+	SquadQuickStartExperimentation = require(script.SquadQuickStartExperimentation),
+	SquadRegroupExperimentation = require(script.SquadRegroupExperimentation),
+	LuckyRecommendationExperimentation = require(script.LuckyRecommendationExperimentation),
+	AppChatPerfExperimentation = require(script.AppChatPerfExperimentation),
+	PartyPageCarouselExperimentation = require(script.PartyPageCarouselExperimentation),
+	deviceMeetsRequirementsForFAE = require(script.DeviceMeetsRequirementsForFAE),
+	FFlagTestDeviceForFAEUpsell = require(script.FFlagTestDeviceForFAEUpsell),
+	GetIsDeviceGated = require(script.GetIsDeviceGated),
+	DeviceGateFeature = require(script.DeviceGateFeature)
+}

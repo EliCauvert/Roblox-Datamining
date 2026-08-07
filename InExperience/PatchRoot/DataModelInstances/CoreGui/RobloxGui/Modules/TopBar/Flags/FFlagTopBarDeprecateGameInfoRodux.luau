@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("TopBarDeprecateGameInfoRodux", false) and (require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls and not require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.isNewInGameMenuEnabled))

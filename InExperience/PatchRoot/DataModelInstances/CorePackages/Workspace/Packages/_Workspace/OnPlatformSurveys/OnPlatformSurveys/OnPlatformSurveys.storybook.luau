@@ -1,0 +1,49 @@
+﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local parent = onPlatformSurveys.Parent
+local reactModule = require(parent.React)
+local reactRobloxModule = require(parent.Dev.ReactRoblox)
+local foundationModule = require(parent.Foundation)
+local foundationProvider = foundationModule.FoundationProvider
+local theme = foundationModule.Enums.Theme
+local device = foundationModule.Enums.Device
+local mockProvidersModule = require(onPlatformSurveys.MockProviders)
+local t = { Dark = theme.Dark, Light = theme.Light }
+
+local function _(p0, p1) --[[ line: 26 | named "union" ]]
+	local cloned = table.clone(p0)
+	
+	if p1 then
+		for i, v in p1 do
+			cloned[i] = v
+		end
+	end
+	return cloned
+end
+
+return {
+	roact = reactModule,
+	reactRoblox = reactRobloxModule,
+	mapStory = function(p2) --[[ line: 39 ]]
+		-- upvalues: reactModule (ref), mockProvidersModule (ref), foundationProvider (ref), t (ref), theme (ref), device (ref)
+		return function(p3) --[[ line: 40 ]]
+			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), theme (copy), device (copy), p2 (ref)
+			local var7 = if p3.definition then p3.definition.props else {}
+			local cloned = table.clone(p3)
+			
+			if var7 then
+				for i, v in var7 do
+					cloned[i] = v
+				end
+			end
+			return reactModule.createElement(mockProvidersModule, {}, {
+				FoundationProvider = reactModule.createElement(foundationProvider, {
+					theme = t[p3.theme] or theme.Dark,
+					device = device[p3.platform] or device.Phone,
+					preferences = p3.settings,
+					overlayGui = p3.focus
+				}, { story = reactModule.createElement(p2, cloned) })
+			})
+		end
+	end,
+	storyRoots = { onPlatformSurveys }
+}

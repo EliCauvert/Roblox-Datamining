@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXBackgroundsCycloramaVR", false) and (require(script.Parent.FFlagAXBackgroundsRoot) and require(script.Parent.FFlagAXBackgroundCycloramaRendering))

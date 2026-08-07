@@ -1,0 +1,1 @@
+﻿return function(...) --[[ line: 9 | named "noop" ]] end

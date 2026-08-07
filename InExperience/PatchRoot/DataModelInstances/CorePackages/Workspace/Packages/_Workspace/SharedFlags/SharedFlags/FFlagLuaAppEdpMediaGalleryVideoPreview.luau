@@ -1,0 +1,1 @@
+﻿return if require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign) then game:DefineFastFlag("LuaAppEdpMediaGalleryVideoPreview5", false) or require(script.Parent.FFlagLuaAppEdpMediaGalleryVideoPreviewIxp) else require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign)

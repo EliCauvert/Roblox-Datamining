@@ -1,0 +1,14 @@
+﻿return function(p0, p1) --[[ line: 1 | named "createGetFInt" ]]
+	local ok, status = pcall(function() --[[ line: 2 ]]
+		-- upvalues: p0 (ref), p1 (ref)
+		game:DefineFastInt(p0, p1)
+	end)
+	
+	return if ok or not status:match("The current thread cannot call") then function() --[[ line: 12 ]]
+		-- upvalues: p0 (ref)
+		return game:GetFastInt(p0)
+	end else function() --[[ line: 7 ]]
+		-- upvalues: p1 (ref)
+		return p1
+	end
+end

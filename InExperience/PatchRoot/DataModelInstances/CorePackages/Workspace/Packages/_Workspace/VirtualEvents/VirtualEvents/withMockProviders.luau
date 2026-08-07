@@ -1,0 +1,86 @@
+﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
+local apolloClientModule = require(virtualEvents.Parent.ApolloClient)
+local graphQLServerModule = require(virtualEvents.Parent.GraphQLServer)
+local reactModule = require(virtualEvents.Parent.React)
+local roduxModule = require(virtualEvents.Parent.Rodux)
+local roactNavigationModule = require(virtualEvents.Parent.RoactNavigation)
+local roactRoduxModule = require(virtualEvents.Parent.RoactRodux)
+local robloxAppLocalesModule = require(virtualEvents.Parent.RobloxAppLocales)
+local localizationModule = require(virtualEvents.Parent.Localization)
+local UIBloxModule = require(virtualEvents.Parent.UIBlox)
+local designTokenProvider = require(virtualEvents.Parent.Style).DesignTokenProvider
+local virtualEventsStateModule = require(virtualEvents.Parent.VirtualEventsState)
+local mockContentProvider = UIBloxModule.UnitTestHelpers.MockContentProvider
+local foundationProvider = require(virtualEvents.Parent.Foundation).FoundationProvider
+local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local constants = UIBloxModule.App.Style.Constants
+local contentProvider = UIBloxModule.App.Context.ContentProvider
+local var11 = roduxModule.combineReducers({
+	VirtualEvents = virtualEventsStateModule.installReducer()
+})
+
+return function(p0, p1) --[[ line: 32 | named "withMockProviders" ]]
+	-- upvalues: roduxModule (ref), var11 (ref), reactModule (ref), roactRoduxModule (ref), contentProvider (ref), mockContentProvider (ref), localizationModule (ref), robloxAppLocalesModule (ref), foundationProvider (ref), appStyleProvider (ref), constants (ref), roactNavigationModule (ref), designTokenProvider (ref), graphQLServerModule (ref), apolloClientModule (ref)
+	local t = {
+		StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
+			store = (if p1 then p1.store else nil) or roduxModule.Store.new(var11, if p1 then p1.initialStoreState else nil, { roduxModule.thunkMiddleware })
+		}, {
+			ContentProvider = reactModule.createElement(contentProvider.Provider, { value = mockContentProvider.new() }, {
+				LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
+					localization = robloxAppLocalesModule.Localization.new("en-us")
+				}, {
+					FoundationProvider = reactModule.createElement(foundationProvider, { theme = "Dark" }, {
+						StyleProvider = reactModule.createElement(appStyleProvider, {
+							style = {
+								themeName = constants.ThemeName.Dark,
+								fontName = constants.FontName.Gotham
+							}
+						}, {
+							NavigationProvider = reactModule.createElement(roactNavigationModule.Provider, {
+								value = {
+									isFocused = function() --[[ line: 61 ]]
+										return true
+									end,
+									goBack = function() --[[ line: 64 ]] end,
+									addListener = function() --[[ line: 65 ]]
+										return { remove = function() --[[ line: 67 ]] end }
+									end
+								}
+							}, {
+								DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
+									Children = reactModule.createElement(reactModule.Fragment, nil, p0)
+								})
+							})
+						})
+					})
+				})
+			})
+		})
+	}
+	
+	if p1 then
+		if p1.mockResolvers then
+			local var13 = graphQLServerModule.GraphQLServer.new({ mockResolvers = p1.mockResolvers })
+			t = {
+				ApolloProvider = reactModule.createElement(apolloClientModule.ApolloProvider, {
+					client = apolloClientModule.ApolloClient.new({
+						cache = apolloClientModule.InMemoryCache.new({}),
+						link = apolloClientModule.HttpLink.new({
+							uri = "/api",
+							fetch = function(_, p2) --[[ line: 95 ]]
+								-- upvalues: var13 (ref)
+								return var13:fetchLocal(p2)
+							end
+						})
+					})
+				}, t)
+			}
+		end
+		if p1.mockNavigation then
+			t = {
+				NavigationProvider = reactModule.createElement(roactNavigationModule.Provider, { value = p1.mockNavigation }, t)
+			}
+		end
+	end
+	return reactModule.createElement(reactModule.Fragment, nil, t)
+end

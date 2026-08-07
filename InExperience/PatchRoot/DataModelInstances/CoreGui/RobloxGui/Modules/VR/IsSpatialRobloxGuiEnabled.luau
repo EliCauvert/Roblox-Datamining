@@ -1,0 +1,4 @@
+﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local corePackagesService = game:GetService("CorePackages")
+
+return if require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled then true elseif require(robloxGui.Modules.Flags.FFlagEnableSpatialRobloxGui) then require(corePackagesService.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper:GetLayerData(require(robloxGui.Modules.Flags.FStringSpatialRobloxUIIXPLayerName))[require(robloxGui.Modules.Flags.FStringSpatialRobloxUIIXPUITypeVariableName)] == require(robloxGui.Modules.Flags.FStringSpatialRobloxUIIXPSpatialUIVariantValue) else false

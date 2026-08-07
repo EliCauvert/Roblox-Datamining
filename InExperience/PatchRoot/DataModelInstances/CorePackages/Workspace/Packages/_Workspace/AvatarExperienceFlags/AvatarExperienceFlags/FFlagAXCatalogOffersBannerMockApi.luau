@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXCatalogOffersBannerMockApi", false) and require(script.Parent.FFlagAXCatalogOffersBannerEnabled)

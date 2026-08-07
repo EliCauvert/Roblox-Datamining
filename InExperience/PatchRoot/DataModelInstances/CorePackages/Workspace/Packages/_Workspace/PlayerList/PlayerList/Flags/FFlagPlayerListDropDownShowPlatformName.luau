@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("PlayerListDropDownShowPlatformName", false) and require(script.Parent.FFlagEnableMobilePlayerListOnConsole)

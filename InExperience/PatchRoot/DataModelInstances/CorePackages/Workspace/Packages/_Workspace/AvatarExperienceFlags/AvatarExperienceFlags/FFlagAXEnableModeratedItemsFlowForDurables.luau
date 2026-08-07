@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableModeratedItemsFlowForDurables", false) and require(script.Parent.FFlagAXRootSlotBasedEditorFlag)

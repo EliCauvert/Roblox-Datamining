@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXCatalogCategoriesSDUI) and game:DefineFastFlag("AXCatalogCategoriesSDUILinks", false)

@@ -1,0 +1,5 @@
+﻿game:DefineFastFlag("FixAccountSwitcherOverlayBackgroundTap", false)
+
+return function() --[[ line: 3 ]]
+	return game:GetFastFlag("FixAccountSwitcherOverlayBackgroundTap")
+end

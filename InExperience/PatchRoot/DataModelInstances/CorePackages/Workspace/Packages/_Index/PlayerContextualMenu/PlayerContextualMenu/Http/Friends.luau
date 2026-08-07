@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("PlayerContextualMenu").Parent.FriendsNetworking).config({ roduxNetworking = require(script.Parent.RoduxNetworking) })

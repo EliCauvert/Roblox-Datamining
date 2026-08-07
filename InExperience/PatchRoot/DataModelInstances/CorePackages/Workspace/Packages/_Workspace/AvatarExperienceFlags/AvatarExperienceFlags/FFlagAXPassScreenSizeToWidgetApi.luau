@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXRootRFYMigration) and (require(script.Parent.FFlagAXUnifiedMarketplaceResultsFetcher) and (require(script.Parent.FFlagAXResetFetchMarketplaceLogic) and game:DefineFastFlag("AXPassScreenSizeToWidgetApi5", false)))

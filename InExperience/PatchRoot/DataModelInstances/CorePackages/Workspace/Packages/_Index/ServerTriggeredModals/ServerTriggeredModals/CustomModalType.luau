@@ -1,0 +1,3 @@
+﻿return {
+	SocialFaceAgeEstimationUpsell = "SocialFaceAgeEstimationUpsell"
+}

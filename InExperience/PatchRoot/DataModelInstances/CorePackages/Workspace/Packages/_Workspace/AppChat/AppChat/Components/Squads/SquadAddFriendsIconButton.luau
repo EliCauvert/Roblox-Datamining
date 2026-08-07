@@ -1,0 +1,54 @@
+﻿local appChat = script:FindFirstAncestor("AppChat")
+local enumScreensModule = require(appChat.EnumScreens)
+local parent = appChat.Parent
+local constantsModule = require(appChat.Constants)
+local reactModule = require(parent.React)
+local squadExternalContractProviderModule = require(parent.SquadsCore.SquadExternalContractProvider)
+local UIBloxModule = require(parent.UIBlox)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
+local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
+local useCurrentSquadParentChannelId = require(parent.SquadsCore.Hooks).useCurrentSquadParentChannelId
+local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+local iconButton = UIBloxModule.App.Button.IconButton
+local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local images = UIBloxModule.App.ImageSet.Images
+local eventNamesModule = require(parent.SquadsCore.EventNames)
+local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
+local squadInvitePageNavSourceEnum = require(parent.Squads.Enums).SquadInvitePageNavSourceEnum
+
+return function(p0) --[[ line: 29 ]]
+	-- upvalues: reactModule (ref), squadExternalContractContext (ref), useCurrentSquadParentChannelId (ref), useGetConversationFromIdModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), constantsModule (ref), enumScreensModule (ref), eventNamesModule (ref), squadInvitePageNavSourceEnum (ref), iconButton (ref), images (ref), iconSize (ref)
+	local var8 = reactModule.useContext(squadExternalContractContext)
+	local var9 = useCurrentSquadParentChannelId() or ""
+	local var10 = useGetConversationFromIdModule(var9)
+	local var11 = if var10 then var10.participants else {}
+	local var12 = useLocalization({
+		tooManyPeopleText = {
+			if fFlagConnectionsToFriendsRename then "Feature.Chat.Message.AddFriendsPartyLimit" else "Feature.Chat.Message.AddConnectionsPartyLimit",
+			friendNum = constantsModule.MAX_PARTICIPANT_COUNT,
+			connectionsNum = constantsModule.MAX_PARTICIPANT_COUNT
+		}
+	})
+	
+	return reactModule.createElement(iconButton, {
+		layoutOrder = 0,
+		size = UDim2.fromOffset(0, 0),
+		icon = images["icons/actions/friends/friendAdd"],
+		iconSize = iconSize.Medium,
+		onActivated = reactModule.useCallback(function() --[[ line: 46 ]]
+			-- upvalues: var11 (ref), constantsModule (copy), p0 (ref), enumScreensModule (copy), var12 (ref), var8 (ref), eventNamesModule (copy), squadInvitePageNavSourceEnum (copy), var9 (ref)
+			if constantsModule.MAX_PARTICIPANT_COUNT < #var11 then
+				p0.navigation.navigate(enumScreensModule.RoactChatToast, {
+					toastProps = { toastContent = { toastTitle = var12.tooManyPeopleText } }
+				})
+				
+				return
+			end
+			var8.fireSquadAnalytics(eventNamesModule.SquadInvitePageNavSource, {
+				inviteNavSource = squadInvitePageNavSourceEnum.SquadLobbyAddFriendsIconButtonClicked,
+				parentChannelId = var9
+			})
+			p0.navigation.navigate(enumScreensModule.SquadInviteFriends, { conversationId = var9 })
+		end, { var9, p0.navigation, var11 })
+	})
+end

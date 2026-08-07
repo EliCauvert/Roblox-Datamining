@@ -1,0 +1,1 @@
+﻿return if game:GetEngineFeature("EnableInExpChatSummary2") then game:DefineFastFlag("EnableInExpChatSummaryOnLua4", false) or require(script:FindFirstAncestor("ExpChat").Parent.SharedFlags).FFlagEnableClientSummarySystemMessageOnLua else game:GetEngineFeature("EnableInExpChatSummary2")

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXOutfitDetailsV4_2", false)

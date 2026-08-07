@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagTrustedFriendsUseEnumCTA) and game:DefineFastFlag("TFWithActionsCheck_4", false)

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("AppChat").Parent.Signals).createComputed(require(script.createRootedNavigationStore))

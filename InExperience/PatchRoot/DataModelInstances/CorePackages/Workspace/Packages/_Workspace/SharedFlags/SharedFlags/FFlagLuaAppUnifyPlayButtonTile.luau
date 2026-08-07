@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppUnifyPlayButtonTile4", false) or (require(script.Parent.FFlagLuaAppUnifyPlayButtonTileIxp) or require(script.Parent.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp))

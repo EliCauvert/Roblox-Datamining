@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ConnectionManagementChips_V3", false)

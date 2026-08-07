@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("HomepagePromptsPaddingFix", false) and require(script.Parent.FFlagHomePagePromptsHandlerEnabled)

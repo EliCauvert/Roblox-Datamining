@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagForceEnableSquadRegroup) or (game:DefineFastFlag("EnableSquadRegroupExperimentation1", false) or require(script.Parent.FFlagEnableSquadRegroupExperimentationSmallScreenFix))

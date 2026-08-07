@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXRootRFYMigration) and (require(script.Parent.FFlagAXPassScreenSizeToWidgetApi) and game:DefineFastFlag("AXMoveAllTabToWidgetOnly5", false))

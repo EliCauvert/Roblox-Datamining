@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("AppShortcutBar").Parent.Signals).createComputed(require(script.createShortcutBarStatusStore))

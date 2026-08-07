@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfilePlatformEditBackgroundMenuItem", false) and require(script:FindFirstAncestor("ProfilePlatform").Parent.AvatarExperienceFlags).FFlagAXCustomizeBackgrounds

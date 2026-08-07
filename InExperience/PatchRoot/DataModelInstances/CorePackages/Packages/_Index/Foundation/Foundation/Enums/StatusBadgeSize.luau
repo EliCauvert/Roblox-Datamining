@@ -1,0 +1,1 @@
+﻿return { XSmall = "XSmall", Small = "Small" }

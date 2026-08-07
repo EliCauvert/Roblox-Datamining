@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatPresetChatSendEnabled", false) and require(script.Parent.FFlagExpChatPresetChatEnabled)

@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("UniversalFeatureRestrictions").Parent.AppCommonLib).Signal.new()

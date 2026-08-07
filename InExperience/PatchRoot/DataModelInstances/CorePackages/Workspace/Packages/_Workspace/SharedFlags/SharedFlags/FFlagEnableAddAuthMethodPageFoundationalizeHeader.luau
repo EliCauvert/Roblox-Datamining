@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnableAddAuthMethodPageFoundationalizeHeader2", false)

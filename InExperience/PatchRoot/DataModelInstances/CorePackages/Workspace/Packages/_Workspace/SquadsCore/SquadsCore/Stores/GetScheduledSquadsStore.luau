@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("SquadsCore").Parent.Signals).createComputed(require(script.createScheduledSquadStore))

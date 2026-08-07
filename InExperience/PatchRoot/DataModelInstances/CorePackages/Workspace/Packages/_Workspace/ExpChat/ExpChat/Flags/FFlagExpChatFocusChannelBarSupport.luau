@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagExpChatEnableFocusNavigation) and game:DefineFastFlag("ExpChatFocusChannelBarSupport", false)

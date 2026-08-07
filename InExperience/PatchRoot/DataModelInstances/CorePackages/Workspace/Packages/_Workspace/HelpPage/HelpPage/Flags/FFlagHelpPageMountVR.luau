@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagRefactorHelpPage) and game:DefineFastFlag("HelpPageMountVR3", false)

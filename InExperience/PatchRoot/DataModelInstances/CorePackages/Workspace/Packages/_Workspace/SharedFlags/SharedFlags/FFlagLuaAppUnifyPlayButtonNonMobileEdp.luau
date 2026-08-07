@@ -1,0 +1,1 @@
+﻿return if require(script.Parent.UIBlox).FFlagUIBloxEnableActionBarButtonOverride then game:DefineFastFlag("LuaAppUnifyPlayButtonNonMobileEdp3", false) or require(script.Parent.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp) else require(script.Parent.UIBlox).FFlagUIBloxEnableActionBarButtonOverride

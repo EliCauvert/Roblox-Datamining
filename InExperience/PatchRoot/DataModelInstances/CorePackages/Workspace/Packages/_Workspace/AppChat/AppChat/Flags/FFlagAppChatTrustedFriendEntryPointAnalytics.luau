@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatTrustedFriendEntryPointAnalytics", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatEnableTrustedFriendEntryPoint)

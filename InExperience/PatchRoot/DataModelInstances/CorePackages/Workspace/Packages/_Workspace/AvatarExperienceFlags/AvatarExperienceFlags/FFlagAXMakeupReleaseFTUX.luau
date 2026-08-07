@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMakeupReleaseFTUX", false) and (require(script.Parent.FFlagAXCatalogMakeupSupport) and require(script.Parent.FFlagAXMakeupEquipping))

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXResetAvatarButton2", false) and require(script.Parent.FFlagAXMigrateBuilderIcons)

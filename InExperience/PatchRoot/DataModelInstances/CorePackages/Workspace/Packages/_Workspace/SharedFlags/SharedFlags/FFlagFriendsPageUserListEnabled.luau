@@ -1,0 +1,1 @@
+﻿return if game:DefineFastFlag("FriendsPageUserListEnabled_v2", false) then require(script.Parent.FFlagFriendsPageUnifiedOpenProfileLogic) or require(script.Parent.FFlagFriendsPageAlwaysOpenPPV) else game:DefineFastFlag("FriendsPageUserListEnabled_v2", false)

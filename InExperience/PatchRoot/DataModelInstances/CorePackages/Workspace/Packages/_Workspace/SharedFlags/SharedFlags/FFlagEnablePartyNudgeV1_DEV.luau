@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnablePartyNudgeV1_DEV", false) and require(script.Parent.GetFFlagIsSquadEnabled)()

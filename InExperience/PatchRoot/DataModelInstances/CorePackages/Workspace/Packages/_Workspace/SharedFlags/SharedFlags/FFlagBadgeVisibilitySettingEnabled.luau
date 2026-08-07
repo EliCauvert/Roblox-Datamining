@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("BadgeVisibilitySettingEnabled_v3", false)

@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AXBackgroundFogDisabledDistance", 1000)

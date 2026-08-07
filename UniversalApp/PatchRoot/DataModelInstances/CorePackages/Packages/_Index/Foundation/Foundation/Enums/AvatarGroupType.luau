@@ -1,0 +1,1 @@
+﻿return { Stacked = "Stacked", Spread = "Spread" }

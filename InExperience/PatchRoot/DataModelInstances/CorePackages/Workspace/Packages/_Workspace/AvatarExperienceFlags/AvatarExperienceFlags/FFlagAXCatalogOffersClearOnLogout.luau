@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXCatalogOffersClearOnLogout2", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagMarketplaceOffersRoot

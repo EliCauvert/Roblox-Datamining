@@ -1,0 +1,15 @@
+﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local chatToastNudgeConfigModule = require(inExperienceIntervention.InterventionTreatmentConfigs.ChatToastNudgeConfig)
+local chatTimeoutConfigModule = require(inExperienceIntervention.InterventionTreatmentConfigs.ChatTimeoutConfig)
+local chatDialogNudgeConfigModule = require(inExperienceIntervention.InterventionTreatmentConfigs.ChatDialogNudgeConfig)
+local partyChatDialogNudgeConfigModule = require(inExperienceIntervention.InterventionTreatmentConfigs.PartyChatDialogNudgeConfig)
+local partyChatDialogTimeoutConfigModule = require(inExperienceIntervention.InterventionTreatmentConfigs.PartyChatDialogTimeoutConfig)
+local list = {
+	chatToastNudgeConfigModule,
+	chatDialogNudgeConfigModule,
+	chatTimeoutConfigModule
+}
+table.insert(list, partyChatDialogNudgeConfigModule)
+table.insert(list, partyChatDialogTimeoutConfigModule)
+
+return list

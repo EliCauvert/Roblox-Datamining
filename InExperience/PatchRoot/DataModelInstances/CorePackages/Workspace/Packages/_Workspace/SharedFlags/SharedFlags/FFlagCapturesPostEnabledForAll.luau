@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("CapturesPostEnabledForAll_v4", false)

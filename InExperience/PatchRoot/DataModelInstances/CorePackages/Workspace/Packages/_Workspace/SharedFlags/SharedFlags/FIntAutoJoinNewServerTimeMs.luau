@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AutoJoinNewServerTimeMs", 5000)

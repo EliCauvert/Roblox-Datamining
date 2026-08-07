@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXAddFacesToHeadList", false) and require(script.Parent.FFlagDynamicHeadsMigration)

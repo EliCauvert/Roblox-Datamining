@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableExpiredUserLookCheckout10", false) and (require(script.Parent.FFlagAXEnableModeratedItemsFlowForDurables) and require(script.Parent.FFlagAXInventoryDurablesSupport))

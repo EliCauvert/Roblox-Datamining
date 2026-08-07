@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("DebugFriendsChat", false) and require(script.Parent.FFlagExpChatEnableFriendsTab)

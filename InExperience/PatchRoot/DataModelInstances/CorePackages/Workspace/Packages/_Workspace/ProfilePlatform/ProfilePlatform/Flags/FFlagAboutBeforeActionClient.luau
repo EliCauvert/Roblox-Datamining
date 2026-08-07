@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfilePlatformAboutBeforeActionClient", false) and require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader

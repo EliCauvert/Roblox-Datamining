@@ -1,0 +1,1 @@
+﻿return { Ring = "Ring", Circle = "Circle" }

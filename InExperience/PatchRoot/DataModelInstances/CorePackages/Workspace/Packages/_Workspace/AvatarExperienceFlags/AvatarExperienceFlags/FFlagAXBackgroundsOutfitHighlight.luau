@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAXBackgroundsRoot) and (require(script.Parent.FFlagAXBackgroundsOutfitPersistence) and game:DefineFastFlag("AXBackgroundsOutfitHighlight", false))

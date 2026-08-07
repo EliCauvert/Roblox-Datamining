@@ -1,0 +1,21 @@
+﻿return {
+	AddSystemInfoToArgs = require(script.AddSystemInfoToArgs),
+	composeRefs = require(script.composeRefs),
+	validateProps = require(script.validateProps),
+	logResponseError = require(script.logResponseError),
+	logResponseTelemetry = require(script.logResponseTelemetry),
+	parseBooleanString = require(script.parseBooleanString),
+	DiscoveryClientAppStorage = require(script.DiscoveryClientAppStorage),
+	HomeOmniFeedCache = require(script.HomeOmniFeedCache),
+	makeDiscoveryNetworkCallWithCacheFallback = require(script.makeDiscoveryNetworkCallWithCacheFallback),
+	OmniRecommendationsPageType = require(script.OmniRecommendationsPageType),
+	VerticalEfficiencyExperimentation = require(script.VerticalEfficiencyExperimentation),
+	getPageSideMargin = require(script.getPageSideMargin),
+	isSearchTypeInOmniSearch = require(script.isSearchTypeInOmniSearch),
+	DiscoveryEventErrorLogger = require(script.Telemetry.DiscoveryEventErrorLogger),
+	ApportioningDiagnosticTelemetry = require(script.Telemetry.ApportioningDiagnosticTelemetry),
+	getTopSearchResultsFetchName = require(script.getTopSearchResultsFetchName),
+	extractAndStyleRichTextLinks = require(script.extractAndStyleRichTextLinks),
+	getZendeskUrl = require(script.getZendeskUrl),
+	["jest.config"] = script["jest.config"]
+}

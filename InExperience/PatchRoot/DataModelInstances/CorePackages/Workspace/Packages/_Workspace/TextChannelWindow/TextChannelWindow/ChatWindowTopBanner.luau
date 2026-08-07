@@ -1,0 +1,96 @@
+﻿local guiService = game:GetService("GuiService")
+local parent = script.Parent.Parent
+local reactModule = require(parent.React)
+local useEventConnection = require(parent.ReactUtils).useEventConnection
+local foundationModule = require(parent.Foundation)
+local _ = require(parent.Signals)
+local chatLineReportingModule = require(parent.ChatLineReporting)
+local chatLineReportRoot = chatLineReportingModule.ChatLineReportRoot
+local constants = chatLineReportingModule.Constants
+local useInExperienceLocalizationModule = require(script.Parent.useInExperienceLocalization)
+local view = foundationModule.View
+local icon = foundationModule.Icon
+local menu = foundationModule.Menu
+local iconName = foundationModule.Enums.IconName
+local iconSize = foundationModule.Enums.IconSize
+local inputSize = foundationModule.Enums.InputSize
+local popoverSide = foundationModule.Enums.PopoverSide
+local popoverAlign = foundationModule.Enums.PopoverAlign
+
+local function mapMessagesForReport(p0, p1) --[[ line: 35 ]]
+	local list = table.create(#p0)
+	
+	for i, v in p0 do
+		if v.messageType == "user" then
+			table.insert(list, {
+				userId = v.senderUserId,
+				text = v.content,
+				textChannel = p1,
+				messageId = v.messageId,
+				prefixText = v.prefixText
+			})
+		end
+	end
+	return list
+end
+
+return function(p2) --[[ line: 51 | named "ChatWindowTopBanner" ]]
+	-- upvalues: useInExperienceLocalizationModule (ref), reactModule (ref), useEventConnection (ref), guiService (ref), chatLineReportRoot (ref), mapMessagesForReport (ref), iconName (ref), constants (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), view (ref), icon (ref), iconSize (ref)
+	local var7 = useInExperienceLocalizationModule()
+	local var8, var9 = reactModule.useState(false)
+	useEventConnection(guiService:GetPropertyChangedSignal("MenuIsOpen"), function() --[[ line: 55 ]]
+		-- upvalues: guiService (copy), var9 (ref)
+		if guiService.MenuIsOpen then
+			var9(false)
+		end
+	end)
+	local var10 = var7("Feature.ReportAbuse.Action.EnterChatLineReporting")
+	local var11 = reactModule.useCallback(function() --[[ line: 71 ]]
+		-- upvalues: p2 (ref), chatLineReportRoot (copy), mapMessagesForReport (copy), var9 (ref)
+		chatLineReportRoot.initialize(mapMessagesForReport(if p2.messagesSignal then p2.messagesSignal(false) else {}, p2.targetChannel))
+		var9(false)
+	end, { p2.messagesSignal, p2.targetChannel })
+	
+	return reactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 0, constants.TopBannerSize),
+		ZIndex = p2.ZIndex
+	}, {
+		Menu = reactModule.createElement(menu, {
+			isOpen = var8,
+			items = reactModule.useMemo(function() --[[ line: 77 ]]
+				-- upvalues: iconName (copy), var10 (ref), var11 (ref)
+				return {
+					{
+						id = "report",
+						icon = iconName.SpeechBubbleExclamation,
+						text = var10,
+						onActivated = var11
+					}
+				}
+			end, { var10, var11 }),
+			size = inputSize.Medium,
+			side = popoverSide.Right,
+			align = popoverAlign.Start,
+			onPressedOutside = reactModule.useCallback(function() --[[ line: 67 ]]
+				-- upvalues: var9 (ref)
+				var9(false)
+			end, {}),
+			Position = UDim2.new(1, constants.IconButtonPositionXOffset, 0, 0)
+		}, {
+			Button = reactModule.createElement(view, {
+				tag = "align-x-center align-y-center radius-medium",
+				Size = UDim2.fromOffset(constants.IconButtonSize, constants.IconButtonSize),
+				onActivated = reactModule.useCallback(function() --[[ line: 63 ]]
+					-- upvalues: var9 (ref), var8 (ref)
+					var9(not var8)
+				end, { var8 })
+			}, {
+				icon = reactModule.createElement(icon, {
+					name = iconName.ThreeDotsHorizontal,
+					size = iconSize.Large
+				})
+			})
+		})
+	})
+end

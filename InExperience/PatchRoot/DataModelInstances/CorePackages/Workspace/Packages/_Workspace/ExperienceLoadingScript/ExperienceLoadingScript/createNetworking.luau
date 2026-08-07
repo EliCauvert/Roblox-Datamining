@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ExperienceLoadingScript").Parent.Http).NetworkLayers.requestInternalWrapper(game:GetService("HttpService"))

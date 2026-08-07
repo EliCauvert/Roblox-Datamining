@@ -1,0 +1,1 @@
+﻿return if game:GetEngineFeature("CoreAttributes") then game:DefineFastFlag("LeaderstatsWithASideOfClient", false) else false

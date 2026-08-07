@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAppIaScrollAway) and game:DefineFastFlag("AppIaScrollAwayFixSocial", false)

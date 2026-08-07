@@ -1,0 +1,1 @@
+﻿return require(script.Parent.Parent.Parent.Chrome.Flags.EnrolledConsoleExperienceControls) and game:DefineFastFlag("LoggingGamepadOpenExpControlsMenu", false)

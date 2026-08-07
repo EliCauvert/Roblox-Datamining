@@ -1,0 +1,1 @@
+﻿return if require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatScrollbarInset) then game:DefineFastInt("ExpChatDefaultARButtonPaddingInset", 1) else game:DefineFastInt("ExpChatDefaultARButtonPadding", 9)

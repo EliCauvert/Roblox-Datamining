@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatRewriteInline3", false) and require(script.Parent.FFlagEnableInExpChatRewrite)

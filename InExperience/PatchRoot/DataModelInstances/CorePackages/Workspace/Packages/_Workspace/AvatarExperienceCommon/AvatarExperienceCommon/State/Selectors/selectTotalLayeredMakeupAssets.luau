@@ -1,0 +1,22 @@
+﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local avatarExperienceFlagsModule = require(avatarExperienceCommon.Parent.AvatarExperienceFlags)
+local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
+local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
+local selectEquippedLayeredMakeupAssetsModule = require(script.Parent.selectEquippedLayeredMakeupAssets)
+local fFlagAXMakeupEquipping = avatarExperienceFlagsModule.FFlagAXMakeupEquipping
+
+return function(value) --[[ line: 15 | named "selectTotalLayeredMakeupAssets" ]]
+	-- upvalues: fFlagAXMakeupEquipping (ref), selectEquippedLayeredMakeupAssetsModule (ref), selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
+	if not fFlagAXMakeupEquipping then
+		return 0
+	end
+	local count = #selectEquippedLayeredMakeupAssetsModule(value)
+	local var6 = 0
+	
+	for i, v in selectTryOnItemsModule(value) do
+		if v.selectedInTryOnManager and v.itemType and isMakeupAssetTypeModule(v.itemSubType) then
+			var6 += 1
+		end
+	end
+	return count + var6
+end

@@ -1,0 +1,4 @@
+﻿local corePackagesService = game:GetService("CorePackages")
+local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreGuiCommon)
+
+return game:DefineFastFlag("TopBarDeprecateDisplayOptionsRodux2", false) and (require(corePackagesService.Workspace.Packages.Chrome).Enabled() and (require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls and (require(script.Parent.FFlagTopBarDeprecateGamepadNavigationDialogRodux) and (coreGuiCommonModule.Flags.FFlagTopBarSignalizeMenuOpen and (coreGuiCommonModule.Flags.FFlagTopBarSignalizeKeepOutAreas and coreGuiCommonModule.Flags.FFlagTopBarSignalizeScreenSize)))))

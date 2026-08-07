@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXInventoryIncludeUnavailableItems", false) and require(script.Parent.FFlagAXModeratedItemsFlow)

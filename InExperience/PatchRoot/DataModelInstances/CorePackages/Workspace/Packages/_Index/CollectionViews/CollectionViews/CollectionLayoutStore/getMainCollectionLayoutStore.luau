@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("CollectionViews").Parent.Signals).createComputed(require(script.Parent.createMainCollectionLayoutStore))

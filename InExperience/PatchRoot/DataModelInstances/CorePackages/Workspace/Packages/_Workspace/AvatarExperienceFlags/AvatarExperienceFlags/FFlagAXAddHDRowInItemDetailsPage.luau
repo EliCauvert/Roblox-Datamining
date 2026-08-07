@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXAddHDRowInItemDetailsPage", false) and require(script.Parent.FFlagAXAddHDCatalogTab)

@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagEnableShopPrefetch) and game:DefineFastFlag("HideShopMenuOnFailure", false)

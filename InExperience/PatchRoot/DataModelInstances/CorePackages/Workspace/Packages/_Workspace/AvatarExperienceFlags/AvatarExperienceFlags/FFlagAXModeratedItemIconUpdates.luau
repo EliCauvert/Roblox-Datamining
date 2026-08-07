@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXModeratedItemIconUpdates2", false) and require(script.Parent.FFlagAXModeratedItemsFlow)

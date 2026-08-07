@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EnablePromptRobloxSubscriptionPurchaseBinding2", false) and (require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagBlackbirdUpsellVersion and game:GetEngineFeature("EnablePromptRobloxSubscriptionPurchase"))

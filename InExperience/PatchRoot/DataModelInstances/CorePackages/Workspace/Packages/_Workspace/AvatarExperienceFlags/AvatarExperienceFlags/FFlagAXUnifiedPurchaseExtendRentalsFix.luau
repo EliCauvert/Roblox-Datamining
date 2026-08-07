@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXUnifiedPurchaseExtendRentalsFix", false) and require(script.Parent.FFlagAXInventoryDurablesSupport)

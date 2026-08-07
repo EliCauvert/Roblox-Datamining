@@ -1,0 +1,39 @@
+﻿local corePackagesService = game:GetService("CorePackages")
+local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
+local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
+local fFlagEnableInExperienceAvatarSwitcher = sharedFlagsModule.FFlagEnableInExperienceAvatarSwitcher
+local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration
+local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
+
+return {
+	OverflowMenu = require(script.OverflowMenu),
+	AssistantBuild = if fFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
+	Chat = require(script.ExpChat.ChatChromeIntegration),
+	ConnectUnibar = if argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconUnibar),
+	ConnectDropdown = if sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and sharedFlagsModule.FFlagExpChatEnableFriendsTab and argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),
+	TrustAndSafety = require(script.TrustAndSafety),
+	DummyWindow = require(script.DummyWindow),
+	DummyWindow2 = require(script.DummyWindow2),
+	ToggleMic = require(script.ToggleMic),
+	JoinVoice = require(script.JoinVoice),
+	SelfieView = require(script.SelfieView),
+	CapturesEntrypoint = require(script.Captures.CapturesEntrypoint),
+	AvatarSwitcherEntryPoint = if fFlagEnableInExperienceAvatarSwitcher then require(script.AvatarSwitcher.AvatarSwitcherEntrypoint) else nil,
+	MusicEntrypoint = require(script.MusicUtility.MusicEntrypoint),
+	PartyEntrypoint = if argoPartyExperimentation.getIsRenameEnabled() then require(script.Party.PartyEntrypoint) else nil,
+	PartyMic = require(script.Party.PartyMic),
+	VRToggleButton = if isInExperienceUIVREnabled and isSpatial() then require(script.VRToggleButton) else nil,
+	VRSafeBubble = if isInExperienceUIVREnabled and isSpatial() then require(script.VRSafeBubble) else nil,
+	People = require(script.Pages.People),
+	InviteFriends = if fFlagAddInviteFriendsIntegration then require(script.Pages.InviteFriends) else nil,
+	Settings = require(script.Pages.Settings),
+	Gallery = require(script.Pages.Gallery),
+	Help = require(script.Pages.Help),
+	TraversalHistory = if require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalHistory and sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet then require(script.Pages.TraversalHistory) else nil,
+	LeaveConfirmation = if fFlagEnableSideSheet then require(script.Pages.LeaveConfirmation) else nil,
+	RespawnConfirmation = if fFlagEnableSideSheet then require(script.Pages.RespawnConfirmation) else nil,
+	ShopEntrypoint = if sharedFlagsModule.FFlagEnableInExperienceShop then require(script.InExperienceShop.ShopEntrypoint) else nil
+}

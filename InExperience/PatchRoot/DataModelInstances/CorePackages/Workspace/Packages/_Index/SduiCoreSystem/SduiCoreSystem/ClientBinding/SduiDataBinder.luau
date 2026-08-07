@@ -1,0 +1,486 @@
+﻿local localizationService = game:GetService("LocalizationService")
+local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local parent = sduiCoreSystem.Parent
+local _ = require(parent.ServiceContractsProto)
+local dataHydrationModule = require(parent.DataHydration)
+local _ = require(parent.Signals)
+local displayModule = require(parent.Display)
+local responsiveModule = require(parent.Responsive)
+local sduiDataBindingResponsiveFieldName = require(sduiCoreSystem.ClientBinding.SduiDataBindingFieldNames).SduiDataBindingResponsiveFieldName
+local tryGetPathFromDataModule = require(sduiCoreSystem.ClientBinding.tryGetPathFromData)
+local sduiDataBindingContentTypeModule = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
+local sduiDataBinderTransformUtilsModule = require(sduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils)
+local getZendeskUrl = require(parent.DiscoveryUtils).getZendeskUrl
+local getSduiPolicyStoreModule = require(sduiCoreSystem.ClientBinding.getSduiPolicyStore)
+local resolveSduiPolicyFieldModule = require(sduiCoreSystem.ClientBinding.resolveSduiPolicyField)
+local getSduiServiceDependenciesStoreModule = require(sduiCoreSystem.ClientBinding.getSduiServiceDependenciesStore)
+local getSduiClientPageScopeModule = require(sduiCoreSystem.ClientBinding.getSduiClientPageScope)
+local sduiCapabilitiesModule = require(sduiCoreSystem.ClientBinding.SduiCapabilities)
+local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local _ = require(sduiCoreSystem.SduiBuilderTypes)
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagSduiAppPolicyBindings = sharedFlagsModule.FFlagSduiAppPolicyBindings
+local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
+local fFlagLuaAppEdpKeepFullPageOnPortraitRotation = sharedFlagsModule.FFlagLuaAppEdpKeepFullPageOnPortraitRotation
+local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
+local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport
+local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
+local fFlagSduiAddMarketplaceEntityDataHydration = sharedFlagsModule.FFlagSduiAddMarketplaceEntityDataHydration
+local fFlagSduiHydrationFetchIfMissing = sharedFlagsModule.FFlagSduiHydrationFetchIfMissing
+local fFlagSduiGameIconSupport = sharedFlagsModule.FFlagSduiGameIconSupport
+local fFlagLuaAppVoteOptimisticUpdateRaceFix = sharedFlagsModule.FFlagLuaAppVoteOptimisticUpdateRaceFix
+local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
+local fFlagSduiClientPageScope = sharedFlagsModule.FFlagSduiClientPageScope
+local fFlagSduiCapabilityBindings = sharedFlagsModule.FFlagSduiCapabilityBindings
+local protobufTimestampToLocalTimeString = sduiDataBinderTransformUtilsModule.protobufTimestampToLocalTimeString
+
+local function _(p0) --[[ line: 67 | named "updateBadgesInfoStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p0)
+end
+
+local _ = function(p1) --[[ line: 71 | named "updateCreatorInfoStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Creator.getCreatorInfoStore(false).updateCreatorInfos(p1)
+end
+
+local _ = function(p2) --[[ line: 75 | named "updateGameInfos" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p2)
+end
+
+local _ = function(p3) --[[ line: 79 | named "updateAgeRecommendations" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getAgeRecommendationStore(false).updateAgeRecommendations(p3)
+end
+
+local _ = function(p4) --[[ line: 83 | named "updateSocialLinkInfos" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).updateSocialLinkInfos(p4)
+end
+
+local _ = function(value) --[[ line: 87 | named "updateMediaAssetStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.MediaAsset.getMediaAssetStore(false).updateMediaAssets(value)
+end
+
+local _ = function(p5) --[[ line: 91 | named "updateExperienceEventInfoStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).updateExperienceEventInfos(p5)
+end
+
+local _ = function(p6) --[[ line: 95 | named "updateMarketplaceCatalogCategoryStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.MarketplaceCatalogCategory.getMarketplaceCatalogCategoryStore(false).updateMarketplaceCatalogCategories(p6)
+end
+
+local _ = function(p7) --[[ line: 101 | named "updateMarketplaceCatalogSortStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).updateMarketplaceCatalogSorts(p7)
+end
+
+local _ = function(value) --[[ line: 105 | named "updateMarketplaceAssetInfoStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.MarketplaceAsset.getMarketplaceAssetStore(false).updateMarketplaceAssetInfos(value)
+end
+
+local _ = function(p8) --[[ line: 109 | named "updateMarketplaceBundleInfoStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).updateMarketplaceBundleInfos(p8)
+end
+
+local _ = function(p9) --[[ line: 113 | named "updateMarketplaceLookInfoStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).updateMarketplaceLookInfos(p9)
+end
+
+local _ = function(p10) --[[ line: 117 | named "updateGamePassStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfos(p10)
+end
+
+local _ = function(p11) --[[ line: 121 | named "updatePlayabilityStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getPlayabilityStore(false).updatePlayabilities(p11)
+end
+
+local _ = function(p12) --[[ line: 125 | named "updateGameDeveloperProductStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getGameDeveloperProductStore(false).updateGameDeveloperProductInfos(p12)
+end
+
+local _ = function(p13) --[[ line: 129 | named "updateGameSubscriptionStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfos(p13)
+end
+
+local _ = function(p14) --[[ line: 133 | named "updateFavoritesStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getFavoritesStore(false).updateItems(p14)
+end
+
+local _ = function(p15) --[[ line: 137 | named "updateUserVoteStore" ]]
+	-- upvalues: dataHydrationModule (ref)
+	dataHydrationModule.Game.getVotesStore(false).updateUserVoteItems(p15)
+end
+
+local function calculateBadgeDerivedField(p16, p17, _) --[[ line: 149 ]]
+	-- upvalues: protobufTimestampToLocalTimeString (ref)
+	if p16 == "created_time_formatted" then
+		local createdTime = p17 and (p17.created_time or p17.createdTime)
+		
+		return createdTime and protobufTimestampToLocalTimeString(createdTime)
+	elseif p16 == "updated_time_formatted" then
+		local updatedTime = p17 and (p17.updated_time or p17.updatedTime)
+		
+		return updatedTime and protobufTimestampToLocalTimeString(updatedTime)
+	elseif p16 == "awarded_time_formatted" then
+		local awardedTime = p17 and (p17.awarded_time or p17.awardedTime)
+		
+		return awardedTime and protobufTimestampToLocalTimeString(awardedTime)
+	end
+	return nil
+end
+
+local function calculateUniverseDerivedField(p18, p19, _) --[[ line: 172 ]]
+	-- upvalues: dataHydrationModule (ref), fFlagSduiExperienceDetailsSupport (ref), localizationService (ref), getZendeskUrl (ref)
+	if p18 == "rating_text_formatted_brief" then
+		local totalUpVotes = tonumber(p19.totalUpVotes) or 0
+		local totalDownVotes = tonumber(p19.totalDownVotes) or 0
+		
+		return dataHydrationModule.Game.VotesUtils.getRatingDisplayText({
+			upVotes = totalUpVotes,
+			downVotes = totalDownVotes,
+			rating = dataHydrationModule.Game.VotesUtils.calculateRating(totalUpVotes, totalDownVotes)
+		})
+	end
+	return if fFlagSduiExperienceDetailsSupport and p18 == "refund_policy_learn_more_url" then getZendeskUrl(nil, localizationService.RobloxLocaleId, p19 and p19.refund_article_id) else nil
+end
+
+local function calculateAgeRecommendationDerivedField(p20, p21, _) --[[ line: 202 ]]
+	-- upvalues: dataHydrationModule (ref)
+	if p20 == "content_rating_image" then
+		local igrsRating = p21 and p21.igrsRating
+		
+		return igrsRating and dataHydrationModule.Game.AgeRecommendationUtils.getIgrsImage(igrsRating)
+	elseif p20 == "filtered_descriptors" then
+		local t = {}
+		
+		if p21 and p21.descriptors then
+			for i, v in p21.descriptors do
+				if v.contains == true and v.displayName and v.displayName ~= "" then
+					table.insert(t, { displayName = v.displayName })
+				end
+			end
+		end
+		return t
+	elseif p20 ~= "contains_strong_language" then
+		return nil
+	elseif p21 and p21.descriptors then
+		for i, v in p21.descriptors do
+			if v.contains == true and v.name == "strong-language" then
+				return true
+			end
+		end
+	end
+	return false
+end
+
+local function getDataObjectSignal(value, _, p22, p23) --[[ line: 238 ]]
+	-- upvalues: dataHydrationModule (ref), fFlagSduiHydrationFetchIfMissing (ref), fFlagSduiExperienceDetailsSupport (ref), sduiDataBindingContentTypeModule (ref), fFlagLuaAppVoteOptimisticUpdateRaceFix (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref)
+	if value == "badge" then
+		return dataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo(tostring(p22))
+	elseif value == "creator" then
+		return dataHydrationModule.Creator.getCreatorInfoStore(false).getCreatorInfo(p22)
+	elseif value == "universe" then
+		return if fFlagSduiHydrationFetchIfMissing and p23 then dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(p22) else dataHydrationModule.Game.getGameInfoStore(false).getGameInfo(p22)
+	elseif fFlagSduiExperienceDetailsSupport then
+		if value == "ageRecommendation" then
+			return if fFlagSduiHydrationFetchIfMissing and p23 then dataHydrationModule.Game.getAgeRecommendationStore(false).getAndFetchAgeRecommendation(p22) else dataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(p22)
+		elseif value == "socialLink" then
+			return dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).getSocialLinkInfo(p22)
+		elseif value == "mediaAsset" then
+			return dataHydrationModule.MediaAsset.getMediaAssetStore(false).getMediaAsset(p22)
+		elseif value == "playability" then
+			return if fFlagSduiHydrationFetchIfMissing and p23 then dataHydrationModule.Game.getPlayabilityStore(false).getAndFetchPlayability(tostring(p22)) else dataHydrationModule.Game.getPlayabilityStore(false).getPlayability(tostring(p22))
+		elseif value == sduiDataBindingContentTypeModule.universeUserVote then
+			return if p23 and not fFlagLuaAppVoteOptimisticUpdateRaceFix then dataHydrationModule.Game.getVotesStore(false).getAndFetchUserVote(p22) else dataHydrationModule.Game.getVotesStore(false).getUserVote(p22)
+		elseif value == sduiDataBindingContentTypeModule.universeUserFavorite then
+			return if p23 then dataHydrationModule.Game.getFavoritesStore(false).getAndFetchFavorite(p22) else dataHydrationModule.Game.getFavoritesStore(false).getFavorite(p22)
+		elseif value == sduiDataBindingContentTypeModule.universeUserFollow then
+			return if p23 then dataHydrationModule.Game.getFollowingsStore(false).getAndFetchFollowing(p22) else dataHydrationModule.Game.getFollowingsStore(false).getFollowing(p22)
+		elseif value == sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then
+			return if p23 then dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).getAndFetchUserVoteFeedbackMetadata(tostring(p22)) else dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).getUserVoteFeedbackMetadata(tostring(p22))
+		elseif (fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport) and value == "gamePass" then
+			return dataHydrationModule.Game.getGamePassStore(false).getGamePassInfo(tostring(p22))
+		elseif (fFlagSduiEventDetailsSupport or fFlagSduiExperienceDetailsSupport) and value == "event" then
+			return dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).getExperienceEventInfo(p22)
+		elseif fFlagSduiMarketplaceCatalogCategorySupport and value == "marketplaceCatalogCategory" then
+			return dataHydrationModule.MarketplaceCatalogCategory.getMarketplaceCatalogCategoryStore(false).getMarketplaceCatalogCategory(p22)
+		elseif fFlagSduiMarketplaceCatalogSortSupport and value == "marketplaceCatalogSort" then
+			return dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getMarketplaceCatalogSort(p22)
+		elseif value == "song" then
+			return dataHydrationModule.Song.getSongInfoStore(false).getSongInfo(tostring(p22))
+		elseif fFlagSduiAddMarketplaceEntityDataHydration then
+			if value == "marketplaceAsset" then
+				return dataHydrationModule.MarketplaceAsset.getMarketplaceAssetStore(false).getMarketplaceAssetInfo(p22)
+			elseif value == "marketplaceBundle" then
+				return dataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).getMarketplaceBundleInfo(p22)
+			elseif value == "marketplaceLook" then
+				return dataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).getMarketplaceLookInfo(p22)
+			elseif fFlagSduiDevStoreSeeAllSupport then
+				return if value == "gameDeveloperProduct" then dataHydrationModule.Game.getGameDeveloperProductStore(false).getGameDeveloperProductInfo(tostring(p22)) elseif value == "gameSubscription" then dataHydrationModule.Game.getGameSubscriptionStore(false).getGameSubscriptionInfo(tostring(p22)) else nil
+			end
+		end
+	end
+end
+
+local t = {
+	responsive = true,
+	policy = if fFlagSduiAppPolicyBindings then true else nil,
+	clientPageScope = if fFlagSduiClientPageScope then true else nil,
+	capability = if fFlagSduiCapabilityBindings then true else nil
+}
+
+local function isClientContentType(p24) --[[ line: 350 ]]
+	-- upvalues: t (ref)
+	return t[p24] or false
+end
+
+local function getFieldValueForClientContentType(p25, p26, p27, p28) --[[ line: 354 ]]
+	-- upvalues: fFlagSduiClientPageScope (ref), sduiDataBindingContentTypeModule (ref), getSduiClientPageScopeModule (ref), sduiDataBindingResponsiveFieldName (ref), displayModule (ref), responsiveModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppEdpKeepFullPageOnPortraitRotation (ref), fFlagSduiCapabilityBindings (ref), sduiCapabilitiesModule (ref), fFlagSduiAppPolicyBindings (ref), getSduiPolicyStoreModule (ref), resolveSduiPolicyFieldModule (ref), tryGetPathFromDataModule (ref)
+	local var32
+	if fFlagSduiClientPageScope and p25 == sduiDataBindingContentTypeModule.clientPageScope then
+		var32 = if p28 then p28.configKey else nil
+		
+		if var32 and #p26 >= 2 then
+			return getSduiClientPageScopeModule(var32).getSignal(p26[2])(p27), nil
+		end
+		return nil
+	elseif p25 == sduiDataBindingContentTypeModule.responsive then
+		if #p26 ~= 2 then
+			return nil
+		end
+		var32 = p26[2]
+		
+		if var32 == sduiDataBindingResponsiveFieldName.screenWidth then
+			return displayModule.GetDisplayStore(p27).getViewportSize(p27).X
+		elseif var32 == sduiDataBindingResponsiveFieldName.screenHeight then
+			return displayModule.GetDisplayStore(p27).getViewportSize(p27).Y
+		elseif var32 == sduiDataBindingResponsiveFieldName.isPortrait then
+			local viewportSize = displayModule.GetDisplayStore(p27).getViewportSize(p27)
+			
+			return viewportSize.X < viewportSize.Y
+		elseif var32 == sduiDataBindingResponsiveFieldName.isSpatial then
+			return displayModule.GetDisplayStore(p27).getIsSpatial(p27)
+		elseif var32 == sduiDataBindingResponsiveFieldName.lastInput then
+			return responsiveModule.GetInputModeStore(p27).getLastInputType(p27)
+		elseif var32 == sduiDataBindingResponsiveFieldName.preferredInput then
+			return responsiveModule.GetInputModeStore(p27).getPreferredInputType(p27)
+		elseif fFlagSduiExperienceDetailsSupport and var32 == sduiDataBindingResponsiveFieldName.isCompactTouch then
+			if fFlagLuaAppEdpKeepFullPageOnPortraitRotation then
+				return responsiveModule.getIsCompactTouch(displayModule.GetDisplayStore(p27).getViewportSize(p27), responsiveModule.GetInputModeStore(p27).getPreferredInputType(p27))
+			end
+			local viewportSize = displayModule.GetDisplayStore(p27).getViewportSize(p27)
+			
+			return viewportSize.X <= responsiveModule.BreakpointConfig.sizes[responsiveModule.Keys.Small].maxWidth and (viewportSize.X < viewportSize.Y and responsiveModule.GetInputModeStore(p27).getPreferredInputType(p27) == responsiveModule.Input.Touch)
+		elseif fFlagSduiCapabilityBindings and p25 == sduiDataBindingContentTypeModule.capability then
+			return if #p26 < 2 then nil else sduiCapabilitiesModule.isEnabled(p26[2])
+		elseif fFlagSduiAppPolicyBindings and p25 == sduiDataBindingContentTypeModule.policy then
+			if #p26 < 2 then
+				return nil
+			end
+			var32 = getSduiPolicyStoreModule().getAppPolicy(p27)
+			
+			if var32 == nil then
+				error(`Failed to find policy table when binding value {table.concat(p26, ".")}`)
+			end
+			local var35, var36 = resolveSduiPolicyFieldModule(var32, p26[2])
+			
+			if var35 then
+				return var36
+			end
+			local rawPolicy = var32.getRawPolicy()
+			
+			if rawPolicy then
+				local var38, var39 = tryGetPathFromDataModule(rawPolicy, p26, 2)
+				
+				if var38 then
+					return var39
+				end
+				error(`Failed to find policy value for '{table.concat(p26, ".")}'`)
+			else
+				error(`Failed to find rawPolicy table when binding value {table.concat(p26, ".")}`)
+			end
+		end
+		return nil
+	end
+end
+
+local function calculateDerivedFieldValue(p29, p30, p31, p32) --[[ line: 449 ]]
+	-- upvalues: calculateBadgeDerivedField (ref), fFlagSduiExperienceDetailsSupport (ref), calculateUniverseDerivedField (ref), calculateAgeRecommendationDerivedField (ref), sduiDataBindingContentTypeModule (ref), dataHydrationModule (ref), fFlagSduiEventDetailsSupport (ref), getSduiServiceDependenciesStoreModule (ref)
+	if p29 == "badge" then
+		return calculateBadgeDerivedField(p30, p31, p32)
+	elseif fFlagSduiExperienceDetailsSupport then
+		return if p29 == "universe" then calculateUniverseDerivedField(p30, p31, p32) elseif p29 == "ageRecommendation" then calculateAgeRecommendationDerivedField(p30, p31, p32) elseif p29 == sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then dataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).calculateDerivedField(p30, p31, p32) elseif (fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport) and p29 == "event" then dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).calculateDerivedField(p30, p31, p32, getSduiServiceDependenciesStoreModule().getDependencies("SduiDataBinder").localization) else nil
+	end
+end
+
+local function getUniverseIcon(p33, p34, p35) --[[ line: 500 ]]
+	-- upvalues: dataHydrationModule (ref)
+	local andFetchGameIcon = dataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcon(tostring(p33), p35)
+	local var41 = andFetchGameIcon.data(p34)
+	local var42 = andFetchGameIcon.status(p34)
+	
+	if var41 and var41.url then
+		return var41.url, var42
+	end
+	return nil, var42
+end
+
+local function getDataHydrationField(p36, p37, p38, p39, p40) --[[ line: 515 ]]
+	-- upvalues: fFlagSduiGameIconSupport (ref), getUniverseIcon (ref), dataHydrationModule (ref), getDataObjectSignal (ref), tryGetPathFromDataModule (ref), calculateDerivedFieldValue (ref)
+	if #p37 < 2 then
+		return nil, nil
+	elseif fFlagSduiGameIconSupport and p36 == "universe" and #p37 == 2 then
+		if p37[2] == "icon" then
+			return getUniverseIcon(p38, p39)
+		elseif p37[2] == "largeIcon" then
+			return getUniverseIcon(p38, p39, dataHydrationModule.Game.GameIconSize.Large)
+		end
+	end
+	local var43 = getDataObjectSignal(p36, p37, p38, p40)
+	
+	if not var43 then
+		error(`No available data object for {p36} {table.concat(p37, ".")} for id: {p38}`)
+	end
+	local var44 = var43.data(p39)
+	local var45 = var43.status(p39)
+	
+	if not var44 then
+		return nil, var45
+	end
+	local var46, var47 = tryGetPathFromDataModule(var44, p37, 2)
+	
+	if var46 then
+		return var47, var45
+	elseif #p37 == 2 then
+		return calculateDerivedFieldValue(p36, p37[2], var44, p39), var45
+	end
+	return nil, var45
+end
+
+local t_1 = {
+	badge = getDataHydrationField,
+	creator = getDataHydrationField,
+	universe = getDataHydrationField,
+	ageRecommendation = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	mediaAsset = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	socialLink = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	event = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then getDataHydrationField else nil,
+	marketplaceCatalogCategory = if fFlagSduiMarketplaceCatalogCategorySupport then getDataHydrationField else nil,
+	marketplaceCatalogSort = if fFlagSduiMarketplaceCatalogSortSupport then getDataHydrationField else nil,
+	marketplaceAsset = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
+	marketplaceBundle = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
+	marketplaceLook = if fFlagSduiAddMarketplaceEntityDataHydration then getDataHydrationField else nil,
+	song = getDataHydrationField,
+	gamePass = if fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
+	gameDeveloperProduct = if fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
+	gameSubscription = if fFlagSduiDevStoreSeeAllSupport then getDataHydrationField else nil,
+	playability = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	universeUserVote = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	universeUserFavorite = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	universeUserFollow = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	universeUserVoteFeedbackMetadata = if fFlagSduiExperienceDetailsSupport then getDataHydrationField else nil,
+	userProfile = if fFlagSduiExperienceDetailsSupport then dataHydrationModule.UserProfile and dataHydrationModule.UserProfile.resolveField else nil
+}
+
+return {
+	updateDataStores = function(p41) --[[ line: 627 ]]
+		-- upvalues: dataHydrationModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiMarketplaceCatalogCategorySupport (ref), fFlagSduiMarketplaceCatalogSortSupport (ref), fFlagSduiAddMarketplaceEntityDataHydration (ref)
+		if p41.badge then
+			dataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p41.badge)
+		end
+		if p41.creator then
+			dataHydrationModule.Creator.getCreatorInfoStore(false).updateCreatorInfos(p41.creator)
+		end
+		if p41.universe then
+			dataHydrationModule.Game.getGameInfoStore(false).updateGameInfos(p41.universe)
+		end
+		if fFlagSduiExperienceDetailsSupport then
+			if p41.ageRecommendation then
+				dataHydrationModule.Game.getAgeRecommendationStore(false).updateAgeRecommendations(p41.ageRecommendation)
+			end
+			if p41.socialLink then
+				dataHydrationModule.SocialLink.getSocialLinkInfoStore(false).updateSocialLinkInfos(p41.socialLink)
+			end
+			if p41.mediaAsset then
+				dataHydrationModule.MediaAsset.getMediaAssetStore(false).updateMediaAssets(p41.mediaAsset)
+			end
+			if p41.playability then
+				dataHydrationModule.Game.getPlayabilityStore(false).updatePlayabilities(p41.playability)
+			end
+			if p41.universeUserFavorite then
+				dataHydrationModule.Game.getFavoritesStore(false).updateItems(p41.universeUserFavorite)
+			end
+			if p41.universeUserVote then
+				dataHydrationModule.Game.getVotesStore(false).updateUserVoteItems(p41.universeUserVote)
+			end
+			if p41.userProfile then
+				dataHydrationModule.UserProfile.updateFromHydration(p41.userProfile)
+			end
+		end
+		if (fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport) and p41.gamePass then
+			dataHydrationModule.Game.getGamePassStore(false).updateGamePassInfos(p41.gamePass)
+		end
+		if (fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport) and p41.event then
+			dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).updateExperienceEventInfos(p41.event)
+		end
+		if fFlagSduiMarketplaceCatalogCategorySupport and p41.marketplaceCatalogCategory then
+			dataHydrationModule.MarketplaceCatalogCategory.getMarketplaceCatalogCategoryStore(false).updateMarketplaceCatalogCategories(p41.marketplaceCatalogCategory)
+		end
+		if fFlagSduiMarketplaceCatalogSortSupport and p41.catalogSort then
+			dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).updateMarketplaceCatalogSorts(p41.catalogSort)
+		end
+		if p41.song then
+			dataHydrationModule.Song.getSongInfoStore(false).updateSongs(p41.song)
+		end
+		if fFlagSduiAddMarketplaceEntityDataHydration then
+			if p41.marketplaceAsset then
+				dataHydrationModule.MarketplaceAsset.getMarketplaceAssetStore(false).updateMarketplaceAssetInfos(p41.marketplaceAsset)
+			end
+			if p41.marketplaceBundle then
+				dataHydrationModule.MarketplaceBundle.getMarketplaceBundleStore(false).updateMarketplaceBundleInfos(p41.marketplaceBundle)
+			end
+			if p41.marketplaceLook then
+				dataHydrationModule.MarketplaceLook.getMarketplaceLookStore(false).updateMarketplaceLookInfos(p41.marketplaceLook)
+			end
+		end
+		if fFlagSduiDevStoreSeeAllSupport then
+			if p41.gameDeveloperProduct then
+				dataHydrationModule.Game.getGameDeveloperProductStore(false).updateGameDeveloperProductInfos(p41.gameDeveloperProduct)
+			end
+			if p41.gameSubscription then
+				dataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfos(p41.gameSubscription)
+			end
+		end
+	end,
+	getDataObjectSignal = getDataObjectSignal,
+	getFieldValue = function(p42, p43, p44, p45, p46) --[[ line: 604 ]]
+		-- upvalues: t_1 (ref)
+		if #p43 < 2 then
+			return nil, nil
+		end
+		local var48 = t_1[p42]
+		
+		if var48 == nil then
+			return nil, nil
+		end
+		return var48(p42, p43, p44, p45, p46)
+	end,
+	calculateBadgeDerivedField = calculateBadgeDerivedField,
+	calculateUniverseDerivedField = calculateUniverseDerivedField,
+	isClientContentType = isClientContentType,
+	getFieldValueForClientContentType = getFieldValueForClientContentType,
+	calculateAgeRecommendationDerivedField = calculateAgeRecommendationDerivedField
+}

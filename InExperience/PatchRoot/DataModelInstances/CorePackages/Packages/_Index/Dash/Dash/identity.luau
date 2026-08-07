@@ -1,0 +1,3 @@
+﻿return function(...) --[[ line: 9 | named "identity" ]]
+	return ...
+end

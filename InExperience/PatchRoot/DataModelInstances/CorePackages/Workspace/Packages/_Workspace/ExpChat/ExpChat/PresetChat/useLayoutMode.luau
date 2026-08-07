@@ -1,0 +1,18 @@
+﻿local userInputService = game:GetService("UserInputService")
+local expChat = script:FindFirstAncestor("ExpChat")
+local signalsReactModule = require(expChat.Parent.SignalsReact)
+local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
+local constantsModule = require(script.Parent.Constants)
+local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
+
+local function _() --[[ line: 13 | named "isTouchDevice" ]]
+	-- upvalues: userInputService (ref)
+	return userInputService.TouchEnabled and not userInputService.MouseEnabled
+end
+
+return function() --[[ line: 17 | named "useLayoutMode" ]]
+	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref)
+	local var6 = signalsReactModule.useSignalState(getPresetChatStoreModule(false).getLayoutModeOverride)
+	
+	return if var6 == constantsModule.LayoutMode.Tray or var6 == constantsModule.LayoutMode.FlyOut then var6 elseif fFlagExpChatPresetChatGamepadEnabledModule and userInputService.PreferredInput == Enum.PreferredInput.Gamepad then constantsModule.LayoutMode.FlyOut elseif userInputService.TouchEnabled and not userInputService.MouseEnabled then constantsModule.LayoutMode.Tray else constantsModule.LayoutMode.FlyOut
+end

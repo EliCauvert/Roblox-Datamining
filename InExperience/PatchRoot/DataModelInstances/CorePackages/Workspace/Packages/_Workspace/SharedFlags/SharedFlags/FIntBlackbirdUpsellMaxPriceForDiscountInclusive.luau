@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("BlackbirdUpsellMaxPriceForDiscountInclusive", 1000000)

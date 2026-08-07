@@ -1,0 +1,1 @@
+﻿return game:GetEngineFeature("EnableGlobalChat3pSummary") and (game:DefineFastFlag("EnableGlobalChat3pSummaryLuaApps", false) and require(script.Parent.FFlagEnableInExpChatSummaryOnLua))
