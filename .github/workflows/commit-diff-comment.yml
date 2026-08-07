@@ -29,9 +29,6 @@ jobs:
           BEFORE="${{ github.event.before }}"
           ZERO="0000000000000000000000000000000000000000"
 
-          # New branch (no previous commit) or a before-commit we no longer
-          # have (e.g. after a force-push) both fall back to an empty tree,
-          # so the diff becomes "everything in AFTER is new".
           if [ "$BEFORE" = "$ZERO" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
             BEFORE="$(git hash-object -t tree /dev/null)"
           fi
@@ -39,8 +36,6 @@ jobs:
           echo "before=$BEFORE" >> "$GITHUB_OUTPUT"
           echo "after=$AFTER" >> "$GITHUB_OUTPUT"
 
-          # --no-renames keeps the status letters simple: every changed path
-          # is exactly one of Added / Removed / Modified.
           NAME_STATUS="$(git diff --no-renames --name-status "$BEFORE" "$AFTER")"
 
           if [ -z "$NAME_STATUS" ]; then
@@ -107,9 +102,6 @@ jobs:
             const section = (title, files) =>
               files.length ? `## ${title}\n` + files.map((f) => `- \`${f}\``).join('\n') + '\n\n' : '';
 
-            // Locale CSVs are "Key,Value" rows, so a line-based diff is noisy.
-            // Instead, read each side's key/value map and report which keys
-            // were added, removed, or changed.
             const readAtRef = (ref, file) => {
               try {
                 return execFileSync('git', ['show', `${ref}:${file}`], {
@@ -193,7 +185,6 @@ jobs:
 
             await postComment(summary.trim());
 
-            // Locale files already got a key-level diff above, so skip them here.
             const nonLocaleModified = modified.filter((f) => !f.startsWith('Locales/'));
             const filesToDiff = nonLocaleModified.slice(0, MAX_FILE_COMMENTS);
             const skipped = nonLocaleModified.slice(MAX_FILE_COMMENTS);
