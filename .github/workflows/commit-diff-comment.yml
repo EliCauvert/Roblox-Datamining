@@ -1,0 +1,87 @@
+name: Commit Diff Comment
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  comment-diff:
+    if: github.event.deleted == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build diff summary
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          AFTER="${{ github.event.after }}"
+          BEFORE="${{ github.event.before }}"
+          ZERO="0000000000000000000000000000000000000000"
+
+          # New branch (no previous commit) or a before-commit we no longer
+          # have (e.g. after a force-push) both fall back to an empty tree,
+          # so the diff becomes "everything in AFTER is new".
+          if [ "$BEFORE" = "$ZERO" ] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            BEFORE="$(git hash-object -t tree /dev/null)"
+          fi
+
+          NAME_STATUS="$(git diff --name-status "$BEFORE" "$AFTER")"
+
+          if [ -z "$NAME_STATUS" ]; then
+            echo "has_diff=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "has_diff=true" >> "$GITHUB_OUTPUT"
+
+          {
+            echo "## Changed files"
+            echo '```'
+            echo "$NAME_STATUS"
+            echo '```'
+          } > summary.md
+
+          LOCALE_DIFF="$(git diff "$BEFORE" "$AFTER" -- Locales/ || true)"
+
+          if [ -n "$LOCALE_DIFF" ]; then
+            {
+              echo ""
+              echo "## Locale diffs"
+              echo '```diff'
+              echo "$LOCALE_DIFF"
+              echo '```'
+            } >> summary.md
+          fi
+
+          # GitHub commit comment bodies are capped at 65536 characters;
+          # trim with headroom so the truncation notice always fits too.
+          MAX_BYTES=60000
+          if [ "$(wc -c < summary.md)" -gt "$MAX_BYTES" ]; then
+            head -c "$MAX_BYTES" summary.md > summary.trunc.md
+            printf '\n\n... (truncated, diff too large for a commit comment)\n' >> summary.trunc.md
+            mv summary.trunc.md summary.md
+          fi
+
+      - name: Post commit comment
+        if: steps.diff.outputs.has_diff == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('summary.md', 'utf8');
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body,
+            });
