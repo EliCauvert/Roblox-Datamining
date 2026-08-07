@@ -1,0 +1,16 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:32:39 2026 Pacific Standard Time.
+
+local APIUtilModule = require(script.Parent.Parent.util.APIUtil)
+local httpService = game:GetService("HttpService")
+local text = string.format("https://apis.%s", APIUtilModule.getBaseDomain()) .. "assets/rcc/v1/assets/%s"
+
+return function(value) --[[ line: 15 | named "getAssetCreationDetailsRCC" ]]
+	-- upvalues: text (ref), APIUtilModule (ref), httpService (ref)
+	local var3, var4 = APIUtilModule.requestAndRetryGet(string.format(text, value))
+	
+	if var3 then
+		return true, httpService:JSONDecode(var4)
+	end
+	return false, var4
+end

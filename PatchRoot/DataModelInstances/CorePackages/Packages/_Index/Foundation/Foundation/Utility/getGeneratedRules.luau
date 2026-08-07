@@ -1,0 +1,57 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:42:29 2026 Pacific Standard Time.
+
+local foundation = script:FindFirstAncestor("Foundation")
+local deviceModule = require(foundation.Enums.Device)
+local flagsModule = require(foundation.Utility.Flags)
+local themeModule = require(foundation.Enums.Theme)
+local t = {
+	Common = function() --[[ line: 11 ]]
+		-- upvalues: foundation (ref)
+		return require(foundation.Generated.StyleRules.CommonAttribute)
+	end,
+	Dark = function() --[[ line: 14 ]]
+		-- upvalues: foundation (ref)
+		return require(foundation.Generated.StyleRules.DarkAttribute)
+	end,
+	Light = function() --[[ line: 17 ]]
+		-- upvalues: foundation (ref)
+		return require(foundation.Generated.StyleRules.LightAttribute)
+	end,
+	Console = function() --[[ line: 20 ]]
+		-- upvalues: foundation (ref)
+		return require(foundation.Generated.StyleRules.ConsoleAttribute)
+	end,
+	Desktop = function() --[[ line: 23 ]]
+		-- upvalues: foundation (ref)
+		return require(foundation.Generated.StyleRules.DesktopAttribute)
+	end
+}
+
+return function(p0, p1) --[[ line: 28 | named "getGeneratedRules" ]]
+	-- upvalues: t (ref), themeModule (ref), deviceModule (ref), flagsModule (ref)
+	local var5 = nil
+	local _ = nil
+	local _ = nil
+	local var6 = t.Common()
+	
+	if p0 == themeModule.Dark then
+		var5 = t.Dark()
+	elseif p0 == themeModule.Light then
+		var5 = t.Light()
+	end
+	local var7 = if p1 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t.Console() else t.Desktop()
+	
+	if not var5 or not var7 or not var6 then
+		return {}
+	end
+	local cloned = table.clone(var7)
+	
+	for i, v in var6 do
+		cloned[i] = v
+	end
+	for i_1, v_1 in var5 do
+		cloned[i_1] = v_1
+	end
+	return cloned
+end

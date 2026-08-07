@@ -1,0 +1,43 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:32:19 2026 Pacific Standard Time.
+
+local _ = require(script.Parent.LuauPolyfill)
+local reactTypesModule = require(script.ReactTypes)
+local _ = require(script["flowtypes.roblox"])
+local _ = require(script.ReactElementType)
+local unknownModule = require(script["ErrorHandling.roblox"])
+
+return {
+	checkPropTypes = require(script.checkPropTypes),
+	console = require(script.console),
+	ConsolePatchingDev = require(script["ConsolePatchingDev.roblox"]),
+	consoleWithStackDev = require(script.consoleWithStackDev),
+	enqueueTask = require(script["enqueueTask.roblox"]),
+	ExecutionEnvironment = require(script.ExecutionEnvironment),
+	formatProdErrorMessage = require(script.formatProdErrorMessage),
+	getComponentName = require(script.getComponentName),
+	invariant = require(script.invariant),
+	invokeGuardedCallbackImpl = require(script.invokeGuardedCallbackImpl),
+	isValidElementType = require(script.isValidElementType),
+	objectIs = require(script.objectIs),
+	ReactComponentStackFrame = require(script.ReactComponentStackFrame),
+	ReactElementType = require(script.ReactElementType),
+	ReactErrorUtils = require(script.ReactErrorUtils),
+	ReactFeatureFlags = require(script.ReactFeatureFlags),
+	ReactInstanceMap = require(script.ReactInstanceMap),
+	ReactSharedInternals = require(script.ReactSharedInternals),
+	ReactFiberHostConfig = require(script.ReactFiberHostConfig),
+	ReactSymbols = require(script.ReactSymbols),
+	ReactVersion = require(script.ReactVersion),
+	shallowEqual = require(script.shallowEqual),
+	UninitializedState = require(script["UninitializedState.roblox"]),
+	ReactTypes = reactTypesModule,
+	describeError = unknownModule.describeError,
+	errorToString = unknownModule.errorToString,
+	parseReactError = unknownModule.parseReactError,
+	Symbol = require(script["Symbol.roblox"]),
+	Type = require(script["Type.roblox"]),
+	Change = require(script.PropMarkers.Change),
+	Event = require(script.PropMarkers.Event),
+	Tag = require(script.PropMarkers.Tag)
+}

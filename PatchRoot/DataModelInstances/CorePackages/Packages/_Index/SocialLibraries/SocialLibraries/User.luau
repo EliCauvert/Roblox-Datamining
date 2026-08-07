@@ -1,0 +1,11 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:32:26 2026 Pacific Standard Time.
+
+return {
+	getUserDisplayName = require(script.getUserDisplayName),
+	getUserDisplayPresence = require(script.getUserDisplayPresence),
+	sortFriendsByPresenceAndRank = require(script.sortFriendsByPresenceAndRank),
+	sortFriendsByCorrectedPresenceAndRank = require(script.sortFriendsByCorrectedPresenceAndRank),
+	getRecommendationDisplayContext = require(script.getRecommendationDisplayContext),
+	getUserAvatarImage = require(script.getUserAvatarImage)
+}

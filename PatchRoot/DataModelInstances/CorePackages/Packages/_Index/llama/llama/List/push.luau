@@ -1,0 +1,17 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:42:42 2026 Pacific Standard Time.
+
+return function(p0, ...) --[[ line: 2 | named "push" ]]
+	local var0 = type(p0)
+	assert(var0 == "table", "expected a table for first argument, got " .. var0)
+	local t = {}
+	local p0Count = #p0
+	
+	for i = 1, p0Count do
+		t[i] = p0[i]
+	end
+	for i_1 = 1, select("#", ...) do
+		t[p0Count + i_1] = select(i_1, ...)
+	end
+	return t
+end

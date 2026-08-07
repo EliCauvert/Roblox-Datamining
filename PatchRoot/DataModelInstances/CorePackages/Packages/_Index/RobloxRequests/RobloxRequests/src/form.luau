@@ -1,0 +1,123 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:31:04 2026 Pacific Standard Time.
+
+local parent = script.Parent.Parent
+local lib = parent.lib
+local _ = parent.src
+local httpService = game:GetService("HttpService")
+local mimetypesModule = require(lib.mimetypes)
+local b64Module = require(lib.b64)
+
+local function randomString(p0) --[[ line: 16 ]]
+	local var6 = ""
+	
+	for _ = 1, p0 do
+		var6 ..= string.char(math.random(97, 122))
+	end
+	return var6
+end
+
+local t = {}
+t.__index = t
+
+function t.new(...) --[[ line: 30 ]]
+	-- upvalues: t (ref), mimetypesModule (ref)
+	local unknown = setmetatable({}, t)
+	unknown.__IsFile = true
+	unknown.name = "unknown"
+	unknown.content = ""
+	unknown.content_type = nil
+	local list = { ... }
+	
+	if #list == 1 then
+		unknown.content = list[1]
+	elseif #list >= 2 then
+		unknown.name = list[1]
+		unknown.content = list[2]
+		unknown.content_type = list[3]
+	end
+	if not unknown.content_type then
+		local var9 = unknown.name:split(".")
+		unknown.content_type = mimetypesModule[var9[#var9]:lower()] or "text/plain"
+	end
+	if type(unknown.content) ~= "string" then
+		error(("[http] Invalid file content for file %s"):format(unknown.name))
+	end
+	return unknown
+end
+
+function t:__tostring() --[[ line: 71 ]]
+	return ("File('%s', '%s')"):format(self.name, self.content_type)
+end
+
+local t_1 = {}
+t_1.__index = t_1
+
+function t_1.new(p1) --[[ line: 79 ]]
+	-- upvalues: t_1 (ref), randomString (ref)
+	local tbl = setmetatable({}, t_1)
+	tbl.__FormData = true
+	p1 = p1 or {}
+	tbl.boundary = "--FormBoundary-" .. randomString(28)
+	tbl.content_type = "application/x-www-form-urlencoded"
+	tbl.fields = {}
+	
+	for i, v in pairs(p1) do
+		tbl:AddField(i, v)
+	end
+	return tbl
+end
+
+function t_1:AddField(p2, p3) --[[ line: 96 ]]
+	if p3.__IsFile then
+		self.content_type = "multipart/form-data; boundary=\"" .. self.boundary .. "\""
+	end
+	table.insert(self.fields, { Name = p2, Value = p3 })
+end
+
+function t_1:build() --[[ line: 108 ]]
+	-- upvalues: httpService (ref), b64Module (ref)
+	local var12 = ""
+	
+	if self.content_type == "application/x-www-form-urlencoded" then
+		for i, v in ipairs(self.fields) do
+			if v.Value.__IsFile then
+				error("[http] URL encoded forms cannot contain any files")
+			end
+			if v.Name:find("=") or v.Name:find("&") then
+				error("[http] Form field names must not contain '=' or '&'")
+			end
+			if type(v.Value) == "table" then
+				for i_1, v_1 in ipairs(v.Value) do
+					if #var12 > 0 then
+						var12 ..= "&"
+					end
+					var12 ..= v.Name .. "=" .. httpService:UrlEncode(v_1)
+				end
+			elseif #var12 > 0 then
+				var12 ..= "&"
+			end
+			var12 ..= v.Name .. "=" .. httpService:UrlEncode(v.Value)
+		end
+		return var12
+	else
+		for i, v in pairs(self.fields) do
+			local value = v.Value
+			var12 = (var12 .. "--" .. self.boundary .. "\r\n") .. ("Content-Disposition: form-data; name=\"%s\""):format(v.Name)
+			
+			if v.Value.__IsFile then
+				value = v.Value.content
+				var12 = (var12 .. ("; filename=\"%s\""):format(v.Value.name)) .. "\r\nContent-Type: " .. v.Value.content_type
+				
+				if v.Value.content_type:sub(1, 5) ~= "text/" then
+					value = b64Module.encode(value)
+					var12 ..= "\r\nContent-Transfer-Encoding: base64"
+				end
+			end
+			var12 ..= "\r\n\r\n" .. value .. "\r\n"
+		end
+		return var12 .. "--" .. self.boundary .. "--"
+	end
+end
+
+return { FormData = t_1, File = t }

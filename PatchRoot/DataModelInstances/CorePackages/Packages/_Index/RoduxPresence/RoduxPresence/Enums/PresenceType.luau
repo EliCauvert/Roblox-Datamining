@@ -1,0 +1,10 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:31:09 2026 Pacific Standard Time.
+
+return require(script:FindFirstAncestor("RoduxPresence").Parent.enumerate)(script.Name, {
+	Offline = 0,
+	Online = 1,
+	InGame = 2,
+	InStudio = 3,
+	Invisible = 4
+})

@@ -1,0 +1,30 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:33:02 2026 Pacific Standard Time.
+
+local parent = script.Parent
+local reactModule = require(parent.Parent.Parent.Parent.React)
+local emojiModule = require(parent.Enum.Emoji)
+local constantsModule = require(parent.constants)
+
+local function _(p0) --[[ line: 20 | named "getEmojiString" ]]
+	-- upvalues: emojiModule (ref), constantsModule (ref)
+	return if emojiModule.isEnumValue(p0) then constantsModule[p0.rawValue()] else ""
+end
+
+return function(p1) --[[ line: 28 | named "Emoji" ]]
+	-- upvalues: reactModule (ref), emojiModule (ref), constantsModule (ref)
+	local createElement = reactModule.createElement
+	local var3 = if p1.onActivated then "TextButton" else "TextLabel"
+	local t = { Size = UDim2.fromScale(0, 1) }
+	local emoji = p1.emoji
+	t.Text = if emojiModule.isEnumValue(emoji) then constantsModule[emoji.rawValue()] else ""
+	t.TextColor3 = Color3.fromHex("#fff")
+	t.AutomaticSize = Enum.AutomaticSize.X
+	t.Font = p1.textFont
+	t.TextSize = p1.textSize
+	t.Position = p1.Position
+	t.BackgroundTransparency = 1
+	t[reactModule.Event.Activated] = p1.onActivated
+	
+	return createElement(var3, t)
+end

@@ -1,0 +1,66 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:43:01 2026 Pacific Standard Time.
+
+local parent = script.Parent
+local parent_1 = parent.Parent
+local reactGlobalsModule = require(parent_1.ReactGlobals)
+local _ = require(parent_1.LuauPolyfill)
+local reactMutableSourceModule = require(parent.ReactMutableSource)
+local reactSharedInternals = require(parent_1.Shared).ReactSharedInternals
+local reactBaseClassesModule = require(parent.ReactBaseClasses)
+local reactChildrenModule = require(parent.ReactChildren)
+local reactElementValidatorModule = require(parent.ReactElementValidator)
+local reactElementModule = require(parent.ReactElement)
+local reactCreateRefModule = require(parent.ReactCreateRef)
+local reactForwardRefModule = require(parent.ReactForwardRef)
+local reactHooksModule = require(parent.ReactHooks)
+local reactMemoModule = require(parent.ReactMemo)
+local reactContextModule = require(parent.ReactContext)
+local reactLazyModule = require(parent.ReactLazy)
+local unknownModule = require(parent["ReactBinding.roblox"])
+local unknownModule_1 = require(parent["None.roblox"])
+local reactSymbols = require(parent_1.Shared).ReactSymbols
+local dEV = reactGlobalsModule.__DEV__ or reactGlobalsModule.__DISABLE_ALL_WARNINGS_EXCEPT_PROP_VALIDATION__
+local _ = require(parent_1.Shared)
+
+return {
+	Children = reactChildrenModule,
+	createMutableSource = reactMutableSourceModule,
+	createRef = reactCreateRefModule.createRef,
+	Component = reactBaseClassesModule.Component,
+	PureComponent = reactBaseClassesModule.PureComponent,
+	createContext = reactContextModule.createContext,
+	forwardRef = reactForwardRefModule.forwardRef,
+	lazy = reactLazyModule.lazy,
+	memo = reactMemoModule.memo,
+	useCallback = reactHooksModule.useCallback,
+	useContext = reactHooksModule.useContext,
+	useEffect = reactHooksModule.useEffect,
+	useImperativeHandle = reactHooksModule.useImperativeHandle,
+	useDebugValue = reactHooksModule.useDebugValue,
+	useLayoutEffect = reactHooksModule.useLayoutEffect,
+	useMemo = reactHooksModule.useMemo,
+	useMutableSource = reactHooksModule.useMutableSource,
+	useReducer = reactHooksModule.useReducer,
+	useRef = reactHooksModule.useRef,
+	useBinding = reactHooksModule.useBinding,
+	useState = reactHooksModule.useState,
+	Fragment = reactSymbols.REACT_FRAGMENT_TYPE,
+	Profiler = reactSymbols.REACT_PROFILER_TYPE,
+	StrictMode = reactSymbols.REACT_STRICT_MODE_TYPE,
+	unstable_DebugTracingMode = reactSymbols.REACT_DEBUG_TRACING_MODE_TYPE,
+	Suspense = reactSymbols.REACT_SUSPENSE_TYPE,
+	createElement = if dEV then reactElementValidatorModule.createElementWithValidation else reactElementModule.createElement,
+	cloneElement = if dEV then reactElementValidatorModule.cloneElementWithValidation else reactElementModule.cloneElement,
+	isValidElement = reactElementModule.isValidElement,
+	__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = reactSharedInternals,
+	unstable_LegacyHidden = reactSymbols.REACT_LEGACY_HIDDEN_TYPE,
+	createBinding = unknownModule.create,
+	joinBindings = unknownModule.join,
+	None = unknownModule_1,
+	__subscribeToBinding = unknownModule.subscribe,
+	Event = require(parent_1.Shared).Event,
+	Change = require(parent_1.Shared).Change,
+	Tag = require(parent_1.Shared).Tag,
+	unstable_parseReactError = require(parent_1.Shared).parseReactError
+}

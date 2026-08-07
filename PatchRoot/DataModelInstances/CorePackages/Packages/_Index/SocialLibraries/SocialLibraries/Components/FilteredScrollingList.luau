@@ -1,0 +1,197 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:32:24 2026 Pacific Standard Time.
+
+local roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
+local sortedListModule = require(script.Parent.SortedList)
+local callbackInputBoxWithIconModule = require(script.Parent.CallbackInputBoxWithIcon)
+local filteredScrollingList = roact.Component:extend("FilteredScrollingList")
+filteredScrollingList.defaultProps = {
+	searchBoxCornerRadius = 0,
+	searchBoxHeight = 48,
+	searchBoxTopPadding = 0,
+	searchBoxLeftPadding = 0,
+	searchBoxRightPadding = 0,
+	searchBoxBottomPadding = 0,
+	searchBackgroundTransparency = 0,
+	searchBackgroundColor3 = Color3.new(1, 0, 1),
+	searchBoxBorderThickness = 0,
+	searchIconCellWidth = 60,
+	searchIconSize = 24,
+	searchIconColor3 = Color3.new(1, 0, 1),
+	searchIconTransparency = 0,
+	searchIconImage = "rbxasset://textures/ui/LuaChat/icons/ic-search.png",
+	searchInputTextFont = nil,
+	searchInputTextColor3 = nil,
+	searchInputTextSize = nil,
+	searchInputTextTransparency = nil,
+	searchPlaceholderTextTransparency = nil,
+	searchPlaceholderTextColor3 = nil,
+	searchPlaceholderText = nil,
+	searchClearIconColor3 = nil,
+	searchClearIcon = "rbxasset://textures/ui/LuaChat/icons/ic-close-white.png",
+	searchDividerColor3 = Color3.new(1, 0, 1),
+	searchDividerTransparency = 0,
+	searchDividerHeight = 1,
+	scrollBarImageTransparency = 0,
+	scrollBarImageColor3 = Color3.new(1, 0, 1),
+	entries = {},
+	renderEntry = nil,
+	entryHeight = 54,
+	scrollTouchedBottomCallback = nil,
+	filterPredicate = function(_, _) --[[ line: 52 ]]
+		return true
+	end,
+	sortComparator = function(_, _) --[[ line: 56 ]]
+		return true
+	end
+}
+
+function filteredScrollingList.shouldUpdate(p0, p1, p2) --[[ line: 61 ]]
+	if p2 ~= p0.state then
+		return true
+	elseif p1 == p0.props then
+		return false
+	end
+	for i, v in pairs(p1) do
+		if i ~= "extraProps" or p0.props.extraProps then
+			if p0.props[i] ~= v then
+				return true
+			end
+		end
+		return true
+	end
+	for i, v in pairs(p0.props) do
+		if i ~= "extraProps" then
+			if p1[i] ~= v then
+				return true
+			end
+		end
+		if p1.extraProps then
+			for i_2, v_2 in pairs(v) do
+				if p1.extraProps[i_2] ~= v_2 then
+					return true
+				end
+			end
+		end
+		return true
+	end
+	return false
+end
+
+function filteredScrollingList.init(p3) --[[ line: 105 ]]
+	p3:setState({})
+end
+
+function filteredScrollingList.render(p4) --[[ line: 109 ]]
+	-- upvalues: roact (ref), sortedListModule (ref), callbackInputBoxWithIconModule (ref)
+	local filterPredicate = p4.props.filterPredicate
+	local filterText = p4.state.filterText
+	local t = {}
+	local var4 = 0
+	
+	for i, v in pairs(p4.props.entries) do
+		if filterPredicate(filterText, v) then
+			var4 += 1
+			table.insert(t, v)
+		end
+	end
+	return roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		layout = roact.createElement("UIListLayout", {
+			VerticalAlignment = Enum.VerticalAlignment.Top,
+			HorizontalAlignment = Enum.HorizontalAlignment.Center,
+			FillDirection = Enum.FillDirection.Vertical,
+			SortOrder = Enum.SortOrder.LayoutOrder
+		}),
+		dividerTop = roact.createElement("Frame", {
+			BorderSizePixel = 0,
+			LayoutOrder = 1,
+			BackgroundColor3 = p4.props.searchDividerColor3,
+			BackgroundTransparency = p4.props.searchDividerTransparency,
+			Size = UDim2.new(1, 0, 0, p4.props.searchDividerHeight)
+		}),
+		callbackBoxContainer = roact.createElement("Frame", {
+			BackgroundTransparency = 1,
+			LayoutOrder = 2,
+			Size = UDim2.new(1, -p4.props.searchBoxBorderThickness * 2, 0, p4.props.searchBoxHeight + p4.props.searchBoxTopPadding + p4.props.searchBoxBottomPadding)
+		}, {
+			UIPadding = roact.createElement("UIPadding", {
+				PaddingBottom = UDim.new(0, p4.props.searchBoxBottomPadding),
+				PaddingLeft = UDim.new(0, p4.props.searchBoxLeftPadding),
+				PaddingRight = UDim.new(0, p4.props.searchBoxRightPadding),
+				PaddingTop = UDim.new(0, p4.props.searchBoxTopPadding)
+			}),
+			callbackBox = roact.createElement(callbackInputBoxWithIconModule, {
+				backgroundTransparency = p4.props.searchBackgroundTransparency,
+				backgroundColor3 = p4.props.searchBackgroundColor3,
+				borderColor = p4.props.searchBoxBorderColor,
+				borderTransparency = p4.props.searchBoxBorderTransparency,
+				borderThickness = p4.props.searchBoxBorderThickness,
+				cornerRadius = p4.props.searchBoxCornerRadius,
+				iconCellWidth = p4.props.searchIconCellWidth,
+				iconSize = p4.props.searchIconSize,
+				iconColor3 = p4.props.searchIconColor3,
+				iconTransparency = p4.props.searchIconTransparency,
+				iconImage = p4.props.searchIconImage,
+				inputTextFont = p4.props.searchInputTextFont,
+				inputTextColor3 = p4.props.searchInputTextColor3,
+				inputTextSize = p4.props.searchInputTextSize,
+				inputTextTransparency = p4.props.searchInputTextTransparency,
+				placeholderTextTransparency = p4.props.searchPlaceholderTextTransparency,
+				placeholderTextColor3 = p4.props.searchPlaceholderTextColor3,
+				placeholderText = p4.props.searchPlaceholderText,
+				clearIconColor3 = p4.props.searchClearIconColor3,
+				clearIcon = p4.props.searchClearIcon,
+				textChangedCallback = function(p5) --[[ line: 195 ]]
+					-- upvalues: p4 (ref)
+					p4:setState({ filterText = p5 })
+				end
+			})
+		}),
+		dividerBottom = roact.createElement("Frame", {
+			BorderSizePixel = 0,
+			LayoutOrder = 3,
+			BackgroundColor3 = p4.props.searchDividerColor3,
+			BackgroundTransparency = p4.props.searchDividerTransparency,
+			Size = UDim2.new(1, 0, 0, p4.props.searchDividerHeight)
+		}),
+		entryList = roact.createElement("ScrollingFrame", {
+			Size = UDim2.new(1, 0, 1, (-p4.props.searchBoxHeight) - p4.props.searchBoxTopPadding - p4.props.searchBoxBottomPadding - p4.props.searchDividerHeight * 2),
+			CanvasSize = UDim2.new(0, 0, 0, var4 * p4.props.entryHeight),
+			BackgroundTransparency = 1,
+			ScrollBarThickness = 5,
+			ElasticBehavior = Enum.ElasticBehavior.Always,
+			ScrollingDirection = Enum.ScrollingDirection.Y,
+			ScrollBarImageTransparency = p4.props.scrollBarImageTransparency,
+			ScrollBarImageColor3 = p4.props.scrollBarImageColor3,
+			BottomImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
+			MidImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
+			TopImage = "rbxasset://textures/ui/LuaChat/9-slice/scroll-bar.png",
+			LayoutOrder = 4,
+			[roact.Change.CanvasPosition] = function(p6) --[[ line: 234 ]]
+				-- upvalues: p4 (ref)
+				local offset = p6.CanvasSize.Y.Offset
+				
+				if not p4.isTouchingBottom and offset <= p6.CanvasPosition.Y + p6.AbsoluteSize.Y then
+					p4.isTouchingBottom = true
+					
+					if p4.props.scrollTouchedBottomCallback then
+						p4.props.scrollTouchedBottomCallback()
+						
+						return
+					end
+				elseif p6.CanvasPosition.Y + p6.AbsoluteSize.Y < offset then
+					p4.isTouchingBottom = false
+				end
+			end
+		}, {
+			sortedList = roact.createElement(sortedListModule, {
+				entries = t,
+				renderEntry = p4.props.renderEntry,
+				entryHeight = p4.props.entryHeight,
+				sortComparator = p4.props.sortComparator
+			})
+		})
+	})
+end
+
+return filteredScrollingList

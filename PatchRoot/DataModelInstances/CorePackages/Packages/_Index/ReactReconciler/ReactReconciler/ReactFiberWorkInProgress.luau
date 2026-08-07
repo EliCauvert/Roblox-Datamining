@@ -1,0 +1,22 @@
+﻿-- Decompiled using LunaUX-Decompiler V1.4.1 (The rewrite version) (discord.gg/2mJUD4XDDT)
+-- Decompiled at Fri Aug 7 0:30:36 2026 Pacific Standard Time.
+
+local reactFiberLaneModule = require(script.Parent.ReactFiberLane)
+local noLanes = reactFiberLaneModule.NoLanes
+local mergeLanes = reactFiberLaneModule.mergeLanes
+
+return {
+	workInProgressRootSkippedLanes = function(p0) --[[ line: 24 ]]
+		-- upvalues: noLanes (write)
+		if p0 == nil then
+			return noLanes
+		end
+		noLanes = p0
+		
+		return noLanes
+	end,
+	markSkippedUpdateLanes = function(p1) --[[ line: 34 ]]
+		-- upvalues: noLanes (write), mergeLanes (ref)
+		noLanes = mergeLanes(p1, noLanes)
+	end
+}
