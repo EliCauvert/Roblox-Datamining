@@ -5,7 +5,7 @@ if debugInfo and type(debugInfo) == "string" then
 	_G.LUAUFORGE_SENTRY_DEBUG_IDS[debugInfo] = "88877336-86b9-58e9-9c2b-1044656acec3"
 end
 local _ = _G.LUAUFORGE_SENTRY_DEBUG_IDS
-_G.IS_PRODUCTION = true
+_G.IS_PRODUCTION = true --hi
 _ = "apps/UniversalApp/build/app/bootstrap.luau"
 local t = nil
 t = {
