@@ -36,7 +36,12 @@ jobs:
             BEFORE="$(git hash-object -t tree /dev/null)"
           fi
 
-          NAME_STATUS="$(git diff --name-status "$BEFORE" "$AFTER")"
+          echo "before=$BEFORE" >> "$GITHUB_OUTPUT"
+          echo "after=$AFTER" >> "$GITHUB_OUTPUT"
+
+          # --no-renames keeps the status letters simple: every changed path
+          # is exactly one of Added / Removed / Modified.
+          NAME_STATUS="$(git diff --no-renames --name-status "$BEFORE" "$AFTER")"
 
           if [ -z "$NAME_STATUS" ]; then
             echo "has_diff=false" >> "$GITHUB_OUTPUT"
@@ -45,44 +50,92 @@ jobs:
 
           echo "has_diff=true" >> "$GITHUB_OUTPUT"
 
-          {
-            echo "## Changed files"
-            echo '```'
-            echo "$NAME_STATUS"
-            echo '```'
-          } > summary.md
+          : > added.txt
+          : > removed.txt
+          : > modified.txt
 
-          LOCALE_DIFF="$(git diff "$BEFORE" "$AFTER" -- Locales/ || true)"
+          while IFS=$'\t' read -r status path; do
+            case "$status" in
+              A) echo "$path" >> added.txt ;;
+              D) echo "$path" >> removed.txt ;;
+              *) echo "$path" >> modified.txt ;;
+            esac
+          done <<< "$NAME_STATUS"
 
-          if [ -n "$LOCALE_DIFF" ]; then
-            {
-              echo ""
-              echo "## Locale diffs"
-              echo '```diff'
-              echo "$LOCALE_DIFF"
-              echo '```'
-            } >> summary.md
-          fi
-
-          # GitHub commit comment bodies are capped at 65536 characters;
-          # trim with headroom so the truncation notice always fits too.
-          MAX_BYTES=60000
-          if [ "$(wc -c < summary.md)" -gt "$MAX_BYTES" ]; then
-            head -c "$MAX_BYTES" summary.md > summary.trunc.md
-            printf '\n\n... (truncated, diff too large for a commit comment)\n' >> summary.trunc.md
-            mv summary.trunc.md summary.md
-          fi
-
-      - name: Post commit comment
+      - name: Post commit comments
         if: steps.diff.outputs.has_diff == 'true'
         uses: actions/github-script@v7
+        env:
+          DIFF_BEFORE: ${{ steps.diff.outputs.before }}
+          DIFF_AFTER: ${{ steps.diff.outputs.after }}
         with:
           script: |
             const fs = require('fs');
-            const body = fs.readFileSync('summary.md', 'utf8');
-            await github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: context.sha,
-              body,
-            });
+            const { execFileSync } = require('child_process');
+
+            const MAX_BYTES = 60000; // commit comments cap out at 65536 chars
+            const MAX_FILE_COMMENTS = 25; // keep a big Roblox update from spamming hundreds of comments
+
+            const readLines = (file) =>
+              fs.existsSync(file)
+                ? fs.readFileSync(file, 'utf8').split('\n').map((s) => s.trim()).filter(Boolean)
+                : [];
+
+            const truncate = (text) => {
+              const buf = Buffer.from(text, 'utf8');
+              if (buf.length <= MAX_BYTES) return text;
+              return buf.subarray(0, MAX_BYTES).toString('utf8') + '\n\n... (truncated)';
+            };
+
+            const postComment = (body) =>
+              github.rest.repos.createCommitComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: context.sha,
+                body: truncate(body),
+              });
+
+            const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+            const added = readLines('added.txt');
+            const removed = readLines('removed.txt');
+            const modified = readLines('modified.txt');
+
+            const section = (title, files) =>
+              files.length ? `## ${title}\n` + files.map((f) => `- \`${f}\``).join('\n') + '\n\n' : '';
+
+            const summary =
+              section('Added files', added) +
+              section('Removed files', removed) +
+              section('Modified files', modified);
+
+            await postComment(summary.trim());
+
+            const before = process.env.DIFF_BEFORE;
+            const after = process.env.DIFF_AFTER;
+
+            const filesToDiff = modified.slice(0, MAX_FILE_COMMENTS);
+            const skipped = modified.slice(MAX_FILE_COMMENTS);
+
+            for (const file of filesToDiff) {
+              let diff;
+              try {
+                diff = execFileSync('git', ['diff', '--no-renames', before, after, '--', file], {
+                  maxBuffer: 1024 * 1024 * 20,
+                }).toString('utf8');
+              } catch (e) {
+                diff = `Error computing diff for this file: ${e.message}`;
+              }
+
+              if (!diff.trim()) continue;
+
+              await postComment(`### Diff: \`${file}\`\n\n\`\`\`diff\n${diff}\n\`\`\``);
+              await sleep(500); // stay well under the commit-comments secondary rate limit
+            }
+
+            if (skipped.length) {
+              await postComment(
+                `${skipped.length} more modified file(s) were skipped to avoid flooding this commit with comments:\n\n` +
+                  skipped.map((f) => `- \`${f}\``).join('\n'),
+              );
+            }
