@@ -3,7 +3,6 @@ AccountIdentity.AgeCheck.Label.AgeBandOver13,13+
 AccountIdentity.AgeCheck.Label.AgeBandOver13Checked,13+ Age Checked
 AccountIdentity.AgeCheck.Label.AgeBandOver18,18+
 AccountIdentity.AgeCheck.Label.AgeBandOver18Checked,18+ Age Checked
-Feature.Testing.Label.Testing, Testing the github action
 AccountIdentity.AgeCheck.Label.AgeBandUnder13,<13
 AccountIdentity.AgeCheck.Label.AgeGroup13To15,13-15
 AccountIdentity.AgeCheck.Label.AgeGroup16To17,16-17
