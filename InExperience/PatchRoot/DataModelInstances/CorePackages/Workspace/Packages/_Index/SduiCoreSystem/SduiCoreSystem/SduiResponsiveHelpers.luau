@@ -28,7 +28,7 @@ local var10 = nil
 local function _() --[[ line: 48 | named "getDevicePerformanceValue" ]]
 	-- upvalues: var9 (write), sduiForcePerfLevel (ref), t (ref), userInputService (ref), t_1 (ref)
 	if var9 == nil then
-		var9 = if sduiForcePerfLevel == "" then t_1[userInputService:GetDeviceLevel()] or t.High else t[sduiForcePerfLevel] or t.High
+		var9 = if sduiForcePerfLevel ~= "" then t_1[userInputService:GetDeviceLevel()] or 3 else t[sduiForcePerfLevel] or 3
 	end
 	return var9
 end
@@ -36,24 +36,24 @@ end
 local function getImageQualityValue() --[[ line: 60 ]]
 	-- upvalues: sduiForceImageQualityLevel (ref), t (ref), var9 (write), sduiForcePerfLevel (ref), userInputService (ref), t_1 (ref), var10 (write), guiService (ref), argCheckModule (ref)
 	if sduiForceImageQualityLevel ~= "" then
-		return t[sduiForceImageQualityLevel] or t.High
+		return t[sduiForceImageQualityLevel] or 3
 	elseif var9 == nil then
 		var9 = if sduiForcePerfLevel == "" then t_1[userInputService:GetDeviceLevel()] or t.High else t[sduiForcePerfLevel] or t.High
 	end
 	local var12 = var9
 	
-	if var12 == t.Low then
-		return t.Low
-	elseif var12 == t.Medium then
-		return t.Medium
-	elseif var12 ~= t.High then
+	if var12 == 1 then
+		return 1
+	elseif var12 == 2 then
+		return 2
+	elseif var12 ~= 3 then
 		argCheckModule.assert(true, `Unexpected performanceLevel {var12}`)
 		
-		return t.High
+		return 3
 	elseif var10 == nil then
 		var10 = guiService:GetResolutionScale()
 	end
-	return if var10 >= 2 then t.High else t.Medium
+	return if var10 >= 2 then 3 else 2
 end
 
 return {
@@ -99,14 +99,14 @@ return {
 		var10 = value
 	end,
 	adaptThumbnailDimensions = function(p4, p5, p6, p7, p8) --[[ line: 125 ]]
-		-- upvalues: getImageQualityValue (ref), t (ref), argCheckModule (ref)
+		-- upvalues: getImageQualityValue (ref), argCheckModule (ref)
 		local var17 = getImageQualityValue()
 		
-		if var17 == t.High then
+		if var17 == 3 then
 			return p4, p5
-		elseif var17 == t.Low then
+		elseif var17 == 1 then
 			return p6, p7
-		elseif var17 ~= t.Medium then
+		elseif var17 ~= 2 then
 			argCheckModule.assert(true, `Unexpected imageQualityLevel {var17}`)
 		elseif p4 == 1320 and p5 == 440 then
 			if p6 <= 660 and p7 <= 220 then

@@ -94,6 +94,7 @@ CommonUI.Controls.Action.Apply,Применить
 CommonUI.Controls.Action.Back,Назад
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Подтверждаю
+CommonUI.Controls.Action.Continue,Продолжить
 CommonUI.Controls.Action.Done,Готово
 CommonUI.Controls.Action.Next,Далее
 CommonUI.Controls.Action.OK,OK
@@ -1543,7 +1544,7 @@ Feature.Catalog.Toast.LinkCopied,Скопировано в буфер обмен
 Feature.Chat.Action.Add,
 Feature.Chat.Action.Cancel,
 Feature.Chat.Action.Confirm,
-Feature.Chat.Action.Continue,Продолжить
+Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,Скопировать
 Feature.Chat.Action.Create,Создать
 Feature.Chat.Action.Delete,
@@ -2832,11 +2833,7 @@ InGame.Chat.Response.EmoteNotAvailable,Невозможно использова
 InGame.Chat.Response.EmotesNotSupported,Здесь нельзя использовать эмоции.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Невозможно использовать эмоции прямо сейчас.
 InGame.Chat.Response.EmotesWrongAvatarType,Только аватары R15 могут использовать эмоции.
-InGame.CommonUI.Badge.BadgeText,БЕТА
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"Если ты видишь, что кто-то нарушает наши Правила сообщества, пожалуйста, сообщи нам об этом. При использовании голосового чата Roblox записывает звук в любом месте на платформе в целях модерации, безопасности и улучшения качества наших услуг и инструментов. Продолжая использовать функцию голосового чата, ты соглашаешься на сбор, использование и хранение Roblox голосовых записей в перечисленных целях. Ты можешь отказаться от использования голосовых функицй в любой момент."
-InGame.CommonUI.Badge.Popup.HeaderList,Ты соглашаешься использовать одну или несколько бета-функций:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,Продолжить играть
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,

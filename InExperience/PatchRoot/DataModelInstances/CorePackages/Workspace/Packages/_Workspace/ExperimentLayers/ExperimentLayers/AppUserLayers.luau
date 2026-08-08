@@ -91,6 +91,7 @@ return {
 	GridUILayer = "PlayerApp.GridUI",
 	ExpChatHiddenMessagesExpLayer = "ExperienceChat.HiddenMessages",
 	ExpChatSystemMessagesExpLayer = "ExperienceChat.SystemMessages",
+	ExpChatPresetChatLayer = "UniverseChat.PresetChat",
 	ExperienceDetailsPageLayer = "PlayerApp.GameDetailsPage",
 	ExperienceDetailsPageExposureLayer = "PlayerApp.GameDetailsPage.Exposure",
 	ExperienceMenuLayer = "Experience.Menu",

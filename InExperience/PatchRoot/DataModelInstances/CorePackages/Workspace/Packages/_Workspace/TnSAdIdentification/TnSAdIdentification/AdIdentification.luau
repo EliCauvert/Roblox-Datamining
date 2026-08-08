@@ -6,11 +6,10 @@ local getFIntAdIdentifiedTelemetryThrottleHundredthsPercentModule = require(tnSA
 local parent = tnSAdIdentification.Parent
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local default = loggingProtocolModule.default
-local getFFlagAvatarIdentificationSafeAreaFix = require(parent.SharedFlags).GetFFlagAvatarIdentificationSafeAreaFix
 local identificationUtils = require(parent.AvatarIdentification).IdentificationUtils
 local maxValue = math.max(getFIntAdIdentificationMinimumAreaPerMyriadModule() / 10000, 0)
 local t = {
-	getAdsForPoint = function(p0, p1) --[[ line: 185 ]]
+	getAdsForPoint = function(p0, p1) --[[ line: 175 ]]
 		local t = {}
 		
 		for i, v in pairs(p0) do
@@ -41,8 +40,8 @@ local t = {
 		end
 		return t
 	end,
-	getVisibleAds = function() --[[ line: 221 ]]
-		-- upvalues: adService (ref), playersService (ref), getFFlagAvatarIdentificationSafeAreaFix (ref), identificationUtils (ref), maxValue (ref), default (ref), loggingProtocolModule (ref), getFIntAdIdentifiedTelemetryThrottleHundredthsPercentModule (ref)
+	getVisibleAds = function() --[[ line: 211 ]]
+		-- upvalues: adService (ref), playersService (ref), identificationUtils (ref), maxValue (ref), default (ref), loggingProtocolModule (ref), getFIntAdIdentifiedTelemetryThrottleHundredthsPercentModule (ref)
 		local t = {}
 		local t_1 = { totalAds = 0, checkedAds = 0, duration = 0 }
 		local reportAdInfo = adService:GetReportAdInfo()
@@ -56,28 +55,24 @@ local t = {
 		if not localPlayer then
 			return t, t_1
 		end
+		local adUnitName, assetId, encryptedAdTrackingData, encryptionMetadata, assetCorners, magnitude, viewportCorners, viewportCorners_1, var26
 		local character = localPlayer.Character
 		local _ = nil
 		local t_2 = {}
 		local var17 = if character then getLocalCharacterPosition(character) or currentCamera.CFrame.Position else currentCamera.CFrame.Position
-		local viewportInfo = nil
-		
-		if getFFlagAvatarIdentificationSafeAreaFix() then
-			viewportInfo = identificationUtils.getViewportInfo()
-			t_1.viewportInfo = viewportInfo
-		end
-		local adUnitName, assetId, encryptedAdTrackingData, encryptionMetadata, assetCorners, magnitude, viewportCorners, viewportCorners_1, var26
+		local viewportInfo = identificationUtils.getViewportInfo()
+		t_1.viewportInfo = viewportInfo
 		local processTime = os.clock()
 		t_1.totalAds = #reportAdInfo
 		
-		local _ = function() --[[ line: 260 ]]
+		local _ = function() --[[ line: 247 ]]
 			-- upvalues: t_1 (ref), processTime (ref)
 			t_1.duration = os.clock() - processTime
 			
 			return t_1
 		end
 		
-		local _ = function() --[[ line: 265 ]]
+		local _ = function() --[[ line: 252 ]]
 			-- upvalues: processTime (ref)
 			return os.clock() - processTime > 0.2
 		end
@@ -174,13 +169,13 @@ local t = {
 	end
 }
 
-function getLocalCharacterPosition(p2) --[[ line: 33 ]]
+function getLocalCharacterPosition(p2) --[[ line: 30 ]]
 	local humanoidRootPart = p2:FindFirstChild("HumanoidRootPart")
 	
 	return if humanoidRootPart then humanoidRootPart.Position else nil
 end
 
-function checkVisibility(p3, p4, p5, p6) --[[ line: 45 ]]
+function checkVisibility(p3, p4, p5, p6) --[[ line: 42 ]]
 	local position = p3.CFrame.Position
 	local viewportSize = p3.ViewportSize
 	local raycastParams = RaycastParams.new()
@@ -213,20 +208,13 @@ function checkVisibility(p3, p4, p5, p6) --[[ line: 45 ]]
 	return var31 / var30
 end
 
-function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9) --[[ line: 93 ]]
-	-- upvalues: getFFlagAvatarIdentificationSafeAreaFix (ref), identificationUtils (ref)
-	local viewportSize = p8.ViewportSize
+function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9) --[[ line: 90 ]]
+	-- upvalues: identificationUtils (ref)
 	local list = table.create(#p7)
 	
 	for i, v in ipairs(p7) do
-		local var41
-		if getFFlagAvatarIdentificationSafeAreaFix() then
-			var40, var41, _ = identificationUtils.worldToFullViewportPointNormalized(v, p8, p9)
-			list[i] = Vector2.new(var40.X, var40.Y)
-		else
-			var42, var41 = p8:WorldToViewportPoint(v)
-			list[i] = Vector2.new(var42.X, var42.Y) / viewportSize
-		end
+		local var40, _, _ = identificationUtils.worldToFullViewportPointNormalized(v, p8, p9)
+		list[i] = Vector2.new(var40.X, var40.Y)
 	end
 	return {
 		id = 1,
@@ -234,18 +222,18 @@ function createSingleVisibleRegionFromWorldSpaceCorners(p7, p8, p9) --[[ line: 9
 	}
 end
 
-function getAdCenterAndScreenArea(p10, p11) --[[ line: 117 ]]
+function getAdCenterAndScreenArea(p10, p11) --[[ line: 107 ]]
 	local viewportSize = p11.ViewportSize
-	local var43 = Vector3.new(0, 0, 0)
-	local var44 = 0
+	local var41 = Vector3.new(0, 0, 0)
+	local var42 = 0
 	local t = {}
 	
 	for i, v in ipairs(p10) do
-		var43 += v
-		local var46, _ = p11:WorldToViewportPoint(v)
-		table.insert(t, Vector2.new(var46.X, var46.Y) / viewportSize)
+		var41 += v
+		local var44, _ = p11:WorldToViewportPoint(v)
+		table.insert(t, Vector2.new(var44.X, var44.Y) / viewportSize)
 	end
-	return var43 / 4, (var44 + math.abs((t[2] - t[1]):Cross(t[3] - t[1])) + math.abs((t[2] - t[4]):Cross(t[3] - t[4]))) / 2
+	return var41 / 4, (var42 + math.abs((t[2] - t[1]):Cross(t[3] - t[1])) + math.abs((t[2] - t[4]):Cross(t[3] - t[4]))) / 2
 end
 
 return t

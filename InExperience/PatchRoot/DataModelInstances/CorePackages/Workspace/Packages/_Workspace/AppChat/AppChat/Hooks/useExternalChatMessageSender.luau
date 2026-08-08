@@ -26,18 +26,17 @@ local useIsChatUserMessagesEnabledModule = require(appChat.Hooks.useIsChatUserMe
 local useIsGroupChatEnabledModule = require(appChat.Hooks.useIsGroupChatEnabled)
 local isNavigationAvailable = require(parent.RobloxAppNavigation).isNavigationAvailable
 local fFlagAppChatNilGuardReceivedChatResponseModule = require(appChat.Flags.FFlagAppChatNilGuardReceivedChatResponse)
-local fFlagAppChatRenameGuacPolicyEnabled = require(parent.SharedFlags).FFlagAppChatRenameGuacPolicyEnabled
 local _ = {
 	Success = "success",
 	Failure = "failure",
 	Declined = "declined"
 }
 
-local function _(p0, p1) --[[ line: 59 | named "makeSendResult" ]]
+local function _(p0, p1) --[[ line: 58 | named "makeSendResult" ]]
 	return { conversationId = p1, status = p0 }
 end
 
-local _ = function(p2) --[[ line: 66 | named "isSuccessfulResponse" ]]
+local _ = function(p2) --[[ line: 65 | named "isSuccessfulResponse" ]]
 	-- upvalues: statusCodes (ref), appChatNetworkingModule (ref)
 	local var20 = p2 and (p2.responseCode == statusCodes.OK and (p2.responseBody and (p2.responseBody.messages and p2.responseBody.messages[1])))
 	local status = var20 and var20.status
@@ -45,25 +44,24 @@ local _ = function(p2) --[[ line: 66 | named "isSuccessfulResponse" ]]
 	return var20 ~= nil and (if status ~= nil then if status ~= "" then status == appChatNetworkingModule.Constants.ResponseStatus.SUCCESS else true else true)
 end
 
-return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
-	-- upvalues: useDispatch (ref), getChatModerationStatusDataHydrationModule (ref), useAppPolicyModule (ref), fFlagAppChatRenameGuacPolicyEnabled (ref), useSelector (ref), getDeepValue2Module (ref), useIsChatEnabledModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsGroupChatEnabledModule (ref), retrievalStatus (ref), fFlagAppChatNilGuardReceivedChatResponseModule (ref), reactModule (ref), getConversationSendEligibilityStatusModule (ref), promiseModule (ref), createConversationFromFriendPlaceholderModule (ref), receivedConversationModule (ref), sendTextMessageModule (ref), statusCodes (ref), appChatNetworkingModule (ref), navigateWithOsaGateModule (ref), navigateIntoChatModule_1 (ref), navigateIntoChatModule (ref), enumScreensModule (ref), isNavigationAvailable (ref)
+return function(p3) --[[ line: 76 | named "useExternalChatMessageSender" ]]
+	-- upvalues: useDispatch (ref), getChatModerationStatusDataHydrationModule (ref), useAppPolicyModule (ref), useSelector (ref), getDeepValue2Module (ref), useIsChatEnabledModule (ref), useIsChatUserMessagesEnabledModule (ref), useIsGroupChatEnabledModule (ref), retrievalStatus (ref), fFlagAppChatNilGuardReceivedChatResponseModule (ref), reactModule (ref), getConversationSendEligibilityStatusModule (ref), promiseModule (ref), createConversationFromFriendPlaceholderModule (ref), receivedConversationModule (ref), sendTextMessageModule (ref), statusCodes (ref), appChatNetworkingModule (ref), navigateWithOsaGateModule (ref), navigateIntoChatModule_1 (ref), navigateIntoChatModule (ref), enumScreensModule (ref), isNavigationAvailable (ref)
 	local var22 = useDispatch()
 	local var23 = getChatModerationStatusDataHydrationModule()
-	local var24 = useAppPolicyModule(function(p4) --[[ line: 80 ]]
+	local var24 = useAppPolicyModule(function(p4) --[[ line: 79 ]]
 		return p4.getCanUsePlatformChat()
 	end)
-	local var25 = useAppPolicyModule(function(p5) --[[ line: 83 ]]
-		-- upvalues: fFlagAppChatRenameGuacPolicyEnabled (copy)
-		return not fFlagAppChatRenameGuacPolicyEnabled or p5.getCanSeeChatTerminology()
+	local var25 = useAppPolicyModule(function(p5) --[[ line: 82 ]]
+		return p5.getCanSeeChatTerminology()
 	end)
-	local var26 = useSelector(function(p6) --[[ line: 86 ]]
+	local var26 = useSelector(function(p6) --[[ line: 85 ]]
 		-- upvalues: getDeepValue2Module (copy)
 		return getDeepValue2Module(p6, "ChatAppReducer.ChatSettings.retrievalStatus")
 	end)
-	local var27 = useSelector(function(p7) --[[ line: 89 ]]
+	local var27 = useSelector(function(p7) --[[ line: 88 ]]
 		return tonumber(p7.LocalUserId) or 0
 	end)
-	local var28 = useSelector(function(p8) --[[ line: 92 ]]
+	local var28 = useSelector(function(p8) --[[ line: 91 ]]
 		return p8.Navigation ~= nil
 	end)
 	local var29 = useIsChatEnabledModule()
@@ -71,7 +69,7 @@ return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
 	local var31 = useIsGroupChatEnabledModule()
 	local var32 = var26 ~= retrievalStatus.Done
 	local fFlagAppChatNilGuardReceivedChatResponseModule_1 = not var32 and (var24 and (var25 and (var29 and (var30 and (fFlagAppChatNilGuardReceivedChatResponseModule or not p3)))))
-	local var34 = reactModule.useCallback(function(p9, p10) --[[ line: 108 ]]
+	local var34 = reactModule.useCallback(function(p9, p10) --[[ line: 107 ]]
 		-- upvalues: getConversationSendEligibilityStatusModule (copy), fFlagAppChatNilGuardReceivedChatResponseModule_1 (ref), var31 (ref), var23 (ref)
 		return getConversationSendEligibilityStatusModule({
 			scope = false,
@@ -87,11 +85,11 @@ return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
 		var31,
 		var23
 	})
-	local var35 = reactModule.useCallback(function(p11) --[[ line: 121 ]]
+	local var35 = reactModule.useCallback(function(p11) --[[ line: 120 ]]
 		-- upvalues: var34 (ref)
 		return var34(p11, false) == "eligible"
 	end, { var34 })
-	local var36 = reactModule.useCallback(function(p12, p13) --[[ line: 126 ]]
+	local var36 = reactModule.useCallback(function(p12, p13) --[[ line: 125 ]]
 		-- upvalues: var35 (ref), promiseModule (copy), createConversationFromFriendPlaceholderModule (copy), var27 (ref), var34 (ref), var22 (ref), receivedConversationModule (copy), sendTextMessageModule (copy), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
 		if not var35(p12) then
 			return promiseModule.resolve({ conversationId = nil, status = "failure" })
@@ -103,7 +101,7 @@ return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
 		if isFriends then
 			var40 = createConversationFromFriendPlaceholderModule(p12, var27)
 			
-			return if var40 == nil then promiseModule.resolve({ conversationId = nil, status = "failure" }) else var40:andThen(function(p14) --[[ line: 143 ]]
+			return if var40 == nil then promiseModule.resolve({ conversationId = nil, status = "failure" }) else var40:andThen(function(p14) --[[ line: 142 ]]
 				-- upvalues: var34 (copy), isFriends (ref), var22 (copy), receivedConversationModule (copy), promiseModule (copy), sendTextMessageModule (copy), p13 (ref), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
 				local id = p14 and p14.id
 				
@@ -112,16 +110,16 @@ return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
 				elseif isFriends then
 					var22(receivedConversationModule(p14))
 				end
-				return promiseModule.new(function(p15) --[[ line: 159 ]]
+				return promiseModule.new(function(p15) --[[ line: 158 ]]
 					-- upvalues: var22 (copy), sendTextMessageModule (copy), id (ref), p13 (copy), statusCodes (copy), appChatNetworkingModule (copy), navigateWithOsaGateModule (copy)
-					local function sendMessage() --[[ line: 160 ]]
+					local function sendMessage() --[[ line: 159 ]]
 						-- upvalues: var22 (copy), sendTextMessageModule (copy), id (copy), p13 (copy), p15 (ref), statusCodes (copy), appChatNetworkingModule (copy)
-						var22(sendTextMessageModule(id, p13, nil)):andThen(function(p16) --[[ line: 161 ]]
+						var22(sendTextMessageModule(id, p13, nil)):andThen(function(p16) --[[ line: 160 ]]
 							-- upvalues: p15 (copy), statusCodes (copy), appChatNetworkingModule (copy), id (copy)
 							local var43 = p16 and (p16.responseCode == statusCodes.OK and (p16.responseBody and (p16.responseBody.messages and p16.responseBody.messages[1])))
 							local status = var43 and var43.status
 							p15(if var43 ~= nil and (if status ~= nil then if status ~= "" then status == appChatNetworkingModule.Constants.ResponseStatus.SUCCESS else true else true) then { status = "success", conversationId = id } else { conversationId = nil, status = "failure" })
-						end, function() --[[ line: 167 ]]
+						end, function() --[[ line: 166 ]]
 							-- upvalues: p15 (copy)
 							p15({ conversationId = nil, status = "failure" })
 						end)
@@ -130,27 +128,27 @@ return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
 					navigateWithOsaGateModule({
 						conversationId = id,
 						dispatch = var22,
-						onAccepted = function() --[[ line: 175 ]]
+						onAccepted = function() --[[ line: 174 ]]
 							-- upvalues: sendMessage (ref)
 							sendMessage()
 						end,
-						onDeclined = function() --[[ line: 178 ]]
+						onDeclined = function() --[[ line: 177 ]]
 							-- upvalues: p15 (ref)
 							p15({ conversationId = nil, status = "declined" })
 						end,
-						onError = function() --[[ line: 181 ]]
+						onError = function() --[[ line: 180 ]]
 							-- upvalues: p15 (ref)
 							p15({ conversationId = nil, status = "failure" })
 						end
 					})
 				end)
-			end):catch(function() --[[ line: 187 ]]
+			end):catch(function() --[[ line: 186 ]]
 				return { conversationId = nil, status = "failure" }
 			end)
 		end
 		var40 = promiseModule.resolve(p12)
 	end, { var35, var22, var34, var27 })
-	local var37 = reactModule.useCallback(function(p17) --[[ line: 193 ]]
+	local var37 = reactModule.useCallback(function(p17) --[[ line: 192 ]]
 		-- upvalues: var22 (ref), navigateIntoChatModule_1 (copy), navigateIntoChatModule (copy), enumScreensModule (copy)
 		var22(navigateIntoChatModule_1({ conversationId = p17 }, true))
 		
@@ -160,7 +158,7 @@ return function(p3) --[[ line: 77 | named "useExternalChatMessageSender" ]]
 	end, { var22 })
 	local var38 = not p3 and (isNavigationAvailable() or var28)
 	
-	return reactModule.useMemo(function() --[[ line: 206 ]]
+	return reactModule.useMemo(function() --[[ line: 205 ]]
 		-- upvalues: fFlagAppChatNilGuardReceivedChatResponseModule_1 (ref), var31 (ref), var32 (ref), var35 (ref), var38 (ref), var37 (ref), var36 (ref)
 		return {
 			isAvailable = fFlagAppChatNilGuardReceivedChatResponseModule_1,

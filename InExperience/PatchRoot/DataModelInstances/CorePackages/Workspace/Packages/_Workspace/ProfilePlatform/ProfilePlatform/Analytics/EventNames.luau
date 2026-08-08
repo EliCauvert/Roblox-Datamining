@@ -59,6 +59,7 @@
 	SetAliasButton = "ProfileSetAliasButton",
 	ProfileClosed = "ProfileClosed",
 	StoreHeaderButton = "ProfileStoreHeaderButton",
+	CurrentlyWearingHeaderButton = "ProfileCurrentlyWearingHeaderButton",
 	CatalogItemOpened = "ProfileCatalogItemOpened",
 	ToggleInExperienceModeButton = "ToggleInExperienceModeButton",
 	UsernameCopied = "UsernameCopied",
@@ -72,6 +73,8 @@
 	InspectAvatarOpened = "InspectAvatarOpened",
 	InspectAvatarBuyClicked = "InspectAvatarBuyClicked",
 	InspectAvatarPurchaseConfirmed = "InspectAvatarPurchaseConfirmed",
+	InspectAvatarInsufficientRobuxShown = "InspectAvatarInsufficientRobuxShown",
+	InspectAvatarBuyRobuxClicked = "InspectAvatarBuyRobuxClicked",
 	MomentsSeeAll = "MomentsSeeAll",
 	MomentOpened = "MomentOpened"
 }

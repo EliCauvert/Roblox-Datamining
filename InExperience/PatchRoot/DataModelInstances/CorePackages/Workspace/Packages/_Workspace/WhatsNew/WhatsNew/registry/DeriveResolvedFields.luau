@@ -22,8 +22,8 @@ local t = {
 		-- upvalues: enumsModule (ref)
 		if p4 == enumsModule.TourType.Onboarding then
 			return false
-		elseif p3.disableTime ~= nil then
-			local dateTime = DateTime.fromIsoDate(p3.disableTime)
+		elseif p3.disabledTime ~= nil then
+			local dateTime = DateTime.fromIsoDate(p3.disabledTime)
 			local var5 = if dateTime then dateTime.UnixTimestamp else nil
 			
 			if var5 ~= nil and var5 <= p5.currentTime then
@@ -32,7 +32,9 @@ local t = {
 				local dateTime = DateTime.fromIsoDate(p3.publishedTime)
 				local var7 = if dateTime then dateTime.UnixTimestamp else nil
 				
-				return var7 == nil or var7 + p6.updateEntryDuration * 86400 > p5.currentTime
+				if var7 ~= nil then
+					return p5.currentTime < var7 or var7 + p6.updateEntryDuration * 86400 <= p5.currentTime
+				end
 			end
 		end
 	end
@@ -53,7 +55,7 @@ local _ = function(p10) --[[ line: 24 | named "isoDateToUnix" ]]
 	return if dateTime then dateTime.UnixTimestamp else nil
 end
 
-function t.deriveEntryDisplay(p11, p12, p13, p14) --[[ line: 81 ]]
+function t.deriveEntryDisplay(p11, p12, p13, p14) --[[ line: 84 ]]
 	-- upvalues: t (ref), enumsModule (ref)
 	local var11
 	local var9 = t.isEntryExpired(p11, p12, p13, p14)
@@ -75,7 +77,7 @@ function t.deriveEntryDisplay(p11, p12, p13, p14) --[[ line: 81 ]]
 		icon = p11.icon,
 		enabled = p11.enabled,
 		publishedTime = p11.publishedTime,
-		disableTime = p11.disableTime,
+		disabledTime = p11.disabledTime,
 		expired = var9,
 		seen = var10,
 		optOutCount = if id then id.optOutCount else 0,
@@ -84,7 +86,7 @@ function t.deriveEntryDisplay(p11, p12, p13, p14) --[[ line: 81 ]]
 	}
 end
 
-function t.getLabels(p15, p16) --[[ line: 110 ]]
+function t.getLabels(p15, p16) --[[ line: 113 ]]
 	-- upvalues: enumsModule (ref)
 	return if p16 == enumsModule.TourType.Onboarding then {
 		title = p15.onboardingTitle or "",
@@ -95,7 +97,7 @@ function t.getLabels(p15, p16) --[[ line: 110 ]]
 	}
 end
 
-function t.hasLabels(p17) --[[ line: 124 ]]
+function t.hasLabels(p17) --[[ line: 127 ]]
 	local title = p17.title
 	local var12 = title ~= nil and title ~= ""
 	
@@ -106,7 +108,7 @@ function t.hasLabels(p17) --[[ line: 124 ]]
 	return var12
 end
 
-function t.countScopeSteps(p18) --[[ line: 128 ]]
+function t.countScopeSteps(p18) --[[ line: 131 ]]
 	local var13 = 0
 	
 	for i, v in p18.tourTips do

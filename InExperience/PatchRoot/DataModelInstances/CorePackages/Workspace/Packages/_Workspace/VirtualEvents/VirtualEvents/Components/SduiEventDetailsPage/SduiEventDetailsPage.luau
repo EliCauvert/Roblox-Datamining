@@ -28,20 +28,19 @@ local fFlagLuaAppSduiEventDetailsLoadingSlot = require(parent.SharedFlags).FFlag
 local fFlagLuaAppSduiEventDetailsActionBarInFeed = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsActionBarInFeed
 local fStringLuaAppSduiEventDetailsIxpLayer = require(parent.SharedFlags).FStringLuaAppSduiEventDetailsIxpLayer
 local fFlagSduiPageEntryUseSharedHooks = require(parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
-local foundationSheetFullBleed = foundationModule.Utility.Flags.FoundationSheetFullBleed
 
-local function _(p0, p1) --[[ line: 49 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1) --[[ line: 48 | named "getFromPropsOrNavigationParams" ]]
 	local extraProps = p0.navigation and p0.navigation.getParam("extraProps")
 	
 	return p0[p1] or extraProps and extraProps[p1]
 end
 
-local _ = function(p2, p3) --[[ line: 59 ]]
+local _ = function(p2, p3) --[[ line: 58 ]]
 	return p2 .. "_" .. p3
 end
 
-return reactModule.memo(function(p4) --[[ line: 66 | named "SduiEventDetailsPage" ]]
-	-- upvalues: useTokens (ref), getEventDetailsPageKeyModule (ref), reactModule (ref), sduiLoadTimer (ref), appPage (ref), useNavigation (ref), useRouteName (ref), useNavigationFocus (ref), fFlagLuaAppSduiEventDetailsCenterSheet (ref), useDeviceType (ref), deviceType (ref), fetchEventDetailsPageModule (ref), fFlagLuaAppSduiEventDetailsLogExposure (ref), IXPService (ref), fStringLuaAppSduiEventDetailsIxpLayer (ref), fireEventDetailsPageVisitModule (ref), foundationModule (ref), foundationSheetFullBleed (ref), sduiFeatureEntryPoint (ref), fFlagLuaAppSduiEventDetailsLoadingSlot (ref), eventDetailsFullBleedSkeletonModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), eventDetailsFeedSkeletonModule (ref), fFlagLuaAppSduiEventDetailsActionBarInFeed (ref), eventDetailsActionBarSkeletonModule (ref)
+return reactModule.memo(function(p4) --[[ line: 65 | named "SduiEventDetailsPage" ]]
+	-- upvalues: useTokens (ref), getEventDetailsPageKeyModule (ref), reactModule (ref), sduiLoadTimer (ref), appPage (ref), useNavigation (ref), useRouteName (ref), useNavigationFocus (ref), fFlagLuaAppSduiEventDetailsCenterSheet (ref), useDeviceType (ref), deviceType (ref), fetchEventDetailsPageModule (ref), fFlagLuaAppSduiEventDetailsLogExposure (ref), IXPService (ref), fStringLuaAppSduiEventDetailsIxpLayer (ref), fireEventDetailsPageVisitModule (ref), foundationModule (ref), sduiFeatureEntryPoint (ref), fFlagLuaAppSduiEventDetailsLoadingSlot (ref), eventDetailsFullBleedSkeletonModule (ref), sduiPageEntryPoint (ref), fFlagSduiPageEntryUseSharedHooks (ref), eventDetailsFeedSkeletonModule (ref), fFlagLuaAppSduiEventDetailsActionBarInFeed (ref), eventDetailsActionBarSkeletonModule (ref)
 	local var13 = useTokens()
 	local extraProps = p4.navigation and p4.navigation.getParam("extraProps")
 	local eventId = p4.eventId or extraProps and extraProps.eventId or p4.navigation and p4.navigation.getParam("detail")
@@ -50,7 +49,7 @@ return reactModule.memo(function(p4) --[[ line: 66 | named "SduiEventDetailsPage
 	local extraProps_2 = p4.navigation and p4.navigation.getParam("extraProps")
 	local referralSource = p4.referralSource or extraProps_2 and extraProps_2.referralSource
 	local var20 = getEventDetailsPageKeyModule(eventId)
-	local var21 = reactModule.useMemo(function() --[[ line: 76 ]]
+	local var21 = reactModule.useMemo(function() --[[ line: 75 ]]
 		-- upvalues: p4 (ref), sduiLoadTimer (copy), appPage (copy)
 		local var29 = p4
 		local extraProps = var29.navigation and var29.navigation.getParam("extraProps")
@@ -66,25 +65,25 @@ return reactModule.memo(function(p4) --[[ line: 66 | named "SduiEventDetailsPage
 		local var26 = useDeviceType()
 		var25 = if var26 ~= deviceType.Desktop then var26 == deviceType.Tablet else true
 	end
-	local var27 = reactModule.useCallback(function() --[[ line: 89 ]]
+	local var27 = reactModule.useCallback(function() --[[ line: 88 ]]
 		-- upvalues: var23 (ref), appPage (copy), var24 (ref), var22 (ref)
 		if var23 == appPage.EventDetails and var24 then
 			var22.goBack()
 		end
 	end, { var22, var23, var24 })
-	reactModule.useEffect(function() --[[ line: 95 ]]
+	reactModule.useEffect(function() --[[ line: 94 ]]
 		-- upvalues: eventId (ref), fetchEventDetailsPageModule (copy), var21 (ref)
 		if eventId then
 			fetchEventDetailsPageModule(eventId, var21)
 		end
 	end, { eventId, var21 })
-	reactModule.useEffect(function() --[[ line: 101 ]]
+	reactModule.useEffect(function() --[[ line: 100 ]]
 		-- upvalues: eventId (ref), fFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), fStringLuaAppSduiEventDetailsIxpLayer (copy)
 		if eventId and fFlagLuaAppSduiEventDetailsLogExposure then
 			IXPService:LogFlagLinkedUserLayerExposure(fStringLuaAppSduiEventDetailsIxpLayer)
 		end
 	end, { eventId })
-	reactModule.useEffect(function() --[[ line: 107 ]]
+	reactModule.useEffect(function() --[[ line: 106 ]]
 		-- upvalues: eventId (ref), fireEventDetailsPageVisitModule (copy), universeId (ref), referralSource (ref)
 		if eventId then
 			fireEventDetailsPageVisitModule({
@@ -104,7 +103,7 @@ return reactModule.memo(function(p4) --[[ line: 66 | named "SduiEventDetailsPage
 		centerSheetHeight = if fFlagLuaAppSduiEventDetailsCenterSheet then 1 else nil,
 		onClose = var27
 	}, {
-		FullBleed = if foundationSheetFullBleed then reactModule.createElement(foundationModule.Sheet.FullBleed, { aspectRatio = 1.777777777778 }, {
+		FullBleed = reactModule.createElement(foundationModule.Sheet.FullBleed, { aspectRatio = 1.777777777778 }, {
 			FullBleedContent = reactModule.createElement(sduiFeatureEntryPoint, {
 				identifier = "event_details_sheet_full_bleed",
 				shouldDisplayError = false,
@@ -115,7 +114,7 @@ return reactModule.memo(function(p4) --[[ line: 66 | named "SduiEventDetailsPage
 				Size = UDim2.fromScale(1, 1),
 				AutomaticSize = Enum.AutomaticSize.None
 			})
-		}) else nil,
+		}),
 		Content = reactModule.createElement(foundationModule.Sheet.Content, { scrollingFrameRef = var28 }, reactModule.createElement(sduiPageEntryPoint, {
 			includeNavigationHeaderBar = false,
 			disableRootPadding = true,

@@ -18,8 +18,9 @@ local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLua
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
 local fFlagLuaAppDemoModePlayButton = sharedFlagsModule.FFlagLuaAppDemoModePlayButton
+local fFlagLuaAppSduiEdpFallbackAttributionFromCache = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
 
-local function VerifiedBadgeIcon() --[[ line: 63 ]]
+local function VerifiedBadgeIcon() --[[ line: 45 ]]
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), foundationModule (ref)
 	local var6 = useTokens()
 	
@@ -40,8 +41,8 @@ local function VerifiedBadgeIcon() --[[ line: 63 ]]
 	})
 end
 
-return reactModule.memo(function(p0) --[[ line: 85 | named "FallbackAttributionRow" ]]
-	-- upvalues: useTokens (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), fFlagLuaAppDemoModePlayButton (ref)
+return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionRow" ]]
+	-- upvalues: useTokens (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), fFlagLuaAppDemoModePlayButton (ref)
 	local var7 = useTokens()
 	local isSmallScreen = p0.isSmallScreen
 	local var8 = p0.isLoading == true
@@ -105,7 +106,8 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "FallbackAttributionR
 	elseif var8 then
 		var15 = reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
-			Size = UDim2.fromOffset(var7.Size.Size_2800 * 2, var13),
+			testId = "--edp-fallback-attribution-creator-skeleton",
+			Size = UDim2.fromOffset(var7.Size.Size_2800 * 2, if fFlagLuaAppSduiEdpFallbackAttributionFromCache then var7.Typography.BodyLarge.FontSize * var7.Typography.BodyLarge.LineHeight else var13),
 			radius = radius.Small
 		})
 	end
@@ -119,9 +121,22 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "FallbackAttributionR
 			Text = p0.ageRecDisplayName
 		})
 	elseif var8 then
+		local fontSize
+		local _ = nil
+		
+		if fFlagLuaAppSduiEdpFallbackAttributionFromCache then
+			fontSize = var7.Typography.BodyMedium.FontSize
+			
+			if not isSmallScreen then
+				fontSize += var7.Padding.XSmall
+			end
+		else
+			fontSize = var13
+		end
 		var16 = reactModule.createElement(skeleton, {
 			LayoutOrder = 3,
-			Size = UDim2.fromOffset(if isSmallScreen then var7.Size.Size_2400 else var7.Size.Size_2800, var13),
+			testId = "--edp-fallback-attribution-age-rating-skeleton",
+			Size = UDim2.fromOffset(if isSmallScreen then var7.Size.Size_2400 else var7.Size.Size_2800, fontSize),
 			radius = radius.Small
 		})
 	end
@@ -136,7 +151,14 @@ return reactModule.memo(function(p0) --[[ line: 85 | named "FallbackAttributionR
 		}
 	}, {
 		Icon = var12,
-		ContentColumn = reactModule.createElement(view, { tag = "col fill gap-small auto-xy", LayoutOrder = 2 }, {
+		ContentColumn = reactModule.createElement(view, {
+			LayoutOrder = 2,
+			testId = "--edp-fallback-attribution-content-column",
+			tag = {
+				["col fill gap-xsmall auto-xy"] = fFlagLuaAppSduiEdpFallbackAttributionFromCache,
+				["col fill gap-small auto-xy"] = not fFlagLuaAppSduiEdpFallbackAttributionFromCache
+			}
+		}, {
 			Title = var14,
 			Creator = var15,
 			AgeRating = var16,

@@ -26,7 +26,7 @@ return {
 			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p0 (ref)
 			return reactModule.createElement(foundationProvider, {
 				theme = if p1 then t[p1.theme] else t.Default,
-				device = if p1 then t_1[p1.platform] else t_1.Default
+				device = if p1 then t_1[p1.platform] else "Desktop"
 			}, reactModule.createElement(p0, p1))
 		end
 	end

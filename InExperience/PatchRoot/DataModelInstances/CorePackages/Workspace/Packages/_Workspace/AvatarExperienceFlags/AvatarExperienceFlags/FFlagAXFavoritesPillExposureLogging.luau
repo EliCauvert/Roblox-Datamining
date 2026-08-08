@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXFavoritesPillExposureLogging", false)
+﻿return game:DefineFastFlag("AXFavoritesPillExposureLogging2", false)

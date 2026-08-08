@@ -1,45 +1,44 @@
 ﻿local playersService = game:GetService("Players")
-local fixAvatarUtilCharacter = game:DefineFastFlag("FixAvatarUtilCharacter", false)
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 19 ]]
-	-- upvalues: t (ref), fixAvatarUtilCharacter (ref)
+function t.new(p0) --[[ line: 17 ]]
+	-- upvalues: t (ref)
 	local tbl = setmetatable({}, t)
 	tbl.player = p0
 	tbl.characterChangedEvent = Instance.new("BindableEvent")
 	tbl.eventQueued = false
 	tbl.connections = {}
-	tbl.connections.characterAddedConnection = p0.CharacterAdded:Connect(function(p1) --[[ line: 32 ]]
+	tbl.connections.characterAddedConnection = p0.CharacterAdded:Connect(function(p1) --[[ line: 30 ]]
 		-- upvalues: tbl (ref)
 		tbl:onCharacterChanged(p1)
 	end)
-	tbl.connections.characterAppearanceChangedConnection = p0.CharacterAppearanceLoaded:Connect(function(p2) --[[ line: 37 ]]
+	tbl.connections.characterAppearanceChangedConnection = p0.CharacterAppearanceLoaded:Connect(function(p2) --[[ line: 35 ]]
 		-- upvalues: tbl (ref)
 		tbl:onCharacterChanged(p2)
 	end)
 	
-	if fixAvatarUtilCharacter and tbl.player.Character then
+	if tbl.player.Character then
 		tbl:onCharacterChanged(tbl.player.Character)
 	end
 	return tbl
 end
 
-function t:removeConnection(p3) --[[ line: 51 ]]
+function t:removeConnection(p3) --[[ line: 47 ]]
 	if self.connections[p3] then
 		self.connections[p3]:Disconnect()
 		self.connections[p3] = nil
 	end
 end
 
-function t:onCharacterChanged(p4) --[[ line: 58 ]]
+function t:onCharacterChanged(p4) --[[ line: 54 ]]
 	self:removeConnection("descendantAddedConnection")
-	self.connections.descendantAddedConnection = p4.DescendantAdded:Connect(function(p5) --[[ line: 61 ]]
+	self.connections.descendantAddedConnection = p4.DescendantAdded:Connect(function(p5) --[[ line: 57 ]]
 		-- upvalues: self (ref)
 		self:onDescendantAdded(p5)
 	end)
 	self:removeConnection("descendantRemovedConnection")
-	self.connections.descendantRemovedConnection = p4.DescendantRemoving:Connect(function(p6) --[[ line: 66 ]]
+	self.connections.descendantRemovedConnection = p4.DescendantRemoving:Connect(function(p6) --[[ line: 62 ]]
 		-- upvalues: self (ref)
 		self:onDescendantRemoving(p6)
 	end)
@@ -50,11 +49,11 @@ function t:onCharacterChanged(p4) --[[ line: 58 ]]
 	self:fireCharacterChanged()
 end
 
-function t:onDescendantAdded(p7) --[[ line: 79 ]]
+function t:onDescendantAdded(p7) --[[ line: 75 ]]
 	if p7:IsA("NumberValue") then
 		local text = p7.Name .. "Connection"
 		self:removeConnection(text)
-		self.connections[text] = p7.Changed:Connect(function() --[[ line: 84 ]]
+		self.connections[text] = p7.Changed:Connect(function() --[[ line: 80 ]]
 			-- upvalues: self (ref)
 			self:fireCharacterChanged()
 		end)
@@ -62,19 +61,19 @@ function t:onDescendantAdded(p7) --[[ line: 79 ]]
 	self:fireCharacterChanged()
 end
 
-function t:onDescendantRemoving(p8) --[[ line: 93 ]]
+function t:onDescendantRemoving(p8) --[[ line: 89 ]]
 	if p8:IsA("NumberValue") then
 		self:removeConnection(p8.Name .. "Connection")
 	end
 	self:fireCharacterChanged()
 end
 
-function t:fireCharacterChanged() --[[ line: 104 ]]
+function t:fireCharacterChanged() --[[ line: 100 ]]
 	if self.eventQueued then
 		return
 	end
 	self.eventQueued = true
-	task.delay(0.1, function() --[[ line: 111 ]]
+	task.delay(0.1, function() --[[ line: 107 ]]
 		-- upvalues: self (ref)
 		self.eventQueued = false
 		local character = self.player.Character
@@ -88,7 +87,7 @@ end
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 126 ]]
+function t_1.new() --[[ line: 122 ]]
 	-- upvalues: t_1 (ref)
 	local tbl = setmetatable({}, t_1)
 	tbl.playerConnections = {}
@@ -96,7 +95,7 @@ function t_1.new() --[[ line: 126 ]]
 	return tbl
 end
 
-function t_1:connectLocalCharacterChanges(p9) --[[ line: 137 ]]
+function t_1:connectLocalCharacterChanges(p9) --[[ line: 133 ]]
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	while not localPlayer do
@@ -106,7 +105,7 @@ function t_1:connectLocalCharacterChanges(p9) --[[ line: 137 ]]
 	self:connectPlayerCharacterChanges(localPlayer, p9)
 end
 
-function t_1:connectPlayerCharacterChanges(p10, p11) --[[ line: 152 ]]
+function t_1:connectPlayerCharacterChanges(p10, p11) --[[ line: 148 ]]
 	-- upvalues: t (ref)
 	if not self.playerConnections[p10] then
 		self.playerConnections[p10] = t.new(p10)

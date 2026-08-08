@@ -26,11 +26,12 @@ local fFlagHidePremiumIconography = require(parent.SharedFlags).FFlagHidePremium
 local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
 local fFlagUserTileAddContextualInfoIcon = require(parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
 local userTileRemoveContextualInfoTag = game:DefineFastFlag("UserTileRemoveContextualInfoTag", false)
+local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
 local t = { layoutOrder = 2 }
 
-return function(p0) --[[ line: 63 | named "TitleStack" ]]
-	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), iconSize (ref), userTileRemoveContextualInfoTag (ref)
-	local var16
+return function(p0) --[[ line: 68 | named "TitleStack" ]]
+	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), iconSize (ref), userTileRemoveContextualInfoTag (ref)
+	local var17
 	p0 = llama.Dictionary.join(t, p0 or {})
 	local var9 = useTokens()
 	local var10 = if p0.layoutMode == layoutModeModule.compact then "align-x-center" else "align-x-left"
@@ -43,48 +44,52 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 	local var13 = (p0.titleStyle or var9.Typography.TitleMedium).FontSize - var9.Padding.XSmall * 2
 	local var14 = (p0.subtitleStyle or var9.Typography.BodyMedium).FontSize - var9.Padding.XSmall * 2
 	local var15 = (p0.contextualInfoStyle or var9.Typography.BodySmall).FontSize - var9.Padding.XSmall * 2
+	local var16 = if fFlagUserTileTitleStackAddExtraInfo then (p0.extraInfoStyle or var9.Typography.BodySmall).FontSize - var9.Padding.XSmall * 2 else 0
 	
 	if fFlagUserTileShowShimmerWhenLoadingModule then
-		var16 = p0.layoutMode == layoutModeModule.compact
-		var16 = nil
+		var17 = p0.layoutMode == layoutModeModule.compact
+		var17 = nil
 	else
-		var16 = nil
+		var17 = nil
 	end
 	local TITLE_SHIMMER_WIDTH_SCALE_WIDE = nil
 	local SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE = nil
 	local CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE = nil
+	local EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE = nil
 	
 	if fFlagUserTileShowShimmerWhenLoadingModule then
-		if var16 then
+		if var17 then
 			TITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.TITLE_SHIMMER_WIDTH_SCALE_COMPACT
 			SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_COMPACT
 			CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_COMPACT
+			EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_COMPACT
 		else
 			TITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.TITLE_SHIMMER_WIDTH_SCALE_WIDE
 			SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE
 			CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE
+			EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE = constantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE
 		end
 	end
-	local var20
-	local var17 = if fFlagUserTileShowShimmerWhenLoadingModule and p0.layoutMode == layoutModeModule.compact then "align-x-center" else "align-x-left"
-	local var18 = if p0.layoutMode == layoutModeModule.compact then "size-full-0" else "grow"
+	local var21
+	local var18 = if fFlagUserTileShowShimmerWhenLoadingModule and p0.layoutMode == layoutModeModule.compact then "align-x-center" else "align-x-left"
+	local var19 = if p0.layoutMode == layoutModeModule.compact then "size-full-0" else "grow"
 	local customTextTruncation = p0.customTextTruncation or Enum.TextTruncate.AtEnd
 	
 	if fFlagEnableBlackbirdCheck then
-		var20 = p0.isRobloxSubscriber == true
-		var20 = nil
+		var21 = p0.isRobloxSubscriber == true
+		var21 = nil
 	else
-		var20 = nil
+		var21 = nil
 	end
 	local createElement_1
-	local var21 = if fFlagHidePremiumIconography then false else p0.isPremium and not var20
-	local var22 = if fFlagUserTileTextTCIndicator then useLocalization({ trustedLabel = textKeysModule.trustedLabel }) else nil
+	local var22 = if fFlagHidePremiumIconography then false else p0.isPremium and not var21
+	local var23 = if fFlagUserTileTextTCIndicator then useLocalization({ trustedLabel = textKeysModule.trustedLabel }) else nil
 	local createElement = reactModule.createElement
-	local t_1 = { tag = `{var18} auto-y col`, LayoutOrder = p0.layoutOrder }
+	local t_1 = { tag = `{var19} auto-y col`, LayoutOrder = p0.layoutOrder }
 	local t_2 = {
 		Title = if fFlagUserTileShowShimmerWhenLoadingModule and p0.isTitleLoading then reactModule.createElement(view, {
 			LayoutOrder = 1,
-			tag = `size-full-0 auto-y padding-xsmall {var17}`
+			tag = `size-full-0 auto-y padding-xsmall {var18}`
 		}, {
 			TitleSkeleton = reactModule.createElement(skeleton, {
 				Size = UDim2.new(TITLE_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var13),
@@ -139,13 +144,13 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 							Position = UDim2.fromScale(0, 0)
 						})
 					}),
-					SubscriptionBadge = if var20 then reactModule.createElement(foundationModule.Icon, {
+					SubscriptionBadge = if var21 then reactModule.createElement(foundationModule.Icon, {
 						LayoutOrder = 3,
 						name = foundationModule.Enums.IconName.RobloxPlus,
 						size = foundationModule.Enums.IconSize.Small,
 						style = var9.Color.Content.Emphasis
 					}) else nil,
-					PremiumBadge = if var21 then reactModule.createElement(foundationModule.Icon, {
+					PremiumBadge = if var22 then reactModule.createElement(foundationModule.Icon, {
 						LayoutOrder = 4,
 						name = foundationModule.Enums.IconName.Premium,
 						size = foundationModule.Enums.IconSize.Large
@@ -174,7 +179,7 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 	if fFlagUserTileShowShimmerWhenLoadingModule and p0.isSubtitleLoading then
 		createElement_1 = reactModule.createElement(view, {
 			LayoutOrder = 2,
-			tag = `size-full-0 auto-y padding-xsmall {var17}`
+			tag = `size-full-0 auto-y padding-xsmall {var18}`
 		}, {
 			SubtitleSkeleton = reactModule.createElement(skeleton, {
 				Size = UDim2.new(SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var14),
@@ -194,7 +199,7 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 			fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
 			Text = p0.subtitle or "",
 			TextTruncate = customTextTruncation,
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 256 ]]
+			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 268 ]]
 				-- upvalues: p0 (write)
 				p0.onSubtitleClicked()
 			end else nil,
@@ -209,7 +214,7 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 				["align-x-center"] = p0.layoutMode == layoutModeModule.compact,
 				["align-x-left"] = p0.layoutMode == layoutModeModule.wide
 			},
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 277 ]]
+			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 289 ]]
 				-- upvalues: p0 (write)
 				p0.onSubtitleClicked()
 			end else nil,
@@ -236,20 +241,20 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 					["text-align-x-left"] = p0.layoutMode == layoutModeModule.wide
 				},
 				fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
-				Text = " \226\128\162 " .. var22.trustedLabel,
+				Text = " \226\128\162 " .. var23.trustedLabel,
 				TextTruncate = customTextTruncation
 			}) else nil
 		})
 	else
 		createElement_1 = nil
 	end
-	local var25
+	local var26
 	t_2.Subtitle = createElement_1
 	
 	if fFlagUserTileShowShimmerWhenLoadingModule and p0.isContextualInfoLoading then
-		var25 = reactModule.createElement(view, {
+		var26 = reactModule.createElement(view, {
 			LayoutOrder = 3,
-			tag = `size-full-0 auto-y padding-xsmall {var17}`
+			tag = `size-full-0 auto-y padding-xsmall {var18}`
 		}, {
 			ContextualInfoSkeleton = reactModule.createElement(skeleton, {
 				Size = UDim2.new(CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var15),
@@ -257,7 +262,7 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 			})
 		})
 	elseif p0.contextualInfo then
-		var25 = if fFlagUserTileAddContextualInfoIcon and p0.contextualInfoIcon then reactModule.createElement(view, {
+		var26 = if fFlagUserTileAddContextualInfoIcon and p0.contextualInfoIcon then reactModule.createElement(view, {
 			LayoutOrder = 3,
 			tag = {
 				["row align-y-center gap-xsmall size-full-0 auto-y"] = true,
@@ -294,9 +299,31 @@ return function(p0) --[[ line: 63 | named "TitleStack" ]]
 			TextTruncate = customTextTruncation,
 			Text = p0.contextualInfo
 		})
-		var25 = var25 or nil
+		var26 = var26 or nil
 	end
-	t_2.ContextualInfo = var25
+	t_2.ContextualInfo = var26
+	t_2.ExtraInfo = if fFlagUserTileTitleStackAddExtraInfo and p0.isExtraInfoLoading then reactModule.createElement(view, {
+		LayoutOrder = 4,
+		tag = `size-full-0 auto-y padding-xsmall {var18}`
+	}, {
+		ExtraInfoSkeleton = reactModule.createElement(skeleton, {
+			Size = UDim2.new(EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE, 0, 0, var16),
+			radius = radius.Small
+		})
+	}) elseif fFlagUserTileTitleStackAddExtraInfo and p0.extraInfo then reactModule.createElement(text, {
+		LayoutOrder = 4,
+		RichText = true,
+		tag = {
+			["size-full-0 auto-y"] = true,
+			["text-align-x-center"] = p0.layoutMode == layoutModeModule.compact,
+			["text-align-x-left"] = p0.layoutMode == layoutModeModule.wide
+		},
+		fontStyle = p0.extraInfoStyle or var9.Typography.BodySmall,
+		TextTruncate = customTextTruncation,
+		Text = p0.extraInfo,
+		onActivated = p0.onExtraInfoClicked,
+		stateLayer = if p0.onExtraInfoClicked then { affordance = stateLayerAffordance.None } else nil
+	}) else nil
 	
 	return createElement(view, t_1, t_2)
 end

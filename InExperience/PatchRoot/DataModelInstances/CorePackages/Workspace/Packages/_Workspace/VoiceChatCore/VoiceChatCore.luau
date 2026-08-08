@@ -2,6 +2,7 @@
 
 return {
 	CoreVoiceManager = require(script.CoreVoiceManager),
+	MicInputManager = require(script.MicInputManager),
 	Constants = require(script.Constants),
 	Analytics = require(script.Analytics),
 	VoiceVolumeControlsEligibility = require(script.VoiceVolumeControlsEligibility),

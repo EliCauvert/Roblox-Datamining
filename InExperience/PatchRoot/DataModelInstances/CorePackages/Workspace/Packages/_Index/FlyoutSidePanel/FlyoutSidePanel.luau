@@ -4,10 +4,10 @@ local sharedFlagsModule = require(parent.SharedFlags)
 
 return {
 	Components = {
-		FlyoutSidePanelComponent = createLazyComponent(function() --[[ line: 9 ]]
+		FlyoutSidePanelComponent = createLazyComponent(function() --[[ line: 10 ]]
 			return require(script.Components.FlyoutSidePanelComponent)
 		end),
-		FlyoutProfileCard = createLazyComponent(function() --[[ line: 12 ]]
+		FlyoutProfileCard = createLazyComponent(function() --[[ line: 13 ]]
 			return require(script.Components.FlyoutProfileCard)
 		end),
 		FlyoutLeftHeader = require(script.Components.FlyoutLeftHeader),
@@ -19,6 +19,9 @@ return {
 	},
 	Utils = {
 		shouldShowLeftHeader = require(script.Utils.shouldShowLeftHeader)
+	},
+	Hooks = {
+		useOpenFlyoutSidePanel = if sharedFlagsModule.FFlagFlyoutUseOpenHook then require(script.Hooks.useOpenFlyoutSidePanel) else nil
 	},
 	FlyoutScrollAwayControl = require(script.FlyoutScrollAwayControl),
 	["jest.config"] = script["jest.config"]

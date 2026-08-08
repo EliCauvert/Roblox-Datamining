@@ -3,11 +3,9 @@ local parent = appChat.Parent
 local reactModule = require(parent.React)
 local defaultTwoStepReportFlow = require(parent.AbuseReporting).UXFlows.DefaultTwoStepReportFlow
 local appChatNetworkingModule = require(parent.AppChatNetworking)
-local fFlagAppChatUseAbuseReportingApi = require(appChat.Flags).FFlagAppChatUseAbuseReportingApi
 local name = require(appChat.Logger):new(script.Name)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local playersService = game:GetService("Players")
-local useChatPlacementContext = require(appChat.Contexts.ChatPlacementContext).useChatPlacementContext
 local list = {
 	{
 		localizationKey = "Feature.ReportAbuse.Label.CategoryInappropriate",
@@ -47,62 +45,43 @@ local list = {
 	}
 }
 
-local function _() --[[ line: 48 | named "getLocalPlayerUserId" ]]
+local function _() --[[ line: 44 | named "getLocalPlayerUserId" ]]
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	return if localPlayer then localPlayer.UserId else 0
 end
 
-return function(p0) --[[ line: 53 | named "ChatAbuseReport" ]]
-	-- upvalues: useDispatch (ref), useChatPlacementContext (ref), reactModule (ref), fFlagAppChatUseAbuseReportingApi (ref), appChatNetworkingModule (ref), playersService (ref), name (ref), defaultTwoStepReportFlow (ref), list (ref)
+return function(p0) --[[ line: 49 | named "ChatAbuseReport" ]]
+	-- upvalues: useDispatch (ref), reactModule (ref), appChatNetworkingModule (ref), playersService (ref), name (ref), defaultTwoStepReportFlow (ref), list (ref)
 	local var6 = useDispatch()
-	local chatPlacement = useChatPlacementContext().chatPlacement
 	
 	return reactModule.createElement(defaultTwoStepReportFlow, {
 		analyticsContext = "AppChat",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = reactModule.useCallback(function(p1, p2) --[[ line: 58 ]]
-				-- upvalues: p0 (ref), chatPlacement (ref), fFlagAppChatUseAbuseReportingApi (copy), var6 (ref), appChatNetworkingModule (copy), playersService (copy), name (copy)
-				local var10, var11
+			onSubmit = reactModule.useCallback(function(p1, p2) --[[ line: 52 ]]
+				-- upvalues: var6 (ref), appChatNetworkingModule (copy), p0 (ref), playersService (copy), name (copy)
+				local API = appChatNetworkingModule.rodux.SubmitAppChatAbuseReport.API
 				local t = {
 					comment = p2,
 					reportedUserId = p0.participantId,
 					reportCategory = p1,
-					conversationId = p0.conversationId,
-					entryPoint = chatPlacement
+					conversationId = p0.conversationId
 				}
-				local _ = nil
-				local _ = nil
+				local localPlayer = playersService.LocalPlayer
+				t.submitterUserId = if localPlayer then localPlayer.UserId else 0
+				var8, API = var6(API(t)):await()
 				
-				if fFlagAppChatUseAbuseReportingApi then
-					local API = appChatNetworkingModule.rodux.SubmitAppChatAbuseReport.API
-					local t_1 = {
-						comment = t.comment,
-						reportedUserId = t.reportedUserId,
-						reportCategory = t.reportCategory,
-						conversationId = t.conversationId
-					}
-					local localPlayer = playersService.LocalPlayer
-					t_1.submitterUserId = if localPlayer then localPlayer.UserId else 0
-					var9, API = var6(API(t_1)):await()
-					var10 = var9
-					var11 = API
-				else
-					local var12, var13 = var6(appChatNetworkingModule.rodux.CreateChatAbuseReport.API(t)):await()
-					var10 = var12
-					var11 = var13
-				end
-				if var10 then
-					name:info("Abuse report submitted successfully. Response: {}", tostring(var11))
+				if var8 then
+					name:info("Abuse report submitted successfully. Response: {}", tostring(API))
 					
-					return var10
+					return var8
 				end
-				name:error("Failed to submit abuse report. Response: {}", tostring(var11))
+				name:error("Failed to submit abuse report. Response: {}", tostring(API))
 				
-				return var10
-			end, { var6, p0.conversationId, p0.participantId, chatPlacement })
+				return var8
+			end, { var6, p0.conversationId, p0.participantId })
 		},
 		onCloseProps = { hasPreviousSteps = false, onAbandon = p0.onAbandon },
 		onComplete = p0.onComplete,

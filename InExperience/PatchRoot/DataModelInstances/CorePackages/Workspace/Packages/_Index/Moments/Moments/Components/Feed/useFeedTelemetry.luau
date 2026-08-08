@@ -3,7 +3,7 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local _ = require(script.Parent.FeedTypes)
 
-return function(p0, p1) --[[ line: 62 | named "useFeedTelemetry" ]]
+return function(p0, p1) --[[ line: 66 | named "useFeedTelemetry" ]]
 	-- upvalues: reactModule (ref), signalsModule (ref)
 	local active = p1.active
 	local var2 = reactModule.useRef(nil)
@@ -18,9 +18,11 @@ return function(p0, p1) --[[ line: 62 | named "useFeedTelemetry" ]]
 	var8.current = p1.getAttribution
 	local var9 = reactModule.useRef(p1.onItemBecameActive)
 	var9.current = p1.onItemBecameActive
-	local var10 = reactModule.useRef(active)
-	var10.current = active
-	local var11 = reactModule.useCallback(function() --[[ line: 94 ]]
+	local var10 = reactModule.useRef(p1.onEndStateReached)
+	var10.current = p1.onEndStateReached
+	local var11 = reactModule.useRef(active)
+	var11.current = active
+	local var12 = reactModule.useCallback(function() --[[ line: 100 ]]
 		-- upvalues: var2 (ref), var4 (ref), var5 (ref), var6 (ref), var3 (ref), var7 (ref)
 		local current = var2.current
 		
@@ -43,34 +45,37 @@ return function(p0, p1) --[[ line: 62 | named "useFeedTelemetry" ]]
 			recommendationSource = var7.current
 		})
 	end, {})
-	reactModule.useEffect(function() --[[ line: 126 ]]
-		-- upvalues: signalsModule (copy), p0 (ref), var11 (ref), var8 (ref), var2 (ref), var3 (ref), var4 (ref), var5 (ref), var10 (ref), var9 (ref)
-		local var12 = signalsModule.createEffect(function(p2) --[[ line: 127 ]]
-			-- upvalues: p0 (copy), var11 (copy), var8 (copy), var2 (copy), var3 (copy), var4 (copy), var5 (copy), var10 (copy), var9 (copy)
+	reactModule.useEffect(function() --[[ line: 132 ]]
+		-- upvalues: signalsModule (copy), p0 (ref), var12 (ref), var11 (ref), var10 (ref), var8 (ref), var2 (ref), var3 (ref), var4 (ref), var5 (ref), var9 (ref)
+		local var13 = signalsModule.createEffect(function(p2) --[[ line: 133 ]]
+			-- upvalues: p0 (copy), var12 (copy), var11 (copy), var10 (copy), var8 (copy), var2 (copy), var3 (copy), var4 (copy), var5 (copy), var9 (copy)
 			local currentItem = p0.getCurrentItem(p2)
-			var11()
+			var12()
 			
 			if currentItem == nil then return end
-			local var14 = var8.current(currentItem)
+			if currentItem.kind == "endState" and var11.current and var10.current then
+				var10.current(p0.getCurrentIndex(false))
+			end
+			local var15 = var8.current(currentItem)
 			
-			if var14 == nil then return end
-			var2.current = var14
+			if var15 == nil then return end
+			var2.current = var15
 			var3.current = p0.getCurrentIndex(false)
 			var4.current = 0
-			var5.current = if var10.current then os.clock() else nil
+			var5.current = if var11.current then os.clock() else nil
 			
-			if var10.current and var9.current then
+			if var11.current and var9.current then
 				var9.current(currentItem)
 			end
 		end)
 		
-		return function() --[[ line: 154 ]]
-			-- upvalues: var12 (ref), var11 (copy)
+		return function() --[[ line: 164 ]]
+			-- upvalues: var13 (ref), var12 (copy)
+			var13()
 			var12()
-			var11()
 		end
-	end, { p0, var11 })
-	reactModule.useEffect(function() --[[ line: 165 ]]
+	end, { p0, var12 })
+	reactModule.useEffect(function() --[[ line: 175 ]]
 		-- upvalues: active (ref), var2 (ref), var5 (ref), var4 (ref)
 		if active then
 			if var2.current == nil or var5.current ~= nil then
@@ -86,5 +91,5 @@ return function(p0, p1) --[[ line: 62 | named "useFeedTelemetry" ]]
 		end
 	end, { active })
 	
-	return { flushView = var11 }
+	return { flushView = var12 }
 end

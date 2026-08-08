@@ -106,4 +106,18 @@ return function(p0, p1) --[[ line: 15 | named "applyRobuxTransferFlowIngestStubs
 	if p0.getNetworkImpl == nil then
 		p0.getNetworkImpl = var16
 	end
+	local var17 = function() --[[ line: 63 ]]
+		return nil
+	end
+	
+	if p0.triggerOnPromptOptimisticHide == nil then
+		p0.triggerOnPromptOptimisticHide = var17
+	end
+	local var18 = function() --[[ line: 66 ]]
+		return nil
+	end
+	
+	if p0.triggerOnPromptDismissCommitted == nil then
+		p0.triggerOnPromptDismissCommitted = var18
+	end
 end

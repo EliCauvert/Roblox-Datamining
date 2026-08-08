@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AddStatusIndicatorToBaseRow", false)
+﻿return game:DefineFastFlag("AddStatusIndicatorToBaseRow_v2", false)

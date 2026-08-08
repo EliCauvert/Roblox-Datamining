@@ -7,10 +7,11 @@ local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
+local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 
-local function _(p0, p1) --[[ line: 16 | named "getLocalizedLiteralResolver" ]]
+local function _(p0, p1) --[[ line: 17 | named "getLocalizedLiteralResolver" ]]
 	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref)
-	return function(p2) --[[ line: 17 ]]
+	return function(p2) --[[ line: 18 ]]
 		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), p1 (ref), p0 (ref)
 		if typeof(p2) ~= "table" or not p2.map_key then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
@@ -31,8 +32,8 @@ local function _(p0, p1) --[[ line: 16 | named "getLocalizedLiteralResolver" ]]
 	end
 end
 
-return function(p3) --[[ line: 49 | named "createBuilderConfig" ]]
-	-- upvalues: getPropBuilderModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref)
+return function(p3) --[[ line: 50 | named "createBuilderConfig" ]]
+	-- upvalues: getPropBuilderModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref)
 	local t = {
 		appPage = p3.appPage,
 		debugName = p3.debugName,
@@ -42,7 +43,7 @@ return function(p3) --[[ line: 49 | named "createBuilderConfig" ]]
 	local localizedLiterals = p3.localizedLiterals
 	local appPage = p3.appPage
 	
-	function t.resolveLocalizedLiteral(p4) --[[ line: 17 ]]
+	function t.resolveLocalizedLiteral(p4) --[[ line: 18 ]]
 		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), appPage (ref), localizedLiterals (ref)
 		if typeof(p4) ~= "table" or not p4.map_key then
 			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
@@ -62,7 +63,7 @@ return function(p3) --[[ line: 49 | named "createBuilderConfig" ]]
 		return var4
 	end
 	
-	t.configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p3.configKey else nil
+	t.configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter then p3.configKey else nil
 	
 	return t
 end

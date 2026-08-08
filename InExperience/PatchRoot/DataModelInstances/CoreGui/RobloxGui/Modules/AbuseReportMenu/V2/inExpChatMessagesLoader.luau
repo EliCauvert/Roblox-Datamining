@@ -65,7 +65,7 @@ return {
 					}
 				end
 			end
-			table.sort(t_1, function(p0, p1) --[[ line: 124 ]]
+			table.sort(t_1, function(p0, p1) --[[ line: 123 ]]
 				-- upvalues: allChannelTabs (ref), expChatMessageHelpersModule (copy)
 				local var25 = allChannelTabs[p0]
 				local var26 = allChannelTabs[p1]

@@ -127,11 +127,30 @@ Common.Presence.Label.Invisible,Invisible
 Common.Presence.Label.Offline,Offline
 Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,Quality score cannot be properly computed due to the input data is incorrect or incomplete. Please check your model or file a bug report
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animation is too long ({duration} seconds). Emote animations must be at most {maxLength} seconds long.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animation is too short ({duration} seconds). Emote animations must be longer than {minLength} seconds.
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Your body contains small disconnected mesh components (mesh islands). Please remove floating geometry and ensure all mesh parts are properly connected.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Asset quality: {partName} has {num_disconnected_components} disconnected components, which exceeds the maximum of {max_disconnected_components}."
+Common.UGCValidation.ErrorLabel.AQSInputDataError,Quality score cannot be properly computed due to the input data is incorrect or incomplete. Please check your model or file a bug report
 Common.UGCValidation.ErrorLabel.AQSInternalError,"Score cannot be generated due to Asset Quality Error. Please check input data correctness and try again, or file a bug report."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Asset quality warning: Cage-to-mesh distance score is {score}. Max distance between outer cage and mesh is {max_distance}, {negative_sdf_percent}% of outer cage vertices are inside render mesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Asset quality warning: Body cage distance score is {score}. Max distance between body cage and mesh is {max_distance}, {negative_sdf_percent}% of body cage vertices are inside the body mesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Asset quality warning: Head cage distance score is {score}. Max distance between head cage and mesh is {max_distance}, {negative_sdf_percent}% of head cage vertices are inside head mesh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Asset quality warning: Cage relevancy score is {score}. {irrelevant_percent}% of the modified outer cage vertices do not cover the accessory.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Asset quality warning: Cage UV score is {score} for {cage_name}. Incorrect UV count: {incorrect_uv_count}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Asset quality: {partName} has {degenerate_triangle_percent}% degenerate triangles (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Asset quality warning: Dynamic head expression score is {score}.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Asset quality: joint configuration scored {score} (joints: {joint_number}, left hand: {left_hand_joint_number}, right hand: {right_hand_joint_number})."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Asset quality: {partName} has {num_small_volume_islands} small disconnected islands out of {num_disconnected_components} components (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,Asset quality: {partName} has mesh manifold issues (score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Asset quality: {partName} mesh is not watertight ({boundary_edges_percent}% boundary edges).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Asset quality warning: Mesh containment score is {score}. {mesh_outside_outer_cage_percent}% of mesh vertices are outside the outer cage.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Asset quality score for {measureName} could not be computed because the input data was incomplete or invalid. This does not block your upload.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Asset quality: texture {textureName} has low complexity (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Asset quality: texture {textureName} has resolution {texture_width}x{texture_height} (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Asset quality: {partName} has {intersecting_tri_face_percent}% intersecting triangle faces (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Asset quality: {partName} has {uv_outside_bound_vert_percent}% UV vertices outside bounds (score: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Asset quality: {partName} has {similar_vertex_percent}% similar vertices (score: {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle is skinned to joint {jointName}, which is not part of the allowed schema. Only standard R15 joints and skinning transfer joints are permitted."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} must use skinning transfer, but you are missing the required joint {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handle is skinned to joint {jointName}, but this asset must be auto skinned. You may only skin to {validJointNameList}."
@@ -146,8 +165,10 @@ Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,The following instanc
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,Uploaded asset should be a {ExpectedClass} but is a {RootClass}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Uploaded asset should be named {ExpectedClass} but is instead named {RootClass}.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Body part '{bodyPartName}' in CurveAnimation has a Position (translation) track. Animation body parts may only be rotated; position tracks are not allowed. Please remove the Position track from this body part.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Body part '{bodyPartName}' in CurveAnimation moves {distance} studs from its start position. Maximum allowed translation is {maxDistance} studs. Please reduce the body part's positional movement.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation contains HRD/DRD bones and body part '{bodyPartName}' has a Position (translation) track. When any bones are present in the animation, no body parts may translate to prevent joint separation. Please remove all Position tracks from body parts."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Bone {boneName} in CurveAnimation has a Position (translation) track. HRD/DRD bones may only be rotated; position tracks cause joint separation and are not allowed. Please remove the position animation from this bone.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Bone '{boneName}' in CurveAnimation moves {distance} studs from its start position. Maximum allowed translation is {maxDistance} studs. Please reduce the bone's positional movement.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation contains HRD/DRD bone folders which are not yet supported. Please remove all bone sub-folders before uploading.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Body parts in a CurveAnimation cannot be lower than {minHeight} studs or more than {maxDistance} studs from the HumanoidRootPart. Please fix the animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation child MarkerCurves and AnimationRigData cannot have children
@@ -193,6 +214,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Cannot detect mouth open
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Dynamic Heads on the marketplace must be animated, but this head has no FACS data."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Cannot detect right eye close expression for the Dynamic Head. Please adjust cage landmarks for the right eye to match where the right eye on the head and make sure it can be closed.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Cannot detect frown expression for the Dynamic Head. Please adjust cage landmarks for the mouth to match where the mouth on the head and make sure it can show frown expression.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,This asset uses emissive maps which are only available to creators in the Trusted Creator Program. Please remove all emissive map content or join the program before uploading.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,The InternalOverrideFACSData property on FaceControls must be empty on upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs was detected expanding your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs was detected shrinking your head to {modPercent}%, but altering the head is against marketplace policy for facial animations."
@@ -208,6 +230,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"DigitsRigDescription in
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,You cannot include a DigitsRigDescription without a HumanoidRigDescription
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"Instance {instName} shows up more than once, but may only exist once within a bone hierarchy."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"Instance {instName} is underneath {parentName}, but based on your existing Bones it should be underneath {expectedParentName}."
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription and additional bones are not enabled for body uploads yet.
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,Instance {instName} of class {className} is in a bone tree but not part of the defined R15plus schema.
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,Optional joint {jointName} is incorrectly mapped in the HRD. This must be mapped to a bone named {boneName}.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"Joint {jointName} is a standard R15 joint, but the rig attachment is not connected to the HRD. Ensure that the HRD under your avatar is linking to an AttachmentConstraint rather than Motor6d."
@@ -240,10 +263,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName} mesh {axis} a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Attachment {attName} must exist exactly once within {partName} descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (or its descendants) contain Attributes. You need to remove Attributes from the following: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"To upload an asset to Roblox, you must select exactly 1 instance and the associated upload type."
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} should not have tags.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Second test error string used to verify the Hub-first translation sync workflow end-to-end.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Head meshpart has facial animations for {jointName}, which cannot be used in FACs. Please rename this joint then reimport your head."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bodypart {partName} is skinned to virtual joint {jointName}, which is not part of the R15plus schema."
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription and additional bones are not enabled for body uploads yet.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Go to Settings
@@ -256,6 +279,7 @@ CommonUI.Controls.Action.Apply,Apply
 CommonUI.Controls.Action.Back,Back
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Confirm
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Done
 CommonUI.Controls.Action.Next,Next
 CommonUI.Controls.Action.OK,OK
@@ -356,7 +380,7 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,Profile
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,Redeem Codes
-CommonUI.Features.Label.RemoveConnection,Remove Connection
+CommonUI.Features.Label.RemoveConnection,Remove Friend
 CommonUI.Features.Label.ReportLogs,Report Logs
 CommonUI.Features.Label.ReportLogsSentenceCase,Report logs
 CommonUI.Features.Label.Sent,Sent
@@ -566,15 +590,15 @@ CoreScripts.Feedback.EntryPoint.OptionText,Give Translation Feedback
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Exit
 CoreScripts.Feedback.FeedbackBar.HelpButton,Help
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Provide any additional comments below (optional)
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Provide any additional comments below
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,Enter any additional comments you have here
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
-CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,What is the correct translation? (optional)
+CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,What is the correct translation? *
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Experience Object: {ObjectType}
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Enter the correct translation here
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Selected Image
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,What is the problem with this translation? (optional)
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,What is the problem with this translation?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Accuracy Issue
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Inappropriate or Derogatory
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Spelling or Grammar Issue
@@ -817,7 +841,7 @@ CoreScripts.InGameMenu.PageTitle.Report,Report
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Comfort Settings
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,Switch Server
 CoreScripts.InGameMenu.Prompt.BackToHome,"Yes, Go Home"
-CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Are you sure you want to leave the experience?
+CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Are you sure you want to leave the game?
 CoreScripts.InGameMenu.Prompt.ConfirmResetCharacter,Are you sure you want to reset your character?
 CoreScripts.InGameMenu.Prompt.ConfirmRespawnCharacter,Are you sure you want to respawn your character?
 CoreScripts.InGameMenu.Prompt.LeaveGame,"Yes, Leave"
@@ -885,8 +909,10 @@ CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Respawn Character?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,You're about to leave this server and switch to another one.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Are you leaving?
-CoreScripts.InGameMenu.Traversal.HistoryDescription,Join previously visited experiences
-CoreScripts.InGameMenu.Traversal.LeaveBody,You're about to leave this experience and return to {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,Join previously visited games
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
+CoreScripts.InGameMenu.Traversal.LeaveBody,You're about to leave this game and return to {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,You're about to leave this game and return to {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Vibration
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,to toggle menu navigation
@@ -963,6 +989,8 @@ CoreScripts.TextChat.Action.SendQuickWords,Send Quick Words
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,Global
 CoreScripts.TextChat.ChannelTabs.Here,Here
+CoreScripts.TextChat.ChannelTabs.System,System
+CoreScripts.TextChat.ChannelTabs.Team,Team
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: mute a speaker.
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>: unmute a speaker.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox automatically translates supported languages in chat
@@ -1175,6 +1203,7 @@ Feature.AddFriends.Action.RequestIgnored,Request Ignored
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by searching for their username or name.
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Search for People
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Search for people
 Feature.AddFriends.Label.SearchForFriendsPrompt,Find people on Roblox by searching for their username or display name.
 Feature.AddFriends.Label.SyncWithContacts,Sync contacts to find and invite friends!
 Feature.AddFriends.Title.ConnectWithContacts,Add from Contacts
@@ -1197,9 +1226,13 @@ Feature.Avatar.Action.CancelSelection,Cancel selection
 Feature.Avatar.Action.Clear,Clear
 Feature.Avatar.Action.ComposerPost,Post
 Feature.Avatar.Action.ComposerPreviewAndPost,Preview & Post
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,Create set
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Default View
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Delete avatars
+Feature.Avatar.Action.DeleteSet,Delete set
 Feature.Avatar.Action.Discard,Discard
 Feature.Avatar.Action.EditProfilePicture,Edit Profile Picture
 Feature.Avatar.Action.GoBack,Go Back
@@ -1215,8 +1248,11 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Not Now
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,Posting
+Feature.Avatar.Action.Remove,Remove
 Feature.Avatar.Action.RemoveAll,Remove All
+Feature.Avatar.Action.RemoveFromSet,Remove from set
 Feature.Avatar.Action.Rename,Rename
+Feature.Avatar.Action.RenameSet,Rename set
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restore last saved avatar
 Feature.Avatar.Action.Revert,Revert
@@ -1281,6 +1317,10 @@ Feature.Avatar.Heading.Outfits,Outfits
 Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,Save Character
 Feature.Avatar.Heading.SelectToUpdate,Select To Update
+Feature.Avatar.Heading.SetLimitReached,Set limit reached
+Feature.Avatar.Heading.SetNameDuplicate,Duplicate name
+Feature.Avatar.Heading.SetNameNotAllowed,Name not allowed
+Feature.Avatar.Heading.SetUpdateFailed,Couldn't update set
 Feature.Avatar.Heading.SharePublicAvatar,Share your Avatar
 Feature.Avatar.Heading.SortBy,Sort by
 Feature.Avatar.Heading.UsedName,Used Name
@@ -1305,6 +1345,7 @@ Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Add/Edit
 Feature.Avatar.Label.AddManage,Add/Manage
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
 Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,All Heads
 Feature.Avatar.Label.AnimationFullSet,Full Set
@@ -1351,6 +1392,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} Selected
 Feature.Avatar.Label.Creations,Creations
 Feature.Avatar.Label.CurrentlyWearing,Currently Wearing
 Feature.Avatar.Label.DefaultBody,Default Body
+Feature.Avatar.Label.DeleteSetBody,Deleting this set won't delete the outfits inside it.
 Feature.Avatar.Label.Details,Details ({quantity})
 Feature.Avatar.Label.DetailsButton,Details
 Feature.Avatar.Label.DressesAndSkirts,Dresses & Skirts
@@ -1374,6 +1416,7 @@ Feature.Avatar.Label.FullBody,Full Body
 Feature.Avatar.Label.FullMasks,Full Masks
 Feature.Avatar.Label.FullPair,Full Pair
 Feature.Avatar.Label.Gear,Gear
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,Would you like to get this outfit for free?
 Feature.Avatar.Label.GetOutfitMultiple,Would you like to get [{numItems}] items for free?
 Feature.Avatar.Label.GetOutfitOne,Would you like to get [1] item for free?
@@ -1408,6 +1451,7 @@ Feature.Avatar.Label.LeftLegs,Left Legs
 Feature.Avatar.Label.LeftShoe,Left Shoe
 Feature.Avatar.Label.LeftShoes,Left Shoes
 Feature.Avatar.Label.LipMakeup,Lips
+Feature.Avatar.Label.LoadingSets,Loading sets
 Feature.Avatar.Label.Looks,Looks
 Feature.Avatar.Label.Makeup,Makeup
 Feature.Avatar.Label.MakeupLayer,Layer {layerIndex}
@@ -1426,6 +1470,7 @@ Feature.Avatar.Label.Newest,Newest
 Feature.Avatar.Label.NoExpiredItems,No Expired {itemType}
 Feature.Avatar.Label.NoItems,No {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,They will no longer be available in this collection
+Feature.Avatar.Label.NoSets,No sets yet
 Feature.Avatar.Label.Outerwear,Outerwear
 Feature.Avatar.Label.OutfitIncomplete,The outfit you created hasn't been purchased and won't be shown in-experience
 Feature.Avatar.Label.OutfitPurchaseFailure,Sorry! [{numItems}] purchases failed!
@@ -1441,6 +1486,8 @@ Feature.Avatar.Label.PPEViewFullButton,View Full Avatar
 Feature.Avatar.Label.Pants,Pants
 Feature.Avatar.Label.PantsClassic,Pants Classic
 Feature.Avatar.Label.Photobooth,Photobooth
+Feature.Avatar.Label.ProfileFrames,Frames
+Feature.Avatar.Label.ProfileFramesUnlockBanner,Unlock frames with Plus
 Feature.Avatar.Label.Props,Props
 Feature.Avatar.Label.Purchased,
 Feature.Avatar.Label.QuickMenuCustomizeTitle,Customize Options
@@ -1449,6 +1496,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Recently worn
+Feature.Avatar.Label.RemoveFromSetBody,These avatars will be removed from this set. They won't be deleted.
 Feature.Avatar.Label.Replace,Replace
 Feature.Avatar.Label.ResetToNewCharacter,You are switching to a new character; would you like to reset all outfit items or keep them?
 Feature.Avatar.Label.Right,R
@@ -1468,6 +1516,10 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Recent Searches
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Recently Viewed
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Keep Shopping For
 Feature.Avatar.Label.SelectItem,Select item
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatars
+Feature.Avatar.Label.SetLimitReachedBody,You can only have up to {setLimit} sets. Delete one to make room
+Feature.Avatar.Label.SetNameDuplicateBody,"You already have a set called this, choose a different name"
+Feature.Avatar.Label.SetNameNotAllowedBody,Please choose another name
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Post Avatars to Marketplace
 Feature.Avatar.Label.Shirt,Shirt
 Feature.Avatar.Label.ShirtClassic,Shirt Classic
@@ -1613,6 +1665,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Write a caption for your Avatar (O
 Feature.Avatar.RevokedItems.BodyText,"{category} item ""{item}"" has been removed from this saved avatar, so we refunded the original amount you paid.{lineBreak}View your inbox for more details."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"The following items has been removed from this saved avatar, so we refunded the original amount you paid.{lineBreak}{items}{lineBreak}View your inbox for more details."
 Feature.Avatar.RevokedItems.ViewInbox,View Inbox
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,Layer your makeup
 Feature.Avatar.Title.AvatarRefinement,Avatar Refinement
 Feature.Avatar.Title.BulkDeleteMakeupLooks,Delete {count} makeup looks?
@@ -1624,6 +1677,8 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Clear all animations?
 Feature.Avatar.Title.ClearBodyConfirmation,Clear body?
 Feature.Avatar.Title.ClearClothesConfirmation,Clear all clothes?
 Feature.Avatar.Title.ClearMakeupConfirmation,Clear all makeup?
+Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplicate Look
 Feature.Avatar.Title.EnhancedAvatarHeads,Enhanced Avatar Heads
 Feature.Avatar.Title.GetOutfit,Get Outfit
@@ -1642,7 +1697,9 @@ Feature.Avatar.Title.NewCustomizeLook,Customize Has A New Look!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,New to Marketplace
 Feature.Avatar.Title.OutfitIncomplete,Outfit Incomplete
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Rename makeup look
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Reset to default
 Feature.Avatar.Title.ResetToNewCharacter,New Character
 Feature.Avatar.Title.RevertToDefault,Revert to default
@@ -1651,6 +1708,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Your saved Avatars are here
 Feature.Avatar.Title.SelectEmoteForAvatar,Select an emote to pose your Avatar
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Select a makeup look
 Feature.Avatar.Title.SelectMakeupLooks,Select looks
+Feature.Avatar.Title.SelectSet,Select set
 Feature.Avatar.Title.SingleDeleteOutfit,"Delete ""{outfitName}""?"
 Feature.Avatar.Title.TrendingItemWidget,Trending Items
 Feature.Avatar.Title.TrendingLooksWidget,Trending Styles
@@ -1791,9 +1849,10 @@ Feature.Catalog.Action.ItemOptions,Item Options
 Feature.Catalog.Action.LoadMore,Load More
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Open Details
+Feature.Catalog.Action.Owned,{count} owned
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
-Feature.Catalog.Action.Remove,Remove
+Feature.Catalog.Action.Remove,
 Feature.Catalog.Action.RemoveFavorite,
 Feature.Catalog.Action.Rent,Rent
 Feature.Catalog.Action.Replace,
@@ -1846,9 +1905,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,Adjustable
+Feature.Catalog.Label.AdvancedMaterials,Advanced Materials
 Feature.Catalog.Label.AllItems,All Items
 Feature.Catalog.Label.AlreadyOwned,Item already owned
 Feature.Catalog.Label.Animation,Animation
+Feature.Catalog.Label.Attributes,Attributes
 Feature.Catalog.Label.Attribution,Made In
 Feature.Catalog.Label.AvailableForSale,Available For Sale
 Feature.Catalog.Label.AvailableToPremiumMembers,Available because you have Premium
@@ -1894,6 +1955,8 @@ Feature.Catalog.Label.CustomizeAvatar,Customize Avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,You can’t undo this action if you delete.
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,Emissive
+Feature.Catalog.Label.EmissiveInfo,"Emissive item glows and gives off its own light, so it stays bright and visible even in dark environments."
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,Eyebrow
@@ -1978,6 +2041,8 @@ Feature.Catalog.Label.PBR.false,Basic
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,"Avatar items with advanced materials use physically based rendering (PBR) to look more natural, with light and shadows that change and shine like they do in real life."
 Feature.Catalog.Label.PBRInfoTitle,Physically Based Rendering (PBR)
+Feature.Catalog.Label.ParticleEffects,Particle Effects
+Feature.Catalog.Label.ParticleEffectsInfo,"An item with particle effects gives off animated visuals, making it feel dynamic and alive."
 Feature.Catalog.Label.Placement,Placement
 Feature.Catalog.Label.PrePremiumPrice,(Item Price:
 Feature.Catalog.Label.Premium,
@@ -2011,6 +2076,7 @@ Feature.Catalog.Label.SalePrice,Sale Price:
 Feature.Catalog.Label.SaveAsCharacter,Save as a Character
 Feature.Catalog.Label.SaveOptions,Save Options
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,You might be looking for
 Feature.Catalog.Label.SellCut,You Earn:
 Feature.Catalog.Label.SellPageUpsell,Selling is only available to users with a Roblox Plus membership.
 Feature.Catalog.Label.SellSuccess,Item on Sale
@@ -2112,7 +2178,7 @@ Feature.Catalog.Title.CheckoutPlural,Checkout {count} items
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Replace bottom layer?
 Feature.Catalog.Title.RentalFtuxText,Rent to try an item out for 3 days
-Feature.Catalog.Toast.AddedToFavorites,Added to favorites!
+Feature.Catalog.Toast.AddedToFavorites,Added to favorites
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,Price changed because you own {number} items
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar under review
 You can share your Avatar after it is reviewed"
@@ -2205,7 +2271,7 @@ Feature.Chat.Label.Members,Members
 Feature.Chat.Label.MessageNotAvailable,This message is not available
 Feature.Chat.Label.MuteInGameChatToastNotifications,Mute in game chat notifications
 Feature.Chat.Label.New,
-Feature.Chat.Label.NoChatFound,No chat found
+Feature.Chat.Label.NoChatFound,No chats found
 Feature.Chat.Label.NoDescriptionYet,No description yet.
 Feature.Chat.Label.NotImplementedMessageType,This message could not be displayed.
 Feature.Chat.Label.NotSet,Not Set
@@ -2248,8 +2314,8 @@ Feature.Chat.Message.AddFriendsPartyLimit,You can have up to {connectionsNum} fr
 Feature.Chat.Message.AddFriendsPartyLimitSingular,You can only form a party with 1 friend due to your privacy settings.
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} sent a message that can't be displayed
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Chat is disabled. You can enable it in your privacy settings.
-Feature.Chat.Message.ChatUnavailableRegion,At this time Chat is not available in your region.
-Feature.Chat.Message.ChatUnavailableWithUser,"At this time, Chat is not available with this user."
+Feature.Chat.Message.ChatUnavailableRegion,At this time chat is not available in your region.
+Feature.Chat.Message.ChatUnavailableWithUser,"At this time, chat is not available with this user."
 Feature.Chat.Message.Default,Not everyone in this chat can see your message.
 Feature.Chat.Message.EnableChat,"To chat with Connections, turn on chat in your Privacy Settings."
 Feature.Chat.Message.EnableChat.FriendsRename,"To chat with friends, turn on chat in your Privacy Settings."
@@ -2460,6 +2526,7 @@ Feature.Friends.Action.ShareQR,Share QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,Unblock
 Feature.Friends.Action.Unfriend,
+Feature.Friends.Action.ViewMore,View more
 Feature.Friends.Action.ViewPlatformProfile,View Gamer Card
 Feature.Friends.Button.AddViaLink,Add via link
 Feature.Friends.Button.GotIt,
@@ -2651,6 +2718,9 @@ Feature.GameDetails.Message.HelpImproveExperience,Help us improve your experienc
 Feature.GameDetails.Message.HidingExperienceQuestion,Why are you hiding this experience?
 Feature.GameDetails.Message.PurchaseGameV2,Unlock access to {gameName} for {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,The sponsorship information could not be displayed due to a temporary error.
+Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"You are seeing this sponsored content based on non-personalized factors such as device info, location, and age to serve you appropriate content. The experience Creator is {CreatorName}. The sponsorship was paid for by {PayerName}. To learn more, please visit the ""Privacy & Content Maturity"" page under Settings in your account, here:"
+Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"You are seeing this sponsored content based on different factors such as your location, device info, age, and platform behavior, to serve you relevant content. The experience Creator is {CreatorName}. The sponsorship was paid for by {PayerName}. To learn more, please visit the ""Privacy & Content Maturity"" page under Settings in your account, here:"
+Feature.GameDetails.Message.SponsoredDisclosure.U18,"You are seeing this sponsored content based on non-personalized factors such as device info, location, and age to serve you appropriate content. The experience Creator is {CreatorName}. The sponsorship was paid for by {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,We’ll suggest this less often
 Feature.GameDetails.RatingPercentOnly,{percentRating}% Rating
 Feature.GameDetails.Toast.LinkCopied,
@@ -2671,7 +2741,7 @@ Feature.GamepadDisconnect.Label.Message,"Controller for user ""%s"" has been dis
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller for user ""%s"" has been disconnected. Please reconnect your controller."
 Feature.GamepadDisconnect.Label.Title,Missing Controller
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Cancel Request
+Feature.Groups.Action.CancelRequest,Cancel request
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Create Community
@@ -2850,6 +2920,7 @@ Feature.Moments.Description.HowToCaptureStep2,Enable the Capture controls
 Feature.Moments.Description.HowToCaptureStep3,Capture photos and videos of gameplay
 Feature.Moments.Description.LeaveMomentsCreation,"You'll lose all your changes, but you can still find this capture in your <b>Captures</b> gallery."
 Feature.Moments.Description.NoMusicResults,No music found
+Feature.Moments.Description.NonInfiniteScrollEndBody,You've reached a stopping point in Moments. Tap below to keep watching.
 Feature.Moments.Description.NothingHereYet,Nothing here yet...
 Feature.Moments.Description.PublishMoment,Describe your Moment
 Feature.Moments.Description.StayFriendly,Let's keep things friendly
@@ -2861,6 +2932,7 @@ Feature.Moments.Label.CaptureLibrary,Your Capture library
 Feature.Moments.Label.DeleteMomentBody,You can't recover a Moment once it's gone.
 Feature.Moments.Label.DeleteMomentTitle,Delete Moment?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,Check back later or create your own Moment.
 Feature.Moments.Label.FeedEndTitle,You're all caught up
 Feature.Moments.Label.FeedFailedToLoad,Feed failed to load
 Feature.Moments.Label.FeedMyMoments,My Moments
@@ -2879,6 +2951,7 @@ Feature.Moments.Label.MomentUnavailable,Moment unavailable
 Feature.Moments.Label.MomentUnavailableDefault,This Moment isn't available.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,You're all caught up for now
 Feature.Moments.Label.Photos,Photos
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
 Feature.Moments.Label.PublishingRodeoBody,This shouldn't take too long.
@@ -3028,11 +3101,11 @@ Feature.Profile.Description.EnterNicknameTextbox,Enter your nickname
 Feature.Profile.Description.InspectAndBuy,Click to see and shop their look.
 Feature.Profile.Description.NicknamePrivacy,Only {displayName} will see this.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,Only this user will see this.
-Feature.Profile.Description.QrCodeDescription,Let others scan your QR code to connect on Roblox. Age‑checked 13+ users who connect via live QR scan will be Trusted Connections.
+Feature.Profile.Description.QrCodeDescription,Let others scan your QR code to connect on Roblox. Age‑checked 13+ users who connect via live QR scan will be Trusted Friends.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Let others scan your QR code to connect on Roblox. Age-checked 13+ users who connect via live QR scan will be trusted friends.
 Feature.Profile.Description.QrCodeScanning,"Let others scan your Roblox QR code with the QR Scanner, or their device camera, to quickly add you as a friend!"
-Feature.Profile.Description.RecognizeConnectionsByCustomName,Recognize Connections more easily by setting a custom name. Names imported from contacts and custom names are only visible to you.
-Feature.Profile.Description.RecognizeFriendsByCustomName,Recognize friends more easily by setting a custom name. Names imported from contacts and custom names are only visible to you.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,Recognize friends more easily by setting a custom name. Names imported from contacts and custom names are only visible to you.
+Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Let people you know scan your QR code to add you.
 Feature.Profile.Description.SelectNicknameDropdown,Select a name
@@ -3112,7 +3185,7 @@ Feature.Profile.Message.InvalidAliasError,Name cannot be saved. Try another name
 Feature.Profile.Message.NoExperienceAccess,{name} is in an experience that you do not have access to.
 Feature.Profile.Message.QRLoadFailed,Failed to load.
 Feature.Profile.Message.QRNofificationRequest,sent you a friend request from your QR code
-Feature.Profile.Message.QRNotificationRequest,sent you a Connection request from your QR code
+Feature.Profile.Message.QRNotificationRequest,
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,QR Scanner
 Feature.Profile.Tooltip.CurrencyTransfer.Body,You can now send Robux.
@@ -3179,7 +3252,6 @@ Feature.ReportAbuse.Label.FinishChatReport,Finish your chat report
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,Highlight the problem with circles
 Feature.ReportAbuse.Label.HighlightProblemPrecise,Highlight the problem
-Feature.ReportAbuse.Label.NoChatMessagesFound,No chat messages found
 Feature.ReportAbuse.Label.Optional,Optional
 Feature.ReportAbuse.Label.Person,Person
 Feature.ReportAbuse.Label.PleaseSelectOne,Please select one.
@@ -3282,6 +3354,7 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Get Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus unavailable here
 Feature.SafetyDashboard.Heading.AccountStatus,Account status
+Feature.Schools.Label.Classmates,Classmates
 Feature.Screentime.Content.ScreentimeLimitDialog,You've reached your daily screen time limit. Come back tomorrow to access Roblox again.
 Feature.SecurityFeedback.Header.NewLogin,New Activity Alert
 Feature.Settings.Label.Error,
@@ -3373,9 +3446,8 @@ Feature.SettingsHub.Label.Sending,Sending
 Feature.SettingsHub.Label.Show,
 Feature.SettingsHub.Label.Unmute,
 Feature.SettingsHub.Label.VoiceChat,Voice chat
-Feature.SettingsHub.Label.WhichChatOptional,Which Chat? (optional)
 Feature.SettingsHub.Label.WhichPlayer,Which Person?
-Feature.SettingsHub.LanguageSelection.SettingLabel,Experience Language
+Feature.SettingsHub.LanguageSelection.SettingLabel,Game Language
 Feature.SettingsHub.LanguageSelection.Unavailable,
 Feature.SettingsHub.Message.InviteToGameTitle,Come join me in {PLACENAME}
 Feature.SettingsHub.MethodOfAbuse.AvatarSubtitle,This person's avatar is wearing offensive clothing
@@ -3955,18 +4027,14 @@ IAPExperience.U13Confirm.Title.Warning,Warning!
 InGame.Chat.ErrorMessageAnimationPlaying,You cannot play Emotes during this action.
 InGame.Chat.ErrorMessageSwitchToR15,Switch to your R15 avatar to play Emote.
 InGame.Chat.Label.From,From
-InGame.Chat.Label.SystemMessagePrefix,System
-InGame.Chat.Label.TeamMessagePrefix,Team
+InGame.Chat.Label.SystemMessagePrefix,
+InGame.Chat.Label.TeamMessagePrefix,
 InGame.Chat.Label.To,To
 InGame.Chat.Response.EmoteNotAvailable,You can't use that Emote.
 InGame.Chat.Response.EmotesNotSupported,You can't use Emotes here.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,You can't use Emotes right now.
 InGame.Chat.Response.EmotesWrongAvatarType,Only R15 avatars can use Emotes.
-InGame.CommonUI.Badge.BadgeText,BETA
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"Please report abuse if you encounter people breaking our Community Guidelines. If you have opted-in to use voice services, Roblox records voice audio anywhere on the platform for moderation, safety, and for improving our services and tools. By continuing to use the voice services, you consent to Roblox' collection, use, and storage of your voice recordings for those purposes. You can opt-out of voice features at any time."
-InGame.CommonUI.Badge.Popup.HeaderList,You have opted in to one or more of our beta features:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,Keep Playing
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -4165,9 +4233,9 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,Enable Save Permissions
 InGame.NotificationScript2.Capture.Success.ToastText,Capture Saved
 InGame.NotificationScript2.FriendRequestEvent.Accept,You are now friends with {RBX_NAME}!
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Sent you a Connection request!
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Sent you a friend request!
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
-InGame.NotificationScript2.Message.FriendRequestEvent.Sent,Sent you a friend request!
+InGame.NotificationScript2.Message.FriendRequestEvent.Sent,
 InGame.NotificationScript2.Screenshot.ButtonText,Open Folder
 InGame.NotificationScript2.Screenshot.Description,Check out your screenshots folder to see it.
 InGame.NotificationScript2.Screenshot.Title,Screenshot Taken
@@ -4181,9 +4249,9 @@ InGame.NotificationScript2.onBadgeAwardedTitle,Badge Awarded
 InGame.NotificationScript2.onPointsAwarded.multiple,You received {RBX_NUMBER} points!
 InGame.NotificationScript2.onPointsAwarded.single,You received {RBX_NUMBER} point!
 InGame.PlayerDropDown.Accept,
-InGame.PlayerDropDown.Action.ConnectionRequest,Connection Request
+InGame.PlayerDropDown.Action.ConnectionRequest,Friend Request
 InGame.PlayerDropDown.Block,
-InGame.PlayerDropDown.CancelRequest,
+InGame.PlayerDropDown.CancelRequest,Cancel Request
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} is at the max friends limit.
 InGame.PlayerDropDown.Report,

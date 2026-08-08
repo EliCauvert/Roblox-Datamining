@@ -37,7 +37,6 @@ local fFlagLuaAppJoinTextPlayableButton = require(parent.SharedFlags).FFlagLuaAp
 local fFlagLuaAppIconPlayButton = require(parent.SharedFlags).FFlagLuaAppIconPlayButton
 local fFlagLuaAppPlayButtonLoadingSkeleton = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingSkeleton
 local luaAppFixPlayButtonDefaultLaunchSource = game:DefineFastFlag("LuaAppFixPlayButtonDefaultLaunchSource", false)
-local fFlagUpdateActionNeededPlayButtonUi = require(parent.SharedFlags).FFlagUpdateActionNeededPlayButtonUi
 local fFlagLuaAppUnifiedPlayButtonSquadMenuDirection = require(parent.SharedFlags).FFlagLuaAppUnifiedPlayButtonSquadMenuDirection
 local getFFlagUIBloxUseFoundationButton = require(parent.SharedFlags).UIBlox.GetFFlagUIBloxUseFoundationButton
 local fFlagLuaAppPlayButtonOptOutFoundationButton = require(parent.SharedFlags).FFlagLuaAppPlayButtonOptOutFoundationButton
@@ -60,7 +59,7 @@ local play = images["icons/common/play"]
 local truncationCollapse = images["icons/actions/truncationCollapse"]
 local truncationExpand = images["icons/actions/truncationExpand"]
 
-local var15 = function() --[[ line: 86 ]] end
+local var15 = function() --[[ line: 84 ]] end
 
 local var16 = if fFlagLuaAppDemoModePlayButton then require(script.Parent.ButtonHeightSizeKeyByInputSize) else {
 	[inputSize.XSmall] = "Size_600",
@@ -69,20 +68,20 @@ local var16 = if fFlagLuaAppDemoModePlayButton then require(script.Parent.Button
 	[inputSize.Large] = "Size_1200"
 }
 
-return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
-	-- upvalues: reactModule (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), gamesProductInfoReducer (ref), tutilsModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), fFlagLuaAppDemoModePlayButton (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), usePlayButtonStateModule (ref), playButtonStatesModule (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), useOnPlayButtonCallbackModule (ref), luaAppFixPlayButtonDefaultLaunchSource (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), useOnPlaySquadButtonCallbackModule (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), usePlayOnReleaseAfterUnmountModule (ref), fFlagSduiExperienceDetailsSupport (ref), useLocalization (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagUpdateActionNeededPlayButtonUi (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), useUserExperiment (ref), appUserLayers (ref), fFlagLuaAppLogExposurePlayButtonUX (ref), IXPService (ref), useTokens (ref), fFlagLuaAppPlayButtonViewRefactor (ref), playButtonGroupViewModule (ref), playButtonViewModule (ref), inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), var16 (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), var14 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), comboButton (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var15 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref)
+return reactModule.memo(function(p0) --[[ line: 183 | named "PlayButton" ]]
+	-- upvalues: reactModule (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), gamesProductInfoReducer (ref), tutilsModule (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), fFlagLuaAppDemoModePlayButton (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), usePlayButtonStateModule (ref), playButtonStatesModule (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), useOnPlayButtonCallbackModule (ref), luaAppFixPlayButtonDefaultLaunchSource (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), useOnPlaySquadButtonCallbackModule (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), usePlayOnReleaseAfterUnmountModule (ref), fFlagSduiExperienceDetailsSupport (ref), useLocalization (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), useUserExperiment (ref), appUserLayers (ref), fFlagLuaAppLogExposurePlayButtonUX (ref), IXPService (ref), useTokens (ref), fFlagLuaAppPlayButtonViewRefactor (ref), playButtonGroupViewModule (ref), playButtonViewModule (ref), inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), var16 (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), var14 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), comboButton (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var15 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref)
 	local var17 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 187 ]]
+	reactModule.useEffect(function() --[[ line: 185 ]]
 		-- upvalues: var17 (ref)
 		var17.current = true
 		
-		return function() --[[ line: 189 ]]
+		return function() --[[ line: 187 ]]
 			-- upvalues: var17 (copy)
 			var17.current = false
 		end
 	end, {})
 	local var18 = useRoactService(roactNetworking)
-	local var19 = useSelector(function(p1) --[[ line: 195 ]]
+	local var19 = useSelector(function(p1) --[[ line: 193 ]]
 		-- upvalues: p0 (ref), gamesProductInfoReducer (copy)
 		return if p0.universeId then p1[gamesProductInfoReducer.key][p0.universeId] else nil
 	end, tutilsModule.shallowEqual)
@@ -113,7 +112,7 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 	
 	if fFlagLuaAppDemoModePlayButton then
 		local useCallback = reactModule.useCallback
-		useCallback = useCallback(function(p2) --[[ line: 266 ]]
+		useCallback = useCallback(function(p2) --[[ line: 264 ]]
 			-- upvalues: fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 (ref), var17 (ref), p0 (ref), playButtonStatesModule (copy), var26 (ref)
 			if p2 == nil then return end
 			if not fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and not var17.current then return end
@@ -133,16 +132,16 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 			p0.onActivated,
 			if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce or fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 else nil
 		})
-		var31 = reactModule.useCallback(function() --[[ line: 303 ]]
+		var31 = reactModule.useCallback(function() --[[ line: 301 ]]
 			-- upvalues: useCallback (ref), playButtonState (write)
 			useCallback(playButtonState)
 		end, { useCallback, playButtonState })
-		var30 = reactModule.useCallback(function() --[[ line: 307 ]]
+		var30 = reactModule.useCallback(function() --[[ line: 305 ]]
 			-- upvalues: useCallback (ref), var23 (write)
 			useCallback(var23)
 		end, { useCallback, var23 })
 	else
-		var31 = reactModule.useCallback(function() --[[ line: 312 ]]
+		var31 = reactModule.useCallback(function() --[[ line: 310 ]]
 			-- upvalues: fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 (ref), var17 (ref), p0 (ref), playButtonState (write), playButtonStatesModule (copy), var26 (ref)
 			if not fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and not var17.current then return end
 			if p0.onActivated then
@@ -164,7 +163,7 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 	local var33 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and var32 then var32.playButtonRef else nil
 	local var34 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 and var32 then var32.loadingCaptureRef else nil
 	local var35 = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountForce_1 then var32.onActivated else var31
-	local var36 = reactModule.useCallback(function(p3) --[[ line: 362 ]]
+	local var36 = reactModule.useCallback(function(p3) --[[ line: 360 ]]
 		-- upvalues: var17 (ref), p0 (ref), var28 (ref)
 		if not var17.current then return end
 		if p0.onActivated then
@@ -174,7 +173,7 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 	end, { var28, p0.onActivated })
 	
 	if fFlagSduiExperienceDetailsSupport then
-		reactModule.useEffect(function() --[[ line: 373 ]]
+		reactModule.useEffect(function() --[[ line: 371 ]]
 			-- upvalues: p0 (ref), var35 (ref)
 			local onRegisterActivation = p0.onRegisterActivation
 			
@@ -186,19 +185,19 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 	end
 	local var37 = useLocalization({
 		join = "Feature.ExperienceDetails.PlayButtonText.ActionNeeded",
+		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
 		joinWithParty = "Feature.Squads.Action.JoinWithParty",
 		unavailable = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 		waitingForParty = "Feature.Squads.Action.WaitingForParty",
 		play = if fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
-		playDemo = if fFlagLuaAppDemoModePlayButton then "Feature.ExperienceDetails.PlayButtonText.PlayDemo" else nil,
-		unlock = if fFlagUpdateActionNeededPlayButtonUi then "Feature.ExperienceDetails.PlayButtonText.Unlock" else nil
+		playDemo = if fFlagLuaAppDemoModePlayButton then "Feature.ExperienceDetails.PlayButtonText.PlayDemo" else nil
 	})
 	local var38 = nil
 	local var39 = nil
 	local var40 = nil
 	
 	if fFlagLuaAppUnifyPlayButtonAllSurfacesIxp then
-		local var41, var42, var43 = useUserExperiment({ appUserLayers.PlayButtonUXExposureLayer }, function(p4) --[[ line: 396 ]]
+		local var41, var42, var43 = useUserExperiment({ appUserLayers.PlayButtonUXExposureLayer }, function(p4) --[[ line: 394 ]]
 			-- upvalues: appUserLayers (copy)
 			local playButtonUXExposureLayer = p4[appUserLayers.PlayButtonUXExposureLayer] or {}
 			
@@ -209,7 +208,7 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 		var40 = var43
 	end
 	if fFlagLuaAppLogExposurePlayButtonUX then
-		reactModule.useEffect(function() --[[ line: 405 ]]
+		reactModule.useEffect(function() --[[ line: 403 ]]
 			-- upvalues: IXPService (copy), appUserLayers (copy)
 			IXPService:LogUserLayerExposure(appUserLayers.PlayButtonUXExposureLayer)
 		end, {})
@@ -330,14 +329,8 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 		subtle = buttonVariant.Emphasis
 		var53 = p0.fiatText or (if var19 then var19.localizedFiatPrice else "")
 	elseif playButtonState == playButtonStatesModule.ActionNeeded then
-		if fFlagUpdateActionNeededPlayButtonUi then
-			subtle = buttonVariant.Emphasis
-			var53 = var37.unlock
-		else
-			subtle = buttonVariant.SubEmphasis
-			var52 = "icons/status/private"
-			var53 = if p0.hideOptionalText then nil else var37.join
-		end
+		subtle = buttonVariant.Emphasis
+		var53 = var37.unlock
 	elseif playButtonState == playButtonStatesModule.UnplayableOther then
 		if p0.hideIfUnplayable then
 			return nil
@@ -363,12 +356,12 @@ return reactModule.memo(function(p0) --[[ line: 185 | named "PlayButton" ]]
 				icon = var52,
 				text = var53,
 				isDisabled = var47,
-				onActivated = if not var47 then var35 else function() --[[ line: 605 ]] end
+				onActivated = if not var47 then var35 else function() --[[ line: 597 ]] end
 			},
 			overflow = {
 				icon = if fFlagLuaAppUnifiedPlayButtonSquadMenuDirection and var27 == menuDirection.Down then truncationExpand else truncationCollapse,
 				isDisabled = var46,
-				onActivated = if not var46 then var36 else function() --[[ line: 613 ]] end
+				onActivated = if not var46 then var36 else function() --[[ line: 605 ]] end
 			},
 			testId = p0.testId
 		})

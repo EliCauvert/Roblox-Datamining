@@ -13,23 +13,24 @@ local appHeaderBarModule = require(parent.AppHeaderBar)
 local navButtonType = require(sduiSharedUtilities.SduiIntegrationTypes).NavButtonType
 local useScrollAwayHeaderPositionModule = require(sduiSharedUtilities.useScrollAwayHeaderPosition)
 local fFlagLuaAppSduiPageEntryScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiPageEntryScrollAway
+local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 
-local function calculateSize(p0) --[[ line: 40 ]]
+local function calculateSize(p0) --[[ line: 41 ]]
 	-- upvalues: getDisplayStore (ref)
 	local var9 = getDisplayStore(p0)
 	
 	return UDim2.new(1, 0, 0, var9.getTopBarHeight(p0) - var9.getGuiInset(p0).top or 0)
 end
 
-return reactModule.memo(function(p1) --[[ line: 48 | named "SduiPageNavigationHeader" ]]
-	-- upvalues: useTokens (ref), usePreferredInput (ref), responsiveModule (ref), signalsReactModule (ref), calculateSize (ref), reactModule (ref), navButtonType (ref), iconButton (ref), foundationModule (ref), builderIconsModule (ref), appHeaderBarModule (ref), fFlagLuaAppSduiPageEntryScrollAway (ref), useScrollAwayHeaderPositionModule (ref)
+return reactModule.memo(function(p1) --[[ line: 49 | named "SduiPageNavigationHeader" ]]
+	-- upvalues: useTokens (ref), usePreferredInput (ref), responsiveModule (ref), signalsReactModule (ref), calculateSize (ref), reactModule (ref), navButtonType (ref), iconButton (ref), foundationModule (ref), builderIconsModule (ref), appHeaderBarModule (ref), fFlagLuaAppSduiPageEntryScrollAway (ref), useScrollAwayHeaderPositionModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
 	local closeCallback = p1.closeCallback
 	local var10 = useTokens()
 	local var11 = usePreferredInput() == responsiveModule.Input.Directional
 	local var12 = signalsReactModule.useSignalBinding(calculateSize)
-	local var13 = reactModule.useMemo(function() --[[ line: 56 ]]
+	local var13 = reactModule.useMemo(function() --[[ line: 57 ]]
 		-- upvalues: var11 (ref), closeCallback (ref), p1 (ref), navButtonType (copy), reactModule (copy), var10 (ref), iconButton (copy), foundationModule (copy), builderIconsModule (copy)
-		return if var11 or not closeCallback or p1.navButtonType ~= navButtonType.back and p1.navButtonType ~= navButtonType.close then nil else function() --[[ line: 61 ]]
+		return if var11 or not closeCallback or p1.navButtonType ~= navButtonType.back and p1.navButtonType ~= navButtonType.close then nil else function() --[[ line: 62 ]]
 			-- upvalues: reactModule (copy), var10 (copy), iconButton (copy), closeCallback (copy), foundationModule (copy), p1 (copy), navButtonType (copy), builderIconsModule (copy)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -83,7 +84,11 @@ return reactModule.memo(function(p1) --[[ line: 48 | named "SduiPageNavigationHe
 			BorderSizePixel = 0,
 			BackgroundColor3 = var10.Color.Surface.Surface_0.Color3,
 			Size = var12,
-			Position = useScrollAwayHeaderPositionModule({ sizeBinding = var12, enabled = p1.scrollAwayHeader }),
+			Position = useScrollAwayHeaderPositionModule({
+				sizeBinding = if fFlagLuaAppSduiStickyHeaderScrollAway then nil else var12,
+				enabled = p1.scrollAwayHeader,
+				scrollAwayHeight = if fFlagLuaAppSduiStickyHeaderScrollAway and p1.scrollAwayHeader then var12:getValue().Y.Offset else nil
+			}),
 			AutomaticSize = if var13 then Enum.AutomaticSize.Y else nil
 		}, t)
 	}) else reactModule.createElement("Frame", {

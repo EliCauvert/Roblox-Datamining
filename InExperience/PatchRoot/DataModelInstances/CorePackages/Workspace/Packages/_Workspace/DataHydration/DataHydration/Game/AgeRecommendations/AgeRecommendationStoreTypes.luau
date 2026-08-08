@@ -2,18 +2,22 @@
 local parent = dataHydration.Parent
 local _ = require(dataHydration.DataHydrationTypes)
 local tModule = require(parent.t)
-local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
+local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
+local var3 = tModule.interface({
+	displayName = tModule.optional(tModule.string),
+	displayNameWithHeaderShort = tModule.optional(tModule.string),
+	igrsRating = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
+	igrsRatingDisplayMessage = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
+	minimumAgeDisplay = if fFlagShowGameAgeRating then tModule.optional(tModule.string) else nil
+})
 
 return {
 	ageRecommendationResponseValidator = tModule.interface({
 		ageRecommendationDetails = tModule.interface({
 			summary = tModule.interface({
-				ageRecommendation = tModule.interface({
-					displayName = tModule.optional(tModule.string),
-					displayNameWithHeaderShort = tModule.optional(tModule.string),
-					igrsRating = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
-					igrsRatingDisplayMessage = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
-				})
+				ageRecommendation = if fFlagShowGameAgeRating then tModule.optional(var3) else var3
 			})
 		})
 	})

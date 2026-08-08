@@ -6,5 +6,6 @@
 	Catalog = "Catalog",
 	InExperienceShopHome = "InExperienceShopHome",
 	InExperienceShopDetails = "InExperienceShopDetails",
-	InExperienceShopSearch = "InExperienceShopSearch"
+	InExperienceShopSearch = "InExperienceShopSearch",
+	Profile = "Profile"
 }

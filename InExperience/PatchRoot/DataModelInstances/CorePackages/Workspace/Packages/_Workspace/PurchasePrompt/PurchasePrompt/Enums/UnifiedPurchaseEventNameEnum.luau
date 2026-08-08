@@ -5,5 +5,8 @@
 	RobuxUpsellModalBuyClicked = "RobuxUpsellModalBuyClicked",
 	ItemPurchaseSuccess = "ItemPurchaseSuccess",
 	SubscriptionUpsellBannerShown = "SubscriptionUpsellBannerShown",
-	SubscriptionUpsellBannerClicked = "SubscriptionUpsellBannerClicked"
+	SubscriptionUpsellBannerClicked = "SubscriptionUpsellBannerClicked",
+	LaunchAfterPurchaseButtonShown = "LaunchAfterPurchaseButtonShown",
+	LaunchAfterPurchaseButtonClicked = "LaunchAfterPurchaseButtonClicked",
+	ExperienceLaunchedAfterPurchase = "ExperienceLaunchedAfterPurchase"
 }

@@ -76,7 +76,7 @@ local function useDynamicInExpConfigWithKeyGuard(p2, p3) --[[ line: 76 ]]
 		var17(nil)
 		var19(false)
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-		fetchConfigWithAttributesModule(var14, inExperience, p3):andThen(function(p5) --[[ line: 144 ]]
+		fetchConfigWithAttributesModule(var14, inExperience, p3):andThen(function(p5) --[[ line: 142 ]]
 			-- upvalues: var20 (copy), var22 (ref), var8 (copy), var15 (copy), var17 (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), telemetryEventType (copy), unixTimestampMillis (ref)
 			if var20.current == var22 then
 				local responseBody = p5.responseBody
@@ -104,7 +104,7 @@ local function useDynamicInExpConfigWithKeyGuard(p2, p3) --[[ line: 76 ]]
 				
 				return
 			end
-		end):catch(function(p4) --[[ line: 170 ]]
+		end):catch(function(p4) --[[ line: 168 ]]
 			-- upvalues: var20 (copy), var22 (ref), var19 (copy), dashModule (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), getNewRunId (copy), telemetryEventType (copy)
 			if var20.current == var22 then
 				warn("Failed to fetch Dynamic Report V2 config:", p4)
@@ -135,13 +135,13 @@ local function useDynamicInExpConfigWithKeyGuard(p2, p3) --[[ line: 76 ]]
 	}
 end
 
-local function useDynamicInExpConfigLegacy(p6, p7) --[[ line: 204 ]]
+local function useDynamicInExpConfigLegacy(p6, p7) --[[ line: 202 ]]
 	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), getCacheKey (ref), inExperience (ref), var8 (write), sendAnalyticsEvent (ref), telemetryEventType (ref), fetchConfigWithAttributesModule (ref), dashModule (ref), getNewRunId (ref)
 	local var23 = useRoactService(roactNetworking)
 	local var24, var25 = reactModule.useState(nil)
 	local var26, var27 = reactModule.useState(false)
 	local var28 = reactModule.useRef(0)
-	reactModule.useEffect(function() --[[ line: 210 ]]
+	reactModule.useEffect(function() --[[ line: 208 ]]
 		-- upvalues: p6 (ref), var25 (ref), getCacheKey (copy), inExperience (copy), p7 (ref), var8 (copy), var27 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var28 (ref), fetchConfigWithAttributesModule (copy), var23 (ref), dashModule (copy), getNewRunId (copy)
 		if not p6 then
 			var25(nil)
@@ -172,7 +172,7 @@ local function useDynamicInExpConfigLegacy(p6, p7) --[[ line: 204 ]]
 		var25(nil)
 		var27(false)
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-		fetchConfigWithAttributesModule(var23, inExperience, p7):andThen(function(p9) --[[ line: 254 ]]
+		fetchConfigWithAttributesModule(var23, inExperience, p7):andThen(function(p9) --[[ line: 250 ]]
 			-- upvalues: var28 (copy), var30 (ref), var8 (copy), var29 (ref), var25 (copy), sendAnalyticsEvent (copy), inExperience (copy), p7 (copy), telemetryEventType (copy), unixTimestampMillis (ref)
 			if var28.current == var30 then
 				local responseBody = p9.responseBody
@@ -200,7 +200,7 @@ local function useDynamicInExpConfigLegacy(p6, p7) --[[ line: 204 ]]
 				
 				return
 			end
-		end):catch(function(p8) --[[ line: 277 ]]
+		end):catch(function(p8) --[[ line: 273 ]]
 			-- upvalues: var28 (copy), var30 (ref), var27 (copy), dashModule (copy), sendAnalyticsEvent (copy), inExperience (copy), p7 (copy), getNewRunId (copy), telemetryEventType (copy)
 			if var28.current == var30 then
 				warn("Failed to fetch Dynamic Report V2 config:", p8)
@@ -233,7 +233,7 @@ end
 
 return {
 	CONFIG_CACHE_TTL_MS = 1800000,
-	useDynamicInExpConfig = function(p10, p11) --[[ line: 309 ]]
+	useDynamicInExpConfig = function(p10, p11) --[[ line: 305 ]]
 		-- upvalues: fFlagFixAbuseReportInExpPhantomAnalyticsModule (ref), useDynamicInExpConfigWithKeyGuard (ref), useDynamicInExpConfigLegacy (ref)
 		return if fFlagFixAbuseReportInExpPhantomAnalyticsModule then useDynamicInExpConfigWithKeyGuard(p10, p11) else useDynamicInExpConfigLegacy(p10, p11)
 	end,

@@ -74,13 +74,13 @@ return {
 	},
 	{
 		kind = "skeleton",
-		getKey = function(_) --[[ line: 149 ]]
+		getKey = function(_) --[[ line: 151 ]]
 			return "__feed_skeleton__"
 		end,
-		getAttribution = function(_) --[[ line: 154 ]]
+		getAttribution = function(_) --[[ line: 156 ]]
 			return nil
 		end,
-		render = function(_, _) --[[ line: 158 ]]
+		render = function(_, _) --[[ line: 160 ]]
 			-- upvalues: reactModule (ref), momentItemSkeletonModule (ref)
 			return reactModule.createElement(momentItemSkeletonModule)
 		end

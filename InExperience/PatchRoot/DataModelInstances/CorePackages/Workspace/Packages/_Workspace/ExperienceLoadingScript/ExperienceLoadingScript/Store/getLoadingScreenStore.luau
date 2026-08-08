@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("ExperienceLoadingScript").Parent.Signals).createComputed(require(script.Parent.createLoadingScreenStore))

@@ -4,6 +4,8 @@ local _ = require(whatsNew.Types)
 local foundationModule = require(whatsNew.Parent.Foundation)
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
+local roseWhatsNewTourPublishedTime = game:DefineFastString("RoseWhatsNewTourPublishedTime", "2026-08-12T00:00:00Z")
+local roseWhatsNewTourDisabledTime = game:DefineFastString("RoseWhatsNewTourDisabledTime", "2026-09-30T00:00:00Z")
 
 return {
 	constants = constantsModule.DEFAULT,
@@ -31,9 +33,10 @@ return {
 			text = "CoreScripts.FTUX.Label.SideSheetUpdate",
 			icon = "",
 			enabled = true,
-			publishedTime = "2026-05-01T00:00:00Z",
 			side = popoverSide.Right,
-			align = popoverAlign.Center
+			align = popoverAlign.Center,
+			publishedTime = roseWhatsNewTourPublishedTime,
+			disabledTime = roseWhatsNewTourDisabledTime
 		},
 		{
 			id = "LeaveRespawn",
@@ -43,9 +46,10 @@ return {
 			text = "CoreScripts.FTUX.Label.LeaveRespawn",
 			icon = "",
 			enabled = true,
-			publishedTime = "2026-05-01T00:00:00Z",
 			side = popoverSide.Right,
-			align = popoverAlign.End
+			align = popoverAlign.End,
+			publishedTime = roseWhatsNewTourPublishedTime,
+			disabledTime = roseWhatsNewTourDisabledTime
 		}
 	},
 	onboarding = {
@@ -57,8 +61,9 @@ return {
 			text = "CoreScripts.FTUX.Label.SocialOnboarding",
 			icon = "",
 			enabled = true,
-			publishedTime = "2026-05-01T00:00:00Z",
-			align = popoverAlign.Start
+			align = popoverAlign.Start,
+			publishedTime = roseWhatsNewTourPublishedTime,
+			disabledTime = roseWhatsNewTourDisabledTime
 		},
 		{
 			id = "SideSheet",
@@ -68,9 +73,10 @@ return {
 			text = "CoreScripts.FTUX.Label.SideSheetOnboarding",
 			icon = "",
 			enabled = true,
-			publishedTime = "2026-05-01T00:00:00Z",
 			side = popoverSide.Right,
-			align = popoverAlign.Center
+			align = popoverAlign.Center,
+			publishedTime = roseWhatsNewTourPublishedTime,
+			disabledTime = roseWhatsNewTourDisabledTime
 		},
 		{
 			id = "LeaveRespawn",
@@ -80,9 +86,10 @@ return {
 			text = "CoreScripts.FTUX.Label.LeaveRespawn",
 			icon = "",
 			enabled = true,
-			publishedTime = "2026-05-01T00:00:00Z",
 			side = popoverSide.Right,
-			align = popoverAlign.End
+			align = popoverAlign.End,
+			publishedTime = roseWhatsNewTourPublishedTime,
+			disabledTime = roseWhatsNewTourDisabledTime
 		}
 	}
 }

@@ -10,44 +10,49 @@ local sharePublishedExperience = require(buildExperience.utils.sharePublishedExp
 local sharePrivateExperienceModule = require(buildExperience.utils.sharePrivateExperience)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local fFlagBuildExperienceShareUseUniverseSummary = require(parent.SharedFlags).FFlagBuildExperienceShareUseUniverseSummary
 local privacyType = universeConfigurationModule.PrivacyType
 local var9 = signalsModule.createSignal(nil)
 
-return function(p0, p1) --[[ line: 58 | named "useExperienceShareFlow" ]]
-	-- upvalues: reactModule (ref), universeConfigurationModule (ref), signalsReactModule (ref), var9 (ref), sharePublishedExperience (ref), gameConfigurationLabelsModule (ref), privacyType (ref), fFlagBuildExperiencePrivateInvitesModule (ref), sendBuildExperienceEventModule (ref), sharePrivateExperienceModule (ref), logger (ref)
-	local var10 = reactModule.useMemo(function() --[[ line: 59 ]]
-		-- upvalues: p0 (ref), universeConfigurationModule (copy)
-		return if p0 == nil then nil else universeConfigurationModule.getUniverseConfigurationStore().getAndFetchConfiguration(p0)
-	end, { p0 })
-	local var11 = signalsReactModule.useSignalState(if var10 ~= nil then var9 else var10.data)
+return function(p0, p1) --[[ line: 59 | named "useExperienceShareFlow" ]]
+	-- upvalues: reactModule (ref), var9 (ref), universeConfigurationModule (ref), fFlagBuildExperienceShareUseUniverseSummary (ref), signalsReactModule (ref), sharePublishedExperience (ref), gameConfigurationLabelsModule (ref), privacyType (ref), fFlagBuildExperiencePrivateInvitesModule (ref), sendBuildExperienceEventModule (ref), sharePrivateExperienceModule (ref), logger (ref)
+	local var10 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 60 ]]
+		-- upvalues: p0 (ref), var9 (copy), universeConfigurationModule (copy), fFlagBuildExperienceShareUseUniverseSummary (copy)
+		if p0 == nil then
+			return var9
+		end
+		local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
+		
+		return if fFlagBuildExperienceShareUseUniverseSummary then universeConfigurationStore.getAndFetchSummary(p0).data else universeConfigurationStore.getAndFetchConfiguration(p0).data
+	end, { p0 }))
 	local none, none_1 = reactModule.useState("none")
-	local var14, var15 = reactModule.useState(false)
-	local var16 = reactModule.useCallback(function() --[[ line: 74 ]]
-		-- upvalues: var15 (ref), none_1 (ref)
-		var15(false)
+	local var13, var14 = reactModule.useState(false)
+	local var15 = reactModule.useCallback(function() --[[ line: 80 ]]
+		-- upvalues: var14 (ref), none_1 (ref)
+		var14(false)
 		none_1("none")
 	end, {})
-	local var17 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var16 = reactModule.useCallback(function() --[[ line: 85 ]]
 		-- upvalues: p1 (ref), sharePublishedExperience (copy)
 		if p1 ~= nil then
 			sharePublishedExperience(p1)
 		end
 	end, { p1 })
-	local var18 = reactModule.useMemo(function() --[[ line: 88 ]]
-		-- upvalues: gameConfigurationLabelsModule (copy), var11 (ref)
-		return gameConfigurationLabelsModule.getAudience(var11)
-	end, { var11 })
+	local var17 = reactModule.useMemo(function() --[[ line: 94 ]]
+		-- upvalues: gameConfigurationLabelsModule (copy), var10 (ref)
+		return gameConfigurationLabelsModule.getAudience(var10)
+	end, { var10 })
 	
 	return {
-		onShare = reactModule.useCallback(function() --[[ line: 94 ]]
-			-- upvalues: var18 (ref), privacyType (copy), fFlagBuildExperiencePrivateInvitesModule (copy), none_1 (ref), p0 (ref), sendBuildExperienceEventModule (copy), var17 (ref)
-			if var18 ~= privacyType.Private then
-				if var18 == privacyType.FriendsOnly then
+		onShare = reactModule.useCallback(function() --[[ line: 100 ]]
+			-- upvalues: var17 (ref), privacyType (copy), fFlagBuildExperiencePrivateInvitesModule (copy), none_1 (ref), p0 (ref), sendBuildExperienceEventModule (copy), var16 (ref)
+			if var17 ~= privacyType.Private then
+				if var17 == privacyType.FriendsOnly then
 					none_1("friends")
 					
 					return
-				elseif var18 == privacyType.Public then
-					var17()
+				elseif var17 == privacyType.Public then
+					var16()
 				end
 			elseif fFlagBuildExperiencePrivateInvitesModule then
 				none_1("playtesters")
@@ -58,30 +63,30 @@ return function(p0, p1) --[[ line: 58 | named "useExperienceShareFlow" ]]
 					sendBuildExperienceEventModule("PLAYTEST_SHARE_DIALOG_IMPRESSION", { universeId = p0 })
 				end
 			end
-		end, { var18, var17, p0 }),
-		audience = var18,
+		end, { var17, var16, p0 }),
+		audience = var17,
 		activeDialog = none,
-		hasShareError = var14,
-		onCancelDialog = var16,
-		onConfirmFriends = reactModule.useCallback(function() --[[ line: 114 ]]
-			-- upvalues: none_1 (ref), var17 (ref)
+		hasShareError = var13,
+		onCancelDialog = var15,
+		onConfirmFriends = reactModule.useCallback(function() --[[ line: 120 ]]
+			-- upvalues: none_1 (ref), var16 (ref)
 			none_1("none")
-			var17()
-		end, { var17 }),
-		onConfirmPlaytesters = reactModule.useCallback(function() --[[ line: 119 ]]
-			-- upvalues: p0 (ref), sendBuildExperienceEventModule (copy), var15 (ref), sharePrivateExperienceModule (copy), none_1 (ref), logger (copy)
+			var16()
+		end, { var16 }),
+		onConfirmPlaytesters = reactModule.useCallback(function() --[[ line: 125 ]]
+			-- upvalues: p0 (ref), sendBuildExperienceEventModule (copy), var14 (ref), sharePrivateExperienceModule (copy), none_1 (ref), logger (copy)
 			if p0 == nil then
 				return
 			end
 			sendBuildExperienceEventModule("PLAYTEST_SHARE_CLICK", { universeId = p0 }, { source = "playtesters_dialog" })
-			var15(false)
-			sharePrivateExperienceModule(p0):andThen(function() --[[ line: 131 ]]
+			var14(false)
+			sharePrivateExperienceModule(p0):andThen(function() --[[ line: 137 ]]
 				-- upvalues: none_1 (copy)
 				none_1("none")
-			end):catch(function(p2) --[[ line: 134 ]]
-				-- upvalues: logger (copy), p0 (copy), var15 (copy)
+			end):catch(function(p2) --[[ line: 140 ]]
+				-- upvalues: logger (copy), p0 (copy), var14 (copy)
 				logger:warning("useExperienceShareFlow: private share failed for universe {}: {}", p0, p2)
-				var15(true)
+				var14(true)
 			end)
 		end, { p0 })
 	}

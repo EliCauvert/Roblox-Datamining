@@ -14,5 +14,6 @@
 	mountCreatorAgentResumeToastReceiver = require(script.mountCreatorAgentResumeToastReceiver),
 	mountPublishGameSheet = require(script.mountPublishGameSheet),
 	sendBuildExperienceEvent = require(script.Telemetry.sendBuildExperienceEvent),
+	UnpublishedPlaytestModeTooltip = require(script.Components.UnpublishedPlaytestModeTooltip.UnpublishedPlaytestModeTooltip),
 	["jest.config"] = script["jest.config"]
 }

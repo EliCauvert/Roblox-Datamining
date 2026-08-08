@@ -127,11 +127,30 @@ Common.Presence.Label.Invisible,Tidak Terlihat
 Common.Presence.Label.Offline,Offline
 Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,Skor kualitas tidak dapat dihitung dengan benar karena data input salah atau tidak lengkap. Periksa model Anda atau ajukan laporan bug
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasi terlalu panjang ({duration} detik). Animasi emote harus berdurasi maksimal {maxLength} detik.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasi terlalu pendek ({duration} detik). Animasi emote harus berdurasi lebih dari {minLength} detik.
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Tubuhmu berisi komponen mesh kecil yang terputus (mesh island). Hapus geometri yang mengambang dan pastikan semua bagian mesh tersambung dengan benar.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Kualitas aset: {partName} memiliki {num_disconnected_components} komponen yang terputus, yang melebihi batas maksimum {max_disconnected_components}."
+Common.UGCValidation.ErrorLabel.AQSInputDataError,Skor kualitas tidak dapat dihitung dengan benar karena data input salah atau tidak lengkap. Periksa model Anda atau ajukan laporan bug
 Common.UGCValidation.ErrorLabel.AQSInternalError,"Skor tidak dapat dibuat karena Kesalahan Kualitas Aset. Periksa kebenaran data input dan coba lagi, atau ajukan laporan bug."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Peringatan kualitas aset: Skor jarak antara cage dan mesh adalah {score}. Jarak maksimal antara cage luar dan mesh adalah {max_distance}, {negative_sdf_percent}% dari verteks cage luar berada di dalam mesh render."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Peringatan kualitas aset: Skor jarak cage tubuh adalah{score}. Jarak maksimal antara cage tubuh dan mesh adalah{max_distance}, {negative_sdf_percent}% dari verteks cage tubuh berada di dalam mesh tubuh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Peringatan kualitas aset: Skor jarak cage kepala adalah {score}. Jarak maksimal antara cage kepala dan mesh adalah {max_distance}, {negative_sdf_percent}% dari verteks cage kepala berada di dalam mesh kepala."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Peringatan kualitas aset: Skor relevansi cage adalah {score}. {irrelevant_percent}% dari verteks cage luar yang dimodifikasi tidak mencakup aksesori.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Peringatan kualitas aset: Skor UV cage adalah {score} untuk {cage_name}. Jumlah UV salah: {incorrect_uv_count}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Kualitas aset: {partName} memiliki {degenerate_triangle_percent}% segitiga degenerasi (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Peringatan kualitas aset: Skor ekspresi kepala dinamis adalah {score}.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Kualitas aset: konfigurasi sendi mendapat skor {score} (sendi: {joint_number}, tangan kiri: {left_hand_joint_number}, tangan kanan: {right_hand_joint_number})."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Kualitas aset: {partName} memiliki {num_small_volume_islands} pulau kecil yang terputus dari {num_disconnected_components} komponen (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,Kualitas aset: {partName} memiliki masalah manifold mesh (skor: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Kualitas aset: Mesh {partName} tidak tertutup rapat ({boundary_edges_percent}% tepi batas).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Peringatan kualitas aset: Skor containment mesh adalah {score}. {mesh_outside_outer_cage_percent}% dari verteks mesh berada di luar cage luar.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Skor kualitas aset untuk {measureName} tidak dapat dihitung karena data input tidak lengkap atau tidak valid. Ini tidak memblokir upload-mu.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Kualitas aset: tekstur {textureName} memiliki kompleksitas rendah (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Kualitas aset: tekstur {textureName} memiliki resolusi {texture_width}x{texture_height} (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Kualitas aset: {partName} memiliki {intersecting_tri_face_percent}% permukaan segitiga yang berpotongan (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Kualitas aset: {partName} memiliki {uv_outside_bound_vert_percent}% verteks UV di luar batas (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Kualitas aset: {partName} memiliki {similar_vertex_percent}% verteks yang serupa (skor: {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handel terikat ke sendi {jointName}, yang bukan bagian dari skema yang diizinkan. Hanya sendi R15 standar dan sendi transfer skinning yang diizinkan."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} harus menggunakan transfer skinning, tetapi kamu tidak memiliki sendi yang diperlukan {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handel terikat ke sendi {jointName}, tetapi aset ini harus di-skin secara otomatis. Kamu hanya boleh melakukan skinning ke {validJointNameList}."
@@ -146,8 +165,10 @@ Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Instance berikut buka
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Aset yang di-upload seharusnya berupa {ExpectedClass}, tetapi terdeteksi sebagai {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Aset yang di-upload seharusnya diberi nama {ExpectedClass}, tetapi saat ini bernama {RootClass}."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Bagian tubuh '{bodyPartName}' di CurveAnimation memiliki track Posisi (translasi). Bagian tubuh animasi hanya boleh diputar; track posisi tidak diizinkan. Hapus track Posisi dari bagian tubuh ini.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Bagian tubuh '{bodyPartName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi bagian tubuh tersebut.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation berisi tulang HRD/DRD dan bagian tubuh '{bodyPartName}' memiliki track Posisi (translasi). Jika ada tulang dalam animasi, tidak ada bagian tubuh yang boleh melakukan translasi untuk mencegah pemisahan sendi. Hapus semua track Posisi dari bagian tubuh."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Tulang {boneName} di CurveAnimation memiliki track Posisi (translasi). Tulang HRD/DRD hanya boleh diputar; track posisi menyebabkan pemisahan sendi dan tidak diizinkan. Hapus animasi posisi dari tulang ini.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Tulang '{boneName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi tulang tersebut.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation berisi folder tulang HRD/DRD yang belum didukung. Hapus semua subfolder tulang sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Bagian tubuh dalam CurveAnimation tidak boleh lebih rendah dari {minHeight} kotak atau berjarak lebih dari {maxDistance} kotak dari HumanoidRootPart. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,"Child CurveAnimation, MarkerCurves dan AnimationRigData, tidak dapat memiliki child"
@@ -192,6 +213,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Tidak dapat mendeteksi e
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Kepala Dinamis di marketplace harus dianimasikan, tetapi kepala ini tidak memiliki data FACS."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kanan agar sesuai dengan posisi mata kanan di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Tidak dapat mendeteksi ekspresi cemberut untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi cemberut.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Aset ini menggunakan peta emisif yang hanya tersedia untuk kreator dalam Program Kreator Tepercaya. Hapus semua konten peta emisif atau gabung ke program sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti InternalOverrideFACSData pada FaceControls harus kosong saat proses upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FAC terdeteksi memperkecil kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
@@ -207,6 +229,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"DigitsRigDescription di
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,Kamu tidak bisa menyertakan DigitsRigDescription tanpa HumanoidRigDescription
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"Instance {instName} muncul lebih dari sekali, tetapi hanya boleh ada sekali dalam hierarki tulang."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"Instance {instName} berada di bawah {parentName}, tetapi berdasarkan Tulang yang ada, seharusnya instance tersebut berada di bawah {expectedParentName}."
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription dan tulang tambahan belum diaktifkan untuk upload tubuh.
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,"Instance {instName} dari kelas {className} berada dalam struktur tulang, tetapi bukan bagian dari skema R15plus yang ditentukan."
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,Sendi opsional {jointName} keliru dipetakan di HRD. Sendi ini harus dipetakan ke tulang bernama {boneName}.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"Sendi {jointName} adalah sendi R15 standar, tetapi sambungan rig tidak terhubung ke HRD. Pastikan HRD di avatarmu terhubung ke AttachmentConstraint, bukan Motor6d."
@@ -239,10 +262,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Ukuran mesh {partName} p
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Sambungan {attName} harus ada tepat 1 kali di dalam {partName} descendant.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (atau descendant-nya) berisi Atribut. Kamu perlu menghapus Atribut dari daftar berikut: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Untuk meng-upload aset ke Roblox, kamu harus memilih persis 1 kejadian dan tipe upload yang terhubung."
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} tidak boleh memiliki tag.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,String kesalahan uji kedua yang digunakan untuk memverifikasi alur kerja sinkronisasi terjemahan Hub-first dari awal hingga akhir.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Meshpart kepala memiliki animasi wajah untuk {jointName}, yang tidak dapat digunakan di FACS. Ganti nama sendi ini, lalu impor ulang kepalamu."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bagian tubuh {partName} terikat ke sendi virtual {jointName}, yang bukan bagian dari skema R15plus."
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription dan tulang tambahan belum diaktifkan untuk upload tubuh.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Buka Pengaturan
@@ -255,6 +278,7 @@ CommonUI.Controls.Action.Apply,Terapkan
 CommonUI.Controls.Action.Back,Kembali
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Konfirmasi
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,Selesai
 CommonUI.Controls.Action.Next,Berikutnya
 CommonUI.Controls.Action.OK,OKE
@@ -355,7 +379,7 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,Profil
 CommonUI.Features.Label.RM,Momen
 CommonUI.Features.Label.Redeem,Redeem Kode
-CommonUI.Features.Label.RemoveConnection,Hapus Koneksi
+CommonUI.Features.Label.RemoveConnection,Hapus Teman
 CommonUI.Features.Label.ReportLogs,Laporkan Log
 CommonUI.Features.Label.ReportLogsSentenceCase,Laporkan log
 CommonUI.Features.Label.Sent,Terkirim
@@ -816,7 +840,7 @@ CoreScripts.InGameMenu.PageTitle.Report,Laporkan
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Pengaturan Kenyamanan
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,Beralih Server
 CoreScripts.InGameMenu.Prompt.BackToHome,"Ya, Kembali ke Beranda"
-CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Kamu yakin ingin keluar dari pengalaman virtual?
+CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Kamu yakin ingin keluar dari game?
 CoreScripts.InGameMenu.Prompt.ConfirmResetCharacter,Kamu yakin ingin mereset karaktermu?
 CoreScripts.InGameMenu.Prompt.ConfirmRespawnCharacter,Kamu yakin ingin me-respawn karaktermu?
 CoreScripts.InGameMenu.Prompt.LeaveGame,"Ya, Keluar"
@@ -884,8 +908,10 @@ CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Respawn Karakter?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Kamu akan keluar dari server ini dan beralih ke server lain.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ingin keluar?
-CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke pengalaman virtual yang dikunjungi sebelumnya
-CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari pengalaman virtual ini dan kembali ke {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
+CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Getaran
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,perlu ditekan untuk menampilkan menu navigasi
@@ -964,6 +990,8 @@ CoreScripts.TextChat.Action.SendQuickWords,Kirim Pesan Cepat
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,Global
 CoreScripts.TextChat.ChannelTabs.Here,Di sini
+CoreScripts.TextChat.ChannelTabs.System,Sistem
+CoreScripts.TextChat.ChannelTabs.Team,Tim
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: bisukan pembicara.
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>: bunyikan pembicara.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox secara otomatis menerjemahkan bahasa yang didukung dalam chat
@@ -1176,6 +1204,7 @@ Feature.AddFriends.Action.RequestIgnored,Permintaan Diabaikan
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama mereka.
 Feature.AddFriends.Label.ConnectWithContacts,Undang kontak atau terhubung dengan teman yang sudah ada di Roblox.
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Cari orang
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama display mereka.
 Feature.AddFriends.Label.SyncWithContacts,Sinkronkan kontak untuk menemukan dan mengundang teman
 Feature.AddFriends.Title.ConnectWithContacts,Tambahkan dari Kontak
@@ -1198,6 +1227,8 @@ Feature.Avatar.Action.CancelSelection,Batalkan pilihan
 Feature.Avatar.Action.Clear,
 Feature.Avatar.Action.ComposerPost,Posting
 Feature.Avatar.Action.ComposerPreviewAndPost,Preview & Posting
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,Buat set
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Tampilan Default
 Feature.Avatar.Action.Delete,
@@ -1282,6 +1313,8 @@ Feature.Avatar.Heading.Outfits,
 Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,Simpan Karakter
 Feature.Avatar.Heading.SelectToUpdate,Pilih untuk Meng-update
+Feature.Avatar.Heading.SetLimitReached,Batas set tercapai
+Feature.Avatar.Heading.SetNameNotAllowed,Nama tidak diperbolehkan
 Feature.Avatar.Heading.SharePublicAvatar,Bagikan Avatarmu
 Feature.Avatar.Heading.SortBy,Urutkan berdasarkan
 Feature.Avatar.Heading.UsedName,Nama yang Sudah Digunakan
@@ -1306,6 +1339,7 @@ Feature.Avatar.Label.Add,Tambahkan
 Feature.Avatar.Label.AddEdit,Tambah/Edit
 Feature.Avatar.Label.AddManage,Tambahkan/Kelola
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
 Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,Semua Kepala
 Feature.Avatar.Label.AnimationFullSet,Set Lengkap
@@ -1374,6 +1408,7 @@ Feature.Avatar.Label.FullBody,Seluruh Tubuh
 Feature.Avatar.Label.FullMasks,Masker Penuh
 Feature.Avatar.Label.FullPair,Pasangan Lengkap
 Feature.Avatar.Label.Gear,Perlengkapan
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,Kamu ingin mendapatkan pakaian ini secara gratis?
 Feature.Avatar.Label.GetOutfitMultiple,Kamu ingin mendapatkan [{numItems}] item secara gratis?
 Feature.Avatar.Label.GetOutfitOne,Kamu ingin mendapatkan [1] secara gratis?
@@ -1441,6 +1476,8 @@ Feature.Avatar.Label.PPEViewFullButton,Lihat Avatar secara Keseluruhan
 Feature.Avatar.Label.Pants,Celana Panjang
 Feature.Avatar.Label.PantsClassic,Celana Klasik
 Feature.Avatar.Label.Photobooth,Fotoboks
+Feature.Avatar.Label.ProfileFrames,Bingkai
+Feature.Avatar.Label.ProfileFramesUnlockBanner,Buka bingkai dengan Plus
 Feature.Avatar.Label.Props,Prop
 Feature.Avatar.Label.Purchased,
 Feature.Avatar.Label.QuickMenuCustomizeTitle,Opsi Kustomisasi
@@ -1468,6 +1505,9 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Pencarian Baru-Baru 
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Dilihat Baru-Baru Ini
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Lanjutkan Berbelanja
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetLimitReachedBody,Kamu hanya bisa memiliki maksimal {setLimit} set. Hapus 1 set untuk membuat ruang
+Feature.Avatar.Label.SetNameDuplicateBody,Kamu sudah memiliki set dengan nama ini. Pilih nama lain
+Feature.Avatar.Label.SetNameNotAllowedBody,Pilih nama lain
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Posting Avatar ke Marketplace
 Feature.Avatar.Label.Shirt,Kemeja
 Feature.Avatar.Label.ShirtClassic,
@@ -1613,6 +1653,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Beri keterangan untuk Avatarmu (Op
 Feature.Avatar.RevokedItems.BodyText,"Item {category} ""{item}"" telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Item berikut telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}{items}{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.ViewInbox,Lihat Inbox
+Feature.Avatar.SetNameDuplicate,Duplikasi nama
 Feature.Avatar.Text.MakeupLayeringTooltip,Ubah urutan lapisan makeup-mu
 Feature.Avatar.Title.AvatarRefinement,Penyempurnaan Avatar
 Feature.Avatar.Title.BulkDeleteMakeupLooks,Hapus {count} tampilan makeup?
@@ -1624,6 +1665,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Hapus semua animasi?
 Feature.Avatar.Title.ClearBodyConfirmation,Hapus bagian tubuh?
 Feature.Avatar.Title.ClearClothesConfirmation,Hapus semua pakaian?
 Feature.Avatar.Title.ClearMakeupConfirmation,Hapus semua makeup?
+Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplikasi Tampilan
 Feature.Avatar.Title.EnhancedAvatarHeads,Kepala Avatar yang Disempurnakan
 Feature.Avatar.Title.GetOutfit,Dapatkan Pakaian
@@ -1846,9 +1888,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,Dapat disesuaikan
+Feature.Catalog.Label.AdvancedMaterials,Material Tingkat Lanjut
 Feature.Catalog.Label.AllItems,Semua Item
 Feature.Catalog.Label.AlreadyOwned,Item sudah dimiliki
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,Atribut
 Feature.Catalog.Label.Attribution,Dibuat di
 Feature.Catalog.Label.AvailableForSale,Tersedia untuk Dijual
 Feature.Catalog.Label.AvailableToPremiumMembers,Tersedia karena kamu memiliki Premium
@@ -1894,6 +1938,8 @@ Feature.Catalog.Label.CustomizeAvatar,Kustomisasi Avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Kamu tidak dapat membatalkan tindakan ini jika kamu menghapus Avatar.
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,Emisif
+Feature.Catalog.Label.EmissiveInfo,"Item emisif bersinar dan memancarkan cahayanya sendiri, sehingga tetap terang dan terlihat bahkan di lingkungan gelap."
 Feature.Catalog.Label.Emotes,Emoji
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -1978,6 +2024,8 @@ Feature.Catalog.Label.PBR.false,Dasar
 Feature.Catalog.Label.PBR.true,Tingkat Lanjut
 Feature.Catalog.Label.PBRInfo,"Item avatar dengan material tingkat lanjut menggunakan perenderan berbasis fisik (PBR) agar terlihat lebih alami, dengan pencahayaan dan bayangan yang berubah dan berkilau seperti di kehidupan nyata."
 Feature.Catalog.Label.PBRInfoTitle,Merender Berbasis Fisik (PBR)
+Feature.Catalog.Label.ParticleEffects,Efek Partikel
+Feature.Catalog.Label.ParticleEffectsInfo,"Item dengan efek partikel memancarkan visual animasi, sehingga terasa dinamis dan hidup."
 Feature.Catalog.Label.Placement,Penempatan
 Feature.Catalog.Label.PrePremiumPrice,(Harga Item:
 Feature.Catalog.Label.Premium,
@@ -2011,6 +2059,7 @@ Feature.Catalog.Label.SalePrice,Harga Jual:
 Feature.Catalog.Label.SaveAsCharacter,Simpan sebagai Karakter
 Feature.Catalog.Label.SaveOptions,Simpan Opsi
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,Kamu mungkin mencari
 Feature.Catalog.Label.SellCut,Kamu Mendapatkan:
 Feature.Catalog.Label.SellPageUpsell,Penjualan hanya tersedia untuk pengguna dengan keanggotaan Roblox Plus.
 Feature.Catalog.Label.SellSuccess,Item untuk Dijual
@@ -2245,8 +2294,8 @@ Feature.Chat.Message.AddFriendsPartyLimit,Kamu bisa mengadakan Party dengan maks
 Feature.Chat.Message.AddFriendsPartyLimitSingular,Kamu hanya bisa mengadakan party dengan 1 teman karena pengaturan privasimu.
 Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} mengirim pesan yang tidak dapat ditampilkan
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Chat dinonaktifkan. Kamu dapat mengaktifkannya di pengaturan privasi.
-Feature.Chat.Message.ChatUnavailableRegion,Saat ini Chat belum tersedia di wilayahmu.
-Feature.Chat.Message.ChatUnavailableWithUser,"Saat ini, Chat tidak tersedia dengan pengguna ini."
+Feature.Chat.Message.ChatUnavailableRegion,Saat ini chat belum tersedia di wilayahmu.
+Feature.Chat.Message.ChatUnavailableWithUser,"Saat ini, chat tidak tersedia dengan pengguna ini."
 Feature.Chat.Message.Default,Tidak semua orang di chat ini dapat melihat pesan kamu.
 Feature.Chat.Message.EnableChat,"Untuk chat dengan Koneksi, nyalakan fitur chat di Pengaturan Privasimu."
 Feature.Chat.Message.EnableChat.FriendsRename,"Untuk chat dengan teman, aktifkan chat di Pengaturan Privasi."
@@ -2456,7 +2505,8 @@ Feature.Friends.Action.PendingRequest,Permintaan pending
 Feature.Friends.Action.ShareQR,Bagikan QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,Buka Blokir
-Feature.Friends.Action.Unfriend,Hapus Teman
+Feature.Friends.Action.Unfriend,
+Feature.Friends.Action.ViewMore,Lebih banyak
 Feature.Friends.Action.ViewPlatformProfile,Lihat Kartu Gamer
 Feature.Friends.Button.AddViaLink,Tambahkan melalui link
 Feature.Friends.Button.GotIt,
@@ -2648,6 +2698,9 @@ Feature.GameDetails.Message.HelpImproveExperience,Bantu kami meningkatkan pengal
 Feature.GameDetails.Message.HidingExperienceQuestion,Kenapa kamu menyembunyikan pengalaman virtual ini?
 Feature.GameDetails.Message.PurchaseGameV2,Buka kunci akses ke {gameName} seharga {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Informasi sponsor tidak dapat ditampilkan karena kesalahan sementara.
+Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
+Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan berbagai faktor seperti lokasi, info perangkat, usia, dan perilaku di platform, untuk menayangkan konten yang relevan untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
+Feature.GameDetails.Message.SponsoredDisclosure.U18,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,Kami akan lebih jarang menyarankan ini
 Feature.GameDetails.RatingPercentOnly,Rating {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -2847,6 +2900,7 @@ Feature.Moments.Description.HowToCaptureStep2,Aktifkan kendali Media
 Feature.Moments.Description.HowToCaptureStep3,Ambil foto dan video gameplay
 Feature.Moments.Description.LeaveMomentsCreation,"Semua perubahanmu akan hilang, tetapi kamu masih dapat menemukan tangkapan layar ini di galeri <b>Mediamu</b>."
 Feature.Moments.Description.NoMusicResults,Musik tidak ditemukan
+Feature.Moments.Description.NonInfiniteScrollEndBody,Kamu telah mencapai titik akhir di Moment. Ketuk di bawah untuk terus menonton.
 Feature.Moments.Description.NothingHereYet,Belum ada apa pun di sini...
 Feature.Moments.Description.PublishMoment,Deskripsikan Moment-mu
 Feature.Moments.Description.StayFriendly,Mari kita tetap bersikap ramah
@@ -2858,6 +2912,7 @@ Feature.Moments.Label.CaptureLibrary,Perpustakaan Mediamu
 Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah Moment dihapus.
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,Kembali lagi nanti atau buat Moment-mu sendiri.
 Feature.Moments.Label.FeedEndTitle,Tidak ada permintaan pending
 Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedMyMoments,Moment Saya
@@ -2876,6 +2931,7 @@ Feature.Moments.Label.MomentUnavailable,Moment tidak tersedia
 Feature.Moments.Label.MomentUnavailableDefault,Moment ini tidak tersedia.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
@@ -3025,10 +3081,10 @@ Feature.Profile.Description.EnterNicknameTextbox,Masukkan nama panggilanmu
 Feature.Profile.Description.InspectAndBuy,Klik untuk melihat dan membeli tampilannya.
 Feature.Profile.Description.NicknamePrivacy,Hanya {displayName} yang akan melihat nama ini.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,Hanya pengguna ini yang akan melihat nama ini.
-Feature.Profile.Description.QrCodeDescription,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi Koneksi Tepercaya.
+Feature.Profile.Description.QrCodeDescription,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi Teman Tepercaya.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi teman tepercaya.
 Feature.Profile.Description.QrCodeScanning,Izinkan pengguna lain men-scan kode QR Roblox kamu dengan Scanner QR atau kamera perangkat mereka untuk dengan cepat menambahkanmu sebagai teman.
-Feature.Profile.Description.RecognizeConnectionsByCustomName,Kenali Koneksi secara lebih mudah dengan memberinya nama khusus. Nama yang diimpor dari kontak dan nama khusus hanya dapat dilihat olehmu.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,Kenali teman secara lebih mudah dengan mengatur nama kustom untuk mereka. Nama yang diimpor dari kontakmu dan nama kustom yang kamu buat hanya dapat dilihat olehmu.
 Feature.Profile.Description.RecognizeFriendsByCustomName,Kenali teman secara lebih mudah dengan mengatur nama kustom untuk mereka. Nama yang diimpor dari kontak kamu dan nama kustom yang kamu buat hanya dapat dilihat oleh kamu.
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Izinkan orang yang kamu kenal memindai kode QR-mu untuk menambahkanmu.
@@ -3109,7 +3165,7 @@ Feature.Profile.Message.InvalidAliasError,Nama tidak dapat disimpan. Coba nama y
 Feature.Profile.Message.NoExperienceAccess,{name} ada di pengalaman virtual yang tidak dapat kamu akses.
 Feature.Profile.Message.QRLoadFailed,Gagal me-load.
 Feature.Profile.Message.QRNofificationRequest,mengirimi kamu permintaan pertemanan dari kode QR kamu
-Feature.Profile.Message.QRNotificationRequest,mengirimimu permintaan Koneksi dari kode QR-mu
+Feature.Profile.Message.QRNotificationRequest,mengirim permintaan pertemanan dari kode QR-mu
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,Scanner QR
 Feature.Profile.Tooltip.CurrencyTransfer.Body,Kini kamu bisa mengirim Robux.
@@ -3172,7 +3228,6 @@ Feature.ReportAbuse.Label.FinishChatReport,Selesaikan laporan chat
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,Sorot masalah dengan lingkaran
 Feature.ReportAbuse.Label.HighlightProblemPrecise,Sorot masalah
-Feature.ReportAbuse.Label.NoChatMessagesFound,Tidak ada pesan chat yang ditemukan
 Feature.ReportAbuse.Label.Optional,Opsional
 Feature.ReportAbuse.Label.Person,
 Feature.ReportAbuse.Label.PleaseSelectOne,Pilih satu.
@@ -3366,7 +3421,6 @@ Feature.SettingsHub.Label.Sending,Mengirim
 Feature.SettingsHub.Label.Show,
 Feature.SettingsHub.Label.Unmute,
 Feature.SettingsHub.Label.VoiceChat,Chat suara
-Feature.SettingsHub.Label.WhichChatOptional,Chat yang mana? (opsional)
 Feature.SettingsHub.Label.WhichPlayer,Pengguna yang Mana?
 Feature.SettingsHub.LanguageSelection.SettingLabel,Bahasa Pengalaman Virtual
 Feature.SettingsHub.LanguageSelection.Unavailable,
@@ -3947,18 +4001,14 @@ IAPExperience.U13Confirm.Title.Warning,Peringatan!
 InGame.Chat.ErrorMessageAnimationPlaying,Kamu tidak dapat menggunakan Emote saat melakukan tindakan ini.
 InGame.Chat.ErrorMessageSwitchToR15,Beralih ke avatar R15 kamu untuk menggunakan Emote.
 InGame.Chat.Label.From,Dari
-InGame.Chat.Label.SystemMessagePrefix,Sistem
-InGame.Chat.Label.TeamMessagePrefix,Tim
+InGame.Chat.Label.SystemMessagePrefix,
+InGame.Chat.Label.TeamMessagePrefix,
 InGame.Chat.Label.To,Kepada
 InGame.Chat.Response.EmoteNotAvailable,Kamu tidak dapat menggunakan Emote itu.
 InGame.Chat.Response.EmotesNotSupported,Kamu tidak dapat menggunakan Emote di sini.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Kamu tidak dapat menggunakan Emote saat ini.
 InGame.Chat.Response.EmotesWrongAvatarType,Hanya avatar R15 yang dapat menggunakan Emote.
-InGame.CommonUI.Badge.BadgeText,BETA
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"Laporkan penyalahgunaan jika kamu menemukan pengguna yang melanggar Panduan Komunitas kami. Jika kamu telah mengaktifkan layanan suara, Roblox akan merekam audio suara di mana saja di platform untuk tujuan moderasi, keamanan, dan untuk meningkatkan layanan dan fitur kami. Dengan terus menggunakan layanan suara, kamu memberikan izin kepada Roblox untuk mengumpulkan, menggunakan, dan menyimpan rekaman suaramu untuk tujuan tersebut. Kamu dapat memilih untuk keluar dari fitur suara kapan saja."
-InGame.CommonUI.Badge.Popup.HeaderList,Kamu telah memilih untuk berpartisipasi dalam satu atau beberapa fitur beta kami:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,Terus Putar
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -4157,7 +4207,7 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,Aktifkan Izin Menyimpan
 InGame.NotificationScript2.Capture.Success.ToastText,Tangkapan Layar Disimpan
 InGame.NotificationScript2.FriendRequestEvent.Accept,Sekarang kamu berteman dengan {RBX_NAME}.
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Mengirimimu permintaan Koneksi.
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Mengirimi kamu permintaan pertemanan.
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
 InGame.NotificationScript2.Message.FriendRequestEvent.Sent,Mengirimi Kamu Permintaan Pertemanan
 InGame.NotificationScript2.Screenshot.ButtonText,Buka Folder
@@ -4173,7 +4223,7 @@ InGame.NotificationScript2.onBadgeAwardedTitle,Lencana Dihadiahkan
 InGame.NotificationScript2.onPointsAwarded.multiple,Kamu menerima {RBX_NUMBER} poin.
 InGame.NotificationScript2.onPointsAwarded.single,
 InGame.PlayerDropDown.Accept,
-InGame.PlayerDropDown.Action.ConnectionRequest,Permintaan Koneksi
+InGame.PlayerDropDown.Action.ConnectionRequest,Permintaan Pertemanan
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,Batalkan Permintaan Pertemanan
 InGame.PlayerDropDown.Examine,

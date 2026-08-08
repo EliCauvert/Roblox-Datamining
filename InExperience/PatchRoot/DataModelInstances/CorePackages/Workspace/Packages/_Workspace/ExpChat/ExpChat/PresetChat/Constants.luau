@@ -7,7 +7,8 @@
 			PresetTray = "preset_tray",
 			PresetTooltip = "preset_ftux",
 			PresetKeyboardIcon = "preset_keyboard_icon",
-			PresetEntryPointButton = "preset_entry_point_button"
+			PresetEntryPointButton = "preset_entry_point_button",
+			PresetAutocomplete = "preset_autocomplete"
 		}
 	}
 }

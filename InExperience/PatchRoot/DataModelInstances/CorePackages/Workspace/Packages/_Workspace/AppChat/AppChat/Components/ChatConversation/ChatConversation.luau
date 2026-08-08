@@ -27,7 +27,7 @@ local globalLongPressSignalModule = require(script.Parent.Utils.GlobalLongPressS
 local getReplyingToStoreModule = require(appChat.Stores.GetReplyingToStore)
 local fFlagAppChatSignalsReplyStoreModule = require(appChat.Flags.FFlagAppChatSignalsReplyStore)
 local fFlagAppChatReplyComposeBarContainerModule = require(appChat.Flags.FFlagAppChatReplyComposeBarContainer)
-local smartSuggestionsChipRowModule = require(script.Parent.SmartSuggestions.SmartSuggestionsChipRow)
+local smartSuggestionsChipRowContainerModule = require(script.Parent.SmartSuggestions.SmartSuggestionsChipRowContainer)
 local fFlagAppChatSmartSuggestionsModule = require(appChat.Flags.FFlagAppChatSmartSuggestions)
 local conversationExitTypeModule = require(appChat.Analytics.Enums.ConversationExitType)
 local sendMessageErrorModule = require(appChat.Analytics.Enums.SendMessageError)
@@ -486,7 +486,7 @@ function chatConversation.willUnmount(p37) --[[ line: 580 ]]
 end
 
 function chatConversation.render(p38) --[[ line: 588 ]]
-	-- upvalues: withRoactChatAnalyticsModule (ref), withStyle (ref), withChatPagePaddingModule (ref), roactModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), keyboardOffsetEventHandlerModule (ref), var35 (ref), fFlagAppChatEnableDoubleOptIn (ref), fFlagAppChatReplyComposeBarContainerModule (ref), messageListModule (ref), userTypingIndicatorModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatSmartSuggestionsModule (ref), smartSuggestionsChipRowModule (ref), replyComposeBarContainerModule (ref), chatConversationMoreMenuModule (ref), var11 (ref), conversationBottomModalContainerModule (ref)
+	-- upvalues: withRoactChatAnalyticsModule (ref), withStyle (ref), withChatPagePaddingModule (ref), roactModule (ref), fFlagAppChatUseSwipeForRepliesModule (ref), keyboardOffsetEventHandlerModule (ref), var35 (ref), fFlagAppChatEnableDoubleOptIn (ref), fFlagAppChatReplyComposeBarContainerModule (ref), messageListModule (ref), userTypingIndicatorModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatSignalsReplyStoreModule (ref), fFlagAppChatSmartSuggestionsModule (ref), smartSuggestionsChipRowContainerModule (ref), replyComposeBarContainerModule (ref), chatConversationMoreMenuModule (ref), var11 (ref), conversationBottomModalContainerModule (ref)
 	local isFriends
 	local var55 = #p38.props.usersTyping > 0 and p38.props.displayNamesAvailable
 	
@@ -499,11 +499,11 @@ function chatConversation.render(p38) --[[ line: 588 ]]
 	local text = "MessageList" .. tostring(p38.props.conversationId)
 	
 	return withRoactChatAnalyticsModule(function(p39) --[[ line: 599 ]]
-		-- upvalues: withStyle (copy), withChatPagePaddingModule (copy), p38 (ref), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (ref), messageListModule (copy), isFriends (ref), var55 (ref), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), conversationBottomModalContainerModule (copy)
+		-- upvalues: withStyle (copy), withChatPagePaddingModule (copy), p38 (ref), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (ref), messageListModule (copy), isFriends (ref), var55 (ref), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), conversationBottomModalContainerModule (copy)
 		return withStyle(function(p40) --[[ line: 600 ]]
-			-- upvalues: withChatPagePaddingModule (copy), p38 (copy), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var55 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), p39 (ref), conversationBottomModalContainerModule (copy)
+			-- upvalues: withChatPagePaddingModule (copy), p38 (copy), roactModule (copy), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var55 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), p39 (ref), conversationBottomModalContainerModule (copy)
 			return withChatPagePaddingModule(function(p41) --[[ line: 601 ]]
-				-- upvalues: p38 (copy), roactModule (copy), p40 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var55 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), p39 (copy), conversationBottomModalContainerModule (copy)
+				-- upvalues: p38 (copy), roactModule (copy), p40 (ref), fFlagAppChatUseSwipeForRepliesModule (copy), keyboardOffsetEventHandlerModule (copy), var35 (copy), fFlagAppChatEnableDoubleOptIn (copy), fFlagAppChatReplyComposeBarContainerModule (copy), text (copy), messageListModule (copy), isFriends (copy), var55 (copy), userTypingIndicatorModule (copy), reactModule (copy), foundationModule (copy), fFlagAppChatSignalsReplyStoreModule (copy), fFlagAppChatSmartSuggestionsModule (copy), smartSuggestionsChipRowContainerModule (copy), replyComposeBarContainerModule (copy), chatConversationMoreMenuModule (copy), var11 (copy), p39 (copy), conversationBottomModalContainerModule (copy)
 				local var62
 				local var58 = if p38.isMoreMenuEnabled() then if p38.props.shouldDisableChatInputBar then UDim.new(0, p41.right) else UDim.new(0, math.max(p41.right - 6, 0)) else nil
 				local createElement = roactModule.createElement
@@ -603,7 +603,7 @@ function chatConversation.render(p38) --[[ line: 588 ]]
 					t_2.onAbsoluteSizeChanged = p38.onHeightChanged
 					t_2.padding = { left = UDim.new(0, p41.left), right = var58 }
 					var62 = var62(view, t_2, {
-						SmartSuggestionsChipRow = if fFlagAppChatSmartSuggestionsModule then reactModule.createElement(smartSuggestionsChipRowModule, {
+						SmartSuggestionsChipRow = if fFlagAppChatSmartSuggestionsModule then reactModule.createElement(smartSuggestionsChipRowContainerModule, {
 							LayoutOrder = 0,
 							conversationId = p38.props.conversationId,
 							sendMessage = p38.props.sendMessage,

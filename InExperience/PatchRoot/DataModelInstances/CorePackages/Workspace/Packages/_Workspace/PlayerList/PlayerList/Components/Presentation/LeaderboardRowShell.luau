@@ -6,11 +6,12 @@ local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 local usePreferences = foundationModule.Hooks.usePreferences
 local constantsModule = require(parent.Common.Constants)
+local fFlagPlayerListReskinConsoleFocusNavModule = require(parent.Flags.FFlagPlayerListReskinConsoleFocusNav)
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "LeaderboardRowShell" ]]
-	-- upvalues: useTokens (ref), usePreferences (ref), constantsModule (ref), reactModule (ref), view (ref), foundationModule (ref)
-	local var3 = useTokens()
-	local var4 = usePreferences()
+return reactModule.memo(function(p0) --[[ line: 28 | named "LeaderboardRowShell" ]]
+	-- upvalues: useTokens (ref), usePreferences (ref), constantsModule (ref), reactModule (ref), view (ref), foundationModule (ref), fFlagPlayerListReskinConsoleFocusNavModule (ref)
+	local var4 = useTokens()
+	local var5 = usePreferences()
 	local t = {
 		RowContent = reactModule.createElement(view, {
 			tag = `size-full {p0.flexTag or constantsModule.ROW_FLEX_TAG}`
@@ -18,12 +19,12 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "LeaderboardRowShell"
 	}
 	
 	if p0.isHighlighted then
-		local overMedia100 = var3.Color.OverMedia.OverMedia_100
+		local overMedia100 = var4.Color.OverMedia.OverMedia_100
 		t.Highlight = reactModule.createElement(view, {
 			ZIndex = 0,
 			backgroundStyle = {
 				Color3 = overMedia100.Color3,
-				Transparency = overMedia100.Transparency * var4.preferredTransparency
+				Transparency = overMedia100.Transparency * var5.preferredTransparency
 			},
 			Size = UDim2.fromScale(1, 1)
 		})
@@ -38,6 +39,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "LeaderboardRowShell"
 		Size = UDim2.new(1, 0, 0, p0.rowHeight),
 		LayoutOrder = p0.layoutOrder,
 		onActivated = p0.onActivated,
-		ref = p0.rowRef
+		ref = p0.rowRef,
+		selection = if fFlagPlayerListReskinConsoleFocusNavModule then p0.selection else nil
 	}, t)
 end)

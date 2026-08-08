@@ -15,12 +15,12 @@ local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventD
 local fFlagSduiLaunchExperienceAction = require(parent.SharedFlags).FFlagSduiLaunchExperienceAction
 local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUnlockUpsellSupport
 local fFlagRobloxPlusFAEFreeTrial = require(parent.SharedFlags).FFlagRobloxPlusFAEFreeTrial
-local fFlagSduiGenreSelector = require(parent.SharedFlags).FFlagSduiGenreSelector
+local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local fFlagSduiAiOverviewEnabled = require(parent.SharedFlags).FFlagSduiAiOverviewEnabled
 local fFlagSduiPinShortcutAction = require(parent.SharedFlags).FFlagSduiPinShortcutAction
 
 return function() --[[ line: 34 | named "registerDiscoveryActions" ]]
-	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiActionTelemetryHandler (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiChartsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiGenreSelector (ref), fFlagSduiPinShortcutAction (ref), getSduiActionHandlerRegistry (ref)
+	-- upvalues: sduiActionType (ref), serverDrivenUi (ref), fFlagRobloxPlusFAEFreeTrial (ref), fFlagSduiActionsUpdateFiresOwnTelemetry (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiActionTelemetryHandler (ref), fFlagSduiOpenSearchResultsTabAction (ref), fFlagLuaAppSduiOpenSearchResultsWithQueryAction (ref), fFlagLuaAppUnlockUpsellSupport (ref), fFlagSduiAiOverviewEnabled (ref), fFlagLuaAppSduiUpdateUserSettingsAction (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiLaunchExperienceAction (ref), fFlagSduiChartsSupport (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiPinShortcutAction (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.DismissDialog] = {
 			skipUnifiedLogging = false,
@@ -320,16 +320,23 @@ return function() --[[ line: 34 | named "registerDiscoveryActions" ]]
 				return require(serverDrivenUi.Actions.SduiReportSurfaceLoadTimeMilestoneAction)
 			end
 		} else nil,
-		[sduiActionType.RefreshOmniRecommendationFeedItem] = if fFlagSduiGenreSelector then {
+		[sduiActionType.RefreshOmniRecommendationFeedItem] = {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ line: 362 ]]
+			lazyHandler = function() --[[ line: 361 ]]
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiRefreshOmniRecommendationFeedItemAction)
+			end
+		},
+		[sduiActionType.RefreshChartsSortDetail] = if fFlagSduiChartsSortDetailGenreFilter then {
+			skipUnifiedLogging = false,
+			lazyHandler = function() --[[ line: 368 ]]
+				-- upvalues: serverDrivenUi (copy)
+				return require(serverDrivenUi.Actions.SduiRefreshChartsSortDetailAction)
 			end
 		} else nil,
 		[sduiActionType.PinExperienceShortcut] = if fFlagSduiPinShortcutAction then {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ line: 370 ]]
+			lazyHandler = function() --[[ line: 376 ]]
 				-- upvalues: serverDrivenUi (copy)
 				return require(serverDrivenUi.Actions.SduiPinShortcutAction)
 			end

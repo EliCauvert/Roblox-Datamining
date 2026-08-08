@@ -5,22 +5,37 @@ local cryoModule = require(parent.Cryo)
 local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local _ = require(appChat.Stores.GetConversationStore)
 local getResponseBodyModule = require(script.Parent.getResponseBody)
+local buildConversationMessageFromApiModule = require(script.Parent.buildConversationMessageFromApi)
+local ingestBatchModule = require(script.Parent.ingestBatch)
+local ingestOperationModule = require(script.Parent.IngestOperation)
+local fFlagAppChatIngestPreviewMessageModule = require(appChat.Flags.FFlagAppChatIngestPreviewMessage)
 
-local function _(p0) --[[ line: 18 | named "isInitialCursor" ]]
+local function _(p0) --[[ line: 22 | named "isInitialCursor" ]]
 	return if p0 ~= nil then p0 == "" else true
 end
 
-local function upsertConversationResponse(p1, p2) --[[ line: 22 ]]
-	-- upvalues: conversationChannelsModule (ref)
+local function upsertConversationResponse(p1, p2) --[[ line: 26 ]]
+	-- upvalues: conversationChannelsModule (ref), fFlagAppChatIngestPreviewMessageModule (ref), ingestBatchModule (ref), buildConversationMessageFromApiModule (ref), ingestOperationModule (ref)
 	if p2 == nil or p2.status == "failed" then return end
 	if p2.source == conversationChannelsModule.Source.Channels and p2.type == conversationChannelsModule.Type.OneToOne and p2.participant_user_ids ~= nil then
 		p1.removeConversation(conversationChannelsModule.getFriendConversationId(p2.participant_user_ids))
 	end
-	p1.upsertConversation(conversationChannelsModule.fromChannelsApi(p2))
+	local var9 = conversationChannelsModule.fromChannelsApi(p2)
+	p1.upsertConversation(var9)
+	
+	if fFlagAppChatIngestPreviewMessageModule then
+		local previewMessage = p2.preview_message
+		
+		if previewMessage ~= nil and var9.previewMessageId ~= nil then
+			ingestBatchModule(var9.id, {
+				buildConversationMessageFromApiModule(previewMessage, var9.id)
+			}, ingestOperationModule.Prepend)
+		end
+	end
 end
 
 return {
-	beginFetch = function(p3, p4) --[[ line: 56 ]]
+	beginFetch = function(p3, p4) --[[ line: 79 ]]
 		-- upvalues: cryoModule (ref)
 		p3.setListStatus({
 			isFetchingConversations = true,
@@ -28,16 +43,16 @@ return {
 			error = cryoModule.None
 		})
 	end,
-	ingestSuccess = function(p5, p6, p7) --[[ line: 64 ]]
+	ingestSuccess = function(p5, p6, p7) --[[ line: 87 ]]
 		-- upvalues: getResponseBodyModule (ref), upsertConversationResponse (ref), cryoModule (ref)
-		local var5 = getResponseBodyModule(p7)
-		local var6 = if var5 ~= nil then nil else var5.next_cursor
-		local var7 = if var5 == nil or var5.conversations == nil then 0 else #var5.conversations
-		local var8 = if var6 ~= nil then var6 == "" else true
+		local var10 = getResponseBodyModule(p7)
+		local var11 = if var10 ~= nil then nil else var10.next_cursor
+		local var12 = if var10 == nil or var10.conversations == nil then 0 else #var10.conversations
+		local var13 = if var11 ~= nil then var11 == "" else true
 		local listStatus = p5.getListStatus(false)
 		
-		if var5 ~= nil and var5.conversations ~= nil then
-			for i, v in var5.conversations do
+		if var10 ~= nil and var10.conversations ~= nil then
+			for i, v in var10.conversations do
 				upsertConversationResponse(p5, v)
 			end
 		end
@@ -45,27 +60,27 @@ return {
 			isFetchingConversations = false,
 			isFetchingNextPage = false,
 			hasFetchedInitialPage = if if p6 ~= nil then p6 == "" else true then true else listStatus.hasFetchedInitialPage,
-			oldestConversationIsFetched = var8,
-			isExhausted = var8,
-			nextCursor = if var8 then cryoModule.None else var6,
+			oldestConversationIsFetched = var13,
+			isExhausted = var13,
+			nextCursor = if var13 then cryoModule.None else var11,
 			error = cryoModule.None
 		})
 		
 		return {
 			cursor = p6,
-			nextCursor = var6,
-			conversationCount = var7,
-			responseBody = var5
+			nextCursor = var11,
+			conversationCount = var12,
+			responseBody = var10
 		}
 	end,
-	ingestFailure = function(p8, p9) --[[ line: 96 ]]
+	ingestFailure = function(p8, p9) --[[ line: 119 ]]
 		p8.setListStatus({
 			isFetchingConversations = false,
 			isFetchingNextPage = false,
 			error = p9
 		})
 	end,
-	ingestConversationResponses = function(p10, p11) --[[ line: 43 ]]
+	ingestConversationResponses = function(p10, p11) --[[ line: 66 ]]
 		-- upvalues: upsertConversationResponse (ref)
 		if p11 == nil or p11.conversations == nil then return end
 		for i, v in p11.conversations do

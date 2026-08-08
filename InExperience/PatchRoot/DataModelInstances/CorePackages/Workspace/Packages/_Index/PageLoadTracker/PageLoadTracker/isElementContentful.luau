@@ -1,5 +1,4 @@
-﻿local removeDeprecatedGuiObjectApisIsElementContentful = game:DefineFastFlag("RemoveDeprecatedGuiObjectApisIsElementContentful", false)
-local t = {
+﻿local t = {
 	ImageLabel = true,
 	ImageButton = true,
 	TextLabel = true,
@@ -9,16 +8,9 @@ local t = {
 	ViewportFrame = true
 }
 
-function isElementContentful(p0) --[[ line: 14 ]]
-	-- upvalues: removeDeprecatedGuiObjectApisIsElementContentful (ref), t (ref)
-	if removeDeprecatedGuiObjectApisIsElementContentful then
-		if p0.Visible and p0.BackgroundTransparency ~= 1 then
-		else
-			return false
-		end
-	else
-		return if p0.Visible and p0.Transparency ~= 1 then t[p0.ClassName] else false
-	end
+function isElementContentful(p0) --[[ line: 11 ]]
+	-- upvalues: t (ref)
+	return if p0.Visible and p0.BackgroundTransparency ~= 1 then t[p0.ClassName] else false
 end
 
 return isElementContentful

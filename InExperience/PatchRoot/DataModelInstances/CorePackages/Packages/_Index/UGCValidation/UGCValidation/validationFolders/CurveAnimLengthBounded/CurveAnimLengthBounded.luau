@@ -6,31 +6,38 @@ local getFFlagUGCValidateMigrateCurveAnimModule = require(parent.flags.getFFlagU
 local getFFlagUGCValidateCurveAnimMinTimeFixModule = require(parent.flags.getFFlagUGCValidateCurveAnimMinTimeFix)
 local getFStringUGCValidateCurveAnimationMinLengthModule = require(parent.flags.GetFStringUGCValidateCurveAnimationMinLength)
 local getFStringUGCValidationMaxAnimationLengthModule = require(parent.flags.GetFStringUGCValidationMaxAnimationLength)
-local t = {
-	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
-}
+local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
+local t = { categories = {} }
 
-if require(parent.flags.getFFlagUGCValidationAnimationPackSupport)() then
+if not require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)() or not require(parent.flags.getFFlagUGCValidateAQEmoteDuration)() then
+	table.insert(t.categories, validationEnumsModule.UploadCategory.EMOTE_ANIMATION)
+end
+if getFFlagUGCValidationAnimationPackSupportModule() then
 	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
 end
 t.requiredData = {
 	validationEnumsModule.SharedDataMember.curveAnimations,
 	validationEnumsModule.SharedDataMember.curveAnimComputedFrames
 }
-t.fflag = getFFlagUGCValidateMigrateCurveAnimModule
+
+function t.fflag() --[[ line: 35 ]]
+	-- upvalues: getFFlagUGCValidateMigrateCurveAnimModule (ref)
+	return getFFlagUGCValidateMigrateCurveAnimModule()
+end
+
 t.expectedFailures = {}
 t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-function t.run(p0, p1) --[[ line: 27 ]]
+function t.run(p0, p1) --[[ line: 41 ]]
 	-- upvalues: getFFlagUGCValidateCurveAnimMinTimeFixModule (ref), getFStringUGCValidateCurveAnimationMinLengthModule (ref), getFStringUGCValidationMaxAnimationLengthModule (ref), errorSourceStringsModule (ref)
 	local animLength = p1.curveAnimComputedFrames.animLength
-	local var7 = if getFFlagUGCValidateCurveAnimMinTimeFixModule() then getFStringUGCValidateCurveAnimationMinLengthModule.asNumber() else 0
+	local var8 = if getFFlagUGCValidateCurveAnimMinTimeFixModule() then getFStringUGCValidateCurveAnimationMinLengthModule.asNumber() else 0
 	
-	if animLength <= var7 or getFStringUGCValidationMaxAnimationLengthModule.asNumber() < animLength then
+	if animLength <= var8 or getFStringUGCValidationMaxAnimationLengthModule.asNumber() < animLength then
 		p0:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidLength, {
-			minLength = tostring(var7),
+			minLength = tostring(var8),
 			maxLength = getFStringUGCValidationMaxAnimationLengthModule.asString()
 		})
 	end

@@ -1,22 +1,23 @@
 ﻿local playersService = game:GetService("Players")
 local insertService = game:GetService("InsertService")
 local emoteSkinningDisableUseClassLookup = game:DefineFastFlag("EmoteSkinningDisableUseClassLookup", false)
-local var3 = game:DefineFastInt("UGCEmoteSkinningDisableTranslationThresholdMillistuds", 100) * 0.001
+local emoteSkinningDisableCleanupCharacterConnections = game:DefineFastFlag("EmoteSkinningDisableCleanupCharacterConnections", false)
+local var4 = game:DefineFastInt("UGCEmoteSkinningDisableTranslationThresholdMillistuds", 100) * 0.001
 local t = {}
 
-local function getClipMetadata(p0) --[[ line: 16 ]]
+local function getClipMetadata(p0) --[[ line: 18 ]]
 	-- upvalues: t (ref), insertService (ref)
 	if t[p0] then
 		return t[p0]
 	end
-	local var11 = tonumber(p0:match("%d+"))
+	local var13 = tonumber(p0:match("%d+"))
 	
-	if not var11 then
+	if not var13 then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 26 ]]
-		-- upvalues: insertService (copy), var11 (ref)
-		return insertService:LoadAsset(var11)
+	local ok, status = pcall(function() --[[ line: 28 ]]
+		-- upvalues: insertService (copy), var13 (ref)
+		return insertService:LoadAsset(var13)
 	end)
 	
 	if not ok or not status then
@@ -41,7 +42,7 @@ local function getClipMetadata(p0) --[[ line: 16 ]]
 	return nil
 end
 
-local function setAllJointsSkinning(value, p1) --[[ line: 53 ]]
+local function setAllJointsSkinning(value, p1) --[[ line: 55 ]]
 	for i, v in value:GetDescendants() do
 		if v:IsA("Motor6D") or v:IsA("AnimationConstraint") or (v:IsA("BallSocketConstraint") or v:IsA("Weld")) or v:IsA("RigidConstraint") then
 			v.EnableSkinning = p1
@@ -50,8 +51,9 @@ local function setAllJointsSkinning(value, p1) --[[ line: 53 ]]
 end
 
 local t_1 = {}
+local t_2 = {}
 
-local function _(p2) --[[ line: 65 | named "clearActiveEmoteConnection" ]]
+local function _(p2) --[[ line: 68 | named "clearActiveEmoteConnection" ]]
 	-- upvalues: t_1 (ref)
 	if t_1[p2] then
 		t_1[p2]:Disconnect()
@@ -59,17 +61,29 @@ local function _(p2) --[[ line: 65 | named "clearActiveEmoteConnection" ]]
 	end
 end
 
-local function onCharacterRemoving(p3) --[[ line: 72 ]]
-	-- upvalues: t_1 (ref)
-	if t_1[p3] then
-		t_1[p3]:Disconnect()
-		t_1[p3] = nil
+local _ = function(p3) --[[ line: 75 | named "clearAnimationPlayedConnection" ]]
+	-- upvalues: t_2 (ref)
+	if t_2[p3] then
+		t_2[p3]:Disconnect()
+		t_2[p3] = nil
 	end
 end
 
-local _ = function(p4, p5) --[[ line: 76 | named "onAnimationPlayed" ]]
-	-- upvalues: getClipMetadata (ref), var3 (ref), t_1 (ref), setAllJointsSkinning (ref)
-	local animation = p5.Animation
+local function onCharacterRemoving(p4) --[[ line: 82 ]]
+	-- upvalues: t_1 (ref), emoteSkinningDisableCleanupCharacterConnections (ref), t_2 (ref)
+	if t_1[p4] then
+		t_1[p4]:Disconnect()
+		t_1[p4] = nil
+	end
+	if emoteSkinningDisableCleanupCharacterConnections and t_2[p4] then
+		t_2[p4]:Disconnect()
+		t_2[p4] = nil
+	end
+end
+
+local _ = function(p5, p6) --[[ line: 89 | named "onAnimationPlayed" ]]
+	-- upvalues: getClipMetadata (ref), var4 (ref), t_1 (ref), setAllJointsSkinning (ref)
+	local animation = p6.Animation
 	
 	if not animation then return end
 	local animationId = animation.AnimationId
@@ -77,92 +91,95 @@ local _ = function(p4, p5) --[[ line: 76 | named "onAnimationPlayed" ]]
 	if animationId == "" then
 		return
 	end
-	task.spawn(function() --[[ line: 87 ]]
-		-- upvalues: getClipMetadata (copy), animationId (ref), var3 (copy), p5 (ref), p4 (ref), t_1 (copy), setAllJointsSkinning (copy)
-		local var16 = getClipMetadata(animationId)
+	task.spawn(function() --[[ line: 100 ]]
+		-- upvalues: getClipMetadata (copy), animationId (ref), var4 (copy), p6 (ref), p5 (ref), t_1 (copy), setAllJointsSkinning (copy)
+		local var18 = getClipMetadata(animationId)
 		
-		if not var16 or not var16.isUGCEmote then return end
-		if var16.maxTranslation <= var3 then return end
-		if not p5.IsPlaying then return end
-		if t_1[p4] then
-			t_1[p4]:Disconnect()
-			t_1[p4] = nil
+		if not var18 or not var18.isUGCEmote then return end
+		if var18.maxTranslation <= var4 then return end
+		if not p6.IsPlaying then return end
+		if t_1[p5] then
+			t_1[p5]:Disconnect()
+			t_1[p5] = nil
 		end
-		setAllJointsSkinning(p4, false)
-		t_1[p4] = p5.Stopped:Connect(function() --[[ line: 103 ]]
-			-- upvalues: setAllJointsSkinning (copy), p4 (copy), t_1 (copy)
-			setAllJointsSkinning(p4, true)
+		setAllJointsSkinning(p5, false)
+		t_1[p5] = p6.Stopped:Connect(function() --[[ line: 116 ]]
+			-- upvalues: setAllJointsSkinning (copy), p5 (copy), t_1 (copy)
+			setAllJointsSkinning(p5, true)
 			
-			if t_1[p4] then
-				t_1[p4]:Disconnect()
-				t_1[p4] = nil
+			if t_1[p5] then
+				t_1[p5]:Disconnect()
+				t_1[p5] = nil
 			end
 		end)
 	end)
 end
 
-local function onCharacterAdded(p6) --[[ line: 110 ]]
-	-- upvalues: emoteSkinningDisableUseClassLookup (ref), getClipMetadata (ref), var3 (ref), t_1 (ref), setAllJointsSkinning (ref)
+local function onCharacterAdded(p7) --[[ line: 123 ]]
+	-- upvalues: emoteSkinningDisableUseClassLookup (ref), getClipMetadata (ref), var4 (ref), t_1 (ref), setAllJointsSkinning (ref), emoteSkinningDisableCleanupCharacterConnections (ref), t_2 (ref)
 	local animator
 	local _ = nil
 	
 	if emoteSkinningDisableUseClassLookup then
-		local humanoid = p6:FindFirstChildOfClass("Humanoid")
+		local humanoid = p7:FindFirstChildOfClass("Humanoid")
 		
 		if not humanoid then return end
 		animator = humanoid:FindFirstChildOfClass("Animator")
 		
-		if animator then
-			animator.AnimationPlayed:Connect(function(p7) --[[ line: 127 ]]
-				-- upvalues: p6 (ref), getClipMetadata (copy), var3 (copy), t_1 (copy), setAllJointsSkinning (copy)
-				local animation = p7.Animation
-				
-				if not animation then return end
-				local animationId = animation.AnimationId
-				
-				if animationId == "" then
-					return
-				end
-				task.spawn(function() --[[ line: 87 ]]
-					-- upvalues: getClipMetadata (copy), animationId (ref), var3 (copy), p7 (ref), p6 (ref), t_1 (copy), setAllJointsSkinning (copy)
-					local var16 = getClipMetadata(animationId)
-					
-					if not var16 or not var16.isUGCEmote then return end
-					if var16.maxTranslation <= var3 then return end
-					if not p7.IsPlaying then return end
-					if t_1[p6] then
-						t_1[p6]:Disconnect()
-						t_1[p6] = nil
-					end
-					setAllJointsSkinning(p6, false)
-					t_1[p6] = p7.Stopped:Connect(function() --[[ line: 103 ]]
-						-- upvalues: setAllJointsSkinning (copy), p6 (copy), t_1 (copy)
-						setAllJointsSkinning(p6, true)
-						
-						if t_1[p6] then
-							t_1[p6]:Disconnect()
-							t_1[p6] = nil
-						end
-					end)
-				end)
-			end)
-			
-			return
-		else
+		if not animator then return end
+	else
+		animator = p7:WaitForChild("Humanoid"):WaitForChild("Animator")
+	end
+	local animationPlayedConnection = animator.AnimationPlayed:Connect(function(p8) --[[ line: 140 ]]
+		-- upvalues: p7 (ref), getClipMetadata (copy), var4 (copy), t_1 (copy), setAllJointsSkinning (copy)
+		local animation = p8.Animation
+		
+		if not animation then return end
+		local animationId = animation.AnimationId
+		
+		if animationId == "" then
 			return
 		end
-	else
-		animator = p6:WaitForChild("Humanoid"):WaitForChild("Animator")
+		task.spawn(function() --[[ line: 100 ]]
+			-- upvalues: getClipMetadata (copy), animationId (ref), var4 (copy), p8 (ref), p7 (ref), t_1 (copy), setAllJointsSkinning (copy)
+			local var18 = getClipMetadata(animationId)
+			
+			if not var18 or not var18.isUGCEmote then return end
+			if var18.maxTranslation <= var4 then return end
+			if not p8.IsPlaying then return end
+			if t_1[p7] then
+				t_1[p7]:Disconnect()
+				t_1[p7] = nil
+			end
+			setAllJointsSkinning(p7, false)
+			t_1[p7] = p8.Stopped:Connect(function() --[[ line: 116 ]]
+				-- upvalues: setAllJointsSkinning (copy), p7 (copy), t_1 (copy)
+				setAllJointsSkinning(p7, true)
+				
+				if t_1[p7] then
+					t_1[p7]:Disconnect()
+					t_1[p7] = nil
+				end
+			end)
+		end)
+	end)
+	
+	if emoteSkinningDisableCleanupCharacterConnections then
+		if t_2[p7] then
+			t_2[p7]:Disconnect()
+			t_2[p7] = nil
+		end
+		t_2[p7] = animationPlayedConnection
 	end
 end
 
-local function onPlayerAdded(p8) --[[ line: 132 ]]
+local function onPlayerAdded(p9) --[[ line: 150 ]]
 	-- upvalues: onCharacterAdded (ref), onCharacterRemoving (ref)
-	if p8.Character then
-		onCharacterAdded(p8.Character)
+	if p9.Character then
+		onCharacterAdded(p9.Character)
 	end
-	p8.CharacterAdded:Connect(onCharacterAdded)
-	p8.CharacterRemoving:Connect(onCharacterRemoving)
+	p9.CharacterAdded:Connect(onCharacterAdded)
+	p9.CharacterRemoving:Connect(onCharacterRemoving)
 end
 
 for i, v in playersService:GetPlayers() do

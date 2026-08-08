@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("MomentsStickerButton2", false)
+﻿game:DefineFastFlag("MomentsStickerButton3", false)
 
 return function() --[[ line: 3 ]]
-	return game:GetFastFlag("MomentsStickerButton2") and game:GetEngineFeature("MomentsStickerOverlay")
+	return game:GetFastFlag("MomentsStickerButton3") and game:GetEngineFeature("MomentsStickerOverlay")
 end

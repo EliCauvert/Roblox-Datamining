@@ -13,7 +13,7 @@ local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReport
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "InExpSceneSelectionNode" ]]
+return reactModule.memo(function(p0) --[[ line: 39 | named "InExpSceneSelectionNode" ]]
 	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), textWithTranslationModule (ref)
 	local var9, var10 = reactModule.useState(p0.loadingText)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
@@ -24,59 +24,71 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "InExpSceneSelectionN
 	var12.current = p0
 	local var13 = reactModule.useRef(sendEvent)
 	var13.current = sendEvent
-	reactModule.useEffect(function() --[[ line: 53 ]]
-		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var13 (ref), telemetryEventType (copy), var10 (ref), var12 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
-		if not getIsInExpSceneSelectionAvailableModule() then
+	reactModule.useEffect(function() --[[ line: 54 ]]
+		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var13 (ref), telemetryEventType (copy), var12 (ref), var10 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+		if getIsInExpSceneSelectionAvailableModule() then
+			local var14 = nil
+			var14 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1) --[[ line: 77 ]]
+				-- upvalues: var14 (write), var13 (copy), telemetryEventType (copy), var12 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+				var14 = nil
+				var13.current({
+					sub_event_type = telemetryEventType.SceneCaptureResult,
+					scene_capture_detail = { exit_reason = p1.reason, success = p1.reason == "submit" }
+				})
+				local current = var12.current
+				
+				if p1.reason == "submit" then
+					if fFlagAbuseReportSceneSelectionSubmitTrackingModule and current.onExternalSubmit then
+						current.onExternalSubmit(submitSource.SceneSelection)
+					end
+					if current.onNext then
+						current.onNext()
+						
+						return
+					end
+				elseif current.goBack then
+					current.goBack()
+				end
+			end)
+			
+			if not pcall(inExpSceneSelectionAdapterModule.start) then
+				var13.current({
+					sub_event_type = telemetryEventType.SceneCaptureResult,
+					scene_capture_detail = { exit_reason = "start_failed", success = false }
+				})
+				
+				if var14 then
+					var14:Disconnect()
+					var14 = nil
+				end
+				local current = var12.current
+				
+				if current.onFailure then
+					current.onFailure()
+				else
+					var10(current.errorText)
+				end
+			end
+			return function() --[[ line: 122 ]]
+				-- upvalues: var14 (write)
+				if var14 then
+					var14:Disconnect()
+					var14 = nil
+				end
+			end
+		else
 			var13.current({
 				sub_event_type = telemetryEventType.SceneCaptureResult,
 				scene_capture_detail = { exit_reason = "unavailable", success = false }
 			})
-			var10(var12.current.errorText)
-			
-			return
-		end
-		local var14 = nil
-		var14 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1) --[[ line: 71 ]]
-			-- upvalues: var14 (write), var13 (copy), telemetryEventType (copy), var12 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
-			var14 = nil
-			var13.current({
-				sub_event_type = telemetryEventType.SceneCaptureResult,
-				scene_capture_detail = { exit_reason = p1.reason, success = p1.reason == "submit" }
-			})
 			local current = var12.current
 			
-			if p1.reason == "submit" then
-				if fFlagAbuseReportSceneSelectionSubmitTrackingModule and current.onExternalSubmit then
-					current.onExternalSubmit(submitSource.SceneSelection)
-				end
-				if current.onNext then
-					current.onNext()
-					
-					return
-				end
-			elseif current.goBack then
-				current.goBack()
+			if current.onFailure then
+				current.onFailure()
+				
+				return
 			end
-		end)
-		
-		if not pcall(inExpSceneSelectionAdapterModule.start) then
-			var13.current({
-				sub_event_type = telemetryEventType.SceneCaptureResult,
-				scene_capture_detail = { exit_reason = "start_failed", success = false }
-			})
-			var10(var12.current.errorText)
-			
-			if var14 then
-				var14:Disconnect()
-				var14 = nil
-			end
-		end
-		return function() --[[ line: 111 ]]
-			-- upvalues: var14 (write)
-			if var14 then
-				var14:Disconnect()
-				var14 = nil
-			end
+			var10(current.errorText)
 		end
 	end, {})
 	

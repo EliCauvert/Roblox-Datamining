@@ -38,6 +38,7 @@ local setProductPayloadModule = require(purchasePrompt.Actions.SetProductPayload
 local resolvePromptStateModule = require(script.Parent.resolvePromptState)
 local fetchCartPricingModule = require(script.Parent.fetchCartPricing)
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
+local fFlagPurchasePromptOfferMarginUpsellEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptOfferMarginUpsellEnabled)
 local buildProductPayloadFromInitiateArgsModule = require(purchasePrompt.Utils.buildProductPayloadFromInitiateArgs)
 local fFlagAddFetchProductInfoAsACallback = require(purchasePrompt.Parent.SharedFlags).FFlagAddFetchProductInfoAsACallback
 local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
@@ -47,7 +48,7 @@ local fFlagFixPurchasingErrorCounterModule = require(purchasePrompt.Flags.FFlagF
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(purchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 local refreshDevSubPriceOnRetryAfterUpsell2 = game:DefineFastFlag("RefreshDevSubPriceOnRetryAfterUpsell2", false)
 local fFlagRefreshLookPriceOnRetryAfterUpsellModule = require(purchasePrompt.Flags.FFlagRefreshLookPriceOnRetryAfterUpsell)
-local var41 = if fFlagRefreshPriceOnRetryAfterUpsellModule or fFlagRefreshLookPriceOnRetryAfterUpsellModule then require(purchasePrompt.Utils.applyRefreshedPrice) else nil
+local var42 = if fFlagRefreshPriceOnRetryAfterUpsellModule or fFlagRefreshLookPriceOnRetryAfterUpsellModule then require(purchasePrompt.Utils.applyRefreshedPrice) else nil
 local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(purchasePrompt.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
 local fFlagAddPurchaseOptionForProvidingBalance = require(purchasePrompt.Parent.SharedFlags).FFlagAddPurchaseOptionForProvidingBalance
 local fFlagUnifiedPurchaseAddSkeleton = require(purchasePrompt.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
@@ -57,12 +58,12 @@ local fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal = require(purchasePrompt.
 local purchaseFlowUUIDTelemetryModule = require(purchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { networkModule, externalSettingsModule }
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 84 | named "initiatePurchase" ]]
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), hasPendingRequestModule (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (ref), httpService (ref), setPurchaseFlowUUIDModule (ref), loggingProtocolModule (ref), purchaseFlowUUIDTelemetryModule (ref), requestAssetPurchaseModule (ref), requestGamepassPurchaseModule (ref), requestProductPurchaseModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), productTypeEnum (ref), requestExperiencePurchaseModule (ref), requestLookPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), requestDeveloperSubscriptionPurchaseModule (ref), fFlagAXMISWithBlackbird (ref), requestRobuxUpsellPurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagAddPurchaseOptionForProvidingBalance (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagAddFetchProductInfoAsACallback (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (ref), setPromptStateModule (ref), promptStateModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), promiseModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), getProductInfoModule (ref), deprecatedGetProductInfoModule (ref), fFlagRemoveAcountInfoFetchFromPurchaseModule (ref), playersService (ref), getAccountInfoModule (ref), getIsAlreadyOwnedModule (ref), getBalanceInfoModule (ref), getUnifiedPurchaseFlowEligibilityModule (ref), getRobloxSubscriptionProducts (ref), setProductPayloadModule (ref), buildProductPayloadFromInitiateArgsModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), refreshDevSubPriceOnRetryAfterUpsell2 (ref), var41 (ref), resolvePromptStateModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fetchCartPricingModule (ref), fFlagFixPurchasingErrorCounterModule (ref)
-	return thunkModule.new(script.Name, list, function(p12, p13) --[[ line: 98 ]]
-		-- upvalues: networkModule (copy), externalSettingsModule (copy), hasPendingRequestModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), p11 (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (copy), httpService (copy), setPurchaseFlowUUIDModule (copy), loggingProtocolModule (copy), purchaseFlowUUIDTelemetryModule (copy), p1 (ref), requestAssetPurchaseModule (copy), p0 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), requestGamepassPurchaseModule (copy), requestProductPurchaseModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), productTypeEnum (copy), requestExperiencePurchaseModule (copy), requestLookPurchaseModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), requestDeveloperSubscriptionPurchaseModule (copy), fFlagAXMISWithBlackbird (copy), requestRobuxUpsellPurchaseModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), fFlagAddPurchaseOptionForProvidingBalance (copy), fFlagUnifiedPurchaseAddSkeleton (copy), fFlagAddFetchProductInfoAsACallback (copy), p10 (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (copy), setPromptStateModule (copy), promptStateModule (copy), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), promiseModule (copy), getFFlagEnableCreatorStorePurchasingCutoverModule (copy), getProductInfoModule (copy), deprecatedGetProductInfoModule (copy), fFlagRemoveAcountInfoFetchFromPurchaseModule (copy), playersService (copy), getAccountInfoModule (copy), getIsAlreadyOwnedModule (copy), getBalanceInfoModule (copy), getUnifiedPurchaseFlowEligibilityModule (copy), getRobloxSubscriptionProducts (copy), setProductPayloadModule (copy), buildProductPayloadFromInitiateArgsModule (copy), fFlagRefreshLookPriceOnRetryAfterUpsellModule (copy), refreshDevSubPriceOnRetryAfterUpsell2 (copy), var41 (copy), resolvePromptStateModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), fetchCartPricingModule (copy), fFlagFixPurchasingErrorCounterModule (copy)
-		local var44 = p13[networkModule]
-		local var45 = p13[externalSettingsModule]
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 85 | named "initiatePurchase" ]]
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), hasPendingRequestModule (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (ref), httpService (ref), setPurchaseFlowUUIDModule (ref), loggingProtocolModule (ref), purchaseFlowUUIDTelemetryModule (ref), requestAssetPurchaseModule (ref), requestGamepassPurchaseModule (ref), requestProductPurchaseModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), productTypeEnum (ref), requestExperiencePurchaseModule (ref), requestLookPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), requestDeveloperSubscriptionPurchaseModule (ref), fFlagAXMISWithBlackbird (ref), requestRobuxUpsellPurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagAddPurchaseOptionForProvidingBalance (ref), fFlagUnifiedPurchaseAddSkeleton (ref), fFlagAddFetchProductInfoAsACallback (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (ref), setPromptStateModule (ref), promptStateModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), fetchCartPricingModule (ref), promiseModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), getProductInfoModule (ref), deprecatedGetProductInfoModule (ref), fFlagRemoveAcountInfoFetchFromPurchaseModule (ref), playersService (ref), getAccountInfoModule (ref), getIsAlreadyOwnedModule (ref), getBalanceInfoModule (ref), getUnifiedPurchaseFlowEligibilityModule (ref), getRobloxSubscriptionProducts (ref), setProductPayloadModule (ref), buildProductPayloadFromInitiateArgsModule (ref), fFlagRefreshLookPriceOnRetryAfterUpsellModule (ref), refreshDevSubPriceOnRetryAfterUpsell2 (ref), var42 (ref), resolvePromptStateModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagFixPurchasingErrorCounterModule (ref)
+	return thunkModule.new(script.Name, list, function(p12, p13) --[[ line: 99 ]]
+		-- upvalues: networkModule (copy), externalSettingsModule (copy), hasPendingRequestModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), p11 (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (copy), httpService (copy), setPurchaseFlowUUIDModule (copy), loggingProtocolModule (copy), purchaseFlowUUIDTelemetryModule (copy), p1 (ref), requestAssetPurchaseModule (copy), p0 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), requestGamepassPurchaseModule (copy), requestProductPurchaseModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), productTypeEnum (copy), requestExperiencePurchaseModule (copy), requestLookPurchaseModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), requestDeveloperSubscriptionPurchaseModule (copy), fFlagAXMISWithBlackbird (copy), requestRobuxUpsellPurchaseModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), fFlagAddPurchaseOptionForProvidingBalance (copy), fFlagUnifiedPurchaseAddSkeleton (copy), fFlagAddFetchProductInfoAsACallback (copy), p10 (ref), setIsUserEligibleForUnifiedPurchaseFlowModule (copy), setPromptStateModule (copy), promptStateModule (copy), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), fetchCartPricingModule (copy), promiseModule (copy), getFFlagEnableCreatorStorePurchasingCutoverModule (copy), getProductInfoModule (copy), deprecatedGetProductInfoModule (copy), fFlagRemoveAcountInfoFetchFromPurchaseModule (copy), playersService (copy), getAccountInfoModule (copy), getIsAlreadyOwnedModule (copy), getBalanceInfoModule (copy), getUnifiedPurchaseFlowEligibilityModule (copy), getRobloxSubscriptionProducts (copy), setProductPayloadModule (copy), buildProductPayloadFromInitiateArgsModule (copy), fFlagRefreshLookPriceOnRetryAfterUpsellModule (copy), refreshDevSubPriceOnRetryAfterUpsell2 (copy), var42 (copy), resolvePromptStateModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), fFlagFixPurchasingErrorCounterModule (copy)
+		local var45 = p13[networkModule]
+		local var46 = p13[externalSettingsModule]
 		
 		if hasPendingRequestModule(p12:getState()) and (not fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal or not p11) then
 			return nil
@@ -89,26 +90,26 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 84 
 			
 			return nil
 		end
-		if var45.getFlagOrder66() then
+		if var46.getFlagOrder66() then
 			p12:dispatch(errorOccurredModule(purchaseErrorModule.PurchaseDisabled))
 			
 			return nil
 		end
-		local var46 = nil
-		local providedRobuxBalance = nil
 		local var47 = nil
+		local providedRobuxBalance = nil
+		local var48 = nil
 		
 		if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then
 			local purchaseOptions = p12:getState().purchaseOptions
 			
 			if purchaseOptions ~= nil and purchaseOptions.shouldSkipOwnershipCheck == true then
-				var46 = true
+				var47 = true
 			end
 			if fFlagAddPurchaseOptionForProvidingBalance and purchaseOptions ~= nil and purchaseOptions.providedRobuxBalance ~= nil then
 				providedRobuxBalance = purchaseOptions.providedRobuxBalance
 			end
 			if fFlagUnifiedPurchaseAddSkeleton and purchaseOptions ~= nil and purchaseOptions.enablePreloadedPurchaseUI == true then
-				var47 = true
+				var48 = true
 			end
 		end
 		local fetchProductInfo = nil
@@ -120,9 +121,9 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 84 
 				fetchProductInfo = purchaseCallbacks.fetchProductInfo
 			end
 		end
-		local var48 = if fFlagEnableUnifiedProductPurchaseFlow then p10 else nil
+		local var49 = if fFlagEnableUnifiedProductPurchaseFlow then p10 else nil
 		
-		if fFlagEnableUnifiedProductPurchaseFlow and fFlagUnifiedPurchaseAddSkeleton and var47 then
+		if fFlagEnableUnifiedProductPurchaseFlow and fFlagUnifiedPurchaseAddSkeleton and var48 then
 			p12:dispatch(setIsUserEligibleForUnifiedPurchaseFlowModule(true))
 			p12:dispatch(setPromptStateModule(promptStateModule.InitializingPurchase))
 		end
@@ -137,18 +138,19 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 84 
 			}
 		end
 		return promiseModule.all({
-			productInfo = if not getFFlagEnableCreatorStorePurchasingCutoverModule() then if fFlagAddFetchProductInfoAsACallback and fetchProductInfo ~= nil and (not fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal or not p11) then fetchProductInfo() else getProductInfoModule(var44, p0, p1, var48, if fFlagRefreshPriceOnRetryAfterUpsellModule then t else nil) else deprecatedGetProductInfoModule(var44, p0, p1),
+			productInfo = if not getFFlagEnableCreatorStorePurchasingCutoverModule() then if fFlagAddFetchProductInfoAsACallback and fetchProductInfo ~= nil and (not fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal or not p11) then fetchProductInfo() else getProductInfoModule(var45, p0, p1, var49, if fFlagRefreshPriceOnRetryAfterUpsellModule then t else nil) else deprecatedGetProductInfoModule(var45, p0, p1),
 			accountInfo = if fFlagRemoveAcountInfoFetchFromPurchaseModule then promiseModule.resolve({
 				isPremium = playersService.LocalPlayer.MembershipType == Enum.MembershipType.Premium
-			}) else getAccountInfoModule(var44, var45),
-			alreadyOwned = getIsAlreadyOwnedModule(var44, p0, p1, var46),
-			balanceInfo = getBalanceInfoModule(var44, var45, false, true, providedRobuxBalance),
-			isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then getUnifiedPurchaseFlowEligibilityModule(var44, p1) else nil,
-			robloxSubscriptionProducts = if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then getRobloxSubscriptionProducts():catch(function() --[[ line: 242 ]]
+			}) else getAccountInfoModule(var45, var46),
+			alreadyOwned = getIsAlreadyOwnedModule(var45, p0, p1, var47),
+			balanceInfo = getBalanceInfoModule(var45, var46, false, true, providedRobuxBalance),
+			isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then getUnifiedPurchaseFlowEligibilityModule(var45, p1) else nil,
+			robloxSubscriptionProducts = if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then getRobloxSubscriptionProducts():catch(function() --[[ line: 250 ]]
 				return nil
-			end) else nil
-		}):andThen(function(p15) --[[ line: 247 ]]
-			-- upvalues: fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), productTypeEnum (copy), p12 (ref), setProductPayloadModule (copy), p0 (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), buildProductPayloadFromInitiateArgsModule (copy), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), p8 (copy), p9 (copy), var48 (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), fFlagRefreshLookPriceOnRetryAfterUpsellModule (copy), p11 (copy), refreshDevSubPriceOnRetryAfterUpsell2 (copy), var41 (copy), resolvePromptStateModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), fetchCartPricingModule (copy)
+			end) else nil,
+			cartPricingResponse = if fFlagPurchasePromptOfferMarginUpsellEnabledModule then if fFlagPurchasePromptOfferMarginUpsellEnabledModule then p12:dispatch(fetchCartPricingModule()) else nil else nil
+		}):andThen(function(p15) --[[ line: 259 ]]
+			-- upvalues: fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), productTypeEnum (copy), p12 (ref), setProductPayloadModule (copy), p0 (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), buildProductPayloadFromInitiateArgsModule (copy), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), p8 (copy), p9 (copy), var49 (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), fFlagRefreshLookPriceOnRetryAfterUpsellModule (copy), p11 (copy), refreshDevSubPriceOnRetryAfterUpsell2 (copy), var42 (copy), resolvePromptStateModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), fetchCartPricingModule (copy)
 			local productPayload
 			if fFlagEnableUnifiedPurchaseFlowForDevSubs and p15.productInfo.ProductType == productTypeEnum.DeveloperSubscription and (p12:getState().productPayload == nil or p12:getState().productPayload.kind == nil) then
 				p12:dispatch(setProductPayloadModule({
@@ -163,29 +165,29 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11) --[[ line: 84 
 				productPayload = p12:getState().productPayload
 				
 				if not productPayload or not productPayload.kind then
-					local var50 = buildProductPayloadFromInitiateArgsModule(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, var48)
+					local var51 = buildProductPayloadFromInitiateArgsModule(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, var49)
 					
-					if var50 then
-						p12:dispatch(setProductPayloadModule(var50))
+					if var51 then
+						p12:dispatch(setProductPayloadModule(var51))
 					end
 				end
 			end
 			productPayload = p9
 			
 			if (fFlagRefreshPriceOnRetryAfterUpsellModule or fFlagRefreshLookPriceOnRetryAfterUpsellModule) and p11 then
-				local var51 = if refreshDevSubPriceOnRetryAfterUpsell2 and fFlagEnableUnifiedPurchaseFlowForDevSubs and p15.productInfo.ProductType == productTypeEnum.DeveloperSubscription then p15.productInfo.PriceInRobux else p15.productInfo.refreshedExpectedPrice
+				local var52 = if refreshDevSubPriceOnRetryAfterUpsell2 and fFlagEnableUnifiedPurchaseFlowForDevSubs and p15.productInfo.ProductType == productTypeEnum.DeveloperSubscription then p15.productInfo.PriceInRobux else p15.productInfo.refreshedExpectedPrice
 				
-				if var51 ~= nil then
-					productPayload = var51
-					var41(p12, var51)
+				if var52 ~= nil then
+					productPayload = var52
+					var42(p12, var52)
 				end
 			end
 			p12:dispatch(resolvePromptStateModule(p15.productInfo, p15.accountInfo, p15.balanceInfo, p15.alreadyOwned, p3, productPayload, p15.isUserEligibleForUnifiedPurchaseFlow, if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then p15.robloxSubscriptionProducts else nil))
 			
-			if fFlagPurchasePromptCartPricingEnabledModule then
+			if fFlagPurchasePromptCartPricingEnabledModule and not fFlagPurchasePromptOfferMarginUpsellEnabledModule then
 				p12:dispatch(fetchCartPricingModule())
 			end
-		end):catch(function(p14) --[[ line: 330 ]]
+		end):catch(function(p14) --[[ line: 342 ]]
 			-- upvalues: fFlagFixPurchasingErrorCounterModule (copy), purchaseErrorModule (copy), p12 (ref), errorOccurredModule (copy)
 			if not fFlagFixPurchasingErrorCounterModule then
 				p12:dispatch(errorOccurredModule(p14))

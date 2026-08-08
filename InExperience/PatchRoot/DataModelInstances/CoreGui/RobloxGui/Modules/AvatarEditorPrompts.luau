@@ -33,7 +33,7 @@ function t.new() --[[ line: 30 ]]
 		LocalizationProvider = roactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
-			FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+			FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 				PolicyProvider = roactModule.createElement(avatarEditorPromptsPolicyModule.Provider, { policy = { avatarEditorPromptsPolicyModule.Mapper } }, {
 					ThemeProvider = renderWithCoreScriptsStyleProviderModule({
 						AvatarEditorPromptsApp = roactModule.createElement(avatarEditorPromptsAppModule)

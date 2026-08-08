@@ -21,9 +21,10 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
+local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 
-return reactModule.memo(function(p0) --[[ line: 46 | named "DualDropdownReportV2" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), dashModule (ref), sheet (ref), view (ref), iconButton (ref), buttonVariant (ref), iconName (ref), text (ref), inputLabel (ref), inputSize (ref), sideModalDropdownButtonModule (ref), textArea (ref), button (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), optionSelectorGroup (ref)
+return reactModule.memo(function(p0) --[[ line: 48 | named "DualDropdownReportV2" ]]
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), dashModule (ref), sheet (ref), view (ref), iconButton (ref), buttonVariant (ref), iconName (ref), text (ref), inputLabel (ref), inputSize (ref), sideModalDropdownButtonModule (ref), textArea (ref), button (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), optionSelectorGroup (ref)
 	local selectOnePrompt
 	local var7 = useTokens()
 	local var8, var9 = reactModule.useState(true)
@@ -38,41 +39,41 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "DualDropdownReportV2
 		selectOnePrompt = "Feature.ReportAbuse.Label.PleaseSelectOne",
 		commentHeading = "Feature.ReportAbuse.Label.TellUsWhatHappenedNoOptional",
 		textAreaPlaceholder = "Feature.SettingsHub.Label.ReportComment",
-		submitButton = "Feature.ReportAbuse.Action.Submit",
 		continueButton = "Feature.ReportAbuse.Action.Continue",
-		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport"
+		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport",
+		submitButton = if fFlagUpdateInGameAssetReportingCTAs then "Feature.ReportAbuse.Label.Report" else "Feature.ReportAbuse.Action.Submit"
 	})
-	local var21 = reactModule.useCallback(function(p1) --[[ line: 67 ]]
+	local var21 = reactModule.useCallback(function(p1) --[[ line: 71 ]]
 		-- upvalues: var17 (ref)
 		var17(p1)
 	end, {})
-	local var22 = reactModule.useCallback(function() --[[ line: 71 ]]
+	local var22 = reactModule.useCallback(function() --[[ line: 75 ]]
 		-- upvalues: none_1 (ref)
 		none_1("Problem")
 	end, {})
-	local var23 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var23 = reactModule.useCallback(function() --[[ line: 79 ]]
 		-- upvalues: none_1 (ref)
 		none_1("Surface")
 	end, {})
-	local var24 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var24 = reactModule.useCallback(function() --[[ line: 83 ]]
 		-- upvalues: var9 (ref), p0 (ref)
 		var9(false)
 		task.wait(0.3)
 		p0.onClose()
 	end, { p0.onClose })
-	local var25 = reactModule.useCallback(function() --[[ line: 85 ]]
+	local var25 = reactModule.useCallback(function() --[[ line: 89 ]]
 		-- upvalues: none_1 (ref)
 		none_1("None")
 	end, {})
-	local var26 = reactModule.useCallback(function(p2) --[[ line: 89 ]]
+	local var26 = reactModule.useCallback(function(p2) --[[ line: 93 ]]
 		-- upvalues: none (ref), dashModule (copy), p0 (ref), var13 (ref), var15 (ref), var25 (ref)
 		if none == "Problem" then
-			var13(dashModule.find(p0.problems, function(p3) --[[ line: 91 ]]
+			var13(dashModule.find(p0.problems, function(p3) --[[ line: 95 ]]
 				-- upvalues: p2 (ref)
 				return p3.value == p2
 			end))
 		else
-			var15(dashModule.find(p0.surfaces, function(p4) --[[ line: 96 ]]
+			var15(dashModule.find(p0.surfaces, function(p4) --[[ line: 100 ]]
 				-- upvalues: p2 (ref)
 				return p4.value == p2
 			end))
@@ -80,7 +81,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "DualDropdownReportV2
 		var25()
 	end, { none, p0.problems, p0.surfaces, var25 })
 	local var27 = var12 and var12.value == "ip infringement"
-	local var28 = reactModule.useCallback(function() --[[ line: 106 ]]
+	local var28 = reactModule.useCallback(function() --[[ line: 110 ]]
 		-- upvalues: var12 (ref), var14 (ref), none_3 (ref), var27 (ref), var24 (ref), p0 (ref), var16 (ref)
 		local var48 = if var12 ~= nil then "" else var12.value
 		local var49 = if var14 ~= nil then "" else var14.value
@@ -251,7 +252,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "DualDropdownReportV2
 				LayoutOrder = 2,
 				value = if none == "Problem" and var12 ~= nil then var12.value elseif none == "Surface" and var14 ~= nil then var14.value else "",
 				onValueChanged = var26
-			}, dashModule.map(p0[if none == "Problem" then "problems" else "surfaces"], function(p5) --[[ line: 279 ]]
+			}, dashModule.map(p0[if none == "Problem" then "problems" else "surfaces"], function(p5) --[[ line: 283 ]]
 				-- upvalues: reactModule (copy), optionSelectorGroup (copy), inputSize (copy)
 				return reactModule.createElement(optionSelectorGroup.Item, {
 					key = p5.value,

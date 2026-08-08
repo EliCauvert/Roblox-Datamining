@@ -279,7 +279,7 @@ function t.GetGroupMembers(p14, p15, p16) --[[ line: 215 ]]
 	-- upvalues: GROUPS_URL (ref), httpService (ref), fetchGet (ref)
 	p16 = p16 or 100
 	local text = "GetGroupMembers_" .. p14 .. "_" .. (p15 or "") .. "_" .. tostring(p16)
-	local formattedText = string.format("%sv1/groups/%s/users?sortOrder=Asc&limit=%d", GROUPS_URL, p14, p16)
+	local formattedText = string.format("%sv2/groups/%s/users?sortOrder=Asc&limit=%d", GROUPS_URL, p14, p16)
 	
 	if p15 then
 		formattedText ..= "&cursor=" .. httpService:UrlEncode(p15)
@@ -291,7 +291,7 @@ function t.GetGroupRoleMembers(p17, p18, p19, p20) --[[ line: 230 ]]
 	-- upvalues: GROUPS_URL (ref), httpService (ref), fetchGet (ref)
 	p20 = p20 or 100
 	local text = "GetGroupRoleMembers_" .. p17 .. "_" .. tostring(p18) .. "_" .. (p19 or "") .. "_" .. tostring(p20)
-	local formattedText = string.format("%sv1/groups/%s/roles/%d/users?sortOrder=Asc&limit=%d", GROUPS_URL, p17, p18, p20)
+	local formattedText = string.format("%sv2/groups/%s/users?roleSetId=%d&sortOrder=Asc&limit=%d", GROUPS_URL, p17, p18, p20)
 	
 	if p19 then
 		formattedText ..= "&cursor=" .. httpService:UrlEncode(p19)

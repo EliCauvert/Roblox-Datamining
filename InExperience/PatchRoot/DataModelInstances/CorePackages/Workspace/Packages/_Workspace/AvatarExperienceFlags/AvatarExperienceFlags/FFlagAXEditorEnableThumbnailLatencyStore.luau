@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXEditorEnableThumbnailLatencyStore", false)
+﻿return game:DefineFastFlag("AXEditorEnableThumbnailLatencyStore2", false)

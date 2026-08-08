@@ -1,16 +1,18 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local cryoModule = require(parent.Cryo)
 local launchGame = require(parent.GameLaunch).LaunchGame
+local fFlagDeferInExperienceRbxmDownload = require(parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
 local fFlagLuaAppFixLaunchGameSourceParam = require(parent.SharedFlags).FFlagLuaAppFixLaunchGameSourceParam
 local sduiReportGamePlayIntent = require(parent.SduiSharedContent).sduiReportGamePlayIntent
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 local launchExperience = sduiCoreSystemModule.SduiActionType.LaunchExperience
 
-return function(p0, p1, p2, _) --[[ line: 30 ]]
-	-- upvalues: sduiErrorType (ref), launchExperience (ref), sduiReportGamePlayIntent (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref)
-	local var1 = if p0 then p0.actionParams else nil
+return function(p0, p1, p2, _) --[[ line: 32 ]]
+	-- upvalues: sduiErrorType (ref), launchExperience (ref), fFlagDeferInExperienceRbxmDownload (ref), cryoModule (ref), sduiReportGamePlayIntent (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref)
+	local var2 = if p0 then p0.actionParams else nil
 	
-	if var1 == nil then
+	if var2 == nil then
 		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = launchExperience
@@ -18,8 +20,8 @@ return function(p0, p1, p2, _) --[[ line: 30 ]]
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local placeId = var1.placeId
+	assert(var2, "actionParams must exist")
+	local placeId = var2.placeId
 	
 	if placeId == nil then
 		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -30,9 +32,13 @@ return function(p0, p1, p2, _) --[[ line: 30 ]]
 		
 		return
 	end
-	local universeId = var1.universeId
-	local launchSource = var1.launchSource
-	local experienceJoinData = var1.experienceJoinData
+	local universeId = var2.universeId
+	local launchSource = var2.launchSource
+	local experienceJoinData = var2.experienceJoinData
+	
+	if fFlagDeferInExperienceRbxmDownload then
+		experienceJoinData = cryoModule.Dictionary.join(experienceJoinData or {}, { universeId = universeId })
+	end
 	sduiReportGamePlayIntent({
 		sduiContext = p2,
 		analyticsContext = p1,

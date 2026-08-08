@@ -1,23 +1,25 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+local parent = shareSheet.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local divider = foundationModule.Divider
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
+local fFlagShareSheetTelemetryRefactorModule = require(shareSheet.Flags.FFlagShareSheetTelemetryRefactor)
 local shareSheetSocialRowModule = require(script.Parent.ShareSheetSocialRow)
 local shareSheetActionRowModule = require(script.Parent.ShareSheetActionRow)
 local shareSendRowModule = require(script.Parent.ShareSendRow)
 
-local function setContentScrollingFrameRef(value) --[[ line: 35 ]]
+local function setContentScrollingFrameRef(value) --[[ line: 37 ]]
 	if value then
 		value.AutomaticSize = Enum.AutomaticSize.Y
 		value.ScrollBarThickness = 0
 	end
 end
 
-return function(p0) --[[ line: 42 | named "ShareSheetView" ]]
-	-- upvalues: reactModule (ref), sheet (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), shareSheetActionRowModule (ref)
+return function(p0) --[[ line: 44 | named "ShareSheetView" ]]
+	-- upvalues: reactModule (ref), sheet (ref), text (ref), setContentScrollingFrameRef (ref), view (ref), shareSheetSocialRowModule (ref), divider (ref), shareSendRowModule (ref), fFlagShareSheetTelemetryRefactorModule (ref), shareSheetActionRowModule (ref)
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		isOpen = p0.isOpen,
@@ -48,7 +50,8 @@ return function(p0) --[[ line: 42 | named "ShareSheetView" ]]
 					isLoading = p0.isSending,
 					label = p0.sendLabel,
 					messagePlaceholder = p0.messagePlaceholder,
-					onActivated = p0.onSendActivated
+					onActivated = p0.onSendActivated,
+					onFocusGained = if fFlagShareSheetTelemetryRefactorModule then p0.onComposerFocused else nil
 				}) else reactModule.createElement(shareSheetActionRowModule, {
 					LayoutOrder = 3,
 					canShare = p0.canShareLink,

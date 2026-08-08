@@ -14,14 +14,14 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
 local navigationMenuModule = require(moments.Components.NavigationMenu)
 local constantsModule = require(moments.Constants)
 local _ = require(script.Parent.MomentsHeaderView)
 
 return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
-	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), plusLarge (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), navigationMenuModule (ref), view (ref), foundationProvider (ref), theme (ref), gradientBackdrop (ref), constantsModule (ref)
+	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), plusLarge (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), navigationMenuModule (ref), view (ref), foundationProvider (ref), colorMode (ref), gradientBackdrop (ref), constantsModule (ref)
 	local t = nil
 	
 	if p0.variant == "back" then
@@ -115,7 +115,7 @@ return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
 			ZIndex = 2,
 			padding = p0.headerPadding
 		}, {
-			OverMediaTheme = reactModule.createElement(foundationProvider, { theme = theme.Light }, {
+			OverMediaTheme = reactModule.createElement(foundationProvider, { colorMode = colorMode.Light }, {
 				HeaderRow = reactModule.createElement(view, {
 					tag = "row align-y-center size-full-0 auto-y padding-x-large padding-top-medium"
 				}, t)

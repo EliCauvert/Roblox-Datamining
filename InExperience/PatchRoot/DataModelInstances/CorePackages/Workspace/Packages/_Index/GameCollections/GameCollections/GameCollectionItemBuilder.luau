@@ -3,8 +3,9 @@ local parent = gameCollections.Parent
 local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
 local calculateGridLayoutModule = require(gameCollections.calculateGridLayout)
 local renderEmphasisTileModule = require(gameCollections.renderEmphasisTile)
-local renderTwoByOneTileModule = require(gameCollections.renderTwoByOneTile)
-local renderOneByTwoTileModule = require(gameCollections.renderOneByTwoTile)
+local sponsoredTilesModule = require(parent.SponsoredTiles)
+local renderTwoByOneTile = sponsoredTilesModule.renderTwoByOneTile
+local renderOneByTwoTile = sponsoredTilesModule.renderOneByTwoTile
 local renderBlankTileModule = require(gameCollections.renderBlankTile)
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.React)
@@ -18,19 +19,19 @@ local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnabl
 local fFlagLuaAppEnableNxMApportioningExtraLogging = sharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
 local t = {
 	[gameCollectionItemTypes.GameCollectionItemType.EmphasisTile] = renderEmphasisTileModule,
-	[gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = renderTwoByOneTileModule,
+	[gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = renderTwoByOneTile,
 	[gameCollectionItemTypes.GameCollectionItemType.Blank] = renderBlankTileModule
 }
 
 if fFlagLuaAppEnableHomepageOneByTwoTile then
-	t[gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile] = renderOneByTwoTileModule
+	t[gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile] = renderOneByTwoTile
 end
-local var10 = if fFlagLuaAppEnableNxMRoduxApportioning then gameCollectionItemTypes.SpanForItemType else nil
+local var9 = if fFlagLuaAppEnableNxMRoduxApportioning then gameCollectionItemTypes.SpanForItemType else nil
 
 return {
-	BuildCollectionEntries = function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 48 ]]
-		-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (ref), t (ref), var10 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), calculateGridLayoutModule (ref), fFlagLuaAppFixTotalColsBound (ref), gridLayoutTelemetryModule (ref), discoveryEventErrorLogger (ref), gameCollectionItemTypes (ref), renderBlankTileModule (ref), cryoModule (ref)
-		local var14, var15
+	BuildCollectionEntries = function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 49 ]]
+		-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (ref), t (ref), var9 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), calculateGridLayoutModule (ref), fFlagLuaAppFixTotalColsBound (ref), gridLayoutTelemetryModule (ref), discoveryEventErrorLogger (ref), gameCollectionItemTypes (ref), renderBlankTileModule (ref), cryoModule (ref)
+		local var13, var14
 		local t_1 = {}
 		local _ = nil
 		local _ = nil
@@ -44,7 +45,7 @@ return {
 					if t[v.componentType] then
 						t_2[i] = v.componentType
 					end
-					local componentType = var10[v.componentType]
+					local componentType = var9[v.componentType]
 					
 					if componentType then
 						t_3[i] = {
@@ -56,11 +57,11 @@ return {
 					end
 				end
 			end
-			var14 = t_2
-			var15 = t_3
+			var13 = t_2
+			var14 = t_3
 		else
-			var14 = p3
-			var15 = p2
+			var13 = p3
+			var14 = p2
 		end
 		local layout, totalRows
 		local _ = nil
@@ -70,28 +71,28 @@ return {
 		if fFlagLuaAppEnableNxMRoduxApportioning and p8 then
 			layout = p8
 			totalRows = #p8
-		elseif fFlagLuaAppEnableNxMApportioningExtraLogging and var15 then
+		elseif fFlagLuaAppEnableNxMApportioningExtraLogging and var14 then
+			local var15 = 0
 			local var16 = 0
 			local var17 = 0
-			local var18 = 0
 			
-			for i, v in var15 do
-				var16 += 1
+			for i, v in var14 do
+				var15 += 1
 				
-				if var18 < i then
-					var18 = i
+				if var17 < i then
+					var17 = i
 				end
 				if #p0 < i then
-					var17 += 1
+					var16 += 1
 				end
 			end
-			if var17 > 0 then
+			if var16 > 0 then
 				apportioningDiagnosticTelemetry.log("LegacySpanOverridesMismatch", {
 					entriesCount = #p0,
 					itemsPerRow = p1,
-					spanOverrideCount = var16,
-					spanOverrideOutOfRangeCount = var17,
-					spanOverrideMaxKey = var18,
+					spanOverrideCount = var15,
+					spanOverrideOutOfRangeCount = var16,
+					spanOverrideMaxKey = var17,
 					pageContext = p5,
 					sortIndex = p6,
 					topicId = p7,
@@ -99,49 +100,49 @@ return {
 				})
 			end
 		end
-		local var19 = calculateGridLayoutModule(#p0, p1, var15)
-		layout = var19.layout
-		totalRows = var19.totalRows
-		totalCols = var19.totalCols
+		local var18 = calculateGridLayoutModule(#p0, p1, var14)
+		layout = var18.layout
+		totalRows = var18.totalRows
+		totalCols = var18.totalCols
 		local t_2 = {}
-		local var21 = if fFlagLuaAppEnableNxMApportioningExtraLogging then {
+		local var20 = if fFlagLuaAppEnableNxMApportioningExtraLogging then {
 			realTileCount = 0,
 			blankStaleCount = 0,
 			blankShadowOrEmptyCount = 0
 		} else nil
 		
 		for i = 1, totalRows do
-			local var22 = 1
+			local var21 = 1
 			
-			for var22 = var22, if fFlagLuaAppEnableNxMRoduxApportioning or fFlagLuaAppFixTotalColsBound then p1 else totalCols do
-				local var23 = layout[i] and layout[i][var22]
+			for var21 = var21, if fFlagLuaAppEnableNxMRoduxApportioning or fFlagLuaAppFixTotalColsBound then p1 else totalCols do
+				local var22 = layout[i] and layout[i][var21]
 				
-				if not var23 or var23 <= 0 then
+				if not var22 or var22 <= 0 then
 					table.insert(t_1, {
 						gameCollectionItemTypeOverride = gameCollectionItemTypes.GameCollectionItemType.Blank,
 						customRenderFunction = renderBlankTileModule
 					})
 					
-					if fFlagLuaAppEnableNxMApportioningExtraLogging and var21 then
-						var21.blankShadowOrEmptyCount += 1
+					if fFlagLuaAppEnableNxMApportioningExtraLogging and var20 then
+						var20.blankShadowOrEmptyCount += 1
 					end
 				end
-				local var24 = if var14 then var14[var23] else nil
-				local var25 = if fFlagLuaAppEnableNxMRoduxApportioning then p0[var23] else nil
+				local var23 = if var13 then var13[var22] else nil
+				local var24 = if fFlagLuaAppEnableNxMRoduxApportioning then p0[var22] else nil
 				
-				if var24 then
-					t_2[var23] = true
+				if var23 then
+					t_2[var22] = true
 					
 					if fFlagLuaAppEnableNxMRoduxApportioning then
-						gridLayoutTelemetryModule.logTilePlaced(var25 and var25.adId, var25 and var25.universeId, var24, p5, p1, totalRows, var23, #t_1 + 1, p6, p7, nil)
+						gridLayoutTelemetryModule.logTilePlaced(var24 and var24.adId, var24 and var24.universeId, var23, p5, p1, totalRows, var22, #t_1 + 1, p6, p7, nil)
 					else
-						local var26 = p0[var23]
-						gridLayoutTelemetryModule.logTilePlaced(var26 and var26.adId, var26 and var26.universeId, var24, p5, p1, totalRows, var23, #t_1 + 1, p6, p7, if fFlagLuaAppFixTotalColsBound then totalCols else nil)
+						local var25 = p0[var22]
+						gridLayoutTelemetryModule.logTilePlaced(var25 and var25.adId, var25 and var25.universeId, var23, p5, p1, totalRows, var22, #t_1 + 1, p6, p7, if fFlagLuaAppFixTotalColsBound then totalCols else nil)
 					end
 				end
-				if fFlagLuaAppEnableNxMRoduxApportioning and not var25 then
+				if fFlagLuaAppEnableNxMRoduxApportioning and not var24 then
 					discoveryEventErrorLogger.reportError("GameCollectionItemBuilder_StaleLayoutEntry", "layout entryIndex points past end of entries", {
-						entryIndex = var23,
+						entryIndex = var22,
 						entriesCount = #p0,
 						pageContext = p5,
 						sortIndex = p6,
@@ -152,29 +153,29 @@ return {
 						customRenderFunction = renderBlankTileModule
 					})
 					
-					if fFlagLuaAppEnableNxMApportioningExtraLogging and var21 then
-						var21.blankStaleCount += 1
+					if fFlagLuaAppEnableNxMApportioningExtraLogging and var20 then
+						var20.blankStaleCount += 1
 					end
 				else
-					table.insert(t_1, cryoModule.Dictionary.join(if fFlagLuaAppEnableNxMRoduxApportioning then var25 else p0[var23], {
-						spanOverride = if var15 then var15[var23] else nil,
-						gameCollectionItemTypeOverride = var24,
-						tileType = var24 or gameCollectionItemTypes.GameCollectionItemType.GameTile,
-						showDescription = if var24 == gameCollectionItemTypes.GameCollectionItemType.EmphasisTile then p4 else nil,
-						customRenderFunction = if var24 then t[var24] else nil
+					table.insert(t_1, cryoModule.Dictionary.join(if fFlagLuaAppEnableNxMRoduxApportioning then var24 else p0[var22], {
+						spanOverride = if var14 then var14[var22] else nil,
+						gameCollectionItemTypeOverride = var23,
+						tileType = var23 or gameCollectionItemTypes.GameCollectionItemType.GameTile,
+						showDescription = if var23 == gameCollectionItemTypes.GameCollectionItemType.EmphasisTile then p4 else nil,
+						customRenderFunction = if var23 then t[var23] else nil
 					}))
 					
-					if fFlagLuaAppEnableNxMApportioningExtraLogging and var21 then
-						var21.realTileCount += 1
+					if fFlagLuaAppEnableNxMApportioningExtraLogging and var20 then
+						var20.realTileCount += 1
 					end
 				end
 			end
 		end
-		if fFlagLuaAppEnableNxMApportioningExtraLogging and var21 then
+		if fFlagLuaAppEnableNxMApportioningExtraLogging and var20 then
 			apportioningDiagnosticTelemetry.log("DerivedEntriesComposed", {
-				realTileCount = var21.realTileCount,
-				blankStaleCount = var21.blankStaleCount,
-				blankShadowOrEmptyCount = var21.blankShadowOrEmptyCount,
+				realTileCount = var20.realTileCount,
+				blankStaleCount = var20.blankStaleCount,
+				blankShadowOrEmptyCount = var20.blankShadowOrEmptyCount,
 				entriesCount = #p0,
 				totalRows = totalRows,
 				totalCols = totalCols,
@@ -185,11 +186,11 @@ return {
 				nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
 			})
 		end
-		if var14 then
-			for i_1, v in var14 do
+		if var13 then
+			for i_1, v in var13 do
 				if not t_2[i_1] then
-					local var27 = p0[i_1]
-					gridLayoutTelemetryModule.logTileSkipped(var27 and var27.adId, var27 and var27.universeId, v, p5, p1, totalRows, i_1, p6, p7)
+					local var26 = p0[i_1]
+					gridLayoutTelemetryModule.logTileSkipped(var26 and var26.adId, var26 and var26.universeId, v, p5, p1, totalRows, i_1, p6, p7)
 				end
 			end
 		end

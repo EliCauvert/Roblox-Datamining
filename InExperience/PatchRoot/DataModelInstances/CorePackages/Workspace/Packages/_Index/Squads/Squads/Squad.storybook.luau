@@ -59,7 +59,7 @@ return {
 			}, {
 				roact.createElement(foundation.FoundationProvider, {
 					device = "Desktop",
-					theme = var8.themeName,
+					colorMode = var8.themeName,
 					overlayGui = useCreateOverlay(p3)
 				}, {
 					roact.createElement(appStyleProvider, { style = var8 }, { Child = mockLocale(p2, p3) })

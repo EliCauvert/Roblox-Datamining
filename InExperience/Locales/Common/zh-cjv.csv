@@ -118,11 +118,30 @@ Common.Presence.Label.Invisible,隐藏
 Common.Presence.Label.Offline,离线
 Common.Presence.Label.Online,在线
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,由于输入数据不正确或不完整，无法正确计算质量分数。请检查你的模型或提交错误报告
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,动画过长（{duration} 秒）。动作动画时长上限为 {maxLength} 秒。
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,动画过短（{duration} 秒）。动作动画时长必须超过 {minLength} 秒。
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,你的身体包含小的不相连的网格组件（网格孤岛）。请移除浮动几何图形，并确保所有网格部件均已正确连接。
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,素材质量：“{partName}”有 {num_disconnected_components} 个未连接的组件，超出了 {max_disconnected_components} 个的上限。
+Common.UGCValidation.ErrorLabel.AQSInputDataError,由于输入数据不正确或不完整，无法正确计算质量分数。请检查你的模型或提交错误报告
 Common.UGCValidation.ErrorLabel.AQSInternalError,由于素材质量错误，无法生成分数。请检查输入数据的正确性，然后重试，或提交错误报告。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,素材质量警告：笼架与网格距离得分为 {score}。外部笼架与网格之间的最大距离为 {max_distance}，{negative_sdf_percent}% 的外部笼架顶点位于渲染网格内。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,素材质量警告：身体笼架距离得分为 {score}。身体笼架与身体网格之间的最大距离为 {max_distance}，{negative_sdf_percent}% 的身体笼架顶点位于身体网格内。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,素材质量警告：头部笼架距离得分为 {score}。头部笼架与头部网格之间的最大距离为 {max_distance}，{negative_sdf_percent}% 的头部笼架顶点位于头部网格内。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,素材质量警告：笼架相关性得分为 {score}。{irrelevant_percent}% 的已修改外部笼架顶点未覆盖配饰。
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,素材质量警告：“{cage_name}”的笼架 UV 得分为 {score}。UV 计数不正确：{incorrect_uv_count}。
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,素材质量：“{partName}”有 {degenerate_triangle_percent}% 的退化三角形（得分：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,素材质量警告：动态头部表情得分为 {score}。
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,素材质量：接头配置得分 {score}（接头：{joint_number}；左手：{left_hand_joint_number}；右手：{right_hand_joint_number}）。
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,素材质量：“{partName}”在 {num_disconnected_components} 个组件中有 {num_small_volume_islands} 个小的不相连的孤岛（得分：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,素材质量：“{partName}”有网格流形问题（得分：{score}）。
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,素材质量：“{partName}”网格不严密（{boundary_edges_percent}% 边界边）。
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,素材质量警告：网格覆盖情况得分为 {score}。{mesh_outside_outer_cage_percent}% 的网格顶点位于外部笼架之外。
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,无法计算“{measureName}”的素材质量分数，原因是输入数据不完整或无效。这不会阻止你的上传操作。
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,素材质量：纹理“{textureName}”的复杂度较低（得分：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,素材质量：纹理“{textureName}”的分辨率为 {texture_width}x{texture_height}（得分：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,素材质量：“{partName}”有 {intersecting_tri_face_percent}% 的相交三角形（得分：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,素材质量：“{partName}”有 {uv_outside_bound_vert_percent}% 的 UV 顶点超出边界（得分：{score}）。
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,素材质量：“{partName}”有 {similar_vertex_percent}% 的相似顶点（得分：{score}）。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,手柄已通过蒙皮绑定到{jointName}关节，该关节不属于允许的架构。目前只允许使用标准 R15 关节和蒙皮转移关节。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType}必须使用蒙皮转移功能，但你缺少必需的{requiredJointName}关节。
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,手柄已通过蒙皮绑定到接头“{jointName}”，但此资源必须进行自动蒙皮。你只能通过蒙皮绑定到“{validJointNameList}”。
@@ -137,8 +156,10 @@ Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,以下实例不属于
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,上传的素材应为{ExpectedClass}，但实际为{RootClass}。
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,上传的素材应命名为{ExpectedClass}，但实际命名为{RootClass}。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation 中的身体部位“{bodyPartName}”有一个位置（平移）轨道。动画身体部位只能旋转；不允许使用位置轨道。请从此身体部位中移除位置轨道。
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation 中的身体部位“{bodyPartName}”从起始位置移动了 {distance} 格。允许的最大平移距离为 {maxDistance} 格。请减少身体部位的位置移动。
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation 包含 HRD/DRD 骨骼，且身体部位“{bodyPartName}”有一个位置（平移）轨道。当动画中存在骨骼时，不可平移任何身体部位，以防止接头分离。请从身体部位移除所有位置轨道。
 Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation 中的骨骼“{boneName}”有一个位置（平移）轨道。HRD/DRD 骨骼只能旋转；位置轨道会导致接头分离，因此不允许使用。请从此骨骼中移除位置动画。
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation 中的骨骼“{boneName}”从起始位置移动了 {distance} 格。允许的最大平移距离为 {maxDistance} 格。请减少骨骼的位置移动。
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation 包含尚不支持的 HRD/DRD 骨骼文件夹。请在上传前移除所有骨骼子文件夹。
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation 中的身体部位距离 HumanoidRootPart 不能低于 {minHeight} 格或高于 {maxDistance} 格。请修改该动画。
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation 的子级 MarkerCurves 和 AnimationRigData 不能有子级
@@ -184,6 +205,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,无法检测到动态头
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,商城中的动态头部必须是动画形式，但此头部没有 FACS 数据。
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,无法检测到动态头部的右眼闭合表情。请调整右眼的笼架标记，使其与头部右眼的位置相匹配，并确保其可以闭合。
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,无法检测到动态头部的皱眉表情。请调整嘴部的笼架标记，使其与头部的嘴巴位置相匹配，并确保它可以显示皱眉表情。
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,此素材使用了发光贴图，这些贴图仅限“受信任创作者计划”创作者使用。请移除所有发光贴图内容或加入该计划后再上传。
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,上传时，FaceControls 上的 InternalOverrideFACSData 属性必须为空。
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,检测到 FACS 将你的头部扩大到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,检测到 FACS 将你的头部缩小到 {modPercent}%，但修改头部大小违反了脸部动画的商城政策。
@@ -199,6 +221,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,“{partName}”中的 D
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,如果没有 HumanoidRigDescription，你不能添加 DigitsRigDescription。
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,实例“{instName}”出现了不止一次，但它在骨骼层次结构中只能存在一次。
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,实例“{instName}”位于“{parentName}”下方，但根据你现有的骨骼，它应该位于“{expectedParentName}”下方。
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription 和额外骨骼尚未启用身体上传功能。
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,类别“{className}”的实例“{instName}”位于骨骼树中，但不属于已定义的 R15plus 架构。
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,可选接头“{jointName}”在 HRD 中的映射不正确。它必须映射到名为“{boneName}”的骨骼。
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,接头“{jointName}”是标准的 R15 接头，但骨架附件未连接到 HRD。请确保将虚拟形象下的 HRD 关联到 AttachmentConstraint，而不是 Motor6d。
@@ -231,10 +254,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,“{partName}“网格�
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件“{attName}”必须存在于“{partName}”的后代中，且只能存在一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,“{RootInstanceName}”（或其后代）包含属性。你需要从以下实例中移除属性：{InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,要将素材上传到 Roblox，你必须选择恰好 1 个实例及其关联的上传类型。
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,实例 {ProblematicDescendantPath} 不应有标签。
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,第二个测试错误字符串，用于验证端到端 Hub-first 翻译同步工作流程。
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,头部网格部件包含{jointName}的脸部动画，但这些动画无法在 FACS 中使用。请重命名此关节，然后重新导入头部。
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,身体部位{partName}已通过蒙皮绑定到虚拟关节{jointName}，该关节不属于 R15plus 架构。
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription 和额外骨骼尚未启用身体上传功能。
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,前往设置
@@ -247,6 +270,7 @@ CommonUI.Controls.Action.Apply,应用
 CommonUI.Controls.Action.Back,返回
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,确认
+CommonUI.Controls.Action.Continue,
 CommonUI.Controls.Action.Done,完成
 CommonUI.Controls.Action.Next,下一步
 CommonUI.Controls.Action.OK,好
@@ -876,8 +900,10 @@ CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,重置人物？
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,你即将离开此服务器并切换到另一台服务器。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要离开吗？
-CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的体验
-CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此体验并返回{PREVIOUS_EXPERIENCE}。
+CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
+CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即将离开此游戏并返回“{PREVIOUS_GAME}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,震动
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,来切换菜单导航
@@ -954,6 +980,8 @@ CoreScripts.TextChat.Action.SendQuickWords,发送短语
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,全域
 CoreScripts.TextChat.ChannelTabs.Here,这里
+CoreScripts.TextChat.ChannelTabs.System,系统
+CoreScripts.TextChat.ChannelTabs.Team,团队
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>：将某位发言者静音。
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>：取消对某位发言者的静音。
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox 会对所支持语言自动进行聊天翻译
@@ -1166,6 +1194,7 @@ Feature.AddFriends.Action.RequestIgnored,申请已忽略
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,通过搜索用户名或昵称，在 Roblox 上找到你想找的人。
 Feature.AddFriends.Label.ConnectWithContacts,邀请联系人或与已经在 Roblox 上的好友交流！
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,搜索用户
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜索用户名或昵称，在 Roblox 上找到对方。
 Feature.AddFriends.Label.SyncWithContacts,同步联系人以寻找并不接受预付卡。邀请好友！
 Feature.AddFriends.Title.ConnectWithContacts,从通讯录添加
@@ -1188,9 +1217,13 @@ Feature.Avatar.Action.CancelSelection,取消选择
 Feature.Avatar.Action.Clear,清除
 Feature.Avatar.Action.ComposerPost,发布
 Feature.Avatar.Action.ComposerPreviewAndPost,预览并发布
+Feature.Avatar.Action.CreateSet,创建
+Feature.Avatar.Action.CreateSetFirstRun,创建集合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,默认视角
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,
+Feature.Avatar.Action.DeleteSet,删除集合
 Feature.Avatar.Action.Discard,放弃
 Feature.Avatar.Action.EditProfilePicture,编辑个人资料图片
 Feature.Avatar.Action.GoBack,
@@ -1206,8 +1239,11 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,以后再说
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,正在发布
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,全部移除
+Feature.Avatar.Action.RemoveFromSet,
 Feature.Avatar.Action.Rename,重命名
+Feature.Avatar.Action.RenameSet,重命名集合
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,恢复最后保存的虚拟形象
 Feature.Avatar.Action.Revert,还原
@@ -1272,6 +1308,10 @@ Feature.Avatar.Heading.Outfits,穿搭
 Feature.Avatar.Heading.RenameCharacter,重命名角色
 Feature.Avatar.Heading.SaveCostume,保存角色
 Feature.Avatar.Heading.SelectToUpdate,选择要更新的素材
+Feature.Avatar.Heading.SetLimitReached,已达到集合数量上限
+Feature.Avatar.Heading.SetNameDuplicate,名称重复
+Feature.Avatar.Heading.SetNameNotAllowed,不允许使用该名称
+Feature.Avatar.Heading.SetUpdateFailed,
 Feature.Avatar.Heading.SharePublicAvatar,分享你的虚拟形象
 Feature.Avatar.Heading.SortBy,排序依据
 Feature.Avatar.Heading.UsedName,名称已使用
@@ -1296,6 +1336,7 @@ Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,添加/编辑
 Feature.Avatar.Label.AddManage,添加/管理
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
 Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,所有头部
 Feature.Avatar.Label.AnimationFullSet,全套
@@ -1342,6 +1383,7 @@ Feature.Avatar.Label.CountSelected,已选择 {itemCount} 个物品
 Feature.Avatar.Label.Creations,
 Feature.Avatar.Label.CurrentlyWearing,当前穿戴
 Feature.Avatar.Label.DefaultBody,默认身体
+Feature.Avatar.Label.DeleteSetBody,
 Feature.Avatar.Label.Details,详细信息 ({quantity})
 Feature.Avatar.Label.DetailsButton,详情
 Feature.Avatar.Label.DressesAndSkirts,裙子
@@ -1365,6 +1407,7 @@ Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,全脸面具
 Feature.Avatar.Label.FullPair,完整配对
 Feature.Avatar.Label.Gear,装备
+Feature.Avatar.Label.GenericSetError,出错了，请重试。
 Feature.Avatar.Label.GetLookQuestion,想要免费获取这套穿搭吗？
 Feature.Avatar.Label.GetOutfitMultiple,想要免费获得 {numItems} 个道具？
 Feature.Avatar.Label.GetOutfitOne,想要免费获得 [1] 个道具？
@@ -1399,6 +1442,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,左脚鞋子
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,嘴唇
+Feature.Avatar.Label.LoadingSets,
 Feature.Avatar.Label.Looks,造型
 Feature.Avatar.Label.Makeup,妆容
 Feature.Avatar.Label.MakeupLayer,图层 {layerIndex}
@@ -1417,6 +1461,7 @@ Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,没有已过期的{itemType}道具
 Feature.Avatar.Label.NoItems,无{itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,将从此收藏中删除该素材
+Feature.Avatar.Label.NoSets,
 Feature.Avatar.Label.Outerwear,外套
 Feature.Avatar.Label.OutfitIncomplete,你尚未购买你创作的穿搭，因此无法在体验中显示
 Feature.Avatar.Label.OutfitPurchaseFailure,抱歉，无法购买 {numItems} 个道具！
@@ -1432,6 +1477,8 @@ Feature.Avatar.Label.PPEViewFullButton,查看完整虚拟形象
 Feature.Avatar.Label.Pants,裤子
 Feature.Avatar.Label.PantsClassic,
 Feature.Avatar.Label.Photobooth,拍照亭
+Feature.Avatar.Label.ProfileFrames,边框
+Feature.Avatar.Label.ProfileFramesUnlockBanner,订阅 Plus，解锁边框
 Feature.Avatar.Label.Props,
 Feature.Avatar.Label.Purchased,
 Feature.Avatar.Label.QuickMenuCustomizeTitle,自定义选项
@@ -1440,6 +1487,7 @@ Feature.Avatar.Label.R15,15 型号
 Feature.Avatar.Label.R6,6 型号
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,最近穿戴
+Feature.Avatar.Label.RemoveFromSetBody,
 Feature.Avatar.Label.Replace,替换
 Feature.Avatar.Label.ResetToNewCharacter,你即将切换至新角色，是否想要重置全部穿搭道具，或保留？
 Feature.Avatar.Label.Right,右
@@ -1459,6 +1507,10 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,最近搜索
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,最近查看
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,继续购物
 Feature.Avatar.Label.SelectItem,选择物品
+Feature.Avatar.Label.SetAvatarCount,
+Feature.Avatar.Label.SetLimitReachedBody,你最多只能有 {setLimit} 个集合。请删除一个以腾出空间
+Feature.Avatar.Label.SetNameDuplicateBody,你已经有一个同名的集合，请选择其他名称
+Feature.Avatar.Label.SetNameNotAllowedBody,请选择其他名称
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,将虚拟形象发布至商城
 Feature.Avatar.Label.Shirt,衬衫
 Feature.Avatar.Label.ShirtClassic,
@@ -1605,6 +1657,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,为你的虚拟形象撰写说明�
 Feature.Avatar.RevokedItems.BodyText,{category}道具“{item}”已从这个保存的虚拟形象中移除，我们已退还所支付的原始金额。{lineBreak}查看你的收件箱获取更多详细信息。
 Feature.Avatar.RevokedItems.BodyTextMultiple,以下道具已从这个保存的虚拟形象中移除，我们已退还所支付的原始金额。{lineBreak}{items}{lineBreak}查看你的收件箱获取更多详细信息。
 Feature.Avatar.RevokedItems.ViewInbox,查看收件箱
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,分层上妆
 Feature.Avatar.Title.AvatarRefinement,虚拟形象微调
 Feature.Avatar.Title.BulkDeleteMakeupLooks,要删除 {count} 个妆容造型吗？
@@ -1616,6 +1669,8 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,清除所有动画？
 Feature.Avatar.Title.ClearBodyConfirmation,清除身体？
 Feature.Avatar.Title.ClearClothesConfirmation,清除所有衣服？
 Feature.Avatar.Title.ClearMakeupConfirmation,清除所有妆容？
+Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,复制造型
 Feature.Avatar.Title.EnhancedAvatarHeads,增强版虚拟形象头部
 Feature.Avatar.Title.GetOutfit,获取穿搭
@@ -1634,7 +1689,9 @@ Feature.Avatar.Title.NewCustomizeLook,自定义功能有了新的外观！
 Feature.Avatar.Title.NewToMarketplaceItemWidget,商城新品
 Feature.Avatar.Title.OutfitIncomplete,穿搭未完成
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,重命名妆容造型
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,重置为默认
 Feature.Avatar.Title.ResetToNewCharacter,新角色
 Feature.Avatar.Title.RevertToDefault,还原为默认值
@@ -1643,6 +1700,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,你保存的虚拟形象在这里
 Feature.Avatar.Title.SelectEmoteForAvatar,选择一个表情动作，给你的虚拟形象摆个造型
 Feature.Avatar.Title.SelectMakeupLookForUpdate,选择一个妆容造型
 Feature.Avatar.Title.SelectMakeupLooks,选择造型
+Feature.Avatar.Title.SelectSet,
 Feature.Avatar.Title.SingleDeleteOutfit,要删除“{outfitName}”吗？
 Feature.Avatar.Title.TrendingItemWidget,热门道具
 Feature.Avatar.Title.TrendingLooksWidget,热门造型
@@ -1701,7 +1759,7 @@ Feature.Captures.Action.Allow,允许
 Feature.Captures.Action.AllowPhotoAccessAccepted,
 Feature.Captures.Action.AllowPhotoAccessDeclined,
 Feature.Captures.Action.CancelSelectAllCaptures,
-Feature.Captures.Action.Create,创建
+Feature.Captures.Action.Create,
 Feature.Captures.Action.DeleteCaptureWarningCancel,
 Feature.Captures.Action.DeleteCaptureWarningConfirm,
 Feature.Captures.Action.DontAllow,不允许
@@ -1783,6 +1841,7 @@ Feature.Catalog.Action.ItemOptions,物品选项
 Feature.Catalog.Action.LoadMore,加载更多
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,打开详情
+Feature.Catalog.Action.Owned,已有 {count} 个
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,移除
@@ -1838,9 +1897,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,可调节
+Feature.Catalog.Label.AdvancedMaterials,高级材质
 Feature.Catalog.Label.AllItems,所有项目
 Feature.Catalog.Label.AlreadyOwned,已拥有该物品
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,属性
 Feature.Catalog.Label.Attribution,创作于
 Feature.Catalog.Label.AvailableForSale,销售中
 Feature.Catalog.Label.AvailableToPremiumMembers,您的 Premium 会员尊享权益之一
@@ -1886,6 +1947,8 @@ Feature.Catalog.Label.CustomizeAvatar,自定义虚拟形象
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,如果你删除此项，你将无法撤销。
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,自发光
+Feature.Catalog.Label.EmissiveInfo,发光道具会亮起，且自身散发光芒，因此即使在黑暗环境中也能保持明亮可见。
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -1970,6 +2033,8 @@ Feature.Catalog.Label.PBR.false,基础
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,带有 PBR（基于物理渲染）的虚拟形象物品看起来更加逼真，光影效果会像现实中一样变化和闪耀。
 Feature.Catalog.Label.PBRInfoTitle,基于物理的渲染 (PBR)
+Feature.Catalog.Label.ParticleEffects,粒子效果
+Feature.Catalog.Label.ParticleEffectsInfo,具有粒子效果的道具会产生动画视觉效果，让人感觉充满活力和生机。
 Feature.Catalog.Label.Placement,展示位置
 Feature.Catalog.Label.PrePremiumPrice,（物品价格：
 Feature.Catalog.Label.Premium,
@@ -2003,6 +2068,7 @@ Feature.Catalog.Label.SalePrice,售价：
 Feature.Catalog.Label.SaveAsCharacter,另存为角色
 Feature.Catalog.Label.SaveOptions,保存选项
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,你可能正在寻找
 Feature.Catalog.Label.SellCut,你赚取：
 Feature.Catalog.Label.SellPageUpsell,只有拥有 Roblox Plus 会员资格的用户可以使用出售功能。
 Feature.Catalog.Label.SellSuccess,待售物品
@@ -2104,7 +2170,7 @@ Feature.Catalog.Title.CheckoutPlural,结账 {count} 件
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,要替换底层图层吗？
 Feature.Catalog.Title.RentalFtuxText,租借道具以试玩 3 天
-Feature.Catalog.Toast.AddedToFavorites,已添加到“最爱”！
+Feature.Catalog.Toast.AddedToFavorites,已添加到“最爱”
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,由于你拥有 {number} 个道具，价格已变更
 Feature.Catalog.Toast.AvatarUnderReview,"正在审核虚拟形象
 你可以在审核完成后分享你的虚拟形象"
@@ -2189,13 +2255,13 @@ Feature.Chat.Label.Group.YouRepliedToThem,你回复了 {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,群组名称
 Feature.Chat.Label.HoverToReplyTooltip,悬停以回复
 Feature.Chat.Label.InGameFriendsChatNotifications,游戏内好友聊天通知
-Feature.Chat.Label.Loading,
+Feature.Chat.Label.Loading,正在加载…
 Feature.Chat.Label.LongPressToReplyTooltip,长按以回复
 Feature.Chat.Label.Members,成员
 Feature.Chat.Label.MessageNotAvailable,此信息不可用
 Feature.Chat.Label.MuteInGameChatToastNotifications,将游戏内聊天通知静音
 Feature.Chat.Label.New,全新
-Feature.Chat.Label.NoChatFound,
+Feature.Chat.Label.NoChatFound,未找到聊天记录
 Feature.Chat.Label.NoDescriptionYet,尚无描述。
 Feature.Chat.Label.NotImplementedMessageType,信息无法显示。
 Feature.Chat.Label.NotSet,未设置
@@ -2236,7 +2302,7 @@ Feature.Chat.Message.AddConnectionsPartyLimitSingular,由于你的隐私设置�
 Feature.Chat.Message.AddFriendsLimit,你可以在群聊中添加最多 {connectionsNum} 位好友。
 Feature.Chat.Message.AddFriendsPartyLimit,你可以 Party 中添加最多 {connectionsNum} 位好友。
 Feature.Chat.Message.AddFriendsPartyLimitSingular,由于你的隐私设置，你只能与一位好友组队。
-Feature.Chat.Message.CannotBeDisplayedThirdPerson,
+Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName}发送了一条无法显示的信息
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,聊天功能已被禁用。你可以在隐私设置中启用它。
 Feature.Chat.Message.ChatUnavailableRegion,聊天功能在你的区域尚不可用。
 Feature.Chat.Message.ChatUnavailableWithUser,此用户当前无法使用聊天功能。
@@ -2450,6 +2516,7 @@ Feature.Friends.Action.ShareQR,分享二维码
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,取消屏蔽
 Feature.Friends.Action.Unfriend,删除好友
+Feature.Friends.Action.ViewMore,查看更多
 Feature.Friends.Action.ViewPlatformProfile,查看玩家卡片
 Feature.Friends.Button.AddViaLink,通过链接添加
 Feature.Friends.Button.GotIt,
@@ -2641,6 +2708,9 @@ Feature.GameDetails.Message.HelpImproveExperience,帮助我们改善你的体验
 Feature.GameDetails.Message.HidingExperienceQuestion,为什么要隐藏此体验？
 Feature.GameDetails.Message.PurchaseGameV2,确定以 {X} 罗宝的价格解锁“{gameName}”的通行证？
 Feature.GameDetails.Message.SponsoredDisclosure.Error,由于临时错误，无法显示赞助信息。
+Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
+Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,你看到的这个赞助内容基于不同因素（如地理位置、设备信息、年龄和平台行为）推送，旨在向你展示相关的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
+Feature.GameDetails.Message.SponsoredDisclosure.U18,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。
 Feature.GameDetails.Message.SuggestLessOften,我们会减少推荐此体验
 Feature.GameDetails.RatingPercentOnly,{percentRating}% 评分
 Feature.GameDetails.Toast.LinkCopied,链接已复制至剪贴板
@@ -2839,6 +2909,7 @@ Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
 Feature.Moments.Description.LeaveMomentsCreation,你将丢失所有更改，但仍然可以在<b>截图</b>图库中找到此截图。
 Feature.Moments.Description.NoMusicResults,未找到音乐
+Feature.Moments.Description.NonInfiniteScrollEndBody,你已到达“精彩瞬间”中的停止点。轻点下方以继续观看。
 Feature.Moments.Description.NothingHereYet,这里什么都没有...
 Feature.Moments.Description.PublishMoment,描述你的精彩瞬间
 Feature.Moments.Description.StayFriendly,请保持友好氛围
@@ -2849,7 +2920,8 @@ Feature.Moments.Label.AttemptingJoinExperience,正在尝试加入“{placeName}�
 Feature.Moments.Label.CaptureLibrary,你的截图库
 Feature.Moments.Label.DeleteMomentBody,精彩瞬间一旦删除，便无法恢复。
 Feature.Moments.Label.DeleteMomentTitle,是否删除精彩瞬间？
-Feature.Moments.Label.Error,出错了，请重试。
+Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,稍后返回查看，或创作自己的精彩瞬间。
 Feature.Moments.Label.FeedEndTitle,你都看完啦
 Feature.Moments.Label.FeedFailedToLoad,无法加载推送
 Feature.Moments.Label.FeedMyMoments,我的精彩瞬间
@@ -2868,6 +2940,7 @@ Feature.Moments.Label.MomentUnavailable,精彩瞬间不可用
 Feature.Moments.Label.MomentUnavailableDefault,此精彩瞬间不可用。
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,全部都看完啦
 Feature.Moments.Label.Photos,照片
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
 Feature.Moments.Label.PublishingRodeoBody,此过程不会花太长时间。
@@ -3017,7 +3090,7 @@ Feature.Profile.Description.EnterNicknameTextbox,输入你的昵称
 Feature.Profile.Description.InspectAndBuy,点按以查看并购买其造型。
 Feature.Profile.Description.NicknamePrivacy,只有 {displayName} 能看到此内容。
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,只有此用户才能看到此内容。
-Feature.Profile.Description.QrCodeDescription,让其他人扫描你的二维码，即可在 Roblox 上与你建立联系。通过实时二维码扫描建立联系的 13 岁以上用户将成为可信赖的联系人。
+Feature.Profile.Description.QrCodeDescription,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户可通过扫描实时二维码建立联系，成为可信好友。
 Feature.Profile.Description.QrCodeDescription.FriendsRename,让其他人扫描你的二维码，在 Roblox 上与你建立联系。已完成年龄验证的 13 岁及以上用户通过扫描实时二维码建立联系，即可成为信赖的好友。
 Feature.Profile.Description.QrCodeScanning,让其他人使用二维码扫描器或设备摄像头以扫描你的 Roblox 二维码，快速添加你为好友！
 Feature.Profile.Description.RecognizeConnectionsByCustomName,设置自定义名称，更快地识别好友。从联系人中导入的名称和自定义名称仅对你可见。
@@ -3101,7 +3174,7 @@ Feature.Profile.Message.InvalidAliasError,无法保存名称。请尝试另一�
 Feature.Profile.Message.NoExperienceAccess,你没有权限加入 {name} 所在的体验。
 Feature.Profile.Message.QRLoadFailed,加载失败。
 Feature.Profile.Message.QRNofificationRequest,已从二维码向你发送好友邀请
-Feature.Profile.Message.QRNotificationRequest,通过你的二维码向你发送了联系人邀请
+Feature.Profile.Message.QRNotificationRequest,已通过二维码向你发送好友邀请
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,二维码扫描器
 Feature.Profile.Tooltip.CurrencyTransfer.Body,你现在可以发送 Robux 了。
@@ -3168,7 +3241,6 @@ Feature.ReportAbuse.Label.FinishChatReport,完成你的聊天举报
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,使用圆圈高亮突出问题
 Feature.ReportAbuse.Label.HighlightProblemPrecise,将问题高亮显示
-Feature.ReportAbuse.Label.NoChatMessagesFound,未找到聊天消息
 Feature.ReportAbuse.Label.Optional,选填
 Feature.ReportAbuse.Label.Person,人员
 Feature.ReportAbuse.Label.PleaseSelectOne,请选择一项。
@@ -3271,6 +3343,7 @@ Feature.RobloxSubscription.Title.GenericError,出错了
 Feature.RobloxSubscription.Title.GetBlackbird,获取 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus 在这里不可用
 Feature.SafetyDashboard.Heading.AccountStatus,帐户状态
+Feature.Schools.Label.Classmates,同学
 Feature.Screentime.Content.ScreentimeLimitDialog,你已达到每日屏幕时间限制。明天再回来访问 Roblox。
 Feature.SecurityFeedback.Header.NewLogin,新活动提醒
 Feature.Settings.Label.Error,
@@ -3362,7 +3435,6 @@ Feature.SettingsHub.Label.Sending,正在发送
 Feature.SettingsHub.Label.Show,
 Feature.SettingsHub.Label.Unmute,
 Feature.SettingsHub.Label.VoiceChat,
-Feature.SettingsHub.Label.WhichChatOptional,哪个聊天？（可选）
 Feature.SettingsHub.Label.WhichPlayer,哪位用户？
 Feature.SettingsHub.LanguageSelection.SettingLabel,作品语言
 Feature.SettingsHub.LanguageSelection.Unavailable,
@@ -3578,7 +3650,7 @@ Feature.Squads.Label.JoinAnotherParty,切换队伍
 Feature.Squads.Label.JoinExperiencesTogether,一起加入体验
 Feature.Squads.Label.JoinParty,加入 party
 Feature.Squads.Label.LeaveParty,离开队伍
-Feature.Squads.Label.Loading,正在加载…
+Feature.Squads.Label.Loading,
 Feature.Squads.Label.LowMemory,内存不足
 Feature.Squads.Label.LuckyRecommendationRevealed,试试这个
 Feature.Squads.Label.LuckyRecommendationRolling,正在选择游戏
@@ -3944,18 +4016,14 @@ IAPExperience.U13Confirm.Title.Warning,警告!
 InGame.Chat.ErrorMessageAnimationPlaying,无法在此动作进行时使用其他动作。
 InGame.Chat.ErrorMessageSwitchToR15,切换成 R15 虚拟形象以使用此动作。
 InGame.Chat.Label.From,来自于
-InGame.Chat.Label.SystemMessagePrefix,系统
+InGame.Chat.Label.SystemMessagePrefix,
 InGame.Chat.Label.TeamMessagePrefix,
 InGame.Chat.Label.To,发送至
 InGame.Chat.Response.EmoteNotAvailable,无法使用该动作。
 InGame.Chat.Response.EmotesNotSupported,无法在此挑战中使用动作。
 InGame.Chat.Response.EmotesTemporarilyUnavailable,当前无法使用动作。
 InGame.Chat.Response.EmotesWrongAvatarType,只有 R15 虚拟形象可以使用动作。
-InGame.CommonUI.Badge.BadgeText,Beta
-InGame.CommonUI.Badge.Popup.DisclaimerText2,如果你遇到有人违反我们的社区准则，请举报滥用。如果你选择使用语音服务，为了审核、安全性并改善我们的服务与工具，Roblox 会录制平台上所有语音信息。继续使用语音服务，即表示你同意 Roblox 收集、使用并保存你的音频录音供以上用途使用。你可以随时选择退出语音功能。
-InGame.CommonUI.Badge.Popup.HeaderList,您已选择使用下列 Beta 功能：
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,继续游戏
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -4154,7 +4222,7 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,启用保存权限
 InGame.NotificationScript2.Capture.Success.ToastText,
 InGame.NotificationScript2.FriendRequestEvent.Accept,你现在与 {RBX_NAME} 成为好友了！
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,向你发送了联系人请求！
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,已向你发送好友邀请！
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
 InGame.NotificationScript2.Message.FriendRequestEvent.Sent,已向你发送好友请求！
 InGame.NotificationScript2.Screenshot.ButtonText,打开文件夹
@@ -4170,7 +4238,7 @@ InGame.NotificationScript2.onBadgeAwardedTitle,已获得徽章
 InGame.NotificationScript2.onPointsAwarded.multiple,你得到了 {RBX_NUMBER} 点！
 InGame.NotificationScript2.onPointsAwarded.single,
 InGame.PlayerDropDown.Accept,
-InGame.PlayerDropDown.Action.ConnectionRequest,联系人请求
+InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.Examine,查看虚拟形象

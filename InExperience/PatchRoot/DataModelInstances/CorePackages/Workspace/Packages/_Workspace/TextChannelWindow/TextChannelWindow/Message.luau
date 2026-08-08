@@ -1,11 +1,11 @@
 ﻿local parent = script.Parent.Parent
-local _ = require(parent.ChatUIPrimitives)
+local fFlagExpChatPresetBoltInMessageLayout = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPresetBoltInMessageLayout
 local _ = { Pending = "pending", Failed = "failed" }
 local httpService = game:GetService("HttpService")
 local getFFlagExpChatProtectedChatInternalAPIs = require(parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 local getTextAndTranslationModule = require(script.Parent.getTextAndTranslation)
 
-local function createUserMessage(p0) --[[ line: 71 ]]
+local function createUserMessage(p0) --[[ line: 74 ]]
 	return {
 		messageType = "user",
 		messageId = p0.messageId,
@@ -17,12 +17,13 @@ local function createUserMessage(p0) --[[ line: 71 ]]
 		status = p0.status,
 		wasRewritten = p0.wasRewritten,
 		originalText = p0.originalText,
-		textChatMessageInstance = p0.textChatMessageInstance
+		textChatMessageInstance = p0.textChatMessageInstance,
+		presetId = p0.presetId
 	}
 end
 
 return {
-	createSystemMessage = function(p1, p2) --[[ line: 37 ]]
+	createSystemMessage = function(p1, p2) --[[ line: 39 ]]
 		-- upvalues: httpService (ref)
 		return {
 			messageType = "system-roblox",
@@ -31,7 +32,7 @@ return {
 			timestamp = DateTime.now()
 		}
 	end,
-	createSystemMessageFromTextChatMessage = function(p3) --[[ line: 48 ]]
+	createSystemMessageFromTextChatMessage = function(p3) --[[ line: 50 ]]
 		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref)
 		return {
 			messageType = "system-roblox",
@@ -42,8 +43,8 @@ return {
 		}
 	end,
 	createUserMessage = createUserMessage,
-	createUserMessageFromTextChatMessage = function(p4, p5) --[[ line: 87 ]]
-		-- upvalues: createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), getTextAndTranslationModule (ref)
+	createUserMessageFromTextChatMessage = function(p4, p5) --[[ line: 91 ]]
+		-- upvalues: createUserMessage (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), getTextAndTranslationModule (ref), fFlagExpChatPresetBoltInMessageLayout (ref)
 		local textSource = p4.TextSource
 		
 		return createUserMessage({
@@ -56,7 +57,8 @@ return {
 			originalText = if p4.WasRewritten then p4.OriginalText else nil,
 			timestamp = p4.Timestamp,
 			isOutgoing = tostring(textSource.UserId) == p5,
-			textChatMessageInstance = p4
+			textChatMessageInstance = p4,
+			presetId = if fFlagExpChatPresetBoltInMessageLayout and game:GetEngineFeature("TextChatPresetsEnabled") then p4.PresetId else nil
 		})
 	end
 }

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("PeopleTabUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("PeopleReactView").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()

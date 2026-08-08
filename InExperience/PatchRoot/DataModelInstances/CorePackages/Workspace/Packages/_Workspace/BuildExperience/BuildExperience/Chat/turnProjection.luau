@@ -1,6 +1,8 @@
-﻿local creatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local creatorAgentChatModule = require(buildExperience.Parent.DataHydration.CreatorAgentChat)
 local _ = require(script.Parent.chatTypes)
 local turnDisplayModule = require(script.Parent.turnDisplay)
+local fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule = require(buildExperience.Flags.FFlagBuildExperienceExcludeUserWaitFromTurnDuration)
 local publishToolUtils = creatorAgentChatModule.PublishToolUtils
 local studioAskUserTool = creatorAgentChatModule.StudioAskUserTool
 local studioProposePlanTool = creatorAgentChatModule.StudioProposePlanTool
@@ -10,6 +12,7 @@ local formatStepCount = turnDisplayModule.formatStepCount
 local getActiveActivityLabel = turnDisplayModule.getActiveActivityLabel
 local getAskUserActivityLabel = turnDisplayModule.getAskUserActivityLabel
 local getCompletedActivityLabel = turnDisplayModule.getCompletedActivityLabel
+local getLocalToolWaitSeconds = turnDisplayModule.getLocalToolWaitSeconds
 local getTurnWorkedDurationLabel = turnDisplayModule.getTurnWorkedDurationLabel
 local t = {
 	submittedToolCallIds = {},
@@ -17,7 +20,7 @@ local t = {
 	planByToolCallId = {}
 }
 
-local function contentBlocksToText(p0) --[[ line: 54 ]]
+local function contentBlocksToText(p0) --[[ line: 58 ]]
 	local t = {}
 	
 	for i, v in p0 do
@@ -28,36 +31,43 @@ local function contentBlocksToText(p0) --[[ line: 54 ]]
 	return table.concat(t)
 end
 
-local function getAssistantMessageTexts(p1) --[[ line: 64 ]]
+local function getAssistantMessageTexts(p1) --[[ line: 68 ]]
 	-- upvalues: contentBlocksToText (ref)
 	local t = {}
 	
 	for i, v in p1.assistantMessageOrder do
-		local var18 = p1.assistantMessages[v]
+		local var21 = p1.assistantMessages[v]
 		
-		if var18 ~= nil then
-			local var19 = contentBlocksToText(var18)
+		if var21 ~= nil then
+			local var22 = contentBlocksToText(var21)
 			
-			if var19 ~= "" then
-				table.insert(t, var19)
+			if var22 ~= "" then
+				table.insert(t, var22)
 			end
 		end
 	end
 	return t
 end
 
-local function _(p2, p3) --[[ line: 78 | named "makeTurnKey" ]]
-	if p3.turnKey ~= nil then
-		return p3.turnKey
-	end
-	local sessionId = p3.sessionId or (if p2 ~= nil then "pending-session" else p2.sessionId)
-	local var21 = if p3.turnFeedbackIds == nil or typeof(p3.turnFeedbackIds) == "function" then nil else p3.turnFeedbackIds.sequenceId
+local function getFinalAssistantMessageText(p2) --[[ line: 82 ]]
+	-- upvalues: getAssistantMessageTexts (ref)
+	local var23 = getAssistantMessageTexts(p2)
 	
-	return if var21 == nil then sessionId else `{sessionId}:{var21}`
+	return var23[#var23]
 end
 
-local function makeSegmentKey(p4, ...) --[[ line: 90 ]]
-	local list = { p4 }
+local function _(p3, p4) --[[ line: 87 | named "makeTurnKey" ]]
+	if p4.turnKey ~= nil then
+		return p4.turnKey
+	end
+	local sessionId = p4.sessionId or (if p3 ~= nil then "pending-session" else p3.sessionId)
+	local var25 = if p4.turnFeedbackIds == nil or typeof(p4.turnFeedbackIds) == "function" then nil else p4.turnFeedbackIds.sequenceId
+	
+	return if var25 == nil then sessionId else `{sessionId}:{var25}`
+end
+
+local function makeSegmentKey(p5, ...) --[[ line: 99 ]]
+	local list = { p5 }
 	
 	for i, v in { ... } do
 		table.insert(list, tostring(v))
@@ -65,10 +75,10 @@ local function makeSegmentKey(p4, ...) --[[ line: 90 ]]
 	return table.concat(list, ":")
 end
 
-local _ = function(p5) --[[ line: 98 | named "getSortedActivitySlotIndexes" ]]
+local _ = function(p6) --[[ line: 107 | named "getSortedActivitySlotIndexes" ]]
 	local t = {}
 	
-	for i in p5.activitySlots do
+	for i in p6.activitySlots do
 		table.insert(t, i)
 	end
 	table.sort(t)
@@ -76,13 +86,13 @@ local _ = function(p5) --[[ line: 98 | named "getSortedActivitySlotIndexes" ]]
 	return t
 end
 
-local _ = function(p6, p7) --[[ line: 107 | named "makeTurnActivityItem" ]]
-	if p7.kind == "tool_call" then
-		local toolCallId = p6.toolCalls[p7.toolCallId]
+local _ = function(p7, p8) --[[ line: 116 | named "makeTurnActivityItem" ]]
+	if p8.kind == "tool_call" then
+		local toolCallId = p7.toolCalls[p8.toolCallId]
 		
 		return {
 			kind = "tool_call",
-			toolCallId = p7.toolCallId,
+			toolCallId = p8.toolCallId,
 			title = if toolCallId then toolCallId.title else nil,
 			status = if toolCallId then toolCallId.status else nil
 		}
@@ -90,58 +100,58 @@ local _ = function(p6, p7) --[[ line: 107 | named "makeTurnActivityItem" ]]
 	return nil
 end
 
-local _ = function(p8, p9, p10) --[[ line: 120 | named "makeAgentMessageSegment" ]]
-	return if p9 == "" then nil else {
+local _ = function(p9, p10, p11) --[[ line: 129 | named "makeAgentMessageSegment" ]]
+	return if p10 == "" then nil else {
 		kind = "agent_message",
-		key = p8,
-		text = p9,
-		isError = p10
+		key = p9,
+		text = p10,
+		isError = p11
 	}
 end
 
-local function makeCompletedActivitySummary(p11, p12) --[[ line: 132 ]]
+local function makeCompletedActivitySummary(p12, p13) --[[ line: 141 ]]
 	-- upvalues: getCompletedActivityLabel (ref), countToolCalls (ref)
-	return if #p11 == 0 then nil else {
+	return if #p12 == 0 then nil else {
 		kind = "activity_summary",
 		summaryKind = "completed",
 		isLoading = false,
-		key = p12,
-		label = getCompletedActivityLabel(p11),
-		activityItems = p11,
-		actionCount = countToolCalls(p11)
+		key = p13,
+		label = getCompletedActivityLabel(p12),
+		activityItems = p12,
+		actionCount = countToolCalls(p12)
 	}
 end
 
-local _ = function(p13, p14, p15, p16, p17) --[[ line: 148 | named "makeActiveActivitySummary" ]]
+local _ = function(p14, p15, p16, p17, p18) --[[ line: 157 | named "makeActiveActivitySummary" ]]
 	-- upvalues: getActiveActivityLabel (ref)
-	return if #p13 == 0 and not p14 then nil else {
+	return if #p14 == 0 and not p15 then nil else {
 		kind = "activity_summary",
 		summaryKind = "active",
-		key = p15,
-		label = p16 or getActiveActivityLabel(p13, p14),
-		activityItems = p13,
-		isLoading = p14,
-		isWaitingForLocalTool = p17
+		key = p16,
+		label = p17 or getActiveActivityLabel(p14, p15),
+		activityItems = p14,
+		isLoading = p15,
+		isWaitingForLocalTool = p18
 	}
 end
 
-local function countActionsInSegments(p18) --[[ line: 170 ]]
+local function countActionsInSegments(p19) --[[ line: 179 ]]
 	-- upvalues: countToolCalls (ref)
-	local var24 = 0
+	local var28 = 0
 	
-	for i, v in p18 do
+	for i, v in p19 do
 		if v.kind == "activity_summary" then
-			var24 += v.actionCount or countToolCalls(v.activityItems)
+			var28 += v.actionCount or countToolCalls(v.activityItems)
 		end
 	end
-	return var24
+	return var28
 end
 
-local function getAnsweredPromptsByToolCallId(p19) --[[ line: 180 ]]
+local function getAnsweredPromptsByToolCallId(p20) --[[ line: 189 ]]
 	-- upvalues: studioAskUserTool (ref)
 	local t = {}
 	
-	for i, v in studioAskUserTool.getAnsweredPromptsFromTurnState(p19) do
+	for i, v in studioAskUserTool.getAnsweredPromptsFromTurnState(p20) do
 		if v.toolCallId ~= nil then
 			local toolCallId = v.toolCallId
 			
@@ -154,11 +164,11 @@ local function getAnsweredPromptsByToolCallId(p19) --[[ line: 180 ]]
 	return t
 end
 
-local function getCompletedPlansByToolCallId(p20) --[[ line: 194 ]]
+local function getCompletedPlansByToolCallId(p21) --[[ line: 203 ]]
 	-- upvalues: studioProposePlanTool (ref)
 	local t = {}
 	
-	for i, v in studioProposePlanTool.getCompletedPlansFromTurnState(p20) do
+	for i, v in studioProposePlanTool.getCompletedPlansFromTurnState(p21) do
 		if v.toolCallId ~= nil then
 			t[v.toolCallId] = v
 		end
@@ -166,55 +176,55 @@ local function getCompletedPlansByToolCallId(p20) --[[ line: 194 ]]
 	return t
 end
 
-local _ = function(p21, p22, p23, p24, p25, p26, p27) --[[ line: 204 | named "makeClientToolSegment" ]]
+local _ = function(p22, p23, p24, p25, p26, p27, p28) --[[ line: 213 | named "makeClientToolSegment" ]]
 	-- upvalues: makeSegmentKey (ref)
 	return {
 		kind = "client_tool",
-		key = makeSegmentKey(p21, "client-tool", p22, p24),
-		toolCallId = p22,
-		callOrder = p23,
-		isActive = p25,
-		answerStackPrompt = p26,
-		planProposal = p27
+		key = makeSegmentKey(p22, "client-tool", p23, p25),
+		toolCallId = p23,
+		callOrder = p24,
+		isActive = p26,
+		answerStackPrompt = p27,
+		planProposal = p28
 	}
 end
 
-local function projectAskUserSegments(p28, p29, p30, p31, p32) --[[ line: 224 ]]
+local function projectAskUserSegments(p29, p30, p31, p32, p33) --[[ line: 233 ]]
 	-- upvalues: makeSegmentKey (ref), studioAskUserTool (ref)
-	local var27 = p28.toolCalls[p30]
+	local var31 = p29.toolCalls[p31]
 	
-	if var27 == nil then
+	if var31 == nil then
 		return {}
 	end
 	local t = {}
-	local var29 = p31[p30]
+	local var33 = p32[p31]
 	
-	if var29 == nil or #var29 <= 0 then
-		local var30 = studioAskUserTool.extractQuestionsFromToolCall(var27)
-		local var31 = p32.askUserByToolCallId[p30]
+	if var33 == nil or #var33 <= 0 then
+		local var34 = studioAskUserTool.extractQuestionsFromToolCall(var31)
+		local var35 = p33.askUserByToolCallId[p31]
 		
-		if var30 == nil or var31 == nil then
+		if var34 == nil or var35 == nil then
 			return t
 		end
-		for i, v in var30 do
-			local var32 = var31.selections[i]
+		for i, v in var34 do
+			local var36 = var35.selections[i]
 			
-			if not (i == var31.currentIndex and not p32.submittedToolCallIds[p30]) then
-				if var32 == nil then break end
+			if not (i == var35.currentIndex and not p33.submittedToolCallIds[p31]) then
+				if var36 == nil then break end
 				table.insert(t, {
 					kind = "client_tool",
 					isActive = false,
 					planProposal = nil,
-					key = makeSegmentKey(p29, "client-tool", p30, i),
-					toolCallId = p30,
-					callOrder = var31.callOrder,
+					key = makeSegmentKey(p30, "client-tool", p31, i),
+					toolCallId = p31,
+					callOrder = var35.callOrder,
 					answerStackPrompt = {
 						question = v,
-						selectedOptionId = var32.selectedOptionId,
-						customResponseText = var32.customResponseText,
-						toolCallId = p30,
-						callOrder = var31.callOrder,
-						isLastQuestion = #var30 <= i
+						selectedOptionId = var36.selectedOptionId,
+						customResponseText = var36.customResponseText,
+						toolCallId = p31,
+						callOrder = var35.callOrder,
+						isLastQuestion = #var34 <= i
 					}
 				})
 			end
@@ -222,16 +232,16 @@ local function projectAskUserSegments(p28, p29, p30, p31, p32) --[[ line: 224 ]]
 				kind = "client_tool",
 				isActive = true,
 				planProposal = nil,
-				key = makeSegmentKey(p29, "client-tool", p30, i),
-				toolCallId = p30,
-				callOrder = var31.callOrder,
+				key = makeSegmentKey(p30, "client-tool", p31, i),
+				toolCallId = p31,
+				callOrder = var35.callOrder,
 				answerStackPrompt = {
 					question = v,
-					selectedOptionId = if var32 ~= nil then nil else var32.selectedOptionId,
-					customResponseText = if var32 ~= nil then nil else var32.customResponseText,
-					toolCallId = p30,
-					callOrder = var31.callOrder,
-					isLastQuestion = #var30 <= i
+					selectedOptionId = if var36 ~= nil then nil else var36.selectedOptionId,
+					customResponseText = if var36 ~= nil then nil else var36.customResponseText,
+					toolCallId = p31,
+					callOrder = var35.callOrder,
+					isLastQuestion = #var34 <= i
 				}
 			})
 			
@@ -239,13 +249,13 @@ local function projectAskUserSegments(p28, p29, p30, p31, p32) --[[ line: 224 ]]
 		end
 		return t
 	else
-		for i, v in var29 do
+		for i, v in var33 do
 			table.insert(t, {
 				kind = "client_tool",
 				isActive = false,
 				planProposal = nil,
-				key = makeSegmentKey(p29, "client-tool", p30, i),
-				toolCallId = p30,
+				key = makeSegmentKey(p30, "client-tool", p31, i),
+				toolCallId = p31,
 				callOrder = v.callOrder or i,
 				answerStackPrompt = v
 			})
@@ -254,162 +264,162 @@ local function projectAskUserSegments(p28, p29, p30, p31, p32) --[[ line: 224 ]]
 	end
 end
 
-local function projectPlanSegments(p33, p34, p35, p36, p37) --[[ line: 291 ]]
+local function projectPlanSegments(p34, p35, p36, p37, p38) --[[ line: 300 ]]
 	-- upvalues: makeSegmentKey (ref), studioProposePlanTool (ref)
-	local var33 = p33.toolCalls[p35]
+	local var37 = p34.toolCalls[p36]
 	
-	if var33 == nil then
+	if var37 == nil then
 		return {}
 	end
-	local var34 = p36[p35]
+	local var38 = p37[p36]
 	
-	if var34 ~= nil then
+	if var38 ~= nil then
 		return {
 			{
 				kind = "client_tool",
 				isActive = false,
 				answerStackPrompt = nil,
-				key = makeSegmentKey(p34, "client-tool", p35, 1),
-				toolCallId = p35,
-				callOrder = var34.callOrder or 0,
-				planProposal = var34
+				key = makeSegmentKey(p35, "client-tool", p36, 1),
+				toolCallId = p36,
+				callOrder = var38.callOrder or 0,
+				planProposal = var38
 			}
 		}
 	end
-	local var35 = p37.planByToolCallId[p35]
-	local var36 = studioProposePlanTool.extractPlanFromToolCall(var33)
+	local var39 = p38.planByToolCallId[p36]
+	local var40 = studioProposePlanTool.extractPlanFromToolCall(var37)
 	
-	return if var36 == nil or var35 == nil then {} else {
+	return if var40 == nil or var39 == nil then {} else {
 		{
 			kind = "client_tool",
 			answerStackPrompt = nil,
-			key = makeSegmentKey(p34, "client-tool", p35, 1),
-			toolCallId = p35,
-			callOrder = var35.callOrder,
-			isActive = var35.isAccepted ~= true and (var35.feedbackText == nil and not p37.submittedToolCallIds[p35]),
+			key = makeSegmentKey(p35, "client-tool", p36, 1),
+			toolCallId = p36,
+			callOrder = var39.callOrder,
+			isActive = var39.isAccepted ~= true and (var39.feedbackText == nil and not p38.submittedToolCallIds[p36]),
 			planProposal = {
-				title = var36.title,
-				textContent = var36.textContent,
-				summary = var36.summary,
-				toolCallId = p35,
-				callOrder = var35.callOrder,
-				isAccepted = var35.isAccepted,
-				feedbackText = var35.feedbackText
+				title = var40.title,
+				textContent = var40.textContent,
+				summary = var40.summary,
+				toolCallId = p36,
+				callOrder = var39.callOrder,
+				isAccepted = var39.isAccepted,
+				feedbackText = var39.feedbackText
 			}
 		}
 	}
 end
 
-local _ = function(p38, p39, p40, p41, p42, p43) --[[ line: 333 | named "projectLocalToolSegments" ]]
+local _ = function(p39, p40, p41, p42, p43, p44) --[[ line: 342 | named "projectLocalToolSegments" ]]
 	-- upvalues: projectAskUserSegments (ref), projectPlanSegments (ref)
-	local var37 = projectAskUserSegments(p38, p39, p40, p41, p43)
+	local var41 = projectAskUserSegments(p39, p40, p41, p42, p44)
 	
-	return if #var37 > 0 then var37 else projectPlanSegments(p38, p39, p40, p42, p43)
+	return if #var41 > 0 then var41 else projectPlanSegments(p39, p40, p41, p43, p44)
 end
 
-local _ = function(p44, p45, p46) --[[ line: 349 | named "getActiveAskUserActivityLabel" ]]
+local _ = function(p45, p46, p47) --[[ line: 358 | named "getActiveAskUserActivityLabel" ]]
 	-- upvalues: studioAskUserTool (ref), getAskUserActivityLabel (ref)
-	local var38 = p46.askUserByToolCallId[p45]
-	local var39 = p44.toolCalls[p45]
+	local var42 = p47.askUserByToolCallId[p46]
+	local var43 = p45.toolCalls[p46]
 	
-	if var38 == nil or var39 == nil then
+	if var42 == nil or var43 == nil then
 		return nil
 	end
-	local var40 = studioAskUserTool.extractQuestionsFromToolCall(var39)
+	local var44 = studioAskUserTool.extractQuestionsFromToolCall(var43)
 	
-	if var40 == nil then
+	if var44 == nil then
 		return nil
 	end
-	local currentIndex = var40[var38.currentIndex]
+	local currentIndex = var44[var42.currentIndex]
 	
-	return getAskUserActivityLabel(#var40, if currentIndex ~= nil then nil else #currentIndex.options)
+	return getAskUserActivityLabel(#var44, if currentIndex ~= nil then nil else #currentIndex.options)
 end
 
-local function projectWorkSegments(p47, p48, p49, p50) --[[ line: 370 ]]
+local function projectWorkSegments(p48, p49, p50, p51) --[[ line: 379 ]]
 	-- upvalues: getAnsweredPromptsByToolCallId (ref), getCompletedPlansByToolCallId (ref), makeSegmentKey (ref), getActiveActivityLabel (ref), makeCompletedActivitySummary (ref), projectAskUserSegments (ref), projectPlanSegments (ref), studioAskUserTool (ref), getAskUserActivityLabel (ref), contentBlocksToText (ref)
 	local t = {}
 	local t_1 = {}
-	local var43 = nil
-	local var44 = false
-	local var45 = getAnsweredPromptsByToolCallId(p47)
-	local var46 = getCompletedPlansByToolCallId(p47)
+	local var47 = nil
+	local var48 = false
+	local var49 = getAnsweredPromptsByToolCallId(p48)
+	local var50 = getCompletedPlansByToolCallId(p48)
 	
-	local function flushActivity(p51, p52) --[[ line: 383 ]]
-		-- upvalues: makeSegmentKey (copy), p48 (ref), t (ref), p50 (ref), t_1 (write), var43 (write), var44 (write), getActiveActivityLabel (copy), makeCompletedActivitySummary (copy)
-		local var59
-		local var58 = makeSegmentKey(p48, if p51 then "activity-trailing" else "activity", p52 or #t + 1)
+	local function flushActivity(p52, p53) --[[ line: 392 ]]
+		-- upvalues: makeSegmentKey (copy), p49 (ref), t (ref), p51 (ref), t_1 (write), var47 (write), var48 (write), getActiveActivityLabel (copy), makeCompletedActivitySummary (copy)
+		local var63
+		local var62 = makeSegmentKey(p49, if p52 then "activity-trailing" else "activity", p53 or #t + 1)
 		local _ = nil
 		
-		if p50 and p51 then
-			local var60 = t_1
-			local _ = #var60 == 0
-			var59 = {
+		if p51 and p52 then
+			local var64 = t_1
+			local _ = #var64 == 0
+			var63 = {
 				kind = "activity_summary",
 				summaryKind = "active",
 				isLoading = true,
-				key = var58,
-				label = var43 or getActiveActivityLabel(var60, true),
-				activityItems = var60,
-				isWaitingForLocalTool = var44
+				key = var62,
+				label = var47 or getActiveActivityLabel(var64, true),
+				activityItems = var64,
+				isWaitingForLocalTool = var48
 			}
 		else
-			var59 = makeCompletedActivitySummary(t_1, var58)
+			var63 = makeCompletedActivitySummary(t_1, var62)
 		end
-		if var59 ~= nil then
-			table.insert(t, var59)
+		if var63 ~= nil then
+			table.insert(t, var63)
 		end
 		t_1 = {}
-		var43 = nil
-		var44 = false
+		var47 = nil
+		var48 = false
 	end
 	
 	local t_2 = {}
 	
-	for i in p47.activitySlots do
+	for i in p48.activitySlots do
 		table.insert(t_2, i)
 	end
 	table.sort(t_2)
 	
 	for i_1, v in t_2 do
-		local var51 = p47.activitySlots[v]
+		local var55 = p48.activitySlots[v]
 		
-		if var51.kind == "agent_message" then
+		if var55.kind == "agent_message" then
 			flushActivity(false, v)
-			local text = var51.text
-			local var52 = if text == "" then nil else {
+			local text = var55.text
+			local var56 = if text == "" then nil else {
 				kind = "agent_message",
 				isError = nil,
-				key = makeSegmentKey(p48, "agent-message", v),
+				key = makeSegmentKey(p49, "agent-message", v),
 				text = text
 			}
 			
-			if var52 ~= nil then
-				table.insert(t, var52)
+			if var56 ~= nil then
+				table.insert(t, var56)
 			end
-		elseif var51.kind == "tool_call" then
+		elseif var55.kind == "tool_call" then
 			local t_4
-			local toolCallId = var51.toolCallId
-			local var53 = projectAskUserSegments(p47, p48, toolCallId, var45, p49)
-			local var54 = if #var53 > 0 then var53 else projectPlanSegments(p47, p48, toolCallId, var46, p49)
+			local toolCallId = var55.toolCallId
+			local var57 = projectAskUserSegments(p48, p49, toolCallId, var49, p50)
+			local var58 = if #var57 > 0 then var57 else projectPlanSegments(p48, p49, toolCallId, var50, p50)
 			
-			if #var54 > 0 then
+			if #var58 > 0 then
 				local v_1
 				flushActivity(false, v)
 				
-				for i_2, v_1 in var54 do
+				for i_2, v_1 in var58 do
 					table.insert(t, v_1)
 					
 					if v_1.isActive then
-						var44 = true
+						var48 = true
 					end
 				end
-				if p50 then
+				if p51 then
 					local t_3
-					if var51.kind == "tool_call" then
-						local toolCallId_1 = p47.toolCalls[var51.toolCallId]
+					if var55.kind == "tool_call" then
+						local toolCallId_1 = p48.toolCalls[var55.toolCallId]
 						t_3 = {
 							kind = "tool_call",
-							toolCallId = var51.toolCallId,
+							toolCallId = var55.toolCallId,
 							title = if toolCallId_1 then toolCallId_1.title else nil,
 							status = if toolCallId_1 then toolCallId_1.status else nil
 						}
@@ -419,28 +429,28 @@ local function projectWorkSegments(p47, p48, p49, p50) --[[ line: 370 ]]
 					if t_3 ~= nil then
 						table.insert(t_1, t_3)
 					end
-					local toolCallId_1 = var51.toolCallId
-					local var56 = p49.askUserByToolCallId[toolCallId_1]
-					i_2 = p47.toolCalls[toolCallId_1]
+					local toolCallId_1 = var55.toolCallId
+					local var60 = p50.askUserByToolCallId[toolCallId_1]
+					i_2 = p48.toolCalls[toolCallId_1]
 					
-					if var56 == nil or i_2 == nil then
-						var43 = nil
+					if var60 == nil or i_2 == nil then
+						var47 = nil
 					else
 						v_1 = studioAskUserTool.extractQuestionsFromToolCall(i_2)
 						
 						if v_1 == nil then
-							var43 = nil
+							var47 = nil
 						else
-							local currentIndex = v_1[var56.currentIndex]
-							var43 = getAskUserActivityLabel(#v_1, if currentIndex ~= nil then nil else #currentIndex.options)
+							local currentIndex = v_1[var60.currentIndex]
+							var47 = getAskUserActivityLabel(#v_1, if currentIndex ~= nil then nil else #currentIndex.options)
 						end
 					end
 				end
-			elseif var51.kind == "tool_call" then
-				local toolCallId_1 = p47.toolCalls[var51.toolCallId]
+			elseif var55.kind == "tool_call" then
+				local toolCallId_1 = p48.toolCalls[var55.toolCallId]
 				t_4 = {
 					kind = "tool_call",
-					toolCallId = var51.toolCallId,
+					toolCallId = var55.toolCallId,
 					title = if toolCallId_1 then toolCallId_1.title else nil,
 					status = if toolCallId_1 then toolCallId_1.status else nil
 				}
@@ -452,19 +462,19 @@ local function projectWorkSegments(p47, p48, p49, p50) --[[ line: 370 ]]
 			end
 		end
 	end
-	local var49 = contentBlocksToText(p47.pendingAgentMessageContent)
+	local var53 = contentBlocksToText(p48.pendingAgentMessageContent)
 	
-	if var49 ~= "" then
-		flushActivity(false, p47.pendingAgentMessageSequenceIndex)
-		local var50 = if var49 == "" then nil else {
+	if var53 ~= "" then
+		flushActivity(false, p48.pendingAgentMessageSequenceIndex)
+		local var54 = if var53 == "" then nil else {
 			kind = "agent_message",
 			isError = nil,
-			key = if p47.pendingAgentMessageSequenceIndex ~= nil then makeSegmentKey(p48, "pending-agent-message") else makeSegmentKey(p48, "agent-message", p47.pendingAgentMessageSequenceIndex),
-			text = var49
+			key = if p48.pendingAgentMessageSequenceIndex ~= nil then makeSegmentKey(p49, "pending-agent-message") else makeSegmentKey(p49, "agent-message", p48.pendingAgentMessageSequenceIndex),
+			text = var53
 		}
 		
-		if var50 ~= nil then
-			table.insert(t, var50)
+		if var54 ~= nil then
+			table.insert(t, var54)
 		end
 	end
 	flushActivity(true, nil)
@@ -472,82 +482,82 @@ local function projectWorkSegments(p47, p48, p49, p50) --[[ line: 370 ]]
 	return t
 end
 
-local function makeTurnWorkSegment(p53, p54, p55, p56, p57) --[[ line: 463 ]]
+local function makeTurnWorkSegment(p54, p55, p56, p57, p58, p59) --[[ line: 472 ]]
 	-- upvalues: countActionsInSegments (ref), makeSegmentKey (ref), getTurnWorkedDurationLabel (ref)
-	if #p54 == 0 then
+	if #p55 == 0 then
 		return nil
 	end
-	local var61 = countActionsInSegments(p54)
+	local var65 = countActionsInSegments(p55)
 	
 	return {
 		kind = "turn_work",
-		key = makeSegmentKey(p53, "work"),
-		label = getTurnWorkedDurationLabel(p55, p56, p57, var61),
-		segments = p54,
-		actionCount = var61
+		key = makeSegmentKey(p54, "work"),
+		label = getTurnWorkedDurationLabel(p56, p57, p58, var65, p59),
+		segments = p55,
+		actionCount = var65
 	}
 end
 
-local function addTerminalAssistantMessageSegments(a, b, p58) --[[ line: 483 ]]
+local function addTerminalAssistantMessageSegments(a, b, p60) --[[ line: 499 ]]
 	-- upvalues: getAssistantMessageTexts (ref), makeSegmentKey (ref)
 	for i, v in getAssistantMessageTexts(b) do
-		local var62 = if v == "" then nil else {
+		local var66 = if v == "" then nil else {
 			kind = "agent_message",
 			isError = nil,
-			key = makeSegmentKey(p58, "terminal-agent-message", i),
+			key = makeSegmentKey(p60, "terminal-agent-message", i),
 			text = v
 		}
 		
-		if var62 ~= nil then
-			table.insert(a, var62)
+		if var66 ~= nil then
+			table.insert(a, var66)
 		end
 	end
 end
 
-local function projectTurnSegments(p59, p60, p61) --[[ line: 493 ]]
-	-- upvalues: projectWorkSegments (ref), makeTurnWorkSegment (ref), addTerminalAssistantMessageSegments (ref), makeSegmentKey (ref), turnDisplayModule (ref), ASSISTANT_STOPPED_TEXT (ref), publishToolUtils (ref)
+local function projectTurnSegments(p61, p62, p63) --[[ line: 509 ]]
+	-- upvalues: projectWorkSegments (ref), fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule (ref), getLocalToolWaitSeconds (ref), makeTurnWorkSegment (ref), addTerminalAssistantMessageSegments (ref), makeSegmentKey (ref), turnDisplayModule (ref), ASSISTANT_STOPPED_TEXT (ref), publishToolUtils (ref)
 	local turnKey
-	if p60.turnKey == nil then
-		local sessionId = p60.sessionId or (if p59 ~= nil then "pending-session" else p59.sessionId)
-		local var64 = if p60.turnFeedbackIds == nil or typeof(p60.turnFeedbackIds) == "function" then nil else p60.turnFeedbackIds.sequenceId
-		turnKey = if var64 ~= nil then sessionId else `{sessionId}:{var64}`
+	if p62.turnKey == nil then
+		local sessionId = p62.sessionId or (if p61 ~= nil then "pending-session" else p61.sessionId)
+		local var68 = if p62.turnFeedbackIds == nil or typeof(p62.turnFeedbackIds) == "function" then nil else p62.turnFeedbackIds.sequenceId
+		turnKey = if var68 ~= nil then sessionId else `{sessionId}:{var68}`
 	else
-		turnKey = p60.turnKey
+		turnKey = p62.turnKey
 	end
 	local t = {}
-	local var66 = makeTurnWorkSegment(turnKey, projectWorkSegments(p59, turnKey, p61, not p59.isDone), p59.eventMetaBySequenceId, p60.startSequenceId, p60.endSequenceId)
+	local var70 = makeTurnWorkSegment(turnKey, projectWorkSegments(p61, turnKey, p63, not p61.isDone), p61.eventMetaBySequenceId, p62.startSequenceId, p62.endSequenceId, if fFlagBuildExperienceExcludeUserWaitFromTurnDurationModule then getLocalToolWaitSeconds(p61) else nil)
 	
-	if var66 ~= nil then
-		table.insert(t, var66)
+	if var70 ~= nil then
+		table.insert(t, var70)
 	end
-	addTerminalAssistantMessageSegments(t, p59, turnKey)
+	addTerminalAssistantMessageSegments(t, p61, turnKey)
 	
-	if p59.status == "failed" or p59.stopReason == "error" then
-		local var69 = turnDisplayModule.formatTurnFailureMessage(p59)
-		local var70 = if var69 == "" then nil else {
+	if p61.status == "failed" or p61.stopReason == "error" then
+		local var73 = turnDisplayModule.formatTurnFailureMessage(p61)
+		local var74 = if var73 == "" then nil else {
 			kind = "agent_message",
 			isError = true,
 			key = makeSegmentKey(turnKey, "failure"),
-			text = var69
+			text = var73
 		}
 		
-		if var70 ~= nil then
-			table.insert(t, var70)
+		if var74 ~= nil then
+			table.insert(t, var74)
 		end
-	elseif p59.status == "cancelled" or p59.stopReason == "cancelled" then
-		local var67 = ASSISTANT_STOPPED_TEXT
-		local var68 = if var67 == "" then nil else {
+	elseif p61.status == "cancelled" or p61.stopReason == "cancelled" then
+		local var71 = ASSISTANT_STOPPED_TEXT
+		local var72 = if var71 == "" then nil else {
 			kind = "agent_message",
 			isError = nil,
 			key = makeSegmentKey(turnKey, "cancelled"),
-			text = var67
+			text = var71
 		}
 		
-		if var68 ~= nil then
-			table.insert(t, var68)
+		if var72 ~= nil then
+			table.insert(t, var72)
 		end
 	end
-	if p59.isDone and publishToolUtils.includesPublishPlaceTool(p59) then
+	if p61.isDone and publishToolUtils.includesPublishPlaceTool(p61) then
 		table.insert(t, {
 			kind = "playtest_cta",
 			key = makeSegmentKey(turnKey, "playtest-cta")
@@ -558,21 +568,22 @@ end
 
 return {
 	formatStepCount = formatStepCount,
-	projectActiveTurnSegments = function(p62, p63) --[[ line: 564 ]]
+	getFinalAssistantMessageText = getFinalAssistantMessageText,
+	projectActiveTurnSegments = function(p64, p65) --[[ line: 584 ]]
 		-- upvalues: projectTurnSegments (ref), t (ref)
-		return projectTurnSegments(p62, p63 or {}, if p63 and p63.optimisticLocalTools then p63.optimisticLocalTools else t)
+		return projectTurnSegments(p64, p65 or {}, if p65 and p65.optimisticLocalTools then p65.optimisticLocalTools else t)
 	end,
-	projectLoadingTurnSegments = function(p64) --[[ line: 542 ]]
+	projectLoadingTurnSegments = function(p66) --[[ line: 562 ]]
 		-- upvalues: makeSegmentKey (ref), getActiveActivityLabel (ref), makeTurnWorkSegment (ref)
 		local turnKey
-		if p64 == nil then
+		if p66 == nil then
 			turnKey = "loading"
-		elseif p64.turnKey == nil then
-			local sessionId = p64.sessionId or "pending-session"
-			local var72 = if p64.turnFeedbackIds == nil or typeof(p64.turnFeedbackIds) == "function" then nil else p64.turnFeedbackIds.sequenceId
-			turnKey = if var72 ~= nil then sessionId else `{sessionId}:{var72}`
+		elseif p66.turnKey == nil then
+			local sessionId = p66.sessionId or "pending-session"
+			local var76 = if p66.turnFeedbackIds == nil or typeof(p66.turnFeedbackIds) == "function" then nil else p66.turnFeedbackIds.sequenceId
+			turnKey = if var76 ~= nil then sessionId else `{sessionId}:{var76}`
 		else
-			turnKey = p64.turnKey
+			turnKey = p66.turnKey
 		end
 		local t = {}
 		local _ = #t == 0
@@ -590,21 +601,21 @@ return {
 		if t_1 ~= nil then
 			table.insert(t_2, t_1)
 		end
-		local var76 = makeTurnWorkSegment(turnKey, t_2)
+		local var80 = makeTurnWorkSegment(turnKey, t_2)
 		
-		return if var76 == nil then {} else { var76 }
+		return if var80 == nil then {} else { var80 }
 	end,
-	projectSetupErrorSegments = function(value, p65) --[[ line: 553 ]]
+	projectSetupErrorSegments = function(value, p67) --[[ line: 573 ]]
 		-- upvalues: makeSegmentKey (ref)
 		local turnKey
-		if p65 == nil then
+		if p67 == nil then
 			turnKey = "setup-error"
-		elseif p65.turnKey == nil then
-			local sessionId = p65.sessionId or "pending-session"
-			local var78 = if p65.turnFeedbackIds == nil or typeof(p65.turnFeedbackIds) == "function" then nil else p65.turnFeedbackIds.sequenceId
-			turnKey = if var78 ~= nil then sessionId else `{sessionId}:{var78}`
+		elseif p67.turnKey == nil then
+			local sessionId = p67.sessionId or "pending-session"
+			local var82 = if p67.turnFeedbackIds == nil or typeof(p67.turnFeedbackIds) == "function" then nil else p67.turnFeedbackIds.sequenceId
+			turnKey = if var82 ~= nil then sessionId else `{sessionId}:{var82}`
 		else
-			turnKey = p65.turnKey
+			turnKey = p67.turnKey
 		end
 		return {
 			{

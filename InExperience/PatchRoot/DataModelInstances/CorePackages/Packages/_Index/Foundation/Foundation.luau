@@ -51,6 +51,7 @@ local radiusModule = require(script.Enums.Radius)
 local ratingValueModule = require(script.Enums.RatingValue)
 local scrubBehaviorModule = require(script.Enums.ScrubBehavior)
 local searchInputShapeModule = require(script.Enums.SearchInputShape)
+local segmentedControlVariantModule = require(script.Enums.SegmentedControlVariant)
 local sliderVariantModule = require(script.Enums.SliderVariant)
 local stateLayerAffordanceModule = require(script.Enums.StateLayerAffordance)
 local stateLayerModeModule = require(script.Enums.StateLayerMode)
@@ -79,7 +80,7 @@ local coachmarkModule = require(script.Components.Coachmark)
 local educationalTooltipModule = require(script.Components.EducationalTooltip)
 local chipModule = require(script.Components.Chip)
 local _ = require(script.Components.AlertActions)
-local var75 = strictModule({
+local var76 = strictModule({
 	Accordion = accordionModule,
 	Avatar = avatarModule,
 	AvatarGroup = avatarGroupModule,
@@ -215,6 +216,7 @@ local var75 = strictModule({
 		RatingValue = ratingValueModule,
 		Radius = radiusModule,
 		SearchInputShape = searchInputShapeModule,
+		SegmentedControlVariant = segmentedControlVariantModule,
 		ScrollBarVisibility = require(script.Enums.Visibility),
 		SliderVariant = sliderVariantModule,
 		StateLayerAffordance = stateLayerAffordanceModule,
@@ -262,9 +264,9 @@ local var75 = strictModule({
 
 if _G.__FOUNDATION_TRACK_USAGE__ then
 	local usageTrackerModule = require(script.Parent.UsageTracker)
-	var75 = usageTrackerModule.trackMemberAccess("Foundation", var75, usageTrackerModule.isReactComponent)
+	var76 = usageTrackerModule.trackMemberAccess("Foundation", var76, usageTrackerModule.isReactComponent)
 end
 if _G.__FOUNDATION_TRACE_LOG__ then
 	require(script.Utility.Logger):enableTraceLog()
 end
-return var75
+return var76

@@ -9,11 +9,13 @@ local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCrea
 local normalizeMomentMetadataModule = require(momentsCreation.Utils.normalizeMomentMetadata)
 local getFFlagMomentsCreationNormalizeMetadataEnumsModule = require(momentsCreation.Flags.GetFFlagMomentsCreationNormalizeMetadataEnums)
 local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
+local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local makePostMetadataModule = require(momentsCreation.Utils.makePostMetadata)
 local _game = game
 local captureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeature("CaptureServiceUploadUniverseIdOverride")
 game:DefineFastString("MomentsUploadUniverseId", "8357232245")
 
-local function _(p0) --[[ line: 62 | named "injectUniverseIdOverride" ]]
+local function _(p0) --[[ line: 64 | named "injectUniverseIdOverride" ]]
 	-- upvalues: _game (ref)
 	local gameId = _game.GameId
 	
@@ -26,36 +28,51 @@ local function _(p0) --[[ line: 62 | named "injectUniverseIdOverride" ]]
 	return p0
 end
 
-return function(p1, p2, p3, p4) --[[ line: 72 | named "createMoment" ]]
-	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), captureService (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
-	local ok, var10
+return function(p1, p2, p3, p4) --[[ line: 74 | named "createMoment" ]]
+	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), captureService (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref)
+	local gameId, var11
 	if captureServiceUploadUniverseIdOverrideEngineFeature then
-		ok = _game.GameId
+		gameId = _game.GameId
 		
-		if ok == nil or ok <= 0 then
+		if gameId == nil or gameId <= 0 then
 			local cloned = table.clone(p2)
 			cloned.universeIdOverride = tonumber(game:GetFastString("MomentsUploadUniverseId"))
-			var10 = cloned
+			var11 = cloned
 		else
-			var10 = p2
+			var11 = p2
 		end
 	else
-		var10 = p2
+		var11 = p2
 	end
 	if getFFlagMomentsCreationNormalizeMetadataEnumsModule() then
-		var10 = normalizeMomentMetadataModule(var10)
+		var11 = normalizeMomentMetadataModule(var11)
 	end
-	ok, status = pcall(function() --[[ line: 87 ]]
-		-- upvalues: captureService (copy), p1 (ref), var10 (write), p3 (ref)
-		captureService:UploadCaptureAndPostMoment(p1, var10, p3)
-	end)
+	local var14
+	gameId = nil
+	local _ = nil
 	
-	if getFFlagMomentsAnalyticsProducerPrereqs() and not ok then
+	if getFFlagMomentsUseUploadPostAsync() then
+		local var13 = makePostMetadataModule(p2)
+		local ok, status = pcall(function() --[[ line: 93 ]]
+			-- upvalues: captureService (copy), p1 (ref), var13 (ref)
+			captureService:UploadPostAsync(p1, var13)
+		end)
+		gameId = ok
+		var14 = status
+	else
+		local ok, status = pcall(function() --[[ line: 97 ]]
+			-- upvalues: captureService (copy), p1 (ref), var11 (write), p3 (ref)
+			captureService:UploadCaptureAndPostMoment(p1, var11, p3)
+		end)
+		gameId = ok
+		var14 = status
+	end
+	if getFFlagMomentsAnalyticsProducerPrereqs() and not gameId then
 		local t = {
 			status = "GenericFailure",
 			captureType = makeCreationEventFieldsModule.enumName(p1.CaptureType),
 			localId = tostring(p1.LocalId),
-			error = tostring(status)
+			error = tostring(var14)
 		}
 		
 		for i, v in makeCreationEventFieldsModule.makeCreationBaseFields(p4) do
@@ -65,11 +82,11 @@ return function(p1, p2, p3, p4) --[[ line: 72 | named "createMoment" ]]
 		
 		return
 	else
-		local var13 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
+		local var16 = makeCreationEventFieldsModule.makeCaptureDescriptorFields(p1)
 		
 		for i, v in makeCreationEventFieldsModule.makeCreationBaseFields(p4) do
-			var13[i] = v
+			var16[i] = v
 		end
-		fireAnalyticsEventModule(eventNames.EditingFlowMomentPublished, var13)
+		fireAnalyticsEventModule(eventNames.EditingFlowMomentPublished, var16)
 	end
 end

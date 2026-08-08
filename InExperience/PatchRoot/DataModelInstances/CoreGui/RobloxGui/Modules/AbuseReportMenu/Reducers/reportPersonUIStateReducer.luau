@@ -1,12 +1,10 @@
 ﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local _ = require(abuseReportMenu.Components.Types)
 local playerMenuActions = constantsModule.PlayerMenuActions
-local fFlagInGameMenuAddChatLineReporting = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagInGameMenuAddChatLineReporting
 
-return function(p0, p1) --[[ line: 11 | named "reportPersonUIStateReducer" ]]
-	-- upvalues: playerMenuActions (ref), constantsModule (ref), fFlagInGameMenuAddChatLineReporting (ref)
+return function(p0, p1) --[[ line: 7 | named "reportPersonUIStateReducer" ]]
+	-- upvalues: playerMenuActions (ref), constantsModule (ref)
 	local cloned = table.clone(p0)
 	local type = p1.type
 	
@@ -52,11 +50,6 @@ return function(p0, p1) --[[ line: 11 | named "reportPersonUIStateReducer" ]]
 		return cloned
 	elseif type == playerMenuActions.SetPreselectedPlayer then
 		cloned.preselectedPlayer = p1.player
-		
-		return cloned
-	elseif fFlagInGameMenuAddChatLineReporting and type == playerMenuActions.UpdatedSelectedChatAndOrderedMessages then
-		cloned.selectedMessage = p1.selectedMessage
-		cloned.orderedMessages = p1.orderedMessages
 	end
 	return cloned
 end

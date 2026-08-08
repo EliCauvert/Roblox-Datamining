@@ -1,11 +1,11 @@
 ﻿local mutedError = require(script:FindFirstAncestor("HttpClient").Parent.Loggers).mutedError
 local _ = require(script.Parent.types)
-local t = {
+local _ = {
 	maxRetryCount = 4,
 	retryJitterMinMs = 0,
 	retryJitterMaxMs = 4000
 }
-local t_1 = { [408] = true, [503] = true, [504] = true }
+local t = { [408] = true, [503] = true, [504] = true }
 
 local function _(p0, p1, p2) --[[ line: 16 | named "backoffSeconds" ]]
 	return (p1 + math.random() * (p2 - p1)) * math.pow(2, p0 - 1) / 1000
@@ -15,122 +15,122 @@ local _ = function(p3, p4) --[[ line: 20 | named "shouldRetry" ]]
 	if p4[p3.statusCode] then
 		return true, nil
 	elseif p3.statusCode == 429 and p3.headers ~= nil then
-		local var2 = tonumber(p3.headers["retry-after"])
+		local var1 = tonumber(p3.headers["retry-after"])
 		
-		if var2 == nil or var2 > 16 then
+		if var1 == nil or var1 > 16 then
 			return false, nil
 		else
-			return true, var2
+			return true, var1
 		end
 	end
 end
 
 return function(p5, p6) --[[ line: 33 | named "withRetry" ]]
-	-- upvalues: t (ref), t_1 (ref), mutedError (ref)
+	-- upvalues: t (ref), mutedError (ref)
 	p6 = p6 or {}
-	local var4 = p6.maxRetryCount or t.maxRetryCount
-	local var5 = p6.retryJitterMinMs or t.retryJitterMinMs
-	local var6 = p6.retryJitterMaxMs or t.retryJitterMaxMs
-	local retryOnStatuses = p6.retryOnStatuses or t_1
+	local maxRetryCount = p6.maxRetryCount or 4
+	local retryJitterMinMs = p6.retryJitterMinMs or 0
+	local retryJitterMaxMs = p6.retryJitterMaxMs or 4000
+	local retryOnStatuses = p6.retryOnStatuses or t
 	
-	if var4 < 0 then
-		mutedError(`withRetry: maxRetryCount must be >= 0, got {var4}; falling back to default`)
-		var4 = t.maxRetryCount
+	if maxRetryCount < 0 then
+		mutedError(`withRetry: maxRetryCount must be >= 0, got {maxRetryCount}; falling back to default`)
+		maxRetryCount = 4
 	end
-	if var6 <= var5 then
-		mutedError(`withRetry: retryJitterMinMs ({var5}) must be < retryJitterMaxMs ({var6}); falling back to default`)
-		var5 = t.retryJitterMinMs
-		var6 = t.retryJitterMaxMs
+	if retryJitterMaxMs <= retryJitterMinMs then
+		mutedError(`withRetry: retryJitterMinMs ({retryJitterMinMs}) must be < retryJitterMaxMs ({retryJitterMaxMs}); falling back to default`)
+		retryJitterMinMs = 0
+		retryJitterMaxMs = 4000
 	end
 	return {
 		request = function(p7, p8) --[[ line: 53 ]]
-			-- upvalues: p5 (ref), retryOnStatuses (ref), var4 (write), var5 (write), var6 (write)
-			local var8 = 0
-			local var9 = false
+			-- upvalues: p5 (ref), retryOnStatuses (ref), maxRetryCount (write), retryJitterMinMs (write), retryJitterMaxMs (write)
+			local var7 = 0
+			local var8 = false
+			local var9 = nil
 			local var10 = nil
-			local var11 = nil
 			local _ = nil
 			
-			local var12 = function() --[[ line: 63 ]]
-				-- upvalues: var9 (write), p7 (ref), var8 (write), var10 (write), p5 (copy), retryOnStatuses (copy), var4 (copy), p8 (ref), var11 (write), var5 (copy), var6 (copy), var12 (write)
-				if var9 then return end
-				local var13 = p7
+			local var11 = function() --[[ line: 63 ]]
+				-- upvalues: var8 (write), p7 (ref), var7 (write), var9 (write), p5 (copy), retryOnStatuses (copy), maxRetryCount (copy), p8 (ref), var10 (write), retryJitterMinMs (copy), retryJitterMaxMs (copy), var11 (write)
+				if var8 then return end
+				local var12 = p7
 				
-				if var8 > 0 then
-					local var14 = if p7.headers then table.clone(p7.headers) else {}
-					var14["X-Retry-Attempt"] = tostring(var8)
-					var13 = {
+				if var7 > 0 then
+					local var13 = if p7.headers then table.clone(p7.headers) else {}
+					var13["X-Retry-Attempt"] = tostring(var7)
+					var12 = {
 						url = p7.url,
 						method = p7.method,
 						body = p7.body,
-						headers = var14
+						headers = var13
 					}
 				end
-				var10 = p5.request(var13, function(p9, p10) --[[ line: 74 ]]
-					-- upvalues: var10 (copy), var9 (copy), retryOnStatuses (copy), var8 (copy), var4 (copy), p8 (copy), var11 (copy), var5 (copy), var6 (copy), var12 (copy)
-					var10 = nil
+				var9 = p5.request(var12, function(p9, p10) --[[ line: 74 ]]
+					-- upvalues: var9 (copy), var8 (copy), retryOnStatuses (copy), var7 (copy), maxRetryCount (copy), p8 (copy), var10 (copy), retryJitterMinMs (copy), retryJitterMaxMs (copy), var11 (copy)
+					var9 = nil
 					
-					if var9 then return end
-					local delay, var17
-					local var15 = nil
+					if var8 then return end
+					local delay, var16
+					local var14 = nil
 					
 					if p9 then
-						local var16
+						local var15
 						if retryOnStatuses[p10.statusCode] then
 							delay = true
-							var16 = nil
+							var15 = nil
 						elseif p10.statusCode == 429 and p10.headers ~= nil then
-							var17 = tonumber(p10.headers["retry-after"])
+							var16 = tonumber(p10.headers["retry-after"])
 							
-							if var17 == nil or var17 > 16 then
+							if var16 == nil or var16 > 16 then
 								delay = false
-								var16 = nil
+								var15 = nil
 							else
 								delay = true
-								var16 = var17
+								var15 = var16
 							end
 						end
-						if not delay or var8 >= var4 then
+						if not delay or var7 >= maxRetryCount then
 							p8(true, p10)
 							
 							return
 						end
-						var15 = var16
-					elseif var4 <= var8 then
+						var14 = var15
+					elseif maxRetryCount <= var7 then
 						p8(false, p10)
 						
 						return
 					end
-					var8 += 1
+					var7 += 1
 					delay = task.delay
-					local var18 = var15
+					local var17 = var14
 					
-					if not var18 then
-						var17 = var5
-						var18 = (var17 + math.random() * (var6 - var17)) * math.pow(2, var8 - 1) / 1000
+					if not var17 then
+						var16 = retryJitterMinMs
+						var17 = (var16 + math.random() * (retryJitterMaxMs - var16)) * math.pow(2, var7 - 1) / 1000
 					end
-					var11 = delay(var18, function() --[[ line: 95 ]]
-						-- upvalues: var11 (copy), var12 (copy)
-						var11 = nil
-						var12()
+					var10 = delay(var17, function() --[[ line: 95 ]]
+						-- upvalues: var10 (copy), var11 (copy)
+						var10 = nil
+						var11()
 					end)
 				end)
 			end
 			
-			var12()
+			var11()
 			
 			return function() --[[ line: 104 ]]
-				-- upvalues: var9 (write), var11 (write), var10 (write)
-				if var9 then return end
-				var9 = true
+				-- upvalues: var8 (write), var10 (write), var9 (write)
+				if var8 then return end
+				var8 = true
 				
-				if var11 ~= nil then
-					task.cancel(var11)
-					var11 = nil
-				end
 				if var10 ~= nil then
-					var10()
+					task.cancel(var10)
 					var10 = nil
+				end
+				if var9 ~= nil then
+					var9()
+					var9 = nil
 				end
 			end
 		end

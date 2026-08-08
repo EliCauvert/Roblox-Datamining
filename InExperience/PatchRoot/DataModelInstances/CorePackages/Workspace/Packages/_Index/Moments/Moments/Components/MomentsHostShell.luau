@@ -6,11 +6,11 @@ local _ = require(moments.Stores.GetMomentsStore.createMomentsStore)
 local experienceDetailsSheet = require(moments.ExperienceDetailsSheet).ExperienceDetailsSheet
 local toastOverlayModule = require(moments.Components.ToastOverlay)
 
-return function(p0) --[[ line: 48 | named "MomentsHostShell" ]]
+return function(p0) --[[ line: 56 | named "MomentsHostShell" ]]
 	-- upvalues: reactModule (ref), momentsSessionContextModule (ref), momentsHostContextModule (ref), experienceDetailsSheet (ref), toastOverlayModule (ref)
 	return reactModule.createElement(momentsSessionContextModule.MomentsSessionContext.Provider, { value = p0.sessionStore }, {
 		Host = reactModule.createElement(momentsHostContextModule.MomentsHostContext.Provider, {
-			value = reactModule.useMemo(function() --[[ line: 49 ]]
+			value = reactModule.useMemo(function() --[[ line: 57 ]]
 				-- upvalues: p0 (ref)
 				return {
 					openProfile = p0.openProfile,

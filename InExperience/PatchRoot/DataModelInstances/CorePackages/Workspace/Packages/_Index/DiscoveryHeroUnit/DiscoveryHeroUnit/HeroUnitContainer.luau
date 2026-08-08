@@ -15,16 +15,15 @@ local collectionHeader = collectionViewsModule.CollectionHeader
 local maybeForceDarkTheme = collectionViewsModule.maybeForceDarkTheme
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppEnableHeroUnitV2 = sharedFlagsModule.FFlagLuaAppEnableHeroUnitV2
-local fFlagLuaAppHeroUnitParallaxUpdates = sharedFlagsModule.FFlagLuaAppHeroUnitParallaxUpdates
 local fFlagLuaAppHomePageFirstImageLoadObserver = sharedFlagsModule.FFlagLuaAppHomePageFirstImageLoadObserver
 local t = { Compact = 0.5625, Square = 1, Tall = 1.25 }
 local t_1 = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
 
-local function _(p0, p1) --[[ line: 138 | named "scaleSizeForPlatform" ]]
+local function _(p0, p1) --[[ line: 128 | named "scaleSizeForPlatform" ]]
 	return p0 * p1.Stroke.Standard
 end
 
-local function useHeroConfiguration(p2, p3) --[[ line: 143 ]]
+local function useHeroConfiguration(p2, p3) --[[ line: 133 ]]
 	-- upvalues: responsiveModule (ref), heroNarrowLayout (ref), t (ref), fFlagLuaAppEnableHeroUnitV2 (ref), cryoModule (ref), userGameSettingsService (ref)
 	local displaySmall, bodyLarge, var16, xLarge, XXLarge, var17
 	local _ = nil
@@ -79,8 +78,6 @@ local function useHeroConfiguration(p2, p3) --[[ line: 143 ]]
 	return cryoModule.Dictionary.join({
 		foregroundAspectRatio = 1,
 		sideMargin = 0,
-		minForegroundHeightPercent = 0.8,
-		maxForegroundHeightPercent = 1,
 		titleImageAspectRatio = 3,
 		cornerRadius = p3.Radius.Medium,
 		titleTypography = displaySmall,
@@ -100,10 +97,10 @@ local function useHeroConfiguration(p2, p3) --[[ line: 143 ]]
 	}, p2)
 end
 
-return reactModule.memo(function(p4) --[[ line: 246 | named "HeroUnitContainer" ]]
-	-- upvalues: reactModule (ref), useTokens (ref), useHeroConfiguration (ref), fFlagLuaAppEnableHeroUnitV2 (ref), argCheckModule (ref), image (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), collectionHeader (ref), t_1 (ref), heroImagesModule (ref), fFlagLuaAppHeroUnitParallaxUpdates (ref), userGameSettingsService (ref), maybeForceDarkTheme (ref)
+return reactModule.memo(function(p4) --[[ line: 234 | named "HeroUnitContainer" ]]
+	-- upvalues: reactModule (ref), useTokens (ref), useHeroConfiguration (ref), fFlagLuaAppEnableHeroUnitV2 (ref), argCheckModule (ref), image (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), collectionHeader (ref), t_1 (ref), heroImagesModule (ref), userGameSettingsService (ref), maybeForceDarkTheme (ref)
 	local var20, var21 = reactModule.useBinding(0)
-	local var22 = reactModule.useCallback(function(p5) --[[ line: 248 ]]
+	local var22 = reactModule.useCallback(function(p5) --[[ line: 236 ]]
 		-- upvalues: var21 (ref)
 		if p5 then
 			var21(p5.AbsoluteSize.X)
@@ -122,7 +119,7 @@ return reactModule.memo(function(p4) --[[ line: 246 | named "HeroUnitContainer" 
 		ref = var22,
 		[reactModule.Change.AbsoluteSize] = var22,
 		Position = UDim2.new(0, var24.sideMargin, 0, 0),
-		Size = if var24.aspectRatio then var20:map(function(p6) --[[ line: 327 ]]
+		Size = if var24.aspectRatio then var20:map(function(p6) --[[ line: 315 ]]
 			-- upvalues: var24 (ref)
 			return UDim2.new(1, -2 * var24.sideMargin, 0, math.max(var24.minCardHeight, p6 * var24.aspectRatio + var24.foregroundOverflow))
 		end) else UDim2.new(1, -2 * var24.sideMargin, 0, var25),
@@ -142,20 +139,6 @@ return reactModule.memo(function(p4) --[[ line: 246 | named "HeroUnitContainer" 
 			foregroundImage = p4.foregroundImage,
 			backgroundImage = p4.backgroundImage,
 			foregroundAspectRatio = var24.foregroundAspectRatio,
-			foregroundHeightPercent = if fFlagLuaAppHeroUnitParallaxUpdates then nil else var20:map(function(p7) --[[ line: 358 ]]
-				-- upvalues: var24 (ref)
-				local minForegroundHeightPercent = var24.minForegroundHeightPercent
-				local maxForegroundHeightPercent = var24.maxForegroundHeightPercent
-				
-				if p7 < 600 then
-					return minForegroundHeightPercent
-				elseif p7 > 1140 then
-					return maxForegroundHeightPercent
-				end
-				local var26 = (p7 - 600) / 540
-				
-				return var26 * maxForegroundHeightPercent + (1 - var26) * minForegroundHeightPercent
-			end),
 			foregroundOverflow = var24.foregroundOverflow,
 			backgroundOverflow = var24.backgroundOverflow,
 			cornerRadius = var24.cornerRadius,
@@ -181,9 +164,9 @@ return reactModule.memo(function(p4) --[[ line: 246 | named "HeroUnitContainer" 
 			}),
 			HeroLogo = if fFlagLuaAppEnableHeroUnitV2 and p4.titleImage then reactModule.createElement(image, {
 				Image = p4.titleImage,
-				Size = var20:map(function(p8) --[[ line: 401 ]]
+				Size = var20:map(function(p7) --[[ line: 375 ]]
 					-- upvalues: var25 (write), var24 (ref)
-					return UDim2.new(0, p8, 0, (if var24.aspectRatio then math.max(var24.minCardHeight, p8 * var24.aspectRatio + var24.foregroundOverflow) else var25 or 0) * var24.titleImageHeightPercentage)
+					return UDim2.new(0, p7, 0, (if var24.aspectRatio then math.max(var24.minCardHeight, p7 * var24.aspectRatio + var24.foregroundOverflow) else var25 or 0) * var24.titleImageHeightPercentage)
 				end),
 				aspectRatio = var24.titleImageAspectRatio,
 				Position = UDim2.new(1, 0, 0, 0),
@@ -202,15 +185,15 @@ return reactModule.memo(function(p4) --[[ line: 246 | named "HeroUnitContainer" 
 					hideButton = true,
 					forceUpdatedHeader = true,
 					AutomaticSize = Enum.AutomaticSize.Y,
-					title = if fFlagLuaAppEnableHeroUnitV2 then p4.title elseif p4.titleImage then reactModule.useCallback(function() --[[ line: 270 ]]
+					title = if fFlagLuaAppEnableHeroUnitV2 then p4.title elseif p4.titleImage then reactModule.useCallback(function() --[[ line: 258 ]]
 						-- upvalues: p4 (ref), argCheckModule (copy), reactModule (copy), image (copy), var20 (ref), var25 (write), var24 (ref), fFlagLuaAppHomePageFirstImageLoadObserver (copy)
 						if p4.titleImage then
 							return reactModule.createElement(image, {
 								ZIndex = 0,
 								Image = p4.titleImage,
-								Size = var20:map(function(p9) --[[ line: 278 ]]
+								Size = var20:map(function(p8) --[[ line: 266 ]]
 									-- upvalues: var25 (copy), var24 (copy)
-									return UDim2.new(0, p9, 0, (if var24.aspectRatio then math.max(var24.minCardHeight, p9 * var24.aspectRatio + var24.foregroundOverflow) else var25) * var24.titleImageHeightPercentage)
+									return UDim2.new(0, p8, 0, (if var24.aspectRatio then math.max(var24.minCardHeight, p8 * var24.aspectRatio + var24.foregroundOverflow) else var25) * var24.titleImageHeightPercentage)
 								end),
 								aspectRatio = var24.titleImageAspectRatio,
 								Position = UDim2.new(0, 0, 0.5, 0),

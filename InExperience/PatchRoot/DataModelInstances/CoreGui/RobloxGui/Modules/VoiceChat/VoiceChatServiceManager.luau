@@ -102,7 +102,6 @@ local BAN_REASON = constantsModule.BAN_REASON
 local seamlessVoiceStatusModule = require(robloxGui.Modules.Settings.Enum.SeamlessVoiceStatus)
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
 local getFFlagVoiceChatClientRewriteMasterLua = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagVoiceChatClientRewriteMasterLua
-local getFFlagEnableSeamlessVoiceV2 = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableSeamlessVoiceV2
 local getFFlagDisconnectToastClientRewrite = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagDisconnectToastClientRewrite
 local getFFlagEnableVrVoiceParity = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableVrVoiceParity
 local analytics = voiceChatCoreModule.Analytics
@@ -134,7 +133,6 @@ local VOICE_CHAT_DEVICE_TYPE = constants.VOICE_CHAT_DEVICE_TYPE
 local VOICE_CHAT_AVAILABILITY = constants.VOICE_CHAT_AVAILABILITY
 local MIN_VOICE_CHAT_API_VERSION = constants.MIN_VOICE_CHAT_API_VERSION
 local WATCHED_MESSAGE_TYPES = constants.WATCHED_MESSAGE_TYPES
-local PERMISSION_STATE = constants.PERMISSION_STATE
 local VOICE_JOIN_PROGRESS = constants_1.VOICE_JOIN_PROGRESS
 local t = {
 	available = nil,
@@ -177,7 +175,7 @@ local t = {
 	previousSessionId = nil,
 	voiceEnabled = false,
 	VOICE_STATE = VOICE_STATE,
-	permissionState = if getFFlagJoinWithoutMicPermissions() then PERMISSION_STATE.IDLE else nil,
+	permissionState = if getFFlagJoinWithoutMicPermissions() then constants.PERMISSION_STATE.IDLE else nil,
 	isBanned = false,
 	bannedUntil = nil,
 	errorText = nil,
@@ -221,23 +219,23 @@ local t_2 = {
 	[constantsModule.IN_EXP_UPSELL_VARIANT.VARIANT3] = promptTypeModule.VoiceConsentModalV3
 }
 
-function getIconSrc(p0, p1) --[[ line: 354 ]]
+function getIconSrc(p0, p1) --[[ line: 353 ]]
 	return "rbxasset://textures/ui/VoiceChat/" .. (if p1 then p1 .. "/" else "") .. p0 .. ".png"
 end
 
-function getIcon(p2, p3, p4) --[[ line: 359 ]]
+function getIcon(p2, p3, p4) --[[ line: 358 ]]
 	-- upvalues: VOICE_STATE (ref)
 	return if p2 == VOICE_STATE.MUTED then getIconSrc("Muted", p4) elseif p2 == VOICE_STATE.CONNECTING then getIconSrc("Connecting", p4) elseif p2 == VOICE_STATE.INACTIVE then getIconSrc("Blank", p4) elseif p2 == VOICE_STATE.TALKING then p3 and getIconSrc("Unmuted" .. tostring(math.floor(0.5 + 5 * (p3 or math.random())) * 20), p4) or getIconSrc("Blank", p4) else getIconSrc("Error", p4)
 end
 
 t.__index = t
 
-function t:__index(p5) --[[ line: 377 ]]
+function t:__index(p5) --[[ line: 376 ]]
 	-- upvalues: var70 (ref), t (ref)
 	return if var70:has(p5) then self.coreVoiceManager[p5] else rawget(t, p5)
 end
 
-function t:__newindex(p6, p7) --[[ line: 384 ]]
+function t:__newindex(p6, p7) --[[ line: 383 ]]
 	-- upvalues: var70 (ref), t (ref)
 	if var70:has(p6) then
 		self.coreVoiceManager[p6] = p7
@@ -247,8 +245,8 @@ function t:__newindex(p6, p7) --[[ line: 384 ]]
 	rawset(t, p6, p7)
 end
 
-function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
-	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), getFFlagEnableSeamlessVoiceV2 (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), seamlessVoiceV2JoinVoiceToast (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
+function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 391 ]]
+	-- upvalues: analytics (ref), getCamMicPermissionsModule (ref), t (ref), WATCHED_MESSAGE_TYPES (ref), getFIntThrottleParticipantsUpdateMs (ref), IXPServiceWrapper (ref), voiceUIImprovementsIXPLayerName (ref), throttleParticipantsUpdateIXPLayerValue (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), expChatModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), debugSkipVoicePermissionCheck (ref), fFlagDebugShowAudioDeviceInputDebugger (ref), fFlagEnablePartyVoiceChangersInLua (ref), microphoneDevicePermissionsLoggingModule (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (ref), voiceVolumeControlsEligibility (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (ref), VOICE_JOIN_PROGRESS (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), disableLeaveToastInStudio (ref), promptTypeModule (ref), debugSimulateConnectDisconnect (ref), name (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), appStorageService (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagShowDevicePermissionsModal (ref), getFFlagEnableSeamlessVoiceDataConsentToastModule (ref), getFFlagNonVoiceFTUX (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), seamlessVoiceV2JoinVoiceToast (ref), getFFlagEnableVoiceChatMuteForVideoCaptures (ref), getFFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref)
 	local tbl = setmetatable({
 		_mutedAnyone = false,
 		voiceConnectEventReportedForActiveSession = false,
@@ -277,7 +275,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 	
 	if getFIntThrottleParticipantsUpdateMs() > 0 then
 		tbl.participantsStateThrottleTime = getFIntThrottleParticipantsUpdateMs() / 1000
-		local ok, status = pcall(function() --[[ line: 433 ]]
+		local ok, status = pcall(function() --[[ line: 432 ]]
 			-- upvalues: IXPServiceWrapper (copy), voiceUIImprovementsIXPLayerName (copy)
 			return IXPServiceWrapper:GetLayerData(voiceUIImprovementsIXPLayerName)
 		end)
@@ -301,16 +299,16 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 		Error = tbl:GetIcon("Error", "MicLight")
 	}
 	local var74 = false
-	local eventConnection = tbl.attemptVoiceRejoin.Event:Connect(function() --[[ line: 459 ]]
+	local eventConnection = tbl.attemptVoiceRejoin.Event:Connect(function() --[[ line: 458 ]]
 		-- upvalues: var74 (write)
 		var74 = true
 	end)
 	local var76 = if getFFlagExpChatUseVoiceParticipantsStore() then expChatModule.Stores.GetVoiceStore(false) else nil
-	tbl.coreVoiceManager:subscribe("GetPermissions", function(p18, p19, p20, p21) --[[ line: 466 ]]
+	tbl.coreVoiceManager:subscribe("GetPermissions", function(p18, p19, p20, p21) --[[ line: 465 ]]
 		-- upvalues: tbl (ref)
 		tbl.getPermissionsFunction(p18, p19, p20, if tbl.inExpUpsellEntrypoint ~= nil then tbl.inExpUpsellEntrypoint else "VoiceChatServiceManager.requestMicPermission", p21)
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceParticipantRemoved", function(p22) --[[ line: 473 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceParticipantRemoved", function(p22) --[[ line: 472 ]]
 		-- upvalues: getFFlagExpChatUseVoiceParticipantsStore (copy), var76 (ref), expChatModule (copy)
 		if getFFlagExpChatUseVoiceParticipantsStore() then
 			var76.handleVoiceParticipantRemoved(p22)
@@ -320,7 +318,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 			expChatModule.Events.VoiceParticipantRemoved(tostring(p22))
 		end
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceParticipantAdded", function(p23) --[[ line: 480 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceParticipantAdded", function(p23) --[[ line: 479 ]]
 		-- upvalues: getFFlagExpChatUseVoiceParticipantsStore (copy), var76 (ref), expChatModule (copy)
 		if getFFlagExpChatUseVoiceParticipantsStore() then
 			var76.handleVoiceParticipantAdded(p23)
@@ -330,27 +328,27 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 			expChatModule.Events.VoiceParticipantAdded(tostring(p23))
 		end
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceParticipantToggleMuted", function(p24, p25) --[[ line: 487 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceParticipantToggleMuted", function(p24, p25) --[[ line: 486 ]]
 		-- upvalues: expChatModule (copy)
 		if expChatModule.Events.VoiceParticipantToggleMuted then
 			expChatModule.Events.VoiceParticipantToggleMuted(tostring(p24), p25)
 		end
 	end)
-	tbl.coreVoiceManager:subscribe("OnUserAndPlaceCanUseVoiceResolved", function(p26, p27) --[[ line: 492 ]]
+	tbl.coreVoiceManager:subscribe("OnUserAndPlaceCanUseVoiceResolved", function(p26, p27) --[[ line: 491 ]]
 		-- upvalues: tbl (ref)
 		tbl:_onUserAndPlaceCanUseVoiceResolved(p26, p27)
 	end)
-	tbl.coreVoiceManager:subscribe("OnRequestMicPermissionResolved", function() --[[ line: 495 ]]
+	tbl.coreVoiceManager:subscribe("OnRequestMicPermissionResolved", function() --[[ line: 494 ]]
 		-- upvalues: getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), tbl (ref)
 		if not getFFlagEnableUniveralVoiceToastsModule() then return end
-		return if fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule and fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule then tbl:CheckAndShowNotAudiblePrompt():andThen(function() --[[ line: 498 ]]
+		return if fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule and fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule then tbl:CheckAndShowNotAudiblePrompt():andThen(function() --[[ line: 497 ]]
 			-- upvalues: tbl (copy)
 			return tbl:ShowNotAudiblePromptVoiceChatVolume()
 		end) else tbl:CheckAndShowNotAudiblePrompt()
 	end)
-	tbl.coreVoiceManager:subscribe("OnRequestMicPermissionRejected", function() --[[ line: 506 ]]
-		-- upvalues: getFFlagEnableSeamlessVoiceV2 (copy), tbl (ref), getFFlagEnableUniveralVoiceToastsModule (copy), debugSkipVoicePermissionCheck (copy)
-		if getFFlagEnableSeamlessVoiceV2() and tbl:IsSeamlessVoice() then
+	tbl.coreVoiceManager:subscribe("OnRequestMicPermissionRejected", function() --[[ line: 505 ]]
+		-- upvalues: tbl (ref), getFFlagEnableUniveralVoiceToastsModule (copy), debugSkipVoicePermissionCheck (copy)
+		if tbl:IsSeamlessVoice() then
 			tbl.deniedMicPermissions = true
 		end
 		if getFFlagEnableUniveralVoiceToastsModule() and not debugSkipVoicePermissionCheck then
@@ -359,43 +357,43 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 	end)
 	
 	if fFlagDebugShowAudioDeviceInputDebugger then
-		tbl.coreVoiceManager:subscribe("OnDevicePlayerChanged", function() --[[ line: 517 ]]
+		tbl.coreVoiceManager:subscribe("OnDevicePlayerChanged", function() --[[ line: 516 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
-		tbl.coreVoiceManager:subscribe("OnDeviceActiveChanged", function() --[[ line: 520 ]]
+		tbl.coreVoiceManager:subscribe("OnDeviceActiveChanged", function() --[[ line: 519 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
-		tbl.coreVoiceManager:subscribe("OnDeviceMuteChanged", function() --[[ line: 523 ]]
+		tbl.coreVoiceManager:subscribe("OnDeviceMuteChanged", function() --[[ line: 522 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
 		
 		if fFlagEnablePartyVoiceChangersInLua then
-			tbl.coreVoiceManager:subscribe("OnVoiceChangerChanged", function() --[[ line: 527 ]]
+			tbl.coreVoiceManager:subscribe("OnVoiceChangerChanged", function() --[[ line: 526 ]]
 				-- upvalues: tbl (ref)
 				tbl:UpdateAudioDeviceInputDebugger()
 			end)
 		end
-		tbl.coreVoiceManager:subscribe("OnPlayerMuted", function() --[[ line: 531 ]]
+		tbl.coreVoiceManager:subscribe("OnPlayerMuted", function() --[[ line: 530 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
-		tbl.coreVoiceManager:subscribe("OnAudioDeviceInputAdded", function() --[[ line: 534 ]]
+		tbl.coreVoiceManager:subscribe("OnAudioDeviceInputAdded", function() --[[ line: 533 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
-		tbl.coreVoiceManager:subscribe("OnAudioDeviceInputRemoved", function() --[[ line: 537 ]]
+		tbl.coreVoiceManager:subscribe("OnAudioDeviceInputRemoved", function() --[[ line: 536 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
-		tbl.coreVoiceManager:subscribe("OnDeviceMutedByLocalUserChanged", function() --[[ line: 540 ]]
+		tbl.coreVoiceManager:subscribe("OnDeviceMutedByLocalUserChanged", function() --[[ line: 539 ]]
 			-- upvalues: tbl (ref)
 			tbl:UpdateAudioDeviceInputDebugger()
 		end)
 	end
-	tbl.coreVoiceManager:subscribe("OnStateChanged", function(_, p28) --[[ line: 544 ]]
+	tbl.coreVoiceManager:subscribe("OnStateChanged", function(_, p28) --[[ line: 543 ]]
 		-- upvalues: microphoneDevicePermissionsLoggingModule (copy), tbl (ref), voiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), voiceVolumeControlsEligibility (copy), IXPServiceWrapper (copy), voiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), VOICE_JOIN_PROGRESS (copy), constantsModule (copy), var74 (write), eventConnection (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), disableLeaveToastInStudio (copy), promptTypeModule (copy)
 		microphoneDevicePermissionsLoggingModule:setClientSessionId(tbl.coreVoiceManager:GetSessionId())
 		
@@ -430,7 +428,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 			tbl:showPrompt(promptTypeModule.LeaveVoice)
 		end
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceChatServiceInitialized", function() --[[ line: 595 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceChatServiceInitialized", function() --[[ line: 594 ]]
 		-- upvalues: tbl (ref), debugSimulateConnectDisconnect (copy), name (copy), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), appStorageService (copy), constantsModule (copy), promptTypeModule (copy)
 		tbl:ShowVoiceUI()
 		
@@ -439,14 +437,14 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 			tbl:simulateVoiceConnectDisconnect()
 		end
 		if getFFlagEnableVoiceTrustedConnectionsToastsModule() and not tbl.coreVoiceManager.initializedPostSuspension then
-			local ok, status = pcall(function() --[[ line: 603 ]]
+			local ok, status = pcall(function() --[[ line: 602 ]]
 				-- upvalues: appStorageService (copy), constantsModule (copy)
 				return appStorageService:GetItem(constantsModule.VOICE_WITH_TC_TOAST_KEY) == "true"
 			end)
 			
 			if not (if ok then status else true) then
 				tbl:showPrompt(promptTypeModule.UpdateOnAutoJoinToast)
-				pcall(function() --[[ line: 610 ]]
+				pcall(function() --[[ line: 609 ]]
 					-- upvalues: appStorageService (copy), constantsModule (copy)
 					appStorageService:SetItem(constantsModule.VOICE_WITH_TC_TOAST_KEY, "true")
 					appStorageService:Flush()
@@ -454,20 +452,20 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 			end
 		end
 	end)
-	tbl.coreVoiceManager:subscribe("OnInitialJoinFailed", function() --[[ line: 618 ]]
+	tbl.coreVoiceManager:subscribe("OnInitialJoinFailed", function() --[[ line: 617 ]]
 		-- upvalues: tbl (ref)
 		tbl:InitialJoinFailedPrompt()
 	end)
-	tbl.coreVoiceManager:subscribe("OnPlayerModerated", function() --[[ line: 621 ]]
+	tbl.coreVoiceManager:subscribe("OnPlayerModerated", function() --[[ line: 620 ]]
 		-- upvalues: tbl (ref), constantsModule (copy)
 		tbl.pendingDisconnectReason = constantsModule.VOICE_DISCONNECT_REASON.MODERATED
 		tbl:ShowPlayerModeratedMessage()
 	end)
-	tbl.coreVoiceManager:subscribe("OnRetryRequested", function() --[[ line: 626 ]]
+	tbl.coreVoiceManager:subscribe("OnRetryRequested", function() --[[ line: 625 ]]
 		-- upvalues: tbl (ref), promptTypeModule (copy)
 		tbl:showPrompt(promptTypeModule.Retry)
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceToxicityModal", function() --[[ line: 629 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceToxicityModal", function() --[[ line: 628 ]]
 		-- upvalues: name (copy), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), voiceNudgeUseNewDACopyModule (copy), tbl (ref), promptTypeModule (copy)
 		name:debug("Showing Voice Toxicity Modal")
 		
@@ -478,7 +476,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 		end
 		tbl:showPrompt(promptTypeModule.VoiceToxicityModal)
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceToxicityToast", function() --[[ line: 637 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceToxicityToast", function() --[[ line: 636 ]]
 		-- upvalues: name (copy), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), voiceNudgeUseNewDACopyModule (copy), tbl (ref), promptTypeModule (copy)
 		name:debug("Showing Voice Toxicity Toast")
 		
@@ -489,7 +487,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 		end
 		tbl:showPrompt(promptTypeModule.VoiceToxicityToast)
 	end)
-	tbl.coreVoiceManager:subscribe("OnPermissionRequested", function() --[[ line: 645 ]]
+	tbl.coreVoiceManager:subscribe("OnPermissionRequested", function() --[[ line: 644 ]]
 		-- upvalues: getFFlagShowDevicePermissionsModal (copy), tbl (ref), promptTypeModule (copy)
 		if getFFlagShowDevicePermissionsModal() then
 			tbl:showPrompt(promptTypeModule.DevicePermissionsModal)
@@ -498,13 +496,13 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 		end
 		tbl:showPrompt(promptTypeModule.Permission)
 	end)
-	tbl.coreVoiceManager:subscribe("OnShowDataConsentToast", function() --[[ line: 652 ]]
+	tbl.coreVoiceManager:subscribe("OnShowDataConsentToast", function() --[[ line: 651 ]]
 		-- upvalues: getFFlagEnableSeamlessVoiceDataConsentToastModule (copy), tbl (ref)
 		if getFFlagEnableSeamlessVoiceDataConsentToastModule() then
 			tbl:showDataConsentToast()
 		end
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceReverseNudgeIconColorChange", function(p29) --[[ line: 657 ]]
+	tbl.coreVoiceManager:subscribe("OnVoiceReverseNudgeIconColorChange", function(p29) --[[ line: 656 ]]
 		-- upvalues: name (copy), expChatModule (copy), tbl (ref)
 		name:debug("Showing Reverse Nudge Icon Color Change")
 		
@@ -512,7 +510,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 			tbl:AddReverseNudgeToxicUser(p29.toxicUserId, expChatModule.Events.AddReverseNudgeToxicUser, expChatModule.Events.RemoveReverseNudgeToxicUser)
 		end
 	end)
-	tbl.coreVoiceManager.setVoiceUIVisibility.Event:Connect(function(p30) --[[ line: 667 ]]
+	tbl.coreVoiceManager.setVoiceUIVisibility.Event:Connect(function(p30) --[[ line: 666 ]]
 		-- upvalues: tbl (ref)
 		if p30 then
 			tbl:ShowVoiceUI()
@@ -521,8 +519,8 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 		end
 		tbl:HideVoiceUI()
 	end)
-	tbl.coreVoiceManager:subscribe("OnVoiceJoin", function() --[[ line: 674 ]]
-		-- upvalues: getFFlagNonVoiceFTUX (copy), tbl (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), getFFlagUpdateVoiceConnectionToastsModule (copy), promptTypeModule (copy), getFFlagEnableSeamlessVoiceV2 (copy), seamlessVoiceV2JoinVoiceToast (copy), getFFlagEnableVoiceChatMuteForVideoCaptures (copy), getFFlagEnableCrossExperienceVoiceCaptureMute (copy), default_1 (copy), var74 (write), eventConnection (ref)
+	tbl.coreVoiceManager:subscribe("OnVoiceJoin", function() --[[ line: 673 ]]
+		-- upvalues: getFFlagNonVoiceFTUX (copy), tbl (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (copy), getFFlagUpdateVoiceConnectionToastsModule (copy), promptTypeModule (copy), seamlessVoiceV2JoinVoiceToast (copy), getFFlagEnableVoiceChatMuteForVideoCaptures (copy), getFFlagEnableCrossExperienceVoiceCaptureMute (copy), default_1 (copy), var74 (write), eventConnection (ref)
 		if getFFlagNonVoiceFTUX() and tbl.hasLeftFTUX then
 			tbl.hasLeftFTUX = false
 			
@@ -534,7 +532,7 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 				tbl:showPrompt(promptTypeModule.JoinedVoiceToast)
 			end
 			tbl.Analytics:reportConnectDisconnectEvents("voiceConnectFtuxLeaveEvent", tbl:GetConnectDisconnectAnalyticsData())
-		elseif getFFlagEnableSeamlessVoiceV2() and tbl:IsSeamlessVoice() then
+		elseif tbl:IsSeamlessVoice() then
 			if getFFlagEnableVoiceTrustedConnectionsToastsModule() then
 				tbl:showJoinVoicePrompt()
 			elseif getFFlagUpdateVoiceConnectionToastsModule() then
@@ -571,64 +569,64 @@ function t.new(p8, p9, p10, p11, p12, p13, p14, p15, p16, p17) --[[ line: 392 ]]
 	return tbl
 end
 
-local function _(p31) --[[ line: 730 | named "shorten" ]]
+local function _(p31) --[[ line: 726 | named "shorten" ]]
 	return "..." .. string.sub(tostring(p31), -4)
 end
 
-local _ = function(p32, p33) --[[ line: 734 | named "bind" ]]
-	return function(...) --[[ line: 735 ]]
+local _ = function(p32, p33) --[[ line: 730 | named "bind" ]]
+	return function(...) --[[ line: 731 ]]
 		-- upvalues: p32 (ref), p33 (ref)
 		return p32[p33](p32, ...)
 	end
 end
 
-function t:subscribe(p34, p35) --[[ line: 740 ]]
+function t:subscribe(p34, p35) --[[ line: 736 ]]
 	return self.coreVoiceManager:subscribe(p34, p35)
 end
 
-function t:unsubscribe(p36, p37) --[[ line: 744 ]]
+function t:unsubscribe(p36, p37) --[[ line: 740 ]]
 	self.coreVoiceManager:unsubscribe(p36, p37)
 end
 
-function t:_reportJoinFailed(p38, p39) --[[ line: 748 ]]
+function t:_reportJoinFailed(p38, p39) --[[ line: 744 ]]
 	return self.coreVoiceManager:_reportJoinFailed(p38, p39)
 end
 
-function t:_asyncInit() --[[ line: 752 ]]
+function t:_asyncInit() --[[ line: 748 ]]
 	return self.coreVoiceManager:_asyncInit()
 end
 
-function t:asyncInit() --[[ line: 756 ]]
+function t:asyncInit() --[[ line: 752 ]]
 	return self.coreVoiceManager:asyncInit()
 end
 
-function t:CheckAudioInputExists() --[[ line: 760 ]]
+function t:CheckAudioInputExists() --[[ line: 756 ]]
 	return self.coreVoiceManager:CheckAudioInputExists()
 end
 
-function t:getService() --[[ line: 764 ]]
+function t:getService() --[[ line: 760 ]]
 	return self.service
 end
 
-function t:GetMutedAnyone() --[[ line: 768 ]]
+function t:GetMutedAnyone() --[[ line: 764 ]]
 	return self.coreVoiceManager:GetMutedAnyone()
 end
 
-function t:RecordGameSettingsOpened() --[[ line: 772 ]]
+function t:RecordGameSettingsOpened() --[[ line: 768 ]]
 	self.coreVoiceManager:RecordGameSettingsOpened()
 end
 
-function t:ReportVoiceVolumeImpressionsIfNeeded() --[[ line: 776 ]]
+function t:ReportVoiceVolumeImpressionsIfNeeded() --[[ line: 772 ]]
 	self.coreVoiceManager:ReportVoiceVolumeImpressionsIfNeeded()
 end
 
-function t:GetRequest(p40, p41) --[[ line: 780 ]]
+function t:GetRequest(p40, p41) --[[ line: 776 ]]
 	return self.coreVoiceManager:GetRequest(p40, p41)
 end
 
-function t.PostRequest(p42, p43, _, p44) --[[ line: 784 ]]
+function t.PostRequest(p42, p43, _, p44) --[[ line: 780 ]]
 	-- upvalues: httpService (ref)
-	local ok, status = pcall(function() --[[ line: 785 ]]
+	local ok, status = pcall(function() --[[ line: 781 ]]
 		-- upvalues: p42 (ref), p43 (ref), p44 (ref), httpService (copy)
 		return httpService:JSONDecode(p42.HttpRbxApiService:PostAsyncFullUrl(p43, p44, Enum.ThrottlingPriority.Default, Enum.HttpContentType.ApplicationJson, Enum.HttpRequestType.Players))
 	end)
@@ -636,13 +634,13 @@ function t.PostRequest(p42, p43, _, p44) --[[ line: 784 ]]
 	return ok and status
 end
 
-function t:_GetShowAgeVerificationOverlay(p45) --[[ line: 806 ]]
+function t:_GetShowAgeVerificationOverlay(p45) --[[ line: 802 ]]
 	return self.coreVoiceManager:_GetShowAgeVerificationOverlay(p45)
 end
 
-function t.simulateVoiceConnectDisconnect(p46) --[[ line: 810 ]]
+function t.simulateVoiceConnectDisconnect(p46) --[[ line: 806 ]]
 	-- upvalues: debugConnectDisconnectInterval (ref), name (ref)
-	task.spawn(function() --[[ line: 811 ]]
+	task.spawn(function() --[[ line: 807 ]]
 		-- upvalues: debugConnectDisconnectInterval (copy), p46 (ref), name (copy)
 		while true do
 			task.wait(debugConnectDisconnectInterval)
@@ -657,62 +655,62 @@ function t.simulateVoiceConnectDisconnect(p46) --[[ line: 810 ]]
 	end)
 end
 
-function t:FetchAgeVerificationOverlay(p47) --[[ line: 825 ]]
+function t:FetchAgeVerificationOverlay(p47) --[[ line: 821 ]]
 	return self.coreVoiceManager:FetchAgeVerificationOverlay(p47)
 end
 
-function t:FetchPhoneVerificationUpsell(p48, p49, p50) --[[ line: 829 ]]
+function t:FetchPhoneVerificationUpsell(p48, p49, p50) --[[ line: 825 ]]
 	return self.coreVoiceManager:FetchPhoneVerificationUpsell(p48, p49, p50)
 end
 
-function t.RecordUserSeenModal(p51, p52) --[[ line: 837 ]]
+function t.RecordUserSeenModal(p51, p52) --[[ line: 833 ]]
 	-- upvalues: postRecordUserSeenGeneralModal (ref)
 	local var81 = "PostRequest"
 	
-	return postRecordUserSeenGeneralModal(function(...) --[[ line: 735 ]]
+	return postRecordUserSeenGeneralModal(function(...) --[[ line: 731 ]]
 		-- upvalues: p51 (ref), var81 (ref)
 		return p51[var81](p51, ...)
 	end, p52)
 end
 
-function t:checkAndUpdateSequence(p53, p54) --[[ line: 841 ]]
+function t:checkAndUpdateSequence(p53, p54) --[[ line: 837 ]]
 	return self.coreVoiceManager:checkAndUpdateSequence(p53, p54)
 end
 
-function t:onMissedSequence(p55) --[[ line: 845 ]]
+function t:onMissedSequence(p55) --[[ line: 841 ]]
 	return self.coreVoiceManager:onMissedSequence(p55)
 end
 
-function t:watchSignalR() --[[ line: 849 ]]
+function t:watchSignalR() --[[ line: 845 ]]
 	return self.coreVoiceManager:watchSignalR()
 end
 
-function t:voicePermissionGranted(p56) --[[ line: 857 ]]
+function t:voicePermissionGranted(p56) --[[ line: 853 ]]
 	return self.coreVoiceManager:voicePermissionGranted(p56)
 end
 
-function t:GetSignalREvent(p57) --[[ line: 861 ]]
+function t:GetSignalREvent(p57) --[[ line: 857 ]]
 	return self.coreVoiceManager:GetSignalREvent(p57)
 end
 
-function t:avatarChatUserAndPlaceSettingsValueOfClientFeatures(p58) --[[ line: 866 ]]
+function t:avatarChatUserAndPlaceSettingsValueOfClientFeatures(p58) --[[ line: 862 ]]
 	return self.coreVoiceManager:avatarChatUserAndPlaceSettingsValueOfClientFeatures(p58)
 end
 
-function t:resolveAvatarChatUserAndPlaceSettings() --[[ line: 870 ]]
+function t:resolveAvatarChatUserAndPlaceSettings() --[[ line: 866 ]]
 	return self.coreVoiceManager:resolveAvatarChatUserAndPlaceSettings()
 end
 
-function t:EnableVoice() --[[ line: 874 ]]
+function t:EnableVoice() --[[ line: 870 ]]
 	return self.coreVoiceManager:EnableVoice()
 end
 
-function t:_VoiceChatFirstTimeUX(p59) --[[ line: 878 ]]
+function t:_VoiceChatFirstTimeUX(p59) --[[ line: 874 ]]
 	-- upvalues: constantsModule (ref), name (ref), getFFlagNonVoiceFTUX (ref), expChatModule (ref), getFFlagEnableFtuxExitOnMuteToggle (ref), seamlessVoiceSTUXDisplayCount (ref), fixSTUXShowingIncorrectly (ref), promptTypeModule (ref)
 	local var82 = nil
 	local var83 = nil
 	
-	if not pcall(function() --[[ line: 880 ]]
+	if not pcall(function() --[[ line: 876 ]]
 		-- upvalues: p59 (ref), constantsModule (copy), var82 (write), var83 (write)
 		local seamless_voice_stux_keyItem = p59:GetItem(constantsModule.SEAMLESS_VOICE_STUX_KEY)
 		var82 = p59:GetItem(constantsModule.SEAMLESS_VOICE_FTUX_KEY) == "true"
@@ -731,18 +729,18 @@ function t:_VoiceChatFirstTimeUX(p59) --[[ line: 878 ]]
 		expChatModule.Events.VoiceUIVisibilityChanged(true)
 	else
 		self:MuteAll(true, "FTUX")
-		self.muteAllChanged.Event:Once(function() --[[ line: 906 ]]
+		self.muteAllChanged.Event:Once(function() --[[ line: 902 ]]
 			-- upvalues: self (ref), p59 (ref)
 			self:HideFTUX(p59)
 			self.Analytics:reportConnectDisconnectEvents("voiceConnectFtuxLeaveEvent", self:GetConnectDisconnectAnalyticsData())
 		end)
-		self.talkingChanged.Event:Once(function() --[[ line: 913 ]]
+		self.talkingChanged.Event:Once(function() --[[ line: 909 ]]
 			-- upvalues: self (ref), p59 (ref)
 			self:HideFTUX(p59)
 		end)
 		
 		if getFFlagEnableFtuxExitOnMuteToggle() then
-			self.coreVoiceManager.onPlayerMuteToggled.Event:Once(function() --[[ line: 917 ]]
+			self.coreVoiceManager.onPlayerMuteToggled.Event:Once(function() --[[ line: 913 ]]
 				-- upvalues: self (ref), p59 (ref)
 				self:HideFTUX(p59)
 			end)
@@ -750,7 +748,7 @@ function t:_VoiceChatFirstTimeUX(p59) --[[ line: 878 ]]
 	end
 end
 
-function t:VoiceChatFirstTimeUX(p60) --[[ line: 935 ]]
+function t:VoiceChatFirstTimeUX(p60) --[[ line: 931 ]]
 	-- upvalues: fixSTUXShowingIncorrectly (ref), name (ref), debugSkipSeamlessVoiceAPICheck (ref), constantsModule (ref), getFFlagNonVoiceFTUX (ref)
 	if fixSTUXShowingIncorrectly and not self:verifyUniverseAndPlaceCanUseVoice() then
 		name:debug("Universe/place is not voice enabled, do not run FTUX/STUX")
@@ -765,7 +763,7 @@ function t:VoiceChatFirstTimeUX(p60) --[[ line: 935 ]]
 			return
 		end
 	end
-	local function _() --[[ line: 955 | named "startFTUX" ]]
+	local function _() --[[ line: 951 | named "startFTUX" ]]
 		-- upvalues: name (copy), self (ref), p60 (ref)
 		name:debug("Starting FTUX")
 		self:_VoiceChatFirstTimeUX(p60)
@@ -777,7 +775,7 @@ function t:VoiceChatFirstTimeUX(p60) --[[ line: 935 ]]
 		
 		return
 	end
-	self:asyncInit():andThen(function() --[[ line: 963 ]]
+	self:asyncInit():andThen(function() --[[ line: 959 ]]
 		-- upvalues: self (ref), name (copy), p60 (ref)
 		local stateChangedConnection = nil
 		
@@ -785,7 +783,7 @@ function t:VoiceChatFirstTimeUX(p60) --[[ line: 935 ]]
 			name:debug("Starting FTUX")
 			self:_VoiceChatFirstTimeUX(p60)
 		end
-		stateChangedConnection = self.service.StateChanged:Connect(function(_, p62) --[[ line: 971 ]]
+		stateChangedConnection = self.service.StateChanged:Connect(function(_, p62) --[[ line: 967 ]]
 			-- upvalues: name (copy), self (copy), p60 (copy), stateChangedConnection (write)
 			if p62 == Enum.VoiceChatState.Joined then
 				name:debug("Starting FTUX")
@@ -793,17 +791,17 @@ function t:VoiceChatFirstTimeUX(p60) --[[ line: 935 ]]
 				stateChangedConnection:Disconnect()
 			end
 		end)
-	end):catch(function(p61) --[[ line: 978 ]]
+	end):catch(function(p61) --[[ line: 974 ]]
 		-- upvalues: name (copy)
 		name:trace("Failed to start FTUX: {}", p61)
 	end)
 end
 
-function t:HideFTUX(p63) --[[ line: 984 ]]
+function t:HideFTUX(p63) --[[ line: 980 ]]
 	-- upvalues: constantsModule (ref), getFFlagNonVoiceFTUX (ref), promptTypeModule (ref)
 	self.isShowingFTUX = false
 	self.hideFTUXSignal:Fire()
-	pcall(function() --[[ line: 987 ]]
+	pcall(function() --[[ line: 983 ]]
 		-- upvalues: p63 (ref), constantsModule (copy)
 		p63:SetItem(constantsModule.SEAMLESS_VOICE_FTUX_KEY, "true")
 		p63:Flush()
@@ -819,13 +817,13 @@ function t:HideFTUX(p63) --[[ line: 984 ]]
 	end
 end
 
-function t:_onUserAndPlaceCanUseVoiceResolved(p64, p65) --[[ line: 1001 ]]
+function t:_onUserAndPlaceCanUseVoiceResolved(p64, p65) --[[ line: 997 ]]
 	-- upvalues: getInformedOfBan (ref), getFFlagAvatarChatServiceEnabled (ref), getFFlagVoiceChatServiceManagerUseAvatarChat (ref), promptTypeModule (ref), BAN_REASON (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref), getFFlagEnableVoicePromptReasonTextModule (ref)
 	self.bannedUntil = nil
 	
 	if p64 and p64.isBanned then
 		local var87 = "GetRequest"
-		local var88 = getInformedOfBan(function(...) --[[ line: 735 ]]
+		local var88 = getInformedOfBan(function(...) --[[ line: 731 ]]
 			-- upvalues: self (ref), var87 (ref)
 			return self[var87](self, ...)
 		end)
@@ -861,35 +859,35 @@ function t:_onUserAndPlaceCanUseVoiceResolved(p64, p65) --[[ line: 1001 ]]
 	end
 end
 
-function t:ChangeVoiceJoinProgress(p66) --[[ line: 1049 ]]
+function t:ChangeVoiceJoinProgress(p66) --[[ line: 1045 ]]
 	return self.coreVoiceManager:ChangeVoiceJoinProgress(p66)
 end
 
-function t:GetVoiceJoinProgress() --[[ line: 1053 ]]
+function t:GetVoiceJoinProgress() --[[ line: 1049 ]]
 	return self.coreVoiceManager.VoiceJoinProgress
 end
 
-function t:UserOnlyEligibleForVoice() --[[ line: 1057 ]]
+function t:UserOnlyEligibleForVoice() --[[ line: 1053 ]]
 	return self.coreVoiceManager:UserOnlyEligibleForVoice()
 end
 
-function t:UserOnlyEligibleForVoiceViaOverlay() --[[ line: 1061 ]]
+function t:UserOnlyEligibleForVoiceViaOverlay() --[[ line: 1057 ]]
 	return self.coreVoiceManager:UserOnlyEligibleForVoiceViaOverlay()
 end
 
-function t:UserVoiceEnabled() --[[ line: 1065 ]]
+function t:UserVoiceEnabled() --[[ line: 1061 ]]
 	return self.coreVoiceManager:UserVoiceEnabled()
 end
 
-function t:UserInInExperienceUpsellTreatment() --[[ line: 1069 ]]
+function t:UserInInExperienceUpsellTreatment() --[[ line: 1065 ]]
 	return self.coreVoiceManager:UserInInExperienceUpsellTreatment()
 end
 
-function t:UserEligibleForInExperienceUpsell() --[[ line: 1073 ]]
+function t:UserEligibleForInExperienceUpsell() --[[ line: 1069 ]]
 	return self.coreVoiceManager:UserEligibleForInExperienceUpsell()
 end
 
-function t:ShowInExperienceVoiceUpsell(p67) --[[ line: 1078 ]]
+function t:ShowInExperienceVoiceUpsell(p67) --[[ line: 1074 ]]
 	-- upvalues: guardVoiceInExpUpsellVariant (ref)
 	local var89 = self:FetchAgeVerificationOverlay()
 	
@@ -901,7 +899,7 @@ function t:ShowInExperienceVoiceUpsell(p67) --[[ line: 1078 ]]
 	self:showPrompt(self:GetInExpUpsellPromptFromEnum(showVoiceInExperienceUpsellVariant))
 end
 
-function t:ShowInExperiencePhoneVoiceUpsell(p68, p69) --[[ line: 1092 ]]
+function t:ShowInExperiencePhoneVoiceUpsell(p68, p69) --[[ line: 1088 ]]
 	-- upvalues: var65 (ref), getFFlagInExperiencePhoneUpsellNewCopy (ref), var66 (ref), constantsModule (ref), promptTypeModule (ref)
 	self:SetInExpUpsellEntrypoint(p68)
 	var65.openPhoneUpsell({
@@ -916,29 +914,29 @@ function t:ShowInExperiencePhoneVoiceUpsell(p68, p69) --[[ line: 1092 ]]
 				extraButtonKey = "Feature.VerificationUpsell.Action.NotNow"
 			}
 		},
-		onSuccessBeforeToast = function() --[[ line: 1109 ]]
+		onSuccessBeforeToast = function() --[[ line: 1105 ]]
 			-- upvalues: self (ref), var66 (copy), p69 (ref)
 			self.coreVoiceManager:DisablePhoneVerificationUpsell()
 			local var90 = "PostRequest"
-			var66(function(...) --[[ line: 735 ]]
+			var66(function(...) --[[ line: 731 ]]
 				-- upvalues: self (ref), var90 (ref)
 				return self[var90](self, ...)
 			end, p69, os.time(), false)
 		end,
-		onSuccess = function() --[[ line: 1113 ]]
+		onSuccess = function() --[[ line: 1109 ]]
 			-- upvalues: self (ref), constantsModule (copy)
 			if self.pendingConnectionSource == nil then
 				self.pendingConnectionSource = constantsModule.VOICE_CONNECTION_SOURCE.IN_EXPERIENCE
 			end
 			self:EnableVoice()
 		end,
-		closeUpsell = function() --[[ line: 1119 ]]
+		closeUpsell = function() --[[ line: 1115 ]]
 			-- upvalues: p68 (ref), constantsModule (copy), self (ref), promptTypeModule (copy), var66 (copy), p69 (ref)
 			if p68 ~= constantsModule.IN_EXP_UPSELL_ENTRYPOINTS.JOIN_VOICE then
 				self:showPrompt(promptTypeModule.VoiceConsentDeclinedToast)
 			end
 			local var91 = "PostRequest"
-			var66(function(...) --[[ line: 735 ]]
+			var66(function(...) --[[ line: 731 ]]
 				-- upvalues: self (ref), var91 (ref)
 				return self[var91](self, ...)
 			end, p69, os.time(), true)
@@ -946,50 +944,50 @@ function t:ShowInExperiencePhoneVoiceUpsell(p68, p69) --[[ line: 1092 ]]
 	})
 end
 
-function t:DisablePhoneVerificationUpsell() --[[ line: 1128 ]]
+function t:DisablePhoneVerificationUpsell() --[[ line: 1124 ]]
 	self.coreVoiceManager:DisablePhoneVerificationUpsell()
 end
 
-function t:SetInExpUpsellEntrypoint(p70) --[[ line: 1132 ]]
+function t:SetInExpUpsellEntrypoint(p70) --[[ line: 1128 ]]
 	self.inExpUpsellEntrypoint = p70
 end
 
-function t:userAndPlaceCanUseVoice() --[[ line: 1136 ]]
+function t:userAndPlaceCanUseVoice() --[[ line: 1132 ]]
 	return self.coreVoiceManager:userAndPlaceCanUseVoice()
 end
 
-function t:verifyUniverseAndPlaceCanUseVoice() --[[ line: 1140 ]]
+function t:verifyUniverseAndPlaceCanUseVoice() --[[ line: 1136 ]]
 	return self.coreVoiceManager:verifyUniverseAndPlaceCanUseVoice()
 end
 
-function t:GetVoiceConnectCookieValue() --[[ line: 1144 ]]
+function t:GetVoiceConnectCookieValue() --[[ line: 1140 ]]
 	return self.coreVoiceManager:GetVoiceConnectCookieValue()
 end
 
-function t:GetVoiceConnectCookie() --[[ line: 1148 ]]
+function t:GetVoiceConnectCookie() --[[ line: 1144 ]]
 	return self.coreVoiceManager:GetVoiceConnectCookie()
 end
 
-function t:SetVoiceConnectCookieValue(p71) --[[ line: 1152 ]]
+function t:SetVoiceConnectCookieValue(p71) --[[ line: 1148 ]]
 	return self.coreVoiceManager:SetVoiceConnectCookieValue(p71)
 end
 
-function t:GetVoiceRewarmCookie() --[[ line: 1156 ]]
+function t:GetVoiceRewarmCookie() --[[ line: 1152 ]]
 	return self.coreVoiceManager:GetVoiceRewarmCookie()
 end
 
-function t:SetVoiceRewarmCookie(p72) --[[ line: 1160 ]]
+function t:SetVoiceRewarmCookie(p72) --[[ line: 1156 ]]
 	self.coreVoiceManager:SetVoiceRewarmCookie(p72)
 end
 
-function t:SetNewUserFTUXCookieValue(p73) --[[ line: 1164 ]]
+function t:SetNewUserFTUXCookieValue(p73) --[[ line: 1160 ]]
 	return self.coreVoiceManager:SetNewUserFTUXCookieValue(p73)
 end
 
-function t:ShowPlayerModeratedMessage(p74) --[[ line: 1168 ]]
+function t:ShowPlayerModeratedMessage(p74) --[[ line: 1164 ]]
 	-- upvalues: getUserSettings (ref), analytics (ref), promptTypeModule (ref), BAN_REASON (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), voiceNudgeUseNewDACopyModule (ref)
 	local var92 = "GetRequest"
-	local var93 = getUserSettings(function(...) --[[ line: 735 ]]
+	local var93 = getUserSettings(function(...) --[[ line: 731 ]]
 		-- upvalues: self (ref), var92 (ref)
 		return self[var92](self, ...)
 	end)
@@ -1024,29 +1022,29 @@ function t:ShowPlayerModeratedMessage(p74) --[[ line: 1168 ]]
 	self:showPrompt(promptTypeModule.VoiceChatSuspendedTemporaryB)
 end
 
-function t:CheckCallState() --[[ line: 1197 ]]
+function t:CheckCallState() --[[ line: 1193 ]]
 	return self.coreVoiceManager:CheckCallState()
 end
 
-function t:ShowVoiceChatLoadingMessage() --[[ line: 1201 ]]
+function t:ShowVoiceChatLoadingMessage() --[[ line: 1197 ]]
 	-- upvalues: promptTypeModule (ref)
 	self:showPrompt(promptTypeModule.VoiceLoading)
 end
 
-function t:requestMicPermission() --[[ line: 1205 ]]
+function t:requestMicPermission() --[[ line: 1201 ]]
 	return self.coreVoiceManager:requestMicPermission()
 end
 
-function t:canUseServiceAsync() --[[ line: 1209 ]]
+function t:canUseServiceAsync() --[[ line: 1205 ]]
 	return self.coreVoiceManager:canUseServiceAsync()
 end
 
-function t:canUseService() --[[ line: 1214 ]]
+function t:canUseService() --[[ line: 1210 ]]
 	-- upvalues: httpRbxApiService (ref), httpService (ref), VOICE_CHAT_AVAILABILITY (ref)
 	if self.available ~= nil or not game:GetEngineFeature("VoiceChatSupported") then
 		return false
 	end
-	local ok, status = pcall(function() --[[ line: 1218 ]]
+	local ok, status = pcall(function() --[[ line: 1214 ]]
 		-- upvalues: httpRbxApiService (copy), httpService (copy)
 		return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl("https://voice.roblox.com/v1/settings", Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players))
 	end)
@@ -1058,27 +1056,27 @@ function t:canUseService() --[[ line: 1214 ]]
 	return isVoiceEnabled
 end
 
-function t:ensureInitialized(p75) --[[ line: 1234 ]]
+function t:ensureInitialized(p75) --[[ line: 1230 ]]
 	return self.coreVoiceManager:ensureInitialized(p75)
 end
 
-function t:GetSessionId() --[[ line: 1239 ]]
+function t:GetSessionId() --[[ line: 1235 ]]
 	return self.coreVoiceManager:GetSessionId()
 end
 
-function t:GetChannelId() --[[ line: 1243 ]]
+function t:GetChannelId() --[[ line: 1239 ]]
 	return self.coreVoiceManager:GetChannelId()
 end
 
-function t:JoinWithVoiceMuteData(p76) --[[ line: 1247 ]]
+function t:JoinWithVoiceMuteData(p76) --[[ line: 1243 ]]
 	return self.coreVoiceManager:JoinWithVoiceMuteData(p76)
 end
 
-function t.calculateBanDuration(_, p77, p78) --[[ line: 1251 ]]
+function t.calculateBanDuration(_, p77, p78) --[[ line: 1247 ]]
 	return math.ceil((p78 - p77) / 60)
 end
 
-function t:ShowVoiceUI() --[[ line: 1255 ]]
+function t:ShowVoiceUI() --[[ line: 1251 ]]
 	-- upvalues: expChatModule (ref)
 	self.voiceUIVisible = true
 	self.showVoiceUI:Fire()
@@ -1088,7 +1086,7 @@ function t:ShowVoiceUI() --[[ line: 1255 ]]
 	end
 end
 
-function t:HideVoiceUI() --[[ line: 1264 ]]
+function t:HideVoiceUI() --[[ line: 1260 ]]
 	-- upvalues: expChatModule (ref)
 	self.voiceUIVisible = false
 	self.hideVoiceUI:Fire()
@@ -1098,7 +1096,7 @@ function t:HideVoiceUI() --[[ line: 1264 ]]
 	end
 end
 
-function t:createPromptInstance(p79, p80) --[[ line: 1273 ]]
+function t:createPromptInstance(p79, p80) --[[ line: 1269 ]]
 	-- upvalues: getFFlagEnableVoicePromptReasonTextModule (ref), promptTypeModule (ref), getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (ref), localizationService (ref), getFFlagShowDevicePermissionsModal (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default_2 (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), roactModule (ref), voiceChatPromptModule (ref), analytics (ref), postInformedOfBan (ref), constantsModule (ref), disablePermissionPromptDeeplink (ref), getFFlagJoinWithoutMicPermissions (ref), name (ref), coreGuiService (ref)
 	if self.promptSignal then
 		self.promptSignal:Destroy()
@@ -1120,7 +1118,7 @@ function t:createPromptInstance(p79, p80) --[[ line: 1273 ]]
 	if getFFlagShowDevicePermissionsModal() and p80 == promptTypeModule.DevicePermissionsModal and self.settingsAppAvailable == nil then
 		if fFlagEnableRetryForLinkingProtocolFetch then
 			for _ = 0, fIntLinkingProtocolFetchRetries do
-				local thread = task.spawn(function() --[[ line: 1322 ]]
+				local thread = task.spawn(function() --[[ line: 1318 ]]
 					-- upvalues: var100 (write), var101 (write), default_2 (copy), settingsRoute (copy)
 					local var105, var106 = default_2:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
 					var100 = var105
@@ -1149,34 +1147,34 @@ function t:createPromptInstance(p79, p80) --[[ line: 1273 ]]
 		onReadyForSignal = p79,
 		VoiceChatServiceManager = self,
 		settingsAppAvailable = if self.settingsAppAvailable == nil then false else self.settingsAppAvailable,
-		onContinueFunc = if p80 == promptTypeModule.VoiceChatSuspendedTemporary or var96 then function() --[[ line: 1355 ]]
+		onContinueFunc = if p80 == promptTypeModule.VoiceChatSuspendedTemporary or var96 then function() --[[ line: 1351 ]]
 			-- upvalues: postInformedOfBan (copy), self (ref)
 			local var107 = "PostRequest"
-			postInformedOfBan(function(...) --[[ line: 735 ]]
+			postInformedOfBan(function(...) --[[ line: 731 ]]
 				-- upvalues: self (ref), var107 (ref)
 				return self[var107](self, ...)
 			end, true)
-		end elseif var98 then function() --[[ line: 1358 ]]
+		end elseif var98 then function() --[[ line: 1354 ]]
 			-- upvalues: self (ref)
 			self.Analytics:reportClosedNudge(self:GetNudgeAnalyticsData())
-		end elseif var99 then function() --[[ line: 1361 ]]
+		end elseif var99 then function() --[[ line: 1357 ]]
 			-- upvalues: self (ref), constantsModule (copy)
 			self:RecordUserSeenModal(constantsModule.MODAL_IDS.IN_EXP_UPSELL)
 		end else nil,
-		onPrimaryActivated = if var98 then function() --[[ line: 1366 ]]
+		onPrimaryActivated = if var98 then function() --[[ line: 1362 ]]
 			-- upvalues: self (ref)
 			self.Analytics:reportAcknowledgedNudge(self:GetNudgeAnalyticsData())
-		end elseif not disablePermissionPromptDeeplink and getFFlagJoinWithoutMicPermissions() and p80 == promptTypeModule.Permission then if getFFlagJoinWithoutMicPermissions() and getFFlagShowDevicePermissionsModal() and p80 == promptTypeModule.DevicePermissionsModal then function() --[[ line: 1393 ]]
+		end elseif not disablePermissionPromptDeeplink and getFFlagJoinWithoutMicPermissions() and p80 == promptTypeModule.Permission then if getFFlagJoinWithoutMicPermissions() and getFFlagShowDevicePermissionsModal() and p80 == promptTypeModule.DevicePermissionsModal then function() --[[ line: 1389 ]]
 			-- upvalues: name (copy), self (ref), default_2 (copy), settingsRoute (copy)
 			name:debug("Settings app available: {}", self.settingsAppAvailable)
 			self.Analytics:reportDevicePermissionsModalEvent(if self.settingsAppAvailable then "OpenedSettings" else "Acknowledged", self:GetSessionId(), self:GetInExpUpsellAnalyticsData())
 			
 			if self.settingsAppAvailable then
 				name:debug("Switching to settings app")
-				default_2:switchToSettingsApp(settingsRoute.Microphone):andThen(function() --[[ line: 1404 ]]
+				default_2:switchToSettingsApp(settingsRoute.Microphone):andThen(function() --[[ line: 1400 ]]
 					-- upvalues: name (copy)
 					name:debug("Successfully switched to settings app")
-				end):catch(function() --[[ line: 1407 ]]
+				end):catch(function() --[[ line: 1403 ]]
 					-- upvalues: name (copy)
 					name:error("Error switching to settings app")
 				end)
@@ -1184,11 +1182,11 @@ function t:createPromptInstance(p79, p80) --[[ line: 1273 ]]
 				return
 			end
 			name:debug("Current platform does not support switching to settings app")
-		end elseif var96 then function() --[[ line: 1414 ]]
+		end elseif var96 then function() --[[ line: 1410 ]]
 			-- upvalues: self (ref)
 			self:reportBanMessage("Understood")
 			self.Analytics:reportBanMessageEvent("Understood")
-		end elseif var99 then function() --[[ line: 1418 ]]
+		end elseif var99 then function() --[[ line: 1414 ]]
 			-- upvalues: self (ref), constantsModule (copy)
 			self.Analytics:reportInExpConsent("accepted", self.inExpUpsellEntrypoint, self:GetInExpUpsellAnalyticsData())
 			
@@ -1196,17 +1194,17 @@ function t:createPromptInstance(p79, p80) --[[ line: 1273 ]]
 				self.pendingConnectionSource = constantsModule.VOICE_CONNECTION_SOURCE.IN_EXPERIENCE
 			end
 			self:EnableVoice()
-		end else nil else function() --[[ line: 1373 ]]
+		end else nil else function() --[[ line: 1369 ]]
 			-- upvalues: default_2 (copy), name (copy)
 			local var108 = default_2:supportsSwitchToSettingsApp():await()
 			name:debug("Settings app available: {}", var108)
 			
 			if var108 then
 				name:debug("Switching to settings app")
-				default_2:switchToSettingsApp():andThen(function() --[[ line: 1379 ]]
+				default_2:switchToSettingsApp():andThen(function() --[[ line: 1375 ]]
 					-- upvalues: name (copy)
 					name:debug("Successfully switched to settings app")
-				end):catch(function() --[[ line: 1382 ]]
+				end):catch(function() --[[ line: 1378 ]]
 					-- upvalues: name (copy)
 					name:error("Error switching to settings app")
 				end)
@@ -1215,80 +1213,73 @@ function t:createPromptInstance(p79, p80) --[[ line: 1273 ]]
 			end
 			name:debug("Current platform does not support switching to settings app")
 		end,
-		onSecondaryActivated = if p80 == promptTypeModule.VoiceToxicityModal or getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p80 == promptTypeModule.VoiceToxicityModalV2 then function() --[[ line: 1431 ]]
+		onSecondaryActivated = if p80 == promptTypeModule.VoiceToxicityModal or getFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module() and p80 == promptTypeModule.VoiceToxicityModalV2 then function() --[[ line: 1427 ]]
 			-- upvalues: self (ref)
 			self:ShowVoiceToxicityFeedbackToast()
 			self.Analytics:reportDeniedNudge(self:GetNudgeAnalyticsData())
-		end elseif var98 then function() --[[ line: 1435 ]]
+		end elseif var98 then function() --[[ line: 1431 ]]
 			-- upvalues: self (ref)
 			self.Analytics:reportDeniedNudge(self:GetNudgeAnalyticsData())
-		end elseif var96 then function() --[[ line: 1438 ]]
+		end elseif var96 then function() --[[ line: 1434 ]]
 			-- upvalues: self (ref)
 			self:ShowVoiceToxicityFeedbackToast()
 			self:reportBanMessage("Denied")
 			self.Analytics:reportBanMessageEvent("Denied")
-		end elseif var99 then function() --[[ line: 1443 ]]
+		end elseif var99 then function() --[[ line: 1439 ]]
 			-- upvalues: self (ref), constantsModule (copy), promptTypeModule (copy)
 			self.Analytics:reportInExpConsent("denied", self.inExpUpsellEntrypoint, self:GetInExpUpsellAnalyticsData())
 			
 			if self.inExpUpsellEntrypoint ~= constantsModule.IN_EXP_UPSELL_ENTRYPOINTS.JOIN_VOICE then
 				self:showPrompt(promptTypeModule.VoiceConsentDeclinedToast)
 			end
-		end elseif p80 == promptTypeModule.DevicePermissionsModal then function() --[[ line: 1453 ]]
+		end elseif p80 == promptTypeModule.DevicePermissionsModal then function() --[[ line: 1449 ]]
 			-- upvalues: self (ref)
 			self.Analytics:reportDevicePermissionsModalEvent("Denied", self:GetSessionId(), self:GetInExpUpsellAnalyticsData())
 		end else nil
 	}), coreGuiService, "RobloxVoiceChatPromptGui")
 end
 
-function t:showPrompt(p81, p82) --[[ line: 1467 ]]
+function t:showPrompt(p81, p82) --[[ line: 1463 ]]
 	-- upvalues: getFFlagEnableVoicePromptReasonTextModule (ref), name (ref)
 	if getFFlagEnableVoicePromptReasonTextModule() then
 		self.errorText = p82 or nil
 	end
-	self:createPromptInstance(function() --[[ line: 1471 ]]
+	self:createPromptInstance(function() --[[ line: 1467 ]]
 		-- upvalues: name (copy), p81 (ref), self (ref)
 		name:debug("Show Prompt: {}", p81)
 		self.promptSignal:fire(p81)
 	end, p81)
 end
 
-function t:showJoinVoicePrompt() --[[ line: 1477 ]]
+function t:showJoinVoicePrompt() --[[ line: 1473 ]]
 	-- upvalues: promptTypeModule (ref), appStorageService (ref), constantsModule (ref)
 	self:showPrompt(promptTypeModule.UnifiedJoinVoiceToast)
-	pcall(function() --[[ line: 1479 ]]
+	pcall(function() --[[ line: 1475 ]]
 		-- upvalues: appStorageService (copy), constantsModule (copy)
 		appStorageService:SetItem(constantsModule.VOICE_WITH_TC_TOAST_KEY, "true")
 		appStorageService:Flush()
 	end)
 end
 
-function t:CheckAndShowPermissionPrompt() --[[ line: 1485 ]]
-	-- upvalues: getFFlagEnableSeamlessVoiceV2 (ref), getFFlagJoinWithoutMicPermissions (ref), PERMISSION_STATE (ref), promptTypeModule (ref), permissionsProtocol (ref), promiseModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref)
-	local function showPrompt() --[[ line: 1486 ]]
-		-- upvalues: self (ref), getFFlagEnableSeamlessVoiceV2 (copy), getFFlagJoinWithoutMicPermissions (copy), PERMISSION_STATE (copy), promptTypeModule (copy), permissionsProtocol (copy), promiseModule (copy)
-		if self.voiceEnabled or self.userEligible then
-			if getFFlagEnableSeamlessVoiceV2() or not getFFlagJoinWithoutMicPermissions() then
-				return self.PermissionsService:hasPermissions({ permissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(p83) --[[ line: 1499 ]]
-					-- upvalues: permissionsProtocol (copy), self (copy), promptTypeModule (copy)
-					if p83 and p83.status == permissionsProtocol.Status.DENIED then
-						self:showPrompt(promptTypeModule.Permission)
-					end
-				end)
-			elseif self.permissionState == PERMISSION_STATE.LISTEN_ONLY then
+function t:CheckAndShowPermissionPrompt() --[[ line: 1481 ]]
+	-- upvalues: permissionsProtocol (ref), promptTypeModule (ref), promiseModule (ref), getFFlagEnableUniveralVoiceToastsModule (ref)
+	local function showPrompt() --[[ line: 1482 ]]
+		-- upvalues: self (ref), permissionsProtocol (copy), promptTypeModule (copy), promiseModule (copy)
+		return if self.voiceEnabled or self.userEligible then self.PermissionsService:hasPermissions({ permissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(p83) --[[ line: 1489 ]]
+			-- upvalues: permissionsProtocol (copy), self (copy), promptTypeModule (copy)
+			if p83 and p83.status == permissionsProtocol.Status.DENIED then
 				self:showPrompt(promptTypeModule.Permission)
 			end
-		end
-		return promiseModule.resolve()
+		end) else promiseModule.resolve()
 	end
 	
-	return if getFFlagEnableUniveralVoiceToastsModule() then showPrompt() else self:asyncInit():andThen(function() --[[ line: 1512 ]] end):catch(function() --[[ line: 1512 ]]
+	return if getFFlagEnableUniveralVoiceToastsModule() then showPrompt() else self:asyncInit():andThen(function() --[[ line: 1501 ]] end):catch(function() --[[ line: 1501 ]]
 		-- upvalues: showPrompt (ref)
 		return showPrompt()
 	end)
 end
 
-function t:showDataConsentToast() --[[ line: 1518 ]]
+function t:showDataConsentToast() --[[ line: 1507 ]]
 	-- upvalues: getFFlagSeamlessVoiceConsentToastPolicy (ref), universalAppPolicyModule (ref), seamlessVoiceStatusModule (ref), constantsModule (ref), promptTypeModule (ref)
 	local var112, showDataConsentToast
 	local var110 = self:FetchAgeVerificationOverlay()
@@ -1313,27 +1304,27 @@ function t:showDataConsentToast() --[[ line: 1518 ]]
 	end
 end
 
-function t:CheckAndShowNotAudiblePrompt() --[[ line: 1552 ]]
+function t:CheckAndShowNotAudiblePrompt() --[[ line: 1541 ]]
 	-- upvalues: promptTypeModule (ref), promiseModule (ref)
-	return if game:GetEngineFeature("VoiceChatSupported") then self:asyncInit():andThen(function() --[[ line: 1555 ]]
+	return if game:GetEngineFeature("VoiceChatSupported") then self:asyncInit():andThen(function() --[[ line: 1544 ]]
 		-- upvalues: self (ref), promptTypeModule (copy)
 		if UserSettings().GameSettings.MasterVolume == 0 then
 			self:showPrompt(promptTypeModule.NotAudible)
 		end
-	end):catch(function() --[[ line: 1561 ]] end) else promiseModule.resolve()
+	end):catch(function() --[[ line: 1550 ]] end) else promiseModule.resolve()
 end
 
-function t:ShowNotAudiblePromptVoiceChatVolume() --[[ line: 1567 ]]
+function t:ShowNotAudiblePromptVoiceChatVolume() --[[ line: 1556 ]]
 	-- upvalues: fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), promiseModule (ref), voiceVolumeControlsEligibility (ref), voiceChatService (ref), promptTypeModule (ref)
-	return if not (not fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule or not fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule) then if game:GetEngineFeature("VoiceChatSupported") then self:asyncInit():andThen(function() --[[ line: 1577 ]]
+	return if not (not fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule or not fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule) then if game:GetEngineFeature("VoiceChatSupported") then self:asyncInit():andThen(function() --[[ line: 1566 ]]
 		-- upvalues: voiceVolumeControlsEligibility (copy), voiceChatService (copy), self (ref), promptTypeModule (copy)
 		if UserSettings().GameSettings.MasterVolume > 0 and voiceVolumeControlsEligibility.isVoiceChatVolumeSliderVisible(true, voiceChatService.UseNewAudioApi) and UserSettings().GameSettings.VoiceChatVolume == 0 then
 			self:showPrompt(promptTypeModule.NotAudibleVoiceChatVolume)
 		end
-	end):catch(function() --[[ line: 1585 ]] end) else promiseModule.resolve() else promiseModule.resolve()
+	end):catch(function() --[[ line: 1574 ]] end) else promiseModule.resolve() else promiseModule.resolve()
 end
 
-function t:InitialJoinFailedPrompt() --[[ line: 1590 ]]
+function t:InitialJoinFailedPrompt() --[[ line: 1579 ]]
 	-- upvalues: name (ref), getFFlagVoiceChatClientRewriteMasterLua (ref), promptTypeModule (ref)
 	name:debug("JoinByGroupIdToken returns false")
 	
@@ -1342,28 +1333,28 @@ function t:InitialJoinFailedPrompt() --[[ line: 1590 ]]
 	end
 end
 
-function t:ShowVoiceToxicityFeedbackToast() --[[ line: 1597 ]]
+function t:ShowVoiceToxicityFeedbackToast() --[[ line: 1586 ]]
 	-- upvalues: name (ref), promptTypeModule (ref)
 	name:debug("Sending feedback toast")
 	self:showPrompt(promptTypeModule.VoiceToxicityFeedbackToast)
 end
 
-function t:GetNudgeAnalyticsData() --[[ line: 1602 ]]
+function t:GetNudgeAnalyticsData() --[[ line: 1591 ]]
 	-- upvalues: playersService (ref)
 	return playersService.LocalPlayer.UserId, self:GetSessionId()
 end
 
-function t.GetInExpUpsellAnalyticsData(_) --[[ line: 1606 ]]
+function t.GetInExpUpsellAnalyticsData(_) --[[ line: 1595 ]]
 	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref)
 	return game.GameId, game.PlaceId, if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
 end
 
-function t:reportBanMessage(p84) --[[ line: 1614 ]]
+function t:reportBanMessage(p84) --[[ line: 1603 ]]
 	-- upvalues: playersService (ref)
 	self.Analytics:reportBanMessageEventV2(p84, self.banReason, playersService.LocalPlayer.UserId, if self.service then self.previousSessionId else "")
 end
 
-function t:reportJoinVoiceUpsellEvent(p85, p86, p87) --[[ line: 1623 ]]
+function t:reportJoinVoiceUpsellEvent(p85, p86, p87) --[[ line: 1612 ]]
 	-- upvalues: rbxAnalyticsService (ref), fFlagVoiceRewarmTelemetry (ref)
 	local playSessionId = rbxAnalyticsService:GetPlaySessionId()
 	
@@ -1375,19 +1366,19 @@ function t:reportJoinVoiceUpsellEvent(p85, p86, p87) --[[ line: 1623 ]]
 	self.Analytics:reportJoinVoiceUpsellEvent(p85, playSessionId, self:UserVoiceEnabled())
 end
 
-function t:SetAndSyncActive(p88, p89) --[[ line: 1642 ]]
+function t:SetAndSyncActive(p88, p89) --[[ line: 1631 ]]
 	self.coreVoiceManager:SetAndSyncActive(p88, p89)
 end
 
-function t:CreateAudioDeviceData(p90) --[[ line: 1646 ]]
+function t:CreateAudioDeviceData(p90) --[[ line: 1635 ]]
 	return self.coreVoiceManager:CreateAudioDeviceData(p90)
 end
 
-function t:onInstanceAdded(p91) --[[ line: 1650 ]]
+function t:onInstanceAdded(p91) --[[ line: 1639 ]]
 	return self.coreVoiceManager:onInstanceAdded(p91)
 end
 
-function t:UpdateAudioDeviceInputDebugger() --[[ line: 1654 ]]
+function t:UpdateAudioDeviceInputDebugger() --[[ line: 1643 ]]
 	-- upvalues: fFlagDebugShowAudioDeviceInputDebugger (ref), name (ref), roactModule (ref), audioDeviceInputDebuggerModule (ref), coreGuiService (ref)
 	if fFlagDebugShowAudioDeviceInputDebugger then
 		if self.voiceDebuggerInstance then
@@ -1407,7 +1398,7 @@ function t:UpdateAudioDeviceInputDebugger() --[[ line: 1654 ]]
 	end
 end
 
-function t:AddReverseNudgeToxicUser(p92, p93, p94) --[[ line: 1678 ]]
+function t:AddReverseNudgeToxicUser(p92, p93, p94) --[[ line: 1667 ]]
 	-- upvalues: getFIntVoiceReverseNudgeUXDisplayTimeSecondsModule (ref)
 	p93(p92, "iconColorChange")
 	local var114 = self.reverseNudgeToxicUserRemovalCallbacks[p92]
@@ -1415,38 +1406,38 @@ function t:AddReverseNudgeToxicUser(p92, p93, p94) --[[ line: 1678 ]]
 	if var114 ~= nil then
 		task.cancel(var114)
 	end
-	self.reverseNudgeToxicUserRemovalCallbacks[p92] = task.delay(getFIntVoiceReverseNudgeUXDisplayTimeSecondsModule(), function() --[[ line: 1692 ]]
+	self.reverseNudgeToxicUserRemovalCallbacks[p92] = task.delay(getFIntVoiceReverseNudgeUXDisplayTimeSecondsModule(), function() --[[ line: 1681 ]]
 		-- upvalues: p94 (ref), p92 (ref), self (ref)
 		p94(p92)
 		self.reverseNudgeToxicUserRemovalCallbacks[p92] = nil
 	end)
 end
 
-function t:onInstanceRemove(p95) --[[ line: 1699 ]]
+function t:onInstanceRemove(p95) --[[ line: 1688 ]]
 	return self.coreVoiceManager:onInstanceRemove(p95)
 end
 
-function t:hookupAudioDeviceInputListener() --[[ line: 1703 ]]
+function t:hookupAudioDeviceInputListener() --[[ line: 1692 ]]
 	return self.coreVoiceManager:hookupAudioDeviceInputListener()
 end
 
-function t:ToggleMutePlayer(p96, p97) --[[ line: 1707 ]]
+function t:ToggleMutePlayer(p96, p97) --[[ line: 1696 ]]
 	return self.coreVoiceManager:ToggleMutePlayer(p96, p97)
 end
 
-function t:MuteAll(p98, p99) --[[ line: 1711 ]]
+function t:MuteAll(p98, p99) --[[ line: 1700 ]]
 	return self.coreVoiceManager:MuteAll(p98, p99)
 end
 
-function t:ToggleMuteSome(p100, p101, p102, p103) --[[ line: 1715 ]]
+function t:ToggleMuteSome(p100, p101, p102, p103) --[[ line: 1704 ]]
 	return self.coreVoiceManager:ToggleMuteSome(p100, p101, p102, p103)
 end
 
-function t:FireMuteNonFriendsEvent() --[[ line: 1724 ]]
+function t:FireMuteNonFriendsEvent() --[[ line: 1713 ]]
 	self.mutedNonFriends:Fire()
 end
 
-function t:EnsureCorrectMuteState(p104, p105) --[[ line: 1728 ]]
+function t:EnsureCorrectMuteState(p104, p105) --[[ line: 1717 ]]
 	-- upvalues: voiceChatService (ref), enableMutedByLocalUserEngineFeature (ref), playersService (ref)
 	local t = {}
 	
@@ -1477,11 +1468,11 @@ function t:EnsureCorrectMuteState(p104, p105) --[[ line: 1728 ]]
 	end
 end
 
-function t:FireUserAgencySelectedEvent(p106) --[[ line: 1760 ]]
+function t:FireUserAgencySelectedEvent(p106) --[[ line: 1749 ]]
 	self.userAgencySelected:Fire(p106)
 end
 
-function t.ParticipantStateToIcon(_, p107, p108) --[[ line: 1764 ]]
+function t.ParticipantStateToIcon(_, p107, p108) --[[ line: 1753 ]]
 	-- upvalues: VOICE_STATE (ref)
 	local INACTIVE = VOICE_STATE.INACTIVE
 	
@@ -1497,16 +1488,16 @@ function t.ParticipantStateToIcon(_, p107, p108) --[[ line: 1764 ]]
 	return getIcon(INACTIVE, p108)
 end
 
-function t.VoiceStateToIcon(_, p109, p110, p111) --[[ line: 1779 ]]
+function t.VoiceStateToIcon(_, p109, p110, p111) --[[ line: 1768 ]]
 	return getIcon(p109, p110, p111)
 end
 
-function t.GetIcon(_, p112, p113) --[[ line: 1783 ]]
+function t.GetIcon(_, p112, p113) --[[ line: 1772 ]]
 	return getIconSrc(p112, p113)
 end
 
-function t:JoinVoice(p114) --[[ line: 1787 ]]
-	-- upvalues: fFlagVoiceRewarmTelemetry (ref), showJoinVoiceWhenDisconnectedV3 (ref), name (ref), guardVoiceInExpUpsellVariant (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), promptTypeModule (ref), getFFlagNonVoiceFTUX (ref), appStorageService (ref), getFFlagEnableVrVoiceParity (ref), promiseModule (ref), seamlessVoiceV2JoinVoiceToast (ref), getFFlagEnableSeamlessVoiceV2 (ref), enableVerifiedCheckViaOverlay (ref), getFFlagDisableConsentModalForExistingUsersModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), getOverlayStore (ref), overlayTypes (ref), socialUpsellType (ref), enum (ref), sendUserConnectionStatus (ref)
+function t:JoinVoice(p114) --[[ line: 1776 ]]
+	-- upvalues: fFlagVoiceRewarmTelemetry (ref), showJoinVoiceWhenDisconnectedV3 (ref), name (ref), guardVoiceInExpUpsellVariant (ref), constantsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagEnableVoiceTrustedConnectionsToastsModule (ref), getFFlagUpdateVoiceConnectionToastsModule (ref), promptTypeModule (ref), getFFlagNonVoiceFTUX (ref), appStorageService (ref), getFFlagEnableVrVoiceParity (ref), promiseModule (ref), seamlessVoiceV2JoinVoiceToast (ref), enableVerifiedCheckViaOverlay (ref), getFFlagDisableConsentModalForExistingUsersModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), getOverlayStore (ref), overlayTypes (ref), socialUpsellType (ref), enum (ref), sendUserConnectionStatus (ref)
 	local joinVoiceButtonContext = nil
 	local var117 = nil
 	
@@ -1562,7 +1553,7 @@ function t:JoinVoice(p114) --[[ line: 1787 ]]
 		end
 		self.attemptVoiceRejoin:Fire()
 		
-		if getFFlagEnableSeamlessVoiceV2() and self:IsNewSeamlessVoiceUserDisconnect() then
+		if self:IsNewSeamlessVoiceUserDisconnect() then
 			self:SetVoiceConnectCookieValue(true)
 			self:SetNewUserFTUXCookieValue(true)
 		end
@@ -1620,14 +1611,14 @@ function t:JoinVoice(p114) --[[ line: 1787 ]]
 		self:reportJoinVoiceUpsellEvent("Click", joinVoiceButtonContext, var117)
 	end
 	if sendUserConnectionStatus and self:IsSeamlessVoice() then
-		task.spawn(function() --[[ line: 1929 ]]
+		task.spawn(function() --[[ line: 1918 ]]
 			-- upvalues: self (ref)
 			self.coreVoiceManager:PostUserVoiceConnectionStatus(true)
 		end)
 	end
 end
 
-function t:EligibleForFaeUpsell() --[[ line: 1935 ]]
+function t:EligibleForFaeUpsell() --[[ line: 1924 ]]
 	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref)
 	local var124 = getFFlagEnableVoiceUxUpdates()
 	
@@ -1648,11 +1639,11 @@ function t:EligibleForFaeUpsell() --[[ line: 1935 ]]
 	return var124
 end
 
-function t:EligibleForAgeCheckToast() --[[ line: 1942 ]]
+function t:EligibleForAgeCheckToast() --[[ line: 1931 ]]
 	return self.coreVoiceManager:EligibleForAgeCheckToast()
 end
 
-function t:ShouldShowJoinVoice() --[[ line: 1947 ]]
+function t:ShouldShowJoinVoice() --[[ line: 1936 ]]
 	-- upvalues: getFFlagEnableVoiceUxUpdates (ref), fFlagVoiceRewarmTelemetry (ref), voiceChatCoreModule (ref), showJoinVoiceWhenDisconnectedV3 (ref), getFFlagOnlyEnableJoinVoiceInVoiceEnabledUniversesModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagIntegratePhoneUpsellJoinVoice (ref), getFFlagEnableInExpPhoneVoiceUpsellEntrypoints (ref), constantsModule (ref)
 	if getFFlagEnableVoiceUxUpdates() then
 		if fFlagVoiceRewarmTelemetry then
@@ -1686,11 +1677,11 @@ function t:ShouldShowJoinVoice() --[[ line: 1947 ]]
 	end
 end
 
-function t:ShouldShowJoinVoiceOnDisconnect() --[[ line: 2026 ]]
+function t:ShouldShowJoinVoiceOnDisconnect() --[[ line: 2015 ]]
 	return self.coreVoiceManager:ShouldShowJoinVoiceOnDisconnect()
 end
 
-function t:IsSeamlessVoice() --[[ line: 2030 ]]
+function t:IsSeamlessVoice() --[[ line: 2019 ]]
 	-- upvalues: getFFlagCheckUniversePlaceBeforeSuspending (ref), name (ref), seamlessVoiceStatusModule (ref)
 	if getFFlagCheckUniversePlaceBeforeSuspending() then
 		return self.coreVoiceManager:IsSeamlessVoice()
@@ -1707,15 +1698,15 @@ function t:IsSeamlessVoice() --[[ line: 2030 ]]
 	return if seamlessVoiceStatus ~= seamlessVoiceStatusModule.EnabledExistingUser then seamlessVoiceStatus == seamlessVoiceStatusModule.EnabledNewUser else true
 end
 
-function t:HasSeamlessVoiceFeature(p115) --[[ line: 2046 ]]
+function t:HasSeamlessVoiceFeature(p115) --[[ line: 2035 ]]
 	return self.coreVoiceManager:HasSeamlessVoiceFeature(p115)
 end
 
-function t:IsNewSeamlessVoiceUserDisconnect() --[[ line: 2050 ]]
+function t:IsNewSeamlessVoiceUserDisconnect() --[[ line: 2039 ]]
 	return self.coreVoiceManager:IsNewSeamlessVoiceUserDisconnect()
 end
 
-function t:GetConnectDisconnectButtonAnalyticsData(p116) --[[ line: 2054 ]]
+function t:GetConnectDisconnectButtonAnalyticsData(p116) --[[ line: 2043 ]]
 	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref)
 	local list = {
 		game.GameId,
@@ -1729,7 +1720,7 @@ function t:GetConnectDisconnectButtonAnalyticsData(p116) --[[ line: 2054 ]]
 	return unpack(list)
 end
 
-function t:GetConnectDisconnectAnalyticsData() --[[ line: 2066 ]]
+function t:GetConnectDisconnectAnalyticsData() --[[ line: 2055 ]]
 	-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), getFFlagNonVoiceFTUX (ref), default (ref)
 	local t = {
 		universeId = game.GameId,
@@ -1747,7 +1738,7 @@ function t:GetConnectDisconnectAnalyticsData() --[[ line: 2066 ]]
 	return t
 end
 
-function t:Leave() --[[ line: 2086 ]]
+function t:Leave() --[[ line: 2075 ]]
 	-- upvalues: getFFlagDisconnectToastClientRewrite (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), getFFlagVoiceChatClientRewriteMasterLua (ref), sendUserConnectionStatus (ref)
 	self:ensureInitialized("leave")
 	
@@ -1775,14 +1766,14 @@ function t:Leave() --[[ line: 2086 ]]
 		self:SetVoiceConnectCookieValue(false)
 	end
 	if sendUserConnectionStatus and self:IsSeamlessVoice() then
-		task.spawn(function() --[[ line: 2109 ]]
+		task.spawn(function() --[[ line: 2098 ]]
 			-- upvalues: self (ref)
 			self.coreVoiceManager:PostUserVoiceConnectionStatus(false)
 		end)
 	end
 end
 
-function t.GetVoiceStateFromEnum(_, p117) --[[ line: 2115 ]]
+function t.GetVoiceStateFromEnum(_, p117) --[[ line: 2104 ]]
 	-- upvalues: t_1 (write), VOICE_STATE (ref)
 	if not t_1[p117] then
 		t_1 = {
@@ -1798,57 +1789,57 @@ function t.GetVoiceStateFromEnum(_, p117) --[[ line: 2115 ]]
 	return t_1[p117]
 end
 
-function t.GetInExpUpsellPromptFromEnum(_, p118) --[[ line: 2135 ]]
+function t.GetInExpUpsellPromptFromEnum(_, p118) --[[ line: 2124 ]]
 	-- upvalues: t_2 (ref)
 	return t_2[p118]
 end
 
-function t:getRecentUsersInteractionData() --[[ line: 2140 ]]
+function t:getRecentUsersInteractionData() --[[ line: 2129 ]]
 	return self.coreVoiceManager:getRecentUsersInteractionData()
 end
 
-function t:_setRecentUserState(p119, p120) --[[ line: 2144 ]]
+function t:_setRecentUserState(p119, p120) --[[ line: 2133 ]]
 	return self.coreVoiceManager:_setRecentUserState(p119, p120)
 end
 
-function t:_updateRecentUsersInteractionData() --[[ line: 2148 ]]
+function t:_updateRecentUsersInteractionData() --[[ line: 2137 ]]
 	return self.coreVoiceManager:_updateRecentUsersInteractionData()
 end
 
-function t:SetupParticipantListeners() --[[ line: 2152 ]]
+function t:SetupParticipantListeners() --[[ line: 2141 ]]
 	return self.coreVoiceManager:SetupParticipantListeners()
 end
 
-function t:Disconnect() --[[ line: 2156 ]]
+function t:Disconnect() --[[ line: 2145 ]]
 	self.coreVoiceManager:Disconnect()
 	self.coreVoiceManager:unsubscribeAll()
 end
 
-function t:GetSendMuteEvent() --[[ line: 2161 ]]
+function t:GetSendMuteEvent() --[[ line: 2150 ]]
 	return self.coreVoiceManager:GetSendMuteEvent()
 end
 
-function t:ToggleMic(p121) --[[ line: 2166 ]]
+function t:ToggleMic(p121) --[[ line: 2155 ]]
 	return self.coreVoiceManager:ToggleMic(p121)
 end
 
-function t:SubscribeRetry(p122) --[[ line: 2170 ]]
+function t:SubscribeRetry(p122) --[[ line: 2159 ]]
 	-- upvalues: name (ref)
 	self:ensureInitialized("subscribe retry")
 	name:debug("Attempting to retry connection to user: {}", "..." .. string.sub(tostring(p122), -4))
 	self.service:SubscribeRetry(p122)
 end
 
-function t:JoinByGroupIdToken(p123, p124) --[[ line: 2176 ]]
+function t:JoinByGroupIdToken(p123, p124) --[[ line: 2165 ]]
 	return self.coreVoiceManager:JoinByGroupIdToken(p123, p124)
 end
 
-function t:RejoinPreviousChannel() --[[ line: 2180 ]]
+function t:RejoinPreviousChannel() --[[ line: 2169 ]]
 	-- upvalues: name (ref), getFFlagVoiceChatClientRewriteMasterLua (ref)
 	local previousGroupId = self.previousGroupId
 	local previousMutedState = self.previousMutedState
 	name:debug("Rejoining previous channel {} with mute status {}", previousGroupId, previousMutedState)
-	pcall(function() --[[ line: 2185 ]]
+	pcall(function() --[[ line: 2174 ]]
 		-- upvalues: getFFlagVoiceChatClientRewriteMasterLua (copy), self (ref), previousGroupId (ref), previousMutedState (ref)
 		if getFFlagVoiceChatClientRewriteMasterLua() then
 			self.coreVoiceManager:RejoinVoice()
@@ -1876,7 +1867,7 @@ function t:RejoinPreviousChannel() --[[ line: 2180 ]]
 	end)
 end
 
-function t.SwitchDevice(_, p125, p126, p127) --[[ line: 2211 ]]
+function t.SwitchDevice(_, p125, p126, p127) --[[ line: 2200 ]]
 	-- upvalues: VOICE_CHAT_DEVICE_TYPE (ref), soundService (ref), name (ref)
 	if p125 == VOICE_CHAT_DEVICE_TYPE.Input then
 		soundService:SetInputDevice(p126, p127)
@@ -1888,9 +1879,9 @@ function t.SwitchDevice(_, p125, p126, p127) --[[ line: 2211 ]]
 	name:info("[OutputDeviceSelection] Setting SS Speaker Device To {} {}", p126, p127)
 end
 
-function t.GetDevices(_, p128) --[[ line: 2221 ]]
+function t.GetDevices(_, p128) --[[ line: 2210 ]]
 	-- upvalues: VOICE_CHAT_DEVICE_TYPE (ref), soundService (ref)
-	local ok, status, var134, var135 = pcall(function() --[[ line: 2222 ]]
+	local ok, status, var134, var135 = pcall(function() --[[ line: 2211 ]]
 		-- upvalues: p128 (ref), VOICE_CHAT_DEVICE_TYPE (copy), soundService (copy)
 		return if p128 == VOICE_CHAT_DEVICE_TYPE.Input then soundService:GetInputDevices() else soundService:GetOutputDevices()
 	end)
@@ -1898,7 +1889,7 @@ function t.GetDevices(_, p128) --[[ line: 2221 ]]
 	return ok, status, var134, var135
 end
 
-function t:VoiceChatAvailable() --[[ line: 2233 ]]
+function t:VoiceChatAvailable() --[[ line: 2222 ]]
 	-- upvalues: MIN_VOICE_CHAT_API_VERSION (ref), VOICE_CHAT_AVAILABILITY (ref)
 	local service = self.service
 	
@@ -1916,7 +1907,7 @@ function t:VoiceChatAvailable() --[[ line: 2233 ]]
 	return if service then MIN_VOICE_CHAT_API_VERSION <= self.version and self.available == VOICE_CHAT_AVAILABILITY.Available else false
 end
 
-function t:VoiceChatEnded() --[[ line: 2253 ]]
+function t:VoiceChatEnded() --[[ line: 2242 ]]
 	-- upvalues: voiceEndedCheckDisregardIdleState (ref)
 	if not self.service then
 		return true
@@ -1926,7 +1917,7 @@ function t:VoiceChatEnded() --[[ line: 2253 ]]
 	return if voiceEndedCheckDisregardIdleState then voiceChatState == Enum.VoiceChatState.Ended elseif voiceChatState ~= Enum.VoiceChatState.Ended then voiceChatState == Enum.VoiceChatState.Idle else true
 end
 
-function t:UnmountPrompt() --[[ line: 2265 ]]
+function t:UnmountPrompt() --[[ line: 2254 ]]
 	-- upvalues: roactModule (ref)
 	if self.voiceChatPromptInstance ~= nil then
 		roactModule.unmount(self.voiceChatPromptInstance)

@@ -8,7 +8,6 @@ local channelChipModule = require(script.Parent.ChannelChip)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local fFlagExpChatEnableFocusNavigationModule = require(expChat.Flags.FFlagExpChatEnableFocusNavigation)
 local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CustomSendButtonModule = require(expChat.Flags.FFlagExpChatInputBarV2CustomSendButton)
 local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
@@ -16,9 +15,9 @@ local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPres
 local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
 local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 
-local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 81 ]]
-	-- upvalues: reactModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), fFlagExpChatEnableFocusNavigationModule (ref), foundationModule (ref)
-	local var13 = if p2 then p1.Color.ActionStandard else p1.Color.ActionEmphasis
+local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 80 ]]
+	-- upvalues: reactModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), foundationModule (ref)
+	local var12 = if p2 then p1.Color.ActionStandard else p1.Color.ActionEmphasis
 	local size800 = p1.Size.Size_800
 	
 	return reactModule.createElement("CanvasGroup", {
@@ -34,10 +33,10 @@ local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 81 ]]
 		}),
 		SendButton = reactModule.createElement("TextButton", {
 			AutoButtonColor = false,
-			BackgroundColor3 = var13.Background.Color3,
-			BackgroundTransparency = var13.Background.Transparency,
+			BackgroundColor3 = var12.Background.Color3,
+			BackgroundTransparency = var12.Background.Transparency,
 			BorderSizePixel = 0,
-			Selectable = if p2 then false elseif fFlagExpChatPresetChatGamepadEnabledModule then nil elseif fFlagExpChatEnableFocusNavigationModule then false else nil,
+			Selectable = if p2 then false elseif fFlagExpChatPresetChatGamepadEnabledModule then nil else false,
 			Size = UDim2.fromOffset(size800, size800),
 			Text = "",
 			[reactModule.Event.Activated] = if p2 then nil else p3
@@ -50,15 +49,15 @@ local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 81 ]]
 			Icon = reactModule.createElement(foundationModule.Icon, {
 				name = foundationModule.Enums.IconName.ArrowMediumUp,
 				size = foundationModule.Enums.IconSize.Small,
-				style = var13.Foreground
+				style = var12.Foreground
 			})
 		})
 	})
 end
 
-return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatEnableFocusNavigationModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
-	local var14 = foundationModule.Hooks.useTokens()
+return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
+	local var13 = foundationModule.Hooks.useTokens()
 	local setTransparency = p4.setTransparency
 	local chatInputBarSettings = p4.chatInputBarSettings
 	local chatInputBarBackgroundTransparency = p4.chatInputBarBackgroundTransparency
@@ -78,7 +77,7 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 	local onReturnPressedFromOnScreenKeyboard = p4.onReturnPressedFromOnScreenKeyboard
 	local onSendActivated = p4.onSendActivated
 	local createElement = reactModule.createElement
-	local var15 = "Frame"
+	local var14 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
@@ -86,7 +85,7 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 	}
 	local t_1 = {}
 	local createElement_1 = reactModule.createElement
-	local var18 = "Frame"
+	local var17 = "Frame"
 	local t_2 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -94,7 +93,7 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 	}
 	local t_3 = {}
 	local createElement_2 = reactModule.createElement
-	local var21 = "Frame"
+	local var20 = "Frame"
 	local t_4 = {
 		LayoutOrder = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -109,21 +108,16 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 		}),
 		UIStroke = reactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = var14.Color.Stroke.Default.Color3,
-			Transparency = setTransparency(var14.Color.Stroke.Default.Transparency, p4.transparencyValue)
+			Color = var13.Color.Stroke.Default.Color3,
+			Transparency = setTransparency(var13.Color.Stroke.Default.Transparency, p4.transparencyValue)
 		}),
 		UIPadding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 2) })
 	}
 	local createElement_3 = reactModule.createElement
-	local var24 = "Frame"
+	local var23 = "Frame"
 	local t_6 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		SelectionBehaviorDown = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
-		SelectionBehaviorLeft = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
-		SelectionBehaviorRight = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
-		SelectionBehaviorUp = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
-		SelectionGroup = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then true else nil,
 		Position = UDim2.fromScale(0, 0),
 		Size = UDim2.new(1, -(p4.sendButtonContainerWidth + 6), 0, 0)
 	}
@@ -131,7 +125,7 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 		TargetChannelChip = reactModule.createElement(channelChipModule, {
 			transparency = setTransparency(0, p4.transparencyValue),
 			onAbsoluteSizeChanged = onAbsoluteSizeChanged,
-			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function() --[[ line: 220 ]]
+			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function() --[[ line: 195 ]]
 				-- upvalues: p4 (ref)
 				p4.resetTargetChannel(p4.isGlobalChatTabActive)
 			end else p4.resetTargetChannel,
@@ -140,18 +134,18 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 			developerChannelTabsEnabled = p4.developerChannelTabsEnabled
 		})
 	}
-	local var27 = if fFlagExpChatUseMessagesStore then not canLocalUserChatDerived else not p4.canLocalUserChat
+	local var26 = if fFlagExpChatUseMessagesStore then not canLocalUserChatDerived else not p4.canLocalUserChat
 	
-	if var27 then
-		var27 = reactModule.createElement
-		var27 = var27("TextLabel", {
+	if var26 then
+		var26 = reactModule.createElement
+		var26 = var26("TextLabel", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Font = configModule.ChatInputBarFont,
 			Text = p4.disabledChatPlaceholderText,
 			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p5) --[[ line: 237 ]]
+			Size = targetChannelWidth:map(function(p5) --[[ line: 212 ]]
 				return UDim2.new(1, -(p5 + 8), 0, 0)
 			end),
 			TextColor3 = if showPlaceholderText then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
@@ -166,27 +160,27 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 			ref = if expChatFocusablePlaceholderText then placeholderRef else nil
 		})
 	end
-	t_7.DisabledPlaceholderLabel = var27
-	local var28 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p4.canLocalUserChat
+	t_7.DisabledPlaceholderLabel = var26
+	local var27 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p4.canLocalUserChat
 	
-	if var28 then
-		var28 = reactModule.createElement
-		local var29 = "Frame"
+	if var27 then
+		var27 = reactModule.createElement
+		local var28 = "Frame"
 		local t_8 = {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p6) --[[ line: 275 ]]
+			Size = targetChannelWidth:map(function(p6) --[[ line: 250 ]]
 				return UDim2.new(1, -(p6 + 8), 0, 0)
 			end)
 		}
 		local t_9 = {}
-		local var32 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p4.canLocalUserChat
+		local var31 = if fFlagExpChatUseMessagesStore then canLocalUserChatDerived else p4.canLocalUserChat
 		
-		if var32 then
-			var32 = reactModule.createElement
-			var32 = var32("TextBox", {
+		if var31 then
+			var31 = reactModule.createElement
+			var31 = var31("TextBox", {
 				AnchorPoint = Vector2.new(0, 0),
 				AutomaticSize = Enum.AutomaticSize.XY,
 				BackgroundTransparency = 1,
@@ -215,18 +209,18 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 				ref = if chatInputBarSettings.TextBox then customTextBoxRef else textBoxRef
 			})
 		end
-		t_9.TextBox = var32
-		var28 = var28(var29, t_8, t_9)
+		t_9.TextBox = var31
+		var27 = var27(var28, t_8, t_9)
 	end
-	t_7.TextBoxContainer = var28
+	t_7.TextBoxContainer = var27
 	t_7.UIPadding = reactModule.createElement("UIPadding", {
 		PaddingBottom = UDim.new(0, 10),
 		PaddingLeft = UDim.new(0, 10),
 		PaddingRight = UDim.new(0, 10),
 		PaddingTop = UDim.new(0, 10)
 	})
-	t_5.TextContainer = createElement_3(var24, t_6, t_7)
-	t_5.SendButtonContainer = if fFlagExpChatInputBarV2CustomSendButtonModule then renderCustomSendButton(p4, var14, hasEmptyInputText, onSendActivated) else reactModule.createElement("CanvasGroup", {
+	t_5.TextContainer = createElement_3(var23, t_6, t_7)
+	t_5.SendButtonContainer = if fFlagExpChatInputBarV2CustomSendButtonModule then renderCustomSendButton(p4, var13, hasEmptyInputText, onSendActivated) else reactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(1, 0),
 		GroupTransparency = p4.transparencyValue,
@@ -243,12 +237,12 @@ return reactModule.memo(function(p4) --[[ line: 138 | named "ChatInputBarV2" ]]
 			variant = if hasEmptyInputText then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
 			size = foundationModule.Enums.InputSize.Small,
 			isDisabled = hasEmptyInputText,
-			Selectable = if fFlagExpChatPresetChatGamepadEnabledModule then nil elseif fFlagExpChatEnableFocusNavigationModule then false else nil,
+			Selectable = if fFlagExpChatPresetChatGamepadEnabledModule then nil else false,
 			onActivated = onSendActivated
 		})
 	})
-	t_3.InputGroup = createElement_2(var21, t_4, t_5)
-	t_1.Container = createElement_1(var18, t_2, t_3)
+	t_3.InputGroup = createElement_2(var20, t_4, t_5)
+	t_1.Container = createElement_1(var17, t_2, t_3)
 	
-	return createElement(var15, t, t_1)
+	return createElement(var14, t, t_1)
 end)

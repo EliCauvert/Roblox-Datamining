@@ -10,6 +10,7 @@ local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInA
 local sduiParsers = sduiCoreSystemModule.SduiParsers
 local sduiErrors = sduiCoreSystemModule.SduiErrors
 local fFlagEnableExperienceDetailsBottomSheet = require(parent.SharedFlags).FFlagEnableExperienceDetailsBottomSheet
+local fFlagLuaAppEdpBottomSheetPeekViewEvents = require(parent.SharedFlags).FFlagLuaAppEdpBottomSheetPeekViewEvents
 local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiEdpPrefetchPlayability = require(parent.SharedFlags).FFlagSduiEdpPrefetchPlayability
 local fFlagLuaAppSduiEdpEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
@@ -17,8 +18,8 @@ local fFlagSduiEdpInheritGameDetailSourceSession = require(parent.SharedFlags).F
 local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
 local t = {}
 
-return function(p0, p1, p2) --[[ line: 34 ]]
-	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), sduiParsers (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagSduiChartsSupport (ref), fFlagSduiEdpInheritGameDetailSourceSession (ref), openGameDetails (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
+return function(p0, p1, p2) --[[ line: 35 ]]
+	-- upvalues: sduiErrors (ref), getInputModeStore (ref), t (ref), findAnalyticsFieldInAncestors (ref), intervalPerformanceTracker (ref), sduiParsers (ref), fFlagLuaAppAddSeeAllFlagToGameDetailReferral (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), fFlagSduiChartsSupport (ref), fFlagSduiEdpInheritGameDetailSourceSession (ref), openGameDetails (ref), fFlagLuaAppEdpBottomSheetPeekViewEvents (ref), fFlagEnableExperienceDetailsBottomSheet (ref), appPage (ref), fFlagSduiEdpPrefetchPlayability (ref), fFlagLuaAppSduiEdpEnabled (ref)
 	p2.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.OpenGameDetailsAction, { name = getInputModeStore(false).getLastInputType(false) }, true)
 	local var2 = if p0 then p0.actionParams else t
 	local var3 = findAnalyticsFieldInAncestors("itemComponentType", p1)
@@ -75,7 +76,9 @@ return function(p0, p1, p2) --[[ line: 34 ]]
 	local var20 = tostring(var9)
 	local t_1 = { index = var6 }
 	
-	if fFlagEnableExperienceDetailsBottomSheet then
+	if fFlagLuaAppEdpBottomSheetPeekViewEvents then
+		var22 = nil
+	elseif fFlagEnableExperienceDetailsBottomSheet then
 		var22 = p2.appPage == appPage.GameDetail
 		var22 = nil
 	else

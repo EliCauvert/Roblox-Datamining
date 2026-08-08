@@ -14,7 +14,8 @@ return function(p0) --[[ line: 11 | named "ParentContainerProvider" ]]
 			entryPoint = p0.entryPoint,
 			hideParentContainer = p0.hideParentContainer,
 			showParentContainer = p0.showParentContainer,
-			updateCurrentSquadId = p0.updateCurrentSquadId
+			updateCurrentSquadId = p0.updateCurrentSquadId,
+			openFriendsChatConversation = p0.openFriendsChatConversation
 		}
 	}, p0.children)
 end

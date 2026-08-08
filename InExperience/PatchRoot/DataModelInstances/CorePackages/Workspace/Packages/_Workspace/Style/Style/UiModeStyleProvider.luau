@@ -9,11 +9,11 @@ local sceneOverridesRegistryModule = require(script.Parent.SceneOverridesRegistr
 local appStyleProvider = require(parent.UIBlox).App.Style.AppStyleProvider
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local getUIScale = require(parent.Display).GetDisplayStore(false).getUIScale
 local enableDisplaySize = game:DefineFastFlag("LuaAppEnableWindowsHandheldTokenScale", false) and game:GetEngineFeature("EnableDisplaySize") or game:DefineFastFlag("DebugLuaAppEnableTokenScale", false)
 local fFlagAppNavBarPerItemThemeOverride = require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
-local t = { dark = theme.Dark, light = theme.Light }
+local t = { dark = colorMode.Dark, light = colorMode.Light }
 
 local function _() --[[ line: 52 | named "useTokenScale" ]]
 	-- upvalues: signalsReactModule (ref), getUIScale (ref)

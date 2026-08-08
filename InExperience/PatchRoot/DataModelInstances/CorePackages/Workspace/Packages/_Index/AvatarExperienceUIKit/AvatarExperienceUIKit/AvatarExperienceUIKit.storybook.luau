@@ -4,7 +4,7 @@ UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 local roduxModule = require(parent.Dev.Rodux)
 local designTokenProvider = require(parent.Style).DesignTokenProvider
@@ -30,7 +30,7 @@ local function createStore() --[[ line: 30 ]]
 	return roduxModule.Store.new(roduxModule.createReducer({}, {}))
 end
 
-local t = { Light = theme.Light, Dark = theme.Dark }
+local t = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_1 = { Console = device.Console, Desktop = device.Desktop }
 local t_2 = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
@@ -63,7 +63,7 @@ return {
 				LocalizationProvider = reactModule.createElement(localizationProvider, { localization = createLocalization() }, if p2.definition.foundationOnly then {
 					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 						FoundationProvider = reactModule.createElement(foundationProvider, {
-							theme = theme,
+							colorMode = theme,
 							device = t_1[p2.platform],
 							preferences = p2.settings,
 							scale = p2.settings and p2.settings.scale
@@ -75,7 +75,7 @@ return {
 							StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 								DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
 									FoundationProvider = reactModule.createElement(foundationProvider, {
-										theme = theme,
+										colorMode = theme,
 										device = t_1[p2.platform],
 										preferences = p2.settings,
 										scale = p2.settings and p2.settings.scale

@@ -11,13 +11,12 @@ local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.Analyti
 local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
 local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
 local useMappedSignal = chromeModule.Hooks.useMappedSignal
-local fFlagChromeActivatedMappedSignal = sharedFlagsModule.FFlagChromeActivatedMappedSignal
 local keepSideSheetOpenFromGrid = game:DefineFastFlag("KeepSideSheetOpenFromGrid", false)
 local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 38 | named "GridItem" ]]
-	-- upvalues: reactModule (ref), keepSideSheetOpenFromGrid (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), fFlagChromeActivatedMappedSignal (ref), useMappedSignal (ref), view (ref), iconHostModule (ref), text (ref)
-	local var10 = reactModule.useCallback(function() --[[ line: 39 ]]
+return reactModule.memo(function(p0) --[[ line: 36 | named "GridItem" ]]
+	-- upvalues: reactModule (ref), keepSideSheetOpenFromGrid (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), useMappedSignal (ref), view (ref), iconHostModule (ref), text (ref)
+	local var10 = reactModule.useCallback(function() --[[ line: 37 ]]
 		-- upvalues: p0 (ref), keepSideSheetOpenFromGrid (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
 		p0.onActivated()
 		
@@ -27,7 +26,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GridItem" ]]
 		end
 	end, { p0.onActivated })
 	local var11 = if fFlagSideSheetFocusNav then reactModule.useRef(nil) else nil
-	local var12 = if fFlagChromeActivatedMappedSignal then useMappedSignal(p0.isActivated) else false
+	local var12 = useMappedSignal(p0.isActivated)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-xsmall size-1400 auto-y",
@@ -55,7 +54,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "GridItem" ]]
 					Selectable = true,
 					NextSelectionRight = if p0.disableGamepadDirections and p0.disableGamepadDirections.right then var11 else nil
 				} else nil,
-				ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1) --[[ line: 51 ]]
+				ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p1) --[[ line: 48 ]]
 					-- upvalues: var11 (ref), p0 (ref)
 					if var11 then
 						var11.current = p1

@@ -18,7 +18,7 @@ local loaderProvider = loaderContextModule.LoaderProvider
 local fFlagAbuseReportInExpPlayerListV3 = sharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
 local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
 
-return function(p0) --[[ line: 58 | named "AbuseReportContentInExp" ]]
+return function(p0) --[[ line: 54 | named "AbuseReportContentInExp" ]]
 	-- upvalues: useAbuseSheetFlowModule (ref), reactModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), layoutSlotsProvider (ref), inlineSlots (ref), overlaidControlsProvider (ref), loaderProvider (ref), abuseReportInlineModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), fFlagAbuseReportVoiceMute (ref), voiceSpeakingSignalsModule (ref)
 	local var8 = useAbuseSheetFlowModule(p0.rawConfig, {
 		abuseVector = p0.abuseVector,
@@ -30,7 +30,7 @@ return function(p0) --[[ line: 58 | named "AbuseReportContentInExp" ]]
 		attemptTrigger = p0.attemptTrigger,
 		inlineAlertController = p0.inlineAlertController
 	})
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function() --[[ line: 66 ]]
 		-- upvalues: var8 (ref), p0 (ref)
 		if not var8 then
 			p0.onResolveError()

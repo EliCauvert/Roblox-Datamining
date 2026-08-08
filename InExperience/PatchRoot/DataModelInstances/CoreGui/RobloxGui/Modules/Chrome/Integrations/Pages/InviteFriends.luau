@@ -11,20 +11,18 @@ local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSign
 local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
 local signal = appCommonLibModule.Signal
 local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagChromeActivatedMappedSignal = sharedFlagsModule.FFlagChromeActivatedMappedSignal
-local var10 = signal.new()
-local var11 = mappedSignal.new(var10, function() --[[ line: 26 ]]
+local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
+local var9 = signal.new()
+local var10 = mappedSignal.new(var9, function() --[[ line: 25 ]]
 	-- upvalues: gameInviteModalManager (ref)
 	return gameInviteModalManager:isGameModalOpen()
 end)
-gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function() --[[ line: 29 ]]
-	-- upvalues: var10 (ref)
-	var10:fire()
+gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function() --[[ line: 28 ]]
+	-- upvalues: var9 (ref)
+	var9:fire()
 end)
 
-local function _() --[[ line: 33 | named "shouldShowInviteFriends" ]]
+local function _() --[[ line: 32 | named "shouldShowInviteFriends" ]]
 	-- upvalues: runService (ref), playersService (ref)
 	return not runService:IsStudio() and (playersService.LocalPlayer ~= nil and playersService.LocalPlayer.UserId > 0)
 end
@@ -35,14 +33,11 @@ return serviceModule:register({
 	label = if fFlagConnectionsToFriendsRename then "CoreScripts.InGameMenu.PageTitle.InviteFriends" else "CommonUI.Features.Label.InviteConnections",
 	sideSheetPlacement = sideSheetPlacement.Vertical,
 	activated = inGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
-	isActivated = if fFlagChromeActivatedMappedSignal then var11 else function() --[[ line: 49 ]]
-		-- upvalues: var11 (ref)
-		return var11:get()
-	end,
+	isActivated = var10,
 	components = {
-		Icon = function() --[[ line: 53 ]]
-			-- upvalues: commonIconModule (ref), var11 (ref)
-			return commonIconModule("PersonArrowFromBottomRight", nil, var11)
+		Icon = function() --[[ line: 48 ]]
+			-- upvalues: commonIconModule (ref), var10 (ref)
+			return commonIconModule("PersonArrowFromBottomRight", nil, var10)
 		end
 	}
 })

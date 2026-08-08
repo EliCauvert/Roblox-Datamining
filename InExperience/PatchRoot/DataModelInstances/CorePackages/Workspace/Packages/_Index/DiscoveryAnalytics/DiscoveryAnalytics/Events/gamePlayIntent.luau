@@ -14,7 +14,6 @@ local luaAppRemoveNumericalSortIndexSearch = game:DefineFastFlag("LuaAppRemoveNu
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
-local fFlagLuaAppGameItemTelemetryServiceTarget = require(parent.SharedFlags).FFlagLuaAppGameItemTelemetryServiceTarget
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local luaAppGamePlayIntentEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGamePlayIntentEventThrottlingHundredthsPercent", 10000)
 local luaAppGamePlayIntentShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGamePlayIntentShadowThrottlingHundredthsPercent", 10000)
@@ -164,7 +163,7 @@ local t = {
 	}) else nil else nil
 }
 
-local function _(p0) --[[ line: 213 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p0) --[[ line: 211 | named "addMobileAdvertisingIdToEventParams" ]]
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -173,8 +172,8 @@ local function _(p0) --[[ line: 213 | named "addMobileAdvertisingIdToEventParams
 	end
 end
 
-return function(p1, p2, p3) --[[ line: 220 ]]
-	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), fFlagLuaAppAddSubIdToHomeEvents (ref), cryoModule (ref), telemetryService (ref), var10 (write), fFlagLuaAppGameItemTelemetryServiceTarget (ref), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
+return function(p1, p2, p3) --[[ line: 218 ]]
+	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), fFlagLuaAppAddSubIdToHomeEvents (ref), cryoModule (ref), telemetryService (ref), var10 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
 	if t[p2] == nil then
 		discoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {p2} to type check gamePlayIntent event parameters`, { eventContext = p2 })
 	else
@@ -244,7 +243,7 @@ return function(p1, p2, p3) --[[ line: 220 ]]
 			eventContext = p2,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = t_1,
-			legacyOverrideTargetForEventIngest = if fFlagLuaAppGameItemTelemetryServiceTarget then getPlatformTarget() else nil
+			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	else
 		local t_1 = {
@@ -323,7 +322,7 @@ return function(p1, p2, p3) --[[ line: 220 ]]
 				sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then p3.sortSubId else nil,
 				tileType = p3.tileType
 			},
-			legacyOverrideTargetForEventIngest = if fFlagLuaAppGameItemTelemetryServiceTarget then getPlatformTarget() else nil
+			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	end
 end

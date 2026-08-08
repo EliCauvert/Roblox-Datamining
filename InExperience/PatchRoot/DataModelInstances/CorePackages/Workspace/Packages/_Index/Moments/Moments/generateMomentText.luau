@@ -1,13 +1,15 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
+﻿local moments = script:FindFirstAncestor("Moments")
+local parent = moments.Parent
 local promiseModule = require(parent.Promise)
 local isStudioModule = require(parent.MomentsCommon.isStudio)
+local getFFlagMomentTextGenerationDisableCacheModule = require(moments.Flags.GetFFlagMomentTextGenerationDisableCache)
 local t = {}
 
-local function log(p0, ...) --[[ line: 48 ]]
+local function log(p0, ...) --[[ line: 50 ]]
 	print(`[moments-gen] {string.format(p0, ...)}`)
 end
 
-local function _() --[[ line: 52 | named "mockResult" ]]
+local function _() --[[ line: 54 | named "mockResult" ]]
 	return {
 		summary = "insane save",
 		description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
@@ -15,21 +17,21 @@ local function _() --[[ line: 52 | named "mockResult" ]]
 	}
 end
 
-local function captureKey(p1) --[[ line: 60 ]]
-	local var5 = nil
-	pcall(function() --[[ line: 62 ]]
-		-- upvalues: var5 (write), p1 (ref)
-		var5 = p1.LocalId
+local function captureKey(p1) --[[ line: 62 ]]
+	local var8 = nil
+	pcall(function() --[[ line: 64 ]]
+		-- upvalues: var8 (write), p1 (ref)
+		var8 = p1.LocalId
 	end)
 	
-	return if var5 == nil then if typeof(p1) == "table" and p1.assetId ~= nil then `asset:{p1.assetId}` else `capture:{tostring(p1)}` else `local:{var5}`
+	return if var8 == nil then if typeof(p1) == "table" and p1.assetId ~= nil then `asset:{p1.assetId}` else `capture:{tostring(p1)}` else `local:{var8}`
 end
 
-local _ = function(p2) --[[ line: 77 | named "resultName" ]]
+local _ = function(p2) --[[ line: 79 | named "resultName" ]]
 	if p2 == nil then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 81 ]]
+	local ok, status = pcall(function() --[[ line: 83 ]]
 		-- upvalues: p2 (ref)
 		return p2.Name
 	end)
@@ -37,57 +39,57 @@ local _ = function(p2) --[[ line: 77 | named "resultName" ]]
 	return if ok and typeof(status) == "string" then status else nil
 end
 
-local _ = function(p3, p4, p5) --[[ line: 90 | named "runGeneration" ]]
+local function runGeneration(p3, p4, p5) --[[ line: 92 ]]
 	-- upvalues: promiseModule (ref), log (ref), isStudioModule (ref)
 	local captureService = p5.captureService or game:GetService("CaptureService")
 	local pollIntervalSeconds = p5.pollIntervalSeconds or 1
 	local maxPollAttempts = p5.maxPollAttempts or 30
 	
-	return promiseModule.new(function(p6) --[[ line: 95 ]]
+	return promiseModule.new(function(p6) --[[ line: 97 ]]
 		-- upvalues: captureService (ref), p3 (ref), log (copy), p4 (ref), isStudioModule (copy), maxPollAttempts (ref), pollIntervalSeconds (ref)
-		task.spawn(function() --[[ line: 96 ]]
+		task.spawn(function() --[[ line: 98 ]]
 			-- upvalues: captureService (copy), p3 (copy), log (copy), p4 (copy), isStudioModule (copy), p6 (ref), maxPollAttempts (copy), pollIntervalSeconds (copy)
-			local ok, status, var9 = pcall(function() --[[ line: 97 ]]
+			local ok, status, var12 = pcall(function() --[[ line: 99 ]]
 				-- upvalues: captureService (copy), p3 (copy)
 				return captureService:GenerateMomentTextAsync(p3)
 			end)
 			
 			if ok then
-				local var10
+				local var13
 				if status == nil then
-					var10 = nil
+					var13 = nil
 				else
-					local ok_1, status_1 = pcall(function() --[[ line: 81 ]]
+					local ok_1, status_1 = pcall(function() --[[ line: 83 ]]
 						-- upvalues: status (ref)
 						return status.Name
 					end)
-					var10 = if ok_1 and typeof(status_1) == "string" then status_1 else nil
+					var13 = if ok_1 and typeof(status_1) == "string" then status_1 else nil
 				end
-				if var10 == "Success" and typeof(var9) == "string" and #var9 ~= 0 then
-					log("generation started for %s \226\134\146 token=%s, polling", p4, var9)
+				if var13 == "Success" and typeof(var12) == "string" and #var12 ~= 0 then
+					log("generation started for %s \226\134\146 token=%s, polling", p4, var12)
 					
 					for _ = 1, maxPollAttempts do
-						local var13
+						local var16
 						task.wait(pollIntervalSeconds)
-						local ok_1, status_1, var11, var12 = pcall(function() --[[ line: 118 ]]
-							-- upvalues: captureService (copy), var9 (ref)
-							return captureService:CheckMomentTextStatusAsync(var9)
+						local ok_1, status_1, var14, var15 = pcall(function() --[[ line: 120 ]]
+							-- upvalues: captureService (copy), var12 (ref)
+							return captureService:CheckMomentTextStatusAsync(var12)
 						end)
 						
 						if not ok_1 then
 							continue
 						end
 						if status_1 == nil then
-							var13 = nil
+							var16 = nil
 						else
-							local ok_2, status_2 = pcall(function() --[[ line: 81 ]]
+							local ok_2, status_2 = pcall(function() --[[ line: 83 ]]
 								-- upvalues: status_1 (ref)
 								return status_1.Name
 							end)
-							var13 = if ok_2 and typeof(status_2) == "string" then status_2 else nil
+							var16 = if ok_2 and typeof(status_2) == "string" then status_2 else nil
 						end
-						if var13 ~= "Success" then
-							if var13 ~= "Failed" then
+						if var16 ~= "Success" then
+							if var16 ~= "Failed" then
 								continue
 							end
 							log("generation failed for %s", p4)
@@ -96,7 +98,7 @@ local _ = function(p3, p4, p5) --[[ line: 90 | named "runGeneration" ]]
 							return
 						end
 						log("generation complete for %s", p4)
-						p6({ summary = var11, description = var12 })
+						p6({ summary = var14, description = var15 })
 						
 						return
 					end
@@ -124,48 +126,50 @@ local _ = function(p3, p4, p5) --[[ line: 90 | named "runGeneration" ]]
 	end)
 end
 
-return function(p7, p8) --[[ line: 144 | named "generateMomentText" ]]
-	-- upvalues: log (ref), isStudioModule (ref), promiseModule (ref), captureKey (ref), t (ref)
+return function(p7, p8) --[[ line: 146 | named "generateMomentText" ]]
+	-- upvalues: log (ref), isStudioModule (ref), promiseModule (ref), captureKey (ref), getFFlagMomentTextGenerationDisableCacheModule (ref), runGeneration (ref), t (ref)
 	p8 = p8 or {}
 	
-	if (p8.isEngineEnabled or function() --[[ line: 147 ]]
+	if (p8.isEngineEnabled or function() --[[ line: 149 ]]
 		return game:GetEngineFeature("CaptureServiceGenerateMomentText")
 	end)() then
-		local var15 = captureKey(p7)
+		local var18 = captureKey(p7)
 		
-		if t[var15] == nil then
+		if getFFlagMomentTextGenerationDisableCacheModule() then
+			return runGeneration(p7, var18, p8)
+		elseif t[var18] == nil then
 			local captureService = p8.captureService or game:GetService("CaptureService")
 			local pollIntervalSeconds = p8.pollIntervalSeconds or 1
 			local maxPollAttempts = p8.maxPollAttempts or 30
-			local var19 = promiseModule.new(function(p9) --[[ line: 95 ]]
-				-- upvalues: captureService (ref), p7 (ref), log (copy), var15 (ref), isStudioModule (copy), maxPollAttempts (ref), pollIntervalSeconds (ref)
-				task.spawn(function() --[[ line: 96 ]]
-					-- upvalues: captureService (copy), p7 (copy), log (copy), var15 (copy), isStudioModule (copy), p9 (ref), maxPollAttempts (copy), pollIntervalSeconds (copy)
-					local ok, status, var20 = pcall(function() --[[ line: 97 ]]
+			local var22 = promiseModule.new(function(p9) --[[ line: 97 ]]
+				-- upvalues: captureService (ref), p7 (ref), log (copy), var18 (ref), isStudioModule (copy), maxPollAttempts (ref), pollIntervalSeconds (ref)
+				task.spawn(function() --[[ line: 98 ]]
+					-- upvalues: captureService (copy), p7 (copy), log (copy), var18 (copy), isStudioModule (copy), p9 (ref), maxPollAttempts (copy), pollIntervalSeconds (copy)
+					local ok, status, var23 = pcall(function() --[[ line: 99 ]]
 						-- upvalues: captureService (copy), p7 (copy)
 						return captureService:GenerateMomentTextAsync(p7)
 					end)
 					
 					if ok then
-						local var10
+						local var13
 						if status == nil then
-							var10 = nil
+							var13 = nil
 						else
-							local ok_1, status_1 = pcall(function() --[[ line: 81 ]]
+							local ok_1, status_1 = pcall(function() --[[ line: 83 ]]
 								-- upvalues: status (ref)
 								return status.Name
 							end)
-							var10 = if ok_1 and typeof(status_1) == "string" then status_1 else nil
+							var13 = if ok_1 and typeof(status_1) == "string" then status_1 else nil
 						end
-						if var10 == "Success" and typeof(var20) == "string" and #var20 ~= 0 then
-							log("generation started for %s \226\134\146 token=%s, polling", var15, var20)
+						if var13 == "Success" and typeof(var23) == "string" and #var23 ~= 0 then
+							log("generation started for %s \226\134\146 token=%s, polling", var18, var23)
 							
 							for _ = 1, maxPollAttempts do
-								local var13
+								local var16
 								task.wait(pollIntervalSeconds)
-								local ok_1, status_1, var21, var22 = pcall(function() --[[ line: 118 ]]
-									-- upvalues: captureService (copy), var20 (ref)
-									return captureService:CheckMomentTextStatusAsync(var20)
+								local ok_1, status_1, var24, var25 = pcall(function() --[[ line: 120 ]]
+									-- upvalues: captureService (copy), var23 (ref)
+									return captureService:CheckMomentTextStatusAsync(var23)
 								end)
 								
 								if not ok_1 then
@@ -173,35 +177,35 @@ return function(p7, p8) --[[ line: 144 | named "generateMomentText" ]]
 									continue
 								end
 								if status_1 == nil then
-									var13 = nil
+									var16 = nil
 								else
-									local ok_2, status_2 = pcall(function() --[[ line: 81 ]]
+									local ok_2, status_2 = pcall(function() --[[ line: 83 ]]
 										-- upvalues: status_1 (ref)
 										return status_1.Name
 									end)
-									var13 = if ok_2 and typeof(status_2) == "string" then status_2 else nil
+									var16 = if ok_2 and typeof(status_2) == "string" then status_2 else nil
 								end
-								if var13 ~= "Success" then
-									if var13 ~= "Failed" then
+								if var16 ~= "Success" then
+									if var16 ~= "Failed" then
 										continue
 										continue
 									end
-									log("generation failed for %s", var15)
+									log("generation failed for %s", var18)
 									p9({ error = "GENERATION_FAILED" })
 									
 									return
 								end
-								log("generation complete for %s", var15)
-								p9({ summary = var21, description = var22 })
+								log("generation complete for %s", var18)
+								p9({ summary = var24, description = var25 })
 								
 								return
 							end
-							log("generation timed out for %s", var15)
+							log("generation timed out for %s", var18)
 							p9({ error = "TIMEOUT" })
 							
 							return
 						else
-							log("generation start failed for %s", var15)
+							log("generation start failed for %s", var18)
 							
 							if isStudioModule() then
 								log("resolving with mock result (Studio, backend unreachable)")
@@ -218,22 +222,22 @@ return function(p7, p8) --[[ line: 144 | named "generateMomentText" ]]
 					end
 				end)
 			end)
-			t[var15] = var19
-			var19:andThen(function(p10) --[[ line: 171 ]]
-				-- upvalues: t (copy), var15 (ref)
+			t[var18] = var22
+			var22:andThen(function(p10) --[[ line: 179 ]]
+				-- upvalues: t (copy), var18 (ref)
 				if p10 == nil or p10.error ~= nil then
-					t[var15] = nil
+					t[var18] = nil
 				end
-			end, function() --[[ line: 175 ]]
-				-- upvalues: t (copy), var15 (ref)
-				t[var15] = nil
+			end, function() --[[ line: 183 ]]
+				-- upvalues: t (copy), var18 (ref)
+				t[var18] = nil
 			end)
 			
-			return var19
+			return var22
 		end
-		log("reusing cached generation for %s (no re-send)", var15)
+		log("reusing cached generation for %s (no re-send)", var18)
 		
-		return t[var15]
+		return t[var18]
 	else
 		log("engine feature %s unavailable", "CaptureServiceGenerateMomentText")
 		

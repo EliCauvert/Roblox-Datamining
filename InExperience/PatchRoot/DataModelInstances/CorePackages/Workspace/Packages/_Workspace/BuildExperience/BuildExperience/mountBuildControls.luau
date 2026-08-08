@@ -23,7 +23,7 @@ local function ConnectedBuildControls() --[[ line: 22 ]]
 			return localization.new(localizationService.RobloxLocaleId)
 		end, {})
 	}, {
-		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Light }, {
+		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Light }, {
 			CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
 			Anchor = reactModule.createElement(view, {
 				tag = "auto-xy",

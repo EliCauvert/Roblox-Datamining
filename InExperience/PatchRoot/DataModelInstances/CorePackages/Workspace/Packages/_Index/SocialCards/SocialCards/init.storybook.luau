@@ -5,9 +5,9 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
 local appStyleProvider = require(parent.Dev.UIBlox).App.Style.AppStyleProvider
 local t = {
-	Default = foundationModule.Enums.Theme.Dark,
-	Light = foundationModule.Enums.Theme.Light,
-	Dark = foundationModule.Enums.Theme.Dark
+	Default = foundationModule.Enums.ColorMode.Dark,
+	Light = foundationModule.Enums.ColorMode.Light,
+	Dark = foundationModule.Enums.ColorMode.Dark
 }
 local t_1 = {
 	Default = "Desktop",
@@ -27,8 +27,8 @@ return {
 			local var6 = if p1 then t[p1.theme] else t.Default
 			
 			return reactModule.createElement(foundationModule.FoundationProvider, {
-				theme = var6,
-				device = if p1 then t_1[p1.platform] else t_1.Default
+				colorMode = var6,
+				device = if p1 then t_1[p1.platform] else "Desktop"
 			}, {
 				AppStyleProvider = reactModule.createElement(appStyleProvider, {
 					style = { fontName = "Gotham", themeName = var6.themeName }

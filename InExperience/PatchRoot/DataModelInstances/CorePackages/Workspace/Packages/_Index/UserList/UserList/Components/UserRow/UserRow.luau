@@ -13,9 +13,10 @@ local fFlagHomepagePYMKUseHorizontalUserList = require(parent.SharedFlags).FFlag
 local fFlagFixUserRowCombinedName = require(parent.SharedFlags).FFlagFixUserRowCombinedName
 local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local fFlagUserListUsernameFallbackConfig = require(parent.SharedFlags).FFlagUserListUsernameFallbackConfig
+local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
 
-return reactModule.memo(function(p0) --[[ line: 46 | named "UserRow" ]]
-	-- upvalues: useUserDataValuesModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagFixUserRowCombinedName (ref), fFlagUserListUsernameFallbackConfig (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), fFlagHomepagePYMKUseHorizontalUserList (ref), reactModule (ref), baseRowModule (ref), fFlagUserListCtaIntegrationEnabled (ref), enumsModule (ref)
+return reactModule.memo(function(p0) --[[ line: 48 | named "UserRow" ]]
+	-- upvalues: useUserDataValuesModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagFixUserRowCombinedName (ref), fFlagUserListUsernameFallbackConfig (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), fFlagHomepagePYMKUseHorizontalUserList (ref), reactModule (ref), baseRowModule (ref), fFlagAddStatusIndicatorToBaseRow (ref), fFlagUserListCtaIntegrationEnabled (ref), enumsModule (ref)
 	local var14, var16
 	local var6 = useUserDataValuesModule(p0.entityId)
 	local var7 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(if p0.entityId then p0.entityId else nil) else nil
@@ -58,6 +59,7 @@ return reactModule.memo(function(p0) --[[ line: 46 | named "UserRow" ]]
 		contextualInfo = if fFlagUserListUsernameFallbackConfig then if not fFlagUserListUsernameFallbackConfig then if p0.configs and p0.configs.showUsernameAsContextualFallback and not p0.contextualInfo then { text = var10 } else p0.contextualInfo else nil else p0.contextualInfo,
 		primaryCta = p0.primaryCta,
 		secondaryCta = p0.secondaryCta,
+		shouldShowNewIndicator = if fFlagAddStatusIndicatorToBaseRow then p0.shouldShowNewIndicator else nil,
 		ctaLoading = if fFlagUserListCtaIntegrationEnabled then p0.ctaLoading else nil,
 		trailingContent = p0.trailingContent,
 		layoutOrder = p0.layoutOrder,

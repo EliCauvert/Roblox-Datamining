@@ -63,7 +63,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | 
 	return reactModule.createElement(scrollViewModule, {
 		ZIndex = 1,
 		tag = "fill size-full-0 auto-y",
-		scrollingFrameRef = if flagsModule.FoundationBottomSheetInnerScrollingSync then if flagsModule.FoundationBottomSheetInnerScrollingSync then useComposedRef(innerScrollingRef, p0.scrollingFrameRef) else nil else p0.scrollingFrameRef,
+		scrollingFrameRef = useComposedRef(innerScrollingRef, p0.scrollingFrameRef),
 		selection = {
 			Selectable = if var18 then var18:map(function(p4) --[[ line: 81 ]]
 				-- upvalues: var26 (ref)
@@ -77,18 +77,18 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | 
 		scroll = {
 			ScrollingEnabled = innerScrollingEnabled,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			CanvasSize = if sheetContentHeight then var21:map(function(p5) --[[ line: 134 ]]
+			CanvasSize = if sheetContentHeight then var21:map(function(p5) --[[ line: 130 ]]
 				return UDim2.new(1, 0, 0, p5)
 			end) else UDim2.fromScale(1, 0),
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
 		Size = if sheetContentHeight then UDim2.fromScale(1, 1) else nil,
 		padding = {
-			top = hasHeader:map(function(p6) --[[ line: 142 ]]
+			top = hasHeader:map(function(p6) --[[ line: 138 ]]
 				-- upvalues: var16 (ref), var24 (ref), var14 (ref)
 				return if p6 or var16 then UDim.new(0, 0) else UDim.new(0, if var24 then var14.Padding.Small else var14.Margin.Small)
 			end),
-			bottom = if var24 then actionsHeight:map(function(p7) --[[ line: 148 ]]
+			bottom = if var24 then actionsHeight:map(function(p7) --[[ line: 144 ]]
 				-- upvalues: bottomPadding (ref), var14 (ref)
 				return UDim.new(0, p7 + bottomPadding + var14.Margin.Small)
 			end) else UDim.new(0, var14.Padding.Small),
@@ -96,7 +96,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | 
 			right = var25
 		},
 		ClipsDescendants = if var24 then hasHeader else true,
-		onCanvasPositionChanged = function(p8) --[[ line: 156 ]]
+		onCanvasPositionChanged = function(p8) --[[ line: 152 ]]
 			-- upvalues: setInnerScrollY (ref)
 			setInnerScrollY(p8.CanvasPosition.Y)
 		end,
@@ -112,7 +112,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | 
 		} else "col align-x-center gap-medium size-full-0 auto-y padding-x-medium"
 	}, if flagsModule.FoundationSheetFullBleed then {
 		FullBleedSpacer = if var16 and var17 then reactModule.createElement(viewModule, {
-			Size = var17:map(function(p9) --[[ line: 180 ]]
+			Size = var17:map(function(p9) --[[ line: 176 ]]
 				return UDim2.new(1, 0, 0, math.max(0, p9))
 			end),
 			LayoutOrder = constantsModule.MIN_LAYOUT_ORDER,

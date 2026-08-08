@@ -9,13 +9,14 @@ local iconButton = foundationModule.IconButton
 local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
+local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 local agentSpecDebugSheetModule = require(buildExperience.Components.AgentSpecDebug.AgentSpecDebugSheet)
 local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local flyoutLeftHeader = require(parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local fFlagEnableHomeRobloxLogo = require(parent.SharedFlags).FFlagEnableHomeRobloxLogo
 
-local function renderFlyoutLeftHeader() --[[ line: 28 ]]
+local function renderFlyoutLeftHeader() --[[ line: 29 ]]
 	-- upvalues: reactModule (ref), flyoutLeftHeader (ref), localizationStringsModule (ref), fFlagEnableHomeRobloxLogo (ref), flyoutSidePanelIXP (ref)
 	return reactModule.createElement(flyoutLeftHeader, {
 		isRobloxLogoEnabled = false,
@@ -25,8 +26,8 @@ local function renderFlyoutLeftHeader() --[[ line: 28 ]]
 	})
 end
 
-return function(p0) --[[ line: 39 | named "BuildPageHeader" ]]
-	-- upvalues: flyoutSidePanelIXP (ref), reactModule (ref), creatorAgentChatModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), view (ref), headerBar (ref), renderFlyoutLeftHeader (ref), localizationStringsModule (ref), agentSpecDebugSheetModule (ref)
+return function(p0) --[[ line: 40 | named "BuildPageHeader" ]]
+	-- upvalues: flyoutSidePanelIXP (ref), reactModule (ref), creatorAgentChatModule (ref), iconButton (ref), iconName (ref), iconVariant (ref), buttonVariant (ref), inputSize (ref), view (ref), headerBar (ref), renderFlyoutLeftHeader (ref), localizationStringsModule (ref), agentSpecDebugSheetModule (ref)
 	local var7 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 	local var8, var9 = reactModule.useState(false)
 	
@@ -44,14 +45,17 @@ return function(p0) --[[ line: 39 | named "BuildPageHeader" ]]
 			paddingRight = UDim.new(0, 0),
 			renderLeft = if var7 then renderFlyoutLeftHeader else nil,
 			title = if var7 then nil else localizationStringsModule.BUILD_HEADER_TITLE,
-			renderRight = if creatorAgentChatModule.experimentOverride.isEnabled() then function() --[[ line: 44 ]]
-				-- upvalues: reactModule (copy), iconButton (copy), iconName (copy), buttonVariant (copy), inputSize (copy), var9 (ref)
+			renderRight = if creatorAgentChatModule.experimentOverride.isEnabled() then function() --[[ line: 45 ]]
+				-- upvalues: reactModule (copy), iconButton (copy), iconName (copy), creatorAgentChatModule (copy), iconVariant (copy), buttonVariant (copy), inputSize (copy), var9 (ref)
 				return reactModule.createElement(iconButton, {
 					isCircular = true,
-					icon = iconName.LabBeaker,
+					icon = {
+						name = iconName.LabBeaker,
+						variant = if creatorAgentChatModule.experimentOverride.get() ~= nil then iconVariant.Regular else iconVariant.Filled
+					},
 					variant = buttonVariant.Utility,
 					size = inputSize.Medium,
-					onActivated = function() --[[ line: 50 ]]
+					onActivated = function() --[[ line: 56 ]]
 						-- upvalues: var9 (copy)
 						var9(true)
 					end
@@ -59,7 +63,7 @@ return function(p0) --[[ line: 39 | named "BuildPageHeader" ]]
 			end else nil
 		}),
 		AgentSpecSheet = if var8 then reactModule.createElement(agentSpecDebugSheetModule, {
-			onClose = function() --[[ line: 75 ]]
+			onClose = function() --[[ line: 81 ]]
 				-- upvalues: var9 (ref)
 				var9(false)
 			end

@@ -1,4 +1,7 @@
-﻿local t = {
+﻿local sharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
+local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
+local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
+local t = {
 	ask_for_logs = {
 		completed = "Requested logs",
 		failed = "Couldn't request logs",
@@ -164,9 +167,10 @@ return {
 	CHAT_ASSISTANT_STILL_WORKING = "Working on it. You can leave the app, play Roblox, or start another project while you wait.",
 	CHAT_ASSISTANT_STOPPED = "You stopped Build.",
 	CHAT_BUILD_CHAT_PAGE_TITLE = "New Game",
-	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = "I've completed creating and publishing your game. You can open it to playtest.",
+	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = if fFlagEnableTeamTestLua then "I've completed creating your game and saved a new version. You can open it to playtest." else "I've completed creating and publishing your game. You can open it to playtest.",
 	CHAT_COMPLETED_GAME_CREATION_TITLE = "Completed game creation",
 	CHAT_COMPOSER_PLACEHOLDER = "Describe an idea",
+	CHAT_COPY_TEXT = "Copy text",
 	CHAT_CREATE_UNIVERSE_ERROR = "Your game wasn't created. Try again.",
 	CHAT_DEFAULT_FAILURE = "Build couldn't connect. Try again.",
 	CHAT_ERROR_CONFLICT = "Build is busy. Wait a minute and try again.",
@@ -191,9 +195,11 @@ return {
 	CHAT_QUESTION_COMPOSER_ANSWER = "Answer Build's question below.",
 	CHAT_QUESTION_MULTIPLE = "Build has some questions",
 	CHAT_QUESTION_SINGLE = "Build has a question",
+	CHAT_REVERT_CONFIRMATION_ACTION = "Revert",
 	CHAT_REVERT_CONFIRMATION_DESCRIPTION = "This version will become your latest published version.",
-	CHAT_REVERT_FAILURE = "Your publish wasn't reverted. Try again.",
-	CHAT_REVERT_SUCCESS = "Reverted publish.",
+	CHAT_REVERT_CONFIRMATION_TITLE = "Revert last change?",
+	CHAT_REVERT_FAILURE = if fFlagEnableTeamTestLua then "A reverted version wasn't created. Try again." else "Your publish wasn't reverted. Try again.",
+	CHAT_REVERT_SUCCESS = if fFlagEnableTeamTestLua then "Created a reverted version." else "Reverted publish.",
 	CHAT_TOOL = "tool",
 	CHAT_TURN_ACTIVITY = "Turn activity",
 	CHAT_UPDATE_WITH_CHANGES = "Update with changes",
@@ -212,6 +218,8 @@ return {
 	GAME_CONFIGURATION_AUDIENCE_PAGE_TITLE = "Experience audience",
 	GAME_CONFIGURATION_AUDIENCE_PRIVATE = "Private",
 	GAME_CONFIGURATION_AUDIENCE_PUBLIC = "Public",
+	GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED = "Publish to expand your audience",
+	GAME_CONFIGURATION_AUDIENCE_PUBLISH_REQUIRED_DESCRIPTION = "Publish your experience to make it available to this audience.",
 	GAME_CONFIGURATION_AUDIENCE_UNKNOWN = "Unknown",
 	GAME_CONFIGURATION_CONTENT_RATING = "Content rating",
 	GAME_CONFIGURATION_CREATOR_HUB = "Creator Hub",
@@ -219,10 +227,11 @@ return {
 	GAME_CONFIGURATION_GAME_DETAILS = "Game details",
 	GAME_CONFIGURATION_GAME_DETAILS_BODY = "Manage how your game appears to others.",
 	GAME_CONFIGURATION_ICON_AND_THUMBNAILS = "Icon & thumbnails",
-	GAME_CONFIGURATION_LINK_COPIED = if not require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagEnableShareSheet then "Link copied to clipboard." else nil,
+	GAME_CONFIGURATION_LINK_COPIED = if not fFlagEnableShareSheet then "Link copied to clipboard." else nil,
 	GAME_CONFIGURATION_LOADING = "Loading...",
 	GAME_CONFIGURATION_PREVIEW = "Preview",
 	GAME_CONFIGURATION_PUBLISH = "Publish",
+	GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR = "Your account is too new to publish. Try again when it's 2 days old.",
 	GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR = "Your game was published, but couldn't be made public. Try again.",
 	GAME_CONFIGURATION_PUBLISH_ERROR = "Your game couldn't be published. Try again.",
 	GAME_CONFIGURATION_PUBLISH_SUCCESS = "Your game is ready to play on Roblox!",
@@ -401,6 +410,8 @@ return {
 	TITLE_DESCRIPTION_DESCRIPTION_LABEL = "Description",
 	TITLE_DESCRIPTION_TITLE_LABEL = "Title",
 	TITLE_DESCRIPTION_TITLE = "Title & description",
+	UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION = "You're playtesting your latest version. Publish it when you're ready to share.",
+	UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE = "Your changes aren\226\128\153t live yet",
 	USER_PICKER_NO_RESULTS = "No results",
 	VERSION_HISTORY_AUTOSAVED = "Autosaved",
 	VERSION_HISTORY_CANCEL = "Cancel",
@@ -414,88 +425,91 @@ return {
 	VERSION_HISTORY_RESTORE = "Restore",
 	VERSION_HISTORY_RESTORE_FAILED = "Couldn't restore this version. Try again.",
 	VERSION_HISTORY_TITLE = "Version history",
-	formatBuildGreeting = function(p0) --[[ line: 107 ]]
+	formatBuildGreeting = function(p0) --[[ line: 110 ]]
 		return if p0 == "" then "Hi" else `Hi, {p0}`
 	end,
-	formatGameSharedWithTarget = function(p1) --[[ line: 115 ]]
-		return if p1 == "" then "Game shared" else `Game shared with {p1}`
+	formatChatRevertConfirmationDescription = function(p1) --[[ line: 189 ]]
+		return `Confirm to revert the latest change and go back to {if p1 < 10 then `v0{p1}` else `v{p1}`}.`
 	end,
-	formatShareExperience = function(p2) --[[ line: 111 ]]
-		return `Share {p2}`
+	formatGameSharedWithTarget = function(p2) --[[ line: 118 ]]
+		return if p2 == "" then "Game shared" else `Game shared with {p2}`
 	end,
-	formatChatFailedTool = function(p3) --[[ line: 157 ]]
-		return `Failed {p3}`
+	formatShareExperience = function(p3) --[[ line: 114 ]]
+		return `Share {p3}`
 	end,
-	formatChatFinishedTool = function(p4) --[[ line: 153 ]]
-		return `Finished {p4}`
+	formatChatFailedTool = function(p4) --[[ line: 160 ]]
+		return `Failed {p4}`
 	end,
-	formatChatRunningTool = function(p5) --[[ line: 161 ]]
-		return `Running {p5}`
+	formatChatFinishedTool = function(p5) --[[ line: 156 ]]
+		return `Finished {p5}`
 	end,
-	formatChatTaskCount = function(p6) --[[ line: 134 ]]
-		return if p6 == 1 then "1 task completed" else `{p6} tasks completed`
+	formatChatRunningTool = function(p6) --[[ line: 164 ]]
+		return `Running {p6}`
 	end,
-	formatChatThinkingDuration = function(p7) --[[ line: 148 ]]
-		return `Thinking for {math.max(0, math.floor(p7))}s`
+	formatChatTaskCount = function(p7) --[[ line: 137 ]]
+		return if p7 == 1 then "1 task completed" else `{p7} tasks completed`
 	end,
-	formatChatTurnFailureMessage = function(p8, p9) --[[ line: 130 ]]
-		return if p9 == nil then p8 else `({p9}) {p8}`
+	formatChatThinkingDuration = function(p8) --[[ line: 151 ]]
+		return `Thinking for {math.max(0, math.floor(p8))}s`
 	end,
-	formatChatWorkedDuration = function(p10) --[[ line: 138 ]]
-		local maxValue = math.max(0, math.floor(p10 + 0.5))
+	formatChatTurnFailureMessage = function(p9, p10) --[[ line: 133 ]]
+		return if p10 == nil then p9 else `({p10}) {p9}`
+	end,
+	formatChatWorkedDuration = function(p11) --[[ line: 141 ]]
+		local maxValue = math.max(0, math.floor(p11 + 0.5))
 		
 		return if maxValue < 60 then `Worked for {maxValue}s` else `Worked for {math.floor(maxValue / 60)}m{maxValue % 60}s`
 	end,
-	getChatToolActivityLabel = function(p11, p12) --[[ line: 165 ]]
+	getChatToolActivityLabel = function(p12, p13) --[[ line: 168 ]]
 		-- upvalues: t (ref)
-		local var2 = t[p11]
+		local var3 = t[p12]
 		
-		return if var2 == nil then nil elseif p12 == "completed" then var2.completed elseif p12 == "failed" then var2.failed else var2.running
+		return if var3 == nil then nil elseif p13 == "completed" then var3.completed elseif p13 == "failed" then var3.failed else var3.running
 	end,
-	formatMyCreationsUniverseName = function(p13) --[[ line: 122 ]]
-		return `Universe {p13}`
+	formatMyCreationsUniverseName = function(p14) --[[ line: 125 ]]
+		return `Universe {p14}`
 	end,
-	formatPrivateInvitesCount = function(p14, p15) --[[ line: 210 ]]
-		return `{p14}/{p15}`
+	formatPrivateInvitesCount = function(p15, p16) --[[ line: 217 ]]
+		return `{p15}/{p16}`
 	end,
-	formatPrivateInvitesSent = function(p16, p17) --[[ line: 206 ]]
-		return `{p16} of {p17} playtesters added`
+	formatPrivateInvitesSent = function(p17, p18) --[[ line: 213 ]]
+		return `{p17} of {p18} playtesters added`
 	end,
-	formatPrivateInvitesSubtitle = function(p18) --[[ line: 202 ]]
-		return `Choose up to {p18} friends, then share the link to the game.`
+	formatPrivateInvitesSubtitle = function(p19) --[[ line: 209 ]]
+		return `Choose up to {p19} friends, then share the link to the game.`
 	end,
-	formatSubagentStatusCompletedTasks = function(p19) --[[ line: 126 ]]
-		return `{p19} completed tasks`
+	formatSubagentStatusCompletedTasks = function(p20) --[[ line: 129 ]]
+		return `{p20} completed tasks`
 	end,
-	formatUserPickerUsername = function(p20) --[[ line: 214 ]]
-		return `@{p20}`
+	formatUserPickerUsername = function(p21) --[[ line: 221 ]]
+		return `@{p21}`
 	end,
-	formatVersionHistoryCreatedDate = function(p21, p22, p23) --[[ line: 190 ]]
-		return `{p21} {p22}, {p23}`
+	formatVersionHistoryCreatedDate = function(p22, p23, p24) --[[ line: 197 ]]
+		return `{p22} {p23}, {p24}`
 	end,
-	formatVersionHistoryRestoredBadge = function(p24) --[[ line: 186 ]]
-		return `Restored {if p24 < 10 then `v0{p24}` else `v{p24}`}`
+	formatVersionHistoryRestoredBadge = function(p25) --[[ line: 193 ]]
+		return `Restored {if p25 < 10 then `v0{p25}` else `v{p25}`}`
 	end,
-	formatVersionHistoryVersionLabel = function(p25, p26) --[[ line: 198 ]]
-		return `{if p25 < 10 then `v0{p25}` else `v{p25}`} \194\183 {p26}`
+	formatVersionHistoryVersionLabel = function(p26, p27) --[[ line: 205 ]]
+		return `{if p26 < 10 then `v0{p26}` else `v{p26}`} \194\183 {p27}`
 	end,
-	formatVersionHistoryVersionNumber = function(p27) --[[ line: 179 ]]
-		return if p27 < 10 then `v0{p27}` else `v{p27}`
+	formatVersionHistoryVersionNumber = function(p28) --[[ line: 182 ]]
+		return if p28 < 10 then `v0{p28}` else `v{p28}`
 	end,
-	formatVersionHistoryVersionTitle = function(p28) --[[ line: 194 ]]
-		return `Version {p28}`
+	formatVersionHistoryVersionTitle = function(p29) --[[ line: 201 ]]
+		return `Version {p29}`
 	end,
-	formatCreatorCreditAdditionalUsed = function(p29, p30) --[[ line: 248 ]]
-		return `{p29} of {p30} used`
+	formatCreatorCreditAdditionalUsed = function(p30, p31) --[[ line: 255 ]]
+		return `{p30} of {p31} used`
 	end,
-	formatCreatorCreditAdditionalUsedNoLimit = function(p31) --[[ line: 252 ]]
-		return `{p31} used \226\128\162 No limit`
+	formatCreatorCreditAdditionalUsedNoLimit = function(p32) --[[ line: 259 ]]
+		return `{p32} used \226\128\162 No limit`
 	end,
-	formatCreatorCreditLimitBelowSpend = function(p32) --[[ line: 256 ]]
-		return `Limit can't be below the {p32} Robux already spent today.`
+	formatCreatorCreditLimitBelowSpend = function(p33) --[[ line: 263 ]]
+		return `Limit can't be below the {p33} Robux already spent today.`
 	end,
-	formatCreatorCreditPercentUsed = function(p33) --[[ line: 222 ]]
-		local floored = math.floor(p33 + 0.5)
+	formatCreatorCreditPercentUsed = function(p34) --[[ line: 229 ]]
+		local floored = math.floor(p34 + 0.5)
 		
 		if floored < 0 then
 			floored = 0
@@ -505,16 +519,16 @@ return {
 		end
 		return `{floored}% used`
 	end,
-	formatCreatorCreditRobuxUsage = function(p34, p35) --[[ line: 233 ]]
-		return `{p34}/{p35}`
+	formatCreatorCreditRobuxUsage = function(p35, p36) --[[ line: 240 ]]
+		return `{p35}/{p36}`
 	end,
-	formatCreatorCreditRobuxUsageUnlimited = function(p36) --[[ line: 237 ]]
-		return `{p36} used`
+	formatCreatorCreditRobuxUsageUnlimited = function(p37) --[[ line: 244 ]]
+		return `{p37} used`
 	end,
-	formatCreatorCreditResetHours = function(value) --[[ line: 241 ]]
+	formatCreatorCreditResetHours = function(value) --[[ line: 248 ]]
 		return if value == 1 then "Resets in 1 hour" else `Resets in {value} hours`
 	end,
-	formatCreatorCreditUsageTrailing = function(p37, p38) --[[ line: 218 ]]
-		return `{p37} of {p38}`
+	formatCreatorCreditUsageTrailing = function(p38, p39) --[[ line: 225 ]]
+		return `{p38} of {p39}`
 	end
 }

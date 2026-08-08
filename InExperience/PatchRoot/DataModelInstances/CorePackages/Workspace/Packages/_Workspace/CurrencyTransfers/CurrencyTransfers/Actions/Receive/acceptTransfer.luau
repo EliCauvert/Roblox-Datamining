@@ -43,6 +43,9 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
 					logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_succeeded)
 				end
+				if sharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction then
+					p0.triggerOnPromptDismissCommitted()
+				end
 				handleReceiveSuccessModule(p0)
 				
 				return
@@ -54,7 +57,7 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 				end
 				handleReceiveErrorModule(p0, nil)
 			end
-		end):catch(function(p1) --[[ line: 76 ]]
+		end):catch(function(p1) --[[ line: 80 ]]
 			-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleReceiveBlockModule (copy), transferRetryOriginModule (copy), handleReceiveErrorModule (copy)
 			logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 			

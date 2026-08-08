@@ -14,7 +14,10 @@ return {
 	Hooks = {
 		useStableSignal = require(script.Hooks.useStableSignal),
 		usePropSignal = require(script.Hooks.usePropSignal),
-		useFinishChatWindowMessageRenderIntervals = require(script.Hooks.useFinishChatWindowMessageRenderIntervals)
+		useFinishChatWindowMessageRenderIntervals = require(script.Hooks.useFinishChatWindowMessageRenderIntervals),
+		useFocusInputBar = require(script.Hooks.useFocusInputBar),
+		useInExperienceLocalization = require(script.Hooks.useInExperienceLocalization),
+		useLastInputGroup = require(script.Hooks.useLastInputGroup)
 	},
 	Telemetry = {
 		ExpChatPerfTracker = require(script.Telemetry.ExpChatPerfTracker),
@@ -23,6 +26,7 @@ return {
 	Flags = {
 		FFlagExpChatScrollPerfTracking = require(script.Flags.FFlagExpChatScrollPerfTracking),
 		FFlagExpChatAddressFrame0Flash = require(script.Flags.FFlagExpChatAddressFrame0Flash),
+		FFlagExpChatPresetBoltInMessageLayout = require(script.Flags.FFlagExpChatPresetBoltInMessageLayout),
 		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName)
 	}
 }

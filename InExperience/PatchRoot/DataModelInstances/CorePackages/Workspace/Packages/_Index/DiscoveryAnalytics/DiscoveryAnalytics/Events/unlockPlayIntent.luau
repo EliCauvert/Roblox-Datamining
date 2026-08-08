@@ -5,10 +5,10 @@ local var1 = tModule.strictInterface({
 	universeId = tModule.string,
 	upsellName = tModule.string,
 	playabilityStatus = tModule.optional(tModule.string),
-	pageName = if require(parent.SharedFlags).FFlagLuaAppLogPageContextUnlockPlayIntent then tModule.optional(tModule.string) else nil
+	pageName = tModule.optional(tModule.string)
 })
 
-return function(p0, p1) --[[ line: 17 ]]
+return function(p0, p1) --[[ line: 14 ]]
 	-- upvalues: var1 (ref), flaggedMutedError (ref)
 	local var2, var3 = var1(p1)
 	

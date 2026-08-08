@@ -79,6 +79,7 @@ return {
 	Previously = "Feature.PlayerSearchResults.Label.Previously",
 	SentFromWithContext = "Feature.Friends.Label.SentFromWithContext",
 	ThisIsYou = "Feature.PlayerSearchResults.Label.ThisIsYou",
+	Classmates = "Feature.Schools.Label.Classmates",
 	MutualText = "Feature.Friends.Mutual",
 	MutualsText = "Feature.Friends.Mutuals",
 	MutualConnectionTitle = if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.MutualFriendTitle" else "Feature.Friends.Label.MutualConnectionTitle",

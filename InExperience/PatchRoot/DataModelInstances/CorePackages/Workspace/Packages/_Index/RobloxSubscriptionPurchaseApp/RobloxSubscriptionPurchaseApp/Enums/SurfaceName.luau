@@ -9,5 +9,7 @@
 	DeepLinkUpsell = "DeepLinkUpsell",
 	HomepageFaeTrialBanner = "HomepageFaeTrialBanner",
 	InGameRobuxUpsell = "InGameRobuxUpsell",
-	SettingsAppThemeUpsell = "SettingsAppThemeUpsell"
+	SettingsAppThemeUpsell = "SettingsAppThemeUpsell",
+	ProfileFramesUpsell = "ProfileFramesUpsell",
+	AiBackgroundUpsell = "AiBackgroundUpsell"
 }

@@ -24,7 +24,7 @@ local function ConnectedPublishGameSheet() --[[ line: 21 ]]
 			return localization.new(localizationService.RobloxLocaleId)
 		end, {})
 	}, {
-		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
 			PublishGameSheet = reactModule.createElement(publishGameSheetModule, {
 				isOpen = var14.useIsOpen(),

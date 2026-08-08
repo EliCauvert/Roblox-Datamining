@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ProfileInspectAndBuyKeepUpsellDialogOpen", false) and require(script:FindFirstAncestor("ProfilePlatform").Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)

@@ -451,7 +451,7 @@ function AppChatEntryPoint(p0) --[[ line: 145 ]]
 	end
 	useEffect(function() --[[ line: 599 ]]
 		-- upvalues: getFFlagIsSquadEnabled (copy), var46 (ref), var45 (ref), var70 (write), getFFlagEnableCrossExpVoice (copy), var71 (write), var51 (ref), navigateIntoChatModule (copy), enumScreensModule (copy), var48 (ref)
-		if getFFlagIsSquadEnabled() and var46 and (var45.initialConversationId == "" and var70) then
+		if getFFlagIsSquadEnabled() and var46 and (var45.initialConversationId == "" and var45.requestedRoute == nil) and var70 then
 			if getFFlagEnableCrossExpVoice() and var71 then
 				var51(navigateIntoChatModule({
 					screen = enumScreensModule.SquadLobby,
@@ -466,11 +466,11 @@ function AppChatEntryPoint(p0) --[[ line: 145 ]]
 			}))
 		end
 	end, {})
-	useEffect(function() --[[ line: 620 ]]
+	useEffect(function() --[[ line: 621 ]]
 		-- upvalues: var69 (ref), var45 (ref)
 		var69(var45.rnBypassActionSignal)
 	end, { var45.rnBypassActionSignal, var69 })
-	useEffect(function() --[[ line: 624 ]]
+	useEffect(function() --[[ line: 625 ]]
 		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), cryoModule (copy), var53 (ref), var54 (ref)
 		if not fFlagAppChatTopBarSignalsStoreModule and not cryoModule.isEmpty(var53) then
 			var54({})
@@ -480,18 +480,18 @@ function AppChatEntryPoint(p0) --[[ line: 145 ]]
 		fFlagAppChatTopBarSignalsStoreModule,
 		var53
 	})
-	local var72 = useAppPolicyModule(function(p28) --[[ line: 630 ]]
+	local var72 = useAppPolicyModule(function(p28) --[[ line: 631 ]]
 		return p28.getChatHeaderSearch()
 	end)
-	local var73 = useAppPolicyModule(function(p29) --[[ line: 633 ]]
+	local var73 = useAppPolicyModule(function(p29) --[[ line: 634 ]]
 		return p29.getChatHeaderCreateChatGroup()
 	end)
-	local var74 = useAppPolicyModule(function(p30) --[[ line: 636 ]]
+	local var74 = useAppPolicyModule(function(p30) --[[ line: 637 ]]
 		-- upvalues: getFFlagHideNotificationIconForVRModule (copy)
 		return p30.getChatHeaderNotifications() and (not getFFlagHideNotificationIconForVRModule() or p30.getWebViewSupport())
 	end)
 	local var75 = usePageSideMargin(var57.current, fFlagLuaAppCompositionAppChat)
-	local var76 = reactModule.useMemo(function() --[[ line: 642 ]]
+	local var76 = reactModule.useMemo(function() --[[ line: 643 ]]
 		-- upvalues: var46 (ref), var75 (ref)
 		return {
 			default = 12,
@@ -511,7 +511,7 @@ function AppChatEntryPoint(p0) --[[ line: 145 ]]
 				parameters = var45.parameters,
 				setActiveConversationId = var45.setActiveConversationId,
 				setBackButtonEnabled = var45.setBackButtonEnabled,
-				setTabBarVisible = useCallback(function(p31) --[[ line: 668 ]]
+				setTabBarVisible = useCallback(function(p31) --[[ line: 669 ]]
 					-- upvalues: var51 (ref), setTabBarVisible (copy)
 					var51(setTabBarVisible(p31))
 				end, { var51 }),
@@ -549,7 +549,7 @@ function AppChatEntryPoint(p0) --[[ line: 145 ]]
 	if not var46 then
 		var79 = reactModule.createElement(layerCollectorProvider, {}, { navigation = var79 })
 	end
-	local var80 = if getFFlagIsSquadEnabled() then useSelector(function(p32) --[[ line: 741 ]]
+	local var80 = if getFFlagIsSquadEnabled() then useSelector(function(p32) --[[ line: 742 ]]
 		local currentSquad = p32.Squad and (p32.Squad.Squad and p32.Squad.Squad.currentSquad)
 		
 		return if currentSquad and currentSquad.squadId then currentSquad.squadId else nil
@@ -583,7 +583,7 @@ function AppChatEntryPoint(p0) --[[ line: 145 ]]
 	})
 	
 	if fFlagAppChatPerfTrackingModule then
-		useEffect(function() --[[ line: 794 ]]
+		useEffect(function() --[[ line: 795 ]]
 			-- upvalues: appChatPerfTrackerModule (copy), var45 (ref), var50 (ref), var80 (ref)
 			appChatPerfTrackerModule.setSharedContext({
 				placement = var45.chatPlacement,

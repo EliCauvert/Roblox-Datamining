@@ -42,7 +42,7 @@ return function() --[[ line: 38 | named "starterScript" ]]
 	enhancedVideoInteractivityControls.Parent = coreGuiService
 	reactRobloxModule.createRoot(enhancedVideoInteractivityControls):render(reactModule.createElement("ScreenGui", { DisplayOrder = -5 }, {
 		LocalizationProvider = reactModule.createElement(localizationProvider, { localization = var14 }, {
-			FoundationProvider = reactModule.createElement(foundationProvider, { theme = enums.Theme.Dark }, {
+			FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = enums.ColorMode.Dark }, {
 				AdLabel = reactModule.createElement(adLabelModule, {
 					sendPauseEvent = function() --[[ line: 79 ]]
 						-- upvalues: adDisclosurePauseEvent (ref)

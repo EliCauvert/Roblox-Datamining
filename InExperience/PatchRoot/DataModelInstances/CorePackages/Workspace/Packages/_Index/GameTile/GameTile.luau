@@ -32,11 +32,12 @@
 	getGameTileHiddenStore = require(script.HiddenGameTile.getGameTileHiddenStore),
 	HiddenTileContent = require(script.HiddenGameTile.HiddenTileContent),
 	EmphasisGameTile = require(script.EmphasisGameTile),
-	TwoByOneGameTile = require(script.TwoByOneGameTile),
-	TwoByOneGameTileTelemetry = require(script.TwoByOneGameTileTelemetry),
-	OneByTwoTile = require(script.OneByTwoTile),
 	getTileBadgeByPositionConfigFromEntry = require(script.getTileBadgeByPositionConfigFromEntry),
 	ItemLayoutDataParsingUtils = require(script.ItemLayoutDataParsingUtils),
+	useIsHoveredTile = require(script.useIsHoveredTile),
+	useValidTileBadges = require(script.Overlays.useValidTileBadges),
+	GameTileOverflowMenu = require(script.GameTileOverflowMenu),
+	getAvailableGameTileOverflowMenuItems = require(script.getAvailableGameTileOverflowMenuItems),
 	ZoomAnimatedFrame = require(script.ZoomAnimatedFrame),
 	["jest.config"] = script["jest.config"]
 }

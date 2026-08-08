@@ -5,30 +5,38 @@ local promiseModule = require(parent.Promise)
 local useNavigation = require(parent.Navigation).useNavigation
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
+local fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyKeepUpsellDialogOpen)
+local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
 
-return function(p0) --[[ line: 13 | named "useOpenRobuxUpsell" ]]
-	-- upvalues: useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), reactModule (ref), parent (ref), promiseModule (ref)
-	local var4 = useDispatch()
-	local var5 = useNavigation()
-	local var6 = useProfileWrapperContextModule()
+return function(p0) --[[ line: 18 | named "useOpenRobuxUpsell" ]]
+	-- upvalues: useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), reactModule (ref), parent (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (ref), promiseModule (ref)
+	local var6 = useDispatch()
+	local var7 = useNavigation()
+	local var8 = useProfileWrapperContextModule()
 	
-	return reactModule.useCallback(function() --[[ line: 18 ]]
-		-- upvalues: parent (copy), var4 (ref), var6 (ref), var5 (ref), promiseModule (copy), p0 (ref)
+	return reactModule.useCallback(function() --[[ line: 23 ]]
+		-- upvalues: parent (copy), var6 (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), var8 (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), var7 (ref), promiseModule (copy), p0 (ref)
+		local purchasePromptLiteModule = require(parent.PurchasePromptLite)
 		local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-		var4(require(parent.PurchasePromptLite).Thunks.OpenCentralOverlayForUnifiedPurchasePrompt({
+		var6(purchasePromptLiteModule.Thunks.OpenCentralOverlayForUnifiedPurchasePrompt({
 			productPayload = { kind = "RobuxUpsell" },
+			purchaseAnalyticsMetadata = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
+				surface = purchasePromptLiteModule.Enums.ProductPurchaseSurface.Profile
+			} else nil,
 			purchaseCallbacks = {
-				onFlowComplete = function() --[[ line: 27 ]]
-					-- upvalues: var4 (copy), closeCentralOverlay (ref), var6 (copy), var5 (copy)
-					var4(closeCentralOverlay())
-					local var7 = if var6.postPurchase then var6.postPurchase.refreshRobuxBalance else nil
+				onFlowComplete = function() --[[ line: 35 ]]
+					-- upvalues: var6 (copy), closeCentralOverlay (ref), var8 (copy), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), var7 (copy)
+					var6(closeCentralOverlay())
+					local var10 = if var8.postPurchase then var8.postPurchase.refreshRobuxBalance else nil
 					
-					if var7 then
-						var7()
+					if var10 then
+						var10()
 					end
-					var5.goBack()
+					if not fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
+						var7.goBack()
+					end
 				end,
-				fetchProductInfo = function() --[[ line: 37 ]]
+				fetchProductInfo = function() --[[ line: 47 ]]
 					-- upvalues: promiseModule (copy), p0 (copy)
 					return promiseModule.resolve({
 						IsForSale = true,
@@ -38,5 +46,5 @@ return function(p0) --[[ line: 13 | named "useOpenRobuxUpsell" ]]
 				end
 			}
 		}))
-	end, { var4, var5, var6.postPurchase, p0 })
+	end, { var6, var7, var8.postPurchase, p0 })
 end

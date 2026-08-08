@@ -2,7 +2,7 @@
 
 return {
 	Analytics = require(script.Analytics),
-	canRenderNativeMoments = function(p0) --[[ line: 83 ]]
+	canRenderNativeMoments = function(p0) --[[ line: 89 ]]
 		return p0.isTabEnabled or p0.isFlyoutEntryEnabled and p0.platformIntegrationEnabled
 	end,
 	Flags = {
@@ -11,7 +11,9 @@ return {
 		GetFFlagMomentsStickerButton = require(script.Flags.GetFFlagMomentsStickerButton),
 		GetFFlagMomentsAnalyticsSchemaIdentity = require(script.Flags.GetFFlagMomentsAnalyticsSchemaIdentity),
 		FFlagMomentsFeedHealthAnalytics = require(script.Flags.FFlagMomentsFeedHealthAnalytics),
-		FFlagMomentsProfileGridInfiniteLoad = require(script.Flags.FFlagMomentsProfileGridInfiniteLoad)
+		FFlagMomentsProfileGridInfiniteLoad = require(script.Flags.FFlagMomentsProfileGridInfiniteLoad),
+		FFlagMomentsRealtimeObservability = require(script.Flags.FFlagMomentsRealtimeObservability),
+		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync)
 	},
 	Components = {
 		GradientBackdrop = require(script.Components.GradientBackdrop),
@@ -34,7 +36,7 @@ return {
 		useDeviceInsets = require(script.Hooks.useDeviceInsets),
 		useFormFactor = require(script.Hooks.useFormFactor),
 		useImageLoadingState = require(script.Hooks.useImageLoadingState),
-		useMomentsGating = function(...) --[[ line: 87 ]]
+		useMomentsGating = function(...) --[[ line: 93 ]]
 			return require(script.Hooks.useMomentsGating)(...)
 		end,
 		useScreenSize = require(script.Hooks.useScreenSize),
@@ -50,7 +52,8 @@ return {
 		MomentMediaView = require(script.Media.Components.MomentMediaView),
 		MomentMediaTile = require(script.Media.Components.MomentMediaTile),
 		useMomentMediaController = require(script.Media.Components.useMomentMediaController),
-		feedPlaybackSuspension = require(script.Media.feedPlaybackSuspension)
+		feedPlaybackSuspension = require(script.Media.feedPlaybackSuspension),
+		reportModalCovering = require(script.Media.reportModalCovering)
 	},
 	Performance = require(script.Performance),
 	Utils = {

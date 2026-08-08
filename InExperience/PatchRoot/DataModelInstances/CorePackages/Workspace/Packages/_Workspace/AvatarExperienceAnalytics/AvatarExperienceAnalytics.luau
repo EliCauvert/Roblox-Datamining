@@ -41,6 +41,8 @@
 		getUnifiedEventsForMIS = require(script.Utils.getUnifiedEventsForMIS),
 		getUnifiedLoggingSurface = require(script.Utils.getUnifiedLoggingSurface),
 		getUnifiedLoggingSurfaceForAppPage = require(script.Utils.getUnifiedLoggingSurfaceForAppPage),
+		getUnifiedLoggingSurfaceForRoute = require(script.Utils.getUnifiedLoggingSurfaceForRoute),
+		mapMarketplaceSurfaceToUnifiedLoggingSurface = require(script.Utils.mapMarketplaceSurfaceToUnifiedLoggingSurface),
 		getItemSelectionAction = require(script.Utils.getItemSelectionAction),
 		getCatalogItemUnifiedLoggingFields = require(script.Utils.getCatalogItemUnifiedLoggingFields)
 	},

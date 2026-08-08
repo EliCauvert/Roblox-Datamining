@@ -1,4 +1,6 @@
-﻿local constantsModule = require(script:FindFirstAncestor("Moments").Constants)
+﻿local moments = script:FindFirstAncestor("Moments")
+local constantsModule = require(moments.Constants)
+local fFlagMomentsRecommendationClientEventTimestampModule = require(moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
 local t = {
 	eventName = "RecommendationActionEvent",
 	throttlingPercentage = 10000,
@@ -7,15 +9,16 @@ local t = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p0) --[[ line: 28 | named "emitRecommendationAction" ]]
-	-- upvalues: constantsModule (ref), t (ref)
-	local var2 = if p0.actionType == constantsModule.RecommendationActionType.Play then game:GetService("HttpService"):GenerateGUID(false) else nil
+return function(p0) --[[ line: 30 | named "emitRecommendationAction" ]]
+	-- upvalues: constantsModule (ref), t (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref)
+	local var4 = if p0.actionType == constantsModule.RecommendationActionType.Play then game:GetService("HttpService"):GenerateGUID(false) else nil
 	game:GetService("TelemetryService"):LogEvent(t, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
 			playsessionid = "",
 			universeid = constantsModule.MOMENTS_UNIVERSE_ID,
 			placeid = constantsModule.MOMENTS_PLACE_ID,
+			client_event_timestamp_ms = if fFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
 			item_id = p0.itemId,
 			tracing_id = p0.tracingId,
 			action_type = tostring(p0.actionType),
@@ -25,9 +28,9 @@ return function(p0) --[[ line: 28 | named "emitRecommendationAction" ]]
 			destination_placeid = if p0.destinationPlaceId then tostring(p0.destinationPlaceId) else nil,
 			comment_text = p0.commentText,
 			action_weight = if p0.actionWeight then tostring(p0.actionWeight) else nil,
-			moments_play_intent_id = var2
+			moments_play_intent_id = var4
 		}
 	})
 	
-	return var2
+	return var4
 end

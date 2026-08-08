@@ -1,12 +1,8 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
 
 return {
-	displayName = "ShareSheet",
-	testMatch = { "**/*.test" },
-	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+	projects = {
+		shareSheet["jest.main.config"],
+		shareSheet["jest.mockDataModel.config"]
 	}
 }

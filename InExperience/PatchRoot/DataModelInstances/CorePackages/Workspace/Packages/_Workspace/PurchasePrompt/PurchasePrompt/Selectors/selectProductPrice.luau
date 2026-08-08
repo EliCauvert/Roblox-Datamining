@@ -4,7 +4,7 @@ local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(purchas
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local selectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p0) --[[ line: 31 | named "selectProductPrice" ]]
+return function(p0) --[[ line: 9 | named "selectProductPrice" ]]
 	-- upvalues: getPlayerPriceModule (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref)
 	local collectibleItemInstanceId = p0.promptRequest.collectibleItemInstanceId
 	local var4 = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" or fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow and p0.productPayload and p0.productPayload.timedOptionDays ~= nil then p0.promptRequest.expectedPrice else getPlayerPriceModule(p0.productInfo, p0.accountInfo.membershipType == 4)

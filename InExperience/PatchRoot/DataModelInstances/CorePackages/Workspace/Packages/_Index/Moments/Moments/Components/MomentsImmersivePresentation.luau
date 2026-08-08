@@ -21,21 +21,23 @@ local createSignalTracker = require(moments.SignalTracker).createSignalTracker
 local useNavigationFocus = navigationModule.useNavigationFocus
 local useSignalState = signalsReactModule.useSignalState
 local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
+local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
 local analytics = momentsCommonModule.Analytics
 local eventNames = analytics.EventNames
 local fireAnalyticsEvent = analytics.fireAnalyticsEvent
 local feedPlaybackSuspension = momentsCommonModule.Media.feedPlaybackSuspension
+local reportModalCovering = momentsCommonModule.Media.reportModalCovering
 local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
 local createRecommendationTelemetry = feedModule.createRecommendationTelemetry
 local createMockFeedSource = feedModule.createMockFeedSource
 
-local function PushedFeedSafeAreaProvider(p0) --[[ line: 75 ]]
+local function PushedFeedSafeAreaProvider(p0) --[[ line: 85 ]]
 	-- upvalues: useDeviceInsets (ref), reactModule (ref), momentPushedFeedSafeAreaContextModule (ref)
 	return reactModule.createElement(momentPushedFeedSafeAreaContextModule.Context.Provider, { value = useDeviceInsets() }, { Content = p0.children })
 end
 
-return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePresentation" ]]
-	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), fireAnalyticsEvent (ref), eventNames (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), PushedFeedSafeAreaProvider (ref), momentsHostShellModule (ref)
+return reactModule.memo(function(p1) --[[ line: 95 | named "MomentsImmersivePresentation" ]]
+	-- upvalues: reactModule (ref), createMomentsStoreModule (ref), fFlagEnableArgus (ref), createSignalTracker (ref), createUserMomentsFeedSourceModule (ref), isStudioModule (ref), getFFlagArgusStudioMockFeedModule (ref), createMockFeedSource (ref), createMomentsFeedSourceModule (ref), createRecommendationTelemetry (ref), fireAnalyticsEvent (ref), eventNames (ref), useNavigationFocus (ref), useSignalState (ref), feedPlaybackSuspension (ref), getMomentsPreferencesStoreModule (ref), reportModalCovering (ref), fFlagEnableReportingFlowForMomentsFeed (ref), momentsBackHeaderModule (ref), momentsFeedSurfaceModule (ref), getFFlagMomentsPushedFeedSafeAreaModule (ref), PushedFeedSafeAreaProvider (ref), momentsHostShellModule (ref)
 	local var19 = reactModule.useRef(nil)
 	
 	if var19.current == nil then
@@ -51,7 +53,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePres
 	local feedKind = p1.feedKind
 	local targetUserId = p1.targetUserId
 	local initialIndex = p1.initialIndex
-	local var21 = reactModule.useMemo(function() --[[ line: 104 ]]
+	local var21 = reactModule.useMemo(function() --[[ line: 114 ]]
 		-- upvalues: feedKind (ref), createUserMomentsFeedSourceModule (copy), targetUserId (ref), initialIndex (ref), isStudioModule (copy), getFFlagArgusStudioMockFeedModule (copy), createMockFeedSource (copy), createMomentsFeedSourceModule (copy), current (ref), current_1 (ref)
 		return if feedKind == "user" then createUserMomentsFeedSourceModule(targetUserId or 0, { initialIndex = initialIndex }) elseif isStudioModule() and getFFlagArgusStudioMockFeedModule() then createMockFeedSource() else createMomentsFeedSourceModule(current.getMomentsSessionId, { signalTracker = current_1 })
 	end, {
@@ -61,7 +63,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePres
 		current,
 		current_1
 	})
-	local var22 = reactModule.useMemo(function() --[[ line: 118 ]]
+	local var22 = reactModule.useMemo(function() --[[ line: 128 ]]
 		-- upvalues: feedKind (ref), fFlagEnableArgus (copy), createRecommendationTelemetry (copy), current (ref), current_1 (ref)
 		return if feedKind == "trending" and fFlagEnableArgus then createRecommendationTelemetry({
 			getMomentsSessionId = current.getMomentsSessionId,
@@ -69,7 +71,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePres
 		}) else nil
 	end, { feedKind, current, current_1 })
 	local sessionSource = p1.sessionSource
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function() --[[ line: 144 ]]
 		-- upvalues: current (ref), sessionSource (ref), fireAnalyticsEvent (copy), eventNames (copy)
 		current.setSessionSource(sessionSource)
 		fireAnalyticsEvent(eventNames.TapMomentsTab, {
@@ -77,7 +79,7 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePres
 			source = sessionSource
 		})
 		
-		return function() --[[ line: 141 ]]
+		return function() --[[ line: 151 ]]
 			-- upvalues: current (copy), fireAnalyticsEvent (copy), eventNames (copy), sessionSource (copy)
 			fireAnalyticsEvent(eventNames.MomentsSessionEnded, {
 				moments_session_id = current.getMomentsSessionId(false),
@@ -87,14 +89,17 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePres
 		end
 	end, { sessionSource, current })
 	local var23 = useNavigationFocus()
+	local var24 = useSignalState(feedPlaybackSuspension.getSuspended)
+	local var25 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
+	local getCovering = fFlagEnableReportingFlowForMomentsFeed and useSignalState(reportModalCovering.getCovering)
 	local onBack = p1.onBack
-	local var24 = reactModule.createElement(momentsFeedSurfaceModule, {
+	local var27 = reactModule.createElement(momentsFeedSurfaceModule, {
 		source = var21,
 		telemetry = var22,
-		active = var23,
-		playbackActive = var23 and (not useSignalState(feedPlaybackSuspension.getSuspended) and not useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)),
+		active = var23 and not getCovering,
+		playbackActive = var23 and (not var24 and (not var25 and not getCovering)),
 		initialIndex = initialIndex,
-		header = reactModule.useMemo(function() --[[ line: 165 ]]
+		header = reactModule.useMemo(function() --[[ line: 179 ]]
 			-- upvalues: reactModule (copy), momentsBackHeaderModule (copy), onBack (ref)
 			return reactModule.createElement(momentsBackHeaderModule, { onBack = onBack })
 		end, { onBack })
@@ -105,5 +110,5 @@ return reactModule.memo(function(p1) --[[ line: 85 | named "MomentsImmersivePres
 		openProfile = p1.openProfile,
 		openOwnMoments = p1.openOwnMoments,
 		openMomentsFeedReport = p1.openMomentsFeedReport
-	}, if getFFlagMomentsPushedFeedSafeAreaModule() then reactModule.createElement(PushedFeedSafeAreaProvider, nil, var24) else var24)
+	}, if getFFlagMomentsPushedFeedSafeAreaModule() then reactModule.createElement(PushedFeedSafeAreaProvider, nil, var27) else var27)
 end)

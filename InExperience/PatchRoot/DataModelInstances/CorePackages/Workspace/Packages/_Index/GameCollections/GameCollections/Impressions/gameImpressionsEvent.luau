@@ -18,7 +18,6 @@ local luaAppGameImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt
 local luaAppGameImpressionsShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsShadowThrottlingHundredthsPercent", 10000)
 local luaAppFixRecommendedImpressionsInterface = game:DefineFastFlag("LuaAppFixRecommendedImpressionsInterface", false)
 local fFlagLuaAppGameImpressionsAddUnifiedFields = require(parent.SharedFlags).FFlagLuaAppGameImpressionsAddUnifiedFields
-local fFlagLuaAppGameItemTelemetryServiceTarget = require(parent.SharedFlags).FFlagLuaAppGameItemTelemetryServiceTarget
 local fFlagLuaAppSduiLandingPageEnabled = require(parent.SharedFlags).FFlagLuaAppSduiLandingPageEnabled
 local fFlagLuaAppAddAnalyticsDataToSeeAllImpressions = require(parent.SharedFlags).FFlagLuaAppAddAnalyticsDataToSeeAllImpressions
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
@@ -184,8 +183,8 @@ local t = {
 	}) else nil
 }
 
-return function(p0, p1, p2) --[[ line: 236 ]]
-	-- upvalues: appPage (ref), var10 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var7 (write), fFlagLuaAppGameItemTelemetryServiceTarget (ref), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var8 (write)
+return function(p0, p1, p2) --[[ line: 234 ]]
+	-- upvalues: appPage (ref), var10 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var7 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var8 (write)
 	local _ = nil
 	local var12 = if p2.seeAllFlag and (p1 == appPage.Home or p1 == appPage.Games) then var10 else t[p1]
 	
@@ -212,7 +211,7 @@ return function(p0, p1, p2) --[[ line: 236 ]]
 			eventContext = p1,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = p2,
-			legacyOverrideTargetForEventIngest = if fFlagLuaAppGameItemTelemetryServiceTarget then getPlatformTarget() else nil
+			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	else
 		p0:sendEventDeferred(p1, "gameImpressions", p2)
@@ -222,7 +221,7 @@ return function(p0, p1, p2) --[[ line: 236 ]]
 			eventContext = p1,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = p2,
-			legacyOverrideTargetForEventIngest = if fFlagLuaAppGameItemTelemetryServiceTarget then getPlatformTarget() else nil
+			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	end
 end

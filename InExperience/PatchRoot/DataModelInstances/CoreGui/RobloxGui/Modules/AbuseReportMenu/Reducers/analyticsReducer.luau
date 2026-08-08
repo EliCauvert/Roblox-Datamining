@@ -4,15 +4,14 @@ local _ = require(abuseReportMenu.Components.Types)
 local constantsModule = require(abuseReportMenu.Components.Constants)
 local cryoModule = require(corePackagesService.Packages.Cryo)
 local analyticsActions = constantsModule.AnalyticsActions
-local fFlagInGameMenuAddChatLineReporting = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagInGameMenuAddChatLineReporting
 local fFlagAddPreselectedAbuseTypeAnalytics = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAddPreselectedAbuseTypeAnalytics
 local t = {
 	typeofabuseSelection = cryoModule.None,
 	reasonSelection = cryoModule.None
 }
 
-return function(p0, p1) --[[ line: 20 | named "analyticsReducer" ]]
-	-- upvalues: analyticsActions (ref), constantsModule (ref), fFlagInGameMenuAddChatLineReporting (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref), t (ref)
+return function(p0, p1) --[[ line: 18 | named "analyticsReducer" ]]
+	-- upvalues: analyticsActions (ref), constantsModule (ref), fFlagAddPreselectedAbuseTypeAnalytics (ref), cryoModule (ref), t (ref)
 	local cloned = table.clone(p0)
 	local type = p1.type
 	
@@ -45,10 +44,6 @@ return function(p0, p1) --[[ line: 20 | named "analyticsReducer" ]]
 		return cloned
 	elseif type == analyticsActions.IncrementCaptureScene then
 		cloned.captureSceneCount += 1
-		
-		return cloned
-	elseif fFlagInGameMenuAddChatLineReporting and type == analyticsActions.IncrementChatLineChanged then
-		cloned.chatLineChangeCount += 1
 		
 		return cloned
 	elseif type == analyticsActions.SetViewportInformation then

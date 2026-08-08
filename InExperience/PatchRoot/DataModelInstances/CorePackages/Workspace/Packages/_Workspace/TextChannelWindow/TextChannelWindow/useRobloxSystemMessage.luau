@@ -1,32 +1,33 @@
-﻿local reactModule = require(script.Parent.Parent.React)
+﻿local parent = script.Parent.Parent
+local reactModule = require(parent.React)
 local messageModule = require(script.Parent.Message)
 local messageWriterContextModule = require(script.Parent.MessageWriterContext)
-local useInExperienceLocalizationModule = require(script.Parent.useInExperienceLocalization)
+local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 
 return function() --[[ line: 17 | named "useRobloxSystemMessage" ]]
-	-- upvalues: messageWriterContextModule (ref), useInExperienceLocalizationModule (ref), reactModule (ref), messageModule (ref)
-	local var4 = messageWriterContextModule.useMessageWriter()
-	local var5 = useInExperienceLocalizationModule()
+	-- upvalues: messageWriterContextModule (ref), useInExperienceLocalization (ref), reactModule (ref), messageModule (ref)
+	local var3 = messageWriterContextModule.useMessageWriter()
+	local var4 = useInExperienceLocalization()
 	
 	return {
 		displayRobloxSystemMessage = reactModule.useCallback(function(p0, p1) --[[ line: 21 ]]
-			-- upvalues: var4 (ref), var5 (ref), messageModule (copy)
-			if not var4 then return end
-			local var6 = var5(p0)
+			-- upvalues: var3 (ref), var4 (ref), messageModule (copy)
+			if not var3 then return end
+			local var5 = var4(p0)
 			
-			if var6 == "" then
-				var6 = p1
+			if var5 == "" then
+				var5 = p1
 			end
-			if var6 == "" then
+			if var5 == "" then
 				return
 			end
-			var4.write(messageModule.createSystemMessage(var6, "Roblox.ChatDisabled.Info"))
-		end, { var4, var5 }),
+			var3.write(messageModule.createSystemMessage(var5, "Roblox.ChatDisabled.Info"))
+		end, { var3, var4 }),
 		clearAvailabilityMessage = reactModule.useCallback(function() --[[ line: 35 ]]
-			-- upvalues: var4 (ref)
-			if var4 then
-				var4.remove("Roblox.ChatDisabled.Info")
+			-- upvalues: var3 (ref)
+			if var3 then
+				var3.remove("Roblox.ChatDisabled.Info")
 			end
-		end, { var4 })
+		end, { var3 })
 	}
 end

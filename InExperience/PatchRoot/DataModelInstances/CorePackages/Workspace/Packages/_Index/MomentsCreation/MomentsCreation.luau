@@ -15,5 +15,6 @@ return {
 	CreationFlowScreen = creationFlowScreenModule,
 	publishMomentWithUpload = require(script.Upload.publishMomentWithUpload),
 	isTextFiltered = require(script.Moderation.isTextFiltered),
+	makePostMetadata = require(script.Utils.makePostMetadata),
 	["jest.config"] = script["jest.config"]
 }

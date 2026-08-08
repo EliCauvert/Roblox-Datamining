@@ -57,6 +57,7 @@ return function(p0) --[[ line: 31 | named "useChatSheetViewModel" ]]
 		clockBinding = var15.clockBinding,
 		onPlaytest = var16.onPlaytest,
 		isPlaytestLoading = var16.isPlaytestLoading,
+		isHistoryLoading = var15.isHistoryLoading,
 		scrollingFrameRef = var15.setScrollingFrame,
 		composerText = var15.composerText,
 		composerErrorText = var15.composerErrorText,

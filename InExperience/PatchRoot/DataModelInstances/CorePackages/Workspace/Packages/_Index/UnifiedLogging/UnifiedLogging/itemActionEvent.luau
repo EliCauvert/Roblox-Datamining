@@ -11,7 +11,6 @@ local fFlagLuaAppLoosenCollectionIdTypeInterface = require(parent.SharedFlags).F
 local fFlagLuaAppUnifiedLoggingDialogContentTypeModule = require(script.Parent.FFlagLuaAppUnifiedLoggingDialogContentType)
 local fFlagLuaAppMigrateItemEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateItemEventsTelemetryService
 local fFlagLuaAppItemEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppItemEventsTelemetryServiceShadowTraffic
-local fFlagLuaAppGameItemTelemetryServiceTarget = require(parent.SharedFlags).FFlagLuaAppGameItemTelemetryServiceTarget
 local var6 = if fFlagLuaAppMigrateItemEventsTelemetryService then {
 	eventName = "itemAction",
 	description = "Fires for default user actions, primarily through SDUI",
@@ -52,13 +51,13 @@ local var9 = if fFlagLuaAppUnifiedLoggingDialogContentTypeModule then tModule.in
 	actionType = tModule.string,
 	interactionUuid = tModule.optional(tModule.string)
 }) else nil
-local t = { [contentTypeModule.User] = u221 }
+local t = { [contentTypeModule.User] = u215 }
 
 if fFlagLuaAppUnifiedLoggingDialogContentTypeModule then
 	t[contentTypeModule.Dialog] = var9
 end
-return function(p0, p1, p2, p3) --[[ line: 117 ]]
-	-- upvalues: t (ref), var8 (write), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppMigrateItemEventsTelemetryService (ref), telemetryService (ref), var6 (write), fFlagLuaAppGameItemTelemetryServiceTarget (ref), getPlatformTarget (ref), fFlagLuaAppItemEventsTelemetryServiceShadowTraffic (ref), var7 (write)
+return function(p0, p1, p2, p3) --[[ line: 115 ]]
+	-- upvalues: t (ref), var8 (write), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppMigrateItemEventsTelemetryService (ref), telemetryService (ref), var6 (write), getPlatformTarget (ref), fFlagLuaAppItemEventsTelemetryServiceShadowTraffic (ref), var7 (write)
 	local var11 = t[p2] or var8
 	
 	if var11 then
@@ -81,7 +80,7 @@ return function(p0, p1, p2, p3) --[[ line: 117 ]]
 			eventContext = p1,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = p3,
-			legacyOverrideTargetForEventIngest = if fFlagLuaAppGameItemTelemetryServiceTarget then getPlatformTarget() else nil
+			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	else
 		p0:sendEventDeferred(p1, "itemAction", p3)
@@ -98,7 +97,7 @@ return function(p0, p1, p2, p3) --[[ line: 117 ]]
 			eventContext = p1,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 			customFields = cloned,
-			legacyOverrideTargetForEventIngest = if fFlagLuaAppGameItemTelemetryServiceTarget then getPlatformTarget() else nil
+			legacyOverrideTargetForEventIngest = getPlatformTarget()
 		})
 	end
 end

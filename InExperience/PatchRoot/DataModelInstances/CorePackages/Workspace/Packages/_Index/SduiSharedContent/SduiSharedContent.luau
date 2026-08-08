@@ -32,5 +32,6 @@
 	SduiMediaGallery = require(script.Components.SduiMediaGallery),
 	SduiSkeleton = require(script.Components.SduiSkeleton),
 	SduiSharedRegister = require(script.SduiSharedRegister),
-	useCollectionAnalyticsContext = require(script.Components.useCollectionAnalyticsContext)
+	useCollectionAnalyticsContext = require(script.Components.useCollectionAnalyticsContext),
+	reportPromptDismiss = require(script.Actions.reportPromptDismiss)
 }

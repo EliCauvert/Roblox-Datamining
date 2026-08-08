@@ -4,11 +4,9 @@ local runService = game:GetService("RunService")
 local builderIconsModule = require(parent.BuilderIcons)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local icon = foundationModule.Icon
 local view = foundationModule.View
-local fFlagLuaAppMomentsInternalVideoUsage = sharedFlagsModule.FFlagLuaAppMomentsInternalVideoUsage
 local useTokens = foundationModule.Hooks.useTokens
 local momentsCommonModule = require(parent.MomentsCommon)
 local getCropSize = momentsCommonModule.Utils.getCropSize
@@ -20,54 +18,54 @@ local useCreationMusicSyncModule = require(momentsCreation.Hooks.useCreationMusi
 local getFFlagMomentsScreenshotMusicScrubberModule = require(momentsCreation.Flags.GetFFlagMomentsScreenshotMusicScrubber)
 local getFFlagMomentsCreationGalleryPreviewSwapFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationGalleryPreviewSwapFix)
 
-local function VideoPreviewSurface(p0) --[[ line: 85 ]]
-	-- upvalues: reactModule (ref), signalsModule (ref), useCreationMusicSyncModule (ref), getCaptureVideoContentModule (ref), runService (ref), view (ref), fFlagLuaAppMomentsInternalVideoUsage (ref), getFitSize (ref), getCropSize (ref)
+local function VideoPreviewSurface(p0) --[[ line: 83 ]]
+	-- upvalues: reactModule (ref), signalsModule (ref), useCreationMusicSyncModule (ref), getCaptureVideoContentModule (ref), runService (ref), view (ref), getFitSize (ref), getCropSize (ref)
 	local preview = p0.preview
 	local capture = p0.capture
 	local timeLength = p0.timeLength
-	local var16 = reactModule.useRef(nil)
-	local var17, var18 = reactModule.useState(Vector2.new(0, 0))
-	local var19, var20 = reactModule.useState(Vector2.new(0, 0))
-	local var21, var22 = reactModule.useState(preview.playback.getRegion(false))
-	reactModule.useEffect(function() --[[ line: 97 ]]
-		-- upvalues: signalsModule (copy), var22 (ref), preview (ref)
-		return signalsModule.createEffect(function(p1) --[[ line: 98 ]]
-			-- upvalues: var22 (copy), preview (copy)
-			var22(preview.playback.getRegion(p1))
+	local var15 = reactModule.useRef(nil)
+	local var16, var17 = reactModule.useState(Vector2.new(0, 0))
+	local var18, var19 = reactModule.useState(Vector2.new(0, 0))
+	local var20, var21 = reactModule.useState(preview.playback.getRegion(false))
+	reactModule.useEffect(function() --[[ line: 95 ]]
+		-- upvalues: signalsModule (copy), var21 (ref), preview (ref)
+		return signalsModule.createEffect(function(p1) --[[ line: 96 ]]
+			-- upvalues: var21 (copy), preview (copy)
+			var21(preview.playback.getRegion(p1))
 		end)
 	end, { preview })
-	local var23 = useCreationMusicSyncModule(preview, if var21 ~= nil then timeLength else math.max(0, var21.endTime - var21.startTime))
-	local audio = var23.audio
-	local music = var23.music
-	local userMuted = var23.userMuted
-	local var24 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 116 ]]
-		-- upvalues: var24 (ref), music (ref), audio (ref)
-		function var24.current() --[[ line: 117 ]]
+	local var22 = useCreationMusicSyncModule(preview, if var20 ~= nil then timeLength else math.max(0, var20.endTime - var20.startTime))
+	local audio = var22.audio
+	local music = var22.music
+	local userMuted = var22.userMuted
+	local var23 = reactModule.useRef(nil)
+	reactModule.useEffect(function() --[[ line: 114 ]]
+		-- upvalues: var23 (ref), music (ref), audio (ref)
+		function var23.current() --[[ line: 115 ]]
 			-- upvalues: music (copy), audio (copy)
 			if music ~= nil then
 				audio.timeline.seek(0)
 			end
 		end
 	end, { audio.timeline.seek, music })
-	reactModule.useEffect(function() --[[ line: 126 ]]
-		-- upvalues: var16 (ref), music (ref), userMuted (ref)
-		local current = var16.current
+	reactModule.useEffect(function() --[[ line: 124 ]]
+		-- upvalues: var15 (ref), music (ref), userMuted (ref)
+		local current = var15.current
 		
 		if current ~= nil then
 			current.Volume = if music == nil and not userMuted then 1 else 0
 		end
 	end, { music, userMuted })
-	reactModule.useEffect(function() --[[ line: 133 ]]
-		-- upvalues: var16 (ref), capture (ref), getCaptureVideoContentModule (copy), preview (ref), timeLength (ref), runService (copy), var24 (ref)
-		local current = var16.current
+	reactModule.useEffect(function() --[[ line: 131 ]]
+		-- upvalues: var15 (ref), capture (ref), getCaptureVideoContentModule (copy), preview (ref), timeLength (ref), runService (copy), var23 (ref)
+		local current = var15.current
 		
 		if current == nil then return end
 		if typeof(capture) == "table" then
-			local var25 = getCaptureVideoContentModule(capture)
+			local var24 = getCaptureVideoContentModule(capture)
 			
-			if var25 ~= nil then
-				current.Video = var25.Uri
+			if var24 ~= nil then
+				current.Video = var24.Uri
 			end
 		else
 			local ok, status = pcall(Content.fromObject, capture)
@@ -80,25 +78,25 @@ local function VideoPreviewSurface(p0) --[[ line: 85 ]]
 		preview.setDuration(timeLength)
 		preview.setTimeLength(timeLength)
 		preview.setReadiness("Ready")
-		local var26 = false
+		local var25 = false
 		preview.bindEngine({
-			play = function() --[[ line: 161 ]]
+			play = function() --[[ line: 159 ]]
 				-- upvalues: current (ref)
 				current.Playing = true
 			end,
-			pause = function() --[[ line: 164 ]]
+			pause = function() --[[ line: 162 ]]
 				-- upvalues: current (ref)
 				current.Playing = false
 			end,
-			seek = function(p2) --[[ line: 167 ]]
+			seek = function(p2) --[[ line: 165 ]]
 				-- upvalues: current (ref)
 				current.TimePosition = p2
 			end
 		})
 		local list = {
-			current.Loaded:Connect(function() --[[ line: 173 ]]
-				-- upvalues: var26 (write), current (ref), preview (copy)
-				var26 = true
+			current.Loaded:Connect(function() --[[ line: 171 ]]
+				-- upvalues: var25 (write), current (ref), preview (copy)
+				var25 = true
 				
 				if current.TimeLength > 0 then
 					preview.setDuration(current.TimeLength)
@@ -107,19 +105,19 @@ local function VideoPreviewSurface(p0) --[[ line: 85 ]]
 				current.Playing = true
 				preview.setIsPlaying(true)
 			end),
-			current.Played:Connect(function() --[[ line: 182 ]]
-				-- upvalues: var26 (write), preview (copy)
-				var26 = true
+			current.Played:Connect(function() --[[ line: 180 ]]
+				-- upvalues: var25 (write), preview (copy)
+				var25 = true
 				preview.setIsPlaying(true)
 			end),
-			current.Paused:Connect(function() --[[ line: 186 ]]
-				-- upvalues: var26 (write), preview (copy)
-				if var26 then
+			current.Paused:Connect(function() --[[ line: 184 ]]
+				-- upvalues: var25 (write), preview (copy)
+				if var25 then
 					preview.setIsPlaying(false)
 				end
 			end),
-			runService.RenderStepped:Connect(function() --[[ line: 194 ]]
-				-- upvalues: preview (copy), current (ref), var24 (copy)
+			runService.RenderStepped:Connect(function() --[[ line: 192 ]]
+				-- upvalues: preview (copy), current (ref), var23 (copy)
 				preview.setPosition(current.TimePosition)
 				local region = preview.playback.getRegion(false)
 				
@@ -129,14 +127,14 @@ local function VideoPreviewSurface(p0) --[[ line: 85 ]]
 				if region.endTime - 0.05 <= timePosition or timePosition < region.startTime - 0.05 then
 					current.TimePosition = region.startTime
 					
-					if var24.current ~= nil then
-						var24.current()
+					if var23.current ~= nil then
+						var23.current()
 					end
 				end
 			end)
 		}
 		
-		return function() --[[ line: 214 ]]
+		return function() --[[ line: 212 ]]
 			-- upvalues: list (ref), preview (copy)
 			for i, v in list do
 				v:Disconnect()
@@ -148,23 +146,23 @@ local function VideoPreviewSurface(p0) --[[ line: 85 ]]
 	return reactModule.createElement(view, {
 		tag = "size-full",
 		ClipsDescendants = true,
-		onAbsoluteSizeChanged = function(value) --[[ line: 225 ]]
-			-- upvalues: var18 (ref)
-			var18(value.AbsoluteSize)
+		onAbsoluteSizeChanged = function(value) --[[ line: 223 ]]
+			-- upvalues: var17 (ref)
+			var17(value.AbsoluteSize)
 		end
 	}, {
 		Media = reactModule.createElement("VideoFrame", {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
-			InternalVideoUsage = if fFlagLuaAppMomentsInternalVideoUsage then Enum.InternalVideoUsage.WatchPage else nil,
+			InternalVideoUsage = Enum.InternalVideoUsage.WatchPage,
 			Looped = true,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = if p0.scaleType == Enum.ScaleType.Fit then getFitSize(var17, var19) else getCropSize(var17, var19),
-			Visible = var19.X > 0 and var19.Y > 0,
-			ref = var16,
-			[reactModule.Change.Resolution] = function(p3) --[[ line: 242 ]]
-				-- upvalues: var20 (ref), p0 (ref)
-				var20(p3.Resolution)
+			Size = if p0.scaleType == Enum.ScaleType.Fit then getFitSize(var16, var18) else getCropSize(var16, var18),
+			Visible = var18.X > 0 and var18.Y > 0,
+			ref = var15,
+			[reactModule.Change.Resolution] = function(p3) --[[ line: 238 ]]
+				-- upvalues: var19 (ref), p0 (ref)
+				var19(p3.Resolution)
 				
 				if p0.onResolutionChanged ~= nil then
 					p0.onResolutionChanged(p3.Resolution)
@@ -175,14 +173,14 @@ local function VideoPreviewSurface(p0) --[[ line: 85 ]]
 	})
 end
 
-local function ScreenshotPreviewSurface(p4) --[[ line: 268 ]]
+local function ScreenshotPreviewSurface(p4) --[[ line: 264 ]]
 	-- upvalues: useCreationMusicSyncModule (ref), constantsModule (ref), reactModule (ref), getFFlagMomentsScreenshotMusicScrubberModule (ref), view (ref), getCaptureContentModule (ref)
 	local preview = p4.preview
 	local capture = p4.capture
-	local var29 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration)
-	local music = var29.music
-	local elapsed = var29.audio.timeline.elapsed
-	reactModule.useEffect(function() --[[ line: 281 ]]
+	local var28 = useCreationMusicSyncModule(preview, constantsModule.ScreenshotMusicDuration)
+	local music = var28.music
+	local elapsed = var28.audio.timeline.elapsed
+	reactModule.useEffect(function() --[[ line: 277 ]]
 		-- upvalues: preview (ref), constantsModule (copy)
 		preview.bindEngine(nil)
 		preview.setDuration(constantsModule.ScreenshotMusicDuration)
@@ -190,7 +188,7 @@ local function ScreenshotPreviewSurface(p4) --[[ line: 268 ]]
 		preview.setPosition(0)
 		preview.setReadiness("Ready")
 	end, { preview, capture })
-	reactModule.useEffect(function() --[[ line: 293 ]]
+	reactModule.useEffect(function() --[[ line: 289 ]]
 		-- upvalues: getFFlagMomentsScreenshotMusicScrubberModule (copy), preview (ref), music (ref), elapsed (ref), constantsModule (copy)
 		if getFFlagMomentsScreenshotMusicScrubberModule() then
 			preview.setPosition(if music ~= nil then 0 else math.clamp(elapsed, 0, constantsModule.ScreenshotMusicDuration))
@@ -213,63 +211,63 @@ local function ScreenshotPreviewSurface(p4) --[[ line: 268 ]]
 	})
 end
 
-return function(p5) --[[ line: 315 ]]
+return function(p5) --[[ line: 311 ]]
 	-- upvalues: useTokens (ref), reactModule (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (ref), signalsModule (ref), view (ref), icon (ref), builderIconsModule (ref), VideoPreviewSurface (ref), ScreenshotPreviewSurface (ref)
-	local var30 = useTokens()
-	local var31, var32 = reactModule.useState(p5.preview.getCapture(false))
-	reactModule.useEffect(function() --[[ line: 321 ]]
-		-- upvalues: p5 (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (copy), signalsModule (copy), var32 (ref)
+	local var29 = useTokens()
+	local var30, var31 = reactModule.useState(p5.preview.getCapture(false))
+	reactModule.useEffect(function() --[[ line: 317 ]]
+		-- upvalues: p5 (ref), getFFlagMomentsCreationGalleryPreviewSwapFixModule (copy), signalsModule (copy), var31 (ref)
 		local preview = p5.preview
 		
 		if getFFlagMomentsCreationGalleryPreviewSwapFixModule() then
+			local var32 = nil
 			local var33 = nil
-			local var34 = nil
-			local var35 = false
+			local var34 = false
 			
-			local function onWindowElapsed() --[[ line: 339 ]]
-				-- upvalues: var35 (write), var34 (write), var32 (copy), var33 (write), onWindowElapsed (ref)
-				if var35 then
-					var35 = false
-					local var38 = var34
-					var34 = nil
-					var32(var38)
-					var33 = task.delay(0.2, onWindowElapsed)
+			local function onWindowElapsed() --[[ line: 335 ]]
+				-- upvalues: var34 (write), var33 (write), var31 (copy), var32 (write), onWindowElapsed (ref)
+				if var34 then
+					var34 = false
+					local var37 = var33
+					var33 = nil
+					var31(var37)
+					var32 = task.delay(0.2, onWindowElapsed)
 					
 					return
 				end
-				var33 = nil
+				var32 = nil
 			end
 			
-			local var37 = signalsModule.createEffect(function(p6) --[[ line: 351 ]]
-				-- upvalues: preview (ref), var33 (write), var32 (copy), onWindowElapsed (ref), var34 (write), var35 (write)
+			local var36 = signalsModule.createEffect(function(p6) --[[ line: 347 ]]
+				-- upvalues: preview (ref), var32 (write), var31 (copy), onWindowElapsed (ref), var33 (write), var34 (write)
 				local capture = preview.getCapture(p6)
 				
-				if var33 == nil then
-					var32(capture)
-					var33 = task.delay(0.2, onWindowElapsed)
+				if var32 == nil then
+					var31(capture)
+					var32 = task.delay(0.2, onWindowElapsed)
 					
 					return
 				end
-				var34 = capture
-				var35 = true
+				var33 = capture
+				var34 = true
 			end)
 			
-			return function() --[[ line: 362 ]]
-				-- upvalues: var33 (write), var37 (ref)
-				if var33 ~= nil then
-					task.cancel(var33)
-					var33 = nil
+			return function() --[[ line: 358 ]]
+				-- upvalues: var32 (write), var36 (ref)
+				if var32 ~= nil then
+					task.cancel(var32)
+					var32 = nil
 				end
-				var37()
+				var36()
 			end
 		end
-		return signalsModule.createEffect(function(p7) --[[ line: 325 ]]
-			-- upvalues: var32 (copy), preview (ref)
-			var32(preview.getCapture(p7))
+		return signalsModule.createEffect(function(p7) --[[ line: 321 ]]
+			-- upvalues: var31 (copy), preview (ref)
+			var31(preview.getCapture(p7))
 		end)
 	end, { p5.preview })
 	
-	return if var31 == nil then reactModule.createElement(view, {
+	return if var30 == nil then reactModule.createElement(view, {
 		tag = "size-full radius-large bg-shift-200",
 		onAbsoluteSizeChanged = p5.onAbsoluteSizeChanged
 	}, {
@@ -277,23 +275,23 @@ return function(p5) --[[ line: 315 ]]
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			name = builderIconsModule.Icon.Image,
 			Position = UDim2.fromScale(0.5, 0.5),
-			size = var30.Size.Size_1200,
-			style = var30.Color.Shift.Shift_400
+			size = var29.Size.Size_1200,
+			style = var29.Color.Shift.Shift_400
 		})
-	}) elseif var31.CaptureType == Enum.CaptureType.Video then reactModule.createElement(view, {
+	}) elseif var30.CaptureType == Enum.CaptureType.Video then reactModule.createElement(view, {
 		tag = "size-full",
 		onAbsoluteSizeChanged = p5.onAbsoluteSizeChanged
 	}, {
 		Preview = reactModule.createElement(VideoPreviewSurface, {
 			preview = p5.preview,
-			capture = var31,
+			capture = var30,
 			scaleType = p5.scaleType,
-			timeLength = var31.TimeLength or 0,
+			timeLength = var30.TimeLength or 0,
 			onResolutionChanged = p5.onResolutionChanged
 		}, p5.children)
 	}) else reactModule.createElement(ScreenshotPreviewSurface, {
 		preview = p5.preview,
-		capture = var31,
+		capture = var30,
 		scaleType = p5.scaleType,
 		onAbsoluteSizeChanged = p5.onAbsoluteSizeChanged
 	}, p5.children)

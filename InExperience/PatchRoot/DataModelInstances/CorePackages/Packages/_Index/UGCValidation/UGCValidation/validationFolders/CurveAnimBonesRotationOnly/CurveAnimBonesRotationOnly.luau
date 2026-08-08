@@ -3,19 +3,23 @@ local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
 local curveAnimBoneHierarchyUtilsModule = require(parent.util.CurveAnimBoneHierarchyUtils)
+local curveAnimTranslationUtilsModule = require(parent.util.CurveAnimTranslationUtils)
 local getFFlagUGCValidateEmotesBonesAllowedModule = require(parent.flags.getFFlagUGCValidateEmotesBonesAllowed)
 local getFFlagUGCValidateAnimBonesSupportModule = require(parent.flags.getFFlagUGCValidateAnimBonesSupport)
+local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.getFFlagUGCValidationAnimationPackSupport)
+local getFFlagUGCValidateAnimTranslationThresholdModule = require(parent.flags.getFFlagUGCValidateAnimTranslationThreshold)
+local UGCValidateBoneTranslationMaxDistanceHundredths = game:DefineFastInt("UGCValidateBoneTranslationMaxDistanceHundredths", 50)
 local t = {
 	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION }
 }
 
-if getFFlagUGCValidateAnimBonesSupportModule() and require(parent.flags.getFFlagUGCValidationAnimationPackSupport)() then
+if getFFlagUGCValidateAnimBonesSupportModule() and getFFlagUGCValidationAnimationPackSupportModule() then
 	table.insert(t.categories, validationEnumsModule.UploadCategory.ANIMATION)
 end
 t.requiredData = { validationEnumsModule.SharedDataMember.curveAnimations }
 t.conditionalData = { validationEnumsModule.SharedDataMember.curveAnimBoneData }
 
-function t.fflag() --[[ line: 22 ]]
+function t.fflag() --[[ line: 26 ]]
 	-- upvalues: getFFlagUGCValidateEmotesBonesAllowedModule (ref), getFFlagUGCValidateAnimBonesSupportModule (ref)
 	return getFFlagUGCValidateEmotesBonesAllowedModule() or getFFlagUGCValidateAnimBonesSupportModule()
 end
@@ -25,28 +29,26 @@ t.prereqTests = {
 	validationEnumsModule.ValidationModule.CurveAnimDataAvailable
 }
 
-local function bonePositionHasKeyframes(p0) --[[ line: 28 ]]
-	local position = p0:FindFirstChild("Position")
+function t.run(p0, p1) --[[ line: 32 ]]
+	-- upvalues: UGCValidateBoneTranslationMaxDistanceHundredths (ref), curveAnimBoneHierarchyUtilsModule (ref), getFFlagUGCValidateAnimTranslationThresholdModule (ref), curveAnimTranslationUtilsModule (ref), errorSourceStringsModule (ref)
+	local var10 = UGCValidateBoneTranslationMaxDistanceHundredths / 100
 	
-	if not position or not position:IsA("Vector3Curve") then
-		return false
-	end
-	for i, v in { "X", "Y", "Z" } do
-		local var8 = position:FindFirstChild(v)
-		
-		if var8 and var8:IsA("FloatCurve") and #var8:GetKeys() > 0 then
-			return true
-		end
-	end
-	return false
-end
-
-function t.run(p1, p2) --[[ line: 42 ]]
-	-- upvalues: curveAnimBoneHierarchyUtilsModule (ref), bonePositionHasKeyframes (ref), errorSourceStringsModule (ref)
-	for i, v in p2.curveAnimations do
+	for i, v in p1.curveAnimations do
 		for i_1, v_1 in v:GetDescendants() do
-			if v_1:IsA("Folder") and curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v_1.Name) and bonePositionHasKeyframes(v_1) then
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_BonePositionNotAllowed, { boneName = v_1.Name })
+			if v_1:IsA("Folder") and curveAnimBoneHierarchyUtilsModule.isBoneFolderName(v_1.Name) then
+				if getFFlagUGCValidateAnimTranslationThresholdModule() then
+					local var11, var12 = curveAnimTranslationUtilsModule.translationExceedsThreshold(v_1, var10)
+					
+					if var11 then
+						p0:fail(errorSourceStringsModule.Keys.CurveAnim_BoneTranslationExceedsThreshold, {
+							boneName = v_1.Name,
+							distance = string.format("%.3f", var12),
+							maxDistance = string.format("%.3f", var10)
+						})
+					end
+				elseif curveAnimTranslationUtilsModule.positionHasKeyframes(v_1) then
+					p0:fail(errorSourceStringsModule.Keys.CurveAnim_BonePositionNotAllowed, { boneName = v_1.Name })
+				end
 			end
 		end
 	end

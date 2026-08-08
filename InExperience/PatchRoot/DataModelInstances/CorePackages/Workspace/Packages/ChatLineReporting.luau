@@ -1,1 +1,0 @@
-﻿return require(script.Parent._Workspace.ChatLineReporting.ChatLineReporting)

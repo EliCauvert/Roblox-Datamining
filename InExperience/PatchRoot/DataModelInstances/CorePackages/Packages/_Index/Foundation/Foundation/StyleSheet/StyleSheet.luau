@@ -6,8 +6,8 @@ local _ = require(parent.Rules.Types)
 local createStyleSheetRulesModule = require(parent.createStyleSheetRules)
 local getOverrideAttributesModule = require(parent.getOverrideAttributes)
 local useGeneratedRulesModule = require(foundation.Utility.useGeneratedRules)
+local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
-local _ = require(foundation.Enums.Theme)
 
 return reactModule.memo(function(p0) --[[ line: 31 | named "StyleSheet" ]]
 	-- upvalues: reactModule (ref), useGeneratedRulesModule (ref), getOverrideAttributesModule (ref), createStyleSheetRulesModule (ref)
@@ -19,11 +19,11 @@ return reactModule.memo(function(p0) --[[ line: 31 | named "StyleSheet" ]]
 			p0.setStyleSheetRef.current(var5)
 		end
 	end, { var5 })
-	local var8 = useGeneratedRulesModule(p0.theme, p0.device)
+	local var8 = useGeneratedRulesModule(p0.colorMode, p0.device)
 	local var9 = reactModule.useMemo(function() --[[ line: 43 ]]
 		-- upvalues: getOverrideAttributesModule (copy), p0 (ref)
-		return getOverrideAttributesModule(p0.theme, p0.device, p0.tokenOverrides)
-	end, { p0.theme, p0.device, p0.tokenOverrides })
+		return getOverrideAttributesModule(p0.colorMode, p0.device, p0.tokenOverrides)
+	end, { p0.colorMode, p0.device, p0.tokenOverrides })
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		FoundationStyleSheet = reactModule.createElement("StyleSheet", { ref = var6 }, reactModule.useMemo(function() --[[ line: 47 ]]

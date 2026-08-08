@@ -1,7 +1,7 @@
 ﻿local VRService = game:GetService("VRService")
 local isVRModeInStudioModule = require(script.Parent.isVRModeInStudio)
 
-return function() --[[ line: 7 ]]
+return function() --[[ line: 5 ]]
 	-- upvalues: isVRModeInStudioModule (ref), VRService (ref)
-	return if isVRModeInStudioModule() then true elseif game:GetEngineFeature("MaquettesBuildFlagsEnabled") then VRService:IsVRAppBuild() else VRService.VREnabled
+	return if isVRModeInStudioModule() then true else VRService:IsVRAppBuild()
 end

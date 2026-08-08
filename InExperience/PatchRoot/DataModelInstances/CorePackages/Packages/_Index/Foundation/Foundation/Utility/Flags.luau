@@ -1,7 +1,5 @@
 ﻿local safeFlagsModule = require(script:FindFirstAncestor("Foundation").Parent.SafeFlags)
-local var1 = safeFlagsModule.createGetFFlag("FoundationDropdownVariant")()
-local var2 = safeFlagsModule.createGetFFlag("FoundationBottomSheetCapToOverlayHeight")()
-local var3 = safeFlagsModule.createGetFFlag("FoundationTabsInlineSizeFull")()
+local var1 = safeFlagsModule.createGetFFlag("FoundationBottomSheetCapToOverlayHeight")()
 
 return {
 	FoundationUsePath2DSpinner = safeFlagsModule.createGetFFlag("FoundationUsePath2DSpinner")(),
@@ -22,16 +20,14 @@ return {
 	FoundationTokenOverrides = safeFlagsModule.createGetFFlag("FoundationTokenOverrides2")(),
 	FoundationButtonFillBehaviorEqualSize = safeFlagsModule.createGetFFlag("FoundationButtonFillBehaviorEqualSize")(),
 	FoundationButtonLabelTypography = safeFlagsModule.createGetFFlag("FoundationButtonLabelTypography")(),
-	FoundationDropdownVariant = var1,
+	FoundationDropdownVariant = safeFlagsModule.createGetFFlag("FoundationDropdownVariant")(),
 	FoundationTextAreaDelayMobileFocus = safeFlagsModule.createGetFFlag("FoundationTextAreaDelayMobileFocus")(),
-	FoundationBottomSheetCapToOverlayHeight = var2,
+	FoundationBottomSheetCapToOverlayHeight = var1,
 	FoundationDropdownSizeGap = safeFlagsModule.createGetFFlag("FoundationDropdownSizeGap")(),
 	FoundationFullBleedSheetContent = safeFlagsModule.createGetFFlag("FoundationFullBleedSheetContent")(),
 	FoundationPopoverClipAwareVisibility = safeFlagsModule.createGetFFlag("FoundationPopoverClipAwareVisibility")(),
-	FoundationTabsInlineSizeFull = var3,
 	FoundationBaseMenuAutoYCanvasSizing = safeFlagsModule.createGetFFlag("FoundationBaseMenuAutoYCanvasSizing")(),
 	FoundationBaseMenuBeta = safeFlagsModule.createGetFFlag("FoundationBaseMenuBeta")(),
-	FoundationBottomSheetInnerScrollingSync = safeFlagsModule.createGetFFlag("FoundationBottomSheetInnerScrollingSync")(),
 	FoundationDialogAnimation = safeFlagsModule.createGetFFlag("FoundationDialogAnimation2")(),
 	FoundationDropdownSelectionProps = safeFlagsModule.createGetFFlag("FoundationDropdownSelectionProps")(),
 	FoundationCoachmarkInteractionFixes = safeFlagsModule.createGetFFlag("FoundationCoachmarkInteractionFixes")(),
@@ -43,9 +39,9 @@ return {
 	FoundationNumberInputBeta = safeFlagsModule.createGetFFlag("FoundationNumberInputBeta")(),
 	FoundationSegmentedControlAutoXFix = safeFlagsModule.createGetFFlag("FoundationSegmentedControlAutoXFix")(),
 	FoundationAvatarBindableUserId = safeFlagsModule.createGetFFlag("FoundationAvatarBindableUserId")(),
-	FoundationBottomSheetFixHeightCap = var2 and safeFlagsModule.createGetFFlag("FoundationBottomSheetFixHeightCap")(),
+	FoundationBottomSheetFixHeightCap = var1 and safeFlagsModule.createGetFFlag("FoundationBottomSheetFixHeightCap")(),
 	FoundationCornerRadiusPerCorner = safeFlagsModule.createGetFFlag("FoundationCornerRadiusPerCorner")(),
-	FoundationFixTabsFitBorderWidth = var3 and safeFlagsModule.createGetFFlag("FoundationFixTabsFitBorderWidth")(),
+	FoundationFixTabsFitBorderWidth = safeFlagsModule.createGetFFlag("FoundationFixTabsFitBorderWidth")(),
 	FoundationHeaderBarDualPaneBreakpointsStaySynced = safeFlagsModule.createGetFFlag("FoundationHeaderBarDualPaneBreakpointsStaySynced")(),
 	FoundationMediaRoundedCornerTags = safeFlagsModule.createGetFFlag("FoundationMediaRoundedCornerTags")(),
 	FoundationPopoverPluginOverlayMeasurement = safeFlagsModule.createGetFFlag("FoundationPopoverPluginOverlayMeasurement2")(),
@@ -64,5 +60,8 @@ return {
 	FoundationRemoveSecondUIDDFromScrubbableTextboxes = safeFlagsModule.createGetFFlag("FoundationRemoveSecondUIDDFromScrubbableTextboxes")(),
 	FoundationSliderAsSeenOnTV = safeFlagsModule.createGetFFlag("FoundationSliderAsSeenOnTV")(),
 	FoundationStatusIndicatorVariantExperiment = safeFlagsModule.createGetFFlag("FoundationStatusIndicatorVariantExperiment2")(),
-	FoundationWidgetManagerSnapshotFlush = safeFlagsModule.createGetFFlag("FoundationWidgetManagerSnapshotFlush")()
+	FoundationWidgetManagerSnapshotFlush = safeFlagsModule.createGetFFlag("FoundationWidgetManagerSnapshotFlush")(),
+	FoundationFixTabsBorderPosition = safeFlagsModule.createGetFFlag("FoundationFixTabsBorderPosition")(),
+	FoundationSegmentedControlBeta = safeFlagsModule.createGetFFlag("FoundationSegmentedControlBeta")(),
+	FoundationTooltipPressedOutside = safeFlagsModule.createGetFFlag("FoundationTooltipPressedOutside")()
 }

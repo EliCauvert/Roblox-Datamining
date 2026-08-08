@@ -53,7 +53,7 @@ return function(p0) --[[ line: 33 | named "EventDetailsPageLoader" ]]
 			})
 			
 			return if if fFlagLuaAppCreatorSuccessVirtualEventsLayerUseRoactExperimentModule then var16 else false then reactModule.createElement(reactModule.Fragment, nil, {
-				FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+				FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 					AppStyleProvider = reactModule.createElement(appStyleProvider, { style = { themeName = "dark" } }, {
 						EventDetailsPage = reactModule.createElement(eventDetailsVerticalPageModule, var21)
 					})

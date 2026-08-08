@@ -2,22 +2,22 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local getSceneOverridesStoreModule = require(script.Parent.getSceneOverridesStore)
 
 return function(p0) --[[ line: 14 | named "SceneOverridesRegistry" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), theme (ref), getSceneOverridesStoreModule (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), colorMode (ref), getSceneOverridesStoreModule (ref)
 	local isActive = p0.isActive
 	local var3 = useTokens()
 	local var4 = reactModule.useMemo(function() --[[ line: 18 ]]
-		-- upvalues: var3 (ref), theme (copy)
+		-- upvalues: var3 (ref), colorMode (copy)
 		local color3 = var3.Color.Extended.Gray.Gray_300.Color3
 		local color3_1 = var3.Color.Extended.Gray.Gray_400.Color3
 		local color3_2 = var3.Color.Extended.Gray.Gray_500.Color3
 		local color3_3 = var3.Color.Extended.Gray.Gray_700.Color3
 		local color3_4 = var3.Color.Surface.Surface_200.Color3
 		
-		return if var3.Config.ColorMode.Name == theme.Light then {
+		return if var3.Config.ColorMode.Name == colorMode.Light then {
 			SkyboxBlockerTransparency = 0,
 			FogStart = 400,
 			FogEnd = 500,

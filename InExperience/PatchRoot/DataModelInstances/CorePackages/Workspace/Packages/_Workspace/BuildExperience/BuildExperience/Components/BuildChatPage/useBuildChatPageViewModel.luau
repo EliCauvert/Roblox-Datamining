@@ -374,6 +374,7 @@ return function(p4) --[[ line: 99 | named "useBuildChatPageViewModel" ]]
 		buyMoreRobuxCardSecondaryActionText = var69.buyMoreRobuxCardSecondaryActionText,
 		onBuyMoreRobuxCardSecondaryAction = var69.onBuyMoreRobuxCardSecondaryAction,
 		isChatEmpty = var64,
+		isHistoryLoading = var61.isHistoryLoading,
 		isNewGameTarget = var56,
 		hasPublishedTurn = var61.hasPublishedTurn,
 		hasPublishedVersion = var24 ~= nil and var24.isActive,

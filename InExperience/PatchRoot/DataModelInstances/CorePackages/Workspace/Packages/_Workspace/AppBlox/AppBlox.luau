@@ -12,7 +12,6 @@ local infoCarouselCellModule = require(script.InfoCarouselCell)
 local insetBackgroundModule = require(script.InsetBackground)
 local bannerModule = require(script.Banner)
 local bannerBadgeModule = require(script.Banner.BannerBadge)
-local upsellModalModule = require(script.UpsellModal)
 local scrollingAppCarouselModule = require(script.ScrollingAppCarousel.ScrollingAppCarousel)
 local infoTableModule = require(script.InfoTable)
 local infoTableCellModule = require(script.InfoTableCell)
@@ -36,7 +35,6 @@ return {
 	InsetBackground = insetBackgroundModule,
 	Banner = bannerModule,
 	BannerBadge = bannerBadgeModule,
-	UpsellModal = upsellModalModule,
 	AnimateScrollViewToSelectionHelper = if sharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper then animateScrollViewToSelectionHelperModule else nil,
 	ContentPosition = require(script.DetailsPage.ContentPosition),
 	DetailsPageLayout = require(script.DetailsPageLayout),

@@ -62,7 +62,7 @@ return function() --[[ line: 61 | named "mountChatSheet" ]]
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, {
-			theme = foundationModule.Enums.Theme.Dark,
+			colorMode = foundationModule.Enums.ColorMode.Dark,
 			overlayGui = { DisplayOrder = 9 }
 		}, {
 			CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),

@@ -8,7 +8,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 22 | named "ShareSendRow" ]]
+return function(p0) --[[ line: 23 | named "ShareSendRow" ]]
 	-- upvalues: reactModule (ref), view (ref), textInput (ref), inputSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var2, var3 = reactModule.useState("")
 	
@@ -23,6 +23,7 @@ return function(p0) --[[ line: 22 | named "ShareSendRow" ]]
 			testId = "share-message-input",
 			isDisabled = p0.isLoading,
 			onChanged = var3,
+			onFocusGained = p0.onFocusGained,
 			placeholder = p0.messagePlaceholder,
 			size = inputSize.Medium,
 			text = var2,
@@ -36,7 +37,7 @@ return function(p0) --[[ line: 22 | named "ShareSendRow" ]]
 			fillBehavior = fillBehavior.Fill,
 			isLoading = p0.isLoading,
 			size = inputSize.Medium,
-			onActivated = reactModule.useCallback(function() --[[ line: 24 ]]
+			onActivated = reactModule.useCallback(function() --[[ line: 25 ]]
 				-- upvalues: p0 (ref), var2 (ref)
 				p0.onActivated(var2)
 			end, { var2, p0.onActivated }),

@@ -14,6 +14,7 @@ return function() --[[ line: 13 | named "useUniversalShareSheetViewModel" ]]
 		formatSuccessSnackbarText = var4.formatSuccessSnackbarText,
 		messagePlaceholder = var4.messagePlaceholder,
 		onClose = var3.hide,
+		onCloseWithReason = var3.hide,
 		telemetryId = var4.telemetryId,
 		url = var4.url
 	}

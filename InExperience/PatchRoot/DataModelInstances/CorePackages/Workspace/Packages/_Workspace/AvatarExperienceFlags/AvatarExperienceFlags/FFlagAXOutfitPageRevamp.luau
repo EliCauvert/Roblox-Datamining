@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXOutfitPageRevamp2", false) and (require(script.Parent.FFlagAXMigrateOutfitsToUserInventory) and game:GetEngineFeature("MakeupOutfits"))
+﻿return game:DefineFastFlag("AXOutfitPageRevamp3", false) and (require(script.Parent.FFlagAXMigrateOutfitsToUserInventory) and game:GetEngineFeature("MakeupOutfits"))

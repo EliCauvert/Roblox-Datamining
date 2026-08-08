@@ -4,6 +4,7 @@ local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local internalProvidersModule = require(script.Parent.internalProviders)
+local fFlagExpChatEmojiInputParity = require(parent.SharedFlags).FFlagExpChatEmojiInputParity
 local t = {
 	activated = false,
 	selectedIndex = 0,
@@ -12,11 +13,17 @@ local t = {
 	results = {}
 }
 
-return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
-	-- upvalues: reactModule (ref), internalProvidersModule (ref), t (ref), userInputService (ref), contextActionService (ref), cryoModule (ref)
-	local var6 = if p1 then p1.commands else nil
-	local var7 = if p1 and p1.emojis then true else false
-	local var8 = reactModule.useMemo(function() --[[ line: 48 ]]
+local function _(p0, p1, p2, p3) --[[ line: 44 | named "spliceInto" ]]
+	local text = p0.Text
+	p0.Text = string.sub(text, 1, p1 - 1) .. p3 .. string.sub(text, p2 + 1)
+	p0.CursorPosition = p1 + #p3
+end
+
+return function(p4, p5) --[[ line: 50 | named "useChatAutocompleteEngine" ]]
+	-- upvalues: reactModule (ref), internalProvidersModule (ref), t (ref), userInputService (ref), contextActionService (ref), fFlagExpChatEmojiInputParity (ref), cryoModule (ref)
+	local var6 = if p5 then p5.commands else nil
+	local var7 = if p5 and p5.emojis then true else false
+	local var8 = reactModule.useMemo(function() --[[ line: 58 ]]
 		-- upvalues: var6 (ref), var7 (ref), internalProvidersModule (copy)
 		return if var6 or var7 then internalProvidersModule.buildTrie(var6, var7) else nil
 	end, { var6 or false, var7 })
@@ -27,13 +34,15 @@ return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
 	var13.current = var9
 	local var14 = reactModule.useRef(var8)
 	var14.current = var8
-	local text = "ChatAutocompleteSink_" .. tostring(p0)
-	reactModule.useEffect(function() --[[ line: 69 ]]
-		-- upvalues: p0 (ref), p1 (ref), var11 (ref)
-		local current = p0.current
+	local var15 = reactModule.useRef(var7)
+	var15.current = var7
+	local text = "ChatAutocompleteSink_" .. tostring(p4)
+	reactModule.useEffect(function() --[[ line: 81 ]]
+		-- upvalues: p4 (ref), p5 (ref), var11 (ref)
+		local current = p4.current
 		
-		if current and p1 then
-			local var18 = current:GetPropertyChangedSignal("CursorPosition"):Connect(function() --[[ line: 74 ]]
+		if current and p5 then
+			local var18 = current:GetPropertyChangedSignal("CursorPosition"):Connect(function() --[[ line: 86 ]]
 				-- upvalues: current (ref), var11 (copy)
 				local cursorPosition = current.CursorPosition
 				
@@ -42,39 +51,54 @@ return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
 				end
 			end)
 			
-			return function() --[[ line: 80 ]]
+			return function() --[[ line: 92 ]]
 				-- upvalues: var18 (ref)
 				var18:Disconnect()
 			end
 		end
-	end, { p0.current, p1 })
+	end, { p4.current, p5 })
 	
-	local function spliceResult(p2) --[[ line: 85 ]]
-		-- upvalues: var13 (ref), p0 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
+	local function _(p6) --[[ line: 97 | named "spliceResult" ]]
+		-- upvalues: var13 (ref), p4 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
 		local current = var13.current
-		local var19 = current.results[p2]
-		local current_1 = p0.current
+		local var19 = current.results[p6]
+		local current_1 = p4.current
 		local currentMatch = current.currentMatch
 		
 		if var19 and current_1 and currentMatch then
+			local replaceStart = currentMatch.replaceStart
+			local replaceFinish = currentMatch.replaceFinish
 			local var20 = internalProvidersModule.formatReplacement(var19)
 			local text = current_1.Text
-			current_1.Text = string.sub(text, 1, currentMatch.replaceStart - 1) .. var20 .. string.sub(text, currentMatch.replaceFinish + 1)
-			current_1.CursorPosition = currentMatch.replaceStart + #var20
+			current_1.Text = string.sub(text, 1, replaceStart - 1) .. var20 .. string.sub(text, replaceFinish + 1)
+			current_1.CursorPosition = replaceStart + #var20
 			var10(t)
 			
 			return
 		end
 	end
 	
-	local function commitSelection(p3) --[[ line: 106 ]]
-		-- upvalues: var12 (ref), spliceResult (ref), p0 (ref)
+	local function commitSelection(p7) --[[ line: 110 ]]
+		-- upvalues: var12 (ref), var13 (ref), p4 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
 		var12.current = true
-		spliceResult(p3)
-		task.defer(function() --[[ line: 109 ]]
-			-- upvalues: var12 (copy), p0 (copy)
+		local current = var13.current
+		local var21 = current.results[p7]
+		local current_1 = p4.current
+		local currentMatch = current.currentMatch
+		
+		if var21 and current_1 and currentMatch then
+			local replaceStart = currentMatch.replaceStart
+			local replaceFinish = currentMatch.replaceFinish
+			local var22 = internalProvidersModule.formatReplacement(var21)
+			local text = current_1.Text
+			current_1.Text = string.sub(text, 1, replaceStart - 1) .. var22 .. string.sub(text, replaceFinish + 1)
+			current_1.CursorPosition = replaceStart + #var22
+			var10(t)
+		end
+		task.defer(function() --[[ line: 113 ]]
+			-- upvalues: var12 (copy), p4 (copy)
 			var12.current = false
-			local current = p0.current
+			local current = p4.current
 			
 			if current then
 				current:CaptureFocus()
@@ -82,49 +106,49 @@ return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
 		end)
 	end
 	
-	reactModule.useEffect(function() --[[ line: 121 ]]
-		-- upvalues: p1 (ref), userInputService (copy), var13 (ref), var10 (ref), t (copy), p0 (ref), var11 (ref)
-		if p1 then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p4) --[[ line: 125 ]]
-				-- upvalues: var13 (copy), var10 (copy), t (copy), p0 (copy), var11 (copy)
+	reactModule.useEffect(function() --[[ line: 125 ]]
+		-- upvalues: p5 (ref), userInputService (copy), var13 (ref), var10 (ref), t (copy), p4 (ref), var11 (ref)
+		if p5 then
+			local inputBeganConnection = userInputService.InputBegan:Connect(function(p8) --[[ line: 129 ]]
+				-- upvalues: var13 (copy), var10 (copy), t (copy), p4 (copy), var11 (copy)
 				local current = var13.current
 				
 				if not current.activated or #current.results == 0 then return end
-				if p4.KeyCode == Enum.KeyCode.Up then
-					var10(function(p5) --[[ line: 132 ]]
-						local var22 = if p5.selectedIndex <= 0 then 1 elseif p5.selectedIndex == 1 then #p5.results else p5.selectedIndex - 1
+				if p8.KeyCode == Enum.KeyCode.Up then
+					var10(function(p9) --[[ line: 136 ]]
+						local var24 = if p9.selectedIndex <= 0 then 1 elseif p9.selectedIndex == 1 then #p9.results else p9.selectedIndex - 1
 						
 						return {
-							activated = p5.activated,
-							results = p5.results,
-							selectedIndex = var22,
-							keyboardIndex = var22,
-							currentMatch = p5.currentMatch
+							activated = p9.activated,
+							results = p9.results,
+							selectedIndex = var24,
+							keyboardIndex = var24,
+							currentMatch = p9.currentMatch
 						}
 					end)
 					
 					return
-				elseif p4.KeyCode == Enum.KeyCode.Down then
-					var10(function(p6) --[[ line: 150 ]]
-						local var23 = p6.selectedIndex + 1
+				elseif p8.KeyCode == Enum.KeyCode.Down then
+					var10(function(p10) --[[ line: 154 ]]
+						local var25 = p10.selectedIndex + 1
 						
-						if #p6.results < var23 then
-							var23 = 1
+						if #p10.results < var25 then
+							var25 = 1
 						end
 						return {
-							activated = p6.activated,
-							results = p6.results,
-							selectedIndex = var23,
-							keyboardIndex = var23,
-							currentMatch = p6.currentMatch
+							activated = p10.activated,
+							results = p10.results,
+							selectedIndex = var25,
+							keyboardIndex = var25,
+							currentMatch = p10.currentMatch
 						}
 					end)
 					
 					return
-				elseif p4.KeyCode == Enum.KeyCode.Escape then
+				elseif p8.KeyCode == Enum.KeyCode.Escape then
 					var10(t)
-					local current_1 = p0.current
-					task.defer(function() --[[ line: 166 ]]
+					local current_1 = p4.current
+					task.defer(function() --[[ line: 170 ]]
 						-- upvalues: current_1 (ref), var11 (copy)
 						if current_1 then
 							current_1:CaptureFocus()
@@ -134,20 +158,20 @@ return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
 				end
 			end)
 			
-			return function() --[[ line: 174 ]]
+			return function() --[[ line: 178 ]]
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
 		end
-	end, { p1 })
-	reactModule.useEffect(function() --[[ line: 179 ]]
+	end, { p5 })
+	reactModule.useEffect(function() --[[ line: 183 ]]
 		-- upvalues: var9 (ref), contextActionService (copy), text (ref)
 		if var9.activated and #var9.results ~= 0 then
-			contextActionService:BindCoreAction(text, function() --[[ line: 183 ]]
+			contextActionService:BindCoreAction(text, function() --[[ line: 187 ]]
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.Up, Enum.KeyCode.Down, Enum.KeyCode.Escape)
 			
-			return function() --[[ line: 186 ]]
+			return function() --[[ line: 190 ]]
 				-- upvalues: contextActionService (copy), text (copy)
 				contextActionService:UnbindCoreAction(text)
 			end
@@ -160,51 +184,81 @@ return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
 		selectedIndex = var9.selectedIndex,
 		keyboardIndex = var9.keyboardIndex,
 		renderEntry = internalProvidersModule.renderEntry,
-		onTextChanged = reactModule.useCallback(function(p7) --[[ line: 191 ]]
-			-- upvalues: var12 (ref), var14 (ref), p0 (ref), var11 (ref), internalProvidersModule (copy), cryoModule (copy), var10 (ref), var13 (ref), t (copy)
+		onTextChanged = reactModule.useCallback(function(p11) --[[ line: 195 ]]
+			-- upvalues: var12 (ref), var14 (ref), p4 (ref), var11 (ref), fFlagExpChatEmojiInputParity (copy), var15 (ref), internalProvidersModule (copy), var13 (ref), var10 (ref), t (copy), cryoModule (copy)
 			if var12.current then return end
 			local current = var14.current
 			
 			if not current then return end
-			local current_1 = p0.current
-			local var24 = internalProvidersModule.matchTrigger(p7, if current_1 and current_1.CursorPosition >= 0 then current_1.CursorPosition else var11.current)
+			local current_1 = p4.current
+			local var26 = if current_1 and current_1.CursorPosition >= 0 then current_1.CursorPosition else var11.current
 			
-			if var24 then
-				local var25 = internalProvidersModule.search(current, var24.query)
+			if fFlagExpChatEmojiInputParity and var15.current and current_1 then
+				local var27 = internalProvidersModule.matchColonCompletion(p11, var26)
 				
-				if #var25 > 20 then
-					var25 = cryoModule.List.getRange(var25, 1, 20)
+				if var27 then
+					var12.current = true
+					local replaceStart = var27.replaceStart
+					local replaceFinish = var27.replaceFinish
+					local replacement = var27.replacement
+					local text = current_1.Text
+					current_1.Text = string.sub(text, 1, replaceStart - 1) .. replacement .. string.sub(text, replaceFinish + 1)
+					current_1.CursorPosition = replaceStart + #replacement
+					task.defer(function() --[[ line: 213 ]]
+						-- upvalues: var12 (copy), p4 (copy)
+						var12.current = false
+						local current = p4.current
+						
+						if current then
+							current:CaptureFocus()
+						end
+					end)
+					
+					if var13.current.activated then
+						var10(t)
+					end
+					return
+				else
+					local var28 = internalProvidersModule.matchTrigger(p11, var26)
+					
+					if var28 then
+						local var29 = internalProvidersModule.search(current, var28.query)
+						
+						if #var29 > 20 then
+							var29 = cryoModule.List.getRange(var29, 1, 20)
+						end
+						var10({
+							selectedIndex = 0,
+							keyboardIndex = 0,
+							activated = #var29 > 0,
+							results = var29,
+							currentMatch = var28
+						})
+						
+						return
+					elseif var13.current.activated then
+						var10(t)
+					end
 				end
-				var10({
-					selectedIndex = 0,
-					keyboardIndex = 0,
-					activated = #var25 > 0,
-					results = var25,
-					currentMatch = var24
-				})
-				
-				return
-			elseif var13.current.activated then
-				var10(t)
 			end
 		end, {}),
-		setSelectedIndex = reactModule.useCallback(function(p8) --[[ line: 256 ]]
+		setSelectedIndex = reactModule.useCallback(function(p12) --[[ line: 281 ]]
 			-- upvalues: var10 (ref)
-			var10(function(p9) --[[ line: 257 ]]
-				-- upvalues: p8 (ref)
+			var10(function(p13) --[[ line: 282 ]]
+				-- upvalues: p12 (ref)
 				return {
-					activated = p9.activated,
-					results = p9.results,
-					selectedIndex = math.clamp(p8, 1, math.max(1, #p9.results)),
-					keyboardIndex = p9.keyboardIndex,
-					currentMatch = p9.currentMatch
+					activated = p13.activated,
+					results = p13.results,
+					selectedIndex = math.clamp(p12, 1, math.max(1, #p13.results)),
+					keyboardIndex = p13.keyboardIndex,
+					currentMatch = p13.currentMatch
 				}
 			end)
 		end, {}),
 		commitSelection = commitSelection,
-		interceptSend = reactModule.useCallback(function(p10, p11) --[[ line: 223 ]]
-			-- upvalues: var13 (ref), var12 (ref), spliceResult (ref)
-			if not p11 then
+		interceptSend = reactModule.useCallback(function(p14, p15) --[[ line: 248 ]]
+			-- upvalues: var13 (ref), var12 (ref), p4 (ref), internalProvidersModule (copy), var10 (ref), t (copy)
+			if not p15 then
 				return false
 			end
 			local current = var13.current
@@ -215,19 +269,32 @@ return function(p0, p1) --[[ line: 40 | named "useChatAutocompleteEngine" ]]
 				return false
 			end
 			var12.current = true
-			spliceResult(current.selectedIndex)
-			task.defer(function() --[[ line: 236 ]]
-				-- upvalues: var12 (copy), p10 (ref)
+			local current_1 = var13.current
+			local selectedIndex = current_1.results[current.selectedIndex]
+			local current_2 = p4.current
+			local currentMatch = current_1.currentMatch
+			
+			if selectedIndex and current_2 and currentMatch then
+				local replaceStart = currentMatch.replaceStart
+				local replaceFinish = currentMatch.replaceFinish
+				local var30 = internalProvidersModule.formatReplacement(selectedIndex)
+				local text = current_2.Text
+				current_2.Text = string.sub(text, 1, replaceStart - 1) .. var30 .. string.sub(text, replaceFinish + 1)
+				current_2.CursorPosition = replaceStart + #var30
+				var10(t)
+			end
+			task.defer(function() --[[ line: 261 ]]
+				-- upvalues: var12 (copy), p14 (ref)
 				var12.current = false
 				
-				if p10 then
-					p10:CaptureFocus()
+				if p14 then
+					p14:CaptureFocus()
 				end
 			end)
 			
 			return true
 		end, {}),
-		dismiss = reactModule.useCallback(function() --[[ line: 249 ]]
+		dismiss = reactModule.useCallback(function() --[[ line: 274 ]]
 			-- upvalues: var10 (ref), t (copy)
 			var10(t)
 		end, {})

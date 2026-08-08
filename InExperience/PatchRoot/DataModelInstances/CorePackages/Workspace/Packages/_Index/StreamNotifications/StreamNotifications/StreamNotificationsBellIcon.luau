@@ -201,7 +201,7 @@ local var12 = function(p0) --[[ line: 66 ]]
 				max = 99,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0.5, 0.5),
-				variant = foundationModule.Enums.StatusIndicatorVariant.Alert,
+				variant = if not foundationModule.Utility.Flags.FoundationStatusIndicatorVariantExperiment then foundationModule.Enums.StatusIndicatorVariant.Emphasis else foundationModule.Enums.StatusIndicatorVariant.Alert,
 				value = notificationCount
 			}) else nil,
 			DisplayStreamNotifications = if not dropdownEnabled then var24 else nil
@@ -261,7 +261,7 @@ local var12 = function(p0) --[[ line: 66 ]]
 end
 
 if getFFlagNotificationsComplianceShouldRestrictStream() then
-	var12 = roactAppPolicy.connect(function(p1, _) --[[ line: 383 ]]
+	var12 = roactAppPolicy.connect(function(p1, _) --[[ line: 385 ]]
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}

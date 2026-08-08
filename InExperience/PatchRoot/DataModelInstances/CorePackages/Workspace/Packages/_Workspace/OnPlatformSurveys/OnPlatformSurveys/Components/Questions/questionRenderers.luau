@@ -1,15 +1,17 @@
 ﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
 local parent = onPlatformSurveys.Parent
 local reactModule = require(parent.React)
-local fFlagInlineSurveyEnhancements = require(parent.SharedFlags).FFlagInlineSurveyEnhancements
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagInlineSurveyEnhancements = sharedFlagsModule.FFlagInlineSurveyEnhancements
+local fFlagInlineSurveyChoiceTextEntry = sharedFlagsModule.FFlagInlineSurveyChoiceTextEntry
 local inlineQuestionTypeModule = require(onPlatformSurveys.Enums.InlineQuestionType)
 local multipleChoiceQuestionModule = require(onPlatformSurveys.Components.Questions.MultipleChoiceQuestion)
 local textQuestionModule = require(onPlatformSurveys.Components.Questions.TextQuestion)
 local thumbsQuestionModule = require(onPlatformSurveys.Components.Questions.ThumbsQuestion)
 local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
 
-local function isThumbsQuestion(p0) --[[ line: 33 ]]
-	-- upvalues: inlineQuestionTypeModule (ref)
+local function isThumbsQuestion(p0) --[[ line: 35 ]]
+	-- upvalues: inlineQuestionTypeModule (ref), fFlagInlineSurveyChoiceTextEntry (ref)
 	if p0.type ~= inlineQuestionTypeModule.MultipleChoiceSingle then
 		return false
 	end
@@ -17,17 +19,23 @@ local function isThumbsQuestion(p0) --[[ line: 33 ]]
 	
 	if choices == nil or #choices ~= 2 then
 		return false
+	elseif fFlagInlineSurveyChoiceTextEntry then
+		for i, v in choices do
+			if v.requiresText == true then
+				return false
+			end
+		end
 	end
 	local t = {}
 	
-	for i, v in choices do
+	for v, v in choices do
 		t[v.id] = true
 	end
 	return t["1"] == true and t["2"] == true
 end
 
 return {
-	renderQuestion = function(p1) --[[ line: 48 ]]
+	renderQuestion = function(p1) --[[ line: 58 ]]
 		-- upvalues: isThumbsQuestion (ref), reactModule (ref), thumbsQuestionModule (ref), fFlagInlineSurveyEnhancements (ref), inlineQuestionTypeModule (ref), textQuestionModule (ref), multipleChoiceQuestionModule (ref)
 		local question = p1.question
 		

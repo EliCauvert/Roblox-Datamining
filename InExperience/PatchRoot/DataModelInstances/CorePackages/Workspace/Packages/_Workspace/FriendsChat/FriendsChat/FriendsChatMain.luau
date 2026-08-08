@@ -85,7 +85,7 @@ local function FriendsChatMainContent(p0) --[[ line: 59 ]]
 	end, { var29, var30 })
 	
 	return reactModule.createElement(localizationProvider, { localization = var34 }, {
-		Content = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		Content = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			Content = if var30 == nil then reactModule.createElement(friendsChatLandingTelemetryProvidersModule, nil, {
 				ConversationList = reactModule.createElement(conversationListModule, {
 					LayoutOrder = parentLayoutOrder,

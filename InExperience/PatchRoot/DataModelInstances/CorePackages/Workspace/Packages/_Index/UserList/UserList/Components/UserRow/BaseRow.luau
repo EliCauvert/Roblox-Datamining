@@ -80,7 +80,7 @@ return reactModule.memo(function(p0) --[[ line: 79 | named "BaseRow" ]]
 				["col size-full-0 auto-y align-x-center"] = p0.layoutMode == enumsModule.RowLayoutMode.Compact
 			}
 		}, {
-			StatusIndicatorContainer = if fFlagAddStatusIndicatorToBaseRow and p0.shouldShowStatusIndicator then reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
+			StatusIndicatorContainer = if fFlagAddStatusIndicatorToBaseRow and p0.shouldShowNewIndicator then reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy padding-right-small" }, {
 				StatusIndicator = reactModule.createElement(statusIndicator, { variant = statusIndicatorVariant.Emphasis })
 			}) else nil,
 			PrimaryActionCta = if p0.primaryCta and p0.primaryCta.onActivated then if p0.layoutMode == enumsModule.RowLayoutMode.Wide then reactModule.createElement(view, {

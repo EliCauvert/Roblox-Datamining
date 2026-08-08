@@ -28,11 +28,11 @@ end
 
 return {
 	getInitialState = getInitialState,
-	getNewRunId = function() --[[ line: 89 ]]
+	getNewRunId = function() --[[ line: 94 ]]
 		-- upvalues: httpService (ref)
 		return httpService:GenerateGUID(false)
 	end,
-	selectStore = function(p3) --[[ line: 93 ]]
+	selectStore = function(p3) --[[ line: 98 ]]
 		local t = {}
 		
 		for i, v in p3.stack do
@@ -44,7 +44,7 @@ return {
 		end
 		return t
 	end,
-	reducer = function(p4, p5) --[[ line: 105 ]]
+	reducer = function(p4, p5) --[[ line: 110 ]]
 		-- upvalues: dashModule (ref), fFlagAbuseReportMenuV2 (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (ref), getInitialState (ref)
 		local cloned = nil
 		
@@ -127,6 +127,20 @@ return {
 					return p4
 				end
 			end
+		elseif p5.type == "navigateFailure" then
+			local var12 = dashModule.last(p4.stack)
+			
+			if not var12 then
+				error("Stack is empty, cannot navigate after failure")
+			end
+			if p5.payload.expectedFromNodeId ~= var12.nodeId then
+				return p4
+			elseif p4.navigationState == "idle" then
+				cloned = dashModule.join(p4, { navigationState = "gotoFailure" })
+				
+				return cloned
+			end
+			return p4
 		elseif p5.type == "startedSubmission" then
 			cloned = dashModule.join(p4, { submissionState = "submitting" })
 			

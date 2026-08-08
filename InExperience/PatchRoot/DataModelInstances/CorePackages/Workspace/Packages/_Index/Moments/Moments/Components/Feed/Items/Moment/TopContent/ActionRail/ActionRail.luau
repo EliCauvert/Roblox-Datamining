@@ -18,69 +18,65 @@ local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionC
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local fFlagMomentsFixFeedShareArrowIconModule = require(moments.Flags.FFlagMomentsFixFeedShareArrowIcon)
 local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local getFFlagMomentsMusicButtonModule = require(moments.Flags.GetFFlagMomentsMusicButton)
 local useConfigurationModule = require(moments.Hooks.useConfiguration)
 local useShareMomentModule = require(moments.Share.useShareMoment)
 local paperAirplane = builderIconsModule.Icon.PaperAirplane
 local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
 
-return reactModule.memo(function(p0) --[[ line: 55 | named "ActionRail" ]]
-	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), useShareMomentModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), fFlagMomentsFixFeedShareArrowIconModule (ref), arrowThickToRight (ref), paperAirplane (ref), getFFlagMomentsMusicButtonModule (ref), contextualMenuModule (ref), view (ref)
-	local var16 = reactUtilsModule.createNextOrder()
-	local var17 = momentContextModule.useMoment()
-	local store = var17.store
+return reactModule.memo(function(p0) --[[ line: 54 | named "ActionRail" ]]
+	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), useShareMomentModule (ref), useSignalBinding (ref), useSignalState (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), fFlagMomentsFixFeedShareArrowIconModule (ref), arrowThickToRight (ref), paperAirplane (ref), contextualMenuModule (ref), view (ref)
+	local var15 = reactUtilsModule.createNextOrder()
+	local var16 = momentContextModule.useMoment()
+	local store = var16.store
 	local isAd = store.getData(false).kind == "ad"
-	local var19 = useShareMomentModule(p0.moment)
-	local animationRatio = var17.animationRatio
-	local var20 = useSignalBinding(store.getShareCount)
-	local var21 = useSignalState(store.getIsModerated)
-	local var22 = if p0.moment == nil or p0.moment.recommendationMetadata == nil then nil else p0.moment.recommendationMetadata.feedItemId
-	local var23 = var21 or (fFlagMomentsPassFeedItemIdToBackendApis and (if var22 ~= nil then var22 == "" else true))
-	local var24 = useConfigurationModule("feed_mute_enabled", false)
-	local var25 = useConfigurationModule("feed_mute_button_analytics_enabled", false)
-	local var26 = getMomentsPreferencesStoreModule(false)
-	local var27 = useSignalState(useMomentsSession().getHideDetails)
-	local var28 = useSignalState(var26.getFeedGlobalMute)
-	local var29 = reactModule.useMemo(function() --[[ line: 91 ]]
-		-- upvalues: var28 (ref), var26 (ref)
-		return { isMuted = var28, toggle = var26.toggleFeedGlobalMute }
-	end, { var28, var26.toggleFeedGlobalMute })
+	local var18 = useShareMomentModule(p0.moment)
+	local animationRatio = var16.animationRatio
+	local var19 = useSignalBinding(store.getShareCount)
+	local var20 = useSignalState(store.getIsModerated)
+	local var21 = if p0.moment == nil or p0.moment.recommendationMetadata == nil then nil else p0.moment.recommendationMetadata.feedItemId
+	local var22 = var20 or (fFlagMomentsPassFeedItemIdToBackendApis and (if var21 ~= nil then var21 == "" else true))
+	local var23 = useConfigurationModule("feed_mute_enabled", false)
+	local var24 = useConfigurationModule("feed_mute_button_analytics_enabled", false)
+	local var25 = getMomentsPreferencesStoreModule(false)
+	local var26 = useSignalState(useMomentsSession().getHideDetails)
+	local var27 = useSignalState(var25.getFeedGlobalMute)
+	local var28 = reactModule.useMemo(function() --[[ line: 90 ]]
+		-- upvalues: var27 (ref), var25 (ref)
+		return { isMuted = var27, toggle = var25.toggleFeedGlobalMute }
+	end, { var27, var25.toggleFeedGlobalMute })
 	local t = {}
 	
-	if not var27 then
+	if not var26 then
 		if not isAd then
 			t.React = reactModule.createElement(reactionButtonModule, {
 				animationRatio = animationRatio,
-				isDisabled = var21,
-				LayoutOrder = var16()
+				isDisabled = var20,
+				LayoutOrder = var15()
 			})
 		end
 		t.Share = reactModule.createElement(railItemModule, {
-			LayoutOrder = var16(),
+			LayoutOrder = var15(),
 			slot = if fFlagMomentsFixFeedShareArrowIconModule then arrowThickToRight else paperAirplane,
-			count = var20,
+			count = var19,
 			animationRatio = animationRatio,
-			isDisabled = var23,
-			onActivated = var19.onShareActivated
+			isDisabled = var22,
+			onActivated = var18.onShareActivated
 		})
-		
-		if getFFlagMomentsMusicButtonModule() then
-			t.Music = reactModule.createElement(require(script.Parent.MusicButton), {
-				LayoutOrder = var16(),
-				moment = p0.moment,
-				animationRatio = animationRatio,
-				isDisabled = var21
-			})
-		end
+		t.Music = reactModule.createElement(require(script.Parent.MusicButton), {
+			LayoutOrder = var15(),
+			moment = p0.moment,
+			animationRatio = animationRatio,
+			isDisabled = var20
+		})
 	end
 	if p0.moment ~= nil then
 		t.ContextualMenu = reactModule.createElement(contextualMenuModule, {
-			isFeedMuteEnabled = var24,
-			isFeedMuteButtonAnalyticsEnabled = var25,
-			isDisabled = var21,
-			layoutOrder = var16(),
+			isFeedMuteEnabled = var23,
+			isFeedMuteButtonAnalyticsEnabled = var24,
+			isDisabled = var20,
+			layoutOrder = var15(),
 			moment = p0.moment,
-			playbackVolume = var29
+			playbackVolume = var28
 		})
 	end
 	return reactModule.createElement(view, {

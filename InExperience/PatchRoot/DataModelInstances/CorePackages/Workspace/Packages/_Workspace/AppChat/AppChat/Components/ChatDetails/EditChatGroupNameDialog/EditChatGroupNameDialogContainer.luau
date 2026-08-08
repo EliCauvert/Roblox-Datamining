@@ -59,7 +59,7 @@ local t_1 = {
 }
 
 function EditChatGroupNameDialogContainer(p2) --[[ line: 103 ]]
-	-- upvalues: cryoModule (ref), t_1 (ref), useState (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), t (ref), loggerModule (ref), responseStatus (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useLocalization (ref), responseIndicator (ref), editChatGroupNameDialogModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+	-- upvalues: cryoModule (ref), t_1 (ref), useState (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), loggerModule (ref), t (ref), responseStatus (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useLocalization (ref), responseIndicator (ref), editChatGroupNameDialogModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var11 = cryoModule.Dictionary.join(t_1, p2)
 	local var12, var13 = useState({ visible = true, isLoading = false })
 	local var14 = useDispatch()
@@ -104,24 +104,28 @@ function EditChatGroupNameDialogContainer(p2) --[[ line: 103 ]]
 			warningText = var12.warningTextKey
 		}), {
 			onActivated = useCallback(function(p7) --[[ line: 130 ]]
-				-- upvalues: var11 (ref), var13 (ref), t (copy), var15 (ref), loggerModule (copy), var16 (ref), responseStatus (copy)
+				-- upvalues: var11 (ref), var13 (ref), var15 (ref), loggerModule (copy), t (copy), var16 (ref), responseStatus (copy), getFFlagIsSquadEnabled (copy)
 				if var11.conversationId then
-					var13(t.Waiting())
+					var13({ visible = true, isLoading = true })
 					var15(var11.conversationId, p7.InputBox):andThen(function(p8) --[[ line: 134 ]]
-						-- upvalues: loggerModule (copy), var13 (copy), t (copy), var16 (copy), p7 (ref), responseStatus (copy), var11 (copy)
+						-- upvalues: loggerModule (copy), var13 (copy), t (copy), var16 (copy), p7 (ref), responseStatus (copy), var11 (copy), getFFlagIsSquadEnabled (copy)
 						if not p8 or not p8.responseBody or (not p8.responseBody.conversations or not p8.responseBody.conversations[1]) then
 							loggerModule.error("Conversation rename response is invalid.")
 							var13(t.Default(var16, p7.InputBox))
 							
 							return
 						elseif p8.responseBody.conversations[1].status == responseStatus.SUCCESS then
-							var13(t.Success())
+							var13({ visible = false, isLoading = false, warningTextKey = nil })
 							var11.onModalClose()
 							
 							return
 						elseif p8.responseBody and p8.responseBody.conversations[1].status == responseStatus.MODERATED then
 							loggerModule.error("Conversation rename was moderated.")
-							var13(t.Moderated())
+							var13({
+								visible = true,
+								isLoading = false,
+								warningTextKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Response.ChatNameFullyModerated.V2" else "Feature.Chat.Response.ChatNameFullyModerated"
+							})
 							
 							return
 						end

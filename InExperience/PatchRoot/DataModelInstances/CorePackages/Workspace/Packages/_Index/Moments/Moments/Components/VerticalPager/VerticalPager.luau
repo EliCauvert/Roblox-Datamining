@@ -9,42 +9,41 @@ local _ = require(script.Parent.Types)
 local snapMathModule = require(script.Parent.snapMath)
 local usePagerControllerModule = require(script.Parent.usePagerController)
 local usePagerInputNavigationModule = require(script.Parent.usePagerInputNavigation)
-local getFFlagMomentsDesktopWheelPagingModule = require(moments.Flags.GetFFlagMomentsDesktopWheelPaging)
 local fFlagMomentsFeedSwipeSensitivityConfigModule = require(moments.Flags.FFlagMomentsFeedSwipeSensitivityConfig)
 local fIntMomentsFeedSnapSensitivityMilliModule = require(moments.Flags.FIntMomentsFeedSnapSensitivityMilli)
 local fIntMomentsFeedAnimationSpeedModule = require(moments.Flags.FIntMomentsFeedAnimationSpeed)
 local verticalPagerContextModule = require(script.Parent.VerticalPagerContext)
 local verticalPagerContext = verticalPagerContextModule.VerticalPagerContext
 local pagerItemContext = verticalPagerContextModule.PagerItemContext
-local var14 = reactModule.memo(function(p0) --[[ line: 59 | named "PagerItemProviderInner" ]]
+local var13 = reactModule.memo(function(p0) --[[ line: 57 | named "PagerItemProviderInner" ]]
 	-- upvalues: reactModule (ref), signalsModule (ref), pagerItemContext (ref), snapMathModule (ref)
 	local index = p0.index
 	local getActiveIndex = p0.getActiveIndex
-	local var16 = reactModule.useMemo(function() --[[ line: 63 ]]
+	local var15 = reactModule.useMemo(function() --[[ line: 61 ]]
 		-- upvalues: signalsModule (copy), getActiveIndex (ref), index (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 64 ]]
+		return signalsModule.createComputed(function(p1) --[[ line: 62 ]]
 			-- upvalues: getActiveIndex (copy), index (copy)
 			return getActiveIndex(p1) == index
 		end)
 	end, { getActiveIndex, index })
-	local var17 = reactModule.useMemo(function() --[[ line: 72 ]]
+	local var16 = reactModule.useMemo(function() --[[ line: 70 ]]
 		-- upvalues: signalsModule (copy), getActiveIndex (ref), index (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 73 ]]
+		return signalsModule.createComputed(function(p2) --[[ line: 71 ]]
 			-- upvalues: getActiveIndex (copy), index (copy)
 			return math.abs(getActiveIndex(p2) - index) <= 1
 		end)
 	end, { getActiveIndex, index })
 	
 	return reactModule.createElement(pagerItemContext.Provider, {
-		value = reactModule.useMemo(function() --[[ line: 78 ]]
-			-- upvalues: index (ref), p0 (ref), var16 (ref), var17 (ref)
+		value = reactModule.useMemo(function() --[[ line: 76 ]]
+			-- upvalues: index (ref), p0 (ref), var15 (ref), var16 (ref)
 			return {
 				index = index,
 				item = p0.item,
-				getIsActive = var16,
-				getIsVisible = var17
+				getIsActive = var15,
+				getIsVisible = var16
 			}
-		end, { index, p0.item, var16, var17 })
+		end, { index, p0.item, var15, var16 })
 	}, {
 		Item = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -54,50 +53,42 @@ local var14 = reactModule.memo(function(p0) --[[ line: 59 | named "PagerItemProv
 	})
 end)
 
-local function useNativeScrollEnabled() --[[ line: 123 ]]
-	-- upvalues: getFFlagMomentsDesktopWheelPagingModule (ref), reactModule (ref), userInputService (ref)
-	local var18 = getFFlagMomentsDesktopWheelPagingModule()
-	
-	local function _(p3) --[[ line: 128 | named "isNonTouch" ]]
+local function useNativeScrollEnabled() --[[ line: 121 ]]
+	-- upvalues: reactModule (ref), userInputService (ref)
+	local function _(p3) --[[ line: 122 | named "isNonTouch" ]]
 		return if p3 ~= Enum.UserInputType.MouseWheel then if p3 ~= Enum.UserInputType.MouseButton1 then if p3 ~= Enum.UserInputType.MouseMovement then p3 == Enum.UserInputType.Keyboard else true else true else true
 	end
 	
-	local var19, var20 = reactModule.useState(function() --[[ line: 135 ]]
-		-- upvalues: var18 (ref), userInputService (copy)
-		local var21 = var18
+	local var17, var18 = reactModule.useState(function() --[[ line: 129 ]]
+		-- upvalues: userInputService (copy)
+		local lastInputType = userInputService:GetLastInputType()
 		
-		if var21 then
-			local lastInputType = userInputService:GetLastInputType()
-			var21 = if lastInputType ~= Enum.UserInputType.MouseWheel then if lastInputType ~= Enum.UserInputType.MouseButton1 then if lastInputType ~= Enum.UserInputType.MouseMovement then lastInputType == Enum.UserInputType.Keyboard else true else true else true
-		end
-		return not var21
+		return not (if lastInputType ~= Enum.UserInputType.MouseWheel then if lastInputType ~= Enum.UserInputType.MouseButton1 then if lastInputType ~= Enum.UserInputType.MouseMovement then lastInputType == Enum.UserInputType.Keyboard else true else true else true)
 	end)
-	reactModule.useEffect(function() --[[ line: 139 ]]
-		-- upvalues: var18 (ref), userInputService (copy), var20 (ref)
-		if var18 then
-			local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p4) --[[ line: 143 ]]
-				-- upvalues: var20 (copy)
-				if p4 == Enum.UserInputType.Touch then
-					var20(true)
-					
-					return
-				elseif if p4 ~= Enum.UserInputType.MouseWheel then if p4 ~= Enum.UserInputType.MouseButton1 then if p4 ~= Enum.UserInputType.MouseMovement then p4 == Enum.UserInputType.Keyboard else true else true else true then
-					var20(false)
-				end
-			end)
-			
-			return function() --[[ line: 150 ]]
-				-- upvalues: lastInputTypeChangedConnection (ref)
-				lastInputTypeChangedConnection:Disconnect()
+	reactModule.useEffect(function() --[[ line: 133 ]]
+		-- upvalues: userInputService (copy), var18 (ref)
+		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p4) --[[ line: 134 ]]
+			-- upvalues: var18 (copy)
+			if p4 == Enum.UserInputType.Touch then
+				var18(true)
+				
+				return
+			elseif if p4 ~= Enum.UserInputType.MouseWheel then if p4 ~= Enum.UserInputType.MouseButton1 then if p4 ~= Enum.UserInputType.MouseMovement then p4 == Enum.UserInputType.Keyboard else true else true else true then
+				var18(false)
 			end
+		end)
+		
+		return function() --[[ line: 141 ]]
+			-- upvalues: lastInputTypeChangedConnection (ref)
+			lastInputTypeChangedConnection:Disconnect()
 		end
-	end, { var18 })
+	end, {})
 	
-	return var19
+	return var17
 end
 
-return function(p5) --[[ line: 158 | named "VerticalPager" ]]
-	-- upvalues: constantsModule (ref), fFlagMomentsFeedSwipeSensitivityConfigModule (ref), fIntMomentsFeedSnapSensitivityMilliModule (ref), fIntMomentsFeedAnimationSpeedModule (ref), reactModule (ref), useNativeScrollEnabled (ref), usePagerControllerModule (ref), usePagerInputNavigationModule (ref), signalsReactModule (ref), snapMathModule (ref), var14 (ref), verticalPagerContext (ref)
+return function(p5) --[[ line: 149 | named "VerticalPager" ]]
+	-- upvalues: constantsModule (ref), fFlagMomentsFeedSwipeSensitivityConfigModule (ref), fIntMomentsFeedSnapSensitivityMilliModule (ref), fIntMomentsFeedAnimationSpeedModule (ref), reactModule (ref), useNativeScrollEnabled (ref), usePagerControllerModule (ref), usePagerInputNavigationModule (ref), signalsReactModule (ref), snapMathModule (ref), var13 (ref), verticalPagerContext (ref)
 	local store = p5.store
 	local renderItem = p5.renderItem
 	local keyExtractor = p5.keyExtractor
@@ -115,177 +106,177 @@ return function(p5) --[[ line: 158 | named "VerticalPager" ]]
 	local overscan = tuning.overscan or constantsModule.DEFAULT_OVERSCAN
 	local onEndReached = p5.onEndReached
 	local endReachedThreshold = tuning.endReachedThreshold or constantsModule.DEFAULT_END_REACHED_THRESHOLD
-	local var29 = p5.active ~= nil or p5.active
+	local var26 = p5.active ~= nil or p5.active
 	local gap = tuning.gap or 0
 	local initialIndex = p5.initialIndex
 	local keyboardNavigation = tuning.keyboardNavigation or "global"
 	
-	local function _(p6, p7) --[[ line: 189 | named "keyOf" ]]
+	local function _(p6, p7) --[[ line: 180 | named "keyOf" ]]
 		-- upvalues: keyExtractor (ref)
 		return if keyExtractor == nil then tostring(p7) else keyExtractor(p6, p7)
 	end
 	
-	local var32, var33 = reactModule.useState(nil)
-	local var34, var35 = reactModule.useState(0)
-	local var36 = reactModule.useRef(nil)
-	local var37 = reactModule.useRef({})
-	local var38 = reactModule.useCallback(function(p8) --[[ line: 203 ]]
-		-- upvalues: var33 (ref), var35 (ref)
-		var33(p8)
+	local var29, var30 = reactModule.useState(nil)
+	local var31, var32 = reactModule.useState(0)
+	local var33 = reactModule.useRef(nil)
+	local var34 = reactModule.useRef({})
+	local var35 = reactModule.useCallback(function(p8) --[[ line: 194 ]]
+		-- upvalues: var30 (ref), var32 (ref)
+		var30(p8)
 		
 		if p8 then
-			var35(p8.AbsoluteSize.Y)
+			var32(p8.AbsoluteSize.Y)
 		end
 	end, {})
-	local var39 = reactModule.useCallback(function(p9) --[[ line: 210 ]]
-		-- upvalues: var35 (ref)
-		var35(p9.AbsoluteSize.Y)
+	local var36 = reactModule.useCallback(function(p9) --[[ line: 201 ]]
+		-- upvalues: var32 (ref)
+		var32(p9.AbsoluteSize.Y)
 	end, {})
-	local var40 = useNativeScrollEnabled()
-	local var41 = usePagerControllerModule({
-		scrollingFrame = var32,
+	local var37 = useNativeScrollEnabled()
+	local var38 = usePagerControllerModule({
+		scrollingFrame = var29,
 		store = store,
-		itemHeight = var34,
+		itemHeight = var31,
 		gap = gap,
 		snapSensitivity = snapSensitivity,
 		animationSpeed = animationSpeed,
-		active = var29,
-		nativeScrollEnabled = var40,
+		active = var26,
+		nativeScrollEnabled = var37,
 		analytics = analytics
 	})
-	local var42 = usePagerInputNavigationModule({
-		active = var29,
+	local var39 = usePagerInputNavigationModule({
+		active = var26,
 		keyboardNavigation = keyboardNavigation,
-		goNext = var41.next,
-		goPrevious = var41.previous
+		goNext = var38.next,
+		goPrevious = var38.previous
 	})
-	local var43 = signalsReactModule.useSignalState(store.getCount)
-	local var44 = signalsReactModule.useSignalState(store.getItems)
-	local var45 = signalsReactModule.useSignalState(var41.getActiveIndex)
-	reactModule.useEffect(function() --[[ line: 247 ]]
-		-- upvalues: onEndReached (ref), var43 (ref), var45 (ref), endReachedThreshold (ref), var36 (ref), var44 (ref)
-		if onEndReached == nil or var43 <= 0 then return end
-		if var43 - endReachedThreshold <= var45 and var36.current ~= var44 then
-			var36.current = var44
+	local var40 = signalsReactModule.useSignalState(store.getCount)
+	local var41 = signalsReactModule.useSignalState(store.getItems)
+	local var42 = signalsReactModule.useSignalState(var38.getActiveIndex)
+	reactModule.useEffect(function() --[[ line: 238 ]]
+		-- upvalues: onEndReached (ref), var40 (ref), var42 (ref), endReachedThreshold (ref), var33 (ref), var41 (ref)
+		if onEndReached == nil or var40 <= 0 then return end
+		if var40 - endReachedThreshold <= var42 and var33.current ~= var41 then
+			var33.current = var41
 			onEndReached()
 		end
 	end, {
-		var45,
-		var43,
-		var44,
+		var42,
+		var40,
+		var41,
 		endReachedThreshold,
 		onEndReached
 	})
-	reactModule.useEffect(function() --[[ line: 259 ]]
-		-- upvalues: analytics (ref), var43 (ref), var44 (ref), var45 (ref), keyExtractor (ref), var37 (ref)
-		local var53 = if analytics ~= nil then nil else analytics.onItemImpression
+	reactModule.useEffect(function() --[[ line: 250 ]]
+		-- upvalues: analytics (ref), var40 (ref), var41 (ref), var42 (ref), keyExtractor (ref), var34 (ref)
+		local var50 = if analytics ~= nil then nil else analytics.onItemImpression
 		
-		if var53 == nil or var43 <= 0 then return end
-		local var54 = var44[var45]
+		if var50 == nil or var40 <= 0 then return end
+		local var51 = var41[var42]
 		
-		if var54 == nil then return end
-		local var55 = if keyExtractor ~= nil then tostring(var45) else keyExtractor(var54, var45)
+		if var51 == nil then return end
+		local var52 = if keyExtractor ~= nil then tostring(var42) else keyExtractor(var51, var42)
 		
-		if var37.current[var55] then
+		if var34.current[var52] then
 			return
 		end
-		var37.current[var55] = true
-		var53(var45, var54)
+		var34.current[var52] = true
+		var50(var42, var51)
 	end, {
-		var45,
-		var43,
-		var44,
+		var42,
+		var40,
+		var41,
 		analytics,
 		keyExtractor
 	})
-	local var46 = reactModule.useMemo(function() --[[ line: 276 ]]
-		-- upvalues: store (ref), var41 (ref), analytics (ref)
+	local var43 = reactModule.useMemo(function() --[[ line: 267 ]]
+		-- upvalues: store (ref), var38 (ref), analytics (ref)
 		return {
 			store = store,
-			getActiveIndex = var41.getActiveIndex,
-			getScrollState = var41.getScrollState,
-			scrollToIndex = var41.scrollToIndex,
-			next = var41.next,
-			previous = var41.previous,
-			removeItem = var41.removeItem,
+			getActiveIndex = var38.getActiveIndex,
+			getScrollState = var38.getScrollState,
+			scrollToIndex = var38.scrollToIndex,
+			next = var38.next,
+			previous = var38.previous,
+			removeItem = var38.removeItem,
 			analytics = analytics
 		}
-	end, { store, var41, analytics })
-	local var47 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 295 ]]
-		-- upvalues: var47 (ref), initialIndex (ref), var43 (ref), store (ref)
-		if var47.current then return end
+	end, { store, var38, analytics })
+	local var44 = reactModule.useRef(false)
+	reactModule.useEffect(function() --[[ line: 286 ]]
+		-- upvalues: var44 (ref), initialIndex (ref), var40 (ref), store (ref)
+		if var44.current then return end
 		if initialIndex == nil then
-			var47.current = true
+			var44.current = true
 			
 			return
-		elseif var43 < initialIndex then return end
-		var47.current = true
+		elseif var40 < initialIndex then return end
+		var44.current = true
 		
 		if initialIndex ~= store.getCurrentIndex(false) then
 			store.goToItem(initialIndex)
 		end
 	end, {
 		initialIndex,
-		var43,
+		var40,
 		store.getCurrentIndex,
 		store.goToItem
 	})
-	reactModule.useImperativeHandle(p5.controllerRef, function() --[[ line: 314 ]]
-		-- upvalues: var41 (ref)
-		return var41
-	end, { var41 })
-	local var48 = var34 + gap
-	local var49 = if var34 > 0 and var43 > 0 then (var43 - 1) * var48 + var34 else 0
+	reactModule.useImperativeHandle(p5.controllerRef, function() --[[ line: 305 ]]
+		-- upvalues: var38 (ref)
+		return var38
+	end, { var38 })
+	local var45 = var31 + gap
+	local var46 = if var31 > 0 and var40 > 0 then (var40 - 1) * var45 + var31 else 0
 	local t = {}
 	
-	if var34 > 0 and var43 > 0 then
-		local visibleWindow = snapMathModule.getVisibleWindow(var45, overscan, var43)
+	if var31 > 0 and var40 > 0 then
+		local visibleWindow = snapMathModule.getVisibleWindow(var42, overscan, var40)
 		
 		for i = visibleWindow.startIndex, visibleWindow.endIndex do
-			local var52 = var44[i]
+			local var49 = var41[i]
 			
-			if var52 ~= nil then
-				table.insert(t, reactModule.createElement(var14, {
-					key = if keyExtractor ~= nil then tostring(i) else keyExtractor(var52, i),
+			if var49 ~= nil then
+				table.insert(t, reactModule.createElement(var13, {
+					key = if keyExtractor ~= nil then tostring(i) else keyExtractor(var49, i),
 					index = i,
-					item = var52,
-					itemHeight = var34,
-					stride = var48,
-					getActiveIndex = var41.getActiveIndex,
+					item = var49,
+					itemHeight = var31,
+					stride = var45,
+					getActiveIndex = var38.getActiveIndex,
 					renderItem = renderItem
 				}))
 			end
 		end
 	end
-	return reactModule.createElement(verticalPagerContext.Provider, { value = var46 }, {
+	return reactModule.createElement(verticalPagerContext.Provider, { value = var43 }, {
 		Container = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			SelectionGroup = true,
-			Active = var29,
+			Active = var26,
 			AnchorPoint = p5.AnchorPoint,
 			LayoutOrder = p5.LayoutOrder,
 			Position = p5.Position,
-			Selectable = var29,
+			Selectable = var26,
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 			Size = p5.Size or UDim2.fromScale(1, 1),
 			ZIndex = p5.ZIndex,
-			ref = var42
+			ref = var39
 		}, {
 			Scroller = reactModule.createElement("ScrollingFrame", {
 				AutomaticCanvasSize = Enum.AutomaticSize.None,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				CanvasSize = UDim2.new(1, 0, 0, var49),
+				CanvasSize = UDim2.new(1, 0, 0, var46),
 				ClipsDescendants = true,
 				ScrollBarThickness = 0,
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollingEnabled = var29 and (var43 > 1 and var40),
+				ScrollingEnabled = var26 and (var40 > 1 and var37),
 				Selectable = false,
 				Size = UDim2.fromScale(1, 1),
-				ref = var38,
-				[reactModule.Change.AbsoluteSize] = var39
+				ref = var35,
+				[reactModule.Change.AbsoluteSize] = var36
 			}, t)
 		})
 	})

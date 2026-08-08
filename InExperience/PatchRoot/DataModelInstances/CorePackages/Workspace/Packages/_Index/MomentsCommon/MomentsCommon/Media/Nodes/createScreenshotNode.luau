@@ -6,16 +6,16 @@ local signalsModule = require(parent.Signals)
 local view = foundationModule.View
 local _ = require(momentsCommon.Media.MediaTypes)
 local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local preloadConstantsModule = require(momentsCommon.Media.Preload.preloadConstants)
+local preloadFastIntsModule = require(momentsCommon.Media.Preload.preloadFastInts)
 
 return {
 	kind = "screenshot",
 	create = function(p0, p1) --[[ line: 72 ]]
-		-- upvalues: preloadConstantsModule (ref), signalsModule (ref), reactModule (ref), view (ref)
+		-- upvalues: preloadFastIntsModule (ref), signalsModule (ref), reactModule (ref), view (ref)
 		local image = p0.image
 		assert(image ~= nil, "createScreenshotNode: spec.image (the screenshot content URI) is required")
 		local poster = p0.poster
-		local durationSeconds = p0.durationSeconds or preloadConstantsModule.screenshotDurationSeconds
+		local durationSeconds = p0.durationSeconds or preloadFastIntsModule.getScreenshotDurationSeconds()
 		local content = Content.fromUri(image)
 		local var7 = if poster ~= nil then nil else Content.fromUri(poster)
 		local var8, var9 = signalsModule.createSignal(0)

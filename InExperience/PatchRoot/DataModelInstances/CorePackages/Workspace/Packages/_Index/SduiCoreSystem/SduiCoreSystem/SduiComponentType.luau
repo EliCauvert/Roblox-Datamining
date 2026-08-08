@@ -53,6 +53,7 @@
 	InfoTable = "InfoTable",
 	InfoTableCell = "InfoTableCell",
 	LinkText = "LinkText",
+	MarketplaceFavoritesCategoryMenu = "MarketplaceFavoritesCategoryMenu",
 	MediaGallery = "MediaGallery",
 	OverflowMenu = "OverflowMenu",
 	OptionSelectorCollection = "OptionSelectorCollection",

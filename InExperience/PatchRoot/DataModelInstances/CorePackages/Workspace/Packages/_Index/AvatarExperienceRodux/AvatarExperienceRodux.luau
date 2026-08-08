@@ -22,6 +22,7 @@ return {
 		RemoveLookItemsFromTryOn = require(script.Actions.RemoveLookItemsFromTryOn),
 		RemoveUnselectedItemsFromTryOn = require(script.Actions.RemoveUnselectedItemsFromTryOn),
 		SetAccessoryAdjustments = require(script.Actions.SetAccessoryAdjustments),
+		SetAnimationPreview = require(script.Actions.SetAnimationPreview),
 		SetAvatarSceneRoute = require(script.Actions.SetAvatarSceneRoute),
 		SetEquippedInTryOnManager = require(script.Actions.SetEquippedInTryOnManager),
 		SetItemDetailsPeekViewState = require(script.Actions.SetItemDetailsPeekViewState),

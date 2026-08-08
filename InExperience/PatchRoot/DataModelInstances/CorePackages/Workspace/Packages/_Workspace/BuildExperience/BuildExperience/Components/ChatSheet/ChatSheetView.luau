@@ -15,7 +15,7 @@ local var10 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then 
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function ChatSheetContent(p0) --[[ line: 54 ]]
+local function ChatSheetContent(p0) --[[ line: 55 ]]
 	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var10 (ref), var9 (ref)
 	local var12 = reactModule.useRef(nil)
 	
@@ -23,7 +23,7 @@ local function ChatSheetContent(p0) --[[ line: 54 ]]
 		var10("LuaApp_Build_Chat_Scroll", var12)
 	end
 	return reactModule.createElement(var9.Content, {
-		scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then reactModule.useCallback(function(p1) --[[ line: 64 ]]
+		scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then reactModule.useCallback(function(p1) --[[ line: 65 ]]
 			-- upvalues: var12 (ref), p0 (ref)
 			var12.current = p1
 			p0.setScrollingFrame(p1)
@@ -31,7 +31,7 @@ local function ChatSheetContent(p0) --[[ line: 54 ]]
 	}, p0.children)
 end
 
-return function(p2) --[[ line: 76 | named "ChatSheetView" ]]
+return function(p2) --[[ line: 77 | named "ChatSheetView" ]]
 	-- upvalues: useTokens (ref), chatMessageListModule (ref), reactModule (ref), buildEmptyStateModule (ref), view (ref), var9 (ref), ChatSheetContent (ref), chatActionsModule (ref), localizationStringsModule (ref), buildPillMenuPortalModule (ref)
 	return reactModule.createElement(var9.Root, {
 		isOpen = p2.isOpen,
@@ -55,6 +55,7 @@ return function(p2) --[[ line: 76 | named "ChatSheetView" ]]
 				clockBinding = p2.clockBinding,
 				localToolActions = p2.localToolActions,
 				emptyState = reactModule.createElement(buildEmptyStateModule),
+				isHistoryLoading = p2.isHistoryLoading,
 				onPlaytest = p2.onPlaytest,
 				isPlaytestLoading = p2.isPlaytestLoading
 			}))

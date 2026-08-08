@@ -10,6 +10,7 @@
 	PostPasswordValid = require(script.PostPasswordValid),
 	LogoutAllLoggedInUsersRequest = require(script.LogoutAllLoggedInUsersRequest),
 	LogoutFromAllSessionsAndReauthenticateRequest = require(script.LogoutFromAllSessionsAndReauthenticateRequest),
+	LogoutRequest = require(script.LogoutRequest),
 	PostUsernameValid = require(script.PostUsernameValid),
 	TwoStepRequests = require(script.TwoStepRequests),
 	AuthPlatformDisconnect = require(script.AuthPlatformDisconnect),

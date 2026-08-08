@@ -36,7 +36,7 @@ local function ThemedOverlay(p0) --[[ line: 49 ]]
 		return roduxModule.Store.new(roduxModule.combineReducers({}), nil, list)
 	end, {})
 	
-	return reactModule.createElement(foundationProvider, { theme = if var14 == "light" then "Light" else "Dark" }, {
+	return reactModule.createElement(foundationProvider, { colorMode = if var14 == "light" then "Light" else "Dark" }, {
 		Providers = reactModule.createElement(providerContainer, {
 			providers = reactModule.useMemo(function() --[[ line: 56 ]]
 				-- upvalues: roactRoduxModule (copy), var15 (ref), styleProviderWithDefaultTheme (copy), var14 (ref), localizationProvider (copy), localization (copy), localizationService (copy), selectionCursorProvider (copy), cursorProvider (copy)

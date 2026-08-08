@@ -32,7 +32,7 @@ local inputSize = foundationModule.Enums.InputSize
 local useTokens = foundationModule.Hooks.useTokens
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 
-local function _(p0, p1) --[[ line: 107 | named "findGroup" ]]
+local function _(p0, p1) --[[ line: 108 | named "findGroup" ]]
 	if p0 == nil or p1 == nil then
 		return nil
 	end
@@ -44,12 +44,12 @@ local function _(p0, p1) --[[ line: 107 | named "findGroup" ]]
 	return nil
 end
 
-local _ = function(p2) --[[ line: 119 | named "getGroupStatus" ]]
+local _ = function(p2) --[[ line: 120 | named "getGroupStatus" ]]
 	-- upvalues: subagentTaskStatus (ref)
 	return if p2.isLoading then subagentTaskStatus.InProgress elseif p2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 end
 
-local function toTodoItems(p3) --[[ line: 129 ]]
+local function toTodoItems(p3) --[[ line: 130 ]]
 	local t = {}
 	
 	if p3 == nil then
@@ -66,7 +66,7 @@ local function toTodoItems(p3) --[[ line: 129 ]]
 	return t
 end
 
-return function(p4) --[[ line: 145 | named "BuildChatPageView" ]]
+return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
 	-- upvalues: useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var17 (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), pushNotificationsUpsellCardModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), chatConstantsModule (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), localizationStringsModule (ref), toTodoItems (ref)
 	local var20 = useTokens()
 	local var21 = reactModule.useRef(nil)
@@ -75,7 +75,7 @@ return function(p4) --[[ line: 145 | named "BuildChatPageView" ]]
 		var17("LuaApp_Build_Chat_Scroll", var21)
 	end
 	local var23
-	local var22 = reactModule.useCallback(function(p5) --[[ line: 153 ]]
+	local var22 = reactModule.useCallback(function(p5) --[[ line: 154 ]]
 		-- upvalues: var21 (ref), p4 (ref)
 		var21.current = p5
 		p4.scrollingFrameRef(p5)
@@ -98,6 +98,7 @@ return function(p4) --[[ line: 145 | named "BuildChatPageView" ]]
 		clockBinding = p4.clockBinding,
 		localToolActions = p4.localToolActions,
 		emptyState = reactModule.createElement(buildEmptyStateModule),
+		isHistoryLoading = p4.isHistoryLoading,
 		onPlaytest = p4.onPlaytest,
 		isPlaytestLoading = p4.isPlaytestLoading
 	})
@@ -128,7 +129,7 @@ return function(p4) --[[ line: 145 | named "BuildChatPageView" ]]
 				layoutOrder = v,
 				text = v_2.name,
 				isChecked = v_2.isComplete,
-				onActivated = function() --[[ line: 202 ]]
+				onActivated = function() --[[ line: 204 ]]
 					-- upvalues: p4 (ref), v_2 (ref)
 					p4.onChipActivated(v_2.name)
 				end,

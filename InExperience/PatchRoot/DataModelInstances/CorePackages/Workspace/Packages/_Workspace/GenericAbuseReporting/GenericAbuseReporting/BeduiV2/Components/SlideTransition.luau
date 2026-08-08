@@ -14,7 +14,7 @@ local t = {
 }
 local t_1 = { inExpChatSelection = true, inExpSceneSelection = true }
 
-local function SlidePane(p0) --[[ line: 54 ]]
+local function SlidePane(p0) --[[ line: 49 ]]
 	-- upvalues: reactModule (ref), view (ref)
 	return reactModule.createElement(view, {
 		tag = "size-full",
@@ -36,7 +36,7 @@ local function SlidePane(p0) --[[ line: 54 ]]
 	})
 end
 
-return reactModule.memo(function(p1) --[[ line: 98 | named "SlideTransition" ]]
+return reactModule.memo(function(p1) --[[ line: 88 | named "SlideTransition" ]]
 	-- upvalues: t_1 (ref), reactModule (ref), reactOtterModule (ref), t (ref), SlidePane (ref), slideTransitionContextModule (ref), view (ref)
 	local nodeType = t_1[p1.nodeType] or false
 	local var9, var10 = reactModule.useState(false)
@@ -51,7 +51,7 @@ return reactModule.memo(function(p1) --[[ line: 98 | named "SlideTransition" ]]
 		transitionId = 0,
 		springId = 0
 	})
-	local var14, var15 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function() --[[ line: 120 ]]
+	local var14, var15 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function() --[[ line: 110 ]]
 		-- upvalues: var13 (ref), var10 (ref), var12 (ref)
 		local current = var13.current
 		
@@ -68,7 +68,7 @@ return reactModule.memo(function(p1) --[[ line: 98 | named "SlideTransition" ]]
 	if current.prevNodeId ~= nil and current.prevNodeId ~= p1.nodeId then
 		local var16 = p1.direction ~= nil
 		
-		if (not nodeType or not true) and current.prevContent and var16 then
+		if not nodeType and current.prevContent and var16 then
 			current.outgoing = {
 				nodeId = current.prevNodeId,
 				content = current.prevContent
@@ -93,7 +93,7 @@ return reactModule.memo(function(p1) --[[ line: 98 | named "SlideTransition" ]]
 		current.prevNodeId = p1.nodeId
 		current.prevContent = p1.nodeContent
 	end
-	reactModule.useLayoutEffect(function() --[[ line: 166 ]]
+	reactModule.useLayoutEffect(function() --[[ line: 156 ]]
 		-- upvalues: var13 (ref), var10 (ref), var12 (ref), t (copy), var15 (ref), reactOtterModule (copy)
 		local current = var13.current
 		
@@ -120,7 +120,7 @@ return reactModule.memo(function(p1) --[[ line: 98 | named "SlideTransition" ]]
 		t_2[current.outgoing.nodeId] = reactModule.createElement(SlidePane, {
 			withInputSink = true,
 			content = current.outgoing.content,
-			position = if needsAnimationStart then UDim2.new(0, 0, 0, 0) else var14:map(function(p2) --[[ line: 197 ]]
+			position = if needsAnimationStart then UDim2.new(0, 0, 0, 0) else var14:map(function(p2) --[[ line: 187 ]]
 				-- upvalues: var13 (ref)
 				return UDim2.new(p2 * (if var13.current.direction == "forward" then -1 else 1), 0, 0, 0)
 			end)
@@ -129,7 +129,7 @@ return reactModule.memo(function(p1) --[[ line: 98 | named "SlideTransition" ]]
 	t_2[p1.nodeId] = reactModule.createElement(SlidePane, {
 		withInputSink = false,
 		content = p1.nodeContent,
-		position = if needsAnimationStart then UDim2.new(if current.direction == "forward" then 1 else -1, 0, 0, 0) elseif var18 then var14:map(function(p3) --[[ line: 214 ]]
+		position = if needsAnimationStart then UDim2.new(if current.direction == "forward" then 1 else -1, 0, 0, 0) elseif var18 then var14:map(function(p3) --[[ line: 204 ]]
 			-- upvalues: var13 (ref)
 			return UDim2.new((1 - p3) * (if var13.current.direction == "forward" then 1 else -1), 0, 0, 0)
 		end) else nil

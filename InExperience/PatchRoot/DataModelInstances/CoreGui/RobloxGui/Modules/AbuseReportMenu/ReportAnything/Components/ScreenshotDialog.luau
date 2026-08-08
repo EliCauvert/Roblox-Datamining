@@ -14,10 +14,9 @@ local virtualKeyboardMonitorModule = require(parent.Utility.VirtualKeyboardMonit
 local screenshotDialogPortraitModeHeaderModule = require(parent.Components.ScreenshotDialogPortraitModeHeader)
 local screenshotDialogLandscapeModeHeaderModule = require(parent.Components.ScreenshotDialogLandscapeModeHeader)
 local _ = require(parent.Utility.ReportAnythingAnalytics)
-local getFFlagAvatarIdentificationSafeAreaFix = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAvatarIdentificationSafeAreaFix
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function PortraitModeFooter(p0) --[[ line: 45 ]]
+local function PortraitModeFooter(p0) --[[ line: 43 ]]
 	-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref), robloxTranslatorModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -47,7 +46,7 @@ local function PortraitModeFooter(p0) --[[ line: 45 ]]
 					{
 						buttonType = buttonType.PrimarySystem,
 						props = {
-							onActivated = function() --[[ line: 76 ]]
+							onActivated = function() --[[ line: 74 ]]
 								-- upvalues: p0 (ref)
 								p0.finishAnnotationAction(p0.annotationPoints)
 							end,
@@ -60,12 +59,12 @@ local function PortraitModeFooter(p0) --[[ line: 45 ]]
 	})
 end
 
-return function(p1) --[[ line: 88 | named "ScreenshotDialog" ]]
-	-- upvalues: useStyle (ref), virtualKeyboardMonitorModule (ref), reactModule (ref), cryoModule (ref), imageSetButton (ref), assetsModule (ref), screenshotDialogPortraitModeHeaderModule (ref), screenshotDialogLandscapeModeHeaderModule (ref), dividerModule (ref), getFFlagAvatarIdentificationSafeAreaFix (ref), screenshotHighlighterModule (ref), PortraitModeFooter (ref)
+return function(p1) --[[ line: 86 | named "ScreenshotDialog" ]]
+	-- upvalues: useStyle (ref), virtualKeyboardMonitorModule (ref), reactModule (ref), cryoModule (ref), imageSetButton (ref), assetsModule (ref), screenshotDialogPortraitModeHeaderModule (ref), screenshotDialogLandscapeModeHeaderModule (ref), dividerModule (ref), screenshotHighlighterModule (ref), PortraitModeFooter (ref)
 	local theme = useStyle().Theme
 	local instance = virtualKeyboardMonitorModule.getInstance()
 	
-	local var13 = function() --[[ line: 94 ]]
+	local var13 = function() --[[ line: 92 ]]
 		-- upvalues: instance (ref), p1 (ref)
 		warn("OverlayActivated")
 		
@@ -78,22 +77,22 @@ return function(p1) --[[ line: 88 | named "ScreenshotDialog" ]]
 	
 	local var14, var15 = reactModule.useState(cryoModule.Dictionary.join({}, p1.initialAnnotationPoints or {}))
 	local var16, var17 = reactModule.useState({})
-	local var18 = reactModule.useCallback(function() --[[ line: 111 ]]
+	local var18 = reactModule.useCallback(function() --[[ line: 109 ]]
 		-- upvalues: var15 (ref), var14 (ref)
 		var15(table.clone(var14))
 	end, { var15, var14 })
-	local var19 = reactModule.useCallback(function() --[[ line: 115 ]]
+	local var19 = reactModule.useCallback(function() --[[ line: 113 ]]
 		-- upvalues: p1 (ref)
 		p1.reportAnythingAnalytics.incrementAnnotationBack()
 		p1.backAction()
 	end, { p1.backAction, p1.reportAnythingAnalytics })
-	local var20 = reactModule.useCallback(function(_) --[[ line: 120 ]]
+	local var20 = reactModule.useCallback(function(_) --[[ line: 118 ]]
 		-- upvalues: p1 (ref), var18 (ref), var17 (ref)
 		p1.reportAnythingAnalytics.incrementAnnotationPlace()
 		var18()
 		var17({})
 	end, { var17, var18, p1.reportAnythingAnalytics })
-	local var21 = reactModule.useCallback(function() --[[ line: 127 ]]
+	local var21 = reactModule.useCallback(function() --[[ line: 125 ]]
 		-- upvalues: var14 (ref), p1 (ref), var16 (ref), var18 (ref)
 		if #var14 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationUndo()
@@ -102,7 +101,7 @@ return function(p1) --[[ line: 88 | named "ScreenshotDialog" ]]
 			var18()
 		end
 	end, { var18, var14, var16, p1.reportAnythingAnalytics })
-	local var22 = reactModule.useCallback(function() --[[ line: 137 ]]
+	local var22 = reactModule.useCallback(function() --[[ line: 135 ]]
 		-- upvalues: var16 (ref), p1 (ref), var14 (ref), var18 (ref)
 		if #var16 > 0 then
 			p1.reportAnythingAnalytics.incrementAnnotationRedo()
@@ -111,7 +110,7 @@ return function(p1) --[[ line: 88 | named "ScreenshotDialog" ]]
 			var18()
 		end
 	end, { var18, var14, var16, p1.reportAnythingAnalytics })
-	local var23 = reactModule.useCallback(function(p2) --[[ line: 147 ]]
+	local var23 = reactModule.useCallback(function(p2) --[[ line: 145 ]]
 		-- upvalues: p1 (ref)
 		p1.reportAnythingAnalytics.setAnnotationNext()
 		p1.finishAnnotationAction(p2)
@@ -181,11 +180,10 @@ return function(p1) --[[ line: 88 | named "ScreenshotDialog" ]]
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5)
 					}, {
-						UIAspectRatioConstraint = if getFFlagAvatarIdentificationSafeAreaFix() then nil else reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p1.imageAspectRatio }),
-						Layout = if getFFlagAvatarIdentificationSafeAreaFix() then reactModule.createElement("UIListLayout", {
+						Layout = reactModule.createElement("UIListLayout", {
 							HorizontalAlignment = Enum.HorizontalAlignment.Center,
 							VerticalAlignment = Enum.VerticalAlignment.Center
-						}) else nil,
+						}),
 						Padding = reactModule.createElement("UIPadding", {
 							PaddingTop = UDim.new(0, 16),
 							PaddingBottom = UDim.new(0, 16),
@@ -195,10 +193,10 @@ return function(p1) --[[ line: 88 | named "ScreenshotDialog" ]]
 						AnnotationLayer = reactModule.createElement("Frame", {
 							BorderSizePixel = 2,
 							Size = UDim2.new(1, 0, 1, 0),
-							BorderMode = if getFFlagAvatarIdentificationSafeAreaFix() then Enum.BorderMode.Outline else Enum.BorderMode.Inset,
+							BorderMode = Enum.BorderMode.Outline,
 							BorderColor3 = Color3.fromRGB(255, 255, 255)
 						}, {
-							UIAspectRatioConstraint = if getFFlagAvatarIdentificationSafeAreaFix() then reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p1.imageAspectRatio }) else nil,
+							UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = p1.imageAspectRatio }),
 							ScreenshotImage = reactModule.createElement("ImageLabel", {
 								ZIndex = 1,
 								Size = UDim2.fromScale(1, 1),

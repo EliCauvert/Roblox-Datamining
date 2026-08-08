@@ -6,6 +6,7 @@
 	Link = "Link",
 	LoadMoreFromApi = "LoadMoreFromApi",
 	RefreshFromApi = "RefreshFromApi",
+	RefreshChartsSortDetail = "RefreshChartsSortDetail",
 	RefreshDeveloperProducts = "RefreshDeveloperProducts",
 	RefreshOmniRecommendationFeedItem = "RefreshOmniRecommendationFeedItem",
 	RefreshGamePasses = "RefreshGamePasses",
@@ -51,6 +52,8 @@
 	OpenMarketplaceCatalogFilters = "OpenMarketplaceCatalogFilters",
 	SelectMarketplaceCatalogCategory = "SelectMarketplaceCatalogCategory",
 	SelectMarketplaceCatalogSubcategory = "SelectMarketplaceCatalogSubcategory",
+	SelectMarketplaceFavoritesCategory = "SelectMarketplaceFavoritesCategory",
+	SelectMarketplaceFavoritesSubcategory = "SelectMarketplaceFavoritesSubcategory",
 	OpenMarketplaceCatalogSeeAll = "OpenMarketplaceCatalogSeeAll",
 	RsvpToEvent = "RsvpToEvent",
 	OpenEventDetails = "OpenEventDetails",
@@ -60,6 +63,7 @@
 	EnableEventNotifications = "EnableEventNotifications",
 	DismissEventNotificationsModal = "DismissEventNotificationsModal",
 	OpenFaeTrialUpsell = "OpenFaeTrialUpsell",
+	OpenIncomingTransferUpsell = "OpenIncomingTransferUpsell",
 	PinExperienceShortcut = "PinExperienceShortcut",
 	ShowToast = "ShowToast"
 }

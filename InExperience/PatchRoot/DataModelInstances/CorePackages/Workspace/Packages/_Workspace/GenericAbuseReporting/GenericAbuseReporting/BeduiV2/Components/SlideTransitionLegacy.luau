@@ -14,7 +14,7 @@ local t = {
 }
 local t_1 = { inExpChatSelection = true, inExpSceneSelection = true }
 
-return reactModule.memo(function(p0) --[[ line: 49 | named "SlideTransitionLegacy" ]]
+return reactModule.memo(function(p0) --[[ line: 47 | named "SlideTransitionLegacy" ]]
 	-- upvalues: t_1 (ref), reactModule (ref), reactOtterModule (ref), t (ref), view (ref), slideTransitionContextModule (ref)
 	local nodeType = t_1[p0.nodeType] or false
 	local var8, var9 = reactModule.useState(false)
@@ -26,7 +26,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "SlideTransitionLegac
 		direction = "forward",
 		needsAnimationStart = false
 	})
-	local var13, var14 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function() --[[ line: 66 ]]
+	local var13, var14 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function() --[[ line: 64 ]]
 		-- upvalues: var12 (ref), var9 (ref), var11 (ref)
 		var12.current.outgoing = nil
 		var9(false)
@@ -48,7 +48,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "SlideTransitionLegac
 		current.prevNodeId = p0.nodeId
 		current.prevContent = p0.nodeContent
 	end
-	reactModule.useLayoutEffect(function() --[[ line: 94 ]]
+	reactModule.useLayoutEffect(function() --[[ line: 92 ]]
 		-- upvalues: var12 (ref), var9 (ref), var11 (ref), t (copy), var14 (ref), reactOtterModule (copy)
 		if var12.current.needsAnimationStart then
 			var12.current.needsAnimationStart = false
@@ -64,7 +64,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "SlideTransitionLegac
 	if current.outgoing then
 		t_2[current.outgoing.nodeId] = reactModule.createElement(view, {
 			tag = "col size-full",
-			Position = if var8 then var13:map(function(p1) --[[ line: 111 ]]
+			Position = if var8 then var13:map(function(p1) --[[ line: 109 ]]
 				-- upvalues: var12 (ref)
 				return UDim2.new(p1 * (if var12.current.direction == "forward" then -1 else 1), 0, 0, 0)
 			end) else nil
@@ -72,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "SlideTransitionLegac
 	end
 	t_2[p0.nodeId] = reactModule.createElement(view, {
 		tag = "col size-full",
-		Position = if var8 then var13:map(function(p2) --[[ line: 122 ]]
+		Position = if var8 then var13:map(function(p2) --[[ line: 120 ]]
 			-- upvalues: var12 (ref)
 			return UDim2.new((1 - p2) * (if var12.current.direction == "forward" then 1 else -1), 0, 0, 0)
 		end) else nil

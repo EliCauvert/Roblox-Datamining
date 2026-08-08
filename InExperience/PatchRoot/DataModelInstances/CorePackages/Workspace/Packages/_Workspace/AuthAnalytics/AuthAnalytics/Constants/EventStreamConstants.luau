@@ -123,7 +123,6 @@
 		LandingScreen = "landingScreen",
 		LandingPageUnmount = "landingPageUnmount",
 		LandingScreenCustomizedInvite = "landingScreenCustomizedInvite",
-		LandingScreenVideo = "landingScreenEligibleForVideo",
 		BirthdayScreen = "birthdayScreen",
 		SignupAvatarScreen = "signupAvatarScreen",
 		UsernameScreen = "usernameScreen",

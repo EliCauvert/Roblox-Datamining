@@ -30,6 +30,7 @@ local selectEquippedLayeredMakeupAssetsModule = require(script.State.Selectors.s
 local selectTotalLayeredMakeupAssetsModule = require(script.State.Selectors.selectTotalLayeredMakeupAssets)
 local selectHasDynamicHeadModule = require(script.State.Selectors.selectHasDynamicHead)
 local selectTryOnsLookIdModule = require(script.State.Selectors.selectTryOnsLookId)
+local itemDataModule = require(script.State.Selectors.ItemData)
 local robuxBalanceModule = require(script.Components.RobuxBalance.RobuxBalance)
 local itemTypeEnumModule = require(script.Enums.ItemTypeEnum)
 local catalogCategoriesModule = require(script.Enums.CatalogCategories)
@@ -174,7 +175,8 @@ return {
 			selectEquippedLayeredMakeupAssets = selectEquippedLayeredMakeupAssetsModule,
 			selectTotalLayeredMakeupAssets = selectTotalLayeredMakeupAssetsModule,
 			selectHasDynamicHead = selectHasDynamicHeadModule,
-			selectTryOnsLookId = selectTryOnsLookIdModule
+			selectTryOnsLookId = selectTryOnsLookIdModule,
+			ItemData = itemDataModule
 		},
 		Actions = {
 			CharacterHistoryStateChangeButtonActivated = characterHistoryStateChangeButtonActivatedModule

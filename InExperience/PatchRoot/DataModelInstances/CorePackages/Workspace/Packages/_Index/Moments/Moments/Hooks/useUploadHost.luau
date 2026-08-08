@@ -75,19 +75,20 @@ return function(p10) --[[ line: 116 | named "useUploadHost" ]]
 	local var15 = useLocalization(t)
 	
 	return reactModule.useMemo(function() --[[ line: 122 ]]
-		-- upvalues: getUploadStoreModule (copy), getToastStoreModule (copy), onExit (ref), captureSource (ref), getFFlagEnableMomentTextGenerationModule (copy), generateMomentTextModule (copy), var15 (ref), momentsCreationModule (copy), var12 (copy), publishMomentWithUpload (copy), makeUploadStore (copy)
+		-- upvalues: getUploadStoreModule (copy), getToastStoreModule (copy), getFFlagEnableMomentTextGenerationModule (copy), onExit (ref), captureSource (ref), generateMomentTextModule (copy), var15 (ref), momentsCreationModule (copy), var12 (copy), publishMomentWithUpload (copy), makeUploadStore (copy)
 		local var16 = getUploadStoreModule(false)
 		local var17 = getToastStoreModule(false)
+		local captureServiceGenerateMomentText = getFFlagEnableMomentTextGenerationModule() and game:GetEngineFeature("CaptureServiceGenerateMomentText")
 		
 		return {
 			exitCreationFlow = onExit,
 			captureSource = captureSource,
-			generateMomentText = if getFFlagEnableMomentTextGenerationModule() then generateMomentTextModule else nil,
-			onGenerateTextSuccess = if getFFlagEnableMomentTextGenerationModule() then function() --[[ line: 131 ]]
+			generateMomentText = if captureServiceGenerateMomentText then generateMomentTextModule else nil,
+			onGenerateTextSuccess = if captureServiceGenerateMomentText then function() --[[ line: 137 ]]
 				-- upvalues: var17 (ref), var15 (copy)
 				var17.triggerToast({ title = var15.generatedTitle, text = var15.generatedBody })
 			end else nil,
-			onGenerateTextFailure = if getFFlagEnableMomentTextGenerationModule() then function() --[[ line: 136 ]]
+			onGenerateTextFailure = if captureServiceGenerateMomentText then function() --[[ line: 142 ]]
 				-- upvalues: var17 (ref), var15 (copy)
 				var17.triggerToast({
 					title = var15.generateFailedTitle,
@@ -95,9 +96,9 @@ return function(p10) --[[ line: 116 | named "useUploadHost" ]]
 				})
 			end else nil,
 			isTextFiltered = momentsCreationModule.isTextFiltered,
-			createMoment = if var12 then function(_, _, p16, _, _) --[[ line: 145 ]]
+			createMoment = if var12 then function(_, _, p16, _, _) --[[ line: 151 ]]
 				print(`[moments-creation] dev publish (not uploaded): "{p16}"`)
-			end else function(p11, p12, p13, p14, p15) --[[ line: 154 ]]
+			end else function(p11, p12, p13, p14, p15) --[[ line: 160 ]]
 				-- upvalues: publishMomentWithUpload (copy), var15 (copy), makeUploadStore (copy), var16 (ref), var17 (ref)
 				publishMomentWithUpload(p11, p12, p13, {
 					localizations = var15,

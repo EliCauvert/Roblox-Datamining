@@ -19,7 +19,7 @@ return {
 		return function(p1) --[[ line: 17 ]]
 			-- upvalues: reactModule (copy), localizationProvider (copy), var4 (copy), foundationProvider (copy), foundationModule (copy), p0 (ref)
 			return reactModule.createElement(localizationProvider, { localization = var4 }, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, { Child = reactModule.createElement(p0, p1) })
+				FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { Child = reactModule.createElement(p0, p1) })
 			})
 		end
 	end

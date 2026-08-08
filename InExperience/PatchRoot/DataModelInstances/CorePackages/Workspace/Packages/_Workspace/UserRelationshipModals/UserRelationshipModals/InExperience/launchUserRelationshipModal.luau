@@ -48,7 +48,7 @@ return function(p0, p1) --[[ line: 33 ]]
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, {
-			theme = foundationModule.Enums.Theme.Dark,
+			colorMode = foundationModule.Enums.ColorMode.Dark,
 			overlayGui = userRelationshipModalOverlay
 		}, {
 			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {
