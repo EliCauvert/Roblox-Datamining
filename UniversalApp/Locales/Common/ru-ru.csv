@@ -706,6 +706,7 @@ CoreScripts.TextChat.Version.Success,{RBX_VERSION}
 CoreScripts.TextChat.Whisper.Error.CannotChat,Ты не можешь общаться с этим пользователем.
 CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[От: {RBX_NAME}]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[Для: {RBX_NAME}]
+CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
 CoreScripts.TopBar.Label.InappropriateAudio,Недопустимое аудио
 CoreScripts.TopBar.Label.Report,Пожаловаться
@@ -2281,7 +2282,6 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Не де�
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Действие чата приостановлено на {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,Мы разберёмся
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Приостановка чата
-Feature.Landing.Heading.LandingSlogan,Исследуй более 30 миллионов плейсов
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,
 Feature.Landing.Label.BrazilContentDescriptorViolence,Насилие
 Feature.Landing.Label.BrazilContentRatingLogoTitle,Рекомендуемый возраст: 12 лет

@@ -64,9 +64,29 @@ Application.Logout.Message.Confirmation,คุณแน่ใจหรือไ�
 Application.Logout.Title.Logout,
 Application.Settings.AccountSettingsTitle,การตั้งค่าบัญชี
 Application.Settings.AppSettingsTitle,การตั้งค่าแอป
+Application.Settings.DeviceSettings.Title,การตั้งค่าอุปกรณ์
+Application.Settings.VR.Comfort.Description,ลดอาการเมาจากการเคลื่อนไหวได้โดยปรับการเคลื่อนไหวและขอบเขตมุมมอง
+Application.Settings.VR.Comfort.Profile.Description,"เลือกค่าที่ตั้งไว้ล่วงหน้าหรือเลือก ""กำหนดเอง"" เพื่อตั้งค่าตัวเลือกความสบายแต่ละรายการด้วยตนเอง"
+Application.Settings.VR.Comfort.Profile.Option.Comfort,สบาย
+Application.Settings.VR.Comfort.Profile.Option.Custom,กำหนดเอง
+Application.Settings.VR.Comfort.Profile.Option.Default,ค่าเริ่มต้น
+Application.Settings.VR.Comfort.Profile.Option.Expert,ผู้เชี่ยวชาญ
+Application.Settings.VR.Comfort.Profile.Title,โปรไฟล์ความสบาย
+Application.Settings.VR.Comfort.SafetyBubbleMode.Description,กำหนดว่าใครที่จะสามารถเข้าใกล้คุณได้โดยไม่หายไป
+Application.Settings.VR.Comfort.SafetyBubbleMode.Option.Anyone,ทุกคน
+Application.Settings.VR.Comfort.SafetyBubbleMode.Option.NoOne,ไม่มีสักคน
+Application.Settings.VR.Comfort.SafetyBubbleMode.Option.OnlyFriends,เพื่อนเท่านั้น
+Application.Settings.VR.Comfort.SafetyBubbleMode.Title,พื้นที่ปลอดภัย
+Application.Settings.VR.Comfort.SteppedRotationEnabled.Description,การตั้งค่าการเคลื่อนที่ที่ทำให้มุมมองหมุนเป็นระยะตามองศาที่กำหนดไว้แทนที่จะหมุนไปเรื่อยๆ
+Application.Settings.VR.Comfort.SteppedRotationEnabled.Title,การหมุนเป็นจังหวะ
+Application.Settings.VR.Comfort.ThirdPersonFixedCamEnabled.Description,ช่วยป้องกันอาการเมาจากการเคลื่อนไหวที่เกิดจากการเคลื่อนที่ของกล้องอย่างนุ่มนวล โดยกล้องจะคงตำแหน่งไว้ขณะที่คุณเคลื่อนที่ แล้วจึงปรับกลับมาอยู่ด้านหลังตัวละครทันที ใช้งานได้เฉพาะในมุมมองบุคคลที่สามเท่านั้น
+Application.Settings.VR.Comfort.ThirdPersonFixedCamEnabled.Title,กล้องมุมมองบุคคลที่สามแบบสบายตา
+Application.Settings.VR.Comfort.Title,การตั้งค่าความสบาย
+Application.Settings.VR.Comfort.VignetteEnabled.Description,การตั้งค่าความสบายที่ลดขอบเขตมุมมองของคุณระหว่างการเคลื่อนไหว เพื่อป้องกันหรือบรรเทาอาการเมาจากการเคลื่อนไหว
+Application.Settings.VR.Comfort.VignetteEnabled.Title,วิกเน็ตต์แบบสบายตา
 Application.Settings.VRAccountSettingsExplanation,หากต้องการเข้าถึงความเป็นส่วนตัว การควบคุมความปลอดภัย และอื่นๆ อีกมากมายของคุณ โปรดไปที่เว็บไซต์หรืออุปกรณ์อื่นของคุณ
 Application.Settings.VRAccountSettingsSubtitle,ไปที่เว็บไซต์หรืออุปกรณ์อื่นของคุณ
-Application.Settings.VolumeSliderDescription,ควบคุมระดับเสียงโดยรวมของ Roblox รวมถึงเอฟเฟ็กต์เมนู เสียงประสบการณ์ และการแชทด้วยเสียง
+Application.Settings.VolumeSliderDescription,ควบคุมระดับเสียงโดยรวมของ Roblox รวมถึงเสียงเอฟเฟ็กต์เมนู เสียงเกม และเสียงในการแชทด้วยเสียง
 Authentication.AccountPicker.Button.CreateAccount,สร้างบัญชี
 Authentication.AccountPicker.Button.SignIntoAnotherAccount,ลงชื่อเข้าใช้บัญชีอื่น
 Authentication.AccountPicker.Label.AllAccounts,ทุกบัญชี
@@ -548,11 +568,30 @@ Common.Presence.Label.Invisible,ไม่แสดงสถานะ
 Common.Presence.Label.Offline,ออฟไลน์
 Common.Presence.Label.Online,ออนไลน์
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,ไม่สามารถคำนวณคะแนนคุณภาพได้อย่างถูกต้องเนื่องจากข้อมูลที่ป้อนไม่ถูกต้องหรือไม่สมบูรณ์ โปรดตรวจสอบโมเดลหรือกรอกรายงานจุดบกพร่อง
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,แอนิเมชันยาวเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวไม่เกิน {maxLength} วินาที
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,แอนิเมชันสั้นเกินไป ({duration} วินาที) แอนิเมชันท่าทางต้องมีความยาวมากกว่า {minLength} วินาที
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,ร่างกายของคุณมีองค์ประกอบเมชขนาดเล็กที่ไม่เชื่อมต่อกัน (ส่วนย่อยของเมช) โปรดลบรูปทรงที่ลอยอยู่ออกและตรวจสอบให้แน่ใจว่าส่วนต่างๆ ของเมชทั้งหมดเชื่อมต่อกันอย่างถูกต้อง
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,คุณภาพของทรัพยากร: {partName} มีองค์ประกอบที่ไม่เชื่อมต่อกัน {num_disconnected_components} ชิ้น ซึ่งเกินจำนวนสูงสุดที่กำหนดไว้ที่ {max_disconnected_components} ชิ้น
+Common.UGCValidation.ErrorLabel.AQSInputDataError,ไม่สามารถคำนวณคะแนนคุณภาพได้อย่างถูกต้องเนื่องจากข้อมูลที่ป้อนไม่ถูกต้องหรือไม่สมบูรณ์ โปรดตรวจสอบโมเดลหรือกรอกรายงานจุดบกพร่อง
 Common.UGCValidation.ErrorLabel.AQSInternalError,สร้างคะแนนไม่ได้เนื่องจากข้อผิดพลาดด้านคุณภาพของเนื้อหา โปรดตรวจสอบความถูกต้องของข้อมูลที่ป้อนและลองอีกครั้ง หรือรายงานจุดบกพร่อง
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage กับเมชมีคะแนนระยะห่าง {score}, Cage ด้านนอกกับเมชมีระยะห่างสูงสุด {max_distance} และจุดตัดของ Cage ด้านนอก {negative_sdf_percent}% อยู่ภายในเมชเรนเดอร์"
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage ของร่างกายมีคะแนนระยะห่าง {score}, Cage ของร่างกายกับเมชมีระยะห่างสูงสุด {max_distance} และจุดตัดของ Cage ของร่างกาย {negative_sdf_percent}% อยู่ภายในเมชของร่างกาย"
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage ของศีรษะมีคะแนนระยะห่าง {score}, Cage ของศีรษะกับเมชมีระยะห่างสูงสุด {max_distance} และจุดตัดของ Cage ของศีรษะ {negative_sdf_percent}% อยู่ภายในเมชของศีรษะ"
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage มีคะแนนความเกี่ยวข้อง {score} โดย {irrelevant_percent}% ของจุดตัดของ Cage ด้านนอกที่มีการแก้ไขไม่ครอบคลุมไอเท็มเสริม
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: Cage {cage_name} มีคะแนน UV {score} จำนวน UV ที่ไม่ถูกต้อง: {incorrect_uv_count}
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,คุณภาพของทรัพยากร: {partName} มีสามเหลี่ยมเสื่อมสภาพ {degenerate_triangle_percent}% (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: การแสดงออกของศีรษะแบบเคลื่อนไหวมีคะแนน {score}
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"คุณภาพของทรัพยากร: การกำหนดค่าข้อต่อได้คะแนน {score} (ข้อต่อ: {joint_number}, มือซ้าย: {left_hand_joint_number}, มือขวา: {right_hand_joint_number})"
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,คุณภาพของทรัพยากร: {partName} มีส่วนย่อยขนาดเล็กที่ไม่เชื่อมต่อกัน {num_small_volume_islands} ส่วน จากองค์ประกอบ  {num_disconnected_components} ชิ้น (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,คุณภาพของทรัพยากร: {partName} มีปัญหาเมชซ้อนทับกัน (คะแนน: {score})
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,คุณภาพของทรัพยากร: เมช {partName} ปิดไม่สนิท ({boundary_edges_percent}% ของขอบเขต)
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,คำเตือนเกี่ยวกับคุณภาพของทรัพยากร: เมชมีคะแนนการครอบคลุม {score} โดยจุดตัดของเมช {mesh_outside_outer_cage_percent}% อยู่นอก Cage ด้านนอก
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,ไม่สามารถคำนวณคะแนนคุณภาพของทรัพยากรสำหรับ {measureName} ได้ เนื่องจากข้อมูลที่ป้อนไม่ครบถ้วนหรือไม่ถูกต้อง แต่ไม่บล็อคการอัปโหลดของคุณ
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,คุณภาพของทรัพยากร: พื้นผิว {textureName} มีความซับซ้อนต่ำ (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,คุณภาพของทรัพยากร: พื้นผิว {textureName} มีความละเอียด {texture_width}x{texture_height} (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,คุณภาพของทรัพยากร: {partName} มีหน้าสามเหลี่ยมที่ตัดกัน {intersecting_tri_face_percent}% (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,คุณภาพของทรัพยากร: {partName} มีจุดตัด UV นอกขอบเขต {uv_outside_bound_vert_percent}% (คะแนน: {score})
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,คุณภาพของทรัพยากร: {partName} มีจุดตัดที่คล้ายกัน {similar_vertex_percent}% (คะแนน: {score})
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,Handle นี้ Skin อยู่กับข้อต่อ {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema ที่อนุญาต จะอนุญาตเฉพาะข้อต่อแบบ R15 มาตรฐานและข้อต่อถ่ายโอนการ Skinning เท่านั้น
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType} ต้องใช้การถ่ายโอนการ Skinning แต่คุณไม่มีข้อต่อ {requiredJointName} ที่จำเป็น
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,Handle นี้ Skin อยู่กับข้อต่อ {jointName} แต่แอสเซทนี้ต้อง Skin โดยอัตโนมัติ คุณสามารถ Skin กับ {validJointNameList} เท่านั้น
@@ -567,8 +606,10 @@ Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,อินสแตน
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,แอสเซทที่อัปโหลดควรเป็น {ExpectedClass} แต่กลับเป็น {RootClass}
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,แอสเซทที่อัปโหลดควรมีชื่อว่า {ExpectedClass} แต่กลับมีชื่อว่า {RootClass}
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,ส่วนของร่างกาย '{bodyPartName}' ใน CurveAnimation มีแทร็ก Position (การเคลื่อนที่) ส่วนของร่างกายในแอนิเมชันสามารถเปลี่ยนได้เฉพาะการหมุนเท่านั้น ไม่อนุญาตให้ใช้แทร็ก Position โปรดลบแทร็ก Position ออกจากส่วนของร่างกายนี้
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,ชิ้นส่วนร่างกาย '{bodyPartName}' ใน CurveAnimation เคลื่อนที่จากตำแหน่งเริ่มต้นเป็นระยะ {distance} Stud แต่ระยะการเลื่อนตำแหน่งสูงสุดที่อนุญาตคือ {maxDistance} Stud โปรดลดการเคลื่อนที่เชิงตำแหน่งของส่วนของร่างกาย
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation มีกระดูก HRD/DRD และส่วนของร่างกาย '{bodyPartName}' มีแทร็ก Position (การเคลื่อนที่) เมื่อมีการใช้กระดูกในแอนิเมชัน จะต้องไม่มีส่วนใดของร่างกายที่เคลื่อนได้ เพื่อป้องกันไม่ให้ข้อต่อแยกออก โปรดลบแทร็ก Position ทั้งหมดออกจากส่วนของร่างกาย
 Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,กระดูก {boneName} ใน CurveAnimation มีแทร็ก Position (การเคลื่อนที่) กระดูก HRD/DRD สามารถเปลี่ยนได้เฉพาะการหมุนเท่านั้น แทร็ก Position จะทำให้ข้อต่อแยกออกจากกันและไม่อนุญาตให้ใช้ โปรดลบแอนิเมชันตำแหน่งออกจากกระดูกนี้
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,กระดูก '{boneName}' ใน CurveAnimation เคลื่อนที่จากตำแหน่งเริ่มต้นเป็นระยะ {distance} Stud แต่ระยะการเลื่อนตำแหน่งสูงสุดที่อนุญาตคือ {maxDistance} Stud โปรดลดการเคลื่อนที่เชิงตำแหน่งของกระดูก
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation มีโฟลเดอร์กระดูก HRD/DRD ซึ่งยังไม่รองรับ โปรดลบโฟลเดอร์ย่อยของกระดูกออกให้หมดก่อนจะอัปโหลด
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,ชิ้นส่วนร่างกายใน CurveAnimation ต้องไม่อยู่ต่ำกว่า HumanoidRootPart {minHeight} Stud หรืออยู่ห่างจาก HumanoidRootPart เกิน {maxDistance} Stud โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,MarkerCurves และ AnimationRigData ที่เป็นส่วนรองของ CurveAnimation ไม่สามารถมีส่วนรองได้
@@ -613,6 +654,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,ตรวจไม่พ
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,ศีรษะแบบเคลื่อนไหวที่ลงในมาร์เก็ตเพลสต้องมีการเคลื่อนไหว แต่ศีรษะนี้ไม่มีข้อมูล FACS
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,ตรวจไม่พบท่าปิดตาข้างขวาสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับตาขวาให้ตรงกับตำแหน่งของตาขวาบนศีรษะ และตรวจสอบให้แน่ใจว่าปิดตาข้างขวาได้
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,ตรวจไม่พบท่าหน้าบึ้งสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่าทำหน้าบึ้งได้
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,ทรัพยากรนี้ใช้แผนที่แบบเปล่งแสง ซึ่งมีให้เฉพาะครีเอเตอร์ในโปรแกรมสำหรับครีเอเตอร์ที่เชื่อได้เท่านั้น โปรดลบเนื้อหาแผนที่แบบเปล่งแสงออกทั้งหมด หรือเข้าร่วมโปรแกรมก่อนอัปโหลด
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,คุณสมบัติ InternalOverrideFACSData บน FaceControls ต้องว่างเปล่าเมื่ออัปโหลด
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำให้ใหญ่ขึ้นเป็น {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,ตรวจพบ FACs ที่ทำให้ศีรษะที่คุณทำเล็กลงเหลือ {modPercent}% แต่การปรับเปลี่ยนศีรษะนั้นขัดต่อนโยบายของมาร์เก็ตเพลสเกี่ยวกับการเคลื่อนไหวใบหน้า
@@ -628,6 +670,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,DigitsRigDescription ภ
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,คุณไม่สามารถรวม DigitsRigDescription ได้หากไม่มี HumanoidRigDescription
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,อินสแตนซ์ {instName} ปรากฏมากกว่า 1 ครั้ง แต่ต้องมีไม่เกิน 1 ครั้งภายในลำดับชั้นของกระดูก
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,อินสแตนซ์ {instName} อยู่ในส่วน {parentName} แต่จากกระดูกที่คุณมี อินสแตนซ์นี้ควรอยู่ในส่วน {expectedParentName}
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,ยังไม่ได้เปิดใช้งาน HumanoidRigDescription และกระดูกเพิ่มเติมสำหรับการอัปโหลดร่างกาย
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,อินสแตนซ์ {instName} ของคลาส {className} อยู่ในผังกระดูก แต่ไม่ได้เป็นส่วนหนึ่งของ Schema R15plus ที่กำหนดไว้
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,ข้อต่อเสริม {jointName} ถูกแมปอย่างไม่ถูกต้องใน HRD โดยต้องแมปกับกระดูกที่ชื่อว่า {boneName}
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,ข้อต่อ {jointName} เป็นข้อต่อแบบ R15 มาตรฐาน แต่จุดเชื่อมต่อของ Rig ไม่ได้เชื่อมต่อกับ HRD ตรวจสอบให้แน่ใจว่า HRD ในส่วนอวาตาร์ของคุณเชื่อมโยงอยู่กับ AttachmentConstraint แทนที่จะเป็น Motor6d
@@ -660,10 +703,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,ขนาดของเ
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,ต้องมีจุดเชื่อมต่อ {attName} อยู่เพียง 1 จุดภายใน Descendant {partName}
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (หรือ Descendant) มีคุณลักษณะแอตทริบิวต์อยู่ คุณต้องลบแอตทริบิวต์ออกจากรายการต่อไปนี้: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,หากต้องการอัปโหลดทรัพยากรไปยัง Roblox คุณต้องเลือก 1 อินสแตนซ์และประเภทการอัปโหลดที่เกี่ยวข้อง
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,อินสแตนซ์ {ProblematicDescendantPath} ไม่ควรมีแท็ก
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,มีการใช้สตริงแสดงข้อผิดพลาดของการทดสอบครั้งที่สองในการตรวจสอบยืนยันเวิร์กโฟลว์การซิงค์การแปลแบบ Hub-first ตั้งแต่ต้นจนจบ
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,Meshpart ของศีรษะมีการเคลื่อนไหวใบหน้าสำหรับ {jointName} ซึ่งไม่สามารถใช้ใน FACs ได้ โปรดตั้งชื่อข้อต่อนี้ใหม่แล้วนำเข้าศีรษะของคุณอีกครั้ง
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,ส่วนของร่างกาย {partName} Skin อยู่กับข้อต่อเสมือน {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema R15plus
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,ยังไม่ได้เปิดใช้งาน HumanoidRigDescription และกระดูกเพิ่มเติมสำหรับการอัปโหลดร่างกาย
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,ไปที่การตั้งค่า
@@ -805,7 +848,7 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,โปรไฟล์
 CommonUI.Features.Label.RM,ช่วงเวลา
 CommonUI.Features.Label.Redeem,แลกใช้รหัส
-CommonUI.Features.Label.RemoveConnection,ลบเครือข่าย
+CommonUI.Features.Label.RemoveConnection,ลบเพื่อน
 CommonUI.Features.Label.ReportLogs,รายงานการบันทึก
 CommonUI.Features.Label.ReportLogsSentenceCase,
 CommonUI.Features.Label.Settings,
@@ -913,8 +956,10 @@ CoreScripts.InGameMenu.GameSettings.UINavToggle,เปิด/ปิดการ�
 CoreScripts.InGameMenu.GameSettings.Volume,ระดับเสียง
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,เชิญเพื่อน
-CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมประสบการณ์ที่เคยเยี่ยมชม
-CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากประสบการณ์นี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
+CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
+CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_GAME}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,ต้องการออกใช่ไหม?
 CoreScripts.PremiumModal.Title.Error,ข้อผิดพลาด
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -954,6 +999,8 @@ CoreScripts.TextChat.Action.SendQuickWords,ส่งข้อความด่�
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,ส่วนกลาง
 CoreScripts.TextChat.ChannelTabs.Here,ที่นี่
+CoreScripts.TextChat.ChannelTabs.System,ระบบ
+CoreScripts.TextChat.ChannelTabs.Team,ทีม
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: ปิดเสียงผู้พูด
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>: เปิดเสียงผู้พูด
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox จะแปลภาษาที่รองรับโดยอัตโนมัติในแชท
@@ -1043,6 +1090,7 @@ CoreScripts.TextChat.Version.Success,{RBX_VERSION}
 CoreScripts.TextChat.Whisper.Error.CannotChat,คุณไม่สามารถแชทกับผู้ใช้นี้ได้
 CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[จาก: {RBX_NAME}]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[ถึง: {RBX_NAME}]
+CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
 CoreScripts.TopBar.Label.InappropriateAudio,เสียงไม่เหมาะสม
 CoreScripts.TopBar.Label.Report,รายงาน
@@ -1061,7 +1109,7 @@ Feature.Accessibility.AppTheme.CategoryEnergetic,ทรงพลัง
 Feature.Accessibility.AppTheme.CategoryKinetic,ไคเนติก
 Feature.Accessibility.AppTheme.CircuitRush,เซอร์กิตรัช
 Feature.Accessibility.AppTheme.CosmicDust,ฝุ่นอวกาศ
-Feature.Accessibility.AppTheme.Default,ค่าเริ่มต้น
+Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,อิเล็กทริกไลม์
 Feature.Accessibility.AppTheme.HyperPlum,ไฮเปอร์พลัม
 Feature.Accessibility.AppTheme.InfernoBlast,อินเฟอร์โนบลาสต์
@@ -1090,13 +1138,13 @@ Feature.Accessibility.Description.UiNavigationKeyBind,ใช้คีย์ {uiN
 Feature.Accessibility.Description.VREnvironmentSetting,เลือกสภาพแวดล้อมสำหรับหน้าจอหลัก
 Feature.Accessibility.DeviceLevelTheme.Dark,มืด
 Feature.Accessibility.DeviceLevelTheme.Light,สว่าง
-Feature.Accessibility.DeviceLevelTheme.System,ระบบ
+Feature.Accessibility.DeviceLevelTheme.System,
 Feature.Accessibility.Header.Haptics,การสั่น
 Feature.Accessibility.Header.ShowInMenuBar,แสดงในแถบเมนู
 Feature.Accessibility.Heading.AppThemeMode,โหมด
 Feature.Accessibility.Heading.DeviceAppTheme,ธีมแอป
 Feature.Accessibility.Heading.DeviceLevelTheme,ธีมระดับอุปกรณ์
-Feature.Accessibility.Heading.DevicePreferences,การตั้งค่าอุปกรณ์
+Feature.Accessibility.Heading.DevicePreferences,
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.LaunchAtLogin,เปิดเมื่อลงชื่อเข้าใช้
 Feature.Accessibility.Heading.LaunchAtStartup,เปิดเมื่อเริ่มระบบ
@@ -1232,7 +1280,7 @@ Feature.AccountSettings.Heading.Tab.Security,ความปลอดภัย
 Feature.AccountSettings.Heading.Tab.Spending,การใช้จ่าย
 Feature.AccountSettings.Heading.Tab.Subscriptions,การเป็นสมาชิก
 Feature.AccountSettings.Label.Discord,Discord
-Feature.AccountSettings.Label.DropDown.Everyone,ทุกคน
+Feature.AccountSettings.Label.DropDown.Everyone,
 Feature.AccountSettings.Label.DropDown.FollowersV3,เพื่อน กำลังติดตาม ผู้ติดตาม
 Feature.AccountSettings.Label.DropDown.FollowingV2,เพื่อนและผู้ใช้ที่ฉันติดตาม
 Feature.AccountSettings.Label.DropDown.Friends,
@@ -1256,6 +1304,7 @@ Feature.AddFriends.Action.IgnoreFriendRequest,ปฏิเสธคำขอเ�
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,ปฏิเสธคำขอเป็นเพื่อนที่เชื่อได้
 Feature.AddFriends.Action.RequestIgnored,คำขอถูกปฏิเสธ
 Feature.AddFriends.Description.CameraPermissionWarning,"การเข้าถึงกล้องถูกปิดใช้งาน หากต้องการใช้คุณสมบัติการสแกนรหัส QR โปรดให้สิทธิ์ในการเข้าถึงกล้องบนโทรศัพท์ของคุณที่ ""การตั้งค่า"" > ""แอปพลิเคชัน"" > ""Roblox"""
+Feature.AddFriends.Heading.AddFriends,
 Feature.AddFriends.Heading.FindPeople,ค้นหาผู้คน
 Feature.AddFriends.Label.AddFriendsTooltip,เริ่มต้นด้วยการค้นหาเพื่อนๆ ของคุณเพื่อจะได้ไปสำรวจ Roblox ด้วยกัน
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อในการค้นหา
@@ -1268,8 +1317,10 @@ Feature.AddFriends.Label.EmptyState.FriendsRename,คุณจะออกสำ
 Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะสำรวจ Roblox ด้วย? ค้นหาผู้ใช้เพื่อเพิ่มเป็นเพื่อนหรือเชื่อมต่อกับเพื่อนๆ ที่คุณรู้จักอยู่แล้วก็ได้!
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,ค้นหาผู้ใช้
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.MyQRTile,รหัส QR ของฉัน
 Feature.AddFriends.Label.MyQrCode,
+Feature.AddFriends.Label.QRCodeTitle,รหัส QR
 Feature.AddFriends.Label.SchoolTile,โรงเรียน
 Feature.AddFriends.Label.SearchForFriendsPrompt,ค้นหาผู้ใช้บน Roblox โดยใช้ชื่อผู้ใช้หรือชื่อที่แสดงในการค้นหา
 Feature.AddFriends.Label.ShareQRCodeAddConnection,แชร์รหัส QR เพื่อเพิ่มผู้ใช้ที่คุณรู้จัก
@@ -1371,6 +1422,7 @@ Feature.AppealsPortal.Label.ChatEvidenceId,ID หลักฐานแชท
 Feature.AppealsPortal.Label.Cheating,การโกง
 Feature.AppealsPortal.Label.ContentMaturity,การส่งแบบสอบถามระดับความเหมาะสมของเนื้อหา
 Feature.AppealsPortal.Label.DecisionCategory,คุณต้องการอุทธรณ์คำตัดสินใจประเภทใด?
+Feature.AppealsPortal.Label.DisplayName,ชื่อที่แสดง
 Feature.AppealsPortal.Label.DropdownPlaceholder,เลือก 1 ข้อ
 Feature.AppealsPortal.Label.EmailConfirmation,ยืนยันอีเมลของคุณ
 Feature.AppealsPortal.Label.EmailInput,อีเมลของคุณ
@@ -1394,6 +1446,7 @@ Feature.AppealsPortal.Label.LookName,ชื่ออวาตาร์ที่�
 Feature.AppealsPortal.Label.PlaceIDPrompt,ID สถานที่คืออะไร?
 Feature.AppealsPortal.Label.PlaceId,ID สถานที่
 Feature.AppealsPortal.Label.PlaceName,ชื่อสถานที่
+Feature.AppealsPortal.Label.ProfileDescription,คำอธิบายโปรไฟล์
 Feature.AppealsPortal.Label.Reason,เหตุผล
 Feature.AppealsPortal.Label.ReportAndAppeals,
 Feature.AppealsPortal.Label.Type.Asset,ทรัพยากร
@@ -1477,9 +1530,12 @@ Feature.Avatar.Action.CancelSelection,ยกเลิกการเลือก
 Feature.Avatar.Action.Clear,ล้างข้อมูล
 Feature.Avatar.Action.ComposerPost,โพสต์
 Feature.Avatar.Action.ComposerPreviewAndPost,ดูตัวอย่างและโพสต์
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,สร้างชุด
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,มุมมองเริ่มต้น
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,ลบเซ็ต
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,แก้ไขภาพโปรไฟล์
 Feature.Avatar.Action.GoBack,
@@ -1497,6 +1553,7 @@ Feature.Avatar.Action.Pan,เลื่อน
 Feature.Avatar.Action.Posting,กำลังโพสต์
 Feature.Avatar.Action.RemoveAll,ลบทั้งหมด
 Feature.Avatar.Action.Rename,เปลี่ยนชื่อ
+Feature.Avatar.Action.RenameSet,เปลี่ยนชื่อเซ็ต
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,กู้คืนอวาตาร์ที่บันทึกล่าสุด
 Feature.Avatar.Action.Revert,แปลงกลับ
@@ -1561,6 +1618,9 @@ Feature.Avatar.Heading.Outfits,เครื่องแต่งกาย
 Feature.Avatar.Heading.RenameCharacter,เปลี่ยนชื่อตัวละคร
 Feature.Avatar.Heading.SaveCostume,บันทึกตัวละคร
 Feature.Avatar.Heading.SelectToUpdate,เลือกเพื่ออัปเดต
+Feature.Avatar.Heading.SetLimitReached,สร้างชุดถึงจำนวนสูงสุดแล้ว
+Feature.Avatar.Heading.SetNameDuplicate,ชื่อซ้ำกัน
+Feature.Avatar.Heading.SetNameNotAllowed,ไม่อนุญาตให้ใช้ชื่อนี้
 Feature.Avatar.Heading.SharePublicAvatar,แชร์อวาตาร์ของคุณ
 Feature.Avatar.Heading.SortBy,เรียงลำดับตาม
 Feature.Avatar.Heading.UsedName,ชื่อนี้ถูกใช้ไปแล้ว
@@ -1585,6 +1645,7 @@ Feature.Avatar.Label.Add,เพิ่ม
 Feature.Avatar.Label.AddEdit,เพิ่ม/แก้ไข
 Feature.Avatar.Label.AddManage,เพิ่ม/จัดการ
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
 Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,ศีรษะทั้งหมด
 Feature.Avatar.Label.AnimationFullSet,ครบชุด
@@ -1653,6 +1714,7 @@ Feature.Avatar.Label.FullBody,ร่างกายทุกส่วน
 Feature.Avatar.Label.FullMasks,มาสก์เต็มหน้า
 Feature.Avatar.Label.FullPair,ครบคู่
 Feature.Avatar.Label.Gear,อุปกรณ์
+Feature.Avatar.Label.GenericSetError,มีบางอย่างผิดปกติ โปรดลองอีกครั้ง
 Feature.Avatar.Label.GetLookQuestion,คุณต้องการรับเครื่องแต่งกายนี้ฟรีใช่หรือไม่?
 Feature.Avatar.Label.GetOutfitMultiple,คุณต้องการรับ [{numItems}] ไอเท็มฟรีใช่หรือไม่?
 Feature.Avatar.Label.GetOutfitOne,คุณต้องการรับ [1] ไอเท็มฟรีใช่หรือไม่?
@@ -1720,6 +1782,8 @@ Feature.Avatar.Label.PPEViewFullButton,ดูอวาตาร์แบบเ�
 Feature.Avatar.Label.Pants,กางเกงขายาว
 Feature.Avatar.Label.PantsClassic,
 Feature.Avatar.Label.Photobooth,ตู้ถ่ายรูป
+Feature.Avatar.Label.ProfileFrames,กรอบ
+Feature.Avatar.Label.ProfileFramesUnlockBanner,ปลดล็อคกรอบเมื่อสมัคร Plus
 Feature.Avatar.Label.Props,พร็อพ
 Feature.Avatar.Label.Purchased,ซื้อแล้ว
 Feature.Avatar.Label.QuickMenuCustomizeTitle,ตัวเลือกการปรับแต่ง
@@ -1747,6 +1811,9 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,การค้น�
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,ดูล่าสุด
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,ช็อปปิ้งต่อสำหรับ
 Feature.Avatar.Label.SelectItem,เลือกไอเท็ม
+Feature.Avatar.Label.SetLimitReachedBody,คุณสร้างได้สูงสุด {setLimit} ชุดเท่านั้น ลบออก 1 ชุดเพื่อเพิ่มพื้นที่
+Feature.Avatar.Label.SetNameDuplicateBody,คุณมีชุดที่ใช้ชื่อนี้อยู่แล้ว โปรดเลือกชื่ออื่น
+Feature.Avatar.Label.SetNameNotAllowedBody,โปรดเลือกชื่ออื่น
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,โพสต์อวาตาร์ไปยังมาร์เก็ตเพลส
 Feature.Avatar.Label.Shirt,เสื้อเชิ้ต
 Feature.Avatar.Label.ShirtClassic,
@@ -1892,6 +1959,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,เขียนคำบรรย�
 Feature.Avatar.RevokedItems.BodyText,"ไอเท็ม{category} ""{item}"" ถูกลบออกจากอวาตาร์ที่บันทึกไว้แล้ว เราจึงคืนเงินตามจำนวนที่คุณจ่ายไป{lineBreak}ดูรายละเอียดเพิ่มเติมได้ในกล่องเข้า"
 Feature.Avatar.RevokedItems.BodyTextMultiple,ไอเท็มต่อไปนี้ถูกลบออกจากอวาตาร์ที่บันทึกไว้ เราจึงคืนเงินตามจำนวนเงินที่คุณจ่ายไป{lineBreak}{items}{lineBreak}ดูรายละเอียดเพิ่มเติมได้ในกล่องเข้า
 Feature.Avatar.RevokedItems.ViewInbox,ดูกล่องเข้า
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,แต่งหน้าเป็นเลเยอร์
 Feature.Avatar.Title.AvatarRefinement,การปรับปรุงรายละเอียดอวาตาร์
 Feature.Avatar.Title.BulkDeleteMakeupLooks,ลบการแต่งหน้า {count} ลุคใช่ไหม?
@@ -1903,6 +1971,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,ต้องการล้า�
 Feature.Avatar.Title.ClearBodyConfirmation,ต้องการนำชิ้นส่วนร่างกายออกหมดเลยใช่ไหม?
 Feature.Avatar.Title.ClearClothesConfirmation,ต้องการถอดเสื้อผ้าหมดเลยใช่ไหม?
 Feature.Avatar.Title.ClearMakeupConfirmation,ล้างการแต่งหน้าทั้งหมดใช่ไหม?
+Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,ทำซ้ำลุค
 Feature.Avatar.Title.EnhancedAvatarHeads,ศีรษะอวาตาร์ที่ปรับปรุงแล้ว
 Feature.Avatar.Title.GetOutfit,รับเครื่องแต่งกาย
@@ -2005,6 +2074,7 @@ Feature.Catalog.Action.ItemOptions,ตัวเลือกสำหรับไ
 Feature.Catalog.Action.LoadMore,โหลดเพิ่มเติม
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,เปิดรายละเอียด
+Feature.Catalog.Action.Owned,เป็นเจ้าของ {count} รายการ
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2060,9 +2130,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,ปรับได้
+Feature.Catalog.Label.AdvancedMaterials,วัสดุขั้นสูง
 Feature.Catalog.Label.AllItems,ไอเท็มทั้งหมด
 Feature.Catalog.Label.AlreadyOwned,เป็นเจ้าของไอเท็มนี้อยู่แล้ว
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,แอตทริบิวต์
 Feature.Catalog.Label.Attribution,จัดทำใน
 Feature.Catalog.Label.AvailableForSale,กำลังวางขายอยู่
 Feature.Catalog.Label.AvailableToPremiumMembers,สามารถซื้อได้เนื่องจากคุณเป็นสมาชิก Premium
@@ -2108,6 +2180,8 @@ Feature.Catalog.Label.CustomizeAvatar,ปรับแต่งอวาตาร
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,คุณจะไม่สามารถยกเลิกการดำเนินการนี้ได้หากคุณลบ
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,เปล่งแสง
+Feature.Catalog.Label.EmissiveInfo,ไอเท็มเปล่งแสงจะเรืองแสงและมีแสงในตัวเอง จึงจะคงความสว่างและมองเห็นได้แม้ในสภาพแวดล้อมที่มืด
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -2192,6 +2266,8 @@ Feature.Catalog.Label.PBR.false,พื้นฐาน
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,ไอเท็มอวาตาร์ที่มีวัสดุขั้นสูงจะใช้ PBR เพื่อให้ดูเป็นธรรมชาติมากขึ้น มีแสงและเงาที่เปลี่ยนแปลงและสะท้อนเหมือนในโลกจริง
 Feature.Catalog.Label.PBRInfoTitle,Physically-based Rendering (PBR)
+Feature.Catalog.Label.ParticleEffects,เอฟเฟกต์พาร์ทิเคิล
+Feature.Catalog.Label.ParticleEffectsInfo,ไอเท็มที่มีเอฟเฟกต์พาร์ทิเคิลจะแสดงภาพเคลื่อนไหว ทำให้ดูมีชีวิตและมีพลัง
 Feature.Catalog.Label.Placement,ตำแหน่ง
 Feature.Catalog.Label.PrePremiumPrice,(ราคาไอเท็ม:
 Feature.Catalog.Label.Premium,
@@ -2225,6 +2301,7 @@ Feature.Catalog.Label.SalePrice,ราคาขาย:
 Feature.Catalog.Label.SaveAsCharacter,บันทึกเป็นตัวละคร
 Feature.Catalog.Label.SaveOptions,ตัวเลือกการบันทึก
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,คุณอาจกำลังมองหา
 Feature.Catalog.Label.SellCut,คุณจะได้รับ:
 Feature.Catalog.Label.SellPageUpsell,เฉพาะผู้ใช้ที่เป็นสมาชิก Roblox Plus เท่านั้นจึงจะทำการขายได้
 Feature.Catalog.Label.SellSuccess,วางขายไอเท็มแล้ว
@@ -2326,7 +2403,7 @@ Feature.Catalog.Title.CheckoutPlural,ชำระเงิน {count} ราย�
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,ต้องการแทนที่เลเยอร์ด้านล่างใช่ไหม?
 Feature.Catalog.Title.RentalFtuxText,เช่าเพื่อลองใช้ไอเท็ม 3 วัน
-Feature.Catalog.Toast.AddedToFavorites,เพิ่มไปยังรายการโปรดแล้ว!
+Feature.Catalog.Toast.AddedToFavorites,เพิ่มไปยังรายการโปรดแล้ว
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,ราคาเปลี่ยนแปลงเนื่องจากคุณเป็นเจ้าของอยู่แล้ว {number} ไอเท็ม
 Feature.Catalog.Toast.AvatarUnderReview,"อวาตาร์อยู่ระหว่างการตรวจสอบ
 คุณสามารถแชร์อวาตาร์ของคุณได้หลังจากตรวจสอบเสร็จแล้ว"
@@ -2736,6 +2813,7 @@ Feature.Friends.Action.ShareQR,แชร์ QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,เลิกบล็อค
 Feature.Friends.Action.Unfriend,เลิกเป็นเพื่อน
+Feature.Friends.Action.ViewMore,ดูเพิ่มเติม
 Feature.Friends.Action.ViewPlatformProfile,ดูการ์ดเกมเมอร์
 Feature.Friends.Button.AddViaLink,เพิ่มผ่านลิงก์
 Feature.Friends.Button.GotIt,
@@ -2772,6 +2850,7 @@ Feature.Friends.Feature.Friends.Heading.AddFriends,
 Feature.Friends.FriendingTooltipBody,คำขอเป็นเพื่อนบางคำขออาจมาจากผู้ใช้ที่หาคุณเจอจากเบอร์โทรศัพท์ของคุณ โปรดตรวจสอบให้แน่ใจว่าคุณรู้จักพวกเขาก่อนที่จะเป็นเพื่อน
 Feature.Friends.Heading.Activities,กิจกรรม
 Feature.Friends.Heading.FilterBy,กรองตาม
+Feature.Friends.Heading.Friends,
 Feature.Friends.Heading.MyConnections,เพื่อนของฉัน
 Feature.Friends.Label.AddConnectionVPC,หากต้องการเพิ่มคนรู้จักที่เชื่อได้นี้ คุณต้องได้รับอนุญาตจากผู้ปกครองก่อน
 Feature.Friends.Label.AddConnectionsHint,เครือข่ายทำให้ Roblox สนุกยิ่งขึ้น!
@@ -2908,6 +2987,7 @@ Feature.Friends.TrustedFriend.AddBack.Header,
 Feature.Friends.TrustedFriend.Info.Modal.Header,เพื่อนที่เชื่อได้รายใหม่
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,เพิ่มเพื่อนที่เชื่อได้
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,
+Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
@@ -3240,7 +3320,6 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
-Feature.Landing.Heading.LandingSlogan,สํารวจประสบการณ์กว่า 30 ล้านประสบการณ์
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,ภาษาที่ไม่เหมาะสม
 Feature.Landing.Label.BrazilContentDescriptorViolence,ความรุนแรง
 Feature.Landing.Label.BrazilContentRatingLogoTitle,เหมาะสำหรับอายุ: 12 ปี
@@ -3291,6 +3370,7 @@ Feature.Moments.Description.HowToCaptureStep2,เปิดใช้งานก�
 Feature.Moments.Description.HowToCaptureStep3,จับภาพและวิดีโอการเล่นเกม
 Feature.Moments.Description.LeaveMomentsCreation,ข้อมูลที่เปลี่ยนแปลงทั้งหมดจะหายไป แต่คุณยังค้นหาภาพที่จับนี้ได้ในแกลเลอรี<b>การจับภาพ</b>
 Feature.Moments.Description.NoMusicResults,ไม่พบดนตรี
+Feature.Moments.Description.NonInfiniteScrollEndBody,คุณมาถึงจุดพักในโมเมนต์แล้ว แตะด้านล่างเพื่อดูต่อ
 Feature.Moments.Description.PublishMoment,อธิบายเกี่ยวกับโมเมนต์ของคุณ
 Feature.Moments.Description.TooManyUploads,คุณอัปโหลดวิดีโอมากเกินไปในวันนี้ โปรดลองอีกครั้งในวันพรุ่งนี้
 Feature.Moments.Disclaimer.EveryoneMoments,ทุกคนในโมเมนต์สามารถดูสิ่งที่เผยแพร่ได้
@@ -3299,7 +3379,8 @@ Feature.Moments.Label.AttemptingJoinExperience,กำลังพยายาม
 Feature.Moments.Label.CaptureLibrary,คลังภาพที่จับไว้ของคุณ
 Feature.Moments.Label.DeleteMomentBody,คุณไม่สามารถกู้คืนโมเมนต์ได้เมื่อลบไปแล้ว
 Feature.Moments.Label.DeleteMomentTitle,ลบโมเมนต์ใช่ไหม?
-Feature.Moments.Label.Error,มีบางอย่างผิดปกติ โปรดลองอีกครั้ง
+Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,กลับมาอีกครั้งในภายหลังหรือสร้างโมเมนต์ของคุณเอง
 Feature.Moments.Label.FeedEndTitle,ดูหมดแล้ว
 Feature.Moments.Label.FeedFailedToLoad,โหลดฟีดไม่สำเร็จ
 Feature.Moments.Label.FeedMyMoments,โมเมนต์ของฉัน
@@ -3318,6 +3399,7 @@ Feature.Moments.Label.MomentUnavailable,โมเมนต์ไม่พร้�
 Feature.Moments.Label.MomentUnavailableDefault,โมเมนต์นี้ไม่สามารถใช้ได้
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,ดูหมดแล้วในตอนนี้
 Feature.Moments.Label.Photos,รูปภาพ
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
 Feature.Moments.Label.PublishingRodeoBody,การดำเนินการนี้น่าจะใช้เวลาไม่นาน
@@ -3348,7 +3430,7 @@ Feature.NotApproved.Action.ReportMistake,รายงานข้อผิดพ
 Feature.NotApproved.Action.RuleConfirmation,ฉันยอมรับว่าเข้าใจและจะปฏิบัติตามกฎ
 Feature.NotApproved.Action.UserAgree,
 Feature.NotApproved.Action.ViewLess,ดูน้อยลง
-Feature.NotApproved.Action.ViewMore,ดูเพิ่มเติม
+Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,ดูกฎ
 Feature.NotApproved.Action.ViewRulesUGCAvatarGuidelines,ดูกฎเกี่ยวกับแนวทางการใช้อวาตาร์ที่สร้างโดยผู้ใช้
 Feature.NotApproved.Description.AppealViaSupport,หากต้องการอุทธรณ์คำตัดสินนี้ {link}โปรดติดต่อฝ่ายบริการช่วยเหลือ{linkEnd}
@@ -3440,7 +3522,7 @@ Feature.NotApproved.Heading.BannedOneDayOnly,ถูกแบน 1 วัน
 Feature.NotApproved.Heading.BannedOneHour,ถูกแบน 1 ชั่วโมง
 Feature.NotApproved.Heading.BannedOneMinute,ถูกแบน 1 นาที
 Feature.NotApproved.Heading.BannedOneSecond,ถูกแบน 1 วินาที
-Feature.NotApproved.Heading.Error,
+Feature.NotApproved.Heading.Error,เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ โปรดลองอีกครั้งในภายหลัง
 Feature.NotApproved.Heading.ReactivationNotice,กลับไปเล่นต่อ
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,ทำให้ทุกคนรู้สึกได้รับการต้อนรับ
 Feature.NotApproved.Heading.RuleExplanation.Dating,รักษาความสัมพันธ์ฉันเพื่อน
@@ -3818,10 +3900,10 @@ Feature.Profile.Description.EnterNicknameTextbox,กรอกชื่อเล�
 Feature.Profile.Description.InspectAndBuy,คลิกเพื่อดูและเลือกซื้อลุค
 Feature.Profile.Description.NicknamePrivacy,มีเพียงแค่ {displayName} เท่านั้นที่จะเห็นชื่อนี้
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,เฉพาะผู้ใช้คนนี้เท่านั้นที่จะเห็นได้
-Feature.Profile.Description.QrCodeDescription,ให้ผู้อื่นสแกนรหัส QR ของคุณเพื่อเชื่อมต่อกับ Roblox ผู้ใช้ที่มีอายุ 13 ปีขึ้นไปที่เชื่อมต่อผ่านการสแกน QR ที่คุณเผยแพร่จะถูกจัดเป็นคนรู้จักที่เชื่อได้
+Feature.Profile.Description.QrCodeDescription,ให้ผู้อื่นสแกนรหัส QR ของคุณเพื่อเชื่อมต่อกันบน Roblox ผู้ใช้ที่มีอายุ 13 ปีขึ้นไปที่เชื่อมต่อผ่านการสแกน QR ที่คุณเผยแพร่จะจัดเป็นเพื่อนที่เชื่อได้
 Feature.Profile.Description.QrCodeDescription.FriendsRename,ให้ผู้อื่นสแกนรหัส QR ของคุณเพื่อเชื่อมต่อกับ Roblox ผู้ใช้ที่มีอายุ 13 ปีขึ้นไปและเชื่อมต่อผ่านการสแกน QR ที่คุณเผยแพร่จะถูกจัดเป็นเพื่อนที่เชื่อได้
 Feature.Profile.Description.QrCodeScanning,ผู้อื่นสามารถใช้เครื่องมือสแกน QR หรือกล้องบนอุปกรณ์ของตนสแกนรหัส QR ของคุณบน Roblox เพื่อเพิ่มคุณเป็นเพื่อนได้อย่างรวดเร็ว!
-Feature.Profile.Description.RecognizeConnectionsByCustomName,จดจำเครือข่ายได้ง่ายยิ่งขึ้นโดยการตั้งชื่อด้วยตนเอง คุณเท่านั้นที่จะเห็นชื่อที่นำเข้าจากรายชื่อผู้ติดต่อและชื่อที่ตั้งเองนี้
+Feature.Profile.Description.RecognizeConnectionsByCustomName,เปลี่ยนชื่อเพื่อน จะได้หาเจอง่ายๆ มีแต่คุณที่เห็นชื่อที่นำเข้าจากรายชื่อผู้ติดต่อและชื่อที่คุณเปลี่ยนเองนี้
 Feature.Profile.Description.RecognizeFriendsByCustomName,จดจำเพื่อนได้ง่ายยิ่งขึ้นโดยการตั้งชื่อที่กำหนดเอง คุณเท่านั้นที่จะสามารถเห็นชื่อที่นำเข้าจากรายชื่อผู้ติดต่อและชื่อที่กำหนดเองนี้ได้
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,ให้ผู้ใช้ที่คุณรู้จักเพิ่มคุณด้วยการสแกนรหัส QR ของคุณ
@@ -3845,7 +3927,7 @@ Feature.Profile.Header.Inventory,
 Feature.Profile.Header.Store,
 Feature.Profile.Heading.AgedUpDisplayName,
 Feature.Profile.Heading.AgedUpDisplayNameUpdated,อัปเดตชื่อแล้ว
-Feature.Profile.Heading.DisplayName,ชื่อที่แสดง
+Feature.Profile.Heading.DisplayName,
 Feature.Profile.Heading.DisplayNameUpdated,อัปเดตชื่อที่แสดงแล้ว
 Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
@@ -3902,7 +3984,7 @@ Feature.Profile.Message.InvalidAliasError,ไม่สามารถบัน�
 Feature.Profile.Message.NoExperienceAccess,"""{name}"" อยู่ในประสบการณ์ที่คุณไม่มีสิทธิ์ในการเข้าถึง"
 Feature.Profile.Message.QRLoadFailed,โหลดไม่สำเร็จ
 Feature.Profile.Message.QRNofificationRequest,ส่งคำขอเป็นเพื่อนกับคุณจากรหัส QR ของคุณ
-Feature.Profile.Message.QRNotificationRequest,ได้ส่งคำขอเข้าร่วมเครือข่ายกับคุณจากรหัส QR ของคุณ
+Feature.Profile.Message.QRNotificationRequest,
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,เครื่องมือสแกน QR
 Feature.Profile.Tooltip.CurrencyTransfer.Body,คุณสามารถส่ง Robux ได้แล้วตอนนี้
@@ -3954,7 +4036,6 @@ Feature.ReportAbuse.Label.Confirmation.Subheading,เราจะตรวจส
 Feature.ReportAbuse.Label.Confirmation.Title,ขอบคุณสำหรับการรายงานของคุณ
 Feature.ReportAbuse.Label.FinishChatReport,ส่งรายงานแชทของคุณให้เสร็จสิ้น
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,รายงานเนื้อหาผิดกฎหมายหรือเนื้อหาที่เป็นอันตรายต่อเด็ก
-Feature.ReportAbuse.Label.NoChatMessagesFound,ไม่พบข้อความแชท
 Feature.ReportAbuse.Label.Optional,
 Feature.ReportAbuse.Label.PleaseSelectOne,โปรดเลือกหนึ่งรายการ
 Feature.ReportAbuse.Label.Report,
@@ -4034,7 +4115,8 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,รับ Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus ใช้งานไม่ได้ที่นี่
 Feature.SafetyDashboard.Heading.AccountStatus,สถานะบัญชี
-Feature.Schools.Action.CantFindSchool,ไม่พบโรงเรียนของฉันใช่ไหม?
+Feature.Schools.Action.AlreadyGraduated,ฉันสำเร็จการศึกษาแล้ว
+Feature.Schools.Action.CantFindSchool,ไม่พบโรงเรียนของคุณใช่ไหม?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,ลบโรงเรียน
 Feature.Schools.Action.Ok,
@@ -4043,51 +4125,68 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
-Feature.Schools.Description.AddTrustedFriendsFromSchool,เพิ่มเพื่อนที่เชื่อได้จากโรงเรียนของคุณ
+Feature.Schools.Body.EnterCode,UNiDAYS ส่งรหัสแบบใช้ครั้งเดียวไปให้ทางอีเมล {user_email} แล้ว โปรดกรอกรหัสด้านล่างเพื่อยืนยันโรงเรียนของคุณ
+Feature.Schools.Body.UnidaysShare,ผู้อื่นจะไม่เห็นอีเมลของคุณ
+Feature.Schools.Body.UnidaysTerms,"เราร่วมมือกับ UNiDAYS เพื่อตรวจสอบยืนยันอีเมลของโรงเรียนคุณ การคลิก ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับข้อกำหนดการใช้บริการและนโยบายความเป็นส่วนตัวของ UNiDAYS"
+Feature.Schools.Caption.RemovedOnGraduate,เมื่อคุณสำเร็จการศึกษา คุณจะถูกลบออกจาก {school}
 Feature.Schools.Description.CantFindSchoolNotify,เราจะแจ้งให้คุณทราบเมื่อโรงเรียนของคุณอยู่บน Roblox
 Feature.Schools.Description.CantVerifySchool,เราไม่สามารถตรวจสอบยืนยันโรงเรียนของคุณได้จากข้อมูลที่คุณระบุ
-Feature.Schools.Description.EasilyAddTrustedFriends,
-Feature.Schools.Description.FeatureAvailableBody,ค้นหาเพื่อนของคุณได้ง่ายๆ
-Feature.Schools.Description.InviteFriendsExclusiveItem,ชวนคนมาตรวจสอบยืนยันเพิ่ม แล้วรับไอเท็มฟรีได้เร็วยิ่งขึ้น
-Feature.Schools.Description.InviteFriendsUnlockSooner,ชวนคนมาตรวจสอบยืนยันเพิ่ม แล้วช่วยเปิดกลุ่มให้เร็วยิ่งขึ้น
+Feature.Schools.Description.ConnectWithFellowAlumni,เชื่อมต่อกับชาวศิษย์เก่า
+Feature.Schools.Description.FeatureAvailableBody,ค้นหาเพื่อนจากโรงเรียนเดียวกัน
+Feature.Schools.Description.InviteFriendsExclusiveItem,ชวนคนอื่นมายืนยันตัวตน แล้วรับไอเท็มฟรีเมื่อโรงเรียนของคุณเปิดตัว
+Feature.Schools.Description.InviteFriendsUnlockSooner,ช่วยให้กลุ่มศิษย์เก่าของโรงเรียนคุณเปิดได้เร็วยิ่งขึ้น
+Feature.Schools.Description.InviteOthersToVerify,เชิญคนอื่นมายืนยันตัวตนกัน
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,ต้องมีศิษย์เก่าที่ตรวจสอบยืนยันแล้วมากกว่านี้
-Feature.Schools.Description.MoreVerifiedStudentsNeeded,ต้องมีนักเรียนที่ตรวจสอบยืนยันแล้วมากกว่านี้
+Feature.Schools.Description.NotAvailableInRegion,คุณสมบัติโรงเรียนยังไม่พร้อมใช้งานในภูมิภาคของคุณ
 Feature.Schools.Description.RemoveSchoolBody,คุณจะต้องตรวจสอบยืนยันที่อยู่อีเมลของโรงเรียนเพื่อเข้าร่วมโรงเรียนของคุณอีกครั้ง และรางวัลที่เคยได้รับจะถูกลบออก
-Feature.Schools.Description.SchoolIsLiveBody,เชื่อมต่อกับเพื่อนร่วมโรงเรียนของคุณ
-Feature.Schools.Description.SeeWhatsPopularAtSchool,ดูว่ามีอะไรเป็นที่นิยมในโรงเรียนของคุณบ้าง
-Feature.Schools.Description.ShowSchoolOnProfile,แสดงโรงเรียนบนโปรไฟล์ของคุณ
-Feature.Schools.Description.WaitlistAlumniBody,คุณยืนยันเสร็จเรียบร้อยแล้ว เราจะแจ้งให้คุณทราบทันทีที่กลุ่มศิษย์เก่าของโรงเรียนคุณเปิดที่นี่
-Feature.Schools.Description.WaitlistBody,ยินดีด้วย คุณยืนยันเสร็จเรียบร้อยแล้ว ไอเท็มฟรีของคุณจะพร้อมใช้งานเมื่อโรงเรียนของคุณเปิดที่นี่
-Feature.Schools.Error.InvalidPassCode,
-Feature.Schools.Error.OtpAlreadyUsed,ใช้ OTP นี้แล้ว
-Feature.Schools.Error.OtpExpired,OTP หมดอายุแล้ว
-Feature.Schools.Error.OtpInvalidFormat,รูปแบบ OTP ไม่ถูกต้อง
-Feature.Schools.Error.OtpTooManyAttempts,มีการพยายามใช้ OTP มากเกินไป
+Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.UpsellDisclaimer,โรงเรียนของคุณจะปรากฏให้เห็นเฉพาะผู้ใช้ที่มาจากโรงเรียนเดียวกันเท่านั้น คุณสามารถอัปเดตหรือลบโรงเรียนของคุณได้ตลอดเวลา
+Feature.Schools.Description.UpsellTagline,ค้นพบ เชื่อมต่อ และเล่นกับเพื่อนจากโรงเรียนเดียวกันที่ตรวจสอบยืนยันแล้ว
+Feature.Schools.Description.WaitlistAlumniBody,เรียบร้อยแล้ว เราจะแจ้งให้คุณทราบทันทีที่มีการเปิดกลุ่มศิษย์เก่าของโรงเรียนคุณ
+Feature.Schools.Description.WaitlistBody,คุณเป็นสมาชิกผู้ก่อตั้ง เชิญเพื่อนร่วมชั้นมาร่วมเปิดตัวโรงเรียนของคุณกัน
+Feature.Schools.Error.AlreadyLinked,ที่อยู่อีเมลนี้เชื่อมโยงกับบัญชีอื่นอยู่แล้ว
+Feature.Schools.Error.InvalidEmail,กรอกที่อยู่อีเมลที่ถูกต้องของโรงเรียน
+Feature.Schools.Error.InvalidPassCode,รหัสนี้ไม่ถูกต้อง
+Feature.Schools.Error.NotSchoolEmail,โปรดใช้ที่อยู่อีเมลที่โรงเรียนของคุณออกให้
+Feature.Schools.Error.OtpAlreadyUsed,รหัสนี้ถูกใช้ไปแล้ว
+Feature.Schools.Error.OtpExpired,รหัสนี้หมดอายุแล้ว
+Feature.Schools.Error.OtpInvalidFormat,รูปแบบรหัสนี้ไม่ถูกต้อง
+Feature.Schools.Error.OtpTooManyAttempts,คุณพยายามขอรหัสถึงจำนวนสูงสุดสำหรับวันนี้แล้ว
 Feature.Schools.Error.SomethingWentWrong,
 Feature.Schools.Filter.AllYears,ทุกปี
 Feature.Schools.Filter.Apply,ใช้
 Feature.Schools.Filter.GradYear,ปีที่สำเร็จการศึกษา
 Feature.Schools.GiftForYou,ของขวัญสำหรับคุณ
 Feature.Schools.Heading.AddSchool,เพิ่มโรงเรียน
-Feature.Schools.Heading.AddSchoolNow,เพิ่มโรงเรียนของคุณ
+Feature.Schools.Heading.AddSchoolNow,เข้าร่วมโรงเรียนของคุณ
 Feature.Schools.Heading.CantFindSchool,เราไม่พบโรงเรียนของคุณ
 Feature.Schools.Heading.CantVerifySchool,เราไม่สามารถตรวจสอบยืนยันโรงเรียนของคุณได้
-Feature.Schools.Heading.CheckYourEmail,ตรวจสอบอีเมลโรงเรียนของคุณ
-Feature.Schools.Heading.HelpUnlockYourSchool,ช่วยเปิดโรงเรียนของคุณ
-Feature.Schools.Heading.HelpUnlockYourSchoolAlumni,ช่วยเปิดกลุ่มศิษย์เก่า
-Feature.Schools.Heading.MembersWithCount,สมาชิก ({count})
+Feature.Schools.Heading.CheckYourEmail,ตรวจสอบอีเมลของคุณ
+Feature.Schools.Heading.EnterSchoolEmail,กรอกอีเมลของโรงเรียน
+Feature.Schools.Heading.JoinClassmates,เข้าร่วมกับเพื่อนร่วมชั้น
+Feature.Schools.Heading.MembersWithCount,สมาชิก {count} ราย
 Feature.Schools.Heading.RemoveYourSchool,ลบโรงเรียนของคุณ
-Feature.Schools.Heading.SchoolIsLive,โรงเรียนของคุณพร้อมใช้งานแล้ว
+Feature.Schools.Heading.SchoolIsLive,โรงเรียนของคุณเปิดแล้ว
 Feature.Schools.Heading.SelectGraduationYear,เลือกปีที่สำเร็จการศึกษา
-Feature.Schools.Label.ConfirmSchool,ยืนยันว่าโรงเรียนใด
+Feature.Schools.Heading.ShareWithFriends,แชร์กับเพื่อน
+Feature.Schools.Heading.ThanksForInterest,ขอบคุณที่ให้ความสนใจ
+Feature.Schools.Heading.YouJoinedSchool,คุณเข้าร่วม {school} แล้ว!
+Feature.Schools.Heading.YourFounderReward,รางวัลผู้ก่อตั้งของคุณ
+Feature.Schools.Label.AlumniGroupLaunches,เปิดกลุ่มศิษย์เก่า
+Feature.Schools.Label.Classmates,เพื่อนร่วมชั้น
+Feature.Schools.Label.ConfirmSchool,เลือกโรงเรียน
 Feature.Schools.Label.ConnectWithClassmates,เชื่อมต่อกับเพื่อนร่วมชั้น
 Feature.Schools.Label.DidntGetCode,
-Feature.Schools.Label.GainSchoolBadge,รับเหรียญตราโรงเรียนของคุณ
-Feature.Schools.Label.MoreToUnlockSchool,ต้องการอีก {count} รายเพื่อเปิดโรงเรียนของคุณ
-Feature.Schools.Label.SchoolTrends,เทรนด์โรงเรียน
-Feature.Schools.Label.SchoolVerified,ตรวจสอบยืนยันโรงเรียนแล้ว
+Feature.Schools.Label.MoreToUnlockSchool,ต้องการอีก {count} คนเพื่อเปิดตัวโรงเรียนของคุณ
+Feature.Schools.Label.ResendInSeconds,ส่งอีกครั้งใน {time}
+Feature.Schools.Label.SchoolLaunches,เปิดตัวโรงเรียน
+Feature.Schools.Label.SchoolVerified,คุณได้รับการยืนยันแล้ว
 Feature.Schools.Label.Search,
 Feature.Schools.Label.UnlockAlumniGroup,รอกลุ่มศิษย์เก่าดำเนินการ
+Feature.Schools.Label.UpsellPerkFindFriends,
+Feature.Schools.Label.UpsellPerkPlayAndChat,ดูว่าใครออนไลน์อยู่แล้วเล่นด้วยกัน ง่ายๆ เลย
+Feature.Schools.Label.UpsellPerkTrends,ค้นพบว่ามีอะไรที่กำลังเป็นที่นิยมในโรงเรียนของคุณบ้าง
+Feature.Schools.Placeholder.Email,อีเมลนักเรียน
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,ขอบคุณที่ยืนยันโรงเรียนของคุณ ดูไอเท็มใหม่ได้ในส่วน อวาตาร์ > ไอเท็มเสริม > ด้านหลัง
 Feature.Screentime.Content.ScreentimeLimitDialog,คุณใช้งานจนถึงขีดจำกัดเวลาการใช้หน้าจอต่อวันแล้ว โปรดกลับมาใหม่ในวันพรุ่งนี้เพื่อใช้งาน Roblox อีกครั้ง
@@ -4405,7 +4504,7 @@ Feature.VerificationUpsell.Heading.PhoneNumberVerified,ตรวจสอบย�
 Feature.VerificationUpsell.Heading.TryVoiceChat,ลองใช้การแชทด้วยเสียง
 Feature.VerificationUpsell.Heading.VerificationCode,รหัสการตรวจสอบยืนยัน
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,ตรวจสอบยืนยันสำเร็จเรียบร้อยแล้ว!
-Feature.VerificationUpsell.Heading.VerifyEmail,ตรวจสอบอีเมลของคุณ
+Feature.VerificationUpsell.Heading.VerifyEmail,
 Feature.VerificationUpsell.Heading.VerifyOnLogout,ป้องกันไม่ให้สูญเสียการเข้าถึง!
 Feature.VerificationUpsell.Heading.VerifyYourPhone,ตรวจสอบยืนยันหมายเลขโทรศัพท์ของคุณ
 Feature.VerificationUpsell.Heading.VoiceChatEnabledMobile,เปิดใช้งานการแชทด้วยเสียงแล้ว! ลองใช้ในประสบการณ์ได้เลยตอนนี้

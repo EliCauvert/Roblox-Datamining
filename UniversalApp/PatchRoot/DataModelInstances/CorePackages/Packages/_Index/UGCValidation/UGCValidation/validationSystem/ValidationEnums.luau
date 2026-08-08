@@ -120,7 +120,8 @@ t.ValidationModule = {
 	CurveAnimBonesHaveValidParents = "CurveAnimBonesHaveValidParents",
 	CurveAnimPartsRotateOnlyIfBones = "CurveAnimPartsRotateOnlyIfBones",
 	CurveAnimBoneHierarchyValid = "CurveAnimBoneHierarchyValid",
-	CurveAnimLoopingRequired = "CurveAnimLoopingRequired"
+	CurveAnimLoopingRequired = "CurveAnimLoopingRequired",
+	EmissiveMapAllowed = "EmissiveMapAllowed"
 }
 t.SharedDataMember = {
 	jobId = "jobId",
@@ -190,7 +191,9 @@ t.AssetQualityCheck = {
 	Measure_Joint_Number = "Measure_Joint_Number",
 	Measure_Texture_Complexity = "Measure_Texture_Complexity",
 	Measure_Texture_Resolution = "Measure_Texture_Resolution",
-	Measure_Mesh_Island_Volume = "Measure_Mesh_Island_Volume"
+	Measure_Mesh_Island_Volume = "Measure_Mesh_Island_Volume",
+	Measure_Mesh_Island_ML = "Measure_Mesh_Island_ML",
+	Measure_Animation_Duration = "Measure_Animation_Duration"
 }
 finalizeEnumTable("AssetQualityCheck")
 finalizeEnumTable("ValidationModule")

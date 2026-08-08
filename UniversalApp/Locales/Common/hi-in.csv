@@ -64,9 +64,29 @@ Application.Logout.Message.Confirmation,वाकई लॉग आउट कर�
 Application.Logout.Title.Logout,
 Application.Settings.AccountSettingsTitle,अकाउंट सेटिंग्स
 Application.Settings.AppSettingsTitle,ऐप सेटिंग्स
+Application.Settings.DeviceSettings.Title,डिवाइस सेटिंग्स
+Application.Settings.VR.Comfort.Description,मूवमेंट और फील्ड ऑफ़ व्यू को एडजस्ट करके मोशन सिकनेस को कम करता है.
+Application.Settings.VR.Comfort.Profile.Description,"प्रीसेट में से कोई एक चुनें या हर कम्फ़र्ट विकल्प को मैन्युअल रूप से सेट करने के लिए ""कस्टम"" चुनें."
+Application.Settings.VR.Comfort.Profile.Option.Comfort,कम्फ़र्ट
+Application.Settings.VR.Comfort.Profile.Option.Custom,कस्टम
+Application.Settings.VR.Comfort.Profile.Option.Default,डिफ़ॉल्ट
+Application.Settings.VR.Comfort.Profile.Option.Expert,एक्सपर्ट
+Application.Settings.VR.Comfort.Profile.Title,कम्फ़र्ट प्रोफ़ाइल
+Application.Settings.VR.Comfort.SafetyBubbleMode.Description,तय करें कि फ़ेड आउट किए बिना कौन आपके करीब आ सकता है
+Application.Settings.VR.Comfort.SafetyBubbleMode.Option.Anyone,कोई भी
+Application.Settings.VR.Comfort.SafetyBubbleMode.Option.NoOne,कोई नहीं
+Application.Settings.VR.Comfort.SafetyBubbleMode.Option.OnlyFriends,सिर्फ़ फ़्रेंड्स
+Application.Settings.VR.Comfort.SafetyBubbleMode.Title,सेफ़्टी बबल
+Application.Settings.VR.Comfort.SteppedRotationEnabled.Description,"लोकोमोशन सेटिंग जो व्यू को लगातार मोशन के बजाय फ़िक्स्ड, बढ़ते हुए ऐंगल में घुमाती है."
+Application.Settings.VR.Comfort.SteppedRotationEnabled.Title,स्टेप्ड रोटेशन
+Application.Settings.VR.Comfort.ThirdPersonFixedCamEnabled.Description,"स्मूथ कैमरा मोशन से मोशन सिकनेस को रोकने में मदद करता है. आपके चलने पर कैमरा अपनी जगह पर बना रहता है, फिर तुरंत आपके पीछे आ जाता है. सिर्फ़ थर्ड पर्सन में काम करता है."
+Application.Settings.VR.Comfort.ThirdPersonFixedCamEnabled.Title,थर्ड पर्सन कम्फ़र्ट कैमरा
+Application.Settings.VR.Comfort.Title,कम्फ़र्ट सेटिंग्स
+Application.Settings.VR.Comfort.VignetteEnabled.Description,"कम्फ़र्ट सेटिंग, जिससे मोशन सिकनेस को रोकने या कम करने के लिए मूवमेंट के दौरान आपके फील्ड ऑफ़ व्यू को कम किया जाता है."
+Application.Settings.VR.Comfort.VignetteEnabled.Title,कम्फ़र्ट विगनेट
 Application.Settings.VRAccountSettingsExplanation,"अपनी प्राइवेसी और सिक्योरिटी कंट्रोल वगैरह ऐक्सेस करने के लिए, वेब या किसी कंपैनियन डिवाइस पर जाएँ."
 Application.Settings.VRAccountSettingsSubtitle,वेब या कंपैनियन डिवाइस पर जाएँ
-Application.Settings.VolumeSliderDescription,"Roblox का ओवरऑल साउंड लेवल कंट्रोल करें, जिसमें मेन्यू इफ़ेक्ट, एक्सपीरिएंस साउंड और वॉइस चैट शामिल हैं."
+Application.Settings.VolumeSliderDescription,"Roblox का ओवरऑल साउंड लेवल कंट्रोल करें, जिसमें मेन्यू इफ़ेक्ट्स, गेम साउंड और वॉइस चैट शामिल हैं."
 Authentication.AccountPicker.Button.CreateAccount,अकाउंट क्रिएट करें
 Authentication.AccountPicker.Button.SignIntoAnotherAccount,दूसरे अकाउंट में साइन-इन करें
 Authentication.AccountPicker.Label.AllAccounts,सभी अकाउंट
@@ -548,11 +568,30 @@ Common.Presence.Label.Invisible,ऑफ़लाइन प्लेयर
 Common.Presence.Label.Offline,ऑफ़लाइन
 Common.Presence.Label.Online,ऑनलाइन
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,इनपुट डेटा गलत या अधूरा होने के कारण क्वॉलिटी स्कोर की सही गणना नहीं की जा सकती. कृपया अपना मॉडल चेक करें या बग रिपोर्ट फ़ाइल करें
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,ऐनिमेशन बहुत लंबा है ({duration} सेकंड). Emote ऐनिमेशन ज़्यादा-से-ज़्यादा {maxLength} सेकंड लंबे होने चाहिए.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,ऐनिमेशन बहुत छोटा है ({duration} सेकंड). Emote ऐनिमेशन {minLength} सेकंड से ज़्यादा लंबे होने चाहिए.
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,आपके बॉडी में छोटे डिस्कनेक्टेड मेश कॉम्पोनेंट (मेश आइलैंड) मौजूद हैं. कृपया फ़्लोटिंग ज्योमेट्री हटा दें और पक्का करें कि सभी मेश पार्ट्स ठीक से जुड़े हुए हैं.
 Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"ऐसेट की क्वॉलिटी : {partName} में {num_disconnected_components} डिस्कनेक्ट किए गए कॉम्पोनेंट हैं, जो मैक्सिमम {max_disconnected_components} की लिमिट से ज़्यादा हैं."
+Common.UGCValidation.ErrorLabel.AQSInputDataError,इनपुट डेटा गलत या अधूरा होने के कारण क्वॉलिटी स्कोर का हिसाब सही से नहीं लगाया जा सकता. कृपया अपना मॉडल चेक करें या बग रिपोर्ट फ़ाइल करें
 Common.UGCValidation.ErrorLabel.AQSInternalError,ऐसेट क्वालिटी में गड़बड़ी की वजह से स्कोर जनरेट नहीं हो सका. कृपया देखें कि इनपुट डेटा सही है या नहीं और फिर से कोशिश करें या बग रिपोर्ट फ़ाइल करें.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"ऐसेट क्वालिटी से जुड़ी वॉर्निंग : केज से मेश की दूरी का स्कोर {score} है . बाहरी केज और मेश के बीच की अधिकतम दूरी {max_distance} है, बाहरी केज के वर्टिसेज़ का {negative_sdf_percent}% हिस्सा, रेंडर मेश के अंदर है."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"ऐसेट क्वालिटी से जुड़ी वॉर्निंग : हेड केज की दूरी का स्कोर {score} है. हेड केज और मेश के बीच की अधिकतम दूरी {max_distance} है, हेड केज के वर्टिसेज़ का {negative_sdf_percent}% हिस्सा, हेड मेश के अंदर है."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,ऐसेट क्वालिटी से जुड़ी वॉर्निंग : केज रेलेवेंसी का स्कोर {score} है. बाहरी केज के बदले गए वर्टिसेस का {irrelevant_percent}% हिस्सा ऐक्सेसरीज़ को कवर नहीं करता.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,ऐसेट क्वालिटी से जुड़ी वॉर्निंग : {cage_name} के लिए केज UV का स्कोर {score} है. UV की गलत संख्या : {incorrect_uv_count}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,ऐसेट क्वालिटी : {partName} में {degenerate_triangle_percent}% डिजेनेरेट ट्रायंगल हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,ऐसेट क्वालिटी से जुड़ी वॉर्निंग : डायनैमिक हेड एक्सप्रेशन का स्कोर {score} है.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"ऐसेट क्वालिटी : जॉइंट कॉन्फ़िगरेशन का स्कोर {score} है (जॉइंट : {joint_number}, बायाँ हाथ : {left_hand_joint_number}, दायाँ हाथ : {right_hand_joint_number})."
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,ऐसेट की क्वालिटी : {partName} में {num_disconnected_components} कॉम्पोनेंट में से {num_small_volume_islands} छोटे डिस्कनेक्टेड आइलैंड हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,ऐसेट क्वालिटी : {partName} में मेश मैनिफ़ोल्ड से जुड़ी समस्याएँ हैं (स्कोर : {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,ऐसेट की क्वालिटी : {partName} मेश वॉटरटाइट नहीं है ({boundary_edges_percent}% बाउंड्री एज).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,"ऐसेट क्वालिटी से जुड़ी वॉर्निंग : मेश कंटेनमेंट का स्कोर {score} है. मेश वर्टिसेज़ का {mesh_outside_outer_cage_percent}% हिस्सा, बाहरी केज के बाहर है."
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,"{measureName} के लिए एसेट क्वालिटी स्कोर का हिसाब नहीं लगाया जा सका, क्योंकि इनपुट डेटा अधूरा या अमान्य था. इससे आपका अपलोड ब्लॉक नहीं होता."
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,ऐसेट क्वालिटी : टेक्स्चर {textureName} थोड़ा कम मुश्किल है (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,ऐसेट क्वालिटी : टेक्स्चर {textureName} की रिज़ॉल्यूशन {texture_width}x{texture_height} है (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,ऐसेट क्वालिटी : {partName} में {intersecting_tri_face_percent}% इंटरसेक्टिंग ट्रायंगल फ़ेस हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"ऐसेट क्वालिटी : {partName} में {uv_outside_bound_vert_percent}% UV वर्टिसेज़ हैं, जो सीमा से बाहर हैं (स्कोर : {score})."
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,ऐसेट क्वालिटी : {partName} में {similar_vertex_percent}% मिलते-जुलते वर्टिसेज़ हैं (स्कोर : {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"हैंडल, जॉइंट {jointName} से जुड़ा हुआ है, जो मंज़ूर किए गए स्कीमा का हिस्सा नहीं है. सिर्फ़ स्टैंडर्ड R15 जॉइंट और स्किनिंग ट्रांसफ़र जॉइंट की अनुमति है."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} के लिए स्किनिंग ट्रांसफ़र का इस्तेमाल करना ज़रूरी है, लेकिन आपके पास ज़रूरी जॉइंट {requiredJointName} मौजूद नहीं है."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"हैंडिल, जॉइंट {jointName} से जुड़ा हुआ है, लेकिन इस ऐसेट को ऑटो-स्किन किया जाना चाहिए. सिर्फ़ {validJointNameList} से जोड़ा जा सकता है."
@@ -567,8 +606,10 @@ Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,नीचे दि�
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"अपलोड किया गया ऐसेट {ExpectedClass} होना चाहिए, लेकिन यह {RootClass} है."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"अपलोड किए गए ऐसेट का नाम {ExpectedClass} होना चाहिए, लेकिन इसका नाम {RootClass} है."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation में बॉडी पार्ट '{bodyPartName}' में एक पोज़िशन (ट्रांसलेशन) ट्रैक है. ऐनिमेशन बॉडी पार्ट्स सिर्फ़ घुमाए जा सकते हैं; पोज़िशन ट्रैक्स की अनुमति नहीं है. कृपया इस बॉडी पार्ट से पोज़िशन ट्रैक हटा दें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation में बॉडी पार्टी '{bodyPartName}' अपनी शुरुआती पोज़िशन से {distance} स्टड्स दूर चला जाता है. ज़्यादा से ज़्यादा {maxDistance} स्टड्स की दूरी की अनुमति है. कृपया बोन की पोज़िशनल मूवमेंट कम करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation में HRD/DRD बोन हैं और बॉडी पार्ट '{bodyPartName}' में एक पोज़िशन (ट्रांसलेशन) ट्रैक है. ऐनिमेशन में कोई भी बोन मौजूद होने पर, जॉइंट को अलग होने से रोकने के लिए कोई भी बॉडी पार्ट ट्रांसलेट नहीं हो सकता. कृपया बॉडी पार्ट्स से सभी पोज़िशन ट्रैक हटा दें."
 Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation में {boneName} बोन का एक पोज़िशन (ट्रांसलेशन) ट्रैक है. HRD/DRD बोन सिर्फ़ घुमाए जा सकते हैं; पोज़िशन ट्रैक्स से जॉइंट अलग हो जाते हैं और इसकी अनुमति नहीं है. कृपया इस बोन से पोज़िशन ऐनिमेशन को हटा दें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation में बोन '{boneName}' अपनी शुरुआती पोज़िशन से {distance} स्टड्स दूर चला जाता है. ज़्यादा से ज़्यादा {maxDistance} स्टड्स की दूरी की अनुमति है. कृपया बोन की पोज़िशनल मूवमेंट कम करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,"CurveAnimation में HRD/DRD बोन फ़ोल्डर हैं, जो अभी तक काम नहीं करते हैं. कृपया अपलोड करने से पहले सभी बोन सब-फ़ोल्डर हटा दें."
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation में बॉडी पार्ट्स, HumanoidRootPart से {minHeight} स्टड्स से नीचे या {maxDistance} स्टड्स से ऊपर नहीं हो सकते. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation के सब-फ़ोल्डर MarkerCurves और AnimationRigData के अंदर और फ़ोल्डर नहीं हो सकते
@@ -613,6 +654,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,"डायनैमि�
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"मार्केटप्लेस पर डायनैमिक हेड को ऐनिमेट किया जाना चाहिए, लेकिन इस हेड में कोई FACS डेटा नहीं है."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"डायनैमिक हेड के लिए दाहिनी आँख बंद करने का एक्सप्रेशन नहीं मिल रहा है. कृपया दाहिनी आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर दाहिनी आँख की जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"डायनैमिक हेड के लिए फ़्राउन एक्सप्रेशन का पता नहीं लगाया जा सकता. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर मुँह से मैच करे और पक्का करें कि यह फ़्राउन एक्सप्रेशन दिखा सकता है."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"यह ऐसेट एमिसिव मैप का इस्तेमाल करता है, जो सिर्फ़ 'भरोसेमंद क्रिएटर प्रोग्राम' में शामिल क्रिएटर्स के लिए उपलब्ध हैं. कृपया सभी एमिसिव मैप कॉन्टेंट हटा दें या अपलोड करने से पहले प्रोग्राम में शामिल हो जाएँ."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
@@ -628,6 +670,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"{partName} में �
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,HumanoidRigDescription के बिना DigitsRigDescription को शामिल नहीं किया जा सकता
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"इंस्टैंस {instName} एक से ज़्यादा बार दिखाई देता है, लेकिन बोन हाइरार्की में सिर्फ़ एक बार मौजूद हो सकता है."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"इंस्टैंस {instName}, {parentName} के नीचे है, लेकिन आपकी मौजूदा बोन्स के आधार पर इसे {expectedParentName} के नीचे होना चाहिए."
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,"बॉडी अपलोड के लिए, HumanoidRigDescription और अतिरिक्त बोन्स अभी तक चालू नहीं किए गए हैं."
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,"क्लास {className} का इंस्टैंस {instName} एक बोन ट्री में मौजूद है, लेकिन यह बताए गए R15plus स्कीमा का हिस्सा नहीं है."
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,वैकल्पिक जॉइंट {jointName} को HRD में गलत तरीके से मैप किया गया है. इसे {boneName} नाम के बोन से मैप किया जाना चाहिए.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"जॉइंट {jointName} एक स्टैंडर्ड R15 जॉइंट है, लेकिन रिग अटैचमेंट HRD से कनेक्ट नहीं है. पक्का करें कि आपके अवतार के नीचे मौजूद HRD, Motor6d के बजाय AttachmentConstraint से लिंक हो रहा है."
@@ -659,10 +702,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} मेश �
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,अटैचमेंट {attName} को {partName} डिसेंडेंट के अंदर सिर्फ़ एक बार मौजूद होना चाहिए.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (या इसके डिसेंडेंट) में ऐट्रिब्यूट हैं. आपको इनसे ऐट्रिब्यूट हटाने होंगे: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Roblox पर कोई ऐसेट अपलोड करने के लिए, आपको ठीक 1 इंस्टैंस और उससे जुड़ा अपलोड टाइप चुनना होगा."
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} इंस्टैंस में टैग नहीं होने चाहिए.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,दूसरे टेस्ट की एरर स्ट्रिंग का इस्तेमाल हब-फ़र्स्ट अनुवाद सिंक वर्कफ़्लो को एंड-टू-एंड वेरिफ़ाई करने के लिए किया जाता है.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"हेड मेशपार्ट में {jointName} के लिए चेहरे के एनिमेशन हैं, जिनका इस्तेमाल FAC में नहीं किया जा सकता. कृपया इस जॉइंट का नाम बदलें, फिर अपना हेड दोबारा इंपोर्ट करें."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"बॉडीपार्ट {partName} वर्चुअल जॉइंट {jointName} से जुड़ा है, जो R15plus स्कीमा का हिस्सा नहीं है."
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,"बॉडी अपलोड के लिए, HumanoidRigDescription और अतिरिक्त बोन अभी तक चालू नहीं किए गए हैं."
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,सेटिंग्स पर जाएँ
@@ -804,7 +847,7 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,प्रोफ़ाइल
 CommonUI.Features.Label.RM,मोमेंट्स
 CommonUI.Features.Label.Redeem,कोड्स रिडीम करें
-CommonUI.Features.Label.RemoveConnection,कनेक्शन हटाएँ
+CommonUI.Features.Label.RemoveConnection,फ़्रेंड को हटाएँ
 CommonUI.Features.Label.ReportLogs,लॉग की रिपोर्ट करें
 CommonUI.Features.Label.ReportLogsSentenceCase,
 CommonUI.Features.Label.Settings,
@@ -912,8 +955,10 @@ CoreScripts.InGameMenu.GameSettings.UINavToggle,UI नैविगेशन ट�
 CoreScripts.InGameMenu.GameSettings.Volume,वॉल्यूम
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,फ़्रेंड्स को इनवाइट करें
-CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले देखे गए एक्सपीरिएंस जॉइन करें
-CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस एक्सपीरिएंस को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
+CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,आप इस गेम को छोड़कर वापस {PREVIOUS_GAME} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,आपको जाना है?
 CoreScripts.PremiumModal.Title.Error,गड़बड़ी
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -951,6 +996,8 @@ CoreScripts.TextChat.Action.SendQuickWords,क्विक वर्ड्स �
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,ग्लोबल
 CoreScripts.TextChat.ChannelTabs.Here,यहाँ
+CoreScripts.TextChat.ChannelTabs.System,सिस्टम
+CoreScripts.TextChat.ChannelTabs.Team,टीम
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: स्पीकर म्यूट करें.
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker> : स्पीकर को अनम्यूट करें.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox चैट में सपोर्टेड भाषाओं का ऑटोमैटिक तरीके से अनुवाद करता है
@@ -1040,6 +1087,7 @@ CoreScripts.TextChat.Version.Success,{RBX_VERSION}
 CoreScripts.TextChat.Whisper.Error.CannotChat,इस व्यक्ति के साथ आपकी चैट नहीं हो पा रही है.
 CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[{RBX_NAME} से]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[{RBX_NAME} के लिए]
+CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
 CoreScripts.TopBar.Label.InappropriateAudio,अनुचित ऑडियो
 CoreScripts.TopBar.Label.Report,रिपोर्ट करें
@@ -1058,7 +1106,7 @@ Feature.Accessibility.AppTheme.CategoryEnergetic,एनर्जेटिक
 Feature.Accessibility.AppTheme.CategoryKinetic,काइनेटिक
 Feature.Accessibility.AppTheme.CircuitRush,सर्किट रश
 Feature.Accessibility.AppTheme.CosmicDust,कॉस्मिक डस्ट
-Feature.Accessibility.AppTheme.Default,डिफ़ॉल्ट
+Feature.Accessibility.AppTheme.Default,
 Feature.Accessibility.AppTheme.ElectricLime,इलेक्ट्रिक लाइम
 Feature.Accessibility.AppTheme.HyperPlum,हाइपर प्लम
 Feature.Accessibility.AppTheme.InfernoBlast,इनफ़र्नो ब्लास्ट
@@ -1087,7 +1135,7 @@ Feature.Accessibility.Description.UiNavigationKeyBind,UI नैविगेश�
 Feature.Accessibility.Description.VREnvironmentSetting,होम स्क्रीन के लिए कोई एनवायरनमेंट चुनें
 Feature.Accessibility.DeviceLevelTheme.Dark,डार्क
 Feature.Accessibility.DeviceLevelTheme.Light,लाइट
-Feature.Accessibility.DeviceLevelTheme.System,सिस्टम
+Feature.Accessibility.DeviceLevelTheme.System,
 Feature.Accessibility.Header.Haptics,हैप्टिक्स
 Feature.Accessibility.Header.ShowInMenuBar,मेन्यू बार में दिखाएँ
 Feature.Accessibility.Heading.AppThemeMode,मोड
@@ -1233,7 +1281,7 @@ Feature.AccountSettings.Label.DropDown.Everyone,हर कोई
 Feature.AccountSettings.Label.DropDown.FollowersV3,"फ़्रेंड, फ़ॉलोइंग, फ़ॉलोअर"
 Feature.AccountSettings.Label.DropDown.FollowingV2,मेरे फ़ॉलो किए गए फ़्रेंड और यूज़र
 Feature.AccountSettings.Label.DropDown.Friends,
-Feature.AccountSettings.Label.DropDown.NoOne,कोई नहीं
+Feature.AccountSettings.Label.DropDown.NoOne,
 Feature.AccountSettings.Label.Facebook,Facebook
 Feature.AccountSettings.Label.Guilded,Guilded
 Feature.AccountSettings.Label.SocialLinksVisibility,यह किसे दिखेगा
@@ -1253,6 +1301,7 @@ Feature.AddFriends.Action.IgnoreFriendRequest,फ़्रेंड रिक्
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,भरोसेमंद फ़्रेंड रिक्वेस्ट इग्नोर करें
 Feature.AddFriends.Action.RequestIgnored,रिक्वेस्ट इग्नोर की गई
 Feature.AddFriends.Description.CameraPermissionWarning,"कैमरे का ऐक्सेस चालू नहीं है. QR कोड स्कैन करने का फ़ीचर इस्तेमाल के लिए, अपने फ़ोन में ""सेटिंग्स "">"" ऐप्लिकेशन "" > ""Roblox"" में कैमरा ऐक्सेस करने की परमिशन दें"
+Feature.AddFriends.Heading.AddFriends,फ़्रेंड्स जोड़ें
 Feature.AddFriends.Heading.FindPeople,लोगों को खोजें
 Feature.AddFriends.Label.AddFriendsTooltip,"फ़्रेंड्स ढूँढना शुरू करें, ताकि आप Roblox को एक साथ एक्सप्लोर कर सकें."
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
@@ -1265,8 +1314,10 @@ Feature.AddFriends.Label.EmptyState.FriendsRename,आपको Roblox किस�
 Feature.AddFriends.Label.EmptyStatePrompt,"आप Roblox को किसके साथ एक्सप्लोर करेंगे? लोगों को जोड़ने के लिए सर्च करें या उन फ़्रेंड्स से कनेक्ट हों, जिन्हें आप पहले से जानते हैं!"
 Feature.AddFriends.Label.FriendRequests,फ़्रेंड रिक्वेस्ट
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,लोगों को सर्च करें
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.MyQRTile,मेरा QR
 Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
+Feature.AddFriends.Label.QRCodeTitle,QR कोड
 Feature.AddFriends.Label.SchoolTile,स्कूल
 Feature.AddFriends.Label.SearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या डिसप्ले नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.ShareQRCodeAddConnection,"अपनी जान-पहचान के लोगों को जोड़ने के लिए, अपना QR कोड शेयर करें"
@@ -1368,6 +1419,7 @@ Feature.AppealsPortal.Label.ChatEvidenceId,चैट एविडेंस ID
 Feature.AppealsPortal.Label.Cheating,जालसाज़ी
 Feature.AppealsPortal.Label.ContentMaturity,कॉन्टेंट मैच्योरिटी क्वेश्चनेयर का सबमिशन
 Feature.AppealsPortal.Label.DecisionCategory,आपको किस तरह के फ़ैसले पर अपील करनी है?
+Feature.AppealsPortal.Label.DisplayName,डिसप्ले नाम
 Feature.AppealsPortal.Label.DropdownPlaceholder,कोई एक चुनें
 Feature.AppealsPortal.Label.EmailConfirmation,अपना ईमेल पता कन्फ़र्म करें
 Feature.AppealsPortal.Label.EmailInput,आपका ईमेल
@@ -1377,7 +1429,7 @@ Feature.AppealsPortal.Label.Experience.Suspension,मेरा एक्सप�
 Feature.AppealsPortal.Label.ExperienceIOwnContentMaturity,
 Feature.AppealsPortal.Label.ExperienceIOwnSuspension,
 Feature.AppealsPortal.Label.ExperienceLinkPrompt,अपने एक्सपीरिएंस का लिंक डालें
-Feature.AppealsPortal.Label.ExploitDetected,डिवाइस एक्सप्लॉइट का पता चला
+Feature.AppealsPortal.Label.ExploitDetected,डिवाइस पर सुरक्षा एक्सप्लॉइट का पता चला
 Feature.AppealsPortal.Label.Group,ग्रुप
 Feature.AppealsPortal.Label.ID,ID
 Feature.AppealsPortal.Label.IDArg,ID: {id}
@@ -1391,6 +1443,7 @@ Feature.AppealsPortal.Label.LookName,शेयर किया गया अव�
 Feature.AppealsPortal.Label.PlaceIDPrompt,प्लेस ID क्या है?
 Feature.AppealsPortal.Label.PlaceId,प्लेस ID
 Feature.AppealsPortal.Label.PlaceName,प्लेस का नाम
+Feature.AppealsPortal.Label.ProfileDescription,प्रोफ़ाइल का विवरण
 Feature.AppealsPortal.Label.Reason,कारण
 Feature.AppealsPortal.Label.ReportAndAppeals,
 Feature.AppealsPortal.Label.Type.Asset,ऐसेट
@@ -1474,9 +1527,12 @@ Feature.Avatar.Action.CancelSelection,सिलेक्शन कैंसि�
 Feature.Avatar.Action.Clear,डिलीट करें
 Feature.Avatar.Action.ComposerPost,पोस्ट करें
 Feature.Avatar.Action.ComposerPreviewAndPost,प्रीव्यू करें और पोस्ट करें
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,सेट क्रिएट करें
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,डिफ़ॉल्ट व्यू
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,सेट डिलीट करें
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,प्रोफ़ाइल पिक्चर एडिट करें
 Feature.Avatar.Action.GoBack,
@@ -1494,6 +1550,7 @@ Feature.Avatar.Action.Pan,पैन करें
 Feature.Avatar.Action.Posting,पोस्ट किया जा रहा है
 Feature.Avatar.Action.RemoveAll,सभी को हटाएँ
 Feature.Avatar.Action.Rename,नाम बदलें
+Feature.Avatar.Action.RenameSet,सेट का नाम बदलें
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,आखिरी बार सेव किए गए अवतार को रीस्टोर करें
 Feature.Avatar.Action.Revert,रिवर्ट करें
@@ -1558,6 +1615,9 @@ Feature.Avatar.Heading.Outfits,आउटफ़िट
 Feature.Avatar.Heading.RenameCharacter,कैरेक्टर का नाम बदलें
 Feature.Avatar.Heading.SaveCostume,कैरेक्टर सेव करें
 Feature.Avatar.Heading.SelectToUpdate,अपडेट करने के लिए चुनें
+Feature.Avatar.Heading.SetLimitReached,इससे ज़्यादा अवतार सेट क्रिएट करने की अनुमति नहीं है
+Feature.Avatar.Heading.SetNameDuplicate,डुप्लिकेट नाम
+Feature.Avatar.Heading.SetNameNotAllowed,नाम की अनुमति नहीं है
 Feature.Avatar.Heading.SharePublicAvatar,अपना अवतार शेयर करें
 Feature.Avatar.Heading.SortBy,इस आधार पर क्रम से लगाएँ
 Feature.Avatar.Heading.UsedName,इस्तेमाल हो चुका नाम
@@ -1582,6 +1642,7 @@ Feature.Avatar.Label.Add,जोड़ें
 Feature.Avatar.Label.AddEdit,जोड़ें/एडिट करें
 Feature.Avatar.Label.AddManage,जोड़ें/मैनेज करें
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
 Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,सभी हेड
 Feature.Avatar.Label.AnimationFullSet,फ़ुल सेट
@@ -1650,6 +1711,7 @@ Feature.Avatar.Label.FullBody,फ़ुल बॉडी
 Feature.Avatar.Label.FullMasks,फ़ुल मास्क
 Feature.Avatar.Label.FullPair,फ़ुल पेयर
 Feature.Avatar.Label.Gear,गियर
+Feature.Avatar.Label.GenericSetError,कुछ गड़बड़ी हुई. कृपया फिर से कोशिश करें.
 Feature.Avatar.Label.GetLookQuestion,क्या आप फ़्री में यह आउटफ़िट पाना चाहते हैं?
 Feature.Avatar.Label.GetOutfitMultiple,क्या आप [{numItems}] आइटम फ़्री में पाना चाहते हैं?
 Feature.Avatar.Label.GetOutfitOne,क्या आप [1] आइटम फ़्री में पाना चाहते हैं?
@@ -1717,6 +1779,8 @@ Feature.Avatar.Label.PPEViewFullButton,फ़ुल अवतार देखे
 Feature.Avatar.Label.Pants,पैंट
 Feature.Avatar.Label.PantsClassic,
 Feature.Avatar.Label.Photobooth,फ़ोटोबूथ
+Feature.Avatar.Label.ProfileFrames,फ़्रेम
+Feature.Avatar.Label.ProfileFramesUnlockBanner,Plus सब्सक्रिप्शन के साथ फ़्रेम अनलॉक करें
 Feature.Avatar.Label.Props,प्रॉप्स
 Feature.Avatar.Label.Purchased,खरीदा गया
 Feature.Avatar.Label.QuickMenuCustomizeTitle,कस्टमाइज़ करने के लिए विकल्प
@@ -1744,6 +1808,9 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,हाल ही म
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,हाल ही में देखा गया
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,इसके लिए शॉपिंग करते रहें
 Feature.Avatar.Label.SelectItem,आइटम चुनें
+Feature.Avatar.Label.SetLimitReachedBody,आपके पास ज़्यादा से ज़्यादा {setLimit} सेट हो सकते हैं. जगह बनाने के लिए एक सेट मिटाएँ
+Feature.Avatar.Label.SetNameDuplicateBody,"आपके पास पहले से इस नाम का एक सेट है, दूसरा नाम चुनें"
+Feature.Avatar.Label.SetNameNotAllowedBody,कृपया कोई दूसरा नाम चुनें
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,अवतार को मार्केटप्लेस में पोस्ट करें
 Feature.Avatar.Label.Shirt,शर्ट
 Feature.Avatar.Label.ShirtClassic,
@@ -1889,6 +1956,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,अपने अवतार क�
 Feature.Avatar.RevokedItems.BodyText,"{category} आइटम ""{item}"" को सेव किए गए इस अवतार से हटा दिया गया है. इसलिए, हमने वह रकम रिफ़ंड कर दी है जिसका पेमेंट आपने किया था.{lineBreak}ज़्यादा जानकारी के लिए, अपना इनबॉक्स देखें."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"नीचे दिए गए आइटम सेव किए गए इस अवतार से हटा दिए गए हैं. इसलिए, हमने वह रकम रिफ़ंड कर दी है जिसका पेमेंट आपने किया था.{lineBreak}{items}{lineBreak}ज़्यादा जानकारी के लिए, अपना इनबॉक्स देखें."
 Feature.Avatar.RevokedItems.ViewInbox,इनबॉक्स देखें
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,अपने मेकअप को लेयर करें
 Feature.Avatar.Title.AvatarRefinement,अवतार के लिए बेहतर लुक
 Feature.Avatar.Title.BulkDeleteMakeupLooks,{count} मेकअप लुक डिलीट करने हैं?
@@ -1900,6 +1968,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,सभी ऐनिमेशन
 Feature.Avatar.Title.ClearBodyConfirmation,बॉडी सेक्शन डिलीट करना है?
 Feature.Avatar.Title.ClearClothesConfirmation,सभी ड्रेस डिलीट करनी हैं?
 Feature.Avatar.Title.ClearMakeupConfirmation,सारा मेकअप हटाना है?
+Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,लुक का डुप्लिकेट बनाएँ
 Feature.Avatar.Title.EnhancedAvatarHeads,बेहतर अवतार हेड
 Feature.Avatar.Title.GetOutfit,आउटफ़िट पाएँ
@@ -2002,6 +2071,7 @@ Feature.Catalog.Action.ItemOptions,आइटम ऑप्शंस
 Feature.Catalog.Action.LoadMore,और लोड करें
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,जानकारी खोलें
+Feature.Catalog.Action.Owned,{count} आइटम की ओनरशिप
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2057,9 +2127,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,एडजस्ट किया जा सकता है
+Feature.Catalog.Label.AdvancedMaterials,एडवांस्ड मटीरियल
 Feature.Catalog.Label.AllItems,सभी आइटम
 Feature.Catalog.Label.AlreadyOwned,आइटम पहले से आपके पास है
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,एट्रीब्यूट
 Feature.Catalog.Label.Attribution,यहाँ बना है
 Feature.Catalog.Label.AvailableForSale,बिक्री के लिए उपलब्ध है
 Feature.Catalog.Label.AvailableToPremiumMembers,आपके पास Premium होने की वजह से उपलब्ध है
@@ -2105,6 +2177,8 @@ Feature.Catalog.Label.CustomizeAvatar,अवतार कस्टमाइज�
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,"अगर आप डिलीट कर दें, तो आप इस ऐक्शन को पहले जैसा नहीं कर सकते."
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,एमिसिव
+Feature.Catalog.Label.EmissiveInfo,"एमिसिव आइटम से अपनी रोशनी निकलती है, इसलिए वह अंधेरे में भी आसानी से दिखाई देता है."
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -2189,6 +2263,8 @@ Feature.Catalog.Label.PBR.false,बेसिक
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,एडवांस्ड मटीरियल वाले अवतार की ऐसेट ज़्यादा नैचुरल दिखने के लिए फ़िज़िकल बेस्ड रेंडरिंग (PBR) का इस्तेमाल करती हैं. इनमें बदलने और चमकने वाली लाइट और शैडो बिल्कुल वैसी ही दिखती हैं जैसी रियल लाइफ़ में दिखती हैं.
 Feature.Catalog.Label.PBRInfoTitle,फ़िज़िकली बेस्ड रेंडरिंग (PBR)
+Feature.Catalog.Label.ParticleEffects,पार्टिकल इफ़ेक्ट्स
+Feature.Catalog.Label.ParticleEffectsInfo,"पार्टिकल इफ़ेक्ट वाले आइटम से ऐनिमेटेड इफ़ेक्ट दिखाई देते हैं, जिससे वह ज़्यादा जीवंत और डायनैमिक लगता है."
 Feature.Catalog.Label.Placement,प्लेसमेंट
 Feature.Catalog.Label.PrePremiumPrice,(आइटम की कीमत:
 Feature.Catalog.Label.Premium,
@@ -2222,6 +2298,7 @@ Feature.Catalog.Label.SalePrice,बिक्री की कीमत :
 Feature.Catalog.Label.SaveAsCharacter,कैरेक्टर के तौर पर सेव करें
 Feature.Catalog.Label.SaveOptions,सेव करने के विकल्प
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,आपको शायद इसकी तलाश हो
 Feature.Catalog.Label.SellCut,आपकी कमाई:
 Feature.Catalog.Label.SellPageUpsell,सिर्फ़ Roblox Plus सब्सक्रिप्शन वाले यूज़र्स ही बेच सकते हैं.
 Feature.Catalog.Label.SellSuccess,बिक्री वाले आइटम
@@ -2323,7 +2400,7 @@ Feature.Catalog.Title.CheckoutPlural,{count} आइटम चेकआउट क
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,सबसे नीचे वाली लेयर को बदलना है?
 Feature.Catalog.Title.RentalFtuxText,किसी आइटम को आज़माने के लिए 3 दिनों के लिए किराए पर लें
-Feature.Catalog.Toast.AddedToFavorites,पसंदीदा में जोड़ा गया!
+Feature.Catalog.Toast.AddedToFavorites,पसंदीदा में जोड़ा गया
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,"आप {number} आइटम के ओनर हैं, इसलिए कीमत बदल गई है"
 Feature.Catalog.Toast.AvatarUnderReview,"अवतार को रिव्यू किया जा रहा है
 रिव्यू होने के बाद आप अपना अवतार शेयर कर सकते हैं"
@@ -2733,6 +2810,7 @@ Feature.Friends.Action.ShareQR,QR शेयर करें
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,अनब्लॉक करें
 Feature.Friends.Action.Unfriend,अनफ़्रेंड करें
+Feature.Friends.Action.ViewMore,और देखें
 Feature.Friends.Action.ViewPlatformProfile,गेमर कार्ड देखें
 Feature.Friends.Button.AddViaLink,लिंक के ज़रिए जोड़ें
 Feature.Friends.Button.GotIt,
@@ -2769,6 +2847,7 @@ Feature.Friends.Feature.Friends.Heading.AddFriends,
 Feature.Friends.FriendingTooltipBody,"कुछ फ़्रेंड रिक्वेस्ट उन यूज़र्स से मिल सकती है, जिन्होंने आपको आपके फ़ोन नंबर से खोजा है. फ़्रेंड्स बनने से पहले पक्का कर लें कि आप उनसे परिचित हैं."
 Feature.Friends.Heading.Activities,ऐक्टिविटीज़
 Feature.Friends.Heading.FilterBy,इस आधार पर फ़िल्टर करें
+Feature.Friends.Heading.Friends,
 Feature.Friends.Heading.MyConnections,मेरे फ़्रेंड्स
 Feature.Friends.Label.AddConnectionVPC,"इस भरोसेमंद कनेक्शन को जोड़ने के लिए, आपको पेरेंट की परमिशन चाहिए."
 Feature.Friends.Label.AddConnectionsHint,कनेक्शन Roblox को मज़ेदार बनाते हैं!
@@ -2905,6 +2984,7 @@ Feature.Friends.TrustedFriend.AddBack.Header,भरोसेमंद फ़्�
 Feature.Friends.TrustedFriend.Info.Modal.Header,नया भरोसेमंद फ़्रेंड
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,भरोसेमंद फ़्रेंड जोड़ें
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,भरोसेमंद दोस्त जोड़ें
+Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,भरोसेमंद फ़्रेंड्स जोड़ें
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
@@ -3237,7 +3317,6 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
-Feature.Landing.Heading.LandingSlogan,3 करोड़ से ज़्यादा एक्सपीरिएंस एक्सप्लोर करें
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,अनुचित भाषा
 Feature.Landing.Label.BrazilContentDescriptorViolence,हिंसा
 Feature.Landing.Label.BrazilContentRatingLogoTitle,एडवाइज़री रेटिंग : 12 साल
@@ -3288,6 +3367,7 @@ Feature.Moments.Description.HowToCaptureStep2,कैप्चर कंट्र
 Feature.Moments.Description.HowToCaptureStep3,गेमप्ले की फ़ोटो और वीडियो कैप्चर करें
 Feature.Moments.Description.LeaveMomentsCreation,"आपके सभी बदलाव हट जाएँगे, लेकिन आप अभी भी इस कैप्चर को अपनी <b>कैप्चर</b> गैलरी में देख सकते हैं."
 Feature.Moments.Description.NoMusicResults,कोई म्यूज़िक नहीं मिला
+Feature.Moments.Description.NonInfiniteScrollEndBody,"आप Moments में स्टॉपिंग पॉइंट पर हैं. देखते रहने के लिए, नीचे टैप करें."
 Feature.Moments.Description.PublishMoment,अपने Moment के बारे में बताएँ
 Feature.Moments.Description.TooManyUploads,आपने आज बहुत सारे वीडियो अपलोड कर दिए हैं. कल फिर से कोशिश करें.
 Feature.Moments.Disclaimer.EveryoneMoments,Moments में मौजूद हर कोई पब्लिश की गई चीज़ें देख सकता है
@@ -3297,6 +3377,7 @@ Feature.Moments.Label.CaptureLibrary,आपकी 'कैप्चर' लाइ
 Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने पर, उसे रिकवर नहीं किया जा सकता."
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
 Feature.Moments.Label.Error,कुछ गड़बड़ी हुई. फिर से कोशिश करें.
+Feature.Moments.Label.FeedEndBody,बाद में फिर से चेक करें या अपना खुद का Moment क्रिएट करें.
 Feature.Moments.Label.FeedEndTitle,कोई नया Moment नहीं है
 Feature.Moments.Label.FeedFailedToLoad,फ़ीड लोड नहीं हो सकी
 Feature.Moments.Label.FeedMyMoments,मेरे Moments
@@ -3315,6 +3396,7 @@ Feature.Moments.Label.MomentUnavailable,Moment उपलब्ध नहीं �
 Feature.Moments.Label.MomentUnavailableDefault,यह Moment उपलब्ध नहीं है.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
@@ -3345,7 +3427,7 @@ Feature.NotApproved.Action.ReportMistake,गलती की रिपोर्�
 Feature.NotApproved.Action.RuleConfirmation,मैं नियमों को समझने और उनका पालन करने के लिए सहमत हूँ.
 Feature.NotApproved.Action.UserAgree,
 Feature.NotApproved.Action.ViewLess,कम देखें
-Feature.NotApproved.Action.ViewMore,और देखें
+Feature.NotApproved.Action.ViewMore,
 Feature.NotApproved.Action.ViewRules,नियम देखें
 Feature.NotApproved.Action.ViewRulesUGCAvatarGuidelines,UGC अवतार गाइडलाइन के नियम देखें
 Feature.NotApproved.Description.AppealViaSupport,"इस फ़ैसले पर अपील करने के लिए, {link}सपोर्ट टीम से संपर्क करें.{linkEnd}"
@@ -3437,7 +3519,7 @@ Feature.NotApproved.Heading.BannedOneDayOnly,1 दिन के लिए बै
 Feature.NotApproved.Heading.BannedOneHour,1 घंटे के लिए बैन किया गया
 Feature.NotApproved.Heading.BannedOneMinute,1 मिनट के लिए बैन किया गया
 Feature.NotApproved.Heading.BannedOneSecond,1 सेकंड के लिए बैन किया गया
-Feature.NotApproved.Heading.Error,अज्ञात गड़बड़ी हुई.
+Feature.NotApproved.Heading.Error,कोई अज्ञात गड़बड़ी हुई है. थोड़ी देर बाद कोशिश करें.
 Feature.NotApproved.Heading.ReactivationNotice,खेलने के लिए वापस जाएँ
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,सभी का स्वागत गर्मजोशी से करें
 Feature.NotApproved.Heading.RuleExplanation.Dating,फ़्रेंड ज़ोन में रहें
@@ -3687,7 +3769,7 @@ Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,तंबाक�
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,खिलौने और गेम
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"हथियार, बंदूक और संबंधित प्रॉडक्ट्स"
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
-Feature.NotApproved.Label.Sublabel.Emissive,एमिसिव
+Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,स्पैम पब्लिश करना
 Feature.NotApproved.Label.Sublabel.FraudAbuseOfTheAffiliateSystem,एफ़िलिएट सिस्टम का दुरुपयोग
 Feature.NotApproved.Label.Sublabel.FraudAttemptedUnauthorizedPaymentMethodUse,पेमेंट के अनधिकृत तरीके का इस्तेमाल करने की कोशिश की गई
@@ -3815,11 +3897,11 @@ Feature.Profile.Description.EnterNicknameTextbox,अपना उपनाम �
 Feature.Profile.Description.InspectAndBuy,उनका लुक देखने और खरीदने के लिए क्लिक करें.
 Feature.Profile.Description.NicknamePrivacy,सिर्फ़ {displayName} के ज़रिए यह देखा जाएगा.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,सिर्फ़ इस यूज़र को यह दिखाई देगा.
-Feature.Profile.Description.QrCodeDescription,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद कनेक्शन होंगे जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
-Feature.Profile.Description.QrCodeDescription.FriendsRename,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद फ़्रेंड्स होंगे, जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
+Feature.Profile.Description.QrCodeDescription,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद फ़्रेंड्स होंगे, जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
+Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,"दूसरों को QR स्कैनर या उनके डिवाइस के कैमरे से अपना Roblox QR कोड स्कैन करने दें, ताकि वे आपको फ़्रेंड के तौर पर फटाफट जोड़ सकें!"
-Feature.Profile.Description.RecognizeConnectionsByCustomName,कस्टम नाम सेट करके कनेक्शंस को और आसानी से पहचानें. कॉन्टैक्ट्स से इंपोर्ट किए गए नाम और कस्टम नाम सिर्फ़ आपको दिखाई देते हैं.
-Feature.Profile.Description.RecognizeFriendsByCustomName,कस्टम नाम सेट करके फ़्रेंड्स को और आसानी से पहचानें. कॉन्टैक्ट्स से इंपोर्ट किए गए नाम और कस्टम नाम सिर्फ़ आपको दिखाई देते हैं.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,कस्टम नाम सेट करके फ़्रेंड्स को और आसानी से पहचानें. कॉन्टैक्ट्स से इंपोर्ट किए गए नाम और कस्टम नाम सिर्फ़ आपको दिखाई देते हैं.
+Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,अपने जानने वाले लोगों को अनुमति दें कि वे आपका QR कोड स्कैन करके आपको जोड़ सकें.
 Feature.Profile.Description.SelectNicknameDropdown,कोई नाम चुनें
@@ -3842,7 +3924,7 @@ Feature.Profile.Header.Inventory,
 Feature.Profile.Header.Store,
 Feature.Profile.Heading.AgedUpDisplayName,
 Feature.Profile.Heading.AgedUpDisplayNameUpdated,नाम अपडेट किया गया.
-Feature.Profile.Heading.DisplayName,डिसप्ले नाम
+Feature.Profile.Heading.DisplayName,
 Feature.Profile.Heading.DisplayNameUpdated,डिसप्ले नाम अपडेट किया गया
 Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करें
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
@@ -3899,7 +3981,7 @@ Feature.Profile.Message.InvalidAliasError,नाम सेव नहीं क�
 Feature.Profile.Message.NoExperienceAccess,"{name} ऐसे एक्सपीरिएंस में हैं, जिसका ऐक्सेस आपको नहीं है."
 Feature.Profile.Message.QRLoadFailed,लोड नहीं हो सका.
 Feature.Profile.Message.QRNofificationRequest,ने आपको आपके QR कोड से एक फ़्रेंड रिक्वेस्ट भेजी है.
-Feature.Profile.Message.QRNotificationRequest,ने आपके QR कोड से आपको कनेक्शन रिक्वेस्ट भेजी है
+Feature.Profile.Message.QRNotificationRequest,
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,QR स्कैनर
 Feature.Profile.Tooltip.CurrencyTransfer.Body,अब आपके पास Robux भेजने की सुविधा है
@@ -3951,7 +4033,6 @@ Feature.ReportAbuse.Label.Confirmation.Subheading,हम जल्द ही आ
 Feature.ReportAbuse.Label.Confirmation.Title,रिपोर्ट करने के लिए धन्यवाद
 Feature.ReportAbuse.Label.FinishChatReport,चैट रिपोर्ट पूरी करें
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,गैरकानूनी कॉन्टेंट या बच्चों के लिए नुकसानदेह कॉन्टेंट की रिपोर्ट करें
-Feature.ReportAbuse.Label.NoChatMessagesFound,कोई चैट मैसेज नहीं मिला
 Feature.ReportAbuse.Label.Optional,
 Feature.ReportAbuse.Label.PleaseSelectOne,कोई एक चुनें.
 Feature.ReportAbuse.Label.Report,
@@ -4031,7 +4112,8 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus लें
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus यहाँ उपलब्ध नहीं है
 Feature.SafetyDashboard.Heading.AccountStatus,अकाउंट का स्टेटस
-Feature.Schools.Action.CantFindSchool,मेरा स्कूल नहीं मिल रहा?
+Feature.Schools.Action.AlreadyGraduated,मैंने पहले ही ग्रैजुएशन कर लिया है
+Feature.Schools.Action.CantFindSchool,आपको अपना स्कूल नहीं मिल रहा?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,स्कूल हटाएँ
 Feature.Schools.Action.Ok,
@@ -4040,51 +4122,68 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
-Feature.Schools.Description.AddTrustedFriendsFromSchool,अपने स्कूल के भरोसेमंद दोस्त जोड़ें
+Feature.Schools.Body.EnterCode,UNiDAYS ने {user_email} पर आपको वन-टाइम कोड वाला ईमेल भेजा है. अपने स्कूल को कन्फ़र्म करने के लिए नीचे कोड डालें.
+Feature.Schools.Body.UnidaysShare,आपका ईमेल एड्रेस दूसरों को नहीं दिखेगा.
+Feature.Schools.Body.UnidaysTerms,"हम आपके स्कूल के ईमेल एड्रेस को वेरिफ़ाई करने के लिए UNiDAYS के साथ पार्टनरशिप करते हैं. ""जारी रखें"" पर क्लिक करने का मतलब है कि आप UNiDAYS की सेवा की शर्तों और प्राइवेसी पॉलिसी से सहमत हैं."
+Feature.Schools.Caption.RemovedOnGraduate,"पढ़ाई पूरी होने के बाद, आपको {school} से हटा दिया जाएगा."
 Feature.Schools.Description.CantFindSchoolNotify,आपका स्कूल Roblox पर आने पर हम आपको सूचित करेंगे.
 Feature.Schools.Description.CantVerifySchool,आपकी दी गई जानकारी के आधार पर हम आपके स्कूल को वेरिफ़ाई नहीं कर सके.
-Feature.Schools.Description.EasilyAddTrustedFriends,अपने स्कूल के भरोसेमंद फ़्रेंड्स जोड़ें
-Feature.Schools.Description.FeatureAvailableBody,अपने फ़्रेंड्स को आसानी से ढूँढें.
-Feature.Schools.Description.InviteFriendsExclusiveItem,वेरिफ़िकेशन के लिए और लोगों को इनवाइट करें. अपना फ़्री आइटम जल्दी पाएँ.
-Feature.Schools.Description.InviteFriendsUnlockSooner,वेरिफ़िकेशन के लिए और लोगों को इनवाइट करें और ग्रुप को जल्दी खोलने में मदद करें.
+Feature.Schools.Description.ConnectWithFellowAlumni,साथी एल्युमनाई से कनेक्ट करें
+Feature.Schools.Description.FeatureAvailableBody,अपने स्कूल के फ़्रेंड्स को ढूँढें.
+Feature.Schools.Description.InviteFriendsExclusiveItem,वेरिफ़िकेशन के लिए दूसरों को इनवाइट करें. अपने स्कूल के लॉन्च होने पर एक फ़्री आइटम पाएँ.
+Feature.Schools.Description.InviteFriendsUnlockSooner,अपने स्कूल के एल्युमनाई ग्रुप को जल्दी लॉन्च करने में मदद करें.
+Feature.Schools.Description.InviteOthersToVerify,वेरिफ़ाई करने के लिए दूसरों को इनवाइट करें
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,वेरिफ़ाई किए जा चुके और एल्युमनाई चाहिए
-Feature.Schools.Description.MoreVerifiedStudentsNeeded,वेरिफ़ाई किए जा चुके और स्टूडेंट्स चाहिए
+Feature.Schools.Description.NotAvailableInRegion,स्कूल का फ़ीचर अभी तक आपके क्षेत्र में उपलब्ध नहीं है.
 Feature.Schools.Description.RemoveSchoolBody,"अपने स्कूल में फिर से शामिल होने के लिए, आपको अपने स्कूल का ईमेल पता फिर से वेरिफ़ाई करना होगा. आपको मिले सभी रिवॉर्ड आइटम डिलीट कर दिए जाएँगे."
-Feature.Schools.Description.SchoolIsLiveBody,अपने स्कूल के साथियों से कनेक्ट करें
-Feature.Schools.Description.SeeWhatsPopularAtSchool,देखें कि आपके स्कूल में क्या पॉप्युलर है
-Feature.Schools.Description.ShowSchoolOnProfile,अपनी प्रोफ़ाइल पर अपना स्कूल दिखाएँ
-Feature.Schools.Description.WaitlistAlumniBody,"आपका वेरिफिकेशन पूरा हो गया है. आपके स्कूल के एल्युमनाई ग्रुप के लाइव होते ही, हम आपको बता देंगे."
-Feature.Schools.Description.WaitlistBody,"बधाई हो, आपका वेरिफिकेशन पूरा हो गया है. आपके स्कूल के यहाँ खुलते ही, आपका फ़्री आइटम उपलब्ध हो जाएगा."
-Feature.Schools.Error.InvalidPassCode,पास कोड अमान्य है
-Feature.Schools.Error.OtpAlreadyUsed,Otp पहले ही इस्तेमाल किया जा चुका है
-Feature.Schools.Error.OtpExpired,OTP एक्सपायर हो गया है
-Feature.Schools.Error.OtpInvalidFormat,OTP का फ़ॉर्मेट अमान्य है
-Feature.Schools.Error.OtpTooManyAttempts,OTP से बहुत बार कोशिश की जा चुकी है
+Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.UpsellDisclaimer,आपका स्कूल सिर्फ़ उसी स्कूल के लोगों को दिखेगा. किसी भी समय अपने स्कूल की जानकारी को अपडेट किया जा सकता है या हटाया जा सकता है.
+Feature.Schools.Description.UpsellTagline,"अपने स्कूल के वेरिफ़ाइड स्टूडेंट्स को खोजें, उनसे कनेक्ट करें और उनके साथ खेलें."
+Feature.Schools.Description.WaitlistAlumniBody,"आपका वेरिफ़िकेशन पूरा हो गया है. आपके स्कूल के एल्युमनाई ग्रुप के लॉन्च होते ही, हम आपको बता देंगे."
+Feature.Schools.Description.WaitlistBody,आप एक फ़ाउंडिंग मेंबर हैं. अपने क्लासमेट्स को इनवाइट करें और उनके साथ मिलकर अपना स्कूल लॉन्च करें.
+Feature.Schools.Error.AlreadyLinked,यह ईमेल एड्रेस पहले से ही किसी दूसरे अकाउंट से लिंक किया जा चुका है.
+Feature.Schools.Error.InvalidEmail,स्कूल का कोई मान्य ईमेल पता डालें.
+Feature.Schools.Error.InvalidPassCode,यह कोड गलत है.
+Feature.Schools.Error.NotSchoolEmail,कृपया अपने स्कूल का जारी किया गया ईमेल एड्रेस इस्तेमाल करें.
+Feature.Schools.Error.OtpAlreadyUsed,यह कोड पहले ही इस्तेमाल किया जा चुका है.
+Feature.Schools.Error.OtpExpired,इस कोड की समयसीमा खत्म हो गई है.
+Feature.Schools.Error.OtpInvalidFormat,इस कोड का फ़ॉर्मैट अमान्य है.
+Feature.Schools.Error.OtpTooManyAttempts,आपके आज के सभी प्रयास पूरे हो गए हैं.
 Feature.Schools.Error.SomethingWentWrong,
 Feature.Schools.Filter.AllYears,सभी साल
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,ग्रैजुएशन का साल
 Feature.Schools.GiftForYou,आपके लिए एक गिफ़्ट
 Feature.Schools.Heading.AddSchool,स्कूल जोड़ें
-Feature.Schools.Heading.AddSchoolNow,अपना स्कूल जोड़ें
+Feature.Schools.Heading.AddSchoolNow,अपने स्कूल से जुड़ें
 Feature.Schools.Heading.CantFindSchool,हमें आपका स्कूल नहीं मिल रहा है
 Feature.Schools.Heading.CantVerifySchool,हम आपका स्कूल वेरिफ़ाई नहीं कर सकते
-Feature.Schools.Heading.CheckYourEmail,स्कूल का अपना ईमेल देखें
-Feature.Schools.Heading.HelpUnlockYourSchool,अपना स्कूल खोलने में मदद करें
-Feature.Schools.Heading.HelpUnlockYourSchoolAlumni,एल्युमनाई ग्रुप खोलने में मदद करें
-Feature.Schools.Heading.MembersWithCount,({count}) मेंबर्स
+Feature.Schools.Heading.CheckYourEmail,अपना ईमेल चेक करें
+Feature.Schools.Heading.EnterSchoolEmail,अपने स्कूल का ईमेल पता डालें
+Feature.Schools.Heading.JoinClassmates,अपने क्लासमेट्स के साथ शामिल हों
+Feature.Schools.Heading.MembersWithCount,{count} मेंबर
 Feature.Schools.Heading.RemoveYourSchool,अपना स्कूल हटाएँ
-Feature.Schools.Heading.SchoolIsLive,आपका स्कूल लाइव है
+Feature.Schools.Heading.SchoolIsLive,आपका स्कूल अब खुल गया है
 Feature.Schools.Heading.SelectGraduationYear,पढ़ाई पूरी होने का साल चुनें
-Feature.Schools.Label.ConfirmSchool,"कौन-सा स्कूल है, यह कन्फ़र्म करें"
+Feature.Schools.Heading.ShareWithFriends,फ़्रेंड्स के साथ शेयर करें
+Feature.Schools.Heading.ThanksForInterest,दिलचस्पी दिखाने के लिए धन्यवाद
+Feature.Schools.Heading.YouJoinedSchool,आपने {school} को जॉइन कर लिया है!
+Feature.Schools.Heading.YourFounderReward,आपका फ़ाउंडर रिवॉर्ड
+Feature.Schools.Label.AlumniGroupLaunches,एल्युमनाई ग्रुप लॉन्च हो गया
+Feature.Schools.Label.Classmates,क्लासमेट
+Feature.Schools.Label.ConfirmSchool,स्कूल चुनें
 Feature.Schools.Label.ConnectWithClassmates,क्लासमेट्स से कनेक्ट करें
 Feature.Schools.Label.DidntGetCode,
-Feature.Schools.Label.GainSchoolBadge,अपना स्कूल बैज पाएँ
-Feature.Schools.Label.MoreToUnlockSchool,"आपका स्कूल खोलने के लिए, {count} और चाहिए"
-Feature.Schools.Label.SchoolTrends,स्कूल के ट्रेंड्स
-Feature.Schools.Label.SchoolVerified,स्कूल वेरिफ़ाई किया गया
+Feature.Schools.Label.MoreToUnlockSchool,"आपका स्कूल लॉन्च करने के लिए, {count} और चाहिए"
+Feature.Schools.Label.ResendInSeconds,{time} में फिर से भेजें
+Feature.Schools.Label.SchoolLaunches,स्कूल लॉन्च हो गया
+Feature.Schools.Label.SchoolVerified,आपको वेरिफ़ाई कर लिया गया है
 Feature.Schools.Label.Search,
 Feature.Schools.Label.UnlockAlumniGroup,एल्युमनाई ग्रुप पेंडिंग है
+Feature.Schools.Label.UpsellPerkFindFriends,अपने स्कूल के फ़्रेंड्स को ढूँढें
+Feature.Schools.Label.UpsellPerkPlayAndChat,देखें कि कौन ऑनलाइन है और आसानी से एक साथ खेलें
+Feature.Schools.Label.UpsellPerkTrends,जानें कि आपके स्कूल में क्या ट्रेंड चल रहा है
+Feature.Schools.Placeholder.Email,स्टूडेंट का ईमेल
 Feature.Schools.Placeholder.SixDigitCode,
 Feature.Schools.RewardGiftBody,अपना स्कूल वेरिफ़ाई करने के लिए धन्यवाद. अपना नया आइटम अवतार > ऐक्सेसरी > 'वापस जाएँ' में देखा जा सकता है.
 Feature.Screentime.Content.ScreentimeLimitDialog,आपकी डेली स्क्रीन टाइम लिमिट पूरी हो गई हैं. फिर से Roblox ऐक्सेस करने के लिए कल वापस आएं.
@@ -4401,7 +4500,7 @@ Feature.VerificationUpsell.Heading.PhoneNumberVerified,फ़ोन नंबर
 Feature.VerificationUpsell.Heading.TryVoiceChat,वॉइस चैट आज़माएँ
 Feature.VerificationUpsell.Heading.VerificationCode,वेरिफ़िकेशन कोड
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,वेरिफ़ाई कर दिया गया है!
-Feature.VerificationUpsell.Heading.VerifyEmail,अपना ईमेल चेक करें
+Feature.VerificationUpsell.Heading.VerifyEmail,
 Feature.VerificationUpsell.Heading.VerifyOnLogout,लॉक आउट होने से बचें!
 Feature.VerificationUpsell.Heading.VerifyYourPhone,फ़ोन नंबर वेरिफ़ाई करें
 Feature.VerificationUpsell.Heading.VoiceChatEnabledMobile,वॉइस चैट चालू है! किसी एक्सपीरिएंस में अभी आज़माएँ.

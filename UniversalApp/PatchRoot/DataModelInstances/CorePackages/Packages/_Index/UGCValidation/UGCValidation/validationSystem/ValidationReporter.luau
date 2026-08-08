@@ -2,8 +2,10 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local getFFlagDebugUGCValidationPrintNewStructureResultsModule = require(parent.flags.getFFlagDebugUGCValidationPrintNewStructureResults)
+local getFFlagUGCValidationLogFailureInfoModule = require(parent.flags.getFFlagUGCValidationLogFailureInfo)
+local UGCValidationLogFailureLength = game:DefineFastInt("UGCValidationLogFailureLength", 100)
 
-local function getRelativePath(p0, p1) --[[ line: 10 ]]
+local function getRelativePath(p0, p1) --[[ line: 14 ]]
 	if p1 == nil or p1 == p0 then
 		return ""
 	end
@@ -17,7 +19,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p2, p3) --[[ line: 26 ]]
+function t.new(p2, p3) --[[ line: 30 ]]
 	-- upvalues: t (ref), validationEnumsModule (ref)
 	local tbl = setmetatable({}, t)
 	tbl._testEnum = p2
@@ -32,17 +34,17 @@ function t.new(p2, p3) --[[ line: 26 ]]
 	return tbl
 end
 
-function t:begin() --[[ line: 41 ]]
+function t:begin() --[[ line: 45 ]]
 	-- upvalues: validationEnumsModule (ref)
 	self._startTime = os.clock()
 	self._status = validationEnumsModule.Status.IN_PROGRESS
 end
 
-function t:setReportingInstance(p4) --[[ line: 48 ]]
+function t:setReportingInstance(p4) --[[ line: 52 ]]
 	self._currentInstance = p4
 end
 
-function t:fail(p5, p6, p7) --[[ line: 52 ]]
+function t:fail(p5, p6, p7) --[[ line: 56 ]]
 	-- upvalues: validationEnumsModule (ref), getRelativePath (ref)
 	self._status = validationEnumsModule.Status.FAIL
 	table.insert(self._failures, {
@@ -52,7 +54,7 @@ function t:fail(p5, p6, p7) --[[ line: 52 ]]
 	})
 end
 
-function t:warn(p8, p9, p10) --[[ line: 61 ]]
+function t:warn(p8, p9, p10) --[[ line: 65 ]]
 	-- upvalues: getRelativePath (ref)
 	table.insert(self._warnings, {
 		failureStringKey = p8,
@@ -61,15 +63,15 @@ function t:warn(p8, p9, p10) --[[ line: 61 ]]
 	})
 end
 
-function t.forceError(_, p11) --[[ line: 70 ]]
+function t.forceError(_, p11) --[[ line: 74 ]]
 	error({ __forceError = true, message = p11 })
 end
 
-function t.fetchError(_, p12) --[[ line: 77 ]]
+function t.fetchError(_, p12) --[[ line: 81 ]]
 	error({ __fetchError = true, message = p12 })
 end
 
-function t:err(p13) --[[ line: 81 ]]
+function t:err(p13) --[[ line: 85 ]]
 	-- upvalues: getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), validationEnumsModule (ref)
 	if getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
 		print("Reporting:", self._testEnum, "has error:", p13)
@@ -80,22 +82,34 @@ function t:err(p13) --[[ line: 81 ]]
 	self._warnings = {}
 end
 
-function t:complete() --[[ line: 92 ]]
-	-- upvalues: validationEnumsModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
-	local var7 = if self._startTime then 1000 * (os.clock() - self._startTime) else 0
+function t:complete() --[[ line: 96 ]]
+	-- upvalues: validationEnumsModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), getFFlagUGCValidationLogFailureInfoModule (ref), UGCValidationLogFailureLength (ref)
+	local var9 = if self._startTime then 1000 * (os.clock() - self._startTime) else 0
 	
 	if self._status == validationEnumsModule.Status.IN_PROGRESS then
 		self._status = validationEnumsModule.Status.PASS
 	end
 	if getFFlagDebugUGCValidationPrintNewStructureResultsModule() and self._status ~= validationEnumsModule.Status.PASS then
-		print("Reporting:", self._testEnum, "has status", self._status, "in", var7)
+		print("Reporting:", self._testEnum, "has status", self._status, "in", var9)
+	end
+	if getFFlagUGCValidationLogFailureInfoModule() and self._status == validationEnumsModule.Status.FAIL then
+		for i, v in self._failures do
+			self._telemetryContext ..= v.failureStringKey .. ";"
+			
+			if v.failureStringParams then
+				for i_1, v_1 in v.failureStringParams do
+					self._telemetryContext ..= tostring(v_1) .. ";"
+				end
+			end
+		end
+		self._telemetryContext = string.sub(self._telemetryContext, 1, UGCValidationLogFailureLength)
 	end
 	return {
 		validationEnum = self._testEnum,
 		status = self._status,
 		failures = self._failures,
 		warnings = self._warnings,
-		duration = var7,
+		duration = var9,
 		telemetryContext = self._telemetryContext
 	}
 end

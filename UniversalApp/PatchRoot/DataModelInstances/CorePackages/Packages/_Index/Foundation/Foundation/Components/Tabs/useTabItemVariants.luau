@@ -42,7 +42,7 @@ local function variantsFactory(_) --[[ line: 35 ]]
 			},
 			[true] = {
 				container = { tag = "grow auto-xy" },
-				content = if flagsModule.FoundationTabsInlineSizeFull then { tag = "auto-y", Size = UDim2.fromScale(1, 0) } else { tag = "size-full-0 auto-y" }
+				content = { tag = "auto-y", Size = UDim2.fromScale(1, 0) }
 			}
 		},
 		paddings = {
@@ -58,7 +58,7 @@ local function variantsFactory(_) --[[ line: 35 ]]
 	}
 end
 
-return function(p0, p1, p2) --[[ line: 86 ]]
+return function(p0, p1, p2) --[[ line: 84 ]]
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), flagsModule (ref)
 	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p0)
 	

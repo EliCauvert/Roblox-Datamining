@@ -81,14 +81,14 @@ return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
 		return UDim2.fromOffset(p5, 0)
 	end) else nil
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, if flagsModule.FoundationTabsInlineSizeFull then {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
 		tag = "auto-y",
 		Size = if flagsModule.FoundationFixTabsFitBorderWidth and var23 then var23 else UDim2.fromScale(1, 0)
-	} else { tag = "size-full-0 auto-y" }), {
+	}), {
 		Scroll = reactModule.createElement(scrollViewModule, {
 			LayoutOrder = 1,
-			tag = if flagsModule.FoundationTabsInlineSizeFull then if flagsModule.FoundationFixTabsFitBorderWidth then "auto-y" else nil else "size-full",
-			Size = if not flagsModule.FoundationTabsInlineSizeFull then if flagsModule.FoundationFixTabsFitBorderWidth and var23 then var23 else UDim2.fromScale(1, 1) else nil,
+			tag = if flagsModule.FoundationFixTabsFitBorderWidth then "auto-y" else nil,
+			Size = if flagsModule.FoundationFixTabsFitBorderWidth and var23 then var23 else UDim2.fromScale(1, 1),
 			onCanvasPositionChanged = var21,
 			onAbsoluteWindowSizeChanged = var21,
 			scrollingFrameRef = var19,

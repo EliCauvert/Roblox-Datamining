@@ -160,7 +160,7 @@ jobs:
               return lines.join('\n');
             };
 
-            const isLocaleFile = (f) => /^[^/]+\/Locales\//.test(f) || f.startsWith('Locales/');
+            const isLocaleFile = (f) => /^([^/]+\/)?Locales\/en-us\.csv$/i.test(f);
 
             const buildLocalesSection = (files) => {
               let out = '';
@@ -208,32 +208,4 @@ jobs:
                 (localesSection ? `### Locales Diffs\n${localesSection}` : '');
 
               await postComment(body.trim());
-              await sleep(500);
-            }
-
-            const nonLocaleModified = modified.filter((f) => !isLocaleFile(f));
-            const filesToDiff = nonLocaleModified.slice(0, MAX_FILE_COMMENTS);
-            const skipped = nonLocaleModified.slice(MAX_FILE_COMMENTS);
-
-            for (const file of filesToDiff) {
-              let diff;
-              try {
-                diff = execFileSync('git', ['diff', '--no-renames', before, after, '--', file], {
-                  maxBuffer: 1024 * 1024 * 20,
-                }).toString('utf8');
-              } catch (e) {
-                diff = `Error computing diff for this file: ${e.message}`;
-              }
-
-              if (!diff.trim()) continue;
-
-              await postComment(`### Diff: \`${file}\`\n\n\`\`\`diff\n${diff}\n\`\`\``);
-              await sleep(500); // stay well under the commit-comments secondary rate limit
-            }
-
-            if (skipped.length) {
-              await postComment(
-                `${skipped.length} more modified file(s) were skipped to avoid flooding this commit with comments:\n\n` +
-                  skipped.map((f) => `- \`${f}\``).join('\n'),
-              );
             }

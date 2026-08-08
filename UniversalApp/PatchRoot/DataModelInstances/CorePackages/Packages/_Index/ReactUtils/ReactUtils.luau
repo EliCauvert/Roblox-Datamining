@@ -1,4 +1,6 @@
-﻿return {
+﻿local _ = require(script.Bindings)
+
+return {
 	useHistory = require(script.useHistory),
 	useSelection = require(script.useSelection),
 	waitForEvents = require(script.waitForEvents),
@@ -9,6 +11,7 @@
 	useDebounce = require(script.useDebounce),
 	useDebouncedState = require(script.useDebouncedState),
 	useDelayedActionHandler = require(script.useDelayedActionHandler),
+	useEventCallback = require(script.useEventCallback),
 	useEventConnection = require(script.useEventConnection),
 	useForwardRef = require(script.useForwardRef),
 	useInitializedValue = require(script.useInitializedValue),
@@ -20,7 +23,9 @@
 	useRefs = require(script.useRefs),
 	useRefToState = require(script.useRefToState),
 	useStackState = require(script.useStackState),
+	useStagnatingState = require(script.useStagnatingState),
 	useToggleState = require(script.useToggleState),
+	Bindings = require(script.Bindings),
 	ContextStack = require(script.ContextStack),
 	EventConnection = require(script.EventConnection),
 	createUnimplemented = require(script.createUnimplemented),

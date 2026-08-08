@@ -2,9 +2,9 @@
 local parent = foundation.Parent
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
 local foundationModule = require(foundation.Providers.Foundation)
-local themeModule = require(foundation.Enums.Theme)
 local typesModule = require(foundation.Utility.Stories.Types)
 local tokenOverridesStoreModule = require(script.Parent.TokenOverridesStore)
 local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
@@ -65,11 +65,11 @@ local function useCreateOverlay(p2) --[[ line: 65 ]]
 end
 
 return function(p3) --[[ line: 91 | named "StoryMiddleware" ]]
-	-- upvalues: useCreateOverlay (ref), themeModule (ref), useTokenOverrides (ref), typesModule (ref), deviceModule (ref), reactModule (ref), foundationModule (ref), isPluginSecurityModule (ref), StyleLinkPortal (ref)
+	-- upvalues: useCreateOverlay (ref), colorModeModule (ref), useTokenOverrides (ref), typesModule (ref), deviceModule (ref), reactModule (ref), foundationModule (ref), isPluginSecurityModule (ref), StyleLinkPortal (ref)
 	return function(p4) --[[ line: 93 ]]
-		-- upvalues: useCreateOverlay (copy), themeModule (copy), useTokenOverrides (copy), typesModule (copy), deviceModule (copy), reactModule (copy), foundationModule (copy), isPluginSecurityModule (copy), p3 (ref), StyleLinkPortal (copy)
+		-- upvalues: useCreateOverlay (copy), colorModeModule (copy), useTokenOverrides (copy), typesModule (copy), deviceModule (copy), reactModule (copy), foundationModule (copy), isPluginSecurityModule (copy), p3 (ref), StyleLinkPortal (copy)
 		local var21 = useCreateOverlay(p4)
-		local theme = themeModule[p4.theme]
+		local theme = colorModeModule[p4.theme]
 		local var22 = useTokenOverrides()
 		local var23 = typesModule.toDeveloperStorybookStoryProps(p4)
 		local platform = nil
