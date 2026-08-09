@@ -27,7 +27,9 @@ local function legacyVariants(p0) --[[ line: 42 ]]
 				style = p0.Color.Content.Emphasis
 			},
 			slotAlign = { tag = "align-x-center align-y-center" },
-			submenuContent = { tag = "stroke-standard stroke-default radius-medium" }
+			submenuContent = {
+				tag = "col auto-xy stroke-standard stroke-default radius-medium"
+			}
 		},
 		sizes = {
 			[inputSizeModule.XSmall] = {
@@ -79,15 +81,11 @@ local function legacyVariants(p0) --[[ line: 42 ]]
 			[false] = { container = { tag = "" } },
 			[true] = { container = { tag = "bg-surface-200" } }
 		},
-		isScrollable = {
-			[false] = { submenuContent = { tag = "col auto-xy" } },
-			[true] = { submenuContent = { tag = "" } }
-		},
 		defaultSize = { container = { tag = "auto-x" } }
 	}
 end
 
-local function refreshVariants(p1) --[[ line: 125 ]]
+local function refreshVariants(p1) --[[ line: 119 ]]
 	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -107,7 +105,9 @@ local function refreshVariants(p1) --[[ line: 125 ]]
 				style = p1.Color.Content.Emphasis
 			},
 			slotAlign = { tag = "align-x-center align-y-center" },
-			submenuContent = { tag = "stroke-standard stroke-default radius-medium" }
+			submenuContent = {
+				tag = "col auto-xy stroke-standard stroke-default radius-medium"
+			}
 		},
 		sizes = {
 			[inputSizeModule.XSmall] = {
@@ -187,22 +187,18 @@ local function refreshVariants(p1) --[[ line: 125 ]]
 			[false] = { container = { tag = "" } },
 			[true] = { container = { tag = "" } }
 		},
-		isScrollable = {
-			[false] = { submenuContent = { tag = "col auto-xy" } },
-			[true] = { submenuContent = { tag = "" } }
-		},
 		defaultSize = { container = { tag = "auto-x" } }
 	}
 end
 
-local function variantsMap(p2) --[[ line: 233 ]]
+local function variantsMap(p2) --[[ line: 221 ]]
 	-- upvalues: flagsModule (ref), refreshVariants (ref), legacyVariants (ref)
 	return if flagsModule.FoundationBaseMenuBeta then refreshVariants(p2) else legacyVariants(p2)
 end
 
-return function(p3, p4, p5, p6) --[[ line: 243 ]]
+return function(p3, p4, p5) --[[ line: 231 ]]
 	-- upvalues: variantsContextModule (ref), variantsMap (ref), flagsModule (ref), composeStyleVariantModule (ref)
 	local baseMenuItem = variantsContextModule.useVariants("BaseMenuItem", variantsMap, p3)
 	
-	return if flagsModule.FoundationBaseMenuBeta then composeStyleVariantModule(baseMenuItem.common, baseMenuItem.sizes[p4], baseMenuItem.defaultSize, baseMenuItem.isScrollable[p6]) else composeStyleVariantModule(baseMenuItem.common, baseMenuItem.sizes[p4], baseMenuItem.isChecked[p5], baseMenuItem.isScrollable[p6])
+	return if flagsModule.FoundationBaseMenuBeta then composeStyleVariantModule(baseMenuItem.common, baseMenuItem.sizes[p4], baseMenuItem.defaultSize) else composeStyleVariantModule(baseMenuItem.common, baseMenuItem.sizes[p4], baseMenuItem.isChecked[p5])
 end

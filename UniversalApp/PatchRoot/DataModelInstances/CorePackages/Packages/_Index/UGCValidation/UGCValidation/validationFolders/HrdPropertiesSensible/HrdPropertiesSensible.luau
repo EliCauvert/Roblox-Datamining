@@ -2,6 +2,7 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local getEngineFeatureEngineUGCValidationExpandReturnSchemaModule = require(parent.flags.getEngineFeatureEngineUGCValidationExpandReturnSchema)
 local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
 local getAllInstancesIsAModule = require(parent.util.getAllInstancesIsA)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
@@ -16,7 +17,7 @@ local t = {
 	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
 	fflag = r15plusUtilsModule.checkFlagEnabledForAllowHrd
 }
-local var9 = game:DefineFastInt("UGCValidationHrdJointSizeHundredthsLimit", 150) / 100
+local var10 = game:DefineFastInt("UGCValidationHrdJointSizeHundredthsLimit", 150) / 100
 local UGCValidationHrdJointRangeMinXHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMinXHundredths", 0)
 local UGCValidationHrdJointRangeMaxXHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMaxXHundredths", 0)
 local UGCValidationHrdJointRangeMinYHundredths = game:DefineFastInt("UGCValidationHrdJointRangeMinYHundredths", 0)
@@ -29,11 +30,11 @@ local vector3 = Vector3.new(UGCValidationHrdJointRangeMinXHundredths / 100, UGCV
 local vector3_1 = Vector3.new(UGCValidationHrdJointRangeMaxXHundredths / 100, UGCValidationHrdJointRangeMaxYHundredths / 100, UGCValidationHrdJointRangeMaxZHundredths / 100)
 local vector3_2 = Vector3.new(0, UGCValidationHrdOriginOffsetMinYHundredths / 100, 0)
 local vector3_3 = Vector3.new(0, UGCValidationHrdOriginOffsetMaxYHundredths / 100, 0)
-local var22 = game:DefineFastInt("UGCValidationDrdJointSizeHundredthsLimit", 150) / 100
+local var23 = game:DefineFastInt("UGCValidationDrdJointSizeHundredthsLimit", 150) / 100
 local vector3_4 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMinZHundredths", 0) / 100)
 local vector3_5 = Vector3.new(game:DefineFastInt("UGCValidationDrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationDrdJointRangeMaxZHundredths", 0) / 100)
 
-local function checkVectorRange(p0, p1, p2, p3, p4, p5) --[[ line: 45 ]]
+local function checkVectorRange(p0, p1, p2, p3, p4, p5) --[[ line: 47 ]]
 	-- upvalues: vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
 	if not vector3UtilsModule.isInRange(p3, p4, p5) then
 		p0:fail(errorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
@@ -46,7 +47,7 @@ local function checkVectorRange(p0, p1, p2, p3, p4, p5) --[[ line: 45 ]]
 	end
 end
 
-local function checkSize(p6, p7, p8, p9, p10) --[[ line: 64 ]]
+local function checkSize(p6, p7, p8, p9, p10) --[[ line: 66 ]]
 	-- upvalues: errorSourceStringsModule (ref), valueToStringModule (ref)
 	if p9 < 0 or p10 < p9 then
 		p6:fail(errorSourceStringsModule.Keys.HrdProperties_PropertyOutOfRange, {
@@ -59,14 +60,16 @@ local function checkSize(p6, p7, p8, p9, p10) --[[ line: 64 ]]
 	end
 end
 
-function t.run(p11, p12) --[[ line: 82 ]]
-	-- upvalues: getAllInstancesIsAModule (ref), validationRulesUtilModule (ref), cFrameUtilsModule (ref), vector3UtilsModule (ref), vector3_2 (ref), vector3_3 (ref), errorSourceStringsModule (ref), valueToStringModule (ref), r15plusUtilsModule (ref), checkSize (ref), var9 (ref), checkVectorRange (ref), vector3 (ref), vector3_1 (ref), var22 (ref), vector3_4 (ref), vector3_5 (ref)
+function t.run(p11, p12) --[[ line: 84 ]]
+	-- upvalues: getAllInstancesIsAModule (ref), validationRulesUtilModule (ref), getEngineFeatureEngineUGCValidationExpandReturnSchemaModule (ref), cFrameUtilsModule (ref), vector3UtilsModule (ref), vector3_2 (ref), vector3_3 (ref), errorSourceStringsModule (ref), valueToStringModule (ref), r15plusUtilsModule (ref), checkSize (ref), var10 (ref), checkVectorRange (ref), vector3 (ref), vector3_1 (ref), var23 (ref), vector3_4 (ref), vector3_5 (ref)
 	for i, v in getAllInstancesIsAModule(p12.rootInstance, "MeshPart") do
 		local humanoidRigDescription = v:FindFirstChildWhichIsA("HumanoidRigDescription")
 		local name = validationRulesUtilModule.rigAttachmentToParentMap[v.Name]
 		
 		if humanoidRigDescription ~= nil then
-			p11:setReportingInstance(humanoidRigDescription)
+			if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
+				p11:setReportingInstance(humanoidRigDescription)
+			end
 			local originOffset = humanoidRigDescription.OriginOffset
 			
 			if v.Name == "LowerTorso" then
@@ -82,25 +85,25 @@ function t.run(p11, p12) --[[ line: 82 ]]
 			local nameContainedJointLabels = humanoidRigDescription:GetContainedJointLabels(v.Name)
 			
 			for i_1, v_1 in r15plusUtilsModule.getHrdJointLabels() do
-				local var31 = `{v_1.Name}RigAttachment` == name
-				local var32 = humanoidRigDescription:GetJoint(v_1)
+				local var32 = `{v_1.Name}RigAttachment` == name
+				local var33 = humanoidRigDescription:GetJoint(v_1)
 				
-				if var31 and (not var32 or var32.Name ~= name or var32.ClassName ~= "Attachment") then
+				if var32 and (not var33 or var33.Name ~= name or var33.ClassName ~= "Attachment") then
 					p11:fail(errorSourceStringsModule.Keys.HrdMissingStandardJoint, { jointName = v_1.Name })
 				end
-				if var32 then
+				if var33 then
 					if table.find(nameContainedJointLabels, v_1) then
-						if not var31 and (var32.Name ~= v_1.Name or var32.ClassName ~= "Bone") then
+						if not var32 and (var33.Name ~= v_1.Name or var33.ClassName ~= "Bone") then
 							p11:fail(errorSourceStringsModule.Keys.HrdImproperJointMapping, { jointName = v_1.Name, boneName = v_1.Name })
 						end
-						local var33 = humanoidRigDescription:GetJointSize(v_1)
-						local var34 = humanoidRigDescription:GetJointRangeMin(v_1)
-						local var35 = humanoidRigDescription:GetJointRangeMax(v_1)
-						checkSize(p11, v_1.Name, "size", var33, var9)
-						checkVectorRange(p11, v_1.Name, "rangeMin", var34, vector3, vector3_1)
-						checkVectorRange(p11, v_1.Name, "rangeMax", var35, vector3, vector3_1)
+						local var34 = humanoidRigDescription:GetJointSize(v_1)
+						local var35 = humanoidRigDescription:GetJointRangeMin(v_1)
+						local var36 = humanoidRigDescription:GetJointRangeMax(v_1)
+						checkSize(p11, v_1.Name, "size", var34, var10)
+						checkVectorRange(p11, v_1.Name, "rangeMin", var35, vector3, vector3_1)
+						checkVectorRange(p11, v_1.Name, "rangeMax", var36, vector3, vector3_1)
 						
-						if not vector3UtilsModule.isFirstLessOrEqual(var34, var35) then
+						if not vector3UtilsModule.isFirstLessOrEqual(var35, var36) then
 							p11:fail(errorSourceStringsModule.Keys.HrdProperties_MinAboveMax, { jointName = v_1.Name })
 						end
 					else
@@ -111,27 +114,28 @@ function t.run(p11, p12) --[[ line: 82 ]]
 			local digitsRigDescription = v:FindFirstChildWhichIsA("DigitsRigDescription")
 			
 			if digitsRigDescription ~= nil then
-				p11:setReportingInstance(digitsRigDescription)
-				
+				if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
+					p11:setReportingInstance(digitsRigDescription)
+				end
 				if (v.Name ~= "LeftHand" or digitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Left) and (v.Name ~= "RightHand" or digitsRigDescription.Side ~= Enum.DigitsRigDescriptionSide.Right) then
-					local var30 = "None"
+					local var31 = "None"
 					
 					if v.Name == "LeftHand" then
-						var30 = "Left"
+						var31 = "Left"
 					elseif v.Name == "RightHand" then
-						var30 = "Right"
+						var31 = "Right"
 					end
 					p11:fail(errorSourceStringsModule.Keys.HrdCheck_DrdInvalidSide, {
 						partName = v.Name,
-						expectedSide = var30,
+						expectedSide = var31,
 						foundSide = digitsRigDescription.Side.Name
 					})
 				end
-				checkSize(p11, "Index", "size", digitsRigDescription.IndexSize, var22)
-				checkSize(p11, "Thumb", "size", digitsRigDescription.ThumbSize, var22)
-				checkSize(p11, "Middle", "size", digitsRigDescription.MiddleSize, var22)
-				checkSize(p11, "Pinky", "size", digitsRigDescription.PinkySize, var22)
-				checkSize(p11, "Ring", "size", digitsRigDescription.RingSize, var22)
+				checkSize(p11, "Index", "size", digitsRigDescription.IndexSize, var23)
+				checkSize(p11, "Thumb", "size", digitsRigDescription.ThumbSize, var23)
+				checkSize(p11, "Middle", "size", digitsRigDescription.MiddleSize, var23)
+				checkSize(p11, "Pinky", "size", digitsRigDescription.PinkySize, var23)
+				checkSize(p11, "Ring", "size", digitsRigDescription.RingSize, var23)
 				checkVectorRange(p11, "Index", "range", digitsRigDescription.IndexRange, vector3_4, vector3_5)
 				checkVectorRange(p11, "Thumb", "range", digitsRigDescription.ThumbRange, vector3_4, vector3_5)
 				checkVectorRange(p11, "Pinky", "range", digitsRigDescription.PinkyRange, vector3_4, vector3_5)

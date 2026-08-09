@@ -2,7 +2,7 @@
 local reactModule = require(foundation.Parent.React)
 local var2 = reactModule.createContext({
 	isIconSize = false,
-	colorNamespace = require(foundation.Enums.ColorNamespace).Color
+	colorMode = require(foundation.Enums.ColorMode).Color
 })
 
 return {

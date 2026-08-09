@@ -1,7 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Enums.ButtonVariant)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
@@ -49,8 +49,8 @@ local var6 = function(p0) --[[ line: 41 ]]
 end
 
 return function(p1, p2, p3, p4) --[[ line: 92 ]]
-	-- upvalues: variantsContextModule (ref), var6 (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
+	-- upvalues: variantsContextModule (ref), var6 (ref), composeStyleVariantModule (ref), colorModeModule (ref)
 	local iconButton = variantsContextModule.useVariants("IconButton", var6, p1)
 	
-	return composeStyleVariantModule(iconButton.common, iconButton.sizes[p2], iconButton.types[p3][p4 or colorNamespaceModule.Color])
+	return composeStyleVariantModule(iconButton.common, iconButton.sizes[p2], iconButton.types[p3][p4 or colorModeModule.Color])
 end

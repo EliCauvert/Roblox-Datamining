@@ -1,1 +1,0 @@
-﻿return { Increment = "Increment", Decrement = "Decrement" }

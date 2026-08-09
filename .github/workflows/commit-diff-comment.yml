@@ -160,7 +160,7 @@ jobs:
               return lines.join('\n');
             };
 
-            const isLocaleFile = (f) => /^([^/]+\/)?Locales\/en-us\.csv$/i.test(f);
+            const isLocaleFile = (f) => /^([^/]+\/)?Locales\/(?:[^/]+\/)*en-us\.csv$/i.test(f);
 
             const buildLocalesSection = (files) => {
               let out = '';

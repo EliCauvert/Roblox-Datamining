@@ -14,7 +14,7 @@ local flagsModule = require(foundation.Utility.Flags)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.ControlState)
 local useToggleVariantsModule = require(script.Parent.useToggleVariants)
 local inputSizeModule = require(foundation.Enums.InputSize)
@@ -26,7 +26,7 @@ local t_1 = {
 	size = inputSizeModule.Medium,
 	placement = require(foundation.Enums.InputPlacement).Start
 }
-local t_2 = { colorNamespace = colorNamespaceModule.Color }
+local t_2 = { colorMode = colorModeModule.Color }
 
 return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 66 | named "Toggle" ]]
 	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTokensModule (ref), useToggleVariantsModule (ref), useUncontrolledStateModule (ref), flagsModule (ref), inputSizeModule (ref), reactModule (ref), otterModule (ref), t (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), presentationContextModule (ref), t_2 (ref), knobModule (ref), builderIconsModule (ref)

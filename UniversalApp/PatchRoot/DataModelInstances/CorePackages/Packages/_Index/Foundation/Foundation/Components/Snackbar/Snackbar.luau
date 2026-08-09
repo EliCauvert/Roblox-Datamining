@@ -6,7 +6,7 @@ local reactModule = require(parent.React)
 local iconVariant = builderIconsModule.IconVariant
 local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local iconModule = require(foundation.Components.Icon)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
@@ -19,7 +19,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = { testId = "--foundation-snackbar" }
-local t_1 = { colorNamespace = colorNamespaceModule.Inverse }
+local t_1 = { colorMode = colorModeModule.Inverse }
 
 return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 56 | named "Snackbar" ]]
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), iconVariant (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), t_1 (ref), iconModule (ref), dashModule (ref), textModule (ref), stateLayerModeModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)

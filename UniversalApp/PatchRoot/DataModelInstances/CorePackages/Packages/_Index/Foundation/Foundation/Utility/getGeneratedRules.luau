@@ -1,7 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local colorModeModule = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
 local flagsModule = require(foundation.Utility.Flags)
+local themeModule = require(foundation.Enums.Theme)
 local t = {
 	Common = function() --[[ line: 11 ]]
 		-- upvalues: foundation (ref)
@@ -26,15 +26,15 @@ local t = {
 }
 
 return function(p0, p1) --[[ line: 28 | named "getGeneratedRules" ]]
-	-- upvalues: t (ref), colorModeModule (ref), deviceModule (ref), flagsModule (ref)
+	-- upvalues: t (ref), themeModule (ref), deviceModule (ref), flagsModule (ref)
 	local var5 = nil
 	local _ = nil
 	local _ = nil
 	local var6 = t.Common()
 	
-	if p0 == colorModeModule.Dark then
+	if p0 == themeModule.Dark then
 		var5 = t.Dark()
-	elseif p0 == colorModeModule.Light then
+	elseif p0 == themeModule.Light then
 		var5 = t.Light()
 	end
 	local var7 = if p1 == deviceModule.Console and not flagsModule.FoundationDisableTokenScaling then t.Console() else t.Desktop()

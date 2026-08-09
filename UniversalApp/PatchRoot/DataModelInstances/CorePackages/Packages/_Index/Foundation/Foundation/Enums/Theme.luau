@@ -1,1 +1,1 @@
-﻿return require(script.Parent.ColorMode)
+﻿return { Dark = "Dark", Light = "Light" }

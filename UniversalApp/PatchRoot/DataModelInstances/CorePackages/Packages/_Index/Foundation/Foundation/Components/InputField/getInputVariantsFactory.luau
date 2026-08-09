@@ -1,5 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local dashModule = require(foundation.Parent.Dash)
+local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Components.Types)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local inputVariantModule = require(foundation.Enums.InputVariant)
@@ -8,11 +9,12 @@ local radiusModule = require(foundation.Enums.Radius)
 local _ = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 
-return function(p0) --[[ line: 39 | named "getInputVariantsFactory" ]]
-	-- upvalues: inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
+return function(p0) --[[ line: 40 | named "getInputVariantsFactory" ]]
+	-- upvalues: flagsModule (ref), inputSizeModule (ref), inputVariantModule (ref), dashModule (ref), radiusModule (ref)
 	return {
 		common = {
 			container = {
+				bgStyle = if flagsModule.FoundationTextInputRemoveBackgroundStyle then nil else p0.Color.Shift.Shift_100,
 				strokeStyle = p0.Color.Stroke.Emphasis,
 				strokeThickness = p0.Stroke.Standard
 			}
@@ -24,7 +26,7 @@ return function(p0) --[[ line: 39 | named "getInputVariantsFactory" ]]
 			[inputSizeModule.Large] = { container = { tag = "size-full-1200" } }
 		},
 		variants = {
-			[inputVariantModule.Standard] = {},
+			[inputVariantModule.Standard] = if flagsModule.FoundationTextInputRemoveBackgroundStyle then {} else { container = { bgStyle = p0.Color.Shift.Shift_100 } },
 			[inputVariantModule.Contrast] = {
 				container = {
 					bgStyle = p0.Color.Shift.Shift_200,

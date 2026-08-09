@@ -33,17 +33,16 @@ local t = {
 }
 local t_1 = {
 	[badgeVariantModule.Primary] = badgeVariantModule.Contrast,
-	[badgeVariantModule.Secondary] = if flagsModule.FoundationBadgeBetaUpdate then badgeVariantModule.Standard else badgeVariantModule.Neutral,
-	[badgeVariantModule.Neutral] = if flagsModule.FoundationBadgeBetaUpdate then badgeVariantModule.Standard else nil
+	[badgeVariantModule.Secondary] = badgeVariantModule.Neutral
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 72 | named "Badge" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 71 | named "Badge" ]]
 	-- upvalues: withDefaultsModule (ref), t (ref), t_1 (ref), useScaledValueModule (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), useBadgeVariantsModule (ref), flagsModule (ref), iconSizeModule (ref), useIconSizeModule (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), iconVariant (ref), getIconScaleModule (ref), viewModule (ref), imageModule (ref), withCommonPropsModule (ref), textModule (ref)
 	local var23 = withDefaultsModule(p0, t)
 	local variant = t_1[var23.variant] or var23.variant
 	local var25 = useScaledValueModule(200)
 	local var26 = useTokensModule()
-	local var27 = reactModule.useMemo(function() --[[ line: 79 ]]
+	local var27 = reactModule.useMemo(function() --[[ line: 78 ]]
 		-- upvalues: var23 (ref), iconPositionModule (copy)
 		return if typeof(var23.icon) == "string" then { name = var23.icon, position = iconPositionModule.Left } else var23.icon
 	end, { var23.icon })

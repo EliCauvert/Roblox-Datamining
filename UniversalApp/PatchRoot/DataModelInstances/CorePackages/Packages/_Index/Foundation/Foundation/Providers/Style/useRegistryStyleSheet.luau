@@ -1,8 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
-local reactModule = require(parent.React)
+local reactModule = require(foundation.Parent.React)
+local _ = require(foundation.Enums.Theme)
 local _ = require(foundation.Providers.Style.Tokens)
 local styleSheetRegistryModule = require(foundation.StyleSheet.StyleSheetRegistry)
 

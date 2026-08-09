@@ -1,0 +1,1 @@
+﻿return require(script.Parent._Index["RoduxContacts-31ab8d40-0.9.1"].RoduxContacts)

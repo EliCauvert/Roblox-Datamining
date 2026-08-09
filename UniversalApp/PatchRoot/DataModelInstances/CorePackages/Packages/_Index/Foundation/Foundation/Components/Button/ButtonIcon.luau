@@ -24,7 +24,7 @@ return function(p0) --[[ line: 38 | named "ButtonIcon" ]]
 	local var11 = useTextSizeOffsetModule()
 	local var12, var13 = getIconScaleModule(p0.icon, p0.size)
 	local var14 = usePresentationContext()
-	local var15 = useButtonVariantsModule(var10, p0.size, p0.variant, if var14 then var14.colorNamespace else nil)
+	local var15 = useButtonVariantsModule(var10, p0.size, p0.variant, if var14 then var14.colorMode else nil)
 	
 	return if p0.icon then if isBuilderOrMigratedIcon(p0.icon) then reactModule.createElement(textModule, {
 		tag = "position-center-center anchor-center-center",

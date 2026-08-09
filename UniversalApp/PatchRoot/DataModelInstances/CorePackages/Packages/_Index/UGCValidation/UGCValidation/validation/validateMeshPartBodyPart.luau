@@ -35,128 +35,129 @@ local getFFlagUGCValidationEnableR15plusSkinningModule = require(parent.flags.ge
 local resetPhysicsDataModule = require(parent.util.resetPhysicsData)
 local _ = require(parent.util.Types)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
+local getFFlagUGCValidationCombineEntrypointResultsModule = require(parent.flags.getFFlagUGCValidationCombineEntrypointResults)
 local getFFlagUGCValidateMigrateTextureTransparencyModule = require(parent.flags.getFFlagUGCValidateMigrateTextureTransparency)
 local getFFlagUGCValidateMigrateBodyPartBoundsModule = require(parent.flags.getFFlagUGCValidateMigrateBodyPartBounds)
 local getFFlagUGCValidateMigratePoseBlockingModule = require(parent.flags.getFFlagUGCValidateMigratePoseBlocking)
 local getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule = require(parent.flags.getFFlagUGCValidateMigrateSurfaceAppearanceMeshQuality)
 
-return function(p0, p1, p2) --[[ line: 57 | named "validateMeshPartBodyPart" ]]
-	-- upvalues: validateWithSchemaModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), getFFlagDebugUGCDisableSurfaceAppearanceTestsModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), resetPhysicsDataModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validateMeshSizePropertyModule (ref), failureReasonsAccumulatorModule (ref), validateBodyPartMeshBoundsModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateBodyPartChildAttachmentBoundsModule (ref), validateBodyPartExtentsRelativeToParentModule (ref), validateBodyPartChildAttachmentOrientationsModule (ref), validatePoseModule (ref), validateAssetBoundsModule (ref), validateLegsSeparationModule (ref), validateAccurateBoundingBoxRasterMethodModule (ref), bodyAssetMasksRendererModule (ref), validateDescendantMeshMetricsModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), validateDescendantTextureMetricsModule (ref), validateHSRModule (ref), validateAssetTransparencyModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateBodyPartCollisionFidelityModule (ref), validateAttributesModule (ref), validateTagsModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), validateMeshPartOnlySkinnedToR15Module (ref), validateModerationModule (ref)
+return function(p0, p1, p2) --[[ line: 58 | named "validateMeshPartBodyPart" ]]
+	-- upvalues: validateWithSchemaModule (ref), analyticsModule (ref), getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule (ref), getFFlagDebugUGCDisableSurfaceAppearanceTestsModule (ref), validateSurfaceAppearancesModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationCombineEntrypointResultsModule (ref), validateDependenciesModule (ref), resetPhysicsDataModule (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigratePoseBlockingModule (ref), validateBodyBlockingTestsModule (ref), getFFlagUGCValidateMigrateBodyPartBoundsModule (ref), validateMeshSizePropertyModule (ref), failureReasonsAccumulatorModule (ref), validateBodyPartMeshBoundsModule (ref), getFFlagUGCValidateTexturePackModule (ref), validateTexturePackModule (ref), validateBodyPartChildAttachmentBoundsModule (ref), validateBodyPartExtentsRelativeToParentModule (ref), validateBodyPartChildAttachmentOrientationsModule (ref), validatePoseModule (ref), validateAssetBoundsModule (ref), validateLegsSeparationModule (ref), validateAccurateBoundingBoxRasterMethodModule (ref), bodyAssetMasksRendererModule (ref), validateDescendantMeshMetricsModule (ref), getFFlagUGCValidateMigrateTextureTransparencyModule (ref), validateDescendantTextureMetricsModule (ref), validateHSRModule (ref), validateAssetTransparencyModule (ref), validateMaterialsModule (ref), validatePropertyRequirementsModule (ref), validateBodyPartCollisionFidelityModule (ref), validateAttributesModule (ref), validateTagsModule (ref), getFFlagUGCValidationEnableR15plusSkinningModule (ref), validateMeshPartOnlySkinnedToR15Module (ref), validateModerationModule (ref)
 	local isServer = p2.isServer
 	local assetTypeEnum = p2.assetTypeEnum
 	local allowUnreviewedAssets = p2.allowUnreviewedAssets
 	local restrictedUserIds = p2.restrictedUserIds
-	local var39 = validateWithSchemaModule(p1, p0, p2)
+	local var40 = validateWithSchemaModule(p1, p0, p2)
 	
-	if not var39.success then
+	if not var40.success then
 		analyticsModule.reportFailure(analyticsModule.ErrorType.validateMeshPartBodyPart_ValidateWithSchema, nil, p2)
 		
 		return false, {
 			string.format("Body part '%s' does not follow R15 schema. The specific issues are: ", p0.Name),
-			var39.message
+			var40.message
 		}
 	elseif not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and not getFFlagDebugUGCDisableSurfaceAppearanceTestsModule() then
-		local var40, var41 = validateSurfaceAppearancesModule(p0, p2)
+		local var41, var42 = validateSurfaceAppearancesModule(p0, p2)
 		
-		if not var40 then
-			return var40, var41
+		if not var41 then
+			return var41, var42
 		end
 	end
-	local var42, var43 = validateDependenciesModule(p0, p2, {
-		skipExistenceCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule(),
-		skipOwnershipCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule()
+	local var43, var44 = validateDependenciesModule(p0, p2, {
+		skipExistenceCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule() and getFFlagUGCValidationCombineEntrypointResultsModule(),
+		skipOwnershipCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule() and getFFlagUGCValidationCombineEntrypointResultsModule()
 	})
 	
-	if not var42 then
-		return var42, var43
+	if not var43 then
+		return var43, var44
 	end
-	local var44, var45 = resetPhysicsDataModule({ p0 }, p2)
+	local var45, var46 = resetPhysicsDataModule({ p0 }, p2)
 	
-	if not var44 then
-		return false, { var45 }
+	if not var45 then
+		return false, { var46 }
 	elseif getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var46, var47 = validatePropertiesSensibleModule.validate(p0, p2)
+		local var47, var48 = validatePropertiesSensibleModule.validate(p0, p2)
 		
-		if not var46 then
-			return false, var47
+		if not var47 then
+			return false, var48
 		elseif not getFFlagUGCValidateMigratePoseBlockingModule() then
-			local var48, var49 = validateBodyBlockingTestsModule.validate(p0, p2)
+			local var49, var50 = validateBodyBlockingTestsModule.validate(p0, p2)
 			
-			if not var48 then
-				return false, var49
+			if not var49 then
+				return false, var50
 			elseif not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				local var50, var51 = validateMeshSizePropertyModule.validateBodyAsset(p0, p2)
+				local var51, var52 = validateMeshSizePropertyModule.validateBodyAsset(p0, p2)
 				
-				if not var50 then
-					return false, var51
+				if not var51 then
+					return false, var52
 				end
 			end
-			local var52 = failureReasonsAccumulatorModule.new()
+			local var53 = failureReasonsAccumulatorModule.new()
 			
 			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				var52:updateReasons(validateBodyPartMeshBoundsModule(p0, p2))
+				var53:updateReasons(validateBodyPartMeshBoundsModule(p0, p2))
 			end
 			if not getFFlagUGCValidateMigrateSurfaceAppearanceMeshQualityModule() and getFFlagUGCValidateTexturePackModule() then
-				var52:updateReasons(validateTexturePackModule.validate(p0, true, p2))
+				var53:updateReasons(validateTexturePackModule.validate(p0, true, p2))
 			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var52:updateReasons(validateBodyPartChildAttachmentBoundsModule(p0, p2))
-			end
-			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				var52:updateReasons(validateBodyPartExtentsRelativeToParentModule.runValidation(p0, p2))
-			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var52:updateReasons(validateBodyPartChildAttachmentOrientationsModule.runValidation(p0, p2))
-			end
-			if not getFFlagUGCValidateMigratePoseBlockingModule() then
-				var52:updateReasons(validatePoseModule(p0, p2))
+			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
+				var53:updateReasons(validateBodyPartChildAttachmentBoundsModule(p0, p2))
 			end
 			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
-				var52:updateReasons(validateAssetBoundsModule(nil, p0, p2))
+				var53:updateReasons(validateBodyPartExtentsRelativeToParentModule.runValidation(p0, p2))
+			end
+			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
+				var53:updateReasons(validateBodyPartChildAttachmentOrientationsModule.runValidation(p0, p2))
 			end
 			if not getFFlagUGCValidateMigratePoseBlockingModule() then
-				var52:updateReasons(validateLegsSeparationModule.validateAsset(p0, p2))
+				var53:updateReasons(validatePoseModule(p0, p2))
+			end
+			if not getFFlagUGCValidateMigrateBodyPartBoundsModule() then
+				var53:updateReasons(validateAssetBoundsModule(nil, p0, p2))
+			end
+			if not getFFlagUGCValidateMigratePoseBlockingModule() then
+				var53:updateReasons(validateLegsSeparationModule.validateAsset(p0, p2))
 			end
 			if not getFFlagUGCValidateMigratePoseBlockingModule() then
 				local _ = nil
-				local var53, var54 = bodyAssetMasksRendererModule.new(p0, validateAccurateBoundingBoxRasterMethodModule.getBoundsViewsForAssetType(assetTypeEnum), p2)
-				local var55 = var53
+				local var54, var55 = bodyAssetMasksRendererModule.new(p0, validateAccurateBoundingBoxRasterMethodModule.getBoundsViewsForAssetType(assetTypeEnum), p2)
 				local var56 = var54
+				local var57 = var55
 				
-				if var55 then
-					var52:updateReasons(validateAccurateBoundingBoxRasterMethodModule.validate(p0, var56, p2))
+				if var56 then
+					var53:updateReasons(validateAccurateBoundingBoxRasterMethodModule.validate(p0, var57, p2))
 				else
-					var52:updateReasons(var55, var56)
+					var53:updateReasons(var56, var57)
 				end
 			end
-			var52:updateReasons(validateDescendantMeshMetricsModule(p0, p2))
+			var53:updateReasons(validateDescendantMeshMetricsModule(p0, p2))
 			
 			if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
-				var52:updateReasons(validateDescendantTextureMetricsModule(p0, p2))
+				var53:updateReasons(validateDescendantTextureMetricsModule(p0, p2))
 			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var52:updateReasons(validateHSRModule(p0, p2))
+			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
+				var53:updateReasons(validateHSRModule(p0, p2))
 			end
 			if not getFFlagUGCValidateMigrateTextureTransparencyModule() then
 				local currentTime = tick()
-				var52:updateReasons(validateAssetTransparencyModule(p0, p2))
+				var53:updateReasons(validateAssetTransparencyModule(p0, p2))
 				analyticsModule.recordScriptTime("validateAssetTransparency", currentTime, p2)
 			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
-				var52:updateReasons(validateMaterialsModule(p0, p2))
-				var52:updateReasons(validatePropertyRequirementsModule(p0, assetTypeEnum, p2))
-				var52:updateReasons(validateBodyPartCollisionFidelityModule(p0, p2))
-				var52:updateReasons(validateAttributesModule(p0, p2))
+			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
+				var53:updateReasons(validateMaterialsModule(p0, p2))
+				var53:updateReasons(validatePropertyRequirementsModule(p0, assetTypeEnum, p2))
+				var53:updateReasons(validateBodyPartCollisionFidelityModule(p0, p2))
+				var53:updateReasons(validateAttributesModule(p0, p2))
 			end
-			var52:updateReasons(validateTagsModule(p0, p2))
+			var53:updateReasons(validateTagsModule(p0, p2))
 			
 			if not getFFlagUGCValidationEnableR15plusSkinningModule() and assetTypeEnum ~= Enum.AssetType.DynamicHead then
-				var52:updateReasons(validateMeshPartOnlySkinnedToR15Module.validateBodyParts(p0, p2))
+				var53:updateReasons(validateMeshPartOnlySkinnedToR15Module.validateBodyParts(p0, p2))
 			end
-			if not getFFlagUGCValidateMigrateSchemaPropertiesModule() and (if allowUnreviewedAssets then false else not isServer) then
-				var52:updateReasons(validateModerationModule(p0, restrictedUserIds, p2))
+			if (not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule()) and (if allowUnreviewedAssets then false else not isServer) then
+				var53:updateReasons(validateModerationModule(p0, restrictedUserIds, p2))
 			end
-			return var52:getFinalResults()
+			return var53:getFinalResults()
 		end
 	end
 end

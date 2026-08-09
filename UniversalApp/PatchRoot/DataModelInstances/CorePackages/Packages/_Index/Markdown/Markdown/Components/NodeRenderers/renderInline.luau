@@ -11,7 +11,6 @@ local isInlineElement = inlineLayoutModule.Utils.isInlineElement
 return function(p0, p1) --[[ line: 13 | named "renderInline" ]]
 	-- upvalues: reactModule (ref), inlineLayout (ref), dashModule (ref), mergeContextsModule (ref), isInlineElement (ref)
 	return reactModule.createElement(inlineLayout, {
-		VerticalPadding = UDim.new(0, 0),
 		Elements = dashModule.filter(p1.processChildren(p0, mergeContextsModule(p1, { isInline = true })), isInlineElement)
 	})
 end

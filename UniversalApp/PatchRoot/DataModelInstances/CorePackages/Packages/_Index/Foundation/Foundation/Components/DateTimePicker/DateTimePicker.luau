@@ -12,24 +12,24 @@ local popoverModule = require(foundation.Components.Popover)
 local popoverSideModule = require(foundation.Enums.PopoverSide)
 local textInputModule = require(foundation.Components.TextInput)
 local translatorModule = require(foundation.Utility.Localization.Translator)
+local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(script.Parent.DateTimePickerProps)
 local dateTimePickerVariantModule = require(foundation.Enums.DateTimePickerVariant)
 local t = {
 	testId = "--foundation-date-time-picker",
 	variant = dateTimePickerVariantModule.Single
 }
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "DateTimePicker" ]]
+return reactModule.memo(function(p0) --[[ line: 69 | named "DateTimePicker" ]]
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), dateTimePickerVariantModule (ref), dateTimeUtilitiesModule (ref), guiService (ref), popoverModule (ref), textInputModule (ref), withCommonPropsModule (ref), icon (ref), translatorModule (ref), inputSizeModule (ref), popoverSideModule (ref), viewModule (ref), calendarModule (ref), buttonModule (ref), buttonVariantModule (ref)
 	local var17 = withDefaultsModule(p0, t)
 	local var18 = useTokensModule()
 	local var19, var20 = reactModule.useState(false)
 	local var21 = reactModule.useRef(nil)
-	local var22 = reactModule.useMemo(function() --[[ line: 42 ]]
+	local var22 = reactModule.useMemo(function() --[[ line: 76 ]]
 		-- upvalues: var17 (ref)
 		local defaultDates = var17.defaultDates
 		
@@ -37,21 +37,21 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "DateTimePicker" ]]
 	end, { var17.defaultDates })
 	local var23, var24 = reactModule.useState(if var22 then if var17.variant == dateTimePickerVariantModule.Dual then `{dateTimeUtilitiesModule.formatLocalTime(var22[1])} - {if var22[2] then dateTimeUtilitiesModule.formatLocalTime(var22[2]) else ""}` else dateTimeUtilitiesModule.formatLocalTime(var22[1], var17.variant == dateTimePickerVariantModule.SingleWithTime) else "")
 	local var25, var26 = reactModule.useState(var22)
-	local var27 = reactModule.useCallback(function() --[[ line: 71 ]]
+	local var27 = reactModule.useCallback(function() --[[ line: 105 ]]
 		-- upvalues: var20 (ref)
 		var20(false)
 	end, {})
-	local var28 = reactModule.useCallback(function() --[[ line: 75 ]]
+	local var28 = reactModule.useCallback(function() --[[ line: 109 ]]
 		-- upvalues: var20 (ref)
 		var20(true)
 	end, {})
-	local var29 = reactModule.useCallback(function() --[[ line: 79 ]]
+	local var29 = reactModule.useCallback(function() --[[ line: 113 ]]
 		-- upvalues: guiService (copy), var28 (ref)
 		if guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small then
 			var28()
 		end
 	end, { var28, guiService.ViewportDisplaySize })
-	local var30 = reactModule.useCallback(function(p1) --[[ line: 86 ]]
+	local var30 = reactModule.useCallback(function(p1) --[[ line: 120 ]]
 		-- upvalues: var24 (ref), var17 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy)
 		var24(p1)
 		
@@ -64,7 +64,7 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "DateTimePicker" ]]
 		end
 		var17.onChanged(dateTimeUtilitiesModule.getDateTimeFromText(p1:match("^%s*(.-)%s*$") or ""))
 	end, { var17.onChanged })
-	local var31 = reactModule.useCallback(function() --[[ line: 110 ]]
+	local var31 = reactModule.useCallback(function() --[[ line: 144 ]]
 		-- upvalues: var17 (ref), dateTimePickerVariantModule (copy), dateTimeUtilitiesModule (copy), var25 (ref), var24 (ref), var27 (ref)
 		if var17.variant == dateTimePickerVariantModule.Dual then
 			var24(dateTimeUtilitiesModule.formatLocalTime(var25[1]) .. " - " .. (if var25[2] then dateTimeUtilitiesModule.formatLocalTime(var25[2]) else ""))
@@ -74,7 +74,7 @@ return reactModule.memo(function(p0) --[[ line: 35 | named "DateTimePicker" ]]
 		var27()
 	end, { var25, var27 })
 	
-	local _ = function() --[[ line: 134 ]]
+	local _ = function() --[[ line: 168 ]]
 		-- upvalues: var25 (ref), var17 (ref), dateTimePickerVariantModule (copy)
 		return if var25 then if var17.variant == dateTimePickerVariantModule.Single or var17.variant == dateTimePickerVariantModule.SingleWithTime then var25[1] == nil else var17.variant == dateTimePickerVariantModule.Dual and (if var25[1] ~= nil then if var25[2] ~= nil then var25[2].UnixTimestamp < var25[1].UnixTimestamp else true else true) else false
 	end

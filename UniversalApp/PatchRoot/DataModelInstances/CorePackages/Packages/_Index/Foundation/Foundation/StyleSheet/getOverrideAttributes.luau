@@ -1,7 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
 local flagsModule = require(foundation.Utility.Flags)
+local _ = require(foundation.Enums.Theme)
 local tokenProcessingUtilitiesModule = require(foundation.Providers.Style.Tokens.TokenProcessingUtilities)
 local tokensModule = require(foundation.Providers.Style.Tokens)
 

@@ -35,20 +35,12 @@ local heartbeatConnection = nil
 local var22 = if var14 then table.create(var13) else nil
 local var23 = 1
 
-local function _() --[[ line: 71 | named "resetFrameBudgets" ]]
-	-- upvalues: var17 (write), var8 (write), var18 (write), var9 (write), var19 (write), var20 (write)
-	var17 = 1000 / var8
-	var18 = 1000 / var9
-	var19 = var17
-	var20 = var19
-end
-
-local _ = function() --[[ line: 78 | named "createHeartbeatConnection" ]]
-	-- upvalues: heartbeatConnection (write), var13 (write), var14 (write), var22 (ref), var23 (write), var20 (write), var19 (write), var17 (write), var18 (write)
+local function _() --[[ line: 71 | named "createHeartbeatConnection" ]]
+	-- upvalues: heartbeatConnection (write), var13 (write), var14 (write), var22 (ref), var23 (write), var20 (write), var19 (write), var17 (ref), var18 (ref)
 	if heartbeatConnection then
 		heartbeatConnection:Disconnect()
 	end
-	heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p0) --[[ line: 83 ]]
+	heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p0) --[[ line: 76 ]]
 		-- upvalues: var13 (copy), var14 (copy), var22 (copy), var23 (copy), var20 (copy), var19 (copy), var17 (copy), var18 (copy)
 		if var13 <= 1 then
 			var19 = math.clamp(p0 * 1000, var17, var18)
@@ -77,8 +69,8 @@ local _ = function() --[[ line: 78 | named "createHeartbeatConnection" ]]
 end
 
 if var12 then
-	heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p1) --[[ line: 83 ]]
-		-- upvalues: var13 (write), var14 (write), var22 (ref), var23 (write), var20 (write), var19 (write), var17 (write), var18 (write)
+	heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p1) --[[ line: 76 ]]
+		-- upvalues: var13 (write), var14 (write), var22 (ref), var23 (write), var20 (write), var19 (write), var17 (ref), var18 (ref)
 		if var13 <= 1 then
 			var19 = math.clamp(p1 * 1000, var17, var18)
 			
@@ -105,7 +97,7 @@ if var12 then
 		end
 	end)
 end
-local function setFrameMarker() --[[ line: 125 ]]
+local function setFrameMarker() --[[ line: 118 ]]
 	-- upvalues: var16 (write)
 	var16 = os.clock() * 1000
 end
@@ -113,24 +105,10 @@ end
 local var25 = reactSchedulerYieldInterval2()
 local var26 = 0
 
-local function setSchedulerFlags(value) --[[ line: 147 ]]
-	-- upvalues: var25 (write), var8 (write), var17 (write), var18 (write), var9 (write), var19 (write), var20 (write), var10 (write), var11 (write), var12 (write), heartbeatConnection (write), var13 (write), var14 (write), var22 (ref), var23 (write)
+local function setSchedulerFlags(value) --[[ line: 138 ]]
+	-- upvalues: var25 (write), var10 (write), var11 (write), var12 (write), heartbeatConnection (write), var13 (write), var14 (write), var22 (ref), var23 (write), var20 (write), var19 (write), var17 (ref), var18 (ref)
 	if value.yieldInterval ~= nil then
 		var25 = value.yieldInterval
-	end
-	if value.desiredFrameRate ~= nil then
-		var8 = value.desiredFrameRate
-		var17 = 1000 / var8
-		var18 = 1000 / var9
-		var19 = var17
-		var20 = var19
-	end
-	if value.minimumFrameRate ~= nil then
-		var9 = value.minimumFrameRate
-		var17 = 1000 / var8
-		var18 = 1000 / var9
-		var19 = var17
-		var20 = var19
 	end
 	if value.deferredWork ~= nil then
 		var10 = value.deferredWork
@@ -145,7 +123,7 @@ local function setSchedulerFlags(value) --[[ line: 147 ]]
 			if heartbeatConnection then
 				heartbeatConnection:Disconnect()
 			end
-			heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p2) --[[ line: 83 ]]
+			heartbeatConnection = game:GetService("RunService").Heartbeat:Connect(function(p2) --[[ line: 76 ]]
 				-- upvalues: var13 (copy), var14 (copy), var22 (copy), var23 (copy), var20 (copy), var19 (copy), var17 (copy), var18 (copy)
 				if var13 <= 1 then
 					var19 = math.clamp(p2 * 1000, var17, var18)
@@ -186,12 +164,10 @@ local function setSchedulerFlags(value) --[[ line: 147 ]]
 	end
 end
 
-local function getSchedulerFlags() --[[ line: 185 ]]
-	-- upvalues: var25 (write), var8 (write), var9 (write), var10 (write), var11 (write), var12 (write), var13 (write), var14 (write)
+local function getSchedulerFlags() --[[ line: 168 ]]
+	-- upvalues: var25 (write), var10 (write), var11 (write), var12 (write), var13 (write), var14 (write)
 	return {
 		yieldInterval = var25,
-		desiredFrameRate = var8,
-		minimumFrameRate = var9,
 		deferredWork = var10,
 		heartbeatFrameMarker = var11,
 		targetMsByHeartbeatDelta = var12,
@@ -200,19 +176,19 @@ local function getSchedulerFlags() --[[ line: 185 ]]
 	}
 end
 
-local _ = function() --[[ line: 198 | named "doesBudgetRemain" ]]
+local _ = function() --[[ line: 179 | named "doesBudgetRemain" ]]
 	-- upvalues: var16 (write), var19 (write), var25 (write)
 	return var25 < var19 - (os.clock() * 1000 - var16)
 end
 
-local function shouldYieldToHost() --[[ line: 206 ]]
+local function shouldYieldToHost() --[[ line: 187 ]]
 	-- upvalues: var26 (write)
 	return var26 <= os.clock() * 1000
 end
 
-local function requestPaint() --[[ line: 211 ]] end
+local function requestPaint() --[[ line: 192 ]] end
 
-local function forceFrameRate(p3) --[[ line: 213 ]]
+local function forceFrameRate(p3) --[[ line: 194 ]]
 	-- upvalues: console (ref), var25 (write)
 	if p3 < 0 or p3 > 125 then
 		console.warn("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported")
@@ -226,7 +202,7 @@ local function forceFrameRate(p3) --[[ line: 213 ]]
 	var25 = 5
 end
 
-local function performWorkUntilDeadline() --[[ line: 229 ]]
+local function performWorkUntilDeadline() --[[ line: 210 ]]
 	-- upvalues: var6 (write), var26 (write), var25 (write), var10 (write), var11 (write), var15 (write), var16 (write), var19 (write), var5 (write), performWorkUntilDeadline (write), setFrameMarker (ref), reactGlobalsModule (ref), describeError (ref), errorToString (ref)
 	if var6 == nil then
 		var5 = false
@@ -247,7 +223,7 @@ local function performWorkUntilDeadline() --[[ line: 229 ]]
 	local _ = nil
 	local _ = nil
 	
-	local function doWork() --[[ line: 259 ]]
+	local function doWork() --[[ line: 240 ]]
 		-- upvalues: var6 (copy), var39 (write), var38 (ref), var5 (copy), var10 (copy), var16 (copy), var19 (copy), var25 (copy), var15 (copy), performWorkUntilDeadline (copy), var11 (copy), setFrameMarker (copy)
 		if not var6(var39, var38) then
 			var5 = false
@@ -286,8 +262,8 @@ local function performWorkUntilDeadline() --[[ line: 229 ]]
 	end
 end
 
-local _ = function(p4) --[[ line: 320 | named "wrapPerformWorkWithCoroutine" ]]
-	local thread = coroutine.create(function() --[[ line: 321 ]]
+local _ = function(p4) --[[ line: 301 | named "wrapPerformWorkWithCoroutine" ]]
+	local thread = coroutine.create(function() --[[ line: 302 ]]
 		-- upvalues: p4 (ref)
 		while true do
 			local ok, status = pcall(coroutine.wrap(p4))
@@ -295,7 +271,7 @@ local _ = function(p4) --[[ line: 320 | named "wrapPerformWorkWithCoroutine" ]]
 		end
 	end)
 	
-	return function() --[[ line: 331 ]]
+	return function() --[[ line: 312 ]]
 		-- upvalues: thread (ref)
 		local _, var44, var45 = coroutine.resume(thread)
 		
@@ -306,7 +282,7 @@ local _ = function(p4) --[[ line: 320 | named "wrapPerformWorkWithCoroutine" ]]
 end
 
 local var33 = performWorkUntilDeadline
-local thread = coroutine.create(function() --[[ line: 321 ]]
+local thread = coroutine.create(function() --[[ line: 302 ]]
 	-- upvalues: var33 (ref)
 	while true do
 		local ok, status = pcall(coroutine.wrap(var33))
@@ -314,7 +290,7 @@ local thread = coroutine.create(function() --[[ line: 321 ]]
 	end
 end)
 
-performWorkUntilDeadline = function() --[[ line: 331 ]]
+performWorkUntilDeadline = function() --[[ line: 312 ]]
 	-- upvalues: thread (ref)
 	local _, var44, var45 = coroutine.resume(thread)
 	
@@ -324,7 +300,7 @@ performWorkUntilDeadline = function() --[[ line: 331 ]]
 end
 
 return {
-	requestHostCallback = function(p5) --[[ line: 341 ]]
+	requestHostCallback = function(p5) --[[ line: 322 ]]
 		-- upvalues: var6 (write), var5 (write), performWorkUntilDeadline (write), var11 (write), setFrameMarker (ref)
 		var6 = p5
 		
@@ -337,18 +313,18 @@ return {
 			end
 		end
 	end,
-	cancelHostCallback = function() --[[ line: 353 ]]
+	cancelHostCallback = function() --[[ line: 334 ]]
 		-- upvalues: var6 (write)
 		var6 = nil
 	end,
-	requestHostTimeout = function(p6, p7) --[[ line: 357 ]]
+	requestHostTimeout = function(p6, p7) --[[ line: 338 ]]
 		-- upvalues: none (write), setTimeout (ref)
-		none = setTimeout(function() --[[ line: 358 ]]
+		none = setTimeout(function() --[[ line: 339 ]]
 			-- upvalues: p6 (ref)
 			p6(os.clock() * 1000)
 		end, p7)
 	end,
-	cancelHostTimeout = function() --[[ line: 363 ]]
+	cancelHostTimeout = function() --[[ line: 344 ]]
 		-- upvalues: clearTimeout (ref), none (write), object (ref)
 		clearTimeout(none)
 		none = object.None

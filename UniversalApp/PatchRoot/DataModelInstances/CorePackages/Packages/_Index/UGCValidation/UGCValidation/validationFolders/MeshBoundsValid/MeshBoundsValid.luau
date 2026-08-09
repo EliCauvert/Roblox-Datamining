@@ -15,6 +15,7 @@ local legacyAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("LegacyAcces
 local meshpartAccessoryCheckAvatarPartScaleType = game:DefineFastFlag("MeshpartAccessoryCheckAvatarPartScaleType", false)
 local UGCValidationScaleMinimumThousandths = game:DefineFastInt("UGCValidationScaleMinimumThousandths", 10)
 local fIntUGCValidationScaleMaximumThousandths = game:DefineFastInt("FIntUGCValidationScaleMaximumThousandths", 10000)
+local renderBoundsCheckAttachmentOrientation = game:DefineFastFlag("RenderBoundsCheckAttachmentOrientation", false)
 local t = {
 	fflag = getFFlagUGCValidateMigrateMeshGeometryModule,
 	categories = {
@@ -25,34 +26,34 @@ local t = {
 	expectedFailures = {}
 }
 
-local function pointInBounds(p0, p1, p2) --[[ line: 39 ]]
-	local var17 = p1:PointToObjectSpace(p0)
+local function pointInBounds(p0, p1, p2) --[[ line: 40 ]]
+	local var18 = p1:PointToObjectSpace(p0)
 	
-	return -p2.X / 2 <= var17.X and (var17.X <= p2.X / 2 and (-p2.Y / 2 <= var17.Y and (var17.Y <= p2.Y / 2 and (-p2.Z / 2 <= var17.Z and var17.Z <= p2.Z / 2))))
+	return -p2.X / 2 <= var18.X and (var18.X <= p2.X / 2 and (-p2.Y / 2 <= var18.Y and (var18.Y <= p2.Y / 2 and (-p2.Z / 2 <= var18.Z and var18.Z <= p2.Z / 2))))
 end
 
-local function _(p3) --[[ line: 49 | named "truncate" ]]
+local function _(p3) --[[ line: 50 | named "truncate" ]]
 	return math.floor(p3 * 100) / 100
 end
 
-function t.run(p4, p5) --[[ line: 53 ]]
-	-- upvalues: validationEnumsModule (ref), constantsModule (ref), getAttachmentModule (ref), isMeshPartAccessoryModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), legacyAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), errorSourceStringsModule (ref), UGCValidationScaleMinimumThousandths (ref), getFFlagUGCValidateMeshMaxScaleModule (ref), fIntUGCValidationScaleMaximumThousandths (ref), UGCValidationService (ref), pointInBounds (ref), getMeshMinMaxModule (ref), getFIntUGCValidateMeshCenteringHundredsThresholdModule (ref)
+function t.run(p4, p5) --[[ line: 54 ]]
+	-- upvalues: validationEnumsModule (ref), constantsModule (ref), getAttachmentModule (ref), isMeshPartAccessoryModule (ref), meshpartAccessoryCheckAvatarPartScaleType (ref), legacyAccessoryCheckAvatarPartScaleType (ref), getAccessoryScaleModule (ref), errorSourceStringsModule (ref), UGCValidationScaleMinimumThousandths (ref), getFFlagUGCValidateMeshMaxScaleModule (ref), fIntUGCValidationScaleMaximumThousandths (ref), UGCValidationService (ref), pointInBounds (ref), renderBoundsCheckAttachmentOrientation (ref), getMeshMinMaxModule (ref), getFIntUGCValidateMeshCenteringHundredsThresholdModule (ref)
 	local rootInstance = p5.rootInstance
 	local assetType = p5.uploadEnum.assetType
-	local var18 = p5.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
-	local var19 = constantsModule.ASSET_TYPE_INFO[assetType]
+	local var19 = p5.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
+	local var20 = constantsModule.ASSET_TYPE_INFO[assetType]
 	
-	if not var19 then return end
+	if not var20 then return end
 	local handle = rootInstance:FindFirstChild("Handle")
 	
 	if not handle then return end
 	local handle_1 = p5.renderMeshesData.Handle
 	
 	if not handle_1 then return end
-	local var21 = getAttachmentModule(handle, var19.attachmentNames)
+	local var22 = getAttachmentModule(handle, var20.attachmentNames)
 	
-	if not var21 then return end
-	local name = var19.bounds[var21.Name]
+	if not var22 then return end
+	local name = var20.bounds[var22.Name]
 	
 	if not name then return end
 	local scale = handle_1.scale
@@ -60,17 +61,17 @@ function t.run(p4, p5) --[[ line: 53 ]]
 	local offset = name.offset or Vector3.new(0, 0, 0)
 	
 	if p5.uploadCategory == validationEnumsModule.UploadCategory.RIGID_ACCESSORY and (if isMeshPartAccessoryModule(rootInstance) then meshpartAccessoryCheckAvatarPartScaleType else legacyAccessoryCheckAvatarPartScaleType) and handle:FindFirstChild("AvatarPartScaleType") then
-		local var23 = getAccessoryScaleModule(handle, var21)
-		size /= var23
-		offset = if name.offset then name.offset / var23 else Vector3.new(0, 0, 0)
+		local var24 = getAccessoryScaleModule(handle, var22)
+		size /= var24
+		offset = if name.offset then name.offset / var24 else Vector3.new(0, 0, 0)
 	end
-	local var24 = handle.CFrame * var21.CFrame * CFrame.new(offset)
+	local var25 = handle.CFrame * var22.CFrame * CFrame.new(offset)
 	
 	if handle.Position.X > 10000 or handle.Position.X < -10000 or (handle.Position.Y > 10000 or handle.Position.Y < -10000) or (handle.Position.Z > 10000 or handle.Position.Z < -10000) then
 		p4:fail(errorSourceStringsModule.Keys.MeshGeometry_PositionOutOfBounds, {})
 		
 		return
-	elseif var24.Position.X > 10000 or var24.Position.X < -10000 or (var24.Position.Y > 10000 or var24.Position.Y < -10000) or (var24.Position.Z > 10000 or var24.Position.Z < -10000) then
+	elseif var25.Position.X > 10000 or var25.Position.X < -10000 or (var25.Position.Y > 10000 or var25.Position.Y < -10000) or (var25.Position.Z > 10000 or var25.Position.Z < -10000) then
 		p4:fail(errorSourceStringsModule.Keys.MeshGeometry_PositionOutOfBounds, {})
 		
 		return
@@ -83,8 +84,9 @@ function t.run(p4, p5) --[[ line: 53 ]]
 		
 		return
 	end
+	local v
 	for i, v in pairs(UGCValidationService:GetEditableMeshVerts(handle_1.editable)) do
-		if not pointInBounds(handle.CFrame:PointToWorldSpace(v * scale), var24, size) then
+		if not pointInBounds(handle.CFrame:PointToWorldSpace(v * scale), var25, size) then
 			p4:fail(errorSourceStringsModule.Keys.MeshGeometry_ExceedsBounds, {
 				meshName = rootInstance.Name,
 				assetTypeName = assetType.Name,
@@ -96,9 +98,37 @@ function t.run(p4, p5) --[[ line: 53 ]]
 			return
 		end
 	end
-	local var25 = (var21.CFrame.Rotation * handle.Size):Abs()
-	
-	if var25.X > size.X or var25.Y > size.Y or var25.Z > size.Z then
+	if renderBoundsCheckAttachmentOrientation then
+		local var26 = (var22.CFrame.Rotation * handle.Size):Abs()
+		
+		if var26.X > size.X or var26.Y > size.Y or var26.Z > size.Z then
+			p4:fail(errorSourceStringsModule.Keys.MeshGeometry_ExceedsBounds, {
+				meshName = handle:GetFullName(),
+				assetTypeName = assetType.Name,
+				maxSizeX = string.format("%.2f", math.floor(size.X * 100) / 100),
+				maxSizeY = string.format("%.2f", math.floor(size.Y * 100) / 100),
+				maxSizeZ = string.format("%.2f", math.floor(size.Z * 100) / 100)
+			})
+			
+			return
+		elseif p5.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
+			var27, v, var28, var29 = getMeshMinMaxModule({
+				fieldName = "MeshId",
+				fullName = handle:GetFullName(),
+				editableMesh = handle_1.editable,
+				scale = scale,
+				context = rootInstance.Name
+			}, { shouldYield = false, isServer = var19 })
+			
+			if not var27 then
+				p4:fetchError(string.format("Failed to compute mesh min/max for %s", handle:GetFullName()))
+			end
+			if var28 and var29 and getFIntUGCValidateMeshCenteringHundredsThresholdModule() / 100 < ((var28 + var29) / 2).Magnitude then
+				p4:fail(errorSourceStringsModule.Keys.MeshGeometry_NotCentered, { fieldName = "MeshId", meshName = handle:GetFullName() })
+			end
+		end
+		return
+	elseif handle.Size.X > size.X or handle.Size.Y > size.Y or handle.Size.Z > size.Z then
 		p4:fail(errorSourceStringsModule.Keys.MeshGeometry_ExceedsBounds, {
 			meshName = handle:GetFullName(),
 			assetTypeName = assetType.Name,
@@ -108,21 +138,6 @@ function t.run(p4, p5) --[[ line: 53 ]]
 		})
 		
 		return
-	elseif p5.consumerConfig.consumerEnv ~= validationEnumsModule.ConsumerEnv.IEC then
-		local var26, _, var27, var28 = getMeshMinMaxModule({
-			fieldName = "MeshId",
-			fullName = handle:GetFullName(),
-			editableMesh = handle_1.editable,
-			scale = scale,
-			context = rootInstance.Name
-		}, { shouldYield = false, isServer = var18 })
-		
-		if not var26 then
-			p4:fetchError(string.format("Failed to compute mesh min/max for %s", handle:GetFullName()))
-		end
-		if var27 and var28 and getFIntUGCValidateMeshCenteringHundredsThresholdModule() / 100 < ((var27 + var28) / 2).Magnitude then
-			p4:fail(errorSourceStringsModule.Keys.MeshGeometry_NotCentered, { fieldName = "MeshId", meshName = handle:GetFullName() })
-		end
 	end
 end
 

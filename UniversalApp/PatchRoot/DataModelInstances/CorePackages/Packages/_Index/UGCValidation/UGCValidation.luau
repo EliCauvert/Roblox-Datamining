@@ -27,13 +27,13 @@ local t = {
 	ValidateFinalizedBundle = validationManagerModule.ValidateFinalizedBundle,
 	combineResultsIntoLegacy = legacyValidationAdapterModule.combineResultsIntoLegacy,
 	mergeLegacyIntoModern = legacyValidationAdapterModule.mergeLegacyIntoModern,
-	isBackendInExperienceViaCanPublishEnabled = require(_script.flags.getFFlagUGCValidateBackendInExperienceViaCanPublish),
-	shouldSkipAssetQualityChecks = require(_script.flags.getFFlagDebugUGCDisableAssetQualityChecks),
+	isFolderStructureEnabled = require(_script.flags.getFFlagUGCValidationEnableFolderStructure),
+	isEntrypointMergingEnabled = require(_script.flags.getFFlagUGCValidationCombineEntrypointResults),
 	SplitHrdInUpload = require(_script.util.SplitHumanoidRigDescriptionForUpload).fixUploadInstance
 }
 
 if getEngineFeatureUGCValidationWithContextEntrypointModule() then
-	function t.validateWithContext(p0) --[[ line: 50 ]]
+	function t.validateWithContext(p0) --[[ line: 49 ]]
 		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), destroyEditableInstancesModule (ref)
 		assert(p0.instances ~= nil, "instances required in validationContext for validateWithContext")
 		assert(p0.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateWithContext")
@@ -75,7 +75,7 @@ if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 		return var27, var28
 	end
 end
-function t.validate(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12) --[[ line: 110 ]]
+function t.validate(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12) --[[ line: 109 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), destroyEditableInstancesModule (ref)
 	local currentTime = tick()
 	analyticsModule.setMetadata({
@@ -122,7 +122,7 @@ function t.validate(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12) --[[ line
 	return var33, var34
 end
 
-function t.validateAsync(p13, p14, p15, p16, p17, p18) --[[ line: 181 ]]
+function t.validateAsync(p13, p14, p15, p16, p17, p18) --[[ line: 180 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateInternalModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "validateAsync",
@@ -150,14 +150,14 @@ function t.validateAsync(p13, p14, p15, p16, p17, p18) --[[ line: 181 ]]
 		editableMeshes = var36.editableMeshes,
 		editableImages = var36.editableImages
 	}
-	coroutine.wrap(function() --[[ line: 217 ]]
+	coroutine.wrap(function() --[[ line: 216 ]]
 		-- upvalues: p15 (ref), validateInternalModule (copy), t (ref), destroyEditableInstancesModule (copy)
 		p15(validateInternalModule(t))
 		destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
 	end)()
 end
 
-function t.validateMeshPartFormat(p19, p20, p21, p22, p23) --[[ line: 227 ]]
+function t.validateMeshPartFormat(p19, p20, p21, p22, p23) --[[ line: 226 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateDynamicHeadMeshPartFormatModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "validateMeshPartFormat",
@@ -190,7 +190,7 @@ function t.validateMeshPartFormat(p19, p20, p21, p22, p23) --[[ line: 227 ]]
 	return var41, var42
 end
 
-function t.validateAsyncMeshPartFormat(p24, p25, p26, p27, p28, p29) --[[ line: 274 ]]
+function t.validateAsyncMeshPartFormat(p24, p25, p26, p27, p28, p29) --[[ line: 273 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateDynamicHeadMeshPartFormatModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "validateAsyncMeshPartFormat",
@@ -217,7 +217,7 @@ function t.validateAsyncMeshPartFormat(p24, p25, p26, p27, p28, p29) --[[ line: 
 		editableMeshes = var44.editableMeshes,
 		editableImages = var44.editableImages
 	}
-	coroutine.wrap(function() --[[ line: 312 ]]
+	coroutine.wrap(function() --[[ line: 311 ]]
 		-- upvalues: p26 (ref), validateDynamicHeadMeshPartFormatModule (copy), t (ref), destroyEditableInstancesModule (copy)
 		p26(validateDynamicHeadMeshPartFormatModule(t))
 		destroyEditableInstancesModule(t.editableMeshes, t.editableImages)
@@ -225,7 +225,7 @@ function t.validateAsyncMeshPartFormat(p24, p25, p26, p27, p28, p29) --[[ line: 
 end
 
 if getEngineFeatureUGCValidationWithContextEntrypointModule() then
-	function t.validateMeshPartAssetFormatWithContext(value) --[[ line: 322 ]]
+	function t.validateMeshPartAssetFormatWithContext(value) --[[ line: 321 ]]
 		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), isLayeredClothingModule (ref), validateLayeredClothingAccessoryMeshPartAssetFormatModule (ref), validateLegacyAccessoryMeshPartAssetFormatModule (ref), destroyEditableInstancesModule (ref)
 		assert(value.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateMeshPartAssetFormatWithContext")
 		assert(value.instances ~= nil, "instances required in validationContext for validateMeshPartAssetFormatWithContext")
@@ -268,7 +268,7 @@ if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 		return var50, var51
 	end
 end
-function t.validateMeshPartAssetFormat2(value, p30, p31, p32, p33, _) --[[ line: 376 ]]
+function t.validateMeshPartAssetFormat2(value, p30, p31, p32, p33, _) --[[ line: 375 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), isLayeredClothingModule (ref), validateLayeredClothingAccessoryMeshPartAssetFormatModule (ref), validateLegacyAccessoryMeshPartAssetFormatModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "validateMeshPartAssetFormat2",
@@ -323,7 +323,7 @@ t.util.isLayeredClothingAllowed = rigidOrLayeredAllowedModule.isLayeredClothingA
 t.util.isRigidAccessoryAllowed = rigidOrLayeredAllowedModule.isRigidAccessoryAllowed
 
 if getEngineFeatureUGCValidationWithContextEntrypointModule() then
-	function t.validateFullBodyWithContext(p34) --[[ line: 481 ]]
+	function t.validateFullBodyWithContext(p34) --[[ line: 480 ]]
 		-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateFullBodyModule (ref), destroyEditableInstancesModule (ref)
 		assert(p34.fullBodyData ~= nil, "fullBodyData required in validationContext for validateFullBodyWithContext")
 		local isServer = p34.isServer
@@ -370,7 +370,7 @@ if getEngineFeatureUGCValidationWithContextEntrypointModule() then
 		return var67, var68
 	end
 end
-function t.validateFullBody(p35, p36, p37, p38, p39, p40) --[[ line: 544 ]]
+function t.validateFullBody(p35, p36, p37, p38, p39, p40) --[[ line: 543 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateFullBodyModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "validateFullBody",
@@ -418,7 +418,7 @@ function t.validateFullBody(p35, p36, p37, p38, p39, p40) --[[ line: 544 ]]
 	return var74, var75
 end
 
-function t.validateShoesWithContext(p41) --[[ line: 606 ]]
+function t.validateShoesWithContext(p41) --[[ line: 605 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validateShoesModule (ref), destroyEditableInstancesModule (ref)
 	assert(p41.fullBodyData ~= nil, "fullBodyData required in validationContext for validateShoes")
 	local isServer = p41.isServer
@@ -461,7 +461,7 @@ function t.validateShoesWithContext(p41) --[[ line: 606 ]]
 	return var80, var81
 end
 
-function t.preprocessDataAsync(p42, p43, p44, p45, p46) --[[ line: 658 ]]
+function t.preprocessDataAsync(p42, p43, p44, p45, p46) --[[ line: 657 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validationHintsModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "preprocessDataAsync",
@@ -503,7 +503,7 @@ function t.preprocessDataAsync(p42, p43, p44, p45, p46) --[[ line: 658 ]]
 	return var87
 end
 
-function t.isPreprocessDataCached(p47, p48, p49) --[[ line: 717 ]]
+function t.isPreprocessDataCached(p47, p48, p49) --[[ line: 716 ]]
 	-- upvalues: analyticsModule (ref), validationHintsModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "isPreprocessDataCached",
@@ -519,7 +519,7 @@ function t.isPreprocessDataCached(p47, p48, p49) --[[ line: 717 ]]
 	return var89
 end
 
-function t.calculateScaleToValidateBoundsAsync(p50, p51, p52, p53, p54, p55) --[[ line: 742 ]]
+function t.calculateScaleToValidateBoundsAsync(p50, p51, p52, p53, p54, p55) --[[ line: 741 ]]
 	-- upvalues: analyticsModule (ref), createEditableInstancesForContextModule (ref), validationHintsModule (ref), destroyEditableInstancesModule (ref)
 	analyticsModule.setMetadata({
 		entrypoint = "calculateScaleToValidateBoundsAsync",

@@ -17,7 +17,7 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local useKnobVariantsModule = require(script.Parent.useKnobVariants)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local flagsModule = require(foundation.Utility.Flags)
 local t = {
 	hasShadow = true,
@@ -27,26 +27,26 @@ local t = {
 }
 
 return reactModule.memo(function(p0) --[[ line: 49 | named "Knob" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorNamespaceModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), flagsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useKnobVariantsModule (ref), colorModeModule (ref), reactModule (ref), useBindableModule (ref), reactIsModule (ref), viewModule (ref), withCommonPropsModule (ref), flagsModule (ref), iconModule (ref), blendTransparenciesModule (ref), constantsModule (ref), dashModule (ref), imageModule (ref)
 	local var17 = withDefaultsModule(p0, t)
 	local var18 = useTokensModule()
 	local var19 = usePresentationContext()
-	local var20 = useKnobVariantsModule(var18, var17.size, var19 and var19.colorNamespace == colorNamespaceModule.Inverse)
+	local var20 = useKnobVariantsModule(var18, var17.size, var19 and var19.colorMode == colorModeModule.Inverse)
 	local style = var17.style or var20.knob.style
-	local var22 = reactModule.useCallback(function(p1) --[[ line: 60 ]]
+	local var22 = reactModule.useCallback(function(p1) --[[ line: 57 ]]
 		-- upvalues: var18 (ref)
 		return {
 			Color3 = var18.Color.Extended.White.White_100.Color3,
 			Transparency = p1.Transparency
 		}
 	end, { var18 })
-	local var23 = reactModule.useMemo(function() --[[ line: 71 ]]
+	local var23 = reactModule.useMemo(function() --[[ line: 68 ]]
 		-- upvalues: var20 (ref), var17 (ref), reactIsModule (copy)
 		local size = var20.knob.size
 		
 		if var17.stroke and var17.stroke.Thickness then
 			if reactIsModule.isBinding(var17.stroke.Thickness) then
-				return var17.stroke.Thickness:map(function(p2) --[[ line: 75 ]]
+				return var17.stroke.Thickness:map(function(p2) --[[ line: 72 ]]
 					-- upvalues: size (write)
 					return size - UDim2.fromOffset(p2 * 2, p2 * 2)
 				end)
@@ -69,7 +69,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "Knob" ]]
 		}, reactModule.createElement(iconModule, {
 			name = var17.icon.name,
 			variant = var17.icon.variant,
-			style = if var17.isDisabled then useBindableModule(var20.knob.style):map(function(p5) --[[ line: 107 ]]
+			style = if var17.isDisabled then useBindableModule(var20.knob.style):map(function(p5) --[[ line: 104 ]]
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
 					Color3 = p5.Color3,
@@ -81,7 +81,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "Knob" ]]
 		})) else reactModule.createElement(viewModule, {
 			ZIndex = 4,
 			tag = var20.knob.tag,
-			backgroundStyle = if var17.isDisabled then useBindableModule(style):map(function(p3) --[[ line: 124 ]]
+			backgroundStyle = if var17.isDisabled then useBindableModule(style):map(function(p3) --[[ line: 121 ]]
 				-- upvalues: blendTransparenciesModule (copy), constantsModule (copy)
 				return {
 					Color3 = p3.Color3,
@@ -89,7 +89,7 @@ return reactModule.memo(function(p0) --[[ line: 49 | named "Knob" ]]
 				}
 			end) else style,
 			Size = var23,
-			stroke = useBindableModule(if var17.stroke then var17.stroke.Transparency else nil):map(function(p4) --[[ line: 133 ]]
+			stroke = useBindableModule(if var17.stroke then var17.stroke.Transparency else nil):map(function(p4) --[[ line: 130 ]]
 				-- upvalues: var17 (ref), dashModule (copy), blendTransparenciesModule (copy), constantsModule (copy)
 				local stroke = var17.stroke
 				

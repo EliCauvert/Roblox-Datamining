@@ -81,34 +81,18 @@ Application.Logout.Message.Confirmation,Çıkış yapmak istediğine emin misin?
 Application.Logout.Title.Logout,
 Application.Settings.AccountSettingsTitle,Hesap Ayarları
 Application.Settings.AppSettingsTitle,Uygulama Ayarları
-Application.Settings.DeviceSettings.Title,Cihaz Ayarları
-Application.Settings.VR.Comfort.Description,Hareketi ve görüş alanını ayarlayarak Hareket Hastalığını azaltır.
-Application.Settings.VR.Comfort.Profile.Description,"Ön ayarlardan birini seç veya her bir konfor seçeneğini manuel olarak ayarlamak için ""Özel""i seç."
-Application.Settings.VR.Comfort.Profile.Option.Comfort,Konforlu
-Application.Settings.VR.Comfort.Profile.Option.Custom,Özel
-Application.Settings.VR.Comfort.Profile.Option.Default,Varsayılan
-Application.Settings.VR.Comfort.Profile.Option.Expert,Deneyimli
-Application.Settings.VR.Comfort.Profile.Title,Konfor Profili
-Application.Settings.VR.Comfort.SafetyBubbleMode.Description,Kimin avatarı ortadan kaybolmadan sana yaklaşabileceğine karar ver
-Application.Settings.VR.Comfort.SafetyBubbleMode.Option.Anyone,Herkes
-Application.Settings.VR.Comfort.SafetyBubbleMode.Option.NoOne,Hiç Kimse
-Application.Settings.VR.Comfort.SafetyBubbleMode.Option.OnlyFriends,Yalnızca Arkadaşlar
-Application.Settings.VR.Comfort.SafetyBubbleMode.Title,Güvenlik Balonu
-Application.Settings.VR.Comfort.SteppedRotationEnabled.Description,"Görüntüyü sürekli bir hareket yerine sabit, artan açılarla döndüren devinme ayarı."
-Application.Settings.VR.Comfort.SteppedRotationEnabled.Title,Kademeli Dönüş
-Application.Settings.VR.Comfort.ThirdPersonFixedCamEnabled.Description,"Yumuşak kamera hareketinden kaynaklanan hareket hastalığını önlemeye yardımcı olur. Sen hareket ederken kamera yerinde kalır, ardından anında arkana geçer. Sadece üçüncü şahıs görünümünde çalışır."
-Application.Settings.VR.Comfort.ThirdPersonFixedCamEnabled.Title,Üçüncü Şahıs Konfor Kamerası
-Application.Settings.VR.Comfort.Title,Konfor Ayarları
-Application.Settings.VR.Comfort.VignetteEnabled.Description,Hareket hastalığını önlemek veya hafifletmek için hareket sırasında görüş alanını küçülten konfor ayarı.
-Application.Settings.VR.Comfort.VignetteEnabled.Title,Konforlu Vinyet
 Application.Settings.VRAccountSettingsExplanation,"Gizliliğine, Güvenlik Denetimlerine ve daha fazlasına erişmek için lütfen Webi veya yardımcı bir cihazı kullan."
 Application.Settings.VRAccountSettingsSubtitle,Webi veya Yardımcı bir cihazı kullan
-Application.Settings.VolumeSliderDescription,"Menü efektleri, oyun sesi ve sesli sohbet de dâhil olmak üzere Roblox'un genel ses seviyesini kontrol et."
+Application.Settings.VolumeSliderDescription,"Menü efektleri, deneyim sesi ve sesli sohbet de dâhil olmak üzere Roblox'un genel ses seviyesini kontrol et."
+Authentication.AccountPicker.Button.ContinueAsSignedIn,{displayName} olarak devam et
 Authentication.AccountPicker.Button.CreateAccount,Hesap oluştur
+Authentication.AccountPicker.Button.MoreOptions,Daha fazla seçenek
+Authentication.AccountPicker.Button.SignInAsAccount,{displayName} olarak giriş yap
 Authentication.AccountPicker.Button.SignIntoAnotherAccount,Başka bir hesaba giriş yap
 Authentication.AccountPicker.Label.AllAccounts,Tüm hesaplar
 Authentication.AccountPicker.Label.Manage,Yönet
 Authentication.AccountPicker.Label.ManageAccounts,Hesapları yönet
+Authentication.AccountPicker.Label.MoreOptions,
 Authentication.AccountPicker.Label.RemoveAccount,Hesap kaldırılsın mı?
 Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,Tekrar giriş yapmadığın sürece bu hesabı artık bu cihazda görmeyeceksin.
@@ -136,7 +120,7 @@ Authentication.AccountRecovery.Description.ChooseAccount,Kurtarmak istediğin he
 Authentication.AccountRecovery.Description.CreateNewPassword,Eski şifrenden farklı güçlü bir şifre oluştur.
 Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,Gelecekte hesabını korumaya yardımcı olması için yeni bir şifre oluştur ve bir e-posta ekle.
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"Gelişmiş Koruma Programına kaydoldun. Giriş yaparken hesabının güvenliği için geçiş anahtarı veya güvenlik anahtarı kullanman gerekecek. Bu cihaz geçiş anahtarlarını desteklemediği için giriş yapmak zor olabilir. Bundan sonra kullanabileceğin Hızlı Giriş özelliği, zaten giriş yapmış olduğun başka bir cihaz üzerinden giriş yapmanı sağlar."
-Authentication.AccountRecovery.Description.EmailCodeSent,Bu e-posta adresiyle ilişkili bir Roblox hesabı varsa doğrulama kodu alacaksın. Spam klasörü de dâhil olmak üzere tüm klasörlerini kontrol et.
+Authentication.AccountRecovery.Description.EmailCodeSent,Bir hesapla ilişkiliyse verdiğin e-posta adresine 6 haneli bir doğrulama kodu gönderdik. Spam klasörü de dâhil olmak üzere tüm klasörlerini kontrol et.
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,Hesabınla ilişkiliyse verdiğin e-posta adresine 6 haneli bir doğrulama kodu gönderdik. Spam klasörü de dâhil olmak üzere tüm klasörlerini kontrol et.
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Gelişmiş Koruma Programına kaydoldun. Giriş yaparken hesabının güvenliği için geçiş anahtarı veya güvenlik anahtarı kullanman gerekecek.{lineBreak}{lineBreak}Kişisel cihazını kullanıyorsan şimdi yeni bir geçiş anahtarı ayarlamanı öneririz. Bu, ileride bu cihazdan giriş yapmanı kolaylaştırır. Paylaşılan veya herkese açık bir cihaz kullanıyorsan bu adımı atla."
 Authentication.AccountRecovery.Description.EnterABackupCode,Şimdi kaydettiğin bir yedek kodu gir.
@@ -146,7 +130,7 @@ Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"�
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,Şimdi hesabınla ilişkilendirilmiş bir telefon numarası gir.
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"Şimdi bir telefon numarası veya başka bir e-posta adresi gir. Bu, Roblox'ta bir şey satın alırken kullandığın bir e-posta olabilir."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,Hesabında {twoStepMethod} etkinleştirildi. Hâlâ erişebiliyorsan bunu sakla. Tekrar oturum açtığında kullanmanı isteyeceğiz.
-Authentication.AccountRecovery.Description.PhoneCodeSent,Bu telefon numarası için bir Roblox hesabı varsa doğrulama kodu alacaksın. SMS veya WhatsApp'ı kontrol et.
+Authentication.AccountRecovery.Description.PhoneCodeSent,"Bir hesapla ilişkiliyse verdiğin telefon numarasına 6 haneli bir doğrulama kodu gönderdik. Kod, WhatsApp veya SMS ile gönderilebilir."
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"Hesabınla ilişkiliyse verdiğin telefon numarasına 6 haneli bir doğrulama kodu gönderdik. Kod, WhatsApp veya SMS ile gönderilebilir."
 Authentication.AccountRecovery.Description.PlatformNotSupported,Hesap kurtarma bu platformda veya cihazda desteklenmiyor. Tamam'ı seçerek bu pencereyi kapat ve Giriş sayfasına dön. Lütfen başka bir cihazda hesabını kurtar. Ardından Hızlı Giriş'i seç ve giriş yapmış olduğun diğer cihazla güvenli şekilde giriş yapmak için talimatları izle.
 Authentication.AccountRecovery.Description.SaveTwoStepMethod,Hâlâ erişebiliyorsan bunu sakla. Tekrar oturum açtığında kullanmanı isteyeceğiz.
@@ -209,6 +193,7 @@ Authentication.AccountSwitch.Description.RemoveCurrentAccount,Bunu yaparsan tekr
 Authentication.AccountSwitch.Description.TryLoggingInDirectly.2,Doğrudan giriş yapmayı dene
 Authentication.AccountSwitch.Header.CantSwitchAccounts,Hesap Değiştirilemiyor
 Authentication.AccountSwitch.Header.CantSwitchAccountsSentenceCase,Hesap değiştirilemiyor
+Authentication.AccountSwitch.Header.ChooseAnAccount,Bir hesap seç
 Authentication.AccountSwitch.Header.LogoutAllAccounts,
 Authentication.AccountSwitch.Header.RemoveCurrentAccount,Mevcut hesap kaldırılsın mı?
 Authentication.AccountSwitch.Header.SignOutOtherAccounts,Diğer hesaplardan çıkış yapılsın mı?
@@ -285,7 +270,7 @@ Authentication.Login.Action.WeChatLogin,WeChat Girişi
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
 Authentication.Login.Button.UseDifferentRobloxAccount,Farklı bir Roblox hesabı kullan
 Authentication.Login.Description.AccountSelectorHelp,İlişkilendirilmiş tüm hesapların burada listelenmiştir.
-Authentication.Login.Description.DownloadNewVersion,Roblox'un bu sürümü hesabında kullanılamıyor. Devam etmek için lütfen doğru sürümü indir.
+Authentication.Login.Description.DownloadNewVersion,Uygulamanın bu sürümü artık bölgende kullanılamıyor. Oynamaya devam etmek için lütfen Roblox'un yeni sürümünü indir.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Az önce {email} adresine gönderdiğimiz kodu gir.
 Authentication.Login.Description.GetOneTimeCodeHelp,Tek kullanımlık kod almak için hesabında doğruladığın e-posta adresini gir.
 Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha güvenli bir giriş yöntemi olan geçiş anahtarı bulunuyor. Bu cihazda giriş yapmak için parmak izini, yüzünü veya ekran kilidini kullanabilirsin."
@@ -296,7 +281,7 @@ Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Mevcut Hesaba Giriş
-Authentication.Login.Heading.NewAppAvailable,Yeni Roblox Uygulamasını İndir
+Authentication.Login.Heading.NewAppAvailable,Yeni Uygulama Mevcut
 Authentication.Login.Heading.SignIn,Giriş yap
 Authentication.Login.Label.AccountSelectorTitle,Giriş Yapılacak Hesabı Seç
 Authentication.Login.Label.AgedUpUsername,Eşsiz bir @kullanıcıadı ekle
@@ -357,7 +342,6 @@ Authentication.Login.Response.UnableToSignIn,Giriş yapılamıyor.
 Authentication.Login.Response.UnknownError,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Bir şeyler yanlış gitti. Lütfen başka bir yöntemle giriş yapmayı dene.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,E-postan doğrulanmadı. Lütfen kullanıcı adınla giriş yap.
-Authentication.Login.WeChat.AntiAddictionText,"Kötü deneyimleri boykot et ve korsan deneyimlerden kaçın. Kandırılma ve kendini savunma konusunda bilinçli ol. Deneyim ziyaretleri, zihnin için faydalıdır ancak çok fazla deneyim ziyareti, sağlığına zarar verebilir. Zamanını iyi kullan ve sağlıklı bir yaşam tarzı benimsemeye özen göster."
 Authentication.Login.WeChat.NotInstalled,WeChat yüklü değil
 Authentication.OneTimePasscode.Action.ChangeEmailV2,E-postayı Değiştir
 Authentication.OneTimePasscode.Action.Continue,Devam Et
@@ -389,7 +373,6 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Hesap Oluştur
-Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID'yi etkinleştir
 Authentication.SignUp.Action.ExitModalLeave,Ayrıl
 Authentication.SignUp.Action.IUnderstand,Anladım
@@ -398,7 +381,6 @@ Authentication.SignUp.Action.SetupLater,Daha sonra kur
 Authentication.SignUp.Action.StartOver,Baştan Başla
 Authentication.SignUp.Action.UseEmail,E-posta adresi kullan
 Authentication.SignUp.Action.UsePhoneNumber,Telefon numarası kullan
-Authentication.SignUp.Button.OKCaptialized,
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
 Authentication.SignUp.Description.AccountAlreadyLinked,{platformAccountName} için hesap zaten bir Roblox hesabına bağlı. Lütfen tekrar giriş yapmayı dene.
 Authentication.SignUp.Description.AgreeToTermsWithGuardian.NoParameters,Roblox'un Kullanım Koşulları'nı (tahkim dâhil) ve Gizlilik Politikası'nı kabul ediyorum. 18 yaşından küçüksem ebeveynimin/vasimin bu hesabı oluşturmama izin verdiğini ve Kullanım Koşulları'nı kabul ettiğini onaylıyorum.
@@ -495,7 +477,6 @@ Authentication.SignUp.Label.PasswordErrorLengthNew,Şifre 8 ila 200 karakter uzu
 Authentication.SignUp.Label.PasswordErrorSimple,Şifre çok basit olmamalı
 Authentication.SignUp.Label.PasswordPlaceholder,En az 8 karakter
 Authentication.SignUp.Label.PhoneNumber,Telefon Numarası
-Authentication.SignUp.Label.SelectBirthdaySentenceCase,Doğum günü seç
 Authentication.SignUp.Label.SelectYourBirthday,Doğum gününü seç
 Authentication.SignUp.Label.SetUpPasskey,Veya bir geçiş anahtarı ayarla
 Authentication.SignUp.Label.SignUp,Kaydol
@@ -585,30 +566,8 @@ Common.Presence.Label.Invisible,Görünmez
 Common.Presence.Label.Offline,Çevrimdışı
 Common.Presence.Label.Online,Çevrimiçi
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasyon çok uzun ({duration} saniye). İfade animasyonları en fazla {maxLength} saniye uzunluğunda olmalıdır.
-Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasyon çok kısa ({duration} saniye). İfade animasyonları {minLength} saniyeden uzun olmalıdır.
-Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Vücudun küçük bağlantısız mesh bileşenleri (mesh adaları) içeriyor. Lütfen serbest geometriyi kaldır ve tüm mesh parçalarının düzgün şekilde bağlanmasını sağla.
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Varlık kalitesi: {partName}, {num_disconnected_components} bağlantısız bileşene sahip ve bu sayı {max_disconnected_components} olan üst sınırı aşıyor."
-Common.UGCValidation.ErrorLabel.AQSInputDataError,Girdi verileri yanlış veya eksik olduğu için kalite puanı düzgün şekilde hesaplanamıyor. Lütfen modelini kontrol et veya bir hata raporu gönder
+Common.UGCValidation.AQSInputDataError,Girdi verileri yanlış veya eksik olduğu için kalite puanı düzgün şekilde hesaplanamıyor. Lütfen modelini kontrol et veya bir hata raporu gönder
 Common.UGCValidation.ErrorLabel.AQSInternalError,Varlık Kalite Hatası nedeniyle puan oluşturulamıyor. Lütfen girdi verilerinin doğruluğunu kontrol edip tekrar dene veya bir hata raporu gönder.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,Varlık kalitesi uyarısı: Kafes-mesh mesafesi skoru {score}. Dış kafes ile mesh arasındaki maksimum mesafe {max_distance}. Dış kafes köşelerinin yüzde {negative_sdf_percent} kadarı görsele dönüştürme mesh'inin içinde.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,Varlık kalitesi uyarısı: Vücut kafesi mesafe skoru {score}. Vücut kafesi ile mesh arasındaki maksimum mesafe {max_distance}. Vücut kafesi köşelerinin yüzde {negative_sdf_percent} kadarı vücut mesh'inin içinde.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,Varlık kalitesi uyarısı: Kafa kafesi mesafe skoru {score}. Kafa kafesi ile mesh arasındaki maksimum mesafe {max_distance}. Kafa kafesi köşelerinin yüzde {negative_sdf_percent} kadarı kafa mesh'inin içinde.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Varlık kalitesi uyarısı: Kafes alaka skoru {score}. Değiştirilen dış kafes köşelerinin yüzde {irrelevant_percent} kadarı aksesuarı kapsamıyor.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Varlık kalitesi uyarısı: {cage_name} için kafes UV skoru {score}. Yanlış UV sayısı: {incorrect_uv_count}.
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Varlık kalitesi: {partName} için bozuk üçgen oranı yüzde {degenerate_triangle_percent} (skor: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Varlık kalitesi uyarısı: Dinamik kafa ifadesi skoru {score}.
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Varlık kalitesi: Eklem yapılandırması skoru {score} (eklemler: {joint_number}, sol el: {left_hand_joint_number}, sağ el: {right_hand_joint_number})."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,"Varlık kalitesi: {partName}, {num_disconnected_components} bileşen içinde {num_small_volume_islands} küçük bağlantısız adaya sahip (puan: {score})."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,"Varlık kalitesi: {partName}, çok katlı mesh sorunlarına sahip (puan: {score})."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,"Varlık kalitesi: {partName} adlı mesh, su geçirmez değil (yüzde {boundary_edges_percent} kenar sınırları)."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Varlık kalitesi uyarısı: Mesh kapsama skoru {score}. Mesh köşelerinin yüzde {mesh_outside_outer_cage_percent} kadarı dış kafesin dışında.
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,"Giriş verileri eksik veya geçersiz olduğundan {measureName} için varlık kalitesi skoru hesaplanamadı. Bu, yükleme işlemini engellemez."
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Varlık kalitesi: {textureName} dokusu düşük karmaşıklığa sahip (skor: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Varlık kalitesi: {textureName} dokusunun çözünürlüğü {texture_width}x{texture_height} (skor: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Varlık kalitesi: {partName} için kesişen üçgen yüzü oranı yüzde {intersecting_tri_face_percent} (skor: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Varlık kalitesi: {partName} için sınır değerleri dışındaki UV köşesi oranı yüzde {uv_outside_bound_vert_percent} (skor: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Varlık kalitesi: {partName} için benzer köşe oranı yüzde {similar_vertex_percent} (skor: {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Tutamak, izin verilen şemada olmayan {jointName} eklemine giydirildi. Yalnızca standart R15 eklemlerine ve soyma aktarımı eklemlerine izin verilir."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType}, soyma aktarımı kullanmalıdır fakat gerekli olan {requiredJointName} eklemi eksik."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,İşleyici {jointName} eklemine giydirildi ancak bu varlığın otomatik olarak giydirilmesi gerekir. Yalnızca {validJointNameList} eklemine giydirebilirsin.
@@ -616,24 +575,17 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,"{ass
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,Rijit aksesuardaki soyma verileri desteklenmiyor. Kemiklerin ağ ile birlikte içe aktarılmamasına dikkat et.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"İşleyici, yalnızca WrapLayer.AutoSkin değeri EnabledOverride olarak ayarlandığında izin verilen {jointName} eklemini içeriyor."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Aktarım eklemlerine giydirilen köşeler tamamen ağırlıklandırılmış olmalıdır.
-Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,"Animasyon paketi setinde beklenen animasyon tipleri ({missingAnimationTypes}) eksik. Her animasyon tipinde, tam olarak beklenen StringValue alt öğelerini içeren bir R15Anim Klasörü olmalıdır."
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"""{animationName}"" animasyonunun Ağırlık değeri {weight}, ancak Ağırlık 0'dan büyük olmalıdır. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath} içinde adı {ExpectedName} olan gerekli {ExpectedClass} bulunamadı
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Aşağıdaki durumlar onaylanmış şemanın bir parçası değildir ve kaldırılmalıdır: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,Yüklenen varlık bir {ExpectedClass} olmalıdır ancak yüklemeye çalıştığın varlığın türü {RootClass}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Yüklenen varlığın adı {ExpectedClass} olmalıdır ancak yüklemeye çalıştığın varlığın adı {RootClass}.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"CurveAnimation'daki ""{bodyPartName}"" vücut parçası bir Pozisyon (çeviri) izine sahip. Animasyon vücut parçaları yalnızca döndürülebilir; pozisyon izlerine izin verilmez. Lütfen bu vücut parçasından Pozisyon izini kaldır."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"CurveAnimation'daki ""{bodyPartName}"" vücut parçası, başlangıç konumundan {distance} birim kare hareket ediyor. En fazla {maxDistance} birim karelik öteleme hareketine izin verilir. Lütfen vücut parçasının pozisyonel hareketini azalt."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation, HRD/DRD kemikleri içeriyor ve ""{bodyPartName}"" vücut parçası bir Pozisyon (çeviri) izine sahip. Animasyonda herhangi bir kemik olduğunda, eklem ayrılmasını önlemek için hiçbir vücut parçası çevrilemez. Lütfen tüm Pozisyon izlerini vücut parçalarından kaldır."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation'daki {boneName} kemiği bir Pozisyon (çeviri) izine sahip. HRD/DRD kemikleri yalnızca döndürülebilir; pozisyon izleri eklem ayrılmasına neden olur ve bunlara izin verilmez. Lütfen bu kemikten konum animasyonunu kaldır.
-Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,"CurveAnimation'daki ""{boneName}"" kemiği, başlangıç konumundan {distance} birim kare hareket ediyor. En fazla {maxDistance} birim karelik öteleme hareketine izin verilir. Lütfen kemiğin pozisyonel hareketini azalt."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation henüz desteklenmeyen HRD/DRD kemik klasörleri içeriyor. Lütfen yüklemeden önce tüm kemik alt klasörlerini kaldır.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation'daki vücut parçaları, HumanoidRootPart'tan en fazla {minHeight} birim kare aşağıda veya en fazla {maxDistance} birim kare uzakta olmalıdır. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation alt öğeleri MarkerCurves ve AnimationRigData'nın alt öğeleri olamaz
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation hiyerarşisi; Scripts, LocalScripts veya ModuleScripts içeriyor. Lütfen bunları kaldır."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation verileri yüklenemedi. Animasyon varlığı geçersiz veya erişilemez olabilir.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimation, geçersiz bir hiyerarşiye sahip olan {folderName} vücut parçası klasörünü içeriyor (izin verilmeyen veya yanlış ayarlanmış alt öğeleri var)"
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation'daki ""{boneName}"" klasörü tanınan bir HRD/DRD kemik adı değil. Animasyon alt klasörleri ya geçerli R15 vücut parçaları ya da tanınan kemik adları olmalıdır (ör. HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase ya da LeftHandIndex1 gibi parmak kemikleri)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,"CurveAnimation, geçersiz Zaman veya Değere sahip Eğriler içeriyor. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation hiyerarşisi yalnızca {allowedTypes} içerebilir. Lütfen diğer tüm Durum tiplerini kaldır.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,"CurveAnimation'ın uzunluğu, {minLength} ila {maxLength} saniye olmalıdır. Lütfen animasyonu düzelt."
@@ -671,7 +623,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Dinamik Kafa için ağı
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,Pazar yerindeki Dinamik Kafalar animasyonlu olmalıdır ancak bu kafanın Yüz Hareketi Kodlama Sistemi (FACS) verileri yok.
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Dinamik Kafa için sağ göz kapalı ifadesi algılanamıyor. Kafada sağ gözün bulunduğu yerle eşleşmesi için lütfen sağ gözün kafes işaretlerini ayarla ve gözün kapatılabildiğinden emin ol.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Dinamik Kafa için kaş çatma ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve kaş çatma ifadesini gösterebildiğinden emin ol.
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"Bu varlık, yalnızca Güvenilir Yaratıcı Programı'ndaki yaratıcılar tarafından kullanılabilen yayıcı haritalar kullanıyor. Yüklemeden önce lütfen tüm yayıcı harita içeriklerini kaldır veya programa katıl."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls'taki InternalOverrideFACSData özelliği yükleme sırasında boş olmalıdır.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında büyüttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Yüz Hareketi Kodlama Sistemi'nin (FAC) başını {modPercent}% oranında küçülttüğü tespit edildi oysa başı değiştirmek, yüz animasyonları için pazar yeri politikasına aykırıdır."
@@ -687,7 +638,6 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"{partName} içindeki Di
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,HumanoidRigDescription olmadan DigitsRigDescription kullanamazsın
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,{instName} örneği bir kereden fazla görünüyor ancak bir kemik hiyerarşisi içinde yalnızca bir kez bulunabilir.
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"Durum {instName}, {parentName} öğesinin altında oysa sende mevcut kemiklere göre {expectedParentName} altında yer almalı."
-Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription ve ilave kemikler henüz vücuda yüklenmek üzere etkinleştirilmedi.
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,"{className} sınıfı {instName} durumu, bir kemik ağacında yer alıyor ancak tanımlanmış R15plus şemasının bir parçası değil."
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,İsteğe bağlı {jointName} eklemi HRD'de yanlış eşleştirilmiş. {boneName} adlı kemiğe eşleştirilmesi gerekir.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"{jointName}, standart bir R15 eklemidir ancak düzenek eklentisi HRD'ye bağlı değildir. Avatarına bağlı HRD'nin Motor6d yerine bir AttachmentConstraint ile bağlantı sağlamasına dikkat et."
@@ -715,15 +665,12 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"Dış kafes,
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,Değiştirilen dış kafes köşelerinin yüzde {outer_cage_face_irrelevant_percent} kadarı aksesuarı kapsamıyor. Dış kafesi yalnızca gerektiğinde hareket ettirmeye dikkat et.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,{cage_name} kafesindeki {incorrect_uv_count} UV değeri yanlış veya şabloba ait değil. Lütfen kafes UV'sini düzelt.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,Aksesuara ait ağ köşelerinin yüzde {mesh_outside_outer_cage_percent} kadarı dış kafesinin dışında. Aksesuarın daha büyük bir kısmının kafesler arasına yerleştirilmesi için ayarlamalar yap.
-Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} mesh'inin {axis} ekseninde ""{currentSize}"" birim kare olan boyutu, izin verilen maksimum tekil parça boyutu olan ""{maxSize}"" birim kareden büyüktür. Mesh'i ölçeklendir."
-Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} mesh'inin {axis} ekseninde ""{currentSize}"" birim kare olan boyutu, izin verilen minimum tekil parça boyutu olan ""{minSize}"" birim kareden küçüktür. Mesh'i ölçeklendir."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,{attName} eklentisinin {partName} alt öğeleri içinde tam bir kez bulunması gerekir.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (veya alt öğeleri) Öznitelikler içeriyor. Öznitelikleri şunlardan kaldırman gerekir: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox'a varlık yüklemek için tam olarak 1 durum ve ilişkili yükleme türünü seçmelisin.
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} durumu etiket içermemelidir.
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Merkez öncelikli çeviri senkronizasyonu iş akışını uçtan uca doğrulamak için kullanılan ikinci test sorun dizisi.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Kafa mesh parçası, {jointName} için Yüz Hareketi Kodlama Sistemi'nde (FACS) kullanılamayan yüz animasyonlarına sahip. Lütfen bu eklemi yeniden adlandır, ardından kafanı tekrar içe aktar."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"{partName} vücut parçası, R15plus şemasının bir parçası olmayan {jointName} sanal eklemine giydirildi."
+Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription ve ilave kemikler henüz vücuda yüklenmek üzere etkinleştirilmedi.
 Common.VerifiedParentalConsent.Action.Cancel,İptal
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ayarlara git
@@ -738,10 +685,8 @@ CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Roblox'u Kapat
 CommonUI.Controls.Action.Confirm,
 CommonUI.Controls.Action.Done,
-CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,Yenile
-CommonUI.Controls.Action.ResetAll,Tümünü sıfırla
 CommonUI.Controls.Action.Search,Ara
 CommonUI.Controls.Action.ShowMore,Daha fazla
 CommonUI.Controls.Action.Submit,Gönder
@@ -766,8 +711,6 @@ CommonUI.Controls.Label.January,Ocak
 CommonUI.Controls.Label.JanuaryAbbreviated,Oca.
 CommonUI.Controls.Label.July,Temmuz
 CommonUI.Controls.Label.June,Haziran
-CommonUI.Controls.Label.LastWeek,Geçen hafta
-CommonUI.Controls.Label.LastYear,Geçen yıl
 CommonUI.Controls.Label.March,Mart
 CommonUI.Controls.Label.MarchAbbreviated,Mar.
 CommonUI.Controls.Label.May,Mayıs
@@ -787,12 +730,8 @@ CommonUI.Controls.Label.September,Eylül
 CommonUI.Controls.Label.SeptemberAbbreviated,Eyl.
 CommonUI.Controls.Label.Sunday,Pazar
 CommonUI.Controls.Label.SundayAbbreviated,Pa
-CommonUI.Controls.Label.ThisMonth,Bu ay
-CommonUI.Controls.Label.ThisWeek,Bu hafta
-CommonUI.Controls.Label.ThisYear,Bu yıl
 CommonUI.Controls.Label.Thursday,Perşembe
 CommonUI.Controls.Label.ThursdayAbbreviated,Pe
-CommonUI.Controls.Label.Today,Bugün
 CommonUI.Controls.Label.Tuesday,Salı
 CommonUI.Controls.Label.TuesdayAbbreviated,Sa
 CommonUI.Controls.Label.Wednesday,Çarşamba
@@ -833,6 +772,8 @@ CommonUI.Features.Label.CreateGames,Oluştur
 CommonUI.Features.Label.CreationCenter,Oluşturma Merkezi
 CommonUI.Features.Label.DevSubs,Abonelikler
 CommonUI.Features.Label.Discover,Keşfet
+CommonUI.Features.Label.EngagementScreen.Continue,
+CommonUI.Features.Label.EngagementScreen.SwitchAccounts,{platform} Hesabına Geç
 CommonUI.Features.Label.ForYou,Senin için
 CommonUI.Features.Label.Friends,Arkadaşlar
 CommonUI.Features.Label.Game,Deneyimler
@@ -854,7 +795,6 @@ CommonUI.Features.Label.Messages,Mesajlar
 CommonUI.Features.Label.Moments,Anlar
 CommonUI.Features.Label.More,Daha Fazla
 CommonUI.Features.Label.MoreEvents,Yakında daha fazla etkinlik geliyor!
-CommonUI.Features.Label.Newsroom,Basın Odası
 CommonUI.Features.Label.OfficialStore,Resmî Mağaza
 CommonUI.Features.Label.Parents,Ebeveynler
 CommonUI.Features.Label.Players,İnsanlar
@@ -865,9 +805,8 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,Profil
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,Kodları kullan
-CommonUI.Features.Label.RemoveConnection,Arkadaşlardan Kaldır
+CommonUI.Features.Label.RemoveConnection,Bağlantıyı Kaldır
 CommonUI.Features.Label.ReportLogs,Kayıtları Bildir
-CommonUI.Features.Label.ReportLogsSentenceCase,Kayıtları bildir
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Startup,Başlangıç
 CommonUI.Features.Label.SupportCenter,Deneyim Destek Geçmişi
@@ -967,16 +906,12 @@ CoreScripts.BulkPurchasePrompt.CompletedPrompt.SuccessHeading,Satın Alım Tamam
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Çık
 CoreScripts.InGameMenu.Actions.Continue,
 CoreScripts.InGameMenu.Cancel,
-CoreScripts.InGameMenu.Controls.RobloxMenu,Roblox menüsü
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Parti ses seviyesi
-CoreScripts.InGameMenu.GameSettings.UINavToggle,Kullanıcı Arayüzü Gezinme Tuşu
 CoreScripts.InGameMenu.GameSettings.Volume,Ses Seviyesi
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
-CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
-CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bu oyundan ayrılıp {PREVIOUS_GAME} oyununa dönmek üzeresin.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen deneyimlere katıl
+CoreScripts.InGameMenu.Traversal.LeaveBody,Bu deneyimden ayrılıp {PREVIOUS_EXPERIENCE} deneyimine dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ayrılıyor musun?
 CoreScripts.PremiumModal.Title.Error,Hata
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1013,11 +948,8 @@ CoreScripts.PurchasePrompt.PurchaseMessage.Succeeded,{ITEM_NAME} satın alım i�
 CoreScripts.PurchasePrompt.Title.BuyItem,Öğeyi Satın Al
 CoreScripts.PurchasePrompt.Title.VerificationRequired,
 CoreScripts.TextChat.Action.SendQuickWords,Hızlı Sözler Gönder
-CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,Genel
 CoreScripts.TextChat.ChannelTabs.Here,Buradan
-CoreScripts.TextChat.ChannelTabs.System,Sistem
-CoreScripts.TextChat.ChannelTabs.Team,Ekip
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: Bir konuşmacıyı sessize al.
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>: Bir konuşmacının susturulmasını bitir.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,"Roblox, sohbette desteklenen dilleri otomatik olarak çevirir"
@@ -1034,8 +966,6 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Burada yalnızca sistem 
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Sistem mesajlarını görüntüleyebilir ve yalnızca bölgendeki kullanıcılarla sohbet edebilirsin.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Yalnızca benzer yaş gruplarındaki insanlar ve güvenilir arkadaşların seninle sohbet edebilir.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,Yalnızca benzer yaş gruplarındaki insanlar ve Güvenilir Etkileşim Ağındaki kişiler seninle sohbet edebilir.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Şu anda oynayan herkese selam ver!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} diğer oyuncu sohbette. Selam ver!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Şu anda oynayan herkese selam ver!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Yalnızca güvenilir arkadaşların seninle sohbet edebilir.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Bu oyunda daha fazla kişiyle sohbet et. Yalnızca benzer yaş gruplarındaki kişiler seninle sohbet edebilir.
@@ -1088,9 +1018,7 @@ CoreScripts.TextChat.Mute.Success,"""{RBX_NAME}"" adlı kullanıcı sessize alı
 CoreScripts.TextChat.Notification.WhisperChat.Created,Şu anda {RBX_NAME} ile özel sohbet ediyorsun.
 CoreScripts.TextChat.Online.Help.Description3,/online: Bu kanalda sohbet edebileceğin kullanıcı sayısı.
 CoreScripts.TextChat.Online.Success.Plural,{RBX_COUNT} oyuncu şu anda çevrimiçi ve sohbet edebilir
-CoreScripts.TextChat.Online.Success.Plural2,{RBX_COUNT} diğer oyuncu çevrimiçi ve sohbet edebilir.
 CoreScripts.TextChat.Online.Success.Singular,
-CoreScripts.TextChat.Online.Success.Singular3,
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,Bir takımda değilsen takım sohbeti yapamazsın.
 CoreScripts.TextChat.TeamChat.PrefixText,[Team]
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,Yalnızca benzer yaş gruplarındaki insanlarla ve Güvenilir Etkileşim Ağındakilerle sohbet edebilirsin.
@@ -1107,12 +1035,10 @@ CoreScripts.TextChat.Version.Success,{RBX_VERSION}
 CoreScripts.TextChat.Whisper.Error.CannotChat,Bu kişiyle sohbet edemezsin.
 CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[Gönderen: {RBX_NAME}]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[Alıcı: {RBX_NAME}]
-CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
 CoreScripts.TopBar.Label.InappropriateAudio,Uygunsuz Ses
 CoreScripts.TopBar.Label.Report,Bildir
 CoreScripts.TopBar.Label.ReportAudio,Sesi Bildir
-CoreScripts.TopBar.LoadingScreen.AutoTranslate,Otomatik Çevrildi
 CoreScripts.TopBar.Music,Müzik
 CoreScripts.TopBar.MusicLoading,Ses çalmıyor
 CoreScripts.TopBar.MusicNotVerified,Çalan ses doğrulanmamış
@@ -1120,28 +1046,6 @@ CoreScripts.TopBar.Traversal.History,Geçmiş
 Feature.AbuseReportDialog.Label.GeneralError,
 Feature.Accessibility.Action.ScrollDown,Aşağı Kaydır
 Feature.Accessibility.Action.ScrollUp,Yukarı Kaydır
-Feature.Accessibility.AppTheme.CategoryCalm,Sakin
-Feature.Accessibility.AppTheme.CategoryDynamic,Dinamik
-Feature.Accessibility.AppTheme.CategoryEnergetic,Enerjik
-Feature.Accessibility.AppTheme.CategoryKinetic,Kinetik
-Feature.Accessibility.AppTheme.CircuitRush,Zümrüt Akını
-Feature.Accessibility.AppTheme.CosmicDust,Kozmik Toz
-Feature.Accessibility.AppTheme.Default,
-Feature.Accessibility.AppTheme.ElectricLime,Elektrik Limon Yeşili
-Feature.Accessibility.AppTheme.HyperPlum,Hiper Erik
-Feature.Accessibility.AppTheme.InfernoBlast,İnferno Patlaması
-Feature.Accessibility.AppTheme.KineticEnergy,Kinetik Enerji
-Feature.Accessibility.AppTheme.LavaGlow,Lav Işıltısı
-Feature.Accessibility.AppTheme.NebulaDrift,Nebula Akıntısı
-Feature.Accessibility.AppTheme.NitroFrost,Nitro Donuş
-Feature.Accessibility.AppTheme.PixelPop,Piksel Patlaması
-Feature.Accessibility.AppTheme.PolarFreeze,Kutup Buzu
-Feature.Accessibility.AppTheme.QuantumPulse,Kuantum Dalgası
-Feature.Accessibility.AppTheme.StarBurst,Yıldız Patlağı
-Feature.Accessibility.AppTheme.SuperCharge,Süper Enerjik
-Feature.Accessibility.Description.AppThemeMode,Bir uygulama modu seç. Diğer cihazların etkilenmeyecek.
-Feature.Accessibility.Description.DeviceAppTheme,"Bir uygulama teması seç. Bu, tüm cihaz türlerine yansıtılacaktır."
-Feature.Accessibility.Description.DeviceAppThemeUpsell,Deneyimini özelleştirmek için Plus'a özel temaları keşfet. Şimdi dene ve seçimini kaydetmek için abone ol.
 Feature.Accessibility.Description.DeviceLevelTheme,"Bu cihaz için bir tema seç. (Not: Bu seçim, Roblox'un diğer cihazlarındaki görünümünü değiştirmez.)"
 Feature.Accessibility.Description.Haptics,Roblox uygulaması için genel titreşim ayarını kontrol eder
 Feature.Accessibility.Description.LaunchAtStartup,Bilgisayarımı başlattığımda Roblox'u otomatik olarak başlat
@@ -1155,11 +1059,9 @@ Feature.Accessibility.Description.UiNavigationKeyBind,Kullanıcı Arayüzü navi
 Feature.Accessibility.Description.VREnvironmentSetting,Ana ekran için bir ortam seç
 Feature.Accessibility.DeviceLevelTheme.Dark,Koyu
 Feature.Accessibility.DeviceLevelTheme.Light,Açık
-Feature.Accessibility.DeviceLevelTheme.System,
+Feature.Accessibility.DeviceLevelTheme.System,Sistem
 Feature.Accessibility.Header.Haptics,Titreşim Ayarı
 Feature.Accessibility.Header.ShowInMenuBar,Menü çubuğunda göster
-Feature.Accessibility.Heading.AppThemeMode,Mod
-Feature.Accessibility.Heading.DeviceAppTheme,Uygulama teması
 Feature.Accessibility.Heading.DeviceLevelTheme,Cihaz seviyesine göre tema
 Feature.Accessibility.Heading.DevicePreferences,Cihaz tercihleri
 Feature.Accessibility.Heading.DevicePreferencesV2,
@@ -1172,9 +1074,7 @@ Feature.Accessibility.Heading.ReducedMotion,Hareketi azalt
 Feature.Accessibility.Heading.SkyStyle,Gökyüzü stili
 Feature.Accessibility.Heading.UiNavigationKeyBind,Kullanıcı arayüzü gezinme değiştirme
 Feature.Accessibility.Heading.VREnvironmentSetting,VR Ortamı
-Feature.Accessibility.Label.AppThemeBadgeNew,Yeni
-Feature.Accessibility.Label.AppThemeUnlockBanner,Plus ile uygulama temalarının kilidini aç
-Feature.Accessibility.PreferredTextSize.Default,
+Feature.Accessibility.PreferredTextSize.Default,Varsayılan
 Feature.Accessibility.PreferredTextSize.Largest,En Büyük
 Feature.Accessibility.PreferredTransparency.Opaque,Opak
 Feature.Accessibility.PreferredTransparency.Transparent,Şeffaf
@@ -1297,7 +1197,7 @@ Feature.AccountSettings.Heading.Tab.Security,Güvenlik
 Feature.AccountSettings.Heading.Tab.Spending,Harcama
 Feature.AccountSettings.Heading.Tab.Subscriptions,
 Feature.AccountSettings.Label.Discord,Discord
-Feature.AccountSettings.Label.DropDown.Everyone,
+Feature.AccountSettings.Label.DropDown.Everyone,Herkes
 Feature.AccountSettings.Label.DropDown.FollowersV3,"Arkadaşlar, takip ettiklerim ve takipçilerim"
 Feature.AccountSettings.Label.DropDown.FollowingV2,Arkadaşlar ve takip ettiğim kullanıcılar
 Feature.AccountSettings.Label.DropDown.Friends,
@@ -1318,10 +1218,8 @@ Feature.AddFriends.Action.FriendAdded,Arkadaş Eklendi
 Feature.AddFriends.Action.IgnoreAll,Tümünü Yok Say
 Feature.AddFriends.Action.IgnoreConnectionRequest,Bağlantı Talebini Yok Say
 Feature.AddFriends.Action.IgnoreFriendRequest,Arkadaşlık isteğini yok say
-Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Güvenilir arkadaş olarak ekleme talebini yok say
 Feature.AddFriends.Action.RequestIgnored,İstek Yok Sayıldı
 Feature.AddFriends.Description.CameraPermissionWarning,"Kamera Erişimi Etkin Değil. QR kodunu tarama özelliğini kullanmak için lütfen telefonunun ""Ayarlar"" > ""Uygulamalar"" > ""Roblox"" menüsünden kamera erişimine izin ver."
-Feature.AddFriends.Heading.AddFriends,Arkadaş ekle
 Feature.AddFriends.Heading.FindPeople,Kişi bul
 Feature.AddFriends.Label.AddFriendsTooltip,Roblox'u birlikte keşfedebilmen için arkadaşlarını bul.
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını veya adlarını arayarak Roblox'taki kişileri bul.
@@ -1334,17 +1232,13 @@ Feature.AddFriends.Label.EmptyState.FriendsRename,Roblox'u kiminle birlikte keş
 Feature.AddFriends.Label.EmptyStatePrompt,Roblox'u kiminle keşfedeceksin? Eklemek istediğin kişileri ara veya zaten tanıdığın arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.FriendRequests,Arkadaş İstekleri
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,İnsanlar Ara
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
 Feature.AddFriends.Label.MyQRTile,QR'ım
 Feature.AddFriends.Label.MyQrCode,QR Kodum
-Feature.AddFriends.Label.QRCodeTitle,QR kodu
 Feature.AddFriends.Label.SchoolTile,Okul
 Feature.AddFriends.Label.SearchForFriendsPrompt,Kullanıcı adlarını veya görünen adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.ShareQRCodeAddConnection,Tanıdığın insanları eklemek için QR kodunu paylaş
 Feature.AddFriends.Label.SyncContactsInvitePeople,Arkadaşlarını bulup davet etmek için rehberindeki kişileri senkronize et!
 Feature.AddFriends.Label.SyncWithContacts,Rehberini senkronize et ve arkadaşlarını davet et!
-Feature.AddFriends.Label.TrustedConnectionRequests,Güvenilir Etkileşim Ağı Talepleri
-Feature.AddFriends.Label.TrustedFriendRequests,Güvenilir Arkadaşlık Talepleri
 Feature.AddFriends.Text.EmptyState,Roblox'u kiminle birlikte keşfedeceksin?{lineBreak}Roblox'ta daha fazlasını yapmak için Etkileşim Ağına kişi ekle!
 Feature.AddFriends.Text.EmptyState.FriendsRename,Roblox'u kiminle birlikte keşfedeceksin?{lineBreak}Roblox'ta daha fazlasını yapmak için arkadaş ekle!
 Feature.AddFriends.Title.AddConnectionsToolTip,"Roblox, Etkileşim Ağınla daha da güzel!"
@@ -1383,7 +1277,7 @@ Feature.AppealsPortal.Description.AppealIneligible,Artık bu karara itiraz edeme
 Feature.AppealsPortal.Description.AppealReceived,Kararı yakında sana bildireceğiz. Meselenin ne kadar karmaşık olduğuna bağlı olarak 5 iş günü içinde yanıt vereceğimizi tahmin ediyoruz. İtiraz gönderdiğin için teşekkürler.
 Feature.AppealsPortal.Description.AppealReceived.Plural,Kararı yakında sana bildireceğiz. Meselenin ne kadar karmaşık olduğuna bağlı olarak {number} iş günü içinde yanıt vereceğimizi tahmin ediyoruz. İtiraz gönderdiğin için teşekkürler.
 Feature.AppealsPortal.Description.AppealReceived.Singular,Kararı yakında sana bildireceğiz. Meselenin ne kadar karmaşık olduğuna bağlı olarak 1 iş günü içinde yanıt vereceğimizi tahmin ediyoruz. İtiraz gönderdiğin için teşekkürler.
-Feature.AppealsPortal.Description.AppealRequiresIdv,Bu karara itiraz etmek için kimliğini doğrulaman gerekiyor. Kimliğini daha önce doğruladıysan bunu kullanabiliriz.
+Feature.AppealsPortal.Description.AppealRequiresIdv,Bu karara itiraz etmek için kimliğini doğrulaman gerekiyor. Kimliğini yakın zamanda doğruladıysan bunu kullanabiliriz.
 Feature.AppealsPortal.Description.AppealSubmitted,YOK SAY - GEREKLİ DEĞİL
 Feature.AppealsPortal.Description.AppealSubmittedComplexity,"Gerçek süre, ortaya çıkan sorunların karmaşıklığı ve ne kadar ilgili bilgi eklediğin gibi birçok faktöre bağlıdır."
 Feature.AppealsPortal.Description.AppealSubmittedDecisionTime,Kararı 5 iş günü içinde vereceğimizi tahmin ediyoruz.
@@ -1402,7 +1296,7 @@ Feature.AppealsPortal.Description.OneAppeal,Gönder'i seçerek bu bilgilerin do�
 Feature.AppealsPortal.Description.OtherWarning,İnceleme yapılmasını sağlamak için yalnızca itirazın başka bir seçeneğe uymadığında Diğer'i kullan. Yanlış kategori altında gönderilen itirazları kapatacağız.
 Feature.AppealsPortal.Description.RequestAppealReview.V3,"İncelemeler, {link}Roblox Topluluk Standartları{linkEnd} temel alınarak yapılır."
 Feature.AppealsPortal.Description.RequiredField,Bu alan gereklidir.
-Feature.AppealsPortal.Description.VerifyIdentityToAppeal,"Bu, hesabın yasaklanan hesaba bağlı olup olmadığını belirlememize yardımcı olur."
+Feature.AppealsPortal.Description.VerifyIdentityToAppeal,"Bu, ilgili hesabın yasaklanan hesaba bağlı olmadığını teyit etmemize yardımcı olur."
 Feature.AppealsPortal.Description.ViolationInactive,Başka bir işlem gerekmediği için bu sorunu kapattık.
 Feature.AppealsPortal.Header.AppealAccepted,Gönderdiğin itirazı kabul ettik
 Feature.AppealsPortal.Header.AppealDenied,Gönderdiğin bir itirazı reddettik
@@ -1415,7 +1309,7 @@ Feature.AppealsPortal.Heading.AppealSubmitted,İtirazını aldık
 Feature.AppealsPortal.Heading.AppealTimeline,İtiraz zaman çizelgesi
 Feature.AppealsPortal.Heading.AppealUnavailable,İtiraz yapılamıyor
 Feature.AppealsPortal.Heading.MiscAppeal,
-Feature.AppealsPortal.Heading.VerifyIdentityToAppeal,İtiraz gönderebilmen için kimliğini doğrulayalım
+Feature.AppealsPortal.Heading.VerifyIdentityToAppeal,Bu karara itiraz edebilmen için kimliğini doğrulayalım
 Feature.AppealsPortal.Heading.ViolationsAndAppeals,İhlaller ve itirazlar
 Feature.AppealsPortal.Label.AccessoryDescription,Aksesuar Açıklaması
 Feature.AppealsPortal.Label.Account,Hesap
@@ -1439,7 +1333,6 @@ Feature.AppealsPortal.Label.ChatEvidenceId,Sohbet Kanıtı Kimliği
 Feature.AppealsPortal.Label.Cheating,Hile
 Feature.AppealsPortal.Label.ContentMaturity,İçerik Olgunluk Düzeyi Anketi Gönderimi
 Feature.AppealsPortal.Label.DecisionCategory,Ne tür bir karara itiraz etmek istiyorsun?
-Feature.AppealsPortal.Label.DisplayName,Görünen Ad
 Feature.AppealsPortal.Label.DropdownPlaceholder,Birini seç
 Feature.AppealsPortal.Label.EmailConfirmation,E-postanı onayla
 Feature.AppealsPortal.Label.EmailInput,E-postan
@@ -1449,7 +1342,6 @@ Feature.AppealsPortal.Label.Experience.Suspension,Sahip olduğum deneyim - Askı
 Feature.AppealsPortal.Label.ExperienceIOwnContentMaturity,
 Feature.AppealsPortal.Label.ExperienceIOwnSuspension,
 Feature.AppealsPortal.Label.ExperienceLinkPrompt,Deneyimin için bir bağlantı gir
-Feature.AppealsPortal.Label.ExploitDetected,Cihaz istismarı algılandı
 Feature.AppealsPortal.Label.Group,Grup
 Feature.AppealsPortal.Label.ID,Kimlik
 Feature.AppealsPortal.Label.IDArg,Kimlik: {id}
@@ -1463,7 +1355,6 @@ Feature.AppealsPortal.Label.LookName,Paylaşılan Avatar Adı
 Feature.AppealsPortal.Label.PlaceIDPrompt,Dünya kimliği nedir?
 Feature.AppealsPortal.Label.PlaceId,Dünya Kimliği
 Feature.AppealsPortal.Label.PlaceName,Dünya Adı
-Feature.AppealsPortal.Label.ProfileDescription,Profil Açıklaması
 Feature.AppealsPortal.Label.Reason,Sebep
 Feature.AppealsPortal.Label.ReportAndAppeals,İhlaller ve İtirazlar
 Feature.AppealsPortal.Label.Type.Asset,Varlık
@@ -1547,12 +1438,9 @@ Feature.Avatar.Action.CancelSelection,Seçimi iptal et
 Feature.Avatar.Action.Clear,Temizle
 Feature.Avatar.Action.ComposerPost,Paylaş
 Feature.Avatar.Action.ComposerPreviewAndPost,Ön İzle ve Paylaş
-Feature.Avatar.Action.CreateSet,
-Feature.Avatar.Action.CreateSetFirstRun,Set oluştur
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Varsayılan Görünüm
 Feature.Avatar.Action.Delete,Sil
-Feature.Avatar.Action.DeleteSet,Seti sil
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Profil Resmini Düzenle
 Feature.Avatar.Action.GoBack,
@@ -1570,7 +1458,6 @@ Feature.Avatar.Action.Pan,Kamerayı hareket ettir
 Feature.Avatar.Action.Posting,Paylaşılıyor
 Feature.Avatar.Action.RemoveAll,Tümünü Kaldır
 Feature.Avatar.Action.Rename,Yeniden Adlandır
-Feature.Avatar.Action.RenameSet,Seti yeniden adlandır
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Son kaydedilen avatarı geri yükle
 Feature.Avatar.Action.Revert,Geri Döndür
@@ -1635,9 +1522,6 @@ Feature.Avatar.Heading.Outfits,Kıyafetler
 Feature.Avatar.Heading.RenameCharacter,Karakterin Adını Değiştir
 Feature.Avatar.Heading.SaveCostume,Karakteri Kaydet
 Feature.Avatar.Heading.SelectToUpdate,Güncellemek İçin Seç
-Feature.Avatar.Heading.SetLimitReached,Set sınırına ulaşıldı
-Feature.Avatar.Heading.SetNameDuplicate,Yinelenen ad
-Feature.Avatar.Heading.SetNameNotAllowed,Ada izin verilmiyor
 Feature.Avatar.Heading.SharePublicAvatar,Avatarını paylaş
 Feature.Avatar.Heading.SortBy,Sıralama ölçütü
 Feature.Avatar.Heading.UsedName,Ad Kullanılmış
@@ -1662,8 +1546,6 @@ Feature.Avatar.Label.Add,Ekle
 Feature.Avatar.Label.AddEdit,Ekle/Düzenle
 Feature.Avatar.Label.AddManage,Ekle/Yönet
 Feature.Avatar.Label.AddManage2,
-Feature.Avatar.Label.AllAvatarSets,
-Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,Tüm Kafalar
 Feature.Avatar.Label.AnimationFullSet,Tam Set
 Feature.Avatar.Label.AvatarAdjustment,Avatar Ayarlaması
@@ -1731,7 +1613,6 @@ Feature.Avatar.Label.FullBody,Tüm Vücut
 Feature.Avatar.Label.FullMasks,Tam Maskeler
 Feature.Avatar.Label.FullPair,Tam Çift
 Feature.Avatar.Label.Gear,Teçhizat
-Feature.Avatar.Label.GenericSetError,Bir şeyler yanlış gitti. Lütfen tekrar dene.
 Feature.Avatar.Label.GetLookQuestion,Bu kıyafeti ücretsiz bir şekilde almak ister misin?
 Feature.Avatar.Label.GetOutfitMultiple,[{numItems}] öğeyi ücretsiz bir şekilde almak ister misin?
 Feature.Avatar.Label.GetOutfitOne,[1] öğeyi ücretsiz bir şekilde almak ister misin?
@@ -1799,8 +1680,6 @@ Feature.Avatar.Label.PPEViewFullButton,Tam Avatarı Görüntüle
 Feature.Avatar.Label.Pants,Pantolonlar
 Feature.Avatar.Label.PantsClassic,Pantolon Klasik
 Feature.Avatar.Label.Photobooth,Fotoğraf Kabini
-Feature.Avatar.Label.ProfileFrames,Çerçeveler
-Feature.Avatar.Label.ProfileFramesUnlockBanner,Plus ile çerçevelerin kilidini aç
 Feature.Avatar.Label.Props,Dekorlar
 Feature.Avatar.Label.Purchased,Satın Alınan
 Feature.Avatar.Label.QuickMenuCustomizeTitle,Özelleştirme Seçenekleri
@@ -1828,9 +1707,6 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Son Aramalar
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Son Görüntülenenler
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Şunun için alışverişe devam et:
 Feature.Avatar.Label.SelectItem,Öğe seç
-Feature.Avatar.Label.SetLimitReachedBody,En fazla {setLimit} setin olabilir. Yer açmak için birini sil
-Feature.Avatar.Label.SetNameDuplicateBody,"Bu ada sahip bir setin zaten var, farklı bir ad seç"
-Feature.Avatar.Label.SetNameNotAllowedBody,Lütfen başka bir ad seç
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Avatarları Pazar Yeri'nde Paylaş
 Feature.Avatar.Label.Shirt,Gömlek
 Feature.Avatar.Label.ShirtClassic,Gömlek Klasik
@@ -1976,7 +1852,6 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Avatarın için bir açıklama yaz
 Feature.Avatar.RevokedItems.BodyText,"{category} ""{item}"" öğesi bu kayıtlı avatardan kaldırıldı, bu nedenle ödediğin ilk tutarı iade ettik.{lineBreak}Daha fazla ayrıntı için gelen kutunu görüntüle."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Aşağıdaki öğeler bu kayıtlı avatardan kaldırıldı, bu nedenle ödediğin ilk tutarı iade ettik.{lineBreak}{items}{lineBreak}Daha fazla ayrıntı için gelen kutunu görüntüle."
 Feature.Avatar.RevokedItems.ViewInbox,Gelen Kutusunu Görüntüle
-Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,Makyajını katmanla
 Feature.Avatar.Title.AvatarRefinement,Avatar Düzeltme
 Feature.Avatar.Title.BulkDeleteMakeupLooks,{count} makyaj görünümü silinsin mi?
@@ -1988,7 +1863,6 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Tüm animasyonlar temizlensin m
 Feature.Avatar.Title.ClearBodyConfirmation,Vücut temizlensin mi?
 Feature.Avatar.Title.ClearClothesConfirmation,Tüm kıyafetler temizlensin mi?
 Feature.Avatar.Title.ClearMakeupConfirmation,Tüm makyaj temizlensin mi?
-Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Yinelenen Görünüm
 Feature.Avatar.Title.EnhancedAvatarHeads,Geliştirilmiş Avatar Kafaları
 Feature.Avatar.Title.GetOutfit,Kıyafet Al
@@ -2091,7 +1965,6 @@ Feature.Catalog.Action.ItemOptions,Öğe Seçenekleri
 Feature.Catalog.Action.LoadMore,Daha Fazlasını Yükle
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Ayrıntıları Aç
-Feature.Catalog.Action.Owned,Sahip olunan: {count}
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2147,11 +2020,9 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,Ayarlanabilir
-Feature.Catalog.Label.AdvancedMaterials,Gelişmiş malzemeler
 Feature.Catalog.Label.AllItems,Tüm Öğeler
 Feature.Catalog.Label.AlreadyOwned,Zaten sahip olunan öğe
 Feature.Catalog.Label.Animation,Animasyon
-Feature.Catalog.Label.Attributes,Özellikler
 Feature.Catalog.Label.Attribution,Şurada oluşturuldu:
 Feature.Catalog.Label.AvailableForSale,Satışa Hazır
 Feature.Catalog.Label.AvailableToPremiumMembers,Premium'a sahip olduğun için kullanılabilir
@@ -2197,8 +2068,6 @@ Feature.Catalog.Label.CustomizeAvatar,Avatarı Özelleştir
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Silersen bu eylemi geri alamazsın.
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
-Feature.Catalog.Label.Emissive,Yayıcı
-Feature.Catalog.Label.EmissiveInfo,"Yayıcı öğe parlar ve kendi ışığını yayar, böylece karanlık ortamlarda bile parlak ve görünür kalır."
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,Kaş
@@ -2266,14 +2135,13 @@ Feature.Catalog.Label.MostFavorited,En Çok Favorilenen
 Feature.Catalog.Label.MostPopular,En Popüler
 Feature.Catalog.Label.NA,
 Feature.Catalog.Label.NeckAccessories,Boyun Aksesuarları
-Feature.Catalog.Label.New,
+Feature.Catalog.Label.New,Yeni
 Feature.Catalog.Label.NewCollectibles,Yeni Toplanabilir Parçalar!
 Feature.Catalog.Label.No,Hayır
 Feature.Catalog.Label.NoLongerAvailable,Bu öğe artık mevcut değil
 Feature.Catalog.Label.NoSellersWarning,"Üzgünüz, bu öğeyi satan kimse yok"
 Feature.Catalog.Label.None,Hiçbiri
 Feature.Catalog.Label.NotAvailable,Bu öğe şu anda mevcut değil
-Feature.Catalog.Label.OfferApplied,Teklif Uygulandı
 Feature.Catalog.Label.OnSale,Satılık
 Feature.Catalog.Label.OriginalPrice,Orijinal Fiyat
 Feature.Catalog.Label.OutOfStock,
@@ -2283,8 +2151,6 @@ Feature.Catalog.Label.PBR.false,Temel
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,"Gelişmiş malzemeler içeren avatar öğeleri, gerçek hayatta olduğu gibi değişen ve parlayan ışık ve gölgelerle daha doğal görünmek için fiziksel tabanlı işleme (PBR) kullanır."
 Feature.Catalog.Label.PBRInfoTitle,Fiziksel Tabanlı İşleme (PBR)
-Feature.Catalog.Label.ParticleEffects,Parçacık Efektleri
-Feature.Catalog.Label.ParticleEffectsInfo,"Parçacık efektlerine sahip bir öğe, animasyonlu görseller yayarak dinamik ve canlı bir his sağlar."
 Feature.Catalog.Label.Placement,Yerleşim
 Feature.Catalog.Label.PrePremiumPrice,(Öğe Fiyatı:
 Feature.Catalog.Label.Premium,
@@ -2318,7 +2184,6 @@ Feature.Catalog.Label.SalePrice,Satış Fiyatı:
 Feature.Catalog.Label.SaveAsCharacter,Karakter olarak kaydet
 Feature.Catalog.Label.SaveOptions,Kaydetme Seçenekleri
 Feature.Catalog.Label.Search,
-Feature.Catalog.Label.SearchSuggestions,Şunu arıyor olabilirsin:
 Feature.Catalog.Label.SellCut,Kazancın:
 Feature.Catalog.Label.SellPageUpsell,Satış yapabilme yalnızca Roblox Plus üyeliğine sahip kullanıcılar için geçerlidir.
 Feature.Catalog.Label.SellSuccess,Öğe Satışta
@@ -2380,7 +2245,6 @@ Feature.Catalog.Message.CaptionLimit,
 Feature.Catalog.Message.Checkout.PurchaseFailed,Devam etmek için öğeleri incele veya kaldır
 Feature.Catalog.Message.Checkout.UnavailableItems,Bir veya daha fazla öğe satın alınamıyor. Devam etmeden önce lütfen bunları kaldır.
 Feature.Catalog.Message.CollectiblesInfo,"Koleksiyon öğeleri, belirli bir elde tutma süresinden sonra orijinal stok tükenmese bile kullanıcıdan kullanıcıya yeniden satılabilir. Roblox Plus aboneleri, Koleksiyon öğelerini yeniden satış için listeleyebilir."
-Feature.Catalog.Message.FTUXFavoritePillTooltip,Bunu favorilerine ekle
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox'taki en usta işi öğeleri keşfet
 Feature.Catalog.Message.HoldingPolicyL1,"Yeniden satışlar {days} güne kadar bekletilir. Öğe ancak bu bekletme süresi sona erdikten sonra yeniden satılabilir. Yalnızca Plus kullanıcıları, öğeleri bekletme süresine takılmadan yeniden satabilir."
 Feature.Catalog.Message.HoldingPolicyL2,"Satın alım sonrasında orijinal satışlar {purchaseDays} güne kadar askıya alınır. Öğe ancak bu bekletme süresi sona erdikten sonra yeniden satılabilir. Yeniden satışlar {resaleDays} güne kadar bekletilir. Yalnızca premium kullanıcılar, öğeleri bekletme süresine takılmadan yeniden satabilir."
@@ -2400,7 +2264,6 @@ Feature.Catalog.Response.ReportSubmitted,Bildirim gönderildi ve kısa süre iç
 Feature.Catalog.Response.TakenOffSaleSuccess,Başarıyla satıştan kaldırıldı
 Feature.Catalog.Search.LandingPage.Empty,"Renklere, türlere, temalara vb. göre ara"
 Feature.Catalog.Search.Placeholder,"Öğeleri, kıyafetleri ara"
-Feature.Catalog.Text.OfferAppliedToHighestItem,Teklif en yüksek fiyatlı öğeye uygulandı
 Feature.Catalog.Title.AvatarSharePanel,Avatarın paylaşmaya hazır
 Feature.Catalog.Title.Checkout,
 Feature.Catalog.Title.Checkout.ClearAllItemsOnAvatarTitle,Tüm öğeler temizlensin mi?
@@ -2420,13 +2283,11 @@ Feature.Catalog.Title.CheckoutPlural,{count} öğe için ödeme yap
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Alttaki katman yenisiyle değiştirilsin mi?
 Feature.Catalog.Title.RentalFtuxText,Bir ürünü 3 günlüğüne denemek için kirala
-Feature.Catalog.Toast.AddedToFavorites,Favorilere eklendi
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,{number} öğeye sahip olduğun için fiyat değişti
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar değerlendiriliyor
 Değerlendirme tamamlandıktan sonra avatarını paylaşabilirsin"
 Feature.Catalog.Toast.FavoritedLook,Avatar favorilere eklendi!
 Feature.Catalog.Toast.LinkCopied,"Bağlantı, panoya kopyalandı"
-Feature.Catalog.Toast.RemovedFromFavorites,Favorilerden kaldırıldı
 Feature.Catalog.Toast.UnfavoritedLook,Avatar favorilerden kaldırıldı
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
@@ -2512,13 +2373,10 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} sana yanıt verdi
 Feature.Chat.Label.Group.YouRepliedToThem,{DISPLAY_NAME} adlı kişiye yanıt verdin
 Feature.Chat.Label.GroupName,Grup adı
 Feature.Chat.Label.HoverToReplyTooltip,Yanıtlamak için üzerine gel
-Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,Yanıtlamak için uzun bas
 Feature.Chat.Label.Members,Üyeler
 Feature.Chat.Label.MessageNotAvailable,Bu mesaj gösterilemiyor
-Feature.Chat.Label.MuteInGameChatToastNotifications,Oyun içi sohbet bildirimlerini sustur
 Feature.Chat.Label.New,
-Feature.Chat.Label.NoChatFound,Sohbet bulunamadı
 Feature.Chat.Label.NoDescriptionYet,Henüz açıklama yok.
 Feature.Chat.Label.NotImplementedMessageType,Bu mesaj görüntülenemedi.
 Feature.Chat.Label.NotSet,Ayarlanmadı
@@ -2548,7 +2406,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 sa.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Mevcut değil
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı
@@ -2560,10 +2417,9 @@ Feature.Chat.Message.AddConnectionsPartyLimitSingular,Gizlilik ayarların nedeni
 Feature.Chat.Message.AddFriendsLimit,Sohbet grubunda en fazla {connectionsNum} arkadaş bulunabilir.
 Feature.Chat.Message.AddFriendsPartyLimit,Partide en fazla {connectionsNum} arkadaş bulunabilir.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,Gizlilik ayarların nedeniyle yalnızca 1 arkadaşınla parti oluşturabiliyorsun.
-Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} gösterilemeyen bir mesaj gönderdi
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Sohbet devre dışı. Gizlilik ayarlarından etkinleştirebilirsin.
 Feature.Chat.Message.ChatUnavailableRegion,"Sohbet, şu anda bulunduğun bölgede kullanılamıyor."
-Feature.Chat.Message.ChatUnavailableWithUser,Bu kullanıcı şu anda sohbeti kullanamıyor.
+Feature.Chat.Message.ChatUnavailableWithUser,Bu kullanıcı şu anda Sohbeti kullanamıyor.
 Feature.Chat.Message.Default,Bu sohbetteki bazı kişiler mesajını göremez.
 Feature.Chat.Message.EnableChat,Bağlantılarla sohbet etmek için Gizlilik Ayarları'nda sohbet ayarını aç.
 Feature.Chat.Message.EnableChat.FriendsRename,Arkadaşlarınla sohbet etmek için Gizlilik Ayarlarında sohbet ayarını aç.
@@ -2613,7 +2469,6 @@ Feature.Chat.ShareGameToChat.Recent,En Son Oynanan
 Feature.Chat.Text.NoConnections,Henüz bağlantı eklemedin. Başlamak için Roblox'ta bağlantı bul ve ekle.
 Feature.Chat.Text.NoFriends,Henüz arkadaş eklemedin. Başlamak için Roblox'ta arkadaşlarını bul ve ekle.
 Feature.Chat.Title.MuteChatNotifications,Oyun sırasında arkadaşlardan gelen sohbet bildirimlerini sustur
-Feature.Chat.Title.NewChat,Yeni sohbet
 Feature.Chat.Toast.Error.InvalidUserSelected,Listedeki bir veya daha fazla kişi eklenemiyor
 Feature.CommunityLinks.Description.CommunityDefault,Duyuruları ve daha fazlasını görüntülemek için {experienceName} deneyiminin resmî Guilded topluluğuna katıl!
 Feature.CommunityLinks.Heading.CommunityTitle,Topluluğa katıl
@@ -2632,18 +2487,22 @@ Feature.ContactUpsell.Action.AddEmailInstead,Bunun Yerine E-posta Ekle
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Header.UnlockVoiceChat,Sesli Sohbetin Kilidini Aç
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Arkadaşlarının Seni Bulmasına İzin Ver
+Feature.Contacts.Action.FindFriends,Arkadaş Bul
 Feature.Contacts.Action.Invite,Davet Et
 Feature.Contacts.Action.Search,Rehber'de Ara
+Feature.Contacts.Action.SyncContacts,Rehberi Senkronize Et
 Feature.Contacts.Description.AddFromContactsDescription,Roblox'ta bağlantı kurmak için kişiler ekle. Her iki kullanıcının da yaş kontrolü yapılmış ve 13 yaş üstü olması durumunda birbirinizin Güvenilir Etkileşim Ağlarına ekleneceksiniz.
 Feature.Contacts.Description.AddFromContactsTrustedFriends,Roblox'ta bağlantı kurmak için kişiler ekle. Her iki kullanıcının da yaş kontrolü tamamlanmış ve 13 yaş üstü olması durumunda güvenilir arkadaşlar olursunuz.
 Feature.Contacts.Description.ContactsList,Roblox'u kiminle keşfetmek istersin? Roblox'ta arkadaş olmak için ona bir davet bağlantısı gönder!
 Feature.Contacts.Description.ContactsListDescription,Daha fazla eğlencenin kapısını aralamak için etkileşim ağına bağlantılar ekle veya kişilerine etkileşim ağına katılma talebi gönder.
 Feature.Contacts.Description.ContactsMixedList,Roblox'u kiminle keşfetmek istersin? Roblox'ta arkadaş ekle veya rehberindeki kişilere bir arkadaşlık isteği bağlantısı gönder.
 Feature.Contacts.Description.ContactsProfileView,Rehberindeki {contactName} adlı kişi Roblox'ta. Arkadaş olduğunda bu kişinin tam profilini görebileceksin.
-Feature.Contacts.FindFriendsBanner.Button,Arkadaş Bul
+Feature.Contacts.Description.ExploreWithFriends,Bir sonraki deneyimine tanıdığın biriyle katıl
+Feature.Contacts.FindFriendsBanner.Button,
 Feature.Contacts.FindFriendsBanner.Description,Telefon numaranı ekleyerek arkadaşlarından hangilerinin Roblox'ta olduğunu gör.
 Feature.Contacts.FindFriendsBanner.DescriptionPV,Roblox'ta olan kişiler uygun olduğunda burada görünecek.
 Feature.Contacts.FindFriendsBanner.DescriptionV2,Bir telefon numarası ekleyerek arkadaşlarınla bağlantı kurmamıza yardımcı ol.
+Feature.Contacts.Heading.ExploreWithFriends,Arkadaşlarınla Keşfet
 Feature.Contacts.Heading.HelpFriendsFindYou,Arkadaşlarının Seni Bulmasına Yardım Et
 Feature.Contacts.Heading.LetFriendsFindYou,
 Feature.Contacts.Heading.SettingSaved,Ayar kaydedildi.
@@ -2749,7 +2608,6 @@ Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Bu deneyimi oynayarak 
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,Satın al
 Feature.ExperienceDetails.PlayButtonText.Play,Oyna
-Feature.ExperienceDetails.PlayButtonText.PlayDemo,Demoyu Oyna
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Kilidini Aç
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -2766,7 +2624,6 @@ Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityRegionalComplianc
 Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated,Derecelendirilmemiş olduğundan bu deneyime erişilemiyor
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom,Bu deneyim {device} cihazı için şu anda mevcut değil
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault,Bu deneyim mevcut cihazın için şu anda mevcut değil
-Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted,Bu deneyim bu cihazda satın alınamaz
 Feature.ExperienceDetails.UnplayableError.GameUnapproved,
 Feature.ExperienceDetails.UnplayableError.IncorrectConfiguration,
 Feature.ExperienceDetails.UnplayableError.InsufficientPermissionFriendsOnly,Şu anda bu deneyime erişimin yok
@@ -2786,6 +2643,7 @@ Feature.ExperienceDetails.UpdateMaturitySettingModal.Label.Title,
 Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
+Feature.FAE.Action.UnlockTrial,Denemenin kilidini aç
 Feature.FAE.CheckIfYouCanJoinGame,Haydi bu oyuna katılabilecek misin öğrenelim.
 Feature.FAE.Label.ChatWithFriends,Arkadaşlarla sohbet et
 Feature.FAE.Label.DayLeft,
@@ -2830,7 +2688,6 @@ Feature.Friends.Action.ShareQR,QR Kodunu Paylaş
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,Engellemeyi Kaldır
 Feature.Friends.Action.Unfriend,Arkadaşlıktan Çıkar
-Feature.Friends.Action.ViewMore,Daha fazlasını görüntüle
 Feature.Friends.Action.ViewPlatformProfile,Oyuncu Kartını Görüntüle
 Feature.Friends.Button.AddViaLink,Bağlantı üzerinden ekle
 Feature.Friends.Button.GotIt,
@@ -2865,9 +2722,7 @@ Feature.Friends.Error.UserBlockedError,Bu işlemi gerçekleştirmen engellendi.
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha'yı geçemedin.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
 Feature.Friends.FriendingTooltipBody,"Bazı arkadaşlık istekleri, seni telefon numarandan bulan kullanıcılardan gelebilir. Arkadaş olmadan önce onları tanıdığından emin ol."
-Feature.Friends.Heading.Activities,Etkinlikler
 Feature.Friends.Heading.FilterBy,Filtrele
-Feature.Friends.Heading.Friends,
 Feature.Friends.Heading.MyConnections,Arkadaşlarım
 Feature.Friends.Label.AddConnectionVPC,Bu kişiyi Güvenilir Etkileşim Ağına eklemek için ebeveyn iznine ihtiyacın var.
 Feature.Friends.Label.AddConnectionsHint,Roblox'u eğlenceli kılan şey bağlantılardır!
@@ -3004,19 +2859,9 @@ Feature.Friends.TrustedFriend.AddBack.Header,Güvenilir arkadaş olma talebi
 Feature.Friends.TrustedFriend.Info.Modal.Header,Yeni güvenilir arkadaş
 Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Güvenilir arkadaş olarak ekle
 Feature.Friends.TrustedFriend.Label.AddTrustedFriends,Güvenilir arkadaşlara ekle
-Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenilir Arkadaş Ekle
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
-Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
-Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
-Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
-Feature.FriendsActivityFeed.Timestamp.Now,
-Feature.FriendsActivityFeed.Timestamp.OneDayAbbreviated,
-Feature.FriendsActivityFeed.Timestamp.OneHourAbbreviated,
-Feature.FriendsActivityFeed.Timestamp.OneMinuteAbbreviated,1 dk.
-Feature.FriendsActivityFeed.Timestamp.OneWeekAbbreviated,1 hft.
-Feature.FriendsActivityFeed.Timestamp.WeeksAbbreviatedPlural,{num_weeks} hft.
 Feature.FriendsMenu.Label.SearchForConnections,
 Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} Bağlantı seçildi
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} Bağlantı seçildi
@@ -3116,6 +2961,7 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Geçici bir hata nedeniyle
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bu sponsorlu içeriği, sana alakalı içerik sunmak için kullandığımız konum, cihaz bilgileri, yaş ve platform davranışı gibi farklı faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı."
+Feature.GameDetails.Message.SuggestLessExperiences,Bunun gibi daha az deneyim önereceğiz
 Feature.GameDetails.Message.SuggestLessOften,Bunu daha az sıklıkta önereceğiz
 Feature.GameDetails.RatingPercentOnly,%{percentRating} Derecelendirme
 Feature.GameDetails.Toast.LinkCopied,
@@ -3143,7 +2989,7 @@ Feature.GamepadDisconnect.Label.Message,"""%s"" adlı kullanıcının kontrol ci
 Feature.GamepadDisconnect.Label.MessageGeneric,"""%s"" adlı kullanıcının kontrol cihazı bağlantısı kesildi. Lütfen kontrol cihazı yeniden bağla."
 Feature.GamepadDisconnect.Label.Title,Kontrol cihazı Yok
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Talebi iptal et
+Feature.Groups.Action.CancelRequest,İsteği İptal Et
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Topluluk oluştur
@@ -3337,6 +3183,7 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} kaldı
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
+Feature.Landing.Heading.LandingSlogan,30 milyondan fazla deneyimi keşfet
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Uygunsuz Dil
 Feature.Landing.Label.BrazilContentDescriptorViolence,Şiddet
 Feature.Landing.Label.BrazilContentRatingLogoTitle,TAVSİYE EDİLEN YAŞ SINIRLAMASI: 12 YAŞ
@@ -3357,7 +3204,6 @@ Feature.MarketplaceFAEUpsell.ActionBar.PrimaryButton.Text,
 Feature.MarketplaceFAEUpsell.Message.AgeCheckCompleteItem,Yaş kontrolü tamamlandı. Yakında {itemName} envanterinde olacak.
 Feature.Moderation.Link.SupportForm,Destek Formu
 Feature.Moments.Action.AddMusic,Müzik Ekle
-Feature.Moments.Action.AddSticker,Çıkartma Ekle
 Feature.Moments.Action.AddText,Metin Ekle
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
@@ -3365,7 +3211,6 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Genişlet
-Feature.Moments.Action.GenerateText,
 Feature.Moments.Action.Hide,Ayrıntıları gizle
 Feature.Moments.Action.HowToCapture,Nasıl Yakalama Yapılır?
 Feature.Moments.Action.Join,
@@ -3387,7 +3232,6 @@ Feature.Moments.Description.HowToCaptureStep2,Yakalama denetimlerini etkinleşti
 Feature.Moments.Description.HowToCaptureStep3,Oynanışın fotoğraflarını ve videolarını yakala
 Feature.Moments.Description.LeaveMomentsCreation,Tüm değişikliklerini kaybedeceksin ancak yakalanan bu ekran görüntüsünü <b>Yakalananlar</b> galerinde bulabilirsin.
 Feature.Moments.Description.NoMusicResults,Müzik bulunamadı
-Feature.Moments.Description.NonInfiniteScrollEndBody,Anlar'da bir durma noktasına ulaştın. İzlemeye devam etmek için aşağıya dokun.
 Feature.Moments.Description.PublishMoment,Anını anlat
 Feature.Moments.Description.TooManyUploads,Bugün çok fazla video yükledin. Yarın tekrar dene.
 Feature.Moments.Disclaimer.EveryoneMoments,Anlardaki herkes yayınlananları görüntüleyebilir
@@ -3396,9 +3240,7 @@ Feature.Moments.Label.AttemptingJoinExperience,{placeName} dünyasına katılmay
 Feature.Moments.Label.CaptureLibrary,Yakalama kütüphanen
 Feature.Moments.Label.DeleteMomentBody,Bir An silindikten sonra onu kurtarmak mümkün olmaz.
 Feature.Moments.Label.DeleteMomentTitle,An silinsin mi?
-Feature.Moments.Label.Error,
-Feature.Moments.Label.FeedEndBody,Daha sonra tekrar kontrol et veya kendi Anını oluştur.
-Feature.Moments.Label.FeedEndTitle,Yeni bir şey yok
+Feature.Moments.Label.Error,Bir şeyler yanlış gitti. Lütfen tekrar dene.
 Feature.Moments.Label.FeedFailedToLoad,Sayfa yüklenemedi
 Feature.Moments.Label.FeedMyMoments,Anlarım
 Feature.Moments.Label.FeedTrending,
@@ -3406,38 +3248,26 @@ Feature.Moments.Label.HowToUseCaptureTitle,Yakalama nasıl kullanılır?
 Feature.Moments.Label.LinkCopied,Bağlantı kopyalandı.
 Feature.Moments.Label.LinkCopyFailed,Bağlantı kopyalanamadı.
 Feature.Moments.Label.ModeratedRodeoBody,Topluluk Standartlarımıza aykırı olduğu için bu Anı kaldırdık. Anlarının görünür kalması için kuralları öğrenip uygulamaya özen göstermelisin.
-Feature.Moments.Label.MomentDeletedBody,
-Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Bir şeyler ters gitti.
 Feature.Moments.Label.MomentFailedToPostTitle,An paylaşılamadı
 Feature.Moments.Label.MomentPublishedBody,Anın başarıyla yayımlandı.
 Feature.Moments.Label.MomentPublishedTitle,An yayımlandı
-Feature.Moments.Label.MomentUnavailable,An kullanılamıyor
 Feature.Moments.Label.MomentUnavailableDefault,Bu An kullanılamıyor.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Şimdilik yeni bir şey yok
 Feature.Moments.Label.Photos,Fotoğraflar
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
 Feature.Moments.Label.PublishingRodeoBody,Bu işlem pek uzun sürmez.
 Feature.Moments.Label.Reactions,Tepkiler
-Feature.Moments.Label.ReportReason.BreaksRules,Bu paylaşım kurallara aykırı
-Feature.Moments.Label.ReportReason.IntellectualProperty,Bu paylaşım fikrî mülkiyetimi ihlal ediyor
 Feature.Moments.Label.ReportSubmittedBody,Geri dönüşün için teşekkürler.
 Feature.Moments.Label.ReportSubmittedTitle,Rapor gönderildi
-Feature.Moments.Label.RobloxPartnerContent,Roblox iş ortağı içeriği
 Feature.Moments.Label.RodeoPublishingTitle,Anın yayınlanıyor
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Roblox'taki Anlar
 Feature.Moments.Label.StayFriendlyModeration,Dostça davranalım
-Feature.Moments.Label.TextGeneratedBody,Yapay zekâ tarafından oluşturulan bindirme ve açıklama eklendi
-Feature.Moments.Label.TextGeneratedTitle,Metin Oluşturuldu
-Feature.Moments.Label.TextGenerationFailedBody,Metin oluşturulamadı. Lütfen tekrar dene.
-Feature.Moments.Label.TextGenerationFailedTitle,Oluşturma Başarısız
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
-Feature.Moments.Title.ReportPost,Paylaşımı raporla
 Feature.MusicPlayer.Action.GoToSongDetails,Şarkı Detaylarına Git
 Feature.MusicPlayer.Action.Report,
 Feature.NotApproved.Action.Continue,
@@ -3447,7 +3277,7 @@ Feature.NotApproved.Action.ReportMistake,Bir hata raporla
 Feature.NotApproved.Action.RuleConfirmation,Kuralları bildiğimi ve bunlara uyacağımı kabul ediyorum.
 Feature.NotApproved.Action.UserAgree,
 Feature.NotApproved.Action.ViewLess,Daha azını görüntüle
-Feature.NotApproved.Action.ViewMore,
+Feature.NotApproved.Action.ViewMore,Daha fazlasını görüntüle
 Feature.NotApproved.Action.ViewRules,Kuralları görüntüle
 Feature.NotApproved.Action.ViewRulesUGCAvatarGuidelines,KTOİ avatar yönergelerindeki kuralları görüntüle
 Feature.NotApproved.Description.AppealViaSupport,Bu karara itiraz etmek için {link}destek birimiyle iletişime geç.{linkEnd}
@@ -3539,7 +3369,7 @@ Feature.NotApproved.Heading.BannedOneDayOnly,1 Gün Yasaklandı
 Feature.NotApproved.Heading.BannedOneHour,1 Saatliğine Yasaklandı
 Feature.NotApproved.Heading.BannedOneMinute,1 Dakikalığına Yasaklandı
 Feature.NotApproved.Heading.BannedOneSecond,1 Saniyeliğine Yasaklandı
-Feature.NotApproved.Heading.Error,Bilinmeyen bir sorun meydana geldi. Lütfen daha sonra tekrar dene.
+Feature.NotApproved.Heading.Error,
 Feature.NotApproved.Heading.ReactivationNotice,Oynamaya devam edebilirsin
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,Herkesi hoş karşıla
 Feature.NotApproved.Heading.RuleExplanation.Dating,Arkadaşlık sınırlarını aşma
@@ -3563,7 +3393,6 @@ Feature.NotApproved.Heading.SuspendedSevenDays,7 günlüğüne askıya alındı
 Feature.NotApproved.Heading.SuspendedSixHours,6 saatliğine askıya alındı
 Feature.NotApproved.Heading.SuspendedSixMonths,6 aylığına askıya alındı
 Feature.NotApproved.Heading.SuspendedSixtyDays,60 günlüğüne askıya alındı
-Feature.NotApproved.Heading.SuspendedThirtyDays,30 gün süreyle askıya alındı
 Feature.NotApproved.Heading.SuspendedThreeDays,3 günlüğüne askıya alındı
 Feature.NotApproved.Heading.Warning,
 Feature.NotApproved.Label.AbuseType.AccountTheft,Hesap Çalınması
@@ -3675,7 +3504,6 @@ Feature.NotApproved.Label.EmailReactivationNoticeUA,Bu hesabı yeniden etkinleş
 Feature.NotApproved.Label.EmailVerificationButtonText,E-postayı Doğrula
 Feature.NotApproved.Label.EmailVerificationNotice,Hesabın yetkisiz ödemeler nedeniyle askıya alındı. Hesabının kilidini açmak için e-posta adresini doğrulaman gerekiyor.
 Feature.NotApproved.Label.Evidence.VoiceRecording,{date} tarihinde {time} saatindeki {experienceName} deneyiminde sesli sohbet konuşması
-Feature.NotApproved.Label.ExploitDetected,İstismar algılandı
 Feature.NotApproved.Label.Hours,{hours}:{minutes} saat
 Feature.NotApproved.Label.LatestActivity,İncelediğimiz en son etkinlik
 Feature.NotApproved.Label.LoadingImage,Görsel yükleniyor
@@ -3770,7 +3598,7 @@ Feature.NotApproved.Label.Sublabel.CommerceBeautyAndPersonalCare,Güzellik ve Ki
 Feature.NotApproved.Label.Sublabel.CommerceDigitalProducts,Dijital Ürünler
 Feature.NotApproved.Label.Sublabel.CommerceDocumentsFinancialInstrumentsAndEconomicOpportunity,"Belgeler, Finansal Araçlar ve Ekonomik Fırsat"
 Feature.NotApproved.Label.Sublabel.CommerceElectronics,Elektronik
-Feature.NotApproved.Label.Sublabel.CommerceEvents,
+Feature.NotApproved.Label.Sublabel.CommerceEvents,Etkinlikler
 Feature.NotApproved.Label.Sublabel.CommerceFoodAndBeverages,Yiyecek ve İçecek
 Feature.NotApproved.Label.Sublabel.CommerceGambling,Kumar
 Feature.NotApproved.Label.Sublabel.CommerceGiftsCardsorDiscountCards,Hediye Kartları veya İndirim Kartları
@@ -3789,7 +3617,6 @@ Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,Tütün ve Entoj
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Oyuncaklar ve Oyunlar
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Silahlar, Ateşli Silahlar ve İlgili Ürünler"
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
-Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,Spam Yayınlama
 Feature.NotApproved.Label.Sublabel.FraudAbuseOfTheAffiliateSystem,Roblox'a Bağlı Kuruluşlar Sistemine Yönelik Kötüye Kullanım
 Feature.NotApproved.Label.Sublabel.FraudAttemptedUnauthorizedPaymentMethodUse,Yetkisiz Ödeme Yöntemi Kullanma Girişimi
@@ -3876,7 +3703,7 @@ Feature.PlatformRestriction.Action.Continue,
 Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,Roblox'u kullanabilmek için ebeveyn iznine ihtiyacın var.
 Feature.PlatformRestriction.Title.AskParent,
-Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Action.AddFriend,Arkadaş ekle
 Feature.PlayerSearchResults.Label.FromSearch,Aramadan
 Feature.PlayerSearchResults.Label.KeywordTooShort,Lütfen en az 3 karakter gir
 Feature.PlayerSearchResults.Label.NewUsername,Yeni kullanıcı adı
@@ -3917,11 +3744,11 @@ Feature.Profile.Description.EnterNicknameTextbox,Takma adını gir
 Feature.Profile.Description.InspectAndBuy,Görünümlerini görmek ve satın almak için tıkla.
 Feature.Profile.Description.NicknamePrivacy,Bunu yalnızca {displayName} görecek.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,Bunu sadece bu kullanıcı görecek.
-Feature.Profile.Description.QrCodeDescription,Başkalarının Roblox'ta bağlantı kurmak için QR kodunu okutmasına izin ver. Canlı QR okutma yoluyla bağlanan ve yaş kontrolü tamamlanmış 13 yaş üstü kullanıcılar birbirlerinin Güvenilir Arkadaşı olacak.
+Feature.Profile.Description.QrCodeDescription,Başkalarının Roblox'ta bağlantı kurmak için QR kodunu taramasına izin ver. Canlı QR taraması yoluyla bağlanan ve yaş kontrolü yapılmış 13 yaş üstü kullanıcılar birbirlerinin Güvenilir Etkileşim Ağlarına eklenecek.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Başkalarının Roblox'ta bağlantı kurmak için QR kodunu okutmasına izin ver. Canlı QR okutma yoluyla bağlanan ve yaş kontrolü tamamlanmış 13 yaş ve üstü kullanıcılar birbirlerinin güvenilir arkadaşları olacak.
 Feature.Profile.Description.QrCodeScanning,Başkalarının seni hızlı bir şekilde arkadaş olarak ekleyebilmeleri için QR Tarayıcı ile Roblox QR kodunu taramaları için arkadaşlarına izin ver!
-Feature.Profile.Description.RecognizeConnectionsByCustomName,Özel bir ad ayarlayarak arkadaşlarını daha kolay tanı. Rehberinden içe aktarılan adları ve özel adları yalnızca sen görebilirsin.
-Feature.Profile.Description.RecognizeFriendsByCustomName,
+Feature.Profile.Description.RecognizeConnectionsByCustomName,Özel adlar ayarlayarak bağlantılarını daha kolay tanıyabilirsin. Rehberinden içe aktarılan adları ve özel adları yalnızca sen görebilirsin.
+Feature.Profile.Description.RecognizeFriendsByCustomName,Özel bir ad ayarlayarak arkadaşlarını daha kolay tanı. Rehberinden içe aktarılan adları ve özel adları yalnızca sen görebilirsin.
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Tanıdığın insanlara QR kodunu tarayarak seni ekleme imkânı ver.
 Feature.Profile.Description.SelectNicknameDropdown,Bir ad seç
@@ -3936,7 +3763,6 @@ Feature.Profile.Description.SocialNetworksCaptionFriends,Şu anda arkadaşların
 Feature.Profile.Description.SocialNetworksCaptionNoOne,Şu anda kimse tarafından görülemez.
 Feature.Profile.Description.UsernameInsufficientFunds,Kullanıcı adını değiştirmek için {rbx}{icon} daha gerekli. Daha fazla Robux satın almak ister misin?
 Feature.Profile.Description.UsernamePrice,1.000
-Feature.Profile.Header.BuyWholeLook,Tüm görünümü satın al
 Feature.Profile.Header.InspectAndBuy,{username} Adlı Kişinin Avatarı
 Feature.Profile.Header.InspectAndBuy.BuySection,Toplam ({numberOfSelectedItems}/{totalNumberOfItems} öğe)
 Feature.Profile.Header.InspectAndBuy.Tooltip,Avatar satın al
@@ -3944,7 +3770,7 @@ Feature.Profile.Header.Inventory,
 Feature.Profile.Header.Store,
 Feature.Profile.Heading.AgedUpDisplayName,
 Feature.Profile.Heading.AgedUpDisplayNameUpdated,Ad Güncellendi.
-Feature.Profile.Heading.DisplayName,
+Feature.Profile.Heading.DisplayName,Görünen Ad
 Feature.Profile.Heading.DisplayNameUpdated,Görünen Ad Güncellendi
 Feature.Profile.Heading.EditAgedUpDisplayName,Adı Düzenle
 Feature.Profile.Heading.EditDisplayName,Görünen Adı Düzenle
@@ -4001,8 +3827,8 @@ Feature.Profile.Message.InvalidAliasError,Ad kaydedilemedi. Başka bir ad dene.
 Feature.Profile.Message.NoExperienceAccess,"{name}, erişiminin olmadığı bir deneyimde."
 Feature.Profile.Message.QRLoadFailed,Yüklenemedi.
 Feature.Profile.Message.QRNofificationRequest,QR kodunu kullanarak sana bir arkadaşlık isteği gönderdi
-Feature.Profile.Message.QRNotificationRequest,QR kodunu kullanarak sana bir arkadaşlık talebi gönderdi
-Feature.Profile.Message.QRNotificationRequest.FriendsRename,
+Feature.Profile.Message.QRNotificationRequest,oluşturduğun QR kodunu kullanarak sana bağlantı talebi gönderdi
+Feature.Profile.Message.QRNotificationRequest.FriendsRename,QR kodunu kullanarak sana bir arkadaşlık talebi gönderdi
 Feature.Profile.Title.QrScanner,QR Tarayıcı
 Feature.Profile.Tooltip.CurrencyTransfer.Body,Artık Robux gönderebilirsin.
 Feature.Profile.Tooltip.CustomNameProfile,Özel bir ad ayarlayarak arkadaşlarını daha kolay tanı.
@@ -4016,7 +3842,6 @@ Feature.QualtricsSurveyPrompt.Action.Cancel,
 Feature.QualtricsSurveyPrompt.Action.Close,"Hayır, Teşekkürler"
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
-Feature.QualtricsSurveyPrompt.Action.Next,
 Feature.QualtricsSurveyPrompt.Action.Retry,
 Feature.QualtricsSurveyPrompt.Action.Send,
 Feature.QualtricsSurveyPrompt.Description.Error,
@@ -4037,7 +3862,6 @@ Feature.ReportAbuse.Action.Submit,
 Feature.ReportAbuse.Action.TextMute,Sohbetlerden engelle: {name}
 Feature.ReportAbuse.DSAIllegal.ReportLink,AB Dijital Hizmetler Yasası uyarınca yasa dışı içeriği bildir.
 Feature.ReportAbuse.DSAIllegal.ReportPageTitle,Yasa Dışı İçeriği Bildir
-Feature.ReportAbuse.Description.IpInfringementReportModal,"<b>Bu kodu kaydet.</b> Buna, <b>Yaratıcı Merkezi</b>'ndeki <b>Fikrî Mülkiyet</b> araçlarını kullanarak veya e-posta yoluyla <b>Kaldırma İsteğini</b> tamamlamak için ihtiyacın olacak <i>(Kullanım Koşulları'ndaki ayrıntılara bak)</i>. <b>Bu kod yalnızca 48 saat geçerli olacak.</b>"
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Label.CategoryBullyingV2,"Zorbalık, Taciz, Ayrımcılık"
 Feature.ReportAbuse.Label.CategoryContent,"Uygunsuz İçerik - Dünya, Görüntü, Model"
@@ -4053,6 +3877,7 @@ Feature.ReportAbuse.Label.Confirmation.Subheading,"Yaptığın bildirimi kısa s
 Feature.ReportAbuse.Label.Confirmation.Title,Bildirimde Bulunduğun İçin Teşekkürler
 Feature.ReportAbuse.Label.FinishChatReport,Sohbet raporunu tamamla
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,Yasa dışı veya çocuklara zararlı içeriği raporla
+Feature.ReportAbuse.Label.NoChatMessagesFound,Sohbet mesajı bulunamadı
 Feature.ReportAbuse.Label.Optional,İsteğe bağlı
 Feature.ReportAbuse.Label.PleaseSelectOne,Lütfen birini seç.
 Feature.ReportAbuse.Label.Report,
@@ -4067,7 +3892,6 @@ Feature.ReportAbuse.Label.UserTextMuted,{name} adlı kişiyi sohbetlerden engell
 Feature.ReportAbuse.Label.UserTextMutedError,{name} adlı kişiyi sohbetlerden engelleyemedik
 Feature.ReportAbuse.Label.WhatWasWrong,Sorun nedir?
 Feature.ReportAbuse.Label.WhereDidItHappen,Olay nerede gerçekleşti?
-Feature.ReportAbuse.Label.YourReportCode,Benzersiz raporlama kodun:
 Feature.ReportAbuse.Message.ChatLineReportingInfoText,"Bildirimin, seçtiğin mesaj da dâhil olmak üzere bu kanaldaki tüm mesajları dâhil edecek."
 Feature.ReportAbuse.Message.ErrorBEDUIFetchFailed,Bildirimin yüklenemedi. Lütfen tekrar dene.
 Feature.ReportAbuse.Message.ErrorSubmit,Bildirin gönderilirken bir sorun oluştu.
@@ -4105,13 +3929,12 @@ Feature.ReportAbuse.ProblemDescription.Spamming,Spam veya tekrarlı mesaj gönde
 Feature.ReportAbuse.ProblemDescription.Swearing,"Hakaret, kaba dil, küfür"
 Feature.ReportAbuse.ProblemDescription.Violence,Aşırı şiddet veya vahşet
 Feature.ReportAbuse.Title.SelectInSceneContinueYourReport,Raporlamana devam et
-Feature.ReportAbuse.Title.SelectInSceneIpReport,FM İhlali raporlamanı başlattığın için teşekkür ederiz
 Feature.RobloxSubscription.Action.Subscribe,Abone Ol
 Feature.RobloxSubscription.Action.TryItForFree,Ücretsiz dene
 Feature.RobloxSubscription.Body.AlreadySubscribed,Plus aboneliğin zaten oyun içi avantajlar sağlıyor.
 Feature.RobloxSubscription.Body.GenericError,İşlemi şu anda tamamlayamadık. Lütfen tekrar dene.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Bu abonelik bu cihazda satın alınamaz.
-Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını doğrula ve bizden sana bir teşekkür hediyesi olarak 1 haftalık ücretsiz Roblox Plus kullanım hakkı kazan. Bu ücretsiz denemeden yararlanmak için herhangi bir ödeme şekli gerekmez.
+Feature.RobloxSubscription.Description.AgeCheckTrial,Plus avantajlarının kilidini açmak ve yaşına uygun özelliklere erişmek için yaş kontrolünü tamamla.
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
@@ -4120,92 +3943,68 @@ Feature.RobloxSubscription.Label.BlackbirdTr,Ücretsiz Robux gönder
 Feature.RobloxSubscription.Label.BlackbirdUpsellBanner,Roblox Plus ile yüzde {discountPercentage} indirimden yararlan
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"Oyun içi öğeler, avatarlar ve daha fazlasında yüzde {discountPercent} indirim"
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex} {periodType} sonrasında bu öğelerde yüzde {discountPercent} indirim
-Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""Devam Et"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""Ücretsiz dene"" düğmesine tıklayarak {linkStart}Roblox Abonelik Koşulları{linkEnd}'nı kabul etmiş olursun. Ücretsiz deneme süren 1 ay içinde sona erer ve ondan sonra her ay senden otomatik olarak ücret alınır. Dilediğin zaman iptal edebilirsin."
 Feature.RobloxSubscription.Label.FreeTrialText,Ücretsiz deneme al
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 ay ücretsiz,{boldEnd} sonrasında {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,ay
 Feature.RobloxSubscription.Label.months,
-Feature.RobloxSubscription.Title.AgeCheckTrial,1 haftalık ücretsiz Plus kullanım hakkı kazan
+Feature.RobloxSubscription.Title.AgeCheckTrial,Bir haftalık ücretsiz Plus kullanım hakkı kazan
 Feature.RobloxSubscription.Title.AlreadySubscribed,İyi haberlerimiz var
 Feature.RobloxSubscription.Title.GenericError,Bir şeyler ters gitti
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus'a geç
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus burada kullanılamıyor
 Feature.SafetyDashboard.Heading.AccountStatus,Hesap durumu
-Feature.Schools.Action.AlreadyGraduated,Zaten mezun oldum
-Feature.Schools.Action.CantFindSchool,Okulunu bulamıyor musun?
 Feature.Schools.Action.Continue,
-Feature.Schools.Action.LeaveSchool,Okulu kaldır
-Feature.Schools.Action.Ok,
+Feature.Schools.Action.LearnMore,
 Feature.Schools.Action.PrivacyPolicy,
-Feature.Schools.Action.Remove,
-Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
-Feature.Schools.Body.EnterCode,"UNiDAYS, tek kullanımlık kodunu içeren bir e-postayı {user_email} adresine gönderdi. Okulunu onaylamak için kodu aşağıya gir."
-Feature.Schools.Body.UnidaysShare,E-posta adresin başkaları tarafından görülmeyecek.
-Feature.Schools.Body.UnidaysTerms,"Okul e-posta adresini doğrulamak için UNiDAYS ile iş birliği yapıyoruz. ""Devam Et"" düğmesine tıklayarak UNiDAYS'in hizmet koşullarını ve gizlilik politikasını kabul etmiş olursun."
-Feature.Schools.Caption.RemovedOnGraduate,Mezun olduğunda {school} okulundan çıkarılacaksın.
-Feature.Schools.Description.CantFindSchoolNotify,Okulun Roblox'ta olduğunda seni bilgilendireceğiz.
-Feature.Schools.Description.CantVerifySchool,Sağladığın bilgilere dayanarak okulunu doğrulayamadık.
-Feature.Schools.Description.ConnectWithFellowAlumni,Diğer mezunlarla bağlantı kur
-Feature.Schools.Description.FeatureAvailableBody,Okulundan arkadaşlarını bul.
-Feature.Schools.Description.InviteFriendsExclusiveItem,Doğrulama için başkalarını davet et. Okulun kullanıma sunulduğunda ücretsiz bir öğe kazan.
-Feature.Schools.Description.InviteFriendsUnlockSooner,Okulunun mezunlar grubunun daha kısa sürede kullanıma sunulmasına yardımcı ol.
-Feature.Schools.Description.InviteOthersToVerify,Başkalarını doğrulamaya davet et
-Feature.Schools.Description.MoreVerifiedAlumniNeeded,Daha fazla doğrulanmış mezun gerekiyor
-Feature.Schools.Description.NotAvailableInRegion,"Okul özelliği, bulunduğun bölgede henüz kullanılamıyor."
-Feature.Schools.Description.RemoveSchoolBody,Okuluna yeniden katılmak için okul e-posta adresini yeniden doğrulaman gerekecek. Aldığın tüm ödül öğeleri silinecek.
-Feature.Schools.Description.SchoolIsLiveBody,
-Feature.Schools.Description.UpsellDisclaimer,Okulun yalnızca aynı okuldan insanlar tarafından görülebilir. Okulunu istediğin zaman güncelleyebilir veya kaldırabilirsin.
-Feature.Schools.Description.UpsellTagline,"Okulundaki doğrulanmış öğrencileri keşfet, onlarla bağlantı kur ve oyna."
-Feature.Schools.Description.WaitlistAlumniBody,Artık tamamen hazırsın. Okulunun mezunlar grubu kullanıma sunulur sunulmaz seni bilgilendireceğiz.
-Feature.Schools.Description.WaitlistBody,Kurucu üyesin. Okulunuzu birlikte kullanıma sunmak için sınıf arkadaşlarını davet et.
-Feature.Schools.Error.AlreadyLinked,Bu e-posta adresi zaten başka bir hesaba bağlı.
-Feature.Schools.Error.InvalidEmail,Geçerli bir okul e-posta adresi gir.
-Feature.Schools.Error.InvalidPassCode,Bu kod hatalı.
-Feature.Schools.Error.NotSchoolEmail,Lütfen okulun tarafından verilen bir e-posta adresini kullan.
-Feature.Schools.Error.OtpAlreadyUsed,Bu kod zaten kullanılmış.
-Feature.Schools.Error.OtpExpired,Bu kodun süresi doldu.
-Feature.Schools.Error.OtpInvalidFormat,Bu kodun formatı geçersiz.
-Feature.Schools.Error.OtpTooManyAttempts,Bugün maksimum girişim sayısına ulaştın.
-Feature.Schools.Error.SomethingWentWrong,
+Feature.Schools.Description.AddTrustedFriendsFromSchool,Okulundan güvenilir arkadaş ekle
+Feature.Schools.Description.CatchingWhatsTrendy,Trend olanı yakalama
+Feature.Schools.Description.EasilyAddTrustedFriends,Güvenilir arkadaşları kolayca ekle
+Feature.Schools.Description.FeatureAvailableBody,Arkadaşlarını kolayca bul.
+Feature.Schools.Description.FindFriendsAtSchool,Okuluna giden arkadaşlarını bul
+Feature.Schools.Description.InviteFriendsExclusiveItem,Doğrulama için daha fazla arkadaş davet et. Özel öğeni daha çabuk kazan.
+Feature.Schools.Description.InviteFriendsUnlockSooner,Daha fazla arkadaşını doğrulamaya davet ederek kilidini daha çabuk aç.
+Feature.Schools.Description.MoreVerifiedAlumniNeeded,Kilidini açmak için daha fazla doğrulanmış mezun gerekiyor
+Feature.Schools.Description.MoreVerifiedStudentsNeeded,Kilidini açmak için daha fazla doğrulanmış öğrenci gerekiyor
+Feature.Schools.Description.SchoolIsLiveBody,Okul arkadaşlarınla bağlantı kur
+Feature.Schools.Description.SeeWhatsPopularAtSchool,Okulunda neler popülermiş gör
+Feature.Schools.Description.ShowSchoolOnProfile,Okulunu profilinde göster
+Feature.Schools.Description.WaitlistAlumniBody,Artık tamamen hazırsın. Okulunun mezunlar grubu yayına girer girmez seni bilgilendireceğiz.
+Feature.Schools.Description.WaitlistBody,"Tebrikler, artık hazırsın. Okulunun kilidi açıldığında ücretsiz öğe kullanılabilir olacak."
 Feature.Schools.Filter.AllYears,Tüm yıllar
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Mezuniyet yılı
-Feature.Schools.GiftForYou,Senin için bir hediye
-Feature.Schools.Heading.AddSchool,Okul ekle
-Feature.Schools.Heading.AddSchoolNow,Okuluna katıl
-Feature.Schools.Heading.CantFindSchool,Okulunu bulamıyoruz
-Feature.Schools.Heading.CantVerifySchool,Okulunu doğrulayamıyoruz
-Feature.Schools.Heading.CheckYourEmail,E-postanı kontrol et
-Feature.Schools.Heading.EnterSchoolEmail,Okul e-posta adresini gir
-Feature.Schools.Heading.JoinClassmates,Sınıf arkadaşlarına katıl
-Feature.Schools.Heading.MembersWithCount,{count} üye
-Feature.Schools.Heading.RemoveYourSchool,Okulunu kaldır
-Feature.Schools.Heading.SchoolIsLive,Okulun artık açık
-Feature.Schools.Heading.SelectGraduationYear,Mezuniyet yılını seç
-Feature.Schools.Heading.ShareWithFriends,Arkadaşlarla paylaş
-Feature.Schools.Heading.ThanksForInterest,İlgin için teşekkürler
-Feature.Schools.Heading.YouJoinedSchool,{school} adlı okula katıldın!
-Feature.Schools.Heading.YourFounderReward,Kurucu ödülün
-Feature.Schools.Label.AlumniGroupLaunches,Mezunlar grubu kullanıma sunuluyor
-Feature.Schools.Label.Classmates,Sınıf arkadaşları
-Feature.Schools.Label.ConfirmSchool,Okul seç
+Feature.Schools.Heading.AddSchoolNow,Okulunu ekle
+Feature.Schools.Heading.HelpUnlockYourSchool,Okulunun kilidini açmaya yardımcı ol
+Feature.Schools.Heading.MembersWithCount,Üyeler ({count})
+Feature.Schools.Heading.SchoolIsLive,Okulun aktif
 Feature.Schools.Label.ConnectWithClassmates,Sınıf arkadaşlarınla bağlantı kur
-Feature.Schools.Label.DidntGetCode,
-Feature.Schools.Label.MoreToUnlockSchool,Okulunu kullanıma sunmak için {count} kişi daha gerekli
-Feature.Schools.Label.ResendInSeconds,{time} içinde tekrar gönder
-Feature.Schools.Label.SchoolLaunches,Okul kullanıma sunuluyor
-Feature.Schools.Label.SchoolVerified,Doğrulandın
-Feature.Schools.Label.Search,
-Feature.Schools.Label.UnlockAlumniGroup,Mezun grubu beklemede
-Feature.Schools.Label.UpsellPerkFindFriends,Okulundan arkadaşlarını bul
-Feature.Schools.Label.UpsellPerkPlayAndChat,Kimin çevrimiçi olduğunu gör ve kolayca birlikte oyna
-Feature.Schools.Label.UpsellPerkTrends,Okulundaki trendleri keşfet
-Feature.Schools.Placeholder.Email,Öğrenci e-postası
-Feature.Schools.Placeholder.SixDigitCode,6 basamaklı kod
-Feature.Schools.RewardGiftBody,Okulunu doğruladığın için teşekkürler. Yeni öğeni Avatar > Aksesuar > Arka Taraf altında bulabilirsin.
+Feature.Schools.Label.DiscoverSchoolTrends,Okulundaki trendleri keşfet
+Feature.Schools.Label.GainSchoolBadge,Profilinde okul rozeti kazan
+Feature.Schools.Label.MoreToUnlockSchool,Okulun kilidini açmak için {count} kişi daha gerek
+Feature.Schools.Label.SchoolBadge,Okul rozeti
+Feature.Schools.Label.SchoolTrends,Okul trendleri
+Feature.Schools.Label.SchoolVerified,Okul doğrulandı
+Feature.Schools.Label.UnlockAlumniGroup,Mezun grubunun kilidini aç
+Feature.Schools.Upsell.Action,
+Feature.Schools.Upsell.Body.Disclaimer,Okulun yalnızca aynı okuldan kişiler tarafından görülebilir. Okulunu istediğin zaman güncelleyebilir veya kaldırabilirsin.
+Feature.Schools.Upsell.Body.UpsellTagline,Okulundan daha fazla öğrenci katıldıkça yeni özellikleri ilk öğrenenlerden olmak için.
+Feature.Schools.Upsell.Heading.AddSchool,Okul ekle
+Feature.Schools.Upsell.Perk.FindFriends,Okulundan arkadaşlarını bul
+Feature.Schools.Upsell.Perk.PlayAndChat,Okul arkadaşlarınla oyna ve sohbet et
+Feature.Schools.Upsell.Perk.Trends,Okul trendlerini keşfet
+Feature.Schools.VerifyEmail.Action.Continue,
+Feature.Schools.VerifyEmail.Body.UnidaysShare,"Roblox, okulunu doğrulamak için öğrenci e-postanı paylaşacak. E-posta adresin başkaları tarafından görülmeyecek."
+Feature.Schools.VerifyEmail.Body.UnidaysTerms,"""Devam et""i seçerek hizmet koşullarını kabul etmiş olursun."
+Feature.Schools.VerifyEmail.Error.AlreadyLinked,Bu e-posta adresi zaten başka bir hesaba bağlı
+Feature.Schools.VerifyEmail.Error.Generic,
+Feature.Schools.VerifyEmail.Error.InvalidEmail,Lütfen geçerli bir e-posta adresi gir
+Feature.Schools.VerifyEmail.Error.NotSchoolEmail,Lütfen okulun tarafından verilen bir e-posta adresini kullan
+Feature.Schools.VerifyEmail.Header.AddSchool,
+Feature.Schools.VerifyEmail.Heading.ConfirmStudent,Öğrenci olduğunu onayla
+Feature.Schools.VerifyEmail.Placeholder.Email,Amanda@stanford.edu
 Feature.Screentime.Content.ScreentimeLimitDialog,Günlük ekran süresi sınırına ulaştın. Roblox'a erişebilmek için yarın tekrar gel.
 Feature.Screentime.Description.HeartbeatConsecutiveFailure,İç hata. Lütfen tekrar giriş yapmayı dene.
 Feature.Screentime.Description.MoreScreentimeDescription,Ekran süresi sınırını geçici olarak ileriye taşır
@@ -4348,9 +4147,6 @@ Feature.Squads.Description.Invited,
 Feature.Squads.Description.InvitedToExperience,Biri seni zaten bir deneyime davet ediyor. Davet sona erdikten sonra tekrar deneyebilirsin.
 Feature.Squads.Description.JoinAnotherParty,Şu anda etkin bir Partidesin. Şu anki Partiden ayrılıp bu Partiye geçmek istiyor musun?
 Feature.Squads.Description.JoinWithLowMemory,"Cihazının belleği düşük. Ses olmadan katılmak, Roblox'un çökmesini önleyecek."
-Feature.Squads.Description.LuckyRecommendationRevealed,Tüm grup katılabilir
-Feature.Squads.Description.LuckyRecommendationRolling,Grubun için uygun bir oyun bulunuyor
-Feature.Squads.Description.LuckyRecommendationRow,Haydi başlayalım
 Feature.Squads.Description.ManyPeopleActive,{userCount} etkin kişi
 Feature.Squads.Description.NoResponse,Yanıt Yok
 Feature.Squads.Description.NotGoing,Gitmiyor
@@ -4390,9 +4186,6 @@ Feature.Squads.Label.JoinParty,Partiye katıl
 Feature.Squads.Label.LeaveParty,Gruptan ayrıl
 Feature.Squads.Label.Loading,
 Feature.Squads.Label.LowMemory,Düşük bellek
-Feature.Squads.Label.LuckyRecommendationRevealed,Bunu dene
-Feature.Squads.Label.LuckyRecommendationRolling,Bir oyun seçiliyor
-Feature.Squads.Label.LuckyRecommendationRow,Ne oynayacağından emin değil misin?
 Feature.Squads.Label.MultiplePeopleJoinedYourParty,Partine birden fazla kişi katıldı
 Feature.Squads.Label.MuteMic,Mikrofonu sustur
 Feature.Squads.Label.Party,
@@ -4462,15 +4255,6 @@ Feature.Toast.VoteError.AssetNotVoteable,Deneyim oylanmayabilir.
 Feature.Toast.VoteError.Default,Eylem kullanılamıyor.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Çok hızlı oy veriyorsun.
 Feature.Toast.VoteError.PlayGame,Değerlendirmeden önce bu deneyimi ziyaret etmelisin.
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Tekrarlanan veya ciddi kural ihlali nedeniyle bu oyunu oynaman yasaklandı.
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Davranışın kuralları ihlal ettiği için bu oyunu oynayamazsın.
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox bu oyuna erişimini yasakladı
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Day,Roblox bu oyuna erişimini 1 günlüğüne askıya aldı
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Days,Roblox bu oyuna erişimini {number} günlüğüne askıya aldı
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hour,Roblox bu oyuna erişimini 1 saatliğine askıya aldı
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox bu oyuna erişimini {number} saatliğine askıya aldı
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox bu oyuna erişimini 1 dakikalığına askıya aldı
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox bu oyuna erişimini {number} dakikalığına askıya aldı
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Sesli Sohbet için Telefon ekle
 Feature.VerificationUpsell.Action.ChangeEmail,E-posta Adresini Değiştir
@@ -4592,18 +4376,15 @@ Feature.VirtualEvents.UnfollowEvent,Etkinliği Takip Etmeyi Bırak
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
-Features.Transfers.Action.TurnOnTwoStepVerification,2 Aşamalı Doğrulamayı Aç
 Features.Transfers.Action.VPC.Ask,
 Features.Transfers.Action.VPC.AskParentBodyReceive,Robux kabul edebilmek için ebeveyn iznine ihtiyacın var.
 Features.Transfers.Action.VPC.AskParentBodySend,Robux gönderebilmek için ebeveyn iznine ihtiyacın var.
 Features.Transfers.Action.VPC.AskParentTitle,
 Features.Transfers.Body.DailyLimitExceededError,Günlük Robux gönderme sınırını aştın. Tekrar denemek için daha sonra kontrol et.
-Features.Transfers.Body.DailyLimitTwoStepVerificationUpsell,Günlük Robux gönderme limitine ulaştın. Limiti yükseltip yükseltemeyeceğini görmek için 2 aşamalı doğrulama özelliğini aç.
 Features.Transfers.Body.ExpiredTransferError,Hiçbir işlem yapılmaması nedeniyle @{username} tarafından gönderilen Robux'un süresi doldu.
 Features.Transfers.Body.GenericReceiveError,Hesabın şu anda Robux kabul edemiyor.
 Features.Transfers.Body.GenericSentError,Bir şeyler ters gitti ve Robux gönderilmedi. Bağlantını kontrol edip tekrar dene.
 Features.Transfers.Body.MonthlyLimitExceededError,Aylık Robux gönderme sınırını aştın. Tekrar denemek için daha sonra kontrol et.
-Features.Transfers.Body.MonthlyLimitTwoStepVerificationUpsell,Aylık Robux gönderme limitine ulaştın. Limiti yükseltip yükseltemeyeceğini görmek için 2 aşamalı doğrulama özelliğini aç.
 Features.Transfers.Body.ReceiverLimitHitError,Kullanıcı şu anda bu tutarı alamıyor. Daha az gönder veya daha sonra tekrar dene.
 Features.Transfers.Body.TransferAmountBelowMinimumError,En az {minAmount} Robux gönder.
 Features.Transfers.Body.TransferAmountExceedsMaximumError,En fazla {maxAmount} Robux gönderebilirsin.
@@ -4649,7 +4430,6 @@ IAPExperience.InsufficientRobux.Action.RobuxStore,Robux Mağazası'na Git
 IAPExperience.InsufficientRobux.Text.BuyRobux,Bu öğeyi ancak {robux} ile satın alabilirsin
 IAPExperience.InsufficientRobux.Text.CurrentBalance,Mevcut Bakiye
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,
-IAPExperience.InsufficientRobux.Text.MissingRobux,Eksik Robux
 IAPExperience.InsufficientRobux.Text.YouNeed,{robux} Robux'a daha ihtiyacın var. Lütfen daha fazla Robux Paketi satın alıp deneyime dön.
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
@@ -4720,6 +4500,7 @@ IAPExperience.PurchasePrompt.Label.GenericDiscountNoPercent,İndirim
 IAPExperience.PurchasePrompt.Label.Subtotal,Ara Toplam
 IAPExperience.PurchasePrompt.Label.SubtotalWithItemCount,Ara toplam ({itemCount} öğe)
 IAPExperience.PurchasePrompt.Label.Total,
+IAPExperience.PurchasePrompt.Label.TotalPrice,Toplam Fiyat
 IAPExperience.PurchasePrompt.Label.TotalPriceV2,Toplam fiyat
 IAPExperience.PurchasePrompt.Text.BuyItemQuestion,"""{name}"" satın almak ister misin?"
 IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning,Lütfen eğlenceni ve tüketimini aşırılığa kaçmadan ve mantıklı bir şekilde yap. {name} satın almak ister misin?
@@ -4781,19 +4562,6 @@ IAPExperience.U13Confirm.Title.Warning,Uyarı!
 InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.FAQWebviewTitle,Ses SSS
-InGame.ConnectionError.Action.JoinNewServer,Yeni sunucuya katıl
-InGame.ConnectionError.Action.JoinTheLine,Sıraya katıl
-InGame.ConnectionError.Action.Restart,Yeniden Başlat
-InGame.ConnectionError.Description.DontWantToWait,Beklemek istemiyor musun?
-InGame.ConnectionError.Description.FriendsServerIsFullJoiningNewServer,Arkadaşının sunucusu dolu. Yeni sunucuya katılıyorsun.
-InGame.ConnectionError.Description.FriendsServerIsFullWaitingToJoin,Arkadaşının sunucusu dolu. Katılmak için bekleniyor.
-InGame.ConnectionError.Description.WantToJoinYourFriend,Arkadaşına katılmak ister misin?
-InGame.ConnectionError.Heading.VRDisconnected,Başlık Bağlantısı Kesildi
-InGame.ConnectionError.Joining,Sunucuya katılıyor
-InGame.ConnectionError.Message.RestartApp,Oynamaya devam etmek için uygulamayı yeniden başlat.
-InGame.ConnectionError.PlacelaunchGameEnded,Bu deneyim sona erdi veya bir sistem hatası nedeniyle sunucu beklenmedik bir şekilde kullanılamaz duruma geldi
-InGame.ConnectionError.PlacelaunchHttpError,Bir Http hatası oluştu. Lütfen istemciyi kapatıp tekrar dene.
-InGame.ConnectionError.Queue,{POSITION}. sıradasın
 InGame.EmotesMenu.ErrorMessageAnimationPlaying,İfadeleri bu eylem sırasında oynatamazsın.
 InGame.EmotesMenu.ErrorMessageNotSupported,Burada İfade kullanamazsın.
 InGame.EmotesMenu.ErrorMessageSwitchToR15,İfadeleri oynatmak için R15 avatarına geç.
@@ -4814,7 +4582,6 @@ InGame.UnknownNamespace.GameChat_ChatCommandsTeller_WhisperCommand,/whisper <spe
 InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage,Etkileşim ağında bulunan {RBX_NAME} deneyime katıldı.
 InGame.UnknownNamespace.GameChat_PrivateMessaging_CannotWhisperToSelf,Kendinle bir özel mesaj kanalı açamazsın.
 InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam,"Artık ""{RBX_NAME}"" takımındasın."
-InstantApps.Shortcuts.Label.AddToHomeMenuItem,Ana Ekrana Ekle
 Luobu.Authentication.Login.Label.AntiAddictionText,
 Luobu.Authentication.Login.Label.NetworkLicense,
 Luobu.Authentication.Message.UnknownErrorTryAgain,Bilinmeyen bir hata oluştu. Lütfen uygulamayı yeniden başlatmayı dene.

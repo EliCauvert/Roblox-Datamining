@@ -1,7 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local stateLayerModeModule = require(foundation.Enums.StateLayerMode)
 local controlStateModule = require(foundation.Enums.ControlState)
 
@@ -11,8 +11,8 @@ function guiStateToStateLayer(p0) --[[ line: 15 ]]
 end
 
 function stateLayerModeToTokenNamespace(p1) --[[ line: 27 ]]
-	-- upvalues: stateLayerModeModule (ref), colorNamespaceModule (ref)
-	return if p1 == stateLayerModeModule.Default then colorNamespaceModule.Color elseif p1 == stateLayerModeModule.Inverse then colorNamespaceModule.Inverse elseif p1 == stateLayerModeModule.Light then colorNamespaceModule.LightMode elseif p1 == stateLayerModeModule.Dark then colorNamespaceModule.DarkMode else colorNamespaceModule.Color
+	-- upvalues: stateLayerModeModule (ref), colorModeModule (ref)
+	return if p1 == stateLayerModeModule.Default then colorModeModule.Color elseif p1 == stateLayerModeModule.Inverse then colorModeModule.Inverse elseif p1 == stateLayerModeModule.Light then colorModeModule.LightMode elseif p1 == stateLayerModeModule.Dark then colorModeModule.DarkMode else colorModeModule.Color
 end
 
 return function(p2, p3, p4) --[[ line: 41 | named "getStateLayerStyle" ]]

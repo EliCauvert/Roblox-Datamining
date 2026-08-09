@@ -9,60 +9,68 @@ local useScaledValueModule = require(foundation.Utility.useScaledValue)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local constantsModule = require(foundation.Constants)
+local flagsModule = require(foundation.Utility.Flags)
 local t = {
 	testId = "--foundation-input-field",
 	size = require(foundation.Enums.InputLabelSize).Small
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 45 | named "InputField" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useScaledValueModule (ref), constantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), inputLabelModule (ref), hintTextModule (ref)
-	local var10 = withDefaultsModule(p0, t)
-	local var11 = useScaledValueModule(constantsModule.DEFAULT_INPUT_FIELD_WIDTH_PIXELS)
-	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function() --[[ line: 50 ]]
-		-- upvalues: var12 (ref)
-		if var12.current and not var12.current.getIsFocused() then
-			var12.current.focus()
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 46 | named "InputField" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), useScaledValueModule (ref), constantsModule (ref), reactModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), inputLabelModule (ref), hintTextModule (ref)
+	local var11 = withDefaultsModule(p0, t)
+	local var12 = useScaledValueModule(constantsModule.DEFAULT_INPUT_FIELD_WIDTH_PIXELS)
+	local var13 = reactModule.useRef(nil)
+	local var14 = reactModule.useCallback(function() --[[ line: 51 ]]
+		-- upvalues: var13 (ref)
+		if var13.current and not var13.current.getIsFocused() then
+			var13.current.focus()
 		end
 	end, {})
-	reactModule.useImperativeHandle(var10.textBoxRef, function() --[[ line: 56 ]]
-		-- upvalues: var12 (ref)
-		return if var12.current then {
-			focus = var12.current.focus,
-			releaseFocus = var12.current.releaseFocus,
-			getIsFocused = var12.current.getIsFocused,
-			getCursorPosition = var12.current.getCursorPosition,
-			getSelectionStart = var12.current.getSelectionStart,
-			setCursorPosition = var12.current.setCursorPosition,
-			setSelectionStart = var12.current.setSelectionStart
+	local var15 = if flagsModule.FoundationTextInputsBetaUpdate then nil else reactModule.useCallback(function(p2) --[[ line: 59 ]]
+		-- upvalues: var13 (ref)
+		if var13.current then
+			var13.current.setHover(p2)
+		end
+	end, {})
+	reactModule.useImperativeHandle(var11.textBoxRef, function() --[[ line: 65 ]]
+		-- upvalues: var13 (ref)
+		return if var13.current then {
+			focus = var13.current.focus,
+			releaseFocus = var13.current.releaseFocus,
+			getIsFocused = var13.current.getIsFocused,
+			getCursorPosition = var13.current.getCursorPosition,
+			getSelectionStart = var13.current.getSelectionStart,
+			setCursorPosition = var13.current.setCursorPosition,
+			setSelectionStart = var13.current.setSelectionStart
 		} else nil
 	end, {})
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var10, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var11, {
 		tag = "col gap-small auto-y",
-		Size = if not var10.width then UDim2.fromOffset(var11, 0) else UDim2.new(var10.width, UDim.new(0, 0)),
+		Size = if not var11.width then UDim2.fromOffset(var12, 0) else UDim2.new(var11.width, UDim.new(0, 0)),
 		ref = p1
 	}), {
-		Label = if #var10.label > 0 then reactModule.createElement(inputLabelModule, {
+		Label = if #var11.label > 0 then reactModule.createElement(inputLabelModule, {
 			LayoutOrder = 1,
-			Text = var10.label,
-			size = var10.size,
-			isRequired = var10.isRequired,
-			isDisabled = var10.isDisabled,
-			onActivated = var13,
-			testId = `{var10.testId}--label`
+			Text = var11.label,
+			size = var11.size,
+			isRequired = var11.isRequired,
+			isDisabled = var11.isDisabled,
+			onActivated = var14,
+			onHover = if flagsModule.FoundationTextInputsBetaUpdate then nil else var15,
+			testId = `{var11.testId}--label`
 		}) else nil,
 		InputWrapper = reactModule.createElement(viewModule, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = 2,
-			testId = `{var10.testId}--input-wrapper`
-		}, { Input = var10.input(var12) }),
-		Hint = if var10.hint then reactModule.createElement(hintTextModule, {
+			testId = `{var11.testId}--input-wrapper`
+		}, { Input = var11.input(var13) }),
+		Hint = if var11.hint then reactModule.createElement(hintTextModule, {
 			LayoutOrder = 3,
-			text = var10.hint,
-			hasError = var10.hasError,
-			isDisabled = var10.isDisabled,
-			testId = `{var10.testId}--hint`
+			text = var11.hint,
+			hasError = var11.hasError,
+			isDisabled = var11.isDisabled,
+			testId = `{var11.testId}--hint`
 		}) else nil
 	})
 end))
