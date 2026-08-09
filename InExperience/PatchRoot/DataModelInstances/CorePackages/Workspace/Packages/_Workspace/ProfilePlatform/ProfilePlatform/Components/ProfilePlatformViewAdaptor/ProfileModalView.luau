@@ -11,7 +11,7 @@ local displayModule = require(parent.Display)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local view = require(parent.Foundation).View
 
-return function(p0) --[[ line: 31 ]]
+return function(p0) --[[ line: 30 ]]
 	-- upvalues: useStyle (ref), fFlagEnableLeftNavOnConsole (ref), useSignalState (ref), displayModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
 	local var4 = useStyle()
 	local var5 = if fFlagEnableLeftNavOnConsole then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
@@ -32,15 +32,15 @@ return function(p0) --[[ line: 31 ]]
 				BorderSizePixel = 0,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.fromScale(1, 0),
-				Size = if p0.fillPane then UDim2.fromScale(1, 1) else UDim2.new(0, p0.viewWidth, 1, 0),
+				Size = UDim2.new(0, p0.viewWidth, 1, 0),
 				BackgroundTransparency = var4.Theme.BackgroundDefault.Transparency,
 				BackgroundColor3 = var4.Theme.BackgroundDefault.Color
 			},
 			customEventHandlers = {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = reactModule.useMemo(function() --[[ line: 60 ]]
+					handler = reactModule.useMemo(function() --[[ line: 59 ]]
 						-- upvalues: inputHandlersModule (copy), p0 (ref)
-						return inputHandlersModule.onRelease(function(p1) --[[ line: 61 ]]
+						return inputHandlersModule.onRelease(function(p1) --[[ line: 60 ]]
 							-- upvalues: p0 (copy)
 							p1:cancel()
 							p0.navigateBack()
@@ -49,7 +49,7 @@ return function(p0) --[[ line: 31 ]]
 				}
 			}
 		}, {
-			reactModule.useCallback(function(p2) --[[ line: 50 ]]
+			reactModule.useCallback(function(p2) --[[ line: 49 ]]
 				-- upvalues: reactModule (copy)
 				return reactModule.createElement("TextButton", {
 					BackgroundTransparency = 1,

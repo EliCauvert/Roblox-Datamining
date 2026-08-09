@@ -6,5 +6,6 @@
 	Utils = require(script.Utils),
 	Thunks = require(script.Thunks),
 	Requests = require(script.Requests),
+	Stores = require(script.Stores),
 	Handlers = require(script.Handlers)
 }

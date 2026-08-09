@@ -7,13 +7,14 @@ local iconSize = foundationModule.Enums.IconSize
 local text = foundationModule.Text
 local shouldShowPriceLabel = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
+local fFlagAXHideInspectAndBuyPriceIfUnavailable = require(parent.AvatarExperienceFlags).FFlagAXHideInspectAndBuyPriceIfUnavailable
 
-return function(p0) --[[ line: 35 | named "SubheaderLabelPrice" ]]
-	-- upvalues: reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref), text (ref), icon (ref), iconSize (ref)
-	local var3 = reactModule.useMemo(function() --[[ line: 36 ]]
+return function(p0) --[[ line: 37 | named "SubheaderLabelPrice" ]]
+	-- upvalues: fFlagAXHideInspectAndBuyPriceIfUnavailable (ref), reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref), text (ref), icon (ref), iconSize (ref)
+	local var3 = if fFlagAXHideInspectAndBuyPriceIfUnavailable then reactModule.useMemo(function() --[[ line: 39 ]]
 		-- upvalues: shouldShowPriceLabel (copy), p0 (ref)
 		return shouldShowPriceLabel(p0.priceStatus)
-	end, { p0.priceStatus })
+	end, { p0.priceStatus }) else true
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "auto-xy row align-y-center align-x-left gap-xxsmall",

@@ -44,8 +44,8 @@ local t_3 = {
 	[catalogItemCardItemInfoEnumModule.DynamicHead] = t.DYNAMIC_HEAD
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 128 ]]
-	-- upvalues: useTokens (ref), t_3 (ref), t_2 (ref), t_1 (ref), reactModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurables2Option (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref)
+return reactModule.forwardRef(function(p0, p1) --[[ line: 124 ]]
+	-- upvalues: useTokens (ref), t_3 (ref), t_2 (ref), t_1 (ref), reactModule (ref), itemCardHeader (ref), itemCardHeaderCornersOverlay (ref), itemCardBadge (ref), itemCardStatus (ref), itemCardIcon (ref), catalogRowItemCardFooterModule (ref), fFlagAXDurablesForMIS (ref), fFlagAXEnableTimedOptionsForCatalogRowCard (ref), fFlagAXDurables2Option (ref)
 	local var12 = useTokens()
 	local var13 = if p0.itemInfo then t_3[p0.itemInfo] else nil
 	local var14 = if p0.itemType then t_2[p0.itemType] else nil
@@ -94,7 +94,6 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 128 ]]
 			itemSubType = p0.itemSubType,
 			creatorHasVerifiedBadge = if p0.creator then p0.creator.verified else nil,
 			priceLineContent = p0.priceLineContent,
-			itemStatusInCheckout = if fFlagAXDurables2Option then p0.itemStatusInCheckout else nil,
 			expirationTime = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.expirationTime else nil,
 			isOwned = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.isOwned else nil,
 			timedOptions = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.timedOptions else nil,
@@ -103,13 +102,10 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 128 ]]
 			setSelectedTimedOptionPrice = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.setSelectedTimedOptionPrice else nil,
 			selectedTimedOptionIndexInReducer = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.selectedTimedOptionIndexInReducer else nil,
 			wearTimeSelectedOptionInList = if fFlagAXDurablesForMIS or fFlagAXEnableTimedOptionsForCatalogRowCard then p0.wearTimeSelectedOptionInList else nil,
+			wearTimeOptionButton = if fFlagAXDurables2Option then p0.wearTimeOptionButton else nil,
 			onRemove = if fFlagAXDurables2Option then p0.onRemove else nil,
-			hideTimedOptionSelections = if fFlagAXDurables2Option then p0.hideTimedOptionSelections else nil,
 			Size = p0.footerSize,
-			AutomaticSize = if p0.footerAutomaticSize then p0.footerAutomaticSize else Enum.AutomaticSize.Y,
-			offersLocalized = if fFlagAXDurables2Option then p0.offersLocalized else nil,
-			offerApplied = if fFlagAXDurables2Option then p0.offerApplied else nil,
-			showOfferPillTooltip = if fFlagAXDurables2Option then p0.showOfferPillTooltip else nil
+			AutomaticSize = if p0.footerAutomaticSize then p0.footerAutomaticSize else Enum.AutomaticSize.Y
 		})
 	})
 end)

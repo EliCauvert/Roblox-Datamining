@@ -1,7 +1,5 @@
-﻿local _ = require(script.Content)
-
-return {
+﻿return {
 	Root = require(script.Popover),
 	Anchor = require(script.Anchor),
-	Content = require(script.PopoverContentProxy)
+	Content = if require(script:FindFirstAncestor("Foundation").Utility.Flags).FoundationPopoverPluginSupport then require(script.PopoverContentProxy) else require(script.Content)
 }

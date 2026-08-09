@@ -4,7 +4,6 @@ return {
 	displayName = "Screentime",
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

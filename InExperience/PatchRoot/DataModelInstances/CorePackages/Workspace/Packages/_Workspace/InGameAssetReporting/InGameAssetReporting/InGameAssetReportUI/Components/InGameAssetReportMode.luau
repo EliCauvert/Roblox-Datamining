@@ -18,18 +18,17 @@ local inGameAssetReportPortraitHeaderFooterModule = require(inGameAssetReporting
 local screenshotHighlighterModule = require(inGameAssetReporting.InGameAssetReportUI.Components.ScreenshotHighlighter)
 local buildReportModule = require(inGameAssetReporting.Utility.buildReport)
 local inGameAssetReportAnalyticsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.InGameAssetReportAnalytics)
-local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 
-local var17 = function(p0) --[[ line: 45 ]]
+local var17 = function(p0) --[[ line: 43 ]]
 	return p0.point
 end
 
-local var18 = function(p1) --[[ line: 49 ]]
+local var18 = function(p1) --[[ line: 47 ]]
 	return p1.interpretationResult
 end
 
-return function(p2) --[[ line: 53 ]]
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), sceneAnalysisModule (ref), experienceStateCaptureService (ref), screenshotManager (ref), cryoModule (ref), var18 (ref), inGameAssetReportAnalyticsModule (ref), var17 (ref), buildReportModule (ref), playersService (ref), userInputService (ref), withLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), inGameAssetReportPortraitHeaderFooterModule (ref), inGameAssetReportLandscapeHeaderModule (ref), screenshotHighlighterModule (ref), inGameAssetReportErrorModalModule (ref), inGameAssetReportSubmitDialogModule (ref), inGameAssetReportCompleteModalModule (ref)
+return function(p2) --[[ line: 51 ]]
+	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), sceneAnalysisModule (ref), experienceStateCaptureService (ref), screenshotManager (ref), cryoModule (ref), var18 (ref), inGameAssetReportAnalyticsModule (ref), var17 (ref), buildReportModule (ref), playersService (ref), userInputService (ref), withLocalization (ref), inGameAssetReportPortraitHeaderFooterModule (ref), inGameAssetReportLandscapeHeaderModule (ref), screenshotHighlighterModule (ref), inGameAssetReportErrorModalModule (ref), inGameAssetReportSubmitDialogModule (ref), inGameAssetReportCompleteModalModule (ref)
 	local var19, var20 = reactModule.useState({})
 	local var21, var22 = reactModule.useState({})
 	local var23, var24 = reactModule.useState(false)
@@ -43,7 +42,7 @@ return function(p2) --[[ line: 53 ]]
 	local var39, var40 = reactModule.useState(nil)
 	local viewportSize = game.Workspace.CurrentCamera.ViewportSize
 	local isSmallPortraitMode = p2.getIsSmallPortraitMode(viewportSize)
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	reactModule.useEffect(function() --[[ line: 70 ]]
 		-- upvalues: var38 (ref), constantsModule (copy)
 		var38({
 			type = constantsModule.AnalyticsActions.AccumulateForTimeSpent,
@@ -54,13 +53,13 @@ return function(p2) --[[ line: 53 ]]
 			place_id = game.PlaceId
 		})
 	end, {})
-	local var42 = reactModule.useCallback(function(p3, p4) --[[ line: 84 ]]
+	local var42 = reactModule.useCallback(function(p3, p4) --[[ line: 82 ]]
 		-- upvalues: sceneAnalysisModule (copy), viewportSize (ref), experienceStateCaptureService (copy), var19 (ref), var29 (ref), screenshotManager (copy), var30 (ref), var20 (ref), var22 (ref), var38 (ref), constantsModule (copy)
 		local t = {
 			point = p3,
-			interpretationResult = sceneAnalysisModule.interpretAnnotation(p3 * viewportSize, p4 * math.max(viewportSize.X, viewportSize.Y), function() --[[ line: 90 ]] end)
+			interpretationResult = sceneAnalysisModule.interpretAnnotation(p3 * viewportSize, p4 * math.max(viewportSize.X, viewportSize.Y), function() --[[ line: 88 ]] end)
 		}
-		t.signalConnection = experienceStateCaptureService.ItemSelectedInCaptureMode:Once(function(p5) --[[ line: 94 ]]
+		t.signalConnection = experienceStateCaptureService.ItemSelectedInCaptureMode:Once(function(p5) --[[ line: 92 ]]
 			-- upvalues: t (ref)
 			t.engineSignalItem = p5
 		end)
@@ -80,7 +79,7 @@ return function(p2) --[[ line: 53 ]]
 		})
 		task.defer(t.interpretationResult.raycastComputation)
 	end, { var19, var20, var22, var29 })
-	local var43 = reactModule.useCallback(function() --[[ line: 121 ]]
+	local var43 = reactModule.useCallback(function() --[[ line: 119 ]]
 		-- upvalues: var19 (ref), var21 (ref), var22 (ref), var20 (ref), var38 (ref), constantsModule (copy)
 		if #var19 > 0 then
 			local cloned = table.clone(var19)
@@ -93,7 +92,7 @@ return function(p2) --[[ line: 53 ]]
 			})
 		end
 	end, { var20, var19, var22, var21 })
-	local var44 = reactModule.useCallback(function() --[[ line: 138 ]]
+	local var44 = reactModule.useCallback(function() --[[ line: 136 ]]
 		-- upvalues: var21 (ref), var19 (ref), var22 (ref), var20 (ref), var38 (ref), constantsModule (copy)
 		if #var21 > 0 then
 			local cloned = table.clone(var19)
@@ -106,19 +105,19 @@ return function(p2) --[[ line: 53 ]]
 			})
 		end
 	end, { var19, var21 })
-	local var45 = reactModule.useCallback(function() --[[ line: 157 ]]
+	local var45 = reactModule.useCallback(function() --[[ line: 155 ]]
 		-- upvalues: var19 (ref), var29 (ref), screenshotManager (copy), var30 (ref), cryoModule (copy), sceneAnalysisModule (copy), var34 (ref), var18 (copy), var32 (ref), var24 (ref), var38 (ref), constantsModule (copy), viewportSize (ref), isSmallPortraitMode (ref)
 		if #var19 == 0 and var29 == "" then
 			screenshotManager:TakeScreenshotWithCallback(var30, nil)
 		end
 		local var62 = sceneAnalysisModule.extractItemsFromInterpretations({
-			sceneAnalysisModule.interpretInstanceListForGUIObjects(cryoModule.List.map(var19, function(p6) --[[ line: 163 ]]
+			sceneAnalysisModule.interpretInstanceListForGUIObjects(cryoModule.List.map(var19, function(p6) --[[ line: 161 ]]
 				return p6.engineSignalItem
 			end))
-		}, function() --[[ line: 169 ]] end)
+		}, function() --[[ line: 167 ]] end)
 		var34(var62)
 		task.defer(var62.computation)
-		local var63 = sceneAnalysisModule.extractItemsFromInterpretations(cryoModule.List.map(var19, var18), function() --[[ line: 175 ]] end)
+		local var63 = sceneAnalysisModule.extractItemsFromInterpretations(cryoModule.List.map(var19, var18), function() --[[ line: 173 ]] end)
 		var32(var63)
 		var24(true)
 		var38({
@@ -134,13 +133,13 @@ return function(p2) --[[ line: 53 ]]
 	end, {
 		var19, var24, var32, var29, viewportSize, isSmallPortraitMode
 	})
-	local var46 = reactModule.useCallback(function() --[[ line: 193 ]]
+	local var46 = reactModule.useCallback(function() --[[ line: 191 ]]
 		-- upvalues: inGameAssetReportAnalyticsModule (copy), var37 (ref), p2 (ref)
 		inGameAssetReportAnalyticsModule(var37, 2)
 		p2.backAction()
 	end, { p2.backAction, var37 })
 	local var47 = cryoModule.List.map(var19, var17)
-	local var48 = reactModule.useCallback(function(p7, p8, p9) --[[ line: 205 ]]
+	local var48 = reactModule.useCallback(function(p7, p8, p9) --[[ line: 203 ]]
 		-- upvalues: var24 (ref), var26 (ref), var38 (ref), constantsModule (copy), var31 (ref), var19 (ref), buildReportModule (copy), playersService (copy), var29 (ref), var47 (ref), var33 (ref)
 		var24(false)
 		var26(true)
@@ -169,29 +168,29 @@ return function(p2) --[[ line: 53 ]]
 	end, {
 		var31, var33, var24, var26, var29, var19, var47
 	})
-	local var49 = reactModule.useCallback(function() --[[ line: 257 ]]
+	local var49 = reactModule.useCallback(function() --[[ line: 255 ]]
 		-- upvalues: var32 (ref), var24 (ref)
 		var32(nil)
 		var24(false)
 	end, { var24, var32 })
-	local var50 = reactModule.useCallback(function() --[[ line: 263 ]]
+	local var50 = reactModule.useCallback(function() --[[ line: 261 ]]
 		-- upvalues: var26 (ref), inGameAssetReportAnalyticsModule (copy), var37 (ref), p2 (ref)
 		var26(false)
 		inGameAssetReportAnalyticsModule(var37, 1)
 		p2.onReportComplete()
 	end, { p2.onReportComplete, var19, var26, var37 })
-	local var51 = reactModule.useCallback(function() --[[ line: 270 ]]
+	local var51 = reactModule.useCallback(function() --[[ line: 268 ]]
 		-- upvalues: var19 (ref), var28 (ref)
 		for i, v in ipairs(var19) do
 			v.signalConnection:Disconnect()
 		end
 		var28(true)
 	end, { var28, var19 })
-	local var52 = reactModule.useCallback(function() --[[ line: 281 ]]
+	local var52 = reactModule.useCallback(function() --[[ line: 279 ]]
 		-- upvalues: var28 (ref)
 		var28(false)
 	end, {})
-	local var53 = reactModule.useCallback(function() --[[ line: 285 ]]
+	local var53 = reactModule.useCallback(function() --[[ line: 283 ]]
 		-- upvalues: var35 (ref), var36 (ref), var38 (ref), constantsModule (copy), var23 (ref), var20 (ref), var22 (ref)
 		if var35 then
 			var36(false)
@@ -208,12 +207,12 @@ return function(p2) --[[ line: 53 ]]
 	end, { var35, var23 })
 	local var54 = #var19 > 0
 	local var55 = #var21 > 0
-	reactModule.useEffect(function() --[[ line: 307 ]]
+	reactModule.useEffect(function() --[[ line: 305 ]]
 		-- upvalues: var39 (ref), userInputService (copy), var46 (ref), var40 (ref)
 		if var39 then
 			var39:Disconnect()
 		end
-		var40(userInputService.InputEnded:Connect(function(p10) --[[ line: 312 ]]
+		var40(userInputService.InputEnded:Connect(function(p10) --[[ line: 310 ]]
 			-- upvalues: var46 (copy)
 			if p10.KeyCode == Enum.KeyCode.Escape then
 				var46()
@@ -223,8 +222,8 @@ return function(p2) --[[ line: 53 ]]
 	
 	return withLocalization({
 		mainTitle = "Feature.ReportAbuse.Label.HighlightProblem",
-		next = if fFlagUpdateInGameAssetReportingCTAs then "CommonUI.Controls.Action.Continue" else "Feature.ReportAbuse.Action.Next"
-	})(function(p11) --[[ line: 326 ]]
+		next = "Feature.ReportAbuse.Action.Next"
+	})(function(p11) --[[ line: 322 ]]
 		-- upvalues: reactModule (copy), var53 (ref), isSmallPortraitMode (ref), inGameAssetReportPortraitHeaderFooterModule (copy), var46 (ref), var43 (ref), var44 (ref), var55 (ref), var54 (ref), var19 (ref), inGameAssetReportLandscapeHeaderModule (copy), var45 (ref), screenshotHighlighterModule (copy), var47 (ref), var42 (ref), var51 (ref), var27 (ref), inGameAssetReportErrorModalModule (copy), viewportSize (ref), var52 (ref), var23 (ref), inGameAssetReportSubmitDialogModule (copy), var48 (ref), var49 (ref), var38 (ref), var25 (ref), inGameAssetReportCompleteModalModule (copy), var50 (ref)
 		return reactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),

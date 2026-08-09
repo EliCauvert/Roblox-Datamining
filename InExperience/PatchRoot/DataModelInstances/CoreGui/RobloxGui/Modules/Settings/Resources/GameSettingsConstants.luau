@@ -8,8 +8,6 @@ local fFlagIEMSettingsGroupsModule = require(modules.Settings.Flags.FFlagIEMSett
 local fFlagAIRephraseSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAIRephraseSettingEnabled
 local updateRephraseSettingUI = game:DefineFastFlag("UpdateRephraseSettingUI", false)
 local fFlagChatSummariesSettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChatSummariesSettingEnabled
-local fFlagExpChatEnableFriendsTab = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatEnableFriendsTab
-local fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule = require(modules.Settings.Flags.FFlagVoiceVolumeControlsEnableVoiceChatVolumeSlider)
 local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
 local chatModerationFrameLayoutOrder = game:DefineFastInt("ChatModerationFrameLayoutOrder", 9)
@@ -44,9 +42,6 @@ else
 	t.ChatLanguageSelectorFrame = 41
 	t.ChatTranslationToggleFrame = 42
 end
-if fFlagExpChatEnableFriendsTab then
-	t.ChatNotificationsFrame = 44
-end
 if isInExperienceUIVREnabled then
 	t.VRComfortSettingFrame = 54
 	t.VRVignetteEnabledFrame = 55
@@ -58,14 +53,7 @@ t.DeviceFrameInput = 60
 t.DeviceFrameOutput = 61
 t.VolumeFrame = 62
 
-if fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule then
-	t.VoiceChatVolumeFrame = 63
-	
-	if partyVoiceVolumeEngineFeature then
-		t.PartyVoiceVolumeFrame = 64
-	end
-	t.HapticsFrame = if partyVoiceVolumeEngineFeature then 65 else 64
-elseif partyVoiceVolumeEngineFeature then
+if partyVoiceVolumeEngineFeature then
 	t.PartyVoiceVolumeFrame = 63
 end
 t.HapticsFrame = if partyVoiceVolumeEngineFeature then 64 else 63
@@ -102,71 +90,69 @@ t.InformationFrame = 999
 local t_1 = nil
 
 if fFlagIEMSettingsGroupsModule then
-	local var10 = reactUtilsModule.createNextOrder()
+	local var9 = reactUtilsModule.createNextOrder()
 	t_1 = {
-		AudioHeader = var10(),
-		VolumeFrame = var10(),
-		VoiceChatVolumeFrame = if fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule then var10() else nil,
-		PartyVoiceVolumeFrame = var10(),
-		DeviceFrameInput = var10(),
-		DeviceFrameOutput = var10(),
-		AudioDivider = var10(),
-		LanguageHeader = var10(),
-		ChatModerationFrame = var10(),
-		VoiceConnectDisconnectSelector = var10(),
-		VoiceConnectFrame = var10(),
-		VoiceDisconnectFrame = var10(),
-		ChatSummariesFrame = if fFlagChatSummariesSettingEnabled then var10() else nil,
-		AIRephraseFrame = if fFlagAIRephraseSettingEnabled then var10() else nil,
-		PlayerChoiceTranslationFrame = if game:GetEngineFeature("InExperiencePlayerChoiceToggle") then var10() else nil,
-		LanguageSelectorFrame = var10(),
-		FeedbackModeButton = var10(),
-		ChatTranslationFrame = var10(),
-		ChatLanguageSelectorFrame = var10(),
-		ChatTranslationToggleFrame = var10(),
-		ChatNotificationsFrame = if fFlagExpChatEnableFriendsTab then var10() else nil,
-		LanguageDivider = var10(),
-		DisplayHeader = var10(),
-		OverscanAdjustButton = var10(),
-		FullScreenFrame = var10(),
-		PreferredTransparencyFrame = var10(),
-		PreferredTextSizeFrame = var10(),
-		VRComfortSettingFrame = if isInExperienceUIVREnabled then var10() else nil,
-		VRVignetteEnabledFrame = if isInExperienceUIVREnabled then var10() else nil,
-		VRSteppedRotationEnabledFrame = if isInExperienceUIVREnabled then var10() else nil,
-		VRThirdPersonFixedCamEnabledFrame = if isInExperienceUIVREnabled then var10() else nil,
-		VRSafetyBubbleModeFrame = if isInExperienceUIVREnabled then var10() else nil,
-		PerformanceStatsFrame = var10(),
-		MicroProfilerFrame = var10(),
-		GraphicsEnablerFrame = var10(),
-		GraphicsQualityFrame = var10(),
-		HapticsFrame = var10(),
-		ReducedMotionFrame = var10(),
-		FramerateCap = var10(),
-		VREnabledFrame = var10(),
-		DisplayDivider = var10(),
-		ViewAndControlsHeader = var10(),
-		CameraModeFrame = var10(),
-		CameraInvertedFrame = var10(),
-		CameraSensitivityFrame = var10(),
-		MouseAdvancedFrame = var10(),
-		GamepadSensitivityFrame = var10(),
-		MovementModeFrame = var10(),
-		ShiftLockFrame = var10(),
-		CameraDeviceFrame = var10(),
-		UiNavigationKeyBindEnabledFrame = var10(),
-		DeveloperConsoleButton = var10(),
-		PlayerNamesEnabledFrame = if getFFlagEnablePlayerNamesEnabledSettingModule() then var10() else nil,
-		BadgeVisibilityFrame = if fFlagBadgeVisibilitySettingEnabled then var10() else nil,
-		UiToggleRow = var10(),
-		UiToggleRowCustom = var10(),
-		UiToggleRowBillboards = var10(),
-		UiToggleRowNameplates = var10(),
-		FreecamToggleRow = var10(),
-		InformationFrame = var10()
+		AudioHeader = var9(),
+		VolumeFrame = var9(),
+		PartyVoiceVolumeFrame = var9(),
+		DeviceFrameInput = var9(),
+		DeviceFrameOutput = var9(),
+		AudioDivider = var9(),
+		LanguageHeader = var9(),
+		ChatModerationFrame = var9(),
+		VoiceConnectDisconnectSelector = var9(),
+		VoiceConnectFrame = var9(),
+		VoiceDisconnectFrame = var9(),
+		ChatSummariesFrame = if fFlagChatSummariesSettingEnabled then var9() else nil,
+		AIRephraseFrame = if fFlagAIRephraseSettingEnabled then var9() else nil,
+		PlayerChoiceTranslationFrame = if game:GetEngineFeature("InExperiencePlayerChoiceToggle") then var9() else nil,
+		LanguageSelectorFrame = var9(),
+		FeedbackModeButton = var9(),
+		ChatTranslationFrame = var9(),
+		ChatLanguageSelectorFrame = var9(),
+		ChatTranslationToggleFrame = var9(),
+		LanguageDivider = var9(),
+		DisplayHeader = var9(),
+		OverscanAdjustButton = var9(),
+		FullScreenFrame = var9(),
+		PreferredTransparencyFrame = var9(),
+		PreferredTextSizeFrame = var9(),
+		VRComfortSettingFrame = if isInExperienceUIVREnabled then var9() else nil,
+		VRVignetteEnabledFrame = if isInExperienceUIVREnabled then var9() else nil,
+		VRSteppedRotationEnabledFrame = if isInExperienceUIVREnabled then var9() else nil,
+		VRThirdPersonFixedCamEnabledFrame = if isInExperienceUIVREnabled then var9() else nil,
+		VRSafetyBubbleModeFrame = if isInExperienceUIVREnabled then var9() else nil,
+		PerformanceStatsFrame = var9(),
+		MicroProfilerFrame = var9(),
+		GraphicsEnablerFrame = var9(),
+		GraphicsQualityFrame = var9(),
+		HapticsFrame = var9(),
+		ReducedMotionFrame = var9(),
+		FramerateCap = var9(),
+		VREnabledFrame = var9(),
+		DisplayDivider = var9(),
+		ViewAndControlsHeader = var9(),
+		CameraModeFrame = var9(),
+		CameraInvertedFrame = var9(),
+		CameraSensitivityFrame = var9(),
+		MouseAdvancedFrame = var9(),
+		GamepadSensitivityFrame = var9(),
+		MovementModeFrame = var9(),
+		ShiftLockFrame = var9(),
+		CameraDeviceFrame = var9(),
+		UiNavigationKeyBindEnabledFrame = var9(),
+		DeveloperConsoleButton = var9(),
+		PlayerNamesEnabledFrame = if getFFlagEnablePlayerNamesEnabledSettingModule() then var9() else nil,
+		BadgeVisibilityFrame = if fFlagBadgeVisibilitySettingEnabled then var9() else nil,
+		UiToggleRow = var9(),
+		UiToggleRowCustom = var9(),
+		UiToggleRowBillboards = var9(),
+		UiToggleRowNameplates = var9(),
+		FreecamToggleRow = var9(),
+		InformationFrame = var9()
 	}
 end
-local function _() --[[ line: 211 | named "getLayoutOrder" ]]
+local function _() --[[ line: 195 | named "getLayoutOrder" ]]
 	-- upvalues: fFlagIEMSettingsGroupsModule (ref), t_1 (write), t (ref)
 	local _ = {}
 	

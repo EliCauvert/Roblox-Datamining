@@ -6,7 +6,6 @@
 	Config = require(script.Config),
 	GlobalCommands = require(script.GlobalCommands),
 	Flags = require(script.Flags),
-	FriendsSurfaceVisibility = require(script.FriendsSurfaceVisibility),
 	Logger = require(script.Logger),
 	RaiseActionAsEventMiddleware = require(script.RaiseActionAsEventMiddleware),
 	Reducers = require(script.Reducers),

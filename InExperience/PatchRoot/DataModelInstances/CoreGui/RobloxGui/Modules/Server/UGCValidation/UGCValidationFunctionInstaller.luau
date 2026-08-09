@@ -69,25 +69,31 @@ local function UGCValidationFunction(p0) --[[ line: 10 ]]
 		var11 = var17
 		var12 = var18
 	end
-	local t_1 = {
-		source = if isServer then "InExpServer" else "InExpClient",
-		enforceR15FolderStructure = requireAllFolders or false,
-		skipAssetQualityChecks = UGCValidationModule.shouldSkipAssetQualityChecks and UGCValidationModule.shouldSkipAssetQualityChecks() or nil,
-		iecConfigs = if UGCValidateMigrateSchemaProperties2 then {
-			token = token,
-			universeId = universeId,
-			restrictedUserIds = if UGCValidateForwardIECRestrictedUserIds then restrictedUserIds else nil
-		} else nil
-	}
-	local var20, var21 = UGCValidationModule.combineResultsIntoLegacy(var11, var12, if fullBodyData then UGCValidationModule.ValidateFinalizedBundle(fullBodyData, Enum.BundleType.BodyParts, t_1) else UGCValidationModule.ValidateAsset(instances, assetType, t_1))
-	
-	if var20 then
+	if UGCValidationModule.isFolderStructureEnabled and UGCValidationModule.isFolderStructureEnabled() then
+		local t_1 = {
+			source = if isServer then "InExpServer" else "InExpClient",
+			enforceR15FolderStructure = requireAllFolders or false,
+			iecConfigs = if UGCValidateMigrateSchemaProperties2 then {
+				token = token,
+				universeId = universeId,
+				restrictedUserIds = if UGCValidateForwardIECRestrictedUserIds then restrictedUserIds else nil
+			} else nil
+		}
+		local var20 = if fullBodyData then UGCValidationModule.ValidateFinalizedBundle(fullBodyData, Enum.BundleType.BodyParts, t_1) else UGCValidationModule.ValidateAsset(instances, assetType, t_1)
+		
+		if UGCValidationModule.isEntrypointMergingEnabled and UGCValidationModule.isEntrypointMergingEnabled() then
+			local var21, var22 = UGCValidationModule.combineResultsIntoLegacy(var11, var12, var20)
+			var11 = var21
+			var12 = var22
+		end
+	end
+	if var11 then
 		return true, { "Success" }
 	end
-	return false, var21
+	return false, var12
 end
 
-return function() --[[ line: 119 | named "Install" ]]
+return function() --[[ line: 126 | named "Install" ]]
 	-- upvalues: UGCValidationService (ref), UGCValidationFunction (ref)
 	UGCValidationService:RegisterUGCValidationFunction(UGCValidationFunction)
 end

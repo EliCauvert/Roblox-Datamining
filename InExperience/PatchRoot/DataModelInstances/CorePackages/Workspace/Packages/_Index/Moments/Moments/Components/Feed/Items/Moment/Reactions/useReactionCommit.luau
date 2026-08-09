@@ -30,7 +30,7 @@ return function() --[[ line: 31 | named "useReactionCommit" ]]
 			
 			if feedItemId ~= nil and feedItemId ~= "" then
 				local t = { itemId = feedItemId, tracingId = data.feedSessionId }
-				local ok, status = pcall(function() --[[ line: 64 ]]
+				local ok, status = pcall(function() --[[ line: 62 ]]
 					-- upvalues: var8 (ref), var7 (copy), signalActionTypeModule (copy), t (ref)
 					if var8.action == "commit" and var8.reaction ~= nil then
 						var7.logAction(signalActionTypeModule.AddReaction, t, { reactionType = var8.reaction })

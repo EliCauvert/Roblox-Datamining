@@ -40,7 +40,7 @@ return function(p2) --[[ line: 102 | named "BulletList" ]]
 	
 	return reactModule.createElement(view, {
 		testId = "--markdown--bullet-list",
-		tag = "col align-x-left gap-xsmall",
+		tag = "col align-x-left gap-small",
 		AutomaticSize = if size and (size.X.Scale > 0 or size.X.Offset > 0) then Enum.AutomaticSize.Y else Enum.AutomaticSize.XY,
 		backgroundStyle = { Transparency = 1 },
 		LayoutOrder = p2.LayoutOrder or 1,
@@ -101,7 +101,7 @@ return function(p2) --[[ line: 102 | named "BulletList" ]]
 		end
 		return reactModule.createElement(view, {
 			testId = "--markdown--bullet-list-item",
-			tag = "gap-xsmall auto-xy row align-x-left align-y-top",
+			tag = "gap-small auto-xy row align-x-left align-y-top",
 			key = tostring(p4),
 			LayoutOrder = p4
 		}, {

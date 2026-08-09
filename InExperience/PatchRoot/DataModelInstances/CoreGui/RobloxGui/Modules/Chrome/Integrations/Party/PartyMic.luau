@@ -9,17 +9,18 @@ local chromeUtilsModule = require(chrome.ChromeShared.Service.ChromeUtils)
 local partyMicIconModule = require(chrome.Integrations.Party.PartyMicIcon)
 local constantsModule = require(chrome.Integrations.Party.Constants)
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
+local fFlagChromeActivatedMappedSignal = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChromeActivatedMappedSignal
 local mappedSignal = chromeUtilsModule.MappedSignal
 local default = crossExperienceVoiceModule.CrossExperienceVoiceManager.default
 local var8 = nil
 local var9 = false
 local var10 = signal.new()
 local var11 = signal.new()
-var10:connect(function(p0) --[[ line: 27 ]]
+var10:connect(function(p0) --[[ line: 30 ]]
 	-- upvalues: var8 (write)
 	var8 = p0
 end)
-var11:connect(function(p1) --[[ line: 31 ]]
+var11:connect(function(p1) --[[ line: 34 ]]
 	-- upvalues: var9 (write)
 	var9 = p1
 end)
@@ -28,11 +29,11 @@ return if getFFlagEnableCrossExpVoice() then serviceModule:register({
 	id = constantsModule.TOGGLE_MIC_INTEGRATION_ID,
 	label = if require(chrome.Flags.FFlagChangeToggleMicText) then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
 	sideSheetPlacement = sideSheetPlacement.Unibar,
-	isActivated = mappedSignal.new(var10, function() --[[ line: 35 ]]
+	isActivated = if fFlagChromeActivatedMappedSignal then if fFlagChromeActivatedMappedSignal then mappedSignal.new(var10, function() --[[ line: 39 ]]
 		-- upvalues: var9 (write), var8 (write)
 		return var9 and var8 == false
-	end),
-	activated = function() --[[ line: 49 ]]
+	end) else nil else nil,
+	activated = function() --[[ line: 54 ]]
 		-- upvalues: playersService (ref), var9 (write), var8 (write), default (ref)
 		local userId = playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or -1))
 		
@@ -46,7 +47,7 @@ return if getFFlagEnableCrossExpVoice() then serviceModule:register({
 		end
 	end,
 	components = {
-		Icon = function() --[[ line: 60 ]]
+		Icon = function() --[[ line: 65 ]]
 			-- upvalues: partyMicIconModule (ref), var10 (ref), var11 (ref)
 			return partyMicIconModule({
 				isLocalPlayerMutedSignal = var10,

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXBlockMakeupEquipR6", false)
+﻿return game:DefineFastFlag("AXBlockMakeupEquipR6", false) and require(script.Parent.FFlagAXCustomizeMakeupSupport)

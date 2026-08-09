@@ -489,7 +489,7 @@
 			}
 		},
 		voiceChatPlayerSelection = {
-			type = "inExpUserSelection",
+			type = "list",
 			variant = "chevron",
 			storeAs = "selectedPlayer",
 			required = true,
@@ -506,20 +506,13 @@
 					}
 				}
 			},
-			trailingAccessories = {
-				{
-					type = "recentlyLeftIndicator",
-					text = { ["$translate"] = "Label.RecentlyLeft" }
-				},
-				{ type = "voiceSpeakingIndicator" }
-			},
 			nextButtonText = { ["$translate"] = "Action.Continue" },
 			errorText = { ["$translate"] = "Label.GeneralError" },
 			retryButtonText = { ["$translate"] = "Action.Retry" },
 			emptyText = { ["$translate"] = "Description.NoVoiceTalk" }
 		},
 		generalUserSelection = {
-			type = "inExpUserSelection",
+			type = "list",
 			variant = "chevron",
 			storeAs = "selectedPlayer",
 			required = true,
@@ -538,12 +531,6 @@
 						description = "@stubuser",
 						meta = { username = "stubuser", displayname = "Stub User" }
 					}
-				}
-			},
-			trailingAccessories = {
-				{
-					type = "recentlyLeftIndicator",
-					text = { ["$translate"] = "Label.RecentlyLeft" }
 				}
 			},
 			nextButtonText = { ["$translate"] = "Action.Continue" },

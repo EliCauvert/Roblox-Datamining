@@ -21,10 +21,7 @@
 	getAvatarEventCounterNameWithPlatform = require(script.getAvatarEventCounterNameWithPlatform),
 	reportAvatarEventCounterNoAnalyticsArgument = require(script.reportAvatarEventCounterNoAnalyticsArgument),
 	reportAvatarEventCounterV1 = require(script.reportAvatarEventCounterV1),
-	Flags = {
-		FFlagAllowCustomUnifiedEventFilter = require(script.FFlagAllowCustomUnifiedEventFilter)
-	},
-	reportBackgroundUserActionCounter = require(script.reportBackgroundUserActionCounter),
+	Flags = {},
 	Enums = { ImpressionEnums = require(script.Enums.ImpressionEnums) },
 	Lib = { CartIdService = require(script.Lib.CartIdService) },
 	Store = {
@@ -41,10 +38,7 @@
 		getUnifiedEventsForMIS = require(script.Utils.getUnifiedEventsForMIS),
 		getUnifiedLoggingSurface = require(script.Utils.getUnifiedLoggingSurface),
 		getUnifiedLoggingSurfaceForAppPage = require(script.Utils.getUnifiedLoggingSurfaceForAppPage),
-		getUnifiedLoggingSurfaceForRoute = require(script.Utils.getUnifiedLoggingSurfaceForRoute),
-		mapMarketplaceSurfaceToUnifiedLoggingSurface = require(script.Utils.mapMarketplaceSurfaceToUnifiedLoggingSurface),
-		getItemSelectionAction = require(script.Utils.getItemSelectionAction),
-		getCatalogItemUnifiedLoggingFields = require(script.Utils.getCatalogItemUnifiedLoggingFields)
+		getItemSelectionAction = require(script.Utils.getItemSelectionAction)
 	},
 	Constants = require(script.Constants),
 	ImpressionsReporter = {

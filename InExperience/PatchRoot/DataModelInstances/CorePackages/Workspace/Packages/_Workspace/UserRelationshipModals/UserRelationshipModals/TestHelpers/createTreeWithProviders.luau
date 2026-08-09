@@ -9,10 +9,7 @@ local mockLocalizationModule = require(script.Parent.mockLocalization)
 return function(p0, p1) --[[ line: 12 ]]
 	-- upvalues: roduxModule (ref), reactModule (ref), localizationProvider (ref), mockLocalizationModule (ref), foundationModule (ref), roactRoduxModule (ref)
 	return reactModule.createElement(localizationProvider, { localization = mockLocalizationModule }, {
-		Provider = reactModule.createElement(foundationModule.FoundationProvider, {
-			colorMode = "Dark",
-			preferences = { reducedMotion = true }
-		}, {
+		Provider = reactModule.createElement(foundationModule.FoundationProvider, { theme = "Dark", preferences = { reducedMotion = true } }, {
 			reactModule.createElement(roactRoduxModule.StoreProvider, {
 				store = if p1 ~= nil then roduxModule.Store.new(function() --[[ line: 15 ]]
 					return {

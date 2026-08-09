@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Common.AbuseVector)
+﻿return require(script.Parent.Parent.Parent.Parent._Index.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Common.AbuseVector)

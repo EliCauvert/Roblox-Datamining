@@ -42,15 +42,11 @@ local function variantsFactory(_) --[[ line: 35 ]]
 			},
 			[true] = {
 				container = { tag = "grow auto-xy" },
-				content = { tag = "auto-y", Size = UDim2.fromScale(1, 0) }
+				content = if flagsModule.FoundationTabsInlineSizeFull then { tag = "auto-y", Size = UDim2.fromScale(1, 0) } else { tag = "size-full-0 auto-y" }
 			}
 		},
 		paddings = {
-			[inputSizeModule.XSmall] = {
-				content = {
-					tag = if flagsModule.FoundationFixTabsFitBorderWidth then "padding-x-xsmall" else "padding-x-small"
-				}
-			},
+			[inputSizeModule.XSmall] = { content = { tag = "padding-x-small" } },
 			[inputSizeModule.Small] = { content = { tag = "padding-x-small" } },
 			[inputSizeModule.Medium] = { content = { tag = "padding-x-medium" } },
 			[inputSizeModule.Large] = { content = { tag = "padding-x-large" } }
@@ -59,8 +55,8 @@ local function variantsFactory(_) --[[ line: 35 ]]
 end
 
 return function(p0, p1, p2) --[[ line: 84 ]]
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), flagsModule (ref)
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p0)
 	
-	return composeStyleVariantModule(tab.common, tab.sizes[p1], tab.isFill[p2], if flagsModule.FoundationFixTabsFitBorderWidth then tab.paddings[p1] elseif p2 then tab.paddings[p1] else {})
+	return composeStyleVariantModule(tab.common, tab.sizes[p1], tab.isFill[p2], if p2 then tab.paddings[p1] else {})
 end

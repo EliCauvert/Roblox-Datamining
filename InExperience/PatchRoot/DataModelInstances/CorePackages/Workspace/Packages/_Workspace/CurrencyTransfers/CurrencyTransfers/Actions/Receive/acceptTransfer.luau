@@ -17,7 +17,6 @@ local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobux
 
 return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), handleReceiveErrorModule (ref), promptStateModule (ref), acceptTransferRequestModule (ref), handleReceiveSuccessModule (ref), failureReasonModule (ref), handleReceiveBlockModule (ref), transferRetryOriginModule (ref)
-	local networkImpl = p0.getNetworkImpl()
 	local setPromptState = p0.setPromptState
 	local setRobuxTransfer = p0.setRobuxTransfer
 	local setIsAlreadyAccepted = p0.setIsAlreadyAccepted
@@ -31,7 +30,7 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
 			logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_attempted)
 		end
-		return acceptTransferRequestModule(t, nil, networkImpl):andThen(function(p2) --[[ line: 54 ]]
+		return acceptTransferRequestModule(t):andThen(function(p2) --[[ line: 53 ]]
 			-- upvalues: setPromptState (ref), promptStateModule (copy), setRobuxTransfer (ref), setIsAlreadyAccepted (ref), logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), handleReceiveSuccessModule (copy), handleReceiveErrorModule (copy)
 			setPromptState(promptStateModule.ReceiveStarted)
 			
@@ -42,9 +41,6 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 				
 				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
 					logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.accept_succeeded)
-				end
-				if sharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction then
-					p0.triggerOnPromptDismissCommitted()
 				end
 				handleReceiveSuccessModule(p0)
 				
@@ -57,7 +53,7 @@ return function(p0) --[[ line: 25 | named "acceptTransfer" ]]
 				end
 				handleReceiveErrorModule(p0, nil)
 			end
-		end):catch(function(p1) --[[ line: 80 ]]
+		end):catch(function(p1) --[[ line: 75 ]]
 			-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleReceiveBlockModule (copy), transferRetryOriginModule (copy), handleReceiveErrorModule (copy)
 			logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferAcceptFailedCounter)
 			

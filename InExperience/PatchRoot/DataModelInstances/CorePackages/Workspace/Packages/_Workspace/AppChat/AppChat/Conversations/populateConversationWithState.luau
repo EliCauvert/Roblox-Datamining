@@ -8,18 +8,17 @@ local populateUserIdsWithStateModule = require(script.Parent.populateUserIdsWith
 local getThumbnailsForUserIdsModule = require(appChat.Users.getThumbnailsForUserIds)
 local getLastMessageContentModule = require(script.Parent.getLastMessageContent)
 local roduxPresenceModule = require(appChat.Http.RoduxPresence)
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 local userPresenceUtilsModule = require(appChat.Users.userPresenceUtils)
 local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
 
-return function(p0, p1) --[[ line: 40 ]]
-	-- upvalues: cryoModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), getOtherParticipant (ref), roduxPresenceModule (ref), userPresenceUtilsModule (ref), getConversationTimestampModule (ref), getConversationTitleModule (ref), populateUserIdsWithStateModule (ref), getLastMessageContentModule (ref), getThumbnailsForUserIdsModule (ref), getConversationGameId (ref)
+return function(p0, p1) --[[ line: 39 ]]
+	-- upvalues: cryoModule (ref), getOtherParticipant (ref), roduxPresenceModule (ref), userPresenceUtilsModule (ref), getConversationTimestampModule (ref), getConversationTitleModule (ref), populateUserIdsWithStateModule (ref), getLastMessageContentModule (ref), getThumbnailsForUserIdsModule (ref), getConversationGameId (ref)
 	local participants = p1.participants or {}
-	local var11 = cryoModule.List.filter(participants, function(p2) --[[ line: 42 ]]
+	local var10 = cryoModule.List.filter(participants, function(p2) --[[ line: 41 ]]
 		-- upvalues: p0 (ref)
 		return p2 ~= p0.LocalUserId
 	end)
-	local var12 = if not (fFlagAppChatPresenceStoreMigrationModule or p1.conversationType ~= "OneToOneConversation") then userPresenceUtilsModule.getUserDisplayPresence(roduxPresenceModule.Selectors.getUserPresenceByUserId(p0, getOtherParticipant(p0, p1.participants))) else nil
+	local var11 = if p1.conversationType == "OneToOneConversation" then userPresenceUtilsModule.getUserDisplayPresence(roduxPresenceModule.Selectors.getUserPresenceByUserId(p0, getOtherParticipant(p0, p1.participants))) else nil
 	local t = {}
 	local users = p0.Users
 	
@@ -30,14 +29,14 @@ return function(p0, p1) --[[ line: 40 ]]
 		id = p1.id,
 		title = getConversationTitleModule(p1),
 		participants = populateUserIdsWithStateModule(p0, participants),
-		otherParticipants = var11,
+		otherParticipants = var10,
 		isDefaultTitle = p1.isDefaultTitle,
 		hasGroupUp = p1.hasGroupUp,
 		lastMessageContent = getLastMessageContentModule(p1) or "",
 		hasUnreadMessages = p1.hasUnreadMessages or false,
-		thumbnails = getThumbnailsForUserIdsModule(var11),
-		presenceText = if fFlagAppChatPresenceStoreMigrationModule then nil else var12 and var12.text,
-		presenceImage = if fFlagAppChatPresenceStoreMigrationModule then nil else var12 and var12.image,
+		thumbnails = getThumbnailsForUserIdsModule(var10),
+		presenceText = var11 and var11.text,
+		presenceImage = var11 and var11.image,
 		gameId = getConversationGameId(p1, p0.LocalUserId, t),
 		serverState = p1.serverState,
 		moderationType = p1.moderationType,

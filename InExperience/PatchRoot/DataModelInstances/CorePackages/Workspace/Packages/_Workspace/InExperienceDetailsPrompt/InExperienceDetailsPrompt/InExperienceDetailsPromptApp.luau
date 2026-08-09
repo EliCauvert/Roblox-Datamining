@@ -6,21 +6,22 @@ local inExperienceDetailsPromptContainerModule = require(inExperienceDetailsProm
 local fireInExperienceDetailsPromptOpenedEvent = require(parent.DiscoveryAnalytics).Events.fireInExperienceDetailsPromptOpenedEvent
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
+local fFlagLuaAppIedpControlledJoin = require(parent.SharedFlags).FFlagLuaAppIedpControlledJoin
 
-return function() --[[ line: 15 | named "InExperienceDetailsPromptApp" ]]
-	-- upvalues: reactModule (ref), teleportService (ref), fireInExperienceDetailsPromptOpenedEvent (ref), discoveryEventErrorLogger (ref), fFlagLuaAppIedpOverlayAndNavigationFix (ref), inExperienceDetailsPromptContainerModule (ref)
+return function() --[[ line: 16 | named "InExperienceDetailsPromptApp" ]]
+	-- upvalues: reactModule (ref), teleportService (ref), fireInExperienceDetailsPromptOpenedEvent (ref), fFlagLuaAppIedpControlledJoin (ref), discoveryEventErrorLogger (ref), fFlagLuaAppIedpOverlayAndNavigationFix (ref), inExperienceDetailsPromptContainerModule (ref)
 	local var4, var5 = reactModule.useState(nil)
 	local var6, var7 = reactModule.useState(false)
-	reactModule.useEffect(function() --[[ line: 19 ]]
+	reactModule.useEffect(function() --[[ line: 20 ]]
 		-- upvalues: teleportService (copy), var5 (ref), var7 (ref), fireInExperienceDetailsPromptOpenedEvent (copy)
-		local openExperienceDetailsPromptConnection = teleportService.OpenExperienceDetailsPrompt:Connect(function(p0) --[[ line: 20 ]]
+		local openExperienceDetailsPromptConnection = teleportService.OpenExperienceDetailsPrompt:Connect(function(p0) --[[ line: 21 ]]
 			-- upvalues: var5 (copy), var7 (copy), fireInExperienceDetailsPromptOpenedEvent (copy)
 			var5(tostring(p0))
 			var7(true)
 			fireInExperienceDetailsPromptOpenedEvent({ targetUniverseId = tostring(p0) })
 		end)
 		
-		return function() --[[ line: 27 ]]
+		return function() --[[ line: 28 ]]
 			-- upvalues: openExperienceDetailsPromptConnection (ref)
 			if openExperienceDetailsPromptConnection then
 				openExperienceDetailsPromptConnection:Disconnect()
@@ -31,15 +32,9 @@ return function() --[[ line: 15 | named "InExperienceDetailsPromptApp" ]]
 	if not var6 or not var4 then
 		return nil
 	end
-	local function _() --[[ line: 38 | named "closePrompt" ]]
-		-- upvalues: var5 (ref), var7 (ref)
-		var5(nil)
-		var7(false)
-	end
-	
-	local t = {
+	local var8 = if fFlagLuaAppIedpControlledJoin then {
 		universeId = var4,
-		onJoin = function(p1) --[[ line: 45 ]]
+		onJoin = function(p1) --[[ line: 47 ]]
 			-- upvalues: teleportService (copy), var5 (ref), var7 (ref), discoveryEventErrorLogger (copy), var4 (ref)
 			if p1 then
 				teleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.TeleportAttempted)
@@ -51,15 +46,22 @@ return function() --[[ line: 15 | named "InExperienceDetailsPromptApp" ]]
 			end
 			discoveryEventErrorLogger.reportError("InExperienceDetailsPromptAppOnJoinMissingRootPlaceId", "Missing valid root place id for universe id", { universeId = var4 })
 		end,
-		onClose = function() --[[ line: 58 ]]
+		onClose = function() --[[ line: 62 ]]
 			-- upvalues: teleportService (copy), var5 (ref), var7 (ref)
 			teleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.PromptClosed)
 			var5(nil)
 			var7(false)
 		end
+	} else {
+		universeId = var4,
+		onClose = function() --[[ line: 39 ]]
+			-- upvalues: var5 (ref), var7 (ref)
+			var5(nil)
+			var7(false)
+		end
 	}
 	
-	return if fFlagLuaAppIedpOverlayAndNavigationFix then reactModule.createElement(inExperienceDetailsPromptContainerModule, t) else reactModule.createElement("ScreenGui", { ScreenInsets = Enum.ScreenInsets.None }, {
-		InExperienceDetailsPrompt = reactModule.createElement(inExperienceDetailsPromptContainerModule, t)
+	return if fFlagLuaAppIedpOverlayAndNavigationFix then reactModule.createElement(inExperienceDetailsPromptContainerModule, var8) else reactModule.createElement("ScreenGui", { ScreenInsets = Enum.ScreenInsets.None }, {
+		InExperienceDetailsPrompt = reactModule.createElement(inExperienceDetailsPromptContainerModule, var8)
 	})
 end

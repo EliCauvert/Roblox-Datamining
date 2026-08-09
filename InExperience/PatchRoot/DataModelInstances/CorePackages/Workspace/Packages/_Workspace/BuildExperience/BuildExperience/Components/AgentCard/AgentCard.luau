@@ -4,12 +4,12 @@ local reactModule = require(parent.React)
 local text = foundationModule.Text
 local view = foundationModule.View
 
-return function(p0) --[[ line: 18 | named "AgentCard" ]]
+return function(p0) --[[ line: 20 | named "AgentCard" ]]
 	-- upvalues: reactModule (ref), view (ref), text (ref)
 	local testId = p0.testId or "agent-card"
 	
 	return reactModule.createElement(view, {
-		tag = "col gap-xxsmall size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
+		tag = "col gap-small size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-100",
 		LayoutOrder = p0.layoutOrder,
 		testId = testId
 	}, {

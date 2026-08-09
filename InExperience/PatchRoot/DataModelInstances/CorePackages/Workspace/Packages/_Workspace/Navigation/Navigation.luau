@@ -21,7 +21,6 @@ return {
 	inspectRouteEntry = require(script.inspectRouteEntry),
 	ViewState = require(script.ViewState),
 	createSignalsNavigationObject = require(script.createSignalsNavigationObject),
-	createProjectedNavigationObject = require(script.createProjectedNavigationObject),
 	SignalsNavigationContainer = require(script.SignalsNavigationContainer),
 	["jest.config"] = script["jest.config"]
 }

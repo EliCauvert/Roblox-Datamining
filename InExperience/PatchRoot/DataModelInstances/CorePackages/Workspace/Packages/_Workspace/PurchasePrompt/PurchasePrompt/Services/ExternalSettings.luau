@@ -3,61 +3,67 @@ local runService = game:GetService("RunService")
 local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
 local getFFlagDisableRobuxUpsellModule = require(parent.Flags.GetFFlagDisableRobuxUpsell)
+local getFFlagEnableRestrictedAssetSaleLocationPurchasePromptModule = require(parent.Flags.GetFFlagEnableRestrictedAssetSaleLocationPurchasePrompt)
 
 return {
-	new = function() --[[ line: 10 ]]
-		-- upvalues: userInputService (ref), runService (ref), guiService (ref), getFFlagDisableRobuxUpsellModule (ref)
+	new = function() --[[ line: 12 ]]
+		-- upvalues: userInputService (ref), runService (ref), guiService (ref), getFFlagDisableRobuxUpsellModule (ref), getFFlagEnableRestrictedAssetSaleLocationPurchasePromptModule (ref)
 		local t = {}
 		setmetatable(t, {
-			__tostring = function() --[[ line: 14 ]]
+			__tostring = function() --[[ line: 16 ]]
 				return "Service(ExternalSettings)"
 			end
 		})
 		
-		function t.getPlatform() --[[ line: 19 ]]
+		function t.getPlatform() --[[ line: 21 ]]
 			-- upvalues: userInputService (copy)
 			return userInputService:GetPlatform()
 		end
 		
-		function t.isStudio() --[[ line: 23 ]]
+		function t.isStudio() --[[ line: 25 ]]
 			-- upvalues: runService (copy)
 			return runService:IsStudio()
 		end
 		
-		function t.isThirdPartyPurchaseAllowed() --[[ line: 27 ]]
-			local var5 = true
-			pcall(function() --[[ line: 30 ]]
-				-- upvalues: var5 (write)
-				var5 = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
+		function t.isThirdPartyPurchaseAllowed() --[[ line: 29 ]]
+			local var6 = true
+			pcall(function() --[[ line: 32 ]]
+				-- upvalues: var6 (write)
+				var6 = game:GetService("PermissionsService"):GetIsThirdPartyPurchaseAllowed()
 			end)
 			
-			return var5
+			return var6
 		end
 		
-		function t.getLuaUseThirdPartyPermissions() --[[ line: 36 ]]
+		function t.getLuaUseThirdPartyPermissions() --[[ line: 38 ]]
 			return true
 		end
 		
-		function t.getFlagBypassThirdPartySettingForRobloxPurchase() --[[ line: 40 ]]
+		function t.getFlagBypassThirdPartySettingForRobloxPurchase() --[[ line: 42 ]]
 			return true
 		end
 		
-		function t.getFlagRestrictSales2() --[[ line: 45 ]]
+		function t.getFlagRestrictSales2() --[[ line: 47 ]]
 			return settings():GetFFlag("RestrictSales2")
 		end
 		
-		function t.getFlagOrder66() --[[ line: 49 ]]
+		function t.getFlagOrder66() --[[ line: 51 ]]
 			return settings():GetFFlag("Order66")
 		end
 		
-		function t.isTenFootInterface() --[[ line: 53 ]]
+		function t.isTenFootInterface() --[[ line: 55 ]]
 			-- upvalues: guiService (copy)
 			return guiService:IsTenFootInterface()
 		end
 		
-		function t.getFFlagDisableRobuxUpsell() --[[ line: 57 ]]
+		function t.getFFlagDisableRobuxUpsell() --[[ line: 59 ]]
 			-- upvalues: getFFlagDisableRobuxUpsellModule (copy)
 			return getFFlagDisableRobuxUpsellModule()
+		end
+		
+		function t.GetFFlagEnableRestrictedAssetSaleLocationPurchasePrompt() --[[ line: 63 ]]
+			-- upvalues: getFFlagEnableRestrictedAssetSaleLocationPurchasePromptModule (copy)
+			return getFFlagEnableRestrictedAssetSaleLocationPurchasePromptModule()
 		end
 		
 		return t

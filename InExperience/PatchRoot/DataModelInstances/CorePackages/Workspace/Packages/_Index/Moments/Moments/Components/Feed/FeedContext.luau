@@ -6,7 +6,7 @@ local var1 = reactModule.createContext(nil)
 
 return {
 	FeedContext = var1,
-	useFeed = function() --[[ line: 60 ]]
+	useFeed = function() --[[ line: 54 ]]
 		-- upvalues: reactModule (ref), var1 (ref)
 		local var2 = reactModule.useContext(var1)
 		
@@ -15,7 +15,7 @@ return {
 		end
 		return var2
 	end,
-	useFeedOptional = function() --[[ line: 72 ]]
+	useFeedOptional = function() --[[ line: 66 ]]
 		-- upvalues: reactModule (ref), var1 (ref)
 		return reactModule.useContext(var1)
 	end

@@ -1,14 +1,8 @@
 ﻿local topicContentsRodux = script:FindFirstAncestor("TopicContentsRodux")
 local topicContentsEntryModelModule = require(topicContentsRodux.TopicContentsEntryModel)
-local parent = topicContentsRodux.Parent
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local omniRecommendationsContentType = discoveryTypesModule.OmniRecommendationsContentType
-local gameCollectionItemType = discoveryTypesModule.GameCollectionItemTypes.GameCollectionItemType
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
-local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile
+local _ = require(topicContentsRodux.Parent.DiscoveryTypes)
 local t = {
-	new = function() --[[ line: 17 ]]
+	new = function() --[[ line: 11 ]]
 		return {
 			entries = {},
 			rowsRequested = 0,
@@ -20,20 +14,20 @@ local t = {
 	end
 }
 
-function t.mock() --[[ line: 31 ]]
+function t.mock() --[[ line: 25 ]]
 	-- upvalues: t (ref), topicContentsEntryModelModule (ref)
-	local var5 = t.new()
-	var5.entries = { topicContentsEntryModelModule.mock() }
-	var5.rowsRequested = 1
-	var5.hasMoreRows = false
-	var5.nextPageExclusiveStartId = 0
-	var5.updatedTimestamp = nil
-	var5.nextPageToken = ""
+	local var3 = t.new()
+	var3.entries = { topicContentsEntryModelModule.mock() }
+	var3.rowsRequested = 1
+	var3.hasMoreRows = false
+	var3.nextPageExclusiveStartId = 0
+	var3.updatedTimestamp = nil
+	var3.nextPageToken = ""
 	
-	return var5
+	return var3
 end
 
-function t.fromData(p0) --[[ line: 45 ]]
+function t.fromData(p0) --[[ line: 39 ]]
 	return {
 		entries = p0.entries,
 		rowsRequested = p0.rowsRequested,
@@ -44,56 +38,39 @@ function t.fromData(p0) --[[ line: 45 ]]
 	}
 end
 
-function t.fromContentList(p1, p2, p3, p4) --[[ line: 59 ]]
-	-- upvalues: t (ref), topicContentsEntryModelModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameCollectionItemType (ref), discoveryEventErrorLogger (ref), omniRecommendationsContentType (ref)
-	local var6 = t.new()
-	var6.updatedTimestamp = p4
-	var6.entries = {}
-	var6.hasMoreRows = false
+function t.fromContentList(p1, p2, p3, p4) --[[ line: 53 ]]
+	-- upvalues: t (ref), topicContentsEntryModelModule (ref)
+	local var4 = t.new()
+	var4.updatedTimestamp = p4
+	var4.entries = {}
+	var4.hasMoreRows = false
 	
 	if p1 then
 		for i, v in ipairs(p1) do
-			if not var6.hasMoreRows then
-				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p6) --[[ line: 78 ]]
-					-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), gameCollectionItemType (copy), discoveryEventErrorLogger (copy), omniRecommendationsContentType (copy), var6 (ref), v (ref), p2 (ref), p3 (ref)
-					if fFlagLuaAppEnableHomepageOneByTwoTile and p6.componentType == gameCollectionItemType.OneByTwoTile and (not p6.primaryVideoAssetId or not p6.primaryImageAssetId) then
-						discoveryEventErrorLogger.reportError("TopicContentsModel_OneByTwoTileMissingAssets", "OneByTwoTile entry dropped: missing primaryVideoAssetId or primaryImageAssetId", {
-							contentType = tostring(p6.contentType),
-							hasVideo = p6.primaryVideoAssetId ~= nil,
-							hasImage = p6.primaryImageAssetId ~= nil
-						})
+			if not var4.hasMoreRows then
+				topicContentsEntryModelModule.fromOmniRecommendations(v):match(function(p6) --[[ line: 72 ]]
+					-- upvalues: v (ref), p2 (ref), p3 (ref), var4 (ref)
+					local var5 = p2(v.contentType)
+					
+					if var5 ~= nil then
+						local var6 = p3(p6, var5)
 						
-						return
-					elseif fFlagLuaAppEnableHomepageOneByTwoTile and p6.contentType == omniRecommendationsContentType.AdLink then
-						if p6.universeId ~= nil then
-							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkUnexpectedUniverseId", "AdLink entry unexpectedly has universe ID")
-						end
-						table.insert(var6.entries, p6)
-						
-						return
-					else
-						local var7 = p2(v.contentType)
-						
-						if var7 ~= nil then
-							local var8 = p3(p6, var7)
+						if var6 ~= nil then
+							table.insert(var4.entries, var6)
 							
-							if var8 ~= nil then
-								table.insert(var6.entries, var8)
-								
-								return
-							end
-							var6.hasMoreRows = true
+							return
 						end
+						var4.hasMoreRows = true
 					end
-				end):matchError(function(p5) --[[ line: 121 ]]
+				end):matchError(function(p5) --[[ line: 84 ]]
 					warn(p5)
 				end)
 				continue
 			end
-			return var6
+			return var4
 		end
 	end
-	return var6
+	return var4
 end
 
 return t

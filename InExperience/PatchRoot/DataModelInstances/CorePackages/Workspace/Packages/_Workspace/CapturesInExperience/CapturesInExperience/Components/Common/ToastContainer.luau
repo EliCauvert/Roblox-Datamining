@@ -1,6 +1,5 @@
 ﻿local parent = script.Parent.Parent.Parent
 local parent_1 = parent.Parent
-local httpService = game:GetService("HttpService")
 local userInputService = game:GetService("UserInputService")
 local dashModule = require(parent_1.Dash)
 local localizationModule = require(parent_1.Localization)
@@ -47,9 +46,9 @@ local _ = {
 	videoCaptureOtherError = "videoCaptureOtherError",
 	viewAction = "viewAction"
 }
-local var21 = if userInputService:GetPlatform() ~= Enum.Platform.Windows then userInputService:GetPlatform() == Enum.Platform.OSX else true
+local var20 = if userInputService:GetPlatform() ~= Enum.Platform.Windows then userInputService:GetPlatform() == Enum.Platform.OSX else true
 
-local function _(p0) --[[ line: 75 | named "isVideoCapture" ]]
+local function _(p0) --[[ line: 74 | named "isVideoCapture" ]]
 	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref)
 	if not p0 then
 		return false
@@ -63,13 +62,46 @@ local t = {
 	[capturesToastTypeModule.CaptureSavedToDevice] = {
 		toastTitleKey = "captureSavedToDevice",
 		iconImage = images["icons/status/success"],
-		onActivated = if var21 then function(p1, _, p2) --[[ line: 96 ]]
+		onActivated = if var20 then function(p1, _, p2) --[[ line: 95 ]]
 			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref)
-			local var23
+			local var22
 			p1.fireEvent(eventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated)
 			
 			if p2 then
 				local captureInfo = p2.captureInfo
+				
+				if not captureInfo then
+					var22 = false
+				elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+					var22 = captureInfo.CaptureType == Enum.CaptureType.Video
+					var22 = nil
+				else
+					var22 = captureInfo.type == captureTypeModule.Video
+				end
+			else
+				var22 = false
+			end
+			if var22 then
+				game:OpenVideosFolder()
+				
+				return
+			end
+			game:OpenScreenshotsFolder()
+		end else nil,
+		toastCTAKey = if var20 then "openInFiles" else nil
+	},
+	[capturesToastTypeModule.CaptureTaken] = {
+		toastCTAKey = "shareAction",
+		toastSubtitleKey = "shareCaptureDescription",
+		toastTitleKey = "captureSaved",
+		iconImage = images["icons/controls/screenshot"],
+		onActivated = function(p3, p4, p5) --[[ line: 109 ]]
+			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref)
+			local var23
+			p3.fireEvent(eventNamesModule.CapturesShareToastButtonActivated)
+			
+			if p5 then
+				local captureInfo = p5.captureInfo
 				
 				if not captureInfo then
 					var23 = false
@@ -83,39 +115,6 @@ local t = {
 				var23 = false
 			end
 			if var23 then
-				game:OpenVideosFolder()
-				
-				return
-			end
-			game:OpenScreenshotsFolder()
-		end else nil,
-		toastCTAKey = if var21 then "openInFiles" else nil
-	},
-	[capturesToastTypeModule.CaptureTaken] = {
-		toastCTAKey = "shareAction",
-		toastSubtitleKey = "shareCaptureDescription",
-		toastTitleKey = "captureSaved",
-		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(p3, p4, p5) --[[ line: 110 ]]
-			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref)
-			local var24
-			p3.fireEvent(eventNamesModule.CapturesShareToastButtonActivated)
-			
-			if p5 then
-				local captureInfo = p5.captureInfo
-				
-				if not captureInfo then
-					var24 = false
-				elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-					var24 = captureInfo.CaptureType == Enum.CaptureType.Video
-					var24 = nil
-				else
-					var24 = captureInfo.type == captureTypeModule.Video
-				end
-			else
-				var24 = false
-			end
-			if var24 then
 				p3.fireEvent(eventNamesModule.CapturesVideoShareToastButtonActivated)
 			end
 			if p5 and p5.captureInfo then
@@ -162,7 +161,7 @@ local t = {
 		toastCTAKey = "viewAction",
 		toastTitleKey = "captureSaved",
 		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(p6, p7) --[[ line: 160 ]]
+		onActivated = function(p6, p7) --[[ line: 159 ]]
 			-- upvalues: eventNamesModule (ref), carouselOpenedModule (ref)
 			p6.fireEvent(eventNamesModule.CapturesViewToastButtonActivated)
 			p7(carouselOpenedModule(1))
@@ -170,11 +169,11 @@ local t = {
 	}
 }
 
-return function(_) --[[ line: 171 ]]
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesToastTypeModule (ref), t (ref), toastVanishedModule (ref), dashModule (ref), fFlagCreateMomentsToastModule (ref), toastControllerModule (ref), httpService (ref), startMomentsCreationFlowModule (ref), eventNamesModule (ref), toast (ref)
-	local var25 = useAnalyticsModule()
-	local var26 = useDispatch()
-	local var27 = useLocalization({
+return function(_) --[[ line: 170 ]]
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesToastTypeModule (ref), t (ref), toastVanishedModule (ref), dashModule (ref), fFlagCreateMomentsToastModule (ref), toastControllerModule (ref), startMomentsCreationFlowModule (ref), eventNamesModule (ref), toast (ref)
+	local var24 = useAnalyticsModule()
+	local var25 = useDispatch()
+	local var26 = useLocalization({
 		captureSaved = "Feature.Captures.Toast.CaptureSaved",
 		captureSavedToDevice = "Feature.Captures.Toast.CaptureSavedToDevice",
 		capturesEnabled = "Feature.Captures.Toast.CapturesEnabled",
@@ -194,95 +193,93 @@ return function(_) --[[ line: 171 ]]
 		videoCaptureOtherError = "Feature.Captures.Toast.VideoCaptureOtherError",
 		viewAction = "Feature.Captures.Action.ViewCapture"
 	})
-	local var28 = useSelector(function(p8) --[[ line: 196 ]]
+	local var27 = useSelector(function(p8) --[[ line: 195 ]]
 		-- upvalues: constantsModule (copy)
 		return p8[constantsModule.RoduxKey].Toast.ToastType
 	end)
-	local var29 = useSelector(function(p9) --[[ line: 200 ]]
+	local var28 = useSelector(function(p9) --[[ line: 199 ]]
 		-- upvalues: constantsModule (copy)
 		return p9[constantsModule.RoduxKey].Toast.ToastConfig
 	end)
-	local var30 = useSelector(function(p10) --[[ line: 204 ]]
+	local var29 = useSelector(function(p10) --[[ line: 203 ]]
 		-- upvalues: constantsModule (copy)
 		return p10[constantsModule.RoduxKey].Toast.IsDismissed
 	end)
-	local var31 = reactModule.useCallback(function(p11) --[[ line: 208 ]]
-		-- upvalues: var27 (ref)
-		return if p11 then var27[p11] else nil
+	local var30 = reactModule.useCallback(function(p11) --[[ line: 207 ]]
+		-- upvalues: var26 (ref)
+		return if p11 then var26[p11] else nil
 	end)
-	local var32 = reactModule.useMemo(function() --[[ line: 215 ]]
-		-- upvalues: var28 (ref), capturesToastTypeModule (copy), t (copy), var26 (ref), toastVanishedModule (copy), var25 (ref), var29 (ref), constantsModule (copy), dashModule (copy), var31 (ref)
-		if var28 == capturesToastTypeModule.None then
+	local var31 = reactModule.useMemo(function() --[[ line: 214 ]]
+		-- upvalues: var27 (ref), capturesToastTypeModule (copy), t (copy), var25 (ref), toastVanishedModule (copy), var24 (ref), var28 (ref), constantsModule (copy), dashModule (copy), var30 (ref)
+		if var27 == capturesToastTypeModule.None then
 			return nil
 		end
-		local var33 = t[var28]
+		local var32 = t[var27]
 		
-		return dashModule.join(var33, {
-			buttonText = var31(var33.toastCTAKey),
-			duration = var33.duration or constantsModule.ToastDuration,
-			onActivated = if var33.onActivated then function() --[[ line: 231 ]]
-				-- upvalues: var33 (ref), var25 (copy), var26 (copy), var29 (copy), var28 (ref), var28 (copy), toastVanishedModule (copy)
-				var33.onActivated(var25, var26, var29)
+		return dashModule.join(var32, {
+			buttonText = var30(var32.toastCTAKey),
+			duration = var32.duration or constantsModule.ToastDuration,
+			onActivated = if var32.onActivated then function() --[[ line: 230 ]]
+				-- upvalues: var32 (ref), var24 (copy), var25 (copy), var28 (copy), var27 (ref), var27 (copy), toastVanishedModule (copy)
+				var32.onActivated(var24, var25, var28)
 				
-				if var28 == var28 then
-					var26(toastVanishedModule())
+				if var27 == var27 then
+					var25(toastVanishedModule())
 				end
 			end else nil,
-			onDismissed = function() --[[ line: 223 ]]
-				-- upvalues: var28 (ref), var28 (copy), var26 (copy), toastVanishedModule (copy)
-				if var28 == var28 then
-					var26(toastVanishedModule())
+			onDismissed = function() --[[ line: 222 ]]
+				-- upvalues: var27 (ref), var27 (copy), var25 (copy), toastVanishedModule (copy)
+				if var27 == var27 then
+					var25(toastVanishedModule())
 				end
 			end,
 			toastCTAKey = dashModule.None,
-			toastSubtitle = var31(var33.toastSubtitleKey),
+			toastSubtitle = var30(var32.toastSubtitleKey),
 			toastSubtitleKey = dashModule.None,
-			toastTitle = var31(var33.toastTitleKey),
+			toastTitle = var30(var32.toastTitleKey),
 			toastTitleKey = dashModule.None
 		})
-	end, { var28, var29 })
+	end, { var27, var28 })
 	
-	return if var32 then if fFlagCreateMomentsToastModule then if var28 == capturesToastTypeModule.CaptureTakenWithMomentsCTA then reactModule.createElement(toastControllerModule, {
+	return if var31 then if fFlagCreateMomentsToastModule then if var27 == capturesToastTypeModule.CaptureTakenWithMomentsCTA then reactModule.createElement(toastControllerModule, {
 		icon = "icons/brands/moments_large",
-		title = var31("momentsTitle"),
-		text = var31("discoverPostWatch"),
-		actionText = var31("createAction"),
-		onAction = function() --[[ line: 263 ]]
-			-- upvalues: var29 (ref), httpService (copy), var26 (ref), startMomentsCreationFlowModule (copy), var25 (ref), eventNamesModule (copy)
-			if var29 and var29.captureInfo then
-				local var34 = httpService:GenerateGUID(false)
-				var26(startMomentsCreationFlowModule(var29.captureInfo, var34))
-				var25.fireEvent(eventNamesModule.XExpMomentCreationStarted, { creationSessionId = var34 })
+		title = var30("momentsTitle"),
+		text = var30("discoverPostWatch"),
+		actionText = var30("createAction"),
+		onAction = function() --[[ line: 262 ]]
+			-- upvalues: var28 (ref), var25 (ref), startMomentsCreationFlowModule (copy), var24 (ref), eventNamesModule (copy)
+			if var28 and var28.captureInfo then
+				var25(startMomentsCreationFlowModule(var28.captureInfo))
 			end
-			var25.fireEvent(eventNamesModule.CapturesCreateMomentToastButtonActivated)
+			var24.fireEvent(eventNamesModule.CapturesCreateMomentToastButtonActivated)
 		end,
-		onDismissed = function() --[[ line: 273 ]]
-			-- upvalues: var26 (ref), toastVanishedModule (copy)
-			var26(toastVanishedModule())
+		onDismissed = function() --[[ line: 268 ]]
+			-- upvalues: var25 (ref), toastVanishedModule (copy)
+			var25(toastVanishedModule())
 		end,
-		duration = var32.duration,
-		show = not var30
-	}) elseif var28 == capturesToastTypeModule.MomentProcessing then reactModule.createElement(toastControllerModule, {
+		duration = var31.duration,
+		show = not var29
+	}) elseif var27 == capturesToastTypeModule.MomentProcessing then reactModule.createElement(toastControllerModule, {
 		icon = "icons/brands/moments_large",
-		title = var31("momentProcessingTitle"),
-		text = var31("momentProcessingDescription"),
-		onDismissed = function() --[[ line: 284 ]]
-			-- upvalues: var26 (ref), toastVanishedModule (copy)
-			var26(toastVanishedModule())
+		title = var30("momentProcessingTitle"),
+		text = var30("momentProcessingDescription"),
+		onDismissed = function() --[[ line: 279 ]]
+			-- upvalues: var25 (ref), toastVanishedModule (copy)
+			var25(toastVanishedModule())
 		end,
-		duration = var32.duration,
-		show = not var30
+		duration = var31.duration,
+		show = not var29
 	}) else reactModule.createElement(reactModule.Fragment, {}, {
-		[var28] = reactModule.createElement(toast, {
-			duration = var32.duration,
-			show = not var30,
-			toastContent = var32
+		[var27] = reactModule.createElement(toast, {
+			duration = var31.duration,
+			show = not var29,
+			toastContent = var31
 		})
 	}) else reactModule.createElement(reactModule.Fragment, {}, {
-		[var28] = reactModule.createElement(toast, {
-			duration = var32.duration,
-			show = not var30,
-			toastContent = var32
+		[var27] = reactModule.createElement(toast, {
+			duration = var31.duration,
+			show = not var29,
+			toastContent = var31
 		})
 	}) else nil
 end

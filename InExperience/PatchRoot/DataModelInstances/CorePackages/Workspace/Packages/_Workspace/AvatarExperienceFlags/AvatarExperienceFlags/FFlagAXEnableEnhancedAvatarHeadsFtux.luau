@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableEnhancedAvatarHeadsFtux2", false) and require(script.Parent.FFlagDynamicHeadsMigration)

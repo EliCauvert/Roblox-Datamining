@@ -47,7 +47,7 @@ return {
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
 			LayerCollectorProvider = reactModule.createElement(layerCollectorProvider, {}, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
+				FoundationProvider = reactModule.createElement(foundationProvider, { theme = "Dark" }, {
 					LocalizationProvider = roactModule.createElement(localizationProvider, {
 						localization = localization.new(localizationService.RobloxLocaleId)
 					}, {

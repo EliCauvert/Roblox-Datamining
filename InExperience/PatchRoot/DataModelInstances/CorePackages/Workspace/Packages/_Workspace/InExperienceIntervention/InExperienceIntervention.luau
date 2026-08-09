@@ -39,7 +39,7 @@ function t.new() --[[ line: 42 ]]
 				localization = localization.new(localizationService.RobloxLocaleId)
 			}, {
 				InterventionPlacementProvider = roactModule.createElement(interventionPlacement.Provider, { value = constants.InterventionPlacementType.InExperience }, {
-					FoundationProvider = roactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
+					FoundationProvider = roactModule.createElement(foundationProvider, { theme = "Dark" }, {
 						StyleProvider = roactModule.createElement(appStyleProvider, { style = { themeName = "dark", fontName = "gotham" } }, {
 							Container = roactModule.createElement(inExperienceInterventionContainerModule, {})
 						})

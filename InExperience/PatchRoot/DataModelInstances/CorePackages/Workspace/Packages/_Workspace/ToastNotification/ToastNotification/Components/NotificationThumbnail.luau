@@ -10,52 +10,50 @@ local typeModule = require(parent.type)
 local getRbxthumbWithTypeSizeAndOptions = dependenciesModule.getRbxthumbWithTypeSizeAndOptions
 local userLibConstants = dependenciesModule.UserLibConstants
 local parent_1 = parent.Parent
-local notificationsCommonModule = require(parent_1.NotificationsCommon)
-local constants = notificationsCommonModule.constants
+local constants = require(parent_1.NotificationsCommon).constants
 local sharedFlagsModule = require(parent_1.SharedFlags)
 local toastNotificationHelperModule = require(parent.utils.toastNotificationHelper)
 local images = UIBlox.App.ImageSet.Images
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local var5 = images["icons/graphic/logomark-gradient_xlarge"]
+local var4 = images["icons/graphic/logomark-gradient_xlarge"]
 local safety = images["icons/common/safety"]
 local getFFlagEnableToastIconSupport = sharedFlagsModule.GetFFlagEnableToastIconSupport
-local fFlagNotificationThumbnailUseProfileFrameThumbnail = notificationsCommonModule.FFlagNotificationThumbnailUseProfileFrameThumbnail
 local useNotificationCardStateModule = require(context.useNotificationCardState)
 
-local var7 = function(p0) --[[ line: 32 ]]
+local var6 = function(p0) --[[ line: 30 ]]
 	-- upvalues: typeModule (ref), userLibConstants (ref)
 	return if p0 == typeModule.SENDERThumbnailTypeEnum.Game then userLibConstants.RbxthumbTypes.GameIcon elseif p0 == typeModule.SENDERThumbnailTypeEnum.User then userLibConstants.RbxthumbTypes.AvatarHeadShot elseif p0 == typeModule.SENDERThumbnailTypeEnum.Group then userLibConstants.RbxthumbTypes.GroupIcon elseif p0 == typeModule.SENDERThumbnailTypeEnum.Asset then userLibConstants.RbxthumbTypes.Asset elseif p0 == typeModule.SENDERThumbnailTypeEnum.Bundle then userLibConstants.RbxthumbTypes.BundleThumbnail else userLibConstants.RbxthumbTypes.GameIcon
 end
 
-local var8 = if toastNotificationHelperModule.isUserThumbnail then toastNotificationHelperModule.isUserThumbnail else function(p1) --[[ line: 50 ]]
+local var7 = if toastNotificationHelperModule.isUserThumbnail then toastNotificationHelperModule.isUserThumbnail else function(p1) --[[ line: 48 ]]
 	-- upvalues: typeModule (ref)
 	return p1.idType == typeModule.SENDERThumbnailTypeEnum.User
 end
 
-return function() --[[ line: 54 ]]
-	-- upvalues: useNotificationCardStateModule (ref), useStyle (ref), var8 (ref), fFlagNotificationThumbnailUseProfileFrameThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), var7 (ref), getFFlagEnableToastIconSupport (ref), typeModule (ref), constants (ref), react (ref), imageSetLabel (ref), safety (ref), var5 (ref), imagePile (ref), loadableImage (ref)
-	local var9 = useNotificationCardStateModule("thumbnail")
+return function() --[[ line: 52 ]]
+	-- upvalues: useNotificationCardStateModule (ref), useStyle (ref), var7 (ref), getRbxthumbWithTypeSizeAndOptions (ref), var6 (ref), getFFlagEnableToastIconSupport (ref), typeModule (ref), constants (ref), react (ref), imageSetLabel (ref), safety (ref), var4 (ref), imagePile (ref), loadableImage (ref)
+	local var8 = useNotificationCardStateModule("thumbnail")
 	
-	if var9 == nil or #var9 == 0 then
+	if var8 == nil or #var8 == 0 then
 		return nil
 	end
-	local var10 = useStyle()
+	local var9 = useStyle()
 	local t = {}
-	local var12 = false
+	local var11 = false
 	
-	for i, v in ipairs(var9) do
-		if not var8(v) then
-			var12 = true
+	for i, v in ipairs(var8) do
+		if not var7(v) then
+			var11 = true
 		end
-		t[tostring(v.id)] = if fFlagNotificationThumbnailUseProfileFrameThumbnail then getRbxthumbWithTypeSizeAndOptions(v.id, var7(v.idType), 150, nil, nil, var8(v)) else getRbxthumbWithTypeSizeAndOptions(v.id, var7(v.idType), 150)
+		t[tostring(v.id)] = getRbxthumbWithTypeSizeAndOptions(v.id, var6(v.idType), 150)
 	end
 	local t_1 = {}
 	
 	if getFFlagEnableToastIconSupport() then
-		local var14 = var9[1]
+		local var13 = var8[1]
 		
-		if var14.idType == typeModule.SENDERThumbnailTypeEnum.Icon then
-			return if var14.id == constants.SafetyThumbnailId then react.createElement("Frame", {
+		if var13.idType == typeModule.SENDERThumbnailTypeEnum.Icon then
+			return if var13.id == constants.SafetyThumbnailId then react.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
@@ -68,14 +66,14 @@ return function() --[[ line: 54 ]]
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
 					Image = safety,
-					ImageColor3 = var10.Theme.IconDefault.Color
+					ImageColor3 = var9.Theme.IconDefault.Color
 				})
 			}) else react.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeXX,
-				BackgroundColor3 = var10.Tokens.Color.Extended.Black.Black_100.Color3
+				BackgroundColor3 = var9.Tokens.Color.Extended.Black.Black_100.Color3
 			}, {
 				UICorner = react.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 				Icon = react.createElement(imageSetLabel, {
@@ -84,13 +82,13 @@ return function() --[[ line: 54 ]]
 					Size = UDim2.fromScale(0.8, 0.8),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					Image = var5
+					Image = var4
 				})
 			})
-		elseif var12 then
-			local var15 = var9[1]
+		elseif var11 then
+			local var14 = var8[1]
 			
-			return if var15 == nil then nil else react.createElement("Frame", {
+			return if var14 == nil then nil else react.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
@@ -101,9 +99,9 @@ return function() --[[ line: 54 ]]
 					showFailedStateWhenLoadingFailed = true,
 					useShimmerAnimationWhileLoading = true,
 					ZIndex = 1,
-					Image = if fFlagNotificationThumbnailUseProfileFrameThumbnail then getRbxthumbWithTypeSizeAndOptions(var15.id, var7(var15.idType), 150, nil, nil, var8(var15)) else getRbxthumbWithTypeSizeAndOptions(var15.id, var7(var15.idType), 150),
+					Image = getRbxthumbWithTypeSizeAndOptions(var14.id, var6(var14.idType), 150),
 					Size = UDim2.fromScale(1, 1),
-					cornerRadius = if var8(var15) then UDim.new(0.5, 0) else UDim.new(0, 8)
+					cornerRadius = if var7(var14) then UDim.new(0.5, 0) else UDim.new(0, 8)
 				})
 			})
 		end
@@ -115,7 +113,7 @@ return function() --[[ line: 54 ]]
 		end
 		return react.createElement(imagePile, {
 			images = t_1,
-			imageBorderColor = var10.Theme.BackgroundUIDefault.Color,
+			imageBorderColor = var9.Theme.BackgroundUIDefault.Color,
 			imageBorderThickness = if #t_1 > 1 then 2 else 0
 		})
 	end

@@ -1,5 +1,5 @@
 ﻿return {
 	SetCountryCodeList = require(script.SetCountryCodeList),
-	SetLoginResult = if not require(script:FindFirstAncestor("AuthCommon").Parent.SharedFlags).FFlagRemoveUnusedLoginResultRoduxSlice then require(script.SetLoginResult) else nil,
+	SetLoginResult = require(script.SetLoginResult),
 	SetBackNavigationDisabled = require(script.SetBackNavigationDisabled)
 }

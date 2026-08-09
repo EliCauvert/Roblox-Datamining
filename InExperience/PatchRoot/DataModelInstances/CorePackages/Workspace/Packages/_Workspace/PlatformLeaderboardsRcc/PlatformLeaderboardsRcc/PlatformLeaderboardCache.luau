@@ -176,29 +176,27 @@ function t:startFriendsRefresh(p14) --[[ line: 240 ]]
 		return
 	else
 		local var16 = nil
-		local var17 = true
 		
-		local function loop() --[[ line: 253 ]]
-			-- upvalues: self (ref), var17 (write), platformLeaderboardFriendsJitterSeconds (copy), platformLeaderboardFriendsIntervalSeconds (copy), var16 (write)
+		local function loop() --[[ line: 250 ]]
+			-- upvalues: self (ref), platformLeaderboardFriendsJitterSeconds (copy), platformLeaderboardFriendsIntervalSeconds (copy), var16 (write)
 			repeat
 				table.clear(self._friendsData)
 				for i in self._currentFriendsLeaderboardViewersById do
-					local var19 = if var17 then 0 else math.random(0, platformLeaderboardFriendsJitterSeconds)
-					self._scheduler.spawn(function() --[[ line: 258 ]]
-						-- upvalues: self (copy), var19 (ref), i (ref)
-						self._scheduler.wait(var19)
+					local randomValue = math.random(0, platformLeaderboardFriendsJitterSeconds)
+					self._scheduler.spawn(function() --[[ line: 255 ]]
+						-- upvalues: self (copy), randomValue (ref), i (ref)
+						self._scheduler.wait(randomValue)
 						
 						if self._currentFriendsLeaderboardViewersById[i] then
 							self:_fetchFriendsLeaderboardForUser(i)
 						end
 					end)
 				end
-				var17 = false
 				self._scheduler.wait(math.max(1, platformLeaderboardFriendsIntervalSeconds))
 			until self._friendsTimer ~= var16
 		end
 		
-		self._friendsTimer = self._scheduler.defer(function() --[[ line: 271 ]]
+		self._friendsTimer = self._scheduler.defer(function() --[[ line: 267 ]]
 			-- upvalues: loop (ref), self (ref), var16 (write)
 			if not pcall(loop) and self._friendsTimer == var16 then
 				self._friendsTimer = nil
@@ -207,7 +205,7 @@ function t:startFriendsRefresh(p14) --[[ line: 240 ]]
 	end
 end
 
-function t:stopFriendsRefresh(p15) --[[ line: 280 ]]
+function t:stopFriendsRefresh(p15) --[[ line: 276 ]]
 	self._currentFriendsLeaderboardViewersById[p15] = nil
 	
 	if next(self._currentFriendsLeaderboardViewersById) then return end
@@ -217,7 +215,7 @@ function t:stopFriendsRefresh(p15) --[[ line: 280 ]]
 	end
 end
 
-function t:forceRefresh(p16, p17) --[[ line: 292 ]]
+function t:forceRefresh(p16, p17) --[[ line: 288 ]]
 	self._config = p16
 	
 	if p17 then
@@ -226,12 +224,12 @@ function t:forceRefresh(p16, p17) --[[ line: 292 ]]
 		table.clear(self._friendsData)
 		table.clear(self._userScoreEntries)
 	end
-	local var20 = next(self._currentlyActiveGlobalLeaderboardViewersByUserId)
+	local var19 = next(self._currentlyActiveGlobalLeaderboardViewersByUserId)
 	
-	if self._globalTimer and var20 then
+	if self._globalTimer and var19 then
 		pcall(self._scheduler.cancel, self._globalTimer)
 		self._globalTimer = nil
-		self:startGlobalRefresh(var20)
+		self:startGlobalRefresh(var19)
 	end
 	if self._friendsTimer then
 		pcall(self._scheduler.cancel, self._friendsTimer)
@@ -249,12 +247,12 @@ function t:forceRefresh(p16, p17) --[[ line: 292 ]]
 	end
 end
 
-function t:cleanupForUserId(p18) --[[ line: 329 ]]
+function t:cleanupForUserId(p18) --[[ line: 325 ]]
 	self:stopGlobalRefresh(p18)
 	self:stopFriendsRefresh(p18)
 end
 
-function t:teardown() --[[ line: 334 ]]
+function t:teardown() --[[ line: 330 ]]
 	if self._globalTimer then
 		pcall(self._scheduler.cancel, self._globalTimer)
 	end
@@ -272,7 +270,7 @@ function t:teardown() --[[ line: 334 ]]
 	table.clear(self._userScoreEntries)
 end
 
-function t:destroy() --[[ line: 351 ]]
+function t:destroy() --[[ line: 347 ]]
 	self:teardown()
 end
 

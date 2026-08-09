@@ -11,12 +11,13 @@ local useTilesSeenCollectionModule = require(socialCarousel.Analytics.useTilesSe
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local appPage = robloxAppEnumsModule.AppPage
 local useNavigation = navigationModule.useNavigation
+local fFlagLuaAppCompositionSupport = require(parent.SharedFlags).FFlagLuaAppCompositionSupport
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var8 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0) --[[ line: 26 | named "CarouselContainer" ]]
-	-- upvalues: useSocialCarouselAnalyticsModule (ref), useTilesSeenCollectionModule (ref), useDispatch (ref), useNavigation (ref), reactModule (ref), fFlagCreateConnectionsHub (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var8 (ref), navigateDown (ref), carouselModule (ref)
+return function(p0) --[[ line: 27 | named "CarouselContainer" ]]
+	-- upvalues: useSocialCarouselAnalyticsModule (ref), useTilesSeenCollectionModule (ref), useDispatch (ref), useNavigation (ref), reactModule (ref), fFlagCreateConnectionsHub (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var8 (ref), navigateDown (ref), carouselModule (ref), fFlagLuaAppCompositionSupport (ref)
 	local var9 = useSocialCarouselAnalyticsModule()
 	local var10 = useTilesSeenCollectionModule()
 	local var11 = useDispatch()
@@ -24,7 +25,7 @@ return function(p0) --[[ line: 26 | named "CarouselContainer" ]]
 	local var13 = reactModule.useRef({ startIndex = 1, endIndex = 1 })
 	
 	return reactModule.createElement(carouselModule, {
-		onActivateHeader = reactModule.useCallback(function() --[[ line: 33 ]]
+		onActivateHeader = reactModule.useCallback(function() --[[ line: 34 ]]
 			-- upvalues: var9 (ref), fFlagCreateConnectionsHub (copy), var12 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var8 (copy), var11 (ref), navigateDown (copy)
 			var9.friendsHeaderPressed()
 			
@@ -39,7 +40,7 @@ return function(p0) --[[ line: 26 | named "CarouselContainer" ]]
 			end
 			var11(navigateDown({ name = appPage.ViewFriends }))
 		end, { var11, var12 }),
-		onTileContentChanged = reactModule.useCallback(function(p1, p2, p3) --[[ line: 44 ]]
+		onTileContentChanged = reactModule.useCallback(function(p1, p2, p3) --[[ line: 45 ]]
 			-- upvalues: var13 (ref), var10 (ref)
 			local current = var13.current
 			
@@ -47,6 +48,6 @@ return function(p0) --[[ line: 26 | named "CarouselContainer" ]]
 				var10.addTileToCollection(p1, p2, p3)
 			end
 		end, { var10 }),
-		appCompositionEnabled = p0.appCompositionEnabled
+		appCompositionEnabled = if fFlagLuaAppCompositionSupport then p0.appCompositionEnabled else nil
 	})
 end

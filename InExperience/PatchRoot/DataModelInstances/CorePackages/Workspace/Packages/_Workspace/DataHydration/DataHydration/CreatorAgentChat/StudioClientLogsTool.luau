@@ -8,11 +8,11 @@ local t = {
 	}
 }
 
-local function _(p0) --[[ line: 34 | named "valueLooksLikeToolName" ]]
+local function _(p0) --[[ line: 36 | named "valueLooksLikeToolName" ]]
 	return typeof(p0) == "string" and string.lower(p0) == "ask_for_logs"
 end
 
-local function toolCallLooksLikeClientLogsRequest(p1) --[[ line: 38 ]]
+local function toolCallLooksLikeClientLogsRequest(p1) --[[ line: 40 ]]
 	local kind = p1.kind
 	
 	if not (typeof(kind) == "string" and string.lower(kind) == "ask_for_logs") then
@@ -37,14 +37,14 @@ local function toolCallLooksLikeClientLogsRequest(p1) --[[ line: 38 ]]
 	end
 end
 
-local _ = function(p2) --[[ line: 55 | named "decodePersistedToolResultText" ]]
+local _ = function(p2) --[[ line: 57 | named "decodePersistedToolResultText" ]]
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, p2)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
 end
 
-local function getPersistedToolResultText(p3) --[[ line: 65 ]]
+local function getPersistedToolResultText(p3) --[[ line: 67 ]]
 	-- upvalues: httpService (ref)
 	if p3.content == nil then
 		return nil
@@ -73,7 +73,7 @@ return {
 	NOT_IN_GAME_MESSAGE = "The user is not in the game.",
 	LOCAL_TOOL_DEFINITION = t,
 	toolCallLooksLikeClientLogsRequest = toolCallLooksLikeClientLogsRequest,
-	findClientLogsRequestInTurnState = function(p4, p5) --[[ line: 88 ]]
+	findClientLogsRequestInTurnState = function(p4, p5) --[[ line: 90 ]]
 		-- upvalues: getPersistedToolResultText (ref)
 		local t = {}
 		
@@ -124,13 +124,13 @@ return {
 		end
 		return nil, nil, nil, nil
 	end,
-	formatLogsContent = function(p6, p7) --[[ line: 114 ]]
+	formatLogsContent = function(p6, p7) --[[ line: 116 ]]
 		-- upvalues: httpService (ref)
 		return {
 			text = httpService:JSONEncode({ status = "ok", clientLogs = p6, serverLogs = p7 })
 		}
 	end,
-	formatNotInGameContent = function() --[[ line: 124 ]]
+	formatNotInGameContent = function() --[[ line: 126 ]]
 		-- upvalues: httpService (ref)
 		return {
 			text = httpService:JSONEncode({

@@ -3,6 +3,7 @@ local reactModule = require(corePackagesService.Packages.React)
 local useSignalState = require(corePackagesService.Packages.SignalsReact).useSignalState
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
 local useDispatch = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useDispatch
+local fFlagAXTimeoutPromptLabelAbuseTypeFallback = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXTimeoutPromptLabelAbuseTypeFallback
 local avatarExperienceCommonModule = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon)
 local AXPartialPageModal = avatarExperienceCommonModule.Components.AXPartialPageModal
 local getTimeoutStatusStore = avatarExperienceCommonModule.Stores.getTimeoutStatusStore
@@ -15,11 +16,11 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 local closeOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOpenPrompt)
 
-return function() --[[ line: 26 | named "SaveAvatarTimeoutPrompt" ]]
-	-- upvalues: useDispatch (ref), getTimeoutStatusStore (ref), useSignalState (ref), reactModule (ref), closeOpenPromptModule (ref), labelAbuseTypeMapping (ref), useLocalization (ref), formatTimeoutEndTime (ref), AXPartialPageModal (ref), buttonVariant (ref), inputSize (ref), view (ref), text (ref)
+return function() --[[ line: 29 | named "SaveAvatarTimeoutPrompt" ]]
+	-- upvalues: useDispatch (ref), getTimeoutStatusStore (ref), useSignalState (ref), reactModule (ref), closeOpenPromptModule (ref), fFlagAXTimeoutPromptLabelAbuseTypeFallback (ref), labelAbuseTypeMapping (ref), useLocalization (ref), formatTimeoutEndTime (ref), AXPartialPageModal (ref), buttonVariant (ref), inputSize (ref), view (ref), text (ref)
 	local var5 = useDispatch()
 	local var6 = useSignalState(getTimeoutStatusStore().getTimeoutDetails)
-	local var7 = reactModule.useCallback(function() --[[ line: 31 ]]
+	local var7 = reactModule.useCallback(function() --[[ line: 34 ]]
 		-- upvalues: var5 (ref), closeOpenPromptModule (copy)
 		var5(closeOpenPromptModule)
 	end, { var5 })
@@ -30,7 +31,7 @@ return function() --[[ line: 26 | named "SaveAvatarTimeoutPrompt" ]]
 		bodyText = {
 			"Feature.Timeout.Prompt.BodyText",
 			rule = useLocalization({
-				rule = if var6 and labelAbuseTypeMapping then labelAbuseTypeMapping[var6.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other" else "Feature.NotApproved.Label.AbuseType.Other"
+				rule = if not fFlagAXTimeoutPromptLabelAbuseTypeFallback then if var6 and labelAbuseTypeMapping then labelAbuseTypeMapping[var6.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other" else "Feature.NotApproved.Label.AbuseType.Other" elseif var6 then labelAbuseTypeMapping[var6.labelTranslationKey] else nil
 			}).rule or "",
 			time = if var6 then formatTimeoutEndTime(var6.endDate) else ""
 		}

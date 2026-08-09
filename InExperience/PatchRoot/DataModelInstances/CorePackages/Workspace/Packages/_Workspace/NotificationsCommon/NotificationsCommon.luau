@@ -15,8 +15,6 @@ return {
 	NotificationHelper = require(script.utils.NotificationHelper),
 	type = require(script.type),
 	constants = require(script.constants),
-	FFlagNotificationThumbnailUseProfileFrameThumbnail = require(script.Flags.FFlagNotificationThumbnailUseProfileFrameThumbnail),
 	ixpHelper = require(script.utils.ixpHelper),
-	sendEventDeferred = require(script.analytics.sendEventDeferred),
-	GetGameInvitesStatusStore = require(script.Stores.GetGameInvitesStatusStore)
+	sendEventDeferred = require(script.analytics.sendEventDeferred)
 }

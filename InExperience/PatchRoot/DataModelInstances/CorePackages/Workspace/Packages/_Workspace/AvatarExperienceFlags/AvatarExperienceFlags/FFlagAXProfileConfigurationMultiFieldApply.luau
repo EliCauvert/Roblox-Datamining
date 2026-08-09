@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXProfileConfigurationMultiFieldApply", false) and (game:GetEngineFeature("AvatarEditorServiceApplyProfileConfigurationEnabled") and game:GetEngineFeature("FrameAssetInProfileConfigurationEnabled"))

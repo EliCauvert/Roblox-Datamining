@@ -22,62 +22,60 @@ local presetCooldownProviderModule = require(script.Parent.PresetCooldownProvide
 local presetMessageButtonModule = require(script.Parent.PresetMessageButton)
 local presetTrayKeyboardSelectedModule = require(expChat.Actions.PresetTrayKeyboardSelected)
 local constantsModule = require(expChat.PresetChat.Constants)
-local sendPresetModule = require(script.Parent.sendPreset)
 local setIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
 local fFlagExpChatUniverseChatPresetEnabledModule = require(expChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
 local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
-local fFlagExpChatPresetChatAutocompleteEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatAutocompleteEnabled)
-local var24 = expChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
+local var22 = expChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
 local presetChatContainer = expChatSharedModule.Logger:new("ExpChat/PresetChat/PresetChatContainer")
 
-local function _() --[[ line: 43 | named "getRBXGeneralChannel" ]]
+local function _() --[[ line: 40 | named "getRBXGeneralChannel" ]]
 	-- upvalues: textChatService (ref)
 	local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
 	
 	return if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
 end
 
-return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContainer" ]]
-	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), useSelector (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), var24 (ref), sendPresetModule (ref), presetChatContainer (ref), textChatService (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
-	local var27 = foundationModule.Hooks.useTokens()
-	local var28 = getPresetChatStoreModule(false)
-	local var29 = useDispatch()
-	local var30 = signalsReactModule.useSignalState(var28.getIsLoading)
-	local var31 = signalsReactModule.useSignalState(var28.getCategoryGroups)
-	local var32 = if fFlagExpChatUseMessagesStore then signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat) else useSelector(function(p0) --[[ line: 64 ]]
+return reactModule.memo(function(value) --[[ line: 48 | named "PresetChatContainer" ]]
+	-- upvalues: foundationModule (ref), getPresetChatStoreModule (ref), useDispatch (ref), signalsReactModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), useSelector (ref), localizationModule (ref), reactModule (ref), setIsPresetTrayOpenModule (ref), presetTrayKeyboardSelectedModule (ref), expChatSharedModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), inputTypeModule (ref), userInputService (ref), guiService (ref), getTransparencyStoreModule (ref), textChatService (ref), var22 (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), presetChatContainer (ref), presetMessageButtonModule (ref), text (ref), presetCooldownProviderModule (ref)
+	local var25 = foundationModule.Hooks.useTokens()
+	local var26 = getPresetChatStoreModule(false)
+	local var27 = useDispatch()
+	local var28 = signalsReactModule.useSignalState(var26.getIsLoading)
+	local var29 = signalsReactModule.useSignalState(var26.getCategoryGroups)
+	local var30 = if fFlagExpChatUseMessagesStore then signalsReactModule.useSignalState(getMessagesStoreModule(false).getCanLocalUserChat) else useSelector(function(p0) --[[ line: 61 ]]
 		return p0.CanLocalUserChat
 	end)
-	local var33 = localizationModule.useLocalization({ footerDescription = "Feature.Chat.PresetChat.Disclaimer" })
-	local var34 = reactModule.useCallback(function() --[[ line: 73 ]]
-		-- upvalues: setIsPresetTrayOpenModule (copy), var28 (ref)
-		setIsPresetTrayOpenModule(var28, false)
-	end, { var28 })
-	local var35 = reactModule.useCallback(function() --[[ line: 77 ]]
-		-- upvalues: var34 (ref), var29 (ref), presetTrayKeyboardSelectedModule (copy), expChatSharedModule (copy), constantsModule (copy)
-		var34()
-		var29(presetTrayKeyboardSelectedModule())
+	local var31 = localizationModule.useLocalization({ footerDescription = "Feature.Chat.PresetChat.Disclaimer" })
+	local var32 = reactModule.useCallback(function() --[[ line: 70 ]]
+		-- upvalues: setIsPresetTrayOpenModule (copy), var26 (ref)
+		setIsPresetTrayOpenModule(var26, false)
+	end, { var26 })
+	local var33 = reactModule.useCallback(function() --[[ line: 74 ]]
+		-- upvalues: var32 (ref), var27 (ref), presetTrayKeyboardSelectedModule (copy), expChatSharedModule (copy), constantsModule (copy)
+		var32()
+		var27(presetTrayKeyboardSelectedModule())
 		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
 			event_type = constantsModule.Analytics.EventTypes.Click,
 			component = constantsModule.Analytics.Components.PresetKeyboardIcon
 		}, expChatSharedModule.Analytics.DefaultStandardizedFields)
-	end, { var34, var29 })
-	local var36 = reactModule.useRef(nil)
-	local categoryGroupId = var31 and (#var31 <= 0 and (var31[1].categoryGroupId or ""))
-	local var38, var39 = reactModule.useState(categoryGroupId)
-	reactModule.useEffect(function() --[[ line: 92 ]]
-		-- upvalues: var38 (ref), categoryGroupId (ref), var39 (ref)
-		if var38 == "" and categoryGroupId ~= "" then
-			var39(categoryGroupId)
+	end, { var32, var27 })
+	local var34 = reactModule.useRef(nil)
+	local categoryGroupId = var29 and (#var29 <= 0 and (var29[1].categoryGroupId or ""))
+	local var36, var37 = reactModule.useState(categoryGroupId)
+	reactModule.useEffect(function() --[[ line: 89 ]]
+		-- upvalues: var36 (ref), categoryGroupId (ref), var37 (ref)
+		if var36 == "" and categoryGroupId ~= "" then
+			var37(categoryGroupId)
 		end
-	end, { categoryGroupId, var38 })
-	local var40 = if fFlagExpChatPresetChatGamepadEnabledModule then signalsReactModule.useSignalState(var28.getIsTrayOpen) else nil
-	local var41 = reactModule.useRef(nil)
+	end, { categoryGroupId, var36 })
+	local var38 = if fFlagExpChatPresetChatGamepadEnabledModule then signalsReactModule.useSignalState(var26.getIsTrayOpen) else nil
+	local var39 = reactModule.useRef(nil)
 	
-	local function _(p1) --[[ line: 103 | named "isValidSelection" ]]
+	local function _(p1) --[[ line: 100 | named "isValidSelection" ]]
 		if p1 == nil then
 			return false
 		end
-		local ok, status = pcall(function() --[[ line: 107 ]]
+		local ok, status = pcall(function() --[[ line: 104 ]]
 			-- upvalues: p1 (ref)
 			return p1:IsDescendantOf(game) and p1:FindFirstAncestorOfClass("ScreenGui") ~= nil
 		end)
@@ -85,32 +83,32 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 		return ok and status
 	end
 	
-	reactModule.useEffect(function() --[[ line: 114 ]]
-		-- upvalues: fFlagExpChatPresetChatGamepadEnabledModule (copy), var40 (ref), var36 (ref), inputTypeModule (copy), userInputService (copy), var41 (ref), guiService (copy)
-		if fFlagExpChatPresetChatGamepadEnabledModule and not var40 then return end
-		local current = var36.current
+	reactModule.useEffect(function() --[[ line: 111 ]]
+		-- upvalues: fFlagExpChatPresetChatGamepadEnabledModule (copy), var38 (ref), var34 (ref), inputTypeModule (copy), userInputService (copy), var39 (ref), guiService (copy)
+		if fFlagExpChatPresetChatGamepadEnabledModule and not var38 then return end
+		local current = var34.current
 		
 		if current == nil then return end
 		if inputTypeModule.getInputGroup(userInputService:GetLastInputType()) ~= inputTypeModule.InputTypeConstants.Gamepad then return end
-		if var41.current == nil then
-			var41.current = if fFlagExpChatPresetChatGamepadEnabledModule then guiService.SelectedCoreObject else guiService.SelectedObject
+		if var39.current == nil then
+			var39.current = if fFlagExpChatPresetChatGamepadEnabledModule then guiService.SelectedCoreObject else guiService.SelectedObject
 		end
-		task.defer(function() --[[ line: 131 ]]
+		task.defer(function() --[[ line: 128 ]]
 			-- upvalues: current (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
-			local var53
-			local var52 = current
+			local var51
+			local var50 = current
 			
-			if var52 == nil then
-				var53 = false
+			if var50 == nil then
+				var51 = false
 			else
-				local ok, status = pcall(function() --[[ line: 107 ]]
-					-- upvalues: var52 (ref)
-					return var52:IsDescendantOf(game) and var52:FindFirstAncestorOfClass("ScreenGui") ~= nil
+				local ok, status = pcall(function() --[[ line: 104 ]]
+					-- upvalues: var50 (ref)
+					return var50:IsDescendantOf(game) and var50:FindFirstAncestorOfClass("ScreenGui") ~= nil
 				end)
-				var53 = ok and status
+				var51 = ok and status
 			end
-			if var53 then
-				pcall(function() --[[ line: 133 ]]
+			if var51 then
+				pcall(function() --[[ line: 130 ]]
 					-- upvalues: fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy), current (copy)
 					if fFlagExpChatPresetChatGamepadEnabledModule then
 						guiService.SelectedCoreObject = current
@@ -121,31 +119,31 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 				end)
 			end
 		end)
-	end, if fFlagExpChatPresetChatGamepadEnabledModule then { var38, var40 } else { var38 })
-	reactModule.useEffect(function() --[[ line: 148 ]]
-		-- upvalues: getTransparencyStoreModule (copy), var41 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
-		local var54 = getTransparencyStoreModule(false)
-		var54.setContextMenuOpen()
+	end, if fFlagExpChatPresetChatGamepadEnabledModule then { var36, var38 } else { var36 })
+	reactModule.useEffect(function() --[[ line: 145 ]]
+		-- upvalues: getTransparencyStoreModule (copy), var39 (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
+		local var52 = getTransparencyStoreModule(false)
+		var52.setContextMenuOpen()
 		
-		return function() --[[ line: 151 ]]
-			-- upvalues: var54 (ref), var41 (copy), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
-			var54.clearContextMenuOpen()
-			local current = var41.current
-			pcall(function() --[[ line: 154 ]]
+		return function() --[[ line: 148 ]]
+			-- upvalues: var52 (ref), var39 (copy), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
+			var52.clearContextMenuOpen()
+			local current = var39.current
+			pcall(function() --[[ line: 151 ]]
 				-- upvalues: current (ref), fFlagExpChatPresetChatGamepadEnabledModule (copy), guiService (copy)
-				local var56
-				local var55 = current
+				local var54
+				local var53 = current
 				
-				if var55 == nil then
-					var56 = false
+				if var53 == nil then
+					var54 = false
 				else
-					local ok, status = pcall(function() --[[ line: 107 ]]
-						-- upvalues: var55 (ref)
-						return var55:IsDescendantOf(game) and var55:FindFirstAncestorOfClass("ScreenGui") ~= nil
+					local ok, status = pcall(function() --[[ line: 104 ]]
+						-- upvalues: var53 (ref)
+						return var53:IsDescendantOf(game) and var53:FindFirstAncestorOfClass("ScreenGui") ~= nil
 					end)
-					var56 = ok and status
+					var54 = ok and status
 				end
-				if var56 then
+				if var54 then
 					if fFlagExpChatPresetChatGamepadEnabledModule then
 						guiService.SelectedCoreObject = current
 						
@@ -161,88 +159,69 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 				end
 				guiService.SelectedObject = nil
 			end)
-			var41.current = nil
+			var39.current = nil
 		end
 	end, {})
-	local var42 = reactModule.useCallback(function(p2) --[[ line: 173 ]]
-		-- upvalues: fFlagExpChatPresetChatAutocompleteEnabledModule (copy), var28 (ref), var24 (copy), sendPresetModule (copy), value (ref), presetChatContainer (copy), var34 (ref), textChatService (copy), fFlagExpChatUniverseChatPresetEnabledModule (copy)
-		if fFlagExpChatPresetChatAutocompleteEnabledModule then
-			var28.setPresetCooldownEndsAt(os.clock() + var24)
-			local var57 = sendPresetModule(p2, value.textChannel)
-			
-			if var57 ~= "Sent" then
-				var28.setPresetCooldownEndsAt(nil)
-			end
-			if var57 == "NoChannel" then
+	local var40 = reactModule.useCallback(function(p2) --[[ line: 170 ]]
+		-- upvalues: value (ref), textChatService (copy), var26 (ref), var22 (copy), fFlagExpChatUniverseChatPresetEnabledModule (copy), presetChatContainer (copy), var32 (ref)
+		local textChannel = value.textChannel
+		
+		if textChannel ~= nil and textChannel.Name ~= "RBXGeneral" then
+			local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
+			textChannel = if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
+		end
+		var26.setPresetCooldownEndsAt(os.clock() + var22)
+		
+		if not textChannel then
+			if not fFlagExpChatUniverseChatPresetEnabledModule then
 				presetChatContainer:warning("Preset {} activated but no target text channel was provided; skipping send.", p2)
-				var34()
+				var26.setPresetCooldownEndsAt(nil)
+				var32()
 				
 				return
-			end
-			var28.incrementPresetClickCount(p2)
-			var34()
-			
-			return
-		else
-			local textChannel = value.textChannel
-			
-			if textChannel ~= nil and textChannel.Name ~= "RBXGeneral" then
-				local RBXGeneral = textChatService:FindFirstChild("RBXGeneral", true)
-				textChannel = if RBXGeneral and RBXGeneral:IsA("TextChannel") then RBXGeneral else nil
-			end
-			var28.setPresetCooldownEndsAt(os.clock() + var24)
-			
-			if not textChannel then
-				if not fFlagExpChatUniverseChatPresetEnabledModule then
-					presetChatContainer:warning("Preset {} activated but no target text channel was provided; skipping send.", p2)
-					var28.setPresetCooldownEndsAt(nil)
-					var34()
-					
-					return
-				elseif not pcall(function() --[[ line: 220 ]]
-					-- upvalues: textChatService (copy), p2 (ref)
-					textChatService:SendUniverseChatPresetAsync(p2)
-				end) then
-					var28.setPresetCooldownEndsAt(nil)
-				end
-			elseif not pcall(function() --[[ line: 227 ]]
-				-- upvalues: textChannel (write), p2 (ref)
-				textChannel:SendPresetAsync(p2)
+			elseif not pcall(function() --[[ line: 192 ]]
+				-- upvalues: textChatService (copy), p2 (ref)
+				textChatService:SendUniverseChatPresetAsync(p2)
 			end) then
-				var28.setPresetCooldownEndsAt(nil)
+				var26.setPresetCooldownEndsAt(nil)
 			end
-			var28.incrementPresetClickCount(p2)
-			var34()
+		elseif not pcall(function() --[[ line: 199 ]]
+			-- upvalues: textChannel (write), p2 (ref)
+			textChannel:SendPresetAsync(p2)
+		end) then
+			var26.setPresetCooldownEndsAt(nil)
 		end
-	end, { value.textChannel, var28, var34 })
+		var26.incrementPresetClickCount(p2)
+		var32()
+	end, { value.textChannel, var26, var32 })
 	
-	if var30 then
+	if var28 then
 		return reactModule.createElement(foundationModule.Text, {
 			Text = "Loading presets...",
 			tag = "size-full text-body-medium content-muted"
 		})
-	elseif not var31 or #var31 == 0 then
+	elseif not var29 or #var29 == 0 then
 		return nil
 	end
 	local v
-	local var43 = nil
+	local var41 = nil
 	
-	for i, v in var31 do
-		if v.categoryGroupId == var38 then
-			var43 = v
+	for i, v in var29 do
+		if v.categoryGroupId == var36 then
+			var41 = v
 			break
 		end
 	end
 	local t = {
 		LineHeight = 1.4,
 		Font = Enum.Font.BuilderSansBold,
-		FontSize = var27.FontSize.FontSize_300
+		FontSize = var25.FontSize.FontSize_300
 	}
 	local t_1 = {}
-	local var46 = true
+	local var44 = true
 	
-	if var43 then
-		for i_1, v_1 in var43.categories do
+	if var41 then
+		for i_1, v_1 in var41.categories do
 			local t_2 = {}
 			
 			for i_2, v_2 in v_1.messages do
@@ -250,10 +229,10 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 					presetId = v_2.presetId,
 					text = v_2.value,
 					layoutOrder = i_2,
-					onActivated = var42,
-					buttonRef = if var46 then var36 else nil
+					onActivated = var40,
+					buttonRef = if var44 then var34 else nil
 				})
-				var46 = false
+				var44 = false
 			end
 			t_1["Category_" .. v_1.categoryId] = reactModule.createElement(foundationModule.View, {
 				tag = "col gap-small size-full-0 auto-y",
@@ -272,7 +251,7 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 						Wraps = true,
 						FillDirection = Enum.FillDirection.Horizontal,
 						SortOrder = Enum.SortOrder.LayoutOrder,
-						Padding = UDim.new(0, var27.Padding.Small)
+						Padding = UDim.new(0, var25.Padding.Small)
 					}
 				}, t_2)
 			})
@@ -280,50 +259,50 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 		t_1.Footer = reactModule.createElement(text, {
 			TextWrapped = true,
 			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
-			LayoutOrder = #var43.categories + 1,
-			Text = var33.footerDescription
+			LayoutOrder = #var41.categories + 1,
+			Text = var31.footerDescription
 		})
 	end
 	local t_2 = {
 		Layout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var27.Padding.XLarge),
+			Padding = UDim.new(0, var25.Padding.XLarge),
 			VerticalAlignment = Enum.VerticalAlignment.Bottom
 		})
 	}
-	v = #var31 > 1
+	v = #var29 > 1
 	
-	for i_1, v_1 in var31 do
+	for i_1, v_1 in var29 do
 		local categoryGroupId_1 = v_1.categoryGroupId
-		local var49 = categoryGroupId_1 == var38
+		local var47 = categoryGroupId_1 == var36
 		local t_3 = {
 			AutomaticSize = Enum.AutomaticSize.X,
 			Size = UDim2.new(0, 0, 0, 36),
 			LayoutOrder = i_1,
 			Text = v_1.name or categoryGroupId_1,
-			fontStyle = var27.Typography.LabelMedium,
-			textStyle = if var49 or not v then var27.Color.Content.Emphasis else var27.Color.Content.Muted,
+			fontStyle = var25.Typography.LabelMedium,
+			textStyle = if var47 or not v then var25.Color.Content.Emphasis else var25.Color.Content.Muted,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}
-		local var51 = if var49 and v then {
+		local var49 = if var47 and v then {
 			Indicator = reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				AnchorPoint = Vector2.new(0.5, 1),
 				Position = UDim2.new(0.5, 0, 1, 0),
 				Size = UDim2.new(1, 0, 0, 2),
-				BackgroundColor3 = var27.Color.Content.Emphasis.Color3
+				BackgroundColor3 = var25.Color.Content.Emphasis.Color3
 			})
 		} else nil
 		
 		if v then
-			function t_3.onActivated() --[[ line: 347 ]]
-				-- upvalues: var39 (ref), categoryGroupId_1 (ref)
-				var39(categoryGroupId_1)
+			function t_3.onActivated() --[[ line: 319 ]]
+				-- upvalues: var37 (ref), categoryGroupId_1 (ref)
+				var37(categoryGroupId_1)
 			end
 		end
-		t_2["Tab_" .. categoryGroupId_1] = reactModule.createElement(text, t_3, var51)
+		t_2["Tab_" .. categoryGroupId_1] = reactModule.createElement(text, t_3, var49)
 	end
 	return reactModule.createElement(presetCooldownProviderModule, {}, reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 		RootLayout = reactModule.createElement("UIListLayout", {
@@ -343,9 +322,9 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 				HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween
 			}),
 			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var27.Padding.Large),
-				PaddingRight = UDim.new(0, var27.Padding.Large),
-				PaddingTop = UDim.new(0, var27.Padding.XSmall)
+				PaddingLeft = UDim.new(0, var25.Padding.Large),
+				PaddingRight = UDim.new(0, var25.Padding.Large),
+				PaddingTop = UDim.new(0, var25.Padding.XSmall)
 			}),
 			TabsGroup = reactModule.createElement("Frame", {
 				LayoutOrder = 1,
@@ -353,22 +332,22 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Size = UDim2.fromScale(0, 0)
 			}, t_2),
-			KeyboardButton = if var32 and value.shouldShowKeyboardButton then reactModule.createElement(foundationModule.IconButton, {
+			KeyboardButton = if var30 and value.shouldShowKeyboardButton then reactModule.createElement(foundationModule.IconButton, {
 				LayoutOrder = 2,
 				isCircular = true,
 				isDisabled = false,
 				icon = { name = "keyboard", variant = "Regular" },
 				variant = foundationModule.Enums.ButtonVariant.Utility,
 				size = foundationModule.Enums.InputSize.Small,
-				onActivated = var35
+				onActivated = var33
 			}) else nil
 		}),
 		TabRowBaseline = reactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 1),
-			BackgroundColor3 = var27.Color.Stroke.Default.Color3,
-			BackgroundTransparency = var27.Color.Stroke.Default.Transparency
+			BackgroundColor3 = var25.Color.Stroke.Default.Color3,
+			BackgroundTransparency = var25.Color.Stroke.Default.Transparency
 		}),
 		Scroll = reactModule.createElement(foundationModule.ScrollView, {
 			LayoutOrder = 3,
@@ -384,13 +363,13 @@ return reactModule.memo(function(value) --[[ line: 51 | named "PresetChatContain
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, var27.Padding.Large)
+					Padding = UDim.new(0, var25.Padding.Large)
 				},
 				padding = {
-					top = UDim.new(0, var27.Padding.Large),
-					bottom = UDim.new(0, var27.Padding.Large),
-					left = UDim.new(0, var27.Padding.Large),
-					right = UDim.new(0, var27.Padding.Large)
+					top = UDim.new(0, var25.Padding.Large),
+					bottom = UDim.new(0, var25.Padding.Large),
+					left = UDim.new(0, var25.Padding.Large),
+					right = UDim.new(0, var25.Padding.Large)
 				}
 			}, t_1)
 		})

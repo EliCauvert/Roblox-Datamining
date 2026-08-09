@@ -10,7 +10,7 @@ local transparencyUtilModule = require(parent.util.TransparencyUtil)
 local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
 local constantsTransparencyValidationModule = require(parent.ConstantsTransparencyValidation)
 
-local function getViews() --[[ line: 23 ]]
+local function getViews() --[[ line: 26 ]]
 	-- upvalues: constantsTransparencyValidationModule (ref)
 	return {
 		{
@@ -52,12 +52,12 @@ local function getViews() --[[ line: 23 ]]
 	}
 end
 
-local function _(p0, p1) --[[ line: 64 | named "getAspectRatio" ]]
+local function _(p0, p1) --[[ line: 67 | named "getAspectRatio" ]]
 	-- upvalues: constantsTransparencyValidationModule (ref)
 	return if p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Front or p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Back then p0.X / p0.Y elseif p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Left or p1 == constantsTransparencyValidationModule.CAMERA_ANGLES.Right then p0.Z / p0.Y else p0.X / p0.Z
 end
 
-local function getScaleFactor(p2, p3) --[[ line: 81 ]]
+local function getScaleFactor(p2, p3) --[[ line: 84 ]]
 	-- upvalues: constantsTransparencyValidationModule (ref)
 	local var17, ASSET_TRANSPARENCY_RASTER_SIZE
 	local var16 = if p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Front or p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Back then p2.X / p2.Y elseif p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Left or p3 == constantsTransparencyValidationModule.CAMERA_ANGLES.Right then p2.Z / p2.Y else p2.X / p2.Z
@@ -80,7 +80,7 @@ local function getScaleFactor(p2, p3) --[[ line: 81 ]]
 	return if maxValue > 1 then vector2 / maxValue else vector2
 end
 
-local function addTransformedTriangle(vectorA, vectorB, p4, p5, p6) --[[ line: 108 ]]
+local function addTransformedTriangle(vectorA, vectorB, p4, p5, p6) --[[ line: 111 ]]
 	-- upvalues: transparencyUtilModule (ref)
 	local t = { orderedVerts = {} }
 	local var21 = vectorA:GetFaceVertices(p4)
@@ -94,7 +94,7 @@ local function addTransformedTriangle(vectorA, vectorB, p4, p5, p6) --[[ line: 1
 	return t
 end
 
-local function updateMinMaxBounds(a, b) --[[ line: 137 ]]
+local function updateMinMaxBounds(a, b) --[[ line: 140 ]]
 	local x = a.min.X
 	local x_1 = a.max.X
 	local y = a.min.Y
@@ -113,7 +113,7 @@ local function updateMinMaxBounds(a, b) --[[ line: 137 ]]
 	a.max = Vector3.new(maxValue, maxValue_1, maxValue_2)
 end
 
-local function getCombinedMeshData(p7, p8, p9, p10, p11, p12) --[[ line: 160 ]]
+local function getCombinedMeshData(p7, p8, p9, p10, p11, p12) --[[ line: 163 ]]
 	-- upvalues: addTransformedTriangle (ref), updateMinMaxBounds (ref), tryYieldModule (ref)
 	for i, v in p7:GetFaces() do
 		updateMinMaxBounds(p10, addTransformedTriangle(p7, p8, v, p9, p11))
@@ -121,7 +121,7 @@ local function getCombinedMeshData(p7, p8, p9, p10, p11, p12) --[[ line: 160 ]]
 	end
 end
 
-local function getOpacity(p13) --[[ line: 176 ]]
+local function getOpacity(p13) --[[ line: 179 ]]
 	local var34 = p13:ReadPixelsBuffer(Vector2.new(0, 0), p13.Size)
 	local var35 = 0
 	local var36 = 0
@@ -138,7 +138,7 @@ local function getOpacity(p13) --[[ line: 176 ]]
 	return true, 1 - var36 / var35
 end
 
-local function checkPartsTransparency(p14) --[[ line: 199 ]]
+local function checkPartsTransparency(p14) --[[ line: 202 ]]
 	local t = {}
 	
 	for i, v in p14 do
@@ -154,7 +154,7 @@ local function checkPartsTransparency(p14) --[[ line: 199 ]]
 	return true, {}
 end
 
-return function(value, p15) --[[ line: 220 | named "validateAssetTransparency" ]]
+return function(value, p15) --[[ line: 223 | named "validateAssetTransparency" ]]
 	-- upvalues: checkPartsTransparency (ref), boundsCalculatorModule (ref), getEditableMeshFromContextModule (ref), getExpectedPartSizeModule (ref), getCombinedMeshData (ref), failureReasonsAccumulatorModule (ref), getViews (ref), constantsTransparencyValidationModule (ref), getScaleFactor (ref), rasterUtilModule (ref), getOpacity (ref), analyticsModule (ref)
 	local assetTypeEnum = p15.assetTypeEnum
 	local t = {}

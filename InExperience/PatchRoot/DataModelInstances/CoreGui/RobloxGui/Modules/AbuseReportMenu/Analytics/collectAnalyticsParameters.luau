@@ -23,6 +23,7 @@ local var5 = function(p0, p1, p2) --[[ line: 15 ]]
 		personChangeCount = p0.personChangeCount,
 		reasonChangeCount = p0.reasonChangeCount,
 		captureSceneCount = p0.captureSceneCount,
+		chatLineChangeCount = p0.chatLineChangeCount,
 		reasonSelection = p0.reasonSelection,
 		commentAdded = p0.commentAdded,
 		experiencePersonSelection = p0.experiencePersonSelection,
@@ -36,7 +37,7 @@ local var5 = function(p0, p1, p2) --[[ line: 15 ]]
 end
 
 return {
-	forPersonReport = function(p3, p4, p5) --[[ line: 64 ]]
+	forPersonReport = function(p3, p4, p5) --[[ line: 65 ]]
 		-- upvalues: var5 (ref), constantsModule (ref)
 		local var8 = var5(p3, p4, p5)
 		local var9 = nil
@@ -53,7 +54,7 @@ return {
 		
 		return var8
 	end,
-	forExperienceReport = function(p6, p7, p8) --[[ line: 86 ]]
+	forExperienceReport = function(p6, p7, p8) --[[ line: 87 ]]
 		-- upvalues: var5 (ref), constantsModule (ref)
 		local var10 = var5(p6, p7, p8)
 		var10.typeofabuseSelection = constantsModule.AnalyticsAbuseMethods.Game

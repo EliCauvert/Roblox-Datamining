@@ -6,13 +6,14 @@ local useTokens = foundationModule.Hooks.useTokens
 local shouldShowPriceLabel = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
 local _ = foundationModule.Enums.ButtonVariant
 local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
+local fFlagAXHideInspectAndBuyPriceIfUnavailable = require(parent.AvatarExperienceFlags).FFlagAXHideInspectAndBuyPriceIfUnavailable
 
-return function(p0) --[[ line: 55 | named "BuyActionBar" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref)
-	local var3 = reactModule.useMemo(function() --[[ line: 58 ]]
+return function(p0) --[[ line: 57 | named "BuyActionBar" ]]
+	-- upvalues: useTokens (ref), fFlagAXHideInspectAndBuyPriceIfUnavailable (ref), reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref)
+	local var3 = if fFlagAXHideInspectAndBuyPriceIfUnavailable then reactModule.useMemo(function() --[[ line: 61 ]]
 		-- upvalues: shouldShowPriceLabel (copy), p0 (ref)
 		return shouldShowPriceLabel(p0.priceStatus)
-	end, { p0.priceStatus })
+	end, { p0.priceStatus }) else true
 	
 	return reactModule.createElement(foundationModule.View, {
 		tag = "size-full col gap-xsmall align-x-center padding-x-large padding-bottom-medium",

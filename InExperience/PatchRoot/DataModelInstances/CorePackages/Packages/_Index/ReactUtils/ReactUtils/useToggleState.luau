@@ -1,25 +1,27 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local reactUtils = script:FindFirstAncestor("ReactUtils")
+local reactModule = require(reactUtils.Parent.React)
+local var2 = require(reactUtils.Flags.getFFlagUseToggleStateImprovements)()
 
-return function(value) --[[ line: 7 | named "useToggleState" ]]
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(value or false)
+return function(value) --[[ line: 10 | named "useToggleState" ]]
+	-- upvalues: reactModule (ref), var2 (ref)
+	local var3, var4 = reactModule.useState(value or false)
 	
 	return {
-		enabled = var1,
-		enable = reactModule.useCallback(function() --[[ line: 16 ]]
-			-- upvalues: var2 (ref)
-			var2(true)
+		enabled = var3,
+		enable = reactModule.useCallback(function() --[[ line: 19 ]]
+			-- upvalues: var4 (ref)
+			var4(true)
 		end, {}),
-		disable = reactModule.useCallback(function() --[[ line: 20 ]]
-			-- upvalues: var2 (ref)
-			var2(false)
+		disable = reactModule.useCallback(function() --[[ line: 23 ]]
+			-- upvalues: var4 (ref)
+			var4(false)
 		end, {}),
-		toggle = reactModule.useCallback(function() --[[ line: 24 ]]
-			-- upvalues: var2 (ref)
-			var2(function(p0) --[[ line: 25 ]]
+		toggle = if var2 then if var2 then reactModule.useCallback(function() --[[ line: 29 ]]
+			-- upvalues: var4 (ref)
+			var4(function(p0) --[[ line: 30 ]]
 				return not p0
 			end)
-		end, {}),
-		set = var2
+		end, {}) else nil else nil,
+		set = if var2 then var4 else nil
 	}
 end

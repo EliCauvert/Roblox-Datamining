@@ -1,16 +1,13 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local constantsModule = require(avatarExperienceCommon.Constants)
-local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
-local _ = require(avatarExperienceCommon.Types.CommonTypes)
+﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(p0, p1, p2) --[[ line: 27 | named "createHumanoidDescriptionAccessoryInfo" ]]
+return function(p0, p1, p2) --[[ line: 22 | named "createHumanoidDescriptionAccessoryInfo" ]]
 	-- upvalues: constantsModule (ref)
-	local var2 = tonumber(p1)
-	assert(var2 ~= nil, "assetIdAsNumber is not nil. Silence type checker.")
+	local var1 = tonumber(p1)
+	assert(var1 ~= nil, "assetIdAsNumber is not nil. Silence type checker.")
 	p2 = p2 or {}
 	
 	return {
-		AssetId = var2,
+		AssetId = var1,
 		Order = p2.order,
 		AccessoryType = p2.type or constantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[p0],
 		IsLayered = p2.isLayered,

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("PurchasePromptFixOfferMarginUpsell", false) and require(script.Parent.FFlagPurchasePromptFetchCartPricing)

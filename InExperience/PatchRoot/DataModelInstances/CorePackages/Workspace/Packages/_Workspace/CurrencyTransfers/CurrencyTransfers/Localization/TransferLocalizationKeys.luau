@@ -10,9 +10,6 @@
 			ReceiveLimitExceeded = "Features.Transfers.Body.ReceiverLimitHitError",
 			TransferAmountBelowMinimum = "Features.Transfers.Body.TransferAmountBelowMinimumError",
 			TransferAmountExceedsMaximum = "Features.Transfers.Body.TransferAmountExceedsMaximumError",
-			DailyLimitTwoStepVerificationUpsell = "Features.Transfers.Body.DailyLimitTwoStepVerificationUpsell",
-			MonthlyLimitTwoStepVerificationUpsell = "Features.Transfers.Body.MonthlyLimitTwoStepVerificationUpsell",
-			TurnOnTwoStepVerification = "Features.Transfers.Action.TurnOnTwoStepVerification",
 			TryAgain = "Features.Transfers.RobuxTransfer.Action.TryAgain",
 			OK = "Features.Transfers.Action.Ok"
 		},

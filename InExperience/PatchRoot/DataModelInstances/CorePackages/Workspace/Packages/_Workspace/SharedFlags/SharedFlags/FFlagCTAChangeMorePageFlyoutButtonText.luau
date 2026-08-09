@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("CTAChangeMorePageFlyoutButtonText", false)

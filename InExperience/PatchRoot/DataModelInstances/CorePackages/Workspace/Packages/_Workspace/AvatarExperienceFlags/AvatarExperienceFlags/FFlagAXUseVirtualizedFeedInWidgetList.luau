@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXUseVirtualizedFeedInWidgetList2", false)
+﻿return game:DefineFastFlag("AXUseVirtualizedFeedInWidgetList", false)

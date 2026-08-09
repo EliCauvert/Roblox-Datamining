@@ -33,61 +33,58 @@ local function normalizeWaveform(p0) --[[ line: 32 ]]
 end
 
 return function(p1, p2) --[[ line: 55 | named "useAudioWaveform" ]]
-	-- upvalues: reactModule (ref), useEffect (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), localPlayer (ref), normalizeWaveform (ref)
+	-- upvalues: reactModule (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), useEffect (ref), localPlayer (ref), normalizeWaveform (ref)
 	local var9, var10 = reactModule.useState({})
-	useEffect(function() --[[ line: 63 ]]
-		-- upvalues: var10 (ref), p2 (ref), segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p1 (ref), localPlayer (copy), normalizeWaveform (copy)
-		var10({})
-		
-		if p2 <= 0 then
-			return nil
-		end
-		local var11 = segmentSelectorWidth / (waveformWidth + waveformPadding) / p2
+	local var11 = reactModule.useRef(nil)
+	local var12 = reactModule.useMemo(function() --[[ line: 59 ]]
+		-- upvalues: segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p2 (ref)
+		return segmentSelectorWidth / (waveformWidth + waveformPadding) / p2
+	end, { p2 })
+	local var13 = reactModule.useMemo(function() --[[ line: 63 ]]
+		-- upvalues: p1 (ref)
+		return `rbxassetid://{p1}`
+	end, { p1 })
+	useEffect(function() --[[ line: 69 ]]
+		-- upvalues: var13 (ref), var11 (ref), localPlayer (copy)
 		local audioWaveform = Instance.new("Folder")
 		audioWaveform.Name = "AudioWaveform"
 		local audioPlayer = Instance.new("AudioPlayer")
-		audioPlayer.Asset = `rbxassetid://{p1}`
+		audioPlayer.Asset = var13
 		audioPlayer.Parent = audioWaveform
+		var11.current = audioPlayer
 		audioWaveform.Parent = localPlayer:WaitForChild("PlayerGui")
-		local var14 = false
-		local var15 = audioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ line: 83 | named "generate" ]]
-			-- upvalues: var14 (write), audioPlayer (ref), var11 (ref), var10 (copy), normalizeWaveform (copy)
-			if var14 or not audioPlayer.IsReady then
-				return
-			end
-			task.spawn(function() --[[ line: 87 ]]
-				-- upvalues: audioPlayer (copy), var11 (copy), var14 (copy), var10 (copy), normalizeWaveform (copy)
-				local ok, status = pcall(function() --[[ line: 88 ]]
-					-- upvalues: audioPlayer (copy), var11 (copy)
-					return audioPlayer:GetWaveformAsync(NumberRange.new(0, audioPlayer.TimeLength), var11 * audioPlayer.TimeLength)
-				end)
-				
-				if not var14 and ok then
-					var10(normalizeWaveform(status))
-				end
-			end)
-		end)
 		
-		if audioPlayer.IsReady and audioPlayer.IsReady then
-			task.spawn(function() --[[ line: 87 ]]
-				-- upvalues: audioPlayer (ref), var11 (ref), var14 (write), var10 (copy), normalizeWaveform (copy)
-				local ok, status = pcall(function() --[[ line: 88 ]]
-					-- upvalues: audioPlayer (copy), var11 (copy)
-					return audioPlayer:GetWaveformAsync(NumberRange.new(0, audioPlayer.TimeLength), var11 * audioPlayer.TimeLength)
-				end)
-				
-				if not var14 and ok then
-					var10(normalizeWaveform(status))
-				end
-			end)
-		end
-		return function() --[[ line: 106 ]]
-			-- upvalues: var14 (write), var15 (ref), audioWaveform (ref)
-			var14 = true
-			var15:Disconnect()
+		return function() --[[ line: 80 ]]
+			-- upvalues: audioWaveform (ref)
 			audioWaveform:Destroy()
 		end
 	end, { p1, p2 })
+	local var14 = reactModule.useCallback(function() --[[ line: 87 ]]
+		-- upvalues: var11 (ref), var12 (ref), var10 (ref), normalizeWaveform (copy)
+		local current = var11.current
+		
+		if current and current.IsReady then
+			task.spawn(function() --[[ line: 90 ]]
+				-- upvalues: current (ref), var12 (copy), var10 (copy), normalizeWaveform (copy)
+				var10(normalizeWaveform(current:GetWaveformAsync(NumberRange.new(0, current.TimeLength), var12 * current.TimeLength)))
+			end)
+		end
+	end, {})
+	useEffect(function() --[[ line: 102 ]]
+		-- upvalues: var11 (ref), var14 (ref)
+		local current = var11.current
+		local t = {}
+		
+		if current then
+			table.insert(t, current:GetPropertyChangedSignal("IsReady"):Connect(var14))
+		end
+		return function() --[[ line: 109 ]]
+			-- upvalues: t (ref)
+			for i, v in t do
+				v:Disconnect()
+			end
+		end
+	end, {})
 	
 	return var9
 end

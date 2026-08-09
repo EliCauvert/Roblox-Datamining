@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppSupportSponsoredExplicitFeedback2", false) and require(script.Parent.FFlagLuaAppEnableWhyThisAdModal)

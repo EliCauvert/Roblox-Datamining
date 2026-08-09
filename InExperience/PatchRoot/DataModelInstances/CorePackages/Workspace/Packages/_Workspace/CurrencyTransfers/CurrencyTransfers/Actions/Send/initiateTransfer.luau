@@ -18,7 +18,6 @@ local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobux
 
 return function(p0) --[[ line: 26 | named "initiateTransfer" ]]
 	-- upvalues: promptStateModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), initiateTransferRequestModule (ref), setTransferPromptStateModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), failureReasonModule (ref), handleTransferBlockModule (ref), transferRetryOriginModule (ref), handleTransferErrorModule (ref)
-	local networkImpl = p0.getNetworkImpl()
 	local setPromptState = p0.setPromptState
 	local setTransferRequestId = p0.setTransferRequestId
 	local setRobuxBalanceAmount = p0.setRobuxBalanceAmount
@@ -40,7 +39,7 @@ return function(p0) --[[ line: 26 | named "initiateTransfer" ]]
 	if transferOrigination then
 		t.transferOrigination = transferOrigination
 	end
-	initiateTransferRequestModule(t, nil, networkImpl):andThen(function(p2) --[[ line: 51 ]]
+	initiateTransferRequestModule(t):andThen(function(p2) --[[ line: 50 ]]
 		-- upvalues: setTransferPromptStateModule (copy), p0 (ref), promptStateModule (copy), setTransferRequestId (ref), setRobuxBalanceAmount (ref), setBalanceReceivedFromApi (ref), setUserRelationshipDetail (ref), setRecipient (ref), setSender (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), setMinimumTransferAmount (ref), setMaximumTransferAmount (ref), logCurrencyTransferCounterModule (copy), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
 		setTransferPromptStateModule(p0, promptStateModule.TransferStarted)
 		
@@ -67,7 +66,7 @@ return function(p0) --[[ line: 26 | named "initiateTransfer" ]]
 				logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.initiate_succeeded)
 			end
 		end
-	end):catch(function(p1) --[[ line: 79 ]]
+	end):catch(function(p1) --[[ line: 78 ]]
 		-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleTransferBlockModule (copy), transferRetryOriginModule (copy), handleTransferErrorModule (copy)
 		logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferInitiateFailedCounter)
 		

@@ -5,6 +5,7 @@ local validationModuleLoaderModule = require(parent.validationSystem.ValidationM
 local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
 local validationReporterModule = require(parent.validationSystem.ValidationReporter)
 local getFFlagDebugUGCValidationPrintNewStructureResultsModule = require(parent.flags.getFFlagDebugUGCValidationPrintNewStructureResults)
+local getEngineFeatureEngineUGCValidationExpandReturnSchemaModule = require(parent.flags.getEngineFeatureEngineUGCValidationExpandReturnSchema)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
 local getFFlagUGCValidationFetchErrorMethodModule = require(parent.flags.getFFlagUGCValidationFetchErrorMethod)
 local validationConstantsModule = require(parent.validationSystem.ValidationConstants)
@@ -20,7 +21,7 @@ local t = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function reportSingleResult(p0, p1, p2, p3, p4) --[[ line: 43 ]]
+local function reportSingleResult(p0, p1, p2, p3, p4) --[[ line: 45 ]]
 	-- upvalues: telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		customFields = {
@@ -34,7 +35,7 @@ local function reportSingleResult(p0, p1, p2, p3, p4) --[[ line: 43 ]]
 	})
 end
 
-local function getMissingData(p5, p6) --[[ line: 62 ]]
+local function getMissingData(p5, p6) --[[ line: 64 ]]
 	-- upvalues: fetchAllDesiredDataModule (ref)
 	local t = {}
 	
@@ -46,101 +47,162 @@ local function getMissingData(p5, p6) --[[ line: 62 ]]
 	return t
 end
 
-local function _(p7, p8, p9) --[[ line: 73 | named "complete" ]]
-	-- upvalues: reportSingleResult (ref)
-	local var14 = p9:complete()
-	reportSingleResult(p7, p8, var14.status, var14.telemetryContext, var14.duration)
-	
-	return var14
+local function checkAqsReturnSchema(p7, p8) --[[ line: 75 ]]
+	-- upvalues: checkAqsReturnSchema (ref)
+	if typeof(p7) ~= "table" then
+		return false
+	end
+	for i, v in p8 do
+		if type(v) ~= "table" or checkAqsReturnSchema(p7[i], v) then
+			if type(v) == "string" and not tonumber(p7[v]) then
+				return false
+			end
+		end
+		return false
+	end
+	return true
 end
 
-return function(p10, p11, p12) --[[ line: 79 | named "ValidationTestWrapper" ]]
-	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
+local function _(p9, p10, p11) --[[ line: 91 | named "complete" ]]
+	-- upvalues: reportSingleResult (ref)
+	local var16 = p11:complete()
+	reportSingleResult(p9, p10, var16.status, var16.telemetryContext, var16.duration)
+	
+	return var16
+end
+
+return function(p12, p13, p14) --[[ line: 97 | named "ValidationTestWrapper" ]]
+	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), getEngineFeatureEngineUGCValidationExpandReturnSchemaModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), checkAqsReturnSchema (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
 	local v
-	local validationModule = validationModuleLoaderModule.getValidationModule(p10)
-	local var16 = validationReporterModule.new(p10, p11)
+	local validationModule = validationModuleLoaderModule.getValidationModule(p12)
+	local var18 = validationReporterModule.new(p12, if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then p13 else nil)
 	
 	for i, v in validationModule.prereqTests do
-		if p12[v] ~= validationEnumsModule.Status.PASS then
-			local var22 = var16:complete()
-			reportSingleResult(p10, p11, var22.status, var22.telemetryContext, var22.duration)
+		if p14[v] ~= validationEnumsModule.Status.PASS then
+			local var32 = var18:complete()
+			reportSingleResult(p12, p13, var32.status, var32.telemetryContext, var32.duration)
 			
-			return var22
+			return var32
 		end
 	end
-	local status
-	local var17 = getMissingData(p11, validationModule.requiredData)
+	local var19 = getMissingData(p13, validationModule.requiredData)
 	
-	if #var17 > 0 then
-		var16:err(`Missing required data: {table.concat(var17, ", ")}`)
-		local var18 = var16:complete()
-		reportSingleResult(p10, p11, var18.status, var18.telemetryContext, var18.duration)
+	if #var19 > 0 then
+		var18:err(`Missing required data: {table.concat(var19, ", ")}`)
+		local var20 = var18:complete()
+		reportSingleResult(p12, p13, var20.status, var20.telemetryContext, var20.duration)
 		
-		return var18
-	elseif validationModule.isAssetQualityModule then
-		local var19 = p11.aqsSummaryData[p10]
-		
-		if var19 and var19.Error then
-			status = false
+		return var20
+	elseif getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
+		if validationModule.isAssetQualityModule then
+			local var21 = p13.aqsSummaryData[p12]
 			
-			for i_1, v_1 in var19.Error do
-				if validationModule.knownAqsUserErrors[v_1] == nil then
-					if table.find(validationConstantsModule.AQSInternalErrorEnum, v_1) ~= nil and status == false then
-						var16:fail(errorSourceStringsModule.Keys.AQSInternalError)
-						status = true
-						continue
-					end
-					var16:err(`Unexpected error enum {v_1}`)
-					local var21 = var16:complete()
-					reportSingleResult(p10, p11, var21.status, var21.telemetryContext, var21.duration)
-					
-					return var21
-				else
-					var16:fail(validationModule.knownAqsUserErrors[v_1])
-				end
-			end
-			v = var16:complete()
-			reportSingleResult(p10, p11, v.status, v.telemetryContext, v.duration)
-			
-			return v
-		else
-			var16:begin()
-			
-			if #getMissingData(p11, validationModule.conditionalData) > 0 then
-				status = var16:complete()
-				reportSingleResult(p10, p11, status.status, status.telemetryContext, status.duration)
+			if var21 and var21.Error then
+				local var22 = false
 				
-				return status
-			end
-			ok, status = pcall(function() --[[ line: 134 ]]
-				-- upvalues: validationModule (ref), var16 (ref), p11 (ref)
-				validationModule.run(var16, p11)
-			end)
-			
-			if not ok then
-				if getFFlagUGCValidateMigrateSchemaPropertiesModule() and type(status) == "table" and status.__forceError then
-					error(status.message, 0)
+				for i_1, v_1 in var21.Error do
+					if validationModule.knownAqsUserErrors[v_1] == nil then
+						if table.find(validationConstantsModule.AQSInternalErrorEnum, v_1) ~= nil and var22 == false then
+							var18:fail(errorSourceStringsModule.Keys.AQSInternalError)
+							var22 = true
+							continue
+						end
+						var18:err(`Unexpected error enum {v_1}`)
+						local var23 = var18:complete()
+						reportSingleResult(p12, p13, var23.status, var23.telemetryContext, var23.duration)
+						
+						return var23
+					else
+						var18:fail(validationModule.knownAqsUserErrors[v_1])
+					end
 				end
-				if getFFlagUGCValidationFetchErrorMethodModule() and type(status) == "table" and status.__fetchError then
-					if p11.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+				v = var18:complete()
+				reportSingleResult(p12, p13, v.status, v.telemetryContext, v.duration)
+				
+				return v
+			else
+				var18:begin()
+				
+				if #getMissingData(p13, validationModule.conditionalData) > 0 then
+					local var31 = var18:complete()
+					reportSingleResult(p12, p13, var31.status, var31.telemetryContext, var31.duration)
+					
+					return var31
+				end
+				local ok, status = pcall(function() --[[ line: 196 ]]
+					-- upvalues: validationModule (ref), var18 (ref), p13 (ref)
+					validationModule.run(var18, p13)
+				end)
+				
+				if not ok then
+					if getFFlagUGCValidateMigrateSchemaPropertiesModule() and type(status) == "table" and status.__forceError then
 						error(status.message, 0)
 					end
-					var16:err(status.message)
-					v = var16:complete()
-					reportSingleResult(p10, p11, v.status, v.telemetryContext, v.duration)
-					
-					return v
-				elseif getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
-					print("Validation error:", status)
-					print("As this is in debug mode, we will re-call the function for a full error trace: ")
-					validationModule.run(var16, p11)
+					if getFFlagUGCValidationFetchErrorMethodModule() and type(status) == "table" and status.__fetchError then
+						if p13.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
+							error(status.message, 0)
+						end
+						var18:err(status.message)
+						v = var18:complete()
+						reportSingleResult(p12, p13, v.status, v.telemetryContext, v.duration)
+						
+						return v
+					elseif getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
+						print("Validation error:", status)
+						print("As this is in debug mode, we will re-call the function for a full error trace: ")
+						validationModule.run(var18, p13)
+					end
+					var18:err(status)
 				end
-				var16:err(status)
+				v = var18:complete()
+				reportSingleResult(p12, p13, v.status, v.telemetryContext, v.duration)
+				
+				return v
 			end
-			v = var16:complete()
-			reportSingleResult(p10, p11, v.status, v.telemetryContext, v.duration)
+		end
+	elseif not getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() and next(validationModule.expectedAqsData) ~= nil then
+		local var28
+		local var24 = false
+		
+		for i_1, v_1 in validationModule.expectedAqsData do
+			local var27 = p13.aqsSummaryData[i_1]
+			var28 = false
 			
-			return v
+			if var27 and var27.Error then
+				for i_2, v_2 in var27.Error do
+					if validationModule.knownAqsUserErrors[v_2] == nil then
+						if table.find(validationConstantsModule.AQSInternalErrorEnum, v_2) ~= nil and var28 == false then
+							var18:err(`Unexpected error enum {v_2}`)
+							local var30 = var18:complete()
+							reportSingleResult(p12, p13, var30.status, var30.telemetryContext, var30.duration)
+							
+							return var30
+						end
+						var18:fail(errorSourceStringsModule.Keys.AQSInternalError)
+						var24 = true
+						var28 = true
+					else
+						var18:fail(validationModule.knownAqsUserErrors[v_2])
+						var24 = true
+					end
+				end
+				local var29 = var18:complete()
+				reportSingleResult(p12, p13, var29.status, var29.telemetryContext, var29.duration)
+				
+				return var29
+			end
+		end
+		if var24 then
+			local var25 = var18:complete()
+			reportSingleResult(p12, p13, var25.status, var25.telemetryContext, var25.duration)
+			
+			return var25
+		elseif not checkAqsReturnSchema(p13.aqsSummaryData, validationModule.expectedAqsData) then
+			var18:err("Missing expected AQS schema")
+			local var26 = var18:complete()
+			reportSingleResult(p12, p13, var26.status, var26.telemetryContext, var26.duration)
+			
+			return var26
 		end
 	end
 end

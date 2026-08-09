@@ -9,9 +9,7 @@ return {
 		SlotItemCardThumbnail = require(script.Components.SlotItemCardThumbnail),
 		ClearAllButton = require(script.Components.ClearAllButton),
 		CloseableHeader = require(script.Components.CloseableHeader),
-		AXPartialPageModal = require(script.Components.AXPartialPageModal),
-		OutfitDetailsActionBar = require(script.Components.OutfitDetails.ActionBar.OutfitDetailsActionBarContainer),
-		OutfitDetailsTopBar = require(script.Components.OutfitDetails.TopBar.OutfitDetailsTopBarContainer)
+		AXPartialPageModal = require(script.Components.AXPartialPageModal)
 	},
 	Hooks = {
 		useSlotItemCardBreakpoints = require(script.Hooks.useSlotItemCardBreakpoints),
@@ -29,7 +27,6 @@ return {
 		createAvatarEditorStores = require(script.Stores.createAvatarEditorStores),
 		createSlotBasedEditorStore = require(script.Stores.createSlotBasedEditorStore),
 		createStaleInventoryGrantStore = require(script.Stores.createStaleInventoryGrantStore),
-		createThumbnailLatencyStore = require(script.Stores.createThumbnailLatencyStore),
 		getStaleInventoryGrantStore = require(script.Stores.getStaleInventoryGrantStore)
 	},
 	Enums = {
@@ -39,10 +36,10 @@ return {
 		Categories = require(script.Enums.Categories),
 		ItemView = require(script.Enums.ItemView),
 		NavigationParams = require(script.Enums.NavigationParams),
+		InventoryItemType = require(script.Enums.InventoryItemType),
 		InventorySorts = require(script.Enums.InventorySorts),
 		InventoryFilters = require(script.Enums.InventoryFilters),
 		InventoryItemAvailability = require(script.Enums.InventoryItemAvailability),
-		InventoryItemType = require(script.Enums.InventoryItemType),
 		SlotType = require(script.Enums.SlotType)
 	},
 	Constants = require(script.Constants),
@@ -51,9 +48,7 @@ return {
 		buildSlots = require(script.Utils.buildSlots),
 		getAssetTypesByCategory = require(script.Utils.getAssetTypesByCategory),
 		buildBodySlotViewportProps = require(script.Utils.buildBodySlotViewportProps),
-		getRemainingTimeFromExpiration = require(script.Utils.getRemainingTimeFromExpiration),
-		buildSlotCategoryTabItems = require(script.Utils.buildSlotCategoryTabItems),
-		buildSlotCategoryLocalizationKeys = require(script.Utils.buildSlotCategoryLocalizationKeys)
+		getRemainingTimeFromExpiration = require(script.Utils.getRemainingTimeFromExpiration)
 	},
 	["jest.config"] = script["jest.config"]
 }

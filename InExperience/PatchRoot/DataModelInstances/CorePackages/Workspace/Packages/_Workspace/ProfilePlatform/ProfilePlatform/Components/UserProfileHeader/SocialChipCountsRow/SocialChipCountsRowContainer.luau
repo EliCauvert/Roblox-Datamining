@@ -18,71 +18,65 @@ local getFFlagEnableProfileInsightsApolloMigration = require(parent.SharedFlags)
 local parent_1 = script.Parent
 local useSocialCountsDataModule = require(parent_1.hooks.useSocialCountsData)
 local useSocialCountsActionsModule = require(parent_1.hooks.useSocialCountsActions)
-local useSchoolChipModule = require(parent_1.hooks.useSchoolChip)
 local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
 local chipSize = foundationModule.Enums.ChipSize
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAddIEMProfilePage = sharedFlagsModule.FFlagAddIEMProfilePage
 local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
-local fFlagProfilePlatformEnableSchoolChip = sharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
 
-return function(p0) --[[ line: 46 | named "SocialCountsChipRowContainer" ]]
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useAreWebViewsSupportedModule (ref), useLocalUserId (ref), useDynamicSizeMarginModule (ref), fFlagAddIEMProfilePage (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), useSocialCountsDataModule (ref), useSocialCountsActionsModule (ref), fFlagEnableSocialTabsPage (ref), fFlagProfilePlatformEnableSchoolChip (ref), useSchoolChipModule (ref), reactModule (ref), enumsModule (ref), chipSize (ref), chipGroup (ref)
-	local var14 = useProfileWrapperContextModule()
-	local var15 = useProfileAnalyticsContextModule()
-	local var16 = useAreWebViewsSupportedModule()
-	local var17 = useLocalUserId()
-	local var18, var19 = useDynamicSizeMarginModule()
-	local profileId = var14.profileId
-	local var20 = if fFlagAddIEMProfilePage then var14.sourceInfo.source else nil
-	local var21 = profileId == tostring(var17)
-	local var22 = nil
+return function(p0) --[[ line: 44 | named "SocialCountsChipRowContainer" ]]
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useAreWebViewsSupportedModule (ref), useLocalUserId (ref), useDynamicSizeMarginModule (ref), fFlagAddIEMProfilePage (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), useSocialCountsDataModule (ref), useSocialCountsActionsModule (ref), fFlagEnableSocialTabsPage (ref), reactModule (ref), enumsModule (ref), chipSize (ref), chipGroup (ref)
+	local var13 = useProfileWrapperContextModule()
+	local var14 = useProfileAnalyticsContextModule()
+	local var15 = useAreWebViewsSupportedModule()
+	local var16 = useLocalUserId()
+	local var17, var18 = useDynamicSizeMarginModule()
+	local profileId = var13.profileId
+	local var19 = if fFlagAddIEMProfilePage then var13.sourceInfo.source else nil
+	local var20 = profileId == tostring(var16)
+	local var21 = nil
 	
 	if getFFlagEnableProfileInsightsApolloMigration() then
-		var22 = useSignalProfileInsightsByUserId({ rankingStrategy = "tc_info_boost", userId = profileId })
+		var21 = useSignalProfileInsightsByUserId({ rankingStrategy = "tc_info_boost", userId = profileId })
 	else
-		local var23 = useProfileInsightsByUserIds({ userIds = { profileId } })
+		local var22 = useProfileInsightsByUserIds({ userIds = { profileId } })
 		
-		if var23 and var23.data and not var23.loading then
-			var22 = getProfileInsightsByUserIdFromData(var23.data, profileId)
+		if var22 and var22.data and not var22.loading then
+			var21 = getProfileInsightsByUserIdFromData(var22.data, profileId)
 		end
 	end
 	local t = {}
 	
-	for i, v in ipairs(if var22 and var22.mutualFriends then var22.mutualFriends else {}) do
+	for i, v in ipairs(if var21 and var21.mutualFriends then var21.mutualFriends else {}) do
 		table.insert(t, v.id)
 	end
-	local var25 = useSocialCountsDataModule(profileId, var21, var16, t)
-	local var26 = useSocialCountsActionsModule(profileId, var21, var15, t, if fFlagEnableSocialTabsPage then p0.title else nil)
-	local var27 = if fFlagProfilePlatformEnableSchoolChip then useSchoolChipModule(var15) else nil
+	local var24 = useSocialCountsDataModule(profileId, var20, var15, t)
+	local var25 = useSocialCountsActionsModule(profileId, var20, var14, t, if fFlagEnableSocialTabsPage then p0.title else nil)
 	
 	return reactModule.createElement("Frame", {
 		LayoutOrder = p0.layoutOrder,
 		Size = p0.size,
 		BackgroundTransparency = 1,
-		[reactModule.Change.AbsoluteSize] = var19,
+		[reactModule.Change.AbsoluteSize] = var18,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var18),
-			PaddingRight = UDim.new(0, var18)
+			PaddingLeft = UDim.new(0, var17),
+			PaddingRight = UDim.new(0, var17)
 		}),
 		ChipGroup = reactModule.createElement(chipGroup, {
 			scrollingEnabledOverride = true,
-			chips = reactModule.useMemo(function() --[[ line: 99 ]]
-				-- upvalues: fFlagAddIEMProfilePage (copy), var20 (ref), enumsModule (copy), fFlagProfilePlatformEnableSchoolChip (copy), var27 (write), var25 (ref), var26 (ref), chipSize (copy)
+			chips = reactModule.useMemo(function() --[[ line: 92 ]]
+				-- upvalues: var24 (ref), fFlagAddIEMProfilePage (copy), var19 (ref), enumsModule (copy), var25 (ref), chipSize (copy)
 				local t = {}
 				
-				if fFlagProfilePlatformEnableSchoolChip and var27 and not (fFlagAddIEMProfilePage and var20 == enumsModule.Sources.InExperienceProfile) then
-					table.insert(t, var27)
-				end
-				for i, v in ipairs(var25) do
+				for i, v in ipairs(var24) do
 					if v.fieldName ~= "mutualFriendsCount" or tonumber(v.count) ~= 0 then
 						table.insert(t, {
 							count = v.count,
 							text = v.text,
 							layoutOrder = v.layoutOrder,
-							onActivated = if fFlagAddIEMProfilePage and var20 == enumsModule.Sources.InExperienceProfile then nil else var26[v.fieldName],
+							onActivated = if fFlagAddIEMProfilePage and var19 == enumsModule.Sources.InExperienceProfile then nil else var25[v.fieldName],
 							isDisabled = v.isDisabled,
 							size = chipSize.Medium,
 							leading = v.leading
@@ -90,7 +84,7 @@ return function(p0) --[[ line: 46 | named "SocialCountsChipRowContainer" ]]
 					end
 				end
 				return t
-			end, { var25, var26, var27, var20 }),
+			end, { var24, var25 }),
 			automaticSize = Enum.AutomaticSize.Y,
 			size = UDim2.new(1, 0, 0, 32),
 			layoutOrder = p0.layoutOrder

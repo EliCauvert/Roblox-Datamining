@@ -3,6 +3,7 @@ local userInputService = game:GetService("UserInputService")
 local parent = script:FindFirstAncestor("InputUi").Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local useLocalization = require(parent.Localization).Hooks.useLocalization
@@ -10,12 +11,12 @@ local useDesignTokens = require(parent.Style).useDesignTokens
 local _ = require(script.Parent.GamepadDisconnectTokenMapper)
 local gamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
-return function(p0) --[[ line: 23 ]]
-	-- upvalues: useDesignTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref)
-	local gamepadDisconnectMessageKeyItem
+return function(p0) --[[ line: 25 ]]
+	-- upvalues: useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref)
+	local var6
 	local var5 = useDesignTokens()
-	local color3 = var5.Color.Content.Emphasis.Color3
-	local transparency = var5.Color.Content.Emphasis.Transparency
+	local color3 = (if fFlagRenameDeprecatedUIBloxTokens then var5.Color.Content.Emphasis else var5.Semantic.Color.Text.Emphasis).Color3
+	local transparency = (if fFlagRenameDeprecatedUIBloxTokens then var5.Color.Content.Emphasis else var5.Semantic.Color.Text.Emphasis).Transparency
 	local gamepadDisconnect = var5.LuaApps.GamepadDisconnect
 	local designWidth = gamepadDisconnect.designWidth
 	local imageWidth = gamepadDisconnect.imageWidth
@@ -26,17 +27,17 @@ return function(p0) --[[ line: 23 ]]
 	local _ = ""
 	
 	if gamepadMessageKeyEngineFeature then
-		gamepadDisconnectMessageKeyItem = memStorageService:GetItem("GamepadDisconnectMessageKey")
+		var6 = memStorageService:GetItem("GamepadDisconnectMessageKey")
 		
-		if gamepadDisconnectMessageKeyItem == "" then
-			gamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.MessageGeneric"
+		if var6 == "" then
+			var6 = "Feature.GamepadDisconnect.Label.MessageGeneric"
 		end
 	else
-		gamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.Message"
+		var6 = "Feature.GamepadDisconnect.Label.Message"
 	end
 	local var7 = useLocalization({
 		title = "Feature.GamepadDisconnect.Label.Title",
-		message = gamepadDisconnectMessageKeyItem
+		message = var6
 	})
 	
 	return reactModule.createElement("Frame", {
@@ -52,8 +53,8 @@ return function(p0) --[[ line: 23 ]]
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.new(1, 0, 1, -verticalPadding * 2),
-			BackgroundTransparency = var5.Color.OverMedia.OverMedia_0.Transparency,
-			BackgroundColor3 = var5.Color.OverMedia.OverMedia_0.Color3
+			BackgroundTransparency = (if fFlagRenameDeprecatedUIBloxTokens then var5.Color.OverMedia.OverMedia_0 else var5.Semantic.Color.BackgroundUi.Contrast).Transparency,
+			BackgroundColor3 = (if fFlagRenameDeprecatedUIBloxTokens then var5.Color.OverMedia.OverMedia_0 else var5.Semantic.Color.BackgroundUi.Contrast).Color3
 		}, {
 			Content = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -93,7 +94,7 @@ return function(p0) --[[ line: 23 ]]
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
-						Padding = UDim.new(0, var5.Size.Size_800)
+						Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var5.Size.Size_800 else var5.Global.Space_400)
 					}),
 					TitleRow = reactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
@@ -112,7 +113,7 @@ return function(p0) --[[ line: 23 ]]
 							BackgroundTransparency = 1,
 							LayoutOrder = 1,
 							Image = images["icons/menu/about_large"],
-							Size = UDim2.fromOffset(var5.Size.Size_1200, var5.Size.Size_1200)
+							Size = UDim2.fromOffset(if fFlagRenameDeprecatedUIBloxTokens then var5.Size.Size_1200 else var5.Global.Size_600, if fFlagRenameDeprecatedUIBloxTokens then var5.Size.Size_1200 else var5.Global.Size_600)
 						}),
 						Title = reactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
@@ -120,8 +121,8 @@ return function(p0) --[[ line: 23 ]]
 							Text = var7.title,
 							TextColor3 = color3,
 							TextTransparency = transparency,
-							TextSize = var5.Typography.HeadingLarge.FontSize,
-							Font = var5.Typography.HeadingLarge.Font,
+							TextSize = if fFlagRenameDeprecatedUIBloxTokens then var5.Typography.HeadingLarge.FontSize else var5.Semantic.Typography.Title.FontSize,
+							Font = if fFlagRenameDeprecatedUIBloxTokens then var5.Typography.HeadingLarge.Font else var5.Semantic.Typography.Title.Font,
 							TextXAlignment = Enum.TextXAlignment.Left
 						})
 					}),
@@ -134,8 +135,8 @@ return function(p0) --[[ line: 23 ]]
 						Size = UDim2.fromOffset(0, 0),
 						TextColor3 = color3,
 						TextTransparency = transparency,
-						TextSize = var5.Typography.TitleLarge.FontSize,
-						Font = var5.Typography.TitleLarge.Font,
+						TextSize = if fFlagRenameDeprecatedUIBloxTokens then var5.Typography.TitleLarge.FontSize else var5.Semantic.Typography.Subheader.FontSize,
+						Font = if fFlagRenameDeprecatedUIBloxTokens then var5.Typography.TitleLarge.Font else var5.Semantic.Typography.Subheader.Font,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})

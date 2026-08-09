@@ -20,7 +20,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 20 | named "meetsPrerequisites" ]
 			return false, purchaseErrorModule.NotForSale
 		elseif getFFlagEnableCreatorStorePurchasingCutoverModule() and p0.IsFiatPriced == true then
 			return false, purchaseErrorModule.NotForSale
-		elseif p4 == nil and p0.CanBeSoldInThisGame == false then
+		elseif p4 == nil and p3.GetFFlagEnableRestrictedAssetSaleLocationPurchasePrompt() and p0.CanBeSoldInThisGame == false then
 			return false, purchaseErrorModule.NotForSaleHere
 		elseif p4 == nil and (var5 and var6 or (p0.IsLimited or p0.IsLimitedUnique)) and (p0.Remaining == nil or p0.Remaining == 0) then
 			return false, purchaseErrorModule.Limited

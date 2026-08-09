@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppChartsResetFetchingStatusOnFilterChange2", false)
+﻿return game:DefineFastFlag("LuaAppChartsResetFetchingStatusOnFilterChange2", false) and require(script.Parent.FFlagLuaAppChartsStickyHeader)

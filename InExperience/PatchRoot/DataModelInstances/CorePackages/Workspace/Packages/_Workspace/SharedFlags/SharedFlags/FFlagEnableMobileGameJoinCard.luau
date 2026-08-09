@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableMobileGameJoinCard_V14", false) and require(script.Parent.FFlagAddBackplateSupportToUserTile)

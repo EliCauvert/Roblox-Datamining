@@ -18,21 +18,24 @@ local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegis
 local constants = require(parent.InterventionShared).Utils.Constants
 local _ = require(inExperienceIntervention.Utils.Types)
 local getFFlagGameJoinTimeoutChatAttemptEnabled = require(parent.SharedFlags).GetFFlagGameJoinTimeoutChatAttemptEnabled
+local fFlagFeatureRestrictionMiscFixes = require(parent.InterventionShared).Flags.FFlagFeatureRestrictionMiscFixes
 local fFlagTemporaryAvatarKickWarningDialogModule = require(parent.InterventionShared.FFlagTemporaryAvatarKickWarningDialog)
 local fFlagUniversalFeatureRestrictionReceivers = require(parent.SharedFlags).FFlagUniversalFeatureRestrictionReceivers
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
-local var13 = reactModule.memo(function(p0) --[[ line: 39 ]]
-	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), var10 (ref), provider (ref), cursorProvider (ref)
-	return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var10 }, {
+local var13 = reactModule.memo(function(p0) --[[ line: 40 ]]
+	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), var10 (ref), fFlagFeatureRestrictionMiscFixes (ref), provider (ref), cursorProvider (ref)
+	return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var10 }, if fFlagFeatureRestrictionMiscFixes then {
 		RegistryProvider = reactModule.createElement(provider, nil, {
 			CursorProvider = reactModule.createElement(cursorProvider, {}, p0.children)
 		})
+	} else {
+		CursorProvider = reactModule.createElement(cursorProvider, {}, p0.children)
 	})
 end)
 
-function InExperienceInterventionDialogManager(p1) --[[ line: 49 ]]
+function InExperienceInterventionDialogManager(p1) --[[ line: 58 ]]
 	-- upvalues: reactModule (ref), constants (ref), fFlagUniversalFeatureRestrictionReceivers (ref), fFlagTemporaryAvatarKickWarningDialogModule (ref), SSUIMetaLuaEngineFeature (ref), chatNudgeCustomDialogModule (ref), chatTimeoutCustomDialogModule (ref), chatNudgeToastModule (ref), chatTimeoutToastModule (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (ref), var13 (ref), partyChatNudgeCustomDialog (ref), partyChatTimeoutCustomDialog (ref), chatTimeoutCustomDialogV2Module (ref), chatNudgeCustomDialogV2Module (ref), universalFeatureRestrictionDialog (ref), temporaryAvatarKickWarningDialogModule (ref)
-	local var14 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var14 = reactModule.useCallback(function() --[[ line: 59 ]]
 		-- upvalues: p1 (ref), constants (copy)
 		p1.uiStateDispatch({
 			isShown = false,
@@ -45,10 +48,10 @@ function InExperienceInterventionDialogManager(p1) --[[ line: 49 ]]
 	local detail = uiState.detail
 	local var15 = if fFlagUniversalFeatureRestrictionReceivers and detail then detail.options else nil
 	local var16 = if fFlagTemporaryAvatarKickWarningDialogModule and detail then detail.extras else nil
-	reactModule.useEffect(function() --[[ line: 65 ]]
+	reactModule.useEffect(function() --[[ line: 74 ]]
 		-- upvalues: SSUIMetaLuaEngineFeature (copy), uiState (ref)
 		if SSUIMetaLuaEngineFeature then
-			pcall(function() --[[ line: 67 ]]
+			pcall(function() --[[ line: 76 ]]
 				-- upvalues: uiState (copy)
 				local safetyService = game:GetService("SafetyService")
 				

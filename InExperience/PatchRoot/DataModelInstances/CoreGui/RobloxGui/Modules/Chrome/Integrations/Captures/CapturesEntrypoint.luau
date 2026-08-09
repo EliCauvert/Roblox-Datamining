@@ -10,9 +10,10 @@ local chromeUtilsModule = require(chrome.ChromeShared.Service.ChromeUtils)
 local commonIconModule = require(chrome.Integrations.CommonIcon)
 local mappedSignal = chromeUtilsModule.MappedSignal
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
+local fFlagChromeActivatedMappedSignal = sharedFlagsModule.FFlagChromeActivatedMappedSignal
 local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local _ = serviceModule.AvailabilitySignal.Available
-local var9 = mappedSignal.new(capturesAppModule.onIsActiveChanged, function() --[[ line: 27 ]]
+local var9 = mappedSignal.new(capturesAppModule.onIsActiveChanged, function() --[[ line: 28 ]]
 	-- upvalues: capturesAppModule (ref)
 	return capturesAppModule.getIsActive()
 end)
@@ -20,14 +21,17 @@ local var10 = serviceModule:register({
 	id = "camera_entrypoint",
 	label = "Feature.SettingsHub.Label.Captures",
 	initialAvailability = if starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
-	sideSheetPlacement = sideSheetPlacement.Page,
-	activated = function(_) --[[ line: 36 ]]
+	sideSheetPlacement = sideSheetPlacement.Vertical,
+	activated = function(_) --[[ line: 37 ]]
 		-- upvalues: capturesAppModule (ref)
 		capturesAppModule.onToggleActivationFromChrome()
 	end,
-	isActivated = var9,
+	isActivated = if fFlagChromeActivatedMappedSignal then var9 else function() --[[ line: 42 ]]
+		-- upvalues: var9 (ref)
+		return var9:get()
+	end,
 	components = {
-		Icon = function(_) --[[ line: 41 ]]
+		Icon = function(_) --[[ line: 46 ]]
 			-- upvalues: commonIconModule (ref), var9 (ref)
 			return commonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", var9)
 		end

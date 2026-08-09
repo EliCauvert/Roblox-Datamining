@@ -1,5 +1,4 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
+﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
 local roactRodux = inGameMenuDependenciesModule.RoactRodux
 local t = inGameMenuDependenciesModule.t
@@ -9,56 +8,39 @@ local globalConfigModule = require(parent.GlobalConfig)
 local assetsModule = require(parent.Resources.Assets)
 local openReportDialogModule = require(parent.Actions.OpenReportDialog)
 local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var6 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var7 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local image = foundationModule.Image
-local var8 = t.strictInterface({
+local withSelectionCursorProvider = UIBlox.App.SelectionImage.withSelectionCursorProvider
+local cursorKind = UIBlox.App.SelectionImage.CursorKind
+local var4 = t.strictInterface({
 	userId = t.optional(t.integer),
 	userName = t.optional(t.string),
 	LayoutOrder = t.integer,
 	dispatchOpenReportDialog = t.callback
 })
 
-return roactRodux.UNSTABLE_connect2(nil, function(p2) --[[ line: 78 ]]
+return roactRodux.UNSTABLE_connect2(nil, function(p2) --[[ line: 49 ]]
 	-- upvalues: openReportDialogModule (ref)
 	return {
-		dispatchOpenReportDialog = function(p3, p4) --[[ line: 80 ]]
+		dispatchOpenReportDialog = function(p3, p4) --[[ line: 51 ]]
 			-- upvalues: p2 (ref), openReportDialogModule (copy)
 			p2(openReportDialogModule(p3, p4))
 		end
 	}
-end)(function(p0) --[[ line: 37 | named "ReportButton" ]]
-	-- upvalues: globalConfigModule (ref), var8 (ref), var6 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), assetsModule (ref), var7 (ref), imageSetButton (ref)
+end)(function(p0) --[[ line: 28 | named "ReportButton" ]]
+	-- upvalues: globalConfigModule (ref), var4 (ref), withSelectionCursorProvider (ref), roact (ref), imageSetButton (ref), assetsModule (ref), cursorKind (ref)
 	if globalConfigModule.propValidation then
-		assert(var8(p0))
+		assert(var4(p0))
 	end
-	return var6(function(p1) --[[ line: 42 ]]
-		-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), assetsModule (copy), p0 (ref), var7 (copy), imageSetButton (copy)
-		return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
-			Image = assetsModule.Images.ReportIcon,
-			Size = UDim2.new(0, 36, 0, 36),
-			backgroundStyle = { Transparency = 1 },
-			imageStyle = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-			LayoutOrder = p0.LayoutOrder,
-			selection = {
-				Selectable = false,
-				SelectionImageObject = p1(var7.RoundedRectNoInset)
-			},
-			onActivated = function() --[[ line: 57 ]]
-				-- upvalues: p0 (copy)
-				p0.dispatchOpenReportDialog(p0.userId, p0.userName)
-			end
-		}) else roact.createElement(imageSetButton, {
+	return withSelectionCursorProvider(function(p1) --[[ line: 33 ]]
+		-- upvalues: roact (copy), imageSetButton (copy), assetsModule (copy), p0 (ref), cursorKind (copy)
+		return roact.createElement(imageSetButton, {
 			Selectable = false,
 			Image = assetsModule.Images.ReportIcon,
 			Size = UDim2.new(0, 36, 0, 36),
 			ImageColor3 = Color3.fromRGB(255, 255, 255),
 			BackgroundTransparency = 1,
 			LayoutOrder = p0.LayoutOrder,
-			SelectionImageObject = p1(var7.RoundedRectNoInset),
-			[roact.Event.Activated] = function() --[[ line: 70 ]]
+			SelectionImageObject = p1(cursorKind.RoundedRectNoInset),
+			[roact.Event.Activated] = function() --[[ line: 42 ]]
 				-- upvalues: p0 (copy)
 				p0.dispatchOpenReportDialog(p0.userId, p0.userName)
 			end

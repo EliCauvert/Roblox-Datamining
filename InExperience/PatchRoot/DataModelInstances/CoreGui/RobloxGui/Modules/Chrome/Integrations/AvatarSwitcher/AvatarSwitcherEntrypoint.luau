@@ -16,98 +16,121 @@ local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagChromeWindowSignalConstraintsToggle = sharedFlagsModule.FFlagChromeWindowSignalConstraintsToggle
 local fFlagRemoveAvatarSwitcherIfUnsupported = sharedFlagsModule.FFlagRemoveAvatarSwitcherIfUnsupported
-local var13 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function() --[[ line: 25 ]]
+local fFlagChromeActivatedMappedSignal = sharedFlagsModule.FFlagChromeActivatedMappedSignal
+local addAvatarsSwitcherToCoreGUIEngineFeature = game:GetEngineFeature("AddAvatarsSwitcherToCoreGUI")
+local var14 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function() --[[ line: 27 ]]
 	-- upvalues: serviceModule (ref), constantsModule (ref)
 	return serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID)
 end)
-local var14 = if fFlagRemoveAvatarSwitcherIfUnsupported then url.AVATAR_URL .. "v2/avatar/experience/get-experience-avatar-support" else nil
-local var15 = if fFlagChromeWindowSignalConstraintsToggle then windowSizeSignalModule.new(844, 754, false, true) else windowSizeSignalModule.new(844, 754, false)
-local all = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.AvatarSwitcher)
+local var15 = if fFlagRemoveAvatarSwitcherIfUnsupported then url.AVATAR_URL .. "v2/avatar/experience/get-experience-avatar-support" else nil
+local var16 = if fFlagChromeWindowSignalConstraintsToggle then windowSizeSignalModule.new(844, 754, false, true) else windowSizeSignalModule.new(844, 754, false)
+local var17 = if addAvatarsSwitcherToCoreGUIEngineFeature then starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.AvatarSwitcher) else true
 
-local function _() --[[ line: 43 | named "getInitialAvailability" ]]
-	-- upvalues: all (write), fFlagRemoveAvatarSwitcherIfUnsupported (ref), serviceModule (ref)
-	return if all and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
+local function _() --[[ line: 49 | named "getInitialAvailability" ]]
+	-- upvalues: addAvatarsSwitcherToCoreGUIEngineFeature (ref), var17 (write), fFlagRemoveAvatarSwitcherIfUnsupported (ref), serviceModule (ref)
+	return if addAvatarsSwitcherToCoreGUIEngineFeature then if var17 and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable elseif fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Unavailable else serviceModule.AvailabilitySignal.Available
 end
 
-local var17 = serviceModule:register({
+local var18 = serviceModule:register({
 	label = "Feature.AvatarSwitcher.Heading.SwitchAvatar",
 	cachePosition = true,
 	draggable = true,
-	initialAvailability = if all and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
+	initialAvailability = if not addAvatarsSwitcherToCoreGUIEngineFeature then if not addAvatarsSwitcherToCoreGUIEngineFeature then if var17 and not fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable elseif fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Unavailable else serviceModule.AvailabilitySignal.Available elseif fFlagRemoveAvatarSwitcherIfUnsupported then serviceModule.AvailabilitySignal.Unavailable else serviceModule.AvailabilitySignal.Available,
 	id = constantsModule.AVATAR_SWITCHER_ID,
 	sideSheetPlacement = sideSheetPlacement.Vertical,
-	activated = function(_) --[[ line: 55 ]]
+	activated = function(_) --[[ line: 72 ]]
 		-- upvalues: serviceModule (ref), constantsModule (ref)
 		serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
 	end,
-	isActivated = var13,
-	windowSize = var15,
+	isActivated = if fFlagChromeActivatedMappedSignal then var14 else function() --[[ line: 77 ]]
+		-- upvalues: var14 (ref)
+		return var14:get()
+	end,
+	windowSize = var16,
 	components = {
-		Icon = function() --[[ line: 63 ]]
-			-- upvalues: reactModule (ref), avatarSwitcherIconModule (ref), var13 (ref)
-			return reactModule.createElement(avatarSwitcherIconModule, { isActive = var13 })
+		Icon = function() --[[ line: 84 ]]
+			-- upvalues: reactModule (ref), avatarSwitcherIconModule (ref), var14 (ref)
+			return reactModule.createElement(avatarSwitcherIconModule, { isActive = var14 })
 		end,
-		Window = function() --[[ line: 69 ]]
-			-- upvalues: reactModule (ref), avatarSwitcherChromeWrapperModule (ref), var15 (ref)
+		Window = function() --[[ line: 90 ]]
+			-- upvalues: reactModule (ref), avatarSwitcherChromeWrapperModule (ref), var16 (ref)
 			return reactModule.createElement(avatarSwitcherChromeWrapperModule, {
 				maxWindowWidth = 844,
 				maxWindowHeight = 754,
-				windowSize = var15
+				windowSize = var16
 			})
 		end
 	}
 })
-local var18 = not fFlagRemoveAvatarSwitcherIfUnsupported
 
-local _ = function() --[[ line: 83 | named "updateAvatarSwitcherAvailability" ]]
-	-- upvalues: all (write), var18 (write), var17 (ref), serviceModule (ref), constantsModule (ref)
-	if all and var18 then
-		var17.availability:available()
-		
-		return
-	elseif serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID) then
-		serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
-	end
-	var17.availability:unavailable()
-end
-
-chromeUtilsModule.setCoreGuiAvailability(var17, Enum.CoreGuiType.AvatarSwitcher, function(p0) --[[ line: 95 ]]
-	-- upvalues: all (write), var18 (write), var17 (ref), serviceModule (ref), constantsModule (ref)
-	all = p0
+if addAvatarsSwitcherToCoreGUIEngineFeature then
+	local var19 = not fFlagRemoveAvatarSwitcherIfUnsupported
 	
-	if all and var18 then
-		var17.availability:available()
-		
-		return
-	elseif serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID) then
-		serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
+	local _ = function() --[[ line: 105 | named "updateAvatarSwitcherAvailability" ]]
+		-- upvalues: var17 (write), var19 (write), var18 (ref), serviceModule (ref), constantsModule (ref)
+		if var17 and var19 then
+			var18.availability:available()
+			
+			return
+		elseif serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID) then
+			serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
+		end
+		var18.availability:unavailable()
 	end
-	var17.availability:unavailable()
-end)
-
-if fFlagRemoveAvatarSwitcherIfUnsupported then
-	task.spawn(function() --[[ line: 102 ]]
-		-- upvalues: httpRbxApiService (ref), var14 (ref), httpService (ref), var18 (write), all (write), var17 (ref), serviceModule (ref), constantsModule (ref)
+	
+	chromeUtilsModule.setCoreGuiAvailability(var18, Enum.CoreGuiType.AvatarSwitcher, function(p0) --[[ line: 117 ]]
+		-- upvalues: var17 (write), var19 (write), var18 (ref), serviceModule (ref), constantsModule (ref)
+		var17 = p0
+		
+		if var17 and var19 then
+			var18.availability:available()
+			
+			return
+		elseif serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID) then
+			serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
+		end
+		var18.availability:unavailable()
+	end)
+	
+	if fFlagRemoveAvatarSwitcherIfUnsupported then
+		task.spawn(function() --[[ line: 124 ]]
+			-- upvalues: httpRbxApiService (ref), var15 (ref), httpService (ref), var19 (write), var17 (write), var18 (ref), serviceModule (ref), constantsModule (ref)
+			if not game:IsLoaded() then
+				game.Loaded:Wait()
+			end
+			local ok, status = pcall(function() --[[ line: 130 ]]
+				-- upvalues: httpRbxApiService (copy), var15 (copy), httpService (copy)
+				return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(var15))
+			end)
+			
+			if ok and status and status.experienceAvatarSupportType ~= 0 then
+				var19 = true
+				
+				if var17 then
+					var18.availability:available()
+					
+					return
+				elseif serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID) then
+					serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
+				end
+				var18.availability:unavailable()
+			end
+		end)
+	end
+elseif fFlagRemoveAvatarSwitcherIfUnsupported then
+	task.spawn(function() --[[ line: 147 ]]
+		-- upvalues: httpRbxApiService (ref), var15 (ref), httpService (ref), var18 (ref)
 		if not game:IsLoaded() then
 			game.Loaded:Wait()
 		end
-		local ok, status = pcall(function() --[[ line: 108 ]]
-			-- upvalues: httpRbxApiService (copy), var14 (copy), httpService (copy)
-			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(var14))
+		local ok, status = pcall(function() --[[ line: 153 ]]
+			-- upvalues: httpRbxApiService (copy), var15 (copy), httpService (copy)
+			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(var15))
 		end)
 		
 		if ok and status and status.experienceAvatarSupportType ~= 0 then
-			var18 = true
-			
-			if all then
-				var17.availability:available()
-				
-				return
-			elseif serviceModule:isWindowOpen(constantsModule.AVATAR_SWITCHER_ID) then
-				serviceModule:toggleWindow(constantsModule.AVATAR_SWITCHER_ID)
-			end
-			var17.availability:unavailable()
+			var18.availability:available()
 		end
 	end)
 end
-return var17
+return var18

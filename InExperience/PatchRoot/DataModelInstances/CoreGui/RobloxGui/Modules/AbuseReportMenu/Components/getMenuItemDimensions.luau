@@ -1,18 +1,20 @@
-﻿local constantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
-local useStyle = require(game:GetService("CorePackages").Packages.UIBlox).Core.Style.useStyle
+﻿local corePackagesService = game:GetService("CorePackages")
+local constantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
+local fFlagRenameDeprecatedUIBloxTokens = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
+local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyle
 
-function getMenuItemDimensions(p0) --[[ line: 9 ]]
-	-- upvalues: useStyle (ref), constantsModule (ref)
-	local var1 = useStyle()
+function getMenuItemDimensions(p0) --[[ line: 11 ]]
+	-- upvalues: useStyle (ref), constantsModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
+	local var2 = useStyle()
 	
 	return if p0 < constantsModule.SmallLayoutThreshold then {
 		LeftWidth = constantsModule.LeftContainerWidthSmall,
 		RightWidth = constantsModule.RightContainerWidthSmall,
 		TextSize = constantsModule.FieldLabelSizeSmall
 	} else {
-		LeftWidth = var1.Tokens.Size.Size_2000 * 3,
-		RightWidth = var1.Tokens.Size.Size_2000 * 4,
-		TextSize = var1.Tokens.FontSize.FontSize_400
+		LeftWidth = (if fFlagRenameDeprecatedUIBloxTokens then var2.Tokens.Size.Size_2000 else var2.Tokens.Global.Space_1000) * 3,
+		RightWidth = (if fFlagRenameDeprecatedUIBloxTokens then var2.Tokens.Size.Size_2000 else var2.Tokens.Global.Space_1000) * 4,
+		TextSize = if fFlagRenameDeprecatedUIBloxTokens then var2.Tokens.FontSize.FontSize_400 else var2.Tokens.Global.FontSize_100
 	}
 end
 

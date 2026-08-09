@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p0) --[[ line: 7 | named "getSequenceId" ]]
+local function _(p0) --[[ line: 8 | named "getSequenceId" ]]
 	local sequenceId = p0.sequenceId
 	
 	return if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
 end
 
 return {
-	mergeHistoryIntoMap = function(p1, p2, p3) --[[ line: 12 ]]
+	mergeHistoryIntoMap = function(p1, p2, p3) --[[ line: 13 ]]
 		for i, v in p2 do
 			local sequenceId = v.sequenceId
 			local var0 = if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
@@ -17,7 +17,7 @@ return {
 			end
 		end
 	end,
-	orderMergedHistoryItems = function(p4, p5) --[[ line: 25 ]]
+	orderMergedHistoryItems = function(p4, p5) --[[ line: 26 ]]
 		local cloned = table.clone(p4)
 		
 		for i, v in p5 do
@@ -28,7 +28,7 @@ return {
 		for i_1, v_1 in cloned do
 			table.insert(t, v_1)
 		end
-		table.sort(t, function(p6, p7) --[[ line: 39 ]]
+		table.sort(t, function(p6, p7) --[[ line: 40 ]]
 			local sequenceId = p6.sequenceId
 			local var3 = (if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil) or -1
 			local sequenceId_1 = p7.sequenceId
@@ -39,7 +39,7 @@ return {
 		
 		return t
 	end,
-	ingestOverlayUpdate = function(p8, _, p9, p10) --[[ line: 48 ]]
+	ingestOverlayUpdate = function(p8, _, p9, p10) --[[ line: 49 ]]
 		if typeof(p10) == "number" and p10 >= 0 then
 			local cloned = table.clone(p9)
 			cloned.sequenceId = p10

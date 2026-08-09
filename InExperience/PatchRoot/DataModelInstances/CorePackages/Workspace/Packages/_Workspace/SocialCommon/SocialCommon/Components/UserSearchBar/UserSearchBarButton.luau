@@ -9,11 +9,10 @@ local getPageMargin = UIBloxModule.App.Container.getPageMargin
 local useIsWideModeModule = require(socialCommon.Hooks.useIsWideMode)
 local userSearchBarModule = require(socialCommon.Components.UserSearchBar.UserSearchBar)
 local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagAddFriendsPageCapitalization = require(parent.SharedFlags).FFlagAddFriendsPageCapitalization
 
-return function(p0) --[[ line: 32 ]]
-	-- upvalues: useIsWideModeModule (ref), useSelector (ref), getPageMargin (ref), useLocalization (ref), fFlagAddFriendsPageCapitalization (ref), reactModule (ref), imageSetButton (ref), fFlagCreateConnectionsHub (ref), userSearchBarModule (ref)
-	local var5 = getPageMargin(useSelector(function(p1) --[[ line: 36 ]]
+return function(p0) --[[ line: 31 ]]
+	-- upvalues: useIsWideModeModule (ref), useSelector (ref), getPageMargin (ref), useLocalization (ref), reactModule (ref), imageSetButton (ref), fFlagCreateConnectionsHub (ref), userSearchBarModule (ref)
+	local var5 = getPageMargin(useSelector(function(p1) --[[ line: 35 ]]
 		return p1.ScreenSize
 	end).X)
 	
@@ -26,7 +25,7 @@ return function(p0) --[[ line: 32 ]]
 		SearchBar = reactModule.createElement(userSearchBarModule, {
 			isDisabled = true,
 			searchPlaceholderText = useLocalization({
-				searchPlaceholderText = if fFlagAddFriendsPageCapitalization then "Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization" else "Feature.AddFriends.Label.InputPlaceholder.SearchForPeople"
+				searchPlaceholderText = "Feature.AddFriends.Label.InputPlaceholder.SearchForPeople"
 			}).searchPlaceholderText
 		})
 	})

@@ -16,7 +16,7 @@ return function(p0, p1) --[[ line: 24 ]]
 		local var8 = p0(false)[p2]
 		
 		if var8 and var8.startTime then
-			local var9 = if fFlagTTITrackerMemoryTrackingModule then getMemoryMbModule() else nil
+			local var9 = if fFlagTTITrackerMemoryTrackingModule and var8.trackMemory == true then getMemoryMbModule() else nil
 			local t = {
 				name = p3,
 				id = if p4 then p4.id else nil,

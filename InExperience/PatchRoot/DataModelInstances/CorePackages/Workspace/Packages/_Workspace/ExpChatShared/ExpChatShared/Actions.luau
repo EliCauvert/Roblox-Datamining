@@ -13,7 +13,6 @@
 	PlayerAdded = require(script.PlayerAdded),
 	PlayerRemoved = require(script.PlayerRemoved),
 	TargetTextChannelPropertyChanged = require(script.TargetTextChannelPropertyChanged),
-	TextChatChannelSelected = require(script.TextChatChannelSelected),
 	TextChannelCreated = require(script.TextChannelCreated),
 	TextChannelRemoved = require(script.TextChannelRemoved),
 	UniverseChatChannelSelected = require(script.UniverseChatChannelSelected),

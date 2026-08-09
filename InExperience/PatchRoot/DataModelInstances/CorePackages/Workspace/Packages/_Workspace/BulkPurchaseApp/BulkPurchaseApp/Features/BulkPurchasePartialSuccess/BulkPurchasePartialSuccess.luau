@@ -4,6 +4,7 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useDesignTokens = require(parent.Style).useDesignTokens
 local UIBloxModule = require(parent.UIBlox)
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local button = UIBloxModule.App.Button.Button
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
@@ -21,7 +22,7 @@ local _ = require(parent.AvatarExperienceCommon)
 local itemStatusToItemStatusKeyModule = require(bulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
 local itemStatusKeyToLocalizationKeyModule = require(bulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 
-local function _(p0, p1) --[[ line: 32 | named "toCardPropsWithId" ]]
+local function _(p0, p1) --[[ line: 34 | named "toCardPropsWithId" ]]
 	local cloned = table.clone(p0)
 	cloned.id = p1
 	
@@ -41,23 +42,24 @@ local t = {
 	dismissCTA = "CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA"
 }
 
-local function mapTokens(p2) --[[ line: 58 ]]
+local function mapTokens(p2) --[[ line: 60 ]]
+	-- upvalues: fFlagRenameDeprecatedUIBloxTokens (ref)
 	return {
-		boxBackground = p2.Color.Surface.Surface_100.Color3,
-		boxPadding = p2.Size.Size_600,
-		boxCornerRadius = p2.Radius.Medium,
-		buttonMarginTop = p2.Size.Size_400,
-		buttonHeight = p2.Size.Size_900,
-		lineItemSpacing = p2.Size.Size_100,
-		noticeFontStyle = p2.Typography.BodyLarge,
-		noticeColorStyle = p2.Color.Content.Muted,
-		noticeMarginBottom = p2.Size.Size_600,
-		successColor = p2.Color.System.Success,
-		failureColor = p2.Color.System.Alert
+		boxBackground = (if fFlagRenameDeprecatedUIBloxTokens then p2.Color.Surface.Surface_100 else p2.Semantic.Color.Background.Contrast).Color3,
+		boxPadding = if fFlagRenameDeprecatedUIBloxTokens then p2.Size.Size_600 else p2.Global.Space_300,
+		boxCornerRadius = if fFlagRenameDeprecatedUIBloxTokens then p2.Radius.Medium else p2.Semantic.Radius.Medium,
+		buttonMarginTop = if fFlagRenameDeprecatedUIBloxTokens then p2.Size.Size_400 else p2.Global.Space_200,
+		buttonHeight = if fFlagRenameDeprecatedUIBloxTokens then p2.Size.Size_900 else p2.Global.Size_450,
+		lineItemSpacing = if fFlagRenameDeprecatedUIBloxTokens then p2.Size.Size_100 else p2.Global.Space_50,
+		noticeFontStyle = if fFlagRenameDeprecatedUIBloxTokens then p2.Typography.BodyLarge else p2.Semantic.Typography.Body,
+		noticeColorStyle = if fFlagRenameDeprecatedUIBloxTokens then p2.Color.Content.Muted else p2.Semantic.Color.Text.Muted,
+		noticeMarginBottom = if fFlagRenameDeprecatedUIBloxTokens then p2.Size.Size_600 else p2.Global.Space_300,
+		successColor = if fFlagRenameDeprecatedUIBloxTokens then p2.Color.System.Success else p2.Semantic.Color.Common.Success,
+		failureColor = if fFlagRenameDeprecatedUIBloxTokens then p2.Color.System.Alert else p2.Semantic.Color.Common.Alert
 	}
 end
 
-local function mapBulkPurchasePartialSuccessItemsToRowPresentation(p3, p4, p5, p6) --[[ line: 74 ]]
+local function mapBulkPurchasePartialSuccessItemsToRowPresentation(p3, p4, p5, p6) --[[ line: 90 ]]
 	-- upvalues: itemStatusToItemStatusKeyModule (ref), reactModule (ref), itemCardThumbnail (ref)
 	local t = {}
 	
@@ -79,7 +81,7 @@ local function mapBulkPurchasePartialSuccessItemsToRowPresentation(p3, p4, p5, p
 	return t
 end
 
-return function(p7) --[[ line: 111 | named "BulkPurchasePartialSuccess" ]]
+return function(p7) --[[ line: 127 | named "BulkPurchasePartialSuccess" ]]
 	-- upvalues: useDesignTokens (ref), mapTokens (ref), useLocalization (ref), t (ref), itemStatusKeyToLocalizationKeyModule (ref), reactModule (ref), fullPagePromptModule (ref), styledTextLabel (ref), fullPagePromptTwoPanelLayoutModule (ref), fullPagePromptScrollListModule (ref), itemListHeaderModule (ref), itemListModule (ref), mapBulkPurchasePartialSuccessItemsToRowPresentation (ref), dividerModule (ref), boxModule (ref), priceBoxLineDEPRECATEDModule (ref), button (ref), buttonType (ref)
 	local var19 = useDesignTokens(mapTokens)
 	local var20 = useLocalization(t)
@@ -100,7 +102,7 @@ return function(p7) --[[ line: 111 | named "BulkPurchasePartialSuccess" ]]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Change.AbsoluteSize] = function(p8) --[[ line: 137 ]]
+		[reactModule.Change.AbsoluteSize] = function(p8) --[[ line: 153 ]]
 			-- upvalues: var23 (ref)
 			var23(p8.AbsoluteSize)
 		end
@@ -112,7 +114,7 @@ return function(p7) --[[ line: 111 | named "BulkPurchasePartialSuccess" ]]
 		automaticSize = Enum.AutomaticSize.XY
 	})), reactModule.createElement(fullPagePromptTwoPanelLayoutModule, {
 		LayoutOrder = 2,
-		size = var22:map(function(p9) --[[ line: 151 ]]
+		size = var22:map(function(p9) --[[ line: 167 ]]
 			-- upvalues: var19 (ref)
 			return UDim2.new(1, 0, 1, -(p9.Y + var19.noticeMarginBottom))
 		end),

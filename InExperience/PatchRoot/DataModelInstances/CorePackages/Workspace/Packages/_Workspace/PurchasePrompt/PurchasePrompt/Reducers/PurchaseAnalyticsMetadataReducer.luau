@@ -1,15 +1,9 @@
 ﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local parent = purchasePrompt.Parent
-local rodux = require(parent.PurchasePromptDeps).Rodux
-local setPurchaseAnalyticsMetadataModule = require(purchasePrompt.Actions.SetPurchaseAnalyticsMetadata)
-local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUnifiedPurchaseGamepassAddProductUniverseId = sharedFlagsModule.FFlagUnifiedPurchaseGamepassAddProductUniverseId
-local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
-local t = {}
+local fFlagUnifiedPurchaseGamepassAddProductUniverseId = require(parent.SharedFlags).FFlagUnifiedPurchaseGamepassAddProductUniverseId
 
-return rodux.createReducer(t, {
-	[setPurchaseAnalyticsMetadataModule.name] = function(_, p0) --[[ line: 18 ]]
+return require(parent.PurchasePromptDeps).Rodux.createReducer({}, {
+	[require(purchasePrompt.Actions.SetPurchaseAnalyticsMetadata).name] = function(_, p0) --[[ line: 14 ]]
 		-- upvalues: fFlagUnifiedPurchaseGamepassAddProductUniverseId (ref)
 		return {
 			purchaseFlowUUID = p0.purchaseAnalyticsMetadata.purchaseFlowUUID,
@@ -23,9 +17,5 @@ return rodux.createReducer(t, {
 			userRobuxBalance = p0.purchaseAnalyticsMetadata.userRobuxBalance,
 			eventMetadata = p0.purchaseAnalyticsMetadata.eventMetadata
 		}
-	end,
-	[completeRequestModule.name] = function(p1, _) --[[ line: 34 ]]
-		-- upvalues: fFlagPassShopPurchaseSurfaceToBuyModal (ref), t (ref)
-		return if fFlagPassShopPurchaseSurfaceToBuyModal then t else p1
 	end
 })

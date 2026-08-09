@@ -1,10 +1,7 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
-
-return {
+﻿return {
 	displayName = "Style",
 	testMatch = { "**/*.test" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.RetryTimes
+		require(script.Parent.Parent.Dev.JestConfigs).setupFiles.UIBloxInitializer
 	}
 }

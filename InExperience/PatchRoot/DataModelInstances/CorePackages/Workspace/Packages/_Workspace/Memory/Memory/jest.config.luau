@@ -4,7 +4,6 @@ return {
 	displayName = "Memory",
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

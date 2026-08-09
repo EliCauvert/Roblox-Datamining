@@ -10,15 +10,13 @@ local interactable = UIBloxModule.Core.Control.Interactable
 local t = {
 	bodyText = "Chat Disabled",
 	defaultCountdownString = "",
-	onActivated = function() --[[ line: 27 ]] end,
-	contentVerticalAlignment = Enum.VerticalAlignment.Top
+	onActivated = function() --[[ line: 26 ]] end
 }
 
-return function(p0) --[[ line: 31 | named "ChatInputBoxDisabled" ]]
+return function(p0) --[[ line: 29 | named "ChatInputBoxDisabled" ]]
 	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useCountdownBinding (ref), reactModule (ref), interactable (ref), imageSetLabel (ref), images (ref)
 	local var5 = cryoModule.Dictionary.union(t, p0)
 	local var6 = foundationModule.Hooks.useTokens()
-	local var7 = if var5.contentVerticalAlignment == Enum.VerticalAlignment.Center then Enum.TextYAlignment.Center elseif var5.contentVerticalAlignment == Enum.VerticalAlignment.Bottom then Enum.TextYAlignment.Bottom else Enum.TextYAlignment.Top
 	
 	return reactModule.createElement(interactable, {
 		BackgroundTransparency = 1,
@@ -29,7 +27,7 @@ return function(p0) --[[ line: 31 | named "ChatInputBoxDisabled" ]]
 			Padding = UDim.new(0, var6.Gap.Small),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			VerticalAlignment = var5.contentVerticalAlignment,
+			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
 		disabledText = reactModule.createElement(foundationModule.Text, {
@@ -43,7 +41,7 @@ return function(p0) --[[ line: 31 | named "ChatInputBoxDisabled" ]]
 			TextSize = var5.contentSize,
 			textStyle = var6.Color.System.Alert,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = var7,
+			TextYAlignment = Enum.TextYAlignment.Top,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
 		countdownText = if var5.endTimestamp ~= nil then nil else reactModule.createElement(foundationModule.Text, {
@@ -57,7 +55,7 @@ return function(p0) --[[ line: 31 | named "ChatInputBoxDisabled" ]]
 			TextSize = var5.contentSize,
 			textStyle = var6.Color.Content.Emphasis,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			TextYAlignment = var7
+			TextYAlignment = Enum.TextYAlignment.Top
 		}),
 		icon = reactModule.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,

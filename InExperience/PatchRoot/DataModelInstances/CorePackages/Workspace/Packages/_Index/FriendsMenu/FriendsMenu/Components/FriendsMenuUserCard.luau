@@ -2,7 +2,6 @@
 local parent = friendsMenu.Parent
 local context = friendsMenu.Context
 local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
-local fFlagFriendsMenuUseProfileFrameThumbnailModule = require(friendsMenu.Flags.FFlagFriendsMenuUseProfileFrameThumbnail)
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
 local images = UIBloxModule.App.ImageSet.Images
@@ -14,24 +13,24 @@ local constantsModule = require(friendsMenu.Constants)
 local selectedUsersContextModule = require(context.SelectedUsersContext)
 local uDim = UDim.new(1, 0)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 24 ]]
-	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), fFlagFriendsMenuUseProfileFrameThumbnailModule (ref), interactable (ref), constantsModule (ref), uDim (ref), imageSetLabel (ref), images (ref)
-	local var7 = reactModule.useContext(selectedUsersContextModule)
-	local var8 = useStyle()
-	local theme = var8.Theme
-	local font = var8.Font
+return reactModule.forwardRef(function(p0, p1) --[[ line: 23 ]]
+	-- upvalues: reactModule (ref), selectedUsersContextModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), interactable (ref), constantsModule (ref), uDim (ref), imageSetLabel (ref), images (ref)
+	local var6 = reactModule.useContext(selectedUsersContextModule)
+	local var7 = useStyle()
+	local theme = var7.Theme
+	local font = var7.Font
 	
 	return reactModule.createElement(interactable, {
 		Size = UDim2.new(0, constantsModule.FRIEND_MENU_CARD_SIZE, 0, constantsModule.FRIEND_MENU_CARD_SIZE),
 		BackgroundTransparency = 1,
 		LayoutOrder = p0.layoutOrder,
-		[reactModule.Event.Activated] = if p0.unremovable then nil else reactModule.useCallback(function() --[[ line: 34 ]]
-			-- upvalues: p0 (ref), var7 (ref)
+		[reactModule.Event.Activated] = if p0.unremovable then nil else reactModule.useCallback(function() --[[ line: 33 ]]
+			-- upvalues: p0 (ref), var6 (ref)
 			if p0.onRemoved then
 				p0.onRemoved()
 			end
-			var7.removeFriend(p0.userId, p0.displayName)
-		end, { p0.userId, var7.removeFriend, p0.onRemoved }),
+			var6.removeFriend(p0.userId, p0.displayName)
+		end, { p0.userId, var6.removeFriend, p0.onRemoved }),
 		ref = p1
 	}, {
 		AvatarContainer = reactModule.createElement("Frame", {
@@ -45,7 +44,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 24 ]]
 				ZIndex = 1,
 				Size = UDim2.fromOffset(60, 60),
 				BackgroundColor3 = theme.UIDefault.Color,
-				Image = getStandardSizeAvatarHeadShotRbxthumb(p0.userId, fFlagFriendsMenuUseProfileFrameThumbnailModule)
+				Image = getStandardSizeAvatarHeadShotRbxthumb(p0.userId)
 			}, {
 				UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim })
 			}),

@@ -2,7 +2,7 @@
 local flagsModule = require(foundation.Utility.Flags)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Enums.ButtonVariant)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
@@ -89,8 +89,8 @@ local var7 = function(p0) --[[ line: 48 ]]
 end
 
 return function(p1, p2, p3, p4) --[[ line: 130 ]]
-	-- upvalues: variantsContextModule (ref), var7 (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
+	-- upvalues: variantsContextModule (ref), var7 (ref), composeStyleVariantModule (ref), colorModeModule (ref)
 	local button = variantsContextModule.useVariants("Button", var7, p1)
 	
-	return composeStyleVariantModule(button.common, button.sizes[p2], button.types[p3][p4 or colorNamespaceModule.Color])
+	return composeStyleVariantModule(button.common, button.sizes[p2], button.types[p3][p4 or colorModeModule.Color])
 end

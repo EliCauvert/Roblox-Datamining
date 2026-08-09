@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.InterventionShared.InterventionShared.Flags.FFlagTemporaryAvatarKickWarningDialog)
+﻿return require(script.Parent.Parent.Parent.Parent._Index.InterventionShared.InterventionShared.Flags.FFlagTemporaryAvatarKickWarningDialog)

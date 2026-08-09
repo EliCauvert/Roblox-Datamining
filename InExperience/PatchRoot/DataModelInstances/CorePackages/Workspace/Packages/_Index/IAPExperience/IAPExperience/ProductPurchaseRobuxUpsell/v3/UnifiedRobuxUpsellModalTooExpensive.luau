@@ -24,18 +24,28 @@ local tooExpensiveUnifiedUpsellShownCounter = require(parent.Generic.Events.TooE
 local useFocusNavigationRefsModule = require(parent.Generic.Hooks.useFocusNavigationRefs)
 local useInitialButtonDisableDelayModule = require(parent.Generic.Hooks.useInitialButtonDisableDelay)
 local UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS = require(parent.Generic.Constants).UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS
+local fFlagUnifiedPurchaseModalUiImprovementsModule = require(parent.Flags.FFlagUnifiedPurchaseModalUiImprovements)
+local fFlagAddFocusNavigationToUnifiedPurchaseModule = require(parent.Flags.FFlagAddFocusNavigationToUnifiedPurchase)
 local fFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 
-local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 76 ]]
-	-- upvalues: useLocalization (ref), useFocusNavigationRefsModule (ref), useInitialButtonDisableDelayModule (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), tooExpensiveUnifiedUpsellShownCounter (ref), sheet (ref), useScaledValue (ref), UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalHeaderModule (ref), view (ref), unifiedPurchaseModalTypeEnumModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), foundationModule (ref)
-	local var13 = useLocalization({
+local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 79 ]]
+	-- upvalues: useLocalization (ref), fFlagAddFocusNavigationToUnifiedPurchaseModule (ref), useFocusNavigationRefsModule (ref), useInitialButtonDisableDelayModule (ref), reactModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), tooExpensiveUnifiedUpsellShownCounter (ref), sheet (ref), fFlagUnifiedPurchaseModalUiImprovementsModule (ref), useScaledValue (ref), UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS (ref), fFlagUnifiedPurchaseFlowMarketplaceUIImprovements (ref), unifiedPurchaseModalHeaderModule (ref), view (ref), unifiedPurchaseModalTypeEnumModule (ref), priceSummaryModule (ref), unifiedProductDetailsModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), foundationModule (ref)
+	local var15 = useLocalization({
 		NeedMoreRobux = "IAPExperience.RobuxUpsell.Text.NeedMoreRobux",
 		ButtonCancel = "IAPExperience.InsufficientRobux.Action.Cancel",
 		BuyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
-	local var14, var15 = useFocusNavigationRefsModule(p0.buttons.cancelPurchaseActivated, nil)
-	local var16 = useInitialButtonDisableDelayModule()
-	reactModule.useEffect(function() --[[ line: 86 ]]
+	local var16 = nil
+	local var17 = nil
+	local var18 = false
+	
+	if fFlagAddFocusNavigationToUnifiedPurchaseModule then
+		local var19, var20 = useFocusNavigationRefsModule(p0.buttons.cancelPurchaseActivated, nil)
+		var16 = var19
+		var17 = var20
+		var18 = useInitialButtonDisableDelayModule()
+	end
+	reactModule.useEffect(function() --[[ line: 92 ]]
 		-- upvalues: loggerModule (copy), p0 (ref), getAppContextModule (copy), default (copy), tooExpensiveUnifiedUpsellShownCounter (copy)
 		loggerModule.debug({
 			message = "Too Expensive Unified Upsell Modal Shown",
@@ -55,17 +65,17 @@ local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 76 ]]
 	return reactModule.createElement(sheet.Root, {
 		preferCenterSheet = true,
 		onClose = p0.buttons.cancelPurchaseActivated,
-		snapPoints = {
+		snapPoints = if fFlagUnifiedPurchaseModalUiImprovementsModule then {
 			useScaledValue(UNIFIED_ROBUX_UPSELL_MODAL_TOO_EXPENSIVE_MIN_HEIGHT_PIXELS),
 			0.8
-		},
-		ref = if var16 then nil else var14
+		} else { 0.4, 0.8 },
+		ref = if fFlagAddFocusNavigationToUnifiedPurchaseModule then if var18 then nil else var16 else nil
 	}, {
 		Header = reactModule.createElement(sheet.Header, {
 			hasCloseAffordance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then if p0.hideUserRobuxBalance then true else nil else nil
 		}, {
 			ModalHeader = reactModule.createElement(unifiedPurchaseModalHeaderModule, {
-				titleText = var13.NeedMoreRobux,
+				titleText = var15.NeedMoreRobux,
 				robuxBalanceAmount = p0.balanceAmount,
 				hideUserRobuxBalance = if fFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p0.hideUserRobuxBalance else nil
 			})
@@ -86,24 +96,24 @@ local function UnifiedRobuxUpsellModalTooExpensive(p0) --[[ line: 76 ]]
 		}),
 		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
 			if p0.isQuest then reactModule.createElement(button, {
-				text = var13.ButtonCancel,
+				text = var15.ButtonCancel,
 				onActivated = p0.buttons.cancelPurchaseActivated,
 				fillBehavior = fillBehavior.Fill,
 				variant = buttonVariant.Standard
 			}) else reactModule.createElement(button, {
-				text = var13.BuyRobux,
+				text = var15.BuyRobux,
 				onActivated = p0.buttons.buyItemActivated,
 				fillBehavior = fillBehavior.Fill,
 				variant = buttonVariant.Emphasis,
 				icon = foundationModule.Enums.IconName.ArrowUpRightFromSquare,
-				isDisabled = var16,
-				ref = var15
+				isDisabled = if fFlagAddFocusNavigationToUnifiedPurchaseModule then var18 else false,
+				ref = if fFlagAddFocusNavigationToUnifiedPurchaseModule then var17 else nil
 			})
 		})
 	})
 end
 
-return function(p1) --[[ line: 163 | named "UnifiedRobuxUpsellModalTooExpensiveContainer" ]]
+return function(p1) --[[ line: 173 | named "UnifiedRobuxUpsellModalTooExpensiveContainer" ]]
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), UnifiedRobuxUpsellModalTooExpensive (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

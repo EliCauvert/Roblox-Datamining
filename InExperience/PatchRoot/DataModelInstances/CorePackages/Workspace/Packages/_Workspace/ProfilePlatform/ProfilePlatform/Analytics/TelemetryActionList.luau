@@ -1,17 +1,13 @@
 ﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local parent = profilePlatform.Parent
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local eventTypes = socialLuaAnalyticsModule.Analytics.Enums.EventTypes
-local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
+local supportedTelemetryBackends = require(parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
 local eventNamesModule = require(script.Parent.EventNames)
-local analyticsConstantsModule = require(script.Parent.AnalyticsConstants)
-local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
 local fFlagProfilePlatformEnableStore = require(parent.SharedFlags).FFlagProfilePlatformEnableStore
 local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
 local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+local fFlagProfilePlatformEnableEditAppearanceAnalyticsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceAnalytics)
 
 return {
 	defaults = {
@@ -25,22 +21,22 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p0) --[[ line: 38 ]]
+					status = function(p0) --[[ line: 35 ]]
 						return p0
 					end
 				}
 			},
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
-				overrideName = function(p1) --[[ line: 45 ]]
+				overrideName = function(p1) --[[ line: 42 ]]
 					-- upvalues: eventNamesModule (ref)
 					return eventNamesModule.ProfileLoadingStage .. "Time" .. p1.status
 				end,
 				dynamicCustomFields = {
-					status = function(p2) --[[ line: 49 ]]
+					status = function(p2) --[[ line: 46 ]]
 						return p2
 					end,
-					isProfilePlatform = function(p3) --[[ line: 52 ]]
+					isProfilePlatform = function(p3) --[[ line: 49 ]]
 						return p3 or false
 					end
 				}
@@ -54,7 +50,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					reloadCount = function(p4) --[[ line: 66 ]]
+					reloadCount = function(p4) --[[ line: 63 ]]
 						return if p4 <= 10 then `ReloadCount${p4}` else "ReloadCount5+"
 					end
 				}
@@ -68,10 +64,10 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p5) --[[ line: 86 ]]
+					status = function(p5) --[[ line: 83 ]]
 						return p5
 					end,
-					isInExperience = function(p6) --[[ line: 89 ]]
+					isInExperience = function(p6) --[[ line: 86 ]]
 						return p6
 					end
 				}
@@ -85,7 +81,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					friendStatus = function(p7) --[[ line: 103 ]]
+					friendStatus = function(p7) --[[ line: 100 ]]
 						return p7
 					end
 				}
@@ -99,7 +95,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					presenceType = function(p8) --[[ line: 117 ]]
+					presenceType = function(p8) --[[ line: 114 ]]
 						return p8
 					end
 				}
@@ -190,7 +186,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariantOverride = function(p9) --[[ line: 230 ]]
+					modalVariantOverride = function(p9) --[[ line: 227 ]]
 						return p9
 					end
 				}
@@ -302,13 +298,6 @@ return {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.SchoolButton] = {
-		description = "School button clicked",
-		lastUpdated = { 26, 7, 20 },
-		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
-		}
-	},
 	[eventNamesModule.FriendsButton] = {
 		description = "Friends button clicked",
 		lastUpdated = { 24, 7, 31 },
@@ -393,11 +382,11 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = if fFlagProfilePlatformEnableStore then if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-					btnContext = function(p11) --[[ line: 489 ]]
+					btnContext = function(p11) --[[ line: 477 ]]
 						return p11
 					end
 				} else {
-					source = function(p10) --[[ line: 494 ]]
+					source = function(p10) --[[ line: 482 ]]
 						return p10
 					end
 				} else nil
@@ -411,7 +400,7 @@ return {
 			{
 				type = supportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					component = function(p12) --[[ line: 509 ]]
+					component = function(p12) --[[ line: 497 ]]
 						return p12
 					end
 				}
@@ -446,102 +435,38 @@ return {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.CTAButtonEditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[eventNamesModule.CTAButtonEditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEnableEditAppearanceAnalyticsModule then {
 		description = "Edit appearance menu opened",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[eventNamesModule.EditAppearanceMenuEditAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEnableEditAppearanceAnalyticsModule then {
 		description = "Edit avatar clicked from edit appearance menu",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditEmote] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[eventNamesModule.EditAppearanceMenuEditEmote] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEnableEditAppearanceAnalyticsModule then {
 		description = "Edit emote clicked from edit appearance menu",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuSwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[eventNamesModule.EditAppearanceMenuSwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEnableEditAppearanceAnalyticsModule then {
 		description = "Switch avatar clicked from edit appearance menu",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem) then {
+	[eventNamesModule.EditAppearanceMenuEditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEnableEditAppearanceAnalyticsModule and require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem) then {
 		description = "Edit background clicked from edit appearance menu",
 		lastUpdated = { 26, 5, 14 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
-		}
-	} else nil,
-	[eventNamesModule.InspectAvatarInsufficientRobuxShown] = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
-		description = "Insufficient Robux dialog shown from the Inspect Avatar sheet",
-		lastUpdated = { 26, 7, 31 },
-		backendsList = {
-			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 621 ]]
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
-				end,
-				staticCustomFields = {
-					eventContext = contexts.PlayerProfile,
-					btn = analyticsConstantsModule.Btns.InspectAvatarInsufficientRobux
-				},
-				dynamicCustomFields = {
-					totalPrice = function(p13) --[[ line: 629 ]]
-						return p13
-					end
-				}
-			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
-		}
-	} else nil,
-	[eventNamesModule.InspectAvatarBuyRobuxClicked] = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
-		description = "Buy Robux clicked on the insufficient Robux dialog",
-		lastUpdated = { 26, 7, 31 },
-		backendsList = {
-			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 647 ]]
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
-				end,
-				staticCustomFields = {
-					eventContext = contexts.PlayerProfile,
-					btn = analyticsConstantsModule.Btns.InspectAvatarBuyRobux
-				},
-				dynamicCustomFields = {
-					totalPrice = function(p14) --[[ line: 655 ]]
-						return p14
-					end
-				}
-			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
-		}
-	} else nil,
-	[eventNamesModule.CurrentlyWearingHeaderButton] = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
-		description = "Currently Wearing header button clicked to open the Inspect Avatar sheet",
-		lastUpdated = { 26, 8, 3 },
-		backendsList = {
-			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function() --[[ line: 673 ]]
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
-				end,
-				staticCustomFields = {
-					eventContext = contexts.PlayerProfile,
-					btn = analyticsConstantsModule.Btns.CurrentlyWearingHeader
-				}
-			},
 			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil

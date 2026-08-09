@@ -46,6 +46,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | 
 	else
 		var30 = if var29 ~= breakpointModule.XSmall then var29 == breakpointModule.Small else true
 	end
+	local var34
 	local var31 = reactModule.useMemo(function() --[[ line: 71 ]]
 		-- upvalues: reactModule (copy), alertActionsModule (copy), var23 (ref), var30 (ref), var24 (ref)
 		return reactModule.createElement(alertActionsModule, {
@@ -60,17 +61,36 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | 
 			padding = if var30 then { top = UDim.new(0, var24.Gap.Small) } else nil
 		})
 	end, { var23.actions, var23.testId, var30, var24.Gap.Small })
+	local createElement = reactModule.createElement
+	local t_1 = {}
+	local t_2 = { [var25.container.tag] = true }
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var23, {
-		tag = {
-			[var25.container.tag] = true,
-			["align-y-center"] = if var23.title ~= "" then var23.description == nil else true,
-			["align-y-top"] = var23.title ~= "" and var23.description ~= nil
-		},
-		ref = var28
-	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = { colorNamespace = var25.container.colorNamespace }
-	}, {
+	if flagsModule.FoundationSystemBannerOptionalTitle then
+		var34 = true
+		
+		if var23.title ~= "" then
+			local _ = var23.description == nil
+		end
+	else
+		var34 = var23.description == nil
+	end
+	local var35
+	t_2["align-y-center"] = var34
+	
+	if flagsModule.FoundationSystemBannerOptionalTitle then
+		var35 = false
+		
+		if var23.title ~= "" then
+			local _ = var23.description ~= nil
+		end
+	else
+		var35 = var23.description ~= nil
+	end
+	t_2["align-y-top"] = var35
+	t_1.tag = t_2
+	t_1.ref = var28
+	
+	return createElement(viewModule, withCommonPropsModule(var23, t_1), reactModule.createElement(presentationContextModule.Provider, { value = { colorMode = var25.container.colorMode } }, {
 		Icon = reactModule.createElement(iconModule, {
 			LayoutOrder = 1,
 			name = SEVERITY_TO_ICON[var23.severity],
@@ -85,7 +105,13 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | 
 			testId = `{var23.testId}--content`
 		}, {
 			Text = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = "col auto-xy" }, {
-				Title = if var23.title ~= "" then nil else reactModule.createElement(textModule, {
+				Title = if flagsModule.FoundationSystemBannerOptionalTitle then if var23.title ~= "" then nil else reactModule.createElement(textModule, {
+					LayoutOrder = 1,
+					Text = var23.title,
+					textStyle = var25.title.style,
+					tag = var25.title.tag,
+					testId = `{var23.testId}--title`
+				}) else reactModule.createElement(textModule, {
 					LayoutOrder = 1,
 					Text = var23.title,
 					textStyle = var25.title.style,

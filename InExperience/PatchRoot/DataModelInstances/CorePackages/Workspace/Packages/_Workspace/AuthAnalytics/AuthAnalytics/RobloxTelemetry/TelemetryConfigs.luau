@@ -6,7 +6,6 @@ local silentPasskeyUpgradeThrottlingHundredthsPercent = game:DefineFastInt("Sile
 local deepLinkNavigationLockThrottlingHundredthsPercent = game:DefineFastInt("DeepLinkNavigationLockThrottlingHundredthsPercent", 0)
 local unauthorizedErrorThrottlingHundredthsPercent = game:DefineFastInt("UnauthorizedErrorThrottlingHundredthsPercent", 0)
 local iosAuthServiceLoginThrottlingHundredthsPercent = game:DefineFastInt("IosAuthServiceLoginThrottlingHundredthsPercent", 0)
-local iosAuthServiceHealthCounterThrottlingHundredthsPercent = game:DefineFastInt("IosAuthServiceHealthCounterThrottlingHundredthsPercent", 0)
 local keystoreTelemetryThrottlingHundredthsPercent = game:DefineFastInt("KeystoreTelemetryThrottlingHundredthsPercent", 0)
 
 return {
@@ -41,6 +40,14 @@ return {
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = authPageMountThrottlingHundredthsPercent,
 		lastUpdated = { 25, 4, 14 }
+	},
+	EngagementScreenMountTelemetryConfig = {
+		eventName = "luaEngagementScreenMount",
+		description = "Report when the engagement screen is mounted.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = authPageMountThrottlingHundredthsPercent,
+		lastUpdated = { 25, 4, 17 }
 	},
 	ConsoleSSOAttemptedTelemetryConfig = {
 		eventName = "luaConsoleSSOAttempted",
@@ -105,6 +112,14 @@ return {
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = authButtonClickedThrottlingHundredthsPercent,
 		lastUpdated = { 25, 4, 14 }
+	},
+	EngagementScreenContinueButtonClickedConfig = {
+		eventName = "luaEngagementScreenContinueButtonClicked",
+		description = "Report when the continue button is clicked.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = authButtonClickedThrottlingHundredthsPercent,
+		lastUpdated = { 25, 4, 17 }
 	},
 	SilentPasskeyUpgradeAvailableConfig = {
 		eventName = "luaSilentPasskeyUpgradeAvailable",
@@ -312,94 +327,5 @@ return {
 		backends = { loggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = keystoreTelemetryThrottlingHundredthsPercent,
 		lastUpdated = { 26, 4, 21 }
-	},
-	IosAuthServiceLoginCredentialSheetLoginSuccessConfig = {
-		eventName = "iosAuthServiceLoginCredentialSheetLoginSuccess",
-		description = "Report when a login attempt using a credential selected from the iOS credential sheet succeeds.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
-		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 23 }
-	},
-	IosAuthServiceLoginCredentialSheetLoginFailureConfig = {
-		eventName = "iosAuthServiceLoginCredentialSheetLoginFailure",
-		description = "Report when a login attempt using a credential selected from the iOS credential sheet fails.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
-		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 23 }
-	},
-	IosAuthServiceLoginCredentialSheetUnavailableConfig = {
-		eventName = "iosAuthServiceLoginCredentialSheetUnavailable",
-		description = "Report when the iOS credential sheet could not be shown during login because no supported credential types (password or passkey) were available.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
-		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServiceLoginSuccessConfig = {
-		eventName = "iosAuthServiceLoginSuccess",
-		description = "iOS Auth Service health: a lua-observed login succeeded.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServiceLoginFailureConfig = {
-		eventName = "iosAuthServiceLoginFailure",
-		description = "iOS Auth Service health: a lua-observed login failed.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServiceLoginTwoStepRequiredConfig = {
-		eventName = "iosAuthServiceLoginTwoStepRequired",
-		description = "iOS Auth Service health: a lua-observed login required two-step verification (2SV/OTP) and is not yet complete.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServiceSignupSuccessConfig = {
-		eventName = "iosAuthServiceSignupSuccess",
-		description = "iOS Auth Service health: a lua-observed signup succeeded.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServiceSignupFailureConfig = {
-		eventName = "iosAuthServiceSignupFailure",
-		description = "iOS Auth Service health: a lua-observed signup failed.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServicePasswordSaveSuccessConfig = {
-		eventName = "iosAuthServicePasswordSaveSuccess",
-		description = "iOS Auth Service health: a lua-observed password save succeeded.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
-	},
-	IosAuthServicePasswordSaveFailureConfig = {
-		eventName = "iosAuthServicePasswordSaveFailure",
-		description = "iOS Auth Service health: a lua-observed password save failed.",
-		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = iosAuthServiceHealthCounterThrottlingHundredthsPercent,
-		lastUpdated = { 26, 6, 24 }
 	}
 }

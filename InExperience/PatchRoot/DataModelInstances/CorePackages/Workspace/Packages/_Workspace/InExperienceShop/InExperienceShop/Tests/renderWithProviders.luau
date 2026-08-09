@@ -5,5 +5,5 @@ local foundationProvider = require(parent.Foundation).FoundationProvider
 
 return function(p0) --[[ line: 9 | named "renderWithProviders" ]]
 	-- upvalues: reactTestingLibraryModule (ref), reactModule (ref), foundationProvider (ref)
-	return reactTestingLibraryModule.render(reactModule.createElement(foundationProvider, { colorMode = "Dark" }, p0))
+	return reactTestingLibraryModule.render(reactModule.createElement(foundationProvider, { theme = "Dark" }, p0))
 end

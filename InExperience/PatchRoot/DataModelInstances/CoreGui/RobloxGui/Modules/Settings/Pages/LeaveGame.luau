@@ -29,11 +29,9 @@ local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeatur
 local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
 local fFlagChromeShortcutRemoveRespawnOnLeavePage = sharedFlagsModule.FFlagChromeShortcutRemoveRespawnOnLeavePage
-local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
 local fFlagRefactorMenuConfirmationButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local fFlagConfirmationButtonsUseGreyButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagConfirmationButtonsUseGreyButtons)
 local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
-local localizationKeys = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).Constants.LocalizationKeys
 local var23 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
 local themeModule = require(robloxGui.Modules.Settings.Theme)
 local foundationProvider = foundationModule.FoundationProvider
@@ -44,17 +42,17 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 
-local function LeaveButtonsContainer(p0) --[[ line: 84 ]]
-	-- upvalues: reactModule (ref), useLastInput (ref), useFocusGuiObject (ref), useLocalization (ref), fFlagDebugEnablePioneerUX (ref), localizationKeys (ref), constantsModule (ref), input (ref), leaveGameModule (ref), utilityModule (ref), view (ref), var17 (ref), text (ref), button (ref), inputSize (ref), fFlagConfirmationButtonsUseGreyButtonsModule (ref), buttonVariant (ref)
+local function LeaveButtonsContainer(p0) --[[ line: 80 ]]
+	-- upvalues: reactModule (ref), useLastInput (ref), useFocusGuiObject (ref), useLocalization (ref), constantsModule (ref), input (ref), leaveGameModule (ref), utilityModule (ref), view (ref), var17 (ref), text (ref), button (ref), inputSize (ref), fFlagConfirmationButtonsUseGreyButtonsModule (ref), buttonVariant (ref)
 	local var29 = reactModule.useRef(nil)
 	local var30 = useLastInput()
 	local var31 = useFocusGuiObject()
 	local var32 = useLocalization({
-		ConfirmLeaveGame = if fFlagDebugEnablePioneerUX then localizationKeys.LogoutConfirmation else constantsModule.ConfirmLeaveGameLocalizedKey,
-		LeaveGame = if fFlagDebugEnablePioneerUX then localizationKeys.LogoutButton else constantsModule.LeaveGameLocalizedKey,
-		DontLeaveGame = if fFlagDebugEnablePioneerUX then localizationKeys.Cancel else constantsModule.DontLeaveGameLocalizedKey
+		ConfirmLeaveGame = constantsModule.ConfirmLeaveGameLocalizedKey,
+		LeaveGame = constantsModule.LeaveGameLocalizedKey,
+		DontLeaveGame = constantsModule.DontLeaveGameLocalizedKey
 	})
-	reactModule.useEffect(function() --[[ line: 102 ]]
+	reactModule.useEffect(function() --[[ line: 92 ]]
 		-- upvalues: var30 (ref), input (copy), var31 (ref), var29 (ref)
 		if var30 == input.Touch then
 			var31(nil)
@@ -90,13 +88,8 @@ local function LeaveButtonsContainer(p0) --[[ line: 84 ]]
 				variant = if fFlagConfirmationButtonsUseGreyButtonsModule then buttonVariant.Standard else buttonVariant.SoftEmphasis,
 				width = UDim.new(0, if var17 then 300 else 200),
 				ref = var29,
-				onActivated = reactModule.useCallback(function() --[[ line: 110 ]]
-					-- upvalues: fFlagDebugEnablePioneerUX (copy), leaveGameModule (copy)
-					if fFlagDebugEnablePioneerUX then
-						leaveGameModule(false, { shouldNativeExit = true })
-						
-						return
-					end
+				onActivated = reactModule.useCallback(function() --[[ line: 100 ]]
+					-- upvalues: leaveGameModule (copy)
 					leaveGameModule(true)
 				end, { leaveGameModule })
 			}),
@@ -106,7 +99,7 @@ local function LeaveButtonsContainer(p0) --[[ line: 84 ]]
 				size = inputSize.Large,
 				variant = buttonVariant.Subtle,
 				width = UDim.new(0, if var17 then 300 else 200),
-				onActivated = reactModule.useCallback(function() --[[ line: 121 ]]
+				onActivated = reactModule.useCallback(function() --[[ line: 104 ]]
 					-- upvalues: p0 (ref), utilityModule (copy)
 					p0.dontLeaveFromButton(utilityModule:IsUsingGamepad())
 				end, { utilityModule, p0.dontLeaveFromButton })
@@ -115,7 +108,7 @@ local function LeaveButtonsContainer(p0) --[[ line: 84 ]]
 	})
 end
 
-local function LeaveGameContainer(p1) --[[ line: 165 ]]
+local function LeaveGameContainer(p1) --[[ line: 148 ]]
 	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), reactFocusNavigationModule (ref), var23 (ref), LeaveButtonsContainer (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
@@ -128,15 +121,15 @@ local function LeaveGameContainer(p1) --[[ line: 165 ]]
 	})
 end
 
-local var28 = (function() --[[ line: 183 | named "Initialize" ]]
-	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), constantsModule (ref), fFlagRefactorMenuConfirmationButtonsModule (ref), reactRobloxModule (ref), reactModule (ref), LeaveGameContainer (ref), fFlagDebugEnablePioneerUX (ref), robloxTranslatorModule (ref), localizationKeys (ref), create (ref), themeModule (ref), var17 (ref), utilityModule (ref), leaveGameModule (ref)
+local var28 = (function() --[[ line: 166 | named "Initialize" ]]
+	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), constantsModule (ref), fFlagRefactorMenuConfirmationButtonsModule (ref), reactRobloxModule (ref), reactModule (ref), LeaveGameContainer (ref), robloxTranslatorModule (ref), create (ref), themeModule (ref), var17 (ref), utilityModule (ref), leaveGameModule (ref)
 	local leaveGamePage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	leaveGamePage.playsessionid = ""
 	
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		leaveGamePage.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function leaveGamePage.DontLeaveFunc(p2) --[[ line: 192 ]]
+	function leaveGamePage.DontLeaveFunc(p2) --[[ line: 175 ]]
 		-- upvalues: leaveGamePage (ref), rbxAnalyticsService (copy), constantsModule (copy)
 		if leaveGamePage.HubRef then
 			leaveGamePage.HubRef:PopMenu(p2, true)
@@ -149,14 +142,14 @@ local var28 = (function() --[[ line: 183 | named "Initialize" ]]
 		})
 	end
 	
-	function leaveGamePage.DontLeaveFromHotkey(_, p3, p4) --[[ line: 209 ]]
+	function leaveGamePage.DontLeaveFromHotkey(_, p3, p4) --[[ line: 192 ]]
 		-- upvalues: leaveGamePage (ref)
 		if p3 == Enum.UserInputState.Begin then
 			leaveGamePage.DontLeaveFunc(if p4.UserInputType ~= Enum.UserInputType.Gamepad1 then if p4.UserInputType ~= Enum.UserInputType.Gamepad2 then if p4.UserInputType ~= Enum.UserInputType.Gamepad3 then p4.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
 		end
 	end
 	
-	function leaveGamePage.DontLeaveFromButton(p5) --[[ line: 217 ]]
+	function leaveGamePage.DontLeaveFromButton(p5) --[[ line: 200 ]]
 		-- upvalues: leaveGamePage (ref)
 		leaveGamePage.DontLeaveFunc(p5)
 	end
@@ -167,13 +160,13 @@ local var28 = (function() --[[ line: 183 | named "Initialize" ]]
 	leaveGamePage.ShouldShowHubBar = false
 	
 	if fFlagRefactorMenuConfirmationButtonsModule then
-		function leaveGamePage.RenderPage() --[[ line: 230 ]]
+		function leaveGamePage.RenderPage() --[[ line: 213 ]]
 			-- upvalues: leaveGamePage (ref), reactRobloxModule (copy), reactModule (copy), LeaveGameContainer (copy)
 			leaveGamePage.PageRoot = reactRobloxModule.createRoot(leaveGamePage.Page)
 			leaveGamePage.PageRoot:render(reactModule.createElement(LeaveGameContainer, { dontLeaveFromButton = leaveGamePage.DontLeaveFromButton }))
 		end
 		
-		function leaveGamePage.UnmountPage() --[[ line: 237 ]]
+		function leaveGamePage.UnmountPage() --[[ line: 220 ]]
 			-- upvalues: leaveGamePage (ref)
 			if leaveGamePage.PageRoot then
 				leaveGamePage.PageRoot:unmount()
@@ -189,7 +182,7 @@ local var28 = (function() --[[ line: 183 | named "Initialize" ]]
 		BackgroundTransparency = 1,
 		TextWrapped = true,
 		ZIndex = 2,
-		Text = if fFlagDebugEnablePioneerUX then robloxTranslatorModule:FormatByKey(localizationKeys.LogoutConfirmation) else robloxTranslatorModule:FormatByKey(constantsModule.ConfirmLeaveGameLocalizedKey),
+		Text = robloxTranslatorModule:FormatByKey(constantsModule.ConfirmLeaveGameLocalizedKey),
 		Font = themeModule.font(Enum.Font.SourceSansBold, "Confirmation"),
 		FontSize = themeModule.fontSize(Enum.FontSize.Size36, "Confirmation"),
 		TextColor3 = Color3.new(1, 1, 1),
@@ -221,13 +214,8 @@ local var28 = (function() --[[ line: 183 | named "Initialize" ]]
 	elseif var17 then
 		var34.FontSize = Enum.FontSize.Size48
 	end
-	leaveGamePage.LeaveGameButton = utilityModule:MakeStyledButton("LeaveGame", if fFlagDebugEnablePioneerUX then robloxTranslatorModule:FormatByKey(localizationKeys.LogoutButton) else "Leave", nil, function() --[[ line: 295 ]]
-		-- upvalues: fFlagDebugEnablePioneerUX (copy), leaveGameModule (copy)
-		if fFlagDebugEnablePioneerUX then
-			leaveGameModule(false, { shouldNativeExit = true })
-			
-			return
-		end
+	leaveGamePage.LeaveGameButton = utilityModule:MakeStyledButton("LeaveGame", "Leave", nil, function() --[[ line: 273 ]]
+		-- upvalues: leaveGameModule (copy)
 		leaveGameModule(true)
 	end)
 	leaveGamePage.LeaveGameButton.NextSelectionRight = nil
@@ -239,7 +227,7 @@ local var28 = (function() --[[ line: 183 | named "Initialize" ]]
 	
 	return leaveGamePage
 end)()
-var28.Displayed.Event:connect(function() --[[ line: 329 ]]
+var28.Displayed.Event:connect(function() --[[ line: 298 ]]
 	-- upvalues: fFlagRefactorMenuConfirmationButtonsModule (ref), var28 (write), guiService (ref), fFlagEnableConsoleExpControls (ref), var14 (ref), fFlagChromeShortcutRemoveRespawnOnLeavePage (ref), var15 (ref), var16 (ref), contextActionService (ref)
 	if fFlagRefactorMenuConfirmationButtonsModule then
 		var28.RenderPage()
@@ -261,7 +249,7 @@ var28.Displayed.Event:connect(function() --[[ line: 329 ]]
 		contextActionService:BindCoreAction("LeaveGameCancelAction", var28.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 	end
 end)
-var28.Hidden.Event:connect(function() --[[ line: 349 ]]
+var28.Hidden.Event:connect(function() --[[ line: 318 ]]
 	-- upvalues: fFlagRefactorMenuConfirmationButtonsModule (ref), var28 (write), contextActionService (ref)
 	if fFlagRefactorMenuConfirmationButtonsModule then
 		var28.UnmountPage()

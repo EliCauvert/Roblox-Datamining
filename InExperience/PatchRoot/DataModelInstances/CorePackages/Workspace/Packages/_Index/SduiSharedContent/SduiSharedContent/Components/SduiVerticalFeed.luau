@@ -11,10 +11,15 @@ local useLastInputMode = require(parent.FocusNavigationUtils).useLastInputMode
 local responsiveModule = require(parent.Responsive)
 local usePreferredInput = responsiveModule.usePreferredInput
 local appCommonLibModule = require(parent.AppCommonLib)
-local scrollMovementDirection = require(parent.RobloxAppEnums).ScrollMovementDirection
+local signalsReactModule = require(parent.SignalsReact)
 local _ = require(parent.SduiCompat)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
+local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
+local getSduiComponentWrapper = sduiCoreSystemModule.getSduiComponentWrapper
+local sduiBuilder = sduiCoreSystemModule.SduiBuilder
+local sduiErrors = sduiCoreSystemModule.SduiErrors
 local collectionViewsModule = require(parent.CollectionViews)
+local collectionItemSize = collectionViewsModule.CollectionViewTypes.CollectionItemSize
 local collectionLayoutStoreProvider = collectionViewsModule.CollectionLayoutStoreProvider
 local collectionLayoutStoreContext = collectionViewsModule.CollectionLayoutStoreContext
 local sduiPoolStore = sduiCoreSystemModule.SduiPoolStore
@@ -25,285 +30,307 @@ local useVerticalScrolledToEndThresholdModule = require(sduiSharedContent.Compon
 local useProgressiveRowCapModule = require(sduiSharedContent.Components.useProgressiveRowCap)
 local buildSduiFeedChildrenModule = require(sduiSharedContent.Components.buildSduiFeedChildren)
 local sduiFeedImpressionsDetectorModule = require(sduiSharedContent.Components.SduiFeedImpressionsDetector)
-local backToTopButtonModule = require(sduiSharedContent.Components.BackToTopButton)
+local luaAppSduiVerticalFeedProgressiveLoad2 = game:DefineFastFlag("LuaAppSduiVerticalFeedProgressiveLoad2", false)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
+local fFlagSduiVerticalFeedLayoutOrder = sharedFlagsModule.FFlagSduiVerticalFeedLayoutOrder
+local fFlagLuaAppSduiBadgeDetailsComponents = sharedFlagsModule.FFlagLuaAppSduiBadgeDetailsComponents
+local fFlagSduiFeedOptionalScrollingFrameFix = sharedFlagsModule.FFlagSduiFeedOptionalScrollingFrameFix
+local fFlagLuaAppCompositionSduiEnabled = sharedFlagsModule.FFlagLuaAppCompositionSduiEnabled
 local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
-local fFlagSduiSrpScrollAway = sharedFlagsModule.FFlagSduiSrpScrollAway
-local sduiEnableBackToTop = game:DefineFastFlag("SduiEnableBackToTop", false)
+local fFlagSduiChartsSupport = sharedFlagsModule.FFlagSduiChartsSupport
+local fFlagSduiFeedImpressions = sharedFlagsModule.FFlagSduiFeedImpressions
+local fFlagSduiComponentList = sharedFlagsModule.FFlagSduiComponentList
+local fFlagSduiFeedStartRowPerIndex = sharedFlagsModule.FFlagSduiFeedStartRowPerIndex
+local fFlagSduiPlayButtonContextualMessageImpression = sharedFlagsModule.FFlagSduiPlayButtonContextualMessageImpression
+local fFlagLuaAppSduiRouteName = sharedFlagsModule.FFlagLuaAppSduiRouteName
+local t = {}
 
-local function PoolStoreLayoutStoreWiring(p0) --[[ line: 111 ]]
+local function PoolStoreLayoutStoreWiring(p0) --[[ line: 121 ]]
 	-- upvalues: reactModule (ref), collectionLayoutStoreContext (ref), sduiPoolStore (ref)
-	local var19 = reactModule.useContext(collectionLayoutStoreContext)
-	reactModule.useEffect(function() --[[ line: 113 ]]
-		-- upvalues: var19 (ref), sduiPoolStore (copy), p0 (ref)
-		if var19 == nil then
+	local var20 = reactModule.useContext(collectionLayoutStoreContext)
+	reactModule.useEffect(function() --[[ line: 123 ]]
+		-- upvalues: var20 (ref), sduiPoolStore (copy), p0 (ref)
+		if var20 == nil then
 			return
 		end
 		local sduiPoolStore_1 = sduiPoolStore.getSduiPoolStore(p0.configKey)
-		sduiPoolStore_1.setLayoutStore(var19)
+		sduiPoolStore_1.setLayoutStore(var20)
 		
-		return function() --[[ line: 119 ]]
+		return function() --[[ line: 129 ]]
 			-- upvalues: sduiPoolStore_1 (ref)
 			sduiPoolStore_1.setLayoutStore(nil)
 		end
-	end, { p0.configKey, var19 })
+	end, { p0.configKey, var20 })
 	
 	return nil
 end
 
-return reactModule.memo(function(p1) --[[ line: 126 | named "SduiVerticalFeed" ]]
-	-- upvalues: useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), appCommonLibModule (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinnerModule (ref)
-	local var24
+return reactModule.memo(function(p1) --[[ line: 136 | named "SduiVerticalFeed" ]]
+	-- upvalues: fFlagLuaAppCompositionSduiEnabled (ref), useTokens (ref), fFlagSduiChartsSupport (ref), fFlagSduiFeedImpressions (ref), useNavBarPlacement (ref), fFlagLuaAppSduiRouteName (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), appCommonLibModule (ref), fFlagSduiPlayButtonContextualMessageImpression (ref), signalsReactModule (ref), collectionItemSize (ref), fFlagSduiFeedStartRowPerIndex (ref), fFlagSduiFeedOptionalScrollingFrameFix (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), luaAppSduiVerticalFeedProgressiveLoad2 (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), findAnalyticsField (ref), t (ref), sduiBuilder (ref), sduiErrors (ref), fFlagSduiComponentList (ref), getSduiComponentWrapper (ref), fFlagSduiVerticalFeedLayoutOrder (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), fFlagLuaAppSduiBadgeDetailsComponents (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinnerModule (ref)
+	local var34
 	local analyticsContext = p1.analyticsContext
 	local sduiContext = p1.sduiContext
 	local feedItems = p1.feedItems
 	local debugName = p1.debugName
-	local contentTag = p1.contentTag or p1.defaultContentTag
-	local var22 = contentTag ~= nil and contentTag ~= ""
-	local var23 = useTokens()
+	local contentTag = fFlagLuaAppCompositionSduiEnabled and (p1.contentTag or p1.defaultContentTag)
+	local var23 = fFlagLuaAppCompositionSduiEnabled and (contentTag ~= nil and contentTag ~= "")
+	local var24 = useTokens()
+	local var25 = nil
+	local var26 = nil
+	local stickyBackgroundStyle = nil
+	local stickyPaddingTop = nil
+	local stickyPaddingBottom = nil
+	local gapBetweenStickyItems = nil
+	local stickyContentTag = nil
+	local gapAfterStickyItems = nil
+	local _ = nil
+	local impressionsTag = nil
+	local selectionBehaviorLeft = nil
+	local selectionBehaviorRight = nil
 	
-	if fFlagLuaAppSduiStickyHeaderScrollAway then
-		var24 = false
-		
-		if p1.stickyItems ~= nil then
-			local _ = #p1.stickyItems > 0
-		end
+	if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then
+		var25 = p1.stickyItems ~= nil
+		var26 = p1.onRefresh ~= nil
+		stickyContentTag = p1.stickyContentTag or p1.defaultStickyContentTag
+		stickyBackgroundStyle = p1.stickyBackgroundStyle or var24.Color.Surface.Surface_0
+		stickyPaddingTop = p1.stickyPaddingTop
+		stickyPaddingBottom = p1.stickyPaddingBottom
+		gapBetweenStickyItems = p1.gapBetweenStickyItems or var24.Gap.Medium
+		gapAfterStickyItems = p1.gapAfterStickyItems or var24.Gap.Medium
+		impressionsTag = p1.impressionsTag or (if fFlagLuaAppSduiRouteName then sduiContext.routeName or sduiContext.appPage else sduiContext.appPage)
+		selectionBehaviorLeft = p1.selectionBehaviorLeft or (if useNavBarPlacement() == appNavBarModule.Placement.Left then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop)
+		selectionBehaviorRight = p1.selectionBehaviorRight or Enum.SelectionBehavior.Stop
+		var34 = p1.scrollBarThickness or (if usePreferredInput() == responsiveModule.Input.Pointer then 4 else 0)
 	else
-		var24 = p1.stickyItems ~= nil
+		var34 = 0
 	end
-	local var25 = p1.onRefresh ~= nil
-	local stickyContentTag = p1.stickyContentTag or p1.defaultStickyContentTag
-	local stickyBackgroundStyle = p1.stickyBackgroundStyle or var23.Color.Surface.Surface_0
-	local var28 = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.stickyPaddingTop or var23.Gap.Medium else p1.stickyPaddingTop
-	local var29 = if fFlagLuaAppSduiStickyHeaderScrollAway then p1.stickyPaddingBottom or var23.Gap.Medium else p1.stickyPaddingBottom
-	local gapBetweenStickyItems = p1.gapBetweenStickyItems or var23.Gap.Medium
-	local gapAfterStickyItems = p1.gapAfterStickyItems or var23.Gap.Medium
-	local impressionsTag = p1.impressionsTag or (sduiContext.routeName or sduiContext.appPage)
-	local selectionBehaviorLeft = p1.selectionBehaviorLeft or (if useNavBarPlacement() == appNavBarModule.Placement.Left then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop)
-	local selectionBehaviorRight = p1.selectionBehaviorRight or Enum.SelectionBehavior.Stop
-	local scrollBarThickness = p1.scrollBarThickness or (if usePreferredInput() == responsiveModule.Input.Pointer then 4 else 0)
-	local var36, var37 = reactModule.useState(nil)
-	local var38 = reactModule.useRef(nil)
-	local var39 = reactModule.useRef(nil)
+	local var35 = nil
+	local var36 = nil
 	
-	if var39.current == nil then
-		var39.current = appCommonLibModule.Signal.new()
+	if fFlagLuaAppCompositionSduiEnabled then
+		local var37, var38 = reactModule.useState(nil)
+		var35 = var37
+		var36 = var38
 	end
-	local var40 = reactModule.useCallback(function() --[[ line: 172 ]]
-		-- upvalues: var39 (ref)
-		var39.current:fire()
+	local var39 = reactModule.useRef(nil)
+	local var40 = reactModule.useRef(nil)
+	
+	if var40.current == nil then
+		var40.current = appCommonLibModule.Signal.new()
+	end
+	local var44
+	local var41 = reactModule.useCallback(function() --[[ line: 195 ]]
+		-- upvalues: var40 (ref)
+		var40.current:fire()
 	end, {})
-	local var41 = if fFlagSduiSrpScrollAway then reactModule.useRef(0) else nil
-	local var42 = if fFlagSduiSrpScrollAway then reactModule.useRef(scrollMovementDirection.Backward) else nil
-	local var43 = if fFlagSduiSrpScrollAway then reactModule.useCallback(function(p2) --[[ line: 180 ]]
-		-- upvalues: var40 (ref), p1 (ref), var41 (ref), scrollMovementDirection (copy), var42 (ref)
-		var40()
-		local onScrollDirectionChanged = p1.onScrollDirectionChanged
-		
-		if not onScrollDirectionChanged then return end
-		local y = p2.CanvasPosition.Y
-		
-		if y < 0 then return end
-		if y == var41.current then return end
-		local var60 = if var41.current < y then scrollMovementDirection.Forward else scrollMovementDirection.Backward
-		
-		if var60 ~= var42.current then
-			onScrollDirectionChanged(var60)
-			var42.current = var60
-		end
-		var41.current = y
-	end, { var40, p1.onScrollDirectionChanged }) else nil
-	local var44 = reactModule.useMemo(function() --[[ line: 208 ]]
-		-- upvalues: var39 (ref), var38 (ref)
+	local var42 = if fFlagSduiPlayButtonContextualMessageImpression then reactModule.useMemo(function() --[[ line: 200 ]]
+		-- upvalues: var40 (ref), var39 (ref)
 		return {
-			scrollViewPositionChangedSignal = var39.current,
-			verticalScrollingFrameRef = var38
+			scrollViewPositionChangedSignal = var40.current,
+			verticalScrollingFrameRef = var39
 		}
-	end, { var39, var38 })
-	local gapBetweenFeedItems = p1.gapBetweenFeedItems or var23.Gap.Large
-	local var46 = reactModule.useMemo(function() --[[ line: 217 ]]
-		-- upvalues: var39 (ref), var38 (ref)
-		return {
-			scrollViewPositionChangedSignal = var39.current,
-			verticalScrollingFrameRef = var38
-		}
-	end, { var39, var38 })
-	local scrollingFrameRef = p1.scrollingFrameRef or var38
-	local var48 = nil
+	end, { var40, var39 }) else nil
+	local sideMargin = nil
 	local _ = nil
 	
-	if sduiEnableBackToTop then
-		local var49, var50 = reactModule.useState(false)
-		var48 = var49
-		local var51 = var50
-		reactModule.useEffect(function() --[[ line: 233 ]]
-			-- upvalues: p1 (ref), scrollingFrameRef (ref), var51 (write)
-			if not p1.enableBackToTop then return end
-			local current = scrollingFrameRef.current
-			
-			if not current then return end
-			local function updateIsScrollable() --[[ line: 242 ]]
-				-- upvalues: current (ref), var51 (copy)
-				local y = current.AbsoluteWindowSize.Y
-				local y_1 = current.AbsoluteCanvasSize.Y
-				
-				if y < 0 then return end
-				if y_1 < 0 then
-					return
-				end
-				var51(y < y_1)
-			end
-			
-			local list = {
-				current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(updateIsScrollable),
-				current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(updateIsScrollable)
-			}
-			local y = current.AbsoluteWindowSize.Y
-			local y_1 = current.AbsoluteCanvasSize.Y
-			
-			if y >= 0 and y_1 >= 0 then
-				var51(y < y_1)
-			end
-			return function() --[[ line: 260 ]]
-				-- upvalues: list (ref)
-				for i, v in list do
-					v:Disconnect()
-				end
-			end
-		end, { scrollingFrameRef, p1.enableBackToTop })
+	if fFlagLuaAppCompositionSduiEnabled then
+		var44 = p1.gapBetweenFeedItems or var24.Gap.Large
+	else
+		local var43 = signalsReactModule.useSignalState(sduiContext.getPageLayoutConfig(collectionItemSize.Small))
+		sideMargin = var43.sideMargin
+		var44 = p1.gapBetweenFeedItems or var43.verticalPadding
 	end
-	reactModule.useEffect(function() --[[ line: 268 ]]
-		-- upvalues: p1 (ref), fFlagSduiSrpScrollAway (copy), var41 (ref), var43 (ref), var40 (ref)
-		if not p1.scrollingFrameRef or not p1.scrollingFrameRef.current then
-			return nil
-		end
-		local current = p1.scrollingFrameRef.current
-		
-		if fFlagSduiSrpScrollAway then
-			var41.current = current.CanvasPosition.Y
-		end
-		local var63 = if fFlagSduiSrpScrollAway then {
-			current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 281 ]]
-				-- upvalues: var43 (copy), current (ref)
-				var43(current)
-			end),
-			current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var40)
-		} else {
-			current:GetPropertyChangedSignal("CanvasPosition"):Connect(var40),
-			current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var40)
+	local var45 = if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then reactModule.useMemo(function() --[[ line: 220 ]]
+		-- upvalues: var40 (ref), var39 (ref), fFlagSduiFeedStartRowPerIndex (copy)
+		return {
+			scrollViewPositionChangedSignal = var40.current,
+			verticalScrollingFrameRef = var39,
+			startRow = if fFlagSduiFeedStartRowPerIndex then nil else 1
 		}
-		
-		return function() --[[ line: 291 ]]
-			-- upvalues: var63 (ref)
-			for i, v in var63 do
-				v:Disconnect()
+	end, { var40, var39 }) else nil
+	local var46 = if fFlagSduiFeedOptionalScrollingFrameFix then p1.scrollingFrameRef or var39 else var39
+	
+	if fFlagSduiFeedOptionalScrollingFrameFix then
+		reactModule.useEffect(function() --[[ line: 241 ]]
+			-- upvalues: p1 (ref), var41 (ref)
+			if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
+				local current = p1.scrollingFrameRef.current
+				local list = {
+					current:GetPropertyChangedSignal("CanvasPosition"):Connect(var41),
+					current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var41)
+				}
+				
+				return function() --[[ line: 252 ]]
+					-- upvalues: list (ref)
+					for i, v in list do
+						v:Disconnect()
+					end
+				end
 			end
-		end
-	end, {
-		p1.scrollingFrameRef,
-		var40,
-		if fFlagSduiSrpScrollAway then var43 else nil
-	})
-	useAnimateScrollViewToSelection(scrollingFrameRef, 0.4)
+			return nil
+		end, { p1.scrollingFrameRef, var41 })
+	end
+	useAnimateScrollViewToSelection(var46, 0.4)
 	local isNotCursor = useLastInputMode() ~= "Cursor"
 	local thresholdFromEnd = p1.thresholdFromEnd or 600
-	local var54, var55 = useProgressiveRowCapModule(if feedItems then #feedItems else 0, p1.initialNumToRender, p1.progressiveFillRate, p1.progressiveFillIntervalMs)
-	useVerticalScrolledToEndThresholdModule(scrollingFrameRef, thresholdFromEnd, if var55 then nil else p1.onScrollToEnd)
-	local var56 = reactModule.useMemo(function() --[[ line: 326 ]]
-		-- upvalues: feedItems (ref), p1 (ref), sduiEnableBackToTop (copy), var48 (write), reactModule (copy), backToTopButtonModule (copy), scrollingFrameRef (ref), sduiContext (ref), gapBetweenFeedItems (ref), var24 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagSduiPoolBackedFeed (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var39 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var46 (ref), var54 (ref)
+	local var49 = nil
+	local var50 = nil
+	
+	if luaAppSduiVerticalFeedProgressiveLoad2 then
+		local var51, var52 = useProgressiveRowCapModule(if feedItems then #feedItems else 0, p1.initialNumToRender, p1.progressiveFillRate, p1.progressiveFillIntervalMs)
+		var49 = var51
+		var50 = var52
+	end
+	useVerticalScrolledToEndThresholdModule(var46, thresholdFromEnd, if luaAppSduiVerticalFeedProgressiveLoad2 and var50 then nil else p1.onScrollToEnd)
+	
+	local var53 = function() --[[ line: 286 ]]
+		-- upvalues: feedItems (ref), fFlagSduiFeedOptionalScrollingFrameFix (copy), p1 (ref), fFlagLuaAppCompositionSduiEnabled (copy), reactModule (copy), var44 (write), fFlagSduiChartsSupport (copy), fFlagSduiFeedImpressions (copy), var25 (write), gapAfterStickyItems (write), fFlagSduiPoolBackedFeed (copy), sduiContext (ref), PoolStoreLayoutStoreWiring (copy), impressionsTag (write), sduiFeedImpressionsDetectorModule (copy), var46 (ref), var40 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (write), selectionBehaviorRight (write), var45 (write), luaAppSduiVerticalFeedProgressiveLoad2 (copy), var49 (write), findAnalyticsField (copy), t (copy), sduiBuilder (copy), sduiErrors (copy), fFlagSduiComponentList (copy), getSduiComponentWrapper (copy), fFlagSduiVerticalFeedLayoutOrder (copy), var39 (ref), sideMargin (write), analyticsContext (ref)
 		if feedItems == nil then
 			return nil
 		end
-		local pageBottomPadding = p1.pageBottomPadding or 80
-		local t = {
-			BottomSpacer = if sduiEnableBackToTop and p1.enableBackToTop and var48 then reactModule.createElement("Frame", {
+		local var57 = if fFlagSduiFeedOptionalScrollingFrameFix then p1.pageBottomPadding or 80 else 80
+		local t_1 = {
+			UIPadding = if not fFlagLuaAppCompositionSduiEnabled then reactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, var57) }) else nil,
+			BottomSpacer = if fFlagLuaAppCompositionSduiEnabled then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1e999,
-				Size = UDim2.new(1, 0, 0, 0),
-				AutomaticSize = Enum.AutomaticSize.Y
-			}, {
-				Layout = reactModule.createElement("UIListLayout", {
-					FillDirection = Enum.FillDirection.Vertical,
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, 0)
-				}),
-				Spacer = reactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, pageBottomPadding)
-				}),
-				BackToTop = reactModule.createElement(backToTopButtonModule, {
-					layoutOrder = 2,
-					scrollingFrameRef = scrollingFrameRef,
-					pageContext = sduiContext.appPage
-				})
-			}) else reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				LayoutOrder = 1e999,
-				Size = UDim2.new(1, 0, 0, pageBottomPadding)
-			}),
+				Size = UDim2.new(1, 0, 0, var57)
+			}) else nil,
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, gapBetweenFeedItems)
+				Padding = UDim.new(0, var44)
 			}),
-			StickyGap = if var24 and gapAfterStickyItems and gapAfterStickyItems > 0 then reactModule.createElement("Frame", {
+			StickyGap = if (fFlagSduiChartsSupport or fFlagSduiFeedImpressions) and (var25 and gapAfterStickyItems) and gapAfterStickyItems > 0 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 0,
-				Size = UDim2.new(1, 0, 0, math.max(0, gapAfterStickyItems - gapBetweenFeedItems))
-			}) else nil,
-			NoStickyTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway and not var24 and (p1.feedTopMargin and p1.feedTopMargin > 0) then reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				LayoutOrder = 0,
-				Size = UDim2.new(1, 0, 0, math.max(0, p1.feedTopMargin - gapBetweenFeedItems))
+				Size = UDim2.new(1, 0, 0, math.max(0, gapAfterStickyItems - var44))
 			}) else nil,
 			PoolStoreLayoutStoreWiring = if fFlagSduiPoolBackedFeed and sduiContext.configKey ~= nil then reactModule.createElement(PoolStoreLayoutStoreWiring, { configKey = sduiContext.configKey }) else nil,
-			FeedImpressionsDetector = if impressionsTag and feedItems then reactModule.createElement(sduiFeedImpressionsDetectorModule, {
+			FeedImpressionsDetector = if fFlagSduiFeedImpressions and impressionsTag and feedItems then reactModule.createElement(sduiFeedImpressionsDetectorModule, {
 				sduiContext = sduiContext,
 				feedItems = feedItems,
-				parentRef = scrollingFrameRef,
+				parentRef = var46,
 				impressionsTag = impressionsTag,
-				scrollViewPositionChangedSignal = var39.current
+				scrollViewPositionChangedSignal = var40.current
 			}) else nil
 		}
 		
-		for i, v in buildSduiFeedChildrenModule({
-			componentType = "VerticalFeed",
-			configs = feedItems,
-			sduiContext = sduiContext,
-			debugName = debugName,
-			impressionsTag = impressionsTag,
-			selectionBehaviorLeft = selectionBehaviorLeft,
-			selectionBehaviorRight = selectionBehaviorRight,
-			extraLocalProps = var46,
-			maxConfigs = var54
-		}) do
-			t[i] = v
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then
+			for i, v in buildSduiFeedChildrenModule({
+				componentType = "VerticalFeed",
+				configs = feedItems,
+				sduiContext = sduiContext,
+				debugName = debugName,
+				impressionsTag = impressionsTag,
+				selectionBehaviorLeft = selectionBehaviorLeft,
+				selectionBehaviorRight = selectionBehaviorRight,
+				extraLocalProps = var45,
+				maxConfigs = if luaAppSduiVerticalFeedProgressiveLoad2 then var49 else nil
+			}) do
+				t_1[i] = v
+			end
+			return t_1
+		else
+			for i, v in feedItems do
+				local componentType = findAnalyticsField("componentType", v.analyticsData or t) or sduiBuilder.getComponentType(v, sduiContext)
+				
+				if componentType then
+					local t_2 = {
+						feedItemPosition = i,
+						itemComponentType = componentType,
+						componentType = componentType
+					}
+					local var61 = if fFlagSduiComponentList then `feedItem{i}_{componentType}` else `feedItem{i}`
+					local var62 = getSduiComponentWrapper(v)
+					local var63 = nil
+					
+					if fFlagSduiVerticalFeedLayoutOrder then
+						var63 = if v.props and v.props.layoutOrder ~= nil then v.props.layoutOrder else i
+					end
+					t_1[var61] = reactModule.createElement(var62, {
+						debugName = var61,
+						componentConfig = v,
+						sduiContext = sduiContext,
+						localAnalyticsData = t_2,
+						extraLocalProps = {
+							startRow = 1,
+							scrollViewPositionChangedSignal = var40.current,
+							verticalScrollingFrameRef = var39,
+							pageSideMargin = if fFlagLuaAppCompositionSduiEnabled then nil else sideMargin,
+							layoutOrder = var63
+						},
+						parentAnalyticsContext = if v.__isClientBinding then nil else analyticsContext
+					})
+				else
+					sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
+						componentType = "VerticalFeed",
+						name = debugName,
+						message = `Nil componentType in VerticalFeed at feedItem index {i}`
+					}, sduiContext.appPage)
+				end
+			end
+			return t_1
 		end
-		return t
-	end, {
-		feedItems, debugName, var38, var39, sduiContext, analyticsContext,
-		gapBetweenFeedItems, impressionsTag, selectionBehaviorLeft,
-		selectionBehaviorRight, var24, gapAfterStickyItems,
-		if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil, var46,
-		var22, p1.pageBottomPadding,
-		if sduiEnableBackToTop then p1.enableBackToTop else nil,
-		if sduiEnableBackToTop then var48 else nil, scrollingFrameRef, var54
+	end
+	
+	var53 = reactModule.useMemo(var53, {
+		feedItems, debugName, var39, var40, sduiContext, sideMargin, analyticsContext,
+		var44,
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then impressionsTag else nil,
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then selectionBehaviorLeft else nil,
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then selectionBehaviorRight else nil,
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then var25 else nil,
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then gapAfterStickyItems else nil,
+		if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then var45 else nil,
+		if fFlagLuaAppCompositionSduiEnabled then var23 else nil,
+		if fFlagLuaAppCompositionSduiEnabled then p1.pageBottomPadding else nil,
+		if fFlagSduiFeedImpressions then var46 else nil,
+		if luaAppSduiVerticalFeedProgressiveLoad2 then var49 else nil
 	})
 	
-	if var44 then
-		var56 = reactModule.createElement(sduiFeedContextModule.Provider, { value = var44 }, var56)
+	if fFlagSduiPlayButtonContextualMessageImpression and var42 then
+		var53 = reactModule.createElement(sduiFeedContextModule.Provider, { value = var42 }, var53)
 	end
-	local var57 = reactModule.createElement(collectionLayoutStoreProvider, { container = var36 }, var56)
-	local t = { ["size-full-0 auto-y"] = true }
-	
-	if var22 then
-		t[contentTag] = true
+	if fFlagLuaAppCompositionSduiEnabled then
+		local var54 = reactModule.createElement(collectionLayoutStoreProvider, { container = var35 }, var53)
+		local t_1 = { ["size-full-0 auto-y"] = true }
+		
+		if var23 then
+			t_1[contentTag] = true
+		end
+		var53 = reactModule.createElement(view, { tag = t_1, LayoutOrder = p1.layoutOrder, ref = var36 }, var54)
+		
+		if p1.scrollingFrameRef ~= nil then
+			return var53
+		end
+	elseif fFlagSduiFeedOptionalScrollingFrameFix and p1.scrollingFrameRef ~= nil then
+		return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, var53)
 	end
-	local var59 = reactModule.createElement(view, { tag = t, LayoutOrder = p1.layoutOrder, ref = var37 }, var57)
+	local createElement = reactModule.createElement
+	createElement = createElement("ScrollingFrame", {
+		LayoutOrder = if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then 3 else p1.layoutOrder,
+		ref = var39,
+		[reactModule.Change.CanvasPosition] = var41,
+		[reactModule.Change.CanvasSize] = var41,
+		BackgroundColor3 = if fFlagLuaAppSduiBadgeDetailsComponents and p1.backgroundStyle then p1.backgroundStyle.Color3 else var24.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = if fFlagLuaAppSduiBadgeDetailsComponents and p1.backgroundStyle then p1.backgroundStyle.Transparency else nil,
+		Size = if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then UDim2.fromScale(1, 0) else UDim2.new(1, 0, 1, 0),
+		CanvasSize = UDim2.new(1, 0, 0, 0),
+		AutomaticCanvasSize = Enum.AutomaticSize.Y,
+		BorderSizePixel = 0,
+		ScrollBarThickness = var34,
+		ElasticBehavior = Enum.ElasticBehavior.Always,
+		ScrollingDirection = Enum.ScrollingDirection.Y,
+		Selectable = false,
+		ScrollingEnabled = not isNotCursor,
+		ClipsDescendants = false
+	}, if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then {
+		FlexFill = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+		Content = var53
+	} else var53)
 	
-	return if p1.scrollingFrameRef == nil then reactModule.createElement(view, {
+	return if fFlagSduiChartsSupport or fFlagSduiFeedImpressions then reactModule.createElement(view, {
 		tag = "size-full",
 		LayoutOrder = p1.layoutOrder,
 		layout = {
@@ -311,47 +338,27 @@ return reactModule.memo(function(p1) --[[ line: 126 | named "SduiVerticalFeed" ]
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}
 	}, {
-		Sticky = if var24 then reactModule.createElement(sduiStickyHeaderModule, {
+		Sticky = if var25 then reactModule.createElement(sduiStickyHeaderModule, {
 			zIndex = 2,
 			stickyItems = p1.stickyItems,
 			sduiContext = sduiContext,
 			debugName = `{debugName}.StickyHeader`,
 			contentTag = stickyContentTag,
 			backgroundStyle = stickyBackgroundStyle,
-			paddingTop = var28,
-			paddingBottom = var29,
+			paddingTop = stickyPaddingTop,
+			paddingBottom = stickyPaddingBottom,
 			gapBetweenItems = gapBetweenStickyItems,
-			extraLocalProps = var46,
+			extraLocalProps = var45,
 			impressionsTag = impressionsTag,
 			selectionBehaviorLeft = selectionBehaviorLeft,
 			selectionBehaviorRight = selectionBehaviorRight
 		}) else nil,
-		RefreshSpinner = if var25 then reactModule.createElement(pullToRefreshSpinnerModule, {
+		RefreshSpinner = if var26 then reactModule.createElement(pullToRefreshSpinnerModule, {
 			LayoutOrder = 2,
 			onRefresh = p1.onRefresh,
-			scrollingFrameRef = var38,
+			scrollingFrameRef = var39,
 			appEventName = sduiContext.appPage
 		}) else nil,
-		Scroll = reactModule.createElement("ScrollingFrame", {
-			LayoutOrder = 3,
-			ref = var38,
-			[reactModule.Change.CanvasPosition] = if fFlagSduiSrpScrollAway then var43 else var40,
-			[reactModule.Change.CanvasSize] = var40,
-			BackgroundColor3 = if p1.backgroundStyle then p1.backgroundStyle.Color3 else var23.Color.Surface.Surface_0.Color3,
-			BackgroundTransparency = if p1.backgroundStyle then p1.backgroundStyle.Transparency else nil,
-			Size = UDim2.fromScale(1, 0),
-			CanvasSize = UDim2.new(1, 0, 0, 0),
-			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			BorderSizePixel = 0,
-			ScrollBarThickness = scrollBarThickness,
-			ElasticBehavior = Enum.ElasticBehavior.Always,
-			ScrollingDirection = Enum.ScrollingDirection.Y,
-			Selectable = false,
-			ScrollingEnabled = not isNotCursor,
-			ClipsDescendants = false
-		}, {
-			FlexFill = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Content = var59
-		})
-	}) else var59
+		Scroll = createElement
+	}) else createElement
 end)

@@ -3,10 +3,9 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local chatActionsRowModule = require(buildExperience.Components.Chat.ChatActionsRow)
 local textAreaModule = require(buildExperience.FoundationFork.TextArea)
-local var7 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then require(script.Parent.useHardwareInsets) else require(buildExperience.FoundationFork.Sheet.useHardwareInsets)
+local useHardwareInsetsModule = require(buildExperience.FoundationFork.Sheet.useHardwareInsets)
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
@@ -16,12 +15,12 @@ local useTokens = foundationModule.Hooks.useTokens
 local function noop() --[[ line: 29 ]] end
 
 return function(p0) --[[ line: 31 | named "ChatSheetLauncher" ]]
-	-- upvalues: useTokens (ref), useOverlay (ref), var7 (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), localizationStringsModule (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
-	local var9 = useTokens()
-	local var10 = useOverlay()
-	local bottom = var7(var10).bottom
-	local small = var9.Margin.Small
-	local var11 = reactModule.createElement(view, {
+	-- upvalues: useTokens (ref), useOverlay (ref), useHardwareInsetsModule (ref), reactModule (ref), view (ref), textAreaModule (ref), noop (ref), inputSize (ref), chatActionsRowModule (ref), stateLayerAffordance (ref), reactRobloxModule (ref)
+	local var8 = useTokens()
+	local var9 = useOverlay()
+	local bottom = useHardwareInsetsModule(var9).bottom
+	local small = var8.Margin.Small
+	local var10 = reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		AnchorPoint = Vector2.new(0, 1),
 		Position = UDim2.fromScale(0, 1),
@@ -53,7 +52,7 @@ return function(p0) --[[ line: 31 | named "ChatSheetLauncher" ]]
 				isDisabled = true,
 				testId = "--chat-sheet-launcher-composer",
 				onChanged = noop,
-				placeholder = p0.placeholder or localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
+				placeholder = p0.placeholder or "Describe an idea",
 				width = UDim.new(1, 0),
 				size = inputSize.Large,
 				trailingElement = reactModule.createElement(view, { tag = "auto-xy padding-x-xsmall padding-y-small" }, {
@@ -78,5 +77,5 @@ return function(p0) --[[ line: 31 | named "ChatSheetLauncher" ]]
 		})
 	})
 	
-	return if var10 == nil then var11 else reactRobloxModule.createPortal(var11, var10)
+	return if var9 == nil then var10 else reactRobloxModule.createPortal(var10, var9)
 end

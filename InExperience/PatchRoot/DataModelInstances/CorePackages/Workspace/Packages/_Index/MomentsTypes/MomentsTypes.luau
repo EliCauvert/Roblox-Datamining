@@ -1,6 +1,4 @@
-﻿local _ = require(script.EmojiSets)
-
-return {
+﻿return {
 	Enums = require(script.Enums),
 	["jest.config"] = script["jest.config"]
 }

@@ -11,13 +11,11 @@ local controlsModule = require(parent.Resources.Controls)
 local reactModule = require(corePackagesService.Packages.React)
 local withLocalizationModule = require(parent.Localization.withLocalization)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = require(corePackagesService.Packages.Foundation).Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local var9 = #controlsModule.gamepadLabels.right * 43 + 62
 
-local function verticalControlsList(p0) --[[ line: 47 ]]
+local function verticalControlsList(p0) --[[ line: 42 ]]
 	-- upvalues: withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref)
-	return withLocalizationModule(p0.controls)(function(p1) --[[ line: 48 ]]
+	return withLocalizationModule(p0.controls)(function(p1) --[[ line: 43 ]]
 		-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref)
 		local t = {
 			ListLayout = roact.createElement("UIListLayout", {
@@ -44,23 +42,21 @@ local function verticalControlsList(p0) --[[ line: 47 ]]
 	end)
 end
 
-return function(p2) --[[ line: 76 | named "GamepadControls" ]]
-	-- upvalues: userInputService (ref), roact (ref), controlLayoutContainerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), verticalControlsList (ref), controlsModule (ref), var9 (ref)
+return function(p2) --[[ line: 71 | named "GamepadControls" ]]
+	-- upvalues: userInputService (ref), roact (ref), controlLayoutContainerModule (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), verticalControlsList (ref), controlsModule (ref), var9 (ref)
 	local platform = userInputService:GetPlatform()
 	
 	return roact.createElement(controlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.GamepadTitle",
 		closeButtonRef = p2.closeButtonRef
 	}, {
-		GamepadImage = roact.createElement(if fFlagCoreUiMigrateUIBloxToFoundation then image else imageSetLabel, {
-			BackgroundTransparency = if fFlagCoreUiMigrateUIBloxToFoundation then nil else 1,
-			backgroundStyle = if fFlagCoreUiMigrateUIBloxToFoundation then { Transparency = 1 } else nil,
+		GamepadImage = roact.createElement(imageSetLabel, {
+			BackgroundTransparency = 1,
 			Image = if if platform ~= Enum.Platform.XBox360 then platform == Enum.Platform.XBoxOne else true then assetsModule.Images.GamepadXbox else assetsModule.Images.Gamepad,
 			Size = UDim2.new(0, 473, 0, 465),
 			Position = UDim2.new(0.5, 16.5, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			testId = if fFlagCoreUiMigrateUIBloxToFoundation then "GamepadInstructions" else nil,
-			[reactModule.Tag] = if fFlagCoreUiMigrateUIBloxToFoundation then nil else "data-testid=GamepadInstructions"
+			[reactModule.Tag] = "data-testid=GamepadInstructions"
 		}, {
 			LeftControlsList = roact.createElement(verticalControlsList, {
 				TextXAlignment = Enum.TextXAlignment.Right,

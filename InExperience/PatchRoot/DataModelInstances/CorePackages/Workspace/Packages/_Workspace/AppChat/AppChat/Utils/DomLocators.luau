@@ -1,14 +1,14 @@
 ﻿local t = {
-	sanitizeSegment = function(p0) --[[ line: 40 ]]
+	sanitizeSegment = function(p0) --[[ line: 39 ]]
 		return (if p0 == nil then "" else tostring(p0)):gsub("%s+", "_"):gsub("[^%w_]", "")
 	end
 }
 
-local function _(p1) --[[ line: 33 | named "coerceToString" ]]
+local function _(p1) --[[ line: 32 | named "coerceToString" ]]
 	return if p1 == nil then "" else tostring(p1)
 end
 
-function t.build(p2) --[[ line: 51 ]]
+function t.build(p2) --[[ line: 50 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -22,7 +22,7 @@ function t.build(p2) --[[ line: 51 ]]
 	return table.concat(t_1, "-")
 end
 
-function t.chatLandingTopBarIconButton(p3) --[[ line: 62 ]]
+function t.chatLandingTopBarIconButton(p3) --[[ line: 61 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -33,12 +33,7 @@ function t.chatLandingTopBarIconButton(p3) --[[ line: 62 ]]
 	})
 end
 
-function t.appChatLoadingOverlayBackButton() --[[ line: 72 ]]
-	-- upvalues: t (ref)
-	return t.build({ "chat", "loadingOverlay", "button", "back" })
-end
-
-function t.chatLandingConversationListHeader(p4) --[[ line: 81 ]]
+function t.chatLandingConversationListHeader(p4) --[[ line: 71 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -49,7 +44,7 @@ function t.chatLandingConversationListHeader(p4) --[[ line: 81 ]]
 	})
 end
 
-function t.chatLandingConversationEntry(p5) --[[ line: 91 ]]
+function t.chatLandingConversationEntry(p5) --[[ line: 81 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -60,7 +55,7 @@ function t.chatLandingConversationEntry(p5) --[[ line: 91 ]]
 	})
 end
 
-function t.chatLandingConversationEntrySquadButton(p6) --[[ line: 101 ]]
+function t.chatLandingConversationEntrySquadButton(p6) --[[ line: 91 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat", "chatLanding", "conversationList", "conversationEntry", "button",
@@ -68,7 +63,7 @@ function t.chatLandingConversationEntrySquadButton(p6) --[[ line: 101 ]]
 	})
 end
 
-function t.chatDetailsTopBarActionButton(p7) --[[ line: 112 ]]
+function t.chatDetailsTopBarActionButton(p7) --[[ line: 102 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -79,7 +74,7 @@ function t.chatDetailsTopBarActionButton(p7) --[[ line: 112 ]]
 	})
 end
 
-function t.chatDetailsListActionButton(p8) --[[ line: 122 ]]
+function t.chatDetailsListActionButton(p8) --[[ line: 112 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -90,7 +85,7 @@ function t.chatDetailsListActionButton(p8) --[[ line: 122 ]]
 	})
 end
 
-function t.chatDetailsParticipantMoreButton(p9) --[[ line: 132 ]]
+function t.chatDetailsParticipantMoreButton(p9) --[[ line: 122 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat", "chatDetails", "detailsList", "participantList", "participantEntry",
@@ -98,7 +93,7 @@ function t.chatDetailsParticipantMoreButton(p9) --[[ line: 132 ]]
 	})
 end
 
-function t.chatConversationTopBarButton(p10) --[[ line: 144 ]]
+function t.chatConversationTopBarButton(p10) --[[ line: 134 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -109,7 +104,7 @@ function t.chatConversationTopBarButton(p10) --[[ line: 144 ]]
 	})
 end
 
-function t.chatConversationSystemMessageCard(p11) --[[ line: 154 ]]
+function t.chatConversationSystemMessageCard(p11) --[[ line: 144 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -120,7 +115,7 @@ function t.chatConversationSystemMessageCard(p11) --[[ line: 154 ]]
 	})
 end
 
-function t.chatConversationSystemMessage(p12) --[[ line: 164 ]]
+function t.chatConversationSystemMessage(p12) --[[ line: 154 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -131,7 +126,7 @@ function t.chatConversationSystemMessage(p12) --[[ line: 164 ]]
 	})
 end
 
-function t.selectChatMembersUserCellWithCheckbox(p13, p14) --[[ line: 174 ]]
+function t.selectChatMembersUserCellWithCheckbox(p13, p14) --[[ line: 164 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat", "selectChatMembers", "friendsList", "userCellWithCheckbox", "checkbox",
@@ -139,7 +134,7 @@ function t.selectChatMembersUserCellWithCheckbox(p13, p14) --[[ line: 174 ]]
 	})
 end
 
-function t.selectChatMembersSearchInput(p15) --[[ line: 185 ]]
+function t.selectChatMembersSearchInput(p15) --[[ line: 175 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",
@@ -150,7 +145,7 @@ function t.selectChatMembersSearchInput(p15) --[[ line: 185 ]]
 	})
 end
 
-function t.selectChatMembersTopBarActionButton(p16) --[[ line: 195 ]]
+function t.selectChatMembersTopBarActionButton(p16) --[[ line: 185 ]]
 	-- upvalues: t (ref)
 	return t.build({
 		"chat",

@@ -3,14 +3,10 @@
 return {
 	displayName = "PurchasePrompt",
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = {
-		"launchRobuxPackagePurchase",
-		"NativePurchaseFinishedConnector"
-	},
+	testPathIgnorePatterns = { "launchRobuxPackagePurchase" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	},
 	coveragePathIgnorePatterns = { "Localization/Locales/.*%.lua$" }
 }

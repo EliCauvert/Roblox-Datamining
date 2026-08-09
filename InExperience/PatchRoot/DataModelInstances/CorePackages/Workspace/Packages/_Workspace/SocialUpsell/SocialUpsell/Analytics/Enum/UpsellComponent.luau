@@ -2,5 +2,5 @@
 	Banner = "Banner",
 	Modal = "Modal",
 	PushNotifUI = "PushNotifUI",
-	Carousel = "Carousel"
+	Carousel = if require(script:FindFirstAncestor("SocialUpsell").Parent.SharedFlags).FFlagLuaAppCarouselAmpUpsellSubtitleClickAnalytics then "Carousel" else nil
 }

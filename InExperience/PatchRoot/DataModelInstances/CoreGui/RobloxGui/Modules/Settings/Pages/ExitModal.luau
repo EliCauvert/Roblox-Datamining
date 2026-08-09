@@ -139,7 +139,7 @@ var16 = (function() --[[ line: 79 | named "Initialize" ]]
 				confirmText = t.actionHome,
 				doNotShowText = t.optionDontShow,
 				titleBackgroundImageProps = {
-					image = "rbxasset://textures/ui/LuaApp/graphic/Auth/GridBackground_05202026.jpg",
+					image = "rbxasset://textures/ui/LuaApp/graphic/Auth/GridBackground.jpg",
 					imageHeight = 200,
 					text = "<font face=\"GothamBlack\" size=\"42\">" .. t.title .. "</font><font size=\"4\"><br /></font><br />" .. t.subtitle
 				},

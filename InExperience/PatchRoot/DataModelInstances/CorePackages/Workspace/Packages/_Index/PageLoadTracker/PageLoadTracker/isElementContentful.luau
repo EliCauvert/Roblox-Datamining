@@ -10,7 +10,7 @@
 
 function isElementContentful(p0) --[[ line: 11 ]]
 	-- upvalues: t (ref)
-	return if p0.Visible and p0.BackgroundTransparency ~= 1 then t[p0.ClassName] else false
+	return if p0.Visible and p0.Transparency ~= 1 then t[p0.ClassName] else false
 end
 
 return isElementContentful

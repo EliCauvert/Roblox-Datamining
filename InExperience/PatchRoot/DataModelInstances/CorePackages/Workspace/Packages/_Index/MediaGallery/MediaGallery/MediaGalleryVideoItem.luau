@@ -4,17 +4,15 @@ local reactModule = require(parent.React)
 local _ = require(parent.AppCommonLib)
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local videoUtilsModule = require(parent.VideoUtils)
-local videoPlaybackDetectionMethod = videoUtilsModule.VideoPlaybackDetectionMethod
 local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
 local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
 local videoPlayer = videoUtilsModule.VideoPlayer
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
-local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
 local getImageUriModule = require(mediaGallery.getImageUri)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 
-return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoItem" ]]
-	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
+return reactModule.memo(function(p0) --[[ line: 61 | named "MediaGalleryVideoItem" ]]
+	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref)
 	local var5 = useTokens()
 	local videoId = `rbxassetid://{p0.videoId}`
 	local var7 = getImageUriModule(p0.thumbnail or "")
@@ -37,12 +35,12 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 	local var17 = if var9 then p0.onMutedChanged else nil
 	local var18, var19 = reactModule.useState(false)
 	local var20 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function() --[[ line: 90 ]]
 		-- upvalues: var9 (ref), setIsVideoActive (ref)
 		if var9 and setIsVideoActive then
 			setIsVideoActive(true)
 			
-			return function() --[[ line: 96 ]]
+			return function() --[[ line: 93 ]]
 				-- upvalues: setIsVideoActive (copy)
 				setIsVideoActive(false)
 			end
@@ -66,7 +64,7 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 			looped = if p0.looped ~= nil then false else p0.looped,
 			Size = UDim2.fromScale(1, 1),
 			cornerRadius = cornerRadius,
-			onMuteButtonActivated = reactModule.useCallback(function(p1) --[[ line: 126 ]]
+			onMuteButtonActivated = reactModule.useCallback(function(p1) --[[ line: 123 ]]
 				-- upvalues: videoAnalytics (ref), p0 (ref), videoPlaybackCoordinator_1 (ref)
 				if videoAnalytics and videoAnalytics.reportVideoMute then
 					videoAnalytics.reportVideoMute(p0.itemIndex, videoPlaybackCoordinator_1.currentPlaybackSessionId, p1)
@@ -79,7 +77,7 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 			showPlayButton = if p0.showPlayButton ~= nil then isFullscreen else p0.showPlayButton,
 			showProgressBar = if p0.showProgressBar ~= nil then isFullscreen else p0.showProgressBar,
 			videoAnalyticsContext = p0.videoAnalyticsContext,
-			onVideoLoaded = reactModule.useCallback(function(p2, p3) --[[ line: 104 ]]
+			onVideoLoaded = reactModule.useCallback(function(p2, p3) --[[ line: 101 ]]
 				-- upvalues: videoAnalytics (ref), p0 (ref), videoPlaybackCoordinator_1 (ref), fFlagSduiExperienceDetailsSupport (copy)
 				if videoAnalytics then
 					videoAnalytics.reportVideoLoad(p0.itemIndex, videoPlaybackCoordinator_1.currentPlaybackSessionId, p2, p3)
@@ -101,12 +99,11 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 		}),
 		VideoPlaybackDetector = reactModule.createElement(videoPlaybackDetector, {
 			isVideoEligible = true,
-			videoKey = u197,
+			videoKey = u181,
 			itemIndex = p0.itemIndex,
 			itemFrameRef = var20,
 			isItemOccluded = p0.isMediaGalleryOccluded,
-			playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback and (p0.autoplay ~= nil or p0.autoplay) then videoPlaybackDetectionMethod.Viewport else nil,
-			autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else p0.autoplay ~= nil or p0.autoplay,
+			autoplay = p0.autoplay ~= nil or p0.autoplay,
 			videoPlaybackCoordinator = videoPlaybackCoordinator_1,
 			onPlaybackChange = var19,
 			videoDwellTimeInSec = var11,

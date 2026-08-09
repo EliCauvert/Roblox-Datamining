@@ -5,7 +5,7 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local useTokens = foundationModule.Hooks.useTokens
 
-local function _(p0) --[[ line: 24 | named "hasChildren" ]]
+local function _(p0) --[[ line: 26 | named "hasChildren" ]]
 	if p0 == nil then
 		return false
 	elseif typeof(p0) ~= "table" then
@@ -19,7 +19,7 @@ local function _(p0) --[[ line: 24 | named "hasChildren" ]]
 	return false
 end
 
-return reactModule.memo(function(p1) --[[ line: 39 | named "SubagentStatus" ]]
+return reactModule.memo(function(p1) --[[ line: 41 | named "SubagentStatus" ]]
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref)
 	local var5
 	local var2 = useTokens()

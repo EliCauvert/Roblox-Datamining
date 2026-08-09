@@ -9,15 +9,14 @@ local findAnalyticsFieldInAncestors = require(parent.SduiCoreSystem).findAnalyti
 local sduiReportGamePlayIntentModule = require(script.Parent.sduiReportGamePlayIntent)
 local fFlagSduiLaunchExperienceAction = require(parent.SharedFlags).FFlagSduiLaunchExperienceAction
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
-local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 25 | named "useSduiReportExperienceLaunched" ]]
-	-- upvalues: reactModule (ref), fFlagSduiLaunchExperienceAction (ref), sduiReportGamePlayIntentModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), findAnalyticsFieldInAncestors (ref), setGamePlaySession (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), gamePlayIntent (ref)
+return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 24 | named "useSduiReportExperienceLaunched" ]]
+	-- upvalues: reactModule (ref), fFlagSduiLaunchExperienceAction (ref), sduiReportGamePlayIntentModule (ref), fFlagSduiExperienceDetailsSupport (ref), findAnalyticsFieldInAncestors (ref), setGamePlaySession (ref), sponsoredGamesRecordClick (ref), calculateRowPositionFields (ref), gamePlayIntent (ref)
 	local eventIngest = p0.dependencies.eventIngest
 	local sessionService = p0.dependencies.sessionService
 	
-	return reactModule.useCallback(function(p7) --[[ line: 38 ]]
-		-- upvalues: fFlagSduiLaunchExperienceAction (copy), sduiReportGamePlayIntentModule (copy), p0 (ref), p1 (ref), p2 (ref), p3 (ref), p4 (write), p5 (ref), fFlagSduiExperienceDetailsSupport (copy), p6 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), findAnalyticsFieldInAncestors (copy), setGamePlaySession (copy), sessionService (ref), sponsoredGamesRecordClick (copy), calculateRowPositionFields (copy), gamePlayIntent (copy), eventIngest (ref)
+	return reactModule.useCallback(function() --[[ line: 37 ]]
+		-- upvalues: fFlagSduiLaunchExperienceAction (copy), sduiReportGamePlayIntentModule (copy), p0 (ref), p1 (ref), p2 (ref), p3 (ref), p4 (write), p5 (ref), fFlagSduiExperienceDetailsSupport (copy), p6 (ref), findAnalyticsFieldInAncestors (copy), setGamePlaySession (copy), sessionService (ref), sponsoredGamesRecordClick (copy), calculateRowPositionFields (copy), gamePlayIntent (copy), eventIngest (ref)
 		if fFlagSduiLaunchExperienceAction then
 			sduiReportGamePlayIntentModule({
 				sduiContext = p0,
@@ -26,8 +25,7 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 25 | named "useSduiReport
 				placeId = p3,
 				rootPlaceId = p4,
 				appliedFilters = p5,
-				launchData = if fFlagSduiExperienceDetailsSupport then p6 else nil,
-				actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p7 else nil
+				launchData = if fFlagSduiExperienceDetailsSupport then p6 else nil
 			})
 			
 			return
@@ -85,8 +83,7 @@ return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 25 | named "useSduiReport
 			feedRowNumber = var14.rowOnPage,
 			heroUnitId = var9,
 			tileType = findAnalyticsFieldInAncestors("tileType", p1, "GameTile"),
-			launchData = if fFlagSduiExperienceDetailsSupport then p6 else nil,
-			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p7 else nil
+			launchData = if fFlagSduiExperienceDetailsSupport then p6 else nil
 		})
 	end, {
 		eventIngest, p1, p2, p3, p4, p5,

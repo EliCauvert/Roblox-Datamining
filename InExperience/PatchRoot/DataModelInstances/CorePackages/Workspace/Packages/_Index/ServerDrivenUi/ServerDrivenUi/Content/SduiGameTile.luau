@@ -25,22 +25,28 @@ local tileHoverShadowModule = require(serverDrivenUi.Content.TileHoverShadow)
 local sduiGameTileFooterModule = require(serverDrivenUi.Content.SduiGameTileFooter)
 local sduiHoldToPlayModule = require(serverDrivenUi.FocusNavigation.SduiHoldToPlay)
 local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
+local fFlagSduiCarouselHoverFixes = require(parent.SharedFlags).FFlagSduiCarouselHoverFixes
 local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
 local fFlagLuaAppSduiGameTileHoverShadow = require(parent.SharedFlags).FFlagLuaAppSduiGameTileHoverShadow
 local fFlagLuaAppSduiGameTilePlayButtonDefaults = require(parent.SharedFlags).FFlagLuaAppSduiGameTilePlayButtonDefaults
-local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 
 return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
-	-- upvalues: useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), sduiParsers (ref), sduiActionType (ref), default (ref), responsiveModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiBuilder (ref), sduiPlayButton (ref), fFlagLuaAppDemoModePlayButton (ref), fFlagLuaAppSduiGameTilePlayButtonDefaults (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
-	local var12 = useTokens()
-	local var13 = usePreferences()
-	local enableLegacyHoverState = not fFlagSduiTileDisableLegacyHover and p0.enableLegacyHoverState
+	-- upvalues: fFlagSduiCarouselHoverFixes (ref), useTokens (ref), usePreferences (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileHoverShadow (ref), reactModule (ref), useUidRefString (ref), sduiErrors (ref), getInputModeStore (ref), sduiParseHelpers (ref), sduiParsers (ref), sduiActionType (ref), default (ref), responsiveModule (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), sduiBuilder (ref), sduiPlayButton (ref), fFlagLuaAppSduiGameTilePlayButtonDefaults (ref), localizeStrings (ref), discoveryAnalyticsModule (ref), sduiHoldToPlayModule (ref), sduiGameTileFooterModule (ref), sduiTileModule (ref), cryoModule (ref), zoomAnimatedFrame (ref), tileHoverShadowModule (ref)
+	local var12 = nil
+	local var13 = nil
+	local var14 = nil
+	
+	if fFlagSduiCarouselHoverFixes then
+		var12 = useTokens()
+		var13 = usePreferences()
+		var14 = not fFlagSduiTileDisableLegacyHover and p0.enableLegacyHoverState
+	end
 	local var15 = if fFlagLuaAppSduiGameTileHoverShadow then reactModule.useRef(nil) else nil
 	local current = useUidRefString().current
 	local universeId = p0.universeId
 	local placeId = p0.placeId
 	local var16 = reactModule.useRef(nil)
-	local var17 = reactModule.useCallback(function(p1) --[[ line: 90 ]]
+	local var17 = reactModule.useCallback(function(p1) --[[ line: 95 ]]
 		-- upvalues: var16 (ref), p0 (ref)
 		var16.current = p1
 		
@@ -49,15 +55,15 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 		end
 	end, { p0.setGuiObject })
 	local var18 = reactModule.useRef(false)
-	local var19 = reactModule.useCallback(function(p2) --[[ line: 98 ]]
+	local var19 = reactModule.useCallback(function(p2) --[[ line: 103 ]]
 		-- upvalues: var18 (ref)
 		var18.current = p2
 	end, {})
-	local var20 = reactModule.useCallback(function() --[[ line: 102 ]]
+	local var20 = reactModule.useCallback(function() --[[ line: 107 ]]
 		-- upvalues: p0 (ref), sduiErrors (copy), getInputModeStore (copy), sduiParseHelpers (copy), var18 (ref), sduiParsers (copy), sduiActionType (copy), placeId (ref), universeId (ref)
 		p0.sduiContext.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.GameTileActivated, { name = getInputModeStore(false).getLastInputType(false) }, true)
 		
-		local function logFailure(p3) --[[ line: 107 ]]
+		local function logFailure(p3) --[[ line: 112 ]]
 			-- upvalues: sduiParseHelpers (copy), p0 (copy), sduiErrors (copy), getInputModeStore (copy)
 			p0.sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToExecuteAction, {
 				componentType = "GameTile",
@@ -66,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			}, p0.sduiContext.appPage)
 		end
 		
-		local ok, status = pcall(function() --[[ line: 117 ]]
+		local ok, status = pcall(function() --[[ line: 122 ]]
 			-- upvalues: var18 (copy), p0 (copy), sduiParsers (copy), sduiActionType (copy), placeId (copy), universeId (copy), sduiErrors (copy), getInputModeStore (copy), logFailure (ref)
 			if var18.current then
 				p0.sduiContext.dependencies.logger.reportCounter(sduiErrors.SduiCounterName.GameTileActivatedWhenDisabled, { name = getInputModeStore(false).getLastInputType(false) })
@@ -100,7 +106,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 	})
 	local var21, var22 = reactModule.useState(false)
 	local var23, var24 = reactModule.useState(false)
-	local var25 = reactModule.useCallback(function() --[[ line: 162 ]]
+	local var25 = reactModule.useCallback(function() --[[ line: 167 ]]
 		-- upvalues: var22 (ref), p0 (ref)
 		var22(true)
 		
@@ -108,7 +114,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			p0.setCustomConditionState("selected", true)
 		end
 	end, { p0.setCustomConditionState })
-	local var26 = reactModule.useCallback(function() --[[ line: 169 ]]
+	local var26 = reactModule.useCallback(function() --[[ line: 174 ]]
 		-- upvalues: var22 (ref), p0 (ref)
 		var22(false)
 		
@@ -122,14 +128,14 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 		var27.current = 0
 	end
 	local default_1 = default.default
-	local var28 = reactModule.useCallback(function() --[[ line: 193 ]]
+	local var28 = reactModule.useCallback(function() --[[ line: 198 ]]
 		-- upvalues: var27 (ref), current (ref), getInputModeStore (copy), responsiveModule (copy), default_1 (ref)
 		if var27.current == 0 and current and getInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Pointer then
 			default_1:requestHover(current)
 		end
 		var27.current += 1
 	end, { current })
-	local var29 = reactModule.useCallback(function() --[[ line: 203 ]]
+	local var29 = reactModule.useCallback(function() --[[ line: 208 ]]
 		-- upvalues: var27 (ref), current (ref), default_1 (ref)
 		var27.current -= 1
 		
@@ -140,11 +146,11 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			default_1:cancelHover(current)
 		end
 	end, { current })
-	reactModule.useEffect(function() --[[ line: 213 ]]
+	reactModule.useEffect(function() --[[ line: 218 ]]
 		-- upvalues: current (ref), var23 (ref), default_1 (ref), var24 (ref), p0 (ref), var27 (ref)
 		local var37 = var23
 		local _ = nil
-		local changedConnection = default_1.changed:connect(function(p4) --[[ line: 217 ]]
+		local changedConnection = default_1.changed:connect(function(p4) --[[ line: 222 ]]
 			-- upvalues: current (copy), var24 (copy), p0 (copy), var37 (write)
 			local var39 = p4 == current
 			var24(var39)
@@ -155,7 +161,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			var37 = var39
 		end)
 		
-		return function() --[[ line: 226 ]]
+		return function() --[[ line: 231 ]]
 			-- upvalues: default_1 (copy), current (ref), var27 (copy), changedConnection (write)
 			default_1:cancelHover(current)
 			var27.current = 0
@@ -165,14 +171,14 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			end
 		end
 	end, { current, p0.setCustomConditionState })
-	local var30 = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then reactModule.useCallback(function() --[[ line: 237 ]]
+	local var30 = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then reactModule.useCallback(function() --[[ line: 242 ]]
 		-- upvalues: var23 (ref), default_1 (ref)
 		if var23 then
 			default_1:reset()
 		end
 	end, { var23 }) else nil
-	local var31 = reactModule.useMemo(function() --[[ line: 245 ]]
-		-- upvalues: p0 (ref), var23 (ref), sduiBuilder (copy), universeId (ref), placeId (ref), fFlagSduiTileDisableLegacyHover (copy), reactModule (copy), sduiPlayButton (copy), fFlagLuaAppDemoModePlayButton (copy), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (copy), var30 (ref), fFlagLuaAppSduiGameTilePlayButtonDefaults (copy), localizeStrings (copy)
+	local var31 = reactModule.useMemo(function() --[[ line: 250 ]]
+		-- upvalues: p0 (ref), var23 (ref), sduiBuilder (copy), universeId (ref), placeId (ref), fFlagSduiTileDisableLegacyHover (copy), reactModule (copy), sduiPlayButton (copy), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (copy), var30 (ref), fFlagLuaAppSduiGameTilePlayButtonDefaults (copy), localizeStrings (copy)
 		if p0.ctaButtonComponent then
 			return p0.ctaButtonComponent
 		elseif not var23 then
@@ -197,7 +203,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			playableText = localizeStrings(p0.sduiContext.dependencies.localization, { Join = "Common.VisitGame.Label.Play" }).Join,
 			width = UDim.new(0, 60),
 			analyticsContext = var40,
-			preferSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then true else nil,
+			squadButtonHeight = UDim.new(0, 40),
 			onActivatedEffect = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then var30 else nil,
 			enableUiBloxButton = if fFlagLuaAppSduiGameTilePlayButtonDefaults then p0.enableUiBloxButton ~= nil or p0.enableUiBloxButton else nil,
 			openGameDetailsOnPurchaseRequired = if fFlagLuaAppSduiGameTilePlayButtonDefaults then p0.openGameDetailsOnPurchaseRequired ~= nil or p0.openGameDetailsOnPurchaseRequired else nil
@@ -207,7 +213,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 			isPlayableWhenLoading = true,
 			universeId = universeId,
 			placeId = placeId,
-			preferSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then true else nil,
+			squadButtonHeight = UDim.new(0, 40),
 			sduiContext = p0.sduiContext,
 			analyticsContext = var40,
 			onActivatedEffect = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then var30 else nil,
@@ -221,7 +227,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 		if fFlagLuaAppSduiGameTilePlayButtonDefaults then p0.enableUiBloxButton else nil,
 		if fFlagLuaAppSduiGameTilePlayButtonDefaults then p0.openGameDetailsOnPurchaseRequired else nil
 	})
-	local var32 = if fFlagSduiTileDisableLegacyHover then nil else reactModule.useCallback(function(p5, p6, p7) --[[ line: 333 ]]
+	local var32 = if fFlagSduiTileDisableLegacyHover then nil else reactModule.useCallback(function(p5, p6, p7) --[[ line: 338 ]]
 		-- upvalues: p0 (ref), reactModule (copy), var28 (ref), var29 (ref), fFlagLuaAppSduiGameTileHoverShadow (copy), var15 (write), var31 (ref)
 		return if p0.enableLegacyHoverState then reactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -279,7 +285,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 		setGuiObject = var17,
 		onActivated = var20,
 		focusNavActionsComponent = var33,
-		footerComponent = reactModule.useMemo(function() --[[ line: 394 ]]
+		footerComponent = reactModule.useMemo(function() --[[ line: 399 ]]
 			-- upvalues: p0 (ref), reactModule (copy), sduiGameTileFooterModule (copy), var23 (ref), var21 (ref), universeId (ref), placeId (ref)
 			return if p0.disableDefaultFooterLogic then p0.footerComponent else reactModule.createElement(sduiGameTileFooterModule, {
 				isHovered = var23,
@@ -300,7 +306,7 @@ return reactModule.memo(function(p0) --[[ line: 73 | named "SduiGameTile" ]]
 		})
 	}))
 	
-	if not enableLegacyHoverState then
+	if not fFlagSduiCarouselHoverFixes or not var14 then
 		return var34
 	end
 	local xSmall = var12.Gap.XSmall

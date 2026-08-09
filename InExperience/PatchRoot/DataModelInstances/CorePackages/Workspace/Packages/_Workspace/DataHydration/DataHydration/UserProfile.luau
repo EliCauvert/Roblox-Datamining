@@ -2,6 +2,5 @@
 
 return {
 	resolveField = userProfileDataHydrationModule.resolveField,
-	updateFromHydration = userProfileDataHydrationModule.updateFromHydration,
-	getAndFetchUserInfo = userProfileDataHydrationModule.getAndFetchUserInfo
+	updateFromHydration = userProfileDataHydrationModule.updateFromHydration
 }

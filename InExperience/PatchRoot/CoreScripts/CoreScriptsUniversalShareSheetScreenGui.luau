@@ -1,1 +1,0 @@
-﻿require(game:GetService("CorePackages").Workspace.Packages.ShareSheet.UniversalShareSheetScreenGui).mount(game:GetService("CoreGui"))

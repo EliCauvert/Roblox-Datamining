@@ -3,9 +3,9 @@ local parent = momentsCommon.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local t = {
-	Default = foundationModule.Enums.ColorMode.Dark,
-	Light = foundationModule.Enums.ColorMode.Light,
-	Dark = foundationModule.Enums.ColorMode.Dark
+	Default = foundationModule.Enums.Theme.Dark,
+	Light = foundationModule.Enums.Theme.Light,
+	Dark = foundationModule.Enums.Theme.Dark
 }
 
 return {
@@ -17,7 +17,7 @@ return {
 		-- upvalues: t (ref), reactModule (ref), foundationModule (ref)
 		return function(p1) --[[ line: 20 ]]
 			-- upvalues: t (copy), reactModule (copy), foundationModule (copy), p0 (ref)
-			return reactModule.createElement(foundationModule.FoundationProvider, { colorMode = if p1 then t[p1.theme] else t.Default }, { Child = reactModule.createElement(p0, p1) })
+			return reactModule.createElement(foundationModule.FoundationProvider, { theme = if p1 then t[p1.theme] else t.Default }, { Child = reactModule.createElement(p0, p1) })
 		end
 	end
 }

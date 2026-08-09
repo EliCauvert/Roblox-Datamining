@@ -33,7 +33,8 @@ return {
 		FFlagMobilePopularItemBadgingExperimentEnabled = require(script.Flags.FFlagMobilePopularItemBadgingExperimentEnabled),
 		GetFStringMobilePopularItemBadgingLayer = require(script.Flags.GetFStringMobilePopularItemBadgingLayer),
 		FFlagPopularFillIconEnabled = require(script.Flags.FFlagPopularFillIconEnabled),
-		GetFStringPopularFillIconLocation = require(script.Flags.GetFStringPopularFillIconLocation)
+		GetFStringPopularFillIconLocation = require(script.Flags.GetFStringPopularFillIconLocation),
+		FFlagEnableDelayedInputForUnifiedPurchaseModalInExperience = require(script.Flags.FFlagEnableDelayedInputForUnifiedPurchaseModalInExperience)
 	},
 	GetEnableConsolePreparePaymentCheck = require(script.Flags.getEnableConsolePreparePaymentCheck),
 	PurchaseFlow = {

@@ -66,12 +66,12 @@ return reactModule.memo(function(p4) --[[ line: 90 | named "ChatInputBar" ]]
 	if var19.inputBarRef then
 		var27 = var19.inputBarRef
 	end
-	local var29 = reactModule.useRef(Enum.KeyCode.None)
+	local var29 = reactModule.useRef(Enum.KeyCode.Unknown)
 	local bubble = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, function(p5) --[[ line: 109 ]]
 		-- upvalues: var29 (ref)
 		if p5.eventData and var29.current == p5.eventData.KeyCode then
 			p5:cancel()
-			var29.current = Enum.KeyCode.None
+			var29.current = Enum.KeyCode.Unknown
 		end
 	end, "Bubble", var27)
 	local var31 = reactModule.useRef(var19.initialInputText or "")
@@ -232,7 +232,7 @@ return reactModule.memo(function(p4) --[[ line: 90 | named "ChatInputBar" ]]
 			var26.current.Selectable = false
 			focusLostConnection = var26.current.FocusLost:Connect(function(_, p12) --[[ line: 324 ]]
 				-- upvalues: var29 (copy)
-				var29.current = if p12 then p12.KeyCode else Enum.KeyCode.None
+				var29.current = if p12 then p12.KeyCode else Enum.KeyCode.Unknown
 			end)
 		end
 		return function() --[[ line: 331 ]]

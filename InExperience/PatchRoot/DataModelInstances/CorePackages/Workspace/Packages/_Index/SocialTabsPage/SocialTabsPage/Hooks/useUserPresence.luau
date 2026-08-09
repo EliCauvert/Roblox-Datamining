@@ -5,9 +5,9 @@ local convertUserPresenceTypeToString = require(parent.SocialCommon).Utils.conve
 local roduxPresenceModule = require(socialTabsPage.Rodux.RoduxPresence)
 local presenceType = roduxPresenceModule.Enums.PresenceType
 
-return if require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration) then nil else function(p0) --[[ line: 19 ]]
+return function(p0) --[[ line: 14 | named "useUserPresence" ]]
 	-- upvalues: useSelector (ref), roduxPresenceModule (ref), presenceType (ref), convertUserPresenceTypeToString (ref)
-	local var2 = useSelector(function(p1) --[[ line: 20 ]]
+	local var2 = useSelector(function(p1) --[[ line: 15 ]]
 		-- upvalues: p0 (ref), roduxPresenceModule (copy)
 		return if p0 and p0 ~= "" then roduxPresenceModule.Selectors.getUserPresenceByUserId(p1, p0) else nil
 	end)

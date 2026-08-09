@@ -6,20 +6,22 @@ local reportUnifiedLoggingAction = require(parent.SduiCoreSystem).reportUnifiedL
 local expandableText = appBloxModule.ExpandableText
 local view = foundationModule.View
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
+local fFlagLuaAppExpandableTextTappableText = require(parent.SharedFlags).FFlagLuaAppExpandableTextTappableText
 
-return reactModule.memo(function(p0) --[[ line: 26 | named "SduiExpandableText" ]]
-	-- upvalues: reactModule (ref), reportUnifiedLoggingAction (ref), fFlagSduiExperienceDetailsSupport (ref), view (ref), expandableText (ref)
+return reactModule.memo(function(p0) --[[ line: 27 | named "SduiExpandableText" ]]
+	-- upvalues: reactModule (ref), reportUnifiedLoggingAction (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagLuaAppExpandableTextTappableText (ref), view (ref), expandableText (ref)
 	local layoutOrder = p0.layoutOrder
 	local t = {
 		text = p0.text,
 		LayoutOrder = if fFlagSduiExperienceDetailsSupport and p0.headerComponent and (p0.text and p0.text ~= "") then 2 else layoutOrder,
 		compactNumberOfLines = p0.compactNumberOfLines,
 		fontStyle = p0.fontStyle,
-		textStyle = p0.textStyle,
-		pressedTextStyle = p0.pressedTextStyle,
+		textColor = if not fFlagLuaAppExpandableTextTappableText then p0.textColor else nil,
+		textStyle = if fFlagLuaAppExpandableTextTappableText then p0.textStyle else nil,
+		pressedTextStyle = if fFlagLuaAppExpandableTextTappableText then p0.pressedTextStyle else nil,
 		expandedInitially = p0.expandedInitially,
 		avoidBlankLineClip = p0.avoidBlankLineClip,
-		onExpandChanged = reactModule.useCallback(function(p1) --[[ line: 29 ]]
+		onExpandChanged = reactModule.useCallback(function(p1) --[[ line: 30 ]]
 			-- upvalues: p0 (ref), reportUnifiedLoggingAction (copy)
 			if p0.onExpandChanged then
 				p0.onExpandChanged(p1)

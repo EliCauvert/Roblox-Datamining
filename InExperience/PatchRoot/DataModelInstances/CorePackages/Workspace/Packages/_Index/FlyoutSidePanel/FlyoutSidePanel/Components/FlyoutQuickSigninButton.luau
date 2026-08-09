@@ -14,21 +14,18 @@ local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
-local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(value) --[[ line: 29 | named "FlyoutQuickSigninButton" ]]
-	-- upvalues: useDispatch (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), button (ref), buttonVariant (ref), buttonSize (ref)
+return function(value) --[[ line: 26 | named "FlyoutQuickSigninButton" ]]
+	-- upvalues: useDispatch (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), button (ref), buttonVariant (ref), buttonSize (ref)
 	local var5 = useDispatch()
 	local var6 = useRoactService(appEventIngestService)
 	
 	return reactModule.createElement(button, {
 		isDisabled = false,
-		text = useLocalization({
-			title = if fFlagCTAChangeMorePageFlyoutButtonText then "Authentication.Login.Action.QuickSignIn" else "Authentication.CrossDevice.Heading.QuickLogin"
-		}).title,
+		text = useLocalization({ title = "Authentication.CrossDevice.Heading.QuickLogin" }).title,
 		variant = buttonVariant.Standard,
 		LayoutOrder = value.layoutOrder,
-		onActivated = reactModule.useCallback(function() --[[ line: 33 ]]
+		onActivated = reactModule.useCallback(function() --[[ line: 30 ]]
 			-- upvalues: value (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var6 (ref)
 			value.closeDrawer()
 			local t = { name = appPage.CrossDeviceLogin }

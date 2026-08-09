@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXFixOutfitEquipCheckEmptyArray", false)
+﻿return game:DefineFastFlag("AXFixOutfitEquipCheckEmptyArray", false) and require(script.Parent.FFlagAXCustomizeMakeupSupport)

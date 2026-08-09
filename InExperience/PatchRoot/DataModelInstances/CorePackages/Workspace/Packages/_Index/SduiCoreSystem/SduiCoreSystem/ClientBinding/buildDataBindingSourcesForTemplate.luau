@@ -7,20 +7,22 @@ local sduiDataBindingContentTypeModule = require(sduiCoreSystem.ClientBinding.Sd
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppSduiBadgeDetailsComponents = sharedFlagsModule.FFlagLuaAppSduiBadgeDetailsComponents
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiMarketplaceCatalogCategorySupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport
 local fFlagSduiMarketplaceCatalogSortSupport = sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
+local fFlagSduiSongHydrationSupport = sharedFlagsModule.FFlagSduiSongHydrationSupport
 local fFlagSduiHydrationFetchIfMissing = sharedFlagsModule.FFlagSduiHydrationFetchIfMissing
 local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiRenderPerf = sharedFlagsModule.FFlagSduiRenderPerf
 local t = {
 	[sduiDataBindingContentTypeModule.badge] = { "badge_id" },
-	[sduiDataBindingContentTypeModule.creator] = { "creator_key" },
-	[sduiDataBindingContentTypeModule.universe] = { "universe_id" },
+	[sduiDataBindingContentTypeModule.creator] = if fFlagLuaAppSduiBadgeDetailsComponents then { "creator_key" } else nil,
+	[sduiDataBindingContentTypeModule.universe] = if fFlagLuaAppSduiBadgeDetailsComponents then { "universe_id" } else nil,
 	[sduiDataBindingContentTypeModule.ageRecommendation] = if fFlagSduiExperienceDetailsSupport then { "universe_id" } else nil,
 	[sduiDataBindingContentTypeModule.socialLink] = if fFlagSduiExperienceDetailsSupport then { "social_link_id" } else nil,
 	[sduiDataBindingContentTypeModule.marketplaceCatalogCategory] = if fFlagSduiMarketplaceCatalogCategorySupport then { "marketplace_catalog_category_item_id" } else nil,
-	[sduiDataBindingContentTypeModule.song] = { "song_id" },
+	[sduiDataBindingContentTypeModule.song] = if fFlagSduiSongHydrationSupport then { "song_id" } else nil,
 	[sduiDataBindingContentTypeModule.marketplaceCatalogSort] = if fFlagSduiMarketplaceCatalogSortSupport then { "catalog_sort_id" } else nil,
 	[sduiDataBindingContentTypeModule.gamePass] = if fFlagSduiExperienceDetailsSupport or fFlagSduiDevStoreSeeAllSupport then { "game_pass_id" } else nil,
 	[sduiDataBindingContentTypeModule.gameDeveloperProduct] = if fFlagSduiDevStoreSeeAllSupport then { "developer_product_id" } else nil,
@@ -30,7 +32,7 @@ local t = {
 	[sduiDataBindingContentTypeModule.userProfile] = if fFlagSduiExperienceDetailsSupport then { "user_id" } else nil
 }
 
-return function(p0, p1) --[[ line: 102 | named "buildDataBindingSourcesForTemplate" ]]
+return function(p0, p1) --[[ line: 108 | named "buildDataBindingSourcesForTemplate" ]]
 	-- upvalues: protoVariableMapperModule (ref), fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref), fFlagSduiHydrationFetchIfMissing (ref)
 	local t_1 = {}
 	

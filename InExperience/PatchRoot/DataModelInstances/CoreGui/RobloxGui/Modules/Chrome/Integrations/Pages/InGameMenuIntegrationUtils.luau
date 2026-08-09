@@ -5,36 +5,38 @@ local gameInviteAnalyticsManager = require(corePackagesService.Workspace.Package
 local gameInviteModalManager = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteModalManager
 local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
+local _ = require(robloxGui.Modules.Settings.EnumReactPage)
+local reactPageSignalModule = require(robloxGui.Modules.Settings.ReactPageSignal)
 
 return {
-	createPageOpenSignal = function(value) --[[ line: 17 ]]
+	createPageOpenSignal = function(value) --[[ line: 21 ]]
 		-- upvalues: signal (ref), mappedSignal (ref), robloxGui (ref)
-		local var3 = false
-		local var4 = signal.new()
-		local var5 = mappedSignal.new(var4, function() --[[ line: 20 ]]
-			-- upvalues: var3 (write)
-			return var3
+		local var4 = false
+		local var5 = signal.new()
+		local var6 = mappedSignal.new(var5, function() --[[ line: 24 ]]
+			-- upvalues: var4 (write)
+			return var4
 		end)
-		task.defer(function() --[[ line: 24 ]]
-			-- upvalues: robloxGui (copy), value (ref), var3 (write), var4 (ref)
+		task.defer(function() --[[ line: 28 ]]
+			-- upvalues: robloxGui (copy), value (ref), var4 (write), var5 (ref)
 			local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-			settingsHubModule.CurrentPageSignal:connect(function(p0) --[[ line: 26 ]]
-				-- upvalues: settingsHubModule (ref), value (copy), var3 (copy), var4 (copy)
-				local var7 = settingsHubModule.Instance[value]
-				var3 = var7 ~= nil and p0 == var7.Page.Name
-				var4:fire()
+			settingsHubModule.CurrentPageSignal:connect(function(p0) --[[ line: 30 ]]
+				-- upvalues: settingsHubModule (ref), value (copy), var4 (copy), var5 (copy)
+				local var8 = settingsHubModule.Instance[value]
+				var4 = var8 ~= nil and p0 == var8.Page.Name
+				var5:fire()
 			end)
 		end)
 		
-		return var5
+		return var6
 	end,
-	toggleIGMPage = function(p1, p2) --[[ line: 36 ]]
+	toggleIGMPage = function(p1, p2) --[[ line: 40 ]]
 		-- upvalues: robloxGui (ref)
 		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-		local var9 = settingsHubModule.Instance[p1]
+		local var10 = settingsHubModule.Instance[p1]
 		
 		if not settingsHubModule:GetVisibility() then
-			settingsHubModule:SetVisibility(true, false, var9)
+			settingsHubModule:SetVisibility(true, false, var10)
 			
 			return
 		elseif p2 then
@@ -42,9 +44,29 @@ return {
 			
 			return
 		end
-		settingsHubModule:SwitchToPage(var9, true)
+		settingsHubModule:SwitchToPage(var10, true)
 	end,
-	toggleInviteFriendsPage = function() --[[ line: 51 ]]
+	toggleReactPage = function(p3, p4, p5) --[[ line: 54 ]]
+		-- upvalues: robloxGui (ref), reactPageSignalModule (ref)
+		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
+		local var12 = settingsHubModule.Instance[p3]
+		local var13 = reactPageSignalModule()
+		
+		if not settingsHubModule:GetVisibility() then
+			settingsHubModule:SetVisibility(true, false, var12)
+			var13.setCurrentReactPage(p5)
+			
+			return
+		elseif p4 then
+			settingsHubModule:SetVisibility(false)
+			var13.setCurrentReactPage(nil)
+			
+			return
+		end
+		settingsHubModule:SwitchToPage(var12, true)
+		var13.setCurrentReactPage(p5)
+	end,
+	toggleInviteFriendsPage = function() --[[ line: 73 ]]
 		-- upvalues: gameInviteModalManager (ref), robloxGui (ref), gameInviteAnalyticsManager (ref)
 		if gameInviteModalManager:isGameModalOpen() then
 			gameInviteModalManager:closeModal()

@@ -8,12 +8,13 @@ local _ = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local sduiClientBindingParsersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
 local fFlagSduiStringPropToString = require(parent.SharedFlags).FFlagSduiStringPropToString
+local fFlagSduiLocalizedLiterals = require(parent.SharedFlags).FFlagSduiLocalizedLiterals
 
-local function buildStringProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 21 ]]
-	-- upvalues: fFlagSduiStringPropToString (ref), sduiClientBindingParsersModule (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
+local function buildStringProp(p0, p1, p2, p3, p4, p5, p6) --[[ line: 22 ]]
+	-- upvalues: fFlagSduiStringPropToString (ref), sduiClientBindingParsersModule (ref), fFlagSduiLocalizedLiterals (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
 	p6 = p6 or (if fFlagSduiStringPropToString then sduiClientBindingParsersModule.parseToString else nil)
 	
-	if p0 == "translation" then
+	if fFlagSduiLocalizedLiterals and p0 == "translation" then
 		local var6 = p4.resolveLocalizedLiteral(p1)
 		
 		if var6 then

@@ -43,6 +43,10 @@ return {
 			getFFlagDisableRobuxUpsell = function() --[[ line: 74 ]]
 				-- upvalues: p2 (write)
 				return p2.DisableRobuxUpsell
+			end,
+			GetFFlagEnableRestrictedAssetSaleLocationPurchasePrompt = function() --[[ line: 78 ]]
+				-- upvalues: p2 (write)
+				return p2.EnableRestrictedAssetSaleLocationPurchasePrompt
 			end
 		}
 		p2 = cryo.Dictionary.join(t, p2 or {})

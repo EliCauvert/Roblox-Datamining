@@ -79,7 +79,6 @@ return {
 	Previously = "Feature.PlayerSearchResults.Label.Previously",
 	SentFromWithContext = "Feature.Friends.Label.SentFromWithContext",
 	ThisIsYou = "Feature.PlayerSearchResults.Label.ThisIsYou",
-	Classmates = "Feature.Schools.Label.Classmates",
 	MutualText = "Feature.Friends.Mutual",
 	MutualsText = "Feature.Friends.Mutuals",
 	MutualConnectionTitle = if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.MutualFriendTitle" else "Feature.Friends.Label.MutualConnectionTitle",
@@ -159,6 +158,5 @@ return {
 	NoPreviousName = "Feature.Profile.Label.NoPreviousName",
 	Statistics = "Feature.Profile.Heading.Statistics",
 	JoinedInYear = "Feature.Friends.Label.JoinedInYear",
-	EventsListTitle = "Feature.VirtualEvents.EventsListTitle",
-	MomentsFeedEndTitle = "Feature.Moments.Label.FeedEndTitle"
+	EventsListTitle = "Feature.VirtualEvents.EventsListTitle"
 }

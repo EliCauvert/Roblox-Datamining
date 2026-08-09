@@ -4,7 +4,7 @@ local myStatsExperienceStatsPath = game:DefineFastString("MyStatsExperienceStats
 return {
 	ProtocolVersion = 2,
 	CapRtnNamespace = "AssistantPlugin",
-	acpUrl = function() --[[ line: 12 ]]
+	acpUrl = function() --[[ line: 13 ]]
 		-- upvalues: urlBase (ref), myStatsExperienceStatsPath (ref)
 		return urlBase.APIS .. myStatsExperienceStatsPath
 	end,
@@ -19,8 +19,7 @@ return {
 		SessionFindByUniverse = "_roblox/session/find_by_universe",
 		SessionDelete = "_roblox/session/delete",
 		SessionUpdateInfo = "_roblox/session/update_info",
-		SessionReadTasks = "_roblox/session/read_tasks",
-		SessionSaveAndPublish = "_roblox/session/save_and_publish"
+		SessionReadTasks = "_roblox/session/read_tasks"
 	},
 	Notifications = { SessionUpdate = "session/update" },
 	ErrorCodes = {
@@ -34,8 +33,7 @@ return {
 		NotFound = -32002,
 		Conflict = -32003,
 		UpstreamUnavailable = -32004,
-		Gone = -32005,
-		OutOfCredits = -32006
+		Gone = -32005
 	},
 	AskTool = { Name = "ask_tool" },
 	extractSessionNewProject = function(p0) --[[ line: 52 ]]
@@ -47,18 +45,15 @@ return {
 		return if typeof(roblox) == "table" and typeof(roblox.universeId) == "number" and typeof(roblox.placeId) == "number" then roblox else nil
 	end,
 	buildSessionNewWireParams = function(p1) --[[ line: 63 ]]
-		local t = {
-			universeId = p1.project.universeId,
-			placeId = p1.project.placeId
-		}
-		
-		if p1.experiment ~= nil then
-			t.experiment = p1.experiment
-		end
 		return {
 			cwd = p1.cwd,
 			mcpServers = p1.mcpServers,
-			_meta = { _roblox = t }
+			_meta = {
+				_roblox = {
+					universeId = p1.project.universeId,
+					placeId = p1.project.placeId
+				}
+			}
 		}
 	end
 }

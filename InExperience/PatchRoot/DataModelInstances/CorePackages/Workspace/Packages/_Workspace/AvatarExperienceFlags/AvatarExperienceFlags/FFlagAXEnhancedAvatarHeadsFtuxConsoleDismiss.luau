@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnhancedAvatarHeadsFtuxConsoleDismiss", false) and require(script.Parent.FFlagAXEnableEnhancedAvatarHeadsFtux)

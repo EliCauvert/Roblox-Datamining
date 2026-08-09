@@ -7,47 +7,42 @@ local sendTextMessageModule = require(messages.Thunks.sendTextMessage)
 local getRemainingOlderMessagesModule = require(messages.Thunks.getRemainingOlderMessages)
 local updateTypingStatusModule = require(messages.NetworkRequests.updateTypingStatus)
 local createFriendConversationModule = require(appChat.Conversations.Thunks.createFriendConversation)
-local sendGameLinkMessageModule = require(appChat.Conversations.Thunks.SendGameLinkMessage)
 local loggerModule = require(appChat.Logger)
 local appChatNetworkingModule = require(parent.AppChatNetworking)
 
-return function(p0) --[[ line: 17 ]]
-	-- upvalues: getOlderMessagesModule (ref), getRemainingOlderMessagesModule (ref), sendTextMessageModule (ref), sendGameLinkMessageModule (ref), createFriendConversationModule (ref), markConversationAsReadModule (ref), updateTypingStatusModule (ref), appChatNetworkingModule (ref), loggerModule (ref)
-	local var10 = function(p1, p2, p3, _) --[[ line: 18 ]]
+return function(p0) --[[ line: 16 ]]
+	-- upvalues: getOlderMessagesModule (ref), getRemainingOlderMessagesModule (ref), sendTextMessageModule (ref), createFriendConversationModule (ref), markConversationAsReadModule (ref), updateTypingStatusModule (ref), appChatNetworkingModule (ref), loggerModule (ref)
+	local var9 = function(p1, p2, p3, _) --[[ line: 17 ]]
 		-- upvalues: p0 (ref), getOlderMessagesModule (copy)
 		return p0(getOlderMessagesModule(p1, p2, p3))
 	end
 	
 	return {
-		getOlderMessages = function(p4, _) --[[ line: 23 ]]
-			-- upvalues: p0 (ref), getRemainingOlderMessagesModule (copy), var10 (ref)
-			return p0(getRemainingOlderMessagesModule(var10, p4))
+		getOlderMessages = function(p4, _) --[[ line: 22 ]]
+			-- upvalues: p0 (ref), getRemainingOlderMessagesModule (copy), var9 (ref)
+			return p0(getRemainingOlderMessagesModule(var9, p4))
 		end,
-		sendMessage = function(p5, p6, p7) --[[ line: 26 ]]
+		sendMessage = function(p5, p6, p7) --[[ line: 25 ]]
 			-- upvalues: p0 (ref), sendTextMessageModule (copy)
 			return p0(sendTextMessageModule(p5, p6, p7))
 		end,
-		sendGameLinkChatMessage = function(p8, p9) --[[ line: 29 ]]
-			-- upvalues: p0 (ref), sendGameLinkMessageModule (copy)
-			return p0(sendGameLinkMessageModule(p8, p9))
-		end,
-		createFriendConversation = function(p10, p11) --[[ line: 32 ]]
+		createFriendConversation = function(p8, p9) --[[ line: 28 ]]
 			-- upvalues: p0 (ref), createFriendConversationModule (copy)
-			return p0(createFriendConversationModule(p10, p11))
+			return p0(createFriendConversationModule(p8, p9))
 		end,
-		markConversationAsRead = function(p12) --[[ line: 35 ]]
+		markConversationAsRead = function(p10) --[[ line: 31 ]]
 			-- upvalues: p0 (ref), markConversationAsReadModule (copy)
-			p0(markConversationAsReadModule(p12))
+			p0(markConversationAsReadModule(p10))
 		end,
-		postTypingStatus = function(p13, _) --[[ line: 38 ]]
+		postTypingStatus = function(p11, _) --[[ line: 34 ]]
 			-- upvalues: p0 (ref), updateTypingStatusModule (copy)
-			return p0(updateTypingStatusModule(p13))
+			return p0(updateTypingStatusModule(p11))
 		end,
-		getUnreadConversationCount = function() --[[ line: 43 ]]
+		getUnreadConversationCount = function() --[[ line: 39 ]]
 			-- upvalues: p0 (ref), appChatNetworkingModule (copy), loggerModule (copy)
-			return p0(appChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(p14) --[[ line: 44 ]]
+			return p0(appChatNetworkingModule.rodux.GetConversationMetadata.API()):catch(function(p12) --[[ line: 40 ]]
 				-- upvalues: loggerModule (copy)
-				loggerModule:error(`Failure in GetConversationMetadata. Error: {tostring(p14)}`)
+				loggerModule:error(`Failure in GetConversationMetadata. Error: {tostring(p12)}`)
 			end)
 		end
 	}

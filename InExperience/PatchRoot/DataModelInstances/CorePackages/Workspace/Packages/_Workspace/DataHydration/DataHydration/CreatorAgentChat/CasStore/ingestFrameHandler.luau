@@ -3,7 +3,7 @@ local _ = require(script.Parent.Parent.createTurnHandle)
 local _ = require(script.Parent.Parent.types)
 
 return {
-	ingestFrame = function(p0, p1, p2) --[[ line: 22 ]]
+	ingestFrame = function(p0, p1, p2) --[[ line: 24 ]]
 		-- upvalues: acpProtocolModule (ref)
 		local activeTurnBySession
 		assert(p1 and (if p1.kind ~= "notification" then p1.kind == "response" else true), "ingestFrame requires an IncomingFrame")
@@ -21,6 +21,20 @@ return {
 				local var3 = if p2 ~= nil then nil else p2.sequenceNumber
 				
 				if update ~= nil and typeof(var3) == "number" then
+					if p0.onCanonicalSessionUpdate ~= nil then
+						local var4 = if typeof(update._meta) == "table" then update._meta._roblox else nil
+						local var5 = if typeof(var4) == "table" then var4.turnId else nil
+						
+						if typeof(var5) == "number" and var5 > 0 and (var5 % 1 == 0 and var3 > 0) and var3 % 1 == 0 then
+							p0.onCanonicalSessionUpdate({
+								source = "live",
+								sessionId = sessionId,
+								sequenceId = var3,
+								turnId = var5,
+								update = update
+							})
+						end
+					end
 					local sessionByCasSessionId = p0.getSessionByCasSessionId(sessionId)
 					
 					if sessionByCasSessionId == nil then
@@ -46,11 +60,11 @@ return {
 				
 				return
 			end
-			local var7 = tostring(id)
-			activeTurnBySession = p0.getActiveTurnByRequestId(var7)
+			local var9 = tostring(id)
+			activeTurnBySession = p0.getActiveTurnByRequestId(var9)
 			
 			if activeTurnBySession == nil then
-				p0.logger:debug(`[CAS] no active handle for response id={var7}`)
+				p0.logger:debug(`[CAS] no active handle for response id={var9}`)
 				
 				return
 			elseif activeTurnBySession == nil then return end

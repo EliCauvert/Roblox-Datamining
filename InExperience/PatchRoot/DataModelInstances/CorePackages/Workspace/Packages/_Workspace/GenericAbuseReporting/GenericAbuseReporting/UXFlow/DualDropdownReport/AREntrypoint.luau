@@ -30,7 +30,7 @@ return function(p0) --[[ line: 52 | named "AREntrypoint" ]]
 	end, { p0.onSubmitProps })
 	
 	return reactModule.createElement(layerCollectorProvider, {}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
+		FoundationProvider = reactModule.createElement(foundationProvider, { theme = "Dark" }, {
 			analytics = reactModule.createElement(analyticsProviderModule, {
 				onBeforeSubmitAnalytics = p0.onBeforeSubmitAnalytics,
 				onSubmitAnalytics = p0.onSubmitAnalytics

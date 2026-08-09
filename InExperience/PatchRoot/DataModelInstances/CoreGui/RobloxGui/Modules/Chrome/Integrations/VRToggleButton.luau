@@ -8,14 +8,15 @@ local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Sign
 local serviceModule = require(chrome.Service)
 local commonIconModule = require(chrome.Integrations.CommonIcon)
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
+local fFlagChromeActivatedMappedSignal = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChromeActivatedMappedSignal
 local UIManager = require(corePackagesService.Workspace.Packages.VrSpatialUi).UIManager
 local var6 = if isSpatial() then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
 local var7 = signal.new()
-local var8 = mappedSignal.new(var7, function() --[[ line: 28 ]]
+local var8 = mappedSignal.new(var7, function() --[[ line: 31 ]]
 	-- upvalues: VRHub (ref)
 	return VRHub.ShowTopBar
 end)
-VRHub.ShowTopBarChanged.Event:Connect(function() --[[ line: 32 ]]
+VRHub.ShowTopBarChanged.Event:Connect(function() --[[ line: 35 ]]
 	-- upvalues: var7 (ref)
 	var7:fire()
 end)
@@ -24,8 +25,11 @@ return serviceModule:register({
 	id = "vr_toggle_button",
 	label = "Feature.Catalog.Label.Filter.Hide",
 	initialAvailability = var6,
-	isActivated = var8,
-	activated = function() --[[ line: 41 ]]
+	isActivated = if fFlagChromeActivatedMappedSignal then var8 else function() --[[ line: 45 ]]
+		-- upvalues: var8 (ref)
+		return var8:get()
+	end,
+	activated = function() --[[ line: 48 ]]
 		-- upvalues: VRHub (ref), UIManager (ref), settingsHubModule (ref), rbxAnalyticsService (ref)
 		if VRHub.ShowTopBar then
 			UIManager.getInstance():prepareGuiToggleAnimationState()
@@ -40,7 +44,7 @@ return serviceModule:register({
 		rbxAnalyticsService:ReportCounter("VR-BottomBar-ToggleGui")
 	end,
 	components = {
-		Icon = function() --[[ line: 55 ]]
+		Icon = function() --[[ line: 62 ]]
 			-- upvalues: commonIconModule (ref), var8 (ref)
 			return commonIconModule("rbxasset://textures/ui/MenuBar/icon_maximize.png", "rbxasset://textures/ui/MenuBar/icon_minimize.png", var8)
 		end

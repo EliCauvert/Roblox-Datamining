@@ -1,8 +1,6 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
+﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local badge = foundationModule.Badge
 local button = foundationModule.Button
 local text = foundationModule.Text
@@ -13,8 +11,8 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 30 | named "VersionHistoryCard" ]]
-	-- upvalues: reactModule (ref), view (ref), text (ref), badge (ref), badgeShape (ref), badgeVariant (ref), button (ref), localizationStringsModule (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+return function(p0) --[[ line: 29 | named "VersionHistoryCard" ]]
+	-- upvalues: reactModule (ref), view (ref), text (ref), badge (ref), badgeShape (ref), badgeVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local testId = p0.testId or "version-history-card"
 	
 	return reactModule.createElement(view, {
@@ -41,7 +39,7 @@ return function(p0) --[[ line: 30 | named "VersionHistoryCard" ]]
 				}, {
 					Title = reactModule.createElement(text, {
 						LayoutOrder = 1,
-						tag = "shrink auto-xy text-title-medium text-wrap text-align-x-left text-truncate-none content-emphasis",
+						tag = "auto-xy text-title-medium text-align-x-left text-truncate-end content-emphasis",
 						Text = p0.title
 					}),
 					Badge = if p0.badgeText then reactModule.createElement(badge, {
@@ -64,12 +62,12 @@ return function(p0) --[[ line: 30 | named "VersionHistoryCard" ]]
 				}),
 				RestoreRow = reactModule.createElement(view, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
 					Restore = reactModule.createElement(button, {
-						text = localizationStringsModule.VERSION_HISTORY_RESTORE,
+						text = "Restore",
 						size = inputSize.Small,
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
 						isDisabled = p0.isRestoreDisabled,
-						onActivated = reactModule.useCallback(function() --[[ line: 32 ]]
+						onActivated = reactModule.useCallback(function() --[[ line: 31 ]]
 							-- upvalues: p0 (ref)
 							p0.onRestore()
 						end, { p0.onRestore }),

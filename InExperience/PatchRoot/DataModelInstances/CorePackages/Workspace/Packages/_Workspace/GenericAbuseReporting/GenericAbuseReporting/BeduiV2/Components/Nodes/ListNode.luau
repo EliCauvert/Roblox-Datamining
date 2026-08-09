@@ -22,9 +22,10 @@ local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagSupportSubmissionOnAllReportNodes = sharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
+local fFlagRemoveHardcodedStringsInReportNodes = sharedFlagsModule.FFlagRemoveHardcodedStringsInReportNodes
 
-return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), scrollToItemModule (ref), dashModule (ref), telemetryEventType (ref), eyebrowModule (ref), view (ref), listModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
+return reactModule.memo(function(p0) --[[ line: 48 | named "ListNode" ]]
+	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), scrollToItemModule (ref), dashModule (ref), telemetryEventType (ref), eyebrowModule (ref), view (ref), listModule (ref), button (ref), fFlagRemoveHardcodedStringsInReportNodes (ref), buttonVariant (ref), fillBehavior (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
 	local var11 = useTokens()
 	local var12, var13 = reactModule.useState(p0.initialValue or nil)
 	local translateIntoString = useArTranslation().translateIntoString
@@ -36,7 +37,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 	local body = var19.Body
 	local actions = var19.Actions
 	local title = var19.Title
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function() --[[ line: 63 ]]
 		-- upvalues: var14 (ref), var16 (ref), var18 (ref)
 		local current = var14.current
 		
@@ -44,12 +45,12 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 		local scrollingFrame = current:FindFirstChildWhichIsA("ScrollingFrame", true)
 		
 		if scrollingFrame then
-			local function checkScrollbar() --[[ line: 75 ]]
+			local function checkScrollbar() --[[ line: 76 ]]
 				-- upvalues: scrollingFrame (ref), var16 (copy)
 				var16(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
 			end
 			
-			local function onScroll() --[[ line: 80 ]]
+			local function onScroll() --[[ line: 81 ]]
 				-- upvalues: scrollingFrame (ref), var18 (copy)
 				if scrollingFrame.CanvasPosition.Y > 0 then
 					var18(true)
@@ -61,7 +62,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 			local var26 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
 			local var27 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
 			
-			return function() --[[ line: 93 ]]
+			return function() --[[ line: 94 ]]
 				-- upvalues: var25 (ref), var26 (ref), var27 (ref)
 				var25:Disconnect()
 				var26:Disconnect()
@@ -71,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 	end, {})
 	local var20 = reactModule.useRef({})
 	local var21 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 103 ]]
+	reactModule.useEffect(function() --[[ line: 104 ]]
 		-- upvalues: var12 (ref), var21 (ref), var20 (ref), scrollToItemModule (copy), var14 (ref)
 		if var12 then
 			var21.current = var20.current[var12]
@@ -93,11 +94,11 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 				}),
 				ItemList = reactModule.createElement(listModule.Root, {
 					value = var12,
-					onValueChanged = reactModule.useCallback(function(p1) --[[ line: 112 ]]
+					onValueChanged = reactModule.useCallback(function(p1) --[[ line: 113 ]]
 						-- upvalues: var13 (ref), dashModule (copy), p0 (ref), sendEvent (ref), telemetryEventType (copy), var15 (ref), var17 (ref)
 						var13(p1)
 						local var28 = 0
-						dashModule.forEach(p0.items, function(p2, p3) --[[ line: 116 ]]
+						dashModule.forEach(p0.items, function(p2, p3) --[[ line: 117 ]]
 							-- upvalues: p1 (ref), var28 (write)
 							if p2.id == p1 then
 								var28 = p3
@@ -116,7 +117,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 						})
 					end, { sendEvent, var15, var17, p0.items })
 				}, {
-					dashModule.map(p0.items, function(p4, p5) --[[ line: 167 ]]
+					dashModule.map(p0.items, function(p4, p5) --[[ line: 168 ]]
 						-- upvalues: reactModule (copy), listModule (copy), translateIntoString (ref), p0 (ref), var20 (ref)
 						return reactModule.createElement(listModule.Item, {
 							trailingAccessory = "Radio",
@@ -125,7 +126,7 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 							title = translateIntoString(p4.label),
 							description = if p4.description then translateIntoString(p4.description) else nil,
 							hasDivider = p5 ~= #p0.items,
-							ref = function(p6) --[[ line: 175 ]]
+							ref = function(p6) --[[ line: 176 ]]
 								-- upvalues: var20 (copy), p4 (ref)
 								var20.current[p4.id] = p6
 							end
@@ -136,14 +137,14 @@ return reactModule.memo(function(p0) --[[ line: 47 | named "ListNode" ]]
 		}),
 		Actions = if p0.onNext and var12 ~= nil then reactModule.createElement(actions, nil, {
 			Button = reactModule.createElement(button, {
-				text = translateIntoString(p0.nextButtonText),
+				text = if fFlagRemoveHardcodedStringsInReportNodes then translateIntoString(p0.nextButtonText) elseif p0.nextButtonText then translateIntoString(p0.nextButtonText) else "Continue",
 				variant = buttonVariant.Emphasis,
 				fillBehavior = fillBehavior.Fill,
 				isLoading = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else false,
 				isDisabled = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else false,
-				onActivated = reactModule.useCallback(function() --[[ line: 133 ]]
+				onActivated = reactModule.useCallback(function() --[[ line: 134 ]]
 					-- upvalues: dashModule (copy), p0 (ref), var12 (ref)
-					local var29 = dashModule.find(p0.items, function(p7) --[[ line: 134 ]]
+					local var29 = dashModule.find(p0.items, function(p7) --[[ line: 135 ]]
 						-- upvalues: var12 (copy)
 						return p7.id == var12
 					end)

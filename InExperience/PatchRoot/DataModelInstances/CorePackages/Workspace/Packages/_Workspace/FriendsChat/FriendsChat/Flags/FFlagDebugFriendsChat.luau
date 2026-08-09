@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagDebugFriendsChat

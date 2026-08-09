@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("VoiceVolumeControlsPerUserPlayerGridMenu", false) and (game:GetEngineFeature("VoiceVolumeControlsApplyPerUserMultiplier") and game:GetEngineFeature("CoreUiDragDetectorWorksWhileMenuOpen"))

@@ -7,7 +7,7 @@ local useCallback = reactModule.useCallback
 local useMemo = reactModule.useMemo
 local view = foundationModule.View
 local textOverlayModule = require(momentsCommon.Components.TextOverlay)
-local clampOverlayPositionModule = require(momentsCommon.Utils.clampOverlayPosition)
+local clampTextOverlayPositionModule = require(momentsCommon.Utils.clampTextOverlayPosition)
 local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
 local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
 local getScaleModule = require(momentsCommon.Utils.getScale)
@@ -26,7 +26,7 @@ local function arePositionsEqual(p3, p4) --[[ line: 48 ]]
 end
 
 return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
-	-- upvalues: reactModule (ref), useMemo (ref), getFitSizeModule (ref), getCropSizeModule (ref), getScaleModule (ref), getAbsoluteSize (ref), getVisibleBounds (ref), useCallback (ref), clampOverlayPositionModule (ref), dashModule (ref), arePositionsEqual (ref), textOverlayModule (ref), view (ref)
+	-- upvalues: reactModule (ref), useMemo (ref), getFitSizeModule (ref), getCropSizeModule (ref), getScaleModule (ref), getAbsoluteSize (ref), getVisibleBounds (ref), useCallback (ref), clampTextOverlayPositionModule (ref), dashModule (ref), arePositionsEqual (ref), textOverlayModule (ref), view (ref)
 	local var12 = reactModule.useRef(nil)
 	local var13 = reactModule.useRef(nil)
 	local var14 = reactModule.useRef(nil)
@@ -55,14 +55,14 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 		return getVisibleBounds(var20, p5.itemSize)
 	end, { var20, p5.itemSize })
 	local var23 = useCallback(function(p6) --[[ line: 87 ]]
-		-- upvalues: var17 (ref), p5 (ref), clampOverlayPositionModule (copy), var20 (ref), var15 (ref), var21 (ref), var22 (ref), dashModule (copy)
+		-- upvalues: var17 (ref), p5 (ref), clampTextOverlayPositionModule (copy), var20 (ref), var15 (ref), var21 (ref), var22 (ref), dashModule (copy)
 		return if var17 then dashModule.joinDeep(var17, {
-			position = if p5.clampToBoundsEnabled == true then clampOverlayPositionModule(p6, var20, var15, var21, var22) else p6
+			position = if p5.clampToBoundsEnabled == true then clampTextOverlayPositionModule(p6, var20, var15, var21, var22) else p6
 		}) else nil
 	end, {
 		var17, p5.clampToBoundsEnabled, var20, var15, var21, var22
 	})
-	local var24 = useCallback(function() --[[ line: 105 ]]
+	local var24 = useCallback(function() --[[ line: 110 ]]
 		-- upvalues: var14 (ref), p5 (ref), var23 (ref)
 		if not var14.current or not p5.onTextOverlayDragEnd then return end
 		local var29 = var23(var14.current.Position)
@@ -73,11 +73,11 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			return
 		end
 	end, { p5.onTextOverlayDragEnd, var23 })
-	local var25 = useCallback(function(p7) --[[ line: 118 ]]
+	local var25 = useCallback(function(p7) --[[ line: 123 ]]
 		-- upvalues: p5 (ref), var16 (ref)
 		if p5.clampToBoundsEnabled == true then
 			local absoluteSize = p7.AbsoluteSize
-			var16(function(p8) --[[ line: 124 ]]
+			var16(function(p8) --[[ line: 129 ]]
 				-- upvalues: absoluteSize (ref)
 				return if p8 == absoluteSize then p8 else absoluteSize
 			end)
@@ -85,10 +85,10 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			return
 		end
 	end, { p5.clampToBoundsEnabled })
-	reactModule.useEffect(function() --[[ line: 134 ]]
-		-- upvalues: p5 (ref), var17 (ref), var20 (ref), var15 (ref), clampOverlayPositionModule (copy), var21 (ref), var22 (ref), arePositionsEqual (copy), dashModule (copy)
+	reactModule.useEffect(function() --[[ line: 139 ]]
+		-- upvalues: p5 (ref), var17 (ref), var20 (ref), var15 (ref), clampTextOverlayPositionModule (copy), var21 (ref), var22 (ref), arePositionsEqual (copy), dashModule (copy)
 		if p5.clampToBoundsEnabled ~= true or not p5.onTextOverlayDragEnd or (not var17 or var20.X <= 0) or (var20.Y <= 0 or var15.X <= 0 or var15.Y <= 0) then return end
-		local var30 = clampOverlayPositionModule(var17.position, var20, var15, var21, var22)
+		local var30 = clampTextOverlayPositionModule(var17.position, var20, var15, var21, var22)
 		
 		if arePositionsEqual(var30, var17.position) then
 			return
@@ -113,7 +113,7 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			ref = var13,
 			Size = UDim2.fromOffset(var22.X, var22.Y)
 		}) else nil,
-		TextOverlay = useCallback(function(p9) --[[ line: 176 ]]
+		TextOverlay = useCallback(function(p9) --[[ line: 181 ]]
 			-- upvalues: p5 (ref), reactModule (copy), textOverlayModule (copy), var19 (ref), var13 (ref), var12 (ref), var14 (ref), var25 (ref), var24 (ref)
 			if p9 then
 				local var31 = p5.clampToBoundsEnabled == true

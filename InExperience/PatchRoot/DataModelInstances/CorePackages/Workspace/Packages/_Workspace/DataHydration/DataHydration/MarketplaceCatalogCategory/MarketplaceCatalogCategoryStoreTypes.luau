@@ -21,7 +21,6 @@ return {
 		tileType = tModule.optional(tModule.string),
 		timeToRefresh = tModule.optional(tModule.number),
 		categoryId = tModule.optional(tModule.number),
-		subcategoryId = tModule.optional(tModule.number),
-		looksWidgetContextForOrganicContent = tModule.optional(tModule.string)
+		subcategoryId = tModule.optional(tModule.number)
 	})
 }

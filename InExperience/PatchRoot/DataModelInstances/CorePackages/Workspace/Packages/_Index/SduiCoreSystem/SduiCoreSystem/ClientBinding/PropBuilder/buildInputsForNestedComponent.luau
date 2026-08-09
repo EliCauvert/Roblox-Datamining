@@ -4,12 +4,13 @@ local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
 local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
 local _ = require(parent.Signals)
+local fFlagSduiLocalizedLiterals = require(parent.SharedFlags).FFlagSduiLocalizedLiterals
 local fFlagSduiFormatArgFormatters = require(parent.SharedFlags).FFlagSduiFormatArgFormatters
 local fFlagSduiClientPageScope = require(parent.SharedFlags).FFlagSduiClientPageScope
 local fFlagSduiRenderPerf = require(parent.SharedFlags).FFlagSduiRenderPerf
 
-return function(p0, p1, p2, p3, p4, p5) --[[ line: 28 | named "buildInputsForNestedComponent" ]]
-	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiFormatArgFormatters (ref)
+return function(p0, p1, p2, p3, p4, p5) --[[ line: 29 | named "buildInputsForNestedComponent" ]]
+	-- upvalues: fFlagSduiRenderPerf (ref), splitDottedPathModule (ref), sduiPropUtilsModule (ref), fFlagSduiClientPageScope (ref), fFlagSduiLocalizedLiterals (ref), fFlagSduiFormatArgFormatters (ref)
 	if p1 then
 		for i, v in p1 do
 			if v.kind then
@@ -26,7 +27,7 @@ return function(p0, p1, p2, p3, p4, p5) --[[ line: 28 | named "buildInputsForNes
 						error(`Failed to determine value for nested input arg {i}`)
 					end
 					p4[i] = value
-				elseif type == "translation" then
+				elseif fFlagSduiLocalizedLiterals and type == "translation" then
 					if p5 and p5.resolveLocalizedLiteral then
 						p4[i] = p5.resolveLocalizedLiteral(v.kind.value)
 					end

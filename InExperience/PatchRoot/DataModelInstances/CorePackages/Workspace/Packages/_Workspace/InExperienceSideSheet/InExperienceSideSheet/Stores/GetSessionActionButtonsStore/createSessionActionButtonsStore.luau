@@ -7,8 +7,6 @@ local getInputModeStore = responsiveModule.GetInputModeStore
 local input = responsiveModule.Input
 local iconName = require(parent.Foundation).Enums.IconName
 local enumsModule = require(inExperienceSideSheet.Common.Enums)
-local constantsModule = require(inExperienceSideSheet.Common.Constants)
-local fFlagDebugEnablePioneerUX = require(parent.SharedFlags).FFlagDebugEnablePioneerUX
 local getActionBindingsStoreModule = require(inExperienceSideSheet.Stores.GetActionBindingsStore)
 local t = {
 	["rbxasset://textures/ui/Controls/DefaultController/ButtonX@2x.png"] = iconName.XboxX,
@@ -19,20 +17,20 @@ local t = {
 	["rbxasset://textures/ui/Controls/PlayStationController/ButtonTriangle@2x.png"] = iconName.PsTriagle
 }
 
-return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
-	-- upvalues: getActionBindingsStoreModule (ref), signalsModule (ref), fFlagDebugEnablePioneerUX (ref), constantsModule (ref), enumsModule (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
+return function() --[[ line: 45 | named "createSessionActionButtonsStore" ]]
+	-- upvalues: getActionBindingsStoreModule (ref), signalsModule (ref), enumsModule (ref), getInputModeStore (ref), input (ref), userInputService (ref), t (ref)
 	local sessionActionBindings = getActionBindingsStoreModule().sessionActionBindings
-	local var8, var9 = signalsModule.createSignal(nil)
-	local var10, var11 = signalsModule.createSignal(nil)
+	local var7, var8 = signalsModule.createSignal(nil)
+	local var9, var10 = signalsModule.createSignal(nil)
 	local list = {
 		{
 			name = "LeaveButton",
+			label = "CoreScripts.InGameMenu.LeaveGame",
 			keyboardIcon = "icons/controls/keys/key_l",
 			isEmphasis = true,
-			label = if fFlagDebugEnablePioneerUX then constantsModule.LocalizationKeys.LogoutButton else "CoreScripts.InGameMenu.LeaveGame",
 			gamepadKeyCode = Enum.KeyCode.ButtonX,
-			getShortcutIcon = var8,
-			setShortcutIcon = var9,
+			getShortcutIcon = var7,
+			setShortcutIcon = var8,
 			getOnActivated = sessionActionBindings[enumsModule.ActionBinding.Leave].getOnActivated,
 			getIsEnabled = sessionActionBindings[enumsModule.ActionBinding.Leave].getIsEnabled
 		},
@@ -42,29 +40,29 @@ return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
 			keyboardIcon = "icons/controls/keys/key_r",
 			isEmphasis = false,
 			gamepadKeyCode = Enum.KeyCode.ButtonY,
-			getShortcutIcon = var10,
-			setShortcutIcon = var11,
+			getShortcutIcon = var9,
+			setShortcutIcon = var10,
 			getOnActivated = sessionActionBindings[enumsModule.ActionBinding.Respawn].getOnActivated,
 			getIsEnabled = sessionActionBindings[enumsModule.ActionBinding.Respawn].getIsEnabled
 		}
 	}
-	local var13 = nil
-	local var14 = signalsModule.createEffect(function(p0) --[[ line: 84 ]]
-		-- upvalues: getInputModeStore (copy), var13 (write), input (copy), list (ref), userInputService (copy), t (copy)
+	local var12 = nil
+	local var13 = signalsModule.createEffect(function(p0) --[[ line: 78 ]]
+		-- upvalues: getInputModeStore (copy), var12 (write), input (copy), list (ref), userInputService (copy), t (copy)
 		local lastInputType = getInputModeStore(p0).getLastInputType(p0)
 		
-		if var13 then
-			var13:Disconnect()
+		if var12 then
+			var12:Disconnect()
 		end
 		if lastInputType == input.Directional then
-			local function setGamepadIcons() --[[ line: 92 ]]
+			local function setGamepadIcons() --[[ line: 86 ]]
 				-- upvalues: list (copy), userInputService (copy), t (copy)
 				for i, v in list do
 					v.setShortcutIcon(t[userInputService:GetImageForKeyCode(v.gamepadKeyCode)])
 				end
 			end
 			
-			var13 = userInputService.GamepadConnected:Connect(function(_) --[[ line: 101 ]]
+			var12 = userInputService.GamepadConnected:Connect(function(_) --[[ line: 95 ]]
 				-- upvalues: setGamepadIcons (ref)
 				setGamepadIcons()
 			end)
@@ -85,13 +83,13 @@ return function() --[[ line: 49 | named "createSessionActionButtonsStore" ]]
 	
 	return {
 		sessionActionButtonConfigs = list,
-		cleanUp = function() --[[ line: 117 ]]
-			-- upvalues: var13 (write), var14 (ref)
-			if var13 then
-				var13:Disconnect()
+		cleanUp = function() --[[ line: 111 ]]
+			-- upvalues: var12 (write), var13 (ref)
+			if var12 then
+				var12:Disconnect()
 			end
-			if var14 then
-				var14()
+			if var13 then
+				var13()
 			end
 		end
 	}

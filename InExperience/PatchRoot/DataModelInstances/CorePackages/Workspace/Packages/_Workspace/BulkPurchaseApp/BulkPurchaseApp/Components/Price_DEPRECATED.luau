@@ -4,11 +4,12 @@ local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local numberLocalization = require(parent.Localization).NumberLocalization
 local UIBloxModule = require(parent.UIBlox)
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
 
-local function PriceIcon(p0) --[[ line: 19 ]]
+local function PriceIcon(p0) --[[ line: 21 ]]
 	-- upvalues: reactModule (ref), imageSetLabel (ref), images (ref)
 	return reactModule.createElement(imageSetLabel, {
 		ImageTransparency = 0,
@@ -20,8 +21,10 @@ local function PriceIcon(p0) --[[ line: 19 ]]
 	})
 end
 
-return function(p1) --[[ line: 36 | named "Price_DEPRECATED" ]]
-	-- upvalues: useDesignTokens (ref), reactModule (ref), PriceIcon (ref), styledTextLabel (ref), numberLocalization (ref), localizationService (ref)
+return function(p1) --[[ line: 38 | named "Price_DEPRECATED" ]]
+	-- upvalues: useDesignTokens (ref), reactModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref), PriceIcon (ref), styledTextLabel (ref), numberLocalization (ref), localizationService (ref)
+	local var4 = useDesignTokens()
+	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -32,7 +35,7 @@ return function(p1) --[[ line: 36 | named "Price_DEPRECATED" ]]
 		HorizontalAlignment = Enum.HorizontalAlignment.Right,
 		VerticalAlignment = Enum.VerticalAlignment.Center,
 		FillDirection = Enum.FillDirection.Horizontal,
-		Padding = UDim.new(0, useDesignTokens().Size.Size_100)
+		Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var4.Size.Size_100 else var4.Global.Space_50)
 	}), reactModule.createElement(PriceIcon, {
 		LayoutOrder = 1,
 		Size = UDim2.fromOffset(p1.fontStyle.FontSize, p1.fontStyle.FontSize),

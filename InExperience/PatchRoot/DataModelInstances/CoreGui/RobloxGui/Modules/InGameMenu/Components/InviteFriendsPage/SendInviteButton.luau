@@ -1,21 +1,14 @@
 ﻿local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
+local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local t = inGameMenuDependenciesModule.t
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var4 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var5 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local withStyle = UIBlox.Core.Style.withStyle
+local withSelectionCursorProvider = UIBlox.App.SelectionImage.withSelectionCursorProvider
+local cursorKind = UIBlox.App.SelectionImage.CursorKind
 local inviteStatus = require(script.Parent.Parent.Parent.Resources.Constants).InviteStatus
 local images = UIBlox.App.ImageSet.Images
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local iconSize = foundationModule.Enums.IconSize
 local sendInviteButton = roact.PureComponent:extend("SendInviteButton")
 sendInviteButton.validateProps = t.strictInterface({
 	onActivated = t.callback,
@@ -24,24 +17,24 @@ sendInviteButton.validateProps = t.strictInterface({
 	userInviteStatus = t.optional(t.string)
 })
 
-local function _(p0, p1, p2) --[[ line: 47 | named "linearTween" ]]
+local function _(p0, p1, p2) --[[ line: 35 | named "linearTween" ]]
 	return (p0 - p1 / 30) / ((p2 - p1) / 30)
 end
 
-local _ = function(p3, p4, p5) --[[ line: 52 | named "isBetweenFrames" ]]
+local _ = function(p3, p4, p5) --[[ line: 40 | named "isBetweenFrames" ]]
 	return p4 / 30 <= p3 and p3 <= p5 / 30
 end
 
 local t_1 = {
-	[inviteStatus.Pending] = function(p6, p7) --[[ line: 57 ]]
+	[inviteStatus.Pending] = function(p6, p7) --[[ line: 45 ]]
 		p7.sendTransparency(math.sin(6.28318530718 * p6) * 0.375 + 0.375)
 	end,
-	[inviteStatus.Success] = function(p8, p9, p10) --[[ line: 66 ]]
+	[inviteStatus.Success] = function(p8, p9, p10) --[[ line: 54 ]]
 		if p8 >= 0 and p8 <= 0.133333333333 then
-			local var8 = (p8 - 0) / 0.133333333333
-			p9.sendTransparency(var8)
-			p9.successTransparency(1 - var8)
-			p9.successSize(0.75 + 0.75 * (1 - var8))
+			local var4 = (p8 - 0) / 0.133333333333
+			p9.sendTransparency(var4)
+			p9.successTransparency(1 - var4)
+			p9.successSize(0.75 + 0.75 * (1 - var4))
 			
 			return
 		elseif p8 >= 0.133333333333 and p8 <= 0.3 then
@@ -54,7 +47,7 @@ local t_1 = {
 		p9.successSize(1)
 		p10()
 	end,
-	[inviteStatus.Failed] = function(p11, p12, p13) --[[ line: 97 ]]
+	[inviteStatus.Failed] = function(p11, p12, p13) --[[ line: 85 ]]
 		if p11 >= 0 and p11 <= 0.066666666667 then
 			p12.sendTransparency((p11 - 0) / 0.133333333333)
 		elseif p11 >= 0.066666666667 and p11 <= 1.733333333333 then
@@ -71,8 +64,8 @@ local t_1 = {
 			return
 		elseif p11 >= 0.133333333333 and p11 <= 1.4 then
 			p12.failTransparency(0)
-			local var9 = p11 - 0.133333333333
-			p12.failPos(-0.4 * 2.71828182846 ^ (-var9 * 8) * math.sin(var9 * 40))
+			local var5 = p11 - 0.133333333333
+			p12.failPos(-0.4 * 2.71828182846 ^ (-var5 * 8) * math.sin(var5 * 40))
 			
 			return
 		elseif p11 >= 1.4 and p11 <= 1.566666666667 then
@@ -85,128 +78,78 @@ local t_1 = {
 	end
 }
 
-function sendInviteButton.init(p14, p15) --[[ line: 154 ]]
+function sendInviteButton.init(p14, p15) --[[ line: 142 ]]
 	-- upvalues: roact (ref), inviteStatus (ref)
-	local var10, var11 = roact.createBinding(0)
+	local var6, var7 = roact.createBinding(0)
+	local var8, var9 = roact.createBinding(1)
+	local var10, var11 = roact.createBinding(1)
 	local var12, var13 = roact.createBinding(1)
-	local var14, var15 = roact.createBinding(1)
-	local var16, var17 = roact.createBinding(1)
-	local var18, var19 = roact.createBinding(0)
+	local var14, var15 = roact.createBinding(0)
 	p14.bindings = {
-		sendTransparency = var10,
-		successTransparency = var12,
-		failTransparency = var14,
-		successSize = var16:map(function(p16) --[[ line: 166 ]]
+		sendTransparency = var6,
+		successTransparency = var8,
+		failTransparency = var10,
+		successSize = var12:map(function(p16) --[[ line: 154 ]]
 			return UDim2.new(p16, 0, p16, 0)
 		end),
-		successScale = var16,
-		failPos = var18:map(function(p17) --[[ line: 170 ]]
+		failPos = var14:map(function(p17) --[[ line: 157 ]]
 			return UDim2.new(p17, 0, 0, 0)
 		end)
 	}
 	p14.updateBindings = {
-		sendTransparency = var11,
-		successTransparency = var13,
-		failTransparency = var15,
-		successSize = var17,
-		failPos = var19
+		sendTransparency = var7,
+		successTransparency = var9,
+		failTransparency = var11,
+		successSize = var13,
+		failPos = var15
 	}
 	
 	if p15.userInviteStatus == inviteStatus.Success then
-		var13(0)
-		var11(1)
+		var9(0)
+		var7(1)
 	end
 end
 
-function sendInviteButton.renderWithSelectionCursor(p18, p19) --[[ line: 189 ]]
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), var5 (ref), inviteStatus (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), icon (ref), iconName (ref), iconVariant (ref), iconSize (ref), imageSetLabel (ref), images (ref)
+function sendInviteButton.renderWithSelectionCursor(p18, p19) --[[ line: 176 ]]
+	-- upvalues: withStyle (ref), roact (ref), cursorKind (ref), inviteStatus (ref), imageSetLabel (ref), images (ref)
 	local props = p18.props
 	
-	return withFoundationOrUIBloxStyle(function(p20) --[[ line: 192 ]]
-		return {
-			Theme = {
-				IconEmphasis = {
-					Color = p20.Color.Content.Emphasis.Color3,
-					Transparency = p20.Color.Content.Emphasis.Transparency
-				}
-			},
-			IconSize = p20.Size.Size_800
-		}
-	end, function(p21) --[[ line: 199 ]]
-		-- upvalues: roact (copy), p19 (ref), var5 (copy), props (ref), inviteStatus (copy), p18 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), icon (copy), iconName (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), images (copy)
+	return withStyle(function(p20) --[[ line: 179 ]]
+		-- upvalues: roact (copy), p19 (ref), cursorKind (copy), props (ref), inviteStatus (copy), p18 (ref), imageSetLabel (copy), images (copy)
 		return roact.createElement("TextButton", {
 			Selectable = false,
 			Size = UDim2.new(0, 36, 0, 36),
 			BackgroundTransparency = 1,
 			Text = "",
-			SelectionImageObject = p19(var5.InputFields),
-			[roact.Event.Activated] = function() --[[ line: 207 ]]
+			SelectionImageObject = p19(cursorKind.InputFields),
+			[roact.Event.Activated] = function() --[[ line: 187 ]]
 				-- upvalues: props (copy), inviteStatus (copy), p18 (copy)
 				if not p18.renderSteppedConnection and not (props.userInviteStatus == inviteStatus.Pending) and not (props.userInviteStatus == inviteStatus.Success) then
 					props.onActivated()
 				end
 			end
 		}, {
-			SendLabel = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(icon, {
-				name = iconName.PersonArrowFromBottomRight,
-				variant = iconVariant.Regular,
-				size = iconSize.XXLarge,
-				style = p18.bindings.sendTransparency:map(function(p22) --[[ line: 220 ]]
-					-- upvalues: p21 (ref)
-					return {
-						Color3 = p21.Theme.IconEmphasis.Color,
-						Transparency = p22
-					}
-				end)
-			}) else roact.createElement(imageSetLabel, {
+			SendLabel = roact.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				Image = images["icons/actions/friends/friendInvite"],
 				Size = UDim2.new(1, 0, 1, 0),
-				ImageColor3 = p21.Theme.IconEmphasis.Color,
+				ImageColor3 = p20.Theme.IconEmphasis.Color,
 				ImageTransparency = p18.bindings.sendTransparency
 			}),
-			SuccessLabel = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(icon, {
-				name = iconName.CheckLarge,
-				variant = iconVariant.Filled,
-				size = p18.bindings.successScale:map(function(p23) --[[ line: 236 ]]
-					-- upvalues: p21 (ref)
-					return p21.IconSize * p23
-				end),
-				Position = UDim2.new(0.5, 0, 0.5, 0),
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				style = p18.bindings.successTransparency:map(function(p24) --[[ line: 241 ]]
-					-- upvalues: p21 (ref)
-					return {
-						Color3 = p21.Theme.IconEmphasis.Color,
-						Transparency = p24
-					}
-				end)
-			}) else roact.createElement(imageSetLabel, {
+			SuccessLabel = roact.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				Image = images["icons/status/success"],
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				ImageColor3 = p21.Theme.IconEmphasis.Color,
+				ImageColor3 = p20.Theme.IconEmphasis.Color,
 				ImageTransparency = p18.bindings.successTransparency,
 				Size = p18.bindings.successSize
 			}),
-			FailLabel = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(icon, {
-				name = iconName.TriangleExclamation,
-				variant = iconVariant.Filled,
-				size = iconSize.XXLarge,
-				style = p18.bindings.failTransparency:map(function(p25) --[[ line: 260 ]]
-					-- upvalues: p21 (ref)
-					return {
-						Color3 = p21.Theme.IconEmphasis.Color,
-						Transparency = p25
-					}
-				end),
-				Position = p18.bindings.failPos
-			}) else roact.createElement(imageSetLabel, {
+			FailLabel = roact.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				Image = images["icons/status/alert"],
 				Size = UDim2.new(1, 0, 1, 0),
-				ImageColor3 = p21.Theme.IconEmphasis.Color,
+				ImageColor3 = p20.Theme.IconEmphasis.Color,
 				ImageTransparency = p18.bindings.failTransparency,
 				Position = p18.bindings.failPos
 			})
@@ -214,55 +157,55 @@ function sendInviteButton.renderWithSelectionCursor(p18, p19) --[[ line: 189 ]]
 	end)
 end
 
-function sendInviteButton.render(p26) --[[ line: 278 ]]
-	-- upvalues: var4 (ref)
-	return var4(function(p27) --[[ line: 279 ]]
-		-- upvalues: p26 (ref)
-		return p26:renderWithSelectionCursor(p27)
+function sendInviteButton.render(p21) --[[ line: 226 ]]
+	-- upvalues: withSelectionCursorProvider (ref)
+	return withSelectionCursorProvider(function(p22) --[[ line: 227 ]]
+		-- upvalues: p21 (ref)
+		return p21:renderWithSelectionCursor(p22)
 	end)
 end
 
-function sendInviteButton.didUpdate(p28, p29) --[[ line: 284 ]]
+function sendInviteButton.didUpdate(p23, p24) --[[ line: 232 ]]
 	-- upvalues: t_1 (ref)
-	if p28.props.userInviteStatus and p28.props.userInviteStatus ~= p29.userInviteStatus then
-		p28:playAnimation(t_1[p28.props.userInviteStatus])
+	if p23.props.userInviteStatus and p23.props.userInviteStatus ~= p24.userInviteStatus then
+		p23:playAnimation(t_1[p23.props.userInviteStatus])
 	end
 end
 
-function sendInviteButton.didMount(p30) --[[ line: 290 ]]
+function sendInviteButton.didMount(p25) --[[ line: 238 ]]
 	-- upvalues: t_1 (ref)
-	if p30.props.userInviteStatus then
-		p30:playAnimation(t_1[p30.props.userInviteStatus])
+	if p25.props.userInviteStatus then
+		p25:playAnimation(t_1[p25.props.userInviteStatus])
 	end
 end
 
-function sendInviteButton.playAnimation(p31, p32) --[[ line: 296 ]]
+function sendInviteButton.playAnimation(p26, p27) --[[ line: 244 ]]
 	-- upvalues: runService (ref)
-	p31.animationStartTime = tick()
-	p31.animationFunction = p32
+	p26.animationStartTime = tick()
+	p26.animationFunction = p27
 	
-	if not p31.renderSteppedConnection then
-		p31.renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 301 ]]
-			-- upvalues: p31 (ref)
-			p31.animationFunction(tick() - p31.animationStartTime, p31.updateBindings, function() --[[ line: 302 ]]
-				-- upvalues: p31 (copy)
-				p31:stopAnimation()
+	if not p26.renderSteppedConnection then
+		p26.renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 249 ]]
+			-- upvalues: p26 (ref)
+			p26.animationFunction(tick() - p26.animationStartTime, p26.updateBindings, function() --[[ line: 250 ]]
+				-- upvalues: p26 (copy)
+				p26:stopAnimation()
 			end)
 		end)
-		p31.props.animationBegun()
+		p26.props.animationBegun()
 	end
 end
 
-function sendInviteButton.stopAnimation(p33) --[[ line: 310 ]]
-	if p33.renderSteppedConnection then
-		p33.renderSteppedConnection:Disconnect()
-		p33.renderSteppedConnection = nil
-		p33.props.animationEnded()
+function sendInviteButton.stopAnimation(p28) --[[ line: 258 ]]
+	if p28.renderSteppedConnection then
+		p28.renderSteppedConnection:Disconnect()
+		p28.renderSteppedConnection = nil
+		p28.props.animationEnded()
 	end
 end
 
-function sendInviteButton.willUnmount(p34) --[[ line: 318 ]]
-	p34:stopAnimation()
+function sendInviteButton.willUnmount(p29) --[[ line: 266 ]]
+	p29:stopAnimation()
 end
 
 return sendInviteButton

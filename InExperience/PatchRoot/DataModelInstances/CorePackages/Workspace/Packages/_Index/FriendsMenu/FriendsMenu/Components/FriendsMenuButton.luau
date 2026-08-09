@@ -4,10 +4,6 @@ local context = friendsMenu.Context
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
 local roactUtilsModule = require(parent.RoactUtils)
-local signalsModule = require(parent.Signals)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local fFlagUseSignalsForGameInvitesStatus = require(parent.SharedFlags).FFlagUseSignalsForGameInvitesStatus
-local var5 = if fFlagUseSignalsForGameInvitesStatus then require(parent.NotificationsCommon).GetGameInvitesStatusStore else nil
 local localizationHelper = require(parent.NotificationsCommon).LocalizationHelper
 local constantsModule = require(friendsMenu.Constants)
 local friendsListContextModule = require(context.FriendsListContext)
@@ -26,42 +22,28 @@ local t = {
 	[inviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
 
-return function(p0) --[[ line: 47 ]]
-	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var5 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var10
-	local _ = nil
+return function(p0) --[[ line: 39 ]]
+	-- upvalues: useSelector (ref), getLocalizedStrings (ref), t (ref), reactModule (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref)
+	local var14
+	local var7 = useSelector(function(p1) --[[ line: 40 ]]
+		-- upvalues: p0 (ref)
+		local friend = p0.friend
+		assert(friend, "friend should be non-nil. Silence type checker.")
+		
+		return p1.GameInvitesStatus[friend.id]
+	end)
+	local var8 = getLocalizedStrings(t)
+	local var9 = reactModule.useContext(friendsListContextModule)
+	local var10 = useStyle()
+	local theme = var10 and var10.Theme
+	local font = var10 and var10.Font
+	local isFetchingFriends = var9.isFetchingFriends
+	local var13 = font.BaseSize * font.CaptionHeader.RelativeSize
 	
-	if fFlagUseSignalsForGameInvitesStatus then
-		local id = p0.friend and p0.friend.id
-		var10 = useSignalState(reactModule.useMemo(function() --[[ line: 51 ]]
-			-- upvalues: signalsModule (copy), var5 (copy), id (ref)
-			return signalsModule.createComputed(function(p1) --[[ line: 52 ]]
-				-- upvalues: var5 (copy), id (copy)
-				return var5(false).getGameInvitesStatus(p1)[id]
-			end)
-		end, { id }))
-	else
-		var10 = useSelector(function(p2) --[[ line: 58 ]]
-			-- upvalues: p0 (ref)
-			local friend = p0.friend
-			assert(friend, "friend should be non-nil. Silence type checker.")
-			
-			return p2.GameInvitesStatus[friend.id]
-		end)
+	if var7 then
+		var14 = var7 == inviteStatus.Failed and not p0.isFullRowActivatable
 	end
-	local var17
-	local var11 = getLocalizedStrings(t)
-	local var12 = reactModule.useContext(friendsListContextModule)
-	local var13 = useStyle()
-	local theme = var13 and var13.Theme
-	local font = var13 and var13.Font
-	local isFetchingFriends = var12.isFetchingFriends
-	local var16 = font.BaseSize * font.CaptionHeader.RelativeSize
-	
-	if var10 then
-		var17 = var10 == inviteStatus.Failed and not p0.isFullRowActivatable
-	end
-	return if var17 then reactModule.createElement(button, {
+	return if var14 then reactModule.createElement(button, {
 		isLoading = false,
 		fitContent = true,
 		buttonType = buttonType.Secondary,
@@ -70,13 +52,13 @@ return function(p0) --[[ line: 47 ]]
 		standardSize = standardButtonSize.XSmall,
 		anchorPoint = p0.anchorPoint,
 		position = p0.position,
-		text = var11.inviteFriend,
+		text = var8.inviteFriend,
 		layoutOrder = p0.layoutOrder
 	}) else reactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextWrapped = true,
-		Text = var11[var10] or var11.inviteFriend,
-		TextSize = var16,
+		Text = var8[var7] or var8.inviteFriend,
+		TextSize = var13,
 		Size = p0.size,
 		AnchorPoint = p0.anchorPoint,
 		Position = p0.position,

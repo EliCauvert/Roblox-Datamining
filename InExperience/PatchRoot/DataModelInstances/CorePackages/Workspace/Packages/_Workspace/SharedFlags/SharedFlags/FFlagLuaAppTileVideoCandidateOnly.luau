@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppTileVideoCandidateOnly", false)
+﻿return game:DefineFastFlag("LuaAppTileVideoCandidateOnly", false) and require(script.Parent.FFlagLuaAppHomeTouchAutoplay)

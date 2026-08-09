@@ -1,8 +1,5 @@
-﻿local appNavigationRegistryModule = require(script.AppNavigationRegistry)
-
-return {
-	AppNavigationRegistry = appNavigationRegistryModule,
-	isNavigationAvailable = appNavigationRegistryModule.isRegistered,
+﻿return {
+	AppNavigationRegistry = require(script.AppNavigationRegistry),
 	NavigationCommands = require(script.NavigationCommands),
 	useNavigationProps = require(script.useNavigationProps),
 	withNavigationProps = require(script.withNavigationProps),

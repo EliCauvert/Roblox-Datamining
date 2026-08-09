@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("MomentsReactToFeedItemV2", false) and require(script.Parent.FFlagMomentsEmojiSetsApi)

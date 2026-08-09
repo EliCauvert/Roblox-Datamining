@@ -9,10 +9,9 @@ local sduiParsers = sduiCoreSystemModule.SduiParsers
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
 local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
-local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
+local fFlagSduiGameImpressionsDynamicFields = require(parent.SharedFlags).FFlagSduiGameImpressionsDynamicFields
 local t = {}
-
-local var3 = function(p0) --[[ line: 25 ]]
+local var3 = if fFlagSduiGameImpressionsDynamicFields then function(p0) --[[ line: 27 ]]
 	if not p0 or type(p0) ~= "table" then
 		return nil
 	end
@@ -24,10 +23,10 @@ local var3 = function(p0) --[[ line: 25 ]]
 		end
 	end
 	return if next(t) then t else nil
-end
+end else nil
 
-return function(p1, p2, p3, p4, p5) --[[ line: 48 | named "SduiGameImpressionsHandler" ]]
-	-- upvalues: sduiErrors (ref), t (ref), cryoModule (ref), var3 (ref), sduiParsers (ref), appPage (ref), fFlagSduiSearchResultsPageEnabled (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiChartsSupport (ref), sduiParseHelpers (ref)
+return function(p1, p2, p3, p4, p5) --[[ line: 51 | named "SduiGameImpressionsHandler" ]]
+	-- upvalues: sduiErrors (ref), t (ref), cryoModule (ref), fFlagSduiGameImpressionsDynamicFields (ref), var3 (write), sduiParsers (ref), appPage (ref), sendGameImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiChartsSupport (ref), sduiParseHelpers (ref)
 	if not p4 then
 		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",
@@ -40,7 +39,7 @@ return function(p1, p2, p3, p4, p5) --[[ line: 48 | named "SduiGameImpressionsHa
 	
 	for i, v in p3 or t do
 		table.insert(t_1, cryoModule.Dictionary.join(v, {
-			analyticsData = var3(v) or cryoModule.None,
+			analyticsData = if fFlagSduiGameImpressionsDynamicFields then var3(v) or cryoModule.None else nil,
 			isSponsored = sduiParsers.safeParseBoolean(v.adFlag or false, p1, t)
 		}))
 	end
@@ -57,9 +56,9 @@ return function(p1, p2, p3, p4, p5) --[[ line: 48 | named "SduiGameImpressionsHa
 	
 	if p1.appPage == appPage.SearchPage then
 		sendGameImpressions.sendFromSearch(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, p2, t_1, p1.appPage, {
+			emphasisFlag = 0,
+			seeAllFlag = 0,
 			searchUuid = p4.searchUuid,
-			emphasisFlag = if fFlagSduiSearchResultsPageEnabled then if p4.hasEmphasizedTile then 1 else 0 else 0,
-			seeAllFlag = if fFlagSduiSearchResultsPageEnabled then tonumber(p4.seeAllFlag) or 0 else 0,
 			sortPos = p4.collectionPosition,
 			gameSetTypeId = tostring(p4.collectionId)
 		}, p4.itemsPerRow, p5, if fFlagLuaAppAddComponentTypeToSearchImpressions then p4.isWideTiles or false else nil, if fFlagLuaAppAddComponentTypeToSearchImpressions then var7 else nil)
@@ -74,12 +73,12 @@ return function(p1, p2, p3, p4, p5) --[[ line: 48 | named "SduiGameImpressionsHa
 		
 		return
 	end
-	sendGameImpressions.sendFromTopicContents(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, p2, t_1, p1.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, if fFlagSduiChartsSupport then p4.gameSetTargetId else nil, nil, p4.itemsPerRow, p4.isWideTiles or false, var7, if fFlagSduiChartsSupport then p4.appliedFilters else nil, nil, function(p6) --[[ line: 150 ]]
+	sendGameImpressions.sendFromTopicContents(p1.dependencies.eventIngest, p1.dependencies.appAnalytics, p2, t_1, p1.appPage, tostring(p4.collectionId), p4.collectionPosition, p5, if fFlagSduiChartsSupport then p4.gameSetTargetId else nil, nil, p4.itemsPerRow, p4.isWideTiles or false, var7, if fFlagSduiChartsSupport then p4.appliedFilters else nil, nil, function(p6) --[[ line: 151 ]]
 		-- upvalues: sduiParseHelpers (copy), p4 (ref), p1 (ref), sduiErrors (copy), var7 (ref)
 		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogGameImpressions, {
 			name = "SduiGameImpressionsHandler",
 			componentType = var7,
 			message = `Failed to log game impressions. reason: {p6}. analyticsContext: {sduiParseHelpers.stringifyValue(p4)}`
 		}, p1.appPage)
-	end, nil, var3(p4))
+	end, nil, if fFlagSduiGameImpressionsDynamicFields then var3(p4) else nil)
 end

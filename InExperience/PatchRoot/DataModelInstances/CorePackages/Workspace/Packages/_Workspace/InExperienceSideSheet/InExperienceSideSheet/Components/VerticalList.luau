@@ -7,10 +7,9 @@ local _ = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local view = foundationModule.View
 local verticalItemModule = require(inExperienceSideSheet.Components.VerticalItem)
-local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p0) --[[ line: 25 | named "VerticalList" ]]
-	-- upvalues: signalsReactModule (ref), reactModule (ref), verticalItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
+return reactModule.memo(function(p0) --[[ line: 21 | named "VerticalList" ]]
+	-- upvalues: signalsReactModule (ref), reactModule (ref), verticalItemModule (ref), view (ref)
 	local t = {}
 	
 	for i, v in signalsReactModule.useSignalState(p0.integrationsGetter) do
@@ -18,9 +17,7 @@ return reactModule.memo(function(p0) --[[ line: 25 | named "VerticalList" ]]
 			label = v.integration.label,
 			layoutOrder = i,
 			onActivated = v.activated,
-			icon = v.component,
-			disableGamepadDirections = if fFlagSideSheetFocusNav then { right = true, left = true } else nil,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and i == 1 then p0.firstIntegrationToFocusCallback else nil
+			icon = v.component
 		})
 	end
 	return reactModule.createElement(view, {

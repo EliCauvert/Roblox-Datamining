@@ -9,18 +9,18 @@ local _ = require(dataHydration.DataHydrationTypes)
 local fetchUniverseSearchModule = require(script.Parent.fetchUniverseSearch)
 local _ = require(script.Parent.UniverseSearchStoreTypes)
 
-local function _(p0) --[[ line: 29 | named "paramsKey" ]]
+local function _(p0) --[[ line: 30 | named "paramsKey" ]]
 	-- upvalues: httpService (ref)
 	return httpService:JSONEncode(p0)
 end
 
-return function(p1) --[[ line: 33 | named "createUniverseSearchStore" ]]
+return function(p1) --[[ line: 34 | named "createUniverseSearchStore" ]]
 	-- upvalues: cryoModule (ref), createDataCacheModule (ref), createDataResolverModule (ref), fetchUniverseSearchModule (ref), httpService (ref)
 	p1 = p1 or {}
 	local t = {}
 	local t_1 = {}
 	
-	local function applyItemPatches(p2) --[[ line: 39 ]]
+	local function applyItemPatches(p2) --[[ line: 40 ]]
 		-- upvalues: t_1 (write), cryoModule (copy)
 		local data = p2.data
 		
@@ -47,35 +47,35 @@ return function(p1) --[[ line: 33 | named "createUniverseSearchStore" ]]
 	local var11 = createDataResolverModule({
 		supportsMultiGet = false,
 		cache = var10,
-		fetchFn = function(p3, _) --[[ line: 70 ]]
+		fetchFn = function(p3, _) --[[ line: 71 ]]
 			-- upvalues: t (write), fetchUniverseSearchModule (copy), p1 (ref), applyItemPatches (ref)
 			return fetchUniverseSearchModule(t[p3], { network = p1.network, baseUrl = p1.baseUrl }):andThen(applyItemPatches)
 		end
 	})
 	
 	return {
-		getSearch = function(p4) --[[ line: 79 ]]
+		getSearch = function(p4) --[[ line: 80 ]]
 			-- upvalues: httpService (copy), t (write), var11 (ref)
 			local var14 = httpService:JSONEncode(p4)
 			t[var14] = p4
 			
 			return var11.getCachedItem(var14)
 		end,
-		fetchSearch = function(p5) --[[ line: 85 ]]
+		fetchSearch = function(p5) --[[ line: 86 ]]
 			-- upvalues: httpService (copy), t (write), var11 (ref)
 			local var15 = httpService:JSONEncode(p5)
 			t[var15] = p5
 			
 			return var11.fetchItem(var15)
 		end,
-		getAndFetchSearch = function(p6) --[[ line: 91 ]]
+		getAndFetchSearch = function(p6) --[[ line: 92 ]]
 			-- upvalues: httpService (copy), t (write), var11 (ref)
 			local var16 = httpService:JSONEncode(p6)
 			t[var16] = p6
 			
 			return var11.getAndFetchItem(var16)
 		end,
-		updateSearchItem = function(p7, p8) --[[ line: 99 ]]
+		updateSearchItem = function(p7, p8) --[[ line: 100 ]]
 			-- upvalues: t_1 (write), cryoModule (copy), t (write), var11 (ref), applyItemPatches (ref), var10 (ref)
 			t_1[p7] = cryoModule.Dictionary.join(t_1[p7] or {}, p8)
 			
@@ -91,12 +91,12 @@ return function(p1) --[[ line: 33 | named "createUniverseSearchStore" ]]
 				end
 			end
 		end,
-		invalidateAll = function() --[[ line: 116 ]]
+		invalidateAll = function() --[[ line: 117 ]]
 			-- upvalues: t (write), var11 (ref)
 			t = {}
 			var11.clear()
 		end,
-		dispose = function() --[[ line: 121 ]]
+		dispose = function() --[[ line: 122 ]]
 			-- upvalues: t (write), t_1 (write), var11 (ref)
 			t = {}
 			t_1 = {}

@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("MomentsFeedSnapSensitivityMilli", 426)

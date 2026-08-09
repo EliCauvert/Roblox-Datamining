@@ -12,10 +12,11 @@ local _ = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 local itemCardBackgroundsWrapperModule = require(script.Parent.ItemCardBackgroundsWrapper)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
+local fFlagAXLookAndFeelBackgrounds = avatarExperienceFlagsModule.FFlagAXLookAndFeelBackgrounds
 local fFlagAXSelectedBorderWrapsBackground = avatarExperienceFlagsModule.FFlagAXSelectedBorderWrapsBackground
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 32 ]]
-	-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (ref), useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
+return reactModule.forwardRef(function(p0, p1) --[[ line: 33 ]]
+	-- upvalues: fFlagAXMigrateAXToGlobalAutofocus (ref), useSelectionCursor (ref), cursorKind (ref), useTokens (ref), reactModule (ref), fFlagAXMISEnableMultiShopping (ref), fFlagAXLookAndFeelBackgrounds (ref), itemCardBackgroundsWrapperModule (ref), fFlagAXSelectedBorderWrapsBackground (ref), view (ref)
 	return reactModule.createElement("TextButton", {
 		Selectable = if fFlagAXMISEnableMultiShopping then p0.Selectable else nil,
 		SelectionImageObject = if fFlagAXMigrateAXToGlobalAutofocus then useSelectionCursor(cursorKind.RoundedRect) else nil,
@@ -30,16 +31,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 32 ]]
 		LayoutOrder = p0.LayoutOrder,
 		SelectionGroup = true,
 		[reactModule.Tag] = p0.tag
-	}, if p0.backgroundLayers == nil or #p0.backgroundLayers <= 0 then {
-		ItemCardListLayout = reactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			FillDirection = Enum.FillDirection.Vertical,
-			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			Padding = UDim.new(0, useTokens().Gap.Small)
-		}),
-		ItemCardHeaderSlot = p0.headerSlot,
-		ItemCardFooterSlot = p0.footerSlot
-	} else {
+	}, if fFlagAXLookAndFeelBackgrounds and p0.backgroundLayers ~= nil and #p0.backgroundLayers > 0 then {
 		BackgroundsWrapper = reactModule.createElement(itemCardBackgroundsWrapperModule, {
 			backgroundLayers = p0.backgroundLayers,
 			imageScaleType = p0.imageScaleType,
@@ -51,5 +43,14 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 32 ]]
 			testId = "card-selection-stroke",
 			ZIndex = 2
 		}) else nil
+	} else {
+		ItemCardListLayout = reactModule.createElement("UIListLayout", {
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			FillDirection = Enum.FillDirection.Vertical,
+			HorizontalAlignment = Enum.HorizontalAlignment.Left,
+			Padding = UDim.new(0, useTokens().Gap.Small)
+		}),
+		ItemCardHeaderSlot = p0.headerSlot,
+		ItemCardFooterSlot = p0.footerSlot
 	})
 end)

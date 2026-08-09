@@ -1,6 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
+local _ = require(foundation.Enums.Theme)
 local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(script.Parent.Rules.Types)
 local flagsModule = require(foundation.Utility.Flags)
@@ -21,7 +21,7 @@ local function createStyleSheet(p0, p1, p2, p3) --[[ line: 47 ]]
 	styleSheet.Parent = foundationStyleSheets
 	
 	return {
-		colorMode = p0,
+		theme = p0,
 		device = p1,
 		scale = p2,
 		tokenOverrides = p3,
@@ -93,7 +93,7 @@ return {
 		p12 = p12 or 1
 		
 		for i, v in t do
-			if v.colorMode == p10 and v.device == p11 and (v.scale == p12 and v.tokenOverrides == p13) then
+			if v.theme == p10 and v.device == p11 and (v.scale == p12 and v.tokenOverrides == p13) then
 				return i
 			end
 		end

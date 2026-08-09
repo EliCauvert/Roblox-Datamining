@@ -1,14 +1,12 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
 local aspectRatioModule = require(foundation.Components.AspectRatio)
-local cornerRadiusModule = require(foundation.Components.CornerRadius)
 local paddingModule = require(foundation.Components.Padding)
-local flagsModule = require(foundation.Utility.Flags)
 local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
 local _ = require(foundation.Components.Types)
 
-return function(p0) --[[ line: 17 | named "GuiObjectChildren" ]]
-	-- upvalues: reactModule (ref), aspectRatioModule (ref), flagsModule (ref), cornerRadiusModule (ref), getTestIdTagModule (ref), paddingModule (ref)
+return function(p0) --[[ line: 15 | named "GuiObjectChildren" ]]
+	-- upvalues: reactModule (ref), aspectRatioModule (ref), getTestIdTagModule (ref), paddingModule (ref)
 	local testId = p0.testId
 	
 	return {
@@ -17,10 +15,7 @@ return function(p0) --[[ line: 17 | named "GuiObjectChildren" ]]
 			value = p0.aspectRatio,
 			testId = if testId then `{testId}--aspect-ratio` else nil
 		}),
-		CornerRadius = if p0.cornerRadius ~= nil then nil elseif flagsModule.FoundationCornerRadiusPerCorner then reactModule.createElement(cornerRadiusModule, {
-			value = p0.cornerRadius,
-			testId = if testId then `{testId}--corner-radius` else nil
-		}) else reactModule.createElement("UICorner", {
+		CornerRadius = if p0.cornerRadius ~= nil then nil else reactModule.createElement("UICorner", {
 			CornerRadius = p0.cornerRadius,
 			[reactModule.Tag] = getTestIdTagModule(testId, "corner-radius")
 		}),

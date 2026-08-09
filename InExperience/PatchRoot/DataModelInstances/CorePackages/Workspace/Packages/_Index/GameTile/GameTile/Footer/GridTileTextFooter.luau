@@ -1,22 +1,23 @@
 ﻿local gameTile = script:FindFirstAncestor("GameTile")
 local parent = gameTile.Parent
 local reactModule = require(parent.React)
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local useTextSizeOffset = require(parent.UIBlox).Core.Style.useTextSizeOffset
 local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
 
-local _ = function(p0, p1) --[[ line: 43 ]]
+local _ = function(p0, p1) --[[ line: 45 ]]
 	return p0 * (p1 or 1)
 end
 
-return function(p2) --[[ line: 47 | named "GridTileTextFooter" ]]
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref)
+return function(p2) --[[ line: 49 | named "GridTileTextFooter" ]]
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref)
 	local var3 = useDesignTokens()
 	local var4 = useTextSizeOffset()
 	local var5 = useTokens()
-	local var6 = if p2.isUnifiedGameTile then var5.Size.Size_500 else var3.Size.Size_500
-	local var7 = if p2.isUnifiedGameTile then var5.Color.Content.Default else var3.Color.Content.Default
+	local var6 = if p2.isUnifiedGameTile then var5.Size.Size_500 elseif fFlagRenameDeprecatedUIBloxTokens then var3.Size.Size_500 else var3.Global.Space_250
+	local var7 = if p2.isUnifiedGameTile then var5.Color.Content.Default elseif fFlagRenameDeprecatedUIBloxTokens then var3.Color.Content.Default else var3.Semantic.Color.Text.Default
 	local var8 = getGameTileMetadataFontModule(p2.useLargerFont, var3, var5, if p2.isUnifiedGameTile then true else nil)
 	
 	return reactModule.createElement("Frame", {

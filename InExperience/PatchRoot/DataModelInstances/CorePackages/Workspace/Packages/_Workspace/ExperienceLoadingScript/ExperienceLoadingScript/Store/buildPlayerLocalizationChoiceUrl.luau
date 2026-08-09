@@ -1,0 +1,11 @@
+﻿local parent = script:FindFirstAncestor("ExperienceLoadingScript").Parent
+local url = require(parent.CoreScriptsCommon).Url
+local urlBuilder = require(parent.UrlBuilder).UrlBuilder
+
+return function(p0) --[[ line: 8 | named "buildPlayerLocalizationChoiceUrl" ]]
+	-- upvalues: urlBuilder (ref), url (ref)
+	return urlBuilder.new({
+		path = "v1/user-localization-settings/player-choice/{universeId}",
+		base = url.GAME_INTERNATIONALIZATION_URL
+	})({ universeId = p0 })
+end

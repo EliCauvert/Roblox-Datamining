@@ -12,19 +12,17 @@ local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
 local dynamicReportModule = require(genericAbuseReporting.UXFlow.DynamicReport.DynamicReport)
 local dynamicReportV2ContainerModule = require(genericAbuseReporting.UXFlow.DynamicReportV2.DynamicReportV2Container)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
-local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
+local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
+local enableDynamicReportV2ForUserProfileReports3 = game:DefineFastFlag("EnableDynamicReportV2ForUserProfileReports3", false)
 local fixKidsBlueOnReportDropdown = game:DefineFastFlag("FixKidsBlueOnReportDropdown", false)
 
-return reactModule.memo(function(p0) --[[ line: 40 | named "DynamicReportContainer" ]]
-	-- upvalues: reactModule (ref), themeContext (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), dynamicReportV2ContainerModule (ref), fixKidsBlueOnReportDropdown (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref), foundationProvider (ref), foundationModule (ref)
-	return if p0.abuseVector == abuseVectorModule.UserProfile or fFlagEnableReportingFlowForMomentsFeed and p0.abuseVector == abuseVectorModule.MomentsFeed then reactModule.createElement(dynamicReportV2ContainerModule, {
+return reactModule.memo(function(p0) --[[ line: 38 | named "DynamicReportContainer" ]]
+	-- upvalues: reactModule (ref), themeContext (ref), enableDynamicReportV2ForUserProfileReports3 (ref), abuseVectorModule (ref), dynamicReportV2ContainerModule (ref), fixKidsBlueOnReportDropdown (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref), foundationProvider (ref), foundationModule (ref)
+	return if enableDynamicReportV2ForUserProfileReports3 and p0.abuseVector == abuseVectorModule.UserProfile then reactModule.createElement(dynamicReportV2ContainerModule, {
 		abuseVector = p0.abuseVector,
 		targetId = p0.targetId,
 		onClose = p0.onClose,
 		onSubmit = p0.onSubmit,
-		onCustomSubmit = p0.onCustomSubmit,
 		custom = p0.custom
 	}) elseif fixKidsBlueOnReportDropdown then reactModule.createElement(layerCollectorProvider, {}, {
 		AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p0.abuseVector }, {
@@ -38,7 +36,7 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "DynamicReportContain
 		})
 	}) else reactModule.createElement(layerCollectorProvider, {}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, {
-			colorMode = if reactModule.useContext(themeContext).theme == "light" then foundationModule.Enums.ColorMode.Light else foundationModule.Enums.ColorMode.Dark
+			theme = if reactModule.useContext(themeContext).theme == "light" then foundationModule.Enums.Theme.Light else foundationModule.Enums.Theme.Dark
 		}, {
 			AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p0.abuseVector }, {
 				AbuseReportFormDataProvider = reactModule.createElement(abuseReportFormDataProviderModule, {

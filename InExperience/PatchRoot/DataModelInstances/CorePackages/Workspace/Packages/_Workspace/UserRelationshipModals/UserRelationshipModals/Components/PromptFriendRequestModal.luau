@@ -9,17 +9,16 @@ local userTileModule = require(parent.UserTile)
 local userTile = userTileModule.UserTile
 local layoutMode = userTileModule.LayoutMode
 local promptFriendRequestModalRevampFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename and game:DefineFastFlag("PromptFriendRequestModalRevampFriendsRename", false)
-local promptFriendRequestModalInputDelayMs = game:DefineFastInt("PromptFriendRequestModalInputDelayMs", 1000)
 
-return function(p0) --[[ line: 34 | named "PromptFriendRequestModal" ]]
-	-- upvalues: useLocalization (ref), promptFriendRequestModalRevampFriendsRename (ref), reactModule (ref), dialog (ref), dialogSize (ref), foundationModule (ref), userTile (ref), layoutMode (ref), buttonVariant (ref), promptFriendRequestModalInputDelayMs (ref)
-	local var5 = useLocalization({
+return function(p0) --[[ line: 33 | named "PromptFriendRequestModal" ]]
+	-- upvalues: useLocalization (ref), promptFriendRequestModalRevampFriendsRename (ref), reactModule (ref), dialog (ref), dialogSize (ref), foundationModule (ref), userTile (ref), layoutMode (ref), buttonVariant (ref)
+	local var4 = useLocalization({
 		sendText = "InGame.FriendPlayerPrompt.Action.Send",
 		titleText = if promptFriendRequestModalRevampFriendsRename then "InGame.FriendPlayerPrompt.Title.SendFriendRequest.FriendsRename" else "InGame.FriendPlayerPrompt.Title.SendFriendRequest"
 	})
 	
 	return reactModule.createElement(dialog.Root, { size = dialogSize.Medium, onClose = p0.onClose }, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var5.titleText }),
+		DialogTitle = reactModule.createElement(dialog.Title, { text = var4.titleText }),
 		Avatar = reactModule.createElement(foundationModule.View, {
 			tag = "row align-x-center size-full-3000",
 			LayoutOrder = 2
@@ -36,10 +35,10 @@ return function(p0) --[[ line: 34 | named "PromptFriendRequestModal" ]]
 			LayoutOrder = 4,
 			actions = {
 				{
-					text = var5.sendText,
+					text = var4.sendText,
 					variant = buttonVariant.Emphasis,
 					onActivated = p0.onSendClicked,
-					inputDelay = if p0.inputDelay == nil then promptFriendRequestModalInputDelayMs / 1000 else p0.inputDelay
+					inputDelay = if p0.inputDelay == nil then 3 else p0.inputDelay
 				}
 			}
 		})

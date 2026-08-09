@@ -9,8 +9,7 @@
 		bundleOpened = "nsNotificationBundleOpened",
 		bundleClosed = "nsNotificationBundleClosed",
 		openMetaActions = "nsOpenMetaActions",
-		closeMetaActions = "nsCloseMetaActions",
-		goToSettingPage = "nsGoToSettingPage"
+		closeMetaActions = "nsCloseMetaActions"
 	},
 	CloseMethod = {
 		closeIcon = "closeIcon",

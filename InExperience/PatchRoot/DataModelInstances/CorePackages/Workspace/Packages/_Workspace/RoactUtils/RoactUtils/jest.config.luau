@@ -5,7 +5,6 @@ return {
 	testMatch = { "**/*.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

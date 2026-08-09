@@ -4,11 +4,9 @@ local roact = inGameMenuDependenciesModule.Roact
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local cryo = inGameMenuDependenciesModule.Cryo
 local t = inGameMenuDependenciesModule.t
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var3 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var4 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local withStyle = UIBlox.Core.Style.withStyle
+local withSelectionCursorProvider = UIBlox.App.SelectionImage.withSelectionCursorProvider
+local cursorKind = UIBlox.App.SelectionImage.CursorKind
 local openTypeSupport = UIBlox.Utility.OpenTypeSupport
 local parent = script.Parent.Parent
 local fFlagLuaMenuPerfImprovementsModule = require(parent.Flags.FFlagLuaMenuPerfImprovements)
@@ -16,7 +14,6 @@ local getFFlagLuaAppEnableOpenTypeSupport = require(corePackagesService.Workspac
 local getFFlagLuaAppEnableOpenTypeIGMFix = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeIGMFix
 local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = foundationModule.Image
 local t_1 = {
 	AnchorPoint = Vector2.new(0, 1),
 	Position = UDim2.new(0, 24, 1, 1),
@@ -39,14 +36,14 @@ playerLabelV2.validateProps = t.strictInterface(require(corePackagesService.Work
 playerLabelV2.defaultProps = { Visible = true }
 
 if fFlagLuaMenuPerfImprovementsModule then
-	function playerLabelV2.init(p0) --[[ line: 78 ]]
-		function p0.onActivated() --[[ line: 79 ]]
+	function playerLabelV2.init(p0) --[[ line: 69 ]]
+		function p0.onActivated() --[[ line: 70 ]]
 			-- upvalues: p0 (ref)
 			p0.props.onActivated(p0.props.userId)
 		end
 	end
 end
-function playerLabelV2.renderButtons(p1) --[[ line: 85 ]]
+function playerLabelV2.renderButtons(p1) --[[ line: 76 ]]
 	-- upvalues: roact (ref), cryo (ref)
 	return cryo.Dictionary.join(p1.props[roact.Children] or {}, {
 		List = roact.createElement("UIListLayout", {
@@ -59,31 +56,18 @@ function playerLabelV2.renderButtons(p1) --[[ line: 85 ]]
 	})
 end
 
-function playerLabelV2.renderWithSelectionCursor(p2, p3) --[[ line: 100 ]]
-	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagLuaMenuPerfImprovementsModule (ref), roact (ref), var4 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), cryo (ref), t_1 (ref), imageSetLabel (ref), themedTextLabelModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), getFFlagLuaAppEnableOpenTypeIGMFix (ref), openTypeSupport (ref)
+function playerLabelV2.renderWithSelectionCursor(p2, p3) --[[ line: 91 ]]
+	-- upvalues: withStyle (ref), fFlagLuaMenuPerfImprovementsModule (ref), roact (ref), cursorKind (ref), imageSetLabel (ref), cryo (ref), t_1 (ref), themedTextLabelModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), getFFlagLuaAppEnableOpenTypeIGMFix (ref), openTypeSupport (ref)
 	local props = p2.props
-	local var9 = if props.displayName ~= "" then props.displayName else props.username
+	local var6 = if props.displayName ~= "" then props.displayName else props.username
 	
-	return withFoundationOrUIBloxStyle(function(p4) --[[ line: 110 ]]
-		return {
-			Theme = {
-				BackgroundContrast = {
-					Color = p4.Color.Surface.Surface_100.Color3,
-					Transparency = p4.Color.Surface.Surface_100.Transparency
-				},
-				BackgroundOnHover = {
-					Color = p4.Color.State.Hover.Color3,
-					Transparency = p4.Color.State.Hover.Transparency
-				}
-			}
-		}
-	end, function(p5) --[[ line: 117 ]]
-		-- upvalues: p2 (ref), fFlagLuaMenuPerfImprovementsModule (copy), roact (copy), props (ref), p3 (ref), var4 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), cryo (copy), t_1 (copy), imageSetLabel (copy), themedTextLabelModule (copy), var9 (ref), getFFlagLuaAppEnableOpenTypeSupport (copy), getFFlagLuaAppEnableOpenTypeIGMFix (copy), openTypeSupport (copy)
-		local var10 = if p2.props.isSelected then p5.Theme.BackgroundOnHover else p5.Theme.BackgroundContrast
+	return withStyle(function(p4) --[[ line: 101 ]]
+		-- upvalues: p2 (ref), fFlagLuaMenuPerfImprovementsModule (copy), roact (copy), props (ref), p3 (ref), cursorKind (copy), imageSetLabel (copy), cryo (copy), t_1 (copy), themedTextLabelModule (copy), var6 (ref), getFFlagLuaAppEnableOpenTypeSupport (copy), getFFlagLuaAppEnableOpenTypeIGMFix (copy), openTypeSupport (copy)
+		local var7 = if p2.props.isSelected then p4.Theme.BackgroundOnHover else p4.Theme.BackgroundContrast
 		
 		return roact.createElement("TextButton", {
-			BackgroundTransparency = var10.Transparency,
-			BackgroundColor3 = var10.Color,
+			BackgroundTransparency = var7.Transparency,
+			BackgroundColor3 = var7.Color,
 			BorderSizePixel = 0,
 			LayoutOrder = props.LayoutOrder,
 			Size = UDim2.new(1, 0, 0, 71),
@@ -93,16 +77,9 @@ function playerLabelV2.renderWithSelectionCursor(p2, p3) --[[ line: 100 ]]
 			[roact.Event.Activated] = if fFlagLuaMenuPerfImprovementsModule then if p2.props.onActivated then p2.onActivated else nil else p2.props.onActivated,
 			[roact.Change.AbsolutePosition] = p2.props[roact.Change.AbsolutePosition],
 			[roact.Ref] = p2.props.forwardRef,
-			SelectionImageObject = p3(var4.Square)
+			SelectionImageObject = p3(cursorKind.Square)
 		}, {
-			PlayerIcon = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, cryo.Dictionary.join(t_1, {
-				ZIndex = 2,
-				Image = if props.userId > 0 then "rbxthumb://type=AvatarHeadShot&id=" .. props.userId .. "&w=60&h=60" else "",
-				imageStyle = {
-					Transparency = 0,
-					Color3 = props.isOnline and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(115, 115, 115)
-				}
-			})) else roact.createElement(imageSetLabel, cryo.Dictionary.join(t_1, {
+			PlayerIcon = roact.createElement(imageSetLabel, cryo.Dictionary.join(t_1, {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				ImageColor3 = props.isOnline and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(115, 115, 115),
@@ -114,7 +91,7 @@ function playerLabelV2.renderWithSelectionCursor(p2, p3) --[[ line: 100 ]]
 				Position = UDim2.new(0, 104, 0, 14),
 				AnchorPoint = Vector2.new(0, 0),
 				Size = UDim2.new(0, 219, 0, 22),
-				Text = var9,
+				Text = var6,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}),
@@ -138,15 +115,15 @@ function playerLabelV2.renderWithSelectionCursor(p2, p3) --[[ line: 100 ]]
 	end)
 end
 
-function playerLabelV2.render(p6) --[[ line: 205 ]]
-	-- upvalues: var3 (ref)
-	return var3(function(p7) --[[ line: 206 ]]
-		-- upvalues: p6 (ref)
-		return p6:renderWithSelectionCursor(p7)
+function playerLabelV2.render(p5) --[[ line: 182 ]]
+	-- upvalues: withSelectionCursorProvider (ref)
+	return withSelectionCursorProvider(function(p6) --[[ line: 183 ]]
+		-- upvalues: p5 (ref)
+		return p5:renderWithSelectionCursor(p6)
 	end)
 end
 
-return roact.forwardRef(function(p8, p9) --[[ line: 211 ]]
+return roact.forwardRef(function(p7, p8) --[[ line: 188 ]]
 	-- upvalues: roact (ref), playerLabelV2 (ref), cryo (ref)
-	return roact.createElement(playerLabelV2, cryo.Dictionary.join(p8, { forwardRef = p9 }))
+	return roact.createElement(playerLabelV2, cryo.Dictionary.join(p7, { forwardRef = p8 }))
 end)

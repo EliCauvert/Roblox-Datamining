@@ -15,6 +15,7 @@ local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEdit
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
+local fFlagAXFixTryOnItemVR = avatarExperienceFlagsModule.FFlagAXFixTryOnItemVR
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local t = {
 	isTransparent = false,
@@ -143,8 +144,8 @@ local t_1 = {
 	[avatarScreenModule.SortAndFilters] = { isTransparent = true, VRPanelPlacement = "Left" },
 	[avatarScreenModule.TryOnItem] = {
 		isTransparent = false,
-		VRPanelPlacement = "Right",
-		VRPanelRoundedCorners = true,
+		VRPanelPlacement = if fFlagAXFixTryOnItemVR then "Right" else nil,
+		VRPanelRoundedCorners = if fFlagAXFixTryOnItemVR then true else nil,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
@@ -233,9 +234,6 @@ if fFlagAXOutfitPageRevamp then
 	}
 	t_1[avatarScreenModule.DuplicateOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
 	t_1[avatarScreenModule.DuplicateOutfitNameDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
-	t_1[avatarScreenModule.RenameOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
-	t_1[avatarScreenModule.DeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
-	t_1[avatarScreenModule.BulkDeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
 	t_1[avatarScreenModule.ManageOutfitsPage] = {
 		isTransparent = false,
 		VRPanelPlacement = "Left",

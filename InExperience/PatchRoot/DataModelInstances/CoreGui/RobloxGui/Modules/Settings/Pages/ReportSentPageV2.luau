@@ -16,17 +16,19 @@ local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.C
 local focusNavigationUtilsModule = require(corePackagesService.Workspace.Packages.FocusNavigationUtils)
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local reportConfirmationScreenModule = require(settings.Components.ReportConfirmation.ReportConfirmationScreen)
 local reportConfirmationContainerModule = require(settings.Components.ReportConfirmation.ReportConfirmationContainer)
-local var13 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local var14 = if var13 then require(robloxGui.Modules.Chrome.Service) else nil
+local reportAbuseThankYouPageGamepadEnable = game:DefineFastFlag("ReportAbuseThankYouPageGamepadEnable", false)
+local var15 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+local var16 = if var15 then require(robloxGui.Modules.Chrome.Service) else nil
 local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
-local var15 = nil
+local var17 = nil
 
-local _ = function() --[[ line: 33 ]]
-	-- upvalues: var15 (write), roactModule (ref)
-	if var15 ~= nil then
-		roactModule.unmount(var15)
-		var15 = nil
+local _ = function() --[[ line: 36 ]]
+	-- upvalues: var17 (write), roactModule (ref)
+	if var17 ~= nil then
+		roactModule.unmount(var17)
+		var17 = nil
 	end
 end
 
@@ -35,9 +37,9 @@ while not localPlayer do
 	playersService.ChildAdded:wait()
 	localPlayer = playersService.LocalPlayer
 end
-local var16 = reportAbuseAnalytics.new(eventIngest.new(eventIngestService), var6.Diag, reportAbuseAnalytics.MenuContexts.LegacySentPage)
-local var17 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
-local var18 = (function() --[[ line: 54 | named "Initialize" ]]
+local var18 = reportAbuseAnalytics.new(eventIngest.new(eventIngestService), var6.Diag, reportAbuseAnalytics.MenuContexts.LegacySentPage)
+local var19 = blockingAnalyticsModule.new(localPlayer.UserId, { EventStream = rbxAnalyticsService })
+local var20 = (function() --[[ line: 57 | named "Initialize" ]]
 	-- upvalues: settingsPageFactoryModule (ref), create (ref)
 	local reportSentPageV2 = settingsPageFactoryModule:CreateNewPage()
 	reportSentPageV2.TabHeader = nil
@@ -58,76 +60,81 @@ local var18 = (function() --[[ line: 54 | named "Initialize" ]]
 	return reportSentPageV2
 end)()
 
-function var18.UpdateMenu(p0) --[[ line: 78 ]]
-	-- upvalues: var15 (write), roactModule (ref), var16 (ref), var17 (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reportConfirmationContainerModule (ref), var13 (ref), fFlagEnableConsoleExpControls (ref), var14 (ref)
+function var20.UpdateMenu(p0) --[[ line: 81 ]]
+	-- upvalues: var17 (write), roactModule (ref), var18 (ref), var19 (ref), reportConfirmationScreenModule (ref), reportAbuseThankYouPageGamepadEnable (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), reportConfirmationContainerModule (ref), var15 (ref), fFlagEnableConsoleExpControls (ref), var16 (ref)
 	local reportedPlayer = p0.ReportedPlayer
 	
-	if var15 ~= nil then
-		roactModule.unmount(var15)
-		var15 = nil
+	if var17 ~= nil then
+		roactModule.unmount(var17)
+		var17 = nil
 	end
 	if p0.settingsShowChangedSignal then
 		p0.settingsShowChangedSignal:disconnect()
 		p0.settingsShowChangedSignal = nil
 	end
-	p0.settingsShowChangedSignal = p0.HubRef.SettingsShowSignal:connect(function(p1) --[[ line: 87 ]]
+	p0.settingsShowChangedSignal = p0.HubRef.SettingsShowSignal:connect(function(p1) --[[ line: 90 ]]
 		-- upvalues: p0 (ref)
 		if not p1 then
 			p0:HandleDone()
 		end
 	end)
 	local bindableEvent = Instance.new("BindableEvent")
-	p0.SizeChangedSignal = p0.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 95 ]]
+	p0.SizeChangedSignal = p0.Root:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 98 ]]
 		-- upvalues: bindableEvent (ref), p0 (ref)
 		bindableEvent:Fire(p0.Root.AbsoluteSize)
 	end)
-	local var21 = roactModule.createElement(coreScriptsRootProvider, {}, {
-		FocusRoot = roactModule.createElement(focusRoot, {
-			isIsolated = true,
-			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView
-		}, {
-			ThankYouScreenRoot = roactModule.createElement(reportConfirmationContainerModule, {
-				player = {
-					UserId = reportedPlayer.UserId,
-					Name = reportedPlayer.Name,
-					DisplayName = reportedPlayer.DisplayName
-				},
-				closeMenu = function() --[[ line: 105 ]]
-					-- upvalues: p0 (ref)
-					p0:HandleDone()
-				end,
-				isVoiceReport = p0.isVoiceReport,
-				ZIndex = p0.HubRef.Shield.ZIndex + 1,
-				reportAbuseAnalytics = var16,
-				blockingAnalytics = var17,
-				onSizeChanged = bindableEvent.Event
+	local t = {
+		player = {
+			UserId = reportedPlayer.UserId,
+			Name = reportedPlayer.Name,
+			DisplayName = reportedPlayer.DisplayName
+		},
+		closeMenu = function() --[[ line: 108 ]]
+			-- upvalues: p0 (ref)
+			p0:HandleDone()
+		end,
+		isVoiceReport = p0.isVoiceReport,
+		ZIndex = p0.HubRef.Shield.ZIndex + 1,
+		reportAbuseAnalytics = var18,
+		blockingAnalytics = var19,
+		onSizeChanged = bindableEvent.Event
+	}
+	local var24 = roactModule.createElement(reportConfirmationScreenModule, t)
+	
+	if reportAbuseThankYouPageGamepadEnable then
+		var24 = roactModule.createElement(coreScriptsRootProvider, {}, {
+			FocusRoot = roactModule.createElement(focusRoot, {
+				isIsolated = true,
+				isAutoFocusRoot = true,
+				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.RouterView
+			}, {
+				ThankYouScreenRoot = roactModule.createElement(reportConfirmationContainerModule, t)
 			})
 		})
-	})
-	
-	if var13 and fFlagEnableConsoleExpControls then
-		var14:setHideShortcutBar("ReportSentPageV2", true)
+		
+		if var15 and fFlagEnableConsoleExpControls then
+			var16:setHideShortcutBar("ReportSentPageV2", true)
+		end
 	end
-	var15 = roactModule.mount(var21, p0.Root, "ReportSentPageV2")
+	var17 = roactModule.mount(var24, p0.Root, "ReportSentPageV2")
 end
 
-function var18.ShowReportedPlayer(p2, p3, p4) --[[ line: 135 ]]
-	-- upvalues: var18 (ref)
+function var20.ShowReportedPlayer(p2, p3, p4) --[[ line: 142 ]]
+	-- upvalues: var20 (ref)
 	p2.ReportedPlayer = p3
 	p2.isVoiceReport = p4
 	p2:UpdateMenu()
-	p2.HubRef:SwitchToPage(var18, true)
+	p2.HubRef:SwitchToPage(var20, true)
 end
 
-function var18.HandleDone(p5) --[[ line: 143 ]]
-	-- upvalues: var13 (ref), fFlagEnableConsoleExpControls (ref), var14 (ref), var15 (write), roactModule (ref)
-	if var13 and fFlagEnableConsoleExpControls then
-		var14:setHideShortcutBar("ReportSentPageV2", false)
+function var20.HandleDone(p5) --[[ line: 150 ]]
+	-- upvalues: reportAbuseThankYouPageGamepadEnable (ref), var15 (ref), fFlagEnableConsoleExpControls (ref), var16 (ref), var17 (write), roactModule (ref)
+	if reportAbuseThankYouPageGamepadEnable and var15 and fFlagEnableConsoleExpControls then
+		var16:setHideShortcutBar("ReportSentPageV2", false)
 	end
-	if var15 ~= nil then
-		roactModule.unmount(var15)
-		var15 = nil
+	if var17 ~= nil then
+		roactModule.unmount(var17)
+		var17 = nil
 	end
 	if p5.settingsShowChangedSignal then
 		p5.settingsShowChangedSignal:disconnect()
@@ -140,4 +147,4 @@ function var18.HandleDone(p5) --[[ line: 143 ]]
 	p5.HubRef:SetVisibility(false, true)
 end
 
-return var18
+return var20

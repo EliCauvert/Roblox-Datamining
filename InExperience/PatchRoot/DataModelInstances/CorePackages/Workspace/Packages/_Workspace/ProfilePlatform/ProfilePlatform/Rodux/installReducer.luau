@@ -12,10 +12,9 @@ local profilePlatformFixPresenceReducer = game:DefineFastFlag("ProfilePlatformFi
 local var10 = if profilePlatformFixPresenceReducer then require(profilePlatform.Rodux.PresenceReducer) else nil
 local profilesModule = require(profilePlatform.Rodux.Profiles)
 local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
 
-return function() --[[ line: 25 ]]
-	-- upvalues: roduxModule (ref), gamesModule (ref), itemDetailsModule (ref), bundleDetailsModule (ref), assetDetailsModule (ref), fFlagAddVideoToCommunityProfile (ref), assetDataModule (ref), myRoduxNetworkingModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), profilePlatformFixPresenceReducer (ref), var10 (ref), presenceModule (ref), profilesModule (ref)
+return function() --[[ line: 23 ]]
+	-- upvalues: roduxModule (ref), gamesModule (ref), itemDetailsModule (ref), bundleDetailsModule (ref), assetDetailsModule (ref), fFlagAddVideoToCommunityProfile (ref), assetDataModule (ref), myRoduxNetworkingModule (ref), profilePlatformFixPresenceReducer (ref), var10 (ref), presenceModule (ref), profilesModule (ref)
 	return roduxModule.combineReducers({
 		Games = gamesModule.installReducer(),
 		ItemAssets = itemDetailsModule,
@@ -23,7 +22,7 @@ return function() --[[ line: 25 ]]
 		AssetDetails = assetDetailsModule,
 		AssetData = if fFlagAddVideoToCommunityProfile then assetDataModule else nil,
 		NetworkStatus = myRoduxNetworkingModule.installReducer(),
-		Presence = if fFlagProfilePlatformPresenceStoreMigrationModule then nil elseif profilePlatformFixPresenceReducer then var10 else presenceModule.installReducer(),
+		Presence = if profilePlatformFixPresenceReducer then var10 else presenceModule.installReducer(),
 		Profiles = profilesModule
 	})
 end

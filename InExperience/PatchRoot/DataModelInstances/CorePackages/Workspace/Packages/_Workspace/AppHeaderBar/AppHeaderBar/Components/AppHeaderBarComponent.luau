@@ -8,6 +8,7 @@ local useStyle = UIBloxModule.Core.Style.useStyle
 local headerBar = UIBloxModule.App.Bar.HeaderBar
 local utilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
 local sharedFlagsModule = require(parent_1.SharedFlags)
+local fFlagRenameDeprecatedUIBloxTokens = sharedFlagsModule.FFlagRenameDeprecatedUIBloxTokens
 local fFlagEnableConsoleRobloxLogo = sharedFlagsModule.FFlagEnableConsoleRobloxLogo
 local fFlagLuaAppCompositionTopBarFullBleed = sharedFlagsModule.FFlagLuaAppCompositionTopBarFullBleed
 local appHeaderBarUseSizeFull = game:DefineFastFlag("AppHeaderBarUseSizeFull", false)
@@ -20,23 +21,23 @@ local t = {
 	utilitiesGap = UDim.new(0, 0)
 }
 
-local function BarTitle(p0) --[[ line: 39 ]]
-	-- upvalues: useStyle (ref), reactModule (ref), textService (ref), cryoModule (ref)
+local function BarTitle(p0) --[[ line: 40 ]]
+	-- upvalues: useStyle (ref), fFlagRenameDeprecatedUIBloxTokens (ref), reactModule (ref), textService (ref), cryoModule (ref)
 	local tokens = useStyle().Tokens
 	local layoutOrder = p0.layoutOrder
 	local title = p0.title
-	local titleFont = p0.titleFont or tokens.Typography.HeadingLarge
-	local var12 = if p0.onMedia then tokens.Color.Extended.White.White_100 else tokens.Color.Content.Emphasis
+	local titleFont = p0.titleFont or (if fFlagRenameDeprecatedUIBloxTokens then tokens.Typography.HeadingLarge else tokens.Semantic.Typography.Title)
+	local var12 = if p0.onMedia then if fFlagRenameDeprecatedUIBloxTokens then tokens.Color.Extended.White.White_100 else tokens.Global.Color.White elseif fFlagRenameDeprecatedUIBloxTokens then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Text.Emphasis
 	
 	return reactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextWrapped = true,
 		LayoutOrder = layoutOrder,
-		Size = reactModule.useMemo(function() --[[ line: 49 ]]
-			-- upvalues: textService (copy), title (ref), titleFont (ref), tokens (ref)
+		Size = reactModule.useMemo(function() --[[ line: 61 ]]
+			-- upvalues: textService (copy), title (ref), titleFont (ref), fFlagRenameDeprecatedUIBloxTokens (copy), tokens (ref)
 			local var13 = textService:GetTextSize(title, titleFont.FontSize, titleFont.Font, Vector2.new(1e999, 1e999))
 			
-			return UDim2.fromOffset(var13.X + 2, var13.Y + tokens.Size.Size_50 * 2)
+			return UDim2.fromOffset(var13.X + 2, var13.Y + (if fFlagRenameDeprecatedUIBloxTokens then tokens.Size.Size_50 else tokens.Global.Space_25) * 2)
 		end, { title, titleFont.FontSize, titleFont.Font, tokens }),
 		Text = title,
 		Font = titleFont.Font,
@@ -47,13 +48,13 @@ local function BarTitle(p0) --[[ line: 39 ]]
 		TextXAlignment = Enum.TextXAlignment.Left
 	}, cryoModule.Dictionary.join(p0.children or {}, {
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, tokens.Size.Size_50),
-			PaddingBottom = UDim.new(0, tokens.Size.Size_50)
+			PaddingTop = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then tokens.Size.Size_50 else tokens.Global.Space_25),
+			PaddingBottom = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then tokens.Size.Size_50 else tokens.Global.Space_25)
 		})
 	}))
 end
 
-local function useRenderLeft(p1) --[[ line: 79 ]]
+local function useRenderLeft(p1) --[[ line: 101 ]]
 	-- upvalues: reactModule (ref), BarTitle (ref)
 	local renderNavigation = p1.renderNavigation
 	local title = p1.title
@@ -62,7 +63,7 @@ local function useRenderLeft(p1) --[[ line: 79 ]]
 	local isTitleCentered = p1.isTitleCentered
 	local groupTransparencyLeft = p1.groupTransparencyLeft
 	
-	return reactModule.useCallback(function(p2) --[[ line: 87 ]]
+	return reactModule.useCallback(function(p2) --[[ line: 109 ]]
 		-- upvalues: reactModule (copy), groupTransparencyLeft (ref), renderNavigation (ref), title (ref), isTitleCentered (ref), BarTitle (copy), titleFontStyle (ref), onMedia (ref)
 		return reactModule.createElement(if groupTransparencyLeft then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
@@ -91,7 +92,7 @@ local function useRenderLeft(p1) --[[ line: 79 ]]
 	})
 end
 
-local function useRenderCenter(p3) --[[ line: 118 ]]
+local function useRenderCenter(p3) --[[ line: 140 ]]
 	-- upvalues: fFlagEnableConsoleRobloxLogo (ref), reactModule (ref), appHeaderBarUseSizeFull (ref), BarTitle (ref)
 	local renderCenter = p3.renderCenter
 	local title = p3.title
@@ -100,7 +101,7 @@ local function useRenderCenter(p3) --[[ line: 118 ]]
 	local isTitleCentered = p3.isTitleCentered
 	local var14 = if fFlagEnableConsoleRobloxLogo then p3.groupTransparencyCenter else nil
 	
-	return reactModule.useCallback(function() --[[ line: 126 ]]
+	return reactModule.useCallback(function() --[[ line: 148 ]]
 		-- upvalues: renderCenter (ref), fFlagEnableConsoleRobloxLogo (copy), reactModule (copy), var14 (ref), appHeaderBarUseSizeFull (copy), title (ref), isTitleCentered (ref), BarTitle (copy), titleFontStyle (ref), onMedia (ref)
 		return if renderCenter then if fFlagEnableConsoleRobloxLogo then reactModule.createElement(if var14 then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
@@ -119,7 +120,7 @@ local function useRenderCenter(p3) --[[ line: 118 ]]
 	})
 end
 
-local function useRenderRight(p4) --[[ line: 154 ]]
+local function useRenderRight(p4) --[[ line: 176 ]]
 	-- upvalues: reactModule (ref), utilityActionIcon (ref)
 	local renderUserInfo = p4.renderUserInfo
 	local avatarActionIcon = p4.avatarActionIcon
@@ -128,7 +129,7 @@ local function useRenderRight(p4) --[[ line: 154 ]]
 	local utilitiesGap = p4.utilitiesGap
 	local groupTransparencyRight = p4.groupTransparencyRight
 	
-	return reactModule.useCallback(function() --[[ line: 163 ]]
+	return reactModule.useCallback(function() --[[ line: 185 ]]
 		-- upvalues: reactModule (copy), groupTransparencyRight (ref), utilitiesGap (ref), renderUserInfo (ref), avatarActionIcon (ref), utilityActionIcon (copy), searchActionIcon (ref), renderUtilities (ref)
 		return reactModule.createElement(if groupTransparencyRight then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
@@ -164,11 +165,11 @@ local function useRenderRight(p4) --[[ line: 154 ]]
 	})
 end
 
-local function _(p5) --[[ line: 211 | named "shouldRenderRight" ]]
+local function _(p5) --[[ line: 233 | named "shouldRenderRight" ]]
 	return p5.renderUserInfo or p5.avatarActionIcon or (p5.searchActionIcon or p5.renderUtilities)
 end
 
-return function(p6) --[[ line: 223 | named "AppHeaderBarComponent" ]]
+return function(p6) --[[ line: 245 | named "AppHeaderBarComponent" ]]
 	-- upvalues: cryoModule (ref), t (ref), useRenderLeft (ref), useRenderCenter (ref), useRenderRight (ref), reactModule (ref), fFlagLuaAppCompositionTopBarFullBleed (ref), headerBar (ref)
 	local var15 = cryoModule.Dictionary.join(t, p6)
 	local groupTransparency = var15.groupTransparency

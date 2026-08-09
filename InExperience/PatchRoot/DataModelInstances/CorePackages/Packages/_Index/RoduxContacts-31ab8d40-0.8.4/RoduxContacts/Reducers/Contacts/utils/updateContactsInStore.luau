@@ -1,0 +1,21 @@
+﻿local parent = script.Parent.Parent.Parent.Parent
+local types = parent.Types
+local parent_1 = parent.Parent
+local _ = require(types.ActionTypes)
+local _ = require(types.ReducerTypes)
+local dashModule = require(parent_1.Dash)
+
+return function(p0, p1) --[[ line: 8 ]]
+	-- upvalues: dashModule (ref)
+	local t = {}
+	dashModule.forEach(p1.responseBody.userContactsEntities, function(p2) --[[ line: 12 ]]
+		-- upvalues: t (ref)
+		t[p2.id] = {
+			contactName = p2.name,
+			mutualContacts = p2.mutualContacts,
+			avatarAssetHashId = p2.avatarAssetHashId
+		}
+	end)
+	
+	return dashModule.join(p0, t)
+end

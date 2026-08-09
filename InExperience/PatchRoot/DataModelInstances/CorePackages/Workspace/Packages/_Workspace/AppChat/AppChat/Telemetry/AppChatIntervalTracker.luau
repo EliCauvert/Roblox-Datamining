@@ -1,19 +1,12 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local appChatPerf = require(appChat.Logger):new("AppChatPerf")
 local intervalPerformanceTracker = require(appChat.Parent.IntervalPerformanceTracker).IntervalPerformanceTracker
-local appChatPerfEventModule = require(appChat.Telemetry.AppChatPerfEvent)
 local appChatPerfEventInfoModule = require(appChat.Telemetry.AppChatPerfEventInfo)
 local appChatTTITrackerModule = require(appChat.Telemetry.AppChatTTITracker)
-local fFlagAppChatScrollFrameTimeTrackingModule = require(appChat.Flags.FFlagAppChatScrollFrameTimeTracking)
 local list = { "duration", "averageFPS", "longestFrameTime" }
-local list_1 = {
-	"duration", "averageFPS", "framesCount", "longestFrameTime", "frameTimeAvgMs",
-	"frameTimeStdDevMs", "frameTimeDistributionMs", "frameBuckets",
-	"rawFrameTimesMs"
-}
 local t = {}
 
-local function canStartInterval(p0) --[[ line: 53 ]]
+local function canStartInterval(p0) --[[ line: 40 ]]
 	-- upvalues: appChatPerfEventInfoModule (ref), appChatTTITrackerModule (ref)
 	local parentTTI = appChatPerfEventInfoModule.getParentTTI(p0)
 	local TTIPage = appChatPerfEventInfoModule.getTTIPage(parentTTI)
@@ -29,73 +22,68 @@ local function canStartInterval(p0) --[[ line: 53 ]]
 	return true, nil
 end
 
-local function _(p1) --[[ line: 73 | named "getMetricsToTrack" ]]
-	-- upvalues: fFlagAppChatScrollFrameTimeTrackingModule (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref)
-	return if fFlagAppChatScrollFrameTimeTrackingModule and (p1 == appChatPerfEventModule.ScrollConversationList or p1 == appChatPerfEventModule.ScrollMessageList) then list_1 else list
-end
-
 local t_1 = {
-	start = function(p2, _) --[[ line: 89 ]]
-		-- upvalues: appChatPerfEventInfoModule (ref), canStartInterval (ref), appChatPerf (ref), intervalPerformanceTracker (ref), fFlagAppChatScrollFrameTimeTrackingModule (ref), appChatPerfEventModule (ref), list_1 (ref), list (ref), t (ref)
-		local intervalName = appChatPerfEventInfoModule.getIntervalName(p2)
-		local var15, var16 = canStartInterval(p2)
+	start = function(p1, _) --[[ line: 66 ]]
+		-- upvalues: appChatPerfEventInfoModule (ref), canStartInterval (ref), appChatPerf (ref), intervalPerformanceTracker (ref), list (ref), t (ref)
+		local intervalName = appChatPerfEventInfoModule.getIntervalName(p1)
+		local var12, var13 = canStartInterval(p1)
 		
-		if not var15 then
-			appChatPerf:debug("Perf start ignored: {} (reason={})", p2, var16 or "unknown")
+		if var12 then
+			appChatPerf:debug("Interval Start: {}", intervalName)
+			intervalPerformanceTracker:startTracking(intervalName, nil, list, true, true)
+			t[p1] = true
 			
-			return false
+			return true
 		end
-		appChatPerf:debug("Interval Start: {}", intervalName)
-		intervalPerformanceTracker:startTracking(intervalName, nil, if fFlagAppChatScrollFrameTimeTrackingModule and (p2 == appChatPerfEventModule.ScrollConversationList or p2 == appChatPerfEventModule.ScrollMessageList) then list_1 else list, true, true)
-		t[p2] = true
+		appChatPerf:debug("Perf start ignored: {} (reason={})", p1, var13 or "unknown")
 		
-		return true
+		return false
 	end,
-	finish = function(p3) --[[ line: 110 ]]
+	finish = function(p2) --[[ line: 87 ]]
+		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
+		local intervalName = appChatPerfEventInfoModule.getIntervalName(p2)
+		
+		if t[p2] then
+			appChatPerf:debug("Interval Stop: {}", intervalName)
+			intervalPerformanceTracker:stopAndLogTracking(intervalName)
+			t[p2] = false
+			
+			return true
+		end
+		return false
+	end,
+	cancel = function(p3) --[[ line: 98 ]]
 		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
 		local intervalName = appChatPerfEventInfoModule.getIntervalName(p3)
 		
 		if t[p3] then
-			appChatPerf:debug("Interval Stop: {}", intervalName)
-			intervalPerformanceTracker:stopAndLogTracking(intervalName)
+			appChatPerf:debug("Interval Cancel: {}", intervalName)
+			intervalPerformanceTracker:cancelTracking(intervalName)
 			t[p3] = false
 			
 			return true
 		end
 		return false
 	end,
-	cancel = function(p4) --[[ line: 121 ]]
-		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
-		local intervalName = appChatPerfEventInfoModule.getIntervalName(p4)
-		
-		if t[p4] then
-			appChatPerf:debug("Interval Cancel: {}", intervalName)
-			intervalPerformanceTracker:cancelTracking(intervalName)
-			t[p4] = false
-			
-			return true
-		end
-		return false
-	end,
-	isActive = function(p5) --[[ line: 132 ]]
+	isActive = function(p4) --[[ line: 109 ]]
 		-- upvalues: t (ref)
-		return t[p5] == true
+		return t[p4] == true
 	end,
-	cancelIntervalsForTTI = function(p6, p7) --[[ line: 138 ]]
+	cancelIntervalsForTTI = function(p5, p6) --[[ line: 115 ]]
 		-- upvalues: appChatPerfEventInfoModule (ref), t (ref), appChatPerf (ref), intervalPerformanceTracker (ref)
-		for i, v in appChatPerfEventInfoModule.getIntervalsForTTI(p6) do
+		for i, v in appChatPerfEventInfoModule.getIntervalsForTTI(p5) do
 			if t[v] then
 				local intervalName = appChatPerfEventInfoModule.getIntervalName(v)
-				appChatPerf:debug("Canceling interval ({}): {}", p7, intervalName)
+				appChatPerf:debug("Canceling interval ({}): {}", p6, intervalName)
 				intervalPerformanceTracker:cancelTracking(intervalName)
 				t[v] = false
 			end
 		end
 	end
 }
-appChatTTITrackerModule.setOnConversationSwitch(function(p8) --[[ line: 151 ]]
+appChatTTITrackerModule.setOnConversationSwitch(function(p7) --[[ line: 128 ]]
 	-- upvalues: t_1 (ref)
-	t_1.cancelIntervalsForTTI(p8, "conversation_switch")
+	t_1.cancelIntervalsForTTI(p7, "conversation_switch")
 end)
 
 return t_1

@@ -5,24 +5,22 @@ local luaSocialLibrariesDepsModule = require(parent_1.LuaSocialLibrariesDeps)
 local httpRequest = luaSocialLibrariesDepsModule.httpRequest
 local friendsCarousel = require(parent_1.Loggers).Logger:new("FriendsCarousel")
 local var3 = friendsCarousel:new("FriendsCarousel Networking")
-local friendsCarouselHttpRetryCount = game:DefineFastInt("FriendsCarouselHttpRetryCount", 3)
 local getFFlagMigrateSocialNetworking = require(parent_1.SharedFlags).getFFlagMigrateSocialNetworking
-local fFlagFriendsCarouselDeprecateUnusedReducers = require(parent_1.SharedFlags).FFlagFriendsCarouselDeprecateUnusedReducers
 local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
-local var5 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
+local var4 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = RODUX_KEY .. ".NetworkStatus",
 	networkImpl = httpRequest.config({
-		requestFunction = function(p0, p1, p2) --[[ line: 20 ]]
+		requestFunction = function(p0, p1, p2) --[[ line: 18 ]]
 			-- upvalues: var3 (ref), getFFlagMigrateSocialNetworking (ref), httpRequest (ref)
 			var3:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p1, p0))
 			
 			return if getFFlagMigrateSocialNetworking() then httpRequest.requestFunctions.RequestInternal(p0, p1, p2) else httpRequest.requestFunctions.HttpRbxApi(p0, p1, p2)
 		end,
-		postRequestFunction = function(p3, p4) --[[ line: 28 ]]
+		postRequestFunction = function(p3, p4) --[[ line: 26 ]]
 			-- upvalues: var3 (ref)
 			var3:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p4.requestMethod, p4.url, p3.StatusCode))
 		end,
-		maxRetryCount = friendsCarouselHttpRetryCount
+		maxRetryCount = game:DefineFastInt("FriendsCarouselHttpRetryCount", 3)
 	})
 })
 local _ = require(parent_1.RobloxAppHooks)
@@ -41,13 +39,13 @@ return {
 	llama = luaSocialLibrariesDepsModule.llama,
 	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
 	SocialCommon = require(parent_1.SocialCommon),
-	RoduxNetworking = var5,
-	NetworkingFriends = require(parent_1.FriendsNetworking).config({ roduxNetworking = var5 }),
-	NetworkingAliases = luaSocialLibrariesDepsModule.NetworkingAliases.config({ roduxNetworking = var5 }),
-	RoduxUsers = if fFlagFriendsCarouselDeprecateUnusedReducers then nil else luaSocialLibrariesDepsModule.RoduxUsers.config({ keyPath = RODUX_KEY .. ".Users" }),
+	RoduxNetworking = var4,
+	NetworkingFriends = require(parent_1.FriendsNetworking).config({ roduxNetworking = var4 }),
+	NetworkingAliases = luaSocialLibrariesDepsModule.NetworkingAliases.config({ roduxNetworking = var4 }),
+	RoduxUsers = luaSocialLibrariesDepsModule.RoduxUsers.config({ keyPath = RODUX_KEY .. ".Users" }),
 	RoduxFriends = require(parent_1.FriendsRodux).config({ keyPath = RODUX_KEY .. ".Friends" }),
-	RoduxPresence = if fFlagFriendsCarouselDeprecateUnusedReducers then nil else luaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = RODUX_KEY .. ".Presence" }),
-	RoduxUserPermissions = if fFlagFriendsCarouselDeprecateUnusedReducers then nil else luaSocialLibrariesDepsModule.RoduxUserPermissions.config({ keyPath = RODUX_KEY .. ".UserPermissions" }),
+	RoduxPresence = luaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = RODUX_KEY .. ".Presence" }),
+	RoduxUserPermissions = luaSocialLibrariesDepsModule.RoduxUserPermissions.config({ keyPath = RODUX_KEY .. ".UserPermissions" }),
 	RoduxAnalytics = socialLuaAnalyticsModule.Analytics.RoduxAnalytics.config({ keyPath = RODUX_KEY .. ".Analytics" }),
 	convertActions = require(parent_1.SocialReducerAdaptors).convertActions,
 	usersActionAdaptor = require(parent_1.SocialReducerAdaptors).usersActionAdaptor,

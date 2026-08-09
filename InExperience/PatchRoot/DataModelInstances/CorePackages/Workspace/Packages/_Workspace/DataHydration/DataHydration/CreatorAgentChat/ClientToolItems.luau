@@ -4,16 +4,16 @@ local studioProposePlanToolModule = require(script.Parent.StudioProposePlanTool)
 local subagentTasksModule = require(script.Parent.SubagentTasks)
 
 return {
-	getAskItemKey = function(p0, p1) --[[ line: 12 ]]
+	getAskItemKey = function(p0, p1) --[[ line: 14 ]]
 		return `ask-{p0.toolCallId or p0.question.id}-{p0.question.id}-{p1}`
 	end,
-	getPlanItemKey = function(p2) --[[ line: 16 ]]
+	getPlanItemKey = function(p2) --[[ line: 18 ]]
 		return `plan-{p2.toolCallId or p2.title}`
 	end,
-	getSubagentTasksItemKey = function() --[[ line: 20 ]]
+	getSubagentTasksItemKey = function() --[[ line: 22 ]]
 		return "subagent-tasks"
 	end,
-	getSubagentTasksCallOrder = function(p3) --[[ line: 24 ]]
+	getSubagentTasksCallOrder = function(p3) --[[ line: 26 ]]
 		-- upvalues: subagentTasksModule (ref)
 		for i, v in p3.activityItems do
 			if v.kind == "tool_call" and v.title == subagentTasksModule.TOOL_NAME then
@@ -22,14 +22,14 @@ return {
 		end
 		return 0
 	end,
-	sortClientToolItems = function(p4) --[[ line: 33 ]]
-		table.sort(p4, function(p5, p6) --[[ line: 34 ]]
+	sortClientToolItems = function(p4) --[[ line: 35 ]]
+		table.sort(p4, function(p5, p6) --[[ line: 36 ]]
 			return if p5.callOrder == p6.callOrder then p5.key < p6.key else p5.callOrder < p6.callOrder
 		end)
 		
 		return p4
 	end,
-	makeAskItem = function(p7, p8, p9, p10) --[[ line: 43 ]]
+	makeAskItem = function(p7, p8, p9, p10) --[[ line: 45 ]]
 		return {
 			kind = "ask_user",
 			key = `ask-{p7.toolCallId or p7.question.id}-{p7.question.id}-{p8}`,
@@ -40,7 +40,7 @@ return {
 			onAnswerSelected = if p9 then p10 else nil
 		}
 	end,
-	makePlanItem = function(p11, p12, p13) --[[ line: 60 ]]
+	makePlanItem = function(p11, p12, p13) --[[ line: 62 ]]
 		return {
 			kind = "plan",
 			key = `plan-{p11.toolCallId or p11.title}`,
@@ -51,7 +51,7 @@ return {
 			onPlanAccepted = if p12 then p13 else nil
 		}
 	end,
-	makeSubagentTasksItem = function(p14, p15, p16) --[[ line: 72 ]]
+	makeSubagentTasksItem = function(p14, p15, p16) --[[ line: 74 ]]
 		return {
 			kind = "subagent_tasks",
 			toolCallId = nil,
@@ -61,7 +61,7 @@ return {
 			subagentTaskState = p14
 		}
 	end,
-	getCompletedItemsFromTurnState = function(p17) --[[ line: 83 ]]
+	getCompletedItemsFromTurnState = function(p17) --[[ line: 85 ]]
 		-- upvalues: studioAskUserToolModule (ref), studioProposePlanToolModule (ref), subagentTasksModule (ref)
 		local t = {}
 		
@@ -106,7 +106,7 @@ return {
 			end
 			var5 = 0
 		end
-		table.sort(t, function(p18, p19) --[[ line: 34 ]]
+		table.sort(t, function(p18, p19) --[[ line: 36 ]]
 			return if p18.callOrder == p19.callOrder then p18.key < p19.key else p18.callOrder < p19.callOrder
 		end)
 		

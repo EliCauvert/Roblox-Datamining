@@ -9,10 +9,10 @@ local robloxAppLocalesModule = require(parent.RobloxAppLocales)
 local foundationProvider = foundationModule.FoundationProvider
 local localizationProvider = localizationModule.LocalizationProvider
 local device = foundationModule.Enums.Device
-local colorMode = foundationModule.Enums.ColorMode
+local theme = foundationModule.Enums.Theme
 local localization = robloxAppLocalesModule.Localization
 local useStyleSheet = foundationModule.Hooks.useStyleSheet
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
+local t = { Light = theme.Light, Dark = theme.Dark }
 local t_1 = { Console = device.Console, Desktop = device.Desktop }
 
 local function StyleLinkPortal(p0) --[[ line: 29 ]]
@@ -46,7 +46,7 @@ return {
 				end, {})
 			}, {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
-					colorMode = t[p2.theme],
+					theme = t[p2.theme],
 					device = t_1[p2.platform],
 					preferences = p2.settings,
 					overlayGui = var10.current

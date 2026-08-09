@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("WhatsNew").Parent.Signals).createComputed(require(script.createWhatsNewStore))

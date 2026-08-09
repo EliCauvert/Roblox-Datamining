@@ -31,7 +31,7 @@ return function(p0, p1) --[[ line: 33 ]]
 	local userRelationshipModalOverlay = Instance.new("ScreenGui")
 	userRelationshipModalOverlay.Parent = userRelationshipModal
 	userRelationshipModalOverlay.Name = "UserRelationshipModalOverlay"
-	userRelationshipModalOverlay.DisplayOrder = -1
+	userRelationshipModalOverlay.DisplayOrder = 1
 	userRelationshipModalOverlay.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	userRelationshipModalOverlay.Enabled = true
 	userRelationshipModalOverlay.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
@@ -48,7 +48,7 @@ return function(p0, p1) --[[ line: 33 ]]
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, {
-			colorMode = foundationModule.Enums.ColorMode.Dark,
+			theme = foundationModule.Enums.Theme.Dark,
 			overlayGui = userRelationshipModalOverlay
 		}, {
 			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {

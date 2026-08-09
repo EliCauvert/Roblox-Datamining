@@ -1,7 +1,7 @@
 ﻿local guiService = game:GetService("GuiService")
 local runService = game:GetService("RunService")
 
-return function(p0) --[[ line: 10 | named "leaveExperience" ]]
+return function(p0) --[[ line: 11 | named "leaveExperience" ]]
 	-- upvalues: guiService (ref), runService (ref)
 	guiService.SelectedCoreObject = nil
 	runService.RenderStepped:Wait()

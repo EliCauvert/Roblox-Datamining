@@ -1,7 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
 local _ = require(foundation.Providers.Preferences.PreferencesProvider)
+local _ = require(foundation.Enums.Theme)
 
 return {
 	toDeveloperStorybookStoryProps = function(p0) --[[ line: 22 ]]

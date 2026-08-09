@@ -7,7 +7,6 @@ local music = creationFlowStateModule.Music
 local textOverlay = creationFlowStateModule.TextOverlay
 local trimming = creationFlowStateModule.Trimming
 local description = creationFlowStateModule.Description
-local stickerOverlay = creationFlowStateModule.StickerOverlay
 local t = {
 	[gallery] = { [preview] = true },
 	[preview] = {
@@ -15,23 +14,21 @@ local t = {
 		[trimming] = true,
 		[music] = true,
 		[textOverlay] = true,
-		[description] = true,
-		[stickerOverlay] = true
+		[description] = true
 	},
 	[trimming] = { [preview] = true },
 	[music] = { [preview] = true },
 	[textOverlay] = { [preview] = true },
-	[description] = { [preview] = true },
-	[stickerOverlay] = { [preview] = true }
+	[description] = { [preview] = true }
 }
 
-return function(p0) --[[ line: 58 | named "createNavigationMachine" ]]
+return function(p0) --[[ line: 55 | named "createNavigationMachine" ]]
 	-- upvalues: createSignal (ref), gallery (ref), t (ref)
 	local var3, var4 = createSignal(p0 or gallery)
 	
 	return {
 		getStep = var3,
-		canNavigate = function(p1) --[[ line: 61 ]]
+		canNavigate = function(p1) --[[ line: 58 ]]
 			-- upvalues: var3 (ref), t (copy)
 			local var5 = var3(false)
 			
@@ -42,7 +39,7 @@ return function(p0) --[[ line: 58 | named "createNavigationMachine" ]]
 			
 			return var6 ~= nil and var6[p1] == true
 		end,
-		navigate = function(p2) --[[ line: 70 ]]
+		navigate = function(p2) --[[ line: 67 ]]
 			-- upvalues: var3 (ref), t (copy), var4 (ref)
 			local var8
 			local var7 = var3(false)
@@ -60,7 +57,7 @@ return function(p0) --[[ line: 58 | named "createNavigationMachine" ]]
 			end
 			return false
 		end,
-		reset = function(value) --[[ line: 80 ]]
+		reset = function(value) --[[ line: 77 ]]
 			-- upvalues: var4 (ref)
 			var4(value)
 		end

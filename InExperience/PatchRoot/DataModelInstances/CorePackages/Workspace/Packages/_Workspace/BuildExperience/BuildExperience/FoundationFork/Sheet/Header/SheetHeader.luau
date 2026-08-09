@@ -7,65 +7,80 @@ local sheetTypeModule = require(sheet.SheetType)
 local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
 local viewModule = require(foundation.Components.View)
+local flagsModule = require(foundation.Utility.Flags)
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 | named "SheetHeader" ]]
-	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), sheetTypeModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref)
-	local var8 = useTokensModule()
-	local var9 = reactModule.useContext(sheetContextModule)
-	local innerScrollY = var9.innerScrollY
-	local setHasHeader = var9.setHasHeader
-	local hasFullBleed = var9.hasFullBleed
-	local sheetType = var9.sheetType
-	local closeSheet = var9.closeSheet
-	local testId = var9.testId
-	local closeAffordanceRef = var9.closeAffordanceRef
-	local contentStartRef = var9.contentStartRef
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 21 | named "SheetHeader" ]]
+	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), flagsModule (ref), sheetTypeModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref)
+	local var18
+	local var9 = useTokensModule()
+	local var10 = reactModule.useContext(sheetContextModule)
+	local innerScrollY = var10.innerScrollY
+	local setHasHeader = var10.setHasHeader
+	local var11 = if flagsModule.FoundationSheetFullBleed then var10.hasFullBleed else nil
+	local sheetType = var10.sheetType
+	local closeSheet = var10.closeSheet
+	local testId = var10.testId
+	local closeAffordanceRef = var10.closeAffordanceRef
+	local contentStartRef = var10.contentStartRef
 	assert(innerScrollY and (setHasHeader and (closeSheet and testId)), "SheetHeader must be used within a Sheet")
-	local var10 = sheetType == sheetTypeModule.Bottom
-	reactModule.useEffect(function() --[[ line: 35 ]]
+	local var12 = sheetType == sheetTypeModule.Bottom
+	reactModule.useEffect(function() --[[ line: 37 ]]
 		-- upvalues: setHasHeader (ref)
 		setHasHeader(true)
 		
-		return function() --[[ line: 37 ]]
+		return function() --[[ line: 39 ]]
 			-- upvalues: setHasHeader (copy)
 			setHasHeader(false)
 		end
 	end, {})
-	
-	return reactModule.createElement(viewModule, {
+	local var13 = if p0.hasCloseAffordance == nil then not var12 else p0.hasCloseAffordance
+	local createElement = reactModule.createElement
+	local t = {
 		ZIndex = 2,
 		tag = "col size-full-0 auto-y",
 		testId = `{testId}--header`,
 		ref = p1
-	}, {
-		Content = reactModule.createElement(viewModule, {
+	}
+	local t_1 = {}
+	local createElement_1 = reactModule.createElement
+	local t_2 = {
+		LayoutOrder = 1,
+		tag = "row align-y-center items-center gap-small size-full-1400 auto-y margin-left-small padding-y-small padding-right-medium"
+	}
+	local t_3 = {
+		SubContent = reactModule.createElement(viewModule, {
 			LayoutOrder = 1,
-			tag = "row align-y-center items-center gap-small size-full-1400 auto-y margin-left-small padding-y-small padding-right-medium"
-		}, {
-			SubContent = reactModule.createElement(viewModule, {
-				LayoutOrder = 1,
-				tag = "row items-center shrink gap-small size-full-0 auto-y"
-			}, p0.children),
-			CloseAffordance = if if p0.hasCloseAffordance == nil then not var10 else p0.hasCloseAffordance then reactModule.createElement(closeAffordanceModule, {
-				LayoutOrder = 2,
-				onActivated = closeSheet,
-				ref = closeAffordanceRef,
-				NextSelectionDown = contentStartRef,
-				variant = if hasFullBleed then closeAffordanceVariantModule.OverMedia else closeAffordanceVariantModule.Utility,
-				testId = `{testId}--header--close-affordance`
-			}) else nil
-		}),
-		BottomBorder = reactModule.createElement(viewModule, {
+			tag = "row items-center shrink gap-small size-full-0 auto-y"
+		}, p0.children)
+	}
+	
+	if var13 then
+		var18 = reactModule.createElement
+		var18 = var18(closeAffordanceModule, {
 			LayoutOrder = 2,
-			backgroundStyle = innerScrollY:map(function(p2) --[[ line: 71 ]]
-				-- upvalues: var8 (ref)
-				return {
-					Color3 = var8.Color.Stroke.Default.Color3,
-					Transparency = math.lerp(1, var8.Color.Stroke.Default.Transparency, math.clamp(p2 / var8.Size.Size_1200, 0, 1))
-				}
-			end),
-			testId = `{testId}--header--bottom-border`,
-			Size = UDim2.new(1, 0, 0, var8.Stroke.Standard)
+			onActivated = closeSheet,
+			ref = closeAffordanceRef,
+			NextSelectionDown = contentStartRef,
+			variant = if flagsModule.FoundationSheetFullBleed and var11 then closeAffordanceVariantModule.OverMedia else closeAffordanceVariantModule.Utility,
+			testId = `{testId}--header--close-affordance`
 		})
+	else
+		var18 = nil
+	end
+	t_3.CloseAffordance = var18
+	t_1.Content = createElement_1(viewModule, t_2, t_3)
+	t_1.BottomBorder = reactModule.createElement(viewModule, {
+		LayoutOrder = 2,
+		backgroundStyle = innerScrollY:map(function(p2) --[[ line: 75 ]]
+			-- upvalues: var9 (ref)
+			return {
+				Color3 = var9.Color.Stroke.Default.Color3,
+				Transparency = math.lerp(1, var9.Color.Stroke.Default.Transparency, math.clamp(p2 / var9.Size.Size_1200, 0, 1))
+			}
+		end),
+		testId = `{testId}--header--bottom-border`,
+		Size = UDim2.new(1, 0, 0, var9.Stroke.Standard)
 	})
+	
+	return createElement(viewModule, t, t_1)
 end))

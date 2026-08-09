@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFixCycloramaOrphanRemount", false) and require(script.Parent.FFlagAXBackgroundCycloramaRendering)

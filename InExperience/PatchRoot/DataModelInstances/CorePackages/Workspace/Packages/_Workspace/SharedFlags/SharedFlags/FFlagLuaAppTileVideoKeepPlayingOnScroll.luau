@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppTileVideoKeepPlayingOnScroll", false)
+﻿return game:DefineFastFlag("LuaAppTileVideoKeepPlayingOnScroll", false) and require(script.Parent.FFlagLuaAppHomeTouchAutoplay)

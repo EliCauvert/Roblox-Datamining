@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("PeopleServicePerUserVoiceVolumeSessionThrottleHundredthsPercent", 10000)

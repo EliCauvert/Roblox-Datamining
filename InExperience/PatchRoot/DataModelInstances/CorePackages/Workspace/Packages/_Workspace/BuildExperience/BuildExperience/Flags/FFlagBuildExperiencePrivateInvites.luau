@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildExperiencePrivateInvites", false)

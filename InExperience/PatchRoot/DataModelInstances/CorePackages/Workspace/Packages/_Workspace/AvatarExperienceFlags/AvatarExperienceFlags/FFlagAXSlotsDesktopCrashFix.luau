@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXSlotsDesktopCrashFix", false) and require(script.Parent.FFlagAXRootSlotBasedEditorFlag)

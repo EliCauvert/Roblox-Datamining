@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSponsoredAdViewabilityEnabled", false)
+﻿return game:DefineFastFlag("LuaAppSponsoredAdViewabilityEnabledDev", false)

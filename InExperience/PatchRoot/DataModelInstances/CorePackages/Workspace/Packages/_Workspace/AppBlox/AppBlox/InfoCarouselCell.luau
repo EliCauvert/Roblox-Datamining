@@ -2,14 +2,15 @@
 local reactModule = require(parent.React)
 local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
 local useDesignTokens = require(parent.Style).useDesignTokens
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 
-return function(p0) --[[ line: 23 ]]
-	-- upvalues: useDesignTokens (ref), reactModule (ref), imageSetLabel (ref)
+return function(p0) --[[ line: 25 ]]
+	-- upvalues: useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), reactModule (ref), imageSetLabel (ref)
 	local var1 = useDesignTokens()
 	local padding = p0.padding or var1.Size.Size_100
 	local iconSize = p0.iconSize or 18
 	local font = var1.Typography.BodyLarge.Font
-	local fontSize350 = var1.FontSize.FontSize_350
+	local var4 = if fFlagRenameDeprecatedUIBloxTokens then var1.FontSize.FontSize_350 else var1.FontSize.FontSize_300
 	local default = var1.Color.Content.Default
 	local emphasis = var1.Color.Content.Emphasis
 	local textLabel = reactModule.createElement("TextLabel", {
@@ -44,7 +45,7 @@ return function(p0) --[[ line: 23 ]]
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Text = p0.headerText,
 			Font = font,
-			TextSize = fontSize350,
+			TextSize = var4,
 			TextColor3 = default.Color3,
 			TextTransparency = default.Transparency,
 			TextYAlignment = Enum.TextYAlignment.Center

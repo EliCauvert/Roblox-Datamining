@@ -1,9 +1,8 @@
 ﻿local cartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
-local fFlagPurchasePromptFixOfferMarginUpsell = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell
 local _ = require(script.Parent.Parent.PricingTypes)
 
-return function(p0) --[[ line: 47 | named "deriveCartPricingView" ]]
-	-- upvalues: cartPricingResponseLineItemModule (ref), fFlagPurchasePromptFixOfferMarginUpsell (ref)
+return function(p0) --[[ line: 38 | named "deriveCartPricingView" ]]
+	-- upvalues: cartPricingResponseLineItemModule (ref)
 	if type(p0) ~= "table" then
 		return nil
 	end
@@ -44,7 +43,6 @@ return function(p0) --[[ line: 47 | named "deriveCartPricingView" ]]
 	return {
 		priceAfterDiscount = var1,
 		originalPrice = var2,
-		priceWithoutOffersDiscounts = if fFlagPurchasePromptFixOfferMarginUpsell then cartPricingResponseLineItemModule.computePriceWithoutOffersDiscounts(items, var1) else nil,
 		hasSavings = var1 < var2,
 		itemCount = #items,
 		discounts = cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items),

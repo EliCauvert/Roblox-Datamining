@@ -11,7 +11,6 @@ return {
 		useExpChatMessagesReducerSlice = require(script.useExpChatMessagesReducerSlice)
 	},
 	isUserChatEnabled = require(script.isUserChatEnabled),
-	requestSelectTab = require(script.requestSelectTab),
 	shouldSuppressUnreadForTabMetadata = require(script.shouldSuppressUnreadForTabMetadata),
 	ExpChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker,
 	["jest.config"] = script["jest.config"],

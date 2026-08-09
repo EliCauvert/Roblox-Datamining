@@ -1,5 +1,4 @@
 ﻿return {
-	["jest.config"] = script["jest.config"],
 	AppAppLifecycleObserverService = require(script.AppAppLifecycleObserverService),
 	AppBrowserService = require(script.AppBrowserService),
 	AppContentProvider = require(script.AppContentProvider),
@@ -11,7 +10,6 @@
 	AppNotificationService = require(script.AppNotificationService),
 	AppOmniRecommendationsRequest = require(script.AppOmniRecommendationsRequest),
 	AppPermissions = require(script.AppPermissions),
-	AppPinShortcutService = require(script.AppPinShortcutService),
 	AppPrefetch = require(script.AppPrefetch),
 	AppRunService = require(script.AppRunService),
 	AppSessionService = require(script.AppSessionService),

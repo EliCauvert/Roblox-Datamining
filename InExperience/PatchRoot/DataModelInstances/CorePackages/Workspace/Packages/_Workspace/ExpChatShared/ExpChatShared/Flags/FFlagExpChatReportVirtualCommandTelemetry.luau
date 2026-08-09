@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatReportVirtualCommandTelemetry", false) and game:GetEngineFeature("ExpChatSendTextChatCommandClientSent")

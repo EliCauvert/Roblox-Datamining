@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagLuaAppEdpConsoleMediaGalleryVideo) and game:DefineFastFlag("LuaAppEdpConsoleMediaGalleryVideoMute", false)

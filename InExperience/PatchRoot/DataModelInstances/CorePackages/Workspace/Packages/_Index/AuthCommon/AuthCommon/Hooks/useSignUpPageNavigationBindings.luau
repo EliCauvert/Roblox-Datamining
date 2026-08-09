@@ -18,7 +18,7 @@ return function(value) --[[ line: 20 | named "useSignUpPageNavigationBindings" ]
 		-- upvalues: value (ref)
 		p0:cancel()
 		
-		if p0.eventData and p0.eventData.KeyCode == Enum.KeyCode.None then return end
+		if p0.eventData and p0.eventData.KeyCode == Enum.KeyCode.Unknown then return end
 		if value then
 			value()
 		end

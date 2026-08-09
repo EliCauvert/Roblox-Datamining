@@ -5,7 +5,6 @@ local enumScreensModule = require(appChat.EnumScreens)
 local chatLandingScreenModule = require(appChat.Components.ChatLanding.ChatLandingScreen)
 local chatConversationScreenModule = require(appChat.Components.ChatConversation.ChatConversationScreen)
 local chatDetailsScreenModule = require(appChat.Components.ChatDetails.ChatDetailsScreen)
-local chatDetailsNavigationOptionsModule = require(appChat.Components.ChatDetails.ChatDetailsNavigationOptions)
 local createNewChatScreenModule = require(appChat.Components.CreateNewChat.CreateNewChatScreen)
 local editChatMembersScreenModule = require(appChat.Components.EditChatMembers.EditChatMembersScreen)
 local squadInviteFriendsScreenModule = require(appChat.Components.Squads.SquadInviteFriendsScreen)
@@ -17,7 +16,7 @@ local list = {
 	{
 		[enumScreensModule.ChatLanding] = {
 			screen = chatLandingScreenModule,
-			navigationOptions = if require(appChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function() --[[ line: 34 ]]
+			navigationOptions = if require(appChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function() --[[ line: 26 ]]
 				return {
 					isRoot = true,
 					backButtonEnabled = false,
@@ -44,10 +43,7 @@ local list = {
 	{
 		[enumScreensModule.ChatDetails] = {
 			screen = chatDetailsScreenModule,
-			navigationOptions = if require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)() then function(p0) --[[ line: 23 | named "getChatDetailsNavigationOptions" ]]
-				-- upvalues: chatDetailsNavigationOptionsModule (ref)
-				return chatDetailsNavigationOptionsModule.getNavigationOptions(p0, { tabBarVisible = false })
-			end else { backButtonEnabled = true, tabBarVisible = false }
+			navigationOptions = { backButtonEnabled = true, tabBarVisible = false }
 		}
 	},
 	{

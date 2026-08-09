@@ -8,17 +8,15 @@ local createDataResolverModule = require(dataHydration.createDataResolver)
 local _ = require(dataHydration.DataHydrationTypes)
 local fetchAgeRecommendationModule = require(script.Parent.fetchAgeRecommendation)
 local ageRecommendationStoreTypesModule = require(script.Parent.AgeRecommendationStoreTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
-local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
+local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 
-return function() --[[ line: 20 | named "createAgeRecommendationStore" ]]
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchAgeRecommendationModule (ref), ageRecommendationStoreTypesModule (ref), fFlagShowGameAgeRating (ref), fFlagSduiExperienceDetailsSupport (ref)
-	local var7 = createDataCacheModule()
-	local var8 = createDataResolverModule({
+return function() --[[ line: 18 | named "createAgeRecommendationStore" ]]
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), logResponseError (ref), discoveryEventErrorLogger (ref), fetchAgeRecommendationModule (ref), ageRecommendationStoreTypesModule (ref), fFlagSduiExperienceDetailsSupport (ref)
+	local var6 = createDataCacheModule()
+	local var7 = createDataResolverModule({
 		requestBatchSize = 1,
-		cache = var7,
-		logError = function(p0) --[[ line: 27 ]]
+		cache = var6,
+		logError = function(p0) --[[ line: 25 ]]
 			-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy)
 			if type(p0) == "table" then
 				if p0.responseCode then
@@ -33,66 +31,59 @@ return function() --[[ line: 20 | named "createAgeRecommendationStore" ]]
 				discoveryEventErrorLogger.reportError("FetchAgeRecommendationError", tostring(p0))
 			end
 		end,
-		fetchFn = function(p1) --[[ line: 47 ]]
-			-- upvalues: fetchAgeRecommendationModule (copy), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
-			local var9 = next(p1)
+		fetchFn = function(p1) --[[ line: 45 ]]
+			-- upvalues: fetchAgeRecommendationModule (copy), ageRecommendationStoreTypesModule (copy), fFlagSduiExperienceDetailsSupport (copy)
+			local var8 = next(p1)
 			
-			if not var9 then
+			if not var8 then
 				error({
 					errorType = "CreateAgeRecommendationStoreMissingUniverseId",
 					errorMessage = "CreateAgeRecommendationStore requires universeId",
-					customFields = { universeId = var9 }
+					customFields = { universeId = var8 }
 				})
 			end
-			return fetchAgeRecommendationModule(var9):andThen(function(p3) --[[ line: 59 ]]
-				-- upvalues: var9 (ref), ageRecommendationStoreTypesModule (copy), fFlagShowGameAgeRating (copy), fFlagSduiExperienceDetailsSupport (copy)
+			return fetchAgeRecommendationModule(var8):andThen(function(p3) --[[ line: 57 ]]
+				-- upvalues: var8 (ref), ageRecommendationStoreTypesModule (copy), fFlagSduiExperienceDetailsSupport (copy)
 				if not p3 or not p3.responseBody then
 					error({
 						errorType = "FetchAgeRecommendationResponseError",
 						responseCode = p3 and p3.responseCode,
 						errorMessage = if p3 then "Missing response body" else "No response",
-						customFields = { universeId = var9 }
+						customFields = { universeId = var8 }
 					})
 				end
-				local var10, var11 = ageRecommendationStoreTypesModule.ageRecommendationResponseValidator(p3.responseBody)
+				local var9, var10 = ageRecommendationStoreTypesModule.ageRecommendationResponseValidator(p3.responseBody)
 				
-				if not var10 then
+				if not var9 then
 					error({
 						errorType = "FetchAgeRecommendationResponseInvalidInterface",
 						responseCode = p3.responseCode,
-						errorMessage = var11,
-						customFields = { universeId = var9 }
+						errorMessage = var10,
+						customFields = { universeId = var8 }
 					})
 				end
 				local t = {}
 				local ageRecommendation = p3.responseBody.ageRecommendationDetails.summary.ageRecommendation
-				
-				if fFlagShowGameAgeRating and not ageRecommendation then
-					t[var9] = {}
-					
-					return t
-				end
-				t[var9] = {
+				t[var8] = {
 					displayName = ageRecommendation.displayName,
 					displayNameWithHeaderShort = ageRecommendation.displayNameWithHeaderShort,
-					minimumAgeDisplay = if fFlagShowGameAgeRating then ageRecommendation.minimumAgeDisplay else nil,
 					igrsRating = if fFlagSduiExperienceDetailsSupport then ageRecommendation.igrsRating else nil,
 					igrsRatingDisplayMessage = if fFlagSduiExperienceDetailsSupport then ageRecommendation.igrsRatingDisplayMessage else nil
 				}
 				
 				return t
-			end):catch(function(p2) --[[ line: 104 ]]
+			end):catch(function(p2) --[[ line: 94 ]]
 				error(p2)
 			end)
 		end
 	})
 	
 	return {
-		fetchAgeRecommendation = var8.fetchItem,
-		getAgeRecommendation = var8.getCachedItem,
-		getAndFetchAgeRecommendation = var8.getAndFetchItem,
-		updateAgeRecommendations = if fFlagSduiExperienceDetailsSupport then var7.updateItems else nil,
-		clear = var8.clear,
-		dispose = var8.dispose
+		fetchAgeRecommendation = var7.fetchItem,
+		getAgeRecommendation = var7.getCachedItem,
+		getAndFetchAgeRecommendation = var7.getAndFetchItem,
+		updateAgeRecommendations = if fFlagSduiExperienceDetailsSupport then var6.updateItems else nil,
+		clear = var7.clear,
+		dispose = var7.dispose
 	}
 end

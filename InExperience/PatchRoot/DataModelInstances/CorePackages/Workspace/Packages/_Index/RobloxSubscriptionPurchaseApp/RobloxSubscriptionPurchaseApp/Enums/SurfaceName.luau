@@ -7,9 +7,5 @@
 	UnifiedProductPurchaseModal = "UnifiedProductPurchaseModal",
 	CatalogMultiItemCheckoutPage = "CatalogMultiItemCheckoutPage",
 	DeepLinkUpsell = "DeepLinkUpsell",
-	HomepageFaeTrialBanner = "HomepageFaeTrialBanner",
-	InGameRobuxUpsell = "InGameRobuxUpsell",
-	SettingsAppThemeUpsell = "SettingsAppThemeUpsell",
-	ProfileFramesUpsell = "ProfileFramesUpsell",
-	AiBackgroundUpsell = "AiBackgroundUpsell"
+	HomepageFaeTrialBanner = "HomepageFaeTrialBanner"
 }

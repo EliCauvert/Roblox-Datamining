@@ -2,6 +2,7 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local getEngineFeatureEngineUGCValidationExpandReturnSchemaModule = require(parent.flags.getEngineFeatureEngineUGCValidationExpandReturnSchema)
 local getDiffBetweenOrientationsModule = require(parent.util.getDiffBetweenOrientations)
 local valueToStringModule = require(parent.util.valueToString)
 local getAllInstancesWithNameModule = require(parent.util.getAllInstancesWithName)
@@ -29,8 +30,8 @@ local t_1 = {
 	}
 }
 
-function t.run(p0, p1) --[[ line: 36 ]]
-	-- upvalues: getAllInstancesWithNameModule (ref), r15plusUtilsModule (ref), errorSourceStringsModule (ref), t_1 (ref), getDiffBetweenOrientationsModule (ref), UGCValidationJointRotationMaximumDegreeOrientationOffset (ref), valueToStringModule (ref), UGCValidationJointRotationMaximumHundredthPositionOffset (ref)
+function t.run(p0, p1) --[[ line: 38 ]]
+	-- upvalues: getAllInstancesWithNameModule (ref), r15plusUtilsModule (ref), getEngineFeatureEngineUGCValidationExpandReturnSchemaModule (ref), errorSourceStringsModule (ref), t_1 (ref), getDiffBetweenOrientationsModule (ref), UGCValidationJointRotationMaximumDegreeOrientationOffset (ref), valueToStringModule (ref), UGCValidationJointRotationMaximumHundredthPositionOffset (ref)
 	local t = {
 		LeftShoulderRigAttachment = 0,
 		RightShoulderRigAttachment = 0
@@ -38,8 +39,10 @@ function t.run(p0, p1) --[[ line: 36 ]]
 	
 	for i, v in getAllInstancesWithNameModule(p1.rootInstance, r15plusUtilsModule.JointRotationName) do
 		local parent = v.Parent
-		p0:setReportingInstance(v)
 		
+		if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
+			p0:setReportingInstance(v)
+		end
 		if v.ClassName ~= "Attachment" or not parent:IsA("Attachment") then
 			p0:fail(errorSourceStringsModule.Keys.JointRotAtt_WrongInstanceClass, { instPath = v:GetFullName() })
 		elseif t[parent.Name] == nil then

@@ -21,7 +21,8 @@ local t = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45 | named "Tabs" ]]
-	-- upvalues: useTokensModule (ref), withDefaultsModule (ref), t (ref), reactModule (ref), dashModule (ref), fillBehaviorModule (ref), flagsModule (ref), useAnimatedHighlightModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), inputSizeModule (ref), tabItemModule (ref)
+	-- upvalues: useTokensModule (ref), withDefaultsModule (ref), t (ref), reactModule (ref), dashModule (ref), fillBehaviorModule (ref), flagsModule (ref), useAnimatedHighlightModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), tabItemModule (ref)
+	local var23
 	local var14 = useTokensModule()
 	local var15 = withDefaultsModule(value, t)
 	local var16, var17 = reactModule.useState(var15.defaultActiveTabId or dashModule.get(var15, { 1, "id" }))
@@ -39,158 +40,119 @@ return reactModule.memo(reactModule.forwardRef(function(value, p0) --[[ line: 45
 		return p2.id == activeTabId
 	end)
 	local var22 = reactModule.useRef(nil)
-	local var23 = nil
 	local _ = nil
-	local var24 = nil
 	
-	if flagsModule.FoundationFixTabsFitBorderWidth then
-		local var25, var26 = reactModule.useBinding(0)
-		var23 = var25
-		local var27 = var26
-		var24 = reactModule.useCallback(function(p3) --[[ line: 70 ]]
-			-- upvalues: var27 (write)
-			var27(p3.AbsoluteSize.X)
-		end, {})
-	end
-	local var44
-	local _ = nil
-	local var28 = reactModule.useRef({})
-	local var29 = reactModule.useMemo(function() --[[ line: 78 ]]
-		-- upvalues: var28 (ref), var15 (ref), reactModule (copy)
-		local current = var28.current
-		
-		for i, v in var15.tabs do
-			if v.ref then
-				current[v.id] = v.ref
-			elseif not current[v.id] then
-				current[v.id] = reactModule.createRef()
-			end
-		end
-		return current
-	end, { var15.tabs })
-	local var30 = useAnimatedHighlightModule(activeTabId, p0 or var22, var29, var15.size, var15.fillBehavior)
-	local highlightPosition = var30.highlightPosition
-	local highlightWidth = var30.highlightWidth
-	local activeItemHeight = var30.activeItemHeight
-	local var31 = if flagsModule.FoundationFixTabsFitBorderWidth then reactModule.useMemo(function() --[[ line: 102 ]]
-		-- upvalues: var19 (ref)
-		return {
-			outer = { clip = true, ["auto-xy"] = not var19, ["auto-y"] = var19 },
-			tabs = { col = true, ["auto-xy"] = not var19, ["auto-y"] = var19 },
-			wrapper = { ["auto-xy"] = not var19, ["auto-y"] = var19 }
-		}
-	end, { var19 }) else nil
-	local var32 = if flagsModule.FoundationFixTabsFitBorderWidth then var15.size else nil
-	local createElement = reactModule.createElement
-	local var33 = withCommonPropsModule(var15, {
-		tag = if flagsModule.FoundationFixTabsFitBorderWidth then var31.outer else "auto-y clip",
-		Size = if flagsModule.FoundationFixTabsFitBorderWidth then if var19 then UDim2.fromScale(1, 0) else nil else UDim2.fromScale(1, 0)
-	})
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local t_2 = {
-		ref = p0 or var22,
-		tag = if flagsModule.FoundationFixTabsFitBorderWidth then var31.tabs else "col auto-y",
-		Size = if flagsModule.FoundationFixTabsFitBorderWidth then if var19 then UDim2.fromScale(1, 0) else nil else UDim2.fromScale(1, 0)
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local var37 = viewModule
-	local t_4 = {
-		LayoutOrder = 1,
-		tag = if flagsModule.FoundationFixTabsFitBorderWidth then var31.wrapper else "auto-y",
-		Size = if flagsModule.FoundationFixTabsFitBorderWidth then if var19 then UDim2.fromScale(1, 0) else nil else UDim2.fromScale(1, 0),
-		testId = `{var15.testId}--wrapper`
-	}
-	local t_5 = {}
-	local createElement_3 = reactModule.createElement
-	local t_6 = {
-		LayoutOrder = 1,
-		size = var15.size,
-		fillBehavior = if flagsModule.FoundationFixTabsFitBorderWidth then if var19 then nil else var15.fillBehavior else nil,
-		fitWidth = if flagsModule.FoundationFixTabsFitBorderWidth then if var19 then nil else var23 else nil,
-		testId = `{var15.testId}--scroll-container`
-	}
-	local t_7 = {}
-	local createElement_4 = reactModule.createElement
-	local t_8 = {
-		onAbsoluteSizeChanged = if flagsModule.FoundationFixTabsFitBorderWidth then var24 else nil
-	}
-	local t_9 = { ["row flex-y-fill auto-xy"] = true }
-	
-	if flagsModule.FoundationFixTabsFitBorderWidth then
-		var44 = not var19
-		
-		if var44 then
-			var44 = true
+	if flagsModule.FoundationFixStaleAnimatedHighlightRefs then
+		local var24 = reactModule.useRef({})
+		var23 = reactModule.useMemo(function() --[[ line: 70 ]]
+			-- upvalues: var24 (ref), var15 (ref), reactModule (copy)
+			local current = var24.current
 			
-			if var32 ~= inputSizeModule.Small then
-				var44 = var32 == inputSizeModule.XSmall
-				var44 = nil
+			for i, v in var15.tabs do
+				if v.ref then
+					current[v.id] = v.ref
+				elseif not current[v.id] then
+					current[v.id] = reactModule.createRef()
+				end
 			end
-		end
+			return current
+		end, { var15.tabs })
 	else
-		var44 = not var19
-	end
-	t_9["gap-large"] = var44
-	t_8.tag = t_9
-	t_8.Size = if var19 then UDim2.fromScale(1, 0) else nil
-	t_8.testId = `{var15.testId}--list`
-	t_7.TabList = createElement_4(viewModule, t_8, dashModule.map(var15.tabs, function(p4, p5) --[[ line: 174 ]]
-		-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var18 (ref), var15 (ref), var29 (write)
-		return reactModule.createElement(tabItemModule, {
-			id = p4.id,
-			text = p4.text,
-			indicator = p4.indicator,
-			key = tostring(p4.id),
-			icon = p4.icon,
-			isActive = p4.id == activeTabId,
-			onActivated = var18,
-			LayoutOrder = p5,
-			fillBehavior = var15.fillBehavior,
-			size = var15.size,
-			isDisabled = p4.isDisabled,
-			testId = `{var15.testId}--item-{p4.id}`,
-			ref = var29[p4.id]
-		})
-	end))
-	t_5.ScrollContainer = createElement_3(overflowScrollContainerModule, t_6, t_7)
-	t_5.Border = reactModule.createElement(viewModule, {
-		LayoutOrder = 2,
-		AnchorPoint = Vector2.new(0, 1),
-		Size = if flagsModule.FoundationFixTabsFitBorderWidth then if var19 then UDim2.new(1, 0, 0, var14.Stroke.Thick) else var23:map(function(p6) --[[ line: 199 ]]
-			-- upvalues: var14 (ref)
-			return UDim2.fromOffset(p6, var14.Stroke.Thick)
-		end) else UDim2.new(1, 0, 0, var14.Stroke.Thick),
-		Position = UDim2.fromScale(0, 1),
-		backgroundStyle = var14.Color.Stroke.Default,
-		testId = `{var15.testId}--border`
-	})
-	t_3.Wrapper = createElement_2(var37, t_4, t_5)
-	t_3.Content = if var21 and var21.content then reactModule.createElement(viewModule, {
-		LayoutOrder = 2,
-		tag = "auto-y",
-		Size = UDim2.fromScale(1, 0),
-		testId = `{var15.testId}--content`
-	}, var21.content) else nil
-	t_1.Tabs = createElement_1(viewModule, t_2, t_3)
-	t_1.AnimatedBorder = reactModule.createElement(viewModule, {
-		LayoutOrder = 0,
-		ZIndex = var15.ZIndex + 1,
-		Size = highlightWidth:map(function(p7) --[[ line: 220 ]]
-			-- upvalues: var14 (ref)
-			return UDim2.fromOffset(p7, var14.Stroke.Thick)
-		end),
-		AnchorPoint = if flagsModule.FoundationFixTabsBorderPosition then Vector2.new(0, 1) else nil,
-		Position = reactModule.joinBindings({ highlightPosition, activeItemHeight }):map(function(p8) --[[ line: 224 ]]
-			-- upvalues: flagsModule (copy), var14 (ref)
-			local var45 = p8[2]
+		var23 = reactModule.useMemo(function() --[[ line: 82 ]]
+			-- upvalues: var15 (ref), reactModule (copy)
+			local t = {}
 			
-			return UDim2.fromOffset(p8[1], if flagsModule.FoundationFixTabsBorderPosition then var45 else var45 - var14.Stroke.Thick)
-		end),
-		backgroundStyle = var14.Color.System.Contrast,
-		testId = `{var15.testId}--animated-border`
-	})
+			for i, v in var15.tabs do
+				t[v.id] = v.ref or reactModule.createRef()
+			end
+			return t
+		end, { var15.tabs })
+	end
+	local var25 = useAnimatedHighlightModule(activeTabId, p0 or var22, var23, var15.size, var15.fillBehavior)
 	
-	return createElement(viewModule, var33, t_1)
+	return reactModule.createElement(viewModule, withCommonPropsModule(var15, if flagsModule.FoundationTabsInlineSizeFull then { tag = "auto-y clip", Size = UDim2.fromScale(1, 0) } else { tag = "size-full-0 auto-y clip" }), {
+		Tabs = reactModule.createElement(viewModule, if flagsModule.FoundationTabsInlineSizeFull then {
+			tag = "col auto-y",
+			ref = p0 or var22,
+			Size = UDim2.fromScale(1, 0)
+		} else { tag = "col size-full-0 auto-y", ref = p0 or var22 }, {
+			Wrapper = reactModule.createElement(viewModule, if flagsModule.FoundationTabsInlineSizeFull then {
+				LayoutOrder = 1,
+				tag = "auto-y",
+				Size = UDim2.fromScale(1, 0),
+				testId = `{var15.testId}--wrapper`
+			} else {
+				LayoutOrder = 1,
+				tag = "size-full-0 auto-y",
+				testId = `{var15.testId}--wrapper`
+			}, {
+				ScrollContainer = reactModule.createElement(overflowScrollContainerModule, {
+					LayoutOrder = 1,
+					size = var15.size,
+					testId = `{var15.testId}--scroll-container`
+				}, {
+					TabList = reactModule.createElement(viewModule, {
+						tag = if flagsModule.FoundationTabsInlineSizeFull then {
+							["row flex-y-fill auto-xy"] = true,
+							["gap-large"] = not var19
+						} else {
+							["row flex-y-fill auto-xy"] = true,
+							["gap-large"] = not var19,
+							["size-full-0"] = var19
+						},
+						Size = if flagsModule.FoundationTabsInlineSizeFull and var19 then UDim2.fromScale(1, 0) else nil,
+						testId = `{var15.testId}--list`
+					}, dashModule.map(var15.tabs, function(p3, p4) --[[ line: 155 ]]
+						-- upvalues: reactModule (copy), tabItemModule (copy), activeTabId (ref), var18 (ref), var15 (ref), var23 (write)
+						return reactModule.createElement(tabItemModule, {
+							id = p3.id,
+							text = p3.text,
+							key = tostring(p3.id),
+							icon = p3.icon,
+							isActive = p3.id == activeTabId,
+							onActivated = var18,
+							LayoutOrder = p4,
+							fillBehavior = var15.fillBehavior,
+							size = var15.size,
+							isDisabled = p3.isDisabled,
+							testId = `{var15.testId}--item-{p3.id}`,
+							ref = var23[p3.id]
+						})
+					end))
+				}),
+				Border = reactModule.createElement(viewModule, {
+					LayoutOrder = 2,
+					AnchorPoint = Vector2.new(0, 1),
+					Size = UDim2.new(1, 0, 0, var14.Stroke.Thick),
+					Position = UDim2.fromScale(0, 1),
+					backgroundStyle = var14.Color.Stroke.Default,
+					testId = `{var15.testId}--border`
+				})
+			}),
+			Content = if var21 and var21.content then reactModule.createElement(viewModule, if flagsModule.FoundationTabsInlineSizeFull then {
+				LayoutOrder = 2,
+				tag = "auto-y",
+				Size = UDim2.fromScale(1, 0),
+				testId = `{var15.testId}--content`
+			} else {
+				LayoutOrder = 2,
+				tag = "size-full-0 auto-y",
+				testId = `{var15.testId}--content`
+			}, var21.content) else nil
+		}),
+		AnimatedBorder = reactModule.createElement(viewModule, {
+			LayoutOrder = 0,
+			ZIndex = var15.ZIndex + 1,
+			Size = var25.highlightWidth:map(function(p5) --[[ line: 206 ]]
+				-- upvalues: var14 (ref)
+				return UDim2.fromOffset(p5, var14.Stroke.Thick)
+			end),
+			Position = reactModule.joinBindings({ var25.highlightPosition, var25.activeItemHeight }):map(function(p6) --[[ line: 209 ]]
+				-- upvalues: var14 (ref)
+				return UDim2.fromOffset(p6[1], p6[2] - var14.Stroke.Thick)
+			end),
+			backgroundStyle = var14.Color.System.Contrast,
+			testId = `{var15.testId}--animated-border`
+		})
+	})
 end))

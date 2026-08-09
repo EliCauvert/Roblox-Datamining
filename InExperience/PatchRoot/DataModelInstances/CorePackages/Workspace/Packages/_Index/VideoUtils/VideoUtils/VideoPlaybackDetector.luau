@@ -10,19 +10,17 @@ local _ = require(videoUtils.Analytics.VideoAnalyticsTypes)
 local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
 local videoPlaybackCoordinatorModule = require(videoUtils.VideoPlaybackCoordinator)
 local videoHoverPlaybackDetectorModule = require(videoUtils.VideoHoverPlaybackDetector)
-local videoPlaybackDetectionMethodModule = require(videoUtils.VideoPlaybackDetectionMethod)
-local videoSelectionPlaybackDetectorModule = require(videoUtils.VideoSelectionPlaybackDetector)
 local videoViewportPlaybackDetectorModule = require(videoUtils.VideoViewportPlaybackDetector)
 local _ = require(videoUtils.ViewportVideoAutoplayController)
 local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
-local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
+local fFlagLuaAppHomeTouchAutoplay = require(parent.SharedFlags).FFlagLuaAppHomeTouchAutoplay
 
-return function(p0) --[[ line: 52 | named "VideoPlaybackDetector" ]]
-	-- upvalues: videoPlaybackCoordinatorModule (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), useLastInput (ref), appLifecycleObserverService (ref), videoEndReason (ref), experienceService (ref), videoPlaybackDetectionMethodModule (ref), videoHoverPlaybackDetectorModule (ref), videoViewportPlaybackDetectorModule (ref), videoSelectionPlaybackDetectorModule (ref), responsiveModule (ref)
+return function(p0) --[[ line: 46 | named "VideoPlaybackDetector" ]]
+	-- upvalues: videoPlaybackCoordinatorModule (ref), reactModule (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), useLastInput (ref), fFlagLuaAppHomeTouchAutoplay (ref), appLifecycleObserverService (ref), videoEndReason (ref), experienceService (ref), videoHoverPlaybackDetectorModule (ref), responsiveModule (ref), videoViewportPlaybackDetectorModule (ref)
 	local videoPlaybackCoordinator = p0.videoPlaybackCoordinator or videoPlaybackCoordinatorModule.default
-	local var11, var12 = reactModule.useState(false)
-	local var13 = if fFlagLuaAppEdpMediaGalleryVideoPreview or fFlagLuaAppGameTileSelectionVideoPlayback then nil else useLastInput()
-	local var14 = reactModule.useCallback(function(p1) --[[ line: 63 ]]
+	local var9, var10 = reactModule.useState(false)
+	local var11 = if fFlagLuaAppEdpMediaGalleryVideoPreview then nil else useLastInput()
+	local var12 = reactModule.useCallback(function(p1) --[[ line: 55 ]]
 		-- upvalues: p0 (ref), videoPlaybackCoordinator (ref)
 		if p0.onPlaybackCandidate then
 			p0.onPlaybackCandidate()
@@ -39,7 +37,7 @@ return function(p0) --[[ line: 52 | named "VideoPlaybackDetector" ]]
 		p0.onVideoIneligible, p0.onPlaybackCandidate, p0.videoDwellTimeInSec,
 		videoPlaybackCoordinator
 	})
-	local var15 = reactModule.useCallback(function(p2) --[[ line: 93 ]]
+	local var13 = reactModule.useCallback(function(p2) --[[ line: 85 ]]
 		-- upvalues: videoPlaybackCoordinator (ref), p0 (ref)
 		videoPlaybackCoordinator:cancelPlayback(p0.videoKey, p2, p0.itemIndex, p0.videoAnalytics)
 	end, {
@@ -48,35 +46,35 @@ return function(p0) --[[ line: 52 | named "VideoPlaybackDetector" ]]
 		p0.videoAnalytics,
 		videoPlaybackCoordinator
 	})
-	reactModule.useEffect(function() --[[ line: 105 ]]
-		-- upvalues: p0 (ref), var11 (ref), var12 (ref), videoPlaybackCoordinator (ref)
-		local function _(p3) --[[ line: 106 | named "checkAndUpdateState" ]]
-			-- upvalues: p0 (copy), var11 (copy), var12 (copy)
-			local var18 = p3 == p0.videoKey
+	reactModule.useEffect(function() --[[ line: 97 ]]
+		-- upvalues: p0 (ref), var9 (ref), var10 (ref), videoPlaybackCoordinator (ref)
+		local function _(p3) --[[ line: 98 | named "checkAndUpdateState" ]]
+			-- upvalues: p0 (copy), var9 (copy), var10 (copy)
+			local var16 = p3 == p0.videoKey
 			
-			if var18 ~= var11 then
-				p0.onPlaybackChange(var18)
-				var12(var18)
+			if var16 ~= var9 then
+				p0.onPlaybackChange(var16)
+				var10(var16)
 			end
 		end
 		
-		local var16 = videoPlaybackCoordinator.playingVideoKey == p0.videoKey
+		local var14 = videoPlaybackCoordinator.playingVideoKey == p0.videoKey
 		
-		if var16 ~= var11 then
-			p0.onPlaybackChange(var16)
-			var12(var16)
+		if var14 ~= var9 then
+			p0.onPlaybackChange(var14)
+			var10(var14)
 		end
-		local changedConnection = videoPlaybackCoordinator.changed:connect(function(p4) --[[ line: 117 ]]
-			-- upvalues: p0 (copy), var11 (copy), var12 (copy)
-			local var19 = p4 == p0.videoKey
+		local changedConnection = videoPlaybackCoordinator.changed:connect(function(p4) --[[ line: 109 ]]
+			-- upvalues: p0 (copy), var9 (copy), var10 (copy)
+			local var17 = p4 == p0.videoKey
 			
-			if var19 ~= var11 then
-				p0.onPlaybackChange(var19)
-				var12(var19)
+			if var17 ~= var9 then
+				p0.onPlaybackChange(var17)
+				var10(var17)
 			end
 		end)
 		
-		return function() --[[ line: 121 ]]
+		return function() --[[ line: 113 ]]
 			-- upvalues: changedConnection (write)
 			if changedConnection ~= nil then
 				changedConnection:disconnect()
@@ -87,41 +85,46 @@ return function(p0) --[[ line: 52 | named "VideoPlaybackDetector" ]]
 		p0.videoKey,
 		p0.onPlaybackChange,
 		videoPlaybackCoordinator,
-		var11
+		var9
 	})
-	reactModule.useEffect(function() --[[ line: 131 ]]
-		-- upvalues: p0 (ref), appLifecycleObserverService (copy), videoEndReason (copy), var15 (ref), experienceService (copy)
-		local viewportVideoAutoplayController = p0.viewportVideoAutoplayController
-		local current = p0.itemFrameRef.current
-		local onHideConnection = appLifecycleObserverService.OnHide:Connect(function() --[[ line: 136 ]]
-			-- upvalues: viewportVideoAutoplayController (ref), videoEndReason (copy), var15 (copy)
-			if viewportVideoAutoplayController then
+	reactModule.useEffect(function() --[[ line: 123 ]]
+		-- upvalues: fFlagLuaAppHomeTouchAutoplay (copy), p0 (ref), appLifecycleObserverService (copy), videoEndReason (copy), var13 (ref), experienceService (copy)
+		local viewportVideoAutoplayController = nil
+		local current = nil
+		
+		if fFlagLuaAppHomeTouchAutoplay then
+			viewportVideoAutoplayController = p0.viewportVideoAutoplayController
+			current = p0.itemFrameRef.current
+		end
+		local onHideConnection = appLifecycleObserverService.OnHide:Connect(function() --[[ line: 132 ]]
+			-- upvalues: fFlagLuaAppHomeTouchAutoplay (copy), viewportVideoAutoplayController (write), videoEndReason (copy), var13 (copy)
+			if fFlagLuaAppHomeTouchAutoplay and viewportVideoAutoplayController then
 				viewportVideoAutoplayController:reset(videoEndReason.AppBackgrounded)
 				
 				return
 			end
-			var15(videoEndReason.AppBackgrounded)
+			var13(videoEndReason.AppBackgrounded)
 		end)
-		local var21 = experienceService:RegisterForExperienceJoin(function() --[[ line: 146 ]]
-			-- upvalues: viewportVideoAutoplayController (ref), videoEndReason (copy), var15 (copy)
-			if viewportVideoAutoplayController then
+		local var19 = experienceService:RegisterForExperienceJoin(function() --[[ line: 142 ]]
+			-- upvalues: fFlagLuaAppHomeTouchAutoplay (copy), viewportVideoAutoplayController (write), videoEndReason (copy), var13 (copy)
+			if fFlagLuaAppHomeTouchAutoplay and viewportVideoAutoplayController then
 				viewportVideoAutoplayController:reset(videoEndReason.ExperienceLaunched)
 				
 				return
 			end
-			var15(videoEndReason.ExperienceLaunched)
+			var13(videoEndReason.ExperienceLaunched)
 		end)
 		
-		return function() --[[ line: 155 ]]
-			-- upvalues: viewportVideoAutoplayController (ref), current (ref), videoEndReason (copy), var15 (copy), var21 (write), onHideConnection (write)
-			if viewportVideoAutoplayController and current then
+		return function() --[[ line: 151 ]]
+			-- upvalues: fFlagLuaAppHomeTouchAutoplay (copy), viewportVideoAutoplayController (write), current (write), videoEndReason (copy), var13 (copy), var19 (write), onHideConnection (write)
+			if fFlagLuaAppHomeTouchAutoplay and viewportVideoAutoplayController and current then
 				viewportVideoAutoplayController:resetIfActiveInstance(current, videoEndReason.Unmounted)
 			else
-				var15(videoEndReason.Unmounted)
+				var13(videoEndReason.Unmounted)
 			end
-			if var21 then
-				var21:Disconnect()
-				var21 = nil
+			if var19 then
+				var19:Disconnect()
+				var19 = nil
 			end
 			if onHideConnection then
 				onHideConnection:Disconnect()
@@ -129,50 +132,23 @@ return function(p0) --[[ line: 52 | named "VideoPlaybackDetector" ]]
 			end
 		end
 	end, {
-		var15,
-		p0.viewportVideoAutoplayController,
-		p0.itemFrameRef
+		var13,
+		if fFlagLuaAppHomeTouchAutoplay then p0.viewportVideoAutoplayController else nil,
+		if fFlagLuaAppHomeTouchAutoplay then p0.itemFrameRef else nil
 	})
 	
-	if fFlagLuaAppGameTileSelectionVideoPlayback then
-		if p0.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Hover then
-			return reactModule.createElement(videoHoverPlaybackDetectorModule, {
-				videoPlaybackCoordinator = videoPlaybackCoordinator,
-				requestVideoPlayback = var14,
-				cancelVideoPlayback = var15,
-				isHovered = p0.isHovered
-			})
-		elseif p0.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Viewport then
-			return reactModule.createElement(videoViewportPlaybackDetectorModule, {
-				videoPlaybackCoordinator = videoPlaybackCoordinator,
-				requestVideoPlayback = var14,
-				cancelVideoPlayback = var15,
-				itemFrameRef = p0.itemFrameRef,
-				isItemOccluded = p0.isItemOccluded,
-				videoVisiblePercent = p0.videoVisiblePercent,
-				viewportVideoAutoplayController = p0.viewportVideoAutoplayController
-			})
-		elseif p0.playbackDetectionMethod == videoPlaybackDetectionMethodModule.Selection then
-			return reactModule.createElement(videoSelectionPlaybackDetectorModule, {
-				requestVideoPlayback = var14,
-				cancelVideoPlayback = var15,
-				isSelected = p0.isSelected
-			})
-		end
-	else
-		return if p0.isHoverSupported then reactModule.createElement(videoHoverPlaybackDetectorModule, {
-			videoPlaybackCoordinator = videoPlaybackCoordinator,
-			requestVideoPlayback = var14,
-			cancelVideoPlayback = var15,
-			isHovered = p0.isHovered
-		}) elseif fFlagLuaAppEdpMediaGalleryVideoPreview and p0.autoplay or var13 == responsiveModule.Input.Touch then reactModule.createElement(videoViewportPlaybackDetectorModule, {
-			videoPlaybackCoordinator = videoPlaybackCoordinator,
-			requestVideoPlayback = var14,
-			cancelVideoPlayback = var15,
-			itemFrameRef = p0.itemFrameRef,
-			isItemOccluded = p0.isItemOccluded,
-			videoVisiblePercent = p0.videoVisiblePercent,
-			viewportVideoAutoplayController = p0.viewportVideoAutoplayController
-		}) else nil
-	end
+	return if p0.isHoverSupported then reactModule.createElement(videoHoverPlaybackDetectorModule, {
+		videoPlaybackCoordinator = videoPlaybackCoordinator,
+		requestVideoPlayback = var12,
+		cancelVideoPlayback = var13,
+		isHovered = p0.isHovered
+	}) elseif fFlagLuaAppEdpMediaGalleryVideoPreview and p0.autoplay or var11 == responsiveModule.Input.Touch then reactModule.createElement(videoViewportPlaybackDetectorModule, {
+		videoPlaybackCoordinator = videoPlaybackCoordinator,
+		requestVideoPlayback = var12,
+		cancelVideoPlayback = var13,
+		itemFrameRef = p0.itemFrameRef,
+		isItemOccluded = p0.isItemOccluded,
+		videoVisiblePercent = p0.videoVisiblePercent,
+		viewportVideoAutoplayController = if fFlagLuaAppHomeTouchAutoplay then p0.viewportVideoAutoplayController else nil
+	}) else nil
 end

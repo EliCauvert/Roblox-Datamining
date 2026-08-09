@@ -13,7 +13,6 @@ local _ = require(squads.Common.ModelTypes)
 local squadLobbyActionBarModule = require(script.Parent.SquadLobbyActionBar)
 local squadLobbyUserGridModule = require(script.Parent.SquadLobbyUserGrid)
 local squadLobbyRegroupRowModule = require(script.Parent.SquadLobbyRegroupRow)
-local squadLobbyLuckyRecommendationRowModule = require(script.Parent.SquadLobbyLuckyRecommendationRow)
 local squadLobbyVoiceChatMenuModule = require(script.Parent.SquadLobbyVoiceChatMenu)
 local squadLobbyBannersModule = require(script.Parent.SquadLobbyBanners)
 local squadLobbyUserDropdownMenuModule = require(script.Parent.SquadLobbyUserDropdownMenu)
@@ -46,12 +45,6 @@ local useSelector = dependenciesModule.Hooks.useSelector
 local useStore = dependenciesModule.Hooks.useStore
 local useSquadState = require(parent.SquadsCore.Hooks).useSquadState
 local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
-local fFlagSquadsPresenceStoreMigration = require(parent.SquadsCore.Flags).FFlagSquadsPresenceStoreMigration
-local dataHydrationModule = require(parent.DataHydration)
-local signalsModule = require(parent.Signals)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local var22 = if fFlagSquadsPresenceStoreMigration then dataHydrationModule.Presence.PresenceStore.get() else nil
-local var23 = if fFlagSquadsPresenceStoreMigration then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
 local stateLayerAffordance = foundation.Enums.StateLayerAffordance
 local useStyle = UIBloxModule.Core.Style.useStyle
 local useTokens = foundation.Hooks.useTokens
@@ -66,215 +59,215 @@ local partyUserInvitedDurationSeconds = game:DefineFastInt("PartyUserInvitedDura
 local squadQuickStartExperimentation = dependenciesModule.SocialExperiments.SquadQuickStartExperimentation
 local squadCoordinationExperienceJoinExperimentation = dependenciesModule.SocialExperiments.SquadCoordinationExperienceJoinExperimentation
 local squadRegroupExperimentation = dependenciesModule.SocialExperiments.SquadRegroupExperimentation
-local luckyRecommendationExperimentation = dependenciesModule.SocialExperiments.LuckyRecommendationExperimentation
 local fFlagEnablePartyQuickStartButton = sharedFlags.FFlagEnablePartyQuickStartButton
 local fFlagEnablePartyVoiceChangersInLua = sharedFlags.FFlagEnablePartyVoiceChangersInLua
 local fFlagEnableSquadRegroupExperimentation = sharedFlags.FFlagEnableSquadRegroupExperimentation
 local fFlagEnableSquadRegroupExperimentationSmallScreenFix = sharedFlags.FFlagEnableSquadRegroupExperimentationSmallScreenFix
 local fFlagEnableSquadRegroupServerCapacityCheck = sharedFlags.FFlagEnableSquadRegroupServerCapacityCheck
 local fFlagAppChatShowOSAOnPageEntry = sharedFlags.FFlagAppChatShowOSAOnPageEntry
+local fFlagEnableScheduledSquads = sharedFlags.FFlagEnableScheduledSquads
 
-return function(p0) --[[ line: 111 | named "SquadLobby" ]]
-	-- upvalues: useTokens (ref), useDispatch (ref), useLocalUserId (ref), useStyle (ref), useSquadState (ref), useNavigation (ref), react (ref), squadExternalContractContext (ref), useVoiceStatus (ref), fFlagEnableSquadTopBannerWideMode (ref), httpService (ref), roactNavigationModule (ref), squadViewFlags (ref), useCurrentSquadSelector (ref), useSelector (ref), useStore (ref), squadQuickStartExperimentation (ref), fFlagEnablePartyQuickStartButton (ref), squadPromptType (ref), fFlagMakeCreateOrJoinSquadAThunks (ref), createOrJoinSquad (ref), networkingSquads (ref), fFlagEnableSquadCoplayAnalytic (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoin (ref), useEffectOnce (ref), fFlagAppChatShowOSAOnPageEntry (ref), loggerModule (ref), cryo (ref), squadUserPartyStatusModule (ref), partyUserInvitedDurationSeconds (ref), partyInviteeNoResponseDurationSeconds (ref), setInterval (ref), clearInterval (ref), usePrevious (ref), userBlockingNetworking (ref), fFlagSquadsPresenceStoreMigration (ref), networkingPresence (ref), constantsModule (ref), signalsModule (ref), var22 (ref), useSignalState (ref), fFlagEnableSquadRegroupServerCapacityCheck (ref), playersService (ref), squadRegroupExperimentation (ref), var23 (ref), presenceType (ref), luckyRecommendationExperimentation (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), enableSquadLobbyBanners (ref), squadLobbyBannersModule (ref), foundation (ref), squadLobbyUserGridModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadLobbyRegroupRowModule (ref), squadLobbyActionBarModule (ref), squadLobbyLuckyRecommendationRowModule (ref), stateLayerAffordance (ref), squadLobbyVoiceChatMenuModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), squadLobbyUserDropdownMenuModule (ref), squadCoordinationExperienceJoinExperimentation (ref), fFlagEnableSquadRegroupExperimentation (ref), roact (ref), squadLobbySessionProvider (ref)
-	local var27 = useTokens()
-	local var28 = useDispatch()
-	local var29 = tonumber(useLocalUserId()) or 0
-	local var30 = useStyle()
-	local var31 = useSquadState()
-	local var32 = useNavigation()
+return function(p0) --[[ line: 98 | named "SquadLobby" ]]
+	-- upvalues: useTokens (ref), useDispatch (ref), useLocalUserId (ref), useStyle (ref), useSquadState (ref), useNavigation (ref), react (ref), squadExternalContractContext (ref), useVoiceStatus (ref), fFlagEnableSquadTopBannerWideMode (ref), httpService (ref), roactNavigationModule (ref), squadViewFlags (ref), useCurrentSquadSelector (ref), useSelector (ref), useStore (ref), squadQuickStartExperimentation (ref), fFlagEnablePartyQuickStartButton (ref), fFlagEnableScheduledSquads (ref), squadPromptType (ref), fFlagMakeCreateOrJoinSquadAThunks (ref), createOrJoinSquad (ref), networkingSquads (ref), fFlagEnableSquadCoplayAnalytic (ref), logInExpCoplayTelemetryModule (ref), squadCoplayJoin (ref), useEffectOnce (ref), fFlagAppChatShowOSAOnPageEntry (ref), loggerModule (ref), cryo (ref), squadUserPartyStatusModule (ref), partyUserInvitedDurationSeconds (ref), partyInviteeNoResponseDurationSeconds (ref), setInterval (ref), clearInterval (ref), usePrevious (ref), userBlockingNetworking (ref), networkingPresence (ref), constantsModule (ref), fFlagEnableSquadRegroupServerCapacityCheck (ref), playersService (ref), squadRegroupExperimentation (ref), presenceType (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), enableSquadLobbyBanners (ref), squadLobbyBannersModule (ref), foundation (ref), squadLobbyUserGridModule (ref), eventNamesModule (ref), squadPartySheetActionEnumModule (ref), squadLobbyRegroupRowModule (ref), squadLobbyActionBarModule (ref), stateLayerAffordance (ref), squadLobbyVoiceChatMenuModule (ref), fFlagEnablePartyVoiceChangersInLua (ref), squadLobbyUserDropdownMenuModule (ref), squadCoordinationExperienceJoinExperimentation (ref), fFlagEnableSquadRegroupExperimentation (ref), roact (ref), squadLobbySessionProvider (ref)
+	local var22 = useTokens()
+	local var23 = useDispatch()
+	local var24 = tonumber(useLocalUserId()) or 0
+	local var25 = useStyle()
+	local var26 = useSquadState()
+	local var27 = useNavigation()
 	local isWideMode = p0.isWideMode
-	local var33 = react.useContext(squadExternalContractContext)
-	local var34, var35 = react.useState(0)
-	local var36 = useVoiceStatus()
+	local var28 = react.useContext(squadExternalContractContext)
+	local var29, var30 = react.useState(0)
+	local var31 = useVoiceStatus()
 	
 	if fFlagEnableSquadTopBannerWideMode then
-		local var37 = react.useRef(httpService:GenerateGUID())
-		react.useEffect(function() --[[ line: 126 ]]
-			-- upvalues: isWideMode (ref), var37 (ref), var33 (ref), var32 (ref), roactNavigationModule (copy)
+		local var32 = react.useRef(httpService:GenerateGUID())
+		react.useEffect(function() --[[ line: 113 ]]
+			-- upvalues: isWideMode (ref), var32 (ref), var28 (ref), var27 (ref), roactNavigationModule (copy)
 			if isWideMode then
-				return function() --[[ line: 152 ]] end
+				return function() --[[ line: 139 ]] end
 			end
-			local current = var37.current
-			var33.disableSquadTopBanner(current, true)
-			local willBlur = var32 and var32.addListener(roactNavigationModule.Events.WillBlur, function(p1) --[[ line: 131 ]]
-				-- upvalues: var33 (copy), current (ref)
+			local current = var32.current
+			var28.disableSquadTopBanner(current, true)
+			local willBlur = var27 and var27.addListener(roactNavigationModule.Events.WillBlur, function(p1) --[[ line: 118 ]]
+				-- upvalues: var28 (copy), current (ref)
 				if p1.state.routeName == "SquadInviteFriends" or p1.state.routeName == "SquadLobby" then
-					var33.disableSquadTopBanner(current, true)
+					var28.disableSquadTopBanner(current, true)
 					
 					return
 				end
-				var33.disableSquadTopBanner(current, false)
+				var28.disableSquadTopBanner(current, false)
 			end)
 			
-			return function() --[[ line: 142 ]]
-				-- upvalues: willBlur (write), var33 (copy), current (ref)
+			return function() --[[ line: 129 ]]
+				-- upvalues: willBlur (write), var28 (copy), current (ref)
 				if willBlur then
 					willBlur.remove()
 					willBlur = nil
 				end
-				var33.disableSquadTopBanner(current, false)
+				var28.disableSquadTopBanner(current, false)
 			end
-		end, { var33.disableSquadTopBanner, var32, isWideMode })
-		react.useEffect(function() --[[ line: 155 ]]
-			-- upvalues: var33 (ref), squadViewFlags (copy)
-			var33.updateSquadViewFlags(squadViewFlags.SquadLobby, true)
+		end, { var28.disableSquadTopBanner, var27, isWideMode })
+		react.useEffect(function() --[[ line: 142 ]]
+			-- upvalues: var28 (ref), squadViewFlags (copy)
+			var28.updateSquadViewFlags(squadViewFlags.SquadLobby, true)
 			
-			return function() --[[ line: 157 ]]
-				-- upvalues: var33 (copy), squadViewFlags (copy)
-				var33.updateSquadViewFlags(squadViewFlags.SquadLobby, false)
+			return function() --[[ line: 144 ]]
+				-- upvalues: var28 (copy), squadViewFlags (copy)
+				var28.updateSquadViewFlags(squadViewFlags.SquadLobby, false)
 			end
-		end, { var33.updateSquadViewFlags })
+		end, { var28.updateSquadViewFlags })
 	else
-		react.useEffect(function() --[[ line: 165 ]]
-			-- upvalues: var33 (ref), squadViewFlags (copy), var32 (ref), roactNavigationModule (copy)
-			var33.updateSquadViewFlags(squadViewFlags.SquadLobby, true)
-			local willBlur = var32 and var32.addListener(roactNavigationModule.Events.WillBlur, function(p2) --[[ line: 168 ]]
-				-- upvalues: var33 (copy), squadViewFlags (copy)
+		react.useEffect(function() --[[ line: 152 ]]
+			-- upvalues: var28 (ref), squadViewFlags (copy), var27 (ref), roactNavigationModule (copy)
+			var28.updateSquadViewFlags(squadViewFlags.SquadLobby, true)
+			local willBlur = var27 and var27.addListener(roactNavigationModule.Events.WillBlur, function(p2) --[[ line: 155 ]]
+				-- upvalues: var28 (copy), squadViewFlags (copy)
 				if p2.state.routeName == "SquadInviteFriends" or p2.state.routeName == "SquadLobby" then
-					var33.updateSquadViewFlags(squadViewFlags.SquadLobby, true)
+					var28.updateSquadViewFlags(squadViewFlags.SquadLobby, true)
 					
 					return
 				end
-				var33.updateSquadViewFlags(squadViewFlags.SquadLobby, false)
+				var28.updateSquadViewFlags(squadViewFlags.SquadLobby, false)
 			end)
 			
-			return function() --[[ line: 175 ]]
-				-- upvalues: willBlur (write), var33 (copy), squadViewFlags (copy)
+			return function() --[[ line: 162 ]]
+				-- upvalues: willBlur (write), var28 (copy), squadViewFlags (copy)
 				if willBlur then
 					willBlur.remove()
 					willBlur = nil
 				end
-				var33.updateSquadViewFlags(squadViewFlags.SquadLobby, false)
+				var28.updateSquadViewFlags(squadViewFlags.SquadLobby, false)
 			end
-		end, { var33.updateSquadViewFlags, var32 })
+		end, { var28.updateSquadViewFlags, var27 })
 	end
-	local var38, var39 = react.useState(false)
-	local var40, var41 = react.useState(Vector2.zero)
-	local var42 = react.useCallback(function(p3) --[[ line: 187 ]]
-		-- upvalues: var41 (ref)
-		var41(p3.AbsoluteSize)
-	end, { var41 })
-	local var43 = useCurrentSquadSelector()
-	local var44 = if var43 then var43.squadId else ""
-	local members = var43 and var43.members
-	local var46 = useSelector(react.useCallback(function(p4) --[[ line: 195 ]]
+	local var33, var34 = react.useState(false)
+	local var35, var36 = react.useState(Vector2.zero)
+	local var37 = react.useCallback(function(p3) --[[ line: 174 ]]
+		-- upvalues: var36 (ref)
+		var36(p3.AbsoluteSize)
+	end, { var36 })
+	local var38 = useCurrentSquadSelector()
+	local var39 = if var38 then var38.squadId else ""
+	local members = var38 and var38.members
+	local var41 = useSelector(react.useCallback(function(p4) --[[ line: 182 ]]
 		return if p4.Squad and p4.Squad.Squad and p4.Squad.Squad.currentSquad then p4.Squad.Squad.currentSquad.parentChannelId or "" else ""
 	end, {}))
-	local var47 = useStore()
-	local conversationId = var32.getParam("conversationId") or ""
-	local var49 = var33.useGetConversationFromId(conversationId)
-	local participants = var49 and var49.participants
-	local invitees = var43 and var43.invitees
+	local var42 = useStore()
+	local conversationId = var27.getParam("conversationId") or ""
+	local var44 = var28.useGetConversationFromId(conversationId)
+	local participants = var44 and var44.participants
+	local invitees = var38 and var38.invitees
 	local _ = nil
 	local _ = nil
 	local squadCreateOrJoinAttemptId = nil
-	local extraParams = var32.getParam("extraParams") or {}
+	local extraParams = var27.getParam("extraParams") or {}
 	local squadId = extraParams.squadId
 	
 	if squadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and fFlagEnablePartyQuickStartButton then
 		squadCreateOrJoinAttemptId = extraParams.squadCreateOrJoinAttemptId
 	end
-	local var71
-	extraParams = extraParams.scheduledGroupUpId
-	local var53 = react.useCallback(function() --[[ line: 219 ]]
-		-- upvalues: var33 (ref), var47 (ref), squadPromptType (copy), p0 (ref)
-		var33.setSquadPrompt(var47, {
+	local var66
+	extraParams = if fFlagEnableScheduledSquads then extraParams.scheduledGroupUpId else nil
+	local var48 = react.useCallback(function() --[[ line: 208 ]]
+		-- upvalues: var28 (ref), var42 (ref), squadPromptType (copy), p0 (ref)
+		var28.setSquadPrompt(var42, {
 			hideCancelButton = true,
 			promptType = squadPromptType.Error,
-			onConfirm = function() --[[ line: 223 ]]
+			onConfirm = function() --[[ line: 212 ]]
 				-- upvalues: p0 (copy)
 				p0.navigateAwayFromSquad()
 			end
 		})
-	end, { p0.navigateAwayFromSquad, var47, var33.setSquadPrompt })
-	local var54 = react.useCallback(function(p5) --[[ line: 229 ]]
-		-- upvalues: fFlagMakeCreateOrJoinSquadAThunks (copy), var28 (ref), createOrJoinSquad (copy), var33 (ref), squadCreateOrJoinAttemptId (write), p0 (ref), extraParams (ref), networkingSquads (copy), fFlagEnableSquadCoplayAnalytic (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoin (copy), var53 (ref)
+	end, { p0.navigateAwayFromSquad, var42, var28.setSquadPrompt })
+	local var49 = react.useCallback(function(p5) --[[ line: 218 ]]
+		-- upvalues: fFlagMakeCreateOrJoinSquadAThunks (copy), var23 (ref), createOrJoinSquad (copy), var28 (ref), squadCreateOrJoinAttemptId (write), p0 (ref), fFlagEnableScheduledSquads (copy), extraParams (ref), networkingSquads (copy), fFlagEnableSquadCoplayAnalytic (copy), logInExpCoplayTelemetryModule (copy), squadCoplayJoin (copy), var48 (ref)
 		if fFlagMakeCreateOrJoinSquadAThunks then
-			var28(createOrJoinSquad(p5, var33.setSquadPrompt, var33.fireSquadAnalytics, var33.squadLocation, squadCreateOrJoinAttemptId, p0.navigateAwayFromSquad, extraParams))
+			var23(createOrJoinSquad(p5, var28.setSquadPrompt, var28.fireSquadAnalytics, var28.squadLocation, squadCreateOrJoinAttemptId, p0.navigateAwayFromSquad, if fFlagEnableScheduledSquads then extraParams else nil))
 			
 			return
 		end
-		local var87 = var28(networkingSquads.CreateOrJoinSquad.API({
+		local var81 = var23(networkingSquads.CreateOrJoinSquad.API({
 			leaveExisting = true,
 			parentChannelId = p5,
-			squadLocation = if fFlagEnableSquadCoplayAnalytic then var33.squadLocation else nil,
+			squadLocation = if fFlagEnableSquadCoplayAnalytic then var28.squadLocation else nil,
 			partyAttemptId = squadCreateOrJoinAttemptId
 		}))
 		
 		if fFlagEnableSquadCoplayAnalytic then
-			var87 = var87:andThen(function(p6) --[[ line: 253 ]]
-				-- upvalues: logInExpCoplayTelemetryModule (copy), var33 (copy), squadCoplayJoin (copy)
+			var81 = var81:andThen(function(p6) --[[ line: 242 ]]
+				-- upvalues: logInExpCoplayTelemetryModule (copy), var28 (copy), squadCoplayJoin (copy)
 				local groupUpId = p6.responseBody.groupUp.groupUpId
 				local members = p6.responseBody.groupUp.members
 				
 				if groupUpId and members then
-					logInExpCoplayTelemetryModule(groupUpId, members, var33.squadLocation, squadCoplayJoin.PartyJoin, var33.fireSquadAnalytics)
+					logInExpCoplayTelemetryModule(groupUpId, members, var28.squadLocation, squadCoplayJoin.PartyJoin, var28.fireSquadAnalytics)
 				end
 			end)
 		end
-		var87:catch(function(_) --[[ line: 269 ]]
-			-- upvalues: var53 (copy)
-			var53()
+		var81:catch(function(_) --[[ line: 258 ]]
+			-- upvalues: var48 (copy)
+			var48()
 		end)
 	end, {
-		var28, if fFlagMakeCreateOrJoinSquadAThunks then createOrJoinSquad else nil,
+		var23, if fFlagMakeCreateOrJoinSquadAThunks then createOrJoinSquad else nil,
 		if fFlagMakeCreateOrJoinSquadAThunks then p0.navigateAwayFromSquad else nil,
-		if not fFlagMakeCreateOrJoinSquadAThunks then var53 else nil,
-		if fFlagMakeCreateOrJoinSquadAThunks then var33.setSquadPrompt else nil,
-		var33.squadLocation, var33.fireSquadAnalytics, squadCreateOrJoinAttemptId,
-		extraParams
+		if not fFlagMakeCreateOrJoinSquadAThunks then var48 else nil,
+		if fFlagMakeCreateOrJoinSquadAThunks then var28.setSquadPrompt else nil,
+		var28.squadLocation, var28.fireSquadAnalytics, squadCreateOrJoinAttemptId,
+		if fFlagEnableScheduledSquads then extraParams else nil
 	})
-	local var55 = squadId and squadId ~= var44
-	react.useEffect(function() --[[ line: 288 ]]
-		-- upvalues: var55 (ref), var33 (ref), var47 (ref), squadPromptType (copy), var54 (ref), conversationId (ref), p0 (ref), var32 (ref)
-		if var55 then
-			var33.setSquadPrompt(var47, {
+	local var50 = squadId and squadId ~= var39
+	react.useEffect(function() --[[ line: 277 ]]
+		-- upvalues: var50 (ref), var28 (ref), var42 (ref), squadPromptType (copy), var49 (ref), conversationId (ref), p0 (ref), var27 (ref)
+		if var50 then
+			var28.setSquadPrompt(var42, {
 				promptType = squadPromptType.JoinAnotherSquad,
-				onConfirm = function() --[[ line: 292 ]]
-					-- upvalues: var54 (copy), conversationId (copy)
-					var54(conversationId)
+				onConfirm = function() --[[ line: 281 ]]
+					-- upvalues: var49 (copy), conversationId (copy)
+					var49(conversationId)
 				end,
-				onCancel = function() --[[ line: 295 ]]
+				onCancel = function() --[[ line: 284 ]]
 					-- upvalues: p0 (copy)
 					p0.navigateAwayFromSquad()
 				end
 			})
-			var32.setParams({ squadId = nil })
+			var27.setParams({ squadId = nil })
 		end
 	end, {
-		squadId, var33.setSquadPrompt, var54, conversationId, p0.navigateAwayFromSquad,
-		var55
+		squadId, var28.setSquadPrompt, var49, conversationId, p0.navigateAwayFromSquad,
+		var50
 	})
-	useEffectOnce(function() --[[ line: 314 ]]
-		-- upvalues: var55 (ref), fFlagAppChatShowOSAOnPageEntry (copy), var33 (ref), var49 (ref), p0 (ref), var44 (ref), loggerModule (copy), conversationId (ref), var28 (ref), var54 (ref), var53 (ref)
-		if var55 then return end
-		if fFlagAppChatShowOSAOnPageEntry and var33.shouldShowOSAForConversation and var33.shouldShowOSAForConversation(var49) then
+	useEffectOnce(function() --[[ line: 303 ]]
+		-- upvalues: var50 (ref), fFlagAppChatShowOSAOnPageEntry (copy), var28 (ref), var44 (ref), p0 (ref), var39 (ref), loggerModule (copy), conversationId (ref), var23 (ref), var49 (ref), var48 (ref)
+		if var50 then return end
+		if fFlagAppChatShowOSAOnPageEntry and var28.shouldShowOSAForConversation and var28.shouldShowOSAForConversation(var44) then
 			p0.navigateAwayFromSquad()
 			
 			return
-		elseif var44 == "" then
-			if var49 and var49.source == "friends" then
+		elseif var39 == "" then
+			if var44 and var44.source == "friends" then
 				loggerModule:debug("Channel does not exist for: {}. Creating a friend conversation.", conversationId)
-				var28(var33.createFriendConversation(conversationId)):andThen(function(p8) --[[ line: 338 ]]
-					-- upvalues: var54 (copy)
+				var23(var28.createFriendConversation(conversationId)):andThen(function(p8) --[[ line: 327 ]]
+					-- upvalues: var49 (copy)
 					if p8 and p8.id then
-						var54(p8.id)
+						var49(p8.id)
 					end
-				end):catch(function(p7) --[[ line: 343 ]]
-					-- upvalues: loggerModule (copy), var53 (copy)
+				end):catch(function(p7) --[[ line: 332 ]]
+					-- upvalues: loggerModule (copy), var48 (copy)
 					loggerModule:debug("Error while trying to create a friend conversation: {}", p7)
-					var53()
+					var48()
 				end)
 				
 				return
 			end
-			var54(conversationId)
+			var49(conversationId)
 		end
 	end, {
-		var28, var33.createFriendConversation, conversationId, var49, var54, var53
+		var23, var28.createFriendConversation, conversationId, var44, var49, var48
 	})
-	local var56, var57 = react.useState({})
-	local var58 = react.useMemo(function() --[[ line: 363 ]]
+	local var51, var52 = react.useState({})
+	local var53 = react.useMemo(function() --[[ line: 352 ]]
 		-- upvalues: members (ref)
 		local t = {}
 		
@@ -285,14 +278,14 @@ return function(p0) --[[ line: 111 | named "SquadLobby" ]]
 		end
 		return t
 	end, { members })
-	local var59 = react.useCallback(function(p9, p10, p11) --[[ line: 384 ]]
-		-- upvalues: cryo (copy), var29 (ref), squadUserPartyStatusModule (copy), partyUserInvitedDurationSeconds (copy), partyInviteeNoResponseDurationSeconds (copy)
+	local var54 = react.useCallback(function(p9, p10, p11) --[[ line: 373 ]]
+		-- upvalues: cryo (copy), var24 (ref), squadUserPartyStatusModule (copy), partyUserInvitedDurationSeconds (copy), partyInviteeNoResponseDurationSeconds (copy)
 		local t = {}
-		local var90 = 0
+		local var84 = 0
 		
 		if p10 and #cryo.Dictionary.keys(p10) == 0 then
 			table.insert(t, {
-				userId = var29,
+				userId = var24,
 				partyStatus = squadUserPartyStatusModule.Connecting
 			})
 		elseif p9 then
@@ -304,21 +297,21 @@ return function(p0) --[[ line: 111 | named "SquadLobby" ]]
 				if p10[v] then
 					inactive = squadUserPartyStatusModule.Active
 				else
-					local var92 = p11 and cryo.List.findWhere(p11, function(p12) --[[ line: 409 ]]
+					local var86 = p11 and cryo.List.findWhere(p11, function(p12) --[[ line: 398 ]]
 						-- upvalues: v (ref)
 						return v == tostring(p12.userId)
 					end)
 					
-					if var92 then
-						local var93 = math.floor(p11[var92].invitedAtTimestampMs / 1000) or 0
+					if var86 then
+						local var87 = math.floor(p11[var86].invitedAtTimestampMs / 1000) or 0
 						
-						if timestamp >= var93 then
-							if timestamp - var93 < partyUserInvitedDurationSeconds then
+						if timestamp >= var87 then
+							if timestamp - var87 < partyUserInvitedDurationSeconds then
 								inactive = squadUserPartyStatusModule.Invited
-								var90 += 1
-							elseif timestamp - var93 < partyInviteeNoResponseDurationSeconds + partyUserInvitedDurationSeconds then
+								var84 += 1
+							elseif timestamp - var87 < partyInviteeNoResponseDurationSeconds + partyUserInvitedDurationSeconds then
 								inactive = squadUserPartyStatusModule.NoResponse
-								var90 += 1
+								var84 += 1
 							end
 						end
 					else
@@ -327,307 +320,276 @@ return function(p0) --[[ line: 111 | named "SquadLobby" ]]
 				end
 			end
 		end
-		return { users = t, numberOfUpdatesPending = var90 }
+		return { users = t, numberOfUpdatesPending = var84 }
 	end, {})
-	react.useEffect(function() --[[ line: 453 ]]
-		-- upvalues: var59 (ref), participants (ref), var58 (ref), invitees (ref), var57 (ref), setInterval (copy), clearInterval (copy)
-		var57(var59(participants, var58, invitees).users)
-		local var94 = nil
-		var94 = setInterval(function() --[[ line: 459 ]]
-			-- upvalues: var59 (copy), participants (copy), var58 (copy), invitees (copy), var57 (copy), clearInterval (copy), var94 (write)
-			local var95 = var59(participants, var58, invitees)
-			var57(var95.users)
+	react.useEffect(function() --[[ line: 442 ]]
+		-- upvalues: var54 (ref), participants (ref), var53 (ref), invitees (ref), var52 (ref), setInterval (copy), clearInterval (copy)
+		var52(var54(participants, var53, invitees).users)
+		local var88 = nil
+		var88 = setInterval(function() --[[ line: 448 ]]
+			-- upvalues: var54 (copy), participants (copy), var53 (copy), invitees (copy), var52 (copy), clearInterval (copy), var88 (write)
+			local var89 = var54(participants, var53, invitees)
+			var52(var89.users)
 			
-			if var95.numberOfUpdatesPending == 0 then
-				clearInterval(var94)
+			if var89.numberOfUpdatesPending == 0 then
+				clearInterval(var88)
 			end
 		end, 1000)
 		
-		return function() --[[ line: 468 ]]
-			-- upvalues: clearInterval (copy), var94 (write)
-			clearInterval(var94)
+		return function() --[[ line: 457 ]]
+			-- upvalues: clearInterval (copy), var88 (write)
+			clearInterval(var88)
 		end
-	end, { var58, invitees, participants, var59 })
-	local var60 = usePrevious(var44) or ""
-	react.useEffect(function() --[[ line: 475 ]]
-		-- upvalues: var60 (ref), var44 (ref), p0 (ref), conversationId (ref), var46 (ref), roactNavigationModule (copy), isWideMode (ref), var32 (ref)
-		if var60 ~= "" and var44 == "" then
+	end, { var53, invitees, participants, var54 })
+	local var55 = usePrevious(var39) or ""
+	react.useEffect(function() --[[ line: 464 ]]
+		-- upvalues: var55 (ref), var39 (ref), p0 (ref), conversationId (ref), var41 (ref), roactNavigationModule (copy), isWideMode (ref), var27 (ref)
+		if var55 ~= "" and var39 == "" then
 			p0.navigateAwayFromSquad()
 			
 			return
-		elseif var44 ~= "" and conversationId ~= "" and (var46 ~= "" and var46 ~= conversationId) then
+		elseif var39 ~= "" and conversationId ~= "" and (var41 ~= "" and var41 ~= conversationId) then
 			local list = {
 				roactNavigationModule.Actions.navigate({
 					routeName = "ChatConversation",
-					params = { conversationId = var46 }
+					params = { conversationId = var41 }
 				}),
 				roactNavigationModule.Actions.navigate({
 					routeName = "SquadLobby",
-					params = { conversationId = var46 }
+					params = { conversationId = var41 }
 				})
 			}
 			
 			if isWideMode then
-				var32.navigate("ChatLanding", { conversationId = var46 }, roactNavigationModule.StackActions.reset({ index = 2, actions = list }))
+				var27.navigate("ChatLanding", { conversationId = var41 }, roactNavigationModule.StackActions.reset({ index = 2, actions = list }))
 				
 				return
 			end
 			table.insert(list, 1, roactNavigationModule.Actions.navigate({ routeName = "ChatLanding" }))
-			var32.navigate("ChatLandingStack", { conversationId = var46 }, roactNavigationModule.StackActions.reset({ index = 3, actions = list }))
+			var27.navigate("ChatLandingStack", { conversationId = var41 }, roactNavigationModule.StackActions.reset({ index = 3, actions = list }))
 		end
 	end, {
-		var32,
-		var46,
+		var27,
+		var41,
 		conversationId,
-		var44,
+		var39,
 		p0.navigateAwayFromSquad
 	})
-	local var61 = usePrevious(members)
-	react.useEffect(function() --[[ line: 539 ]]
-		-- upvalues: members (ref), var61 (ref), var29 (ref), var28 (ref), userBlockingNetworking (copy), fFlagSquadsPresenceStoreMigration (copy), networkingPresence (copy)
+	local var56 = usePrevious(members)
+	react.useEffect(function() --[[ line: 528 ]]
+		-- upvalues: members (ref), var56 (ref), var24 (ref), var23 (ref), userBlockingNetworking (copy), networkingPresence (copy)
 		local t = {}
 		
 		if members then
-			local var98
+			local var92
 			for i, v in pairs(members) do
-				var98 = false
+				var92 = false
 				
-				if var61 then
-					for i_1, v_1 in pairs(var61) do
+				if var56 then
+					for i_1, v_1 in pairs(var56) do
 						if v_1.userId == v.userId then
-							var98 = true
+							var92 = true
 							break
 						end
 					end
 				end
-				if not var98 then
+				if not var92 then
 					table.insert(t, v.userId)
 					
-					if var29 ~= v.userId then
-						var28(userBlockingNetworking.IsBlockedById.API({ userId = v.userId, currentUserId = var29 }))
+					if var24 ~= v.userId then
+						var23(userBlockingNetworking.IsBlockedById.API({ userId = v.userId, currentUserId = var24 }))
 					end
 				end
 			end
 		end
-		if not fFlagSquadsPresenceStoreMigration then
-			var28(networkingPresence.GetPresencesFromUserIds.API(t))
-		end
-	end, { members, var29, var61 })
-	local var62 = react.useCallback(function() --[[ line: 573 ]]
-		-- upvalues: var39 (ref), var38 (ref)
-		var39(not var38)
-	end, { var38, var39 })
-	local var63 = constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + 26 + 20
-	local var64 = constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + 20
-	local var65, var66 = react.useState(nil)
-	local var67, var68 = react.useState(false)
-	local var69 = react.useCallback(function(p13) --[[ line: 585 ]]
-		-- upvalues: var35 (ref), var27 (ref)
+		var23(networkingPresence.GetPresencesFromUserIds.API(t))
+	end, { members, var24, var56 })
+	local var57 = react.useCallback(function() --[[ line: 558 ]]
+		-- upvalues: var34 (ref), var33 (ref)
+		var34(not var33)
+	end, { var33, var34 })
+	local var58 = constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + 26 + 20
+	local var59 = constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + 20
+	local var60, var61 = react.useState(nil)
+	local var62, var63 = react.useState(false)
+	local var64 = react.useCallback(function(p13) --[[ line: 570 ]]
+		-- upvalues: var30 (ref), var22 (ref)
 		if p13.Y > 0 then
-			var35(p13.Y + var27.Gap.Medium)
+			var30(p13.Y + var22.Gap.Medium)
 			
 			return
 		end
-		var35(0)
-	end, { var35, var27 })
-	local var70 = if fFlagSquadsPresenceStoreMigration then useSignalState(if fFlagSquadsPresenceStoreMigration then react.useMemo(function() --[[ line: 606 ]]
-		-- upvalues: signalsModule (copy), members (ref), var22 (copy)
-		return signalsModule.createComputed(function(p15) --[[ line: 607 ]]
-			-- upvalues: members (copy), var22 (copy)
-			local t = {}
-			
-			for i, v in ipairs(members or {}) do
-				local var103 = tostring(v.userId)
-				t[var103] = var22.GetPresenceByUserId(var103).data(p15)
-			end
-			return t
-		end)
-	end, { members }) else nil) else useSelector(react.useCallback(function(p14) --[[ line: 593 ]]
+		var30(0)
+	end, { var30, var22 })
+	local var65 = useSelector(react.useCallback(function(p14) --[[ line: 578 ]]
 		-- upvalues: members (ref)
 		local byUserId = p14.Squad and (p14.Squad.Presence and (p14.Squad.Presence.byUserId or {}))
 		local t = {}
 		
 		for i, v in ipairs(members or {}) do
-			local var101 = tostring(v.userId)
-			t[var101] = byUserId[var101]
+			local var95 = tostring(v.userId)
+			t[var95] = byUserId[var95]
 		end
 		return t
 	end, { members }))
 	
 	if fFlagEnableSquadRegroupServerCapacityCheck then
-		var71 = playersService.MaxPlayers > 1
-		var71 = nil
+		var66 = playersService.MaxPlayers > 1
+		var66 = nil
 	else
-		var71 = true
+		var66 = true
 	end
-	local var72 = react.useMemo(function() --[[ line: 625 ]]
-		-- upvalues: squadRegroupExperimentation (copy), p0 (ref), var71 (ref), var43 (ref), var70 (ref), var29 (ref), fFlagSquadsPresenceStoreMigration (copy), var23 (copy), presenceType (copy)
-		if not squadRegroupExperimentation.getSquadRegroupEnabled() or not p0.isInExperience or (not var71 or not var43) or (not var43.members or #var43.members <= 1 or (not var43.selfPermissions or not var43.selfPermissions.canSeeRegroupJoinButton)) then
+	local var67 = react.useMemo(function() --[[ line: 594 ]]
+		-- upvalues: squadRegroupExperimentation (copy), p0 (ref), var66 (ref), var38 (ref), var65 (ref), var24 (ref), presenceType (copy)
+		if not squadRegroupExperimentation.getSquadRegroupEnabled() or not p0.isInExperience or (not var66 or not var38) or (not var38.members or #var38.members <= 1 or (not var38.selfPermissions or not var38.selfPermissions.canSeeRegroupJoinButton)) then
 			return false
 		end
-		local var104 = var70[tostring(var29)]
+		local var96 = var65[tostring(var24)]
 		
-		if var104 == nil then
+		if var96 == nil then
 			return false
 		end
-		for i, v in pairs(var70) do
-			if v ~= nil and i ~= tostring(var29) and (v.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var23.Online else presenceType.Online) or v.userPresenceType == (if fFlagSquadsPresenceStoreMigration then var23.InGame else presenceType.InGame) and var104.gameId ~= (if fFlagSquadsPresenceStoreMigration then "" else nil) and (v.gameId ~= (if fFlagSquadsPresenceStoreMigration then "" else nil) and var104.gameId ~= v.gameId)) then
+		for i, v in pairs(var65) do
+			if v ~= nil and i ~= tostring(var24) and (v.userPresenceType == presenceType.Online or v.userPresenceType == presenceType.InGame and var96.gameId ~= nil and (v.gameId ~= nil and var96.gameId ~= v.gameId)) then
 				return true
 			end
 		end
 		return false
 	end, {
-		var70,
-		var29,
+		var65,
+		var24,
 		p0.isInExperience,
-		var43,
-		var71
+		var38,
+		var66
 	})
-	local var73 = false
-	
-	if luckyRecommendationExperimentation.getLuckyRecommendationEnabled() then
-		var73 = not p0.isInExperience and (members ~= nil and #members >= 2)
-	end
-	local var74 = var27.Size.Size_1000 + var27.Padding.Medium * 2
-	local var72_1 = fFlagEnableSquadRegroupExperimentationSmallScreenFix and var72
-	local var76 = if var72 and not var72_1 or var73 then var27.Gap.XXLarge + var74 else 0
-	local var77 = react.useMemo(function() --[[ line: 696 ]]
-		-- upvalues: enableSquadLobbyBanners (copy), react (copy), squadLobbyBannersModule (copy), var69 (ref)
-		return if enableSquadLobbyBanners then react.createElement(squadLobbyBannersModule, { onAbsoluteSizeChanged = var69 }) else nil
-	end, { var69 })
-	local var78 = react.useCallback(function() --[[ line: 704 ]]
-		-- upvalues: p0 (ref), var46 (ref)
-		p0.navigateToSquadInviteFriends(var46)
-	end, { var46, p0.navigateToSquadInviteFriends })
-	local useMemo = react.useMemo
-	useMemo = useMemo(function() --[[ line: 709 ]]
-		-- upvalues: react (copy), var34 (ref), var76 (ref), var30 (ref), var42 (ref), var72_1 (ref), foundation (copy), squadLobbyUserGridModule (copy), var40 (ref), var63 (ref), var27 (ref), var74 (ref), var56 (ref), p0 (ref), var33 (ref), eventNamesModule (copy), var46 (ref), squadPartySheetActionEnumModule (copy), var36 (ref), var66 (ref), var68 (ref), var78 (ref), squadLobbyRegroupRowModule (copy), var29 (ref)
+	local var68 = var22.Size.Size_1000 + var22.Padding.Medium * 2
+	local var67_1 = fFlagEnableSquadRegroupExperimentationSmallScreenFix and var67
+	local var70 = if var67_1 or not var67 then 0 else var22.Gap.XXLarge + var68
+	local var71 = react.useMemo(function() --[[ line: 648 ]]
+		-- upvalues: enableSquadLobbyBanners (copy), react (copy), squadLobbyBannersModule (copy), var64 (ref)
+		return if enableSquadLobbyBanners then react.createElement(squadLobbyBannersModule, { onAbsoluteSizeChanged = var64 }) else nil
+	end, { var64 })
+	local var72 = react.useCallback(function() --[[ line: 656 ]]
+		-- upvalues: p0 (ref), var41 (ref)
+		p0.navigateToSquadInviteFriends(var41)
+	end, { var41, p0.navigateToSquadInviteFriends })
+	local var73 = react.useMemo(function() --[[ line: 661 ]]
+		-- upvalues: react (copy), var29 (ref), var70 (ref), var25 (ref), var37 (ref), var67_1 (ref), foundation (copy), squadLobbyUserGridModule (copy), var35 (ref), var58 (ref), var22 (ref), var68 (ref), var51 (ref), p0 (ref), var28 (ref), eventNamesModule (copy), var41 (ref), squadPartySheetActionEnumModule (copy), var31 (ref), var61 (ref), var63 (ref), var72 (ref), squadLobbyRegroupRowModule (copy), var24 (ref)
 		return react.createElement("ScrollingFrame", {
-			Position = UDim2.fromOffset(0, var34),
-			Size = UDim2.new(1, 0, 1, -(var34 + var76)),
+			Position = UDim2.fromOffset(0, var29),
+			Size = UDim2.new(1, 0, 1, -(var29 + var70)),
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			CanvasSize = UDim2.new(),
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			ScrollBarImageColor3 = var30.Theme.UIEmphasis.Color,
-			ScrollBarImageTransparency = var30.Theme.UIEmphasis.Transparency,
+			ScrollBarImageColor3 = var25.Theme.UIEmphasis.Color,
+			ScrollBarImageTransparency = var25.Theme.UIEmphasis.Transparency,
 			ScrollBarThickness = 4,
 			Selectable = false,
 			ZIndex = 0,
-			[react.Change.AbsoluteSize] = var42
+			[react.Change.AbsoluteSize] = var37
 		}, {
-			FrameContents = if var72_1 then react.createElement(foundation.View, {
+			FrameContents = if var67_1 then react.createElement(foundation.View, {
 				tag = "auto-y size-full-0 bg-surface-0 col align-x-center align-y-top"
 			}, {
 				UserGridContainer = react.createElement(foundation.View, { tag = "auto-y size-full-0 bg-surface-0", LayoutOrder = 1 }, {
 					SquadLobbyUserGrid = react.createElement(squadLobbyUserGridModule, {
-						containerSize = var40 - Vector2.new(0, var63 + var27.Gap.Medium + var74),
+						containerSize = var35 - Vector2.new(0, var58 + var22.Gap.Medium + var68),
 						paddingBottom = UDim.new(0, 0),
-						users = var56,
+						users = var51,
 						isInExperience = p0.isInExperience,
-						onUserCardActivated = function(p16) --[[ line: 739 ]]
-							-- upvalues: var33 (copy), eventNamesModule (copy), var46 (copy), squadPartySheetActionEnumModule (copy), var36 (copy), var66 (copy), var68 (copy)
-							var33.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-								parentChannelId = var46,
+						onUserCardActivated = function(p15) --[[ line: 691 ]]
+							-- upvalues: var28 (copy), eventNamesModule (copy), var41 (copy), squadPartySheetActionEnumModule (copy), var31 (copy), var61 (copy), var63 (copy)
+							var28.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+								parentChannelId = var41,
 								actionType = squadPartySheetActionEnumModule.UserCardClicked,
-								voiceStatus = var36
+								voiceStatus = var31
 							})
-							var66(p16)
-							var68(true)
+							var61(p15)
+							var63(true)
 						end,
 						navigateToHomePage = p0.navigateToHomePage,
-						navigateToSquadInviteFriends = var78
+						navigateToSquadInviteFriends = var72
 					})
 				}),
 				RegroupRowSpacer = react.createElement(foundation.View, {
 					tag = "bg-surface-0",
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, var27.Gap.Medium)
+					Size = UDim2.new(1, 0, 0, var22.Gap.Medium)
 				}),
 				SquadLobbyRegroupRow = react.createElement(foundation.View, {
 					tag = "bg-surface-0",
 					LayoutOrder = 3,
-					Size = UDim2.new(1, 0, 0, var74)
+					Size = UDim2.new(1, 0, 0, var68)
 				}, {
-					Row = react.createElement(squadLobbyRegroupRowModule, { localUserId = var29 })
+					Row = react.createElement(squadLobbyRegroupRowModule, { localUserId = var24 })
 				}),
 				BottomPadding = react.createElement(foundation.View, {
 					tag = "bg-surface-0",
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, var63)
+					Size = UDim2.new(1, 0, 0, var58)
 				})
 			}) else nil,
-			SquadLobbyUserGrid = if var72_1 then nil else react.createElement(squadLobbyUserGridModule, {
-				containerSize = var40 - Vector2.new(0, var63),
-				paddingBottom = UDim.new(0, var63),
-				users = var56,
+			SquadLobbyUserGrid = if var67_1 then nil else react.createElement(squadLobbyUserGridModule, {
+				containerSize = var35 - Vector2.new(0, var58),
+				paddingBottom = UDim.new(0, var58),
+				users = var51,
 				isInExperience = p0.isInExperience,
-				onUserCardActivated = function(p17) --[[ line: 781 ]]
-					-- upvalues: var33 (copy), eventNamesModule (copy), var46 (copy), squadPartySheetActionEnumModule (copy), var36 (copy), var66 (copy), var68 (copy)
-					var33.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
-						parentChannelId = var46,
+				onUserCardActivated = function(p16) --[[ line: 733 ]]
+					-- upvalues: var28 (copy), eventNamesModule (copy), var41 (copy), squadPartySheetActionEnumModule (copy), var31 (copy), var61 (copy), var63 (copy)
+					var28.fireSquadAnalytics(eventNamesModule.PartySheetAction, {
+						parentChannelId = var41,
 						actionType = squadPartySheetActionEnumModule.UserCardClicked,
-						voiceStatus = var36
+						voiceStatus = var31
 					})
-					var66(p17)
-					var68(true)
+					var61(p16)
+					var63(true)
 				end,
 				navigateToHomePage = p0.navigateToHomePage,
-				navigateToSquadInviteFriends = var78
+				navigateToSquadInviteFriends = var72
 			})
 		})
 	end, {
-		var66, var68, var40, members, var78, var42, p0.navigateToHomePage, var63,
-		var34, if var72 or var73 then var76 else nil, var56, var72_1,
-		if var72_1 then var74 else nil, if var72_1 then var29 else nil, var36
+		var61, var63, var35, members, var72, var37, p0.navigateToHomePage, var58,
+		var29, if var67 then var70 else nil, var51, var67_1,
+		if var67_1 then var68 else nil, if var67_1 then var24 else nil, var31
 	})
-	local var79 = react.useMemo(function() --[[ line: 812 ]]
-		-- upvalues: react (copy), squadLobbyActionBarModule (copy), var31 (ref), var49 (ref), p0 (ref), var62 (ref), var44 (ref)
+	local var74 = react.useMemo(function() --[[ line: 764 ]]
+		-- upvalues: react (copy), squadLobbyActionBarModule (copy), var26 (ref), var44 (ref), p0 (ref), var57 (ref), var39 (ref)
 		return react.createElement(squadLobbyActionBarModule, {
-			squadState = var31,
+			squadState = var26,
 			anchorPoint = Vector2.new(0.5, 1),
-			hasUnreadMessages = if var49 and var49.hasUnreadMessages then var49.hasUnreadMessages else false,
+			hasUnreadMessages = if var44 and var44.hasUnreadMessages then var44.hasUnreadMessages else false,
 			navigateAwayFromSquad = p0.navigateAwayFromSquad,
-			navigateToChat = p0.navigateToChat,
 			navigateToHomePage = p0.navigateToHomePage,
-			toggleVoiceChatMenu = var62,
+			toggleVoiceChatMenu = var57,
 			position = UDim2.new(0.5, 0, 1, -20),
-			squadId = var44,
+			squadId = var39,
 			isInExperience = p0.isInExperience
 		})
 	end, {
-		var44, p0.isInExperience, p0.navigateToChat, p0.navigateToHomePage, var31,
-		var62, var49 and var49.hasUnreadMessages
+		var39, p0.isInExperience, p0.navigateToHomePage, var26, var57,
+		var44 and var44.hasUnreadMessages
 	})
-	local var80 = react.useMemo(function() --[[ line: 837 ]]
-		-- upvalues: var72_1 (ref), var72 (ref), react (copy), foundation (copy), constantsModule (copy), var27 (ref), var74 (ref), squadLobbyRegroupRowModule (copy), var29 (ref)
-		return if var72_1 or not var72 then nil else react.createElement(foundation.View, {
+	local var75 = react.useMemo(function() --[[ line: 787 ]]
+		-- upvalues: var67_1 (ref), var67 (ref), react (copy), foundation (copy), constantsModule (copy), var22 (ref), var68 (ref), squadLobbyRegroupRowModule (copy), var24 (ref)
+		return if var67_1 or not var67 then nil else react.createElement(foundation.View, {
 			tag = "anchor-bottom-center auto-none gui-object-defaults",
-			Position = UDim2.new(0.5, 0, 1, -(20 + constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + var27.Gap.XXLarge)),
-			Size = UDim2.new(1, 0, 0, var74)
+			Position = UDim2.new(0.5, 0, 1, -(20 + constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + var22.Gap.XXLarge)),
+			Size = UDim2.new(1, 0, 0, var68)
 		}, {
-			Row = react.createElement(squadLobbyRegroupRowModule, { localUserId = var29 })
+			Row = react.createElement(squadLobbyRegroupRowModule, { localUserId = var24 })
 		})
-	end, { var72, var29, var27, var74 })
-	local var81 = react.useMemo(function() --[[ line: 858 ]]
-		-- upvalues: var73 (write), react (copy), foundation (copy), constantsModule (copy), var27 (ref), var74 (ref), squadLobbyLuckyRecommendationRowModule (copy)
-		return if var73 then react.createElement(foundation.View, {
-			tag = "anchor-bottom-center auto-none gui-object-defaults",
-			Position = UDim2.new(0.5, 0, 1, -(20 + constantsModule.SQUAD_LOBBY_ACTION_BAR_HEIGHT + var27.Gap.XXLarge)),
-			Size = UDim2.new(1, 0, 0, var74)
-		}, {
-			Row = react.createElement(squadLobbyLuckyRecommendationRowModule)
-		}) else nil
-	end, { var73, var27, var74 })
-	local var82 = react.useMemo(function() --[[ line: 877 ]]
-		-- upvalues: var38 (ref), react (copy), foundation (copy), stateLayerAffordance (copy), var39 (ref), var64 (ref), var27 (ref), squadLobbyVoiceChatMenuModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), p0 (ref)
-		return if var38 then react.createElement(foundation.View, {
+	end, { var67, var24, var22, var68 })
+	local var76 = react.useMemo(function() --[[ line: 808 ]]
+		-- upvalues: var33 (ref), react (copy), foundation (copy), stateLayerAffordance (copy), var34 (ref), var59 (ref), var22 (ref), squadLobbyVoiceChatMenuModule (copy), fFlagEnablePartyVoiceChangersInLua (copy), p0 (ref)
+		return if var33 then react.createElement(foundation.View, {
 			Size = UDim2.new(1, 0, 1, 0),
 			stateLayer = { affordance = stateLayerAffordance.None },
-			onActivated = function() --[[ line: 883 ]]
-				-- upvalues: var39 (copy)
-				var39(false)
+			onActivated = function() --[[ line: 814 ]]
+				-- upvalues: var34 (copy)
+				var34(false)
 			end
 		}, {
 			react.createElement(foundation.ScrollView, {
@@ -647,12 +609,12 @@ return function(p0) --[[ line: 111 | named "SquadLobby" ]]
 			}, {
 				FlexibleSpace = react.createElement(foundation.View, {
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, var64),
+					Size = UDim2.new(1, 0, 0, var59),
 					flexItem = { FlexMode = Enum.UIFlexMode.Fill },
 					stateLayer = { affordance = stateLayerAffordance.None },
-					onActivated = function() --[[ line: 907 ]]
-						-- upvalues: var39 (copy)
-						var39(false)
+					onActivated = function() --[[ line: 838 ]]
+						-- upvalues: var34 (copy)
+						var34(false)
 					end
 				}),
 				Menu = react.createElement(foundation.View, {
@@ -661,9 +623,9 @@ return function(p0) --[[ line: 111 | named "SquadLobby" ]]
 					Size = UDim2.new(1, 0, 1, 0),
 					flexItem = { ItemLineAlignment = Enum.ItemLineAlignment.Center },
 					AutomaticSize = Enum.AutomaticSize.Y,
-					padding = Vector2.new(var27.Padding.XLarge, var27.Padding.Medium),
+					padding = Vector2.new(var22.Padding.XLarge, var22.Padding.Medium),
 					stateLayer = { affordance = stateLayerAffordance.None },
-					onActivated = function() --[[ line: 920 ]] end
+					onActivated = function() --[[ line: 851 ]] end
 				}, {
 					SquadLobbyVoiceChatMenu = react.createElement(squadLobbyVoiceChatMenuModule, {
 						openSquadVoiceChangers = if fFlagEnablePartyVoiceChangersInLua then p0.openSquadVoiceChangers else nil
@@ -671,57 +633,55 @@ return function(p0) --[[ line: 111 | named "SquadLobby" ]]
 				}),
 				BottomPadding = react.createElement(foundation.View, {
 					LayoutOrder = 3,
-					Size = UDim2.new(1, 0, 0, var64),
+					Size = UDim2.new(1, 0, 0, var59),
 					stateLayer = { affordance = stateLayerAffordance.None },
-					onActivated = function() --[[ line: 933 ]]
-						-- upvalues: var39 (copy)
-						var39(false)
+					onActivated = function() --[[ line: 864 ]]
+						-- upvalues: var34 (copy)
+						var34(false)
 					end
 				})
 			})
 		}) else nil
-	end, { var64, var38, var39, var27 })
-	local var83 = react.useMemo(function() --[[ line: 942 ]]
-		-- upvalues: var67 (ref), var65 (ref), react (copy), squadLobbyUserDropdownMenuModule (copy), p0 (ref), var66 (ref), var68 (ref), var46 (ref)
-		return if var67 and var65 then react.createElement(squadLobbyUserDropdownMenuModule, {
-			userId = var65,
+	end, { var59, var33, var34, var22 })
+	local var77 = react.useMemo(function() --[[ line: 873 ]]
+		-- upvalues: var62 (ref), var60 (ref), react (copy), squadLobbyUserDropdownMenuModule (copy), p0 (ref), var61 (ref), var63 (ref), var41 (ref)
+		return if var62 and var60 then react.createElement(squadLobbyUserDropdownMenuModule, {
+			userId = var60,
 			isInExperience = p0.isInExperience,
-			onDismiss = function() --[[ line: 947 ]]
-				-- upvalues: var66 (copy), var68 (copy)
-				var66(nil)
-				var68(false)
+			onDismiss = function() --[[ line: 878 ]]
+				-- upvalues: var61 (copy), var63 (copy)
+				var61(nil)
+				var63(false)
 			end,
-			openViewProfile = function() --[[ line: 951 ]]
-				-- upvalues: p0 (copy), var65 (copy)
-				p0.openViewProfile(var65)
+			openViewProfile = function() --[[ line: 882 ]]
+				-- upvalues: p0 (copy), var60 (copy)
+				p0.openViewProfile(var60)
 			end,
 			openSquadVoiceAbuseReport = p0.openSquadVoiceAbuseReport,
-			parentChannelId = var46
+			parentChannelId = var41
 		}) else nil
 	end, {
-		var46, p0.isInExperience, var67, var68, p0.openViewProfile, var65, var66
+		var41, p0.isInExperience, var62, var63, p0.openViewProfile, var60, var61
 	})
-	react.useEffect(function() --[[ line: 968 ]]
-		-- upvalues: squadCoordinationExperienceJoinExperimentation (copy), fFlagEnableSquadRegroupExperimentation (copy), squadRegroupExperimentation (copy), luckyRecommendationExperimentation (copy)
+	react.useEffect(function() --[[ line: 899 ]]
+		-- upvalues: squadCoordinationExperienceJoinExperimentation (copy), fFlagEnableSquadRegroupExperimentation (copy), squadRegroupExperimentation (copy)
 		squadCoordinationExperienceJoinExperimentation.logExposure()
 		
 		if fFlagEnableSquadRegroupExperimentation then
 			squadRegroupExperimentation.logExposure()
 		end
-		luckyRecommendationExperimentation.logExposure()
 	end, {})
-	local var84 = roact.createFragment({
-		SquadLobbyBanners = var77,
-		SquadLobbyUsersScrollingFrame = useMemo,
-		SquadLobbyRegroupRow = var80,
-		SquadLobbyLuckyRecommendationRow = var81,
-		SquadLobbyActionBar = var79,
-		SquadLobbyVoiceChatMenu = var82,
-		UserDropdownMenu = var83
+	local var78 = roact.createFragment({
+		SquadLobbyBanners = var71,
+		SquadLobbyUsersScrollingFrame = var73,
+		SquadLobbyRegroupRow = var75,
+		SquadLobbyActionBar = var74,
+		SquadLobbyVoiceChatMenu = var76,
+		UserDropdownMenu = var77
 	})
 	
 	if squadCoordinationExperienceJoinExperimentation.getIsSquadLobbySessionEnabled() then
-		var84 = react.createElement(squadLobbySessionProvider.Provider, nil, var84)
+		var78 = react.createElement(squadLobbySessionProvider.Provider, nil, var78)
 	end
-	return var84
+	return var78
 end

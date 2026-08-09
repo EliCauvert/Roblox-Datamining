@@ -9,7 +9,7 @@ local text = foundationModule.Text
 local enums = foundationModule.Enums
 local fFlagAXDurables2Option = avatarExperienceFlagsModule.FFlagAXDurables2Option
 
-return reactModule.forwardRef(function(p0, _) --[[ line: 28 ]]
+return reactModule.forwardRef(function(p0, _) --[[ line: 21 ]]
 	-- upvalues: useTokens (ref), useLocalization (ref), fFlagAXDurables2Option (ref), reactModule (ref), foundationModule (ref), enums (ref), text (ref)
 	local var3 = useTokens()
 	local var4 = useLocalization({
@@ -29,14 +29,13 @@ return reactModule.forwardRef(function(p0, _) --[[ line: 28 ]]
 	return reactModule.createElement(foundationModule.View, {
 		tag = {
 			["row align-y-center gap-small padding-medium radius-medium stroke-standard"] = true,
-			["align-x-center"] = if fFlagAXDurables2Option then p0.isFullWidth else nil,
 			["stroke-thick"] = p0.option.selected,
 			["stroke-system-contrast"] = p0.option.selected,
 			["stroke-emphasis"] = not p0.option.selected
 		},
 		onActivated = p0.onActivated,
-		AutomaticSize = if fFlagAXDurables2Option and p0.isFullWidth then Enum.AutomaticSize.None else Enum.AutomaticSize.X,
-		Size = if fFlagAXDurables2Option and p0.isFullWidth then UDim2.new(1, 0, 0, var3.Size.Size_800) else UDim2.new(0, 0, 0, var3.Size.Size_1000),
+		AutomaticSize = Enum.AutomaticSize.X,
+		Size = UDim2.new(0, 0, 0, if fFlagAXDurables2Option then var3.Size.Size_800 else var3.Size.Size_1000),
 		stateLayer = { affordance = enums.StateLayerAffordance.None },
 		selection = { Selectable = true }
 	}, {
@@ -48,8 +47,8 @@ return reactModule.forwardRef(function(p0, _) --[[ line: 28 ]]
 			selection = { Selectable = false }
 		}),
 		PriceTag = reactModule.createElement(foundationModule.View, {
-			LayoutOrder = 2,
-			tag = if fFlagAXDurables2Option then "row align-y-center gap-xxsmall auto-xy" else "row align-y-center gap-xsmall auto-xy"
+			tag = "row align-y-center gap-xsmall auto-xy",
+			LayoutOrder = 2
 		}, {
 			RobuxIcon = reactModule.createElement(foundationModule.Icon, {
 				LayoutOrder = 1,
@@ -60,30 +59,9 @@ return reactModule.forwardRef(function(p0, _) --[[ line: 28 ]]
 			PriceLabel = reactModule.createElement(text, {
 				tag = "auto-xy text-body-small",
 				LayoutOrder = 2,
-				Text = if fFlagAXDurables2Option and p0.option.selected and p0.option.priceInRobuxDiscountedByOffers then tostring(p0.option.priceInRobuxDiscountedByOffers) else tostring(p0.option.price),
+				Text = tostring(p0.option.price),
 				selection = { Selectable = false }
 			})
-		}),
-		OriginalPriceTag = if fFlagAXDurables2Option and (p0.option.discountInformation or p0.option.priceInRobuxDiscountedByOffers and p0.option.selected and p0.option.priceInRobuxDiscountedByOffers < p0.option.price) then reactModule.createElement(foundationModule.View, { tag = "auto-xy", LayoutOrder = 3 }, {
-			PriceContent = reactModule.createElement(foundationModule.View, { tag = "row align-y-center gap-xxsmall auto-xy" }, {
-				RobuxIcon = reactModule.createElement(foundationModule.Icon, {
-					LayoutOrder = 1,
-					name = enums.IconName.Robux,
-					variant = enums.IconVariant.Filled,
-					size = enums.IconSize.XSmall,
-					style = var3.Color.Content.Muted
-				}),
-				PriceLabel = reactModule.createElement(text, {
-					tag = "auto-xy text-body-small content-muted",
-					LayoutOrder = 2,
-					Text = if p0.option.discountInformation then tostring(p0.option.discountInformation.originalPrice) else tostring(p0.option.price),
-					selection = { Selectable = false }
-				})
-			}),
-			Strikethrough = reactModule.createElement(foundationModule.View, {
-				tag = "position-center-center anchor-center-center bg-system-neutral",
-				Size = UDim2.new(1, 0, 0, 1)
-			})
-		}) else nil
+		})
 	})
 end)

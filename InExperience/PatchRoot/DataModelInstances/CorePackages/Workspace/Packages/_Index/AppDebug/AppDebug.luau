@@ -13,7 +13,7 @@ return {
 	LogTree = require(script.LogTree),
 	register = function() --[[ line: 33 ]]
 		-- upvalues: devOnly (ref), var0 (ref), var2 (write), var3 (write)
-		if _G.IS_PRODUCTION or devOnly == nil then
+		if devOnly == nil then
 			return var0
 		elseif var2 then
 			return var3 or var0
@@ -21,7 +21,7 @@ return {
 		var2 = true
 		local list = { require(devOnly.TagAnnotation.TagAnnotationSection) }
 		
-		var3 = function() --[[ line: 48 ]]
+		var3 = function() --[[ line: 47 ]]
 			-- upvalues: list (ref), var2 (copy), var3 (copy)
 			for i, v in list do
 				v()

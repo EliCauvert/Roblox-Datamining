@@ -24,66 +24,31 @@ local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagPr
 local fFlagSwitchProfileWidthHookToSocialCommon = require(parent.SharedFlags).FFlagSwitchProfileWidthHookToSocialCommon
 local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
 local var11 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local fFlagMutualConnectionsListPagination = require(parent.SharedFlags).FFlagMutualConnectionsListPagination
-local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
-local var12 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
-local useSignalState = require(parent.SignalsReact).useSignalState
 
-return function(_) --[[ line: 43 | named "MutualConnectionList" ]]
-	-- upvalues: useDispatch (ref), useNavigationProps (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), fFlagEnableSplitPane (ref), useSignalState (ref), var12 (ref), fFlagMutualConnectionsListPagination (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), userListViewAdaptor (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateDown (ref)
-	local var16
-	local var13 = useDispatch()
-	local var14 = useNavigationProps(function(_, p0) --[[ line: 45 ]]
+return function(_) --[[ line: 34 | named "MutualConnectionList" ]]
+	-- upvalues: useDispatch (ref), useNavigationProps (ref), useScreenSize (ref), useSelector (ref), getSafeAreaSize (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), enumsModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), constantsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), userListViewAdaptor (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var11 (ref), navigateDown (ref)
+	local var15
+	local var12 = useDispatch()
+	local var13 = useNavigationProps(function(_, p0) --[[ line: 36 ]]
 		return { mutualFriendIds = p0.mutualFriendIds }
 	end)
-	local var15 = getSafeAreaSize(useScreenSize(), useSelector(function(p1) --[[ line: 53 ]]
+	local var14 = getSafeAreaSize(useScreenSize(), useSelector(function(p1) --[[ line: 44 ]]
 		return p1.GlobalGuiInset
 	end))
 	
 	if fFlagProfilePlatformNewProfileHeader then
-		var16 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-		var16 = nil
+		var15 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
+		var15 = nil
 	else
-		var16 = false
+		var15 = false
 	end
 	local t = {
 		position = UDim2.fromScale(1, 0),
-		size = UDim2.fromScale(if fFlagEnableSplitPane and (if fFlagEnableSplitPane then useSignalState(var12.getStore().getIsSplitEnabled) else false) then 1 else (if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var16) else math.min(var15.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)) / var15.X.Offset, 1),
+		size = UDim2.fromScale((if fFlagProfilePlatformNewProfileHeader then if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var15) else math.min(var14.X.Offset, constantsModule.MAXIMUM_CONTAINER_WIDTH)) / var14.X.Offset, 1),
 		anchorPoint = Vector2.new(1, 0)
 	}
-	local mutualFriendIds = var14.mutualFriendIds
-	local var18 = if fFlagMutualConnectionsListPagination then mutualFriendIds else nil
-	local var19 = nil
-	local var20 = nil
-	
-	if fFlagMutualConnectionsListPagination then
-		local var21, var22 = reactModule.useState(25)
-		reactModule.useEffect(function() --[[ line: 90 ]]
-			-- upvalues: var22 (ref)
-			var22(25)
-		end, { mutualFriendIds })
-		var20 = reactModule.useCallback(function() --[[ line: 94 ]]
-			-- upvalues: var22 (ref), mutualFriendIds (ref)
-			var22(function(p2) --[[ line: 95 ]]
-				-- upvalues: mutualFriendIds (copy)
-				return math.min(p2 + 25, #mutualFriendIds)
-			end)
-		end, { mutualFriendIds })
-		var18 = reactModule.useMemo(function() --[[ line: 100 ]]
-			-- upvalues: var21 (ref), mutualFriendIds (ref)
-			if var21 >= #mutualFriendIds then
-				return mutualFriendIds
-			end
-			local t = {}
-			
-			for i = 1, var21 do
-				table.insert(t, mutualFriendIds[i])
-			end
-			return t
-		end, { mutualFriendIds, var21 })
-		var19 = var21 < #mutualFriendIds
-	end
-	local var23 = useLocalization({
+	local mutualFriendIds = var13.mutualFriendIds
+	local var17 = useLocalization({
 		mutualConnections = {
 			textKeysModule.MutualConnectionsTitle,
 			numConnections = #mutualFriendIds
@@ -92,14 +57,14 @@ return function(_) --[[ line: 43 | named "MutualConnectionList" ]]
 	})
 	
 	return if #mutualFriendIds == 0 then nil else reactModule.createElement(userListViewAdaptor, {
-		users = if fFlagMutualConnectionsListPagination then var18 else mutualFriendIds,
-		title = if #mutualFriendIds == 1 then var23.mutualConnection else var23.mutualConnections,
+		users = mutualFriendIds,
+		title = if #mutualFriendIds == 1 then var17.mutualConnection else var17.mutualConnections,
 		wideModePeekViewLayout = t,
-		onUserSelected = function(p3) --[[ line: 132 ]]
-			-- upvalues: appPage (copy), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var13 (ref), navigateDown (copy)
+		onUserSelected = function(p2) --[[ line: 84 ]]
+			-- upvalues: appPage (copy), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), var11 (copy), var12 (ref), navigateDown (copy)
 			local t = {
 				name = appPage.ProfilePlatform,
-				detail = p3,
+				detail = p2,
 				extraProps = {
 					profileType = enumsModule.ProfileTypes.User,
 					source = enumsModule.Sources.MutualConnectionsList
@@ -111,9 +76,7 @@ return function(_) --[[ line: 43 | named "MutualConnectionList" ]]
 				
 				return
 			end
-			var13(navigateDown(t))
-		end,
-		hasMore = if fFlagMutualConnectionsListPagination then var19 else nil,
-		onLoadMore = if fFlagMutualConnectionsListPagination then var20 else nil
+			var12(navigateDown(t))
+		end
 	})
 end

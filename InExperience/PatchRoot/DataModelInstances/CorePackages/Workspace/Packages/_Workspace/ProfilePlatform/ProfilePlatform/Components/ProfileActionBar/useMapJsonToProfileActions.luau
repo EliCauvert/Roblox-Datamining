@@ -26,9 +26,6 @@ local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatfo
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagProfilePlatformEnableEditLookModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
 local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
-local fFlagProfilePlatformEnableUnlockChatModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat)
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var20 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
 local dashModule = require(parent.Dash)
 local t = {
 	[enumsModule.ProfileActions.AcceptFriendRequest] = true,
@@ -38,7 +35,7 @@ local t = {
 	[enumsModule.ProfileActions.AddFriendFromContactsSent] = true,
 	[enumsModule.ProfileActions.CannotAddFriend] = true,
 	[enumsModule.ProfileActions.Chat] = true,
-	[enumsModule.ProfileActions.UnlockChat] = if fFlagProfilePlatformEnableUnlockChatModule then true else nil,
+	[enumsModule.ProfileActions.UnlockChat] = if require(profilePlatform.Flags.FFlagProfilePlatformEnableUnlockChat) then true else nil,
 	[enumsModule.ProfileActions.EditAlias] = true,
 	[enumsModule.ProfileActions.EditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then true else nil,
 	[enumsModule.ProfileActions.EditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then true else nil,
@@ -58,7 +55,7 @@ local t = {
 	[enumsModule.ProfileActions.CurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then true else nil
 }
 
-function isJoinExperience(p0) --[[ line: 94 ]]
+function isJoinExperience(p0) --[[ line: 87 ]]
 	-- upvalues: enumsModule (ref)
 	for i, v in p0 do
 		if v.type == enumsModule.ProfileActions.JoinExperience then
@@ -68,63 +65,53 @@ function isJoinExperience(p0) --[[ line: 94 ]]
 	return false
 end
 
-return function(p1) --[[ line: 103 ]]
-	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), useProfileActionsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), var20 (ref), useEffectOnce (ref), fFlagProfilePlatformEnableUserProfileButtonsBacktestModule (ref), dashModule (ref), t (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref)
-	local var23 = useDispatch()
+return function(p1) --[[ line: 96 ]]
+	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), useProfileActionsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), useEffectOnce (ref), fFlagProfilePlatformEnableUserProfileButtonsBacktestModule (ref), dashModule (ref), t (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref)
+	local var20 = useDispatch()
 	local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
-	local var25 = if fFlagProfilePlatformPresenceStoreMigrationModule then nil else useSelector(function(p2) --[[ line: 109 ]]
+	local var22 = useSelector(function(p2) --[[ line: 100 ]]
 		-- upvalues: networkingPresenceModule (copy), p1 (ref), networkStatus (copy)
 		return networkingPresenceModule.GetPresencesFromUserIds.getStatus(p2, p1) == networkStatus.NotStarted
 	end)
-	local var26 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
+	local var23 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
 	local t_1 = {}
 	local t_2 = {}
 	local t_3 = {}
 	
 	if fFlagProfilePlatformAddCurrentlyPlayingModule then
-		reactModule.useEffect(function() --[[ line: 122 ]]
-			-- upvalues: actions (ref), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var20 (copy), p1 (ref), var23 (ref), networkingPresenceModule (copy)
+		reactModule.useEffect(function() --[[ line: 113 ]]
+			-- upvalues: actions (ref), var20 (ref), networkingPresenceModule (copy), p1 (ref)
 			if isJoinExperience(actions.buttons) then
-				if fFlagProfilePlatformPresenceStoreMigrationModule then
-					var20.RefreshPresenceByUserId(p1)
-					
-					return
-				end
-				var23(networkingPresenceModule.GetPresencesFromUserIds.API({ p1 }))
+				var20(networkingPresenceModule.GetPresencesFromUserIds.API({ p1 }))
 			end
-		end, { actions.buttons, var23, p1 })
+		end, { actions.buttons, var20, p1 })
 	else
-		useEffectOnce(function() --[[ line: 133 ]]
-			-- upvalues: fFlagProfilePlatformPresenceStoreMigrationModule (copy), var20 (copy), p1 (ref), var23 (ref), networkingPresenceModule (copy)
-			if fFlagProfilePlatformPresenceStoreMigrationModule then
-				var20.RefreshPresenceByUserId(p1)
-				
-				return
-			end
-			var23(networkingPresenceModule.GetPresencesFromUserIds.API({ p1 }))
-		end, isJoinExperience(actions.buttons) and (if fFlagProfilePlatformPresenceStoreMigrationModule then true else var25))
+		useEffectOnce(function() --[[ line: 119 ]]
+			-- upvalues: var20 (ref), networkingPresenceModule (copy), p1 (ref)
+			var20(networkingPresenceModule.GetPresencesFromUserIds.API({ p1 }))
+		end, isJoinExperience(actions.buttons) and var22)
 	end
-	local buttons = fFlagProfilePlatformEnableUserProfileButtonsBacktestModule and dashModule.find(actions.buttons, function(p3) --[[ line: 146 ]]
+	local buttons = fFlagProfilePlatformEnableUserProfileButtonsBacktestModule and dashModule.find(actions.buttons, function(p3) --[[ line: 125 ]]
 		-- upvalues: enumsModule (copy)
 		return p3.type == enumsModule.ProfileActions.JoinExperience
 	end)
 	
 	for i, v in ipairs(actions.buttons) do
 		if not buttons or v.type == enumsModule.ProfileActions.JoinExperience or not t[v.type] then
-			local type = var26[v.type]
+			local type = var23[v.type]
 			
 			if fFlagProfilePlatformEnableEditAppearanceMenuModule and v.subActions then
 				local t_4 = {}
 				
 				for i_1, v_1 in v.subActions do
-					local var32 = var26[v_1]
+					local var29 = var23[v_1]
 					
-					if var32 then
+					if var29 then
 						table.insert(t_4, {
 							id = v_1,
-							text = var32.text,
-							icon = var32.icon,
-							onActivated = var32.onActivated
+							text = var29.text,
+							icon = var29.icon,
+							onActivated = var29.onActivated
 						})
 					end
 				end
@@ -136,14 +123,14 @@ return function(p1) --[[ line: 103 ]]
 				if fFlagEnableCommunityVerificationModalModule and v.type == enumsModule.ProfileActions.JoinCommunity and (v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelLow or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelMedium or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelHigh) then
 					type.icon = if fFlagEnableCommunityVerificationModalModule and fFlagPortEnableCommunityVerificationModalModule then iconName.LockClosed else nil
 					
-					function type.onActivated() --[[ line: 195 ]]
-						-- upvalues: enumsModule (copy), v (ref), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var23 (ref), navigateDown (copy)
+					function type.onActivated() --[[ line: 174 ]]
+						-- upvalues: enumsModule (copy), v (ref), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var20 (ref), navigateDown (copy)
 						local t = {
 							name = enumsModule.Screens.CommunityVerificationModal,
 							extraProps = { disabledReason = v.disabledReason }
 						}
 						
-						return if fFlagSignalsNavP3Dispatch then var5.down(var5.fromLegacyPage(t)) else var23(navigateDown(t))
+						return if fFlagSignalsNavP3Dispatch then var5.down(var5.fromLegacyPage(t)) else var20(navigateDown(t))
 					end
 				else
 					type.isDisabled = true

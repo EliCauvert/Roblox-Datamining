@@ -3,12 +3,13 @@ local parent = genericAbuseReporting.Parent
 local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
 local updateAbuseReportRevampItemAbuseVector = game:DefineFastFlag("UpdateAbuseReportRevampItemAbuseVector", false)
+local fFlagFixNotificationReportsMobile = require(parent.SharedFlags).FFlagFixNotificationReportsMobile
 local fFlagLuaAppEnableReportBadge = require(parent.SharedFlags).FFlagLuaAppEnableReportBadge
 local fFlagEnableReportingFlowForDevSubs = require(parent.SharedFlags).FFlagEnableReportingFlowForDevSubs
 local fFlagEnableReportingFlowForExperienceShop = require(parent.SharedFlags).FFlagEnableReportingFlowForExperienceShop
 
-return function(p0) --[[ line: 29 ]]
-	-- upvalues: abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagLuaAppEnableReportBadge (ref), updateAbuseReportRevampItemAbuseVector (ref)
+return function(p0) --[[ line: 30 ]]
+	-- upvalues: abuseVectorModule (ref), fFlagEnableReportingFlowForDevSubs (ref), fFlagEnableReportingFlowForExperienceShop (ref), fFlagFixNotificationReportsMobile (ref), fFlagLuaAppEnableReportBadge (ref), updateAbuseReportRevampItemAbuseVector (ref)
 	local t = {}
 	
 	if p0.abuseVector == abuseVectorModule.Looks then
@@ -37,7 +38,7 @@ return function(p0) --[[ line: 29 ]]
 		t.PLACE_ID = p0.targetId
 	elseif p0.abuseVector == abuseVectorModule.Group then
 		t.REPORT_TARGET_GROUP_ID = p0.targetId
-	elseif p0.abuseVector == abuseVectorModule.Notifications then
+	elseif fFlagFixNotificationReportsMobile and p0.abuseVector == abuseVectorModule.Notifications then
 		t.NOTIFICATION_ID = p0.targetId
 	elseif fFlagLuaAppEnableReportBadge and p0.abuseVector == abuseVectorModule.Badge then
 		t.REPORT_TARGET_BADGE_ID = p0.targetId

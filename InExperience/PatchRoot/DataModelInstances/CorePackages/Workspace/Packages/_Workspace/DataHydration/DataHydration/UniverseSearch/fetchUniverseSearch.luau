@@ -6,7 +6,7 @@ local _ = require(script.Parent.UniverseSearchStoreTypes)
 local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
-return function(p0, p1) --[[ line: 18 | named "fetchUniverseSearch" ]]
+return function(p0, p1) --[[ line: 19 | named "fetchUniverseSearch" ]]
 	-- upvalues: urlBase (ref), fetch (ref), urlBuilderModule (ref), asPromise (ref)
 	p1 = p1 or {}
 	local baseUrl = p1.baseUrl or urlBase.APIS
@@ -56,7 +56,7 @@ return function(p0, p1) --[[ line: 18 | named "fetchUniverseSearch" ]]
 		analyticsKey = "universes-search.search",
 		network = p1.network,
 		url = urlBuilderModule.UrlBuilder.addQueryString(baseUrl .. "/universes/v1/search", t),
-		decode = function(p2) --[[ line: 72 ]]
+		decode = function(p2) --[[ line: 73 ]]
 			return p2
 		end
 	}))

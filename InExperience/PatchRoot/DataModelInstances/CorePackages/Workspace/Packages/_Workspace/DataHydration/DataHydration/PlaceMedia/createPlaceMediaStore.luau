@@ -4,11 +4,11 @@ local createSingleEntityResolverModule = require(dataHydration.createSingleEntit
 local fetchPlaceMediaModule = require(script.Parent.fetchPlaceMedia)
 local _ = require(script.Parent.PlaceMediaStoreTypes)
 
-return function(p0) --[[ line: 18 | named "createPlaceMediaStore" ]]
+return function(p0) --[[ line: 19 | named "createPlaceMediaStore" ]]
 	-- upvalues: createSingleEntityResolverModule (ref), fetchPlaceMediaModule (ref)
 	p0 = p0 or {}
 	local t = { network = p0.network, baseUrl = p0.baseUrl }
-	local var5 = createSingleEntityResolverModule(function(p1) --[[ line: 22 ]]
+	local var5 = createSingleEntityResolverModule(function(p1) --[[ line: 23 ]]
 		-- upvalues: fetchPlaceMediaModule (copy), t (ref)
 		return fetchPlaceMediaModule.fetchMedia(p1, t)
 	end)

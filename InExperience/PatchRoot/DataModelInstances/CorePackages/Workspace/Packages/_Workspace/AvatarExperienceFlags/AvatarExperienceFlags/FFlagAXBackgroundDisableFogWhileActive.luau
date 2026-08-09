@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXBackgroundDisableFogWhileActive", false) and require(script.Parent.FFlagAXBackgroundCycloramaRendering)

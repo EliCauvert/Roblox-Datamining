@@ -21,16 +21,18 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler = sharedFlagsModule.FFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler
 local fFlagSduiUseSharedUiStatusHook = sharedFlagsModule.FFlagSduiUseSharedUiStatusHook
 local fFlagSduiClientPageScope = sharedFlagsModule.FFlagSduiClientPageScope
+local fFlagLuaAppSduiRouteName = sharedFlagsModule.FFlagLuaAppSduiRouteName
+local fFlagEnableSduiV2HomeInterleave = sharedFlagsModule.FFlagEnableSduiV2HomeInterleave
 
-local function _(p0) --[[ line: 32 | named "useUiStatusLegacy" ]]
+local function _(p0) --[[ line: 34 | named "useUiStatusLegacy" ]]
 	-- upvalues: signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref)
 	local var14 = signalsReactModule.useSignalState(getSduiApiStoreModule().getData(p0).status)
 	
 	return if var14 == dataHydrationTypes.DataStatus.NotReady then "Loading" elseif var14 == dataHydrationTypes.DataStatus.Failed then "Error" else "Resolved"
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 82 | named "SduiFeatureEntryPoint" ]]
-	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), useDataUpdatedTimestampModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), useStatefulRefModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiClientPageScope (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), sduiFeatureEntryPointUiModule (ref), getSduiComponentWrapper (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref)
+return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 84 | named "SduiFeatureEntryPoint" ]]
+	-- upvalues: useComponentConfigModule (ref), useComponentLifecycleTimingModule (ref), fFlagEnableSduiV2HomeInterleave (ref), useDataUpdatedTimestampModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), signalsReactModule (ref), getSduiApiStoreModule (ref), dataHydrationTypes (ref), useStatefulRefModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiClientPageScope (ref), fFlagLuaAppSduiRouteName (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), sduiFeatureEntryPointUiModule (ref), getSduiComponentWrapper (ref), fFlagSduiFeatureEntryPointTakesAbsoluteSizeHandler (ref)
 	local var20
 	local configKey = p1.configKey
 	local appPage = p1.appPage
@@ -38,7 +40,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 82 | 
 	local var16 = p1.shouldDisplayError == nil or p1.shouldDisplayError
 	local var17 = useComponentConfigModule(configKey, p1.identifier)
 	useComponentLifecycleTimingModule(p1.loadTimer, typeof(var17) == "table")
-	local var18 = useDataUpdatedTimestampModule(configKey, p1.identifier)
+	local var18 = if fFlagEnableSduiV2HomeInterleave then useDataUpdatedTimestampModule(configKey, p1.identifier) else nil
 	local _ = nil
 	
 	if fFlagSduiUseSharedUiStatusHook then
@@ -54,9 +56,9 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 82 | 
 		contentSlot = if var17 then reactModule.createElement(getSduiComponentWrapper(var17), {
 			debugName = `SduiFeatureEntryPoint-{configKey}`,
 			componentConfig = var17,
-			sduiContext = useCreateClientBindingSduiContextModule(appPage, var21, nil, var18, if fFlagSduiClientPageScope then configKey else nil, p1.appCompositionEnabledOverride, p1.routeName),
+			sduiContext = useCreateClientBindingSduiContextModule(appPage, var21, nil, if fFlagEnableSduiV2HomeInterleave then var18 else nil, if fFlagSduiClientPageScope then configKey else nil, if fFlagEnableSduiV2HomeInterleave then p1.appCompositionEnabledOverride else nil, if fFlagLuaAppSduiRouteName then p1.routeName else nil),
 			localAnalyticsData = useLocalAnalyticsDataModule(configKey, appPage, p1.additionalAnalyticsData),
-			extraLocalProps = p1.extraLocalProps
+			extraLocalProps = if fFlagEnableSduiV2HomeInterleave then p1.extraLocalProps else nil
 		}) else nil,
 		uiStatus = var20,
 		errorSlot = p1.errorSlot,

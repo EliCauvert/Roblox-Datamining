@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AppChatUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()

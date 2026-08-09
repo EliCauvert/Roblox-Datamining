@@ -7,13 +7,13 @@ local getFFlagMomentsPauseAudioThroughTeleportModule = require(moments.Flags.Get
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
 local createSignal = signalsModule.createSignal
 
-return function() --[[ line: 66 | named "createMomentsStore" ]]
+return function() --[[ line: 57 | named "createMomentsStore" ]]
 	-- upvalues: createSignal (ref), httpService (ref), getFFlagMomentsPauseAudioThroughTeleportModule (ref), getMomentsPreferencesStoreModule (ref), fFlagEnableArgus (ref)
 	local var5, var6 = createSignal(httpService:GenerateGUID(false))
 	local var7, var8 = createSignal("watch_tab")
 	local var9, var10 = createSignal(os.clock())
 	
-	local function resetSession() --[[ line: 71 ]]
+	local function resetSession() --[[ line: 62 ]]
 		-- upvalues: var6 (ref), httpService (copy), var10 (ref), getFFlagMomentsPauseAudioThroughTeleportModule (copy), getMomentsPreferencesStoreModule (copy)
 		var6(httpService:GenerateGUID(false))
 		var10(os.clock())
@@ -33,20 +33,20 @@ return function() --[[ line: 66 | named "createMomentsStore" ]]
 		getSessionStartTime = var9,
 		resetSession = resetSession,
 		getHideDetails = var12,
-		toggleFeedDetailVisibility = function() --[[ line: 90 ]]
+		toggleFeedDetailVisibility = function() --[[ line: 80 ]]
 			-- upvalues: fFlagEnableArgus (copy), var13 (ref), var12 (ref)
 			if fFlagEnableArgus then
 				var13(not var12(false))
 			end
 		end,
 		getPendingDeletion = var14,
-		requestDeletion = function(p0, p1, p2) --[[ line: 96 ]]
+		requestDeletion = function(p0) --[[ line: 86 ]]
 			-- upvalues: fFlagEnableArgus (copy), var15 (ref)
 			if fFlagEnableArgus then
-				var15({ momentId = p0, feedItemId = p1, feedSessionId = p2 })
+				var15(p0)
 			end
 		end,
-		clearPendingDeletion = function() --[[ line: 102 ]]
+		clearPendingDeletion = function() --[[ line: 92 ]]
 			-- upvalues: var15 (ref)
 			var15(nil)
 		end

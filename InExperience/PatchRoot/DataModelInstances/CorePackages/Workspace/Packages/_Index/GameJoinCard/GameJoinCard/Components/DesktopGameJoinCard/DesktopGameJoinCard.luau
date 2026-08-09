@@ -16,7 +16,6 @@ local inputSize = foundationModule.Enums.InputSize
 local radius = foundationModule.Enums.Radius
 local getBuilderIconForCurrentPlatform = foundationModule.Utility.getBuilderIconForCurrentPlatform
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local controlState = foundationModule.Enums.ControlState
 local analyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
 local viewEDPsourceValues = analyticsConstantsModule.viewEDPsourceValues
 local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
@@ -24,11 +23,11 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableConsoleGameJoinCard = sharedFlagsModule.FFlagEnableConsoleGameJoinCard
 local fFlagJoinCardAgeCheckUpsell = sharedFlagsModule.FFlagJoinCardAgeCheckUpsell
 local fFlagBlockEDPClickthrough = sharedFlagsModule.FFlagBlockEDPClickthrough
-local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
 local ageCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 
-return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
-	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagDesktopGameJoinCardUIImprovements (ref), controlState (ref), fFlagJoinCardAgeCheckUpsell (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), skeleton (ref), radius (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
+return function(p0) --[[ line: 61 | named "DesktopGameJoinCard" ]]
+	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagJoinCardAgeCheckUpsell (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), skeleton (ref), radius (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), button (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
+	local createElement_2
 	local var5 = useTokens()
 	local var6 = useScaledValue(260)
 	local var7 = useLocalization({
@@ -43,40 +42,25 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 	local gameIconUrl = p0.gameIconUrl
 	local isLoading = p0.isLoading
 	local var8 = if p0.isConsole then var5.Size.Size_1500 else var5.Size.Size_1000
-	local var9 = reactModule.useMemo(function() --[[ line: 79 ]]
+	local var9 = reactModule.useMemo(function() --[[ line: 77 ]]
 		-- upvalues: getBuilderIconForCurrentPlatform (copy)
 		return getBuilderIconForCurrentPlatform()
 	end, {})
-	local var10 = reactModule.useCallback(function() --[[ line: 83 ]]
+	local var10 = reactModule.useCallback(function() --[[ line: 81 ]]
 		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
 		p0.onViewExperienceDetails(viewEDPsourceValues.Thumbnail)
 	end, { p0 })
-	local var11 = reactModule.useCallback(function() --[[ line: 87 ]]
+	local var11 = reactModule.useCallback(function() --[[ line: 85 ]]
 		-- upvalues: p0 (ref), viewEDPsourceValues (copy)
 		p0.onViewExperienceDetails(viewEDPsourceValues.Title)
 	end, { p0 })
-	local var12 = reactModule.useCallback(function() --[[ line: 91 ]]
+	local var12 = reactModule.useCallback(function() --[[ line: 89 ]]
 		-- upvalues: p0 (ref), viewProfileSourceValues (copy)
 		if p0.onViewProfile then
 			p0.onViewProfile(viewProfileSourceValues.ViewProfileButton)
 		end
 	end, { p0 })
-	local var13 = nil
-	local _ = nil
-	local var14 = nil
-	
-	if fFlagDesktopGameJoinCardUIImprovements then
-		local var15, var16 = reactModule.useState(false)
-		var13 = var15
-		local var17 = var16
-		var14 = reactModule.useCallback(function(p1) --[[ line: 101 ]]
-			-- upvalues: var17 (write), controlState (copy)
-			var17(p1 == controlState.Hover)
-		end, {})
-	end
-	local createElement_2
-	local var18 = if fFlagDesktopGameJoinCardUIImprovements and var13 then `<u>{var7.viewProfile}</u>` else var7.viewProfile
-	local var19 = fFlagJoinCardAgeCheckUpsell and p0.ageCheckRequired == true
+	local var13 = fFlagJoinCardAgeCheckUpsell and p0.ageCheckRequired == true
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "col gap-medium padding-large radius-medium stroke-thin stroke-muted",
@@ -117,10 +101,10 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 			})
 		})
 	end
-	local var27
+	local var21
 	t_3.GameIcon = createElement_2
 	local createElement_3 = reactModule.createElement
-	local var24 = view
+	local var18 = view
 	local t_4 = {
 		tag = "col size-full-0 auto-y gap-xxsmall shrink align-x-left items-start",
 		LayoutOrder = 2,
@@ -158,12 +142,8 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 				stateLayer = if fFlagBlockEDPClickthrough then nil else { affordance = stateLayerAffordance.None }
 			}, {
 				Label = reactModule.createElement(text, {
-					Text = experienceName,
-					tag = {
-						["size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left content-emphasis"] = true,
-						["text-truncate-split"] = fFlagDesktopGameJoinCardUIImprovements,
-						["text-truncate-end"] = not fFlagDesktopGameJoinCardUIImprovements
-					}
+					tag = "size-full-0 auto-y text-title-medium content-emphasis text-no-wrap text-truncate-end text-align-x-left",
+					Text = experienceName
 				})
 			}) else reactModule.createElement(skeleton, {
 				LayoutOrder = 2,
@@ -174,16 +154,16 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 	}
 	
 	if not p0.isConsole then
-		var27 = nil
+		var21 = nil
 	elseif isLoading then
-		var27 = reactModule.createElement(skeleton, {
+		var21 = reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
 			Size = UDim2.new(0.6, 0, 0, var5.Typography.BodySmall.FontSize),
 			radius = radius.Small
 		})
 	else
-		var27 = reactModule.createElement
-		var27 = var27(view, {
+		var21 = reactModule.createElement
+		var21 = var21(view, {
 			LayoutOrder = 2,
 			tag = "row align-x-left items-center gap-small size-full-0 auto-y",
 			onActivated = if fFlagEnableConsoleGameJoinCard then p0.onPlatformProfilePressed else nil,
@@ -200,16 +180,16 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 			})
 		})
 	end
-	t_5.PlatformName = var27
-	t_3.TextContainer = createElement_3(var24, t_4, t_5)
+	t_5.PlatformName = var21
+	t_3.TextContainer = createElement_3(var18, t_4, t_5)
 	t_1.GameInfoRow = createElement_1(view, t_2, t_3)
 	t_1.Actions = if not p0.isConsole then reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = 2
 	}, {
-		JoinButton = if var19 then reactModule.createElement(ageCheckUpsellCTAModule, {
+		JoinButton = if var13 then reactModule.createElement(ageCheckUpsellCTAModule, {
 			LayoutOrder = 1,
-			onUnlockPressed = p0.onAgeCheckPressed or function() --[[ line: 260 ]] end
+			onUnlockPressed = p0.onAgeCheckPressed or function() --[[ line: 242 ]] end
 		}) else reactModule.createElement(button, {
 			tag = "align-x-center fill size-full-0",
 			LayoutOrder = 1,
@@ -234,13 +214,11 @@ return function(p0) --[[ line: 63 | named "DesktopGameJoinCard" ]]
 			LayoutOrder = 3,
 			Size = UDim2.new(1, 0, 0, var5.Size.Size_600),
 			onActivated = var12,
-			onStateChanged = if fFlagDesktopGameJoinCardUIImprovements then var14 else nil,
 			stateLayer = { affordance = stateLayerAffordance.None }
 		}, {
 			Label = reactModule.createElement(text, {
 				tag = "auto-xy text-title-medium text-align-x-center content-emphasis",
-				Text = var18,
-				RichText = fFlagDesktopGameJoinCardUIImprovements
+				Text = var7.viewProfile
 			})
 		})
 	}) else nil

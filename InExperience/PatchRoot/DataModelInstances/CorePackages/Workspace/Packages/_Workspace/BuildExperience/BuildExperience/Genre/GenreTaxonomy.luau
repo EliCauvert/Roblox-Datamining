@@ -1,305 +1,302 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-
-return {
-	version = require(buildExperience.Parent.DataHydration.ExperienceGenre).ExperienceGenreStoreTypes.DEFAULT_TAXONOMY_VERSION,
+﻿return {
+	version = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.ExperienceGenre).ExperienceGenreStoreTypes.DEFAULT_TAXONOMY_VERSION,
 	genres = {
 		{
 			id = "action",
-			displayName = localizationStringsModule.GENRE_ACTION_NAME,
-			description = localizationStringsModule.GENRE_ACTION_DESCRIPTION,
+			displayName = "Action",
+			description = "Combat, shooting, brawling, and action-oriented gameplay.",
 			subgenres = {
 				{
 					id = "battle_royale",
-					displayName = localizationStringsModule.GENRE_BATTLE_ROYALE_NAME,
-					description = localizationStringsModule.GENRE_BATTLE_ROYALE_DESCRIPTION
+					displayName = "Battle Royale",
+					description = "Last-player-standing matches."
 				},
 				{
 					id = "fighting",
-					displayName = localizationStringsModule.GENRE_FIGHTING_NAME,
-					description = localizationStringsModule.GENRE_FIGHTING_DESCRIPTION
+					displayName = "Fighting",
+					description = "One-on-one or team combat."
 				},
 				{
 					id = "shooter",
-					displayName = localizationStringsModule.GENRE_ACTION_SHOOTER_NAME,
-					description = localizationStringsModule.GENRE_ACTION_SHOOTER_DESCRIPTION
+					displayName = "Shooter",
+					description = "First- or third-person shooting."
 				}
 			}
 		},
 		{
 			id = "adventure",
-			displayName = localizationStringsModule.GENRE_ADVENTURE_NAME,
-			description = localizationStringsModule.GENRE_ADVENTURE_DESCRIPTION,
+			displayName = "Adventure",
+			description = "Exploration-driven gameplay with narrative or world goals.",
 			subgenres = {
 				{
 					id = "exploration",
-					displayName = localizationStringsModule.GENRE_EXPLORATION_NAME,
-					description = localizationStringsModule.GENRE_EXPLORATION_DESCRIPTION
+					displayName = "Exploration",
+					description = "Discover worlds and lore."
 				},
 				{
 					id = "story",
-					displayName = localizationStringsModule.GENRE_STORY_NAME,
-					description = localizationStringsModule.GENRE_STORY_DESCRIPTION
+					displayName = "Story",
+					description = "Narrative-driven adventures."
 				},
 				{
 					id = "scavenger_hunt",
-					displayName = localizationStringsModule.GENRE_SCAVENGER_HUNT_NAME,
-					description = localizationStringsModule.GENRE_SCAVENGER_HUNT_DESCRIPTION
+					displayName = "Scavenger Hunt",
+					description = "Find-and-collect quests."
 				}
 			}
 		},
 		{
 			id = "comedy",
-			displayName = localizationStringsModule.GENRE_COMEDY_NAME,
-			description = localizationStringsModule.GENRE_COMEDY_DESCRIPTION,
+			displayName = "Comedy",
+			description = "Humour-first experiences and party games.",
 			subgenres = {
 				{
 					id = "memes",
-					displayName = localizationStringsModule.GENRE_MEMES_NAME,
-					description = localizationStringsModule.GENRE_MEMES_DESCRIPTION
+					displayName = "Memes",
+					description = "Memetic, parodic content."
 				},
 				{
 					id = "funny_animations",
-					displayName = localizationStringsModule.GENRE_FUNNY_ANIMATIONS_NAME,
-					description = localizationStringsModule.GENRE_FUNNY_ANIMATIONS_DESCRIPTION
+					displayName = "Funny Animations",
+					description = "Animation showcases."
 				}
 			}
 		},
 		{
 			id = "horror",
-			displayName = localizationStringsModule.GENRE_HORROR_NAME,
-			description = localizationStringsModule.GENRE_HORROR_DESCRIPTION,
+			displayName = "Horror",
+			description = "Scary, suspenseful, or thriller content.",
 			subgenres = {
 				{
 					id = "survival_horror",
-					displayName = localizationStringsModule.GENRE_SURVIVAL_HORROR_NAME,
-					description = localizationStringsModule.GENRE_SURVIVAL_HORROR_DESCRIPTION
+					displayName = "Survival Horror",
+					description = "Escape monsters or threats."
 				},
 				{
 					id = "jumpscare",
-					displayName = localizationStringsModule.GENRE_JUMPSCARE_NAME,
-					description = localizationStringsModule.GENRE_JUMPSCARE_DESCRIPTION
+					displayName = "Jumpscare",
+					description = "Reactive scare-driven gameplay."
 				}
 			}
 		},
 		{
 			id = "life",
-			displayName = localizationStringsModule.GENRE_LIFE_NAME,
-			description = localizationStringsModule.GENRE_LIFE_DESCRIPTION,
+			displayName = "Life",
+			description = "Roleplay, avatar simulation, and slice-of-life experiences.",
 			subgenres = {
 				{
 					id = "roleplay",
-					displayName = localizationStringsModule.GENRE_ROLEPLAY_NAME,
-					description = localizationStringsModule.GENRE_ROLEPLAY_DESCRIPTION
+					displayName = "Roleplay",
+					description = "Player-driven roleplay scenarios."
 				},
 				{
 					id = "avatar_sim",
-					displayName = localizationStringsModule.GENRE_AVATAR_SIMULATOR_NAME,
-					description = localizationStringsModule.GENRE_AVATAR_SIMULATOR_DESCRIPTION
+					displayName = "Avatar Simulator",
+					description = "Avatar customisation and showcases."
 				},
 				{
 					id = "social_hangout",
-					displayName = localizationStringsModule.GENRE_SOCIAL_HANGOUT_NAME,
-					description = localizationStringsModule.GENRE_SOCIAL_HANGOUT_DESCRIPTION
+					displayName = "Social Hangout",
+					description = "Chat and hangout spaces."
 				}
 			}
 		},
 		{
 			id = "party",
-			displayName = localizationStringsModule.GENRE_PARTY_NAME,
-			description = localizationStringsModule.GENRE_PARTY_DESCRIPTION,
+			displayName = "Party",
+			description = "Minigames and casual social play.",
 			subgenres = {
 				{
 					id = "minigames",
-					displayName = localizationStringsModule.GENRE_MINIGAMES_NAME,
-					description = localizationStringsModule.GENRE_MINIGAMES_DESCRIPTION
+					displayName = "Minigames",
+					description = "Collections of quick-play games."
 				},
 				{
 					id = "obby",
-					displayName = localizationStringsModule.GENRE_OBBY_NAME,
-					description = localizationStringsModule.GENRE_OBBY_DESCRIPTION
+					displayName = "Obby",
+					description = "Obstacle courses and parkour."
 				}
 			}
 		},
 		{
 			id = "puzzle",
-			displayName = localizationStringsModule.GENRE_PUZZLE_NAME,
-			description = localizationStringsModule.GENRE_PUZZLE_DESCRIPTION,
+			displayName = "Puzzle",
+			description = "Logic, escape-room, and puzzle-solving gameplay.",
 			subgenres = {
 				{
 					id = "escape",
-					displayName = localizationStringsModule.GENRE_ESCAPE_ROOM_NAME,
-					description = localizationStringsModule.GENRE_ESCAPE_ROOM_DESCRIPTION
+					displayName = "Escape Room",
+					description = "Locked-room puzzles."
 				},
 				{
 					id = "trivia",
-					displayName = localizationStringsModule.GENRE_TRIVIA_NAME,
-					description = localizationStringsModule.GENRE_TRIVIA_DESCRIPTION
+					displayName = "Trivia",
+					description = "Quiz-style questions."
 				}
 			}
 		},
 		{
 			id = "rpg",
-			displayName = localizationStringsModule.GENRE_RPG_NAME,
-			description = localizationStringsModule.GENRE_RPG_DESCRIPTION,
+			displayName = "RPG",
+			description = "Character progression, classes, and stats.",
 			subgenres = {
 				{
 					id = "mmo",
-					displayName = localizationStringsModule.GENRE_MMORPG_NAME,
-					description = localizationStringsModule.GENRE_MMORPG_DESCRIPTION
+					displayName = "MMORPG",
+					description = "Massively multiplayer RPGs."
 				},
 				{
 					id = "action_rpg",
-					displayName = localizationStringsModule.GENRE_ACTION_RPG_NAME,
-					description = localizationStringsModule.GENRE_ACTION_RPG_DESCRIPTION
+					displayName = "Action RPG",
+					description = "Real-time combat RPGs."
 				},
 				{
 					id = "turn_based_rpg",
-					displayName = localizationStringsModule.GENRE_TURN_BASED_RPG_NAME,
-					description = localizationStringsModule.GENRE_TURN_BASED_RPG_DESCRIPTION
+					displayName = "Turn-Based RPG",
+					description = "Strategic, turn-taking combat."
 				}
 			}
 		},
 		{
 			id = "shooter",
-			displayName = localizationStringsModule.GENRE_SHOOTER_NAME,
-			description = localizationStringsModule.GENRE_SHOOTER_DESCRIPTION,
+			displayName = "Shooter",
+			description = "Dedicated shooting-mechanic experiences.",
 			subgenres = {
 				{
 					id = "fps",
-					displayName = localizationStringsModule.GENRE_FPS_NAME,
-					description = localizationStringsModule.GENRE_FPS_DESCRIPTION
+					displayName = "FPS",
+					description = "First-person shooting."
 				},
 				{
 					id = "tps",
-					displayName = localizationStringsModule.GENRE_TPS_NAME,
-					description = localizationStringsModule.GENRE_TPS_DESCRIPTION
+					displayName = "Third-Person Shooter",
+					description = "Third-person shooting."
 				}
 			}
 		},
 		{
 			id = "simulator",
-			displayName = localizationStringsModule.GENRE_SIMULATOR_NAME,
-			description = localizationStringsModule.GENRE_SIMULATOR_DESCRIPTION,
+			displayName = "Simulator",
+			description = "Progression and collection-driven simulators.",
 			subgenres = {
 				{
 					id = "incremental",
-					displayName = localizationStringsModule.GENRE_INCREMENTAL_NAME,
-					description = localizationStringsModule.GENRE_INCREMENTAL_DESCRIPTION
+					displayName = "Incremental",
+					description = "Tap-and-grow gameplay."
 				},
 				{
 					id = "tycoon",
-					displayName = localizationStringsModule.GENRE_TYCOON_NAME,
-					description = localizationStringsModule.GENRE_TYCOON_DESCRIPTION
+					displayName = "Tycoon",
+					description = "Build-and-manage tycoons."
 				}
 			}
 		},
 		{
 			id = "social",
-			displayName = localizationStringsModule.GENRE_SOCIAL_NAME,
-			description = localizationStringsModule.GENRE_SOCIAL_DESCRIPTION,
+			displayName = "Social",
+			description = "Hangouts, dancing, and social-focused experiences.",
 			subgenres = {
 				{
 					id = "dance_club",
-					displayName = localizationStringsModule.GENRE_DANCE_CLUB_NAME,
-					description = localizationStringsModule.GENRE_DANCE_CLUB_DESCRIPTION
+					displayName = "Dance Club",
+					description = "Dance and music venues."
 				},
 				{
 					id = "showcase",
-					displayName = localizationStringsModule.GENRE_SHOWCASE_NAME,
-					description = localizationStringsModule.GENRE_SHOWCASE_DESCRIPTION
+					displayName = "Showcase",
+					description = "Showcase or gallery worlds."
 				}
 			}
 		},
 		{
 			id = "sports",
-			displayName = localizationStringsModule.GENRE_SPORTS_NAME,
-			description = localizationStringsModule.GENRE_SPORTS_DESCRIPTION,
+			displayName = "Sports & Racing",
+			description = "Sports, racing, and athletics.",
 			subgenres = {
 				{
 					id = "racing",
-					displayName = localizationStringsModule.GENRE_RACING_NAME,
-					description = localizationStringsModule.GENRE_RACING_DESCRIPTION
+					displayName = "Racing",
+					description = "Vehicle or foot races."
 				},
 				{
 					id = "team_sports",
-					displayName = localizationStringsModule.GENRE_TEAM_SPORTS_NAME,
-					description = localizationStringsModule.GENRE_TEAM_SPORTS_DESCRIPTION
+					displayName = "Team Sports",
+					description = "Football, basketball, etc."
 				}
 			}
 		},
 		{
 			id = "strategy",
-			displayName = localizationStringsModule.GENRE_STRATEGY_NAME,
-			description = localizationStringsModule.GENRE_STRATEGY_DESCRIPTION,
+			displayName = "Strategy",
+			description = "Real-time and turn-based strategy games.",
 			subgenres = {
 				{
 					id = "rts",
-					displayName = localizationStringsModule.GENRE_RTS_NAME,
-					description = localizationStringsModule.GENRE_RTS_DESCRIPTION
+					displayName = "RTS",
+					description = "Real-time strategy."
 				},
 				{
 					id = "tower_defense",
-					displayName = localizationStringsModule.GENRE_TOWER_DEFENSE_NAME,
-					description = localizationStringsModule.GENRE_TOWER_DEFENSE_DESCRIPTION
+					displayName = "Tower Defense",
+					description = "Defend against waves."
 				}
 			}
 		},
 		{
 			id = "survival",
-			displayName = localizationStringsModule.GENRE_SURVIVAL_NAME,
-			description = localizationStringsModule.GENRE_SURVIVAL_DESCRIPTION,
+			displayName = "Survival",
+			description = "Resource management and survival gameplay.",
 			subgenres = {
 				{
 					id = "open_world_survival",
-					displayName = localizationStringsModule.GENRE_OPEN_WORLD_SURVIVAL_NAME,
-					description = localizationStringsModule.GENRE_OPEN_WORLD_SURVIVAL_DESCRIPTION
+					displayName = "Open World Survival",
+					description = "Sandbox survival."
 				},
 				{
 					id = "zombie_survival",
-					displayName = localizationStringsModule.GENRE_ZOMBIE_SURVIVAL_NAME,
-					description = localizationStringsModule.GENRE_ZOMBIE_SURVIVAL_DESCRIPTION
+					displayName = "Zombie Survival",
+					description = "Survive waves of enemies."
 				}
 			}
 		},
 		{
 			id = "utility",
-			displayName = localizationStringsModule.GENRE_UTILITY_NAME,
-			description = localizationStringsModule.GENRE_UTILITY_DESCRIPTION,
+			displayName = "Utility",
+			description = "Non-game experiences (showrooms, education).",
 			subgenres = {
 				{
 					id = "education",
-					displayName = localizationStringsModule.GENRE_EDUCATION_NAME,
-					description = localizationStringsModule.GENRE_EDUCATION_DESCRIPTION
+					displayName = "Education",
+					description = "Learning-focused experiences."
 				},
 				{
 					id = "showroom",
-					displayName = localizationStringsModule.GENRE_SHOWROOM_NAME,
-					description = localizationStringsModule.GENRE_SHOWROOM_DESCRIPTION
+					displayName = "Showroom",
+					description = "Brand or product showcases."
 				}
 			}
 		},
 		{
 			id = "vehicle",
-			displayName = localizationStringsModule.GENRE_VEHICLE_NAME,
-			description = localizationStringsModule.GENRE_VEHICLE_DESCRIPTION,
+			displayName = "Vehicle Sim",
+			description = "Vehicle-centric simulation gameplay.",
 			subgenres = {
 				{
 					id = "driving",
-					displayName = localizationStringsModule.GENRE_DRIVING_NAME,
-					description = localizationStringsModule.GENRE_DRIVING_DESCRIPTION
+					displayName = "Driving",
+					description = "Open-world driving sims."
 				},
 				{
 					id = "flight",
-					displayName = localizationStringsModule.GENRE_FLIGHT_NAME,
-					description = localizationStringsModule.GENRE_FLIGHT_DESCRIPTION
+					displayName = "Flight",
+					description = "Aircraft simulators."
 				}
 			}
 		},
 		{
 			id = "na",
-			displayName = localizationStringsModule.GENRE_NONE_NAME,
-			description = localizationStringsModule.GENRE_NONE_DESCRIPTION,
+			displayName = "None",
+			description = "No genre selected.",
 			subgenres = {}
 		}
 	}

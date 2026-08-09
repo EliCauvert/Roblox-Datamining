@@ -1,17 +1,13 @@
 ﻿local decodeLuauUnicodeEscapesModule = require(script:FindFirstAncestor("IAPExperience").Utility.decodeLuauUnicodeEscapes)
 local discountType = require(script.Parent.Parent.PricingTypes).DiscountType
-local t = {
-	RobloxPlus = "ROBLOX_PLUS",
-	MarketplaceOffer = "MARKETPLACE_OFFER"
-}
 
-local function _(p0) --[[ line: 132 | named "mapCartPricingDiscountType" ]]
+local function _(p0) --[[ line: 125 | named "mapCartPricingDiscountType" ]]
 	-- upvalues: discountType (ref)
 	return if p0 == "ROBLOX_PLUS" then discountType.RobloxPlusSubscription else discountType.Uncategorized
 end
 
 return {
-	getCartLineSalePriceInRobux = function(p1) --[[ line: 81 ]]
+	getCartLineSalePriceInRobux = function(p1) --[[ line: 74 ]]
 		if type(p1) ~= "table" then
 			return nil
 		end
@@ -19,14 +15,14 @@ return {
 		
 		return if type(priceInRobux) == "number" and priceInRobux >= 0 then priceInRobux else nil
 	end,
-	getCartLineRegularPriceInRobux = function(p2, p3) --[[ line: 92 ]]
+	getCartLineRegularPriceInRobux = function(p2, p3) --[[ line: 85 ]]
 		if type(p2) == "table" then
 			local regularPriceInRobux = p2.regularPriceInRobux
 			
 			return if type(regularPriceInRobux) == "number" and p3 <= regularPriceInRobux then regularPriceInRobux else p3
 		end
 	end,
-	extractCartPricingMarketingOffers = function(p4) --[[ line: 102 ]]
+	extractCartPricingMarketingOffers = function(p4) --[[ line: 95 ]]
 		-- upvalues: decodeLuauUnicodeEscapesModule (ref)
 		local t = {}
 		
@@ -54,12 +50,12 @@ return {
 		end
 		return t
 	end,
-	extractDiscountRowsFromLineItems = function(p5) --[[ line: 146 ]]
-		-- upvalues: t (ref), discountType (ref), decodeLuauUnicodeEscapesModule (ref)
-		local t_1 = {}
+	extractDiscountRowsFromLineItems = function(p5) --[[ line: 139 ]]
+		-- upvalues: discountType (ref), decodeLuauUnicodeEscapesModule (ref)
+		local t = {}
 		
 		if type(p5) ~= "table" then
-			return t_1
+			return t
 		end
 		for i, v in p5 do
 			if type(v) == "table" then
@@ -75,9 +71,9 @@ return {
 								local localizedDiscountAttribution = v_1.localizedDiscountAttribution
 								
 								if type(robuxDiscountAmount) == "number" and robuxDiscountAmount > 0 and (type(localizedDiscountAttribution) == "string" and localizedDiscountAttribution ~= "") then
-									table.insert(t_1, {
+									table.insert(t, {
 										percent = 0,
-										type = if v_1.discountType == t.RobloxPlus then discountType.RobloxPlusSubscription else discountType.Uncategorized,
+										type = if v_1.discountType == "ROBLOX_PLUS" then discountType.RobloxPlusSubscription else discountType.Uncategorized,
 										amountInRobux = robuxDiscountAmount,
 										localizedDiscountAttribution = decodeLuauUnicodeEscapesModule(localizedDiscountAttribution)
 									})
@@ -88,43 +84,14 @@ return {
 				end
 			end
 		end
-		return t_1
+		return t
 	end,
-	computePriceWithoutOffersDiscounts = function(p6, p7) --[[ line: 195 ]]
-		local var4 = p7
-		
-		if type(p6) ~= "table" then
-			return var4
-		end
-		for i, v in p6 do
-			if type(v) == "table" then
-				local discountInformation = v.discountInformation
-				
-				if type(discountInformation) == "table" then
-					local discounts = discountInformation.discounts
-					
-					if type(discounts) == "table" then
-						for i_1, v_1 in discounts do
-							if type(v_1) == "table" and v_1.discountType == "MARKETPLACE_OFFER" then
-								local robuxDiscountAmount = v_1.robuxDiscountAmount
-								
-								if type(robuxDiscountAmount) == "number" and robuxDiscountAmount > 0 then
-									var4 += robuxDiscountAmount
-								end
-							end
-						end
-					end
-				end
-			end
-		end
-		return var4
-	end,
-	extractCartPricingSavingsSummary = function(p8) --[[ line: 228 ]]
+	extractCartPricingSavingsSummary = function(p6) --[[ line: 184 ]]
 		-- upvalues: decodeLuauUnicodeEscapesModule (ref)
-		if type(p8) ~= "table" then
+		if type(p6) ~= "table" then
 			return nil
 		end
-		local savingsSummary = p8.savingsSummary
+		local savingsSummary = p6.savingsSummary
 		
 		return if type(savingsSummary) == "string" and savingsSummary ~= "" then decodeLuauUnicodeEscapesModule(savingsSummary) else nil
 	end

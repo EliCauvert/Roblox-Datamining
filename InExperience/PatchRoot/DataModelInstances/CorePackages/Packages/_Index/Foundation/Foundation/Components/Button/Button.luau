@@ -90,7 +90,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 100 |
 	end, { inputDelay })
 	local var31 = useTokensModule()
 	local var32 = usePresentationContext()
-	local var33 = useButtonVariantsModule(var31, var23.size, var23.variant, if var32 then var32.colorNamespace else nil)
+	local var33 = useButtonVariantsModule(var31, var23.size, var23.variant, if var32 then var32.colorMode else nil)
 	local var34 = useButtonMotionStatesModule(var33.content.style.Transparency, constantsModule.DISABLED_TRANSPARENCY)
 	local var35, var36 = useMotion(var34.Default)
 	local var37, var38 = useMotion(var34.Default)

@@ -7,7 +7,6 @@ return {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,
 		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		script.Parent.TestHelpers.collisionMatcherSetup,
-		jestConfigsModule.setupFiles.RetryTimes
+		script.Parent.TestHelpers.collisionMatcherSetup
 	}
 }

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXCatalogItemInformationPopover2", false)
+﻿return game:DefineFastFlag("AXCatalogItemInformationPopover", false)

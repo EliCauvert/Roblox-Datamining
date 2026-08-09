@@ -1,6 +1,5 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
 local parent = momentsCreation.Parent
-local cryoModule = require(parent.Cryo)
 local foundationModule = require(parent.Foundation)
 local momentsCommonModule = require(parent.MomentsCommon)
 local reactModule = require(parent.React)
@@ -16,39 +15,36 @@ local useSignalState = signalsReactModule.useSignalState
 local useTokens = foundationModule.Hooks.useTokens
 local getCreationFlowStoreModule = require(momentsCreation.Stores.GetCreationFlowStore)
 local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
 local constantsModule = require(momentsCreation.Constants)
 local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
 local eventNames = momentsCommonModule.Analytics.EventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 
-return function(p0) --[[ line: 46 ]]
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), view (ref), constantsModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
-	local var11 = useDeviceInsets()
-	local var12 = useTokens()
-	local var13 = useCreationFlowStringsModule()
-	local var14 = getCreationFlowStoreModule(false)
-	local var15 = reactModule.useRef(nil)
-	local publishingCtaSecondary = var13.PublishingCtaSecondary
-	local var16 = useSignalState(var14.getDescription)
-	reactModule.useEffect(function() --[[ line: 59 ]]
-		-- upvalues: var15 (ref), var16 (ref)
-		local current = var15.current
+return function(p0) --[[ line: 42 ]]
+	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), useCallback (ref), fireAnalyticsEventModule (ref), eventNames (ref), view (ref), constantsModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
+	local var9 = useDeviceInsets()
+	local var10 = useTokens()
+	local var11 = useCreationFlowStringsModule()
+	local var12 = getCreationFlowStoreModule(false)
+	local var13 = reactModule.useRef(nil)
+	local publishingCtaSecondary = var11.PublishingCtaSecondary
+	local var14 = useSignalState(var12.getDescription)
+	reactModule.useEffect(function() --[[ line: 55 ]]
+		-- upvalues: var13 (ref), var14 (ref)
+		local current = var13.current
 		
 		if current ~= nil then
-			current.Text = var16
+			current.Text = var14
 		end
-	end, { var16 })
+	end, { var14 })
 	
 	return reactModule.createElement(view, {
 		tag = "align-x-center size-full-0 auto-y",
 		LayoutOrder = p0.layoutOrder,
 		padding = {
-			top = UDim.new(0, var12.Padding.Large),
-			bottom = UDim.new(0, math.max(var11.bottom, var12.Padding.Large)),
-			left = UDim.new(0, math.max(var11.left, var12.Padding.XLarge)),
-			right = UDim.new(0, math.max(var11.right, var12.Padding.XLarge))
+			top = UDim.new(0, var10.Padding.Large),
+			bottom = UDim.new(0, math.max(var9.bottom, var10.Padding.Large)),
+			left = UDim.new(0, math.max(var9.left, var10.Padding.XLarge)),
+			right = UDim.new(0, math.max(var9.right, var10.Padding.XLarge))
 		}
 	}, {
 		SizeConstraint = reactModule.createElement(view, {
@@ -66,32 +62,32 @@ return function(p0) --[[ line: 46 ]]
 					Font = Enum.Font.BuilderSans,
 					MaxVisibleGraphemes = 140,
 					MultiLine = false,
-					PlaceholderColor3 = var12.Color.Content.Muted.Color3,
-					PlaceholderText = var13.PublishingDescription,
-					ref = var15,
+					PlaceholderColor3 = var10.Color.Content.Muted.Color3,
+					PlaceholderText = var11.PublishingDescription,
+					ref = var13,
 					ShowNativeInput = true,
-					TextColor3 = var12.Color.ActionStandard.Foreground.Color3,
-					TextSize = var12.FontSize.FontSize_400,
+					TextColor3 = var10.Color.ActionStandard.Foreground.Color3,
+					TextSize = var10.FontSize.FontSize_400,
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = useCallback(function(p1) --[[ line: 82 ]]
-						local var17 = p1.Text:gsub("[\r\n]+", " ")
-						local charCount = utf8.len(var17)
+					[reactModule.Change.Text] = useCallback(function(p1) --[[ line: 69 ]]
+						local var15 = p1.Text:gsub("[\r\n]+", " ")
+						local charCount = utf8.len(var15)
 						
 						if charCount ~= nil and charCount >= 140 then
-							var17 = string.sub(var17, 1, utf8.offset(var17, 141) - 1)
+							var15 = string.sub(var15, 1, utf8.offset(var15, 141) - 1)
 						end
-						if var17 ~= p1.Text then
-							p1.Text = var17
+						if var15 ~= p1.Text then
+							p1.Text = var15
 						end
 					end, {}),
-					[reactModule.Event.FocusLost] = useCallback(function() --[[ line: 66 ]]
-						-- upvalues: var15 (ref), var14 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
-						local current = var15.current
-						var14.updateDescription(if current ~= nil then "" else current.Text)
-						fireAnalyticsEventModule(eventNames.EditingFlowDescriptionEdited, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeToolFieldFromKind("description"), makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow))))
-					end, { var14.updateDescription })
+					[reactModule.Event.FocusLost] = useCallback(function() --[[ line: 62 ]]
+						-- upvalues: var13 (ref), var12 (ref), fireAnalyticsEventModule (copy), eventNames (copy)
+						local current = var13.current
+						var12.updateDescription(if current ~= nil then "" else current.Text)
+						fireAnalyticsEventModule(eventNames.EditingFlowDescriptionEdited)
+					end, { var12.updateDescription })
 				})
 			}),
 			CTAs = reactModule.createElement(view, {
@@ -103,7 +99,7 @@ return function(p0) --[[ line: 46 ]]
 					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
 					onActivated = p0.onPublish,
 					size = inputSize.Medium,
-					text = var13.PublishingCtaPrimary,
+					text = var11.PublishingCtaPrimary,
 					variant = buttonVariant.Emphasis,
 					width = UDim.new(0.5, 0)
 				}),
@@ -120,7 +116,7 @@ return function(p0) --[[ line: 46 ]]
 			Disclaimer = reactModule.createElement(text, {
 				LayoutOrder = 3,
 				tag = "auto-xy text-body-small text-align-x-center text-align-y-top content-neutral",
-				Text = var13.CreationTooltip
+				Text = var11.CreationTooltip
 			})
 		})
 	})

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildAudiencePublishPrompt", false) and require(script.Parent.FFlagBuildRehydrateOnPublish)

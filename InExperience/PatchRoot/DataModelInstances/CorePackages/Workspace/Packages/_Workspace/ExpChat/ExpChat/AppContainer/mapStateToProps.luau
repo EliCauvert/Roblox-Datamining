@@ -9,16 +9,21 @@ local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPres
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
+local fFlagExpChatChannelTabRefactor = sharedFlagsModule.FFlagExpChatChannelTabRefactor
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 
-local function _(p0) --[[ line: 17 | named "getIsChatInputBarVisible" ]]
+local function _(p0) --[[ line: 18 | named "getIsChatInputBarVisible" ]]
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), selectSelectedTabNameModule (ref)
 	local isChatInputBarEnabled = p0.ChatVisibility.isChatInputBarEnabled
 	
 	return if getFFlagTextChatEnableUniverseChatTabs() and selectSelectedTabNameModule(p0) == "RBXGlobal" and isChatInputBarEnabled._propertyEnabled ~= nil then isChatInputBarEnabled._topBarVisibility and (isChatInputBarEnabled._coreGuiEnabled and not isChatInputBarEnabled._devTextBoxEnabled) else isChatInputBarEnabled.value
 end
 
-local _ = function(p1) --[[ line: 32 | named "getSelectedTabType" ]]
+local _ = function(p1) --[[ line: 33 | named "getSelectedTabType" ]]
+	-- upvalues: fFlagExpChatChannelTabRefactor (ref)
+	if not fFlagExpChatChannelTabRefactor then
+		return nil
+	end
 	local channelTabs = p1.ChannelTabs
 	
 	if channelTabs == nil or channelTabs.allChannelTabs == nil or channelTabs.selectedTabName == nil then
@@ -29,8 +34,8 @@ local _ = function(p1) --[[ line: 32 | named "getSelectedTabType" ]]
 	return if selectedTabName then selectedTabName.Type else nil
 end
 
-return function(p2, _) --[[ line: 41 ]]
-	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), fFlagExpChatUseMessagesStore (ref), selectSelectedTabNameModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref)
+return function(p2, _) --[[ line: 45 ]]
+	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), fFlagExpChatUseMessagesStore (ref), selectSelectedTabNameModule (ref), getFFlagExpChatEnableChannelTabsUIModule (ref), fFlagExpChatUseChatConfigStore (ref), fFlagExpChatChannelTabRefactor (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatNewInputBarModule (ref)
 	local var6 = false
 	
 	if getFFlagTextChatEnableUniverseChatTabs() then
@@ -55,13 +60,18 @@ return function(p2, _) --[[ line: 41 ]]
 	t.chatLayoutAlignment = p2.ChatLayout.Alignment
 	t.chatWindowSettings = if fFlagExpChatUseChatConfigStore then nil else p2.ChatLayout.ChatWindowSettings
 	t.clientSettings = p2.ClientSettings
-	local channelTabs = p2.ChannelTabs
 	
-	if channelTabs == nil or channelTabs.allChannelTabs == nil or channelTabs.selectedTabName == nil then
-		var9 = nil
+	if fFlagExpChatChannelTabRefactor then
+		local channelTabs = p2.ChannelTabs
+		
+		if channelTabs == nil or channelTabs.allChannelTabs == nil or channelTabs.selectedTabName == nil then
+			var9 = nil
+		else
+			local selectedTabName = channelTabs.allChannelTabs[channelTabs.selectedTabName]
+			var9 = if selectedTabName then selectedTabName.Type else nil
+		end
 	else
-		local selectedTabName = channelTabs.allChannelTabs[channelTabs.selectedTabName]
-		var9 = if selectedTabName then selectedTabName.Type else nil
+		var9 = nil
 	end
 	t.selectedTabType = var9
 	t.targetTextChannel = if fFlagExpChatPresetChatEnabled or fFlagExpChatNewInputBarModule then p2.TextChannels and p2.TextChannels.targetTextChannel else nil

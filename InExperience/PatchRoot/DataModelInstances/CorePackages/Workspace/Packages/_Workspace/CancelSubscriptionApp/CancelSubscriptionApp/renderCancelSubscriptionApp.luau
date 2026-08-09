@@ -50,7 +50,7 @@ return function() --[[ line: 57 | named "renderCancelSubscriptionApp" ]]
 	cancelSubscriptionApp.Name = "CancelSubscriptionApp"
 	cancelSubscriptionApp.Parent = coreGuiService
 	local var16 = reactRobloxModule.createRoot(cancelSubscriptionApp)
-	var16:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+	var16:render(reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
 		LocalizationProvider = reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {

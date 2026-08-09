@@ -1,6 +1,5 @@
 ﻿return {
 	PublishAssetSingleStep = "PublishAssetSingleStep",
 	PublishAvatar = "PublishAvatar",
-	PublishAvatarAsset = "PublishAvatarAsset",
-	PublishMakeupLook = "PublishMakeupLook"
+	PublishAvatarAsset = "PublishAvatarAsset"
 }

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppEnableSponsoredReportAd3", false)
+﻿return game:DefineFastFlag("LuaAppEnableSponsoredReportAd3", false) and require(script.Parent.FFlagLuaAppEnableWhyThisAdModal)

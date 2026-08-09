@@ -5,6 +5,7 @@ local reactModule = require(parent.React)
 local useDesignTokens = require(parent.Style).useDesignTokens
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local UIBloxModule = require(parent.UIBlox)
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local getGameTileMetadataFontModule = require(gameTile.Footer.getGameTileMetadataFont)
@@ -21,8 +22,8 @@ local ratingSmall = images["icons/status/games/rating_small"]
 local var7 = images["icons/status/games/people-playing_small"]
 local vector2 = Vector2.new(1e999, 1e999)
 
-return function(p0) --[[ line: 61 | named "GridTileGameStats" ]]
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), textService (ref), vector2 (ref), imageSetLabel (ref), ratingSmall (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var7 (ref)
+return function(p0) --[[ line: 63 | named "GridTileGameStats" ]]
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), useTokens (ref), fFlagLuaAppFixSmallScreenFooterStatsOverlap (ref), useBreakpointXOrSmaller (ref), responsiveModule (ref), gameTileTypesModule (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppMigrateGameTileFooterValueFixes (ref), fFlagRenameDeprecatedUIBloxTokens (ref), getGameTileMetadataFontModule (ref), reactModule (ref), fFlagLuaAppNarrowTileHideRating (ref), textService (ref), vector2 (ref), imageSetLabel (ref), ratingSmall (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), var7 (ref)
 	local var12
 	local var9 = useDesignTokens()
 	local var10 = useTextSizeOffset()
@@ -40,17 +41,17 @@ return function(p0) --[[ line: 61 | named "GridTileGameStats" ]]
 	end
 	local createElement_1
 	local var13 = useBreakpointXOrSmaller(responsiveModule.Keys.Small) and p0.gameTileLayoutType == gameTileTypesModule.GameTileLayoutType.Narrow
-	local var14 = if p0.isUnifiedGameTile then if fFlagLuaAppMigrateGameTileFooterValueFixes then var11.Size.Size_500 else var11.Size.Size_300 elseif fFlagLuaAppMigrateGameTileFooterValueFixes then var9.Size.Size_500 else var9.Size.Size_300
-	local var15 = if p0.isUnifiedGameTile then if var12 or fFlagLuaAppNarrowTileSmallerFooterFont and p0.compactMetadataFormat then var11.Gap.XXSmall else var11.Gap.XSmall else var9.Size.Size_100
-	local var16 = if p0.isUnifiedGameTile then if fFlagLuaAppMigrateGameTileFooterValueFixes then if var12 then var11.Gap.XXSmall else var11.Gap.Small else var11.Gap.Medium else var9.Size.Size_200
-	local var17 = if p0.isUnifiedGameTile then var11.Color.Content.Default else var9.Color.Content.Default
+	local var14 = if p0.isUnifiedGameTile then if fFlagLuaAppMigrateGameTileFooterValueFixes then var11.Size.Size_500 else var11.Size.Size_300 elseif fFlagLuaAppMigrateGameTileFooterValueFixes then if fFlagRenameDeprecatedUIBloxTokens then var9.Size.Size_500 else var9.Global.Space_250 elseif fFlagRenameDeprecatedUIBloxTokens then var9.Size.Size_300 else var9.Global.Space_150
+	local var15 = if p0.isUnifiedGameTile then if var12 or fFlagLuaAppNarrowTileSmallerFooterFont and p0.compactMetadataFormat then var11.Gap.XXSmall else var11.Gap.XSmall elseif fFlagRenameDeprecatedUIBloxTokens then var9.Size.Size_100 else var9.Global.Space_50
+	local var16 = if p0.isUnifiedGameTile then if fFlagLuaAppMigrateGameTileFooterValueFixes then if var12 then var11.Gap.XXSmall else var11.Gap.Small else var11.Gap.Medium elseif fFlagRenameDeprecatedUIBloxTokens then var9.Size.Size_200 else var9.Global.Space_100
+	local var17 = if p0.isUnifiedGameTile then var11.Color.Content.Default elseif fFlagRenameDeprecatedUIBloxTokens then var9.Color.Content.Default else var9.Semantic.Color.Text.Default
 	local var18 = getGameTileMetadataFontModule(p0.useLargerFont, var9, var11 or nil, if p0.isUnifiedGameTile then true else nil, if fFlagLuaAppNarrowTileSmallerFooterFont then p0.compactMetadataFormat else nil)
 	local fontSize = var18.FontSize
 	local font = var18.Font
 	local var19 = var10 > 0 and var13
 	local var20 = fontSize / 1.26
 	local ratingText = p0.ratingText
-	local var21 = reactModule.useMemo(function() --[[ line: 110 ]]
+	local var21 = reactModule.useMemo(function() --[[ line: 116 ]]
 		-- upvalues: fFlagLuaAppNarrowTileHideRating (copy), p0 (ref), ratingText (ref), textService (copy), fontSize (ref), font (ref), vector2 (copy)
 		return if fFlagLuaAppNarrowTileHideRating and p0.hideRating or (ratingText == nil or ratingText == "") then 0 else textService:GetTextSize(ratingText, fontSize, font, vector2).X
 	end, {

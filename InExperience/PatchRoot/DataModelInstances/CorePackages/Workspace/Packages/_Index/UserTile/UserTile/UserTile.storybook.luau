@@ -10,8 +10,8 @@ local designTokenProvider = styleModule.DesignTokenProvider
 local roduxModule = require(parent.Rodux)
 local roactNavigationModule = require(parent.RoactNavigation)
 local roactRoduxModule = require(parent.RoactRodux)
-local colorMode = foundationModule.Enums.ColorMode
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
+local theme = foundationModule.Enums.Theme
+local t = { Light = theme.Light, Dark = theme.Dark }
 
 local function createStore(_) --[[ line: 20 ]]
 	-- upvalues: roduxModule (ref)
@@ -54,7 +54,7 @@ return {
 			-- upvalues: t (copy), reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), designTokenProvider (copy), p2 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore(nil) }, {
-					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { colorMode = t[p3.theme] }, {
+					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { theme = t[p3.theme] }, {
 						designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = p2(p3) })
 					}))
 				})

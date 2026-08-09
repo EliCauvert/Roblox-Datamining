@@ -8,8 +8,6 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local robloxAppLocalesModule = require(parent.RobloxAppLocales)
 local roactUtilsModule = require(parent.RoactUtils)
-local buildExperienceCompositionStyleSheetModule = require(buildExperience.Components.BuildExperienceCompositionStyleSheet)
-local _ = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local chatSheetModule = require(buildExperience.Components.ChatSheet.ChatSheet)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
 local clientLogsCollectorModule = require(buildExperience.Chat.clientLogsCollector)
@@ -17,38 +15,32 @@ local localizationProvider = localizationModule.LocalizationProvider
 local localization = robloxAppLocalesModule.Localization
 local fIntInGameBuildChatSheetSnapPoint = game:DefineFastInt("FIntInGameBuildChatSheetSnapPoint", 50)
 
-local function ConnectedChatSheet() --[[ line: 31 ]]
+local function ConnectedChatSheet() --[[ line: 23 ]]
 	-- upvalues: getPlayButtonStoreModule (ref), reactModule (ref), chatSheetModule (ref), fIntInGameBuildChatSheetSnapPoint (ref)
-	local var16 = getPlayButtonStoreModule()
-	local var17 = var16.useIsActive()
-	local var18 = var16.useResumeTarget()
+	local var15 = getPlayButtonStoreModule()
+	local var16 = var15.useResumeTarget()
 	
 	return reactModule.createElement(chatSheetModule, {
-		defaultSnapPointIndex = 1,
-		isOpen = var17,
-		onClose = reactModule.useCallback(function() --[[ line: 41 ]]
-			-- upvalues: var16 (ref)
-			var16.setIsActive(false)
-		end, { var16 }),
-		snapPoints = { fIntInGameBuildChatSheetSnapPoint / 100 },
-		topBarPillMenuTarget = if var17 then {
-			isNewGameTarget = false,
-			universeId = game.GameId,
-			placeId = game.PlaceId
-		} else nil,
-		universeId = if var18 then var18.universeId else nil,
-		placeId = if var18 then var18.placeId else nil,
-		sessionId = if var18 then var18.sessionId else nil
+		defaultSnapPointIndex = 2,
+		isOpen = var15.useIsActive(),
+		onClose = reactModule.useCallback(function() --[[ line: 28 ]]
+			-- upvalues: var15 (ref)
+			var15.setIsActive(false)
+		end, { var15 }),
+		snapPoints = { fIntInGameBuildChatSheetSnapPoint / 100, 1 },
+		universeId = if var16 then var16.universeId else nil,
+		placeId = if var16 then var16.placeId else nil,
+		sessionId = if var16 then var16.sessionId else nil
 	})
 end
 
-local var15 = roactUtilsModule.Components.createLazyComponent(function() --[[ line: 57 ]]
+local var14 = roactUtilsModule.Components.createLazyComponent(function() --[[ line: 43 ]]
 	-- upvalues: ConnectedChatSheet (ref)
 	return ConnectedChatSheet
 end)
 
-return function() --[[ line: 61 | named "mountChatSheet" ]]
-	-- upvalues: clientLogsCollectorModule (ref), coreGuiService (ref), reactRobloxModule (ref), localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationModule (ref), buildExperienceCompositionStyleSheetModule (ref), var15 (ref)
+return function() --[[ line: 47 | named "mountChatSheet" ]]
+	-- upvalues: clientLogsCollectorModule (ref), coreGuiService (ref), reactRobloxModule (ref), localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationModule (ref), var14 (ref)
 	clientLogsCollectorModule.startServerLogCollection()
 	local buildExperienceChatSheet = Instance.new("ScreenGui")
 	buildExperienceChatSheet.Name = "BuildExperienceChatSheet"
@@ -56,19 +48,12 @@ return function() --[[ line: 61 | named "mountChatSheet" ]]
 	buildExperienceChatSheet.ResetOnSpawn = false
 	buildExperienceChatSheet.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	buildExperienceChatSheet.Parent = coreGuiService
-	buildExperienceChatSheet.DisplayOrder = 9
-	local var20 = reactRobloxModule.createRoot(buildExperienceChatSheet)
-	var20:render(reactModule.createElement(localizationProvider, {
+	local var18 = reactRobloxModule.createRoot(buildExperienceChatSheet)
+	var18:render(reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, {
-			colorMode = foundationModule.Enums.ColorMode.Dark,
-			overlayGui = { DisplayOrder = 9 }
-		}, {
-			CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
-			Sheet = reactModule.createElement(var15)
-		})
+		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, { Sheet = reactModule.createElement(var14) })
 	}))
 	
-	return var20
+	return var18
 end

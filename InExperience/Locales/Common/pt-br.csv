@@ -74,12 +74,8 @@ Amp.Upsell.Message.EmailSent,Enviamos um e-mail para {parentEmail}
 Amp.Upsell.Message.EmailSentPluralParent,Nós enviamos um e-mail para seu responsável vinculado
 Amp.Upsell.Title.AskYourParent,Peça ao seu responsável
 Amp.Upsell.Title.RequestSent,Pedido enviado
-Application.Logout.Action.Logout,Sair
-Application.Logout.Message.Confirmation,Tem certeza de que deseja sair?
 Authentication.AccountSwitch.Action.SwitchAccount,Trocar de conta
-Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Acesso rápido
-Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Saia da Roblox para mudar de conta para {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use uma conta Roblox diferente
 Authentication.Login.Error.PasskeyOnlyAccount,Sua conta só tem uma chave de acesso configurada para entrar. Tente entrar com sua chave de acesso ou recupere sua conta.
@@ -127,30 +123,8 @@ Common.Presence.Label.Invisible,Invisível
 Common.Presence.Label.Offline,Desconectado
 Common.Presence.Label.Online,Conectado
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,A animação é longa demais ({duration} segundos). As animações de emote devem ter no máximo {maxLength} segundos de duração.
-Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,A animação é curta demais ({duration} segundos). As animações de emote devem ter mais de {minLength} segundos de duração.
-Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Seu corpo contém pequenos componentes de malha desconectados (ilhas de malha). Remova a geometria flutuante e verifique se todas as partes da malha estão conectadas corretamente.
-Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Qualidade do ativo: {partName} tem {num_disconnected_components} componentes desconectados, o que ultrapassa o máximo de {max_disconnected_components}."
-Common.UGCValidation.ErrorLabel.AQSInputDataError,A pontuação de qualidade não pode ser calculada corretamente porque os dados de entrada estão incorretos ou incompletos. Confira seu modelo ou denuncie um bug.
+Common.UGCValidation.AQSInputDataError,A pontuação de qualidade não pode ser calculada corretamente porque os dados de entrada estão incorretos ou incompletos. Confira seu modelo ou denuncie um bug.
 Common.UGCValidation.ErrorLabel.AQSInternalError,A pontuação não pode ser gerada devido a um erro de qualidade do ativo. Confira a exatidão dos dados de entrada e tente novamente ou denuncie um bug.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Aviso de qualidade do ativo: a pontuação da distância da gaiola à malha é de {score}. A distância máxima entre a gaiola externa e a malha é de {max_distance}, {negative_sdf_percent}% dos vértices da gaiola externa estão dentro da malha de renderização."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Aviso de qualidade do ativo: a pontuação da distância da gaiola do corpo é de {score}. A distância máxima entre a gaiola do corpo e a malha é de {max_distance}, {negative_sdf_percent}% dos vértices da gaiola do corpo estão dentro da malha do corpo."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Aviso de qualidade do ativo: a pontuação da distância da gaiola da cabeça é de {score}. A distância máxima entre a gaiola da cabeça e a malha é de {max_distance}, {negative_sdf_percent}% dos vértices da gaiola da cabeça estão dentro da malha da cabeça."
-Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Aviso de qualidade do ativo: a pontuação de relevância da gaiola é {score}. {irrelevant_percent}% dos vértices da gaiola externa modificados não cobrem o acessório.
-Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Aviso de qualidade do ativo: a pontuação UV da gaiola é de {score} para {cage_name}. Contagem UV incorreta: {incorrect_uv_count}.
-Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Qualidade do ativo: {partName} tem {degenerate_triangle_percent}% de triângulos degenerados (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Aviso de qualidade do ativo: a pontuação da expressão dinâmica da cabeça é de {score}.
-Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Qualidade do ativo: a configuração da articulação teve a pontuação {score} (articulações: {joint_number}, mão esquerda: {left_hand_joint_number}, mão direita: {right_hand_joint_number})."
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Qualidade do ativo: {partName} tem {num_small_volume_islands} pequenas ilhas desconectadas de {num_disconnected_components} componentes (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,Qualidade do ativo: {partName} tem problemas de integridade na malha (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Qualidade do ativo: a malha de {partName} não é fechada ({boundary_edges_percent}% das bordas são abertas).
-Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Aviso de qualidade do ativo: a pontuação de contenção da malha é de {score}. {mesh_outside_outer_cage_percent}% dos vértices da malha estão fora da gaiola externa.
-Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,A pontuação de qualidade do ativo para {measureName} não pôde ser calculada porque os dados de entrada estavam incompletos ou inválidos. Isso não bloqueia seu upload.
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Qualidade do ativo: a textura {textureName} tem baixa complexidade (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Qualidade do ativo: a textura {textureName} tem resolução {texture_width}x{texture_height} (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Qualidade do ativo: {partName} tem {intersecting_tri_face_percent}% de faces triangulares que se cruzam (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Qualidade do ativo: {partName} tem {uv_outside_bound_vert_percent}% de vértices UV fora dos limites (pontuação: {score}).
-Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Qualidade do ativo: {partName} tem {similar_vertex_percent}% de vértices semelhantes (pontuação: {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"A alça está aplicada à articulação {jointName}, que não faz parte do esquema permitido. Apenas articulações R15 padrão e articulações de transferência de skinning são permitidas."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} deve usar transferência de skinning, mas está faltando a articulação obrigatória {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"A alça está aplicada à articulação {jointName}, mas este ativo deve ser aplicado automaticamente. Você só pode aplicar à {validJointNameList}."
@@ -158,24 +132,17 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,O acessório rígido contém dados de skinning que não são suportados. Certifique-se de que os ossos não sejam importados com a malha
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"A alça contém a articulação {jointName}, que só é permitida quando WrapLayer.AutoSkin está definido como EnabledOverride."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Os vértices vinculados a articulações de transferência devem estar com peso total.
-Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,O pacote de animações não contém os tipos de animação esperados: {missingAnimationTypes}. Cada tipo de animação deve ter uma pasta R15Anim contendo exatamente seus filhos StringValue esperados.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"A animação '{animationName}' tem um valor de peso de {weight}, mas o peso deve ser maior que zero. Corrija a animação."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Não foi possível encontrar a classe {ExpectedClass} chamada {ExpectedName} dentro de {ParentPath}.
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,As seguintes instâncias não fazem parte do esquema aprovado e devem ser removidas: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"O ativo enviado deve ser um {ExpectedClass}, mas é um {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"O ativo enviado deve ter o nome {ExpectedClass}, mas tem {RootClass}."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,A parte do corpo '{bodyPartName}' em CurveAnimation tem uma trilha de Posição (translação). As partes do corpo da animação só podem ser giradas; as trilhas de posição não são permitidas. Remova a trilha de Posição dessa parte do corpo.
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"A parte do corpo ""{bodyPartName}"" na CurveAnimation se move {distance} rebites da sua posição inicial. A translação máxima permitida é de {maxDistance} rebites. Reduza o movimento posicional da parte do corpo."
-Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"A CurveAnimation contém ossos HRD/DRD, e a parte do corpo '{bodyPartName}' tem uma faixa de Posição (translação). Quando algum osso está presente na animação, nenhuma parte do corpo pode transladar, para evitar a separação da articulação. Remova todas as faixas de Posição das partes do corpo."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,O osso {boneName} em CurveAnimation tem uma faixa de Posição (translação). Os ossos HRD/DRD só podem ser girados; as faixas de posição causam separação das articulações e não são permitidas. Remova a animação de posição desse osso.
-Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,"O osso ""{boneName}"" na CurveAnimation se move {distance} rebites da sua posição inicial. A translação máxima permitida é de {maxDistance} rebites. Reduza o movimento posicional do osso."
-Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,A CurveAnimation contém pastas de ossos HRD/DRD que ainda não são compatíveis. Remova todas as subpastas de ossos antes de fazer o upload.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,As partes do corpo em uma CurveAnimation não podem estar a menos de {minHeight} rebites ou a mais de {maxDistance} rebites da HumanoidRootPart. Corrija a animação.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,Os elementos filhos MarkerCurves e AnimationRigData de CurveAnimation não podem ter elementos filhos
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"A hierarquia de CurveAnimation contém Scripts, LocalScripts ou ModuleScripts. Remova-os."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Falha ao carregar os dados de CurveAnimation. O elemento de animação pode ser inválido ou estar inacessível.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"A CurveAnimation contém a pasta de parte do corpo {folderName}, que possui uma hierarquia inválida (possui pastas filhas que não são permitidas ou que foram configuradas incorretamente)"
-Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"A pasta '{boneName}' em CurveAnimation não é um nome de osso HRD/DRD reconhecido. As subpastas de animação devem ser partes do corpo R15 válidas ou nomes de ossos reconhecidos (por exemplo, HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase ou ossos dos dedos, como LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,A CurveAnimation contém Curvas com Tempo ou Valor inválidos. Corrija a animação.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,A hierarquia CurveAnimation só pode conter {allowedTypes}. Remova quaisquer outros tipos de instância.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,A CurveAnimation deve ter entre {minLength} e {maxLength} segundos de duração. Corrija a animação.
@@ -213,7 +180,6 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Não é possível identi
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"As cabeças dinâmicas disponíveis no mercado devem ser animadas, mas esta cabeça não tem dados do SCAF (Sistema de Codificação de Ações Faciais)."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Não é possível identificar a expressão de olho direito fechado para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que o olho direito corresponda ao local do olho direito na cabeça e confira se ele pode se fechar.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Não é possível identificar a expressão de careta para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que a boca corresponda ao local da boca na cabeça e confira se ela pode mostrar a expressão de careta.
-Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Este ativo usa mapas emissivos que só estão disponíveis para criadores no Programa de Criadores Confiáveis. Remova todo o conteúdo do mapa emissivo ou participe do programa para enviar.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,A propriedade InternalOverrideFACSData em FaceControls deve estar vazia no envio.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"Foi detectado que o SCAF - Sistema de Codificação de Ações Faciais expandiu sua cabeça para {modPercent}%, mas alterar a cabeça é contra a política do mercado para animações faciais."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"Foi detectado que o SCAF - Sistema de Codificação de Ações Faciais encolheu sua cabeça para {modPercent}%, mas alterar a cabeça é contra a política do mercado para animações faciais."
@@ -229,7 +195,6 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"A DigitsRigDescription 
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,Você não pode incluir um DigitsRigDescription sem um HumanoidRigDescription
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"A instância {instName} aparece mais de uma vez, mas só pode existir uma vez dentro de uma hierarquia de ossos."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"A instância {instName} está abaixo de {parentName}, mas, com base nos seus ossos existentes, ela deveria estar abaixo de {expectedParentName}."
-Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,A HumanoidRigDescription e os ossos adicionais ainda não estão habilitados para uploads de corpo.
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,"A instância {instName} da classe {className} está em uma árvore de ossos, mas não faz parte do esquema R15plus definido."
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,A articulação opcional {jointName} está mapeada incorretamente no HRD. Ela deve ser mapeada para um osso chamado {boneName}.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"A articulação {jointName} é uma articulação R15 padrão, mas o anexo da plataforma não está conectado ao HRD. Verifique se o HRD do seu avatar está vinculado a um AttachmentConstraint em vez de um Motor6d."
@@ -257,15 +222,12 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"A gaiola ext
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% dos vértices da gaiola externa modificados não cobrem o acessório. Só mova a gaiola externa quando necessário.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,Há {incorrect_uv_count} valores UV na gaiola {cage_name} que estão incorretos ou não pertencem ao modelo. Corrija o UV da gaiola.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% dos vértices da malha do acessório estão fora da gaiola externa. Ajuste para que uma parte maior do acessório fique entre as gaiolas.
-Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"A dimensão da malha de {partName} no eixo {axis}, de '{currentSize}' rebites, é maior que a dimensão máxima permitida para uma peça individual, de '{maxSize}' rebites. Reduza a escala da malha."
-Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"A dimensão da malha de {partName} no eixo {axis}, de '{currentSize}' rebites, é menor que a dimensão mínima permitida para uma peça individual, de '{minSize}' rebites. Aumente a escala da malha."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,O anexo {attName} deve existir exatamente uma vez dentro dos descendentes de {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (ou seus descendentes) contêm Atributos. Você precisa remover os Atributos do seguinte: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Para fazer upload de um ativo no Roblox, você deve selecionar exatamente 1 instância e o tipo de upload associado."
-Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,A instância {ProblematicDescendantPath} não deve ter marcadores.
-Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Segunda string de erro de teste usada para verificar o fluxo completo de sincronização de tradução Hub-first.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"A parte da malha da cabeça tem animações faciais para {jointName}, que não podem ser usadas em SCAF - Sistema de Codificação de Ações Faciais. Renomeie essa articulação e importe sua cabeça novamente."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"A parte do corpo {partName} tem a skin aplicada à articulação virtual {jointName}, que não faz parte do esquema R15plus."
+Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,A HumanoidRigDescription e os ossos adicionais ainda não estão habilitados para uploads de corpo.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Ir para configurações
@@ -278,12 +240,8 @@ CommonUI.Controls.Action.Apply,Aplicar
 CommonUI.Controls.Action.Back,Voltar
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Confirmar
-CommonUI.Controls.Action.Continue,
-CommonUI.Controls.Action.Done,Pronto
-CommonUI.Controls.Action.Next,Próximo
 CommonUI.Controls.Action.OK,OK
 CommonUI.Controls.Action.Refresh,Atualizar
-CommonUI.Controls.Action.ResetAll,Redefinir tudo
 CommonUI.Controls.Action.Search,Pesquisar
 CommonUI.Controls.Action.ShowMore,Mostrar mais
 CommonUI.Controls.Action.Submit,Enviar
@@ -306,8 +264,6 @@ CommonUI.Controls.Label.January,Janeiro
 CommonUI.Controls.Label.JanuaryAbbreviated,Jan.
 CommonUI.Controls.Label.July,Julho
 CommonUI.Controls.Label.June,Junho
-CommonUI.Controls.Label.LastWeek,Semana passada
-CommonUI.Controls.Label.LastYear,Ano passado
 CommonUI.Controls.Label.March,Março
 CommonUI.Controls.Label.MarchAbbreviated,Mar.
 CommonUI.Controls.Label.May,Maio
@@ -326,12 +282,8 @@ CommonUI.Controls.Label.September,Setembro
 CommonUI.Controls.Label.SeptemberAbbreviated,Set.
 CommonUI.Controls.Label.Sunday,Domingo
 CommonUI.Controls.Label.SundayAbbreviated,Dom
-CommonUI.Controls.Label.ThisMonth,Este mês
-CommonUI.Controls.Label.ThisWeek,Esta semana
-CommonUI.Controls.Label.ThisYear,Este ano
 CommonUI.Controls.Label.Thursday,Quinta-feira
 CommonUI.Controls.Label.ThursdayAbbreviated,Qui
-CommonUI.Controls.Label.Today,Hoje
 CommonUI.Controls.Label.Tuesday,Terça-feira
 CommonUI.Controls.Label.TuesdayAbbreviated,Ter
 CommonUI.Controls.Label.Wednesday,Quarta-feira
@@ -339,11 +291,8 @@ CommonUI.Controls.Label.WednesdayAbbreviated,Qua
 CommonUI.Controls.Label.Year,Ano
 CommonUI.Controls.NoResultsFound,Nenhum resultado encontrado
 CommonUI.Features.Action.Close,
-CommonUI.Features.Action.Continue,
-CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,menos
 CommonUI.Features.Action.MoreLowercase,mais
-CommonUI.Features.Action.Send,
 CommonUI.Features.Label.About,Sobre
 CommonUI.Features.Label.AcceptConnection,Aceitar conexão
 CommonUI.Features.Label.AcceptFriend,Aceitar amigo
@@ -379,9 +328,8 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,Perfil
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,Resgatar códigos
-CommonUI.Features.Label.RemoveConnection,Excluir amizade
+CommonUI.Features.Label.RemoveConnection,Remover conexão
 CommonUI.Features.Label.ReportLogs,Registros de relatório
-CommonUI.Features.Label.ReportLogsSentenceCase,Enviar relatório
 CommonUI.Features.Label.Sent,Enviado
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Termos
@@ -561,32 +509,19 @@ CoreScripts.EmoteThumbnailEditor.Action.Update,
 CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Editar miniatura
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,Rotação
 CoreScripts.EmoteThumbnailEditor.Label.Time,Horário
-CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,O menu branco da Roblox indica que você está testando o jogo. Siga sempre as Regras da Comunidade da Roblox.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Novo: Confira Roblox Connect!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,Novo: Confira a Turma Roblox!
 CoreScripts.FTUX.Heading.InExperienceShop,Loja nova
 CoreScripts.FTUX.Heading.JoinVoice,Entrar no Bate-papo de voz
-CoreScripts.FTUX.Heading.LeaveRespawn,Sair e reaparecer
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Novo: alternador de avatar
-CoreScripts.FTUX.Heading.NewTiltOnboarding,O menu fica aqui
-CoreScripts.FTUX.Heading.NewTiltUpdate,Novo menu
-CoreScripts.FTUX.Heading.ReadyToPlaytest,Tudo pronto para o teste de jogo?
-CoreScripts.FTUX.Heading.SideSheetUpdate,Todas as suas ações em um só lugar
-CoreScripts.FTUX.Heading.SocialOnboarding,Recursos sociais
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Mude para seus avatares salvos a qualquer momento.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Converse com suas amizades a qualquer hora.
 CoreScripts.FTUX.Label.InExperienceShopDescription,Confira os itens escolhidos especialmente para você
 CoreScripts.FTUX.Label.JoinVoiceDescription,Para ouvir e conversar com outros
-CoreScripts.FTUX.Label.LeaveRespawn,Sair do jogo ou fazer seu avatar reaparecer é fácil: basta usar as opções disponíveis aqui.
-CoreScripts.FTUX.Label.NewTiltOnboarding,O menu do jogo reúne ações disponíveis durante a partida e as configurações do jogo.
-CoreScripts.FTUX.Label.NewTiltUpdate,Os itens do menu foram movidos para cá.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Crie uma Turma com seus amigos a qualquer hora.
-CoreScripts.FTUX.Label.SideSheetOnboarding,"O menu contém todos os seus recursos essenciais. Convide amizades, experimente emotes, controle a música e muito mais."
-CoreScripts.FTUX.Label.SideSheetUpdate,O menu ainda contém todos os seus recursos essenciais.
-CoreScripts.FTUX.Label.SocialOnboarding,"Acesse facilmente seus recursos sociais na barra superior, incluindo o bate-papo."
 CoreScripts.Feedback.EntryPoint.ButtonText,Dar feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Dar feedback de tradução
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Sair
 CoreScripts.Feedback.FeedbackBar.HelpButton,Ajuda
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Forneça quaisquer comentários adicionais abaixo (opcional)
@@ -787,7 +722,6 @@ CoreScripts.InGameMenu.GameSettings.Haptics,Vibrar ao tocar
 CoreScripts.InGameMenu.GameSettings.InvertedCamera,Câmera invertida
 CoreScripts.InGameMenu.GameSettings.LanguageHeader,Chat e idioma
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,Bloqueado pelo desenvolvedor
-CoreScripts.InGameMenu.GameSettings.MainVolume,Volume principal
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,Nível de qualidade
 CoreScripts.InGameMenu.GameSettings.MovementMode,Modo de movimento
 CoreScripts.InGameMenu.GameSettings.Open,Abrir
@@ -818,7 +752,6 @@ CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,Rotação progressi
 CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Câmera fixa em 3ª pessoa
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Visualização e controles
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,Vinheta VR ativada
-CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Volume do chat de voz
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,CONTROLES RV
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,Ocorreu um erro. Tente novamente.
@@ -831,6 +764,7 @@ CoreScripts.InGameMenu.Label.ViewButton,Botão Visualizar
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
 CoreScripts.InGameMenu.LeaveGameQuestion,Sair?
+CoreScripts.InGameMenu.NextUpExitMenu.Title,Experiências sugeridas
 CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Controles...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
@@ -840,7 +774,7 @@ CoreScripts.InGameMenu.PageTitle.Report,Denunciar
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Configurações de conforto
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,Trocar servidor
 CoreScripts.InGameMenu.Prompt.BackToHome,"Sim, ir para a página inicial"
-CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Quer mesmo sair do jogo?
+CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Quer mesmo sair da experiência?
 CoreScripts.InGameMenu.Prompt.ConfirmResetCharacter,Tem certeza de que deseja redefinir seu personagem?
 CoreScripts.InGameMenu.Prompt.ConfirmRespawnCharacter,Quer mesmo regenerar o personagem?
 CoreScripts.InGameMenu.Prompt.LeaveGame,"Sim, sair"
@@ -908,15 +842,12 @@ CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Regenerar personagem?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Você está prestes a sair deste servidor e mudar para outro.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Você está saindo?
-CoreScripts.InGameMenu.Traversal.HistoryDescription,Entrar em jogos acessados anteriormente
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,Entrar em jogos visitados anteriormente
-CoreScripts.InGameMenu.Traversal.LeaveBody,Você está prestes a sair deste jogo e retornar para {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Você está prestes a sair deste jogo e retornar para {PREVIOUS_GAME}.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,Entrar em experiências visitadas anteriormente
+CoreScripts.InGameMenu.Traversal.LeaveBody,Você está prestes a sair desta experiência e retornar para {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Vibração
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,para ativar ou desativar o menu de navegação
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,Algumas experiências precisam que você aperte
-CoreScripts.InGameMenu.VoiceChatVolumeLower,
 CoreScripts.PremiumModal.Title.Error,
 CoreScripts.PublishAssetPrompt.AssetDescriptionPlaceholder,Descrição
 CoreScripts.PublishAssetPrompt.Cancel,
@@ -987,11 +918,8 @@ CoreScripts.PurchasePrompt.Title.VerificationRequired,
 CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,Tirar foto
 CoreScripts.TextChat.Action.SendQuickWords,Enviar mensagens rápidas
-CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,Global
 CoreScripts.TextChat.ChannelTabs.Here,Aqui
-CoreScripts.TextChat.ChannelTabs.System,Sistema
-CoreScripts.TextChat.ChannelTabs.Team,Equipe
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: silenciar uma pessoa.
 CoreScripts.TextChat.ChatCommands.Unmute.Description, /remover usilêncio <speaker>: remover silêncio de um remetente.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,O Roblox traduz automaticamente os idiomas suportados no chat
@@ -1008,8 +936,6 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Você só pode ver as me
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Você pode ver as mensagens do sistema e conversar com usuários apenas da sua região.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Apenas pessoas de faixa etária semelhante e amizades confiáveis podem conversar com você.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,Apenas pessoas em faixas etárias semelhantes e suas Conexões Confiáveis podem bater papo com você.
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Diga oi a todos que estão jogando agora!
-CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} outros jogadores estão no chat. Dê um oi!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Diga oi a todos que estão jogando agora!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Só suas amizades confiáveis podem conversar com você.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Converse com mais pessoas neste jogo. Apenas pessoas em faixas etárias semelhantes podem conversar com você.
@@ -1040,11 +966,7 @@ CoreScripts.TextChat.Emote.Error.NotEnabled,Você não pode usar esse emote.
 CoreScripts.TextChat.Emote.Error.NotEquipped,Você não tem esse emote equipado.
 CoreScripts.TextChat.Emote.Error.NotOwnedGeneric,Você não possui esse emote.
 CoreScripts.TextChat.EnableChatButton.Label.UnlockChat,Desbloquear chat
-CoreScripts.TextChat.Error.NoChannelAccess,Você não tem acesso a este canal do chat
-CoreScripts.TextChat.Error.NoChannelSelected,Nenhum canal de chat foi selecionado
-CoreScripts.TextChat.Error.ReadOnlyChannel,Canal de chat somente leitura
 CoreScripts.TextChat.Help.FirstLine,Estes são os comandos básicos do chat:
-CoreScripts.TextChat.InputBar.Hint.ChatUnavailable,Chat indisponível
 CoreScripts.TextChat.InputBar.Hint.Gamepad,"Use o botão ""{CHAT_BUTTON}"" no menu para conversar"
 CoreScripts.TextChat.InputBar.Hint.GamepadConnected,"Pressione ""{CONFIRM_KEY}"" para digitar"
 CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
@@ -1066,9 +988,7 @@ CoreScripts.TextChat.Mute.Success,O usuário '{RBX_NAME}' foi silenciado(a).
 CoreScripts.TextChat.Notification.WhisperChat.Created,Agora você está em um chat privado com {RBX_NAME}.
 CoreScripts.TextChat.Online.Help.Description3,/online : número de usuários com quem você pode conversar neste canal.
 CoreScripts.TextChat.Online.Success.Plural,{RBX_COUNT} jogadores estão online no momento e podem conversar
-CoreScripts.TextChat.Online.Success.Plural2,{RBX_COUNT} outros jogadores estão online e podem conversar.
 CoreScripts.TextChat.Online.Success.Singular,{RBX_COUNT} jogador está online no momento e pode conversar
-CoreScripts.TextChat.Online.Success.Singular3,{RBX_COUNT} outro jogador está online e pode conversar.
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,Você não pode participar de chat de equipe se não estiver em uma equipe.
 CoreScripts.TextChat.TeamChat.PrefixText,[Equipe]
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,Você só pode conversar com suas conexões confiáveis e com pessoas de faixas etárias semelhantes.
@@ -1124,7 +1044,7 @@ CoreScripts.TopBar.Title.ExperienceControls,Controles da experiência
 CoreScripts.TopBar.ToggleMic,Silenciar/Ativar áudio de si mesmo
 CoreScripts.TopBar.Traversal.BackButtonDefault,Experiência anterior
 CoreScripts.TopBar.Traversal.History,Histórico
-CoreScripts.VRFTUX.Action.Next,
+CoreScripts.VRFTUX.Action.Next,Próximo
 CoreScripts.VRFTUX.Action.Skip,Ignorar
 CoreScripts.VRFTUX.Description.Movement.Body1,"Para se mover em uma experiência, use a miniatura no seu <b>controlador</b> esquerdo."
 CoreScripts.VRFTUX.Description.Movement.Body2,Pressione o botão <b>A</b> para pular.
@@ -1176,9 +1096,7 @@ Feature.AccountSettings.Example.Twitch,ex.: www.twitch.tv/roblox/profile
 Feature.AccountSettings.Example.Twitter,ex.: @Roblox
 Feature.AccountSettings.Example.YouTube,ex.: www.youtube.com/user/roblox
 Feature.AccountSettings.Heading.SocialNetworks,Redes sociais
-Feature.AccountSettings.Heading.Tab.Notifications,Notificações
 Feature.AccountSettings.Heading.Tab.Privacy,
-Feature.AccountSettings.Heading.Tab.Robux,Robux
 Feature.AccountSettings.Heading.Tab.Security,Segurança
 Feature.AccountSettings.Label.Discord,Discord
 Feature.AccountSettings.Label.DropDown.Everyone,Todos
@@ -1199,12 +1117,10 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,O identificador X é inválido
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Canal do YouTube inválido.
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignorar solicitação de conexão
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar pedido de amizade
-Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar pedido de amizade confiável
 Feature.AddFriends.Action.RequestIgnored,Pedido ignorado
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encontre pessoas na Roblox pesquisando pelo nome de usuário ou nome.
 Feature.AddFriends.Label.ConnectWithContacts,Convide seus contatos ou conecte-se com amizades que já estão na Roblox!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Pesquisar pessoas
-Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,Encontre pessoas na Roblox procurando seu nome de usuário ou nome de exibição.
 Feature.AddFriends.Label.SyncWithContacts,Sincronize os contatos para encontrar e convidar amizades!
 Feature.AddFriends.Title.ConnectWithContacts,Adicionar de contatos
@@ -1227,8 +1143,6 @@ Feature.Avatar.Action.CancelSelection,Cancelar seleção
 Feature.Avatar.Action.Clear,Remover
 Feature.Avatar.Action.ComposerPost,Publicar
 Feature.Avatar.Action.ComposerPreviewAndPost,Pré-visualizar e publicar
-Feature.Avatar.Action.CreateSet,
-Feature.Avatar.Action.CreateSetFirstRun,Criar conjunto
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Visualização padrão
 Feature.Avatar.Action.Delete,
@@ -1313,8 +1227,6 @@ Feature.Avatar.Heading.Outfits,Trajes
 Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,Salvar personagem
 Feature.Avatar.Heading.SelectToUpdate,Selecione para atualizar
-Feature.Avatar.Heading.SetLimitReached,Limite de conjuntos atingido
-Feature.Avatar.Heading.SetNameNotAllowed,Nome não permitido
 Feature.Avatar.Heading.SharePublicAvatar,Compartilhe seu avatar
 Feature.Avatar.Heading.SortBy,Ordenar por
 Feature.Avatar.Heading.UsedName,Nome já usado
@@ -1339,8 +1251,6 @@ Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,Adicionar/Editar
 Feature.Avatar.Label.AddManage,Adicionar/Gerenciar
 Feature.Avatar.Label.AddManage2,
-Feature.Avatar.Label.AllAvatarSets,Tudo
-Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,Todas as cabeças
 Feature.Avatar.Label.AnimationFullSet,Conjunto completo
 Feature.Avatar.Label.AvatarAdjustment,Ajuste de avatar
@@ -1408,7 +1318,6 @@ Feature.Avatar.Label.FullBody,Corpo inteiro
 Feature.Avatar.Label.FullMasks,Máscaras completas
 Feature.Avatar.Label.FullPair,Par completo
 Feature.Avatar.Label.Gear,Equipamento
-Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,Gostaria de obter esta roupa de graça?
 Feature.Avatar.Label.GetOutfitMultiple,Você gostaria de obter [{numItems}] itens de graça?
 Feature.Avatar.Label.GetOutfitOne,Você gostaria de obter [[1]] item de graça?
@@ -1476,8 +1385,6 @@ Feature.Avatar.Label.PPEViewFullButton,Ver avatar inteiro
 Feature.Avatar.Label.Pants,
 Feature.Avatar.Label.PantsClassic,
 Feature.Avatar.Label.Photobooth,Cabine de fotos
-Feature.Avatar.Label.ProfileFrames,Molduras
-Feature.Avatar.Label.ProfileFramesUnlockBanner,Desbloqueie molduras com o Plus
 Feature.Avatar.Label.Props,
 Feature.Avatar.Label.Purchased,Comprados
 Feature.Avatar.Label.QuickMenuCustomizeTitle,Personalizar opções
@@ -1505,9 +1412,6 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Pesquisas recentes
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Visitadas recentemente
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Continuar comprando
 Feature.Avatar.Label.SelectItem,
-Feature.Avatar.Label.SetLimitReachedBody,Você pode ter até {setLimit} conjuntos. Exclua um para liberar espaço
-Feature.Avatar.Label.SetNameDuplicateBody,Você já tem um conjunto com este nome. Escolha outro.
-Feature.Avatar.Label.SetNameNotAllowedBody,Escolha outro nome
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Publicar avatares no mercado
 Feature.Avatar.Label.Shirt,Camisas
 Feature.Avatar.Label.ShirtClassic,Camisa clássica
@@ -1653,7 +1557,6 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Escreva uma legenda para seu avata
 Feature.Avatar.RevokedItems.BodyText,"""{item}"" da categoria {category} foi removido deste avatar salvo, então reembolsamos a quantia original paga.{lineBreak}Confira a caixa de entrada para conferir os detalhes."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Os seguintes itens foram removidos deste avatar salvo, então reembolsamos a quantia original paga.{lineBreak}{items}{lineBreak}Confira a caixa de entrada para conferir os detalhes."
 Feature.Avatar.RevokedItems.ViewInbox,Ver caixa de entrada
-Feature.Avatar.SetNameDuplicate,Duplicar nome
 Feature.Avatar.Text.MakeupLayeringTooltip,Faça camadas na sua maquiagem
 Feature.Avatar.Title.AvatarRefinement,Refinamento de avatar
 Feature.Avatar.Title.BulkDeleteMakeupLooks,Excluir {count} visuais de maquiagem?
@@ -1665,7 +1568,6 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Remover todas as animações?
 Feature.Avatar.Title.ClearBodyConfirmation,Remover corpo?
 Feature.Avatar.Title.ClearClothesConfirmation,Remover todas as roupas?
 Feature.Avatar.Title.ClearMakeupConfirmation,Remover toda a maquiagem?
-Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplicar visual
 Feature.Avatar.Title.EnhancedAvatarHeads,Cabeças de avatar aprimoradas
 Feature.Avatar.Title.GetOutfit,Obter roupa
@@ -1746,7 +1648,39 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Bloquear {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Bloquear este usuário irá removê-los como conexão ou seguidor. Ele não será capaz de enviar mensagens, solicitações ou convites para você.<br /><br />Ele não será notificado de que você o bloqueou."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Se você bloquear este usuário, ele será removido das suas conexões ou seguidores e não poderá enviar mensagens, solicitações ou convites para você.<br /><br />Ele não será notificado de que você o bloqueou."
+Feature.Call.Description.ExperienceError,A Conversa com voz não é suportada por esta experiência.
+Feature.Call.Description.Friends,Amizades que podem ou não ter dispositivos e configurações para uma ótima experiência de chamada.
+Feature.Call.Description.NoFriendsFound,Nenhuma amizade encontrada
+Feature.Call.Description.SuggestedFriends,Amizades com dispositivos e configurações definidas para uma ótima experiência de chamada.
+Feature.Call.Error.Description.AlreadyInCall,Você já está em uma chamada
+Feature.Call.Error.Description.DeviceNotSupported,Chamadas não são suportadas no seu dispositivo. Tente novamente mais tarde.
+Feature.Call.Error.Description.FriendBusy,{calleeCombinedName} está ocupado(a) e não pode receber sua chamada agora. Tente novamente mais tarde.
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
+Feature.Call.Error.Label.OhNo,Oh não!
+Feature.Call.Error.Title.CouldntMakeCall,Não foi possível fazer uma chamada
+Feature.Call.Error.Title.ExperienceError,Erro de experiência
+Feature.Call.Error.Title.FriendBusy,A amizade está ocupada
+Feature.Call.Label.Block,Bloquear {combinedName}
+Feature.Call.Label.CallEnded,Chamada encerrada
+Feature.Call.Label.Calling,Chamando...
+Feature.Call.Label.Friends,
+Feature.Call.Label.Incoming,Chamadas recebidas
+Feature.Call.Label.Missed,Chamadas perdidas
+Feature.Call.Label.Outgoing,Chamadas enviadas
+Feature.Call.Label.RecentCalls,Chamadas recentes
+Feature.Call.Label.Retry,
+Feature.Call.Label.RobloxCall,Chamada Roblox
+Feature.Call.Label.StartNewCall,Iniciar nova chamada
+Feature.Call.Label.Suggested,Sugeridas
+Feature.Call.Label.Teleporting,
+Feature.Call.Label.Unfriend,Desfazer amizade com {combinedName}
+Feature.Call.Label.Yesterday,Ontem
+Feature.Call.Modal.EnableChatVoiceBody,Ative o bate-papo com voz em Configurações > Privacidade para conversar com outras pessoas nesta experiência.
+Feature.Call.Modal.EnableChatVoiceTitle,Ativar Conversa por voz
+Feature.Call.Prompt.AddFriends,Adicione amizades na Roblox para fazer uma chamada
+Feature.Call.Prompt.FirstCall,Tente fazer sua primeira chamada
+Feature.Call.Prompt.SearchFriends,Pesquisar amizades
+Feature.Call.Prompt.StartCall,Iniciar uma chamada
 Feature.Captures.Action.Allow,Permitir
 Feature.Captures.Action.AllowPhotoAccessAccepted,
 Feature.Captures.Action.AllowPhotoAccessDeclined,
@@ -1888,11 +1822,9 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,Ajustável
-Feature.Catalog.Label.AdvancedMaterials,Materiais avançados
 Feature.Catalog.Label.AllItems,Todos os itens
 Feature.Catalog.Label.AlreadyOwned,Você já tem este item
 Feature.Catalog.Label.Animation,Animação
-Feature.Catalog.Label.Attributes,Atributos
 Feature.Catalog.Label.Attribution,Feito em
 Feature.Catalog.Label.AvailableForSale,Disponível para venda
 Feature.Catalog.Label.AvailableToPremiumMembers,Disponível porque você tem Premium
@@ -1938,8 +1870,6 @@ Feature.Catalog.Label.CustomizeAvatar,Personalizar avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Você não poderá desfazer essa ação se excluir.
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
-Feature.Catalog.Label.Emissive,Emissivo
-Feature.Catalog.Label.EmissiveInfo,"O item emissivo brilha e emite sua própria luz, por isso permanece brilhante e visível mesmo em ambientes escuros."
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,Sobrancelha
@@ -2014,7 +1944,6 @@ Feature.Catalog.Label.NoLongerAvailable,Este item não está mais disponível
 Feature.Catalog.Label.NoSellersWarning,"Infelizmente, ninguém está vendendo este item"
 Feature.Catalog.Label.None,Nenhum
 Feature.Catalog.Label.NotAvailable,Este item não está disponível no momento
-Feature.Catalog.Label.OfferApplied,Oferta aplicada
 Feature.Catalog.Label.OnSale,À venda
 Feature.Catalog.Label.OriginalPrice,Preço original
 Feature.Catalog.Label.OutOfStock,
@@ -2024,8 +1953,6 @@ Feature.Catalog.Label.PBR.false,Básico
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,"Itens de avatar com materiais avançados usam renderização baseada em física (PBR) para terem um aspecto mais natural, com luz e sombras que mudam e brilham como na vida real."
 Feature.Catalog.Label.PBRInfoTitle,Renderização baseada em física (RBP)
-Feature.Catalog.Label.ParticleEffects,Efeitos de partículas
-Feature.Catalog.Label.ParticleEffectsInfo,"Um item com efeitos de partículas emite visuais animados, fazendo com que pareça dinâmico e vivo."
 Feature.Catalog.Label.Placement,Posicionamento
 Feature.Catalog.Label.PrePremiumPrice,(Preço do item:
 Feature.Catalog.Label.Premium,
@@ -2059,7 +1986,6 @@ Feature.Catalog.Label.SalePrice,Preço de venda:
 Feature.Catalog.Label.SaveAsCharacter,Salvar como personagem
 Feature.Catalog.Label.SaveOptions,Opções de salvamento
 Feature.Catalog.Label.Search,
-Feature.Catalog.Label.SearchSuggestions,Talvez você esteja procurando
 Feature.Catalog.Label.SellCut,Você ganha:
 Feature.Catalog.Label.SellPageUpsell,A venda só está disponível para usuários com uma assinatura do Roblox Plus.
 Feature.Catalog.Label.SellSuccess,Item à venda
@@ -2106,7 +2032,7 @@ Feature.Catalog.LabelNoResellers,Nenhum revendedor
 Feature.Catalog.LabelOffSale,
 Feature.Catalog.LabelPants,
 Feature.Catalog.LabelPastDay,Dia anterior
-Feature.Catalog.LabelPastWeek,
+Feature.Catalog.LabelPastWeek,Semana passada
 Feature.Catalog.LabelShirts,
 Feature.Catalog.LabelTShirts,Camisetas
 Feature.Catalog.Message.AvatarModerated,Este avatar não atendeu às nossas regras da comunidade. Tente compartilhar um avatar diferente
@@ -2121,7 +2047,6 @@ Feature.Catalog.Message.CaptionLimit,
 Feature.Catalog.Message.Checkout.PurchaseFailed,"Para continuar, reveja ou remova os itens"
 Feature.Catalog.Message.Checkout.UnavailableItems,"Um ou mais itens não podem ser comprados. Por favor, remova-os antes de continuar."
 Feature.Catalog.Message.CollectiblesInfo,"Itens coletáveis podem ser vendidos de usuário para usuário após um período de espera, mesmo que o estoque original não esteja esgotado. Assinantes do Roblox Plus podem listar itens colecionáveis para revenda."
-Feature.Catalog.Message.FTUXFavoritePillTooltip,Adicionar isto aos seus favoritos
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Descubra os itens mais bem trabalhados na Roblox
 Feature.Catalog.Message.HoldingPolicyL1,As compras da revenda terão uma retenção de até {days} dias. O item só pode ser revendido após o término desse período de retenção. Apenas usuários Plus podem revender itens.
 Feature.Catalog.Message.HoldingPolicyL2,"Após a compra, vendas originais entram em retenção por até {purchaseDays} dias. O item só pode ser revendido após o período de retenção terminar e as revendas são retidas por até {resaleDays} dias. Apenas usuários Premium podem revender itens."
@@ -2141,7 +2066,6 @@ Feature.Catalog.Response.ReportSubmitted,A denúncia foi enviada e será analisa
 Feature.Catalog.Response.TakenOffSaleSuccess,Venda cancelada
 Feature.Catalog.Search.LandingPage.Empty,"Pesquise por cores, tipos, temas, etc"
 Feature.Catalog.Search.Placeholder,"Pesquisar itens, roupas"
-Feature.Catalog.Text.OfferAppliedToHighestItem,Oferta aplicada ao item de maior valor
 Feature.Catalog.Title.AvatarSharePanel,Seu avatar está pronto para compartilhar
 Feature.Catalog.Title.Checkout,
 Feature.Catalog.Title.Checkout.ClearAllItemsOnAvatarTitle,Retirar todos os itens?
@@ -2161,13 +2085,11 @@ Feature.Catalog.Title.CheckoutPlural,Fazer checkout de {count} itens
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Substituir a camada inferior?
 Feature.Catalog.Title.RentalFtuxText,Alugue para testar um item por 3 dias
-Feature.Catalog.Toast.AddedToFavorites,Adicionado aos favoritos
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,Preço alterado porque você possui {number} itens
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar em revisão
 Você pode compartilhar seu avatar depois que ele for revisado"
 Feature.Catalog.Toast.FavoritedLook,Avatar adicionado aos favoritos!
 Feature.Catalog.Toast.LinkCopied,Link copiado para área de transferência
-Feature.Catalog.Toast.RemovedFromFavorites,Removido dos favoritos
 Feature.Catalog.Toast.UnfavoritedLook,Avatar removido dos favoritos
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
@@ -2247,14 +2169,10 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} respondeu a você
 Feature.Chat.Label.Group.YouRepliedToThem,Você respondeu a {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,Nome do grupo
 Feature.Chat.Label.HoverToReplyTooltip,Passe o cursor para responder
-Feature.Chat.Label.InGameFriendsChatNotifications,Notificações de amizades no chat do jogo
-Feature.Chat.Label.Loading,Carregando…
 Feature.Chat.Label.LongPressToReplyTooltip,Pressione e segure para responder
 Feature.Chat.Label.Members,Membros
 Feature.Chat.Label.MessageNotAvailable,Esta mensagem não está disponível
-Feature.Chat.Label.MuteInGameChatToastNotifications,Silenciar notificações de chat no jogo
 Feature.Chat.Label.New,
-Feature.Chat.Label.NoChatFound,Nenhuma conversa encontrada
 Feature.Chat.Label.NoDescriptionYet,Ainda sem descrição.
 Feature.Chat.Label.NotImplementedMessageType,Esta mensagem não pode ser exibida.
 Feature.Chat.Label.NotSet,Não configurado
@@ -2282,7 +2200,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem.
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,usuário desconhecido
 Feature.Chat.Label.User,Usuário
@@ -2294,7 +2211,6 @@ Feature.Chat.Message.AddConnectionsPartyLimitSingular,Você só pode formar um g
 Feature.Chat.Message.AddFriendsLimit,Você pode ter até {connectionsNum} amigos no bate-papo em grupo.
 Feature.Chat.Message.AddFriendsPartyLimit,Você pode ter até {connectionsNum} amigos numa Turma.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,"Por causa das suas configurações de privacidade, você só pode formar uma Turma com 1 amigo."
-Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} enviou uma mensagem que não pode ser exibida
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,O bate-papo está desativado. Você pode ativá-lo nas suas configurações de privacidade.
 Feature.Chat.Message.ChatUnavailableRegion,No momento o bate-papo não está disponível na sua região.
 Feature.Chat.Message.ChatUnavailableWithUser,"No momento, o bate-papo não está disponível com este usuário."
@@ -2346,22 +2262,25 @@ Feature.Chat.Text.NoConnections,"Você ainda não adicionou nenhuma conexão. Pa
 Feature.Chat.Text.NoFriends,"Você ainda não adicionou nenhum amigo. Para começar, encontre e adicione seus amigos na Roblox."
 Feature.Chat.Title.FriendsChat,Chat de amizades
 Feature.Chat.Title.MuteChatNotifications,Silenciar notificações de chat das amizades durante o jogo
-Feature.Chat.Title.NewChat,Novo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Uma ou mais pessoas nesta lista não podem ser adicionadas
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Ajude suas amizades a encontrarem você
+Feature.Contacts.Action.FindFriends,Encontrar amizades
 Feature.Contacts.Action.Invite,Convidar
 Feature.Contacts.Action.Search,Pesquisar contatos
+Feature.Contacts.Action.SyncContacts,Sincronizar contatos
 Feature.Contacts.Description.AddFromContactsDescription,"Adicione contatos para se conectar na Roblox. Se os dois usuários tiverem mais de 13 anos, com verificação de idade, vocês vão se tornar conexões confiáveis."
 Feature.Contacts.Description.AddFromContactsTrustedFriends,"Adicione contatos para se conectar na Roblox. Se os dois usuários tiverem mais de 13 anos, com verificação de idade, vocês vão ser amizades confiáveis."
 Feature.Contacts.Description.ContactsList,Com quem você gostaria de explorar a Roblox? Envie um link de convite para se tornar amizades na Roblox!
 Feature.Contacts.Description.ContactsListDescription,"Para desbloquear mais diversão, adicione conexões ou envie um pedido de conexão para seus contatos."
 Feature.Contacts.Description.ContactsMixedList,"Com quem você gostaria de explorar o Roblox? Adicione amizades na Roblox, ou envie um link para um pedido de amizade."
 Feature.Contacts.Description.ContactsProfileView,Seu contato {contactName} está na Roblox. Você poderá ver o perfil completo dessa pessoa assim que vocês formarem uma amizade na Roblox.
-Feature.Contacts.FindFriendsBanner.Button,Encontrar amizades
+Feature.Contacts.Description.ExploreWithFriends,Junte-se à sua próxima experiência com alguém que você conhece
+Feature.Contacts.FindFriendsBanner.Button,
 Feature.Contacts.FindFriendsBanner.Description,Veja quais de suas amizades estão na Roblox adicionando seu número de telefone.
 Feature.Contacts.FindFriendsBanner.DescriptionPV,Os contatos que estão na Roblox aparecerão aqui quando disponíveis.
 Feature.Contacts.FindFriendsBanner.DescriptionV2,Ajude-nos a conectá-lo com suas amizades adicionando um número de telefone.
+Feature.Contacts.Heading.ExploreWithFriends,Explore com amizades
 Feature.Contacts.Heading.HelpFriendsFindYou,
 Feature.Contacts.Heading.LetFriendsFindYou,Deixe suas amizades encontrarem você
 Feature.Contacts.Heading.SettingSaved,Configuração salva.
@@ -2417,7 +2336,6 @@ Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Concordo com o aviso a
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,Jogar
-Feature.ExperienceDetails.PlayButtonText.PlayDemo,Jogar demo
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Desbloquear
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -2434,7 +2352,6 @@ Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityRegionalComplianc
 Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated,Esta experiência não está acessível porque não foi avaliada
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom,Esta experiência não está disponível no {device}
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault,Esta experiência não está disponível no seu dispositivo
-Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted,Não é possível comprar esta experiência neste dispositivo
 Feature.ExperienceDetails.UnplayableError.GameUnapproved,
 Feature.ExperienceDetails.UnplayableError.IncorrectConfiguration,
 Feature.ExperienceDetails.UnplayableError.InsufficientPermissionFriendsOnly,"No momento, você não tem acesso a esta experiência"
@@ -2454,6 +2371,7 @@ Feature.ExperienceDetails.UpdateMaturitySettingModal.Label.Title,
 Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
+Feature.FAE.Action.UnlockTrial,Desbloquear teste
 Feature.FAE.CheckIfYouCanJoinGame,Vamos verificar se você pode entrar neste jogo.
 Feature.FAE.Label.ChatWithFriends,Converse com amigos
 Feature.FAE.Label.DayLeft,1 dia restante
@@ -2508,7 +2426,6 @@ Feature.Friends.Action.ShareQR,Compartilhar código QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,
 Feature.Friends.Action.Unfriend,
-Feature.Friends.Action.ViewMore,Ver mais
 Feature.Friends.Action.ViewPlatformProfile,Ver cartão do jogador
 Feature.Friends.Button.AddViaLink,Adicionar via link
 Feature.Friends.Button.GotIt,
@@ -2608,10 +2525,10 @@ Feature.Friends.Label.PlayedByUserAndOthers,<b>{name}</b> e mais <b>{numOfOthers
 Feature.Friends.Label.PlayedByUserAndOthers.FriendsRename,<b>{name}</b> e mais <b>{numOfOthers} amizades jogaram</b>
 Feature.Friends.Label.RenameInfoText,"As amizades Roblox agora são conexões. Adicione pessoas que você conhece como conexões para facilmente ver quem está online, iniciar uma turma e jogar juntos. <br /><br />Agora, usuários com 13 anos ou mais podem desbloquear recursos expressivos de bate-papo com conexões elegíveis, com mais recursos em breve!"
 Feature.Friends.Label.Request,Solicitação
-Feature.Friends.Label.SearchFriends,Pesquisar amizades
+Feature.Friends.Label.SearchFriends,
 Feature.Friends.Label.SentFromWithContext,Enviado por {gameName}
 Feature.Friends.Label.SingularMutualFriend,amizade em comum
-Feature.Friends.Label.Suggested,Sugeridas
+Feature.Friends.Label.Suggested,
 Feature.Friends.Label.YourLinkedParent,Seu responsável vinculado
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Você deseja ter seu perfil recomendado para outros usuários Roblox que têm seu número de telefone?
@@ -2700,9 +2617,7 @@ Feature.GameDetails.Message.HelpImproveExperience,Ajude-nos a melhorar a sua exp
 Feature.GameDetails.Message.HidingExperienceQuestion,Por que você está escondendo esta experiência?
 Feature.GameDetails.Message.PurchaseGameV2,Desbloquear o acesso a {gameName} por {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Não foi possível exibir as informações de patrocínio devido a um erro temporário.
-Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Você está vendo este conteúdo patrocinado com base em fatores não personalizados, como informações do dispositivo, localização e idade, para oferecer conteúdo apropriado a você. O criador da experiência é {CreatorName}. O patrocínio foi pago por {PayerName}. Para saber mais, acesse a página ""Privacidade e maturidade do conteúdo"" nas configurações na sua conta aqui:"
-Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Você está vendo este conteúdo patrocinado com base em diferentes fatores, como sua localização, informações do dispositivo, idade e comportamento da plataforma, para oferecer conteúdo relevante a você. O criador da experiência é {CreatorName}. O patrocínio foi pago por {PayerName}. Para saber mais, acesse a página ""Privacidade e maturidade do conteúdo"" nas configurações na sua conta aqui:"
-Feature.GameDetails.Message.SponsoredDisclosure.U18,"Você está vendo este conteúdo patrocinado com base em fatores não personalizados, como informações do dispositivo, localização e idade, para oferecer conteúdo apropriado a você. O criador da experiência é {CreatorName}. O patrocínio foi pago por {PayerName}."
+Feature.GameDetails.Message.SuggestLessExperiences,Vamos sugerir menos experiências como esta
 Feature.GameDetails.Message.SuggestLessOften,Vamos sugerir isso com menos frequência
 Feature.GameDetails.RatingPercentOnly,Avaliação {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -2723,7 +2638,7 @@ Feature.GamepadDisconnect.Label.Message,"O controle para o usuário ""%s"" foi d
 Feature.GamepadDisconnect.Label.MessageGeneric,"O controle para o usuário ""%s"" foi desconectado. Reconecte seu controle."
 Feature.GamepadDisconnect.Label.Title,Controle desconectado
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Cancelar solicitação
+Feature.Groups.Action.CancelRequest,Cancelar pedido
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Criar comunidade
@@ -2816,7 +2731,7 @@ Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,Atualize 
 Feature.Home.HeadingFriends,Amizades ({friendCount})
 Feature.Home.Label.HappeningNow,Acontecendo agora
 Feature.Home.PeopleList.ChatWith,Bate-papo com {username}
-Feature.Home.Robux,
+Feature.Home.Robux,Robux
 Feature.InExperienceIntervention.Action.LetUsKnow,Nos informe
 Feature.InExperienceIntervention.Action.Understand,Eu entendo
 Feature.InExperienceIntervention.Description.BeRespectful,"No futuro, siga as regras e trate os outros com respeito."
@@ -2872,7 +2787,6 @@ Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Ativar
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Ajude as pessoas que têm seu celular a adicionarem você aos amigos na Roblox
 Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Ativar a descoberta de amizades
 Feature.Moments.Action.AddMusic,Adicionar música
-Feature.Moments.Action.AddSticker,Adicionar adesivo
 Feature.Moments.Action.AddText,Adicionar texto
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
@@ -2880,7 +2794,6 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expandir
-Feature.Moments.Action.GenerateText,Gerar
 Feature.Moments.Action.Hide,
 Feature.Moments.Action.HowToCapture,Como capturar
 Feature.Moments.Action.Join,
@@ -2902,20 +2815,17 @@ Feature.Moments.Description.HowToCaptureStep2,Habilite os controles de captura
 Feature.Moments.Description.HowToCaptureStep3,Capture fotos e vídeos enquanto joga
 Feature.Moments.Description.LeaveMomentsCreation,"Você vai perder todas as suas alterações, mas ainda pode encontrar esta captura na sua galeria de <b>Capturas</b>."
 Feature.Moments.Description.NoMusicResults,Nenhuma música encontrada
-Feature.Moments.Description.NonInfiniteScrollEndBody,Você chegou ao fim desta sequência de Momentos. Toque abaixo para continuar assistindo.
 Feature.Moments.Description.NothingHereYet,Nada aqui ainda…
 Feature.Moments.Description.PublishMoment,Descreva seu Momento
 Feature.Moments.Description.StayFriendly,Vamos manter o clima amigável
 Feature.Moments.Description.TooManyUploads,Você enviou muitos vídeos hoje. Tente novamente amanhã.
 Feature.Moments.Disclaimer.EveryoneMoments,Todos nos Momentos podem ver o que é publicado
-Feature.Moments.Label.All,
+Feature.Moments.Label.All,Tudo
 Feature.Moments.Label.AttemptingJoinExperience,Tentando entrar em {placeName}. Isso pode levar alguns segundos.
 Feature.Moments.Label.CaptureLibrary,Sua biblioteca de capturas
 Feature.Moments.Label.DeleteMomentBody,Você não pode recuperar um Momento depois que ele for excluído.
 Feature.Moments.Label.DeleteMomentTitle,Excluir Momento?
 Feature.Moments.Label.Error,
-Feature.Moments.Label.FeedEndBody,Volte mais tarde ou crie seu próprio Momento.
-Feature.Moments.Label.FeedEndTitle,Você conferiu tudo
 Feature.Moments.Label.FeedFailedToLoad,Erro ao carregar as notícias
 Feature.Moments.Label.FeedMyMoments,Meus Momentos
 Feature.Moments.Label.FeedTrending,Em destaque
@@ -2923,38 +2833,26 @@ Feature.Moments.Label.HowToUseCaptureTitle,Como usar a captura
 Feature.Moments.Label.LinkCopied,Link copiado.
 Feature.Moments.Label.LinkCopyFailed,Falha ao copiar link.
 Feature.Moments.Label.ModeratedRodeoBody,"Removemos este Momento porque ele vai contra as Regras da Comunidade. Para que seus Momentos continuem disponíveis, confira e siga as regras."
-Feature.Moments.Label.MomentDeletedBody,
-Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Algo deu errado.
 Feature.Moments.Label.MomentFailedToPostTitle,Erro ao publicar o Momento
 Feature.Moments.Label.MomentPublishedBody,Seu Momento foi publicado com sucesso.
 Feature.Moments.Label.MomentPublishedTitle,Momento publicado
-Feature.Moments.Label.MomentUnavailable,Momento indisponível
 Feature.Moments.Label.MomentUnavailableDefault,Este Momento não está disponível.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
-Feature.Moments.Label.NonInfiniteScrollEndTitle,Você conferiu tudo por enquanto
 Feature.Moments.Label.Photos,Fotos
 Feature.Moments.Label.PostRemovedBody,O Momento que você publicou vai contra as Regras da Comunidade.
 Feature.Moments.Label.PublishingRodeoBody,Isso não deve demorar muito.
 Feature.Moments.Label.Reactions,Reações
-Feature.Moments.Label.ReportReason.BreaksRules,Esta publicação quebra as regras
-Feature.Moments.Label.ReportReason.IntellectualProperty,Esta publicação viola minha propriedade intelectual
 Feature.Moments.Label.ReportSubmittedBody,Agradecemos por seu feedback.
 Feature.Moments.Label.ReportSubmittedTitle,Denúncia enviada
-Feature.Moments.Label.RobloxPartnerContent,Conteúdo de parceiros da Roblox
 Feature.Moments.Label.RodeoPublishingTitle,Como publicar seu Momento
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Momentos na Roblox
 Feature.Moments.Label.StayFriendlyModeration,
-Feature.Moments.Label.TextGeneratedBody,Sobreposição de tela gerada por IA e descrição adicionada
-Feature.Moments.Label.TextGeneratedTitle,Texto gerado
-Feature.Moments.Label.TextGenerationFailedBody,Não foi possível gerar o texto. Tente novamente.
-Feature.Moments.Label.TextGenerationFailedTitle,Falha na geração
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
-Feature.Moments.Title.ReportPost,Denunciar publicação
 Feature.Moments.Tooltip.Creation,Todos na experiência podem ver seus Momentos.
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,Relatar um erro
@@ -3084,7 +2982,7 @@ Feature.Profile.Description.EnterNicknameTextbox,Insira seu apelido
 Feature.Profile.Description.InspectAndBuy,Clique para ver e comprar o visual deles.
 Feature.Profile.Description.NicknamePrivacy,Somente {displayName} vai ver isso.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,Apenas este usuário vai ver isto.
-Feature.Profile.Description.QrCodeDescription,Deixe que outras pessoas escaneiem seu QR code para se conectarem na Roblox. Usuários com idade verificada de mais de 13 anos que usarem o QR code em tempo real para se conectar serão Amizades Confiáveis.
+Feature.Profile.Description.QrCodeDescription,"Deixe que outras pessoas escaneiem seu código QR para se conectarem na Roblox. Usuários com mais de 13 anos, com verificação de idade, que usarem o código QR em tempo real para se conectar serão conexões confiáveis."
 Feature.Profile.Description.QrCodeDescription.FriendsRename,"Deixe que outras pessoas escaneiem seu código QR para se conectarem na Roblox. Usuários com mais de 13 anos, com verificação de idade, que usarem o código QR em tempo real para se conectar serão amigos confiáveis."
 Feature.Profile.Description.QrCodeScanning,"Deixe outros escanearem o código QR da Roblox com o Scanner QR ou a câmera do dispositivo deles, para adicioná-lo rapidamente como um amizade!"
 Feature.Profile.Description.RecognizeConnectionsByCustomName,"Reconheça suas amizades mais facilmente, definindo um nome personalizado. Nomes importados de contatos e nomes personalizados só são visíveis para você."
@@ -3103,7 +3001,6 @@ Feature.Profile.Description.SocialNetworksCaptionFriends,Atualmente visível par
 Feature.Profile.Description.SocialNetworksCaptionNoOne,Atualmente visível para ninguém.
 Feature.Profile.Description.UsernameInsufficientFunds,Você precisa de mais {icon}{rbx} para mudar seu nome de usuário. Gostaria de comprar mais Robux?
 Feature.Profile.Description.UsernamePrice,1000
-Feature.Profile.Header.BuyWholeLook,Comprar visual completo
 Feature.Profile.Header.InspectAndBuy,Avatar de {username}
 Feature.Profile.Header.InspectAndBuy.BuySection,Total ({numberOfSelectedItems} de {totalNumberOfItems}itens)
 Feature.Profile.Header.InspectAndBuy.Tooltip,
@@ -3166,8 +3063,8 @@ Feature.Profile.Message.InvalidAliasError,
 Feature.Profile.Message.NoExperienceAccess,{name} está em uma experiência a qual você não tem acesso.
 Feature.Profile.Message.QRLoadFailed,Falha ao carregar.
 Feature.Profile.Message.QRNofificationRequest,enviou-lhe uma solicitação de amizade a partir de seu código QR
-Feature.Profile.Message.QRNotificationRequest,enviou uma solicitação de amizade pelo seu código QR
-Feature.Profile.Message.QRNotificationRequest.FriendsRename,
+Feature.Profile.Message.QRNotificationRequest,enviou-lhe um pedido de conexão a partir de seu código QR
+Feature.Profile.Message.QRNotificationRequest.FriendsRename,enviou uma solicitação de amizade pelo seu código QR
 Feature.Profile.Title.QrScanner,Scanner QR
 Feature.Profile.Tooltip.CurrencyTransfer.Body,Agora você pode enviar Robux.
 Feature.Profile.Tooltip.CustomNameProfile,Reconheça amizades mais facilmente definindo um nome personalizado.
@@ -3178,13 +3075,10 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,Emblema verificado
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Close,"Não, obrigado."
-Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
-Feature.QualtricsSurveyPrompt.Action.Next,Avançar
 Feature.QualtricsSurveyPrompt.Action.Retry,
 Feature.QualtricsSurveyPrompt.Action.Send,
 Feature.QualtricsSurveyPrompt.Description.Error,
-Feature.QualtricsSurveyPrompt.Description.TakeAQuickSurvey,Responda a uma pesquisa rápida para ajudar a Roblox a melhorar.
 Feature.QualtricsSurveyPrompt.Heading.GiveUsFeedback,O que você acha?
 Feature.QualtricsSurveyPrompt.Response.SurveySubmitted,Obrigado pelo seu feedback!
 Feature.ReportAbuse.Action.AttachScreenshot,Anexar captura de tela
@@ -3206,7 +3100,7 @@ Feature.ReportAbuse.Action.Submit,
 Feature.ReportAbuse.Action.TextMute,Bloquear bate-papos de {name}
 Feature.ReportAbuse.DSAIllegal.ReportLink,Denuncie conteúdo ilegal de acordo com o Regulamento Serviços Digitais da UE.
 Feature.ReportAbuse.DSAIllegal.ReportPageTitle,Denunciar conteúdo ilegal
-Feature.ReportAbuse.Description.IpInfringementReportModal,<b>Salve este código.</b> Você precisará dele para concluir sua <b>Solicitação de Remoção</b> usando as ferramentas de <b>Propriedade Intelectual</b> no <b>Salão dos criadores</b> ou por email <i>(consulte os detalhes nos Termos de Uso)</i>. <b>Este código só será válido por 48 horas.</b>
+Feature.ReportAbuse.Description.IpInfringementReportModal,<b>Salve este código.</b> Você precisará dele para concluir sua <b>solicitação de remoção</b> usando as ferramentas de <b>propriedade intelectual</b> no <b>Salão dos criadores. Este código será válido por apenas 48 horas.</b>
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,Denunciar usando o modo de destaque
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,Erro: Máximo de 5 círculos
@@ -3229,6 +3123,7 @@ Feature.ReportAbuse.Label.FinishChatReport,Terminar a denúncia de bate-papo
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,Destaque o problema usando círculos
 Feature.ReportAbuse.Label.HighlightProblemPrecise,Destaque o problema
+Feature.ReportAbuse.Label.NoChatMessagesFound,Nenhuma mensagem de conversa encontrada
 Feature.ReportAbuse.Label.Optional,Opcional
 Feature.ReportAbuse.Label.Person,Pessoa
 Feature.ReportAbuse.Label.PleaseSelectOne,Por favor selecione um.
@@ -3310,7 +3205,7 @@ Feature.RobloxSubscription.Action.TryItForFree,Teste grátis
 Feature.RobloxSubscription.Body.AlreadySubscribed,Sua assinatura Plus já oferece benefícios no jogo.
 Feature.RobloxSubscription.Body.GenericError,Não foi possível concluir esta ação no momento. Tente novamente.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Esta assinatura não está disponível para compra neste dispositivo.
-Feature.RobloxSubscription.Description.AgeCheckTrial,Faça a verificação de idade e ganhe 1 semana grátis do Roblox Plus como agradecimento. Não é necessário informar um método de pagamento para aproveitar esse teste grátis.
+Feature.RobloxSubscription.Description.AgeCheckTrial,Faça uma verificação de idade para liberar os benefícios do Plus e acessar funcionalidades apropriadas para sua idade.
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mais diversão por menos Robux. Assine o Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Ao clicar em \u{201C}{ctaText}\u{201D}, você concorda com os <a href=""{termsUrl}"">Termos de assinatura da Roblox</a>. A cobrança será feita automaticamente todo mês até você cancelar."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratuitos
@@ -3319,13 +3214,12 @@ Feature.RobloxSubscription.Label.BlackbirdTr,Envie Robux de graça
 Feature.RobloxSubscription.Label.BlackbirdUpsellBanner,Ganhe {discountPercentage}% de desconto com o Roblox Plus
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"{discountPercent}% de desconto em itens do jogo, avatares e muito mais"
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{discountPercent}% de desconto nesses itens após {periodIndex} {periodType}
-Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Ao clicar em “Continuar”, você concorda com os {linkStart}Termos de assinatura da Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Ao clicar em “Teste grátis”, você concorda com os {linkStart}Termos de assinatura da Roblox.{linkEnd} Seu teste grátis termina em 1 mês. A cobrança será automática todo mês até você cancelar."
 Feature.RobloxSubscription.Label.FreeTrialText,Faça um teste grátis
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 mês grátis,{boldEnd} depois {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,mês
 Feature.RobloxSubscription.Label.months,meses
-Feature.RobloxSubscription.Title.AgeCheckTrial,Ganhe 1 semana grátis do Plus
+Feature.RobloxSubscription.Title.AgeCheckTrial,Ganhe uma semana grátis do Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Boas notícias
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Assine o Roblox Plus
@@ -3421,10 +3315,11 @@ Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,Pesquisar am
 Feature.SettingsHub.Label.Sending,Enviando
 Feature.SettingsHub.Label.Show,Mostrar
 Feature.SettingsHub.Label.Unmute,Desilenciar
-Feature.SettingsHub.Label.VoiceChat,Chat de voz
+Feature.SettingsHub.Label.WhichChatOptional,Qual chat? (opcional)
 Feature.SettingsHub.Label.WhichPlayer,Qual pessoa?
-Feature.SettingsHub.LanguageSelection.SettingLabel,Idioma do jogo
+Feature.SettingsHub.LanguageSelection.SettingLabel,Idioma da experiência
 Feature.SettingsHub.LanguageSelection.Unavailable,
+Feature.SettingsHub.Message.BlockConfirmation,Você e {DISPLAY_NAME} (@{RBX_NAME}) não poderão mais se comunicar.
 Feature.SettingsHub.Message.InviteToGameTitle,Junte-se a mim em {PLACENAME}
 Feature.SettingsHub.MethodOfAbuse.AvatarSubtitle,O avatar desta pessoa está usando roupas ofensivas
 Feature.SettingsHub.MethodOfAbuse.Other.Subtitle,
@@ -3475,7 +3370,6 @@ Feature.SettingsHub.Prompt.Subtitle.Microphone,"Nossos sistemas detectaram compo
 Feature.SettingsHub.Prompt.Subtitle.MicrophonePermission,"Para conversar com voz, acesse as Configurações do sistema operacional para permitir que o aplicativo Roblox use o microfone"
 Feature.SettingsHub.Prompt.Subtitle.MuteAnyoneAnytime,Você pode silenciar qualquer um a qualquer momento.
 Feature.SettingsHub.Prompt.Subtitle.NotAudible,O volume da experiência está em '0' nas configurações. Aumente o volume do jogo para ouvir voz.
-Feature.SettingsHub.Prompt.Subtitle.NotAudibleVoiceChatVolume,O volume do chat de voz está em '0' nas configurações. Aumente o volume do jogo para ouvir voz.
 Feature.SettingsHub.Prompt.Subtitle.Place,A voz espacial só está disponível em locais com um máximo de jogadores de 30 ou menos.
 Feature.SettingsHub.Prompt.Subtitle.Respect,Mantenha a Roblox divertida tratando todos com respeito.
 Feature.SettingsHub.Prompt.Subtitle.Retry,
@@ -3596,9 +3490,6 @@ Feature.Squads.Description.Invited,
 Feature.Squads.Description.InvitedToExperience,"Alguém já está convidando você para uma experiência. Quando o convite for concluído, você pode tentar novamente."
 Feature.Squads.Description.JoinAnotherParty,Você está em um grupo ativo. Quer sair do grupo atual e alternar para este?
 Feature.Squads.Description.JoinWithLowMemory,Seu dispositivo tem pouca memória. Juntar-se sem voz irá impedir que o aplicativo Roblox trave.
-Feature.Squads.Description.LuckyRecommendationRevealed,Todo o grupo pode participar
-Feature.Squads.Description.LuckyRecommendationRolling,Busca de uma boa opção para seu grupo
-Feature.Squads.Description.LuckyRecommendationRow,Vamos começar
 Feature.Squads.Description.ManyPeopleActive,{userCount} pessoas ativas
 Feature.Squads.Description.NoResponse,Sem resposta
 Feature.Squads.Description.NotGoing,Não vou
@@ -3638,9 +3529,6 @@ Feature.Squads.Label.JoinParty,Entrar na Turma
 Feature.Squads.Label.LeaveParty,Sair da Turma
 Feature.Squads.Label.Loading,
 Feature.Squads.Label.LowMemory,Pouca memória
-Feature.Squads.Label.LuckyRecommendationRevealed,Testar este
-Feature.Squads.Label.LuckyRecommendationRolling,Escolha do jogo
-Feature.Squads.Label.LuckyRecommendationRow,Não sabe o que jogar?
 Feature.Squads.Label.MultiplePeopleJoinedYourParty,Várias pessoas entraram na sua Turma
 Feature.Squads.Label.MuteMic,Silenciar microfone
 Feature.Squads.Label.Party,Turma
@@ -3701,15 +3589,6 @@ Feature.Toast.VoteError.AssetNotVoteable,Você não pode votar nesta experiênci
 Feature.Toast.VoteError.Default,Ação indisponível.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Você está votando rápido demais.
 Feature.Toast.VoteError.PlayGame,Você precisa explorar a experiência para poder votar.
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,"Você não pode mais jogar este jogo, porque algumas regras foram violadas muitas vezes ou houve violações sérias."
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Você não pode jogar este jogo porque seu comportamento violou as regras.
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,A Roblox baniu você deste jogo
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Day,A Roblox suspendeu você deste jogo por 1 dia
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Days,A Roblox suspendeu você deste jogo por {number} dias
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hour,A Roblox suspendeu você deste jogo por 1 hora
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,A Roblox suspendeu você deste jogo por {number} horas
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,A Roblox suspendeu você deste jogo por 1 minuto
-Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,A Roblox suspendeu você deste jogo por {number} minutos
 Feature.VerificationUpsell.Action.AddPhone,Adicionar telefone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Adicionar número de telefone
 Feature.VerificationUpsell.Action.AddPhoneVoice,Número de telefone para o Bate-papo de voz
@@ -3814,18 +3693,15 @@ Features.OnDemandAds.Reward_Earned,Recompensa ganha
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
-Features.Transfers.Action.TurnOnTwoStepVerification,Ative a verificação em duas etapas
 Features.Transfers.Action.VPC.Ask,
 Features.Transfers.Action.VPC.AskParentBodyReceive,"Para aceitar Robux, você precisa da permissão do seu responsável."
 Features.Transfers.Action.VPC.AskParentBodySend,"Para enviar Robux, você precisa da permissão do seu responsável."
 Features.Transfers.Action.VPC.AskParentTitle,
 Features.Transfers.Body.DailyLimitExceededError,Você excedeu seu limite diário para enviar Robux. Volte mais tarde para tentar novamente.
-Features.Transfers.Body.DailyLimitTwoStepVerificationUpsell,Você atingiu seu limite diário de envio de Robux. Ative a verificação em duas etapas para ver se você se qualifica para um limite mais alto.
 Features.Transfers.Body.ExpiredTransferError,"Devido à inatividade, os Robux enviados por @{username} expiraram."
 Features.Transfers.Body.GenericReceiveError,Sua conta não pode aceitar Robux no momento.
 Features.Transfers.Body.GenericSentError,Algo deu errado e o Robux não foi enviado. Verifique sua conexão e tente novamente.
 Features.Transfers.Body.MonthlyLimitExceededError,Você excedeu seu limite mensal para enviar Robux. Volte mais tarde para tentar novamente.
-Features.Transfers.Body.MonthlyLimitTwoStepVerificationUpsell,Você atingiu seu limite mensal de envio de Robux. Ative a verificação em duas etapas para ver se você se qualifica para um limite mais alto.
 Features.Transfers.Body.ReceiverLimitHitError,Este usuário não pode receber este valor no momento. Envie menos ou tente novamente mais tarde.
 Features.Transfers.Body.TransferAmountBelowMinimumError,Envie {minAmount} ou mais Robux.
 Features.Transfers.Body.TransferAmountExceedsMaximumError,Você pode enviar até {maxAmount} Robux.
@@ -3841,7 +3717,7 @@ Features.Transfers.Label.ConnectedMonthsSingular,Conectados há {amount} mês
 Features.Transfers.Label.ConnectedSince,Conexão há {year} anos
 Features.Transfers.Notification.ReceiveSuccess,Você já aceitou os Robux
 Features.Transfers.RobuxTransfer.Action.Edit,
-Features.Transfers.RobuxTransfer.Action.Next,
+Features.Transfers.RobuxTransfer.Action.Next,Avançar
 Features.Transfers.RobuxTransfer.Action.Send,
 Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"Você precisa fazer a verificação de idade ou obter o consentimento dos pais para enviar Robux. Depois de enviar, não é possível cancelar."
@@ -3871,7 +3747,6 @@ IAPExperience.InsufficientRobux.Action.RobuxStore,Ir para loja de Robux
 IAPExperience.InsufficientRobux.Text.BuyRobux,Compre {robux} para comprar este item
 IAPExperience.InsufficientRobux.Text.CurrentBalance,
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,Você não tem Robux suficiente para comprar este item.
-IAPExperience.InsufficientRobux.Text.MissingRobux,
 IAPExperience.InsufficientRobux.Text.YouNeed,Você precisa de {robux} adicionais. Compre mais pacotes de Robux e volte para a experiência.
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
@@ -3941,7 +3816,8 @@ IAPExperience.PurchasePrompt.Label.GenericDiscountNoPercent,Desconto
 IAPExperience.PurchasePrompt.Label.Subtotal,Subtotal
 IAPExperience.PurchasePrompt.Label.SubtotalWithItemCount,Subtotal ({itemCount} itens)
 IAPExperience.PurchasePrompt.Label.Total,
-IAPExperience.PurchasePrompt.Label.TotalPriceV2,Preço total
+IAPExperience.PurchasePrompt.Label.TotalPrice,Preço total
+IAPExperience.PurchasePrompt.Label.TotalPriceV2,
 IAPExperience.PurchasePrompt.Text.BuyItemQuestion,"Gostaria de comprar ""{name}""?"
 IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning,"Controle seu entretenimento e pratique o consumo racional. Gostaria de comprar ""{name}""?"
 IAPExperience.PurchasePrompt.Text.Loading,
@@ -4002,14 +3878,18 @@ IAPExperience.U13Confirm.Title.Warning,Aviso!
 InGame.Chat.ErrorMessageAnimationPlaying,Você não pode usar emotes durante esta ação.
 InGame.Chat.ErrorMessageSwitchToR15,Mude seu avatar para o modelo R15 para usar emotes.
 InGame.Chat.Label.From,
-InGame.Chat.Label.SystemMessagePrefix,
-InGame.Chat.Label.TeamMessagePrefix,
+InGame.Chat.Label.SystemMessagePrefix,Sistema
+InGame.Chat.Label.TeamMessagePrefix,Equipe
 InGame.Chat.Label.To,Para
 InGame.Chat.Response.EmoteNotAvailable,
 InGame.Chat.Response.EmotesNotSupported,Você não pode usar emotes aqui.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Você não pode usar emotes no momento.
 InGame.Chat.Response.EmotesWrongAvatarType,Apenas avatares R15 podem usar emotes.
+InGame.CommonUI.Badge.BadgeText,BETA
+InGame.CommonUI.Badge.Popup.DisclaimerText2,"Denuncie abusos se você se deparar com pessoas quebrando as Regras da Comunidade. Se você optou pelos serviços de voz, a Roblox pode gravar áudio de voz em qualquer local da plataforma para propósitos de segurança e moderação, ou para melhorar nossos serviços e ferramentas. Ao continuar a utilizar os serviços de voz, você concorda que a Roblox colete, utilize e armazene gravações de sua voz para esses propósitos. Você pode optar por não participar das funcionalidades de voz a qualquer momento."
+InGame.CommonUI.Badge.Popup.HeaderList,Você optou por participar de uma ou mais funcionalidades beta:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
+InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,Tentar de novo
@@ -4035,7 +3915,6 @@ InGame.ConnectionError.Action.ViewCollaborators,Ver colaboradores
 InGame.ConnectionError.AndroidAnticheatKick,A Roblox detectou arquivos ausentes ou corrompidos. Desinstale e reinstale o aplicativo Roblox de uma loja oficial de aplicativos.
 InGame.ConnectionError.AndroidEmulatorKick,"Nós não permitimos emuladores para contas sem o acesso à edição de locais. Se você não estiver usando um emulador, entre em contato com o suporte ao cliente com este código de erro para nos informar."
 InGame.ConnectionError.Button.Reconnect,Reconectar
-InGame.ConnectionError.Button.ReconnectNow,Reconectar agora
 InGame.ConnectionError.ConnectErrors,Erro ao se conectar à experiência. Tente novamente.
 InGame.ConnectionError.ConnectionBanned,Erro ao se conectar à experiência. Sua participação foi banida desta experiência.
 InGame.ConnectionError.ConnectionFailedRobloxVersion,Erro ao se conectar à experiência. A versão da Roblox está desatualizada. Atualize-a e tente novamente.
@@ -4100,7 +3979,6 @@ InGame.ConnectionError.DisconnectTryAgain,Você foi desconectado(a) da experiên
 InGame.ConnectionError.DisconnectVerboselyModeratedGame,"Para proteger sua segurança, desconectamos este servidor após as pessoas terem quebrado as regras inúmeras vezes. Ao aprender sobre as Regras da Comunidade, você pode ajudar a manter a Roblox segura."
 InGame.ConnectionError.DisconnectWrongVersion,Sua versão do cliente Roblox pode estar desatualizada. Atualize o cliente Roblox e tente novamente.
 InGame.ConnectionError.Heading.VRDisconnected,Fones de ouvido desconectados
-InGame.ConnectionError.Joining,Entrando no servidor
 InGame.ConnectionError.Message.ChannelName,Canal: {CHANNEL_NAME}
 InGame.ConnectionError.Message.ErrorCode,Código de erro: {ERROR_CODE}
 InGame.ConnectionError.Message.RestartApp,"Para continuar jogando, reinicie o aplicativo."
@@ -4120,15 +3998,11 @@ InGame.ConnectionError.PlacelaunchRestricted,O status desta experiência mudou e
 InGame.ConnectionError.PlacelaunchUnauthorized,Você não tem permissão para entrar nesta experiência.
 InGame.ConnectionError.PlacelaunchUserLeft,O usuário ao qual você estava tentando se juntar saiu da experiência.
 InGame.ConnectionError.PlacelaunchUserPrivacyUnauthorized,Suas configurações de privacidade impedem que você entre neste servidor.
-InGame.ConnectionError.Queue,Sua posição na fila: {POSITION}
 InGame.ConnectionError.ReconnectFailed,Falha ao reconectar. Tente novamente.
-InGame.ConnectionError.ReconnectingAttempt,Reconectando (tentativa nº {RBX_ATTEMPT})...
-InGame.ConnectionError.ReconnectingAttemptInSecond,Reconectando (tentativa nº {RBX_ATTEMPT}) em 1 segundo...
-InGame.ConnectionError.ReconnectingAttemptInSeconds,Reconectando (tentativa nº {RBX_ATTEMPT}) em {RBX_SECONDS} segundos...
-InGame.ConnectionError.RemoteAttestationBootValidationFailure,Este jogo requer um sistema operacional confiável. Execute o aplicativo Roblox em um dispositivo compatível e verifique se o bootloader está bloqueado.
-InGame.ConnectionError.RemoteAttestationGeneralFailure,"A Roblox não conseguiu verificar a integridade do aplicativo. Verifique se o seu sistema operacional é confiável e está atualizado e, em seguida, reinstale o aplicativo da Roblox de um local oficial de download."
-InGame.ConnectionError.RemoteAttestationOSOutOfDate,Este jogo requer uma instalação atualizada do Android. O seu sistema operacional precisa estar atualizado.
-InGame.ConnectionError.RemoteAttestationTimeout,A Roblox não conseguiu verificar a integridade do aplicativo devido a um problema de rede. Reconecte-se.
+InGame.ConnectionError.RemoteAttestationBootValidationFailure,Este local exige um sistema operacional confiável. Execute o aplicativo Roblox em um dispositivo compatível e verifique se o bootloader está bloqueado.
+InGame.ConnectionError.RemoteAttestationGeneralFailure,"A Roblox não conseguiu verificar a integridade do jogo. Verifique se o seu sistema operacional é confiável e está atualizado e, em seguida, reinstale o aplicativo da Roblox de um local oficial de download."
+InGame.ConnectionError.RemoteAttestationOSOutOfDate,Este local requer uma instalação atualizada do Android. O seu sistema operacional precisa estar atualizado.
+InGame.ConnectionError.RemoteAttestationTimeout,A Roblox não conseguiu verificar a integridade do jogo devido a um problema de rede. Reconecte-se.
 InGame.ConnectionError.RemoteAttestationUnsupported,Este jogo ativou requisitos adicionais de segurança de hardware. Execute o aplicativo Roblox em um dispositivo compatível.
 InGame.ConnectionError.ServerShutdown,Você foi desconectado(a) da experiência. O servidor foi desligado.
 InGame.ConnectionError.TeleportErrors,O teletransporte falhou devido a um erro inesperado. Tente teletransportar novamente.
@@ -4208,9 +4082,9 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,Habilitar permissões p
 InGame.NotificationScript2.Capture.Success.ToastText,
 InGame.NotificationScript2.FriendRequestEvent.Accept,Agora você é amigo de {RBX_NAME}!
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Enviou um pedido de amizade para você!
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Enviou-lhe um pedido de conexão!
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,Novo amigo
-InGame.NotificationScript2.Message.FriendRequestEvent.Sent,
+InGame.NotificationScript2.Message.FriendRequestEvent.Sent,Enviou um pedido de amizade para você!
 InGame.NotificationScript2.Screenshot.ButtonText,Abrir pasta
 InGame.NotificationScript2.Screenshot.Description,Confira sua pasta de capturas de tela para vê-la.
 InGame.NotificationScript2.Screenshot.Title,Captura de tela salva
@@ -4224,9 +4098,9 @@ InGame.NotificationScript2.onBadgeAwardedTitle,Emblema concedido
 InGame.NotificationScript2.onPointsAwarded.multiple,Você recebeu {RBX_NUMBER} pontos!
 InGame.NotificationScript2.onPointsAwarded.single,Você recebeu {RBX_NUMBER} ponto!
 InGame.PlayerDropDown.Accept,
-InGame.PlayerDropDown.Action.ConnectionRequest,Enviar pedido de amizade
+InGame.PlayerDropDown.Action.ConnectionRequest,Solicitações de conexão
 InGame.PlayerDropDown.Block,
-InGame.PlayerDropDown.CancelRequest,Cancelar pedido
+InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} alcançou o limite máximo de amizades.
 InGame.PlayerDropDown.Report,
@@ -4237,6 +4111,7 @@ InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,No Studio
 InGame.Presence.Label.Offline,
 InGame.Presence.Label.Online,
+InGame.Presence.Label.RobloxStudio,
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage,"{RBX_NAME}, dos seus amigos, entrou na experiência."
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <speaker> : silenciar uma pessoa.
@@ -4252,7 +4127,7 @@ InGame.UnknownNamespace.Sent,
 Notifications.NotificationStream.Bundle.ShowLess,Mostrar menos
 Notifications.NotificationStream.Bundle.ShowMoreV2,mais {notificationCount}
 Notifications.NotificationStream.Label.AllCaughtUp,Tudo em dia!
-Notifications.NotificationStream.Label.Notifications,
+Notifications.NotificationStream.Label.Notifications,Notificações
 Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,"Altere seu avatar. Em breve, os jogadores com avatares que violem as Regras da Comunidade serão suspensos deste jogo."
 Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,Seu avatar violou as regras
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,Dispensar

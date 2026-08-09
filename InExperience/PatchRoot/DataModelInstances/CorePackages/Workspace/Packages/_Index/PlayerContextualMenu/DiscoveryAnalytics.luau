@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DiscoveryAnalytics.DiscoveryAnalytics)
+﻿return require(script.Parent.Parent.Parent._Workspace.DiscoveryAnalytics.DiscoveryAnalytics)

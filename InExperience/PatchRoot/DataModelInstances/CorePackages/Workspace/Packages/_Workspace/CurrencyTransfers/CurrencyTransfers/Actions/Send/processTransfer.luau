@@ -17,7 +17,6 @@ local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobux
 
 return function(p0, p1) --[[ line: 24 | named "processTransfer" ]]
 	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), handleTransferErrorModule (ref), promptStateModule (ref), processTransferRequestModule (ref), handleTransferSuccessModule (ref), failureReasonModule (ref), handleTransferBlockModule (ref), transferRetryOriginModule (ref)
-	local networkImpl = p0.getNetworkImpl()
 	local setPromptState = p0.setPromptState
 	local transferRequestId = p0.getTransferRequestId(false)
 	
@@ -28,7 +27,7 @@ return function(p0, p1) --[[ line: 24 | named "processTransfer" ]]
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
 			logRobuxTransferFlowEventModule(p0, robuxTransferFlowEventNameModule.process_attempted)
 		end
-		return processTransferRequestModule({ transferRequestId = transferRequestId, robuxAmount = p1 }, nil, networkImpl):andThen(function(p3) --[[ line: 53 ]]
+		return processTransferRequestModule({ transferRequestId = transferRequestId, robuxAmount = p1 }):andThen(function(p3) --[[ line: 52 ]]
 			-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), handleTransferSuccessModule (copy), handleTransferErrorModule (copy)
 			if p3 and p3.success then
 				logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferProcessSucceededCounter)
@@ -47,7 +46,7 @@ return function(p0, p1) --[[ line: 24 | named "processTransfer" ]]
 				end
 				handleTransferErrorModule(p0)
 			end
-		end):catch(function(p2) --[[ line: 74 ]]
+		end):catch(function(p2) --[[ line: 73 ]]
 			-- upvalues: logCurrencyTransferCounterModule (copy), p0 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), failureReasonModule (copy), handleTransferBlockModule (copy), transferRetryOriginModule (copy), handleTransferErrorModule (copy)
 			logCurrencyTransferCounterModule(p0, currencyTransferTelemetryModule.CurrencyTransferProcessFailedCounter)
 			

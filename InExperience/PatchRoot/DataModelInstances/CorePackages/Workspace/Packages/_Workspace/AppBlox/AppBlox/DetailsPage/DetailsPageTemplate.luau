@@ -29,10 +29,10 @@ local fFlagLuaAppFixDetailsPageThumbnailRenderInPhone = require(parent.SharedFla
 local fFlagLuaAppFixSDPLayout = require(parent.SharedFlags).FFlagLuaAppFixSDPLayout
 local luaAppDisableStickyBarMediaGallery = game:DefineFastFlag("LuaAppDisableStickyBarMediaGallery", false)
 local fFlagLuaAppAddTestIdsForArrow = require(parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
-local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
+local fFlagLuaAppPlayButtonContextualMessageImpression = require(parent.SharedFlags).FFlagLuaAppPlayButtonContextualMessageImpression
 local detailsPageTemplate = roactModule.PureComponent:extend("DetailsPageTemplate")
 
-local function _(p0, p1) --[[ line: 60 | named "applyTokenScaling" ]]
+local function _(p0, p1) --[[ line: 61 | named "applyTokenScaling" ]]
 	return p0 * p1.Stroke.Standard
 end
 
@@ -50,7 +50,7 @@ detailsPageTemplate.validateProps = tModule.strictInterface({
 	actionBarProps = tModule.optional(tModule.table),
 	actionBarWidth = tModule.optional(tModule.number),
 	actionBarHeight = tModule.optional(tModule.number),
-	renderActionBarLabelImpressionsDetector = tModule.optional(tModule.callback),
+	renderActionBarLabelImpressionsDetector = if fFlagLuaAppPlayButtonContextualMessageImpression then tModule.optional(tModule.callback) else nil,
 	componentList = tModule.optional(validateDetailsPageComponentListModule),
 	dualPanelBreakpoint = tModule.optional(tModule.number),
 	sideMargin = tModule.optional(tModule.number),
@@ -77,8 +77,7 @@ detailsPageTemplate.validateProps = tModule.strictInterface({
 	backgroundImageSize = if fFlagLuaAppFixSDPLayout then tModule.optional(tModule.UDim2) else nil,
 	headerPadding = if fFlagLuaAppFixSDPLayout then tModule.optional(tModule.number) else nil,
 	disableStickyActionBar = tModule.optional(tModule.boolean),
-	hideCloseButton = tModule.optional(tModule.boolean),
-	backgroundContentOverride = if fFlagLuaAppEdpConsoleMediaGalleryVideo then tModule.optional(tModule.table) else nil
+	hideCloseButton = tModule.optional(tModule.boolean)
 })
 detailsPageTemplate.defaultProps = { isFullscreen = false, deviceType = deviceType.Desktop }
 
@@ -88,11 +87,11 @@ local _ = function(p2, p3) --[[ line: 174 | named "getHeaderPaddingHeight" ]]
 end
 
 function detailsPageTemplate.init(p4) --[[ line: 183 ]]
-	-- upvalues: roactModule (ref), signal (ref), getPlatformConfigModule (ref), deviceType (ref)
+	-- upvalues: roactModule (ref), fFlagLuaAppPlayButtonContextualMessageImpression (ref), signal (ref), getPlatformConfigModule (ref), deviceType (ref)
 	p4.containerRef = roactModule.createRef()
 	p4.scrollingFrameRef = p4.props.scrollingFrameRef
 	p4.scrolled = false
-	p4.scrollViewPositionChangedSignal = signal.new()
+	p4.scrollViewPositionChangedSignal = if fFlagLuaAppPlayButtonContextualMessageImpression then signal.new() else nil
 	p4.state = {
 		showStickyActionTopBar = false,
 		backgroundHeight = 500,
@@ -100,14 +99,14 @@ function detailsPageTemplate.init(p4) --[[ line: 183 ]]
 		containerSize = Vector2.new(500, 500)
 	}
 	
-	function p4.onContainerSizeChange(p5) --[[ line: 195 ]]
+	function p4.onContainerSizeChange(p5) --[[ line: 197 ]]
 		-- upvalues: p4 (ref)
 		p4:setState({ containerSize = p5.AbsoluteSize })
 	end
 	
-	function p4.onBackgroundComponentFrameSizeChange(p6) --[[ line: 201 ]]
+	function p4.onBackgroundComponentFrameSizeChange(p6) --[[ line: 203 ]]
 		-- upvalues: p4 (ref), getPlatformConfigModule (copy)
-		p4:setState(function(_, p7) --[[ line: 203 ]]
+		p4:setState(function(_, p7) --[[ line: 205 ]]
 			-- upvalues: p6 (ref), getPlatformConfigModule (copy)
 			local y = p6.AbsoluteSize.Y
 			
@@ -118,11 +117,13 @@ function detailsPageTemplate.init(p4) --[[ line: 183 ]]
 		end)
 	end
 	
-	function p4.canvasPositionChange(p8) --[[ line: 214 ]]
-		-- upvalues: p4 (ref), getPlatformConfigModule (copy), deviceType (copy)
-		p4.scrollViewPositionChangedSignal:fire()
+	function p4.canvasPositionChange(p8) --[[ line: 216 ]]
+		-- upvalues: fFlagLuaAppPlayButtonContextualMessageImpression (copy), p4 (ref), getPlatformConfigModule (copy), deviceType (copy)
+		if fFlagLuaAppPlayButtonContextualMessageImpression then
+			p4.scrollViewPositionChangedSignal:fire()
+		end
 		p4.scrolled = true
-		p4:setState(function(p9, p10) --[[ line: 218 ]]
+		p4:setState(function(p9, p10) --[[ line: 222 ]]
 			-- upvalues: getPlatformConfigModule (copy), p8 (ref), p4 (copy), deviceType (copy)
 			local var14 = p9.backgroundHeight - (if p10.headerBarBackgroundHeight then p10.headerBarBackgroundHeight else getPlatformConfigModule(p10.deviceType).headerBarBackgroundHeight * p10.foundationTokens.Stroke.Standard)
 			local var15 = math.max(0, var14 - p8.CanvasPosition.Y) / 2
@@ -135,8 +136,8 @@ function detailsPageTemplate.init(p4) --[[ line: 183 ]]
 	end
 end
 
-function detailsPageTemplate.render(p11) --[[ line: 255 ]]
-	-- upvalues: deviceType (ref), getPlatformConfigModule (ref), fFlagLuaAppFixSDPLayout (ref), withStyle (ref), getIconSize (ref), iconSize (ref), roactModule (ref), getIconSizeUDim2 (ref), reactModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), iconButton (ref), images (ref), loadableImage (ref), luaAppDisableStickyBarMediaGallery (ref), stickyActionBarModule (ref), verticalScrollView (ref), detailsPageHeaderModule (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (ref), detailsPageBodyModule (ref), actionBar (ref)
+function detailsPageTemplate.render(p11) --[[ line: 259 ]]
+	-- upvalues: deviceType (ref), getPlatformConfigModule (ref), fFlagLuaAppFixSDPLayout (ref), withStyle (ref), getIconSize (ref), iconSize (ref), roactModule (ref), getIconSizeUDim2 (ref), reactModule (ref), fFlagLuaAppAddTestIdsForArrow (ref), getTestId (ref), iconButton (ref), images (ref), loadableImage (ref), luaAppDisableStickyBarMediaGallery (ref), stickyActionBarModule (ref), verticalScrollView (ref), detailsPageHeaderModule (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (ref), fFlagLuaAppPlayButtonContextualMessageImpression (ref), detailsPageBodyModule (ref), actionBar (ref)
 	local headerPadding
 	local var16 = p11.props.deviceType == deviceType.Phone
 	local var17 = getPlatformConfigModule(p11.props.deviceType)
@@ -157,8 +158,8 @@ function detailsPageTemplate.render(p11) --[[ line: 255 ]]
 		local renderFullscreenContent = p11.props.renderFullscreenContent
 		local var22 = if var16 or not p11.props.isFullscreen or not renderFullscreenContent then false else true
 		
-		return withStyle(function(p12) --[[ line: 279 ]]
-			-- upvalues: p11 (ref), var16 (ref), getIconSize (copy), iconSize (copy), var19 (ref), roactModule (copy), getIconSizeUDim2 (copy), reactModule (copy), fFlagLuaAppAddTestIdsForArrow (copy), getTestId (copy), iconButton (copy), var22 (ref), images (copy), loadableImage (copy), backgroundComponentPosition (ref), fFlagLuaAppFixSDPLayout (copy), containerSize (ref), luaAppDisableStickyBarMediaGallery (copy), stickyActionBarModule (copy), verticalScrollView (copy), headerPadding (ref), detailsPageHeaderModule (copy), var18 (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), var20 (ref), detailsPageBodyModule (copy), var21 (ref), renderFullscreenContent (ref), actionBar (copy)
+		return withStyle(function(p12) --[[ line: 283 ]]
+			-- upvalues: p11 (ref), var16 (ref), getIconSize (copy), iconSize (copy), var19 (ref), roactModule (copy), getIconSizeUDim2 (copy), reactModule (copy), fFlagLuaAppAddTestIdsForArrow (copy), getTestId (copy), iconButton (copy), var22 (ref), images (copy), loadableImage (copy), backgroundComponentPosition (ref), fFlagLuaAppFixSDPLayout (copy), containerSize (ref), luaAppDisableStickyBarMediaGallery (copy), stickyActionBarModule (copy), verticalScrollView (copy), headerPadding (ref), detailsPageHeaderModule (copy), var18 (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (copy), var20 (ref), fFlagLuaAppPlayButtonContextualMessageImpression (copy), detailsPageBodyModule (copy), var21 (ref), renderFullscreenContent (ref), actionBar (copy)
 			local textButton
 			local theme = p12.Theme
 			local var23 = p11.props.bannerImageUrl == nil
@@ -297,8 +298,8 @@ function detailsPageTemplate.render(p11) --[[ line: 255 ]]
 							maxContentWidth = p11.props.maxContentWidth,
 							deviceType = p11.props.deviceType,
 							gradientHeight = p11.props.gradientHeight,
-							renderActionBarLabelImpressionsDetector = p11.props.renderActionBarLabelImpressionsDetector,
-							scrollViewPositionChangedSignal = p11.scrollViewPositionChangedSignal
+							renderActionBarLabelImpressionsDetector = if fFlagLuaAppPlayButtonContextualMessageImpression then p11.props.renderActionBarLabelImpressionsDetector else nil,
+							scrollViewPositionChangedSignal = if fFlagLuaAppPlayButtonContextualMessageImpression then p11.scrollViewPositionChangedSignal else nil
 						})
 					}),
 					BodyContainer = roactModule.createElement("Frame", {
@@ -384,13 +385,13 @@ function detailsPageTemplate.render(p11) --[[ line: 255 ]]
 	end
 end
 
-function detailsPageTemplate.didMount(p13) --[[ line: 531 ]]
+function detailsPageTemplate.didMount(p13) --[[ line: 539 ]]
 	if p13.containerRef.current then
 		p13.onContainerSizeChange(p13.containerRef.current)
 	end
 end
 
-function detailsPageTemplate.didUpdate(p14) --[[ line: 537 ]]
+function detailsPageTemplate.didUpdate(p14) --[[ line: 545 ]]
 	-- upvalues: getPlatformConfigModule (ref)
 	local var31 = getPlatformConfigModule(p14.props.deviceType)
 	
@@ -400,7 +401,7 @@ function detailsPageTemplate.didUpdate(p14) --[[ line: 537 ]]
 	end
 end
 
-return function(p15) --[[ line: 551 ]]
+return function(p15) --[[ line: 559 ]]
 	-- upvalues: reactModule (ref), useAnimateScrollViewToSelectionModule (ref), useTokens (ref), useLastInputMode (ref), detailsPageTemplate (ref), cryoModule (ref)
 	local var32 = reactModule.useRef(nil)
 	useAnimateScrollViewToSelectionModule(var32, 0.4)

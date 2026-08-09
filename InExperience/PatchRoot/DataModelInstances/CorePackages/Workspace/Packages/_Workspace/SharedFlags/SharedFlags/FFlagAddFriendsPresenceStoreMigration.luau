@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddFriendsPresenceStoreMigration_v4", false)

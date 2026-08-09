@@ -11,7 +11,6 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local inputHandlersModule = require(parent.InputHandlers)
 local fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav
-local fFlagProfileInspectAvatarBuyAllModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
 local view = foundationModule.View
 local text = foundationModule.Text
 local iconButton = foundationModule.IconButton
@@ -27,11 +26,11 @@ local catalogItemRowCardContainerModule = require(script.Parent.CatalogItemRowCa
 local isItemPurchasable = require(script.Parent.InspectAvatarUtils).isItemPurchasable
 
 return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
-	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), view (ref), displayBackground (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref), skeleton (ref), divider (ref), buyActionBar (ref), fFlagProfileInspectAvatarBuyAllModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
-	local var9 = useLocalization({
+	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), view (ref), displayBackground (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref), skeleton (ref), divider (ref), buyActionBar (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
+	local var8 = useLocalization({
 		buyItems = "Feature.Catalog.Label.BuyItems",
-		buyWholeLook = "Feature.Profile.Header.BuyWholeLook",
 		bundle = "Feature.Catalog.Label.Bundle",
+		insufficientRobux = "Feature.Profile.Heading.InsufficientFunds",
 		title = {
 			"Feature.Profile.Header.InspectAndBuy",
 			username = p0.username
@@ -42,17 +41,17 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 			totalNumberOfItems = #p0.displayItems
 		}
 	})
-	local var10 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
-	local var11 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
-	local var12 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local var13 = reactModule.useMemo(function() --[[ line: 87 ]]
-		-- upvalues: var9 (ref), dashModule (copy), var11 (ref), var12 (ref)
+	local var9 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
+	local var10 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
+	local var11 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
+	local var12 = reactModule.useMemo(function() --[[ line: 87 ]]
+		-- upvalues: var8 (ref), dashModule (copy), var10 (ref), var11 (ref)
 		return {
 			bundleParts = nil,
-			bundle = var9.bundle,
-			assetTypeNames = dashModule.join(var11, var12)
+			bundle = var8.bundle,
+			assetTypeNames = dashModule.join(var10, var11)
 		}
-	end, { var9.bundle, var11, var12 })
+	end, { var8.bundle, var10, var11 })
 	local t = {}
 	
 	for i, v in p0.displayItems do
@@ -63,8 +62,8 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 			index = i,
 			isChecked = p0.selectedItems[id] == true,
 			isPurchasable = isItemPurchasable(v),
-			localizedStrings = var13,
-			priceStatusLocalized = var10,
+			localizedStrings = var12,
+			priceStatusLocalized = var9,
 			onToggleItem = p0.onToggleItem,
 			openItemDetails = p0.openItemDetails
 		})
@@ -113,7 +112,7 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 			Title = reactModule.createElement(text, {
 				tag = "size-full-0 auto-y padding-y-small text-heading-small text-align-x-left",
 				LayoutOrder = 2,
-				Text = var9.title
+				Text = var8.title
 			}),
 			ScrollWrapper = reactModule.createElement(view, { tag = "fill size-full-0", LayoutOrder = 3 }, {
 				ScrollContent = reactModule.createElement("ScrollingFrame", {
@@ -142,13 +141,13 @@ return function(p0) --[[ line: 69 | named "InspectAvatarSheet" ]]
 			Footer = reactModule.createElement(view, { tag = "size-full-2500 bg-surface-0", LayoutOrder = 5 }, {
 				ActionBar = reactModule.createElement(buyActionBar, {
 					priceLabel = {
-						leftLabel = var9.buyHeader,
+						leftLabel = var8.buyHeader,
 						priceInRobux = tostring(p0.purchaseSummary.totalPrice)
 					},
 					purchaseButtonProps = {
-						purchaseButtonText = if fFlagProfileInspectAvatarBuyAllModule then var9.buyWholeLook else var9.buyItems,
+						purchaseButtonText = if p0.hasInsufficientFunds then var8.insufficientRobux else var8.buyItems,
 						onPurchase = p0.onBuyAll,
-						isDisabled = p0.isLoading or p0.purchaseSummary.count == 0,
+						isDisabled = p0.isLoading or (if p0.purchaseSummary.count ~= 0 then p0.hasInsufficientFunds == true else true),
 						variant = buttonVariant.Emphasis
 					}
 				})

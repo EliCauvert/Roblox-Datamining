@@ -18,7 +18,7 @@ local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.Ro
 local userRelationshipModalsModule = require(corePackagesService.Workspace.Packages.UserRelationshipModals)
 local legacyThumbnailUrlsModule = require(modules.Common.LegacyThumbnailUrls)
 local fFlagRemoveHardCodedFriendLimitPromptModule = require(modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
-local friendRequestModalRevampV4 = game:DefineFastFlag("FriendRequestModalRevampV4", false)
+local friendRequestModalRevampV3 = game:DefineFastFlag("FriendRequestModalRevampV3", false)
 local friendRequestModalIxpEnabled = game:DefineFastFlag("FriendRequestModalIxpEnabled", false)
 local friendRequestModalIxpLayer = game:DefineFastString("FriendRequestModalIxpLayer", "")
 local _ = legacyThumbnailUrlsModule.Thumbnail
@@ -75,14 +75,14 @@ function AtFriendLimit(p4) --[[ line: 79 ]]
 end
 
 function DoPromptRequestFriendPlayer(p5) --[[ line: 94 ]]
-	-- upvalues: localPlayer (write), friendRequestModalIxpEnabled (ref), IXPService (ref), friendRequestModalIxpLayer (ref), friendRequestModalRevampV4 (ref), userRelationshipModalsModule (ref), fFlagRemoveHardCodedFriendLimitPromptModule (ref), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref), robloxTranslatorModule (ref)
+	-- upvalues: localPlayer (write), friendRequestModalIxpEnabled (ref), IXPService (ref), friendRequestModalIxpLayer (ref), friendRequestModalRevampV3 (ref), userRelationshipModalsModule (ref), fFlagRemoveHardCodedFriendLimitPromptModule (ref), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref), robloxTranslatorModule (ref)
 	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
 		if localPlayer:IsFriendsWithAsync(p5.UserId) then return end
 	elseif localPlayer:IsFriendsWith(p5.UserId) then return end
 	if friendRequestModalIxpEnabled then
 		IXPService:LogFlagLinkedUserLayerExposure(friendRequestModalIxpLayer)
 	end
-	if friendRequestModalRevampV4 then
+	if friendRequestModalRevampV3 then
 		userRelationshipModalsModule.launchPromptFriendRequestModal(p5.UserId)
 		
 		return

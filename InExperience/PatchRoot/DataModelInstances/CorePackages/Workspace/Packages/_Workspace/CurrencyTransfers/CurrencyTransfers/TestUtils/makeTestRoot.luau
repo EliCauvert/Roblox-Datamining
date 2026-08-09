@@ -15,7 +15,7 @@ return function(p0) --[[ line: 16 ]]
 	return function(p1) --[[ line: 18 ]]
 		-- upvalues: reactModule (copy), localizationProvider (copy), var5 (ref), foundationProvider (copy), foundationModule (copy), transferContextModule (copy), p0 (ref)
 		return reactModule.createElement(localizationProvider, { localization = var5 }, {
-			reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+			reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
 				reactModule.createElement(transferContextModule.Provider, { value = p0.transferStore }, p1.children)
 			})
 		})

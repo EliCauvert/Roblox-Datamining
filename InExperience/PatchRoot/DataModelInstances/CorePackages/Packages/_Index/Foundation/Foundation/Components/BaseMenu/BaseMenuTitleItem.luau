@@ -12,7 +12,7 @@ local useBaseMenuItemVariantsModule = require(script.Parent.useBaseMenuItemVaria
 
 return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 32 | named "BaseMenuTitleItem" ]]
 	-- upvalues: useTokensModule (ref), useBaseMenuItemVariantsModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref)
-	local var8 = useBaseMenuItemVariantsModule(useTokensModule(), p0.size, false, false)
+	local var8 = useBaseMenuItemVariantsModule(useTokensModule(), p0.size, false)
 	
 	return if flagsModule.FoundationBaseMenuBeta then reactModule.createElement(viewModule, withCommonPropsModule(p0, {
 		tag = `row align-y-center {var8.container.tag}`,

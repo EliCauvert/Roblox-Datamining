@@ -1,4 +1,6 @@
 ﻿return {
+	FFlagUnifiedPurchaseFlowShouldCacheExperimentResult = require(script.Flags.FFlagUnifiedPurchaseFlowShouldCacheExperimentResult),
+	GetFFlagDevSubsEligibleForUnifiedPurchaseFlow = require(script.Flags.GetFFlagDevSubsEligibleForUnifiedPurchaseFlow),
 	Enums = {
 		ProductKind = require(script.Enums.ProductKind),
 		ProductPurchaseSurface = require(script.Enums.ProductPurchaseSurface),

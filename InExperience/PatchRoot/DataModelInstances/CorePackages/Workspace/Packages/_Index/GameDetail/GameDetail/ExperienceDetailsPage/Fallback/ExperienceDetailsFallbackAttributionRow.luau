@@ -17,10 +17,8 @@ local fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox = sharedFlagsModule.FFlagLu
 local fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox
 local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp = sharedFlagsModule.FFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp
-local fFlagLuaAppDemoModePlayButton = sharedFlagsModule.FFlagLuaAppDemoModePlayButton
-local fFlagLuaAppSduiEdpFallbackAttributionFromCache = sharedFlagsModule.FFlagLuaAppSduiEdpFallbackAttributionFromCache
 
-local function VerifiedBadgeIcon() --[[ line: 45 ]]
+local function VerifiedBadgeIcon() --[[ line: 61 ]]
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), foundationModule (ref)
 	local var6 = useTokens()
 	
@@ -41,8 +39,8 @@ local function VerifiedBadgeIcon() --[[ line: 45 ]]
 	})
 end
 
-return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionRow" ]]
-	-- upvalues: useTokens (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref), fFlagLuaAppDemoModePlayButton (ref)
+return reactModule.memo(function(p0) --[[ line: 83 | named "FallbackAttributionRow" ]]
+	-- upvalues: useTokens (ref), useImageLoadFadeModule (ref), reactModule (ref), view (ref), image (ref), skeleton (ref), text (ref), radius (ref), VerifiedBadgeIcon (ref), playButton (ref), fFlagLuaAppSduiEdpFallbackPlayButtonPassUiBlox (ref), fFlagLuaAppSduiEdpFallbackPlayButtonUseUiBlox (ref), buttonSize (ref), edpFallbackActionBarPlayButtonWidth (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp (ref)
 	local var7 = useTokens()
 	local isSmallScreen = p0.isSmallScreen
 	local var8 = p0.isLoading == true
@@ -72,7 +70,6 @@ return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionR
 	if p0.gameName then
 		var14 = reactModule.createElement(text, {
 			LayoutOrder = 1,
-			testId = "--edp-fallback-attribution-title",
 			tag = {
 				["auto-xy text-wrap text-align-x-left text-truncate-none"] = true,
 				["text-heading-small"] = isSmallScreen,
@@ -97,7 +94,6 @@ return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionR
 			CreatorName = reactModule.createElement(text, {
 				tag = "auto-xy text-body-medium content-default",
 				LayoutOrder = 1,
-				testId = "--edp-fallback-attribution-creator",
 				Text = p0.creatorName,
 				TextTruncate = Enum.TextTruncate.None
 			}),
@@ -106,8 +102,7 @@ return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionR
 	elseif var8 then
 		var15 = reactModule.createElement(skeleton, {
 			LayoutOrder = 2,
-			testId = "--edp-fallback-attribution-creator-skeleton",
-			Size = UDim2.fromOffset(var7.Size.Size_2800 * 2, if fFlagLuaAppSduiEdpFallbackAttributionFromCache then var7.Typography.BodyLarge.FontSize * var7.Typography.BodyLarge.LineHeight else var13),
+			Size = UDim2.fromOffset(var7.Size.Size_2800 * 2, var13),
 			radius = radius.Small
 		})
 	end
@@ -117,26 +112,12 @@ return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionR
 		var16 = reactModule.createElement(text, {
 			tag = "auto-xy text-body-medium content-default",
 			LayoutOrder = 3,
-			testId = "--edp-fallback-attribution-age-rating",
 			Text = p0.ageRecDisplayName
 		})
 	elseif var8 then
-		local fontSize
-		local _ = nil
-		
-		if fFlagLuaAppSduiEdpFallbackAttributionFromCache then
-			fontSize = var7.Typography.BodyMedium.FontSize
-			
-			if not isSmallScreen then
-				fontSize += var7.Padding.XSmall
-			end
-		else
-			fontSize = var13
-		end
 		var16 = reactModule.createElement(skeleton, {
 			LayoutOrder = 3,
-			testId = "--edp-fallback-attribution-age-rating-skeleton",
-			Size = UDim2.fromOffset(if isSmallScreen then var7.Size.Size_2400 else var7.Size.Size_2800, fontSize),
+			Size = UDim2.fromOffset(if isSmallScreen then var7.Size.Size_2400 else var7.Size.Size_2800, var13),
 			radius = radius.Small
 		})
 	end
@@ -151,14 +132,7 @@ return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionR
 		}
 	}, {
 		Icon = var12,
-		ContentColumn = reactModule.createElement(view, {
-			LayoutOrder = 2,
-			testId = "--edp-fallback-attribution-content-column",
-			tag = {
-				["col fill gap-xsmall auto-xy"] = fFlagLuaAppSduiEdpFallbackAttributionFromCache,
-				["col fill gap-small auto-xy"] = not fFlagLuaAppSduiEdpFallbackAttributionFromCache
-			}
-		}, {
+		ContentColumn = reactModule.createElement(view, { tag = "col fill gap-small auto-xy", LayoutOrder = 2 }, {
 			Title = var14,
 			Creator = var15,
 			AgeRating = var16,
@@ -178,8 +152,7 @@ return reactModule.memo(function(p0) --[[ line: 67 | named "FallbackAttributionR
 					buttonSize = buttonSize.Large,
 					width = UDim.new(0, edpFallbackActionBarPlayButtonWidth),
 					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
-					launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then true else nil,
-					expandWidthForSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then true else nil
+					launchOnReleaseAfterUnmount = if fFlagLuaAppPlayButtonLaunchOnReleaseAfterUnmountEdp then true else nil
 				}),
 				OverflowSkeleton1 = if var8 then reactModule.createElement(skeleton, {
 					LayoutOrder = 2,

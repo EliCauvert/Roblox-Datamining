@@ -1,14 +1,13 @@
 ﻿local parent = script:FindFirstAncestor("Charts").Parent
 local addSystemInfoToArgs = require(parent.DiscoveryUtils).AddSystemInfoToArgs
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local var0 = urlBuilder.new({
 	path = "charts-api/v1/charts-sort-detail",
 	base = require(parent.Http).Url.APIS_URL
 })
 
-return function(p0) --[[ line: 15 | named "getChartsSortDetailUrl" ]]
-	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsSortDetailGenreFilter (ref), urlBuilder (ref), var0 (ref)
+return function(p0) --[[ line: 13 | named "getChartsSortDetailUrl" ]]
+	-- upvalues: addSystemInfoToArgs (ref), urlBuilder (ref), var0 (ref)
 	local t = {}
 	addSystemInfoToArgs(t)
 	t.sortId = p0.sortId
@@ -23,9 +22,6 @@ return function(p0) --[[ line: 15 | named "getChartsSortDetailUrl" ]]
 		for i, v in p0.filterSelections do
 			t[i] = v
 		end
-	end
-	if fFlagSduiChartsSortDetailGenreFilter and p0.selectedGenre ~= nil then
-		t.selectedGenre = p0.selectedGenre
 	end
 	return urlBuilder.addQueryString(var0(), t)
 end

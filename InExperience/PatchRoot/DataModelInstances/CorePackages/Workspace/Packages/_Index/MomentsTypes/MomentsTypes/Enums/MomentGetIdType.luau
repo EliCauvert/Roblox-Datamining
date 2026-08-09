@@ -1,1 +1,0 @@
-﻿return { MomentId = "momentId", FeedItemId = "feedItemId" }

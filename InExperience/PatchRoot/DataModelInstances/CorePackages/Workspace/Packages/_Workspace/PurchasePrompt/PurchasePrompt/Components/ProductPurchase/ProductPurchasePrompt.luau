@@ -32,12 +32,12 @@ local appContextModule = require(purchasePrompt.Utils.AppContext)
 local fFlagAddCenterDialogForUnifiedPurchaseModal = require(parent.SharedFlags).FFlagAddCenterDialogForUnifiedPurchaseModal
 local fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase = require(parent.SharedFlags).FFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase
 
-local function getPurchaseErrorText(p0, p1) --[[ line: 67 ]]
+local function getPurchaseErrorText(p0, p1) --[[ line: 62 ]]
 	-- upvalues: purchaseErrorModule (ref)
 	return if p1 == purchaseErrorModule.CannotGetBalance then p0.PurchaseErrorCannotGetBalanceText elseif p1 == purchaseErrorModule.CannotGetItemPrice then p0.PurchaseErrorCannotGetItemPriceText elseif p1 == purchaseErrorModule.NotForSale then p0.PurchaseErrorNotForSaleText elseif p1 == purchaseErrorModule.NotForSaleHere then p0.PurchaseErrorNotForSaleHereText elseif p1 == purchaseErrorModule.AlreadyOwn then p0.PurchaseErrorAlreadyOwnText elseif p1 == purchaseErrorModule.Under13 then p0.PurchaseErrorUnder13Text elseif p1 == purchaseErrorModule.Limited then p0.PurchaseErrorLimitedText elseif p1 == purchaseErrorModule.ThirdPartyDisabled then p0.PurchaseErrorThirdPartyDisabledText elseif p1 == purchaseErrorModule.NotEnoughRobux then p0.PurchaseErrorNotEnoughRobuxText elseif p1 == purchaseErrorModule.NotEnoughRobuxXbox then p0.PurchaseErrorNotEnoughRobuxXboxText elseif p1 == purchaseErrorModule.NotEnoughRobuxNoUpsell then p0.PurchaseErrorNotEnoughRobuxNoUpsellText elseif p1 == purchaseErrorModule.TwoFactorNeeded then p0.PurchaseErrorTwoFactorNeededText elseif p1 == purchaseErrorModule.TwoFactorNeededSettings then p0.PurchaseErrorTwoFactorNeededSettingsText elseif p1 == purchaseErrorModule.UnknownFailure then p0.PurchaseErrorUnknownFailureText elseif p1 == purchaseErrorModule.UnknownFailureNoItemName then p0.PurchaseErrorUnknownFailureNoItemNameText elseif p1 == purchaseErrorModule.PurchaseDisabled then p0.PurchaseErrorPurchaseDisabledText elseif p1 == purchaseErrorModule.InvalidFunds then p0.PurchaseErrorInvalidFundsText elseif p1 == purchaseErrorModule.InvalidFundsUnknown then p0.PurchaseErrorInvalidFundsUnknownText elseif p1 == purchaseErrorModule.PremiumOnly then p0.PurchaseErrorPremiumOnlyText else p0.PurchaseErrorUnknownFailureNoItemNameText
 end
 
-local function getModalContent(p2, p3) --[[ line: 111 ]]
+local function getModalContent(p2, p3) --[[ line: 106 ]]
 	-- upvalues: promptStateModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagPurchaseModalTimedOptionExtension (ref), formatTextWithParamsModule (ref), purchaseErrorModule (ref), formatEconomicRestrictionText (ref), fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), getPurchaseErrorText (ref)
 	local promptState = p3.promptState
 	local purchaseError = p3.purchaseError
@@ -90,7 +90,7 @@ local function getModalContent(p2, p3) --[[ line: 111 ]]
 	}
 end
 
-local function getButtonStackInfo(p4, p5) --[[ line: 207 ]]
+local function getButtonStackInfo(p4, p5) --[[ line: 202 ]]
 	-- upvalues: buttonType (ref)
 	return if p4.includeCancelButton then {
 		{
@@ -120,7 +120,7 @@ local function getButtonStackInfo(p4, p5) --[[ line: 207 ]]
 	}
 end
 
-local function ProductPurchasePrompt(p6) --[[ line: 242 ]]
+local function ProductPurchasePrompt(p6) --[[ line: 237 ]]
 	-- upvalues: fFlagEnableDevProductPendingProductsLimitExceededInUnifiedPurchase (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), useMemo (ref), getModalContent (ref), useEffect (ref), fFlagFixPurchasingErrorCounterModule (ref), default (ref), productPurchasePromptCounter (ref), purchaseErrorModule (ref), promptStateModule (ref), universalEconomicRestrictionsCounter (ref), economicRestrictionsSurface (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagAddCenterDialogForUnifiedPurchaseModal (ref), appContextModule (ref), reactModule (ref), unifiedPurchaseCompletionModalV2 (ref), unifiedPurchaseCompletionModal (ref), interactiveAlert (ref), getButtonStackInfo (ref)
 	local t = {
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
@@ -161,11 +161,11 @@ local function ProductPurchasePrompt(p6) --[[ line: 242 ]]
 	}
 	addEconomicRestrictionKeysToLocalization(t)
 	local var16 = useLocalization(t)
-	local var17 = useMemo(function() --[[ line: 288 ]]
+	local var17 = useMemo(function() --[[ line: 283 ]]
 		-- upvalues: getModalContent (copy), var16 (ref), p6 (ref)
 		return getModalContent(var16, p6)
 	end, { p6 })
-	useEffect(function() --[[ line: 292 ]]
+	useEffect(function() --[[ line: 287 ]]
 		-- upvalues: fFlagFixPurchasingErrorCounterModule (copy), default (copy), productPurchasePromptCounter (copy), p6 (ref), purchaseErrorModule (copy), promptStateModule (copy), universalEconomicRestrictionsCounter (copy), economicRestrictionsSurface (copy)
 		if fFlagFixPurchasingErrorCounterModule then
 			default:logRobloxTelemetryCounter(productPurchasePromptCounter, 1, {
@@ -186,40 +186,34 @@ local function ProductPurchasePrompt(p6) --[[ line: 242 ]]
 		end
 	end, { p6.purchaseError })
 	
-	if not fFlagEnableUnifiedProductPurchaseFlow or not p6.useUnifiedPurchaseCompletionModal then
-		return reactModule.createElement(interactiveAlert, {
-			screenSize = p6.screenSize,
-			title = var17.titleText,
-			titleIcon = p6.titleIcon,
-			bodyText = var17.messageText,
-			buttonStackInfo = { buttons = getButtonStackInfo(p6, var16) }
-		})
-	end
-	local launchAfterPurchaseButtonPressed = p6.launchAfterPurchaseButtonPressed
-	local var18 = launchAfterPurchaseButtonPressed ~= nil and p6.promptState == promptStateModule.PurchaseComplete
-	local t_1 = {
-		text = var16.OkButtonText,
-		onActivated = if launchAfterPurchaseButtonPressed == nil or p6.promptState ~= promptStateModule.PurchaseComplete then p6.confirmButtonPressed else launchAfterPurchaseButtonPressed,
-		onClose = p6.cancelButtonPressed,
-		onShown = if var18 then p6.launchAfterPurchaseButtonShown else nil
-	}
-	
-	return if fFlagAddCenterDialogForUnifiedPurchaseModal and appContextModule.get() == appContextModule.Enum.IN_APP then reactModule.createElement(unifiedPurchaseCompletionModalV2, {
+	return if not (not fFlagEnableUnifiedProductPurchaseFlow or not p6.useUnifiedPurchaseCompletionModal) then if fFlagAddCenterDialogForUnifiedPurchaseModal and appContextModule.get() == appContextModule.Enum.IN_APP then reactModule.createElement(unifiedPurchaseCompletionModalV2, {
 		title = var17.titleText,
 		isError = p6.promptState ~= promptStateModule.PurchaseComplete,
 		bodyText = var17.messageText,
-		buttons = t_1,
-		enableLaunchAfterPurchase = var18
+		buttons = {
+			onActivated = p6.confirmButtonPressed,
+			text = var16.OkButtonText,
+			onClose = p6.cancelButtonPressed
+		}
 	}) else reactModule.createElement(unifiedPurchaseCompletionModal, {
 		title = var17.titleText,
 		isError = p6.promptState ~= promptStateModule.PurchaseComplete,
 		bodyText = var17.messageText,
-		buttons = t_1,
-		enableLaunchAfterPurchase = var18
+		buttons = {
+			onActivated = p6.confirmButtonPressed,
+			text = var16.OkButtonText,
+			onClose = p6.cancelButtonPressed
+		}
+	}) else reactModule.createElement(interactiveAlert, {
+		screenSize = p6.screenSize,
+		title = var17.titleText,
+		titleIcon = p6.titleIcon,
+		bodyText = var17.messageText,
+		buttonStackInfo = { buttons = getButtonStackInfo(p6, var16) }
 	})
 end
 
-return function(p7) --[[ line: 360 | named "ProductPurchasePromptContainer" ]]
+return function(p7) --[[ line: 344 | named "ProductPurchasePromptContainer" ]]
 	-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), ProductPurchasePrompt (ref)
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)

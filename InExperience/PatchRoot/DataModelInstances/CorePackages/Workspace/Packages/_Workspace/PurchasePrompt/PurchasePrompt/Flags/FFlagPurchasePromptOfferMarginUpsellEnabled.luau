@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagPurchasePromptFixOfferMarginUpsell and require(script.Parent.FFlagPurchasePromptCartPricingEnabled)

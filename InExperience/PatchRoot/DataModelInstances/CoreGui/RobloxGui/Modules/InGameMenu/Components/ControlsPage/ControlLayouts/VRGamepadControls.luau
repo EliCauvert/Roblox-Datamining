@@ -11,8 +11,6 @@ local controlsModule = require(inGameMenu.Resources.Controls)
 local reactModule = require(corePackagesService.Packages.React)
 local withLocalizationModule = require(inGameMenu.Localization.withLocalization)
 local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = require(corePackagesService.Packages.Foundation).Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local t = {
 	ResetCameraLabel = "CoreScripts.InGameMenu.Controls.ResetCameraLabel",
 	MenuLabel = "CoreScripts.InGameMenu.Controls.MenuLabel",
@@ -22,25 +20,23 @@ local t = {
 	JumpSelectLabel = "CoreScripts.InGameMenu.Controls.JumpSelectLabel"
 }
 
-return function(_) --[[ line: 43 | named "GamepadControls" ]]
-	-- upvalues: roact (ref), controlLayoutContainerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), array (ref), controlsModule (ref), t (ref), withLocalizationModule (ref), themedTextLabelModule (ref)
+return function(_) --[[ line: 38 | named "GamepadControls" ]]
+	-- upvalues: roact (ref), controlLayoutContainerModule (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), array (ref), controlsModule (ref), t (ref), withLocalizationModule (ref), themedTextLabelModule (ref)
 	return roact.createElement(controlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.GamepadTitle"
 	}, {
-		GamepadImage = roact.createElement(if fFlagCoreUiMigrateUIBloxToFoundation then image else imageSetLabel, {
-			BackgroundTransparency = if fFlagCoreUiMigrateUIBloxToFoundation then nil else 1,
-			backgroundStyle = if fFlagCoreUiMigrateUIBloxToFoundation then { Transparency = 1 } else nil,
+		GamepadImage = roact.createElement(imageSetLabel, {
+			BackgroundTransparency = 1,
 			Image = assetsModule.Images.GamepadQuest,
 			Size = UDim2.new(1, 0, 0.6, 0),
 			Position = UDim2.new(0.5, 16.5, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
-			testId = if fFlagCoreUiMigrateUIBloxToFoundation then "VRGamepadInstructions" else nil,
-			[reactModule.Tag] = if fFlagCoreUiMigrateUIBloxToFoundation then nil else "data-testid=VRGamepadInstructions"
+			[reactModule.Tag] = "data-testid=VRGamepadInstructions"
 		}, {
-			array.map(controlsModule.questGamepadLabels, function(p0, p1) --[[ line: 58 ]]
+			array.map(controlsModule.questGamepadLabels, function(p0, p1) --[[ line: 51 ]]
 				-- upvalues: t (copy), withLocalizationModule (copy), roact (copy), themedTextLabelModule (copy)
-				return withLocalizationModule({ t[p0.labelKey] })(function(p2) --[[ line: 61 ]]
+				return withLocalizationModule({ t[p0.labelKey] })(function(p2) --[[ line: 54 ]]
 					-- upvalues: roact (copy), themedTextLabelModule (copy), p0 (ref), p1 (ref)
 					return roact.createElement(themedTextLabelModule, {
 						fontKey = "Header2",

@@ -1,12 +1,9 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
+﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 local t = {
 	Unknown = "Unknown",
 	ConnectTab = "ConnectTab",
 	ChatTab = "ChatTab",
-	InExperienceDefault = "InExperienceDefault",
-	InExperienceFriendsTab = "InExperienceFriendsTab"
+	InExperienceDefault = "InExperienceDefault"
 }
 local var2 = reactModule.createContext({ chatPlacement = t.Unknown })
 local consumer = var2.Consumer
@@ -16,21 +13,21 @@ return {
 	Consumer = consumer,
 	Context = var2,
 	Enum = t,
-	useChatPlacementContext = function() --[[ line: 42 ]]
+	useChatPlacementContext = function() --[[ line: 38 ]]
 		-- upvalues: reactModule (ref), var2 (ref)
 		return reactModule.useContext(var2)
 	end,
-	withChatPlacementContext = function(p0) --[[ line: 45 ]]
+	withChatPlacementContext = function(p0) --[[ line: 41 ]]
 		-- upvalues: reactModule (ref), consumer (ref)
 		return reactModule.createElement(consumer, {
-			render = function(p1) --[[ line: 47 ]]
+			render = function(p1) --[[ line: 43 ]]
 				-- upvalues: p0 (ref)
 				return p0(p1)
 			end
 		})
 	end,
-	isPlacementInExperience = function(p2) --[[ line: 52 ]]
-		-- upvalues: fFlagExpChatEnableFriendsTab (ref), t (ref)
-		return if fFlagExpChatEnableFriendsTab and p2 == t.InExperienceFriendsTab then true else p2 == t.InExperienceDefault
+	isPlacementInExperience = function(p2) --[[ line: 48 ]]
+		-- upvalues: t (ref)
+		return p2 == t.InExperienceDefault
 	end
 }

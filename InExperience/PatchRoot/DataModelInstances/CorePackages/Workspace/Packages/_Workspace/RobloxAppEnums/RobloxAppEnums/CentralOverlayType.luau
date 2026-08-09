@@ -58,6 +58,7 @@
 	AccountSwitchingErrorOverlay = "AccountSwitchingErrorOverlay",
 	CloseOnlyInteractiveAlert = "CloseOnlyInteractiveAlert",
 	ConfirmationDialog = "ConfirmationDialog",
+	UpsellModal = "UpsellModal",
 	PlayButtonUpsellDialog = "PlayButtonUpsellDialog",
 	SquadPrompt = "SquadPrompt",
 	VngComplianceLoadingPopup = "VngComplianceLoadingPopup",

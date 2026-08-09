@@ -8,42 +8,31 @@ local abuseReportErrorBoundaryModule = require(genericAbuseReporting.BeduiV2.Com
 local getIsInExpSceneSelectionAvailableModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.getIsInExpSceneSelectionAvailable)
 local getUsersModule = require(genericAbuseReporting.BeduiV2.Loaders.getUsers)
 local _ = require(genericAbuseReporting.BeduiV2.Loaders.LoaderContext)
-local recentlyLeftSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
 local sendBoundaryErrorTelemetryModule = require(genericAbuseReporting.BeduiV2.Analytics.sendBoundaryErrorTelemetry)
 local useInExpCustomSubmit = require(genericAbuseReporting.BeduiV2.Hooks.useInExpCustomSubmit).useInExpCustomSubmit
 local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.fetchConfigWithAttributes)
 local dynamicReportV2InExpErrorModule = require(script.Parent.DynamicReportV2InExpError)
-local dynamicReportV2InExpLoadingModule = require(script.Parent.DynamicReportV2InExpLoading)
 local abuseReportContentInExpModule = require(script.Parent.AbuseReportContentInExp)
 local useDynamicInExpConfig = require(script.Parent.useDynamicInExpConfig).useDynamicInExpConfig
-local useInExpConfigLoadingSkeleton = require(script.Parent.useInExpConfigLoadingSkeleton).useInExpConfigLoadingSkeleton
 local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.useAbuseSheetFlow)
 local useIsVoiceChatReportable = require(script.Parent.useIsVoiceChatReportable).useIsVoiceChatReportable
 local _ = require(genericAbuseReporting.BeduiV2.Utils.appendReportAnythingTags)
-local fFlagAbuseReportCheckSceneSelectionAvailabilityOnOpenModule = require(genericAbuseReporting.Flags.FFlagAbuseReportCheckSceneSelectionAvailabilityOnOpen)
 local fFlagAbuseReportInlineAlertStateOutsideReducerModule = require(genericAbuseReporting.Flags.FFlagAbuseReportInlineAlertStateOutsideReducer)
-local fFlagAbuseReportInExpShowConfigLoadingSkeletonModule = require(genericAbuseReporting.Flags.FFlagAbuseReportInExpShowConfigLoadingSkeleton)
-local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
-local fFlagAbuseReportVoiceMute = require(parent.SharedFlags).FFlagAbuseReportVoiceMute
 
-return reactModule.memo(function(p0) --[[ line: 69 | named "DynamicReportV2InExpContainer" ]]
-	-- upvalues: reactModule (ref), useIsVoiceChatReportable (ref), fFlagAbuseReportCheckSceneSelectionAvailabilityOnOpenModule (ref), getIsInExpSceneSelectionAvailableModule (ref), useDynamicInExpConfig (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (ref), useDeviceOrientation (ref), guiService (ref), fFlagAbuseReportInExpShowConfigLoadingSkeletonModule (ref), useInExpConfigLoadingSkeleton (ref), getUsersModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), recentlyLeftSignalsModule (ref), useInExpCustomSubmit (ref), sendBoundaryErrorTelemetryModule (ref), dynamicReportV2InExpLoadingModule (ref), dynamicReportV2InExpErrorModule (ref), abuseReportErrorBoundaryModule (ref), abuseReportContentInExpModule (ref), fFlagAbuseReportVoiceMute (ref)
+return reactModule.memo(function(p0) --[[ line: 59 | named "DynamicReportV2InExpContainer" ]]
+	-- upvalues: reactModule (ref), useIsVoiceChatReportable (ref), getIsInExpSceneSelectionAvailableModule (ref), useDynamicInExpConfig (ref), fFlagAbuseReportInlineAlertStateOutsideReducerModule (ref), useDeviceOrientation (ref), guiService (ref), getUsersModule (ref), useInExpCustomSubmit (ref), sendBoundaryErrorTelemetryModule (ref), dynamicReportV2InExpErrorModule (ref), abuseReportErrorBoundaryModule (ref), abuseReportContentInExpModule (ref)
 	local preselectedPlayer = p0.preselectedPlayer
-	local var14 = reactModule.useMemo(function() --[[ line: 72 ]]
+	local var10 = reactModule.useMemo(function() --[[ line: 62 ]]
 		return tostring(game.GameId)
 	end, {})
-	local var15 = useIsVoiceChatReportable(p0.voiceChatServiceManager)
-	local var16 = if fFlagAbuseReportCheckSceneSelectionAvailabilityOnOpenModule then reactModule.useMemo(function() --[[ line: 83 ]]
-		-- upvalues: p0 (ref), getIsInExpSceneSelectionAvailableModule (copy)
-		return p0.isReportTabVisible and getIsInExpSceneSelectionAvailableModule()
-	end, { p0.isReportTabVisible }) else nil
-	local var17 = useDynamicInExpConfig(p0.isReportTabVisible, reactModule.useMemo(function() --[[ line: 88 ]]
-		-- upvalues: var14 (ref), var15 (ref), fFlagAbuseReportCheckSceneSelectionAvailabilityOnOpenModule (copy), var16 (write), getIsInExpSceneSelectionAvailableModule (copy), preselectedPlayer (ref)
+	local var11 = useIsVoiceChatReportable(p0.voiceChatServiceManager)
+	local var12 = useDynamicInExpConfig(p0.isReportTabVisible, reactModule.useMemo(function() --[[ line: 68 ]]
+		-- upvalues: var10 (ref), var11 (ref), getIsInExpSceneSelectionAvailableModule (copy), preselectedPlayer (ref)
 		local t = {
-			experienceTargetId = var14,
-			isVoiceChatReportable = var15,
-			isSceneSelectionAvailable = if fFlagAbuseReportCheckSceneSelectionAvailabilityOnOpenModule then var16 else getIsInExpSceneSelectionAvailableModule()
+			experienceTargetId = var10,
+			isVoiceChatReportable = var11,
+			isSceneSelectionAvailable = getIsInExpSceneSelectionAvailableModule()
 		}
 		
 		if preselectedPlayer then
@@ -52,22 +41,21 @@ return reactModule.memo(function(p0) --[[ line: 69 | named "DynamicReportV2InExp
 			t.preselectedAbuserUsername = preselectedPlayer.Name
 		end
 		return t
-	end, { var14, preselectedPlayer, var15, var16 }))
-	local config = var17.config
-	local hasError = var17.hasError
-	local setHasError = var17.setHasError
-	local abuseVector = var17.abuseVector
-	local var18 = nil
-	local var19 = nil
+	end, { var10, preselectedPlayer, var11 }))
+	local config = var12.config
+	local hasError = var12.hasError
+	local setHasError = var12.setHasError
+	local abuseVector = var12.abuseVector
+	local var13 = nil
+	local var14 = nil
 	
 	if fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-		local var20, var21 = reactModule.useState(nil)
-		var18 = var20
-		var19 = var21
+		local var15, var16 = reactModule.useState(nil)
+		var13 = var15
+		var14 = var16
 	end
-	local var22 = if useDeviceOrientation() ~= "Landscape" then not (guiService.ViewportDisplaySize == Enum.DisplaySize.Small) else true
-	local var23 = if fFlagAbuseReportInExpShowConfigLoadingSkeletonModule then useInExpConfigLoadingSkeleton(p0.isReportTabVisible, p0.isReportTabVisible and (config == nil and not hasError)) else false
-	local var24 = reactModule.useMemo(function() --[[ line: 124 ]]
+	local var17 = if useDeviceOrientation() ~= "Landscape" then not (guiService.ViewportDisplaySize == Enum.DisplaySize.Small) else true
+	local var18 = reactModule.useMemo(function() --[[ line: 97 ]]
 		-- upvalues: getUsersModule (copy), p0 (ref)
 		local t = { users = { type = "listItem", fetch = getUsersModule } }
 		
@@ -79,75 +67,54 @@ return reactModule.memo(function(p0) --[[ line: 69 | named "DynamicReportV2InExp
 		end
 		return t
 	end, { p0.inExpChatMessagesLoader, p0.inExpVoiceUsersLoader })
-	local var25 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
-	reactModule.useEffect(function() --[[ line: 145 ]]
-		-- upvalues: p0 (ref), var25 (ref)
+	local var19 = reactModule.useRef(DateTime.now().UnixTimestampMillis)
+	reactModule.useEffect(function() --[[ line: 118 ]]
+		-- upvalues: p0 (ref), var19 (ref)
 		if p0.isReportTabVisible then
-			var25.current = DateTime.now().UnixTimestampMillis
+			var19.current = DateTime.now().UnixTimestampMillis
 		end
 	end, { p0.isReportTabVisible })
 	
-	if fFlagAbuseReportInExpPlayerListV3 then
-		reactModule.useEffect(function() --[[ line: 157 ]]
-			-- upvalues: recentlyLeftSignalsModule (copy)
-			recentlyLeftSignalsModule.init()
-		end, {})
-	end
 	if fFlagAbuseReportInlineAlertStateOutsideReducerModule then
-		reactModule.useEffect(function() --[[ line: 163 ]]
-			-- upvalues: p0 (ref), var19 (write)
-			if not p0.isReportTabVisible and var19 then
-				var19(nil)
+		reactModule.useEffect(function() --[[ line: 125 ]]
+			-- upvalues: p0 (ref), var14 (write)
+			if not p0.isReportTabVisible and var14 then
+				var14(nil)
 			end
-		end, { p0.isReportTabVisible, var19 })
+		end, { p0.isReportTabVisible, var14 })
 	end
-	local var30
-	local var26 = useInExpCustomSubmit({
-		voiceChatServiceManager = p0.voiceChatServiceManager,
-		inExpChatMessagesLoader = p0.inExpChatMessagesLoader,
-		menuOpenTimeRef = var25,
-		reportAnythingSnapshotRef = p0.reportAnythingSnapshotRef
-	})
-	local var27 = reactModule.useCallback(function() --[[ line: 179 ]]
-		-- upvalues: setHasError (ref)
-		setHasError(true)
-	end, { setHasError })
-	local var28 = reactModule.useCallback(function(p1) --[[ line: 183 ]]
-		-- upvalues: sendBoundaryErrorTelemetryModule (copy), abuseVector (ref), var14 (ref), setHasError (ref)
-		warn("AbuseReportErrorBoundary (in-exp) caught:", p1)
-		sendBoundaryErrorTelemetryModule(p1, { abuse_vector = abuseVector, target_id = var14 })
-		setHasError(true)
-	end, { abuseVector, var14, setHasError })
-	local var29 = if fFlagAbuseReportInlineAlertStateOutsideReducerModule then reactModule.useMemo(function() --[[ line: 194 ]]
-		-- upvalues: var19 (write), var18 (write)
-		return if var19 then { pendingInlineAlert = var18, setInlineAlert = var19 } else nil
-	end, { var18, var19 }) else nil
-	
-	if var23 then
-		return reactModule.createElement(dynamicReportV2InExpLoadingModule, { shouldUseOverlaidControls = var22 })
-	elseif p0.isReportTabVisible and hasError then
-		return reactModule.createElement(dynamicReportV2InExpErrorModule, nil)
-	elseif p0.isReportTabVisible and config and not hasError then
-		var30 = reactModule.createElement
-		var30 = var30(abuseReportErrorBoundaryModule, { onError = var28 }, {
-			AbuseReportContentInExp = reactModule.createElement(abuseReportContentInExpModule, {
-				rawConfig = config,
-				abuseVector = abuseVector,
-				targetId = var14,
-				onClose = p0.onClose,
-				open = p0.isReportTabVisible,
-				onCustomSubmit = var26,
-				onFinish = p0.onReportFinish,
-				onResolveError = var27,
-				shouldUseOverlaidControls = var22,
-				loaders = var24,
-				attemptTrigger = if preselectedPlayer then "onOpen" else "onFirstAction",
-				inlineAlertController = var29,
-				voiceChatServiceManager = if fFlagAbuseReportInExpPlayerListV3 or fFlagAbuseReportVoiceMute then p0.voiceChatServiceManager else nil
-			})
+	return if p0.isReportTabVisible and hasError then reactModule.createElement(dynamicReportV2InExpErrorModule, nil) elseif p0.isReportTabVisible and config and not hasError then reactModule.createElement(abuseReportErrorBoundaryModule, {
+		onError = reactModule.useCallback(function(p1) --[[ line: 145 ]]
+			-- upvalues: sendBoundaryErrorTelemetryModule (copy), abuseVector (ref), var10 (ref), setHasError (ref)
+			warn("AbuseReportErrorBoundary (in-exp) caught:", p1)
+			sendBoundaryErrorTelemetryModule(p1, { abuse_vector = abuseVector, target_id = var10 })
+			setHasError(true)
+		end, { abuseVector, var10, setHasError })
+	}, {
+		AbuseReportContentInExp = reactModule.createElement(abuseReportContentInExpModule, {
+			rawConfig = config,
+			abuseVector = abuseVector,
+			targetId = var10,
+			onClose = p0.onClose,
+			open = p0.isReportTabVisible,
+			onCustomSubmit = useInExpCustomSubmit({
+				voiceChatServiceManager = p0.voiceChatServiceManager,
+				inExpChatMessagesLoader = p0.inExpChatMessagesLoader,
+				menuOpenTimeRef = var19,
+				reportAnythingSnapshotRef = p0.reportAnythingSnapshotRef
+			}),
+			onFinish = p0.onReportFinish,
+			onResolveError = reactModule.useCallback(function() --[[ line: 141 ]]
+				-- upvalues: setHasError (ref)
+				setHasError(true)
+			end, { setHasError }),
+			shouldUseOverlaidControls = var17,
+			loaders = var18,
+			attemptTrigger = if preselectedPlayer then "onOpen" else "onFirstAction",
+			inlineAlertController = if fFlagAbuseReportInlineAlertStateOutsideReducerModule then reactModule.useMemo(function() --[[ line: 156 ]]
+				-- upvalues: var14 (write), var13 (write)
+				return if var14 then { pendingInlineAlert = var13, setInlineAlert = var14 } else nil
+			end, { var13, var14 }) else nil
 		})
-	else
-		var30 = nil
-	end
-	return var30
+	}) else nil
 end)

@@ -8,7 +8,7 @@ local fFlagEnableVerifiedBadgeStore = require(parent.SharedFlags).FFlagEnableVer
 local enableInExpChatRewriteEngineFeature = game:GetEngineFeature("EnableInExpChatRewrite")
 local fFlagExpChatRewriteInlineModule = require(expChat.Flags.FFlagExpChatRewriteInline)
 
-return function(p0) --[[ line: 34 | named "createMessageChildren" ]]
+return function(p0) --[[ line: 40 | named "createMessageChildren" ]]
 	-- upvalues: dictionary (ref), fFlagEnableVerifiedBadgeStore (ref), var3 (ref), reactModule (ref), translatedTextMessageModule (ref), enableInExpChatRewriteEngineFeature (ref), fFlagExpChatRewriteInlineModule (ref)
 	local messages = p0.messages
 	local verifiedUserIds = p0.verifiedUserIds
@@ -18,7 +18,7 @@ return function(p0) --[[ line: 34 | named "createMessageChildren" ]]
 	local showTranslationButton = p0.showTranslationButton
 	local isSpatialUIEnabled = p0.isSpatialUIEnabled
 	local onTextMessageLabelButtonActivated = p0.onTextMessageLabelButtonActivated
-	local var6 = dictionary.map(messages, function(p1, p2) --[[ line: 44 ]]
+	local var6 = dictionary.map(messages, function(p1, p2) --[[ line: 50 ]]
 		-- upvalues: fFlagEnableVerifiedBadgeStore (copy), var3 (copy), dictionary (copy), verifiedUserIds (ref), reactModule (copy), translatedTextMessageModule (copy), textTransparency (ref), enableInExpChatRewriteEngineFeature (copy), transparencyValue (ref), onTextMessageLabelButtonActivated (ref), chatWindowSettings (ref), showTranslationButton (ref), isSpatialUIEnabled (ref), fFlagExpChatRewriteInlineModule (copy)
 		if p1.isVisibleInChatWindow then
 			return reactModule.createElement(translatedTextMessageModule, {
@@ -31,7 +31,7 @@ return function(p0) --[[ line: 34 | named "createMessageChildren" ]]
 				chatWindowSettings = chatWindowSettings,
 				showTranslationButton = showTranslationButton,
 				isSpatialUIEnabled = isSpatialUIEnabled,
-				onToggle = function() --[[ line: 64 ]] end,
+				onToggle = function() --[[ line: 70 ]] end,
 				chatWindowTransparencyBindable = if fFlagExpChatRewriteInlineModule then transparencyValue else nil
 			}), p1.messageId
 		end

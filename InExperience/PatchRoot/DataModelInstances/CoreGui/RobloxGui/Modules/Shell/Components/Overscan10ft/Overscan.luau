@@ -2,28 +2,31 @@
 local modules = game:GetService("CoreGui").RobloxGui.Modules
 local reactModule = require(corePackagesService.Packages.React)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local fFlagRenameDeprecatedUIBloxTokens = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local buttonStack = UIBloxModule.App.Button.ButtonStack
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local useDesignTokens = require(corePackagesService.Workspace.Packages.Style).useDesignTokens
 local useStyle = UIBloxModule.Core.Style.useStyle
 local globalSettingsModule = require(modules.Shell.GlobalSettings)
 local localizedStringsModule = require(modules.Shell.LocalizedStrings)
+local fFlagAppShellMigrateLocales = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAppShellMigrateLocales
 local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
 local useNavigation = require(corePackagesService.Workspace.Packages.Navigation).useNavigation
 local controllerHintModule = require(modules.Shell.Components.Overscan.ControllerHint)
 local edgesModule = require(script.Parent.Edges)
 
-return function(p0) --[[ line: 27 | named "Overscan" ]]
-	-- upvalues: useNavigation (ref), useLocalization (ref), useDesignTokens (ref), useStyle (ref), reactModule (ref), globalSettingsModule (ref), localizedStringsModule (ref), controllerHintModule (ref), buttonStack (ref), buttonType (ref), edgesModule (ref)
+return function(p0) --[[ line: 30 | named "Overscan" ]]
+	-- upvalues: useNavigation (ref), useLocalization (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), useStyle (ref), reactModule (ref), globalSettingsModule (ref), fFlagAppShellMigrateLocales (ref), localizedStringsModule (ref), controllerHintModule (ref), buttonStack (ref), buttonType (ref), edgesModule (ref)
 	local onUnmount = p0.onUnmount or useNavigation().goBack
 	local var8 = useLocalization({
 		accept = "CommonUI.Controls.Action.Accept",
 		cancel = "CommonUI.Controls.Action.Cancel"
 	})
-	local var9 = useDesignTokens(function(p1) --[[ line: 37 ]]
+	local var9 = useDesignTokens(function(p1) --[[ line: 40 ]]
+		-- upvalues: fFlagRenameDeprecatedUIBloxTokens (copy)
 		return {
-			buttonHeight = p1.Size.Size_1200,
-			marginBetween = p1.Size.Size_300
+			buttonHeight = if fFlagRenameDeprecatedUIBloxTokens then p1.Size.Size_1200 else p1.Global.Size_600,
+			marginBetween = if fFlagRenameDeprecatedUIBloxTokens then p1.Size.Size_300 else p1.Global.Space_150
 		}
 	end)
 	local var10 = useStyle()
@@ -50,7 +53,7 @@ return function(p0) --[[ line: 27 | named "Overscan" ]]
 			FontSize = globalSettingsModule.HeaderSize,
 			TextColor3 = globalSettingsModule.WhiteTextColor,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Text = localizedStringsModule:LocStringUA("Xbox.Old.ScreenSizeWord")
+			Text = if fFlagAppShellMigrateLocales then localizedStringsModule:LocStringUA("Xbox.Old.ScreenSizeWord") else localizedStringsModule:LocalizedString("ScreenSizeWord")
 		}),
 		Prompt = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
@@ -59,7 +62,7 @@ return function(p0) --[[ line: 27 | named "Overscan" ]]
 			FontSize = globalSettingsModule.ButtonSize,
 			TextColor3 = globalSettingsModule.WhiteTextColor,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Text = localizedStringsModule:LocStringUA("Xbox.Old.ResizeScreenPrompt")
+			Text = if fFlagAppShellMigrateLocales then localizedStringsModule:LocStringUA("Xbox.Old.ResizeScreenPrompt") else localizedStringsModule:LocalizedString("ResizeScreenPrompt")
 		}),
 		Controller = reactModule.createElement(controllerHintModule),
 		Actions = reactModule.createElement("Frame", {
@@ -85,7 +88,7 @@ return function(p0) --[[ line: 27 | named "Overscan" ]]
 						props = {
 							text = var8.accept,
 							fontStyle = var10.Font.Header1,
-							onActivated = function() --[[ line: 108 ]]
+							onActivated = function() --[[ line: 115 ]]
 								-- upvalues: var11 (ref)
 								if var11.current then
 									var11.current.onAccept()

@@ -40,7 +40,6 @@
 		AddTrustedConnection = "AddTrustedConnection",
 		SendTransfer = "SendTransfer",
 		ReceiveTransfer = "ReceiveTransfer",
-		LiftRestriction = "LiftRestriction",
 		Unknown = "Unknown"
 	},
 	IDVStep = {

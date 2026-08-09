@@ -62,7 +62,6 @@ return function() --[[ line: 16 | named "createGameMediaStore" ]]
 	return {
 		getAndFetchGameMedia = var5.getAndFetchItem,
 		getGameMedia = var5.getCachedItem,
-		fetchGameMedia = var5.fetchItem,
 		clear = var5.clear,
 		dispose = var5.dispose
 	}

@@ -5,9 +5,9 @@ local getPropBuilderModule = require(sduiCoreSystem.ClientBinding.PropBuilder.ge
 local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
 local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
 local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
+local fFlagSduiLocalizedLiterals = require(parent.SharedFlags).FFlagSduiLocalizedLiterals
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
-local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 
 local function _(p0, p1) --[[ line: 17 | named "getLocalizedLiteralResolver" ]]
 	-- upvalues: sduiLoggerModule (ref), sduiErrorsModule (ref)
@@ -33,37 +33,42 @@ local function _(p0, p1) --[[ line: 17 | named "getLocalizedLiteralResolver" ]]
 end
 
 return function(p3) --[[ line: 50 | named "createBuilderConfig" ]]
-	-- upvalues: getPropBuilderModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref)
+	-- upvalues: getPropBuilderModule (ref), fFlagSduiLocalizedLiterals (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref)
 	local t = {
 		appPage = p3.appPage,
 		debugName = p3.debugName,
 		getTemplateForRobloxComponent = p3.getTemplateForRobloxComponent,
 		getPropBuilder = getPropBuilderModule
 	}
-	local localizedLiterals = p3.localizedLiterals
-	local appPage = p3.appPage
 	
-	function t.resolveLocalizedLiteral(p4) --[[ line: 18 ]]
-		-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), appPage (ref), localizedLiterals (ref)
-		if typeof(p4) ~= "table" or not p4.map_key then
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
-				message = `Invalid translationRef: expected table with map_key, got {typeof(p4)}`
-			}, appPage)
-			
-			return nil
-		end
-		local mapKey = p4.map_key
-		local var4 = localizedLiterals and localizedLiterals[mapKey]
+	if fFlagSduiLocalizedLiterals then
+		local localizedLiterals = p3.localizedLiterals
+		local appPage = p3.appPage
 		
-		if var4 == nil then
-			sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
-				message = `Could not find localized literal for mapKey: {tostring(mapKey)}, namespace: {p4.namespace}, key: {p4.key}`
-			}, appPage)
+		local var6 = function(p4) --[[ line: 18 ]]
+			-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), appPage (ref), localizedLiterals (ref)
+			if typeof(p4) ~= "table" or not p4.map_key then
+				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
+					message = `Invalid translationRef: expected table with map_key, got {typeof(p4)}`
+				}, appPage)
+				
+				return nil
+			end
+			local mapKey = p4.map_key
+			local var4 = localizedLiterals and localizedLiterals[mapKey]
+			
+			if var4 == nil then
+				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.FailedToResolveLocalizedLiteral, {
+					message = `Could not find localized literal for mapKey: {tostring(mapKey)}, namespace: {p4.namespace}, key: {p4.key}`
+				}, appPage)
+			end
+			return var4
 		end
-		return var4
+	else
+		local var6 = nil
 	end
-	
-	t.configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter then p3.configKey else nil
+	t.resolveLocalizedLiteral = var6
+	t.configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p3.configKey else nil
 	
 	return t
 end

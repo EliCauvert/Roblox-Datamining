@@ -1,12 +1,9 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
+﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
 local foundationModule = require(parent.Foundation)
 local markdownModule = require(parent.Markdown)
 local reactModule = require(parent.React)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local agentCardModule = require(script.Parent.AgentCard)
 local agentCardActionsModule = require(script.Parent.AgentCardActions)
-local getMarkdownRendererPropsModule = require(buildExperience.utils.getMarkdownRendererProps)
 local button = foundationModule.Button
 local sheet = foundationModule.Sheet
 local text = foundationModule.Text
@@ -16,10 +13,9 @@ local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 local markdownViewer = markdownModule.Components.MarkdownViewer
 
-local function AgentPlanSheet(p0) --[[ line: 42 ]]
-	-- upvalues: foundationModule (ref), reactModule (ref), getMarkdownRendererPropsModule (ref), sheet (ref), text (ref), view (ref), localizationStringsModule (ref), markdownViewer (ref)
-	local var9 = foundationModule.Hooks.useTokens()
-	local default = var9.Color.Content.Default
+local function AgentPlanSheet(p0) --[[ line: 44 ]]
+	-- upvalues: foundationModule (ref), reactModule (ref), sheet (ref), text (ref), view (ref), markdownViewer (ref)
+	local default = foundationModule.Hooks.useTokens().Color.Content.Default
 	
 	return reactModule.createElement(sheet.Root, {
 		defaultSnapPointIndex = 1,
@@ -28,21 +24,21 @@ local function AgentPlanSheet(p0) --[[ line: 42 ]]
 		snapPoints = { 0.5, 1 },
 		testId = p0.testId
 	}, {
-		Header = reactModule.createElement(sheet.Header, nil, {
+		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				tag = "size-full-0 auto-y margin-x-small padding-y-small text-heading-small text-wrap text-align-x-left content-emphasis",
+				tag = "gap-xsmall size-full-0 auto-y margin-x-small text-heading-small text-wrap text-align-x-left content-emphasis",
 				Text = p0.title
 			})
 		}),
 		Content = reactModule.createElement(sheet.Content, nil, {
 			OverviewAndBody = reactModule.createElement(view, {
-				tag = "col gap-xsmall size-full-0 auto-y margin-x-small padding-bottom-large"
+				tag = "col gap-large size-full-0 auto-y margin-x-small padding-bottom-large"
 			}, {
 				Overview = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-default",
-					Text = localizationStringsModule.AGENT_PLAN_OVERVIEW
+					Text = "Overview",
+					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-default"
 				}),
 				Body = reactModule.createElement(markdownViewer, {
 					Markdown = p0.textContent,
@@ -51,20 +47,22 @@ local function AgentPlanSheet(p0) --[[ line: 42 ]]
 						tag = "size-full-0 auto-y text-body-medium content-emphasis",
 						testId = `{p0.testId}-text-content`
 					},
-					MarkdownRendererProps = reactModule.useMemo(function() --[[ line: 45 ]]
-						-- upvalues: getMarkdownRendererPropsModule (copy), var9 (ref), default (ref)
-						return getMarkdownRendererPropsModule(var9, default)
-					end, { var9, default })
+					MarkdownRendererProps = {
+						textStyles = {
+							color = `#{default.Color3:ToHex()}`,
+							transparency = default.Transparency
+						}
+					}
 				})
 			})
 		})
 	})
 end
 
-return function(p1) --[[ line: 91 | named "AgentPlanCard" ]]
-	-- upvalues: reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), localizationStringsModule (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
+return function(p1) --[[ line: 97 | named "AgentPlanCard" ]]
+	-- upvalues: reactModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
 	local testId = p1.testId or "agent-plan-card"
-	local var11, var12 = reactModule.useState(false)
+	local var7, var8 = reactModule.useState(false)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Card = reactModule.createElement(agentCardModule, {
@@ -76,12 +74,12 @@ return function(p1) --[[ line: 91 | named "AgentPlanCard" ]]
 			Actions = reactModule.createElement(agentCardActionsModule, nil, {
 				Build = reactModule.createElement(button, {
 					LayoutOrder = 1,
-					text = localizationStringsModule.AGENT_PLAN_BUILD,
+					text = "Build",
 					size = inputSize.Small,
-					variant = buttonVariant.Emphasis,
+					variant = buttonVariant.SoftEmphasis,
 					fillBehavior = fillBehavior.Fill,
 					isDisabled = p1.isBuildDisabled == true,
-					onActivated = reactModule.useCallback(function() --[[ line: 95 ]]
+					onActivated = reactModule.useCallback(function() --[[ line: 101 ]]
 						-- upvalues: p1 (ref)
 						if p1.isBuildDisabled == true then
 							return
@@ -92,13 +90,13 @@ return function(p1) --[[ line: 91 | named "AgentPlanCard" ]]
 				}),
 				View = reactModule.createElement(button, {
 					LayoutOrder = 2,
-					text = localizationStringsModule.AGENT_PLAN_VIEW,
+					text = "View",
 					size = inputSize.Small,
 					variant = buttonVariant.Standard,
 					fillBehavior = fillBehavior.Fill,
-					onActivated = reactModule.useCallback(function() --[[ line: 102 ]]
-						-- upvalues: var12 (ref)
-						var12(true)
+					onActivated = reactModule.useCallback(function() --[[ line: 108 ]]
+						-- upvalues: var8 (ref)
+						var8(true)
 					end, {}),
 					testId = `{testId}-view-button`
 				})
@@ -107,10 +105,10 @@ return function(p1) --[[ line: 91 | named "AgentPlanCard" ]]
 		Sheet = reactModule.createElement(AgentPlanSheet, {
 			title = p1.title,
 			textContent = p1.textContent,
-			isOpen = var11,
-			onClose = reactModule.useCallback(function() --[[ line: 106 ]]
-				-- upvalues: var12 (ref)
-				var12(false)
+			isOpen = var7,
+			onClose = reactModule.useCallback(function() --[[ line: 112 ]]
+				-- upvalues: var8 (ref)
+				var8(false)
 			end, {}),
 			testId = `{testId}-sheet`
 		})

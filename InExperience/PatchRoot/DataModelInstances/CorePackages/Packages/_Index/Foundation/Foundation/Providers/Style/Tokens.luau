@@ -1,8 +1,8 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local rbxDesignFoundationsModule = require(foundation.Parent.RbxDesignFoundations)
-local colorModeModule = require(foundation.Enums.ColorMode)
 local deviceModule = require(foundation.Enums.Device)
 local flagsModule = require(foundation.Utility.Flags)
+local themeModule = require(foundation.Enums.Theme)
 local tokenProcessingUtilitiesModule = require(script.TokenProcessingUtilities)
 local _ = require(foundation.Components.Types)
 
@@ -32,7 +32,7 @@ local function applyTokenOverrides(p2, p3) --[[ line: 35 ]]
 end
 
 local function getTokens(p4, p5, p6, p7) --[[ line: 50 ]]
-	-- upvalues: rbxDesignFoundationsModule (ref), deviceModule (ref), flagsModule (ref), colorModeModule (ref), applyTokenOverrides (ref)
+	-- upvalues: rbxDesignFoundationsModule (ref), deviceModule (ref), flagsModule (ref), themeModule (ref), applyTokenOverrides (ref)
 	local var11
 	local tokens = rbxDesignFoundationsModule.Tokens
 	p5 = p5 or deviceModule.Desktop
@@ -44,7 +44,7 @@ local function getTokens(p4, p5, p6, p7) --[[ line: 50 ]]
 		var10 = 1
 	end
 	var11 = (if p5 == deviceModule.Console then 1.5 else 1) * math.clamp(var10, 0, 1e999)
-	local var12 = (if p4 == colorModeModule.Dark then tokens.Dark else tokens.Light)(var11)
+	local var12 = (if p4 == themeModule.Dark then tokens.Dark else tokens.Light)(var11)
 	local t = {
 		Color = var12.Color,
 		Config = var12.Config,
@@ -75,5 +75,5 @@ end
 
 return {
 	getTokens = getTokens,
-	defaultTokens = getTokens(colorModeModule.Dark, deviceModule.Desktop)
+	defaultTokens = getTokens(themeModule.Dark, deviceModule.Desktop)
 }

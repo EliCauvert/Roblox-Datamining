@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("RobloxPlusFAEFreeTrial", false)
+﻿return game:DefineFastFlag("RobloxPlusFAEFreeTrial_DEV", false)

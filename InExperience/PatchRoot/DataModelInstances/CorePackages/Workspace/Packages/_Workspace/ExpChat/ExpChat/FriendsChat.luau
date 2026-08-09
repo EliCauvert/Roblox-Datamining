@@ -1,0 +1,1 @@
+﻿return { FriendsChatMain = require(script.FriendsChatMain) }

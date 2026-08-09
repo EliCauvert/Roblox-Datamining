@@ -12,17 +12,16 @@ local openTypeSupport = UIBloxModule.Utility.OpenTypeSupport
 local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local useLocalUserInfoModule = require(profileQRCode.Utils.useLocalUserInfo)
 local useStyle = UIBloxModule.Core.Style.useStyle
-local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 local displayQRCode = QRCodeDisplayModule.DisplayQRCode
 local getStandardSizeAvatarHeadShotRbxthumb = userLibModule.Utils.getStandardSizeAvatarHeadShotRbxthumb
 local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local dropshadow568 = images["component_assets/dropshadow_56_8"]
 
-return function(p0) --[[ line: 40 ]]
-	-- upvalues: useLocalUserId (ref), useLocalUserInfoModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), reactModule (ref), lightTheme (ref), displayQRCode (ref), QRCodeDisplayModule (ref), imageSetLabel (ref), dropshadow568 (ref), styledTextLabel (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
-	local var7 = useLocalUserId()
-	local var8 = useLocalUserInfoModule(var7)
-	local var9 = useStyle()
+return function(p0) --[[ line: 38 ]]
+	-- upvalues: useLocalUserId (ref), useLocalUserInfoModule (ref), useStyle (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), reactModule (ref), lightTheme (ref), displayQRCode (ref), QRCodeDisplayModule (ref), imageSetLabel (ref), dropshadow568 (ref), styledTextLabel (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
+	local var6 = useLocalUserId()
+	local var7 = useLocalUserInfoModule(var6)
+	local var8 = useStyle()
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -77,7 +76,7 @@ return function(p0) --[[ line: 40 ]]
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						BackgroundColor3 = lightTheme.BackgroundUIDefault.Color,
 						BackgroundTransparency = lightTheme.BackgroundUIDefault.Transparency,
-						Image = if var7 then getStandardSizeAvatarHeadShotRbxthumb(var7) else nil,
+						Image = if var6 then getStandardSizeAvatarHeadShotRbxthumb(var6) else nil,
 						Position = UDim2.fromScale(0.5, 0.5),
 						Size = UDim2.fromOffset(60, 60)
 					})
@@ -97,8 +96,8 @@ return function(p0) --[[ line: 40 ]]
 				Image = dropshadow568,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(28, 28, 29, 29),
-				ImageColor3 = var9.Theme.DropShadow.Color,
-				ImageTransparency = var9.Theme.DropShadow.Transparency
+				ImageColor3 = var8.Theme.DropShadow.Color,
+				ImageTransparency = var8.Theme.DropShadow.Transparency
 			})
 		}),
 		Spacer1 = reactModule.createElement("Frame", {
@@ -112,8 +111,8 @@ return function(p0) --[[ line: 40 ]]
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			text = var8.displayName,
-			fontStyle = var9.Font.SubHeader1,
+			text = var7.displayName,
+			fontStyle = var8.Font.SubHeader1,
 			colorStyle = lightTheme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.Y,
 			textTruncate = Enum.TextTruncate.AtEnd,
@@ -127,8 +126,8 @@ return function(p0) --[[ line: 40 ]]
 			fluidSizing = false,
 			richText = false,
 			size = UDim2.new(1, 0, 0, 0),
-			text = "@" .. (if fFlagProfileQrCodeDeprecateUserReduxModule then var8.username or "" else var8.username),
-			fontStyle = var9.Font.CaptionBody,
+			text = "@" .. var7.username,
+			fontStyle = var8.Font.CaptionBody,
 			automaticSize = Enum.AutomaticSize.Y,
 			colorStyle = lightTheme.TextEmphasis,
 			textTruncate = Enum.TextTruncate.AtEnd,

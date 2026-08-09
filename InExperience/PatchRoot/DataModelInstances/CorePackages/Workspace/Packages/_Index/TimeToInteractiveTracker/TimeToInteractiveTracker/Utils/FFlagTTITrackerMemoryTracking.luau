@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("TTITrackerMemoryTracking3", false)
+﻿return game:DefineFastFlag("TTITrackerMemoryTracking", false)

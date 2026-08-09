@@ -12,11 +12,11 @@ local presenceStorePollingTtlSec = game:DefineFastInt("PresenceStorePollingTtlSe
 local RTEPresenceStorePollingTtlSec = game:DefineFastInt("RTEPresenceStorePollingTtlSec", 0)
 game:DefineFastInt("PresenceStoreProcessDelaySec", 1)
 
-local function _() --[[ line: 48 | named "getFIntPresenceStoreProcessDelaySec" ]]
+local function _() --[[ line: 47 | named "getFIntPresenceStoreProcessDelaySec" ]]
 	return game:GetFastInt("PresenceStoreProcessDelaySec")
 end
 
-return function() --[[ line: 52 | named "createPresenceStore" ]]
+return function() --[[ line: 51 | named "createPresenceStore" ]]
 	-- upvalues: createDataCacheModule (ref), presenceStorePollingTtlSec (ref), RTEPresenceStorePollingTtlSec (ref), createDataResolverModule (ref), cryoModule (ref), requestsModule (ref), normalizePresenceRawDataModule (ref), signalsModule (ref)
 	local var9 = createDataCacheModule(presenceStorePollingTtlSec)
 	local var10 = createDataCacheModule(if RTEPresenceStorePollingTtlSec > 0 then RTEPresenceStorePollingTtlSec else 1e999)
@@ -25,9 +25,9 @@ return function() --[[ line: 52 | named "createPresenceStore" ]]
 	local var13 = createDataResolverModule({
 		cache = var9,
 		queueProcessDelaySec = game:GetFastInt("PresenceStoreProcessDelaySec"),
-		fetchFn = function(p0) --[[ line: 86 ]]
+		fetchFn = function(p0) --[[ line: 85 ]]
 			-- upvalues: cryoModule (copy), requestsModule (copy), normalizePresenceRawDataModule (copy)
-			return requestsModule.MultiGetPresenceByUserIds(cryoModule.Dictionary.keys(p0)):andThen(function(p1) --[[ line: 88 ]]
+			return requestsModule.MultiGetPresenceByUserIds(cryoModule.Dictionary.keys(p0)):andThen(function(p1) --[[ line: 87 ]]
 				-- upvalues: normalizePresenceRawDataModule (copy)
 				local userPresences
 				local t = {}
@@ -47,7 +47,7 @@ return function() --[[ line: 52 | named "createPresenceStore" ]]
 		end
 	})
 	
-	local function _() --[[ line: 143 | named "disposeLockAwarePresenceEffects" ]]
+	local function _() --[[ line: 138 | named "disposeLockAwarePresenceEffects" ]]
 		-- upvalues: t_1 (ref)
 		for i, v in t_1 do
 			v()
@@ -56,12 +56,12 @@ return function() --[[ line: 52 | named "createPresenceStore" ]]
 	end
 	
 	return {
-		GetPresenceByUserId = function(p2, p3) --[[ line: 106 ]]
+		GetPresenceByUserId = function(p2, p3) --[[ line: 105 ]]
 			-- upvalues: var13 (ref), t_1 (ref), signalsModule (copy), var10 (ref)
 			if p3 and p3.skipFetch == true then
 				return var13.getCachedItem(p2)
 			elseif t_1[p2] == nil then
-				t_1[p2] = signalsModule.createEffect(function(p4) --[[ line: 112 ]]
+				t_1[p2] = signalsModule.createEffect(function(p4) --[[ line: 111 ]]
 					-- upvalues: var10 (copy), p2 (ref), var13 (copy)
 					local item, _ = var10.getItem(p2)
 					
@@ -73,18 +73,14 @@ return function() --[[ line: 52 | named "createPresenceStore" ]]
 			end
 			return var13.getCachedItem(p2)
 		end,
-		UpdateUserPresence = function(p5, p6, p7) --[[ line: 127 ]]
+		UpdateUserPresence = function(p5, p6, p7) --[[ line: 126 ]]
 			-- upvalues: var9 (ref), var10 (ref), t (ref)
 			var9.replaceItem(p5, p6)
 			local var18 = if p7 then true else false
 			var10.replaceItem(p5, var18)
 			t[p5] = var18
 		end,
-		RefreshPresenceByUserId = function(p8) --[[ line: 139 ]]
-			-- upvalues: var13 (ref)
-			var13.fetchItem(p8)
-		end,
-		clear = function() --[[ line: 150 ]]
+		clear = function() --[[ line: 145 ]]
 			-- upvalues: t_1 (ref), var10 (ref), var13 (ref)
 			for i, v in t_1 do
 				v()
@@ -93,7 +89,7 @@ return function() --[[ line: 52 | named "createPresenceStore" ]]
 			var10.clear()
 			var13.clear()
 		end,
-		dispose = function() --[[ line: 156 ]]
+		dispose = function() --[[ line: 151 ]]
 			-- upvalues: t_1 (ref), var10 (ref), var13 (ref)
 			for i, v in t_1 do
 				v()

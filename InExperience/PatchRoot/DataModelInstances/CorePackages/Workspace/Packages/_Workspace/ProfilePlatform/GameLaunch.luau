@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GameLaunch.GameLaunch)
+﻿return require(script.Parent.Parent.Parent._Workspace.GameLaunch.GameLaunch)

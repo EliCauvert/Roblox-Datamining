@@ -18,6 +18,7 @@ local parseUDim2Prop = sduiParsers.parseUDim2Prop_
 local parseUiComponentProp = sduiParsers.parseUiComponentProp_
 local parseVector2Prop = sduiParsers.parseVector2Prop_
 local getLuaTableEnumParser = sduiParsers.getLuaTableEnumParser
+local fFlagLuaAppSduiBadgeDetailsComponents = require(parent.SharedFlags).FFlagLuaAppSduiBadgeDetailsComponents
 local fFlagSduiCardComponent = require(parent.SharedFlags).FFlagSduiCardComponent
 local sduiCoachmarkComponent = game:DefineFastFlag("SduiCoachmarkComponent", false)
 local luaAppEnableCustomAnalyticsEvent = game:DefineFastFlag("LuaAppEnableCustomAnalyticsEvent", false)
@@ -29,110 +30,110 @@ local fFlagLuaAppUnlockUpsellSupport = require(parent.SharedFlags).FFlagLuaAppUn
 local fFlagSduiDevStoreSeeAllSupport = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
 local fFlagSduiPlayWithReward = require(parent.SharedFlags).FFlagSduiPlayWithReward
 local fFlagSduiDismissPromptAction = require(parent.SharedFlags).FFlagSduiDismissPromptAction
+local fFlagLuaAppSduiVerificationUpsellActions = require(parent.SharedFlags).FFlagLuaAppSduiVerificationUpsellActions
 local fFlagSduiShimmerTextComponentEnabled = require(parent.SharedFlags).FFlagSduiShimmerTextComponentEnabled
 local fFlagSduiTooltipComponentEnabled = require(parent.SharedFlags).FFlagSduiTooltipComponentEnabled
 local fFlagLuaAppSduiPlaceholderSupport = require(parent.SharedFlags).FFlagLuaAppSduiPlaceholderSupport
+local fFlagSduiSkeletonComponentEnabled = require(parent.SharedFlags).FFlagSduiSkeletonComponentEnabled
 local fFlagSduiRevealTextComponentEnabled = require(parent.SharedFlags).FFlagSduiRevealTextComponentEnabled
 local fFlagSduiAiOverviewEnabled = require(parent.SharedFlags).FFlagSduiAiOverviewEnabled
-local fFlagSduiCollectionCarouselPlaceholderItem = require(parent.SharedFlags).FFlagSduiCollectionCarouselPlaceholderItem
-local fFlagSduiShowToastAction = require(parent.SharedFlags).FFlagSduiShowToastAction
 
-local function registerSharedActions() --[[ line: 52 ]]
-	-- upvalues: sduiActionType (ref), fFlagSduiChartsSupport (ref), luaAppEnableCustomAnalyticsEvent (ref), sduiSharedContent (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDismissPromptAction (ref), fFlagSduiShowToastAction (ref), getSduiActionHandlerRegistry (ref)
+local function registerSharedActions() --[[ line: 53 ]]
+	-- upvalues: sduiActionType (ref), fFlagSduiChartsSupport (ref), luaAppEnableCustomAnalyticsEvent (ref), sduiSharedContent (ref), fFlagLuaAppSduiBadgeDetailsComponents (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiDismissPromptAction (ref), fFlagLuaAppSduiVerificationUpsellActions (ref), getSduiActionHandlerRegistry (ref)
 	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
 		[sduiActionType.CustomAnalyticsEvent] = if fFlagSduiChartsSupport or luaAppEnableCustomAnalyticsEvent then {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ line: 60 ]]
+			lazyHandler = function() --[[ line: 61 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiAnalyticsEventAction)
 			end
 		} else nil,
 		[sduiActionType.LoadMoreFromApi] = {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ line: 67 ]]
+			lazyHandler = function() --[[ line: 68 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiLoadMoreFromApi)
 			end
 		},
 		[sduiActionType.RefreshFromApi] = if fFlagSduiChartsSupport then {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ line: 74 ]]
+			lazyHandler = function() --[[ line: 75 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiRefreshFromApi)
 			end
 		} else nil,
-		[sduiActionType.Share] = {
+		[sduiActionType.Share] = if fFlagLuaAppSduiBadgeDetailsComponents then {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ line: 81 ]]
+			lazyHandler = function() --[[ line: 83 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiShareAction)
 			end
-		},
+		} else nil,
 		[sduiActionType.OpenSocialProofUserListSheet] = if fFlagSduiExperienceDetailsSupport then {
 			skipUnifiedLogging = true,
-			lazyHandler = function() --[[ line: 88 ]]
+			lazyHandler = function() --[[ line: 91 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiOpenSocialProofUserListSheetAction)
 			end
 		} else nil,
 		[sduiActionType.DismissPrompt] = if fFlagSduiDismissPromptAction then {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ line: 96 ]]
+			lazyHandler = function() --[[ line: 99 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Actions.SduiDismissPromptAction)
 			end
 		} else nil,
-		[sduiActionType.ShowToast] = if fFlagSduiShowToastAction then {
+		[sduiActionType.OpenFacialAgeEstimation] = if fFlagLuaAppSduiVerificationUpsellActions then {
 			skipUnifiedLogging = false,
-			lazyHandler = function() --[[ line: 104 ]]
+			lazyHandler = function() --[[ line: 107 ]]
 				-- upvalues: sduiSharedContent (copy)
-				return require(sduiSharedContent.Actions.SduiShowToastAction)
+				return require(sduiSharedContent.Actions.SduiOpenFacialAgeEstimationAction)
 			end
 		} else nil
 	})
 end
 
-local function registerSharedUiComponents() --[[ line: 114 ]]
-	-- upvalues: sduiComponentType (ref), sduiSharedContent (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiCardComponent (ref), sduiCoachmarkComponent (ref), fFlagSduiSystemBannerComponent (ref), fFlagLuaAppUnlockUpsellSupport (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseColorTokenProp (ref), parseVector2Prop (ref), parseIntegerProp (ref), parseUDim2Prop (ref), parseBooleanProp (ref), parseNumberProp (ref), parseStringProp (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiShimmerTextComponentEnabled (ref), fFlagSduiRevealTextComponentEnabled (ref), fFlagSduiPlayWithReward (ref), parseUiComponentProp (ref), parseCallbackProp (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiTooltipComponentEnabled (ref), fFlagSduiChartsSupport (ref), fFlagLuaAppSduiPlaceholderSupport (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiAiOverviewEnabled (ref), getSduiComponentRegistry (ref)
+local function registerSharedUiComponents() --[[ line: 117 ]]
+	-- upvalues: sduiComponentType (ref), fFlagLuaAppSduiBadgeDetailsComponents (ref), sduiSharedContent (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiCardComponent (ref), sduiCoachmarkComponent (ref), fFlagSduiSystemBannerComponent (ref), fFlagLuaAppUnlockUpsellSupport (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseColorTokenProp (ref), parseVector2Prop (ref), parseIntegerProp (ref), parseUDim2Prop (ref), parseBooleanProp (ref), parseNumberProp (ref), parseStringProp (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiShimmerTextComponentEnabled (ref), fFlagSduiRevealTextComponentEnabled (ref), fFlagSduiPlayWithReward (ref), parseUiComponentProp (ref), parseCallbackProp (ref), fFlagSduiDevStoreSeeAllSupport (ref), fFlagSduiTooltipComponentEnabled (ref), fFlagSduiChartsSupport (ref), fFlagLuaAppSduiPlaceholderSupport (ref), fFlagSduiSkeletonComponentEnabled (ref), fFlagSduiAiOverviewEnabled (ref), getSduiComponentRegistry (ref)
 	getSduiComponentRegistry().registerComponentDefinitions({
-		[sduiComponentType.DetailsPageImageHeader] = {
-			getLazyComponent = function() --[[ line: 117 ]]
+		[sduiComponentType.DetailsPageImageHeader] = if fFlagLuaAppSduiBadgeDetailsComponents then {
+			getLazyComponent = function() --[[ line: 121 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiDetailsPageImageHeader)
 			end
-		},
+		} else nil,
 		[sduiComponentType.AvatarGroup] = if fFlagSduiExperienceDetailsSupport then {
-			getLazyComponent = function() --[[ line: 123 ]]
+			getLazyComponent = function() --[[ line: 128 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiAvatarGroup)
 			end
 		} else nil,
 		[sduiComponentType.Card] = if fFlagSduiCardComponent then {
-			getLazyComponent = function() --[[ line: 130 ]]
+			getLazyComponent = function() --[[ line: 135 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiCard)
 			end
 		} else nil,
 		[sduiComponentType.Coachmark] = if sduiCoachmarkComponent then {
-			getLazyComponent = function() --[[ line: 137 ]]
+			getLazyComponent = function() --[[ line: 142 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiCoachmark)
 			end
 		} else nil,
 		[sduiComponentType.SystemBanner] = if fFlagSduiSystemBannerComponent then {
-			getLazyComponent = function() --[[ line: 144 ]]
+			getLazyComponent = function() --[[ line: 149 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiSystemBanner)
 			end
 		} else nil,
 		[sduiComponentType.CircleIcon] = if fFlagSduiExperienceDetailsSupport then {
-			getLazyComponent = function() --[[ line: 151 ]]
+			getLazyComponent = function() --[[ line: 156 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiCircleIcon)
 			end
 		} else nil,
 		[sduiComponentType.Icon] = if fFlagSduiExperienceDetailsSupport or fFlagLuaAppUnlockUpsellSupport then {
-			getLazyComponent = function() --[[ line: 158 ]]
+			getLazyComponent = function() --[[ line: 163 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiIcon)
 			end,
@@ -150,61 +151,61 @@ local function registerSharedUiComponents() --[[ line: 114 ]]
 			} else nil
 		} else nil,
 		[sduiComponentType.IconButton] = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then {
-			getLazyComponent = function() --[[ line: 180 ]]
+			getLazyComponent = function() --[[ line: 185 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiIconButton)
 			end
 		} else nil,
 		[sduiComponentType.LinkText] = if fFlagSduiExperienceDetailsSupport then {
-			getLazyComponent = function() --[[ line: 188 ]]
+			getLazyComponent = function() --[[ line: 193 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiLinkText)
 			end
 		} else nil,
 		[sduiComponentType.ShimmerText] = if fFlagSduiShimmerTextComponentEnabled then {
-			getLazyComponent = function() --[[ line: 195 ]]
+			getLazyComponent = function() --[[ line: 200 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiShimmerText)
 			end
 		} else nil,
 		[sduiComponentType.RevealText] = if fFlagSduiRevealTextComponentEnabled then {
-			getLazyComponent = function() --[[ line: 202 ]]
+			getLazyComponent = function() --[[ line: 207 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiRevealText)
 			end
 		} else nil,
 		[sduiComponentType.ContentRatingLabel] = if fFlagSduiExperienceDetailsSupport then {
-			getLazyComponent = function() --[[ line: 209 ]]
+			getLazyComponent = function() --[[ line: 214 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiContentRatingLabel)
 			end
 		} else nil,
 		[sduiComponentType.MediaGallery] = if fFlagSduiExperienceDetailsSupport then {
-			getLazyComponent = function() --[[ line: 216 ]]
+			getLazyComponent = function() --[[ line: 221 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiMediaGallery)
 			end
 		} else nil,
 		[sduiComponentType.ActionBar] = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then {
-			getLazyComponent = function() --[[ line: 223 ]]
+			getLazyComponent = function() --[[ line: 228 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiActionBar)
 			end
 		} else nil,
 		[sduiComponentType.PlayButtonContextualMessage] = if fFlagSduiExperienceDetailsSupport then {
-			getLazyComponent = function() --[[ line: 230 ]]
+			getLazyComponent = function() --[[ line: 235 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiPlayButtonContextualMessage)
 			end
 		} else nil,
 		[sduiComponentType.PlayWithReward] = if fFlagSduiPlayWithReward then {
-			getLazyComponent = function() --[[ line: 237 ]]
+			getLazyComponent = function() --[[ line: 242 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiPlayWithReward)
 			end
 		} else nil,
 		[sduiComponentType.ContentRow] = if fFlagSduiExperienceDetailsSupport or fFlagLuaAppUnlockUpsellSupport or fFlagSduiEventDetailsSupport then {
-			getLazyComponent = function() --[[ line: 246 ]]
+			getLazyComponent = function() --[[ line: 251 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiContentRow)
 			end,
@@ -224,47 +225,41 @@ local function registerSharedUiComponents() --[[ line: 114 ]]
 			} else nil
 		} else nil,
 		[sduiComponentType.SubscriptionCell] = if fFlagSduiDevStoreSeeAllSupport then {
-			getLazyComponent = function() --[[ line: 269 ]]
+			getLazyComponent = function() --[[ line: 274 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiSubscriptionCell)
 			end
 		} else nil,
 		[sduiComponentType.Tooltip] = if fFlagSduiTooltipComponentEnabled then {
-			getLazyComponent = function() --[[ line: 276 ]]
+			getLazyComponent = function() --[[ line: 281 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiTooltip)
 			end
 		} else nil,
 		[sduiComponentType.FilterPillsCarousel] = if fFlagSduiChartsSupport then {
-			getLazyComponent = function() --[[ line: 283 ]]
+			getLazyComponent = function() --[[ line: 288 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiFilterPillsCarousel)
 			end
 		} else nil,
 		[sduiComponentType.Placeholder] = if fFlagLuaAppSduiPlaceholderSupport then {
-			getLazyComponent = function() --[[ line: 290 ]]
+			getLazyComponent = function() --[[ line: 295 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiPlaceholder)
 			end
 		} else nil,
-		[sduiComponentType.PlaceholderTile] = if fFlagSduiCollectionCarouselPlaceholderItem then {
-			getLazyComponent = function() --[[ line: 297 ]]
-				-- upvalues: sduiSharedContent (copy)
-				return require(sduiSharedContent.Components.SduiPlaceholderTile)
-			end
-		} else nil,
 		[sduiComponentType.PlaceholderWrapper] = if fFlagLuaAppSduiPlaceholderSupport then {
-			getLazyComponent = function() --[[ line: 304 ]]
+			getLazyComponent = function() --[[ line: 302 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiPlaceholderWrapper)
 			end
 		} else nil,
-		[sduiComponentType.Skeleton] = {
-			getLazyComponent = function() --[[ line: 310 ]]
+		[sduiComponentType.Skeleton] = if fFlagSduiSkeletonComponentEnabled then {
+			getLazyComponent = function() --[[ line: 309 ]]
 				-- upvalues: sduiSharedContent (copy)
 				return require(sduiSharedContent.Components.SduiSkeleton)
 			end
-		},
+		} else nil,
 		[sduiComponentType.AiOverview] = if fFlagSduiAiOverviewEnabled then {
 			getLazyComponent = function() --[[ line: 316 ]]
 				-- upvalues: sduiSharedContent (copy)

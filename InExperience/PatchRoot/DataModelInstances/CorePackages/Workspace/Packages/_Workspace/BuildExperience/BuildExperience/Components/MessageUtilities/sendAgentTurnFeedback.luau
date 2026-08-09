@@ -6,10 +6,10 @@ local _ = require(script.Parent.FeedbackAction)
 local debug = creatorAgentChatModule.debug
 local t = {
 	eventName = "agentTurnFeedback",
-	description = "Fires when a user interacts with an agent turn (thumbs up, thumbs down, copy, or revert).",
-	backends = { "Points", "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("AgentTurnFeedbackEventThrottleHundredthsPercent", 0),
-	lastUpdated = { 2026, 7, 30 }
+	description = "Fires when a user reacts to an agent turn (thumbs up, thumbs down, or revert).",
+	backends = { "EventIngest" },
+	throttlingPercentage = game:DefineFastInt("AgentTurnFeedbackEventThrottleHundredthsPercent", 10000),
+	lastUpdated = { 2026, 6, 12 }
 }
 
 return function(p0, p1) --[[ line: 24 | named "sendAgentTurnFeedback" ]]
@@ -19,8 +19,7 @@ return function(p0, p1) --[[ line: 24 | named "sendAgentTurnFeedback" ]]
 		universeid = p1.universeId,
 		placeid = p1.placeId,
 		sessionid = p1.sessionId,
-		sequenceId = p1.sequenceId,
-		turnId = p1.turnId
+		sequenceId = p1.sequenceId
 	}
 	debug.log("info", "agent_turn_feedback sending event", { customFields = t_1 })
 	telemetryService:LogEvent(t, { standardizedFields = { "addUserId" }, customFields = t_1 })

@@ -107,7 +107,7 @@ return function(_) --[[ line: 46 | named "InsufficientBalanceSheet" ]]
 									if getFFlagCurrencyTransferFixBalanceReRenderModule() then
 										var22.current += 1
 										local current = var22.current
-										getBalanceAfterPurchaseWebviewModule(nil, var18.getNetworkImpl()):andThen(function(p0) --[[ line: 82 ]]
+										getBalanceAfterPurchaseWebviewModule():andThen(function(p0) --[[ line: 82 ]]
 											-- upvalues: var22 (copy), current (ref), var18 (copy), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
 											if var22.current ~= current then return end
 											var18.setRobuxBalanceAmount(p0)
@@ -132,7 +132,7 @@ return function(_) --[[ line: 46 | named "InsufficientBalanceSheet" ]]
 										
 										return
 									end
-									getBalanceRequestModule(nil, var18.getNetworkImpl()):andThen(function(p1) --[[ line: 98 ]]
+									getBalanceRequestModule():andThen(function(p1) --[[ line: 98 ]]
 										-- upvalues: var18 (copy), transferOrigination (copy), transferOriginationModule (copy), setTransferPromptStateModule (copy), promptStateModule (copy)
 										var18.setRobuxBalanceAmount(p1)
 										var18.setBalanceReceivedFromApi(true)

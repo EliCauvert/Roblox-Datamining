@@ -1,13 +1,8 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-
-if require(friendsLanding.Flags.FFlagFriendsLandingDeprecateUnusedMapToUsers) then
-	return nil
-end
-local dependenciesModule = require(friendsLanding.dependencies)
+﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
 local rodux = dependenciesModule.Rodux
 local llama = dependenciesModule.llama
 
-local var2 = function(p0, p1) --[[ line: 24 ]]
+local var1 = function(p0, p1) --[[ line: 17 ]]
 	-- upvalues: llama (ref)
 	local t = {}
 	
@@ -18,8 +13,8 @@ local var2 = function(p0, p1) --[[ line: 24 ]]
 end
 
 return rodux.createReducer({}, {
-	[dependenciesModule.FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3) --[[ line: 35 ]]
-		-- upvalues: var2 (ref)
-		return var2(p2, p3.responseBody.data)
+	[dependenciesModule.FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3) --[[ line: 28 ]]
+		-- upvalues: var1 (ref)
+		return var1(p2, p3.responseBody.data)
 	end
 })

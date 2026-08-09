@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFixOpenPurchasePromptForOffersGamepad", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagMarketplaceOffersRoot

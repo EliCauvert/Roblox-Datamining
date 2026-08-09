@@ -1,12 +1,11 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
+﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
 local t = inGameMenuDependenciesModule.t
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local withStyle = inGameMenuDependenciesModule.UIBlox.Core.Style.withStyle
 local parent = script.Parent.Parent
 local assetsModule = require(parent.Resources.Assets)
 local globalConfigModule = require(parent.GlobalConfig)
-local var4 = t.strictInterface({
+local var3 = t.strictInterface({
 	Size = t.optional(t.UDim2),
 	AnchorPoint = t.optional(t.UDim2),
 	CanvasSize = t.optional(t.UDim2),
@@ -14,29 +13,20 @@ local var4 = t.strictInterface({
 	[roact.Children] = t.optional(t.table)
 })
 
-return function(p0) --[[ line: 23 | named "PaddedScrollFrame" ]]
-	-- upvalues: globalConfigModule (ref), var4 (ref), withFoundationOrUIBloxStyle (ref), roact (ref), assetsModule (ref)
+return function(p0) --[[ line: 24 | named "PaddedScrollFrame" ]]
+	-- upvalues: globalConfigModule (ref), var3 (ref), withStyle (ref), roact (ref), assetsModule (ref)
 	if globalConfigModule.propValidation then
-		assert(var4(p0))
+		assert(var3(p0))
 	end
-	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 27 ]]
-		return {
-			Theme = {
-				UIEmphasis = {
-					Color = p1.Color.Shift.Shift_400.Color3,
-					Transparency = p1.Color.Shift.Shift_400.Transparency
-				}
-			}
-		}
-	end, function(p2) --[[ line: 33 ]]
+	return withStyle(function(p1) --[[ line: 28 ]]
 		-- upvalues: roact (copy), assetsModule (copy), p0 (ref)
 		return roact.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ClipsDescendants = false,
 			ScrollBarThickness = 12,
-			ScrollBarImageColor3 = p2.Theme.UIEmphasis.Color,
-			ScrollBarImageTransparency = p2.Theme.UIEmphasis.Transparency,
+			ScrollBarImageColor3 = p1.Theme.UIEmphasis.Color,
+			ScrollBarImageTransparency = p1.Theme.UIEmphasis.Transparency,
 			BottomImage = assetsModule.Images.ScrollBottom,
 			MidImage = assetsModule.Images.ScrollMid,
 			TopImage = assetsModule.Images.ScrollTop,

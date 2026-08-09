@@ -10,13 +10,12 @@ local checkbox = foundationModule.Checkbox
 local useTokens = foundationModule.Hooks.useTokens
 local inputSize = foundationModule.Enums.InputSize
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagProfileInspectAvatarBuyAllModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
 local _ = require(profilePlatform.Common.Types)
 local itemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
 
-return function(p0) --[[ line: 41 | named "CatalogItemRowCardContainer" ]]
-	-- upvalues: useTokens (ref), itemDisplayHelpersModule (ref), useLocalization (ref), reactModule (ref), view (ref), fFlagProfileInspectAvatarBuyAllModule (ref), checkbox (ref), inputSize (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), getPriceLineContent (ref)
-	local var5 = useTokens()
+return function(p0) --[[ line: 39 | named "CatalogItemRowCardContainer" ]]
+	-- upvalues: useTokens (ref), itemDisplayHelpersModule (ref), useLocalization (ref), reactModule (ref), view (ref), checkbox (ref), inputSize (ref), catalogRowItemCard (ref), itemCardThumbnail (ref), getPriceLineContent (ref)
+	local var4 = useTokens()
 	local asset = p0.asset
 	local id = asset.id
 	
@@ -25,13 +24,13 @@ return function(p0) --[[ line: 41 | named "CatalogItemRowCardContainer" ]]
 		Size = UDim2.new(1, 0, 0, p0.rowHeight),
 		LayoutOrder = p0.index
 	}, {
-		ItemCheckbox = if fFlagProfileInspectAvatarBuyAllModule then nil else reactModule.createElement(checkbox, {
+		ItemCheckbox = reactModule.createElement(checkbox, {
 			label = "",
 			LayoutOrder = 1,
 			isChecked = p0.isPurchasable and p0.isChecked,
 			isDisabled = not p0.isPurchasable,
 			size = inputSize.Small,
-			onActivated = function(_) --[[ line: 70 ]]
+			onActivated = function(_) --[[ line: 66 ]]
 				-- upvalues: p0 (ref), id (ref)
 				p0.onToggleItem(id)
 			end
@@ -52,11 +51,11 @@ return function(p0) --[[ line: 41 | named "CatalogItemRowCardContainer" ]]
 						count = asset.bundlePartsCount
 					}
 				} else {}).bundleParts,
-				priceLineContent = getPriceLineContent(asset, var5, p0.priceStatusLocalized, { isShopContext = true }),
+				priceLineContent = getPriceLineContent(asset, var4, p0.priceStatusLocalized, { isShopContext = true }),
 				headerSize = UDim2.fromOffset(p0.rowHeight, p0.rowHeight),
 				footerSize = UDim2.fromScale(0, 1),
 				footerAutomaticSize = Enum.AutomaticSize.X,
-				onActivated = function() --[[ line: 99 ]]
+				onActivated = function() --[[ line: 95 ]]
 					-- upvalues: p0 (ref), id (ref), asset (ref)
 					p0.openItemDetails(id, asset.itemType or "Asset", p0.index)
 				end

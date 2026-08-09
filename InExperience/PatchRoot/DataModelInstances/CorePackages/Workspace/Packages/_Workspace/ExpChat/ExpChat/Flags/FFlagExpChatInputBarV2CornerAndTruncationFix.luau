@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatInputBarV2CornerAndTruncationFix", false)

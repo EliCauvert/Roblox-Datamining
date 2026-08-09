@@ -30,7 +30,7 @@ return function(p0, p1) --[[ line: 20 | named "makeWrapWithProviders" ]]
 					}, {
 						ContextProvider = roactModule.createElement(capturesContextModule.Provider, { value = p5 }, {
 							Portal = roactModule.createElement(roactModule.Portal, { target = p4 }, var7(p7, {
-								FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { p6 })
+								FoundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, { p6 })
 							}))
 						})
 					})

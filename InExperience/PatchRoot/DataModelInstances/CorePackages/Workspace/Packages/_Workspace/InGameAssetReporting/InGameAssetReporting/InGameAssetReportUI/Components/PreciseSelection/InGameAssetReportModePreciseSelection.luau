@@ -25,11 +25,11 @@ local inGameAssetReportAnalyticsModule = require(inGameAssetReporting.InGameAsse
 local getHighlightModeVariantModule = require(inGameAssetReporting.Utility.getHighlightModeVariant)
 local preciseSelectionBugfixesEnabled = game:DefineFastFlag("PreciseSelectionBugfixesEnabled", false)
 local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
-local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
+local fFlagReportIPInfringement = require(parent.SharedFlags).FFlagReportIPInfringement
 local text = string.gsub(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:"), "https://www", "https://apis") .. "rights-management-api/rights/v1/snapshots"
 
 return function(p0) --[[ line: 57 ]]
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), setTimeout (ref), clearTimeout (ref), preciseSelectionBugfixesEnabled (ref), screenshotManager (ref), sceneAnalysisModule (ref), inGameAssetReportAnalyticsModule (ref), experienceStateCaptureService (ref), userInputService (ref), httpService (ref), text (ref), getHighlightModeVariantModule (ref), buildReportModule (ref), playersService (ref), withLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), reportPreciseSelectionPortraitHeaderFooterModule (ref), reportPreciseSelectionLandscapeHeaderModule (ref), inGameAssetReportSubmitDialogModule (ref), fFlagPrefillPreciseSelectionChoices (ref), inGameAssetReportCompleteModalModule (ref), inGameAssetReportIPInfringementModalModule (ref), inGameAssetIPInfringementErrorModalModule (ref)
+	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), setTimeout (ref), clearTimeout (ref), preciseSelectionBugfixesEnabled (ref), screenshotManager (ref), sceneAnalysisModule (ref), inGameAssetReportAnalyticsModule (ref), experienceStateCaptureService (ref), userInputService (ref), fFlagReportIPInfringement (ref), httpService (ref), text (ref), getHighlightModeVariantModule (ref), buildReportModule (ref), playersService (ref), withLocalization (ref), reportPreciseSelectionPortraitHeaderFooterModule (ref), reportPreciseSelectionLandscapeHeaderModule (ref), inGameAssetReportSubmitDialogModule (ref), fFlagPrefillPreciseSelectionChoices (ref), inGameAssetReportCompleteModalModule (ref), inGameAssetReportIPInfringementModalModule (ref), inGameAssetIPInfringementErrorModalModule (ref)
 	local var22, var23 = reactModule.useState(false)
 	local var24, var25 = reactModule.useState(false)
 	local var26, var27 = reactModule.useState(false)
@@ -130,8 +130,8 @@ return function(p0) --[[ line: 57 ]]
 		var41, var39, var54, var31, var35, var53
 	})
 	local var57 = reactModule.useCallback(function(p2, p3, p4) --[[ line: 192 ]]
-		-- upvalues: var30 (ref), var49 (ref), constantsModule (copy), var28 (ref), httpService (copy), text (copy), var47 (ref), var27 (ref), var23 (ref), var25 (ref), var35 (ref), getHighlightModeVariantModule (copy), buildReportModule (copy), playersService (copy)
-		if p2 == "ip infringement" then
+		-- upvalues: fFlagReportIPInfringement (copy), var30 (ref), var49 (ref), constantsModule (copy), var28 (ref), httpService (copy), text (copy), var47 (ref), var27 (ref), var23 (ref), var25 (ref), var35 (ref), getHighlightModeVariantModule (copy), buildReportModule (copy), playersService (copy)
+		if fFlagReportIPInfringement and p2 == "ip infringement" then
 			if not var30 or not var30.extractedAssets then
 				var49(constantsModule.IpErrorCodes.ClientNoAssetsExtracted)
 				
@@ -311,11 +311,11 @@ return function(p0) --[[ line: 57 ]]
 	
 	return withLocalization({
 		mainTitle = "Feature.ReportAbuse.Label.HighlightProblemPrecise",
+		next = "Feature.ReportAbuse.Action.Next",
 		coachmarkTitle = "Feature.ReportAbuse.Label.CantSelectTitle",
-		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle",
-		next = if fFlagUpdateInGameAssetReportingCTAs then "CommonUI.Controls.Action.Continue" else "Feature.ReportAbuse.Action.Next"
-	})(function(p8) --[[ line: 417 ]]
-		-- upvalues: reactModule (copy), var60 (ref), isSmallPortraitMode (ref), reportPreciseSelectionPortraitHeaderFooterModule (copy), var56 (ref), reportPreciseSelectionLandscapeHeaderModule (copy), var55 (ref), var42 (ref), var53 (ref), var22 (ref), inGameAssetReportSubmitDialogModule (copy), viewportSize (ref), var57 (ref), var58 (ref), var35 (ref), fFlagPrefillPreciseSelectionChoices (copy), var30 (ref), var24 (ref), inGameAssetReportCompleteModalModule (copy), var59 (ref), var26 (ref), inGameAssetReportIPInfringementModalModule (copy), var46 (ref), var48 (ref), inGameAssetIPInfringementErrorModalModule (copy), var61 (ref), var62 (ref), var50 (ref)
+		coachmarkText = "Feature.ReportAbuse.Label.CantSelectSubtitle"
+	})(function(p8) --[[ line: 415 ]]
+		-- upvalues: reactModule (copy), var60 (ref), isSmallPortraitMode (ref), reportPreciseSelectionPortraitHeaderFooterModule (copy), var56 (ref), reportPreciseSelectionLandscapeHeaderModule (copy), var55 (ref), var42 (ref), var53 (ref), var22 (ref), inGameAssetReportSubmitDialogModule (copy), viewportSize (ref), var57 (ref), var58 (ref), var35 (ref), fFlagPrefillPreciseSelectionChoices (copy), var30 (ref), var24 (ref), inGameAssetReportCompleteModalModule (copy), var59 (ref), fFlagReportIPInfringement (copy), var26 (ref), inGameAssetReportIPInfringementModalModule (copy), var46 (ref), var48 (ref), inGameAssetIPInfringementErrorModalModule (copy), var61 (ref), var62 (ref), var50 (ref)
 		return reactModule.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
@@ -371,18 +371,18 @@ return function(p0) --[[ line: 57 ]]
 				extractionResult = if fFlagPrefillPreciseSelectionChoices then var30 else nil
 			}) else nil,
 			ReportCompleteModal = if var24 then reactModule.createElement(inGameAssetReportCompleteModalModule, { screenSize = viewportSize, onClose = var59 }) else nil,
-			IPInfringementModal = if var26 then reactModule.createElement(inGameAssetReportIPInfringementModalModule, {
+			IPInfringementModal = if fFlagReportIPInfringement and var26 then reactModule.createElement(inGameAssetReportIPInfringementModalModule, {
 				screenSize = viewportSize,
 				reportCode = var46,
 				onClose = var59
 			}) else nil,
-			ErrorModal = if var48 ~= nil then nil else reactModule.createElement(inGameAssetIPInfringementErrorModalModule, {
+			ErrorModal = if fFlagReportIPInfringement and var48 ~= nil then reactModule.createElement(inGameAssetIPInfringementErrorModalModule, {
 				screenSize = viewportSize,
 				onBack = var61,
 				errorCode = var48,
 				onReportExperience = var62,
 				isReportExperienceLoading = var50
-			})
+			}) else nil
 		})
 	end)
 end

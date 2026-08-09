@@ -8,7 +8,6 @@ local topBarProviderModule = require(appChat.TopBarProvider)
 local argCheckModule = require(parent.ArgCheck)
 local roactModule = require(parent.Roact)
 local roactNavigationModule = require(parent.RoactNavigation)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local withLocalization = require(parent.Localization).withLocalization
 local UIBloxModule = require(parent.UIBlox)
 local foundationModule = require(parent.Foundation)
@@ -31,25 +30,21 @@ local getFFlagEnableAppChatInExperience = require(parent.SharedFlags).GetFFlagEn
 local fFlagEnablePartyQuickStartButton = require(parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local getFFlagEnablePushNotificationsUpsellModalChat = require(parent.SharedFlags).GetFFlagEnablePushNotificationsUpsellModalChat
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableHeaderBarButtonsUpdate = sharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
-local fFlagAppChatChatLandingScreenRenameFixEnabled = sharedFlagsModule.FFlagAppChatChatLandingScreenRenameFixEnabled
+local fFlagEnableHeaderBarButtonsUpdate = require(parent.SharedFlags).FFlagEnableHeaderBarButtonsUpdate
 local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local fFlagAppChatDomLocatorFoundationMigrationModule = require(appChat.Flags.FFlagAppChatDomLocatorFoundationMigration)
 local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
 local fFlagAppChatTopBarSignalsStoreModule = require(appChat.Flags.FFlagAppChatTopBarSignalsStore)
 local fFlagAppChatTopBarConfigDrivenModule = require(appChat.Flags.FFlagAppChatTopBarConfigDriven)
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
-local fFlagAppChatIxpScreenExposureModule = require(appChat.Flags.FFlagAppChatIxpScreenExposure)
-local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
 local chatLandingScreen = roactModule.PureComponent:extend("ChatLandingScreen")
 chatLandingScreen.defaultProps = { navigation = nil }
 
-local var31 = function() --[[ line: 63 ]]
+local var27 = function() --[[ line: 57 ]]
 	-- upvalues: roactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), argCheckModule (ref), withLocalization (ref), searchTopBarModule (ref)
 	return roactModule.createElement(topBarProviderModule, {
 		screenName = enumScreensModule.ChatLanding,
-		render = function(p0) --[[ line: 66 ]]
+		render = function(p0) --[[ line: 60 ]]
 			-- upvalues: enumScreensModule (copy), argCheckModule (copy), withLocalization (copy), roactModule (copy), searchTopBarModule (copy)
 			local screenTopBar = p0.getScreenTopBar(enumScreensModule.ChatLanding)
 			argCheckModule.isType(screenTopBar, "table", "screenTopBar")
@@ -57,7 +52,7 @@ local var31 = function() --[[ line: 63 ]]
 			return withLocalization({
 				searchPlaceholderText = "Feature.Chat.Label.SearchWord",
 				cancelText = "Feature.Chat.Action.Cancel"
-			})(function(p1) --[[ line: 73 ]]
+			})(function(p1) --[[ line: 67 ]]
 				-- upvalues: roactModule (copy), searchTopBarModule (copy), screenTopBar (ref), p0 (ref), enumScreensModule (copy)
 				return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
 					filterBox = roactModule.createElement(searchTopBarModule, {
@@ -65,16 +60,16 @@ local var31 = function() --[[ line: 63 ]]
 						cancelText = p1.cancelText,
 						searchPlaceholderText = p1.searchPlaceholderText,
 						captureFocusOnMount = screenTopBar.shouldAutoFocusCenter,
-						onSelectCallback = screenTopBar.closeInputBar or function() --[[ line: 83 ]] end,
-						resetOnMount = function() --[[ line: 85 ]]
+						onSelectCallback = screenTopBar.closeInputBar or function() --[[ line: 77 ]] end,
+						resetOnMount = function() --[[ line: 79 ]]
 							-- upvalues: p0 (copy), enumScreensModule (copy)
 							p0.setScreenTopBar(enumScreensModule.ChatLanding, { shouldAutoFocusCenter = false })
 						end,
-						cancelCallback = function() --[[ line: 91 ]]
+						cancelCallback = function() --[[ line: 85 ]]
 							-- upvalues: p0 (copy), enumScreensModule (copy)
 							p0.setScreenTopBar(enumScreensModule.ChatLanding, { shouldRenderCenter = false, filterText = "" })
 						end,
-						textChangedCallback = function(p2) --[[ line: 98 ]]
+						textChangedCallback = function(p2) --[[ line: 92 ]]
 							-- upvalues: p0 (copy), enumScreensModule (copy)
 							p0.setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p2 })
 						end
@@ -85,30 +80,24 @@ local var31 = function() --[[ line: 63 ]]
 	})
 end
 
-function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
-	-- upvalues: constantsModule (ref), getFFlagEnableAppChatInExperience (ref), fFlagEnableHeaderBarButtonsUpdate (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), getFFlagIsSquadEnabled (ref), fFlagAppChatTopBarConfigDrivenModule (ref), var31 (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), roactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), argCheckModule (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), streamNotificationsBellIcon (ref), fFlagStreamNotificationBellEntryPoint (ref), appPage (ref), snoozeToastNotificationsButtonModule (ref), fFlagAppChatDomLocatorFoundationMigrationModule (ref), iconButton (ref), images (ref)
+function chatLandingScreen.navigationOptions(p3) --[[ line: 104 ]]
+	-- upvalues: constantsModule (ref), getFFlagEnableAppChatInExperience (ref), fFlagEnableHeaderBarButtonsUpdate (ref), argoPartyExperimentation (ref), getFFlagIsSquadEnabled (ref), fFlagAppChatTopBarConfigDrivenModule (ref), var27 (ref), withTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), roactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), argCheckModule (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), streamNotificationsBellIcon (ref), fFlagStreamNotificationBellEntryPoint (ref), appPage (ref), snoozeToastNotificationsButtonModule (ref), fFlagAppChatDomLocatorFoundationMigrationModule (ref), iconButton (ref), images (ref)
 	local navigation = p3.navigation
 	local navigateToRootStack = navigation.getScreenProps("navigateToRootStack", nil)
 	local wideMode = navigation.getScreenProps("wideMode", false)
-	local var35 = constantsModule:GetIconButtonWidth(wideMode)
-	local var36 = if navigateToRootStack then true else false
+	local var31 = constantsModule:GetIconButtonWidth(wideMode)
+	local var32 = if navigateToRootStack then true else false
 	local isInExperience = getFFlagEnableAppChatInExperience() and navigation.getScreenProps("isInExperience", false)
-	local var38 = if navigation.getScreenProps("wideMode", false) then navigation.getScreenProps("appChatInnerPadding", 12) else navigation.getScreenProps("appChatOuterPadding", 12)
+	local var34 = if navigation.getScreenProps("wideMode", false) then navigation.getScreenProps("appChatInnerPadding", 12) else navigation.getScreenProps("appChatOuterPadding", 12)
 	
 	if fFlagEnableHeaderBarButtonsUpdate then
-		var38 -= navigation.getScreenProps("topBarUtilityIconSideMargin", 0)
+		var34 -= navigation.getScreenProps("topBarUtilityIconSideMargin", 0)
 	end
-	local var39 = if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
+	local var35 = if argoPartyExperimentation.getIsRenameEnabled() or not getFFlagIsSquadEnabled() then {
 		raw = "CommonUI.Features.Label.Chat",
 		shouldLocalize = true
 	} else {
 		raw = "Feature.Squads.Label.Party",
-		shouldLocalize = true
-	} elseif getFFlagIsSquadEnabled() then {
-		raw = "Feature.Squads.Label.Party",
-		shouldLocalize = true
-	} else {
-		raw = "CommonUI.Features.Label.Chat",
 		shouldLocalize = true
 	}
 	
@@ -117,30 +106,30 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = var39,
-		closeButtonEnabled = isInExperience and var36,
+		headerText = var35,
+		closeButtonEnabled = isInExperience and var32,
 		tabBarVisible = not navigateToRootStack or nil,
 		leftPaddingOverride = navigation.getScreenProps("appChatOuterPadding", 12),
-		rightPaddingOverride = var38
+		rightPaddingOverride = var34
 	} else {
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = var39,
-		backButtonEnabled = if isInExperience then false else var36,
-		closeButtonEnabled = isInExperience and var36,
+		headerText = var35,
+		backButtonEnabled = if isInExperience then false else var32,
+		closeButtonEnabled = isInExperience and var32,
 		tabBarVisible = not navigateToRootStack or nil,
 		leftPaddingOverride = navigation.getScreenProps("appChatOuterPadding", 12),
-		rightPaddingOverride = var38,
-		renderCenter = var31,
-		renderRight = function() --[[ line: 182 ]]
-			-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), roactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), navigation (ref), fFlagEnableHeaderBarButtonsUpdate (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), chatLandingTelemetryEventsModule (copy), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var35 (ref), fFlagAppChatDomLocatorFoundationMigrationModule (copy), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
-			return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p4) --[[ line: 183 ]]
-				-- upvalues: roactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), navigation (copy), fFlagEnableHeaderBarButtonsUpdate (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), chatLandingTelemetryEventsModule (copy), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var35 (copy), fFlagAppChatDomLocatorFoundationMigrationModule (copy), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (copy)
+		rightPaddingOverride = var34,
+		renderCenter = var27,
+		renderRight = function() --[[ line: 165 ]]
+			-- upvalues: withTelemetryModule (copy), chatLandingTelemetryLayerModule (copy), roactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), navigation (ref), fFlagEnableHeaderBarButtonsUpdate (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), chatLandingTelemetryEventsModule (copy), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var31 (ref), fFlagAppChatDomLocatorFoundationMigrationModule (copy), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
+			return withTelemetryModule(chatLandingTelemetryLayerModule.Context)(function(p4) --[[ line: 166 ]]
+				-- upvalues: roactModule (copy), topBarProviderModule (copy), enumScreensModule (copy), argCheckModule (copy), navigation (copy), fFlagEnableHeaderBarButtonsUpdate (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), chatLandingTelemetryEventsModule (copy), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var31 (copy), fFlagAppChatDomLocatorFoundationMigrationModule (copy), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (copy)
 				return roactModule.createElement(topBarProviderModule, {
 					screenName = enumScreensModule.ChatLanding,
-					render = function(p5) --[[ line: 186 ]]
-						-- upvalues: enumScreensModule (copy), argCheckModule (copy), navigation (copy), fFlagEnableHeaderBarButtonsUpdate (copy), roactModule (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), p4 (ref), chatLandingTelemetryEventsModule (copy), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var35 (copy), fFlagAppChatDomLocatorFoundationMigrationModule (copy), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (copy)
+					render = function(p5) --[[ line: 169 ]]
+						-- upvalues: enumScreensModule (copy), argCheckModule (copy), navigation (copy), fFlagEnableHeaderBarButtonsUpdate (copy), roactModule (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), p4 (ref), chatLandingTelemetryEventsModule (copy), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var31 (copy), fFlagAppChatDomLocatorFoundationMigrationModule (copy), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (copy)
 						local screenTopBar = p5.getScreenTopBar(enumScreensModule.ChatLanding)
 						argCheckModule.isType(screenTopBar, "table", "screenTopBar")
 						local notificationCount = navigation.getScreenProps("notificationCount", 0)
@@ -158,7 +147,7 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								size = foundationModule.Enums.InputSize.Medium,
 								icon = foundationModule.Enums.IconName.MagnifyingGlass,
 								testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("search") else nil,
-								onActivated = function() --[[ line: 214 ]]
+								onActivated = function() --[[ line: 197 ]]
 									-- upvalues: p5 (ref), enumScreensModule (copy), p4 (copy), chatLandingTelemetryEventsModule (copy)
 									p5.setScreenTopBar(enumScreensModule.ChatLanding, {
 										shouldRenderCenter = true,
@@ -174,7 +163,7 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								size = foundationModule.Enums.InputSize.Medium,
 								icon = foundationModule.Enums.IconName.PlusLarge,
 								testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("createChat") else nil,
-								onActivated = function() --[[ line: 234 ]]
+								onActivated = function() --[[ line: 217 ]]
 									-- upvalues: navigation (copy), enumScreensModule (copy), p4 (copy), chatLandingTelemetryEventsModule (copy)
 									navigation.navigate(enumScreensModule.CreateNewChat)
 									p4.emit(chatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
@@ -186,7 +175,7 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								entryPoint = if fFlagStreamNotificationBellEntryPoint then appPage.Chat else nil,
 								testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("notifications") else nil
 							}) else nil,
-							snoozeChatNotifications = if topBarShowSnoozeNotifications then roactModule.createElement(snoozeToastNotificationsButtonModule, { layoutOrder = 4, size = UDim2.new(0, var35, 1, 0) }) else nil
+							snoozeChatNotifications = if topBarShowSnoozeNotifications then roactModule.createElement(snoozeToastNotificationsButtonModule, { layoutOrder = 4, size = UDim2.new(0, var31, 1, 0) }) else nil
 						}) else roactModule.createFragment({
 							filter = topBarShowSearch and (if fFlagAppChatDomLocatorFoundationMigrationModule then roactModule.createElement(foundationModule.IconButton, {
 								isCircular = true,
@@ -194,7 +183,7 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								size = foundationModule.Enums.InputSize.Medium,
 								icon = foundationModule.Enums.IconName.MagnifyingGlass,
 								testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("search") else nil,
-								onActivated = function() --[[ line: 271 ]]
+								onActivated = function() --[[ line: 254 ]]
 									-- upvalues: p5 (ref), enumScreensModule (copy), p4 (copy), chatLandingTelemetryEventsModule (copy)
 									p5.setScreenTopBar(enumScreensModule.ChatLanding, {
 										shouldRenderCenter = true,
@@ -205,9 +194,9 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								end
 							}) else roactModule.createElement(iconButton, {
 								layoutOrder = 1,
-								size = UDim2.new(0, var35, 1, 0),
+								size = UDim2.new(0, var31, 1, 0),
 								icon = images["icons/common/search"],
-								onActivated = function() --[[ line: 285 ]]
+								onActivated = function() --[[ line: 268 ]]
 									-- upvalues: p5 (ref), enumScreensModule (copy), p4 (copy), chatLandingTelemetryEventsModule (copy)
 									p5.setScreenTopBar(enumScreensModule.ChatLanding, {
 										shouldRenderCenter = true,
@@ -223,16 +212,16 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								size = foundationModule.Enums.InputSize.Medium,
 								icon = foundationModule.Enums.IconName.PlusLarge,
 								testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("createChat") else nil,
-								onActivated = function() --[[ line: 306 ]]
+								onActivated = function() --[[ line: 289 ]]
 									-- upvalues: navigation (copy), enumScreensModule (copy), p4 (copy), chatLandingTelemetryEventsModule (copy)
 									navigation.navigate(enumScreensModule.CreateNewChat)
 									p4.emit(chatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
 								end
 							}) else roactModule.createElement(iconButton, {
 								layoutOrder = 2,
-								size = UDim2.new(0, var35, 1, 0),
+								size = UDim2.new(0, var31, 1, 0),
 								icon = if getFFlagIsSquadEnabled() then images["icons/common/plus"] else images["icons/actions/compose"],
-								onActivated = function() --[[ line: 320 ]]
+								onActivated = function() --[[ line: 303 ]]
 									-- upvalues: navigation (copy), enumScreensModule (copy), p4 (copy), chatLandingTelemetryEventsModule (copy)
 									navigation.navigate(enumScreensModule.CreateNewChat)
 									p4.emit(chatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
@@ -240,7 +229,7 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 							})),
 							notifications = topBarShowNotifications and (if fFlagAppChatDomLocatorFoundationMigrationModule then roactModule.createElement(foundationModule.View, {
 								tag = "radius-circle row align-x-center align-y-center",
-								Size = UDim2.new(0, var35, 0, var35),
+								Size = UDim2.new(0, var31, 0, var31),
 								testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("notifications") else nil
 							}, {
 								BellIcon = roactModule.createElement(streamNotificationsBellIcon, {
@@ -254,7 +243,7 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 								compactWidth = not wideMode,
 								entryPoint = if fFlagStreamNotificationBellEntryPoint then appPage.Chat else nil
 							})),
-							snoozeChatNotifications = if topBarShowSnoozeNotifications then roactModule.createElement(snoozeToastNotificationsButtonModule, { layoutOrder = 4, size = UDim2.new(0, var35, 1, 0) }) else nil
+							snoozeChatNotifications = if topBarShowSnoozeNotifications then roactModule.createElement(snoozeToastNotificationsButtonModule, { layoutOrder = 4, size = UDim2.new(0, var31, 1, 0) }) else nil
 						})
 					end
 				})
@@ -263,30 +252,28 @@ function chatLandingScreen.navigationOptions(p3) --[[ line: 110 ]]
 	}
 end
 
-function chatLandingScreen.init(p6) --[[ line: 365 ]]
-	-- upvalues: fFlagAppChatIxpScreenExposureModule (ref), IXPNavigationUtilsModule (ref), loggerModule (ref), enumScreensModule (ref), getCurrentRouteModule (ref), fFlagEnablePartyQuickStartButton (ref), resetForSquadLobbyForCompactModeModule (ref), roactNavigationModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), argCheckModule (ref)
-	p6.ixpSubscription = if fFlagAppChatIxpScreenExposureModule then IXPNavigationUtilsModule.registerExposureOnFocus(p6.props.navigation, "Party.LandingPage") else nil
-	
-	function p6.navigateToConversation(p7) --[[ line: 370 ]]
+function chatLandingScreen.init(p6) --[[ line: 348 ]]
+	-- upvalues: loggerModule (ref), enumScreensModule (ref), getCurrentRouteModule (ref), fFlagEnablePartyQuickStartButton (ref), resetForSquadLobbyForCompactModeModule (ref), roactNavigationModule (ref), fFlagAppChatTopBarSignalsStoreModule (ref), getTopBarStoreModule (ref), argCheckModule (ref)
+	function p6.navigateToConversation(p7) --[[ line: 349 ]]
 		-- upvalues: loggerModule (copy), p6 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Conversation: {} from {screen}", p7)
 		p6.props.navigation.navigate(enumScreensModule.ChatConversation, { navigatedWithFocus = false, conversationId = p7 })
 		p6.resetScreenTopBar()
 	end
 	
-	function p6.navigateToCreateChat() --[[ line: 379 ]]
+	function p6.navigateToCreateChat() --[[ line: 358 ]]
 		-- upvalues: loggerModule (copy), p6 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To CreateNewChat from {screen}")
 		p6.props.navigation.push(enumScreensModule.CreateNewChat)
 	end
 	
-	function p6.navigateToToast(p8) --[[ line: 384 ]]
+	function p6.navigateToToast(p8) --[[ line: 363 ]]
 		-- upvalues: loggerModule (copy), p6 (ref), enumScreensModule (copy)
 		loggerModule:info("Navigate To Toast from {screen}")
 		p6.props.navigation.navigate(enumScreensModule.RoactChatToast, p8)
 	end
 	
-	function p6.navigateToPrivacy() --[[ line: 389 ]]
+	function p6.navigateToPrivacy() --[[ line: 368 ]]
 		-- upvalues: p6 (ref), enumScreensModule (copy), loggerModule (copy)
 		local privacySettings = p6.props.navigation.getScreenProps("navigateToLuaAppPages", {})[enumScreensModule.PrivacySettings]
 		
@@ -299,12 +286,12 @@ function chatLandingScreen.init(p6) --[[ line: 365 ]]
 		loggerModule:warning("PrivacySettings page was not set in navigateToLuaAppPages screenProps")
 	end
 	
-	function p6.navigateToSquadLobby(p9) --[[ line: 400 ]]
+	function p6.navigateToSquadLobby(p9) --[[ line: 379 ]]
 		-- upvalues: loggerModule (copy), getCurrentRouteModule (copy), p6 (ref), enumScreensModule (copy), fFlagEnablePartyQuickStartButton (copy), resetForSquadLobbyForCompactModeModule (copy), roactNavigationModule (copy)
 		loggerModule:info("Navigate To SquadLobby from {screen}")
-		local var46 = getCurrentRouteModule(p6.props.navigation.state)
+		local var42 = getCurrentRouteModule(p6.props.navigation.state)
 		
-		if var46 and var46.params and (var46.params.conversationId == p9 and var46.routeName == enumScreensModule.ChatConversation) then
+		if var42 and var42.params and (var42.params.conversationId == p9 and var42.routeName == enumScreensModule.ChatConversation) then
 			p6.props.navigation.navigate(enumScreensModule.SquadLobby, { conversationId = p9 })
 			
 			return
@@ -326,7 +313,7 @@ function chatLandingScreen.init(p6) --[[ line: 365 ]]
 		}, 3)
 	end
 	
-	function p6.setScreenTopBar(p10) --[[ line: 432 ]]
+	function p6.setScreenTopBar(p10) --[[ line: 411 ]]
 		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), p6 (ref), argCheckModule (copy)
 		if fFlagAppChatTopBarSignalsStoreModule then
 			getTopBarStoreModule(false).setScreenTopBar(enumScreensModule.ChatLanding, p10)
@@ -338,35 +325,35 @@ function chatLandingScreen.init(p6) --[[ line: 365 ]]
 		setScreenTopBar(enumScreensModule.ChatLanding, p10)
 	end
 	
-	function p6.resetScreenTopBar() --[[ line: 442 ]]
+	function p6.resetScreenTopBar() --[[ line: 421 ]]
 		-- upvalues: fFlagAppChatTopBarSignalsStoreModule (copy), getTopBarStoreModule (copy), enumScreensModule (copy), argCheckModule (copy), p6 (ref)
 		local _ = nil
-		local var48 = if fFlagAppChatTopBarSignalsStoreModule then getTopBarStoreModule(false).getScreenTopBar(enumScreensModule.ChatLanding)(false) or {} else argCheckModule.isNotNil(p6.props.navigation.getScreenProps("getScreenTopBar", nil), "getScreenTopBar in screenProps")(enumScreensModule.ChatLanding)
+		local var44 = if fFlagAppChatTopBarSignalsStoreModule then getTopBarStoreModule(false).getScreenTopBar(enumScreensModule.ChatLanding)(false) or {} else argCheckModule.isNotNil(p6.props.navigation.getScreenProps("getScreenTopBar", nil), "getScreenTopBar in screenProps")(enumScreensModule.ChatLanding)
 		
-		if var48.filterText == "" and var48.shouldRenderCenter then
+		if var44.filterText == "" and var44.shouldRenderCenter then
 			p6.setScreenTopBar({ shouldRenderCenter = false, isSecondary = false })
 		end
 	end
 end
 
-function chatLandingScreen.render(p11) --[[ line: 462 ]]
+function chatLandingScreen.render(p11) --[[ line: 441 ]]
 	-- upvalues: loggerModule (ref), argCheckModule (ref), roactModule (ref), topBarProviderModule (ref), enumScreensModule (ref), chatLandingContainerModule (ref), chatSearchBoxModule (ref), getFFlagEnablePushNotificationsUpsellModalChat (ref), checkAndOpenChatPushUpsellModule (ref)
 	loggerModule:info("{screen} render")
-	local var49 = argCheckModule.isNotNil(p11.props.navigation, "navigation in ChatLandingScreen")
-	local key = var49 and var49.getParam("key", "") or ""
-	local showSearchRow = var49.getScreenProps("showSearchRow", true)
-	local topBarHeight = var49.getScreenProps("topBarHeight", 0)
+	local var45 = argCheckModule.isNotNil(p11.props.navigation, "navigation in ChatLandingScreen")
+	local key = var45 and var45.getParam("key", "") or ""
+	local showSearchRow = var45.getScreenProps("showSearchRow", true)
+	local topBarHeight = var45.getScreenProps("topBarHeight", 0)
 	
 	return roactModule.createElement(topBarProviderModule, {
 		screenName = enumScreensModule.ChatLanding,
-		render = function(p12) --[[ line: 471 ]]
-			-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), chatLandingContainerModule (copy), var49 (ref), p11 (ref), key (ref), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), getFFlagEnablePushNotificationsUpsellModalChat (copy), checkAndOpenChatPushUpsellModule (copy)
+		render = function(p12) --[[ line: 450 ]]
+			-- upvalues: enumScreensModule (copy), argCheckModule (copy), roactModule (copy), chatLandingContainerModule (copy), var45 (ref), p11 (ref), key (ref), showSearchRow (ref), chatSearchBoxModule (copy), topBarHeight (ref), getFFlagEnablePushNotificationsUpsellModalChat (copy), checkAndOpenChatPushUpsellModule (copy)
 			local screenTopBar = p12.getScreenTopBar(enumScreensModule.ChatLanding)
 			argCheckModule.isType(screenTopBar, "table", "screenTopBar")
-			local var54 = roactModule.createElement(chatLandingContainerModule, {
+			local var50 = roactModule.createElement(chatLandingContainerModule, {
 				isShowingFilterBox = screenTopBar.shouldRenderCenter,
 				filterText = screenTopBar.filterText,
-				topBarHeight = var49.getScreenProps("topBarHeight", 0),
+				topBarHeight = var45.getScreenProps("topBarHeight", 0),
 				navigateToAddFriends = p11.props.navigation.getScreenProps("navigateToAddFriends", {}),
 				navigateToConversation = p11.navigateToConversation,
 				navigateToCreateChat = p11.navigateToCreateChat,
@@ -387,22 +374,22 @@ function chatLandingScreen.render(p11) --[[ line: 462 ]]
 				ChatSearchBox = roactModule.createElement(chatSearchBoxModule, {
 					height = topBarHeight,
 					initialText = screenTopBar.filterText,
-					onFilter = function(p13) --[[ line: 502 ]]
+					onFilter = function(p13) --[[ line: 481 ]]
 						-- upvalues: p12 (ref), enumScreensModule (copy)
 						p12.setScreenTopBar(enumScreensModule.ChatLanding, { filterText = p13 })
 					end
 				}),
-				var54
+				var50
 			}) elseif getFFlagEnablePushNotificationsUpsellModalChat() then roactModule.createFragment({
-				var54,
+				var50,
 				CheckAndOpenChatPushUpsell = roactModule.createElement(checkAndOpenChatPushUpsellModule)
-			}) else var54
+			}) else var50
 		end
 	})
 end
 
-function chatLandingScreen.didMount(p14) --[[ line: 523 ]]
-	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getFFlagEnableAppChatInExperience (ref), sharedFlagsModule (ref), fFlagAppChatChatLandingScreenRenameFixEnabled (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), getFFlagIsSquadEnabled (ref)
+function chatLandingScreen.didMount(p14) --[[ line: 502 ]]
+	-- upvalues: loggerModule (ref), fFlagAppChatTopBarConfigDrivenModule (ref), getFFlagEnableAppChatInExperience (ref), argoPartyExperimentation (ref), getFFlagIsSquadEnabled (ref)
 	loggerModule:info("{screen} mounted")
 	
 	if not fFlagAppChatTopBarConfigDrivenModule() then
@@ -411,14 +398,6 @@ function chatLandingScreen.didMount(p14) --[[ line: 523 ]]
 		return
 	end
 	local navigation = p14.props.navigation
-	local var55 = if navigation.getScreenProps("navigateToRootStack", nil) then true else false
-	local isInExperience = getFFlagEnableAppChatInExperience() and navigation.getScreenProps("isInExperience", false)
-	local var57 = if navigation.getScreenProps("wideMode", false) then navigation.getScreenProps("appChatInnerPadding", 12) else navigation.getScreenProps("appChatOuterPadding", 12)
-	
-	if sharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate then
-		var57 -= navigation.getScreenProps("topBarUtilityIconSideMargin", 0)
-	end
-	local _ = nil
 	p14.setScreenTopBar({
 		shouldRenderCenter = false,
 		filterText = "",
@@ -426,35 +405,17 @@ function chatLandingScreen.didMount(p14) --[[ line: 523 ]]
 		isRoot = true,
 		isTitleLeftAligned = true,
 		shouldBoldHeader = true,
-		headerText = if fFlagAppChatChatLandingScreenRenameFixEnabled then if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then {
-			raw = "CommonUI.Features.Label.Chat",
-			shouldLocalize = true
-		} else {
-			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} elseif getFFlagIsSquadEnabled() then {
-			raw = "Feature.Squads.Label.Party",
-			shouldLocalize = true
-		} else {
-			raw = "CommonUI.Features.Label.Chat",
-			shouldLocalize = true
-		} elseif argoPartyExperimentation.getIsRenameEnabled() or not getFFlagIsSquadEnabled() then {
+		headerText = if argoPartyExperimentation.getIsRenameEnabled() or not getFFlagIsSquadEnabled() then {
 			raw = "CommonUI.Features.Label.Chat",
 			shouldLocalize = true
 		} else {
 			raw = "Feature.Squads.Label.Party",
 			shouldLocalize = true
 		},
-		closeButtonEnabled = isInExperience and var55,
+		closeButtonEnabled = getFFlagEnableAppChatInExperience() and navigation.getScreenProps("isInExperience", false) and (if navigation.getScreenProps("navigateToRootStack", nil) then true else false),
 		leftPaddingOverride = navigation.getScreenProps("appChatOuterPadding", 12),
-		rightPaddingOverride = var57
+		rightPaddingOverride = if navigation.getScreenProps("wideMode", false) then navigation.getScreenProps("appChatInnerPadding", 12) else navigation.getScreenProps("appChatOuterPadding", 12)
 	})
-end
-
-function chatLandingScreen.willUnmount(p15) --[[ line: 596 ]]
-	if p15.ixpSubscription then
-		p15.ixpSubscription.remove()
-	end
 end
 
 return chatLandingScreen

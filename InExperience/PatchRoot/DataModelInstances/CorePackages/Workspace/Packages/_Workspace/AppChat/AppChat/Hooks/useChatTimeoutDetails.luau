@@ -8,41 +8,46 @@ local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
 local luauPolyfillModule = require(parent.LuauPolyfill)
 local clearTimeout = luauPolyfillModule.clearTimeout
 local setTimeout = luauPolyfillModule.setTimeout
-local _ = require(appChat.Models.ConversationChannels)
+local conversationChannelsModule = require(appChat.Models.ConversationChannels)
 local currentConversationTimeoutEndedModule = require(appChat.Conversations.Actions.CurrentConversationTimeoutEnded)
-local getEffectiveChatTimeoutDetailsModule = require(appChat.Utils.getEffectiveChatTimeoutDetails)
 
-return function(p0) --[[ line: 21 | named "useChatTimeoutDetails" ]]
-	-- upvalues: useDispatch (ref), useSelector (ref), getDeepValue2Module (ref), getEffectiveChatTimeoutDetailsModule (ref), reactModule (ref), setTimeout (ref), currentConversationTimeoutEndedModule (ref), clearTimeout (ref)
+return function(p0) --[[ line: 20 | named "useChatTimeoutDetails" ]]
+	-- upvalues: useDispatch (ref), useSelector (ref), getDeepValue2Module (ref), conversationChannelsModule (ref), reactModule (ref), setTimeout (ref), currentConversationTimeoutEndedModule (ref), clearTimeout (ref)
 	local conversationId = p0.conversationId
 	local var6 = useDispatch()
-	local var7 = useSelector(function(p1) --[[ line: 24 ]]
+	local var7 = useSelector(function(p1) --[[ line: 23 ]]
 		-- upvalues: getDeepValue2Module (copy), conversationId (ref)
 		return {
 			userTimeout = getDeepValue2Module(p1, "ChatAppReducer.ChatTimeouts.userTimeout"),
 			conversationTimeout = getDeepValue2Module(p1, `ChatAppReducer.ChatTimeouts.byConversationId.{conversationId}`)
 		}
 	end)
-	local var8 = getEffectiveChatTimeoutDetailsModule(var7.userTimeout, var7.conversationTimeout, p0.conversationModerationType, DateTime.now().UnixTimestamp)
-	reactModule.useEffect(function() --[[ line: 38 ]]
-		-- upvalues: var8 (ref), setTimeout (copy), var6 (ref), currentConversationTimeoutEndedModule (copy), conversationId (ref), clearTimeout (copy)
-		local var9 = if var8.isTimedOut then setTimeout(function() --[[ line: 42 ]]
+	local unixTimestamp = DateTime.now().UnixTimestamp
+	local var8 = if var7.userTimeout then var7.userTimeout.endTimestamp else 0
+	local var9 = if var7.conversationTimeout then var7.conversationTimeout.endTimestamp else 0
+	local maxValue = math.max(var8, var9)
+	local var11 = unixTimestamp < maxValue and p0.conversationModerationType ~= conversationChannelsModule.ModerationType.TrustedComms
+	local var12 = if var8 < var9 then var7.conversationTimeout and var7.conversationTimeout.decisionEventId else var7.userTimeout and var7.userTimeout.decisionEventId
+	local var13 = if var8 < var9 then var7.conversationTimeout and var7.conversationTimeout.duration else var7.userTimeout and var7.userTimeout.duration
+	reactModule.useEffect(function() --[[ line: 44 ]]
+		-- upvalues: var11 (ref), setTimeout (copy), var6 (ref), currentConversationTimeoutEndedModule (copy), conversationId (ref), maxValue (ref), unixTimestamp (ref), clearTimeout (copy)
+		local var14 = if var11 then setTimeout(function() --[[ line: 47 ]]
 			-- upvalues: var6 (copy), currentConversationTimeoutEndedModule (copy), conversationId (copy)
 			var6(currentConversationTimeoutEndedModule(conversationId))
-		end, (var8.timeoutEndTimestamp - DateTime.now().UnixTimestamp + 1) * 1000) else nil
+		end, (maxValue - unixTimestamp + 1) * 1000) else nil
 		
-		return function() --[[ line: 46 ]]
-			-- upvalues: var9 (write), clearTimeout (copy)
-			if var9 then
-				clearTimeout(var9)
+		return function() --[[ line: 51 ]]
+			-- upvalues: var14 (write), clearTimeout (copy)
+			if var14 then
+				clearTimeout(var14)
 			end
 		end
-	end, {
-		var8.isTimedOut,
-		var8.timeoutEndTimestamp,
-		conversationId,
-		var6
-	})
+	end, { var11, maxValue, p0.conversationId })
 	
-	return var8
+	return {
+		isTimedOut = var11,
+		timeoutEndTimestamp = maxValue,
+		decisionEventId = var12,
+		duration = var13
+	}
 end

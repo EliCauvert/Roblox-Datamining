@@ -1,11 +1,9 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
+﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
 
 return require(parent.SocialLuaAnalytics).Telemetry.createEmitter({
 	telemetryImpl = require(parent.LoggingProtocol).default,
-	shouldUseTelemetryService = require(momentsCommon.Flags.GetFFlagMomentsAnalyticsProducerPrereqs)(),
 	defaultTelemetryConfig = { throttlingThousandths = 10000, links = "" },
-	getSharedInfo = function() --[[ line: 40 ]]
+	getSharedInfo = function() --[[ line: 31 ]]
 		return {}
 	end
 })

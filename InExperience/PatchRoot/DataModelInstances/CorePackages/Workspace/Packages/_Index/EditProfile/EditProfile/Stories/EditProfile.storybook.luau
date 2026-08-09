@@ -15,11 +15,11 @@ local foundationProvider = foundationModule.FoundationProvider
 local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
 local designTokenProvider = require(parent.Style).DesignTokenProvider
 local mockApolloClient = require(parent.GraphQLServer).ApolloClientTestUtils.mockApolloClient
-local colorMode = foundationModule.Enums.ColorMode
+local theme = foundationModule.Enums.Theme
 local device = foundationModule.Enums.Device
 local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local t = { language = "en-us" }
-local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
+local t_1 = { Light = theme.Light, Dark = theme.Dark }
 local t_2 = { Console = device.Console, Desktop = device.Desktop }
 
 local var14 = function(p0) --[[ line: 40 ]]
@@ -55,7 +55,7 @@ return {
 					policyProvider = reactModule.createElement(universalAppPolicyModule.RoactAppPolicy.Provider, { policy = { universalAppPolicyModule.AppFeaturePolicies } }, {
 						apolloClient = reactModule.createElement(apolloClientModule.ApolloProvider, { client = mockApolloClient({}) }, {
 							foundationProvider = reactModule.createElement(foundationProvider, {
-								colorMode = t_1[p3.theme],
+								theme = t_1[p3.theme],
 								device = t_2[p3.platform],
 								preferences = p3.settings
 							}, {

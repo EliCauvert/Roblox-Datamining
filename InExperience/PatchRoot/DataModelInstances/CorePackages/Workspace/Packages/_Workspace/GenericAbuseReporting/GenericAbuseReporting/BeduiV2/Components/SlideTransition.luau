@@ -14,126 +14,69 @@ local t = {
 }
 local t_1 = { inExpChatSelection = true, inExpSceneSelection = true }
 
-local function SlidePane(p0) --[[ line: 49 ]]
-	-- upvalues: reactModule (ref), view (ref)
-	return reactModule.createElement(view, {
-		tag = "size-full",
-		Position = p0.position,
-		testId = if p0.withInputSink then "SlideTransitionOutgoing" else "SlideTransitionIncoming"
-	}, {
-		Content = reactModule.createElement(view, { tag = "col size-full" }, { Page = p0.content }),
-		InputSink = if p0.withInputSink then reactModule.createElement("TextButton", {
-			Size = UDim2.fromScale(1, 1),
-			Position = UDim2.fromScale(0, 0),
-			BackgroundTransparency = 1,
-			Text = "",
-			AutoButtonColor = false,
-			Selectable = false,
-			Active = true,
-			ZIndex = 100,
-			[reactModule.Tag] = "data-testid=SlideTransitionInputSink"
-		}) else nil
-	})
-end
-
-return reactModule.memo(function(p1) --[[ line: 88 | named "SlideTransition" ]]
-	-- upvalues: t_1 (ref), reactModule (ref), reactOtterModule (ref), t (ref), SlidePane (ref), slideTransitionContextModule (ref), view (ref)
-	local nodeType = t_1[p1.nodeType] or false
-	local var9, var10 = reactModule.useState(false)
-	local var11, var12 = reactModule.useBinding(false)
-	local var13 = reactModule.useRef({
+return reactModule.memo(function(p0) --[[ line: 60 | named "SlideTransition" ]]
+	-- upvalues: t_1 (ref), reactModule (ref), reactOtterModule (ref), t (ref), view (ref), slideTransitionContextModule (ref)
+	local nodeType = t_1[p0.nodeType] or false
+	local var8, var9 = reactModule.useState(false)
+	local var10, var11 = reactModule.useBinding(false)
+	local var12 = reactModule.useRef({
 		prevNodeId = nil,
 		prevContent = nil,
 		outgoing = nil,
 		direction = "forward",
-		needsAnimationStart = false,
-		needsAnimationCancel = false,
-		transitionId = 0,
-		springId = 0
+		needsAnimationStart = false
 	})
-	local var14, var15 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function() --[[ line: 110 ]]
-		-- upvalues: var13 (ref), var10 (ref), var12 (ref)
-		local current = var13.current
-		
-		if current.springId == current.transitionId then
-			current.outgoing = nil
-			var10(false)
-			var12(false)
-			
-			return
-		end
+	local var13, var14 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function() --[[ line: 77 ]]
+		-- upvalues: var12 (ref), var9 (ref), var11 (ref)
+		var12.current.outgoing = nil
+		var9(false)
+		var11(false)
 	end, {}))
-	local current = var13.current
+	local current = var12.current
 	
-	if current.prevNodeId ~= nil and current.prevNodeId ~= p1.nodeId then
-		local var16 = p1.direction ~= nil
-		
-		if not nodeType and current.prevContent and var16 then
+	if current.prevNodeId ~= nil and current.prevNodeId ~= p0.nodeId then
+		if (not nodeType or not true) and current.prevContent and p0.direction ~= nil then
 			current.outgoing = {
 				nodeId = current.prevNodeId,
 				content = current.prevContent
 			}
-			current.direction = p1.direction or "forward"
+			current.direction = p0.direction or "forward"
 			current.needsAnimationStart = true
-			current.needsAnimationCancel = false
-			current.transitionId += 1
-			current.springId = -1
-		elseif not var16 then
-			current.outgoing = nil
-			current.needsAnimationStart = false
-			current.transitionId += 1
-			current.springId = -1
-			
-			if var9 then
-				current.needsAnimationCancel = true
-			end
 		end
 	end
 	if not nodeType then
-		current.prevNodeId = p1.nodeId
-		current.prevContent = p1.nodeContent
+		current.prevNodeId = p0.nodeId
+		current.prevContent = p0.nodeContent
 	end
-	reactModule.useLayoutEffect(function() --[[ line: 156 ]]
-		-- upvalues: var13 (ref), var10 (ref), var12 (ref), t (copy), var15 (ref), reactOtterModule (copy)
-		local current = var13.current
-		
-		if current.needsAnimationCancel then
-			current.needsAnimationCancel = false
-			var10(false)
-			var12(false)
-		end
-		if current.needsAnimationStart then
-			current.needsAnimationStart = false
-			current.springId = current.transitionId
-			var10(true)
-			var12(true)
+	reactModule.useLayoutEffect(function() --[[ line: 105 ]]
+		-- upvalues: var12 (ref), var9 (ref), var11 (ref), t (copy), var14 (ref), reactOtterModule (copy)
+		if var12.current.needsAnimationStart then
+			var12.current.needsAnimationStart = false
+			var9(true)
+			var11(true)
 			local cloned = table.clone(t)
 			cloned.startingValue = 0
-			var15(reactOtterModule.spring(1, cloned))
+			var14(reactOtterModule.spring(1, cloned))
 		end
-	end, { p1.nodeId })
+	end, { p0.nodeId })
 	local t_2 = {}
-	local var18 = current.outgoing ~= nil
-	local needsAnimationStart = var18 and (current.needsAnimationStart or not var9)
 	
 	if current.outgoing then
-		t_2[current.outgoing.nodeId] = reactModule.createElement(SlidePane, {
-			withInputSink = true,
-			content = current.outgoing.content,
-			position = if needsAnimationStart then UDim2.new(0, 0, 0, 0) else var14:map(function(p2) --[[ line: 187 ]]
-				-- upvalues: var13 (ref)
-				return UDim2.new(p2 * (if var13.current.direction == "forward" then -1 else 1), 0, 0, 0)
-			end)
-		})
+		t_2[current.outgoing.nodeId] = reactModule.createElement(view, {
+			tag = "col size-full",
+			Position = if var8 then var13:map(function(p1) --[[ line: 122 ]]
+				-- upvalues: var12 (ref)
+				return UDim2.new(p1 * (if var12.current.direction == "forward" then -1 else 1), 0, 0, 0)
+			end) else nil
+		}, { Content = current.outgoing.content })
 	end
-	t_2[p1.nodeId] = reactModule.createElement(SlidePane, {
-		withInputSink = false,
-		content = p1.nodeContent,
-		position = if needsAnimationStart then UDim2.new(if current.direction == "forward" then 1 else -1, 0, 0, 0) elseif var18 then var14:map(function(p3) --[[ line: 204 ]]
-			-- upvalues: var13 (ref)
-			return UDim2.new((1 - p3) * (if var13.current.direction == "forward" then 1 else -1), 0, 0, 0)
+	t_2[p0.nodeId] = reactModule.createElement(view, {
+		tag = "col size-full",
+		Position = if var8 then var13:map(function(p2) --[[ line: 133 ]]
+			-- upvalues: var12 (ref)
+			return UDim2.new((1 - p2) * (if var12.current.direction == "forward" then 1 else -1), 0, 0, 0)
 		end) else nil
-	})
+	}, { Content = p0.nodeContent })
 	
-	return reactModule.createElement(slideTransitionContextModule.Provider, { value = var11 }, reactModule.createElement(view, { tag = "fill size-full-0", ClipsDescendants = true }, t_2))
+	return reactModule.createElement(slideTransitionContextModule.Provider, { value = var10 }, reactModule.createElement(view, { tag = "fill size-full-0", ClipsDescendants = true }, t_2))
 end)

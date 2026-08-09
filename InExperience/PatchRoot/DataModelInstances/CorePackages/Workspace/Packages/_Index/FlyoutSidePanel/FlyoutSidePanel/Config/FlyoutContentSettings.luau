@@ -13,7 +13,6 @@ local flyoutLearnPlaceURI = game:DefineFastString("FlyoutLearnPlaceURI", "roblox
 local fFlagCreateConnectionsHub = sharedFlagsModule.FFlagCreateConnectionsHub
 local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
 local fFlagEnableArgusFlyoutEntry = sharedFlagsModule.FFlagEnableArgusFlyoutEntry
-local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
 local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
@@ -91,7 +90,7 @@ local t_3 = {
 		textKey = t_2[t.Inventory],
 		icon = builderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p0) --[[ line: 121 ]]
+			urlGenerator = function(p0) --[[ line: 120 ]]
 				-- upvalues: urlBuilder (ref)
 				return p0 and urlBuilder.user.inventory({ userId = p0 }) or nil
 			end
@@ -133,7 +132,7 @@ local t_3 = {
 		itemType = t.Moments,
 		textKey = t_2[t.Moments],
 		icon = builderIconsModule.Icon.Moments,
-		context = if (fFlagEnableArgusFlyoutEntry or fFlagArgusTabImpliesFlyout) and fFlagEnableArgus then { appPage = appPage.Moments } else { appUri = flyoutMomentsPlaceURI }
+		context = if fFlagEnableArgusFlyoutEntry and fFlagEnableArgus then { appPage = appPage.Moments } else { appUri = flyoutMomentsPlaceURI }
 	},
 	[t.Charts] = {
 		itemType = t.Charts,
@@ -152,7 +151,7 @@ local t_3 = {
 		textKey = t_2[t.CreateGames],
 		icon = builderIconsModule.Icon.Studio,
 		context = {
-			urlGenerator = function(p1) --[[ line: 194 ]]
+			urlGenerator = function(p1) --[[ line: 193 ]]
 				return p1({ utm_content = "side_panel" })
 			end
 		}
@@ -168,7 +167,7 @@ local t_3 = {
 		textKey = t_2[t.GiftCards],
 		icon = builderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p2) --[[ line: 212 ]]
+			urlGenerator = function(p2) --[[ line: 211 ]]
 				-- upvalues: urlBuilder (ref)
 				return urlBuilder.static.giftCards(p2)
 			end
@@ -192,7 +191,7 @@ local t_3 = {
 		itemType = t.Terms,
 		textKey = t_2[t.Terms],
 		context = {
-			urlGenerator = function(_, p3) --[[ line: 240 ]]
+			urlGenerator = function(_, p3) --[[ line: 239 ]]
 				-- upvalues: urlBuilder (ref)
 				local var11 = if p3 then p3.getTermsOfUseLink() else nil
 				
@@ -207,7 +206,7 @@ local t_3 = {
 		itemType = t.Privacy,
 		textKey = t_2[t.Privacy],
 		context = {
-			urlGenerator = function(_, p4) --[[ line: 258 ]]
+			urlGenerator = function(_, p4) --[[ line: 257 ]]
 				-- upvalues: urlBuilder (ref)
 				local var12 = if p4 then p4.getPrivacyPolicyLink() else nil
 				
@@ -235,6 +234,5 @@ return {
 	ItemType = t,
 	ItemTextKey = t_2,
 	ItemInfo = t_3,
-	EventNameMappings = t_1,
-	MomentsExperienceUri = flyoutMomentsPlaceURI
+	EventNameMappings = t_1
 }

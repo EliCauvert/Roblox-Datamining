@@ -5,8 +5,5 @@
 	virtualEventImpressions = "virtualEventImpressions",
 	experienceStoreImpressions = "experienceStoreImpressions",
 	marketplaceItemImpressions = "marketplaceItemImpressions",
-	devStoreSeeAllImpressions = "devStoreSeeAllImpressions",
-	queryImpressions = "queryImpressions",
-	playerTileImpressions = "playerTileImpressions",
-	promptImpressions = "promptImpressions"
+	devStoreSeeAllImpressions = "devStoreSeeAllImpressions"
 }

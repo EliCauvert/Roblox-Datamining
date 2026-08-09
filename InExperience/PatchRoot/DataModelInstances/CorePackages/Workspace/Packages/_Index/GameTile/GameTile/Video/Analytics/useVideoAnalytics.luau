@@ -8,6 +8,7 @@ local videoLogger = require(parent.VideoUtils).VideoLogger
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local _ = require(gameTile.GameTileTypes)
 local getGameTileLayoutDataModule = require(gameTile.getGameTileLayoutData)
+local fFlagLuaAppHomeUnifiedVideoEngagementEvents = require(parent.SharedFlags).FFlagLuaAppHomeUnifiedVideoEngagementEvents
 local fFlagLuaAppHomeReduceRenders = require(parent.SharedFlags).FFlagLuaAppHomeReduceRenders
 local discoveryAnalyticsModule = require(gameTile.Parent.DiscoveryAnalytics)
 local discoveryVideoEndEvent = discoveryAnalyticsModule.Events.discoveryVideoEndEvent
@@ -15,11 +16,11 @@ local discoveryVideoLoadEvent = discoveryAnalyticsModule.Events.discoveryVideoLo
 local discoveryVideoLoopEvent = discoveryAnalyticsModule.Events.discoveryVideoLoopEvent
 local discoveryVideoPlayEvent = discoveryAnalyticsModule.Events.discoveryVideoPlayEvent
 
-local function _(p0, p1) --[[ line: 29 | named "getGameSortId" ]]
+local function _(p0, p1) --[[ line: 31 | named "getGameSortId" ]]
 	return if p0 == nil then nil elseif p1 then p0.topicId else p0.gameSetTypeId
 end
 
-local _ = function(value, p2) --[[ line: 41 | named "getVideoAssetId" ]]
+local _ = function(value, p2) --[[ line: 43 | named "getVideoAssetId" ]]
 	-- upvalues: getGameTileLayoutDataModule (ref)
 	if value and value.primaryWideVideoAssetId then
 		return value.primaryWideVideoAssetId
@@ -29,10 +30,10 @@ local _ = function(value, p2) --[[ line: 41 | named "getVideoAssetId" ]]
 	return var4 and (var4.primaryMediaAsset and var4.primaryMediaAsset.wideVideoAssetId)
 end
 
-return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
-	-- upvalues: reactModule (ref), mutedError (ref), getGameTileLayoutDataModule (ref), discoveryVideoPlayEvent (ref), discoveryEventErrorLogger (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref), fFlagLuaAppHomeReduceRenders (ref)
+return function(p3, p4, p5, p6, p7) --[[ line: 56 | named "useVideoAnalytics" ]]
+	-- upvalues: reactModule (ref), mutedError (ref), getGameTileLayoutDataModule (ref), discoveryVideoPlayEvent (ref), fFlagLuaAppHomeUnifiedVideoEngagementEvents (ref), discoveryEventErrorLogger (ref), discoveryVideoLoadEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoLoopEvent (ref), discoveryVideoEndEvent (ref), fFlagLuaAppHomeReduceRenders (ref)
 	local var5 = if p3 ~= nil then nil elseif p4 then p3.topicId else p3.gameSetTypeId
-	local var6 = reactModule.useCallback(function(p8, p9) --[[ line: 63 ]]
+	local var6 = reactModule.useCallback(function(p8, p9) --[[ line: 65 ]]
 		-- upvalues: p7 (ref), mutedError (copy), var5 (ref), getGameTileLayoutDataModule (copy), discoveryVideoPlayEvent (copy), p5 (ref), p6 (ref)
 		if p8 ~= nil and p7 ~= nil then
 			local var10 = p7[p8]
@@ -62,8 +63,8 @@ return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
 			})
 		end
 	end, { p5, p7, var5, p6 })
-	local var7 = reactModule.useCallback(function(p10, p11, p12, p13) --[[ line: 87 ]]
-		-- upvalues: p7 (ref), mutedError (copy), var5 (ref), getGameTileLayoutDataModule (copy), discoveryEventErrorLogger (copy), p5 (ref), discoveryVideoLoadEvent (copy), p6 (ref), videoLogger (copy), videoActions (copy)
+	local var7 = reactModule.useCallback(function(p10, p11, p12, p13) --[[ line: 89 ]]
+		-- upvalues: p7 (ref), mutedError (copy), var5 (ref), getGameTileLayoutDataModule (copy), fFlagLuaAppHomeUnifiedVideoEngagementEvents (copy), discoveryEventErrorLogger (copy), p5 (ref), discoveryVideoLoadEvent (copy), p6 (ref), videoLogger (copy), videoActions (copy)
 		if p10 ~= nil and p7 ~= nil then
 			local var14 = p7[p10]
 			
@@ -82,7 +83,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
 			if not wideVideoAssetId then
 				mutedError("reportVideoLoad requires a valid videoAssetId")
 			end
-			if not var14.universeId then
+			if fFlagLuaAppHomeUnifiedVideoEngagementEvents and not var14.universeId then
 				discoveryEventErrorLogger.reportError("UnifiedVideoEngagementEvent_MissingUniverseId", `reportVideoLoad: entry at index {p10} is missing universeId for unified "load" on page "{p5}"`, {
 					index = p10,
 					pageContext = p5,
@@ -102,7 +103,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
 				sortPos = p6
 			})
 			
-			if var14.universeId and wideVideoAssetId then
+			if fFlagLuaAppHomeUnifiedVideoEngagementEvents and var14.universeId and wideVideoAssetId then
 				videoLogger.reportVideoAction(videoActions.load, p5, {
 					source = "universe",
 					videoAssetId = wideVideoAssetId,
@@ -112,7 +113,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
 			end
 		end
 	end, { p5, p7, var5, p6 })
-	local var8 = reactModule.useCallback(function(p14, p15) --[[ line: 137 ]]
+	local var8 = reactModule.useCallback(function(p14, p15) --[[ line: 139 ]]
 		-- upvalues: p7 (ref), mutedError (copy), var5 (ref), getGameTileLayoutDataModule (copy), discoveryVideoLoopEvent (copy), p5 (ref), p6 (ref)
 		if p14 ~= nil and p7 ~= nil then
 			local var18 = p7[p14]
@@ -142,7 +143,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
 			})
 		end
 	end, { p5, p7, var5, p6 })
-	local var9 = reactModule.useCallback(function(p16, p17, p18, p19, p20) --[[ line: 161 ]]
+	local var9 = reactModule.useCallback(function(p16, p17, p18, p19, p20) --[[ line: 163 ]]
 		-- upvalues: p7 (ref), mutedError (copy), var5 (ref), getGameTileLayoutDataModule (copy), discoveryVideoEndEvent (copy), p5 (ref), p6 (ref)
 		if p16 ~= nil and p7 ~= nil then
 			local var22 = p7[p16]
@@ -176,7 +177,7 @@ return function(p3, p4, p5, p6, p7) --[[ line: 54 | named "useVideoAnalytics" ]]
 		end
 	end, { p5, p7, var5, p6 })
 	
-	return if fFlagLuaAppHomeReduceRenders then reactModule.useMemo(function() --[[ line: 196 ]]
+	return if fFlagLuaAppHomeReduceRenders then reactModule.useMemo(function() --[[ line: 198 ]]
 		-- upvalues: var6 (ref), var7 (ref), var8 (ref), var9 (ref)
 		return {
 			reportVideoPlay = var6,

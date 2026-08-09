@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppIaHomeSubTab", false) or game:DefineFastFlag("SubTabAddMomentsFlagGating", false) and (require(script.Parent.FFlagEnableArgus) and require(script.Parent.FFlagArgoEnableMoments))
+﻿return game:DefineFastFlag("LuaAppIaHomeSubTab", false)

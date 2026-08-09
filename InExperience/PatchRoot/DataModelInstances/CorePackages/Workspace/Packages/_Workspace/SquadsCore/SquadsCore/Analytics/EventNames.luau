@@ -17,13 +17,5 @@
 	SquadRegroupButtonClicked = "squadRegroupButtonClicked",
 	SquadRegroupPromptShown = "squadRegroupPromptShown",
 	SquadRegroupPromptClicked = "squadRegroupPromptClicked",
-	SquadExperienceInviteImpression = "squadExperienceInviteImpression",
-	LuckyRecommendationRowImpression = "luckyRecommendationRowImpression",
-	LuckyRecommendationInvoked = "luckyRecommendationInvoked",
-	LuckyRecommendationRevealShown = "luckyRecommendationRevealShown",
-	LuckyRecommendationRerolled = "luckyRecommendationRerolled",
-	LuckyRecommendationJoinTapped = "luckyRecommendationJoinTapped",
-	LuckyRecommendationErrorShown = "luckyRecommendationErrorShown",
-	LuckyRecommendationDismissed = "luckyRecommendationDismissed",
-	LuckyRecommendationExperienceInviteCreated = "luckyRecommendationExperienceInviteCreated"
+	SquadExperienceInviteImpression = "squadExperienceInviteImpression"
 }

@@ -1,12 +1,13 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local textButton = require(corePackagesService.Packages.UIBlox).App.Button.TextButton
+local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local withStyle = UIBloxModule.Style.withStyle
+local textButton = UIBloxModule.App.Button.TextButton
 local checkboxRowModule = require(script.Parent.CheckboxRow)
 local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
 
-local var5 = function() --[[ line: 25 ]] end
+local var6 = function() --[[ line: 25 ]] end
 
 reportActionSelection.defaultProps = {
 	titleText = "Thanks for your report!",
@@ -20,9 +21,9 @@ reportActionSelection.defaultProps = {
 	isBlocked = false,
 	ZIndex = 1,
 	uiScale = 1.3,
-	onMuteCheckboxActivated = var5,
-	onBlockCheckboxActivated = var5,
-	onDoneActivated = var5
+	onMuteCheckboxActivated = var6,
+	onBlockCheckboxActivated = var6,
+	onDoneActivated = var6
 }
 reportActionSelection.validateProps = tModule.interface({
 	titleText = tModule.string,
@@ -65,42 +66,10 @@ function reportActionSelection.init(p0) --[[ line: 60 ]]
 end
 
 function reportActionSelection.render(p3) --[[ line: 87 ]]
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roactModule (ref), checkboxRowModule (ref), textButton (ref)
-	return withFoundationOrUIBloxStyle(function(p4) --[[ line: 88 ]]
-		return {
-			Theme = {
-				Divider = {
-					Color = p4.Color.Stroke.Emphasis.Color3,
-					Transparency = p4.Color.Stroke.Emphasis.Transparency
-				},
-				SystemPrimaryContent = {
-					Color = p4.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = p4.Color.ActionSubEmphasis.Foreground.Transparency
-				},
-				TextDefault = {
-					Color = p4.Color.Content.Default.Color3,
-					Transparency = p4.Color.Content.Default.Transparency
-				},
-				TextEmphasis = {
-					Color = p4.Color.Content.Emphasis.Color3,
-					Transparency = p4.Color.Content.Emphasis.Transparency
-				}
-			},
-			Font = {
-				BaseSize = 1,
-				CaptionHeader = {
-					Font = p4.Typography.CaptionLarge.Font,
-					RelativeSize = p4.Typography.CaptionLarge.FontSize
-				},
-				Header1 = {
-					Font = p4.Typography.HeadingSmall.Font,
-					RelativeSize = p4.Typography.HeadingSmall.FontSize
-				}
-			}
-		}
-	end, function(p5) --[[ line: 120 ]]
+	-- upvalues: withStyle (ref), roactModule (ref), checkboxRowModule (ref), textButton (ref)
+	return withStyle(function(p4) --[[ line: 88 ]]
 		-- upvalues: roactModule (copy), p3 (ref), checkboxRowModule (copy), textButton (copy)
-		local baseSize = p5.Font.BaseSize
+		local baseSize = p4.Font.BaseSize
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -121,10 +90,10 @@ function reportActionSelection.render(p3) --[[ line: 87 ]]
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Text = p3.props.titleText,
-				TextColor3 = p5.Theme.TextEmphasis.Color,
-				TextTransparency = p5.Theme.TextEmphasis.Transparency,
-				TextSize = p5.Font.Header1.RelativeSize * baseSize,
-				Font = p5.Font.Header1.Font,
+				TextColor3 = p4.Theme.TextEmphasis.Color,
+				TextTransparency = p4.Theme.TextEmphasis.Transparency,
+				TextSize = p4.Font.Header1.RelativeSize * baseSize,
+				Font = p4.Font.Header1.Font,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
 			subtitle = roactModule.createElement("TextLabel", {
@@ -133,10 +102,10 @@ function reportActionSelection.render(p3) --[[ line: 87 ]]
 				LayoutOrder = 2,
 				Size = UDim2.fromOffset(612, 0),
 				Text = p3.props.subtitleText,
-				TextColor3 = p5.Theme.TextEmphasis.Color,
-				TextTransparency = p5.Theme.TextEmphasis.Transparency,
-				TextSize = p5.Font.CaptionHeader.RelativeSize * baseSize,
-				Font = p5.Font.CaptionHeader.Font,
+				TextColor3 = p4.Theme.TextEmphasis.Color,
+				TextTransparency = p4.Theme.TextEmphasis.Transparency,
+				TextSize = p4.Font.CaptionHeader.RelativeSize * baseSize,
+				Font = p4.Font.CaptionHeader.Font,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
 			actions = roactModule.createElement("Frame", {
@@ -157,10 +126,10 @@ function reportActionSelection.render(p3) --[[ line: 87 ]]
 					LayoutOrder = 1,
 					Size = UDim2.fromScale(1, 0),
 					Text = p3.props.instructionText,
-					TextColor3 = p5.Theme.TextDefault.Color,
-					TextTransparency = p5.Theme.TextDefault.Transparency,
-					TextSize = p5.Font.CaptionHeader.RelativeSize * baseSize,
-					Font = p5.Font.CaptionHeader.Font,
+					TextColor3 = p4.Theme.TextDefault.Color,
+					TextTransparency = p4.Theme.TextDefault.Transparency,
+					TextSize = p4.Font.CaptionHeader.RelativeSize * baseSize,
+					Font = p4.Font.CaptionHeader.Font,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					AutomaticSize = Enum.AutomaticSize.Y
 				}),
@@ -177,8 +146,8 @@ function reportActionSelection.render(p3) --[[ line: 87 ]]
 					BorderSizePixel = 0,
 					LayoutOrder = 3,
 					Size = UDim2.new(1, 0, 0, 1),
-					BackgroundColor3 = p5.Theme.Divider.Color,
-					BackgroundTransparency = p5.Theme.Divider.Transparency
+					BackgroundColor3 = p4.Theme.Divider.Color,
+					BackgroundTransparency = p4.Theme.Divider.Transparency
 				}),
 				blockCheckbox = roactModule.createElement(checkboxRowModule, {
 					height = 28,
@@ -191,8 +160,8 @@ function reportActionSelection.render(p3) --[[ line: 87 ]]
 				doneContainer = roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 5,
-					BackgroundColor3 = p5.Theme.SystemPrimaryContent.Color,
-					BackgroundTransparency = p5.Theme.SystemPrimaryContent.Transparency,
+					BackgroundColor3 = p4.Theme.SystemPrimaryContent.Color,
+					BackgroundTransparency = p4.Theme.SystemPrimaryContent.Transparency,
 					Size = UDim2.new(1, 0, 0, 44)
 				}, {
 					uiCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),

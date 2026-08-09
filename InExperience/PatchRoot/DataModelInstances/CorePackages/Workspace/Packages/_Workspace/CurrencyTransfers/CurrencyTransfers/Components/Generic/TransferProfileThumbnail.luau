@@ -2,7 +2,6 @@
 local parent = currencyTransfers.Parent
 local reactModule = require(parent.React)
 local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
-local fFlagCurrencyTransferUseProfileFrameThumbnailModule = require(currencyTransfers.Flags.FFlagCurrencyTransferUseProfileFrameThumbnail)
 local foundationModule = require(parent.Foundation)
 local image = foundationModule.Image
 local view = foundationModule.View
@@ -13,9 +12,9 @@ local constants = userLibModule.Utils.Constants
 local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local size100x100 = Enum.ThumbnailSize.Size100x100
 
-return function(p0) --[[ line: 34 | named "UserProfileThumbnail" ]]
-	-- upvalues: useTokens (ref), size100x100 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), fFlagCurrencyTransferUseProfileFrameThumbnailModule (ref), reactModule (ref), view (ref), image (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), text (ref)
-	local var6 = useTokens()
+return function(p0) --[[ line: 32 | named "UserProfileThumbnail" ]]
+	-- upvalues: useTokens (ref), size100x100 (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), reactModule (ref), view (ref), image (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), text (ref)
+	local var5 = useTokens()
 	
 	if not p0.thumbnailSize then
 		p0.thumbnailSize = size100x100
@@ -30,8 +29,8 @@ return function(p0) --[[ line: 34 | named "UserProfileThumbnail" ]]
 		}, {
 			AvatarImage = reactModule.createElement(image, {
 				tag = "size-full aspect-1-1 radius-circle align-x-center align-y-center",
-				Image = getRbxthumbWithTypeSizeAndOptions(p0.userId, constants.RbxthumbTypes.AvatarHeadShot, if p0.thumbnailSize == Enum.ThumbnailSize.Size48x48 then 48 elseif p0.thumbnailSize == Enum.ThumbnailSize.Size60x60 then 60 else 150, true, nil, fFlagCurrencyTransferUseProfileFrameThumbnailModule),
-				backgroundStyle = var6.Color.Shift.Shift_300
+				Image = getRbxthumbWithTypeSizeAndOptions(p0.userId, constants.RbxthumbTypes.AvatarHeadShot, if p0.thumbnailSize == Enum.ThumbnailSize.Size48x48 then 48 elseif p0.thumbnailSize == Enum.ThumbnailSize.Size60x60 then 60 else 150, true),
+				backgroundStyle = var5.Color.Shift.Shift_300
 			})
 		}),
 		NameContainer = if p0.showUsername and (if getFFlagCurrencyTransferFlowUIImprovementFixModule() then p0.username or p0.displayName else p0.username) then reactModule.createElement(view, { tag = "col auto-y align-x-center" }, {

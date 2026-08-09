@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfileInspectAvatarCWEntry", false) and require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy

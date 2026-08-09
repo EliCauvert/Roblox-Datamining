@@ -2,9 +2,9 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
+local theme = foundationModule.Enums.Theme
 local device = foundationModule.Enums.Device
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
+local t = { Light = theme.Light, Dark = theme.Dark }
 
 return {
 	name = "SduiSharedContent",
@@ -26,7 +26,7 @@ return {
 					PaddingRight = UDim.new(0, 10)
 				}),
 				FoundationContext = reactModule.createElement(foundationProvider, {
-					colorMode = t[p1.theme],
+					theme = t[p1.theme],
 					device = device[p1.platform],
 					preferences = p1.settings,
 					scale = p1.settings and p1.settings.scale

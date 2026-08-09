@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("ChatMute").Parent.Signals).createComputed(require(script.Parent.createMutedUsersStore))

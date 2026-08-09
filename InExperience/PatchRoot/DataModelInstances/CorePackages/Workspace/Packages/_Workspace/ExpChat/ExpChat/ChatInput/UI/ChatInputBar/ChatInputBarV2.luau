@@ -8,15 +8,14 @@ local channelChipModule = require(script.Parent.ChannelChip)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
+local fFlagExpChatEnableFocusNavigationModule = require(expChat.Flags.FFlagExpChatEnableFocusNavigation)
 local expChatFocusablePlaceholderText = game:DefineFastFlag("ExpChatFocusablePlaceholderText", false)
 local fFlagExpChatInputBarV2CustomSendButtonModule = require(expChat.Flags.FFlagExpChatInputBarV2CustomSendButton)
-local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
 local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
 
-local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 80 ]]
-	-- upvalues: reactModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), foundationModule (ref)
+local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 77 ]]
+	-- upvalues: reactModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), fFlagExpChatEnableFocusNavigationModule (ref), foundationModule (ref)
 	local var12 = if p2 then p1.Color.ActionStandard else p1.Color.ActionEmphasis
 	local size800 = p1.Size.Size_800
 	
@@ -36,7 +35,7 @@ local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 80 ]]
 			BackgroundColor3 = var12.Background.Color3,
 			BackgroundTransparency = var12.Background.Transparency,
 			BorderSizePixel = 0,
-			Selectable = if p2 then false elseif fFlagExpChatPresetChatGamepadEnabledModule then nil else false,
+			Selectable = if p2 then false elseif fFlagExpChatPresetChatGamepadEnabledModule then nil elseif fFlagExpChatEnableFocusNavigationModule then false else nil,
 			Size = UDim2.fromOffset(size800, size800),
 			Text = "",
 			[reactModule.Event.Activated] = if p2 then nil else p3
@@ -55,8 +54,8 @@ local function renderCustomSendButton(p0, p1, p2, p3) --[[ line: 80 ]]
 	})
 end
 
-return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
+return reactModule.memo(function(p4) --[[ line: 134 | named "ChatInputBarV2" ]]
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatEnableFocusNavigationModule (ref), channelChipModule (ref), fFlagExpChatUseMessagesStore (ref), configModule (ref), expChatFocusablePlaceholderText (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatInputBarV2CustomSendButtonModule (ref), renderCustomSendButton (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref)
 	local var13 = foundationModule.Hooks.useTokens()
 	local setTransparency = p4.setTransparency
 	local chatInputBarSettings = p4.chatInputBarSettings
@@ -103,9 +102,7 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 		Size = UDim2.fromScale(1, 0)
 	}
 	local t_5 = {
-		UICorner = reactModule.createElement("UICorner", {
-			CornerRadius = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then UDim.new(0, 20) else UDim.new(1, 0)
-		}),
+		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
 		UIStroke = reactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = var13.Color.Stroke.Default.Color3,
@@ -118,6 +115,11 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 	local t_6 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
+		SelectionBehaviorDown = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
+		SelectionBehaviorLeft = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
+		SelectionBehaviorRight = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
+		SelectionBehaviorUp = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then Enum.SelectionBehavior.Stop else nil,
+		SelectionGroup = if fFlagEnableConsoleExpControls and not fFlagExpChatEnableFocusNavigationModule then true else nil,
 		Position = UDim2.fromScale(0, 0),
 		Size = UDim2.new(1, -(p4.sendButtonContainerWidth + 6), 0, 0)
 	}
@@ -125,10 +127,7 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 		TargetChannelChip = reactModule.createElement(channelChipModule, {
 			transparency = setTransparency(0, p4.transparencyValue),
 			onAbsoluteSizeChanged = onAbsoluteSizeChanged,
-			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function() --[[ line: 195 ]]
-				-- upvalues: p4 (ref)
-				p4.resetTargetChannel(p4.isGlobalChatTabActive)
-			end else p4.resetTargetChannel,
+			onChannelChipActivated = p4.resetTargetChannel,
 			targetTextChannelDisplayName = p4.targetTextChannelDisplayName or "",
 			isChannelBarVisible = p4.isChannelBarVisible,
 			developerChannelTabsEnabled = p4.developerChannelTabsEnabled
@@ -145,7 +144,7 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 			Font = configModule.ChatInputBarFont,
 			Text = p4.disabledChatPlaceholderText,
 			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p5) --[[ line: 212 ]]
+			Size = targetChannelWidth:map(function(p5) --[[ line: 227 ]]
 				return UDim2.new(1, -(p5 + 8), 0, 0)
 			end),
 			TextColor3 = if showPlaceholderText then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
@@ -153,8 +152,8 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 			TextTransparency = setTransparency(if showPlaceholderText then 0.5 else 0, p4.transparencyValue),
 			Selectable = if expChatFocusablePlaceholderText then true else nil,
 			SelectionImageObject = if expChatFocusablePlaceholderText then cursor else nil,
-			TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p4.shouldTruncatePlaceholder)),
-			TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd elseif fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
+			TextWrapped = not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p4.shouldTruncatePlaceholder)),
+			TextTruncate = if fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			ref = if expChatFocusablePlaceholderText then placeholderRef else nil
@@ -171,7 +170,7 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 			AnchorPoint = Vector2.new(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p6) --[[ line: 250 ]]
+			Size = targetChannelWidth:map(function(p6) --[[ line: 262 ]]
 				return UDim2.new(1, -(p6 + 8), 0, 0)
 			end)
 		}
@@ -197,8 +196,8 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 				TextTransparency = setTransparency(if showPlaceholderText then 0.5 else 0, p4.transparencyValue),
 				TextStrokeTransparency = setTransparency(chatInputBarSettings.TextStrokeTransparency, p4.transparencyValue),
 				TextStrokeColor3 = chatInputBarSettings.TextStrokeColor3,
-				TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p4.shouldTruncatePlaceholder)),
-				TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd elseif fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
+				TextWrapped = not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p4.shouldTruncatePlaceholder)),
+				TextTruncate = if fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				ZIndex = 2,
@@ -237,7 +236,7 @@ return reactModule.memo(function(p4) --[[ line: 133 | named "ChatInputBarV2" ]]
 			variant = if hasEmptyInputText then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
 			size = foundationModule.Enums.InputSize.Small,
 			isDisabled = hasEmptyInputText,
-			Selectable = if fFlagExpChatPresetChatGamepadEnabledModule then nil else false,
+			Selectable = if fFlagExpChatPresetChatGamepadEnabledModule then nil elseif fFlagExpChatEnableFocusNavigationModule then false else nil,
 			onActivated = onSendActivated
 		})
 	})

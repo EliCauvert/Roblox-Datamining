@@ -5,7 +5,6 @@ local t = inGameMenuDependenciesModule.t
 local userGameSettingsService = UserSettings():GetService("UserGameSettings")
 local masterVolumePropertyChangedSignal = userGameSettingsService:GetPropertyChangedSignal("MasterVolume")
 local parent = script.Parent.Parent.Parent
-local fFlagRenameVolumeToMainVolumeModule = require(coreGuiService.RobloxGui.Modules.Flags.FFlagRenameVolumeToMainVolume)
 local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
 local sliderEntryModule = require(script.Parent.SliderEntry)
 local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
@@ -28,9 +27,9 @@ volumeEntry.validateProps = t.strictInterface({
 	buttonRef = t.optional(t.table)
 })
 
-function volumeEntry.init(p0) --[[ line: 41 ]]
+function volumeEntry.init(p0) --[[ line: 39 ]]
 	-- upvalues: userGameSettingsService (ref)
-	function p0.onVolumeChanged() --[[ line: 42 ]]
+	function p0.onVolumeChanged() --[[ line: 40 ]]
 		-- upvalues: p0 (ref), userGameSettingsService (copy)
 		p0:setState({
 			volume = math.floor(userGameSettingsService.MasterVolume * 10 + 0.5)
@@ -40,17 +39,17 @@ function volumeEntry.init(p0) --[[ line: 41 ]]
 	p0.onVolumeChanged()
 end
 
-function volumeEntry.render(p1) --[[ line: 51 ]]
-	-- upvalues: roact (ref), sliderEntryModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), userGameSettingsService (ref), volumeChangeSound (ref), sendAnalyticsModule (ref), constantsModule (ref), externalEventConnectionModule (ref), masterVolumePropertyChangedSignal (ref)
+function volumeEntry.render(p1) --[[ line: 49 ]]
+	-- upvalues: roact (ref), sliderEntryModule (ref), userGameSettingsService (ref), volumeChangeSound (ref), sendAnalyticsModule (ref), constantsModule (ref), externalEventConnectionModule (ref), masterVolumePropertyChangedSignal (ref)
 	return roact.createFragment({
 		VolumeSlider = roact.createElement(sliderEntryModule, {
+			labelKey = "CoreScripts.InGameMenu.GameSettings.Volume",
 			min = 0,
 			max = 10,
 			stepInterval = 1,
-			labelKey = if fFlagRenameVolumeToMainVolumeModule then "CoreScripts.InGameMenu.GameSettings.MainVolume" else "CoreScripts.InGameMenu.GameSettings.Volume",
 			LayoutOrder = p1.props.LayoutOrder,
 			value = p1.state.volume,
-			valueChanged = function(p2) --[[ line: 62 ]]
+			valueChanged = function(p2) --[[ line: 58 ]]
 				-- upvalues: userGameSettingsService (copy), volumeChangeSound (copy), sendAnalyticsModule (copy), constantsModule (copy)
 				userGameSettingsService.MasterVolume = p2 / 10
 				volumeChangeSound:Play()

@@ -3,15 +3,10 @@
 return {
 	displayName = "PurchasePrompt-MockDataModel",
 	mockDataModel = true,
-	testMatch = {
-		"**/launchRobuxPackagePurchase.test",
-		"**/NativePurchaseFinishedConnector.test",
-		"**/NativePurchaseFinishedConnectorFlagOff.test"
-	},
+	testMatch = { "**/launchRobuxPackagePurchase.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	},
 	coveragePathIgnorePatterns = { "Localization/Locales/.*%.lua$" }
 }

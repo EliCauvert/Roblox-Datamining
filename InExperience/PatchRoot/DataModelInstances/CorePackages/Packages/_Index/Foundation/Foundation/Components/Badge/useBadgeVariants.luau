@@ -64,14 +64,13 @@ function variantsFactory(p0) --[[ line: 35 ]]
 				content = { style = p0.Inverse.Content.Emphasis },
 				icon = { style = p0.Inverse.Content.Emphasis }
 			},
-			[badgeVariantModule.Standard] = {
-				container = { backgroundStyle = p0.Color.ActionStandard.Background },
-				content = { style = p0.Color.ActionStandard.Foreground },
-				icon = { style = p0.Color.ActionStandard.Foreground }
-			},
-			[badgeVariantModule.Neutral] = if flagsModule.FoundationBadgeBetaUpdate then nil else {
-				container = { backgroundStyle = p0.Color.Shift.Shift_300 },
-				content = { style = p0.Color.Content.Emphasis },
+			[badgeVariantModule.Neutral] = {
+				container = {
+					backgroundStyle = if flagsModule.FoundationBadgeBetaUpdate then p0.Color.ActionStandard.Background else p0.Color.Shift.Shift_300
+				},
+				content = {
+					style = if flagsModule.FoundationBadgeBetaUpdate then p0.Color.ActionStandard.Foreground else p0.Color.Content.Emphasis
+				},
 				icon = { style = p0.Color.ActionStandard.Foreground }
 			},
 			[badgeVariantModule.OverMedia] = {
@@ -128,7 +127,7 @@ function variantsFactory(p0) --[[ line: 35 ]]
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6) --[[ line: 218 ]]
+return function(p1, p2, p3, p4, p5, p6) --[[ line: 211 ]]
 	-- upvalues: variantsContextModule (ref), composeStyleVariantModule (ref), flagsModule (ref), dashModule (ref)
 	local badge = variantsContextModule.useVariants("Badge", variantsFactory, p1)
 	

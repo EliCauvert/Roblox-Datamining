@@ -24,7 +24,7 @@ return {
 			-- upvalues: dictionary (copy), reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), p2 (ref)
 			return reactModule.createElement(mockProvidersModule, {}, {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
-					colorMode = "Dark",
+					theme = "Dark",
 					preferences = p3.settings,
 					overlayGui = p3.focus
 				}, {

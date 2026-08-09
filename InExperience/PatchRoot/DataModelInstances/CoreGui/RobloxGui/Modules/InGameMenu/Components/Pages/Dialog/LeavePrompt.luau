@@ -12,7 +12,7 @@ local gameIconModule = require(parent.GameIcon)
 local button = UIBlox.App.Button.Button
 local buttonType = UIBlox.App.Button.Enum.ButtonType
 local themedTextLabelModule = require(parent.ThemedTextLabel)
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local withStyle = UIBlox.Core.Style.withStyle
 local focusHandlerModule = require(parent.Connection.FocusHandler)
 local zonePortalModule = require(parent.ZonePortal)
 local directionModule = require(parent_1.Enums.Direction)
@@ -41,37 +41,17 @@ function leavePrompt.init(p0) --[[ line: 58 ]]
 end
 
 function leavePrompt.render(p1) --[[ line: 62 ]]
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), gameIconModule (ref), themedTextLabelModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), platformEnumModule (ref), button (ref), buttonType (ref), focusHandlerModule (ref), guiService (ref), zonePortalModule (ref), directionModule (ref), contextActionService (ref)
-	return withFoundationOrUIBloxStyle(function(p2) --[[ line: 63 ]]
-		return {
-			Theme = {
-				BackgroundDefault = {
-					Color = p2.Color.Surface.Surface_0.Color3,
-					Transparency = p2.Color.Surface.Surface_0.Transparency
-				}
-			},
-			Font = {
-				BaseSize = 1,
-				Header1 = {
-					Font = p2.Typography.HeadingSmall.Font,
-					RelativeSize = p2.Typography.HeadingSmall.FontSize
-				},
-				Body = {
-					Font = p2.Typography.BodyLarge.Font,
-					RelativeSize = p2.Typography.BodyLarge.FontSize
-				}
-			}
-		}
-	end, function(p3) --[[ line: 74 ]]
+	-- upvalues: withStyle (ref), roact (ref), gameIconModule (ref), themedTextLabelModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), platformEnumModule (ref), button (ref), buttonType (ref), focusHandlerModule (ref), guiService (ref), zonePortalModule (ref), directionModule (ref), contextActionService (ref)
+	return withStyle(function(p2) --[[ line: 63 ]]
 		-- upvalues: roact (copy), gameIconModule (copy), themedTextLabelModule (copy), p1 (ref), getFFlagEnableVRFTUXExperienceModule (copy), isFTUXExperienceModule (copy), platformEnumModule (copy), button (copy), buttonType (copy), focusHandlerModule (copy), guiService (copy), zonePortalModule (copy), directionModule (copy), contextActionService (copy)
-		local font = p3.Font
+		local font = p2.Font
 		
 		return roact.createElement("ImageButton", {
 			AutoButtonColor = false,
 			Selectable = false,
 			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = p3.Theme.BackgroundDefault.Color,
-			BackgroundTransparency = p3.Theme.BackgroundDefault.Transparency
+			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
+			BackgroundTransparency = p2.Theme.BackgroundDefault.Transparency
 		}, {
 			Content = roact.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -127,7 +107,7 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 			}),
 			FocusHandler = roact.createElement(focusHandlerModule, {
 				isFocused = p1.props.canGamepadCaptureFocus,
-				didFocus = function() --[[ line: 141 ]]
+				didFocus = function() --[[ line: 130 ]]
 					-- upvalues: guiService (copy), p1 (copy)
 					guiService.SelectedCoreObject = p1.leaveButtonRef.current
 				end
@@ -135,11 +115,11 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 			ZonePortal = roact.createElement(zonePortalModule, { targetZone = 0, direction = directionModule.Left }),
 			KeyboardFocusHandler = roact.createElement(focusHandlerModule, {
 				isFocused = p1.props.canKeyboardCaptureFocus,
-				didFocus = function() --[[ line: 152 ]]
+				didFocus = function() --[[ line: 141 ]]
 					-- upvalues: contextActionService (copy), p1 (copy)
-					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p4) --[[ line: 153 ]]
+					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p3) --[[ line: 142 ]]
 						-- upvalues: p1 (copy)
-						if p4 == Enum.UserInputState.End then
+						if p3 == Enum.UserInputState.End then
 							p1.props.onConfirm()
 							
 							return Enum.ContextActionResult.Sink
@@ -147,7 +127,7 @@ function leavePrompt.render(p1) --[[ line: 62 ]]
 						return Enum.ContextActionResult.Pass
 					end, false, Enum.KeyCode.Return)
 				end,
-				didBlur = function() --[[ line: 162 ]]
+				didBlur = function() --[[ line: 151 ]]
 					-- upvalues: contextActionService (copy)
 					contextActionService:UnbindCoreAction("LeavePromptConfirm")
 				end

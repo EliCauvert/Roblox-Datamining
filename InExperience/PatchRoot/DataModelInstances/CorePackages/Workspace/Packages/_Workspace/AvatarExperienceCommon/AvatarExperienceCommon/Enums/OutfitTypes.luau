@@ -6,5 +6,5 @@ return {
 	DynamicHead = "DynamicHead",
 	Shoes = "Shoes",
 	Animations = "Animations",
-	Makeup = "Makeup"
+	Makeup = if require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FFlagAXCustomizeMakeupSupport then "Makeup" else nil
 }

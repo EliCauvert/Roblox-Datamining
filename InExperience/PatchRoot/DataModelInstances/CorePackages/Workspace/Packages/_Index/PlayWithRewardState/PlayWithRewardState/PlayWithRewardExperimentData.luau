@@ -2,16 +2,14 @@
 local parent = script:FindFirstAncestor("PlayWithRewardState").Parent
 local mutedError = require(parent.Loggers).mutedError
 local tModule = require(parent.t)
-local fFlagLuaAppEnableContainedRewardUiModule = require(script.Parent.FFlagLuaAppEnableContainedRewardUi)
-local var3 = tModule.interface({
+local var2 = tModule.interface({
 	titleText = tModule.string,
 	subtitleText = tModule.string,
 	buttonText = tModule.string,
 	coachmarkTitleText = tModule.string,
 	coachmarkSubtitleText = tModule.string,
 	showButton = tModule.boolean,
-	variantId = tModule.string,
-	keepRewardContained = if fFlagLuaAppEnableContainedRewardUiModule then tModule.optional(tModule.boolean) else nil
+	variantId = tModule.string
 })
 local t = {}
 local t_1 = {
@@ -21,23 +19,22 @@ local t_1 = {
 	coachmarkTitleText = "",
 	coachmarkSubtitleText = "",
 	showButton = false,
-	variantId = "",
-	keepRewardContained = if fFlagLuaAppEnableContainedRewardUiModule then false else nil
+	variantId = ""
 }
 
-function t.fromJsonData(p0) --[[ line: 44 ]]
-	-- upvalues: t_1 (ref), httpService (ref), var3 (ref), mutedError (ref), fFlagLuaAppEnableContainedRewardUiModule (ref)
+function t.fromJsonData(p0) --[[ line: 39 ]]
+	-- upvalues: t_1 (ref), httpService (ref), var2 (ref), mutedError (ref)
 	local cloned = table.clone(t_1)
-	local ok, status = pcall(function() --[[ line: 47 ]]
+	local ok, status = pcall(function() --[[ line: 42 ]]
 		-- upvalues: httpService (copy), p0 (ref)
 		return httpService:JSONDecode(p0)
 	end)
 	
 	if ok then
-		local var7, var8 = var3(status)
+		local var6, var7 = var2(status)
 		
-		if not var7 then
-			mutedError(`PlayWithRewardExperimentData invalid: {tostring(var8)}`)
+		if not var6 then
+			mutedError(`PlayWithRewardExperimentData invalid: {tostring(var7)}`)
 			
 			return cloned
 		end
@@ -48,10 +45,6 @@ function t.fromJsonData(p0) --[[ line: 44 ]]
 		cloned.coachmarkSubtitleText = status.coachmarkSubtitleText
 		cloned.showButton = status.showButton
 		cloned.variantId = status.variantId
-		
-		if fFlagLuaAppEnableContainedRewardUiModule then
-			cloned.keepRewardContained = status.keepRewardContained or false
-		end
 	end
 	return cloned
 end

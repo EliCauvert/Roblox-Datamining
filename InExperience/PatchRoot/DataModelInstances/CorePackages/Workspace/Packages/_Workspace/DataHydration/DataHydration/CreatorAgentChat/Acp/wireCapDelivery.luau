@@ -9,15 +9,15 @@ local var6 = 0
 local var7 = nil
 local var8 = 0
 
-local function _(p0) --[[ line: 28 | named "isConnectionState" ]]
+local function _(p0) --[[ line: 29 | named "isConnectionState" ]]
 	return typeof(p0) == "EnumItem" and p0.EnumType == Enum.ConnectionState
 end
 
-local _ = function(p1) --[[ line: 32 | named "previewString" ]]
+local _ = function(p1) --[[ line: 33 | named "previewString" ]]
 	return if #p1 <= 4000 then p1 else string.sub(p1, 1, 4000) .. "\226\128\166"
 end
 
-local function summarizeDetail(p2, p3) --[[ line: 39 ]]
+local function summarizeDetail(p2, p3) --[[ line: 40 ]]
 	if typeof(p2) == "string" then
 		return {
 			shape = "string",
@@ -42,7 +42,7 @@ local function summarizeDetail(p2, p3) --[[ line: 39 ]]
 	return { shape = "table", keys = t, detailType = p3 }
 end
 
-local function extractRawFrame(p4) --[[ line: 69 ]]
+local function extractRawFrame(p4) --[[ line: 70 ]]
 	if typeof(p4) == "string" then
 		return p4
 	elseif typeof(p4) ~= "table" then
@@ -64,11 +64,11 @@ local function extractRawFrame(p4) --[[ line: 69 ]]
 	return nil
 end
 
-local _ = function(p5) --[[ line: 85 | named "extractRtnSequenceNumber" ]]
+local _ = function(p5) --[[ line: 86 | named "extractRtnSequenceNumber" ]]
 	return if typeof(p5) == "table" then p5.sequence_number else nil
 end
 
-local function describeParsedFrame(p6) --[[ line: 92 ]]
+local function describeParsedFrame(p6) --[[ line: 93 ]]
 	if typeof(p6) ~= "table" then
 		return { kind = "unknown" }
 	elseif p6.kind == "notification" and typeof(p6.notification) == "table" then
@@ -99,7 +99,7 @@ local function describeParsedFrame(p6) --[[ line: 92 ]]
 	end
 end
 
-local _ = function(p7, p8, p9) --[[ line: 128 | named "onCapConnectionState" ]]
+local _ = function(p7, p8, p9) --[[ line: 129 | named "onCapConnectionState" ]]
 	-- upvalues: debugModule (ref), acpProtocolModule (ref)
 	debugModule.log("info", "CAP RTN connection state", {
 		namespace = acpProtocolModule.CapRtnNamespace,
@@ -109,7 +109,7 @@ local _ = function(p7, p8, p9) --[[ line: 128 | named "onCapConnectionState" ]]
 	})
 end
 
-local function onSignalRConnectionState(value, p10, p11) --[[ line: 137 ]]
+local function onSignalRConnectionState(value, p10, p11) --[[ line: 138 ]]
 	-- upvalues: acpProtocolModule (ref), debugModule (ref)
 	debugModule.log("info", "SignalR connection state", {
 		connectionState = tostring(value),
@@ -119,7 +119,7 @@ local function onSignalRConnectionState(value, p10, p11) --[[ line: 137 ]]
 	})
 end
 
-local function onCapEvent(p12, p13, p14) --[[ line: 151 ]]
+local function onCapEvent(p12, p13, p14) --[[ line: 152 ]]
 	-- upvalues: var8 (write), debugModule (ref), acpProtocolModule (ref), summarizeDetail (ref), extractRawFrame (ref), parseFrameModule (ref), describeParsedFrame (ref)
 	var8 += 1
 	local var18 = var8
@@ -171,7 +171,7 @@ local function onCapEvent(p12, p13, p14) --[[ line: 151 ]]
 	end
 	local sessionId = var21.sessionId
 	
-	local function logTurnSnapshot(p15) --[[ line: 210 ]]
+	local function logTurnSnapshot(p15) --[[ line: 211 ]]
 		-- upvalues: sessionId (ref), p12 (ref), debugModule (copy), var18 (ref)
 		if typeof(sessionId) ~= "string" then return end
 		local activeTurnHandle = p12.getActiveTurnHandle(sessionId)
@@ -190,7 +190,7 @@ local function onCapEvent(p12, p13, p14) --[[ line: 151 ]]
 	end
 end
 
-local _ = function(value, p16, p17, p18) --[[ line: 229 | named "onNamespaceSignal" ]]
+local _ = function(value, p16, p17, p18) --[[ line: 230 | named "onNamespaceSignal" ]]
 	-- upvalues: debugModule (ref), acpProtocolModule (ref), onCapEvent (ref)
 	if typeof(p16) == "EnumItem" and p16.EnumType == Enum.ConnectionState then
 		debugModule.log("info", "CAP RTN connection state", {
@@ -205,21 +205,21 @@ local _ = function(value, p16, p17, p18) --[[ line: 229 | named "onNamespaceSign
 	onCapEvent(value, p16, p17)
 end
 
-local _ = function() --[[ line: 238 | named "ensureReceiver" ]]
+local _ = function() --[[ line: 239 | named "ensureReceiver" ]]
 	-- upvalues: var5 (write), realtimeDeliveryModule (ref), notificationService (ref)
 	if var5 == nil then
 		var5 = realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
 	end
 end
 
-local function subscribeCapNamespace(p19) --[[ line: 244 ]]
+local function subscribeCapNamespace(p19) --[[ line: 245 ]]
 	-- upvalues: acpProtocolModule (ref), debugModule (ref), var5 (write), onCapEvent (ref), onSignalRConnectionState (ref)
 	local capRtnNamespace = acpProtocolModule.CapRtnNamespace
 	debugModule.log("info", "listening on CAP RTN namespace (SignalR topic)", {
 		via = "NotificationService.RobloxEventReceived + RobloxConnectionChanged",
 		namespace = capRtnNamespace
 	})
-	local var24 = var5:observeEvent(capRtnNamespace, function(p20, p21, p22) --[[ line: 251 ]]
+	local var24 = var5:observeEvent(capRtnNamespace, function(p20, p21, p22) --[[ line: 252 ]]
 		-- upvalues: p19 (ref), debugModule (copy), acpProtocolModule (copy), onCapEvent (copy)
 		if typeof(p20) == "EnumItem" and p20.EnumType == Enum.ConnectionState then
 			debugModule.log("info", "CAP RTN connection state", {
@@ -233,21 +233,21 @@ local function subscribeCapNamespace(p19) --[[ line: 244 ]]
 		end
 		onCapEvent(p19, p20, p21)
 	end)
-	local signalR = var5:observeEvent("signalR", function(p23, p24, p25) --[[ line: 257 ]]
+	local signalR = var5:observeEvent("signalR", function(p23, p24, p25) --[[ line: 258 ]]
 		-- upvalues: onSignalRConnectionState (copy)
 		if typeof(p23) == "EnumItem" and p23.EnumType == Enum.ConnectionState then
 			onSignalRConnectionState(p23, p24, p25)
 		end
 	end)
 	
-	return function() --[[ line: 264 ]]
+	return function() --[[ line: 265 ]]
 		-- upvalues: var24 (ref), signalR (ref)
 		var24:Disconnect()
 		signalR:Disconnect()
 	end
 end
 
-return function(p26) --[[ line: 270 | named "wireCapDelivery" ]]
+return function(p26) --[[ line: 271 | named "wireCapDelivery" ]]
 	-- upvalues: var5 (write), realtimeDeliveryModule (ref), notificationService (ref), var6 (write), var7 (write), var8 (write), subscribeCapNamespace (ref), debugModule (ref), acpProtocolModule (ref)
 	if var5 == nil then
 		var5 = realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
@@ -259,7 +259,7 @@ return function(p26) --[[ line: 270 | named "wireCapDelivery" ]]
 		var7 = subscribeCapNamespace(p26)
 		debugModule.log("info", "CAP RTN listener active \226\128\148 waiting for SignalR posts", { namespace = acpProtocolModule.CapRtnNamespace })
 	end
-	return function() --[[ line: 282 ]]
+	return function() --[[ line: 283 ]]
 		-- upvalues: var6 (copy), var7 (copy), debugModule (copy), acpProtocolModule (copy), var8 (copy)
 		var6 -= 1
 		

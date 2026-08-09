@@ -32,7 +32,7 @@ return function(p0, p1, p2) --[[ line: 7 | named "launchPlaytestWithLoadingState
 			var3.setPlaytestStatusForPlaceId(p0, "Idle")
 			error(var4 or "Failed to launch playtest", 0)
 		end
-		if var5 == "teleport_pending" then
+		if var5 == "teleport_pending" or var5 == "leave_and_launch_pending" then
 			return
 		end
 		var3.setPlaytestStatusForPlaceId(p0, "Completed")

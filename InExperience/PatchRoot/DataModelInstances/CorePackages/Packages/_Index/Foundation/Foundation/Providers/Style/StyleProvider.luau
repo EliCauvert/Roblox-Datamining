@@ -1,53 +1,89 @@
 ﻿local parent = script.Parent
 local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local colorModeModule = require(foundation.Enums.ColorMode)
+local parent_1 = foundation.Parent
+local dashModule = require(parent_1.Dash)
+local reactModule = require(parent_1.React)
 local deviceModule = require(foundation.Enums.Device)
+local flagsModule = require(foundation.Utility.Flags)
+local styleSheetModule = require(foundation.StyleSheet)
 local styleSheetContextModule = require(parent.StyleSheetContext)
 local tagsContextModule = require(parent.TagsContext)
 local textSizeOffsetContextModule = require(parent.TextSizeOffsetContext)
+local themeModule = require(foundation.Enums.Theme)
 local tokensModule = require(parent.Tokens)
 local tokensContextModule = require(parent.TokensContext)
 local variantsContextModule = require(parent.VariantsContext)
 local getTextSizeOffsetModule = require(foundation.Utility.getTextSizeOffset)
 local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
+local useTagsStateModule = require(parent.useTagsState)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local getTokens = tokensModule.getTokens
-local useRegistryStyleSheetModule = require(parent.useRegistryStyleSheet)
+local var17 = if flagsModule.FoundationUseStyleSheetRegistry then require(parent.useRegistryStyleSheet) else nil
 local t = {
 	scale = 1,
-	colorMode = colorModeModule.Dark,
+	theme = themeModule.Dark,
 	device = deviceModule.Desktop
 }
 
-return function(p0) --[[ line: 53 | named "StyleProvider" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), variantsContextModule (ref), reactModule (ref), getTokens (ref), usePreferencesModule (ref), getTextSizeOffsetModule (ref), useRegistryStyleSheetModule (ref), tokensContextModule (ref), textSizeOffsetContextModule (ref), tagsContextModule (ref), styleSheetContextModule (ref)
-	local var15 = withDefaultsModule({
-		colorMode = p0.colorMode or p0.theme,
-		device = p0.device,
-		scale = p0.scale
-	}, t)
-	local var16 = variantsContextModule.useVariantsState()
-	local var17 = reactModule.useMemo(function() --[[ line: 62 ]]
-		-- upvalues: getTokens (copy), var15 (ref), p0 (ref)
-		return getTokens(var15.colorMode, var15.device, var15.scale, p0.tokenOverrides)
+function StyleSheetContextWrapper(p0) --[[ line: 55 ]]
+	-- upvalues: reactModule (ref), styleSheetContextModule (ref), dashModule (ref)
+	local var19, var20 = reactModule.useState(nil)
+	
+	if p0.setStyleSheetRef and p0.setStyleSheetRef.current ~= var20 then
+		p0.setStyleSheetRef.current = var20
+	end
+	return reactModule.createElement(styleSheetContextModule.Provider, { value = var19 or dashModule.None }, p0.children)
+end
+
+return function(p1) --[[ line: 69 | named "StyleProvider" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), useTagsStateModule (ref), variantsContextModule (ref), getTokens (ref), usePreferencesModule (ref), getTextSizeOffsetModule (ref), var17 (ref), tokensContextModule (ref), textSizeOffsetContextModule (ref), tagsContextModule (ref), styleSheetContextModule (ref), styleSheetModule (ref)
+	local var21 = withDefaultsModule({ theme = p1.theme, device = p1.device, scale = p1.scale }, t)
+	local var22 = if not flagsModule.FoundationUseStyleSheetRegistry then reactModule.useRef(nil) else nil
+	local var23 = nil
+	local var24 = nil
+	
+	if not flagsModule.FoundationUseStyleSheetRegistry then
+		local var25, var26 = useTagsStateModule()
+		var23 = var25
+		var24 = var26
+	end
+	local var27 = variantsContextModule.useVariantsState()
+	local var28 = reactModule.useMemo(function() --[[ line: 86 ]]
+		-- upvalues: getTokens (copy), var21 (ref), p1 (ref)
+		return getTokens(var21.theme, var21.device, var21.scale, p1.tokenOverrides)
 	end, {
-		var15.device,
-		var15.colorMode,
-		var15.scale,
-		p0.tokenOverrides
+		var21.device,
+		var21.theme,
+		var21.scale,
+		p1.tokenOverrides
 	})
-	local var18 = reactModule.useMemo(function() --[[ line: 69 ]]
+	local var29 = reactModule.useMemo(function() --[[ line: 93 ]]
 		-- upvalues: getTextSizeOffsetModule (copy)
 		return getTextSizeOffsetModule() or 0
 	end, { usePreferencesModule().preferredTextSize })
-	local var19, var20 = useRegistryStyleSheetModule(var15.colorMode, var15.device, var15.scale, p0.tokenOverrides)
+	local var30 = nil
+	local var31 = nil
 	
-	return reactModule.createElement(tokensContextModule.Provider, { value = var17 }, {
-		TextSizeOffsetContext = reactModule.createElement(textSizeOffsetContextModule.Provider, { value = var18 }, {
-			VariantsContext = reactModule.createElement(variantsContextModule.Provider, { value = var16 }, {
-				TagsContext = reactModule.createElement(tagsContextModule.Provider, { value = var20 }, reactModule.createElement(styleSheetContextModule.Provider, { value = var19 }, p0.children)),
-				StyleSheet = reactModule.createElement("StyleLink", { StyleSheet = var19 })
+	if flagsModule.FoundationUseStyleSheetRegistry then
+		local var32, var33 = var17(var21.theme, var21.device, var21.scale, p1.tokenOverrides)
+		var30 = var32
+		var31 = var33
+	end
+	return reactModule.createElement(tokensContextModule.Provider, { value = var28 }, {
+		TextSizeOffsetContext = reactModule.createElement(textSizeOffsetContextModule.Provider, { value = var29 }, {
+			VariantsContext = reactModule.createElement(variantsContextModule.Provider, { value = var27 }, {
+				TagsContext = reactModule.createElement(tagsContextModule.Provider, {
+					value = if flagsModule.FoundationUseStyleSheetRegistry then var31 else var24
+				}, if flagsModule.FoundationUseStyleSheetRegistry then reactModule.createElement(styleSheetContextModule.Provider, { value = var30 }, p1.children) else reactModule.createElement(StyleSheetContextWrapper, { setStyleSheetRef = var22 }, p1.children)),
+				StyleSheet = if flagsModule.FoundationUseStyleSheetRegistry then reactModule.createElement("StyleLink", { StyleSheet = var30 }) else reactModule.createElement(styleSheetModule, {
+					theme = var21.theme,
+					device = var21.device,
+					scale = var21.scale,
+					tags = var23,
+					derives = p1.derives,
+					setStyleSheetRef = var22,
+					tokenOverrides = p1.tokenOverrides
+				})
 			})
 		})
 	})

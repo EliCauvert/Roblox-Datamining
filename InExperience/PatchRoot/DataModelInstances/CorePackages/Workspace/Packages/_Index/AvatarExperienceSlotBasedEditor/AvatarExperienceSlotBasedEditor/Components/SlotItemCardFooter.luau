@@ -5,9 +5,10 @@ local useTokens = foundationModule.Hooks.useTokens
 local text = foundationModule.Text
 local responsiveModule = require(parent.Responsive)
 local fFlagAXAddTextXAlignmentProp = require(parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
+local fFlagAXCustomizeMakeupSupport = require(parent.AvatarExperienceFlags).FFlagAXCustomizeMakeupSupport
 
-return function(p0) --[[ line: 18 | named "SlotItemCardFooter" ]]
-	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), text (ref), fFlagAXAddTextXAlignmentProp (ref)
+return function(p0) --[[ line: 19 | named "SlotItemCardFooter" ]]
+	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), text (ref), fFlagAXCustomizeMakeupSupport (ref), fFlagAXAddTextXAlignmentProp (ref)
 	local var8
 	local var3 = useTokens()
 	local var4 = responsiveModule.useOrientation() == responsiveModule.BreakpointConfig.Enum.Portrait
@@ -52,9 +53,9 @@ return function(p0) --[[ line: 18 | named "SlotItemCardFooter" ]]
 		if p0.title then
 			createElement_1 = reactModule.createElement
 			createElement_1 = createElement_1(text, {
-				LayoutOrder = 1,
 				textStyle = var3.Color.Content.Emphasis,
-				fontStyle = if var4 then var3.Typography.CaptionSmall else var3.Typography.CaptionMedium,
+				fontStyle = if var4 then var3.Typography.CaptionSmall elseif fFlagAXCustomizeMakeupSupport then var3.Typography.CaptionMedium else var3.Typography.LabelMedium,
+				LayoutOrder = if fFlagAXCustomizeMakeupSupport then 1 else p0.LayoutOrder,
 				Text = p0.title,
 				TextXAlignment = if fFlagAXAddTextXAlignmentProp and p0.TextXAlignment then p0.TextXAlignment else Enum.TextXAlignment.Left,
 				Size = UDim2.fromScale(1, 0),

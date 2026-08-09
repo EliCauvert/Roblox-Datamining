@@ -1,9 +1,10 @@
-﻿local screenSizeModule = require(script.ScreenSize)
+﻿local corePackagesService = game:GetService("CorePackages")
+local screenSizeModule = require(script.ScreenSize)
 
-return require(game:GetService("CorePackages").Packages.Rodux).combineReducers({
+return require(corePackagesService.Packages.Rodux).combineReducers({
 	promptInfo = require(script.PromptInfo),
 	screenSize = screenSizeModule,
-	ScreenSize = screenSizeModule,
+	ScreenSize = if require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXAvatarTimeoutFlowIE then screenSizeModule else nil,
 	gameName = require(script.GameName),
 	analyticsInfo = require(script.AnalyticsInfo)
 })

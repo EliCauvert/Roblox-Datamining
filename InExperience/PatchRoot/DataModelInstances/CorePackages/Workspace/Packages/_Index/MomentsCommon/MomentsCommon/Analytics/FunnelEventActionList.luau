@@ -6,7 +6,6 @@ local creationFlowSteps = funnelEventNamesModule.CreationFlowSteps
 local musicEnhancementSteps = funnelEventNamesModule.MusicEnhancementSteps
 local trimEnhancementSteps = funnelEventNamesModule.TrimEnhancementSteps
 local textOverlayEnhancementSteps = funnelEventNamesModule.TextOverlayEnhancementSteps
-local stickerOverlayEnhancementSteps = funnelEventNamesModule.StickerOverlayEnhancementSteps
 
 return {
 	[eventNamesModule.EditingFlowGalleryItemSelected] = {
@@ -78,31 +77,6 @@ return {
 			funnelType = funnelTypes.TextOverlayEnhancement
 		}
 	},
-	[eventNamesModule.EditingFlowStickerOverlayButtonPressed] = {
-		{
-			funnelType = funnelTypes.StickerOverlayEnhancement,
-			stepKey = stickerOverlayEnhancementSteps.StickerOverlayButtonPressed
-		}
-	},
-	[eventNamesModule.EditingFlowStickerSelected] = {
-		{
-			funnelType = funnelTypes.StickerOverlayEnhancement,
-			stepKey = stickerOverlayEnhancementSteps.StickerOverlaySelected
-		}
-	},
-	[eventNamesModule.EditingFlowStickerOverlayDoneButtonPressed] = {
-		{
-			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement,
-			stepKey = stickerOverlayEnhancementSteps.StickerOverlayCompleted
-		}
-	},
-	[eventNamesModule.EditingFlowStickerOverlayBackButtonPressed] = {
-		{
-			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement
-		}
-	},
 	[eventNamesModule.EditingFlowTrimButtonPressed] = {
 		{
 			funnelType = funnelTypes.TrimEnhancement,
@@ -131,10 +105,6 @@ return {
 		{
 			endSession = true,
 			funnelType = funnelTypes.TextOverlayEnhancement
-		},
-		{
-			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement
 		},
 		{
 			endSession = true,

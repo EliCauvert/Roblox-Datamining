@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ProfilePlatformPresenceStoreMigration_v1", false)

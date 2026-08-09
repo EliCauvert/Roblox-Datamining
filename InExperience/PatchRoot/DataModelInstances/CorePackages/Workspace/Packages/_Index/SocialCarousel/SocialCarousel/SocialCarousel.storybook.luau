@@ -16,11 +16,11 @@ local foundationProvider = foundationModule.FoundationProvider
 local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
 local designTokenProvider = require(parent.Style).DesignTokenProvider
 local mockApolloClient = require(parent.GraphQLServer).ApolloClientTestUtils.mockApolloClient
-local colorMode = foundationModule.Enums.ColorMode
+local theme = foundationModule.Enums.Theme
 local device = foundationModule.Enums.Device
 roactModule.setGlobalConfig({ elementTracing = true })
 local t = { language = "en-us" }
-local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
+local t_1 = { Light = theme.Light, Dark = theme.Dark }
 local t_2 = { Console = device.Console, Desktop = device.Desktop }
 
 local var13 = function(p0) --[[ line: 44 ]]
@@ -80,7 +80,7 @@ return {
 						storeProvider = roactModule.createElement(roactRoduxModule.StoreProvider, { store = var13(p3.definition.state or {}) }, {
 							apolloClient = roactModule.createElement(apolloClientModule.ApolloProvider, { client = mockApolloClient({}) }, {
 								foundationProvider = roactModule.createElement(foundationProvider, {
-									colorMode = t_1[p3.theme],
+									theme = t_1[p3.theme],
 									device = t_2[p3.platform],
 									preferences = p3.settings
 								}, {

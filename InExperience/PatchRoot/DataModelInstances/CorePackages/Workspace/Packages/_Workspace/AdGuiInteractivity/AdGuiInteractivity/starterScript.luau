@@ -51,7 +51,7 @@ local function initializeImmersiveBrandedAds() --[[ line: 55 ]]
 		localizationProvider = reactModule.createElement(localizationProvider, {
 			localization = inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 		}, {
-			foundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+			foundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
 				disclosureButtonListener = reactModule.createElement(disclosureButtonListenerComponentModule)
 			})
 		})

@@ -16,11 +16,12 @@ local useEntitySelectionHandlerModule = require(userList.Hooks.useEntitySelectio
 local useRenderEntityModule = require(userList.Hooks.useRenderEntity)
 local useIsWideMode = require(parent.SocialCommon).Hooks.useIsWideMode
 local adjustHorizontalUserListSizeForMobile = game:DefineFastFlag("AdjustHorizontalUserListSizeForMobile", false)
+local fFlagLuaAppCompositionSupport = require(parent.SharedFlags).FFlagLuaAppCompositionSupport
 local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
 
-return function(p0) --[[ line: 50 | named "HorizontalUserList" ]]
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), reactModule (ref), useIsWideMode (ref), adjustHorizontalUserListSizeForMobile (ref), collectionItemSize (ref), usePageSideMargin (ref), useCollectionLayoutParams (ref), useCompactTileHeightModule (ref), useEntitiesModule (ref), useEntitySelectionHandlerModule (ref), useRenderEntityModule (ref), enumsModule (ref), cryoModule (ref), view (ref), collectionCarousel (ref)
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p0.appCompositionEnabled
+return function(p0) --[[ line: 51 | named "HorizontalUserList" ]]
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), fFlagLuaAppCompositionSupport (ref), reactModule (ref), useIsWideMode (ref), adjustHorizontalUserListSizeForMobile (ref), collectionItemSize (ref), usePageSideMargin (ref), useCollectionLayoutParams (ref), useCompactTileHeightModule (ref), useEntitiesModule (ref), useEntitySelectionHandlerModule (ref), useRenderEntityModule (ref), enumsModule (ref), cryoModule (ref), view (ref), collectionCarousel (ref)
+	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or fFlagLuaAppCompositionSupport and p0.appCompositionEnabled
 	local var11, var12 = reactModule.useState(nil)
 	local scrollingFrameRef = p0.scrollingFrameRef or reactModule.useRef(nil)
 	local var14 = if adjustHorizontalUserListSizeForMobile then if useIsWideMode() then collectionItemSize.Small else collectionItemSize.Medium else collectionItemSize.Small
@@ -45,7 +46,7 @@ return function(p0) --[[ line: 50 | named "HorizontalUserList" ]]
 			onActivateHeader = if p0.header then p0.header.onTitleActivated else nil,
 			containerRef = var12,
 			scrollingFrameRef = scrollingFrameRef,
-			items = reactModule.useMemo(function() --[[ line: 89 ]]
+			items = reactModule.useMemo(function() --[[ line: 91 ]]
 				-- upvalues: p0 (ref)
 				local t = {}
 				
@@ -54,11 +55,11 @@ return function(p0) --[[ line: 50 | named "HorizontalUserList" ]]
 				end
 				return t
 			end, { p0.entities }),
-			renderItem = reactModule.useCallback(function(p1, p2, p3, _) --[[ line: 82 ]]
+			renderItem = reactModule.useCallback(function(p1, p2, p3, _) --[[ line: 84 ]]
 				-- upvalues: var17 (ref)
 				return var17(p1, p2, p3), p1
 			end, { var17 }),
-			getItemHeight = reactModule.useCallback(function(_) --[[ line: 67 ]]
+			getItemHeight = reactModule.useCallback(function(_) --[[ line: 69 ]]
 				-- upvalues: var16 (ref)
 				return var16
 			end, { var16 }),

@@ -59,14 +59,13 @@ return {
 	GetFFlagEnableReportAdDropdown = function() --[[ line: 59 ]]
 		return game:GetFastFlag("EnableReportAdDropdown5")
 	end,
-	FFlagFixReportAdInfoDuringRotation = game:DefineFastFlag("FixReportAdInfoDuringRotation", false),
-	GetFIntUniversalAppPolicyFailureTelemetryThrottleHundredthsPercent = function() --[[ line: 63 ]]
+	GetFIntUniversalAppPolicyFailureTelemetryThrottleHundredthsPercent = function() --[[ line: 62 ]]
 		return game:GetFastInt("UniversalAppPolicyFailureTelemetryThrottleHundredthsPercent")
 	end,
-	GetEnableHideReportAdModalDuringScreenshot = function() --[[ line: 66 ]]
+	GetEnableHideReportAdModalDuringScreenshot = function() --[[ line: 65 ]]
 		return game:GetFastFlag("EnableHideReportAdModalDuringScreenshot2")
 	end,
-	GetAdGuiInteractivityPixelsPerStud = function() --[[ line: 69 ]]
+	GetAdGuiInteractivityPixelsPerStud = function() --[[ line: 68 ]]
 		return game:GetFastInt("AdGuiInteractivityPixelsPerStud")
 	end
 }

@@ -6,7 +6,7 @@ local roact = inGameMenuDependenciesModule.Roact
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local t = inGameMenuDependenciesModule.t
 local parent = script.Parent.Parent
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local withStyle = UIBlox.Core.Style.withStyle
 local assetsModule = require(parent.Resources.Assets)
 local divideTransparencyModule = require(parent.Utility.divideTransparency)
 local themedButtonModule = require(script.Parent.ThemedButton)
@@ -156,29 +156,12 @@ function dropDownSelection.renderFocusHandler(p8) --[[ line: 170 ]]
 end
 
 function dropDownSelection.render(p10) --[[ line: 203 ]]
-	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), assetsModule (ref), roact (ref), themedButtonModule (ref), divideTransparencyModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), barOnTopScrollingFrameModule (ref)
-	return withFoundationOrUIBloxStyle(function(p11) --[[ line: 204 ]]
-		return {
-			Theme = {
-				BackgroundUIDefault = {
-					Color = p11.Color.Surface.Surface_300.Color3,
-					Transparency = p11.Color.Surface.Surface_300.Transparency
-				},
-				IconDefault = {
-					Color = p11.Color.Content.Default.Color3,
-					Transparency = p11.Color.Content.Default.Transparency
-				},
-				IconOnHover = {
-					Color = p11.Color.Content.Emphasis.Color3,
-					Transparency = p11.Color.Content.Emphasis.Transparency
-				}
-			}
-		}
-	end, function(p12) --[[ line: 212 ]]
+	-- upvalues: withStyle (ref), withLocalizationModule (ref), assetsModule (ref), roact (ref), themedButtonModule (ref), divideTransparencyModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), barOnTopScrollingFrameModule (ref)
+	return withStyle(function(p11) --[[ line: 204 ]]
 		-- upvalues: withLocalizationModule (copy), p10 (ref), assetsModule (copy), roact (copy), themedButtonModule (copy), divideTransparencyModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), barOnTopScrollingFrameModule (copy)
-		return withLocalizationModule(if p10.props.localize then p10.props.selections else {})(function(p13) --[[ line: 213 ]]
-			-- upvalues: p10 (copy), assetsModule (copy), p12 (ref), roact (copy), themedButtonModule (copy), divideTransparencyModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), barOnTopScrollingFrameModule (copy)
-			local var17 = if p10.props.selectedIndex > 0 then if p10.props.localize then p13[p10.props.selectedIndex] else p10.props.selections[p10.props.selectedIndex] else p10.props.placeHolderText
+		return withLocalizationModule(if p10.props.localize then p10.props.selections else {})(function(p12) --[[ line: 205 ]]
+			-- upvalues: p10 (copy), assetsModule (copy), p11 (ref), roact (copy), themedButtonModule (copy), divideTransparencyModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), barOnTopScrollingFrameModule (copy)
+			local var17 = if p10.props.selectedIndex > 0 then if p10.props.localize then p12[p10.props.selectedIndex] else p10.props.selections[p10.props.selectedIndex] else p10.props.placeHolderText
 			local size = assetsModule.Images.Shadow.Size
 			
 			return roact.createElement("Frame", {
@@ -187,15 +170,15 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 				LayoutOrder = p10.props.LayoutOrder,
 				BackgroundTransparency = 1,
 				[roact.Ref] = p10.rootRef,
-				[roact.Change.AbsoluteSize] = function(p14) --[[ line: 235 ]]
+				[roact.Change.AbsoluteSize] = function(p13) --[[ line: 227 ]]
 					-- upvalues: p10 (copy)
-					p10:setState({ dropDownItemHeight = p14.AbsoluteSize.Y })
+					p10:setState({ dropDownItemHeight = p13.AbsoluteSize.Y })
 				end,
-				[roact.Change.AbsolutePosition] = function(p15) --[[ line: 241 ]]
+				[roact.Change.AbsolutePosition] = function(p14) --[[ line: 233 ]]
 					-- upvalues: p10 (copy)
 					p10:setState({
-						absolutePositionX = p15.AbsolutePosition.X,
-						absolutePositionY = p15.AbsolutePosition.Y
+						absolutePositionX = p14.AbsolutePosition.X,
+						absolutePositionY = p14.AbsolutePosition.Y
 					})
 				end
 			}, {
@@ -205,14 +188,14 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 					Size = UDim2.new(1, 0, 1, 0),
 					Visible = not p10.state.isOpen,
 					enabled = p10.props.enabled,
-					onActivated = function() --[[ line: 252 ]]
+					onActivated = function() --[[ line: 244 ]]
 						-- upvalues: p10 (copy)
 						p10:setState({ isOpen = true })
 					end,
 					imageProps = assetsModule.Images.RoundedRectBorder,
-					renderChildren = function(p16, p17, p18) --[[ line: 260 ]]
-						-- upvalues: p12 (copy), divideTransparencyModule (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), var17 (write), p10 (copy)
-						local var18 = if p17 then p12.Theme.IconOnHover else p12.Theme.IconDefault
+					renderChildren = function(p15, p16, p17) --[[ line: 252 ]]
+						-- upvalues: p11 (copy), divideTransparencyModule (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), themedTextLabelModule (copy), var17 (write), p10 (copy)
+						local var18 = if p16 then p11.Theme.IconOnHover else p11.Theme.IconDefault
 						
 						return {
 							ButtonIcon = roact.createElement(imageSetLabel, {
@@ -222,7 +205,7 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 								AnchorPoint = Vector2.new(1, 0.5),
 								Image = assetsModule.Images.ExpandArrow,
 								ImageColor3 = var18.Color,
-								ImageTransparency = divideTransparencyModule(var18.Transparency, if p18 then 2 else 1)
+								ImageTransparency = divideTransparencyModule(var18.Transparency, if p17 then 2 else 1)
 							}),
 							ButtonText = roact.createElement(themedTextLabelModule, {
 								themeKey = "SecondaryContent",
@@ -230,7 +213,7 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 								Text = var17,
 								Position = UDim2.new(0, 12, 0, 0),
 								Size = UDim2.new(1, if p10.props.truncate then -48 else -12, 1, 0),
-								TextTransparency = p16,
+								TextTransparency = p15,
 								TextTruncate = if p10.props.truncate then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
 								TextXAlignment = Enum.TextXAlignment.Left
 							})
@@ -245,7 +228,7 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 					Size = UDim2.new(0, p10.state.screenSizeX, 0, p10.state.screenSizeY),
 					Visible = p10.state.isOpen,
 					Selectable = false,
-					[roact.Event.Activated] = function() --[[ line: 299 ]]
+					[roact.Event.Activated] = function() --[[ line: 291 ]]
 						-- upvalues: p10 (copy)
 						p10:setState({ isOpen = false })
 					end,
@@ -266,8 +249,8 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 						BackgroundTransparency = 1,
 						SliceScale = 0.5,
 						Image = assetsModule.Images.RoundedRect.Image,
-						ImageColor3 = p12.Theme.BackgroundUIDefault.Color,
-						ImageTransparency = p12.Theme.BackgroundUIDefault.Transparency,
+						ImageColor3 = p11.Theme.BackgroundUIDefault.Color,
+						ImageTransparency = p11.Theme.BackgroundUIDefault.Transparency,
 						ScaleType = assetsModule.Images.RoundedRect.ScaleType,
 						Size = UDim2.new(1, -(size * 2), 1, -(size * 2)),
 						Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -278,7 +261,7 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 							Position = UDim2.new(0, 0, 0, 4),
 							Size = UDim2.new(1, 0, 1, -8),
 							CanvasSize = UDim2.new(1, 0, 0, #p10.props.selections * p10.state.dropDownItemHeight)
-						}, p10:renderDropDownList(p12, p13))
+						}, p10:renderDropDownList(p11, p12))
 					})
 				})
 			})
@@ -286,56 +269,56 @@ function dropDownSelection.render(p10) --[[ line: 203 ]]
 	end)
 end
 
-function dropDownSelection.watchLayerCollector(p19, p20) --[[ line: 342 ]]
-	p19:setState({
-		screenSizeX = p20.AbsoluteSize.X,
-		screenSizeY = p20.AbsoluteSize.Y
+function dropDownSelection.watchLayerCollector(p18, p19) --[[ line: 334 ]]
+	p18:setState({
+		screenSizeX = p19.AbsoluteSize.X,
+		screenSizeY = p19.AbsoluteSize.Y
 	})
-	p19.sizeConnection = p20:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 348 ]]
-		-- upvalues: p19 (ref), p20 (ref)
-		p19:setState({
-			screenSizeX = p20.AbsoluteSize.X,
-			screenSizeY = p20.AbsoluteSize.Y
+	p18.sizeConnection = p19:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 340 ]]
+		-- upvalues: p18 (ref), p19 (ref)
+		p18:setState({
+			screenSizeX = p19.AbsoluteSize.X,
+			screenSizeY = p19.AbsoluteSize.Y
 		})
 	end)
 end
 
-function dropDownSelection.didMount(p21) --[[ line: 356 ]]
-	local current = p21.rootRef.current
+function dropDownSelection.didMount(p20) --[[ line: 348 ]]
+	local current = p20.rootRef.current
 	local layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
 	
 	if layerCollector == nil then
-		p21.ancestryConnection = current.AncestryChanged:Connect(function() --[[ line: 361 ]]
-			-- upvalues: layerCollector (write), current (ref), p21 (ref)
+		p20.ancestryConnection = current.AncestryChanged:Connect(function() --[[ line: 353 ]]
+			-- upvalues: layerCollector (write), current (ref), p20 (ref)
 			layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
 			
 			if layerCollector ~= nil then
-				p21.ancestryConnection:Disconnect()
-				p21.ancestryConnection = nil
-				p21:watchLayerCollector(layerCollector)
+				p20.ancestryConnection:Disconnect()
+				p20.ancestryConnection = nil
+				p20:watchLayerCollector(layerCollector)
 			end
 		end)
 	else
-		p21:watchLayerCollector(layerCollector)
+		p20:watchLayerCollector(layerCollector)
 	end
 end
 
-function dropDownSelection.didUpdate(p22, p23) --[[ line: 374 ]]
+function dropDownSelection.didUpdate(p21, p22) --[[ line: 366 ]]
 	-- upvalues: roact (ref)
-	if p23.ButtonRef ~= p22.props.ButtonRef then
-		p22.openDropDownButtonRef = p22.props.ButtonRef or roact.createRef()
+	if p22.ButtonRef ~= p21.props.ButtonRef then
+		p21.openDropDownButtonRef = p21.props.ButtonRef or roact.createRef()
 	end
-	if p22.state.isOpen and p23.canCaptureFocus ~= p22.props.canCaptureFocus then
-		p22:setState({ isOpen = false })
+	if p21.state.isOpen and p22.canCaptureFocus ~= p21.props.canCaptureFocus then
+		p21:setState({ isOpen = false })
 	end
 end
 
-function dropDownSelection.willUnmount(p24) --[[ line: 385 ]]
-	if p24.ancestryConnection then
-		p24.ancestryConnection:Disconnect()
+function dropDownSelection.willUnmount(p23) --[[ line: 377 ]]
+	if p23.ancestryConnection then
+		p23.ancestryConnection:Disconnect()
 	end
-	if p24.sizeConnection then
-		p24.sizeConnection:Disconnect()
+	if p23.sizeConnection then
+		p23.sizeConnection:Disconnect()
 	end
 end
 

@@ -61,6 +61,7 @@ t.PlayerMenuActions = {
 	UpdateComment = "UpdateComment",
 	UpdateMethodOfAbuse = "UpdateMethodOfAbuse",
 	UpdateAbuser = "UpdateAbuser",
+	UpdatedSelectedChatAndOrderedMessages = "UpdatedSelectedChatAndOrderedMessages",
 	UpdatePlayerNameMap = "UpdatePlayerNameMap",
 	SetVoiceEnabled = "SetVoiceEnabled",
 	ClearState = "ClearState",
@@ -88,6 +89,7 @@ t.AnalyticsActions = {
 	IncrementPersonChanged = "IncrementPersonChanged",
 	IncrementReasonChanged = "IncrementReasonChanged",
 	IncrementCaptureScene = "IncrementCaptureScene",
+	IncrementChatLineChanged = "IncrementChatLineChanged",
 	SetMemoryRequirementMet = "SetMemoryRequirementMet",
 	SetViewportInformation = "SetViewportInformation",
 	SetSubmissionCompleted = "SetSubmissionCompleted",
@@ -136,6 +138,7 @@ t.localizationKeys = {
 	SceneCaptured = "Feature.SettingsHub.Label.SceneCaptured",
 	CaptureScene = "Feature.SettingsHub.Action.CaptureScene",
 	MethodOfAbuse = "Feature.SettingsHub.Label.MethodOfAbuse",
+	WhichChat = "Feature.SettingsHub.Label.WhichChatOptional",
 	WhichPerson = "Feature.SettingsHub.Label.WhichPlayer",
 	ChooseOne = "Feature.SettingsHub.Label.ChooseOne",
 	ReportCommentPlaceholder = "Feature.SettingsHub.Label.ReportComment",
@@ -164,6 +167,7 @@ t.AnalyticsInitialState = {
 	personChangeCount = 0,
 	reasonChangeCount = 0,
 	captureSceneCount = 0,
+	chatLineChangeCount = 0,
 	viewportSizeX = -1,
 	viewportSizeY = -1,
 	isPortraitMode = false,
@@ -213,8 +217,10 @@ t.InitPersonUIState = {
 	modalSelectorCellData = nil,
 	isModalSelectorShown = nil,
 	preselectedPlayer = nil,
+	selectedMessage = nil,
 	reportType = t.ReportTypes.Person,
-	playerObjects = {}
+	playerObjects = {},
+	orderedMessages = {}
 }
 t.InitExperienceUIState = {
 	comment = "",
@@ -222,5 +228,6 @@ t.InitExperienceUIState = {
 	reportType = t.ReportTypes.Experience,
 	abuseReason = t.InappropriateContentAbuseReason
 }
+t.ChatLineReportingVariant = { IGM_CLRv1 = "IGM_CLRv1" }
 
 return t

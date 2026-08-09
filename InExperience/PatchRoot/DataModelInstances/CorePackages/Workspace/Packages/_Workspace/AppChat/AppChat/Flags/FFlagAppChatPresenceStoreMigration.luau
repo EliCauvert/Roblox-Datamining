@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AppChatPresenceStoreMigration_v1", false)

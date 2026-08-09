@@ -29,21 +29,22 @@ local unblockUser = userBlockModule.unblockUser
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
 local fFlagSupportSubmissionOnAllReportNodes = sharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
+local fFlagRemoveHardcodedStringsInReportNodes = sharedFlagsModule.FFlagRemoveHardcodedStringsInReportNodes
 local fFlagAbuseReportMenuV2 = sharedFlagsModule.FFlagAbuseReportMenuV2
 
-local function useBlockToggle(p0) --[[ line: 71 ]]
+local function useBlockToggle(p0) --[[ line: 72 ]]
 	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useRoactService (ref), roactNetworking (ref), isBlockedUser (ref), telemetryEventType (ref), dashModule (ref), unblockUser (ref), blockUser (ref)
 	local var14, var15 = reactModule.useState(if p0 then "Loading" else "Hidden")
 	local var16, var17 = reactModule.useState(false)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	local var18 = useRoactService(roactNetworking)
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function() --[[ line: 79 ]]
 		-- upvalues: p0 (ref), isBlockedUser (copy), var18 (ref), var15 (ref), sendEvent (ref), telemetryEventType (copy), dashModule (copy)
 		if p0 and p0.userId then
-			isBlockedUser(var18, p0.userId):andThen(function(p2) --[[ line: 81 ]]
+			isBlockedUser(var18, p0.userId):andThen(function(p2) --[[ line: 82 ]]
 				-- upvalues: var15 (copy)
 				var15(if p2.responseBody then "Hidden" else "Visible")
-			end):catch(function(p1) --[[ line: 85 ]]
+			end):catch(function(p1) --[[ line: 86 ]]
 				-- upvalues: var15 (copy), sendEvent (copy), telemetryEventType (copy), dashModule (copy)
 				var15("Hidden")
 				sendEvent({
@@ -62,14 +63,14 @@ local function useBlockToggle(p0) --[[ line: 71 ]]
 	
 	return {
 		blockToggleState = var14,
-		handleBlockToggleChange = reactModule.useCallback(function() --[[ line: 100 ]]
+		handleBlockToggleChange = reactModule.useCallback(function() --[[ line: 101 ]]
 			-- upvalues: p0 (ref), var16 (ref), unblockUser (copy), var18 (ref), var17 (ref), var15 (ref), sendEvent (ref), telemetryEventType (copy), dashModule (copy), blockUser (copy)
 			if p0 == nil or p0.userId == nil then return end
 			if var16 then
-				unblockUser(var18, p0.userId):andThen(function() --[[ line: 107 ]]
+				unblockUser(var18, p0.userId):andThen(function() --[[ line: 108 ]]
 					-- upvalues: var17 (copy)
 					var17(false)
-				end):catch(function(p3) --[[ line: 110 ]]
+				end):catch(function(p3) --[[ line: 111 ]]
 					-- upvalues: var15 (copy), sendEvent (copy), telemetryEventType (copy), dashModule (copy)
 					var15("Error")
 					sendEvent({
@@ -83,11 +84,11 @@ local function useBlockToggle(p0) --[[ line: 71 ]]
 				
 				return
 			end
-			blockUser(var18, p0.userId):andThen(function() --[[ line: 122 ]]
+			blockUser(var18, p0.userId):andThen(function() --[[ line: 123 ]]
 				-- upvalues: sendEvent (copy), telemetryEventType (copy), var17 (copy)
 				sendEvent({ sub_event_type = telemetryEventType.DidBlockUser })
 				var17(true)
-			end):catch(function(p4) --[[ line: 126 ]]
+			end):catch(function(p4) --[[ line: 127 ]]
 				-- upvalues: var15 (copy), sendEvent (copy), telemetryEventType (copy), dashModule (copy)
 				var15("Error")
 				sendEvent({
@@ -102,8 +103,8 @@ local function useBlockToggle(p0) --[[ line: 71 ]]
 	}
 end
 
-return reactModule.memo(function(p5) --[[ line: 149 | named "ConfirmationNode" ]]
-	-- upvalues: useArTranslation (ref), useOpenLinkModule (ref), useAbuseReportAnalytics (ref), useBlockToggle (ref), useLayoutSlots (ref), fFlagAbuseReportMenuV2 (ref), reactModule (ref), telemetryEventType (ref), eyebrowModule (ref), textWithTranslationModule (ref), view (ref), toggle (ref), button (ref), buttonVariant (ref), footerModule (ref), fillBehavior (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
+return reactModule.memo(function(p5) --[[ line: 150 | named "ConfirmationNode" ]]
+	-- upvalues: useArTranslation (ref), useOpenLinkModule (ref), useAbuseReportAnalytics (ref), useBlockToggle (ref), useLayoutSlots (ref), fFlagAbuseReportMenuV2 (ref), reactModule (ref), telemetryEventType (ref), eyebrowModule (ref), textWithTranslationModule (ref), view (ref), toggle (ref), button (ref), buttonVariant (ref), footerModule (ref), fFlagRemoveHardcodedStringsInReportNodes (ref), fillBehavior (ref), fFlagSupportSubmissionOnAllReportNodes (ref)
 	local var26
 	local translateIntoString = useArTranslation().translateIntoString
 	local var19 = useOpenLinkModule()
@@ -117,19 +118,19 @@ return reactModule.memo(function(p5) --[[ line: 149 | named "ConfirmationNode" ]
 	local actions = var21.Actions
 	local title = var21.Title
 	local var22 = if fFlagAbuseReportMenuV2 then var21.Layout else nil
-	reactModule.useEffect(function() --[[ line: 170 ]]
+	reactModule.useEffect(function() --[[ line: 171 ]]
 		-- upvalues: p5 (ref), sendEvent (ref), telemetryEventType (copy)
 		if p5.helpline and p5.helpline.href then
 			sendEvent({ sub_event_type = telemetryEventType.HelplineShown })
 		end
 	end, { p5.helpline and p5.helpline.href, sendEvent })
-	local var23 = reactModule.useCallback(function() --[[ line: 176 ]]
+	local var23 = reactModule.useCallback(function() --[[ line: 177 ]]
 		-- upvalues: p5 (ref)
 		if p5.onNext then
 			p5.onNext()
 		end
 	end, { p5.onNext })
-	local var24 = reactModule.useCallback(function() --[[ line: 183 ]]
+	local var24 = reactModule.useCallback(function() --[[ line: 184 ]]
 		-- upvalues: p5 (ref), var19 (ref), translateIntoString (ref), sendEvent (ref), telemetryEventType (copy)
 		if p5.helpline and p5.helpline.href then
 			var19(translateIntoString(p5.helpline.heading or ""), p5.helpline.href)
@@ -219,7 +220,7 @@ return reactModule.memo(function(p5) --[[ line: 149 | named "ConfirmationNode" ]
 		footerItems = p5.footerItems
 	}) else nil
 	local var27 = if p5.onNext then reactModule.createElement(button, {
-		text = translateIntoString(p5.nextButtonText),
+		text = if fFlagRemoveHardcodedStringsInReportNodes then translateIntoString(p5.nextButtonText) else "Close",
 		variant = buttonVariant.Emphasis,
 		fillBehavior = fillBehavior.Fill,
 		isLoading = if fFlagSupportSubmissionOnAllReportNodes then p5.isSubmitting else false,

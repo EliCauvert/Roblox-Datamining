@@ -4,8 +4,6 @@ local fFlagAddIEMProfilePage = require(parent.SharedFlags).FFlagAddIEMProfilePag
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 local fFlagEnableProfileCompletion = require(parent.SharedFlags).FFlagEnableProfileCompletion
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
-local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
 
 return {
@@ -52,7 +50,7 @@ return {
 		EditLook = "EditLook",
 		EditEmotes = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "EditEmotes" else "",
 		SwitchAvatar = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "SwitchAvatar" else "",
-		EditBackground = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then "EditBackground" else "",
+		EditBackground = if fFlagProfilePlatformEnableEditAppearanceMenuModule and require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem) then "EditBackground" else "",
 		EditProfile = "EditProfile",
 		IgnoreFriendRequest = "IgnoreFriendRequest",
 		JoinExperience = "JoinExperience",
@@ -108,7 +106,6 @@ return {
 		ItemDetailsPage = "ItemDetailsPage",
 		MutualConnectionsList = "MutualConnectionsList",
 		JoinGameCard = "JoinGameCard",
-		SchoolMemberList = "SchoolMemberList",
 		InExperienceProfile = if fFlagAddIEMProfilePage then "InExperienceProfile" else "",
 		MomentsFeed = if fFlagProfilePlatformEnableMomentsModule then "MomentsFeed" else ""
 	},
@@ -148,8 +145,7 @@ return {
 		CommunityVerificationModal = "CommunityVerificationModal",
 		PurchaseConfirmationModal = "PurchaseConfirmationModal",
 		TransferRobuxFlow = if fFlagProfilePlatformEnableCurrencyTransfer then "TransferRobuxFlow" else "",
-		InsufficientRobuxDialog = if fFlagSocialEnableProfileInspectAndBuy then "InsufficientRobuxDialog" else "",
-		InspectAvatarSheet = if fFlagSocialEnableProfileInspectAndBuy then "InspectAvatarSheet" else "",
+		InspectAvatarSheet = if require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy then "InspectAvatarSheet" else "",
 		MomentsAll = if fFlagProfilePlatformEnableMomentsModule then "MomentsAll" else "",
 		MomentsFeed = if fFlagProfilePlatformEnableMomentsModule then "MomentsFeed" else ""
 	},
@@ -182,7 +178,6 @@ return {
 	ViewFullProfileTypes = { Profile = "Profile", Community = "Community" },
 	ProfileFormFactor = { Wide = "Wide", PeekView = "PeekView" },
 	ProfileTabVariants = { Default = "Default", MeTab = "MeTab" },
-	ProfileAvatarLayoutVariant = { Default = "Default", MeTabMobile = "MeTabMobile" },
 	LoadingState = {
 		Failed = "Failed",
 		Finished = "Finished",

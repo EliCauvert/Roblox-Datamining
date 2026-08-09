@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppUnifyPlayButtonAllSurfacesIxp5", false)
+﻿return game:DefineFastFlag("LuaAppUnifyPlayButtonAllSurfacesIxp5", false) and require(script.Parent.FFlagLuaAppSupportUnifiedUIBloxPlayButton)

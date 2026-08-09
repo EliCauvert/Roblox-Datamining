@@ -2,7 +2,6 @@
 local browserService = game:GetService("BrowserService")
 local httpService = game:GetService("HttpService")
 local runService = game:GetService("RunService")
-local starterGuiService = game:GetService("StarterGui")
 local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
 local parent = bulkPurchaseApp.Parent
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
@@ -29,68 +28,67 @@ local handleEconomicRestrictionErrorModule = require(script.Parent.Utils.handleE
 local selectBulkPurchaseRequestStateModule = require(script.Parent.Utils.selectBulkPurchaseRequestState)
 local selectOptionsModule = require(script.Parent.Utils.selectOptions)
 local fixBuyRobuxForAndroid = game:DefineFastFlag("FixBuyRobuxForAndroid", false)
-local fixBulkPurchaseStarterGuiRename = game:DefineFastFlag("FixBulkPurchaseStarterGuiRename", false)
 local _ = require(script.Parent.BulkPurchaseRequest)
 
-return function() --[[ line: 43 | named "useBulkPurchaseRequestProps" ]]
-	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), getRobuxStoreUrlModule (ref), browserService (ref), fFlagFixVP8143Module (ref), reactModule (ref), runService (ref), getGuiObjectIsObscuredModule (ref), fixBulkPurchaseStarterGuiRename (ref), starterGuiService (ref)
-	local var28 = useDispatch()
-	local var29 = useSelector(selectBulkPurchaseRequestStateModule)
-	local var30 = useSelector(selectPurchaseResultsModule)
-	local var31 = useSelector(selectOrderRequestModule)
-	local var32 = useSelector(selectOptionsModule)
-	local var33 = useSelector(selectItemDataModule)
-	local totalCost = var29.totalCost
-	local balance = var29.balance
+return function() --[[ line: 41 | named "useBulkPurchaseRequestProps" ]]
+	-- upvalues: useDispatch (ref), useSelector (ref), selectBulkPurchaseRequestStateModule (ref), selectPurchaseResultsModule (ref), selectOrderRequestModule (ref), selectOptionsModule (ref), selectItemDataModule (ref), marketplaceService (ref), bulkPurchaseEndedModule (ref), isErrorReasonContainsEconomicRestrictions (ref), handleEconomicRestrictionErrorModule (ref), getItemResultsFromResponseModule (ref), getCommonItemStatusModule (ref), bulkPurchaseSucceededModule (ref), bulkPurchasePromptStateEnumModule (ref), bulkPurchaseFailedModule (ref), itemStatusToErrorCodeMapModule (ref), errorCodeEnumModule (ref), getPaymentPlatformModule (ref), paymentPlatformEnumModule (ref), fixBuyRobuxForAndroid (ref), httpService (ref), getRobuxStoreUrlModule (ref), browserService (ref), fFlagFixVP8143Module (ref), reactModule (ref), runService (ref), getGuiObjectIsObscuredModule (ref)
+	local var26 = useDispatch()
+	local var27 = useSelector(selectBulkPurchaseRequestStateModule)
+	local var28 = useSelector(selectPurchaseResultsModule)
+	local var29 = useSelector(selectOrderRequestModule)
+	local var30 = useSelector(selectOptionsModule)
+	local var31 = useSelector(selectItemDataModule)
+	local totalCost = var27.totalCost
+	local balance = var27.balance
 	
-	local var34 = function() --[[ line: 53 ]]
-		-- upvalues: marketplaceService (copy), var30 (ref), var28 (ref), bulkPurchaseEndedModule (copy)
-		marketplaceService:signalPromptBulkPurchaseFinished(2, var30)
-		var28(bulkPurchaseEndedModule())
+	local var32 = function() --[[ line: 51 ]]
+		-- upvalues: marketplaceService (copy), var28 (ref), var26 (ref), bulkPurchaseEndedModule (copy)
+		marketplaceService:signalPromptBulkPurchaseFinished(2, var28)
+		var26(bulkPurchaseEndedModule())
 	end
 	
-	local var35 = function() --[[ line: 60 ]]
-		-- upvalues: marketplaceService (copy), var31 (ref), var32 (ref), isErrorReasonContainsEconomicRestrictions (copy), handleEconomicRestrictionErrorModule (copy), var28 (ref), getItemResultsFromResponseModule (copy), var33 (ref), getCommonItemStatusModule (copy), bulkPurchaseSucceededModule (copy), bulkPurchasePromptStateEnumModule (copy), bulkPurchaseFailedModule (copy), itemStatusToErrorCodeMapModule (copy), errorCodeEnumModule (copy)
-		local ok, status = pcall(function() --[[ line: 61 ]]
-			-- upvalues: marketplaceService (copy), var31 (copy), var32 (copy)
-			return marketplaceService:PerformBulkPurchase(var31, var32)
+	local var33 = function() --[[ line: 58 ]]
+		-- upvalues: marketplaceService (copy), var29 (ref), var30 (ref), isErrorReasonContainsEconomicRestrictions (copy), handleEconomicRestrictionErrorModule (copy), var26 (ref), getItemResultsFromResponseModule (copy), var31 (ref), getCommonItemStatusModule (copy), bulkPurchaseSucceededModule (copy), bulkPurchasePromptStateEnumModule (copy), bulkPurchaseFailedModule (copy), itemStatusToErrorCodeMapModule (copy), errorCodeEnumModule (copy)
+		local ok, status = pcall(function() --[[ line: 59 ]]
+			-- upvalues: marketplaceService (copy), var29 (copy), var30 (copy)
+			return marketplaceService:PerformBulkPurchase(var29, var30)
 		end)
 		
 		if ok and status then
 			if status.message and isErrorReasonContainsEconomicRestrictions(status.message) then
-				handleEconomicRestrictionErrorModule(status.message, var28)
+				handleEconomicRestrictionErrorModule(status.message, var26)
 				
 				return
 			end
-			local var42 = getItemResultsFromResponseModule(status, var33)
-			local var43 = getCommonItemStatusModule(var42)
+			local var40 = getItemResultsFromResponseModule(status, var31)
+			local var41 = getCommonItemStatusModule(var40)
 			
-			if not var43 then
-				var28(bulkPurchaseSucceededModule(bulkPurchasePromptStateEnumModule.PartialSuccess, var42))
+			if not var41 then
+				var26(bulkPurchaseSucceededModule(bulkPurchasePromptStateEnumModule.PartialSuccess, var40))
 				
 				return
-			elseif var43 == Enum.MarketplaceItemPurchaseStatus.Success then
-				var28(bulkPurchaseSucceededModule(bulkPurchasePromptStateEnumModule.Success, var42))
+			elseif var41 == Enum.MarketplaceItemPurchaseStatus.Success then
+				var26(bulkPurchaseSucceededModule(bulkPurchasePromptStateEnumModule.Success, var40))
 				
 				return
 			end
-			var28(bulkPurchaseFailedModule(itemStatusToErrorCodeMapModule[var43]))
+			var26(bulkPurchaseFailedModule(itemStatusToErrorCodeMapModule[var41]))
 			
 			return
 		elseif string.find(status, "403") then
-			var28(bulkPurchaseFailedModule(errorCodeEnumModule.TwoStepVerificationRequired))
+			var26(bulkPurchaseFailedModule(errorCodeEnumModule.TwoStepVerificationRequired))
 			
 			return
 		end
-		var28(bulkPurchaseFailedModule(errorCodeEnumModule.Generic))
+		var26(bulkPurchaseFailedModule(errorCodeEnumModule.Generic))
 	end
 	
-	local var36 = function() --[[ line: 98 ]]
-		-- upvalues: getPaymentPlatformModule (copy), paymentPlatformEnumModule (copy), fixBuyRobuxForAndroid (copy), httpService (copy), getRobuxStoreUrlModule (copy), browserService (copy), var28 (ref), bulkPurchaseEndedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
-		local var44 = getPaymentPlatformModule()
+	local var34 = function() --[[ line: 96 ]]
+		-- upvalues: getPaymentPlatformModule (copy), paymentPlatformEnumModule (copy), fixBuyRobuxForAndroid (copy), httpService (copy), getRobuxStoreUrlModule (copy), browserService (copy), var26 (ref), bulkPurchaseEndedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
+		local var42 = getPaymentPlatformModule()
 		
-		if var44 ~= paymentPlatformEnumModule.Desktop and var44 ~= paymentPlatformEnumModule.Mobile then
-			var28(bulkPurchaseFailedModule(errorCodeEnumModule.InsufficientRobux))
+		if var42 ~= paymentPlatformEnumModule.Desktop and var42 ~= paymentPlatformEnumModule.Mobile then
+			var26(bulkPurchaseFailedModule(errorCodeEnumModule.InsufficientRobux))
 			
 			return
 		elseif fixBuyRobuxForAndroid then
@@ -98,43 +96,43 @@ return function() --[[ line: 43 | named "useBulkPurchaseRequestProps" ]]
 		else
 			browserService:OpenBrowserWindow(getRobuxStoreUrlModule())
 		end
-		var28(bulkPurchaseEndedModule())
+		var26(bulkPurchaseEndedModule())
 	end
 	
-	local var37 = nil
-	local var38 = nil
+	local var35 = nil
+	local var36 = nil
 	local _ = nil
 	
 	if fFlagFixVP8143Module then
-		var37 = reactModule.useRef(nil)
-		local var39, var40 = reactModule.useState(true)
-		var38 = var39
-		local var41 = var40
-		reactModule.useEffect(function() --[[ line: 129 ]]
-			-- upvalues: runService (copy), var37 (write), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var41 (write)
-			local heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 130 ]]
-				-- upvalues: var37 (copy), getGuiObjectIsObscuredModule (copy), fixBulkPurchaseStarterGuiRename (copy), starterGuiService (copy), var41 (copy)
-				if var37.current and typeof(var37.current) == "Instance" and var37.current:IsA("GuiObject") then
-					var41(getGuiObjectIsObscuredModule(var37.current) or (if fixBulkPurchaseStarterGuiRename then starterGuiService:GetCore("DevConsoleVisible") else game.StarterGui:GetCore("DevConsoleVisible")))
+		var35 = reactModule.useRef(nil)
+		local var37, var38 = reactModule.useState(true)
+		var36 = var37
+		local var39 = var38
+		reactModule.useEffect(function() --[[ line: 127 ]]
+			-- upvalues: runService (copy), var35 (write), getGuiObjectIsObscuredModule (copy), var39 (write)
+			local heartbeatConnection = runService.Heartbeat:Connect(function() --[[ line: 128 ]]
+				-- upvalues: var35 (copy), getGuiObjectIsObscuredModule (copy), var39 (copy)
+				if var35.current and typeof(var35.current) == "Instance" and var35.current:IsA("GuiObject") then
+					var39(getGuiObjectIsObscuredModule(var35.current) or game.StarterGui:GetCore("DevConsoleVisible"))
 				end
 			end)
 			
-			return function() --[[ line: 143 ]]
+			return function() --[[ line: 139 ]]
 				-- upvalues: heartbeatConnection (ref)
 				heartbeatConnection:Disconnect()
 			end
 		end, {})
 	end
 	return {
-		currentBalance = var29.balance,
-		items = var29.items,
-		ownedItems = var29.ownedItems,
-		unpurchasableItems = var29.unpurchasableItems,
-		onClose = var34,
-		onAccept = if balance < totalCost then var36 else var35,
-		totalCost = var29.totalCost,
-		isDisabled = if fFlagFixVP8143Module then var38 else #var29.items == 0,
-		purchaseButtonRef = if fFlagFixVP8143Module then var37 else nil,
-		discountInformation = var29.discountInformation
+		currentBalance = var27.balance,
+		items = var27.items,
+		ownedItems = var27.ownedItems,
+		unpurchasableItems = var27.unpurchasableItems,
+		onClose = var32,
+		onAccept = if balance < totalCost then var34 else var33,
+		totalCost = var27.totalCost,
+		isDisabled = if fFlagFixVP8143Module then var36 else #var27.items == 0,
+		purchaseButtonRef = if fFlagFixVP8143Module then var35 else nil,
+		discountInformation = var27.discountInformation
 	}
 end

@@ -30,7 +30,6 @@
 			AvatarExperienceRoot = "AvatarExperienceRoot",
 			Chat = "Chat",
 			Moments = "Moments",
-			MomentsImmersive = "Moments",
 			More = "More",
 			Landing = "Landing",
 			Startup = "Startup",
@@ -84,8 +83,7 @@
 			ReportAbuse = "ReportAbuse",
 			ExperienceGuidelinesExplained = "ExperienceGuidelinesExplained",
 			PassesPage = "PassesPage",
-			MomentsFeed = "MomentsFeed",
-			MomentsImmersive = "MomentsFeed"
+			MomentsFeed = "MomentsFeed"
 		}
 	},
 	Metadata = {

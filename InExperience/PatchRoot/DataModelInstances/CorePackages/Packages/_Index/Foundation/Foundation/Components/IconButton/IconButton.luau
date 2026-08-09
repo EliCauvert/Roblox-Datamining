@@ -53,7 +53,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 79 | 
 		var27 = var25
 	end
 	local new
-	local var28 = useIconButtonVariantsModule(var20, var19.size, var19.variant, if var21 then var21.colorNamespace else nil)
+	local var28 = useIconButtonVariantsModule(var20, var19.size, var19.variant, if var21 then var21.colorMode else nil)
 	local size = var28.container.size
 	
 	if var19.isCircular then

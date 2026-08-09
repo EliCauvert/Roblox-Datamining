@@ -11,7 +11,7 @@ local var4 = urlBuilder.new({
 	base = urlBase.APIS,
 	query = {
 		entryPoint = "InExperienceChatWindowOpen",
-		promptStyle = if game:DefineFastFlag("ExpChatUseTooltipPromptStyle", false) then "Tooltip" else "Modal"
+		promptStyle = "Modal"
 	}
 })()
 local var5 = urlBuilder.new({
@@ -21,7 +21,7 @@ local var5 = urlBuilder.new({
 local var6 = nil
 
 return {
-	fetchAllTooltipEligibility = function(p0, p1) --[[ line: 87 ]]
+	fetchAllTooltipEligibility = function(p0, p1) --[[ line: 86 ]]
 		-- upvalues: fFlagExpChatUseUnifiedTooltipStore (ref), var6 (write), httpService (ref), var4 (ref), var3 (ref)
 		if not fFlagExpChatUseUnifiedTooltipStore then return end
 		if var6 == nil then
@@ -29,10 +29,10 @@ return {
 				Method = "GET",
 				Url = var4,
 				Headers = { Accept = "application/json" }
-			}):Start(function(_, p2) --[[ line: 107 ]]
+			}):Start(function(_, p2) --[[ line: 106 ]]
 				-- upvalues: httpService (copy), var6 (copy), p0 (ref), var3 (copy), p1 (ref)
 				if p2.StatusCode == 200 then
-					local ok, status = pcall(function() --[[ line: 109 ]]
+					local ok, status = pcall(function() --[[ line: 108 ]]
 						-- upvalues: httpService (copy), p2 (ref)
 						return httpService:JSONDecode(p2.Body)
 					end)
@@ -75,7 +75,7 @@ return {
 			p0({ customPrompts = var6 })
 		end
 	end,
-	reportImpression = function(p3) --[[ line: 50 ]]
+	reportImpression = function(p3) --[[ line: 49 ]]
 		-- upvalues: fFlagExpChatUseUnifiedTooltipStore (ref), httpService (ref), var5 (ref), var3 (ref)
 		if fFlagExpChatUseUnifiedTooltipStore then
 			httpService:RequestInternal({
@@ -83,7 +83,7 @@ return {
 				Url = var5,
 				Headers = { ["Content-Type"] = "application/json" },
 				Body = httpService:JSONEncode({ promptType = p3, promptId = p3 })
-			}):Start(function(_, p4) --[[ line: 69 ]]
+			}):Start(function(_, p4) --[[ line: 68 ]]
 				-- upvalues: var3 (copy), p3 (ref)
 				if p4.StatusCode == 200 then
 					var3:debug("ChatTooltip impression reported: {}", p3)

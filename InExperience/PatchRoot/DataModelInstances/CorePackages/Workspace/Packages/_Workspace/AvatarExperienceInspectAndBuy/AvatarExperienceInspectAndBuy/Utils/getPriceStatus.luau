@@ -6,28 +6,29 @@ local itemRestrictions = AXCommonModule.Enums.ItemRestrictions
 local salesLocationType = AXCommonModule.Enums.SalesLocationType
 local noPriceStatus = AXCommonModule.Enums.NoPriceStatus
 local fFlagAXPurchaseFromQuantityFirst = require(parent.AvatarExperienceFlags).FFlagAXPurchaseFromQuantityFirst
+local fFlagAXLimitedsOffsaleFixIaB = require(parent.AvatarExperienceFlags).FFlagAXLimitedsOffsaleFixIaB
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-local function _(p0) --[[ line: 21 | named "getAvailableInExperienceOnly" ]]
+local function _(p0) --[[ line: 22 | named "getAvailableInExperienceOnly" ]]
 	-- upvalues: salesLocationType (ref)
 	return p0.saleLocationType == salesLocationType.ExperiencesDevApiOnly
 end
 
-local _ = function(p1) --[[ line: 28 | named "getHasLimitedAmount" ]]
+local _ = function(p1) --[[ line: 29 | named "getHasLimitedAmount" ]]
 	-- upvalues: itemRestrictions (ref)
 	local itemRestrictions_1 = p1.itemRestrictions
 	
 	return itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Limited] or (itemRestrictions_1 and itemRestrictions_1[itemRestrictions.LimitedUnique] or itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Collectible])
 end
 
-local _ = function(p2) --[[ line: 40 | named "getUserHasReachedQuantityLimit" ]]
+local _ = function(p2) --[[ line: 41 | named "getUserHasReachedQuantityLimit" ]]
 	-- upvalues: itemRestrictions (ref)
 	local itemRestrictions_1 = p2.itemRestrictions
 	
 	return if not ((not itemRestrictions_1 or not itemRestrictions_1[itemRestrictions.Limited]) and ((not itemRestrictions_1 or not itemRestrictions_1[itemRestrictions.LimitedUnique]) and (not itemRestrictions_1 or not itemRestrictions_1[itemRestrictions.Collectible])) and p2.isOwned) then if p2.collectibleItemDetails and p2.collectibleItemDetails.quantityLimitPerUser then p2.collectibleItemDetails.quantityLimitPerUser > 0 and p2.collectibleItemDetails.quantityLimitPerUser <= p2.collectibleItemDetails.resellableCount else false else true
 end
 
-local _ = function(p3) --[[ line: 56 | named "getOriginalStockAvailable" ]]
+local _ = function(p3) --[[ line: 57 | named "getOriginalStockAvailable" ]]
 	-- upvalues: itemRestrictions (ref)
 	local itemRestrictions_1 = p3.itemRestrictions
 	local limited = itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Limited] or (itemRestrictions_1 and itemRestrictions_1[itemRestrictions.LimitedUnique] or itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Collectible])
@@ -35,7 +36,7 @@ local _ = function(p3) --[[ line: 56 | named "getOriginalStockAvailable" ]]
 	return limited and (p3.collectibleItemDetails and (p3.collectibleItemDetails.unitsAvailableForConsumption and p3.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not limited
 end
 
-local function gethasReachedQuantityLimitOfLimitedItem(p4) --[[ line: 72 ]]
+local function gethasReachedQuantityLimitOfLimitedItem(p4) --[[ line: 73 ]]
 	-- upvalues: itemRestrictions (ref)
 	local itemRestrictions_1 = p4.itemRestrictions
 	
@@ -53,12 +54,12 @@ local function gethasReachedQuantityLimitOfLimitedItem(p4) --[[ line: 72 ]]
 	return var6 and ((not (limited and (p4.collectibleItemDetails and (p4.collectibleItemDetails.unitsAvailableForConsumption and p4.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not limited) or (var7 or p4.isOffSale == true)) and not hasResellers)
 end
 
-local _ = function(p5) --[[ line: 103 | named "getIsFree" ]]
+local _ = function(p5) --[[ line: 104 | named "getIsFree" ]]
 	-- upvalues: salesLocationType (ref), noPriceStatus (ref)
 	return if p5.isOffSale then false elseif p5.noPriceStatus ~= noPriceStatus.Free then not (p5.saleLocationType == salesLocationType.ExperiencesDevApiOnly) or p5.catalogPriceStatus == "Free" else true
 end
 
-local _ = function(p6) --[[ line: 116 | named "getIsExperienceOnly" ]]
+local _ = function(p6) --[[ line: 117 | named "getIsExperienceOnly" ]]
 	-- upvalues: salesLocationType (ref), itemRestrictions (ref), fFlagAXPurchaseFromQuantityFirst (ref), noPriceStatus (ref)
 	if p6.isOffSale then
 		return false
@@ -70,8 +71,8 @@ local _ = function(p6) --[[ line: 116 | named "getIsExperienceOnly" ]]
 	return if var10 then limited and (p6.collectibleItemDetails and (p6.collectibleItemDetails.unitsAvailableForConsumption and p6.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not limited else not fFlagAXPurchaseFromQuantityFirst and p6.noPriceStatus == noPriceStatus.InExperience
 end
 
-local function getIsPurchaseFromResale(p7, p8) --[[ line: 144 ]]
-	-- upvalues: fFlagAXPurchaseFromQuantityFirst (ref), itemRestrictions (ref), salesLocationType (ref)
+local function getIsPurchaseFromResale(p7, p8) --[[ line: 145 ]]
+	-- upvalues: fFlagAXPurchaseFromQuantityFirst (ref), itemRestrictions (ref), salesLocationType (ref), fFlagAXLimitedsOffsaleFixIaB (ref)
 	local var14
 	if not p7.collectibleItemDetails or not p7.collectibleItemDetails.hasResellers then
 		return false
@@ -98,7 +99,7 @@ local function getIsPurchaseFromResale(p7, p8) --[[ line: 144 ]]
 	local limited = itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Limited] or (itemRestrictions_1 and itemRestrictions_1[itemRestrictions.LimitedUnique] or itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Collectible])
 	local var16 = not (limited and (p7.collectibleItemDetails and (p7.collectibleItemDetails.unitsAvailableForConsumption and p7.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not limited) or p7.isOffSale == true
 	
-	if not p8 then
+	if not fFlagAXLimitedsOffsaleFixIaB or not p8 then
 		return var14 or var16
 	elseif not var14 then
 		var17 = var16
@@ -121,7 +122,7 @@ local function getIsPurchaseFromResale(p7, p8) --[[ line: 144 ]]
 	end
 end
 
-local _ = function(p9) --[[ line: 204 | named "getIsSoldOut" ]]
+local _ = function(p9) --[[ line: 205 | named "getIsSoldOut" ]]
 	-- upvalues: itemRestrictions (ref)
 	local itemRestrictions_1 = p9.itemRestrictions
 	local limited = itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Limited] or (itemRestrictions_1 and itemRestrictions_1[itemRestrictions.LimitedUnique] or itemRestrictions_1 and itemRestrictions_1[itemRestrictions.Collectible])
@@ -129,7 +130,7 @@ local _ = function(p9) --[[ line: 204 | named "getIsSoldOut" ]]
 	return not (limited and (p9.collectibleItemDetails and (p9.collectibleItemDetails.unitsAvailableForConsumption and p9.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not limited) and not (p9.collectibleItemDetails and p9.collectibleItemDetails.hasResellers)
 end
 
-local _ = function(p10) --[[ line: 214 | named "getIsOwned" ]]
+local _ = function(p10) --[[ line: 215 | named "getIsOwned" ]]
 	-- upvalues: itemRestrictions (ref)
 	local isOwned = p10.isOwned
 	local itemRestrictions_1 = p10.itemRestrictions
@@ -141,22 +142,22 @@ local _ = function(p10) --[[ line: 214 | named "getIsOwned" ]]
 	return isOwned and ((not (limited and (p10.collectibleItemDetails and (p10.collectibleItemDetails.unitsAvailableForConsumption and p10.collectibleItemDetails.unitsAvailableForConsumption > 0)) or not limited) or (var21 or p10.isOffSale)) and not hasResellers)
 end
 
-local _ = function(p11) --[[ line: 228 | named "getIsPurchasableFromRoblox" ]]
+local _ = function(p11) --[[ line: 229 | named "getIsPurchasableFromRoblox" ]]
 	-- upvalues: noPriceStatus (ref), salesLocationType (ref)
 	return if p11.isOffSale or p11.noPriceStatus == noPriceStatus.OffSale then false else not (p11.saleLocationType == salesLocationType.ExperiencesDevApiOnly)
 end
 
-local _ = function(p12) --[[ line: 238 | named "getIsOffSale" ]]
+local _ = function(p12) --[[ line: 239 | named "getIsOffSale" ]]
 	-- upvalues: noPriceStatus (ref)
 	return p12.isOffSale or p12.noPriceStatus == noPriceStatus.OffSale
 end
 
-local _ = function(p13) --[[ line: 246 | named "getIsShopOnly" ]]
+local _ = function(p13) --[[ line: 247 | named "getIsShopOnly" ]]
 	-- upvalues: salesLocationType (ref)
 	return p13.saleLocationType == salesLocationType.ShopOnly
 end
 
-return function(p14, p15) --[[ line: 254 | named "getPriceStatus" ]]
+return function(p14, p15) --[[ line: 255 | named "getPriceStatus" ]]
 	-- upvalues: priceStatusModule (ref), gethasReachedQuantityLimitOfLimitedItem (ref), itemRestrictions (ref), getIsPurchaseFromResale (ref), salesLocationType (ref), fFlagAXPurchaseFromQuantityFirst (ref), noPriceStatus (ref)
 	if not p14 then
 		return priceStatusModule.Unavailable

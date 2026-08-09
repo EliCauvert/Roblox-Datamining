@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddFriendsDeprecateUnusedReducers", false) and require(script.Parent.FFlagAddFriendsRenderTileRefactor)

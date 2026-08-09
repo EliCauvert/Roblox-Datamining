@@ -6,6 +6,7 @@ local roactModule = require(parent.Roact)
 local text = require(parent.AppCommonLib).Text
 local memoize = require(parent.AppCommonLib).memoize
 local plainTextAutomaticSizeModule = require(script.Parent.PlainTextAutomaticSize)
+local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local withStyle = require(parent.UIBlox).Style.withStyle
 local assetCardTempAutomaticSizeModule = require(script.Parent.AssetCardTempAutomaticSize)
 local hiddenMessageModule = require(script.Parent.HiddenMessage)
@@ -33,7 +34,7 @@ local t_1 = {
 	component = hiddenMessageModule
 }
 
-local function _(p0) --[[ line: 47 | named "getMessageComponent" ]]
+local function _(p0) --[[ line: 49 | named "getMessageComponent" ]]
 	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref)
 	return if p0 and p0.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[p0.messageType]
 end
@@ -46,8 +47,8 @@ chatMessage.defaultProps = {
 		placeId = nil,
 		universeId = nil,
 		senderUserId = nil,
-		onDetailsOpened = function() --[[ line: 65 ]] end,
-		openGameDetailsPage = function() --[[ line: 66 ]] end
+		onDetailsOpened = function() --[[ line: 67 ]] end,
+		openGameDetailsPage = function() --[[ line: 68 ]] end
 	},
 	conversationId = nil,
 	BackgroundColor3 = nil,
@@ -72,7 +73,7 @@ chatMessage.defaultProps = {
 	Transparency = nil,
 	wideMode = false,
 	viewProfileOnAvatarPressed = true,
-	closeKeyboard = function() --[[ line: 91 ]] end,
+	closeKeyboard = function() --[[ line: 93 ]] end,
 	inputBoxRef = nil,
 	repliesTo = nil,
 	translatedText = nil,
@@ -83,13 +84,13 @@ chatMessage.defaultProps = {
 	unknownUserText = "PLACEHOLDER unknown user"
 }
 
-function chatMessage.init(p1) --[[ line: 103 ]]
+function chatMessage.init(p1) --[[ line: 105 ]]
 	-- upvalues: fFlagAppChatEnableAutotranslationModule (ref), memoize (ref), text (ref)
-	function p1.getModeratedText(p2) --[[ line: 104 ]]
+	function p1.getModeratedText(p2) --[[ line: 106 ]]
 		return string.gsub(p2, "[^%s]", "#")
 	end
 	
-	function p1.messageMaxWidth(p3, p4) --[[ line: 108 ]]
+	function p1.messageMaxWidth(p3, p4) --[[ line: 110 ]]
 		local var15 = 128
 		
 		if p3 then
@@ -99,21 +100,21 @@ function chatMessage.init(p1) --[[ line: 103 ]]
 	end
 	
 	if fFlagAppChatEnableAutotranslationModule then
-		p1.getBubbleMaxWidth = memoize(function(p5, p6, p7, p8, p9) --[[ line: 119 ]]
+		p1.getBubbleMaxWidth = memoize(function(p5, p6, p7, p8, p9) --[[ line: 121 ]]
 			-- upvalues: text (copy), p1 (ref)
 			return if p9 then math.max(text.GetTextBounds(p6, p8, p1.props.autotranslationOriginalTextFontSize, Vector2.new(p5, 10000)).X, text.GetTextBounds(p9, p8, p7, Vector2.new(p5, 10000)).X) + 20 else text.GetTextBounds(p6, p8, p7, Vector2.new(p5, 10000)).X + 20
 		end)
 		
 		return
 	end
-	p1.getBubbleMaxWidth = memoize(function(p10, p11, p12, p13) --[[ line: 136 ]]
+	p1.getBubbleMaxWidth = memoize(function(p10, p11, p12, p13) --[[ line: 138 ]]
 		-- upvalues: text (copy)
 		return text.GetTextBounds(p11, p13, p12, Vector2.new(p10, 10000)).X + 20
 	end)
 end
 
-function chatMessage.render(p14) --[[ line: 143 ]]
-	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerAutomaticSizeModule (ref), cryoModule (ref), reactModule (ref), fFlagAppChatEnableAutotranslationModule (ref)
+function chatMessage.render(p14) --[[ line: 145 ]]
+	-- upvalues: messageModelModule (ref), t_1 (ref), t (ref), loggerModule (ref), pruneConsecutiveNewLines (ref), withStyle (ref), roactModule (ref), chatMessageContainerAutomaticSizeModule (ref), cryoModule (ref), reactModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref), fFlagAppChatEnableAutotranslationModule (ref)
 	local props = p14.props
 	local var16 = if props and props.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[props.messageType]
 	props = p14.messageMaxWidth(p14.props.wideMode, p14.props.parentWidth)
@@ -123,8 +124,8 @@ function chatMessage.render(p14) --[[ line: 143 ]]
 		var17 = p14.props.moderated and p14.getModeratedText(var17) or var17
 		local content = p14.props.repliesTo and (p14.props.repliesTo.messageType and p14.props.repliesTo.content)
 		
-		return withStyle(function(p15) --[[ line: 162 ]]
-			-- upvalues: roactModule (copy), chatMessageContainerAutomaticSizeModule (copy), cryoModule (copy), p14 (ref), props (ref), var16 (ref), reactModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagAppChatEnableAutotranslationModule (copy), var17 (ref)
+		return withStyle(function(p15) --[[ line: 164 ]]
+			-- upvalues: roactModule (copy), chatMessageContainerAutomaticSizeModule (copy), cryoModule (copy), p14 (ref), props (ref), var16 (ref), reactModule (copy), content (ref), messageModelModule (copy), t_1 (copy), t (copy), fFlagRenameDeprecatedUIBloxTokens (copy), fFlagAppChatEnableAutotranslationModule (copy), var17 (ref)
 			local body = p15.Font.Body
 			local var19 = p15.Font.BaseSize * body.RelativeSize
 			local var20 = p15.Font.BaseSize * p15.Font.BodySmall.RelativeSize
@@ -135,8 +136,8 @@ function chatMessage.render(p14) --[[ line: 143 ]]
 				messageId = p14.props.messageId,
 				isPending = p14.props.isSending or (p14.props.moderated or p14.props.failed),
 				visibility = p14.props.visibility,
-				renderMessage = function(p16, p17) --[[ line: 182 ]]
-					-- upvalues: reactModule (copy), cryoModule (copy), p14 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), body (ref), props (copy), var20 (ref), p15 (ref), var16 (copy), fFlagAppChatEnableAutotranslationModule (copy), var17 (copy), var19 (ref)
+				renderMessage = function(p16, p17) --[[ line: 184 ]]
+					-- upvalues: reactModule (copy), cryoModule (copy), p14 (copy), content (copy), roactModule (copy), messageModelModule (copy), t_1 (copy), t (copy), body (ref), props (copy), var20 (ref), fFlagRenameDeprecatedUIBloxTokens (copy), p15 (ref), var16 (copy), fFlagAppChatEnableAutotranslationModule (copy), var17 (copy), var19 (ref)
 					local var24
 					local createElement = reactModule.createElement
 					local var21 = "ImageButton"
@@ -193,7 +194,7 @@ function chatMessage.render(p14) --[[ line: 143 ]]
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							SortOrder = Enum.SortOrder.LayoutOrder,
-							Padding = UDim.new(0, p15.Tokens.Size.Size_100)
+							Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then p15.Tokens.Size.Size_100 else p15.Tokens.Global.Size_50)
 						}),
 						Icons = if p17 then p17.Icons else nil,
 						[var16.name] = roactModule.createElement(var16.component, {
@@ -230,7 +231,7 @@ function chatMessage.render(p14) --[[ line: 143 ]]
 	return nil
 end
 
-return if fFlagAppChatEnableAutotranslationModule then function(p18) --[[ line: 284 ]]
+return if fFlagAppChatEnableAutotranslationModule then function(p18) --[[ line: 293 ]]
 	-- upvalues: useTokens (ref), reactModule (ref), chatMessage (ref), cryoModule (ref)
 	return reactModule.createElement(chatMessage, cryoModule.Dictionary.union(p18, {
 		autotranslationOriginalTextFontSize = useTokens().Typography.BodySmall.FontSize

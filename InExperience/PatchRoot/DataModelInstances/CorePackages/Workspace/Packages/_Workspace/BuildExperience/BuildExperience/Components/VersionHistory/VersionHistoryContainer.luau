@@ -1,146 +1,178 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local dataHydrationModule = require(parent.DataHydration)
+local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local localizationModule = require(parent.Localization)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
 local timeModule = require(parent.Time)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagisPublishOnBuildRevertModule = require(buildExperience.Flags.FFlagisPublishOnBuildRevert)
 local getPlaytestLoadingStoreModule = require(buildExperience.Stores.GetPlaytestLoadingStore)
-local rollbackPlaceWithRetryModule = require(buildExperience.utils.rollbackPlaceWithRetry)
 local versionHistoryBottomSheetModule = require(script.Parent.VersionHistoryBottomSheet)
-local versionHistoryUtilsModule = require(script.Parent.VersionHistoryUtils)
-local useScrollToTopAfterRestoreModule = require(script.Parent.useScrollToTopAfterRestore)
 local dataStatus = dataHydrationModule.DataStatus
 local dateHelper = timeModule.DateHelper
-local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
+local debug = creatorAgentChatModule.debug
 local useLocalization = localizationModule.Hooks.useLocalization
 
-local function _(p0) --[[ line: 38 | named "toNumber" ]]
+local function _(p0) --[[ line: 40 | named "toNumber" ]]
 	return if type(p0) == "number" then p0 elseif type(p0) == "string" then tonumber(p0) else nil
 end
 
-local _ = function(p1) --[[ line: 48 | named "getVersionNumber" ]]
+local _ = function(p1) --[[ line: 50 | named "getVersionNumber" ]]
 	local version = p1.version
 	
 	return assert(if type(version) == "number" then version elseif type(version) == "string" then tonumber(version) else nil, `Place version must be numeric: {p1.version}`)
 end
 
-local _ = function(p2, p3) --[[ line: 52 | named "getRequiredString" ]]
+local _ = function(p2, p3) --[[ line: 54 | named "getRequiredString" ]]
 	assert(type(p2) == "string" and p2 ~= "", `Place version {p3} must not be empty`)
 	
 	return p2
 end
 
-local function formatCreatedDate(p4, p5) --[[ line: 57 ]]
-	-- upvalues: localizationStringsModule (ref)
-	assert(type(p4) == "string" and p4 ~= "", "Place version createdTime must not be empty")
-	local match, match_1, match_2 = string.match(p4, "^(%d%d%d%d)%-(%d%d)%-(%d%d)")
-	local var21 = if match_1 then tonumber(match_1) else nil
-	local var22 = if match_2 then tonumber(match_2) else nil
-	assert(match ~= nil and (var21 ~= nil and (var22 ~= nil and p5[var21] ~= nil)), `Place version createdTime must be an ISO date: {p4}`)
-	
-	return localizationStringsModule.formatVersionHistoryCreatedDate(p5[var21], var22, match)
+local _ = function(p4) --[[ line: 59 | named "formatVersionNumber" ]]
+	return if p4 < 10 then `v0{p4}` else `v{p4}`
 end
 
-local function mapVersionToEntry(p6, p7) --[[ line: 70 ]]
-	-- upvalues: localizationStringsModule (ref), formatCreatedDate (ref), versionHistoryUtilsModule (ref)
-	local version = p6.version
-	local var23 = assert(if type(version) == "number" then version elseif type(version) == "string" then tonumber(version) else nil, `Place version must be numeric: {p6.version}`)
+local function formatCreatedDate(p5, p6) --[[ line: 67 ]]
+	assert(type(p5) == "string" and p5 ~= "", "Place version createdTime must not be empty")
+	local match, match_1, match_2 = string.match(p5, "^(%d%d%d%d)%-(%d%d)%-(%d%d)")
+	local var16 = if match_1 then tonumber(match_1) else nil
+	local var17 = if match_2 then tonumber(match_2) else nil
+	assert(match ~= nil and (var16 ~= nil and (var17 ~= nil and p6[var16] ~= nil)), `Place version createdTime must be an ISO date: {p5}`)
 	
-	return {
-		id = tostring(var23),
-		versionNumber = var23,
-		versionLabel = localizationStringsModule.formatVersionHistoryVersionLabel(var23, formatCreatedDate(p6.createdTime, p7)),
-		title = if p6.title == nil or p6.title == "" then localizationStringsModule.formatVersionHistoryVersionTitle(var23) else p6.title,
-		description = if p6.description == nil or p6.description == "" then localizationStringsModule.VERSION_HISTORY_FALLBACK_DESCRIPTION else p6.description,
-		noteTitle = p6.title,
-		noteDescription = p6.description,
-		badgeText = versionHistoryUtilsModule.getBadgeText(p6)
+	return `{p6[var16]} {var17}, {match}`
+end
+
+local _ = function(p7) --[[ line: 80 | named "getBadgeText" ]]
+	if p7.isPublished == true then
+		return "Published"
+	elseif p7.parentAssetVersionId == nil then
+		return nil
+	end
+	local parentAssetVersionId = p7.parentAssetVersionId
+	
+	return `Restored {if parentAssetVersionId < 10 then `v0{parentAssetVersionId}` else `v{parentAssetVersionId}`}`
+end
+
+local function mapVersionToEntry(p8, p9) --[[ line: 90 ]]
+	-- upvalues: formatCreatedDate (ref)
+	local var20
+	local version = p8.version
+	local var18 = assert(if type(version) == "number" then version elseif type(version) == "string" then tonumber(version) else nil, `Place version must be numeric: {p8.version}`)
+	local t = {
+		id = tostring(var18),
+		versionNumber = var18,
+		versionLabel = `{if var18 < 10 then `v0{var18}` else `v{var18}`} \194\183 {formatCreatedDate(p8.createdTime, p9)}`,
+		title = if p8.title == nil or p8.title == "" then `Version {var18}` else p8.title,
+		description = if p8.description == nil or p8.description == "" then "No description provided." else p8.description,
+		noteTitle = p8.title,
+		noteDescription = p8.description,
+		restoreMessage = p8.description
 	}
+	
+	if p8.isPublished == true then
+		var20 = "Published"
+	elseif p8.parentAssetVersionId == nil then
+		var20 = nil
+	else
+		local parentAssetVersionId = p8.parentAssetVersionId
+		var20 = `Restored {if parentAssetVersionId < 10 then `v0{parentAssetVersionId}` else `v{parentAssetVersionId}`}`
+	end
+	t.badgeText = var20
+	
+	return t
 end
 
-local function mapHistoryToEntries(p8, p9) --[[ line: 92 ]]
+local function mapHistoryToEntries(p10, p11) --[[ line: 113 ]]
 	-- upvalues: mapVersionToEntry (ref)
-	if p8 == nil or p8.placeVersions == nil then
+	if p10 == nil or p10.placeVersions == nil then
 		return {}
 	end
 	local t = {}
 	
-	for i, v in p8.placeVersions do
-		table.insert(t, mapVersionToEntry(v, p9))
+	for i, v in p10.placeVersions do
+		table.insert(t, mapVersionToEntry(v, p11))
 	end
 	return t
 end
 
-local _ = function(p10, p11, p12) --[[ line: 107 | named "getStatusText" ]]
-	-- upvalues: dataStatus (ref), localizationStringsModule (ref)
-	return if p12 == nil then if p10 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif p10 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #p11 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else p12
+local _ = function(p12, p13, p14) --[[ line: 128 | named "getStatusText" ]]
+	-- upvalues: dataStatus (ref)
+	return if p14 == nil then if p12 == dataStatus.NotReady then "Loading version history..." elseif p12 == dataStatus.Failed then "Version history couldn't load." elseif #p13 == 0 then "No version history yet." else nil else p14
 end
 
-return function(p13) --[[ line: 121 | named "VersionHistoryContainer" ]]
-	-- upvalues: useLocalization (ref), dateHelper (ref), reactModule (ref), placeVersionHistoryModule (ref), signalsReactModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), mapHistoryToEntries (ref), dataStatus (ref), localizationStringsModule (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagisPublishOnBuildRevertModule (ref), versionHistoryBottomSheetModule (ref)
-	local var25 = useLocalization(dateHelper.MonthsLocalizationKeys)
-	local var26 = reactModule.useMemo(function() --[[ line: 123 ]]
-		-- upvalues: p13 (ref), placeVersionHistoryModule (copy)
-		return p13.store or placeVersionHistoryModule.getPlaceVersionHistoryStore()
-	end, { p13.store })
-	local var27 = reactModule.useMemo(function() --[[ line: 126 ]]
-		-- upvalues: var26 (ref), p13 (ref)
-		return var26.getAndFetchHistory(p13.placeId)
-	end, { var26, p13.placeId })
-	local var28 = signalsReactModule.useSignalState(var27.data)
-	local var29 = signalsReactModule.useSignalState(var27.status)
-	local var30, var31 = reactModule.useState(false)
-	local var32, var33 = reactModule.useState(nil)
-	local var34 = useScrollToTopAfterRestoreModule()
-	local var35 = signalsReactModule.useSignalState(reactModule.useCallback(function(p14) --[[ line: 134 ]]
-		-- upvalues: getPlaytestLoadingStoreModule (copy), p13 (ref)
-		return getPlaytestLoadingStoreModule(p14).getAgentStatusForPlaceId(p13.placeId)(p14) == "Loading"
-	end, { p13.placeId }))
-	local var36 = reactModule.useMemo(function() --[[ line: 139 ]]
-		-- upvalues: mapHistoryToEntries (copy), var28 (ref), var25 (ref)
-		return mapHistoryToEntries(var28, var25)
-	end, { var28, var25 })
+return function(p15) --[[ line: 142 | named "VersionHistoryContainer" ]]
+	-- upvalues: useLocalization (ref), dateHelper (ref), reactModule (ref), placeVersionHistoryModule (ref), signalsReactModule (ref), getPlaytestLoadingStoreModule (ref), mapHistoryToEntries (ref), dataStatus (ref), debug (ref), versionHistoryBottomSheetModule (ref)
+	local var22 = useLocalization(dateHelper.MonthsLocalizationKeys)
+	local var23 = reactModule.useMemo(function() --[[ line: 144 ]]
+		-- upvalues: p15 (ref), placeVersionHistoryModule (copy)
+		return p15.store or placeVersionHistoryModule.getPlaceVersionHistoryStore()
+	end, { p15.store })
+	local var24 = reactModule.useMemo(function() --[[ line: 147 ]]
+		-- upvalues: var23 (ref), p15 (ref)
+		return var23.getAndFetchHistory(p15.placeId)
+	end, { var23, p15.placeId })
+	local var25 = signalsReactModule.useSignalState(var24.data)
+	local var26 = signalsReactModule.useSignalState(var24.status)
+	local var27, var28 = reactModule.useState(false)
+	local var29, var30 = reactModule.useState(nil)
+	local var31 = signalsReactModule.useSignalState(reactModule.useCallback(function(p16) --[[ line: 154 ]]
+		-- upvalues: getPlaytestLoadingStoreModule (copy), p15 (ref)
+		return getPlaytestLoadingStoreModule(p16).getAgentStatusForPlaceId(p15.placeId)(p16) == "Loading"
+	end, { p15.placeId }))
+	local var32 = reactModule.useMemo(function() --[[ line: 159 ]]
+		-- upvalues: mapHistoryToEntries (copy), var25 (ref), var22 (ref)
+		return mapHistoryToEntries(var25, var22)
+	end, { var25, var22 })
 	
 	return reactModule.createElement(versionHistoryBottomSheetModule, {
-		isOpen = p13.isOpen,
-		entries = var36,
-		statusText = if var32 ~= nil then if var29 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif var29 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #var36 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else var32,
-		isRestoreDisabled = var30 or var35,
-		onClose = p13.onClose,
-		onRestore = reactModule.useCallback(function(p15) --[[ line: 144 ]]
-			-- upvalues: var30 (ref), var35 (ref), var31 (ref), var33 (ref), rollbackPlaceWithRetryModule (copy), p13 (ref), fFlagEnableTeamTestLua (copy), fFlagisPublishOnBuildRevertModule (copy), var34 (ref), localizationStringsModule (copy)
-			if var30 or var35 then
+		isOpen = p15.isOpen,
+		entries = var32,
+		statusText = if var29 ~= nil then if var26 == dataStatus.NotReady then "Loading version history..." elseif var26 == dataStatus.Failed then "Version history couldn't load." elseif #var32 == 0 then "No version history yet." else nil else var29,
+		isRestoreDisabled = var27 or var31,
+		onClose = p15.onClose,
+		onRestore = reactModule.useCallback(function(p17) --[[ line: 164 ]]
+			-- upvalues: var27 (ref), var31 (ref), var28 (ref), var30 (ref), var23 (ref), p15 (ref), debug (copy)
+			if var27 or var31 then
 				return
 			end
-			var31(true)
-			var33(nil)
-			rollbackPlaceWithRetryModule(p13.placeId, p15.versionNumber, {
-				debugSource = "version_history restore",
-				note = { title = p15.noteTitle, description = p15.noteDescription },
-				published = if fFlagEnableTeamTestLua then true else fFlagisPublishOnBuildRevertModule
-			}):andThen(function() --[[ line: 159 ]]
-				-- upvalues: var34 (copy)
-				var34.scrollToTopAfterRestore()
-			end):catch(function(_) --[[ line: 162 ]]
-				-- upvalues: var33 (copy), localizationStringsModule (copy)
-				var33(localizationStringsModule.VERSION_HISTORY_RESTORE_FAILED)
-			end):finally(function() --[[ line: 165 ]]
-				-- upvalues: var31 (copy)
-				var31(false)
+			var28(true)
+			var30(nil)
+			var23.rollbackPlace(p15.placeId, p17.versionNumber, p17.restoreMessage, true):andThen(function(p18) --[[ line: 173 ]]
+				-- upvalues: debug (copy), p15 (copy), p17 (ref), var23 (copy)
+				if p18.newVersionNumber == nil then
+					debug.log("info", "version_history restore note copy skipped", {
+						reason = "newVersionNumber_nil",
+						placeId = p15.placeId,
+						restoredVersion = p17.versionNumber
+					})
+					
+					return nil
+				end
+				local var33 = tostring(p18.newVersionNumber)
+				local t = { title = p17.noteTitle, description = p17.noteDescription }
+				
+				return var23.addVersionNote(p15.placeId, var33, t):catch(function(p19) --[[ line: 189 ]]
+					-- upvalues: debug (copy), p15 (copy), p17 (copy), var33 (ref), t (ref)
+					debug.log("warn", "version_history restore note copy failed", {
+						placeId = p15.placeId,
+						restoredVersion = p17.versionNumber,
+						newVersion = var33,
+						titleLength = if t.title == nil then nil else #t.title,
+						descriptionLength = if t.description == nil then nil else #t.description,
+						error = tostring(p19)
+					})
+					error(p19)
+				end)
+			end):catch(function(_) --[[ line: 201 ]]
+				-- upvalues: var30 (copy)
+				var30("Couldn't restore this version. Try again.")
+			end):finally(function() --[[ line: 204 ]]
+				-- upvalues: var28 (copy)
+				var28(false)
 			end)
-		end, {
-			var30,
-			var35,
-			var34,
-			var26,
-			p13.placeId
-		}),
-		scrollingFrameRef = var34.scrollingFrameRef,
-		testId = p13.testId
+		end, { var27, var31, var23, p15.placeId }),
+		testId = p15.testId
 	})
 end

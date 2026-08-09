@@ -5,10 +5,8 @@ local collectionViewsModule = require(parent.CollectionViews)
 local foundationModule = require(parent.Foundation)
 local navigationModule = require(parent.Navigation)
 local _ = require(parent.DataHydration.MomentsStoreTypes)
-local fFlagMomentsCarouselVideoHandoff = require(parent.SharedFlags).FFlagMomentsCarouselVideoHandoff
 local momentTileModule = require(script.Parent.MomentTile)
 local momentsCarouselMediaProviderModule = require(script.Parent.MomentsCarouselMediaProvider)
-local getVisibleTileRangeModule = require(script.Parent.getVisibleTileRange)
 local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
 local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
 local enumsModule = require(profilePlatform.Common.Enums)
@@ -16,24 +14,18 @@ local collectionCarousel = collectionViewsModule.CollectionCarousel
 local useNavigationFocus = navigationModule.useNavigationFocus
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 45 | named "MomentsCarousel" ]]
-	-- upvalues: useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), useNavigationFocus (ref), useDynamicSizeMarginModule (ref), reactModule (ref), fFlagMomentsCarouselVideoHandoff (ref), getVisibleTileRangeModule (ref), momentTileModule (ref), collectionCarousel (ref), momentsCarouselMediaProviderModule (ref)
+return function(p0) --[[ line: 40 | named "MomentsCarousel" ]]
+	-- upvalues: useTokens (ref), useProfileFormFactorModule (ref), enumsModule (ref), useNavigationFocus (ref), useDynamicSizeMarginModule (ref), reactModule (ref), momentTileModule (ref), collectionCarousel (ref), momentsCarouselMediaProviderModule (ref)
 	local moments = p0.moments
-	local var11 = useTokens()
-	local var12 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-	local var13 = useNavigationFocus()
-	local var14, var15 = useDynamicSizeMarginModule()
-	local var16, var17 = reactModule.useState(0)
-	local var18, var19 = reactModule.useState(1)
+	local var10 = useTokens()
+	local var11 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
+	local var12 = useNavigationFocus()
+	local var13, var14 = useDynamicSizeMarginModule()
+	local var15, var16 = reactModule.useState(0)
+	local var17, var18 = reactModule.useState(1)
+	local var19 = reactModule.useRef(nil)
 	local var20 = reactModule.useRef(nil)
-	local var21 = reactModule.useRef(nil)
-	local var22 = if fFlagMomentsCarouselVideoHandoff then reactModule.useRef(nil) else nil
-	local var23 = if var12 then 4 else 3
-	local var24 = if var12 then nil else 0.2
-	local onTileImpression = p0.onTileImpression
-	local var25 = reactModule.useRef({})
-	local var26 = reactModule.useRef(nil)
-	local var27 = reactModule.useMemo(function() --[[ line: 73 ]]
+	local var21 = reactModule.useMemo(function() --[[ line: 53 ]]
 		-- upvalues: moments (ref)
 		for i, v in moments do
 			if v.metadata.captureType == Enum.CaptureType.Video then
@@ -42,66 +34,38 @@ return function(p0) --[[ line: 45 | named "MomentsCarousel" ]]
 		end
 		return false
 	end, { moments })
-	local var28 = moments[var18]
-	local var29 = var28 ~= nil and var28.metadata.captureType == Enum.CaptureType.Video
-	local var30 = reactModule.useCallback(function(p1) --[[ line: 85 ]]
-		-- upvalues: var17 (ref)
-		var17(p1)
+	local var22 = moments[var17]
+	local var23 = var22 ~= nil and var22.metadata.captureType == Enum.CaptureType.Video
+	local var24 = reactModule.useCallback(function(p1) --[[ line: 65 ]]
+		-- upvalues: var16 (ref)
+		var16(p1)
 		
 		return p1 * 1.5 + 48
 	end, {})
-	local var31 = reactModule.useCallback(function() --[[ line: 94 ]]
-		-- upvalues: onTileImpression (ref), var16 (ref), var20 (ref), getVisibleTileRangeModule (copy), var23 (ref), var24 (ref), moments (ref), var25 (ref)
-		if onTileImpression == nil or var16 <= 0 then return end
-		local current = var20.current
-		local var34, var35 = getVisibleTileRangeModule(if current ~= nil then 0 else current.CanvasPosition.X, var16, 12, var23, var24, #moments)
-		
-		for i = var34, var35 do
-			if not var25.current[i] then
-				var25.current[i] = true
-				onTileImpression(i)
-			end
+	local var25 = reactModule.useCallback(function() --[[ line: 70 ]]
+		-- upvalues: var19 (ref), var15 (ref), var20 (ref), moments (ref), var18 (ref)
+		if var19.current == nil or var15 <= 0 then return end
+		if var20.current ~= nil then
+			task.cancel(var20.current)
 		end
-	end, {
-		onTileImpression,
-		var16,
-		var23,
-		var24,
-		#moments
-	})
-	reactModule.useEffect(function() --[[ line: 110 ]]
-		-- upvalues: var26 (ref), moments (ref), var25 (ref), var31 (ref)
-		if var26.current ~= moments then
-			var26.current = moments
-			var25.current = {}
-		end
-		var31()
-	end, { moments, var31 })
-	local var32 = reactModule.useCallback(function() --[[ line: 121 ]]
-		-- upvalues: var20 (ref), var16 (ref), var21 (ref), moments (ref), var19 (ref), var31 (ref)
-		if var20.current == nil or var16 <= 0 then return end
-		if var21.current ~= nil then
-			task.cancel(var21.current)
-		end
-		var21.current = task.delay(0.2, function() --[[ line: 129 ]]
-			-- upvalues: var21 (copy), var20 (copy), var16 (copy), moments (copy), var19 (copy), var31 (copy)
-			var21.current = nil
-			local current = var20.current
+		var20.current = task.delay(0.2, function() --[[ line: 78 ]]
+			-- upvalues: var20 (copy), var19 (copy), var15 (copy), moments (copy), var18 (copy)
+			var20.current = nil
+			local current = var19.current
 			
 			if current == nil then
 				return
 			end
-			var19(math.clamp(math.round(current.CanvasPosition.X / (var16 + 12)) + 1, 1, #moments))
-			var31()
+			var18(math.clamp(math.round(current.CanvasPosition.X / (var15 + 12)) + 1, 1, #moments))
 		end)
-	end, { var16, #moments, var31 })
-	reactModule.useEffect(function() --[[ line: 144 ]]
-		-- upvalues: var21 (ref)
-		return function() --[[ line: 145 ]]
-			-- upvalues: var21 (copy)
-			if var21.current ~= nil then
-				task.cancel(var21.current)
-				var21.current = nil
+	end, { var15, #moments })
+	reactModule.useEffect(function() --[[ line: 90 ]]
+		-- upvalues: var20 (ref)
+		return function() --[[ line: 91 ]]
+			-- upvalues: var20 (copy)
+			if var20.current ~= nil then
+				task.cancel(var20.current)
+				var20.current = nil
 			end
 		end
 	end, {})
@@ -109,49 +73,41 @@ return function(p0) --[[ line: 45 | named "MomentsCarousel" ]]
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		LayoutOrder = p0.layoutOrder,
-		Size = UDim2.new(1, 0, 0, var16 * 1.5 + 48),
-		[reactModule.Change.AbsoluteSize] = var15
+		Size = UDim2.new(1, 0, 0, var15 * 1.5 + 48),
+		[reactModule.Change.AbsoluteSize] = var14
 	}, {
 		CollectionCarousel = reactModule.createElement(collectionCarousel, {
 			LayoutOrder = 1,
 			title = "Moments",
 			columnGap = 12,
 			items = moments,
-			renderItem = reactModule.useCallback(function(p2, p3, p4) --[[ line: 153 ]]
-				-- upvalues: reactModule (copy), momentTileModule (copy), var13 (ref), var18 (ref), fFlagMomentsCarouselVideoHandoff (copy), var22 (ref), p0 (ref)
+			renderItem = reactModule.useCallback(function(p2, p3, p4) --[[ line: 99 ]]
+				-- upvalues: reactModule (copy), momentTileModule (copy), var12 (ref), var17 (ref), p0 (ref)
 				return reactModule.createElement(momentTileModule, {
 					moment = p2,
 					layoutOrder = p3,
 					itemSize = p4,
-					isActive = var13 and p3 == var18,
-					onActivated = function() --[[ line: 159 ]]
-						-- upvalues: fFlagMomentsCarouselVideoHandoff (copy), var22 (copy), p0 (copy), p3 (ref)
-						if fFlagMomentsCarouselVideoHandoff then
-							local current = var22.current
-							
-							if current ~= nil then
-								current.release()
-							end
-						end
+					isActive = var12 and p3 == var17,
+					onActivated = function() --[[ line: 105 ]]
+						-- upvalues: p0 (copy), p3 (ref)
 						p0.onSelectMoment(p3)
 					end
 				}), p2.momentId
-			end, { var13, var18, p0.onSelectMoment }),
-			getItemHeight = var30,
-			scrollingFrameRef = var20,
-			onChangeCanvasPosition = var32,
-			numColumns = var23,
-			fractionalItemAmount = var24,
-			sideMargin = var14,
+			end, { var12, var17, p0.onSelectMoment }),
+			getItemHeight = var24,
+			scrollingFrameRef = var19,
+			onChangeCanvasPosition = var25,
+			numColumns = if var11 then 4 else 3,
+			fractionalItemAmount = if var11 then nil else 0.2,
+			sideMargin = var13,
 			onActivateHeader = p0.onActivateHeader
 		})
 	})
 	
-	return if var13 and var27 then reactModule.createElement(momentsCarouselMediaProviderModule, {
+	return if var12 and var21 then reactModule.createElement(momentsCarouselMediaProviderModule, {
 		moments = moments,
-		activeIndex = var18,
-		playbackActive = var29,
-		mediaCornerRadius = var11.Radius.Large,
-		handoffRef = if fFlagMomentsCarouselVideoHandoff then var22 else nil
+		activeIndex = var17,
+		playbackActive = var23,
+		mediaCornerRadius = var10.Radius.Large
 	}, { Carousel = frame }) else frame
 end

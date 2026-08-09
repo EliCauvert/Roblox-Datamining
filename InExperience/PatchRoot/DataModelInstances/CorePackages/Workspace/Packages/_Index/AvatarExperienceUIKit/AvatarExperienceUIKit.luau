@@ -20,7 +20,6 @@ return {
 		ItemCardPriceLine = require(itemCard.ItemCardPriceLine),
 		ItemCardStatus = require(itemCard.ItemCardStatus),
 		ItemCardThumbnail = require(itemCard.ItemCardThumbnail),
-		ItemCardThumbnailSkeleton = require(itemCard.ItemCardThumbnailSkeleton),
 		ItemCardTitle = require(itemCard.ItemCardTitle)
 	},
 	WidgetComponents = {
@@ -39,7 +38,6 @@ return {
 	},
 	Utils = {
 		getRemainingTime = require(script.Utils.getRemainingTime),
-		getItemCountForRow = require(script.Utils.getItemCountForRow),
 		getLocalizedPrice = require(itemCard.Utils.getLocalizedPrice)
 	},
 	["jest.config"] = script["jest.config"]

@@ -31,19 +31,18 @@ local useCallback = reactModule.useCallback
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagLuaAppSduiEventDetailsEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 local fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable = require(parent.SharedFlags).FFlagLuaAppEventDetailsPageDisableCtaOnUnplayable
-local fFlagLuaAppGameViewTileBackgroundColorOverride = require(parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 
-local var10 = function() --[[ line: 67 ]] end
+local var10 = function() --[[ line: 63 ]] end
 
-return function(p0) --[[ line: 71 ]]
-	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), getVirtualEventDatesModule (ref), useMemo (ref), footerCornerButtonStyle (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), playButtonStates (ref), getFFlagIsSquadEnabled (ref), useLocalization (ref), useCallback (ref), reactModule (ref), useEffect (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), formatDateLocalizedModule (ref), notificationModalsManagerModule (ref), useState (ref), fetchEventThumbnailModule (ref), impressionsTagUtility (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (ref), getEventCtaButtonStateModule (ref), focusNavigationEventNameEnum (ref), var10 (ref), gameTileView (ref), fFlagLuaAppGameViewTileBackgroundColorOverride (ref), gridTileTextFooter (ref), gameTileThumbnailBadges (ref), eventWideFooterButtonModule (ref), holdDetector (ref)
+return function(p0) --[[ line: 67 ]]
+	-- upvalues: useDesignTokens (ref), useTextSizeOffset (ref), getVirtualEventDatesModule (ref), useMemo (ref), footerCornerButtonStyle (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), playButtonStates (ref), getFFlagIsSquadEnabled (ref), useLocalization (ref), useCallback (ref), reactModule (ref), useEffect (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), formatDateLocalizedModule (ref), notificationModalsManagerModule (ref), useState (ref), fetchEventThumbnailModule (ref), impressionsTagUtility (ref), fFlagLuaAppEventDetailsPageDisableCtaOnUnplayable (ref), getEventCtaButtonStateModule (ref), focusNavigationEventNameEnum (ref), var10 (ref), gameTileView (ref), gridTileTextFooter (ref), gameTileThumbnailBadges (ref), eventWideFooterButtonModule (ref), holdDetector (ref)
 	local var11 = useDesignTokens()
 	local var12 = useTextSizeOffset()
 	local event = p0.Event
 	local var13 = getVirtualEventDatesModule(event)
 	local var14 = var13.startDate.UnixTimestamp <= DateTime.now().UnixTimestamp
 	local isGoing = event.userRsvpStatus == "going"
-	local var16 = useMemo(function() --[[ line: 79 ]]
+	local var16 = useMemo(function() --[[ line: 75 ]]
 		-- upvalues: var14 (ref), footerCornerButtonStyle (copy), isGoing (ref)
 		return if var14 then footerCornerButtonStyle.Play elseif isGoing then footerCornerButtonStyle.Following else footerCornerButtonStyle.Follow
 	end, { var14, isGoing })
@@ -55,7 +54,7 @@ return function(p0) --[[ line: 71 ]]
 		DateAtTime = "Feature.VirtualEvents.Label.DateAtTime",
 		ToastText = "Feature.VirtualEvents.Label.ReminderSetForEventTime"
 	})
-	local var21 = useCallback(function() --[[ line: 100 ]]
+	local var21 = useCallback(function() --[[ line: 96 ]]
 		-- upvalues: var19 (ref), var14 (ref), p0 (ref), event (ref)
 		if not var19 then return end
 		if var14 then
@@ -72,7 +71,7 @@ return function(p0) --[[ line: 71 ]]
 		var14, p0.onJoinEvent, p0.onRsvpChanged, event.userRsvpStatus, event, var19
 	})
 	local var22 = reactModule.useRef(event.userRsvpStatus)
-	useEffect(function() --[[ line: 122 ]]
+	useEffect(function() --[[ line: 118 ]]
 		-- upvalues: fFlagLuaAppSduiEventDetailsEnabled (copy), p0 (ref), var22 (ref), event (ref), formatDateLocalizedModule (copy), var20 (ref), var13 (ref), notificationModalsManagerModule (copy)
 		if (not fFlagLuaAppSduiEventDetailsEnabled or not p0.suppressRsvpReminderToastBecauseEventDetailsFocused) and (var22.current and var22.current ~= "going") and event.userRsvpStatus == "going" then
 			notificationModalsManagerModule.SetUIBloxToast({
@@ -90,27 +89,27 @@ return function(p0) --[[ line: 71 ]]
 		if fFlagLuaAppSduiEventDetailsEnabled then p0.suppressRsvpReminderToastBecauseEventDetailsFocused else nil
 	})
 	local var23, var24 = useState(nil)
-	useEffect(function() --[[ line: 156 ]]
+	useEffect(function() --[[ line: 152 ]]
 		-- upvalues: fetchEventThumbnailModule (copy), var17 (ref), event (ref), p0 (ref), var24 (ref)
 		local var33 = true
-		fetchEventThumbnailModule(var17, event.id, p0.DefaultThumbnail):andThen(function(p1) --[[ line: 158 ]]
+		fetchEventThumbnailModule(var17, event.id, p0.DefaultThumbnail):andThen(function(p1) --[[ line: 154 ]]
 			-- upvalues: var33 (write), var24 (copy)
 			if var33 then
 				var24(p1)
 			end
 		end)
 		
-		return function() --[[ line: 163 ]]
+		return function() --[[ line: 159 ]]
 			-- upvalues: var33 (write)
 			var33 = false
 		end
 	end, { event.id, p0.DefaultThumbnail })
 	local var25 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 169 ]]
+	reactModule.useEffect(function() --[[ line: 165 ]]
 		-- upvalues: impressionsTagUtility (copy), var25 (ref), p0 (ref)
 		impressionsTagUtility.AddTag(var25, p0.impressionsTag, p0.layoutOrder)
 		
-		return function() --[[ line: 171 ]]
+		return function() --[[ line: 167 ]]
 			-- upvalues: impressionsTagUtility (copy), var25 (copy), p0 (copy)
 			impressionsTagUtility.RemoveTag(var25, p0.impressionsTag, p0.layoutOrder)
 		end
@@ -118,7 +117,7 @@ return function(p0) --[[ line: 71 ]]
 	local _ = nil
 	local var26 = reactModule.useRef(nil)
 	local var27 = reactModule.useRef(false)
-	local var28 = reactModule.useCallback(function(p2) --[[ line: 180 ]]
+	local var28 = reactModule.useCallback(function(p2) --[[ line: 176 ]]
 		-- upvalues: var27 (ref)
 		var27.current = p2
 	end, {})
@@ -167,10 +166,9 @@ return function(p0) --[[ line: 71 ]]
 			isHovered = false,
 			forwardRef = var26,
 			image = var23,
-			backgroundStyle = if fFlagLuaAppGameViewTileBackgroundColorOverride then p0.backgroundStyle else nil,
 			Size = UDim2.fromScale(1, 1),
 			title = event.displayTitle or "",
-			onActivated = useCallback(function() --[[ line: 217 ]]
+			onActivated = useCallback(function() --[[ line: 213 ]]
 				-- upvalues: var27 (ref), p0 (ref)
 				if var27.current then
 					return

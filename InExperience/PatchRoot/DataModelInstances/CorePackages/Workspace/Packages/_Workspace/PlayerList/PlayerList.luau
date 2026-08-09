@@ -6,7 +6,6 @@ return {
 	LeaderboardStoreInstanceManager = require(script.Common.LeaderboardStoreInstanceManager),
 	LeaderboardStoreContext = require(script.Common.LeaderboardStoreContext),
 	PlayerListVisibilityStore = require(script.Common.PlayerListVisibilityStore),
-	PlayerRelationshipStore = require(script.Common.PlayerRelationshipStore),
 	Flags = {
 		FFlagAddNewPlayerListFocusNav = require(script.Flags.FFlagAddNewPlayerListFocusNav),
 		FFlagAddNewPlayerListMobileFocusNav = require(script.Flags.FFlagAddNewPlayerListMobileFocusNav),
@@ -17,23 +16,11 @@ return {
 		FFlagPlayerListUseFocusNavHook = fFlagPlayerListUseFocusNavHookModule,
 		FFlagPlayerListDropDownShowPlatformName = require(script.Flags.FFlagPlayerListDropDownShowPlatformName),
 		FFlagPlayerListFoundationSubscriptionIcon = require(script.Flags.FFlagPlayerListFoundationSubscriptionIcon),
-		FFlagPlayerListReskin = require(script.Flags.FFlagPlayerListReskin),
-		FFlagPlayerListReskinConsoleFocusNav = require(script.Flags.FFlagPlayerListReskinConsoleFocusNav),
-		FFlagPlayerListReskinConsoleMobileRouting = require(script.Flags.FFlagPlayerListReskinConsoleMobileRouting),
-		FFlagPlayerListReskinStickySelfRow = require(script.Flags.FFlagPlayerListReskinStickySelfRow),
-		FFlagPlayerListReskinMobileLayoutFix = require(script.Flags.FFlagPlayerListReskinMobileLayoutFix),
-		FFlagPlayerListReskinOptimization = require(script.Flags.FFlagPlayerListReskinOptimization),
-		FFlagPlayerListTwoTabs = require(script.Flags.FFlagPlayerListTwoTabs),
-		FFlagPlayerListReskinPreferredTransparency = require(script.Flags.FFlagPlayerListReskinPreferredTransparency),
-		FFlagPlayerListLocalizeGameText = require(script.Flags.FFlagPlayerListLocalizeGameText),
-		FFlagEnablePlayerListExposureEvents = require(script.Flags.FFlagEnablePlayerListExposureEvents),
-		FStringPlayerListIXPLayer = require(script.Flags.FStringPlayerListIXPLayer),
-		FFlagPlayerListContextMenuTelemetry = require(script.Flags.FFlagPlayerListContextMenuTelemetry)
+		FFlagPlayerListReskin = require(script.Flags.FFlagPlayerListReskin)
 	},
 	Hooks = {
 		useLeaderboardStore = require(script.Hooks.useLeaderboardStore),
-		usePlayerListFocusNavigation = if fFlagPlayerListUseFocusNavHookModule then require(script.Hooks.usePlayerListFocusNavigation) else nil,
-		usePlatformLeaderboard = require(script.Hooks.usePlatformLeaderboard)
+		usePlayerListFocusNavigation = if fFlagPlayerListUseFocusNavHookModule then require(script.Hooks.usePlayerListFocusNavigation) else nil
 	},
 	Common = {
 		LayoutValuesContext = require(script.Common.LayoutValuesContext),
@@ -43,16 +30,12 @@ return {
 		FormatStatString = require(script.Common.FormatStatString),
 		Constants = require(script.Common.Constants),
 		PlayerListVisibilityStore = require(script.Common.PlayerListVisibilityStore),
-		computeStatColumns = require(script.Common.computeStatColumns),
-		PlatformLeaderboardStoreContext = require(script.Common.PlatformLeaderboardStoreContext),
-		GameTextTranslatorContext = require(script.Common.GameTextTranslatorContext)
+		computeStatColumns = require(script.Common.computeStatColumns)
 	},
 	Container = {
-		PlayerListContainer = require(script.Components.Containers.PlayerListContainer),
-		PlatformLeaderboardContainer = require(script.Components.Containers.PlatformLeaderboardContainer)
+		PlayerListContainer = require(script.Components.Containers.PlayerListContainer)
 	},
 	PlayerContextualMenuStore = require(script.Common.PlayerContextualMenuStore),
-	PlayerListContextMenuTelemetryAction = require(script.Common.PlayerListContextMenuTelemetryAction),
 	builderIcon = require(script.Common.builderIcon),
 	resolveDisplayName = require(script.Common.resolveDisplayName),
 	getHeadshotThumbnail = require(script.Common.getHeadshotThumbnail),
@@ -61,11 +44,6 @@ return {
 		StatEntryView = require(script.Components.Presentation.StatEntryView),
 		PlayerListPanel = require(script.Components.Presentation.PlayerListPanel),
 		PlayerContextualMenuView = require(script.Components.Presentation.PlayerContextualMenuView),
-		LeaderboardScrim = require(script.Components.Presentation.LeaderboardScrim),
-		LeaderboardTabs = require(script.Components.Presentation.LeaderboardTabs),
-		EmptyAndErrorStates = require(script.Components.Presentation.EmptyAndErrorStates),
-		PlatformLeaderboardView = require(script.Components.Presentation.PlatformLeaderboardView),
-		PlatformEntryView = require(script.Components.Presentation.PlatformEntryView),
-		TabbedLeaderboardBody = require(script.Components.Presentation.TabbedLeaderboardBody)
+		LeaderboardScrim = require(script.Components.Presentation.LeaderboardScrim)
 	}
 }

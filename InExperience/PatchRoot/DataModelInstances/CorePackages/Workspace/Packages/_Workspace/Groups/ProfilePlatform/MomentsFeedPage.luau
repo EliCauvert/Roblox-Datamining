@@ -1,1 +1,0 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Components.Moments.MomentsFeedPage)

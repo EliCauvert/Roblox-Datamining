@@ -1,8 +1,10 @@
-﻿local parent = script.Parent
+﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
-	projects = {
-		parent["jest.main.config"],
-		parent["jest.mockDataModel.config"]
+	displayName = "CoreScriptsRoactCommon",
+	setupFilesAfterEnv = {
+		jestConfigsModule.setupFiles.LogHandler,
+		jestConfigsModule.setupFiles.UIBloxInitializer,
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

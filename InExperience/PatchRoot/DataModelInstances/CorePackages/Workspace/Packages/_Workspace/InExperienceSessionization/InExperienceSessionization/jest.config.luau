@@ -3,9 +3,8 @@
 return {
 	displayName = "InExperienceSessionization",
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.ErrorLogHandler,
+		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

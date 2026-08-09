@@ -7,10 +7,10 @@ local function parseBaseUrlInformation() --[[ line: 12 ]]
 	if baseUrl:sub(#baseUrl) ~= "/" then
 		baseUrl ..= "/"
 	end
-	local _, var51 = baseUrl:find("://")
-	local var52, var53 = baseUrl:find("%.", var51 + 1)
+	local _, var50 = baseUrl:find("://")
+	local var51, var52 = baseUrl:find("%.", var50 + 1)
 	
-	return baseUrl, baseUrl:sub(var51 + 1, var52 - 1), baseUrl:sub(var53 + 1)
+	return baseUrl, baseUrl:sub(var50 + 1, var51 - 1), baseUrl:sub(var52 + 1)
 end
 
 local function preventTableModification(_, _, _) --[[ line: 34 ]]
@@ -63,18 +63,17 @@ local formattedText_32 = string.format("https://contacts.%s", var5)
 local formattedText_33 = string.format("https://search.%s", var5)
 local formattedText_34 = string.format("https://static.%s", var5)
 local formattedText_35 = string.format("https://gamesearchuitreatments.api.%s", var5)
-local formattedText_36 = string.format("https://gameinternationalization.%s", var5)
-local formattedText_37 = string.format("https://economycreatorstats.%s", var5)
-local formattedText_38 = string.format("https://usermoderation.%s", var5)
+local formattedText_36 = string.format("https://economycreatorstats.%s", var5)
+local formattedText_37 = string.format("https://usermoderation.%s", var5)
 local replaced = string.gsub(var3, "http://", "https://")
-local formattedText_39 = string.format("https://voice.%s", var5)
-local formattedText_40 = string.format("https://translations.%s", var5)
-local formattedText_41 = string.format("https://twostepverification.%s", var5)
-local formattedText_42 = string.format("https://privatemessages.%sv1", var5)
-local var50 = formattedText_34
+local formattedText_38 = string.format("https://voice.%s", var5)
+local formattedText_39 = string.format("https://translations.%s", var5)
+local formattedText_40 = string.format("https://twostepverification.%s", var5)
+local formattedText_41 = string.format("https://privatemessages.%sv1", var5)
+local var49 = formattedText_34
 
 if var5 == "roblox.com/" then
-	var50 = string.gsub(var50, var5, "rbxcdn.com/")
+	var49 = string.gsub(var49, var5, "rbxcdn.com/")
 end
 return setmetatable({}, {
 	__metatable = false,
@@ -106,7 +105,6 @@ return setmetatable({}, {
 		AD_CONFIGURATION_URL = formattedText_20,
 		SEARCH_URL = formattedText_33,
 		GAME_SEARCH_UI_TREATMENTS = formattedText_35,
-		GAME_INTERNATIONALIZATION_URL = formattedText_36,
 		FOLLOWINGS_URL = formattedText_21,
 		ECONOMY_URL = formattedText_22,
 		THUMBNAILS_URL = formattedText_23,
@@ -120,32 +118,32 @@ return setmetatable({}, {
 		DISCUSSIONS_URL = formattedText_31,
 		CONTACTS_URL = formattedText_32,
 		STATIC_URL = formattedText_34,
-		STATIC_CDN_URL = var50,
+		STATIC_CDN_URL = var49,
 		BLOG_URL = "https://blog.roblox.com/",
 		CORP_URL = "https://corp.roblox.com/",
 		STORE_URL = "https://www.amazon.com/roblox",
-		ECNOMY_CREATOR_STATS = formattedText_37,
-		USER_MODERATION_URL = formattedText_38,
-		VOICE_URL = formattedText_39,
-		TRANSLATIONS_URL = formattedText_40,
-		TWOSTEPVERIFICATION_URL = formattedText_41,
-		PRIVATEMESSAGES_URL = formattedText_42,
-		getUserProfileUrl = function(p1, p2) --[[ line: 155 ]]
+		ECNOMY_CREATOR_STATS = formattedText_36,
+		USER_MODERATION_URL = formattedText_37,
+		VOICE_URL = formattedText_38,
+		TRANSLATIONS_URL = formattedText_39,
+		TWOSTEPVERIFICATION_URL = formattedText_40,
+		PRIVATEMESSAGES_URL = formattedText_41,
+		getUserProfileUrl = function(p1, p2) --[[ line: 153 ]]
 			return string.format("%susers/%s/profile", p1.BASE_URL, p2)
 		end,
-		getUserFriendsUrl = function(p3, p4) --[[ line: 159 ]]
+		getUserFriendsUrl = function(p3, p4) --[[ line: 157 ]]
 			return string.format("%susers/%s/friends", p3.BASE_URL, p4)
 		end,
-		getUserInventoryUrl = function(p5, p6) --[[ line: 163 ]]
+		getUserInventoryUrl = function(p5, p6) --[[ line: 161 ]]
 			return string.format("%susers/%s/inventory", p5.BASE_URL, p6)
 		end,
-		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10) --[[ line: 167 ]]
+		getPlaceDefaultThumbnailUrl = function(p7, p8, p9, p10) --[[ line: 165 ]]
 			return string.format("%sThumbs/Asset.ashx?width=%d&height=%d&assetId=%s&ignorePlaceMediaItems=true", p7.BASE_URL, p9, p10, tostring(p8))
 		end,
-		isVanitySite = function(p11) --[[ line: 177 ]]
+		isVanitySite = function(p11) --[[ line: 175 ]]
 			return p11.PREFIX ~= "www"
 		end,
-		makeQueryString = function(_, p12) --[[ line: 182 ]]
+		makeQueryString = function(_, p12) --[[ line: 180 ]]
 			local t = {}
 			
 			for i, v in pairs(p12) do
@@ -161,7 +159,7 @@ return setmetatable({}, {
 			end
 			return table.concat(t, "&")
 		end,
-		stripHttpsAndTrailingSlash = function(p13) --[[ line: 205 ]]
+		stripHttpsAndTrailingSlash = function(p13) --[[ line: 203 ]]
 			return string.gsub(string.gsub(p13, "^https://", ""), "/*$", "")
 		end
 	},

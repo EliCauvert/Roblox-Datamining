@@ -1,88 +1,90 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local dashModule = require(corePackagesService.Packages.Dash)
-local constantsModule = require(script.Parent.Parent.Constants)
+local parent = script.Parent.Parent
+local constantsModule = require(parent.Constants)
 local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
 local itemRestrictions = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon).Enums.ItemRestrictions
+local fFlagAXParseAdditionalItemDetailsFromCatalogModule = require(parent.Flags.FFlagAXParseAdditionalItemDetailsFromCatalog)
 local mockIdModule = require(script.Parent.Parent.MockId)
 local t = {
-	new = function() --[[ line: 38 ]]
+	new = function() --[[ line: 41 ]]
 		return {}
 	end
 }
 
-function t.mock() --[[ line: 44 ]]
+function t.mock() --[[ line: 47 ]]
 	-- upvalues: t (ref), mockIdModule (ref)
-	local var5 = t.new()
-	var5.name = ""
-	var5.bundleId = mockIdModule()
-	var5.description = ""
-	var5.bundleType = ""
-	var5.creatorId = ""
-	var5.creatorName = ""
-	var5.productId = ""
-	var5.isForSale = false
-	var5.price = ""
-	var5.assetIds = {}
-	var5.numFavorites = 0
-	var5.costumeId = ""
-	var5.owned = false
-	var5.isForSale = false
-	var5.collectibleItemId = ""
-	var5.collectibleIsLimited = nil
-	var5.collectibleProductId = ""
-	var5.collectibleLowestResalePrice = 0
-	var5.collectibleLowestAvailableResaleProductId = ""
-	var5.collectibleLowestAvailableResaleItemInstanceId = ""
-	var5.collectibleQuantityLimitPerUser = 0
-	var5.remaining = 0
-	var5.productType = ""
-	
-	return var5
-end
-
-function t.fromBulkPurchaseResult(p0, p1) --[[ line: 77 ]]
-	-- upvalues: t (ref), itemRestrictions (ref)
 	local var6 = t.new()
-	local var7 = if p1 and p1.itemRestrictions then p1.itemRestrictions else {}
-	var6.resellableCount = if p1 and p1.resellableCount then p1.resellableCount else 0
+	var6.name = ""
+	var6.bundleId = mockIdModule()
+	var6.description = ""
+	var6.bundleType = ""
+	var6.creatorId = ""
+	var6.creatorName = ""
+	var6.productId = ""
+	var6.isForSale = false
+	var6.price = ""
+	var6.assetIds = {}
+	var6.numFavorites = 0
+	var6.costumeId = ""
+	var6.owned = false
+	var6.isForSale = false
+	var6.collectibleItemId = ""
+	var6.collectibleIsLimited = nil
+	var6.collectibleProductId = ""
+	var6.collectibleLowestResalePrice = 0
+	var6.collectibleLowestAvailableResaleProductId = ""
+	var6.collectibleLowestAvailableResaleItemInstanceId = ""
+	var6.collectibleQuantityLimitPerUser = 0
+	var6.remaining = 0
+	var6.productType = ""
 	
-	if p0.status == Enum.MarketplaceItemPurchaseStatus.Success and p0.type == Enum.MarketplaceProductType.AvatarBundle then
-		var6.owned = true
-		
-		if var7[itemRestrictions.Collectible] or var7[itemRestrictions.Limited] or var7[itemRestrictions.LimitedUnique] then
-			var6.resellableCount += 1
-		end
-	end
 	return var6
 end
 
-function t.fromGetFavoriteForAsset(value, p2) --[[ line: 106 ]]
-	-- upvalues: t (ref)
-	local var8 = t.new()
-	var8.bundleId = tostring(value)
-	var8.isFavorited = p2
+function t.fromBulkPurchaseResult(p0, p1) --[[ line: 80 ]]
+	-- upvalues: t (ref), itemRestrictions (ref)
+	local var7 = t.new()
+	local var8 = if p1 and p1.itemRestrictions then p1.itemRestrictions else {}
+	var7.resellableCount = if p1 and p1.resellableCount then p1.resellableCount else 0
 	
-	return var8
+	if p0.status == Enum.MarketplaceItemPurchaseStatus.Success and p0.type == Enum.MarketplaceProductType.AvatarBundle then
+		var7.owned = true
+		
+		if var8[itemRestrictions.Collectible] or var8[itemRestrictions.Limited] or var8[itemRestrictions.LimitedUnique] then
+			var7.resellableCount += 1
+		end
+	end
+	return var7
 end
 
-function t.fromAvatarPreviewItem(p3) --[[ line: 113 ]]
+function t.fromGetFavoriteForAsset(value, p2) --[[ line: 109 ]]
 	-- upvalues: t (ref)
 	local var9 = t.new()
-	var9.name = p3.name
-	var9.description = p3.description
-	var9.price = p3.priceInRobux
-	var9.isForSale = p3.isPurchasable
-	var9.productId = tostring(p3.productId)
-	var9.collectibleItemId = p3.collectibleItemId
-	var9.collectibleProductId = p3.collectibleProductId
-	var9.owned = p3.quantityOwned > 0
-	var9.resellableCount = p3.quantityOwned
-	var9.creatorId = tostring(p3.creator.id)
-	var9.creatorName = p3.creator.name
-	var9.creatorHasVerifiedBadge = p3.creator.hasVerifiedBadge
-	var9.bundleId = tostring(p3.id)
-	var9.bundleType = tostring(p3.bundleType)
-	var9.noPriceStatus = p3.noPriceStatus
+	var9.bundleId = tostring(value)
+	var9.isFavorited = p2
+	
+	return var9
+end
+
+function t.fromAvatarPreviewItem(p3) --[[ line: 116 ]]
+	-- upvalues: t (ref)
+	local var10 = t.new()
+	var10.name = p3.name
+	var10.description = p3.description
+	var10.price = p3.priceInRobux
+	var10.isForSale = p3.isPurchasable
+	var10.productId = tostring(p3.productId)
+	var10.collectibleItemId = p3.collectibleItemId
+	var10.collectibleProductId = p3.collectibleProductId
+	var10.owned = p3.quantityOwned > 0
+	var10.resellableCount = p3.quantityOwned
+	var10.creatorId = tostring(p3.creator.id)
+	var10.creatorName = p3.creator.name
+	var10.creatorHasVerifiedBadge = p3.creator.hasVerifiedBadge
+	var10.bundleId = tostring(p3.id)
+	var10.bundleType = tostring(p3.bundleType)
+	var10.noPriceStatus = p3.noPriceStatus
 	local t_1 = {}
 	
 	if p3.assetsInBundle then
@@ -95,7 +97,7 @@ function t.fromAvatarPreviewItem(p3) --[[ line: 113 ]]
 			})
 		end
 	end
-	var9.assetsInBundle = t_1
+	var10.assetsInBundle = t_1
 	
 	if p3.itemRestrictions then
 		local t_2 = {}
@@ -103,63 +105,63 @@ function t.fromAvatarPreviewItem(p3) --[[ line: 113 ]]
 		for i, v in p3.itemRestrictions do
 			t_2[v] = true
 		end
-		var9.itemRestrictions = t_2
+		var10.itemRestrictions = t_2
 	end
-	return var9
+	return var10
 end
 
-function t.fromGetAssetBundles(value) --[[ line: 158 ]]
+function t.fromGetAssetBundles(value) --[[ line: 161 ]]
 	-- upvalues: t (ref), constantsModule (ref)
-	local var12 = t.new()
-	var12.name = value.name
-	var12.bundleId = tostring(value.id)
-	var12.description = value.description
-	var12.bundleType = value.bundleType
-	var12.creatorId = tostring(value.creator.id)
-	var12.creatorName = value.creator.name
-	var12.productId = tostring(value.product.id)
+	local var13 = t.new()
+	var13.name = value.name
+	var13.bundleId = tostring(value.id)
+	var13.description = value.description
+	var13.bundleType = value.bundleType
+	var13.creatorId = tostring(value.creator.id)
+	var13.creatorName = value.creator.name
+	var13.productId = tostring(value.product.id)
 	
 	if value.collectibleItemDetail then
-		var12.isForSale = value.collectibleItemDetail.saleStatus == constantsModule.SaleStatus.OnSale
-		var12.collectibleItemId = value.collectibleItemDetail.collectibleItemId or ""
-		var12.collectibleProductId = value.collectibleItemDetail.collectibleProductId or ""
-		var12.collectibleLowestResalePrice = value.collectibleItemDetail.lowestResalePrice or 0
-		var12.collectibleLowestAvailableResaleProductId = value.collectibleItemDetail.lowestAvailableResaleProductId or ""
-		var12.collectibleLowestAvailableResaleItemInstanceId = value.collectibleItemDetail.lowestAvailableResaleItemInstanceId or ""
-		var12.collectibleQuantityLimitPerUser = value.collectibleItemDetail.quantityLimitPerUser or 0
-		var12.productType = constantsModule.ProductType.CollectibleItem
-		var12.price = value.collectibleItemDetail.price
-		var12.remaining = value.collectibleItemDetail.unitsAvailable or 0
-		var12.collectibleIsLimited = value.collectibleItemDetail.collectibleItemType == "Limited"
-		var12.saleLocation = value.collectibleItemDetail.saleLocation
+		var13.isForSale = value.collectibleItemDetail.saleStatus == constantsModule.SaleStatus.OnSale
+		var13.collectibleItemId = value.collectibleItemDetail.collectibleItemId or ""
+		var13.collectibleProductId = value.collectibleItemDetail.collectibleProductId or ""
+		var13.collectibleLowestResalePrice = value.collectibleItemDetail.lowestResalePrice or 0
+		var13.collectibleLowestAvailableResaleProductId = value.collectibleItemDetail.lowestAvailableResaleProductId or ""
+		var13.collectibleLowestAvailableResaleItemInstanceId = value.collectibleItemDetail.lowestAvailableResaleItemInstanceId or ""
+		var13.collectibleQuantityLimitPerUser = value.collectibleItemDetail.quantityLimitPerUser or 0
+		var13.productType = constantsModule.ProductType.CollectibleItem
+		var13.price = value.collectibleItemDetail.price
+		var13.remaining = value.collectibleItemDetail.unitsAvailable or 0
+		var13.collectibleIsLimited = value.collectibleItemDetail.collectibleItemType == "Limited"
+		var13.saleLocation = value.collectibleItemDetail.saleLocation
 	end
-	var12.assetIds = {}
+	var13.assetIds = {}
 	
 	for i, v in pairs(value.items) do
 		if v.type == "UserOutfit" then
-			var12.costumeId = tostring(v.id)
+			var13.costumeId = tostring(v.id)
 		else
-			table.insert(var12.assetIds, tostring(v.id))
+			table.insert(var13.assetIds, tostring(v.id))
 		end
 	end
-	return var12
+	return var13
 end
 
-function t.fromGetItemDetailsV2(p4) --[[ line: 205 ]]
+function t.fromGetItemDetailsV2(p4) --[[ line: 208 ]]
 	-- upvalues: t (ref)
-	local var13 = t.new()
-	var13.bundleId = tostring(p4.id)
-	var13.isForSale = p4.isPurchasable
-	var13.price = p4.price or 0
-	var13.hasResellers = p4.hasResellers
-	var13.collectibleItemId = p4.collectibleItemId
-	var13.remaining = p4.unitsAvailableForConsumption
-	var13.collectibleTotalQuantity = p4.totalQuantity
-	var13.collectibleLowestResalePrice = p4.lowestResalePrice
-	var13.isOffSale = p4.isOffSale
-	var13.saleLocationType = p4.saleLocationType
-	var13.numFavorites = p4.favoriteCount
-	var13.catalogPriceStatus = p4.priceStatus
+	local var14 = t.new()
+	var14.bundleId = tostring(p4.id)
+	var14.isForSale = p4.isPurchasable
+	var14.price = p4.price or 0
+	var14.hasResellers = p4.hasResellers
+	var14.collectibleItemId = p4.collectibleItemId
+	var14.remaining = p4.unitsAvailableForConsumption
+	var14.collectibleTotalQuantity = p4.totalQuantity
+	var14.collectibleLowestResalePrice = p4.lowestResalePrice
+	var14.isOffSale = p4.isOffSale
+	var14.saleLocationType = p4.saleLocationType
+	var14.numFavorites = p4.favoriteCount
+	var14.catalogPriceStatus = p4.priceStatus
 	local t_1 = {}
 	
 	if p4.bundledItems then
@@ -167,94 +169,94 @@ function t.fromGetItemDetailsV2(p4) --[[ line: 205 ]]
 			table.insert(t_1, { id = tostring(v.id), name = v.name })
 		end
 	end
-	var13.assetsInBundle = t_1
+	var14.assetsInBundle = t_1
 	
-	return var13
+	return var14
 end
 
-function t.fromGetItemDetails(p5) --[[ line: 237 ]]
-	-- upvalues: t (ref)
-	local var15 = t.new()
-	var15.bundleId = tostring(p5.Id)
-	var15.owned = p5.Owned
-	var15.isForSale = p5.IsPurchasable
-	var15.price = p5.Price or 0
-	var15.hasResellers = p5.HasResellers
-	var15.collectibleItemId = p5.CollectibleItemId
-	var15.remaining = p5.UnitsAvailableForConsumption
-	var15.collectibleTotalQuantity = p5.TotalQuantity
-	var15.collectibleLowestResalePrice = p5.LowestResalePrice
-	var15.isOffSale = p5.IsOffSale
-	var15.saleLocationType = p5.SaleLocationType
-	var15.numFavorites = p5.FavoriteCount
-	var15.catalogPriceStatus = p5.PriceStatus
-	local t_1 = {}
+function t.fromGetItemDetails(p5) --[[ line: 240 ]]
+	-- upvalues: t (ref), fFlagAXParseAdditionalItemDetailsFromCatalogModule (ref)
+	local var16 = t.new()
+	var16.bundleId = tostring(p5.Id)
+	var16.owned = p5.Owned
+	var16.isForSale = p5.IsPurchasable
+	var16.price = p5.Price or 0
+	var16.hasResellers = p5.HasResellers
+	var16.collectibleItemId = p5.CollectibleItemId
 	
-	if p5.BundledItems then
+	if fFlagAXParseAdditionalItemDetailsFromCatalogModule then
+		var16.remaining = p5.UnitsAvailableForConsumption
+		var16.collectibleTotalQuantity = p5.TotalQuantity
+		var16.collectibleLowestResalePrice = p5.LowestResalePrice
+		var16.isOffSale = p5.IsOffSale
+		var16.saleLocationType = p5.SaleLocationType
+		var16.numFavorites = p5.FavoriteCount
+		var16.catalogPriceStatus = p5.PriceStatus
+		local t_1 = {}
+		
 		for i, v in p5.BundledItems do
 			table.insert(t_1, { id = tostring(v.Id), name = v.Name })
 		end
+		var16.assetsInBundle = t_1
 	end
-	var15.assetsInBundle = t_1
-	
-	return var15
+	return var16
 end
 
-function t.fromGetBundleFavoriteCount(p6, p7) --[[ line: 270 ]]
-	-- upvalues: t (ref)
-	local var17 = t.new()
-	var17.bundleId = tostring(p6)
-	var17.numFavorites = p7
-	
-	return var17
-end
-
-function t.fromGetEconomyProductInfo(p8, p9, p10, p11) --[[ line: 277 ]]
+function t.fromGetBundleFavoriteCount(p6, p7) --[[ line: 273 ]]
 	-- upvalues: t (ref)
 	local var18 = t.new()
-	var18.bundleId = tostring(p9)
-	var18.owned = p8
-	var18.price = p10
-	var18.isForSale = p11
+	var18.bundleId = tostring(p6)
+	var18.numFavorites = p7
 	
 	return var18
 end
 
-function t.fromPurchaseSuccess(p12) --[[ line: 286 ]]
+function t.fromGetEconomyProductInfo(p8, p9, p10, p11) --[[ line: 280 ]]
 	-- upvalues: t (ref)
 	local var19 = t.new()
-	var19.bundleId = tostring(p12)
-	var19.owned = true
+	var19.bundleId = tostring(p9)
+	var19.owned = p8
+	var19.price = p10
+	var19.isForSale = p11
 	
 	return var19
 end
 
-function t.getSaleDetailsForCollectibles(p13) --[[ line: 293 ]]
+function t.fromPurchaseSuccess(p12) --[[ line: 289 ]]
+	-- upvalues: t (ref)
+	local var20 = t.new()
+	var20.bundleId = tostring(p12)
+	var20.owned = true
+	
+	return var20
+end
+
+function t.getSaleDetailsForCollectibles(p13) --[[ line: 296 ]]
 	-- upvalues: dashModule (ref), constantsModule (ref)
-	local var20 = dashModule.joinDeep({}, p13)
+	local var21 = dashModule.joinDeep({}, p13)
 	
 	if p13.productType == constantsModule.ProductType.CollectibleItem then
-		local saleLocation = var20.saleLocation
-		local var21 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopOnly
-		local var22 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopAndExperiencesById
-		local var23 = saleLocation and (saleLocation.saleLocationTypeId == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.universeIds) == "table" and table.find(saleLocation.universeIds, game.GameId) ~= nil))
-		local var24 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
-		local isForSale = var20.isForSale
+		local saleLocation = var21.saleLocation
+		local var22 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopOnly
+		local var23 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ShopAndExperiencesById
+		local var24 = saleLocation and (saleLocation.saleLocationTypeId == constantsModule.SaleLocationType.ShopAndExperiencesById and (type(saleLocation.universeIds) == "table" and table.find(saleLocation.universeIds, game.GameId) ~= nil))
+		local var25 = saleLocation and saleLocation.saleLocationTypeId ~= constantsModule.SaleLocationType.ExperiencesDevApiOnly
+		local isForSale = var21.isForSale
 		
 		if isForSale then
-			isForSale = var21
+			isForSale = var22
 			
-			if isForSale and not var22 then
-				isForSale = var23 and var24
+			if isForSale and not var23 then
+				isForSale = var24 and var25
 			end
 		end
-		var20.isForSale = isForSale
+		var21.isForSale = isForSale
 		
 		if not p13.collectibleIsLimited then
-			var20.isForSale = var20.isForSale and not var20.owned
+			var21.isForSale = var21.isForSale and not var21.owned
 		end
 	end
-	return var20
+	return var21
 end
 
 return t

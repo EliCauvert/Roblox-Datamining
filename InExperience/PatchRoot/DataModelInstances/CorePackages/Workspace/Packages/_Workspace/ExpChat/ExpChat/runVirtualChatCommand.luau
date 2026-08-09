@@ -7,13 +7,11 @@ local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
 local universeChatSystemMessageAddedModule = require(expChat.Actions.UniverseChatSystemMessageAdded)
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
 local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local analytics = expChatSharedModule.Analytics
-local fFlagExpChatReportVirtualCommandTelemetry = expChatSharedModule.Flags.FFlagExpChatReportVirtualCommandTelemetry
 local context = expChatSharedModule.context
 local var6 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p0, p1, p2, p3) --[[ line: 23 ]]
-	-- upvalues: context (ref), var6 (ref), fFlagExpChatReportVirtualCommandTelemetry (ref), analytics (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
+return function(p0, p1, p2, p3) --[[ line: 21 ]]
+	-- upvalues: context (ref), var6 (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), universeChatSystemMessageAddedModule (ref)
 	if not context.translator then
 		var6:warning("context.translator is nil, cannot execute command")
 		
@@ -22,10 +20,7 @@ return function(p0, p1, p2, p3) --[[ line: 23 ]]
 	for i, v in ipairs(p2) do
 		for i_1, v_1 in ipairs(v.alias) do
 			if p0 == v_1 or string.find(p0, "^" .. v_1 .. "%s") ~= nil then
-				if fFlagExpChatReportVirtualCommandTelemetry then
-					analytics:reportTextChatCommandClientSent(v.name)
-				end
-				task.spawn(function() --[[ line: 40 ]]
+				task.spawn(function() --[[ line: 34 ]]
 					-- upvalues: v (ref), context (copy), p1 (ref), p0 (ref), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p3 (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), universeChatSystemMessageAddedModule (copy)
 					local var7 = v.clientRun(context.store, p1, p0, context)
 					

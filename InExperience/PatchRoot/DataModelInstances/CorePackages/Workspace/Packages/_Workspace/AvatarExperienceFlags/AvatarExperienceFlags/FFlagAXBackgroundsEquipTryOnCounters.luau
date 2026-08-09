@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAXBackgroundsRoot) and game:DefineFastFlag("AXBackgroundsEquipTryOnCounters2", false)

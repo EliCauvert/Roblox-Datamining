@@ -4,15 +4,16 @@ local reactModule = require(parent.React)
 local expChatSharedModule = require(parent.ExpChatShared)
 local useCursor = require(parent.UIBlox).App.SelectionCursor.useCursor
 local configModule = require(expChat.Config)
+local fFlagExpChatEnableFocusNavigationModule = require(expChat.Flags.FFlagExpChatEnableFocusNavigation)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 
-return function(p0) --[[ line: 13 ]]
-	-- upvalues: useCursor (ref), getFFlagTextChatEnableUniverseChatTabs (ref), reactModule (ref), configModule (ref)
+return function(p0) --[[ line: 14 ]]
+	-- upvalues: fFlagExpChatEnableFocusNavigationModule (ref), useCursor (ref), getFFlagTextChatEnableUniverseChatTabs (ref), reactModule (ref), configModule (ref)
 	return reactModule.createElement("TextButton", {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
 		Font = configModule.ChatInputBarFont,
-		SelectionImageObject = useCursor(),
+		SelectionImageObject = if fFlagExpChatEnableFocusNavigationModule then useCursor() else nil,
 		Size = UDim2.fromScale(0, 1),
 		Text = p0.targetTextChannelDisplayName or "",
 		TextColor3 = configModule.ChatInputBarTextColor3,

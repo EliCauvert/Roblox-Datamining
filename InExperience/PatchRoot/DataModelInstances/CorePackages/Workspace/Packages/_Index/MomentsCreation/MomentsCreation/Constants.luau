@@ -16,10 +16,5 @@
 		DefaultFontSize = 16,
 		TreatmentMaxFontSize = 64,
 		TreatmentDefaultFontSize = 32
-	},
-	StickerOverlay = {
-		MinStickerSize = 50,
-		MaxStickerSize = 200,
-		DefaultStickerSize = 100
 	}
 }

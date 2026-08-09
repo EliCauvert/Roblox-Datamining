@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("StreamNotificationDropdownFocusedOwner", false) and (require(script.Parent.FFlagAppChatRemoveNotifications) and require(script.Parent.FFlagStreamNotificationDropdownSingleOwner))

@@ -25,7 +25,6 @@ local friendsListContextModule = require(parent.FriendsListContext)
 local useFriendsListOrderedByPresence = friendsCommonModule.Hooks.useFriendsListOrderedByPresence
 local generateDummyFriendsModule = require(utils.generateDummyFriends)
 local fFlagFilterOutDeletedAccountsGameInvitesModule = require(parent_1.Flags.FFlagFilterOutDeletedAccountsGameInvites)
-local fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(parent_2.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
 local userModel = userLibModule.Models.UserModel
 local t = {
 	InviteAvatarThumbnailType = constants.RbxAvatarThumbnailTypesFromEnum.HeadShot,
@@ -38,8 +37,8 @@ t.ThumbnailRequest = {
 	}
 }
 
-return function(p0) --[[ line: 57 ]]
-	-- upvalues: sortInvitesByScoreIXPModule (ref), networkImpl (ref), playersService (ref), useDispatch (ref), reactModule (ref), generateDummyFriendsModule (ref), useFriendsListOrderedByPresence (ref), userProfilesModule (ref), preloadUsersThumbnail (ref), t (ref), userModel (ref), presenceType (ref), fFlagFilterOutDeletedAccountsGameInvitesModule (ref), constantsModule (ref), sortFriendsByCorrectedPresenceAndRank (ref), cryoModule (ref), getFriendsSearchModule (ref), fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (ref), friendsListContextModule (ref)
+return function(p0) --[[ line: 55 ]]
+	-- upvalues: sortInvitesByScoreIXPModule (ref), networkImpl (ref), playersService (ref), useDispatch (ref), reactModule (ref), generateDummyFriendsModule (ref), useFriendsListOrderedByPresence (ref), userProfilesModule (ref), preloadUsersThumbnail (ref), t (ref), userModel (ref), presenceType (ref), fFlagFilterOutDeletedAccountsGameInvitesModule (ref), constantsModule (ref), sortFriendsByCorrectedPresenceAndRank (ref), cryoModule (ref), getFriendsSearchModule (ref), friendsListContextModule (ref)
 	local var16 = if sortInvitesByScoreIXPModule.FFlagEnableSortInvitesByScoreExperiment then sortInvitesByScoreIXPModule.useSortInvitesByScoreExperiment() else nil
 	local var17 = if p0.networkImplOverride then p0.networkImplOverride else networkImpl
 	local var18 = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else "0"
@@ -58,10 +57,10 @@ return function(p0) --[[ line: 57 ]]
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
 	
-	local var29 = function(p1, p2) --[[ line: 87 ]]
+	local var29 = function(p1, p2) --[[ line: 85 ]]
 		-- upvalues: var19 (ref), preloadUsersThumbnail (copy), t (copy), var28 (ref), p0 (ref), userModel (copy), var27 (ref), presenceType (copy), fFlagFilterOutDeletedAccountsGameInvitesModule (copy), constantsModule (copy), var16 (ref), sortInvitesByScoreIXPModule (copy), sortFriendsByCorrectedPresenceAndRank (copy), var26 (ref), var23 (ref), t_1 (write), cryoModule (copy)
 		var19(preloadUsersThumbnail(p1, t.ThumbnailRequest.InviteToGame, nil))
-		var28:fetchMore({ variables = { userIds = p1 } }):andThen(function(p4) --[[ line: 95 ]]
+		var28:fetchMore({ variables = { userIds = p1 } }):andThen(function(p4) --[[ line: 93 ]]
 			-- upvalues: p1 (ref), p0 (copy), userModel (copy), var27 (copy), presenceType (copy), fFlagFilterOutDeletedAccountsGameInvitesModule (copy), constantsModule (copy), var16 (copy), sortInvitesByScoreIXPModule (copy), p2 (ref), sortFriendsByCorrectedPresenceAndRank (copy), var26 (copy), var23 (copy)
 			local OFFLINE, lastLocation
 			local t = {}
@@ -105,7 +104,7 @@ return function(p0) --[[ line: 57 ]]
 			table.sort(t, sortFriendsByCorrectedPresenceAndRank)
 			var26(t)
 			var23(false)
-		end):catch(function(p3) --[[ line: 146 ]]
+		end):catch(function(p3) --[[ line: 144 ]]
 			-- upvalues: var23 (copy)
 			print("error", p3)
 			var23(false)
@@ -114,8 +113,8 @@ return function(p0) --[[ line: 57 ]]
 		return if t_1 then cryoModule.List.join(t_1, p1) else p1
 	end
 	
-	t_1 = reactModule.useMemo(function() --[[ line: 154 ]]
-		-- upvalues: var20 (ref), getFriendsSearchModule (copy), var17 (write), var18 (ref), var16 (ref), sortInvitesByScoreIXPModule (copy), cryoModule (copy), var29 (ref), var27 (ref), t_1 (write), fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), var26 (ref), var23 (ref)
+	t_1 = reactModule.useMemo(function() --[[ line: 152 ]]
+		-- upvalues: var20 (ref), getFriendsSearchModule (copy), var17 (write), var18 (ref), var16 (ref), sortInvitesByScoreIXPModule (copy), cryoModule (copy), var29 (ref), var27 (ref), t_1 (write)
 		if var20 == "" then
 			if not var27.onlineFriends or not var27.offlineFriends then
 				return {}
@@ -132,44 +131,31 @@ return function(p0) --[[ line: 57 ]]
 					end
 				end
 			end
-			if not fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt or #t ~= 0 then
-				return var29(t, var32)
-			elseif var27.isLoading then
-				return {}
-			end
-			var26({})
-			var23(false)
-			
-			return {}
+			return var29(t, var32)
 		else
-			getFriendsSearchModule(var17, var18, var20, 20):andThen(function(p6) --[[ line: 156 ]]
+			getFriendsSearchModule(var17, var18, var20, 20):andThen(function(p6) --[[ line: 154 ]]
 				-- upvalues: var16 (copy), sortInvitesByScoreIXPModule (copy), cryoModule (copy), var29 (copy)
 				local var33 = if var16 or sortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then {} else nil
 				
-				return var29(cryoModule.List.map(p6.responseBody.PageItems, function(p7, p8) --[[ line: 161 ]]
+				return var29(cryoModule.List.map(p6.responseBody.PageItems, function(p7, p8) --[[ line: 159 ]]
 					-- upvalues: var16 (copy), sortInvitesByScoreIXPModule (copy), var33 (ref)
 					if var16 or sortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then
 						var33[p7.id] = p8
 					end
 					return tostring(p7.id)
 				end), var33)
-			end):catch(function(p5) --[[ line: 168 ]]
+			end):catch(function(p5) --[[ line: 166 ]]
 				print("error", p5)
 			end)
 		end
-	end, {
-		var27.onlineFriends,
-		var27.offlineFriends,
-		var20,
-		if fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then var27.isLoading else nil
-	})
+	end, { var27.onlineFriends, var27.offlineFriends, var20 })
 	
 	return reactModule.createElement(friendsListContextModule.Provider, {
 		value = {
 			isFriendsListFetchFailed = false,
 			friends = var25,
 			hasFriends = not cryoModule.isEmpty(var27.onlineFriends) or not cryoModule.isEmpty(var27.offlineFriends),
-			isFetchingFriends = var28.loading or (p0.isLoadingCustomParams or (var22 or fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt and var27.isLoading)),
+			isFetchingFriends = var28.loading or (p0.isLoadingCustomParams or var22),
 			friendsNames = { loading = var28 and var28.loading },
 			fetchMoreFriends = var27.fetchMoreFriends,
 			searchFriends = var21,

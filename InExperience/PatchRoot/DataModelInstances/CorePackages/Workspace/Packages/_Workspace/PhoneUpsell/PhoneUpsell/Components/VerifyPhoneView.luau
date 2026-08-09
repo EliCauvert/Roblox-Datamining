@@ -10,9 +10,10 @@ local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
 local linkButton = UIBloxModule.App.Button.LinkButton
 local getFFlagDisableVerifyPhoneViewOnSuccessModule = require(phoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
+local fFlagPhoneUpsellEnforceCodeInputLimit = require(parent.SharedFlags).FFlagPhoneUpsellEnforceCodeInputLimit
 
-return function(p0) --[[ line: 43 | named "VerifyPhoneView" ]]
-	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), buttonType (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getPartialPageModalMiddleContentWidth (ref), partialPageModal (ref), textInputBoxWithBorder (ref), linkButton (ref)
+return function(p0) --[[ line: 44 | named "VerifyPhoneView" ]]
+	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), buttonType (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getPartialPageModalMiddleContentWidth (ref), partialPageModal (ref), textInputBoxWithBorder (ref), fFlagPhoneUpsellEnforceCodeInputLimit (ref), linkButton (ref)
 	local var4 = useStyle()
 	local t = {
 		titleKey = "Feature.VerificationUpsell.Heading.VerifyYourPhone",
@@ -31,7 +32,7 @@ return function(p0) --[[ line: 43 | named "VerifyPhoneView" ]]
 	local var7, var8 = reactModule.useState(false)
 	local var9, var10 = reactModule.useState(0)
 	
-	local function _(p1) --[[ line: 131 | named "getBodyText" ]]
+	local function _(p1) --[[ line: 132 | named "getBodyText" ]]
 		-- upvalues: p0 (ref)
 		return p1:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber)
 	end
@@ -39,9 +40,9 @@ return function(p0) --[[ line: 43 | named "VerifyPhoneView" ]]
 	return reactModule.createElement(partialPageModal, {
 		title = var6.titleKey,
 		screenSize = p0.screenSize,
-		buttonStackProps = (function(p2, p3, p4, p5, p6, p7) --[[ line: 63 | named "getButtonStackProps" ]]
+		buttonStackProps = (function(p2, p3, p4, p5, p6, p7) --[[ line: 64 | named "getButtonStackProps" ]]
 			-- upvalues: var8 (ref), var10 (ref), var7 (ref), var9 (ref), buttonType (copy), getFFlagDisableVerifyPhoneViewOnSuccessModule (copy), p0 (ref)
-			local function _() --[[ line: 92 | named "getButtonText" ]]
+			local function _() --[[ line: 93 | named "getButtonText" ]]
 				-- upvalues: var7 (copy), p3 (ref), var9 (copy), p2 (ref)
 				return if var7 then p3 .. " (" .. var9 .. ")" else p2
 			end
@@ -50,14 +51,14 @@ return function(p0) --[[ line: 43 | named "VerifyPhoneView" ]]
 				{
 					buttonType = buttonType.PrimarySystem,
 					props = {
-						onActivated = function() --[[ line: 71 ]]
+						onActivated = function() --[[ line: 72 ]]
 							-- upvalues: p5 (ref), var8 (copy), var10 (copy), p4 (ref)
 							p5()
 							var8(true)
 							var10(p4)
 							local currentTime = tick()
 							
-							local function countDown() --[[ line: 77 ]]
+							local function countDown() --[[ line: 78 ]]
 								-- upvalues: currentTime (ref), p4 (copy), var10 (copy), countDown (ref), var8 (copy)
 								local var14 = p4 - (tick() - currentTime)
 								
@@ -129,14 +130,14 @@ return function(p0) --[[ line: 43 | named "VerifyPhoneView" ]]
 			TextBox = reactModule.createElement(textInputBoxWithBorder, {
 				textInputHeight = 36,
 				layoutOrder = 2,
-				maxLength = 6,
 				text = p0.code,
 				textInputType = if p0.useOTPInputType then Enum.TextInputType.OneTimePassword else Enum.TextInputType.Number,
 				placeholderText = var6.placeholderKey,
 				errorText = p0.errorMessage,
 				onChangeTextCallback = p0.onCodeTextChange,
 				Size = UDim2.new(1, 0, 0, 0),
-				onFocused = p0.onCodeInputFocus
+				onFocused = p0.onCodeInputFocus,
+				maxLength = if fFlagPhoneUpsellEnforceCodeInputLimit then 6 else nil
 			}),
 			ChangePhoneButton = reactModule.createElement(linkButton, {
 				layoutOrder = 3,

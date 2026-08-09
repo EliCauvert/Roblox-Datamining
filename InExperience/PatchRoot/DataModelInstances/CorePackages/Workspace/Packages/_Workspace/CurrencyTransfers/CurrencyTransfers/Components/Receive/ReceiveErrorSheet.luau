@@ -53,15 +53,15 @@ return function(_) --[[ line: 64 | named "ReceiveErrorSheet" ]]
 	local triggerOnClose = var10.triggerOnClose
 	local var16 = if var12 then var12.failureReason else nil
 	local var17 = var16 == failureReasonModule.TransferExpired
-	reactModule.useEffect(function() --[[ line: 81 ]]
+	reactModule.useEffect(function() --[[ line: 76 ]]
 		-- upvalues: var17 (ref), var13 (ref), var14 (ref), var15 (ref), getTransferRequestByIdRequestModule (copy), var10 (ref)
 		if var17 and not var13 and (not var14 or not var14.sender) and var15 then
-			getTransferRequestByIdRequestModule({ transferRequestId = var15 }, nil, var10.getNetworkImpl()):andThen(function(p3) --[[ line: 91 ]]
+			getTransferRequestByIdRequestModule({ transferRequestId = var15 }):andThen(function(p3) --[[ line: 86 ]]
 				-- upvalues: var10 (copy)
 				if p3 and p3.transfer and p3.transfer.sender then
 					var10.setSender(p3.transfer.sender)
 				end
-			end):catch(function() --[[ line: 96 ]] end)
+			end):catch(function() --[[ line: 91 ]] end)
 			
 			return
 		end

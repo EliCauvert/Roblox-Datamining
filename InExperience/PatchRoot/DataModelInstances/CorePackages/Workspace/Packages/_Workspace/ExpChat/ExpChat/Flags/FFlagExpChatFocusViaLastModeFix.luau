@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatFocusViaLastModeFix2", false)
+﻿return require(script.Parent.FFlagExpChatEnableFocusNavigation) and game:DefineFastFlag("ExpChatFocusViaLastModeFix2", false)

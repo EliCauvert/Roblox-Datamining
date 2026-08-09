@@ -1,4 +1,4 @@
-﻿return {
+﻿local t = {
 	name = "user_profile",
 	version = 2,
 	attributes = { isUkRegionUser = false, isEuRegionUser = false },
@@ -143,8 +143,6 @@
 			eyebrow = { ["$translate"] = "Title.ReportAPerson" },
 			items = { ["$resource"] = "surfaces" },
 			nextButtonText = { ["$translate"] = "Action.Continue" },
-			errorText = { ["$translate"] = "Description.GeneralError" },
-			retryButtonText = { ["$translate"] = "Action.Retry" },
 			next = {
 				["$switch"] = {
 					{
@@ -169,9 +167,7 @@
 			title = { ["$translate"] = "Label.WhatWasTheIssue" },
 			eyebrow = { ["$translate"] = "Title.ReportAPerson" },
 			items = { ["$resource"] = "abuseTypes" },
-			nextButtonText = { ["$translate"] = "Action.Continue" },
-			errorText = { ["$translate"] = "Description.GeneralError" },
-			retryButtonText = { ["$translate"] = "Action.Retry" }
+			nextButtonText = { ["$translate"] = "Action.Continue" }
 		},
 		voiceEducation = {
 			type = "paragraph",
@@ -230,8 +226,6 @@
 	},
 	translations = {
 		["Action.Close"] = "Close",
-		["Action.Retry"] = "Retry",
-		["Description.GeneralError"] = "Something went wrong. Please try again later.",
 		["Label.WhatPartOfTheirProfile"] = "What part of their profile?",
 		["Label.WhatWasTheIssue"] = "What was the issue?",
 		["Label.UsernameDisplayNameDescription"] = "Username, display name, description",
@@ -293,3 +287,13 @@
 		["Title.ReportAPerson"] = "Report a person"
 	}
 }
+
+if require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags).FFlagRemoveHardcodedStringsInReportNodes then
+	t.nodes.root.errorText = { ["$translate"] = "Description.GeneralError" }
+	t.nodes.root.retryButtonText = { ["$translate"] = "Action.Retry" }
+	t.nodes.abuseType.errorText = { ["$translate"] = "Description.GeneralError" }
+	t.nodes.abuseType.retryButtonText = { ["$translate"] = "Action.Retry" }
+	t.translations["Description.GeneralError"] = "Something went wrong. Please try again later."
+	t.translations["Action.Retry"] = "Retry"
+end
+return t

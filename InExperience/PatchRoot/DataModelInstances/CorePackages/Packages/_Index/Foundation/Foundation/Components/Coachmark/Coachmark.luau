@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local buttonModule = require(foundation.Components.Button)
 local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
+local colorModeModule = require(foundation.Enums.ColorMode)
 local fillBehaviorModule = require(foundation.Enums.FillBehavior)
 local flagsModule = require(foundation.Utility.Flags)
 local inputSizeModule = require(foundation.Enums.InputSize)
@@ -36,7 +36,7 @@ local function _(p0, p1) --[[ line: 75 | named "stepsText" ]]
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 79 | named "Coachmark" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), flagsModule (ref), radiusModule (ref), presentationContextModule (ref), colorNamespaceModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), flagsModule (ref), radiusModule (ref), presentationContextModule (ref), colorModeModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref)
 	local var24 = withDefaultsModule(p2, t)
 	local var25 = useTokensModule()
 	local var26 = useScaledValueModule(320)
@@ -56,9 +56,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 79 | 
 			selection = var24.selection,
 			selectionGroup = var24.selectionGroup,
 			ref = p3
-		}, reactModule.createElement(presentationContextModule.Provider, {
-			value = { colorNamespace = colorNamespaceModule.Inverse }
-		}, reactModule.createElement(viewModule, {
+		}, reactModule.createElement(presentationContextModule.Provider, { value = { colorMode = colorModeModule.Inverse } }, reactModule.createElement(viewModule, {
 			tag = "col gap-medium auto-xy padding-bottom-medium",
 			sizeConstraint = { MaxSize = Vector2.new(var26, 1e999) }
 		}, {

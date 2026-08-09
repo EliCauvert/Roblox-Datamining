@@ -105,7 +105,6 @@
 	XExpEditingFlowTrimBackButtonPressed = "XExpEditingFlowTrimBackButtonPressed",
 	XExpEditingFlowTrimButtonPressed = "XExpEditingFlowTrimButtonPressed",
 	XExpEditingFlowTrimDoneButtonPressed = "XExpEditingFlowTrimDoneButtonPressed",
-	XExpMomentCreationStarted = "XExpMomentCreationStarted",
 	XExpMomentsEditingFlowContinueToDescriptionButtonPressed = "XExpMomentsEditingFlowContinueToDescriptionButtonPressed",
 	XExpMomentsEditingFlowContinueToEditButtonPressed = "XExpMomentsEditingFlowContinueToEditButtonPressed",
 	XExpMomentsEditingFlowExited = "XExpMomentsEditingFlowExited",

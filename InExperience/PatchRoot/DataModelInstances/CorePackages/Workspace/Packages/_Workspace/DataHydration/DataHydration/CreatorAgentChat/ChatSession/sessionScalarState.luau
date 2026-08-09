@@ -1,7 +1,7 @@
 ﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
 
 return {
-	createSessionScalarState = function(p0) --[[ line: 27 ]]
+	createSessionScalarState = function(p0) --[[ line: 28 ]]
 		-- upvalues: signalsModule (ref)
 		local var1, var2 = signalsModule.createSignal(p0)
 		local var3, var4 = signalsModule.createSignal(false)
@@ -16,7 +16,7 @@ return {
 			setCasSessionId = var2,
 			getHasLoadedHistory = var3,
 			setHasLoadedHistory = var4,
-			markHistoryLoaded = function() --[[ line: 62 ]]
+			markHistoryLoaded = function() --[[ line: 63 ]]
 				-- upvalues: var4 (ref)
 				var4(true)
 			end,
@@ -27,7 +27,7 @@ return {
 			getInitialized = var9,
 			setInitialized = var10,
 			getAssistantTurnSequence = var11,
-			incrementAssistantTurnSequence = function() --[[ line: 51 ]]
+			incrementAssistantTurnSequence = function() --[[ line: 52 ]]
 				-- upvalues: var11 (ref), var12 (ref)
 				local var15 = var11(false) + 1
 				var12(var15)
@@ -35,11 +35,11 @@ return {
 				return var15
 			end,
 			getLatestObservedHistorySequenceId = var13,
-			setLatestObservedHistorySequenceId = function(value) --[[ line: 37 ]]
+			setLatestObservedHistorySequenceId = function(value) --[[ line: 38 ]]
 				-- upvalues: var14 (ref)
 				var14(value)
 			end,
-			noteHistorySequenceId = function(p1) --[[ line: 41 ]]
+			noteHistorySequenceId = function(p1) --[[ line: 42 ]]
 				-- upvalues: var13 (ref), var14 (ref)
 				if p1 == nil then return end
 				local var16 = var13(false)

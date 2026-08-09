@@ -12,10 +12,11 @@ local _ = require(sduiCoreSystem.SduiComponentType)
 local getSduiComponentRegistryModule = require(sduiCoreSystem.getSduiComponentRegistry)
 local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
 local fFlagSduiNestedComponentListProp = require(parent.SharedFlags).FFlagSduiNestedComponentListProp
+local fFlagSduiComponentList = require(parent.SharedFlags).FFlagSduiComponentList
 local fFlagSduiPoolBackedFeed = require(parent.SharedFlags).FFlagSduiPoolBackedFeed
 local sduiDataBindingShallowEquals = game:DefineFastFlag("SduiDataBindingShallowEquals", false)
 
-local function SduiErrorComponent(_) --[[ line: 25 ]]
+local function SduiErrorComponent(_) --[[ line: 26 ]]
 	-- upvalues: reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -25,8 +26,8 @@ end
 
 local t = {}
 
-local function buildWrappedComponent(p0, p1, p2) --[[ line: 42 ]]
-	-- upvalues: fFlagSduiNestedComponentListProp (ref), t (ref), reactModule (ref), getSduiComponentRegistryModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), validateInterfaceModule (ref)
+local function buildWrappedComponent(p0, p1, p2) --[[ line: 43 ]]
+	-- upvalues: fFlagSduiNestedComponentListProp (ref), t (ref), reactModule (ref), fFlagSduiComponentList (ref), getSduiComponentRegistryModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), validateInterfaceModule (ref)
 	local componentType = p1.componentConfig.componentType
 	local sduiContext = p1.sduiContext
 	
@@ -86,7 +87,7 @@ local function buildWrappedComponent(p0, p1, p2) --[[ line: 42 ]]
 					local t_1 = {}
 					
 					for i_1, v in data do
-						t_1[`{i}_{i_1}_{v.componentType}`] = reactModule.createElement(p0(v), {
+						t_1[if fFlagSduiComponentList then `{i}_{i_1}_{v.componentType}` else `{i}_{i_1}`] = reactModule.createElement(p0(v), {
 							sduiContext = p1.sduiContext,
 							componentConfig = v,
 							extraLocalProps = { layoutOrder = i_1 },
@@ -111,23 +112,23 @@ local function buildWrappedComponent(p0, p1, p2) --[[ line: 42 ]]
 	return if propInterface and not validateInterfaceModule(var12, propInterface) then nil else reactModule.createElement(var19, var12)
 end
 
-return function(p3) --[[ line: 171 | named "createSduiClientBindingWrappers" ]]
-	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), fFlagSduiPoolBackedFeed (ref), signalsModule (ref), sduiDataBindingShallowEquals (ref), tutilsModule (ref), signalsReactModule (ref)
+return function(p3) --[[ line: 174 | named "createSduiClientBindingWrappers" ]]
+	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), fFlagSduiPoolBackedFeed (ref), signalsModule (ref), sduiDataBindingShallowEquals (ref), tutilsModule (ref), fFlagSduiComponentList (ref), signalsReactModule (ref)
 	return {
-		SduiClientBindingThinWrapper = reactModule.memo(function(p4) --[[ line: 177 ]]
+		SduiClientBindingThinWrapper = reactModule.memo(function(p4) --[[ line: 180 ]]
 			-- upvalues: buildWrappedComponent (copy), p3 (ref)
 			return buildWrappedComponent(p3, p4)
 		end, compareSduiPropsModule),
-		SduiDataBindingWrapper = reactModule.memo(function(p5) --[[ line: 183 ]]
-			-- upvalues: fFlagSduiPoolBackedFeed (copy), reactModule (copy), signalsModule (copy), sduiDataBindingShallowEquals (copy), tutilsModule (copy), signalsReactModule (copy), buildWrappedComponent (copy), p3 (ref)
+		SduiDataBindingWrapper = reactModule.memo(function(p5) --[[ line: 186 ]]
+			-- upvalues: fFlagSduiPoolBackedFeed (copy), reactModule (copy), signalsModule (copy), sduiDataBindingShallowEquals (copy), tutilsModule (copy), fFlagSduiComponentList (copy), signalsReactModule (copy), buildWrappedComponent (copy), p3 (ref)
 			local propSignals = p5.componentConfig.propSignals
 			local isComponentFilteredSignal = p5.componentConfig.isComponentFilteredSignal
 			local var21 = if fFlagSduiPoolBackedFeed then p5.extraLocalPropSignals else nil
-			local var22 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 191 ]]
+			local var22 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 194 ]]
 				-- upvalues: propSignals (ref), isComponentFilteredSignal (ref), var21 (ref), signalsModule (copy), fFlagSduiPoolBackedFeed (copy), sduiDataBindingShallowEquals (copy), tutilsModule (copy)
 				assert(propSignals or (isComponentFilteredSignal or var21), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
 				
-				return signalsModule.createComputed(function(p6) --[[ line: 196 ]]
+				return signalsModule.createComputed(function(p6) --[[ line: 199 ]]
 					-- upvalues: propSignals (copy), fFlagSduiPoolBackedFeed (copy), var21 (copy), isComponentFilteredSignal (copy)
 					local t = {}
 					
@@ -150,7 +151,7 @@ return function(p3) --[[ line: 171 | named "createSduiClientBindingWrappers" ]]
 				propSignals,
 				isComponentFilteredSignal,
 				if fFlagSduiPoolBackedFeed then var21 else nil,
-				p5.componentConfig.componentType
+				if fFlagSduiComponentList then p5.componentConfig.componentType else nil
 			}))
 			
 			return if var22.__isComponentFiltered == true then nil else buildWrappedComponent(p3, p5, var22)

@@ -5,9 +5,9 @@ local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverl
 local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
 
-return function(p0) --[[ line: 25 ]]
+return function(p0) --[[ line: 22 ]]
 	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p1) --[[ line: 26 ]]
+	return function(p1) --[[ line: 23 ]]
 		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p0 (ref)
 		p1:dispatch(setCentralOverlay(centralOverlayType.DynamicAbuseReport, p0))
 	end

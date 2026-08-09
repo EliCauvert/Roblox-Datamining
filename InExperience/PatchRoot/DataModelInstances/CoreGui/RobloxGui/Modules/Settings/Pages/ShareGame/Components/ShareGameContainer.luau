@@ -15,7 +15,7 @@ local shareGameContainer = roactModule.PureComponent:extend("ShareGameContainer"
 shareGameContainer.defaultProps = { skeletonComponent = shareGamePageFrameModule }
 
 function shareGameContainer.init(p0) --[[ line: 30 ]]
-	p0.props.reFetch(p0.props.requestImpl)
+	p0.props.reFetch()
 end
 
 function shareGameContainer.render(p1) --[[ line: 34 ]]
@@ -36,9 +36,9 @@ end, function(p3) --[[ line: 44 ]]
 			-- upvalues: p3 (ref), closePageModule (copy), constantsModule (copy)
 			p3(closePageModule(constantsModule.PageRoute.SHARE_GAME))
 		end,
-		reFetch = function(p4) --[[ line: 50 ]]
+		reFetch = function() --[[ line: 50 ]]
 			-- upvalues: playersService (copy), httpRequestModule (copy), httpRbxApiService (copy), p3 (ref), fetchUserFriendsModule (copy)
-			p3(fetchUserFriendsModule(p4 or httpRequestModule(httpRbxApiService), tostring(playersService.LocalPlayer.UserId)))
+			p3(fetchUserFriendsModule(httpRequestModule(httpRbxApiService), tostring(playersService.LocalPlayer.UserId)))
 		end
 	}
 end)(shareGameContainer)

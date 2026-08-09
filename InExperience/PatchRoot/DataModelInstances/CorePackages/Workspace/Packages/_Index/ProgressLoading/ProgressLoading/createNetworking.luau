@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("ProgressLoading").Parent.Http).NetworkLayers.requestInternalWrapper(game:GetService("HttpService"))

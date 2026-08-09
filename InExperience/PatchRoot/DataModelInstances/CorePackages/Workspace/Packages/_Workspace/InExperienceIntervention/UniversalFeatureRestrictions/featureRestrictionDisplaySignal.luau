@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Signals.featureRestrictionDisplaySignal)
+﻿return require(script.Parent.Parent.Parent.Parent._Index.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Signals.featureRestrictionDisplaySignal)
