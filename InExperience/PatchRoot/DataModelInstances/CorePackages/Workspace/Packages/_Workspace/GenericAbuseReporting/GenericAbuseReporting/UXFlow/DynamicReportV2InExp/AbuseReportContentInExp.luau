@@ -18,19 +18,19 @@ local loaderProvider = loaderContextModule.LoaderProvider
 local fFlagAbuseReportInExpPlayerListV3 = sharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
 local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
 
-return function(p0) --[[ line: 52 | named "AbuseReportContentInExp" ]]
+return function(p0) --[[ line: 54 | named "AbuseReportContentInExp" ]]
 	-- upvalues: useAbuseSheetFlowModule (ref), reactModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), layoutSlotsProvider (ref), inlineSlots (ref), overlaidControlsProvider (ref), loaderProvider (ref), abuseReportInlineModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), fFlagAbuseReportVoiceMute (ref), voiceSpeakingSignalsModule (ref)
 	local var8 = useAbuseSheetFlowModule(p0.rawConfig, {
-		open = true,
 		abuseVector = p0.abuseVector,
 		targetId = p0.targetId,
 		onClose = p0.onClose,
+		open = p0.open,
 		onCustomSubmit = p0.onCustomSubmit,
 		onFinish = p0.onFinish,
 		attemptTrigger = p0.attemptTrigger,
 		inlineAlertController = p0.inlineAlertController
 	})
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function() --[[ line: 66 ]]
 		-- upvalues: var8 (ref), p0 (ref)
 		if not var8 then
 			p0.onResolveError()
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 52 | named "AbuseReportContentInExp" ]]
 	if not var8 then
 		return nil
 	end
-	local var9 = reactModule.createElement(arTranslationProvider, { translations = var8.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var8.analytics }, reactModule.createElement(layoutSlotsProvider, { slots = inlineSlots }, reactModule.createElement(overlaidControlsProvider, { value = p0.shouldUseOverlaidControls }, reactModule.createElement(loaderProvider, { open = true, loaders = p0.loaders }, reactModule.createElement(abuseReportInlineModule, {
+	local var9 = reactModule.createElement(arTranslationProvider, { translations = var8.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var8.analytics }, reactModule.createElement(layoutSlotsProvider, { slots = inlineSlots }, reactModule.createElement(overlaidControlsProvider, { value = p0.shouldUseOverlaidControls }, reactModule.createElement(loaderProvider, { loaders = p0.loaders, open = p0.open }, reactModule.createElement(abuseReportInlineModule, {
 		abuseReportFlow = var8,
 		shouldUseOverlaidControls = p0.shouldUseOverlaidControls
 	}))))))

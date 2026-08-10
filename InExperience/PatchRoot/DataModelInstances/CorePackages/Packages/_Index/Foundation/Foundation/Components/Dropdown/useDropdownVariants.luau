@@ -12,21 +12,48 @@ local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local getInputVariantsFactoryModule = require(foundation.Components.InputField.getInputVariantsFactory)
 
-local function variantsFactory() --[[ line: 46 ]]
-	-- upvalues: inputSizeModule (ref), flagsModule (ref), iconSizeModule (ref), controlStateModule (ref), dashModule (ref)
+local function variantsFactory() --[[ line: 49 ]]
+	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref), controlStateModule (ref), dashModule (ref)
 	local t = {
-		[controlStateModule.Disabled] = { container = nil, text = { tag = "content-muted" } },
-		[controlStateModule.Initialize] = { container = nil, text = { tag = "content-default" } },
-		[controlStateModule.Default] = nil,
-		[controlStateModule.Hover] = nil,
-		[controlStateModule.Pressed] = nil
+		[controlStateModule.Disabled] = {
+			container = if flagsModule.FoundationDropdownVariant then nil else { tag = "stroke-muted" },
+			text = { tag = "content-muted" }
+		},
+		[controlStateModule.Initialize] = {
+			container = if flagsModule.FoundationDropdownVariant then nil else { tag = "stroke-default" },
+			text = { tag = "content-default" }
+		},
+		[controlStateModule.Default] = if flagsModule.FoundationDropdownVariant then nil else {
+			container = { tag = "stroke-default" },
+			text = { tag = "content-default" }
+		},
+		[controlStateModule.Hover] = if flagsModule.FoundationDropdownVariant then nil else {
+			container = { tag = "stroke-emphasis" },
+			text = { tag = "content-emphasis" }
+		},
+		[controlStateModule.Pressed] = if flagsModule.FoundationDropdownVariant then nil else {
+			container = { tag = "stroke-emphasis" },
+			text = { tag = "content-emphasis" }
+		},
+		Error = if not flagsModule.FoundationDropdownVariant then nil else {
+			container = { tag = "stroke-alert" },
+			text = { tag = "content-default" }
+		}
 	}
 	
 	return {
 		common = {
-			container = { tag = "row flex-x-between align-y-center" },
+			container = {
+				tag = {
+					["row flex-x-between align-y-center stroke-standard stroke-position-inner"] = not flagsModule.FoundationDropdownVariant,
+					["row flex-x-between align-y-center"] = flagsModule.FoundationDropdownVariant
+				}
+			},
 			text = {
-				tag = "shrink auto-xy text-truncate-split content-emphasis"
+				tag = {
+					["shrink auto-xy text-truncate-split content-emphasis"] = flagsModule.FoundationDropdownVariant,
+					["shrink auto-xy text-truncate-split"] = not flagsModule.FoundationDropdownVariant
+				}
 			}
 		},
 		sizes = {
@@ -72,18 +99,19 @@ local function variantsFactory() --[[ line: 46 ]]
 			}
 		},
 		states = t,
-		placeholderStates = dashModule.map(t, function(p0) --[[ line: 116 ]]
+		placeholderStates = dashModule.map(t, function(p0) --[[ line: 147 ]]
 			-- upvalues: dashModule (copy)
 			return dashModule.join(p0, { text = { tag = "content-muted" } })
 		end)
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 130 ]]
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
+return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 161 ]]
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
 	local dropdown = variantsContextModule.useVariants("Dropdown", variantsFactory, p1)
-	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p1)
-	local var14 = inputField.variants[p3 or inputVariantModule.Standard]
+	local var13 = if flagsModule.FoundationDropdownVariant then variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p1) else nil
+	local var14 = if flagsModule.FoundationDropdownVariant then var13.variants[p3 or inputVariantModule.Standard] else nil
+	local var15 = if flagsModule.FoundationDropdownVariant or not p6 then p4 else "Error"
 	
-	return composeStyleVariantModule(inputField.common, dropdown.common, inputField.sizes[p2], dropdown.sizes[p2], if p3 ~= inputVariantModule.Utility then {} else var14, inputField.hoverState[p8], inputField.focusedState[p7], inputField.errorState[p6], if p5 then dropdown.placeholderStates[p4] else dropdown.states[p4], if p3 == inputVariantModule.Utility then var14 else {})
+	return composeStyleVariantModule(if flagsModule.FoundationDropdownVariant then var13.common else {}, dropdown.common, if flagsModule.FoundationDropdownVariant then var13.sizes[p2] else {}, dropdown.sizes[p2], if flagsModule.FoundationDropdownVariant and p3 ~= inputVariantModule.Utility then var14 else {}, if flagsModule.FoundationDropdownVariant then var13.hoverState[p8] else {}, if flagsModule.FoundationDropdownVariant then var13.focusedState[p7] else {}, if flagsModule.FoundationDropdownVariant then var13.errorState[p6] else {}, if p5 then dropdown.placeholderStates[var15] else dropdown.states[var15], if flagsModule.FoundationDropdownVariant and p3 == inputVariantModule.Utility then var14 else {})
 end

@@ -538,60 +538,42 @@ end)
 local memoryModule = require(corePackagesService.Workspace.Packages.Memory)
 memoryModule.start(true, fStringReactSchedulingContext, memoryModule.MemoryScope.InExperience)
 
-if game:DefineFastFlag("EnableNpcInference", false) then
-	coroutine.wrap(function() --[[ line: 620 ]]
-		-- upvalues: corePackagesService (ref)
-		local var61
-		local npcInference = corePackagesService.Workspace.Packages.NpcInference
-		local ok, status = pcall(require, npcInference)
-		
-		if ok then
-			var61 = status
-		else
-			warn("Failure to Start CoreScript module " .. npcInference.Name .. ".\n" .. status)
-			var61 = nil
-		end
-		if var61 then
-			var61.initialize()
-		end
-	end)()
-end
 if game:GetEngineFeature("RecordingServicePlaybackApiLua") then
 	coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.ExperienceStateReplay)
 end
 if fFlagEnableAEGIS2CommsFAEUpsell then
-	coroutine.wrap(function() --[[ line: 633 ]]
+	coroutine.wrap(function() --[[ line: 623 ]]
 		-- upvalues: corePackagesService (ref)
-		local var62
+		local var61
 		local socialUpsell = corePackagesService.Workspace.Packages.SocialUpsell
 		local ok, status = pcall(require, socialUpsell)
 		
 		if ok then
-			var62 = status
+			var61 = status
 		else
 			warn("Failure to Start CoreScript module " .. socialUpsell.Name .. ".\n" .. status)
-			var62 = nil
+			var61 = nil
 		end
-		if var62 then
-			var62.Overlay.initializeInExpOverlay()
+		if var61 then
+			var61.Overlay.initializeInExpOverlay()
 		end
 	end)()
 end
-coroutine.wrap(function() --[[ line: 641 ]]
+coroutine.wrap(function() --[[ line: 631 ]]
 	-- upvalues: corePackagesService (ref), guiService (ref)
-	local var63
+	local var62
 	local display = corePackagesService.Workspace.Packages.Display
 	local ok, status = pcall(require, display)
 	
 	if ok then
-		var63 = status
+		var62 = status
 	else
 		warn("Failure to Start CoreScript module " .. display.Name .. ".\n" .. status)
-		var63 = nil
+		var62 = nil
 	end
-	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ line: 643 ]]
-		-- upvalues: var63 (ref), guiService (copy)
-		var63.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
+	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ line: 633 ]]
+		-- upvalues: var62 (ref), guiService (copy)
+		var62.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
 	end)
 end)()
 

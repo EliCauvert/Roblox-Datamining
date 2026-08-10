@@ -1,9 +1,5 @@
 ﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.Signals)
-local momentsCommonModule = require(parent.MomentsCommon)
-local analytics = momentsCommonModule.Analytics
-local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
+local _ = require(moments.Parent.Signals)
 local constantsModule = require(moments.Constants)
 local emitRecommendationImpressionModule = require(moments.Analytics.emitRecommendationImpression)
 local emitRecommendationActionModule = require(moments.Analytics.emitRecommendationAction)
@@ -16,25 +12,18 @@ local t = {
 	Report = constantsModule.RecommendationActionType.Report,
 	Join = constantsModule.RecommendationActionType.Play
 }
-local t_1 = {
-	AddReaction = "reaction_add",
-	RemoveReaction = "reaction_remove",
-	Share = "share",
-	Report = "report",
-	Join = "join"
-}
 
-local function _(value, p0) --[[ line: 64 | named "getSignalValue" ]]
+local function _(value, p0) --[[ line: 50 | named "getSignalValue" ]]
 	return if value == "AddReaction" or value == "RemoveReaction" then p0.reactionType or "" else ""
 end
 
-return function(p1) --[[ line: 71 | named "createRecommendationTelemetry" ]]
-	-- upvalues: emitRecommendationImpressionModule (ref), t (ref), fFlagMomentsRealtimeSessionTelemetry (ref), t_1 (ref), analytics (ref), emitRecommendationActionModule (ref)
+return function(p1) --[[ line: 57 | named "createRecommendationTelemetry" ]]
+	-- upvalues: emitRecommendationImpressionModule (ref), t (ref), emitRecommendationActionModule (ref)
 	local getMomentsSessionId = p1.getMomentsSessionId
 	local signalTracker = p1.signalTracker
 	
 	return {
-		logView = function(p2, p3) --[[ line: 76 ]]
+		logView = function(p2, p3) --[[ line: 62 ]]
 			-- upvalues: emitRecommendationImpressionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
 			emitRecommendationImpressionModule({
 				itemId = p2.itemId,
@@ -48,24 +37,18 @@ return function(p1) --[[ line: 71 | named "createRecommendationTelemetry" ]]
 				signalTracker:recordSignal(p2.itemId, "View", string.format("%.1f", p3.durationSeconds))
 			end
 		end,
-		logAction = function(p4, p5, p6) --[[ line: 90 ]]
-			-- upvalues: t (copy), fFlagMomentsRealtimeSessionTelemetry (copy), t_1 (copy), analytics (copy), emitRecommendationActionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
-			local var7 = t[p4]
+		logAction = function(p4, p5, p6) --[[ line: 76 ]]
+			-- upvalues: t (copy), emitRecommendationActionModule (copy), getMomentsSessionId (ref), signalTracker (ref)
+			local var5 = t[p4]
 			
-			if var7 == nil then
+			if var5 == nil then
 				return nil
-			elseif fFlagMomentsRealtimeSessionTelemetry then
-				local var8 = t_1[p4]
-				
-				if var8 ~= nil then
-					analytics.reportMomentsEngagement(var8)
-				end
 			end
-			local var9 = emitRecommendationActionModule({
+			local var6 = emitRecommendationActionModule({
 				itemId = p5.itemId,
 				tracingId = p5.tracingId or "",
 				momentsSessionId = getMomentsSessionId(false),
-				actionType = var7,
+				actionType = var5,
 				reactionType = p6.reactionType,
 				destinationPlaceId = p6.destinationPlaceId,
 				commentText = p6.commentText,
@@ -75,7 +58,7 @@ return function(p1) --[[ line: 71 | named "createRecommendationTelemetry" ]]
 			if signalTracker then
 				signalTracker:recordSignal(p5.itemId, p4, if p4 == "AddReaction" or p4 == "RemoveReaction" then p6.reactionType or "" else "")
 			end
-			return var9
+			return var6
 		end
 	}
 end

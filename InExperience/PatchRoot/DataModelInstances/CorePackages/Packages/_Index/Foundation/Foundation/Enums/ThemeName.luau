@@ -1,1 +1,0 @@
-﻿return { Default = "Default", Kids = "Kids" }

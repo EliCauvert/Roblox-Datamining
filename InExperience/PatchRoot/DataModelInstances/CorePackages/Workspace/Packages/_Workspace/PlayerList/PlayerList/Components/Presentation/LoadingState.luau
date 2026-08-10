@@ -7,10 +7,10 @@ local loading = foundationModule.Loading
 local iconSize = foundationModule.Enums.IconSize
 local constantsModule = require(parent.Common.Constants)
 
-return reactModule.memo(function(p0) --[[ line: 19 | named "LoadingStateImpl" ]]
-	-- upvalues: constantsModule (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref)
+return reactModule.memo(function(p0) --[[ line: 17 | named "LoadingStateImpl" ]]
+	-- upvalues: reactModule (ref), view (ref), constantsModule (ref), loading (ref), iconSize (ref)
 	return reactModule.createElement(view, {
-		tag = if p0.useLegacyPanelStyling then constantsModule.LEGACY_STATE_PANEL_TAG else constantsModule.STATE_PANEL_TAG,
+		tag = constantsModule.STATE_PANEL_TAG,
 		LayoutOrder = p0.layoutOrder
 	}, {
 		Spinner = reactModule.createElement(loading, { size = iconSize.XLarge })

@@ -37,7 +37,6 @@
 	CJVSettings = "CJVSettings",
 	TenFootSettings = "TenFootSettings",
 	AccountSettings = "AccountSettings",
-	PlatformSettings = "PlatformSettings",
 	Licensing = "Licensing",
 	AppInformation = "AppInformation",
 	DevSubs = "DevSubs",

@@ -618,18 +618,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,感谢你
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,为了保护年龄较小的玩家，13 岁以下的用户无法发送反馈。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,无法提供反馈
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,添加截图
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,编辑选择
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,无可用截图。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,截图 ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,帮助创作者了解你的问题。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,正在加载截图…
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,已选择 {count} 项，共 {max} 项
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,你的一个或多个截图无法上传。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,漏洞报告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,道具或数据恢复
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,类别 *
@@ -638,14 +627,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,选择一个
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,购买问题
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 个字符
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,详情 *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消选择
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,请提供与问题相关的任何信息，例如游戏版本以及重现问题的步骤。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,请描述缺失的内容以及你最后一次看到该内容的时间。如果你的帐户受到入侵，请提供你的 Roblox 客户支持票单编号以及任何相关详细信息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,在此处描述你的请求或问题。请尽可能详细地提供信息，以帮助我们了解情况。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,请告诉我们你尝试购买的内容、发生的时间以及总价值（例如 500 Robux/4.99 美元）。请提供你看到的任何错误消息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想举报滥用？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改为提交举报。</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,选择
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,这有助于创作者为正确的帐户提供支持。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,与创作者分享用户信息
@@ -914,7 +901,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,重置人物？
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,你即将离开此服务器并切换到另一台服务器。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要离开吗？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即将离开此游戏并返回“{PREVIOUS_GAME}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,震动
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,来切换菜单导航
@@ -1224,7 +1213,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,违规和申诉
 Feature.Avatar.Action.AddNewMakeupLook,添加新造型
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,
+Feature.Avatar.Action.CancelSelection,取消选择
 Feature.Avatar.Action.Clear,清除
 Feature.Avatar.Action.ComposerPost,发布
 Feature.Avatar.Action.ComposerPreviewAndPost,预览并发布
@@ -1261,7 +1250,7 @@ Feature.Avatar.Action.Revert,还原
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,保存
 Feature.Avatar.Action.SaveAsNew,储存为新装扮
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,选择
 Feature.Avatar.Action.SelectMultipleItems,选择多个物品
 Feature.Avatar.Action.SelectSlot,选择栏位
 Feature.Avatar.Action.Share,分享
@@ -2301,6 +2290,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小时
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
@@ -3804,7 +3794,7 @@ Feature.VirtualEvents.HostedByLabel,主办方：
 Feature.VirtualEvents.Join,
 Feature.VirtualEvents.JoinEvent,加入活动
 Feature.VirtualEvents.Label.Challenge,挑战
-Feature.VirtualEvents.Label.DateAtTime,
+Feature.VirtualEvents.Label.DateAtTime,{date} {time}
 Feature.VirtualEvents.Label.EarlyAccess,抢先体验
 Feature.VirtualEvents.Label.Ended,已结束
 Feature.VirtualEvents.Label.Expansion,扩充内容

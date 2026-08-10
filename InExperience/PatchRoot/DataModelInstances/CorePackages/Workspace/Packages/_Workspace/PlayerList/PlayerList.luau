@@ -24,7 +24,6 @@ return {
 		FFlagPlayerListReskinMobileLayoutFix = require(script.Flags.FFlagPlayerListReskinMobileLayoutFix),
 		FFlagPlayerListReskinOptimization = require(script.Flags.FFlagPlayerListReskinOptimization),
 		FFlagPlayerListTwoTabs = require(script.Flags.FFlagPlayerListTwoTabs),
-		FFlagPlayerListTwoTabsOnLegacy = require(script.Flags.FFlagPlayerListTwoTabsOnLegacy),
 		FFlagPlayerListReskinPreferredTransparency = require(script.Flags.FFlagPlayerListReskinPreferredTransparency),
 		FFlagPlayerListLocalizeGameText = require(script.Flags.FFlagPlayerListLocalizeGameText),
 		FFlagEnablePlayerListExposureEvents = require(script.Flags.FFlagEnablePlayerListExposureEvents),
@@ -33,7 +32,6 @@ return {
 	},
 	Hooks = {
 		useLeaderboardStore = require(script.Hooks.useLeaderboardStore),
-		useLegacyVisibilityMirror = require(script.Hooks.useLegacyVisibilityMirror),
 		usePlayerListFocusNavigation = if fFlagPlayerListUseFocusNavHookModule then require(script.Hooks.usePlayerListFocusNavigation) else nil,
 		usePlatformLeaderboard = require(script.Hooks.usePlatformLeaderboard)
 	},
@@ -65,8 +63,6 @@ return {
 		PlayerContextualMenuView = require(script.Components.Presentation.PlayerContextualMenuView),
 		LeaderboardScrim = require(script.Components.Presentation.LeaderboardScrim),
 		LeaderboardTabs = require(script.Components.Presentation.LeaderboardTabs),
-		LeaderboardTabsBody = require(script.Components.Presentation.LeaderboardTabsBody),
-		LegacyTwoTabsBody = require(script.Components.Presentation.LegacyTwoTabsBody),
 		EmptyAndErrorStates = require(script.Components.Presentation.EmptyAndErrorStates),
 		PlatformLeaderboardView = require(script.Components.Presentation.PlatformLeaderboardView),
 		PlatformEntryView = require(script.Components.Presentation.PlatformEntryView),

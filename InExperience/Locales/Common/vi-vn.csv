@@ -626,18 +626,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Cảm ơn
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Để bảo vệ người chơi nhỏ tuổi, các tài khoản dưới 13 tuổi không được gửi ý kiến đóng góp."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Tính năng góp ý không khả dụng
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Thêm ảnh/video ghi lại
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Chỉnh sửa lựa chọn
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Không có ảnh/video ghi lại nào.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Ảnh/video ghi lại ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Giúp nhà sáng tạo hiểu được vấn đề của bạn.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Đang tải ảnh/video ghi lại...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} – {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,Đã chọn {count}/{max}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Một hoặc nhiều ảnh/video ghi lại của bạn chưa được tải lên thành công.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Báo cáo lỗi
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Khôi phục vật phẩm hoặc dữ liệu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Danh mục *
@@ -646,14 +635,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Chọn một
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Vấn đề với việc mua hàng
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Tối đa {MAX} ký tự
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Chi tiết *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Bỏ chọn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Hãy cung cấp mọi thông tin liên quan đến sự cố, chẳng hạn như phiên bản trò chơi và các bước để tái hiện lỗi."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Hãy mô tả vật phẩm bị mất và lần cuối bạn nhìn thấy vật phẩm là khi nào. Nếu tài khoản của bạn bị hack, vui lòng cho biết mã biên bản CS của Roblox và mọi chi tiết liên quan."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Vui lòng mô tả yêu cầu hoặc sự cố bạn gặp tại đây. Hãy chia sẻ thật cụ thể để giúp chúng tôi hiểu rõ tình hình.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Hãy cho chúng tôi biết khi đó bạn muốn mua gì, sự cố xảy ra khi nào và tổng giá trị (ví dụ: 500 Robux hoặc 4,99 USD). Vui lòng gửi kèm thông báo lỗi mà bạn gặp (nếu có)."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Bạn muốn báo cáo vi phạm?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Vậy hãy gửi báo cáo.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Chọn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Điều này giúp nhà sáng tạo hỗ trợ đúng tài khoản.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Chia sẻ thông tin người dùng với nhà sáng tạo
@@ -922,7 +909,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Hồi Sinh Nhân Vật?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Bạn sắp rời khỏi máy chủ này để chuyển sang máy chủ khác.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Bạn muốn rời đi?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
 CoreScripts.InGameMenu.Vibration,Rung
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,để chuyển điều hướng trình đơn
@@ -1268,7 +1257,7 @@ Feature.Avatar.Action.Revert,Hoàn lại
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Lưu
 Feature.Avatar.Action.SaveAsNew,Lưu mới
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,Chọn
 Feature.Avatar.Action.SelectMultipleItems,Chọn nhiều vật phẩm
 Feature.Avatar.Action.SelectSlot,Chọn Ô
 Feature.Avatar.Action.Share,Chia Sẻ
@@ -1282,7 +1271,7 @@ Feature.Avatar.Action.Stay,Ở Lại
 Feature.Avatar.Action.Switch,Chuyển
 Feature.Avatar.Action.TryOn,Mặc Thử
 Feature.Avatar.Action.Unequip,Cởi Bỏ
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,Bỏ chọn
 Feature.Avatar.Action.UnslotEmote,Gỡ Biểu Cảm Khỏi Ô
 Feature.Avatar.Action.Update,Cập Nhật
 Feature.Avatar.Action.UpdateExistingCharacter,Cập nhật nhân vật đang tồn tại
@@ -2297,6 +2286,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1g
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Không có
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng

@@ -9,10 +9,10 @@ local constantsModule = require(parent.Common.Constants)
 
 local var3 = function() --[[ line: 14 ]] end
 
-return reactModule.memo(function(p0) --[[ line: 23 | named "ServiceUnavailableStateImpl" ]]
-	-- upvalues: constantsModule (ref), reactModule (ref), view (ref), empty (ref), iconSize (ref), var3 (ref)
+return reactModule.memo(function(p0) --[[ line: 21 | named "ServiceUnavailableStateImpl" ]]
+	-- upvalues: reactModule (ref), view (ref), constantsModule (ref), empty (ref), iconSize (ref), var3 (ref)
 	return reactModule.createElement(view, {
-		tag = if p0.useLegacyPanelStyling then constantsModule.LEGACY_STATE_PANEL_TAG else constantsModule.STATE_PANEL_TAG,
+		tag = constantsModule.STATE_PANEL_TAG,
 		LayoutOrder = p0.layoutOrder
 	}, {
 		Content = reactModule.createElement(empty, {

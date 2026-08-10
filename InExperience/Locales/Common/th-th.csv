@@ -609,18 +609,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,ขอข
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,เพื่อปกป้องผู้เล่นอายุน้อย บัญชีที่มีอายุต่ำกว่า 13 ปีจะไม่สามารถส่งข้อเสนอแนะได้
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,ไม่สามารถให้ข้อเสนอแนะได้
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,เพิ่มภาพที่จับ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,แก้ไขภาพที่เลือก
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,ไม่มีภาพที่จับ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,ภาพ ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,ช่วยให้ครีเอเตอร์เห็นปัญหาของคุณ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,กำลังโหลดภาพที่จับ...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,เลือกแล้ว {count}/{max} รายการ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,อัปโหลดภาพที่จับอย่างน้อย 1 รายการไม่สำเร็จ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,รายงานจุดบกพร่อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,การกู้คืนไอเท็มหรือข้อมูล
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,หมวดหมู่ *
@@ -629,14 +618,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,เลือ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,ปัญหาในการซื้อ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ความยาวสูงสุด {MAX} อักขระ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,รายละเอียด *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,ยกเลิกการเลือก
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ระบุข้อมูลที่เกี่ยวข้องกับปัญหา เช่น เวอร์ชันของเกมและวิธีที่นำไปสู่ปัญหาอีกครั้ง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,อธิบายว่ามีอะไรไม่ครบและคุณเห็นครั้งสุดท้ายเมื่อใด หากบัญชีของคุณถูกแฮ็ก โปรดระบุหมายเลขตั๋ว Roblox CS ของคุณและรายละเอียดที่เกี่ยวข้อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,อธิบายคำขอหรือปัญหาของคุณที่นี่ โปรดระบุรายละเอียดให้มากที่สุดเพื่อช่วยให้เราเข้าใจสถานการณ์
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,ระบุว่าคุณพยายามซื้ออะไร เวลาเกิดเหตุการณ์ และมูลค่ารวม (เช่น 500 Robux / $4.99) รวมถึงข้อความแสดงข้อผิดพลาดที่คุณเห็น
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,พยายามรายงานการกระทำผิดอยู่ใช่ไหม?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>ส่งรายงานแทน</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,เลือก
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,การดำเนินการนี้จะช่วยให้ครีเอเตอร์รู้ว่าต้องช่วยเหลือบัญชีไหน
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,แชร์ข้อมูลผู้ใช้กับครีเอเตอร์
@@ -905,7 +892,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,ต้องการให�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,คุณกำลังจะออกจากเซิร์ฟเวอร์นี้และเปลี่ยนไปใช้เซิร์ฟเวอร์อื่น
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_GAME}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,เพื่อเปิด/ปิดการนำทางบนเมนู
@@ -1217,7 +1206,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,การละเมิดและการอุทธรณ์
 Feature.Avatar.Action.AddNewMakeupLook,เพิ่มลุคใหม่
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,
+Feature.Avatar.Action.CancelSelection,ยกเลิกการเลือก
 Feature.Avatar.Action.Clear,ล้างข้อมูล
 Feature.Avatar.Action.ComposerPost,โพสต์
 Feature.Avatar.Action.ComposerPreviewAndPost,ดูตัวอย่างและโพสต์
@@ -1251,7 +1240,7 @@ Feature.Avatar.Action.Revert,แปลงกลับ
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,บันทึก
 Feature.Avatar.Action.SaveAsNew,บันทึกเป็นรายการใหม่
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,เลือก
 Feature.Avatar.Action.SelectMultipleItems,เลือกหลายไอเท็ม
 Feature.Avatar.Action.SelectSlot,เลือกช่อง
 Feature.Avatar.Action.Share,แชร์
@@ -2280,6 +2269,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ชม.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 นาที
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 สัปดาห์
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} สัปดาห์
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,ไม่พร้อมให้บริการ
 Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จัก
 Feature.Chat.Label.User,

@@ -2,7 +2,7 @@
 
 return {
 	Analytics = require(script.Analytics),
-	canRenderNativeMoments = function(p0) --[[ line: 93 ]]
+	canRenderNativeMoments = function(p0) --[[ line: 89 ]]
 		return p0.isTabEnabled or p0.isFlyoutEntryEnabled and p0.platformIntegrationEnabled
 	end,
 	Flags = {
@@ -13,9 +13,6 @@ return {
 		FFlagMomentsFeedHealthAnalytics = require(script.Flags.FFlagMomentsFeedHealthAnalytics),
 		FFlagMomentsProfileGridInfiniteLoad = require(script.Flags.FFlagMomentsProfileGridInfiniteLoad),
 		FFlagMomentsRealtimeObservability = require(script.Flags.FFlagMomentsRealtimeObservability),
-		FFlagMomentsRealtimeSessionTelemetry = require(script.Flags.FFlagMomentsRealtimeSessionTelemetry),
-		FFlagMomentsSessionHeartbeat = require(script.Flags.FFlagMomentsSessionHeartbeat),
-		FFlagMomentsContentStatsTelemetry = require(script.Flags.FFlagMomentsContentStatsTelemetry),
 		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync)
 	},
 	Components = {
@@ -39,7 +36,7 @@ return {
 		useDeviceInsets = require(script.Hooks.useDeviceInsets),
 		useFormFactor = require(script.Hooks.useFormFactor),
 		useImageLoadingState = require(script.Hooks.useImageLoadingState),
-		useMomentsGating = function(...) --[[ line: 97 ]]
+		useMomentsGating = function(...) --[[ line: 93 ]]
 			return require(script.Hooks.useMomentsGating)(...)
 		end,
 		useScreenSize = require(script.Hooks.useScreenSize),
