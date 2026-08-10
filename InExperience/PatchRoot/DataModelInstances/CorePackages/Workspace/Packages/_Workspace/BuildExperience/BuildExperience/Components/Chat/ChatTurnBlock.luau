@@ -286,22 +286,24 @@ return reactModule.memo(function(p17) --[[ line: 373 | named "ChatTurnBlock" ]]
 	local universeId = turn.universeId
 	local sessionId = turn.sessionId
 	local isDone = turn.isDone
-	local var49 = reactModule.useMemo(function() --[[ line: 387 ]]
-		-- upvalues: turnState (ref), turnProjectionModule (copy), turnKey (ref), universeId (ref), sessionId (ref), startSequenceId (ref), endSequenceId (ref), optimisticLocalTools (ref), setupErrorText (ref)
+	local isLatestPublishTurn = turn.isLatestPublishTurn
+	local var49 = reactModule.useMemo(function() --[[ line: 388 ]]
+		-- upvalues: turnState (ref), turnProjectionModule (copy), turnKey (ref), universeId (ref), sessionId (ref), startSequenceId (ref), endSequenceId (ref), optimisticLocalTools (ref), isLatestPublishTurn (ref), setupErrorText (ref)
 		return if turnState == nil then if setupErrorText == nil then turnProjectionModule.projectLoadingTurnSegments({ turnKey = turnKey }) else turnProjectionModule.projectSetupErrorSegments(setupErrorText, { turnKey = turnKey }) else turnProjectionModule.projectActiveTurnSegments(turnState, {
 			turnKey = turnKey,
 			universeId = universeId,
 			sessionId = sessionId,
 			startSequenceId = startSequenceId,
 			endSequenceId = endSequenceId,
-			optimisticLocalTools = optimisticLocalTools
+			optimisticLocalTools = optimisticLocalTools,
+			showPlaytestCta = isLatestPublishTurn
 		})
 	end, {
 		turnState, turnKey, startSequenceId, endSequenceId, optimisticLocalTools,
-		setupErrorText, universeId, sessionId
+		setupErrorText, universeId, sessionId, isLatestPublishTurn
 	})
 	local var50 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 416 ]]
+	reactModule.useEffect(function() --[[ line: 419 ]]
 		-- upvalues: isDone (ref), var50 (ref), reportTurnActivityGapModule (copy), universeId (ref)
 		if isDone then
 			var50.current = nil
@@ -317,7 +319,7 @@ return reactModule.memo(function(p17) --[[ line: 373 | named "ChatTurnBlock" ]]
 	local emphasis = foundationModule.Hooks.useTokens().Color.Content.Emphasis
 	local var53 = if fFlagBuildExperienceCopyChatMessagesModule and turnState ~= nil then turnProjectionModule.getFinalAssistantMessageText(turnState) else nil
 	local onPlaytest = p17.onPlaytest
-	local var54 = reactModule.useCallback(function() --[[ line: 438 ]]
+	local var54 = reactModule.useCallback(function() --[[ line: 441 ]]
 		-- upvalues: sendBuildExperienceEventModule (copy), var51 (ref), onPlaytest (ref)
 		sendBuildExperienceEventModule("PLAYTEST_CLICK", {
 			universeId = var51.universeId,
@@ -331,7 +333,7 @@ return reactModule.memo(function(p17) --[[ line: 373 | named "ChatTurnBlock" ]]
 		end
 	end, { onPlaytest, var51 })
 	local var55 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 451 ]]
+	reactModule.useEffect(function() --[[ line: 454 ]]
 		-- upvalues: var55 (ref), onPlaytest (ref), var49 (ref), sendBuildExperienceEventModule (copy), var51 (ref)
 		if var55.current or onPlaytest == nil then return end
 		local var60 = false
