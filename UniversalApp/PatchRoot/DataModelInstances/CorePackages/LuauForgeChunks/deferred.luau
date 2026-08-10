@@ -60675,7 +60675,7 @@ return table.freeze({
 				end)
 			end
 			
-			-- [0.036s] <RUNTIME-ERROR> : Error block 0 analysis at pc 35 ('luna.Call' object has no attribute 'name')
+			-- [0.029s] <RUNTIME-ERROR> : Error block 0 analysis at pc 35 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.fwP() --[[ line: 81155 ]]
@@ -61199,7 +61199,7 @@ return table.freeze({
 				})
 			end
 			
-			-- [0.066s] <RUNTIME-ERROR> : Error block 0 analysis at pc 50 ('luna.Call' object has no attribute 'name')
+			-- [0.050s] <RUNTIME-ERROR> : Error block 0 analysis at pc 50 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.fxj() --[[ line: 81889 ]]
@@ -61950,7 +61950,7 @@ return table.freeze({
 				})
 			end
 			
-			-- [0.008s] <RUNTIME-ERROR> : Error block 0 analysis at pc 26 ('luna.Call' object has no attribute 'name')
+			-- [0.012s] <RUNTIME-ERROR> : Error block 0 analysis at pc 26 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.fxO() --[[ line: 82882 ]]
@@ -69084,7 +69084,7 @@ return table.freeze({
 				end)
 			end
 			
-			-- [0.077s] <RUNTIME-ERROR> : Error block 0 analysis at pc 64 ('luna.Call' object has no attribute 'name')
+			-- [0.065s] <RUNTIME-ERROR> : Error block 0 analysis at pc 64 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.fzk() --[[ line: 91941 ]]
@@ -195646,7 +195646,7 @@ Traceback:
 				end
 			end
 			
-			-- [0.291s] <RUNTIME-ERROR> : Error block 0 analysis at pc 108 ('luna.Call' object has no attribute 'name')
+			-- [0.119s] <RUNTIME-ERROR> : Error block 0 analysis at pc 108 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.gnA() --[[ line: 265208 ]]
@@ -197102,7 +197102,7 @@ Traceback:
 				end
 			end
 			
-			-- [0.249s] <RUNTIME-ERROR> : Error block 0 analysis at pc 86 ('luna.Call' object has no attribute 'name')
+			-- [0.076s] <RUNTIME-ERROR> : Error block 0 analysis at pc 86 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.gnT() --[[ line: 267177 ]]
@@ -212727,7 +212727,7 @@ Traceback:
 				end)
 			end
 			
-			-- [0.080s] <RUNTIME-ERROR> : Error block 0 analysis at pc 32 ('luna.Call' object has no attribute 'name')
+			-- [0.048s] <RUNTIME-ERROR> : Error block 0 analysis at pc 32 ('luna.Call' object has no attribute 'name')
 		end
 		
 		function var1.guR() --[[ line: 286816 ]]
