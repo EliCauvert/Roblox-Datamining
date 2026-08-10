@@ -94,6 +94,7 @@ local sduiClientTemplateCache = sduiConfigFetchTakesPostBody and game:DefineFast
 local sduiEdpClientTemplateCache = sduiClientTemplateCache and game:DefineFastFlag("SduiEdpClientTemplateCache", false)
 local sduiPaginatePostBody = sduiConfigFetchTakesPostBody and game:DefineFastFlag("SduiPaginatePostBody", false)
 local fFlagSduiEdpPersistentActionBarPlayButtonModule = require(script.FFlagSduiEdpPersistentActionBarPlayButton)
+local fFlagLuaAppPlayButtonViewRefactorModule = require(script.FFlagLuaAppPlayButtonViewRefactor)
 
 return {
 	Debug = require(script.Debug),
@@ -972,6 +973,7 @@ return {
 	FFlagLuaAppFixLaunchGameSourceParam = game:DefineFastFlag("LuaAppFixLaunchGameSourceParam", false),
 	FFlagLuaAppPlayButtonLoadingDurationTelemetry = game:DefineFastFlag("LuaAppPlayButtonLoadingDurationTelemetry", false),
 	FFlagLuaAppPlayLoadingClickTelemetryMobile = game:DefineFastFlag("LuaAppPlayLoadingClickTelemetryMobile", false),
+	FIntLuaAppPlayButtonSecondaryButtonGap = game:DefineFastInt("LuaAppPlayButtonSecondaryButtonGap", 8),
 	FFlagLuaAppPlayButtonWizardCloseDelay = game:DefineFastFlag("LuaAppPlayButtonWizardCloseDelay", false) and game:GetFastFlag("LuaAppPlayButtonAmpAgeCheckFlow"),
 	FIntLuaAppPlayButtonThrottleTimeSeconds = require(script.FIntLuaAppPlayButtonThrottleTimeSeconds),
 	FIntLuaAppPlayButtonWizardCloseDelayMs = game:DefineFastInt("LuaAppPlayButtonWizardCloseDelayMs", 4000),
@@ -987,11 +989,12 @@ return {
 	FFlagLuaAppUnifyPlayButtonMobileEdp = require(script.FFlagLuaAppUnifyPlayButtonMobileEdp),
 	FFlagLuaAppUnifyPlayButtonNonMobileEdp = require(script.FFlagLuaAppUnifyPlayButtonNonMobileEdp),
 	FFlagLuaAppUnifyPlayButtonAllSurfacesIxp = require(script.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp),
+	FFlagLuaAppMobileEdpPlayButtonPartialUnificationIXP = game:DefineFastFlag("LuaAppMobileEdpPlayButtonPartialUnificationIXP", false),
 	FFlagLuaAppJoinTextPlayableButton = game:DefineFastFlag("LuaAppJoinTextPlayableButton", false) or require(script.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp),
 	FFlagLuaAppIconPlayButton = game:DefineFastFlag("LuaAppIconPlayButton", false) or require(script.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp),
 	FFlagLuaAppPlayButtonLoadingSkeleton = game:DefineFastFlag("LuaAppPlayButtonLoadingSkeleton3", false) or require(script.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp),
-	FFlagLuaAppPlayButtonViewRefactor = require(script.FFlagLuaAppPlayButtonViewRefactor),
-	FFlagLuaAppDemoModePlayButton = game:DefineFastFlag("LuaAppDemoModePlayButton", false) and require(script.FFlagLuaAppPlayButtonViewRefactor),
+	FFlagLuaAppPlayButtonViewRefactor = fFlagLuaAppPlayButtonViewRefactorModule,
+	FFlagLuaAppDemoModePlayButton = game:DefineFastFlag("LuaAppDemoModePlayButton", false) and fFlagLuaAppPlayButtonViewRefactorModule,
 	FFlagLuaAppDemoModePlayButtonTelemetry = game:DefineFastFlag("LuaAppDemoModePlayButtonTelemetry2", false),
 	FFlagEnableDemoModeRegionalAvailability = require(script.FFlagEnableDemoModeRegionalAvailability),
 	FFlagLuaAppUseTokenHeightForPlayButton = game:DefineFastFlag("LuaAppUseTokenHeightForPlayButton", false),
