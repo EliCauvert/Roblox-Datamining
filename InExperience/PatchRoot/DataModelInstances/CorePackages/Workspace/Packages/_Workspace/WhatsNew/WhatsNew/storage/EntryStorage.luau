@@ -1,49 +1,37 @@
 ﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
 local appCommonLibModule = require(whatsNew.Parent.AppCommonLib)
 local _ = require(whatsNew.Types)
-local hadUsageBeforeFeatureModule = require(script.Parent.hadUsageBeforeFeature)
 local appStorageService = game:GetService("AppStorageService")
 local httpService = game:GetService("HttpService")
-local var5 = appCommonLibModule.Utils.AppStorageJsonCacheUtils.new(appStorageService)
-local t = { grandfathered = nil, onboardingCompletedAt = nil }
+local var4 = appCommonLibModule.Utils.AppStorageJsonCacheUtils.new(appStorageService)
 
-local function _(p0, p1) --[[ line: 49 | named "getOrCreateStoredEntry" ]]
-	local var13 = p0[p1]
+local function _(p0, p1) --[[ line: 34 | named "getOrCreateStoredEntry" ]]
+	local var9 = p0[p1]
 	
-	if type(var13) ~= "table" then
-		var13 = {}
-		p0[p1] = var13
+	if type(var9) ~= "table" then
+		var9 = {}
+		p0[p1] = var9
 	end
-	return var13
+	return var9
 end
 
-local function normalizeMeta(p2) --[[ line: 58 ]]
-	-- upvalues: t (ref)
-	return if type(p2) == "table" then table.clone(p2) else table.clone(t)
+local _ = function() --[[ line: 43 | named "emptyDeviceData" ]]
+	return { entries = {} }
 end
 
-local function emptyDeviceData() --[[ line: 65 ]]
-	-- upvalues: t (ref)
-	return { meta = table.clone(t), entries = {} }
-end
-
-local _ = function(p3) --[[ line: 72 | named "normalizeDeviceData" ]]
-	-- upvalues: t (ref)
-	local meta = p3.meta
-	p3.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
-	
-	if type(p3.entries) ~= "table" then
-		p3.entries = {}
+local _ = function(p2) --[[ line: 49 | named "normalizeDeviceData" ]]
+	if type(p2.entries) ~= "table" then
+		p2.entries = {}
 	end
-	return p3
+	return p2
 end
 
-local function deepClone(p4) --[[ line: 80 ]]
+local function deepClone(p3) --[[ line: 56 ]]
 	-- upvalues: deepClone (ref)
 	local t = {}
 	
-	if type(p4) == "table" then
-		for i, v in p4 do
+	if type(p3) == "table" then
+		for i, v in p3 do
 			if type(v) == "table" then
 				t[i] = deepClone(v)
 			else
@@ -54,30 +42,28 @@ local function deepClone(p4) --[[ line: 80 ]]
 	return t
 end
 
-local _ = function() --[[ line: 94 | named "readDeviceData" ]]
-	-- upvalues: var5 (ref)
-	local whatsNewEntriesCachedJsonForKey = var5:getCachedJsonForKey("WhatsNewEntries")
+local _ = function() --[[ line: 70 | named "readDeviceData" ]]
+	-- upvalues: var4 (ref)
+	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
 	
 	return if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 end
 
-local _ = function(p5) --[[ line: 102 | named "cloneStoredDeviceData" ]]
-	-- upvalues: deepClone (ref), t (ref)
-	local t_1 = { meta = p5.meta, entries = deepClone(p5.entries) }
-	local meta = t_1.meta
-	t_1.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
+local _ = function(p4) --[[ line: 78 | named "cloneStoredDeviceData" ]]
+	-- upvalues: deepClone (ref)
+	local t = { entries = deepClone(p4.entries) }
 	
-	if type(t_1.entries) ~= "table" then
-		t_1.entries = {}
+	if type(t.entries) ~= "table" then
+		t.entries = {}
 	end
-	return t_1
+	return t
 end
 
-local function writeDeviceData(p6) --[[ line: 109 ]]
-	-- upvalues: httpService (ref), appStorageService (ref), var5 (ref)
-	local ok, status = pcall(function() --[[ line: 110 ]]
-		-- upvalues: httpService (copy), p6 (ref)
-		return httpService:JSONEncode(p6)
+local function writeDeviceData(p5) --[[ line: 84 ]]
+	-- upvalues: httpService (ref), appStorageService (ref), var4 (ref)
+	local ok, status = pcall(function() --[[ line: 85 ]]
+		-- upvalues: httpService (copy), p5 (ref)
+		return httpService:JSONEncode(p5)
 	end)
 	
 	if not ok or type(status) ~= "string" then
@@ -85,14 +71,14 @@ local function writeDeviceData(p6) --[[ line: 109 ]]
 		
 		return false
 	end
-	local ok_1, status_1 = pcall(function() --[[ line: 118 ]]
+	local ok_1, status_1 = pcall(function() --[[ line: 93 ]]
 		-- upvalues: appStorageService (copy), status (ref)
 		appStorageService:SetItem("WhatsNewEntries", status)
 		appStorageService:Flush()
 	end)
 	
 	if ok_1 then
-		var5:getCachedJsonForKey("WhatsNewEntries", true)
+		var4:getCachedJsonForKey("WhatsNewEntries", true)
 		
 		return true
 	end
@@ -101,67 +87,57 @@ local function writeDeviceData(p6) --[[ line: 109 ]]
 	return false
 end
 
-local _ = function() --[[ line: 131 | named "getDeviceData" ]]
-	-- upvalues: var5 (ref), emptyDeviceData (ref), deepClone (ref), t (ref)
-	local whatsNewEntriesCachedJsonForKey = var5:getCachedJsonForKey("WhatsNewEntries")
-	local var18 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
+local _ = function() --[[ line: 106 | named "getDeviceData" ]]
+	-- upvalues: var4 (ref), deepClone (ref)
+	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
+	local var14 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 	
-	if var18 == nil then
-		return emptyDeviceData()
+	if var14 == nil then
+		return { entries = {} }
 	end
-	local t_1 = { meta = var18.meta, entries = deepClone(var18.entries) }
-	local meta = t_1.meta
-	t_1.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
+	local t = { entries = deepClone(var14.entries) }
 	
-	if type(t_1.entries) ~= "table" then
-		t_1.entries = {}
+	if type(t.entries) ~= "table" then
+		t.entries = {}
 	end
-	return t_1
+	return t
 end
 
-local function updateDeviceData(p7) --[[ line: 140 ]]
-	-- upvalues: var5 (ref), deepClone (ref), t (ref), emptyDeviceData (ref), writeDeviceData (ref)
-	local var22
-	local whatsNewEntriesCachedJsonForKey = var5:getCachedJsonForKey("WhatsNewEntries")
-	local var21 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
+local function updateDeviceData(p6) --[[ line: 115 ]]
+	-- upvalues: var4 (ref), deepClone (ref), writeDeviceData (ref)
+	local t
+	local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
+	local var17 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 	
-	if var21 then
-		local t_1 = { meta = var21.meta, entries = deepClone(var21.entries) }
-		local meta = t_1.meta
-		t_1.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
+	if var17 then
+		local t_1 = { entries = deepClone(var17.entries) }
 		
 		if type(t_1.entries) ~= "table" then
 			t_1.entries = {}
 		end
-		var22 = t_1
+		t = t_1
 	else
-		var22 = emptyDeviceData()
+		t = { entries = {} }
 	end
-	local meta = var22.meta
-	var22.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
-	
-	if type(var22.entries) ~= "table" then
-		var22.entries = {}
+	if type(t.entries) ~= "table" then
+		t.entries = {}
 	end
-	local var24 = p7(var22)
+	local var20 = p6(t)
 	
-	if var24 == nil then return end
-	local meta_1 = var24.meta
-	var24.meta = if type(meta_1) == "table" then table.clone(meta_1) else table.clone(t)
-	
-	if type(var24.entries) ~= "table" then
-		var24.entries = {}
+	if var20 == nil then return end
+	if type(var20.entries) ~= "table" then
+		var20.entries = {}
 	end
-	writeDeviceData(var24)
+	writeDeviceData(var20)
 end
 
-local function toSnapshot(p8) --[[ line: 154 ]]
+local function toSnapshot(p7) --[[ line: 129 ]]
 	local t = {}
 	
-	if type(p8) ~= "table" then
+	if type(p7) ~= "table" then
 		return t
 	end
-	for i, v in p8 do
+	for i, v in p7 do
 		if type(v) == "table" then
 			t[i] = { optOutCount = 0, adopted = false, seen = v.seen }
 		end
@@ -171,127 +147,47 @@ end
 
 return {
 	STORAGE_KEY = "WhatsNewEntries",
-	clearJsonCacheForTests = function() --[[ line: 175 ]]
-		-- upvalues: var5 (ref)
-		var5._jsonDecodeCache = {}
+	clearJsonCacheForTests = function() --[[ line: 150 ]]
+		-- upvalues: var4 (ref)
+		var4._jsonDecodeCache = {}
 	end,
-	clearForTests = function() --[[ line: 178 ]]
-		-- upvalues: writeDeviceData (ref), emptyDeviceData (ref), var5 (ref)
-		writeDeviceData(emptyDeviceData())
-		var5._jsonDecodeCache = {}
+	clearForTests = function() --[[ line: 153 ]]
+		-- upvalues: writeDeviceData (ref), var4 (ref)
+		writeDeviceData({ entries = {} })
+		var4._jsonDecodeCache = {}
 	end,
-	getEntries = function() --[[ line: 182 ]]
-		-- upvalues: var5 (ref), emptyDeviceData (ref), deepClone (ref), t (ref), toSnapshot (ref)
-		local var28
-		local whatsNewEntriesCachedJsonForKey = var5:getCachedJsonForKey("WhatsNewEntries")
-		local var27 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
+	getEntries = function() --[[ line: 157 ]]
+		-- upvalues: var4 (ref), deepClone (ref), toSnapshot (ref)
+		local t
+		local whatsNewEntriesCachedJsonForKey = var4:getCachedJsonForKey("WhatsNewEntries")
+		local var23 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
 		
-		if var27 == nil then
-			var28 = emptyDeviceData()
+		if var23 == nil then
+			t = { entries = {} }
 		else
-			local t_1 = { meta = var27.meta, entries = deepClone(var27.entries) }
-			local meta = t_1.meta
-			t_1.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
+			local t_1 = { entries = deepClone(var23.entries) }
 			
 			if type(t_1.entries) ~= "table" then
 				t_1.entries = {}
 			end
-			var28 = t_1
+			t = t_1
 		end
-		return toSnapshot(var28.entries)
+		return toSnapshot(t.entries)
 	end,
-	getMeta = function() --[[ line: 187 ]]
-		-- upvalues: var5 (ref), emptyDeviceData (ref), deepClone (ref), t (ref), normalizeMeta (ref)
-		local var32
-		local whatsNewEntriesCachedJsonForKey = var5:getCachedJsonForKey("WhatsNewEntries")
-		local var31 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
-		
-		if var31 == nil then
-			var32 = emptyDeviceData()
-		else
-			local t_1 = { meta = var31.meta, entries = deepClone(var31.entries) }
-			local meta = t_1.meta
-			t_1.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
-			
-			if type(t_1.entries) ~= "table" then
-				t_1.entries = {}
-			end
-			var32 = t_1
-		end
-		return normalizeMeta(var32.meta)
-	end,
-	setMeta = function(value) --[[ line: 192 ]]
-		-- upvalues: updateDeviceData (ref), t (ref)
-		updateDeviceData(function(p9) --[[ line: 193 ]]
-			-- upvalues: value (ref), t (copy)
-			p9.meta = if type(value) == "table" then table.clone(value) else table.clone(t)
-			
-			return p9
-		end)
-	end,
-	markSeen = function(p10, p11) --[[ line: 199 ]]
+	markSeen = function(p8, p9) --[[ line: 162 ]]
 		-- upvalues: updateDeviceData (ref)
-		updateDeviceData(function(p12) --[[ line: 200 ]]
-			-- upvalues: p10 (ref), p11 (ref)
-			local entries = p12.entries
-			local var34 = entries[p10]
+		updateDeviceData(function(p10) --[[ line: 163 ]]
+			-- upvalues: p8 (ref), p9 (ref)
+			local entries = p10.entries
+			local var26 = entries[p8]
 			
-			if type(var34) ~= "table" then
-				var34 = {}
-				entries[p10] = var34
+			if type(var26) ~= "table" then
+				var26 = {}
+				entries[p8] = var26
 			end
-			var34.seen = p11
+			var26.seen = p9
 			
-			return p12
+			return p10
 		end)
-	end,
-	runMigration = function(p13) --[[ line: 207 ]]
-		-- upvalues: var5 (ref), emptyDeviceData (ref), deepClone (ref), t (ref), hadUsageBeforeFeatureModule (ref), updateDeviceData (ref)
-		local var37
-		local whatsNewEntriesCachedJsonForKey = var5:getCachedJsonForKey("WhatsNewEntries")
-		local var36 = if type(whatsNewEntriesCachedJsonForKey) == "table" then whatsNewEntriesCachedJsonForKey else nil
-		
-		if var36 == nil then
-			var37 = emptyDeviceData()
-		else
-			local t_1 = { meta = var36.meta, entries = deepClone(var36.entries) }
-			local meta = t_1.meta
-			t_1.meta = if type(meta) == "table" then table.clone(meta) else table.clone(t)
-			
-			if type(t_1.entries) ~= "table" then
-				t_1.entries = {}
-			end
-			var37 = t_1
-		end
-		var37 = var37.meta
-		
-		if type(var37) == "table" and var37.grandfathered ~= nil then return end
-		if hadUsageBeforeFeatureModule() then
-			updateDeviceData(function(p14) --[[ line: 217 ]]
-				-- upvalues: var37 (ref)
-				p14.meta = {
-					grandfathered = true,
-					onboardingCompletedAt = if var37 then var37.onboardingCompletedAt else nil
-				}
-				
-				return p14
-			end)
-			
-			if p13 and p13.onGrandfathered then
-				p13.onGrandfathered()
-				
-				return
-			end
-		else
-			updateDeviceData(function(p15) --[[ line: 229 ]]
-				-- upvalues: var37 (ref)
-				p15.meta = {
-					grandfathered = false,
-					onboardingCompletedAt = if var37 then var37.onboardingCompletedAt else nil
-				}
-				
-				return p15
-			end)
-		end
 	end
 }

@@ -17,7 +17,6 @@ local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
 local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagFlyoutTermsPrivacyFooterModule = require(script.Parent.Parent.Flags.FFlagFlyoutTermsPrivacyFooter)
 local getFFlagEnableCommunityListExperimentation = sharedFlagsModule.GetFFlagEnableCommunityListExperimentation
 local communityListExperimentation = require(parent.Groups).Experiments.CommunityListExperimentation
 local t = {
@@ -70,8 +69,8 @@ local t_2 = {
 	[t.GiftCards] = "CommonUI.Features.Label.GiftCards",
 	[t.Redeem] = "CommonUI.Features.Label.Redeem",
 	[t.Events] = "CommonUI.Features.Label.TheHunt",
-	[t.Terms] = if fFlagFlyoutTermsPrivacyFooterModule then "CommonUI.Features.Label.Terms" else nil,
-	[t.Privacy] = if fFlagFlyoutTermsPrivacyFooterModule then "CommonUI.Features.Label.Privacy" else nil
+	[t.Terms] = "CommonUI.Features.Label.Terms",
+	[t.Privacy] = "CommonUI.Features.Label.Privacy"
 }
 local t_3 = {
 	[t.Favorites] = {
@@ -91,7 +90,7 @@ local t_3 = {
 		textKey = t_2[t.Inventory],
 		icon = builderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p0) --[[ line: 121 ]]
+			urlGenerator = function(p0) --[[ line: 120 ]]
 				-- upvalues: urlBuilder (ref)
 				return p0 and urlBuilder.user.inventory({ userId = p0 }) or nil
 			end
@@ -152,7 +151,7 @@ local t_3 = {
 		textKey = t_2[t.CreateGames],
 		icon = builderIconsModule.Icon.Studio,
 		context = {
-			urlGenerator = function(p1) --[[ line: 194 ]]
+			urlGenerator = function(p1) --[[ line: 193 ]]
 				return p1({ utm_content = "side_panel" })
 			end
 		}
@@ -168,7 +167,7 @@ local t_3 = {
 		textKey = t_2[t.GiftCards],
 		icon = builderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p2) --[[ line: 212 ]]
+			urlGenerator = function(p2) --[[ line: 211 ]]
 				-- upvalues: urlBuilder (ref)
 				return urlBuilder.static.giftCards(p2)
 			end
@@ -188,36 +187,36 @@ local t_3 = {
 			url = if getFStringPlatformEventUrl() ~= "" then urlBuilder.static.help() else urlBuilder.fromString(getFStringPlatformEventUrl())()
 		}
 	},
-	[t.Terms] = if fFlagFlyoutTermsPrivacyFooterModule then {
+	[t.Terms] = {
 		itemType = t.Terms,
 		textKey = t_2[t.Terms],
 		context = {
-			urlGenerator = function(_, p3) --[[ line: 240 ]]
+			urlGenerator = function(_, p3) --[[ line: 238 ]]
 				-- upvalues: urlBuilder (ref)
-				local var11 = if p3 then p3.getTermsOfUseLink() else nil
+				local var10 = if p3 then p3.getTermsOfUseLink() else nil
+				
+				if var10 == nil or var10 == "" then
+					var10 = urlBuilder.static.about.terms({ useGameQQUrls = true })
+				end
+				return var10
+			end
+		}
+	},
+	[t.Privacy] = {
+		itemType = t.Privacy,
+		textKey = t_2[t.Privacy],
+		context = {
+			urlGenerator = function(_, p4) --[[ line: 254 ]]
+				-- upvalues: urlBuilder (ref)
+				local var11 = if p4 then p4.getPrivacyPolicyLink() else nil
 				
 				if var11 == nil or var11 == "" then
-					var11 = urlBuilder.static.about.terms({ useGameQQUrls = true })
+					var11 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
 				end
 				return var11
 			end
 		}
-	} else nil,
-	[t.Privacy] = if fFlagFlyoutTermsPrivacyFooterModule then {
-		itemType = t.Privacy,
-		textKey = t_2[t.Privacy],
-		context = {
-			urlGenerator = function(_, p4) --[[ line: 258 ]]
-				-- upvalues: urlBuilder (ref)
-				local var12 = if p4 then p4.getPrivacyPolicyLink() else nil
-				
-				if var12 == nil or var12 == "" then
-					var12 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
-				end
-				return var12
-			end
-		}
-	} else nil
+	}
 }
 
 if fFlagEnableBlackbird and fFlagEnableBlackbirdOnFlyoutMenu then

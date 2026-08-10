@@ -14,33 +14,25 @@ local reactModule = require(corePackagesService.Packages.React)
 local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
 local symbol = require(corePackagesService.Workspace.Packages.AppCommonLib).Symbol
 local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
-local connectIntegrationCheckForDirectionalInput = game:DefineFastFlag("ConnectIntegrationCheckForDirectionalInput", false)
-local var12 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function() --[[ line: 28 ]]
+local var11 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function() --[[ line: 25 ]]
 	-- upvalues: inExperienceAppChatModalModule (ref)
 	return inExperienceAppChatModalModule:getVisible()
 end)
 
-return function(p0, p1) --[[ line: 32 ]]
-	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), connectIntegrationCheckForDirectionalInput (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var12 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
-	local var13 = serviceModule:register({
+return function(p0, p1) --[[ line: 29 ]]
+	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var11 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
+	local var12 = serviceModule:register({
 		label = "Feature.Squads.Label.Party",
 		id = p0,
 		sideSheetPlacement = sideSheetPlacement.None,
-		activated = function() --[[ line: 37 ]]
-			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), connectIntegrationCheckForDirectionalInput (copy), responsiveModule (copy), focusUtils (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
+		activated = function() --[[ line: 34 ]]
+			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
 			if inExperienceAppChatModalModule:getVisible() then
 				inExperienceAppChatModalModule.default:setVisible(false)
 			else
-				chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function() --[[ line: 41 ]]
-					-- upvalues: connectIntegrationCheckForDirectionalInput (copy), responsiveModule (copy), focusUtils (copy), inExperienceAppChatModalModule (copy)
-					if not connectIntegrationCheckForDirectionalInput then
-						focusUtils.FocusOffChrome(function() --[[ line: 49 ]]
-							-- upvalues: inExperienceAppChatModalModule (copy)
-							inExperienceAppChatModalModule.default:setVisible(true)
-						end)
-						
-						return
-					elseif responsiveModule.GetInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
+				chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function() --[[ line: 38 ]]
+					-- upvalues: responsiveModule (copy), focusUtils (copy), inExperienceAppChatModalModule (copy)
+					if responsiveModule.GetInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
 						focusUtils.FocusOffChrome()
 					end
 					inExperienceAppChatModalModule.default:setVisible(true)
@@ -48,9 +40,9 @@ return function(p0, p1) --[[ line: 32 ]]
 			end
 			localStoreModule.storeForLocalPlayer(getFStringConnectTooltipLocalStorageKeyModule(), true)
 		end,
-		isActivated = var12,
+		isActivated = var11,
 		components = {
-			Icon = function(p2) --[[ line: 59 ]]
+			Icon = function(p2) --[[ line: 50 ]]
 				-- upvalues: reactModule (copy), partyIconModule (copy), p0 (ref)
 				return reactModule.createElement(partyIconModule, { integrationId = p0, isIconVisible = p2.visible })
 			end
@@ -58,7 +50,7 @@ return function(p0, p1) --[[ line: 32 ]]
 		initialAvailability = p1
 	})
 	local inExperienceRobloxParty = symbol.named("InExperienceRobloxParty")
-	inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p3) --[[ line: 71 ]]
+	inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p3) --[[ line: 62 ]]
 		-- upvalues: mouseIconOverrideService (copy), inExperienceRobloxParty (ref)
 		if p3 then
 			mouseIconOverrideService.push(inExperienceRobloxParty, Enum.OverrideMouseIconBehavior.ForceShow)
@@ -68,5 +60,5 @@ return function(p0, p1) --[[ line: 32 ]]
 		mouseIconOverrideService.pop(inExperienceRobloxParty)
 	end)
 	
-	return var13
+	return var12
 end

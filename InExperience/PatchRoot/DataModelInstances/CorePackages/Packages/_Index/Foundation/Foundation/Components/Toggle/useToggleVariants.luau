@@ -4,13 +4,12 @@ local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Enums.ControlState)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
-local flagsModule = require(foundation.Utility.Flags)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local getKnobSizeModule = require(foundation.Components.Knob.getKnobSize)
 
-local function computeProps(p0) --[[ line: 30 ]]
+local function computeProps(p0) --[[ line: 29 ]]
 	local offset = p0.knobSize.X.Offset
-	local var8 = (p0.size.height - offset) / 2
+	local var7 = (p0.size.height - offset) / 2
 	
 	return {
 		input = {
@@ -19,16 +18,16 @@ local function computeProps(p0) --[[ line: 30 ]]
 			stroke = { thickness = p0.strokeThickness }
 		},
 		knob = {
-			offPosition = UDim2.new(0, var8, 0.5, 0),
-			onPosition = UDim2.new(0, p0.size.width - offset - var8, 0.5, 0)
+			offPosition = UDim2.new(0, var7, 0.5, 0),
+			onPosition = UDim2.new(0, p0.size.width - offset - var7, 0.5, 0)
 		}
 	}
 end
 
-local function variantsFactory(p1) --[[ line: 54 ]]
-	-- upvalues: flagsModule (ref), inputSizeModule (ref), computeProps (ref), getKnobSizeModule (ref)
+local function variantsFactory(p1) --[[ line: 53 ]]
+	-- upvalues: inputSizeModule (ref), computeProps (ref), getKnobSizeModule (ref)
 	return {
-		common = if flagsModule.FoundationToggleVisualUpdate then {
+		common = {
 			input = {
 				colors = {
 					backgroundStyle = p1.Color.ActionStandard.Background,
@@ -39,13 +38,8 @@ local function variantsFactory(p1) --[[ line: 54 ]]
 				},
 				cursorRadius = UDim.new(0, p1.Radius.Circle)
 			}
-		} else {
-			input = {
-				checkedStyle = p1.Color.ActionEmphasis.Background,
-				cursorRadius = UDim.new(0, p1.Radius.Circle)
-			}
 		},
-		sizes = if flagsModule.FoundationToggleVisualUpdate then {
+		sizes = {
 			[inputSizeModule.XSmall] = computeProps({
 				tag = "radius-circle",
 				size = { width = p1.Size.Size_700, height = p1.Size.Size_400 },
@@ -70,32 +64,11 @@ local function variantsFactory(p1) --[[ line: 54 ]]
 				knobSize = getKnobSizeModule(p1, inputSizeModule.Medium),
 				strokeThickness = p1.Stroke.None
 			})
-		} else {
-			[inputSizeModule.XSmall] = computeProps({
-				tag = "radius-large",
-				size = { width = p1.Size.Size_700, height = p1.Size.Size_300 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.XSmall)
-			}),
-			[inputSizeModule.Small] = computeProps({
-				tag = "radius-large",
-				size = { width = p1.Size.Size_800, height = p1.Size.Size_400 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.Small)
-			}),
-			[inputSizeModule.Medium] = computeProps({
-				tag = "radius-large",
-				size = { width = p1.Size.Size_1000, height = p1.Size.Size_500 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.Medium)
-			}),
-			[inputSizeModule.Large] = computeProps({
-				tag = "radius-circle",
-				size = { width = p1.Size.Size_1600, height = p1.Size.Size_900 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.Large)
-			})
 		}
 	}
 end
 
-return function(p2, p3) --[[ line: 127 ]]
+return function(p2, p3) --[[ line: 96 ]]
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local toggle = variantsContextModule.useVariants("Toggle", variantsFactory, p2)
 	

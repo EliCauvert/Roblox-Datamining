@@ -799,241 +799,252 @@ return function(p0) --[[ line: 92 | named "AppFeaturePolicies" ]]
 			-- upvalues: useOriginalPlatformChatPolicy (copy), p0 (ref), fFlagAppChatOnConsoles (copy)
 			return if useOriginalPlatformChatPolicy then p0.CanSeeChatTab or false elseif fFlagAppChatOnConsoles then p0.CanSeeChatTab2 or false else p0.CanSeeChatTab or false
 		end,
-		getHidesGamesTab = function() --[[ line: 864 ]]
+		getCanSeeFriendsTab = function() --[[ line: 867 ]]
+			-- upvalues: p0 (ref)
+			local t = { OSA = false, U13 = false, VR = false, Console = false }
+			
+			for i, v in p0.FriendsTabRequiredCapabilities or {} do
+				if not t[v] then
+					return false
+				end
+			end
+			return true
+		end,
+		getHidesGamesTab = function() --[[ line: 883 ]]
 			-- upvalues: fFlagEnableAndroidTvAppPolicies (copy), p0 (ref)
 			return if fFlagEnableAndroidTvAppPolicies then p0.HidesGamesTab or false else false
 		end,
-		getShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function() --[[ line: 872 ]]
+		getShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function() --[[ line: 891 ]]
 			-- upvalues: getFFlagEnableMultiPageSignup (copy), p0 (ref)
 			return if getFFlagEnableMultiPageSignup() then p0.ShowTermsAndPrivacyPolicyLinksForAllPagesU13Signup == nil or p0.ShowTermsAndPrivacyPolicyLinksForAllPagesU13Signup else true
 		end,
-		getAgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function() --[[ line: 881 ]]
+		getAgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages = function() --[[ line: 900 ]]
 			-- upvalues: getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup (copy), getFFlagEnableMultiPageSignup (copy), p0 (ref)
-			local var22 = getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup()
+			local var23 = getFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignup()
 			
-			return if getFFlagEnableMultiPageSignup() then if p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages == nil then var22 else p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages else var22
+			return if getFFlagEnableMultiPageSignup() then if p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages == nil then var23 else p0.AgeCutoffForShowDisclaimerLinkForUnderageSignupsOnAllSignupPages else var23
 		end,
-		getRobuxUpsellFlowMobile = function() --[[ line: 891 ]]
+		getRobuxUpsellFlowMobile = function() --[[ line: 910 ]]
 			-- upvalues: p0 (ref)
 			return p0.useMobileRobuxUpsellFlow or false
 		end,
-		getUsePaymentPlatformMicrosoftStore = function() --[[ line: 894 ]]
+		getUsePaymentPlatformMicrosoftStore = function() --[[ line: 913 ]]
 			-- upvalues: fFlagEnableMicrosoftStorePaymentsPlatform (copy), p0 (ref)
 			return if fFlagEnableMicrosoftStorePaymentsPlatform then p0.usePaymentPlatformMicrosoftStore or false else false
 		end,
-		getMicSettingsDirectionsLocaleKey = function() --[[ line: 901 ]]
+		getMicSettingsDirectionsLocaleKey = function() --[[ line: 920 ]]
 			-- upvalues: p0 (ref)
 			return p0.micSettingsDirectionsLocaleKey or nil
 		end,
-		getMicSettingsDeeplinkDirectionsLocaleKey = function() --[[ line: 904 ]]
+		getMicSettingsDeeplinkDirectionsLocaleKey = function() --[[ line: 923 ]]
 			-- upvalues: p0 (ref)
 			return p0.micSettingsDeeplinkDirectionsLocaleKey or nil
 		end,
-		getRequiresAppRestartOnMicAccessChange = function() --[[ line: 907 ]]
+		getRequiresAppRestartOnMicAccessChange = function() --[[ line: 926 ]]
 			-- upvalues: p0 (ref)
 			return p0.requiresAppRestartOnMicAccessChange or false
 		end,
-		getRenameFriendsToConnections = function() --[[ line: 910 ]]
+		getRenameFriendsToConnections = function() --[[ line: 929 ]]
 			-- upvalues: fFlagEnableFriendsRenamingForAll (copy), p0 (ref)
 			return if fFlagEnableFriendsRenamingForAll then true else p0.renameFriendsToConnections or false
 		end,
-		getShareSheetEnabled = function() --[[ line: 916 ]]
+		getShareSheetEnabled = function() --[[ line: 935 ]]
 			-- upvalues: p0 (ref)
 			return p0.shareSheetEnabled or false
 		end,
-		getCanAccessTrustedContacts = function() --[[ line: 919 ]]
+		getCanAccessTrustedContacts = function() --[[ line: 938 ]]
 			-- upvalues: p0 (ref)
 			return p0.canAccessTrustedContacts or false
 		end,
-		getExperienceDetailsNoticeType = function() --[[ line: 922 ]]
+		getExperienceDetailsNoticeType = function() --[[ line: 941 ]]
 			-- upvalues: p0 (ref)
 			return p0.experienceDetailsNoticeType or nil
 		end,
-		getRequiresOSAFriendingEducation = function() --[[ line: 925 ]]
+		getRequiresOSAFriendingEducation = function() --[[ line: 944 ]]
 			-- upvalues: p0 (ref)
 			return p0.requiresOSAFriendingEducation or false
 		end,
-		getSocialGraphSyncEnabled = function() --[[ line: 928 ]]
+		getSocialGraphSyncEnabled = function() --[[ line: 947 ]]
 			-- upvalues: p0 (ref)
 			return p0.SocialGraphSyncEnabled or false
 		end,
-		getAccountDisambiguationDisabled = function() --[[ line: 931 ]]
+		getAccountDisambiguationDisabled = function() --[[ line: 950 ]]
 			-- upvalues: p0 (ref)
 			return p0.AccountDisambiguationDisabled or false
 		end,
-		getHasWebViewSupportForFAE = function() --[[ line: 934 ]]
+		getHasWebViewSupportForFAE = function() --[[ line: 953 ]]
 			-- upvalues: p0 (ref)
 			return p0.hasWebViewSupportForFAE or false
 		end,
-		getLinkedAuthEndpointsEnabled = function() --[[ line: 937 ]]
+		getLinkedAuthEndpointsEnabled = function() --[[ line: 956 ]]
 			-- upvalues: p0 (ref)
 			return p0.LinkedAuthEndpointsEnabled or false
 		end,
-		getLinkingPlatform = function() --[[ line: 940 ]]
+		getLinkingPlatform = function() --[[ line: 959 ]]
 			-- upvalues: p0 (ref)
 			return p0.LinkingPlatform or nil
 		end,
-		getUsePaymentPlatformMilkyWayStore = function() --[[ line: 943 ]]
+		getUsePaymentPlatformMilkyWayStore = function() --[[ line: 962 ]]
 			-- upvalues: fFlagEnableMilkyWayPaymentsPlatformV2 (copy), p0 (ref)
 			return if fFlagEnableMilkyWayPaymentsPlatformV2 then p0.usePaymentPlatformMilkyWayStore or false else false
 		end,
-		getScreentimeMoreTimeOptionEnabled = function() --[[ line: 949 ]]
+		getScreentimeMoreTimeOptionEnabled = function() --[[ line: 968 ]]
 			-- upvalues: fFlagEnableScreentimeMoreTimeOption (copy), p0 (ref)
 			return if fFlagEnableScreentimeMoreTimeOption then p0.ScreentimeMoreTimeOptionEnabled or false else false
 		end,
-		getDisablePremiumEntrypoint = function() --[[ line: 955 ]]
+		getDisablePremiumEntrypoint = function() --[[ line: 974 ]]
 			-- upvalues: flyoutDisablePremiumEntrypoint1 (copy), p0 (ref)
 			return if flyoutDisablePremiumEntrypoint1 then p0.DisablePremiumEntrypoint or (p0.DisablePremiumEntryPoint or false) else false
 		end,
-		getDisableBlackbirdEntrypoints = function() --[[ line: 961 ]]
+		getDisableBlackbirdEntrypoints = function() --[[ line: 980 ]]
 			-- upvalues: guacDisableBlackbirdEntrypoints (copy), p0 (ref)
 			return if guacDisableBlackbirdEntrypoints then p0.DisableBlackbirdEntrypoints or false else false
 		end,
-		getEnableGiftcardsWithRedeem = function() --[[ line: 967 ]]
+		getEnableGiftcardsWithRedeem = function() --[[ line: 986 ]]
 			-- upvalues: flyoutEnableGiftcardsWithRedeem (copy), p0 (ref)
 			return if flyoutEnableGiftcardsWithRedeem then p0.EnableGiftcardsWithRedeem or false else false
 		end,
-		getGiftCardSourceRefOverride = function() --[[ line: 973 ]]
+		getGiftCardSourceRefOverride = function() --[[ line: 992 ]]
 			-- upvalues: p0 (ref)
 			return p0.GiftCardSourceRefOverride or ""
 		end,
-		getSignupCheckboxDisabled = function() --[[ line: 976 ]]
+		getSignupCheckboxDisabled = function() --[[ line: 995 ]]
 			-- upvalues: guacAppPolicyDisableSignupCheckbox (copy), p0 (ref)
 			return if guacAppPolicyDisableSignupCheckbox then p0.DisableSignupCheckbox or false else false
 		end,
-		getShouldShowFaceIDText = function() --[[ line: 982 ]]
+		getShouldShowFaceIDText = function() --[[ line: 1001 ]]
 			-- upvalues: fFlagEnableFaceIDTextOnAddAuthMethodPage (copy), p0 (ref)
 			return if fFlagEnableFaceIDTextOnAddAuthMethodPage then p0.ShouldShowFaceIDText or false else false
 		end,
-		getExcludeCrossDeviceSignIn = function() --[[ line: 989 ]]
+		getExcludeCrossDeviceSignIn = function() --[[ line: 1008 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludeCrossDeviceSignIn or false
 		end,
-		getExcludePasskeyLogin = function() --[[ line: 992 ]]
+		getExcludePasskeyLogin = function() --[[ line: 1011 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludePasskeyLogin or false
 		end,
-		getExcludeUsernamePasswordSignIn = function() --[[ line: 996 ]]
+		getExcludeUsernamePasswordSignIn = function() --[[ line: 1015 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludeUsernamePasswordSignIn or false
 		end,
-		getExcludeEmailPasswordSignIn = function() --[[ line: 999 ]]
+		getExcludeEmailPasswordSignIn = function() --[[ line: 1018 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludeEmailPasswordSignIn or false
 		end,
-		getExcludePhoneNumberPasswordSignIn = function() --[[ line: 1002 ]]
+		getExcludePhoneNumberPasswordSignIn = function() --[[ line: 1021 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludePhoneNumberPasswordSignIn or false
 		end,
-		getExcludeAccountSwitcher = function() --[[ line: 1005 ]]
+		getExcludeAccountSwitcher = function() --[[ line: 1024 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludeAccountSwitcher or false
 		end,
-		getAccountSwitcherEnabled = function() --[[ line: 1008 ]]
+		getAccountSwitcherEnabled = function() --[[ line: 1027 ]]
 			-- upvalues: p0 (ref)
 			return p0.AccountSwitcherEnabled or false
 		end,
-		getAccountPickerEnabled = function() --[[ line: 1011 ]]
+		getAccountPickerEnabled = function() --[[ line: 1030 ]]
 			-- upvalues: p0 (ref)
 			return p0.AccountPickerEnabled or false
 		end,
-		getExcludeUsernameUpdateModeration = function() --[[ line: 1014 ]]
+		getExcludeUsernameUpdateModeration = function() --[[ line: 1033 ]]
 			-- upvalues: p0 (ref)
 			return p0.ExcludeUsernameUpdateModeration or false
 		end,
-		getMorePageExitButtonEnabled = if fFlagEnableMorePageExitButtonSupport then function() --[[ line: 1018 ]]
+		getMorePageExitButtonEnabled = if fFlagEnableMorePageExitButtonSupport then function() --[[ line: 1037 ]]
 			-- upvalues: p0 (ref)
 			return p0.MorePageExitButtonEnabled or false
 		end else nil,
-		getMoreGridDirectionalLayoutPreferred = if fFlagEnableMorePageDirectionalLayoutRolloutFix then function() --[[ line: 1023 ]]
+		getMoreGridDirectionalLayoutPreferred = if fFlagEnableMorePageDirectionalLayoutRolloutFix then function() --[[ line: 1042 ]]
 			-- upvalues: p0 (ref)
 			return p0.MoreGridDirectionalLayoutPreferred or false
 		end else nil,
-		getShouldUseDMCCALegalDisclosureInApp = function() --[[ line: 1027 ]]
+		getShouldUseDMCCALegalDisclosureInApp = function() --[[ line: 1046 ]]
 			-- upvalues: fFlagEnableUnifiedProductPurchaseFlow (copy), p0 (ref)
 			return if fFlagEnableUnifiedProductPurchaseFlow then p0.ShouldUseDMCCALegalDisclosureInApp or false else false
 		end,
-		getCanAccessParty = function() --[[ line: 1033 ]]
+		getCanAccessParty = function() --[[ line: 1052 ]]
 			-- upvalues: p0 (ref)
 			return p0.CanAccessParty == nil or p0.CanAccessParty
 		end,
-		getRedeemTileEnabled = function() --[[ line: 1039 ]]
+		getRedeemTileEnabled = function() --[[ line: 1058 ]]
 			-- upvalues: p0 (ref)
 			return p0.RedeemTileEnabled or false
 		end,
-		getDisplayMomentsMoreTabTile = function() --[[ line: 1042 ]]
+		getDisplayMomentsMoreTabTile = function() --[[ line: 1061 ]]
 			-- upvalues: p0 (ref)
 			return p0.DisplayMomentsMoreTabTile or false
 		end,
-		getMomentsCanAutoPlay = if fFlagMomentsAutoplayAmpPolicy then function() --[[ line: 1046 ]]
+		getMomentsCanAutoPlay = if fFlagMomentsAutoplayAmpPolicy then function() --[[ line: 1065 ]]
 			-- upvalues: p0 (ref)
 			return p0.MomentsAutoPlayEnabled == nil or p0.MomentsAutoPlayEnabled
 		end else nil,
-		getMomentsInfiniteScrollEnabled = function() --[[ line: 1050 ]]
+		getMomentsInfiniteScrollEnabled = function() --[[ line: 1069 ]]
 			-- upvalues: p0 (ref)
 			return p0.MomentsInfiniteScrollEnabled == nil or p0.MomentsInfiniteScrollEnabled
 		end,
-		getSupportCenterEnabled = if getFFlagEnableSupportCenter() then function() --[[ line: 1054 ]]
+		getSupportCenterEnabled = if getFFlagEnableSupportCenter() then function() --[[ line: 1073 ]]
 			-- upvalues: p0 (ref)
 			return p0.SupportCenterEnabled or false
 		end else nil,
-		getShouldUseVibrationInsteadOfHaptics = function() --[[ line: 1058 ]]
+		getShouldUseVibrationInsteadOfHaptics = function() --[[ line: 1077 ]]
 			-- upvalues: p0 (ref)
 			return p0.ShouldUseVibrationInsteadOfHaptics or false
 		end,
-		getRawPolicy = if fFlagSduiAppPolicyBindings then function() --[[ line: 1062 ]]
+		getRawPolicy = if fFlagSduiAppPolicyBindings then function() --[[ line: 1081 ]]
 			-- upvalues: p0 (ref)
 			return p0
 		end else nil,
-		getStickyShortcutBarEnabled = if fFlagGuacStickyShortcutBarEnabled then function() --[[ line: 1067 ]]
+		getStickyShortcutBarEnabled = if fFlagGuacStickyShortcutBarEnabled then function() --[[ line: 1086 ]]
 			-- upvalues: p0 (ref)
 			return p0.StickyShortcutBarEnabled or false
 		end else nil,
-		getAccountType = if fFlagEnableCoreContentAccountType then function() --[[ line: 1072 ]]
+		getAccountType = if fFlagEnableCoreContentAccountType then function() --[[ line: 1091 ]]
 			-- upvalues: p0 (ref)
 			return p0.AccountType
 		end else nil,
-		getCoreContentBadgeText = if fFlagEnableCoreContentBadge then function() --[[ line: 1077 ]]
+		getCoreContentBadgeText = if fFlagEnableCoreContentBadge then function() --[[ line: 1096 ]]
 			-- upvalues: p0 (ref)
 			return p0.CoreContentBadgeText
 		end else nil,
-		getCoreContentTheme = if fFlagEnableCoreContentThemeUseGuacForTokenOverrides then function() --[[ line: 1082 ]]
+		getCoreContentTheme = if fFlagEnableCoreContentThemeUseGuacForTokenOverrides then function() --[[ line: 1101 ]]
 			-- upvalues: p0 (ref)
 			return p0.CoreContentTheme
 		end else nil,
-		getShowUncheckedBadge = if fFlagEnableFlyoutUncheckedBadge or fFlagEnableNonFlyoutUncheckedBadge then function() --[[ line: 1087 ]]
+		getShowUncheckedBadge = if fFlagEnableFlyoutUncheckedBadge or fFlagEnableNonFlyoutUncheckedBadge then function() --[[ line: 1106 ]]
 			-- upvalues: p0 (ref)
 			return p0.ShowUncheckedBadge
 		end else nil,
-		getShowUncheckedBadgeForAccountSwitcher = function() --[[ line: 1091 ]]
+		getShowUncheckedBadgeForAccountSwitcher = function() --[[ line: 1110 ]]
 			-- upvalues: getFFlagEnableAccountSwitcherUncheckedBadge (copy), p0 (ref)
 			return if getFFlagEnableAccountSwitcherUncheckedBadge() then p0.ShowUncheckedBadge else false
 		end,
-		getShowGameAgeRating = if fFlagShowGameAgeRating then function() --[[ line: 1098 ]]
+		getShowGameAgeRating = if fFlagShowGameAgeRating then function() --[[ line: 1117 ]]
 			-- upvalues: p0 (ref)
 			return p0.ShowGameAgeRating or false
 		end else nil,
-		getShowBadgeOver12 = if not fFlagShowGameAgeRating then function() --[[ line: 1103 ]]
+		getShowBadgeOver12 = if not fFlagShowGameAgeRating then function() --[[ line: 1122 ]]
 			-- upvalues: p0 (ref)
 			return p0.ShowBadgeOver12 or false
 		end else nil,
-		getDefaultTheme = if fFlagDefaultKidsToDarkTheme then function() --[[ line: 1108 ]]
+		getDefaultTheme = if fFlagDefaultKidsToDarkTheme then function() --[[ line: 1127 ]]
 			-- upvalues: p0 (ref)
 			return p0.DefaultTheme
 		end else nil,
-		getDevicePreferencesPersistentPresenceVariant = if fFlagMacMenuBarContentUpdates then function() --[[ line: 1113 ]]
+		getDevicePreferencesPersistentPresenceVariant = if fFlagMacMenuBarContentUpdates then function() --[[ line: 1132 ]]
 			-- upvalues: p0 (ref)
 			return p0.DevicePreferencesPersistentPresenceVariant
 		end else nil,
-		getCancelSearchOnLostFocus = if fFlagUsesCancelSearchAppPolicy then function() --[[ line: 1118 ]]
+		getCancelSearchOnLostFocus = if fFlagUsesCancelSearchAppPolicy then function() --[[ line: 1137 ]]
 			-- upvalues: p0 (ref)
 			return p0.CancelSearchOnLostFocus == nil or p0.CancelSearchOnLostFocus
 		end else nil,
-		getCanViewBuild = if fFlagAppNavMyStatsTab then function() --[[ line: 1126 ]]
+		getCanViewBuild = if fFlagAppNavMyStatsTab then function() --[[ line: 1145 ]]
 			-- upvalues: p0 (ref)
 			return p0.CanViewBuild or false
 		end else nil,
-		getCanUseBuild = if fFlagAppNavMyStatsTab then function() --[[ line: 1131 ]]
+		getCanUseBuild = if fFlagAppNavMyStatsTab then function() --[[ line: 1150 ]]
 			-- upvalues: p0 (ref)
 			return p0.CanUseBuild or false
 		end else nil

@@ -7,7 +7,6 @@ local getFStringLuaAppExperienceMenuLayer = require(corePackagesService.Workspac
 local getFStringLuaAppConsoleExperienceMenuLayerModule = require(script.Parent.Parent.Flags.GetFStringLuaAppConsoleExperienceMenuLayer)
 local getFFlagReportAnythingAnnotationIXP = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagReportAnythingAnnotationIXP
 local getFStringReportAnythingAnnotationIXPLayerName = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringReportAnythingAnnotationIXPLayerName
-local _ = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagReportTabShareIXPLayerWithMenu
 local getFStringChatTranslationLayerNameModule = require(script.Parent.Parent.Flags.GetFStringChatTranslationLayerName)
 local getFFlagChatTranslationSettingEnabledModule = require(script.Parent.Parent.Flags.GetFFlagChatTranslationSettingEnabled)
 local getFFlagVoiceUserAgencyEnableIXPModule = require(script.Parent.Parent.Flags.GetFFlagVoiceUserAgencyEnableIXP)
@@ -26,7 +25,7 @@ local fStringReportMenuIXPLayer = require(corePackagesService.Workspace.Packages
 local fStringReportingIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReportingIXPLayer
 local fStringEARReportMenuIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringEARReportMenuIXPLayer
 
-return function() --[[ line: 44 ]]
+return function() --[[ line: 42 ]]
 	-- upvalues: getFStringDesktopToastNotificationLayer (ref), fStringReportMenuIXPLayer (ref), fStringReportingIXPLayer (ref), fStringEARReportMenuIXPLayer (ref), fStringSocialCaptureIXPLayer (ref), fStringSocialCaptureTakenIXPLayer (ref), getFStringLuaAppExperienceMenuLayer (ref), getFStringLuaAppConsoleExperienceMenuLayerModule (ref), getFStringLargerRobuxUpsellIxpLayer (ref), getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), getFFlagVoiceUserAgencyEnableIXPModule (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), getFStringGameInviteMenuLayer (ref), getFFlagUXForCameraPerformanceIXPEnabledModule (ref), getFStringUXForCameraPerformanceIXPLayerNameModule (ref), getFStringVoiceExposureIXPLayerNameModule (ref), getFStringAndroidPhoneVerificationLayer (ref), getFStringIOSPhoneVerificationLayer (ref), getFFlagEnableAppChatInExperience (ref), getFStringAppChatInExperienceIXPLayer (ref)
 	local list = {
 		"AbuseReports", getFStringDesktopToastNotificationLayer(),

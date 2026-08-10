@@ -77,7 +77,7 @@ return function(p0) --[[ line: 52 | named "AvatarHeadshotComponent" ]]
 			userPresenceType = var10,
 			titleStyle = var7.Typography.HeadingSmall,
 			subtitleStyle = var7.Typography.BodyMedium,
-			onSubtitleClicked = if var16 then nil else reactModule.useCallback(function() --[[ line: 97 ]]
+			onSubtitleClicked = if var16 then nil else reactModule.useCallback(function() --[[ line: 98 ]]
 				-- upvalues: default (copy), contexts (copy), p0 (ref), var12 (ref), setCurrentToastMessage (copy), var13 (ref), copy (copy)
 				default:setClipboardText({ context = contexts.ProfileCard, text = p0.username })
 				var12(setCurrentToastMessage({
@@ -91,8 +91,8 @@ return function(p0) --[[ line: 52 | named "AvatarHeadshotComponent" ]]
 			extraInfo = if fFlagEnableUserRecentActivityEntryPoint then "View Recent Activity" else nil,
 			onExtraInfoClicked = if fFlagEnableUserRecentActivityEntryPoint then reactModule.useCallback(function() --[[ line: 90 ]]
 				-- upvalues: var17 (ref), appPage (copy), p0 (ref)
-				var17.navigate(appPage.UserRecentActivity, { userId = p0.userId })
-			end, { var17, p0.userId }) else nil
+				var17.navigate(appPage.UserRecentActivity, { userId = p0.userId, primaryName = p0.primaryName })
+			end, { var17, p0.userId, p0.primaryName }) else nil
 		})
 	})
 end

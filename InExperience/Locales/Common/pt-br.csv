@@ -626,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Agradecem
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Com o objetivo de proteger jogadores mais jovens, as contas de jogadores menores de 13 anos não podem enviar comentários."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,O envio de comentários não está disponível
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Adicionar capturas
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Editar seleção
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Nenhuma captura disponível.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Capturas ({count} de {max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Ajude o criador a entender o seu problema.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Carregando capturas...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count} de {max} selecionadas
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Não foi possível enviar uma ou mais das suas capturas.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Relatório de bug
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Restauração de item ou dados
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Categoria *
@@ -635,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Selecione um
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problema na compra
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Até {MAX} caracteres
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Detalhes *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Cancelar seleção
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Inclua qualquer coisa relevante sobre o problema, como a versão do jogo e como reproduzir as etapas."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Descreva o que está faltando e quando você viu pela última vez. Se sua conta foi hackeada, inclua o número do seu ticket do Atendimento ao Cliente da Roblox e quaisquer detalhes relevantes."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Descreva sua solicitação ou problema aqui. Forneça o máximo de detalhes possível para nos ajudar a entender a situação.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Conte-nos o que você tentou comprar, quando isso aconteceu e o valor total (por exemplo, 500 Robux / $ 4,99). Inclua todas as mensagens de erro que você viu."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Tentando denunciar um abuso?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Envie uma denúncia.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Selecionar
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Isso ajuda o criador a atender à conta correta.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Compartilhar informações de usuário com o criador
@@ -909,9 +922,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Regenerar personagem?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Você está prestes a sair deste servidor e mudar para outro.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Você está saindo?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Entrar em jogos acessados anteriormente
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,Entrar em jogos visitados anteriormente
 CoreScripts.InGameMenu.Traversal.LeaveBody,Você está prestes a sair deste jogo e retornar para {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Você está prestes a sair deste jogo e retornar para {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Vibração
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,para ativar ou desativar o menu de navegação
@@ -1223,7 +1234,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,Violações e apelos
 Feature.Avatar.Action.AddNewMakeupLook,Adicionar novo visual
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,Cancelar seleção
+Feature.Avatar.Action.CancelSelection,
 Feature.Avatar.Action.Clear,Remover
 Feature.Avatar.Action.ComposerPost,Publicar
 Feature.Avatar.Action.ComposerPreviewAndPost,Pré-visualizar e publicar
@@ -1255,7 +1266,7 @@ Feature.Avatar.Action.Revert,Reverter
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Salvar
 Feature.Avatar.Action.SaveAsNew,Salvar como novo
-Feature.Avatar.Action.Select,Selecionar
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Selecionar múltiplos itens
 Feature.Avatar.Action.SelectSlot,Selecionar espaço
 Feature.Avatar.Action.Share,Compartilhar
@@ -2282,7 +2293,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem.
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,usuário desconhecido
 Feature.Chat.Label.User,Usuário

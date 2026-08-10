@@ -19,11 +19,13 @@ local eventNames = momentsCommonModule.Analytics.EventNames
 local sessionManager = momentsCommonModule.Analytics.SessionManager
 local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
 local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
+local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
+local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
-return function(p0) --[[ line: 62 | named "createCreationController" ]]
-	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), createCapturePreviewControllerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), createEditSessionModule (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref)
+return function(p0) --[[ line: 64 | named "createCreationController" ]]
+	-- upvalues: creationToolRegistryModule (ref), defaultCreationToolsModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), sessionManager (ref), funnelEventNames (ref), getFFlagMomentsCreationPersistEditSessionModule (ref), createSignal (ref), createComputed (ref), createCapturePreviewControllerModule (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), creationFlowStateModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fFlagMomentsContentStatsTelemetry (ref), createEditSessionModule (ref), dialogTypeModule (ref), makeDefaultTextOverlayEditModule (ref)
 	local store = p0.store
 	local host = p0.host or {}
 	local registry = p0.registry or creationToolRegistryModule(defaultCreationToolsModule)
@@ -45,13 +47,13 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		getActiveSession = var17
 		var19 = var18
 		
-		local setActiveSession = function(p1) --[[ line: 91 ]]
+		local setActiveSession = function(p1) --[[ line: 93 ]]
 			-- upvalues: var19 (write)
 			var19(p1)
 		end
 	end
 	var19, var20 = createSignal(nil)
-	local var21 = createComputed(function(p2) --[[ line: 100 ]]
+	local var21 = createComputed(function(p2) --[[ line: 102 ]]
 		-- upvalues: store (ref), registry (ref)
 		local t = {}
 		
@@ -71,7 +73,7 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		return t
 	end)
 	local var22, var23 = createSignal(false)
-	local var24 = createComputed(function(p3) --[[ line: 122 ]]
+	local var24 = createComputed(function(p3) --[[ line: 124 ]]
 		-- upvalues: store (ref), host (ref), var21 (ref), registry (ref)
 		local selectedCapture = store.getSelectedCapture(p3)
 		local var33 = if selectedCapture ~= nil then nil else selectedCapture.CaptureType
@@ -89,7 +91,7 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		end
 		return t_1
 	end)
-	local var25 = createComputed(function(p4) --[[ line: 144 ]]
+	local var25 = createComputed(function(p4) --[[ line: 146 ]]
 		-- upvalues: store (ref), registry (ref)
 		local step = store.getStep(p4)
 		
@@ -100,7 +102,7 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		end
 		return nil
 	end)
-	local preview = p0.preview or createCapturePreviewControllerModule(store, createComputed(function(p5) --[[ line: 158 ]]
+	local preview = p0.preview or createCapturePreviewControllerModule(store, createComputed(function(p5) --[[ line: 160 ]]
 		-- upvalues: var25 (ref), getActiveSession (write), var21 (ref)
 		local var37 = var25(p5)
 		
@@ -115,7 +117,7 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		local trim = var21(p5).trim
 		
 		return if trim == nil or trim.startTime == nil or trim.endTime == nil then nil else { startTime = trim.startTime, endTime = trim.endTime }
-	end), createComputed(function(p6) --[[ line: 177 ]]
+	end), createComputed(function(p6) --[[ line: 179 ]]
 		-- upvalues: var25 (ref), getActiveSession (write), var21 (ref)
 		local var40 = var25(p6)
 		
@@ -127,22 +129,22 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		end
 	end))
 	
-	local function showModal(p7) --[[ line: 191 ]]
+	local function showModal(p7) --[[ line: 193 ]]
 		-- upvalues: var20 (ref)
 		var20(p7)
 	end
 	
-	local function dismissModal() --[[ line: 195 ]]
+	local function dismissModal() --[[ line: 197 ]]
 		-- upvalues: var20 (ref)
 		var20(nil)
 	end
 	
-	local function withCreationSession(p8) --[[ line: 203 ]]
+	local function withCreationSession(p8) --[[ line: 205 ]]
 		-- upvalues: sessionManager (copy), funnelEventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
 		return cryoModule.Dictionary.join(p8, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
 	end
 	
-	local function _() --[[ line: 322 | named "dismiss" ]]
+	local function _() --[[ line: 333 | named "dismiss" ]]
 		-- upvalues: var20 (ref), store (ref), p0 (ref), creationFlowStateModule (copy), host (ref)
 		var20(nil)
 		store.clearEdits(if p0.excludeGallery then creationFlowStateModule.Preview else creationFlowStateModule.Gallery)
@@ -154,26 +156,30 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 	
 	return {
 		getStep = store.getStep,
-		navigate = function(p9) --[[ line: 208 ]]
+		navigate = function(p9) --[[ line: 210 ]]
 			-- upvalues: store (ref)
 			store.navigate(p9)
 		end,
-		returnToGallery = function() --[[ line: 213 ]]
+		returnToGallery = function() --[[ line: 215 ]]
 			-- upvalues: store (ref), creationFlowStateModule (copy), setActiveSession (write)
 			store.clearEdits(creationFlowStateModule.Gallery)
 			setActiveSession(nil)
 		end,
 		getSelectedCapture = store.getSelectedCapture,
-		selectCapture = function(p10) --[[ line: 218 ]]
-			-- upvalues: store (ref), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy)
+		selectCapture = function(p10) --[[ line: 220 ]]
+			-- upvalues: store (ref), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy)
 			store.onSelectedCaptureUpdated(p10)
 			
 			if p10 ~= nil then
 				fireAnalyticsEventModule(eventNames.EditingFlowGalleryItemSelected, withCreationSession(makeCreationEventFieldsModule.makeToolFieldFromKind("gallery")))
+				
+				if fFlagMomentsRealtimeSessionTelemetry then
+					momentsCommonModule.Analytics.reportMomentsCreationStep("gallery_selected")
+				end
 			end
 		end,
 		getDescription = store.getDescription,
-		setDescription = function(value) --[[ line: 231 ]]
+		setDescription = function(value) --[[ line: 236 ]]
 			-- upvalues: store (ref)
 			store.updateDescription(value)
 		end,
@@ -181,11 +187,14 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 		getActiveTool = var25,
 		getActiveSession = getActiveSession,
 		getComposedEdits = var21,
-		beginTool = function(p11) --[[ line: 235 ]]
-			-- upvalues: registry (ref), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), var16 (write), createEditSessionModule (copy), store (ref), setActiveSession (write)
+		beginTool = function(p11) --[[ line: 240 ]]
+			-- upvalues: registry (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), var16 (write), createEditSessionModule (copy), store (ref), setActiveSession (write)
 			local var43 = registry.get(p11)
 			
 			if var43 == nil then return end
+			if fFlagMomentsContentStatsTelemetry then
+				momentsCommonModule.Analytics.reportMomentsEditToolOpened(var43.kind)
+			end
 			if var43.cta.analyticsEvent ~= nil then
 				fireAnalyticsEventModule(var43.cta.analyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var43)))
 			end
@@ -207,7 +216,7 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 				end
 			end
 		end,
-		commitActiveTool = function() --[[ line: 273 ]]
+		commitActiveTool = function() --[[ line: 281 ]]
 			-- upvalues: getActiveSession (write), var25 (ref), store (ref), creationFlowStateModule (copy), var16 (write), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write)
 			local var45 = getActiveSession(false)
 			local var46 = var25(false)
@@ -228,8 +237,8 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 			setActiveSession(nil)
 			store.navigate(creationFlowStateModule.Preview)
 		end,
-		discardActiveTool = function() --[[ line: 298 ]]
-			-- upvalues: getActiveSession (write), var25 (ref), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), setActiveSession (write), store (ref), creationFlowStateModule (copy)
+		discardActiveTool = function() --[[ line: 306 ]]
+			-- upvalues: getActiveSession (write), var25 (ref), fireAnalyticsEventModule (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), setActiveSession (write), store (ref), creationFlowStateModule (copy)
 			local var48 = getActiveSession(false)
 			local var49 = var25(false)
 			
@@ -239,18 +248,21 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 			if var49 ~= nil and var49.cta.cancelAnalyticsEvent ~= nil then
 				fireAnalyticsEventModule(var49.cta.cancelAnalyticsEvent, withCreationSession(makeCreationEventFieldsModule.makeToolField(var49)))
 			end
+			if fFlagMomentsContentStatsTelemetry and var49 ~= nil then
+				momentsCommonModule.Analytics.reportMomentsEditToolAbandoned(var49.kind)
+			end
 			setActiveSession(nil)
 			store.navigate(creationFlowStateModule.Preview)
 		end,
-		updateCommittedEdit = function(p12, p13) --[[ line: 318 ]]
+		updateCommittedEdit = function(p12, p13) --[[ line: 329 ]]
 			-- upvalues: store (ref)
 			store.setCommittedEdit(p12, p13)
 		end,
 		getActiveModal = var19,
 		showModal = showModal,
 		dismissModal = dismissModal,
-		publish = function() --[[ line: 330 ]]
-			-- upvalues: store (ref), host (ref), var20 (ref), dialogTypeModule (copy), dismissModal (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var21 (ref), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy), p0 (ref), creationFlowStateModule (copy)
+		publish = function() --[[ line: 341 ]]
+			-- upvalues: store (ref), host (ref), var20 (ref), dialogTypeModule (copy), dismissModal (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var21 (ref), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), p0 (ref), creationFlowStateModule (copy)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -267,6 +279,42 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 				host.createMoment(store.getSelectedCapture(false), var21(false), description, var51, preview.playback.getTimeLength(false))
 			end
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(var51)))
+			
+			if fFlagMomentsRealtimeSessionTelemetry then
+				momentsCommonModule.Analytics.reportMomentsCreationStep("published")
+			end
+			if fFlagMomentsContentStatsTelemetry then
+				local analytics = momentsCommonModule.Analytics
+				local var52 = var21(false)
+				local var53 = 0
+				
+				if var52.music ~= nil then
+					var53 += 1
+					analytics.reportMomentsPublishedWithEdit("music")
+				end
+				if var52.trim ~= nil then
+					var53 += 1
+					analytics.reportMomentsPublishedWithEdit("trim")
+				end
+				if var52.textOverlays ~= nil and #var52.textOverlays > 0 then
+					var53 += 1
+					analytics.reportMomentsPublishedWithEdit("text_overlay")
+				end
+				if var52.stickerOverlays ~= nil and #var52.stickerOverlays > 0 then
+					var53 += 1
+					analytics.reportMomentsPublishedWithEdit("sticker")
+				end
+				if description ~= nil and description ~= "" then
+					var53 += 1
+					analytics.reportMomentsPublishedWithEdit("description")
+				end
+				analytics.reportMomentsPublishedEditCount(var53)
+				local selectedCapture = store.getSelectedCapture(false)
+				
+				if selectedCapture ~= nil then
+					analytics.reportMomentsPublishedByCaptureType(if selectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif selectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
+				end
+			end
 			var20(nil)
 			store.clearEdits(if p0.excludeGallery then creationFlowStateModule.Preview else creationFlowStateModule.Gallery)
 			
@@ -274,7 +322,7 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 				host.exitCreationFlow()
 			end
 		end,
-		exit = function() --[[ line: 428 ]]
+		exit = function() --[[ line: 489 ]]
 			-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), var20 (ref), store (ref), p0 (ref), creationFlowStateModule (copy), host (ref)
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowExited, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowExited)))
 			var20(nil)
@@ -284,26 +332,29 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 				host.exitCreationFlow()
 			end
 		end,
-		generateText = function() --[[ line: 371 ]]
-			-- upvalues: var22 (ref), host (ref), store (ref), var23 (ref), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeDefaultTextOverlayEditModule (copy)
+		generateText = function() --[[ line: 423 ]]
+			-- upvalues: var22 (ref), host (ref), store (ref), var23 (ref), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy)
 			if var22(false) then return end
 			if host.generateMomentText == nil then return end
 			local selectedCapture = store.getSelectedCapture(false)
 			
 			if selectedCapture == nil then return end
 			var23(true)
-			local var53 = host.generateMomentText(selectedCapture)
+			local var56 = host.generateMomentText(selectedCapture)
 			
-			if var53 == nil then
+			if var56 == nil then
 				var23(false)
 				
 				return
 			end
-			var53:andThen(function(p14) --[[ line: 389 ]]
-				-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), host (copy), var23 (copy), makeDefaultTextOverlayEditModule (copy), store (copy)
+			var56:andThen(function(p14) --[[ line: 441 ]]
+				-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), var23 (copy), makeDefaultTextOverlayEditModule (copy), store (copy)
 				if p14 == nil or p14.error ~= nil then
 					fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFailed, withCreationSession({}))
 					
+					if fFlagMomentsContentStatsTelemetry then
+						momentsCommonModule.Analytics.reportMomentsGenerateText("failed")
+					end
 					if host.onGenerateTextFailure ~= nil then
 						host.onGenerateTextFailure()
 					end
@@ -311,15 +362,15 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 					
 					return
 				elseif p14.summary ~= nil and p14.summary ~= "" then
-					local var54 = makeDefaultTextOverlayEditModule()
-					var54.text = p14.summary
+					local var57 = makeDefaultTextOverlayEditModule()
+					var57.text = p14.summary
 					local textOverlayEdits = store.getTextOverlayEdits(false)
 					
 					if textOverlayEdits == nil or #textOverlayEdits == 0 then
-						store.updateTextOverlayEdits({ var54 })
+						store.updateTextOverlayEdits({ var57 })
 					else
 						local cloned = table.clone(textOverlayEdits)
-						cloned[1] = var54
+						cloned[1] = var57
 						store.updateTextOverlayEdits(cloned)
 					end
 				end
@@ -328,14 +379,20 @@ return function(p0) --[[ line: 62 | named "createCreationController" ]]
 				end
 				fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextSucceeded, withCreationSession({}))
 				
+				if fFlagMomentsContentStatsTelemetry then
+					momentsCommonModule.Analytics.reportMomentsGenerateText("succeeded")
+				end
 				if host.onGenerateTextSuccess ~= nil then
 					host.onGenerateTextSuccess()
 				end
 				var23(false)
-			end):catch(function() --[[ line: 419 ]]
-				-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), host (copy), var23 (copy)
+			end):catch(function() --[[ line: 477 ]]
+				-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), var23 (copy)
 				fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFailed, withCreationSession({}))
 				
+				if fFlagMomentsContentStatsTelemetry then
+					momentsCommonModule.Analytics.reportMomentsGenerateText("failed")
+				end
 				if host.onGenerateTextFailure ~= nil then
 					host.onGenerateTextFailure()
 				end
