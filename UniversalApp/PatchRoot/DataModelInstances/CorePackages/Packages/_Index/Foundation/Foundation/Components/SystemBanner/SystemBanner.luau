@@ -11,7 +11,6 @@ local builderIconsModule = require(parent.BuilderIcons)
 local _ = require(foundation.Enums.ButtonVariant)
 local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local flagsModule = require(foundation.Utility.Flags)
 local iconModule = require(foundation.Components.Icon)
 local iconSizeModule = require(foundation.Enums.IconSize)
 local iconVariant = builderIconsModule.IconVariant
@@ -31,84 +30,77 @@ local t = {
 	variant = alertVariantModule.Standard
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | named "SystemBanner" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), flagsModule (ref), breakpointModule (ref), alertActionsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
-	local var30
-	local var23 = withDefaultsModule(p0, t)
-	local var24 = useTokensModule()
-	local var25 = useSystemBannerVariantsModule(var24, var23.variant, var23.severity)
-	local var26, var27 = reactModule.useState(nil)
-	local var28 = reactUtilsModule.useComposedRef(p1, var27)
-	local var29 = useBreakpointModule(var26)
-	
-	if flagsModule.FoundationSystemBannerWrapActionsOnXSmall then
-		local _ = var29 == breakpointModule.XSmall
-	else
-		var30 = if var29 ~= breakpointModule.XSmall then var29 == breakpointModule.Small else true
-	end
-	local var31 = reactModule.useMemo(function() --[[ line: 71 ]]
-		-- upvalues: reactModule (copy), alertActionsModule (copy), var23 (ref), var30 (ref), var24 (ref)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 56 | named "SystemBanner" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useSystemBannerVariantsModule (ref), reactModule (ref), reactUtilsModule (ref), useBreakpointModule (ref), breakpointModule (ref), alertActionsModule (ref), viewModule (ref), withCommonPropsModule (ref), presentationContextModule (ref), iconModule (ref), SEVERITY_TO_ICON (ref), iconSizeModule (ref), iconVariant (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
+	local var22 = withDefaultsModule(p0, t)
+	local var23 = useTokensModule()
+	local var24 = useSystemBannerVariantsModule(var23, var22.variant, var22.severity)
+	local var25, var26 = reactModule.useState(nil)
+	local var27 = reactUtilsModule.useComposedRef(p1, var26)
+	local var28 = useBreakpointModule(var25) == breakpointModule.XSmall
+	local var29 = reactModule.useMemo(function() --[[ line: 68 ]]
+		-- upvalues: reactModule (copy), alertActionsModule (copy), var22 (ref), var28 (ref), var23 (ref)
 		return reactModule.createElement(alertActionsModule, {
 			LayoutOrder = 3,
-			actions = var23.actions,
-			testId = `{var23.testId}--actions`,
+			actions = var22.actions,
+			testId = `{var22.testId}--actions`,
 			tag = {
 				["row gap-small auto-xy"] = true,
-				["align-x-left"] = var30,
-				["align-x-right"] = not var30
+				["align-x-left"] = var28,
+				["align-x-right"] = not var28
 			},
-			padding = if var30 then { top = UDim.new(0, var24.Gap.Small) } else nil
+			padding = if var28 then { top = UDim.new(0, var23.Gap.Small) } else nil
 		})
-	end, { var23.actions, var23.testId, var30, var24.Gap.Small })
+	end, { var22.actions, var22.testId, var28, var23.Gap.Small })
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var23, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var22, {
 		tag = {
-			[var25.container.tag] = true,
-			["align-y-center"] = if var23.title ~= "" then var23.description == nil else true,
-			["align-y-top"] = var23.title ~= "" and var23.description ~= nil
+			[var24.container.tag] = true,
+			["align-y-center"] = if var22.title ~= "" then var22.description == nil else true,
+			["align-y-top"] = var22.title ~= "" and var22.description ~= nil
 		},
-		ref = var28
+		ref = var27
 	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = { colorNamespace = var25.container.colorNamespace }
+		value = { colorNamespace = var24.container.colorNamespace }
 	}, {
 		Icon = reactModule.createElement(iconModule, {
 			LayoutOrder = 1,
-			name = SEVERITY_TO_ICON[var23.severity],
+			name = SEVERITY_TO_ICON[var22.severity],
 			size = iconSizeModule.Large,
 			variant = iconVariant.Filled,
-			style = var25.icon.style,
-			testId = `{var23.testId}--icon`
+			style = var24.icon.style,
+			testId = `{var22.testId}--icon`
 		}),
 		Content = reactModule.createElement(viewModule, {
 			LayoutOrder = 2,
-			tag = { ["fill auto-xy"] = true, col = var30, row = not var30 },
-			testId = `{var23.testId}--content`
+			tag = { ["fill auto-xy"] = true, col = var28, row = not var28 },
+			testId = `{var22.testId}--content`
 		}, {
 			Text = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = "col auto-xy" }, {
-				Title = if var23.title ~= "" then nil else reactModule.createElement(textModule, {
+				Title = if var22.title ~= "" then nil else reactModule.createElement(textModule, {
 					LayoutOrder = 1,
-					Text = var23.title,
-					textStyle = var25.title.style,
-					tag = var25.title.tag,
-					testId = `{var23.testId}--title`
+					Text = var22.title,
+					textStyle = var24.title.style,
+					tag = var24.title.tag,
+					testId = `{var22.testId}--title`
 				}),
-				Description = if var23.description then reactModule.createElement(textModule, {
+				Description = if var22.description then reactModule.createElement(textModule, {
 					LayoutOrder = 2,
-					Text = var23.description,
-					textStyle = var25.description.style,
-					tag = var25.description.tag,
-					testId = `{var23.testId}--description`
+					Text = var22.description,
+					textStyle = var24.description.style,
+					tag = var24.description.tag,
+					testId = `{var22.testId}--description`
 				}) else nil,
-				Actions = if var30 then var31 else nil
+				Actions = if var28 then var29 else nil
 			})
 		}),
-		Actions = if not var30 then var31 else nil,
-		Close = if var23.onClose ~= nil then nil else reactModule.createElement(closeAffordanceModule, {
+		Actions = if not var28 then var29 else nil,
+		Close = if var22.onClose ~= nil then nil else reactModule.createElement(closeAffordanceModule, {
 			LayoutOrder = 4,
-			onActivated = var23.onClose,
+			onActivated = var22.onClose,
 			size = inputSizeModule.Small,
 			variant = closeAffordanceVariantModule.Utility,
-			testId = `{var23.testId}--close`
+			testId = `{var22.testId}--close`
 		})
 	}))
 end))

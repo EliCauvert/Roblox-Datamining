@@ -4,15 +4,16 @@ local inputSizeModule = require(foundation.Enums.InputSize)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0) --[[ line: 27 ]]
-	-- upvalues: inputSizeModule (ref)
+local function variantsFactory(p0) --[[ line: 29 ]]
+	-- upvalues: flagsModule (ref), inputSizeModule (ref)
 	local ceiled = math.ceil(p0.Stroke.Standard)
 	
 	return {
 		common = {
 			container = {
-				tag = "row align-x-left align-y-center auto-xy",
+				tag = if flagsModule.FoundationInternalInputBeta then "row align-x-left align-y-top auto-xy" else "row align-x-left align-y-center auto-xy",
 				padding = UDim.new(0, ceiled)
 			},
 			input = { stroke = { thickness = ceiled } }
@@ -30,7 +31,7 @@ local function variantsFactory(p0) --[[ line: 27 ]]
 	}
 end
 
-return function(p1, p2, p3) --[[ line: 52 ]]
+return function(p1, p2, p3) --[[ line: 56 ]]
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local internalInput = variantsContextModule.useVariants("InternalInput", variantsFactory, p1)
 	

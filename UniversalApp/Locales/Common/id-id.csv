@@ -974,9 +974,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Undang Teman
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ingin keluar?
 CoreScripts.PremiumModal.Title.Error,Eror
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2542,7 +2540,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1j
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Tidak tersedia
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
