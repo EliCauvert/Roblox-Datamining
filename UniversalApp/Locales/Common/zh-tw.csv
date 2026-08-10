@@ -973,9 +973,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀請好友
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入先前造訪過的遊戲
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即將離開此遊戲，並返回「{PREVIOUS_EXPERIENCE}」。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即將離開此遊戲，並返回「{PREVIOUS_GAME}」。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,你要離開了嗎？
 CoreScripts.PremiumModal.Title.Error,錯誤
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2543,7 +2541,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小時
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
-Feature.Chat.Label.TryAgain,再試一次
 Feature.Chat.Label.Unavailable,無法使用
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
