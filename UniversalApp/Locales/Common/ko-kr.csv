@@ -975,7 +975,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,볼륨
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,친구 초대
 CoreScripts.InGameMenu.Traversal.HistoryDescription,이전에 방문한 게임에 참가
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,이 체험에서 나가고 {PREVIOUS_EXPERIENCE}(으)로 돌아갑니다.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,이 게임을 떠나 {PREVIOUS_GAME}에 돌아가려고 합니다.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,나갈까요?
 CoreScripts.PremiumModal.Title.Error,오류
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2548,6 +2550,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1시간
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1분
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1주
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}주
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,사용 불가
 Feature.Chat.Label.UnknownUser,알 수 없는 사용자
 Feature.Chat.Label.User,사용자

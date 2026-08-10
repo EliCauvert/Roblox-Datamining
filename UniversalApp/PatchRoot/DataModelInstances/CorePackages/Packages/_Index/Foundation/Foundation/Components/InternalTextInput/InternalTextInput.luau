@@ -76,8 +76,8 @@ local var29 = reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line
 end))
 
 return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 | named "InternalTextInput" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), flagsModule (ref), useTextInputVariantsModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), getDisabledStyleModule (ref), inputFocusBehaviorModule (ref), getMultiLineTextHeightModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), radiusModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var29 (ref), mapBindableModule (ref), iconModule (ref)
-	if p2.Selectable == nil then
+	-- upvalues: flagsModule (ref), withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), getDisabledStyleModule (ref), inputFocusBehaviorModule (ref), getMultiLineTextHeightModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), radiusModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var29 (ref), mapBindableModule (ref), iconModule (ref)
+	if flagsModule.FoundationInputSelectionProps and p2.Selectable == nil then
 		p2.Selectable = true
 	end
 	local var46, var47
@@ -398,23 +398,29 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 |
 		p19.CanvasPosition = var42.current
 	end, {})
 	local var92 = reactModule.useCallback(function(p20) --[[ line: 592 ]]
-		-- upvalues: var39 (ref)
+		-- upvalues: var39 (ref), flagsModule (copy)
 		if p20 then
 			p20.Text = var39.current
 			var39.current = ""
-			task.delay(0, function() --[[ line: 596 ]]
-				-- upvalues: p20 (ref)
-				if p20.Parent ~= nil then
-					p20:CaptureFocus()
-				end
-			end)
+			
+			if flagsModule.FoundationTextAreaDelayMobileFocus then
+				task.delay(0, function() --[[ line: 597 ]]
+					-- upvalues: p20 (ref)
+					if p20.Parent ~= nil then
+						p20:CaptureFocus()
+					end
+				end)
+				
+				return
+			end
+			p20:CaptureFocus()
 		end
 	end, {})
-	local var93 = reactModule.useCallback(function(p21) --[[ line: 604 ]]
+	local var93 = reactModule.useCallback(function(p21) --[[ line: 608 ]]
 		-- upvalues: var42 (ref)
 		var42.current = p21.CanvasPosition
 	end, {})
-	local var94 = reactModule.useMemo(function() --[[ line: 608 ]]
+	local var94 = reactModule.useMemo(function() --[[ line: 612 ]]
 		-- upvalues: var31 (ref), reactModule (copy), var78 (ref), var79 (ref), var80 (ref), var46 (write)
 		return if var31.onDragStarted or var31.onDrag or var31.onDragEnded then reactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
@@ -432,7 +438,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 |
 	})
 	local var95 = useBindableModule(if var31.horizontalPadding then var31.horizontalPadding.left or UDim.new(0, 0) else UDim.new(0, 0))
 	local var96 = useBindableModule(if var31.horizontalPadding then var31.horizontalPadding.right or UDim.new(0, 0) else UDim.new(0, 0))
-	local var97 = reactModule.useMemo(function() --[[ line: 628 ]]
+	local var97 = reactModule.useMemo(function() --[[ line: 632 ]]
 		-- upvalues: var31 (ref), container (ref), var32 (ref)
 		return if var31.hasClearButton then UDim2.fromOffset(0, (container.minHeight - var32.Stroke.Standard) / 2) else nil
 	end, {
@@ -446,11 +452,11 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 |
 		ref = var31.inputRef,
 		Size = UDim2.new(1, 0, 0, var84),
 		selection = {
-			Selectable = var31.Selectable and not var31.isDisabled,
-			NextSelectionUp = var31.NextSelectionUp,
-			NextSelectionDown = var31.NextSelectionDown,
-			NextSelectionLeft = var31.NextSelectionLeft,
-			NextSelectionRight = var31.NextSelectionRight
+			Selectable = if flagsModule.FoundationInputSelectionProps then var31.Selectable and not var31.isDisabled else not var31.isDisabled,
+			NextSelectionUp = if flagsModule.FoundationInputSelectionProps then var31.NextSelectionUp else nil,
+			NextSelectionDown = if flagsModule.FoundationInputSelectionProps then var31.NextSelectionDown else nil,
+			NextSelectionLeft = if flagsModule.FoundationInputSelectionProps then var31.NextSelectionLeft else nil,
+			NextSelectionRight = if flagsModule.FoundationInputSelectionProps then var31.NextSelectionRight else nil
 		},
 		cursor = var81,
 		stroke = if container.strokeStyle and container.strokeThickness then {
@@ -461,11 +467,11 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 |
 		} else nil,
 		cornerRadius = if var31.radius == radiusModule.Circle then UDim.new(0, math.ceil(container.minHeight / 2)) else nil,
 		padding = {
-			left = var95:map(function(p22) --[[ line: 671 ]]
+			left = var95:map(function(p22) --[[ line: 677 ]]
 				-- upvalues: standard (ref)
 				return UDim.new(0, standard) + p22
 			end),
-			right = if var31.trailingElement == nil and var31.hasClearButton then UDim.new(0, standard) else var96:map(function(p23) --[[ line: 677 ]]
+			right = if var31.trailingElement == nil and var31.hasClearButton then UDim.new(0, standard) else var96:map(function(p23) --[[ line: 683 ]]
 				-- upvalues: standard (ref)
 				return UDim.new(0, standard) + p23
 			end),
@@ -523,7 +529,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 |
 			tag = `{var55 or ""} data-testid={var31.testId}--textbox`,
 			Interactable = if flagsModule.FoundationRemoveSecondUIDDFromScrubbableTextboxes and var94 ~= nil then var43 else nil,
 			Size = if var34 then uDim2 else nil,
-			automaticSize = mapBindableModule(var31.text, function(p24) --[[ line: 735 ]]
+			automaticSize = mapBindableModule(var31.text, function(p24) --[[ line: 741 ]]
 				-- upvalues: var34 (ref), var57 (ref)
 				return if var34 and not var57 and p24 ~= "" then Enum.AutomaticSize.Y else nil
 			end),
@@ -576,7 +582,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 179 |
 		LayoutOrder = 3,
 		isDisabled = var31.isDisabled,
 		GroupTransparency = if var31.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
-		Visible = mapBindableModule(var31.text, function(p25) --[[ line: 796 ]]
+		Visible = mapBindableModule(var31.text, function(p25) --[[ line: 802 ]]
 			return p25 ~= ""
 		end),
 		tag = var54.clearButton.tag
