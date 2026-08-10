@@ -60,12 +60,20 @@ jobs:
       - name: Post commit comments
         if: steps.diff.outputs.has_diff == 'true'
         uses: actions/github-script@v7
+        env:
+          DIFF_BEFORE: ${{ steps.diff.outputs.before }}
+          DIFF_AFTER: ${{ steps.diff.outputs.after }}
         with:
           script: |
             const fs = require('fs');
             const crypto = require('crypto');
+            const { execFileSync } = require('child_process');
 
             const MAX_BYTES = 60000; // commit comments cap out at 65536 chars
+            const MAX_INLINE_KEYS = 200; // per-file cap before falling back to a link
+
+            const BEFORE = process.env.DIFF_BEFORE;
+            const AFTER = process.env.DIFF_AFTER;
 
             const readLines = (file) =>
               fs.existsSync(file)
@@ -96,11 +104,130 @@ jobs:
             const diffLink = (file) =>
               `${commitUrl}#diff-${crypto.createHash('sha256').update(file).digest('hex')}`;
 
+            const readAtRef = (ref, path) => {
+              try {
+                return execFileSync('git', ['show', `${ref}:${path}`], {
+                  encoding: 'utf8',
+                  maxBuffer: 1024 * 1024 * 100,
+                });
+              } catch {
+                return null; // file didn't exist at that ref (added/removed)
+              }
+            };
+
+            // Minimal RFC4180 parser matching RobloxExtractor's CsvEscape (quotes a
+            // field only when it contains , " \n or \r; quotes doubled inside).
+            const parseCsvRows = (text) => {
+              const rows = [];
+              let row = [];
+              let field = '';
+              let inQuotes = false;
+              for (let i = 0; i < text.length; i++) {
+                const c = text[i];
+                if (inQuotes) {
+                  if (c === '"') {
+                    if (text[i + 1] === '"') { field += '"'; i++; }
+                    else inQuotes = false;
+                  } else {
+                    field += c;
+                  }
+                } else if (c === '"') {
+                  inQuotes = true;
+                } else if (c === ',') {
+                  row.push(field); field = '';
+                } else if (c === '\r') {
+                  // skip, \n handles the line end
+                } else if (c === '\n') {
+                  row.push(field); field = '';
+                  rows.push(row); row = [];
+                } else {
+                  field += c;
+                }
+              }
+              if (field.length || row.length) { row.push(field); rows.push(row); }
+              return rows;
+            };
+
+            const parseKeyValueCsv = (text) => {
+              const map = new Map();
+              if (!text) return map;
+              const rows = parseCsvRows(text);
+              for (let i = 1; i < rows.length; i++) { // skip "Key,Value" header
+                const [key, value] = rows[i];
+                if (key === undefined) continue;
+                map.set(key, value ?? '');
+              }
+              return map;
+            };
+
+            const sanitizeForDiffLine = (s) =>
+              String(s)
+                .replace(/\r\n|\r|\n/g, '⏎ ') // keep one line per key in the diff block
+                .replace(/`{3,}/g, (m) => m.replace(/`/g, '´')); // never break the outer ``` fence
+
+            const diffCsv = (beforeText, afterText) => {
+              const before = parseKeyValueCsv(beforeText);
+              const after = parseKeyValueCsv(afterText);
+              const addedKeys = [];
+              const removedKeys = [];
+              const changedKeys = [];
+              for (const [k, v] of after) {
+                if (!before.has(k)) addedKeys.push(k);
+                else if (before.get(k) !== v) changedKeys.push(k);
+              }
+              for (const k of before.keys()) {
+                if (!after.has(k)) removedKeys.push(k);
+              }
+              addedKeys.sort(); removedKeys.sort(); changedKeys.sort();
+              return { before, after, addedKeys, removedKeys, changedKeys };
+            };
+
+            const formatCsvDiff = (beforeText, afterText) => {
+              const { before, after, addedKeys, removedKeys, changedKeys } = diffCsv(beforeText, afterText);
+              if (!addedKeys.length && !removedKeys.length && !changedKeys.length) return null;
+
+              const lines = [];
+              for (const k of addedKeys) lines.push(`+ ${sanitizeForDiffLine(k)} = ${sanitizeForDiffLine(after.get(k))}`);
+              for (const k of removedKeys) lines.push(`- ${sanitizeForDiffLine(k)} = ${sanitizeForDiffLine(before.get(k))}`);
+              for (const k of changedKeys) lines.push(`~ ${sanitizeForDiffLine(k)}: ${sanitizeForDiffLine(before.get(k))} → ${sanitizeForDiffLine(after.get(k))}`);
+
+              return {
+                summary: `${addedKeys.length} added, ${removedKeys.length} removed, ${changedKeys.length} changed`,
+                body: lines.join('\n'),
+                keyCount: addedKeys.length + removedKeys.length + changedKeys.length,
+              };
+            };
+
             const buildLocalesSection = (files) => {
               const localeFiles = files.filter(isLocaleFile).sort();
               if (!localeFiles.length) return '';
-              const links = localeFiles.map((f) => `- [\`${f}\`](${diffLink(f)})`).join('\n');
-              return `### Locale diffs\nToo large to inline — view on GitHub:\n${links}\n\n`;
+
+              const inlineBlocks = [];
+              const linkOnly = [];
+
+              for (const f of localeFiles) {
+                const diff = formatCsvDiff(readAtRef(BEFORE, f), readAtRef(AFTER, f));
+                if (!diff) continue;
+
+                const block = `<details>\n<summary>\`${f}\` — ${diff.summary}</summary>\n\n` +
+                  '```diff\n' + diff.body + '\n```\n</details>\n';
+
+                if (diff.keyCount <= MAX_INLINE_KEYS && Buffer.byteLength(block, 'utf8') <= MAX_BYTES) {
+                  inlineBlocks.push(block);
+                } else {
+                  linkOnly.push(f);
+                }
+              }
+
+              let section = '';
+              if (inlineBlocks.length) {
+                section += `### Locale diffs\n\n${inlineBlocks.join('\n')}\n`;
+              }
+              if (linkOnly.length) {
+                const links = linkOnly.map((f) => `- [\`${f}\`](${diffLink(f)})`).join('\n');
+                section += `### Locale diffs (too large to inline)\n${links}\n\n`;
+              }
+              return section;
             };
 
             const appOf = (path) => (path.includes('/') ? path.split('/')[0] : 'Other');
