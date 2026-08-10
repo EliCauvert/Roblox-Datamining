@@ -1024,6 +1024,7 @@ return {
 	FFlagLuaAppStratusBugReportAfterConnect = game:DefineFastFlag("LuaAppStratusBugReportAfterConnect", false) and game:GetEngineFeature("StratusBugReport"),
 	FFlagLuaAppVideoPlaybackRefCount = game:DefineFastFlag("LuaAppVideoPlaybackRefCount", false),
 	FFlagLuaAppVideoServerDisplayWakeLock = game:DefineFastFlag("LuaAppVideoServerDisplayWakeLock", false) and game:GetEngineFeature("EnableDisplayWakeLock"),
+	FFlagLuaAppWireAudioDeviceInputOnRequest = game:DefineFastFlag("LuaAppWireAudioDeviceInputOnRequest", false) and game:GetEngineFeature("RealtimeMediaRequestAudioInput"),
 	FFlagLuaAppUseExperienceLogoTrayInGameInfoList = game:DefineFastFlag("LuaAppUseExperienceLogoTrayInGameInfoList", false),
 	FFlagLuaAppSduiUpdateUserSettingsAction = game:DefineFastFlag("LuaAppSduiUpdateUserSettingsAction", false),
 	FFlagLuaAppEnableHeroUnitV2 = require(script.FFlagLuaAppEnableHeroUnitV2),
