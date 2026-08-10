@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagIEMFocusNavToButtons) and game:DefineFastFlag("IEMFocusNavPeoplePageToButtons", false)
+﻿return game:DefineFastFlag("IEMFocusNavPeoplePageToButtons", false)
