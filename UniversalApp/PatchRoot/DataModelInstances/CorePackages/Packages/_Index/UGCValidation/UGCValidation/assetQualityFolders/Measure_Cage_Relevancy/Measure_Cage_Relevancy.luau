@@ -9,12 +9,12 @@ return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
 	run = function(p0, p1) --[[ line: 15 ]]
-		-- upvalues: errorSourceStringsModule (ref), UGCMinCageRelevancyThreshold (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
+		-- upvalues: UGCMinCageRelevancyThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local handleOuterCage = p1.aqsSummaryData.Measure_Cage_Relevancy.Handle_OuterCage
 		local outerCageFaceRelevantPercent = handleOuterCage and tonumber(handleOuterCage.outer_cage_face_relevant_percent)
 		
 		if outerCageFaceRelevantPercent == nil then
-			p0:fail(errorSourceStringsModule.Keys.AQSInputDataError)
+			error("Measure_Cage_Relevancy: AQS summary missing required fields")
 			
 			return
 		elseif outerCageFaceRelevantPercent * 100 < UGCMinCageRelevancyThreshold then

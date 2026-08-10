@@ -10,11 +10,11 @@ return {
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityLC),
 	run = function(p0, p1) --[[ line: 16 ]]
-		-- upvalues: errorSourceStringsModule (ref), UGCValidationCageMeshDistanceMaxCageMeshDistanceLC (ref), UGCValidationCageMeshDistanceMaxNegativeSDFThresholdLC (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
+		-- upvalues: UGCValidationCageMeshDistanceMaxCageMeshDistanceLC (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceMaxNegativeSDFThresholdLC (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local handleOuterCage = p1.aqsSummaryData.Measure_Cage_Mesh_Distance.Handle_OuterCage
 		
 		if handleOuterCage == nil or handleOuterCage.max_distance == nil or handleOuterCage.negative_sdf_percent == nil then
-			p0:fail(errorSourceStringsModule.Keys.AQSInputDataError)
+			error("Measure_Cage_Mesh_Distance: AQS summary missing required fields")
 			
 			return
 		elseif UGCValidationCageMeshDistanceMaxCageMeshDistanceLC / 100 < tonumber(handleOuterCage.max_distance) then

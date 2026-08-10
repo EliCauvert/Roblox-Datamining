@@ -4,11 +4,14 @@ local assetService = game:GetService("AssetService")
 local getFFlagUGCValidationAddPBRToSharedDataModule = require(parent.flags.getFFlagUGCValidationAddPBRToSharedData)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local r15plusUtilsModule = require(parent.util.R15plusUtils)
+local rigBuilderModule = require(parent.util.RigBuilder)
+local buildEmoteKeyframeSequenceFromCurveAnimModule = require(parent.util.buildEmoteKeyframeSequenceFromCurveAnim)
+local getEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
 local getFFlagUGCValidationAddGeometryToExportsModule = require(parent.flags.getFFlagUGCValidationAddGeometryToExports)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
 local t = {}
 
-local function createCagePart(p0, p1, p2, p3) --[[ line: 18 ]]
+local function createCagePart(p0, p1, p2, p3) --[[ line: 22 ]]
 	-- upvalues: assetService (ref)
 	local editable = assetService:CreateMeshPartAsync(Content.fromObject(p2.editable))
 	editable.Name = `{p0}_{p3}`
@@ -18,7 +21,7 @@ local function createCagePart(p0, p1, p2, p3) --[[ line: 18 ]]
 	return editable
 end
 
-local function copyMeshPart(p4, p5, p6) --[[ line: 32 ]]
+local function copyMeshPart(p4, p5, p6) --[[ line: 36 ]]
 	-- upvalues: assetService (ref), getFFlagUGCValidationAddPBRToSharedDataModule (ref), getFFlagUGCValidateAllowEmissivesModule (ref), r15plusUtilsModule (ref)
 	local editable = assetService:CreateMeshPartAsync(Content.fromObject(p5.editable))
 	
@@ -60,46 +63,88 @@ local function copyMeshPart(p4, p5, p6) --[[ line: 32 ]]
 	if r15plusUtilsModule.checkFlagEnabledForAllowHrd() then
 		for i_1, v_1 in r15plusUtilsModule.getNameWhitelistOfClassInSchema(r15plusUtilsModule.getAvatarBoneSchema(p4.Name), "Attachment") do
 			if v_1 and editable:FindFirstChild(i_1) == nil then
-				local var12 = p4:FindFirstChild(i_1, true)
-				local var13 = if var12 ~= nil then editable.CFrame else var12.WorldCFrame
+				local var17 = p4:FindFirstChild(i_1, true)
+				local var18 = if var17 ~= nil then editable.CFrame else var17.WorldCFrame
 				local attachment = Instance.new("Attachment")
 				attachment.Name = i_1
 				attachment.Parent = editable
-				attachment.WorldCFrame = var13
+				attachment.WorldCFrame = var18
 			end
 		end
 	end
 	return editable
 end
 
-function t.createModelForGltfExport(p7) --[[ line: 113 ]]
-	-- upvalues: copyMeshPart (ref), createCagePart (ref), getFFlagUGCValidationAddGeometryToExportsModule (ref), validationEnumsModule (ref)
+local function addBonesFromPoses(p7, p8, p9) --[[ line: 122 ]]
+	-- upvalues: addBonesFromPoses (ref)
+	for i, v in p7:GetChildren() do
+		if v:IsA("Pose") then
+			local name = v.Name
+			local var20 = p9:FindFirstChild(name)
+			
+			if var20 and var20:IsA("BasePart") then
+				addBonesFromPoses(v, var20, p9)
+			else
+				local bone = Instance.new("Bone")
+				bone.Name = name
+				bone.Parent = p8
+				addBonesFromPoses(v, bone, p9)
+			end
+		end
+	end
+end
+
+local function createEmoteExportScene(p10) --[[ line: 139 ]]
+	-- upvalues: rigBuilderModule (ref), buildEmoteKeyframeSequenceFromCurveAnimModule (ref), addBonesFromPoses (ref)
+	local var22 = rigBuilderModule.createDefaultCharacter(false)
+	local var23 = if p10.curveAnimations and #p10.curveAnimations > 0 then buildEmoteKeyframeSequenceFromCurveAnimModule(p10.curveAnimations[1]) else nil
+	
+	if not var23 then
+		error("Emote export requires a curve animation, but none was available")
+	end
+	var23.Parent = var22
+	local children = var23:GetChildren()
+	local humanoidRootPart = var22:FindFirstChild("HumanoidRootPart")
+	
+	if #children > 0 and humanoidRootPart and humanoidRootPart:IsA("BasePart") then
+		addBonesFromPoses(children[1], humanoidRootPart, var22)
+	end
+	var22:PivotTo(CFrame.new())
+	
+	return var22
+end
+
+function t.createModelForGltfExport(p11) --[[ line: 169 ]]
+	-- upvalues: getEngineFeatureEngineUGCValidateEmoteAnimationExportModule (ref), validationEnumsModule (ref), createEmoteExportScene (ref), copyMeshPart (ref), createCagePart (ref), getFFlagUGCValidationAddGeometryToExportsModule (ref)
+	if getEngineFeatureEngineUGCValidateEmoteAnimationExportModule() and p11.uploadCategory == validationEnumsModule.UploadCategory.EMOTE_ANIMATION then
+		return createEmoteExportScene(p11)
+	end
 	local model = Instance.new("Model")
-	local descendants = p7.rootInstance:GetDescendants()
-	table.insert(descendants, p7.rootInstance)
+	local descendants = p11.rootInstance:GetDescendants()
+	table.insert(descendants, p11.rootInstance)
 	
 	for i, v in descendants do
 		if v:IsA("MeshPart") then
 			local name = v.Name
-			local var17 = p7.renderMeshesData[name]
+			local var28 = p11.renderMeshesData[name]
 			
-			if not var17 then
+			if not var28 then
 				error("Missing editable data")
 			end
-			local var18 = copyMeshPart(v, var17, p7.meshTextures[name])
-			var18.Parent = model
-			local var19 = p7.outerCagesData[name]
+			local var29 = copyMeshPart(v, var28, p11.meshTextures[name])
+			var29.Parent = model
+			local var30 = p11.outerCagesData[name]
 			
-			if var19 then
-				createCagePart(var18, var17, var19, "OuterCage").Parent = model
+			if var30 then
+				createCagePart(var29, var28, var30, "OuterCage").Parent = model
 			end
-			local var20 = p7.innerCagesData[name]
+			local var31 = p11.innerCagesData[name]
 			
-			if var20 then
-				createCagePart(var18, var17, var20, "InnerCage").Parent = model
+			if var31 then
+				createCagePart(var29, var28, var31, "InnerCage").Parent = model
 			end
-			if getFFlagUGCValidationAddGeometryToExportsModule() and p7.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
-				var18.Name = `{name}_Geo`
+			if getFFlagUGCValidationAddGeometryToExportsModule() and p11.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
+				var29.Name = `{name}_Geo`
 			end
 		end
 	end

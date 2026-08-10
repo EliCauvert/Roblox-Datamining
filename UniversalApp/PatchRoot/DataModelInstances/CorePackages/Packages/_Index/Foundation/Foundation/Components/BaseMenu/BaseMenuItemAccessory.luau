@@ -9,11 +9,11 @@ local viewModule = require(foundation.Components.View)
 local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
 local _ = require(foundation.Providers.Style.Tokens)
 local accessoryTypeModule = require(foundation.Enums.AccessoryType)
-local colorModeModule = require(foundation.Enums.ColorMode)
+local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local _ = require(foundation.Enums.InputSize)
 
 return function(p0) --[[ line: 46 | named "Accessory" ]]
-	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), colorModeModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
+	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), colorNamespaceModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
 	local accessory = p0.accessory
 	
 	if accessory == nil then
@@ -27,7 +27,10 @@ return function(p0) --[[ line: 46 | named "Accessory" ]]
 		testId = p0.testId
 	}, {
 		Avatar = reactModule.createElement(presentationContextModule.Provider, {
-			value = { isIconSize = true, colorMode = colorModeModule.Color }
+			value = {
+				isIconSize = true,
+				colorNamespace = colorNamespaceModule.Color
+			}
 		}, {
 			Avatar = reactModule.createElement(avatarModule, {
 				userId = accessory.userId,

@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent.Parent
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local getEngineFeatureEngineUGCValidationExpandReturnSchemaModule = require(parent.flags.getEngineFeatureEngineUGCValidationExpandReturnSchema)
 local validationFolders = parent.validationFolders
 local assetQualityFolders = parent.assetQualityFolders
 local t = {}
@@ -17,23 +16,21 @@ local t_1 = {}
 for i, v in validationEnumsModule.ValidationModule do
 	t_1[v] = validationFolders
 end
-if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
-	for i_1, v_1 in validationEnumsModule.AssetQualityCheck do
-		t_1[v_1] = assetQualityFolders
-	end
+for i_1, v_1 in validationEnumsModule.AssetQualityCheck do
+	t_1[v_1] = assetQualityFolders
 end
 local t_2 = {}
 
-for i_1, v_1 in validationEnumsModule do
-	t_2[i_1] = {}
+for i_2, v_2 in validationEnumsModule do
+	t_2[i_2] = {}
 	
-	if typeof(v_1) == "table" then
-		for i_2, v_2 in v_1 do
-			t_2[i_1][i_2] = true
+	if typeof(v_2) == "table" then
+		for i_3, v_3 in v_2 do
+			t_2[i_2][i_3] = true
 		end
 	end
 end
-local function tableOnlyHasExistingEnums(p0, p1, p2) --[[ line: 54 ]]
+local function tableOnlyHasExistingEnums(p0, p1, p2) --[[ line: 50 ]]
 	-- upvalues: t_2 (ref)
 	if typeof(p1) ~= "table" then
 		error(`Invalid config option {p2} inside of {p0} - expected to be table`)
@@ -45,34 +42,34 @@ local function tableOnlyHasExistingEnums(p0, p1, p2) --[[ line: 54 ]]
 	end
 end
 
-local function defaultFlagCheck() --[[ line: 66 ]]
+local function defaultFlagCheck() --[[ line: 62 ]]
 	return true
 end
 
-local function defaultShadowCheck() --[[ line: 70 ]]
+local function defaultShadowCheck() --[[ line: 66 ]]
 	return false
 end
 
 local t_3 = {}
 
-for i_2, v_2 in t_1 do
-	local var10 = v_2:FindFirstChild(i_2)
+for i_3, v_3 in t_1 do
+	local var9 = v_3:FindFirstChild(i_3)
 	
-	if var10 == nil then
-		error(`{i_2} validation folder is missing from {v_2.Name}`)
+	if var9 == nil then
+		error(`{i_3} validation folder is missing from {v_3.Name}`)
 	end
-	local var11 = var10:FindFirstChild(i_2)
+	local var10 = var9:FindFirstChild(i_3)
 	
-	if var11 == nil or not var11:IsA("ModuleScript") then
-		error(`{i_2}.lua validation file is missing from {v_2.Name}/{i_2}`)
+	if var10 == nil or not var10:IsA("ModuleScript") then
+		error(`{i_3}.lua validation file is missing from {v_3.Name}/{i_3}`)
 	end
-	local unknownModule = require(var11)
+	local unknownModule = require(var10)
 	
-	for i_3, v_3 in unknownModule do
-		if typeof(i_3) ~= "string" then
-			error(`{i_2}.lua contains non-string key {tostring(i_3)}`)
-		elseif not t_2.ValidationConfig[i_3] then
-			error(`{i_2}.lua contains unexpected member {i_3}. Check for typos or add an extra ValidationEnums.ValidationConfig`)
+	for i_4, v_4 in unknownModule do
+		if typeof(i_4) ~= "string" then
+			error(`{i_3}.lua contains non-string key {tostring(i_4)}`)
+		elseif not t_2.ValidationConfig[i_4] then
+			error(`{i_3}.lua contains unexpected member {i_4}. Check for typos or add an extra ValidationEnums.ValidationConfig`)
 		end
 	end
 	unknownModule.fflag = unknownModule.fflag or defaultFlagCheck
@@ -82,50 +79,41 @@ for i_2, v_2 in t_1 do
 	unknownModule.conditionalData = unknownModule.conditionalData or {}
 	unknownModule.prereqTests = unknownModule.prereqTests or {}
 	unknownModule.expectedFailures = unknownModule.expectedFailures or {}
-	unknownModule.expectedAqsData = unknownModule.expectedAqsData or {}
 	unknownModule.knownAqsUserErrors = unknownModule.knownAqsUserErrors or {}
-	unknownModule.isAssetQualityModule = v_2 == assetQualityFolders
+	unknownModule.isAssetQualityModule = v_3 == assetQualityFolders
 	
-	if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
-		if unknownModule.isAssetQualityModule then
-			for i_3, v_3 in list do
-				if not table.find(unknownModule.requiredData, v_3) then
-					table.insert(unknownModule.requiredData, v_3)
-				end
-			end
-		end
-	elseif next(unknownModule.expectedAqsData) ~= nil then
-		for i_3, v_3 in list do
-			if not table.find(unknownModule.requiredData, v_3) then
-				table.insert(unknownModule.requiredData, v_3)
+	if unknownModule.isAssetQualityModule then
+		for i_4, v_4 in list do
+			if not table.find(unknownModule.requiredData, v_4) then
+				table.insert(unknownModule.requiredData, v_4)
 			end
 		end
 	end
 	if unknownModule.run == nil or typeof(unknownModule.run) ~= "function" then
-		error(`Missing module run function in {i_2}`)
+		error(`Missing module run function in {i_3}`)
 	end
 	setmetatable(unknownModule, {
-		__index = function(_, p3) --[[ line: 136 ]]
-			-- upvalues: i_2 (ref)
-			error(`Invalid ValidationConfig {p3} used on the module {i_2}`)
+		__index = function(_, p3) --[[ line: 123 ]]
+			-- upvalues: i_3 (ref)
+			error(`Invalid ValidationConfig {p3} used on the module {i_3}`)
 		end
 	})
 	
 	if typeof(unknownModule.fflag) ~= "function" or typeof(unknownModule.fflag()) ~= "boolean" then
-		error(`Invalid FFlag config in {i_2}`)
+		error(`Invalid FFlag config in {i_3}`)
 	end
 	if typeof(unknownModule.shadowFlag) ~= "function" or typeof(unknownModule.shadowFlag()) ~= "boolean" then
-		error(`Invalid shadowFlag config in {i_2}`)
+		error(`Invalid shadowFlag config in {i_3}`)
 	end
-	tableOnlyHasExistingEnums(i_2, unknownModule.categories, "UploadCategory")
-	tableOnlyHasExistingEnums(i_2, unknownModule.requiredData, "SharedDataMember")
-	tableOnlyHasExistingEnums(i_2, unknownModule.conditionalData, "SharedDataMember")
-	tableOnlyHasExistingEnums(i_2, unknownModule.prereqTests, "ValidationModule")
-	t_3[i_2] = unknownModule
+	tableOnlyHasExistingEnums(i_3, unknownModule.categories, "UploadCategory")
+	tableOnlyHasExistingEnums(i_3, unknownModule.requiredData, "SharedDataMember")
+	tableOnlyHasExistingEnums(i_3, unknownModule.conditionalData, "SharedDataMember")
+	tableOnlyHasExistingEnums(i_3, unknownModule.prereqTests, "ValidationModule")
+	t_3[i_3] = unknownModule
 end
 t.allModules = t_3
 
-function t.getValidationModule(p4) --[[ line: 159 ]]
+function t.getValidationModule(p4) --[[ line: 146 ]]
 	-- upvalues: t_3 (ref)
 	if t_3[p4] == nil then
 		error(`{p4} does not exist in the preload table.`)

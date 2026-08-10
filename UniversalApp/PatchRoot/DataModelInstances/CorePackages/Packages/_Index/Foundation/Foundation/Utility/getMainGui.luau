@@ -14,12 +14,14 @@ local function _() --[[ line: 14 | named "getPlayerGui" ]]
 end
 
 return function() --[[ line: 22 | named "getMainGui" ]]
-	-- upvalues: flagsModule (ref), isPluginSecurityModule (ref), coreGui (ref), var4 (write), var5 (write), runService (ref), players (ref)
-	if not flagsModule.FoundationUseMainGuiUtility then
-		error("FoundationUseMainGuiUtility is not enabled")
-	end
+	-- upvalues: isPluginSecurityModule (ref), coreGui (ref), flagsModule (ref), var5 (write), runService (ref), players (ref), var4 (write)
 	if isPluginSecurityModule() then
 		return coreGui
+	elseif flagsModule.FoundationOverlayResilientMainGui then
+		if var5 == nil then
+			var5 = if runService:IsClient() and players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
+		end
+		return var5
 	elseif not var4 then
 		var5 = if runService:IsClient() and players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
 		var4 = true

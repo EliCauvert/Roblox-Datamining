@@ -7,7 +7,6 @@ local inputFieldModule = require(components.InputField)
 local internalTextInputModule = require(components.InternalTextInput)
 local _ = require(foundation.Components.Types)
 local viewModule = require(components.View)
-local flagsModule = require(foundation.Utility.Flags)
 local useTextInputVariantsModule = require(foundation.Components.TextInput.useTextInputVariants)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
@@ -21,75 +20,75 @@ local t = {
 	size = inputSizeModule.Large
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | named "TextInput" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref), flagsModule (ref), viewModule (ref), iconModule (ref), iconButtonModule (ref)
-	local var15 = withDefaultsModule(p0, t)
-	local var16 = useTextInputVariantsModule(useTokensModule(), var15.size, var15.variant)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 51 | named "TextInput" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextInputVariantsModule (ref), reactModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), internalTextInputModule (ref), viewModule (ref), iconModule (ref), iconButtonModule (ref)
+	local var14 = withDefaultsModule(p0, t)
+	local var15 = useTextInputVariantsModule(useTokensModule(), var14.size, var14.variant)
 	
-	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var15, {
-		width = var15.width,
+	return reactModule.createElement(inputFieldModule, withCommonPropsModule(var14, {
+		width = var14.width,
 		ref = p1,
-		label = var15.label,
-		size = getInputTextSizeModule(var15.size),
-		isRequired = var15.isRequired,
-		isDisabled = var15.isDisabled,
-		hasError = var15.hasError,
-		hint = var15.hint,
-		textBoxRef = var15.textBoxRef,
-		input = function(p2) --[[ line: 69 ]]
-			-- upvalues: reactModule (copy), internalTextInputModule (copy), var15 (ref), flagsModule (copy), var16 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
-			local var18
+		label = var14.label,
+		size = getInputTextSizeModule(var14.size),
+		isRequired = var14.isRequired,
+		isDisabled = var14.isDisabled,
+		hasError = var14.hasError,
+		hint = var14.hint,
+		textBoxRef = var14.textBoxRef,
+		input = function(p2) --[[ line: 68 ]]
+			-- upvalues: reactModule (copy), internalTextInputModule (copy), var14 (ref), var15 (ref), viewModule (copy), iconModule (copy), iconButtonModule (copy)
+			local var17
 			local createElement = reactModule.createElement
 			local t = {
 				ref = p2,
-				inputRef = var15.inputRef,
-				hasError = var15.hasError,
-				isDisabled = var15.isDisabled,
-				hasClearButton = var15.hasClearButton,
-				text = var15.text,
-				textInputType = var15.textInputType,
-				focusBehavior = var15.focusBehavior,
-				size = var15.size,
-				variant = var15.variant,
-				Selectable = if flagsModule.FoundationInputSelectionProps then var15.Selectable else nil,
-				NextSelectionUp = if flagsModule.FoundationInputSelectionProps then var15.NextSelectionUp else nil,
-				NextSelectionDown = if flagsModule.FoundationInputSelectionProps then var15.NextSelectionDown else nil,
-				NextSelectionLeft = if flagsModule.FoundationInputSelectionProps then var15.NextSelectionLeft else nil,
-				NextSelectionRight = if flagsModule.FoundationInputSelectionProps then var15.NextSelectionRight else nil,
+				inputRef = var14.inputRef,
+				hasError = var14.hasError,
+				isDisabled = var14.isDisabled,
+				hasClearButton = var14.hasClearButton,
+				text = var14.text,
+				textInputType = var14.textInputType,
+				focusBehavior = var14.focusBehavior,
+				size = var14.size,
+				variant = var14.variant,
+				Selectable = var14.Selectable,
+				NextSelectionUp = var14.NextSelectionUp,
+				NextSelectionDown = var14.NextSelectionDown,
+				NextSelectionLeft = var14.NextSelectionLeft,
+				NextSelectionRight = var14.NextSelectionRight,
 				horizontalPadding = {
-					left = var16.container.horizontalPadding,
-					right = var16.container.horizontalPadding
+					left = var15.container.horizontalPadding,
+					right = var15.container.horizontalPadding
 				},
-				onChanged = var15.onChanged,
-				onFocus = var15.onFocusGained,
-				onFocusLost = var15.onFocusLost,
-				onReturnPressed = var15.onReturnPressed,
-				placeholder = var15.placeholder,
-				leadingElement = if var15.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
-					name = var15.leadingIcon,
-					style = var16.icon.style,
-					size = var16.icon.size
+				onChanged = var14.onChanged,
+				onFocus = var14.onFocusGained,
+				onFocusLost = var14.onFocusLost,
+				onReturnPressed = var14.onReturnPressed,
+				placeholder = var14.placeholder,
+				leadingElement = if var14.leadingIcon then reactModule.createElement(viewModule, { tag = "row align-y-center size-0-full auto-x" }, reactModule.createElement(iconModule, {
+					name = var14.leadingIcon,
+					style = var15.icon.style,
+					size = var15.icon.size
 				})) else nil
 			}
 			
-			if var15.iconTrailing then
-				var18 = reactModule.createElement
-				var18 = var18(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var15.iconTrailing) == "table" and var15.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
-					onActivated = var15.iconTrailing.onActivated,
-					isDisabled = var15.isDisabled,
-					size = var16.icon.size,
-					icon = var15.iconTrailing.name,
-					testId = `{var15.testId}--trailing-icon-button`
+			if var14.iconTrailing then
+				var17 = reactModule.createElement
+				var17 = var17(viewModule, { tag = "row align-y-center size-0-full auto-x" }, if type(var14.iconTrailing) == "table" and var14.iconTrailing.onActivated then reactModule.createElement(iconButtonModule, {
+					onActivated = var14.iconTrailing.onActivated,
+					isDisabled = var14.isDisabled,
+					size = var15.icon.size,
+					icon = var14.iconTrailing.name,
+					testId = `{var14.testId}--trailing-icon-button`
 				}) else reactModule.createElement(iconModule, {
-					name = if type(var15.iconTrailing) == "table" then var15.iconTrailing.name else var15.iconTrailing,
-					style = var16.icon.style,
-					size = var16.icon.size
+					name = if type(var14.iconTrailing) == "table" then var14.iconTrailing.name else var14.iconTrailing,
+					style = var15.icon.style,
+					size = var15.icon.size
 				}))
 			else
-				var18 = nil
+				var17 = nil
 			end
-			t.trailingElement = var18
-			t.testId = `{var15.testId}--internal-text-input`
+			t.trailingElement = var17
+			t.testId = `{var14.testId}--internal-text-input`
 			
 			return createElement(internalTextInputModule, t)
 		end

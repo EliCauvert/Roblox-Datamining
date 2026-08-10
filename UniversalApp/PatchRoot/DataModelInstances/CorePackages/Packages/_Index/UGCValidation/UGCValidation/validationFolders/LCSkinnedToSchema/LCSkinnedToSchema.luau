@@ -4,14 +4,13 @@ local constantsModule = require(parent.Constants)
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getEngineFeatureEngineUGCValidationExpandReturnSchemaModule = require(parent.flags.getEngineFeatureEngineUGCValidationExpandReturnSchema)
 
 return {
 	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
 	categories = { validationEnumsModule.UploadCategory.LAYERED_CLOTHING },
 	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p0, p1) --[[ line: 15 ]]
-		-- upvalues: UGCValidationService (ref), getEngineFeatureEngineUGCValidationExpandReturnSchemaModule (ref), constantsModule (ref), errorSourceStringsModule (ref)
+	run = function(p0, p1) --[[ line: 13 ]]
+		-- upvalues: UGCValidationService (ref), constantsModule (ref), errorSourceStringsModule (ref)
 		local handle = p1.rootInstance:FindFirstChild("Handle")
 		local handle_1 = p1.renderMeshesData.Handle
 		
@@ -29,14 +28,12 @@ return {
 		local editableEditableMeshSkinningTransferJointsInfo = UGCValidationService:GetEditableMeshSkinningTransferJointsInfo(handle_1.editable)
 		local wrapLayer = handle:FindFirstChildOfClass("WrapLayer")
 		assert(wrapLayer, "WrapLayer not found on handle")
-		local var10 = wrapLayer.AutoSkin == Enum.WrapLayerAutoSkin.EnabledOverride
+		local var9 = wrapLayer.AutoSkin == Enum.WrapLayerAutoSkin.EnabledOverride
+		p0:setReportingInstance(handle)
 		
-		if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
-			p0:setReportingInstance(handle)
-		end
 		for i_1, v_1 in t do
 			if constantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES[v_1] then
-				if not var10 then
+				if not var9 then
 					p0:fail(errorSourceStringsModule.Keys.AccessorySkinning_TransferJointWithoutAutoSkin, { jointName = v_1 })
 				end
 			elseif not constantsModule.R15_STANDARD_JOINT_NAMES[v_1] then
@@ -50,7 +47,7 @@ return {
 			end
 		end
 		if constantsModule.SkinningTransferRequiredTypes[p1.uploadEnum.assetType] then
-			if not var10 then
+			if not var9 then
 				p0:fail(errorSourceStringsModule.Keys.AccessorySkinning_RequiredSkinningTransfer, { assetType = p1.uploadEnum.assetType.Name })
 			end
 			for i_3, v_2 in constantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES do

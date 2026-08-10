@@ -1,20 +1,21 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
+local flagsModule = require(foundation.Utility.Flags)
 local numberInputControlsVariantModule = require(foundation.Enums.NumberInputControlsVariant)
 local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.InputVariant)
+local iconSizeModule = require(foundation.Enums.IconSize)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function computeProps(p0) --[[ line: 22 ]]
-	local var7 = if p0.width and p0.horizontalPadding then UDim.new(0, (p0.buttonWidth - p0.horizontalPadding) / 2) else nil
+local function computeProps(p0) --[[ line: 23 ]]
+	local var9 = if p0.width and p0.horizontalPadding then UDim.new(0, (p0.buttonWidth - p0.horizontalPadding) / 2) else nil
 	
 	return {
 		container = { width = p0.width },
 		button = {
 			tag = "fill size-full",
 			width = p0.buttonWidth,
-			padding = if var7 then { left = var7, right = var7 } else nil
+			padding = if var9 then { left = var9, right = var9 } else nil
 		},
 		upButton = { tag = p0.upButtonTag },
 		downButton = { tag = p0.downButtonTag },
@@ -23,15 +24,54 @@ local function computeProps(p0) --[[ line: 22 ]]
 	}
 end
 
-local function variantsFactory(p1) --[[ line: 65 ]]
-	-- upvalues: inputSizeModule (ref), computeProps (ref), numberInputControlsVariantModule (ref)
+local function variantsFactory(p1) --[[ line: 66 ]]
+	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref), computeProps (ref), numberInputControlsVariantModule (ref)
 	return {
-		common = {
+		common = if flagsModule.FoundationNumberInputBeta then {
+			controls = { tag = "row align-y-center bg-action-standard" }
+		} else {
 			upButton = { tag = "fill size-full padding-bottom-xsmall" },
 			downButton = { tag = "fill size-full padding-top-xsmall" },
 			icon = { tag = "content-default" }
 		},
-		sizes = {
+		sizes = if flagsModule.FoundationNumberInputBeta then {
+			[inputSizeModule.XSmall] = {
+				controls = {
+					tag = "radius-small",
+					width = p1.Size.Size_1200,
+					buttonSize = p1.Size.Size_600,
+					iconSize = iconSizeModule.XSmall,
+					radius = p1.Radius.Small
+				}
+			},
+			[inputSizeModule.Small] = {
+				controls = {
+					tag = "radius-medium",
+					width = p1.Size.Size_1600,
+					buttonSize = p1.Size.Size_800,
+					iconSize = iconSizeModule.Small,
+					radius = p1.Radius.Medium
+				}
+			},
+			[inputSizeModule.Medium] = {
+				controls = {
+					tag = "radius-medium",
+					width = p1.Size.Size_2000,
+					buttonSize = p1.Size.Size_1000,
+					iconSize = iconSizeModule.Medium,
+					radius = p1.Radius.Medium
+				}
+			},
+			[inputSizeModule.Large] = {
+				controls = {
+					tag = "radius-medium",
+					width = p1.Size.Size_2400,
+					buttonSize = p1.Size.Size_1200,
+					iconSize = iconSizeModule.Large,
+					radius = p1.Radius.Medium
+				}
+			}
+		} else {
 			[inputSizeModule.XSmall] = computeProps({
 				upButtonTag = "padding-top-xxsmall",
 				downButtonTag = "padding-bottom-xxsmall",
@@ -69,15 +109,15 @@ local function variantsFactory(p1) --[[ line: 65 ]]
 				splitButtonSize = p1.Size.Size_1200
 			})
 		},
-		controlVariants = {
+		controlVariants = if flagsModule.FoundationNumberInputBeta then nil else {
 			[numberInputControlsVariantModule.Stacked] = computeProps({ iconTag = "size-150-100" })
 		}
 	}
 end
 
-return function(p2, p3, p4) --[[ line: 126 ]]
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
+return function(p2, p3, p4) --[[ line: 174 ]]
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), composeStyleVariantModule (ref)
 	local numberInput = variantsContextModule.useVariants("NumberInput", variantsFactory, p2)
 	
-	return composeStyleVariantModule(numberInput.common, numberInput.sizes[p3], numberInput.controlVariants[p4])
+	return if flagsModule.FoundationNumberInputBeta then composeStyleVariantModule(numberInput.common, numberInput.sizes[p3]) else composeStyleVariantModule(numberInput.common, numberInput.sizes[p3], numberInput.controlVariants[p4])
 end

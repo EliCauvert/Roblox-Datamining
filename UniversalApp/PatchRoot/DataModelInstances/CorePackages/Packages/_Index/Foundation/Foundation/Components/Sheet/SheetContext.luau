@@ -20,6 +20,7 @@ return require(script:FindFirstAncestor("Foundation").Parent.React).createContex
 	testId = nil,
 	closeAffordanceRef = nil,
 	contentStartRef = nil,
+	isVerticalSheetGesture = nil,
 	setSheetHeightAvailable = function(_) --[[ line: 11 ]]
 		error("No SheetContext available")
 	end,

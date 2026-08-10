@@ -1,6 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local dashModule = require(foundation.Parent.Dash)
-local colorModeModule = require(foundation.Enums.ColorMode)
+local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Components.Types)
 local iconSizeModule = require(foundation.Enums.IconSize)
@@ -12,7 +12,7 @@ local constantsModule = require(foundation.Constants)
 local getSharedVariantsModule = require(foundation.Components.Button.getSharedVariants)
 
 local var10 = function(p0) --[[ line: 45 ]]
-	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref), iconSizeModule (ref), closeAffordanceVariantModule (ref), dashModule (ref), colorModeModule (ref), constantsModule (ref)
+	-- upvalues: getSharedVariantsModule (ref), inputSizeModule (ref), iconSizeModule (ref), closeAffordanceVariantModule (ref), dashModule (ref), colorNamespaceModule (ref), constantsModule (ref)
 	local var11 = getSharedVariantsModule(p0)
 	
 	return {
@@ -20,19 +20,19 @@ local var10 = function(p0) --[[ line: 45 ]]
 			container = { tag = "row align-x-center align-y-center auto-xy clip" }
 		},
 		types = {
-			[closeAffordanceVariantModule.OverMedia] = dashModule.map(colorModeModule, function() --[[ line: 101 ]]
+			[closeAffordanceVariantModule.OverMedia] = dashModule.map(colorNamespaceModule, function() --[[ line: 101 ]]
 				-- upvalues: p0 (ref)
 				return {
 					container = { tag = "bg-over-media-100" },
 					content = { style = p0.Color.Content.Emphasis }
 				}
 			end),
-			[closeAffordanceVariantModule.Utility] = dashModule.map(colorModeModule, function(p1) --[[ line: 107 ]]
+			[closeAffordanceVariantModule.Utility] = dashModule.map(colorNamespaceModule, function(p1) --[[ line: 107 ]]
 				-- upvalues: constantsModule (copy), p0 (ref)
 				return {
 					container = {
 						stateLayer = {
-							mode = constantsModule.COLOR_MODE_TO_STATE_LAYER_MODE[false][p1]
+							mode = constantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[false][p1]
 						}
 					},
 					content = { style = p0[p1].Content.Emphasis }
@@ -81,8 +81,8 @@ local var10 = function(p0) --[[ line: 45 ]]
 end
 
 return function(p2, p3, p4, p5, p6, p7) --[[ line: 138 ]]
-	-- upvalues: variantsContextModule (ref), var10 (ref), closeAffordanceVariantModule (ref), composeStyleVariantModule (ref), colorModeModule (ref)
+	-- upvalues: variantsContextModule (ref), var10 (ref), closeAffordanceVariantModule (ref), composeStyleVariantModule (ref), colorNamespaceModule (ref)
 	local closeAffordance = variantsContextModule.useVariants("CloseAffordance", var10, p2)
 	
-	return composeStyleVariantModule(closeAffordance.common, closeAffordance.types[p4][p5 or colorModeModule.Color], closeAffordance.sizes[p6][p3], closeAffordance.padding[p6], closeAffordance.circular[if p4 ~= closeAffordanceVariantModule.OverMedia then p7 else true])
+	return composeStyleVariantModule(closeAffordance.common, closeAffordance.types[p4][p5 or colorNamespaceModule.Color], closeAffordance.sizes[p6][p3], closeAffordance.padding[p6], closeAffordance.circular[if p4 ~= closeAffordanceVariantModule.OverMedia then p7 else true])
 end

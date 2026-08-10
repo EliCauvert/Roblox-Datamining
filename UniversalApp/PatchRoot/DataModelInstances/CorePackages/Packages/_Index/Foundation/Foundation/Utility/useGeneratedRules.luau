@@ -1,13 +1,19 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
+local _ = require(foundation.Enums.ColorMode)
 local _ = require(foundation.Enums.Device)
-local _ = require(foundation.Enums.Theme)
+local flagsModule = require(foundation.Utility.Flags)
+local _ = require(foundation.Enums.ThemeName)
 local getGeneratedRulesModule = require(foundation.Utility.getGeneratedRules)
 
-return function(p0, p1) --[[ line: 11 | named "useGeneratedRules" ]]
-	-- upvalues: reactModule (ref), getGeneratedRulesModule (ref)
-	return reactModule.useMemo(function() --[[ line: 12 ]]
-		-- upvalues: getGeneratedRulesModule (copy), p0 (ref), p1 (ref)
-		return getGeneratedRulesModule(p0, p1)
-	end, { p0, p1 })
+return function(p0, p1, p2) --[[ line: 15 | named "useGeneratedRules" ]]
+	-- upvalues: reactModule (ref), getGeneratedRulesModule (ref), flagsModule (ref)
+	return reactModule.useMemo(function() --[[ line: 16 ]]
+		-- upvalues: getGeneratedRulesModule (copy), flagsModule (copy), p0 (ref), p1 (ref), p2 (ref)
+		return getGeneratedRulesModule(if flagsModule.FoundationThemeName then p0 else nil, p1, p2)
+	end, {
+		if flagsModule.FoundationThemeName then p0 else nil,
+		p1,
+		p2
+	})
 end

@@ -48,13 +48,9 @@ Application.Settings.AppSettingsTitle,Настройки приложения
 Application.Settings.VRAccountSettingsExplanation,"Чтобы получить доступ к настройкам конфиденциальности, безопасности и пр. перейди на веб-сайт или вспомогательное устройство."
 Application.Settings.VRAccountSettingsSubtitle,Посети сайт или вспомогательное устройство
 Application.Settings.VolumeSliderDescription,"Контролируй общий уровень звука Roblox, включая эффекты меню, звук в плейсах и голосовой чат."
-Authentication.AccountPicker.Button.ContinueAsSignedIn,Продолжить как {displayName}
 Authentication.AccountPicker.Button.CreateAccount,Создать аккаунт
-Authentication.AccountPicker.Button.MoreOptions,Дополнительно
-Authentication.AccountPicker.Button.SignInAsAccount,Войти как {displayName}
 Authentication.AccountPicker.Button.SignIntoAnotherAccount,Войти в другой аккаунт
 Authentication.AccountPicker.Label.ManageAccounts,Управление аккаунтами
-Authentication.AccountPicker.Label.MoreOptions,
 Authentication.AccountPicker.Label.RemoveAccount,Удалить аккаунт?
 Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountRemove,Удалить
@@ -233,6 +229,7 @@ Authentication.Login.Response.UnableToSignIn,Невозможно выполни
 Authentication.Login.Response.UnknownError,
 Authentication.Login.Response.UnknownErrorLoginWithDifferentMethod,Что-то пошло не так. Попробуй выполнить вход другим способом.
 Authentication.Login.Response.UnverifiedEmailLoginWithUsername,"Этот адрес эл. почты не подтверждён. Войди, используя своё имя пользователя."
+Authentication.Login.WeChat.AntiAddictionText,"Не участвуй в плохих и пиратских проектах. Будь начеку, чтобы избежать обмана. Не проводи слишком много времени в сети, это может навредить здоровью. Разумно распределяй своё время и наслаждайся правильным образом жизни."
 Authentication.Login.WeChat.NotInstalled,WeChat не установлен
 Authentication.OneTimePasscode.Action.ChangeEmailV2,Изменить адрес эл. почты
 Authentication.OneTimePasscode.Action.Continue,Продолжить
@@ -443,6 +440,7 @@ CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.CloseRoblox,Закрыть Roblox
 CommonUI.Controls.Action.Confirm,Подтверждаю
 CommonUI.Controls.Action.Done,
+CommonUI.Controls.Action.Next,
 CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,Обновить
 CommonUI.Controls.Action.Search,Поиск
@@ -524,8 +522,6 @@ CommonUI.Features.Label.CreateGames,Studio
 CommonUI.Features.Label.CreationCenter,Центр создания
 CommonUI.Features.Label.DevSubs,Подписки
 CommonUI.Features.Label.Discover,Плейсы
-CommonUI.Features.Label.EngagementScreen.Continue,
-CommonUI.Features.Label.EngagementScreen.SwitchAccounts,Переключиться между аккаунтами {platform}
 CommonUI.Features.Label.Friends,Друзья
 CommonUI.Features.Label.Game,
 CommonUI.Features.Label.GiftCards,Гифткарты
@@ -638,7 +634,9 @@ CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Спонсируемые п�
 CoreScripts.BulkPurchasePrompt.CompletedPrompt.SuccessHeading,Покупка выполнена
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.InGameMenu.Cancel,
+CoreScripts.InGameMenu.Controls.RobloxMenu,Меню Roblox
 CoreScripts.InGameMenu.GameSettings.PartyVoiceVolume,Громкость голоса в команде
+CoreScripts.InGameMenu.GameSettings.UINavToggle,Переключатель навигации по интерфейсу
 CoreScripts.InGameMenu.GameSettings.Volume,Громкость
 CoreScripts.InGameMenu.Leave,Выйти
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Пригласить друзей
@@ -708,6 +706,7 @@ CoreScripts.TextChat.Version.Success,{RBX_VERSION}
 CoreScripts.TextChat.Whisper.Error.CannotChat,Ты не можешь общаться с этим пользователем.
 CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[От: {RBX_NAME}]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[Для: {RBX_NAME}]
+CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
 CoreScripts.TopBar.Label.InappropriateAudio,Недопустимое аудио
 CoreScripts.TopBar.Label.Report,Пожаловаться
@@ -734,7 +733,7 @@ Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.PreferredTextSize,Размер текста
 Feature.Accessibility.Heading.PreferredTransparency,Прозрачность фона
 Feature.Accessibility.Heading.ReducedMotion,Уменьшить движение
-Feature.Accessibility.Heading.UiNavigationKeyBind,Переключатель навигации по интерфейсу
+Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.PreferredTextSize.Default,По умолчанию
 Feature.Accessibility.PreferredTextSize.Largest,Самый большой
 Feature.Accessibility.PreferredTransparency.Opaque,Непрозрачный
@@ -1784,19 +1783,15 @@ Feature.ContactUpsell.Action.AddEmailInstead,
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Header.UnlockVoiceChat,Включи голосовой чат
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Пусть друзья находят тебя!
-Feature.Contacts.Action.FindFriends,Найти друзей
 Feature.Contacts.Action.Invite,Пригласить
 Feature.Contacts.Action.Search,
-Feature.Contacts.Action.SyncContacts,Синхронизировать контакты
 Feature.Contacts.Description.ContactsList,"С кем бы тебе хотелось исследовать Roblox? Отправь ссылку, чтобы стать друзьями в Roblox!"
 Feature.Contacts.Description.ContactsMixedList,С кем бы тебе хотелось познакомиться в Roblox? Добавь друзей на Roblox или отправь контактам ссылку на запрос дружбы.
 Feature.Contacts.Description.ContactsProfileView,"Твой контакт {contactName} зарегистрирован в Roblox. После того как вы станете друзьями, ты сможешь увидеть его полный профиль."
-Feature.Contacts.Description.ExploreWithFriends,Присоединяйся к следующему плейсу со знакомыми
-Feature.Contacts.FindFriendsBanner.Button,
+Feature.Contacts.FindFriendsBanner.Button,Найти друзей
 Feature.Contacts.FindFriendsBanner.Description,"Посмотри, кто из твоих друзей зарегистрированы в Roblox, добавив свой номер телефона."
 Feature.Contacts.FindFriendsBanner.DescriptionPV,"Контакты, которые зарегистрированы в Roblox, появятся здесь, когда они будут доступны."
 Feature.Contacts.FindFriendsBanner.DescriptionV2,"Помоги нам связать тебя с друзьями, добавив номер телефона."
-Feature.Contacts.Heading.ExploreWithFriends,Исследуй с друзьями
 Feature.Contacts.Heading.HelpFriendsFindYou,Пусть друзья тебя находят
 Feature.Contacts.Heading.LetFriendsFindYou,Пусть тебя находят друзья
 Feature.Contacts.Heading.SettingSaved,Настройка сохранена.
@@ -2120,7 +2115,6 @@ Feature.GameDetails.Message.HidingExperienceQuestion,Почему ты скры�
 Feature.GameDetails.Message.LeavingRobloxTitle,Ты покидаешь Roblox
 Feature.GameDetails.Message.PurchaseGame,Разблокировать доступ к игре {gameName} за {X} Robux?
 Feature.GameDetails.Message.PurchaseGameV2,
-Feature.GameDetails.Message.SuggestLessExperiences,Мы предложим меньше таких плейсов
 Feature.GameDetails.Message.SuggestLessOften,Мы будем предлагать это реже
 Feature.GameDetails.RatingPercentOnly,Рейтинг {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -2288,7 +2282,6 @@ Feature.InExperienceIntervention.Heading.DontSharePersonalInformation,Не де�
 Feature.InExperienceIntervention.Heading.PartyChatSuspended,Действие чата приостановлено на {remainingTime}
 Feature.InExperienceIntervention.Heading.TakeALook,Мы разберёмся
 Feature.InExperienceIntervention.Heading.TextChatSuspension,Приостановка чата
-Feature.Landing.Heading.LandingSlogan,Исследуй более 30 миллионов плейсов
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,
 Feature.Landing.Label.BrazilContentDescriptorViolence,Насилие
 Feature.Landing.Label.BrazilContentRatingLogoTitle,Рекомендуемый возраст: 12 лет
@@ -3186,6 +3179,13 @@ IAPExperience.U13Confirm.Title.Warning,Предупреждение!
 InGame.CommonUI.Button.KeepPlaying,Продолжить играть
 InGame.CommonUI.Button.Retry,
 InGame.CommonUI.Label.FAQWebviewTitle,FAQ по функции голоса
+InGame.ConnectionError.Action.Restart,Перезапустить
+InGame.ConnectionError.Heading.VRDisconnected,Наушники отключены
+InGame.ConnectionError.Joining,Подключение к серверу
+InGame.ConnectionError.Message.RestartApp,"Чтобы продолжить играть, перезапусти приложение."
+InGame.ConnectionError.PlacelaunchGameEnded,"Этот плейс закрылся, или сервер стал недоступен из-за ошибки системы"
+InGame.ConnectionError.PlacelaunchHttpError,Произошла ошибка Http. Закрой клиент и попробуй снова.
+InGame.ConnectionError.Queue,Место в очереди: {POSITION}
 InGame.EmotesMenu.ErrorMessageAnimationPlaying,Во время этого действия эмоции недоступны.
 InGame.EmotesMenu.ErrorMessageNotSupported,Здесь нельзя использовать эмоции.
 InGame.EmotesMenu.ErrorMessageSwitchToR15,"Переключись на аватара R15, чтобы использовать эмоции."

@@ -4,12 +4,11 @@ local dashModule = require(parent.Dash)
 local otterModule = require(parent.Otter)
 local reactModule = require(parent.React)
 local reactOtterModule = require(parent.ReactOtter)
-local controlStateModule = require(foundation.Enums.ControlState)
+local _ = require(foundation.Enums.FillBehavior)
 local flagsModule = require(foundation.Utility.Flags)
 local iconButtonModule = require(foundation.Components.IconButton)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local scrollViewModule = require(foundation.Components.ScrollView)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local visibilityModule = require(foundation.Enums.Visibility)
@@ -25,7 +24,7 @@ local numberSequence_1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(1, 0)
 })
 
-local function OverflowButton(p0) --[[ line: 35 ]]
+local function OverflowButton(p0) --[[ line: 34 ]]
 	-- upvalues: reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconButtonModule (ref), inputSizeModule (ref)
 	return reactModule.createElement(viewModule, withCommonPropsModule(p0, {
 		tag = `col align-y-center size-0-full auto-x bg-surface-0 {p0.tag}`
@@ -39,22 +38,14 @@ local function OverflowButton(p0) --[[ line: 35 ]]
 	})
 end
 
-return function(p1) --[[ line: 72 | named "OverflowScrollContainer" ]]
-	-- upvalues: reactModule (ref), flagsModule (ref), reactOtterModule (ref), dashModule (ref), otterModule (ref), controlStateModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), stateLayerAffordanceModule (ref), visibilityModule (ref), OverflowButton (ref), numberSequence (ref), numberSequence_1 (ref)
+return function(p1) --[[ line: 73 | named "OverflowScrollContainer" ]]
+	-- upvalues: reactModule (ref), reactOtterModule (ref), dashModule (ref), otterModule (ref), flagsModule (ref), viewModule (ref), withCommonPropsModule (ref), scrollViewModule (ref), visibilityModule (ref), OverflowButton (ref), numberSequence (ref), numberSequence_1 (ref)
+	local var15, var16 = reactModule.useBinding(false)
 	local var17, var18 = reactModule.useBinding(false)
-	local var19, var20 = reactModule.useBinding(false)
-	local var21 = nil
-	local var22 = nil
-	
-	if flagsModule.FoundationTabsNavArrowsOnlyOnHover then
-		local var23, var24 = reactModule.useState(false)
-		var21 = var23
-		var22 = var24
-	end
-	local var25 = reactModule.useRef(nil)
-	local var26 = reactOtterModule.useMotor(0, function(p2) --[[ line: 80 ]]
-		-- upvalues: var25 (ref)
-		local current = var25.current
+	local var19 = reactModule.useRef(nil)
+	local var20 = reactOtterModule.useMotor(0, function(p2) --[[ line: 77 ]]
+		-- upvalues: var19 (ref)
+		local current = var19.current
 		
 		if current then
 			current.CanvasPosition = Vector2.new(p2, 0)
@@ -62,55 +53,52 @@ return function(p1) --[[ line: 72 | named "OverflowScrollContainer" ]]
 			return
 		end
 	end)
-	local var27 = reactModule.useCallback(dashModule.throttle(function(p3) --[[ line: 89 ]]
-		-- upvalues: var18 (ref), var20 (ref)
+	local var21 = reactModule.useCallback(dashModule.throttle(function(p3) --[[ line: 86 ]]
+		-- upvalues: var16 (ref), var18 (ref)
 		if p3.AbsoluteWindowSize.X == 0 then
 			return
 		end
-		var18(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
-		var20(p3.CanvasPosition.X ~= 0)
+		var16(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
+		var18(p3.CanvasPosition.X ~= 0)
 	end, 0.2), {})
-	local var28 = reactModule.useCallback(function(p4) --[[ line: 102 ]]
-		-- upvalues: var25 (ref), var26 (ref), otterModule (copy)
-		local current = var25.current
+	local var22 = reactModule.useCallback(function(p4) --[[ line: 99 ]]
+		-- upvalues: var19 (ref), var20 (ref), otterModule (copy)
+		local current = var19.current
 		
 		if current then
-			var26(otterModule.ease(current.CanvasPosition.X + p4, { duration = 0.2, easingStyle = Enum.EasingStyle.Quad }))
+			var20(otterModule.ease(current.CanvasPosition.X + p4, { duration = 0.2, easingStyle = Enum.EasingStyle.Quad }))
 			
 			return
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 116 ]]
-		-- upvalues: var25 (ref), var27 (ref)
-		if var25.current then
-			var27(var25.current)
+	reactModule.useEffect(function() --[[ line: 113 ]]
+		-- upvalues: var19 (ref), var21 (ref)
+		if var19.current then
+			var21(var19.current)
 		end
 	end, {})
+	local var23 = if flagsModule.FoundationFixTabsFitBorderWidth and p1.fitWidth then p1.fitWidth:map(function(p5) --[[ line: 128 ]]
+		return UDim2.fromOffset(p5, 0)
+	end) else nil
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, if flagsModule.FoundationTabsInlineSizeFull then { tag = "auto-y", Size = UDim2.fromScale(1, 0) } else { tag = "size-full-0 auto-y" }), {
+	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
+		tag = "auto-y",
+		Size = if flagsModule.FoundationFixTabsFitBorderWidth and var23 then var23 else UDim2.fromScale(1, 0)
+	}), {
 		Scroll = reactModule.createElement(scrollViewModule, {
 			LayoutOrder = 1,
-			tag = if flagsModule.FoundationTabsInlineSizeFull then if flagsModule.FoundationTabsNavArrowsOnlyOnHover then "auto-y" else nil else {
-				["size-full-0 auto-y"] = flagsModule.FoundationTabsNavArrowsOnlyOnHover,
-				["size-full"] = not flagsModule.FoundationTabsNavArrowsOnlyOnHover
-			},
-			Size = if flagsModule.FoundationTabsInlineSizeFull then if flagsModule.FoundationTabsNavArrowsOnlyOnHover then UDim2.fromScale(1, 0) else UDim2.fromScale(1, 1) else nil,
-			onStateChanged = if flagsModule.FoundationTabsNavArrowsOnlyOnHover then if flagsModule.FoundationTabsNavArrowsOnlyOnHover then reactModule.useCallback(function(p5) --[[ line: 131 ]]
-				-- upvalues: var22 (write), controlStateModule (copy)
-				var22(p5 == controlStateModule.Hover)
-			end, {}) else nil else nil,
-			stateLayer = if flagsModule.FoundationTabsNavArrowsOnlyOnHover then { affordance = stateLayerAffordanceModule.None } else nil,
-			onCanvasPositionChanged = var27,
-			onAbsoluteWindowSizeChanged = var27,
-			scrollingFrameRef = var25,
+			tag = if flagsModule.FoundationFixTabsFitBorderWidth then "auto-y" else nil,
+			Size = if flagsModule.FoundationFixTabsFitBorderWidth and var23 then var23 else UDim2.fromScale(1, 1),
+			onCanvasPositionChanged = var21,
+			onAbsoluteWindowSizeChanged = var21,
+			scrollingFrameRef = var19,
 			selection = { Selectable = false },
 			scroll = {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				scrollBarVisibility = visibilityModule.None
-			},
-			testId = if flagsModule.FoundationTabsNavArrowsOnlyOnHover then `{p1.testId}--scroll` else nil
+			}
 		}, p1.children),
 		OverflowStart = reactModule.createElement(OverflowButton, {
 			LayoutOrder = 3,
@@ -120,14 +108,11 @@ return function(p1) --[[ line: 72 | named "OverflowScrollContainer" ]]
 			icon = "chevron-large-left",
 			Position = UDim2.fromScale(0, 0),
 			size = p1.size,
-			Visible = if flagsModule.FoundationTabsNavArrowsOnlyOnHover then var19:map(function(p6) --[[ line: 185 ]]
-				-- upvalues: var21 (write)
-				return var21 and p6
-			end) else var19,
-			onActivated = reactModule.useCallback(function() --[[ line: 122 ]]
-				-- upvalues: var28 (ref)
-				var28(-90)
-			end, { var28 }),
+			Visible = var17,
+			onActivated = reactModule.useCallback(function() --[[ line: 119 ]]
+				-- upvalues: var22 (ref)
+				var22(-90)
+			end, { var22 }),
 			gradient = numberSequence,
 			testId = `{p1.testId}--overflow-start`
 		}),
@@ -138,14 +123,11 @@ return function(p1) --[[ line: 72 | named "OverflowScrollContainer" ]]
 			icon = "chevron-large-right",
 			Position = UDim2.fromScale(1, 0),
 			size = p1.size,
-			Visible = if flagsModule.FoundationTabsNavArrowsOnlyOnHover then var17:map(function(p7) --[[ line: 201 ]]
-				-- upvalues: var21 (write)
-				return var21 and p7
-			end) else var17,
-			onActivated = reactModule.useCallback(function() --[[ line: 126 ]]
-				-- upvalues: var28 (ref)
-				var28(90)
-			end, { var28 }),
+			Visible = var15,
+			onActivated = reactModule.useCallback(function() --[[ line: 123 ]]
+				-- upvalues: var22 (ref)
+				var22(90)
+			end, { var22 }),
 			gradient = numberSequence_1,
 			testId = `{p1.testId}--overflow-end`
 		})

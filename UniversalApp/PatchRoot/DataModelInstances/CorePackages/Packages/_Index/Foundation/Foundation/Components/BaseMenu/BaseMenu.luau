@@ -1,7 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
 local flagsModule = require(foundation.Utility.Flags)
-local scrollViewModule = require(foundation.Components.ScrollView)
 local viewModule = require(foundation.Components.View)
 local useScaledValueModule = require(foundation.Utility.useScaledValue)
 local useBindableModule = require(foundation.Utility.useBindable)
@@ -12,6 +11,7 @@ local radiusModule = require(foundation.Enums.Radius)
 local _ = require(foundation.Components.Types)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local baseMenuContextModule = require(script.Parent.BaseMenuContext)
+local baseMenuScrollContainerModule = require(script.Parent.BaseMenuScrollContainer)
 local useSubmenuHoverModule = require(script.Parent.useSubmenuHover)
 local declarativeBaseMenuContentModule = require(script.Parent.DeclarativeBaseMenuContent)
 local t = { size = inputSizeModule.Medium }
@@ -20,143 +20,99 @@ local t_1 = {
 	[radiusModule.Medium] = "radius-medium"
 }
 
-local function computeAutomaticSize(p0) --[[ line: 67 ]]
-	return if p0.autoSize then if p0.isOverMaxHeight then Enum.AutomaticSize.X else Enum.AutomaticSize.XY elseif p0.isOverMaxHeight then Enum.AutomaticSize.None else Enum.AutomaticSize.Y
-end
-
-local function computeSize(p1) --[[ line: 73 ]]
-	local var18 = if p1.isOverMaxHeight and p1.maxHeight then UDim.new(0, p1.maxHeight) else UDim.new()
-	
-	return if p1.autoSize then UDim2.new(UDim.new(), var18) else UDim2.new(p1.width or UDim.new(), var18)
-end
-
-return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 83 | named "BaseMenu" ]]
-	-- upvalues: reactModule (ref), t (ref), withDefaultsModule (ref), useBindableModule (ref), useScaledValueModule (ref), useSubmenuHoverModule (ref), declarativeBaseMenuContentModule (ref), t_1 (ref), computeAutomaticSize (ref), scrollViewModule (ref), withCommonPropsModule (ref), flagsModule (ref), computeSize (ref), viewModule (ref), baseMenuContextModule (ref)
-	local var19, var20 = reactModule.useBinding(false)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | named "BaseMenu" ]]
+	-- upvalues: reactModule (ref), t (ref), withDefaultsModule (ref), useBindableModule (ref), useScaledValueModule (ref), useSubmenuHoverModule (ref), flagsModule (ref), declarativeBaseMenuContentModule (ref), t_1 (ref), baseMenuContextModule (ref), baseMenuScrollContainerModule (ref), withCommonPropsModule (ref), viewModule (ref)
+	local var16, var17 = reactModule.useBinding(false)
 	local cloned = table.clone(t)
-	cloned.Visible = var19
-	local var22 = withDefaultsModule(p2, cloned)
-	local var23 = useBindableModule(var22.width)
-	local var24 = useBindableModule(var22.maxHeight)
-	local var25 = useScaledValueModule(260)
-	local var26 = useScaledValueModule(320)
-	local var27, var28 = reactModule.useState(false)
-	local var29, var30 = reactModule.useBinding(UDim2.fromScale(0, 1))
-	local var31 = useSubmenuHoverModule()
-	reactModule.useEffect(function() --[[ line: 96 ]]
-		-- upvalues: var20 (ref)
-		task.delay(0, function() --[[ line: 97 ]]
-			-- upvalues: var20 (copy)
-			var20(true)
+	cloned.Visible = var16
+	local var19 = withDefaultsModule(p0, cloned)
+	local var20 = useBindableModule(var19.width)
+	local var21 = useBindableModule(var19.maxHeight)
+	local var22 = useScaledValueModule(260)
+	local var23 = useScaledValueModule(320)
+	local var24, var25 = reactModule.useState(false)
+	local var26 = useSubmenuHoverModule()
+	reactModule.useEffect(function() --[[ line: 81 ]]
+		-- upvalues: var17 (ref)
+		task.delay(0, function() --[[ line: 82 ]]
+			-- upvalues: var17 (copy)
+			var17(true)
 		end)
 	end, {})
-	local var32 = reactModule.useCallback(function() --[[ line: 102 ]]
-		-- upvalues: var28 (ref)
-		var28(true)
+	local var27 = reactModule.useCallback(function() --[[ line: 87 ]]
+		-- upvalues: var25 (ref)
+		var25(true)
 	end, {})
-	local var33 = reactModule.useMemo(function() --[[ line: 107 ]]
-		-- upvalues: var23 (ref), var25 (ref)
-		return var23:map(function(p4) --[[ line: 108 ]]
-			-- upvalues: var25 (copy)
-			return if p4 then p4.Offset else var25
+	local var28 = reactModule.useMemo(function() --[[ line: 92 ]]
+		-- upvalues: var20 (ref), flagsModule (copy), var22 (ref)
+		return var20:map(function(p2) --[[ line: 93 ]]
+			-- upvalues: flagsModule (copy), var22 (copy)
+			return if p2 then p2.Offset elseif flagsModule.FoundationBaseMenuContentSizing then 0 else var22
 		end)
-	end, { var23, var25 })
-	local var34 = reactModule.useMemo(function() --[[ line: 114 ]]
-		-- upvalues: var23 (ref), var22 (ref), var26 (ref)
-		return var23:map(function(p5) --[[ line: 115 ]]
-			-- upvalues: var22 (copy), var26 (copy)
-			return not p5 or var22.couldGrow and p5.Offset < var26
+	end, { var20, var22 })
+	local var29 = reactModule.useMemo(function() --[[ line: 101 ]]
+		-- upvalues: var20 (ref), flagsModule (copy), var19 (ref), var23 (ref)
+		return var20:map(function(p3) --[[ line: 102 ]]
+			-- upvalues: flagsModule (copy), var19 (copy), var23 (copy)
+			return if flagsModule.FoundationBaseMenuContentSizing then not p3 or var19.couldGrow == true else not p3 or (var19.couldGrow == true and p3.Offset < var23)
 		end)
-	end, { var23, var26, var22.couldGrow })
-	local var35 = reactModule.useMemo(function() --[[ line: 120 ]]
-		-- upvalues: reactModule (copy), var34 (ref), var33 (ref), var26 (ref)
+	end, { var20, var23, var19.couldGrow })
+	local var30 = reactModule.useMemo(function() --[[ line: 110 ]]
+		-- upvalues: reactModule (copy), var29 (ref), var28 (ref), flagsModule (copy), var23 (ref)
 		return {
-			MinSize = reactModule.joinBindings({ var34, var33 }):map(function(p6) --[[ line: 122 ]]
-				return if p6[1] then Vector2.new(p6[2], 0) else nil
+			MinSize = reactModule.joinBindings({ var29, var28 }):map(function(p4) --[[ line: 112 ]]
+				-- upvalues: flagsModule (copy)
+				local var33 = p4[2]
+				
+				return if p4[1] then if flagsModule.FoundationBaseMenuContentSizing and var33 == 0 then nil else Vector2.new(var33, 0) else nil
 			end),
-			MaxSize = var34:map(function(p7) --[[ line: 127 ]]
-				-- upvalues: var26 (copy)
-				return if p7 then Vector2.new(var26, 1e999) else nil
+			MaxSize = if flagsModule.FoundationBaseMenuContentSizing then nil else var29:map(function(p5) --[[ line: 124 ]]
+				-- upvalues: var23 (copy)
+				return if p5 then Vector2.new(var23, 1e999) else nil
 			end)
 		}
-	end, { var34, var33, var26 })
-	local var36 = reactModule.useMemo(function() --[[ line: 133 ]]
-		-- upvalues: reactModule (copy), var29 (ref), var24 (ref)
-		return reactModule.joinBindings({ canvasSize = var29, maxHeight = var24 }):map(function(p8) --[[ line: 135 ]]
-			return p8.maxHeight ~= nil and p8.maxHeight < p8.canvasSize.Y.Offset
-		end)
-	end, { var24 })
-	local var37 = reactModule.useCallback(function(p9) --[[ line: 140 ]]
-		-- upvalues: var30 (ref)
-		return var30(UDim2.fromOffset(p9.AbsoluteSize.X, p9.AbsoluteSize.Y))
-	end, { var30 })
-	local children = var22.children
+	end, { var29, var28, var23 })
+	local children = var19.children
 	
-	if not children and var22.items then
-		children = reactModule.createElement(declarativeBaseMenuContentModule, { items = var22.items, size = var22.size })
+	if not children and var19.items then
+		children = reactModule.createElement(declarativeBaseMenuContentModule, { items = var19.items, size = var19.size })
 	end
-	local var38 = if var22.radius ~= nil then "" else t_1[var22.radius]
-	
-	if var22.maxHeight then
-		local var39 = reactModule.joinBindings({ autoSize = var34, isOverMaxHeight = var36 }):map(computeAutomaticSize)
-		
-		return reactModule.createElement(scrollViewModule, withCommonPropsModule(var22, {
-			ref = p3,
-			scroll = {
-				AutomaticCanvasSize = if flagsModule.FoundationBaseMenuAutoYCanvasSizing then Enum.AutomaticSize.Y else nil,
-				AutomaticSize = var39,
-				ScrollingDirection = Enum.ScrollingDirection.Y,
-				CanvasSize = var29
-			},
-			AutomaticSize = var39,
-			Size = reactModule.joinBindings({
-				autoSize = var34,
-				width = var23,
-				isOverMaxHeight = var36,
-				maxHeight = var24
-			}):map(computeSize),
-			sizeConstraint = var35,
-			tag = `stroke-standard stroke-default {var38}`
-		}), reactModule.createElement(viewModule, {
-			tag = if flagsModule.FoundationBaseMenuAutoYCanvasSizing then "col size-full-0 auto-y" else "col size-full",
-			onAbsoluteSizeChanged = var37
-		}, reactModule.createElement(baseMenuContextModule.Provider, {
-			value = {
-				depth = 1,
-				onActivated = var22.onActivated,
-				onNestedLeafActivated = var22.onNestedLeafActivated,
-				size = var22.size,
-				hasLeading = var27,
-				setHasLeading = var32,
-				hoverOpenPath = var31.openPath,
-				hoverOpenAtDepth = var31.openAtDepth,
-				hoverCloseAtDepth = var31.closeAtDepth,
-				hoverReset = var31.reset
-			}
-		}, children)))
-	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var22, {
-		tag = `col stroke-standard stroke-default {var38}`,
-		AutomaticSize = var34:map(function(p10) --[[ line: 210 ]]
-			return if p10 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
-		end),
-		Size = reactModule.joinBindings({ var34, var23 }):map(function(p11) --[[ line: 213 ]]
-			return if p11[1] then nil else UDim2.new(p11[2], UDim.new())
-		end),
-		ref = p3,
-		sizeConstraint = var35
-	}), reactModule.createElement(baseMenuContextModule.Provider, {
+	local var31 = if var19.radius ~= nil then "" else t_1[var19.radius]
+	local var32 = reactModule.createElement(baseMenuContextModule.Provider, {
 		value = {
 			depth = 1,
-			onActivated = var22.onActivated,
-			onNestedLeafActivated = var22.onNestedLeafActivated,
-			size = var22.size,
-			hasLeading = var27,
-			setHasLeading = var32,
-			hoverOpenPath = var31.openPath,
-			hoverOpenAtDepth = var31.openAtDepth,
-			hoverCloseAtDepth = var31.closeAtDepth,
-			hoverReset = var31.reset
+			onActivated = var19.onActivated,
+			onNestedLeafActivated = var19.onNestedLeafActivated,
+			size = var19.size,
+			hasLeading = var24,
+			setHasLeading = var27,
+			hoverOpenPath = var26.openPath,
+			hoverOpenAtDepth = var26.openAtDepth,
+			hoverCloseAtDepth = var26.closeAtDepth,
+			hoverReset = var26.reset,
+			maxHeight = var19.maxHeight
 		}
-	}, children))
+	}, children)
+	
+	return if var19.maxHeight then reactModule.createElement(baseMenuScrollContainerModule, {
+		maxHeight = var21,
+		autoSize = var29,
+		width = var20,
+		scrollViewProps = withCommonPropsModule(var19, {
+			ref = p1,
+			sizeConstraint = var30,
+			scrollingFrameRef = var19.scrollingFrameRef,
+			tag = `stroke-standard stroke-default {var31}`
+		})
+	}, var32) else reactModule.createElement(viewModule, withCommonPropsModule(var19, {
+		tag = `col stroke-standard stroke-default {var31}`,
+		AutomaticSize = var29:map(function(p6) --[[ line: 173 ]]
+			return if p6 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
+		end),
+		Size = reactModule.joinBindings({ var29, var20 }):map(function(p7) --[[ line: 176 ]]
+			return if p7[1] then nil else UDim2.new(p7[2], UDim.new())
+		end),
+		ref = p1,
+		sizeConstraint = var30
+	}), var32)
 end))

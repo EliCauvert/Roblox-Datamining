@@ -1,18 +1,8 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
 local constantsModule = require(foundation.Constants)
-local wrappersModule = require(foundation.Utility.Wrappers)
-local coreGui = wrappersModule.Services.CoreGui
-local runService = wrappersModule.Services.RunService
-local players = wrappersModule.Services.Players
 local flagsModule = require(foundation.Utility.Flags)
-local var4 = nil
-
-if not flagsModule.FoundationUseMainGuiUtility then
-	var4 = if players.LocalPlayer and runService:IsRunning() then players.LocalPlayer:WaitForChild("PlayerGui", 3) else nil
-end
 local getMainGuiModule = require(foundation.Utility.getMainGui)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local useStyleSheet = require(foundation.Providers.Style.StyleSheetContext).useStyleSheet
 local _ = require(foundation.Components.Types)
@@ -21,44 +11,44 @@ local useKeyboardAwareSizeModule = require(script.Parent.useKeyboardAwareSize)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local t = { DisplayOrder = constantsModule.MAX_LAYOUT_ORDER - 1 }
-local var13 = if flagsModule.FoundationUseMainGuiUtility then getMainGuiModule() elseif isPluginSecurityModule() then coreGui else var4
+local var10 = if flagsModule.FoundationOverlayResilientMainGui then nil else getMainGuiModule()
 
-return function(p0) --[[ line: 45 | named "OverlayProvider" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), useKeyboardAwareSizeModule (ref), useStyleSheet (ref), var13 (ref), overlayContextModule (ref), reactRobloxModule (ref)
-	local var14 = withDefaultsModule(p0, t)
-	local var15, var16 = reactModule.useState(var14.gui)
-	local var17, var18 = reactModule.useState(false)
-	local var19 = if flagsModule.FoundationOverlayKeyboardAwarenessHardened and not var14.gui then var15 and var15.Parent else nil
+return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useKeyboardAwareSizeModule (ref), useStyleSheet (ref), flagsModule (ref), getMainGuiModule (ref), var10 (ref), overlayContextModule (ref), reactRobloxModule (ref)
+	local var11 = withDefaultsModule(p0, t)
+	local var12, var13 = reactModule.useState(var11.gui)
+	local var14, var15 = reactModule.useState(false)
+	local var16 = if not var11.gui then var12 and var12.Parent else nil
+	local var17 = if not flagsModule.FoundationOverlayResilientMainGui then if var11.gui == nil and var14 then getMainGuiModule() else nil else var10
 	
 	return reactModule.createElement(overlayContextModule.Provider, {
 		value = {
-			requestOverlay = reactModule.useCallback(function() --[[ line: 57 ]]
-				-- upvalues: var14 (ref), var18 (ref)
-				if var14.gui == nil then
-					var18(true)
+			requestOverlay = reactModule.useCallback(function() --[[ line: 38 ]]
+				-- upvalues: var11 (ref), var15 (ref)
+				if var11.gui == nil then
+					var15(true)
 				end
-			end, { var14.gui }),
-			instance = if var14.gui ~= nil then var15 else var14.gui,
-			screen = if flagsModule.FoundationOverlayKeyboardAwarenessHardened then if var14.gui ~= nil then var19 else var14.gui else nil
+			end, { var11.gui }),
+			instance = if var11.gui ~= nil then var12 else var11.gui,
+			screen = if var11.gui ~= nil then var16 else var11.gui
 		}
 	}, {
-		FoundationOverlay = if var14.gui == nil and (var13 ~= nil and var17) then reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
+		FoundationOverlay = if var11.gui == nil and (var17 ~= nil and var14) then reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
 			Enabled = true,
 			ClipToDeviceSafeArea = false,
-			DisplayOrder = var14.DisplayOrder,
+			DisplayOrder = var11.DisplayOrder,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 			ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets,
-			SafeAreaCompatibility = Enum.SafeAreaCompatibility.None,
-			ref = if not flagsModule.FoundationOverlayKeyboardAwareness then var16 else nil
+			SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 		}, {
-			SafeAreaFrame = if flagsModule.FoundationOverlayKeyboardAwareness then reactModule.createElement("Frame", {
+			SafeAreaFrame = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = if flagsModule.FoundationOverlayKeyboardAwareness then useKeyboardAwareSizeModule(if flagsModule.FoundationOverlayKeyboardAwarenessHardened then var19 else var15) else nil,
-				ref = var16
-			}) else nil,
+				Size = useKeyboardAwareSizeModule(var16),
+				ref = var13
+			}),
 			FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() })
-		}), var13) else nil,
-		Children = reactModule.createElement(reactModule.Fragment, nil, var14.children)
+		}), var17) else nil,
+		Children = reactModule.createElement(reactModule.Fragment, nil, var11.children)
 	})
 end

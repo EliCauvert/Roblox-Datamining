@@ -29,12 +29,11 @@ local function computeProps(p0) --[[ line: 62 ]]
 end
 
 local function variantsFactory(p1) --[[ line: 92 ]]
-	-- upvalues: flagsModule (ref), inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), builderIconsModule (ref)
+	-- upvalues: inputSizeModule (ref), computeProps (ref), iconSizeModule (ref), builderIconsModule (ref), flagsModule (ref)
 	return {
 		common = {
 			container = {
 				tag = "row",
-				bgStyle = if flagsModule.FoundationTextInputRemoveBackgroundStyle then nil else p1.Color.Shift.Shift_100,
 				strokeStyle = p1.Color.Stroke.Emphasis,
 				strokeThickness = p1.Stroke.Standard
 			},
@@ -68,7 +67,7 @@ local function variantsFactory(p1) --[[ line: 92 ]]
 			[inputSizeModule.Medium] = computeProps({
 				containerTag = "size-full-1000 gap-large",
 				radius = p1.Radius.Medium,
-				horizontalPadding = if flagsModule.FoundationSupportPrefixSuffixNumberInput then p1.Padding.Medium else p1.Padding.Small,
+				horizontalPadding = if flagsModule.FoundationNumberInputBeta then p1.Padding.Medium else p1.Padding.Small,
 				typography = p1.Typography.BodyMedium,
 				iconSize = iconSizeModule.Small,
 				minContainerHeight = p1.Size.Size_1000,
@@ -89,11 +88,11 @@ local function variantsFactory(p1) --[[ line: 92 ]]
 	}
 end
 
-return function(p2, p3, p4, p5, p6, p7, p8) --[[ line: 162 ]]
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref), flagsModule (ref)
+return function(p2, p3, p4, p5, p6, p7) --[[ line: 159 ]]
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), getInputVariantsFactoryModule (ref), inputVariantModule (ref), composeStyleVariantModule (ref)
 	local textInput = variantsContextModule.useVariants("TextInput", variantsFactory, p2)
 	local inputField = variantsContextModule.useVariants("InputField", getInputVariantsFactoryModule, p2)
 	local var13 = inputField.variants[p4 or inputVariantModule.Standard]
 	
-	return composeStyleVariantModule(textInput.common, inputField.sizes[p3], textInput.sizes[p3], if p4 ~= inputVariantModule.Utility then {} else var13, if p5 then inputField.radius[p5] else inputField.defaultRadius[p3], if flagsModule.FoundationTextInputsBetaUpdate then {} elseif p7 ~= nil then {} else inputField.hoverState[p7], if p6 ~= nil then {} else inputField.focusedState[p6], if p8 ~= nil then {} else inputField.errorState[p8], if p4 == inputVariantModule.Utility then var13 else {})
+	return composeStyleVariantModule(textInput.common, inputField.sizes[p3], textInput.sizes[p3], if p4 ~= inputVariantModule.Utility then {} else var13, if p5 then inputField.radius[p5] else inputField.defaultRadius[p3], if p6 ~= nil then {} else inputField.focusedState[p6], if p7 ~= nil then {} else inputField.errorState[p7], if p4 == inputVariantModule.Utility then var13 else {})
 end

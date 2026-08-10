@@ -10,6 +10,7 @@ return require(foundation.Parent.React).createContext({
 	hoverCloseAtDepth = nil,
 	hoverReset = nil,
 	depth = 1,
+	maxHeight = nil,
 	size = require(foundation.Enums.InputSize).Medium,
 	hoverOpenPath = {}
 })

@@ -10,11 +10,11 @@ return {
 	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	fflag = require(parent.flags.getFFlagUGCValidateCageMeshDistanceHead),
 	run = function(p0, p1) --[[ line: 16 ]]
-		-- upvalues: errorSourceStringsModule (ref), UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (ref), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
+		-- upvalues: UGCValidationCageMeshDistanceHeadMaxCageMeshDistance (ref), errorSourceStringsModule (ref), UGCValidationCageMeshDistanceHeadMaxNegativeSDFThreshold (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local headOuterCage = p1.aqsSummaryData.Measure_Cage_Distance_Head.Head_OuterCage
 		
 		if headOuterCage == nil or headOuterCage.max_distance == nil or headOuterCage.negative_sdf_percent == nil then
-			p0:fail(errorSourceStringsModule.Keys.AQSInputDataError)
+			error("Measure_Cage_Distance_Head: AQS summary missing required fields")
 			
 			return
 		elseif UGCValidationCageMeshDistanceHeadMaxCageMeshDistance / 100 < tonumber(headOuterCage.max_distance) then

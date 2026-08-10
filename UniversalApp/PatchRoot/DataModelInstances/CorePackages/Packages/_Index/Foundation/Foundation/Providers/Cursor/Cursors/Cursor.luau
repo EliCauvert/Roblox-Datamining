@@ -4,7 +4,7 @@ local reactModule = require(parent.React)
 local images = require(parent.FoundationImages).Images
 local cursorComponentModule = require(script.Parent.Parent.CursorComponent)
 local cursorTypeModule = require(foundation.Enums.CursorType)
-local _ = require(foundation.Enums.ColorMode)
+local _ = require(foundation.Enums.ColorNamespace)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local getScaledSliceModule = require(script.Parent.Parent.Parent.Parent.Components.Image.ImageSet.getScaledSlice)
 local t = {
@@ -102,7 +102,7 @@ local t = {
 return reactModule.forwardRef(function(p0, p1) --[[ line: 140 ]]
 	-- upvalues: useTokensModule (ref), cursorTypeModule (ref), reactModule (ref), t (ref), images (ref), getScaledSliceModule (ref), cursorComponentModule (ref)
 	local var7 = useTokensModule()
-	local colorMode = p0.colorMode
+	local colorNamespace = p0.colorNamespace
 	
 	if p0.cursorType == cursorTypeModule.NavHighlight then
 		return reactModule.createElement("Frame", {
@@ -111,8 +111,8 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 140 ]]
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, -3),
 			Size = UDim2.new(1, 0, 0, 3),
-			BackgroundColor3 = var7[colorMode].Selection.Start.Color3,
-			BorderColor3 = var7[colorMode].Selection.Start.Color3,
+			BackgroundColor3 = var7[colorNamespace].Selection.Start.Color3,
+			BorderColor3 = var7[colorNamespace].Selection.Start.Color3,
 			ref = p1
 		})
 	elseif p0.cursorType == cursorTypeModule.Invisible then
@@ -134,8 +134,8 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 140 ]]
 			ImageRectSize = images[cursorType.Image].ImageRectSize,
 			Size = uDim2,
 			Position = UDim2.new(0.5, -uDim2.X.Offset / 2, 0.5, -uDim2.Y.Offset / 2),
-			ImageColor3 = var7[colorMode].Selection.Start.Color3,
-			ImageTransparency = var7[colorMode].Selection.Start.Transparency,
+			ImageColor3 = var7[colorNamespace].Selection.Start.Color3,
+			ImageTransparency = var7[colorNamespace].Selection.Start.Transparency,
 			ref = p1
 		})
 	elseif cursorType.Tag == "SlicedImage" then
@@ -152,8 +152,8 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 140 ]]
 			ScaleType = Enum.ScaleType.Slice,
 			Size = UDim2.new(1, insetAdjustment.X * 2, 1, insetAdjustment.Y * 2),
 			Position = UDim2.fromOffset(-insetAdjustment.X, -insetAdjustment.Y),
-			ImageColor3 = var7[colorMode].Selection.Start.Color3,
-			ImageTransparency = var7[colorMode].Selection.Start.Transparency,
+			ImageColor3 = var7[colorNamespace].Selection.Start.Color3,
+			ImageTransparency = var7[colorNamespace].Selection.Start.Transparency,
 			ref = p1
 		}, {
 			Padding = if cursorType.Padding then reactModule.createElement("UIPadding", {
@@ -169,7 +169,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 140 ]]
 		cornerRadius = cursorType.CornerRadius,
 		offset = cursorType.Offset - cursorType.BorderWidth,
 		borderWidth = cursorType.BorderWidth,
-		colorMode = p0.colorMode,
+		colorNamespace = p0.colorNamespace,
 		ref = p1
 	}) else nil
 end)

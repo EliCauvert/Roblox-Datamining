@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local buttonModule = require(foundation.Components.Button)
 local closeAffordanceModule = require(foundation.Components.CloseAffordance)
 local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local colorModeModule = require(foundation.Enums.ColorMode)
+local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local fillBehaviorModule = require(foundation.Enums.FillBehavior)
 local flagsModule = require(foundation.Utility.Flags)
 local inputSizeModule = require(foundation.Enums.InputSize)
@@ -30,13 +30,13 @@ local t = {
 	side = popoverSideModule.Right
 }
 
-local function _(p0, p1) --[[ line: 75 | named "stepsText" ]]
+local function _(p0, p1) --[[ line: 77 | named "stepsText" ]]
 	-- upvalues: translatorModule (ref)
 	return translatorModule:FormatByKey("CommonUI.Controls.Label.PageCount", { current = p0, total = p1 })
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 79 | named "Coachmark" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), flagsModule (ref), radiusModule (ref), presentationContextModule (ref), colorModeModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref)
+return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 81 | named "Coachmark" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useScaledValueModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), popoverModule (ref), withCommonPropsModule (ref), flagsModule (ref), radiusModule (ref), presentationContextModule (ref), colorNamespaceModule (ref), viewModule (ref), closeAffordanceModule (ref), closeAffordanceVariantModule (ref), textModule (ref), translatorModule (ref)
 	local var24 = withDefaultsModule(p2, t)
 	local var25 = useTokensModule()
 	local var26 = useScaledValueModule(320)
@@ -48,26 +48,29 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 79 | 
 		Anchor = reactModule.createElement(popoverModule.Anchor, withCommonPropsModule(var24, { anchorRef = var24.anchorRef }), var24.children),
 		Content = reactModule.createElement(popoverModule.Content, {
 			hasArrow = true,
+			DO_NOT_USE_hasContentInputSink = true,
 			align = var24.align,
-			DO_NOT_USE_hasContentInputSink = flagsModule.FoundationCoachmarkInteractionFixes,
+			onPressedOutside = if flagsModule.FoundationCoachmarkPressedOutside then var24.onPressedOutside else nil,
 			side = { position = var24.side, offset = var25.Size.Size_200 },
 			radius = radiusModule.Medium,
 			backgroundStyle = var25.Inverse.Surface.Surface_0,
 			selection = var24.selection,
 			selectionGroup = var24.selectionGroup,
 			ref = p3
-		}, reactModule.createElement(presentationContextModule.Provider, { value = { colorMode = colorModeModule.Inverse } }, reactModule.createElement(viewModule, {
+		}, reactModule.createElement(presentationContextModule.Provider, {
+			value = { colorNamespace = colorNamespaceModule.Inverse }
+		}, reactModule.createElement(viewModule, {
 			tag = "col gap-medium auto-xy padding-bottom-medium",
 			sizeConstraint = { MaxSize = Vector2.new(var26, 1e999) }
 		}, {
 			CloseAffordanceContainer = if var24.onClose then reactModule.createElement("Folder", {}, {
 				CloseAffordance = reactModule.createElement(closeAffordanceModule, {
+					ZIndex = 2,
 					onActivated = var24.onClose,
 					size = inputSizeModule.Small,
 					variant = closeAffordanceVariantModule.Utility,
 					Position = UDim2.new(1, -var25.Padding.Small, 0, var25.Padding.Small),
 					AnchorPoint = Vector2.new(1, 0),
-					ZIndex = if flagsModule.FoundationCoachmarkInteractionFixes then 2 else nil,
 					testId = `{var24.testId}--close-affordance`
 				})
 			}) else nil,
@@ -100,7 +103,7 @@ return reactModule.memo(reactModule.forwardRef(function(p2, p3) --[[ line: 79 | 
 			Actions = if var24.actions and #var24.actions > 0 then reactModule.createElement(viewModule, {
 				LayoutOrder = 3,
 				tag = "row gap-small size-full-0 auto-y padding-x-medium"
-			}, reactModule.useMemo(function() --[[ line: 90 ]]
+			}, reactModule.useMemo(function() --[[ line: 92 ]]
 				-- upvalues: var24 (ref), loggerModule (copy), inputSizeModule (copy), fillBehaviorModule (copy), dashModule (copy), reactModule (copy), buttonModule (copy)
 				local t = {}
 				

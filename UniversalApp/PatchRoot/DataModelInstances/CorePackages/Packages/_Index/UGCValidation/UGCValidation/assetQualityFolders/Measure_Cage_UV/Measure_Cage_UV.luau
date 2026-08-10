@@ -11,12 +11,15 @@ local t = {
 local list = { "Handle_InnerCage", "Handle_OuterCage" }
 
 function t.run(p0, p1) --[[ line: 19 ]]
-	-- upvalues: list (ref), errorSourceStringsModule (ref), UGCValidateLCCagingIncorrectUVThreshold (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
+	-- upvalues: list (ref), UGCValidateLCCagingIncorrectUVThreshold (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 	local measureCageUV = p1.aqsSummaryData.Measure_Cage_UV
 	
+	if measureCageUV == nil then
+		error("Measure_Cage_UV: AQS summary data is nil")
+	end
 	for i, v in list do
 		if measureCageUV[v] == nil or measureCageUV[v].incorrect_uv_count == nil then
-			p0:fail(errorSourceStringsModule.Keys.AQSInputDataError)
+			error("Measure_Cage_UV: AQS summary missing required fields for cage " .. v)
 		elseif UGCValidateLCCagingIncorrectUVThreshold < tonumber(measureCageUV[v].incorrect_uv_count) then
 			p0:fail(errorSourceStringsModule.Keys.MeasureCageUV, {
 				cage_name = v,
