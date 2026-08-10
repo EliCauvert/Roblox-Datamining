@@ -3021,6 +3021,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Add Trust
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is a trusted friend now
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Trusted friend removed
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Trusted friend request sent
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Recent Activity
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username}'s Recent Activity
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
