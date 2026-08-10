@@ -538,42 +538,60 @@ end)
 local memoryModule = require(corePackagesService.Workspace.Packages.Memory)
 memoryModule.start(true, fStringReactSchedulingContext, memoryModule.MemoryScope.InExperience)
 
-if game:GetEngineFeature("RecordingServicePlaybackApiLua") then
-	coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.ExperienceStateReplay)
-end
-if fFlagEnableAEGIS2CommsFAEUpsell then
-	coroutine.wrap(function() --[[ line: 623 ]]
+if game:DefineFastFlag("EnableNpcInference", false) then
+	coroutine.wrap(function() --[[ line: 620 ]]
 		-- upvalues: corePackagesService (ref)
 		local var61
-		local socialUpsell = corePackagesService.Workspace.Packages.SocialUpsell
-		local ok, status = pcall(require, socialUpsell)
+		local npcInference = corePackagesService.Workspace.Packages.NpcInference
+		local ok, status = pcall(require, npcInference)
 		
 		if ok then
 			var61 = status
 		else
-			warn("Failure to Start CoreScript module " .. socialUpsell.Name .. ".\n" .. status)
+			warn("Failure to Start CoreScript module " .. npcInference.Name .. ".\n" .. status)
 			var61 = nil
 		end
 		if var61 then
-			var61.Overlay.initializeInExpOverlay()
+			var61.initialize()
 		end
 	end)()
 end
-coroutine.wrap(function() --[[ line: 631 ]]
+if game:GetEngineFeature("RecordingServicePlaybackApiLua") then
+	coroutine.wrap(safeRequire)(corePackagesService.Workspace.Packages.ExperienceStateReplay)
+end
+if fFlagEnableAEGIS2CommsFAEUpsell then
+	coroutine.wrap(function() --[[ line: 633 ]]
+		-- upvalues: corePackagesService (ref)
+		local var62
+		local socialUpsell = corePackagesService.Workspace.Packages.SocialUpsell
+		local ok, status = pcall(require, socialUpsell)
+		
+		if ok then
+			var62 = status
+		else
+			warn("Failure to Start CoreScript module " .. socialUpsell.Name .. ".\n" .. status)
+			var62 = nil
+		end
+		if var62 then
+			var62.Overlay.initializeInExpOverlay()
+		end
+	end)()
+end
+coroutine.wrap(function() --[[ line: 641 ]]
 	-- upvalues: corePackagesService (ref), guiService (ref)
-	local var62
+	local var63
 	local display = corePackagesService.Workspace.Packages.Display
 	local ok, status = pcall(require, display)
 	
 	if ok then
-		var62 = status
+		var63 = status
 	else
 		warn("Failure to Start CoreScript module " .. display.Name .. ".\n" .. status)
-		var62 = nil
+		var63 = nil
 	end
-	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ line: 633 ]]
-		-- upvalues: var62 (ref), guiService (copy)
-		var62.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
+	guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ line: 643 ]]
+		-- upvalues: var63 (ref), guiService (copy)
+		var63.GetDisplayStore().setTopBarHeight(guiService.TopbarInset.Height)
 	end)
 end)()
 

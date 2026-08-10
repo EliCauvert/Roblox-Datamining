@@ -626,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Terima ka
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Untuk melindungi pemain yang lebih muda, pemilik akun yang berusia di bawah 13 tahun tidak dapat mengirim masukan."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Masukan Tidak Tersedia
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Tambahkan media
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Edit pilihan
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Tidak tersedia media.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Media ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Bantu kreator memahami masalahmu.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Me-load media...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} — {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} dipilih
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Satu atau beberapa mediamu gagal di-upload.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Laporan bug
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Pemulihan item atau data
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategori *
@@ -635,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Pilih katego
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Masalah pembelian
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maksimum {MAX} karakter
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Detail *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Batalkan Pilihan
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Sertakan semua yang relevan tentang masalah tersebut, seperti versi game dan langkah-langkah untuk memicu masalahnya."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Jelaskan apa yang hilang dan kapan terakhir kali kamu melihatnya. Jika akunmu diretas, sertakan nomor email Dukungan Pelanggan Roblox-mu dan detail relevan lainnya."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Jelaskan permintaan atau masalahmu di sini. Berikan detail sebanyak mungkin untuk membantu kami memahami situasinya.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Beri tahu kami apa yang kamu coba beli, kapan itu terjadi, dan nilai totalnya (misalnya 500 Robux/$4,99). Sertakan pesan kesalahan yang kamu lihat."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Mencoba melaporkan penyalahgunaan?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Kirim laporan saja.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Pilih
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Ini membantu kreator mendukung akun yang benar.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Bagikan informasi pengguna kepada kreator
@@ -909,9 +922,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Respawn Karakter?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Kamu akan keluar dari server ini dan beralih ke server lain.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ingin keluar?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Getaran
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,perlu ditekan untuk menampilkan menu navigasi
@@ -1255,7 +1266,7 @@ Feature.Avatar.Action.Revert,Kembalikan
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Simpan sebagai baru
-Feature.Avatar.Action.Select,Pilih
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Pilih beberapa item
 Feature.Avatar.Action.SelectSlot,Pilih Slot
 Feature.Avatar.Action.Share,Bagikan
@@ -2280,7 +2291,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1j
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
-Feature.Chat.Label.TryAgain,Coba lagi
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
@@ -2809,7 +2819,7 @@ Feature.Groups.Title.UnableToJoin,Tidak dapat bergabung ke {groupName}
 Feature.Home.ActionSeeAll,
 Feature.Home.ClientCacheFallbackBanner.Action.Refresh,
 Feature.Home.ClientCacheFallbackBanner.Label.Error,Kesalahan
-Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle,
+Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle,Coba lagi
 Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,Refresh halaman untuk load konten
 Feature.Home.HeadingFriends,Teman ({friendCount})
 Feature.Home.Label.HappeningNow,Berlangsung sekarang

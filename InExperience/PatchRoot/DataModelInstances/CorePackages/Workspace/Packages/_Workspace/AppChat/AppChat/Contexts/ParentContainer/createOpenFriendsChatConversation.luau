@@ -34,7 +34,7 @@ return function(p0) --[[ line: 16 | named "createOpenFriendsChatConversation" ]]
 			return if p0.isChatAvailable() then p0.openConversation(p1) else false
 		end):andThen(function(p4) --[[ line: 54 ]]
 			-- upvalues: p0 (copy)
-			return if p4 then p0.requestSelectTab("FriendsChat") else false
+			return if p4 then p0.requestSelectFriendsTab() else false
 		end):andThen(function(p3) --[[ line: 60 ]]
 			-- upvalues: p0 (copy), var5 (ref), var4 (copy), var6 (write)
 			if p3 then

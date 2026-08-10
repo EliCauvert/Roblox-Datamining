@@ -4,7 +4,7 @@ local t = {}
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 82 ]]
+function t_1.new(p0) --[[ line: 84 ]]
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		name = if p0 == nil or p0.name == nil then "" else p0.name,
@@ -13,7 +13,7 @@ function t_1.new(p0) --[[ line: 82 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 92 ]]
+function t_1:encode() --[[ line: 94 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -42,7 +42,7 @@ function t_1:encode() --[[ line: 92 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 116 ]]
+function t_1.decode(p1) --[[ line: 118 ]]
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var14 = t_1.new()
 	local var15 = 0
@@ -100,7 +100,7 @@ function t_1.decode(p1) --[[ line: 116 ]]
 	return var14
 end
 
-function t_1:jsonEncode() --[[ line: 169 ]]
+function t_1:jsonEncode() --[[ line: 171 ]]
 	local t = {}
 	
 	if self.name ~= nil and self.name ~= "" then
@@ -115,7 +115,7 @@ function t_1:jsonEncode() --[[ line: 169 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 187 ]]
+function t_1:jsonDecode() --[[ line: 189 ]]
 	-- upvalues: t_1 (ref)
 	local var36 = t_1.new()
 	
@@ -143,18 +143,19 @@ typeRegistryModule.default:register(t.AgeRecommendationDescriptor)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 223 ]]
+function t_2.new(p2) --[[ line: 225 ]]
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		display_name = if p2 == nil or p2.display_name == nil then "" else p2.display_name,
 		display_name_with_header_short = if p2 == nil or p2.display_name_with_header_short == nil then "" else p2.display_name_with_header_short,
 		igrs_rating = if p2 == nil or p2.igrs_rating == nil then "" else p2.igrs_rating,
 		igrs_rating_display_message = if p2 == nil or p2.igrs_rating_display_message == nil then "" else p2.igrs_rating_display_message,
-		descriptors = if p2 == nil or p2.descriptors == nil then {} else p2.descriptors
+		descriptors = if p2 == nil or p2.descriptors == nil then {} else p2.descriptors,
+		minimum_age_display = if p2 == nil or p2.minimum_age_display == nil then nil else p2.minimum_age_display
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 237 ]]
+function t_2:encode() --[[ line: 242 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var38 = 0
@@ -192,80 +193,91 @@ function t_2:encode() --[[ line: 237 ]]
 			var38 = var49
 		end
 	end
+	if self.minimum_age_display ~= nil then
+		local var50, var51 = protoModule.writeTag(buff, var38, 6, protoModule.wireTypes.lengthDelimited)
+		var50, var51 = protoModule.writeString(var50, var51, self.minimum_age_display)
+		buff = var50
+		var38 = var51
+	end
 	local buff_1 = buffer.create(var38)
 	buffer.copy(buff_1, 0, buff, 0, var38)
 	
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 274 ]]
+function t_2.decode(p3) --[[ line: 284 ]]
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
-	local var51 = t_2.new()
-	local var52 = 0
-	while var52 < buffer.len(p3) do
+	local var53 = t_2.new()
+	local var54 = 0
+	while var54 < buffer.len(p3) do
 		local _ = nil
-		local var53 = nil
-		local var54, var55, var56 = protoModule.readTag(p3, var52)
-		local var57 = var54
-		var53 = var55
-		var52 = var56
+		local var55 = nil
+		local var56, var57, var58 = protoModule.readTag(p3, var54)
+		local var59 = var56
+		var55 = var57
+		var54 = var58
 		
-		if var53 == protoModule.wireTypes.varint then
+		if var55 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var58, var59 = protoModule.readVarInt(p3, var52)
-			local _ = var58
-			var52 = var59
+			local var60, var61 = protoModule.readVarInt(p3, var54)
+			local _ = var60
+			var54 = var61
 			continue
 		end
-		if var53 == protoModule.wireTypes.lengthDelimited then
-			if var57 == 1 then
+		if var55 == protoModule.wireTypes.lengthDelimited then
+			if var59 == 1 then
 				local _ = nil
-				local var60, var61 = protoModule.readBuffer(p3, var52)
-				var52 = var61
-				var51.display_name = buffer.tostring(var60)
-			elseif var57 == 2 then
+				local var62, var63 = protoModule.readBuffer(p3, var54)
+				var54 = var63
+				var53.display_name = buffer.tostring(var62)
+			elseif var59 == 2 then
 				local _ = nil
-				local var62, var63 = protoModule.readBuffer(p3, var52)
-				var52 = var63
-				var51.display_name_with_header_short = buffer.tostring(var62)
-			elseif var57 == 3 then
+				local var64, var65 = protoModule.readBuffer(p3, var54)
+				var54 = var65
+				var53.display_name_with_header_short = buffer.tostring(var64)
+			elseif var59 == 3 then
 				local _ = nil
-				local var64, var65 = protoModule.readBuffer(p3, var52)
-				var52 = var65
-				var51.igrs_rating = buffer.tostring(var64)
-			elseif var57 == 4 then
+				local var66, var67 = protoModule.readBuffer(p3, var54)
+				var54 = var67
+				var53.igrs_rating = buffer.tostring(var66)
+			elseif var59 == 4 then
 				local _ = nil
-				local var66, var67 = protoModule.readBuffer(p3, var52)
-				var52 = var67
-				var51.igrs_rating_display_message = buffer.tostring(var66)
-			elseif var57 == 5 then
+				local var68, var69 = protoModule.readBuffer(p3, var54)
+				var54 = var69
+				var53.igrs_rating_display_message = buffer.tostring(var68)
+			elseif var59 == 5 then
 				local _ = nil
-				local var68, var69 = protoModule.readBuffer(p3, var52)
-				var52 = var69
-				table.insert(var51.descriptors, t.AgeRecommendationDescriptor.decode(var68))
+				local var70, var71 = protoModule.readBuffer(p3, var54)
+				var54 = var71
+				table.insert(var53.descriptors, t.AgeRecommendationDescriptor.decode(var70))
+			elseif var59 == 6 then
+				local _ = nil
+				local var72, var73 = protoModule.readBuffer(p3, var54)
+				var54 = var73
+				var53.minimum_age_display = buffer.tostring(var72)
 			else
 				local _ = nil
-				local var70, var71 = protoModule.readVarInt(p3, var52)
-				var52 = var71 + var70
+				local var74, var75 = protoModule.readVarInt(p3, var54)
+				var54 = var75 + var74
 			end
-		elseif var53 == protoModule.wireTypes.i32 then
+		elseif var55 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var72, var73 = protoModule.readFixed32(p3, var52)
-			local _ = var72
-			var52 = var73
-		elseif var53 == protoModule.wireTypes.i64 then
+			local var76, var77 = protoModule.readFixed32(p3, var54)
+			local _ = var76
+			var54 = var77
+		elseif var55 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var74, var75 = protoModule.readFixed64(p3, var52)
-			local _ = var74
-			var52 = var75
+			local var78, var79 = protoModule.readFixed64(p3, var54)
+			local _ = var78
+			var54 = var79
 		else
-			error("Unsupported wire type: " .. var53)
+			error("Unsupported wire type: " .. var55)
 		end
 	end
-	return var51
+	return var53
 end
 
-function t_2:jsonEncode() --[[ line: 337 ]]
+function t_2:jsonEncode() --[[ line: 352 ]]
 	local t = {}
 	
 	if self.display_name ~= nil and self.display_name ~= "" then
@@ -288,36 +300,39 @@ function t_2:jsonEncode() --[[ line: 337 ]]
 		end
 		t.descriptors = t_1
 	end
+	if self.minimum_age_display ~= nil then
+		t.minimumAgeDisplay = self.minimum_age_display
+	end
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 367 ]]
+function t_2:jsonDecode() --[[ line: 386 ]]
 	-- upvalues: t_2 (ref), t (ref)
-	local var78 = t_2.new()
+	local var82 = t_2.new()
 	
 	if self.display_name ~= nil then
-		var78.display_name = self.display_name
+		var82.display_name = self.display_name
 	end
 	if self.displayName ~= nil then
-		var78.display_name = self.displayName
+		var82.display_name = self.displayName
 	end
 	if self.display_name_with_header_short ~= nil then
-		var78.display_name_with_header_short = self.display_name_with_header_short
+		var82.display_name_with_header_short = self.display_name_with_header_short
 	end
 	if self.displayNameWithHeaderShort ~= nil then
-		var78.display_name_with_header_short = self.displayNameWithHeaderShort
+		var82.display_name_with_header_short = self.displayNameWithHeaderShort
 	end
 	if self.igrs_rating ~= nil then
-		var78.igrs_rating = self.igrs_rating
+		var82.igrs_rating = self.igrs_rating
 	end
 	if self.igrsRating ~= nil then
-		var78.igrs_rating = self.igrsRating
+		var82.igrs_rating = self.igrsRating
 	end
 	if self.igrs_rating_display_message ~= nil then
-		var78.igrs_rating_display_message = self.igrs_rating_display_message
+		var82.igrs_rating_display_message = self.igrs_rating_display_message
 	end
 	if self.igrsRatingDisplayMessage ~= nil then
-		var78.igrs_rating_display_message = self.igrsRatingDisplayMessage
+		var82.igrs_rating_display_message = self.igrsRatingDisplayMessage
 	end
 	if self.descriptors ~= nil then
 		local t_1 = {}
@@ -325,9 +340,15 @@ function t_2:jsonDecode() --[[ line: 367 ]]
 		for i, v in self.descriptors do
 			table.insert(t_1, t.AgeRecommendationDescriptor.jsonDecode(v))
 		end
-		var78.descriptors = t_1
+		var82.descriptors = t_1
 	end
-	return var78
+	if self.minimum_age_display ~= nil then
+		var82.minimum_age_display = self.minimum_age_display
+	end
+	if self.minimumAgeDisplay ~= nil then
+		var82.minimum_age_display = self.minimumAgeDisplay
+	end
+	return var82
 end
 
 t_2.descriptor = {

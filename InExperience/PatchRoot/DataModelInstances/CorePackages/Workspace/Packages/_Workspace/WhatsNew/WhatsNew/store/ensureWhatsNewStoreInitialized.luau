@@ -13,7 +13,7 @@ return {
 			return
 		end
 		getWhatsNewStoreModule().initialize({
-			rootTourMap = loadWhatsNewRegistryModule.loadBundledRegistry(p0.deps or createResolveDepsModule.bootstrapPersistedResolveDeps(), { scopeActions = p0.scopeActions }),
+			rootTourMap = loadWhatsNewRegistryModule.loadBundledRegistry(p0.deps or createResolveDepsModule.createResolveDeps(), { scopeActions = p0.scopeActions }),
 			scopeActions = p0.scopeActions
 		})
 		var4 = true

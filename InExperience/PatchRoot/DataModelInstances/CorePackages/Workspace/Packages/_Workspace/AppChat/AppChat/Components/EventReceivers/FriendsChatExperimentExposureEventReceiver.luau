@@ -3,25 +3,30 @@ local parent = appChat.Parent
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
+local sharedFlagsModule = require(parent.SharedFlags)
+local fStringAppChatFriendsTabIxpLayerModule = require(appChat.Flags.FStringAppChatFriendsTabIxpLayer)
 local getFriendsChatSettingsStoreModule = require(appChat.Stores.GetFriendsChatSettingsStore)
-local var5 = require(appChat.Utils.IXPNavigationUtils).createExposureHandler(require(appChat.Flags.FStringAppChatFriendsTabIxpLayer))
+local IXPNavigationUtilsModule = require(appChat.Utils.IXPNavigationUtils)
+local fFlagExpChatFriendsTabUsePolicy = sharedFlagsModule.FFlagExpChatFriendsTabUsePolicy
+local var8 = if fFlagExpChatFriendsTabUsePolicy then require(parent.UniversalAppPolicy).GetAppPolicyStore else nil
+local var9 = IXPNavigationUtilsModule.createExposureHandler(fStringAppChatFriendsTabIxpLayerModule)
 
-return function() --[[ line: 14 | named "FriendsChatExperimentExposureEventReceiver" ]]
-	-- upvalues: getFriendsChatSettingsStoreModule (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), var5 (ref)
-	local var6 = getFriendsChatSettingsStoreModule(false)
-	local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 16 ]]
-		-- upvalues: signalsModule (copy), var6 (ref)
-		return signalsModule.createComputed(function(p0) --[[ line: 17 ]]
-			-- upvalues: var6 (copy)
-			return var6.getChatEnabled(p0) and var6.getChatUserMessagesEnabled(p0) ~= false
+return function() --[[ line: 22 | named "FriendsChatExperimentExposureEventReceiver" ]]
+	-- upvalues: getFriendsChatSettingsStoreModule (ref), reactModule (ref), signalsModule (ref), fFlagExpChatFriendsTabUsePolicy (ref), var8 (write), signalsReactModule (ref), var9 (ref)
+	local var10 = getFriendsChatSettingsStoreModule(false)
+	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 24 ]]
+		-- upvalues: signalsModule (copy), fFlagExpChatFriendsTabUsePolicy (copy), var8 (copy), var10 (ref)
+		return signalsModule.createComputed(function(p0) --[[ line: 25 ]]
+			-- upvalues: fFlagExpChatFriendsTabUsePolicy (copy), var8 (copy), var10 (copy)
+			return (not fFlagExpChatFriendsTabUsePolicy or var8(false).getAppPolicy(p0).getCanSeeFriendsTab()) and (var10.getChatEnabled(p0) and var10.getChatUserMessagesEnabled(p0) ~= false)
 		end)
-	end, { var6 }))
-	reactModule.useEffect(function() --[[ line: 24 ]]
-		-- upvalues: var7 (ref), var5 (copy)
-		if var7 then
-			var5()
+	end, { var10 }))
+	reactModule.useEffect(function() --[[ line: 39 ]]
+		-- upvalues: var11 (ref), var9 (copy)
+		if var11 then
+			var9()
 		end
-	end, { var7 })
+	end, { var11 })
 	
 	return nil
 end

@@ -1,5 +1,4 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Components.Types)
 local _ = require(foundation.Components.InternalInput)
 local inputSizeModule = require(foundation.Enums.InputSize)
@@ -7,23 +6,15 @@ local _ = require(foundation.Enums.ControlState)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0) --[[ line: 30 ]]
-	-- upvalues: flagsModule (ref), inputSizeModule (ref)
+local function variantsFactory(p0) --[[ line: 31 ]]
+	-- upvalues: inputSizeModule (ref), flagsModule (ref)
 	return {
-		common = if flagsModule.FoundationToggleVisualUpdate then {
+		common = {
 			input = {
 				tag = "radius-small",
 				colors = { checkedStyle = p0.Color.ActionSubEmphasis.Background },
-				cursorRadius = UDim.new(0, p0.Radius.Small)
-			},
-			checkmark = {
-				tag = "position-center-center anchor-center-center content-action-sub-emphasis"
-			}
-		} else {
-			input = {
-				tag = "radius-small",
-				checkedStyle = p0.Color.ActionSubEmphasis.Background,
 				cursorRadius = UDim.new(0, p0.Radius.Small)
 			},
 			checkmark = {
@@ -51,15 +42,17 @@ local function variantsFactory(p0) --[[ line: 30 ]]
 			},
 			[inputSizeModule.Large] = {
 				input = {
-					size = UDim2.fromOffset(p0.Size.Size_700, p0.Size.Size_700)
+					size = if flagsModule.FoundationCheckboxBeta then UDim2.fromOffset(p0.Size.Size_600, p0.Size.Size_600) else UDim2.fromOffset(p0.Size.Size_700, p0.Size.Size_700)
 				},
-				checkmark = { tag = "size-700" }
+				checkmark = {
+					tag = if flagsModule.FoundationCheckboxBeta then "size-600" else "size-700"
+				}
 			}
 		}
 	}
 end
 
-return function(p1, p2) --[[ line: 73 ]]
+return function(p1, p2) --[[ line: 71 ]]
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local checkbox = variantsContextModule.useVariants("Checkbox", variantsFactory, p1)
 	
