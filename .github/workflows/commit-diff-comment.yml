@@ -92,8 +92,6 @@ jobs:
 
             const isLocaleFile = (f) => /^([^/]+\/)?Locales\/(?:[^/]+\/)*en-us\.csv$/i.test(f);
 
-            // GitHub's commit view anchors each file's diff as #diff-<sha256(path)>, so we can
-            // link straight to it instead of embedding the (often huge) CSV diff in the comment.
             const commitUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha}`;
             const diffLink = (file) =>
               `${commitUrl}#diff-${crypto.createHash('sha256').update(file).digest('hex')}`;
@@ -105,9 +103,6 @@ jobs:
               return `### Locale diffs\nToo large to inline — view on GitHub:\n${links}\n\n`;
             };
 
-            // Each top-level folder is a separate app (UniversalApp, InExperience, ...
-            // future ones need no workflow change). Anything with no top-level
-            // folder (e.g. README.md) is bucketed as "Other".
             const appOf = (path) => (path.includes('/') ? path.split('/')[0] : 'Other');
 
             const groups = new Map();
