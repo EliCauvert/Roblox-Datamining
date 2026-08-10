@@ -17,7 +17,7 @@ local isScrollingFrameOverflowingYModule = require(foundation.Utility.isScrollin
 local useComposedRef = reactUtilsModule.useComposedRef
 
 return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | named "SheetContent" ]]
-	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), flagsModule (ref), isScrollingFrameOverflowingYModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), dashModule (ref), useComposedRef (ref), scrollViewModule (ref), constantsModule (ref)
+	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), isScrollingFrameOverflowingYModule (ref), sheetTypeModule (ref), flagsModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), dashModule (ref), useComposedRef (ref), scrollViewModule (ref), constantsModule (ref)
 	local var14 = useTokensModule()
 	local var15 = reactModule.useContext(sheetContextModule)
 	local innerScrollingEnabled = var15.innerScrollingEnabled
@@ -28,46 +28,36 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | 
 	local setHasActionsDivider = var15.setHasActionsDivider
 	local bottomPadding = var15.bottomPadding
 	local hasHeader = var15.hasHeader
-	local var16 = if flagsModule.FoundationSheetFullBleed then var15.hasFullBleed else false
-	local var17 = if flagsModule.FoundationSheetFullBleed then var15.fullBleedHeight else nil
+	local hasFullBleed = var15.hasFullBleed
+	local fullBleedHeight = var15.fullBleedHeight
 	local sheetType = var15.sheetType
 	local testId = var15.testId
 	assert(innerScrollingEnabled and (setInnerScrollY and (actionsHeight and (setHasActionsDivider and (bottomPadding and (hasHeader and testId))))), "SheetContent must be used within a Sheet")
-	local var18, var19 = reactModule.useBinding(false)
-	local var20 = reactModule.useCallback(function(p2) --[[ line: 59 ]]
-		-- upvalues: setInnerScrollY (ref), isScrollingFrameOverflowingYModule (copy), setHasActionsDivider (ref), var19 (ref)
+	local var16, var17 = reactModule.useBinding(false)
+	local var18 = reactModule.useCallback(function(p2) --[[ line: 59 ]]
+		-- upvalues: setInnerScrollY (ref), isScrollingFrameOverflowingYModule (copy), setHasActionsDivider (ref), var17 (ref)
 		setInnerScrollY(p2.CanvasPosition.Y)
-		local var28 = isScrollingFrameOverflowingYModule(p2, 1)
-		setHasActionsDivider(var28)
-		var19(var28)
+		local var25 = isScrollingFrameOverflowingYModule(p2, 1)
+		setHasActionsDivider(var25)
+		var17(var25)
 	end, { setHasActionsDivider, setInnerScrollY })
-	local var21, var22 = reactModule.useBinding(0)
-	local var23 = reactModule.useCallback(function(p3) --[[ line: 69 ]]
-		-- upvalues: var22 (ref)
-		var22(p3.AbsoluteSize.Y)
+	local var19, var20 = reactModule.useBinding(0)
+	local var21 = reactModule.useCallback(function(p3) --[[ line: 69 ]]
+		-- upvalues: var20 (ref)
+		var20(p3.AbsoluteSize.Y)
 	end, {})
-	local var24 = sheetType == sheetTypeModule.Bottom
-	local var25 = if flagsModule.FoundationFullBleedSheetContent and p0.isContentFullBleed then nil else UDim.new(0, var14.Padding.Small)
-	local var26 = p0.Selectable == nil or p0.Selectable
-	local var27 = if flagsModule.FoundationBottomSheetGestureInteractionSink then reactModule.createElement("Folder", nil, {
-		ContentInteractionSink = if if flagsModule.FoundationBottomSheetGestureInteractionSink then var15.isVerticalSheetGesture else nil then reactModule.createElement(viewModule, {
-			Selectable = false,
-			ZIndex = 2,
-			Size = UDim2.fromScale(1, 1),
-			testId = `{testId}--content--interaction-sink`,
-			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			onActivated = dashModule.noop
-		}) else nil
-	}) else nil
+	local var22 = sheetType == sheetTypeModule.Bottom
+	local var23 = if p0.isContentFullBleed then nil else UDim.new(0, var14.Padding.Small)
+	local var24 = p0.Selectable == nil or p0.Selectable
 	
 	return reactModule.createElement(scrollViewModule, {
 		ZIndex = 1,
 		tag = "fill size-full-0 auto-y",
 		scrollingFrameRef = useComposedRef(innerScrollingRef, p0.scrollingFrameRef),
 		selection = {
-			Selectable = if var18 then var18:map(function(p4) --[[ line: 81 ]]
-				-- upvalues: var26 (ref)
-				return var26 and p4
+			Selectable = if var16 then var16:map(function(p4) --[[ line: 79 ]]
+				-- upvalues: var24 (ref)
+				return var24 and p4
 			end) else nil,
 			NextSelectionUp = p0.NextSelectionUp,
 			NextSelectionDown = p0.NextSelectionDown,
@@ -77,51 +67,57 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 30 | 
 		scroll = {
 			ScrollingEnabled = innerScrollingEnabled,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			CanvasSize = if sheetContentHeight then var21:map(function(p5) --[[ line: 130 ]]
+			CanvasSize = if sheetContentHeight then var19:map(function(p5) --[[ line: 128 ]]
 				return UDim2.new(1, 0, 0, p5)
 			end) else UDim2.fromScale(1, 0),
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
 		Size = if sheetContentHeight then UDim2.fromScale(1, 1) else nil,
 		padding = {
-			top = hasHeader:map(function(p6) --[[ line: 138 ]]
-				-- upvalues: var16 (ref), var24 (ref), var14 (ref)
-				return if p6 or var16 then UDim.new(0, 0) else UDim.new(0, if var24 then var14.Padding.Small else var14.Margin.Small)
+			top = hasHeader:map(function(p6) --[[ line: 136 ]]
+				-- upvalues: hasFullBleed (ref), var22 (ref), var14 (ref)
+				return if p6 or hasFullBleed then UDim.new(0, 0) else UDim.new(0, if var22 then var14.Padding.Small else var14.Margin.Small)
 			end),
-			bottom = if var24 then actionsHeight:map(function(p7) --[[ line: 144 ]]
+			bottom = if var22 then actionsHeight:map(function(p7) --[[ line: 142 ]]
 				-- upvalues: bottomPadding (ref), var14 (ref)
 				return UDim.new(0, p7 + bottomPadding + var14.Margin.Small)
 			end) else UDim.new(0, var14.Padding.Small),
-			left = var25,
-			right = var25
+			left = var23,
+			right = var23
 		},
-		ClipsDescendants = if var24 then hasHeader else true,
-		onCanvasPositionChanged = function(p8) --[[ line: 152 ]]
+		ClipsDescendants = if var22 then hasHeader else true,
+		onCanvasPositionChanged = function(p8) --[[ line: 150 ]]
 			-- upvalues: setInnerScrollY (ref)
 			setInnerScrollY(p8.CanvasPosition.Y)
 		end,
-		onAbsoluteCanvasSizeChanged = var20,
-		onAbsoluteWindowSizeChanged = var20,
+		onAbsoluteCanvasSizeChanged = var18,
+		onAbsoluteWindowSizeChanged = var18,
 		testId = `{testId}--content`,
 		ref = p1
 	}, reactModule.createElement(viewModule, {
-		onAbsoluteSizeChanged = var23,
-		tag = if flagsModule.FoundationFullBleedSheetContent then {
+		onAbsoluteSizeChanged = var21,
+		tag = {
 			["col align-x-center gap-medium size-full-0 auto-y"] = true,
 			["padding-x-medium"] = not p0.isContentFullBleed
-		} else "col align-x-center gap-medium size-full-0 auto-y padding-x-medium"
-	}, if flagsModule.FoundationSheetFullBleed then {
-		FullBleedSpacer = if var16 and var17 then reactModule.createElement(viewModule, {
-			Size = var17:map(function(p9) --[[ line: 176 ]]
+		}
+	}, {
+		FullBleedSpacer = if hasFullBleed and fullBleedHeight then reactModule.createElement(viewModule, {
+			Size = fullBleedHeight:map(function(p9) --[[ line: 168 ]]
 				return UDim2.new(1, 0, 0, math.max(0, p9))
 			end),
 			LayoutOrder = constantsModule.MIN_LAYOUT_ORDER,
 			testId = `{testId}--content--full-bleed-spacer`
 		}) else nil,
 		Children = reactModule.createElement(reactModule.Fragment, nil, p0.children),
-		ContentInteractionSinkContainer = if flagsModule.FoundationBottomSheetGestureInteractionSink then var27 else nil
-	} elseif flagsModule.FoundationBottomSheetGestureInteractionSink then {
-		Children = reactModule.createElement(reactModule.Fragment, nil, p0.children),
-		ContentInteractionSinkContainer = var27
-	} else p0.children))
+		ContentInteractionSinkContainer = if flagsModule.FoundationBottomSheetGestureInteractionSink then if flagsModule.FoundationBottomSheetGestureInteractionSink then reactModule.createElement("Folder", nil, {
+			ContentInteractionSink = if if flagsModule.FoundationBottomSheetGestureInteractionSink then var15.isVerticalSheetGesture else nil then reactModule.createElement(viewModule, {
+				Selectable = false,
+				ZIndex = 2,
+				Size = UDim2.fromScale(1, 1),
+				testId = `{testId}--content--interaction-sink`,
+				stateLayer = { affordance = stateLayerAffordanceModule.None },
+				onActivated = dashModule.noop
+			}) else nil
+		}) else nil else nil
+	}))
 end))

@@ -14,23 +14,23 @@ local t = { DisplayOrder = constantsModule.MAX_LAYOUT_ORDER - 1 }
 local var10 = if flagsModule.FoundationOverlayResilientMainGui then nil else getMainGuiModule()
 
 return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), useKeyboardAwareSizeModule (ref), useStyleSheet (ref), getMainGuiModule (ref), var10 (ref), overlayContextModule (ref), reactRobloxModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useKeyboardAwareSizeModule (ref), useStyleSheet (ref), flagsModule (ref), getMainGuiModule (ref), var10 (ref), overlayContextModule (ref), reactRobloxModule (ref)
 	local var11 = withDefaultsModule(p0, t)
 	local var12, var13 = reactModule.useState(var11.gui)
 	local var14, var15 = reactModule.useState(false)
-	local var16 = if flagsModule.FoundationOverlayKeyboardAwarenessHardened and not var11.gui then var12 and var12.Parent else nil
+	local var16 = if not var11.gui then var12 and var12.Parent else nil
 	local var17 = if not flagsModule.FoundationOverlayResilientMainGui then if var11.gui == nil and var14 then getMainGuiModule() else nil else var10
 	
 	return reactModule.createElement(overlayContextModule.Provider, {
 		value = {
-			requestOverlay = reactModule.useCallback(function() --[[ line: 42 ]]
+			requestOverlay = reactModule.useCallback(function() --[[ line: 38 ]]
 				-- upvalues: var11 (ref), var15 (ref)
 				if var11.gui == nil then
 					var15(true)
 				end
 			end, { var11.gui }),
 			instance = if var11.gui ~= nil then var12 else var11.gui,
-			screen = if flagsModule.FoundationOverlayKeyboardAwarenessHardened then if var11.gui ~= nil then var16 else var11.gui else nil
+			screen = if var11.gui ~= nil then var16 else var11.gui
 		}
 	}, {
 		FoundationOverlay = if var11.gui == nil and (var17 ~= nil and var14) then reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
@@ -39,15 +39,14 @@ return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
 			DisplayOrder = var11.DisplayOrder,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 			ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets,
-			SafeAreaCompatibility = Enum.SafeAreaCompatibility.None,
-			ref = if not flagsModule.FoundationOverlayKeyboardAwareness then var13 else nil
+			SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 		}, {
-			SafeAreaFrame = if flagsModule.FoundationOverlayKeyboardAwareness then reactModule.createElement("Frame", {
+			SafeAreaFrame = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = if flagsModule.FoundationOverlayKeyboardAwareness then useKeyboardAwareSizeModule(if flagsModule.FoundationOverlayKeyboardAwarenessHardened then var16 else var12) else nil,
+				Size = useKeyboardAwareSizeModule(var16),
 				ref = var13
-			}) else nil,
+			}),
 			FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() })
 		}), var17) else nil,
 		Children = reactModule.createElement(reactModule.Fragment, nil, var11.children)
