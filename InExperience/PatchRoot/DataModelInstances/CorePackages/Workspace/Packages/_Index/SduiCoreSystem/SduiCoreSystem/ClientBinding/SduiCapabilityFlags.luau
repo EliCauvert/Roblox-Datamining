@@ -30,6 +30,5 @@ return {
 		end)
 		
 		return if ok then status == true else false
-	end)(),
-	CAPABILITY_SUPPORTS_EVENT_RSVP_FACE_PILE = sharedFlagsModule.FFlagSduiEventRsvpFacePile
+	end)()
 }

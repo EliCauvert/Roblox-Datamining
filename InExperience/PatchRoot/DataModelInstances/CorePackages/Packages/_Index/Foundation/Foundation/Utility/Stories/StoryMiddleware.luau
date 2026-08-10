@@ -91,7 +91,7 @@ return function(p3) --[[ line: 91 | named "StoryMiddleware" ]]
 				PaddingRight = UDim.new(0, 10)
 			}),
 			FoundationContext = reactModule.createElement(foundationModule, {
-				colorMode = theme,
+				theme = theme,
 				device = platform,
 				preferences = settings,
 				scale = settings and settings.scale,

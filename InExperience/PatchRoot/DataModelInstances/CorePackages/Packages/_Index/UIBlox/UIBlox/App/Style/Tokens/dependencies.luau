@@ -29,11 +29,10 @@ return {
 	end,
 	GetFoundationTokens = function(p2) --[[ line: 40 ]]
 		-- upvalues: parent_1 (ref), constantsModule (ref)
-		local rbxDesignFoundationsV4Module = require(parent_1.RbxDesignFoundationsV4)
-		local var6 = rbxDesignFoundationsV4Module.themes[rbxDesignFoundationsV4Module.Theme.Default]()
-		local var7 = p2:lower()
+		local tokens = require(parent_1.RbxDesignFoundationsV2).Tokens
+		local var5 = p2:lower()
 		
-		return if var7 == constantsModule.ThemeName.Dark:lower() then var6.Dark elseif var7 == constantsModule.ThemeName.Light:lower() then var6.Light else nil
+		return if var5 == constantsModule.ThemeName.Dark:lower() then tokens.Dark elseif var5 == constantsModule.ThemeName.Light:lower() then tokens.Light else nil
 	end,
 	SchemaPackage = {
 		Validators = {

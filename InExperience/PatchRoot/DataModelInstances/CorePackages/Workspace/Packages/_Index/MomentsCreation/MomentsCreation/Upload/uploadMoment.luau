@@ -13,7 +13,6 @@ local getFFlagMomentsCreationNormalizeMetadataEnumsModule = require(momentsCreat
 local getFFlagMomentsUseBackendPostStatusNotificationModule = require(momentsCreation.Flags.GetFFlagMomentsUseBackendPostStatusNotification)
 local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
 local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 local makePostMetadataModule = require(momentsCreation.Utils.makePostMetadata)
 local enumName = makeCreationEventFieldsModule.enumName
 local _game = game
@@ -21,12 +20,12 @@ local captureServiceUploadUniverseIdOverrideEngineFeature = game:GetEngineFeatur
 local captureServiceStartUploadCoreScriptBypassEngineFeature = game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass")
 game:DefineFastString("MomentsUploadUniverseId", "8357232245")
 
-local function _(p0) --[[ line: 77 | named "logValue" ]]
+local function _(p0) --[[ line: 76 | named "logValue" ]]
 	-- upvalues: enumName (ref)
 	return string.gsub(string.gsub(enumName(p0) or "nil", "\r", "\\r"), "\n", "\\n")
 end
 
-local _ = function(p1) --[[ line: 84 | named "injectUniverseIdOverride" ]]
+local _ = function(p1) --[[ line: 83 | named "injectUniverseIdOverride" ]]
 	-- upvalues: _game (ref)
 	local gameId = _game.GameId
 	
@@ -39,8 +38,8 @@ local _ = function(p1) --[[ line: 84 | named "injectUniverseIdOverride" ]]
 	return p1
 end
 
-return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uploadMoment" ]]
-	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), loggerModule (ref), captureServiceStartUploadCoreScriptBypassEngineFeature (ref), enumName (ref), getFFlagMomentsUseBackendPostStatusNotificationModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), makeCreationEventFieldsModule (ref), captureService (ref), completeMomentUploadModule (ref)
+return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 93 | named "uploadMoment" ]]
+	-- upvalues: captureServiceUploadUniverseIdOverrideEngineFeature (ref), _game (ref), getFFlagMomentsCreationNormalizeMetadataEnumsModule (ref), normalizeMomentMetadataModule (ref), loggerModule (ref), captureServiceStartUploadCoreScriptBypassEngineFeature (ref), enumName (ref), getFFlagMomentsUseBackendPostStatusNotificationModule (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), fireAnalyticsEventModule (ref), eventNames (ref), getFFlagMomentsUseUploadPostAsync (ref), makePostMetadataModule (ref), makeCreationEventFieldsModule (ref), captureService (ref), completeMomentUploadModule (ref)
 	local gameId, var15
 	if captureServiceUploadUniverseIdOverrideEngineFeature then
 		gameId = _game.GameId
@@ -63,7 +62,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 	p7.triggerToast({ title = p5.publishingTitle, text = p5.publishingBody })
 	gameId = getFFlagMomentsAnalyticsProducerPrereqs()
 	
-	local function _(p11) --[[ line: 139 | named "publishFields" ]]
+	local function _(p11) --[[ line: 138 | named "publishFields" ]]
 		-- upvalues: gameId (ref), p10 (ref)
 		if gameId then
 			p11.creationSessionId = p10
@@ -71,11 +70,8 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 		return p11
 	end
 	
-	local _ = function(p12, p13) --[[ line: 147 | named "fireUploadFailed" ]]
-		-- upvalues: fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), gameId (ref), p2 (ref), p10 (ref), fireAnalyticsEventModule (copy), eventNames (copy)
-		if fFlagMomentsRealtimeSessionTelemetry then
-			momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-		end
+	local _ = function(p12, p13) --[[ line: 146 | named "fireUploadFailed" ]]
+		-- upvalues: gameId (ref), p2 (ref), p10 (ref), fireAnalyticsEventModule (copy), eventNames (copy)
 		if not gameId and not p13 then return end
 		if gameId then
 			p12.localId = tostring(p2.LocalId)
@@ -84,8 +80,8 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 		fireAnalyticsEventModule(eventNames.UploadCaptureFailed, p12)
 	end
 	
-	task.spawn(function() --[[ line: 163 ]]
-		-- upvalues: getFFlagMomentsUseUploadPostAsync (copy), loggerModule (copy), p2 (ref), enumName (copy), makePostMetadataModule (copy), var15 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), gameId (ref), p10 (ref), captureService (copy), completeMomentUploadModule (copy), p6 (ref), p7 (ref), p8 (ref), p9 (ref), p5 (ref), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), captureServiceStartUploadCoreScriptBypassEngineFeature (copy), p4 (ref)
+	task.spawn(function() --[[ line: 157 ]]
+		-- upvalues: getFFlagMomentsUseUploadPostAsync (copy), loggerModule (copy), p2 (ref), enumName (copy), makePostMetadataModule (copy), var15 (write), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), gameId (ref), p10 (ref), captureService (copy), completeMomentUploadModule (copy), p6 (ref), p7 (ref), p8 (ref), p9 (ref), p5 (ref), captureServiceStartUploadCoreScriptBypassEngineFeature (copy), p4 (ref)
 		local ok_1
 		if getFFlagMomentsUseUploadPostAsync() then
 			loggerModule:debug("event=path_selected path=post_upload localId={}", string.gsub(string.gsub(enumName(p2.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"))
@@ -97,7 +93,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 				var18.creationSessionId = p10
 			end
 			fireAnalyticsEventModule(editingFlowMomentPublished, var18)
-			local ok, status = pcall(function() --[[ line: 174 ]]
+			local ok, status = pcall(function() --[[ line: 168 ]]
 				-- upvalues: captureService (copy), p2 (copy), var17 (ref)
 				return captureService:UploadPostAsync(p2, var17)
 			end)
@@ -110,7 +106,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 					feedStore = p8,
 					myCreationsStore = p9,
 					localizations = p5,
-					onPostedToFeed = function() --[[ line: 190 ]]
+					onPostedToFeed = function() --[[ line: 184 ]]
 						-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), status (ref), p2 (copy), enumName (copy), gameId (copy), p10 (copy)
 						local editingFlowMomentPostedToFeed = eventNames.EditingFlowMomentPostedToFeed
 						local t = {
@@ -136,10 +132,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 				error = tostring(status),
 				captureType = enumName(p2.CaptureType)
 			}
-			
-			if fFlagMomentsRealtimeSessionTelemetry then
-				momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-			end
 			local _ = not gameId
 			
 			if gameId then
@@ -151,7 +143,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 			return
 		elseif captureServiceStartUploadCoreScriptBypassEngineFeature then
 			loggerModule:debug("event=path_selected path=two_phase localId={}", string.gsub(string.gsub(enumName(p2.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"))
-			ok_1, status, var23 = pcall(function() --[[ line: 254 ]]
+			ok_1, status, var23 = pcall(function() --[[ line: 248 ]]
 				-- upvalues: captureService (copy), p2 (copy)
 				return captureService:StartUploadCaptureAsync(p2)
 			end)
@@ -163,7 +155,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 			end
 			if ok_1 then
 				if status == Enum.UploadCaptureResult.Success then
-					local ok_2, status_1 = pcall(function() --[[ line: 313 ]]
+					local ok_2, status_1 = pcall(function() --[[ line: 307 ]]
 						-- upvalues: captureService (copy), p2 (copy), var15 (copy), p4 (copy)
 						captureService:UploadCaptureAndPostMoment(p2, var15, p4)
 					end)
@@ -178,9 +170,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 							captureType = enumName(p2.CaptureType)
 						}
 						
-						if fFlagMomentsRealtimeSessionTelemetry then
-							momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-						end
 						if not gameId then return end
 						if gameId then
 							t.localId = tostring(p2.LocalId)
@@ -202,7 +191,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 						
 						for i = 1, 120 do
 							task.wait(5)
-							local ok_3, status_2, var30 = pcall(function() --[[ line: 352 ]]
+							local ok_3, status_2, var30 = pcall(function() --[[ line: 346 ]]
 								-- upvalues: captureService (copy), var23 (ref)
 								return captureService:CheckUploadCaptureStatusAsync(var23)
 							end)
@@ -234,9 +223,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 											captureType = enumName(p2.CaptureType)
 										}
 										
-										if fFlagMomentsRealtimeSessionTelemetry then
-											momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-										end
 										if not gameId then return end
 										if gameId then
 											t.localId = tostring(p2.LocalId)
@@ -253,9 +239,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 											captureType = enumName(p2.CaptureType)
 										}
 										
-										if fFlagMomentsRealtimeSessionTelemetry then
-											momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-										end
 										if not gameId then return end
 										if gameId then
 											t.localId = tostring(p2.LocalId)
@@ -272,7 +255,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 									feedStore = p8,
 									myCreationsStore = p9,
 									localizations = p5,
-									onPostedToFeed = function() --[[ line: 405 ]]
+									onPostedToFeed = function() --[[ line: 399 ]]
 										-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), var30 (ref), p2 (copy), enumName (copy), gameId (copy), p10 (copy)
 										local editingFlowMomentPostedToFeed = eventNames.EditingFlowMomentPostedToFeed
 										local t = {
@@ -298,9 +281,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 								captureType = enumName(p2.CaptureType)
 							}
 							
-							if fFlagMomentsRealtimeSessionTelemetry then
-								momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-							end
 							if not gameId then return end
 							if gameId then
 								t.localId = tostring(p2.LocalId)
@@ -318,9 +298,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 							captureType = enumName(p2.CaptureType)
 						}
 						
-						if fFlagMomentsRealtimeSessionTelemetry then
-							momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-						end
 						if not gameId then return end
 						if gameId then
 							t.localId = tostring(p2.LocalId)
@@ -342,10 +319,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 					status = enumName(status),
 					captureType = enumName(p2.CaptureType)
 				}
-				
-				if fFlagMomentsRealtimeSessionTelemetry then
-					momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-				end
 				local _ = not gameId
 				
 				if gameId then
@@ -367,9 +340,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 					t.status = "StartUploadFailed"
 					t.error = tostring(status)
 				end
-				if fFlagMomentsRealtimeSessionTelemetry then
-					momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
-				end
 				local _ = not gameId
 				
 				if gameId then
@@ -382,7 +352,7 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 			end
 		else
 			loggerModule:debug("event=path_selected path=fallback localId={}", string.gsub(string.gsub(enumName(p2.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"))
-			ok_1, status = pcall(function() --[[ line: 222 ]]
+			ok_1, status = pcall(function() --[[ line: 216 ]]
 				-- upvalues: captureService (copy), p2 (copy), var15 (copy), p4 (copy)
 				captureService:UploadCaptureAndPostMoment(p2, var15, p4)
 			end)
@@ -407,9 +377,6 @@ return function(p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ line: 94 | named "uplo
 				
 				if gameId then
 					t.status = "GenericFailure"
-				end
-				if fFlagMomentsRealtimeSessionTelemetry then
-					momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "failed")
 				end
 				local _ = not gameId
 				

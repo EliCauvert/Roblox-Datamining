@@ -626,18 +626,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,ご意見
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,児童のプレイヤーを保護するため、13歳未満のアカウントはフィードバックを送信できません。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,フィードバックは利用できません
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,切り抜きを追加
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,選択内容を編集
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,利用可能な切り抜きはありません。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,切り抜き（{count}/{max}枚）
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,クリエーターが問題を把握できるようご協力ください。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,切り抜きを読み込み中...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max}枚選択済み
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,1枚以上の切り抜きをアップロードできませんでした。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,バグ報告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,アイテムまたはデータの復元
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,カテゴリ*
@@ -646,14 +635,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,カテゴリ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,購入に関する問題
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最大{MAX}文字
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,詳細*
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,選択解除
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ゲームのバージョンや問題箇所を再現する手順など、問題に関連する情報をすべて記載してください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,不足しているものと、最後にそれを見た時期を説明してください。アカウントがハッキングされた場合は、Roblox CSチケット番号と関連する詳細も書き添えてください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,リクエストまたは問題をこちらに記入してください。状況を把握するため、できるだけ詳しく説明してください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,購入しようとしたもの、購入しようとした日時、合計金額（例：500 Robux / 4.99ドル）をお知らせください。表示されたエラーメッセージがあれば、それも含めてください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,規約違反を報告しますか？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>代わりに報告を送信してください。</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,選択
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,これにより、クリエーターは適切なアカウントをサポートできます。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,ユーザー情報をクリエーターとシェアする
@@ -922,7 +909,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,キャラクターをリス�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,このサーバーから退出し、別のサーバーに切り替えようとしています。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,以前プレイしたゲームに参加
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,このゲームから退出し、{PREVIOUS_EXPERIENCE}に戻ろうとしています。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,このゲームから退出し、{PREVIOUS_GAME}に戻ろうとしています。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,バイブレーション
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,必要がある場合もあります。
@@ -1266,7 +1255,7 @@ Feature.Avatar.Action.Revert,元に戻す
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,保存
 Feature.Avatar.Action.SaveAsNew,新規として保存
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,選択
 Feature.Avatar.Action.SelectMultipleItems,複数のアイテムを選択
 Feature.Avatar.Action.SelectSlot,スロットを選択
 Feature.Avatar.Action.Share,シェアする
@@ -1280,7 +1269,7 @@ Feature.Avatar.Action.Stay,
 Feature.Avatar.Action.Switch,切りかえ
 Feature.Avatar.Action.TryOn,試着する
 Feature.Avatar.Action.Unequip,装備を外す
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,選択解除
 Feature.Avatar.Action.UnslotEmote,エモート装備を外す
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,既存のキャラクターを更新
@@ -2293,6 +2282,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1時間
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー

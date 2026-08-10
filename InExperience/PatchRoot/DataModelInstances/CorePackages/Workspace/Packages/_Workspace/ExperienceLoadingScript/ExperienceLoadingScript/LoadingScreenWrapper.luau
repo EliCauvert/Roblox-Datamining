@@ -1,6 +1,7 @@
 ﻿local experienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
 local parent = experienceLoadingScript.Parent
 local experienceService = game:GetService("ExperienceService")
+local httpService = game:GetService("HttpService")
 local reactModule = require(parent.React)
 local roactUtilsModule = require(parent.RoactUtils)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
@@ -11,86 +12,87 @@ local getGameProductInfoModule = require(experienceLoadingScript.Thunks.GetGameP
 local getIsSubjectToChinaPoliciesModule = require(experienceLoadingScript.Thunks.GetIsSubjectToChinaPolicies)
 local getUniverseIdModule = require(experienceLoadingScript.Thunks.GetUniverseId)
 local getFFlagReportFirstExperienceCancelledModule = require(experienceLoadingScript.Flags.GetFFlagReportFirstExperienceCancelled)
+local requestInternalWrapper = require(parent.Http).NetworkLayers.requestInternalWrapper
 local queueExperimentation = require(parent.SocialExperiments).QueueExperimentation
 local progressLoadingModule = require(parent.ProgressLoading)
 local loadingScreenView = progressLoadingModule.LoadingScreenView
 local placeLauncherState = progressLoadingModule.PlaceLauncherState
-local createNetworking = progressLoadingModule.createNetworking
+local var12 = if require(parent.SharedFlags).FFlagAddAutoTranslateToLoadingScreen then progressLoadingModule.createNetworking else requestInternalWrapper(httpService)
 
-return function(p0) --[[ line: 33 | named "LoadingScreenWrapper" ]]
-	-- upvalues: useSelector (ref), useDispatch (ref), reactModule (ref), responsiveModule (ref), getUniverseIdModule (ref), createNetworking (ref), getGameProductInfoModule (ref), getIsSubjectToChinaPoliciesModule (ref), queueExperimentation (ref), experienceService (ref), placeLauncherState (ref), loadingScreenView (ref), getFFlagReportFirstExperienceCancelledModule (ref), loggingProtocolModule (ref)
-	local var11 = useSelector(function(p1) --[[ line: 34 ]]
+return function(p0) --[[ line: 38 | named "LoadingScreenWrapper" ]]
+	-- upvalues: useSelector (ref), useDispatch (ref), reactModule (ref), responsiveModule (ref), getUniverseIdModule (ref), var12 (ref), getGameProductInfoModule (ref), getIsSubjectToChinaPoliciesModule (ref), queueExperimentation (ref), experienceService (ref), placeLauncherState (ref), loadingScreenView (ref), getFFlagReportFirstExperienceCancelledModule (ref), loggingProtocolModule (ref)
+	local var13 = useSelector(function(p1) --[[ line: 39 ]]
 		-- upvalues: p0 (ref)
 		return if p1.gameIds then p1.gameIds.placeId else p0.placeId
 	end)
-	local var12 = useSelector(function(p2) --[[ line: 37 ]]
+	local var14 = useSelector(function(p2) --[[ line: 42 ]]
 		return if p2.gameIds then p2.gameIds.universeId else 0
 	end)
-	local var13 = useSelector(function(p3) --[[ line: 40 ]]
+	local var15 = useSelector(function(p3) --[[ line: 45 ]]
 		return p3.productInfo
 	end)
-	local var14 = useSelector(function(p4) --[[ line: 43 ]]
+	local var16 = useSelector(function(p4) --[[ line: 48 ]]
 		return p4.isSubjectToChinaPolicies
 	end)
-	local var15 = useDispatch()
-	local var16, var17 = reactModule.useState(false)
-	local var18 = reactModule.useRef(nil)
-	var18.current = responsiveModule.usePreferredInput()
-	reactModule.useEffect(function() --[[ line: 53 ]]
-		-- upvalues: var15 (ref), getUniverseIdModule (copy), createNetworking (copy), var11 (ref), getGameProductInfoModule (copy), getIsSubjectToChinaPoliciesModule (copy)
-		var15(getUniverseIdModule(createNetworking, var11))
-		var15(getGameProductInfoModule(var11))
-		var15(getIsSubjectToChinaPoliciesModule())
-	end, { var11, var15 })
-	reactModule.useEffect(function() --[[ line: 60 ]]
-		-- upvalues: var17 (ref)
-		local loadedConnection = game.Loaded:Connect(function() --[[ line: 61 ]]
-			-- upvalues: var17 (copy)
-			var17(true)
+	local var17 = useDispatch()
+	local var18, var19 = reactModule.useState(false)
+	local var20 = reactModule.useRef(nil)
+	var20.current = responsiveModule.usePreferredInput()
+	reactModule.useEffect(function() --[[ line: 58 ]]
+		-- upvalues: var17 (ref), getUniverseIdModule (copy), var12 (copy), var13 (ref), getGameProductInfoModule (copy), getIsSubjectToChinaPoliciesModule (copy)
+		var17(getUniverseIdModule(var12, var13))
+		var17(getGameProductInfoModule(var13))
+		var17(getIsSubjectToChinaPoliciesModule())
+	end, { var13, var17 })
+	reactModule.useEffect(function() --[[ line: 65 ]]
+		-- upvalues: var19 (ref)
+		local loadedConnection = game.Loaded:Connect(function() --[[ line: 66 ]]
+			-- upvalues: var19 (copy)
+			var19(true)
 		end)
 		
-		return function() --[[ line: 64 ]]
+		return function() --[[ line: 69 ]]
 			-- upvalues: loadedConnection (ref)
 			loadedConnection:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 70 ]]
-		-- upvalues: queueExperimentation (copy), experienceService (copy), var11 (ref), placeLauncherState (copy)
-		if not queueExperimentation.isInExperiment() or experienceService:GetFollowUserId() <= 0 or var11 <= 0 then return end
+	reactModule.useEffect(function() --[[ line: 75 ]]
+		-- upvalues: queueExperimentation (copy), experienceService (copy), var13 (ref), placeLauncherState (copy)
+		if not queueExperimentation.isInExperiment() or experienceService:GetFollowUserId() <= 0 or var13 <= 0 then return end
 		if experienceService:GetPlaceJoinState() == placeLauncherState.Queued then
 			queueExperimentation.logExposure()
 			
 			return
 		end
-		local placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p5) --[[ line: 78 ]]
+		local placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p5) --[[ line: 83 ]]
 			-- upvalues: placeLauncherState (copy), queueExperimentation (copy)
 			if p5 == placeLauncherState.Queued then
 				queueExperimentation.logExposure()
 			end
 		end)
 		
-		return function() --[[ line: 83 ]]
+		return function() --[[ line: 88 ]]
 			-- upvalues: placeJoinStateChangedConnection (ref)
 			placeJoinStateChangedConnection:Disconnect()
 		end
-	end, { var11 })
+	end, { var13 })
 	
 	return reactModule.createElement(loadingScreenView, {
 		manageRobloxGuiFocus = true,
-		placeId = var11,
-		universeId = var12,
-		productInfo = var13,
-		isSubjectToChinaPolicies = var14,
-		preferredInputRef = var18,
-		shouldStartFadeOut = var16,
-		onCloseButtonActivated = function() --[[ line: 96 ]]
+		placeId = var13,
+		universeId = var14,
+		productInfo = var15,
+		isSubjectToChinaPolicies = var16,
+		preferredInputRef = var20,
+		shouldStartFadeOut = var18,
+		onCloseButtonActivated = function() --[[ line: 101 ]]
 			-- upvalues: getFFlagReportFirstExperienceCancelledModule (copy), loggingProtocolModule (copy)
 			if getFFlagReportFirstExperienceCancelledModule then
 				loggingProtocolModule.default:logEventOnce("first_experience_cancelled")
 			end
 			game:Shutdown()
 		end,
-		onGamepadCancel = function() --[[ line: 102 ]]
+		onGamepadCancel = function() --[[ line: 107 ]]
 			if not game:IsLoaded() then
 				game:Shutdown()
 			end

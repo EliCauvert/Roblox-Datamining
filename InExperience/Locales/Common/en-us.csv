@@ -627,18 +627,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Thanks fo
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"To protect younger players, accounts under 13 can't send feedback."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Feedback Unavailable
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Add captures
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Edit selection
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,No captures available.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Captures ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Help the creator see your issue.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Loading captures...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} selected
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,One or more of your captures failed to upload.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Bug report
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Item or data restoration
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Category *
@@ -647,14 +636,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Select a cat
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Purchase issue
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Up to {MAX} characters
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Details *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Deselect
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Include anything relevant about the issue, like the game version and how to reproduce the steps."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Describe what is missing and when you last saw it. If your account was hacked, please include your Roblox CS ticket number and any relevant specifics."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Describe your request or issue here. Provide as much detail as possible to help us understand the situation.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Tell us what you tried to purchase, when it happened, and the total value (e.g. 500 Robux / $4.99). Include any error messages you saw."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Trying to report abuse?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Submit a report instead.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Select
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,This helps the creator support the correct account.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Share user information with creator
@@ -923,7 +910,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Respawn Character?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,You're about to leave this server and switch to another one.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Are you leaving?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Join previously visited games
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,You're about to leave this game and return to {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,You're about to leave this game and return to {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Vibration
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,to toggle menu navigation
@@ -1270,7 +1259,7 @@ Feature.Avatar.Action.Revert,Revert
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Save
 Feature.Avatar.Action.SaveAsNew,Save as new
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,Select
 Feature.Avatar.Action.SelectMultipleItems,Select multiple items
 Feature.Avatar.Action.SelectSlot,Select Slot
 Feature.Avatar.Action.Share,Share
@@ -2311,6 +2300,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1m
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
+Feature.Chat.Label.TryAgain,Try again
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,unknown user
 Feature.Chat.Label.User,User
@@ -3878,7 +3868,7 @@ Features.Transfers.Notification.ReceiveSuccess,You have already accepted the Rob
 Features.Transfers.RobuxTransfer.Action.Edit,
 Features.Transfers.RobuxTransfer.Action.Next,
 Features.Transfers.RobuxTransfer.Action.Send,
-Features.Transfers.RobuxTransfer.Action.TryAgain,Try again
+Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"You need an age check or parental consent to send Robux. Once you send, you cannot cancel."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} cannot receive Robux at the moment.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Send Robux

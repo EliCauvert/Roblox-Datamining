@@ -625,18 +625,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,感謝你
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,為了保護未成年玩家，使用者年齡未滿 13 歲的帳號無法傳送回饋。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,無法提交回饋
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,新增截圖
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,編輯選取內容
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,沒有可用的截圖。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,截圖（{count} 個，共 {max} 個）
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,協助創作者瞭解你的問題。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,正在載入截圖...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,已選擇 {count} 個，共 {max} 個
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,你有一或多個截圖無法上傳。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,錯誤報告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,道具或資料還原
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,類別*
@@ -645,14 +634,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,選擇類別
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,購買問題
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 個字元
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,詳細資訊*
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消選擇
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,請提供與問題相關的所有資訊，例如遊戲版本和重現問題的步驟。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,請描述遺失的物品，以及最後一次看到該物品的時間。若帳號遭到駭客入侵，請提供你的 Roblox 客服票證編號，以及任何相關的詳細資訊。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,請在此描述你的請求或問題。請盡可能提供詳細資訊，以利我們瞭解情況。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,請告訴我們你嘗試購買的商品、購買時間以及總價值（例如 500 Robux／$4.99），並附上你看到的任何錯誤訊息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想檢舉濫用嗎？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改為提交檢舉。</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,選擇
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,這有助於創作者為正確的帳號提供支援。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,與創作者分享使用者資訊
@@ -921,7 +908,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,重生角色？
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,你即將離開此伺服器，並切換至另一個伺服器。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要離開了嗎？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入先前造訪過的遊戲
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即將離開此遊戲，並返回「{PREVIOUS_EXPERIENCE}」。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即將離開此遊戲，並返回「{PREVIOUS_GAME}」。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,震動
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,來切換選單導航
@@ -1265,7 +1254,7 @@ Feature.Avatar.Action.Revert,還原
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,儲存
 Feature.Avatar.Action.SaveAsNew,儲存為新裝扮
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,選擇
 Feature.Avatar.Action.SelectMultipleItems,選擇多個道具
 Feature.Avatar.Action.SelectSlot,選擇欄位
 Feature.Avatar.Action.Share,分享
@@ -1279,7 +1268,7 @@ Feature.Avatar.Action.Stay,
 Feature.Avatar.Action.Switch,切換
 Feature.Avatar.Action.TryOn,試穿
 Feature.Avatar.Action.Unequip,解除裝備
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,取消選擇
 Feature.Avatar.Action.UnslotEmote,移除動作
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,更新現有角色
@@ -2292,6 +2281,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小時
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
+Feature.Chat.Label.TryAgain,再試一次
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者

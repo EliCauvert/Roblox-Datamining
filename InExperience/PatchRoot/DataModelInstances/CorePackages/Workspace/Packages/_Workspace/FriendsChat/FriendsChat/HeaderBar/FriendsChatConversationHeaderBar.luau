@@ -5,7 +5,6 @@ local expChatSharedModule = require(parent.ExpChatShared)
 local useInterpolatedClientSettingsModule = require(parent.ExpChatIntegration.useInterpolatedClientSettings)
 local useChatWindowSettingsModule = require(parent.ExpChatIntegration.useChatWindowSettings)
 local friendsChatFacePileModule = require(script.Parent.FriendsChatFacePile)
-local resolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
 local view = foundationModule.View
 local iconButton = foundationModule.IconButton
 local iconName = foundationModule.Enums.IconName
@@ -14,31 +13,39 @@ local buttonSize = foundationModule.Enums.ButtonSize
 local useTokens = foundationModule.Hooks.useTokens
 local name = expChatSharedModule.Logger:new(script.Name)
 
-return function(p0) --[[ line: 73 | named "FriendsChatConversationHeaderBar" ]]
-	-- upvalues: useTokens (ref), useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), name (ref), resolveFadeModule (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), friendsChatFacePileModule (ref)
-	local var8 = useTokens()
-	local var9 = useChatWindowSettingsModule()
-	local chatWindowSettings = p0.chatWindowSettings
-	local var10 = useInterpolatedClientSettingsModule(chatWindowSettings or reactModule.useMemo(function() --[[ line: 76 ]]
-		-- upvalues: var9 (ref)
+local function _(p0, p1) --[[ line: 76 | named "resolveFade" ]]
+	return if type(p1) == "number" then p0 + p1 * (1 - p0) elseif p1 == nil then p0 else p1:map(function(p2) --[[ line: 80 ]]
+		-- upvalues: p0 (ref)
+		return p0 + p2 * (1 - p0)
+	end)
+end
+
+return function(p3) --[[ line: 87 | named "FriendsChatConversationHeaderBar" ]]
+	-- upvalues: useTokens (ref), useChatWindowSettingsModule (ref), reactModule (ref), useInterpolatedClientSettingsModule (ref), name (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref), friendsChatFacePileModule (ref)
+	local var16
+	local var7 = useTokens()
+	local var8 = useChatWindowSettingsModule()
+	local chatWindowSettings = p3.chatWindowSettings
+	local var9 = useInterpolatedClientSettingsModule(chatWindowSettings or reactModule.useMemo(function() --[[ line: 90 ]]
+		-- upvalues: var8 (ref)
 		return {
-			BackgroundColor3 = var9.ChatWindowBackgroundColor3,
-			BackgroundTransparency = var9.ChatWindowBackgroundTransparency
+			BackgroundColor3 = var8.ChatWindowBackgroundColor3,
+			BackgroundTransparency = var8.ChatWindowBackgroundTransparency
 		}
-	end, { var9 }))
-	local var11 = if chatWindowSettings then chatWindowSettings.FontFace else nil
-	local var12 = reactModule.useMemo(function() --[[ line: 94 ]]
-		-- upvalues: var11 (ref), var8 (ref)
-		if var11 == nil then
+	end, { var8 }))
+	local var10 = if chatWindowSettings then chatWindowSettings.FontFace else nil
+	local var11 = reactModule.useMemo(function() --[[ line: 108 ]]
+		-- upvalues: var10 (ref), var7 (ref)
+		if var10 == nil then
 			return nil
 		end
-		local cloned = table.clone(var8.Typography.TitleMedium)
-		cloned.Font = if typeof(var11) == "Font" then Font.new(var11.Family, Enum.FontWeight.Bold, var11.Style) else var11
+		local cloned = table.clone(var7.Typography.TitleMedium)
+		cloned.Font = if typeof(var10) == "Font" then Font.new(var10.Family, Enum.FontWeight.Bold, var10.Style) else var10
 		
 		return { title = cloned }
-	end, { var8, var11 })
-	local onBack = p0.onBack
-	local var13 = reactModule.useCallback(function() --[[ line: 112 ]]
+	end, { var7, var10 })
+	local onBack = p3.onBack
+	local var12 = reactModule.useCallback(function() --[[ line: 126 ]]
 		-- upvalues: name (copy), onBack (ref)
 		name:info("Back button activated")
 		
@@ -46,63 +53,94 @@ return function(p0) --[[ line: 73 | named "FriendsChatConversationHeaderBar" ]]
 			onBack()
 		end
 	end, { onBack })
-	local var14 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 120 ]]
-		-- upvalues: var14 (ref), p0 (ref)
-		local current = var14.current
+	local var13 = reactModule.useRef(nil)
+	reactModule.useEffect(function() --[[ line: 134 ]]
+		-- upvalues: var13 (ref), p3 (ref)
+		local current = var13.current
 		
-		if current and p0.onAbsoluteSizeChanged then
-			p0.onAbsoluteSizeChanged(current)
+		if current and p3.onAbsoluteSizeChanged then
+			p3.onAbsoluteSizeChanged(current)
 		end
-	end, { p0.onAbsoluteSizeChanged })
-	
-	return reactModule.createElement("Frame", {
+	end, { p3.onAbsoluteSizeChanged })
+	local createElement = reactModule.createElement
+	local var14 = "Frame"
+	local t = {
 		Name = "FriendsChatConversationHeaderBar",
-		BackgroundColor3 = var10.BackgroundColor3 or var8.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = if p0.suppressBackground then 1 else resolveFadeModule(var10.BackgroundTransparency, p0.transparencyValue),
-		Active = p0.interactable == nil or p0.interactable,
-		BorderSizePixel = 0,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = UDim2.new(1, 0, 0, 0),
-		LayoutOrder = p0.layoutOrder,
-		ZIndex = p0.zIndex,
-		[reactModule.Change.AbsoluteSize] = p0.onAbsoluteSizeChanged,
-		[reactModule.Event.MouseEnter] = p0.onHovered,
-		[reactModule.Event.MouseLeave] = p0.onUnhovered,
-		ref = var14
-	}, {
-		Content = reactModule.createElement("CanvasGroup", {
-			Name = "FriendsChatConversationHeaderContent",
-			BackgroundTransparency = 1,
-			BorderSizePixel = 0,
-			GroupTransparency = resolveFadeModule(0, p0.transparencyValue),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, 0, 0, 0),
-			Interactable = p0.interactable,
-			ZIndex = p0.zIndex
+		BackgroundColor3 = var9.BackgroundColor3 or var7.Color.Surface.Surface_0.Color3
+	}
+	
+	if p3.suppressBackground then
+		var16 = 1
+	else
+		local backgroundTransparency = var9.BackgroundTransparency
+		local transparencyValue = p3.transparencyValue
+		var16 = if type(transparencyValue) == "number" then backgroundTransparency + transparencyValue * (1 - backgroundTransparency) elseif transparencyValue ~= nil then backgroundTransparency else transparencyValue:map(function(p4) --[[ line: 80 ]]
+			-- upvalues: backgroundTransparency (ref)
+			return backgroundTransparency + p4 * (1 - backgroundTransparency)
+		end)
+	end
+	local var20
+	t.BackgroundTransparency = var16
+	t.Active = p3.interactable == nil or p3.interactable
+	t.BorderSizePixel = 0
+	t.AutomaticSize = Enum.AutomaticSize.Y
+	t.Size = UDim2.new(1, 0, 0, 0)
+	t.LayoutOrder = p3.layoutOrder
+	t.ZIndex = p3.zIndex
+	t[reactModule.Change.AbsoluteSize] = p3.onAbsoluteSizeChanged
+	t[reactModule.Event.MouseEnter] = p3.onHovered
+	t[reactModule.Event.MouseLeave] = p3.onUnhovered
+	t.ref = var13
+	local t_1 = {}
+	local createElement_1 = reactModule.createElement
+	local var18 = "CanvasGroup"
+	local t_2 = {
+		Name = "FriendsChatConversationHeaderContent",
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0
+	}
+	local transparencyValue = p3.transparencyValue
+	
+	if type(transparencyValue) == "number" then
+		var20 = 0 + transparencyValue * 1
+	elseif transparencyValue == nil then
+		var20 = 0
+	else
+		local var21 = 0
+		var20 = transparencyValue:map(function(p5) --[[ line: 80 ]]
+			-- upvalues: var21 (ref)
+			return var21 + p5 * (1 - var21)
+		end)
+	end
+	t_2.GroupTransparency = var20
+	t_2.AutomaticSize = Enum.AutomaticSize.Y
+	t_2.Size = UDim2.new(1, 0, 0, 0)
+	t_2.Interactable = p3.interactable
+	t_2.ZIndex = p3.zIndex
+	t_1.Content = createElement_1(var18, t_2, {
+		Row = reactModule.createElement(view, {
+			tag = "row align-y-center gap-small size-full-0 auto-y padding-x-small padding-y-small"
 		}, {
-			Row = reactModule.createElement(view, {
-				tag = "row align-y-center gap-small size-full-0 auto-y padding-x-small padding-y-small"
-			}, {
-				BackButton = reactModule.createElement(iconButton, {
-					testId = "friends-chat-back-button",
-					LayoutOrder = 1,
-					icon = iconName.ChevronLargeLeft,
-					variant = buttonVariant.Utility,
-					size = buttonSize.XSmall,
-					onActivated = var13
-				}),
-				FacePileContainer = reactModule.createElement(view, { tag = "fill size-0-800", LayoutOrder = 2 }, {
-					FacePile = reactModule.createElement(friendsChatFacePileModule, {
-						participantUserIds = p0.participantUserIds,
-						localUserId = p0.localUserId,
-						titleText = p0.titleText,
-						titleStyle = if var12 then var12.title else nil,
-						onActivated = p0.onActivated,
-						selectable = if p0.onActivated ~= nil then nil else true
-					})
+			BackButton = reactModule.createElement(iconButton, {
+				testId = "friends-chat-back-button",
+				LayoutOrder = 1,
+				icon = iconName.ChevronLargeLeft,
+				variant = buttonVariant.Utility,
+				size = buttonSize.XSmall,
+				onActivated = var12
+			}),
+			FacePileContainer = reactModule.createElement(view, { tag = "fill size-0-800", LayoutOrder = 2 }, {
+				FacePile = reactModule.createElement(friendsChatFacePileModule, {
+					participantUserIds = p3.participantUserIds,
+					localUserId = p3.localUserId,
+					titleText = p3.titleText,
+					titleStyle = if var11 then var11.title else nil,
+					onActivated = p3.onActivated,
+					selectable = if p3.onActivated ~= nil then nil else true
 				})
 			})
 		})
 	})
+	
+	return createElement(var14, t, t_1)
 end

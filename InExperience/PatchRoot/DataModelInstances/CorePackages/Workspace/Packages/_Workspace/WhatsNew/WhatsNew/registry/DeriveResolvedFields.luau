@@ -2,7 +2,7 @@
 local enumsModule = require(whatsNew.Enums)
 local _ = require(whatsNew.Types)
 local t = {
-	isEntryInScopeSubtree = function(p0, p1, p2) --[[ line: 27 ]]
+	isEntryInScopeSubtree = function(p0, p1, p2) --[[ line: 29 ]]
 		local scopeId = p0.scopeId
 		while scopeId ~= nil do
 			if scopeId ~= p1 then
@@ -18,95 +18,103 @@ local t = {
 		end
 		return false
 	end,
-	isEntryExpired = function(p3, p4, p5) --[[ line: 46 ]]
+	isEntryExpired = function(p3, p4, p5, p6) --[[ line: 48 ]]
 		-- upvalues: enumsModule (ref)
-		local var5
-		if p3.publishedTime == nil then
-			var5 = nil
-		else
-			local dateTime = DateTime.fromIsoDate(p3.publishedTime)
-			var5 = if dateTime then dateTime.UnixTimestamp else nil
-		end
-		if var5 ~= nil and p5.currentTime < var5 then
-			return true
-		elseif p4 == enumsModule.TourType.Onboarding then
+		if p4 == enumsModule.TourType.Onboarding then
 			return false
 		elseif p3.disabledTime ~= nil then
 			local dateTime = DateTime.fromIsoDate(p3.disabledTime)
-			local var7 = if dateTime then dateTime.UnixTimestamp else nil
+			local var5 = if dateTime then dateTime.UnixTimestamp else nil
 			
-			return var7 == nil or var7 > p5.currentTime
+			if var5 ~= nil and var5 <= p5.currentTime then
+				return true
+			elseif p3.publishedTime ~= nil then
+				local dateTime = DateTime.fromIsoDate(p3.publishedTime)
+				local var7 = if dateTime then dateTime.UnixTimestamp else nil
+				
+				if var7 ~= nil then
+					return p5.currentTime < var7 or var7 + p6.updateEntryDuration * 86400 <= p5.currentTime
+				end
+			end
 		end
 	end
 }
 
-local function _(p6, p7) --[[ line: 11 | named "clientGatesPass" ]]
+local function _(p7, p8) --[[ line: 13 | named "clientGatesPass" ]]
 	-- upvalues: enumsModule (ref)
-	return if p6 == enumsModule.TourType.Onboarding then p7.onboardingEligible else true
+	return if p7 == enumsModule.TourType.Onboarding then p8.grandfathered ~= true else true
 end
 
-local _ = function(p8) --[[ line: 18 | named "isNonEmptyString" ]]
-	return p8 ~= nil and p8 ~= ""
+local _ = function(p9) --[[ line: 20 | named "isNonEmptyString" ]]
+	return p9 ~= nil and p9 ~= ""
 end
 
-local _ = function(p9) --[[ line: 22 | named "isoDateToUnix" ]]
-	local dateTime = DateTime.fromIsoDate(p9)
+local _ = function(p10) --[[ line: 24 | named "isoDateToUnix" ]]
+	local dateTime = DateTime.fromIsoDate(p10)
 	
 	return if dateTime then dateTime.UnixTimestamp else nil
 end
 
-function t.deriveEntryDisplay(p10, p11, p12) --[[ line: 74 ]]
+function t.deriveEntryDisplay(p11, p12, p13, p14) --[[ line: 84 ]]
 	-- upvalues: t (ref), enumsModule (ref)
-	local var9 = t.isEntryExpired(p10, p11, p12)
-	local id = p12.storage[p10.id]
+	local var11
+	local var9 = t.isEntryExpired(p11, p12, p13, p14)
+	local id = p13.storage[p11.id]
 	local var10 = if id then id.seen else nil
+	local meta = p13.meta
 	
+	if p12 == enumsModule.TourType.Onboarding then
+		var11 = meta.grandfathered ~= true
+		var11 = nil
+	else
+		var11 = true
+	end
 	return {
-		id = p10.id,
-		scopeId = p10.scopeId,
-		title = p10.title,
-		text = p10.text,
-		icon = p10.icon,
-		enabled = p10.enabled,
-		publishedTime = p10.publishedTime,
-		disabledTime = p10.disabledTime,
+		id = p11.id,
+		scopeId = p11.scopeId,
+		title = p11.title,
+		text = p11.text,
+		icon = p11.icon,
+		enabled = p11.enabled,
+		publishedTime = p11.publishedTime,
+		disabledTime = p11.disabledTime,
 		expired = var9,
 		seen = var10,
 		optOutCount = if id then id.optOutCount else 0,
 		adopted = if id then id.adopted else false,
-		toShow = p10.enabled and (not var9 and (var10 == nil and (if p11 == enumsModule.TourType.Onboarding then p12.onboardingEligible else true)))
+		toShow = p11.enabled and (not var9 and (var10 == nil and var11))
 	}
 end
 
-function t.getLabels(p13, p14) --[[ line: 102 ]]
+function t.getLabels(p15, p16) --[[ line: 113 ]]
 	-- upvalues: enumsModule (ref)
-	return if p14 == enumsModule.TourType.Onboarding then {
-		title = p13.onboardingTitle or "",
-		text = p13.onboardingText or ""
+	return if p16 == enumsModule.TourType.Onboarding then {
+		title = p15.onboardingTitle or "",
+		text = p15.onboardingText or ""
 	} else {
-		title = p13.updatesTitle or "",
-		text = p13.updatesText or ""
+		title = p15.updatesTitle or "",
+		text = p15.updatesText or ""
 	}
 end
 
-function t.hasLabels(p15) --[[ line: 116 ]]
-	local title = p15.title
-	local var11 = title ~= nil and title ~= ""
+function t.hasLabels(p17) --[[ line: 127 ]]
+	local title = p17.title
+	local var12 = title ~= nil and title ~= ""
 	
-	if not var11 then
-		local text = p15.text
-		var11 = text ~= nil and text ~= ""
-	end
-	return var11
-end
-
-function t.countScopeSteps(p16) --[[ line: 120 ]]
-	local var12 = 0
-	
-	for i, v in p16.tourTips do
-		var12 += v.stepCount
+	if not var12 then
+		local text = p17.text
+		var12 = text ~= nil and text ~= ""
 	end
 	return var12
+end
+
+function t.countScopeSteps(p18) --[[ line: 131 ]]
+	local var13 = 0
+	
+	for i, v in p18.tourTips do
+		var13 += v.stepCount
+	end
+	return var13
 end
 
 return t

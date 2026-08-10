@@ -7,7 +7,6 @@ local analytics = momentsCommonModule.Analytics
 local momentsSurfaceLoadManager = momentsCommonModule.Performance.MomentsSurfaceLoadManager
 local fFlagMomentsSurfaceLoadTTI = sharedFlagsModule.FFlagMomentsSurfaceLoadTTI
 local fFlagMomentsRealtimeObservability = momentsCommonModule.Flags.FFlagMomentsRealtimeObservability
-local fFlagMomentsContentStatsTelemetry = momentsCommonModule.Flags.FFlagMomentsContentStatsTelemetry
 local _ = require(script.Parent.FeedTypes)
 local createPagerStoreModule = require(moments.Components.VerticalPager.createPagerStore)
 local fFlagMomentsNonInfiniteScrollEndStateFixesModule = require(moments.Flags.FFlagMomentsNonInfiniteScrollEndStateFixes)
@@ -15,8 +14,8 @@ local createSignal = signalsModule.createSignal
 local t = { kind = "skeleton" }
 local t_1 = { kind = "endState" }
 
-return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
-	-- upvalues: createPagerStoreModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), fFlagMomentsContentStatsTelemetry (ref), analytics (ref), t_1 (ref), fFlagMomentsRealtimeObservability (ref), t (ref), fFlagMomentsSurfaceLoadTTI (ref), momentsSurfaceLoadManager (ref)
+return function(p0, p1, p2, p3) --[[ line: 101 | named "createFeedStore" ]]
+	-- upvalues: createPagerStoreModule (ref), createSignal (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (ref), t_1 (ref), fFlagMomentsRealtimeObservability (ref), analytics (ref), t (ref), fFlagMomentsSurfaceLoadTTI (ref), momentsSurfaceLoadManager (ref)
 	local var8 = createPagerStoreModule()
 	local var9, var10 = createSignal("Loading")
 	local var11, var12 = createSignal(nil)
@@ -41,7 +40,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 	end
 	local t_3 = {}
 	
-	local function _() --[[ line: 151 | named "stripTrailingSkeleton" ]]
+	local function _() --[[ line: 150 | named "stripTrailingSkeleton" ]]
 		-- upvalues: var8 (ref)
 		local items = var8.getItems(false)
 		local var37 = items[#items]
@@ -51,8 +50,8 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 		end
 	end
 	
-	local function dedupeAndTrack(p4) --[[ line: 171 ]]
-		-- upvalues: p1 (ref), t_2 (write), fFlagMomentsContentStatsTelemetry (copy), analytics (copy), recommendationSource (ref)
+	local function dedupeAndTrack(p4) --[[ line: 165 ]]
+		-- upvalues: p1 (ref), t_2 (write)
 		if p1 == nil then
 			return p4
 		end
@@ -67,17 +66,13 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 				elseif not t_2[status] then
 					t_2[status] = true
 					table.insert(t, v)
-				elseif fFlagMomentsContentStatsTelemetry then
-					analytics.reportMomentsFeedItemFiltered("duplicate", recommendationSource)
 				end
-			elseif fFlagMomentsContentStatsTelemetry then
-				analytics.reportMomentsFeedItemFiltered("malformed", recommendationSource)
 			end
 		end
 		return t
 	end
 	
-	local _ = function(p5) --[[ line: 198 | named "countRealItems" ]]
+	local _ = function(p5) --[[ line: 186 | named "countRealItems" ]]
 		local var39 = 0
 		
 		for i, v in p5 do
@@ -88,7 +83,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 		return var39
 	end
 	
-	local function maybeAppendEndState() --[[ line: 211 ]]
+	local function maybeAppendEndState() --[[ line: 199 ]]
 		-- upvalues: var24 (write), var25 (ref), var8 (ref), t_3 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var28 (write), var13 (ref), var26 (ref), t_1 (copy)
 		if var24 == nil or var25(false) then return end
 		local items = var8.getItems(false)
@@ -130,7 +125,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 		var8.addItems({ t_1 })
 	end
 	
-	local function runFetch(p6) --[[ line: 249 ]]
+	local function runFetch(p6) --[[ line: 237 ]]
 		-- upvalues: var20 (write), var13 (ref), var22 (write), var19 (write), var16 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var12 (ref), var8 (ref), t (copy), var10 (ref), var24 (write), p3 (ref), var26 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var28 (write), t_3 (ref), fFlagMomentsSurfaceLoadTTI (copy), p2 (ref), momentsSurfaceLoadManager (copy), var18 (write), p0 (ref), t_2 (write), dedupeAndTrack (ref), var21 (write), var14 (ref), maybeAppendEndState (ref)
 		if var20 then return end
 		if not p6 and not var13(false) then return end
@@ -167,7 +162,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 		var8.addItems({ t })
 		var10("LoadingMore")
 		local var46 = if p6 then nil else var18
-		task.spawn(function() --[[ line: 311 ]]
+		task.spawn(function() --[[ line: 299 ]]
 			-- upvalues: p0 (copy), var46 (ref), var20 (copy), var44 (ref), var22 (copy), var19 (copy), fFlagMomentsSurfaceLoadTTI (copy), p2 (copy), p6 (ref), sessionGeneration (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var8 (copy), var18 (copy), var21 (copy), var14 (copy), var10 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p3 (copy), maybeAppendEndState (copy), var12 (copy), var16 (copy)
 			local ok, status = pcall(p0.fetchAsync, var46)
 			
@@ -263,7 +258,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 		end)
 	end
 	
-	local function loadInitial() --[[ line: 432 ]]
+	local function loadInitial() --[[ line: 420 ]]
 		-- upvalues: runFetch (ref)
 		runFetch(true)
 	end
@@ -278,7 +273,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 		getAtScrollLimit = var25,
 		getCanLoadMoreBeyondLimit = var27,
 		loadInitial = loadInitial,
-		loadMore = function() --[[ line: 436 ]]
+		loadMore = function() --[[ line: 424 ]]
 			-- upvalues: fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p3 (ref), var25 (ref), var19 (write), var15 (ref), var20 (write), var13 (ref), var22 (write), var16 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), var8 (ref), t (copy), var10 (ref), var18 (write), p0 (ref), fFlagMomentsSurfaceLoadTTI (copy), p2 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), var21 (write), var14 (ref), maybeAppendEndState (ref), var12 (ref)
 			if fFlagMomentsNonInfiniteScrollEndStateFixesModule then
 				if p3 ~= nil and var25(false) then return end
@@ -298,7 +293,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 			var8.addItems({ t })
 			var10("LoadingMore")
 			local var57 = false
-			task.spawn(function() --[[ line: 311 ]]
+			task.spawn(function() --[[ line: 299 ]]
 				-- upvalues: p0 (copy), var18 (ref), var20 (copy), var55 (ref), var22 (copy), var19 (copy), fFlagMomentsSurfaceLoadTTI (copy), p2 (copy), var57 (ref), var56 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var8 (copy), var18 (copy), var21 (copy), var14 (copy), var10 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p3 (copy), maybeAppendEndState (copy), var12 (copy), var16 (copy)
 				local ok, status = pcall(p0.fetchAsync, var18)
 				
@@ -393,7 +388,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 				end
 			end)
 		end,
-		loadBeyondLimit = function() --[[ line: 462 ]]
+		loadBeyondLimit = function() --[[ line: 450 ]]
 			-- upvalues: var20 (write), p3 (ref), var25 (ref), var13 (ref), t_3 (ref), var8 (ref), var24 (write), var26 (ref), maybeAppendEndState (ref), var22 (write), var19 (write), var16 (ref), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (ref), t (copy), var10 (ref), var18 (write), p0 (ref), fFlagMomentsSurfaceLoadTTI (copy), p2 (ref), momentsSurfaceLoadManager (copy), t_2 (write), dedupeAndTrack (ref), var21 (write), var14 (ref), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), var12 (ref)
 			if var20 or p3 == nil or not var25(false) then return end
 			if not var13(false) and #t_3 == 0 then return end
@@ -439,7 +434,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 			var8.addItems({ t })
 			var10("LoadingMore")
 			local var64 = false
-			task.spawn(function() --[[ line: 311 ]]
+			task.spawn(function() --[[ line: 299 ]]
 				-- upvalues: p0 (copy), var18 (ref), var20 (copy), var62 (ref), var22 (copy), var19 (copy), fFlagMomentsSurfaceLoadTTI (copy), p2 (copy), var64 (ref), var63 (write), momentsSurfaceLoadManager (copy), t_2 (copy), dedupeAndTrack (copy), var8 (copy), var18 (copy), var21 (copy), var14 (copy), var10 (copy), fFlagMomentsRealtimeObservability (copy), analytics (copy), recommendationSource (copy), fFlagMomentsNonInfiniteScrollEndStateFixesModule (copy), p3 (copy), maybeAppendEndState (copy), var12 (copy), var16 (copy)
 				local ok, status = pcall(p0.fetchAsync, var18)
 				
@@ -534,7 +529,7 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 				end
 			end)
 		end,
-		prependItem = function(p7) --[[ line: 500 ]]
+		prependItem = function(p7) --[[ line: 488 ]]
 			-- upvalues: dedupeAndTrack (ref), var8 (ref), var9 (ref), var10 (ref)
 			local var65 = dedupeAndTrack({ p7 })
 			
@@ -546,11 +541,11 @@ return function(p0, p1, p2, p3) --[[ line: 102 | named "createFeedStore" ]]
 			end
 		end,
 		refresh = loadInitial,
-		retry = function() --[[ line: 514 ]]
+		retry = function() --[[ line: 502 ]]
 			-- upvalues: runFetch (ref), var8 (ref)
 			runFetch(var8.getCount(false) == 0)
 		end,
-		dispose = function() --[[ line: 518 ]]
+		dispose = function() --[[ line: 506 ]]
 			-- upvalues: var20 (write), p0 (ref), var8 (ref)
 			var20 = true
 			

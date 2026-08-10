@@ -17,9 +17,10 @@ local expChatConversationListAdapterModule = require(script.Parent.ExpChatConver
 local useConversationListPaginationModule = require(script.Parent.useConversationListPagination)
 local layoutConstantsModule = require(friendsChat.LayoutConstants)
 local useFriendsChatLandingTelemetryModule = require(script.Parent.Parent.Telemetry.ChatLanding.useFriendsChatLandingTelemetry)
+local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
+local fillBehavior = foundationModule.Enums.FillBehavior
 local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local inputSize = foundationModule.Enums.InputSize
@@ -38,32 +39,33 @@ local friendsChatConversationListWindowSize = game:DefineFastInt("FriendsChatCon
 local t = {
 	NoFriends = "Feature.Chat.Text.NoFriends",
 	SearchPlaceholder = "CommonUI.Controls.Action.Search",
+	Retry = "InGame.CommonUI.Button.Retry",
 	Loading = "Feature.Chat.Label.Loading",
-	NoChatFound = "Feature.Chat.Label.NoChatFound",
-	SomethingWentWrong = "CommonUI.Messages.Response.SomethingWentWrong"
+	TryAgain = "Feature.Chat.Label.TryAgain",
+	NoChatFound = "Feature.Chat.Label.NoChatFound"
 }
 
-local function _(p0, p1) --[[ line: 83 | named "getColorStyle" ]]
+local function _(p0, p1) --[[ line: 85 | named "getColorStyle" ]]
 	return { Color3 = p0, Transparency = p1 }
 end
 
-local _ = function(p2, p3) --[[ line: 90 | named "getTransparencyOrBindingValue" ]]
+local _ = function(p2, p3) --[[ line: 92 | named "getTransparencyOrBindingValue" ]]
 	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p3) then p3:map(function(p4) --[[ line: 92 ]]
+	return if reactIsModule.isBinding(p3) then p3:map(function(p4) --[[ line: 94 ]]
 		-- upvalues: p2 (ref)
 		return p2 + p4 * (1 - p2)
 	end) else p3
 end
 
-local _ = function(p5, p6) --[[ line: 100 | named "getTextTransparency" ]]
+local _ = function(p5, p6) --[[ line: 102 | named "getTextTransparency" ]]
 	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p5) then p5:map(function(p7) --[[ line: 102 ]]
+	return if reactIsModule.isBinding(p5) then p5:map(function(p7) --[[ line: 104 ]]
 		-- upvalues: p6 (ref)
 		return p6 + p7 * (1 - p6)
 	end) else p6
 end
 
-local function mergeTransparency(p8, p9) --[[ line: 110 ]]
+local function mergeTransparency(p8, p9) --[[ line: 112 ]]
 	-- upvalues: reactIsModule (ref), reactModule (ref)
 	local t = {}
 	local var24 = p8
@@ -75,7 +77,7 @@ local function mergeTransparency(p8, p9) --[[ line: 110 ]]
 			var24 += (v or 0) * (1 - var24)
 		end
 	end
-	return if #t == 0 then var24 else reactModule.joinBindings(t):map(function(p10) --[[ line: 126 ]]
+	return if #t == 0 then var24 else reactModule.joinBindings(t):map(function(p10) --[[ line: 128 ]]
 		-- upvalues: var24 (write)
 		local var25 = var24
 		
@@ -86,21 +88,21 @@ local function mergeTransparency(p8, p9) --[[ line: 110 ]]
 	end)
 end
 
-local _ = function(p11) --[[ line: 135 | named "normalizeSearchText" ]]
+local _ = function(p11) --[[ line: 137 | named "normalizeSearchText" ]]
 	return string.lower(p11 or "")
 end
 
-local _ = function(p12, p13) --[[ line: 139 | named "containsSearchText" ]]
+local _ = function(p12, p13) --[[ line: 141 | named "containsSearchText" ]]
 	return p13 == "" or string.find(string.lower(p12 or ""), p13, 1, true) ~= nil
 end
 
-return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConversationList" ]]
-	-- upvalues: useTokens (ref), useChatPlatformModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useLocalization (ref), t (ref), useInterpolatedClientSettingsModule (ref), reactIsModule (ref), mergeTransparency (ref), useChatInputBarSettingsModule (ref), layoutConstantsModule (ref), useConversationList (ref), useConversationListPaginationModule (ref), getConversationTitle (ref), useFriendsChatLandingTelemetryModule (ref), textChatService (ref), conversationRow (ref), promiseModule (ref), fFlagAppChatUseUltimateListConversationListModule (ref), conversationListUltimate (ref), bidirectionalFlatList (ref), friendsChatConversationListScrollbarThickness (ref), friendsChatConversationListWindowSize (ref), friendsChatConversationListInitialNumToRender (ref), friendsChatConversationListPaginationThresholdRows (ref), friendsChatConversationListAutoscrollToTopThreshold (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), iconButton (ref), inputSize (ref), buttonVariant (ref)
+return reactModule.memo(function(p14) --[[ line: 148 | named "FriendsChatConversationList" ]]
+	-- upvalues: useTokens (ref), useChatPlatformModule (ref), useChatWindowSettingsModule (ref), reactModule (ref), useLocalization (ref), t (ref), useInterpolatedClientSettingsModule (ref), reactIsModule (ref), mergeTransparency (ref), useChatInputBarSettingsModule (ref), layoutConstantsModule (ref), useConversationList (ref), useConversationListPaginationModule (ref), getConversationTitle (ref), useFriendsChatLandingTelemetryModule (ref), textChatService (ref), conversationRow (ref), promiseModule (ref), fFlagAppChatUseUltimateListConversationListModule (ref), conversationListUltimate (ref), bidirectionalFlatList (ref), friendsChatConversationListScrollbarThickness (ref), friendsChatConversationListWindowSize (ref), friendsChatConversationListInitialNumToRender (ref), friendsChatConversationListPaginationThresholdRows (ref), friendsChatConversationListAutoscrollToTopThreshold (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), button (ref), fillBehavior (ref), inputSize (ref), buttonVariant (ref)
 	local var33
 	local var26 = useTokens()
 	local getTransparencyStore = useChatPlatformModule().getTransparencyStore
 	local var27 = useChatWindowSettingsModule()
-	local chatWindowSettings = p14.chatWindowSettings or reactModule.useMemo(function() --[[ line: 150 ]]
+	local chatWindowSettings = p14.chatWindowSettings or reactModule.useMemo(function() --[[ line: 152 ]]
 		-- upvalues: var27 (ref)
 		return {
 			BackgroundColor3 = var27.ChatWindowBackgroundColor3,
@@ -117,7 +119,7 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 		var33 = 0
 	elseif reactIsModule.isBinding(transparencyValue) then
 		local var34 = 0
-		var33 = transparencyValue:map(function(p15) --[[ line: 92 ]]
+		var33 = transparencyValue:map(function(p15) --[[ line: 94 ]]
 			-- upvalues: var34 (ref)
 			return var34 + p15 * (1 - var34)
 		end)
@@ -140,7 +142,7 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 	local var46 = useConversationListPaginationModule(var44, var45.listStatus)
 	local listStatus = var45.listStatus
 	local items = var45.items
-	local var47 = reactModule.useMemo(function() --[[ line: 197 ]]
+	local var47 = reactModule.useMemo(function() --[[ line: 199 ]]
 		-- upvalues: var41 (ref), items (ref), getConversationTitle (copy)
 		local lowerText = string.lower(var41 or "")
 		local t = {}
@@ -165,19 +167,20 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 	local t_1 = {
 		searchPlaceholder = var29.SearchPlaceholder,
 		loadingConversations = var29.Loading,
-		loadConversationsError = var29.SomethingWentWrong,
+		loadConversationsError = var29.TryAgain,
 		noLoadedConversationsFound = var29.NoChatFound,
-		noFriends = var29.NoFriends
+		noFriends = var29.NoFriends,
+		retry = var29.Retry
 	}
 	local var55 = if var49 then t_1.loadingConversations elseif var48_1 then t_1.loadConversationsError elseif #var47 == 0 and (listStatus.isFetchingConversations ~= true and (if var48 then if listStatus.hasFetchedInitialPage ~= true then var48_1 else true else not var48)) then if var48 then t_1.noFriends else t_1.noLoadedConversationsFound else nil
-	local var56 = reactModule.useCallback(function(p16) --[[ line: 245 ]]
+	local var56 = reactModule.useCallback(function(p16) --[[ line: 248 ]]
 		-- upvalues: p14 (ref)
 		if p14.onConversationActivated == nil or p16 == nil or p16.id == nil then
 			return
 		end
 		p14.onConversationActivated(p16.id)
 	end, { p14.onConversationActivated })
-	local var57 = reactModule.useCallback(function(p17) --[[ line: 253 ]]
+	local var57 = reactModule.useCallback(function(p17) --[[ line: 256 ]]
 		-- upvalues: textChatService (copy), p14 (ref)
 		local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -185,7 +188,7 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 			p14.onAbsoluteSizeChanged(p17, chatWindowConfiguration)
 		end
 	end, { p14.onAbsoluteSizeChanged })
-	local var58 = reactModule.useCallback(function(p18) --[[ line: 260 ]]
+	local var58 = reactModule.useCallback(function(p18) --[[ line: 263 ]]
 		-- upvalues: textChatService (copy), p14 (ref)
 		local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 		
@@ -193,27 +196,27 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 			p14.onAbsolutePositionChanged(p18, chatWindowConfiguration)
 		end
 	end, { p14.onAbsolutePositionChanged })
-	local var59 = reactModule.useCallback(function() --[[ line: 267 ]]
+	local var59 = reactModule.useCallback(function() --[[ line: 270 ]]
 		-- upvalues: var52 (ref), getTransparencyStore (ref)
 		var52.fireSearchActivatedEvent()
 		getTransparencyStore(false).setTextboxFocus()
 	end, { getTransparencyStore, var52.fireSearchActivatedEvent })
-	local var60 = reactModule.useCallback(function() --[[ line: 272 ]]
+	local var60 = reactModule.useCallback(function() --[[ line: 275 ]]
 		-- upvalues: getTransparencyStore (ref)
 		getTransparencyStore(false).clearTextboxFocus()
 	end, { getTransparencyStore })
-	reactModule.useEffect(function() --[[ line: 276 ]]
+	reactModule.useEffect(function() --[[ line: 279 ]]
 		-- upvalues: getTransparencyStore (ref)
-		return function() --[[ line: 277 ]]
+		return function() --[[ line: 280 ]]
 			-- upvalues: getTransparencyStore (copy)
 			getTransparencyStore(false).clearTextboxFocus()
 		end
 	end, { getTransparencyStore })
-	local var61 = reactModule.useCallback(function(_) --[[ line: 282 ]]
+	local var61 = reactModule.useCallback(function(_) --[[ line: 285 ]]
 		-- upvalues: getTransparencyStore (ref)
 		getTransparencyStore(false).resetAllTransparency()
 	end, { getTransparencyStore })
-	local var62 = reactModule.useCallback(function(p19) --[[ line: 287 ]]
+	local var62 = reactModule.useCallback(function(p19) --[[ line: 290 ]]
 		-- upvalues: reactModule (copy), conversationRow (copy), size1400 (ref), var56 (ref), var52 (ref), p14 (ref)
 		return reactModule.createElement(conversationRow, {
 			isWideMode = false,
@@ -232,7 +235,7 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 		var56,
 		p14.localUserId
 	})
-	local var63 = reactModule.useCallback(function(_, p20) --[[ line: 309 ]]
+	local var63 = reactModule.useCallback(function(_, p20) --[[ line: 312 ]]
 		-- upvalues: size1400 (ref)
 		return {
 			length = size1400,
@@ -240,7 +243,7 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 			index = p20
 		}
 	end, { size1400 })
-	local var64 = reactModule.useCallback(function(_, p21) --[[ line: 317 ]]
+	local var64 = reactModule.useCallback(function(_, p21) --[[ line: 320 ]]
 		-- upvalues: var43 (ref), var46 (ref)
 		local current = var43.current
 		
@@ -248,17 +251,17 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 			var46.loadNext()
 		end
 	end, { var46.loadNext })
-	local var65 = reactModule.useCallback(function() --[[ line: 324 ]]
+	local var65 = reactModule.useCallback(function() --[[ line: 327 ]]
 		-- upvalues: var46 (ref), promiseModule (copy)
 		var46.loadNext()
 		
 		return promiseModule.resolve()
 	end, { var46.loadNext })
-	local var66 = reactModule.useCallback(function(p22) --[[ line: 329 ]]
+	local var66 = reactModule.useCallback(function(p22) --[[ line: 332 ]]
 		-- upvalues: var42 (ref)
 		var42(p22.Text)
 	end, {})
-	local var67 = reactModule.useCallback(function() --[[ line: 333 ]]
+	local var67 = reactModule.useCallback(function() --[[ line: 336 ]]
 		-- upvalues: var42 (ref)
 		var42("")
 	end, {})
@@ -289,10 +292,10 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 			data = var47,
 			renderItem = var62,
 			getItemLayout = var63,
-			keyExtractor = function(p23) --[[ line: 364 ]]
+			keyExtractor = function(p23) --[[ line: 367 ]]
 				return tostring(p23.id)
 			end,
-			compareItemData = function(p24, p25) --[[ line: 367 ]]
+			compareItemData = function(p24, p25) --[[ line: 370 ]]
 				return p24.id == p25.id
 			end,
 			style = {
@@ -320,7 +323,7 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 		Name = "chatWindow",
 		Active = true,
 		BackgroundColor3 = backgroundColor3,
-		BackgroundTransparency = if reactIsModule.isBinding(transparencyValue) then transparencyValue:map(function(p26) --[[ line: 92 ]]
+		BackgroundTransparency = if reactIsModule.isBinding(transparencyValue) then transparencyValue:map(function(p26) --[[ line: 94 ]]
 			-- upvalues: backgroundTransparency (ref)
 			return backgroundTransparency + p26 * (1 - backgroundTransparency)
 		end) else transparencyValue,
@@ -469,16 +472,17 @@ return reactModule.memo(function(p14) --[[ line: 146 | named "FriendsChatConvers
 		local transparency = var26.Color.Content.Default.Transparency
 		t_10.textStyle = {
 			Color3 = var26.Color.Content.Default.Color3,
-			Transparency = if reactIsModule.isBinding(textTransparency) then textTransparency:map(function(p27) --[[ line: 102 ]]
+			Transparency = if reactIsModule.isBinding(textTransparency) then textTransparency:map(function(p27) --[[ line: 104 ]]
 				-- upvalues: transparency (ref)
 				return transparency + p27 * (1 - transparency)
 			end) else transparency
 		}
 		t_9.Message = createElement_4(var80, t_10)
-		t_9.Retry = var48_1 and reactModule.createElement(iconButton, {
-			icon = iconName.ArrowSpinClockwise,
+		t_9.Retry = var48_1 and reactModule.createElement(button, {
+			fillBehavior = fillBehavior.Fit,
 			onActivated = var46.retryInitialFetch,
 			size = inputSize.Small,
+			text = t_1.retry,
 			variant = buttonVariant.Standard
 		}) or nil
 		createElement_3 = createElement_3(var77, t_8, t_9) or nil

@@ -609,18 +609,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,شكرً�
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,لحماية اللاعبين الأصغر سنًا، لا يمكن للحسابات التي تقل أعمار أصحابها عن 13 عامًا إرسال الملاحظات.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,الملاحظات غير متاحة
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,إضافة لقطات
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,تحرير التحديد
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,لا توجد أي لقطات متاحة.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,اللقطات ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,ساعد المصمّم في الاطلاع على مشكلتك.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,جارٍ تحميل اللقطات...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,تم تحديد {count}/{max}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,تعذَّر رفع لقطة واحدة أو أكثر من لقطاتك.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,الإبلاغ عن خطأ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,استعادة العناصر أو البيانات
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,الفئة *
@@ -629,14 +618,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,تحديد �
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,مشكلة في الشراء
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,بحد أقصى {MAX} من الأحرف
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,التفاصيل *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,إلغاء التحديد
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,قم بتضمين أي شيء ذي صلة بالمشكلة، مثل إصدار اللعبة وكيفية إعادة تكرار الخطوات.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,صِف ما هو مفقود ومتى رأيته آخر مرة. إذا تعرض حسابك للاختراق، يرجى تضمين رقم بطاقة دعم العملاء لدى منصّة Roblox وأي تفاصيل ذات صلة.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,صِف طلبك أو مشكلتك هنا. قدّم أكبر قدر ممكن من التفاصيل لمساعدتنا في فهم الموقف.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,أخبرنا بما حاولت شراؤه، ومتى حدث ذلك، والقيمة الإجمالية (على سبيل المثال 500 Robux / 4.99 دولار أمريكي). قم بتضمين أي رسائل خطأ رأيتها.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,هل تحاول الإبلاغ عن إساءة؟
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>إرسال بلاغ بدلًا من ذلك.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,تحديد
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,يساعد هذا المصمّم في دعم الحساب الصحيح.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,مشاركة معلومات المستخدم مع المصمّم
@@ -905,7 +892,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,استرجاع حياة ال�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,أنت على وشك الخروج من هذا الخادم والتبديل إلى خادم آخر.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,هل تريد الخروج؟
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,اهتزاز
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,لتبديل التنقل في القائمة
@@ -1246,7 +1235,7 @@ Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,حفظ
 Feature.Avatar.Action.SaveAsNew,حفظ كجديد
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,تحديد
 Feature.Avatar.Action.SelectMultipleItems,حدد عناصر متعددة
 Feature.Avatar.Action.SelectSlot,حدد خانة
 Feature.Avatar.Action.Share,مشاركة
@@ -1260,7 +1249,7 @@ Feature.Avatar.Action.Stay,البقاء
 Feature.Avatar.Action.Switch,تبديل
 Feature.Avatar.Action.TryOn,تجريب
 Feature.Avatar.Action.Unequip,إلغاء التجهيز
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,إلغاء التحديد
 Feature.Avatar.Action.UnslotEmote,إزالة Emote من الخانة
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,تحديث الشخصية الموجودة
@@ -2273,6 +2262,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1س
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
+Feature.Chat.Label.TryAgain,حاول مرة أخرى
 Feature.Chat.Label.Unavailable,غير متاحة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم

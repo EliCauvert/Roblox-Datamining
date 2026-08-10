@@ -5,10 +5,10 @@ local t = {
 	[inputSizeModule.Large] = inputLabelSizeModule.Large,
 	[inputSizeModule.Medium] = inputLabelSizeModule.Medium,
 	[inputSizeModule.Small] = inputLabelSizeModule.Small,
-	[inputSizeModule.XSmall] = if require(foundation.Utility.Flags).FoundationInternalInputBeta then inputLabelSizeModule.XSmall else inputLabelSizeModule.Small
+	[inputSizeModule.XSmall] = inputLabelSizeModule.Small
 }
 
-return function(p0) --[[ line: 21 | named "getInputTextSize" ]]
+return function(p0) --[[ line: 19 | named "getInputTextSize" ]]
 	-- upvalues: t (ref)
 	return t[p0]
 end

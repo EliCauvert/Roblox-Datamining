@@ -625,18 +625,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,"Vielen D
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Um jüngere Spieler zu schützen, kann über Konten von Personen unter 13 Jahren kein Feedback gesendet werden."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Feedback nicht verfügbar
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Aufnahmen hinzufügen
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Auswahl bearbeiten
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Keine Aufnahmen verfügbar.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Aufnahmen ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,"Hilf dem Creator, dein Problem besser zu verstehen."
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Aufnahmen werden geladen …
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} – {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} ausgewählt
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Eine oder mehrere deiner Aufnahmen konnten nicht hochgeladen werden.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Fehlerbericht
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Artikel- oder Datenwiederherstellung
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategorie *
@@ -645,14 +634,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Wähle eine 
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problem beim Kauf
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Bis zu {MAX} Zeichen
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Details *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Auswahl aufheben
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Gib alle relevanten Informationen zum Problem an, z. B. die Spielversion und die Schritte, um das Problem zu reproduzieren."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Beschreibe, was fehlt und wann du es zuletzt gesehen hast. Wenn dein Konto gehackt wurde, gib bitte deine Roblox-CS-Ticketnummer und alle relevanten Details an."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,"Beschreibe hier deine Anfrage oder dein Problem. Gib so viele Details wie möglich an, damit wir die Situation verstehen können."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Sag uns, was du kaufen wolltest, wann es passiert ist und wie hoch der Gesamtwert war (z. B. 500 Robux / 4,99 USD). Gib auch alle Fehlermeldungen an, die dir angezeigt wurden."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Möchtest du einen Verstoß melden?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Reiche stattdessen eine Meldung ein.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Auswählen
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,"Dies hilft dem Creator, das richtige Konto zu unterstützen."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Benutzerinformationen mit dem Creator teilen
@@ -1213,7 +1200,7 @@ Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Speichern
 Feature.Avatar.Action.SaveAsNew,Als neu speichern
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,Auswählen
 Feature.Avatar.Action.SelectMultipleItems,Mehrere Items auswählen
 Feature.Avatar.Action.SelectSlot,Wähle Slot
 Feature.Avatar.Action.Share,Teilen
@@ -2242,6 +2229,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 Std.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 Monat
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 Woche
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} Woche(n)
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,unbekannter Benutzer
 Feature.Chat.Label.User,Benutzer

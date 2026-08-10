@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagPlayerListReskin) and game:DefineFastFlag("PlayerListReskinPanelStroke", false)

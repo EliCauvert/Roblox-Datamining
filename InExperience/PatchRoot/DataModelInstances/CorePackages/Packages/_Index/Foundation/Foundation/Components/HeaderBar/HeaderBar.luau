@@ -1,9 +1,11 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
 local breakpointModule = require(foundation.Enums.Breakpoint)
+local flagsModule = require(foundation.Utility.Flags)
 local headerBarContextModule = require(foundation.Components.HeaderBar.HeaderBarContext)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
+local useBreakpointModule = require(foundation.Providers.Responsive.Hooks.useBreakpoint)
 local useViewportBreakpointModule = require(foundation.Providers.Responsive.Hooks.useViewportBreakpoint)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
@@ -17,15 +19,23 @@ local t = {
 }
 local t_1 = { hasBackground = true, testId = "--foundation-header-bar" }
 
-return reactModule.memo(function(p0) --[[ line: 35 | named "HeaderBar" ]]
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useViewportBreakpointModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), t (ref), headerBarContextModule (ref)
-	local var10 = withDefaultsModule(p0, t_1)
+return reactModule.memo(function(p0) --[[ line: 37 | named "HeaderBar" ]]
+	-- upvalues: withDefaultsModule (ref), t_1 (ref), flagsModule (ref), reactModule (ref), useViewportBreakpointModule (ref), useBreakpointModule (ref), viewModule (ref), withCommonPropsModule (ref), t (ref), headerBarContextModule (ref)
+	local var12 = withDefaultsModule(p0, t_1)
+	local var13 = nil
+	local var14 = nil
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var10, {
+	if not flagsModule.FoundationHeaderBarDualPaneBreakpointsStaySynced then
+		local var15, var16 = reactModule.useState(nil)
+		var13 = var15
+		var14 = var16
+	end
+	return reactModule.createElement(viewModule, withCommonPropsModule(var12, {
 		tag = {
 			["row flex-between gap-small padding-medium"] = true,
-			["bg-surface-0"] = var10.hasBackground,
-			[t[useViewportBreakpointModule()]] = true
-		}
-	}), reactModule.createElement(headerBarContextModule.Provider, { testId = var10.testId }, var10.children))
+			["bg-surface-0"] = var12.hasBackground,
+			[t[if flagsModule.FoundationHeaderBarDualPaneBreakpointsStaySynced then useViewportBreakpointModule() else useBreakpointModule(var13)]] = true
+		},
+		ref = if flagsModule.FoundationHeaderBarDualPaneBreakpointsStaySynced then nil else var14
+	}), reactModule.createElement(headerBarContextModule.Provider, { testId = var12.testId }, var12.children))
 end)

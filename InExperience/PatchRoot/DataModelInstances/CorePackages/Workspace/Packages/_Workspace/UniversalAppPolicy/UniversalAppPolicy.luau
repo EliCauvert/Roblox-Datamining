@@ -2,7 +2,6 @@
 
 return {
 	getAppFeaturePolicies = require(script.getAppFeaturePolicies),
-	GetAppPolicyStore = require(script.GetAppPolicyStore),
 	AppFeaturePolicies = require(script.AppFeaturePolicies),
 	RoactAppPolicy = require(script.RoactAppPolicy),
 	UniversalAppPolicy = require(script.UniversalAppPolicy),

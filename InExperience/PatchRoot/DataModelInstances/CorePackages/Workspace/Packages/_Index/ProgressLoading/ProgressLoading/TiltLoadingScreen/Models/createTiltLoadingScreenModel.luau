@@ -15,6 +15,7 @@ local httpService = game:GetService("HttpService")
 local experienceService = game:GetService("ExperienceService")
 local guiService = game:GetService("GuiService")
 local userInputService = game:GetService("UserInputService")
+local fFlagAddAutoTranslateToLoadingScreen = sharedFlagsModule.FFlagAddAutoTranslateToLoadingScreen
 local fFlagAutoTranslateSkipZeroUniverseId = sharedFlagsModule.FFlagAutoTranslateSkipZeroUniverseId
 local fFlagEnableLuaAppsFollowUserId = sharedFlagsModule.FFlagEnableLuaAppsFollowUserId
 local createDataCache = dataHydrationModule.createDataCache
@@ -24,21 +25,21 @@ local fFlagEnableLuaAppsFollowUserId_1 = game:GetEngineFeature("ExperienceServic
 local placeJoinStateEnabledEngineFeature = game:GetEngineFeature("PlaceJoinStateEnabled")
 local var17 = httpModule.NetworkLayers.requestInternalWrapper(httpService)
 
-local function defaultFetchUniverseId(p0) --[[ line: 80 ]]
+local function defaultFetchUniverseId(p0) --[[ line: 82 ]]
 	-- upvalues: httpModule (ref), var17 (ref)
 	local var21, var22 = var17(string.format("%suniverses/v1/places/%d/universe", httpModule.Url.APIS_URL, p0), "GET"):await()
 	
 	return if var21 and var22 and var22.responseBody then var22.responseBody.universeId else nil
 end
 
-local function defaultFetchProductInfo(p1) --[[ line: 89 ]]
+local function defaultFetchProductInfo(p1) --[[ line: 91 ]]
 	-- upvalues: marketplaceService (ref)
 	return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p1) else marketplaceService:GetProductInfo(p1)
 end
 
-local function defaultFetchPlayerLocalizationChoice(p2) --[[ line: 96 ]]
+local function defaultFetchPlayerLocalizationChoice(p2) --[[ line: 98 ]]
 	-- upvalues: var17 (ref), httpModule (ref)
-	return var17(string.format("%sv1/user-localization-settings/player-choice/%s", httpModule.Url.GAME_INTERNATIONALIZATION_URL, p2), "GET"):andThen(function(p3) --[[ line: 104 ]]
+	return var17(string.format("%sv1/user-localization-settings/player-choice/%s", httpModule.Url.GAME_INTERNATIONALIZATION_URL, p2), "GET"):andThen(function(p3) --[[ line: 106 ]]
 		-- upvalues: p2 (ref)
 		if not p3 or not p3.responseBody then
 			error({
@@ -62,26 +63,26 @@ local function defaultFetchPlayerLocalizationChoice(p2) --[[ line: 96 ]]
 	end)
 end
 
-local function _() --[[ line: 127 | named "getQueueTreatment" ]]
+local function _() --[[ line: 129 | named "getQueueTreatment" ]]
 	-- upvalues: placeJoinStateEnabledEngineFeature (ref), queueExperimentation (ref), constantsModule (ref)
 	return if placeJoinStateEnabledEngineFeature then if queueExperimentation.getIsAutoJoinNewServerEnabled() then constantsModule.AUTO_JOIN_TREATMENT elseif queueExperimentation.getIsJoinNewServerButtonEnabled() then constantsModule.JOIN_NEW_SERVER_TREATMENT else nil else nil
 end
 
-return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
-	-- upvalues: experienceService (ref), guiService (ref), defaultFetchUniverseId (ref), defaultFetchProductInfo (ref), cachedPolicyServiceModule (ref), defaultFetchPlayerLocalizationChoice (ref), marketplaceGetMarketplaceAssetStoreModule (ref), createDataCache (ref), createDataResolver (ref), loadingScreenTelemetryModule (ref), signalsModule (ref), placeJoinStateEnabledEngineFeature (ref), queueExperimentation (ref), constantsModule (ref), fFlagAutoTranslateSkipZeroUniverseId (ref), fFlagEnableLuaAppsFollowUserId_1 (ref), queuePositionEnabledEngineFeature (ref), userInputService (ref)
+return function(p4, p5) --[[ line: 142 | named "createTiltLoadingScreenModel" ]]
+	-- upvalues: experienceService (ref), guiService (ref), defaultFetchUniverseId (ref), defaultFetchProductInfo (ref), cachedPolicyServiceModule (ref), defaultFetchPlayerLocalizationChoice (ref), marketplaceGetMarketplaceAssetStoreModule (ref), createDataCache (ref), createDataResolver (ref), loadingScreenTelemetryModule (ref), signalsModule (ref), placeJoinStateEnabledEngineFeature (ref), queueExperimentation (ref), constantsModule (ref), fFlagAddAutoTranslateToLoadingScreen (ref), fFlagAutoTranslateSkipZeroUniverseId (ref), fFlagEnableLuaAppsFollowUserId_1 (ref), queuePositionEnabledEngineFeature (ref), userInputService (ref)
 	local var44, ok
 	local var23 = if p5 and p5.dataModel then p5.dataModel else game
 	local var24 = if p5 and p5.experienceService then p5.experienceService else experienceService
 	local var25 = if p5 and p5.guiService then p5.guiService else guiService
 	local var26 = if p5 then p5.fetchUniverseId else defaultFetchUniverseId
 	local var27 = if p5 then p5.fetchProductInfo else defaultFetchProductInfo
-	local var28 = if p5 then p5.fetchIsSubjectToChinaPolicies else function() --[[ line: 149 ]]
+	local var28 = if p5 then p5.fetchIsSubjectToChinaPolicies else function() --[[ line: 151 ]]
 		-- upvalues: cachedPolicyServiceModule (copy)
 		return cachedPolicyServiceModule:IsSubjectToChinaPolicies()
 	end
 	local var29 = if p5 then p5.fetchPlayerLocalizationChoice else defaultFetchPlayerLocalizationChoice
 	
-	local function _() --[[ line: 155 | named "readServerStatusText" ]]
+	local function _() --[[ line: 157 | named "readServerStatusText" ]]
 		-- upvalues: var25 (ref)
 		if not var25.GetUiMessage then
 			return ""
@@ -96,7 +97,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 	local var32 = createDataResolver({
 		supportsMultiGet = false,
 		cache = var31,
-		logError = function(p6) --[[ line: 167 ]]
+		logError = function(p6) --[[ line: 169 ]]
 			-- upvalues: loadingScreenTelemetryModule (copy)
 			if type(p6) == "table" then
 				loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p6.responseCode, errorType = p6.errorType })
@@ -105,7 +106,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 			end
 			loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 		end,
-		fetchFn = function(p7) --[[ line: 179 ]]
+		fetchFn = function(p7) --[[ line: 181 ]]
 			-- upvalues: var29 (ref)
 			return var29(p7)
 		end
@@ -128,7 +129,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 	createSignal, var44 = createSignal(var44)
 	ok, var45 = signalsModule.createSignal(0)
 	local var46, var47 = signalsModule.createSignal(false)
-	local var48 = signalsModule.createComputed(function(p8) --[[ line: 195 ]]
+	local var48 = signalsModule.createComputed(function(p8) --[[ line: 197 ]]
 		-- upvalues: var34 (ref), var30 (ref)
 		local var66 = var34(p8)
 		
@@ -144,8 +145,11 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		} else nil
 	end)
 	local var49 = false
-	local var50 = signalsModule.createComputed(function(p9) --[[ line: 211 ]]
-		-- upvalues: var36 (ref), fFlagAutoTranslateSkipZeroUniverseId (copy), var49 (write), loadingScreenTelemetryModule (copy), var32 (ref)
+	local var50 = signalsModule.createComputed(function(p9) --[[ line: 213 ]]
+		-- upvalues: fFlagAddAutoTranslateToLoadingScreen (copy), var36 (ref), fFlagAutoTranslateSkipZeroUniverseId (copy), var49 (write), loadingScreenTelemetryModule (copy), var32 (ref)
+		if not fFlagAddAutoTranslateToLoadingScreen then
+			return nil
+		end
 		local var68 = var36(p9)
 		
 		if fFlagAutoTranslateSkipZeroUniverseId and var68 <= 0 then
@@ -173,20 +177,20 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 	local var61 = false
 	local var62 = false
 	
-	local _ = function(p10) --[[ line: 238 | named "cancel" ]]
+	local _ = function(p10) --[[ line: 244 | named "cancel" ]]
 		if p10 and coroutine.status(p10) ~= "dead" then
 			task.cancel(p10)
 		end
 	end
 	
-	local _ = function(p11) --[[ line: 244 | named "disconnect" ]]
+	local _ = function(p11) --[[ line: 250 | named "disconnect" ]]
 		if p11 then
 			p11:Disconnect()
 		end
 		return nil
 	end
 	
-	local _ = function() --[[ line: 251 | named "readFollowUserId" ]]
+	local _ = function() --[[ line: 257 | named "readFollowUserId" ]]
 		-- upvalues: fFlagEnableLuaAppsFollowUserId_1 (copy), var24 (ref)
 		if not fFlagEnableLuaAppsFollowUserId_1 or not var24.GetFollowUserId then
 			return 0
@@ -196,7 +200,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		return if ok and type(status) == "number" then status else 0
 	end
 	
-	local _ = function() --[[ line: 259 | named "readExposureFollowUserId" ]]
+	local _ = function() --[[ line: 265 | named "readExposureFollowUserId" ]]
 		-- upvalues: var24 (ref)
 		if not var24.GetFollowUserId then
 			return 0
@@ -206,7 +210,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		return if ok and type(status) == "number" then status else 0
 	end
 	
-	local _ = function() --[[ line: 267 | named "readQueuePosition" ]]
+	local _ = function() --[[ line: 273 | named "readQueuePosition" ]]
 		-- upvalues: queuePositionEnabledEngineFeature (copy), var24 (ref)
 		if not queuePositionEnabledEngineFeature or not var24.GetQueuePosition then
 			return nil
@@ -216,7 +220,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		return if ok and type(status) == "number" then status else nil
 	end
 	
-	local function updateQueuePosition() --[[ line: 275 ]]
+	local function updateQueuePosition() --[[ line: 281 ]]
 		-- upvalues: var43 (ref), queuePositionEnabledEngineFeature (copy), var24 (ref)
 		local var70
 		if queuePositionEnabledEngineFeature and var24.GetQueuePosition then
@@ -228,7 +232,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		var43(var70)
 	end
 	
-	local _ = function(p12) --[[ line: 279 | named "logQueueExposureIfNeeded" ]]
+	local _ = function(p12) --[[ line: 285 | named "logQueueExposureIfNeeded" ]]
 		-- upvalues: var61 (write), constantsModule (copy), var34 (ref), var24 (ref), queueExperimentation (copy)
 		if not var61 and p12 == constantsModule.QUEUED_STATE and var34(false) > 0 then
 			local var71
@@ -247,7 +251,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end
 	end
 	
-	local function updateJoinState(p13) --[[ line: 293 ]]
+	local function updateJoinState(p13) --[[ line: 299 ]]
 		-- upvalues: var41 (ref), constantsModule (copy), var43 (ref), var61 (write), var34 (ref), var24 (ref), queueExperimentation (copy)
 		if type(p13) ~= "string" then return end
 		var41(p13)
@@ -271,7 +275,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end
 	end
 	
-	local _ = function(p14) --[[ line: 304 | named "resolveUniverseId" ]]
+	local _ = function(p14) --[[ line: 310 | named "resolveUniverseId" ]]
 		-- upvalues: var52 (write), var36 (ref), var37 (ref), var54 (write)
 		if var52 or p14 <= 0 or var36(false) > 0 then return end
 		var37(p14)
@@ -282,7 +286,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		var54 = nil
 	end
 	
-	local function watchUniverseId() --[[ line: 312 ]]
+	local function watchUniverseId() --[[ line: 318 ]]
 		-- upvalues: var54 (write), var52 (write), var36 (ref), var23 (ref), var37 (ref)
 		local var73 = var54
 		
@@ -292,7 +296,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		var54 = nil
 		
 		if var52 or var36(false) > 0 then return end
-		var54 = var23:GetPropertyChangedSignal("GameId"):Connect(function() --[[ line: 317 ]]
+		var54 = var23:GetPropertyChangedSignal("GameId"):Connect(function() --[[ line: 323 ]]
 			-- upvalues: var23 (copy), var52 (copy), var36 (copy), var37 (copy), var54 (copy)
 			local gameId = var23.GameId
 			
@@ -321,13 +325,13 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end
 	end
 	
-	local _ = function(p15) --[[ line: 323 | named "fetchUniverseIdForPlace" ]]
+	local _ = function(p15) --[[ line: 329 | named "fetchUniverseIdForPlace" ]]
 		-- upvalues: var36 (ref), var59 (write), var26 (ref), var52 (write), var34 (ref), var37 (ref), var54 (write)
 		if var36(false) > 0 then return end
 		if var59 and coroutine.status(var59) ~= "dead" then
 			task.cancel(var59)
 		end
-		var59 = task.defer(function() --[[ line: 328 ]]
+		var59 = task.defer(function() --[[ line: 334 ]]
 			-- upvalues: var26 (copy), p15 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
 			local ok, status = pcall(var26, p15)
 			
@@ -344,12 +348,12 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end)
 	end
 	
-	local _ = function(p16) --[[ line: 336 | named "fetchGameDataForPlace" ]]
+	local _ = function(p16) --[[ line: 342 | named "fetchGameDataForPlace" ]]
 		-- upvalues: var58 (write), var27 (ref), var52 (write), var34 (ref), var30 (ref)
 		if var58 and coroutine.status(var58) ~= "dead" then
 			task.cancel(var58)
 		end
-		var58 = task.defer(function() --[[ line: 338 ]]
+		var58 = task.defer(function() --[[ line: 344 ]]
 			-- upvalues: var27 (copy), p16 (ref), var52 (copy), var34 (copy), var30 (copy)
 			local ok, status = pcall(var27, p16)
 			
@@ -378,12 +382,12 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end)
 	end
 	
-	local _ = function() --[[ line: 357 | named "resolveChinaPolicy" ]]
+	local _ = function() --[[ line: 363 | named "resolveChinaPolicy" ]]
 		-- upvalues: var60 (write), var28 (ref), var52 (write), var47 (ref)
 		if var60 and coroutine.status(var60) ~= "dead" then
 			task.cancel(var60)
 		end
-		var60 = task.defer(function() --[[ line: 359 ]]
+		var60 = task.defer(function() --[[ line: 365 ]]
 			-- upvalues: var28 (copy), var52 (copy), var47 (copy)
 			local ok, status = pcall(var28)
 			
@@ -393,13 +397,13 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end)
 	end
 	
-	local _ = function(p17) --[[ line: 367 | named "beginRequests" ]]
+	local _ = function(p17) --[[ line: 373 | named "beginRequests" ]]
 		-- upvalues: var58 (write), var27 (ref), var52 (write), var34 (ref), var30 (ref), var36 (ref), var59 (write), var26 (ref), var37 (ref), var54 (write)
 		if p17 <= 0 then return end
 		if var58 and coroutine.status(var58) ~= "dead" then
 			task.cancel(var58)
 		end
-		var58 = task.defer(function() --[[ line: 338 ]]
+		var58 = task.defer(function() --[[ line: 344 ]]
 			-- upvalues: var27 (copy), p17 (ref), var52 (copy), var34 (copy), var30 (copy)
 			local ok, status = pcall(var27, p17)
 			
@@ -431,7 +435,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		if var59 and coroutine.status(var59) ~= "dead" then
 			task.cancel(var59)
 		end
-		var59 = task.defer(function() --[[ line: 328 ]]
+		var59 = task.defer(function() --[[ line: 334 ]]
 			-- upvalues: var26 (copy), p17 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
 			local ok, status = pcall(var26, p17)
 			
@@ -448,7 +452,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		end)
 	end
 	
-	local _ = function(p18) --[[ line: 375 | named "resolvePlaceId" ]]
+	local _ = function(p18) --[[ line: 381 | named "resolvePlaceId" ]]
 		-- upvalues: var52 (write), var34 (ref), var35 (ref), var53 (write), var58 (write), var27 (ref), var30 (ref), var36 (ref), var59 (write), var26 (ref), var37 (ref), var54 (write)
 		if var52 or p18 <= 0 or var34(false) == p18 then return end
 		var35(p18)
@@ -463,7 +467,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		if var58 and coroutine.status(var58) ~= "dead" then
 			task.cancel(var58)
 		end
-		var58 = task.defer(function() --[[ line: 338 ]]
+		var58 = task.defer(function() --[[ line: 344 ]]
 			-- upvalues: var27 (copy), p18 (ref), var52 (copy), var34 (copy), var30 (copy)
 			local ok, status = pcall(var27, p18)
 			
@@ -495,7 +499,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		if var59 and coroutine.status(var59) ~= "dead" then
 			task.cancel(var59)
 		end
-		var59 = task.defer(function() --[[ line: 328 ]]
+		var59 = task.defer(function() --[[ line: 334 ]]
 			-- upvalues: var26 (copy), p18 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
 			local ok, status = pcall(var26, p18)
 			
@@ -522,7 +526,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 		getQueueTreatment = var39,
 		getServerStatusText = createSignal,
 		getUniverseId = var36,
-		launchExperience = function() --[[ line: 459 ]]
+		launchExperience = function() --[[ line: 465 ]]
 			-- upvalues: var34 (ref), var24 (ref)
 			local var81 = var34(false)
 			
@@ -530,7 +534,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				var24:LaunchExperience({ placeId = var81 })
 			end
 		end,
-		logQueuedStateButtonClick = function(p19, p20) --[[ line: 473 ]]
+		logQueuedStateButtonClick = function(p19, p20) --[[ line: 479 ]]
 			-- upvalues: var38 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId_1 (copy), ok (ref), var34 (ref), queuePositionEnabledEngineFeature (copy), var42 (ref), var36 (ref)
 			if var38 then
 				loadingScreenTelemetryModule.logQueuedStateButtonClick({
@@ -545,20 +549,20 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				return
 			end
 		end,
-		showConnectionHealth = function() --[[ line: 466 ]]
+		showConnectionHealth = function() --[[ line: 472 ]]
 			-- upvalues: var25 (ref), var62 (write)
 			if var25.ShowStatsBasedOnInputString then
 				var62 = true
 				var25:ShowStatsBasedOnInputString("ConnectionHealth")
 			end
 		end,
-		start = function() --[[ line: 385 ]]
+		start = function() --[[ line: 391 ]]
 			-- upvalues: var51 (write), var52 (write), var34 (ref), var53 (write), var23 (ref), var35 (ref), var58 (write), var27 (ref), var30 (ref), var36 (ref), var59 (write), var26 (ref), var37 (ref), var54 (write), watchUniverseId (ref), var60 (write), var28 (ref), var47 (ref), var45 (ref), fFlagEnableLuaAppsFollowUserId_1 (copy), var24 (ref), var25 (ref), var57 (write), var44 (ref), queueExperimentation (copy), var41 (ref), constantsModule (copy), var43 (ref), var61 (write), var55 (write), updateJoinState (ref), queuePositionEnabledEngineFeature (copy), var56 (write), updateQueuePosition (ref)
 			if var51 or var52 then return end
 			var51 = true
 			
 			if var34(false) <= 0 then
-				var53 = var23:GetPropertyChangedSignal("PlaceId"):Connect(function() --[[ line: 391 ]]
+				var53 = var23:GetPropertyChangedSignal("PlaceId"):Connect(function() --[[ line: 397 ]]
 					-- upvalues: var23 (copy), var52 (copy), var34 (copy), var35 (copy), var53 (copy), var58 (copy), var27 (copy), var30 (copy), var36 (copy), var59 (copy), var26 (copy), var37 (copy), var54 (copy)
 					local placeId = var23.PlaceId
 					
@@ -576,7 +580,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 						if var58 and coroutine.status(var58) ~= "dead" then
 							task.cancel(var58)
 						end
-						var58 = task.defer(function() --[[ line: 338 ]]
+						var58 = task.defer(function() --[[ line: 344 ]]
 							-- upvalues: var27 (copy), placeId (ref), var52 (copy), var34 (copy), var30 (copy)
 							local ok, status = pcall(var27, placeId)
 							
@@ -608,7 +612,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 						if var59 and coroutine.status(var59) ~= "dead" then
 							task.cancel(var59)
 						end
-						var59 = task.defer(function() --[[ line: 328 ]]
+						var59 = task.defer(function() --[[ line: 334 ]]
 							-- upvalues: var26 (copy), placeId (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
 							local ok, status = pcall(var26, placeId)
 							
@@ -632,7 +636,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				task.cancel(var60)
 			end
 			local var82, ok_2
-			var60 = task.defer(function() --[[ line: 359 ]]
+			var60 = task.defer(function() --[[ line: 365 ]]
 				-- upvalues: var28 (copy), var52 (copy), var47 (copy)
 				local ok, status = pcall(var28)
 				
@@ -651,7 +655,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 			var45(var82)
 			
 			if var25.UiMessageChanged then
-				var57 = var25.UiMessageChanged:Connect(function(p21, p22) --[[ line: 399 ]]
+				var57 = var25.UiMessageChanged:Connect(function(p21, p22) --[[ line: 405 ]]
 					-- upvalues: var44 (copy)
 					if p21 == Enum.UiMessageType.UiMessageInfo and type(p22) == "string" then
 						var44(p22)
@@ -727,7 +731,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				if var58 and coroutine.status(var58) ~= "dead" then
 					task.cancel(var58)
 				end
-				var58 = task.defer(function() --[[ line: 338 ]]
+				var58 = task.defer(function() --[[ line: 344 ]]
 					-- upvalues: var27 (copy), placeId (ref), var52 (copy), var34 (copy), var30 (copy)
 					local ok, status = pcall(var27, placeId)
 					
@@ -759,7 +763,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				if var59 and coroutine.status(var59) ~= "dead" then
 					task.cancel(var59)
 				end
-				var59 = task.defer(function() --[[ line: 328 ]]
+				var59 = task.defer(function() --[[ line: 334 ]]
 					-- upvalues: var26 (copy), placeId (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
 					local ok, status = pcall(var26, placeId)
 					
@@ -785,7 +789,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				if var87 and coroutine.status(var87) ~= "dead" then
 					task.cancel(var87)
 				end
-				var58 = task.defer(function() --[[ line: 338 ]]
+				var58 = task.defer(function() --[[ line: 344 ]]
 					-- upvalues: var27 (copy), var86 (ref), var52 (copy), var34 (copy), var30 (copy)
 					local ok, status = pcall(var27, var86)
 					
@@ -819,7 +823,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				if var88 and coroutine.status(var88) ~= "dead" then
 					task.cancel(var88)
 				end
-				var59 = task.defer(function() --[[ line: 328 ]]
+				var59 = task.defer(function() --[[ line: 334 ]]
 					-- upvalues: var26 (copy), var86 (ref), var52 (copy), var34 (copy), var36 (copy), var37 (copy), var54 (copy)
 					local ok, status = pcall(var26, var86)
 					
@@ -836,7 +840,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 				end)
 			end
 		end,
-		destroy = function() --[[ line: 431 ]]
+		destroy = function() --[[ line: 437 ]]
 			-- upvalues: var52 (write), var53 (write), var54 (write), var55 (write), var56 (write), var57 (write), var58 (write), var59 (write), var60 (write), var32 (ref), var31 (ref), var62 (write), var25 (ref), userInputService (copy)
 			if var52 then return end
 			var52 = true
@@ -887,7 +891,7 @@ return function(p4, p5) --[[ line: 140 | named "createTiltLoadingScreenModel" ]]
 			
 			if var62 and var25.CloseStatsBasedOnInputString then
 				local inputBeganConnection = nil
-				inputBeganConnection = userInputService.InputBegan:Connect(function() --[[ line: 449 ]]
+				inputBeganConnection = userInputService.InputBegan:Connect(function() --[[ line: 455 ]]
 					-- upvalues: inputBeganConnection (write), var25 (copy)
 					if inputBeganConnection then
 						inputBeganConnection:Disconnect()
