@@ -956,7 +956,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,वॉल्यूम
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,फ़्रेंड्स को इनवाइट करें
 CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,आप इस गेम को छोड़कर वापस {PREVIOUS_GAME} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,आपको जाना है?
 CoreScripts.PremiumModal.Title.Error,गड़बड़ी
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2526,6 +2528,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 घंटा
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र

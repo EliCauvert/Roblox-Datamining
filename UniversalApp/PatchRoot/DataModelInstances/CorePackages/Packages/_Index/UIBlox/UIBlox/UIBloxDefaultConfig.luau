@@ -14,6 +14,5 @@
 	enableShortcutCustomization = false,
 	enableScalingForSomeEdpIcons = false,
 	disableTokenScaling = false,
-	removeStackedNavigationTabIconLabelSpacing = false,
-	addFoundationNavigationTabIcon = false
+	removeStackedNavigationTabIconLabelSpacing = false
 }

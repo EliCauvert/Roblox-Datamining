@@ -974,7 +974,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,Ses Seviyesi
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bu oyundan ayrılıp {PREVIOUS_GAME} oyununa dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ayrılıyor musun?
 CoreScripts.PremiumModal.Title.Error,Hata
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2546,6 +2548,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 sa.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Mevcut değil
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı

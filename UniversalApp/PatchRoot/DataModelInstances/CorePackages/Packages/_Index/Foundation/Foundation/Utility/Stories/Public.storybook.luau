@@ -2,10 +2,10 @@
 local parent_1 = script:FindFirstAncestor("Foundation").Parent
 
 return {
-	name = "Components [engineering-only]",
+	name = "Public",
 	group = "Foundation",
 	roact = require(parent_1.Roact),
-	storyRoots = require(parent.GetStories)("engineering-only"),
+	storyRoots = require(parent.GetStories)(true),
 	mapStory = require(parent.StoryMiddleware),
 	packages = {
 		React = require(parent_1.React),

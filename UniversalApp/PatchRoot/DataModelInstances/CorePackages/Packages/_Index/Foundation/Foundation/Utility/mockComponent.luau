@@ -7,7 +7,7 @@ local viewModule = require(foundation.Components.View)
 
 return function(p0, p1, p2) --[[ line: 12 ]]
 	-- upvalues: reactModule (ref), foundationModule (ref), colorModeModule (ref), viewModule (ref)
-	return reactModule.createElement(foundationModule, { colorMode = p2 or colorModeModule.Dark, preferences = p1 }, {
+	return reactModule.createElement(foundationModule, { theme = p2 or colorModeModule.Dark, preferences = p1 }, {
 		Content = reactModule.createElement(viewModule, { Size = UDim2.fromScale(1, 1) }, p0)
 	})
 end
