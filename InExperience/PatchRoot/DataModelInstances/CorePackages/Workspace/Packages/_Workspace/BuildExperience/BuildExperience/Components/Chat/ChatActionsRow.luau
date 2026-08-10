@@ -7,13 +7,13 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-local function constantSource() --[[ line: 30 ]]
+local function constantSource() --[[ line: 29 ]]
 	return 0
 end
 
-return function(p0) --[[ line: 34 | named "ChatActionsRow" ]]
+return function(p0) --[[ line: 33 | named "ChatActionsRow" ]]
 	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	local var4 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 35 ]]
+	local var4 = signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 34 ]]
 		-- upvalues: p0 (ref), constantSource (copy)
 		if p0.getIsComposerEmpty ~= nil then
 			return p0.getIsComposerEmpty(p1)
@@ -22,7 +22,7 @@ return function(p0) --[[ line: 34 | named "ChatActionsRow" ]]
 		end
 		return p0.isComposerEmpty == true
 	end, { p0.getIsComposerEmpty, p0.isComposerEmpty }))
-	local var5 = p0.isAssistantResponding and not (p0.canSendWhileResponding == true and not var4)
+	local var5 = p0.isAssistantResponding and (p0.canStopAssistantResponse ~= false and p0.canSendWhileResponding ~= true)
 	
 	return reactModule.createElement(iconButton, {
 		isCircular = true,

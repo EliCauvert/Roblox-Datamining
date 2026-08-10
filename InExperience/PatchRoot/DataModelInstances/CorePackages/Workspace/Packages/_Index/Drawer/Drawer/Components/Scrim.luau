@@ -1,18 +1,15 @@
 ﻿local parent = script:FindFirstAncestor("Drawer").Parent
 local reactModule = require(parent.React)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local useTokens = require(parent.Foundation).Hooks.useTokens
 local drawerScrimCanBeModal = game:DefineFastFlag("DrawerScrimCanBeModal", false)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 20 ]]
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref), drawerScrimCanBeModal (ref)
-	local var2 = useTokens()
-	
+return reactModule.forwardRef(function(p0, p1) --[[ line: 18 ]]
+	-- upvalues: useTokens (ref), reactModule (ref), drawerScrimCanBeModal (ref)
 	return reactModule.createElement("TextButton", {
 		ref = p1,
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = p0.transparencyBinding,
-		BackgroundColor3 = (if fFlagRenameDeprecatedUIBloxTokens then var2.Color.Common.Scrim else var2.Semantic.Color.Common.Overlay).Color3,
+		BackgroundColor3 = useTokens().Color.Common.Scrim.Color3,
 		ClipsDescendants = false,
 		Text = "",
 		AutoButtonColor = false,

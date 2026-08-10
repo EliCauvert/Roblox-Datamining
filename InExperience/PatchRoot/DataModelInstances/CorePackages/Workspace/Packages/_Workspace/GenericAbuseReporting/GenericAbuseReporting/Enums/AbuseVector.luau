@@ -12,6 +12,7 @@
 	InExperienceShop = "in_experience_shop",
 	Invalid = "invalid",
 	Looks = "looks",
+	MomentsFeed = "moments_feed",
 	Notifications = "notifications",
 	Place = "place",
 	Subscription = "subscriptions",

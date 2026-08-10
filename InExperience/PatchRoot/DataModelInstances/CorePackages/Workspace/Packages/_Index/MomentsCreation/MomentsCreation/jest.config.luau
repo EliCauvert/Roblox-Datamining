@@ -4,6 +4,7 @@ return {
 	displayName = "MomentsCreation",
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		jestConfigsModule.setupFiles.RetryTimes
 	}
 }

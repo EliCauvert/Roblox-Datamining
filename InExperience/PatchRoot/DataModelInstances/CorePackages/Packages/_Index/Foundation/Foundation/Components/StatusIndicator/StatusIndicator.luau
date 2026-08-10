@@ -12,6 +12,7 @@ local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local var11 = _G.__DEV__ == true
+local statusIndicatorSizeModule = require(foundation.Enums.StatusIndicatorSize)
 local statusIndicatorVariantModule = require(foundation.Enums.StatusIndicatorVariant)
 local statusIndicatorShapeModule = require(foundation.Enums.StatusIndicatorShape)
 local validNumericVariantsModule = require(script.Parent.ValidNumericVariants)
@@ -19,44 +20,61 @@ local t = {
 	max = 1e999,
 	testId = "--foundation-status-indicator",
 	variant = statusIndicatorVariantModule.Standard,
-	shape = statusIndicatorShapeModule.Circle
+	shape = statusIndicatorShapeModule.Circle,
+	size = if flagsModule.FoundationAvatarBeta then statusIndicatorSizeModule.Small else nil
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 55 | named "StatusIndicator" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), statusIndicatorShapeModule (ref), var11 (ref), validNumericVariantsModule (ref), dashModule (ref), useTokensModule (ref), useStatusIndicatorVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref), reactIsModule (ref), flagsModule (ref)
-	local var16 = withDefaultsModule(p0, t)
-	local var17 = if var16.value then statusIndicatorShapeModule.Circle else var16.shape
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 65 | named "StatusIndicator" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), statusIndicatorShapeModule (ref), var11 (ref), validNumericVariantsModule (ref), dashModule (ref), useTokensModule (ref), useStatusIndicatorVariantsModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), textModule (ref), reactIsModule (ref)
+	local var17 = withDefaultsModule(p0, t)
+	local var18 = if var17.value then statusIndicatorShapeModule.Circle else var17.shape
 	
-	if var11 and var16.value ~= nil then
-		assert(validNumericVariantsModule[var16.variant], `{var16.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p2, _) --[[ line: 63 ]]
+	if var11 and var17.value ~= nil then
+		assert(validNumericVariantsModule[var17.variant], `{var17.variant} is not a supported numeric variant. The following are valid numeric variants: {table.concat(dashModule.filter(dashModule.keys(validNumericVariantsModule), function(p2, _) --[[ line: 73 ]]
 			-- upvalues: validNumericVariantsModule (copy)
 			return validNumericVariantsModule[p2] == true
 		end), ",")}`)
 	end
-	local var18 = useTokensModule()
-	local var19 = var16.value ~= nil
-	local var20 = useStatusIndicatorVariantsModule(var18, var16.variant, var19, var17)
-	local var21 = reactModule.useCallback(function(p3) --[[ line: 75 ]]
-		-- upvalues: var16 (ref)
-		return if var16.max and var16.max < p3 then `{var16.max}+` else tostring(p3)
-	end, { var16.max })
-	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var16, {
-		tag = var20.container.tag,
-		backgroundStyle = if var20.container.backgroundStyle then var20.container.backgroundStyle else nil,
-		ref = p1
-	}), {
-		Text = if var19 and var20.content.style then reactModule.createElement(textModule, {
-			Text = if reactIsModule.isBinding(var16.value) then var16.value:map(var21) else var21(var16.value),
-			textStyle = var20.content.style,
-			fontStyle = if flagsModule.FoundationStatusIndicatorBeta then {
-				Font = var20.content.font,
-				FontSize = var18.Typography.LabelSmall.FontSize,
-				LineHeight = var18.Typography.LabelSmall.LineHeight
-			} else nil,
-			tag = var20.content.tag,
-			testId = `{var16.testId}--text`
-		}) else nil,
-		InnerRing = if var20.ring then reactModule.createElement(viewModule, { tag = var20.ring.tag, testId = `{var16.testId}--ring` }) else nil
+	local var25
+	local var19 = useTokensModule()
+	local var20 = var17.value ~= nil
+	local var21 = useStatusIndicatorVariantsModule(var19, var17.variant, var20, var18, if flagsModule.FoundationAvatarBeta then var17.size else nil)
+	local var22 = reactModule.useCallback(function(p3) --[[ line: 91 ]]
+		-- upvalues: var17 (ref)
+		return if var17.max and var17.max < p3 then `{var17.max}+` else tostring(p3)
+	end, { var17.max })
+	local createElement = reactModule.createElement
+	local var23 = withCommonPropsModule(var17, {
+		tag = var21.container.tag,
+		backgroundStyle = if var21.container.backgroundStyle then var21.container.backgroundStyle else nil,
+		ref = p1,
+		Size = if flagsModule.FoundationAvatarBeta then var21.container.size else nil
 	})
+	local t_1 = {
+		Text = if var20 and var21.content.style then reactModule.createElement(textModule, {
+			Text = if reactIsModule.isBinding(var17.value) then var17.value:map(var22) else var22(var17.value),
+			textStyle = var21.content.style,
+			fontStyle = {
+				Font = var21.content.font,
+				FontSize = var19.Typography.LabelSmall.FontSize,
+				LineHeight = var19.Typography.LabelSmall.LineHeight
+			},
+			tag = var21.content.tag,
+			testId = `{var17.testId}--text`
+		}) else nil
+	}
+	
+	if flagsModule.FoundationAvatarBeta then
+		var25 = var18 == statusIndicatorShapeModule.Ring
+		var25 = nil
+	else
+		var25 = true
+	end
+	t_1.InnerRing = if var25 and var21.ring then reactModule.createElement(viewModule, {
+		tag = var21.ring.tag,
+		Size = if flagsModule.FoundationAvatarBeta then var21.ring.size else nil,
+		testId = `{var17.testId}--ring`
+	}) else nil
+	
+	return createElement(viewModule, var23, t_1)
 end))

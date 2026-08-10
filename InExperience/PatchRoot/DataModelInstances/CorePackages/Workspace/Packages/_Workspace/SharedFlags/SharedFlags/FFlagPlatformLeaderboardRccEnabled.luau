@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("PlatformLeaderboardRccEnabled", false)
+﻿return game:DefineFastFlag("PlatformLeaderboardRccEnabled2", false)

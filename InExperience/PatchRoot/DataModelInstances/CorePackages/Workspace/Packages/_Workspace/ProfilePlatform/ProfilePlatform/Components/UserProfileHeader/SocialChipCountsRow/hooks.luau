@@ -1,4 +1,5 @@
 ﻿return {
 	useSocialCountsData = require(script.useSocialCountsData),
-	useSocialCountsActions = require(script.useSocialCountsActions)
+	useSocialCountsActions = require(script.useSocialCountsActions),
+	useSchoolChip = require(script.useSchoolChip)
 }

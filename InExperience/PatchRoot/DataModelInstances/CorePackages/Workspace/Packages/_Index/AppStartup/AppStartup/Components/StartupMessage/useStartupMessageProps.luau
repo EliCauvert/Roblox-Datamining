@@ -2,7 +2,6 @@
 local parent = script:FindFirstAncestor("AppStartup").Parent
 local dashModule = require(parent.Dash)
 local reactModule = require(parent.React)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local appLinking = require(parent.RoactServiceTags).AppLinking
 local appLogging = require(parent.RoactServiceTags).AppLogging
 local appAppLifecycleObserverService = require(parent.RoactServiceTags).AppAppLifecycleObserverService
@@ -22,37 +21,36 @@ local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
 local showStartupMessageOnUnhide = game:DefineFastFlag("ShowStartupMessageOnUnhide", false)
 local startupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
 
-local function selectScreenSize(p0) --[[ line: 32 ]]
+local function selectScreenSize(p0) --[[ line: 30 ]]
 	return p0.ScreenSize
 end
 
-return function() --[[ line: 36 | named "useStartupMessageProps" ]]
-	-- upvalues: useRoactService (ref), appLinking (ref), appLogging (ref), showStartupMessageOnUnhide (ref), appAppLifecycleObserverService (ref), appStartupMessageService (ref), useSelector (ref), selectScreenSize (ref), useDispatch (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), reactModule (ref), startupMessageActionButtonEnabledEngineFeature (ref), useLocalization (ref), dashModule (ref), localizationService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
+return function() --[[ line: 34 | named "useStartupMessageProps" ]]
+	-- upvalues: useRoactService (ref), appLinking (ref), appLogging (ref), showStartupMessageOnUnhide (ref), appAppLifecycleObserverService (ref), appStartupMessageService (ref), useSelector (ref), selectScreenSize (ref), useDispatch (ref), useDesignTokens (ref), reactModule (ref), startupMessageActionButtonEnabledEngineFeature (ref), useLocalization (ref), dashModule (ref), localizationService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var3 (ref), navigateDown (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	local var8 = useRoactService(appLinking)
 	local var9 = useRoactService(appLogging)
 	local var10 = if showStartupMessageOnUnhide then useRoactService(appAppLifecycleObserverService) else nil
 	local var11 = useRoactService(appStartupMessageService)
 	local var12 = useSelector(selectScreenSize)
 	local var13 = useDispatch()
-	local var14 = useDesignTokens(function(p1) --[[ line: 45 ]]
-		-- upvalues: fFlagRenameDeprecatedUIBloxTokens (copy)
-		return if fFlagRenameDeprecatedUIBloxTokens then p1.Color.Common.Scrim else p1.Semantic.Color.Common.Overlay
+	local var14 = useDesignTokens(function(p1) --[[ line: 43 ]]
+		return p1.Color.Common.Scrim
 	end)
 	local var15, var16 = reactModule.useState(false)
 	local var17, var18 = reactModule.useState(false)
-	local var19 = if showStartupMessageOnUnhide then reactModule.useCallback(function() --[[ line: 56 ]]
+	local var19 = if showStartupMessageOnUnhide then reactModule.useCallback(function() --[[ line: 50 ]]
 		-- upvalues: var16 (ref), var18 (ref)
 		var16(false)
 		var18(false)
 	end, {}) else nil
 	
 	if showStartupMessageOnUnhide then
-		reactModule.useEffect(function() --[[ line: 63 ]]
+		reactModule.useEffect(function() --[[ line: 57 ]]
 			-- upvalues: var10 (ref), var19 (ref)
 			if var10 then
 				local onUnhideConnection = var10.OnUnhide:Connect(var19)
 				
-				return function() --[[ line: 69 ]]
+				return function() --[[ line: 63 ]]
 					-- upvalues: onUnhideConnection (ref)
 					if onUnhideConnection then
 						onUnhideConnection:Disconnect()
@@ -69,10 +67,10 @@ return function() --[[ line: 36 | named "useStartupMessageProps" ]]
 	local var23 = if startupMessageActionButtonEnabledEngineFeature then startupMessage_1.actionButtonLocalizationKey else nil
 	local loggingEventName = startupMessage_1.loggingEventName
 	local links = startupMessage_1.links or {}
-	local var25 = useLocalization(dashModule.map(links, function(p2) --[[ line: 89 ]]
+	local var25 = useLocalization(dashModule.map(links, function(p2) --[[ line: 83 ]]
 		return p2.localizationKey
 	end))
-	local var26 = dashModule.reduce(links, function(p3, p4, p5) --[[ line: 92 ]]
+	local var26 = dashModule.reduce(links, function(p3, p4, p5) --[[ line: 86 ]]
 		-- upvalues: dashModule (copy), var25 (ref)
 		return dashModule.append(p3, { { label = var25[p5], url = p4.url } })
 	end, {})
@@ -89,19 +87,19 @@ return function() --[[ line: 36 | named "useStartupMessageProps" ]]
 		bodyText = bodyLocalizationKey and { bodyLocalizationKey, date = date },
 		actionButtonText = var23
 	})
-	local var29 = reactModule.useCallback(function() --[[ line: 115 ]]
+	local var29 = reactModule.useCallback(function() --[[ line: 109 ]]
 		-- upvalues: var16 (ref)
 		var16(true)
 	end, {})
 	
-	local function onActionButtonActivated() --[[ line: 119 ]]
+	local function onActionButtonActivated() --[[ line: 113 ]]
 		-- upvalues: var11 (ref)
 		var11:executeActionButton()
 	end
 	
-	local var31 = reactModule.useCallback(function(p6, p7) --[[ line: 123 ]]
+	local var31 = reactModule.useCallback(function(p6, p7) --[[ line: 117 ]]
 		-- upvalues: var8 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var3 (copy), var13 (ref), navigateDown (copy)
-		var8:isURLRegistered(p6):andThen(function(p8) --[[ line: 124 ]]
+		var8:isURLRegistered(p6):andThen(function(p8) --[[ line: 118 ]]
 			-- upvalues: var8 (copy), p6 (ref), appPage (copy), p7 (ref), fFlagSignalsNavP3Dispatch (copy), var3 (copy), var13 (copy), navigateDown (copy)
 			if p8 then
 				var8:detectURL(p6)
@@ -127,7 +125,7 @@ return function() --[[ line: 36 | named "useStartupMessageProps" ]]
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		isFocusable = not var15
 	})
-	reactModule.useEffect(function() --[[ line: 150 ]]
+	reactModule.useEffect(function() --[[ line: 144 ]]
 		-- upvalues: var17 (ref), var21 (ref), loggingEventName (ref), var9 (ref), var18 (ref)
 		if not var17 and var21 and loggingEventName then
 			var9:logEphemeralCounterEvent({

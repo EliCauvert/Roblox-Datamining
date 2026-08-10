@@ -57,8 +57,12 @@ Amp.Upsell.Message.EmailSent,हमने {parentEmail} पर ईमेल भ�
 Amp.Upsell.Message.EmailSentPluralParent,हमने आपके पेरेंट के अकाउंट पर ईमेल भेजा है
 Amp.Upsell.Title.AskYourParent,अपने पेरेंट से पूछें
 Amp.Upsell.Title.RequestSent,रिक्वेस्ट भेजी गई
+Application.Logout.Action.Logout,लॉग आउट करें
+Application.Logout.Message.Confirmation,वाकई लॉग आउट करना है?
 Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदलें
+Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,क्विक साइन-इन
+Authentication.Login.Action.QuickSignIn,क्विक साइन-इन करें
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} के अकाउंट पर स्विच करने के लिए Roblox से बाहर निकलें
 Authentication.Login.Button.UseDifferentRobloxAccount,किसी दूसरे Roblox अकाउंट का इस्तेमाल करें
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
@@ -106,8 +110,30 @@ Common.Presence.Label.Invisible,ऑफ़लाइन प्लेयर
 Common.Presence.Label.Offline,ऑफ़लाइन
 Common.Presence.Label.Online,ऑनलाइन
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,इनपुट डेटा गलत या अधूरा होने के कारण क्वॉलिटी स्कोर की सही गणना नहीं की जा सकती. कृपया अपना मॉडल चेक करें या बग रिपोर्ट फ़ाइल करें
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,ऐनिमेशन बहुत लंबा है ({duration} सेकंड). Emote ऐनिमेशन ज़्यादा-से-ज़्यादा {maxLength} सेकंड लंबे होने चाहिए.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,ऐनिमेशन बहुत छोटा है ({duration} सेकंड). Emote ऐनिमेशन {minLength} सेकंड से ज़्यादा लंबे होने चाहिए.
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,आपके बॉडी में छोटे डिस्कनेक्टेड मेश कॉम्पोनेंट (मेश आइलैंड) मौजूद हैं. कृपया फ़्लोटिंग ज्योमेट्री हटा दें और पक्का करें कि सभी मेश पार्ट्स ठीक से जुड़े हुए हैं.
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"ऐसेट की क्वॉलिटी : {partName} में {num_disconnected_components} डिस्कनेक्ट किए गए कॉम्पोनेंट हैं, जो मैक्सिमम {max_disconnected_components} की लिमिट से ज़्यादा हैं."
+Common.UGCValidation.ErrorLabel.AQSInputDataError,इनपुट डेटा गलत या अधूरा होने के कारण क्वॉलिटी स्कोर का हिसाब सही से नहीं लगाया जा सकता. कृपया अपना मॉडल चेक करें या बग रिपोर्ट फ़ाइल करें
 Common.UGCValidation.ErrorLabel.AQSInternalError,ऐसेट क्वालिटी में गड़बड़ी की वजह से स्कोर जनरेट नहीं हो सका. कृपया देखें कि इनपुट डेटा सही है या नहीं और फिर से कोशिश करें या बग रिपोर्ट फ़ाइल करें.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"ऐसेट क्वालिटी से जुड़ी वॉर्निंग : केज से मेश की दूरी का स्कोर {score} है . बाहरी केज और मेश के बीच की अधिकतम दूरी {max_distance} है, बाहरी केज के वर्टिसेज़ का {negative_sdf_percent}% हिस्सा, रेंडर मेश के अंदर है."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"ऐसेट क्वालिटी से जुड़ी वॉर्निंग : हेड केज की दूरी का स्कोर {score} है. हेड केज और मेश के बीच की अधिकतम दूरी {max_distance} है, हेड केज के वर्टिसेज़ का {negative_sdf_percent}% हिस्सा, हेड मेश के अंदर है."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,ऐसेट क्वालिटी से जुड़ी वॉर्निंग : केज रेलेवेंसी का स्कोर {score} है. बाहरी केज के बदले गए वर्टिसेस का {irrelevant_percent}% हिस्सा ऐक्सेसरीज़ को कवर नहीं करता.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,ऐसेट क्वालिटी से जुड़ी वॉर्निंग : {cage_name} के लिए केज UV का स्कोर {score} है. UV की गलत संख्या : {incorrect_uv_count}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,ऐसेट क्वालिटी : {partName} में {degenerate_triangle_percent}% डिजेनेरेट ट्रायंगल हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,ऐसेट क्वालिटी से जुड़ी वॉर्निंग : डायनैमिक हेड एक्सप्रेशन का स्कोर {score} है.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"ऐसेट क्वालिटी : जॉइंट कॉन्फ़िगरेशन का स्कोर {score} है (जॉइंट : {joint_number}, बायाँ हाथ : {left_hand_joint_number}, दायाँ हाथ : {right_hand_joint_number})."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,ऐसेट की क्वालिटी : {partName} में {num_disconnected_components} कॉम्पोनेंट में से {num_small_volume_islands} छोटे डिस्कनेक्टेड आइलैंड हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,ऐसेट क्वालिटी : {partName} में मेश मैनिफ़ोल्ड से जुड़ी समस्याएँ हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,ऐसेट की क्वालिटी : {partName} मेश वॉटरटाइट नहीं है ({boundary_edges_percent}% बाउंड्री एज).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,"ऐसेट क्वालिटी से जुड़ी वॉर्निंग : मेश कंटेनमेंट का स्कोर {score} है. मेश वर्टिसेज़ का {mesh_outside_outer_cage_percent}% हिस्सा, बाहरी केज के बाहर है."
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,"{measureName} के लिए एसेट क्वालिटी स्कोर का हिसाब नहीं लगाया जा सका, क्योंकि इनपुट डेटा अधूरा या अमान्य था. इससे आपका अपलोड ब्लॉक नहीं होता."
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,ऐसेट क्वालिटी : टेक्स्चर {textureName} थोड़ा कम मुश्किल है (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,ऐसेट क्वालिटी : टेक्स्चर {textureName} की रिज़ॉल्यूशन {texture_width}x{texture_height} है (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,ऐसेट क्वालिटी : {partName} में {intersecting_tri_face_percent}% इंटरसेक्टिंग ट्रायंगल फ़ेस हैं (स्कोर : {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,"ऐसेट क्वालिटी : {partName} में {uv_outside_bound_vert_percent}% UV वर्टिसेज़ हैं, जो सीमा से बाहर हैं (स्कोर : {score})."
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,ऐसेट क्वालिटी : {partName} में {similar_vertex_percent}% मिलते-जुलते वर्टिसेज़ हैं (स्कोर : {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"हैंडल, जॉइंट {jointName} से जुड़ा हुआ है, जो मंज़ूर किए गए स्कीमा का हिस्सा नहीं है. सिर्फ़ स्टैंडर्ड R15 जॉइंट और स्किनिंग ट्रांसफ़र जॉइंट की अनुमति है."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} के लिए स्किनिंग ट्रांसफ़र का इस्तेमाल करना ज़रूरी है, लेकिन आपके पास ज़रूरी जॉइंट {requiredJointName} मौजूद नहीं है."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"हैंडिल, जॉइंट {jointName} से जुड़ा हुआ है, लेकिन इस ऐसेट को ऑटो-स्किन किया जाना चाहिए. सिर्फ़ {validJointNameList} से जोड़ा जा सकता है."
@@ -115,17 +141,24 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,"{ass
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,"रिजिड ऐक्सेसरी में स्किनिंग डेटा है, जो काम नहीं करता है. पक्का करें कि मेश के साथ बोन इंपोर्ट न किए जाएँ."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"हैंडिल में {jointName} जॉइंट है, जो सिर्फ़ तभी हो सकता है, जब WrapLayer.AutoSkin, EnabledOverride पर सेट हो."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,ट्रांसफ़र जॉइंट से जुड़े वर्टिसेस पूरी तरह से वेटेड होने चाहिए.
+Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,ऐनिमेशन पैक बंडल में वह ऐनिमेशन टाइप मौजूद नहीं है (हैं) जो होना चाहिए : {missingAnimationTypes}. हर ऐनिमेशन टाइप में एक R15Anim फ़ोल्डर होना चाहिए जिसमें उसके अपेक्षित StringValue चिल्ड्रन बिल्कुल सही हों.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"ऐनिमेशन '{animationName}' का वज़न {weight} है, लेकिन वज़न 0 से ज़्यादा होना चाहिए. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath} में {ExpectedName} नाम का ज़रूरी {ExpectedClass} नहीं मिला
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,नीचे दिए गए इंस्टैंस मंज़ूर किए गए स्कीमा का हिस्सा नहीं हैं और उन्हें हटा दिया जाना चाहिए: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"अपलोड किया गया ऐसेट {ExpectedClass} होना चाहिए, लेकिन यह {RootClass} है."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"अपलोड किए गए ऐसेट का नाम {ExpectedClass} होना चाहिए, लेकिन इसका नाम {RootClass} है."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation में बॉडी पार्ट '{bodyPartName}' में एक पोज़िशन (ट्रांसलेशन) ट्रैक है. ऐनिमेशन बॉडी पार्ट्स सिर्फ़ घुमाए जा सकते हैं; पोज़िशन ट्रैक्स की अनुमति नहीं है. कृपया इस बॉडी पार्ट से पोज़िशन ट्रैक हटा दें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation में बॉडी पार्टी '{bodyPartName}' अपनी शुरुआती पोज़िशन से {distance} स्टड्स दूर चला जाता है. ज़्यादा से ज़्यादा {maxDistance} स्टड्स की दूरी की अनुमति है. कृपया बोन की पोज़िशनल मूवमेंट कम करें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation में HRD/DRD बोन हैं और बॉडी पार्ट '{bodyPartName}' में एक पोज़िशन (ट्रांसलेशन) ट्रैक है. ऐनिमेशन में कोई भी बोन मौजूद होने पर, जॉइंट को अलग होने से रोकने के लिए कोई भी बॉडी पार्ट ट्रांसलेट नहीं हो सकता. कृपया बॉडी पार्ट्स से सभी पोज़िशन ट्रैक हटा दें."
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation में {boneName} बोन का एक पोज़िशन (ट्रांसलेशन) ट्रैक है. HRD/DRD बोन सिर्फ़ घुमाए जा सकते हैं; पोज़िशन ट्रैक्स से जॉइंट अलग हो जाते हैं और इसकी अनुमति नहीं है. कृपया इस बोन से पोज़िशन ऐनिमेशन को हटा दें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation में बोन '{boneName}' अपनी शुरुआती पोज़िशन से {distance} स्टड्स दूर चला जाता है. ज़्यादा से ज़्यादा {maxDistance} स्टड्स की दूरी की अनुमति है. कृपया बोन की पोज़िशनल मूवमेंट कम करें.
+Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,"CurveAnimation में HRD/DRD बोन फ़ोल्डर हैं, जो अभी तक काम नहीं करते हैं. कृपया अपलोड करने से पहले सभी बोन सब-फ़ोल्डर हटा दें."
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,"CurveAnimation में बॉडी पार्ट्स, HumanoidRootPart से {minHeight} स्टड्स से नीचे या {maxDistance} स्टड्स से ऊपर नहीं हो सकते. कृपया ऐनिमेशन को ठीक करें."
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation के सब-फ़ोल्डर MarkerCurves और AnimationRigData के अंदर और फ़ोल्डर नहीं हो सकते
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation हायरार्की में Scripts, LocalScripts या ModuleScripts मौजूद हैं. कृपया उन्हें हटा दें."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation डेटा लोड नहीं हो सका. हो सकता है कि ऐनिमेशन ऐसेट अमान्य हो या उसे ऐक्सेस न किया जा सकता हो.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,"CurveAnimation में {folderName} बॉडी पार्ट फ़ोल्डर मौजूद है, जिसकी हायरार्की अमान्य है (इसमें ऐसे सब-फ़ोल्डर मौजूद हैं, जिनकी अनुमति नहीं है या जिन्हें गलत तरीके से सेट अप किया गया है)"
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation में मौजूद फ़ोल्डर '{boneName}' एक मान्य HRD/DRD बोन नाम नहीं है. ऐनिमेशन सब-फ़ोल्डर या तो मान्य R15 बॉडी पार्ट्स होने चाहिए या फिर मान्य बोन नेम (जैसे कि HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, या उँगली की हड्डियाँ, जैसे कि LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation में अमान्य समय या वैल्यू वाले Curves मौजूद हैं. कृपया ऐनिमेशन को ठीक करें.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation हायरार्की में सिर्फ़ {allowedTypes} हो सकते हैं. कृपया अन्य सभी इंस्टैंस टाइप हटा दें.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation की अवधि {minLength} से {maxLength} सेकंड के बीच होनी चाहिए. कृपया ऐनिमेशन को ठीक करें.
@@ -163,6 +196,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,"डायनैमि�
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"मार्केटप्लेस पर डायनैमिक हेड को ऐनिमेट किया जाना चाहिए, लेकिन इस हेड में कोई FACS डेटा नहीं है."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,"डायनैमिक हेड के लिए दाहिनी आँख बंद करने का एक्सप्रेशन नहीं मिल रहा है. कृपया दाहिनी आँख के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर दाहिनी आँख की जगह से मैच करे और पक्का करें कि उसे बंद किया जा सकता है."
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,"डायनैमिक हेड के लिए फ़्राउन एक्सप्रेशन का पता नहीं लगाया जा सकता. कृपया मुँह के लिए केज लैंडमार्क को एडजस्ट करें, ताकि वह सिर पर मुँह से मैच करे और पक्का करें कि यह फ़्राउन एक्सप्रेशन दिखा सकता है."
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,"यह ऐसेट एमिसिव मैप का इस्तेमाल करता है, जो सिर्फ़ 'भरोसेमंद क्रिएटर प्रोग्राम' में शामिल क्रिएटर्स के लिए उपलब्ध हैं. कृपया सभी एमिसिव मैप कॉन्टेंट हटा दें या अपलोड करने से पहले प्रोग्राम में शामिल हो जाएँ."
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls पर InternalOverrideFACSData प्रॉपर्टी अपलोड के समय खाली होनी चाहिए.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FACs को आपके सिर को {modPercent}% तक फैलाते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FACs को आपके सिर को {modPercent}% तक सिकोड़ते हुए पाया गया, लेकिन सिर में बदलाव करना 'चेहरे के ऐनिमेशन के लिए मार्केटप्लेस पॉलिसी' के खिलाफ़ है."
@@ -178,6 +212,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"{partName} में �
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,HumanoidRigDescription के बिना DigitsRigDescription को शामिल नहीं किया जा सकता
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"इंस्टैंस {instName} एक से ज़्यादा बार दिखाई देता है, लेकिन बोन हाइरार्की में सिर्फ़ एक बार मौजूद हो सकता है."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"इंस्टैंस {instName}, {parentName} के नीचे है, लेकिन आपकी मौजूदा बोन्स के आधार पर इसे {expectedParentName} के नीचे होना चाहिए."
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,"बॉडी अपलोड के लिए, HumanoidRigDescription और अतिरिक्त बोन्स अभी तक चालू नहीं किए गए हैं."
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,"क्लास {className} का इंस्टैंस {instName} एक बोन ट्री में मौजूद है, लेकिन यह बताए गए R15plus स्कीमा का हिस्सा नहीं है."
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,वैकल्पिक जॉइंट {jointName} को HRD में गलत तरीके से मैप किया गया है. इसे {boneName} नाम के बोन से मैप किया जाना चाहिए.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"जॉइंट {jointName} एक स्टैंडर्ड R15 जॉइंट है, लेकिन रिग अटैचमेंट HRD से कनेक्ट नहीं है. पक्का करें कि आपके अवतार के नीचे मौजूद HRD, Motor6d के बजाय AttachmentConstraint से लिंक हो रहा है."
@@ -204,12 +239,15 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageInsideMesh,"बा�
 Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"बाहरी केज, रेंडर मेश से बहुत दूर है. बाहरी केज और मेश के बीच की अधिकतम दूरी {max_sdf} है, जो कि {max_sdf_threshold} की अधिकतम सीमा से ज़्यादा है"
 Common.UGCValidation.ErrorLabel.MeasureCageUV,"केज {cage_name} में {incorrect_uv_count} ऐसी UV वैल्यू हैं, जो गलत हैं या टेम्पलेट से संबंधित नहीं हैं. कृपया केज UV को सही करें."
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,"ऐक्सेसरी के {mesh_outside_outer_cage_percent}% मेश वर्टिसेस, उसके बाहरी केज के बाहर हैं. एडजस्टमेंट करें, जिससे कि ऐक्सेसरी का ज़्यादा-से-ज़्यादा हिस्सा केज के बीच रहे."
+Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} मेश के {axis} ऐक्सिस पर '{currentSize}' स्टड्स का साइज़, किसी अलग हिस्से के लिए मंज़ूर किए गए मैक्सिमम साइज़ '{maxSize}' स्टड्स से बड़ा है. मेश का साइज़ कम करें."
+Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} मेश के {axis} ऐक्सिस पर '{currentSize}' स्टड्स का साइज़, किसी अलग हिस्से के लिए मंज़ूर किए गए न्यूनतम साइज़ '{minSize}' स्टड्स से छोटा है. मेश का साइज़ बढ़ाएँ."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,अटैचमेंट {attName} को {partName} डिसेंडेंट के अंदर सिर्फ़ एक बार मौजूद होना चाहिए.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (या इसके डिसेंडेंट) में ऐट्रिब्यूट हैं. आपको इनसे ऐट्रिब्यूट हटाने होंगे: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Roblox पर कोई ऐसेट अपलोड करने के लिए, आपको ठीक 1 इंस्टैंस और उससे जुड़ा अपलोड टाइप चुनना होगा."
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} इंस्टैंस में टैग नहीं होने चाहिए.
+Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,दूसरे टेस्ट की एरर स्ट्रिंग का इस्तेमाल हब-फ़र्स्ट अनुवाद सिंक वर्कफ़्लो को एंड-टू-एंड वेरिफ़ाई करने के लिए किया जाता है.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"हेड मेशपार्ट में {jointName} के लिए चेहरे के एनिमेशन हैं, जिनका इस्तेमाल FAC में नहीं किया जा सकता. कृपया इस जॉइंट का नाम बदलें, फिर अपना हेड दोबारा इंपोर्ट करें."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"बॉडीपार्ट {partName} वर्चुअल जॉइंट {jointName} से जुड़ा है, जो R15plus स्कीमा का हिस्सा नहीं है."
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,"बॉडी अपलोड के लिए, HumanoidRigDescription और अतिरिक्त बोन अभी तक चालू नहीं किए गए हैं."
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,सेटिंग्स पर जाएँ
@@ -222,8 +260,12 @@ CommonUI.Controls.Action.Apply,लागू करें
 CommonUI.Controls.Action.Back,वापस जाएँ
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,कंफ़र्म करें
+CommonUI.Controls.Action.Continue,
+CommonUI.Controls.Action.Done,हो गया
+CommonUI.Controls.Action.Next,अगला
 CommonUI.Controls.Action.OK,ठीक है
 CommonUI.Controls.Action.Refresh,रीफ़्रेश करें
+CommonUI.Controls.Action.ResetAll,सभी को रीसेट करें
 CommonUI.Controls.Action.Search,सर्च करें
 CommonUI.Controls.Action.ShowMore,और दिखाएँ
 CommonUI.Controls.Action.Submit,सबमिट करें
@@ -246,6 +288,8 @@ CommonUI.Controls.Label.January,जनवरी
 CommonUI.Controls.Label.JanuaryAbbreviated,
 CommonUI.Controls.Label.July,जुलाई
 CommonUI.Controls.Label.June,जून
+CommonUI.Controls.Label.LastWeek,पिछले हफ़्ते
+CommonUI.Controls.Label.LastYear,पिछले साल
 CommonUI.Controls.Label.March,मार्च
 CommonUI.Controls.Label.MarchAbbreviated,
 CommonUI.Controls.Label.May,मई
@@ -264,8 +308,12 @@ CommonUI.Controls.Label.September,सितंबर
 CommonUI.Controls.Label.SeptemberAbbreviated,
 CommonUI.Controls.Label.Sunday,रविवार
 CommonUI.Controls.Label.SundayAbbreviated,रवि
+CommonUI.Controls.Label.ThisMonth,इस महीने
+CommonUI.Controls.Label.ThisWeek,इस हफ़्ते
+CommonUI.Controls.Label.ThisYear,इस साल
 CommonUI.Controls.Label.Thursday,गुरुवार
 CommonUI.Controls.Label.ThursdayAbbreviated,गुरु
+CommonUI.Controls.Label.Today,आज
 CommonUI.Controls.Label.Tuesday,मंगलवार
 CommonUI.Controls.Label.TuesdayAbbreviated,मंगल
 CommonUI.Controls.Label.Wednesday,बुधवार
@@ -273,8 +321,11 @@ CommonUI.Controls.Label.WednesdayAbbreviated,बुध
 CommonUI.Controls.Label.Year,साल
 CommonUI.Controls.NoResultsFound,कोई रिज़ल्ट नहीं मिला
 CommonUI.Features.Action.Close,
+CommonUI.Features.Action.Continue,
+CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,कम
 CommonUI.Features.Action.MoreLowercase,ज़्यादा
+CommonUI.Features.Action.Send,भेजें
 CommonUI.Features.Label.About,परिचय
 CommonUI.Features.Label.AcceptConnection,कनेक्शन मंज़ूर करें
 CommonUI.Features.Label.AcceptFriend,फ़्रेंड को स्वीकार करें
@@ -310,8 +361,9 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,प्रोफ़ाइल
 CommonUI.Features.Label.RM,मोमेंट्स
 CommonUI.Features.Label.Redeem,कोड्स रिडीम करें
-CommonUI.Features.Label.RemoveConnection,कनेक्शन हटाएँ
+CommonUI.Features.Label.RemoveConnection,फ़्रेंड को हटाएँ
 CommonUI.Features.Label.ReportLogs,लॉग की रिपोर्ट करें
+CommonUI.Features.Label.ReportLogsSentenceCase,
 CommonUI.Features.Label.Sent,भेज दिया गया
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,शर्तें
@@ -448,7 +500,7 @@ CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusSoldOut,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusSuccess,खरीदा गया
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.Notice,इस समय कुछ आइटम खरीदे नहीं जा सके हैं. थोड़ी देर बाद कोशिश करें.
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.CurrentBalance,मौजूदा बैलेंस
-CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA,हो गया
+CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.RobuxSpent,Robux खर्च हो गए
 CoreScripts.BulkPurchasePrompt.RequestPrompt.Heading,समरी
 CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemListPurchaseCount,
@@ -491,16 +543,29 @@ CoreScripts.EmoteThumbnailEditor.Action.Update,अपडेट करें
 CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,थंबनेल एडिट करें
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,रोटेशन
 CoreScripts.EmoteThumbnailEditor.Label.Time,समय
+CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,सफ़ेद Roblox मेन्यू से यह पता चलता है कि आप प्ले-टेस्ट कर रहे हैं. हमेशा Roblox कम्यूनिटी स्टैंडर्ड का पालन करें.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,नया: Roblox Connect देखें!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,नया: Roblox पार्टी देखें!
 CoreScripts.FTUX.Heading.InExperienceShop,नई शॉप
 CoreScripts.FTUX.Heading.JoinVoice,वॉइस चैट में शामिल हों
+CoreScripts.FTUX.Heading.LeaveRespawn,छोड़ें और रीस्पॉन करें
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,नया: अवतार स्विचर
+CoreScripts.FTUX.Heading.NewTiltOnboarding,मेन्यू यहाँ मौजूद है
+CoreScripts.FTUX.Heading.NewTiltUpdate,नया मेन्यू
+CoreScripts.FTUX.Heading.ReadyToPlaytest,प्ले-टेस्ट करने के लिए तैयार हैं?
+CoreScripts.FTUX.Heading.SideSheetUpdate,आपके सभी ऐक्शन एक ही जगह पर
+CoreScripts.FTUX.Heading.SocialOnboarding,सोशल फ़ीचर्स
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,किसी भी समय अपने सेव किए गए अवतार पर स्विच करें.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,किसी भी समय अपने दोस्तों से चैट करें.
 CoreScripts.FTUX.Label.InExperienceShopDescription,सिर्फ़ आपके लिए चुने गए आइटम देखें
 CoreScripts.FTUX.Label.JoinVoiceDescription,दूसरों को सुनना और उनसे बातें करना
+CoreScripts.FTUX.Label.LeaveRespawn,गेम छोड़ने या अपने अवतार को रीस्पॉन करने की सुविधा यहाँ आसानी से उपलब्ध है.
+CoreScripts.FTUX.Label.NewTiltOnboarding,गेम मेन्यू में आपकी गेम सेटिंग्स के साथ-साथ इन-गेम ऐक्शन शामिल हैं.
+CoreScripts.FTUX.Label.NewTiltUpdate,हैमबर्गर मेन्यू आइटम यहाँ लाए गए हैं.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,किसी भी समय अपने दोस्तों के साथ पार्टी करें.
+CoreScripts.FTUX.Label.SideSheetOnboarding,"मेन्यू में आपके सभी ज़रूरी फ़ीचर्स मौजूद हैं. दोस्तों को इनवाइट करने, Emotes आज़माने, म्यूज़िक कंट्रोल करने के साथ-साथ और भी बहुत कुछ."
+CoreScripts.FTUX.Label.SideSheetUpdate,मेन्यू में अभी भी आपके सभी ज़रूरी फ़ीचर्स मौजूद हैं.
+CoreScripts.FTUX.Label.SocialOnboarding,"टॉप बार से अपने सोशल फ़ीचर्स आसानी से ऐक्सेस करें, जिसमें चैट भी शामिल है."
 CoreScripts.Feedback.EntryPoint.ButtonText,फ़ीडबैक दें
 CoreScripts.Feedback.EntryPoint.OptionText,अनुवाद का फ़ीडबैक दें
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,बाहर निकलें
@@ -543,7 +608,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,अपन
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"युवा प्लेयर्स की सुरक्षा के लिए, 13 साल से कम उम्र वाले यूज़र के अकाउंट से फ़ीडबैक नहीं भेजा जा सकता."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,फ़ीडबैक उपलब्ध नहीं है
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,कैप्चर जोड़ें
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,सिलेक्शन एडिट करें
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,कोई कैप्चर उपलब्ध नहीं है.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,कैप्चर ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,क्रिएटर की मदद करें ताकि वे आपकी समस्या देख सकें.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,कैप्चर लोड हो रहे हैं...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} को चुना गया
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,आपके एक या एक से ज़्यादा स्क्रीनशॉट अपलोड नहीं हो सके.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,बग रिपोर्ट
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,आइटम या डेटा रीस्टोरेशन
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,कैटगरी *
@@ -552,13 +628,15 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,कोई �
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,खरीदारी से जुड़ी समस्या
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ज़्यादा से ज़्यादा {MAX} कैरेक्टर
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,जानकारी *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,चुने गए का निशान हटाएँ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"समस्या से संबंधित कोई भी जानकारी शामिल करें, जैसे कि गेम का वर्ज़न और स्टेप्स को दोबारा देखने के लिए क्या करना होगा."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"बताएँ कि क्या गायब है और आपने उसे आखिरी बार कब देखा था. अगर आपका अकाउंट हैक कर लिया गया था, तो कृपया अपना Roblox CS टिकट नंबर और कोई भी संबंधित जानकारी शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,अपनी रिक्वेस्ट या समस्या की जानकारी यहाँ दें. स्थिति को समझने में हमारी मदद करने के लिए ज़्यादा से ज़्यादा जानकारी दें.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"हमें बताएँ कि आपने क्या खरीदने की कोशिश की, यह कब हुआ और कुल कीमत क्या थी (जैसे कि 500 Robux / $4.99). आपको दिख रहा कोई भी गड़बड़ी मैसेज शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,दुर्व्यवहार की रिपोर्ट करने की कोशिश की जा रही है?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>इसके बजाय रिपोर्ट सबमिट करें.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,भेजें
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,चुनें
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,इससे क्रिएटर को सही अकाउंट को सपोर्ट करने में मदद मिलती है.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,क्रिएटर के साथ यूज़र की जानकारी शेयर करें
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.LabelRequired,क्रिएटर के साथ यूज़र की जानकारी शेयर करें (ज़रूरी)
@@ -704,6 +782,7 @@ CoreScripts.InGameMenu.GameSettings.Haptics,हैप्टिक्स
 CoreScripts.InGameMenu.GameSettings.InvertedCamera,इनवर्टेड कैमरा
 CoreScripts.InGameMenu.GameSettings.LanguageHeader,चैट और भाषा
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,डेवलपर ने लॉक किया है
+CoreScripts.InGameMenu.GameSettings.MainVolume,मुख्य वॉल्यूम
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,क्वालिटी लेवल
 CoreScripts.InGameMenu.GameSettings.MovementMode,मूवमेंट मोड
 CoreScripts.InGameMenu.GameSettings.Open,खोलें
@@ -734,6 +813,7 @@ CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,VR स्टेप�
 CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,थर्ड पर्सन फ़िक्स्ड कैमरा
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,व्यू और कंट्रोल
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR विग्नेट चालू है
+CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,वॉइस चैट का वॉल्यूम
 CoreScripts.InGameMenu.GameSettings.Volume,वॉल्यूम
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR कंट्रोल
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,कोई गड़बड़ी हुई है. थोड़ी देर बाद कोशिश करें.
@@ -746,7 +826,6 @@ CoreScripts.InGameMenu.Label.ViewButton,बटन देखें
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
 CoreScripts.InGameMenu.LeaveGameQuestion,छोड़ना है?
-CoreScripts.InGameMenu.NextUpExitMenu.Title,सुझाए गए एक्सपीरिएंस
 CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,कंट्रोल...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
@@ -756,7 +835,7 @@ CoreScripts.InGameMenu.PageTitle.Report,रिपोर्ट करें
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,कम्फ़र्ट सेटिंग्स
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,सर्वर स्विच करें
 CoreScripts.InGameMenu.Prompt.BackToHome,होमपेज पर जाएँ
-CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,क्या आपको वाकई यह एक्सपीरिएंस छोड़ना है?
+CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,क्या आपको वाकई गेम छोड़ना है?
 CoreScripts.InGameMenu.Prompt.ConfirmResetCharacter,क्या आपको वाकई अपना कैरेक्टर रीसेट करना है?
 CoreScripts.InGameMenu.Prompt.ConfirmRespawnCharacter,क्या आपको वाकई अपना कैरेक्टर रीस्पॉन करना है?
 CoreScripts.InGameMenu.Prompt.LeaveGame,
@@ -824,12 +903,13 @@ CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,कैरेक्टर रीसेट करना है?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,आपको इस सर्वर को छोड़कर दूसरे सर्वर पर स्विच किया जा रहा है.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,आपको जाना है?
-CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले देखे गए एक्सपीरिएंस जॉइन करें
-CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस एक्सपीरिएंस को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
+CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,वाइब्रेशन
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,मेन्यू नेविगेशन टॉगल करने के लिए
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,कुछ एक्सपीरिएंस में गेमपैड को दबाने की ज़रूरत होती है
+CoreScripts.InGameMenu.VoiceChatVolumeLower,
 CoreScripts.PremiumModal.Title.Error,
 CoreScripts.PublishAssetPrompt.AssetDescriptionPlaceholder,विवरण
 CoreScripts.PublishAssetPrompt.Cancel,
@@ -899,8 +979,11 @@ CoreScripts.PurchasePrompt.Title.VerificationRequired,
 CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,फ़ोटो लें
 CoreScripts.TextChat.Action.SendQuickWords,क्विक वर्ड्स भेजें
+CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,ग्लोबल
 CoreScripts.TextChat.ChannelTabs.Here,यहाँ
+CoreScripts.TextChat.ChannelTabs.System,सिस्टम
+CoreScripts.TextChat.ChannelTabs.Team,टीम
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: स्पीकर म्यूट करें.
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker> : स्पीकर को अनम्यूट करें.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox चैट में सपोर्टेड भाषाओं का ऑटोमैटिक तरीके से अनुवाद करता है
@@ -917,6 +1000,8 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,"यहाँ सिर�
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,आप सिस्टम मैसेज देख सकते हैं और सिर्फ़ अपने इलाके के यूज़र्स से चैट कर सकते हैं.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,सिर्फ़ आपके एज ग्रुप के लोग और आपके भरोसेमंद फ़्रेंड्स ही आपसे चैट कर सकते हैं.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,सिर्फ़ आपके एज ग्रुप के लोग और आपके भरोसेमंद कनेक्शन ही आपसे बात कर सकते हैं.
+CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,अभी खेल रहे सभी लोगों को हैलो कहें!
+CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,{RBX_COUNT} प्लेयर्स चैट में मौजूद हैं. हैलो कहें!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 अभी खेल रहे सभी लोगों को नमस्ते कहें!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,सिर्फ़ आपके भरोसेमंद फ़्रेंड्स ही आपसे चैट कर सकते हैं.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,इस एक्सपीरिएंस में और लोगों से चैट करें. सिर्फ़ मिलते-जुलते एज ग्रुप के लोग ही आपसे चैट कर सकते हैं.
@@ -947,7 +1032,11 @@ CoreScripts.TextChat.Emote.Error.NotEnabled,उस Emote का इस्ते�
 CoreScripts.TextChat.Emote.Error.NotEquipped,आपके पास वह Emote नहीं है.
 CoreScripts.TextChat.Emote.Error.NotOwnedGeneric,आपके पास वह इमोट नहीं है.
 CoreScripts.TextChat.EnableChatButton.Label.UnlockChat,चैट अनलॉक करें
+CoreScripts.TextChat.Error.NoChannelAccess,आपके पास इस चैट चैनल का ऐक्सेस नहीं है
+CoreScripts.TextChat.Error.NoChannelSelected,कोई चैट चैनल नहीं चुना गया है
+CoreScripts.TextChat.Error.ReadOnlyChannel,सिर्फ़ पढ़ने के लिए चैट चैनल
 CoreScripts.TextChat.Help.FirstLine,ये बेसिक चैट कमांड्स हैं.
+CoreScripts.TextChat.InputBar.Hint.ChatUnavailable,चैट उपलब्ध नहीं है
 CoreScripts.TextChat.InputBar.Hint.Gamepad,"चैट के लिए मेन्यू में ""{CHAT_BUTTON}"" बटन का इस्तेमाल करें"
 CoreScripts.TextChat.InputBar.Hint.GamepadConnected,"टाइप करने के लिए, ""{CONFIRM_KEY}"" दबाएँ"
 CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
@@ -969,7 +1058,9 @@ CoreScripts.TextChat.Mute.Success,यूज़र '{RBX_NAME}' को म्य�
 CoreScripts.TextChat.Notification.WhisperChat.Created,आपकी चैट अब {RBX_NAME} के साथ प्राइवेट तौर पर हो रही है
 CoreScripts.TextChat.Online.Help.Description3,/online : उन यूज़र्स की संख्या जिनसे इस चैनल में चैट करने की सुविधा आपके पास है.
 CoreScripts.TextChat.Online.Success.Plural,{RBX_COUNT} प्लेयर्स अभी ऑनलाइन हैं और चैट कर सकते हैं
+CoreScripts.TextChat.Online.Success.Plural2,{RBX_COUNT} अन्य प्लेयर ऑनलाइन हैं और चैट कर सकते हैं.
 CoreScripts.TextChat.Online.Success.Singular,{RBX_COUNT} प्लेयर अभी ऑनलाइन है और चैट कर सकता है
+CoreScripts.TextChat.Online.Success.Singular3,{RBX_COUNT} अन्य प्लेयर ऑनलाइन है और चैट कर सकता है.
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,"अगर आप किसी टीम में नहीं हैं, तो टीम चैट नहीं हो पाएगी!"
 CoreScripts.TextChat.TeamChat.PrefixText,[टीम]
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,अब आपके पास अपने एज ग्रुप के लोगों और अपने भरोसेमंद कनेक्शन से बात करने की सुविधा है.
@@ -1025,7 +1116,7 @@ CoreScripts.TopBar.Title.ExperienceControls,एक्सपीरिएंस �
 CoreScripts.TopBar.ToggleMic,खुद को म्यूट/अनम्यूट करें
 CoreScripts.TopBar.Traversal.BackButtonDefault,पिछला एक्सपीरिएंस
 CoreScripts.TopBar.Traversal.History,हिस्ट्री
-CoreScripts.VRFTUX.Action.Next,अगला
+CoreScripts.VRFTUX.Action.Next,
 CoreScripts.VRFTUX.Action.Skip,
 CoreScripts.VRFTUX.Description.Movement.Body1,"किसी एक्सपीरिएंस में इधर-उधर जाने के लिए, अपने <b>बाएँ</b> कंट्रोलर पर मौजूद थंबस्टिक का इस्तेमाल करें."
 CoreScripts.VRFTUX.Description.Movement.Body2,"कूदने के लिए, <b>A</b> बटन दबाएँ."
@@ -1077,7 +1168,9 @@ Feature.AccountSettings.Example.Twitch,जैसे www.twitch.tv/roblox/profile
 Feature.AccountSettings.Example.Twitter,जैसे @Roblox
 Feature.AccountSettings.Example.YouTube,जैसे www.youtube.com/user/roblox
 Feature.AccountSettings.Heading.SocialNetworks,सोशल नेटवर्क
+Feature.AccountSettings.Heading.Tab.Notifications,नोटिफ़िकेशन
 Feature.AccountSettings.Heading.Tab.Privacy,
+Feature.AccountSettings.Heading.Tab.Robux,Robux
 Feature.AccountSettings.Heading.Tab.Security,सुरक्षा
 Feature.AccountSettings.Label.Discord,Discord
 Feature.AccountSettings.Label.DropDown.Everyone,हर कोई
@@ -1098,10 +1191,12 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,X हैंडल अमान
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube का URL अमान्य है.
 Feature.AddFriends.Action.IgnoreConnectionRequest,कनेक्शन की रिक्वेस्ट को इग्नोर करें
 Feature.AddFriends.Action.IgnoreFriendRequest,फ़्रेंड रिक्वेस्ट इग्नोर करें
+Feature.AddFriends.Action.IgnoreTrustedFriendRequest,भरोसेमंद फ़्रेंड रिक्वेस्ट इग्नोर करें
 Feature.AddFriends.Action.RequestIgnored,रिक्वेस्ट इग्नोर की गई
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,लोगों को सर्च करें
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या डिसप्ले नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.SyncWithContacts,"फ़्रेंड्स को खोजने और इनवाइट करने के लिए, कॉन्टेक्ट्स को सिंक करें!"
 Feature.AddFriends.Title.ConnectWithContacts,कॉन्टैक्ट्स से जोड़ें
@@ -1124,9 +1219,12 @@ Feature.Avatar.Action.CancelSelection,सिलेक्शन कैंसि�
 Feature.Avatar.Action.Clear,
 Feature.Avatar.Action.ComposerPost,पोस्ट करें
 Feature.Avatar.Action.ComposerPreviewAndPost,प्रीव्यू करें और पोस्ट करें
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,सेट क्रिएट करें
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,डिफ़ॉल्ट व्यू
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,सेट डिलीट करें
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,प्रोफ़ाइल पिक्चर एडिट करें
 Feature.Avatar.Action.GoBack,
@@ -1144,13 +1242,14 @@ Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,पोस्ट किया जा रहा है
 Feature.Avatar.Action.RemoveAll,सभी को हटाएँ
 Feature.Avatar.Action.Rename,नाम बदलें
+Feature.Avatar.Action.RenameSet,सेट का नाम बदलें
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,आखिरी बार सेव किए गए अवतार को रीस्टोर करें
 Feature.Avatar.Action.Revert,रिवर्ट करें
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,सेव करें
 Feature.Avatar.Action.SaveAsNew,नए नाम से सेव करें
-Feature.Avatar.Action.Select,चुनें
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,कई आइटम चुनें
 Feature.Avatar.Action.SelectSlot,स्लॉट चुनें
 Feature.Avatar.Action.Share,शेयर करें
@@ -1208,6 +1307,9 @@ Feature.Avatar.Heading.Outfits,आउटफ़िट
 Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,कैरेक्टर सेव करें
 Feature.Avatar.Heading.SelectToUpdate,अपडेट करने के लिए चुनें
+Feature.Avatar.Heading.SetLimitReached,इससे ज़्यादा अवतार सेट क्रिएट करने की अनुमति नहीं है
+Feature.Avatar.Heading.SetNameDuplicate,डुप्लिकेट नाम
+Feature.Avatar.Heading.SetNameNotAllowed,नाम की अनुमति नहीं है
 Feature.Avatar.Heading.SharePublicAvatar,अपना अवतार शेयर करें
 Feature.Avatar.Heading.SortBy,इस आधार पर क्रम से लगाएँ
 Feature.Avatar.Heading.UsedName,इस्तेमाल हो चुका नाम
@@ -1232,6 +1334,8 @@ Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,जोड़ें/एडिट करें
 Feature.Avatar.Label.AddManage,जोड़ें/मैनेज करें
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
+Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,सभी हेड
 Feature.Avatar.Label.AnimationFullSet,फ़ुल सेट
 Feature.Avatar.Label.AvatarAdjustment,अवतार एडजस्टमेंट
@@ -1299,6 +1403,7 @@ Feature.Avatar.Label.FullBody,फ़ुल बॉडी
 Feature.Avatar.Label.FullMasks,फ़ुल मास्क
 Feature.Avatar.Label.FullPair,फ़ुल पेयर
 Feature.Avatar.Label.Gear,गियर
+Feature.Avatar.Label.GenericSetError,कुछ गड़बड़ी हुई. कृपया फिर से कोशिश करें.
 Feature.Avatar.Label.GetLookQuestion,क्या आप फ़्री में यह आउटफ़िट पाना चाहते हैं?
 Feature.Avatar.Label.GetOutfitMultiple,क्या आप [{numItems}] आइटम फ़्री में पाना चाहते हैं?
 Feature.Avatar.Label.GetOutfitOne,क्या आप [1] आइटम फ़्री में पाना चाहते हैं?
@@ -1366,6 +1471,8 @@ Feature.Avatar.Label.PPEViewFullButton,फ़ुल अवतार देखे
 Feature.Avatar.Label.Pants,पैंट
 Feature.Avatar.Label.PantsClassic,
 Feature.Avatar.Label.Photobooth,फ़ोटोबूथ
+Feature.Avatar.Label.ProfileFrames,फ़्रेम
+Feature.Avatar.Label.ProfileFramesUnlockBanner,Plus सब्सक्रिप्शन के साथ फ़्रेम अनलॉक करें
 Feature.Avatar.Label.Props,प्रॉप्स
 Feature.Avatar.Label.Purchased,
 Feature.Avatar.Label.QuickMenuCustomizeTitle,कस्टमाइज़ करने के लिए विकल्प
@@ -1393,6 +1500,9 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,हाल ही म
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,हाल ही में देखा गया
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,इसके लिए शॉपिंग करते रहें
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetLimitReachedBody,आपके पास ज़्यादा से ज़्यादा {setLimit} सेट हो सकते हैं. जगह बनाने के लिए एक सेट मिटाएँ
+Feature.Avatar.Label.SetNameDuplicateBody,"आपके पास पहले से इस नाम का एक सेट है, दूसरा नाम चुनें"
+Feature.Avatar.Label.SetNameNotAllowedBody,कृपया कोई दूसरा नाम चुनें
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,अवतार को मार्केटप्लेस में पोस्ट करें
 Feature.Avatar.Label.Shirt,शर्ट
 Feature.Avatar.Label.ShirtClassic,
@@ -1538,6 +1648,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,अपने अवतार क�
 Feature.Avatar.RevokedItems.BodyText,"{category} आइटम ""{item}"" को सेव किए गए इस अवतार से हटा दिया गया है. इसलिए, हमने वह रकम रिफ़ंड कर दी है जिसका पेमेंट आपने किया था.{lineBreak}ज़्यादा जानकारी के लिए, अपना इनबॉक्स देखें."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"नीचे दिए गए आइटम सेव किए गए इस अवतार से हटा दिए गए हैं. इसलिए, हमने वह रकम रिफ़ंड कर दी है जिसका पेमेंट आपने किया था.{lineBreak}{items}{lineBreak}ज़्यादा जानकारी के लिए, अपना इनबॉक्स देखें."
 Feature.Avatar.RevokedItems.ViewInbox,इनबॉक्स देखें
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,अपने मेकअप को लेयर करें
 Feature.Avatar.Title.AvatarRefinement,अवतार के लिए बेहतर लुक
 Feature.Avatar.Title.BulkDeleteMakeupLooks,{count} मेकअप लुक डिलीट करने हैं?
@@ -1549,6 +1660,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,सभी ऐनिमेशन
 Feature.Avatar.Title.ClearBodyConfirmation,बॉडी सेक्शन डिलीट करना है?
 Feature.Avatar.Title.ClearClothesConfirmation,सभी ड्रेस डिलीट करनी हैं?
 Feature.Avatar.Title.ClearMakeupConfirmation,सारा मेकअप हटाना है?
+Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,लुक का डुप्लिकेट बनाएँ
 Feature.Avatar.Title.EnhancedAvatarHeads,बेहतर अवतार हेड
 Feature.Avatar.Title.GetOutfit,आउटफ़िट पाएँ
@@ -1629,39 +1741,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} को ब्लॉक करना है?
 Feature.BlockingModal.Message.BlockConfirmation,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक किया है."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक कर दिया है."
-Feature.Call.Description.ExperienceError,इस एक्सपीरिएंस में वॉइस चैट की सुविधा नहीं है.
-Feature.Call.Description.Friends,"बढ़िया कॉल के लिए, जिन फ़्रेंड के पास डिवाइस और सेटिंग्स हो सकती हैं या नहीं हो सकती हैं "
-Feature.Call.Description.NoFriendsFound,कोई फ़्रेंड नहीं मिला
-Feature.Call.Description.SuggestedFriends,"बढ़िया कॉल के लिए, डिवाइस वाले दोस्त और सेटिंग्स सेट हैं"
-Feature.Call.Error.Description.AlreadyInCall,आप पहले से ही कॉल में हैं
-Feature.Call.Error.Description.DeviceNotSupported,"फ़िलहाल, आपके डिवाइस पर कॉल करने की सुविधा नहीं है. बाद में कोशिश करें."
-Feature.Call.Error.Description.FriendBusy,{calleeCombinedName} फ़िलहाल व्यस्त हैं और अभी आपका कॉल रिसीव नहीं कर सकते. बाद में कोशिश करें.
 Feature.Call.Error.Description.Generic,
-Feature.Call.Error.Label.OhNo,अरे नहीं!
-Feature.Call.Error.Title.CouldntMakeCall,कॉल नहीं की जा सकी
-Feature.Call.Error.Title.ExperienceError,एक्सपीरिएंस से जुड़ी गड़बड़ी
-Feature.Call.Error.Title.FriendBusy,फ़्रेंड बिज़ी है
-Feature.Call.Label.Block,{combinedName} को ब्लॉक करें
-Feature.Call.Label.CallEnded,कॉल खत्म हो गई
-Feature.Call.Label.Calling,कॉल किया जा रहा है...
-Feature.Call.Label.Friends,
-Feature.Call.Label.Incoming,इनकमिंग
-Feature.Call.Label.Missed,मिस्ड
-Feature.Call.Label.Outgoing,आउटगोइंग
-Feature.Call.Label.RecentCalls,हाल की कॉल
-Feature.Call.Label.Retry,
-Feature.Call.Label.RobloxCall,Roblox कॉल
-Feature.Call.Label.StartNewCall,नयी कॉल शुरू करें
-Feature.Call.Label.Suggested,सुझाया गया
-Feature.Call.Label.Teleporting,
-Feature.Call.Label.Unfriend,{combinedName} को अनफ़्रेंड करें 
-Feature.Call.Label.Yesterday,बीता हुआ कल
-Feature.Call.Modal.EnableChatVoiceBody,इस एक्सपीरिएंस में दूसरे लोगों से बात करने के लिए सेटिंग्स > प्राइवेसी में वॉइस चैट चालू करें.
-Feature.Call.Modal.EnableChatVoiceTitle,
-Feature.Call.Prompt.AddFriends,"कॉल करने के लिए, Roblox पर दोस्त जोड़ें"
-Feature.Call.Prompt.FirstCall,अपना पहला कॉल करने की कोशिश करें
-Feature.Call.Prompt.SearchFriends,फ़्रेंड्स के लिए सर्च करें
-Feature.Call.Prompt.StartCall,कॉल शुरू करें
 Feature.Captures.Action.Allow,अनुमति दें
 Feature.Captures.Action.AllowPhotoAccessAccepted,परमिशन दें
 Feature.Captures.Action.AllowPhotoAccessDeclined,
@@ -1748,6 +1828,7 @@ Feature.Catalog.Action.ItemOptions,आइटम ऑप्शंस
 Feature.Catalog.Action.LoadMore,और लोड करें
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,जानकारी खोलें
+Feature.Catalog.Action.Owned,{count} आइटम की ओनरशिप
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,हटाएँ
@@ -1803,9 +1884,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,एडजस्ट किया जा सकता है
+Feature.Catalog.Label.AdvancedMaterials,एडवांस्ड मटीरियल
 Feature.Catalog.Label.AllItems,सभी आइटम
 Feature.Catalog.Label.AlreadyOwned,आइटम पहले से आपके पास है
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,एट्रीब्यूट
 Feature.Catalog.Label.Attribution,यहाँ बना है
 Feature.Catalog.Label.AvailableForSale,बिक्री के लिए उपलब्ध है
 Feature.Catalog.Label.AvailableToPremiumMembers,आपके पास Premium होने की वजह से उपलब्ध है
@@ -1851,6 +1934,8 @@ Feature.Catalog.Label.CustomizeAvatar,अवतार कस्टमाइज�
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,"अगर आप डिलीट कर दें, तो आप इस ऐक्शन को पहले जैसा नहीं कर सकते."
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,एमिसिव
+Feature.Catalog.Label.EmissiveInfo,"एमिसिव आइटम से अपनी रोशनी निकलती है, इसलिए वह अंधेरे में भी आसानी से दिखाई देता है."
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -1925,6 +2010,7 @@ Feature.Catalog.Label.NoLongerAvailable,यह आइटम अब उपलब�
 Feature.Catalog.Label.NoSellersWarning,"माफ़ करें, यह आइटम कोई नहीं बेच रहा"
 Feature.Catalog.Label.None,कोई भी नहीं
 Feature.Catalog.Label.NotAvailable,यह आइटम अभी उपलब्ध नहीं है
+Feature.Catalog.Label.OfferApplied,ऑफ़र लागू है
 Feature.Catalog.Label.OnSale,बिक्री के लिए
 Feature.Catalog.Label.OriginalPrice,मूल कीमत
 Feature.Catalog.Label.OutOfStock,
@@ -1934,6 +2020,8 @@ Feature.Catalog.Label.PBR.false,बेसिक
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,एडवांस्ड मटीरियल वाले अवतार की ऐसेट ज़्यादा नैचुरल दिखने के लिए फ़िज़िकल बेस्ड रेंडरिंग (PBR) का इस्तेमाल करती हैं. इनमें बदलने और चमकने वाली लाइट और शैडो बिल्कुल वैसी ही दिखती हैं जैसी रियल लाइफ़ में दिखती हैं.
 Feature.Catalog.Label.PBRInfoTitle,फ़िज़िकली बेस्ड रेंडरिंग (PBR)
+Feature.Catalog.Label.ParticleEffects,पार्टिकल इफ़ेक्ट्स
+Feature.Catalog.Label.ParticleEffectsInfo,"पार्टिकल इफ़ेक्ट वाले आइटम से ऐनिमेटेड इफ़ेक्ट दिखाई देते हैं, जिससे वह ज़्यादा जीवंत और डायनैमिक लगता है."
 Feature.Catalog.Label.Placement,प्लेसमेंट
 Feature.Catalog.Label.PrePremiumPrice,(आइटम की कीमत:
 Feature.Catalog.Label.Premium,
@@ -1967,6 +2055,7 @@ Feature.Catalog.Label.SalePrice,बिक्री की कीमत :
 Feature.Catalog.Label.SaveAsCharacter,कैरेक्टर के तौर पर सेव करें
 Feature.Catalog.Label.SaveOptions,सेव करने के विकल्प
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,आपको शायद इसकी तलाश हो
 Feature.Catalog.Label.SellCut,आपकी कमाई:
 Feature.Catalog.Label.SellPageUpsell,सिर्फ़ Roblox Plus सब्सक्रिप्शन वाले यूज़र्स ही बेच सकते हैं.
 Feature.Catalog.Label.SellSuccess,बिक्री वाले आइटम
@@ -2028,6 +2117,7 @@ Feature.Catalog.Message.CaptionLimit,
 Feature.Catalog.Message.Checkout.PurchaseFailed,"जारी रखने के लिए, आइटम का रिव्यू करें या उन्हें हटाएँ"
 Feature.Catalog.Message.Checkout.UnavailableItems,एक या एक से ज़्यादा आइटम खरीदे नहीं जा सकते. जारी रखने से पहले कृपया उन्हें हटा दें.
 Feature.Catalog.Message.CollectiblesInfo,"होल्डिंग पीरियड के बाद एक यूज़र दूसरे यूज़र को कलेक्टिबल आइटम रीसेल कर सकता है, भले ही ओरिजनल स्टॉक न बिका हो. Roblox Plus सब्सक्राइबर्स रीसेल के लिए कलेक्टिबल आइटम लिस्ट कर सकते हैं."
+Feature.Catalog.Message.FTUXFavoritePillTooltip,इसे अपने पसंदीदा में जोड़ें
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox पर सबसे अच्छी तरह से तैयार किए गए आइटम खोजें
 Feature.Catalog.Message.HoldingPolicyL1,रीसेल में की गई खरीदारियाँ {days} दिनों तक होल्ड पर रहेंगी. होल्ड करने की इस अवधि के खत्म होने के बाद ही आइटम को रीसेल किया जा सकता है. सिर्फ़ Plus यूज़र्स ही आइटम रीसेल कर सकते हैं.
 Feature.Catalog.Message.HoldingPolicyL2,"खरीदारी करने के बाद, ओरिजनल बिक्री {purchaseDays} दिनों तक होल्ड में रहती है. होल्डिंग की यह अवधि खत्म होने के बाद ही आइटम को फिर से बेचा जा सकता है और फिर यह आइटम {resaleDays} दिनों तक रीसेल में होल्ड पर रहता है. सिर्फ़ Premium यूज़र्स ही आइटम को रीसेल कर सकते हैं."
@@ -2047,6 +2137,7 @@ Feature.Catalog.Response.ReportSubmitted,रिपोर्ट सबमिट �
 Feature.Catalog.Response.TakenOffSaleSuccess,बिक्री बंद कर दी गई है
 Feature.Catalog.Search.LandingPage.Empty,"कलर, टाइप, थीम वगैरह से सर्च करें"
 Feature.Catalog.Search.Placeholder,"आइटम, आउटफ़िट सर्च करें"
+Feature.Catalog.Text.OfferAppliedToHighestItem,ऑफ़र सबसे ज़्यादा कीमत वाले आइटम पर लागू है
 Feature.Catalog.Title.AvatarSharePanel,आपका अवतार शेयर करने के लिए तैयार है
 Feature.Catalog.Title.Checkout,चेकआउट
 Feature.Catalog.Title.Checkout.ClearAllItemsOnAvatarTitle,सभी आइटम हटाने हैं?
@@ -2066,11 +2157,13 @@ Feature.Catalog.Title.CheckoutPlural,{count} आइटम चेकआउट क
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,सबसे नीचे वाली लेयर को बदलना है?
 Feature.Catalog.Title.RentalFtuxText,किसी आइटम को आज़माने के लिए 3 दिनों के लिए किराए पर लें
+Feature.Catalog.Toast.AddedToFavorites,पसंदीदा में जोड़ा गया
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,"आप {number} आइटम के ओनर हैं, इसलिए कीमत बदल गई है"
 Feature.Catalog.Toast.AvatarUnderReview,"अवतार को रिव्यू किया जा रहा है
 रिव्यू होने के बाद आप अपना अवतार शेयर कर सकते हैं"
 Feature.Catalog.Toast.FavoritedLook,अवतार को पसंदीदा में जोड़ा गया!
 Feature.Catalog.Toast.LinkCopied,लिंक को क्लिपबोर्ड पर कॉपी किया गया
+Feature.Catalog.Toast.RemovedFromFavorites,पसंदीदा से हटाया गया
 Feature.Catalog.Toast.UnfavoritedLook,अवतार को पसंदीदा की लिस्ट से हटाया गया
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
@@ -2150,10 +2243,14 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} ने आपको ज
 Feature.Chat.Label.Group.YouRepliedToThem,आपने {DISPLAY_NAME} को जवाब दिया
 Feature.Chat.Label.GroupName,ग्रुप का नाम
 Feature.Chat.Label.HoverToReplyTooltip,जवाब देने के लिए होवर करें
+Feature.Chat.Label.InGameFriendsChatNotifications,गेम में दोस्तों के चैट नोटिफ़िकेशन
+Feature.Chat.Label.Loading,लोड किया जा रहा है...
 Feature.Chat.Label.LongPressToReplyTooltip,जवाब देने के लिए थोड़ा लंबा दबाएँ
 Feature.Chat.Label.Members,मेंबर्स
 Feature.Chat.Label.MessageNotAvailable,यह मैसेज उपलब्ध नहीं है
+Feature.Chat.Label.MuteInGameChatToastNotifications,गेम में मिलने वाले चैट नोटिफ़िकेशन म्यूट करें
 Feature.Chat.Label.New,
+Feature.Chat.Label.NoChatFound,कोई चैट नहीं मिली
 Feature.Chat.Label.NoDescriptionYet,अभी तक कोई विवरण नहीं है.
 Feature.Chat.Label.NotImplementedMessageType,यह मैसेज नहीं दिखाया जा सका.
 Feature.Chat.Label.NotSet,सेट नहीं किया गया
@@ -2167,7 +2264,7 @@ Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,खुद को जव�
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} ने कहा...
 Feature.Chat.Label.ReplyingToYourself,आपने कहा...
 Feature.Chat.Label.SearchConnections,कनेक्शंस सर्च करें
-Feature.Chat.Label.SearchFriends,
+Feature.Chat.Label.SearchFriends,फ़्रेंड्स के लिए सर्च करें
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,इन-एक्सपीरिएंस चैट नोटिफ़िकेशन को म्यूट करें :
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
@@ -2192,6 +2289,7 @@ Feature.Chat.Message.AddConnectionsPartyLimitSingular,"आपकी प्रा
 Feature.Chat.Message.AddFriendsLimit,आपके चैट ग्रुप में {connectionsNum} फ़्रेंड्स तक हो सकते हैं.
 Feature.Chat.Message.AddFriendsPartyLimit,आपकी पार्टी में {connectionsNum} फ़्रेंड्स तक हो सकते हैं.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,"प्राइवेसी सेटिंग की वजह से, सिर्फ़ 1 फ़्रेंड के साथ पार्टी बनाई जा सकती है."
+Feature.Chat.Message.CannotBeDisplayedThirdPerson,"{displayName} ने एक मैसेज भेजा है, जो दिखाया नहीं जा सकता"
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,चैट की सुविधा बंद है. आप इसे अपनी प्राइवेसी सेटिंग में जाकर चालू कर सकते हैं.
 Feature.Chat.Message.ChatUnavailableRegion,इस समय चैट की सुविधा आपके क्षेत्र में उपलब्ध नहीं है.
 Feature.Chat.Message.ChatUnavailableWithUser,"इस समय, चैट की सुविधा इस यूज़र के लिए उपलब्ध नहीं है."
@@ -2243,25 +2341,22 @@ Feature.Chat.Text.NoConnections,"आपने अभी तक कोई कन�
 Feature.Chat.Text.NoFriends,आपके पास अभी तक कोई फ़्रेंड नहीं है. Roblox पर शुरू करने के लिए फ़्रेंड्स को खोजें और जोड़ें.
 Feature.Chat.Title.FriendsChat,फ़्रेंड्स चैट
 Feature.Chat.Title.MuteChatNotifications,गेमप्ले के दौरान फ़्रेंड्स से मिलने वाले चैट नोटिफ़िकेशन म्यूट करें
+Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,खुद को खोजने में अपने फ़्रेंड्स की मदद करें
-Feature.Contacts.Action.FindFriends,फ़्रेंड्स खोजें
 Feature.Contacts.Action.Invite,इनवाइट करें
 Feature.Contacts.Action.Search,कॉन्टैक्ट सर्च करें
-Feature.Contacts.Action.SyncContacts,कॉन्टैक्ट्स सिंक करें
 Feature.Contacts.Description.AddFromContactsDescription,"Roblox पर कनेक्ट करने के लिए कॉन्टैक्ट्स जोड़ें. अगर दोनों यूज़र्स की उम्र 13+ है और उनकी उम्र का वेरिफ़िकेशन हो चुका है, तो आप भरोसेमंद कनेक्शन बन जाएँगे."
 Feature.Contacts.Description.AddFromContactsTrustedFriends,"Roblox पर कनेक्ट करने के लिए कॉन्टैक्ट्स जोड़ें. अगर दोनों यूज़र्स की उम्र 13+ है और उनकी उम्र का वेरिफ़िकेशन हो चुका है, तो आप भरोसेमंद फ़्रेंड्स बन जाएँगे."
 Feature.Contacts.Description.ContactsList,आप Roblox को किसके साथ एक्सप्लोर करना चाहते हैं? Roblox पर फ़्रेंड्स बनने के लिए उन्हें इनवाइट लिंक भेजें!
 Feature.Contacts.Description.ContactsListDescription,"ज़्यादा मज़ेदार अनुभव पाने के लिए, कनेक्शन जोड़ें या कॉन्टैक्ट्स को कनेक्शन रिक्वेस्ट भेजें."
 Feature.Contacts.Description.ContactsMixedList,आप Roblox को किसके साथ एक्सप्लोर करना चाहते हैं? Roblox पर फ़्रेंड्स जोड़ें या कॉन्टैक्ट्स को फ़्रेंड रिक्वेस्ट लिंक भेजें.
 Feature.Contacts.Description.ContactsProfileView,आपका कॉन्टैक्ट {contactName} Roblox पर है. फ़्रेंड्स बनने के बाद आप उनकी पूरी प्रोफ़ाइल देख सकते हैं.
-Feature.Contacts.Description.ExploreWithFriends,अपना अगला एक्सपीरिएंस किसी जानने वाले के साथ जॉइन करें.
-Feature.Contacts.FindFriendsBanner.Button,
+Feature.Contacts.FindFriendsBanner.Button,फ़्रेंड्स खोजें
 Feature.Contacts.FindFriendsBanner.Description,अपना फ़ोन नंबर जोड़कर देखें कि आपके कौन से दोस्त Roblox पर हैं.
 Feature.Contacts.FindFriendsBanner.DescriptionPV,"Roblox पर मौजूद कॉन्टैक्ट्स, उपलब्ध होने पर यहाँ दिखेंगे."
 Feature.Contacts.FindFriendsBanner.DescriptionV2,अपना फ़ोन नंबर जोड़ें और हम आपको आपके फ़्रेंड्स से कनेक्ट करेंगे.
-Feature.Contacts.Heading.ExploreWithFriends,फ़्रेंड्स के साथ एक्सप्लोर करें
 Feature.Contacts.Heading.HelpFriendsFindYou,
 Feature.Contacts.Heading.LetFriendsFindYou,आपको खोजने में फ़्रेंड्स की मदद करें
 Feature.Contacts.Heading.SettingSaved,सेटिंग सेव की गई.
@@ -2317,6 +2412,7 @@ Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,इस एक्सप
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,खेलें
+Feature.ExperienceDetails.PlayButtonText.PlayDemo,डेमो खेलें
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,अनलॉक करें
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -2333,6 +2429,7 @@ Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityRegionalComplianc
 Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated,"इस एक्सपीरिएंस को ऐक्सेस नहीं किया जा सकता, क्योंकि यह अनरेटेड है"
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom,यह एक्सपीरिएंस {device} पर उपलब्ध नहीं है
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault,यह एक्सपीरिएंस आपके डिवाइस पर उपलब्ध नहीं है
+Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted,यह एक्सपीरिएंस इस डिवाइस पर नहीं खरीदा जा सकता
 Feature.ExperienceDetails.UnplayableError.GameUnapproved,
 Feature.ExperienceDetails.UnplayableError.IncorrectConfiguration,
 Feature.ExperienceDetails.UnplayableError.InsufficientPermissionFriendsOnly,फ़िलहाल आपके पास इस एक्सपीरिएंस का ऐक्सेस नहीं है
@@ -2352,7 +2449,6 @@ Feature.ExperienceDetails.UpdateMaturitySettingModal.Label.Title,
 Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
-Feature.FAE.Action.UnlockTrial,ट्रायल अनलॉक करें
 Feature.FAE.CheckIfYouCanJoinGame,आइए चेक करें कि आपके पास इस गेम को जॉइन करने का विकल्प है या नहीं.
 Feature.FAE.Label.ChatWithFriends,
 Feature.FAE.Label.DayLeft,
@@ -2407,6 +2503,7 @@ Feature.Friends.Action.ShareQR,QR शेयर करें
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,अनब्लॉक करें
 Feature.Friends.Action.Unfriend,
+Feature.Friends.Action.ViewMore,और देखें
 Feature.Friends.Action.ViewPlatformProfile,गेमर कार्ड देखें
 Feature.Friends.Button.AddViaLink,लिंक के ज़रिए जोड़ें
 Feature.Friends.Button.GotIt,
@@ -2509,7 +2606,7 @@ Feature.Friends.Label.Request,रिक्वेस्ट
 Feature.Friends.Label.SearchFriends,फ़्रेंड्स सर्च करें
 Feature.Friends.Label.SentFromWithContext,{gameName} से भेजा गया
 Feature.Friends.Label.SingularMutualFriend,कॉमन फ़्रेंड
-Feature.Friends.Label.Suggested,
+Feature.Friends.Label.Suggested,सुझाया गया
 Feature.Friends.Label.YourLinkedParent,आपके लिंक किए गए पेरेंट
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"क्या आपके नाम का सुझाव उन Roblox यूज़र्स को दिया जा सकता है, जिनके पास आपका फ़ोन नंबर है?"
@@ -2598,7 +2695,9 @@ Feature.GameDetails.Message.HelpImproveExperience,अपने एक्सप�
 Feature.GameDetails.Message.HidingExperienceQuestion,आपने इस एक्सपीरिएंस को क्यों छिपाया है?
 Feature.GameDetails.Message.PurchaseGameV2,क्या {X} Robux में {gameName} का ऐक्सेस अनलॉक करना है?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,इस समय किसी गड़बड़ी के कारण स्पॉन्सरशिप की जानकारी नहीं दिखाई जा सकी.
-Feature.GameDetails.Message.SuggestLessExperiences,हम इस तरह के कम एक्सपीरिएंस सुझाएँगे
+Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
+Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट आपके लोकेशन, डिवाइस की जानकारी, उम्र और प्लैटफ़ॉर्म पर बिहेवियर जैसे अलग-अलग फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
+Feature.GameDetails.Message.SponsoredDisclosure.U18,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है."
 Feature.GameDetails.Message.SuggestLessOften,हम इसका सुझाव कम देंगे
 Feature.GameDetails.RatingPercentOnly,{percentRating}% रेटिंग
 Feature.GameDetails.Toast.LinkCopied,
@@ -2712,7 +2811,7 @@ Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,कॉन
 Feature.Home.HeadingFriends,फ़्रेंड्स ({friendCount})
 Feature.Home.Label.HappeningNow,अभी चल रहा है
 Feature.Home.PeopleList.ChatWith,{username} के साथ चैट करें
-Feature.Home.Robux,Robux
+Feature.Home.Robux,
 Feature.InExperienceIntervention.Action.LetUsKnow,हमें इसके बारे में बताएँ
 Feature.InExperienceIntervention.Action.Understand,मैं सहमत हूँ
 Feature.InExperienceIntervention.Description.BeRespectful,"भविष्य में, कृपया नियमों का पालन करें और सम्मान से पेश आएँ."
@@ -2768,6 +2867,7 @@ Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"जिन लोगों के पास आपका फ़ोन नंबर है, उन्हें आपको Roblox पर फ़्रेंड के तौर पर जोड़ने में मदद करें."
 Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,फ़्रेंड खोजने की सुविधा चालू करें
 Feature.Moments.Action.AddMusic,म्यूज़िक जोड़ें
+Feature.Moments.Action.AddSticker,स्टिकर जोड़ें
 Feature.Moments.Action.AddText,टेक्स्ट जोड़ें
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
@@ -2775,6 +2875,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,बड़ा करें
+Feature.Moments.Action.GenerateText,जेनरेट करें
 Feature.Moments.Action.Hide,जानकारी छिपाएँ
 Feature.Moments.Action.HowToCapture,कैप्चर कैसे करें
 Feature.Moments.Action.Join,
@@ -2796,6 +2897,7 @@ Feature.Moments.Description.HowToCaptureStep2,कैप्चर कंट्र
 Feature.Moments.Description.HowToCaptureStep3,गेमप्ले की फ़ोटो और वीडियो कैप्चर करें
 Feature.Moments.Description.LeaveMomentsCreation,"आपके सभी बदलाव हट जाएँगे, लेकिन आप अभी भी इस कैप्चर को अपनी <b>कैप्चर</b> गैलरी में देख सकते हैं."
 Feature.Moments.Description.NoMusicResults,कोई म्यूज़िक नहीं मिला
+Feature.Moments.Description.NonInfiniteScrollEndBody,"आप Moments में स्टॉपिंग पॉइंट पर हैं. देखते रहने के लिए, नीचे टैप करें."
 Feature.Moments.Description.NothingHereYet,अभी तक यहाँ कुछ भी नहीं है...
 Feature.Moments.Description.PublishMoment,अपने Moment के बारे में बताएँ
 Feature.Moments.Description.StayFriendly,चलो दोस्ताना माहौल बनाए रखते हैं
@@ -2807,6 +2909,8 @@ Feature.Moments.Label.CaptureLibrary,आपकी 'कैप्चर' लाइ
 Feature.Moments.Label.DeleteMomentBody,"कोई Moment मिट जाने पर, उसे रिकवर नहीं किया जा सकता."
 Feature.Moments.Label.DeleteMomentTitle,Moment डिलीट करना है?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,बाद में फिर से चेक करें या अपना खुद का Moment क्रिएट करें.
+Feature.Moments.Label.FeedEndTitle,कोई नया Moment नहीं है
 Feature.Moments.Label.FeedFailedToLoad,फ़ीड लोड नहीं हो सकी
 Feature.Moments.Label.FeedMyMoments,मेरे Moments
 Feature.Moments.Label.FeedTrending,ट्रेंडिंग
@@ -2814,26 +2918,38 @@ Feature.Moments.Label.HowToUseCaptureTitle,कैप्चर का इस्�
 Feature.Moments.Label.LinkCopied,लिंक कॉपी किया गया.
 Feature.Moments.Label.LinkCopyFailed,लिंक कॉपी नहीं हो सका.
 Feature.Moments.Label.ModeratedRodeoBody,"हमने इस Moment को हटा दिया, क्योंकि यह हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है. अपने Moments दिखाने के लिए, पक्का करें कि आपको नियम पता हों और उनका पालन किया जा रहा हो."
+Feature.Moments.Label.MomentDeletedBody,"किसी Moment के डिलीट होने के बाद, उसे रिकवर नहीं किया जा सकता."
+Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,कोई गड़बड़ी हुई.
 Feature.Moments.Label.MomentFailedToPostTitle,Moment पोस्ट नहीं किया जा सका
 Feature.Moments.Label.MomentPublishedBody,आपका Moment पब्लिश हो गया है.
 Feature.Moments.Label.MomentPublishedTitle,Moment पब्लिश हो गया
+Feature.Moments.Label.MomentUnavailable,Moment उपलब्ध नहीं है
 Feature.Moments.Label.MomentUnavailableDefault,यह Moment उपलब्ध नहीं है.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ
+Feature.Moments.Label.ReportReason.BreaksRules,इस पोस्ट से नियमों का उल्लंघन हुआ है
+Feature.Moments.Label.ReportReason.IntellectualProperty,इस पोस्ट से मेरी बौद्धिक संपदा का उल्लंघन हुआ है
 Feature.Moments.Label.ReportSubmittedBody,
 Feature.Moments.Label.ReportSubmittedTitle,रिपोर्ट सबमिट की गई
+Feature.Moments.Label.RobloxPartnerContent,Roblox पार्टनर कॉन्टेंट
 Feature.Moments.Label.RodeoPublishingTitle,अपना Moment पब्लिश करना
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Roblox पर Moments
 Feature.Moments.Label.StayFriendlyModeration,चलो दोस्ताना माहौल बनाए रखें
+Feature.Moments.Label.TextGeneratedBody,AI से जेनरेट किया गया ओवरले और विवरण जोड़ा गया
+Feature.Moments.Label.TextGeneratedTitle,टेक्स्ट जेनरेट हो गया
+Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेनरेट नहीं हो सका. कृपया फिर से कोशिश करें.
+Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
+Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
 Feature.Moments.Tooltip.Creation,एक्सपीरिएंस में मौजूद हर कोई आपके मोमेंट देख सकता है.
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,गलती की रिपोर्ट करें
@@ -2962,11 +3078,11 @@ Feature.Profile.Description.EnterNicknameTextbox,अपना उपनाम �
 Feature.Profile.Description.InspectAndBuy,उनका लुक देखने और खरीदने के लिए क्लिक करें.
 Feature.Profile.Description.NicknamePrivacy,सिर्फ़ {displayName} के ज़रिए यह देखा जाएगा.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,सिर्फ़ इस यूज़र को यह दिखाई देगा.
-Feature.Profile.Description.QrCodeDescription,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद कनेक्शन होंगे जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
-Feature.Profile.Description.QrCodeDescription.FriendsRename,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद फ़्रेंड्स होंगे, जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
+Feature.Profile.Description.QrCodeDescription,"Roblox पर आपसे कनेक्ट करने के लिए, दूसरों को अपना QR कोड स्कैन करने दें. लाइव QR स्कैन करके कनेक्ट करने वाले 13+ की उम्र वाले ऐसे यूज़र्स भरोसेमंद फ़्रेंड्स होंगे, जिनकी उम्र का वेरिफ़िकेशन हो चुका है."
+Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,"दूसरों को QR स्कैनर या उनके डिवाइस के कैमरे से अपना Roblox QR कोड स्कैन करने दें, ताकि वे आपको फ़्रेंड के तौर पर फटाफट जोड़ सकें!"
-Feature.Profile.Description.RecognizeConnectionsByCustomName,कस्टम नाम सेट करके कनेक्शंस को और आसानी से पहचानें. कॉन्टैक्ट्स से इंपोर्ट किए गए नाम और कस्टम नाम सिर्फ़ आपको दिखाई देते हैं.
-Feature.Profile.Description.RecognizeFriendsByCustomName,कस्टम नाम सेट करके फ़्रेंड्स को और आसानी से पहचानें. कॉन्टैक्ट्स से इंपोर्ट किए गए नाम और कस्टम नाम सिर्फ़ आपको दिखाई देते हैं.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,कस्टम नाम सेट करके फ़्रेंड्स को और आसानी से पहचानें. कॉन्टैक्ट्स से इंपोर्ट किए गए नाम और कस्टम नाम सिर्फ़ आपको दिखाई देते हैं.
+Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,अपने जानने वाले लोगों को अनुमति दें कि वे आपका QR कोड स्कैन करके आपको जोड़ सकें.
 Feature.Profile.Description.SelectNicknameDropdown,कोई नाम चुनें
@@ -2981,6 +3097,7 @@ Feature.Profile.Description.SocialNetworksCaptionFriends,इस समय आप
 Feature.Profile.Description.SocialNetworksCaptionNoOne,फ़िलहाल किसी के लिए विज़िबिल नहीं हैं.
 Feature.Profile.Description.UsernameInsufficientFunds,आपको अपना यूज़रनेम बदलने के लिए {icon} {rbx} की और ज़रूरत है. क्या आपको और Robux खरीदने हैं?
 Feature.Profile.Description.UsernamePrice,1000
+Feature.Profile.Header.BuyWholeLook,पूरा लुक खरीदें
 Feature.Profile.Header.InspectAndBuy,{username} का अवतार
 Feature.Profile.Header.InspectAndBuy.BuySection,कुल ({numberOfSelectedItems}/{totalNumberOfItems} आइटम)
 Feature.Profile.Header.InspectAndBuy.Tooltip,
@@ -3045,7 +3162,7 @@ Feature.Profile.Message.InvalidAliasError,नाम सेव नहीं क�
 Feature.Profile.Message.NoExperienceAccess,"{name} ऐसे एक्सपीरिएंस में हैं, जिसका ऐक्सेस आपको नहीं है."
 Feature.Profile.Message.QRLoadFailed,लोड नहीं हो सका.
 Feature.Profile.Message.QRNofificationRequest,ने आपको आपके QR कोड से एक फ़्रेंड रिक्वेस्ट भेजी है.
-Feature.Profile.Message.QRNotificationRequest,ने आपके QR कोड से आपको कनेक्शन रिक्वेस्ट भेजी है
+Feature.Profile.Message.QRNotificationRequest,
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,QR स्कैनर
 Feature.Profile.Tooltip.CurrencyTransfer.Body,अब आपके पास Robux भेजने की सुविधा है
@@ -3057,10 +3174,13 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,ज़्यादा जानें
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,वेरिफ़ाई किया गया बैज
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
+Feature.QualtricsSurveyPrompt.Action.Next,
 Feature.QualtricsSurveyPrompt.Action.Retry,
 Feature.QualtricsSurveyPrompt.Action.Send,
 Feature.QualtricsSurveyPrompt.Description.Error,
+Feature.QualtricsSurveyPrompt.Description.TakeAQuickSurvey,Roblox को बेहतर बनाने में मदद करने के लिए छोटा-सा सर्वे पूरा करें.
 Feature.QualtricsSurveyPrompt.Heading.GiveUsFeedback,हमें फ़ीडबैक दें
 Feature.QualtricsSurveyPrompt.Response.SurveySubmitted,
 Feature.ReportAbuse.Action.AttachScreenshot,स्क्रीनशॉट अटैच करें
@@ -3082,7 +3202,7 @@ Feature.ReportAbuse.Action.Submit,
 Feature.ReportAbuse.Action.TextMute,{name} से चैट को ब्लॉक करें
 Feature.ReportAbuse.DSAIllegal.ReportLink,EU डिजिटल सर्विसेज़ ऐक्ट के तहत गैरकानूनी कॉन्टेंट की रिपोर्ट करें.
 Feature.ReportAbuse.DSAIllegal.ReportPageTitle,गैरकानूनी कॉन्टेंट की रिपोर्ट करें
-Feature.ReportAbuse.Description.IpInfringementReportModal,<b>यह कोड सेव करें.</b> आपको अपनी <b>हटाने की रिक्वेस्ट</b> पूरी करने के लिए <b>Creator Hub पर <b>बौद्धिक संपदा</b> वाले टूल्स इस्तेमाल करने होंगे. यह कोड सिर्फ़ 48 घंटे तक मान्य रहेगा.</b>
+Feature.ReportAbuse.Description.IpInfringementReportModal,<b>यह कोड सेव कर लें.</b> आपको <b>Creator Hub</b> पर <b>बौद्धिक संपदा</b> टूल्स का इस्तेमाल करके या ईमेल के ज़रिए <b>हटाने की अपनी रिक्वेस्ट</b> पूरी करनी होगी <i>(उपयोग की शर्तों में जानकारी देखें)</i>. <b>यह कोड सिर्फ़ 48 घंटों के लिए मान्य होगा.</b>
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,हाइलाइट मोड का इस्तेमाल करके रिपोर्ट करें
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,गड़बड़ी: मैक्सिमम 5 सर्कल
@@ -3105,7 +3225,6 @@ Feature.ReportAbuse.Label.FinishChatReport,चैट रिपोर्ट प�
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,समस्या को सर्कल से हाईलाइट करें
 Feature.ReportAbuse.Label.HighlightProblemPrecise,समस्या को हाइलाइट करें
-Feature.ReportAbuse.Label.NoChatMessagesFound,कोई चैट मैसेज नहीं मिला
 Feature.ReportAbuse.Label.Optional,ज़रूरी नहीं
 Feature.ReportAbuse.Label.Person,व्यक्ति
 Feature.ReportAbuse.Label.PleaseSelectOne,कोई एक चुनें.
@@ -3187,7 +3306,7 @@ Feature.RobloxSubscription.Action.TryItForFree,इसे फ़्री मे�
 Feature.RobloxSubscription.Body.AlreadySubscribed,आपके Plus सब्सक्रिप्शन में पहले से ही गेम में मिलने वाले फ़ायदे शामिल हैं.
 Feature.RobloxSubscription.Body.GenericError,हम इसे अभी पूरा नहीं कर सके. कृपया फिर से कोशिश करें.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,यह सब्सक्रिप्शन इस डिवाइस पर नहीं खरीदा जा सकता.
-Feature.RobloxSubscription.Description.AgeCheckTrial,"Plus के फ़ायदे अनलॉक करने और अपनी उम्र के मुताबिक सही फ़ीचर्स ऐक्सेस करने के लिए, उम्र का वेरिफ़िकेशन पूरा करें."
+Feature.RobloxSubscription.Description.AgeCheckTrial,उम्र का वेरिफ़िकेशन करके अपनी उम्र वेरिफ़ाई करें और धन्यवाद के तौर पर Roblox Plus का 1 हफ़्ते का फ़्री ट्रायल पाएँ. इस फ़्री ट्रायल के लिए किसी भी पेमेंट के तरीके की ज़रूरत नहीं है.
 Feature.RobloxSubscription.Description.ExclusiveBenefits,कम Robux में ज़्यादा मज़ा. Roblox Plus को सब्सक्राइब करें.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,फ़्री प्राइवेट सर्वर्स
@@ -3196,17 +3315,19 @@ Feature.RobloxSubscription.Label.BlackbirdTr,मुफ़्त में Robux 
 Feature.RobloxSubscription.Label.BlackbirdUpsellBanner,Roblox Plus के साथ {discountPercentage}% की छूट पाएँ
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"गेम में मिलने वाले आइटम, अवतार, वगैरह पर {discountPercent}% की छूट"
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodType} के बाद इन आइटम पर {discountPercent}% की छूट
+Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"""जारी रखें"" पर क्लिक करने का मतलब है कि आप {linkStart}Roblox सब्सक्रिप्शन की शर्तों{linkEnd} से सहमत हैं."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"""इसे फ़्री में आज़माएँ"" पर क्लिक करने का मतलब है कि आप {linkStart}Roblox के सब्सक्रिप्शन की शर्तों{linkEnd} से सहमत हैं. आपका फ़्री ट्रायल 1 महीने में खत्म हो जाएगा और आपसे हर महीने शुल्क अपने आप ले लिया जाएगा. सब्सक्रिप्शन को कभी भी कैंसिल किया जा सकता है."
 Feature.RobloxSubscription.Label.FreeTrialText,फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}1 महीने के लिए फ़्री,{boldEnd} फिर {price}/{periodType}"
 Feature.RobloxSubscription.Label.month,महीना
 Feature.RobloxSubscription.Label.months,महीने
-Feature.RobloxSubscription.Title.AgeCheckTrial,Plus का एक हफ़्ते का फ़्री ट्रायल पाएँ
+Feature.RobloxSubscription.Title.AgeCheckTrial,Plus का 1 हफ़्ते का फ़्री ट्रायल पाएँ
 Feature.RobloxSubscription.Title.AlreadySubscribed,अच्छी खबर
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus लें
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus यहाँ उपलब्ध नहीं है
 Feature.SafetyDashboard.Heading.AccountStatus,अकाउंट का स्टेटस
+Feature.Schools.Label.Classmates,क्लासमेट
 Feature.Screentime.Content.ScreentimeLimitDialog,आपकी डेली स्क्रीन टाइम लिमिट पूरी हो गई हैं. फिर से Roblox ऐक्सेस करने के लिए कल वापस आएं.
 Feature.SecurityFeedback.Header.NewLogin,नया ऐक्टिविटी अलर्ट
 Feature.Settings.Label.Error,
@@ -3297,11 +3418,10 @@ Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,भेजा जा रहा है
 Feature.SettingsHub.Label.Show,
 Feature.SettingsHub.Label.Unmute,
-Feature.SettingsHub.Label.WhichChatOptional,कौन सी चैट? (ज़रूरी नहीं)
+Feature.SettingsHub.Label.VoiceChat,
 Feature.SettingsHub.Label.WhichPlayer,कौन-सा व्यक्ति?
-Feature.SettingsHub.LanguageSelection.SettingLabel,एक्सपीरिएंस की भाषा
+Feature.SettingsHub.LanguageSelection.SettingLabel,गेम की भाषा
 Feature.SettingsHub.LanguageSelection.Unavailable,
-Feature.SettingsHub.Message.BlockConfirmation,आप और {DISPLAY_NAME} (@{RBX_NAME}) अब एक-दूसरे के साथ कम्यूनिकेट नहीं कर सकेंगे.
 Feature.SettingsHub.Message.InviteToGameTitle,मेरे साथ {PLACENAME} में शामिल हों
 Feature.SettingsHub.MethodOfAbuse.AvatarSubtitle,इस व्यक्ति के अवतार ने आपत्तिजनक कपड़े पहने हुए हैं
 Feature.SettingsHub.MethodOfAbuse.Other.Subtitle,
@@ -3353,6 +3473,7 @@ Feature.SettingsHub.Prompt.Subtitle.Microphone,
 Feature.SettingsHub.Prompt.Subtitle.MicrophonePermission,"वॉइस चैट करने के लिए, अपनी OS सेटिंग्स पर जाएँ और Roblox को माइक्रोफ़ोन इस्तेमाल करने की परमिशन दें"
 Feature.SettingsHub.Prompt.Subtitle.MuteAnyoneAnytime,"कभी भी, किसी भी व्यक्ति को म्यूट किया जा सकता है."
 Feature.SettingsHub.Prompt.Subtitle.NotAudible,गेम का वॉल्यूम सेटिंग में ‘0‘ पर सेट है. आवाज़ सुनने के लिए वॉल्यूम बढ़ाएँ.
+Feature.SettingsHub.Prompt.Subtitle.NotAudibleVoiceChatVolume,सेटिंग्स में वॉइस चैट वॉल्यूम ‘0‘ पर सेट है. आवाज़ सुनने के लिए कृपया वॉल्यूम बढ़ाएँ.
 Feature.SettingsHub.Prompt.Subtitle.Place,"स्पैशियल वॉइस सिर्फ़ उन प्लेस के लिए उपलब्ध है, जिनमें ज़्यादा से ज़्यादा 30 या उससे कम प्लेयर हों."
 Feature.SettingsHub.Prompt.Subtitle.Respect,"दूसरों का सम्मान करते हुए, Roblox को अच्छी जगह बनाए रखने में मदद करें."
 Feature.SettingsHub.Prompt.Subtitle.Retry,
@@ -3473,6 +3594,9 @@ Feature.Squads.Description.Invited,
 Feature.Squads.Description.InvitedToExperience,"कोई पहले से ही आपको किसी एक्सपीरिएंस के लिए इनवाइट कर रहा है. इनवाइट पूरी होने पर, फिर से कोशिश की जा सकती है."
 Feature.Squads.Description.JoinAnotherParty,फ़िलहाल आप एक ऐक्टिव पार्टी में हैं. क्या आपको अपनी मौजूदा पार्टी छोड़कर इस पार्टी में जाना है?
 Feature.Squads.Description.JoinWithLowMemory,"आपके डिवाइस की मेमोरी कम है. बिना वॉइस के जॉइन करने पर, Roblox को क्रैश होने से रोका जा सकेगा."
+Feature.Squads.Description.LuckyRecommendationRevealed,पूरा ग्रुप जॉइन कर सकता है
+Feature.Squads.Description.LuckyRecommendationRolling,अपने ग्रुप के लिए एक अच्छा विकल्प ढूँढना
+Feature.Squads.Description.LuckyRecommendationRow,"चलिए, शुरू करते हैं"
 Feature.Squads.Description.ManyPeopleActive,{userCount} लोग ऐक्टिव हैं
 Feature.Squads.Description.NoResponse,कोई जवाब नहीं है
 Feature.Squads.Description.NotGoing,नहीं जा रहे
@@ -3512,6 +3636,9 @@ Feature.Squads.Label.JoinParty,पार्टी जॉइन करें
 Feature.Squads.Label.LeaveParty,पार्टी छोड़ें
 Feature.Squads.Label.Loading,
 Feature.Squads.Label.LowMemory,कम मेमोरी
+Feature.Squads.Label.LuckyRecommendationRevealed,इसे आज़माएँ
+Feature.Squads.Label.LuckyRecommendationRolling,कोई गेम चुनना
+Feature.Squads.Label.LuckyRecommendationRow,ठीक से नहीं मालूम कि क्या खेलना है?
 Feature.Squads.Label.MultiplePeopleJoinedYourParty,कई लोगों ने आपकी पार्टी जॉइन की है
 Feature.Squads.Label.MuteMic,माइक्रो को म्यूट करें
 Feature.Squads.Label.Party,
@@ -3572,6 +3699,15 @@ Feature.Toast.VoteError.AssetNotVoteable,हो सकता है कि अ�
 Feature.Toast.VoteError.Default,ऐक्शन उपलब्ध नहीं है.
 Feature.Toast.VoteError.FloodCheckThresholdMet,आप बहुत जल्दी-जल्दी वोट कर रहे हैं.
 Feature.Toast.VoteError.PlayGame,इसे रेटिंग देने से पहले आपका इस एक्सपीरिएंस पर जाना ज़रूरी है.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,"आपको यह गेम खेलने से बैन कर दिया गया है, क्योंकि आपने बार-बार नियम तोड़े हैं या उनका गंभीर उल्लंघन किया है."
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,"आपके पास यह गेम खेलने की अनुमति नहीं है, क्योंकि आपके बिहेवियर से नियम टूटे हैं."
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox ने आपको इस गेम से बैन कर दिया है
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Day,Roblox ने आपको 1 दिन के लिए इस गेम से सस्पेंड कर दिया है
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Days,Roblox ने आपको {number} दिनों के लिए इस गेम से सस्पेंड कर दिया है
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hour,Roblox ने आपको 1 घंटे के लिए इस गेम से सस्पेंड कर दिया है
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox ने आपको {number} घंटों के लिए इस गेम से सस्पेंड कर दिया है
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox ने आपको 1 मिनट के लिए इस गेम से सस्पेंड कर दिया है
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox ने आपको {number} मिनट के लिए इस गेम से सस्पेंड कर दिया है
 Feature.VerificationUpsell.Action.AddPhone,फ़ोन नंबर जोड़ें
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,वॉइस चैट के लिए फ़ोन नंबर जोड़ें
@@ -3676,15 +3812,18 @@ Features.OnDemandAds.Reward_Earned,मिला हुआ रिवॉर्ड
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
+Features.Transfers.Action.TurnOnTwoStepVerification,2-स्टेप वेरिफ़िकेशन चालू करें
 Features.Transfers.Action.VPC.Ask,
 Features.Transfers.Action.VPC.AskParentBodyReceive,"Robux स्वीकार करने के लिए, आपको पेरेंट की परमिशन चाहिए."
 Features.Transfers.Action.VPC.AskParentBodySend,"Robux भेजने के लिए, आपको पेरेंट की परमिशन चाहिए."
 Features.Transfers.Action.VPC.AskParentTitle,
 Features.Transfers.Body.DailyLimitExceededError,रोज़ाना इससे ज़्यादा Robux नहीं भेजे जा सकते. बाद में वापस आकर दोबारा कोशिश करें.
+Features.Transfers.Body.DailyLimitTwoStepVerificationUpsell,आपके द्वारा हर रोज़ इससे ज़्यादा Robux नहीं भेजे जा सकते. 2-स्टेप वेरिफ़िकेशन चालू करके देखें कि आप ज़्यादा लिमिट के लिए योग्य हैं या नहीं.
 Features.Transfers.Body.ExpiredTransferError,"कोई ऐक्टिविटी न होने की वजह से,  @{username} से भेजे गए Robux एक्सपायर हो गए हैं."
 Features.Transfers.Body.GenericReceiveError,आपके अकाउंट से फ़िलहाल Robux नहीं भेजे जा सकते.
 Features.Transfers.Body.GenericSentError,कुछ गड़बड़ी की वजह से Robux भेजे नहीं जा सके. अपना कनेक्शन जाँचें और फिर से कोशिश करें.
 Features.Transfers.Body.MonthlyLimitExceededError,हर महीने इससे ज़्यादा Robux नहीं भेजे जा सकते. बाद में वापस आकर दोबारा कोशिश करें.
+Features.Transfers.Body.MonthlyLimitTwoStepVerificationUpsell,आपके द्वारा हर महीने इससे ज़्यादा Robux नहीं भेजे जा सकते. 2-स्टेप वेरिफ़िकेशन चालू करके देखें कि आप ज़्यादा लिमिट के लिए योग्य हैं या नहीं.
 Features.Transfers.Body.ReceiverLimitHitError,इस यूज़र को अभी यह राशि नहीं मिल सकती. कम राशि भेजकर देखें या बाद में फिर से कोशिश करें
 Features.Transfers.Body.TransferAmountBelowMinimumError,{minAmount} या इससे ज़्यादा Robux भेजें.
 Features.Transfers.Body.TransferAmountExceedsMaximumError,आपके पास ज़्यादा से ज़्यादा {maxAmount} Robux भेजने की सुविधा है
@@ -3730,6 +3869,7 @@ IAPExperience.InsufficientRobux.Action.RobuxStore,Robux स्टोर पर �
 IAPExperience.InsufficientRobux.Text.BuyRobux,"यह आइटम खरीदने के लिए, {robux} खरीदें"
 IAPExperience.InsufficientRobux.Text.CurrentBalance,
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,आपके पास यह आइटम खरीदने के लिए Robux पूरे नहीं हैं.
+IAPExperience.InsufficientRobux.Text.MissingRobux,
 IAPExperience.InsufficientRobux.Text.YouNeed,आपको अतिरिक्त {robux} चाहिए. कृपया और Robux पैकेज खरीदें और फिर एक्सपीरिएंस पर वापस आएँ.
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux काफ़ी नहीं हैं
 IAPExperience.LeaveRoblox.Action.Cancel,
@@ -3799,8 +3939,7 @@ IAPExperience.PurchasePrompt.Label.GenericDiscountNoPercent,छूट
 IAPExperience.PurchasePrompt.Label.Subtotal,सबटोटल
 IAPExperience.PurchasePrompt.Label.SubtotalWithItemCount,सबटोटल ({itemCount} आइटम)
 IAPExperience.PurchasePrompt.Label.Total,
-IAPExperience.PurchasePrompt.Label.TotalPrice,कुल कीमत
-IAPExperience.PurchasePrompt.Label.TotalPriceV2,
+IAPExperience.PurchasePrompt.Label.TotalPriceV2,कुल कीमत
 IAPExperience.PurchasePrompt.Text.BuyItemQuestion,"क्या आपको ""{name}"" खरीदना है?"
 IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning,"अपने एंटरटेनमेंट पर कंट्रोल करें और समझदारी से काम लें. क्या आपको ""{name}""खरीदना है?"
 IAPExperience.PurchasePrompt.Text.Loading,
@@ -3861,18 +4000,14 @@ IAPExperience.U13Confirm.Title.Warning,वॉर्निंग!
 InGame.Chat.ErrorMessageAnimationPlaying,इस ऐक्शन के दौरान Emotes नहीं खेला जा सकता.
 InGame.Chat.ErrorMessageSwitchToR15,Emote खेलने के लिए अपने R15 अवतार पर स्विच करें.
 InGame.Chat.Label.From,इनसे
-InGame.Chat.Label.SystemMessagePrefix,सिस्टम
-InGame.Chat.Label.TeamMessagePrefix,टीम
+InGame.Chat.Label.SystemMessagePrefix,
+InGame.Chat.Label.TeamMessagePrefix,
 InGame.Chat.Label.To,इनको
 InGame.Chat.Response.EmoteNotAvailable,उस Emote का इस्तेमाल नहीं किया जा सकता.
 InGame.Chat.Response.EmotesNotSupported,यहाँ Emotes का इस्तेमाल नहीं किया जा सकता.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,इस समय Emotes का इस्तेमाल नहीं किया जा सकता.
 InGame.Chat.Response.EmotesWrongAvatarType,Emotes सिर्फ़ R15 अवतारों के साथ काम करते हैं.
-InGame.CommonUI.Badge.BadgeText,बीटा
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"अगर कोई हमारी कम्यूनिटी गाइडलाइन का उल्लंघन करता है, तो दुर्व्यवहार की रिपोर्ट करें. अगर आप वॉइस सेवाओं का इस्तेमाल करते हैं, तो Roblox सुरक्षा और मॉडरेशन के लिए आवाज़ रिकॉर्ड करता है. इससे, हमारे टूल को बेहतर बनाने में भी मदद मिलती है. आवाज़ का उपयोग करके, आप इस रिकॉर्डिंग और स्टोर करने से सहमत होते हैं. आप किसी भी समय वॉइस फ़ीचर से ऑप्ट-आउट कर सकते हैं."
-InGame.CommonUI.Badge.Popup.HeaderList,आपने हमारे एक या एक से ज़्यादा बीटा फ़ीचर्स को चुना है:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -3898,6 +4033,7 @@ InGame.ConnectionError.Action.ViewCollaborators,कोलैबरेटर्�
 InGame.ConnectionError.AndroidAnticheatKick,Roblox को खोई हुई या करप्ट फ़ाइलों का पता चला है. इसे अनइंस्टॉल करें और किसी आधिकारिक ऐप स्टोर से Roblox को फिर से इंस्टॉल करें.
 InGame.ConnectionError.AndroidEmulatorKick,"हम बिना प्लेस एडिट ऐक्सेस वाले अकाउंट के एम्युलेटर्स को अनुमति नहीं देते. एम्युलेटर का इस्तेमाल नहीं करने पर, हमें बताने के लिए गड़बड़ी के इस कोड के साथ कस्टमर सपोर्ट से संपर्क करें."
 InGame.ConnectionError.Button.Reconnect,फिर से कनेक्ट करें
+InGame.ConnectionError.Button.ReconnectNow,अभी फिर से कनेक्ट करें
 InGame.ConnectionError.ConnectErrors,एक्सपीरिएंस से कनेक्ट नहीं हो सका. फिर से कोशिश करें.
 InGame.ConnectionError.ConnectionBanned,एक्सपीरिएंस से कनेक्ट नहीं हो सका. इस एक्सपीरिएंस से बैन है.
 InGame.ConnectionError.ConnectionFailedRobloxVersion,एक्सपीरिएंस से कनेक्ट नहीं हो सका. ROBLOX का वर्ज़न पुराना है. अपडेट करके फिर से कोशिश करें.
@@ -3962,6 +4098,7 @@ InGame.ConnectionError.DisconnectTryAgain,एक्सपीरिएंस स�
 InGame.ConnectionError.DisconnectVerboselyModeratedGame,"लोगों द्वारा कई बार नियम तोड़ने के बाद, हमने आपकी सुरक्षा के लिए इस सर्वर को डिस्कनेक्ट कर दिया है. हमारे कम्यूनिटी स्टैंडर्ड में बताए गए नियमों को सीखकर Roblox को सुरक्षित रखने में मदद करें."
 InGame.ConnectionError.DisconnectWrongVersion,
 InGame.ConnectionError.Heading.VRDisconnected,हेडसेट डिसकनेक्ट हो गया है
+InGame.ConnectionError.Joining,सर्वर में शामिल किया जा रहा है
 InGame.ConnectionError.Message.ChannelName,चैनल : {CHANNEL_NAME}
 InGame.ConnectionError.Message.ErrorCode,गड़बड़ी का कोड: {ERROR_CODE}
 InGame.ConnectionError.Message.RestartApp,"खेलना जारी रखने के लिए, ऐप को रीस्टार्ट करें."
@@ -3981,11 +4118,15 @@ InGame.ConnectionError.PlacelaunchRestricted,एक्सपीरिएंस �
 InGame.ConnectionError.PlacelaunchUnauthorized,आपके पास इस एक्सपीरिएंस को जॉइन करने की परमिशन नहीं है.
 InGame.ConnectionError.PlacelaunchUserLeft,"जिस यूज़र के साथ आपने शामिल होने की कोशिश की थी, वह एक्सपीरिएंस छोड़कर चला गया है."
 InGame.ConnectionError.PlacelaunchUserPrivacyUnauthorized,आपकी प्राइवेसी सेटिंग्स आपको इस सर्वर से जुड़ने से रोकती हैं.
+InGame.ConnectionError.Queue,लाइन में आपका नंबर: {POSITION}
 InGame.ConnectionError.ReconnectFailed,फिर से कनेक्ट नहीं हो सका. फिर से कोशिश करें.
-InGame.ConnectionError.RemoteAttestationBootValidationFailure,इस प्लेस के लिए एक भरोसेमंद ऑपरेटिंग सिस्टम चाहिए. कृपया ऐसे डिवाइस पर रन करें जिस पर Roblox काम करता हो और पक्का करें कि बूटलोडर लॉक कर दिया गया हो.
-InGame.ConnectionError.RemoteAttestationGeneralFailure,"Roblox पर गेम की इंटीग्रिटी वेरिफ़ाई नहीं हो सकी. कृपया पक्का करें कि आपका ऑपरेटिंग सिस्टम भरोसेमंद और अप-टू-डेट हो, फिर किसी ऑफ़िशियल डाउनलोड लोकेशन से Roblox को फिर से इंस्टॉल करें."
-InGame.ConnectionError.RemoteAttestationOSOutOfDate,इस प्लेस के लिए Android का अप-टू-डेट इंस्टॉलेशन ज़रूरी है. कृपया पक्का करें कि आपका ऑपरेटिंग सिस्टम अप-टू-डेट हो.
-InGame.ConnectionError.RemoteAttestationTimeout,नेटवर्क में समस्या की वजह से Roblox पर गेम की इंटीग्रिटी वेरिफ़ाई नहीं हो सकी. कृपया फिर से कनेक्ट करें.
+InGame.ConnectionError.ReconnectingAttempt,फिर से कनेक्ट किया जा रहा है (प्रयास #{RBX_ATTEMPT})...
+InGame.ConnectionError.ReconnectingAttemptInSecond,1 सेकंड में फिर से कनेक्ट किया जा रहा है (प्रयास #{RBX_ATTEMPT})...
+InGame.ConnectionError.ReconnectingAttemptInSeconds,{RBX_SECONDS} सेकंड में फिर से कनेक्ट किया जा रहा है (प्रयास # {RBX_ATTEMPT})...
+InGame.ConnectionError.RemoteAttestationBootValidationFailure,"इस गेम के लिए एक भरोसेमंद ऑपरेटिंग सिस्टम चाहिए. कृपया Roblox को ऐसे डिवाइस पर रन करें, जिस पर वह काम करता हो और पक्का करें कि बूटलोडर लॉक कर दिया गया हो."
+InGame.ConnectionError.RemoteAttestationGeneralFailure,"Roblox पर ऐप की इंटीग्रिटी वेरिफ़ाई नहीं हो सकी. कृपया पक्का करें कि आपका ऑपरेटिंग सिस्टम भरोसेमंद और अप-टू-डेट हो, फिर किसी ऑफ़िशियल डाउनलोड लोकेशन से Roblox को फिर से इंस्टॉल करें."
+InGame.ConnectionError.RemoteAttestationOSOutOfDate,इस गेम के लिए Android का अप-टू-डेट इंस्टॉलेशन ज़रूरी है. कृपया पक्का करें कि आपका ऑपरेटिंग सिस्टम अप-टू-डेट हो.
+InGame.ConnectionError.RemoteAttestationTimeout,नेटवर्क में समस्या की वजह से Roblox पर ऐप की इंटीग्रिटी वेरिफ़ाई नहीं हो सकी. कृपया फिर से कनेक्ट करें.
 InGame.ConnectionError.RemoteAttestationUnsupported,"इस गेम में हार्डवेयर सुरक्षा से जुड़ी अतिरिक्त शर्तें चालू की गई हैं. कृपया Roblox को किसी ऐसे डिवाइस पर चलाएँ, जिस पर वह काम करता हो."
 InGame.ConnectionError.ServerShutdown,एक्सपीरिएंस से डिस्कनेक्ट हुआ. सर्वर बंद हो गया है.
 InGame.ConnectionError.TeleportErrors,अचानक हुई गड़बड़ी के कारण टेलीपोर्ट नहीं हो सका. फिर से टेलीपोर्ट करने की कोशिश करें.
@@ -4065,9 +4206,9 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,सेव करने 
 InGame.NotificationScript2.Capture.Success.ToastText,
 InGame.NotificationScript2.FriendRequestEvent.Accept,आप और {RBX_NAME} अब फ़्रेंड हैं!
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,आपको एक कनेक्शन रिक्वेस्ट भेजी गई है!
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,आपको एक फ़्रेंड रिक्वेस्ट भेजी गई है!
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
-InGame.NotificationScript2.Message.FriendRequestEvent.Sent,आपको एक फ़्रेंड रिक्वेस्ट भेजी गई है!
+InGame.NotificationScript2.Message.FriendRequestEvent.Sent,
 InGame.NotificationScript2.Screenshot.ButtonText,फ़ोल्डर खोलें
 InGame.NotificationScript2.Screenshot.Description,इसे अपने स्क्रीनशॉट फ़ोल्डर में देखें.
 InGame.NotificationScript2.Screenshot.Title,स्क्रीनशॉट लिया गया
@@ -4081,7 +4222,7 @@ InGame.NotificationScript2.onBadgeAwardedTitle,आपको एक बैज म
 InGame.NotificationScript2.onPointsAwarded.multiple,आपको {RBX_NUMBER} पॉइंट मिले हैं!
 InGame.NotificationScript2.onPointsAwarded.single,आपको {RBX_NUMBER} पॉइंट मिला है!
 InGame.PlayerDropDown.Accept,
-InGame.PlayerDropDown.Action.ConnectionRequest,कनेक्शन रिक्वेस्ट
+InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.Examine,
@@ -4094,7 +4235,6 @@ InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,स्टूडियो में हैं
 InGame.Presence.Label.Offline,
 InGame.Presence.Label.Online,
-InGame.Presence.Label.RobloxStudio,
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage,आपके फ़्रेंड {RBX_NAME} ने यह एक्सपीरिएंस जॉइन कर लिया है.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <speaker> : स्पीकर म्यूट करें.
@@ -4110,7 +4250,7 @@ InGame.UnknownNamespace.Sent,
 Notifications.NotificationStream.Bundle.ShowLess,कम दिखाएँ
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} ज़्यादा
 Notifications.NotificationStream.Label.AllCaughtUp,सारी रिक्वेस्ट पूरी हो गईं!
-Notifications.NotificationStream.Label.Notifications,नोटिफ़िकेशन
+Notifications.NotificationStream.Label.Notifications,
 Notifications.SafetyAvatarModeration.Description.NotificationTypeInExpWarnMsg,"कृपया अपना अवतार बदलें. जल्द ही, ऐसे अवतार वाले प्लेयर्स को इस गेम से सस्पेंड कर दिया जाएगा जो हमारे कम्यूनिटी स्टैंडर्ड का उल्लंघन करते हैं."
 Notifications.SafetyAvatarModeration.Label.NotificationTypeInExpWarn,आपके अवतार ने नियमों का उल्लंघन किया है
 Notifications.SquadRegroupPrompt.ToastAction.Dismiss,

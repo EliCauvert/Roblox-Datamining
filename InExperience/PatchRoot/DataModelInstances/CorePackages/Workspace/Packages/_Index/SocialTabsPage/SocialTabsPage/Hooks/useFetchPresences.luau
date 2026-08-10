@@ -3,23 +3,24 @@ local parent = socialTabsPage.Parent
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local getPresencesFromUserIds = require(socialTabsPage.Networking.NetworkingPresence).GetPresencesFromUserIds
+local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
+local var4 = if not fFlagSocialTabsPagePresenceSignalsMigrationModule then require(socialTabsPage.Networking.NetworkingPresence).GetPresencesFromUserIds else nil
 
-return function(p0) --[[ line: 12 | named "useFetchPresences" ]]
-	-- upvalues: useDispatch (ref), reactModule (ref), cryoModule (ref), getPresencesFromUserIds (ref)
-	local var3 = useDispatch()
-	local var4 = reactModule.useRef({})
-	reactModule.useEffect(function() --[[ line: 16 ]]
-		-- upvalues: cryoModule (copy), var4 (ref), p0 (ref), var3 (ref), getPresencesFromUserIds (copy)
-		local var5 = cryoModule.List.toSet(var4.current)
-		local var6 = cryoModule.List.filter(p0, function(p1) --[[ line: 18 ]]
-			-- upvalues: var5 (ref)
-			return not var5[p1]
+return if fFlagSocialTabsPagePresenceSignalsMigrationModule then nil else function(p0) --[[ line: 18 ]]
+	-- upvalues: useDispatch (ref), reactModule (ref), cryoModule (ref), var4 (ref)
+	local var5 = useDispatch()
+	local var6 = reactModule.useRef({})
+	reactModule.useEffect(function() --[[ line: 22 ]]
+		-- upvalues: cryoModule (copy), var6 (ref), p0 (ref), var5 (ref), var4 (copy)
+		local var7 = cryoModule.List.toSet(var6.current)
+		local var8 = cryoModule.List.filter(p0, function(p1) --[[ line: 24 ]]
+			-- upvalues: var7 (ref)
+			return not var7[p1]
 		end)
 		
-		if #var6 > 0 then
-			var3(getPresencesFromUserIds.API(var6))
-			var4.current = cryoModule.List.join(var4.current, var6)
+		if #var8 > 0 then
+			var5(var4.API(var8))
+			var6.current = cryoModule.List.join(var6.current, var8)
 		end
-	end, { p0, var3 })
+	end, { p0, var5 })
 end

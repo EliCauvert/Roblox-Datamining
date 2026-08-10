@@ -4,10 +4,10 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 local mockProvidersModule = require(onPlatformSurveys.MockProviders)
-local t = { Dark = theme.Dark, Light = theme.Light }
+local t = { Dark = colorMode.Dark, Light = colorMode.Light }
 
 local function _(p0, p1) --[[ line: 26 | named "union" ]]
 	local cloned = table.clone(p0)
@@ -24,9 +24,9 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	mapStory = function(p2) --[[ line: 39 ]]
-		-- upvalues: reactModule (ref), mockProvidersModule (ref), foundationProvider (ref), t (ref), theme (ref), device (ref)
+		-- upvalues: reactModule (ref), mockProvidersModule (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref)
 		return function(p3) --[[ line: 40 ]]
-			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), theme (copy), device (copy), p2 (ref)
+			-- upvalues: reactModule (copy), mockProvidersModule (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p2 (ref)
 			local var7 = if p3.definition then p3.definition.props else {}
 			local cloned = table.clone(p3)
 			
@@ -37,7 +37,7 @@ return {
 			end
 			return reactModule.createElement(mockProvidersModule, {}, {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
-					theme = t[p3.theme] or theme.Dark,
+					colorMode = t[p3.theme] or colorMode.Dark,
 					device = device[p3.platform] or device.Phone,
 					preferences = p3.settings,
 					overlayGui = p3.focus

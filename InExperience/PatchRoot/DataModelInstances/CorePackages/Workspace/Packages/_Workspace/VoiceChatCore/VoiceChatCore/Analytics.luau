@@ -2,6 +2,8 @@
 local sessionService = game:GetService("SessionService")
 local telemetryService = game:GetService("TelemetryService")
 game:DefineFastInt("LuaVoiceChatThrottleHundrethsPercent", 10000)
+game:DefineFastInt("LuaVoiceVolumeControlsEligibilityThrottleHundredthsPercent", 10000)
+game:DefineFastInt("LuaVoiceVolumeControlsImpressionsThrottleHundredthsPercent", 10000)
 game:DefineFastInt("LuaVoiceChatAnalyticsPointsThrottle", 0)
 game:DefineFastFlag("LuaVoiceChatAnalyticsUsePointsV2", false)
 game:DefineFastFlag("LuaVoiceChatAnalyticsUseCounterV2", false)
@@ -14,7 +16,7 @@ t.INFO = "info"
 t.WARNING = "warning"
 t.ERROR = "error"
 
-function t.new(p0) --[[ line: 137 ]]
+function t.new(p0) --[[ line: 158 ]]
 	-- upvalues: rbxAnalyticsService (ref), t (ref)
 	if not p0 then
 		p0 = rbxAnalyticsService
@@ -24,9 +26,9 @@ function t.new(p0) --[[ line: 137 ]]
 	return setmetatable({ _impl = p0 }, t)
 end
 
-local function stub() --[[ line: 150 ]] end
+local function stub() --[[ line: 171 ]] end
 
-function t.stubService() --[[ line: 152 ]]
+function t.stubService() --[[ line: 173 ]]
 	-- upvalues: stub (ref)
 	return {
 		SetRBXEvent = stub,
@@ -38,11 +40,11 @@ function t.stubService() --[[ line: 152 ]]
 	}
 end
 
-function t:setImpl(p1) --[[ line: 163 ]]
+function t:setImpl(p1) --[[ line: 184 ]]
 	self._impl = p1
 end
 
-function t:_report(p2, p3, p4, p5) --[[ line: 167 ]]
+function t:_report(p2, p3, p4, p5) --[[ line: 188 ]]
 	local text = p2 .. "-" .. p3
 	
 	if game:GetFastFlag("LuaVoiceChatAnalyticsUsePointsV2") then
@@ -66,18 +68,18 @@ function t:_report(p2, p3, p4, p5) --[[ line: 167 ]]
 	end
 end
 
-function t:reportVoiceChatJoinResult(p6, p7, p8) --[[ line: 189 ]]
+function t:reportVoiceChatJoinResult(p6, p7, p8) --[[ line: 210 ]]
 	-- upvalues: t (ref)
 	self:_report("voiceChat", "defaultChannelJoinResults", p7, { success = p6, result = p7, logLevel = p8 or t.INFO })
 end
 
-function t:reportBanMessageEvent(p9) --[[ line: 197 ]]
+function t:reportBanMessageEvent(p9) --[[ line: 218 ]]
 	if game:GetFastFlag("LuaVoiceChatAnalyticsBanMessage") then
 		self._impl:ReportCounter("voiceChat-reportBanMessage" .. p9, 1)
 	end
 end
 
-function t:reportBanMessageEventV2(p10, p11, p12, p13) --[[ line: 203 ]]
+function t:reportBanMessageEventV2(p10, p11, p12, p13) --[[ line: 224 ]]
 	self:_report("voiceChat", "reportBanEvent", nil, {
 		eventType = p10,
 		banReason = p11,
@@ -86,17 +88,17 @@ function t:reportBanMessageEventV2(p10, p11, p12, p13) --[[ line: 203 ]]
 	})
 end
 
-function t:reportReconnectDueToMissedSequence() --[[ line: 212 ]]
+function t:reportReconnectDueToMissedSequence() --[[ line: 233 ]]
 	if game:GetFastFlag("LuaVoiceChatReconnectMissedSequence") then
 		self._impl:ReportCounter("voiceChat-reconnectMissedSequence", 1)
 	end
 end
 
-function t:reportOutOfOrderSequence() --[[ line: 218 ]]
+function t:reportOutOfOrderSequence() --[[ line: 239 ]]
 	self._impl:ReportCounter("voiceChat-outOfOrderSequence", 1)
 end
 
-function t:reportReceivedNudge(p14, p15, p16) --[[ line: 222 ]]
+function t:reportReceivedNudge(p14, p15, p16) --[[ line: 243 ]]
 	local var8 = DateTime.now().UnixTimestampMillis - DateTime.fromIsoDate(p14.deliveryTime).UnixTimestampMillis
 	self._impl:ReportCounter("voicechat-receivednudge", 1)
 	self._impl:ReportCounter("voicechat-receivednudgeduration", var8)
@@ -108,12 +110,12 @@ function t:reportReceivedNudge(p14, p15, p16) --[[ line: 222 ]]
 	})
 end
 
-function t:reportClosedNudge(p17, p18) --[[ line: 239 ]]
+function t:reportClosedNudge(p17, p18) --[[ line: 260 ]]
 	self._impl:ReportCounter("voicechat-closednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "CLOSED", userId = p17, voiceSessionId = p18 })
 end
 
-function t:reportAcknowledgedNudge(p19, p20) --[[ line: 248 ]]
+function t:reportAcknowledgedNudge(p19, p20) --[[ line: 269 ]]
 	self._impl:ReportCounter("voicechat-acknowledgednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", {
 		closeType = "ACKNOWLEDGED",
@@ -122,12 +124,12 @@ function t:reportAcknowledgedNudge(p19, p20) --[[ line: 248 ]]
 	})
 end
 
-function t:reportDeniedNudge(p21, p22) --[[ line: 257 ]]
+function t:reportDeniedNudge(p21, p22) --[[ line: 278 ]]
 	self._impl:ReportCounter("voicechat-deniednudge", 1)
 	self._impl:SendEventDeferred("client", "voiceChat", "closedNudge", { closeType = "DENIED", userId = p21, voiceSessionId = p22 })
 end
 
-function t:reportVoiceMuteIndividual(p23) --[[ line: 266 ]]
+function t:reportVoiceMuteIndividual(p23) --[[ line: 287 ]]
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteIndividual", {
 		user_id = p23.userId,
 		client_session_id = p23.clientSessionId,
@@ -138,7 +140,7 @@ function t:reportVoiceMuteIndividual(p23) --[[ line: 266 ]]
 	})
 end
 
-function t:reportVoiceMuteGroup(p24) --[[ line: 277 ]]
+function t:reportVoiceMuteGroup(p24) --[[ line: 298 ]]
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteGroup", {
 		user_id = p24.userId,
 		client_session_id = p24.clientSessionId,
@@ -149,7 +151,7 @@ function t:reportVoiceMuteGroup(p24) --[[ line: 277 ]]
 	})
 end
 
-function t:reportVoiceMuteSelf(p25) --[[ line: 288 ]]
+function t:reportVoiceMuteSelf(p25) --[[ line: 309 ]]
 	self._impl:SendEventDeferred("client", "voice", "voiceUIMuteUnmuteSelf", {
 		user_id = p25.userId,
 		client_session_id = p25.clientSessionId,
@@ -159,7 +161,7 @@ function t:reportVoiceMuteSelf(p25) --[[ line: 288 ]]
 	})
 end
 
-function t:reportJoinVoiceButtonEvent(p26, p27, p28, p29, p30, p31) --[[ line: 298 ]]
+function t:reportJoinVoiceButtonEvent(p26, p27, p28, p29, p30, p31) --[[ line: 319 ]]
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
 		eventType = p26,
 		universeId = p27,
@@ -170,7 +172,7 @@ function t:reportJoinVoiceButtonEvent(p26, p27, p28, p29, p30, p31) --[[ line: 2
 	})
 end
 
-function t:reportJoinVoiceButtonEventWithVoiceSessionId(p32, p33, p34, p35, p36, p37, p38) --[[ line: 316 ]]
+function t:reportJoinVoiceButtonEventWithVoiceSessionId(p32, p33, p34, p35, p36, p37, p38) --[[ line: 337 ]]
 	self._impl:SendEventDeferred("client", "voice", "joinVoiceButtonEvent", {
 		eventType = p32,
 		universeId = p33,
@@ -182,7 +184,7 @@ function t:reportJoinVoiceButtonEventWithVoiceSessionId(p32, p33, p34, p35, p36,
 	})
 end
 
-function t.reportJoinVoiceUpsellEvent(_, p39, p40, p41, p42, p43) --[[ line: 336 ]]
+function t.reportJoinVoiceUpsellEvent(_, p39, p40, p41, p42, p43) --[[ line: 357 ]]
 	-- upvalues: sessionService (ref), telemetryService (ref)
 	telemetryService:LogEvent({
 		description = "Event fired when user sees or interacts with Join Voice button",
@@ -205,7 +207,7 @@ function t.reportJoinVoiceUpsellEvent(_, p39, p40, p41, p42, p43) --[[ line: 336
 	})
 end
 
-function t:reportLeaveVoiceButtonEvent(p44, p45, p46, p47, p48) --[[ line: 369 ]]
+function t:reportLeaveVoiceButtonEvent(p44, p45, p46, p47, p48) --[[ line: 390 ]]
 	self._impl:SendEventDeferred("client", "voice", "leaveVoiceButtonEvent", {
 		eventType = p44,
 		universeId = p45,
@@ -215,7 +217,7 @@ function t:reportLeaveVoiceButtonEvent(p44, p45, p46, p47, p48) --[[ line: 369 ]
 	})
 end
 
-function t:reportInExpConsent(p49, p50, p51, p52, p53) --[[ line: 385 ]]
+function t:reportInExpConsent(p49, p50, p51, p52, p53) --[[ line: 406 ]]
 	self._impl:SendEventDeferred("client", "voiceChat", "inExpConsentModalEvent", {
 		eventType = p49,
 		entry = p50,
@@ -225,7 +227,7 @@ function t:reportInExpConsent(p49, p50, p51, p52, p53) --[[ line: 385 ]]
 	})
 end
 
-function t:reportDevicePermissionsModalEvent(p54, p55, p56, p57, p58) --[[ line: 401 ]]
+function t:reportDevicePermissionsModalEvent(p54, p55, p56, p57, p58) --[[ line: 422 ]]
 	self._impl:SendEventDeferred("client", "voiceChat", "devicePermissionsModalEvent", {
 		eventType = p54,
 		universeId = p56,
@@ -235,12 +237,55 @@ function t:reportDevicePermissionsModalEvent(p54, p55, p56, p57, p58) --[[ line:
 	})
 end
 
-function t:reportConnectDisconnectEvents(p59, p60) --[[ line: 420 ]]
+function t:reportConnectDisconnectEvents(p59, p60) --[[ line: 441 ]]
 	self._impl:SendEventDeferred("client", "voiceChat", p59, p60)
 end
 
-function t:reportVoiceEvents(p61, p62) --[[ line: 424 ]]
+function t:reportVoiceEvents(p61, p62) --[[ line: 445 ]]
 	self._impl:SendEventDeferred("client", "voice", p61, p62)
+end
+
+function t.reportVoiceVolumeEligibility(_, p63) --[[ line: 449 ]]
+	-- upvalues: telemetryService (ref)
+	telemetryService:LogEvent({
+		eventName = "VoiceVolumeControlsEligibility",
+		description = "Records voice volume eligibility state on voice join for VVC telemetry",
+		links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/voice_volume_controls_eligibility.proto",
+		backends = { "EventIngest" },
+		throttlingPercentage = game:GetFastInt("LuaVoiceVolumeControlsEligibilityThrottleHundredthsPercent"),
+		lastUpdated = { 2026, 7, 7 }
+	}, {
+		customFields = {
+			playSessionId = p63.playSessionId,
+			voiceSessionId = p63.voiceSessionId,
+			voiceChatVolume = p63.voiceChatVolume,
+			usesNewAudioApi = p63.usesNewAudioApi,
+			enablesVoiceVolumeControls = p63.enablesVoiceVolumeControls,
+			isEligible = p63.isEligible
+		},
+		standardizedFields = { "addPlaceId", "addUniverseId" }
+	})
+end
+
+function t.reportVoiceVolumeImpressions(_, p64) --[[ line: 470 ]]
+	-- upvalues: telemetryService (ref)
+	telemetryService:LogEvent({
+		eventName = "VoiceVolumeControlsImpressions",
+		description = "Records whether the voice volume slider was seen during a voice session for Voice Volume Controls telemetry. Only recorded for voice volume control eligible users",
+		links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/voice_volume_controls_impressions.proto",
+		backends = { "EventIngest" },
+		throttlingPercentage = game:GetFastInt("LuaVoiceVolumeControlsImpressionsThrottleHundredthsPercent"),
+		lastUpdated = { 2026, 7, 7 }
+	}, {
+		customFields = {
+			playSessionId = p64.playSessionId,
+			voiceSessionId = p64.voiceSessionId,
+			sliderSeen = p64.sliderSeen,
+			voiceJoinTimestampMs = p64.voiceJoinTimestampMs,
+			sliderSeenTimestampMs = p64.sliderSeenTimestampMs
+		},
+		standardizedFields = { "addPlaceId", "addUniverseId" }
+	})
 end
 
 return t

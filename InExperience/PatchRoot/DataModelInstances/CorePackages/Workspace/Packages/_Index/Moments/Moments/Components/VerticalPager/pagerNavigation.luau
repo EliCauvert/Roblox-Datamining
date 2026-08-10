@@ -31,7 +31,10 @@ return {
 	thumbstickDirection = function(p2, p3) --[[ line: 59 ]]
 		return if math.abs(p2) < p3 then nil elseif p3 <= p2 then "previous" else "next"
 	end,
-	resolveWheelGesture = function(p4, p5, p6) --[[ line: 81 ]]
-		return p6 <= p4 - p5, p4
+	shouldTrackDrag = function(p4, p5) --[[ line: 77 ]]
+		return if p4 then p5 else true
+	end,
+	resolveWheelGesture = function(p6, p7, p8) --[[ line: 99 ]]
+		return p8 <= p6 - p7, p6
 	end
 }

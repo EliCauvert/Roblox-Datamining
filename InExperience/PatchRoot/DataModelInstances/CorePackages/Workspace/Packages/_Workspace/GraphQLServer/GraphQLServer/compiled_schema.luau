@@ -2770,6 +2770,11 @@
 				{
 					kind = "EnumValueDefinition",
 					directives = {},
+					name = { value = "LiftRestriction", kind = "Name" }
+				},
+				{
+					kind = "EnumValueDefinition",
+					directives = {},
 					name = { value = "Unknown", kind = "Name" }
 				}
 			},

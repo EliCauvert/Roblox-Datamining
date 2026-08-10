@@ -11,16 +11,13 @@ return serviceModule:register({
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	id = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).Enums.ActionBinding.Leave,
 	sideSheetPlacement = sideSheetPlacement.SessionAction,
-	activated = function(_) --[[ line: 25 ]]
+	activated = function(_) --[[ line: 22 ]]
 		-- upvalues: inGameMenuIntegrationUtilsModule (ref), leaveGamePage (ref)
 		inGameMenuIntegrationUtilsModule.toggleIGMPage("LeaveGamePage", leaveGamePage:get())
 	end,
-	isActivated = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagChromeActivatedMappedSignal then leaveGamePage else function() --[[ line: 30 ]]
-		-- upvalues: leaveGamePage (ref)
-		return leaveGamePage:get()
-	end,
+	isActivated = leaveGamePage,
 	components = {
-		Icon = function(_) --[[ line: 34 ]]
+		Icon = function(_) --[[ line: 27 ]]
 			-- upvalues: commonIconModule (ref), leaveGamePage (ref)
 			return commonIconModule("icons/actions/leave", nil, leaveGamePage)
 		end

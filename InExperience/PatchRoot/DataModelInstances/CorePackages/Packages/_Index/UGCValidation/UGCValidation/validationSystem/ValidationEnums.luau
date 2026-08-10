@@ -1,20 +1,19 @@
-﻿local getEngineFeatureEngineUGCValidationExpandReturnSchemaModule = require(script.Parent.Parent.flags.getEngineFeatureEngineUGCValidationExpandReturnSchema)
-local t = {}
+﻿local t = {}
 
-local function createEnumMetatable(p0) --[[ line: 12 ]]
+local function createEnumMetatable(p0) --[[ line: 8 ]]
 	return {
 		__metatable = "This metatable is protected",
-		__index = function(_, p1) --[[ line: 14 ]]
+		__index = function(_, p1) --[[ line: 10 ]]
 			-- upvalues: p0 (ref)
 			error("Invalid ValidationEnums." .. p0 .. " enum value: " .. tostring(p1))
 		end,
-		__newindex = function(_, _, _) --[[ line: 17 ]]
+		__newindex = function(_, _, _) --[[ line: 13 ]]
 			error("Cannot add new keys to ValidationEnums")
 		end
 	}
 end
 
-local function finalizeEnumTable(p2) --[[ line: 24 ]]
+local function finalizeEnumTable(p2) --[[ line: 20 ]]
 	-- upvalues: t (ref), createEnumMetatable (ref)
 	if t[p2] == nil then
 		error(p2 .. " enum table is not found")
@@ -87,6 +86,7 @@ t.ValidationModule = {
 	AssetBoundsValid = "AssetBoundsValid",
 	BodyMeshSizesConsistent = "BodyMeshSizesConsistent",
 	ExtentsWithinParent = "ExtentsWithinParent",
+	IndividualMeshPartBoundsValid = "IndividualMeshPartBoundsValid",
 	MeshSizePropertyCorrect = "MeshSizePropertyCorrect",
 	LCDeformationWithinBounds = "LCDeformationWithinBounds",
 	VerticesNotCoincident = "VerticesNotCoincident",
@@ -120,7 +120,8 @@ t.ValidationModule = {
 	CurveAnimBonesHaveValidParents = "CurveAnimBonesHaveValidParents",
 	CurveAnimPartsRotateOnlyIfBones = "CurveAnimPartsRotateOnlyIfBones",
 	CurveAnimBoneHierarchyValid = "CurveAnimBoneHierarchyValid",
-	CurveAnimLoopingRequired = "CurveAnimLoopingRequired"
+	CurveAnimLoopingRequired = "CurveAnimLoopingRequired",
+	EmissiveMapAllowed = "EmissiveMapAllowed"
 }
 t.SharedDataMember = {
 	jobId = "jobId",
@@ -149,7 +150,6 @@ t.ValidationConfig = {
 	prereqTests = "prereqTests",
 	requiredData = "requiredData",
 	conditionalData = "conditionalData",
-	expectedAqsData = "expectedAqsData",
 	knownAqsUserErrors = "knownAqsUserErrors",
 	expectedFailures = "expectedFailures",
 	run = "run"
@@ -173,31 +173,29 @@ t.Status = {
 	IN_PROGRESS = "IN_PROGRESS"
 }
 finalizeEnumTable("Status")
-
-if getEngineFeatureEngineUGCValidationExpandReturnSchemaModule() then
-	t.AssetQualityCheck = {
-		Measure_Dynamic_Head = "Measure_Dynamic_Head",
-		Measure_Cage_Distance_Head = "Measure_Cage_Distance_Head",
-		Measure_Cage_Mesh_Distance = "Measure_Cage_Mesh_Distance",
-		Measure_Cage_Mesh_Distance_Avatar = "Measure_Cage_Mesh_Distance_Avatar",
-		Measure_Cage_UV = "Measure_Cage_UV",
-		Measure_Cage_UV_Avatar = "Measure_Cage_UV_Avatar",
-		Measure_Cage_Relevancy = "Measure_Cage_Relevancy",
-		Measure_Mesh_Outside_OuterCage = "Measure_Mesh_Outside_OuterCage",
-		Measure_Degen_Triangles = "Measure_Degen_Triangles",
-		Measure_Mesh_Manifold = "Measure_Mesh_Manifold",
-		Measure_Triangle_Intersection = "Measure_Triangle_Intersection",
-		Measure_UV_Bound = "Measure_UV_Bound",
-		Measure_Vertex_Similarity = "Measure_Vertex_Similarity",
-		Measure_Joint_Number = "Measure_Joint_Number",
-		Measure_Texture_Complexity = "Measure_Texture_Complexity",
-		Measure_Texture_Resolution = "Measure_Texture_Resolution"
-	}
-	finalizeEnumTable("AssetQualityCheck")
-else
-	t.ValidationModule.HeadIsDynamic = "HeadIsDynamic"
-	t.ValidationModule.MeasureCageMeshDistanceHead = "MeasureCageMeshDistanceHead"
-end
+t.AssetQualityCheck = {
+	Measure_Dynamic_Head = "Measure_Dynamic_Head",
+	Measure_Cage_Distance_Head = "Measure_Cage_Distance_Head",
+	Measure_Cage_Mesh_Distance = "Measure_Cage_Mesh_Distance",
+	Measure_Cage_Mesh_Distance_Avatar = "Measure_Cage_Mesh_Distance_Avatar",
+	Measure_Cage_UV = "Measure_Cage_UV",
+	Measure_Cage_UV_Avatar = "Measure_Cage_UV_Avatar",
+	Measure_Cage_Relevancy = "Measure_Cage_Relevancy",
+	Measure_Mesh_Outside_OuterCage = "Measure_Mesh_Outside_OuterCage",
+	Measure_Degen_Triangles = "Measure_Degen_Triangles",
+	Measure_Mesh_Manifold = "Measure_Mesh_Manifold",
+	Measure_Mesh_Watertight = "Measure_Mesh_Watertight",
+	Measure_Triangle_Intersection = "Measure_Triangle_Intersection",
+	Measure_UV_Bound = "Measure_UV_Bound",
+	Measure_Vertex_Similarity = "Measure_Vertex_Similarity",
+	Measure_Joint_Number = "Measure_Joint_Number",
+	Measure_Texture_Complexity = "Measure_Texture_Complexity",
+	Measure_Texture_Resolution = "Measure_Texture_Resolution",
+	Measure_Mesh_Island_Volume = "Measure_Mesh_Island_Volume",
+	Measure_Mesh_Island_ML = "Measure_Mesh_Island_ML",
+	Measure_Animation_Duration = "Measure_Animation_Duration"
+}
+finalizeEnumTable("AssetQualityCheck")
 finalizeEnumTable("ValidationModule")
 t.UploadCategory = {
 	TORSO_AND_LIMBS = "TORSO_AND_LIMBS",

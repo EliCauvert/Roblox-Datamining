@@ -1,23 +1,52 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local parent = genericAbuseReporting.Parent
 local playersService = game:GetService("Players")
 local localPlayer = playersService.LocalPlayer
+local foundationModule = require(parent.Foundation)
 local promiseModule = require(parent.Promise)
-local accessoryType = require(parent.Foundation).Enums.AccessoryType
+local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
+local recentlyLeftSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
+local accessoryType = foundationModule.Enums.AccessoryType
 
-return function() --[[ line: 15 | named "getUsers" ]]
-	-- upvalues: promiseModule (ref), playersService (ref), localPlayer (ref), accessoryType (ref)
-	return promiseModule.new(function(p0, p1) --[[ line: 16 ]]
-		-- upvalues: playersService (copy), localPlayer (copy), accessoryType (copy)
-		local ok, status = pcall(function() --[[ line: 17 ]]
-			-- upvalues: playersService (copy), localPlayer (copy), accessoryType (copy)
+local function appendRecentlyLeftItems(p0, p1, p2) --[[ line: 23 ]]
+	-- upvalues: accessoryType (ref)
+	local cloned = table.clone(p2)
+	table.sort(cloned, function(p3, p4) --[[ line: 29 ]]
+		return p3.username:lower() < p4.username:lower()
+	end)
+	
+	for i, v in ipairs(cloned) do
+		if not p1[tostring(v.userId)] then
+			table.insert(p0, {
+				leading = { type = accessoryType.Avatar, userId = v.userId },
+				id = tostring(v.userId),
+				label = v.displayName,
+				description = v.username,
+				meta = { username = v.username, displayName = v.displayName }
+			})
+		end
+	end
+	return p0
+end
+
+return function() --[[ line: 59 | named "getUsers" ]]
+	-- upvalues: promiseModule (ref), playersService (ref), localPlayer (ref), fFlagAbuseReportInExpPlayerListV3 (ref), accessoryType (ref), appendRecentlyLeftItems (ref), recentlyLeftSignalsModule (ref)
+	return promiseModule.new(function(p5, p6) --[[ line: 60 ]]
+		-- upvalues: playersService (copy), localPlayer (copy), fFlagAbuseReportInExpPlayerListV3 (copy), accessoryType (copy), appendRecentlyLeftItems (copy), recentlyLeftSignalsModule (copy)
+		local ok, status = pcall(function() --[[ line: 61 ]]
+			-- upvalues: playersService (copy), localPlayer (copy), fFlagAbuseReportInExpPlayerListV3 (copy), accessoryType (copy), appendRecentlyLeftItems (copy), recentlyLeftSignalsModule (copy)
 			local players = playersService:GetPlayers()
-			table.sort(players, function(p2, p3) --[[ line: 19 ]]
-				return p2.Name:lower() < p3.Name:lower()
+			table.sort(players, function(p7, p8) --[[ line: 63 ]]
+				return p7.Name:lower() < p8.Name:lower()
 			end)
 			local t = {}
+			local t_1 = {}
 			
 			for i, v in ipairs(players) do
 				if not localPlayer or v.UserId ~= localPlayer.UserId then
+					if fFlagAbuseReportInExpPlayerListV3 then
+						t_1[tostring(v.UserId)] = true
+					end
 					table.insert(t, {
 						leading = { type = accessoryType.Avatar, userId = v.UserId },
 						id = tostring(v.UserId),
@@ -27,14 +56,17 @@ return function() --[[ line: 15 | named "getUsers" ]]
 					})
 				end
 			end
+			if fFlagAbuseReportInExpPlayerListV3 then
+				appendRecentlyLeftItems(t, t_1, recentlyLeftSignalsModule.getRecentlyLeft())
+			end
 			return t
 		end)
 		
 		if ok then
-			p0(status)
+			p5(status)
 			
 			return
 		end
-		p1(status)
+		p6(status)
 	end)
 end

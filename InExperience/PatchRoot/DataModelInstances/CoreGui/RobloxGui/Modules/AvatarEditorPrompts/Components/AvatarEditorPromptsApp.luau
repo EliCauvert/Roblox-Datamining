@@ -19,7 +19,6 @@ local setFavoritePromptModule = require(prompts.SetFavoritePrompt)
 local deleteOutfitPromptModule = require(prompts.DeleteOutfitPrompt)
 local renameOutfitPromptModule = require(prompts.RenameOutfitPrompt)
 local updateOutfitPromptModule = require(prompts.UpdateOutfitPrompt)
-local fFlagAXAvatarTimeoutFlowIE = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXAvatarTimeoutFlowIE
 local localPlayer = playersService.LocalPlayer
 local parent = script.Parent.Parent
 local promptTypeModule = require(parent.PromptType)
@@ -42,25 +41,22 @@ local t_1 = {
 	[promptTypeModule.SetFavorite] = setFavoritePromptModule,
 	[promptTypeModule.DeleteOutfit] = deleteOutfitPromptModule,
 	[promptTypeModule.RenameOutfit] = renameOutfitPromptModule,
-	[promptTypeModule.UpdateOutfit] = updateOutfitPromptModule
+	[promptTypeModule.UpdateOutfit] = updateOutfitPromptModule,
+	[promptTypeModule.SaveAvatarTimeout] = saveAvatarTimeoutPromptModule
 }
-
-if fFlagAXAvatarTimeoutFlowIE then
-	t_1[promptTypeModule.SaveAvatarTimeout] = saveAvatarTimeoutPromptModule
-end
 local avatarEditorPromptsApp = roactModule.PureComponent:extend("AvatarEditorPromptsApp")
 avatarEditorPromptsApp.validateProps = tModule.strictInterface({
 	promptType = tModule.optional(tModule.userdata),
 	screenSizeUpdated = tModule.callback
 })
 
-function avatarEditorPromptsApp.init(p0) --[[ line: 75 ]]
+function avatarEditorPromptsApp.init(p0) --[[ line: 70 ]]
 	-- upvalues: t (ref), userInputService (ref), roactGamepadModule (ref)
 	p0:setState({
 		isGamepad = t[userInputService:GetLastInputType()] or false
 	})
 	
-	function p0.absoluteSizeChanged(p1) --[[ line: 80 ]]
+	function p0.absoluteSizeChanged(p1) --[[ line: 75 ]]
 		-- upvalues: p0 (ref)
 		p0.props.screenSizeUpdated(p1.AbsoluteSize)
 	end
@@ -70,7 +66,7 @@ function avatarEditorPromptsApp.init(p0) --[[ line: 75 ]]
 	p0.selectedGuiObject = nil
 end
 
-function avatarEditorPromptsApp.render(p2) --[[ line: 90 ]]
+function avatarEditorPromptsApp.render(p2) --[[ line: 85 ]]
 	-- upvalues: t_1 (ref), roactModule (ref), connectionModule (ref), externalEventConnection (ref), userInputService (ref), t (ref), roactGamepadModule (ref)
 	local var24 = nil
 	
@@ -93,7 +89,7 @@ function avatarEditorPromptsApp.render(p2) --[[ line: 90 ]]
 		Connection = roactModule.createElement(connectionModule),
 		LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService.LastInputTypeChanged,
-			callback = function(p3) --[[ line: 115 ]]
+			callback = function(p3) --[[ line: 110 ]]
 				-- upvalues: p2 (ref), t (copy)
 				p2:setState({ isGamepad = t[p3] or false })
 			end
@@ -106,7 +102,7 @@ function avatarEditorPromptsApp.render(p2) --[[ line: 90 ]]
 	})
 end
 
-function avatarEditorPromptsApp.revertSelectedGuiObject(p4) --[[ line: 133 ]]
+function avatarEditorPromptsApp.revertSelectedGuiObject(p4) --[[ line: 128 ]]
 	-- upvalues: localPlayer (ref), coreGuiService (ref), guiService (ref)
 	local playerGui = localPlayer and localPlayer:FindFirstChildWhichIsA("PlayerGui")
 	
@@ -122,7 +118,7 @@ function avatarEditorPromptsApp.revertSelectedGuiObject(p4) --[[ line: 133 ]]
 	p4.selectedGuiObject = nil
 end
 
-function avatarEditorPromptsApp.didUpdate(p5, p6, p7) --[[ line: 149 ]]
+function avatarEditorPromptsApp.didUpdate(p5, p6, p7) --[[ line: 144 ]]
 	-- upvalues: guiService (ref)
 	local var26 = p5.state.isGamepad and p5.props.promptType ~= nil
 	
@@ -143,18 +139,18 @@ function avatarEditorPromptsApp.didUpdate(p5, p6, p7) --[[ line: 149 ]]
 	end
 end
 
-function avatarEditorPromptsApp.willUnmount(p8) --[[ line: 168 ]]
+function avatarEditorPromptsApp.willUnmount(p8) --[[ line: 163 ]]
 	if p8.state.isGamepad then
 		p8:revertSelectedGuiObject()
 	end
 end
 
-return roactRoduxModule.connect(function(p9) --[[ line: 174 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p9) --[[ line: 169 | named "mapStateToProps" ]]
 	return { promptType = p9.promptInfo.promptType }
-end, function(p10) --[[ line: 180 | named "mapDispatchToProps" ]]
+end, function(p10) --[[ line: 175 | named "mapDispatchToProps" ]]
 	-- upvalues: screenSizeUpdatedModule (ref)
 	return {
-		screenSizeUpdated = function(p11) --[[ line: 182 ]]
+		screenSizeUpdated = function(p11) --[[ line: 177 ]]
 			-- upvalues: p10 (ref), screenSizeUpdatedModule (copy)
 			return p10(screenSizeUpdatedModule(p11))
 		end

@@ -8,19 +8,22 @@ local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
 local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
+local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p0) --[[ line: 19 | named "FlyoutReportLogs" ]]
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), foundationModule (ref), buttonVariant (ref), buttonSize (ref)
+return function(p0) --[[ line: 22 | named "FlyoutReportLogs" ]]
+	-- upvalues: useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), foundationModule (ref), buttonVariant (ref), buttonSize (ref)
 	local var4 = useRoactService(appEventIngestService)
 	
 	return reactModule.createElement(foundationModule.Button, {
 		isDisabled = false,
-		text = useLocalization({ text = "CommonUI.Features.Label.ReportLogs" }).text,
+		text = useLocalization({
+			text = if fFlagCTAChangeMorePageFlyoutButtonText then "CommonUI.Features.Label.ReportLogsSentenceCase" else "CommonUI.Features.Label.ReportLogs"
+		}).text,
 		variant = buttonVariant.Standard,
 		LayoutOrder = p0.layoutOrder,
 		size = buttonSize.Large,
 		width = UDim.new(1, 0),
-		onActivated = reactModule.useCallback(function() --[[ line: 21 ]]
+		onActivated = reactModule.useCallback(function() --[[ line: 24 ]]
 			-- upvalues: p0 (ref), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var4 (ref)
 			p0.closeDrawer()
 			

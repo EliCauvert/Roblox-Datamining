@@ -8,29 +8,28 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconVariant = foundationModule.Enums.IconVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 32 | named "UserFeedback" ]]
-	-- upvalues: reactModule (ref), iconVariant (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
+return function(p0) --[[ line: 34 | named "UserFeedback" ]]
+	-- upvalues: iconVariant (ref), reactModule (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
 	local testId = p0.testId or "user-feedback"
 	local onActivated = p0.onActivated
-	local var3, var4 = reactModule.useState(nil)
+	local selectedAction = p0.selectedAction
 	local t = {}
 	
 	for i, v in p0.icons do
-		t[`{v.iconName}-{i}`] = reactModule.createElement(iconButton, {
+		t[v.testId or `{v.iconName}-{i}`] = reactModule.createElement(iconButton, {
 			LayoutOrder = i,
-			icon = if var3 == v.action then { name = v.iconName, variant = iconVariant.Filled } else v.iconName,
+			icon = if selectedAction == v.action then { name = v.iconName, variant = iconVariant.Filled } else v.iconName,
 			isDisabled = v.isDisabled,
-			onActivated = function() --[[ line: 49 ]]
-				-- upvalues: var3 (ref), v (ref), var4 (ref), onActivated (ref)
-				if var3 == v.action and v.allowRepeatedActivation ~= true then
+			onActivated = function() --[[ line: 52 ]]
+				-- upvalues: selectedAction (ref), v (ref), onActivated (ref)
+				if selectedAction == v.action and v.allowRepeatedActivation ~= true then
 					return
 				end
-				var4(v.action)
 				onActivated(v)
 			end,
 			size = inputSize.Small,
 			variant = buttonVariant.Utility,
-			testId = `{testId}-{v.iconName}`
+			testId = v.testId or `{testId}-{v.iconName}`
 		})
 	end
 	return reactModule.createElement(view, {

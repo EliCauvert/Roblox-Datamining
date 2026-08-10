@@ -5,6 +5,7 @@ return {
 	["jest.config"] = script["jest.config"],
 	createDataResolver = require(script.createDataResolver),
 	createDataCache = require(script.createDataCache),
+	createMutationLayer = require(script.createMutationLayer),
 	DataHydrationTypes = dataHydrationTypesModule,
 	DataHydrationUtils = require(script.DataHydrationUtils),
 	DataStatus = dataHydrationTypesModule.DataStatus,
@@ -24,5 +25,6 @@ return {
 	MarketplaceBundle = require(script.MarketplaceBundle),
 	MarketplaceLook = require(script.MarketplaceLook),
 	Song = require(script.Song),
+	UserSettings = require(script.UserSettings),
 	UserProfile = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then require(script.UserProfile) else nil else nil
 }

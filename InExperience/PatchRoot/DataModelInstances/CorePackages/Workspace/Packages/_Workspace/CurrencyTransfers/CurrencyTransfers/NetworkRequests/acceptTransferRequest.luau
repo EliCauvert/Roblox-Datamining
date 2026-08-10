@@ -18,23 +18,18 @@ end
 
 local var6 = tModule.strictInterface({ transferRequestId = tModule.string })
 
-return function(p1, p2) --[[ line: 31 | named "acceptTransferRequest" ]]
+return function(p1, p2, p3) --[[ line: 31 | named "acceptTransferRequest" ]]
 	-- upvalues: var6 (ref), httpRequestModule (ref), urlBuilder (ref), urlBase (ref), acceptTransferModelModule (ref), promiseModule (ref)
 	assert(var6(p1))
 	
-	return httpRequestModule.new(p2):post(urlBuilder.new({
+	return (if p3 ~= nil then httpRequestModule.new(p2) else httpRequestModule.fromNetworkImpl(p3)):post(urlBuilder.new({
 		base = urlBase.APIS,
 		path = `transfer/v1/robux-transfer/accept-transfer/{p1.transferRequestId}`
-	})(), { recipientId = 0 }):andThen(function(p4) --[[ line: 37 ]]
+	})(), { recipientId = 0 }):andThen(function(p5) --[[ line: 39 ]]
 		-- upvalues: acceptTransferModelModule (copy)
-		local var7 = acceptTransferModelModule.format(p4)
-		print("[acceptTransferRequest] Formatted result:", var7)
-		
-		return var7
-	end):catch(function(p3) --[[ line: 42 ]]
+		return acceptTransferModelModule.format(p5)
+	end):catch(function(p4) --[[ line: 42 ]]
 		-- upvalues: promiseModule (copy)
-		print("[acceptTransferRequest] Error response:", p3)
-		
-		return promiseModule.reject(p3)
+		return promiseModule.reject(p4)
 	end)
 end

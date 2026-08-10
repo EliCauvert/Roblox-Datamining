@@ -12,52 +12,84 @@ return {
 		}, { Child = p0 })
 	end,
 	NativePurchaseFinishedWithLocalPlayer = {
-		new = function() --[[ line: 33 ]]
+		new = function() --[[ line: 39 ]]
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function() --[[ line: 36 ]]
+				getSignal = function() --[[ line: 42 ]]
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p1, p2) --[[ line: 39 ]]
+				fire = function(p1, p2) --[[ line: 45 ]]
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p1, p2)
 				end
 			}
 		end
 	},
-	NativePurchaseFinished = {
-		new = function() --[[ line: 45 ]]
+	NativePurchaseFinishedWithLocalPlayerV2 = {
+		new = function() --[[ line: 51 ]]
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function() --[[ line: 48 ]]
+				getSignal = function() --[[ line: 54 ]]
 					-- upvalues: bindableEvent (ref)
 					return bindableEvent.Event
 				end,
-				fire = function(p3, p4, p5) --[[ line: 51 ]]
+				fire = function(p3, p4, p5) --[[ line: 57 ]]
 					-- upvalues: bindableEvent (ref)
 					bindableEvent:Fire(p3, p4, p5)
 				end
 			}
 		end
 	},
-	LocalPlayerHasRobloxSubscription = {
+	NativePurchaseFinished = {
 		new = function() --[[ line: 63 ]]
 			local bindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				HasRobloxSubscription = false,
-				GetPropertyChangedSignal = function(_, p6) --[[ line: 67 ]]
+				getSignal = function() --[[ line: 66 ]]
 					-- upvalues: bindableEvent (ref)
-					assert(p6 == "HasRobloxSubscription", "Invalid property name")
+					return bindableEvent.Event
+				end,
+				fire = function(p6, p7, p8) --[[ line: 69 ]]
+					-- upvalues: bindableEvent (ref)
+					bindableEvent:Fire(p6, p7, p8)
+				end
+			}
+		end
+	},
+	NativePurchaseFinishedV2 = {
+		new = function() --[[ line: 81 ]]
+			local bindableEvent = Instance.new("BindableEvent")
+			
+			return {
+				getSignal = function() --[[ line: 84 ]]
+					-- upvalues: bindableEvent (ref)
+					return bindableEvent.Event
+				end,
+				fire = function(p9, p10, p11, p12) --[[ line: 87 ]]
+					-- upvalues: bindableEvent (ref)
+					bindableEvent:Fire(p9, p10, p11, p12)
+				end
+			}
+		end
+	},
+	LocalPlayerHasRobloxSubscription = {
+		new = function() --[[ line: 99 ]]
+			local bindableEvent = Instance.new("BindableEvent")
+			
+			return {
+				HasRobloxSubscription = false,
+				GetPropertyChangedSignal = function(_, p13) --[[ line: 103 ]]
+					-- upvalues: bindableEvent (ref)
+					assert(p13 == "HasRobloxSubscription", "Invalid property name")
 					
 					return bindableEvent.Event
 				end,
-				setHasRobloxSubscription = function(value, p7) --[[ line: 71 ]]
+				setHasRobloxSubscription = function(value, p14) --[[ line: 107 ]]
 					-- upvalues: bindableEvent (ref)
-					value.HasRobloxSubscription = p7
+					value.HasRobloxSubscription = p14
 					bindableEvent:Fire()
 				end
 			}

@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("AppChatUseNewSelectChatMembersIxpLayer2", "Party.ChatMembersPage")

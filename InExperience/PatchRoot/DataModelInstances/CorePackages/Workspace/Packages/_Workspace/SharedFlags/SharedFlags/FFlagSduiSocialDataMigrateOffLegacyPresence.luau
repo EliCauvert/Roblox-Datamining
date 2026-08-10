@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SduiSocialDataMigrateOffLegacyPresence", false) and require(script.Parent.FFlagFriendsStoreSortOnlineFriendsByRank)

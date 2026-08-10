@@ -29,7 +29,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 53 | 
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), useCloseAffordanceVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), iconModule (ref), builderIconsModule (ref), iconVariant (ref)
 	local var13 = withDefaultsModule(p0, t)
 	local var14 = useTokensModule()
-	local var15 = useCloseAffordanceVariantsModule(var14, var13.size, var13.variant, usePresentationContext().colorMode, var13.hasPadding, var13.isCircular)
+	local var15 = useCloseAffordanceVariantsModule(var14, var13.size, var13.variant, usePresentationContext().colorNamespace, var13.hasPadding, var13.isCircular)
 	local uDim = UDim.new(0, var15.container.radius)
 	
 	return reactModule.createElement(viewModule, withCommonPropsModule(var13, {

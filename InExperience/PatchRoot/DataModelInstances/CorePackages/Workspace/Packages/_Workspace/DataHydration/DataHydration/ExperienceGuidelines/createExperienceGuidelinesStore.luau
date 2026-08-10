@@ -22,11 +22,21 @@ return function(p0) --[[ line: 20 | named "createExperienceGuidelinesStore" ]]
 	return {
 		getDetailedGuidelines = var5.get,
 		fetchDetailedGuidelines = var5.fetch,
+		refreshDetailedGuidelines = function(p3) --[[ line: 33 ]]
+			-- upvalues: fetchExperienceGuidelinesModule (copy), t (ref), var5 (ref), syncGuidelinesAgeToGameStores (copy)
+			return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p3, t):andThen(function(p4) --[[ line: 36 ]]
+				-- upvalues: var5 (copy), p3 (ref), syncGuidelinesAgeToGameStores (copy)
+				var5.cache.replaceItem(tostring(p3), p4)
+				syncGuidelinesAgeToGameStores(p3, p4)
+				
+				return p4
+			end)
+		end,
 		getAndFetchDetailedGuidelines = var5.getAndFetch,
-		updateDetailedGuidelines = function(p3, p4) --[[ line: 37 ]]
+		updateDetailedGuidelines = function(p5, p6) --[[ line: 48 ]]
 			-- upvalues: var5 (ref), syncGuidelinesAgeToGameStores (copy)
-			var5.update(p3, p4)
-			syncGuidelinesAgeToGameStores(p3, p4)
+			var5.update(p5, p6)
+			syncGuidelinesAgeToGameStores(p5, p6)
 		end,
 		clear = var5.clear,
 		dispose = var5.dispose

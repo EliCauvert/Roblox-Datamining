@@ -1,7 +1,7 @@
 ﻿local _ = require(script.Parent.Parent.types)
 
 return {
-	awaitRequestState = function(p0, p1) --[[ line: 11 ]]
+	awaitRequestState = function(p0, p1) --[[ line: 10 ]]
 		while p0(false).status == "pending" do
 			if p1 > os.clock() then
 				task.wait()
@@ -11,13 +11,13 @@ return {
 		end
 		return p0(false)
 	end,
-	awaitRequestStateCancelled = function(p2, p3) --[[ line: 21 ]]
+	awaitRequestStateCancelled = function(p2, p3) --[[ line: 20 ]]
 		while p2(false).status == "pending" and not p3() do
 			task.wait()
 		end
 		return p2(false)
 	end,
-	getMaxHistorySequenceId = function(a) --[[ line: 31 ]]
+	getMaxHistorySequenceId = function(a) --[[ line: 30 ]]
 		local var0 = nil
 		
 		for i, v in a do
@@ -29,17 +29,17 @@ return {
 		end
 		return var0
 	end,
-	getSessionLoadHistory = function(p4) --[[ line: 42 ]]
+	getSessionLoadHistory = function(p4) --[[ line: 41 ]]
 		local var1 = if p4 ~= nil then nil else p4.history
 		
 		return if typeof(var1) == "table" then var1 else {}
 	end,
-	getNextHistoryPageToken = function(p5) --[[ line: 47 ]]
+	getNextHistoryPageToken = function(p5) --[[ line: 46 ]]
 		local var2 = if p5 ~= nil then nil else p5.nextHistoryPageToken
 		
 		return if typeof(var2) == "string" and var2 ~= "" then var2 else nil
 	end,
-	collectSequenceIds = function(p6) --[[ line: 52 ]]
+	collectSequenceIds = function(p6) --[[ line: 51 ]]
 		local t = {}
 		
 		for i, v in p6 do
@@ -51,7 +51,7 @@ return {
 		end
 		return t
 	end,
-	historyOverlapsSequenceIds = function(p7, p8) --[[ line: 63 ]]
+	historyOverlapsSequenceIds = function(p7, p8) --[[ line: 62 ]]
 		for i, v in p7 do
 			local sequenceId = v.sequenceId
 			
@@ -61,7 +61,7 @@ return {
 		end
 		return false
 	end,
-	appendUniqueHistoryBySequenceId = function(p9, p10, p11) --[[ line: 73 ]]
+	appendUniqueHistoryBySequenceId = function(p9, p10, p11) --[[ line: 72 ]]
 		local var4 = 0
 		
 		for i, v in p10 do
@@ -77,13 +77,13 @@ return {
 		end
 		return var4
 	end,
-	cloneHistoryBySequenceId = function(p12) --[[ line: 92 ]]
+	cloneHistoryBySequenceId = function(p12) --[[ line: 91 ]]
 		return table.clone(p12)
 	end,
-	resolveNonNegativeNumber = function(p13, p14) --[[ line: 96 ]]
+	resolveNonNegativeNumber = function(p13, p14) --[[ line: 95 ]]
 		return if typeof(p13) == "number" and p13 >= 0 then p13 else p14
 	end,
-	resolvePositiveNumber = function(p15, p16) --[[ line: 103 ]]
+	resolvePositiveNumber = function(p15, p16) --[[ line: 102 ]]
 		return if typeof(p15) == "number" and p15 > 0 then p15 else p16
 	end
 }

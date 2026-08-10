@@ -1,7 +1,6 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local coreGuiService = game:GetService("CoreGui")
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local fFlagRenameDeprecatedUIBloxTokens = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local reactModule = require(corePackagesService.Packages.React)
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
@@ -15,21 +14,21 @@ local useScreenSizeModule = require(coreGuiService.RobloxGui.Modules.Common.Hook
 local experienceService = require(corePackagesService.Workspace.Packages.ExperienceService).ExperienceService
 local closeOverlayModule = require(script.Parent.Parent.Actions.CloseOverlay)
 
-return function(p0) --[[ line: 34 | named "AttributionTraversal" ]]
-	-- upvalues: useDispatch (ref), useScreenSizeModule (ref), useStyle (ref), reactModule (ref), closeOverlayModule (ref), experienceService (ref), useSelector (ref), interactiveAlert (ref), robloxTranslatorModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref), imageSetLabel (ref), styledTextLabel (ref), buttonType (ref)
+return function(p0) --[[ line: 32 | named "AttributionTraversal" ]]
+	-- upvalues: useDispatch (ref), useScreenSizeModule (ref), useStyle (ref), reactModule (ref), closeOverlayModule (ref), experienceService (ref), useSelector (ref), interactiveAlert (ref), robloxTranslatorModule (ref), imageSetLabel (ref), styledTextLabel (ref), buttonType (ref)
 	local var7 = useDispatch()
 	local var8 = useScreenSizeModule()
 	local var9 = useStyle()
-	local var10 = reactModule.useCallback(function() --[[ line: 39 ]]
+	local var10 = reactModule.useCallback(function() --[[ line: 37 ]]
 		-- upvalues: var7 (ref), closeOverlayModule (copy)
 		var7(closeOverlayModule())
 	end, { var7 })
-	local var11 = reactModule.useCallback(function() --[[ line: 43 ]]
+	local var11 = reactModule.useCallback(function() --[[ line: 41 ]]
 		-- upvalues: p0 (ref), experienceService (copy), var7 (ref), closeOverlayModule (copy)
 		experienceService:LaunchExperience({ placeId = p0.rootPlaceId })
 		var7(closeOverlayModule())
 	end, { var7, p0.rootPlaceId })
-	local var12 = useSelector(function(p1) --[[ line: 52 ]]
+	local var12 = useSelector(function(p1) --[[ line: 50 ]]
 		return p1.locale
 	end)
 	local theme = var9.Theme
@@ -39,8 +38,8 @@ return function(p0) --[[ line: 34 | named "AttributionTraversal" ]]
 	return reactModule.createElement(interactiveAlert, {
 		isMiddleContentFocusable = false,
 		title = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Attribution.GoToExperience", var12),
-		middleContent = function() --[[ line: 62 ]]
-			-- upvalues: reactModule (copy), fFlagRenameDeprecatedUIBloxTokens (copy), var9 (ref), theme (ref), imageSetLabel (copy), p0 (ref), styledTextLabel (copy), robloxTranslatorModule (copy), var12 (ref), name (ref), font (ref)
+		middleContent = function() --[[ line: 60 ]]
+			-- upvalues: reactModule (copy), var9 (ref), theme (ref), imageSetLabel (copy), p0 (ref), styledTextLabel (copy), robloxTranslatorModule (copy), var12 (ref), name (ref), font (ref)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -51,7 +50,7 @@ return function(p0) --[[ line: 34 | named "AttributionTraversal" ]]
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var9.Tokens.Size.Size_300 else var9.Tokens.Global.Space_150)
+					Padding = UDim.new(0, var9.Tokens.Size.Size_300)
 				}),
 				ExperienceThumbnailFrame = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
@@ -69,9 +68,7 @@ return function(p0) --[[ line: 34 | named "AttributionTraversal" ]]
 						Image = string.format("rbxthumb://type=GameIcon&id=%s&w=%d&h=%d", tostring(p0.universeId), 150, 150),
 						Size = UDim2.fromScale(1, 1)
 					}, {
-						RoundCorner = reactModule.createElement("UICorner", {
-							CornerRadius = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var9.Tokens.Radius.Medium else var9.Tokens.Semantic.Radius.Medium)
-						})
+						RoundCorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var9.Tokens.Radius.Medium) })
 					})
 				}),
 				BodyText = reactModule.createElement(styledTextLabel, {

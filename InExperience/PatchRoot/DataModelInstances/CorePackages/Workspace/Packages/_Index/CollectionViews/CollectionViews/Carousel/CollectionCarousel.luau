@@ -23,13 +23,9 @@ local useCollectionLayoutModule = require(collectionViews.CollectionLayoutStore.
 local compositionTags = require(parent.AppComposition).CompositionTags
 local calculateCarouselSpacingMetricsModule = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagRenameDeprecatedUIBloxTokens = sharedFlagsModule.FFlagRenameDeprecatedUIBloxTokens
-local fFlagLuaAppCompositionSupport = sharedFlagsModule.FFlagLuaAppCompositionSupport
 local fFlagCollectionViewMathChanges = sharedFlagsModule.FFlagCollectionViewMathChanges
 local fFlagLuaAppEnableVRCarouselScrolling = sharedFlagsModule.FFlagLuaAppEnableVRCarouselScrolling
-local fFlagSduiCarouselHoverFixes = sharedFlagsModule.FFlagSduiCarouselHoverFixes
 local fFlagLuaAppFixCarouselPeekInControl = sharedFlagsModule.FFlagLuaAppFixCarouselPeekInControl
-local fFlagLuaAppHideCarouselSubtitleChevron = sharedFlagsModule.FFlagLuaAppHideCarouselSubtitleChevron
 local var17 = tModule.strictInterface({
 	testId = tModule.optional(tModule.string),
 	Position = tModule.optional(tModule.UDim2),
@@ -37,7 +33,7 @@ local var17 = tModule.strictInterface({
 	containerRef = tModule.optional(tModule.union(tModule.table, tModule.callback)),
 	scrollingFrameRef = tModule.optional(tModule.table),
 	onScrollingFrameRefCallback = tModule.optional(tModule.callback),
-	numColumns = if fFlagLuaAppCompositionSupport then tModule.optional(tModule.number) else tModule.number,
+	numColumns = tModule.optional(tModule.number),
 	fractionalItemAmount = tModule.optional(tModule.number),
 	items = tModule.table,
 	renderItem = tModule.callback,
@@ -68,9 +64,9 @@ local var17 = tModule.strictInterface({
 	onScrollButtonLeave = tModule.optional(tModule.callback),
 	AutomaticSize = tModule.optional(tModule.enum(Enum.AutomaticSize)),
 	headerComponent = tModule.optional(tModule.table),
-	collectionItemSize = if fFlagLuaAppCompositionSupport then tModule.optional(tModule.string) else nil,
-	enableHoverOverflow = if fFlagLuaAppCompositionSupport then tModule.optional(tModule.boolean) else nil,
-	hideSubtitleChevron = if fFlagLuaAppHideCarouselSubtitleChevron then tModule.optional(tModule.boolean) else nil
+	collectionItemSize = tModule.optional(tModule.string),
+	enableHoverOverflow = tModule.optional(tModule.boolean),
+	hideSubtitleChevron = tModule.optional(tModule.boolean)
 })
 local t = {
 	numColumns = 0,
@@ -79,12 +75,12 @@ local t = {
 	sideMargin = 0
 }
 
-local function _(p0, p1) --[[ line: 224 | named "isScrollingEnabled" ]]
+local function _(p0, p1) --[[ line: 220 | named "isScrollingEnabled" ]]
 	-- upvalues: fFlagLuaAppEnableVRCarouselScrolling (ref)
 	return if p0 == nil then if fFlagLuaAppEnableVRCarouselScrolling then true else not p1 else p0
 end
 
-local _ = function(p2, _, p3, p4, p5) --[[ line: 237 | named "areScrollButtonsEnabled" ]]
+local _ = function(p2, _, p3, p4, p5) --[[ line: 233 | named "areScrollButtonsEnabled" ]]
 	-- upvalues: responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref)
 	if not p3 then
 		return false
@@ -93,15 +89,15 @@ local _ = function(p2, _, p3, p4, p5) --[[ line: 237 | named "areScrollButtonsEn
 		local pointer = responsiveModule.Input.Pointer
 		local _ = p2 == pointer and ((if p2 == pointer then fFlagLuaAppEnableVRCarouselScrolling else nil) and p5)
 		
-		return u461
+		return u438
 	end
 	return p4
 end
 
-return reactModule.memo(function(_) --[[ line: 257 | named "CollectionCarousel" ]]
-	-- upvalues: validateProps (ref), var17 (ref), cryoModule (ref), t (ref), fFlagLuaAppCompositionSupport (ref), useCollectionLayoutModule (ref), fFlagLuaAppFixCarouselPeekInControl (ref), argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), useCollectionSizeBindingsModule (ref), calculateCarouselSpacingMetricsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), fFlagSduiCarouselHoverFixes (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), fFlagLuaAppHideCarouselSubtitleChevron (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
+return reactModule.memo(function(_) --[[ line: 253 | named "CollectionCarousel" ]]
+	-- upvalues: validateProps (ref), var17 (ref), cryoModule (ref), t (ref), useCollectionLayoutModule (ref), fFlagLuaAppFixCarouselPeekInControl (ref), argCheckModule (ref), reactModule (ref), fFlagCollectionViewMathChanges (ref), useLastInput (ref), usePreferredInput (ref), useIsSpatial (ref), responsiveModule (ref), fFlagLuaAppEnableVRCarouselScrolling (ref), useCollectionSizeBindingsModule (ref), calculateCarouselSpacingMetricsModule (ref), useScrollButtonHandlersModule (ref), useCarouselScrollingBindingModule (ref), useDesignTokens (ref), scrollingRowOfCollectionItemsModule (ref), collectionBackgroundMuralModule (ref), maybeForceDarkThemeModule (ref), collectionHeaderModule (ref), compositionTags (ref), carouselScrollButtonsModule (ref)
 -- FATAL: Failed to generate AST for `CollectionCarousel` function:
-runtime : [KeyError] :11990: 105
+runtime : [KeyError] :11990: 104
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

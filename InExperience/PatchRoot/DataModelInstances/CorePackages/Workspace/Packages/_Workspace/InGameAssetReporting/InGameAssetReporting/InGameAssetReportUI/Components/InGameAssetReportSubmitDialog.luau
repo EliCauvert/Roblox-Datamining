@@ -13,11 +13,11 @@ local constantsModule = require(inGameAssetReporting.InGameAssetReportUI.Resourc
 local getPreselectedSurfaceValueModule = require(inGameAssetReporting.Utility.getPreselectedSurfaceValue)
 local _ = require(inGameAssetReporting.Analysis.SceneAnalysis)
 local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
-local fFlagReportIPInfringement = require(parent.SharedFlags).FFlagReportIPInfringement
 local fFlagGenericAbuseReportingGranularExports = require(parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
+local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 
 return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
-	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), fFlagReportIPInfringement (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
+	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagUpdateInGameAssetReportingCTAs (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
 	local var8 = if fFlagPrefillPreciseSelectionChoices then useLocalization({
 		title = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
 		problemBullying = "Feature.ReportAbuse.Problem.Bullying",
@@ -62,7 +62,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 				})
 			end
 		end, { var10 })
-		local var11 = reactModule.useMemo(function() --[[ line: 144 ]]
+		local var11 = reactModule.useMemo(function() --[[ line: 142 ]]
 			-- upvalues: var8 (write)
 			return {
 				{ value = "avatar", label = var8.surfaceAvatar },
@@ -83,7 +83,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 		return reactModule.createElement(defaultDualDropdownDialogV2Module, {
 			title = var8.title,
 			problems = reactModule.useMemo(function() --[[ line: 90 ]]
-				-- upvalues: var8 (write), fFlagReportIPInfringement (copy)
+				-- upvalues: var8 (write)
 				return {
 					{
 						value = "bullying",
@@ -130,11 +130,11 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 						label = var8.problemViolence,
 						description = var8.problemViolenceDesc
 					},
-					if fFlagReportIPInfringement then {
+					{
 						value = "ip infringement",
 						label = var8.problemIPInfringement,
 						description = var8.problemIPInfringementDesc
-					} else nil
+					}
 				}
 			end, {
 				var8.problemBullying, var8.problemBullyingDesc, var8.problemCheating,
@@ -146,7 +146,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 				var8.problemIPInfringement, var8.problemIPInfringementDesc
 			}),
 			surfaces = var11,
-			preselected = reactModule.useMemo(function() --[[ line: 166 ]]
+			preselected = reactModule.useMemo(function() --[[ line: 164 ]]
 				-- upvalues: var9 (ref), var11 (ref)
 				local var12 = nil
 				
@@ -179,7 +179,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 			analyticsContext = "Test",
 			localizationKeys = {
 				formTitle = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
-				formSubmit = "Feature.ReportAbuse.Action.Submit"
+				formSubmit = if fFlagUpdateInGameAssetReportingCTAs then "Feature.ReportAbuse.Label.Report" else "Feature.ReportAbuse.Action.Submit"
 			},
 			onSubmitProps = {
 				hasNextSteps = true,

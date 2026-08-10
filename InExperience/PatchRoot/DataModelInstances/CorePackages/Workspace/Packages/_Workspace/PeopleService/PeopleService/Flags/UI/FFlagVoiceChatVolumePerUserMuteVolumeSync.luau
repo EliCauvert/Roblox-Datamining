@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("VoiceChatVolumePerUserMuteVolumeSync", false) and not game:DefineFastFlag("VoiceChatVolumePerUserDisableInteractionWhenMuted", false)

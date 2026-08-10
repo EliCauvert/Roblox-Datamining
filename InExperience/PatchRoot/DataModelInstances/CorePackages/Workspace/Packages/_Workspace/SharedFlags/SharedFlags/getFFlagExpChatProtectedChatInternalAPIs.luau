@@ -1,6 +1,5 @@
-﻿local var0 = game:DefineFastFlag("ExpChatUseInternalTextChatAPIs", false) and (game:GetEngineFeature("TextChatServiceInternalAPIs2") and game:GetService("TextChatService").EnableProtectedChat == Enum.RolloutState.Enabled)
+﻿game:DefineFastFlag("ExpChatUseInternalTextChatAPIs2", false)
 
-return function() --[[ line: 15 ]]
-	-- upvalues: var0 (ref)
-	return var0
+return function() --[[ line: 12 ]]
+	return game:GetFastFlag("ExpChatUseInternalTextChatAPIs2") and (game:GetEngineFeature("TextChatServiceInternalAPIs2") and (game:GetEngineFeature("TextChatServiceProtectedChatEnabled") and game:GetService("TextChatService"):IsProtectedChatEnabled()))
 end

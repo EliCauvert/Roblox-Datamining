@@ -14,14 +14,13 @@ local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSoc
 local useSocialCarouselLoadTimerModule = require(socialCarousel.Analytics.useSocialCarouselLoadTimer)
 local _ = require(socialCarousel.Analytics.AnalyticsTypes)
 local friendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarouselRefreshThrottleInterval", 3)
-local fFlagLuaAppCompositionSupport = require(parent.SharedFlags).FFlagLuaAppCompositionSupport
 local fFlagLuaAppAddSortDataToSocialCarouselClicks = require(parent.SharedFlags).FFlagLuaAppAddSortDataToSocialCarouselClicks
 local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 local fFlagEnableDesktopGameJoinCard = require(parent.SharedFlags).FFlagEnableDesktopGameJoinCard
 local carouselModule = require(socialCarousel.Components.Carousel)
 
-return function(p0) --[[ line: 55 ]]
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref), fFlagLuaAppCompositionSupport (ref)
+return function(p0) --[[ line: 54 ]]
+	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
 	local var10 = useRoactService(roactAnalytics)
 	local var11 = useRoactService(appEventIngestService)
 	local var12 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
@@ -36,11 +35,11 @@ return function(p0) --[[ line: 55 ]]
 		var16 = var18
 	end
 	local var19 = useSocialCarouselUnifiedLoggingModule(var10, var11, p0.unifiedLogging, var14, var13)
-	local var20 = useThrottledCallback(function() --[[ line: 74 ]]
+	local var20 = useThrottledCallback(function() --[[ line: 73 ]]
 		-- upvalues: var14 (ref)
 		var14.refreshFriendsList()
 	end, friendCarouselRefreshThrottleInterval)
-	reactModule.useEffect(function() --[[ line: 78 ]]
+	reactModule.useEffect(function() --[[ line: 77 ]]
 		-- upvalues: p0 (ref), var20 (ref)
 		if p0.refreshSignal then
 			p0.refreshSignal:connect(var20)
@@ -69,8 +68,6 @@ return function(p0) --[[ line: 55 ]]
 			navigateToQRCodePage = if fFlagSocialCarouselShareQREnabled then p0.navigateToQRCodePage else nil
 		}
 	}, {
-		Carousel = reactModule.createElement(carouselModule, {
-			appCompositionEnabled = if fFlagLuaAppCompositionSupport then p0.appCompositionEnabled else nil
-		})
+		Carousel = reactModule.createElement(carouselModule, { appCompositionEnabled = p0.appCompositionEnabled })
 	})
 end

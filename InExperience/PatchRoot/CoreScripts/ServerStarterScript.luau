@@ -13,6 +13,7 @@ local getFFlagEnableReferredPlayerJoinRemoteEvent = require(corePackagesService.
 local debugLogExpchatMigration = game:DefineFastFlag("DebugLogExpchatMigration", false)
 local fFlagAXEnableInspectAndBuyBulkPurchase = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase
 local fFlagPlatformLeaderboardRccEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled
+local emoteSkinningDisableEnabled = game:DefineFastFlag("EmoteSkinningDisableEnabled", false)
 local robloxGui = coreGuiService:WaitForChild("RobloxGui", 1e999)
 assert(robloxGui ~= nil, "RobloxGui should exist")
 local serverUtilModule = require(robloxGui.Modules.Server.ServerUtil)
@@ -31,6 +32,9 @@ end
 scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerInGameMenu", script.Parent)
 scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerSocialScript", script.Parent)
 
+if emoteSkinningDisableEnabled then
+	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/EmoteSkinningDisable", script.Parent)
+end
 if fFlagPlatformLeaderboardRccEnabled then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerPlatformLeaderboard", script.Parent)
 end
@@ -53,23 +57,23 @@ if getFFlagDisplayServerChannel() then
 	getServerChannel.Name = "GetServerChannel"
 	getServerChannel.Parent = robloxReplicatedStorageService
 end
-local function getServerChannel_1() --[[ line: 111 | named "getServerChannel" ]]
+local function getServerChannel_1() --[[ line: 115 | named "getServerChannel" ]]
 	-- upvalues: runService (ref)
 	return runService:GetRobloxClientChannel()
 end
 
-function getServerVersion.getServerVersion() --[[ line: 90 ]]
+function getServerVersion.getServerVersion() --[[ line: 94 ]]
 	-- upvalues: runService (ref)
 	local robloxVersion = runService:GetRobloxVersion()
-	local var15 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion
+	local var16 = if robloxVersion == "?" then "DEBUG_SERVER" elseif runService:IsStudio() then "ROBLOX Studio" else robloxVersion
 	
-	return if runService:IsStudio() then var15 else string.format("%s (%.6s)", var15, runService.ClientGitHash)
+	return if runService:IsStudio() then var16 else string.format("%s (%.6s)", var16, runService.ClientGitHash)
 end
 
 if getFFlagDisplayServerChannel() then
 	getServerChannel.OnServerInvoke = getServerChannel_1
 end
-if (function() --[[ line: 119 | named "shouldLoadLuaChat" ]]
+if (function() --[[ line: 123 | named "shouldLoadLuaChat" ]]
 	return game:GetService("Chat").LoadDefaultChat and (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService and not game:GetService("GuiService"):IsTenFootInterface())
 end)() then
 	require(game:GetService("CoreGui").RobloxGui.Modules.Server.ClientChat.ChatWindowInstaller)()
@@ -88,7 +92,7 @@ if getFFlagExpChatAlwaysRunTCS() or chatVersion == Enum.ChatVersion.TextChatServ
 	require(corePackagesService.Workspace.Packages.ExpChatServer).mountServerApp({})
 elseif chatVersion == Enum.ChatVersion.LegacyChatService then
 	local chatService = game:GetService("Chat")
-	chatService:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ line: 147 ]]
+	chatService:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ line: 151 ]]
 		-- upvalues: chatService (ref), debugLogExpchatMigration (ref), corePackagesService (ref)
 		if chatService.IsAutoMigrated then
 			if debugLogExpchatMigration then
@@ -103,9 +107,6 @@ if runService:IsStudio() == false then
 end
 if game:DefineFastFlag("VersionedFlags_Dev", false) then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/VersionedFlagTest", script.Parent)
-end
-if require(robloxGui.Modules.Common.Flags.GetFFlagContactListEnabled)() then
-	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerContactList", script.Parent)
 end
 if game:DefineFastFlag("AppBuildReloadRemote", false) then
 	scriptContextService:AddCoreScriptLocal("ServerCoreScripts/ServerBuildExperiencePlaytestTeleport", script.Parent)

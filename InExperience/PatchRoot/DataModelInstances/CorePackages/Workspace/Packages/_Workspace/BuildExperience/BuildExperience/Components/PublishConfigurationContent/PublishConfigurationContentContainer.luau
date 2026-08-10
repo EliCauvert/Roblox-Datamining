@@ -1,0 +1,8 @@
+﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local publishConfigurationContentViewModule = require(script.Parent.PublishConfigurationContentView)
+local usePublishConfigurationContentViewModelModule = require(script.Parent.usePublishConfigurationContentViewModel)
+
+return function(p0) --[[ line: 11 | named "PublishConfigurationContentContainer" ]]
+	-- upvalues: usePublishConfigurationContentViewModelModule (ref), reactModule (ref), publishConfigurationContentViewModule (ref)
+	return reactModule.createElement(publishConfigurationContentViewModule, usePublishConfigurationContentViewModelModule(p0))
+end

@@ -6,9 +6,9 @@ local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetN
 local openCentralOverlayForUpdateRequiredPromptModule = require(robloxAppUpdate.Thunks.OpenCentralOverlayForUpdateRequiredPrompt)
 local updateMessageTypeModule = require(robloxAppUpdate.UpdateMessageType)
 
-return function(p0, p1, p2, p3, p4) --[[ line: 17 ]]
+return function(p0, p1, p2, p3, p4) --[[ line: 18 ]]
 	-- upvalues: dashModule (ref), joinGamePlayButton (ref), setNetworkingErrorToast (ref), openCentralOverlayForUpdateRequiredPromptModule (ref), updateMessageTypeModule (ref)
-	return function(p5) --[[ line: 18 ]]
+	return function(p5) --[[ line: 19 ]]
 		-- upvalues: p0 (ref), p3 (ref), p1 (ref), p4 (ref), dashModule (copy), joinGamePlayButton (copy), p2 (ref), setNetworkingErrorToast (copy), openCentralOverlayForUpdateRequiredPromptModule (copy), updateMessageTypeModule (copy)
 		if p0 == nil then
 			warn("appUpdateImpl is nil")
@@ -18,7 +18,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 17 ]]
 			end
 			return
 		elseif not p1 or p0:canPerformBinaryUpdate() then
-			p0:checkForUpdate():andThen(function(p6) --[[ line: 27 ]]
+			p0:checkForUpdate():andThen(function(p6) --[[ line: 28 ]]
 				-- upvalues: p4 (copy), dashModule (copy), joinGamePlayButton (copy), p2 (copy), p5 (ref), setNetworkingErrorToast (copy), openCentralOverlayForUpdateRequiredPromptModule (copy), p0 (copy), updateMessageTypeModule (copy), p3 (copy)
 				local appUpdateStatus = p6.appUpdateStatus
 				local t = { appUpdateStatus = appUpdateStatus }

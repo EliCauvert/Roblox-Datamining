@@ -1,9 +1,4 @@
 ﻿return {
-	Background2024 = {
-		IMAGE = "rbxasset://textures/ui/LuaApp/graphic/Auth/GridBackground.jpg",
-		ASPECT_RATIO = 1,
-		SCRIM_TRANSPARENCY = 1
-	},
 	Background2026 = {
 		IMAGE = "rbxasset://textures/ui/LuaApp/graphic/Auth/GridBackground_05202026.jpg",
 		ASPECT_RATIO = 1,

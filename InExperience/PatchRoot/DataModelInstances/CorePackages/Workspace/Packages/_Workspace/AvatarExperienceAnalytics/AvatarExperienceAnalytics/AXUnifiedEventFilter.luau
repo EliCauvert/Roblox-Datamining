@@ -5,6 +5,7 @@ local marketplaceUnifiedItemType = unifiedEventLogEnumsModule.MarketplaceUnified
 local widgetUiTreatment = unifiedEventLogEnumsModule.WidgetUiTreatment
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local sendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
+local fFlagAXUnifiedImpressionsOnThumbnail = require(parent.AvatarExperienceFlags).FFlagAXUnifiedImpressionsOnThumbnail
 local AXSendPurchaseAttempt = game:DefineFastFlag("AXSendPurchaseAttempt", false)
 local AXUnifiedFilterWidgetLoadedAndUIImpression = game:DefineFastFlag("AXUnifiedFilterWidgetLoadedAndUIImpression", false)
 local t = {}
@@ -19,19 +20,19 @@ end
 for i_1, v_1 in Enum.AvatarAssetType:GetEnumItems() do
 	t_1.AssetTypeIdStringToName[tostring(v_1.Value)] = v_1.Name
 end
-function t.hasOrganicData(p0) --[[ line: 104 ]]
+function t.hasOrganicData(p0) --[[ line: 107 ]]
 	return p0.assetType or p0.bundleType or (p0.organicItemPrice or p0.organicItemWearAfterPurchase) or (p0.organicItemSaveToMyAvatars or p0.organicAssetIds or p0.organicBundleIds)
 end
 
-function t.hasWidgetData(p1) --[[ line: 120 ]]
+function t.hasWidgetData(p1) --[[ line: 123 ]]
 	return p1.widgetId or p1.widgetType or (p1.assetIds or p1.bundleIds) or (p1.widgetItemIds or p1.organicResultIds or (p1.widgetItemPrice or p1.uiTreatmentType)) or (p1.themeId or p1.widgetItemWearAfterPurchase or p1.widgetItemSaveToMyAvatars)
 end
 
-function t.hasUiElementData(p2) --[[ line: 141 ]]
+function t.hasUiElementData(p2) --[[ line: 144 ]]
 	return p2.elementName
 end
 
-function t.hasItemId(p3) --[[ line: 149 ]]
+function t.hasItemId(p3) --[[ line: 152 ]]
 	-- upvalues: marketplaceUnifiedAction (ref), AXUnifiedFilterWidgetLoadedAndUIImpression (ref)
 	local action = p3.action
 	local itemId = p3.itemId
@@ -39,7 +40,7 @@ function t.hasItemId(p3) --[[ line: 149 ]]
 	return if action == marketplaceUnifiedAction.UNDEFINED_ACTION or action == marketplaceUnifiedAction.UI_ELEMENT_CLICK or action == marketplaceUnifiedAction.WIDGET_IMPRESSION or AXUnifiedFilterWidgetLoadedAndUIImpression and (action == marketplaceUnifiedAction.UI_ELEMENT_IMPRESSION or action == marketplaceUnifiedAction.WIDGET_LOADED) then true else itemId ~= nil and itemId ~= ""
 end
 
-function t.hasValidItemType(p4) --[[ line: 172 ]]
+function t.hasValidItemType(p4) --[[ line: 175 ]]
 	-- upvalues: marketplaceUnifiedItemType (ref), AXUnifiedFilterWidgetLoadedAndUIImpression (ref), marketplaceUnifiedAction (ref)
 	local itemType = p4.itemType
 	
@@ -51,34 +52,34 @@ function t.hasValidItemType(p4) --[[ line: 172 ]]
 	return if itemType ~= marketplaceUnifiedItemType.ASSET then if itemType ~= marketplaceUnifiedItemType.BUNDLE then itemType == marketplaceUnifiedItemType.LOOK else true else true
 end
 
-function t.hasValidAction(p5) --[[ line: 193 ]]
+function t.hasValidAction(p5) --[[ line: 196 ]]
 	-- upvalues: marketplaceUnifiedAction (ref)
 	local action = p5.action
 	
 	return action ~= nil and action ~= marketplaceUnifiedAction.UNDEFINED_ACTION
 end
 
-function t.hasValidSurface(p6) --[[ line: 198 ]]
+function t.hasValidSurface(p6) --[[ line: 201 ]]
 	-- upvalues: unifiedLoggingSurface (ref)
 	local surface = p6.surface
 	
 	return surface ~= nil and surface ~= unifiedLoggingSurface.UNDEFINED_SURFACE
 end
 
-function t.hasRequestIdForWidgetLog(p7) --[[ line: 203 ]]
+function t.hasRequestIdForWidgetLog(p7) --[[ line: 206 ]]
 	-- upvalues: t (ref)
 	return if t.hasWidgetData(p7) then p7.requestId ~= nil and p7.requestId ~= "" else true
 end
 
-function t.hasValidSizeAndPosition(p8) --[[ line: 213 ]]
+function t.hasValidSizeAndPosition(p8) --[[ line: 216 ]]
 	-- upvalues: marketplaceUnifiedAction (ref)
 	local action = p8.action
 	
 	return if action == marketplaceUnifiedAction.ITEM_IMPRESSION or action == marketplaceUnifiedAction.ITEM_SELECTED or (action == marketplaceUnifiedAction.ITEM_DESELECTED or action == marketplaceUnifiedAction.PURCHASE_SUCCESS) then ((p8.screenSizeWidth or 0) > 0 and (p8.screenSizeHeight or 0) > 0) and (((p8.elementSizeWidth or 0) > 0 and (p8.elementSizeHeight or 0) > 0) and ((p8.gridPositionRow or 0) > 0 and (p8.gridPositionColumn or 0) > 0)) elseif action == marketplaceUnifiedAction.WIDGET_IMPRESSION then (p8.gridPositionRow or 0) > 0 and (p8.gridPositionColumn or 0) == 1 else true
 end
 
-function t.hasValidFilter(p9) --[[ line: 248 ]]
-	-- upvalues: marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), unifiedEventLogEnumsModule (ref)
+function t.hasValidFilter(p9) --[[ line: 251 ]]
+	-- upvalues: fFlagAXUnifiedImpressionsOnThumbnail (ref), marketplaceUnifiedAction (ref), unifiedLoggingSurface (ref), unifiedEventLogEnumsModule (ref)
 	local surface = p9.surface
 	local keyword = p9.keyword
 	local category = p9.category
@@ -91,7 +92,9 @@ function t.hasValidFilter(p9) --[[ line: 248 ]]
 	local var6 = true
 	
 	if category == nil or category == "" then
-		var6 = if p9.action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then if p9.action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then p9.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT else true else true
+		if not fFlagAXUnifiedImpressionsOnThumbnail then
+			var6 = if p9.action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then if p9.action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then p9.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT else true else true
+		end
 	elseif subcategory ~= nil and subcategory == "" then
 		var6 = false
 	end
@@ -103,7 +106,7 @@ function t.hasValidFilter(p9) --[[ line: 248 ]]
 	return var7 and (var6 and ((if filterPriceMin and filterPriceMin ~= "" or filterPriceMax and filterPriceMax ~= "" then filterPrice == unifiedEventLogEnumsModule.FiltersPrice.PRICE_RANGE else true) and (if filterCreatorsName and filterCreatorsName ~= "" then filterCreators == unifiedEventLogEnumsModule.FiltersCreators.CREATORS_BY_USERNAME else true)))
 end
 
-function t.hasValidEntityData(p10) --[[ line: 294 ]]
+function t.hasValidEntityData(p10) --[[ line: 297 ]]
 	-- upvalues: unifiedLoggingSurface (ref), AXSendPurchaseAttempt (ref), marketplaceUnifiedAction (ref), t (ref), marketplaceUnifiedItemType (ref), t_1 (ref), widgetUiTreatment (ref)
 	if p10.surface == unifiedLoggingSurface.CUSTOMIZE then
 		return true
@@ -176,7 +179,7 @@ function t.hasValidEntityData(p10) --[[ line: 294 ]]
 	end
 end
 
-function t.filter(p11) --[[ line: 404 ]]
+function t.filter(p11) --[[ line: 407 ]]
 	-- upvalues: t (ref), marketplaceUnifiedAction (ref), sendAXCounterV2Module (ref), unifiedLoggingSurface (ref)
 	local var23 = t.hasItemId(p11)
 	local var24 = t.hasValidItemType(p11)

@@ -2,10 +2,10 @@
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local t = { Light = theme.Light, Dark = theme.Dark }
+local t = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_1 = { Console = device.Console, Desktop = device.Desktop }
 local t_2 = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
@@ -35,7 +35,7 @@ return {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
 					DONOTUSE_colorUpdate = true,
 					styleTable = t_2,
-					theme = t[p1.theme],
+					colorMode = t[p1.theme],
 					device = t_1[p1.platform]
 				}, { Child = reactModule.createElement(p0, p1) })
 			})

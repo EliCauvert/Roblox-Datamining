@@ -3,177 +3,182 @@ local starterGuiService = game:GetService("StarterGui")
 local parent = script.Parent.Parent
 local _ = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
+local expChatTextChannelWindowMinWidth = game:DefineFastInt("ExpChatTextChannelWindowMinWidth", 200)
+local expChatTextChannelWindowMinHeight = game:DefineFastInt("ExpChatTextChannelWindowMinHeight", 200)
 local t = {}
-local t_1 = {}
 
-local function createOverlay(p0, p1) --[[ line: 15 ]]
+local function _(p0) --[[ line: 17 | named "getEffectiveAdornee" ]]
+	if p0.Adornee ~= nil then
+		return p0.Adornee
+	end
+	local parent = p0.Parent
+	
+	return if parent and parent:IsA("BasePart") then parent else nil
+end
+
+local function createOverlay(p1, p2) --[[ line: 28 ]]
 	-- upvalues: coreGuiService (ref)
-	if p1 and p1:IsA("SurfaceGui") then
+	if p2 and p2:IsA("SurfaceGui") then
+		local adornee
 		local surfaceGui = Instance.new("SurfaceGui")
-		surfaceGui.Name = "TextChannelWindowOverlay_" .. p0.Name
+		surfaceGui.Name = "TextChannelWindowOverlay_" .. p1.Name
 		surfaceGui.ResetOnSpawn = false
-		surfaceGui.Adornee = p1.Adornee
-		surfaceGui.Face = p1.Face
-		surfaceGui.SizingMode = p1.SizingMode
-		surfaceGui.CanvasSize = p1.CanvasSize
+		
+		if p2.Adornee == nil then
+			local parent = p2.Parent
+			adornee = if parent and parent:IsA("BasePart") then parent else nil
+		else
+			adornee = p2.Adornee
+		end
+		surfaceGui.Adornee = adornee
+		surfaceGui.Face = p2.Face
+		surfaceGui.SizingMode = p2.SizingMode
+		surfaceGui.CanvasSize = p2.CanvasSize
 		surfaceGui.Parent = coreGuiService
 		
 		return surfaceGui
-	end
-	local screenGui = Instance.new("ScreenGui")
-	screenGui.Name = "TextChannelWindowOverlay_" .. p0.Name
-	screenGui.ResetOnSpawn = false
-	
-	if p1 and p1:IsA("ScreenGui") then
-		screenGui.IgnoreGuiInset = p1.IgnoreGuiInset
-		screenGui.DisplayOrder = -1
-		screenGui.ZIndexBehavior = p1.ZIndexBehavior
 	else
-		screenGui.IgnoreGuiInset = true
-		screenGui.DisplayOrder = -1
-		screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		local screenGui = Instance.new("ScreenGui")
+		screenGui.Name = "TextChannelWindowOverlay_" .. p1.Name
+		screenGui.ResetOnSpawn = false
+		
+		if p2 and p2:IsA("ScreenGui") then
+			screenGui.IgnoreGuiInset = p2.IgnoreGuiInset
+			screenGui.DisplayOrder = -1
+			screenGui.ZIndexBehavior = p2.ZIndexBehavior
+		else
+			screenGui.IgnoreGuiInset = true
+			screenGui.DisplayOrder = -1
+			screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		end
+		screenGui.Parent = coreGuiService
+		
+		return screenGui
 	end
-	screenGui.Parent = coreGuiService
-	
-	return screenGui
 end
 
-local function connectGuiObjectSync(p2, p3, _, p4) --[[ line: 46 ]]
-	local function syncTransform() --[[ line: 52 ]]
-		-- upvalues: p3 (ref), p2 (ref)
-		p3.Position = UDim2.fromOffset(p2.AbsolutePosition.X, p2.AbsolutePosition.Y)
-		p3.Size = UDim2.fromOffset(p2.AbsoluteSize.X, p2.AbsoluteSize.Y)
-		p3.Rotation = p2.Rotation
+local function connectGuiObjectSync(p3, p4, _, p5) --[[ line: 59 ]]
+	local function syncTransform() --[[ line: 65 ]]
+		-- upvalues: p4 (ref), p3 (ref)
+		p4.Position = UDim2.fromOffset(p3.AbsolutePosition.X, p3.AbsolutePosition.Y)
+		p4.Size = UDim2.fromOffset(p3.AbsoluteSize.X, p3.AbsoluteSize.Y)
+		p4.Rotation = p3.Rotation
 	end
 	
-	table.insert(p4, p2:GetPropertyChangedSignal("AbsolutePosition"):Connect(syncTransform))
-	table.insert(p4, p2:GetPropertyChangedSignal("AbsoluteSize"):Connect(syncTransform))
-	table.insert(p4, p2:GetPropertyChangedSignal("Rotation"):Connect(syncTransform))
+	table.insert(p5, p3:GetPropertyChangedSignal("AbsolutePosition"):Connect(syncTransform))
+	table.insert(p5, p3:GetPropertyChangedSignal("AbsoluteSize"):Connect(syncTransform))
+	table.insert(p5, p3:GetPropertyChangedSignal("Rotation"):Connect(syncTransform))
 end
 
-local function connectSurfaceGuiSync(p5, p6, p7) --[[ line: 63 ]]
-	table.insert(p7, p5:GetPropertyChangedSignal("Adornee"):Connect(function() --[[ line: 66 ]]
-		-- upvalues: p6 (ref), p5 (ref)
-		p6.Adornee = p5.Adornee
+local function connectSurfaceGuiSync(p6, p7, p8) --[[ line: 76 ]]
+	local function syncAdornee() --[[ line: 77 ]]
+		-- upvalues: p7 (ref), p6 (ref)
+		local adornee
+		if p6.Adornee == nil then
+			local parent = p6.Parent
+			adornee = if parent and parent:IsA("BasePart") then parent else nil
+		else
+			adornee = p6.Adornee
+		end
+		p7.Adornee = adornee
+	end
+	
+	table.insert(p8, p6:GetPropertyChangedSignal("Adornee"):Connect(syncAdornee))
+	table.insert(p8, p6:GetPropertyChangedSignal("Parent"):Connect(syncAdornee))
+	table.insert(p8, p6:GetPropertyChangedSignal("Face"):Connect(function() --[[ line: 85 ]]
+		-- upvalues: p7 (ref), p6 (ref)
+		p7.Face = p6.Face
 	end))
-	table.insert(p7, p5:GetPropertyChangedSignal("Face"):Connect(function() --[[ line: 72 ]]
-		-- upvalues: p6 (ref), p5 (ref)
-		p6.Face = p5.Face
+	table.insert(p8, p6:GetPropertyChangedSignal("SizingMode"):Connect(function() --[[ line: 91 ]]
+		-- upvalues: p7 (ref), p6 (ref)
+		p7.SizingMode = p6.SizingMode
 	end))
-	table.insert(p7, p5:GetPropertyChangedSignal("SizingMode"):Connect(function() --[[ line: 78 ]]
-		-- upvalues: p6 (ref), p5 (ref)
-		p6.SizingMode = p5.SizingMode
-	end))
-	table.insert(p7, p5:GetPropertyChangedSignal("CanvasSize"):Connect(function() --[[ line: 84 ]]
-		-- upvalues: p6 (ref), p5 (ref)
-		p6.CanvasSize = p5.CanvasSize
+	table.insert(p8, p6:GetPropertyChangedSignal("CanvasSize"):Connect(function() --[[ line: 97 ]]
+		-- upvalues: p7 (ref), p6 (ref)
+		p7.CanvasSize = p6.CanvasSize
 	end))
 end
 
-local function connectScreenGuiSync(p8, p9, p10) --[[ line: 90 ]]
-	table.insert(p10, p8:GetPropertyChangedSignal("IgnoreGuiInset"):Connect(function() --[[ line: 93 ]]
-		-- upvalues: p9 (ref), p8 (ref)
-		p9.IgnoreGuiInset = p8.IgnoreGuiInset
+local function connectScreenGuiSync(p9, p10, p11) --[[ line: 103 ]]
+	table.insert(p11, p9:GetPropertyChangedSignal("IgnoreGuiInset"):Connect(function() --[[ line: 106 ]]
+		-- upvalues: p10 (ref), p9 (ref)
+		p10.IgnoreGuiInset = p9.IgnoreGuiInset
 	end))
-	table.insert(p10, p8:GetPropertyChangedSignal("ZIndexBehavior"):Connect(function() --[[ line: 99 ]]
-		-- upvalues: p9 (ref), p8 (ref)
-		p9.ZIndexBehavior = p8.ZIndexBehavior
+	table.insert(p11, p9:GetPropertyChangedSignal("ZIndexBehavior"):Connect(function() --[[ line: 112 ]]
+		-- upvalues: p10 (ref), p9 (ref)
+		p10.ZIndexBehavior = p9.ZIndexBehavior
 	end))
 end
 
-local function _(p11, p12, p13) --[[ line: 105 | named "connectLayerCollectorSync" ]]
+local _ = function(p12, p13, p14) --[[ line: 118 | named "connectLayerCollectorSync" ]]
 	-- upvalues: connectSurfaceGuiSync (ref), connectScreenGuiSync (ref)
-	if p11 == nil then return end
-	if p11:IsA("SurfaceGui") then
-		connectSurfaceGuiSync(p11, p12, p13)
+	if p12 == nil then return end
+	if p12:IsA("SurfaceGui") then
+		connectSurfaceGuiSync(p12, p13, p14)
 		
 		return
-	elseif p11:IsA("ScreenGui") then
-		connectScreenGuiSync(p11, p12, p13)
+	elseif p12:IsA("ScreenGui") then
+		connectScreenGuiSync(p12, p13, p14)
 	end
 end
 
-local function doMount(p14, p15) --[[ line: 120 ]]
-	-- upvalues: t (ref), createOverlay (ref), reactRobloxModule (ref), connectGuiObjectSync (ref), connectSurfaceGuiSync (ref), connectScreenGuiSync (ref)
-	if not p14:IsA("TextChannelWindow") then
+local function doMount(p15, p16) --[[ line: 133 ]]
+	-- upvalues: t (ref), createOverlay (ref), reactRobloxModule (ref), connectGuiObjectSync (ref), connectSurfaceGuiSync (ref), connectScreenGuiSync (ref), expChatTextChannelWindowMinWidth (ref), expChatTextChannelWindowMinHeight (ref)
+	if not p15:IsA("TextChannelWindow") then
 		return nil
-	elseif t[p14] then
+	elseif t[p15] then
 		return nil
 	end
-	local layerCollector = p14:FindFirstAncestorWhichIsA("LayerCollector")
+	local layerCollector = p15:FindFirstAncestorWhichIsA("LayerCollector")
 	
 	if layerCollector and not layerCollector:IsA("ScreenGui") and not layerCollector:IsA("SurfaceGui") then
 		return nil
 	end
-	local var14 = createOverlay(p14, layerCollector)
+	local var16 = createOverlay(p15, layerCollector)
 	local frame = Instance.new("Frame")
 	frame.BackgroundTransparency = 1
-	frame.Position = UDim2.fromOffset(p14.AbsolutePosition.X, p14.AbsolutePosition.Y)
-	frame.Size = UDim2.fromOffset(p14.AbsoluteSize.X, p14.AbsoluteSize.Y)
-	frame.Rotation = p14.Rotation
-	frame.Parent = var14
-	local var16 = reactRobloxModule.createRoot(frame)
-	var16:render(p15)
+	frame.Position = UDim2.fromOffset(p15.AbsolutePosition.X, p15.AbsolutePosition.Y)
+	frame.Size = UDim2.fromOffset(p15.AbsoluteSize.X, p15.AbsoluteSize.Y)
+	frame.Rotation = p15.Rotation
+	frame.Parent = var16
+	local var18 = reactRobloxModule.createRoot(frame)
+	var18:render(p16)
 	local t_1 = {}
-	connectGuiObjectSync(p14, frame, var14, t_1)
+	connectGuiObjectSync(p15, frame, var16, t_1)
 	
 	if layerCollector ~= nil then
 		if layerCollector:IsA("SurfaceGui") then
-			connectSurfaceGuiSync(layerCollector, var14, t_1)
+			connectSurfaceGuiSync(layerCollector, var16, t_1)
 		elseif layerCollector:IsA("ScreenGui") then
-			connectScreenGuiSync(layerCollector, var14, t_1)
+			connectScreenGuiSync(layerCollector, var16, t_1)
 		end
 	end
-	var14.Enabled = p14.IsRendering
-	table.insert(t_1, p14:GetPropertyChangedSignal("IsRendering"):Connect(function() --[[ line: 155 ]]
-		-- upvalues: var14 (ref), p14 (ref)
-		var14.Enabled = p14.IsRendering
-	end))
+	local function updateEnabled() --[[ line: 165 ]]
+		-- upvalues: var16 (ref), p15 (ref), p15 (ref), expChatTextChannelWindowMinWidth (copy), expChatTextChannelWindowMinHeight (copy)
+		var16.Enabled = p15.IsRendering and (expChatTextChannelWindowMinWidth <= p15.AbsoluteSize.X and expChatTextChannelWindowMinHeight <= p15.AbsoluteSize.Y)
+	end
 	
-	local function unmount() --[[ line: 160 ]]
-		-- upvalues: t_1 (ref), var16 (ref), var14 (ref), t (copy), p14 (ref)
+	var16.Enabled = p15.IsRendering and (expChatTextChannelWindowMinWidth <= p15.AbsoluteSize.X and expChatTextChannelWindowMinHeight <= p15.AbsoluteSize.Y)
+	table.insert(t_1, p15:GetPropertyChangedSignal("IsRendering"):Connect(updateEnabled))
+	table.insert(t_1, p15:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateEnabled))
+	
+	local function unmount() --[[ line: 174 ]]
+		-- upvalues: t_1 (ref), var18 (ref), var16 (ref), t (copy), p15 (ref)
 		for i, v in t_1 do
 			v:Disconnect()
 		end
-		var16:unmount()
-		var14:Destroy()
-		t[p14] = nil
+		var18:unmount()
+		var16:Destroy()
+		t[p15] = nil
 	end
 	
-	table.insert(t_1, p14.Destroying:Connect(unmount))
-	t[p14] = true
+	table.insert(t_1, p15.Destroying:Connect(unmount))
+	t[p15] = true
 	
 	return unmount
 end
 
-return function(p16, p17) --[[ line: 175 | named "mountToTargetInstance" ]]
-	-- upvalues: starterGuiService (ref), t_1 (ref), doMount (ref)
-	if p16:IsDescendantOf(starterGuiService) then
-		return nil
-	elseif p16.AbsoluteSize.X == 0 and p16.AbsoluteSize.Y == 0 then
-		t_1[p16] = true
-		local var19 = nil
-		local destroyingConnection = nil
-		
-		local function cleanup() --[[ line: 188 ]]
-			-- upvalues: var19 (write), destroyingConnection (write), t_1 (copy), p16 (ref)
-			var19:Disconnect()
-			destroyingConnection:Disconnect()
-			t_1[p16] = nil
-		end
-		
-		var19 = p16:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 194 ]]
-			-- upvalues: p16 (ref), var19 (write), destroyingConnection (write), t_1 (copy), p16 (ref), doMount (copy), p17 (ref)
-			if p16.AbsoluteSize.X ~= 0 or p16.AbsoluteSize.Y ~= 0 then
-				var19:Disconnect()
-				destroyingConnection:Disconnect()
-				t_1[p16] = nil
-				doMount(p16, p17)
-			end
-		end)
-		destroyingConnection = p16.Destroying:Connect(cleanup)
-		
-		return nil
-	end
-	return doMount(p16, p17)
+return function(p17, p18) --[[ line: 189 | named "mountToTargetInstance" ]]
+	-- upvalues: starterGuiService (ref), doMount (ref)
+	return if p17:IsDescendantOf(starterGuiService) then nil else doMount(p17, p18)
 end

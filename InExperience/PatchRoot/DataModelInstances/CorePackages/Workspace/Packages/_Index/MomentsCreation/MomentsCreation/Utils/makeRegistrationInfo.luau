@@ -1,7 +1,14 @@
-﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
-local _ = { PrimaryAsset = "PrimaryAsset", Music = "Music" }
+﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
+local _ = require(parent.MomentsTypes)
+local getFFlagMomentsStickerButton = require(parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton
+local _ = {
+	PrimaryAsset = "PrimaryAsset",
+	Music = "Music",
+	Sticker = "Sticker"
+}
 
-return function(p0, p1) --[[ line: 32 | named "makeRegistrationInfo" ]]
+return function(p0, p1) --[[ line: 36 | named "makeRegistrationInfo" ]]
+	-- upvalues: getFFlagMomentsStickerButton (ref)
 	local assetTotalDuration
 	local edits = p1.edits
 	local t = {}
@@ -28,6 +35,17 @@ return function(p0, p1) --[[ line: 32 | named "makeRegistrationInfo" ]]
 			AssetId = edits.music.assetId,
 			TrimStartTime = edits.music.startTime
 		})
+	end
+	if getFFlagMomentsStickerButton() and edits and edits.stickerOverlays then
+		for i, v in edits.stickerOverlays do
+			if v.stickerURI then
+				table.insert(t, {
+					AssetId = 0,
+					Description = "Sticker",
+					Text = v.stickerURI
+				})
+			end
+		end
 	end
 	return {
 		attributes = t,

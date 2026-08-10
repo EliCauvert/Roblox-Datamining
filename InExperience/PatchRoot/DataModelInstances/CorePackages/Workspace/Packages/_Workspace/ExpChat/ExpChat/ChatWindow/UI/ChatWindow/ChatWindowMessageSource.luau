@@ -13,11 +13,11 @@ local fFlagExpChatRewriteInlineModule = require(expChat.Flags.FFlagExpChatRewrit
 local getFFlagChatWindowUseCallbackOptimizationsModule = require(expChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 
-return function(p0) --[[ line: 67 | named "ChatWindowMessageSource" ]]
+return function(p0) --[[ line: 64 | named "ChatWindowMessageSource" ]]
 	-- upvalues: useStableSignal (ref), reactModule (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), getMessagesStoreModule (ref), fFlagExpChatEnableV2ChatWindowModule (ref), useV2MessagePoolModule (ref), fFlagExpChatRewriteInlineModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), createMessageChildrenModule (ref), chatWindowModule (ref), dictionary (ref)
 	local var10, var11 = useStableSignal({})
 	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function(p1) --[[ line: 72 ]]
+	local var13 = reactModule.useCallback(function(p1) --[[ line: 69 ]]
 		-- upvalues: p0 (ref)
 		p0.resetTargetChannel()
 		local var16 = tonumber(p1.userId)
@@ -40,7 +40,7 @@ return function(p0) --[[ line: 67 | named "ChatWindowMessageSource" ]]
 		showTranslationButton = p0.showTranslationButton or false,
 		chatWindowTransparencyBindable = if fFlagExpChatRewriteInlineModule then p0.transparencyValue else nil,
 		selectedChannelName = if getFFlagTextChatEnableUniverseChatTabs() then p0.selectedChannelName else nil
-	}).children else nil else reactModule.useMemo(function() --[[ line: 109 ]]
+	}).children else nil else reactModule.useMemo(function() --[[ line: 106 ]]
 		-- upvalues: fFlagExpChatEnableV2ChatWindowModule (copy), createMessageChildrenModule (copy), p0 (ref), textTransparency (ref), var13 (ref)
 		return if fFlagExpChatEnableV2ChatWindowModule then nil else createMessageChildrenModule({
 			messages = p0.messages or {},

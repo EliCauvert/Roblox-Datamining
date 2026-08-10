@@ -7,81 +7,98 @@ local getIsInExpSceneSelectionAvailableModule = require(script.Parent.getIsInExp
 local layoutSlotsModule = require(genericAbuseReporting.BeduiV2.Components.LayoutSlots)
 local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
+local submitSource = analyticsServiceModule.SubmitSource
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
+local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
-return reactModule.memo(function(p0) --[[ line: 31 | named "InExpSceneSelectionNode" ]]
-	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), textWithTranslationModule (ref)
-	local var8, var9 = reactModule.useState(p0.loadingText)
+return reactModule.memo(function(p0) --[[ line: 39 | named "InExpSceneSelectionNode" ]]
+	-- upvalues: reactModule (ref), useAbuseReportAnalytics (ref), useLayoutSlots (ref), getIsInExpSceneSelectionAvailableModule (ref), telemetryEventType (ref), inExpSceneSelectionAdapterModule (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), submitSource (ref), textWithTranslationModule (ref)
+	local var9, var10 = reactModule.useState(p0.loadingText)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var10 = useLayoutSlots()
-	local layout = var10.Layout
-	local title = var10.Title
-	local var11 = reactModule.useRef(p0)
-	var11.current = p0
-	local var12 = reactModule.useRef(sendEvent)
-	var12.current = sendEvent
-	reactModule.useEffect(function() --[[ line: 46 ]]
-		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var12 (ref), telemetryEventType (copy), var9 (ref), var11 (ref), inExpSceneSelectionAdapterModule (copy)
-		if not getIsInExpSceneSelectionAvailableModule() then
-			var12.current({
+	local var11 = useLayoutSlots()
+	local layout = var11.Layout
+	local title = var11.Title
+	local var12 = reactModule.useRef(p0)
+	var12.current = p0
+	local var13 = reactModule.useRef(sendEvent)
+	var13.current = sendEvent
+	reactModule.useEffect(function() --[[ line: 54 ]]
+		-- upvalues: getIsInExpSceneSelectionAvailableModule (copy), var13 (ref), telemetryEventType (copy), var12 (ref), var10 (ref), inExpSceneSelectionAdapterModule (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+		if getIsInExpSceneSelectionAvailableModule() then
+			local var14 = nil
+			var14 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1) --[[ line: 77 ]]
+				-- upvalues: var14 (write), var13 (copy), telemetryEventType (copy), var12 (copy), fFlagAbuseReportSceneSelectionSubmitTrackingModule (copy), submitSource (copy)
+				var14 = nil
+				var13.current({
+					sub_event_type = telemetryEventType.SceneCaptureResult,
+					scene_capture_detail = { exit_reason = p1.reason, success = p1.reason == "submit" }
+				})
+				local current = var12.current
+				
+				if p1.reason == "submit" then
+					if fFlagAbuseReportSceneSelectionSubmitTrackingModule and current.onExternalSubmit then
+						current.onExternalSubmit(submitSource.SceneSelection)
+					end
+					if current.onNext then
+						current.onNext()
+						
+						return
+					end
+				elseif current.goBack then
+					current.goBack()
+				end
+			end)
+			
+			if not pcall(inExpSceneSelectionAdapterModule.start) then
+				var13.current({
+					sub_event_type = telemetryEventType.SceneCaptureResult,
+					scene_capture_detail = { exit_reason = "start_failed", success = false }
+				})
+				
+				if var14 then
+					var14:Disconnect()
+					var14 = nil
+				end
+				local current = var12.current
+				
+				if current.onFailure then
+					current.onFailure()
+				else
+					var10(current.errorText)
+				end
+			end
+			return function() --[[ line: 122 ]]
+				-- upvalues: var14 (write)
+				if var14 then
+					var14:Disconnect()
+					var14 = nil
+				end
+			end
+		else
+			var13.current({
 				sub_event_type = telemetryEventType.SceneCaptureResult,
 				scene_capture_detail = { exit_reason = "unavailable", success = false }
 			})
-			var9(var11.current.errorText)
+			local current = var12.current
 			
-			return
-		end
-		local var13 = nil
-		var13 = inExpSceneSelectionAdapterModule.subscribeOnceToExitReason(function(p1) --[[ line: 64 ]]
-			-- upvalues: var13 (write), var12 (copy), telemetryEventType (copy), var11 (copy)
-			var13 = nil
-			var12.current({
-				sub_event_type = telemetryEventType.SceneCaptureResult,
-				scene_capture_detail = { exit_reason = p1.reason, success = p1.reason == "submit" }
-			})
-			local current = var11.current
-			
-			if p1.reason == "submit" then
-				if current.onNext then
-					current.onNext()
-					
-					return
-				end
-			elseif current.goBack then
-				current.goBack()
+			if current.onFailure then
+				current.onFailure()
+				
+				return
 			end
-		end)
-		
-		if not pcall(inExpSceneSelectionAdapterModule.start) then
-			var12.current({
-				sub_event_type = telemetryEventType.SceneCaptureResult,
-				scene_capture_detail = { exit_reason = "start_failed", success = false }
-			})
-			var9(var11.current.errorText)
-			
-			if var13 then
-				var13:Disconnect()
-				var13 = nil
-			end
-		end
-		return function() --[[ line: 101 ]]
-			-- upvalues: var13 (write)
-			if var13 then
-				var13:Disconnect()
-				var13 = nil
-			end
+			var10(current.errorText)
 		end
 	end, {})
 	
 	return reactModule.createElement(layout, {
 		body = reactModule.createElement(reactModule.Fragment, nil, {
 			Title = reactModule.createElement(title, { layoutOrder = 1, input = p0.title }),
-			Message = if var8 then reactModule.createElement(textWithTranslationModule, {
+			Message = if var9 then reactModule.createElement(textWithTranslationModule, {
 				tag = "size-full-0 auto-y text-body-small",
 				layoutOrder = 2,
-				input = var8
+				input = var9
 			}) else nil
 		})
 	})

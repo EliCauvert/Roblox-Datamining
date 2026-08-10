@@ -7,7 +7,9 @@ local reactModule = require(parent.React)
 local useLocalization = localizationModule.Hooks.useLocalization
 local momentsCreationModule = require(parent.MomentsCreation)
 local publishMomentWithUpload = momentsCreationModule.publishMomentWithUpload
+local getFFlagEnableMomentTextGenerationModule = require(moments.Flags.GetFFlagEnableMomentTextGeneration)
 local getFFlagMomentsRefreshFromTopAfterUploadModule = require(moments.Flags.GetFFlagMomentsRefreshFromTopAfterUpload)
+local generateMomentTextModule = require(moments.generateMomentText)
 local getUploadStoreModule = require(moments.Stores.GetUploadStore)
 local getToastStoreModule = require(moments.Stores.GetToastStore)
 local t = {
@@ -19,75 +21,93 @@ local t = {
 	failedBody = "Feature.Moments.Label.MomentFailedToPostBody",
 	removedTitle = "Feature.Moments.Title.MomentRemoved",
 	removedBody = "Feature.Moments.Label.PostRemovedBody",
-	uploadQuotaReachedBody = "Feature.Moments.Description.TooManyUploads"
+	uploadQuotaReachedBody = "Feature.Moments.Description.TooManyUploads",
+	generatedTitle = "Feature.Moments.Label.TextGeneratedTitle",
+	generatedBody = "Feature.Moments.Label.TextGeneratedBody",
+	generateFailedTitle = "Feature.Moments.Label.TextGenerationFailedTitle",
+	generateFailedBody = "Feature.Moments.Label.TextGenerationFailedBody"
 }
-local var10 = require(parent.MomentsCommon.isStudio)()
+local var12 = require(parent.MomentsCommon.isStudio)()
 local momentStatus = momentsTypesModule.Enums.MomentStatus
 
-local function makeUploadedMomentItem(p0, p1, p2, p3) --[[ line: 56 ]]
-	-- upvalues: playersService (ref), momentStatus (ref)
-	local var13 = tostring(p0)
+local function makeUploadedMomentItem(p0, p1, p2, p3, p4) --[[ line: 61 ]]
+	-- upvalues: playersService (ref), momentsCreationModule (ref), momentStatus (ref)
 	local localPlayer = playersService.LocalPlayer
 	
 	return {
 		assetId = p0,
 		creatorId = if localPlayer ~= nil then 0 else localPlayer.UserId,
 		metadata = {
-			assetTotalDuration = if p1.CaptureType == Enum.CaptureType.Screenshot then 7 else p1.TimeLength,
+			assetTotalDuration = if p1.CaptureType == Enum.CaptureType.Screenshot then momentsCreationModule.Constants.ScreenshotMusicDuration elseif p4 == nil or p4 <= 0 then p1.TimeLength else p4,
 			captureType = p1.CaptureType,
 			description = p3,
 			edits = p2,
 			placeId = p1.SourcePlaceId,
 			universeId = p1.SourceUniverseId
 		},
-		momentId = var13,
-		recommendationMetadata = { itemId = var13 },
+		momentId = tostring(p0),
+		recommendationMetadata = {},
 		status = momentStatus.Public
 	}
 end
 
-local function makeUploadStore(p4, p5, p6, p7) --[[ line: 80 ]]
+local function makeUploadStore(p5, p6, p7, p8, p9) --[[ line: 91 ]]
 	-- upvalues: getFFlagMomentsRefreshFromTopAfterUploadModule (ref), makeUploadedMomentItem (ref)
 	return if getFFlagMomentsRefreshFromTopAfterUploadModule() then {
-		setUploading = p4.setUploading,
-		setFailed = p4.setFailed,
-		setSuccess = function(value) --[[ line: 88 ]]
-			-- upvalues: p4 (ref), makeUploadedMomentItem (copy), p5 (ref), p6 (ref), p7 (ref)
+		setUploading = p5.setUploading,
+		setFailed = p5.setFailed,
+		setSuccess = function(value) --[[ line: 105 ]]
+			-- upvalues: p5 (ref), makeUploadedMomentItem (copy), p6 (ref), p7 (ref), p8 (ref), p9 (ref)
 			if type(value) == "number" then
-				p4.setSuccess(makeUploadedMomentItem(value, p5, p6, p7))
+				p5.setSuccess(makeUploadedMomentItem(value, p6, p7, p8, p9))
 				
 				return
 			end
-			p4.setSuccess(value)
+			p5.setSuccess(value)
 		end
-	} else p4
+	} else p5
 end
 
-return function(p8) --[[ line: 99 | named "useUploadHost" ]]
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), getUploadStoreModule (ref), getToastStoreModule (ref), momentsCreationModule (ref), var10 (ref), publishMomentWithUpload (ref), makeUploadStore (ref)
-	local onExit = p8.onExit
-	local captureSource = p8.captureSource
-	local var14 = useLocalization(t)
+return function(p10) --[[ line: 116 | named "useUploadHost" ]]
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), getUploadStoreModule (ref), getToastStoreModule (ref), getFFlagEnableMomentTextGenerationModule (ref), generateMomentTextModule (ref), momentsCreationModule (ref), var12 (ref), publishMomentWithUpload (ref), makeUploadStore (ref)
+	local onExit = p10.onExit
+	local captureSource = p10.captureSource
+	local var15 = useLocalization(t)
 	
-	return reactModule.useMemo(function() --[[ line: 105 ]]
-		-- upvalues: getUploadStoreModule (copy), getToastStoreModule (copy), onExit (ref), captureSource (ref), momentsCreationModule (copy), var10 (copy), publishMomentWithUpload (copy), var14 (ref), makeUploadStore (copy)
-		local var15 = getUploadStoreModule(false)
-		local var16 = getToastStoreModule(false)
+	return reactModule.useMemo(function() --[[ line: 122 ]]
+		-- upvalues: getUploadStoreModule (copy), getToastStoreModule (copy), getFFlagEnableMomentTextGenerationModule (copy), onExit (ref), captureSource (ref), generateMomentTextModule (copy), var15 (ref), momentsCreationModule (copy), var12 (copy), publishMomentWithUpload (copy), makeUploadStore (copy)
+		local var16 = getUploadStoreModule(false)
+		local var17 = getToastStoreModule(false)
+		local captureServiceGenerateMomentText = getFFlagEnableMomentTextGenerationModule() and game:GetEngineFeature("CaptureServiceGenerateMomentText")
 		
 		return {
 			exitCreationFlow = onExit,
 			captureSource = captureSource,
+			generateMomentText = if captureServiceGenerateMomentText then generateMomentTextModule else nil,
+			onGenerateTextSuccess = if captureServiceGenerateMomentText then function() --[[ line: 137 ]]
+				-- upvalues: var17 (ref), var15 (copy)
+				var17.triggerToast({ title = var15.generatedTitle, text = var15.generatedBody })
+			end else nil,
+			onGenerateTextFailure = if captureServiceGenerateMomentText then function() --[[ line: 142 ]]
+				-- upvalues: var17 (ref), var15 (copy)
+				var17.triggerToast({
+					title = var15.generateFailedTitle,
+					text = var15.generateFailedBody
+				})
+			end else nil,
 			isTextFiltered = momentsCreationModule.isTextFiltered,
-			createMoment = if var10 then function(_, _, p12) --[[ line: 114 ]]
-				print(`[moments-creation] dev publish (not uploaded): "{p12}"`)
-			end else function(p9, p10, p11) --[[ line: 117 ]]
-				-- upvalues: publishMomentWithUpload (copy), var14 (copy), makeUploadStore (copy), var15 (ref), var16 (ref)
-				publishMomentWithUpload(p9, p10, p11, {
-					localizations = var14,
-					uploadStore = makeUploadStore(var15, p9, p10, p11),
-					toastStore = var16
+			createMoment = if var12 then function(_, _, p16, _, _) --[[ line: 151 ]]
+				print(`[moments-creation] dev publish (not uploaded): "{p16}"`)
+			end else function(p11, p12, p13, p14, p15) --[[ line: 160 ]]
+				-- upvalues: publishMomentWithUpload (copy), var15 (copy), makeUploadStore (copy), var16 (ref), var17 (ref)
+				publishMomentWithUpload(p11, p12, p13, {
+					localizations = var15,
+					uploadStore = makeUploadStore(var16, p11, p12, p13, p15),
+					toastStore = var17,
+					creationSessionId = p14,
+					resolvedTimeLength = p15
 				})
 			end
 		}
-	end, { onExit, captureSource, var14 })
+	end, { onExit, captureSource, var15 })
 end

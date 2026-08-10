@@ -4,7 +4,6 @@ local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
 local useDesignTokens = require(parent.Style).useDesignTokens
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local fullPagePromptModule = require(bulkPurchaseApp.Components.FullPagePrompt)
@@ -33,12 +32,12 @@ local t = {
 	itemOwned = "CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemOwned"
 }
 
-return function(p0) --[[ line: 63 | named "BulkPurchaseRequest" ]]
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref)
+return function(p0) --[[ line: 61 | named "BulkPurchaseRequest" ]]
+	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), localizationRoactContext (ref), reactFocusNavigationModule (ref), fFlagFixVP8143Module (ref), useDesignTokens (ref), itemStatusKeyToLocalizationKeyModule (ref), mapItemsToRowPresentation (ref), fFlagBulkPurchaseEnablePurchaseOptionsModule (ref), mapOwnedItemsToRowPresentation (ref), mapUnpurchasableItemsToRowPresentation (ref), fullPagePromptModule (ref), fullPagePromptTwoPanelLayoutModule (ref), lineItemLayoutModule (ref), styledTextLabel (ref), fullPagePromptScrollListModule (ref), itemListModule (ref), dividerModule (ref), priceBoxModule (ref)
 	local var15 = useLocalization(t)
 	local var16 = reactModule.useContext(localizationRoactContext)
 	local var17, var18 = reactFocusNavigationModule.useDefaultFocusBehavior()
-	local var19 = if fFlagFixVP8143Module then reactModule.useCallback(function(p1) --[[ line: 68 ]]
+	local var19 = if fFlagFixVP8143Module then reactModule.useCallback(function(p1) --[[ line: 66 ]]
 		-- upvalues: p0 (ref), var17 (ref)
 		if typeof(p0.purchaseButtonRef) == "table" then
 			p0.purchaseButtonRef.current = p1
@@ -53,23 +52,23 @@ return function(p0) --[[ line: 63 | named "BulkPurchaseRequest" ]]
 	end, { p0.purchaseButtonRef }) else nil
 	local var20 = useDesignTokens()
 	local t_1 = {
-		LineHeight = if fFlagRenameDeprecatedUIBloxTokens then var20.Typography.BodyLarge.LineHeight else var20.Semantic.Typography.Body.LineHeight,
-		Font = if fFlagRenameDeprecatedUIBloxTokens then var20.Typography.TitleLarge.Font else var20.Semantic.Typography.Subheader.Font,
-		FontSize = if fFlagRenameDeprecatedUIBloxTokens then var20.Typography.BodyLarge.FontSize else var20.Semantic.Typography.Body.FontSize,
-		LetterSpacing = if fFlagRenameDeprecatedUIBloxTokens then var20.Typography.BodyLarge.LetterSpacing else var20.Semantic.Typography.Body.LetterSpacing
+		LineHeight = var20.Typography.BodyLarge.LineHeight,
+		Font = var20.Typography.TitleLarge.Font,
+		FontSize = var20.Typography.BodyLarge.FontSize,
+		LetterSpacing = var20.Typography.BodyLarge.LetterSpacing
 	}
-	local var22 = if fFlagRenameDeprecatedUIBloxTokens then var20.Color.Content.Emphasis else var20.Semantic.Color.Text.Emphasis
-	local var23, var24 = reactModule.useBinding(Vector2.new(0, 0))
-	local var25 = useLocalization(itemStatusKeyToLocalizationKeyModule)
-	local var26 = if fFlagRenameDeprecatedUIBloxTokens then var20.Color.System.Success else var20.Semantic.Color.Common.Success
-	local var27 = if fFlagRenameDeprecatedUIBloxTokens then var20.Color.System.Alert else var20.Semantic.Color.Common.Alert
-	local var28 = mapItemsToRowPresentation(p0.items, if fFlagBulkPurchaseEnablePurchaseOptionsModule then var16 else nil)
+	local emphasis = var20.Color.Content.Emphasis
+	local var22, var23 = reactModule.useBinding(Vector2.new(0, 0))
+	local var24 = useLocalization(itemStatusKeyToLocalizationKeyModule)
+	local success = var20.Color.System.Success
+	local alert = var20.Color.System.Alert
+	local var25 = mapItemsToRowPresentation(p0.items, if fFlagBulkPurchaseEnablePurchaseOptionsModule then var16 else nil)
 	local t_2 = {}
-	local var30 = mapOwnedItemsToRowPresentation(p0.ownedItems, var22, var15)
-	local var31 = mapUnpurchasableItemsToRowPresentation(p0.unpurchasableItems, var25, var26, var27)
-	table.move(var30, 1, #var30, #t_2 + 1, t_2)
-	table.move(var31, 1, #var31, #t_2 + 1, t_2)
-	local var32 = #t_2 <= 0
+	local var27 = mapOwnedItemsToRowPresentation(p0.ownedItems, emphasis, var15)
+	local var28 = mapUnpurchasableItemsToRowPresentation(p0.unpurchasableItems, var24, success, alert)
+	table.move(var27, 1, #var27, #t_2 + 1, t_2)
+	table.move(var28, 1, #var28, #t_2 + 1, t_2)
+	local var29 = #t_2 <= 0
 	
 	return reactModule.createElement(fullPagePromptModule, { onClose = p0.onClose, title = var15.heading, ref = var18 }, reactModule.createElement(fullPagePromptTwoPanelLayoutModule, {
 		size = reactModule.createBinding(UDim2.fromScale(1, 1)),
@@ -81,38 +80,36 @@ return function(p0) --[[ line: 63 | named "BulkPurchaseRequest" ]]
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var20.Size.Size_600 else var20.Global.Space_300)
+			Padding = UDim.new(0, var20.Size.Size_600)
 		}), reactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = 1,
-			[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 163 ]]
-				-- upvalues: var24 (ref)
-				var24(p2.AbsoluteSize)
+			[reactModule.Change.AbsoluteSize] = function(p2) --[[ line: 134 ]]
+				-- upvalues: var23 (ref)
+				var23(p2.AbsoluteSize)
 			end
-		}, reactModule.createElement("UIPadding", {
-			PaddingRight = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var20.Size.Size_250 else var20.Global.Space_125)
-		}), reactModule.createElement(lineItemLayoutModule, {
+		}, reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var20.Size.Size_250) }), reactModule.createElement(lineItemLayoutModule, {
 			LayoutOrder = 1,
 			startSlot = reactModule.createElement(styledTextLabel, {
 				fontStyle = t_1,
-				colorStyle = var22,
+				colorStyle = emphasis,
 				text = var15.listHeading
 			}),
 			endSlot = reactModule.createElement(styledTextLabel, {
 				fontStyle = t_1,
-				colorStyle = var22,
+				colorStyle = emphasis,
 				text = var15.itemCount:gsub("{.*}", tostring(#p0.items))
 			})
 		})), reactModule.createElement(fullPagePromptScrollListModule, {
 			LayoutOrder = 2,
-			size = var23:map(function(p3) --[[ line: 194 ]]
-				-- upvalues: fFlagRenameDeprecatedUIBloxTokens (copy), var20 (ref)
-				return UDim2.new(1, 0, 1, -(p3.Y + (if fFlagRenameDeprecatedUIBloxTokens then var20.Size.Size_600 else var20.Global.Space_300)))
+			size = var22:map(function(p3) --[[ line: 158 ]]
+				-- upvalues: var20 (ref)
+				return UDim2.new(1, 0, 1, -(p3.Y + var20.Size.Size_600))
 			end)
-		}, reactModule.createElement(itemListModule, { items = var28 }), if var32 then reactModule.createElement(dividerModule) else nil, if var32 then reactModule.createElement(itemListModule, { items = t_2 }) else nil)),
+		}, reactModule.createElement(itemListModule, { items = var25 }), if var29 then reactModule.createElement(dividerModule) else nil, if var29 then reactModule.createElement(itemListModule, { items = t_2 }) else nil)),
 		endSlot = reactModule.createElement(priceBoxModule, {
 			currentBalance = p0.currentBalance,
 			totalCost = p0.totalCost,

@@ -1,0 +1,1 @@
+﻿return require(script.Parent.Parent._Workspace.FriendsChat.FriendsChat.Realtime.FriendsChatEventReceiver)

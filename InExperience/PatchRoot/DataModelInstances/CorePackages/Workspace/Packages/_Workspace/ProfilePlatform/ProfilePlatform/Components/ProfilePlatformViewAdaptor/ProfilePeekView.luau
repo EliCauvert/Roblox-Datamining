@@ -9,16 +9,17 @@ local view = require(parent.Foundation).View
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local enumsModule = require(profilePlatform.Common.Enums)
 local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local fFlagProfilePlatformPeekDraggerContrast = require(parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local var5 = if fFlagProfilePlatformNewProfileHeader then 0 else 25
 
-return function(p0) --[[ line: 39 | named "ProfilePeekView" ]]
-	-- upvalues: useSelector (ref), fFlagProfilePlatformNewProfileHeader (ref), useStyle (ref), reactModule (ref), peekViewState (ref), var5 (ref), view (ref), peekView (ref), enumsModule (ref)
-	local statusBarHeight = p0.statusBarHeight or useSelector(function(p1) --[[ line: 41 ]]
+return function(p0) --[[ line: 40 | named "ProfilePeekView" ]]
+	-- upvalues: useSelector (ref), fFlagProfilePlatformNewProfileHeader (ref), useStyle (ref), reactModule (ref), peekViewState (ref), var5 (ref), fFlagProfilePlatformPeekDraggerContrast (ref), enumsModule (ref), view (ref), peekView (ref)
+	local statusBarHeight = p0.statusBarHeight or useSelector(function(p1) --[[ line: 42 ]]
 		return p1.TopBar.statusBarHeight
 	end)
 	local var7 = if fFlagProfilePlatformNewProfileHeader then useStyle() else nil
-	local var8 = reactModule.useCallback(function(p2, p3, p4) --[[ line: 46 ]]
+	local var8 = reactModule.useCallback(function(p2, p3, p4) --[[ line: 47 ]]
 		-- upvalues: peekViewState (copy), p0 (ref)
 		if p2 == peekViewState.Closed and p0.onClosed then
 			p0.onClosed()
@@ -52,7 +53,7 @@ return function(p0) --[[ line: 39 | named "ProfilePeekView" ]]
 				mountAsFullView = p0.mountAsFullView,
 				mountAnimation = p0.mountAnimation,
 				viewStateChanged = var8,
-				briefToFullTransitionPercent = function(p5) --[[ line: 59 ]]
+				briefToFullTransitionPercent = function(p5) --[[ line: 60 ]]
 					-- upvalues: var10 (ref), p0 (ref)
 					var10(p5)
 					
@@ -60,7 +61,8 @@ return function(p0) --[[ line: 39 | named "ProfilePeekView" ]]
 						p0.transitionPercentCallback(p5)
 					end
 				end,
-				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader and p0.profileType == enumsModule.ProfileTypes.User then false else nil
+				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader and p0.profileType == enumsModule.ProfileTypes.User then false else nil,
+				draggerImageStyle = if fFlagProfilePlatformNewProfileHeader and (fFlagProfilePlatformPeekDraggerContrast and p0.profileType == enumsModule.ProfileTypes.User) then var7.Tokens.Color.System.Contrast else nil
 			}, {
 				UIListLayout = reactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 0),
@@ -77,7 +79,7 @@ return function(p0) --[[ line: 39 | named "ProfilePeekView" ]]
 			ZIndex = 1000,
 			Position = UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 0, statusBarHeight + 56),
-			GroupTransparency = var9:map(function(p6) --[[ line: 124 ]]
+			GroupTransparency = var9:map(function(p6) --[[ line: 131 ]]
 				return 1 - p6
 			end)
 		}, {
@@ -100,7 +102,7 @@ return function(p0) --[[ line: 39 | named "ProfilePeekView" ]]
 			ZIndex = 1000,
 			Size = UDim2.new(1, 0, 0, 56),
 			Position = UDim2.new(0, 0, 0, statusBarHeight),
-			GroupTransparency = var9:map(function(p7) --[[ line: 153 ]]
+			GroupTransparency = var9:map(function(p7) --[[ line: 160 ]]
 				return 1 - p7
 			end)
 		}, { TopBar = p0.topBarSlot })

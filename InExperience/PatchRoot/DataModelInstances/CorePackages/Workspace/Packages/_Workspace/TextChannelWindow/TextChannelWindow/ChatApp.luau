@@ -3,48 +3,43 @@ local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
 local foundationModule = require(parent.Foundation)
 local _ = require(parent.Signals)
-local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
 local textChatWindowInputBarHostModule = require(script.Parent.TextChatWindowInputBarHost)
 local chatWindowTopBannerModule = require(script.Parent.ChatWindowTopBanner)
+local messageListAreaModule = require(script.Parent.MessageListArea)
+local _ = require(script.Parent.Message)
+local themeFromBackgroundColorModule = require(script.Parent.themeFromBackgroundColor)
+local expChatTextChannelWindowThemeByBackground = game:DefineFastFlag("ExpChatTextChannelWindowThemeByBackground", false)
 local createNextOrder = reactUtilsModule.createNextOrder
-local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
-local _ = { Pending = "pending", Failed = "failed" }
 
-local function ChatAppInner(p0) --[[ line: 48 ]]
-	-- upvalues: foundationModule (ref), createNextOrder (ref), reactModule (ref), messageLayoutContainer (ref), textChatWindowInputBarHostModule (ref), chatWindowTopBannerModule (ref)
-	local var7 = foundationModule.Hooks.useTokens()
-	local var8 = createNextOrder()
+local function ChatAppInner(p0) --[[ line: 33 ]]
+	-- upvalues: foundationModule (ref), createNextOrder (ref), reactModule (ref), expChatTextChannelWindowThemeByBackground (ref), messageListAreaModule (ref), textChatWindowInputBarHostModule (ref), chatWindowTopBannerModule (ref)
+	local var9 = foundationModule.Hooks.useTokens()
+	local var10 = createNextOrder()
 	
 	return reactModule.createElement(foundationModule.View, { Size = p0.Size or UDim2.fromScale(1, 1) }, {
 		chatView = reactModule.createElement(foundationModule.View, {
 			tag = "col fill clip",
-			cornerRadius = UDim.new(0, var7.Radius.Medium),
+			cornerRadius = if not expChatTextChannelWindowThemeByBackground then UDim.new(0, var9.Radius.Medium) else nil,
 			Size = UDim2.fromScale(1, 1),
-			backgroundStyle = {
+			backgroundStyle = if not expChatTextChannelWindowThemeByBackground then {
 				Transparency = 0.3,
-				Color3 = var7.DarkMode.Surface.Surface_100.Color3
-			}
+				Color3 = var9.DarkMode.Surface.Surface_100.Color3
+			} else nil
 		}, {
 			messageList = reactModule.createElement(foundationModule.View, {
 				tag = "fill",
-				LayoutOrder = var8(),
+				LayoutOrder = var10(),
 				Size = UDim2.fromScale(1, 0)
 			}, {
-				container = reactModule.createElement(messageLayoutContainer, {
-					layoutStyle = "textLine",
+				content = reactModule.createElement(messageListAreaModule, {
+					channelState = p0.channelState,
 					messagesSignal = p0.messagesSignal,
-					Size = UDim2.fromScale(1, 1),
-					contentPadding = {
-						top = UDim.new(0, var7.Size.Size_100),
-						bottom = UDim.new(0, var7.Size.Size_100),
-						left = UDim.new(0, var7.Size.Size_200),
-						right = UDim.new(0, 56)
-					}
+					windowName = p0.windowName
 				})
 			}),
 			inputBar = reactModule.createElement(foundationModule.View, {
 				tag = "auto-y padding-small",
-				LayoutOrder = var8(),
+				LayoutOrder = var10(),
 				Size = UDim2.new(1, 0, 0, 0)
 			}, {
 				host = reactModule.createElement(textChatWindowInputBarHostModule, {
@@ -62,7 +57,9 @@ local function ChatAppInner(p0) --[[ line: 48 ]]
 	})
 end
 
-return function(p1) --[[ line: 106 | named "ChatApp" ]]
-	-- upvalues: reactModule (ref), foundationModule (ref), ChatAppInner (ref)
-	return reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, { inner = reactModule.createElement(ChatAppInner, p1) })
+return function(p1) --[[ line: 89 | named "ChatApp" ]]
+	-- upvalues: expChatTextChannelWindowThemeByBackground (ref), themeFromBackgroundColorModule (ref), foundationModule (ref), reactModule (ref), ChatAppInner (ref)
+	return reactModule.createElement(foundationModule.FoundationProvider, {
+		theme = if expChatTextChannelWindowThemeByBackground and p1.backgroundColor then themeFromBackgroundColorModule(p1.backgroundColor) else foundationModule.Enums.Theme.Dark
+	}, { inner = reactModule.createElement(ChatAppInner, p1) })
 end

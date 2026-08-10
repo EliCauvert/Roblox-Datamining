@@ -10,12 +10,12 @@ local fFlagAXMISEnableMultiShopping = avatarExperienceFlagsModule.FFlagAXMISEnab
 local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
 local fFlagAXFixGamepadNavigationOnOutfitManagement = avatarExperienceFlagsModule.FFlagAXFixGamepadNavigationOnOutfitManagement
 local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
+local fFlagAXAvatarFoldersEnabled = avatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
 local AXEnableMultiTryOnUI = game:DefineFastFlag("AXEnableMultiTryOnUI", false)
 local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
 local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
-local fFlagAXFixTryOnItemVR = avatarExperienceFlagsModule.FFlagAXFixTryOnItemVR
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local t = {
 	isTransparent = false,
@@ -144,8 +144,8 @@ local t_1 = {
 	[avatarScreenModule.SortAndFilters] = { isTransparent = true, VRPanelPlacement = "Left" },
 	[avatarScreenModule.TryOnItem] = {
 		isTransparent = false,
-		VRPanelPlacement = if fFlagAXFixTryOnItemVR then "Right" else nil,
-		VRPanelRoundedCorners = if fFlagAXFixTryOnItemVR then true else nil,
+		VRPanelPlacement = "Right",
+		VRPanelRoundedCorners = true,
 		analyticsData = {
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
@@ -234,7 +234,92 @@ if fFlagAXOutfitPageRevamp then
 	}
 	t_1[avatarScreenModule.DuplicateOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
 	t_1[avatarScreenModule.DuplicateOutfitNameDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
+	t_1[avatarScreenModule.RenameOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
+	t_1[avatarScreenModule.DeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
+	t_1[avatarScreenModule.BulkDeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
 	t_1[avatarScreenModule.ManageOutfitsPage] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+end
+if fFlagAXAvatarFoldersEnabled then
+	t_1[avatarScreenModule.CreateFolderDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.RenameFolderDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.DuplicateFolderNameDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.FolderNameNotAllowedDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.FolderLimitReachedDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.FolderErrorDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.DeleteFolderPrompt] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.SelectFolderMenu] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.RemoveFromFolderDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	t_1[avatarScreenModule.FolderItemsErrorDialog] = {
 		isTransparent = false,
 		VRPanelPlacement = "Left",
 		VRPanelRoundedCorners = true,

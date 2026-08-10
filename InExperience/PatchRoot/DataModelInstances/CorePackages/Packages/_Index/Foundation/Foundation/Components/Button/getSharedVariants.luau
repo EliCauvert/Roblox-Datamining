@@ -3,7 +3,7 @@ local constantsModule = require(foundation.Constants)
 local dashModule = require(foundation.Parent.Dash)
 local _ = require(foundation.Components.Types)
 local buttonVariantModule = require(foundation.Enums.ButtonVariant)
-local colorModeModule = require(foundation.Enums.ColorMode)
+local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
 local _ = require(foundation.Enums.StateLayerMode)
 local _ = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
@@ -14,10 +14,10 @@ local function _(p0) --[[ line: 40 | named "toStroke" ]]
 end
 
 local function createButtonVariantStyles(p1, p2, p3) --[[ line: 48 ]]
-	-- upvalues: colorModeModule (ref), dashModule (ref), constantsModule (ref)
+	-- upvalues: colorNamespaceModule (ref), dashModule (ref), constantsModule (ref)
 	local t = {}
 	
-	for i in colorModeModule do
+	for i in colorNamespaceModule do
 		local t_3
 		local var10 = p1[i]
 		local var11 = if type(p2) == "table" then { Foreground = dashModule.get(var10, p2) } else var10[p2]
@@ -35,7 +35,7 @@ local function createButtonVariantStyles(p1, p2, p3) --[[ line: 48 ]]
 		end
 		t_2.stroke = t_3
 		t_2.stateLayer = {
-			mode = constantsModule.COLOR_MODE_TO_STATE_LAYER_MODE[p3 or false][i]
+			mode = constantsModule.COLOR_NAMESPACE_TO_STATE_LAYER_MODE[p3 or false][i]
 		}
 		t_1.container = t_2
 		t_1.content = { style = var11.Foreground }

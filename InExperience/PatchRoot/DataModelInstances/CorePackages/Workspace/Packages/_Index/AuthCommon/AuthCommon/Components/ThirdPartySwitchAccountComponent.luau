@@ -2,7 +2,6 @@
 local parent = authCommon.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local dividerWithTextModule = require(authCommon.Components.DividerWithText)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local thirdPartyUserService = game:GetService("ThirdPartyUserService")
@@ -11,11 +10,11 @@ local text = foundationModule.Text
 local image = foundationModule.Image
 local useTokens = foundationModule.Hooks.useTokens
 
-return function(p0) --[[ line: 24 ]]
-	-- upvalues: useTokens (ref), reactModule (ref), thirdPartyUserService (ref), useLocalization (ref), view (ref), dividerWithTextModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref), image (ref), text (ref)
+return function(p0) --[[ line: 22 ]]
+	-- upvalues: useTokens (ref), reactModule (ref), thirdPartyUserService (ref), useLocalization (ref), view (ref), dividerWithTextModule (ref), image (ref), text (ref)
 	local var8, var9
 	local var5 = useTokens()
-	local var6 = reactModule.useCallback(function() --[[ line: 26 ]]
+	local var6 = reactModule.useCallback(function() --[[ line: 24 ]]
 		-- upvalues: thirdPartyUserService (copy)
 		if thirdPartyUserService then
 			thirdPartyUserService:ShowAccountPicker()
@@ -42,10 +41,10 @@ return function(p0) --[[ line: 24 ]]
 			height = 0,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			size = UDim2.new(1, 0, 0, 0),
-			font = if fFlagRenameDeprecatedUIBloxTokens then var5.Typography.CaptionSmall.Font else var5.Semantic.Typography.Footer.Font,
-			fontSize = if fFlagRenameDeprecatedUIBloxTokens then var5.Typography.CaptionSmall.FontSize else var5.Semantic.Typography.Footer.FontSize,
-			color3 = (if fFlagRenameDeprecatedUIBloxTokens then var5.Color.Content.Muted else var5.Semantic.Color.Text.Muted).Color3,
-			transparency = (if fFlagRenameDeprecatedUIBloxTokens then var5.Color.Content.Muted else var5.Semantic.Color.Text.Muted).Transparency,
+			font = var5.Typography.CaptionSmall.Font,
+			fontSize = var5.Typography.CaptionSmall.FontSize,
+			color3 = var5.Color.Content.Muted.Color3,
+			transparency = var5.Color.Content.Muted.Transparency,
 			text = if var7 then var7.dividerText else "",
 			padding = var5.Size.Size_800
 		}),
@@ -60,7 +59,7 @@ return function(p0) --[[ line: 24 ]]
 			Image = reactModule.createElement(image, {
 				LayoutOrder = 0,
 				Image = "rbxasset://textures/ui/Shell/Icons/PlatformLogo.png",
-				Size = UDim2.fromOffset(if fFlagRenameDeprecatedUIBloxTokens then var5.Size.Size_400 else var5.Semantic.Icon.Size.Small, if fFlagRenameDeprecatedUIBloxTokens then var5.Size.Size_400 else var5.Semantic.Icon.Size.Small),
+				Size = UDim2.fromOffset(var5.Size.Size_400, var5.Size.Size_400),
 				tag = "align-x-center align-x-left align-y-center " .. var9
 			}),
 			Text = reactModule.createElement(text, {

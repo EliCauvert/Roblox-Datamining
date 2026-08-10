@@ -13,49 +13,54 @@ local analyticsModule = require(trustedContacts.Analytics)
 local useTCAnalytics = analyticsModule.useTCAnalytics
 local eventNames = analyticsModule.EventNames
 local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdateAnalytics)
+local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
 local _ = require(trustedContacts.Common.Types)
 
-return function(p0) --[[ line: 32 | named "TrustedFriendsCardWithActionsCheck" ]]
-	-- upvalues: useNavigation (ref), useTrustedFriendActionModule (ref), fFlagTFUpdateAnalyticsModule (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), appPage (ref), TFActionsEnumModule (ref), roactUtilsModule (ref), foundationModule (ref), iconSize (ref), trustedContactsModalContainerModule (ref)
-	local var9 = useNavigation()
+return function(p0) --[[ line: 33 | named "TrustedFriendsCardWithActionsCheck" ]]
+	-- upvalues: useNavigation (ref), useTrustedFriendActionModule (ref), fFlagTFPassQRCodeSourceModule (ref), fFlagTFUpdateAnalyticsModule (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), appPage (ref), TFActionsEnumModule (ref), roactUtilsModule (ref), foundationModule (ref), iconSize (ref), trustedContactsModalContainerModule (ref)
+	local var10 = useNavigation()
 	local userId = p0.userId
-	local var10 = useTrustedFriendActionModule({ userId = userId, tokens = p0.tokens })
-	local isLoading = var10.isLoading
-	local enum = var10.enum
-	local var11 = if fFlagTFUpdateAnalyticsModule then useTCAnalytics({
+	local var11 = useTrustedFriendActionModule({
+		userId = userId,
+		tokens = p0.tokens,
+		sentFromQrCode = if fFlagTFPassQRCodeSourceModule then p0.sentFromQrCode else nil
+	})
+	local isLoading = var11.isLoading
+	local enum = var11.enum
+	local var12 = if fFlagTFUpdateAnalyticsModule then useTCAnalytics({
 		friendId = userId,
 		source = p0.source,
 		tfActionsEnum = enum
 	}).fireAnalyticsEvent else nil
-	local var12 = reactModule.useCallback(function() --[[ line: 52 ]]
-		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var11 (ref), eventNames (copy), p0 (ref), var9 (ref), appPage (copy)
+	local var13 = reactModule.useCallback(function() --[[ line: 54 ]]
+		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (ref), eventNames (copy), p0 (ref), var10 (ref), appPage (copy)
 		if fFlagTFUpdateAnalyticsModule then
-			var11(eventNames.TCUpsellAgePrecheckTriggered)
+			var12(eventNames.TCUpsellAgePrecheckTriggered)
 		end
 		p0.externalNavigation.openFacialAgeEstimationUpsell({
-			onSuccess = function() --[[ line: 58 ]]
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var11 (copy), eventNames (copy), var9 (copy), appPage (copy)
+			onSuccess = function() --[[ line: 60 ]]
+				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (copy), eventNames (copy), var10 (copy), appPage (copy)
 				if fFlagTFUpdateAnalyticsModule then
-					var11(eventNames.TCUpsellAgePrecheckSucceeded)
+					var12(eventNames.TCUpsellAgePrecheckSucceeded)
 				end
-				var9.replace(appPage.TrustedFriendsUserModal, {})
+				var10.replace(appPage.TrustedFriendsUserModal, {})
 			end,
-			onFailure = function() --[[ line: 64 ]]
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var11 (copy), eventNames (copy), p0 (copy)
+			onFailure = function() --[[ line: 66 ]]
+				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var12 (copy), eventNames (copy), p0 (copy)
 				if fFlagTFUpdateAnalyticsModule then
-					var11(eventNames.TCUpsellAgePrecheckFailed)
+					var12(eventNames.TCUpsellAgePrecheckFailed)
 				end
 				p0.externalNavigation.closeModal()
 			end
 		})
-	end, { var9, p0.externalNavigation, var11 })
-	local var13 = enum == TFActionsEnumModule.UnlockTrustedFriendByFAE
-	roactUtilsModule.Hooks.useEffectOnce(function() --[[ line: 75 ]]
-		-- upvalues: var12 (ref)
-		var12()
-	end, var13)
+	end, { var10, p0.externalNavigation, var12 })
+	local var14 = enum == TFActionsEnumModule.UnlockTrustedFriendByFAE
+	roactUtilsModule.Hooks.useEffectOnce(function() --[[ line: 77 ]]
+		-- upvalues: var13 (ref)
+		var13()
+	end, var14)
 	
-	return if var13 then nil elseif isLoading then reactModule.createElement(foundationModule.View, { tag = "position-center-center auto-xy" }, {
+	return if var14 then nil elseif isLoading then reactModule.createElement(foundationModule.View, { tag = "position-center-center auto-xy" }, {
 		LoadingIcon = reactModule.createElement(foundationModule.Loading, { LayoutOrder = 1, size = iconSize.Large })
 	}) else reactModule.createElement(trustedContactsModalContainerModule, {
 		userId = p0.userId,

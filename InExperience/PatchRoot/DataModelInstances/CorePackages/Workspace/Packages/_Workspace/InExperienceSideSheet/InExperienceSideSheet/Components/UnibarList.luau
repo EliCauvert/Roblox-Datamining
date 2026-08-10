@@ -6,14 +6,15 @@ local signalsReactModule = require(parent.SignalsReact)
 local view = foundationModule.View
 local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
 local unibarItemModule = require(inExperienceSideSheet.Components.UnibarItem)
+local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
 
-local function getIntegrations(p0) --[[ line: 18 ]]
+local function getIntegrations(p0) --[[ line: 21 ]]
 	-- upvalues: getIntegrationsStoreModule (ref)
 	return getIntegrationsStoreModule(p0).getUnibarIntegrations(p0)
 end
 
-return reactModule.memo(function(p1) --[[ line: 23 | named "UnibarList" ]]
-	-- upvalues: signalsReactModule (ref), getIntegrations (ref), reactModule (ref), unibarItemModule (ref), view (ref)
+return reactModule.memo(function(p1) --[[ line: 26 | named "UnibarList" ]]
+	-- upvalues: signalsReactModule (ref), getIntegrations (ref), reactModule (ref), unibarItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
 	local var7 = signalsReactModule.useSignalState(getIntegrations)
 	
 	if #var7 == 0 then
@@ -27,7 +28,8 @@ return reactModule.memo(function(p1) --[[ line: 23 | named "UnibarList" ]]
 			layoutOrder = i,
 			onActivated = v.activated,
 			icon = v.component,
-			notification = v.integration.notification
+			notification = v.integration.notification,
+			disableGamepadDirections = if fFlagSideSheetFocusNav and i == 1 then { left = true } else nil
 		})
 	end
 	return reactModule.createElement(view, {

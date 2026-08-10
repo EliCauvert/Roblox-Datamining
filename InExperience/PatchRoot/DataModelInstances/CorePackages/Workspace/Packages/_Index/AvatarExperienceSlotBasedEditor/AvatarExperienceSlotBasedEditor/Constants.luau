@@ -7,7 +7,6 @@ local categoriesModule = require(script.Parent.Enums.Categories)
 local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagRemoveClassicHeadsAndFaces = avatarExperienceFlagsModule.FFlagRemoveClassicHeadsAndFaces
-local fFlagAXCustomizeMakeupSupport = avatarExperienceFlagsModule.FFlagAXCustomizeMakeupSupport
 local fFlagAXMigrateBuilderIcons = avatarExperienceFlagsModule.FFlagAXMigrateBuilderIcons
 local fFlagAXSlotsDesktopRedesign = avatarExperienceFlagsModule.FFlagAXSlotsDesktopRedesign
 local fFlagAXInventoryDurablesExpiredFilter = avatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
@@ -134,7 +133,7 @@ local list_1 = {
 	categoriesModule.Body
 }
 
-if fFlagAXCustomizeMakeupSupport and not fFlagAXDownrankMakeupCustomize then
+if not fFlagAXDownrankMakeupCustomize then
 	table.insert(list_1, categoriesModule.Makeup)
 end
 table.insert(list_1, categoriesModule.Clothing)
@@ -248,7 +247,7 @@ local t_3 = {
 			}
 		}
 	},
-	[categoriesModule.Makeup] = if not fFlagAXCustomizeMakeupSupport then nil else {
+	[categoriesModule.Makeup] = {
 		name = "Makeup",
 		nameTranslationKey = "Feature.Avatar.Label.Makeup",
 		resetSlotOnClearAll = true,
@@ -488,5 +487,6 @@ t.SlotEditorCategories = t_3
 t.Icons = t_1
 t.BodyAssetTypes = list
 t.InventoryFilterToAvailabilityStatus = var11
+t.ActionBarHeight = 64
 
 return t

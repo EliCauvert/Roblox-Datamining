@@ -7,7 +7,7 @@ local resolveAcpUrlModule = require(script.Parent.Env.resolveAcpUrl)
 local _ = require(script.Parent.types)
 local wireCapDeliveryModule = require(script.Parent.Acp.wireCapDelivery)
 
-return signalsModule.createComputed(function() --[[ line: 20 | named "createDefaultStore" ]]
+return signalsModule.createComputed(function() --[[ line: 19 | named "createDefaultStore" ]]
 	-- upvalues: resolveAcpUrlModule (ref), debugModule (ref), acpProtocolModule (ref), createCreatorAgentChatStoreModule (ref), getDefaultAuthHeadersModule (ref), wireCapDeliveryModule (ref)
 	local var7 = resolveAcpUrlModule.resolveCreatorAgentAcp()
 	debugModule.log("info", "creating CreatorAgentChatStore", {

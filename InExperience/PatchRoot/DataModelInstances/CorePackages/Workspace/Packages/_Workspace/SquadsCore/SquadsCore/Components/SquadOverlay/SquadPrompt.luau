@@ -18,7 +18,6 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local focusRoot = focusNavigationUtilsModule.FocusRoot
 local enableSquadPromptAnalytics = game:DefineFastFlag("EnableSquadPromptAnalytics", false)
-local fFlagEnableScheduledSquads = require(parent.SharedFlags).FFlagEnableScheduledSquads
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
@@ -27,19 +26,19 @@ local t = {
 	bodyTextLocalizationProps = nil
 }
 
-local function _() --[[ line: 40 | named "getFFlagRenameFriendsToConnectionsPartyLobby" ]]
+local function _() --[[ line: 39 | named "getFFlagRenameFriendsToConnectionsPartyLobby" ]]
 	-- upvalues: universalAppPolicyModule (ref)
 	return universalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
 end
 
-return function(p0) --[[ line: 44 ]]
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), squadExternalContractContextModule (ref), useDispatch (ref), useCurrentSquadIdModule (ref), useScreenSize (ref), eventNamesModule (ref), enableSquadPromptAnalytics (ref), squadPromptTypeModule (ref), universalAppPolicyModule (ref), fFlagEnableScheduledSquads (ref), useLocalization (ref), buttonType (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert (ref)
+return function(p0) --[[ line: 43 ]]
+	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), squadExternalContractContextModule (ref), useDispatch (ref), useCurrentSquadIdModule (ref), useScreenSize (ref), eventNamesModule (ref), enableSquadPromptAnalytics (ref), squadPromptTypeModule (ref), universalAppPolicyModule (ref), useLocalization (ref), buttonType (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), interactiveAlert (ref)
 	local var14 = cryoModule.Dictionary.join(t, p0)
 	local var15 = reactModule.useContext(squadExternalContractContextModule)
 	local var16 = useDispatch()
 	local var17 = useCurrentSquadIdModule() or ""
 	local var18 = if var14.screenSize then var14.screenSize else useScreenSize()
-	local var19 = reactModule.useCallback(function(p1) --[[ line: 52 ]]
+	local var19 = reactModule.useCallback(function(p1) --[[ line: 51 ]]
 		-- upvalues: var15 (ref), eventNamesModule (copy), var14 (ref), var17 (ref)
 		var15.fireSquadAnalytics(eventNamesModule.SquadPromptResponded, {
 			promptType = var14.promptType,
@@ -47,7 +46,7 @@ return function(p0) --[[ line: 44 ]]
 			responseType = p1
 		})
 	end, { var14.promptType, var17, var15.fireSquadAnalytics })
-	local var20 = reactModule.useCallback(function() --[[ line: 60 ]]
+	local var20 = reactModule.useCallback(function() --[[ line: 59 ]]
 		-- upvalues: enableSquadPromptAnalytics (copy), var19 (ref), var16 (ref), var15 (ref), var14 (ref)
 		if enableSquadPromptAnalytics then
 			var19("cancel")
@@ -58,7 +57,7 @@ return function(p0) --[[ line: 44 ]]
 			var14.onCancel()
 		end
 	end, { var16, var14.onCancel, var15.closeSquadPrompt, var19 })
-	local var21 = reactModule.useCallback(function() --[[ line: 72 ]]
+	local var21 = reactModule.useCallback(function() --[[ line: 71 ]]
 		-- upvalues: enableSquadPromptAnalytics (copy), var19 (ref), var16 (ref), var15 (ref), var14 (ref)
 		if enableSquadPromptAnalytics then
 			var19("confirm")
@@ -69,8 +68,8 @@ return function(p0) --[[ line: 44 ]]
 			var14.onConfirm()
 		end
 	end, { var16, var14.onConfirm, var15.closeSquadPrompt, var19 })
-	local var22 = reactModule.useCallback(function(p2) --[[ line: 84 ]]
-		-- upvalues: squadPromptTypeModule (copy), universalAppPolicyModule (copy), fFlagEnableScheduledSquads (copy), var14 (ref)
+	local var22 = reactModule.useCallback(function(p2) --[[ line: 83 ]]
+		-- upvalues: squadPromptTypeModule (copy), universalAppPolicyModule (copy), var14 (ref)
 		local var26, var27, var28
 		local _ = nil
 		local _ = nil
@@ -141,11 +140,11 @@ return function(p0) --[[ line: 44 ]]
 			var27 = "Feature.Squads.Description.VoiceRecordedDisclosure"
 			var28 = "Feature.Chat.Action.Continue"
 			var25 = "Feature.Squads.Action.JoinWithoutVoice"
-		elseif fFlagEnableScheduledSquads and p2 == squadPromptTypeModule.ConfirmDeleteScheduledSquad then
+		elseif p2 == squadPromptTypeModule.ConfirmDeleteScheduledSquad then
 			var26 = "Feature.Squads.Label.DeleteScheduledParty"
 			var27 = "Feature.Squads.Description.DeleteScheduledSquad"
 			var28 = "CommonUI.Controls.Action.Yes"
-		elseif fFlagEnableScheduledSquads and p2 == squadPromptTypeModule.ScheduledSquadConflict then
+		elseif p2 == squadPromptTypeModule.ScheduledSquadConflict then
 			var26 = "Feature.Squads.Label.PartyOperationFailed"
 			var27 = "Feature.Squads.Description.ScheduledPartyAlreadyExists"
 			var28 = "Feature.Squads.Action.Ok"
@@ -172,7 +171,7 @@ return function(p0) --[[ line: 44 ]]
 			cancelButtonText = var25
 		}
 	end, {})
-	local var23 = reactModule.useMemo(function() --[[ line: 185 ]]
+	local var23 = reactModule.useMemo(function() --[[ line: 184 ]]
 		-- upvalues: var22 (ref), var14 (ref)
 		return var22(var14.promptType)
 	end, { var14.promptType })
@@ -186,11 +185,11 @@ return function(p0) --[[ line: 44 ]]
 	return reactModule.createElement(focusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
-		eventHandlers = reactModule.useMemo(function() --[[ line: 224 ]]
+		eventHandlers = reactModule.useMemo(function() --[[ line: 223 ]]
 			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var20 (ref)
 			return {
 				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p3) --[[ line: 227 ]]
+					handler = inputHandlersModule.onRelease(function(p3) --[[ line: 226 ]]
 						-- upvalues: var20 (copy)
 						var20()
 						p3:cancel()
@@ -205,7 +204,7 @@ return function(p0) --[[ line: 44 ]]
 			title = var24.title,
 			bodyText = var24.bodyText,
 			buttonStackInfo = {
-				buttons = reactModule.useCallback(function() --[[ line: 196 ]]
+				buttons = reactModule.useCallback(function() --[[ line: 195 ]]
 					-- upvalues: var14 (ref), var20 (ref), var24 (ref), buttonType (copy), var21 (ref)
 					local t = {}
 					

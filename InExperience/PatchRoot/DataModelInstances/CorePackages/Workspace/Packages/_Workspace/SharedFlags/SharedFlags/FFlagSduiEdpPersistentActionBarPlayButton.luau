@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SduiEdpPersistentActionBarPlayButton", false)
+﻿return game:DefineFastFlag("SduiEdpPersistentActionBarPlayButton2", false)

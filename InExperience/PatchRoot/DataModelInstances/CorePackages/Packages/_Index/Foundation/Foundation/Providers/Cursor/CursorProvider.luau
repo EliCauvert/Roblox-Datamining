@@ -1,6 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
-local flagsModule = require(foundation.Utility.Flags)
 local coreGui = require(foundation.Utility.Wrappers).Services.CoreGui
 local guiService = require(foundation.Utility.Wrappers).Services.GuiService
 local dashModule = require(parent.Dash)
@@ -12,114 +11,114 @@ local cursorComponentModule = require(script.Parent.CursorComponent)
 local cursorContextModule = require(script.Parent.CursorContext)
 local _ = require(foundation.Enums.CursorType)
 local keyUtilitiesModule = require(script.Parent.KeyUtilities)
-local _ = require(foundation.Enums.ColorMode)
+local _ = require(foundation.Enums.ColorNamespace)
 local _ = require(foundation.Components.Types)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
-return function(p0) --[[ line: 29 | named "CursorProvider" ]]
-	-- upvalues: reactModule (ref), useRefCache (ref), useTokensModule (ref), keyUtilitiesModule (ref), dashModule (ref), cursorModule (ref), cursorComponentModule (ref), flagsModule (ref), isPluginSecurityModule (ref), coreGui (ref), guiService (ref), cursorContextModule (ref)
-	local var10, var11 = reactModule.useState({})
-	local var12 = reactModule.useRef(nil)
-	local var13, var14 = reactModule.useState(nil)
-	local var15 = useRefCache()
-	local var16 = useTokensModule()
-	local var17 = reactModule.useMemo(function() --[[ line: 36 ]]
-		-- upvalues: var15 (ref), var11 (ref), keyUtilitiesModule (copy), var16 (ref), dashModule (copy)
+return function(p0) --[[ line: 28 | named "CursorProvider" ]]
+	-- upvalues: reactModule (ref), useRefCache (ref), useTokensModule (ref), keyUtilitiesModule (ref), dashModule (ref), cursorModule (ref), cursorComponentModule (ref), isPluginSecurityModule (ref), coreGui (ref), guiService (ref), cursorContextModule (ref)
+	local var9, var10 = reactModule.useState({})
+	local var11 = reactModule.useRef(nil)
+	local var12, var13 = reactModule.useState(nil)
+	local var14 = useRefCache()
+	local var15 = useTokensModule()
+	local var16 = reactModule.useMemo(function() --[[ line: 35 ]]
+		-- upvalues: var14 (ref), var10 (ref), keyUtilitiesModule (copy), var15 (ref), dashModule (copy)
 		return {
-			refCache = var15,
-			setMountedCursors = var11,
-			getCursor = function(p1) --[[ line: 40 ]]
-				-- upvalues: keyUtilitiesModule (copy), var16 (copy), var11 (copy), dashModule (copy), var15 (copy)
-				local var19 = keyUtilitiesModule.mapCursorToKey(p1, var16)
-				var11(function(p2) --[[ line: 43 ]]
-					-- upvalues: var19 (ref), dashModule (copy)
-					return if p2[var19] == nil then dashModule.union(p2, { [var19] = true }) else p2
+			refCache = var14,
+			setMountedCursors = var10,
+			getCursor = function(p1) --[[ line: 39 ]]
+				-- upvalues: keyUtilitiesModule (copy), var15 (copy), var10 (copy), dashModule (copy), var14 (copy)
+				local var18 = keyUtilitiesModule.mapCursorToKey(p1, var15)
+				var10(function(p2) --[[ line: 42 ]]
+					-- upvalues: var18 (ref), dashModule (copy)
+					return if p2[var18] == nil then dashModule.union(p2, { [var18] = true }) else p2
 				end)
 				
-				return var15[var19]
+				return var14[var18]
 			end
 		}
-	end, { var15, var11, var16 })
+	end, { var14, var10, var15 })
 	
-	local var18 = function() --[[ line: 57 ]]
-		-- upvalues: var10 (ref), var15 (ref), var13 (ref), keyUtilitiesModule (copy), reactModule (copy), cursorModule (copy), cursorComponentModule (copy)
+	local var17 = function() --[[ line: 56 ]]
+		-- upvalues: var9 (ref), var14 (ref), var12 (ref), keyUtilitiesModule (copy), reactModule (copy), cursorModule (copy), cursorComponentModule (copy)
 		local t = {}
 		
-		for i, v in var10 do
-			local var21 = var15[i] ~= nil and (var13 ~= nil and var15[i].current == var13)
+		for i, v in var9 do
+			local var20 = var14[i] ~= nil and (var12 ~= nil and var14[i].current == var12)
 			local parts = string.split(i, " ")
 			
 			if #parts == 2 then
-				local var27, var28 = keyUtilitiesModule.decodeCursorTypeKey(parts)
+				local var26, var27 = keyUtilitiesModule.decodeCursorTypeKey(parts)
 				t[i] = reactModule.createElement(cursorModule, {
-					ref = var15[i],
-					isVisible = var21,
-					cursorType = var27,
-					colorMode = var28
+					ref = var14[i],
+					isVisible = var20,
+					cursorType = var26,
+					colorNamespace = var27
 				})
 			else
-				local var23, var24, var25, var26 = keyUtilitiesModule.decodeKey(parts)
+				local var22, var23, var24, var25 = keyUtilitiesModule.decodeKey(parts)
 				t[i] = reactModule.createElement(cursorComponentModule, {
-					ref = var15[i],
-					isVisible = var21,
-					cornerRadius = var23,
-					offset = var24,
-					borderWidth = var25,
-					colorMode = var26
+					ref = var14[i],
+					isVisible = var20,
+					cornerRadius = var22,
+					offset = var23,
+					borderWidth = var24,
+					colorNamespace = var25
 				})
 			end
 		end
 		return t
 	end
 	
-	reactModule.useEffect(function() --[[ line: 94 ]]
-		-- upvalues: var12 (ref), flagsModule (copy), isPluginSecurityModule (copy), coreGui (copy), guiService (copy), var14 (ref)
-		if var12.current == nil or (if flagsModule.FoundationAllowMockDataModel then not game:IsAncestorOf(var12.current) else not var12.current:IsDescendantOf(game)) then
+	reactModule.useEffect(function() --[[ line: 93 ]]
+		-- upvalues: var11 (ref), isPluginSecurityModule (copy), coreGui (copy), guiService (copy), var13 (ref)
+		if var11.current == nil or not game:IsAncestorOf(var11.current) then
 			return
 		end
-		local var29 = isPluginSecurityModule() and var12.current:IsDescendantOf(coreGui)
+		local var28 = isPluginSecurityModule() and var11.current:IsDescendantOf(coreGui)
 		
-		local function setUpSelectionImageObjectConnection() --[[ line: 108 ]]
-			-- upvalues: var29 (ref), guiService (copy), var14 (copy)
-			return if var29 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 113 ]]
-				-- upvalues: guiService (copy), var14 (copy)
+		local function setUpSelectionImageObjectConnection() --[[ line: 100 ]]
+			-- upvalues: var28 (ref), guiService (copy), var13 (copy)
+			return if var28 then guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 105 ]]
+				-- upvalues: guiService (copy), var13 (copy)
 				if guiService.SelectedCoreObject == nil then
-					var14(nil)
+					var13(nil)
 					
 					return
 				end
-				var14(guiService.SelectedCoreObject.SelectionImageObject)
-			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ line: 121 ]]
-				-- upvalues: guiService (copy), var14 (copy)
+				var13(guiService.SelectedCoreObject.SelectionImageObject)
+			end) else guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ line: 113 ]]
+				-- upvalues: guiService (copy), var13 (copy)
 				if guiService.SelectedObject == nil then
-					var14(nil)
+					var13(nil)
 					
 					return
 				end
-				var14(guiService.SelectedObject.SelectionImageObject)
+				var13(guiService.SelectedObject.SelectionImageObject)
 			end)
 		end
 		
-		local var31 = setUpSelectionImageObjectConnection()
-		local ancestryChangedConnection = var12.current.AncestryChanged:Connect(function() --[[ line: 132 ]]
-			-- upvalues: var31 (write), setUpSelectionImageObjectConnection (ref)
-			var31:Disconnect()
-			var31 = setUpSelectionImageObjectConnection()
+		local var30 = setUpSelectionImageObjectConnection()
+		local ancestryChangedConnection = var11.current.AncestryChanged:Connect(function() --[[ line: 124 ]]
+			-- upvalues: var30 (write), setUpSelectionImageObjectConnection (ref)
+			var30:Disconnect()
+			var30 = setUpSelectionImageObjectConnection()
 		end)
 		
-		return function() --[[ line: 142 ]]
-			-- upvalues: var31 (write), ancestryChangedConnection (ref)
-			var31:Disconnect()
+		return function() --[[ line: 134 ]]
+			-- upvalues: var30 (write), ancestryChangedConnection (ref)
+			var30:Disconnect()
 			ancestryChangedConnection:Disconnect()
 		end
 	end, {})
 	
-	return reactModule.createElement(cursorContextModule.Provider, { value = var17 }, {
+	return reactModule.createElement(cursorContextModule.Provider, { value = var16 }, {
 		Children = reactModule.createElement(reactModule.Fragment, {}, p0.children),
 		FoundationCursorContainer = reactModule.createElement("Frame", {
 			Visible = false,
 			Size = UDim2.new(0, 0, 0, 0),
-			ref = var12
-		}, var18())
+			ref = var11
+		}, var17())
 	})
 end

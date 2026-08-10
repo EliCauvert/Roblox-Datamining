@@ -60,7 +60,7 @@ local function getCardsPerRowAndCardWidth(p0) --[[ line: 73 ]]
 end
 
 return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 95 | named "HistoryPage" ]]
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), useTokens (ref), useLocalization (ref), fFlagTraversalExpPagePaddingFixes (ref), reactModule (ref), traversalUseDiscoveryCollectionViews (ref), traversalUseXSmallCollectionItems (ref), guiService (ref), collectionItemSize (ref), collectionLayoutCalculators (ref), collectionViewsModule (ref), getCardsPerRowAndCardWidth (ref), maxTraversalHistoryCardsPerRow709 (ref), signal (ref), cryoModule (ref), traversalExperienceCardModule (ref), constantsModule (ref), traversalTelemetryModule (ref), fFlagTraversalHistoryDiscoveryTelemetry (ref), gamePlayIntent (ref), discoveryAnalyticsModule (ref), useViewportBounds (ref), sendGameImpressions (ref), view (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), iconButton (ref), iconName (ref), text (ref), scrollView (ref), impressionsTrackerWithoutNavigation (ref)
+	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), useTokens (ref), useLocalization (ref), fFlagTraversalExpPagePaddingFixes (ref), reactModule (ref), traversalUseDiscoveryCollectionViews (ref), traversalUseXSmallCollectionItems (ref), guiService (ref), collectionItemSize (ref), collectionLayoutCalculators (ref), collectionViewsModule (ref), getCardsPerRowAndCardWidth (ref), maxTraversalHistoryCardsPerRow709 (ref), signal (ref), cryoModule (ref), traversalExperienceCardModule (ref), constantsModule (ref), traversalTelemetryModule (ref), fFlagTraversalHistoryDiscoveryTelemetry (ref), gamePlayIntent (ref), discoveryAnalyticsModule (ref), useViewportBounds (ref), sendGameImpressions (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), view (ref), iconButton (ref), iconName (ref), text (ref), scrollView (ref), impressionsTrackerWithoutNavigation (ref)
 	local var34, var35
 	local var25 = useRoactService(appEventIngestService)
 	local var26 = useRoactService(roactAnalytics)
@@ -188,7 +188,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 95 | 
 				bottom = UDim.new(0, var27.Padding.XLarge)
 			} else nil
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = not fFlagIntegrateTraversalHistoryInSideSheet and reactModule.createElement(text, {
 				tag = "auto-xy text-heading-small text-truncate-split",
 				Text = var28.historyTitle
 			}),
@@ -201,7 +201,11 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 95 | 
 			tag = "size-full shrink",
 			LayoutOrder = 2,
 			selectionGroup = false,
-			padding = if fFlagTraversalExpPagePaddingFixes then { left = UDim.new(0, xLarge), right = UDim.new(0, xLarge) } else UDim.new(0, xLarge),
+			padding = if fFlagIntegrateTraversalHistoryInSideSheet then {
+				left = UDim.new(0, xLarge),
+				right = UDim.new(0, xLarge),
+				top = UDim.new(0, var27.Padding.Small)
+			} elseif fFlagTraversalExpPagePaddingFixes then { left = UDim.new(0, xLarge), right = UDim.new(0, xLarge) } else UDim.new(0, xLarge),
 			layout = {
 				Wraps = true,
 				FillDirection = Enum.FillDirection.Horizontal,

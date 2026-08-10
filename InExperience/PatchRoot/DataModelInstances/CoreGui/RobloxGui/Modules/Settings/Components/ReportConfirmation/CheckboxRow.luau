@@ -2,8 +2,10 @@
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local checkbox = require(corePackagesService.Packages.Foundation).Checkbox
-local withStyle = UIBloxModule.Style.withStyle
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local checkbox = foundationModule.Checkbox
+local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local images = UIBloxModule.App.ImageSet.Images
 local checkboxRow = roactModule.PureComponent:extend("CheckboxRow")
@@ -14,7 +16,7 @@ checkboxRow.defaultProps = {
 	checkboxSelected = false,
 	actionDisabled = false,
 	LayoutOrder = 1,
-	onCheckboxActivated = function() --[[ line: 25 ]] end
+	onCheckboxActivated = function() --[[ line: 27 ]] end
 }
 checkboxRow.validateProps = tModule.interface({
 	height = tModule.number,
@@ -26,21 +28,49 @@ checkboxRow.validateProps = tModule.interface({
 	LayoutOrder = tModule.optional(tModule.number)
 })
 
-function checkboxRow.render(p0) --[[ line: 39 ]]
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref), checkbox (ref)
-	return withStyle(function(p1) --[[ line: 40 ]]
-		-- upvalues: p0 (ref), roactModule (copy), imageSetLabel (copy), images (copy), checkbox (copy)
+function checkboxRow.render(p0) --[[ line: 41 ]]
+	-- upvalues: withFoundationOrUIBloxStyle (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), imageSetLabel (ref), images (ref), checkbox (ref)
+	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 42 ]]
+		return {
+			Theme = {
+				IconDefault = {
+					Color = p1.Color.Content.Default.Color3,
+					Transparency = p1.Color.Content.Default.Transparency
+				},
+				IconEmphasis = {
+					Color = p1.Color.Content.Emphasis.Color3,
+					Transparency = p1.Color.Content.Emphasis.Transparency
+				},
+				TextEmphasis = {
+					Color = p1.Color.Content.Emphasis.Color3,
+					Transparency = p1.Color.Content.Emphasis.Transparency
+				},
+				TextMuted = {
+					Color = p1.Color.Content.Muted.Color3,
+					Transparency = p1.Color.Content.Muted.Transparency
+				}
+			},
+			Font = {
+				BaseSize = 1,
+				Header2 = {
+					Font = p1.Typography.TitleLarge.Font,
+					RelativeSize = p1.Typography.TitleLarge.FontSize
+				}
+			}
+		}
+	end, function(p2) --[[ line: 70 ]]
+		-- upvalues: p0 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), checkbox (copy)
 		local textMuted, iconDefault
-		local baseSize = p1.Font.BaseSize
+		local baseSize = p2.Font.BaseSize
 		local _ = nil
 		local _ = nil
 		
 		if p0.props.actionDisabled then
-			textMuted = p1.Theme.TextMuted
-			iconDefault = p1.Theme.IconDefault
+			textMuted = p2.Theme.TextMuted
+			iconDefault = p2.Theme.IconDefault
 		else
-			textMuted = p1.Theme.TextEmphasis
-			iconDefault = p1.Theme.IconEmphasis
+			textMuted = p2.Theme.TextEmphasis
+			iconDefault = p2.Theme.IconEmphasis
 		end
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -54,7 +84,15 @@ function checkboxRow.render(p0) --[[ line: 39 ]]
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			image = roactModule.createElement(imageSetLabel, {
+			image = if fFlagCoreUiMigrateUIBloxToFoundation then roactModule.createElement(foundationModule.Icon, {
+				LayoutOrder = 1,
+				name = p0.props.image,
+				size = foundationModule.Enums.IconSize.Medium,
+				style = {
+					Color3 = iconDefault.Color,
+					Transparency = iconDefault.Transparency
+				}
+			}) else roactModule.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.fromOffset(p0.props.height, p0.props.height),
@@ -69,8 +107,8 @@ function checkboxRow.render(p0) --[[ line: 39 ]]
 				Text = p0.props.descriptionText,
 				TextColor3 = textMuted.Color,
 				TextTransparency = textMuted.Transparency,
-				TextSize = p1.Font.Header2.RelativeSize * baseSize,
-				Font = p1.Font.Header2.Font,
+				TextSize = p2.Font.Header2.RelativeSize * baseSize,
+				Font = p2.Font.Header2.Font,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			checkbox = roactModule.createElement(checkbox, {

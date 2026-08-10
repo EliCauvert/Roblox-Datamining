@@ -48,6 +48,7 @@
 	EditAppearanceMenuSwitchAvatar = "EditAppearanceMenuSwitchAvatar",
 	EditAppearanceMenuEditBackground = "EditAppearanceMenuEditBackground",
 	FriendsButton = "ProfileFriendsButton",
+	SchoolButton = "ProfileSchoolButton",
 	FollowersButton = "ProfileFollowersButton",
 	FollowingsButton = "ProfileFollowingsButton",
 	MutualFriendsButton = "ProfileMutualFriendsButton",
@@ -58,6 +59,7 @@
 	SetAliasButton = "ProfileSetAliasButton",
 	ProfileClosed = "ProfileClosed",
 	StoreHeaderButton = "ProfileStoreHeaderButton",
+	CurrentlyWearingHeaderButton = "ProfileCurrentlyWearingHeaderButton",
 	CatalogItemOpened = "ProfileCatalogItemOpened",
 	ToggleInExperienceModeButton = "ToggleInExperienceModeButton",
 	UsernameCopied = "UsernameCopied",
@@ -71,6 +73,8 @@
 	InspectAvatarOpened = "InspectAvatarOpened",
 	InspectAvatarBuyClicked = "InspectAvatarBuyClicked",
 	InspectAvatarPurchaseConfirmed = "InspectAvatarPurchaseConfirmed",
+	InspectAvatarInsufficientRobuxShown = "InspectAvatarInsufficientRobuxShown",
+	InspectAvatarBuyRobuxClicked = "InspectAvatarBuyRobuxClicked",
 	MomentsSeeAll = "MomentsSeeAll",
 	MomentOpened = "MomentOpened"
 }

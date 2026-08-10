@@ -4,10 +4,11 @@ local parent = expChat.Parent
 local emojiListModule = require(parent.EmojiList)
 local useCursor = require(parent.UIBlox).App.SelectionCursor.useCursor
 local configModule = require(expChat.Config)
-local fFlagExpChatEnableFocusNavigationModule = require(expChat.Flags.FFlagExpChatEnableFocusNavigation)
+local presetEntryTextModule = require(expChat.Autocomplete.PresetEntryText)
+local fFlagExpChatPresetChatAutocompleteEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatAutocompleteEnabled)
 
-return function(p0) --[[ line: 14 ]]
-	-- upvalues: fFlagExpChatEnableFocusNavigationModule (ref), useCursor (ref), reactModule (ref), configModule (ref), emojiListModule (ref)
+return function(p0) --[[ line: 16 ]]
+	-- upvalues: useCursor (ref), reactModule (ref), configModule (ref), emojiListModule (ref), fFlagExpChatPresetChatAutocompleteEnabledModule (ref), presetEntryTextModule (ref)
 	return reactModule.createElement("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, configModule.AutocompleteEntryDefaultSizeY),
@@ -20,7 +21,7 @@ return function(p0) --[[ line: 14 ]]
 			Size = UDim2.new(1, 0, 1, if p0.isDividerVisible then -1 else 0),
 			BackgroundTransparency = p0.setTransparency(if p0.layoutOrder == p0.selectedIndex then configModule.AutocompleteSelectedTransparency else 1, p0.transparencyValue),
 			BackgroundColor3 = if p0.layoutOrder == p0.selectedIndex then configModule.AutocompleteSelectedColor else nil,
-			SelectionImageObject = if fFlagExpChatEnableFocusNavigationModule then useCursor() else nil,
+			SelectionImageObject = useCursor(),
 			Text = "",
 			ZIndex = 3,
 			[reactModule.Event.Activated] = p0.onAutocompleteSelected
@@ -81,7 +82,7 @@ return function(p0) --[[ line: 14 ]]
 				AutomaticSize = Enum.AutomaticSize.XY,
 				FontFace = p0.chatInputBarSettings.FontFace,
 				Size = UDim2.new(0, 0, 0, 0),
-				Text = string.format("%s", p0.result),
+				Text = if fFlagExpChatPresetChatAutocompleteEnabledModule and p0.autocompleteType == "presets" then presetEntryTextModule.decorate(p0.result, p0.chatInputBarSettings.TextSize) else string.format("%s", p0.result),
 				TextColor3 = p0.chatInputBarSettings.TextColor3,
 				TextSize = p0.chatInputBarSettings.TextSize,
 				TextStrokeColor3 = p0.chatInputBarSettings.TextStrokeColor3,

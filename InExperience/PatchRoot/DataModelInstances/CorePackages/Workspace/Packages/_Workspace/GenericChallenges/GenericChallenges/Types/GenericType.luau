@@ -15,7 +15,8 @@ local t = {
 	PhoneVerification = "phoneverification",
 	PrivateAccessToken = "privateaccesstoken",
 	BlockSession = "blocksession",
-	CaptchaV2 = "captchav2"
+	CaptchaV2 = "captchav2",
+	Turnstile = "turnstile"
 }
 local var3 = require(genericChallenges.Parent.enumerate)(script.Name, t)
 addRawValueMethodToEnumModule(var3, t)

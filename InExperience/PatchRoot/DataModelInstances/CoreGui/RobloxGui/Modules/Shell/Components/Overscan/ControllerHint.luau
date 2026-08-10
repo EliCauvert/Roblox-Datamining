@@ -1,12 +1,10 @@
 ﻿local modules = game:GetService("CoreGui").RobloxGui.Modules
-local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
+local roactModule = require(game:GetService("CorePackages").Packages.Roact)
 local globalSettingsModule = require(modules.Shell.GlobalSettings)
 local localizedStringsModule = require(modules.Shell.LocalizedStrings)
-local fFlagAppShellMigrateLocales = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAppShellMigrateLocales
 
-return function(_) --[[ line: 11 ]]
-	-- upvalues: roactModule (ref), globalSettingsModule (ref), fFlagAppShellMigrateLocales (ref), localizedStringsModule (ref)
+return function(_) --[[ line: 10 ]]
+	-- upvalues: roactModule (ref), globalSettingsModule (ref), localizedStringsModule (ref)
 	return roactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		Image = "rbxasset://textures/ui/Shell/ScreenAdjustment/Controller@1080.png",
@@ -29,7 +27,7 @@ return function(_) --[[ line: 11 ]]
 				FontSize = globalSettingsModule.ButtonSize,
 				TextColor3 = globalSettingsModule.WhiteTextColor,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Text = if fFlagAppShellMigrateLocales then localizedStringsModule:LocStringUA("Xbox.Old.ResizeScreenInputHint") else localizedStringsModule:LocalizedString("ResizeScreenInputHint")
+				Text = localizedStringsModule:LocStringUA("Xbox.Old.ResizeScreenInputHint")
 			})
 		})
 	})

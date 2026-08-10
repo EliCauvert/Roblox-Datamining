@@ -3,42 +3,37 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local _ = require(buildExperience.Chat.chatTypes)
+local fFlagBuildExperienceChatHistoryLoadingSkeletonModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryLoadingSkeleton)
 local view = foundationModule.View
+local chatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local chatMessageItemModule = require(script.Parent.ChatMessageItem)
 
-local function _(p0, p1) --[[ line: 23 | named "hasInlineFooterAfter" ]]
-	local var4 = p0[p1 + 1]
-	
-	return var4 ~= nil and var4.inlineKind ~= nil
-end
-
-return function(p2) --[[ line: 28 | named "ChatMessageList" ]]
-	-- upvalues: reactModule (ref), view (ref), chatMessageItemModule (ref)
+return function(p0) --[[ line: 26 | named "ChatMessageList" ]]
+	-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), reactModule (ref), chatHistoryLoadingStateModule (ref), view (ref), chatMessageItemModule (ref)
 	local t = {}
 	
-	if #p2.messages == 0 and p2.emptyState ~= nil then
-		t.EmptyState = reactModule.createElement(view, {
-			LayoutOrder = 0,
-			tag = "col align-x-center align-y-center padding-large",
-			Size = UDim2.fromScale(1, 1)
-		}, p2.emptyState)
+	if #p0.messages == 0 then
+		local var7 = if fFlagBuildExperienceChatHistoryLoadingSkeletonModule and p0.isHistoryLoading then reactModule.createElement(chatHistoryLoadingStateModule) else p0.emptyState
 		
+		if var7 ~= nil then
+			t.EmptyState = reactModule.createElement(view, {
+				LayoutOrder = 0,
+				tag = "col align-x-center align-y-center padding-large",
+				Size = UDim2.fromScale(1, 1)
+			}, var7)
+		end
+		return t
+	else
+		for i, v in p0.messages do
+			t[v.id or `Message{i}`] = reactModule.createElement(chatMessageItemModule, {
+				message = v,
+				LayoutOrder = i,
+				clockBinding = p0.clockBinding,
+				localToolActions = p0.localToolActions,
+				onPlaytest = p0.onPlaytest,
+				isPlaytestLoading = p0.isPlaytestLoading
+			})
+		end
 		return t
 	end
-	for i, v in p2.messages do
-		local id = v.id or `Message{i}`
-		local createElement = reactModule.createElement
-		local var7 = chatMessageItemModule
-		local t_1 = {
-			message = v,
-			LayoutOrder = i,
-			clockBinding = p2.clockBinding,
-			onPlaytest = p2.onPlaytest,
-			isPlaytestLoading = p2.isPlaytestLoading
-		}
-		local var9 = p2.messages[i + 1]
-		t_1.hideFeedback = var9 ~= nil and var9.inlineKind ~= nil
-		t[id] = createElement(var7, t_1)
-	end
-	return t
 end

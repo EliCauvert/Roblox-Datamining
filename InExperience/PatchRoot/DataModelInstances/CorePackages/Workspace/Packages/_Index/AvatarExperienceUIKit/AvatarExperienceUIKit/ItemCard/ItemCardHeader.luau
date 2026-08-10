@@ -1,15 +1,14 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local reactModule = require(parent.React)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local useDesignTokens = require(parent.Style).useDesignTokens
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXAddTransparencyToItemCardHeader = avatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
 local fFlagAXCatalogItemCardDarkerBackground = avatarExperienceFlagsModule.FFlagAXCatalogItemCardDarkerBackground
 
-local function ItemCardHeader(p0) --[[ line: 23 ]]
-	-- upvalues: useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), fFlagAXCatalogItemCardDarkerBackground (ref), reactModule (ref), fFlagAXAddTransparencyToItemCardHeader (ref)
+local function ItemCardHeader(p0) --[[ line: 21 ]]
+	-- upvalues: useDesignTokens (ref), fFlagAXCatalogItemCardDarkerBackground (ref), reactModule (ref), fFlagAXAddTransparencyToItemCardHeader (ref)
 	local var3 = useDesignTokens()
-	local var4 = if fFlagAXCatalogItemCardDarkerBackground then var3.Color.Shift.Shift_100 elseif fFlagRenameDeprecatedUIBloxTokens then var3.Color.Common.Shimmer else var3.Semantic.Color.Common.Placeholder
+	local var4 = if fFlagAXCatalogItemCardDarkerBackground then var3.Color.Shift.Shift_100 else var3.Color.Common.Shimmer
 	
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -19,9 +18,7 @@ local function ItemCardHeader(p0) --[[ line: 23 ]]
 		LayoutOrder = p0.LayoutOrder,
 		ZIndex = p0.ZIndex
 	}, {
-		CornerRadius = reactModule.createElement("UICorner", {
-			CornerRadius = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var3.Radius.Medium else var3.Semantic.Radius.Medium)
-		}),
+		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) }),
 		AspectRatio = if not p0.Size then reactModule.createElement("UIAspectRatioConstraint", {
 			AspectRatio = p0.aspectRatio or 1,
 			AspectType = Enum.AspectType.FitWithinMaxSize,

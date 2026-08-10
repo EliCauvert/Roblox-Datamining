@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMigrateOutfitsToUserInventory", false) and (require(script.Parent.FFlagAXInventoryDurablesSupport) and require(script.Parent.FFlagAXAvatarEditorStoresContext))

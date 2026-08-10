@@ -16,9 +16,10 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 local fFlagUserTileShowBadges = require(parent.SharedFlags).FFlagUserTileShowBadges
 local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
 local fFlagUserTileAddContextualInfoIcon = require(parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
+local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
 
-return function(p0) --[[ line: 55 | named "UserTile" ]]
-	-- upvalues: reactModule (ref), controlState (ref), view (ref), layoutModeModule (ref), enums (ref), avatarPileModule (ref), avatarModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), titleStackModule (ref), fFlagUserTileShowBadges (ref), fFlagUserTileAddContextualInfoIcon (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnableMobileGameJoinCard (ref), fFlagUserTileTextTCIndicator (ref), fFlagEnableBlackbirdCheck (ref)
+return function(p0) --[[ line: 61 | named "UserTile" ]]
+	-- upvalues: reactModule (ref), controlState (ref), view (ref), layoutModeModule (ref), enums (ref), avatarPileModule (ref), avatarModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), titleStackModule (ref), fFlagUserTileShowBadges (ref), fFlagUserTileAddContextualInfoIcon (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnableMobileGameJoinCard (ref), fFlagUserTileTextTCIndicator (ref), fFlagEnableBlackbirdCheck (ref), fFlagUserTileTitleStackAddExtraInfo (ref)
 	local var8, var9 = reactModule.useState(false)
 	local var10 = p0.onActivated ~= nil
 	
@@ -29,7 +30,7 @@ return function(p0) --[[ line: 55 | named "UserTile" ]]
 			["row align-y-center gap-medium"] = p0.layoutMode == layoutModeModule.wide
 		},
 		selection = { Selectable = p0.selectable },
-		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 58 ]]
+		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 64 ]]
 			-- upvalues: var9 (ref), var10 (ref), controlState (copy), p0 (ref)
 			var9(var10 and (if p1 ~= controlState.Hover then p1 == controlState.Pressed else true))
 			
@@ -59,7 +60,8 @@ return function(p0) --[[ line: 55 | named "UserTile" ]]
 				userId = p0.userId,
 				userPresenceType = p0.userPresenceType,
 				hover = var8,
-				backplateStyle = p0.backplateStyle
+				backplateStyle = p0.backplateStyle,
+				includeProfileFrame = p0.includeProfileFrame
 			})
 		}),
 		TitleStack = reactModule.createElement(titleStackModule, {
@@ -84,7 +86,11 @@ return function(p0) --[[ line: 55 | named "UserTile" ]]
 			customTextTruncation = p0.customTextTruncation,
 			isTrustedConnection = if fFlagUserTileTextTCIndicator then p0.isTrustedConnection else nil,
 			trustedConnectionIndicatorEnabled = if fFlagUserTileTextTCIndicator then p0.trustedConnectionIndicatorEnabled else nil,
-			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p0.isRobloxSubscriber else nil
+			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p0.isRobloxSubscriber else nil,
+			extraInfo = p0.extraInfo,
+			isExtraInfoLoading = if fFlagUserTileTitleStackAddExtraInfo then p0.isExtraInfoLoading else nil,
+			extraInfoStyle = p0.extraInfoStyle,
+			onExtraInfoClicked = p0.onExtraInfoClicked
 		})
 	})
 end

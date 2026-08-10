@@ -1,10 +1,36 @@
-﻿local _ = require(script.Types)
+﻿local eventNamesModule = require(script.EventNames)
+local funnelEventNamesModule = require(script.FunnelEventNames)
+local recommendationSourceModule = require(script.RecommendationSource)
+local sessionManagerModule = require(script.SessionManager)
+local _ = require(script.Types)
+local reportMomentsRealtimeEventModule = require(script.reportMomentsRealtimeEvent)
 
 return {
-	EventNames = require(script.EventNames),
-	FunnelEventNames = require(script.FunnelEventNames),
-	RecommendationSource = require(script.RecommendationSource),
-	SessionManager = require(script.SessionManager),
+	EventNames = eventNamesModule,
+	FunnelEventNames = funnelEventNamesModule,
+	RecommendationSource = recommendationSourceModule,
+	SessionManager = sessionManagerModule,
 	fireAnalyticsEvent = require(script.fireAnalyticsEvent),
-	fireFunnelAnalyticsEvent = require(script.fireFunnelAnalyticsEvent)
+	fireFunnelAnalyticsEvent = require(script.fireFunnelAnalyticsEvent),
+	reportMomentSkip = require(script.reportMomentSkip),
+	reportMomentsFeedLoadAttempt = reportMomentsRealtimeEventModule.reportMomentsFeedLoadAttempt,
+	reportMomentsFeedLoadMore = reportMomentsRealtimeEventModule.reportMomentsFeedLoadMore,
+	reportMomentsFeedMediaLoad = reportMomentsRealtimeEventModule.reportMomentsFeedMediaLoad,
+	reportMomentsFeedState = reportMomentsRealtimeEventModule.reportMomentsFeedState,
+	reportMomentsSurfaceLoadAbort = reportMomentsRealtimeEventModule.reportMomentsSurfaceLoadAbort,
+	reportMomentsViewBegan = reportMomentsRealtimeEventModule.reportMomentsViewBegan,
+	reportMomentsSessionStarted = reportMomentsRealtimeEventModule.reportMomentsSessionStarted,
+	reportMomentsSessionEnded = reportMomentsRealtimeEventModule.reportMomentsSessionEnded,
+	reportMomentsSessionHeartbeat = reportMomentsRealtimeEventModule.reportMomentsSessionHeartbeat,
+	reportMomentsEngagement = reportMomentsRealtimeEventModule.reportMomentsEngagement,
+	reportMomentsCreationStep = reportMomentsRealtimeEventModule.reportMomentsCreationStep,
+	createMomentsSessionHeartbeat = require(script.createMomentsSessionHeartbeat),
+	reportMomentsFeedItemsReceived = reportMomentsRealtimeEventModule.reportMomentsFeedItemsReceived,
+	reportMomentsFeedItemFiltered = reportMomentsRealtimeEventModule.reportMomentsFeedItemFiltered,
+	reportMomentsPublishedWithEdit = reportMomentsRealtimeEventModule.reportMomentsPublishedWithEdit,
+	reportMomentsPublishedEditCount = reportMomentsRealtimeEventModule.reportMomentsPublishedEditCount,
+	reportMomentsPublishedByCaptureType = reportMomentsRealtimeEventModule.reportMomentsPublishedByCaptureType,
+	reportMomentsEditToolOpened = reportMomentsRealtimeEventModule.reportMomentsEditToolOpened,
+	reportMomentsEditToolAbandoned = reportMomentsRealtimeEventModule.reportMomentsEditToolAbandoned,
+	reportMomentsGenerateText = reportMomentsRealtimeEventModule.reportMomentsGenerateText
 }

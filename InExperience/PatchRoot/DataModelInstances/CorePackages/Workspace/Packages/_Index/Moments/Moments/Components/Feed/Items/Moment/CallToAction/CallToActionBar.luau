@@ -61,7 +61,8 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CallToActionBar" ]]
 			getExperienceDetailsSheetStoreModule(false).open({
 				placeId = var19,
 				universeId = var20,
-				itemId = data.feedItemId or data.momentId,
+				itemId = data.feedItemId,
+				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId
 			})
 		end,
@@ -105,7 +106,7 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CallToActionBar" ]]
 		CtaButton = if var23 and var24 then nil elseif isAd then reactModule.createElement(button, {
 			LayoutOrder = 2,
 			isDisabled = var21 or var22,
-			onActivated = function() --[[ line: 175 ]] end,
+			onActivated = function() --[[ line: 176 ]] end,
 			size = foundationModule.Enums.InputSize.Medium,
 			text = var30,
 			variant = foundationModule.Enums.ButtonVariant.Emphasis
@@ -114,7 +115,8 @@ return reactModule.memo(function(p0) --[[ line: 57 | named "CallToActionBar" ]]
 			context = {
 				placeId = var19,
 				universeId = var20,
-				itemId = data.feedItemId or data.momentId,
+				itemId = data.feedItemId,
+				feedItemId = data.feedItemId,
 				tracingId = data.feedSessionId
 			},
 			text = var30,

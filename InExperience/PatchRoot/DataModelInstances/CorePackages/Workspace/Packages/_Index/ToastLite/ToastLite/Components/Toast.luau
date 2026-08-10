@@ -4,7 +4,6 @@ local reactModule = require(parent.React)
 local roactUtilsModule = require(parent.RoactUtils)
 local toastRoduxModule = require(parent.ToastRodux)
 local UIBloxModule = require(parent.UIBlox)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local toast = UIBloxModule.App.Dialog.Toast
 local images = UIBloxModule.App.ImageSet.Images
 local toastType = toastRoduxModule.Enums.ToastType
@@ -26,29 +25,29 @@ local t_2 = {
 	springOptions = { frequency = 4, damping = 1 }
 }
 
-local function selectCurrentMessage(p0) --[[ line: 51 ]]
+local function selectCurrentMessage(p0) --[[ line: 49 ]]
 	return p0.currentToastMessages[1]
 end
 
-return function(p1) --[[ line: 55 | named "Toast" ]]
-	-- upvalues: cryoModule (ref), t_2 (ref), useDispatch (ref), useSelector (ref), selectCurrentMessage (ref), useStyle (ref), reactModule (ref), toastRoduxModule (ref), toastType (ref), t_1 (ref), fFlagRenameDeprecatedUIBloxTokens (ref), toast (ref)
+return function(p1) --[[ line: 53 | named "Toast" ]]
+	-- upvalues: cryoModule (ref), t_2 (ref), useDispatch (ref), useSelector (ref), selectCurrentMessage (ref), useStyle (ref), reactModule (ref), toastRoduxModule (ref), toastType (ref), t_1 (ref), toast (ref)
 	local var9 = cryoModule.Dictionary.join(t_2, p1)
 	local var10 = useDispatch()
 	local var11 = useSelector(selectCurrentMessage)
 	local tokens = useStyle().Tokens
-	local var12 = reactModule.useCallback(function() --[[ line: 63 ]]
+	local var12 = reactModule.useCallback(function() --[[ line: 61 ]]
 		-- upvalues: var10 (ref), toastRoduxModule (copy)
 		var10(toastRoduxModule.Actions.RemoveCurrentToastMessage())
 	end, { var10 })
 	
-	local var13 = function() --[[ line: 68 ]]
+	local var13 = function() --[[ line: 66 ]]
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11 then
 			var12()
 		end
 	end
 	
-	reactModule.useEffect(function() --[[ line: 75 ]]
+	reactModule.useEffect(function() --[[ line: 73 ]]
 		-- upvalues: var11 (ref), var12 (ref)
 		if var11 and (not next(var11) or not var11.toastTitle) then
 			var12()
@@ -63,7 +62,7 @@ return function(p1) --[[ line: 55 | named "Toast" ]]
 	return reactModule.createElement(toast, {
 		show = true,
 		duration = var9.duration,
-		position = UDim2.new(0.5, 0, 0, if fFlagRenameDeprecatedUIBloxTokens then tokens.Size.Size_500 else tokens.Global.Space_250),
+		position = UDim2.new(0.5, 0, 0, tokens.Size.Size_500),
 		springOptions = var9.springOptions,
 		toastContent = {
 			iconImage = if toastType_1 ~= nil then nil else t_1[toastType_1],

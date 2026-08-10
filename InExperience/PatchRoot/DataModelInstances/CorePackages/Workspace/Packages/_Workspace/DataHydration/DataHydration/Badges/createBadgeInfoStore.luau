@@ -8,17 +8,16 @@ local _ = require(dataHydration.DataHydrationTypes)
 local _ = require(script.Parent.BadgesTypes)
 local requestRemoveBadgeModule = require(script.Parent.requestRemoveBadge)
 local badgesUrlBuilderModule = require(script.Parent.BadgesUrlBuilder)
-local fFlagLuaAppSduiBadgeDetailsComponents = require(parent.SharedFlags).FFlagLuaAppSduiBadgeDetailsComponents
 local discoveryUtilsModule = require(parent.DiscoveryUtils)
 local logResponseError = discoveryUtilsModule.logResponseError
 local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
 
-return function() --[[ line: 28 | named "createBadgeInfoStore" ]]
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), requestRemoveBadgeModule (ref), logResponseError (ref), badgesUrlBuilderModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppSduiBadgeDetailsComponents (ref)
+return function() --[[ line: 26 | named "createBadgeInfoStore" ]]
+	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), requestRemoveBadgeModule (ref), logResponseError (ref), badgesUrlBuilderModule (ref), discoveryEventErrorLogger (ref)
 	local var8 = createDataCacheModule()
 	local var9 = createDataResolverModule({
 		cache = var8,
-		fetchFn = function(_) --[[ line: 32 ]]
+		fetchFn = function(_) --[[ line: 30 ]]
 			-- upvalues: promiseModule (copy)
 			return promiseModule.resolve({})
 		end
@@ -28,7 +27,7 @@ return function() --[[ line: 28 | named "createBadgeInfoStore" ]]
 		getBadgeInfo = var9.getCachedItem,
 		getBadgeInfos = var9.getCachedItems,
 		updateBadges = var8.updateItems,
-		removeBadge = if fFlagLuaAppSduiBadgeDetailsComponents then function(p0) --[[ line: 39 | named "removeBadge" ]]
+		removeBadge = function(p0) --[[ line: 37 ]]
 			-- upvalues: signalsModule (copy), var8 (ref), requestRemoveBadgeModule (copy), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
 			local var10, var11 = signalsModule.createSignal(nil)
 			local var12 = var8.getItem(p0).data(false)
@@ -37,10 +36,10 @@ return function() --[[ line: 28 | named "createBadgeInfoStore" ]]
 			if var13 == true then
 				var8.updateItem(p0, { isEarnedByUser = false })
 			end
-			requestRemoveBadgeModule(p0):andThen(function() --[[ line: 58 ]]
+			requestRemoveBadgeModule(p0):andThen(function() --[[ line: 56 ]]
 				-- upvalues: var11 (ref)
 				var11({ type = "success" })
-			end):catch(function(p1) --[[ line: 63 ]]
+			end):catch(function(p1) --[[ line: 61 ]]
 				-- upvalues: var12 (ref), var8 (copy), p0 (ref), var13 (ref), var11 (ref), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
 				if var12 then
 					var8.updateItem(p0, { isEarnedByUser = var13 })
@@ -63,7 +62,7 @@ return function() --[[ line: 28 | named "createBadgeInfoStore" ]]
 			end)
 			
 			return var10
-		end else nil,
+		end,
 		clear = var9.clear,
 		dispose = var9.dispose
 	}

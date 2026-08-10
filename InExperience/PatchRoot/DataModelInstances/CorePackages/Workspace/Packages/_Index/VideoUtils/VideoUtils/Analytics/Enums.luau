@@ -9,6 +9,7 @@
 		TileClicked = "tileClicked",
 		Unhovered = "unhovered",
 		Unmounted = "unmounted",
+		Unselected = "unselected",
 		ViewportResized = "viewportResized"
 	},
 	VideoEngagementEvents = {

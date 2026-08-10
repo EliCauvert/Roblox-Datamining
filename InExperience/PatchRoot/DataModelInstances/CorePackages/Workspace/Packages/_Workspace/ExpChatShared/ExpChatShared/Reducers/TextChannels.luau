@@ -5,9 +5,11 @@ local dictionary = require(parent.llama).Dictionary
 local none = require(parent.llama).None
 local var2 = require(expChatShared.Logger):new("ExpChat/Reducers/" .. script.Name)
 local getFFlagTextChatEnableUniverseChatTabsModule = require(expChatShared.Flags.GetFFlagTextChatEnableUniverseChatTabs)
+local fFlagExpChatFixBackspaceNilTargetChannelModule = require(expChatShared.Flags.FFlagExpChatFixBackspaceNilTargetChannel)
+local fFlagExpChatFixTeamChangeOverwriteChannelModule = require(expChatShared.Flags.FFlagExpChatFixTeamChangeOverwriteChannel)
 local actions = expChatShared.Actions
 
-local function _(p0, p1) --[[ line: 37 | named "getTeamTextChannelFromTeam" ]]
+local function _(p0, p1) --[[ line: 41 | named "getTeamTextChannelFromTeam" ]]
 	local text = "RBXTeam" .. p1.TeamColor.Name
 	
 	for i, v in pairs(p0) do
@@ -24,11 +26,11 @@ return roduxModule.createReducer({
 	currentTeam = nil,
 	allTextChannels = {}
 }, {
-	[require(actions.ClientAppLoaded).name] = function(p2, p3) --[[ line: 49 ]]
+	[require(actions.ClientAppLoaded).name] = function(p2, p3) --[[ line: 53 ]]
 		-- upvalues: dictionary (ref), none (ref)
 		return dictionary.join(p2, { currentTeam = if p3.team == nil then none else p3.team })
 	end,
-	[require(actions.TextChannelCreated).name] = function(p4, p5) --[[ line: 55 ]]
+	[require(actions.TextChannelCreated).name] = function(p4, p5) --[[ line: 59 ]]
 		-- upvalues: var2 (ref), dictionary (ref)
 		var2:trace("TextChannelCreated: {}", p5.textChannel.Name)
 		
@@ -36,22 +38,22 @@ return roduxModule.createReducer({
 			allTextChannels = dictionary.join(p4.allTextChannels, { [p5.textChannel.Name] = p5.textChannel })
 		})
 	end,
-	[require(actions.TextChannelRemoved).name] = function(p6, p7) --[[ line: 64 ]]
+	[require(actions.TextChannelRemoved).name] = function(p6, p7) --[[ line: 68 ]]
 		-- upvalues: dictionary (ref), none (ref)
-		local var5 = dictionary.removeKey(p6.allTextChannels, p7.textChannel.Name)
+		local var7 = dictionary.removeKey(p6.allTextChannels, p7.textChannel.Name)
 		
 		return dictionary.join(p6, {
-			allTextChannels = var5,
-			targetTextChannel = if p7.textChannel == p6.targetTextChannel then var5.RBXGeneral or none else p6.targetTextChannel
+			allTextChannels = var7,
+			targetTextChannel = if p7.textChannel == p6.targetTextChannel then var7.RBXGeneral or none else p6.targetTextChannel
 		})
 	end,
-	[require(actions.LocalTextChannelParticipantRemoved).name] = function(p8, p9) --[[ line: 76 ]]
+	[require(actions.LocalTextChannelParticipantRemoved).name] = function(p8, p9) --[[ line: 80 ]]
 		-- upvalues: dictionary (ref), none (ref)
 		return dictionary.join(p8, {
 			targetTextChannel = if p9.textChannel == p8.targetTextChannel then if p9.textChannel == p8.allTextChannels.RBXGeneral then none else p8.allTextChannels.RBXGeneral or none else p8.targetTextChannel
 		})
 	end,
-	[require(actions.TargetTextChannelPropertyChanged).name] = function(p10, p11) --[[ line: 89 ]]
+	[require(actions.TargetTextChannelPropertyChanged).name] = function(p10, p11) --[[ line: 93 ]]
 		-- upvalues: var2 (ref), getFFlagTextChatEnableUniverseChatTabsModule (ref), dictionary (ref), none (ref)
 		var2:trace("TargetTextChannelPropertyChanged dispatched")
 		
@@ -62,102 +64,116 @@ return roduxModule.createReducer({
 			targetTextChannel = if p11.textChannel == nil then none else p11.textChannel
 		})
 	end,
-	[require(actions.LocalTeamChanged).name] = function(p12, p13) --[[ line: 108 ]]
-		-- upvalues: var2 (ref), dictionary (ref), none (ref)
-		if not p13.team then
+	[require(actions.TextChatChannelSelected).name] = function(p12, p13) --[[ line: 116 ]]
+		-- upvalues: var2 (ref), dictionary (ref)
+		var2:trace("TextChatChannelSelected dispatched: {}", p13.channelName)
+		local channelName = p12.allTextChannels[p13.channelName]
+		
+		return if channelName == nil then p12 else dictionary.join(p12, {
+			targetTextChannel = channelName,
+			selectedChannelName = p13.channelName
+		})
+	end,
+	[require(actions.LocalTeamChanged).name] = function(p14, p15) --[[ line: 130 ]]
+		-- upvalues: var2 (ref), dictionary (ref), fFlagExpChatFixTeamChangeOverwriteChannelModule (ref), none (ref)
+		if p15.team then
+			var2:trace("LocalTeamChanged dispatched with team: {}", p15.team.Name)
+			
+			if not p14.targetTextChannel or not string.find(p14.targetTextChannel.Name, "^RBXTeam") then
+				return dictionary.join(p14, { currentTeam = p15.team })
+			end
+			local var9
+			local text = "RBXTeam" .. p15.team.TeamColor.Name
+			
+			for i, v in pairs(p14.allTextChannels) do
+				if i == text then
+					var9 = v
+					return dictionary.join(p14, {
+						currentTeam = p15.team,
+						targetTextChannel = if var9 == nil then p14.allTextChannels.RBXGeneral else var9
+					})
+				end
+			end
+			var9 = nil
+		else
 			var2:trace("LocalTeamChanged dispatched with no team")
 			
-			return dictionary.join(p12, {
+			return if fFlagExpChatFixTeamChangeOverwriteChannelModule then if p14.targetTextChannel and string.find(p14.targetTextChannel.Name, "^RBXTeam") then dictionary.join(p14, {
 				currentTeam = none,
-				targetTextChannel = p12.allTextChannels.RBXGeneral or p12.targetTextChannel
+				targetTextChannel = p14.allTextChannels.RBXGeneral or p14.targetTextChannel
+			}) else dictionary.join(p14, { currentTeam = none }) else dictionary.join(p14, {
+				currentTeam = none,
+				targetTextChannel = p14.allTextChannels.RBXGeneral or p14.targetTextChannel
 			})
 		end
-		var2:trace("LocalTeamChanged dispatched with team: {}", p13.team.Name)
-		
-		if not p12.targetTextChannel or not string.find(p12.targetTextChannel.Name, "^RBXTeam") then
-			return dictionary.join(p12, { currentTeam = p13.team })
-		end
-		local var7
-		local text = "RBXTeam" .. p13.team.TeamColor.Name
-		
-		for i, v in pairs(p12.allTextChannels) do
-			if i == text then
-				var7 = v
-				return dictionary.join(p12, {
-					currentTeam = p13.team,
-					targetTextChannel = if var7 == nil then p12.allTextChannels.RBXGeneral else var7
-				})
-			end
-		end
-		var7 = nil
 	end,
-	[require(actions.ChatInputBarActivatedTeamMode).name] = function(p14, _) --[[ line: 134 ]]
+	[require(actions.ChatInputBarActivatedTeamMode).name] = function(p16, _) --[[ line: 167 ]]
 		-- upvalues: var2 (ref), dictionary (ref), none (ref)
-		if p14.currentTeam == nil then
+		if p16.currentTeam == nil then
 			var2:trace("ChatInputBarActivatedTeamMode but not on a team")
 			
-			return p14
+			return p16
 		end
-		local var9
-		assert(p14.currentTeam, "This should be unreachable")
-		local text = "RBXTeam" .. p14.currentTeam.TeamColor.Name
+		local var11
+		assert(p16.currentTeam, "This should be unreachable")
+		local text = "RBXTeam" .. p16.currentTeam.TeamColor.Name
 		
-		for i, v in pairs(p14.allTextChannels) do
+		for i, v in pairs(p16.allTextChannels) do
 			if i == text then
-				var9 = v
-				var2:trace("ChatInputBarActivatedTeamMode - set targetTextChannel to {}", if var9 then var9.Name else "nil")
+				var11 = v
+				var2:trace("ChatInputBarActivatedTeamMode - set targetTextChannel to {}", if var11 then var11.Name else "nil")
 				
-				return if var9 == nil then p14 else dictionary.join(p14, { targetTextChannel = if var9 == nil then none else var9 })
+				return if var11 == nil then p16 else dictionary.join(p16, { targetTextChannel = if var11 == nil then none else var11 })
 			end
 		end
-		var9 = nil
+		var11 = nil
 	end,
-	[require(actions.ChatInputBarResetTargetChannel).name] = function(p15, _) --[[ line: 157 ]]
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p15, {
-			targetTextChannel = p15.allTextChannels.RBXGeneral or p15.targetTextChannel
+	[require(actions.ChatInputBarResetTargetChannel).name] = function(p17, p18) --[[ line: 190 ]]
+		-- upvalues: fFlagExpChatFixBackspaceNilTargetChannelModule (ref), dictionary (ref), none (ref)
+		return if fFlagExpChatFixBackspaceNilTargetChannelModule and p18.isGlobalTabActive then dictionary.join(p17, { targetTextChannel = none }) else dictionary.join(p17, {
+			targetTextChannel = p17.allTextChannels.RBXGeneral or p17.targetTextChannel
 		})
 	end,
-	[require(actions.ChatInputBarActivatedWhisperMode).name] = function(p16, p17) --[[ line: 163 ]]
+	[require(actions.ChatInputBarActivatedWhisperMode).name] = function(p19, p20) --[[ line: 201 ]]
 		-- upvalues: var2 (ref), dictionary (ref)
-		var2:trace("ChatInputBarActivatedTeamMode - set targetTextChannel to {}", if p17.textChannel then p17.textChannel.Name else "nil")
+		var2:trace("ChatInputBarActivatedTeamMode - set targetTextChannel to {}", if p20.textChannel then p20.textChannel.Name else "nil")
 		
-		return if p17.textChannel == nil then p16 else dictionary.join(p16, {
-			allTextChannels = dictionary.join(p16.allTextChannels, { [p17.textChannel.Name] = p17.textChannel }),
-			targetTextChannel = p17.textChannel
+		return if p20.textChannel == nil then p19 else dictionary.join(p19, {
+			allTextChannels = dictionary.join(p19.allTextChannels, { [p20.textChannel.Name] = p20.textChannel }),
+			targetTextChannel = p20.textChannel
 		})
 	end,
-	[require(actions.PlayerRemoved).name] = function(p18, p19) --[[ line: 181 ]]
+	[require(actions.PlayerRemoved).name] = function(p21, p22) --[[ line: 219 ]]
 		-- upvalues: dictionary (ref)
-		local function _(p20) --[[ line: 182 | named "isRemovedPlayerInWhisperChannel" ]]
-			-- upvalues: p19 (ref)
-			return string.find(p20, "RBXWhisper:") and string.find(p20, p19.userId)
+		local function _(p23) --[[ line: 220 | named "isRemovedPlayerInWhisperChannel" ]]
+			-- upvalues: p22 (ref)
+			return string.find(p23, "RBXWhisper:") and string.find(p23, p22.userId)
 		end
 		
-		local targetTextChannel = p18.targetTextChannel
+		local targetTextChannel = p21.targetTextChannel
 		
 		if targetTextChannel then
 			local name = targetTextChannel.Name
 			
-			if string.find(name, "RBXWhisper:") and string.find(name, p19.userId) then
-				targetTextChannel = p18.allTextChannels.RBXGeneral
+			if string.find(name, "RBXWhisper:") and string.find(name, p22.userId) then
+				targetTextChannel = p21.allTextChannels.RBXGeneral
 			end
 		end
-		return dictionary.join(p18, {
+		return dictionary.join(p21, {
 			targetTextChannel = targetTextChannel,
-			allTextChannels = dictionary.filter(p18.allTextChannels, function(_, p21) --[[ line: 191 ]]
-				-- upvalues: p19 (ref)
-				return not (string.find(p21, "RBXWhisper:") and string.find(p21, p19.userId))
+			allTextChannels = dictionary.filter(p21.allTextChannels, function(_, p24) --[[ line: 229 ]]
+				-- upvalues: p22 (ref)
+				return not (string.find(p24, "RBXWhisper:") and string.find(p24, p22.userId))
 			end)
 		})
 	end,
-	[require(actions.UniverseChatChannelSelected).name] = function(p22, p23) --[[ line: 204 ]]
+	[require(actions.UniverseChatChannelSelected).name] = function(p25, p26) --[[ line: 242 ]]
 		-- upvalues: var2 (ref), dictionary (ref), none (ref)
-		var2:trace("UniverseChatChannelSelected dispatched: {}", p23.channelName)
+		var2:trace("UniverseChatChannelSelected dispatched: {}", p26.channelName)
 		
-		return dictionary.join(p22, {
+		return dictionary.join(p25, {
 			targetTextChannel = none,
-			selectedChannelName = p23.channelName
+			selectedChannelName = p26.channelName
 		})
 	end
 })

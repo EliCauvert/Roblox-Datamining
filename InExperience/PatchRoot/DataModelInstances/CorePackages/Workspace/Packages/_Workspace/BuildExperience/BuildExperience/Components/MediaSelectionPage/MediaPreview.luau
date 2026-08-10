@@ -3,6 +3,7 @@ local parent = script:FindFirstAncestor("BuildExperience").Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local image = foundationModule.Image
+local skeleton = foundationModule.Skeleton
 local view = foundationModule.View
 local icon = foundationModule.Icon
 local iconButton = foundationModule.IconButton
@@ -15,23 +16,23 @@ local progressSize = foundationModule.Enums.ProgressSize
 local useTokens = foundationModule.Hooks.useTokens
 local _ = require(script.Parent.types)
 
-return function(p0) --[[ line: 34 | named "MediaPreview" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), runService (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), inputSize (ref), progress (ref), progressShape (ref), progressSize (ref), image (ref)
+return function(p0) --[[ line: 36 | named "MediaPreview" ]]
+	-- upvalues: useTokens (ref), reactModule (ref), runService (ref), view (ref), skeleton (ref), foundationModule (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), inputSize (ref), progress (ref), progressShape (ref), progressSize (ref), image (ref)
 	local var3 = useTokens()
 	local var4, var5 = reactModule.useState(true)
 	local var6 = reactModule.useRef(nil)
 	local var7, var8 = reactModule.useBinding(0)
 	local var9 = if p0.isIcon then 1 else 1.777777777778
-	local var10 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var10 = reactModule.useCallback(function() --[[ line: 44 ]]
 		-- upvalues: var5 (ref), var4 (ref)
 		var5(not var4)
 	end, { var4 })
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function() --[[ line: 48 ]]
 		-- upvalues: p0 (ref), var6 (ref), runService (copy), var8 (ref)
 		if p0.mediaType ~= "video" then
 			return nil
 		elseif var6.current then
-			local renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 56 ]]
+			local renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 58 ]]
 				-- upvalues: var6 (copy), var8 (copy)
 				local current = var6.current
 				
@@ -40,7 +41,7 @@ return function(p0) --[[ line: 34 | named "MediaPreview" ]]
 				end
 			end)
 			
-			return function() --[[ line: 63 ]]
+			return function() --[[ line: 65 ]]
 				-- upvalues: renderSteppedConnection (ref)
 				renderSteppedConnection:Disconnect()
 			end
@@ -48,7 +49,20 @@ return function(p0) --[[ line: 34 | named "MediaPreview" ]]
 		return nil
 	end, { p0.mediaType })
 	
-	return if p0.assetSource then if p0.mediaType == "video" then reactModule.createElement(view, {
+	return if p0.isLoading then reactModule.createElement(view, {
+		Size = UDim2.fromScale(1, 1),
+		LayoutOrder = p0.LayoutOrder,
+		aspectRatio = {
+			AspectRatio = var9,
+			AspectType = Enum.AspectType.FitWithinMaxSize,
+			DominantAxis = Enum.DominantAxis.Width
+		}
+	}, {
+		LoadingSkeleton = reactModule.createElement(skeleton, {
+			radius = foundationModule.Enums.Radius.Medium,
+			Size = UDim2.fromScale(1, 1)
+		})
+	}) elseif not (not p0.assetSource and not p0.imageContent) then if p0.mediaType == "video" then reactModule.createElement(view, {
 		Size = UDim2.fromScale(1, 1),
 		aspectRatio = {
 			AspectRatio = var9,
@@ -64,6 +78,7 @@ return function(p0) --[[ line: 34 | named "MediaPreview" ]]
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
 			Video = p0.assetSource,
+			VideoContent = p0.imageContent,
 			Playing = var4,
 			ref = var6
 		}, {
@@ -92,10 +107,17 @@ return function(p0) --[[ line: 34 | named "MediaPreview" ]]
 			DominantAxis = Enum.DominantAxis.Width
 		}
 	}, {
-		PreviewImage = reactModule.createElement(image, {
+		PreviewImage = if p0.imageContent then reactModule.createElement("ImageLabel", {
+			BackgroundTransparency = 1,
+			ImageContent = p0.imageContent,
+			ScaleType = Enum.ScaleType.Crop,
+			Size = UDim2.fromScale(1, 1)
+		}, {
+			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 12) })
+		}) else reactModule.createElement(image, {
 			tag = "size-full radius-large",
 			Image = p0.assetSource,
-			ScaleType = Enum.ScaleType.Fit
+			ScaleType = Enum.ScaleType.Crop
 		})
 	}) else reactModule.createElement(view, {
 		tag = "align-x-center align-y-center radius-large clip bg-surface-200",

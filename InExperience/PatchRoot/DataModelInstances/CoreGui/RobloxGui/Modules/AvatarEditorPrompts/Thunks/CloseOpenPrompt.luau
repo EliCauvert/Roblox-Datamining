@@ -1,12 +1,10 @@
 ﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local corePackagesService = game:GetService("CorePackages")
 local parent = script.Parent.Parent
 local closeOpenPromptModule = require(parent.Actions.CloseOpenPrompt)
 local promptTypeModule = require(parent.PromptType)
-local fFlagAXAvatarTimeoutFlowIE = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXAvatarTimeoutFlowIE
 
-return function(p0) --[[ line: 10 ]]
-	-- upvalues: promptTypeModule (ref), avatarEditorService (ref), fFlagAXAvatarTimeoutFlowIE (ref), closeOpenPromptModule (ref)
+return function(p0) --[[ line: 8 ]]
+	-- upvalues: promptTypeModule (ref), avatarEditorService (ref), closeOpenPromptModule (ref)
 	local promptType = p0:getState().promptInfo.promptType
 	
 	if promptType == promptTypeModule.AllowInventoryReadAccess then
@@ -25,7 +23,7 @@ return function(p0) --[[ line: 10 ]]
 		avatarEditorService:SignalRenameOutfitPermissionDenied()
 	elseif promptType == promptTypeModule.UpdateOutfit then
 		avatarEditorService:SignalUpdateOutfitPermissionDenied()
-	elseif fFlagAXAvatarTimeoutFlowIE and promptType == promptTypeModule.SaveAvatarTimeout then
+	elseif promptType == promptTypeModule.SaveAvatarTimeout then
 		avatarEditorService:SignalSaveAvatarPermissionDenied()
 	elseif promptType ~= nil then
 		error("CloseOpenPrompt for unhandled prompt type " .. tostring(promptType))

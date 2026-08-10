@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("NotificationThumbnailUseProfileFrameThumbnail", false) and require(script.Parent.Parent.Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()

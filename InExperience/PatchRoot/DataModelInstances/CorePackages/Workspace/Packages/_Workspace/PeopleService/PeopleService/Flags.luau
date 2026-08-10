@@ -13,6 +13,12 @@
 	GetFIntUnblockUserThrottleHundredthsPercent = require(script.Analytics.FIntUnblockUserThrottleHundredthsPercent),
 	GetFIntPeoplePageLayoutChangedThrottleHundredthsPercent = require(script.Analytics.FIntPeoplePageLayoutChangedThrottleHundredthsPercent),
 	GetFIntPersonCardMenuToggledThrottleHundredthsPercent = require(script.Analytics.FIntPersonCardMenuToggledThrottleHundredthsPercent),
+	FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = require(script.Analytics.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry),
+	FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent = require(script.Analytics.FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent),
+	FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent = require(script.Analytics.FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent),
+	FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent = require(script.Analytics.FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent),
+	FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent = require(script.Analytics.FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent),
+	FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent = require(script.Analytics.FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent),
 	GetFFlagNewPeoplePageIcons = require(script.UI.FFlagNewPeoplePageIcons),
 	GetFFlagNewPeopleButtonOrder = require(script.UI.FFlagNewPeopleButtonOrder),
 	FFlagShowSwitchServerButton = require(script.UI.FFlagShowSwitchServerButton),
@@ -25,5 +31,13 @@
 	FFlagPeoplePageRemoveSkeletons = require(script.UI.FFlagPeoplePageRemoveSkeletons),
 	FFlagPeoplePageRemoveUseMemoElements = require(script.UI.FFlagPeoplePageRemoveUseMemoElements),
 	FFlagPeopleCardsEnableVirtualizedGrid = require(script.UI.FFlagPeopleCardsEnableVirtualizedGrid),
-	FFlagFixVirtualizedGridNumItems = require(script.UI.FFlagFixVirtualizedGridNumItems)
+	FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView = require(script.UI.FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView),
+	FFlagPeoplePageFlipVolumePopoverToFitViewport = require(script.UI.FFlagPeoplePageFlipVolumePopoverToFitViewport),
+	FFlagPeoplePageDismissCardMenuOnScrollOutOfView = require(script.UI.FFlagPeoplePageDismissCardMenuOnScrollOutOfView),
+	FFlagFixVirtualizedGridNumItems = require(script.UI.FFlagFixVirtualizedGridNumItems),
+	FFlagVoiceVolumeControlsPerUserPlayerListButton = require(script.UI.FFlagVoiceVolumeControlsPerUserPlayerListButton),
+	FFlagVoiceVolumeControlsPerUserPlayerGridMenu = require(script.UI.FFlagVoiceVolumeControlsPerUserPlayerGridMenu),
+	FFlagEnablePeoplePageButtonOnMount = require(script.UI.FFlagEnablePeoplePageButtonOnMount),
+	FFlagVoiceChatVolumePerUserMuteVolumeSync = require(script.UI.FFlagVoiceChatVolumePerUserMuteVolumeSync),
+	FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted = require(script.UI.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted)
 }

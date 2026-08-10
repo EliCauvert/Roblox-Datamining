@@ -29,6 +29,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAppIaHomeSubTab = sharedFlagsModule.FFlagAppIaHomeSubTab
 local fFlagLuaAppResponsiveEnginePreferredInput = sharedFlagsModule.FFlagLuaAppResponsiveEnginePreferredInput
 local fFlagLuaAppsDefaultSelection = sharedFlagsModule.FFlagLuaAppsDefaultSelection
+local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
 local globalFocusFailureTelemetry = game:DefineFastFlag("GlobalFocusFailureTelemetry", false)
 local t = {
 	[Enum.UserInputType.MouseButton1] = true,
@@ -39,16 +40,16 @@ local t = {
 local var20 = messageBus.Subscriber.new()
 local default = loggingProtocolModule.default
 
-local function gameLeaveMessageValidator(p0) --[[ line: 52 ]]
+local function gameLeaveMessageValidator(p0) --[[ line: 53 ]]
 	return typeof(p0) == "table"
 end
 
-local function _(p1) --[[ line: 60 | named "createGlobalFocusFailureDetection" ]]
+local function _(p1) --[[ line: 61 | named "createGlobalFocusFailureDetection" ]]
 	-- upvalues: globalFocusFailureTelemetry (ref), runService (ref), autoFocusFailsafeThreshold (ref)
 	local var23 = if globalFocusFailureTelemetry then false else nil
 	local var24 = 0
 	
-	return runService.Heartbeat:Connect(function(p2) --[[ line: 63 ]]
+	return runService.Heartbeat:Connect(function(p2) --[[ line: 64 ]]
 		-- upvalues: var24 (write), autoFocusFailsafeThreshold (copy), globalFocusFailureTelemetry (copy), var23 (write), p1 (ref)
 		var24 += p2
 		
@@ -63,20 +64,20 @@ local function _(p1) --[[ line: 60 | named "createGlobalFocusFailureDetection" ]
 	end)
 end
 
-local function createGameLeaveSubscription(p3) --[[ line: 83 ]]
+local function createGameLeaveSubscription(p3) --[[ line: 84 ]]
 	-- upvalues: messageBus (ref), var20 (ref), gameLeaveMessageValidator (ref), autoFocusFailsafeThreshold (ref)
 	local game = messageBus.getMessageId("Game", "onGameLeave")
 	local var26 = nil
-	var20:subscribe({ mid = game, validateParams = gameLeaveMessageValidator }, function(_) --[[ line: 90 ]]
+	var20:subscribe({ mid = game, validateParams = gameLeaveMessageValidator }, function(_) --[[ line: 91 ]]
 		-- upvalues: var26 (write), autoFocusFailsafeThreshold (copy), p3 (ref)
-		var26 = task.delay(autoFocusFailsafeThreshold, function() --[[ line: 91 ]]
+		var26 = task.delay(autoFocusFailsafeThreshold, function() --[[ line: 92 ]]
 			-- upvalues: p3 (copy)
 			p3()
 		end)
 	end)
 	
 	return {
-		unsubscribe = function() --[[ line: 96 ]]
+		unsubscribe = function() --[[ line: 97 ]]
 			-- upvalues: var20 (copy), game (ref), var26 (write)
 			var20:unsubscribeWithMsgId(game)
 			
@@ -87,8 +88,8 @@ local function createGameLeaveSubscription(p3) --[[ line: 83 ]]
 	}
 end
 
-return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
-	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), globalFocusFailureTelemetry (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagAppIaHomeSubTab (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), tenFootUiCorrectAutoFocusLoggingBehavior (ref), mutedError (ref), default (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
+return function(p4) --[[ line: 110 | named "useGlobalFocusHandler" ]]
+	-- upvalues: useLastInputMethodModule (ref), useFocusGuiObject (ref), useFocusedGuiObject (ref), reactModule (ref), globalFocusFailureTelemetry (ref), useLastInputModeModule (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), responsiveModule (ref), sessionService (ref), sessionType (ref), globalFocusTelemetryModule (ref), userInputService (ref), t (ref), navigationModule (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnumModule (ref), fFlagEnablePeekViewFocusNav (ref), fFlagAXMigrateAXToGlobalAutofocus (ref), fFlagAppIaHomeSubTab (ref), fFlagEnableDrawerFocusNav (ref), useAutoFocusModule (ref), useDescendantHasFocusModule (ref), fFlagLuaAppsDefaultSelection (ref), useSelector (ref), tenFootUiCorrectAutoFocusLoggingBehavior (ref), mutedError (ref), default (ref), runService (ref), autoFocusFailsafeThreshold (ref), createGameLeaveSubscription (ref)
 	local var27 = useLastInputMethodModule()
 	local var28 = useFocusGuiObject()
 	local var29 = useFocusedGuiObject()
@@ -96,7 +97,7 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 	local var31 = if globalFocusFailureTelemetry then reactModule.useRef(false) else nil
 	local isFocus = useLastInputModeModule() == "Focus"
 	local var33 = if fFlagLuaAppResponsiveEnginePreferredInput then responsiveModule.usePreferredInput() else nil
-	reactModule.useEffect(function() --[[ line: 119 ]]
+	reactModule.useEffect(function() --[[ line: 121 ]]
 		-- upvalues: var29 (ref), var30 (ref), sessionService (copy), sessionType (copy), var27 (ref), globalFocusFailureTelemetry (copy), var31 (ref), globalFocusTelemetryModule (copy)
 		if var29 ~= nil and var30.current == nil then
 			sessionService:SetSession(sessionType.StructuralIdentifier.Level1, sessionType.StructuralIdentifier.FocusNavigation, var27)
@@ -107,9 +108,9 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 			var31.current = false
 		end
 	end, { var29 })
-	reactModule.useEffect(function() --[[ line: 135 ]]
+	reactModule.useEffect(function() --[[ line: 137 ]]
 		-- upvalues: userInputService (copy), fFlagLuaAppResponsiveEnginePreferredInput (copy), var33 (ref), responsiveModule (copy), t (copy), var30 (ref), sessionService (copy), sessionType (copy), var28 (ref)
-		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p5) --[[ line: 136 ]]
+		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p5) --[[ line: 138 ]]
 			-- upvalues: fFlagLuaAppResponsiveEnginePreferredInput (copy), var33 (copy), responsiveModule (copy), t (copy), var30 (copy), sessionService (copy), sessionType (copy), var28 (copy)
 			if if fFlagLuaAppResponsiveEnginePreferredInput then var33 ~= responsiveModule.Input.Directional and t[p5] else t[p5] then
 				if var30.current == nil then
@@ -124,7 +125,7 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 			end
 		end)
 		
-		return function() --[[ line: 151 ]]
+		return function() --[[ line: 153 ]]
 			-- upvalues: lastInputTypeChangedConnection (ref)
 			lastInputTypeChangedConnection:Disconnect()
 		end
@@ -133,7 +134,7 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 	local var35 = if var34 then var34.state else nil
 	local var36 = if var35 then var35.index else nil
 	local var37 = reactModule.useRef(var36)
-	reactModule.useEffect(function() --[[ line: 164 ]]
+	reactModule.useEffect(function() --[[ line: 166 ]]
 		-- upvalues: isFocus (ref), var37 (ref), var36 (ref), var28 (ref)
 		if isFocus and var37.current ~= nil and (var36 ~= nil and var37.current < var36) then
 			var37.current = var36
@@ -148,7 +149,7 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 		var39 = reactModule.useRef(nil)
 		local currentRouteState = navigationModule.getCurrentRouteState(var34)
 		local var41 = if currentRouteState then currentRouteState.routeName else nil
-		reactModule.useEffect(function() --[[ line: 185 ]]
+		reactModule.useEffect(function() --[[ line: 187 ]]
 			-- upvalues: var41 (ref), var38 (write), var39 (write)
 			if var41 ~= var38.current then
 				var39.current = var38.current
@@ -167,8 +168,9 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 	local var50 = if fFlagAXMigrateAXToGlobalAutofocus then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.SubRouterView) else nil
 	local var51 = if fFlagAXMigrateAXToGlobalAutofocus then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.Auxiliary) else nil
 	local var52 = if fFlagAppIaHomeSubTab then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.HeaderView) else nil
-	local var53 = reactModule.useMemo(function() --[[ line: 237 ]]
-		-- upvalues: var45 (ref), var44 (ref), var47 (ref), var46 (ref), var49 (ref), var43 (ref), fFlagAXMigrateAXToGlobalAutofocus (copy), var50 (ref), var42 (ref), var48 (ref), var51 (ref), fFlagAppIaHomeSubTab (copy), var52 (ref)
+	local var53 = if fFlagEnableDrawerFocusNav then useRegistryEntry(focusNavigableSurfaceIdentifierEnumModule.Drawer) else nil
+	local var54 = reactModule.useMemo(function() --[[ line: 242 ]]
+		-- upvalues: var45 (ref), var44 (ref), var47 (ref), var46 (ref), var49 (ref), fFlagEnableDrawerFocusNav (copy), var53 (ref), var43 (ref), fFlagAXMigrateAXToGlobalAutofocus (copy), var50 (ref), var42 (ref), var48 (ref), var51 (ref), fFlagAppIaHomeSubTab (copy), var52 (ref)
 		local t = {}
 		
 		if var45 then
@@ -189,6 +191,10 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 			return t
 		elseif var49 then
 			table.insert(t, var49)
+			
+			return t
+		elseif fFlagEnableDrawerFocusNav and var53 then
+			table.insert(t, var53)
 			
 			return t
 		elseif var43 then
@@ -214,67 +220,70 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 		var45, var43, var42, var44, var47, var46, var49,
 		if fFlagAXMigrateAXToGlobalAutofocus then var50 else nil,
 		if fFlagAXMigrateAXToGlobalAutofocus then var51 else nil,
-		if fFlagAppIaHomeSubTab then var52 else nil
+		if fFlagAppIaHomeSubTab then var52 else nil,
+		if fFlagEnableDrawerFocusNav then var48 else nil,
+		if fFlagEnableDrawerFocusNav then var53 else nil
 	})
-	local var54 = useAutoFocusModule(var53, 0.1)
-	local var55 = useDescendantHasFocusModule(var42)
-	local var56 = useDescendantHasFocusModule(var43)
-	local var57 = useDescendantHasFocusModule(var44)
-	local var58 = useDescendantHasFocusModule(var45)
-	local var59 = useDescendantHasFocusModule(var47)
-	local var60 = useDescendantHasFocusModule(var46)
-	local var61 = useDescendantHasFocusModule(var48)
-	local var62 = if fFlagAXMigrateAXToGlobalAutofocus then useDescendantHasFocusModule(var50) else nil
-	local var63 = if fFlagAXMigrateAXToGlobalAutofocus then useDescendantHasFocusModule(var51) else nil
-	local var64 = if fFlagEnablePeekViewFocusNav then useDescendantHasFocusModule(var49) else false
-	local var65 = if fFlagAppIaHomeSubTab then useDescendantHasFocusModule(var52) else false
+	local var55 = useAutoFocusModule(var54, 0.1)
+	local var56 = useDescendantHasFocusModule(var42)
+	local var57 = useDescendantHasFocusModule(var43)
+	local var58 = useDescendantHasFocusModule(var44)
+	local var59 = useDescendantHasFocusModule(var45)
+	local var60 = useDescendantHasFocusModule(var47)
+	local var61 = useDescendantHasFocusModule(var46)
+	local var62 = useDescendantHasFocusModule(var48)
+	local var63 = if fFlagAXMigrateAXToGlobalAutofocus then useDescendantHasFocusModule(var50) else nil
+	local var64 = if fFlagAXMigrateAXToGlobalAutofocus then useDescendantHasFocusModule(var51) else nil
+	local var65 = if fFlagEnablePeekViewFocusNav then useDescendantHasFocusModule(var49) else false
+	local var66 = if fFlagAppIaHomeSubTab then useDescendantHasFocusModule(var52) else false
+	local var67 = if fFlagEnableDrawerFocusNav then useDescendantHasFocusModule(var53) else false
 	local _ = nil
-	local var66 = if var45 then var58 elseif var44 then var57 elseif var47 then var59 elseif var46 then var60 elseif var49 then var64 elseif fFlagAXMigrateAXToGlobalAutofocus then var55 or (var56 or (var61 or (var62 or (var63 or fFlagAppIaHomeSubTab and var65)))) else var55 or (var56 or (var61 or fFlagAppIaHomeSubTab and var65))
-	local var67 = nil
+	local var68 = if var45 then var59 elseif var44 then var58 elseif var47 then var60 elseif var46 then var61 elseif var49 then var65 elseif fFlagEnableDrawerFocusNav and var53 then var67 elseif fFlagAXMigrateAXToGlobalAutofocus then var56 or (var57 or (var62 or (var63 or (var64 or fFlagAppIaHomeSubTab and var66)))) else var56 or (var57 or (var62 or fFlagAppIaHomeSubTab and var66))
+	local var69 = nil
 	
 	if fFlagLuaAppsDefaultSelection then
-		var67 = reactModule.useRef(var53)
-		local var68 = if var45 and not var58 then true elseif var44 and not var57 then true elseif var47 and not var59 then true elseif var46 and not var60 then true elseif var49 and not var64 then true elseif var43 and not var56 then true elseif fFlagAXMigrateAXToGlobalAutofocus and var50 and not var62 then true elseif var42 and not var55 then true elseif var48 and not var61 then true elseif fFlagAXMigrateAXToGlobalAutofocus and var51 and not var63 then true elseif fFlagAppIaHomeSubTab and var52 and not var65 then true else false
-		reactModule.useEffect(function() --[[ line: 362 ]]
-			-- upvalues: var33 (ref), responsiveModule (copy), var67 (write), var53 (ref), p4 (ref), var68 (ref), var28 (ref)
-			if var33 == responsiveModule.Input.Directional and var67.current ~= var53 and (not p4 and var68) then
+		var69 = reactModule.useRef(var54)
+		local var70 = if var45 and not var59 then true elseif var44 and not var58 then true elseif var47 and not var60 then true elseif var46 and not var61 then true elseif var49 and not var65 then true elseif fFlagEnableDrawerFocusNav and var53 and not var67 then true elseif var43 and not var57 then true elseif fFlagAXMigrateAXToGlobalAutofocus and var50 and not var63 then true elseif var42 and not var56 then true elseif var48 and not var62 then true elseif fFlagAXMigrateAXToGlobalAutofocus and var51 and not var64 then true elseif fFlagAppIaHomeSubTab and var52 and not var66 then true else false
+		reactModule.useEffect(function() --[[ line: 375 ]]
+			-- upvalues: var33 (ref), responsiveModule (copy), var69 (write), var54 (ref), p4 (ref), var70 (ref), var28 (ref)
+			if var33 == responsiveModule.Input.Directional and var69.current ~= var54 and (not p4 and var70) then
 				var28(nil)
 			end
-			var67.current = var53
+			var69.current = var54
 		end, {
-			var53,
+			var54,
 			var33,
 			p4,
-			var68,
+			var70,
 			var28
 		})
 	end
-	local var69 = if globalFocusFailureTelemetry then useSelector(function(p6) --[[ line: 384 ]]
+	local var71 = if globalFocusFailureTelemetry then useSelector(function(p6) --[[ line: 397 ]]
 		return p6.CentralOverlay.OverlayType
 	end) else nil
-	local var70 = if fFlagLuaAppResponsiveEnginePreferredInput then if var33 ~= responsiveModule.Input.Directional then isFocus else true else isFocus
-	var70 = var70 and (not var66 and not p4)
-	reactModule.useEffect(function() --[[ line: 396 ]]
-		-- upvalues: var54 (ref), var70 (ref), globalFocusFailureTelemetry (copy), globalFocusTelemetryModule (copy), var53 (ref), var29 (ref), var67 (write), var45 (ref), var44 (ref), var47 (ref), var46 (ref), var49 (ref), var43 (ref), var50 (ref), var42 (ref), var48 (ref), var51 (ref), var52 (ref), var39 (write), var38 (write), var69 (ref), var31 (ref), tenFootUiCorrectAutoFocusLoggingBehavior (copy), mutedError (copy), default (copy), runService (copy), autoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
-		local var73 = nil
+	local var72 = if fFlagLuaAppResponsiveEnginePreferredInput then if var33 ~= responsiveModule.Input.Directional then isFocus else true else isFocus
+	var72 = var72 and (not var68 and not p4)
+	reactModule.useEffect(function() --[[ line: 409 ]]
+		-- upvalues: var55 (ref), var72 (ref), globalFocusFailureTelemetry (copy), globalFocusTelemetryModule (copy), var54 (ref), var29 (ref), var69 (write), var45 (ref), var44 (ref), var47 (ref), var46 (ref), var49 (ref), var43 (ref), var50 (ref), var42 (ref), var48 (ref), var51 (ref), var52 (ref), var39 (write), var38 (write), var71 (ref), var31 (ref), tenFootUiCorrectAutoFocusLoggingBehavior (copy), mutedError (copy), default (copy), runService (copy), autoFocusFailsafeThreshold (copy), createGameLeaveSubscription (copy)
+		local var75 = nil
 		local heartbeatConnection = nil
 		
-		local function setAutoFocusing() --[[ line: 400 ]]
-			-- upvalues: var73 (write), var54 (copy)
-			if var73 then
-				var73.cancel()
+		local function setAutoFocusing() --[[ line: 413 ]]
+			-- upvalues: var75 (write), var55 (copy)
+			if var75 then
+				var75.cancel()
 			end
-			var73 = var54()
+			var75 = var55()
 		end
 		
-		if var70 then
-			var73 = var54()
+		if var72 then
+			var75 = var55()
 			
-			local var76 = function() --[[ line: 409 ]]
-				-- upvalues: globalFocusFailureTelemetry (copy), globalFocusTelemetryModule (copy), var53 (copy), var29 (copy), var67 (copy), var45 (copy), var44 (copy), var47 (copy), var46 (copy), var49 (copy), var43 (copy), var50 (copy), var42 (copy), var48 (copy), var51 (copy), var52 (copy), var39 (copy), var38 (copy), var69 (copy), var31 (copy), tenFootUiCorrectAutoFocusLoggingBehavior (copy), mutedError (copy), default (copy), var73 (write), var54 (copy)
+			local var78 = function() --[[ line: 422 ]]
+				-- upvalues: globalFocusFailureTelemetry (copy), globalFocusTelemetryModule (copy), var54 (copy), var29 (copy), var69 (copy), var45 (copy), var44 (copy), var47 (copy), var46 (copy), var49 (copy), var43 (copy), var50 (copy), var42 (copy), var48 (copy), var51 (copy), var52 (copy), var39 (copy), var38 (copy), var71 (copy), var31 (copy), tenFootUiCorrectAutoFocusLoggingBehavior (copy), mutedError (copy), default (copy), var75 (write), var55 (copy)
 				if globalFocusFailureTelemetry then
-					globalFocusTelemetryModule.sendAutoFocusFailureCounter(var53)
-					globalFocusTelemetryModule.sendAutoFocusFailureEvent(var29, if var67 then var67.current else {}, var53, {
+					globalFocusTelemetryModule.sendAutoFocusFailureCounter(var54)
+					globalFocusTelemetryModule.sendAutoFocusFailureEvent(var29, if var69 then var69.current else {}, var54, {
 						moderationOverlay = var45,
 						centralOverlay = var44,
 						contextualMenu = var47,
@@ -286,53 +295,53 @@ return function(p4) --[[ line: 108 | named "useGlobalFocusHandler" ]]
 						searchBar = var48,
 						auxiliaryView = var51,
 						headerView = var52
-					}, if var39 then var39.current else nil, if var38 then var38.current else nil, var69)
+					}, if var39 then var39.current else nil, if var38 then var38.current else nil, var71)
 					var31.current = true
 				elseif tenFootUiCorrectAutoFocusLoggingBehavior then
-					mutedError("[useGlobalFocusHandler] globalFocusHandler failed to autofocus with " .. #var53 .. " targets, retrying")
+					mutedError("[useGlobalFocusHandler] globalFocusHandler failed to autofocus with " .. #var54 .. " targets, retrying")
 				else
-					default:logEvent("GamePadFocusFailsafeActivated", { targetCount = #var53 })
+					default:logEvent("GamePadFocusFailsafeActivated", { targetCount = #var54 })
 				end
-				if var73 then
-					var73.cancel()
+				if var75 then
+					var75.cancel()
 				end
-				var73 = var54()
+				var75 = var55()
 			end
 			
-			local var77 = if globalFocusFailureTelemetry then false else nil
-			local var78 = 0
-			heartbeatConnection = runService.Heartbeat:Connect(function(p7) --[[ line: 63 ]]
-				-- upvalues: var78 (write), autoFocusFailsafeThreshold (copy), globalFocusFailureTelemetry (copy), var77 (write), var76 (ref)
-				var24 += p7
+			local var79 = if globalFocusFailureTelemetry then false else nil
+			local var80 = 0
+			heartbeatConnection = runService.Heartbeat:Connect(function(p7) --[[ line: 64 ]]
+				-- upvalues: var80 (write), autoFocusFailsafeThreshold (copy), globalFocusFailureTelemetry (copy), var79 (write), var78 (ref)
+				var80 += p7
 				
-				if autoFocusFailsafeThreshold < var24 and (not globalFocusFailureTelemetry or not var77) then
-					var76()
+				if autoFocusFailsafeThreshold < var80 and (not globalFocusFailureTelemetry or not var79) then
+					var78()
 					
 					if globalFocusFailureTelemetry then
-						var77 = true
+						var79 = true
 					end
-					var24 = 0
+					var80 = 0
 				end
 			end)
 		end
-		local var79 = if var70 then createGameLeaveSubscription(setAutoFocusing) else nil
+		local var81 = if var72 then createGameLeaveSubscription(setAutoFocusing) else nil
 		
-		return function() --[[ line: 456 ]]
-			-- upvalues: var73 (write), var79 (write), heartbeatConnection (write)
-			if var73 then
-				var73.cancel()
+		return function() --[[ line: 469 ]]
+			-- upvalues: var75 (write), var81 (write), heartbeatConnection (write)
+			if var75 then
+				var75.cancel()
 			end
-			if var79 then
-				var79.unsubscribe()
+			if var81 then
+				var81.unsubscribe()
 			end
 			if heartbeatConnection then
 				heartbeatConnection:Disconnect()
 			end
 		end
 	end, {
-		var70,
+		var72,
+		var55,
 		var54,
-		var53,
 		if fFlagLuaAppsDefaultSelection then var29 else nil
 	})
 end

@@ -8,9 +8,11 @@ local fFlagSignalsNavP3hMisc = sharedFlagsModule.FFlagSignalsNavP3hMisc
 local fFlagMomentsWatchSessionalization = sharedFlagsModule.FFlagMomentsWatchSessionalization
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useSignalState = require(parent.SignalsReact).useSignalState
-local var2 = if fFlagSignalsNavP3hMisc then navigationRoduxModule.GetLegacyNavigationStore else nil
+local reactModule = require(parent.React)
+local var3 = if fFlagSignalsNavP3hMisc then navigationRoduxModule.GetLegacyNavigationStore else nil
+local var4 = if fFlagSignalsNavP3hMisc then require(parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-local function routeContainsMoments(p0) --[[ line: 32 ]]
+local function routeContainsMoments(p0) --[[ line: 36 ]]
 	-- upvalues: appPage (ref)
 	if type(p0) ~= "table" then
 		return false
@@ -23,10 +25,10 @@ local function routeContainsMoments(p0) --[[ line: 32 ]]
 	return false
 end
 
-return function() --[[ line: 44 | named "useMomentsTabIsVisible" ]]
-	-- upvalues: fFlagSignalsNavP3hMisc (ref), useSelector (ref), var2 (ref), useSignalState (ref), fFlagMomentsWatchSessionalization (ref), routeContainsMoments (ref), appPage (ref), fFlagUseNavigationSelectors (ref), selectors (ref)
+return function() --[[ line: 48 | named "useMomentsTabIsVisible" ]]
+	-- upvalues: fFlagSignalsNavP3hMisc (ref), var3 (ref), reactModule (ref), fFlagMomentsWatchSessionalization (ref), appPage (ref), useSignalState (ref), var4 (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), routeContainsMoments (ref), selectors (ref)
 	if not fFlagSignalsNavP3hMisc then
-		return useSelector(function(p1) --[[ line: 61 ]]
+		return useSelector(function(p1) --[[ line: 64 ]]
 			-- upvalues: fFlagUseNavigationSelectors (copy), fFlagMomentsWatchSessionalization (copy), routeContainsMoments (copy), selectors (copy), appPage (copy)
 			if not p1.Navigation then
 				return true
@@ -38,21 +40,15 @@ return function() --[[ line: 44 | named "useMomentsTabIsVisible" ]]
 			if not history then
 				return false
 			end
-			local var6 = history[#history]
+			local var7 = history[#history]
 			
-			return if fFlagMomentsWatchSessionalization then routeContainsMoments(var6) else (var6[#var6] and var6[#var6].name) == appPage.Moments
+			return if fFlagMomentsWatchSessionalization then routeContainsMoments(var7) else (var7[#var7] and var7[#var7].name) == appPage.Moments
 		end)
 	end
-	local var4 = useSignalState(var2(false).getCurrentLegacyRoute)
+	local var6 = var3(false)
 	
-	if not useSelector(function(p2) --[[ line: 46 ]]
-		return p2.Navigation ~= nil
-	end) then
-		return true
-	elseif fFlagMomentsWatchSessionalization then
-		return routeContainsMoments(var4)
-	end
-	local var5 = if var4 then var4[#var4] else nil
-	
-	return var5 ~= nil and var5.name == appPage.Moments
+	return if var4() then useSignalState(reactModule.useMemo(function() --[[ line: 51 ]]
+		-- upvalues: fFlagMomentsWatchSessionalization (copy), var6 (ref), appPage (copy)
+		return if fFlagMomentsWatchSessionalization then var6.getRouteContainsPageSignal(appPage.Moments) else var6.getIsCurrentPageSignal(appPage.Moments)
+	end, {})) else true
 end

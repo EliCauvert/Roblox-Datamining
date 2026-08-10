@@ -14,17 +14,18 @@ local var6 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			overrideName = function(p0) --[[ line: 56 ]]
+			standardizedFields = if require(momentsCommon.Flags.GetFFlagMomentsAnalyticsProducerPrereqs)() then { "addSessionInfo", "addSessionId" } else nil,
+			overrideName = function(p0) --[[ line: 69 ]]
 				return p0.eventName
 			end,
-			format = function(p1, _) --[[ line: 59 ]]
+			format = function(p1, _) --[[ line: 72 ]]
 				return p1.additionalInfo or {}
 			end
 		}
 	}
 })
 
-return function(p2, p3) --[[ line: 66 | named "fireAnalyticsEvent" ]]
+return function(p2, p3) --[[ line: 79 | named "fireAnalyticsEvent" ]]
 	-- upvalues: telemetryEmitterModule (ref), var6 (ref), funnelEventActionListModule (ref), sessionManagerModule (ref), fireFunnelAnalyticsEventModule (ref)
 	telemetryEmitterModule.emit(var6, { eventName = p2, additionalInfo = p3 })
 	local var7 = funnelEventActionListModule[p2]

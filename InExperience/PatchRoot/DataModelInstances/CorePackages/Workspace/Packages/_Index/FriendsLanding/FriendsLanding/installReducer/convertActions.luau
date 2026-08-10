@@ -1,8 +1,8 @@
 ﻿local llama = require(script:FindFirstAncestor("FriendsLanding").dependencies).llama
 
-return function(p0, p1, p2) --[[ line: 6 ]]
+return function(p0, p1, p2) --[[ line: 15 ]]
 	-- upvalues: llama (ref)
-	return function(p3, p4) --[[ line: 7 ]]
+	return function(p3, p4) --[[ line: 16 ]]
 		-- upvalues: p2 (ref), p1 (ref), llama (copy), p0 (ref)
 		p3 = p3 or p2
 		local list = { p4 }

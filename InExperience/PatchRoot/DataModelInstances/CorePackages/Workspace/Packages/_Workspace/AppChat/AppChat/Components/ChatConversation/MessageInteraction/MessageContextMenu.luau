@@ -47,7 +47,7 @@ function MessageContextMenu(p0) --[[ line: 86 ]]
 	local var13 = cryoModule.Dictionary.union(t, p0)
 	local var14 = if fFlagAppChatSignalsReplyStoreModule then getReplyingToStoreModule(false) else nil
 	local var15 = useReplyingToMessageDispatchModule()
-	local color = useStyle().Tokens.Global.Color
+	local tokens = useStyle().Tokens
 	local var16 = reactModule.useRef(signal.new())
 	local unitTestScreenSize = var13.unitTestScreenSize or useLayerCollector().absoluteSize
 	local var18 = useNavigation()
@@ -161,7 +161,7 @@ function MessageContextMenu(p0) --[[ line: 86 ]]
 	local var39, vector2, vector2_1, uDim, uDim_1
 	local var36 = reactModule.useCallback(function() --[[ line: 248 ]] end)
 	local var37 = reactModule.useMemo(function() --[[ line: 253 ]]
-		-- upvalues: images (copy), var21 (ref), var30 (ref), var31 (ref), var13 (ref), var32 (ref), color (ref), var33 (ref), getFFlagAppChatEnableManualTranslationModule (copy), var34 (write), var36 (ref)
+		-- upvalues: images (copy), var21 (ref), var30 (ref), var31 (ref), var13 (ref), var32 (ref), tokens (ref), var33 (ref), getFFlagAppChatEnableManualTranslationModule (copy), var34 (write), var36 (ref)
 		local list = {
 			{
 				icon = images["icons/placeholder/placeholderOff"],
@@ -183,9 +183,9 @@ function MessageContextMenu(p0) --[[ line: 86 ]]
 			})
 			table.insert(list, {
 				icon = images["icons/actions/edit/delete"],
-				iconColorOverride = color.Red.Color3,
+				iconColorOverride = tokens.Color.System.Alert.Color3,
 				text = var21.deleteText,
-				textColorOverride = color.Red.Color3,
+				textColorOverride = tokens.Color.System.Alert.Color3,
 				onActivated = var33
 			})
 			
@@ -199,9 +199,9 @@ function MessageContextMenu(p0) --[[ line: 86 ]]
 		end
 		table.insert(list, {
 			icon = images["icons/placeholder/placeholderOff"],
-			iconColorOverride = color.Red.Color3,
+			iconColorOverride = tokens.Color.System.Alert.Color3,
 			text = var21.reportText,
-			textColorOverride = color.Red.Color3,
+			textColorOverride = tokens.Color.System.Alert.Color3,
 			onActivated = var36
 		})
 		

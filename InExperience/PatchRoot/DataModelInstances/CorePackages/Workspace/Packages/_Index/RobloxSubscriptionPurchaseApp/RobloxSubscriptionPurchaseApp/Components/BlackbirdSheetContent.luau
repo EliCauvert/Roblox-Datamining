@@ -52,7 +52,8 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 	local var28 = if fFlagRobloxPlusFAEFreeTrialModule then var24.description else nil
 	local var29 = if var27 then var26.getFreeTrialText else var26.buttonText
 	local var30 = var24.showLegalDisclosure ~= nil or var24.showLegalDisclosure
-	local var31 = reactModule.useCallback(function(p0) --[[ line: 82 ]]
+	local var31 = if fFlagRobloxPlusFAEFreeTrialModule and var24.noPurchaseMethodRequired ~= nil then var24.noPurchaseMethodRequired else false
+	local var32 = reactModule.useCallback(function(p0) --[[ line: 90 ]]
 		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy)
 		if p0 then
 			if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
@@ -62,7 +63,7 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		end
 	end, {})
 	
-	local function onSubscribe() --[[ line: 93 ]]
+	local function onSubscribe() --[[ line: 101 ]]
 		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy), fFlagRobloxPlusFAEFreeTrialModule (copy), var23 (ref), var22 (ref), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy), performRobloxSubscriptionPurchaseModule (copy)
 		if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
 			logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
@@ -71,11 +72,11 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		
 		if fFlagRobloxPlusFAEFreeTrialModule and var23 then
 			var22.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
-			var23(function() --[[ line: 105 ]]
+			var23(function() --[[ line: 113 ]]
 				-- upvalues: var22 (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
 				var22.setDidTryPurchasing(true)
 				finalizeRobloxSubscriptionUpsellFlowModule(true)
-			end, function() --[[ line: 108 ]]
+			end, function() --[[ line: 116 ]]
 				-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
 				completeRobloxSubscriptionUpsellFlowModule()
 			end)
@@ -85,7 +86,7 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		performRobloxSubscriptionPurchaseModule()
 	end
 	
-	local var33 = t[var25] == true
+	local var34 = t[var25] == true
 	local t_1 = {
 		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
 			View = reactModule.createElement(view, { LayoutOrder = 1, tag = "row gap-small auto-xy" }, {
@@ -107,10 +108,10 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
 			ContentContainer = reactModule.createElement(view, {
 				tag = {
-					["col size-full-0 auto-y"] = fFlagRobloxPlusFAEFreeTrialModule,
-					col = not fFlagRobloxPlusFAEFreeTrialModule
+					["col size-full-0 auto-y"] = fFlagRobloxPlusFAEFreeTrialModule and var28 ~= nil,
+					col = not (fFlagRobloxPlusFAEFreeTrialModule and var28 ~= nil)
 				},
-				Size = if fFlagRobloxPlusFAEFreeTrialModule then nil else UDim2.new(1, 0, 0, 140)
+				Size = if fFlagRobloxPlusFAEFreeTrialModule and var28 ~= nil then nil else UDim2.new(1, 0, 0, 140)
 			}, {
 				PriceRow = if fFlagRobloxPlusFAEFreeTrialModule and var28 ~= nil then reactModule.createElement(text, {
 					LayoutOrder = 1,
@@ -120,7 +121,7 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 					layoutOrder = 1,
 					isFreeTrial = if fFlagSupportFreeTrialPriceRowModule then var27 else nil
 				}),
-				FeatureList = reactModule.createElement(robloxSubscriptionFeatureListModule, { layoutOrder = 2 })
+				FeatureList = reactModule.createElement(robloxSubscriptionFeatureListModule, { layoutOrder = 2, noPurchaseMethodRequired = var31 })
 			})
 		})
 	}
@@ -136,12 +137,12 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 	local t_5 = {
 		SubscribeButton = reactModule.createElement(button, {
 			LayoutOrder = 1,
-			ref = var31,
+			ref = var32,
 			text = if fFlagRobloxPlusFAEFreeTrialModule and var24.ctaText then var24.ctaText else var29,
 			onActivated = onSubscribe,
 			fillBehavior = fillBehavior.Fill,
 			variant = buttonVariant.Emphasis,
-			isLoading = var33
+			isLoading = var34
 		})
 	}
 	
@@ -152,7 +153,8 @@ return function() --[[ line: 57 | named "useBlackbirdSheetSlots" ]]
 		createElement_2 = createElement_2(legalDisclosureModule, {
 			layoutOrder = 2,
 			ctaText = if fFlagRobloxPlusFAEFreeTrialModule and var24.ctaText then var24.ctaText else var29,
-			isFreeTrial = if fFlagSupportFreeTrialModule then var27 else nil
+			isFreeTrial = if fFlagSupportFreeTrialModule then var27 else nil,
+			shortenFreeTrialTerms = if fFlagRobloxPlusFAEFreeTrialModule then var31 else nil
 		})
 	end
 	t_5.LegalDisclosure = createElement_2

@@ -9,7 +9,6 @@ local roactModule = require(parent.Roact)
 local colors = require(parent.Style).Colors
 local cryoModule = require(parent.Cryo)
 local UIBloxModule = require(parent.UIBlox)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local withStyle = UIBloxModule.Style.withStyle
 local withTextSizeOffset = UIBloxModule.Core.Style.withTextSizeOffset
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -25,7 +24,7 @@ local fFlagLuaAppGenreRatingFooter = require(parent.SharedFlags).FFlagLuaAppGenr
 local ratingSmall = images["icons/status/games/rating_small"]
 local var9 = images["icons/status/games/people-playing_small"]
 local gameStats = roactModule.PureComponent:extend("GameStats")
-local var11 = if not fFlagLuaAppGenreRatingFooter then function(p0, p1) --[[ line: 37 ]]
+local var11 = if not fFlagLuaAppGenreRatingFooter then function(p0, p1) --[[ line: 35 ]]
 	local var12 = "--"
 	
 	if p0 == nil or p0 < 0 then
@@ -42,14 +41,14 @@ local var11 = if not fFlagLuaAppGenreRatingFooter then function(p0, p1) --[[ lin
 	return var12
 end else nil
 
-function gameStats.renderSponsored(p2, p3) --[[ line: 58 ]]
+function gameStats.renderSponsored(p2, p3) --[[ line: 56 ]]
 	-- upvalues: roactModule (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), getUserInputIsSelectionOnlyModule (ref), interactable (ref), withLocalization (ref)
 	local theme = p3.Theme
 	local font = p3.Font
 	local var14 = if p2.props.useLargerFont then font.Body else font.CaptionHeader
 	local var15 = var14.RelativeSize * font.BaseSize
 	
-	return withLocalization({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p4) --[[ line: 65 ]]
+	return withLocalization({ sponsoredText = "Feature.GamePage.Label.Sponsored" })(function(p4) --[[ line: 63 ]]
 		-- upvalues: roactModule (copy), var15 (ref), theme (ref), var14 (ref), sponsoredTooltipHover (copy), tooltipOrientation (copy), p2 (ref), getUserInputIsSelectionOnlyModule (copy), interactable (copy)
 		return roactModule.createElement("Frame", {
 			BorderSizePixel = 0,
@@ -62,7 +61,7 @@ function gameStats.renderSponsored(p2, p3) --[[ line: 58 ]]
 			SponsoredBlock = roactModule.createElement(interactable, {
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
-				onStateChanged = function() --[[ line: 113 ]] end,
+				onStateChanged = function() --[[ line: 111 ]] end,
 				[roactModule.Event.Activated] = p2.props.onActivateSponsoredTooltip
 			}, {
 				SponsoredBlockFrame = roactModule.createElement("Frame", {
@@ -102,7 +101,7 @@ function gameStats.renderSponsored(p2, p3) --[[ line: 58 ]]
 	end)
 end
 
-function gameStats.renderGameStats(p5, p6, p7, p8) --[[ line: 126 ]]
+function gameStats.renderGameStats(p5, p6, p7, p8) --[[ line: 124 ]]
 	-- upvalues: fFlagLuaAppGenreRatingFooter (ref), getGameStatsRatingPercentageTextModule (ref), var11 (write), roactModule (ref), gridTileGameStatsModule (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), withLocalization (ref), gridTileIconTextFooterModule (ref), images (ref)
 	local stats = p7.stats
 	local var16 = if fFlagLuaAppGenreRatingFooter then getGameStatsRatingPercentageTextModule(stats.totalUpVotes, stats.totalDownVotes) else var11(stats.totalUpVotes, stats.totalDownVotes)
@@ -113,7 +112,7 @@ function gameStats.renderGameStats(p5, p6, p7, p8) --[[ line: 126 ]]
 				"Feature.GameDetails.RatingPercentOnly",
 				percentRating = var16
 			}
-		})(function(p9) --[[ line: 156 ]]
+		})(function(p9) --[[ line: 154 ]]
 			-- upvalues: roactModule (copy), gridTileIconTextFooterModule (copy), images (copy), p5 (ref), p7 (ref)
 			return roactModule.createElement(gridTileIconTextFooterModule, {
 				icon = images["icons/status/games/rating_small"],
@@ -139,14 +138,14 @@ function gameStats.renderGameStats(p5, p6, p7, p8) --[[ line: 126 ]]
 	}) else p5:renderFullGameStats(p6, p7, var16, p8)
 end
 
-function gameStats.renderFullGameStats(_, p10, p11, p12, p13) --[[ line: 171 ]]
-	-- upvalues: fFlagRenameDeprecatedUIBloxTokens (ref), roactModule (ref), imageSetLabel (ref), ratingSmall (ref), var9 (ref)
+function gameStats.renderFullGameStats(_, p10, p11, p12, p13) --[[ line: 169 ]]
+	-- upvalues: roactModule (ref), imageSetLabel (ref), ratingSmall (ref), var9 (ref)
 	local var17 = if p11.stats.playerCount then p11.playerCountText else nil
 	local theme = p10.Theme
 	local font = p10.Font
 	local font_1 = font.CaptionSubHeader.Font
 	local var18 = font.BaseSize * font.CaptionSubHeader.RelativeSize
-	local var19 = var18 + (if fFlagRenameDeprecatedUIBloxTokens then p10.Tokens.Size.Size_150 else p10.Tokens.Global.Size_75)
+	local var19 = var18 + p10.Tokens.Size.Size_150
 	local minValue = math.min(math.ceil(var18) + (p13 or 0), var19)
 	
 	return roactModule.createElement("Frame", {
@@ -209,7 +208,7 @@ function gameStats.renderFullGameStats(_, p10, p11, p12, p13) --[[ line: 171 ]]
 	})
 end
 
-function gameStats.renderConcurrentUsersPill(_, p14, p15) --[[ line: 261 ]]
+function gameStats.renderConcurrentUsersPill(_, p14, p15) --[[ line: 254 ]]
 	-- upvalues: roactModule (ref), colors (ref), imageSetLabel (ref), var9 (ref)
 	local font = p14.Font
 	
@@ -261,28 +260,28 @@ function gameStats.renderConcurrentUsersPill(_, p14, p15) --[[ line: 261 ]]
 	})
 end
 
-function gameStats.render(p16) --[[ line: 317 ]]
+function gameStats.render(p16) --[[ line: 310 ]]
 	-- upvalues: withTextSizeOffset (ref), withStyle (ref)
 	local stats = p16.props.stats
 	
 	if stats == nil then
 		return nil
 	end
-	local var21 = function(p17, p18) --[[ line: 323 ]]
+	local var21 = function(p17, p18) --[[ line: 316 ]]
 		-- upvalues: stats (ref), p16 (ref)
 		return if stats.isSponsored and stats.isShowSponsoredLabel then p16:renderSponsored(p17) elseif stats.displayConcurrentUsersPill then p16:renderConcurrentUsersPill(p17, p16.props) elseif p16.props.hideGameStats then nil else p16:renderGameStats(p17, p16.props, p18)
 	end
 	
-	return withTextSizeOffset(function(p19) --[[ line: 338 ]]
+	return withTextSizeOffset(function(p19) --[[ line: 331 ]]
 		-- upvalues: withStyle (copy), var21 (ref)
-		return withStyle(function(p20) --[[ line: 339 ]]
+		return withStyle(function(p20) --[[ line: 332 ]]
 			-- upvalues: var21 (copy), p19 (ref)
 			return var21(p20, p19)
 		end)
 	end)
 end
 
-return function(p21) --[[ line: 346 ]]
+return function(p21) --[[ line: 339 ]]
 	-- upvalues: usePlayerCountTextModule (ref), roactModule (ref), gameStats (ref), cryoModule (ref)
 	return roactModule.createElement(gameStats, cryoModule.Dictionary.join(p21, {
 		playerCountText = usePlayerCountTextModule(if p21.stats then p21.stats.playerCount else nil)

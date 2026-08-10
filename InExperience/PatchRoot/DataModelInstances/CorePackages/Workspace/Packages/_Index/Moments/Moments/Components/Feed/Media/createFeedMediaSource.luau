@@ -5,15 +5,15 @@ local _ = require(parent.MomentsCommon)
 local _ = require(moments.Components.Feed.FeedTypes)
 local toMediaItemModule = require(script.Parent.toMediaItem)
 
-return function(p0, p1) --[[ line: 31 | named "createFeedMediaSource" ]]
+return function(p0, p1, p2) --[[ line: 31 | named "createFeedMediaSource" ]]
 	-- upvalues: toMediaItemModule (ref)
 	return {
 		getActiveIndex = p0.getCurrentIndex,
-		getItems = function(p2) --[[ line: 43 ]]
+		getItems = function(p3) --[[ line: 44 ]]
 			-- upvalues: p0 (ref), toMediaItemModule (copy)
 			local t = {}
 			
-			for i, v in p0.getItems(p2) do
+			for i, v in p0.getItems(p3) do
 				local var3 = toMediaItemModule(v)
 				
 				if var3 ~= nil then
@@ -22,6 +22,7 @@ return function(p0, p1) --[[ line: 31 | named "createFeedMediaSource" ]]
 			end
 			return t
 		end,
-		getPlaybackActive = p1
+		getPlaybackActive = p1,
+		getCanAutoPlay = p2
 	}
 end

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatSignalsMessageStore4", false)
+﻿return game:DefineFastFlag("AppChatSignalsMessageStore5", false)

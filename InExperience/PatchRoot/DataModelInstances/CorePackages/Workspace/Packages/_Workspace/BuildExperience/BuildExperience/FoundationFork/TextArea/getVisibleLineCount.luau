@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 3 | named "getVisibleLineCount" ]]
+﻿return function(p0, p1) --[[ line: 1 | named "getVisibleLineCount" ]]
 	local var0 = 1
 	
 	if p0 ~= "" then

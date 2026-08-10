@@ -46,7 +46,7 @@ return function(p0, p1, p2, p3) --[[ line: 17 | named "handleReceiveBlock" ]]
 	local var9 = getTransferRequestId(false)
 	
 	if var9 then
-		getTransferRequestByIdRequestModule({ transferRequestId = var9 }):andThen(function(p4) --[[ line: 60 ]]
+		getTransferRequestByIdRequestModule({ transferRequestId = var9 }, nil, p0.getNetworkImpl()):andThen(function(p4) --[[ line: 60 ]]
 			-- upvalues: setSender (ref), applyBlockState (ref)
 			if p4 and p4.transfer and p4.transfer.sender then
 				setSender(p4.transfer.sender)

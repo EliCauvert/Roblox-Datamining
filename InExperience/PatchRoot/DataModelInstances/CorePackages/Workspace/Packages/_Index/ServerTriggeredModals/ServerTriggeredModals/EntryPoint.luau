@@ -1,4 +1,5 @@
 ﻿return {
 	HomepageLaunch = "HomepageLaunch",
-	ChartsLaunch = "ChartsLaunch"
+	ChartsLaunch = "ChartsLaunch",
+	ExperienceDetailsPageSessionEnd = "ExperienceDetailsPageSessionEnd"
 }

@@ -167,10 +167,9 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 		cardWidth = var23,
 		topOffset = var22,
 		purchaseSummary = { totalPrice = var33.totalPrice, count = var33.count },
-		hasInsufficientFunds = var20 ~= nil and var20 < var33.totalPrice,
 		onToggleItem = var32,
 		onBuyAll = reactModule.useCallback(function() --[[ line: 193 ]]
-			-- upvalues: var33 (ref), var28 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var18 (ref), eventNamesModule (copy), var17 (ref), p0 (ref), enumsModule (copy), var34 (ref)
+			-- upvalues: var33 (ref), var28 (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var18 (ref), eventNamesModule (copy), var17 (ref), var20 (ref), p0 (ref), enumsModule (copy), var34 (ref)
 			if #var33.lineItems == 0 or not var28.localUserId then return end
 			if fFlagSocialEnableProfileInspectAndBuyAnalytics then
 				var18.fireAnalyticsEvent(eventNamesModule.InspectAvatarBuyClicked, {
@@ -179,35 +178,41 @@ return function(p0) --[[ line: 47 | named "InspectAvatarSheetContainer" ]]
 					totalPrice = var33.totalPrice
 				})
 			end
-			p0.navigation.navigate(enumsModule.Screens.PurchaseConfirmationModal, {
-				totalPrice = var33.totalPrice,
-				itemCount = var33.count,
-				purchasableLineItems = var33.lineItems,
-				userId = var28.localUserId,
-				purchasedWearIds = var33.purchasedWearIds,
-				ownedAssetIds = var28.ownedAssetIds,
-				purchasedItemIds = var33.purchasedItemIds,
-				purchasedBundleIds = var33.purchasedBundleIds,
-				wearTypeMap = var34
-			})
+			if var20 == nil or var20 >= var33.totalPrice then
+				p0.navigation.navigate(enumsModule.Screens.PurchaseConfirmationModal, {
+					totalPrice = var33.totalPrice,
+					itemCount = var33.count,
+					purchasableLineItems = var33.lineItems,
+					userId = var28.localUserId,
+					purchasedWearIds = var33.purchasedWearIds,
+					ownedAssetIds = var28.ownedAssetIds,
+					purchasedItemIds = var33.purchasedItemIds,
+					purchasedBundleIds = var33.purchasedBundleIds,
+					wearTypeMap = var34,
+					robuxBalance = var20
+				})
+				
+				return
+			end
+			p0.navigation.navigate(enumsModule.Screens.InsufficientRobuxDialog, { totalPrice = var33.totalPrice, robuxBalance = var20 })
 		end, {
-			var33, var28.localUserId, var28.ownedAssetIds, p0.navigation, var34,
+			var33, var28.localUserId, var28.ownedAssetIds, p0.navigation, var34, var20,
 			if fFlagSocialEnableProfileInspectAndBuyAnalytics then var18 else nil,
 			if fFlagSocialEnableProfileInspectAndBuyAnalytics then var17.profileSessionId else nil
 		}),
-		onClose = reactModule.useCallback(function() --[[ line: 227 ]]
+		onClose = reactModule.useCallback(function() --[[ line: 238 ]]
 			-- upvalues: p0 (ref)
 			p0.navigation.pop()
 		end, { p0.navigation }),
-		onDismiss = reactModule.useCallback(function() --[[ line: 231 ]]
+		onDismiss = reactModule.useCallback(function() --[[ line: 242 ]]
 			-- upvalues: p0 (ref), var17 (ref)
 			p0.navigation.pop()
-			task.defer(function() --[[ line: 233 ]]
+			task.defer(function() --[[ line: 244 ]]
 				-- upvalues: var17 (copy)
 				var17.navigateTo.previousView(false)
 			end)
 		end, { p0.navigation, var17.navigateTo }),
-		openItemDetails = reactModule.useCallback(function(p5, p6, p7) --[[ line: 239 ]]
+		openItemDetails = reactModule.useCallback(function(p5, p6, p7) --[[ line: 250 ]]
 			-- upvalues: var17 (ref), var18 (ref), eventNamesModule (copy), var19 (ref)
 			var17.navigateTo.itemOrBundleDetails(p5, p6)
 			var18.fireAnalyticsEvent(eventNamesModule.CatalogItemOpened, {

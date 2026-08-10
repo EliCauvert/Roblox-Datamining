@@ -40,6 +40,7 @@ local fIntExpChatRandomCharChangeLowerBoundModule = require(expChat.Flags.FIntEx
 local fIntExpChatRandomCharChangeUpperBoundModule = require(expChat.Flags.FIntExpChatRandomCharChangeUpperBound)
 local fFlagEnableInExpChatRewriteModule = require(expChat.Flags.FFlagEnableInExpChatRewrite)
 local fFlagEnableInExpChatSummaryOnLuaModule = require(expChat.Flags.FFlagEnableInExpChatSummaryOnLua)
+local fFlagExpChatFixLocalUserVerifiedBadgeModule = require(expChat.Flags.FFlagExpChatFixLocalUserVerifiedBadge)
 local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local sharedFlagsModule = require(parent.SharedFlags)
 local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
@@ -52,14 +53,13 @@ local getFFlagExpChatExcludeFOMORendersModule = require(expChat.Flags.getFFlagEx
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatDisableUniverseBubbleChat = expChatSharedModule.Flags.FFlagExpChatDisableUniverseBubbleChat
 local getFFlagExpChatSyntheticSystemMessageRichText = expChatSharedModule.Flags.GetFFlagExpChatSyntheticSystemMessageRichText
-local fFlagExpChatEnablePostProcessRichSystemMessageTextFormatModule = require(expChat.Flags.FFlagExpChatEnablePostProcessRichSystemMessageTextFormat)
 local getTextAndTranslationModule = require(expChat.getTextAndTranslation)
 local channelTabsConfigurationEnabledModule = require(actions.ChannelTabsConfigurationEnabled)
 local textChatService = game:GetService("TextChatService")
 
-function getChatTranslationEnabled() --[[ line: 68 ]]
+function getChatTranslationEnabled() --[[ line: 67 ]]
 	-- upvalues: textChatService (ref)
-	local ok, status = pcall(function() --[[ line: 69 ]]
+	local ok, status = pcall(function() --[[ line: 68 ]]
 		-- upvalues: textChatService (copy)
 		return textChatService.ChatTranslationEnabled
 	end)
@@ -82,12 +82,12 @@ local t = {
 	messagesBySenderId = {}
 }
 
-local function resolveChannelNameForMapOrder(p0, p1, p2) --[[ line: 131 ]]
+local function resolveChannelNameForMapOrder(p0, p1, p2) --[[ line: 130 ]]
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), none (ref)
 	return if getFFlagTextChatEnableUniverseChatTabs() then p2 or (if p1.textChannel then if p1.textChannel.Name == "RBXSystem" or not p0.channelTabsConfigurationEnabled then "RBXGeneral" else p1.textChannel.Name else none) elseif p1.textChannel then if p1.textChannel.Name == "RBXSystem" then "RBXGeneral" else p1.textChannel.Name else none
 end
 
-local function mapByMessageIdInOrderHelper(p3, p4, p5) --[[ line: 157 ]]
+local function mapByMessageIdInOrderHelper(p3, p4, p5) --[[ line: 156 ]]
 	-- upvalues: isWhiteSpaceOnlyModule (ref), resolveChannelNameForMapOrder (ref), httpService (ref), dictionary (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatDictation (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), fFlagExpChatPresetChatEnabled (ref), list (ref), fFlagExpChatEnableFOMOUpsellModule (ref), getFFlagExpChatExcludeFOMORendersModule (ref)
 	if isWhiteSpaceOnlyModule(p4.text) and p4.status ~= Enum.TextChatMessageStatus.Floodchecked and p4.status ~= Enum.TextChatMessageStatus.MessageTooLong then
 		return p3
@@ -149,7 +149,7 @@ local function mapByMessageIdInOrderHelper(p3, p4, p5) --[[ line: 157 ]]
 		byMessageId = dictionary.join(byMessageId, { [messageId] = t })
 		
 		if userId and messagesBySenderId[userId] then
-			local var45 = list.findWhere(messagesBySenderId[userId], function(p6, _) --[[ line: 236 ]]
+			local var45 = list.findWhere(messagesBySenderId[userId], function(p6, _) --[[ line: 235 ]]
 				-- upvalues: messageId (ref)
 				return p6.messageId == messageId
 			end)
@@ -166,7 +166,7 @@ local function mapByMessageIdInOrderHelper(p3, p4, p5) --[[ line: 157 ]]
 			byMessageId = dictionary.removeKey(byMessageId, p4.messageId)
 			
 			if userId then
-				local var46 = list.findWhere(messagesBySenderId[userId], function(p7, _) --[[ line: 256 ]]
+				local var46 = list.findWhere(messagesBySenderId[userId], function(p7, _) --[[ line: 255 ]]
 					-- upvalues: messageId (ref)
 					return p7.messageId == messageId
 				end)
@@ -191,7 +191,7 @@ local function mapByMessageIdInOrderHelper(p3, p4, p5) --[[ line: 157 ]]
 		
 		if var48 then
 			if messagesBySenderId ~= nil and messagesBySenderId[var48] then
-				local var49 = list.findWhere(messagesBySenderId[var48], function(p8, _) --[[ line: 284 ]]
+				local var49 = list.findWhere(messagesBySenderId[var48], function(p8, _) --[[ line: 283 ]]
 					-- upvalues: var47 (write)
 					return p8.messageId == var47
 				end)
@@ -306,8 +306,8 @@ local function mapByMessageIdInOrderHelper(p3, p4, p5) --[[ line: 157 ]]
 	})
 end
 
-local function mapByMessageIdInOrder(p9, p10) --[[ line: 519 ]]
-	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatPresetChatEnabled (ref), set (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), getFFlagTextChatEnableUniverseChatTabs (ref), computeNameColor (ref), playersService (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), mapByMessageIdInOrderHelper (ref)
+local function mapByMessageIdInOrder(p9, p10) --[[ line: 518 ]]
+	-- upvalues: fFlagEnableInExpChatRewriteModule (ref), getTextAndTranslationModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), outgoingMessageSentModule (ref), playersService (ref), fFlagExpChatPresetChatEnabled (ref), set (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatDisableUniverseBubbleChat (ref), getFFlagTextChatEnableUniverseChatTabs (ref), computeNameColor (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagChatLineReportingGlobalMuteEnabled (ref), mapByMessageIdInOrderHelper (ref)
 	local var54, var55
 	local textChatMessage = p10.textChatMessage
 	local _ = nil
@@ -322,7 +322,7 @@ local function mapByMessageIdInOrder(p9, p10) --[[ line: 519 ]]
 		var55 = if getFFlagExpChatProtectedChatInternalAPIs() then textChatMessage.TranslationInternal else textChatMessage.Translation
 	end
 	local var57
-	local var56 = if textChatMessage.TextSource then tostring(textChatMessage.TextSource.UserId) else nil
+	local var56 = if textChatMessage.TextSource then tostring(textChatMessage.TextSource.UserId) elseif fFlagExpChatFixLocalUserVerifiedBadgeModule and p10.type == outgoingMessageSentModule.name and playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else nil
 	local _ = nil
 	
 	if var56 == nil then
@@ -371,12 +371,12 @@ local function mapByMessageIdInOrder(p9, p10) --[[ line: 519 ]]
 end
 
 return roduxModule.createReducer(t, {
-	[channelTabsConfigurationEnabledModule.name] = function(p11, p12) --[[ line: 726 ]]
+	[channelTabsConfigurationEnabledModule.name] = function(p11, p12) --[[ line: 734 ]]
 		-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), dictionary (ref)
 		return if getFFlagTextChatEnableUniverseChatTabs() then dictionary.join(p11, { channelTabsConfigurationEnabled = p12.enabled }) else p11
 	end,
 	[incomingMessageReceivedModule.name] = mapByMessageIdInOrder,
-	[incomingBubbleChatMessageReceivedModule.name] = function(p13, p14) --[[ line: 496 ]]
+	[incomingBubbleChatMessageReceivedModule.name] = function(p13, p14) --[[ line: 495 ]]
 		-- upvalues: mapByMessageIdInOrderHelper (ref)
 		local bubbleChatMessageTable = p14.bubbleChatMessageTable
 		
@@ -397,24 +397,24 @@ return roduxModule.createReducer(t, {
 		})
 	end,
 	[outgoingMessageSentModule.name] = mapByMessageIdInOrder,
-	[userMuted.name] = function(p15, p16) --[[ line: 738 ]]
+	[userMuted.name] = function(p15, p16) --[[ line: 746 ]]
 		-- upvalues: dictionary (ref), set (ref)
 		return dictionary.join(p15, { _mutedUserIds = set.add(p15._mutedUserIds, p16.userId) })
 	end,
-	[userUnmuted.name] = function(p17, p18) --[[ line: 743 ]]
+	[userUnmuted.name] = function(p17, p18) --[[ line: 751 ]]
 		-- upvalues: dictionary (ref), set (ref)
 		return dictionary.join(p17, {
 			_mutedUserIds = set.subtract(p17._mutedUserIds, p18.userId)
 		})
 	end,
-	[playerRemoved.name] = function(p19, p20) --[[ line: 748 ]]
+	[playerRemoved.name] = function(p19, p20) --[[ line: 756 ]]
 		-- upvalues: dictionary (ref), set (ref)
-		local var60 = dictionary.filter(p19.messagesBySenderId, function(_, p21) --[[ line: 755 ]]
+		local var60 = dictionary.filter(p19.messagesBySenderId, function(_, p21) --[[ line: 763 ]]
 			-- upvalues: p20 (ref)
 			return p21 ~= p20.userId
 		end)
 		
-		return if #dictionary.filter(p19.bubbleMessagesInOrderBySenderId, function(_, p22) --[[ line: 751 ]]
+		return if #dictionary.filter(p19.bubbleMessagesInOrderBySenderId, function(_, p22) --[[ line: 759 ]]
 			-- upvalues: p20 (ref)
 			return p22 ~= p20.userId
 		end) == 0 and #var60 == 0 and not set.has(p19._mutedUserIds, p20.userId) then p19 else dictionary.join(p19, {
@@ -422,24 +422,24 @@ return roduxModule.createReducer(t, {
 			_mutedUserIds = set.subtract(p19._mutedUserIds, p20.userId)
 		})
 	end,
-	[chatPrivacySettingsReceivedModule.name] = function(p23, p24) --[[ line: 768 ]]
+	[chatPrivacySettingsReceivedModule.name] = function(p23, p24) --[[ line: 776 ]]
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p23, { canLocalUserChat = p24.canUserChat })
 	end,
-	[chatPrivacySettingsFetchFailedModule.name] = function(p25, _) --[[ line: 771 ]]
+	[chatPrivacySettingsFetchFailedModule.name] = function(p25, _) --[[ line: 779 ]]
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p25, { canLocalUserChat = false })
 	end,
-	[configurationObjectsLoadedModule.name] = function(p26, p27) --[[ line: 774 ]]
+	[configurationObjectsLoadedModule.name] = function(p26, p27) --[[ line: 782 ]]
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p26, {
 			isBubbleChatEnabled = if p27.bubbleChatSettings.Enabled then p27.bubbleChatSettings.Enabled else false
 		})
 	end,
-	[bubbleChatSettingsChangedModule.name] = function(p28, p29) --[[ line: 781 ]]
+	[bubbleChatSettingsChangedModule.name] = function(p28, p29) --[[ line: 789 ]]
 		-- upvalues: dictionary (ref)
 		return if p29.property == "Enabled" then dictionary.join(p28, {
-			byMessageId = dictionary.map(p28.byMessageId, function(p30) --[[ line: 786 ]]
+			byMessageId = dictionary.map(p28.byMessageId, function(p30) --[[ line: 794 ]]
 				-- upvalues: dictionary (copy), p29 (ref)
 				return if p30.shouldOverrideBubbleChatSettings then p30 else dictionary.join(p30, {
 					isVisibleInBubbleChat = p29.value and p30.isVisibleInChatWindow
@@ -448,18 +448,18 @@ return roduxModule.createReducer(t, {
 			isBubbleChatEnabled = p29.value
 		}) else p28
 	end,
-	[chatWindowMessagesCleared.name] = function(p31, _) --[[ line: 801 ]]
+	[chatWindowMessagesCleared.name] = function(p31, _) --[[ line: 809 ]]
 		-- upvalues: dictionary (ref)
 		return dictionary.join(p31, {
 			windowMessagesInOrder = {},
 			windowMessagesInOrderByTabId = {},
-			byMessageId = dictionary.map(p31.byMessageId, function(p32) --[[ line: 802 ]]
+			byMessageId = dictionary.map(p31.byMessageId, function(p32) --[[ line: 810 ]]
 				-- upvalues: dictionary (copy)
 				return dictionary.join(p32, { isVisibleInChatWindow = false })
 			end)
 		})
 	end,
-	[chatTranslationGlobalToggledModule.name] = function(p33, p34) --[[ line: 410 ]]
+	[chatTranslationGlobalToggledModule.name] = function(p33, p34) --[[ line: 409 ]]
 		-- upvalues: getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPresetChatEnabled (ref), dictionary (ref)
 		local useTranslation = p34.useTranslation
 		local byMessageId = p33.byMessageId
@@ -496,7 +496,7 @@ return roduxModule.createReducer(t, {
 		end
 		return dictionary.join(p33, { byMessageId = dictionary.join(byMessageId, t) })
 	end,
-	[chatTranslationMessageToggledModule.name] = function(p35, p36) --[[ line: 452 ]]
+	[chatTranslationMessageToggledModule.name] = function(p35, p36) --[[ line: 451 ]]
 		-- upvalues: dictionary (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPresetChatEnabled (ref)
 		local useTranslation = p36.useTranslation
 		local messageId = p36.messageId
@@ -531,7 +531,7 @@ return roduxModule.createReducer(t, {
 			})
 		})
 	end,
-	[legacyBubbleCreatedModule.name] = function(p37, p38) --[[ line: 631 ]]
+	[legacyBubbleCreatedModule.name] = function(p37, p38) --[[ line: 639 ]]
 		-- upvalues: mapByMessageIdInOrderHelper (ref)
 		local messageData = p38.messageData
 		
@@ -548,7 +548,7 @@ return roduxModule.createReducer(t, {
 			partOrModel = messageData.adornee
 		})
 	end,
-	[legacyBubbleTextUpdatedModule.name] = function(p39, p40) --[[ line: 816 ]]
+	[legacyBubbleTextUpdatedModule.name] = function(p39, p40) --[[ line: 824 ]]
 		-- upvalues: dictionary (ref), list (ref)
 		local byMessageId = p39.byMessageId
 		local messagesBySenderId = p39.messagesBySenderId
@@ -562,7 +562,7 @@ return roduxModule.createReducer(t, {
 			local userId = var64.userId
 			
 			if userId and messagesBySenderId[userId] then
-				local var65 = list.findWhere(messagesBySenderId[userId], function(p41, _) --[[ line: 830 ]]
+				local var65 = list.findWhere(messagesBySenderId[userId], function(p41, _) --[[ line: 838 ]]
 					-- upvalues: messageId (ref)
 					return p41.messageId == messageId
 				end)
@@ -579,7 +579,7 @@ return roduxModule.createReducer(t, {
 			messagesBySenderId = messagesBySenderId
 		})
 	end,
-	[hiddenMessageReceivedModule.name] = function(p42, p43) --[[ line: 655 ]]
+	[hiddenMessageReceivedModule.name] = function(p42, p43) --[[ line: 663 ]]
 		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref), fIntExpChatRandomCharChangeLowerBoundModule (ref), fIntExpChatRandomCharChangeUpperBoundModule (ref), configModule (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), mapByMessageIdInOrderHelper (ref)
 		local userMessageIntent = p43.userMessageIntent
 		local var66 = string.len(if getFFlagExpChatProtectedChatInternalAPIs() then userMessageIntent.TextInternal else userMessageIntent.Text)
@@ -598,8 +598,8 @@ return roduxModule.createReducer(t, {
 			textChatMessageInstance = if getFFlagExpChatTelemetryEventTriggerModule() then userMessageIntent else nil
 		})
 	end,
-	[universeChatSystemMessageAddedModule.name] = function(p44, p45) --[[ line: 689 ]]
-		-- upvalues: httpService (ref), sanitizeForRichTextModule (ref), getFFlagExpChatSyntheticSystemMessageRichText (ref), generateRichSystemMessageTextFormatModule (ref), fFlagExpChatDictation (ref), fFlagExpChatEnablePostProcessRichSystemMessageTextFormatModule (ref), mapByMessageIdInOrderHelper (ref), getFFlagTextChatEnableUniverseChatTabs (ref)
+	[universeChatSystemMessageAddedModule.name] = function(p44, p45) --[[ line: 697 ]]
+		-- upvalues: httpService (ref), sanitizeForRichTextModule (ref), getFFlagExpChatSyntheticSystemMessageRichText (ref), generateRichSystemMessageTextFormatModule (ref), fFlagExpChatDictation (ref), mapByMessageIdInOrderHelper (ref), getFFlagTextChatEnableUniverseChatTabs (ref)
 		local var67 = sanitizeForRichTextModule(p45.text)
 		
 		return mapByMessageIdInOrderHelper(p44, {
@@ -614,31 +614,31 @@ return roduxModule.createReducer(t, {
 			chatWindowMessageProperties = nil,
 			textChatMessageInstance = nil,
 			partOrModel = nil,
-			text = if getFFlagExpChatSyntheticSystemMessageRichText() then generateRichSystemMessageTextFormatModule(var67, if fFlagExpChatDictation then p45.isError else nil, if fFlagExpChatEnablePostProcessRichSystemMessageTextFormatModule then p45.postProcessMessage else nil) else var67,
+			text = if getFFlagExpChatSyntheticSystemMessageRichText() then generateRichSystemMessageTextFormatModule(var67, if fFlagExpChatDictation then p45.isError else nil, p45.postProcessMessage) else var67,
 			messageId = httpService:GenerateGUID(false),
 			timestamp = DateTime.fromUnixTimestampMillis(workspace:GetServerTimeNow() * 1000),
 			status = Enum.TextChatMessageStatus.Success,
 			metadata = p45.metadata
 		}, if getFFlagTextChatEnableUniverseChatTabs() then p45.channelNameOverride else nil)
 	end,
-	[hiddenMessagesClearedModule.name] = function(p46, _) --[[ line: 848 ]]
+	[hiddenMessagesClearedModule.name] = function(p46, _) --[[ line: 856 ]]
 		-- upvalues: fFlagExpChatClearHiddenMessagesPostAgeCheckModule (ref), dictionary (ref), list (ref)
 		if fFlagExpChatClearHiddenMessagesPostAgeCheckModule then
-			local var68 = dictionary.map(p46.byMessageId, function(p47) --[[ line: 853 ]]
+			local var68 = dictionary.map(p46.byMessageId, function(p47) --[[ line: 861 ]]
 				-- upvalues: dictionary (copy)
 				return if p47.isHiddenMessage then dictionary.join(p47, { isVisibleInChatWindow = false }) else p47
 			end)
 			
 			return dictionary.join(p46, {
-				windowMessagesInOrder = list.filter(p46.windowMessagesInOrder, function(p48) --[[ line: 863 ]]
+				windowMessagesInOrder = list.filter(p46.windowMessagesInOrder, function(p48) --[[ line: 871 ]]
 					-- upvalues: var68 (ref)
 					local var69 = var68[p48]
 					
 					return var69 and not var69.isHiddenMessage
 				end),
-				windowMessagesInOrderByTabId = dictionary.map(p46.windowMessagesInOrderByTabId, function(p49) --[[ line: 870 ]]
+				windowMessagesInOrderByTabId = dictionary.map(p46.windowMessagesInOrderByTabId, function(p49) --[[ line: 878 ]]
 					-- upvalues: list (copy), var68 (ref)
-					return list.filter(p49, function(p50) --[[ line: 871 ]]
+					return list.filter(p49, function(p50) --[[ line: 879 ]]
 						-- upvalues: var68 (copy)
 						local var70 = var68[p50]
 						

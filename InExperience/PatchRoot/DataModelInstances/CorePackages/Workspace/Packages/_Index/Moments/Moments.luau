@@ -16,5 +16,6 @@ return {
 	MomentsFeedSurface = require(script.Components.MomentsFeedSurface),
 	MomentsBackHeader = require(script.Components.MomentsBackHeader),
 	MomentsHostShell = require(script.Components.MomentsHostShell),
-	MomentsImmersivePresentation = require(script.Components.MomentsImmersivePresentation)
+	MomentsImmersivePresentation = require(script.Components.MomentsImmersivePresentation),
+	reportMoment = require(script.Moderation.reportMoment)
 }

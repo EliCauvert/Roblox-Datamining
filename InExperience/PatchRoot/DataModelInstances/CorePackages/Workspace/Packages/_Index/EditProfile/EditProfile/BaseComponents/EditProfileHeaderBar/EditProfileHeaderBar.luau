@@ -7,11 +7,16 @@ local iconButton = foundationModule.IconButton
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
+local useTokens = foundationModule.Hooks.useTokens
+local editProfileIncreaseTopPadding = game:DefineFastFlag("EditProfileIncreaseTopPadding", false)
 
-return function(p0) --[[ line: 22 | named "EditProfileHeaderBar" ]]
-	-- upvalues: reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
+return function(p0) --[[ line: 25 | named "EditProfileHeaderBar" ]]
+	-- upvalues: editProfileIncreaseTopPadding (ref), useTokens (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
 	return reactModule.createElement(view, {
-		tag = "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-xxlarge"
+		tag = if editProfileIncreaseTopPadding then "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-xxlarge",
+		padding = if editProfileIncreaseTopPadding then {
+			top = UDim.new(0, (if editProfileIncreaseTopPadding then useTokens() else nil).Margin.Large)
+		} else nil
 	}, {
 		HeaderBar = reactModule.createElement(view, { tag = "row align-y-center size-0-1800 auto-x gap-small" }, {
 			BackButton = reactModule.createElement(iconButton, {

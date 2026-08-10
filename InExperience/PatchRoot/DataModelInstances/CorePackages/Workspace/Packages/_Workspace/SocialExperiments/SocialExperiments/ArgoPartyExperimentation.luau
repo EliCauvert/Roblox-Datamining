@@ -1,34 +1,39 @@
 ﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
 local argoPartyLayer = game:DefineFastString("ArgoPartyLayer", "Social.ConnectTab")
 local argoPartyVariant = game:DefineFastString("ArgoPartyVariant", "enableArgoPartyChanges")
-local forceEnableArgoPartyChanges6 = game:DefineFastFlag("ForceEnableArgoPartyChanges6", false)
-local enableArgoPartyExperimentation6 = game:DefineFastFlag("EnableArgoPartyExperimentation6", false)
+local forceEnableArgoPartyChanges7 = game:DefineFastFlag("ForceEnableArgoPartyChanges7", false)
+local enableArgoPartyExperimentation7 = game:DefineFastFlag("EnableArgoPartyExperimentation7", false)
+local enableArgoPartyChanges = game:DefineFastFlag("EnableArgoPartyChanges", false)
 
-local function _(p0) --[[ line: 12 | named "getIsUserInTreatment" ]]
+local function _(p0) --[[ line: 13 | named "getIsUserInTreatment" ]]
 	-- upvalues: experimentCacheManager (ref), argoPartyLayer (ref)
-	local var4 = experimentCacheManager.default:getLayerVariables(argoPartyLayer)
+	local var5 = experimentCacheManager.default:getLayerVariables(argoPartyLayer)
 	
-	return if var4 and var4[p0] ~= nil then var4[p0] else false
+	return if var5 and var5[p0] ~= nil then var5[p0] else false
 end
 
 return {
-	getIsRenameEnabled = function() --[[ line: 22 ]]
-		-- upvalues: forceEnableArgoPartyChanges6 (ref), enableArgoPartyExperimentation6 (ref), argoPartyVariant (ref), experimentCacheManager (ref), argoPartyLayer (ref)
-		local var5 = forceEnableArgoPartyChanges6
+	getIsRenameEnabled = function() --[[ line: 23 ]]
+		-- upvalues: forceEnableArgoPartyChanges7 (ref), enableArgoPartyChanges (ref), enableArgoPartyExperimentation7 (ref), argoPartyVariant (ref), experimentCacheManager (ref), argoPartyLayer (ref)
+		local var6 = forceEnableArgoPartyChanges7
 		
-		if not var5 then
-			var5 = enableArgoPartyExperimentation6
+		if not var6 then
+			var6 = enableArgoPartyChanges
 			
-			if var5 then
-				local var6 = argoPartyVariant
-				local var7 = experimentCacheManager.default:getLayerVariables(argoPartyLayer)
+			if not var6 then
+				var6 = enableArgoPartyExperimentation7
 				
-				if var7 and var7[var6] ~= nil then
-					return var7[var6]
+				if var6 then
+					local var7 = argoPartyVariant
+					local var8 = experimentCacheManager.default:getLayerVariables(argoPartyLayer)
+					
+					if var8 and var8[var7] ~= nil then
+						return var8[var7]
+					end
+					var6 = false
 				end
-				var5 = false
 			end
 		end
-		return var5
+		return var6
 	end
 }

@@ -1,11 +1,12 @@
 ﻿local expChat = script:FindFirstAncestor("ExpChat")
 local UIBloxModule = require(expChat.Parent.UIBlox)
-local fFlagExpChatEnablePostProcessRichSystemMessageTextFormatModule = require(expChat.Flags.FFlagExpChatEnablePostProcessRichSystemMessageTextFormat)
+local summaryMessageRichTextModule = require(expChat.summaryMessageRichText)
+local expChatAlignSystemMessageStyling = game:DefineFastFlag("ExpChatAlignSystemMessageStyling", false)
 
-return function(p0, p1, p2) --[[ line: 9 | named "generateRichSystemMessageTextFormat" ]]
-	-- upvalues: fFlagExpChatEnablePostProcessRichSystemMessageTextFormatModule (ref), UIBloxModule (ref)
-	if not fFlagExpChatEnablePostProcessRichSystemMessageTextFormatModule then
-		return string.format("<font color=\"#%s\">%s</font>", if p1 then UIBloxModule.App.Style.Colors.Red:ToHex() else UIBloxModule.App.Style.Colors.LightGrey:ToHex(), p0)
+return function(p0, p1, p2) --[[ line: 10 | named "generateRichSystemMessageTextFormat" ]]
+	-- upvalues: expChatAlignSystemMessageStyling (ref), summaryMessageRichTextModule (ref), UIBloxModule (ref)
+	if expChatAlignSystemMessageStyling and not p1 and p2 == nil then
+		return summaryMessageRichTextModule.wrapInSummaryMutedStyle(p0)
 	end
 	local formattedText = string.format("<font color=\"#%s\">%s</font>", if p1 then UIBloxModule.App.Style.Colors.Red:ToHex() else UIBloxModule.App.Style.Colors.LightGrey:ToHex(), p0)
 	

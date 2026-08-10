@@ -2,13 +2,11 @@
 local enumerateModule = require(parent.enumerate)
 local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local fFlagAXCatalogBodySuits = avatarExperienceFlagsModule.FFlagAXCatalogBodySuits
-local fFlagAXCustomizeMakeupSupport = avatarExperienceFlagsModule.FFlagAXCustomizeMakeupSupport
 local fFlagAXCatalogM41Props = avatarExperienceFlagsModule.FFlagAXCatalogM41Props
 local fFlagAXCatalogM41FullMasks = avatarExperienceFlagsModule.FFlagAXCatalogM41FullMasks
 local fFlagAXCatalogM41HandAndArm = avatarExperienceFlagsModule.FFlagAXCatalogM41HandAndArm
 local fFlagAXFixHandAndArmWidgetApiContext = avatarExperienceFlagsModule.FFlagAXFixHandAndArmWidgetApiContext
 local fFlagDynamicHeadsMigration = avatarExperienceFlagsModule.FFlagDynamicHeadsMigration
-local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 
 return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	Featured = "Featured",
@@ -42,12 +40,12 @@ return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	Hair = "Hair",
 	ClassicHeads = if not fFlagDynamicHeadsMigration then "Classic Heads" else nil,
 	ClassicFaces = if not fFlagDynamicHeadsMigration then "Classic Faces" else nil,
-	MakeupLooks = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Makeup Looks" else nil,
-	EyeMakeup = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Eye Makeup" else nil,
-	FaceMakeup = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Face Makeup" else nil,
-	LipMakeup = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Lip Makeup" else nil,
-	Eyelashes = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Eyelashes" else nil,
-	Eyebrows = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Eyebrows" else nil,
+	MakeupLooks = "Makeup Looks",
+	EyeMakeup = "Eye Makeup",
+	FaceMakeup = "Face Makeup",
+	LipMakeup = "Lip Makeup",
+	Eyelashes = "Eyelashes",
+	Eyebrows = "Eyebrows",
 	AnimationBundles = "AnimationBundles",
 	Emotes = "Emotes",
 	Props = if fFlagAXCatalogM41Props then "Props" else nil
@@ -82,12 +80,12 @@ return if fFlagAXCatalogBodySuits then enumerateModule(script.Name, {
 	Hair = "Hair",
 	ClassicHeads = if not fFlagDynamicHeadsMigration then "Classic Heads" else nil,
 	ClassicFaces = if not fFlagDynamicHeadsMigration then "Classic Faces" else nil,
-	MakeupLooks = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Makeup Looks" else nil,
-	EyeMakeup = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Eye Makeup" else nil,
-	FaceMakeup = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Face Makeup" else nil,
-	LipMakeup = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Lip Makeup" else nil,
-	Eyelashes = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Eyelashes" else nil,
-	Eyebrows = if fFlagAXCustomizeMakeupSupport or fFlagAXCatalogMakeupSupport then "Eyebrows" else nil,
+	MakeupLooks = "Makeup Looks",
+	EyeMakeup = "Eye Makeup",
+	FaceMakeup = "Face Makeup",
+	LipMakeup = "Lip Makeup",
+	Eyelashes = "Eyelashes",
+	Eyebrows = "Eyebrows",
 	AnimationBundles = "AnimationBundles",
 	Emotes = "Emotes",
 	Props = if fFlagAXCatalogM41Props then "Props" else nil

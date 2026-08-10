@@ -1,5 +1,7 @@
 ﻿return {
 	Toggle = "Toggle",
 	Radio = "Radio",
-	Checkbox = "Checkbox"
+	Checkbox = "Checkbox",
+	Chevron = "Chevron",
+	None = "None"
 }

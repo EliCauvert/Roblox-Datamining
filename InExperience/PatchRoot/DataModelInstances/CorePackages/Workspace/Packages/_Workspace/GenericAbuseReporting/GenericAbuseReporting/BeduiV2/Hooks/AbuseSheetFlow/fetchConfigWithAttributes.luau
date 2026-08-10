@@ -5,7 +5,7 @@ local localizationService = game:GetService("LocalizationService")
 local argCheckModule = require(parent.ArgCheck)
 local url = require(parent.Http).Url
 local _ = require(genericAbuseReporting.Enums.AbuseVector)
-local var4 = if require(parent.SharedFlags).FFlagAbuseReportConfigStoreResolver then "&version=2" else ""
+local var4 = if require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3 then "&version=3" else "&version=2"
 
 return function(p0, p1, p2) --[[ line: 19 ]]
 	-- upvalues: argCheckModule (ref), localizationService (ref), httpService (ref), url (ref), var4 (ref)

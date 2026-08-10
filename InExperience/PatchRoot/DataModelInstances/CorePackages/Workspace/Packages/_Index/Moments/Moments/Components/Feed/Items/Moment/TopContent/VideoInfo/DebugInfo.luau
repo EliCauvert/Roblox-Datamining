@@ -28,12 +28,12 @@ return reactModule.memo(function(p0) --[[ line: 32 | named "DebugInfo" ]]
 			text = var7.momentId,
 			width = UDim.new(1, 0)
 		}),
-		DebugItemId = reactModule.createElement(textInput, {
-			label = "itemId",
+		DebugFeedItemId = reactModule.createElement(textInput, {
+			label = "feedItemId",
 			LayoutOrder = 2,
 			onChanged = noop,
 			size = inputSize.Medium,
-			text = var7.store.getData(false).feedItemId or var7.momentId,
+			text = var7.store.getData(false).feedItemId or "",
 			width = UDim.new(1, 0)
 		})
 	}) else nil

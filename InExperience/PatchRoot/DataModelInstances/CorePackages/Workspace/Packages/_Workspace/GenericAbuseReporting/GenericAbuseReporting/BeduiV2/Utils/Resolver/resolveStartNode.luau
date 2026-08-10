@@ -11,8 +11,6 @@ return {
 		local var1 = configResolversModule.resolveConfig(p0.startNode, {
 			attribute = p0.attributes or {},
 			resources = {},
-			context = {},
-			formData = {},
 			store = {}
 		})
 		

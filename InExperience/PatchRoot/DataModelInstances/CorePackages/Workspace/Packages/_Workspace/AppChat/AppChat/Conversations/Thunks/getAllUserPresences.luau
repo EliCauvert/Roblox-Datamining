@@ -1,8 +1,9 @@
-﻿local networkingPresenceModule = require(script:FindFirstAncestor("AppChat").Http.NetworkingPresence)
+﻿local appChat = script:FindFirstAncestor("AppChat")
+local networkingPresenceModule = require(appChat.Http.NetworkingPresence)
 
-return function() --[[ line: 5 ]]
+return if require(appChat.Flags.FFlagAppChatPresenceStoreMigration) then nil else function() --[[ line: 8 ]]
 	-- upvalues: networkingPresenceModule (ref)
-	return function(p0) --[[ line: 6 ]]
+	return function(p0) --[[ line: 9 ]]
 		-- upvalues: networkingPresenceModule (copy)
 		local t = {}
 		
@@ -11,7 +12,7 @@ return function() --[[ line: 5 ]]
 				table.insert(t, i)
 			end
 		end
-		p0:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(t)):catch(function(p1) --[[ line: 17 ]]
+		p0:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(t)):catch(function(p1) --[[ line: 20 ]]
 			warn("NetworkingPresence failure in getAllUserPresences, Status: " .. tostring(p1))
 		end)
 	end

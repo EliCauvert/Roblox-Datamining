@@ -7,6 +7,7 @@
 	SwitchTab = require(script.SwitchTab),
 	CentralOverlayType = require(script.CentralOverlayType),
 	LayoutConfig = require(script.LayoutConfig),
+	ScrollMovementDirection = require(script.ScrollMovementDirection),
 	MemStorageKeys = require(script.MemStorageKeys),
 	NotificationType = require(script.NotificationType),
 	SearchTypes = require(script.SearchTypes)

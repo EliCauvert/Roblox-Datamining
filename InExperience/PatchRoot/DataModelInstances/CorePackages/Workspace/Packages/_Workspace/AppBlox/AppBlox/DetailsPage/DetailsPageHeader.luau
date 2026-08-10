@@ -14,9 +14,6 @@ local luaAppBottomAlignDetailsHeaderInfoFrame = game:DefineFastFlag("LuaAppBotto
 local fFlagUIBloxEnableActionBarButtonOverride = require(parent.SharedFlags).UIBlox.FFlagUIBloxEnableActionBarButtonOverride
 local fFlagUIBloxAddTestIdToActionBar = require(parent.SharedFlags).UIBlox.FFlagUIBloxAddTestIdToActionBar
 local fFlagFixDetailsPageIconShadowSlicing = game:DefineFastFlag("FFlagFixDetailsPageIconShadowSlicing", false)
-local fFlagLuaAppDesktopPlayabilityMessageFontSizeUpdate = require(parent.SharedFlags).FFlagLuaAppDesktopPlayabilityMessageFontSizeUpdate
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
-local fFlagLuaAppPlayButtonContextualMessageImpression = require(parent.SharedFlags).FFlagLuaAppPlayButtonContextualMessageImpression
 local detailsPageHeader = roactModule.PureComponent:extend("DetailsPageHeader")
 detailsPageHeader.defaultProps = {
 	thumbnailHeight = 200,
@@ -43,18 +40,17 @@ detailsPageHeader.validateProps = tModule.strictInterface({
 	actionBarWidth = tModule.optional(tModule.number),
 	maxContentWidth = tModule.optional(tModule.number),
 	actionBarProps = tModule.optional(tModule.table),
-	renderActionBarLabelImpressionsDetector = if fFlagLuaAppPlayButtonContextualMessageImpression then tModule.optional(tModule.callback) else nil,
-	scrollViewPositionChangedSignal = if fFlagLuaAppPlayButtonContextualMessageImpression then tModule.optional(tModule.table) else nil,
+	renderActionBarLabelImpressionsDetector = tModule.optional(tModule.callback),
+	scrollViewPositionChangedSignal = tModule.optional(tModule.table),
 	deviceType = tModule.optional(tModule.string)
 })
 
-if fFlagLuaAppPlayButtonContextualMessageImpression then
-	function detailsPageHeader.init(p0) --[[ line: 90 ]]
-		-- upvalues: roactModule (ref)
-		p0.actionBarLabelRef = roactModule.createRef()
-	end
+function detailsPageHeader.init(p0) --[[ line: 80 ]]
+	-- upvalues: roactModule (ref)
+	p0.actionBarLabelRef = roactModule.createRef()
 end
-function detailsPageHeader.renderThumbnail(p1, p2, p3, p4, p5) --[[ line: 95 ]]
+
+function detailsPageHeader.renderThumbnail(p1, p2, p3, p4, p5) --[[ line: 84 ]]
 	-- upvalues: roactModule (ref), loadableImage (ref), imageSetLabel (ref), images (ref), fFlagFixDetailsPageIconShadowSlicing (ref)
 	return roactModule.createElement("Frame", {
 		LayoutOrder = 1,
@@ -81,8 +77,8 @@ function detailsPageHeader.renderThumbnail(p1, p2, p3, p4, p5) --[[ line: 95 ]]
 	})
 end
 
-function detailsPageHeader.renderDesktopMode(p6, p7) --[[ line: 125 ]]
-	-- upvalues: roactModule (ref), luaAppBottomAlignDetailsHeaderInfoFrame (ref), detailsPageTitleContentModule (ref), actionBar (ref), fFlagUIBloxEnableActionBarButtonOverride (ref), fFlagUIBloxAddTestIdToActionBar (ref), fFlagLuaAppDesktopPlayabilityMessageFontSizeUpdate (ref), fFlagRenameDeprecatedUIBloxTokens (ref), fFlagLuaAppPlayButtonContextualMessageImpression (ref)
+function detailsPageHeader.renderDesktopMode(p6, p7) --[[ line: 114 ]]
+	-- upvalues: roactModule (ref), luaAppBottomAlignDetailsHeaderInfoFrame (ref), detailsPageTitleContentModule (ref), actionBar (ref), fFlagUIBloxEnableActionBarButtonOverride (ref), fFlagUIBloxAddTestIdToActionBar (ref)
 	local thumbnailHeight = p6.props.thumbnailHeight
 	local var7 = thumbnailHeight * (p6.props.thumbnailAspectRatio.X / p6.props.thumbnailAspectRatio.Y)
 	local sideMargin = p6.props.sideMargin or 48
@@ -156,20 +152,20 @@ function detailsPageHeader.renderDesktopMode(p6, p7) --[[ line: 125 ]]
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					Font = p7.Tokens.Typography.BodyLarge.Font,
-					TextSize = if fFlagLuaAppDesktopPlayabilityMessageFontSizeUpdate then if fFlagRenameDeprecatedUIBloxTokens then p7.Tokens.FontSize.FontSize_350 else p7.Tokens.FontSize.FontSize_300 else p7.Tokens.Typography.BodyLarge.FontSize,
+					TextSize = p7.Tokens.FontSize.FontSize_350,
 					TextColor3 = p7.Tokens.Color.Content.Emphasis.Color3,
 					TextTransparency = p7.Tokens.Color.Content.Emphasis.Transparency,
 					LayoutOrder = 3,
-					[roactModule.Ref] = if fFlagLuaAppPlayButtonContextualMessageImpression then p6.actionBarLabelRef else nil
+					[roactModule.Ref] = p6.actionBarLabelRef
 				}) else nil,
-				ActionBarLabelImpressionsDetector = if fFlagLuaAppPlayButtonContextualMessageImpression and p6.props.actionBarLabelText and p6.props.renderActionBarLabelImpressionsDetector then p6.props.renderActionBarLabelImpressionsDetector(p6.actionBarLabelRef, p6.props.scrollViewPositionChangedSignal) else nil
+				ActionBarLabelImpressionsDetector = if p6.props.actionBarLabelText and p6.props.renderActionBarLabelImpressionsDetector then p6.props.renderActionBarLabelImpressionsDetector(p6.actionBarLabelRef, p6.props.scrollViewPositionChangedSignal) else nil
 			}),
 			UISizeConstraint = if p6.props.maxContentWidth then roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(p6.props.maxContentWidth, 1e999) }) else nil
 		})
 	}
 end
 
-function detailsPageHeader.renderisPhone(p8, p9) --[[ line: 270 ]]
+function detailsPageHeader.renderisPhone(p8, p9) --[[ line: 251 ]]
 	-- upvalues: roactModule (ref), fFlagLuaAppFixDetailsPageThumbnailRenderInPhone (ref)
 	local thumbnailHeight = p8.props.thumbnailHeight
 	local var9 = thumbnailHeight * (p8.props.thumbnailAspectRatio.X / p8.props.thumbnailAspectRatio.Y)
@@ -198,7 +194,7 @@ function detailsPageHeader.renderisPhone(p8, p9) --[[ line: 270 ]]
 	}
 end
 
-function detailsPageHeader.render(p10) --[[ line: 308 ]]
+function detailsPageHeader.render(p10) --[[ line: 289 ]]
 	-- upvalues: deviceType (ref), withStyle (ref), roactModule (ref)
 	local var11 = p10.props.deviceType == deviceType.Phone
 	local thumbnailHeight = p10.props.thumbnailHeight
@@ -206,7 +202,7 @@ function detailsPageHeader.render(p10) --[[ line: 308 ]]
 	local gradientHeight = p10.props.gradientHeight or thumbnailHeight + 16 - headerBarBackgroundHeight + 44
 	local bottomMargin = p10.props.bottomMargin
 	
-	return withStyle(function(p11) --[[ line: 318 ]]
+	return withStyle(function(p11) --[[ line: 299 ]]
 		-- upvalues: roactModule (copy), gradientHeight (ref), headerBarBackgroundHeight (ref), var11 (ref), p10 (ref), thumbnailHeight (ref), bottomMargin (ref)
 		local theme = p11.Theme
 		

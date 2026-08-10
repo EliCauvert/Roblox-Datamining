@@ -6,6 +6,7 @@ return {
 	testMatch = { "**/*.test" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		jestConfigsModule.setupFiles.RetryTimes
 	}
 }

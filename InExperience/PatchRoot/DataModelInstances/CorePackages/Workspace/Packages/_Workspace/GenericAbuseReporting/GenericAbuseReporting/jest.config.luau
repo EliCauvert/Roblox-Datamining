@@ -1,11 +1,8 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local parent = script.Parent
 
 return {
-	displayName = "GenericAbuseReporting",
-	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.ErrorLogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		script.Parent.extendExpectations
+	projects = {
+		parent["jest.main.config"],
+		parent["jest.mockDataModel.config"]
 	}
 }

@@ -92,7 +92,7 @@ local _ = nil
 local iChatSettings = require(robloxGui.Modules.InGameChat.BubbleChat.Types).IChatSettings
 local var25 = if getFFlagExpChatAlwaysRunTCS() then textChatService.CreateDefaultTextChannels else textChatService.ChatVersion == Enum.ChatVersion.TextChatService and textChatService.CreateDefaultTextChannels
 
-if game:GetEngineFeature("TextChatServiceProtectedChatEnabled") and game:DefineFastFlag("DebugExpChatTextChannelWindow", false) then
+if game:GetEngineFeature("TextChatServiceProtectedChatEnabled") and game:DefineFastFlag("ExpChatTextChannelWindow", false) and textChatService:IsProtectedChatEnabled() then
 	require(corePackagesService.Workspace.Packages.TextChannelWindow).start()
 end
 expChatModule.mountClientApp({

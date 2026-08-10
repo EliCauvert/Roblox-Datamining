@@ -3,7 +3,6 @@ local parent = bulkPurchaseApp.Parent
 local reactModule = require(parent.React)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useDesignTokens = require(parent.Style).useDesignTokens
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
 local IAPExperienceModule = require(parent.IAPExperience)
 local formatEconomicRestrictionText = IAPExperienceModule.Utility.formatEconomicRestrictionText
@@ -11,15 +10,15 @@ local addEconomicRestrictionKeysToLocalization = IAPExperienceModule.Utility.add
 local alertPromptModule = require(bulkPurchaseApp.Components.AlertPrompt)
 local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
 
-local function BulkPurchaseErrorText(p0) --[[ line: 24 ]]
-	-- upvalues: useDesignTokens (ref), reactModule (ref), styledTextLabel (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
+local function BulkPurchaseErrorText(p0) --[[ line: 22 ]]
+	-- upvalues: useDesignTokens (ref), reactModule (ref), styledTextLabel (ref)
 	local var8 = useDesignTokens()
 	
 	return reactModule.createElement(styledTextLabel, {
 		size = UDim2.fromScale(1, 0),
 		automaticSize = Enum.AutomaticSize.Y,
-		fontStyle = if fFlagRenameDeprecatedUIBloxTokens then var8.Typography.BodyLarge else var8.Semantic.Typography.Body,
-		colorStyle = if fFlagRenameDeprecatedUIBloxTokens then var8.Color.Content.Default else var8.Semantic.Color.Text.Default,
+		fontStyle = var8.Typography.BodyLarge,
+		colorStyle = var8.Color.Content.Default,
 		textXAlignment = Enum.TextXAlignment.Center,
 		text = p0.text,
 		layoutOrder = p0.layoutOrder
@@ -57,8 +56,8 @@ local t_1 = {
 	[errorCodeEnumModule.PlaceInvalid] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems"
 }
 
-return function(p1) --[[ line: 80 | named "BulkPurchaseError" ]]
-	-- upvalues: useDesignTokens (ref), t (ref), t_1 (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), errorCodeEnumModule (ref), formatEconomicRestrictionText (ref), reactModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref), BulkPurchaseErrorText (ref), alertPromptModule (ref)
+return function(p1) --[[ line: 74 | named "BulkPurchaseError" ]]
+	-- upvalues: useDesignTokens (ref), t (ref), t_1 (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), errorCodeEnumModule (ref), formatEconomicRestrictionText (ref), reactModule (ref), BulkPurchaseErrorText (ref), alertPromptModule (ref)
 	local var9 = useDesignTokens()
 	local _ = nil
 	local t_2 = {
@@ -77,8 +76,8 @@ return function(p1) --[[ line: 80 | named "BulkPurchaseError" ]]
 		title = var11.title,
 		dismissCTA = var11.dismissCTA,
 		onDismiss = p1.onDismiss,
-		middleContent = function() --[[ line: 95 ]]
-			-- upvalues: reactModule (copy), fFlagRenameDeprecatedUIBloxTokens (copy), var9 (ref), BulkPurchaseErrorText (copy), var11 (write)
+		middleContent = function() --[[ line: 89 ]]
+			-- upvalues: reactModule (copy), var9 (ref), BulkPurchaseErrorText (copy), var11 (write)
 			return reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -89,7 +88,7 @@ return function(p1) --[[ line: 80 | named "BulkPurchaseError" ]]
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
-					Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var9.Size.Size_400 else var9.Global.Space_200)
+					Padding = UDim.new(0, var9.Size.Size_400)
 				}),
 				ErrorReason = reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 1, text = var11.errorReason }),
 				TryAgain = if var11.tryAgain then reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 2, text = var11.tryAgain }) else nil

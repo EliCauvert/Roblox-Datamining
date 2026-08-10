@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXSelectedBorderWrapsBackground", false) and require(script.Parent.FFlagAXLookAndFeelBackgrounds)
+﻿return game:DefineFastFlag("AXSelectedBorderWrapsBackground", false)

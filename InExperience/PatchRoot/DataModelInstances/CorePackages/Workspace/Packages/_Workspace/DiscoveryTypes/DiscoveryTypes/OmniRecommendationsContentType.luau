@@ -5,5 +5,6 @@
 	RecommendedFriend = "RecommendedFriend",
 	GameCoPlay = "GameCoPlay",
 	TrendingSearches = "TrendingSearches",
-	Song = "Song"
+	Song = "Song",
+	AdLink = if require(script:FindFirstAncestor("DiscoveryTypes").Parent.SharedFlags).FFlagLuaAppEnableHomepageOneByTwoTile then "AdLink" else nil
 }

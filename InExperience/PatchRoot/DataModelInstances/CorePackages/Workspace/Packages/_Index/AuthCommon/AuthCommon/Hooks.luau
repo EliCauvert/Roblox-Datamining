@@ -1,4 +1,4 @@
 ﻿return {
-	useAuthBackgroundContainerVariant = require(script.useAuthBackgroundContainerVariant),
-	useSignUpPageNavigationBindings = require(script.useSignUpPageNavigationBindings)
+	useSignUpPageNavigationBindings = require(script.useSignUpPageNavigationBindings),
+	useOpenDisclaimerLinks = require(script.useOpenDisclaimerLinks)
 }

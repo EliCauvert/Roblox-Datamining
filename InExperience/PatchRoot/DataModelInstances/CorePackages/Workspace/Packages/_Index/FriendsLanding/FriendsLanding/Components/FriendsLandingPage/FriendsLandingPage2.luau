@@ -58,6 +58,7 @@ local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnect
 local fFlagFixCohubUiBugs = require(parent.SharedFlags).FFlagFixCohubUiBugs
 local fFlagFriendsPageAlwaysOpenPPV = require(parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
 local fFlagFriendsPageUserListEnabled = require(parent.SharedFlags).FFlagFriendsPageUserListEnabled
+local fFlagFriendsPageUnifiedOpenProfileLogic = require(parent.SharedFlags).FFlagFriendsPageUnifiedOpenProfileLogic
 local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fStringIsUserInTcEligibleCountryAmpFeature = require(parent.SharedFlags).FStringIsUserInTcEligibleCountryAmpFeature
@@ -65,15 +66,16 @@ local fStringCanAccessTrustedContactsAmpNameSpace = require(parent.SharedFlags).
 local fixSearchYNavigation = game:DefineFastFlag("FixSearchYNavigation", false)
 local fixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRightMargin", false)
 local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
+local fFlagAddFriendsPageCapitalization = require(parent.SharedFlags).FFlagAddFriendsPageCapitalization
 
-return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
-	-- upvalues: useLocalization (ref), reactModule (ref), friendsLandingContextModule (ref), friendsLandingAnalyticsModule (ref), useNavigation (ref), useDesignTokens (ref), useUiModeInfo (ref), fFlagFixScalingOnFriendsLandingModule (ref), useTokens (ref), useFocusGuiObject (ref), fFlagFixCohubUiBugs (ref), getPageMargin (ref), useScreenSize (ref), uiMode (ref), focusNavigationUtilsModule (ref), inputHandlersModule (ref), fixSearchYNavigation (ref), fFlagEnableLeftNavOnConsole (ref), appPage (ref), robloxAppEnumsModule (ref), enumScreensModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), useTextSizeOffset (ref), fFlagConnectionManagementChips (ref), ampApiProvider (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), accessResponseEnum (ref), fFlagFriendsPageAlwaysOpenPPV (ref), convertUserPresenceTypeToString (ref), buttonClickEventsModule (ref), constantsModule (ref), fFlagFriendsPageUserListEnabled (ref), friendTileModule (ref), dependencyArray (ref), var21 (ref), filterStatesModule (ref), fFlagCreateConnectionsHub (ref), gridMetrics (ref), useAnimatedScrollToSelection (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), isFromConnectionsHubModule (ref), fFlagLuaAppsDefaultSelection (ref), useFocusOnMount (ref), roactModule (ref), horizontalPageMargin (ref), fixFriendsLandingRightMargin (ref), refreshScrollingFrame (ref), filterByButtonModule (ref), emptyResultsViewModule (ref), noFriendsViewModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), collectionGrid (ref), button (ref), buttonType (ref)
+return function(p0) --[[ line: 108 | named "FriendsLandingPage" ]]
+	-- upvalues: useLocalization (ref), fFlagAddFriendsPageCapitalization (ref), reactModule (ref), friendsLandingContextModule (ref), friendsLandingAnalyticsModule (ref), useNavigation (ref), useDesignTokens (ref), useUiModeInfo (ref), fFlagFixScalingOnFriendsLandingModule (ref), useTokens (ref), useFocusGuiObject (ref), fFlagFixCohubUiBugs (ref), getPageMargin (ref), useScreenSize (ref), uiMode (ref), focusNavigationUtilsModule (ref), inputHandlersModule (ref), fixSearchYNavigation (ref), fFlagEnableLeftNavOnConsole (ref), appPage (ref), robloxAppEnumsModule (ref), enumScreensModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), useTextSizeOffset (ref), fFlagConnectionManagementChips (ref), ampApiProvider (ref), fStringIsUserInTcEligibleCountryAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), accessResponseEnum (ref), fFlagFriendsPageAlwaysOpenPPV (ref), convertUserPresenceTypeToString (ref), buttonClickEventsModule (ref), constantsModule (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), friendTileModule (ref), dependencyArray (ref), var21 (ref), filterStatesModule (ref), fFlagCreateConnectionsHub (ref), gridMetrics (ref), useAnimatedScrollToSelection (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), isFromConnectionsHubModule (ref), fFlagLuaAppsDefaultSelection (ref), useFocusOnMount (ref), roactModule (ref), horizontalPageMargin (ref), fixFriendsLandingRightMargin (ref), refreshScrollingFrame (ref), filterByButtonModule (ref), emptyResultsViewModule (ref), noFriendsViewModule (ref), userListLayoutAdaptor (ref), layoutMode (ref), collectionGrid (ref), button (ref), buttonType (ref)
 	local var25 = useLocalization({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
 		errorText = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		friends = "CommonUI.Features.Label.Friends",
-		showMore = "Feature.Avatar.Action.ShowMore"
+		showMore = if fFlagAddFriendsPageCapitalization then "Feature.Friends.Action.ViewMore" else "Feature.Avatar.Action.ShowMore"
 	})
 	local var26 = reactModule.useContext(friendsLandingContextModule.Context)
 	local var27 = reactModule.useContext(friendsLandingAnalyticsModule.Context)
@@ -86,7 +88,7 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 	local var33 = if fFlagFixCohubUiBugs then getPageMargin(useScreenSize().X) else nil
 	local var34 = var30.uiMode == uiMode.TenFoot
 	local isCursor = focusNavigationUtilsModule.useLastInputMode() == "Cursor"
-	local var36 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.Search, inputHandlersModule.onRelease(function(p1) --[[ line: 131 ]]
+	local var36 = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.Search, inputHandlersModule.onRelease(function(p1) --[[ line: 135 ]]
 		-- upvalues: fixSearchYNavigation (copy), var34 (ref), fFlagEnableLeftNavOnConsole (copy), var28 (ref), appPage (copy), robloxAppEnumsModule (copy), navigateToLuaAppPages (ref), enumScreensModule (copy)
 		p1:cancel()
 		
@@ -113,8 +115,8 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 		var39 = var41
 		var40 = var42
 	end
-	local t, var64
-	reactModule.useEffect(function() --[[ line: 163 ]]
+	local t, var63
+	reactModule.useEffect(function() --[[ line: 167 ]]
 		-- upvalues: var27 (ref), fFlagConnectionManagementChips (copy), ampApiProvider (copy), fStringIsUserInTcEligibleCountryAmpFeature (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), accessResponseEnum (copy), var40 (write)
 		var27:pageMountingTimeReport()
 		
@@ -122,9 +124,9 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 			var40(true)
 		end
 	end, {})
-	local var43 = if fFlagFriendsPageAlwaysOpenPPV then nil else reactModule.useCallback(function(p2) --[[ line: 175 ]]
+	local var43 = if fFlagFriendsPageAlwaysOpenPPV then nil else reactModule.useCallback(function(p2) --[[ line: 179 ]]
 		-- upvalues: var26 (ref), convertUserPresenceTypeToString (copy)
-		return function() --[[ line: 176 ]]
+		return function() --[[ line: 180 ]]
 			-- upvalues: var26 (copy), p2 (ref), convertUserPresenceTypeToString (copy)
 			var26.openPlayerContextualMenu({
 				friendshipOriginSourceType = nil,
@@ -140,9 +142,9 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 			})
 		end
 	end, { var26.openPlayerContextualMenu })
-	local var44 = reactModule.useCallback(function(p3, p4, _, _, _) --[[ line: 193 ]]
+	local var44 = reactModule.useCallback(function(p3, p4, _, _, _) --[[ line: 197 ]]
 		-- upvalues: var27 (ref), enumScreensModule (copy), buttonClickEventsModule (copy), var26 (ref), constantsModule (copy)
-		return function() --[[ line: 194 ]]
+		return function() --[[ line: 198 ]]
 			-- upvalues: var27 (copy), enumScreensModule (copy), buttonClickEventsModule (copy), p3 (ref), p4 (ref), var26 (copy), constantsModule (copy)
 			var27:navigate(enumScreensModule.ViewUserProfile)
 			var27:buttonClick(buttonClickEventsModule.PlayerTile, {
@@ -154,60 +156,72 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 			var26.openProfilePeekView(p3, { source = constantsModule.FriendsLandingPageSourceName })
 		end
 	end, { var27, var26.openProfilePeekView })
-	local var45 = if fFlagFriendsPageUserListEnabled then reactModule.useCallback(function(p5, p6) --[[ line: 210 ]]
-		-- upvalues: var27 (ref), enumScreensModule (copy), buttonClickEventsModule (copy), var26 (ref), constantsModule (copy)
-		var27:navigate(enumScreensModule.ViewUserProfile)
-		var27:buttonClick(buttonClickEventsModule.PlayerTile, {
-			subpage = "peekView",
-			page = "playerProfile",
-			friendId = p5,
-			position = p6 - 1
-		})
-		var26.openProfilePeekView(p5, { source = constantsModule.FriendsLandingPageSourceName })
-	end, { var27 }) else nil
+	local var45 = if fFlagFriendsPageUserListEnabled or fFlagFriendsPageUnifiedOpenProfileLogic then reactModule.useCallback(function(p5, p6, p7) --[[ line: 214 ]]
+		-- upvalues: fFlagFriendsPageAlwaysOpenPPV (copy), fFlagFriendsPageUnifiedOpenProfileLogic (copy), var34 (ref), var43 (ref), var27 (ref), enumScreensModule (copy), buttonClickEventsModule (copy), var26 (ref), constantsModule (copy)
+		if fFlagFriendsPageAlwaysOpenPPV or not fFlagFriendsPageUnifiedOpenProfileLogic or (not var34 or not var43) then
+			var27:navigate(enumScreensModule.ViewUserProfile)
+			var27:buttonClick(buttonClickEventsModule.PlayerTile, {
+				subpage = "peekView",
+				page = "playerProfile",
+				friendId = p5,
+				position = p6 - 1
+			})
+			var26.openProfilePeekView(p5, { source = constantsModule.FriendsLandingPageSourceName })
+			
+			return
+		end
+		return var43(p7)()
+	end, {
+		var27,
+		if fFlagFriendsPageUnifiedOpenProfileLogic then var43 else nil,
+		if fFlagFriendsPageUnifiedOpenProfileLogic then var34 else nil
+	}) else nil
 	
-	local var46 = function() --[[ line: 225 ]]
+	local var46 = function() --[[ line: 241 ]]
 		-- upvalues: var27 (ref)
 		var27:pageLoadingTimeReport()
 	end
 	
-	local var47 = reactModule.useCallback(function() --[[ line: 229 ]]
+	local var47 = reactModule.useCallback(function() --[[ line: 245 ]]
 		-- upvalues: var28 (ref), enumScreensModule (copy), var25 (ref)
-		return function() --[[ line: 230 ]]
+		return function() --[[ line: 246 ]]
 			-- upvalues: var28 (copy), enumScreensModule (copy), var25 (copy)
 			var28.navigate(enumScreensModule.GenericToast, {
 				toastProps = { toastContent = { toastTitle = var25.errorText } }
 			})
 		end
 	end, { var28, var25 })
-	local var48 = reactModule.useCallback(function(p7, p8) --[[ line: 239 ]]
-		-- upvalues: reactModule (copy), friendTileModule (copy), fFlagFriendsPageAlwaysOpenPPV (copy), var44 (ref), var34 (ref), var43 (ref), var47 (ref), var46 (ref), p0 (ref), var32 (ref)
+	local useCallback = reactModule.useCallback
+	useCallback = useCallback(function(p8, p9) --[[ line: 255 ]]
+		-- upvalues: reactModule (copy), friendTileModule (copy), fFlagFriendsPageUnifiedOpenProfileLogic (copy), fFlagFriendsPageAlwaysOpenPPV (copy), var44 (ref), var34 (ref), var43 (ref), var47 (ref), var45 (ref), var46 (ref), p0 (ref), var32 (ref)
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			LayoutOrder = p8
+			LayoutOrder = p9
 		}, {
 			tile = reactModule.createElement(friendTileModule, {
-				user = p7,
-				index = p8,
-				openPlayerProfile = if fFlagFriendsPageAlwaysOpenPPV then var44 elseif var34 then if var43 == nil then var47 else var43 else var44,
-				isPlayerContextualMenuEnabled = var34,
+				user = p8,
+				index = p9,
+				openPlayerProfile = if fFlagFriendsPageUnifiedOpenProfileLogic then nil elseif fFlagFriendsPageAlwaysOpenPPV then var44 elseif var34 then if var43 == nil then var47 else var43 else var44,
+				openPlayerProfileHandle = if fFlagFriendsPageUnifiedOpenProfileLogic then var45 else nil,
+				isPlayerContextualMenuEnabled = if fFlagFriendsPageUnifiedOpenProfileLogic then nil else var34,
 				pageLoadingTimeReport = var46,
-				selected = p8 == p0.selectedItemIndex,
+				selected = p9 == p0.selectedItemIndex,
 				focusGuiObject = var32
 			})
 		}), "FriendTile"
 	end, {
 		p0.selectedItemIndex,
 		var34,
-		if fFlagFriendsPageAlwaysOpenPPV then nil else var43,
-		var44
+		if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else var43,
+		var44,
+		if fFlagFriendsPageUnifiedOpenProfileLogic then var45 else nil
 	})
-	local var49 = reactModule.useCallback(function(p9) --[[ line: 267 ]]
+	local var48 = reactModule.useCallback(function(p10) --[[ line: 294 ]]
 		-- upvalues: var38 (write)
-		return p9 + var38
+		return p10 + var38
 	end, dependencyArray(var38, var37))
-	local var50 = reactModule.useCallback(function() --[[ line: 271 ]]
+	local var49 = reactModule.useCallback(function() --[[ line: 298 ]]
 		-- upvalues: var27 (ref), buttonClickEventsModule (copy), var28 (ref), enumScreensModule (copy), var21 (copy), p0 (ref)
 		var27:buttonClick(buttonClickEventsModule.FriendFilterPill)
 		var28.navigate(enumScreensModule.FilterByModal, {
@@ -215,25 +229,25 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 			friendCount = p0.totalFriendCount
 		})
 	end, dependencyArray(var28, var27))
-	local var51 = if fFlagConnectionManagementChips then reactModule.useCallback(function(p10) --[[ line: 280 ]]
+	local var50 = if fFlagConnectionManagementChips then reactModule.useCallback(function(p11) --[[ line: 307 ]]
 		-- upvalues: var27 (ref), buttonClickEventsModule (copy), var26 (ref)
 		var27:buttonClick(buttonClickEventsModule.FriendFilterPill)
-		var26.setFilterKeys(p10)
+		var26.setFilterKeys(p11)
 	end, dependencyArray(var27, var26.setFilterKeys)) else nil
-	local var52 = reactModule.useCallback(function() --[[ line: 286 ]]
+	local var51 = reactModule.useCallback(function() --[[ line: 313 ]]
 		-- upvalues: var27 (ref), var26 (ref), filterStatesModule (copy), var25 (ref)
 		var27:pageLoaded()
 		var26.setFilterKeys(filterStatesModule.All)
 		
 		return var26.refreshPage({
 			errorMessage = var25.pageError,
-			onResolve = function() --[[ line: 292 ]]
+			onResolve = function() --[[ line: 319 ]]
 				-- upvalues: var27 (copy)
 				var27:pageLoadedWithArgs()
 			end
 		})
 	end, dependencyArray(var26.refreshPage, var25, var27, var26.setFilterKeys))
-	local var53 = reactModule.useCallback(function() --[[ line: 298 ]]
+	local var52 = reactModule.useCallback(function() --[[ line: 325 ]]
 		-- upvalues: var27 (ref), buttonClickEventsModule (copy), enumScreensModule (copy), fFlagCreateConnectionsHub (copy), var28 (ref), appPage (copy)
 		var27:buttonClick(buttonClickEventsModule.AddFriendsNoFriendsEmptyView)
 		var27:navigate(enumScreensModule.AddFriends)
@@ -245,57 +259,57 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 		end
 		var28.navigate(appPage.AddFriendsPage)
 	end, dependencyArray(var27, var28))
-	local var54 = if p0.friends then #p0.friends else 0
+	local var53 = if p0.friends then #p0.friends else 0
 	local totalFriendCount = p0.totalFriendCount or 0
-	local var56 = totalFriendCount == 0
-	local var57 = var54 == 0 and totalFriendCount > 0
-	local var58 = p0.fetchMoreFriends and (not var56 and (not var57 and (not var26.filter or var26.filter == filterStatesModule.All)))
-	local var59 = reactModule.useCallback(function() --[[ line: 317 ]]
+	local var55 = totalFriendCount == 0
+	local var56 = var53 == 0 and totalFriendCount > 0
+	local var57 = p0.fetchMoreFriends and (not var55 and (not var56 and (not var26.filter or var26.filter == filterStatesModule.All)))
+	local var58 = reactModule.useCallback(function() --[[ line: 344 ]]
 		-- upvalues: p0 (ref)
 		if p0.fetchMoreFriends then
 			p0.fetchMoreFriends()
 		end
 	end, { p0.fetchMoreFriends })
-	local var60 = if var34 then 24 else 12
-	local var61, var62 = reactModule.useState(100)
+	local var59 = if var34 then 24 else 12
+	local var60, var61 = reactModule.useState(100)
 	local _ = nil
 	local _ = nil
 	
 	if var34 then
 		t = var29.LuaApps.FriendsLanding.FriendsLandingPage.GridViewItemMetrics
-		var64 = var29.LuaApps.FriendsLanding.FriendsLandingPage.GridHorizontalSpacing
+		var63 = var29.LuaApps.FriendsLanding.FriendsLandingPage.GridHorizontalSpacing
 	else
 		t = {
 			minimumItemsPerRow = 2,
 			minimumItemWidth = if fFlagFixScalingOnFriendsLandingModule then 176 * var31.Config.UI.Scale else 176
 		}
-		var64 = 12
+		var63 = 12
 	end
-	local var65 = reactModule.useMemo(function() --[[ line: 340 ]]
+	local var64 = reactModule.useMemo(function() --[[ line: 367 ]]
 		-- upvalues: gridMetrics (copy), t (write)
 		return gridMetrics.makeCustomMetricsGetter(t)
 	end, { t })
-	local var66 = reactModule.useMemo(function() --[[ line: 344 ]]
-		-- upvalues: var65 (ref), var61 (ref), var64 (write)
-		return var65(var61, var64)
-	end, { var65 })
-	local var67 = reactModule.useCallback(function(p11) --[[ line: 348 ]]
-		-- upvalues: var62 (ref)
-		var62(p11.X)
+	local var65 = reactModule.useMemo(function() --[[ line: 371 ]]
+		-- upvalues: var64 (ref), var60 (ref), var63 (write)
+		return var64(var60, var63)
+	end, { var64 })
+	local var66 = reactModule.useCallback(function(p12) --[[ line: 375 ]]
+		-- upvalues: var61 (ref)
+		var61(p12.X)
 	end, {})
-	local var68 = reactModule.useRef({})
-	local var69, var70 = useAnimatedScrollToSelection(Enum.ScrollingDirection.Y, 0, var29.Size.Size_2000, var29.LuaApps.App.Page.ScrollAnimationConfig)
+	local var67 = reactModule.useRef({})
+	local var68, var69 = useAnimatedScrollToSelection(Enum.ScrollingDirection.Y, 0, var29.Size.Size_2000, var29.LuaApps.App.Page.ScrollAnimationConfig)
 	local _ = nil
-	local var71 = if not var34 then if var56 or var57 or isCursor then 8 else 1000 else 8
-	local var72 = if fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
-	var71 += if fFlagExtendScrollingFramesBySafeInsets then var72.bottom else 0
-	local var73 = fFlagCreateConnectionsHub and isFromConnectionsHubModule(var28)
+	local var70 = if not var34 then if var55 or var56 or isCursor then 8 else 1000 else 8
+	local var71 = if fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	var70 += if fFlagExtendScrollingFramesBySafeInsets then var71.bottom else 0
+	local var72 = fFlagCreateConnectionsHub and isFromConnectionsHubModule(var28)
 	
 	return reactModule.createElement("Frame", {
 		[roactModule.Ref] = var36,
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = if var73 then nil else var29.LuaApps.App.Page.BackgroundColor,
-		BackgroundTransparency = if var73 then 1 else var29.LuaApps.App.Page.BackgroundTransparency
+		BackgroundColor3 = if var72 then nil else var29.LuaApps.App.Page.BackgroundColor,
+		BackgroundTransparency = if var72 then 1 else var29.LuaApps.App.Page.BackgroundTransparency
 	}, {
 		HorizontalPageMargin = reactModule.createElement(horizontalPageMargin, { backgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 			Padding = if fFlagFixCohubUiBugs then reactModule.createElement("UIPadding", {
@@ -304,18 +318,18 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 			}) else nil,
 			scrollView = reactModule.createElement(refreshScrollingFrame, {
 				scrollingElementProps = {
-					Size = UDim2.new(1, 0, 1, -constantsModule.TOP_BAR_HEIGHT + (if fFlagExtendScrollingFramesBySafeInsets then var72.bottom else 0)),
+					Size = UDim2.new(1, 0, 1, -constantsModule.TOP_BAR_HEIGHT + (if fFlagExtendScrollingFramesBySafeInsets then var71.bottom else 0)),
 					BackgroundTransparency = 1,
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					ScrollBarThickness = 0,
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					AutomaticCanvasSize = Enum.AutomaticSize.XY,
-					CanvasPosition = var69,
-					[roactModule.Event.SelectionChanged] = var70,
+					CanvasPosition = var68,
+					[roactModule.Event.SelectionChanged] = var69,
 					Selectable = if fFlagEnableLeftNavOnConsole then false else nil
 				},
-				[roactModule.Ref] = var68,
-				refresh = var52,
+				[roactModule.Ref] = var67,
+				refresh = var51,
 				usesBuilderIcon = true
 			}, {
 				UISizeConstraint = if fFlagFriendsPageUserListEnabled then reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(640, 1e999) }) else nil,
@@ -332,51 +346,51 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 					layoutOrder = 2,
 					analytics = var27,
 					filter = var26.filter,
-					friendCount = if var26.filter == filterStatesModule.All then totalFriendCount else var54,
+					friendCount = if var26.filter == filterStatesModule.All then totalFriendCount else var53,
 					isDisabled = totalFriendCount == 0,
-					onActivated = if fFlagConnectionManagementChips then var51 else var50,
+					onActivated = if fFlagConnectionManagementChips then var50 else var49,
 					maxWidth = if fFlagConnectionManagementChips then 640 else nil,
 					canAccessTrustedContacts = if fFlagConnectionManagementChips then var39 else nil
 				}),
-				NoResultsView = if var57 then reactModule.createElement(emptyResultsViewModule, { layoutOrder = 6 }) else nil,
-				NoFriendsView = if var56 then reactModule.createElement(noFriendsViewModule, {
+				NoResultsView = if var56 then reactModule.createElement(emptyResultsViewModule, { layoutOrder = 6 }) else nil,
+				NoFriendsView = if var55 then reactModule.createElement(noFriendsViewModule, {
 					layoutOrder = 6,
 					pageLoadingTimeReport = var46,
-					openAddFriendsPage = var53
+					openAddFriendsPage = var52
 				}) else nil,
-				UserListLayoutAdaptor = if not fFlagFriendsPageUserListEnabled then if var57 or var56 then nil else reactModule.createElement(userListLayoutAdaptor, {
+				UserListLayoutAdaptor = if not fFlagFriendsPageUserListEnabled then if var56 or var55 then nil else reactModule.createElement(userListLayoutAdaptor, {
 					layoutOrder = 6,
 					isScrollEnabled = false,
 					layoutMode = layoutMode.Vertical,
 					header = { title = var25.peopleYouMayKnow },
 					entities = p0.friends,
-					renderRow = if fFlagFriendsPageUserListEnabled then reactModule.useCallback(function(p12, p13, p14) --[[ line: 375 ]]
+					renderRow = if fFlagFriendsPageUserListEnabled then reactModule.useCallback(function(p13, p14, p15) --[[ line: 402 ]]
 						-- upvalues: reactModule (copy), friendTileModule (copy), var45 (ref), var46 (ref)
 						return reactModule.createElement(friendTileModule, {
 							isPlayerContextualMenuEnabled = nil,
-							user = p13,
-							createRow = p12,
-							index = p14,
+							user = p14,
+							createRow = p13,
+							index = p15,
 							openPlayerProfileHandle = var45,
 							pageLoadingTimeReport = var46
 						})
 					end, { var46, var45 }) else nil,
-					hasMore = var58,
-					onLoadMore = var59
+					hasMore = var57,
+					onLoadMore = var58
 				}) else nil,
-				FriendsGridView = if fFlagFriendsPageUserListEnabled then nil elseif var57 or var56 then nil else reactModule.createElement(collectionGrid, {
+				FriendsGridView = if fFlagFriendsPageUserListEnabled then nil elseif var56 or var55 then nil else reactModule.createElement(collectionGrid, {
 					LayoutOrder = 6,
 					containerRef = if fFlagLuaAppsDefaultSelection then if fFlagLuaAppsDefaultSelection then useFocusOnMount() else nil else nil,
 					items = p0.friends,
-					verticalScrollingFrameRef = var68,
-					renderItem = var48,
-					getItemHeight = var49,
-					numColumns = var66.itemsPerRow,
-					columnGap = var64,
-					verticalPadding = var60,
-					onContainerSizeChanged = var67
+					verticalScrollingFrameRef = var67,
+					renderItem = useCallback,
+					getItemHeight = var48,
+					numColumns = var65.itemsPerRow,
+					columnGap = var63,
+					verticalPadding = var59,
+					onContainerSizeChanged = var66
 				}),
-				showMoreFrame = if fFlagFriendsPageUserListEnabled then nil elseif var58 then reactModule.createElement("Frame", {
+				showMoreFrame = if fFlagFriendsPageUserListEnabled then nil elseif var57 then reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 7,
 					Size = UDim2.new(1, 0, 0, constantsModule.CTA_BUTTON_HEIGHT)
@@ -389,14 +403,14 @@ return function(p0) --[[ line: 106 | named "FriendsLandingPage" ]]
 					showMoreButton = reactModule.createElement(button, {
 						buttonType = buttonType.Secondary,
 						size = UDim2.new(1, 0, 1, 0),
-						onActivated = var59,
+						onActivated = var58,
 						text = var25.showMore
 					})
 				}) else nil,
 				additionalPadding = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 8,
-					Size = UDim2.new(1, 0, 0, var71)
+					Size = UDim2.new(1, 0, 0, var70)
 				})
 			})
 		})

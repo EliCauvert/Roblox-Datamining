@@ -19,13 +19,12 @@ local useDeviceType = require(parent.RobloxAppHooks).useDeviceType
 local deviceType = require(parent.RobloxAppEnums).DeviceType
 local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagRenameDeprecatedUIBloxTokens = sharedFlagsModule.FFlagRenameDeprecatedUIBloxTokens
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local var8 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return reactModule.memo(function(p0) --[[ line: 54 | named "ExperienceDetailsConnectionsPlayedTextRow" ]]
-	-- upvalues: useTokens (ref), useDispatch (ref), useDeviceType (ref), deviceType (ref), game (ref), signalsReactModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), gameConnectionsPlayedChipClicked (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var8 (ref), navigateDown (ref), fFlagRenameDeprecatedUIBloxTokens (ref), avatarGroupType (ref), inputSize (ref), sduiTextAccessoryRow (ref)
+return reactModule.memo(function(p0) --[[ line: 53 | named "ExperienceDetailsConnectionsPlayedTextRow" ]]
+	-- upvalues: useTokens (ref), useDispatch (ref), useDeviceType (ref), deviceType (ref), game (ref), signalsReactModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), gameConnectionsPlayedChipClicked (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var8 (ref), navigateDown (ref), avatarGroupType (ref), inputSize (ref), sduiTextAccessoryRow (ref)
 	local layoutOrder = p0.layoutOrder
 	local universeId = p0.universeId
 	local name = p0.name
@@ -58,7 +57,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "ExperienceDetailsCon
 	local _ = nil
 	local var17 = if name and name ~= "" then if var15 == 1 then var16.playedByUser elseif var15 == 2 then var16.playedByUserAndOneOther else var16.playedByUserAndOthersPlural elseif var15 == 1 then var16.connectionRecentlyPlayed else var16.connectionsRecentlyPlayed
 	local rootPlaceId = var13 and var13.rootPlaceId
-	local var19 = reactModule.useCallback(function() --[[ line: 128 ]]
+	local var19 = reactModule.useCallback(function() --[[ line: 127 ]]
 		-- upvalues: rootPlaceId (ref), playersService (copy), gameConnectionsPlayedChipClicked (copy), universeId (ref), var15 (ref), appPage (copy), var14 (ref), var16 (ref), fFlagSignalsNavP3Dispatch (copy), var8 (copy), var10 (ref), navigateDown (copy)
 		if rootPlaceId then
 			gameConnectionsPlayedChipClicked({
@@ -85,16 +84,16 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "ExperienceDetailsCon
 	end, {
 		var10, universeId, rootPlaceId, var14, var15, var16, playersService.LocalPlayer
 	})
-	local var20 = reactModule.useMemo(function() --[[ line: 157 ]]
+	local var20 = reactModule.useMemo(function() --[[ line: 156 ]]
 		-- upvalues: var14 (ref)
 		return { table.unpack(var14, 1, math.min(2, #var14)) }
 	end, { var14 })
-	local var21 = if var11 then if fFlagRenameDeprecatedUIBloxTokens then var9.Color.Surface.Surface_100 else var9.Semantic.Color.Background.Contrast elseif fFlagRenameDeprecatedUIBloxTokens then var9.Color.Surface.Surface_0 else var9.Semantic.Color.Background.Default
+	local var21 = if var11 then var9.Color.Surface.Surface_100 else var9.Color.Surface.Surface_0
 	
 	return if var15 == 0 then nil else reactModule.createElement(sduiTextAccessoryRow, {
 		testId = "--experience-details-connections-played-text-row",
 		text = var17,
-		leading = reactModule.useMemo(function() --[[ line: 169 ]]
+		leading = reactModule.useMemo(function() --[[ line: 162 ]]
 			-- upvalues: var20 (ref), avatarGroupType (copy), inputSize (copy), var21 (ref)
 			return {
 				type = "AvatarGroup",
@@ -106,7 +105,7 @@ return reactModule.memo(function(p0) --[[ line: 54 | named "ExperienceDetailsCon
 			}
 		end, { var20, var21 }),
 		gap = var9.Gap.Small,
-		fontStyle = reactModule.useMemo(function() --[[ line: 180 ]]
+		fontStyle = reactModule.useMemo(function() --[[ line: 173 ]]
 			-- upvalues: var9 (ref)
 			return { FontSize = var9.FontSize.FontSize_300 }
 		end, { var9 }),

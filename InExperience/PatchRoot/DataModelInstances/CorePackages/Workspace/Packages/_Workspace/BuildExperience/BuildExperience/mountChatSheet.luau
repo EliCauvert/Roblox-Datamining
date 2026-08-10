@@ -8,39 +8,49 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local robloxAppLocalesModule = require(parent.RobloxAppLocales)
 local roactUtilsModule = require(parent.RoactUtils)
+local buildExperienceCompositionStyleSheetModule = require(buildExperience.Components.BuildExperienceCompositionStyleSheet)
+local _ = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local chatSheetModule = require(buildExperience.Components.ChatSheet.ChatSheet)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
 local clientLogsCollectorModule = require(buildExperience.Chat.clientLogsCollector)
+local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
 local localizationProvider = localizationModule.LocalizationProvider
 local localization = robloxAppLocalesModule.Localization
+local var14 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider else nil
 local fIntInGameBuildChatSheetSnapPoint = game:DefineFastInt("FIntInGameBuildChatSheetSnapPoint", 50)
 
-local function ConnectedChatSheet() --[[ line: 23 ]]
+local function ConnectedChatSheet() --[[ line: 35 ]]
 	-- upvalues: getPlayButtonStoreModule (ref), reactModule (ref), chatSheetModule (ref), fIntInGameBuildChatSheetSnapPoint (ref)
-	local var15 = getPlayButtonStoreModule()
-	local var16 = var15.useResumeTarget()
+	local var18 = getPlayButtonStoreModule()
+	local var19 = var18.useIsActive()
+	local var20 = var18.useResumeTarget()
 	
 	return reactModule.createElement(chatSheetModule, {
-		defaultSnapPointIndex = 2,
-		isOpen = var15.useIsActive(),
-		onClose = reactModule.useCallback(function() --[[ line: 28 ]]
-			-- upvalues: var15 (ref)
-			var15.setIsActive(false)
-		end, { var15 }),
-		snapPoints = { fIntInGameBuildChatSheetSnapPoint / 100, 1 },
-		universeId = if var16 then var16.universeId else nil,
-		placeId = if var16 then var16.placeId else nil,
-		sessionId = if var16 then var16.sessionId else nil
+		defaultSnapPointIndex = 1,
+		isOpen = var19,
+		onClose = reactModule.useCallback(function() --[[ line: 45 ]]
+			-- upvalues: var18 (ref)
+			var18.setIsActive(false)
+		end, { var18 }),
+		snapPoints = { fIntInGameBuildChatSheetSnapPoint / 100 },
+		topBarPillMenuTarget = if var19 then {
+			isNewGameTarget = false,
+			universeId = game.GameId,
+			placeId = game.PlaceId
+		} else nil,
+		universeId = if var20 then var20.universeId else nil,
+		placeId = if var20 then var20.placeId else nil,
+		sessionId = if var20 then var20.sessionId else nil
 	})
 end
 
-local var14 = roactUtilsModule.Components.createLazyComponent(function() --[[ line: 43 ]]
+local var17 = roactUtilsModule.Components.createLazyComponent(function() --[[ line: 61 ]]
 	-- upvalues: ConnectedChatSheet (ref)
 	return ConnectedChatSheet
 end)
 
-return function() --[[ line: 47 | named "mountChatSheet" ]]
-	-- upvalues: clientLogsCollectorModule (ref), coreGuiService (ref), reactRobloxModule (ref), localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationModule (ref), var14 (ref)
+return function() --[[ line: 65 | named "mountChatSheet" ]]
+	-- upvalues: clientLogsCollectorModule (ref), coreGuiService (ref), reactRobloxModule (ref), localization (ref), localizationService (ref), reactModule (ref), foundationModule (ref), buildExperienceCompositionStyleSheetModule (ref), var17 (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var14 (ref), localizationProvider (ref)
 	clientLogsCollectorModule.startServerLogCollection()
 	local buildExperienceChatSheet = Instance.new("ScreenGui")
 	buildExperienceChatSheet.Name = "BuildExperienceChatSheet"
@@ -48,12 +58,21 @@ return function() --[[ line: 47 | named "mountChatSheet" ]]
 	buildExperienceChatSheet.ResetOnSpawn = false
 	buildExperienceChatSheet.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	buildExperienceChatSheet.Parent = coreGuiService
-	local var18 = reactRobloxModule.createRoot(buildExperienceChatSheet)
-	var18:render(reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+	buildExperienceChatSheet.DisplayOrder = 9
+	local var22 = reactRobloxModule.createRoot(buildExperienceChatSheet)
+	local var23 = localization.new(localizationService.RobloxLocaleId)
+	local var24 = reactModule.createElement(foundationModule.FoundationProvider, {
+		colorMode = foundationModule.Enums.ColorMode.Dark,
+		overlayGui = { DisplayOrder = 9 }
 	}, {
-		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, { Sheet = reactModule.createElement(var14) })
-	}))
+		CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
+		Sheet = reactModule.createElement(var17)
+	})
 	
-	return var18
+	if fFlagBuildExperienceUserMessageHapticFeedbackModule then
+		var24 = reactModule.createElement(var14, nil, { FoundationProvider = var24 })
+	end
+	var22:render(reactModule.createElement(localizationProvider, { localization = var23 }, { ChatSheet = var24 }))
+	
+	return var22
 end

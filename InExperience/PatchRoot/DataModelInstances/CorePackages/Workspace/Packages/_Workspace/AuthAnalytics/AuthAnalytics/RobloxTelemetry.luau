@@ -1,3 +1,4 @@
 ﻿return {
-	CheckForAndFireValidCookieForNoCachedUserEvent = require(script.CheckForAndFireValidCookieForNoCachedUserEvent)
+	CheckForAndFireValidCookieForNoCachedUserEvent = require(script.CheckForAndFireValidCookieForNoCachedUserEvent),
+	IosAuthServiceHealthCounters = require(script.IosAuthServiceHealthCounters)
 }

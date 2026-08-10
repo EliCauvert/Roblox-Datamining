@@ -1,5 +1,4 @@
 ﻿local parent = script:FindFirstAncestor("FriendsCommon").Parent
-local fFlagFriendsSortFeatureLoggingEnabled = require(parent.SharedFlags).FFlagFriendsSortFeatureLoggingEnabled
 local queries = require(parent.ApolloLocalState).queries
 local apolloFriendsModule = require(parent.ApolloFriends)
 local apolloPresenceModule = require(parent.ApolloPresence)
@@ -7,7 +6,7 @@ local _ = require(parent.GraphQLServer)
 local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
 local loggingProtocolModule = require(parent.LoggingProtocol)
 
-local function rtnPresenceToGraphQLPresence(p0) --[[ line: 39 ]]
+local function rtnPresenceToGraphQLPresence(p0) --[[ line: 37 ]]
 	-- upvalues: apolloPresenceModule (ref)
 	return {
 		__typename = "UserPresence",
@@ -22,7 +21,7 @@ local function rtnPresenceToGraphQLPresence(p0) --[[ line: 39 ]]
 	}
 end
 
-local function toUserIdToFriendMap(p1) --[[ line: 53 ]]
+local function toUserIdToFriendMap(p1) --[[ line: 51 ]]
 	local t = {}
 	
 	for i, v in p1 do
@@ -31,7 +30,7 @@ local function toUserIdToFriendMap(p1) --[[ line: 53 ]]
 	return t
 end
 
-local function _(p2) --[[ line: 62 | named "userIdFriendMapToList" ]]
+local function _(p2) --[[ line: 60 | named "userIdFriendMapToList" ]]
 	local t = {}
 	
 	for i, v in p2 do
@@ -46,7 +45,7 @@ local var6 = socialLuaAnalyticsModule.Telemetry.createEmitter({
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function() --[[ line: 84 ]]
+	getSharedInfo = function() --[[ line: 82 ]]
 		return {}
 	end
 })
@@ -57,15 +56,15 @@ local var7 = socialLuaAnalyticsModule.Telemetry.new({
 	backendsList = {
 		{
 			type = "EventIngest",
-			format = function(p3, _) --[[ line: 96 ]]
+			format = function(p3, _) --[[ line: 94 ]]
 				return p3
 			end
 		}
 	}
 })
 
-return function(p4) --[[ line: 103 | named "handlePresenceEventWithScores" ]]
-	-- upvalues: apolloFriendsModule (ref), queries (ref), toUserIdToFriendMap (ref), fFlagFriendsSortFeatureLoggingEnabled (ref), rtnPresenceToGraphQLPresence (ref), var6 (ref), var7 (ref)
+return function(p4) --[[ line: 101 | named "handlePresenceEventWithScores" ]]
+	-- upvalues: apolloFriendsModule (ref), queries (ref), toUserIdToFriendMap (ref), rtnPresenceToGraphQLPresence (ref), var6 (ref), var7 (ref)
 	local t = {
 		userId = p4.localUserId,
 		sort = apolloFriendsModule.Enums.Sort.FriendshipScore
@@ -77,10 +76,8 @@ return function(p4) --[[ line: 103 | named "handlePresenceEventWithScores" ]]
 	for i, v in pairs(p4.updatedPresences) do
 		local var15 = tostring(v.userId)
 		local var16 = p4.updatedSortScores[var15]
+		table.insert(t_1, var15)
 		
-		if fFlagFriendsSortFeatureLoggingEnabled then
-			table.insert(t_1, var15)
-		end
 		if v.userPresenceType == 0 then
 			var12[var15] = nil
 		elseif var12[var15] == nil then
@@ -108,7 +105,7 @@ return function(p4) --[[ line: 103 | named "handlePresenceEventWithScores" ]]
 		data = { onlineFriendsByUserId = t_2 }
 	})
 	
-	if fFlagFriendsSortFeatureLoggingEnabled and p4.rtnMessageId ~= nil then
+	if p4.rtnMessageId ~= nil then
 		var6.emit(var7, {
 			sortType = "Carousel",
 			messageId = p4.rtnMessageId,

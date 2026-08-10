@@ -16,30 +16,29 @@ local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore
 local apportioningPreprocessingHelpersModule = require(serverDrivenUi.DataStore.ApportioningPreprocessingHelpers)
 local fFlagLuaAppUseEffectInSignalPreprocessing = require(parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
 local fFlagLuaAppAddRequestIdToRfySignalApportioning = require(parent.SharedFlags).FFlagLuaAppAddRequestIdToRfySignalApportioning
-local fFlagLuaAppCompositionSupport = require(parent.SharedFlags).FFlagLuaAppCompositionSupport
 local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
 local getMainCollectionLayoutStore = collectionViewsModule.getMainCollectionLayoutStore
 
-return function(p0, p1, p2) --[[ line: 40 | named "useApportioningPreprocessingFromOmniRecommendations" ]]
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), fFlagLuaAppCompositionSupport (ref), useSelector (ref), tutilsModule (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (ref), topicContentsReducer (ref), fFlagLuaAppUseEffectInSignalPreprocessing (ref), reactModule (ref), getSduiFeedStoreModule (ref), getMainCollectionLayoutStore (ref), omniFeedTypes (ref), gameTileLayoutType (ref), omniFeedConstants (ref), getGameTileCollectionItemSize (ref), apportioningPreprocessingHelpersModule (ref)
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or fFlagLuaAppCompositionSupport and p2
-	local var10 = useSelector(function(p3) --[[ line: 48 ]]
+return function(p0, p1, p2) --[[ line: 39 | named "useApportioningPreprocessingFromOmniRecommendations" ]]
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), useSelector (ref), tutilsModule (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (ref), topicContentsReducer (ref), fFlagLuaAppUseEffectInSignalPreprocessing (ref), reactModule (ref), getSduiFeedStoreModule (ref), getMainCollectionLayoutStore (ref), omniFeedTypes (ref), gameTileLayoutType (ref), omniFeedConstants (ref), getGameTileCollectionItemSize (ref), apportioningPreprocessingHelpersModule (ref)
+	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p2
+	local var10 = useSelector(function(p3) --[[ line: 46 ]]
 		-- upvalues: p0 (ref)
 		local var13 = p3.OmniRecommendations[p0]
 		
 		return if var13 then var13.sorts else {}
 	end, tutilsModule.shallowEqual)
-	local var11 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then useSelector(function(p4) --[[ line: 58 ]]
+	local var11 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then useSelector(function(p4) --[[ line: 56 ]]
 		-- upvalues: p0 (ref)
 		local var14 = p4.OmniRecommendations[p0]
 		
 		return if var14 then var14.recommendationsId else nil
 	end) else nil
-	local var12 = useSelector(function(p5) --[[ line: 67 ]]
+	local var12 = useSelector(function(p5) --[[ line: 65 ]]
 		-- upvalues: topicContentsReducer (copy)
 		return p5.Personalization[topicContentsReducer.key]
 	end)
-	;(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function() --[[ line: 75 ]]
+	;(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function() --[[ line: 73 ]]
 		-- upvalues: getSduiFeedStoreModule (copy), p0 (ref), fFlagLuaAppCompositionAlways_1 (ref), getMainCollectionLayoutStore (copy), var10 (ref), omniFeedTypes (copy), gameTileLayoutType (copy), omniFeedConstants (copy), getGameTileCollectionItemSize (copy), p1 (ref), apportioningPreprocessingHelpersModule (copy), var12 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var11 (write)
 		local var15 = getSduiFeedStoreModule(p0)
 		local t = {}
@@ -80,10 +79,10 @@ return function(p0, p1, p2) --[[ line: 40 | named "useApportioningPreprocessingF
 		end
 		var15.updateData({ apportioningData = t }, if fFlagLuaAppAddRequestIdToRfySignalApportioning then var11 else nil)
 		
-		return function() --[[ line: 142 ]] end
+		return function() --[[ line: 140 ]] end
 	end, {
 		var10, var12, if not fFlagLuaAppCompositionAlways then p1 else nil, p0,
 		if fFlagLuaAppAddRequestIdToRfySignalApportioning then var11 else nil,
-		if fFlagLuaAppCompositionSupport then fFlagLuaAppCompositionAlways_1 else nil
+		fFlagLuaAppCompositionAlways_1
 	})
 end

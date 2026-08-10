@@ -1,9 +1,12 @@
 ﻿local runService = game:GetService("RunService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local corePackagesService = game:GetService("CorePackages")
+local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
 local t = inGameMenuDependenciesModule.t
 local assetsModule = require(script.Parent.Parent.Parent.Resources.Assets)
 local imageSetLabel = inGameMenuDependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
+local image = require(corePackagesService.Packages.Foundation).Image
+local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local color = Color3.fromRGB(98, 98, 99)
 local color_1 = Color3.fromRGB(255, 255, 255)
 local color_2 = Color3.fromRGB(196, 0, 1)
@@ -18,35 +21,35 @@ fillCircle.validateProps = t.strictInterface({
 	BackgroundColor = t.Color3
 })
 
-local function _(p0) --[[ line: 37 | named "getFillRingZIndex" ]]
+local function _(p0) --[[ line: 42 | named "getFillRingZIndex" ]]
 	return if p0 > 0.75 then 8 elseif p0 > 0.5 then 6 elseif p0 > 0.25 then 4 elseif p0 > 0 then 2 else 0
 end
 
-local _ = function(p1, p2, p3) --[[ line: 50 | named "linearTween" ]]
+local _ = function(p1, p2, p3) --[[ line: 55 | named "linearTween" ]]
 	return (p1 - p2 / 30) / ((p3 - p2) / 30)
 end
 
-local _ = function(p4, p5, p6) --[[ line: 55 | named "isBetweenFrames" ]]
+local _ = function(p4, p5, p6) --[[ line: 60 | named "isBetweenFrames" ]]
 	return p5 / 30 <= p4 and p4 <= p6 / 30
 end
 
-local function largerCircleAnimation(p7, p8, p9, p10) --[[ line: 59 ]]
+local function largerCircleAnimation(p7, p8, p9, p10) --[[ line: 64 ]]
 	if p9 then
 		p7 = 0.266666666667 - p7
 	end
-	local var10 = p7
+	local var11 = p7
 	
-	if var10 >= 0 and var10 <= 0.166666666667 then
-		local var11 = 16 + 6 * ((p7 - 0) / 0.166666666667)
-		p8.size(UDim2.new(0, var11, 0, var11))
+	if var11 >= 0 and var11 <= 0.166666666667 then
+		local var12 = 16 + 6 * ((p7 - 0) / 0.166666666667)
+		p8.size(UDim2.new(0, var12, 0, var12))
 		
 		return
 	end
-	local var12 = p7
+	local var13 = p7
 	
-	if var12 >= 0.166666666667 and var12 <= 0.266666666667 then
-		local var13 = 22 - 2 * ((p7 - 0.166666666667) / 0.1)
-		p8.size(UDim2.new(0, var13, 0, var13))
+	if var13 >= 0.166666666667 and var13 <= 0.266666666667 then
+		local var14 = 22 - 2 * ((p7 - 0.166666666667) / 0.1)
+		p8.size(UDim2.new(0, var14, 0, var14))
 		
 		return
 	elseif p7 < 0 then
@@ -59,15 +62,15 @@ local function largerCircleAnimation(p7, p8, p9, p10) --[[ line: 59 ]]
 	p10()
 end
 
-local function popCircleAnimation(p11, p12, _, p13) --[[ line: 87 ]]
+local function popCircleAnimation(p11, p12, _, p13) --[[ line: 92 ]]
 	if p11 >= 0 and p11 <= 0.1 then
-		local var14 = 20 + 4 * ((p11 - 0) / 0.1)
-		p12.size(UDim2.new(0, var14, 0, var14))
+		local var15 = 20 + 4 * ((p11 - 0) / 0.1)
+		p12.size(UDim2.new(0, var15, 0, var15))
 		
 		return
 	elseif p11 >= 0.1 and p11 <= 0.2 then
-		local var15 = 24 - 4 * ((p11 - 0.1) / 0.1)
-		p12.size(UDim2.new(0, var15, 0, var15))
+		local var16 = 24 - 4 * ((p11 - 0.1) / 0.1)
+		p12.size(UDim2.new(0, var16, 0, var16))
 		
 		return
 	end
@@ -75,7 +78,7 @@ local function popCircleAnimation(p11, p12, _, p13) --[[ line: 87 ]]
 	p13()
 end
 
-local function shakeCircleAnimation(p14, p15, _, p16) --[[ line: 108 ]]
+local function shakeCircleAnimation(p14, p15, _, p16) --[[ line: 113 ]]
 	if p14 >= 0 and p14 <= 0.1 then
 		p15.positionOffset(UDim2.new(0, -4 * ((p14 - 0) / 0.1), 0, 0))
 		
@@ -105,17 +108,17 @@ local function shakeCircleAnimation(p14, p15, _, p16) --[[ line: 108 ]]
 	p16()
 end
 
-function fillCircle.init(p17) --[[ line: 143 ]]
+function fillCircle.init(p17) --[[ line: 148 ]]
 	-- upvalues: roact (ref)
-	local var16, var17 = roact.createBinding(UDim2.new(0, 16, 0, 16))
-	p17.sizeBinding = var16
-	p17.sizeBindingUpdate = var17
-	p17.largerSizeBinding = p17.sizeBinding:map(function(p18) --[[ line: 146 ]]
+	local var17, var18 = roact.createBinding(UDim2.new(0, 16, 0, 16))
+	p17.sizeBinding = var17
+	p17.sizeBindingUpdate = var18
+	p17.largerSizeBinding = p17.sizeBinding:map(function(p18) --[[ line: 151 ]]
 		return p18 + UDim2.new(0, 2, 0, 2)
 	end)
-	local var18, var19 = roact.createBinding(UDim2.new(0, 0, 0, 0))
-	p17.positionOffsetBinding = var18
-	p17.positionOffsetBindingUpdate = var19
+	local var19, var20 = roact.createBinding(UDim2.new(0, 0, 0, 0))
+	p17.positionOffsetBinding = var19
+	p17.positionOffsetBindingUpdate = var20
 	p17.updateBindings = {
 		size = p17.sizeBindingUpdate,
 		positionOffset = p17.positionOffsetBindingUpdate
@@ -126,12 +129,12 @@ function fillCircle.init(p17) --[[ line: 143 ]]
 	p17.renderSteppedConnection = nil
 end
 
-function fillCircle.render(p19) --[[ line: 162 ]]
-	-- upvalues: color_2 (ref), color_1 (ref), roact (ref), color (ref), imageSetLabel (ref), assetsModule (ref)
+function fillCircle.render(p19) --[[ line: 167 ]]
+	-- upvalues: color_2 (ref), color_1 (ref), roact (ref), color (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref)
 	local props = p19.props
-	local var20 = if props.fillFraction >= 1 then color_2 else color_1
+	local var21 = if props.fillFraction >= 1 then color_2 else color_1
 	local createElement = roact.createElement
-	local var21 = "Frame"
+	local var22 = "Frame"
 	local t = {
 		BackgroundTransparency = 1,
 		Size = p19.sizeBinding,
@@ -140,7 +143,7 @@ function fillCircle.render(p19) --[[ line: 162 ]]
 	}
 	local t_1 = {}
 	local createElement_1 = roact.createElement
-	local var24 = "Frame"
+	local var25 = "Frame"
 	local t_2 = {
 		BorderSizePixel = 0,
 		Position = p19.positionOffsetBinding,
@@ -148,14 +151,26 @@ function fillCircle.render(p19) --[[ line: 162 ]]
 		BackgroundColor3 = color
 	}
 	local t_3 = {
-		OuterRing = roact.createElement(imageSetLabel, {
+		OuterRing = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+			ZIndex = 10,
+			Image = assetsModule.Images.CircleCutout,
+			Size = UDim2.new(1, 0, 1, 0),
+			imageStyle = { Transparency = 0, Color3 = props.BackgroundColor }
+		}) else roact.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			ZIndex = 10,
 			Image = assetsModule.Images.CircleCutout,
 			Size = UDim2.new(1, 0, 1, 0),
 			ImageColor3 = props.BackgroundColor
 		}),
-		InnerRing = roact.createElement(imageSetLabel, {
+		InnerRing = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+			ZIndex = 10,
+			Image = assetsModule.Images.Circle,
+			Size = UDim2.new(1, -4, 1, -4),
+			Position = UDim2.new(0.5, 0, 0.5, 0),
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			imageStyle = { Transparency = 0, Color3 = props.BackgroundColor }
+		}) else roact.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			ZIndex = 10,
 			Image = assetsModule.Images.Circle,
@@ -166,7 +181,7 @@ function fillCircle.render(p19) --[[ line: 162 ]]
 		})
 	}
 	local createElement_2 = roact.createElement
-	local var27 = "Frame"
+	local var28 = "Frame"
 	local t_4 = {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 0, 0, 0),
@@ -175,13 +190,18 @@ function fillCircle.render(p19) --[[ line: 162 ]]
 	}
 	local fillFraction = props.fillFraction
 	t_4.ZIndex = if fillFraction > 0.75 then 8 elseif fillFraction > 0.5 then 6 elseif fillFraction > 0.25 then 4 elseif fillFraction > 0 then 2 else 0
-	t_3.FillRingRotationFrame = createElement_2(var27, t_4, {
-		FillRing = roact.createElement(imageSetLabel, {
+	t_3.FillRingRotationFrame = createElement_2(var28, t_4, {
+		FillRing = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+			Image = assetsModule.Images.QuarterCircle,
+			Size = p19.largerSizeBinding,
+			AnchorPoint = Vector2.new(0.5, 0.5),
+			imageStyle = { Transparency = 0, Color3 = var21 }
+		}) else roact.createElement(imageSetLabel, {
 			BackgroundTransparency = 1,
 			Image = assetsModule.Images.QuarterCircle,
 			Size = p19.largerSizeBinding,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageColor3 = var20
+			ImageColor3 = var21
 		})
 	})
 	t_3.EdgeBlockers = roact.createElement("Frame", {
@@ -221,41 +241,41 @@ function fillCircle.render(p19) --[[ line: 162 ]]
 	t_3.TopLeftFill = roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(0.5, 0, 0.5, 0),
-		BackgroundColor3 = if props.fillFraction >= 1 then var20 else color,
+		BackgroundColor3 = if props.fillFraction >= 1 then var21 else color,
 		ZIndex = if props.fillFraction >= 1 then 9 else 7
 	})
 	t_3.BottomLeftFill = roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(0.5, 0, 0.5, 0),
 		Position = UDim2.new(0, 0, 0.5, 0),
-		BackgroundColor3 = if props.fillFraction >= 0.75 then var20 else color,
+		BackgroundColor3 = if props.fillFraction >= 0.75 then var21 else color,
 		ZIndex = if props.fillFraction >= 0.75 then 9 else 5
 	})
 	t_3.BottomRightFill = roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(0.5, 0, 0.5, 0),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
-		BackgroundColor3 = if props.fillFraction >= 0.5 then var20 else color,
+		BackgroundColor3 = if props.fillFraction >= 0.5 then var21 else color,
 		ZIndex = if props.fillFraction >= 0.5 then 9 else 3
 	})
 	t_3.TopRightFill = roact.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(0.5, 0, 0.5, 0),
 		Position = UDim2.new(0.5, 0, 0, 0),
-		BackgroundColor3 = if props.fillFraction >= 0.25 then var20 else color,
+		BackgroundColor3 = if props.fillFraction >= 0.25 then var21 else color,
 		ZIndex = if props.fillFraction >= 0.25 then 9 else 1
 	})
-	t_1.PositionOffsetFrame = createElement_1(var24, t_2, t_3)
+	t_1.PositionOffsetFrame = createElement_1(var25, t_2, t_3)
 	
-	return createElement(var21, t, t_1)
+	return createElement(var22, t, t_1)
 end
 
-function fillCircle.didUpdate(p20, p21, _) --[[ line: 285 ]]
+function fillCircle.didUpdate(p20, p21, _) --[[ line: 313 ]]
 	-- upvalues: largerCircleAnimation (ref), popCircleAnimation (ref), shakeCircleAnimation (ref)
-	local var29 = p20.props.largerCircleFraction <= p20.props.fillFraction
+	local var30 = p20.props.largerCircleFraction <= p20.props.fillFraction
 	
-	if p21.largerCircleFraction <= p21.fillFraction ~= var29 then
-		p20:playAnimation(largerCircleAnimation, not var29)
+	if p21.largerCircleFraction <= p21.fillFraction ~= var30 then
+		p20:playAnimation(largerCircleAnimation, not var30)
 	end
 	if p20.props.popCircleFraction <= p20.props.fillFraction and not (p21.popCircleFraction <= p21.fillFraction) then
 		p20:playAnimation(popCircleAnimation, false)
@@ -265,19 +285,19 @@ function fillCircle.didUpdate(p20, p21, _) --[[ line: 285 ]]
 	end
 end
 
-function fillCircle.playAnimation(p22, p23, p24) --[[ line: 305 ]]
+function fillCircle.playAnimation(p22, p23, p24) --[[ line: 333 ]]
 	-- upvalues: runService (ref)
 	if p22.animationFunction then
-		p22.animationFunction(100, p22.updateBindings, p22.reverseAnimation, function() --[[ line: 308 ]] end)
+		p22.animationFunction(100, p22.updateBindings, p22.reverseAnimation, function() --[[ line: 336 ]] end)
 	end
 	p22.animationStartTime = tick()
 	p22.animationFunction = p23
 	p22.reverseAnimation = p24
 	
 	if not p22.renderSteppedConnection then
-		p22.renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 314 ]]
+		p22.renderSteppedConnection = runService.RenderStepped:Connect(function() --[[ line: 342 ]]
 			-- upvalues: p22 (ref)
-			p22.animationFunction(tick() - p22.animationStartTime, p22.updateBindings, p22.reverseAnimation, function() --[[ line: 319 ]]
+			p22.animationFunction(tick() - p22.animationStartTime, p22.updateBindings, p22.reverseAnimation, function() --[[ line: 347 ]]
 				-- upvalues: p22 (copy)
 				p22:stopAnimation()
 			end)
@@ -285,14 +305,14 @@ function fillCircle.playAnimation(p22, p23, p24) --[[ line: 305 ]]
 	end
 end
 
-function fillCircle.stopAnimation(p25) --[[ line: 327 ]]
+function fillCircle.stopAnimation(p25) --[[ line: 355 ]]
 	if p25.renderSteppedConnection then
 		p25.renderSteppedConnection:Disconnect()
 		p25.renderSteppedConnection = nil
 	end
 end
 
-function fillCircle.willUnmount(p26) --[[ line: 334 ]]
+function fillCircle.willUnmount(p26) --[[ line: 362 ]]
 	p26:stopAnimation()
 end
 

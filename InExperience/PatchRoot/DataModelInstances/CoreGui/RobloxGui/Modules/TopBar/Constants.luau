@@ -40,7 +40,6 @@ return {
 	MoreMenuKeepOutAreaId = "more-menu",
 	ChatIconKeepOutAreaId = "chat-icon",
 	BackIconKeepOutAreaId = "back-icon",
-	VoiceBetaBadgeKeepOutAreaId = "badge-voice-beta",
 	TopBarKeepOutAreaId = "roblox-topbar",
 	InitialHealth = 100,
 	HealthPercentForOverlay = 0.05,

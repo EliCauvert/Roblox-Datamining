@@ -1,11 +1,10 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local reactModule = require(parent.React)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local useDesignTokens = require(parent.Style).useDesignTokens
 local roactGamepadModule = require(parent.RoactGamepad)
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 30 ]]
-	-- upvalues: useDesignTokens (ref), reactModule (ref), roactGamepadModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
+return reactModule.forwardRef(function(p0, p1) --[[ line: 28 ]]
+	-- upvalues: useDesignTokens (ref), reactModule (ref), roactGamepadModule (ref)
 	local horizontalMargin = p0.horizontalMargin or 0
 	local var3 = useDesignTokens()
 	
@@ -30,8 +29,8 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 30 ]]
 			Gradient = reactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, (if fFlagRenameDeprecatedUIBloxTokens then var3.Color.Surface.Surface_200 else var3.Semantic.Color.Background.Muted).Color3),
-					ColorSequenceKeypoint.new(1, (if fFlagRenameDeprecatedUIBloxTokens then var3.Color.Surface.Surface_0 else var3.Semantic.Color.Background.Default).Color3)
+					ColorSequenceKeypoint.new(0, var3.Color.Surface.Surface_200.Color3),
+					ColorSequenceKeypoint.new(1, var3.Color.Surface.Surface_0.Color3)
 				})
 			})
 		}) else nil,

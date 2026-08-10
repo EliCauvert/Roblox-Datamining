@@ -3,6 +3,7 @@ local parent = buildExperience.Parent
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local todoListModule = require(script.Parent.TodoList)
 local matchesSearchQueryModule = require(buildExperience.utils.matchesSearchQuery)
 local chip = foundationModule.Chip
@@ -19,35 +20,39 @@ local popoverSide = foundationModule.Enums.PopoverSide
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 local buildAgentDetailsStatusMenuWidth = game:DefineFastInt("BuildAgentDetailsStatusMenuWidth", 172)
 local list = {
-	{ id = "All", status = nil, text = "All" },
 	{
-		text = "In progress",
+		id = "All",
+		status = nil,
+		text = localizationStringsModule.SUBAGENT_STATUS_ALL
+	},
+	{
 		id = subagentTaskStatus.InProgress,
-		status = subagentTaskStatus.InProgress
+		status = subagentTaskStatus.InProgress,
+		text = localizationStringsModule.SUBAGENT_STATUS_IN_PROGRESS
 	},
 	{
-		text = "Done",
 		id = subagentTaskStatus.Done,
-		status = subagentTaskStatus.Done
+		status = subagentTaskStatus.Done,
+		text = localizationStringsModule.SUBAGENT_STATUS_DONE
 	},
 	{
-		text = "Pending",
 		id = subagentTaskStatus.Pending,
-		status = subagentTaskStatus.Pending
+		status = subagentTaskStatus.Pending,
+		text = localizationStringsModule.SUBAGENT_STATUS_PENDING
 	},
 	{
-		text = "Error",
 		id = subagentTaskStatus.Error,
-		status = subagentTaskStatus.Error
+		status = subagentTaskStatus.Error,
+		text = localizationStringsModule.SUBAGENT_STATUS_ERROR
 	},
 	{
-		text = "Deleted",
 		id = subagentTaskStatus.Deleted,
-		status = subagentTaskStatus.Deleted
+		status = subagentTaskStatus.Deleted,
+		text = localizationStringsModule.SUBAGENT_STATUS_DELETED
 	}
 }
 
-local function _(p0) --[[ line: 54 | named "getStatusFilterText" ]]
+local function _(p0) --[[ line: 73 | named "getStatusFilterText" ]]
 	-- upvalues: list (ref)
 	for i, v in list do
 		if v.status == p0 then
@@ -57,49 +62,49 @@ local function _(p0) --[[ line: 54 | named "getStatusFilterText" ]]
 	return p0 or "All"
 end
 
-local _ = function(p1, p2) --[[ line: 63 | named "taskMatchesSearch" ]]
+local _ = function(p1, p2) --[[ line: 82 | named "taskMatchesSearch" ]]
 	-- upvalues: matchesSearchQueryModule (ref)
 	return matchesSearchQueryModule(p1.text, p2) or matchesSearchQueryModule(p1.description, p2)
 end
 
-local _ = function(p3, p4) --[[ line: 67 | named "taskMatchesStatus" ]]
+local _ = function(p3, p4) --[[ line: 86 | named "taskMatchesStatus" ]]
 	return p4 == nil or p3.status == p4
 end
 
-local _ = function(p5, p6) --[[ line: 74 | named "shouldIncludeTask" ]]
+local _ = function(p5, p6) --[[ line: 93 | named "shouldIncludeTask" ]]
 	-- upvalues: matchesSearchQueryModule (ref)
 	local searchQuery = p6.searchQuery
-	local var8 = matchesSearchQueryModule(p5.text, searchQuery) or matchesSearchQueryModule(p5.description, searchQuery)
+	local var9 = matchesSearchQueryModule(p5.text, searchQuery) or matchesSearchQueryModule(p5.description, searchQuery)
 	
-	if var8 then
+	if var9 then
 		local status = p6.status
 		
 		if status == nil then
 			return true
 		end
-		var8 = p5.status == status
+		var9 = p5.status == status
 	end
-	return var8
+	return var9
 end
 
-return reactModule.memo(function(p7) --[[ line: 78 | named "AgentDetailsList" ]]
-	-- upvalues: reactModule (ref), useScaledValue (ref), buildAgentDetailsStatusMenuWidth (ref), matchesSearchQueryModule (ref), list (ref), view (ref), searchInput (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), todoListModule (ref)
-	local var9, var10 = reactModule.useState("")
-	local var11, var12 = reactModule.useState(nil)
-	local var13, var14 = reactModule.useState(false)
-	local var15 = useScaledValue(buildAgentDetailsStatusMenuWidth)
-	local t = { searchQuery = var9, status = var11 }
+return reactModule.memo(function(p7) --[[ line: 97 | named "AgentDetailsList" ]]
+	-- upvalues: reactModule (ref), useScaledValue (ref), buildAgentDetailsStatusMenuWidth (ref), matchesSearchQueryModule (ref), list (ref), view (ref), searchInput (ref), localizationStringsModule (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), todoListModule (ref)
+	local var10, var11 = reactModule.useState("")
+	local var12, var13 = reactModule.useState(nil)
+	local var14, var15 = reactModule.useState(false)
+	local var16 = useScaledValue(buildAgentDetailsStatusMenuWidth)
+	local t = { searchQuery = var10, status = var12 }
 	local t_1 = {}
 	
 	for i, v in p7.group.tasks do
 		local searchQuery = t.searchQuery
-		local var32 = matchesSearchQueryModule(v.text, searchQuery) or matchesSearchQueryModule(v.description, searchQuery)
+		local var33 = matchesSearchQueryModule(v.text, searchQuery) or matchesSearchQueryModule(v.description, searchQuery)
 		
-		if var32 then
+		if var33 then
 			local status = t.status
-			var32 = status == nil or v.status == status
+			var33 = status == nil or v.status == status
 		end
-		if var32 then
+		if var33 then
 			table.insert(t_1, {
 				title = v.text,
 				description = v.description,
@@ -108,9 +113,9 @@ return reactModule.memo(function(p7) --[[ line: 78 | named "AgentDetailsList" ]]
 			})
 		end
 	end
-	local var11_1
-	local var18 = reactModule.useMemo(function() --[[ line: 101 ]]
-		-- upvalues: list (copy), var11 (ref)
+	local var12_1
+	local var19 = reactModule.useMemo(function() --[[ line: 120 ]]
+		-- upvalues: list (copy), var12 (ref)
 		local t = {}
 		
 		for i, v in list do
@@ -118,29 +123,29 @@ return reactModule.memo(function(p7) --[[ line: 78 | named "AgentDetailsList" ]]
 				isDisabled = false,
 				id = v.id,
 				text = v.text,
-				isChecked = var11 == v.status
+				isChecked = var12 == v.status
 			})
 		end
 		return t
-	end, { var11 })
-	local var19 = reactModule.useCallback(function() --[[ line: 114 ]]
-		-- upvalues: var14 (ref)
-		var14(function(p8) --[[ line: 115 ]]
+	end, { var12 })
+	local var20 = reactModule.useCallback(function() --[[ line: 133 ]]
+		-- upvalues: var15 (ref)
+		var15(function(p8) --[[ line: 134 ]]
 			return not p8
 		end)
 	end, {})
-	local var20 = reactModule.useCallback(function() --[[ line: 120 ]]
-		-- upvalues: var14 (ref)
-		var14(false)
+	local var21 = reactModule.useCallback(function() --[[ line: 139 ]]
+		-- upvalues: var15 (ref)
+		var15(false)
 	end, {})
-	local var21 = reactModule.useCallback(function(p9) --[[ line: 124 ]]
-		-- upvalues: var12 (ref), var14 (ref)
-		var12(if p9 == "All" then nil else p9)
-		var14(false)
+	local var22 = reactModule.useCallback(function(p9) --[[ line: 143 ]]
+		-- upvalues: var13 (ref), var15 (ref)
+		var13(if p9 == "All" then nil else p9)
+		var15(false)
 	end, {})
 	local createElement = reactModule.createElement
 	local t_2 = {
-		tag = "col gap-xxlarge size-full-0 auto-y padding-x-xlarge padding-y-small",
+		tag = "col gap-xxlarge size-full-0 auto-y padding-y-small",
 		LayoutOrder = p7.LayoutOrder,
 		testId = p7.testId or "build-agent-details-list"
 	}
@@ -153,9 +158,9 @@ return reactModule.memo(function(p7) --[[ line: 78 | named "AgentDetailsList" ]]
 	local t_5 = {
 		Search = reactModule.createElement(searchInput, {
 			LayoutOrder = 1,
-			placeholder = "Search tasks",
-			text = var9,
-			onChanged = var10,
+			text = var10,
+			placeholder = localizationStringsModule.SUBAGENT_STATUS_SEARCH_TASKS,
+			onChanged = var11,
 			width = UDim.new(1, 0),
 			testId = `{p7.testId or "build-agent-details-list"}-search-input`
 		})
@@ -170,26 +175,26 @@ return reactModule.memo(function(p7) --[[ line: 78 | named "AgentDetailsList" ]]
 	local t_8 = {
 		LayoutOrder = 2,
 		align = popoverAlign.Start,
-		isOpen = var13,
-		items = var18,
-		onActivated = var21,
-		onPressedOutside = var20,
+		isOpen = var14,
+		items = var19,
+		onActivated = var22,
+		onPressedOutside = var21,
 		side = popoverSide.Bottom,
 		size = inputSize.Medium,
-		width = UDim.new(0, var15)
+		width = UDim.new(0, var16)
 	}
 	local t_9 = {}
 	local createElement_4 = reactModule.createElement
 	local t_10 = { LayoutOrder = 1 }
 	
 	for i_1, v_1 in list do
-		if v_1.status == var11 then
-			var11_1 = v_1.text
-			t_10.text = var11_1
+		if v_1.status == var12 then
+			var12_1 = v_1.text
+			t_10.text = var12_1
 			t_10.trailing = iconName.ChevronLargeDown
 			t_10.variant = chipVariant.Standard
 			t_10.size = chipSize.Medium
-			t_10.onActivated = var19
+			t_10.onActivated = var20
 			t_10.testId = `{p7.testId or "build-agent-details-list"}-status-filter-chip`
 			t_9.StatusChip = createElement_4(chip, t_10)
 			t_7.StatusMenu = createElement_3(menu, t_8, t_9)
@@ -200,5 +205,5 @@ return reactModule.memo(function(p7) --[[ line: 78 | named "AgentDetailsList" ]]
 			return createElement(view, t_2, t_3)
 		end
 	end
-	var11_1 = var11 or "All"
+	var12_1 = var12 or "All"
 end)

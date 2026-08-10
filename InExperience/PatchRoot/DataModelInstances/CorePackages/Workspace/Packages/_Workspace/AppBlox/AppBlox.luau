@@ -12,12 +12,12 @@ local infoCarouselCellModule = require(script.InfoCarouselCell)
 local insetBackgroundModule = require(script.InsetBackground)
 local bannerModule = require(script.Banner)
 local bannerBadgeModule = require(script.Banner.BannerBadge)
-local upsellModalModule = require(script.UpsellModal)
 local scrollingAppCarouselModule = require(script.ScrollingAppCarousel.ScrollingAppCarousel)
 local infoTableModule = require(script.InfoTable)
 local infoTableCellModule = require(script.InfoTableCell)
 local expandableTextModule = require(script.ExpandableText)
-local fFlagLuaAppSduiBadgeDetailsComponents = require(parent.SharedFlags).FFlagLuaAppSduiBadgeDetailsComponents
+local animateScrollViewToSelectionHelperModule = require(script.AnimateScrollViewToSelectionHelper)
+local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(script.MediaGallery.MediaGalleryTypes)
 
 return {
@@ -35,13 +35,13 @@ return {
 	InsetBackground = insetBackgroundModule,
 	Banner = bannerModule,
 	BannerBadge = bannerBadgeModule,
-	UpsellModal = upsellModalModule,
+	AnimateScrollViewToSelectionHelper = if sharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper then animateScrollViewToSelectionHelperModule else nil,
 	ContentPosition = require(script.DetailsPage.ContentPosition),
 	DetailsPageLayout = require(script.DetailsPageLayout),
 	DetailsPageSelector = require(script.DetailsPage.DetailsPageSelector),
 	DetailsPageTemplate = require(script.DetailsPage.DetailsPageTemplate),
-	InfoTable = if fFlagLuaAppSduiBadgeDetailsComponents then infoTableModule else nil,
-	InfoTableCell = if fFlagLuaAppSduiBadgeDetailsComponents then infoTableCellModule else nil,
+	InfoTable = infoTableModule,
+	InfoTableCell = infoTableCellModule,
 	ScrollingAppCarousel = scrollingAppCarouselModule,
 	CrossFadeAnimatedView = require(script.MediaGallery.CrossFadeAnimatedView),
 	MediaGalleryCarousel = require(script.MediaGallery.MediaGalleryCarousel),
@@ -50,9 +50,9 @@ return {
 	MediaGalleryPreview = require(script.MediaGallery.MediaGalleryPreview),
 	calcMediaGallerySizesFromWidth = require(script.MediaGallery.calcMediaGallerySizesFromWidth),
 	useAnimateScrollViewToSelection = require(script.useAnimateScrollViewToSelection),
-	ExpandableText = if fFlagLuaAppSduiBadgeDetailsComponents then expandableTextModule else nil,
+	ExpandableText = expandableTextModule,
 	CheckboxFeedbackFormModal = checkboxFeedbackFormModalModule,
-	TextFeedbackFormModal = if require(parent.SharedFlags).FFlagLuaAppTextFeedbackFormModal then require(script.TextFeedbackFormModal) else nil,
+	TextFeedbackFormModal = if sharedFlagsModule.FFlagLuaAppTextFeedbackFormModal then require(script.TextFeedbackFormModal) else nil,
 	ProvideFeedbackToast = require(script.ProvideFeedbackToast),
 	EmptyTile = require(script.EmptyTile),
 	useCloseWithBackButton = require(script.DetailsPage.Hooks.useCloseWithBackButton),

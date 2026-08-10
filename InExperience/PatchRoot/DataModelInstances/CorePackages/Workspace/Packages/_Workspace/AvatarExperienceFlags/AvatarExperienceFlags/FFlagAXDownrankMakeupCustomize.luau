@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXCustomizeMakeupSupport) and game:DefineFastFlag("AXDownrankMakeupCustomize", false)
+﻿return game:DefineFastFlag("AXDownrankMakeupCustomize", false)

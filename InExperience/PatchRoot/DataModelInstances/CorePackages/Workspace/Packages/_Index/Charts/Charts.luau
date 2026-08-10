@@ -5,6 +5,8 @@
 	ChartsPageScopeFields = require(script.ChartsPage.ChartsPageScopeFields),
 	ChartsPageSession = require(script.ChartsPage.ChartsPageSession),
 	ChartsSortDetailPage = require(script.ChartsSortDetailPage.ChartsSortDetailPage),
+	ChartsSortDetailScopeFields = require(script.ChartsSortDetailPage.ChartsSortDetailScopeFields),
+	refreshChartsSortDetailGenre = require(script.ChartsSortDetailPage.refreshChartsSortDetailGenre),
 	getChartsSortDetailPageKey = require(script.ChartsSortDetailPage.getChartsSortDetailPageKey),
 	navigateToChartsPage = require(script.ChartsPage.navigateToChartsPage),
 	navigateToChartsSortDetailPage = require(script.ChartsSortDetailPage.navigateToChartsSortDetailPage),

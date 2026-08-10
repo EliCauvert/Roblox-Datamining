@@ -4,19 +4,18 @@ local UIBloxModule = require(parent.UIBlox)
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
 local useStyle = UIBloxModule.Core.Style.useStyle
 local fFlagChatLineReportingFocusFixesEnabled = require(parent.SharedFlags).FFlagChatLineReportingFocusFixesEnabled
-local addBackgroundTransparencyToAbuseReportCommentTextField = game:DefineFastFlag("AddBackgroundTransparencyToAbuseReportCommentTextField", false)
 
-return function(p0) --[[ line: 27 | named "CommentTextField" ]]
-	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref), addBackgroundTransparencyToAbuseReportCommentTextField (ref)
-	local var3, var4 = reactModule.useState("")
-	local var5 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
-	local var6 = useStyle()
-	local theme = var6.Theme
+return function(p0) --[[ line: 25 | named "CommentTextField" ]]
+	-- upvalues: reactModule (ref), fFlagChatLineReportingFocusFixesEnabled (ref), useCursor (ref), useStyle (ref)
+	local var2, var3 = reactModule.useState("")
+	local var4 = if fFlagChatLineReportingFocusFixesEnabled then useCursor() else nil
+	local var5 = useStyle()
+	local theme = var5.Theme
 	
 	return reactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 60),
-		BackgroundTransparency = if addBackgroundTransparencyToAbuseReportCommentTextField then if p0.backgroundTransparency ~= nil then var6.Theme.BackgroundDefault.Transparency else p0.backgroundTransparency else var6.Theme.BackgroundDefault.Transparency,
-		BackgroundColor3 = p0.backgroundColor3 or var6.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = if p0.backgroundTransparency ~= nil then var5.Theme.BackgroundDefault.Transparency else p0.backgroundTransparency,
+		BackgroundColor3 = p0.backgroundColor3 or var5.Theme.BackgroundDefault.Color,
 		LayoutOrder = p0.layoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
@@ -34,15 +33,15 @@ return function(p0) --[[ line: 27 | named "CommentTextField" ]]
 			AnchorPoint = Vector2.new(0, 0),
 			BackgroundColor3 = p0.backgroundColor3 or theme.BackgroundDefault.Color,
 			PlaceholderText = p0.placeholderText,
-			Font = var6.Font.Body.Font,
-			SelectionImageObject = var5,
+			Font = var5.Font.Body.Font,
+			SelectionImageObject = var4,
 			Text = p0.text,
-			TextSize = var6.Font.BaseSize,
+			TextSize = var5.Font.BaseSize,
 			TextColor3 = theme.TextDefault.Color,
 			TextTransparency = theme.TextDefault.Transparency,
 			TextXAlignment = p0.textXAlignment or Enum.TextXAlignment.Left,
 			TextYAlignment = p0.textYAlignment or Enum.TextYAlignment.Top,
-			BackgroundTransparency = if addBackgroundTransparencyToAbuseReportCommentTextField then 1 else theme.BackgroundDefault.Transparency,
+			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
 			RichText = false,
@@ -53,17 +52,17 @@ return function(p0) --[[ line: 27 | named "CommentTextField" ]]
 			OverlayNativeInput = true,
 			ClipsDescendants = true,
 			Interactable = p0.interactable,
-			[reactModule.Change.Text] = reactModule.useCallback(function(p1) --[[ line: 35 ]]
-				-- upvalues: var4 (ref), p0 (ref), var3 (ref)
+			[reactModule.Change.Text] = reactModule.useCallback(function(p1) --[[ line: 33 ]]
+				-- upvalues: var3 (ref), p0 (ref), var2 (ref)
 				local text = p1.Text
 				
 				if p1.TextFits then
-					var4(text)
+					var3(text)
 					p0.onUpdate(text)
 					
 					return
 				end
-				p1.Text = var3
+				p1.Text = var2
 			end)
 		})
 	})

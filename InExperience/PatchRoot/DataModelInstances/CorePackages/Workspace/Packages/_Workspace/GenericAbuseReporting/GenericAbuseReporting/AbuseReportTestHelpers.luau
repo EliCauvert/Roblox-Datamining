@@ -6,7 +6,7 @@ local roactServices = require(parent.RoactServices).RoactServices
 local mockProvidersModule = require(genericAbuseReporting.MockProviders)
 local loaderProvider = require(genericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
 
-local function findEventsBySubType(p0, p1, p2) --[[ line: 109 ]]
+local function findEventsBySubType(p0, p1, p2) --[[ line: 108 ]]
 	local t = {}
 	
 	for i, v in p0.mock.calls do
@@ -73,7 +73,6 @@ return {
 					type = "list",
 					eyebrow = "Report",
 					title = "Select an option",
-					formKey = "test",
 					nextButtonText = "Continue",
 					items = { { id = "test", label = "TestItem1" } },
 					next = { type = "close" }
@@ -82,7 +81,7 @@ return {
 			translations = {}
 		}
 	end,
-	makeMalformedConfig = function() --[[ line: 96 ]]
+	makeMalformedConfig = function() --[[ line: 95 ]]
 		return {
 			version = 1,
 			resources = {},
@@ -93,17 +92,17 @@ return {
 		}
 	end,
 	findEventsBySubType = findEventsBySubType,
-	findRenderErrorEvents = function(p5) --[[ line: 126 ]]
+	findRenderErrorEvents = function(p5) --[[ line: 125 ]]
 		-- upvalues: findEventsBySubType (ref)
-		return findEventsBySubType(p5, "Error", function(p6) --[[ line: 127 ]]
+		return findEventsBySubType(p5, "Error", function(p6) --[[ line: 126 ]]
 			local errorMessage = p6.error_detail and p6.error_detail.error_message
 			
 			return type(errorMessage) == "string" and errorMessage:sub(1, 13) == "Render error:"
 		end)
 	end,
-	findFetchErrorEvents = function(p7) --[[ line: 133 ]]
+	findFetchErrorEvents = function(p7) --[[ line: 132 ]]
 		-- upvalues: findEventsBySubType (ref)
-		return findEventsBySubType(p7, "Error", function(p8) --[[ line: 134 ]]
+		return findEventsBySubType(p7, "Error", function(p8) --[[ line: 133 ]]
 			local errorMessage = p8.error_detail and p8.error_detail.error_message
 			
 			return type(errorMessage) == "string" and errorMessage:sub(1, 23) == "Failed to fetch config:"

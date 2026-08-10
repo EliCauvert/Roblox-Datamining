@@ -50,8 +50,8 @@ local t = {
 	}
 }
 
-return function(p0, p1, p2) --[[ line: 188 ]]
-	-- upvalues: t (ref), thumbnailSizeModule (ref), getAssetIdAsNumericModule (ref)
+return function(p0, p1, p2, p3) --[[ line: 197 ]]
+	-- upvalues: t (ref), thumbnailSizeModule (ref), getAssetIdAsNumericModule (ref), thumbnailTypeModule (ref)
 	local var5 = t[p0][p2 or thumbnailSizeModule.Medium]
 	local var6 = getAssetIdAsNumericModule(p1)
 	
@@ -59,5 +59,10 @@ return function(p0, p1, p2) --[[ line: 188 ]]
 		warn(`Unsupported size {p2} for media type: {p0}, defaulting to {thumbnailSizeModule.Medium}`)
 		var5 = t[p0][thumbnailSizeModule.Medium]
 	end
-	return `rbxthumb://type={p0}&id={var6}&w={var5.X}&h={var5.Y}`
+	local var7 = `rbxthumb://type={p0}&id={var6}&w={var5.X}&h={var5.Y}`
+	
+	if p0 == thumbnailTypeModule.AvatarHeadShot and p3 and p3.includeProfileFrame then
+		var7 ..= "&includeprofileframe=true"
+	end
+	return var7
 end

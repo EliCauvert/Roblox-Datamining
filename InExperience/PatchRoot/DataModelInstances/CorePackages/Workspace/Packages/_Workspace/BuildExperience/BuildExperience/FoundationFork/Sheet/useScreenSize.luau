@@ -1,31 +1,29 @@
 ﻿local foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
 local reactModule = require(foundation.Parent.React)
-local flagsModule = require(foundation.Utility.Flags)
-local useOverlayModule = require(foundation.Providers.Overlay.useOverlay)
 local useScreenModule = require(foundation.Providers.Overlay.useScreen)
 
-return function() --[[ line: 9 | named "useScreenSize" ]]
-	-- upvalues: flagsModule (ref), useScreenModule (ref), useOverlayModule (ref), reactModule (ref)
-	local var4 = if flagsModule.FoundationOverlayKeyboardAwarenessHardened then useScreenModule() else useOverlayModule()
-	local var5, var6 = reactModule.useState(if var4 then var4.AbsoluteSize else Vector2.new(0, 0))
-	reactModule.useLayoutEffect(function() --[[ line: 13 ]]
-		-- upvalues: var4 (ref), var6 (ref)
-		local var7 = nil
+return function() --[[ line: 7 | named "useScreenSize" ]]
+	-- upvalues: useScreenModule (ref), reactModule (ref)
+	local var2 = useScreenModule()
+	local var3, var4 = reactModule.useState(if var2 then var2.AbsoluteSize else Vector2.new(0, 0))
+	reactModule.useLayoutEffect(function() --[[ line: 11 ]]
+		-- upvalues: var2 (ref), var4 (ref)
+		local var5 = nil
 		
-		if var4 then
-			var6(var4.AbsoluteSize)
-			var7 = var4:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 18 ]]
-				-- upvalues: var6 (copy), var4 (copy)
-				var6(var4.AbsoluteSize)
+		if var2 then
+			var4(var2.AbsoluteSize)
+			var5 = var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 16 ]]
+				-- upvalues: var4 (copy), var2 (copy)
+				var4(var2.AbsoluteSize)
 			end)
 		end
-		return function() --[[ line: 23 ]]
-			-- upvalues: var7 (write)
-			if var7 then
-				var7:Disconnect()
+		return function() --[[ line: 21 ]]
+			-- upvalues: var5 (write)
+			if var5 then
+				var5:Disconnect()
 			end
 		end
-	end, { var4 })
+	end, { var2 })
 	
-	return var5
+	return var3
 end

@@ -1,39 +1,24 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local reactModule = require(buildExperience.Parent.React)
 local _ = require(buildExperience.Chat.chatTypes)
-local chatAssistantMessageModule = require(script.Parent.ChatAssistantMessage)
-local chatInlineTurnFooterModule = require(script.Parent.ChatInlineTurnFooter)
+local chatTurnBlockModule = require(script.Parent.ChatTurnBlock)
 local chatUserMessageModule = require(script.Parent.ChatUserMessage)
 
-local function _(p0) --[[ line: 23 | named "getInlineTurnFeedbackIds" ]]
-	local turnFeedbackIds = p0.turnFeedbackIds
+return reactModule.memo(function(p0) --[[ line: 20 | named "ChatMessageItem" ]]
+	-- upvalues: reactModule (ref), chatUserMessageModule (ref), chatTurnBlockModule (ref)
+	local message = p0.message
 	
-	return if typeof(turnFeedbackIds) == "table" then turnFeedbackIds else nil
-end
-
-return function(p1) --[[ line: 31 | named "ChatMessageItem" ]]
-	-- upvalues: reactModule (ref), chatInlineTurnFooterModule (ref), chatUserMessageModule (ref), chatAssistantMessageModule (ref)
+	return if message.kind == "user_message" then reactModule.createElement(chatUserMessageModule, { message = message, LayoutOrder = p0.LayoutOrder }) else reactModule.createElement(chatTurnBlockModule, {
+		turn = message,
+		LayoutOrder = p0.LayoutOrder,
+		clockBinding = p0.clockBinding,
+		localToolActions = p0.localToolActions,
+		onPlaytest = p0.onPlaytest,
+		isPlaytestLoading = p0.isPlaytestLoading
+	})
+end, function(p1, p2) --[[ line: 43 | named "arePropsEqual" ]]
 	local message = p1.message
+	local message_1 = p2.message
 	
-	if message.inlineKind == nil or message.stepCount == nil then
-		return if message.isUser == true then reactModule.createElement(chatUserMessageModule, { message = p1.message, LayoutOrder = p1.LayoutOrder }) else reactModule.createElement(chatAssistantMessageModule, {
-			message = p1.message,
-			LayoutOrder = p1.LayoutOrder,
-			clockBinding = p1.clockBinding,
-			hideFeedback = p1.hideFeedback
-		})
-	end
-	local createElement = reactModule.createElement
-	local var5 = chatInlineTurnFooterModule
-	local t = {
-		inlineKind = message.inlineKind,
-		stepCount = message.stepCount,
-		LayoutOrder = p1.LayoutOrder,
-		onPlaytest = if message.inlineKind == "playtestCard" then p1.onPlaytest else nil,
-		isPlaytestLoading = p1.isPlaytestLoading
-	}
-	local turnFeedbackIds = message.turnFeedbackIds
-	t.turnFeedbackIds = if typeof(turnFeedbackIds) ~= "table" then turnFeedbackIds else nil
-	
-	return createElement(var5, t)
-end
+	return if message.id == nil or message.id ~= message_1.id then false else message.kind == message_1.kind and (p1.LayoutOrder == p2.LayoutOrder and (if message_1.kind == "user_message" then message.text == message_1.text else p1.isPlaytestLoading == p2.isPlaytestLoading and (message.isDone == true and message_1.isDone == true)))
+end)

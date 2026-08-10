@@ -5,6 +5,7 @@ local focusBehaviorsModule = require(parent.FocusBehaviors)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
+local fFlagAbuseReportSelectItemAddId = require(parent.SharedFlags).FFlagAbuseReportSelectItemAddId
 local button = foundationModule.Button
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local empty = foundationModule.Empty
@@ -30,6 +31,7 @@ local useListLoader = require(genericAbuseReporting.BeduiV2.Loaders.useLoader).u
 local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local useLayoutSlots = layoutSlotsModule.useLayoutSlots
+local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
 local t = {
 	chevron = nil,
 	radio = listItemInputType.Radio,
@@ -37,7 +39,7 @@ local t = {
 	checkbox = listItemInputType.Checkbox
 }
 
-local function ListNodeLoading(p0) --[[ line: 71 ]]
+local function ListNodeLoading(p0) --[[ line: 76 ]]
 	-- upvalues: reactModule (ref), eyebrowModule (ref), view (ref), skeleton (ref), radius (ref)
 	local title = p0.title
 	local eyebrow = p0.eyebrow
@@ -76,7 +78,7 @@ local function ListNodeLoading(p0) --[[ line: 71 ]]
 	})
 end
 
-local function ListNodeError(p1) --[[ line: 120 ]]
+local function ListNodeError(p1) --[[ line: 125 ]]
 	-- upvalues: useArTranslation (ref), reactModule (ref), eyebrowModule (ref), textWithTranslationModule (ref), button (ref), buttonVariant (ref), foundationModule (ref)
 	local translateIntoString = useArTranslation().translateIntoString
 	
@@ -100,8 +102,8 @@ local function ListNodeError(p1) --[[ line: 120 ]]
 	})
 end
 
-return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useListLoader (ref), useLayoutSlots (ref), reactFocusNavigationModule (ref), focusBehaviorsModule (ref), scrollToItemModule (ref), telemetryEventType (ref), dashModule (ref), ListNodeLoading (ref), ListNodeError (ref), empty (ref), eyebrowModule (ref), view (ref), list (ref), iconName (ref), t (ref), footerModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
+return reactModule.memo(function(p2) --[[ line: 166 | named "ListNode" ]]
+	-- upvalues: useTokens (ref), reactModule (ref), useArTranslation (ref), useAbuseReportAnalytics (ref), useListLoader (ref), useLayoutSlots (ref), reactFocusNavigationModule (ref), focusBehaviorsModule (ref), scrollToItemModule (ref), telemetryEventType (ref), fFlagAbuseReportSelectItemAddId (ref), dashModule (ref), ListNodeLoading (ref), ListNodeError (ref), empty (ref), eyebrowModule (ref), view (ref), list (ref), fFlagAbuseReportInExpPlayerListV3 (ref), iconName (ref), t (ref), footerModule (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
 	local var16 = useTokens()
 	local var17, var18 = reactModule.useState(p2.initialValue or nil)
 	local translateIntoString = useArTranslation().translateIntoString
@@ -120,7 +122,7 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 	local layout = var27.Layout
 	local var28 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
 	local var29 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 183 ]]
+	reactModule.useEffect(function() --[[ line: 188 ]]
 		-- upvalues: var19 (ref), var28 (ref), data (ref), focusBehaviorsModule (copy), var29 (ref)
 		local current = var19.current
 		
@@ -129,13 +131,13 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 			local var37 = focusBehaviorsModule.mostRecentOrDefault(var29.current)
 			var28:registerFocusBehavior(current, var37)
 			
-			return function() --[[ line: 195 ]]
+			return function() --[[ line: 200 ]]
 				-- upvalues: var28 (copy), current (ref), var37 (ref)
 				var28:deregisterFocusBehavior(current, var37)
 			end
 		end
 	end, { var28, data, var29 })
-	reactModule.useEffect(function() --[[ line: 201 ]]
+	reactModule.useEffect(function() --[[ line: 206 ]]
 		-- upvalues: var19 (ref), var21 (ref), var23 (ref)
 		local current = var19.current
 		
@@ -143,12 +145,12 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 		local scrollingFrame = current:FindFirstChildWhichIsA("ScrollingFrame", true)
 		
 		if scrollingFrame then
-			local function checkScrollbar() --[[ line: 214 ]]
+			local function checkScrollbar() --[[ line: 219 ]]
 				-- upvalues: scrollingFrame (ref), var21 (copy)
 				var21(scrollingFrame.AbsoluteWindowSize.Y < scrollingFrame.AbsoluteCanvasSize.Y)
 			end
 			
-			local function onScroll() --[[ line: 219 ]]
+			local function onScroll() --[[ line: 224 ]]
 				-- upvalues: scrollingFrame (ref), var23 (copy)
 				if scrollingFrame.CanvasPosition.Y > 0 then
 					var23(true)
@@ -160,7 +162,7 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 			local var42 = scrollingFrame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkScrollbar)
 			local var43 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(onScroll)
 			
-			return function() --[[ line: 232 ]]
+			return function() --[[ line: 237 ]]
 				-- upvalues: var41 (ref), var42 (ref), var43 (ref)
 				var41:Disconnect()
 				var42:Disconnect()
@@ -170,7 +172,7 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 	end, { loading })
 	local var30 = reactModule.useRef({})
 	local var31 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 242 ]]
+	reactModule.useEffect(function() --[[ line: 247 ]]
 		-- upvalues: var17 (ref), var31 (ref), var30 (ref), scrollToItemModule (copy), var19 (ref)
 		if var17 then
 			var31.current = var30.current[var17]
@@ -180,7 +182,7 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 		end
 		var31.current = nil
 	end, { var17 })
-	reactModule.useEffect(function() --[[ line: 251 ]]
+	reactModule.useEffect(function() --[[ line: 256 ]]
 		-- upvalues: error (ref), var24 (ref), sendEvent (ref), telemetryEventType (copy)
 		if error and not var24.current then
 			var24.current = true
@@ -190,7 +192,7 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 			})
 		end
 	end, { error, sendEvent })
-	reactModule.useEffect(function() --[[ line: 261 ]]
+	reactModule.useEffect(function() --[[ line: 266 ]]
 		-- upvalues: loading (ref), error (ref), data (ref), var25 (ref), sendEvent (ref), telemetryEventType (copy)
 		if not loading and not error and (data == nil or #data == 0) and not var25.current then
 			var25.current = true
@@ -199,13 +201,14 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 	end, { loading, error, data, sendEvent })
 	local variant = p2.variant or "radio"
 	local isChevron = variant == "chevron"
-	local var34 = reactModule.useCallback(function(p3) --[[ line: 278 ]]
-		-- upvalues: data (ref), sendEvent (ref), telemetryEventType (copy), var20 (ref), var22 (ref)
+	local var34 = reactModule.useCallback(function(p3, p4) --[[ line: 283 ]]
+		-- upvalues: data (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportSelectItemAddId (copy), var20 (ref), var22 (ref)
 		if data then
 			sendEvent({
 				sub_event_type = telemetryEventType.SelectItem,
 				select_item_detail = {
 					selected_index = p3,
+					selected_id = if fFlagAbuseReportSelectItemAddId then p4 else nil,
 					list_length = #data,
 					has_scroll = var20,
 					did_scroll = var22
@@ -215,30 +218,30 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 			return
 		end
 	end, { sendEvent, var20, var22, data })
-	local var35 = reactModule.useCallback(function(p4) --[[ line: 293 ]]
-		-- upvalues: data (ref), var18 (ref), dashModule (copy), var34 (ref)
+	local var35 = reactModule.useCallback(function(p5) --[[ line: 299 ]]
+		-- upvalues: data (ref), var18 (ref), dashModule (copy), var34 (ref), fFlagAbuseReportSelectItemAddId (copy)
 		if data then
-			var18(p4)
+			var18(p5)
 			local var44 = 0
-			dashModule.forEach(data, function(p5, p6) --[[ line: 300 ]]
-				-- upvalues: p4 (ref), var44 (write)
-				if p5.id == p4 then
-					var44 = p6
+			dashModule.forEach(data, function(p6, p7) --[[ line: 306 ]]
+				-- upvalues: p5 (ref), var44 (write)
+				if p6.id == p5 then
+					var44 = p7
 					
 					return
 				end
 			end)
-			var34(var44)
+			var34(var44, if fFlagAbuseReportSelectItemAddId then p5 else nil)
 			
 			return
 		end
 	end, { var34, data })
-	local var36 = reactModule.useCallback(function() --[[ line: 309 ]]
+	local var36 = reactModule.useCallback(function() --[[ line: 315 ]]
 		-- upvalues: data (ref), dashModule (copy), var17 (ref), p2 (ref)
 		if not data then return end
-		local var45 = dashModule.find(data, function(p7) --[[ line: 314 ]]
+		local var45 = dashModule.find(data, function(p8) --[[ line: 320 ]]
 			-- upvalues: var17 (copy)
-			return p7.id == var17
+			return p8.id == var17
 		end)
 		
 		if p2.onNext then
@@ -284,34 +287,35 @@ return reactModule.memo(function(p2) --[[ line: 161 | named "ListNode" ]]
 				hasDivider = { hasDivider = true, isInset = false },
 				isContained = { isContained = false, hasMargin = true }
 			}, {
-				dashModule.map(data, function(p8, p9) --[[ line: 381 ]]
-					-- upvalues: reactModule (copy), list (copy), iconName (copy), translateIntoString (ref), isChevron (ref), var34 (ref), p2 (ref), var35 (ref), t (copy), variant (ref), var17 (ref), var30 (ref), var29 (ref)
+				dashModule.map(data, function(p9, p10) --[[ line: 387 ]]
+					-- upvalues: fFlagAbuseReportInExpPlayerListV3 (copy), p2 (ref), reactModule (copy), list (copy), iconName (copy), translateIntoString (ref), isChevron (ref), var34 (ref), fFlagAbuseReportSelectItemAddId (copy), var35 (ref), t (copy), variant (ref), var17 (ref), var30 (ref), var29 (ref)
 					return reactModule.createElement(list.Item, {
-						leading = if type(p8.leading) == "string" then iconName[p8.leading] else p8.leading,
-						title = translateIntoString(p8.label),
-						description = if p8.description then translateIntoString(p8.description) else nil,
+						leading = if type(p9.leading) == "string" then iconName[p9.leading] else p9.leading,
+						title = translateIntoString(p9.label),
+						description = if p9.description then translateIntoString(p9.description) else nil,
+						trailing = if fFlagAbuseReportInExpPlayerListV3 and p2.renderTrailingAccessory then p2.renderTrailingAccessory(p9) else nil,
 						onActivated = {
-							onActivated = if isChevron then function() --[[ line: 390 ]]
-								-- upvalues: var34 (copy), p9 (ref), p2 (copy), p8 (ref)
-								var34(p9)
+							onActivated = if isChevron then function() --[[ line: 401 ]]
+								-- upvalues: var34 (copy), p10 (ref), fFlagAbuseReportSelectItemAddId (copy), p9 (ref), p2 (copy)
+								var34(p10, if fFlagAbuseReportSelectItemAddId then p9.id else nil)
 								
 								if p2.onNext then
-									p2.onNext(p8.id, p8)
+									p2.onNext(p9.id, p9)
 								end
-							end else function() --[[ line: 396 ]]
-								-- upvalues: var35 (copy), p8 (ref)
-								var35(p8.id)
+							end else function() --[[ line: 410 ]]
+								-- upvalues: var35 (copy), p9 (ref)
+								var35(p9.id)
 							end,
 							inputType = t[variant],
-							isChecked = var17 == p8.id
+							isChecked = var17 == p9.id
 						},
-						LayoutOrder = p9,
-						ref = function(p10) --[[ line: 403 ]]
-							-- upvalues: var30 (copy), p8 (ref), p9 (ref), var29 (copy)
-							var30.current[p8.id] = p10
+						LayoutOrder = p10,
+						ref = function(p11) --[[ line: 417 ]]
+							-- upvalues: var30 (copy), p9 (ref), p10 (ref), var29 (copy)
+							var30.current[p9.id] = p11
 							
-							if p9 == 1 then
-								var29.current = p10
+							if p10 == 1 then
+								var29.current = p11
 							end
 						end
 					})

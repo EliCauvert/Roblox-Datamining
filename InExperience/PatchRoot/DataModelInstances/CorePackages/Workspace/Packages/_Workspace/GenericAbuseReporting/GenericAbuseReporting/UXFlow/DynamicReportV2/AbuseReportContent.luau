@@ -14,13 +14,14 @@ local layoutSlotsProvider = layoutSlotsModule.LayoutSlotsProvider
 local loaderProvider = loaderContextModule.LoaderProvider
 local sheetSlots = layoutSlotsModule.sheetSlots
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 50 ]]
+return reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
 	-- upvalues: useAbuseSheetFlowModule (ref), fFlagEnableInlineSurveyOnUserReport (ref), reactModule (ref), abuseReportDialogModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), loaderProvider (ref), layoutSlotsProvider (ref), sheetSlots (ref)
 	local var6 = useAbuseSheetFlowModule(p0.rawConfig, {
 		abuseVector = p0.abuseVector,
 		targetId = p0.targetId,
 		onClose = p0.onClose,
 		open = p0.open,
+		onCustomSubmit = p0.onCustomSubmit,
 		onFinish = if fFlagEnableInlineSurveyOnUserReport then p0.onFinish else nil
 	})
 	reactModule.useImperativeHandle(p1, function() --[[ line: 59 ]]

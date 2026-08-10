@@ -13,29 +13,22 @@ local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLo
 local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
-local fFlagAXAvatarTimeoutFlowIE = require(parent.AvatarExperienceFlags).FFlagAXAvatarTimeoutFlowIE
 local getTimeoutStatusStore = require(parent.AvatarExperienceCommon).Stores.getTimeoutStatusStore
 
-return function(p0) --[[ line: 31 | named "SwitchAvatarButton" ]]
-	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), fFlagAXAvatarTimeoutFlowIE (ref), getTimeoutStatusStore (ref), useLocalization (ref), reactModule (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), foundationModule (ref), buttonSize (ref), buttonVariant (ref), fillBehavior (ref)
+return function(p0) --[[ line: 29 | named "SwitchAvatarButton" ]]
+	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), getTimeoutStatusStore (ref), useLocalization (ref), reactModule (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), foundationModule (ref), buttonSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local var7 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
 	local var8 = signalsReactModule.useSignalState(var7.getIsSwitching)
 	local var9 = signalsReactModule.useSignalState(var7.getSelectedOutfitId)
 	local var10 = signalsReactModule.useSignalState(var7.getSelectedOutfitDetails)
-	local _ = nil
-	local var11 = if fFlagAXAvatarTimeoutFlowIE then signalsReactModule.useSignalState(getTimeoutStatusStore().getIsTimedOut) else nil
+	local var11 = signalsReactModule.useSignalState(getTimeoutStatusStore().getIsTimedOut)
 	local var12 = useLocalization({ buttonText = "Feature.AvatarSwitcher.Action.Continue" })
 	local var8_1 = var8 or (var9 ~= nil and var10 == nil)
-	local var14 = var8_1
-	
-	if not var14 then
-		var14 = true
-		var14 = var9 == nil and ((if var9 == nil then fFlagAXAvatarTimeoutFlowIE else nil) and var11)
-	end
+	local var14 = var8_1 or (if var9 ~= nil then var11 else true)
 	local var15 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 53 ]]
+	reactModule.useEffect(function() --[[ line: 47 ]]
 		-- upvalues: addUnifiedEventLogging (copy), var15 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy)
-		task.delay(0, function() --[[ line: 56 ]]
+		task.delay(0, function() --[[ line: 50 ]]
 			-- upvalues: addUnifiedEventLogging (copy), var15 (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy)
 			addUnifiedEventLogging(var15, {
 				elementName = "SWITCH_AVATAR_BUTTON",

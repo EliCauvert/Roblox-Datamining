@@ -1,3 +1,9 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").DataHydrationTypes)
 
-return {}
+return {
+	PrivacyType = {
+		Private = "Private",
+		Public = "Public",
+		FriendsOnly = "FriendsOnly"
+	}
+}

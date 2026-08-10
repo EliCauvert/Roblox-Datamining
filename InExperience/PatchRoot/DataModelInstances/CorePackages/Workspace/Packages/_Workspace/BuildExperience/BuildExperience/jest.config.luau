@@ -3,8 +3,9 @@
 return {
 	displayName = "BuildExperience",
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
+		jestConfigsModule.setupFiles.ErrorLogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		jestConfigsModule.setupFiles.RetryTimes
 	}
 }

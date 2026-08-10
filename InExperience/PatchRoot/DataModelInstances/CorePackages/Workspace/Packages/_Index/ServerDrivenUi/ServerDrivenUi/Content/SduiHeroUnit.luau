@@ -7,10 +7,10 @@ local sduiAttributionRow = require(parent.SduiSharedContent).SduiAttributionRow
 local sduiTextPillModule = require(serverDrivenUi.Content.SduiTextPill)
 local _ = require(parent.SduiCoreSystem)
 
-return reactModule.memo(function(p0) --[[ line: 112 | named "SduiHeroUnit" ]]
+return reactModule.memo(function(p0) --[[ line: 103 | named "SduiHeroUnit" ]]
 	-- upvalues: reactModule (ref), sduiAttributionRow (ref), sduiTextPillModule (ref), cryoModule (ref), heroUnitContainer (ref)
 	local children = p0.children
-	local var4 = reactModule.useMemo(function() --[[ line: 117 ]]
+	local var4 = reactModule.useMemo(function() --[[ line: 108 ]]
 		-- upvalues: p0 (ref), reactModule (copy), sduiAttributionRow (copy)
 		return if p0.asset then reactModule.createElement(sduiAttributionRow, {
 			image = p0.asset.image,
@@ -26,12 +26,12 @@ return reactModule.memo(function(p0) --[[ line: 112 | named "SduiHeroUnit" ]]
 		p0.sduiContext,
 		p0.onActivated
 	})
-	local var5 = reactModule.useMemo(function() --[[ line: 133 ]]
+	local var5 = reactModule.useMemo(function() --[[ line: 124 ]]
 		-- upvalues: p0 (ref), reactModule (copy), sduiTextPillModule (copy)
 		return if p0.badgeText then reactModule.createElement(sduiTextPillModule, { sduiContext = p0.sduiContext, text = p0.badgeText }) else nil
 	end, { p0.badgeText, p0.sduiContext })
 	
-	return reactModule.createElement(heroUnitContainer, reactModule.useMemo(function() --[[ line: 143 ]]
+	return reactModule.createElement(heroUnitContainer, reactModule.useMemo(function() --[[ line: 134 ]]
 		-- upvalues: cryoModule (copy), var4 (ref), var5 (ref), p0 (ref)
 		return cryoModule.Dictionary.join({
 			bottomRowComponent = var4,

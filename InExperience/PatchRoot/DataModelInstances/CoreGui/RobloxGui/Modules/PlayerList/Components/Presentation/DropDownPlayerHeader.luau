@@ -4,7 +4,7 @@ local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
 local userLibModule = require(corePackagesService.Workspace.Packages.UserLib)
 local cryoModule = require(corePackagesService.Packages.Cryo)
-local withStyle = UIBloxModule.Style.withStyle
+local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local withLayoutValues = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
 local useVerifiedBadge = require(corePackagesService.Workspace.Packages.UserProfiles).Hooks.useVerifiedBadge
 local fFlagEnableVerifiedBadgeStore = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableVerifiedBadgeStore
@@ -17,10 +17,42 @@ dropDownPlayerHeader.validateProps = tModule.strictInterface({
 })
 
 function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
-	-- upvalues: withLayoutValues (ref), withStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref)
+	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref)
 	return withLayoutValues(function(p1) --[[ line: 38 ]]
-		-- upvalues: withStyle (copy), p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy)
-		return withStyle(function(p2) --[[ line: 39 ]]
+		-- upvalues: withFoundationOrUIBloxStyle (copy), p0 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy)
+		return withFoundationOrUIBloxStyle(function(p2) --[[ line: 39 ]]
+			return {
+				Theme = {
+					Divider = {
+						Color = p2.Color.Stroke.Emphasis.Color3,
+						Transparency = p2.Color.Stroke.Emphasis.Transparency
+					},
+					TextEmphasis = {
+						Color = p2.Color.Content.Emphasis.Color3,
+						Transparency = p2.Color.Content.Emphasis.Transparency
+					},
+					TextMuted = {
+						Color = p2.Color.Content.Muted.Color3,
+						Transparency = p2.Color.Content.Muted.Transparency
+					}
+				},
+				Font = {
+					BaseSize = 1,
+					CaptionHeader = {
+						Font = p2.Typography.CaptionLarge.Font,
+						RelativeSize = p2.Typography.CaptionLarge.FontSize
+					},
+					Footer = {
+						Font = p2.Typography.CaptionSmall.Font,
+						RelativeSize = p2.Typography.CaptionSmall.FontSize
+					},
+					Header2 = {
+						Font = p2.Typography.TitleLarge.Font,
+						RelativeSize = p2.Typography.TitleLarge.FontSize
+					}
+				}
+			}
+		end, function(p3) --[[ line: 71 ]]
 			-- upvalues: p0 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), roactModule (copy), p1 (ref), emojiTextLabel (copy), emoji (copy)
 			local player = p0.props.player
 			
@@ -55,8 +87,8 @@ function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
 							TextScaled = true,
-							fontStyle = p2.Font.Header2,
-							colorStyle = p2.Theme.TextEmphasis,
+							fontStyle = p3.Font.Header2,
+							colorStyle = p3.Theme.TextEmphasis,
 							emoji = emoji.Verified,
 							maxSize = Vector2.new(p1.PlayerDropDownSizeX - 124, 22),
 							Text = player.DisplayName,
@@ -68,16 +100,16 @@ function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
 							TextScaled = true,
 							Size = UDim2.new(1, 0, 0, 22),
 							Text = player.DisplayName,
-							Font = p2.Font.Header2.Font,
-							TextSize = p2.Font.BaseSize * p2.Font.Header2.RelativeSize,
-							TextColor3 = p2.Theme.TextEmphasis.Color,
-							TextTransparency = p2.Theme.TextEmphasis.Transparency,
+							Font = p3.Font.Header2.Font,
+							TextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
+							TextColor3 = p3.Theme.TextEmphasis.Color,
+							TextTransparency = p3.Theme.TextEmphasis.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd
 						}, {
 							SizeConstraint = roactModule.createElement("UITextSizeConstraint", {
-								MaxTextSize = p2.Font.BaseSize * p2.Font.Header2.RelativeSize,
-								MinTextSize = p2.Font.BaseSize * p2.Font.Footer.RelativeSize
+								MaxTextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
+								MinTextSize = p3.Font.BaseSize * p3.Font.Footer.RelativeSize
 							})
 						}),
 						PlayerName = roactModule.createElement("TextLabel", {
@@ -86,16 +118,16 @@ function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
 							TextScaled = true,
 							Size = UDim2.new(1, 0, 0, 22),
 							Text = "@" .. player.Name,
-							Font = p2.Font.CaptionHeader.Font,
-							TextSize = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize,
-							TextColor3 = p2.Theme.TextMuted.Color,
-							TextTransparency = p2.Theme.TextMuted.Transparency,
+							Font = p3.Font.CaptionHeader.Font,
+							TextSize = p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
+							TextColor3 = p3.Theme.TextMuted.Color,
+							TextTransparency = p3.Theme.TextMuted.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd
 						}, {
 							SizeConstraint = roactModule.createElement("UITextSizeConstraint", {
-								MaxTextSize = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize,
-								MinTextSize = p2.Font.BaseSize * p2.Font.Footer.RelativeSize
+								MaxTextSize = p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
+								MinTextSize = p3.Font.BaseSize * p3.Font.Footer.RelativeSize
 							})
 						})
 					})
@@ -114,15 +146,15 @@ function dropDownPlayerHeader.render(p0) --[[ line: 37 ]]
 					Size = UDim2.new(1, 0, 0, 1),
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1),
-					BackgroundTransparency = p2.Theme.Divider.Transparency,
-					BackgroundColor3 = p2.Theme.Divider.Color
+					BackgroundTransparency = p3.Theme.Divider.Transparency,
+					BackgroundColor3 = p3.Theme.Divider.Color
 				})
 			})
 		end)
 	end)
 end
 
-return if fFlagEnableVerifiedBadgeStore then function(p3) --[[ line: 147 ]]
+return if fFlagEnableVerifiedBadgeStore then function(p4) --[[ line: 181 ]]
 	-- upvalues: useVerifiedBadge (ref), roactModule (ref), dropDownPlayerHeader (ref), cryoModule (ref)
-	return roactModule.createElement(dropDownPlayerHeader, cryoModule.Dictionary.join(p3, { showVerifiedBadge = useVerifiedBadge(p3.player) }))
+	return roactModule.createElement(dropDownPlayerHeader, cryoModule.Dictionary.join(p4, { showVerifiedBadge = useVerifiedBadge(p4.player) }))
 end else dropDownPlayerHeader

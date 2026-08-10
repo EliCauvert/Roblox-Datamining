@@ -1,0 +1,1 @@
+﻿return require(script.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions)

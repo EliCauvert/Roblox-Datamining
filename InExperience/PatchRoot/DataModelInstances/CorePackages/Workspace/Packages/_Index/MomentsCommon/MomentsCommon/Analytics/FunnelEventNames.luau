@@ -3,6 +3,7 @@
 	CreationFlow = "Creation Flow",
 	MusicEnhancement = "Music Enhancement",
 	TextOverlayEnhancement = "Text Enhancement",
+	StickerOverlayEnhancement = "Sticker Enhancement",
 	TrimEnhancement = "Trim Enhancement"
 }
 local t_1 = {
@@ -11,11 +12,7 @@ local t_1 = {
 	MyMomentsScreenView = "MyMomentsScreenView",
 	UserProfileScreenView = "UserProfileScreenView"
 }
-local t_2 = {
-	TopBar = "TopBar",
-	MyMomentsScreen = "MyMomentsScreen",
-	FeedEmptyScreen = "FeedEmptyScreen"
-}
+local t_2 = { TopBar = "TopBar" }
 local t_3 = {
 	CreateIntent = "CreateIntent",
 	GalleryItemSelected = "GalleryItemSelected",
@@ -33,6 +30,11 @@ local t_5 = {
 	TextOverlayCompleted = "TextOverlayCompleted"
 }
 local t_6 = {
+	StickerOverlayButtonPressed = "StickerOverlayButtonPressed",
+	StickerOverlaySelected = "StickerOverlaySelected",
+	StickerOverlayCompleted = "StickerOverlayCompleted"
+}
+local t_7 = {
 	TrimButtonPressed = "TrimButtonPressed",
 	TrimCompleted = "TrimCompleted"
 }
@@ -65,18 +67,27 @@ return {
 			[t_4.MusicApplied] = { stepNumber = 3, stepName = "Music Applied" }
 		},
 		[t.TrimEnhancement] = {
-			[t_6.TrimButtonPressed] = { stepNumber = 1, stepName = "Trim Button Pressed" },
-			[t_6.TrimCompleted] = { stepNumber = 2, stepName = "Trim Completed" }
+			[t_7.TrimButtonPressed] = { stepNumber = 1, stepName = "Trim Button Pressed" },
+			[t_7.TrimCompleted] = { stepNumber = 2, stepName = "Trim Completed" }
 		},
 		[t.TextOverlayEnhancement] = {
 			[t_5.TextOverlayButtonPressed] = { stepNumber = 1, stepName = "Text Overlay Button Pressed" },
 			[t_5.TextOverlayCompleted] = { stepNumber = 2, stepName = "Text Overlay Completed" }
+		},
+		[t.StickerOverlayEnhancement] = {
+			[t_6.StickerOverlayButtonPressed] = {
+				stepNumber = 1,
+				stepName = "Sticker Overlay Button Pressed"
+			},
+			[t_6.StickerOverlaySelected] = { stepNumber = 2, stepName = "Sticker Overlay Selected" },
+			[t_6.StickerOverlayCompleted] = { stepNumber = 3, stepName = "Sticker Overlay Completed" }
 		}
 	},
 	CreationIntentSource = t_2,
 	AppNavigationSteps = t_1,
 	CreationFlowSteps = t_3,
 	MusicEnhancementSteps = t_4,
-	TrimEnhancementSteps = t_6,
-	TextOverlayEnhancementSteps = t_5
+	TrimEnhancementSteps = t_7,
+	TextOverlayEnhancementSteps = t_5,
+	StickerOverlayEnhancementSteps = t_6
 }

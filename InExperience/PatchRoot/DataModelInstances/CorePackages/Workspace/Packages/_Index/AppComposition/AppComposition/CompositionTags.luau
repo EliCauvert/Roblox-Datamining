@@ -7,7 +7,10 @@ return {
 		Header = "composition-content-header",
 		Body = "composition-content-body"
 	},
-	SupportRegion = if fFlagEnableSplitPane then { Root = "composition-support-root" } else nil,
+	SupportRegion = if fFlagEnableSplitPane then {
+		Root = "composition-support-root",
+		Collapsed = "composition-support-collapsed"
+	} else nil,
 	Layout = {
 		Discovery = "composition-layout-discovery",
 		Detail = "composition-layout-detail"

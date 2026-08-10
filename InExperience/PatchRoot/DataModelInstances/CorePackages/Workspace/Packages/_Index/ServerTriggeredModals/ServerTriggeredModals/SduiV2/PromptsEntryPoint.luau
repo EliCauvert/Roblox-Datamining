@@ -1,5 +1,6 @@
 ﻿return {
 	SelfUserProfileOpen = "SelfUserProfileOpen",
 	HomepageLaunch = "HomepageLaunch",
-	ChartsLaunch = "ChartsLaunch"
+	ChartsLaunch = "ChartsLaunch",
+	ExperienceDetailsPageSessionEnd = "ExperienceDetailsPageSessionEnd"
 }

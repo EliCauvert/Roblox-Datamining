@@ -8,10 +8,11 @@ local notLocalizedStringsModule = require(friendsLanding.Enums.NotLocalizedStrin
 local images = UIBlox.App.ImageSet.Images
 local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
 local fFlagFriendsPageAlwaysOpenPPV = require(parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
+local fFlagFriendsPageUnifiedOpenProfileLogic = require(parent.SharedFlags).FFlagFriendsPageUnifiedOpenProfileLogic
 local uDim2 = UDim2.fromOffset(12, 12)
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 17 ]]
-	-- upvalues: getCorrectUserPresenceModule (ref), images (ref), presenceType (ref), uDim2 (ref), isUserInGameModule (ref), fFlagFriendsPageAlwaysOpenPPV (ref), notLocalizedStringsModule (ref)
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 18 ]]
+	-- upvalues: getCorrectUserPresenceModule (ref), images (ref), presenceType (ref), uDim2 (ref), isUserInGameModule (ref), fFlagFriendsPageAlwaysOpenPPV (ref), fFlagFriendsPageUnifiedOpenProfileLogic (ref), notLocalizedStringsModule (ref)
 	local t = { icon = if p2 then images[p2] else nil }
 	
 	if getCorrectUserPresenceModule(p0) == presenceType.Online then
@@ -25,7 +26,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 17 ]]
 		t.text = p8
 	elseif isUserInGameModule(p0) then
 		t.text = p0.lastLocation
-		t.onActivated = if fFlagFriendsPageAlwaysOpenPPV then nil else p3(p0.universeId, p0.id, p5)
+		t.onActivated = if fFlagFriendsPageAlwaysOpenPPV or fFlagFriendsPageUnifiedOpenProfileLogic then nil else p3(p0.universeId, p0.id, p5)
 	elseif p0.userPresenceType ~= presenceType.InStudio then
 		t.text = p1
 	elseif p0.lastLocation and p0.lastLocation ~= "" then

@@ -52,7 +52,7 @@ return {
 			-- upvalues: reactModule (copy), styleProviderWithDefaultTheme (copy), roactRoduxModule (copy), createStore (copy), mockNavigation (copy), foundationProvider (copy), foundationModule (copy), designTokenProvider (copy), p2 (ref)
 			return reactModule.createElement(styleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
 				reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore(nil) }, {
-					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Light }, {
+					navigationProvider = mockNavigation(reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Light }, {
 						designTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = p2(p3) })
 					}))
 				})

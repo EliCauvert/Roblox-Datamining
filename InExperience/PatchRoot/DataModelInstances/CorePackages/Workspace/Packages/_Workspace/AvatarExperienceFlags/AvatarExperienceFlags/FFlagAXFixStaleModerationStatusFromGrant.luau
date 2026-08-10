@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXFixStaleModerationStatusFromGrant2", false)

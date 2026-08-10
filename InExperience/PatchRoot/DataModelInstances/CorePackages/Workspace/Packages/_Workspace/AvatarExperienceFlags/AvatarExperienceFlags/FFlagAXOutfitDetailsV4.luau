@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXOutfitDetailsV4", false)
+﻿return game:DefineFastFlag("AXOutfitDetailsV4_2", false)

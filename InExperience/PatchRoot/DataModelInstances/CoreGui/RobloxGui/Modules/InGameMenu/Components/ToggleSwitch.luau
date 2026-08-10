@@ -1,11 +1,14 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+﻿local corePackagesService = game:GetService("CorePackages")
+local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local otter = inGameMenuDependenciesModule.Otter
 local t = inGameMenuDependenciesModule.t
-local withStyle = UIBlox.Core.Style.withStyle
-local withSelectionCursorProvider = UIBlox.App.SelectionImage.withSelectionCursorProvider
-local cursorKind = UIBlox.App.SelectionImage.CursorKind
+local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local foundationModule = require(corePackagesService.Packages.Foundation)
+local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local var3 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local var4 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
 local divideTransparencyModule = require(script.Parent.Parent.Utility.divideTransparency)
 local assetImageModule = require(script.Parent.AssetImage)
 local uDim2 = UDim2.new(0, -3, 0.5, 0)
@@ -25,28 +28,41 @@ toggleSwitch.validateProps = t.strictInterface({
 	onSelectionGained = t.optional(t.callback)
 })
 
-function toggleSwitch.init(p0) --[[ line: 42 ]]
+function toggleSwitch.init(p0) --[[ line: 49 ]]
 	-- upvalues: roact (ref), divideTransparencyModule (ref), uDim2 (ref), uDim2_1 (ref), otter (ref)
-	local var7 = if p0.props.checked then 1 else 0
-	local var8, var9 = roact.createBinding(var7)
-	p0.progress = var8
-	p0.setProgress = var9
-	p0.fillTransparency = p0.progress:map(function(p1) --[[ line: 46 ]]
+	local var11 = if p0.props.checked then 1 else 0
+	local var12, var13 = roact.createBinding(var11)
+	p0.progress = var12
+	p0.setProgress = var13
+	p0.fillTransparency = p0.progress:map(function(p1) --[[ line: 53 ]]
 		-- upvalues: divideTransparencyModule (copy), p0 (ref)
 		return divideTransparencyModule(1 - p1, if p0.props.disabled then 4 else 1)
 	end)
-	p0.knobPosition = p0.progress:map(function(p2) --[[ line: 50 ]]
+	p0.knobPosition = p0.progress:map(function(p2) --[[ line: 57 ]]
 		-- upvalues: uDim2 (copy), uDim2_1 (copy)
 		return uDim2:lerp(uDim2_1, p2)
 	end)
-	p0.motor = otter.createSingleMotor(var7)
+	p0.motor = otter.createSingleMotor(var11)
 	p0.motor:onStep(p0.setProgress)
 end
 
-function toggleSwitch.renderWithSelectionCursor(p3, p4) --[[ line: 58 ]]
-	-- upvalues: withStyle (ref), roact (ref), assetImageModule (ref), divideTransparencyModule (ref), cursorKind (ref)
-	return withStyle(function(p5) --[[ line: 59 ]]
-		-- upvalues: roact (copy), assetImageModule (copy), p3 (ref), divideTransparencyModule (copy), p4 (ref), cursorKind (copy)
+function toggleSwitch.renderWithSelectionCursor(p3, p4) --[[ line: 65 ]]
+	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), assetImageModule (ref), divideTransparencyModule (ref), var4 (ref)
+	return withFoundationOrUIBloxStyle(function(p5) --[[ line: 66 ]]
+		return {
+			Theme = {
+				SecondaryDefault = {
+					Color = p5.Color.Extended.White.White_70.Color3,
+					Transparency = p5.Color.Extended.White.White_70.Transparency
+				},
+				Success = {
+					Color = p5.Color.System.Success.Color3,
+					Transparency = p5.Color.System.Success.Transparency
+				}
+			}
+		}
+	end, function(p6) --[[ line: 73 ]]
+		-- upvalues: roact (copy), assetImageModule (copy), p3 (ref), divideTransparencyModule (copy), p4 (ref), var4 (copy)
 		return roact.createElement(assetImageModule.Button, {
 			Size = UDim2.new(0, 60, 0, 36),
 			BackgroundTransparency = 1,
@@ -54,20 +70,20 @@ function toggleSwitch.renderWithSelectionCursor(p3, p4) --[[ line: 58 ]]
 			LayoutOrder = p3.props.LayoutOrder,
 			imageKey = "ToggleOutline",
 			AnchorPoint = p3.props.AnchorPoint,
-			ImageColor3 = p5.Theme.SecondaryDefault.Color,
-			ImageTransparency = divideTransparencyModule(p5.Theme.SecondaryDefault.Transparency, if p3.props.disabled then 4 else 1),
+			ImageColor3 = p6.Theme.SecondaryDefault.Color,
+			ImageTransparency = divideTransparencyModule(p6.Theme.SecondaryDefault.Transparency, if p3.props.disabled then 4 else 1),
 			NextSelectionUp = p3.props.NextSelectionUp,
 			[roact.Event.Activated] = p3.props.onToggled,
 			[roact.Ref] = p3.props.buttonRef,
 			[roact.Event.SelectionLost] = p3.props.onSelectionLost,
 			[roact.Event.SelectionGained] = p3.props.onSelectionGained,
-			SelectionImageObject = p4(cursorKind.Toggle)
+			SelectionImageObject = p4(var4.Toggle)
 		}, {
 			Fill = roact.createElement(assetImageModule.Label, {
 				BackgroundTransparency = 1,
 				imageKey = "ToggleFill",
 				Size = UDim2.new(1, 0, 1, 0),
-				ImageColor3 = p5.Theme.Success.Color,
+				ImageColor3 = p6.Theme.Success.Color,
 				ImageTransparency = p3.fillTransparency
 			}),
 			Knob = roact.createElement(assetImageModule.Label, {
@@ -83,21 +99,21 @@ function toggleSwitch.renderWithSelectionCursor(p3, p4) --[[ line: 58 ]]
 	end)
 end
 
-function toggleSwitch.render(p6) --[[ line: 99 ]]
-	-- upvalues: withSelectionCursorProvider (ref)
-	return withSelectionCursorProvider(function(p7) --[[ line: 100 ]]
-		-- upvalues: p6 (ref)
-		return p6:renderWithSelectionCursor(p7)
+function toggleSwitch.render(p7) --[[ line: 113 ]]
+	-- upvalues: var3 (ref)
+	return var3(function(p8) --[[ line: 114 ]]
+		-- upvalues: p7 (ref)
+		return p7:renderWithSelectionCursor(p8)
 	end)
 end
 
-function toggleSwitch.didUpdate(p8) --[[ line: 105 ]]
+function toggleSwitch.didUpdate(p9) --[[ line: 119 ]]
 	-- upvalues: otter (ref), t_1 (ref)
-	p8.motor:setGoal(otter.spring(if p8.props.checked then 1 else 0, t_1))
+	p9.motor:setGoal(otter.spring(if p9.props.checked then 1 else 0, t_1))
 end
 
-function toggleSwitch.willUnmount(p9) --[[ line: 110 ]]
-	p9.motor:destroy()
+function toggleSwitch.willUnmount(p10) --[[ line: 124 ]]
+	p10.motor:destroy()
 end
 
 return toggleSwitch

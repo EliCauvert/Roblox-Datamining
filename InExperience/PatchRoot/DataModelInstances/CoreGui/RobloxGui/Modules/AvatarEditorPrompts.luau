@@ -14,12 +14,11 @@ local getGameNameModule = require(script.Thunks.GetGameName)
 local avatarEditorPromptsPolicyModule = require(script.AvatarEditorPromptsPolicy)
 local roactGlobalConfigModule = require(script.RoactGlobalConfig)
 local connectAvatarEditorServiceEventsModule = require(script.ConnectAvatarEditorServiceEvents)
-local fFlagAXAvatarTimeoutFlowIE = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXAvatarTimeoutFlowIE
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 33 ]]
-	-- upvalues: t (ref), roactGlobalConfigModule (ref), roactModule (ref), roduxModule (ref), reducerModule (ref), getGameNameModule (ref), fFlagAXAvatarTimeoutFlowIE (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationModule (ref), avatarEditorPromptsPolicyModule (ref), renderWithCoreScriptsStyleProviderModule (ref), avatarEditorPromptsAppModule (ref), coreGuiService (ref), connectAvatarEditorServiceEventsModule (ref)
+function t.new() --[[ line: 30 ]]
+	-- upvalues: t (ref), roactGlobalConfigModule (ref), roactModule (ref), roduxModule (ref), reducerModule (ref), getGameNameModule (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationModule (ref), avatarEditorPromptsPolicyModule (ref), renderWithCoreScriptsStyleProviderModule (ref), avatarEditorPromptsAppModule (ref), coreGuiService (ref), connectAvatarEditorServiceEventsModule (ref)
 	local tbl = setmetatable({}, t)
 	
 	if roactGlobalConfigModule.propValidation then
@@ -30,22 +29,16 @@ function t.new() --[[ line: 33 ]]
 	end
 	tbl.store = roduxModule.Store.new(reducerModule, nil, { roduxModule.thunkMiddleware })
 	tbl.store:dispatch(getGameNameModule)
-	tbl.root = roactModule.createElement("Folder", { Name = "AvatarEditorPromptsApp" }, if fFlagAXAvatarTimeoutFlowIE then roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
+	tbl.root = roactModule.createElement("Folder", { Name = "AvatarEditorPromptsApp" }, roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
 		LocalizationProvider = roactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
-			FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+			FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 				PolicyProvider = roactModule.createElement(avatarEditorPromptsPolicyModule.Provider, { policy = { avatarEditorPromptsPolicyModule.Mapper } }, {
 					ThemeProvider = renderWithCoreScriptsStyleProviderModule({
 						AvatarEditorPromptsApp = roactModule.createElement(avatarEditorPromptsAppModule)
 					})
 				})
-			})
-		})
-	}) else roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
-		PolicyProvider = roactModule.createElement(avatarEditorPromptsPolicyModule.Provider, { policy = { avatarEditorPromptsPolicyModule.Mapper } }, {
-			ThemeProvider = renderWithCoreScriptsStyleProviderModule({
-				AvatarEditorPromptsApp = roactModule.createElement(avatarEditorPromptsAppModule)
 			})
 		})
 	}))

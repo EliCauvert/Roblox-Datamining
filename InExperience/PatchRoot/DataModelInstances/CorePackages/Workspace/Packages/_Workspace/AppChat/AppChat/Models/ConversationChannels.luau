@@ -7,28 +7,42 @@ local orderedMap = require(parent.AppCommonLib).OrderedMap
 local constantsModule = require(appChat.Constants)
 local conversationModule = require(script.Parent.Conversation)
 local dateTime = require(parent.Time).DateTime
+local fFlagAppChatNilGuardMessageSortModule = require(appChat.Flags.FFlagAppChatNilGuardMessageSort)
 
-local function getMessageId(p0) --[[ line: 13 ]]
+local function getMessageId(p0) --[[ line: 15 ]]
 	return p0.id
 end
 
-local function messageSortPredicate(p1, p2) --[[ line: 17 ]]
+local function messageSortPredicate(p1, p2) --[[ line: 19 ]]
+	-- upvalues: fFlagAppChatNilGuardMessageSortModule (ref)
+	if fFlagAppChatNilGuardMessageSortModule then
+		local sent = p1 and p1.sent
+		local sent_1 = p2 and p2.sent
+		
+		if not sent and not sent_1 then
+			return (if p2 then p2.id else "") < (if p1 then p1.id else "")
+		elseif not sent then
+			return false
+		elseif not sent_1 then
+			return true
+		end
+	end
 	local unixTimestamp = p1.sent:GetUnixTimestamp()
 	local unixTimestamp_1 = p2.sent:GetUnixTimestamp()
 	
 	return if unixTimestamp == unixTimestamp_1 then p2.id < p1.id else unixTimestamp < unixTimestamp_1
 end
 
-local function sendingMessageSortPredicate(p3, p4) --[[ line: 27 ]]
+local function sendingMessageSortPredicate(p3, p4) --[[ line: 44 ]]
 	return p3.order < p4.order
 end
 
-local function _(p5, p6) --[[ line: 33 | named "convertToLegacyConversationType" ]]
+local function _(p5, p6) --[[ line: 50 | named "convertToLegacyConversationType" ]]
 	-- upvalues: conversationModule (ref)
 	return if p6 == "friends" then conversationModule.Type.ONE_TO_ONE_CONVERSATION elseif p5 == "group" then conversationModule.Type.MULTI_USER_CONVERSATION elseif p5 == "one_to_one" then conversationModule.Type.ONE_TO_ONE_CONVERSATION else conversationModule.Type.ONE_TO_ONE_CONVERSATION
 end
 
-local function getFriendId(p7) --[[ line: 46 ]]
+local function getFriendId(p7) --[[ line: 63 ]]
 	-- upvalues: playersService (ref)
 	local localPlayer = playersService.LocalPlayer
 	
@@ -62,17 +76,17 @@ local t = {
 		Chat = "chat"
 	},
 	Type = { Group = "group", OneToOne = "one_to_one" },
-	getEmptyMessages = function() --[[ line: 90 ]]
+	getEmptyMessages = function() --[[ line: 107 ]]
 		-- upvalues: orderedMap (ref), getMessageId (ref), messageSortPredicate (ref)
 		return orderedMap.new(getMessageId, messageSortPredicate)
 	end,
-	getEmptySendingMessages = function() --[[ line: 93 ]]
+	getEmptySendingMessages = function() --[[ line: 110 ]]
 		-- upvalues: orderedMap (ref), getMessageId (ref), sendingMessageSortPredicate (ref)
 		return orderedMap.new(getMessageId, sendingMessageSortPredicate)
 	end
 }
 
-function t.mockBase() --[[ line: 97 ]]
+function t.mockBase() --[[ line: 114 ]]
 	-- upvalues: t (ref), conversationModule (ref), constantsModule (ref), dateTime (ref)
 	return {
 		source = "channels",
@@ -109,12 +123,12 @@ function t.mockBase() --[[ line: 97 ]]
 	}
 end
 
-function t.mock(p8) --[[ line: 144 ]]
+function t.mock(p8) --[[ line: 161 ]]
 	-- upvalues: cryoModule (ref), t (ref)
 	return cryoModule.Dictionary.join(t.mockBase(), p8 or {})
 end
 
-function t.response(p9) --[[ line: 148 ]]
+function t.response(p9) --[[ line: 165 ]]
 	return {
 		source = if p9.source then p9.source else "channels",
 		type = if p9.type then p9.type else "one_to_one",
@@ -137,7 +151,7 @@ function t.response(p9) --[[ line: 148 ]]
 	}
 end
 
-function t.fromChannelsApi(p10) --[[ line: 197 ]]
+function t.fromChannelsApi(p10) --[[ line: 214 ]]
 	-- upvalues: t (ref), getFriendId (ref), conversationModule (ref), constantsModule (ref), dateTime (ref)
 	local t_1 = {
 		source = p10.source,
@@ -189,7 +203,7 @@ function t.fromChannelsApi(p10) --[[ line: 197 ]]
 	return t_1
 end
 
-function t.getFriendConversationId(p11) --[[ line: 255 ]]
+function t.getFriendConversationId(p11) --[[ line: 272 ]]
 	-- upvalues: getFriendId (ref)
 	return getFriendId({ participant_user_ids = p11 })
 end

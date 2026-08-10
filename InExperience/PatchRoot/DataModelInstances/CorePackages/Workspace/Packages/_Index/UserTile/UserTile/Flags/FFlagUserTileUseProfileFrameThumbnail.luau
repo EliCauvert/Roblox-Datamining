@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("UserTileUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("UserTile").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()

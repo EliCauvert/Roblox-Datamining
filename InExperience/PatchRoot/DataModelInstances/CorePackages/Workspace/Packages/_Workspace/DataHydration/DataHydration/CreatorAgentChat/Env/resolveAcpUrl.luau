@@ -2,7 +2,7 @@
 local acpProtocolModule = require(script.Parent.Parent.Acp.AcpProtocol)
 local myStatsExperienceStatsBaseUrl = game:DefineFastString("MyStatsExperienceStatsBaseUrl", "")
 
-local function resolveCreatorAgentAcp() --[[ line: 34 ]]
+local function resolveCreatorAgentAcp() --[[ line: 33 ]]
 	-- upvalues: myStatsExperienceStatsBaseUrl (ref), contentProviderService (ref), acpProtocolModule (ref)
 	if typeof(myStatsExperienceStatsBaseUrl) == "string" and myStatsExperienceStatsBaseUrl ~= "" then
 		local t = {
@@ -14,7 +14,7 @@ local function resolveCreatorAgentAcp() --[[ line: 34 ]]
 		
 		return t
 	end
-	local ok, status = pcall(function() --[[ line: 44 ]]
+	local ok, status = pcall(function() --[[ line: 43 ]]
 		-- upvalues: contentProviderService (copy)
 		return contentProviderService.BaseUrl
 	end)
@@ -37,16 +37,16 @@ end
 
 return {
 	resolveCreatorAgentAcp = resolveCreatorAgentAcp,
-	resolveCreatorAgentAcpUrl = function() --[[ line: 65 ]]
+	resolveCreatorAgentAcpUrl = function() --[[ line: 64 ]]
 		-- upvalues: resolveCreatorAgentAcp (ref)
 		return resolveCreatorAgentAcp().url
 	end,
-	parseSitetestRobloxlabsNumber = function(value) --[[ line: 26 ]]
+	parseSitetestRobloxlabsNumber = function(value) --[[ line: 25 ]]
 		local match = string.match(value, "sitetest(%d+)%.robloxlabs%.com")
 		
 		return if match == nil then nil else tonumber(match)
 	end,
-	buildRobloxlabsAcpUrl = function(value) --[[ line: 22 ]]
+	buildRobloxlabsAcpUrl = function(value) --[[ line: 21 ]]
 		-- upvalues: acpProtocolModule (ref)
 		return `https://apis.sitetest{value}.robloxlabs.com{acpProtocolModule.ACP_PATH}`
 	end

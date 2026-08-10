@@ -117,7 +117,7 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 		screenName = screenName,
 		navigation = navigation,
 		renderRight = if not shouldRenderCenter then function() --[[ line: 164 ]]
-			-- upvalues: rightHidden (ref), var28 (ref), fFlagEnableHeaderBarButtonsUpdate (copy), reactModule (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), argoPartyExperimentation (copy), var33 (ref), var34 (ref), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var25 (ref), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
+			-- upvalues: rightHidden (ref), var28 (ref), fFlagEnableHeaderBarButtonsUpdate (copy), reactModule (copy), foundationModule (copy), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy), var33 (ref), argoPartyExperimentation (copy), var34 (ref), streamNotificationsBellIcon (copy), fFlagStreamNotificationBellEntryPoint (copy), appPage (copy), snoozeToastNotificationsButtonModule (copy), var25 (ref), iconButton (copy), images (copy), getFFlagIsSquadEnabled (copy), wideMode (ref)
 			if rightHidden then
 				return nil
 			end
@@ -132,18 +132,18 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 			}, {
 				filter = if topBarShowSearch then reactModule.createElement(foundationModule.IconButton, {
 					isCircular = true,
+					LayoutOrder = 1,
 					size = foundationModule.Enums.InputSize.Medium,
 					icon = foundationModule.Enums.IconName.MagnifyingGlass,
 					testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("search") else nil,
-					LayoutOrder = if argoPartyExperimentation.getIsRenameEnabled() then 2 else 1,
 					onActivated = var33
 				}) else nil,
 				createNewChat = if topBarShowCreateChatGroup then reactModule.createElement(foundationModule.IconButton, {
 					isCircular = true,
+					LayoutOrder = 2,
 					size = foundationModule.Enums.InputSize.Medium,
 					icon = if argoPartyExperimentation.getIsRenameEnabled() then foundationModule.Enums.IconName.PencilSquare else foundationModule.Enums.IconName.PlusLarge,
 					testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("createChat") else nil,
-					LayoutOrder = if argoPartyExperimentation.getIsRenameEnabled() then 1 else 2,
 					onActivated = var34
 				}) else nil,
 				notifications = if topBarShowNotifications then reactModule.createElement(streamNotificationsBellIcon, {
@@ -156,10 +156,10 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 			}) else reactModule.createElement(reactModule.Fragment, nil, {
 				filter = topBarShowSearch and (if fFlagDebugAppChatEnableDomLocatorsModule then reactModule.createElement(foundationModule.IconButton, {
 					isCircular = true,
+					LayoutOrder = 1,
 					size = foundationModule.Enums.InputSize.Medium,
 					icon = foundationModule.Enums.IconName.MagnifyingGlass,
 					testId = domLocatorsModule.chatLandingTopBarIconButton("search"),
-					LayoutOrder = if argoPartyExperimentation.getIsRenameEnabled() then 2 else 1,
 					onActivated = var33
 				}) else reactModule.createElement(iconButton, {
 					layoutOrder = 1,
@@ -169,10 +169,10 @@ return function(p1) --[[ line: 110 | named "ChatLandingTopBar" ]]
 				})),
 				createNewChat = topBarShowCreateChatGroup and (if fFlagDebugAppChatEnableDomLocatorsModule then reactModule.createElement(foundationModule.IconButton, {
 					isCircular = true,
+					LayoutOrder = 2,
 					size = foundationModule.Enums.InputSize.Medium,
 					icon = foundationModule.Enums.IconName.PlusLarge,
 					testId = domLocatorsModule.chatLandingTopBarIconButton("createChat"),
-					LayoutOrder = if argoPartyExperimentation.getIsRenameEnabled() then 1 else 2,
 					onActivated = var34
 				}) else reactModule.createElement(iconButton, {
 					layoutOrder = 2,

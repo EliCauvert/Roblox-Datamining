@@ -1,11 +1,10 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
 local chipSizeModule = require(foundation.Enums.ChipSize)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 19 ]]
+local function variantsFactory(p0) --[[ line: 17 ]]
 	-- upvalues: chipSizeModule (ref)
 	return {
 		textSpacing = {
@@ -47,21 +46,21 @@ local function variantsFactory(p0) --[[ line: 19 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ line: 67 ]]
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), composeStyleVariantModule (ref)
+return function(p1, p2, p3, p4) --[[ line: 65 ]]
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local chipAccessory = variantsContextModule.useVariants("ChipAccessory", variantsFactory, p1)
-	local var7 = if p4 then "Circular" else "Default"
-	local var8 = if if flagsModule.FoundationChipBeta then p3 else p4 then "Leading" else "Trailing"
+	local var6 = if p4 then "Circular" else "Default"
+	local var7 = if p3 then "Leading" else "Trailing"
 	
 	return composeStyleVariantModule({
 		accessory = {
-			Size = chipAccessory.accessorySize[var7][p2],
+			Size = chipAccessory.accessorySize[var6][p2],
 			padding = if p3 then {
-				left = chipAccessory.accessorySpacing[var7][p2],
-				right = chipAccessory.textSpacing[var8][p2]
+				left = chipAccessory.accessorySpacing[var6][p2],
+				right = chipAccessory.textSpacing[var7][p2]
 			} else {
-				left = chipAccessory.textSpacing[var8][p2],
-				right = chipAccessory.accessorySpacing[var7][p2]
+				left = chipAccessory.textSpacing[var7][p2],
+				right = chipAccessory.accessorySpacing[var6][p2]
 			}
 		}
 	})

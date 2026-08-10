@@ -1,15 +1,12 @@
 ﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local marketplaceService = game:GetService("MarketplaceService")
-local localizationService = game:GetService("LocalizationService")
 local parent = avatarExperienceInspectAndBuy.Parent
 local tutilsModule = require(parent.tutils)
 local reactModule = require(parent.React)
 local useEventConnection = require(parent.ReactUtils).useEventConnection
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local verifiedBadgesModule = require(parent.VerifiedBadges)
-local localizationModule = require(parent.Localization)
-local numberLocalization = localizationModule.NumberLocalization
-local useLocalization = localizationModule.Hooks.useLocalization
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useItemSelectionStore = require(avatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
 local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 local fFlagAXEnableIaBTimedOptionsBulkPurchase = require(parent.AvatarExperienceFlags).FFlagAXEnableIaBTimedOptionsBulkPurchase
@@ -25,26 +22,19 @@ local getItemThumbnailUrlModule = require(avatarExperienceInspectAndBuy.Utils.ge
 local usePurchaseButtonPropsModule = require(avatarExperienceInspectAndBuy.Components.usePurchaseButtonProps)
 local useInspectPlayerModule = require(avatarExperienceInspectAndBuy.Hooks.useInspectPlayer)
 local useTokens = require(parent.Foundation).Hooks.useTokens
-local fFlagAXFixBulkPurchaseFreeItems = require(parent.AvatarExperienceFlags).FFlagAXFixBulkPurchaseFreeItems
-local fFlagIBV2Attribution = require(parent.SharedFlags).FFlagIBV2Attribution
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXReportTryOnAnalyticsIaB = avatarExperienceFlagsModule.FFlagAXReportTryOnAnalyticsIaB
-local var16 = if avatarExperienceFlagsModule.FFlagAXFormatPDPPriceLabel then require(avatarExperienceInspectAndBuy.Utils.formatNumber) else function(p0) --[[ line: 61 ]]
-	-- upvalues: numberLocalization (ref), localizationService (ref)
-	return numberLocalization.localize(string.format("%.0f", p0 or 0), localizationService.RobloxLocaleId)
+local formatNumberModule = require(avatarExperienceInspectAndBuy.Utils.formatNumber)
+
+local function selectView(p0) --[[ line: 54 ]]
+	return p0.view
 end
 
-local function selectView(p1) --[[ line: 66 ]]
-	return p1.view
+local function selectInspectPreviewDetails(p1) --[[ line: 58 ]]
+	return p1.avatarPreviewDetails
 end
 
-local function selectInspectPreviewDetails(p2) --[[ line: 70 ]]
-	return p2.avatarPreviewDetails
-end
-
-local function _(p3, p4) --[[ line: 81 | named "shouldRenderSecondPanel" ]]
+local function _(p2, p3) --[[ line: 69 | named "shouldRenderSecondPanel" ]]
 	-- upvalues: viewTypeModule (ref)
-	return p3 == viewTypeModule.WideLandscape or ((p3 == viewTypeModule.Wide or p3 == viewTypeModule.Compact) and not p4)
+	return p2 == viewTypeModule.WideLandscape or ((p2 == viewTypeModule.Wide or p2 == viewTypeModule.Compact) and not p3)
 end
 
 local t = {
@@ -77,152 +67,152 @@ local t = {
 	}
 }
 
-return function(p5) --[[ line: 143 ]]
-	-- upvalues: useSelector (ref), selectView (ref), tutilsModule (ref), viewTypeModule (ref), reactModule (ref), selectInspectPreviewDetails (ref), useRemoteBulkPurchaseEventModule (ref), useInspectPlayerModule (ref), var16 (ref), useTokens (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), useItemSelectionStore (ref), useLocalization (ref), verifiedBadgesModule (ref), fFlagAXReportTryOnAnalyticsIaB (ref), usePurchaseButtonPropsModule (ref), fFlagAXFixBulkPurchaseFreeItems (ref), useEventConnection (ref), marketplaceService (ref), itemDetailsLayoutModule (ref), fFlagIBV2Attribution (ref), avatarItemsViewLayoutModule (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), t (ref)
-	local var20 = useSelector(selectView, tutilsModule.deepEqual)
-	local var21 = var20 == viewTypeModule.WideLandscape
-	local var22, var23 = reactModule.useState(nil)
-	local var24, var25 = reactModule.useState({ isTryOnEnabled = false, tryOnItem = {} })
+return function(p4) --[[ line: 131 ]]
+	-- upvalues: useSelector (ref), selectView (ref), tutilsModule (ref), viewTypeModule (ref), reactModule (ref), selectInspectPreviewDetails (ref), useRemoteBulkPurchaseEventModule (ref), useInspectPlayerModule (ref), formatNumberModule (ref), useTokens (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (ref), useItemSelectionStore (ref), useLocalization (ref), verifiedBadgesModule (ref), usePurchaseButtonPropsModule (ref), useEventConnection (ref), marketplaceService (ref), itemDetailsLayoutModule (ref), avatarItemsViewLayoutModule (ref), viewportLayoutModule (ref), getItemThumbnailUrlModule (ref), t (ref)
+	local var17 = useSelector(selectView, tutilsModule.deepEqual)
+	local var18 = var17 == viewTypeModule.WideLandscape
+	local var19, var20 = reactModule.useState(nil)
+	local var21, var22 = reactModule.useState({ isTryOnEnabled = false, tryOnItem = {} })
 	local items = useSelector(selectInspectPreviewDetails, tutilsModule.deepEqual).items
-	local var26, var27, var28 = useRemoteBulkPurchaseEventModule(items, p5.analytics)
-	local var29 = useInspectPlayerModule()
-	local var30 = var16(var28)
-	local var31 = useTokens()
-	local var32 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then useItemSelectionStore() else nil
-	local var33 = reactModule.useRef(nil)
-	local var34 = reactModule.useRef(0)
-	local var35 = useLocalization({
+	local var23, var24, var25 = useRemoteBulkPurchaseEventModule(items, p4.analytics)
+	local var26 = useInspectPlayerModule()
+	local var27 = formatNumberModule(var25)
+	local var28 = useTokens()
+	local var29 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then useItemSelectionStore() else nil
+	local var30 = reactModule.useRef(nil)
+	local var31 = reactModule.useRef(0)
+	local var32 = useLocalization({
 		bulkPurchaseButtonText = "Feature.Catalog.Label.BuyItems",
 		total = "Feature.Catalog.Label.TotalUnformatted",
-		headerText = if var29.hasVerifiedBadge then {
+		headerText = if var26.hasVerifiedBadge then {
 			"InGame.InspectMenu.Label.VerifiedAvatar",
-			PLAYER_NAME = var29.playerName,
+			PLAYER_NAME = var26.playerName,
 			VERIFIED_BADGE = verifiedBadgesModule.emoji.verified
 		} else {
 			"InGame.InspectMenu.Label.Avatar",
-			PLAYER_NAME = var29.playerName
+			PLAYER_NAME = var26.playerName
 		},
 		totalItems = if items then {
 			"Feature.Catalog.Feature.Catalog.Label.TotalItemsParenthesis",
 			itemCount = #items
 		} else nil
 	})
-	local var36 = reactModule.useCallback(function(p6) --[[ line: 189 ]]
-		-- upvalues: var25 (ref), fFlagAXReportTryOnAnalyticsIaB (copy), p5 (ref)
-		var25(function(p7) --[[ line: 190 ]]
-			-- upvalues: p6 (ref), fFlagAXReportTryOnAnalyticsIaB (copy), p5 (copy)
-			local var39 = p6
-			local var40 = not p7.isTryOnEnabled
+	local var33 = reactModule.useCallback(function(p5) --[[ line: 177 ]]
+		-- upvalues: var22 (ref), p4 (ref)
+		var22(function(p6) --[[ line: 178 ]]
+			-- upvalues: p5 (ref), p4 (copy)
+			local var36 = p5
+			local var37 = not p6.isTryOnEnabled
 			
-			if fFlagAXReportTryOnAnalyticsIaB and var40 then
-				p5.analytics.reportTryOnButtonClicked(p6.itemType, p6.itemId)
+			if var37 then
+				p4.analytics.reportTryOnButtonClicked(p5.itemType, p5.itemId)
 			end
-			if not var40 then
-				var39 = {}
+			if not var37 then
+				var36 = {}
 			end
-			return { isTryOnEnabled = var40, tryOnItem = var39 }
+			return { isTryOnEnabled = var37, tryOnItem = var36 }
 		end)
-	end, if fFlagAXReportTryOnAnalyticsIaB then { p5.analytics } else {})
-	local var37 = usePurchaseButtonPropsModule({
-		purchaseButtonText = var35.bulkPurchaseButtonText,
-		onBulkPurchase = var26,
-		isDisabled = if fFlagAXFixBulkPurchaseFreeItems then not var27 elseif items ~= nil then if var28 ~= 0 then not var27 else true else true,
-		selectedItem = var22,
-		localizedStrings = var35,
-		formattedTotalPrice = var30,
-		onPromptPurchase = p5.onPromptPurchase
+	end, { p4.analytics })
+	local var34 = usePurchaseButtonPropsModule({
+		purchaseButtonText = var32.bulkPurchaseButtonText,
+		onBulkPurchase = var23,
+		isDisabled = not var24,
+		selectedItem = var19,
+		localizedStrings = var32,
+		formattedTotalPrice = var27,
+		onPromptPurchase = p4.onPromptPurchase
 	})
-	useEventConnection(marketplaceService.PromptBulkPurchaseFinished, p5.onBulkPurchaseFinished)
-	reactModule.useEffect(function() --[[ line: 231 ]]
-		-- upvalues: var33 (ref), var34 (ref)
-		if var33.current then
-			var33.current.CanvasPosition = Vector2.new(0, var34.current)
+	useEventConnection(marketplaceService.PromptBulkPurchaseFinished, p4.onBulkPurchaseFinished)
+	reactModule.useEffect(function() --[[ line: 217 ]]
+		-- upvalues: var30 (ref), var31 (ref)
+		if var30.current then
+			var30.current.CanvasPosition = Vector2.new(0, var31.current)
 		end
-	end, { var22 })
-	reactModule.useEffect(function() --[[ line: 238 ]]
-		-- upvalues: var22 (ref), p5 (ref)
-		if var22 then
-			p5.onItemDetailsOpened(var22)
+	end, { var19 })
+	reactModule.useEffect(function() --[[ line: 224 ]]
+		-- upvalues: var19 (ref), p4 (ref)
+		if var19 then
+			p4.onItemDetailsOpened(var19)
 		end
-	end, { var22, p5.onItemDetailsOpened })
-	local var38 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function() --[[ line: 245 ]]
-		-- upvalues: var32 (ref), p5 (ref)
-		var32.clearAll()
-		p5.onInspectMenuClosed()
-	end, { var32, p5.onInspectMenuClosed }) else nil
+	end, { var19, p4.onItemDetailsOpened })
+	local var35 = if fFlagAXEnableIaBTimedOptionsBulkPurchase then reactModule.useCallback(function() --[[ line: 231 ]]
+		-- upvalues: var29 (ref), p4 (ref)
+		var29.clearAll()
+		p4.onInspectMenuClosed()
+	end, { var29, p4.onInspectMenuClosed }) else nil
 	
 	return {
-		view = var20,
-		renderFirstPanel = function() --[[ line: 252 ]]
-			-- upvalues: var22 (ref), reactModule (copy), itemDetailsLayoutModule (copy), var20 (ref), var23 (ref), var25 (ref), p5 (ref), fFlagIBV2Attribution (copy), viewTypeModule (copy), var37 (ref), var36 (ref), var24 (ref), var16 (copy), avatarItemsViewLayoutModule (copy), items (ref), var35 (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (copy), var38 (ref), var33 (ref), var34 (ref), var30 (ref)
-			return if var22 then reactModule.createElement(itemDetailsLayoutModule, {
+		view = var17,
+		renderFirstPanel = function() --[[ line: 238 ]]
+			-- upvalues: var19 (ref), reactModule (copy), itemDetailsLayoutModule (copy), var17 (ref), var20 (ref), var22 (ref), p4 (ref), viewTypeModule (copy), var34 (ref), var33 (ref), var21 (ref), formatNumberModule (copy), avatarItemsViewLayoutModule (copy), items (ref), var32 (ref), fFlagAXEnableIaBTimedOptionsBulkPurchase (copy), var35 (ref), var30 (ref), var31 (ref), var27 (ref)
+			return if var19 then reactModule.createElement(itemDetailsLayoutModule, {
 				itemDetailsViewProps = {
-					view = var20,
-					item = var22,
-					onItemDetailsClosed = function() --[[ line: 258 ]]
-						-- upvalues: var23 (copy), var25 (copy)
-						var23(nil)
-						var25({ isTryOnEnabled = false, tryOnItem = {} })
+					view = var17,
+					item = var19,
+					onItemDetailsClosed = function() --[[ line: 244 ]]
+						-- upvalues: var20 (copy), var22 (copy)
+						var20(nil)
+						var22({ isTryOnEnabled = false, tryOnItem = {} })
 					end,
-					onToggleFavorite = p5.onToggleFavorite,
-					openAttributionOverlay = if fFlagIBV2Attribution then p5.openAttributionOverlay else nil,
-					purchaseButtonProps = if var20 == viewTypeModule.Wide then var37.purchaseButtonProps else nil,
-					onToggleTryOn = var36,
-					renderTryOnViewport = p5.renderTryOnViewport,
-					tryOnState = var24,
-					localPlayerModel = p5.localPlayerModel,
-					formatNumber = var16
+					onToggleFavorite = p4.onToggleFavorite,
+					openAttributionOverlay = p4.openAttributionOverlay,
+					purchaseButtonProps = if var17 == viewTypeModule.Wide then var34.purchaseButtonProps else nil,
+					onToggleTryOn = var33,
+					renderTryOnViewport = p4.renderTryOnViewport,
+					tryOnState = var21,
+					localPlayerModel = p4.localPlayerModel,
+					formatNumber = formatNumberModule
 				},
-				buyActionBarProps = var37,
-				view = var20
+				buyActionBarProps = var34,
+				view = var17
 			}) else reactModule.createElement(avatarItemsViewLayoutModule, {
-				view = var20,
+				view = var17,
 				items = items,
-				headerText = var35.headerText,
-				onInspectMenuClosed = if fFlagAXEnableIaBTimedOptionsBulkPurchase and var38 then var38 else p5.onInspectMenuClosed,
-				onItemCardActivated = function(p8) --[[ line: 286 ]]
-					-- upvalues: var33 (copy), var34 (copy), var23 (copy)
-					if var33.current then
-						var34.current = var33.current.CanvasPosition.Y
+				headerText = var32.headerText,
+				onInspectMenuClosed = if fFlagAXEnableIaBTimedOptionsBulkPurchase and var35 then var35 else p4.onInspectMenuClosed,
+				onItemCardActivated = function(p7) --[[ line: 272 ]]
+					-- upvalues: var30 (copy), var31 (copy), var20 (copy)
+					if var30.current then
+						var31.current = var30.current.CanvasPosition.Y
 					end
-					var23(p8)
+					var20(p7)
 				end,
 				subheaderText = {
-					leftSlotLabel = var35.totalItems or "",
-					rightSlotPrice = var30
+					leftSlotLabel = var32.totalItems or "",
+					rightSlotPrice = var27
 				},
-				buyActionBarProps = var37,
-				ref = var33
+				buyActionBarProps = var34,
+				ref = var30
 			})
 		end,
-		renderSecondPanel = if var20 == viewTypeModule.WideLandscape or ((var20 == viewTypeModule.Wide or var20 == viewTypeModule.Compact) and not var22) then function() --[[ line: 302 ]]
-			-- upvalues: reactModule (copy), viewportLayoutModule (copy), var20 (ref), var22 (ref), getItemThumbnailUrlModule (copy), var29 (ref), var23 (ref), p5 (ref), var21 (ref), var37 (ref), var24 (ref), var31 (ref)
+		renderSecondPanel = if var17 == viewTypeModule.WideLandscape or ((var17 == viewTypeModule.Wide or var17 == viewTypeModule.Compact) and not var19) then function() --[[ line: 288 ]]
+			-- upvalues: reactModule (copy), viewportLayoutModule (copy), var17 (ref), var19 (ref), getItemThumbnailUrlModule (copy), var26 (ref), var20 (ref), p4 (ref), var18 (ref), var34 (ref), var21 (ref), var28 (ref)
 			return reactModule.createElement(viewportLayoutModule, {
-				view = var20,
-				thumbnailUrl = if var22 then getItemThumbnailUrlModule(var22) or "" else "rbxthumb://type=Avatar&id=" .. tostring(var29.playerId) .. "&w=420&h=420",
+				view = var17,
+				thumbnailUrl = if var19 then getItemThumbnailUrlModule(var19) or "" else "rbxthumb://type=Avatar&id=" .. tostring(var26.playerId) .. "&w=420&h=420",
 				backButtonProps = {
-					onBackButtonClick = if var22 then function() --[[ line: 310 ]]
-						-- upvalues: var23 (copy)
-						var23(nil)
-					end else p5.onInspectMenuClosed
+					onBackButtonClick = if var19 then function() --[[ line: 296 ]]
+						-- upvalues: var20 (copy)
+						var20(nil)
+					end else p4.onInspectMenuClosed
 				},
 				viewportProps = {
 					AspectRatio = 1,
 					ScaleType = Enum.ScaleType.Crop,
-					Size = if var21 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 1, 0)
+					Size = if var18 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 1, 0)
 				},
-				buyActionBarProps = var37,
+				buyActionBarProps = var34,
 				Size = UDim2.new(1, 0, 1, 0),
-				renderTryOnViewport = p5.renderTryOnViewport,
-				tryOnState = var24,
-				thumbnailPadding = if var22 then {
-					left = UDim.new(0, var31.Padding.XXLarge),
-					right = UDim.new(0, var31.Padding.XXLarge),
-					top = UDim.new(0, var31.Padding.XXLarge),
-					bottom = UDim.new(0, var31.Padding.XXLarge)
+				renderTryOnViewport = p4.renderTryOnViewport,
+				tryOnState = var21,
+				thumbnailPadding = if var19 then {
+					left = UDim.new(0, var28.Padding.XXLarge),
+					right = UDim.new(0, var28.Padding.XXLarge),
+					top = UDim.new(0, var28.Padding.XXLarge),
+					bottom = UDim.new(0, var28.Padding.XXLarge)
 				} else nil
 			})
 		end else nil,
-		panelConfig = t[var20] or t[viewTypeModule.Wide]
+		panelConfig = t[var17] or t[viewTypeModule.Wide]
 	}
 end

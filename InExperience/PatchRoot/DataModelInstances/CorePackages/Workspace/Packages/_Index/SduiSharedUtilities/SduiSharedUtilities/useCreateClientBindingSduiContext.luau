@@ -8,13 +8,10 @@ local useCollectionLayoutConfig = require(parent.CollectionViews).useCollectionL
 local getSduiServiceDependenciesStore = sduiCoreSystemModule.getSduiServiceDependenciesStore
 local collectionItemSize = require(parent.CollectionViews).CollectionViewTypes.CollectionItemSize
 local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppCompositionSduiEnabled = sharedFlagsModule.FFlagLuaAppCompositionSduiEnabled
 local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlways
-local fFlagSduiChartsSupport = sharedFlagsModule.FFlagSduiChartsSupport
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
-local fFlagLuaAppSduiRouteName = sharedFlagsModule.FFlagLuaAppSduiRouteName
-local fFlagEnableSduiV2HomeInterleave = sharedFlagsModule.FFlagEnableSduiV2HomeInterleave
+local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
 local t = {
 	numColumns = 3,
 	fractionalItemAmount = 0,
@@ -23,60 +20,46 @@ local t = {
 	verticalPadding = 16
 }
 
-return function(p0, p1, p2, p3, p4, p5, p6) --[[ line: 48 | named "useCreateClientBindingSduiContext" ]]
-	-- upvalues: fFlagLuaAppSduiRouteName (ref), fFlagLuaAppCompositionAlways (ref), fFlagLuaAppCompositionSduiEnabled (ref), fFlagEnableSduiV2HomeInterleave (ref), reactModule (ref), signalsModule (ref), t (ref), useCollectionLayoutConfig (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagSduiChartsSupport (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref)
-	local var5 = if fFlagLuaAppSduiRouteName then p6 or p0 else nil
+return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 48 | named "useCreateClientBindingSduiContext" ]]
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+	p6 = p6 or p0
 	local _ = nil
 	local var6 = nil
 	
 	if not fFlagLuaAppCompositionAlways then
-		if fFlagLuaAppCompositionSduiEnabled and not fFlagEnableSduiV2HomeInterleave then
-			var6 = reactModule.useCallback(function(_) --[[ line: 65 ]]
-				-- upvalues: signalsModule (copy), t (copy)
-				return signalsModule.createComputed(function(_) --[[ line: 66 ]]
-					-- upvalues: t (copy)
+		local var7 = useCollectionLayoutConfig(p1, p2)
+		var6 = reactModule.useCallback(function(p8) --[[ line: 66 ]]
+			-- upvalues: signalsModule (copy), p5 (ref), t (copy), var7 (write), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (ref)
+			return signalsModule.createComputed(function(p9) --[[ line: 67 ]]
+				-- upvalues: p5 (copy), t (copy), var7 (copy), p8 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (copy)
+				if p5 ~= false then
 					return t
-				end)
-			end, {})
-		else
-			local var7 = useCollectionLayoutConfig(p1, p2)
-			var6 = reactModule.useCallback(function(p7) --[[ line: 73 ]]
-				-- upvalues: signalsModule (copy), fFlagEnableSduiV2HomeInterleave (copy), fFlagLuaAppCompositionSduiEnabled (copy), p5 (ref), t (copy), var7 (write), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (ref)
-				return signalsModule.createComputed(function(p8) --[[ line: 74 ]]
-					-- upvalues: fFlagEnableSduiV2HomeInterleave (copy), fFlagLuaAppCompositionSduiEnabled (copy), p5 (copy), t (copy), var7 (copy), p7 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (copy)
-					if fFlagEnableSduiV2HomeInterleave and fFlagLuaAppCompositionSduiEnabled and p5 ~= false then
-						return t
-					elseif var7 then
-						return (var7[p7] or var7[collectionItemSize.Small])(p8)
-					end
-					sduiLogger.reportError(sduiErrors.SduiErrorType.NoPageLayoutConfig, {
-						message = `No page layout config available for {p0}, returning default config`
-					}, p0)
-					
-					return t
-				end)
-			end, {
-				var7,
-				p0,
-				if fFlagEnableSduiV2HomeInterleave then p5 else nil
-			})
-		end
+				elseif var7 then
+					return (var7[p8] or var7[collectionItemSize.Small])(p9)
+				end
+				sduiLogger.reportError(sduiErrors.SduiErrorType.NoPageLayoutConfig, {
+					message = `No page layout config available for {p0}, returning default config`
+				}, p0)
+				
+				return t
+			end)
+		end, { var7, p0, p5 })
 	end
-	return reactModule.useMemo(function() --[[ line: 105 ]]
-		-- upvalues: getSduiServiceDependenciesStore (copy), p0 (ref), fFlagLuaAppSduiRouteName (copy), var5 (ref), var6 (write), fFlagEnableSduiV2HomeInterleave (copy), p5 (ref), fFlagLuaAppCompositionSduiEnabled (copy), fFlagSduiChartsSupport (copy), p3 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), p4 (ref)
+	return reactModule.useMemo(function() --[[ line: 94 ]]
+		-- upvalues: getSduiServiceDependenciesStore (copy), p0 (ref), p6 (ref), var6 (write), p5 (ref), p3 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), p4 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), p7 (ref)
 		return {
 			dependencies = getSduiServiceDependenciesStore().getDependencies(p0),
 			appPage = p0,
-			routeName = if fFlagLuaAppSduiRouteName then var5 else nil,
+			routeName = p6,
 			getPageLayoutConfig = var6,
-			appCompositionEnabled = if fFlagEnableSduiV2HomeInterleave and p5 ~= nil then p5 elseif fFlagLuaAppCompositionSduiEnabled then true else nil,
-			dataUpdatedTimestamp = if fFlagSduiChartsSupport or fFlagEnableSduiV2HomeInterleave then p3 else nil,
-			configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p4 else nil
+			appCompositionEnabled = p5 ~= nil or p5,
+			dataUpdatedTimestamp = p3,
+			configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p4 else nil,
+			scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p7 else nil
 		}
 	end, {
-		p0, if fFlagLuaAppSduiRouteName then var5 else nil, var6,
-		if fFlagSduiChartsSupport or fFlagEnableSduiV2HomeInterleave then p3 else nil,
+		p0, p6, var6, p3,
 		if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p4 else nil,
-		if fFlagEnableSduiV2HomeInterleave then p5 else nil
+		p5, if fFlagLuaAppSduiStickyHeaderScrollAway then p7 else nil
 	})
 end

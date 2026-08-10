@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagEnableInspectAndBuyV2RootFlag and game:DefineFastFlag("AXUseNewChevronIcon", false)

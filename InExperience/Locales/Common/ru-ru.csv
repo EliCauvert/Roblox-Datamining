@@ -38,8 +38,11 @@ Amp.Upsell.Message.EmailSent,Мы отправили эл. письмо на а�
 Amp.Upsell.Message.EmailSentPluralParent,Мы отправили эл. письмо твоим родителям на связанный аккаунт
 Amp.Upsell.Title.AskYourParent,Спроси родителей
 Amp.Upsell.Title.RequestSent,Запрос отправлен
+Application.Logout.Action.Logout,Выход
+Application.Logout.Message.Confirmation,Точно хочешь выйти?
 Authentication.AccountSwitch.Action.SwitchAccount,Переключить аккаунт
 Authentication.CrossDevice.Heading.QuickLogin,Быстрый вход
+Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Выполни выход из Roblox для смены аккаунта для {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Использовать другой аккаунт Roblox
 Authentication.Login.Error.PasskeyOnlyAccount,Твой аккаунт имеет только ключ доступа для входа в систему. Попробуй войти с паролем или восстановить свой аккаунт.
@@ -91,6 +94,9 @@ CommonUI.Controls.Action.Apply,Применить
 CommonUI.Controls.Action.Back,Назад
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Подтверждаю
+CommonUI.Controls.Action.Continue,Продолжить
+CommonUI.Controls.Action.Done,Готово
+CommonUI.Controls.Action.Next,Далее
 CommonUI.Controls.Action.OK,OK
 CommonUI.Controls.Action.Refresh,Обновить
 CommonUI.Controls.Action.Search,Поиск
@@ -140,6 +146,7 @@ CommonUI.Controls.Label.WednesdayAbbreviated,Ср
 CommonUI.Controls.Label.Year,Год
 CommonUI.Controls.NoResultsFound,Ничего не найдено
 CommonUI.Features.Action.Close,
+CommonUI.Features.Action.Send,
 CommonUI.Features.Label.About,Сведения
 CommonUI.Features.Label.AcceptConnection,Принять контакт
 CommonUI.Features.Label.Add,Добавить
@@ -302,7 +309,7 @@ CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusSoldOut,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusSuccess,Куплено
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.Notice,"Некоторые предметы не удалось купить, попробуй позже."
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.CurrentBalance,Текущий баланс
-CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA,Готово
+CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.RobuxSpent,Потрачено Robux
 CoreScripts.BulkPurchasePrompt.RequestPrompt.Heading,Краткое содержание
 CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemListPurchaseCount,
@@ -353,7 +360,7 @@ CoreScripts.FTUX.Label.JoinVoiceDescription,Слушать и общаться �
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,
 CoreScripts.Feedback.EntryPoint.ButtonText,Отправить отзыв
 CoreScripts.Feedback.EntryPoint.OptionText,Отправить отзыв о переводе
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Выход
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Помощь
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Оставь комментарий ниже (необязательно)
@@ -534,7 +541,6 @@ CoreScripts.InGameMenu.Label.ViewButton,Кнопка просмотра
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
 CoreScripts.InGameMenu.LeaveGameQuestion,Выйти?
-CoreScripts.InGameMenu.NextUpExitMenu.Title,Рекомендуемые плейсы
 CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Управление...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
@@ -747,7 +753,7 @@ CoreScripts.TopBar.SelfViewLabel,Самопросмотр
 CoreScripts.TopBar.ShowChat,Показать чат
 CoreScripts.TopBar.Title.ExperienceControls,Управление плейсом
 CoreScripts.TopBar.ToggleMic,Отключить/Включить свой звук
-CoreScripts.VRFTUX.Action.Next,Далее
+CoreScripts.VRFTUX.Action.Next,
 CoreScripts.VRFTUX.Action.Skip,Пропустить
 CoreScripts.VRFTUX.Description.Movement.Body1,"Чтобы перемещаться по плейсу, используй большой палец на <b>левом</b> контроллере."
 CoreScripts.VRFTUX.Description.Movement.Body2,Нажми на кнопку <b>A</b> для прыжка.
@@ -796,6 +802,7 @@ Feature.AccountSettings.Example.Twitch,Например: www.twitch.tv/roblox/pr
 Feature.AccountSettings.Example.Twitter,Например: @Roblox
 Feature.AccountSettings.Example.YouTube,Например: www.youtube.com/user/roblox
 Feature.AccountSettings.Heading.SocialNetworks,Социальные сети
+Feature.AccountSettings.Heading.Tab.Notifications,Уведомления
 Feature.AccountSettings.Heading.Tab.Privacy,
 Feature.AccountSettings.Heading.Tab.Security,Безопасность
 Feature.AccountSettings.Label.Discord,Discord
@@ -1211,39 +1218,7 @@ Feature.BlockingModal.Action.Block,
 Feature.BlockingModal.Action.BlockAndReport,Заблокировать и пожаловаться
 Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Заблокировать: {DisplayName}?
-Feature.Call.Description.ExperienceError,Голосовой чат не поддерживается в этом плейсе.
-Feature.Call.Description.Friends,"Друзья, устройства или настройки устройств которых не поддерживают оптимальное качество звонка."
-Feature.Call.Description.NoFriendsFound,Друзья не найдены
-Feature.Call.Description.SuggestedFriends,"Друзья, устройства или настройки устройств которых поддерживают оптимальное качество звонка."
-Feature.Call.Error.Description.AlreadyInCall,Вы уже участвуете в звонке
-Feature.Call.Error.Description.DeviceNotSupported,Звонки в настоящее время не поддерживаются на этом устройстве. Повтори попытку позже.
-Feature.Call.Error.Description.FriendBusy,{calleeCombinedName} в настоящее время занят и не может принять твой звонок. Повтори попытку позже.
 Feature.Call.Error.Description.Generic,
-Feature.Call.Error.Label.OhNo,Ой!
-Feature.Call.Error.Title.CouldntMakeCall,Не удалось позвонить
-Feature.Call.Error.Title.ExperienceError,
-Feature.Call.Error.Title.FriendBusy,Друг занят
-Feature.Call.Label.Block,Заблокировать: {combinedName}
-Feature.Call.Label.CallEnded,Вызов завершён
-Feature.Call.Label.Calling,Вызов...
-Feature.Call.Label.Friends,
-Feature.Call.Label.Incoming,Входящий
-Feature.Call.Label.Missed,Пропущенный
-Feature.Call.Label.Outgoing,Исходящий
-Feature.Call.Label.RecentCalls,Недавние звонки
-Feature.Call.Label.Retry,
-Feature.Call.Label.RobloxCall,Вызов Roblox
-Feature.Call.Label.StartNewCall,Начать новый звонок
-Feature.Call.Label.Suggested,Рекомендуемый
-Feature.Call.Label.Teleporting,
-Feature.Call.Label.Unfriend,Удалить из друзей: {combinedName}
-Feature.Call.Label.Yesterday,Вчера
-Feature.Call.Modal.EnableChatVoiceBody,"Включи Голосовой чат, перейдя в Настройки > Конфиденциальность, чтобы разговаривать с другими пользователями в этом плейсе."
-Feature.Call.Modal.EnableChatVoiceTitle,
-Feature.Call.Prompt.AddFriends,"Добавь друзей в Roblox, чтобы позвонить"
-Feature.Call.Prompt.FirstCall,Попробуй сделать свой первый звонок
-Feature.Call.Prompt.SearchFriends,Поиск друзей
-Feature.Call.Prompt.StartCall,Начать звонок
 Feature.Captures.Action.Allow,Разрешить
 Feature.Captures.Action.AllowPhotoAccessAccepted,
 Feature.Captures.Action.AllowPhotoAccessDeclined,
@@ -1522,7 +1497,7 @@ Feature.Catalog.LabelFree,Бесплатно
 Feature.Catalog.LabelNoResellers,Без посредников
 Feature.Catalog.LabelOffSale,Нет продаётся
 Feature.Catalog.LabelPants,
-Feature.Catalog.LabelPastDay,
+Feature.Catalog.LabelPastDay,Вчера
 Feature.Catalog.LabelPastWeek,Прошлая неделя
 Feature.Catalog.LabelShirts,
 Feature.Catalog.LabelTShirts,Футболки
@@ -1569,7 +1544,7 @@ Feature.Catalog.Toast.LinkCopied,Скопировано в буфер обмен
 Feature.Chat.Action.Add,
 Feature.Chat.Action.Cancel,
 Feature.Chat.Action.Confirm,
-Feature.Chat.Action.Continue,Продолжить
+Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,Скопировать
 Feature.Chat.Action.Create,Создать
 Feature.Chat.Action.Delete,
@@ -1705,19 +1680,15 @@ Feature.Chat.Text.NoConnections,"Ни одного контакта не доб�
 Feature.Chat.Toast.Error.InvalidUserSelected,Один или несколько человек из этого списка не могут быть добавлены
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Пусть друзья находят тебя!
-Feature.Contacts.Action.FindFriends,Найти друзей
 Feature.Contacts.Action.Invite,Пригласить
 Feature.Contacts.Action.Search,
-Feature.Contacts.Action.SyncContacts,Синхронизировать контакты
 Feature.Contacts.Description.ContactsList,"С кем бы тебе хотелось исследовать Roblox? Отправь ссылку, чтобы стать друзьями в Roblox!"
 Feature.Contacts.Description.ContactsMixedList,С кем бы тебе хотелось познакомиться в Roblox? Добавь друзей на Roblox или отправь контактам ссылку на запрос дружбы.
 Feature.Contacts.Description.ContactsProfileView,"Твой контакт {contactName} зарегистрирован в Roblox. После того как вы станете друзьями, ты сможешь увидеть его полный профиль."
-Feature.Contacts.Description.ExploreWithFriends,Присоединяйся к следующему плейсу со знакомыми
-Feature.Contacts.FindFriendsBanner.Button,
+Feature.Contacts.FindFriendsBanner.Button,Найти друзей
 Feature.Contacts.FindFriendsBanner.Description,"Посмотри, кто из твоих друзей зарегистрированы в Roblox, добавив свой номер телефона."
 Feature.Contacts.FindFriendsBanner.DescriptionPV,"Контакты, которые зарегистрированы в Roblox, появятся здесь, когда они будут доступны."
 Feature.Contacts.FindFriendsBanner.DescriptionV2,"Помоги нам связать тебя с друзьями, добавив номер телефона."
-Feature.Contacts.Heading.ExploreWithFriends,Исследуй с друзьями
 Feature.Contacts.Heading.HelpFriendsFindYou,Пусть друзья тебя находят
 Feature.Contacts.Heading.LetFriendsFindYou,Пусть тебя находят друзья
 Feature.Contacts.Heading.SettingSaved,Настройка сохранена.
@@ -1884,10 +1855,10 @@ Feature.Friends.Label.NewFriendRequestsMax,{maxRequestsCount}+
 Feature.Friends.Label.PYMK,Возможно вы знакомы
 Feature.Friends.Label.Pending,
 Feature.Friends.Label.Request,Запрос
-Feature.Friends.Label.SearchFriends,
+Feature.Friends.Label.SearchFriends,Поиск друзей
 Feature.Friends.Label.SentFromWithContext,Отправлено из: {gameName}
 Feature.Friends.Label.SingularMutualFriend,общий друг
-Feature.Friends.Label.Suggested,
+Feature.Friends.Label.Suggested,Рекомендуемый
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"Хочешь, чтобы мы рекомендовали тебя другим пользователям Roblox, у которых есть твой номер телефона?"
 Feature.Friends.Message.EmptyState,"Когда твои контакты станут доступны, ты сможешь найти их в разделе «Добавить друзей»."
@@ -1945,7 +1916,6 @@ Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Ответы публи�
 Feature.GameDetails.Message.HelpImproveExperience,Помоги улучшить твоё взаимодействие с Roblox
 Feature.GameDetails.Message.HidingExperienceQuestion,Почему ты скрываешь этот плейс?
 Feature.GameDetails.Message.PurchaseGameV2,Разблокировать доступ к игре {gameName} за {X} Robux?
-Feature.GameDetails.Message.SuggestLessExperiences,Мы предложим меньше таких плейсов
 Feature.GameDetails.Message.SuggestLessOften,Мы будем предлагать это реже
 Feature.GameDetails.RatingPercentOnly,Рейтинг {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -2429,7 +2399,6 @@ Feature.SettingsHub.Label.Unmute,
 Feature.SettingsHub.Label.WhichPlayer,Кто из пользователей?
 Feature.SettingsHub.LanguageSelection.SettingLabel,Язык плейса
 Feature.SettingsHub.LanguageSelection.Unavailable,
-Feature.SettingsHub.Message.BlockConfirmation,Ты и {DISPLAY_NAME} (@{RBX_NAME}) больше не сможете общаться друг с другом.
 Feature.SettingsHub.Message.InviteToGameTitle,Присоединяйтесь ко мне в: {PLACENAME}
 Feature.SettingsHub.MethodOfAbuse.AvatarSubtitle,Аватар этого человека одет в неприличную одежду
 Feature.SettingsHub.MethodOfAbuse.Other.Subtitle,
@@ -2864,11 +2833,7 @@ InGame.Chat.Response.EmoteNotAvailable,Невозможно использова
 InGame.Chat.Response.EmotesNotSupported,Здесь нельзя использовать эмоции.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Невозможно использовать эмоции прямо сейчас.
 InGame.Chat.Response.EmotesWrongAvatarType,Только аватары R15 могут использовать эмоции.
-InGame.CommonUI.Badge.BadgeText,БЕТА
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"Если ты видишь, что кто-то нарушает наши Правила сообщества, пожалуйста, сообщи нам об этом. При использовании голосового чата Roblox записывает звук в любом месте на платформе в целях модерации, безопасности и улучшения качества наших услуг и инструментов. Продолжая использовать функцию голосового чата, ты соглашаешься на сбор, использование и хранение Roblox голосовых записей в перечисленных целях. Ты можешь отказаться от использования голосовых функицй в любой момент."
-InGame.CommonUI.Badge.Popup.HeaderList,Ты соглашаешься использовать одну или несколько бета-функций:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,Продолжить играть
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -2930,6 +2895,7 @@ InGame.ConnectionError.DisconnectSendPacketError,Проблемы с отпра�
 InGame.ConnectionError.DisconnectTimeout,
 InGame.ConnectionError.DisconnectWrongVersion,
 InGame.ConnectionError.Heading.VRDisconnected,Наушники отключены
+InGame.ConnectionError.Joining,Подключение к серверу
 InGame.ConnectionError.Message.ChannelName,Канал: {CHANNEL_NAME}
 InGame.ConnectionError.Message.ErrorCode,Код ошибки: {ERROR_CODE}
 InGame.ConnectionError.Message.RestartApp,"Чтобы продолжить играть, перезапусти приложение."
@@ -2948,6 +2914,7 @@ InGame.ConnectionError.PlacelaunchRestricted,"Статус этого плейс
 InGame.ConnectionError.PlacelaunchUnauthorized,Нет прав для доступа к этому плейсу.
 InGame.ConnectionError.PlacelaunchUserLeft,"Пользователь, к которому ты пытаешься присоединиться, покинул плейс."
 InGame.ConnectionError.PlacelaunchUserPrivacyUnauthorized,Твои настройки конфиденциальности не позволяют соединиться с этим сервером.
+InGame.ConnectionError.Queue,Место в очереди: {POSITION}
 InGame.ConnectionError.ReconnectFailed,Повторное соединение не удалось. Повтори попытку.
 InGame.ConnectionError.TeleportErrors,Телепорт не удался из-за непредвиденной ошибки. Повтори попытку.
 InGame.ConnectionError.TeleportFailure,
@@ -3050,7 +3017,6 @@ InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,В студии
 InGame.Presence.Label.Offline,
 InGame.Presence.Label.Online,
-InGame.Presence.Label.RobloxStudio,
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <пользователь> : игнорировать пользователя.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_TeamCommand,/team <message> или /t <message> : отправить групповое сообщение команде.
@@ -3065,7 +3031,7 @@ InGame.UnknownNamespace.Sent,
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,Ещё {notificationCount}
 Notifications.NotificationStream.Label.AllCaughtUp,Всё прочитано!
-Notifications.NotificationStream.Label.Notifications,Уведомления
+Notifications.NotificationStream.Label.Notifications,
 Notifications.ToastNotifications.Label.LeaveExperienceConfirmation,Действительно выйти и присоединиться к другому плейсу?
 Notifications.ToastNotifications.Title.LeavingExperience,Выход из плейса
 PlayerFeedbacks.VoteForm.Message.Action.Report,

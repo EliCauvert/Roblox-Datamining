@@ -1,10 +1,13 @@
 ﻿local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local fFlagAXExportTimedOptionsConstant = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags).FFlagAXExportTimedOptionsConstant
 
 return {
 	AVATAR_EVENT_COUNTER_NAME = {
 		AXEquipAsset = "AXEquipAsset",
 		AXUnequipAsset = "AXUnequipAsset",
+		AXEquipBackground = "AXEquipBackground",
+		AXUnequipBackground = "AXUnequipBackground",
+		AXTryOnBackground = "AXTryOnBackground",
+		AXRemoveTryOnBackground = "AXRemoveTryOnBackground",
 		AXCreateCostume = "AXCreateCostume",
 		AXCreateMakeupLook = "AXCreateMakeupLook",
 		AXColorPickerChanged = "AXColorPickerChanged",
@@ -51,9 +54,9 @@ return {
 		AvatarItems = "avatarItemImpressions",
 		AvatarItemsCatalog = "avatarItemImpressionsCatalog"
 	},
-	TIMED_OPTION_BY_DAYS = if fFlagAXExportTimedOptionsConstant then if fFlagAXExportTimedOptionsConstant then {
+	TIMED_OPTION_BY_DAYS = {
 		[3] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_3,
 		[7] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_7,
 		[14] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
-	} else nil else nil
+	}
 }

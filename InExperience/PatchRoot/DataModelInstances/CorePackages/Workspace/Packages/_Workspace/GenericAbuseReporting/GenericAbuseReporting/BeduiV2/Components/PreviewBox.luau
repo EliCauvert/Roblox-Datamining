@@ -2,6 +2,7 @@
 local parent = genericAbuseReporting.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local var3 = game:DefineFastFlag("AbuseReportingUseProfileFrameThumbnail", false) and require(parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
 local avatar = foundationModule.Avatar
 local image = foundationModule.Image
 local text = foundationModule.Text
@@ -10,25 +11,29 @@ local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local useExperienceDetailsModule = require(genericAbuseReporting.BeduiV2.Hooks.Enrichment.useExperienceDetails)
 local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 
-local function UserPreview(p0) --[[ line: 26 ]]
-	-- upvalues: reactModule (ref), view (ref), avatar (ref), text (ref)
+local function UserPreview(p0) --[[ line: 29 ]]
+	-- upvalues: reactModule (ref), view (ref), avatar (ref), var3 (ref), text (ref)
 	local preview = p0.preview
 	
 	if not preview then
 		return nil
 	end
-	local var10
+	local var11
 	local createElement = reactModule.createElement
 	local t = {
 		tag = "row size-full-0 auto-y gap-medium radius-medium bg-surface-200 padding-medium align-y-center",
 		LayoutOrder = p0.layoutOrder
 	}
 	local t_1 = {
-		Avatar = preview.id ~= nil and reactModule.createElement(avatar, { LayoutOrder = 1, userId = tonumber(preview.id) })
+		Avatar = preview.id ~= nil and reactModule.createElement(avatar, {
+			LayoutOrder = 1,
+			userId = tonumber(preview.id),
+			includeProfileFrame = var3
+		})
 	}
 	
 	if not preview.displayName then
-		var10 = preview.username and reactModule.createElement(view, { tag = "col auto-xy fill", LayoutOrder = 2 }, {
+		var11 = preview.username and reactModule.createElement(view, { tag = "col auto-xy fill", LayoutOrder = 2 }, {
 			DisplayName = preview.displayName and reactModule.createElement(text, {
 				RichText = true,
 				tag = "auto-xy content-emphasis text-wrap text-align-x-left",
@@ -43,12 +48,12 @@ local function UserPreview(p0) --[[ line: 26 ]]
 			})
 		})
 	end
-	t_1.TextContainer = var10
+	t_1.TextContainer = var11
 	
 	return createElement(view, t, t_1)
 end
 
-local function ChatPreview(p1) --[[ line: 60 ]]
+local function ChatPreview(p1) --[[ line: 64 ]]
 	-- upvalues: reactModule (ref), view (ref), textWithTranslationModule (ref)
 	local preview = p1.preview
 	
@@ -63,10 +68,10 @@ local function ChatPreview(p1) --[[ line: 60 ]]
 	}) else nil
 end
 
-local function ExperiencePreview(p2) --[[ line: 77 ]]
+local function ExperiencePreview(p2) --[[ line: 81 ]]
 	-- upvalues: useExperienceDetailsModule (ref), reactModule (ref), view (ref), image (ref), text (ref)
 	local preview = p2.preview
-	local var11 = useExperienceDetailsModule(preview.id)
+	local var12 = useExperienceDetailsModule(preview.id)
 	
 	return if preview then reactModule.createElement(view, {
 		tag = "row size-full-0 auto-y gap-medium radius-medium bg-surface-200 padding-medium align-y-center",
@@ -80,12 +85,12 @@ local function ExperiencePreview(p2) --[[ line: 77 ]]
 		Name = reactModule.createElement(text, {
 			RichText = true,
 			tag = "auto-xy text-wrap text-align-x-left",
-			Text = if var11 then var11.name else preview.title or ""
+			Text = if var12 then var12.name else preview.title or ""
 		})
 	}) else nil
 end
 
-return reactModule.memo(function(p3) --[[ line: 104 | named "PreviewBox" ]]
+return reactModule.memo(function(p3) --[[ line: 108 | named "PreviewBox" ]]
 	-- upvalues: reactModule (ref), UserPreview (ref), ChatPreview (ref), ExperiencePreview (ref)
 	local preview = p3.preview
 	

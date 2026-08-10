@@ -12,12 +12,26 @@ local fFlagPlayerListPersistVisibilityModule = require(parent.Flags.FFlagPlayerL
 local fStringPlayerListOverrideTypeModule = require(parent.Flags.FStringPlayerListOverrideType)
 local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
 local fFlagPlayerListUseMobileOnSmallDisplay = playerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay
+local fFlagPlayerListReskin = playerListModule.Flags.FFlagPlayerListReskin
+local fFlagPlayerListReskinConsoleMobileRouting = playerListModule.Flags.FFlagPlayerListReskinConsoleMobileRouting
 
-local function isSmallTouchScreen() --[[ line: 19 ]]
-	-- upvalues: fFlagPlayerListUseMobileOnSmallDisplay (ref), guiService (ref), fFlagEnableMobilePlayerListOnConsole (ref), userInputService (ref), utilityModule (ref), fStringPlayerListOverrideTypeModule (ref)
+local function _() --[[ line: 21 | named "isTouchOrGamepad" ]]
+	-- upvalues: userInputService (ref)
+	return if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true
+end
+
+local _ = function() --[[ line: 32 | named "isReskinConsoleMobileRoute" ]]
+	-- upvalues: fFlagPlayerListReskin (ref), fFlagPlayerListReskinConsoleMobileRouting (ref), guiService (ref), userInputService (ref)
+	return fFlagPlayerListReskin and (fFlagPlayerListReskinConsoleMobileRouting and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))
+end
+
+local function isSmallTouchScreen() --[[ line: 39 ]]
+	-- upvalues: fFlagPlayerListReskin (ref), fFlagPlayerListReskinConsoleMobileRouting (ref), guiService (ref), userInputService (ref), fFlagPlayerListUseMobileOnSmallDisplay (ref), fFlagEnableMobilePlayerListOnConsole (ref), utilityModule (ref), fStringPlayerListOverrideTypeModule (ref)
 	local var12
 	if _G.__TESTEZ_RUNNING_TEST__ then
 		return false
+	elseif fFlagPlayerListReskin and (fFlagPlayerListReskinConsoleMobileRouting and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true))) then
+		return true
 	elseif fFlagPlayerListUseMobileOnSmallDisplay then
 		var12 = guiService.ViewportDisplaySize == Enum.DisplaySize.Small
 		var12 = nil
@@ -44,15 +58,15 @@ local function isSmallTouchScreen() --[[ line: 19 ]]
 	return utilityModule:IsSmallTouchScreen() or fFlagEnableMobilePlayerListOnConsole and (var13 and (var14 or fFlagPlayerListUseMobileOnSmallDisplay and (var12 and (var14 or fStringPlayerListOverrideTypeModule == "mobile"))))
 end
 
-return function() --[[ line: 32 ]]
-	-- upvalues: isSmallTouchScreen (ref), VRService (ref), fFlagEnableMobilePlayerListOnConsole (ref), tenFootInterfaceModule (ref), fFlagPlayerListPersistVisibilityModule (ref)
+return function() --[[ line: 62 ]]
+	-- upvalues: isSmallTouchScreen (ref), VRService (ref), fFlagPlayerListReskin (ref), fFlagPlayerListReskinConsoleMobileRouting (ref), guiService (ref), userInputService (ref), fFlagEnableMobilePlayerListOnConsole (ref), tenFootInterfaceModule (ref), fFlagPlayerListPersistVisibilityModule (ref)
 	local var15 = not isSmallTouchScreen()
 	
 	if var15 then
 		var15 = not VRService.VREnabled
 		
 		if var15 then
-			if not fFlagEnableMobilePlayerListOnConsole then
+			if not (fFlagPlayerListReskin and (fFlagPlayerListReskinConsoleMobileRouting and (guiService.ViewportDisplaySize == Enum.DisplaySize.Large and (if userInputService.PreferredInput ~= Enum.PreferredInput.Touch then userInputService.PreferredInput == Enum.PreferredInput.Gamepad else true)))) and not fFlagEnableMobilePlayerListOnConsole then
 				var15 = not tenFootInterfaceModule:IsEnabled()
 				
 				if var15 then

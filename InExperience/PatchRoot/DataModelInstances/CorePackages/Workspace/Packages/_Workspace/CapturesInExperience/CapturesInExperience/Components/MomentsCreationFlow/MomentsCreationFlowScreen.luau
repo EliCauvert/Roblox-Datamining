@@ -1,5 +1,6 @@
 ﻿local parent = script.Parent.Parent.Parent
 local parent_1 = parent.Parent
+local cryoModule = require(parent_1.Cryo)
 local dashModule = require(parent_1.Dash)
 local localizationModule = require(parent_1.Localization)
 local momentsCreationFlowModule = require(parent_1.MomentsCreationFlow)
@@ -45,45 +46,50 @@ local t = {
 	[creationFlowLocalization.StayFriendlyModeration] = "Feature.Moments.Description.StayFriendly"
 }
 
-return function() --[[ line: 60 | named "MomentsCreationFlowScreen" ]]
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), t (ref), useSelector (ref), constantsModule (ref), reactModule (ref), momentsCreationFlowClosedModule (ref), createMomentModule (ref), dashModule (ref), creationFlowContextProvider (ref), creationFlowScreen (ref)
-	local var10 = useAnalyticsModule()
-	local var11 = useDispatch()
-	local var12 = useLocalization(t)
-	local var13 = useSelector(function(p0) --[[ line: 70 ]]
+return function() --[[ line: 61 | named "MomentsCreationFlowScreen" ]]
+	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), t (ref), useSelector (ref), constantsModule (ref), reactModule (ref), momentsCreationFlowClosedModule (ref), createMomentModule (ref), dashModule (ref), cryoModule (ref), creationFlowContextProvider (ref), creationFlowScreen (ref)
+	local var11 = useAnalyticsModule()
+	local var12 = useDispatch()
+	local var13 = useLocalization(t)
+	local var14 = useSelector(function(p0) --[[ line: 67 ]]
 		-- upvalues: constantsModule (copy)
-		return p0[constantsModule.RoduxKey].MomentsCreationFlow.Capture
+		return p0[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen
+	end)
+	local var15 = useSelector(function(p1) --[[ line: 71 ]]
+		-- upvalues: constantsModule (copy)
+		return p1[constantsModule.RoduxKey].MomentsCreationFlow.Capture
+	end)
+	local var16 = useSelector(function(p2) --[[ line: 75 ]]
+		-- upvalues: constantsModule (copy)
+		return p2[constantsModule.RoduxKey].MomentsCreationFlow.SessionId
 	end)
 	
-	return if useSelector(function(p1) --[[ line: 66 ]]
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].MomentsCreationFlow.IsOpen
-	end) and var13 then reactModule.createElement(creationFlowContextProvider, {
-		captures = { var13 },
-		exitCreationFlow = reactModule.useCallback(function() --[[ line: 74 ]]
-			-- upvalues: var11 (ref), momentsCreationFlowClosedModule (copy)
-			var11(momentsCreationFlowClosedModule())
-		end, { var11 }),
+	return if var14 and var15 then reactModule.createElement(creationFlowContextProvider, {
+		captures = { var15 },
+		exitCreationFlow = reactModule.useCallback(function() --[[ line: 79 ]]
+			-- upvalues: var12 (ref), momentsCreationFlowClosedModule (copy)
+			var12(momentsCreationFlowClosedModule())
+		end, { var12 }),
 		value = {
-			capturesPagesIsFinished = function() --[[ line: 98 ]]
+			capturesPagesIsFinished = function() --[[ line: 103 ]]
 				return true
 			end,
-			createMoment = reactModule.useCallback(function(p2, p3, p4) --[[ line: 83 ]]
-				-- upvalues: var11 (ref), createMomentModule (copy)
-				var11(createMomentModule(p2, p3, p4))
-			end, { var11 }),
+			createMoment = reactModule.useCallback(function(p3, p4, p5) --[[ line: 88 ]]
+				-- upvalues: var12 (ref), createMomentModule (copy)
+				var12(createMomentModule(p3, p4, p5))
+			end, { var12 }),
 			fetchAdditionalCaptures = dashModule.noop,
 			fetchInitialCaptures = dashModule.noop,
-			fireEvent = function(p5, p6) --[[ line: 104 ]]
-				-- upvalues: var10 (ref)
-				var10.fireEvent("XExp" .. p5, p6)
+			fireEvent = function(p6, p7) --[[ line: 109 ]]
+				-- upvalues: var11 (ref), cryoModule (copy), var16 (ref)
+				var11.fireEvent("XExp" .. p6, cryoModule.Dictionary.join(p7 or {}, { creationSessionId = var16 }))
 			end,
-			getLocalization = reactModule.useCallback(function(p7) --[[ line: 78 ]]
-				-- upvalues: var12 (ref)
-				return var12[p7] or nil
-			end, { var12 }),
+			getLocalization = reactModule.useCallback(function(p8) --[[ line: 83 ]]
+				-- upvalues: var13 (ref)
+				return var13[p8] or nil
+			end, { var13 }),
 			getUserConfiguration = dashModule.noop,
-			isTextFiltered = function() --[[ line: 109 ]]
+			isTextFiltered = function() --[[ line: 119 ]]
 				return false
 			end,
 			setScreenOrientation = dashModule.noop

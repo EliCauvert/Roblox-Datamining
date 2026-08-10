@@ -1,33 +1,31 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local reactModule = require(parent.React)
 local dashModule = require(parent.Dash)
-local fFlagAXHeroWidget = avatarExperienceFlagsModule.FFlagAXHeroWidget
 local t = {
 	resourceIdentifier = "",
 	anchorPoint = Vector2.new(0.5, 0.5),
 	color = Color3.fromRGB(255, 255, 255),
 	position = UDim2.fromScale(0.5, 0.5),
-	scaleType = if fFlagAXHeroWidget then Enum.ScaleType.Fit else nil
+	scaleType = Enum.ScaleType.Fit
 }
 
-return function(value) --[[ line: 31 | named "BackgroundImage" ]]
-	-- upvalues: dashModule (ref), t (ref), reactModule (ref), fFlagAXHeroWidget (ref)
-	local var4 = dashModule.join(t, value)
+return function(value) --[[ line: 27 | named "BackgroundImage" ]]
+	-- upvalues: dashModule (ref), t (ref), reactModule (ref)
+	local var3 = dashModule.join(t, value)
 	
 	return reactModule.createElement("ImageLabel", {
-		AnchorPoint = var4.anchorPoint,
-		Position = var4.position,
+		AnchorPoint = var3.anchorPoint,
+		Position = var3.position,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Image = var4.resourceIdentifier,
-		ImageColor3 = var4.color,
-		ImageTransparency = var4.transparency,
-		ScaleType = if fFlagAXHeroWidget then var4.scaleType else Enum.ScaleType.Fit,
+		Image = var3.resourceIdentifier,
+		ImageColor3 = var3.color,
+		ImageTransparency = var3.transparency,
+		ScaleType = var3.scaleType,
 		Size = UDim2.fromScale(1, 1),
-		ZIndex = var4.ZIndex,
-		[reactModule.Tag] = var4.tag
+		ZIndex = var3.ZIndex,
+		[reactModule.Tag] = var3.tag
 	}, {
-		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = var4.cornerRadius })
+		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = var3.cornerRadius })
 	})
 end

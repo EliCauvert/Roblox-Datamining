@@ -15,52 +15,48 @@ local dropdownControlModule = require(script.Parent.DropdownControl)
 local markSelectedItemModule = require(script.Parent.markSelectedItem)
 local t = {
 	testId = "--foundation-dropdown",
-	variant = if flagsModule.FoundationDropdownVariant then inputVariantModule.Standard else nil,
+	variant = inputVariantModule.Standard,
 	width = UDim.new(0, 400),
 	size = inputSizeModule.Medium
 }
 local t_1 = { offset = 5, position = popoverSideModule.Bottom }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 80 | named "Dropdown" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), inputVariantModule (ref), reactModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 83 | named "Dropdown" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
 	local var16 = withDefaultsModule(p0, t)
-	
-	if flagsModule.FoundationDropdownVariant and var16.variant == nil then
-		var16.variant = inputVariantModule.Standard
-	end
 	local var17, var18 = reactModule.useState(false)
 	local var19 = reactModule.useRef(nil)
 	local var20, var21 = reactModule.useState(nil)
-	local var22 = reactModule.useCallback(function(p2) --[[ line: 89 ]]
+	local var22 = reactModule.useCallback(function(p2) --[[ line: 88 ]]
 		-- upvalues: var19 (ref), var21 (ref)
 		var19.current = p2
 		var21(p2)
 	end, {})
 	
 	if flagsModule.FoundationDropdownSelectionProps then
-		reactModule.useImperativeHandle(p1, function() --[[ line: 95 ]]
+		reactModule.useImperativeHandle(p1, function() --[[ line: 94 ]]
 			-- upvalues: var20 (ref)
 			return var20
 		end, { var20 })
 	end
 	local var23, var24 = reactModule.useBinding(var16.width)
 	local var25, var26 = markSelectedItemModule(var16.items, var16.value)
-	local var27 = reactModule.useCallback(function() --[[ line: 105 ]]
+	local var27 = reactModule.useCallback(function() --[[ line: 104 ]]
 		-- upvalues: var18 (ref)
-		var18(function(p3) --[[ line: 106 ]]
+		var18(function(p3) --[[ line: 105 ]]
 			return not p3
 		end)
 	end, {})
-	local var28 = reactModule.useCallback(function() --[[ line: 111 ]]
+	local var28 = reactModule.useCallback(function() --[[ line: 110 ]]
 		-- upvalues: var18 (ref)
 		var18(false)
 	end, {})
-	local var29 = reactModule.useCallback(function(p4) --[[ line: 115 ]]
+	local var29 = reactModule.useCallback(function(p4) --[[ line: 114 ]]
 		-- upvalues: var18 (ref), var16 (ref)
 		var18(false)
 		var16.onItemChanged(p4)
 	end, { var16.onItemChanged })
-	var16.onAbsoluteSizeChanged = reactModule.useCallback(function(p5) --[[ line: 120 ]]
+	var16.onAbsoluteSizeChanged = reactModule.useCallback(function(p5) --[[ line: 119 ]]
 		-- upvalues: p0 (ref), var24 (ref)
 		if p0.onAbsoluteSizeChanged then
 			p0.onAbsoluteSizeChanged(p5)
@@ -73,7 +69,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 80 | 
 		ref = if flagsModule.FoundationDropdownSelectionProps then nil else p1
 	}, {
 		DropdownControl = reactModule.createElement(dropdownControlModule, withCommonPropsModule(var16, {
-			variant = if flagsModule.FoundationDropdownVariant then var16.variant else nil,
+			variant = var16.variant,
 			onActivated = var27,
 			hasError = var16.hasError,
 			isDisabled = var16.isDisabled,
@@ -108,6 +104,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 80 | 
 			maxHeight = var16.maxHeight,
 			onActivated = var29,
 			radius = radiusModule.Medium,
+			scrollingFrameRef = var16.scrollingFrameRef,
 			testId = `{var16.testId}--menu`
 		}))
 	})

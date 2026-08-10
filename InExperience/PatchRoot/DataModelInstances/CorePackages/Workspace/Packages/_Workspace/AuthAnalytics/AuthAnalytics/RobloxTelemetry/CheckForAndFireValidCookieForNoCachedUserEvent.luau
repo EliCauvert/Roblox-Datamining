@@ -1,31 +1,34 @@
 ﻿local authAnalytics = script:FindFirstAncestor("AuthAnalytics")
+local parent = authAnalytics.Parent
 local telemetryConfigsModule = require(authAnalytics.RobloxTelemetry.TelemetryConfigs)
-local loginStatus = require(authAnalytics.Parent.RobloxAppEnums).LoginStatus
+local loginStatus = require(parent.RobloxAppEnums).LoginStatus
+local fFlagUseSignalsForAuthenticationStatus = require(parent.SharedFlags).FFlagUseSignalsForAuthenticationStatus
+local var2 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 local t = {
 	[loginStatus.UNKNOWN] = true,
 	[loginStatus.LOGGED_OUT] = true,
 	[loginStatus.LOGGED_IN] = true
 }
 
-local function _(p0) --[[ line: 17 | named "normalizeAuthenticationStatusForTelemetry" ]]
+local function _(p0) --[[ line: 24 | named "normalizeAuthenticationStatusForTelemetry" ]]
 	-- upvalues: t (ref)
 	return if p0 == nil then "NIL" elseif t[p0] then p0 else "UNRECOGNIZED"
 end
 
-return function(p1, p2, p3) --[[ line: 27 ]]
-	-- upvalues: loginStatus (ref), telemetryConfigsModule (ref), t (ref)
-	return function(p4) --[[ line: 30 ]]
-		-- upvalues: loginStatus (copy), p3 (ref), p1 (ref), p2 (ref), telemetryConfigsModule (copy), t (copy)
-		local status = p4:getState().AuthenticationStatus.status
+return function(p1, p2, p3) --[[ line: 34 ]]
+	-- upvalues: fFlagUseSignalsForAuthenticationStatus (ref), var2 (ref), loginStatus (ref), telemetryConfigsModule (ref), t (ref)
+	return function(p4) --[[ line: 37 ]]
+		-- upvalues: fFlagUseSignalsForAuthenticationStatus (copy), var2 (copy), loginStatus (copy), p3 (ref), p1 (ref), p2 (ref), telemetryConfigsModule (copy), t (copy)
+		local var4 = if fFlagUseSignalsForAuthenticationStatus then var2(false).getStatus(false) else p4:getState().AuthenticationStatus.status
 		
-		if status == loginStatus.LOGGED_IN then
+		if var4 == loginStatus.LOGGED_IN then
 			return
 		end
-		p3(p1):andThen(function(_) --[[ line: 43 ]]
-			-- upvalues: p2 (copy), telemetryConfigsModule (copy), status (ref), t (copy)
+		p3(p1):andThen(function(_) --[[ line: 52 ]]
+			-- upvalues: p2 (copy), telemetryConfigsModule (copy), var4 (ref), t (copy)
 			p2:logRobloxTelemetryCounter(telemetryConfigsModule.ValidCookieForNoCachedUserTelemetryConfig, 1, {
-				authenticationStatus = if status == nil then "NIL" elseif t[status] then status else "UNRECOGNIZED"
+				authenticationStatus = if var4 == nil then "NIL" elseif t[var4] then var4 else "UNRECOGNIZED"
 			})
-		end):catch(function(_) --[[ line: 54 ]] end)
+		end):catch(function(_) --[[ line: 63 ]] end)
 	end
 end

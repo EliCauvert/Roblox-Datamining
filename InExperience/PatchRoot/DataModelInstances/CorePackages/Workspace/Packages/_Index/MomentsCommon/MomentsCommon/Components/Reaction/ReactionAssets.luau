@@ -45,5 +45,11 @@ return {
 		local var7 = t_1[p4]
 		
 		return if var6 == nil or var7 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var6}-{var7}.png`
+	end,
+	getStickerImageUri = function(p5) --[[ line: 62 ]]
+		-- upvalues: t (ref)
+		local var8 = t[p5]
+		
+		return if var8 == nil then nil else `rbxasset://textures/ui/Moments/Reactions/{var8}-large@3x.png`
 	end
 }

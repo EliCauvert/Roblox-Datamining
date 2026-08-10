@@ -20,18 +20,18 @@ local _ = function(p2, p3) --[[ line: 41 | named "calculateSideMargin" ]]
 	return if hasExtraPlatformInset() then p2.Size.Size_1600 elseif p3 < 1024 then p2.Size.Size_300 elseif p3 < 1280 then 18 elseif p3 < 1440 then p2.Size.Size_600 elseif p3 < 1920 then 34 elseif p3 < 2260 then 38 else p2.Size.Size_1200
 end
 
-return function(p4) --[[ line: 59 ]]
+return function(p4) --[[ line: 50 ]]
 	-- upvalues: useIsInExperienceModule (ref), useScreenSize (ref), styleModule (ref), usePreferredInput (ref), responsiveModule (ref), useSelector (ref), useMemo (ref), hasExtraPlatformInset (ref), formFactor (ref)
 	local var5 = useIsInExperienceModule() or p4
 	local var6 = useScreenSize()
 	local var7 = if var6 and var6.X ~= nil then var6.X else 0
 	local var8 = styleModule.useDesignTokens()
 	local var9 = usePreferredInput() == responsiveModule.Input.Pointer
-	local var10 = useSelector(function(p5) --[[ line: 69 ]]
+	local var10 = useSelector(function(p5) --[[ line: 60 ]]
 		return p5.FormFactor
 	end)
 	
-	return useMemo(function() --[[ line: 73 ]]
+	return useMemo(function() --[[ line: 64 ]]
 		-- upvalues: var5 (ref), var9 (ref), var8 (ref), var7 (ref), hasExtraPlatformInset (copy), var10 (ref), formFactor (copy)
 		if var5 then
 			return { outer = 12, inner = 12, default = 12 }

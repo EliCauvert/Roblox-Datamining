@@ -1,91 +1,188 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local _ = require(parent.DataHydration.CreatorAgentChat)
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local parent = buildExperience.Parent
+local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local loadingIndicatorModule = require(script.Parent.LoadingIndicator)
 local icon = foundationModule.Icon
+local scrollView = foundationModule.ScrollView
 local text = foundationModule.Text
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
+local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
+local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
+local useScaledValue = foundationModule.Hooks.useScaledValue
+local useTokens = foundationModule.Hooks.useTokens
+local subagentTaskCategory = creatorAgentChatModule.SubagentTaskCategory
+local list = {
+	subagentTaskCategory.Gameplay,
+	subagentTaskCategory.Art,
+	subagentTaskCategory.Audio,
+	subagentTaskCategory.Marketing
+}
 local t = {
-	Art = iconName.PaintBrush,
+	Art = iconName.TwoMakeupBrushes,
 	Audio = iconName.FiveVerticalLinesWave,
 	Gameplay = iconName.Controller,
 	Marketing = iconName.Wallet
 }
 
-local function _(p0) --[[ line: 37 | named "getStatusText" ]]
-	return if #p0.tasks == 0 then "Not started" elseif p0.isComplete then `{#p0.tasks} completed tasks` else "Building..."
-end
-
-return reactModule.memo(function(p1) --[[ line: 47 | named "AgentsList" ]]
-	-- upvalues: t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref)
-	local testId = p1.testId or "build-agent-list"
+local function getDisplayGroups(p0) --[[ line: 49 ]]
+	-- upvalues: list (ref)
+	local t = {}
+	
+	for i, v in p0 do
+		t[v.name] = v
+	end
 	local t_1 = {}
 	
-	for i, v in p1.groups do
-		local name = t[v.name]
-		local t_2 = {}
-		
-		for i_1 = 1, math.min(3, #v.tasks) do
-			local var7 = v.tasks[i_1]
-			t_2[`Task{i_1}`] = reactModule.createElement(view, {
-				tag = "row align-y-center gap-small size-full-0 auto-y",
-				LayoutOrder = i_1
-			}, {
-				Label = reactModule.createElement(text, {
-					LayoutOrder = 1,
-					tag = "fill auto-y text-body-small text-align-x-left text-truncate-end content-emphasis",
-					Text = var7.text
-				}),
-				Status = reactModule.createElement(loadingIndicatorModule, {
-					layoutOrder = 2,
-					status = var7.status,
-					testId = `{testId}-card-{i}-task-{i_1}`
-				})
-			})
+	for i_1, v_1 in list do
+		table.insert(t_1, t[v_1] or {
+			isComplete = false,
+			isLoading = false,
+			name = v_1,
+			tasks = {}
+		})
+		t[v_1] = nil
+	end
+	for i_2, v_2 in p0 do
+		if t[v_2.name] ~= nil then
+			table.insert(t_1, v_2)
+			t[v_2.name] = nil
 		end
-		t_1[`Card{i}`] = reactModule.createElement(view, {
-			tag = "col gap-small size-full-0 auto-y padding-large stroke-standard stroke-emphasis radius-large",
+	end
+	return t_1
+end
+
+local function _(p1) --[[ line: 77 | named "getStatusText" ]]
+	-- upvalues: localizationStringsModule (ref)
+	return if #p1.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif p1.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#p1.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
+end
+
+local function AgentTaskList(p2) --[[ line: 95 ]]
+	-- upvalues: reactModule (ref), scrollView (ref), scrollBarVisibility (ref), view (ref), stateLayerAffordance (ref)
+	local var13, var14 = reactModule.useBinding(0)
+	
+	return reactModule.createElement(scrollView, {
+		tag = "shrink",
+		LayoutOrder = p2.LayoutOrder,
+		Size = var13:map(function(p3) --[[ line: 97 ]]
+			return UDim2.new(1, 0, 0, p3)
+		end),
+		onAbsoluteCanvasSizeChanged = reactModule.useCallback(function(p4) --[[ line: 100 ]]
+			-- upvalues: var14 (ref)
+			var14(p4.AbsoluteCanvasSize.Y)
+		end, { var14 }),
+		scroll = {
+			AutomaticCanvasSize = Enum.AutomaticSize.Y,
+			CanvasSize = UDim2.new(1, 0, 0, 0),
+			scrollBarVisibility = scrollBarVisibility.None,
+			ScrollingDirection = Enum.ScrollingDirection.Y
+		},
+		testId = p2.testId
+	}, {
+		Content = reactModule.createElement(view, {
+			tag = "col size-full-0 auto-y",
+			onActivated = p2.onActivated,
+			layout = {
+				FillDirection = Enum.FillDirection.Vertical,
+				Padding = UDim.new(0, p2.taskGap)
+			},
+			stateLayer = { affordance = stateLayerAffordance.None },
+			testId = `{p2.testId}-content`
+		}, p2.children)
+	})
+end
+
+local function AgentCard(p5) --[[ line: 141 ]]
+	-- upvalues: t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), localizationStringsModule (ref), AgentTaskList (ref)
+	local group = p5.group
+	local name = t[group.name]
+	local var15 = reactModule.useCallback(function() --[[ line: 144 ]]
+		-- upvalues: p5 (ref), group (ref)
+		p5.onAgentActivated(group)
+	end, { p5.onAgentActivated, group })
+	local t_1 = {}
+	
+	for i, v in group.tasks do
+		t_1[`Task{i}`] = reactModule.createElement(view, {
+			tag = "row align-y-center gap-small size-full-0 auto-y",
 			LayoutOrder = i,
-			onActivated = function() --[[ line: 75 ]]
-				-- upvalues: p1 (ref), v (ref)
-				p1.onAgentActivated(v)
-			end,
-			testId = `{testId}-card-{i}`
+			testId = `{p5.testId}-card-{p5.index}-task-{i}`
 		}, {
-			Header = reactModule.createElement(view, {
+			Label = reactModule.createElement(text, {
 				LayoutOrder = 1,
-				tag = "row align-y-center gap-small size-full-0 auto-y"
-			}, {
-				Icon = if name ~= nil then nil else reactModule.createElement(icon, {
-					LayoutOrder = 1,
-					tag = "auto-xy content-emphasis",
-					name = name,
-					size = iconSize.Small,
-					testId = `{testId}-card-{i}-category-icon`
-				}),
-				Title = reactModule.createElement(text, {
-					LayoutOrder = 2,
-					tag = "fill auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-					Text = v.name
-				})
+				tag = "fill auto-y text-body-small text-align-x-left text-truncate-end content-emphasis",
+				Text = v.text
 			}),
-			Status = reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-				Text = if #v.tasks == 0 then "Not started" elseif v.isComplete then `{#v.tasks} completed tasks` else "Building..."
-			}),
-			Tasks = reactModule.createElement(view, {
-				LayoutOrder = 3,
-				tag = "col gap-small size-full-0 auto-y padding-top-small"
-			}, t_2)
+			Status = reactModule.createElement(loadingIndicatorModule, {
+				layoutOrder = 2,
+				status = v.status,
+				testId = `{p5.testId}-card-{p5.index}-task-{i}`
+			})
 		})
 	end
 	return reactModule.createElement(view, {
-		tag = "col gap-medium size-full-0 auto-y padding-x-large padding-y-medium",
-		LayoutOrder = p1.LayoutOrder,
+		tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-emphasis radius-large",
+		LayoutOrder = p5.index,
+		onActivated = if #group.tasks > 0 then var15 else nil,
+		sizeConstraint = { MaxSize = Vector2.new(1e999, p5.maxHeight) },
+		testId = `{p5.testId}-card-{p5.index}-container`
+	}, {
+		Header = reactModule.createElement(view, {
+			LayoutOrder = 1,
+			tag = "row align-y-center gap-small size-full-0 auto-y",
+			testId = `{p5.testId}-card-{p5.index}`
+		}, {
+			Icon = if name ~= nil then nil else reactModule.createElement(icon, {
+				LayoutOrder = 1,
+				tag = "auto-xy content-emphasis",
+				name = name,
+				size = iconSize.Small,
+				testId = `{p5.testId}-card-{p5.index}-category-icon`
+			}),
+			Title = reactModule.createElement(text, {
+				LayoutOrder = 2,
+				tag = "fill auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
+				Text = group.name
+			}),
+			Status = reactModule.createElement(text, {
+				LayoutOrder = 3,
+				tag = "auto-xy padding-left-large text-body-small text-align-x-right content-emphasis",
+				Text = if #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
+			})
+		}),
+		Tasks = if #group.tasks > 0 then reactModule.createElement(AgentTaskList, {
+			LayoutOrder = 2,
+			onActivated = var15,
+			taskGap = p5.taskGap,
+			testId = `{p5.testId}-card-{p5.index}-tasks`
+		}, t_1) else nil
+	})
+end
+
+return reactModule.memo(function(p6) --[[ line: 213 | named "AgentsList" ]]
+	-- upvalues: useTokens (ref), useScaledValue (ref), getDisplayGroups (ref), reactModule (ref), AgentCard (ref), view (ref)
+	local var17 = useTokens()
+	local var18 = useScaledValue(156)
+	local testId = p6.testId or "build-agent-list"
+	local t = {}
+	
+	for i, v in getDisplayGroups(p6.groups) do
+		t[`Card{i}`] = reactModule.createElement(AgentCard, {
+			group = v,
+			index = i,
+			maxHeight = var18,
+			onAgentActivated = p6.onAgentActivated,
+			taskGap = var17.Gap.Small,
+			testId = testId
+		})
+	end
+	return reactModule.createElement(view, {
+		tag = "col gap-medium size-full-0 auto-y padding-y-medium",
+		LayoutOrder = p6.LayoutOrder,
 		testId = testId
-	}, t_1)
+	}, t)
 end)

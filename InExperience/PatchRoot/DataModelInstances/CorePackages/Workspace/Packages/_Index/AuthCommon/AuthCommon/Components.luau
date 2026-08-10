@@ -1,7 +1,6 @@
 ﻿return {
 	AccountLinkingAlert = require(script.AccountLinkingAlert),
 	AuthBackgroundContainer = require(script.AuthBackgroundContainer),
-	AuthBackgroundGate = require(script.AuthBackgroundGate),
 	AuthStatefulRoundCornerBorder = require(script.AuthStatefulRoundCornerBorder),
 	BackgroundFill = require(script.BackgroundFill),
 	CountryCodeSelector = require(script.CountryCodeSelector),

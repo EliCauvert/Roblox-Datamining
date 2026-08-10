@@ -1,4 +1,4 @@
-﻿return function(p0, p1) --[[ line: 3 | named "insertNewlineAtCursor" ]]
+﻿return function(p0, p1) --[[ line: 1 | named "insertNewlineAtCursor" ]]
 	if p1 < 1 then
 		local charCount = utf8.len(p0)
 		local text = p0 .. "\n"

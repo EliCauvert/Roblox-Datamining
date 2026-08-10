@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableAuthDeepLinkReceiver3", false)

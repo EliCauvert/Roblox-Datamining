@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("DebugFriendsChat", false) and require(script:FindFirstAncestor("ExpChat").Parent.SharedFlags).FFlagExpChatEnableFriendsTab

@@ -9,5 +9,6 @@
 	ProfileShare = 7,
 	PhoneContactImporter = 8,
 	OffNetworkFriendLink = 9,
-	FriendRecommendations = 10
+	FriendRecommendations = 10,
+	SchoolMemberList = 11
 }

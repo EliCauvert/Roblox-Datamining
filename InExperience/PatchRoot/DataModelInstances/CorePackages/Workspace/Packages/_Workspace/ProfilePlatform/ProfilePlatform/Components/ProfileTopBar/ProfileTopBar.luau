@@ -16,17 +16,17 @@ local divider = foundationModule.Divider
 local close = images["icons/navigation/close"]
 local var7 = constantsModule.USER_PROFILE_HEADER_HEIGHT + constantsModule.CTA_BUTTON_HEIGHT + constantsModule.PAGE_PADDING
 
-return function(p0) --[[ line: 34 ]]
+return function(p0) --[[ line: 35 ]]
 	-- upvalues: useLastInputMode (ref), useStyle (ref), useProfileScrollContextModule (ref), reactModule (ref), fFlagProfilePlatformNewProfileHeader (ref), var7 (ref), view (ref), imageSetLabel (ref), close (ref), divider (ref)
 	local isFocus = useLastInputMode() == "Focus"
 	local var9 = useStyle()
 	local var10 = useProfileScrollContextModule()
 	local var11 = if var10 then var10.scrollY else 0
-	local var12 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var12 = reactModule.useCallback(function() --[[ line: 43 ]]
 		-- upvalues: p0 (ref)
 		p0.navigateBack()
 	end, { p0.navigateBack })
-	local var13 = reactModule.useMemo(function() --[[ line: 48 ]]
+	local var13 = reactModule.useMemo(function() --[[ line: 49 ]]
 		-- upvalues: p0 (ref), var7 (copy), var11 (ref)
 		if p0.backgroundTransparency ~= nil then
 			return p0.backgroundTransparency
@@ -41,7 +41,7 @@ return function(p0) --[[ line: 34 ]]
 		ZIndex = 100,
 		backgroundStyle = { Transparency = var13 }
 	}, {
-		LeftNavigationButton = if not isFocus then reactModule.createElement(view, {
+		LeftNavigationButton = if isFocus or p0.hideNavigationButton then nil else reactModule.createElement(view, {
 			tag = "bg-over-media-0 radius-circle",
 			AnchorPoint = if fFlagProfilePlatformNewProfileHeader then Vector2.new(0, 0.5) else nil,
 			Position = if fFlagProfilePlatformNewProfileHeader then UDim2.new(0, 10, 0.5, 0) else UDim2.new(0, 10, 0, if fFlagProfilePlatformNewProfileHeader then nil else 10),
@@ -65,7 +65,7 @@ return function(p0) --[[ line: 34 ]]
 					ImageTransparency = var9.Theme.IconEmphasis.Transparency
 				})
 			})
-		}) else nil,
+		}),
 		BottomDivider = reactModule.createElement(divider, {
 			Position = UDim2.new(0, 0, 1, -1),
 			Size = UDim2.new(1, 0, 0, 1),

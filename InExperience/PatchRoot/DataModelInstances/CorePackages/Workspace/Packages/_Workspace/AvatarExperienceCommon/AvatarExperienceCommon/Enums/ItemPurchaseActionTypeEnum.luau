@@ -6,5 +6,6 @@
 	Free = "Free",
 	PurchaseFromResale = "PurchaseFromResale",
 	Loading = "Loading",
-	Disabled = "Disabled"
+	Disabled = "Disabled",
+	QuantityLimitExceeded = "QuantityLimitExceeded"
 }

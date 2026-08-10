@@ -4,6 +4,7 @@ return {
 	displayName = "InlineRichText",
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		jestConfigsModule.setupFiles.RetryTimes
 	}
 }

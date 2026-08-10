@@ -44,6 +44,8 @@ return function() --[[ line: 24 | named "createRequestInternalNetwork" ]]
 					for i, v in p4.Stats do
 						if typeof(i) == "string" and typeof(v) == "number" then
 							t[i] = v
+						elseif i == "WasRequestRetried" and typeof(v) == "boolean" then
+							t[i] = if v then 1 else 0
 						end
 					end
 				end
@@ -56,13 +58,13 @@ return function() --[[ line: 24 | named "createRequestInternalNetwork" ]]
 				})
 			end)
 			
-			return function() --[[ line: 70 ]]
+			return function() --[[ line: 72 ]]
 				-- upvalues: var4 (write), var3 (ref)
 				if var4 then
 					return
 				end
 				var4 = true
-				pcall(function() --[[ line: 75 ]]
+				pcall(function() --[[ line: 77 ]]
 					-- upvalues: var3 (copy)
 					var3:Cancel()
 				end)

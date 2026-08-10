@@ -9,11 +9,9 @@ local multiItemPriceShowsDiscountAccordionModule = require(IAPExperience.Generic
 local unifiedPurchaseModalTypeEnumModule = require(IAPExperience.Enums.UnifiedPurchaseModalTypeEnum)
 local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local _ = require(IAPExperience.Enums.VirtualItemBadgeType)
-local fFlagAddCompactUnifiedUpsellModalModeModule = require(IAPExperience.Flags.FFlagAddCompactUnifiedUpsellModalMode)
-local fFlagFixUnnecessaryPaddingInUnifiedPurchaseModalModule = require(IAPExperience.Flags.FFlagFixUnnecessaryPaddingInUnifiedPurchaseModal)
 local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
 
-local function _(p0) --[[ line: 63 | named "itemPriceHasDiscountBreakdown" ]]
+local function _(p0) --[[ line: 60 | named "itemPriceHasDiscountBreakdown" ]]
 	if p0 then
 		local basePriceInRobux = p0.basePriceInRobux
 		local priceInRobux = p0.priceInRobux
@@ -23,19 +21,19 @@ local function _(p0) --[[ line: 63 | named "itemPriceHasDiscountBreakdown" ]]
 	return false
 end
 
-return function(p1) --[[ line: 74 | named "ProductDetailsContainer" ]]
-	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), multiItemPriceShowsDiscountAccordionModule (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), view (ref), unifiedProductDetailsModule (ref), fFlagAddCompactUnifiedUpsellModalModeModule (ref), discountSummaryModule (ref), priceSummaryV2Module (ref), fFlagFixUnnecessaryPaddingInUnifiedPurchaseModalModule (ref)
-	local var10
+return function(p1) --[[ line: 71 | named "ProductDetailsContainer" ]]
+	-- upvalues: fFlagPurchasePromptFetchCartPricing (ref), multiItemPriceShowsDiscountAccordionModule (ref), unifiedPurchaseModalTypeEnumModule (ref), reactModule (ref), view (ref), unifiedProductDetailsModule (ref), discountSummaryModule (ref), priceSummaryV2Module (ref)
+	local var8
 	local itemPrice = p1.product and p1.product.itemPrice
 	
 	if itemPrice then
 		local basePriceInRobux = itemPrice.basePriceInRobux
 		local priceInRobux = itemPrice.priceInRobux
-		var10 = typeof(basePriceInRobux) == "number" and (typeof(priceInRobux) == "number" and priceInRobux < basePriceInRobux)
+		var8 = typeof(basePriceInRobux) == "number" and (typeof(priceInRobux) == "number" and priceInRobux < basePriceInRobux)
 	else
-		var10 = false
+		var8 = false
 	end
-	local var11 = if fFlagPurchasePromptFetchCartPricing then multiItemPriceShowsDiscountAccordionModule(itemPrice) else nil
+	local var9 = if fFlagPurchasePromptFetchCartPricing then multiItemPriceShowsDiscountAccordionModule(itemPrice) else nil
 	local uDim2 = UDim2.new(1, 0, 0, 100)
 	
 	if p1.purchaseModalType == unifiedPurchaseModalTypeEnumModule.MultiItem then
@@ -45,7 +43,7 @@ return function(p1) --[[ line: 74 | named "ProductDetailsContainer" ]]
 			Details = if p1.hideProductDetails then nil else reactModule.createElement(unifiedProductDetailsModule, {
 				layoutOrder = 1,
 				isPortrait = false,
-				isCompact = if fFlagAddCompactUnifiedUpsellModalModeModule then p1.isCompact else nil,
+				isCompact = p1.isCompact,
 				itemIcon = p1.product.itemIcon,
 				itemName = p1.product.itemName,
 				itemRobuxCost = itemPrice.priceInRobux,
@@ -66,7 +64,7 @@ return function(p1) --[[ line: 74 | named "ProductDetailsContainer" ]]
 					savingsSummary = p1.savingsSummary
 				})
 			})
-		}) elseif var10 then reactModule.createElement(view, {
+		}) elseif var8 then reactModule.createElement(view, {
 			tag = {
 				["col align-x-center align-y-top size-full-0"] = fFlagPurchasePromptFetchCartPricing,
 				["col shrink-0 size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing
@@ -84,7 +82,7 @@ return function(p1) --[[ line: 74 | named "ProductDetailsContainer" ]]
 			subtotalItemCount = if fFlagPurchasePromptFetchCartPricing then p1.subtotalItemCount else nil
 		})
 	end
-	local var13 = if itemPrice and (not fFlagPurchasePromptFetchCartPricing or var11) then reactModule.createElement(view, {
+	local var11 = if itemPrice and (not fFlagPurchasePromptFetchCartPricing or var9) then reactModule.createElement(view, {
 		LayoutOrder = 2,
 		tag = {
 			["size-full-0 auto-y padding-xxsmall"] = fFlagPurchasePromptFetchCartPricing,
@@ -98,21 +96,21 @@ return function(p1) --[[ line: 74 | named "ProductDetailsContainer" ]]
 		})
 	}) else nil
 	
-	if fFlagFixUnnecessaryPaddingInUnifiedPurchaseModalModule and not var10 then
-		var13 = nil
+	if not var8 then
+		var11 = nil
 	end
 	return reactModule.createElement(view, {
 		tag = {
 			["col align-x-center align-y-top gap-medium size-full-0 auto-y"] = fFlagPurchasePromptFetchCartPricing,
-			["col gap-medium shrink-0 auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and var10,
-			["col gap-medium auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and not var10
+			["col gap-medium shrink-0 auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and var8,
+			["col gap-medium auto-y size-full-0 align-x-center align-y-start"] = not fFlagPurchasePromptFetchCartPricing and not var8
 		},
-		Size = if if fFlagPurchasePromptFetchCartPricing then var11 else var10 then uDim2 else nil
+		Size = if if fFlagPurchasePromptFetchCartPricing then var9 else var8 then uDim2 else nil
 	}, {
 		Details = reactModule.createElement(unifiedProductDetailsModule, {
 			layoutOrder = 1,
 			isPortrait = false,
-			isCompact = if fFlagAddCompactUnifiedUpsellModalModeModule then p1.isCompact else nil,
+			isCompact = p1.isCompact,
 			itemIcon = p1.product.itemIcon,
 			itemName = p1.product.itemName,
 			itemRobuxCost = p1.product.itemRobuxCost,
@@ -123,6 +121,6 @@ return function(p1) --[[ line: 74 | named "ProductDetailsContainer" ]]
 			isLoading = p1.isLoading,
 			priceSuffix = p1.priceSuffix
 		}),
-		DiscountSummary = var13
+		DiscountSummary = var11
 	})
 end

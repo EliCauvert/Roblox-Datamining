@@ -15,12 +15,15 @@ local signalsReactModule = require(parent.SignalsReact)
 local compositionTags = require(parent.AppComposition).CompositionTags
 local experienceDetailsFallbackAttributionRowModule = require(script.Parent.ExperienceDetailsFallbackAttributionRow)
 local useGameInfoModule = require(script.Parent.Parent.useGameInfo)
+local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
+local fFlagLuaAppSduiEdpFallbackAttributionFromCache = require(parent.SharedFlags).FFlagLuaAppSduiEdpFallbackAttributionFromCache
 
-local function ExperienceDetailsFeedSkeleton(p0) --[[ line: 41 ]]
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), skeleton (ref), radius (ref)
+local function ExperienceDetailsFeedSkeleton(p0) --[[ line: 45 ]]
+	-- upvalues: useTokens (ref), fFlagLuaAppSduiEdpFallbackAttributionFromCache (ref), useGameInfosSelector (ref), reactModule (ref), view (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), skeleton (ref), radius (ref)
 	local universeId = p0.universeId
 	local var7 = useTokens()
 	local isSmallScreen = p0.isSmallScreen
+	local var8 = if fFlagLuaAppSduiEdpFallbackAttributionFromCache then useGameInfosSelector(universeId) else nil
 	
 	return reactModule.createElement(view, {
 		testId = "--edp-fallback-feed-skeleton",
@@ -36,6 +39,7 @@ local function ExperienceDetailsFeedSkeleton(p0) --[[ line: 41 ]]
 		AttributionRow = reactModule.createElement(experienceDetailsFallbackAttributionRowModule, {
 			isLoading = true,
 			universeId = universeId,
+			gameName = var8 and var8.name,
 			isSmallScreen = isSmallScreen,
 			launchSource = p0.launchSource,
 			referralSource = p0.referralSource,
@@ -103,20 +107,20 @@ end
 
 return {
 	Skeleton = reactModule.memo(ExperienceDetailsFeedSkeleton),
-	Error = reactModule.memo(function(p1) --[[ line: 148 | named "ExperienceDetailsFeedError" ]]
+	Error = reactModule.memo(function(p1) --[[ line: 161 | named "ExperienceDetailsFeedError" ]]
 		-- upvalues: useTokens (ref), useGameInfoModule (ref), signalsReactModule (ref), dataHydrationModule (ref), useLocalization (ref), reactModule (ref), ExperienceDetailsFeedSkeleton (ref), view (ref), icon (ref), foundationModule (ref), text (ref), compositionTags (ref), experienceDetailsFallbackAttributionRowModule (ref), button (ref), buttonVariant (ref)
 		local universeId = p1.universeId
 		local isSmallScreen = p1.isSmallScreen
-		local var8 = useTokens()
-		local var9 = useGameInfoModule(universeId)
-		local var10 = signalsReactModule.useSignalState(dataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(universeId).data)
-		local var11 = useLocalization({
+		local var9 = useTokens()
+		local var10 = useGameInfoModule(universeId)
+		local var11 = signalsReactModule.useSignalState(dataHydrationModule.Game.getAgeRecommendationStore(false).getAgeRecommendation(universeId).data)
+		local var12 = useLocalization({
 			somethingWentWrongMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
 			experienceUnavailableMessage = "Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable",
 			retryButtonText = "InGame.CommonUI.Button.Retry"
 		})
 		
-		if var9 == nil then
+		if var10 == nil then
 			return reactModule.createElement(ExperienceDetailsFeedSkeleton, {
 				universeId = universeId,
 				isSmallScreen = isSmallScreen,
@@ -126,30 +130,30 @@ return {
 				placeIdOverride = p1.placeIdOverride
 			})
 		end
-		local var13
-		local creator = var9.creator
-		local name = var9.name
+		local var14
+		local creator = var10.creator
+		local name = var10.name
 		local name_1 = creator and creator.name
 		
 		if creator then
-			var13 = creator.hasVerifiedBadge == true
-			var13 = nil
+			var14 = creator.hasVerifiedBadge == true
+			var14 = nil
 		else
-			var13 = false
+			var14 = false
 		end
-		return if var9.isUnavailable == true then reactModule.createElement(view, {
+		return if var10.isUnavailable == true then reactModule.createElement(view, {
 			tag = "col align-x-center align-y-center size-full-0 auto-y",
 			testId = "--edp-fallback-feed-unavailable"
 		}, {
 			ErrorIcon = reactModule.createElement(icon, {
 				LayoutOrder = 1,
-				size = var8.Size.Size_2500,
+				size = var9.Size.Size_2500,
 				name = foundationModule.Enums.IconName.TriangleExclamation
 			}),
 			ErrorText = reactModule.createElement(text, {
 				tag = "auto-xy padding-top-medium text-body-large text-align-x-center content-default",
 				LayoutOrder = 2,
-				Text = var11.experienceUnavailableMessage
+				Text = var12.experienceUnavailableMessage
 			})
 		}) else reactModule.createElement(view, {
 			testId = "--edp-fallback-feed-error",
@@ -166,8 +170,8 @@ return {
 				universeId = universeId,
 				gameName = name,
 				creatorName = name_1,
-				hasVerifiedBadge = var13,
-				ageRecDisplayName = var10 and var10.displayNameWithHeaderShort,
+				hasVerifiedBadge = var14,
+				ageRecDisplayName = var11 and var11.displayNameWithHeaderShort,
 				isSmallScreen = isSmallScreen,
 				launchSource = p1.launchSource,
 				referralSource = p1.referralSource,
@@ -181,18 +185,18 @@ return {
 			}, {
 				ErrorIcon = reactModule.createElement(icon, {
 					LayoutOrder = 1,
-					size = var8.Size.Size_2500,
+					size = var9.Size.Size_2500,
 					name = foundationModule.Enums.IconName.TriangleExclamation
 				}),
 				ErrorText = reactModule.createElement(text, {
 					tag = "auto-xy padding-bottom-medium text-body-large text-align-x-center content-default",
 					LayoutOrder = 2,
-					Text = var11.somethingWentWrongMessage
+					Text = var12.somethingWentWrongMessage
 				}),
 				RetryButton = reactModule.createElement(button, {
 					LayoutOrder = 3,
 					testId = "--edp-fallback-error-state-retry",
-					text = var11.retryButtonText,
+					text = var12.retryButtonText,
 					onActivated = p1.refresh,
 					variant = buttonVariant.Standard
 				})

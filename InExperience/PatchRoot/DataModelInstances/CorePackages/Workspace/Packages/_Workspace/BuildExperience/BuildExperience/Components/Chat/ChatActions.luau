@@ -18,6 +18,8 @@ return function(p0) --[[ line: 28 | named "ChatActions" ]]
 			placeholder = p0.placeholder,
 			textBoxRef = p0.textBoxRef,
 			isAssistantResponding = p0.isAssistantResponding,
+			canStopAssistantResponse = p0.canStopAssistantResponse,
+			canSendWhileResponding = p0.canSendWhileResponding,
 			onSend = p0.onSend,
 			onStop = p0.onStop,
 			maxLines = p0.maxLines,

@@ -1,6 +1,6 @@
 ﻿local parent = script:FindFirstAncestor("SignalsUtils").Parent
 local signalsModule = require(parent.Signals)
-local getCurrentUserId = require(parent.UserLib).Stores.LocalUserIdStore.getCurrentUserId
+local getCurrentUserId = require(parent.LocalUserIdStore).LocalUserIdStore.getCurrentUserId
 
 return function(value, p0) --[[ line: 19 | named "createSessionScopedSignal" ]]
 	-- upvalues: signalsModule (ref), getCurrentUserId (ref)

@@ -18,7 +18,7 @@ local lifecycleEvents = toastNotificationModule.LifecycleEvents
 local default_1 = toastNotificationsProtocolModule.ToastNotificationProtocol.default
 local toastNotificationProtocolConstants = toastNotificationsProtocolModule.ToastNotificationProtocolConstants
 
-local function _(p0) --[[ line: 40 | named "disconnect" ]]
+local function _(p0) --[[ line: 38 | named "disconnect" ]]
 	if p0 == nil then return end
 	if typeof(p0.Disconnect) == "function" then
 		p0:Disconnect()
@@ -29,7 +29,7 @@ local function _(p0) --[[ line: 40 | named "disconnect" ]]
 	end
 end
 
-local function decodeActionParams(p1) --[[ line: 51 ]]
+local function decodeActionParams(p1) --[[ line: 49 ]]
 	-- upvalues: httpService (ref)
 	local var15 = if typeof(p1) == "table" then p1.visualItem else nil
 	local var16 = if typeof(var15) == "table" then var15.actionEventParams else nil
@@ -61,12 +61,12 @@ local function decodeActionParams(p1) --[[ line: 51 ]]
 	return nil
 end
 
-local _ = function(p2) --[[ line: 81 | named "publishToast" ]]
+local _ = function(p2) --[[ line: 79 | named "publishToast" ]]
 	-- upvalues: messageBusService (ref), toastNotificationProtocolConstants (ref), resumeNotification (ref)
 	messageBusService:Publish(toastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, resumeNotification.buildToastNotification(p2))
 end
 
-local function routeToBuildChat(p3, p4, p5) --[[ line: 88 ]]
+local function routeToBuildChat(p3, p4, p5) --[[ line: 86 ]]
 	-- upvalues: getCurrentExperienceProjectModule (ref), getPlayButtonStoreModule (ref), resumeNotification (ref), leaveExperienceModule (ref), default (ref)
 	if p4 and p5 then
 		local var17 = getCurrentExperienceProjectModule()
@@ -86,7 +86,7 @@ local function routeToBuildChat(p3, p4, p5) --[[ line: 88 ]]
 	local resumeDeepLink = resumeNotification.getResumeDeepLink(p3)
 	
 	if p4 then
-		leaveExperienceModule(function() --[[ line: 105 ]]
+		leaveExperienceModule(function() --[[ line: 103 ]]
 			-- upvalues: default (copy), resumeDeepLink (ref)
 			default:detectURL(resumeDeepLink)
 		end)
@@ -96,18 +96,18 @@ local function routeToBuildChat(p3, p4, p5) --[[ line: 88 ]]
 	default:detectURL(resumeDeepLink)
 end
 
-return function(p6) --[[ line: 113 | named "BuildEventReceiver" ]]
+return function(p6) --[[ line: 111 | named "BuildEventReceiver" ]]
 	-- upvalues: getCreatorAgentResumeStoreModule (ref), reactModule (ref), realtimeDeliveryModule (ref), notificationService (ref), resumeNotification (ref), messageBusService (ref), toastNotificationProtocolConstants (ref), lifecycleEvents (ref), decodeActionParams (ref), default_1 (ref), routeToBuildChat (ref)
 	local var20 = getCreatorAgentResumeStoreModule()
-	local var21 = reactModule.useMemo(function() --[[ line: 115 ]]
+	local var21 = reactModule.useMemo(function() --[[ line: 113 ]]
 		-- upvalues: p6 (ref), realtimeDeliveryModule (copy), notificationService (copy)
 		return p6.RobloxEventReceiver or realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
 	end, { p6.RobloxEventReceiver })
 	local var22 = p6.isInExperience == true
 	local var23 = p6.isBuildModeActive == true
-	reactModule.useEffect(function() --[[ line: 122 ]]
+	reactModule.useEffect(function() --[[ line: 120 ]]
 		-- upvalues: var21 (ref), resumeNotification (copy), var20 (ref), messageBusService (copy), toastNotificationProtocolConstants (copy)
-		local capRtnNamespace = var21:observeEvent(resumeNotification.CapRtnNamespace, function(p7) --[[ line: 123 ]]
+		local capRtnNamespace = var21:observeEvent(resumeNotification.CapRtnNamespace, function(p7) --[[ line: 121 ]]
 			-- upvalues: resumeNotification (copy), var20 (copy), messageBusService (copy), toastNotificationProtocolConstants (copy)
 			local var25 = resumeNotification.classifyRtnDetail(p7)
 			
@@ -118,7 +118,7 @@ return function(p6) --[[ line: 113 | named "BuildEventReceiver" ]]
 			messageBusService:Publish(toastNotificationProtocolConstants.MESSAGE_DISPLAY_TOAST_NOTIF, resumeNotification.buildToastNotification(var25))
 		end)
 		
-		return function() --[[ line: 137 ]]
+		return function() --[[ line: 135 ]]
 			-- upvalues: capRtnNamespace (ref)
 			if capRtnNamespace == nil then return end
 			if typeof(capRtnNamespace.Disconnect) == "function" then
@@ -130,9 +130,9 @@ return function(p6) --[[ line: 113 | named "BuildEventReceiver" ]]
 			end
 		end
 	end, { var21, var20 })
-	reactModule.useEffect(function() --[[ line: 142 ]]
+	reactModule.useEffect(function() --[[ line: 140 ]]
 		-- upvalues: lifecycleEvents (copy), resumeNotification (copy), decodeActionParams (copy), default_1 (copy), routeToBuildChat (copy), var22 (ref), var23 (ref)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, resumeNotification.NotificationType, function(p8) --[[ line: 146 ]]
+		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, resumeNotification.NotificationType, function(p8) --[[ line: 144 ]]
 			-- upvalues: resumeNotification (copy), decodeActionParams (copy), default_1 (copy), routeToBuildChat (copy), var22 (copy), var23 (copy)
 			if typeof(p8) ~= "table" or p8.userActionType ~= "click" or (typeof(p8.visualItem) ~= "table" or p8.visualItem.eventName ~= resumeNotification.ResumeEventName) or typeof(p8.notificationData) ~= "table" then return end
 			local var27 = decodeActionParams(p8)
@@ -144,7 +144,7 @@ return function(p6) --[[ line: 113 | named "BuildEventReceiver" ]]
 			routeToBuildChat(var27, var22, var23)
 		end)
 		
-		return function() --[[ line: 167 ]]
+		return function() --[[ line: 165 ]]
 			-- upvalues: userAction (ref)
 			userAction()
 		end

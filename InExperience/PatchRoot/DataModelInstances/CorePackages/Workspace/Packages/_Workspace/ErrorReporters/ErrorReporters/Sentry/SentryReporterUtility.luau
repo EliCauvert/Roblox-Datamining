@@ -1,17 +1,18 @@
 ﻿local _ = require(script.Parent.ErrorReport)
 local _ = script:FindFirstAncestor("ErrorReporters").Parent
 local t = {}
+local sentryIncludeRolloutFlagsContext = game:DefineFastFlag("SentryIncludeRolloutFlagsContext", false)
 
-local function _(value) --[[ line: 124 | named "toUnsignedInt" ]]
+local function _(value) --[[ line: 126 | named "toUnsignedInt" ]]
 	if value == nil then
 		return nil
 	end
-	local var4 = tonumber(value)
+	local var6 = tonumber(value)
 	
-	return if var4 == nil then nil elseif var4 < 0 then 0 else math.floor(var4)
+	return if var6 == nil then nil elseif var6 < 0 then 0 else math.floor(var6)
 end
 
-local function convertErrorStackToSentryFrame(p0) --[[ line: 184 ]]
+local function convertErrorStackToSentryFrame(p0) --[[ line: 186 ]]
 	local t = { lineno = tonumber(p0.line) or 0 }
 	
 	if p0.funcName then
@@ -36,16 +37,16 @@ local function convertErrorStackToSentryFrame(p0) --[[ line: 184 ]]
 	return t
 end
 
-function t.parseThreadsToSentry(value) --[[ line: 286 ]]
+function t.parseThreadsToSentry(value) --[[ line: 288 ]]
 	-- upvalues: convertErrorStackToSentryFrame (ref)
 	if not value then
 		return nil
 	end
 	local t = {}
-	local var7 = 1
+	local var9 = 1
 	
 	for i, v in pairs(value) do
-		local t_1 = { id = var7, name = v.name or i }
+		local t_1 = { id = var9, name = v.name or i }
 		
 		if i == "main" or v.name == "main" then
 			t_1.main = true
@@ -55,7 +56,7 @@ function t.parseThreadsToSentry(value) --[[ line: 286 ]]
 		end
 		if not v.stack or #v.stack <= 0 then
 			table.insert(t, t_1)
-			var7 += 1
+			var9 += 1
 			continue
 		end
 		local t_2 = {}
@@ -73,7 +74,8 @@ function t.parseThreadsToSentry(value) --[[ line: 286 ]]
 	return if #t == 0 then nil else { values = t }
 end
 
-local function parseAppContext(p1) --[[ line: 371 ]]
+local function parseAppContext(p1) --[[ line: 373 ]]
+	-- upvalues: sentryIncludeRolloutFlagsContext (ref)
 	local t = {}
 	local attributes = p1.attributes
 	
@@ -101,10 +103,21 @@ local function parseAppContext(p1) --[[ line: 371 ]]
 	if attributes.WindowsLaunchType ~= nil then
 		t.windows_launch_type = attributes.WindowsLaunchType
 	end
+	if attributes.CountryCode ~= nil then
+		t.country_code = attributes.CountryCode
+	end
+	if sentryIncludeRolloutFlagsContext then
+		if attributes.RolloutFlagsInControl ~= nil then
+			t.rollout_flags_in_control = attributes.RolloutFlagsInControl
+		end
+		if attributes.RolloutFlagsInVariant ~= nil then
+			t.rollout_flags_in_variant = attributes.RolloutFlagsInVariant
+		end
+	end
 	return t
 end
 
-local _ = function(p2) --[[ line: 432 | named "parseNetworkContext" ]]
+local _ = function(p2) --[[ line: 448 | named "parseNetworkContext" ]]
 	local t = {}
 	
 	if p2.attributes.networkType ~= nil then
@@ -113,7 +126,7 @@ local _ = function(p2) --[[ line: 432 | named "parseNetworkContext" ]]
 	return t
 end
 
-local _ = function(p3) --[[ line: 466 | named "parseOSContext" ]]
+local _ = function(p3) --[[ line: 482 | named "parseOSContext" ]]
 	local t = {}
 	local attributes = p3.attributes
 	
@@ -129,7 +142,7 @@ local _ = function(p3) --[[ line: 466 | named "parseOSContext" ]]
 	return t
 end
 
-local function parseDeviceContext(p4) --[[ line: 537 ]]
+local function parseDeviceContext(p4) --[[ line: 553 ]]
 	local t = {}
 	local attributes = p4.attributes
 	
@@ -137,41 +150,41 @@ local function parseDeviceContext(p4) --[[ line: 537 ]]
 		t.name = attributes.deviceName
 	end
 	if attributes.batteryLevel ~= nil then
-		local var15 = tonumber(attributes.batteryLevel)
+		local var17 = tonumber(attributes.batteryLevel)
 		
-		if var15 ~= nil then
-			t.battery_level = var15
+		if var17 ~= nil then
+			t.battery_level = var17
 		end
 	end
 	if attributes.manufacturer ~= nil then
 		t.manufacturer = attributes.manufacturer
 	end
 	if attributes.maxMemory ~= nil then
-		local var16
+		local var18
 		local maxMemory = attributes.maxMemory
 		
 		if maxMemory == nil then
-			var16 = nil
-		else
-			local var17 = tonumber(maxMemory)
-			var16 = if var17 == nil then nil elseif var17 < 0 then 0 else math.floor(var17)
-		end
-		if var16 ~= nil then
-			t.memory_size = var16
-		end
-	end
-	if attributes.availRAM ~= nil then
-		local var18
-		local availRAM = attributes.availRAM
-		
-		if availRAM == nil then
 			var18 = nil
 		else
-			local var19 = tonumber(availRAM)
+			local var19 = tonumber(maxMemory)
 			var18 = if var19 == nil then nil elseif var19 < 0 then 0 else math.floor(var19)
 		end
 		if var18 ~= nil then
-			t.free_memory = var18
+			t.memory_size = var18
+		end
+	end
+	if attributes.availRAM ~= nil then
+		local var20
+		local availRAM = attributes.availRAM
+		
+		if availRAM == nil then
+			var20 = nil
+		else
+			local var21 = tonumber(availRAM)
+			var20 = if var21 == nil then nil elseif var21 < 0 then 0 else math.floor(var21)
+		end
+		if var20 ~= nil then
+			t.free_memory = var20
 		end
 	end
 	if attributes.maxResolution ~= nil then
@@ -181,78 +194,93 @@ local function parseDeviceContext(p4) --[[ line: 537 ]]
 		t.thermal_status = attributes.thermalStatus
 	end
 	if attributes.cpuLogicalCount ~= nil then
-		local var20
+		local var22
 		local cpuLogicalCount = attributes.cpuLogicalCount
 		
 		if cpuLogicalCount == nil then
-			var20 = nil
-		else
-			local var21 = tonumber(cpuLogicalCount)
-			var20 = if var21 == nil then nil elseif var21 < 0 then 0 else math.floor(var21)
-		end
-		if var20 ~= nil then
-			t.processor_count = var20
-		end
-	end
-	if attributes.cpuCoreCount ~= nil then
-		local var22
-		local cpuCoreCount = attributes.cpuCoreCount
-		
-		if cpuCoreCount == nil then
 			var22 = nil
 		else
-			local var23 = tonumber(cpuCoreCount)
+			local var23 = tonumber(cpuLogicalCount)
 			var22 = if var23 == nil then nil elseif var23 < 0 then 0 else math.floor(var23)
 		end
 		if var22 ~= nil then
-			t.cpu_core_count = var22
+			t.processor_count = var22
+		end
+	end
+	if attributes.cpuCoreCount ~= nil then
+		local var24
+		local cpuCoreCount = attributes.cpuCoreCount
+		
+		if cpuCoreCount == nil then
+			var24 = nil
+		else
+			local var25 = tonumber(cpuCoreCount)
+			var24 = if var25 == nil then nil elseif var25 < 0 then 0 else math.floor(var25)
+		end
+		if var24 ~= nil then
+			t.cpu_core_count = var24
 		end
 	end
 	if attributes.cpuMake ~= nil then
 		t.cpu_description = attributes.cpuMake
 	end
 	if attributes.cpuPhysCount ~= nil then
-		local var24
+		local var26
 		local cpuPhysCount = attributes.cpuPhysCount
 		
 		if cpuPhysCount == nil then
-			var24 = nil
-		else
-			local var25 = tonumber(cpuPhysCount)
-			var24 = if var25 == nil then nil elseif var25 < 0 then 0 else math.floor(var25)
-		end
-		if var24 ~= nil then
-			t.cpu_physical_count = var24
-		end
-	end
-	if attributes.cpuSpeed ~= nil then
-		local var26
-		local cpuSpeed = attributes.cpuSpeed
-		
-		if cpuSpeed == nil then
 			var26 = nil
 		else
-			local var27 = tonumber(cpuSpeed)
+			local var27 = tonumber(cpuPhysCount)
 			var26 = if var27 == nil then nil elseif var27 < 0 then 0 else math.floor(var27)
 		end
 		if var26 ~= nil then
-			t.cpu_speed = var26
+			t.cpu_physical_count = var26
+		end
+	end
+	if attributes.cpuSpeed ~= nil then
+		local var28
+		local cpuSpeed = attributes.cpuSpeed
+		
+		if cpuSpeed == nil then
+			var28 = nil
+		else
+			local var29 = tonumber(cpuSpeed)
+			var28 = if var29 == nil then nil elseif var29 < 0 then 0 else math.floor(var29)
+		end
+		if var28 ~= nil then
+			t.cpu_speed = var28
 		end
 	end
 	return t
 end
 
-function t.parseErrorToContext(p5) --[[ line: 651 ]]
-	-- upvalues: parseAppContext (ref), parseDeviceContext (ref)
-	local t = { app = parseAppContext(p5) }
+local function parseCustomMetadataContexts(p5) --[[ line: 640 ]]
+	local t = {}
+	local customMetadata = p5.customMetadata
+	
+	if type(customMetadata) ~= "table" then
+		return t
+	end
+	for i, v in customMetadata do
+		if type(v) == "table" and next(v) ~= nil then
+			t[i] = v
+		end
+	end
+	return t
+end
+
+function t.parseErrorToContext(p6) --[[ line: 704 ]]
+	-- upvalues: parseAppContext (ref), parseDeviceContext (ref), parseCustomMetadataContexts (ref)
+	local t = { app = parseAppContext(p6) }
 	local t_1 = {}
 	
-	if p5.attributes.networkType ~= nil then
-		t_1.network_type = p5.attributes.networkType
+	if p6.attributes.networkType ~= nil then
+		t_1.network_type = p6.attributes.networkType
 	end
 	t.network = t_1
 	local t_2 = {}
-	local attributes = p5.attributes
+	local attributes = p6.attributes
 	
 	if attributes.baseOs ~= nil then
 		t_2.name = attributes.baseOs
@@ -264,8 +292,11 @@ function t.parseErrorToContext(p5) --[[ line: 651 ]]
 		t_2.version = attributes.systemVersion
 	end
 	t.os = t_2
-	t.device = parseDeviceContext(p5)
+	t.device = parseDeviceContext(p6)
 	
+	for i, v in parseCustomMetadataContexts(p6) do
+		t[i] = v
+	end
 	return t
 end
 

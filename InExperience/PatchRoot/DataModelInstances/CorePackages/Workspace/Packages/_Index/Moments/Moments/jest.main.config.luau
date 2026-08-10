@@ -3,10 +3,11 @@
 return {
 	displayName = "Moments",
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = { "/Analytics/", "/Components/Feed/" },
+	testPathIgnorePatterns = { "/Analytics/" },
 	setupFilesAfterEnv = {
 		jestConfigsModule.setupFiles.LogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		jestConfigsModule.setupFiles.RetryTimes
 	}
 }

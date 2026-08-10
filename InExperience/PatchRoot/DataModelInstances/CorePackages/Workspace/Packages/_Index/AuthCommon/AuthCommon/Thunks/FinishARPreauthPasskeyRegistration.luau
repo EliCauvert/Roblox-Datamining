@@ -5,18 +5,19 @@ local base64Module = require(authCommon.Utils.Base64)
 local promiseModule = require(parent.Promise)
 local url = require(parent.Http).Url
 local passkeyConstantsModule = require(authCommon.Common.PasskeyConstants)
+local fFlagEmitPasskeyRegistrationSourceOnFinish = require(parent.SharedFlags).FFlagEmitPasskeyRegistrationSourceOnFinish
 
-local function _() --[[ line: 13 | named "getFinishRegistrationUrl" ]]
+local function _() --[[ line: 15 | named "getFinishRegistrationUrl" ]]
 	-- upvalues: url (ref)
 	return string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL)
 end
 
-local function finishARPreauthPasskeyRegistration(p0, p1) --[[ line: 17 ]]
+local function finishARPreauthPasskeyRegistration(p0, p1) --[[ line: 19 ]]
 	-- upvalues: url (ref), promiseModule (ref), httpService (ref), passkeyConstantsModule (ref)
-	return p0(string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL), "POST", { postBody = p1 }):andThen(function(p2) --[[ line: 18 ]]
+	return p0(string.format("%sv1/passkey/finish-ar-preauth-registration", url.AUTH_URL), "POST", { postBody = p1 }):andThen(function(p2) --[[ line: 20 ]]
 		-- upvalues: promiseModule (copy)
 		return promiseModule.resolve(p2)
-	end, function(p3) --[[ line: 20 ]]
+	end, function(p3) --[[ line: 22 ]]
 		-- upvalues: httpService (copy), promiseModule (copy), passkeyConstantsModule (copy)
 		return promiseModule.reject({
 			body = if type(p3) == "table" then httpService:JSONEncode(p3) else nil,
@@ -25,8 +26,8 @@ local function finishARPreauthPasskeyRegistration(p0, p1) --[[ line: 17 ]]
 	end)
 end
 
-return function(p4, p5, p6, p7, p8, p9) --[[ line: 26 | named "attemptFinishARPreauthPasskeyRegistration" ]]
-	-- upvalues: httpService (ref), base64Module (ref), finishARPreauthPasskeyRegistration (ref)
+return function(p4, p5, p6, p7, p8, p9, p10) --[[ line: 28 | named "attemptFinishARPreauthPasskeyRegistration" ]]
+	-- upvalues: httpService (ref), base64Module (ref), fFlagEmitPasskeyRegistrationSourceOnFinish (ref), finishARPreauthPasskeyRegistration (ref)
 	local var6 = httpService:JSONDecode(p8)
 	var6.id = base64Module.ToUrlSafeBase64(var6.id)
 	var6.rawId = base64Module.ToUrlSafeBase64(var6.rawId)
@@ -38,6 +39,7 @@ return function(p4, p5, p6, p7, p8, p9) --[[ line: 26 | named "attemptFinishARPr
 		passkeySessionId = p6,
 		passkeyRegistrationResponse = httpService:JSONEncode(var6),
 		userId = p7,
-		isPostRecovery = p9
+		isPostRecovery = p9,
+		source = if fFlagEmitPasskeyRegistrationSourceOnFinish then p10 else nil
 	}))
 end

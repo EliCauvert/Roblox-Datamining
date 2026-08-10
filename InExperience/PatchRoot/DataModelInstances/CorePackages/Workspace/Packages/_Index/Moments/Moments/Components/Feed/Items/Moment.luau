@@ -8,59 +8,45 @@ local _ = require(script.createMomentStore)
 local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(parent.MomentsTypes)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
+local getFFlagMomentsPartnerContentLabelModule = require(moments.Flags.GetFFlagMomentsPartnerContentLabel)
+local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
 local toMediaItemModule = require(moments.Components.Feed.Media.toMediaItem)
 local momentMediaView = momentsCommonModule.Media.MomentMediaView
 
-local function _(p0) --[[ line: 45 | named "momentAttribution" ]]
-	if p0 == nil then
-		return nil
-	end
-	local recommendationMetadata = p0.recommendationMetadata
-	
-	return if recommendationMetadata == nil or recommendationMetadata.itemId == nil or recommendationMetadata.itemId == "" then nil else {
-		itemId = recommendationMetadata.itemId,
-		tracingId = recommendationMetadata.tracingId
-	}
+local function momentAttribution(p0) --[[ line: 47 ]]
+	-- upvalues: makeRecommendationAttributionModule (ref)
+	return if p0 == nil then nil else makeRecommendationAttributionModule(p0.recommendationMetadata)
 end
 
 return {
 	{
 		kind = "moment",
-		getKey = function(p1) --[[ line: 64 ]]
+		getKey = function(p1) --[[ line: 59 ]]
 			local moment = p1.moment
 			local recommendationMetadata = moment.recommendationMetadata
 			
-			return if recommendationMetadata and recommendationMetadata.itemId and recommendationMetadata.itemId ~= "" then recommendationMetadata.itemId else moment.momentId
+			return if recommendationMetadata and recommendationMetadata.feedItemId and recommendationMetadata.feedItemId ~= "" then recommendationMetadata.feedItemId else moment.momentId
 		end,
-		getAttribution = function(p2) --[[ line: 78 ]]
-			local moment = p2.moment
-			
-			if moment == nil then
-				return nil
-			end
-			local recommendationMetadata = moment.recommendationMetadata
-			
-			return if recommendationMetadata == nil or recommendationMetadata.itemId == nil or recommendationMetadata.itemId == "" then nil else {
-				itemId = recommendationMetadata.itemId,
-				tracingId = recommendationMetadata.tracingId
-			}
+		getAttribution = function(p2) --[[ line: 75 ]]
+			-- upvalues: momentAttribution (ref)
+			return momentAttribution(p2.moment)
 		end,
-		render = function(p3, _) --[[ line: 82 ]]
-			-- upvalues: toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), momentItemModule (ref)
+		render = function(p3, _) --[[ line: 79 ]]
+			-- upvalues: toMediaItemModule (ref), reactModule (ref), momentMediaView (ref), getMomentsPreferencesStoreModule (ref), getFFlagMomentsPartnerContentLabelModule (ref), momentItemModule (ref)
 			local moment = p3.moment
 			
 			if moment == nil then
 				return nil
 			end
-			local var7 = nil
-			local var8 = toMediaItemModule(p3)
+			local var10 = nil
+			local var11 = toMediaItemModule(p3)
 			
-			if var8 ~= nil then
-				var7 = reactModule.createElement(momentMediaView, {
+			if var11 ~= nil then
+				var10 = reactModule.createElement(momentMediaView, {
 					suppressTapToToggle = true,
-					momentId = var8.momentId,
-					posterContent = var8.posterContent,
-					showLoadingSkeleton = var8.captureType == Enum.CaptureType.Video,
+					momentId = var11.momentId,
+					posterContent = var11.posterContent,
+					showLoadingSkeleton = var11.captureType == Enum.CaptureType.Video,
 					getScaleType = getMomentsPreferencesStoreModule(false).getMediaScaleType
 				})
 			end
@@ -70,32 +56,31 @@ return {
 				data = {
 					kind = "experience",
 					creatorIsVerified = nil,
-					isSponsored = false,
 					commentCount = nil,
 					momentId = moment.momentId,
-					itemId = moment.recommendationMetadata and moment.recommendationMetadata.itemId,
 					creatorId = moment.creatorId,
 					placeId = moment.metadata.placeId or 0,
 					universeId = moment.metadata.universeId or 0,
+					isSponsored = getFFlagMomentsPartnerContentLabelModule() and moment.metadata.partnerUploadType == "influencer",
 					description = moment.metadata.description,
 					isModerated = moment.isModerated == true,
-					feedItemId = if recommendationMetadata ~= nil then nil else recommendationMetadata.itemId,
+					feedItemId = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId,
 					feedSessionId = if recommendationMetadata ~= nil then nil else recommendationMetadata.tracingId
 				},
-				mediaSurface = var7,
+				mediaSurface = var10,
 				moment = moment
 			})
 		end
 	},
 	{
 		kind = "skeleton",
-		getKey = function(_) --[[ line: 150 ]]
+		getKey = function(_) --[[ line: 151 ]]
 			return "__feed_skeleton__"
 		end,
-		getAttribution = function(_) --[[ line: 155 ]]
+		getAttribution = function(_) --[[ line: 156 ]]
 			return nil
 		end,
-		render = function(_, _) --[[ line: 159 ]]
+		render = function(_, _) --[[ line: 160 ]]
 			-- upvalues: reactModule (ref), momentItemSkeletonModule (ref)
 			return reactModule.createElement(momentItemSkeletonModule)
 		end

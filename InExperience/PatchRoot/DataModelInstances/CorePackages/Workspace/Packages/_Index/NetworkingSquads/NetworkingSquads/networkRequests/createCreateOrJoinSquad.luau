@@ -1,13 +1,11 @@
-﻿local parent = script:FindFirstAncestor("NetworkingSquads").Parent
-local SQUAD_URLModule = require(script.Parent.Parent.SQUAD_URL)
+﻿local SQUAD_URLModule = require(script.Parent.Parent.SQUAD_URL)
 local _ = require(script.Parent.Parent.networkingSquadTypes)
-local fFlagEnableScheduledSquads = require(parent.SharedFlags).FFlagEnableScheduledSquads
 
-return function(p0) --[[ line: 10 ]]
-	-- upvalues: SQUAD_URLModule (ref), fFlagEnableScheduledSquads (ref)
+return function(p0) --[[ line: 5 ]]
+	-- upvalues: SQUAD_URLModule (ref)
 	local var1 = nil
-	local var2 = p0.roduxNetworking.POST({ Name = "CreateOrJoinSquad" }, function(p1, p2) --[[ line: 16 ]]
-		-- upvalues: p0 (ref), var1 (write), SQUAD_URLModule (copy), fFlagEnableScheduledSquads (copy)
+	local var2 = p0.roduxNetworking.POST({ Name = "CreateOrJoinSquad" }, function(p1, p2) --[[ line: 11 ]]
+		-- upvalues: p0 (ref), var1 (write), SQUAD_URLModule (copy)
 		if p0.useMockedResponse then
 			var1 = {
 				responseBody = {
@@ -31,13 +29,13 @@ return function(p0) --[[ line: 10 ]]
 			leaveExisting = p2.leaveExisting,
 			squadLocation = p2.squadLocation,
 			partyAttemptId = p2.partyAttemptId,
-			scheduledGroupUpId = if fFlagEnableScheduledSquads then p2.scheduledSquadId else nil
+			scheduledGroupUpId = p2.scheduledSquadId
 		})
 	end)
 	
 	if p0.useMockedResponse then
 		var2.Mock.clear()
-		var2.Mock.reply(function() --[[ line: 69 ]]
+		var2.Mock.reply(function() --[[ line: 64 ]]
 			-- upvalues: var1 (write)
 			return var1
 		end)

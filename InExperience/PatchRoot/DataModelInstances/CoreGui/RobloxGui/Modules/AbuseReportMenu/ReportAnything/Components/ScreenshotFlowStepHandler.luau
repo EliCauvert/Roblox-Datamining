@@ -5,31 +5,30 @@ local parent = script.Parent.Parent
 local screenshotDialogModule = require(parent.Components.ScreenshotDialog)
 local screenshotReviewDialogModule = require(parent.Components.ScreenshotReviewDialog)
 local _ = require(script.Parent.Parent.Parent.Components.Types)
-local getFFlagAvatarIdentificationSafeAreaFix = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAvatarIdentificationSafeAreaFix
 
-return function(p0) --[[ line: 28 | named "ScreenshotFlowStepHandler" ]]
-	-- upvalues: reactModule (ref), getFFlagAvatarIdentificationSafeAreaFix (ref), screenshotReviewDialogModule (ref), robloxTranslatorModule (ref), screenshotDialogModule (ref)
+return function(p0) --[[ line: 25 | named "ScreenshotFlowStepHandler" ]]
+	-- upvalues: reactModule (ref), screenshotReviewDialogModule (ref), robloxTranslatorModule (ref), screenshotDialogModule (ref)
 	local var5, var6 = reactModule.useState(if p0.initialPageNumber == nil then 1 else p0.initialPageNumber)
 	local var7, var8 = reactModule.useState(1.777777777778)
 	local var9, var10 = reactModule.useState(800)
 	local var11, var12 = reactModule.useState(800)
 	local var13, var14 = reactModule.useState(true)
-	local var15 = reactModule.useCallback(function() --[[ line: 35 ]]
+	local var15 = reactModule.useCallback(function() --[[ line: 32 ]]
 		-- upvalues: var6 (ref)
 		var6(2)
 	end, { var6 })
-	local var16 = reactModule.useCallback(function() --[[ line: 38 ]]
+	local var16 = reactModule.useCallback(function() --[[ line: 35 ]]
 		-- upvalues: var6 (ref)
 		var6(1)
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 42 ]]
-		-- upvalues: getFFlagAvatarIdentificationSafeAreaFix (copy), p0 (ref), var8 (ref), var10 (ref), var12 (ref), var14 (ref)
+	reactModule.useEffect(function() --[[ line: 39 ]]
+		-- upvalues: p0 (ref), var8 (ref), var10 (ref), var12 (ref), var14 (ref)
 		local currentCamera = game.Workspace.CurrentCamera
 		
 		if currentCamera ~= nil then
 			local viewportSize = currentCamera.viewportSize
 			
-			if getFFlagAvatarIdentificationSafeAreaFix() and p0.viewportInfo then
+			if p0.viewportInfo then
 				var8(p0.viewportInfo.width / p0.viewportInfo.height)
 			else
 				var8(viewportSize.X / viewportSize.Y)

@@ -25,7 +25,11 @@ return {
 		-- upvalues: var0 (write), t (ref)
 		return var0 or t
 	end,
-	_resetForTest = function() --[[ line: 38 ]]
+	isRegistered = function() --[[ line: 41 ]]
+		-- upvalues: var0 (write)
+		return var0 ~= nil
+	end,
+	_resetForTest = function() --[[ line: 45 ]]
 		-- upvalues: var0 (write)
 		var0 = nil
 	end

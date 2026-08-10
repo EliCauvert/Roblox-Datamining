@@ -6,7 +6,7 @@ local fetch = httpClientModule.fetch
 local asPromise = httpClientModule.asPromise
 
 return {
-	fetchEligibility = function(p0, p1) --[[ line: 20 ]]
+	fetchEligibility = function(p0, p1) --[[ line: 19 ]]
 		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
 		p1 = p1 or {}
 		
@@ -15,12 +15,12 @@ return {
 			analyticsKey = "creator-eligibility.get",
 			network = p1.network,
 			url = ("%s/core-content/v1/creator-eligibility/%d"):format(p1.baseUrl or urlBase.APIS, p0),
-			decode = function(p2) --[[ line: 31 ]]
+			decode = function(p2) --[[ line: 30 ]]
 				return p2
 			end
 		}))
 	end,
-	isFlagPresent = function(p3, p4) --[[ line: 38 ]]
+	isFlagPresent = function(p3, p4) --[[ line: 37 ]]
 		return table.find(p3.creatorEligibility, p4) ~= nil
 	end
 }

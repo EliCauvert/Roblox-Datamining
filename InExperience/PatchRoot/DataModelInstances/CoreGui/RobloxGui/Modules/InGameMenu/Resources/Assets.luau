@@ -1,14 +1,16 @@
-﻿local imagesModule = require(script.Parent.Images)
-local images = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).UIBlox.App.ImageSet.Images
+﻿local corePackagesService = game:GetService("CorePackages")
+local imagesModule = require(script.Parent.Images)
+local images = require(corePackagesService.Packages.InGameMenuDependencies).UIBlox.App.ImageSet.Images
+local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 
 return {
 	Images = {
 		RobloxLogo = imagesModule["LuaApp/graphic/ic_logo"],
 		CloseButton = "rbxasset://textures/ui/TopBar/close.png",
 		RespawnIcon = imagesModule["InGameMenu/Icons/RespawnIcon"],
-		ReportIcon = imagesModule["LuaApp/icons/GameDetails/feedback"],
-		CloseModal = imagesModule["LuaApp/icons/navigation/close"],
-		NavigateBack = imagesModule["LuaApp/icons/navigation/pushBack"],
+		ReportIcon = if fFlagCoreUiMigrateUIBloxToFoundation then "icons/actions/feedback" else imagesModule["LuaApp/icons/GameDetails/feedback"],
+		CloseModal = if fFlagCoreUiMigrateUIBloxToFoundation then "icons/navigation/close" else imagesModule["LuaApp/icons/navigation/close"],
+		NavigateBack = if fFlagCoreUiMigrateUIBloxToFoundation then "icons/navigation/pushBack" else imagesModule["LuaApp/icons/navigation/pushBack"],
 		NavigateForward = imagesModule["LuaApp/icons/navigation/pushRight"],
 		SendInvite = imagesModule["LuaApp/icons/GameDetails/invite"],
 		InviteSuccess = imagesModule["LuaApp/icons/status_progress"],
@@ -37,6 +39,7 @@ return {
 		Friends = imagesModule["InGameMenu/Icons/Friends"],
 		MoreActions = imagesModule["LuaApp/icons/GameDetails/more"],
 		ViewAvatar = imagesModule["InGameMenu/Icons/ViewAvatar"],
+		RoundedRectImageKey = "component_assets/circle_17",
 		RoundedRect = {
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(8, 8, 9, 9),
@@ -52,7 +55,7 @@ return {
 			ScaleType = Enum.ScaleType.Stretch,
 			SliceCenter = Rect.new(0, 0, 0, 0)
 		},
-		Circle = images["component_assets/circle_29"],
+		Circle = if fFlagCoreUiMigrateUIBloxToFoundation then "component_assets/circle_29" else images["component_assets/circle_29"],
 		CircleCutout = "rbxasset://textures/ui/InGameMenu/CircleCutout.png",
 		QuarterCircle = "rbxasset://textures/ui/InGameMenu/QuarterCircle.png",
 		ExpandArrow = imagesModule["InGameMenu/Icons/ExpandArrow"],
@@ -86,6 +89,6 @@ return {
 			ScaleType = Enum.ScaleType.Slice
 		},
 		SliderButton = imagesModule["InGameMenu/Graphic/SliderButton"],
-		PlaceholderGameIcon = images["icons/imageUnavailable"]
+		PlaceholderGameIcon = if fFlagCoreUiMigrateUIBloxToFoundation then "icons/imageUnavailable" else images["icons/imageUnavailable"]
 	}
 }

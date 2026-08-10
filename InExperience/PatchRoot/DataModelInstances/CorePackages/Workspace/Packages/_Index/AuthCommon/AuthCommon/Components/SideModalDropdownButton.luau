@@ -7,28 +7,14 @@ local view = foundationModule.View
 local controlState = foundationModule.Enums.ControlState
 local iconSize = foundationModule.Enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
-local fFlagUseBirthdayDropdownForGamepad = require(parent.SharedFlags).FFlagUseBirthdayDropdownForGamepad
 
-return function(p0) --[[ line: 32 | named "SideModalDropdown" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), fFlagUseBirthdayDropdownForGamepad (ref), view (ref), text (ref), icon (ref), iconSize (ref)
+return function(p0) --[[ line: 30 | named "SideModalDropdown" ]]
+	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), text (ref), icon (ref), iconSize (ref)
 	local var2 = useTokens()
 	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useCallback(function(p1) --[[ line: 35 ]]
-		-- upvalues: controlState (copy), var4 (ref)
-		if p1 == controlState.Hover then
-			var4(true)
-			
-			return
-		end
-		var4(false)
-	end, { var4 })
-	local var6 = 40
 	
-	if fFlagUseBirthdayDropdownForGamepad then
-		var6 = p0.height or var6
-	end
 	return reactModule.createElement(view, {
-		Size = UDim2.new(if p0.fixSizeToParent then 1 else 0, 0, 0, var6),
+		Size = UDim2.new(if p0.fixSizeToParent then 1 else 0, 0, 0, p0.height or 40),
 		tag = {
 			["auto-x"] = not p0.fixSizeToParent,
 			["radius-medium"] = true,
@@ -37,9 +23,17 @@ return function(p0) --[[ line: 32 | named "SideModalDropdown" ]]
 			["padding-xxsmall"] = true,
 			["bg-shift-100"] = true
 		},
-		onStateChanged = var5,
+		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 33 ]]
+			-- upvalues: controlState (copy), var4 (ref)
+			if p1 == controlState.Hover then
+				var4(true)
+				
+				return
+			end
+			var4(false)
+		end, { var4 }),
 		onActivated = p0.onActivated,
-		backgroundStyle = if fFlagUseBirthdayDropdownForGamepad then p0.backgroundColorToken else nil
+		backgroundStyle = p0.backgroundColorToken
 	}, {
 		UIStroke = reactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,

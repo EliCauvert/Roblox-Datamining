@@ -21,10 +21,10 @@ local useLocalization = localizationModule.Hooks.useLocalization
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
-local fFlagReportIPInfringement = require(parent.SharedFlags).FFlagReportIPInfringement
+local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
 
 return reactModule.memo(function(p0) --[[ line: 48 | named "DualDropdownReportV2" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), dashModule (ref), fFlagReportIPInfringement (ref), sheet (ref), view (ref), iconButton (ref), buttonVariant (ref), iconName (ref), text (ref), inputLabel (ref), inputSize (ref), sideModalDropdownButtonModule (ref), textArea (ref), button (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), optionSelectorGroup (ref)
+	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), fFlagUpdateInGameAssetReportingCTAs (ref), dashModule (ref), sheet (ref), view (ref), iconButton (ref), buttonVariant (ref), iconName (ref), text (ref), inputLabel (ref), inputSize (ref), sideModalDropdownButtonModule (ref), textArea (ref), button (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), optionSelectorGroup (ref)
 	local selectOnePrompt
 	local var7 = useTokens()
 	local var8, var9 = reactModule.useState(true)
@@ -39,48 +39,48 @@ return reactModule.memo(function(p0) --[[ line: 48 | named "DualDropdownReportV2
 		selectOnePrompt = "Feature.ReportAbuse.Label.PleaseSelectOne",
 		commentHeading = "Feature.ReportAbuse.Label.TellUsWhatHappenedNoOptional",
 		textAreaPlaceholder = "Feature.SettingsHub.Label.ReportComment",
-		submitButton = "Feature.ReportAbuse.Action.Submit",
 		continueButton = "Feature.ReportAbuse.Action.Continue",
-		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport"
+		titleIpInfringement = "Feature.ReportAbuse.Title.SelectInSceneContinueYourReport",
+		submitButton = if fFlagUpdateInGameAssetReportingCTAs then "Feature.ReportAbuse.Label.Report" else "Feature.ReportAbuse.Action.Submit"
 	})
-	local var21 = reactModule.useCallback(function(p1) --[[ line: 69 ]]
+	local var21 = reactModule.useCallback(function(p1) --[[ line: 71 ]]
 		-- upvalues: var17 (ref)
 		var17(p1)
 	end, {})
-	local var22 = reactModule.useCallback(function() --[[ line: 73 ]]
+	local var22 = reactModule.useCallback(function() --[[ line: 75 ]]
 		-- upvalues: none_1 (ref)
 		none_1("Problem")
 	end, {})
-	local var23 = reactModule.useCallback(function() --[[ line: 77 ]]
+	local var23 = reactModule.useCallback(function() --[[ line: 79 ]]
 		-- upvalues: none_1 (ref)
 		none_1("Surface")
 	end, {})
-	local var24 = reactModule.useCallback(function() --[[ line: 81 ]]
+	local var24 = reactModule.useCallback(function() --[[ line: 83 ]]
 		-- upvalues: var9 (ref), p0 (ref)
 		var9(false)
 		task.wait(0.3)
 		p0.onClose()
 	end, { p0.onClose })
-	local var25 = reactModule.useCallback(function() --[[ line: 87 ]]
+	local var25 = reactModule.useCallback(function() --[[ line: 89 ]]
 		-- upvalues: none_1 (ref)
 		none_1("None")
 	end, {})
-	local var26 = reactModule.useCallback(function(p2) --[[ line: 91 ]]
+	local var26 = reactModule.useCallback(function(p2) --[[ line: 93 ]]
 		-- upvalues: none (ref), dashModule (copy), p0 (ref), var13 (ref), var15 (ref), var25 (ref)
 		if none == "Problem" then
-			var13(dashModule.find(p0.problems, function(p3) --[[ line: 93 ]]
+			var13(dashModule.find(p0.problems, function(p3) --[[ line: 95 ]]
 				-- upvalues: p2 (ref)
 				return p3.value == p2
 			end))
 		else
-			var15(dashModule.find(p0.surfaces, function(p4) --[[ line: 98 ]]
+			var15(dashModule.find(p0.surfaces, function(p4) --[[ line: 100 ]]
 				-- upvalues: p2 (ref)
 				return p4.value == p2
 			end))
 		end
 		var25()
 	end, { none, p0.problems, p0.surfaces, var25 })
-	local var27 = fFlagReportIPInfringement and (var12 and var12.value == "ip infringement")
+	local var27 = var12 and var12.value == "ip infringement"
 	local var28 = reactModule.useCallback(function() --[[ line: 110 ]]
 		-- upvalues: var12 (ref), var14 (ref), none_3 (ref), var27 (ref), var24 (ref), p0 (ref), var16 (ref)
 		local var48 = if var12 ~= nil then "" else var12.value

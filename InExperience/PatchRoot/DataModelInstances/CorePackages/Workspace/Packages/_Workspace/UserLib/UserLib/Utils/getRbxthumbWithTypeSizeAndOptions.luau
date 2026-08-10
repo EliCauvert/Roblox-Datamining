@@ -7,8 +7,8 @@ local t = {
 	[constantsModule.RbxthumbTypes.Outfit] = sharedFlagsModule.FFlagAXBackgroundsInOutfitThumbnails
 }
 
-return function(p0, p1, p2, p3, p4) --[[ line: 14 ]]
-	-- upvalues: t (ref)
+return function(p0, p1, p2, p3, p4, p5) --[[ line: 14 ]]
+	-- upvalues: t (ref), constantsModule (ref)
 	local formattedText = string.format("rbxthumb://type=%s&id=%s&w=%d&h=%d", p1, tostring(p0), p2, p2)
 	
 	if p3 then
@@ -19,6 +19,9 @@ return function(p0, p1, p2, p3, p4) --[[ line: 14 ]]
 	end
 	if t[p1] then
 		formattedText ..= "&includeBackground=true"
+	end
+	if p5 and p1 == constantsModule.RbxthumbTypes.AvatarHeadShot then
+		formattedText ..= "&includeprofileframe=true"
 	end
 	return formattedText
 end

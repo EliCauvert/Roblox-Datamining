@@ -1,4 +1,6 @@
-﻿return {
+﻿local _ = require(script.Components.AppNavItem)
+
+return {
 	Placement = require(script.Enum.Placement),
 	AppNavBar = require(script.Components.AppNavBar),
 	StudioCTAIcon = require(script.Components.StudioCTAIcon),

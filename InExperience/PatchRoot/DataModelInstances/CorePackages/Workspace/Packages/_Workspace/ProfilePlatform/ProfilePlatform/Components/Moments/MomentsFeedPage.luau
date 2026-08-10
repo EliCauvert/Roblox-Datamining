@@ -6,81 +6,156 @@ local robloxAppHooksModule = require(parent.RobloxAppHooks)
 local roactUtilsModule = require(parent.RoactUtils)
 local momentsCommonModule = require(parent.MomentsCommon)
 local momentsModule = require(parent.Moments)
-local fFlagEnableArgusImmersiveNav = require(parent.SharedFlags).FFlagEnableArgusImmersiveNav
+local genericAbuseReportingModule = require(parent.GenericAbuseReporting)
+local centralOverlayModule = require(parent.CentralOverlay)
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEnableArgusImmersiveNav = sharedFlagsModule.FFlagEnableArgusImmersiveNav
+local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
+local fFlagMomentsReportWithFeedId = sharedFlagsModule.FFlagMomentsReportWithFeedId
 local view = foundationModule.View
 local iconButton = foundationModule.IconButton
 local buttonSize = foundationModule.Enums.ButtonSize
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local useScreenSize = robloxAppHooksModule.useScreenSize
 local useStatusBarHeight = robloxAppHooksModule.useStatusBarHeight
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
+local abuseVector = genericAbuseReportingModule.Enums.AbuseVector
+local openDynamicAbuseReport = genericAbuseReportingModule.Thunks.OpenDynamicAbuseReport
+local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
 local fireAnalyticsEvent = momentsCommonModule.Analytics.fireAnalyticsEvent
 local eventNames = momentsCommonModule.Analytics.EventNames
 local useNavigation = navigationModule.useNavigation
 local feed = momentsModule.Feed
 local momentsImmersivePresentation = momentsModule.MomentsImmersivePresentation
 local createUserMomentsFeedSourceModule = require(parent.Moments.CreateUserMomentsFeedSource)
+local reportMoment = momentsModule.reportMoment
 
-return if fFlagEnableArgusImmersiveNav then function() --[[ line: 50 | named "MomentsFeedPageImmersive" ]]
-	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref)
-	local var16 = useNavigation()
-	local extraProps = var16.getParam("extraProps")
-	local var18 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
-	local var19 = useScreenSize()
+return if fFlagEnableArgusImmersiveNav then function() --[[ line: 64 | named "MomentsFeedPageImmersive" ]]
+	-- upvalues: useNavigation (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useDispatch (ref), openDynamicAbuseReport (ref), abuseVector (ref), closeCentralOverlay (ref), reportMoment (ref), fFlagMomentsReportWithFeedId (ref), useScreenSize (ref), view (ref), momentsImmersivePresentation (ref)
+	local var19 = useNavigation()
+	local extraProps = var19.getParam("extraProps")
+	local var21 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
+	local var22 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
+	local var23 = reactModule.useCallback(function() --[[ line: 71 ]]
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var21 (ref), var19 (ref)
+		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var21) })
+		var19.goBack()
+	end, { var19.goBack, var21 })
+	local var24 = nil
+	
+	if fFlagEnableReportingFlowForMomentsFeed then
+		local var25 = useDispatch()
+		var24 = reactModule.useCallback(function(p1) --[[ line: 84 ]]
+			-- upvalues: var25 (ref), openDynamicAbuseReport (copy), abuseVector (copy), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy)
+			local var27 = false
+			var25(openDynamicAbuseReport({
+				abuseVector = abuseVector.MomentsFeed,
+				targetId = p1.feedItemId,
+				onSubmit = function() --[[ line: 98 ]]
+					-- upvalues: var27 (write), p1 (ref)
+					if var27 then
+						return
+					end
+					p1.onSubmit()
+				end,
+				onClose = function() --[[ line: 104 ]]
+					-- upvalues: p1 (ref), var25 (copy), closeCentralOverlay (copy)
+					p1.onClose()
+					var25(closeCentralOverlay())
+				end,
+				onCustomSubmit = function(p2) --[[ line: 112 ]]
+					-- upvalues: var27 (write), p1 (ref), var25 (copy), closeCentralOverlay (copy), reportMoment (copy), fFlagMomentsReportWithFeedId (copy)
+					if p2.endpoint == "moments-ip" then
+						var27 = true
+						
+						local function _(p3) --[[ line: 121 | named "showConfirmation" ]]
+							-- upvalues: p1 (copy), var25 (copy), closeCentralOverlay (copy)
+							p1.onClose()
+							var25(closeCentralOverlay())
+							
+							if p1.onIpReportCode then
+								p1.onIpReportCode(p3)
+							end
+						end
+						
+						return reportMoment(if fFlagMomentsReportWithFeedId then p1.feedItemId else p1.momentId, "IntellectualProperty"):andThen(function(p4) --[[ line: 131 ]]
+							-- upvalues: p1 (copy), var25 (copy), closeCentralOverlay (copy)
+							local reportCode = p4.reportCode
+							p1.onClose()
+							var25(closeCentralOverlay())
+							
+							if p1.onIpReportCode then
+								p1.onIpReportCode(reportCode)
+							end
+							return p4
+						end, function() --[[ line: 134 ]]
+							-- upvalues: p1 (copy), var25 (copy), closeCentralOverlay (copy)
+							p1.onClose()
+							var25(closeCentralOverlay())
+							
+							if p1.onIpReportCode then
+								p1.onIpReportCode(nil)
+							end
+						end)
+					end
+					return nil
+				end
+			}))
+		end, { var25 })
+	end
+	local var26 = useScreenSize()
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var19.X, var19.Y)
+		Size = UDim2.fromOffset(var26.X, var26.Y)
 	}, {
 		Presentation = reactModule.createElement(momentsImmersivePresentation, {
 			feedKind = "user",
 			sessionSource = "profile",
-			targetUserId = var18,
-			initialIndex = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1,
-			onBack = reactModule.useCallback(function() --[[ line: 57 ]]
-				-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var18 (ref), var16 (ref)
-				fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var18) })
-				var16.goBack()
-			end, { var16.goBack, var18 })
+			targetUserId = var21,
+			initialIndex = var22,
+			onBack = var23,
+			openMomentsFeedReport = var24
 		})
 	})
-end else function() --[[ line: 86 | named "MomentsFeedPageLegacy" ]]
-	-- upvalues: useNavigation (ref), reactModule (ref), createUserMomentsFeedSourceModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useScreenSize (ref), useSelector (ref), useStatusBarHeight (ref), view (ref), foundationProvider (ref), theme (ref), feed (ref), iconButton (ref), buttonSize (ref)
-	local var8 = useNavigation()
-	local extraProps = var8.getParam("extraProps")
-	local var10 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
-	local var11 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
-	local var12 = reactModule.useMemo(function() --[[ line: 93 ]]
-		-- upvalues: createUserMomentsFeedSourceModule (copy), var10 (ref), var11 (ref)
-		return createUserMomentsFeedSourceModule(var10, { initialIndex = var11 })
-	end, { var10, var11 })
-	local var13 = reactModule.useCallback(function() --[[ line: 99 ]]
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var10 (ref), var8 (ref)
-		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var10) })
-		var8.goBack()
-	end, { var8.goBack, var10 })
-	local var14 = useScreenSize()
-	local var15 = useSelector(function(p0) --[[ line: 109 ]]
+end else function() --[[ line: 165 | named "MomentsFeedPageLegacy" ]]
+	-- upvalues: useNavigation (ref), reactModule (ref), createUserMomentsFeedSourceModule (ref), fireAnalyticsEvent (ref), eventNames (ref), useScreenSize (ref), useSelector (ref), useStatusBarHeight (ref), view (ref), foundationProvider (ref), colorMode (ref), feed (ref), iconButton (ref), buttonSize (ref)
+	local var11 = useNavigation()
+	local extraProps = var11.getParam("extraProps")
+	local var13 = if extraProps and extraProps.targetUserId then extraProps.targetUserId else 0
+	local var14 = if extraProps and extraProps.initialIndex then extraProps.initialIndex else 1
+	local var15 = reactModule.useMemo(function() --[[ line: 172 ]]
+		-- upvalues: createUserMomentsFeedSourceModule (copy), var13 (ref), var14 (ref)
+		return createUserMomentsFeedSourceModule(var13, { initialIndex = var14 })
+	end, { var13, var14 })
+	local var16 = reactModule.useCallback(function() --[[ line: 178 ]]
+		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var13 (ref), var11 (ref)
+		fireAnalyticsEvent(eventNames.ProfileClosePressed, { userId = tostring(var13) })
+		var11.goBack()
+	end, { var11.goBack, var13 })
+	local var17 = useScreenSize()
+	local var18 = useSelector(function(p0) --[[ line: 188 ]]
 		return p0.GlobalGuiInset
 	end)
 	
 	return reactModule.createElement(view, {
 		tag = "bg-surface-0",
-		Size = UDim2.fromOffset(var14.X, var14.Y),
+		Size = UDim2.fromOffset(var17.X, var17.Y),
 		padding = {
-			top = UDim.new(0, var15.top + useStatusBarHeight()),
-			bottom = UDim.new(0, var15.bottom),
-			left = UDim.new(0, var15.left),
-			right = UDim.new(0, var15.right)
+			top = UDim.new(0, var18.top + useStatusBarHeight()),
+			bottom = UDim.new(0, var18.bottom),
+			left = UDim.new(0, var18.left),
+			right = UDim.new(0, var18.right)
 		}
 	}, {
-		OnVideoUI = reactModule.createElement(foundationProvider, { theme = theme.Dark }, {
+		OnVideoUI = reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
 			Feed = reactModule.createElement(feed, {
 				active = true,
 				playbackActive = true,
-				source = var12,
-				initialIndex = var11
+				source = var15,
+				initialIndex = var14
 			}),
 			CloseButtonContainer = reactModule.createElement(view, {
 				tag = "position-top-left anchor-top-left auto-xy padding-large",
@@ -89,7 +164,7 @@ end else function() --[[ line: 86 | named "MomentsFeedPageLegacy" ]]
 				CloseButton = reactModule.createElement(iconButton, {
 					icon = "icons/navigation/close",
 					size = buttonSize.Medium,
-					onActivated = var13
+					onActivated = var16
 				})
 			})
 		})

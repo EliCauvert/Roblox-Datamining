@@ -9,7 +9,7 @@ local fFlagEnableLeftNavOnConsole = sharedFlagsModule.FFlagEnableLeftNavOnConsol
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local regionName = appCompositionEnumsModule.RegionName
 
-local function getBaseConfig(p0, p1) --[[ line: 38 ]]
+local function getBaseConfig(p0, p1) --[[ line: 36 ]]
 	-- upvalues: breakpoint (ref), fFlagEnableLeftNavOnConsole (ref), hardwareSafeAreaInsets (ref)
 	local t
 	local _ = nil
@@ -61,21 +61,22 @@ end
 
 return {
 	getBaseConfig = getBaseConfig,
-	resolveLayout = if fFlagEnableSplitPane then function(p2, p3) --[[ line: 97 | named "resolveLayout" ]]
+	resolveLayout = if fFlagEnableSplitPane then function(p2, p3) --[[ line: 95 | named "resolveLayout" ]]
 		-- upvalues: getBaseConfig (ref)
 		return getBaseConfig(p2, p3)
 	end else nil,
 	getRegionOverrides = if fFlagEnableSplitPane then function(p4) --[[ line: 27 | named "getRegionOverrides" ]]
 		-- upvalues: regionName (ref)
-		return if p4 == regionName.SupportRegion then { width = 532, minWidth = 224, maxWidth = 640 } else nil
+		return if p4 == regionName.SupportRegion then { widthScale = 0.33 } else nil
 	end else nil,
-	getRegionLayout = if fFlagEnableSplitPane then function(p5, p6, p7) --[[ line: 101 | named "getRegionLayout" ]]
+	getRegionLayout = if fFlagEnableSplitPane then function(p5, p6, p7) --[[ line: 99 | named "getRegionLayout" ]]
 		-- upvalues: getBaseConfig (ref), regionName (ref)
 		local var5 = getBaseConfig(p6, p7)
-		local var6 = if p5 == regionName.SupportRegion then { width = 532, minWidth = 224, maxWidth = 640 } else nil
+		local var6 = if p5 == regionName.SupportRegion then { widthScale = 0.33 } else nil
 		
 		if var6 then
 			var5.width = var6.width
+			var5.widthScale = var6.widthScale
 			var5.minWidth = var6.minWidth
 			var5.maxWidth = var6.maxWidth
 		end

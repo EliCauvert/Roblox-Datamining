@@ -2,7 +2,7 @@
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local withStyle = UIBloxModule.Style.withStyle
+local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local buttonType = UIBloxModule.App.Button.Enum.ButtonType
 local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local fFlagAddNewPlayerListMobileFocusNav = require(corePackagesService.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
@@ -20,14 +20,23 @@ actionModal.validateProps = tModule.interface({
 	screenSize = tModule.optional(tModule.Vector2)
 })
 
-function actionModal.render(p0) --[[ line: 33 ]]
-	-- upvalues: withStyle (ref), roactModule (ref), interactiveAlert (ref), fFlagAddNewPlayerListMobileFocusNav (ref), buttonType (ref)
-	return withStyle(function(p1) --[[ line: 34 ]]
+function actionModal.render(p0) --[[ line: 35 ]]
+	-- upvalues: withFoundationOrUIBloxStyle (ref), roactModule (ref), interactiveAlert (ref), fFlagAddNewPlayerListMobileFocusNav (ref), buttonType (ref)
+	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 36 ]]
+		return {
+			Theme = {
+				Overlay = {
+					Color = p1.Color.Common.Scrim.Color3,
+					Transparency = p1.Color.Common.Scrim.Transparency
+				}
+			}
+		}
+	end, function(p2) --[[ line: 45 ]]
 		-- upvalues: roactModule (copy), p0 (ref), interactiveAlert (copy), fFlagAddNewPlayerListMobileFocusNav (copy), buttonType (copy)
 		return roactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 1, 0),
-			BackgroundTransparency = p1.Theme.Overlay.Transparency,
-			BackgroundColor3 = p1.Theme.Overlay.Color,
+			BackgroundTransparency = p2.Theme.Overlay.Transparency,
+			BackgroundColor3 = p2.Theme.Overlay.Color,
 			Active = true,
 			AutoButtonColor = false,
 			Selectable = false,

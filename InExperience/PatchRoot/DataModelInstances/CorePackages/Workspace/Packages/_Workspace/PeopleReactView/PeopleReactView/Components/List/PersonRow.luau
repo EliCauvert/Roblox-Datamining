@@ -1,5 +1,6 @@
 ﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
 local parent = peopleReactView.Parent
+local fFlagPeopleTabUseProfileFrameThumbnailModule = require(peopleReactView.Flags.FFlagPeopleTabUseProfileFrameThumbnail)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local peopleServiceModule = require(parent.PeopleService)
@@ -26,94 +27,95 @@ local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbi
 local playerListRefactorUsernameFormatting = game:DefineFastFlag("PlayerListRefactorUsernameFormatting", false)
 local getFFlagAddPeoplePageCardLayout = peopleServiceModule.getService("Flags").GetFFlagAddPeoplePageCardLayout
 
-return function(p0) --[[ line: 47 | named "PersonRow" ]]
-	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), reactModule (ref), peopleServiceModule (ref), getFFlagAddPeoplePageCardLayout (ref), useInExperienceCombinedNameModule (ref), useSignalBinding (ref), avatar (ref), inputSize (ref), text (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), personButtonRowModule (ref), platformNameModule (ref)
-	local var18
-	local var12 = useTokens()
-	local var13 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
-	local var14 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(tostring(p0.person.UserId)) else nil
-	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useCallback(function(p1) --[[ line: 58 ]]
-		-- upvalues: peopleServiceModule (copy), p0 (ref), var15 (ref)
+return function(p0) --[[ line: 48 | named "PersonRow" ]]
+	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), reactModule (ref), peopleServiceModule (ref), getFFlagAddPeoplePageCardLayout (ref), useInExperienceCombinedNameModule (ref), useSignalBinding (ref), avatar (ref), inputSize (ref), fFlagPeopleTabUseProfileFrameThumbnailModule (ref), text (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), playerListRefactorUsernameFormatting (ref), formatUsername (ref), personButtonRowModule (ref), platformNameModule (ref)
+	local var19
+	local var13 = useTokens()
+	local var14 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait
+	local var15 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(tostring(p0.person.UserId)) else nil
+	local var16 = reactModule.useRef(nil)
+	local var17 = reactModule.useCallback(function(p1) --[[ line: 59 ]]
+		-- upvalues: peopleServiceModule (copy), p0 (ref), var16 (ref)
 		peopleServiceModule.getService("FocusNavigationService").registerFrame(p1, p0.person.UserId)
-		var15.current = p1
+		var16.current = p1
 	end, { p0.person.UserId })
 	local _ = nil
 	
 	if getFFlagAddPeoplePageCardLayout() then
-		var18 = useInExperienceCombinedNameModule(p0.person.UserId, p0.person.DisplayName)
+		var19 = useInExperienceCombinedNameModule(p0.person.UserId, p0.person.DisplayName)
 	else
-		local var17 = reactModule.useMemo(function() --[[ line: 68 ]]
+		local var18 = reactModule.useMemo(function() --[[ line: 69 ]]
 			-- upvalues: peopleServiceModule (copy)
 			return peopleServiceModule.getService("PeopleListStore")
 		end, {})
-		var18 = useSignalBinding(reactModule.useMemo(function() --[[ line: 72 ]]
-			-- upvalues: var17 (ref), p0 (ref)
-			return var17.getProfile(p0.person.UserId)
-		end, { p0.person.UserId })):map(function(p2) --[[ line: 78 ]]
+		var19 = useSignalBinding(reactModule.useMemo(function() --[[ line: 73 ]]
+			-- upvalues: var18 (ref), p0 (ref)
+			return var18.getProfile(p0.person.UserId)
+		end, { p0.person.UserId })):map(function(p2) --[[ line: 79 ]]
 			-- upvalues: p0 (ref)
 			return if p2 and string.len(p2) > 0 then p2 else p0.person.DisplayName
 		end)
 	end
-	local var19 = reactModule.createElement(avatar, {
+	local var20 = reactModule.createElement(avatar, {
 		LayoutOrder = 1,
 		userId = p0.person.UserId,
 		size = inputSize.Large,
 		backgroundStyle = {
-			Color3 = var12.Color.Shift.Shift_300.Color3,
-			Transparency = var12.Color.Shift.Shift_300.Transparency
-		}
+			Color3 = var13.Color.Shift.Shift_300.Color3,
+			Transparency = var13.Color.Shift.Shift_300.Transparency
+		},
+		includeProfileFrame = fFlagPeopleTabUseProfileFrameThumbnailModule
 	})
-	local var20 = reactModule.createElement(text, {
+	local var21 = reactModule.createElement(text, {
 		tag = "text-label-medium auto-xy text-align-x-left text-truncate-end",
 		LayoutOrder = 1,
-		Text = var18,
-		textStyle = { Color3 = var12.Color.Content.Default.Color3 }
+		Text = var19,
+		textStyle = { Color3 = var13.Color.Content.Default.Color3 }
 	})
 	
 	return reactModule.createElement(view, {
 		tag = {
 			["padding-small row bg-surface-200 radius-medium"] = true,
-			["size-full-2600 gap-medium"] = var13,
-			["size-full-1500"] = not var13
+			["size-full-2600 gap-medium"] = var14,
+			["size-full-1500"] = not var14
 		},
 		LayoutOrder = p0.layoutOrder,
-		ref = var16
+		ref = var17
 	}, {
-		PortraitAvatar = if var13 then var19 else nil,
+		PortraitAvatar = if var14 then var20 else nil,
 		RowContent = reactModule.createElement(view, {
 			LayoutOrder = 2,
 			tag = {
 				["gap-medium size-full align-y-center text-no-wrap"] = true,
-				["flex-between row"] = not var13,
-				col = var13
+				["flex-between row"] = not var14,
+				col = var14
 			}
 		}, {
 			LeftContent = reactModule.createElement(view, {
 				LayoutOrder = 1,
 				tag = {
 					["row gap-medium align-y-center text-no-wrap"] = true,
-					["size-full-0 auto-y"] = var13,
-					["size-0-full auto-x"] = not var13
+					["size-full-0 auto-y"] = var14,
+					["size-0-full auto-x"] = not var14
 				}
 			}, {
-				Avatar = if not var13 then var19 else nil,
+				Avatar = if not var14 then var20 else nil,
 				NameContainer = reactModule.createElement(view, {
 					tag = "col gap-small auto-xy flex-evenly",
 					LayoutOrder = 2
 				}, {
-					DisplayName = if fFlagEnableBlackbirdCheck and var14 then reactModule.createElement(view, {
+					DisplayName = if fFlagEnableBlackbirdCheck and var15 then reactModule.createElement(view, {
 						tag = "row gap-xsmall auto-xy align-y-center",
 						LayoutOrder = 1
 					}, {
-						Name = var20,
+						Name = var21,
 						SubscriptionBadge = reactModule.createElement(icon, {
 							LayoutOrder = 2,
 							name = iconName.RobloxPlus,
 							size = iconSize.Small,
-							style = { Color3 = var12.Color.Content.Default.Color3 }
+							style = { Color3 = var13.Color.Content.Default.Color3 }
 						})
-					}) else var20,
+					}) else var21,
 					UserName = reactModule.createElement(text, {
 						tag = "text-caption-small auto-xy text-align-x-left content-muted text-truncate-end",
 						LayoutOrder = 2,
@@ -128,7 +130,7 @@ return function(p0) --[[ line: 47 | named "PersonRow" ]]
 				PersonButtonRow = reactModule.createElement(personButtonRowModule, {
 					userId = p0.person.UserId,
 					index = p0.layoutOrder,
-					personRowRef = var15
+					personRowRef = var16
 				}),
 				PlatformNameSection = reactModule.createElement(platformNameModule, { UserId = p0.person.UserId })
 			})

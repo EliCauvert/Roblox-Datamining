@@ -10,18 +10,21 @@ local localTextChannelParticipantAddedModule = require(actions.LocalTextChannelP
 local localTextChannelParticipantRemoved = expChatSharedModule.Actions.LocalTextChannelParticipantRemoved
 local textChannelRemoved = expChatSharedModule.Actions.TextChannelRemoved
 local targetTextChannelPropertyChanged = expChatSharedModule.Actions.TargetTextChannelPropertyChanged
+local textChatChannelSelected = expChatSharedModule.Actions.TextChatChannelSelected
 local incomingMessageReceivedModule = require(actions.IncomingMessageReceived)
 local universeChatSystemMessageAddedModule = require(actions.UniverseChatSystemMessageAdded)
 local universeChatChannelAddedModule = require(actions.UniverseChatChannelAdded)
 local universeChatChannelSelected = expChatSharedModule.Actions.UniverseChatChannelSelected
 local friendsChatChannelAddedModule = require(actions.FriendsChatChannelAdded)
+local friendsChatChannelRemovedModule = require(actions.FriendsChatChannelRemoved)
 local friendsChatChannelSelected = expChatSharedModule.Actions.FriendsChatChannelSelected
+local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
 local markChannelUnreadForSystemMessageModule = require(actions.MarkChannelUnreadForSystemMessage)
 local markChannelUnreadForIncomingMessageModule = require(actions.MarkChannelUnreadForIncomingMessage)
+local setChannelUnreadStatusModule = require(actions.SetChannelUnreadStatus)
 local fFlagExpChatUnreadTabIndicatorV2WindowModule = require(expChat.Flags.FFlagExpChatUnreadTabIndicatorV2Window)
 local getFFlagExpChatFixChannelTabsMidExperienceToggleModule = require(expChat.Flags.getFFlagExpChatFixChannelTabsMidExperienceToggle)
 local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
-local fFlagExpChatChannelTabRefactor = sharedFlagsModule.FFlagExpChatChannelTabRefactor
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local getFFlagExpChatSuppressWelcomeMessageTabUnread = expChatSharedModule.Flags.GetFFlagExpChatSuppressWelcomeMessageTabUnread
@@ -33,7 +36,7 @@ local t = {
 	allChannelTabs = {}
 }
 
-local function insertTabAndReorder(p0, p1) --[[ line: 61 ]]
+local function insertTabAndReorder(p0, p1) --[[ line: 64 ]]
 	-- upvalues: dictionary (ref)
 	local t = { [p1.Name] = p1 }
 	
@@ -45,278 +48,351 @@ local function insertTabAndReorder(p0, p1) --[[ line: 61 ]]
 	return t
 end
 
-local function removeTabAndReorder(p2, p3) --[[ line: 79 ]]
+local function _(p2) --[[ line: 82 | named "hasFriendsTab" ]]
+	-- upvalues: fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref)
+	return if fFlagExpChatEnableFriendsTab then p2[friendsChatTabNameModule] ~= nil else false
+end
+
+local _ = function(p3) --[[ line: 91 | named "priorityTabCount" ]]
+	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref)
+	return (if p3.RBXGeneral ~= nil then 1 else 0) + (if getFFlagTextChatEnableUniverseChatTabs() and p3.RBXGlobal ~= nil then 1 else 0) + (if if not fFlagExpChatEnableFriendsTab then false else p3[friendsChatTabNameModule] ~= nil then 1 else 0)
+end
+
+local _ = function(p4) --[[ line: 101 | named "nextDeveloperTabIndex" ]]
+	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref)
+	return (if p4.RBXGeneral ~= nil then 1 else 0) + (if getFFlagTextChatEnableUniverseChatTabs() and p4.RBXGlobal ~= nil then 1 else 0) + (if if not fFlagExpChatEnableFriendsTab then false else p4[friendsChatTabNameModule] ~= nil then 1 else 0) + 1
+end
+
+local _ = function(p5) --[[ line: 105 | named "getFriendsTabIndex" ]]
+	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref)
+	return (if p5.RBXGeneral ~= nil then 1 else 0) + 1 + (if getFFlagTextChatEnableUniverseChatTabs() and p5.RBXGlobal ~= nil then 1 else 0)
+end
+
+local function removeTabAndReorder(p6, p7) --[[ line: 111 ]]
 	-- upvalues: dictionary (ref)
-	if p3 == nil then
-		return p2
+	if p7 == nil then
+		return p6
 	end
 	local t = {}
 	
-	for i, v in p2 do
-		if i ~= p3.Name then
+	for i, v in p6 do
+		if i ~= p7.Name then
 			t = dictionary.join(t, {
-				[i] = dictionary.set(p2[i], "TabIndex", if v.TabIndex < p3.TabIndex then v.TabIndex else v.TabIndex - 1)
+				[i] = dictionary.set(p6[i], "TabIndex", if v.TabIndex < p7.TabIndex then v.TabIndex else v.TabIndex - 1)
 			})
 		end
 	end
 	return t
 end
 
-local function onChannelRemoved(p4, p5) --[[ line: 103 ]]
+local function removeChannelTab(p8, p9) --[[ line: 135 ]]
 	-- upvalues: removeTabAndReorder (ref), dictionary (ref)
-	local name = p4.allChannelTabs[p5.Name]
+	local var30 = p8.allChannelTabs[p9]
 	
-	if name == nil then
-		return p4
+	if var30 == nil then
+		return p8
 	end
-	local var25 = removeTabAndReorder(p4.allChannelTabs, name)
-	local var26 = if name.Name == p4.selectedTabName then if var25.RBXGeneral then "RBXGeneral" else nil else p4.selectedTabName
+	local var31 = removeTabAndReorder(p8.allChannelTabs, var30)
+	local var32 = if var30.Name == p8.selectedTabName then if var31.RBXGeneral then "RBXGeneral" else nil else p8.selectedTabName
 	
 	return {
-		allChannelTabs = if var26 and var25[var26] then dictionary.join(var25, {
-			[var26] = dictionary.join(var25[var26], { HasUnreadMessages = false })
-		}) else var25,
-		selectedTabName = var26,
-		channelTabsConfigurationEnabled = p4.channelTabsConfigurationEnabled
+		allChannelTabs = if var32 and var31[var32] then dictionary.join(var31, {
+			[var32] = dictionary.join(var31[var32], { HasUnreadMessages = false })
+		}) else var31,
+		selectedTabName = var32,
+		channelTabsConfigurationEnabled = p8.channelTabsConfigurationEnabled
 	}
 end
 
-local function handleIncomingMessageReceived(a, b) --[[ line: 128 ]]
+local function onChannelRemoved(p10, p11) --[[ line: 160 ]]
+	-- upvalues: fFlagExpChatEnableFriendsTab (ref), removeTabAndReorder (ref), dictionary (ref), removeChannelTab (ref)
+	if fFlagExpChatEnableFriendsTab then
+		return removeChannelTab(p10, p11.Name)
+	end
+	local name = p10.allChannelTabs[p11.Name]
+	
+	if name == nil then
+		return p10
+	end
+	local var33 = removeTabAndReorder(p10.allChannelTabs, name)
+	local var34 = if name.Name == p10.selectedTabName then if var33.RBXGeneral then "RBXGeneral" else nil else p10.selectedTabName
+	
+	return {
+		allChannelTabs = if var34 and var33[var34] then dictionary.join(var33, {
+			[var34] = dictionary.join(var33[var34], { HasUnreadMessages = false })
+		}) else var33,
+		selectedTabName = var34,
+		channelTabsConfigurationEnabled = p10.channelTabsConfigurationEnabled
+	}
+end
+
+local function handleIncomingMessageReceived(a, b) --[[ line: 189 ]]
 	-- upvalues: var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getFFlagExpChatSuppressWelcomeMessageTabUnread (ref), shouldSuppressUnreadForTabMetadataModule (ref), dictionary (ref)
 	var4:trace("IncomingMessageReceived dispatched")
-	local var27 = nil
+	local var35 = nil
 	
 	if getFFlagTextChatEnableUniverseChatTabs() and b.channelNameOverride then
-		var27 = b.channelNameOverride
+		var35 = b.channelNameOverride
 	elseif b.textChatMessage.TextChannel then
-		var27 = if b.textChatMessage.TextChannel.Name == "RBXSystem" then "RBXGeneral" else b.textChatMessage.TextChannel.Name
+		var35 = if b.textChatMessage.TextChannel.Name == "RBXSystem" then "RBXGeneral" else b.textChatMessage.TextChannel.Name
 	end
-	local var28 = a.allChannelTabs[var27]
+	local var36 = a.allChannelTabs[var35]
 	
-	return if var28 == nil then a elseif b.isSenderLocalPlayer or var28.Name == a.selectedTabName then a elseif getFFlagExpChatSuppressWelcomeMessageTabUnread() and shouldSuppressUnreadForTabMetadataModule(b.textChatMessage.Metadata) then a else dictionary.join(a, {
+	return if var36 == nil then a elseif b.isSenderLocalPlayer or var36.Name == a.selectedTabName then a elseif getFFlagExpChatSuppressWelcomeMessageTabUnread() and shouldSuppressUnreadForTabMetadataModule(b.textChatMessage.Metadata) then a else dictionary.join(a, {
 		allChannelTabs = dictionary.join(a.allChannelTabs, {
-			[var28.Name] = dictionary.join(var28, { HasUnreadMessages = true })
+			[var36.Name] = dictionary.join(var36, { HasUnreadMessages = true })
 		})
 	})
 end
 
-local function handleUniverseChatSystemMessageAdded(p6, p7) --[[ line: 169 ]]
+local function handleUniverseChatSystemMessageAdded(p12, p13) --[[ line: 230 ]]
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), getFFlagExpChatSuppressWelcomeMessageTabUnread (ref), shouldSuppressUnreadForTabMetadataModule (ref), dictionary (ref)
 	if not getFFlagTextChatEnableUniverseChatTabs() then
-		return p6
+		return p12
 	end
-	local channelNameOverride = p6.allChannelTabs[p7.channelNameOverride]
+	local channelNameOverride = p12.allChannelTabs[p13.channelNameOverride]
 	
-	return if channelNameOverride == nil then p6 elseif channelNameOverride.Name == p6.selectedTabName then p6 elseif getFFlagExpChatSuppressWelcomeMessageTabUnread() and shouldSuppressUnreadForTabMetadataModule(p7.metadata or "") then p6 else dictionary.join(p6, {
-		allChannelTabs = dictionary.join(p6.allChannelTabs, {
+	return if channelNameOverride == nil then p12 elseif channelNameOverride.Name == p12.selectedTabName then p12 elseif getFFlagExpChatSuppressWelcomeMessageTabUnread() and shouldSuppressUnreadForTabMetadataModule(p13.metadata or "") then p12 else dictionary.join(p12, {
+		allChannelTabs = dictionary.join(p12.allChannelTabs, {
 			[channelNameOverride.Name] = dictionary.join(channelNameOverride, { HasUnreadMessages = true })
 		})
 	})
 end
 
-local function pruneNonSpecialTabs(value) --[[ line: 202 ]]
-	-- upvalues: dictionary (ref), fFlagExpChatEnableFriendsTab (ref)
+local function pruneNonSpecialTabs(value) --[[ line: 263 ]]
+	-- upvalues: dictionary (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref)
 	local t = {}
-	local var30 = value.RBXGeneral ~= nil
+	local var38 = value.RBXGeneral ~= nil
 	
-	if var30 then
+	if var38 then
 		t.RBXGeneral = dictionary.set(value.RBXGeneral, "TabIndex", 1)
 	end
 	if value.RBXGlobal ~= nil then
-		t.RBXGlobal = dictionary.set(value.RBXGlobal, "TabIndex", if var30 then 2 else 1)
+		t.RBXGlobal = dictionary.set(value.RBXGlobal, "TabIndex", if var38 then 2 else 1)
 	end
-	if fFlagExpChatEnableFriendsTab then
-		for i, v in value do
-			if v.Type == "FriendsChat" then
-				t[i] = v
-			end
-		end
+	if if not fFlagExpChatEnableFriendsTab then false else value[friendsChatTabNameModule] ~= nil then
+		t[friendsChatTabNameModule] = value[friendsChatTabNameModule]
 	end
 	return t
 end
 
+local function selectTextChannelTabByName(p14, p15, p16) --[[ line: 287 ]]
+	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), dictionary (ref), insertTabAndReorder (ref), removeTabAndReorder (ref)
+	if p15 and p14.allChannelTabs[p15] then
+		local var39 = p14.allChannelTabs[p15]
+		local tabIndex = var39.TabIndex
+		
+		if p16 then
+			if var39.Name == "RBXGeneral" then
+				tabIndex = 1
+			elseif getFFlagTextChatEnableUniverseChatTabs() and var39.Name == "RBXGlobal" then
+				tabIndex = if p14.allChannelTabs.RBXGeneral then 2 else 1
+			else
+				local allChannelTabs = p14.allChannelTabs
+				tabIndex = (if allChannelTabs.RBXGeneral ~= nil then 1 else 0) + (if getFFlagTextChatEnableUniverseChatTabs() and allChannelTabs.RBXGlobal ~= nil then 1 else 0) + (if if not fFlagExpChatEnableFriendsTab then false else allChannelTabs[friendsChatTabNameModule] ~= nil then 1 else 0) + 1
+			end
+		end
+		return dictionary.join(p14, {
+			allChannelTabs = insertTabAndReorder(removeTabAndReorder(p14.allChannelTabs, var39), dictionary.join(var39, { HasUnreadMessages = false, TabIndex = tabIndex })),
+			selectedTabName = var39.Name
+		})
+	else
+		return if getFFlagTextChatEnableUniverseChatTabs() and not p14.channelTabsConfigurationEnabled then p14 else dictionary.join(p14, { selectedTabName = p15 })
+	end
+end
+
 return roduxModule.createReducer(t, {
-	[channelTabsConfigurationEnabledModule.name] = function(p8, p9) --[[ line: 227 ]]
+	[channelTabsConfigurationEnabledModule.name] = function(p17, p18) --[[ line: 325 ]]
 		-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (ref), dictionary (ref), pruneNonSpecialTabs (ref)
 		if not getFFlagTextChatEnableUniverseChatTabs() then
-			return p8
-		elseif not getFFlagExpChatFixChannelTabsMidExperienceToggleModule() or p9.enabled then
-			return dictionary.join(p8, { channelTabsConfigurationEnabled = p9.enabled })
+			return p17
+		elseif not getFFlagExpChatFixChannelTabsMidExperienceToggleModule() or p18.enabled then
+			return dictionary.join(p17, { channelTabsConfigurationEnabled = p18.enabled })
 		end
-		local var31 = pruneNonSpecialTabs(p8.allChannelTabs)
-		local selectedTabName = p8.selectedTabName
+		local var40 = pruneNonSpecialTabs(p17.allChannelTabs)
+		local selectedTabName = p17.selectedTabName
 		
-		if selectedTabName == nil or var31[selectedTabName] == nil then
-			selectedTabName = if var31.RBXGeneral then "RBXGeneral" elseif var31.RBXGlobal then "RBXGlobal" else nil
+		if selectedTabName == nil or var40[selectedTabName] == nil then
+			selectedTabName = if var40.RBXGeneral then "RBXGeneral" elseif var40.RBXGlobal then "RBXGlobal" else nil
 		end
-		if selectedTabName and var31[selectedTabName] then
-			var31 = dictionary.join(var31, {
-				[selectedTabName] = dictionary.join(var31[selectedTabName], { HasUnreadMessages = false })
+		if selectedTabName and var40[selectedTabName] then
+			var40 = dictionary.join(var40, {
+				[selectedTabName] = dictionary.join(var40[selectedTabName], { HasUnreadMessages = false })
 			})
 		end
 		return {
 			channelTabsConfigurationEnabled = false,
-			allChannelTabs = var31,
+			allChannelTabs = var40,
 			selectedTabName = selectedTabName
 		}
 	end,
-	[localTextChannelParticipantAddedModule.name] = function(p10, p11) --[[ line: 262 ]]
-		-- upvalues: var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatChannelTabRefactor (ref), insertTabAndReorder (ref), dictionary (ref)
-		local name = p11.textChannel.Name
+	[localTextChannelParticipantAddedModule.name] = function(p19, p20) --[[ line: 360 ]]
+		-- upvalues: var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), insertTabAndReorder (ref), dictionary (ref)
+		local name = p20.textChannel.Name
 		var4:trace("LocalTextChannelParticipantAdded dispatched: {}", name)
 		
-		if p10.allChannelTabs[name] ~= nil or name == "RBXSystem" then
-			return p10
-		elseif getFFlagTextChatEnableUniverseChatTabs() and not p10.channelTabsConfigurationEnabled and name ~= "RBXGeneral" then
-			return p10
+		if p19.allChannelTabs[name] ~= nil or name == "RBXSystem" then
+			return p19
+		elseif getFFlagTextChatEnableUniverseChatTabs() and not p19.channelTabsConfigurationEnabled and name ~= "RBXGeneral" then
+			return p19
 		end
+		local var41
 		local _ = nil
-		local t = {
+		
+		if name == "RBXGeneral" then
+			var41 = 1
+		elseif getFFlagTextChatEnableUniverseChatTabs() and name == "RBXGlobal" then
+			var41 = if p19.allChannelTabs.RBXGeneral then 2 else 1
+		else
+			local allChannelTabs = p19.allChannelTabs
+			var41 = (if allChannelTabs.RBXGeneral ~= nil then 1 else 0) + (if getFFlagTextChatEnableUniverseChatTabs() and allChannelTabs.RBXGlobal ~= nil then 1 else 0) + (if if not fFlagExpChatEnableFriendsTab then false else allChannelTabs[friendsChatTabNameModule] ~= nil then 1 else 0) + 1
+		end
+		local var42 = insertTabAndReorder(p19.allChannelTabs, {
 			HasUnreadMessages = false,
 			Name = name,
-			TabIndex = if name == "RBXGeneral" then 1 elseif getFFlagTextChatEnableUniverseChatTabs() and name == "RBXGlobal" then if p10.allChannelTabs.RBXGeneral then 2 else 1 else (if p10.allChannelTabs.RBXGeneral ~= nil then 1 else 0) + 1 + (if if getFFlagTextChatEnableUniverseChatTabs() then p10.allChannelTabs.RBXGlobal ~= nil else getFFlagTextChatEnableUniverseChatTabs() then 1 else 0)
-		}
-		
-		if fFlagExpChatChannelTabRefactor then
-			t.Type = "TextChat"
-		end
-		local var33 = insertTabAndReorder(p10.allChannelTabs, t)
-		
-		if not getFFlagTextChatEnableUniverseChatTabs() then
-			return dictionary.join(p10, { allChannelTabs = var33 })
-		end
-		local selectedTabName = p10.selectedTabName
-		
-		if selectedTabName == "RBXGlobal" and name == "RBXGeneral" then
-			selectedTabName = "RBXGeneral"
-		end
-		return dictionary.join(p10, {
-			allChannelTabs = var33,
-			selectedTabName = selectedTabName
+			TabIndex = var41,
+			Type = "TextChat"
 		})
-	end,
-	[localTextChannelParticipantRemoved.name] = function(p12, p13) --[[ line: 316 ]]
-		-- upvalues: var4 (ref), onChannelRemoved (ref)
-		var4:trace("LocalTextChannelParticipantRemoved dispatched: {}", p13.textChannel.Name)
 		
-		return onChannelRemoved(p12, p13.textChannel)
-	end,
-	[textChannelRemoved.name] = function(p14, p15) --[[ line: 324 ]]
-		-- upvalues: var4 (ref), onChannelRemoved (ref)
-		var4:trace("TextChannelRemoved dispatched: {}", p15.textChannel.Name)
-		
-		return onChannelRemoved(p14, p15.textChannel)
-	end,
-	[targetTextChannelPropertyChanged.name] = function(p16, p17) --[[ line: 329 ]]
-		-- upvalues: var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), dictionary (ref), insertTabAndReorder (ref), removeTabAndReorder (ref)
-		var4:trace("TargetTextChannelPropertyChanged dispatched")
-		
-		if p17.textChannel and p16.allChannelTabs[p17.textChannel.Name] then
-			local name = p16.allChannelTabs[p17.textChannel.Name]
-			local tabIndex = name.TabIndex
+		if getFFlagTextChatEnableUniverseChatTabs() then
+			local selectedTabName = p19.selectedTabName
 			
-			if p17.shouldReorderTabs then
-				tabIndex = if name.Name == "RBXGeneral" then 1 elseif getFFlagTextChatEnableUniverseChatTabs() and name.Name == "RBXGlobal" then if p16.allChannelTabs.RBXGeneral then 2 else 1 else (if p16.allChannelTabs.RBXGeneral ~= nil then 1 else 0) + 1 + (if if getFFlagTextChatEnableUniverseChatTabs() then p16.allChannelTabs.RBXGlobal ~= nil else getFFlagTextChatEnableUniverseChatTabs() then 1 else 0)
+			if selectedTabName == "RBXGlobal" and name == "RBXGeneral" then
+				selectedTabName = "RBXGeneral"
+			elseif fFlagExpChatEnableFriendsTab and selectedTabName == friendsChatTabNameModule and (name == "RBXGeneral" or name == "RBXGlobal") then
+				selectedTabName = name
 			end
-			return dictionary.join(p16, {
-				allChannelTabs = insertTabAndReorder(removeTabAndReorder(p16.allChannelTabs, name), dictionary.join(name, { HasUnreadMessages = false, TabIndex = tabIndex })),
-				selectedTabName = name.Name
+			return dictionary.join(p19, {
+				allChannelTabs = var42,
+				selectedTabName = selectedTabName
 			})
 		else
-			return if getFFlagTextChatEnableUniverseChatTabs() and not p16.channelTabsConfigurationEnabled then p16 else dictionary.join(p16, {
-				selectedTabName = if p17.textChannel then p17.textChannel.Name else nil
-			})
+			return if fFlagExpChatEnableFriendsTab and name == "RBXGeneral" and p19.selectedTabName == friendsChatTabNameModule then dictionary.join(p19, { selectedTabName = "RBXGeneral", allChannelTabs = var42 }) else dictionary.join(p19, { allChannelTabs = var42 })
 		end
+	end,
+	[localTextChannelParticipantRemoved.name] = function(p21, p22) --[[ line: 431 ]]
+		-- upvalues: var4 (ref), onChannelRemoved (ref)
+		var4:trace("LocalTextChannelParticipantRemoved dispatched: {}", p22.textChannel.Name)
+		
+		return onChannelRemoved(p21, p22.textChannel)
+	end,
+	[textChannelRemoved.name] = function(p23, p24) --[[ line: 439 ]]
+		-- upvalues: var4 (ref), onChannelRemoved (ref)
+		var4:trace("TextChannelRemoved dispatched: {}", p24.textChannel.Name)
+		
+		return onChannelRemoved(p23, p24.textChannel)
+	end,
+	[targetTextChannelPropertyChanged.name] = function(p25, p26) --[[ line: 444 ]]
+		-- upvalues: var4 (ref), selectTextChannelTabByName (ref)
+		var4:trace("TargetTextChannelPropertyChanged dispatched")
+		
+		return selectTextChannelTabByName(p25, if p26.textChannel then p26.textChannel.Name else nil, p26.shouldReorderTabs)
+	end,
+	[textChatChannelSelected.name] = function(p27, p28) --[[ line: 454 ]]
+		-- upvalues: var4 (ref), selectTextChannelTabByName (ref)
+		var4:trace("TextChatChannelSelected dispatched: {}", p28.channelName)
+		
+		return selectTextChannelTabByName(p27, p28.channelName, p28.shouldReorderTabs)
 	end,
 	[incomingMessageReceivedModule.name] = handleIncomingMessageReceived,
 	[markChannelUnreadForIncomingMessageModule.name] = if fFlagExpChatUseMessagesStore and fFlagExpChatUnreadTabIndicatorV2WindowModule then handleIncomingMessageReceived else nil,
 	[universeChatSystemMessageAddedModule.name] = handleUniverseChatSystemMessageAdded,
 	[markChannelUnreadForSystemMessageModule.name] = if fFlagExpChatUseMessagesStore and fFlagExpChatUnreadTabIndicatorV2WindowModule then handleUniverseChatSystemMessageAdded else nil,
-	[universeChatChannelAddedModule.name] = function(p18, p19) --[[ line: 390 ]]
-		-- upvalues: var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatChannelTabRefactor (ref), insertTabAndReorder (ref), dictionary (ref)
-		var4:trace("UniverseChatChannelAdded dispatched: {}", p19.channelName)
+	[universeChatChannelAddedModule.name] = function(p29, p30) --[[ line: 476 ]]
+		-- upvalues: var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), insertTabAndReorder (ref), fFlagExpChatEnableFriendsTab (ref), friendsChatTabNameModule (ref), dictionary (ref)
+		var4:trace("UniverseChatChannelAdded dispatched: {}", p30.channelName)
 		
-		if p18.allChannelTabs[p19.channelName] ~= nil then
-			return p18
+		if p29.allChannelTabs[p30.channelName] ~= nil then
+			return p29
 		end
-		local t = {
+		local var44
+		local var43 = insertTabAndReorder(p29.allChannelTabs, {
 			HasUnreadMessages = false,
-			Name = p19.channelName,
-			TabIndex = if getFFlagTextChatEnableUniverseChatTabs() and p19.channelName == "RBXGlobal" then if p18.allChannelTabs.RBXGeneral then 2 else 1 else p19.tabIndex
-		}
-		
-		if fFlagExpChatChannelTabRefactor then
-			t.Type = "UniverseChat"
-		end
-		local selectedTabName
-		local var35 = insertTabAndReorder(p18.allChannelTabs, t)
+			Name = p30.channelName,
+			TabIndex = if getFFlagTextChatEnableUniverseChatTabs() and p30.channelName == "RBXGlobal" then if p29.allChannelTabs.RBXGeneral then 2 else 1 else p30.tabIndex,
+			Type = "UniverseChat"
+		})
 		local _ = nil
 		
 		if getFFlagTextChatEnableUniverseChatTabs() then
-			selectedTabName = p18.selectedTabName
+			var44 = p29.selectedTabName
 			
-			if selectedTabName == nil then
-				selectedTabName = if var35.RBXGeneral then "RBXGeneral" else p19.channelName
+			if var44 == nil then
+				var44 = if var43.RBXGeneral then "RBXGeneral" else p30.channelName
+			elseif fFlagExpChatEnableFriendsTab and var44 == friendsChatTabNameModule then
+				var44 = p30.channelName
 			end
 		else
-			selectedTabName = p18.selectedTabName or p19.channelName
+			var44 = p29.selectedTabName or p30.channelName
 		end
-		return dictionary.join(p18, {
-			allChannelTabs = var35,
-			selectedTabName = selectedTabName
-		})
+		return dictionary.join(p29, { allChannelTabs = var43, selectedTabName = var44 })
 	end,
-	[friendsChatChannelAddedModule.name] = function(p20, p21) --[[ line: 428 ]]
-		-- upvalues: fFlagExpChatEnableFriendsTab (ref), var4 (ref), insertTabAndReorder (ref), dictionary (ref)
+	[friendsChatChannelAddedModule.name] = function(p31, p32) --[[ line: 515 ]]
+		-- upvalues: fFlagExpChatEnableFriendsTab (ref), var4 (ref), getFFlagTextChatEnableUniverseChatTabs (ref), insertTabAndReorder (ref), dictionary (ref)
 		if not fFlagExpChatEnableFriendsTab then
-			return p20
+			return p31
 		end
-		var4:trace("FriendsChatChannelAdded dispatched: {}", p21.channelName)
+		var4:trace("FriendsChatChannelAdded dispatched: {}", p32.channelName)
 		
-		if p20.allChannelTabs[p21.channelName] ~= nil then
-			return p20
+		if p31.allChannelTabs[p32.channelName] ~= nil then
+			return p31
 		end
-		local var36 = insertTabAndReorder(p20.allChannelTabs, {
+		local t = {
 			HasUnreadMessages = false,
 			Type = "FriendsChat",
-			Name = p21.channelName,
-			TabIndex = p21.tabIndex
-		})
-		local selectedTabName = p20.selectedTabName
+			Name = p32.channelName
+		}
+		local allChannelTabs = p31.allChannelTabs
+		t.TabIndex = (if allChannelTabs.RBXGeneral ~= nil then 1 else 0) + 1 + (if getFFlagTextChatEnableUniverseChatTabs() and allChannelTabs.RBXGlobal ~= nil then 1 else 0)
+		local var46 = insertTabAndReorder(p31.allChannelTabs, t)
+		local selectedTabName = p31.selectedTabName
 		
 		if selectedTabName == nil then
-			selectedTabName = if var36.RBXGeneral then "RBXGeneral" else p21.channelName
+			selectedTabName = if var46.RBXGeneral then "RBXGeneral" else p32.channelName
 		end
-		return dictionary.join(p20, {
-			allChannelTabs = var36,
+		return dictionary.join(p31, {
+			allChannelTabs = var46,
 			selectedTabName = selectedTabName
 		})
 	end,
-	[friendsChatChannelSelected.name] = function(p22, p23) --[[ line: 457 ]]
-		-- upvalues: fFlagExpChatEnableFriendsTab (ref), var4 (ref), dictionary (ref)
-		if not fFlagExpChatEnableFriendsTab then
-			return p22
+	[friendsChatChannelRemovedModule.name] = function(p33, p34) --[[ line: 544 ]]
+		-- upvalues: fFlagExpChatEnableFriendsTab (ref), var4 (ref), removeChannelTab (ref)
+		if fFlagExpChatEnableFriendsTab then
+			var4:trace("FriendsChatChannelRemoved dispatched: {}", p34.channelName)
+			
+			return removeChannelTab(p33, p34.channelName)
 		end
-		var4:trace("FriendsChatChannelSelected dispatched: {}", p23.channelName)
-		local channelName = p22.allChannelTabs[p23.channelName]
+		return p33
+	end,
+	[friendsChatChannelSelected.name] = function(p35, p36) --[[ line: 552 ]]
+		-- upvalues: fFlagExpChatEnableFriendsTab (ref), var4 (ref), dictionary (ref)
+		if fFlagExpChatEnableFriendsTab then
+			var4:trace("FriendsChatChannelSelected dispatched: {}", p36.channelName)
+			
+			return dictionary.join(p35, { selectedTabName = p36.channelName })
+		end
+		return p35
+	end,
+	[setChannelUnreadStatusModule.name] = function(p37, p38) --[[ line: 564 ]]
+		-- upvalues: dictionary (ref)
+		local channelName = p37.allChannelTabs[p38.channelName]
 		
-		return if channelName == nil then dictionary.join(p22, { selectedTabName = p23.channelName }) else dictionary.join(p22, {
-			allChannelTabs = dictionary.join(p22.allChannelTabs, {
-				[p23.channelName] = dictionary.join(channelName, { HasUnreadMessages = false })
-			}),
-			selectedTabName = p23.channelName
+		return if channelName == nil then p37 else dictionary.join(p37, {
+			allChannelTabs = dictionary.join(p37.allChannelTabs, {
+				[p38.channelName] = dictionary.join(channelName, { HasUnreadMessages = p38.hasUnreadMessages })
+			})
 		})
 	end,
-	[universeChatChannelSelected.name] = function(p24, p25) --[[ line: 476 ]]
+	[universeChatChannelSelected.name] = function(p39, p40) --[[ line: 579 ]]
 		-- upvalues: var4 (ref), dictionary (ref)
-		var4:trace("UniverseChatChannelSelected dispatched: {}", p25.channelName)
-		local channelName = p24.allChannelTabs[p25.channelName]
+		var4:trace("UniverseChatChannelSelected dispatched: {}", p40.channelName)
+		local channelName = p39.allChannelTabs[p40.channelName]
 		
-		return if channelName == nil then dictionary.join(p24, { selectedTabName = p25.channelName }) else dictionary.join(p24, {
-			allChannelTabs = dictionary.join(p24.allChannelTabs, {
-				[p25.channelName] = dictionary.join(channelName, { HasUnreadMessages = false })
+		return if channelName == nil then dictionary.join(p39, { selectedTabName = p40.channelName }) else dictionary.join(p39, {
+			allChannelTabs = dictionary.join(p39.allChannelTabs, {
+				[p40.channelName] = dictionary.join(channelName, { HasUnreadMessages = false })
 			}),
-			selectedTabName = p25.channelName
+			selectedTabName = p40.channelName
 		})
 	end
 })

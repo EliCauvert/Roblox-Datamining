@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EditProfileImageV2Enabled", false)

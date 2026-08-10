@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.ChatLineReporting.ChatLineReporting)
+﻿return require(script.Parent.Parent.Parent._Index.ChatLineReporting.ChatLineReporting)

@@ -11,9 +11,9 @@ local catalogItemCardStatusIconTypeEnumModule = require(script.Components.Catalo
 local colorGradientCircleModule = require(script.Components.ColorGradientCircle.ColorGradientCircle)
 local normalizeModule = require(script.Utils.normalize)
 local AXPartialPageModalModule = require(script.Components.AXPartialPageModal.AXPartialPageModal)
+local backgroundHighlightContainerModule = require(script.Components.BackgroundHighlight.BackgroundHighlightContainer)
 local contextualActionButtonModule = require(script.Components.ContextualActionButton.ContextualActionButton)
 local selectColorAdjustmentButtonColorModule = require(script.State.Selectors.selectColorAdjustmentButtonColor)
-local selectAdjustableLastTryOnItemModule = require(script.State.Selectors.selectAdjustableLastTryOnItem)
 local selectTryOnBodyIdsModule = require(script.State.Selectors.selectTryOnBodyIds)
 local selectHasBodyTryOnModule = require(script.State.Selectors.selectHasBodyTryOn)
 local selectShowColorQuickButtonModule = require(script.State.Selectors.selectShowColorQuickButton)
@@ -30,6 +30,7 @@ local selectEquippedLayeredMakeupAssetsModule = require(script.State.Selectors.s
 local selectTotalLayeredMakeupAssetsModule = require(script.State.Selectors.selectTotalLayeredMakeupAssets)
 local selectHasDynamicHeadModule = require(script.State.Selectors.selectHasDynamicHead)
 local selectTryOnsLookIdModule = require(script.State.Selectors.selectTryOnsLookId)
+local itemDataModule = require(script.State.Selectors.ItemData)
 local robuxBalanceModule = require(script.Components.RobuxBalance.RobuxBalance)
 local itemTypeEnumModule = require(script.Enums.ItemTypeEnum)
 local catalogCategoriesModule = require(script.Enums.CatalogCategories)
@@ -37,8 +38,11 @@ local catalogSubcategoriesModule = require(script.Enums.CatalogSubcategories)
 local catalogCategoryIdsModule = require(script.Enums.CatalogCategoryIds)
 local catalogSubcategoryIdsModule = require(script.Enums.CatalogSubcategoryIds)
 local catalogSDUICategoryIdsModule = require(script.Enums.CatalogSDUICategoryIds)
+local catalogCategoryKeyModule = require(script.Enums.CatalogCategoryKey)
+local catalogSubcategoryKeyModule = require(script.Enums.CatalogSubcategoryKey)
 local noPriceStatusModule = require(script.Enums.NoPriceStatus)
 local itemPurchaseActionTypeEnumModule = require(script.Enums.ItemPurchaseActionTypeEnum)
+local inventoryOutfitTypeModule = require(script.Enums.InventoryOutfitType)
 local fullViewModule = require(script.Enums.FullView)
 local wearTimeFilterModule = require(script.Enums.WearTimeFilter)
 local characterHistoryStateChangeButtonActivatedModule = require(script.State.CharacterHistoryStateChangeButtonActivated)
@@ -65,6 +69,8 @@ local _ = require(script.Types.AvatarColorTypes)
 local _ = require(script.Types.WidgetAnalyticsInfo)
 local _ = require(script.Types.WidgetInfoContextTypes)
 local _ = require(script.Types.ItemTypes)
+local _ = require(script.Types.PurchaseItemsTypes)
+local _ = require(script.Types.TryOnItemComparisonData)
 local _ = require(script.Backgrounds.types)
 
 return {
@@ -97,6 +103,7 @@ return {
 			AnimatedScrollingFrame = require(script.Components.AnimatedScrollingFrame.AnimatedScrollingFrame)
 		},
 		AXPartialPageModal = AXPartialPageModalModule,
+		BackgroundHighlight = backgroundHighlightContainerModule,
 		wrapForReactPortal = require(script.Components.Wrappers.wrapForReactPortal),
 		AXTooltip = require(script.Components.AXTooltip.AXTooltipContainer),
 		TimeoutBanner = require(script.Components.TimeoutBanner.TimeoutBannerContainer),
@@ -106,6 +113,7 @@ return {
 	},
 	Enums = {
 		OutfitTypes = require(script.Enums.OutfitTypes),
+		InventoryOutfitType = inventoryOutfitTypeModule,
 		ItemTypeEnum = itemTypeEnumModule,
 		ItemRestrictions = itemRestrictionsModule,
 		ItemStatus = itemStatusModule,
@@ -118,6 +126,8 @@ return {
 		CatalogCategoryIds = catalogCategoryIdsModule,
 		CatalogSubcategoryIds = catalogSubcategoryIdsModule,
 		CatalogSDUICategoryIds = catalogSDUICategoryIdsModule,
+		CatalogCategoryKeys = catalogCategoryKeyModule,
+		CatalogSubcategoryKeys = catalogSubcategoryKeyModule,
 		FullView = fullViewModule,
 		WearTimeFilter = wearTimeFilterModule,
 		DiscountTypeEnum = require(script.Enums.DiscountType)
@@ -137,7 +147,8 @@ return {
 		useAdaptiveScrolling = require(script.Hooks.useAdaptiveScrolling),
 		AdaptiveScrollingContext = adaptiveScrollingContextModule,
 		withAdaptiveScrolling = withAdaptiveScrollingModule,
-		useUnifiedImpressionExposer = require(script.Hooks.useUnifiedImpressionExposer)
+		useUnifiedImpressionExposer = require(script.Hooks.useUnifiedImpressionExposer),
+		useIsDirectional = require(script.Hooks.useIsDirectional)
 	},
 	Lib = {
 		SafeAppStorageService = require(script.Lib.SafeAppStorageService)
@@ -149,7 +160,6 @@ return {
 	State = {
 		Selectors = {
 			selectColorAdjustmentButtonColor = selectColorAdjustmentButtonColorModule,
-			selectAdjustableLastTryOnItem = selectAdjustableLastTryOnItemModule,
 			selectTryOnBodyIds = selectTryOnBodyIdsModule,
 			selectHasBodyTryOn = selectHasBodyTryOnModule,
 			selectShowColorQuickButton = selectShowColorQuickButtonModule,
@@ -165,7 +175,8 @@ return {
 			selectEquippedLayeredMakeupAssets = selectEquippedLayeredMakeupAssetsModule,
 			selectTotalLayeredMakeupAssets = selectTotalLayeredMakeupAssetsModule,
 			selectHasDynamicHead = selectHasDynamicHeadModule,
-			selectTryOnsLookId = selectTryOnsLookIdModule
+			selectTryOnsLookId = selectTryOnsLookIdModule,
+			ItemData = itemDataModule
 		},
 		Actions = {
 			CharacterHistoryStateChangeButtonActivated = characterHistoryStateChangeButtonActivatedModule
@@ -203,6 +214,10 @@ return {
 		getUseSelectorDeepEquals = require(script.Utils.getUseSelectorDeepEquals),
 		findItemInTryOnItems = require(script.Utils.findItemInTryOnItems),
 		getTryOnItemReducerKey = require(script.Utils.getTryOnItemReducerKey),
+		getFilteredTryOnItems = require(script.Utils.TryOns.getFilteredTryOnItems),
+		getTryOnItemComparisonData = require(script.Utils.TryOns.getTryOnItemComparisonData),
+		getShouldReplaceTryOn = require(script.Utils.TryOns.getShouldReplaceTryOn),
+		removeMakeupAssetsFromTryOnsIfOverLimit = require(script.Utils.TryOns.removeMakeupAssetsFromTryOnsIfOverLimit),
 		getItemPurchaseActionType = require(script.Utils.getItemPurchaseActionType),
 		RoactGamepadMigration = {
 			useTableWrappedCallbackRef = require(script.Utils.RoactGamepadMigration.useTableWrappedCallbackRef),
@@ -215,12 +230,19 @@ return {
 		isMakeupOrEyebrowEyelashAssetType = require(script.Utils.isMakeupOrEyebrowEyelashAssetType),
 		isLayeredClothingAssetType = require(script.Utils.isLayeredClothingAssetType),
 		isDurableItemExpired = require(script.Utils.isDurableItemExpired),
-		formatTimeoutEndTime = require(script.Utils.formatTimeoutEndTime)
+		formatTimeoutEndTime = require(script.Utils.formatTimeoutEndTime),
+		isOutfitNameValid = require(script.Utils.isOutfitNameValid),
+		isValidAssetTypeForOutfitType = require(script.Utils.isValidAssetTypeForOutfitType),
+		getHumanoidDescriptionFromStateForOutfitType = require(script.Utils.Humanoid.getHumanoidDescriptionFromStateForOutfitType),
+		getIsInsufficientRobuxError = require(script.Utils.getIsInsufficientRobuxError),
+		getInventoryOutfitType = require(script.Utils.getInventoryOutfitType),
+		getGrantedOutfitIds = require(script.Utils.getGrantedOutfitIds)
 	},
 	Backgrounds = {
 		loadBackgroundAsset = require(script.Backgrounds.loadBackgroundAsset),
 		selectActiveBackground = require(script.Backgrounds.selectActiveBackground),
 		buildOutfitProfileConfiguration = require(script.Backgrounds.buildOutfitProfileConfiguration),
+		normalizeBackgroundId = require(script.Backgrounds.normalizeBackgroundId),
 		NO_BACKGROUND_ASSET_ID = require(script.Backgrounds.constants).NO_BACKGROUND_ASSET_ID
 	},
 	Constants = require(script.Constants),

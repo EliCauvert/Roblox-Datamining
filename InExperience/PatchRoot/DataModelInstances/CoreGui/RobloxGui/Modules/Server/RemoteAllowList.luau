@@ -1,8 +1,10 @@
-﻿local fFlagEnableModerateChatRemoteEvent = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagEnableModerateChatRemoteEvent
+﻿local sharedFlagsModule = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags)
+local fFlagEnableModerateChatRemoteEvent = sharedFlagsModule.FFlagEnableModerateChatRemoteEvent
+local fFlagPlatformLeaderboardRccEnabled = sharedFlagsModule.FFlagPlatformLeaderboardRccEnabled
 local remoteAllowListAddExpChatFeatureValueChanged = game:DefineFastFlag("RemoteAllowListAddExpChatFeatureValueChanged", false)
 
-return function() --[[ line: 6 ]]
-	-- upvalues: fFlagEnableModerateChatRemoteEvent (ref), remoteAllowListAddExpChatFeatureValueChanged (ref)
+return function() --[[ line: 8 ]]
+	-- upvalues: fFlagEnableModerateChatRemoteEvent (ref), remoteAllowListAddExpChatFeatureValueChanged (ref), fFlagPlatformLeaderboardRccEnabled (ref)
 	assert(game:FindService("NetworkServer") ~= nil)
 	local networkServerService = game:GetService("NetworkServer")
 	local t = {}
@@ -32,9 +34,6 @@ return function() --[[ line: 6 ]]
 		table.insert(t, "ExpChatFeatureValueChanged")
 	end
 	table.insert(t, "SetDialogInUse")
-	table.insert(t, "ContactListInvokeIrisInvite")
-	table.insert(t, "ContactListIrisInviteTeleport")
-	table.insert(t, "UpdateCurrentCall")
 	table.insert(t, "RequestDeviceCameraOrientationCapability")
 	table.insert(t, "RequestDeviceCameraCFrame")
 	table.insert(t, "ReplicateDeviceCameraCFrame")
@@ -42,5 +41,11 @@ return function() --[[ line: 6 ]]
 	table.insert(t, "BuildExperiencePlaytestTeleport")
 	table.insert(t, "SetUserActive")
 	table.insert(t, "AvatarGesturesVRPlayer")
+	
+	if fFlagPlatformLeaderboardRccEnabled then
+		table.insert(t, "PlatformLeaderboardPush")
+		table.insert(t, "PlatformLeaderboardTabOpened")
+		table.insert(t, "PlatformLeaderboardTabClosed")
+	end
 	networkServerService:InitializeRemoteAllowList(t)
 end

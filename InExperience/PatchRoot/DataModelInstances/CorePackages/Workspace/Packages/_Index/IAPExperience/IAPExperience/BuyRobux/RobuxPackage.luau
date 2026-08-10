@@ -13,18 +13,16 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local withStyle = UIBloxModule.Core.Style.withStyle
 local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local useCursor = UIBloxModule.App.SelectionCursor.useCursor
-local constants = UIBloxModule.App.Style.Constants
 local roactGamepadModule = require(parent_1.RoactGamepad)
 local roactFitComponentsModule = require(parent_1.RoactFitComponents)
 local fitFrameHorizontal = roactFitComponentsModule.FitFrameHorizontal
 local fitTextLabel = roactFitComponentsModule.FitTextLabel
 local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
 local formatNumberModule = require(parent.Utility.formatNumber)
-local fFlagEnableCoreContentTheme = require(parent_1.SharedFlags).FFlagEnableCoreContentTheme
 local robux = images["icons/common/robux"]
 
-local function renderWithProviders(p0, p1, p2, p3, p4, p5) --[[ line: 62 ]]
-	-- upvalues: roactModule (ref), skeleton (ref), fFlagEnableCoreContentTheme (ref), constants (ref), roactGamepadModule (ref), imageSetButton (ref), imageSetLabel (ref), fitFrameHorizontal (ref), robux (ref), fitTextLabel (ref), formatNumberModule (ref), localizationService (ref)
+local function renderWithProviders(p0, p1, p2, p3, _, p4) --[[ line: 59 ]]
+	-- upvalues: roactModule (ref), skeleton (ref), roactGamepadModule (ref), imageSetButton (ref), imageSetLabel (ref), fitFrameHorizontal (ref), robux (ref), fitTextLabel (ref), formatNumberModule (ref), localizationService (ref)
 	if p0.robuxAmount == nil then
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -36,10 +34,10 @@ local function renderWithProviders(p0, p1, p2, p3, p4, p5) --[[ line: 62 ]]
 	local theme = p2.Theme
 	local font = p2.Font
 	local var9 = p0.scale * 64
-	local var10 = if fFlagEnableCoreContentTheme then p5.Color.Surface.Surface_100.Color3 elseif p4 == constants.ThemeName.Dark then Color3.fromRGB(25, 27, 29) else Color3.fromRGB(242, 244, 245)
+	local color3 = p4.Color.Surface.Surface_100.Color3
 	
 	if p0.selected then
-		var10 = if fFlagEnableCoreContentTheme then var10:Lerp(p5.Color.Surface.Surface_200.Color3, 0.5) elseif p4 == constants.ThemeName.Dark then Color3.fromRGB(57, 59, 61) else Color3.fromRGB(255, 255, 255)
+		color3 = color3:Lerp(p4.Color.Surface.Surface_200.Color3, 0.5)
 	end
 	return roactModule.createElement(roactGamepadModule.Focusable[imageSetButton], {
 		LayoutOrder = p0.layoutOrder,
@@ -54,28 +52,28 @@ local function renderWithProviders(p0, p1, p2, p3, p4, p5) --[[ line: 62 ]]
 		NextSelectionLeft = p0.nextSelectionLeft,
 		NextSelectionRight = p0.nextSelectionRight,
 		inputBindings = {
-			Activated = if p0.onActivated ~= nil then nil else roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ line: 112 ]]
+			Activated = if p0.onActivated ~= nil then nil else roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ line: 99 ]]
 				-- upvalues: p0 (ref)
 				p0.onActivated(p0.packageId)
 			end)
 		},
-		[roactModule.Event.Activated] = function() --[[ line: 117 ]]
+		[roactModule.Event.Activated] = function() --[[ line: 104 ]]
 			-- upvalues: p0 (ref)
 			p0.onActivated(p0.packageId)
 		end,
-		[roactModule.Event.MouseMoved] = function() --[[ line: 120 ]]
+		[roactModule.Event.MouseMoved] = function() --[[ line: 107 ]]
 			-- upvalues: p0 (ref)
 			p0.onHover(p0.forwardRef, true)
 		end,
-		[roactModule.Event.MouseEnter] = function() --[[ line: 123 ]]
+		[roactModule.Event.MouseEnter] = function() --[[ line: 110 ]]
 			-- upvalues: p0 (ref)
 			p0.onHover(p0.forwardRef, true)
 		end,
-		[roactModule.Event.MouseLeave] = function() --[[ line: 126 ]]
+		[roactModule.Event.MouseLeave] = function() --[[ line: 113 ]]
 			-- upvalues: p0 (ref)
 			p0.onHover(p0.forwardRef, false)
 		end,
-		[roactModule.Event.SelectionGained] = function() --[[ line: 129 ]]
+		[roactModule.Event.SelectionGained] = function() --[[ line: 116 ]]
 			-- upvalues: p0 (ref)
 			p0.onSelect(p0.forwardRef)
 		end
@@ -86,7 +84,7 @@ local function renderWithProviders(p0, p1, p2, p3, p4, p5) --[[ line: 62 ]]
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			BackgroundColor3 = var10,
+			BackgroundColor3 = color3,
 			Size = UDim2.new(1, -3, 1, -3)
 		}, {
 			Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
@@ -180,10 +178,10 @@ local function renderWithProviders(p0, p1, p2, p3, p4, p5) --[[ line: 62 ]]
 	})
 end
 
-return function(p6) --[[ line: 255 ]]
+return function(p5) --[[ line: 242 ]]
 	-- upvalues: useCursor (ref), useTokens (ref), useStyleMetadata (ref), roactModule (ref), multiTextLocalizerModule (ref), formatNumberModule (ref), localizationService (ref), withStyle (ref), renderWithProviders (ref)
-	local var11 = useCursor(UDim.new(0, 8))
-	local var12 = useTokens()
+	local var10 = useCursor(UDim.new(0, 8))
+	local var11 = useTokens()
 	local themeName = useStyleMetadata().ThemeName
 	
 	return roactModule.createElement(multiTextLocalizerModule, {
@@ -191,18 +189,18 @@ return function(p6) --[[ line: 255 ]]
 			moreRobux = {
 				key = "IAPExperience.BuyRobux.Text.MoreRobux2",
 				params = {
-					robux = formatNumberModule(localizationService.RobloxLocaleId, p6.robuxMoreAmount or 0)
+					robux = formatNumberModule(localizationService.RobloxLocaleId, p5.robuxMoreAmount or 0)
 				}
 			}
 		},
-		render = function(p7) --[[ line: 271 ]]
-			-- upvalues: withStyle (copy), p6 (ref), renderWithProviders (copy), var11 (ref), themeName (ref), var12 (ref)
-			return withStyle(function(p8) --[[ line: 272 ]]
-				-- upvalues: p6 (copy), renderWithProviders (copy), p7 (ref), var11 (copy), themeName (copy), var12 (copy)
-				if p6.scale == nil then
-					p6.scale = 0.65
+		render = function(p6) --[[ line: 258 ]]
+			-- upvalues: withStyle (copy), p5 (ref), renderWithProviders (copy), var10 (ref), themeName (ref), var11 (ref)
+			return withStyle(function(p7) --[[ line: 259 ]]
+				-- upvalues: p5 (copy), renderWithProviders (copy), p6 (ref), var10 (copy), themeName (copy), var11 (copy)
+				if p5.scale == nil then
+					p5.scale = 0.65
 				end
-				return renderWithProviders(p6, p7, p8, var11, themeName, var12)
+				return renderWithProviders(p5, p6, p7, var10, themeName, var11)
 			end)
 		end
 	})

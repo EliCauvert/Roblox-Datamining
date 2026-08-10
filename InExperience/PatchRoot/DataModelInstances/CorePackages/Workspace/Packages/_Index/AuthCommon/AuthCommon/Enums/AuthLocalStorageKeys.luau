@@ -20,5 +20,6 @@
 	ActivePartyId = "ActivePartyId",
 	LastSuccessfulSignInMethod = "LastSuccessfulSignInMethod",
 	DiscoveryClientFallbackCache = "DiscoveryClientFallbackCache",
-	HasRobloxSubscription = "HasRobloxSubscription"
+	HasRobloxSubscription = "HasRobloxSubscription",
+	IosAuthServiceEnabled = "IosAuthServiceEnabled"
 }

@@ -46,6 +46,7 @@
 	Btns = {
 		Friends = "friends",
 		Followers = "followers",
+		School = "school",
 		ViewPlayerProfile = "viewPlayerProfile",
 		ContextualMenu = "contextualMenu",
 		Following = "following",
@@ -54,6 +55,7 @@
 		EditDisplayName = "editDisplayName",
 		SetAlias = "setAlias",
 		StoreHeader = "storeHeader",
+		CurrentlyWearingHeader = "currentlyWearingHeader",
 		FavoriteExperience = "favoriteExperience",
 		FavoriteExperienceSeeAll = "favoriteExperienceSeeAll",
 		Experience = "experience",
@@ -69,6 +71,8 @@
 		InspectAvatar = "inspectAvatar",
 		InspectAvatarBuyItems = "inspectAvatarBuyItems",
 		InspectAvatarConfirmBuy = "inspectAvatarConfirmBuy",
+		InspectAvatarInsufficientRobux = "inspectAvatarInsufficientRobux",
+		InspectAvatarBuyRobux = "inspectAvatarBuyRobux",
 		MomentsSeeAll = "momentsSeeAll",
 		Moment = "moment"
 	}

@@ -29,7 +29,7 @@ return function(p0, p1) --[[ line: 32 | named "withMockProviders" ]]
 				LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
 					localization = robloxAppLocalesModule.Localization.new("en-us")
 				}, {
-					FoundationProvider = reactModule.createElement(foundationProvider, { theme = "Dark" }, {
+					FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
 						StyleProvider = reactModule.createElement(appStyleProvider, {
 							style = {
 								themeName = constants.ThemeName.Dark,

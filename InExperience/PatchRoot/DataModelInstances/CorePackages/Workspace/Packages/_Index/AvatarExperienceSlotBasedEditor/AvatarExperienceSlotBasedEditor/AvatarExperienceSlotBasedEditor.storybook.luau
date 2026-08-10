@@ -10,7 +10,7 @@ local roactRoduxModule = require(parent.RoactRodux)
 local roduxModule = require(parent.Rodux)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
 local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
@@ -20,7 +20,7 @@ local function createStore() --[[ line: 22 ]]
 	return roduxModule.Store.new(roduxModule.createReducer({}, {}), nil, { roduxModule.makeThunkMiddleware({}) })
 end
 
-local t = { Light = theme.Light, Dark = theme.Dark }
+local t = { Light = colorMode.Light, Dark = colorMode.Dark }
 local t_1 = { Console = device.Console, Desktop = device.Desktop }
 local t_2 = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
@@ -42,7 +42,7 @@ return {
 					StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 						DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
 							FoundationProvider = reactModule.createElement(foundationProvider, {
-								theme = t[p1.theme],
+								colorMode = t[p1.theme],
 								device = t_1[p1.platform],
 								preferences = p1.settings
 							}, { Child = reactModule.createElement(p0, p1) })

@@ -5,7 +5,7 @@ local horizontalUserList = require(userList.Components.HorizontalUserList).Horiz
 local enumsModule = require(userList.Common.Enums)
 local _ = require(userList.Common.Types)
 
-return reactModule.memo(function(p0) --[[ line: 36 | named "UserListLayoutAdaptor" ]]
+return reactModule.memo(function(p0) --[[ line: 38 | named "UserListLayoutAdaptor" ]]
 	-- upvalues: enumsModule (ref), verticalUserListSection (ref), horizontalUserList (ref), reactModule (ref)
 	local var3 = if p0.layoutMode == enumsModule.LayoutMode.Vertical then verticalUserListSection else horizontalUserList
 	local cloned = table.clone(p0)

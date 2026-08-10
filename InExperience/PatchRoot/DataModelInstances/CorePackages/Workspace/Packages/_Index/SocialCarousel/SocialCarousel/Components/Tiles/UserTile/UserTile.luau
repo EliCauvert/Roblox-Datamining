@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("SocialCarousel").Parent
+﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
+local parent = socialCarousel.Parent
 local reactModule = require(parent.React)
 local socialCommonModule = require(parent.SocialCommon)
 local userTile = require(parent.UserTile).UserTile
@@ -7,10 +8,11 @@ local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local convertToFoundationPresenceEnum = socialCommonModule.Utils.convertToFoundationPresenceEnum
+local fFlagFriendsCarouselProfileFrameEnabledModule = require(socialCarousel.Flags.FFlagFriendsCarouselProfileFrameEnabled)
 
-return function(p0) --[[ line: 31 | named "UserTile" ]]
-	-- upvalues: useTokens (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref)
-	local var3 = useTokens()
+return function(p0) --[[ line: 36 | named "UserTile" ]]
+	-- upvalues: useTokens (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), view (ref), userTile (ref), layoutMode (ref), fFlagFriendsCarouselProfileFrameEnabledModule (ref)
+	local var5 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "auto-none",
@@ -24,11 +26,12 @@ return function(p0) --[[ line: 31 | named "UserTile" ]]
 			userId = p0.item.id,
 			title = p0.name,
 			subtitle = p0.contextualText,
-			titleStyle = var3.Typography.TitleSmall,
-			subtitleStyle = var3.Typography.LabelSmall,
+			titleStyle = var5.Typography.TitleSmall,
+			subtitleStyle = var5.Typography.LabelSmall,
 			userPresenceType = if p0.item.presence ~= nil then foundationModule.Enums.UserPresence.None else foundationModule.Enums.UserPresence[convertToFoundationPresenceEnum(p0.item.presence.userPresenceType)],
 			onActivated = p0.onActivated,
-			titleIcon = p0.titleIcon
+			titleIcon = p0.titleIcon,
+			includeProfileFrame = fFlagFriendsCarouselProfileFrameEnabledModule
 		})
 	})
 end

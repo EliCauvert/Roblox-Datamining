@@ -1,15 +1,14 @@
 ﻿local parent = script.Parent.Parent
 local promiseModule = require(parent.Promise)
 local purchaseWarningModule = require(parent.Enums.PurchaseWarning)
-local getFFlagUseCatalogItemDetailsToResolveBundlePurchaseModule = require(parent.Flags.GetFFlagUseCatalogItemDetailsToResolveBundlePurchase)
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 
-local function getABTestGroup() --[[ line: 15 ]]
+local function getABTestGroup() --[[ line: 13 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(false)
 end
 
-local function getProductInfo(_, _) --[[ line: 19 ]]
+local function getProductInfo(_, _) --[[ line: 17 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		AssetId = 1,
@@ -35,12 +34,12 @@ local function getProductInfo(_, _) --[[ line: 19 ]]
 	})
 end
 
-local function getPlayerOwns(_, _, _) --[[ line: 44 ]]
+local function getPlayerOwns(_, _, _) --[[ line: 42 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(false)
 end
 
-local function performPurchase(_, _, _, _) --[[ line: 48 ]]
+local function performPurchase(_, _, _, _) --[[ line: 46 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		success = true,
@@ -49,22 +48,22 @@ local function performPurchase(_, _, _, _) --[[ line: 48 ]]
 	})
 end
 
-local function loadAssetForEquip(_) --[[ line: 56 ]]
+local function loadAssetForEquip(_) --[[ line: 54 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(Instance.new("Tool"))
 end
 
-local function getAccountInfo() --[[ line: 60 ]]
+local function getAccountInfo() --[[ line: 58 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ isPremium = false })
 end
 
-local function getBalanceInfo() --[[ line: 66 ]]
+local function getBalanceInfo() --[[ line: 64 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ robux = 2147483647 })
 end
 
-local function getBundleDetails(_) --[[ line: 72 ]]
+local function getBundleDetails(_) --[[ line: 70 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		id = 1,
@@ -78,12 +77,12 @@ local function getBundleDetails(_) --[[ line: 72 ]]
 	})
 end
 
-local function getProductPurchasableDetails(_) --[[ line: 97 ]]
+local function getProductPurchasableDetails(_) --[[ line: 95 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ purchasable = false, reason = "mock-reason", price = 100 })
 end
 
-local function getCatalogItemDetails(_, _) --[[ line: 105 ]]
+local function getCatalogItemDetails(_, _) --[[ line: 103 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		bundleType = 1,
@@ -170,12 +169,12 @@ local function getCatalogItemDetails(_, _) --[[ line: 105 ]]
 	})
 end
 
-local function getResellers(_, _) --[[ line: 191 ]]
+local function getResellers(_, _) --[[ line: 189 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ nextPageCursor = nil, data = {} })
 end
 
-local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _) --[[ line: 198 ]]
+local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _) --[[ line: 196 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		roblox_product_id = 50,
@@ -185,32 +184,32 @@ local function getRobuxUpsellProductWithUniverseItemInfo(_, _, _, _, _, _) --[[ 
 	})
 end
 
-local function postPremiumImpression() --[[ line: 214 ]]
+local function postPremiumImpression() --[[ line: 212 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function getPremiumUpsellPrecheck() --[[ line: 218 ]]
+local function getPremiumUpsellPrecheck() --[[ line: 216 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve(true)
 end
 
-local function getPurchaseWarning(_) --[[ line: 222 ]]
+local function getPurchaseWarning(_) --[[ line: 220 ]]
 	-- upvalues: promiseModule (ref), purchaseWarningModule (ref)
 	return promiseModule.resolve({ action = purchaseWarningModule.NoAction })
 end
 
-local function postPurchaseWarningAcknowledge() --[[ line: 228 ]]
+local function postPurchaseWarningAcknowledge() --[[ line: 226 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve()
 end
 
-local function checkUserPurchaseSettings() --[[ line: 232 ]]
+local function checkUserPurchaseSettings() --[[ line: 230 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({ isEligible = false, failureReason = "PurchaseNotEnabled" })
 end
 
-local function getUnifiedPurchaseFlowUserEligibility() --[[ line: 239 ]]
+local function getUnifiedPurchaseFlowUserEligibility() --[[ line: 237 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		isUserEligibleForUnifiedPurchaseFlow = true,
@@ -218,7 +217,7 @@ local function getUnifiedPurchaseFlowUserEligibility() --[[ line: 239 ]]
 	})
 end
 
-local function getSubscriptionProductInfo(_) --[[ line: 246 ]]
+local function getSubscriptionProductInfo(_) --[[ line: 244 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		Name = "Mock Subscription",
@@ -233,7 +232,7 @@ local function getSubscriptionProductInfo(_) --[[ line: 246 ]]
 	})
 end
 
-local function GetLookDetailsV2ProductInfo(_) --[[ line: 260 ]]
+local function GetLookDetailsV2ProductInfo(_) --[[ line: 258 ]]
 	-- upvalues: promiseModule (ref)
 	return promiseModule.resolve({
 		look = {
@@ -245,37 +244,37 @@ end
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 277 ]]
-	-- upvalues: promiseModule (ref), getFFlagUseCatalogItemDetailsToResolveBundlePurchaseModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), getCatalogItemDetails (ref), getResellers (ref), getRobuxUpsellProductWithUniverseItemInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getUnifiedPurchaseFlowUserEligibility (ref), getSubscriptionProductInfo (ref), GetLookDetailsV2ProductInfo (ref)
+function t.new(p0, p1) --[[ line: 275 ]]
+	-- upvalues: promiseModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), getCatalogItemDetails (ref), getResellers (ref), getRobuxUpsellProductWithUniverseItemInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getUnifiedPurchaseFlowUserEligibility (ref), getSubscriptionProductInfo (ref), GetLookDetailsV2ProductInfo (ref)
 	local t
 	local _ = nil
 	
 	if p1 or p0 then
-		local var26 = function() --[[ line: 281 ]]
+		local var25 = function() --[[ line: 279 ]]
 			-- upvalues: p0 (ref), promiseModule (copy), p1 (ref)
 			return if p0 then promiseModule.resolve(p0) else promiseModule.reject(p1)
 		end
 		
 		t = {
-			getABTestGroup = var26,
-			getProductInfo = var26,
-			getPlayerOwns = var26,
-			performPurchase = var26,
-			loadAssetForEquip = var26,
-			getAccountInfo = var26,
-			getBalanceInfo = var26,
-			getBundleDetails = var26,
-			getProductPurchasableDetails = var26,
-			getCatalogItemDetails = if getFFlagUseCatalogItemDetailsToResolveBundlePurchaseModule() or fFlagRefreshPriceOnRetryAfterUpsellModule then var26 else nil,
-			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then var26 else nil,
-			getRobuxUpsellProductWithUniverseItemInfo = var26,
-			postPremiumImpression = var26,
-			getPremiumUpsellPrecheck = var26,
-			getPurchaseWarning = var26,
-			postPurchaseWarningAcknowledge = var26,
-			checkUserPurchaseSettings = var26,
-			getUnifiedPurchaseFlowUserEligibility = var26,
-			getSubscriptionProductInfo = var26
+			getABTestGroup = var25,
+			getProductInfo = var25,
+			getPlayerOwns = var25,
+			performPurchase = var25,
+			loadAssetForEquip = var25,
+			getAccountInfo = var25,
+			getBalanceInfo = var25,
+			getBundleDetails = var25,
+			getProductPurchasableDetails = var25,
+			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then var25 else nil,
+			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then var25 else nil,
+			getRobuxUpsellProductWithUniverseItemInfo = var25,
+			postPremiumImpression = var25,
+			getPremiumUpsellPrecheck = var25,
+			getPurchaseWarning = var25,
+			postPurchaseWarningAcknowledge = var25,
+			checkUserPurchaseSettings = var25,
+			getUnifiedPurchaseFlowUserEligibility = var25,
+			getSubscriptionProductInfo = var25
 		}
 	else
 		t = {
@@ -288,7 +287,7 @@ function t.new(p0, p1) --[[ line: 277 ]]
 			getBalanceInfo = getBalanceInfo,
 			getBundleDetails = getBundleDetails,
 			getProductPurchasableDetails = getProductPurchasableDetails,
-			getCatalogItemDetails = if getFFlagUseCatalogItemDetailsToResolveBundlePurchaseModule() or fFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
+			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
 			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then getResellers else nil,
 			getRobuxUpsellProductWithUniverseItemInfo = getRobuxUpsellProductWithUniverseItemInfo,
 			postPremiumImpression = postPremiumImpression,
@@ -302,7 +301,7 @@ function t.new(p0, p1) --[[ line: 277 ]]
 		}
 	end
 	setmetatable(t, {
-		__tostring = function() --[[ line: 341 ]]
+		__tostring = function() --[[ line: 333 ]]
 			return "MockService(Network)"
 		end
 	})

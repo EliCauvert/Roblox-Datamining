@@ -6,6 +6,7 @@
 	useExternalEvent = require(script.useExternalEvent),
 	useInputType = require(script.useInputType),
 	useIsGamepad = require(script.useIsGamepad),
+	useGamepadSupports = require(script.useGamepadSupports),
 	useIsTvRemoteDevice = require(script.useIsTvRemoteDevice),
 	useEffectOnMount = require(script.useEffectOnMount),
 	useDidUpdate = require(script.useDidUpdate),

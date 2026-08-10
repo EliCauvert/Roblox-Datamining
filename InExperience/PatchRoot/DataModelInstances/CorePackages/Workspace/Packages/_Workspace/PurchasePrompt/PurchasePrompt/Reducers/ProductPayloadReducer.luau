@@ -4,14 +4,15 @@ local rodux = require(parent.PurchasePromptDeps).Rodux
 local setProductPayloadModule = require(purchasePrompt.Actions.SetProductPayload)
 local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
+local fFlagPromptPurchaseClearStateOnCompletionModule = require(purchasePrompt.Flags.FFlagPromptPurchaseClearStateOnCompletion)
 local t = {}
 
 return rodux.createReducer(t, {
-	[setProductPayloadModule.name] = function(_, p0) --[[ line: 14 ]]
+	[setProductPayloadModule.name] = function(_, p0) --[[ line: 15 ]]
 		return p0.productPayload
 	end,
-	[completeRequestModule.name] = function(p1, _) --[[ line: 17 ]]
-		-- upvalues: fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), t (ref)
-		return if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.kind == "DeveloperSubscription" then t else p1
+	[completeRequestModule.name] = function(p1, _) --[[ line: 18 ]]
+		-- upvalues: fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), t (ref), fFlagPromptPurchaseClearStateOnCompletionModule (ref)
+		return if fFlagEnableUnifiedPurchaseFlowForDevSubs and p1.kind == "DeveloperSubscription" then t elseif fFlagPromptPurchaseClearStateOnCompletionModule then t else p1
 	end
 })

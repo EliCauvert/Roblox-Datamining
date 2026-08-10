@@ -1,10 +1,6 @@
-﻿local parent = script.Parent.Parent.Parent
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
+﻿local useStyle = require(script.Parent.Parent.Parent.UIBlox).Core.Style.useStyle
 
-return function() --[[ line: 10 | named "useNavBarSize" ]]
-	-- upvalues: useStyle (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
-	local tokens = useStyle().Tokens
-	
-	return if fFlagRenameDeprecatedUIBloxTokens then tokens.Size.Size_1600 else tokens.Global.Size_800
+return function() --[[ line: 8 | named "useNavBarSize" ]]
+	-- upvalues: useStyle (ref)
+	return useStyle().Tokens.Size.Size_1600
 end

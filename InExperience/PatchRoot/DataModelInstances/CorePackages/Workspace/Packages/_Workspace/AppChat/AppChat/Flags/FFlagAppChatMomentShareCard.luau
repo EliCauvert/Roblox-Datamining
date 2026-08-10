@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatMomentShareCard", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatResolveShareLinkV2)

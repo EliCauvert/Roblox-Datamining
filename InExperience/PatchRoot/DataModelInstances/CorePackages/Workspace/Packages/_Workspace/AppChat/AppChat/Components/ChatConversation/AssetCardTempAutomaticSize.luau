@@ -5,9 +5,9 @@ local cryoModule = require(parent.Cryo)
 local chatBubbleContainerAutomaticSizeModule = require(script.Parent.Bubble.ChatBubbleContainerAutomaticSize)
 local constantsModule = require(appChat.Constants)
 local useScaledValue = require(parent.Foundation).Hooks.useScaledValue
-local placeIdContainerModule = require(appChat.Components.ChatConversation.GameCardComponents.PlaceIdContainer)
-local gameCardContainerModule = require(appChat.Components.ChatConversation.GameCardComponents.GameCardContainer)
-local shareLinkContainerModule = require(appChat.Components.ChatConversation.GameCardComponents.ShareLinkContainer)
+local placeIdContainerModule = require(appChat.Components.ChatConversation.ShareLinkComponents.GameCardComponents.PlaceIdContainer)
+local gameCardContainerModule = require(appChat.Components.ChatConversation.ShareLinkComponents.GameCardComponents.GameCardContainer)
+local shareLinkContainerModule = require(appChat.Components.ChatConversation.ShareLinkComponents.ShareLinkContainer)
 local t = {
 	hasTail = false,
 	innerPadding = 0,
@@ -23,12 +23,12 @@ local t = {
 		placeId = nil,
 		universeId = nil,
 		senderUserId = nil,
-		onDetailsOpened = function() --[[ line: 24 ]] end,
-		openGameDetailsPage = function() --[[ line: 25 ]] end
+		onDetailsOpened = function() --[[ line: 26 ]] end,
+		openGameDetailsPage = function() --[[ line: 27 ]] end
 	}
 }
 
-return function(value) --[[ line: 38 | named "AssetCardTemp" ]]
+return function(value) --[[ line: 40 | named "AssetCardTemp" ]]
 	-- upvalues: cryoModule (ref), t (ref), shareLinkContainerModule (ref), placeIdContainerModule (ref), gameCardContainerModule (ref), useScaledValue (ref), constantsModule (ref), roactModule (ref), chatBubbleContainerAutomaticSizeModule (ref)
 	local var9 = cryoModule.Dictionary.union(t, value)
 	local var10 = cryoModule.Dictionary.union(t.additionalProps, var9.additionalProps)

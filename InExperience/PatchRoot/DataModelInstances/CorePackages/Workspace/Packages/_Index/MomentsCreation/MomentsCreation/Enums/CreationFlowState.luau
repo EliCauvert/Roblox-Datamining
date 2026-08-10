@@ -4,5 +4,6 @@
 	Music = "Music",
 	TextOverlay = "TextOverlay",
 	Trimming = "Trimming",
-	Description = "Description"
+	Description = "Description",
+	StickerOverlay = "StickerOverlay"
 }

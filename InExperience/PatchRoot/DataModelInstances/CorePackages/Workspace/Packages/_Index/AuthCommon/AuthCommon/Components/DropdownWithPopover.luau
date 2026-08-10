@@ -19,15 +19,13 @@ local useTokens = foundationModule.Hooks.useTokens
 local view = foundationModule.View
 local sideModalDropdownButtonModule = require(authCommon.Components.SideModalDropdownButton)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local fFlagUseBirthdayDropdownForGamepad = require(parent.SharedFlags).FFlagUseBirthdayDropdownForGamepad
 
-local function selectScreenSize(p0) --[[ line: 54 ]]
+local function selectScreenSize(p0) --[[ line: 52 ]]
 	return p0.ScreenSize
 end
 
-return reactModule.memo(function(p1) --[[ line: 58 | named "DropdownWithPopover" ]]
-	-- upvalues: useTokens (ref), useSelector (ref), selectScreenSize (ref), reactModule (ref), fFlagUseBirthdayDropdownForGamepad (ref), useLastInputMode (ref), reactFocusNavigationModule (ref), view (ref), text (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), popoverSide (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), scrollView (ref), scrollBarVisibility (ref)
-	local isFocus
+return reactModule.memo(function(p1) --[[ line: 56 | named "DropdownWithPopover" ]]
+	-- upvalues: useTokens (ref), useSelector (ref), selectScreenSize (ref), reactModule (ref), useLastInputMode (ref), reactFocusNavigationModule (ref), view (ref), text (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), popoverSide (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), scrollView (ref), scrollBarVisibility (ref)
 	local var8 = useTokens()
 	local var9 = useSelector(selectScreenSize)
 	local var10, var11 = reactModule.useState(false)
@@ -36,15 +34,9 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "DropdownWithPopover"
 	local var16, var17 = reactModule.useState(Vector2.new(0, 0))
 	local var18 = reactModule.useRef(nil)
 	local var19 = reactModule.useRef(nil)
-	
-	if fFlagUseBirthdayDropdownForGamepad then
-		isFocus = useLastInputMode() == "Focus"
-		isFocus = nil
-	else
-		isFocus = nil
-	end
-	local var21 = if fFlagUseBirthdayDropdownForGamepad then reactFocusNavigationModule.useFocusGuiObject() else nil
-	reactModule.useEffect(function() --[[ line: 72 ]]
+	local isFocus = useLastInputMode() == "Focus"
+	local var21 = reactFocusNavigationModule.useFocusGuiObject()
+	reactModule.useEffect(function() --[[ line: 70 ]]
 		-- upvalues: p1 (ref), var13 (ref)
 		if p1.value == nil then
 			var13({})
@@ -59,30 +51,30 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "DropdownWithPopover"
 			end
 		end
 	end, { p1.value, p1.cellDatas })
-	local var22 = reactModule.useCallback(function() --[[ line: 86 ]]
-		-- upvalues: fFlagUseBirthdayDropdownForGamepad (copy), var21 (ref), isFocus (ref), var18 (ref), var11 (ref)
-		if fFlagUseBirthdayDropdownForGamepad and var21 and isFocus then
+	local var22 = reactModule.useCallback(function() --[[ line: 84 ]]
+		-- upvalues: var21 (ref), isFocus (ref), var18 (ref), var11 (ref)
+		if var21 and isFocus then
 			var21(var18.current)
 		end
 		var11(false)
-	end, { var18.current, isFocus })
-	reactModule.useEffect(function() --[[ line: 93 ]]
-		-- upvalues: fFlagUseBirthdayDropdownForGamepad (copy), var21 (ref), p1 (ref), var18 (ref)
-		if fFlagUseBirthdayDropdownForGamepad and var21 and p1.focusOnMount then
+	end, { var18.current, isFocus, var21 })
+	reactModule.useEffect(function() --[[ line: 91 ]]
+		-- upvalues: var21 (ref), p1 (ref), var18 (ref)
+		if var21 and p1.focusOnMount then
 			var21(var18.current)
 		end
-	end, { var18.current })
-	reactModule.useEffect(function() --[[ line: 99 ]]
+	end, { var18.current, var21, p1.focusOnMount })
+	reactModule.useEffect(function() --[[ line: 97 ]]
 		-- upvalues: p1 (ref), var10 (ref)
 		if p1.onDropdownOpened then
 			p1.onDropdownOpened(var10)
 		end
-	end, { var10 })
+	end, { var10, p1.onDropdownOpened })
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
 		ref = var18,
-		onAbsoluteSizeChanged = function(value) --[[ line: 154 ]]
+		onAbsoluteSizeChanged = function(value) --[[ line: 152 ]]
 			-- upvalues: var15 (ref)
 			var15(value.AbsoluteSize)
 		end,
@@ -91,15 +83,15 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "DropdownWithPopover"
 		Popover = reactModule.createElement(popover.Root, { isOpen = var10 }, {
 			Anchor = reactModule.createElement(popover.Anchor, nil, reactModule.createElement(view, { Size = UDim2.new(0, var14.X, 0, var14.Y) }, {
 				DropdownButton = reactModule.createElement(sideModalDropdownButtonModule, {
-					onActivated = reactModule.useCallback(function() --[[ line: 147 ]]
+					onActivated = reactModule.useCallback(function() --[[ line: 145 ]]
 						-- upvalues: var11 (ref), var10 (ref)
 						var11(not var10)
 					end, { var10 }),
 					text = if var12.text and #var12.text > 0 then var12.text elseif p1.placeholder then p1.placeholder else "",
 					isDropdownError = p1.errorState,
-					backgroundColorToken = if fFlagUseBirthdayDropdownForGamepad then p1.backgroundColorToken else nil,
-					height = if fFlagUseBirthdayDropdownForGamepad then p1.dropdownHeight else nil,
-					fixSizeToParent = if fFlagUseBirthdayDropdownForGamepad then p1.fixSizeToParent else nil
+					backgroundColorToken = p1.backgroundColorToken,
+					height = p1.dropdownHeight,
+					fixSizeToParent = p1.fixSizeToParent
 				})
 			})),
 			Content = reactModule.createElement(popover.Content, {
@@ -129,18 +121,18 @@ return reactModule.memo(function(p1) --[[ line: 58 | named "DropdownWithPopover"
 							BaseMenu = reactModule.createElement(view, {
 								tag = "auto-y col align-y-center gap-xsmall padding-xsmall",
 								Size = UDim2.new(0, var14.X + var8.Stroke.Standard * 2, 0, 0),
-								onAbsoluteSizeChanged = function(value) --[[ line: 231 ]]
+								onAbsoluteSizeChanged = function(value) --[[ line: 227 ]]
 									-- upvalues: var17 (ref)
 									var17(value.AbsoluteSize)
 								end,
 								ref = var19
-							}, reactModule.useMemo(function() --[[ line: 106 ]]
+							}, reactModule.useMemo(function() --[[ line: 104 ]]
 								-- upvalues: p1 (ref), var22 (ref), reactModule (copy), view (copy), var12 (ref), text (copy)
 								local t = {}
 								
 								for i, v in ipairs(p1.cellDatas) do
 									table.insert(t, reactModule.createElement(view, {
-										onActivated = function() --[[ line: 109 ]]
+										onActivated = function() --[[ line: 107 ]]
 											-- upvalues: p1 (copy), v (ref), var22 (copy)
 											p1.onChange(v.value)
 											var22()

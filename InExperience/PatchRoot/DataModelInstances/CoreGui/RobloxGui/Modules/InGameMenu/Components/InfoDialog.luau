@@ -1,12 +1,13 @@
 ﻿local textService = game:GetService("TextService")
+local corePackagesService = game:GetService("CorePackages")
 local contextActionService = game:GetService("ContextActionService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
 local roact = inGameMenuDependenciesModule.Roact
 local UIBlox = inGameMenuDependenciesModule.UIBlox
 local t = inGameMenuDependenciesModule.t
 local button = UIBlox.App.Button.Button
 local buttonType = UIBlox.App.Button.Enum.ButtonType
-local withStyle = UIBlox.Core.Style.withStyle
+local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local assetsModule = require(script.Parent.Parent.Resources.Assets)
 local themedTextLabelModule = require(script.Parent.ThemedTextLabel)
 local dividerModule = require(script.Parent.Divider)
@@ -23,13 +24,33 @@ infoDialog.validateProps = t.strictInterface({
 })
 
 function infoDialog.render(p0) --[[ line: 41 ]]
-	-- upvalues: withStyle (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
+	-- upvalues: withFoundationOrUIBloxStyle (ref), textService (ref), roact (ref), imageSetLabel (ref), assetsModule (ref), themedTextLabelModule (ref), dividerModule (ref), button (ref), buttonType (ref)
 	local props = p0.props
 	
-	return withStyle(function(p1) --[[ line: 44 ]]
+	return withFoundationOrUIBloxStyle(function(p1) --[[ line: 44 ]]
+		return {
+			Theme = {
+				Overlay = {
+					Color = p1.Color.Common.Scrim.Color3,
+					Transparency = p1.Color.Common.Scrim.Transparency
+				},
+				BackgroundUIDefault = {
+					Color = p1.Color.Surface.Surface_300.Color3,
+					Transparency = p1.Color.Surface.Surface_300.Transparency
+				}
+			},
+			Font = {
+				BaseSize = 1,
+				Body = {
+					Font = p1.Typography.BodyLarge.Font,
+					RelativeSize = p1.Typography.BodyLarge.FontSize
+				}
+			}
+		}
+	end, function(p2) --[[ line: 55 ]]
 		-- upvalues: props (ref), textService (copy), roact (copy), imageSetLabel (copy), assetsModule (copy), p0 (ref), themedTextLabelModule (copy), dividerModule (copy), button (copy), buttonType (copy)
-		local var7 = p1.Font.Body.RelativeSize * p1.Font.BaseSize
-		local var8 = math.max(textService:GetTextSize(props.bodyText, var7, p1.Font.Body.Font, Vector2.new(264, 1e999)).Y, var7 * 2) + 48
+		local var8 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+		local var9 = math.max(textService:GetTextSize(props.bodyText, var8, p2.Font.Body.Font, Vector2.new(264, 1e999)).Y, var8 * 2) + 48
 		
 		return roact.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -41,19 +62,19 @@ function infoDialog.render(p0) --[[ line: 41 ]]
 				AutoButtonColor = false,
 				BorderSizePixel = 0,
 				Text = "",
-				BackgroundColor3 = p1.Theme.Overlay.Color,
-				BackgroundTransparency = p1.Theme.Overlay.Transparency,
+				BackgroundColor3 = p2.Theme.Overlay.Color,
+				BackgroundTransparency = p2.Theme.Overlay.Transparency,
 				Size = UDim2.new(1, 0, 1, 0)
 			}),
 			DialogMainFrame = roact.createElement(imageSetLabel, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Image = assetsModule.Images.RoundedRect.Image,
-				ImageColor3 = p1.Theme.BackgroundUIDefault.Color,
-				ImageTransparency = p1.Theme.BackgroundUIDefault.Transparency,
+				ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
+				ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-				Size = UDim2.new(0, 312, 0, var8 + 49 + 36 + 36 + 24 + 10),
+				Size = UDim2.new(0, 312, 0, var9 + 49 + 36 + 36 + 24 + 10),
 				SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
 			}, {
 				Padding = roact.createElement("UIPadding", {
@@ -84,7 +105,7 @@ function infoDialog.render(p0) --[[ line: 41 ]]
 				BodyTextContainer = roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, var8)
+					Size = UDim2.new(1, 0, 0, var9)
 				}, {
 					BodyText = roact.createElement(themedTextLabelModule, {
 						TextWrapped = true,
@@ -105,38 +126,38 @@ function infoDialog.render(p0) --[[ line: 41 ]]
 	end)
 end
 
-function infoDialog.bindActions(p2) --[[ line: 139 ]]
+function infoDialog.bindActions(p3) --[[ line: 150 ]]
 	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p3, _) --[[ line: 140 | named "dismissFunc" ]]
-		-- upvalues: p2 (ref)
-		if p3 == Enum.UserInputState.Begin then
-			p2.props.onDismiss()
+	contextActionService:BindCoreAction("InGameMenuModalDismiss", function(_, p4, _) --[[ line: 151 | named "dismissFunc" ]]
+		-- upvalues: p3 (ref)
+		if p4 == Enum.UserInputState.Begin then
+			p3.props.onDismiss()
 		end
 	end, false, Enum.KeyCode.Escape)
 end
 
-function infoDialog.unbindActions(_) --[[ line: 149 ]]
+function infoDialog.unbindActions(_) --[[ line: 160 ]]
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("InGameMenuModalDismiss")
 end
 
-function infoDialog.didMount(p4) --[[ line: 153 ]]
-	if p4.props.visible then
-		p4:bindActions()
+function infoDialog.didMount(p5) --[[ line: 164 ]]
+	if p5.props.visible then
+		p5:bindActions()
 	end
 end
 
-function infoDialog.didUpdate(p5) --[[ line: 159 ]]
-	if p5.props.visible then
-		p5:bindActions()
+function infoDialog.didUpdate(p6) --[[ line: 170 ]]
+	if p6.props.visible then
+		p6:bindActions()
 		
 		return
 	end
-	p5:unbindActions()
+	p6:unbindActions()
 end
 
-function infoDialog.willUnmount(p6) --[[ line: 167 ]]
-	p6:unbindActions()
+function infoDialog.willUnmount(p7) --[[ line: 178 ]]
+	p7:unbindActions()
 end
 
 return infoDialog

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.InterventionShared.InterventionShared)
+﻿return require(script.Parent.Parent.Parent._Workspace.InterventionShared.InterventionShared)

@@ -1,18 +1,21 @@
 ﻿local playersService = game:GetService("Players")
 local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
 local parent = script.Parent
+local parent_1 = parent.Parent
 local platformLeaderboardTypesModule = require(parent.PlatformLeaderboardTypes)
 local platformLeaderboardCacheModule = require(parent.PlatformLeaderboardCache)
 local _ = require(parent.PlatformLeaderboardConfigService)
+local sharedFlagsModule = require(parent_1.SharedFlags)
 local eventType = platformLeaderboardTypesModule.EventType
 local leaderboardType = platformLeaderboardTypesModule.LeaderboardType
 local remoteEventName = platformLeaderboardTypesModule.RemoteEventName
 local platformLeaderboardTabEventRateLimit = game:DefineFastInt("PlatformLeaderboardTabEventRateLimit", 20)
 local platformLeaderboardTabEventRateWindowSeconds = game:DefineFastInt("PlatformLeaderboardTabEventRateWindowSeconds", 10)
+local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
 local t = {}
 t.__index = t
 
-function t.new(p0, p1) --[[ line: 48 ]]
+function t.new(p0, p1) --[[ line: 51 ]]
 	-- upvalues: t (ref)
 	return setmetatable({
 		_cache = nil,
@@ -25,7 +28,7 @@ function t.new(p0, p1) --[[ line: 48 ]]
 	}, t)
 end
 
-function t:_onConfigChanged(p2, p3) --[[ line: 63 ]]
+function t:_onConfigChanged(p2, p3) --[[ line: 66 ]]
 	-- upvalues: eventType (ref)
 	self:_pushToAll({ type = eventType.ConfigUpdate, config = p3 })
 	
@@ -45,11 +48,11 @@ function t:_onConfigChanged(p2, p3) --[[ line: 63 ]]
 	table.clear(self._playerTabs)
 end
 
-function t:_initializeCache(p4) --[[ line: 83 ]]
+function t:_initializeCache(p4) --[[ line: 86 ]]
 	-- upvalues: platformLeaderboardCacheModule (ref), eventType (ref), playersService (ref)
 	self._cache = platformLeaderboardCacheModule.new(self._fetcher, p4)
 	local cache = self._cache
-	table.insert(self._conns, cache:onGlobalUpdated(function(p5, p6) --[[ line: 89 ]]
+	table.insert(self._conns, cache:onGlobalUpdated(function(p5, p6) --[[ line: 92 ]]
 		-- upvalues: self (ref), eventType (copy)
 		self:_pushToGlobalViewers({ type = eventType.GlobalLeaderboardData, data = p5 })
 		
@@ -57,12 +60,12 @@ function t:_initializeCache(p4) --[[ line: 83 ]]
 			self._configService:updateConfig(p6)
 		end
 	end))
-	table.insert(self._conns, cache:onFriendsUpdated(function(p7, p8, p9) --[[ line: 99 ]]
+	table.insert(self._conns, cache:onFriendsUpdated(function(p7, p8, p9) --[[ line: 102 ]]
 		-- upvalues: playersService (copy), self (ref), eventType (copy)
-		local var7 = playersService:GetPlayerByUserId(p7)
+		local var8 = playersService:GetPlayerByUserId(p7)
 		
-		if var7 then
-			self:_pushToPlayer(var7, {
+		if var8 then
+			self:_pushToPlayer(var8, {
 				type = eventType.FriendsLeaderboardData,
 				userId = p7,
 				data = p8
@@ -72,17 +75,17 @@ function t:_initializeCache(p4) --[[ line: 83 ]]
 			self._configService:updateConfig(p9)
 		end
 	end))
-	table.insert(self._conns, cache:onUserScoreUpdated(function(p10, p11) --[[ line: 115 ]]
+	table.insert(self._conns, cache:onUserScoreUpdated(function(p10, p11) --[[ line: 118 ]]
 		-- upvalues: playersService (copy), self (ref), eventType (copy)
-		local var8 = playersService:GetPlayerByUserId(p10)
+		local var9 = playersService:GetPlayerByUserId(p10)
 		
-		if var8 then
-			self:_pushToPlayer(var8, { type = eventType.UserScore, userId = p10, entry = p11 })
+		if var9 then
+			self:_pushToPlayer(var9, { type = eventType.UserScore, userId = p10, entry = p11 })
 		end
 	end))
 end
 
-function t:initialize() --[[ line: 124 ]]
+function t:initialize() --[[ line: 127 ]]
 	-- upvalues: remoteEventName (ref), robloxReplicatedStorageService (ref), eventType (ref), playersService (ref)
 	self._pushEvent = Instance.new("RemoteEvent")
 	self._pushEvent.Name = remoteEventName.Push
@@ -93,13 +96,13 @@ function t:initialize() --[[ line: 124 ]]
 	local remoteEvent_1 = Instance.new("RemoteEvent")
 	remoteEvent_1.Name = remoteEventName.TabClosed
 	remoteEvent_1.Parent = robloxReplicatedStorageService
-	self._pushEvent.OnServerEvent:Connect(function() --[[ line: 140 ]] end)
+	self._pushEvent.OnServerEvent:Connect(function() --[[ line: 143 ]] end)
 	local config = self._configService:getConfig()
 	
 	if config then
 		self:_initializeCache(config)
 	end
-	table.insert(self._conns, self._configService:onConfigChanged(function(p12, p13) --[[ line: 152 ]]
+	table.insert(self._conns, self._configService:onConfigChanged(function(p12, p13) --[[ line: 155 ]]
 		-- upvalues: self (ref)
 		self:_onConfigChanged(p12, p13)
 	end))
@@ -107,27 +110,27 @@ function t:initialize() --[[ line: 124 ]]
 		type = eventType.ConfigUpdate,
 		config = self._configService:getConfig()
 	})
-	table.insert(self._conns, remoteEvent.OnServerEvent:Connect(function(p14, p15) --[[ line: 164 ]]
+	table.insert(self._conns, remoteEvent.OnServerEvent:Connect(function(p14, p15) --[[ line: 167 ]]
 		-- upvalues: self (ref)
 		if self:_isRateLimited(p14.UserId) then return end
-		local var12 = self:_validateTabPayload(p14, p15)
-		
-		if var12 then
-			self:_onTabOpened(p14, var12)
-		end
-	end))
-	table.insert(self._conns, remoteEvent_1.OnServerEvent:Connect(function(p16, p17) --[[ line: 176 ]]
-		-- upvalues: self (ref)
-		if self:_isRateLimited(p16.UserId) then return end
-		local var13 = self:_validateTabPayload(p16, p17)
+		local var13 = self:_validateTabPayload(p14, p15)
 		
 		if var13 then
-			self:_onTabClosed(p16, var13)
+			self:_onTabOpened(p14, var13)
 		end
 	end))
-	table.insert(self._conns, playersService.PlayerAdded:Connect(function(p18) --[[ line: 189 ]]
+	table.insert(self._conns, remoteEvent_1.OnServerEvent:Connect(function(p16, p17) --[[ line: 179 ]]
+		-- upvalues: self (ref)
+		if self:_isRateLimited(p16.UserId) then return end
+		local var14 = self:_validateTabPayload(p16, p17)
+		
+		if var14 then
+			self:_onTabClosed(p16, var14)
+		end
+	end))
+	table.insert(self._conns, playersService.PlayerAdded:Connect(function(p18) --[[ line: 192 ]]
 		-- upvalues: self (ref), eventType (copy)
-		task.defer(function() --[[ line: 190 ]]
+		task.defer(function() --[[ line: 193 ]]
 			-- upvalues: self (copy), p18 (ref), eventType (copy)
 			self:_pushToPlayer(p18, {
 				type = eventType.ConfigUpdate,
@@ -135,30 +138,30 @@ function t:initialize() --[[ line: 124 ]]
 			})
 		end)
 	end))
-	table.insert(self._conns, playersService.PlayerRemoving:Connect(function(p19) --[[ line: 201 ]]
+	table.insert(self._conns, playersService.PlayerRemoving:Connect(function(p19) --[[ line: 204 ]]
 		-- upvalues: self (ref)
 		self:_removePlayerFromAllTabs(p19.UserId)
 	end))
 end
 
-function t:_isRateLimited(p20) --[[ line: 212 ]]
+function t:_isRateLimited(p20) --[[ line: 215 ]]
 	-- upvalues: platformLeaderboardTabEventRateWindowSeconds (ref), platformLeaderboardTabEventRateLimit (ref)
 	local processTime = os.clock()
-	local var15 = self._rateLimits[p20]
+	local var16 = self._rateLimits[p20]
 	
-	if var15 == nil or platformLeaderboardTabEventRateWindowSeconds <= processTime - var15.windowStart then
+	if var16 == nil or platformLeaderboardTabEventRateWindowSeconds <= processTime - var16.windowStart then
 		self._rateLimits[p20] = { count = 1, windowStart = processTime }
 		
 		return false
-	elseif platformLeaderboardTabEventRateLimit <= var15.count then
+	elseif platformLeaderboardTabEventRateLimit <= var16.count then
 		return true
 	end
-	var15.count += 1
+	var16.count += 1
 	
 	return false
 end
 
-function t._validateTabPayload(_, p21, p22) --[[ line: 229 ]]
+function t._validateTabPayload(_, p21, p22) --[[ line: 232 ]]
 	if typeof(p22) ~= "table" then
 		return nil
 	end
@@ -172,7 +175,7 @@ function t._validateTabPayload(_, p21, p22) --[[ line: 229 ]]
 	return if userId == nil or userId == p21.UserId then { tabType = tabType } else nil
 end
 
-function t:_removePlayerFromAllTabs(p23) --[[ line: 244 ]]
+function t:_removePlayerFromAllTabs(p23) --[[ line: 247 ]]
 	if self._cache then
 		self._cache:cleanupForUserId(p23)
 	end
@@ -180,8 +183,8 @@ function t:_removePlayerFromAllTabs(p23) --[[ line: 244 ]]
 	self._rateLimits[p23] = nil
 end
 
-function t:_onTabOpened(p24, p25) --[[ line: 252 ]]
-	-- upvalues: leaderboardType (ref), eventType (ref)
+function t:_onTabOpened(p24, p25) --[[ line: 255 ]]
+	-- upvalues: leaderboardType (ref), eventType (ref), fFlagPlatformLeaderboardDebugLogging (ref)
 	local cache = self._cache
 	
 	if not cache then return end
@@ -212,26 +215,28 @@ function t:_onTabOpened(p24, p25) --[[ line: 252 ]]
 				return
 			end
 		end
-	elseif p25.tabType ~= leaderboardType.Friends then
-		warn("[PlatformLeaderboard] Unknown tabType:", p25.tabType)
-	elseif not userId.friends then
-		userId.friends = true
-		cache:startFriendsRefresh(p24.UserId)
-		local userIdFriendsData = cache:getFriendsData(p24.UserId)
-		
-		if userIdFriendsData then
-			self:_pushToPlayer(p24, {
-				type = eventType.FriendsLeaderboardData,
-				userId = p24.UserId,
-				data = userIdFriendsData
-			})
+	elseif p25.tabType == leaderboardType.Friends then
+		if not userId.friends then
+			userId.friends = true
+			cache:startFriendsRefresh(p24.UserId)
+			local userIdFriendsData = cache:getFriendsData(p24.UserId)
 			
-			return
+			if userIdFriendsData then
+				self:_pushToPlayer(p24, {
+					type = eventType.FriendsLeaderboardData,
+					userId = p24.UserId,
+					data = userIdFriendsData
+				})
+				
+				return
+			end
 		end
+	elseif fFlagPlatformLeaderboardDebugLogging then
+		warn("[PlatformLeaderboard] Unknown tabType:", p25.tabType)
 	end
 end
 
-function t:_onTabClosed(p26, p27) --[[ line: 291 ]]
+function t:_onTabClosed(p26, p27) --[[ line: 294 ]]
 	-- upvalues: leaderboardType (ref)
 	if not self._cache then return end
 	local cache = self._cache
@@ -248,13 +253,13 @@ function t:_onTabClosed(p26, p27) --[[ line: 291 ]]
 	end
 end
 
-function t:_pushToAll(p28) --[[ line: 307 ]]
+function t:_pushToAll(p28) --[[ line: 310 ]]
 	if self._pushEvent then
 		self._pushEvent:FireAllClients(p28)
 	end
 end
 
-function t:_pushToGlobalViewers(p29) --[[ line: 313 ]]
+function t:_pushToGlobalViewers(p29) --[[ line: 316 ]]
 	-- upvalues: playersService (ref)
 	if not self._pushEvent then return end
 	for i, v in playersService:GetPlayers() do
@@ -266,13 +271,13 @@ function t:_pushToGlobalViewers(p29) --[[ line: 313 ]]
 	end
 end
 
-function t:_pushToPlayer(p30, p31) --[[ line: 325 ]]
+function t:_pushToPlayer(p30, p31) --[[ line: 328 ]]
 	if self._pushEvent then
 		self._pushEvent:FireClient(p30, p31)
 	end
 end
 
-function t:destroy() --[[ line: 331 ]]
+function t:destroy() --[[ line: 334 ]]
 	for i, v in self._conns do
 		if typeof(v) == "table" and v.disconnect then
 			v:disconnect()

@@ -6,5 +6,6 @@
 	PlayableWithParty = "PlayableWithParty",
 	WaitingForParty = "WaitingForParty",
 	ActionNeeded = "ActionNeeded",
-	FiatPaidAccess = "FiatPaidAccess"
+	FiatPaidAccess = "FiatPaidAccess",
+	DemoMode = if require(script:FindFirstAncestor("GamePlayButton").Parent.SharedFlags).FFlagLuaAppDemoModePlayButton then "DemoMode" else nil
 }

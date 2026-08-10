@@ -1,8 +1,8 @@
 ﻿local reactModule = require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Parent.React)
 
-return function(p0, p1) --[[ line: 17 | named "useComposerFocusLock" ]]
+return function(p0, p1) --[[ line: 16 | named "useComposerFocusLock" ]]
 	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function() --[[ line: 18 ]]
+	reactModule.useEffect(function() --[[ line: 17 ]]
 		-- upvalues: p1 (ref), p0 (ref)
 		for i, v in p1 do
 			local current = v.current

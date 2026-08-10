@@ -12,10 +12,9 @@ local LAYERED_ASSET_TYPES = constants.LAYERED_ASSET_TYPES
 local BODY_BUNDLE_TYPE_ID = constants.BODY_BUNDLE_TYPE_ID
 local SHOES_BUNDLE_TYPE_ID = constants.SHOES_BUNDLE_TYPE_ID
 local DYNAMIC_HEAD_BUNDLE_TYPE_ID = constants.DYNAMIC_HEAD_BUNDLE_TYPE_ID
-local fFlagAXFix2DClothingTryOn = require(parent.AvatarExperienceFlags).FFlagAXFix2DClothingTryOn
 local _ = require(avatarExperienceInspectAndBuy.Types)
 
-local _ = function(p0, p1) --[[ line: 25 ]]
+local _ = function(p0, p1) --[[ line: 24 ]]
 	-- upvalues: LAYERED_CLOTHING_ORDER (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_ASSET_TYPES (ref)
 	return {
 		AssetId = tonumber(p1) or 0,
@@ -25,9 +24,9 @@ local _ = function(p0, p1) --[[ line: 25 ]]
 	}
 end
 
-local _ = function(p2, p3) --[[ line: 44 ]]
+local _ = function(p2, p3) --[[ line: 43 ]]
 	-- upvalues: cryoModule (ref)
-	return cryoModule.List.filter(p2, function(p4) --[[ line: 48 ]]
+	return cryoModule.List.filter(p2, function(p4) --[[ line: 47 ]]
 		-- upvalues: p3 (ref)
 		for i, v in p3 do
 			if p4.AccessoryType == v then
@@ -38,7 +37,7 @@ local _ = function(p2, p3) --[[ line: 44 ]]
 	end)
 end
 
-local var3 = function(p5, p6) --[[ line: 61 ]]
+local var3 = function(p5, p6) --[[ line: 60 ]]
 	-- upvalues: ASSET_TYPE_TO_ACCESSORY_TYPE (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref)
 	local var7
 	local t = {}
@@ -74,7 +73,7 @@ local var3 = function(p5, p6) --[[ line: 61 ]]
 	return t
 end
 
-local var4 = function(p7, p8) --[[ line: 98 ]]
+local var4 = function(p7, p8) --[[ line: 97 ]]
 	-- upvalues: cryoModule (ref)
 	local var8 = p7:GetAccessories(true)
 	local t = {}
@@ -82,7 +81,7 @@ local var4 = function(p7, p8) --[[ line: 98 ]]
 	for i, v in p8 do
 		table.insert(t, v.AccessoryType)
 	end
-	p7:SetAccessories(cryoModule.List.join(cryoModule.List.filter(var8, function(p9) --[[ line: 48 ]]
+	p7:SetAccessories(cryoModule.List.join(cryoModule.List.filter(var8, function(p9) --[[ line: 47 ]]
 		-- upvalues: t (ref)
 		for i, v in t do
 			if p9.AccessoryType == v then
@@ -93,13 +92,13 @@ local var4 = function(p7, p8) --[[ line: 98 ]]
 	end), p8), true)
 end
 
-return function(p10, p11) --[[ line: 117 ]]
-	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), fFlagAXFix2DClothingTryOn (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), var4 (ref), BODY_BUNDLE_TYPE_ID (ref), var3 (ref), SHOES_BUNDLE_TYPE_ID (ref), DYNAMIC_HEAD_BUNDLE_TYPE_ID (ref)
+return function(p10, p11) --[[ line: 116 ]]
+	-- upvalues: itemTypeEnum (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref), LAYERED_CLOTHING_ORDER (ref), LAYERED_ASSET_TYPES (ref), var4 (ref), BODY_BUNDLE_TYPE_ID (ref), var3 (ref), SHOES_BUNDLE_TYPE_ID (ref), DYNAMIC_HEAD_BUNDLE_TYPE_ID (ref)
 	local itemSubType
-	if p10.itemType == itemTypeEnum.Asset and (ASSET_TYPE_TO_ACCESSORY_TYPE[p10.itemSubType] or fFlagAXFix2DClothingTryOn and ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[p10.itemSubType]) then
+	if p10.itemType == itemTypeEnum.Asset and (ASSET_TYPE_TO_ACCESSORY_TYPE[p10.itemSubType] or ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[p10.itemSubType]) then
 		itemSubType = p10.itemSubType
 		local itemId = p10.itemId
-		local var10 = if fFlagAXFix2DClothingTryOn then ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[itemSubType] else nil
+		local var10 = ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[itemSubType]
 		
 		if itemId and itemSubType ~= ASSET_TYPE_NAME_TO_ID_STRING.Gear and ASSET_TYPE_TO_ACCESSORY_TYPE[itemSubType] then
 			var4(p11, {
@@ -110,7 +109,7 @@ return function(p10, p11) --[[ line: 117 ]]
 					IsLayered = LAYERED_ASSET_TYPES[itemSubType] ~= nil
 				}
 			})
-		elseif fFlagAXFix2DClothingTryOn and var10 and itemId then
+		elseif var10 and itemId then
 			p11[var10] = itemId
 		end
 	end

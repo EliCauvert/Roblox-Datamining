@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SocialExperienceJoinPresenceStoreMigration_v1", false)

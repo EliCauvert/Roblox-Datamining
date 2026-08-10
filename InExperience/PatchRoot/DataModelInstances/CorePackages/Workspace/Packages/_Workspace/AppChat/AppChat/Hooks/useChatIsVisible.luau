@@ -6,31 +6,38 @@ local fFlagUseNavigationSelectors = sharedFlagsModule.FFlagUseNavigationSelector
 local fFlagSignalsNavP3hMisc = sharedFlagsModule.FFlagSignalsNavP3hMisc
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useSignalState = require(parent.SignalsReact).useSignalState
-local var1 = if fFlagSignalsNavP3hMisc then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
+local reactModule = require(parent.React)
+local signalsModule = require(parent.Signals)
+local var3 = if fFlagSignalsNavP3hMisc then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
+local var4 = if fFlagSignalsNavP3hMisc then require(parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-return function() --[[ line: 20 ]]
-	-- upvalues: fFlagSignalsNavP3hMisc (ref), useSelector (ref), var1 (ref), useSignalState (ref), appPage (ref), fFlagUseNavigationSelectors (ref), selectors (ref)
-	if not fFlagSignalsNavP3hMisc then
-		return useSelector(function(p0) --[[ line: 33 ]]
-			-- upvalues: fFlagUseNavigationSelectors (copy), selectors (copy), appPage (copy)
-			if not p0.Navigation then
-				return true
-			elseif fFlagUseNavigationSelectors then
-				return selectors.selectCurrentPageName(p0) == appPage.Chat
-			end
-			local history = p0.Navigation.history
-			
-			if history then
-				local var3 = history[#history]
-				
-				return (var3[#var3] and var3[#var3].name) == appPage.Chat
-			end
-			return false
-		end)
+return function() --[[ line: 27 ]]
+	-- upvalues: fFlagSignalsNavP3hMisc (ref), var3 (ref), reactModule (ref), signalsModule (ref), var4 (ref), appPage (ref), useSignalState (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref)
+	if fFlagSignalsNavP3hMisc then
+		local var5 = var3(false)
+		
+		return useSignalState(reactModule.useMemo(function() --[[ line: 30 ]]
+			-- upvalues: signalsModule (copy), var4 (copy), var5 (ref), appPage (copy)
+			return signalsModule.createComputed(function(p0) --[[ line: 31 ]]
+				-- upvalues: var4 (copy), var5 (copy), appPage (copy)
+				return if var4() then var5.getCurrentPageName(p0) == appPage.Chat else true
+			end)
+		end, {}))
 	end
-	local var2 = useSignalState(var1(false).getCurrentPage)
-	
-	return if useSelector(function(p1) --[[ line: 22 ]]
-		return p1.Navigation ~= nil
-	end) then var2 ~= nil and var2.name == appPage.Chat else true
+	return useSelector(function(p1) --[[ line: 40 ]]
+		-- upvalues: fFlagUseNavigationSelectors (copy), selectors (copy), appPage (copy)
+		if not p1.Navigation then
+			return true
+		elseif fFlagUseNavigationSelectors then
+			return selectors.selectCurrentPageName(p1) == appPage.Chat
+		end
+		local history = p1.Navigation.history
+		
+		if history then
+			local var6 = history[#history]
+			
+			return (var6[#var6] and var6[#var6].name) == appPage.Chat
+		end
+		return false
+	end)
 end

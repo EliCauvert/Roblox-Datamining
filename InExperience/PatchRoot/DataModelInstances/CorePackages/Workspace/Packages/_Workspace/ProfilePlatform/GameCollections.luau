@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.GameCollections.GameCollections)
+﻿return require(script.Parent.Parent.Parent._Index.GameCollections.GameCollections)

@@ -40,22 +40,23 @@ return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p1) -
 			surfaceKey = "HomepagePrompts",
 			configKey = "HomepagePrompts",
 			clearOnEmptyResponse = true,
+			clientAttributes = nil,
 			entryPoint = promptsEntryPointModule.HomepageLaunch,
 			allowNoConfigsBuilt = if fFlagSduiAllowNoConfigsBuilt then true else nil,
 			loadTimer = sduiLoadTimer.createLoadTimer("HomepagePrompts")
 		}
 	end, {})
-	reactModule.useEffect(function() --[[ line: 64 ]]
+	reactModule.useEffect(function() --[[ line: 65 ]]
 		-- upvalues: fetchPromptsModule (copy), var17 (ref)
 		fetchPromptsModule(var17)
 	end, { var17 })
-	local var18 = if fFlagEnableHomepagePromptsForModalsAndBanners then usePromptEntriesModule("HomepagePrompts", promptStyleModule.Modal)[1] else useSignalState(reactModule.useCallback(function(p2) --[[ line: 74 ]]
+	local var18 = if fFlagEnableHomepagePromptsForModalsAndBanners then usePromptEntriesModule("HomepagePrompts", promptStyleModule.Modal)[1] else useSignalState(reactModule.useCallback(function(p2) --[[ line: 75 ]]
 		-- upvalues: getSduiApiStore (copy)
 		local var19 = getSduiApiStore().getData("HomepagePrompts").data(p2)
 		
 		return var19 and var19.HomepagePrompts
 	end, {}))
-	reactModule.useEffect(function() --[[ line: 82 ]]
+	reactModule.useEffect(function() --[[ line: 83 ]]
 		-- upvalues: var16 (ref), var15 (ref), isFocused (ref), var18 (write), var14 (ref), entryPointModule (copy), var13 (ref), setCentralOverlay (copy), centralOverlayType (copy), appPage (copy), fFlagPromptsImpressionUsesTitle (copy)
 		if var16 then return end
 		if var15 then return end

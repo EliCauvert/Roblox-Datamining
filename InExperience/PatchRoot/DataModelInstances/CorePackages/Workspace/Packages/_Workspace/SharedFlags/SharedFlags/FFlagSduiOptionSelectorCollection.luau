@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SduiOptionSelectorCollection", false) and (require(script.Parent.FFlagSduiActionsShouldTakeOverrides) and require(script.Parent.FFlagSduiGenreSelector))
+﻿return game:DefineFastFlag("SduiOptionSelectorCollection", false)

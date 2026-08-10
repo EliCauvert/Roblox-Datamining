@@ -4,23 +4,23 @@ local var2 = nil
 local var3 = nil
 local var4 = nil
 
-local function _(value) --[[ line: 18 | named "roundSec" ]]
+local function _(value) --[[ line: 17 | named "roundSec" ]]
 	return math.floor(value * 1000 + 0.5) / 1000
 end
 
-local function isEnabled() --[[ line: 22 ]]
+local function isEnabled() --[[ line: 21 ]]
 	-- upvalues: debugMyStatsExperienceStats (ref)
 	return debugMyStatsExperienceStats
 end
 
-local function resetTimeline(value) --[[ line: 27 ]]
+local function resetTimeline(value) --[[ line: 26 ]]
 	-- upvalues: var2 (write), var3 (write), var4 (write)
 	var2 = os.clock()
 	var3 = value
 	var4 = nil
 end
 
-local function timelineFields() --[[ line: 33 ]]
+local function timelineFields() --[[ line: 32 ]]
 	-- upvalues: var2 (write), var3 (write), var4 (write)
 	local processTime = os.clock()
 	local t = {
@@ -38,7 +38,7 @@ local function timelineFields() --[[ line: 33 ]]
 	return t
 end
 
-local function mergeTimeline(p0) --[[ line: 49 ]]
+local function mergeTimeline(p0) --[[ line: 48 ]]
 	-- upvalues: timelineFields (ref)
 	local var12 = timelineFields()
 	
@@ -60,14 +60,14 @@ local function mergeTimeline(p0) --[[ line: 49 ]]
 	return cloned
 end
 
-local _ = function(p1) --[[ line: 69 | named "encode" ]]
+local _ = function(p1) --[[ line: 68 | named "encode" ]]
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONEncode, httpService, p1)
 	
 	return if ok and typeof(status) == "string" then status else tostring(p1)
 end
 
-local _ = function(p2, p3) --[[ line: 77 | named "previewString" ]]
+local _ = function(p2, p3) --[[ line: 76 | named "previewString" ]]
 	if typeof(p2) ~= "string" then
 		return nil
 	end
@@ -76,7 +76,7 @@ local _ = function(p2, p3) --[[ line: 77 | named "previewString" ]]
 	return if #p2 <= p3 then p2 else string.sub(p2, 1, p3) .. "..."
 end
 
-local function formatRequestState(p4) --[[ line: 154 ]]
+local function formatRequestState(p4) --[[ line: 153 ]]
 	return if typeof(p4) == "table" then {
 		status = p4.status,
 		error = p4.error,
@@ -88,7 +88,7 @@ end
 return {
 	LOG_PREFIX = "[MyStats]",
 	isEnabled = isEnabled,
-	log = function(p5, p6, p7) --[[ line: 88 ]]
+	log = function(p5, p6, p7) --[[ line: 87 ]]
 		-- upvalues: debugMyStatsExperienceStats (ref), mergeTimeline (ref), httpService (ref)
 		if not debugMyStatsExperienceStats then return end
 		local var15 = " | %*"
@@ -105,7 +105,7 @@ return {
 	end,
 	resetTimeline = resetTimeline,
 	timelineFields = timelineFields,
-	formatStudioAskUserQuestions = function(p8) --[[ line: 100 ]]
+	formatStudioAskUserQuestions = function(p8) --[[ line: 99 ]]
 		if typeof(p8) ~= "table" then
 			return { raw = tostring(p8) }
 		end
@@ -143,7 +143,7 @@ return {
 			firstOption = var20
 		}
 	end,
-	formatToolResultPayload = function(p9) --[[ line: 137 ]]
+	formatToolResultPayload = function(p9) --[[ line: 136 ]]
 		if typeof(p9) == "table" then
 			local content = p9.content
 			local var21 = if typeof(content) == "table" then content.text else nil
@@ -160,7 +160,7 @@ return {
 		return { raw = tostring(p9) }
 	end,
 	formatRequestState = formatRequestState,
-	formatTurnState = function(p10) --[[ line: 166 ]]
+	formatTurnState = function(p10) --[[ line: 165 ]]
 		return if typeof(p10) == "table" then {
 			status = p10.status,
 			isDone = p10.isDone,
@@ -168,13 +168,11 @@ return {
 			errorCode = p10.errorCode,
 			stopReason = p10.stopReason,
 			assistantTextLength = if typeof(p10.assistantText) == "string" then #p10.assistantText else nil,
-			thoughtTextLength = if typeof(p10.thoughtText) == "string" then #p10.thoughtText else nil,
-			thoughtContiguousChunks = if typeof(p10.thoughtChunks) == "table" then #p10.thoughtChunks else nil,
 			toolCallCount = p10.toolCallCount,
 			sessionId = p10.sessionId
 		} else { raw = tostring(p10) }
 	end,
-	rpcFailureMessage = function(p11, p12) --[[ line: 184 ]]
+	rpcFailureMessage = function(p11, p12) --[[ line: 181 ]]
 		-- upvalues: formatRequestState (ref)
 		local var22 = formatRequestState(p12)
 		local status = var22.status

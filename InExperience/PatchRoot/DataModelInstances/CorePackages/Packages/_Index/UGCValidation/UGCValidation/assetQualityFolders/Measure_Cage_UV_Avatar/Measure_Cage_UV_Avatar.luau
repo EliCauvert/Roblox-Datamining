@@ -10,12 +10,15 @@ return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	fflag = require(parent.flags.getFFlagUGCValidateAQCageQualityAvatar),
 	run = function(p0, p1) --[[ line: 15 ]]
-		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref), UGCValidateLCCagingIncorrectUVThresholdBodyPart (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
+		-- upvalues: constantsModule (ref), UGCValidateLCCagingIncorrectUVThresholdBodyPart (ref), errorSourceStringsModule (ref), getFFlagUGCValidateAQScoreWarningsModule (ref)
 		local measureCageUVAvatar = p1.aqsSummaryData.Measure_Cage_UV_Avatar
 		
+		if measureCageUVAvatar == nil then
+			error("Measure_Cage_UV_Avatar: AQS summary data is nil")
+		end
 		for i, v in constantsModule.R15_CAGE_PARTS do
 			if measureCageUVAvatar[v] == nil or measureCageUVAvatar[v].incorrect_uv_count == nil then
-				p0:fail(errorSourceStringsModule.Keys.AQSInputDataError)
+				error("Measure_Cage_UV_Avatar: AQS summary missing required fields for cage " .. v)
 			elseif UGCValidateLCCagingIncorrectUVThresholdBodyPart < tonumber(measureCageUVAvatar[v].incorrect_uv_count) then
 				p0:fail(errorSourceStringsModule.Keys.MeasureCageUV, {
 					cage_name = v,

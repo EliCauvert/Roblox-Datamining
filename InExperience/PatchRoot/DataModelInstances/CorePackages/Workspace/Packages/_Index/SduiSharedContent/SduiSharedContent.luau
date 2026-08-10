@@ -25,11 +25,13 @@
 	SduiCircleIcon = require(script.Components.SduiCircleIcon),
 	SduiIcon = require(script.Components.SduiIcon),
 	SduiPlaceholder = require(script.Components.SduiPlaceholder),
+	SduiPlaceholderTile = require(script.Components.SduiPlaceholderTile),
 	SduiPlaceholderWrapper = require(script.Components.SduiPlaceholderWrapper),
 	SduiIconButton = require(script.Components.SduiIconButton),
 	SduiTextAccessoryRow = require(script.Components.SduiTextAccessoryRow),
 	SduiMediaGallery = require(script.Components.SduiMediaGallery),
 	SduiSkeleton = require(script.Components.SduiSkeleton),
 	SduiSharedRegister = require(script.SduiSharedRegister),
-	useCollectionAnalyticsContext = require(script.Components.useCollectionAnalyticsContext)
+	useCollectionAnalyticsContext = require(script.Components.useCollectionAnalyticsContext),
+	reportPromptDismiss = require(script.Actions.reportPromptDismiss)
 }

@@ -1,16 +1,13 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceUIKit").Parent.React)
 local backgroundGradientModule = require(script.Parent.BackgroundGradient)
 local backgroundImageModule = require(script.Parent.BackgroundImage)
-local fFlagAXHeroWidget = avatarExperienceFlagsModule.FFlagAXHeroWidget
 
-return function(value) --[[ line: 40 | named "BackgroundLayers" ]]
-	-- upvalues: reactModule (ref), backgroundGradientModule (ref), backgroundImageModule (ref), fFlagAXHeroWidget (ref)
+return function(value) --[[ line: 36 | named "BackgroundLayers" ]]
+	-- upvalues: reactModule (ref), backgroundGradientModule (ref), backgroundImageModule (ref)
 	local t = {}
 	
 	for i, v in value.backgroundLayers do
-		local var5 = (value.ZIndex or 0) - (#value.backgroundLayers - i)
+		local var4 = (value.ZIndex or 0) - (#value.backgroundLayers - i)
 		
 		if v.type == "GradientBackground" then
 			t[`GradientBackground_{i}`] = reactModule.createElement(backgroundGradientModule, {
@@ -19,7 +16,7 @@ return function(value) --[[ line: 40 | named "BackgroundLayers" ]]
 				offset = v.offset,
 				rotation = v.rotation,
 				transparency = v.transparency,
-				ZIndex = var5,
+				ZIndex = var4,
 				tag = v.tag
 			})
 		elseif v.type == "ImageBackground" then
@@ -30,9 +27,9 @@ return function(value) --[[ line: 40 | named "BackgroundLayers" ]]
 				position = v.position,
 				resourceIdentifier = v.resourceIdentifier,
 				transparency = v.transparency,
-				ZIndex = var5,
+				ZIndex = var4,
 				tag = v.tag,
-				scaleType = if fFlagAXHeroWidget then value.imageScaleType else nil
+				scaleType = value.imageScaleType
 			})
 		end
 	end

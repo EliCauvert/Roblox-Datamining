@@ -4,61 +4,69 @@ local reactModule = require(parent.React)
 local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
 local inputHandlersModule = require(parent.InputHandlers)
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
 local popoverFocusRestorationContextModule = require(script.Parent.PopoverFocusRestorationContext)
-local fFlagAXFixIaBTimedOptionsPopoverFocus = require(parent.AvatarExperienceFlags).FFlagAXFixIaBTimedOptionsPopoverFocus
+local fFlagAXFixIaBTimedOptionsPopoverFocus = avatarExperienceFlagsModule.FFlagAXFixIaBTimedOptionsPopoverFocus
+local fFlagAXTimedOptionsPopoverSkipFocusOnCursor = avatarExperienceFlagsModule.FFlagAXTimedOptionsPopoverSkipFocusOnCursor
 local useFocusNavigableSurfaceRegistryConnection = focusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
 local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local getFirstFocusableDescendant = focusNavigationUtilsModule.getFirstFocusableDescendant
+local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
 local t = {
 	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p0, p1, p2) --[[ line: 25 | named "useWearTimePopoverFocusNavigationBindings" ]]
-	-- upvalues: reactModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), popoverFocusRestorationContextModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), getFirstFocusableDescendant (ref), guiService (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var7 = reactModule.useRef(nil)
-	local var8, var9 = reactModule.useState(false)
-	local var10 = if fFlagAXFixIaBTimedOptionsPopoverFocus then reactModule.useContext(popoverFocusRestorationContextModule) else nil
-	reactModule.useEffect(function() --[[ line: 36 ]]
-		-- upvalues: var9 (ref), p1 (ref)
-		var9(p1)
+return function(p0, p1, p2) --[[ line: 27 | named "useWearTimePopoverFocusNavigationBindings" ]]
+	-- upvalues: reactModule (ref), fFlagAXFixIaBTimedOptionsPopoverFocus (ref), popoverFocusRestorationContextModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagAXTimedOptionsPopoverSkipFocusOnCursor (ref), useLastInputMode (ref), getFirstFocusableDescendant (ref), guiService (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
+	local var8 = reactModule.useRef(nil)
+	local var9, var10 = reactModule.useState(false)
+	local var11 = if fFlagAXFixIaBTimedOptionsPopoverFocus then reactModule.useContext(popoverFocusRestorationContextModule) else nil
+	reactModule.useEffect(function() --[[ line: 38 ]]
+		-- upvalues: var10 (ref), p1 (ref)
+		var10(p1)
 	end, { p1 })
-	useFocusNavigableSurfaceRegistryConnection(var7 and var7.current, focusNavigableSurfaceIdentifierEnum.PopUp, var8)
+	useFocusNavigableSurfaceRegistryConnection(var8 and var8.current, focusNavigableSurfaceIdentifierEnum.PopUp, var9)
+	local var12 = if fFlagAXFixIaBTimedOptionsPopoverFocus and fFlagAXTimedOptionsPopoverSkipFocusOnCursor then useLastInputMode() else nil
 	
 	if fFlagAXFixIaBTimedOptionsPopoverFocus then
-		local var11 = reactModule.useRef(false)
-		reactModule.useEffect(function() --[[ line: 53 ]]
-			-- upvalues: var8 (ref), var11 (ref), var7 (ref), getFirstFocusableDescendant (copy), guiService (copy), fFlagAXFixIaBTimedOptionsPopoverFocus (copy), var10 (ref), p2 (ref)
-			if var8 and not var11.current then
-				local current = var7.current
-				
-				if current and current:IsDescendantOf(game) then
-					local var13 = getFirstFocusableDescendant(current)
+		local var13 = reactModule.useRef(false)
+		reactModule.useEffect(function() --[[ line: 62 ]]
+			-- upvalues: fFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), var12 (ref), var9 (ref), var13 (ref), var8 (ref), getFirstFocusableDescendant (copy), guiService (copy), var11 (ref), p2 (ref)
+			local var14 = not fFlagAXTimedOptionsPopoverSkipFocusOnCursor or var12 == "Focus"
+			
+			if var9 and not var13.current then
+				if var14 then
+					local current = var8.current
 					
-					if var13 then
-						guiService.SelectedCoreObject = var13
+					if current and current:IsDescendantOf(game) then
+						local var16 = getFirstFocusableDescendant(current)
+						
+						if var16 then
+							guiService.SelectedCoreObject = var16
+						end
 					end
 				end
-			elseif not var8 and var11.current and (fFlagAXFixIaBTimedOptionsPopoverFocus and var10) then
+			elseif not var9 and var13.current and (var11 and var14) then
 				local current = p2 and p2.current
 				
 				if current and current:IsDescendantOf(game) then
 					guiService.SelectedCoreObject = current
 				end
 			end
-			var11.current = var8
-		end, { var8, var10, p2 })
+			var13.current = var9
+		end, { var9, var11, p2, var12 })
 	end
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 77 ]]
+	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function() --[[ line: 90 ]]
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p0 (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p3) --[[ line: 80 ]]
+				handler = inputHandlersModule.onRelease(function(p3) --[[ line: 93 ]]
 					-- upvalues: p0 (copy)
 					p3.cancelled = true
 					p0()
 				end)
 			}
 		}
-	end, { p0 }), reactFocusNavigationModule.useEventMap(t, var7))
+	end, { p0 }), reactFocusNavigationModule.useEventMap(t, var8))
 end

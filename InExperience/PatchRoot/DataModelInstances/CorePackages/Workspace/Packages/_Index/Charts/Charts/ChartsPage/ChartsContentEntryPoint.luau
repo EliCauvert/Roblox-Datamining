@@ -5,6 +5,7 @@ local reactModule = require(parent.React)
 local appPage = require(parent.RobloxAppEnums).AppPage
 local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
 local compositionTags = require(parent.AppComposition).CompositionTags
+local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local sduiPageEntryPoint = sduiSharedUtilitiesModule.SduiPageEntryPoint
 local sduiSurfaceLoadTimeTracker = sduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local getSduiClientPageScope = sduiSharedUtilitiesModule.getSduiClientPageScope
@@ -12,16 +13,16 @@ local usePageScopeRef = sduiSharedUtilitiesModule.usePageScopeRef
 local fetchChartsPageModule = require(charts.ChartsPage.fetchChartsPage)
 local chartsConstantsModule = require(charts.ChartsPage.ChartsConstants)
 
-local function _(p0, p1) --[[ line: 26 | named "getFromPropsOrNavigationParams" ]]
+local function _(p0, p1) --[[ line: 31 | named "getFromPropsOrNavigationParams" ]]
 	return p0[p1] or p0.navigation and p0.navigation.getParam(p1)
 end
 
-return reactModule.memo(function(p2) --[[ line: 30 | named "ChartsContentEntryPoint" ]]
-	-- upvalues: chartsConstantsModule (ref), usePageScopeRef (ref), reactModule (ref), getSduiClientPageScope (ref), sduiSurfaceLoadTimeTracker (ref), fetchChartsPageModule (ref), sduiPageEntryPoint (ref), appPage (ref), compositionTags (ref)
+return reactModule.memo(function(p2) --[[ line: 35 | named "ChartsContentEntryPoint" ]]
+	-- upvalues: chartsConstantsModule (ref), usePageScopeRef (ref), reactModule (ref), getSduiClientPageScope (ref), sduiSurfaceLoadTimeTracker (ref), fetchChartsPageModule (ref), sduiPageEntryPoint (ref), appPage (ref), compositionTags (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
 	local configKey = chartsConstantsModule.ConfigKey
 	local pageTimer = p2.pageTimer or p2.navigation and p2.navigation.getParam("pageTimer")
 	usePageScopeRef(configKey)
-	local var6 = reactModule.useMemo(function() --[[ line: 35 ]]
+	local var6 = reactModule.useMemo(function() --[[ line: 40 ]]
 		-- upvalues: pageTimer (ref), getSduiClientPageScope (copy), configKey (ref), sduiSurfaceLoadTimeTracker (copy), chartsConstantsModule (copy)
 		if pageTimer then
 			getSduiClientPageScope(configKey).set(sduiSurfaceLoadTimeTracker.SURFACE_LOAD_TIME_PAGE_SCOPE_KEY, pageTimer)
@@ -37,7 +38,7 @@ return reactModule.memo(function(p2) --[[ line: 30 | named "ChartsContentEntryPo
 		
 		return var7
 	end, { configKey, pageTimer })
-	reactModule.useEffect(function() --[[ line: 54 ]]
+	reactModule.useEffect(function() --[[ line: 59 ]]
 		-- upvalues: fetchChartsPageModule (copy), var6 (ref)
 		fetchChartsPageModule(var6)
 	end, { configKey, var6 })
@@ -47,7 +48,7 @@ return reactModule.memo(function(p2) --[[ line: 30 | named "ChartsContentEntryPo
 		appPage = appPage.Games,
 		configKey = configKey,
 		pageTimer = var6,
-		refresh = reactModule.useCallback(function() --[[ line: 58 ]]
+		refresh = reactModule.useCallback(function() --[[ line: 63 ]]
 			-- upvalues: sduiSurfaceLoadTimeTracker (copy), configKey (ref), chartsConstantsModule (copy), fetchChartsPageModule (copy)
 			local var8 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(configKey, {
 				eventName = chartsConstantsModule.SurfaceLoadTimeEventName,
@@ -59,6 +60,8 @@ return reactModule.memo(function(p2) --[[ line: 30 | named "ChartsContentEntryPo
 		end, { configKey }),
 		contentTag = compositionTags.ContentRegion.Body,
 		stickyContentTag = compositionTags.ContentRegion.Header,
-		pageTopPadding = p2.pageTopPadding
+		pageTopPadding = p2.pageTopPadding,
+		feedTopMargin = if fFlagLuaAppSduiStickyHeaderScrollAway then p2.feedTopMargin else nil,
+		scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p2.scrollAway else nil
 	})
 end)

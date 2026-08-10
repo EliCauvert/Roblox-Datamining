@@ -74,8 +74,12 @@ Amp.Upsell.Message.EmailSent,{parentEmail}(으)로 이메일이 전송되었습�
 Amp.Upsell.Message.EmailSentPluralParent,연결된 보호자 이메일 주소로 이메일이 전송되었습니다
 Amp.Upsell.Title.AskYourParent,보호자에게 요청하세요
 Amp.Upsell.Title.RequestSent,요청 전송 완료
+Application.Logout.Action.Logout,로그아웃
+Application.Logout.Message.Confirmation,정말로 로그아웃할까요?
 Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
+Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,빠른 로그인
+Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
 Authentication.Login.Button.UseDifferentRobloxAccount,다른 Roblox 계정 사용
 Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
@@ -123,8 +127,30 @@ Common.Presence.Label.Invisible,오프라인
 Common.Presence.Label.Offline,
 Common.Presence.Label.Online,온라인
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,입력 데이터가 올바르지 않거나 불완전하여 품질 점수를 제대로 계산할 수 없습니다. 모델을 확인하거나 버그 신고를 제출하세요.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,애니메이션이 너무 깁니다({duration}초). 이모티콘 애니메이션은 {maxLength}초 이하여야 합니다.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,애니메이션이 너무 짧습니다({duration}초). 이모티콘 애니메이션은 {minLength}초 이상이어야 합니다.
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,신체에 분리된 작은 메시 구성 요소(메시 분리 영역)가 있습니다. 플로팅 지오메트리를 제거하고 모든 메시 부품이 올바르게 연결되었는지 확인하세요.
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"애셋 품질: {partName}에는 분리 영역이 {num_disconnected_components}개 존재하며, 이는 최대치인 {max_disconnected_components}을(를) 초과합니다."
+Common.UGCValidation.ErrorLabel.AQSInputDataError,입력 데이터가 올바르지 않거나 불완전하여 품질 점수를 제대로 계산할 수 없습니다. 모델을 확인하거나 버그 신고를 제출하세요.
 Common.UGCValidation.ErrorLabel.AQSInternalError,"애셋 품질 오류로 인해 점수를 생성할 수 없습니다. 입력 데이터의 정확성을 확인하고 다시 시도하거나, 버그 신고를 제출하세요."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,애셋 품질 경고: 케이지-메시 거리 점수가 {score}입니다. 외부 케이지와 메시 사이의 최대 거리는 {max_distance}입니다. 외부 케이지 버텍스의 {negative_sdf_percent}%가 렌더링 메시 내부에 있습니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,애셋 품질 경고: 바디 케이지 거리 점수가 {score}입니다. 바디 케이지와 메시 사이의 최대 거리는 {max_distance}입니다. 바디 케이지 버텍스의 {negative_sdf_percent}%가 바디 메시 내부에 있습니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,애셋 품질 경고: 헤드 케이지 거리 점수가 {score}입니다. 헤드 케이지와 메시 사이의 최대 거리는 {max_distance}입니다. 헤드 케이지 버텍스의 {negative_sdf_percent}%가 헤드 메시 내부에 있습니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,애셋 품질 경고: 케이지 관련성 점수는 {score}입니다. 수정된 외부 케이지 버텍스의 {irrelevant_percent}%가 장신구를 포함하지 않습니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,애셋 품질 경고: {cage_name}의 케이지 UV 점수가 {score}입니다. 잘못된 UV 수: {incorrect_uv_count}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,애셋 품질: {partName}에는 퇴화 삼각형이 {degenerate_triangle_percent}% 존재합니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,애셋 품질 경고: 다이내믹 헤드 표현 점수가 {score}입니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"애셋 품질: 조인트 구성 점수 {score}(조인트: {joint_number}, 왼손: {left_hand_joint_number}, 오른손: {right_hand_joint_number})."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,애셋 품질: {partName}에는 {num_disconnected_components}개 구성 요소 중 작은 분리 영역이 {num_small_volume_islands}개 존재합니다(점수:{score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,애셋 품질: {partName}에는 메시 매니폴드 문제가 있습니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,애셋 품질: {partName} 메시가 방수가 되지 않습니다(경계 에지 {boundary_edges_percent}%).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,애셋 품질 경고: 메시 포함 점수가 {score}입니다. 메시 버텍스의 {mesh_outside_outer_cage_percent}%가 외부 케이지 외부에 있습니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,입력 데이터가 불완전하거나 유효하지 않아 {measureName}의 애셋 품질 점수를 계산할 수 없습니다. 이로 인해 업로드가 차단되지는 않습니다.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,애셋 품질: 텍스처 {textureName}의 복잡도가 낮습니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,애셋 품질: 텍스처 {textureName}의 해상도가 {texture_width}x{texture_height}입니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,애셋 품질: {partName}에는 교차하는 삼각형 면이 {intersecting_tri_face_percent}% 존재합니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,애셋 품질: {partName}에는 경계 밖에 있는 UV 버텍스가 {uv_outside_bound_vert_percent}% 존재합니다(점수: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,애셋 품질: {partName}에는 유사한 버텍스가 {similar_vertex_percent}% 존재합니다(점수: {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,핸들에 허용되는 스키마에 포함되지 않는 조인트 {jointName}에 대한 스킨이 적용되어 있습니다. 표준 R15 조인트와 스키닝 전달 조인트만 허용됩니다.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType}에서는 스키닝 전달을 사용해야 하지만, 필요한 조인트 {requiredJointName}이(가) 없습니다."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"핸들에 조인트 {jointName}에 대한 스킨이 적용되어 있지만, 이 애셋에는 자동 스킨이 적용되어야 합니다. {validJointNameList}에 대해서만 스킨을 적용할 수 있습니다."
@@ -132,17 +158,24 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,{asse
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,리지드 액세서리에 지원되지 않는 스키닝 데이터가 있습니다. 메시와 함께 본을 가져오지 않도록 하세요.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"핸들에 조인트 {jointName}이(가) 포함되어 있으며, 이는 WrapLayer.AutoSkin이 EnabledOverride로 설정된 경우에만 허용됩니다."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,조인트를 전달하기 위해 스킨이 적용된 버텍스에는 완전한 가중치를 적용해야 합니다.
+Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,애니메이션 팩 번들에 예상되는 애니메이션 유형이 없습니다: {missingAnimationTypes}. 각 애니메이션 유형에는 예상되는 StringValue 하위 항목을 정확히 포함하는 R15Anim 폴더가 하나 있어야 합니다.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,애니메이션 '{animationName}'의 가중치 값이 {weight}입니다. 가중치는 0보다 커야 합니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,필요한 {ExpectedClass}의 {ExpectedName}을(를) {ParentPath} 내에서 찾지 못했습니다
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,다음 인스턴스는 승인된 스키마의 일부가 아니며 제거되어야 합니다: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,업로드할 애셋 조건은 {ExpectedClass}인 반면 현재 애셋은 {RootClass}입니다.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"업로드할 애셋의 이름이 {ExpectedClass}여(이어)야 하지만, 현재 애셋의 이름은 {RootClass}입니다."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation의 신체 부위 '{bodyPartName}'에 위치(이동) 트랙이 있습니다. 애니메이션 신체 부위는 회전만 가능합니다. 위치 트랙은 허용되지 않습니다. 이 신체 부위에서 위치 트랙을 제거하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation의 신체 부위 '{bodyPartName}'이(가) 시작 위치에서 {distance} 스터드 만큼 움직입니다. 허용되는 최대 이동 거리는 {maxDistance} 스터드 입니다. 신체 부위의 위치 이동을 줄이세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation에 HRD/DRD 뼈대가 포함되어 있으며 신체 부위 '{bodyPartName}'에 위치(이동) 트랙이 있습니다. 애니메이션에 뼈대가 있는 경우, 관절 분리를 방지하기 위해 신체 부위를 이동할 수 없습니다. 신체 부위에서 모든 위치 트랙을 제거하세요."
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,CurveAnimation의 {boneName} 뼈대에는 위치(이동) 트랙이 있습니다. HRD/DRD 뼈대는 회전만 가능합니다. 위치 트랙은 관절 분리를 유발하므로 허용되지 않습니다. 이 뼈대에서 위치 애니메이션을 제거하세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,CurveAnimation의 뼈대 '{boneName}'이(가) 시작 위치에서 {distance} 스터드 만큼 움직입니다. 허용되는 최대 이동 거리는 {maxDistance} 스터드 입니다. 뼈대의 위치 이동을 줄이세요.
+Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation에는 아직 지원되지 않는 HRD/DRD 뼈대 폴더가 포함되어 있습니다. 업로드하기 전에 모든 뼈대 하위 폴더를 제거하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,CurveAnimation의 신체 부위는 HumanoidRootPart에서 {minHeight}스터드보다 낮거나 {maxDistance}스터드 이상 떨어져 있으면 안 됩니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,CurveAnimation의 자식 항목인 MarkerCurves 및 AnimationRigData는 자식 항목을 포함할 수 없습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"CurveAnimation 계층 구조에 Scripts, LocalScripts 또는 ModuleScripts가 포함되어 있습니다. 해당 항목을 제거하세요."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,CurveAnimation 데이터를 불러오는 데 실패했습니다. 애니메이션 애셋이 유효하지 않거나 액세스할 수 없는 상태일 수 있습니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation에 유효하지 않은 계층 구조를 가진 신체 부위 폴더({folderName})가 포함되어 있습니다(허용되지 않거나 잘못 설정된 자식 항목이 있음).
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"CurveAnimation의 '{boneName}' 폴더는 인식되는 HRD/DRD 뼈대 이름이 아닙니다. 애니메이션 하위 폴더는 유효한 R15 신체 부위이거나 인식되는 뼈대 이름(예: HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase 또는 LeftHandIndex1과 같은 손가락 뼈대)이어야 합니다."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation에 '시간' 또는 '값'이 유효하지 않은 Curve가 있습니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,CurveAnimation 계층 구조에는 {allowedTypes}만 포함할 수 있습니다. 다른 인스턴스 유형은 모두 제거하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation의 길이는 {minLength}~{maxLength}초여야 합니다. 애니메이션을 수정하세요.
@@ -180,6 +213,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,다이내믹 헤드의 �
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"마켓플레이스의 다이내믹 헤드는 애니메이션화되어 있어야 하지만, 이 헤드에는 FACS 데이터가 없습니다."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,다이내믹 헤드의 오른쪽 눈 감기 표정을 감지할 수 없습니다. 오른쪽 눈의 케이지 랜드마크를 조정하여 머리의 오른쪽 눈과 일치시키고 감을 수 있는지 확인하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,다이내믹 헤드의 찡그린 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 찡그린 표정을 지을 수 있는지 확인하세요.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,이 애셋은 신뢰할 수 있는 크리에이터 프로그램에 속한 크리에이터만 사용할 수 있는 발광형 맵을 사용합니다. 업로드하기 전에 모든 발광형 맵 콘텐츠를 제거하거나 프로그램에 참여하세요.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,FaceControls의 InternalOverrideFACSData 속성은 업로드 시 비워두어야 합니다.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 확대된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,FACS(표정 코딩 시스템)이 사용자의 머리가 {modPercent}% 축소된 것을 감지했습니다. 머리를 변경하는 것은 얼굴 애니메이션에 대한 마켓플레이스 정책에 위배됩니다.
@@ -195,6 +229,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"{partName} 내부의 Di
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,HumanoidRigDescription이 없는 DigitsRigDescription은 포함할 수 없습니다
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"인스턴스 {instName}이(가) 두 번 이상 표시되지만, 뼈대 계층 구조 내에 한 번만 존재할 수 있습니다."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"인스턴스 {instName}은(는) {parentName}의 하위에 있지만, 기존 뼈대를 기준으로 할 때에는 {expectedParentName}의 하위에 있어야 합니다."
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,신체 업로드에 대한 HumanoidRigDescription 및 추가 뼈대가 아직 활성화되지 않았습니다.
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,클래스 {className}의 인스턴스 {instName}은(는) 뼈대 구조에 있지만 정의된 R15plus 스키마의 일부가 아닙니다.
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,선택적 조인트 {jointName}이(가) HRD에 잘못 매핑되어 있습니다. 이 조인트는 {boneName}라는 뼈대에 매핑되어야 합니다.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"조인트 {jointName}은(는) 표준 R15 조인트이지만, 리그 연결부가 HRD에 연결되어 있지 않습니다. 아바타의 HRD가 Motor6d가 아닌 AttachmentConstraint에 연결되어 있는지 확인하세요."
@@ -222,12 +257,15 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"외부 케�
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,수정된 외부 케이지 정점의 {outer_cage_face_irrelevant_percent}%가 장신구를 포함하지 않습니다. 반드시 필요한 경우에만 외부 케이지를 움직이세요.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,{cage_name} 케이지 내에 올바르지 않거나 템플릿에 속하지 않는 UV 값이 {incorrect_uv_count}개 있습니다. 케이지 UV를 수정하세요.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,장신구의 메시 정점 중 {mesh_outside_outer_cage_percent}%가 외부 케이지 외부에 있습니다. 장신구의 더 많은 부분이 케이지 사이에 위치하도록 조정하세요.
+Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} 메시의 {axis}축 크기가 '{currentSize}' 스터드로, 허용되는 최대 개별 부품 크기인 '{maxSize}' 스터드보다 큽니다. 메시 크기를 줄이세요."
+Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} 메시의 {axis}축 크기가 '{currentSize}' 스터드로, 허용되는 최소 개별 부품 크기인 '{minSize}' 스터드보다 작습니다. 메시 크기를 늘리세요."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,첨부 파일({attName})은 {partName} 하위 항목에 정확히 한 번만 존재해야 합니다.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}'(또는 하위 항목)에 속성이 포함되어 있습니다. 다음({InstanceNameList})에서 속성을 제거해야 합니다.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox에 애셋을 업로드하려면 정확히 1개의 인스턴스와 관련된 업로드 유형을 선택해야 합니다.
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,인스턴스 {ProblematicDescendantPath}에는 태그가 없어야 합니다.
+Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Hub 우선 번역 동기화 워크플로우를 엔드투엔드로 확인하는 데 사용되는 두 번째 테스트 오류 문자열.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"머리 메쉬 파트에 {jointName}의 얼굴 애니메이션이 있으며, 이는 FACS(표정 코딩 시스템)에서 사용할 수 없습니다. 이 조인트의 이름을 변경한 후 머리를 다시 가져오세요."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,바디 파트 {partName}에는 R15plus 스키마에 포함되지 않는 가상 조인트 {jointName}에 대한 스킨이 적용되어 있습니다.
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,신체 업로드에 대한 HumanoidRigDescription 및 추가 뼈대가 아직 활성화되지 않았습니다.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,설정으로 이동
@@ -240,8 +278,12 @@ CommonUI.Controls.Action.Apply,적용
 CommonUI.Controls.Action.Back,뒤로
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,확인
+CommonUI.Controls.Action.Continue,계속
+CommonUI.Controls.Action.Done,완료
+CommonUI.Controls.Action.Next,다음
 CommonUI.Controls.Action.OK,
 CommonUI.Controls.Action.Refresh,새로 고침
+CommonUI.Controls.Action.ResetAll,모두 재설정
 CommonUI.Controls.Action.Search,검색
 CommonUI.Controls.Action.ShowMore,더 보기
 CommonUI.Controls.Action.Submit,제출
@@ -264,6 +306,8 @@ CommonUI.Controls.Label.January,1월
 CommonUI.Controls.Label.JanuaryAbbreviated,
 CommonUI.Controls.Label.July,7월
 CommonUI.Controls.Label.June,6월
+CommonUI.Controls.Label.LastWeek,지난주
+CommonUI.Controls.Label.LastYear,지난해
 CommonUI.Controls.Label.March,3월
 CommonUI.Controls.Label.MarchAbbreviated,
 CommonUI.Controls.Label.May,5월
@@ -282,8 +326,12 @@ CommonUI.Controls.Label.September,9월
 CommonUI.Controls.Label.SeptemberAbbreviated,
 CommonUI.Controls.Label.Sunday,일요일
 CommonUI.Controls.Label.SundayAbbreviated,
+CommonUI.Controls.Label.ThisMonth,이번 달
+CommonUI.Controls.Label.ThisWeek,이번 주
+CommonUI.Controls.Label.ThisYear,올해
 CommonUI.Controls.Label.Thursday,목요일
 CommonUI.Controls.Label.ThursdayAbbreviated,목
+CommonUI.Controls.Label.Today,오늘
 CommonUI.Controls.Label.Tuesday,화요일
 CommonUI.Controls.Label.TuesdayAbbreviated,화
 CommonUI.Controls.Label.Wednesday,수요일
@@ -291,8 +339,11 @@ CommonUI.Controls.Label.WednesdayAbbreviated,수
 CommonUI.Controls.Label.Year,년
 CommonUI.Controls.NoResultsFound,검색 결과 없음
 CommonUI.Features.Action.Close,
+CommonUI.Features.Action.Continue,
+CommonUI.Features.Action.LearnMore,자세히 보기
 CommonUI.Features.Action.LessLowercase,간략히 보기
 CommonUI.Features.Action.MoreLowercase,
+CommonUI.Features.Action.Send,보내기
 CommonUI.Features.Label.About,소개
 CommonUI.Features.Label.AcceptConnection,인맥 수락
 CommonUI.Features.Label.AcceptFriend,친구 수락
@@ -328,8 +379,9 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,프로필
 CommonUI.Features.Label.RM,
 CommonUI.Features.Label.Redeem,코드 사용
-CommonUI.Features.Label.RemoveConnection,인맥에서 삭제
+CommonUI.Features.Label.RemoveConnection,친구 삭제
 CommonUI.Features.Label.ReportLogs,로그 보고
+CommonUI.Features.Label.ReportLogsSentenceCase,로그 전송
 CommonUI.Features.Label.Sent,전송 완료
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,이용 약관
@@ -360,9 +412,9 @@ CommonUI.Messages.SystemMessage.AndroidDeprecationTitlePhase2,
 CommonUI.Messages.SystemMessage.AndroidDeprecationTitlePhase3,
 CommonUI.Messages.SystemMessage.DeprecationMobileSystemRequirementsLinkLabel,
 CommonUI.Messages.SystemMessage.DeprecationTitle,
-CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase1,조만간 Roblox에서 더 이상 iOS 13 및 iOS 14를 지원하지 않습니다. 계속 플레이하려면 기기를 iOS 15 이상으로 업그레이드하세요.
-CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase2Fallback,2026년 6월 1일부터 Roblox에서는 더 이상 iOS 13 및 iOS 14를 지원하지 않습니다. 계속 플레이하려면 기기를 iOS 15 이상으로 업그레이드하세요.
-CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase3,Roblox에서는 더 이상 iOS 13 및 iOS 14를 지원하지 않습니다. 계속 플레이하려면 기기를 iOS 15 이상으로 업그레이드하세요.
+CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase1,곧 Roblox에서 iOS 13 지원하지 않게 됩니다. 계속 플레이하려면 기기를 iOS 14 이상으로 업그레이드하세요.
+CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase2Fallback,2026년 6월 5일부터 Roblox는 더 이상 iOS 13을 지원하지 않습니다. 계속 플레이하려면 기기를 iOS 14 이상으로 업그레이드하세요.
+CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase3,Roblox는 더 이상 iOS 13을 지원하지 않습니다. 계속 플레이하려면 기기를 iOS 14 이상으로 업그레이드하세요.
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationBody,새롭게 출시된 PlayStation®5용 Roblox를 설치하고 플레이하세요. {date}부터 PlayStation®5에서는 PlayStation®4용 Roblox를 플레이할 수 없습니다.
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationTitle,이제 PlayStation®5에서 Roblox를 이용할 수 있습니다
 CommonUI.Messages.SystemMessage.PS4onPS5HardDeprecationBody,PlayStation®4 버전의 Roblox는 더 이상 PlayStation®5에서 지원되지 않습니다. 계속 플레이하려면 PlayStation®5용 새 Roblox 앱을 다운로드하세요.
@@ -448,7 +500,7 @@ CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainWait,Robux가
 CoreScripts.BulkPurchasePrompt.CompletedPrompt.SuccessHeading,구매 완료
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.Heading,일부 구매 완료
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemListSuccessfulCount,{itemCount}개 아이템
-CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemListSuccessfulHeading,완료
+CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemListSuccessfulHeading,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemListUnsuccessfulCount,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemListUnsuccessfulHeading,미완료
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusAlreadyOwned,이미 보유 중
@@ -508,16 +560,29 @@ CoreScripts.EmoteThumbnailEditor.Action.Update,업데이트
 CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,섬네일 편집
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,회전
 CoreScripts.EmoteThumbnailEditor.Label.Time,시간
+CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,흰색 Roblox 메뉴는 플레이테스트 중임을 나타냅니다. 항상 Roblox 커뮤니티 규정을 준수하세요.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,신규: Roblox Connect를 이용해 보세요!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,업데이트 소식: Roblox의 파티 기능을 활용해 보세요!
 CoreScripts.FTUX.Heading.InExperienceShop,신규 상점
 CoreScripts.FTUX.Heading.JoinVoice,음성 채팅 참가
+CoreScripts.FTUX.Heading.LeaveRespawn,종료 및 리스폰
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,신규: 아바타 전환기
+CoreScripts.FTUX.Heading.NewTiltOnboarding,메뉴는 여기에 있습니다
+CoreScripts.FTUX.Heading.NewTiltUpdate,새로운 메뉴
+CoreScripts.FTUX.Heading.ReadyToPlaytest,플레이테스트할 준비가 되셨나요?
+CoreScripts.FTUX.Heading.SideSheetUpdate,모든 작업을 한곳에서
+CoreScripts.FTUX.Heading.SocialOnboarding,소셜 기능
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,언제든지 저장한 아바타로 전환하세요.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,친구들과 언제든지 채팅할 수 있습니다.
 CoreScripts.FTUX.Label.InExperienceShopDescription,나만을 위해 엄선된 아이템을 확인해보세요
 CoreScripts.FTUX.Label.JoinVoiceDescription,다른 사람들과 대화
+CoreScripts.FTUX.Label.LeaveRespawn,여기에서 손쉽게 게임을 종료하거나 아바타를 리스폰할 수 있습니다.
+CoreScripts.FTUX.Label.NewTiltOnboarding,게임 메뉴에는 게임 설정과 게임 내 작업이 포함되어 있습니다.
+CoreScripts.FTUX.Label.NewTiltUpdate,햄버거 메뉴 항목이 여기로 이동했습니다.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,친구들과 파티를 만들어 함께 즐기세요.
+CoreScripts.FTUX.Label.SideSheetOnboarding,"메뉴에는 필수 기능이 전부 포함되어 있습니다. 친구를 초대하고, 감정 표현을 사용하고, 음악을 제어하는 등 다양한 기능을 이용해 보세요."
+CoreScripts.FTUX.Label.SideSheetUpdate,메뉴에는 여전히 필수 기능이 전부 포함되어 있습니다.
+CoreScripts.FTUX.Label.SocialOnboarding,상단 바에서 채팅을 비롯한 소셜 기능에 쉽게 접근할 수 있습니다.
 CoreScripts.Feedback.EntryPoint.ButtonText,피드백 제공
 CoreScripts.Feedback.EntryPoint.OptionText,번역 피드백 제공
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,나가기
@@ -560,7 +625,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,의견을
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,어린 플레이어를 보호하기 위해 13세 미만의 사용자 계정은 피드백을 보낼 수 없습니다.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,피드백 이용 불가
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,캡처 추가
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,선택 항목 편집
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,사용 가능한 캡처가 없습니다.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,캡처({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,크리에이터가 문제를 파악할 수 있도록 도와주세요.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,캡처 불러오는 중...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{max}개 중 {count}개 선택됨
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,하나 이상의 캡처를 업로드하지 못했습니다.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,버그 신고
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,아이템 또는 데이터 복원
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,카테고리*
@@ -569,13 +645,15 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,카테고리
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,구매 문제
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,최대 {MAX}자
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,세부 정보*
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,선택 취소
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,게임 버전 및 해당 문제를 재현하는 단계 등 문제와 관련된 모든 사항을 포함해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"누락된 항목과 마지막으로 본 시기를 설명해 주세요. 계정이 해킹된 경우, Roblox CS 문의 양식 번호와 관련 세부 정보를 포함해 주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,요청 사항이나 문제를 여기에 설명해 주세요. 상황을 이해하는 데 도움이 되도록 가능한 한 많은 정보를 제공해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"구매하려던 아이템, 구매 시도 시기, 총 금액(예: 500 Robux/4.99달러)을 알려주세요. 표시된 오류 메시지가 있다면 포함해주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,신고하기를 진행하시겠어요?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>대신 신고를 제출하세요.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,보내기
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,선택
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,크리에이터가 올바른 계정을 지원하는 데 도움이 됩니다.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,크리에이터와 사용자 정보 공유
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.LabelRequired,크리에이터와 사용자 정보 공유(필수)
@@ -721,6 +799,7 @@ CoreScripts.InGameMenu.GameSettings.Haptics,햅틱
 CoreScripts.InGameMenu.GameSettings.InvertedCamera,카메라 반전됨
 CoreScripts.InGameMenu.GameSettings.LanguageHeader,채팅 및 언어
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,개발자 잠금
+CoreScripts.InGameMenu.GameSettings.MainVolume,주 볼륨
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,품질 수준
 CoreScripts.InGameMenu.GameSettings.MovementMode,이동 모드
 CoreScripts.InGameMenu.GameSettings.Open,열기
@@ -751,6 +830,7 @@ CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,VR 단계별 회전
 CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,3인칭 고정 카메라
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,보기 및 컨트롤
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR 비네트 활성화됨
+CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,음성 채팅 볼륨
 CoreScripts.InGameMenu.GameSettings.Volume,볼륨
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,VR 제어
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,오류가 발생했어요. 다시 시도하세요.
@@ -763,7 +843,6 @@ CoreScripts.InGameMenu.Label.ViewButton,보기 버튼
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
 CoreScripts.InGameMenu.LeaveGameQuestion,나갈까요?
-CoreScripts.InGameMenu.NextUpExitMenu.Title,추천 체험
 CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,컨트롤...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
@@ -773,7 +852,7 @@ CoreScripts.InGameMenu.PageTitle.Report,신고
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,컴포트 설정
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,서버 전환
 CoreScripts.InGameMenu.Prompt.BackToHome,"예, 홈으로 이동합니다"
-CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,체험에서 정말 나갈까요?
+CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,게임을 종료하시겠습니까?
 CoreScripts.InGameMenu.Prompt.ConfirmResetCharacter,캐릭터를 정말 재설정할까요?
 CoreScripts.InGameMenu.Prompt.ConfirmRespawnCharacter,캐릭터를 리스폰하시겠어요?
 CoreScripts.InGameMenu.Prompt.LeaveGame,"예, 나갑니다"
@@ -839,12 +918,15 @@ CoreScripts.InGameMenu.RespawnCharacter,
 CoreScripts.InGameMenu.RespawnCharacterDialogBody,캐릭터가 스폰 지점에서 리스폰됩니다.
 CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,캐릭터를 리스폰할까요?
-CoreScripts.InGameMenu.Traversal.HistoryDescription,이전에 방문한 체험에 참여하기
+CoreScripts.InGameMenu.SwitchServer.ConfirmBody,이 서버를 나가 다른 서버로 전환하려고 합니다.
+CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
+CoreScripts.InGameMenu.Traversal.HistoryDescription,이전에 방문한 게임에 참가
 CoreScripts.InGameMenu.Traversal.LeaveBody,이 체험에서 나가고 {PREVIOUS_EXPERIENCE}(으)로 돌아갑니다.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,진동 
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,을 눌러야 합니다
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,일부 체험에서는 메뉴 탐색 전환을 위해
+CoreScripts.InGameMenu.VoiceChatVolumeLower,
 CoreScripts.PremiumModal.Title.Error,
 CoreScripts.PublishAssetPrompt.AssetDescriptionPlaceholder,설명
 CoreScripts.PublishAssetPrompt.Cancel,
@@ -915,8 +997,11 @@ CoreScripts.PurchasePrompt.Title.VerificationRequired,
 CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,사진 찍기
 CoreScripts.TextChat.Action.SendQuickWords,간단한 메시지 보내기
+CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,글로벌
 CoreScripts.TextChat.ChannelTabs.Here,여기
+CoreScripts.TextChat.ChannelTabs.System,시스템
+CoreScripts.TextChat.ChannelTabs.Team,팀
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: 사용자 음소거
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>: 스피커 음소거 해제.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,지원되는 언어로 자동 번역됩니다
@@ -933,6 +1018,8 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,여기서는 시스템 �
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,현재 같은 지역에 있는 사용자와만 채팅하고 시스템 메시지를 볼 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,비슷한 연령대의 사람들 및 신뢰할 수 있는 친구들과만 채팅할 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,비슷한 연령대의 사람들과 신뢰할 수 있는 인맥과만 채팅할 수 있습니다.
+CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold, 지금 플레이 중인 모든 사람에게 인사하세요!
+CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,다른 플레이어 {RBX_COUNT}명이 채팅에 참여하고 있어요. 인사해 보세요!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 지금 플레이 중인 모든 사람에게 인사하세요!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,신뢰할 수 있는 친구들과만 채팅할 수 있습니다.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,이 게임에서 더 많은 사람과 채팅하세요. 연령대가 비슷한 사람과만 채팅할 수 있습니다.
@@ -963,7 +1050,11 @@ CoreScripts.TextChat.Emote.Error.NotEnabled,감정 표현을 여기에서 사용
 CoreScripts.TextChat.Emote.Error.NotEquipped,감정 표현을 장착하고 있지 않습니다.
 CoreScripts.TextChat.Emote.Error.NotOwnedGeneric,해당 감정 표현을 보유하고 있지 않습니다.
 CoreScripts.TextChat.EnableChatButton.Label.UnlockChat,채팅 잠금 해제
+CoreScripts.TextChat.Error.NoChannelAccess,이 채팅 채널에 대한 액세스 권한이 없습니다.
+CoreScripts.TextChat.Error.NoChannelSelected,채팅 채널이 선택되지 않았습니다.
+CoreScripts.TextChat.Error.ReadOnlyChannel,읽기 전용 채팅 채널
 CoreScripts.TextChat.Help.FirstLine,다음은 기본적인 채팅 명령어입니다:
+CoreScripts.TextChat.InputBar.Hint.ChatUnavailable,채팅 이용 불가
 CoreScripts.TextChat.InputBar.Hint.Gamepad,메뉴의 '{CHAT_BUTTON}' 버튼을 이용해 채팅
 CoreScripts.TextChat.InputBar.Hint.GamepadConnected,'{CONFIRM_KEY}'(을)를 눌러 입력
 CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
@@ -985,7 +1076,9 @@ CoreScripts.TextChat.Mute.Success,사용자 '{RBX_NAME}' 님이 음소거되었�
 CoreScripts.TextChat.Notification.WhisperChat.Created,현재 {RBX_NAME} 님과 비공개 채팅 중이에요.
 CoreScripts.TextChat.Online.Help.Description3,/online: 이 채널에서 채팅할 수 있는 사용자 수.
 CoreScripts.TextChat.Online.Success.Plural,현재 플레이어 {RBX_COUNT}명이 온라인 상태이며 채팅할 수 있습니다.
+CoreScripts.TextChat.Online.Success.Plural2,다른 플레이어 {RBX_COUNT}명이 온라인 상태이며 채팅할 수 있습니다.
 CoreScripts.TextChat.Online.Success.Singular,
+CoreScripts.TextChat.Online.Success.Singular3,
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,팀에 소속되어 있지 않으면 팀 채팅을 이용할 수 없습니다.
 CoreScripts.TextChat.TeamChat.PrefixText,[팀]
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,비슷한 연령대의 사람들 및 신뢰할 수 있는 인맥과만 대화할 수 있습니다.
@@ -1041,7 +1134,7 @@ CoreScripts.TopBar.Title.ExperienceControls,체험 제어
 CoreScripts.TopBar.ToggleMic,나를 음소거/음소거 해제
 CoreScripts.TopBar.Traversal.BackButtonDefault,이전 체험
 CoreScripts.TopBar.Traversal.History,기록
-CoreScripts.VRFTUX.Action.Next,다음
+CoreScripts.VRFTUX.Action.Next,
 CoreScripts.VRFTUX.Action.Skip,건너뛰기
 CoreScripts.VRFTUX.Description.Movement.Body1,체험 내에서 이동하려면 <b>왼쪽</b> 컨트롤러의 엄지스틱을 사용하세요.
 CoreScripts.VRFTUX.Description.Movement.Body2,점프하려면 <b>A</b> 버튼을 누르세요.
@@ -1093,7 +1186,9 @@ Feature.AccountSettings.Example.Twitch,예: www.twitch.tv/roblox/profile
 Feature.AccountSettings.Example.Twitter,예: @Roblox
 Feature.AccountSettings.Example.YouTube,예: www.youtube.com/user/roblox
 Feature.AccountSettings.Heading.SocialNetworks,소셜 네트워크
+Feature.AccountSettings.Heading.Tab.Notifications,알림
 Feature.AccountSettings.Heading.Tab.Privacy,개인정보
+Feature.AccountSettings.Heading.Tab.Robux,Robux
 Feature.AccountSettings.Heading.Tab.Security,보안
 Feature.AccountSettings.Label.Discord,Discord
 Feature.AccountSettings.Label.DropDown.Everyone,
@@ -1114,10 +1209,12 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,유효하지 않은 X 핸들�
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,유효하지 않은 YouTube URL입니다.
 Feature.AddFriends.Action.IgnoreConnectionRequest,인맥 요청 무시
 Feature.AddFriends.Action.IgnoreFriendRequest,친구 요청 무시
+Feature.AddFriends.Action.IgnoreTrustedFriendRequest,신뢰할 수 있는 친구 요청 무시
 Feature.AddFriends.Action.RequestIgnored,요청이 무시됨
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,회원 검색
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
 Feature.AddFriends.Label.SearchForFriendsPrompt,"사용자 이름이나 표시 이름으로 검색해, 아는 사람들을 Roblox에서 찾으세요."
 Feature.AddFriends.Label.SyncWithContacts,연락처를 동기화해 친구를 찾고 초대하세요!
 Feature.AddFriends.Title.ConnectWithContacts,연락처에서 추가
@@ -1136,13 +1233,16 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,규정 위반 및 이의 신청
 Feature.Avatar.Action.AddNewMakeupLook,새로운 룩 추가
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,선택 취소
+Feature.Avatar.Action.CancelSelection,
 Feature.Avatar.Action.Clear,지우기
 Feature.Avatar.Action.ComposerPost,게시
 Feature.Avatar.Action.ComposerPreviewAndPost,미리 보기 및 게시
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,세트 만들기
 Feature.Avatar.Action.Default,기본값
 Feature.Avatar.Action.DefaultView,기본 보기
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,세트 삭제
 Feature.Avatar.Action.Discard,폐기
 Feature.Avatar.Action.EditProfilePicture,프로필 사진 편집
 Feature.Avatar.Action.GoBack,돌아가기
@@ -1160,13 +1260,14 @@ Feature.Avatar.Action.Pan,팬
 Feature.Avatar.Action.Posting,게시 중
 Feature.Avatar.Action.RemoveAll,전체 제거
 Feature.Avatar.Action.Rename,이름 변경
+Feature.Avatar.Action.RenameSet,세트 이름 변경
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,마지막으로 저장한 아바타 복원
 Feature.Avatar.Action.Revert,되돌리기
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,저장
 Feature.Avatar.Action.SaveAsNew,새 코스튬으로 저장
-Feature.Avatar.Action.Select,선택
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,여러 아이템 선택
 Feature.Avatar.Action.SelectSlot,슬롯 선택
 Feature.Avatar.Action.Share,공유
@@ -1224,6 +1325,9 @@ Feature.Avatar.Heading.Outfits,코스튬
 Feature.Avatar.Heading.RenameCharacter,캐릭터 이름 변경
 Feature.Avatar.Heading.SaveCostume,캐릭터 저장
 Feature.Avatar.Heading.SelectToUpdate,업데이트 항목 선택
+Feature.Avatar.Heading.SetLimitReached,세트 한도에 도달함
+Feature.Avatar.Heading.SetNameDuplicate,이름 복제
+Feature.Avatar.Heading.SetNameNotAllowed,허용되지 않는 이름
 Feature.Avatar.Heading.SharePublicAvatar,아바타를 공유하세요
 Feature.Avatar.Heading.SortBy,정렬 기준
 Feature.Avatar.Heading.UsedName,이미 사용되었던 이름
@@ -1248,6 +1352,8 @@ Feature.Avatar.Label.Add,
 Feature.Avatar.Label.AddEdit,추가/편집
 Feature.Avatar.Label.AddManage,추가/관리
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
+Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,전체 머리
 Feature.Avatar.Label.AnimationFullSet,전체 세트
 Feature.Avatar.Label.AvatarAdjustment,아바타 조정
@@ -1315,6 +1421,7 @@ Feature.Avatar.Label.FullBody,전신
 Feature.Avatar.Label.FullMasks,전면 마스크
 Feature.Avatar.Label.FullPair,한 쌍
 Feature.Avatar.Label.Gear,장비
+Feature.Avatar.Label.GenericSetError,문제가 발생했습니다. 다시 시도하세요.
 Feature.Avatar.Label.GetLookQuestion,이 코스튬을 무료로 받으시겠어요?
 Feature.Avatar.Label.GetOutfitMultiple,아이템 [{numItems}]개를 무료로 획득하시겠어요?
 Feature.Avatar.Label.GetOutfitOne,아이템 [1]개를 무료로 획득하시겠어요?
@@ -1382,6 +1489,8 @@ Feature.Avatar.Label.PPEViewFullButton,아바타 전체 보기
 Feature.Avatar.Label.Pants,바지
 Feature.Avatar.Label.PantsClassic,기본형 바지
 Feature.Avatar.Label.Photobooth,포토부스
+Feature.Avatar.Label.ProfileFrames,프레임
+Feature.Avatar.Label.ProfileFramesUnlockBanner,Plus로 프레임 잠금 해제
 Feature.Avatar.Label.Props,소도구
 Feature.Avatar.Label.Purchased,
 Feature.Avatar.Label.QuickMenuCustomizeTitle,꾸미기 옵션
@@ -1409,6 +1518,9 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,최근 검색
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,최근 조회
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,계속 쇼핑하기
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetLimitReachedBody,최대 {setLimit}개 세트만 보유할 수 있습니다. 공간을 확보하려면 하나를 삭제하세요
+Feature.Avatar.Label.SetNameDuplicateBody,이미 해당 이름의 세트가 있습니다. 다른 이름을 선택하세요.
+Feature.Avatar.Label.SetNameNotAllowedBody,다른 이름을 선택하세요
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,마켓플레이스에 아바타 게시
 Feature.Avatar.Label.Shirt,셔츠
 Feature.Avatar.Label.ShirtClassic,기본형 셔츠
@@ -1554,6 +1666,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,아바타 캡션을 작성하세�
 Feature.Avatar.RevokedItems.BodyText,"{category} 아이템 ""{item}""이(가) 이 저장된 아바타에서 제거되었으므로, 지불한 기본가를 환불해 드리겠습니다.{lineBreak}자세한 내용은 수신함을 확인하세요."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"다음 아이템이 저장된 아바타에서 제거되었으므로, 지불한 기본가를 환불해 드리겠습니다.{lineBreak}{items}{lineBreak}자세한 내용은 받은 수신함을 확인하세요."
 Feature.Avatar.RevokedItems.ViewInbox,수신함 보기
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,
 Feature.Avatar.Title.AvatarRefinement,아바타 세부 조정
 Feature.Avatar.Title.BulkDeleteMakeupLooks,{count}개의 메이크업 룩을 삭제할까요?
@@ -1565,6 +1678,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,모든 애니메이션을 지�
 Feature.Avatar.Title.ClearBodyConfirmation,신체 전체를 지울까요?
 Feature.Avatar.Title.ClearClothesConfirmation,모든 의상을 지울까요?
 Feature.Avatar.Title.ClearMakeupConfirmation,모든 메이크업을 지울까요?
+Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,룩 복제
 Feature.Avatar.Title.EnhancedAvatarHeads,향상된 아바타 머리
 Feature.Avatar.Title.GetOutfit,코스튬 획득
@@ -1631,7 +1745,7 @@ Feature.AvatarSwitcher.Message.SwitchingDeferred,다음 리스폰 또는 체험 
 Feature.AvatarSwitcher.Message.UnknownSupport,아바타를 변경할 수 있지만 이 체험에서는 올바르게 표시되지 않을 수 있습니다.
 Feature.AvatarSwitcher.Message.Unsupported,이 체험은 커스텀 아바타를 사용하며 Roblox 아바타를 지원하지 않습니다.
 Feature.BiometricChallenge.Action.Cancel,
-Feature.BiometricChallenge.Action.Continue,계속
+Feature.BiometricChallenge.Action.Continue,
 Feature.BiometricChallenge.Content.LivenessHostedPrompt,인간 여부를 확인하려면 외부 브라우저를 열고 잠시 셀카를 찍으세요.
 Feature.BiometricChallenge.Content.Loading,불러오는 중...
 Feature.BiometricChallenge.Content.QRHelpFull,{prompt} 모바일 기기에서 Roblox 앱을 다운로드하고 앱에서 다시 시도해 보세요.
@@ -1645,39 +1759,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} 님을 차단할까요?
 Feature.BlockingModal.Message.BlockConfirmation,"이 사용자를 차단하면 인맥 또는 팔로워 목록에서 삭제되며, 메시지, 요청, 초대 등을 나에게 보낼 수 없게 됩니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"이 사용자를 차단하면 친구 또는 팔로워 목록에서 삭제됩니다. 상대가 메시지나 요청, 초대 등을 내게 보낼 수 없습니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
-Feature.Call.Description.ExperienceError,이 체험은 음성으로 채팅하기를 지원하지 않습니다.
-Feature.Call.Description.Friends,"최적의 통화를 위한 기기 및 설정을 보유 중일수도, 그렇지 않을 수도 있는 친구입니다."
-Feature.Call.Description.NoFriendsFound,친구를 찾을 수 없습니다
-Feature.Call.Description.SuggestedFriends,최적의 통화가 가능한 기기를 보유하고 해당 설정을 완료한 친구입니다.
-Feature.Call.Error.Description.AlreadyInCall,이미 통화 중입니다
-Feature.Call.Error.Description.DeviceNotSupported,현재 회원님의 기기에서는 통화 기능이 지원되지 않습니다. 나중에 다시 시도하세요.
-Feature.Call.Error.Description.FriendBusy,{calleeCombinedName} 님은 현재 통화 중이므로 전화를 받을 수 없습니다. 나중에 다시 시도하세요.
 Feature.Call.Error.Description.Generic,
-Feature.Call.Error.Label.OhNo,
-Feature.Call.Error.Title.CouldntMakeCall,전화를 걸지 못했습니다
-Feature.Call.Error.Title.ExperienceError,체험 오류
-Feature.Call.Error.Title.FriendBusy,친구가 통화 중이에요
-Feature.Call.Label.Block,{combinedName} 님 차단
-Feature.Call.Label.CallEnded,통화 종료
-Feature.Call.Label.Calling,전화 거는 중...
-Feature.Call.Label.Friends,
-Feature.Call.Label.Incoming,수신 전화
-Feature.Call.Label.Missed,부재 중 전화
-Feature.Call.Label.Outgoing,발신 전화
-Feature.Call.Label.RecentCalls,최근 통화
-Feature.Call.Label.Retry,
-Feature.Call.Label.RobloxCall,Roblox 통화
-Feature.Call.Label.StartNewCall,새로운 통화 시작
-Feature.Call.Label.Suggested,추천
-Feature.Call.Label.Teleporting,
-Feature.Call.Label.Unfriend,{combinedName} 님과 친구 끊기
-Feature.Call.Label.Yesterday,어제
-Feature.Call.Modal.EnableChatVoiceBody,이 체험에서 다른 사람들과 대화하려면 '설정' > '개인정보'에서 '음성으로 채팅하기'를 사용하도록 설정하세요.
-Feature.Call.Modal.EnableChatVoiceTitle,음성으로 채팅하기 사용
-Feature.Call.Prompt.AddFriends,Roblox에서 친구를 추가하고 전화를 거세요
-Feature.Call.Prompt.FirstCall,첫 전화를 걸어 보세요
-Feature.Call.Prompt.SearchFriends,친구 검색
-Feature.Call.Prompt.StartCall,
 Feature.Captures.Action.Allow,허용
 Feature.Captures.Action.AllowPhotoAccessAccepted,
 Feature.Captures.Action.AllowPhotoAccessDeclined,
@@ -1764,6 +1846,7 @@ Feature.Catalog.Action.ItemOptions,아이템 옵션
 Feature.Catalog.Action.LoadMore,더 불러오기
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,세부 정보 열기
+Feature.Catalog.Action.Owned,{count}개 보유 중
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,제거
@@ -1819,9 +1902,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,조정 가능
+Feature.Catalog.Label.AdvancedMaterials,고급 재질
 Feature.Catalog.Label.AllItems,전체 아이템
 Feature.Catalog.Label.AlreadyOwned,이미 보유 중인 아이템입니다
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,특성
 Feature.Catalog.Label.Attribution,제작 장소:
 Feature.Catalog.Label.AvailableForSale,판매 중
 Feature.Catalog.Label.AvailableToPremiumMembers,Premium을 이용 중이므로 구매 가능합니다
@@ -1868,6 +1953,8 @@ Feature.Catalog.Label.CustomizeAvatar,아바타 꾸미기
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,삭제하면 이 액션을 실행 취소할 수 없습니다.
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,이미시브
+Feature.Catalog.Label.EmissiveInfo,방출형 아이템은 빛을 내며 자체적으로 빛을 발산하므로 어두운 환경에서도 밝고 눈에 잘 띕니다.
 Feature.Catalog.Label.Emotes,
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -1942,6 +2029,7 @@ Feature.Catalog.Label.NoLongerAvailable,이 아이템은 더 이상 판매하지
 Feature.Catalog.Label.NoSellersWarning,"앗, 이 아이템을 파는 사람이 없어요"
 Feature.Catalog.Label.None,
 Feature.Catalog.Label.NotAvailable,현재 이용할 수 없는 아이템입니다
+Feature.Catalog.Label.OfferApplied,제안 적용됨
 Feature.Catalog.Label.OnSale,
 Feature.Catalog.Label.OriginalPrice,원래 가격
 Feature.Catalog.Label.OutOfStock,
@@ -1951,6 +2039,8 @@ Feature.Catalog.Label.PBR.false,
 Feature.Catalog.Label.PBR.true,
 Feature.Catalog.Label.PBRInfo,고급 재질의 아바타 아이템은 물리 기반 렌더링(PBR)을 사용해 현실에서처럼 변화하고 빛나는 빛과 그림자가 표현되어 더욱 자연스럽게 보입니다.
 Feature.Catalog.Label.PBRInfoTitle,물리 기반 렌더링(PBR)
+Feature.Catalog.Label.ParticleEffects,파티클 효과
+Feature.Catalog.Label.ParticleEffectsInfo,파티클 효과가 있는 아이템은 애니메이션 시각 효과를 생성하여 역동적이고 생동감 있는 느낌을 줍니다.
 Feature.Catalog.Label.Placement,배치
 Feature.Catalog.Label.PrePremiumPrice,(아이템 가격:
 Feature.Catalog.Label.Premium,
@@ -1984,6 +2074,7 @@ Feature.Catalog.Label.SalePrice,판매 가격:
 Feature.Catalog.Label.SaveAsCharacter,캐릭터로 저장
 Feature.Catalog.Label.SaveOptions,옵션 저장
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,연관 검색 결과
 Feature.Catalog.Label.SellCut,획득:
 Feature.Catalog.Label.SellPageUpsell,Roblox Plus 멤버십을 보유한 사용자만 판매할 수 있습니다.
 Feature.Catalog.Label.SellSuccess,판매 아이템
@@ -2029,8 +2120,8 @@ Feature.Catalog.LabelFree,
 Feature.Catalog.LabelNoResellers,재판매자 없음
 Feature.Catalog.LabelOffSale,
 Feature.Catalog.LabelPants,
-Feature.Catalog.LabelPastDay,
-Feature.Catalog.LabelPastWeek,지난주
+Feature.Catalog.LabelPastDay,어제
+Feature.Catalog.LabelPastWeek,
 Feature.Catalog.LabelShirts,
 Feature.Catalog.LabelTShirts,
 Feature.Catalog.Message.AvatarModerated,이 아바타는 커뮤니티 가이드라인을 충족하지 않습니다. 다른 아바타를 게시해 보세요
@@ -2045,6 +2136,7 @@ Feature.Catalog.Message.CaptionLimit,
 Feature.Catalog.Message.Checkout.PurchaseFailed,계속 진행하려면 아이템을 검토하거나 삭제하세요
 Feature.Catalog.Message.Checkout.UnavailableItems,구매할 수 없는 아이템이 있습니다. 계속하려면 해당 아이템을 삭제하세요.
 Feature.Catalog.Message.CollectiblesInfo,컬렉터블 아이템은 보류 기간이 지나면 원래 재고가 남아 있더라도 다른 사용자에게 재판매할 수 있습니다. Roblox Plus 멤버가 되면 컬렉터블 아이템을 재판매할 수 있습니다.
+Feature.Catalog.Message.FTUXFavoritePillTooltip,즐겨찾기에 추가하기
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox에서 최고급으로 제작된 아이템을 찾아 보세요
 Feature.Catalog.Message.HoldingPolicyL1,구매한 재판매 아이템은 최대 {days}일 동안 보류됩니다. 아이템은 이 보류 기간이 종료된 후에만 재판매할 수 있습니다. 아이템을 재판매하려면 Plus 사용자여야 합니다.
 Feature.Catalog.Message.HoldingPolicyL2,아이템 구매를 완료하면 오리지널 판매는 최대 {purchaseDays}일 동안 보류됩니다. 아이템은 이 보류 기간이 종료된 후에만 재판매할 수 있으며 재판매는 최대 {resaleDays}일 동안 보류됩니다. 재판매를 하려면 Premium 사용자여야 합니다.
@@ -2064,6 +2156,7 @@ Feature.Catalog.Response.ReportSubmitted,신고 제출이 완료되었으며 해
 Feature.Catalog.Response.TakenOffSaleSuccess,판매 중단 완료
 Feature.Catalog.Search.LandingPage.Empty,"색상, 유형, 테마 등으로 검색"
 Feature.Catalog.Search.Placeholder,"아이템, 의상 검색"
+Feature.Catalog.Text.OfferAppliedToHighestItem,가장 높은 아이템에 혜택 적용됨
 Feature.Catalog.Title.AvatarSharePanel,아바타 공유 준비를 마쳤습니다
 Feature.Catalog.Title.Checkout,
 Feature.Catalog.Title.Checkout.ClearAllItemsOnAvatarTitle,모든 아이템을 지울까요?
@@ -2083,11 +2176,13 @@ Feature.Catalog.Title.CheckoutPlural,{count}개 아이템 결제
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,맨 아래 레이어를 바꾸시겠어요?
 Feature.Catalog.Title.RentalFtuxText,아이템을 대여해서 3일 동안 이용해보세요
+Feature.Catalog.Toast.AddedToFavorites,즐겨찾기에 추가됨
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,아이템 {number}개를 보유 중이므로 가격이 변경되었습니다
 Feature.Catalog.Toast.AvatarUnderReview,"아바타 검토 중
 아바타 검토가 완료된 후에 공유할 수 있습니다"
 Feature.Catalog.Toast.FavoritedLook,아바타를 즐겨찾기에 추가했습니다!
 Feature.Catalog.Toast.LinkCopied,링크가 클립보드에 복사되었습니다
+Feature.Catalog.Toast.RemovedFromFavorites,즐겨찾기에서 제거되었습니다
 Feature.Catalog.Toast.UnfavoritedLook,아바타를 즐겨찾기에서 제거했습니다
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
@@ -2114,7 +2209,7 @@ Feature.Chat.Action.StartChatWithFriends,
 Feature.Chat.Action.Stay,머물기
 Feature.Chat.Action.Translate,번역
 Feature.Chat.Action.UnmuteVoice,음소거 해제
-Feature.Chat.Action.ViewAssetDetails,자세히 보기
+Feature.Chat.Action.ViewAssetDetails,
 Feature.Chat.Description.ConversationInviteGroupCreatedOn,{creation_date}에 생성된 그룹
 Feature.Chat.Description.CreateUnfilteredChatCell,"이 그룹의 모든 멤버가 초대되지만, 요건을 충족하지 않은 멤버는 참여할 수 없습니다."
 Feature.Chat.Description.CreateUnfilteredChatDialog,"확장된 채팅 기능을 이용하면 필터링 없는 채팅이 가능합니다.
@@ -2167,10 +2262,14 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} 님이 내게 답장 �
 Feature.Chat.Label.Group.YouRepliedToThem,{DISPLAY_NAME} 님에게 답장 보냄
 Feature.Chat.Label.GroupName,그룹 이름
 Feature.Chat.Label.HoverToReplyTooltip,답장하려면 마우스를 위로 가져가세요
+Feature.Chat.Label.InGameFriendsChatNotifications,게임 내 친구 채팅 알림
+Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,답장하려면 길게 누르세요
 Feature.Chat.Label.Members,멤버
 Feature.Chat.Label.MessageNotAvailable,이 메시지는 이용할 수 없습니다
+Feature.Chat.Label.MuteInGameChatToastNotifications,게임 내 채팅 알림 음소거
 Feature.Chat.Label.New,
+Feature.Chat.Label.NoChatFound,채팅을 찾을 수 없음
 Feature.Chat.Label.NoDescriptionYet,설명이 아직 없습니다.
 Feature.Chat.Label.NotImplementedMessageType,이 메시지를 표시할 수 없어요.
 Feature.Chat.Label.NotSet,설정 안 됨
@@ -2184,7 +2283,7 @@ Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,자신에게 답장
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 님의 말...
 Feature.Chat.Label.ReplyingToYourself,회원님의 말...
 Feature.Chat.Label.SearchConnections,인맥 검색
-Feature.Chat.Label.SearchFriends,
+Feature.Chat.Label.SearchFriends,친구 검색
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,체험 내 채팅 알림 음소거:
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
@@ -2209,6 +2308,7 @@ Feature.Chat.Message.AddConnectionsPartyLimitSingular,개인정보 설정에 따
 Feature.Chat.Message.AddFriendsLimit,채팅 그룹에 추가할 수 있는 친구는 최대 {connectionsNum}명입니다.
 Feature.Chat.Message.AddFriendsPartyLimit,파티에 참여할 수 있는 친구 수는 최대 {connectionsNum}명입니다.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,개인정보 설정으로 인해 친구 1명과만 파티를 구성할 수 있습니다.
+Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} 님이 표시할 수 없는 메시지를 보냈습니다.
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,채팅이 비활성화되었습니다. 개인정보 설정에서 활성화할 수 있습니다.
 Feature.Chat.Message.ChatUnavailableRegion,현재 이 지역에서는 채팅을 이용할 수 없습니다.
 Feature.Chat.Message.ChatUnavailableWithUser,현재 이 사용자와는 채팅을 할 수 없습니다.
@@ -2260,25 +2360,22 @@ Feature.Chat.Text.NoConnections,아직 추가한 인맥이 없습니다. 시작�
 Feature.Chat.Text.NoFriends,아직 추가한 친구가 없습니다. 시작하려면 먼저 Roblox에서 친구를 찾아 추가하세요.
 Feature.Chat.Title.FriendsChat,친구 채팅
 Feature.Chat.Title.MuteChatNotifications,게임 플레이 중 친구의 채팅 알림 음소거
+Feature.Chat.Title.NewChat,새 채팅
 Feature.Chat.Toast.Error.InvalidUserSelected,이 목록에는 추가할 수 없는 사람이 한 명 이상 있습니다
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,친구들이 나를 찾을 수 있게 해 주세요
-Feature.Contacts.Action.FindFriends,친구 찾기
 Feature.Contacts.Action.Invite,초대
 Feature.Contacts.Action.Search,연락처 검색
-Feature.Contacts.Action.SyncContacts,연락처 동기화
 Feature.Contacts.Description.AddFromContactsDescription,Roblox에서 인맥이 될 수 있도록 연락처를 추가하세요. 두 사용자가 모두 13세 이상으로 확인되면 신뢰할 수 있는 인맥이 됩니다.
 Feature.Contacts.Description.AddFromContactsTrustedFriends,연락처를 추가하여 Roblox에서 사용자를 연결하세요. 두 사용자 모두 연령 인증을 완료한 만 13세 이상이면 신뢰할 수 있는 친구로 설정됩니다.
 Feature.Contacts.Description.ContactsList,누구와 함께 Roblox를 탐험하고 싶나요? Roblox 친구 초대 링크를 보내세요!
 Feature.Contacts.Description.ContactsListDescription,연락처 목록의 사람들과 인맥을 맺고 Roblox를 더 풍성하게 즐기세요.
 Feature.Contacts.Description.ContactsMixedList,"누구와 함께 Roblox를 탐험하고 싶나요? Roblox에서 친구를 추가하거나, 연락처 목록에 있는 사람들에게 친구 요청 링크를 보내세요."
 Feature.Contacts.Description.ContactsProfileView,회원님의 연락처 {contactName}(이)가 Roblox에 있습니다. 친구가 되면 이들의 전체 프로필을 볼 수 있습니다.
-Feature.Contacts.Description.ExploreWithFriends,아는 사람들과 함께 체험에 참가하세요
-Feature.Contacts.FindFriendsBanner.Button,
+Feature.Contacts.FindFriendsBanner.Button,친구 찾기
 Feature.Contacts.FindFriendsBanner.Description,휴대폰 번호를 추가해 Roblox에 있는 친구들을 확인하세요.
 Feature.Contacts.FindFriendsBanner.DescriptionPV,Roblox에서 친구들의 연락처가 이용 가능할 경우 여기에 표시됩니다.
 Feature.Contacts.FindFriendsBanner.DescriptionV2,휴대폰 번호를 추가해 친구들과 소통하세요.
-Feature.Contacts.Heading.ExploreWithFriends,친구와 함께 즐기세요
 Feature.Contacts.Heading.HelpFriendsFindYou,
 Feature.Contacts.Heading.LetFriendsFindYou,
 Feature.Contacts.Heading.SettingSaved,설정을 저장했습니다.
@@ -2334,6 +2431,7 @@ Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,이 체험을 플레�
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,
+Feature.ExperienceDetails.PlayButtonText.PlayDemo,데모 플레이
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,잠금 해제
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -2350,6 +2448,7 @@ Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityRegionalComplianc
 Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated,이 체험은 등급 평가를 거치지 않아 이용이 불가능합니다
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom,이 체험은 {device}에서 이용할 수 없습니다
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault,이 체험은 사용자 기기에서 이용할 수 없습니다
+Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted,이 체험은 본 기기에서 구매할 수 없습니다
 Feature.ExperienceDetails.UnplayableError.GameUnapproved,
 Feature.ExperienceDetails.UnplayableError.IncorrectConfiguration,
 Feature.ExperienceDetails.UnplayableError.InsufficientPermissionFriendsOnly,이 체험에 대한 이용 권한이 없습니다
@@ -2369,7 +2468,6 @@ Feature.ExperienceDetails.UpdateMaturitySettingModal.Label.Title,
 Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
-Feature.FAE.Action.UnlockTrial,평가판 잠금 해제
 Feature.FAE.CheckIfYouCanJoinGame,이 게임에 참가할 수 있는지 확인해 보겠습니다.
 Feature.FAE.Label.ChatWithFriends,
 Feature.FAE.Label.DayLeft,
@@ -2424,6 +2522,7 @@ Feature.Friends.Action.ShareQR,QR 코드 공유
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,차단 해제
 Feature.Friends.Action.Unfriend,
+Feature.Friends.Action.ViewMore,
 Feature.Friends.Action.ViewPlatformProfile,게이머 카드 보기
 Feature.Friends.Button.AddViaLink,링크를 통해 추가
 Feature.Friends.Button.GotIt,
@@ -2526,7 +2625,7 @@ Feature.Friends.Label.Request,
 Feature.Friends.Label.SearchFriends,
 Feature.Friends.Label.SentFromWithContext,전송 위치: {gameName}
 Feature.Friends.Label.SingularMutualFriend,
-Feature.Friends.Label.Suggested,
+Feature.Friends.Label.Suggested,추천
 Feature.Friends.Label.YourLinkedParent,연결된 보호자
 Feature.Friends.LinkText.LearnMore,자세히 알아보기
 Feature.Friends.Message.DiscoverableSettings,내 휴대폰 번호를 알고 있는 Roblox 사용자에게 나를 추천할까요?
@@ -2615,11 +2714,13 @@ Feature.GameDetails.Message.HelpImproveExperience,체험 개선을 도와주세�
 Feature.GameDetails.Message.HidingExperienceQuestion,이 체험을 숨기는 이유에 대해 알려주세요.
 Feature.GameDetails.Message.PurchaseGameV2,{X} Robux를 사용해 {gameName} 체험을 잠금 해제할까요?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,일시적인 오류로 인해 스폰서십 정보를 표시할 수 없습니다.
-Feature.GameDetails.Message.SuggestLessExperiences,이제부터 이런 체험은 덜 보여 드릴게요
+Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"이 스폰서 콘텐츠는 적절한 콘텐츠를 제공하기 위해 기기 정보, 위치, 나이와 같은 개인 맞춤화되지 않은 요소를 기반으로 표시됩니다. 이 체험의 크리에이터는 {CreatorName}입니다. 스폰서십 비용은 {PayerName}에서 지급했습니다. 자세한 내용은 계정 설정 내 '개인정보 보호 및 콘텐츠 성숙도' 페이지에서 확인하실 수 있습니다."
+Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"이 스폰서 콘텐츠는 위치, 기기 정보, 연령, 플랫폼 이용 행태 등 다양한 요소를 기반으로 관련성 높은 콘텐츠를 제공하기 위해 표시됩니다. 이 체험의 크리에이터는 {CreatorName}입니다. 스폰서십 비용은 {PayerName}에서 지급했습니다. 자세한 내용은 계정 설정 내 '개인정보 및 콘텐츠 수위' 페이지에서 확인하실 수 있습니다."
+Feature.GameDetails.Message.SponsoredDisclosure.U18,"이 스폰서 콘텐츠는 적절한 콘텐츠를 제공하기 위해 기기 정보, 위치, 나이와 같은 개인 맞춤화되지 않은 요소를 기반으로 표시됩니다. 이 체험의 크리에이터는 {CreatorName}입니다. 스폰서십을 지불한 자는 {PayerName}입니다."
 Feature.GameDetails.Message.SuggestLessOften,이런 제안은 앞으로 덜 보여 드릴게요
 Feature.GameDetails.RatingPercentOnly,평점 {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
-Feature.GameFollows.LabelNotifications,알림
+Feature.GameFollows.LabelNotifications,
 Feature.GameFollows.TooltipFollowLimitReached,제한에 도달했어요. 이 체험을 팔로우하려면 다른 체험을 언팔로우하세요.
 Feature.GameFollows.TooltipNotificationsLimitReached,한도에 도달했습니다. 먼저 다른 체험에 대한 알림을 끄세요.
 Feature.GameFollows.TooltipTurnedOffNotifications,{experienceName}에 대한 알림 사용이 중지되었습니다
@@ -2729,7 +2830,7 @@ Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,콘텐츠
 Feature.Home.HeadingFriends,친구 ({friendCount}명)
 Feature.Home.Label.HappeningNow,지금 진행 중
 Feature.Home.PeopleList.ChatWith,{username} 님과 채팅
-Feature.Home.Robux,Robux
+Feature.Home.Robux,
 Feature.InExperienceIntervention.Action.LetUsKnow,의견을 전해 주세요
 Feature.InExperienceIntervention.Action.Understand,이해했습니다
 Feature.InExperienceIntervention.Description.BeRespectful,앞으로는 규칙을 준수하고 타인을 존중해 주세요.
@@ -2786,6 +2887,7 @@ Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,내 전화번호를 알고 있는 사람들이 Roblox에서 나를 친구로 추가할 수 있도록 도와줍니다
 Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,친구 찾기 켜기
 Feature.Moments.Action.AddMusic,음악 추가
+Feature.Moments.Action.AddSticker,스티커 추가
 Feature.Moments.Action.AddText,텍스트 추가
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
@@ -2793,6 +2895,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,펼치기
+Feature.Moments.Action.GenerateText,생성
 Feature.Moments.Action.Hide,세부 정보 숨기기
 Feature.Moments.Action.HowToCapture,캡처 방법
 Feature.Moments.Action.Join,
@@ -2814,6 +2917,7 @@ Feature.Moments.Description.HowToCaptureStep2,캡처 제어를 활성화합니�
 Feature.Moments.Description.HowToCaptureStep3,게임 플레이 사진 및 동영상을 캡처합니다.
 Feature.Moments.Description.LeaveMomentsCreation,"모든 변경 사항이 사라지지만, 이 캡처는 <b>캡처</b> 갤러리에서 계속 확인하실 수 있습니다."
 Feature.Moments.Description.NoMusicResults,음악을 찾을 수 없음
+Feature.Moments.Description.NonInfiniteScrollEndBody,모멘트에서 정지 지점에 도달했습니다. 계속 보려면 아래를 누르세요.
 Feature.Moments.Description.NothingHereYet,아직 아무것도 없네요...
 Feature.Moments.Description.PublishMoment,모멘트에 대한 설명을 작성해 주세요
 Feature.Moments.Description.StayFriendly,친근한 분위기를 유지해 보세요
@@ -2824,7 +2928,9 @@ Feature.Moments.Label.AttemptingJoinExperience,{placeName}에 참가하려고 �
 Feature.Moments.Label.CaptureLibrary,캡처 라이브러리
 Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 없습니다.
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
-Feature.Moments.Label.Error,문제가 발생했습니다. 다시 시도하세요.
+Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,나중에 다시 확인하거나 나만의 모멘트를 만들어 보세요.
+Feature.Moments.Label.FeedEndTitle,모두 확인했습니다
 Feature.Moments.Label.FeedFailedToLoad,피드를 불러오지 못했습니다.
 Feature.Moments.Label.FeedMyMoments,내 모멘트
 Feature.Moments.Label.FeedTrending,트렌드
@@ -2838,22 +2944,32 @@ Feature.Moments.Label.MomentFailedToPostBody,문제가 발생했습니다.
 Feature.Moments.Label.MomentFailedToPostTitle,모멘트를 게시하지 못했습니다
 Feature.Moments.Label.MomentPublishedBody,모멘트 게시가 완료되었습니다.
 Feature.Moments.Label.MomentPublishedTitle,모멘트 게시됨
+Feature.Moments.Label.MomentUnavailable,모멘트 이용 불가
 Feature.Moments.Label.MomentUnavailableDefault,이 모멘트는 이용할 수 없습니다.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,지금은 모두 확인했습니다
 Feature.Moments.Label.Photos,사진
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
 Feature.Moments.Label.PublishingRodeoBody,오래 걸리지 않을 겁니다.
 Feature.Moments.Label.Reactions,반응
+Feature.Moments.Label.ReportReason.BreaksRules,이 게시물이 규칙을 위반하였습니다
+Feature.Moments.Label.ReportReason.IntellectualProperty,이 게시물은 나의 지식 재산권을 침해합니다
 Feature.Moments.Label.ReportSubmittedBody,
 Feature.Moments.Label.ReportSubmittedTitle,신고 제출 완료
+Feature.Moments.Label.RobloxPartnerContent,Roblox 파트너 콘텐츠
 Feature.Moments.Label.RodeoPublishingTitle,모멘트 게시 중
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Roblox의 모멘트
 Feature.Moments.Label.StayFriendlyModeration,
+Feature.Moments.Label.TextGeneratedBody,AI가 생성한 오버레이 및 설명 추가됨
+Feature.Moments.Label.TextGeneratedTitle,텍스트 생성됨
+Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했습니다. 다시 시도해 보세요.
+Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,모멘트 삭제됨
+Feature.Moments.Title.ReportPost,게시물 신고
 Feature.Moments.Tooltip.Creation,체험에 참여하는 모든 사람이 내 모멘트를 볼 수 있습니다.
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,오류 신고
@@ -2982,11 +3098,11 @@ Feature.Profile.Description.EnterNicknameTextbox,닉네임을 입력하세요
 Feature.Profile.Description.InspectAndBuy,클릭하여 해당 친구의 룩을 보고 쇼핑하세요.
 Feature.Profile.Description.NicknamePrivacy,{displayName} 님만 볼 수 있습니다.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,이 사용자만 볼 수 있습니다.
-Feature.Profile.Description.QrCodeDescription,다른 사람이 나의 QR 코드를 스캔하면 Roblox에서 인맥이 될 수 있습니다. 실시간 QR 스캔을 통해 연결되는 13세 이상 사용자는 신뢰할 수 있는 인맥이 됩니다.
-Feature.Profile.Description.QrCodeDescription.FriendsRename,다른 사람들이 Roblox에서 내 QR 코드를 스캔하여 나와 연결하도록 허용하세요. 실시간 QR 스캔을 통해 연결되고 연령 인증을 완료한 만 13세 이상 사용자는 신뢰할 수 있는 친구로 설정됩니다.
+Feature.Profile.Description.QrCodeDescription,다른 사람들이 Roblox에서 내 QR 코드를 스캔하여 나와 연결하도록 허용하세요. 실시간 QR 스캔을 통해 연결되고 연령 인증을 완료한 만 13세 이상 사용자는 신뢰할 수 있는 친구로 설정됩니다.
+Feature.Profile.Description.QrCodeDescription.FriendsRename,
 Feature.Profile.Description.QrCodeScanning,"사람들이 QR 스캐너나 기기의 카메라로 내 Roblox QR 코드를 스캔하면, 바로 나를 친구로 추가할 수 있어요!"
-Feature.Profile.Description.RecognizeConnectionsByCustomName,맞춤 이름을 설정해 인맥을 더 쉽게 알아보세요. 연락처에서 가져온 이름과 맞춤 이름은 본인만 볼 수 있습니다.
-Feature.Profile.Description.RecognizeFriendsByCustomName,맞춤 이름을 설정해 더 쉽게 친구를 알아보세요. 연락처에서 가져온 이름과 맞춤 이름은 본인만 볼 수 있습니다.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,맞춤 이름을 설정해 더 쉽게 친구를 알아보세요. 연락처에서 가져온 이름과 맞춤 이름은 본인만 볼 수 있습니다.
+Feature.Profile.Description.RecognizeFriendsByCustomName,
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,아는 사람이 내 QR 코드를 스캔해 나를 추가하도록 합니다.
 Feature.Profile.Description.SelectNicknameDropdown,이름을 선택하세요
@@ -3001,6 +3117,7 @@ Feature.Profile.Description.SocialNetworksCaptionFriends,현재 친구에게 보
 Feature.Profile.Description.SocialNetworksCaptionNoOne,현재 아무에게도 보이지 않습니다.
 Feature.Profile.Description.UsernameInsufficientFunds,{icon}{rbx}가 부족해 사용자 이름을 변경할 수 없습니다. Robux를 구매할까요?
 Feature.Profile.Description.UsernamePrice,1000
+Feature.Profile.Header.BuyWholeLook,전체 룩 구매
 Feature.Profile.Header.InspectAndBuy,{username} 님의 아바타
 Feature.Profile.Header.InspectAndBuy.BuySection,합계({totalNumberOfItems}개 중 {numberOfSelectedItems}개 아이템)
 Feature.Profile.Header.InspectAndBuy.Tooltip,아바타 쇼핑하기
@@ -3065,8 +3182,8 @@ Feature.Profile.Message.InvalidAliasError,이름을 저장할 수 없습니다. 
 Feature.Profile.Message.NoExperienceAccess,{name}(을)를 이용할 수 있는 권한이 없습니다.
 Feature.Profile.Message.QRLoadFailed,불러오기 실패.
 Feature.Profile.Message.QRNofificationRequest,님이 내 QR 코드를 사용해 친구 요청을 보냈어요
-Feature.Profile.Message.QRNotificationRequest,님이 내 QR 코드를 사용해 인맥 요청을 보냈어요
-Feature.Profile.Message.QRNotificationRequest.FriendsRename,QR 코드를 통해 친구 요청을 받았습니다.
+Feature.Profile.Message.QRNotificationRequest,QR 코드를 통해 친구 요청을 받았습니다.
+Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,QR 스캐너
 Feature.Profile.Tooltip.CurrencyTransfer.Body,이제 Robux를 보낼 수 있습니다.
 Feature.Profile.Tooltip.CustomNameProfile,맞춤 이름을 설정해 더 쉽게 친구를 알아보세요.
@@ -3077,9 +3194,13 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,인증된 배지
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Close,
+Feature.QualtricsSurveyPrompt.Action.Continue,
+Feature.QualtricsSurveyPrompt.Action.Done,
+Feature.QualtricsSurveyPrompt.Action.Next,
 Feature.QualtricsSurveyPrompt.Action.Retry,
 Feature.QualtricsSurveyPrompt.Action.Send,
 Feature.QualtricsSurveyPrompt.Description.Error,
+Feature.QualtricsSurveyPrompt.Description.TakeAQuickSurvey,Roblox를 개선할 수 있도록 간단한 설문조사에 참여해 주세요.
 Feature.QualtricsSurveyPrompt.Heading.GiveUsFeedback,피드백을 보내주세요
 Feature.QualtricsSurveyPrompt.Response.SurveySubmitted,의견을 보내 주셔서 감사합니다!
 Feature.ReportAbuse.Action.AttachScreenshot,스크린샷 첨부
@@ -3101,7 +3222,7 @@ Feature.ReportAbuse.Action.Submit,
 Feature.ReportAbuse.Action.TextMute,{name} 님과의 채팅 차단
 Feature.ReportAbuse.DSAIllegal.ReportLink,유럽 연합 디지털 서비스법에 따른 불법 콘텐츠를 신고하세요.
 Feature.ReportAbuse.DSAIllegal.ReportPageTitle,불법 콘텐츠 신고
-Feature.ReportAbuse.Description.IpInfringementReportModal,<b>이 코드를 저장하세요.</b> 크리에이터 허브의 <b>지식 재산</b> 도구를 사용하여 <b>제거 요청</b>을 완료하려면 <b>이 코드가 필요합니다. 이 코드는 48시간 동안만 유효합니다.</b>
+Feature.ReportAbuse.Description.IpInfringementReportModal,<b>이 코드를 저장하세요.</b> <b>크리에이터 허브</b>의 <b>지적 재산</b> 도구를 사용하거나 이메일을 통해 <b>삭제 요청</b>을 완료할 때 필요합니다<i>(이용 약관에서 자세한 내용 참조)</i>. <b>이 코드는 48시간 동안만 유효합니다.</b>
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,강조 표시 모드를 사용해 신고
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,오류: 최대 5개의 동그라미만 가능
@@ -3124,7 +3245,6 @@ Feature.ReportAbuse.Label.FinishChatReport,채팅 신고 완료
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,동그라미로 문제에 강조 표시
 Feature.ReportAbuse.Label.HighlightProblemPrecise,문제 강조 표시
-Feature.ReportAbuse.Label.NoChatMessagesFound,채팅 메시지 찾을 수 없음
 Feature.ReportAbuse.Label.Optional,선택 사항
 Feature.ReportAbuse.Label.Person,
 Feature.ReportAbuse.Label.PleaseSelectOne,한 개를 선택해야 합니다.
@@ -3206,15 +3326,16 @@ Feature.RobloxSubscription.Action.TryItForFree,무료로 이용해 보기
 Feature.RobloxSubscription.Body.AlreadySubscribed,이미 Plus 구독을 통해 게임 내 혜택을 적용받고 계시네요.
 Feature.RobloxSubscription.Body.GenericError,현재 이 작업을 완료하지 못했습니다. 다시 시도해 보세요.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,현재 기기에서는 이 구독을 구매할 수 없습니다.
-Feature.RobloxSubscription.Description.AgeCheckTrial,나이 확인을 완료하여 Plus 혜택을 이용하고 연령에 맞는 기능을 이용하세요.
+Feature.RobloxSubscription.Description.AgeCheckTrial,나이 확인을 완료하고 감사 선물로 Roblox Plus 1주일 무료 체험 혜택을 받으세요. 무료 체험은 결제 수단 입력 없이 이용하실 수 있습니다.
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
-Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료로 비공개 서버 무제한 이용
+Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버
 Feature.RobloxSubscription.Label.BlackbirdPriceTag,{price}/{periodType}
 Feature.RobloxSubscription.Label.BlackbirdTr,Robux 무료로 보내기
 Feature.RobloxSubscription.Label.BlackbirdUpsellBanner,Roblox Plus로 {discountPercentage}% 할인받기
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"게임 내 아이템, 아바타 등 {discountPercent}% 할인"
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,{periodIndex}{periodType} 이후 이 아이템 {discountPercent}% 할인 
+Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,'계속하기'를 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다.
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"'무료 체험'을 클릭하면 {linkStart}Roblox 구독 약관{linkEnd}에 동의하는 것으로 간주됩니다. 무료 체험 기간은 1개월 후 종료되며, 매월 자동으로 요금이 청구됩니다. 언제든지 구독을 취소하실 수 있습니다."
 Feature.RobloxSubscription.Label.FreeTrialText,무료 체험하기
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,{boldStart}1개월 무료 이용{boldEnd} 후 {price}/{periodType}
@@ -3226,6 +3347,7 @@ Feature.RobloxSubscription.Title.GenericError,오류가 발생했습니다
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plus 구독하기
 Feature.RobloxSubscription.Title.UnsupportedPlatform,여기에서는 Roblox Plus를 이용할 수 없습니다
 Feature.SafetyDashboard.Heading.AccountStatus,계정 상태
+Feature.Schools.Label.Classmates,학급 친구
 Feature.Screentime.Content.ScreentimeLimitDialog,일일 스크린 타임 한도에 도달했습니다. Roblox에 액세스하려면 내일 다시 오세요.
 Feature.SecurityFeedback.Header.NewLogin,새로운 활동 알림
 Feature.Settings.Label.Error,
@@ -3316,11 +3438,10 @@ Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,전송 중
 Feature.SettingsHub.Label.Show,
 Feature.SettingsHub.Label.Unmute,
-Feature.SettingsHub.Label.WhichChatOptional,채팅 선택?(선택사항)
+Feature.SettingsHub.Label.VoiceChat,
 Feature.SettingsHub.Label.WhichPlayer,회원 선택
-Feature.SettingsHub.LanguageSelection.SettingLabel,체험 언어
+Feature.SettingsHub.LanguageSelection.SettingLabel,게임 언어
 Feature.SettingsHub.LanguageSelection.Unavailable,
-Feature.SettingsHub.Message.BlockConfirmation,이제 {DISPLAY_NAME} (@{RBX_NAME}) 님과는 더 이상 소통할 수 없게 됩니다.
 Feature.SettingsHub.Message.InviteToGameTitle,{PLACENAME}에서 함께 즐겨요
 Feature.SettingsHub.MethodOfAbuse.AvatarSubtitle,아바타의 복장이 부적절함
 Feature.SettingsHub.MethodOfAbuse.Other.Subtitle,"나를 계속 따라옴, 부적절한 셔츠를 입음 등"
@@ -3371,6 +3492,7 @@ Feature.SettingsHub.Prompt.Subtitle.Microphone,커뮤니티 규정 위반 가능
 Feature.SettingsHub.Prompt.Subtitle.MicrophonePermission,음성으로 채팅하려면 OS 설정으로 이동해 Roblox에서의 마이크 사용을 허용하세요
 Feature.SettingsHub.Prompt.Subtitle.MuteAnyoneAnytime,언제든지 다른 사용자를 음소거할 수 있습니다.
 Feature.SettingsHub.Prompt.Subtitle.NotAudible,설정에서 체험의 볼륨이 '0'으로 설정되어 있습니다. 음성을 들으려면 볼륨을 높이세요.
+Feature.SettingsHub.Prompt.Subtitle.NotAudibleVoiceChatVolume,설정에서 음성 채팅의 볼륨이 '0'으로 설정되어 있습니다. 음성을 들으려면 볼륨을 높이세요.
 Feature.SettingsHub.Prompt.Subtitle.Place,공간 음성 기능은 최대 플레이어가 30명 이하인 플레이스에서만 사용할 수 있습니다.
 Feature.SettingsHub.Prompt.Subtitle.Respect,이곳에 모인 우리들 모두가 즐거운 Roblox 라이프를 누릴 수 있도록 서로를 존중하는 태도를 보여 주세요.
 Feature.SettingsHub.Prompt.Subtitle.Retry,
@@ -3491,6 +3613,9 @@ Feature.Squads.Description.Invited,초대됨
 Feature.Squads.Description.InvitedToExperience,이미 누군가로부터 체험 초대를 받았습니다. 초대가 완료되면 다시 시도할 수 있습니다.
 Feature.Squads.Description.JoinAnotherParty,현재 활성 파티에 합류해 있습니다. 현재 파티를 탈퇴하고 이 파티로 전환하시겠어요?
 Feature.Squads.Description.JoinWithLowMemory,기기의 메모리가 부족합니다. 음성 사용 없이 합류하면 Roblox에서 충돌이 발생하는 것을 방지할 수 있습니다.
+Feature.Squads.Description.LuckyRecommendationRevealed,그룹 전체가 참가할 수 있습니다
+Feature.Squads.Description.LuckyRecommendationRolling,그룹에 적합한 게임 찾기
+Feature.Squads.Description.LuckyRecommendationRow,시작을 도와드릴게요.
 Feature.Squads.Description.ManyPeopleActive,{userCount}명 활동 중
 Feature.Squads.Description.NoResponse,응답 없음
 Feature.Squads.Description.NotGoing,참석하지 않음
@@ -3530,6 +3655,9 @@ Feature.Squads.Label.JoinParty,파티 합류
 Feature.Squads.Label.LeaveParty,파티 나가기
 Feature.Squads.Label.Loading,
 Feature.Squads.Label.LowMemory,메모리 부족
+Feature.Squads.Label.LuckyRecommendationRevealed,이 게임 플레이해 보기
+Feature.Squads.Label.LuckyRecommendationRolling,게임 선택
+Feature.Squads.Label.LuckyRecommendationRow,무엇을 플레이할지 모르시겠나요?
 Feature.Squads.Label.MultiplePeopleJoinedYourParty,여러 명이 파티에 참가했어요
 Feature.Squads.Label.MuteMic,마이크 음소거
 Feature.Squads.Label.Party,
@@ -3590,6 +3718,15 @@ Feature.Toast.VoteError.AssetNotVoteable,지금은 이 체험에 투표할 수 �
 Feature.Toast.VoteError.Default,실행 불가.
 Feature.Toast.VoteError.FloodCheckThresholdMet,너무 자주 투표를 하시는군요.
 Feature.Toast.VoteError.PlayGame,체험을 평가하려면 먼저 이 체험을 방문하셔야 합니다.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,규칙을 반복해서 위반했거나 위반 정도가 심각해 이 게임을 플레이하는 것이 금지되었습니다.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,규칙을 어기는 행동을 하셨기 때문에 이 게임을 플레이할 수 없습니다.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox에서 회원님의 이 게임 이용을 일시 정지했습니다
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Day,Roblox에서 1일 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Days,Roblox에서 {number}일 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hour,Roblox에서 1시간 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox에서 {number}시간 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox에서 1분 동안 회원님의 이 게임 이용을 정지했습니다
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox에서 {number}분 동안 회원님의 이 게임 이용을 정지했습니다
 Feature.VerificationUpsell.Action.AddPhone,휴대폰 번호 추가
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,음성 채팅을 위해 휴대폰 번호 추가
@@ -3694,15 +3831,18 @@ Features.OnDemandAds.Reward_Earned,보상을 획득했어요
 Features.Transfers.Action.BuyRobux,구매하기
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
+Features.Transfers.Action.TurnOnTwoStepVerification,2단계 인증 켜기
 Features.Transfers.Action.VPC.Ask,요청하기
 Features.Transfers.Action.VPC.AskParentBodyReceive,Robux를 받으려면 보호자의 허락을 받아야 합니다.
 Features.Transfers.Action.VPC.AskParentBodySend,Robux를 보내려면 보호자의 허락을 받아야 합니다.
 Features.Transfers.Action.VPC.AskParentTitle,보호자에게 허락 요청
 Features.Transfers.Body.DailyLimitExceededError,일일 Robux 선물 한도를 초과했습니다. 나중에 다시 시도하세요.
+Features.Transfers.Body.DailyLimitTwoStepVerificationUpsell,일일 Robux 전송 한도에 도달했습니다. 2단계 인증을 켜고 더 높은 한도를 적용받을 수 있는지 확인하세요.
 Features.Transfers.Body.ExpiredTransferError,활동이 없어서 {username} 님이 보낸 Robux가 만료되었습니다.
 Features.Transfers.Body.GenericReceiveError,현재 이 계정에서 Robux를 받을 수 없습니다.
 Features.Transfers.Body.GenericSentError,문제가 발생하여 Robux가 전송되지 않았습니다. 연결 상태를 확인하고 다시 시도하세요.
 Features.Transfers.Body.MonthlyLimitExceededError,월간 Robux 선물 한도를 초과했습니다. 나중에 다시 시도하세요.
+Features.Transfers.Body.MonthlyLimitTwoStepVerificationUpsell,월간 Robux 전송 한도에 도달했습니다. 2단계 인증을 켜고 더 높은 한도를 적용받을 수 있는지 확인하세요.
 Features.Transfers.Body.ReceiverLimitHitError,이 사용자는 현재 이 금액을 받을 수 없습니다. 더 적은 금액을 보내거나 나중에 다시 시도해 보세요.
 Features.Transfers.Body.TransferAmountBelowMinimumError,{minAmount} 이상의 Robux를 보내세요.
 Features.Transfers.Body.TransferAmountExceedsMaximumError,최대 {maxAmount}Robux를 보낼 수 있습니다.
@@ -3748,6 +3888,7 @@ IAPExperience.InsufficientRobux.Action.RobuxStore,Robux 상점으로 이동
 IAPExperience.InsufficientRobux.Text.BuyRobux,이 아이템을 구매하려면 {robux}를 구매하세요
 IAPExperience.InsufficientRobux.Text.CurrentBalance,
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,Robux가 부족해 이 아이템을 구매할 수 없습니다.
+IAPExperience.InsufficientRobux.Text.MissingRobux,
 IAPExperience.InsufficientRobux.Text.YouNeed,{robux}가 더 필요합니다. Robux 패키지를 추가로 구매한 후 체험으로 돌아오세요.
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux가 부족합니다
 IAPExperience.LeaveRoblox.Action.Cancel,
@@ -3817,8 +3958,7 @@ IAPExperience.PurchasePrompt.Label.GenericDiscountNoPercent,할인
 IAPExperience.PurchasePrompt.Label.Subtotal,소계
 IAPExperience.PurchasePrompt.Label.SubtotalWithItemCount,소계({itemCount}개 아이템)
 IAPExperience.PurchasePrompt.Label.Total,
-IAPExperience.PurchasePrompt.Label.TotalPrice,총 가격
-IAPExperience.PurchasePrompt.Label.TotalPriceV2,
+IAPExperience.PurchasePrompt.Label.TotalPriceV2,총 가격
 IAPExperience.PurchasePrompt.Text.BuyItemQuestion,{name} 아이템을 구매할까요?
 IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning,엔터테인먼트를 적당히 즐기며 합리적으로 소비하세요. {name} 아이템을 구매할까요?
 IAPExperience.PurchasePrompt.Text.Loading,
@@ -3879,18 +4019,14 @@ IAPExperience.U13Confirm.Title.Warning,주의!
 InGame.Chat.ErrorMessageAnimationPlaying,이 동작 중에는 감정 표현을 적용할 수 없습니다.
 InGame.Chat.ErrorMessageSwitchToR15,감정 표현을 적용하려면 R15 아바타로 전환하세요.
 InGame.Chat.Label.From,발신:
-InGame.Chat.Label.SystemMessagePrefix,시스템
-InGame.Chat.Label.TeamMessagePrefix,팀
+InGame.Chat.Label.SystemMessagePrefix,
+InGame.Chat.Label.TeamMessagePrefix,
 InGame.Chat.Label.To,수신:
 InGame.Chat.Response.EmoteNotAvailable,이 감정 표현은 사용할 수 없어요.
 InGame.Chat.Response.EmotesNotSupported,여기서는 감정 표현을 사용할 수 없어요.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,지금은 감정 표현을 사용할 수 없어요.
 InGame.Chat.Response.EmotesWrongAvatarType,R15 아바타만 감정 표현을 사용할 수 있어요.
-InGame.CommonUI.Badge.BadgeText,베타
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"커뮤니티 가이드라인을 위반하는 사람들을 만나게 될 경우 신고해 주세요. 음성 서비스 사용에 옵트인한 경우, Roblox는 규정 준수 확인, 안전, 서비스 및 툴 개선을 위해 플랫폼의 모든 위치에서 음성을 녹음합니다. 음성 서비스를 계속해서 사용하면 Roblox가 이러한 목적으로 내 음성 녹음 내용을 수집, 사용 및 저장하는 데 동의하게 됩니다. 음성 기능은 언제든지 옵트아웃할 수 있습니다."
-InGame.CommonUI.Badge.Popup.HeaderList,베타 기능 중 한 가지 이상 사용에 옵트인했습니다:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -3916,6 +4052,7 @@ InGame.ConnectionError.Action.ViewCollaborators,공동 작업자 보기
 InGame.ConnectionError.AndroidAnticheatKick,Roblox에서 누락되거나 손상된 파일을 감지했습니다. Roblox를 삭제한 후 공식 앱 스토어에서 다시 설치하세요.
 InGame.ConnectionError.AndroidEmulatorKick,"플레이스 편집 액세스가 없는 계정은 에뮬레이터 사용이 허용되지 않습니다. 에뮬레이터를 사용하지 않았다면, 이 오류 코드를 지원 센터에 문의해 알려주세요."
 InGame.ConnectionError.Button.Reconnect,재연결
+InGame.ConnectionError.Button.ReconnectNow,지금 다시 연결
 InGame.ConnectionError.ConnectErrors,체험에 연결하지 못했습니다. 다시 시도하세요.
 InGame.ConnectionError.ConnectionBanned,체험에 연결하지 못했습니다. 이 체험에서 차단되었습니다.
 InGame.ConnectionError.ConnectionFailedRobloxVersion,체험에 연결하지 못했습니다. Roblox가 이전 버전입니다. 업데이트한 후에 다시 시도하세요.
@@ -3980,6 +4117,7 @@ InGame.ConnectionError.DisconnectTryAgain,체험 연결이 끊어졌습니다. �
 InGame.ConnectionError.DisconnectVerboselyModeratedGame,모두를 안전하게 보호하기 위해 사람들이 규칙을 너무 자주 위반한 이 서버의 연결을 해제했습니다. 커뮤니티 규정의 규칙을 숙지해 Roblox를 계속 안전한 공간으로 유지해 주세요.
 InGame.ConnectionError.DisconnectWrongVersion,
 InGame.ConnectionError.Heading.VRDisconnected,헤드셋 연결 끊김
+InGame.ConnectionError.Joining,서버 입장 중
 InGame.ConnectionError.Message.ChannelName,채널: {CHANNEL_NAME}
 InGame.ConnectionError.Message.ErrorCode,오류 코드: {ERROR_CODE}
 InGame.ConnectionError.Message.RestartApp,체험을 계속하려면 앱을 다시 시작하세요.
@@ -3999,11 +4137,15 @@ InGame.ConnectionError.PlacelaunchRestricted,체험 상태가 변경되어 더 �
 InGame.ConnectionError.PlacelaunchUnauthorized,이 체험에 참가할 권한이 없습니다.
 InGame.ConnectionError.PlacelaunchUserLeft,함께 방문하려던 사용자가 체험을 나갔습니다.
 InGame.ConnectionError.PlacelaunchUserPrivacyUnauthorized,개인정보 설정으로 인해 이 서버에 참가할 수 없습니다.
+InGame.ConnectionError.Queue,내 순서: {POSITION}
 InGame.ConnectionError.ReconnectFailed,재연결에 실패했어요. 다시 시도하세요
-InGame.ConnectionError.RemoteAttestationBootValidationFailure,이 플레이스를 이용하려면 신뢰할 수 있는 운영 체제가 필요합니다. 지원되는 기기에서 Roblox를 실행하고 부트 로더가 잠겨 있는지 확인하세요.
-InGame.ConnectionError.RemoteAttestationGeneralFailure,"Roblox에서 게임 무결성을 확인할 수 없습니다. 운영 체제가 신뢰할 수 있고 최신 버전인지 확인한 다음, 공식 다운로드 위치에서 Roblox를 다시 설치하세요."
-InGame.ConnectionError.RemoteAttestationOSOutOfDate,이 플레이스를 이용하려면 최신 버전의 Android가 설치되어 있어야 합니다. 운영 체제가 최신 버전인지 확인하세요.
-InGame.ConnectionError.RemoteAttestationTimeout,네트워크 문제로 인해 Roblox에서 게임 무결성을 확인할 수 없습니다. 다시 연결해 주세요.
+InGame.ConnectionError.ReconnectingAttempt,다시 연결하는 중({RBX_ATTEMPT}번째 시도)...
+InGame.ConnectionError.ReconnectingAttemptInSecond,1초 후 다시 연결({RBX_ATTEMPT}번째 시도)...
+InGame.ConnectionError.ReconnectingAttemptInSeconds,{RBX_SECONDS}초 후 다시 연결({RBX_ATTEMPT}번째 시도)...
+InGame.ConnectionError.RemoteAttestationBootValidationFailure,이 게임을 플레이하려면 신뢰할 수 있는 운영 체제가 필요합니다. 지원되는 기기에서 Roblox를 실행하고 부트 로더가 잠겨 있는지 확인하세요.
+InGame.ConnectionError.RemoteAttestationGeneralFailure,"Roblox에서 앱의 무결성을 확인할 수 없습니다. 운영 체제가 신뢰할 수 있고 최신 버전인지 확인한 다음, 공식 다운로드 위치에서 Roblox를 다시 설치하세요."
+InGame.ConnectionError.RemoteAttestationOSOutOfDate,이 게임을 이용하려면 최신 버전의 Android가 설치되어 있어야 합니다. 운영 체제가 최신 버전인지 확인하세요.
+InGame.ConnectionError.RemoteAttestationTimeout,네트워크 문제로 인해 Roblox에서 앱의 무결성을 확인할 수 없습니다. 다시 연결해 주세요.
 InGame.ConnectionError.RemoteAttestationUnsupported,이 게임은 추가 하드웨어 보안 요건을 활성화했습니다. 지원되는 기기에서 Roblox를 실행하세요.
 InGame.ConnectionError.ServerShutdown,체험 연결이 끊어졌습니다. 서버가 종료되었습니다.
 InGame.ConnectionError.TeleportErrors,예기치 못한 오류로 인해 텔레포트에 실패했습니다. 다시 시도해 보세요.
@@ -4083,9 +4225,9 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,저장 권한 활성화
 InGame.NotificationScript2.Capture.Success.ToastText,
 InGame.NotificationScript2.FriendRequestEvent.Accept,이제 {RBX_NAME} 님과 친구예요!
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,인맥 요청을 받았어요!
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,친구 요청을 보냈어요!
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
-InGame.NotificationScript2.Message.FriendRequestEvent.Sent,친구 요청을 보냈어요!
+InGame.NotificationScript2.Message.FriendRequestEvent.Sent,
 InGame.NotificationScript2.Screenshot.ButtonText,폴더 열기
 InGame.NotificationScript2.Screenshot.Description,스크린샷 폴더에서 확인하세요.
 InGame.NotificationScript2.Screenshot.Title,스크린샷 찍기 완료
@@ -4112,7 +4254,6 @@ InGame.Presence.Label.InGame,체험 이용 중
 InGame.Presence.Label.InStudio,Studio 사용 중
 InGame.Presence.Label.Offline,
 InGame.Presence.Label.Online,
-InGame.Presence.Label.RobloxStudio,
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage,친구 {RBX_NAME} 님이 체험에 참가했어요.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <스피커> : 스피커 음소거.

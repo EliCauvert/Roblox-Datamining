@@ -85,7 +85,8 @@ if game:DefineFastFlag("SlimDevConsole2", false) then
 	end
 	t.SlimTintMode = {
 		name = "SlimTintMode",
-		description = "None - No tint will be applied.\nLOD - Distinct colors for each LOD. Blue is always the lowest.\nMeshes - Distinct colors for each mesh.\nMeshResourcePtr - Distinct colors for each shared Mesh Resource.\nContentId - Distinct colors based on Content Id.\nZone - Green for HL zone (datamodel is present), Yellow for LL zone (datamodel is absent).",
+		description = "Color-codes meshes by the selected debug criterion. Select a mode from the dropdown to visualize SLIM streaming behavior.",
+		learnMoreUrl = "https://create.roblox.com/docs/reference/engine/enums/SlimTintMode",
 		type = "Tint",
 		kind = "Dropdown",
 		getter = "GetTintMode",

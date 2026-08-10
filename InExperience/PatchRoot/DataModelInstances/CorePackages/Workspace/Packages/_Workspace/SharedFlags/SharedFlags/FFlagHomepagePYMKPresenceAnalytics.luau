@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagHomepagePYMKPresence) and game:DefineFastFlag("HomepagePYMKPresenceAnalytics", false)

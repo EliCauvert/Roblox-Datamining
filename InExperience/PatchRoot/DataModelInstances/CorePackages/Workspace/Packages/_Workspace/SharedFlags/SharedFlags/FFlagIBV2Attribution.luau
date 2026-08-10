@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("IBV2Attribution", false)

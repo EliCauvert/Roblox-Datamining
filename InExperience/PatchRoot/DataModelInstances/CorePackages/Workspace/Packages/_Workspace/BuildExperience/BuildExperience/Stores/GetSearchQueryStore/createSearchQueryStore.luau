@@ -3,7 +3,7 @@ local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local myStatsExperienceSearchDebounceMs = game:DefineFastInt("MyStatsExperienceSearchDebounceMs", 200)
 
-return function(p0) --[[ line: 48 | named "createSearchQueryStore" ]]
+return function(p0) --[[ line: 47 | named "createSearchQueryStore" ]]
 	-- upvalues: myStatsExperienceSearchDebounceMs (ref), signalsModule (ref), signalsReactModule (ref)
 	p0 = p0 or {}
 	local debounceMs = p0.debounceMs or myStatsExperienceSearchDebounceMs
@@ -13,7 +13,7 @@ return function(p0) --[[ line: 48 | named "createSearchQueryStore" ]]
 	local var9, var10 = signalsModule.createSignal("")
 	local var11 = nil
 	
-	local function _() --[[ line: 59 | named "cancelPending" ]]
+	local function _() --[[ line: 58 | named "cancelPending" ]]
 		-- upvalues: var11 (write), cancel (ref)
 		if var11 ~= nil then
 			pcall(cancel, var11)
@@ -23,16 +23,16 @@ return function(p0) --[[ line: 48 | named "createSearchQueryStore" ]]
 	
 	return {
 		getDraftQuery = var7,
-		useDraftQuery = function() --[[ line: 95 ]]
+		useDraftQuery = function() --[[ line: 94 ]]
 			-- upvalues: signalsReactModule (copy), var7 (ref)
 			return signalsReactModule.useSignalState(var7)
 		end,
 		getDebouncedQuery = var9,
-		useDebouncedQuery = function() --[[ line: 99 ]]
+		useDebouncedQuery = function() --[[ line: 98 ]]
 			-- upvalues: signalsReactModule (copy), var9 (ref)
 			return signalsReactModule.useSignalState(var9)
 		end,
-		setQuery = function(value) --[[ line: 69 ]]
+		setQuery = function(value) --[[ line: 68 ]]
 			-- upvalues: var8 (ref), var11 (write), cancel (ref), var9 (ref), debounceMs (ref), schedule (ref), var10 (ref)
 			var8(value)
 			
@@ -43,13 +43,13 @@ return function(p0) --[[ line: 48 | named "createSearchQueryStore" ]]
 			if value == var9() then
 				return
 			end
-			var11 = schedule(debounceMs / 1000, function() --[[ line: 79 ]]
+			var11 = schedule(debounceMs / 1000, function() --[[ line: 78 ]]
 				-- upvalues: var11 (copy), var10 (copy), value (ref)
 				var11 = nil
 				var10(value)
 			end)
 		end,
-		clear = function() --[[ line: 85 ]]
+		clear = function() --[[ line: 84 ]]
 			-- upvalues: var11 (write), cancel (ref), var8 (ref), var10 (ref)
 			if var11 ~= nil then
 				pcall(cancel, var11)
@@ -58,7 +58,7 @@ return function(p0) --[[ line: 48 | named "createSearchQueryStore" ]]
 			var8("")
 			var10("")
 		end,
-		destroy = function() --[[ line: 91 ]]
+		destroy = function() --[[ line: 90 ]]
 			-- upvalues: var11 (write), cancel (ref)
 			if var11 ~= nil then
 				pcall(cancel, var11)

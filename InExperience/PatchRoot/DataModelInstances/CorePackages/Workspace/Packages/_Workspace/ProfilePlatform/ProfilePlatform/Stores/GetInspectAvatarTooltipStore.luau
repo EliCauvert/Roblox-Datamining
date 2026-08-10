@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ProfilePlatform").Parent.Signals).createComputed(require(script.createInspectAvatarTooltipStore))

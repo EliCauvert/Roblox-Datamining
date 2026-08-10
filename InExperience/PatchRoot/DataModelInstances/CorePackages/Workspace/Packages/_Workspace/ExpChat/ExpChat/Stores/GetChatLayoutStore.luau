@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Signals).createComputed(require(script.createChatLayoutStore))

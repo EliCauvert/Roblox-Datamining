@@ -17,61 +17,52 @@ local previewPanelModule = require(avatarSwitcher.Components.PreviewPanel)
 local respawnDialogContainerModule = require(avatarSwitcher.Components.Modals.RespawnDialogContainer)
 local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
 local experienceAvatarSupportTypeModule = require(avatarSwitcher.Enums.ExperienceAvatarSupportType)
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAvatarSwitcherUiFixes = avatarExperienceFlagsModule.FFlagAvatarSwitcherUiFixes
-local fFlagAXAvatarTimeoutFlowIE = avatarExperienceFlagsModule.FFlagAXAvatarTimeoutFlowIE
-local timeoutBanner = avatarExperienceCommonModule.Components.TimeoutBanner
+local fFlagAvatarSwitcherUiFixes = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherUiFixes
+local timeoutBanner = require(parent.AvatarExperienceCommon).Components.TimeoutBanner
 
-return function(p0) --[[ line: 43 | named "AvatarSwitcherContainer" ]]
-	-- upvalues: useTokens (ref), useSignalState (ref), getAvatarSwitcherStoreModule (ref), signalsReactModule (ref), experienceAvatarSupportTypeModule (ref), useUnifiedEventListenerInExperience (ref), reactModule (ref), topBarModule (ref), fFlagAXAvatarTimeoutFlowIE (ref), foundationModule (ref), timeoutBanner (ref), outfitsGridWithMessageModule (ref), previewPanelModule (ref), fFlagAvatarSwitcherUiFixes (ref), guiService (ref), emptyStateModule (ref), singleItemLayoutModule (ref), verticalLayoutModule (ref), horizontalLayoutModule (ref), respawnDialogContainerModule (ref)
-	local var17 = useTokens()
-	local var18 = useSignalState(getAvatarSwitcherStoreModule)
-	local var19 = useSignalState(var18.getIsEmpty)
-	local var20 = signalsReactModule.useSignalState(var18.getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport
+return function(p0) --[[ line: 42 | named "AvatarSwitcherContainer" ]]
+	-- upvalues: useTokens (ref), useSignalState (ref), getAvatarSwitcherStoreModule (ref), signalsReactModule (ref), experienceAvatarSupportTypeModule (ref), useUnifiedEventListenerInExperience (ref), reactModule (ref), topBarModule (ref), foundationModule (ref), timeoutBanner (ref), outfitsGridWithMessageModule (ref), previewPanelModule (ref), fFlagAvatarSwitcherUiFixes (ref), guiService (ref), emptyStateModule (ref), singleItemLayoutModule (ref), verticalLayoutModule (ref), horizontalLayoutModule (ref), respawnDialogContainerModule (ref)
+	local var15 = useTokens()
+	local var16 = useSignalState(getAvatarSwitcherStoreModule)
+	local var17 = useSignalState(var16.getIsEmpty)
+	local var18 = signalsReactModule.useSignalState(var16.getExperienceAvatarSupportType) == experienceAvatarSupportTypeModule.NoSupport
 	useUnifiedEventListenerInExperience()
-	reactModule.useEffect(function() --[[ line: 52 ]]
-		-- upvalues: var18 (ref)
-		task.spawn(function() --[[ line: 53 ]]
-			-- upvalues: var18 (copy)
-			var18.fetchExperienceAvatarSupportType()
+	reactModule.useEffect(function() --[[ line: 51 ]]
+		-- upvalues: var16 (ref)
+		task.spawn(function() --[[ line: 52 ]]
+			-- upvalues: var16 (copy)
+			var16.fetchExperienceAvatarSupportType()
 		end)
 	end, {})
-	local var21 = reactModule.createElement(topBarModule, { onClose = p0.toggleWindow })
-	local var22 = if fFlagAXAvatarTimeoutFlowIE then reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0 col gap-0" }, {
-		TopBar = var21,
+	local var19 = reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0 col gap-0" }, {
+		TopBar = reactModule.createElement(topBarModule, { onClose = p0.toggleWindow }),
 		TimeoutBanner = reactModule.createElement(foundationModule.View, { tag = "auto-y size-full-0 bg-surface-200" }, {
 			Banner = reactModule.createElement(timeoutBanner, { shouldFetch = true, shouldNavigateOnClick = false })
 		})
-	}) else var21
-	local var23 = reactModule.createElement(outfitsGridWithMessageModule)
-	local var24 = reactModule.createElement(previewPanelModule, { compactLayout = p0.verticalLayout })
+	})
+	local var20 = reactModule.createElement(outfitsGridWithMessageModule)
+	local var21 = reactModule.createElement(previewPanelModule, { compactLayout = p0.verticalLayout })
 	
 	return reactModule.createElement("Frame", {
 		Active = true,
 		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = var17.Color.OverMedia.OverMedia_0.Color3,
-		BackgroundTransparency = if fFlagAvatarSwitcherUiFixes then var17.Color.OverMedia.OverMedia_0.Transparency * guiService.PreferredTransparency else var17.Color.OverMedia.OverMedia_0.Transparency
+		BackgroundColor3 = var15.Color.OverMedia.OverMedia_0.Color3,
+		BackgroundTransparency = if fFlagAvatarSwitcherUiFixes then var15.Color.OverMedia.OverMedia_0.Transparency * guiService.PreferredTransparency else var15.Color.OverMedia.OverMedia_0.Transparency
 	}, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var17.Radius.Medium) }),
-		Layout = if var19 then reactModule.createElement(emptyStateModule, {
-			headerSlot = if fFlagAXAvatarTimeoutFlowIE then var22 else var21
-		}) elseif var20 then reactModule.createElement(singleItemLayoutModule, {
-			headerHeight = if fFlagAXAvatarTimeoutFlowIE then nil else var17.Size.Size_1200,
-			headerSlot = if fFlagAXAvatarTimeoutFlowIE then var22 else var21,
-			contentSlot = reactModule.createElement(foundationModule.View, { tag = "size-full-full padding-x-xlarge col gap-medium" }, { OutfitsGrid = var23 })
+		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var15.Radius.Medium) }),
+		Layout = if var17 then reactModule.createElement(emptyStateModule, { headerSlot = var19 }) elseif var18 then reactModule.createElement(singleItemLayoutModule, {
+			headerSlot = var19,
+			contentSlot = reactModule.createElement(foundationModule.View, { tag = "size-full-full padding-x-xlarge col gap-medium" }, { OutfitsGrid = var20 })
 		}, {}) elseif p0.verticalLayout then reactModule.createElement(verticalLayoutModule, {
-			headerHeight = if fFlagAXAvatarTimeoutFlowIE then nil else var17.Size.Size_1200,
-			headerSlot = if fFlagAXAvatarTimeoutFlowIE then var22 else var21,
-			topItemSlot = var24,
+			headerSlot = var19,
+			topItemSlot = var21,
 			bottomItemSlot = reactModule.createElement(foundationModule.View, {
 				tag = "size-full-full padding-x-xlarge padding-top-xlarge"
-			}, { OutfitsGrid = var23 })
+			}, { OutfitsGrid = var20 })
 		}) else reactModule.createElement(horizontalLayoutModule, {
-			headerHeight = if fFlagAXAvatarTimeoutFlowIE then nil else var17.Size.Size_1200,
-			headerSlot = if fFlagAXAvatarTimeoutFlowIE then var22 else var21,
-			leftItemSlot = reactModule.createElement(foundationModule.View, { tag = "size-full-full padding-x-xlarge" }, { OutfitsGrid = var23 }),
-			rightItemSlot = var24
+			headerSlot = var19,
+			leftItemSlot = reactModule.createElement(foundationModule.View, { tag = "size-full-full padding-x-xlarge" }, { OutfitsGrid = var20 }),
+			rightItemSlot = var21
 		}),
 		RespawnDialogContainer = reactModule.createElement(respawnDialogContainerModule, {
 			toggleWindow = p0.toggleWindow,

@@ -1,4 +1,4 @@
-﻿return function() --[[ line: 10 | named "getCurrentExperienceProject" ]]
+﻿return function() --[[ line: 9 | named "getCurrentExperienceProject" ]]
 	local gameId = game.GameId
 	local placeId = game.PlaceId
 	

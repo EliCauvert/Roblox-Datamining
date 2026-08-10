@@ -5,6 +5,7 @@
 	isStringEmail = require(script.isStringEmail),
 	getSingleSignOnUrls = require(script.getSingleSignOnUrls),
 	AppStorageUtilities = require(script.AppStorageUtilities),
+	scheduleAccountSwitchRelaunchFallback = require(script.scheduleAccountSwitchRelaunchFallback),
 	Base64 = require(script.Base64),
 	GetDxBlob = require(script.GetDxBlob),
 	GetCaptchaDataJson = require(script.GetCaptchaDataJson),
@@ -18,5 +19,8 @@
 	record2svCompletion = require(script.record2svCompletion),
 	PreviousAccountEntry = require(script.PreviousAccountEntry),
 	parseCredentialsProtocolIsAvailableResponse = require(script.parseCredentialsProtocolIsAvailableResponse),
-	getTwoStepLoginErrorKey = require(script.getTwoStepLoginErrorKey)
+	getTwoStepLoginErrorKey = require(script.getTwoStepLoginErrorKey),
+	isIosAuthServiceEnabled = require(script.isIosAuthServiceEnabled),
+	coarseLoginErrorBucket = require(script.coarseLoginErrorBucket),
+	isNonTerminalLoginError = require(script.isNonTerminalLoginError)
 }

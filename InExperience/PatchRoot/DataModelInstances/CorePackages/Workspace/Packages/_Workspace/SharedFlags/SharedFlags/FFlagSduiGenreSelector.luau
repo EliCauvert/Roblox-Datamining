@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SduiGenreSelector2", false) and (require(script.Parent.FFlagEnableSduiV2HomeInterleave) and require(script.Parent.FFlagSduiVariableItemWidthCarousel))

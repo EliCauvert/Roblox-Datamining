@@ -6,110 +6,218 @@ local foundationModule = require(parent.Foundation)
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 local menu = foundationModule.Menu
+local view = foundationModule.View
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local personButtonConfigsModule = require(peopleReactView.Configs.PersonButtonConfigs)
 local useGetPeopleServiceModule = require(peopleReactView.Hooks.useGetPeopleService)
 local personButtonModule = require(peopleReactView.Components.Buttons.PersonButton)
+local cardMenuWithVoiceVolumeModule = require(peopleReactView.Components.Card.CardMenuWithVoiceVolume)
+local useDismissWhenOutOfViewModule = require(peopleReactView.Hooks.useDismissWhenOutOfView)
 local constantsModule = require(peopleReactView.Constants)
+local flags = require(parent.PeopleService).getService("Flags")
+local fFlagVoiceVolumeControlsPerUserPlayerGridMenu = flags.FFlagVoiceVolumeControlsPerUserPlayerGridMenu
+local fFlagPeoplePageDismissCardMenuOnScrollOutOfView = flags.FFlagPeoplePageDismissCardMenuOnScrollOutOfView
+local fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule = require(peopleReactView.Flags.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted)
+local fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = flags.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
 
-return reactModule.memo(function(p0) --[[ line: 29 | named "CardMenu" ]]
-	-- upvalues: useLocalization (ref), constantsModule (ref), useGetPeopleServiceModule (ref), personButtonConfigsModule (ref), signalsReactModule (ref), reactModule (ref), iconName (ref), menu (ref), inputSize (ref), personButtonModule (ref)
-	local var8 = useLocalization({
+return reactModule.memo(function(p0) --[[ line: 42 | named "CardMenu" ]]
+	-- upvalues: useLocalization (ref), constantsModule (ref), fFlagVoiceVolumeControlsPerUserPlayerGridMenu (ref), useGetPeopleServiceModule (ref), personButtonConfigsModule (ref), signalsReactModule (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (ref), reactModule (ref), fFlagPeoplePageDismissCardMenuOnScrollOutOfView (ref), useDismissWhenOutOfViewModule (ref), iconName (ref), personButtonModule (ref), view (ref), cardMenuWithVoiceVolumeModule (ref), fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (ref), menu (ref), inputSize (ref)
+	local var12 = useLocalization({
 		unblock = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.UNBLOCK,
 		block = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.BLOCK,
 		unmute = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.UNMUTE,
 		mute = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.MUTE,
-		report = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.REPORT
+		report = constantsModule.PEOPLEPAGE.PERSON_BUTTONS.LOCALIZED_STRINGS.REPORT,
+		voiceSectionTitle = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then constantsModule.PEOPLEPAGE.CARD_MENU.LOCALIZED_STRINGS.VOICE_SECTION_TITLE else nil
 	})
-	local var9 = useGetPeopleServiceModule("PeopleBlockStatusStore")
-	local var10 = useGetPeopleServiceModule("PeopleVoiceChatStore")
-	local var11 = useGetPeopleServiceModule("PeopleAnalyticsManager")
-	local var12 = useGetPeopleServiceModule("Constants")
-	local var13 = personButtonConfigsModule(p0.person.UserId)
-	local var14 = signalsReactModule.useSignalState(var9.getPlayerBlockStatus(p0.person.UserId))
-	local var15 = signalsReactModule.useSignalState(var10.getPlayerIsLocalMuted(p0.person.UserId))
-	local var16 = signalsReactModule.useSignalState(var10.getPlayerIsTalking(p0.person.UserId))
-	local var17, var18 = reactModule.useState(false)
-	local var19 = reactModule.useCallback(function(p1) --[[ line: 51 ]]
-		-- upvalues: p0 (ref), var18 (ref)
+	local var13 = useGetPeopleServiceModule("PeopleBlockStatusStore")
+	local var14 = useGetPeopleServiceModule("PeopleVoiceChatStore")
+	local var15 = useGetPeopleServiceModule("PeopleAnalyticsManager")
+	local var16 = useGetPeopleServiceModule("Constants")
+	local var17 = personButtonConfigsModule(p0.person.UserId)
+	local var18 = signalsReactModule.useSignalState(var13.getPlayerBlockStatus(p0.person.UserId))
+	local var19 = signalsReactModule.useSignalState(var14.getPlayerIsLocalMuted(p0.person.UserId))
+	local var20 = signalsReactModule.useSignalState(var14.getPlayerIsTalking(p0.person.UserId))
+	local var21 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then signalsReactModule.useSignalState(var14.getShowVolumeControl) else false
+	local var22 = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var21 and var17[var16.PERSON_BUTTONS.MUTE_PLAYER].shouldShow() else false
+	local var23, var24 = reactModule.useState(false)
+	local var25 = reactModule.useCallback(function(p1) --[[ line: 73 ]]
+		-- upvalues: p0 (ref), var24 (ref)
 		p0.onIsOpenChanged(p1)
-		var18(p1)
+		var24(p1)
 	end, { p0.onIsOpenChanged })
-	local var20 = reactModule.useMemo(function() --[[ line: 71 ]]
-		-- upvalues: var13 (ref), var12 (ref), var15 (ref), var8 (ref), iconName (copy), var14 (ref), var19 (ref)
-		local MUTE_PLAYER = var13[var12.PERSON_BUTTONS.MUTE_PLAYER]
-		local BLOCK_PLAYER = var13[var12.PERSON_BUTTONS.BLOCK_PLAYER]
-		local REPORT_PLAYER = var13[var12.PERSON_BUTTONS.REPORT_PLAYER]
+	local var26 = reactModule.useCallback(function() --[[ line: 78 ]]
+		-- upvalues: var15 (ref), var25 (ref)
+		var15:trackPersonCardMenuToggled(false)
+		var25(false)
+	end, { var25 })
+	local var27 = reactModule.useCallback(function() --[[ line: 84 ]]
+		-- upvalues: var23 (ref), var15 (ref), fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), var22 (ref), var16 (ref), var25 (ref)
+		local var34 = not var23
+		var15:trackPersonCardMenuToggled(var34)
+		
+		if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry and var34 and var22 then
+			var15:recordPerUserVoiceVolumeUiOpened(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
+		end
+		var25(var34)
+	end, {
+		var23,
+		var25,
+		if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var22 else nil,
+		if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var16 else nil
+	})
+	local var28 = nil
+	
+	if fFlagPeoplePageDismissCardMenuOnScrollOutOfView then
+		var28 = reactModule.useRef(nil)
+		useDismissWhenOutOfViewModule(var23, var26, var28)
+	end
+	local var29 = reactModule.useMemo(function() --[[ line: 112 ]]
+		-- upvalues: var17 (ref), var16 (ref)
+		return var17[var16.PERSON_BUTTONS.MUTE_PLAYER].animatedIcon
+	end, { var17 })
+	local var30 = nil
+	
+	if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then
+		local getPlayerIsLocalMuted = var14.getPlayerIsLocalMuted
+		var30 = reactModule.useCallback(function(p2) --[[ line: 119 ]]
+			-- upvalues: getPlayerIsLocalMuted (ref)
+			return if p2 and getPlayerIsLocalMuted then getPlayerIsLocalMuted(p2)(false) else false
+		end, { getPlayerIsLocalMuted })
+	end
+	local var31 = if fFlagVoiceVolumeControlsPerUserPlayerGridMenu then reactModule.useMemo(function() --[[ line: 130 ]]
+		-- upvalues: var17 (ref), var16 (ref), var19 (ref), var12 (ref), iconName (copy), var21 (ref), var18 (ref), var25 (ref)
+		local MUTE_PLAYER = var17[var16.PERSON_BUTTONS.MUTE_PLAYER]
+		local BLOCK_PLAYER = var17[var16.PERSON_BUTTONS.BLOCK_PLAYER]
+		local REPORT_PLAYER = var17[var16.PERSON_BUTTONS.REPORT_PLAYER]
+		local PEOPLE_CARD = var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD
+		local t = {}
+		local t_1 = {}
+		local var38 = if MUTE_PLAYER.shouldShow() then {
+			id = "mute",
+			text = if var19 then var12.unmute else var12.mute,
+			icon = if var19 then iconName.SpeakerSlash else iconName.Speaker,
+			onActivated = function() --[[ line: 145 ]]
+				-- upvalues: MUTE_PLAYER (ref), PEOPLE_CARD (ref)
+				MUTE_PLAYER.onActivated(PEOPLE_CARD)
+			end
+		} else nil
+		
+		if var38 and not var21 then
+			table.insert(t_1, var38)
+		end
+		if BLOCK_PLAYER.shouldShow() then
+			table.insert(t_1, {
+				id = "block",
+				text = if var18 then var12.unblock else var12.block,
+				icon = iconName.CircleSlash,
+				onActivated = function() --[[ line: 161 ]]
+					-- upvalues: BLOCK_PLAYER (ref), PEOPLE_CARD (ref), var25 (copy)
+					BLOCK_PLAYER.onActivated(PEOPLE_CARD)
+					var25(false)
+				end
+			})
+		end
+		if REPORT_PLAYER.shouldShow() then
+			table.insert(t_1, {
+				id = "report",
+				text = var12.report,
+				icon = iconName.Flag,
+				onActivated = function() --[[ line: 172 ]]
+					-- upvalues: REPORT_PLAYER (ref), PEOPLE_CARD (ref)
+					REPORT_PLAYER.onActivated(PEOPLE_CARD)
+				end
+			})
+		end
+		if #t_1 > 0 then
+			table.insert(t, { items = t_1 })
+		end
+		if var38 and var21 then
+			table.insert(t, {
+				showVolumeSlider = true,
+				title = var12.voiceSectionTitle,
+				items = { var38 }
+			})
+		end
+		return t
+	end, {
+		var18, var19, var25, var17, var12, var21
+	}) else reactModule.useMemo(function() --[[ line: 201 ]]
+		-- upvalues: var17 (ref), var16 (ref), var19 (ref), var12 (ref), iconName (copy), var18 (ref), var25 (ref)
+		local MUTE_PLAYER = var17[var16.PERSON_BUTTONS.MUTE_PLAYER]
+		local BLOCK_PLAYER = var17[var16.PERSON_BUTTONS.BLOCK_PLAYER]
+		local REPORT_PLAYER = var17[var16.PERSON_BUTTONS.REPORT_PLAYER]
 		local t = {}
 		
 		if MUTE_PLAYER.shouldShow() then
 			table.insert(t, {
 				id = "mute",
-				text = if var15 then var8.unmute else var8.mute,
-				icon = if var15 then iconName.SpeakerSlash else iconName.Speaker,
-				onActivated = function() --[[ line: 83 ]]
-					-- upvalues: MUTE_PLAYER (ref), var12 (copy)
-					MUTE_PLAYER.onActivated(var12.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
+				text = if var19 then var12.unmute else var12.mute,
+				icon = if var19 then iconName.SpeakerSlash else iconName.Speaker,
+				onActivated = function() --[[ line: 213 ]]
+					-- upvalues: MUTE_PLAYER (ref), var16 (copy)
+					MUTE_PLAYER.onActivated(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end
 			})
 		end
 		if BLOCK_PLAYER.shouldShow() then
 			table.insert(t, {
 				id = "block",
-				text = if var14 then var8.unblock else var8.block,
+				text = if var18 then var12.unblock else var12.block,
 				icon = iconName.CircleSlash,
-				onActivated = function() --[[ line: 93 ]]
-					-- upvalues: BLOCK_PLAYER (ref), var12 (copy), var19 (copy)
-					BLOCK_PLAYER.onActivated(var12.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
-					var19(false)
+				onActivated = function() --[[ line: 223 ]]
+					-- upvalues: BLOCK_PLAYER (ref), var16 (copy), var25 (copy)
+					BLOCK_PLAYER.onActivated(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
+					var25(false)
 				end
 			})
 		end
 		if REPORT_PLAYER.shouldShow() then
 			table.insert(t, {
 				id = "report",
-				text = var8.report,
+				text = var12.report,
 				icon = iconName.Flag,
-				onActivated = function() --[[ line: 104 ]]
-					-- upvalues: REPORT_PLAYER (ref), var12 (copy)
-					REPORT_PLAYER.onActivated(var12.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
+				onActivated = function() --[[ line: 234 ]]
+					-- upvalues: REPORT_PLAYER (ref), var16 (copy)
+					REPORT_PLAYER.onActivated(var16.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 				end
 			})
 		end
 		return t
 	end, {
-		var14,
-		var15,
+		var18,
 		var19,
-		var13,
-		var8
+		var25,
+		var17,
+		var12
 	})
+	local var32 = reactModule.createElement(personButtonModule, {
+		isBackgroundTransparent = true,
+		LayoutOrder = 1,
+		icon = { on = if var20 then nil else iconName.ThreeDotsHorizontal },
+		animatedIcon = if var20 then var29 else nil,
+		onActivated = var27,
+		isBuilderIcon = not var20
+	})
+	local var33 = if fFlagPeoplePageDismissCardMenuOnScrollOutOfView then reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy", ref = var28 }, { Button = var32 }) else nil
 	
-	return if next(var20) == nil then nil else reactModule.createElement(menu, {
-		isOpen = var17,
-		items = var20,
+	return if next(var31) == nil then nil elseif fFlagVoiceVolumeControlsPerUserPlayerGridMenu then reactModule.createElement(cardMenuWithVoiceVolumeModule, {
+		isOpen = var23,
+		menuGroups = var31,
+		onPressedOutside = var26,
+		userId = p0.person.UserId,
+		voiceVolumeMin = var16.VOICE_CHAT.VOICE_VOLUME.MIN,
+		voiceVolumeMax = var16.VOICE_CHAT.VOICE_VOLUME.MAX,
+		getPlayerVoiceVolume = var14.getPlayerVoiceVolume,
+		subscribePlayerVoiceVolume = var14.subscribePlayerVoiceVolume,
+		setPlayerVoiceVolume = var14.setPlayerVoiceVolume,
+		isMutedByLocalUser = if fFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule then var19 else nil,
+		getPlayerIsLocalMuted = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var30 else nil,
+		getVoiceSessionId = if fFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry then var14.getVoiceSessionId else nil
+	}, { MenuAnchor = var33 or var32 }) else reactModule.createElement(menu, {
+		isOpen = var23,
+		items = var31,
 		size = inputSize.Medium,
-		onPressedOutside = reactModule.useCallback(function() --[[ line: 56 ]]
-			-- upvalues: var11 (ref), var19 (ref)
-			var11:trackPersonCardMenuToggled(false)
-			var19(false)
-		end, { var19 })
-	}, {
-		MenuAnchor = reactModule.createElement(personButtonModule, {
-			isBackgroundTransparent = true,
-			LayoutOrder = 1,
-			icon = { on = if var16 then nil else iconName.ThreeDotsHorizontal },
-			animatedIcon = if var16 then reactModule.useMemo(function() --[[ line: 67 ]]
-				-- upvalues: var13 (ref), var12 (ref)
-				return var13[var12.PERSON_BUTTONS.MUTE_PLAYER].animatedIcon
-			end, { var13 }) else nil,
-			onActivated = reactModule.useCallback(function() --[[ line: 61 ]]
-				-- upvalues: var17 (ref), var11 (ref), var19 (ref)
-				local var22 = not var17
-				var11:trackPersonCardMenuToggled(var22)
-				var19(var22)
-			end, { var17, var19 }),
-			isBuilderIcon = not var16
-		})
-	})
+		onPressedOutside = var26
+	}, { MenuAnchor = var33 or var32 })
 end)

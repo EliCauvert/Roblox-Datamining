@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXEnableMakeupOutfitCreation", false) and (require(script.Parent.FFlagAXOutfitPageRevamp) and game:GetEngineFeature("AvatarEditorServiceV4CreateOutfitType"))

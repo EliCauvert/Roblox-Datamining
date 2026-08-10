@@ -74,8 +74,12 @@ Amp.Upsell.Message.EmailSent,Kami telah mengirim email ke {parentEmail}
 Amp.Upsell.Message.EmailSentPluralParent,Kami telah mengirim email ke email orang tuamu yang terdaftar di akunmu
 Amp.Upsell.Title.AskYourParent,Minta izin orang tua
 Amp.Upsell.Title.RequestSent,Permintaan terkirim
+Application.Logout.Action.Logout,Log Out
+Application.Logout.Message.Confirmation,Kamu yakin ingin log out?
 Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
+Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Beralih akun
 Authentication.CrossDevice.Heading.QuickLogin,Log In Cepat
+Authentication.Login.Action.QuickSignIn,Log in cepat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Gunakan akun Roblox lain
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
@@ -123,8 +127,30 @@ Common.Presence.Label.Invisible,Tidak Terlihat
 Common.Presence.Label.Offline,Offline
 Common.Presence.Label.Online,Online
 Common.Presence.Label.RobloxStudio,Roblox Studio
-Common.UGCValidation.AQSInputDataError,Skor kualitas tidak dapat dihitung dengan benar karena data input salah atau tidak lengkap. Periksa model Anda atau ajukan laporan bug
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooLong,Animasi terlalu panjang ({duration} detik). Animasi emote harus berdurasi maksimal {maxLength} detik.
+Common.UGCValidation.ErrorLabel.AQSFail_AnimationTooShort,Animasi terlalu pendek ({duration} detik). Animasi emote harus berdurasi lebih dari {minLength} detik.
+Common.UGCValidation.ErrorLabel.AQSFail_MeshIslandML,Tubuhmu berisi komponen mesh kecil yang terputus (mesh island). Hapus geometri yang mengambang dan pastikan semua bagian mesh tersambung dengan benar.
+Common.UGCValidation.ErrorLabel.AQSFail_TooManyDisconnectedComponents,"Kualitas aset: {partName} memiliki {num_disconnected_components} komponen yang terputus, yang melebihi batas maksimum {max_disconnected_components}."
+Common.UGCValidation.ErrorLabel.AQSInputDataError,Skor kualitas tidak dapat dihitung dengan benar karena data input salah atau tidak lengkap. Periksa model Anda atau ajukan laporan bug
 Common.UGCValidation.ErrorLabel.AQSInternalError,"Skor tidak dapat dibuat karena Kesalahan Kualitas Aset. Periksa kebenaran data input dan coba lagi, atau ajukan laporan bug."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistance,"Peringatan kualitas aset: Skor jarak antara cage dan mesh adalah {score}. Jarak maksimal antara cage luar dan mesh adalah {max_distance}, {negative_sdf_percent}% dari verteks cage luar berada di dalam mesh render."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceAvatar,"Peringatan kualitas aset: Skor jarak cage tubuh adalah{score}. Jarak maksimal antara cage tubuh dan mesh adalah{max_distance}, {negative_sdf_percent}% dari verteks cage tubuh berada di dalam mesh tubuh."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageMeshDistanceHead,"Peringatan kualitas aset: Skor jarak cage kepala adalah {score}. Jarak maksimal antara cage kepala dan mesh adalah {max_distance}, {negative_sdf_percent}% dari verteks cage kepala berada di dalam mesh kepala."
+Common.UGCValidation.ErrorLabel.AQSWarn_CageRelevancy,Peringatan kualitas aset: Skor relevansi cage adalah {score}. {irrelevant_percent}% dari verteks cage luar yang dimodifikasi tidak mencakup aksesori.
+Common.UGCValidation.ErrorLabel.AQSWarn_CageUV,Peringatan kualitas aset: Skor UV cage adalah {score} untuk {cage_name}. Jumlah UV salah: {incorrect_uv_count}.
+Common.UGCValidation.ErrorLabel.AQSWarn_DegenTriangles,Kualitas aset: {partName} memiliki {degenerate_triangle_percent}% segitiga degenerasi (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_DynamicHead,Peringatan kualitas aset: Skor ekspresi kepala dinamis adalah {score}.
+Common.UGCValidation.ErrorLabel.AQSWarn_JointNumber,"Kualitas aset: konfigurasi sendi mendapat skor {score} (sendi: {joint_number}, tangan kiri: {left_hand_joint_number}, tangan kanan: {right_hand_joint_number})."
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshIslandVolume,Kualitas aset: {partName} memiliki {num_small_volume_islands} pulau kecil yang terputus dari {num_disconnected_components} komponen (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshManifold,Kualitas aset: {partName} memiliki masalah manifold mesh (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshNotWatertight,Kualitas aset: Mesh {partName} tidak tertutup rapat ({boundary_edges_percent}% tepi batas).
+Common.UGCValidation.ErrorLabel.AQSWarn_MeshOutsideOuterCage,Peringatan kualitas aset: Skor containment mesh adalah {score}. {mesh_outside_outer_cage_percent}% dari verteks mesh berada di luar cage luar.
+Common.UGCValidation.ErrorLabel.AQSWarn_MissingData,Skor kualitas aset untuk {measureName} tidak dapat dihitung karena data input tidak lengkap atau tidak valid. Ini tidak memblokir upload-mu.
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureComplexity,Kualitas aset: tekstur {textureName} memiliki kompleksitas rendah (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Kualitas aset: tekstur {textureName} memiliki resolusi {texture_width}x{texture_height} (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Kualitas aset: {partName} memiliki {intersecting_tri_face_percent}% permukaan segitiga yang berpotongan (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Kualitas aset: {partName} memiliki {uv_outside_bound_vert_percent}% verteks UV di luar batas (skor: {score}).
+Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Kualitas aset: {partName} memiliki {similar_vertex_percent}% verteks yang serupa (skor: {score}).
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handel terikat ke sendi {jointName}, yang bukan bagian dari skema yang diizinkan. Hanya sendi R15 standar dan sendi transfer skinning yang diizinkan."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} harus menggunakan transfer skinning, tetapi kamu tidak memiliki sendi yang diperlukan {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handel terikat ke sendi {jointName}, tetapi aset ini harus di-skin secara otomatis. Kamu hanya boleh melakukan skinning ke {validJointNameList}."
@@ -132,17 +158,24 @@ Common.UGCValidation.ErrorLabel.AccessorySkinning_RequiredSkinningTransfer,"{ass
 Common.UGCValidation.ErrorLabel.AccessorySkinning_RigidIsSkinned,Aksesori kaku memiliki data skinning yang tidak didukung. Pastikan tulang tidak diimpor bersama mesh
 Common.UGCValidation.ErrorLabel.AccessorySkinning_TransferJointWithoutAutoSkin,"Handle berisi sendi {jointName}, yang hanya diperbolehkan jika WrapLayer.AutoSkin diatur ke EnabledOverride."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_WeightNotFull,Verteks yang terikat ke sendi transfer harus memiliki bobot penuh.
+Common.UGCValidation.ErrorLabel.AnimationPack_InvalidR15AnimChildren,Bundel paket animasi tidak memiliki tipe animasi yang diharapkan: {missingAnimationTypes}. Setiap tipe animasi harus memiliki 1 Folder R15Anim yang tepat berisi children StringValue yang diharapkan.
 Common.UGCValidation.ErrorLabel.Animation_WeightNotPositive,"Animasi '{animationName}' memiliki nilai Bobot {weight}, tetapi Bobot harus lebih besar dari 0. Perbaiki animasi."
 Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Tidak dapat menemukan {ExpectedClass} yang diperlukan bernama {ExpectedName} di dalam {ParentPath}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Instance berikut bukan bagian dari skema yang disetujui dan harus dihapus: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Aset yang di-upload seharusnya berupa {ExpectedClass}, tetapi terdeteksi sebagai {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Aset yang di-upload seharusnya diberi nama {ExpectedClass}, tetapi saat ini bernama {RootClass}."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Bagian tubuh '{bodyPartName}' di CurveAnimation memiliki track Posisi (translasi). Bagian tubuh animasi hanya boleh diputar; track posisi tidak diizinkan. Hapus track Posisi dari bagian tubuh ini.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Bagian tubuh '{bodyPartName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi bagian tubuh tersebut.
+Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation berisi tulang HRD/DRD dan bagian tubuh '{bodyPartName}' memiliki track Posisi (translasi). Jika ada tulang dalam animasi, tidak ada bagian tubuh yang boleh melakukan translasi untuk mencegah pemisahan sendi. Hapus semua track Posisi dari bagian tubuh."
+Common.UGCValidation.ErrorLabel.CurveAnim_BonePositionNotAllowed,Tulang {boneName} di CurveAnimation memiliki track Posisi (translasi). Tulang HRD/DRD hanya boleh diputar; track posisi menyebabkan pemisahan sendi dan tidak diizinkan. Hapus animasi posisi dari tulang ini.
+Common.UGCValidation.ErrorLabel.CurveAnim_BoneTranslationExceedsThreshold,Tulang '{boneName}' dalam CurveAnimation bergerak {distance} kotak dari posisi awalnya. Translasi maksimum yang diizinkan adalah {maxDistance} kotak. Kurangi pergerakan posisi tulang tersebut.
+Common.UGCValidation.ErrorLabel.CurveAnim_BonesNotAllowed,CurveAnimation berisi folder tulang HRD/DRD yang belum didukung. Hapus semua subfolder tulang sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.CurveAnim_BoundsExceeded,Bagian tubuh dalam CurveAnimation tidak boleh lebih rendah dari {minHeight} kotak atau berjarak lebih dari {maxDistance} kotak dari HumanoidRootPart. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_ChildrenOnMarkerOrRig,"Child CurveAnimation, MarkerCurves dan AnimationRigData, tidak dapat memiliki child"
 Common.UGCValidation.ErrorLabel.CurveAnim_ContainsScripts,"Hierarki CurveAnimation berisi Scripts, LocalScripts, atau ModuleScripts. Hapus semuanya."
 Common.UGCValidation.ErrorLabel.CurveAnim_FetchFailed,Gagal me-load data CurveAnimation. Aset animasi mungkin tidak valid atau tidak dapat diakses.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBodyPartHierarchy,CurveAnimation berisi Folder bagian tubuh {folderName} yang memiliki hierarki yang tidak valid (Folder ini memiliki child yang tidak diizinkan atau diatur secara tidak benar)
+Common.UGCValidation.ErrorLabel.CurveAnim_InvalidBoneName,"Folder '{boneName}' di CurveAnimation bukan nama tulang HRD/DRD yang dikenali. Subfolder animasi harus berupa bagian tubuh R15 yang valid atau nama tulang yang dikenali (misalnya HeadBase, Spine, Chest, LeftClavicle, RightClavicle, LeftToeBase, RightToeBase, atau tulang jari seperti LeftHandIndex1)."
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidCurveData,CurveAnimation berisi Curve dengan Waktu atau Nilai yang tidak valid. Perbaiki animasi.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidInstanceTypes,Hierarki CurveAnimation hanya dapat berisi {allowedTypes}. Hapus tipe Instance lainnya.
 Common.UGCValidation.ErrorLabel.CurveAnim_InvalidLength,CurveAnimation harus berdurasi antara {minLength} dan {maxLength} detik. Perbaiki animasi.
@@ -180,6 +213,7 @@ Common.UGCValidation.ErrorLabel.DynamicHeadMouthNotOpen,Tidak dapat mendeteksi e
 Common.UGCValidation.ErrorLabel.DynamicHeadNOFACS,"Kepala Dinamis di marketplace harus dianimasikan, tetapi kepala ini tidak memiliki data FACS."
 Common.UGCValidation.ErrorLabel.DynamicHeadRightEyeNotClose,Tidak dapat mendeteksi ekspresi mata kanan tertutup untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mata kanan agar sesuai dengan posisi mata kanan di kepala dan pastikan mata tersebut dapat ditutup.
 Common.UGCValidation.ErrorLabel.DynamicHeadSadNotShown,Tidak dapat mendeteksi ekspresi cemberut untuk Kepala Dinamis. Sesuaikan titik acuan cage untuk mulut agar sesuai dengan posisi mulut di kepala dan pastikan mulut dapat menunjukkan ekspresi cemberut.
+Common.UGCValidation.ErrorLabel.EmissiveMap_NotAllowed,Aset ini menggunakan peta emisif yang hanya tersedia untuk kreator dalam Program Kreator Tepercaya. Hapus semua konten peta emisif atau gabung ke program sebelum meng-upload.
 Common.UGCValidation.ErrorLabel.FaceControlsOverrideFACSNotEmpty,Properti InternalOverrideFACSData pada FaceControls harus kosong saat proses upload.
 Common.UGCValidation.ErrorLabel.FacsExpandsHead,"FAC terdeteksi memperbesar kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
 Common.UGCValidation.ErrorLabel.FacsShrinksHead,"FAC terdeteksi memperkecil kepala Anda menjadi {modPercent}%, tetapi mengubah kepala bertentangan dengan kebijakan marketplace untuk animasi wajah."
@@ -195,6 +229,7 @@ Common.UGCValidation.ErrorLabel.HrdCheck_DrdInvalidSide,"DigitsRigDescription di
 Common.UGCValidation.ErrorLabel.HrdCheck_DrdWithoutHrd,Kamu tidak bisa menyertakan DigitsRigDescription tanpa HumanoidRigDescription
 Common.UGCValidation.ErrorLabel.HrdCheck_DuplicateInstance,"Instance {instName} muncul lebih dari sekali, tetapi hanya boleh ada sekali dalam hierarki tulang."
 Common.UGCValidation.ErrorLabel.HrdCheck_ImproperParent,"Instance {instName} berada di bawah {parentName}, tetapi berdasarkan Tulang yang ada, seharusnya instance tersebut berada di bawah {expectedParentName}."
+Common.UGCValidation.ErrorLabel.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription dan tulang tambahan belum diaktifkan untuk upload tubuh.
 Common.UGCValidation.ErrorLabel.HrdCheck_UndefinedInstanceInBoneTree,"Instance {instName} dari kelas {className} berada dalam struktur tulang, tetapi bukan bagian dari skema R15plus yang ditentukan."
 Common.UGCValidation.ErrorLabel.HrdImproperJointMapping,Sendi opsional {jointName} keliru dipetakan di HRD. Sendi ini harus dipetakan ke tulang bernama {boneName}.
 Common.UGCValidation.ErrorLabel.HrdMissingStandardJoint,"Sendi {jointName} adalah sendi R15 standar, tetapi sambungan rig tidak terhubung ke HRD. Pastikan HRD di avatarmu terhubung ke AttachmentConstraint, bukan Motor6d."
@@ -222,12 +257,15 @@ Common.UGCValidation.ErrorLabel.MeasureCageMeshDistance_CageTooFar,"Cage luar te
 Common.UGCValidation.ErrorLabel.MeasureCageRelevancy,{outer_cage_face_irrelevant_percent}% verteks cage luar yang dimodifikasi tidak mencakup aksesori. Pastikan kamu memindahkan cage luar jika diperlukan saja.
 Common.UGCValidation.ErrorLabel.MeasureCageUV,Ada nilai UV {incorrect_uv_count} di cage {cage_name} yang salah atau tidak sesuai dengan templat. Perbaiki UV cage.
 Common.UGCValidation.ErrorLabel.MeasureMeshOutsideOuterCage,{mesh_outside_outer_cage_percent}% verteks mesh untuk aksesori berada di luar cage luarnya. Lakukan penyesuaian agar lebih banyak aksesori berada di antara kedua cage.
+Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,Ukuran mesh {partName} pada sumbu {axis} sebesar '{currentSize}' kotak lebih besar dari ukuran maksimum yang diizinkan untuk setiap bagian yaitu '{maxSize}' kotak. Perkecil mesh.
+Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Ukuran mesh {partName} pada sumbu {axis} sebesar '{currentSize}' kotak lebih kecil dari ukuran minimum yang diizinkan untuk setiap bagian yaitu '{minSize}' kotak. Perbesar mesh.
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Sambungan {attName} harus ada tepat 1 kali di dalam {partName} descendant.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (atau descendant-nya) berisi Atribut. Kamu perlu menghapus Atribut dari daftar berikut: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Untuk meng-upload aset ke Roblox, kamu harus memilih persis 1 kejadian dan tipe upload yang terhubung."
+Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} tidak boleh memiliki tag.
+Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,String kesalahan uji kedua yang digunakan untuk memverifikasi alur kerja sinkronisasi terjemahan Hub-first dari awal hingga akhir.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Meshpart kepala memiliki animasi wajah untuk {jointName}, yang tidak dapat digunakan di FACS. Ganti nama sendi ini, lalu impor ulang kepalamu."
 Common.UGCValidation.ErrorLabel.UnallowedJointSkinned,"Bagian tubuh {partName} terikat ke sendi virtual {jointName}, yang bukan bagian dari skema R15plus."
-Common.UGCValidation.HrdCheck_TempR15BonesUploadNotAllowed,HumanoidRigDescription dan tulang tambahan belum diaktifkan untuk upload tubuh.
 Common.VerifiedParentalConsent.Action.Cancel,
 Common.VerifiedParentalConsent.Action.Close,
 Common.VerifiedParentalConsent.Action.GoToSettings,Buka Pengaturan
@@ -240,8 +278,12 @@ CommonUI.Controls.Action.Apply,Terapkan
 CommonUI.Controls.Action.Back,Kembali
 CommonUI.Controls.Action.Cancel,
 CommonUI.Controls.Action.Confirm,Konfirmasi
+CommonUI.Controls.Action.Continue,
+CommonUI.Controls.Action.Done,Selesai
+CommonUI.Controls.Action.Next,Berikutnya
 CommonUI.Controls.Action.OK,OKE
 CommonUI.Controls.Action.Refresh,Refresh
+CommonUI.Controls.Action.ResetAll,Reset semua
 CommonUI.Controls.Action.Search,Cari
 CommonUI.Controls.Action.ShowMore,Tampilkan selengkapnya
 CommonUI.Controls.Action.Submit,Kirim
@@ -264,6 +306,8 @@ CommonUI.Controls.Label.January,Januari
 CommonUI.Controls.Label.JanuaryAbbreviated,Jan
 CommonUI.Controls.Label.July,Juli
 CommonUI.Controls.Label.June,Juni
+CommonUI.Controls.Label.LastWeek,Minggu lalu
+CommonUI.Controls.Label.LastYear,Tahun lalu
 CommonUI.Controls.Label.March,Maret
 CommonUI.Controls.Label.MarchAbbreviated,Mar
 CommonUI.Controls.Label.May,Mei
@@ -282,8 +326,12 @@ CommonUI.Controls.Label.September,September
 CommonUI.Controls.Label.SeptemberAbbreviated,Sep
 CommonUI.Controls.Label.Sunday,Minggu
 CommonUI.Controls.Label.SundayAbbreviated,Min
+CommonUI.Controls.Label.ThisMonth,Bulan ini
+CommonUI.Controls.Label.ThisWeek,Minggu ini
+CommonUI.Controls.Label.ThisYear,Tahun ini
 CommonUI.Controls.Label.Thursday,Kamis
 CommonUI.Controls.Label.ThursdayAbbreviated,Kam
+CommonUI.Controls.Label.Today,Hari ini
 CommonUI.Controls.Label.Tuesday,Selasa
 CommonUI.Controls.Label.TuesdayAbbreviated,Sel
 CommonUI.Controls.Label.Wednesday,Rabu
@@ -291,8 +339,11 @@ CommonUI.Controls.Label.WednesdayAbbreviated,Rab
 CommonUI.Controls.Label.Year,Tahun
 CommonUI.Controls.NoResultsFound,Tidak ada hasil
 CommonUI.Features.Action.Close,
+CommonUI.Features.Action.Continue,
+CommonUI.Features.Action.LearnMore,
 CommonUI.Features.Action.LessLowercase,lebih sedikit
 CommonUI.Features.Action.MoreLowercase,lebih banyak
+CommonUI.Features.Action.Send,
 CommonUI.Features.Label.About,Tentang
 CommonUI.Features.Label.AcceptConnection,Terima Koneksi
 CommonUI.Features.Label.AcceptFriend,Terima Teman
@@ -328,8 +379,9 @@ CommonUI.Features.Label.PrivacyPolicy,
 CommonUI.Features.Label.Profile,Profil
 CommonUI.Features.Label.RM,Momen
 CommonUI.Features.Label.Redeem,Redeem Kode
-CommonUI.Features.Label.RemoveConnection,Hapus Koneksi
+CommonUI.Features.Label.RemoveConnection,Hapus Teman
 CommonUI.Features.Label.ReportLogs,Laporkan Log
+CommonUI.Features.Label.ReportLogsSentenceCase,Laporkan log
 CommonUI.Features.Label.Sent,Terkirim
 CommonUI.Features.Label.Settings,
 CommonUI.Features.Label.Terms,Ketentuan
@@ -466,7 +518,7 @@ CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusSoldOut,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.ItemStatusSuccess,Dibeli
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.Notice,Beberapa item tidak dapat dibeli saat ini. Coba lagi nanti.
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.CurrentBalance,Saldo saat ini
-CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA,Selesai
+CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA,
 CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.RobuxSpent,Robux dibelanjakan
 CoreScripts.BulkPurchasePrompt.RequestPrompt.Heading,Ringkasan
 CoreScripts.BulkPurchasePrompt.RequestPrompt.ItemListPurchaseCount,
@@ -509,16 +561,29 @@ CoreScripts.EmoteThumbnailEditor.Action.Update,Update
 CoreScripts.EmoteThumbnailEditor.Heading.EditThumbnail,Edit thumbnail
 CoreScripts.EmoteThumbnailEditor.Label.Rotation,Rotasi
 CoreScripts.EmoteThumbnailEditor.Label.Time,Waktu
+CoreScripts.FTUX.Description.WhiteMenuPlaytestMode,Menu Roblox berwarna putih menunjukkan bahwa kamu sedang melakukan playtest. Selalu patuhi Standar Komunitas Roblox.
 CoreScripts.FTUX.Heading.CheckOutRobloxConnect,Baru: Cek Roblox Connect!
 CoreScripts.FTUX.Heading.CheckOutRobloxParty,Baru: Lihat Roblox Party!
 CoreScripts.FTUX.Heading.InExperienceShop,Toko baru
 CoreScripts.FTUX.Heading.JoinVoice,Bergabung dengan Chat Suara
+CoreScripts.FTUX.Heading.LeaveRespawn,Keluar dan Respawn
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Baru: Pengalih avatar
+CoreScripts.FTUX.Heading.NewTiltOnboarding,Menu ada di sini
+CoreScripts.FTUX.Heading.NewTiltUpdate,Menu baru
+CoreScripts.FTUX.Heading.ReadyToPlaytest,Siap melakukan playtest?
+CoreScripts.FTUX.Heading.SideSheetUpdate,Semua tindakan di 1 tempat
+CoreScripts.FTUX.Heading.SocialOnboarding,Fitur sosial
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Beralih ke avatar tersimpan kapan saja.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat dengan temanmu kapan saja.
 CoreScripts.FTUX.Label.InExperienceShopDescription,Lihat item yang dipilih hanya untukmu
 CoreScripts.FTUX.Label.JoinVoiceDescription,Mendengar dan berbicara dengan pengguna lain
+CoreScripts.FTUX.Label.LeaveRespawn,Keluar dari game atau respawn avatar dapat diakses dengan mudah dari sini.
+CoreScripts.FTUX.Label.NewTiltOnboarding,Menu game berisi tindakan dalam game beserta pengaturan game-mu.
+CoreScripts.FTUX.Label.NewTiltUpdate,Item menu hamburger telah dipindahkan ke sini.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party dengan temanmu kapan saja.
+CoreScripts.FTUX.Label.SideSheetOnboarding,"Menu berisi semua fitur pentingmu. Undang teman, coba Emote, atur Musik, dan lainnya."
+CoreScripts.FTUX.Label.SideSheetUpdate,Menu masih berisi semua fitur pentingmu.
+CoreScripts.FTUX.Label.SocialOnboarding,"Akses fitur sosialmu dengan mudah dari bilah atas, termasuk Chat."
 CoreScripts.Feedback.EntryPoint.ButtonText,Beri Masukan
 CoreScripts.Feedback.EntryPoint.OptionText,Beri Masukan Terjemahan
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Keluar
@@ -561,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Terima ka
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Untuk melindungi pemain yang lebih muda, pemilik akun yang berusia di bawah 13 tahun tidak dapat mengirim masukan."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Masukan Tidak Tersedia
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Tambahkan media
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Edit pilihan
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Tidak tersedia media.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Media ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Bantu kreator memahami masalahmu.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Me-load media...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} — {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} dipilih
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Satu atau beberapa mediamu gagal di-upload.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Laporan bug
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Pemulihan item atau data
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategori *
@@ -570,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Pilih katego
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Masalah pembelian
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maksimum {MAX} karakter
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Detail *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Batalkan Pilihan
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Sertakan semua yang relevan tentang masalah tersebut, seperti versi game dan langkah-langkah untuk memicu masalahnya."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Jelaskan apa yang hilang dan kapan terakhir kali kamu melihatnya. Jika akunmu diretas, sertakan nomor email Dukungan Pelanggan Roblox-mu dan detail relevan lainnya."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Jelaskan permintaan atau masalahmu di sini. Berikan detail sebanyak mungkin untuk membantu kami memahami situasinya.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Beri tahu kami apa yang kamu coba beli, kapan itu terjadi, dan nilai totalnya (misalnya 500 Robux/$4,99). Sertakan pesan kesalahan yang kamu lihat."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Mencoba melaporkan penyalahgunaan?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Kirim laporan saja.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Pilih
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Ini membantu kreator mendukung akun yang benar.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Bagikan informasi pengguna kepada kreator
@@ -722,6 +800,7 @@ CoreScripts.InGameMenu.GameSettings.Haptics,Haptik
 CoreScripts.InGameMenu.GameSettings.InvertedCamera,Kamera Terbalik
 CoreScripts.InGameMenu.GameSettings.LanguageHeader,Chat & Bahasa
 CoreScripts.InGameMenu.GameSettings.LockedByDeveloper,Terkunci oleh Developer
+CoreScripts.InGameMenu.GameSettings.MainVolume,Volume Utama
 CoreScripts.InGameMenu.GameSettings.ManualGraphicsQuality,Level Kualitas
 CoreScripts.InGameMenu.GameSettings.MovementMode,Mode Gerakan
 CoreScripts.InGameMenu.GameSettings.Open,Buka
@@ -752,6 +831,7 @@ CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled,Rotasi Bertahap VR 
 CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled,Kamera Tetap Orang Ketiga
 CoreScripts.InGameMenu.GameSettings.ViewandControlsHeader,Tampilan & Kendali
 CoreScripts.InGameMenu.GameSettings.VignetteEnabled,VR Vignette Diaktifkan
+CoreScripts.InGameMenu.GameSettings.VoiceChatVolume,Volume Chat Suara
 CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.GameSettings.VrControlsTitle,KONTROL VR
 CoreScripts.InGameMenu.InviteFriends.ErrorOccured,
@@ -764,7 +844,6 @@ CoreScripts.InGameMenu.Label.ViewButton,Tombol Tampilkan
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
 CoreScripts.InGameMenu.LeaveGameQuestion,Keluar?
-CoreScripts.InGameMenu.NextUpExitMenu.Title,Pengalaman Virtual yang Disarankan
 CoreScripts.InGameMenu.Ok,
 CoreScripts.InGameMenu.PageTitle.Controls,Kontrol...
 CoreScripts.InGameMenu.PageTitle.GameSettings,
@@ -774,7 +853,7 @@ CoreScripts.InGameMenu.PageTitle.Report,Laporkan
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,Pengaturan Kenyamanan
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,Beralih Server
 CoreScripts.InGameMenu.Prompt.BackToHome,"Ya, Kembali ke Beranda"
-CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Kamu yakin ingin keluar dari pengalaman virtual?
+CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame,Kamu yakin ingin keluar dari game?
 CoreScripts.InGameMenu.Prompt.ConfirmResetCharacter,Kamu yakin ingin mereset karaktermu?
 CoreScripts.InGameMenu.Prompt.ConfirmRespawnCharacter,Kamu yakin ingin me-respawn karaktermu?
 CoreScripts.InGameMenu.Prompt.LeaveGame,"Ya, Keluar"
@@ -842,12 +921,13 @@ CoreScripts.InGameMenu.RespawnCharacterDialogConfirm,
 CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Respawn Karakter?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Kamu akan keluar dari server ini dan beralih ke server lain.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ingin keluar?
-CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke pengalaman virtual yang dikunjungi sebelumnya
-CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari pengalaman virtual ini dan kembali ke {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
+CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Getaran
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,perlu ditekan untuk menampilkan menu navigasi
 CoreScripts.InGameMenu.VirtualCursorHintPreIcon,"Di beberapa pengalaman virtual,"
+CoreScripts.InGameMenu.VoiceChatVolumeLower,Volume chat suara
 CoreScripts.PremiumModal.Title.Error,
 CoreScripts.PublishAssetPrompt.AssetDescriptionPlaceholder,Deskripsi
 CoreScripts.PublishAssetPrompt.Cancel,
@@ -918,8 +998,11 @@ CoreScripts.PurchasePrompt.Title.VerificationRequired,
 CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,Ambil Foto
 CoreScripts.TextChat.Action.SendQuickWords,Kirim Pesan Cepat
+CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,Global
 CoreScripts.TextChat.ChannelTabs.Here,Di sini
+CoreScripts.TextChat.ChannelTabs.System,Sistem
+CoreScripts.TextChat.ChannelTabs.Team,Tim
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: bisukan pembicara.
 CoreScripts.TextChat.ChatCommands.Unmute.Description,/unmute <speaker>: bunyikan pembicara.
 CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew,Roblox secara otomatis menerjemahkan bahasa yang didukung dalam chat
@@ -936,6 +1019,8 @@ CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff,Kamu hanya dapat melihat
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion,Kamu bisa melihat pesan sistem dan chat hanya dengan pengguna di wilayahmu.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAAndTF,Hanya pengguna dalam kelompok usia yang mirip dan Teman Tepercayamu yang dapat chat denganmu.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithAgeGroupAndTC,Hanya pengguna dalam kelompok usia yang mirip dan Koneksi Tepercayamu yang dapat chat denganmu.
+CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.BelowThreshold,Sapa semua yang sedang bermain!
+CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.Local.WithCount,Ada {RBX_COUNT} pemain lain di chat. Sapa mereka.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithOnlinePlayers.V3,👋 Sapa semua pemain yang sedang bermain sekarang!
 CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF,Hanya teman tepercayamu yang bisa chat denganmu.
 CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2,Chat dengan lebih banyak pengguna dalam game ini. Hanya pengguna dalam kelompok usia yang mirip yang dapat chat denganmu.
@@ -966,7 +1051,11 @@ CoreScripts.TextChat.Emote.Error.NotEnabled,Kamu tidak dapat menggunakan Emote i
 CoreScripts.TextChat.Emote.Error.NotEquipped,Kamu tidak memakai Emote itu.
 CoreScripts.TextChat.Emote.Error.NotOwnedGeneric,Kamu tidak memiliki Emote itu.
 CoreScripts.TextChat.EnableChatButton.Label.UnlockChat,Buka chat
+CoreScripts.TextChat.Error.NoChannelAccess,Kamu tidak memiliki akses ke channel chat ini
+CoreScripts.TextChat.Error.NoChannelSelected,Tidak ada channel chat yang dipilih
+CoreScripts.TextChat.Error.ReadOnlyChannel,Channel chat hanya baca
 CoreScripts.TextChat.Help.FirstLine,Ini adalah perintah chat dasar:
+CoreScripts.TextChat.InputBar.Hint.ChatUnavailable,Chat tidak tersedia
 CoreScripts.TextChat.InputBar.Hint.Gamepad,"Gunakan tombol ""{CHAT_BUTTON}"" di menu untuk memulai chat"
 CoreScripts.TextChat.InputBar.Hint.GamepadConnected,"Tekan ""{CONFIRM_KEY}"" untuk mengetik"
 CoreScripts.TextChat.InputBar.Hint.GamepadConnectedConfirm,
@@ -988,7 +1077,9 @@ CoreScripts.TextChat.Mute.Success,Pengguna {RBX_NAME} telah dibisukan.
 CoreScripts.TextChat.Notification.WhisperChat.Created,Sekarang kamu sedang chat privat dengan {RBX_NAME}.
 CoreScripts.TextChat.Online.Help.Description3,/online : jumlah pengguna yang bisa kamu ajak chat di channel ini.
 CoreScripts.TextChat.Online.Success.Plural,{RBX_COUNT} pemain saat ini sedang online dan bisa chat
+CoreScripts.TextChat.Online.Success.Plural2,{RBX_COUNT} pemain lain sedang online dan bisa chat.
 CoreScripts.TextChat.Online.Success.Singular,
+CoreScripts.TextChat.Online.Success.Singular3,Ada {RBX_COUNT} pemain lain sedang online dan bisa chat.
 CoreScripts.TextChat.TeamChat.Error.NotOnTeam,Kamu tidak dapat melakukan chat tim jika kamu tidak berada dalam tim.
 CoreScripts.TextChat.TeamChat.PrefixText,[Team]
 CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle,Kamu hanya dapat chat dengan pengguna dalam kelompok usia yang mirip dan Koneksi Tepercayamu.
@@ -1096,7 +1187,9 @@ Feature.AccountSettings.Example.Twitch,contoh: www.twitch.tv/roblox/profil
 Feature.AccountSettings.Example.Twitter,contoh: @Roblox
 Feature.AccountSettings.Example.YouTube,contoh: www.youtube.com/pengguna/roblox
 Feature.AccountSettings.Heading.SocialNetworks,Jaringan Sosial
+Feature.AccountSettings.Heading.Tab.Notifications,Notifikasi
 Feature.AccountSettings.Heading.Tab.Privacy,
+Feature.AccountSettings.Heading.Tab.Robux,Robux
 Feature.AccountSettings.Heading.Tab.Security,Keamanan
 Feature.AccountSettings.Label.Discord,Discord
 Feature.AccountSettings.Label.DropDown.Everyone,Semua orang
@@ -1117,10 +1210,12 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,Pegangan X tidak valid.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Tautan YouTube tidak valid.
 Feature.AddFriends.Action.IgnoreConnectionRequest,Abaikan Permintaan Koneksi
 Feature.AddFriends.Action.IgnoreFriendRequest,Abaikan permintaan pertemanan
+Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Abaikan permintaan pertemanan tepercaya
 Feature.AddFriends.Action.RequestIgnored,Permintaan Diabaikan
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama mereka.
 Feature.AddFriends.Label.ConnectWithContacts,Undang kontak atau terhubung dengan teman yang sudah ada di Roblox.
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeople,Cari orang
+Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.SearchForFriendsPrompt,Temukan pengguna di Roblox dengan memasukkan nama pengguna atau nama display mereka.
 Feature.AddFriends.Label.SyncWithContacts,Sinkronkan kontak untuk menemukan dan mengundang teman
 Feature.AddFriends.Title.ConnectWithContacts,Tambahkan dari Kontak
@@ -1143,6 +1238,8 @@ Feature.Avatar.Action.CancelSelection,Batalkan pilihan
 Feature.Avatar.Action.Clear,
 Feature.Avatar.Action.ComposerPost,Posting
 Feature.Avatar.Action.ComposerPreviewAndPost,Preview & Posting
+Feature.Avatar.Action.CreateSet,
+Feature.Avatar.Action.CreateSetFirstRun,Buat set
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Tampilan Default
 Feature.Avatar.Action.Delete,
@@ -1169,7 +1266,7 @@ Feature.Avatar.Action.Revert,Kembalikan
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,
 Feature.Avatar.Action.SaveAsNew,Simpan sebagai baru
-Feature.Avatar.Action.Select,Pilih
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Pilih beberapa item
 Feature.Avatar.Action.SelectSlot,Pilih Slot
 Feature.Avatar.Action.Share,Bagikan
@@ -1227,6 +1324,8 @@ Feature.Avatar.Heading.Outfits,
 Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,Simpan Karakter
 Feature.Avatar.Heading.SelectToUpdate,Pilih untuk Meng-update
+Feature.Avatar.Heading.SetLimitReached,Batas set tercapai
+Feature.Avatar.Heading.SetNameNotAllowed,Nama tidak diperbolehkan
 Feature.Avatar.Heading.SharePublicAvatar,Bagikan Avatarmu
 Feature.Avatar.Heading.SortBy,Urutkan berdasarkan
 Feature.Avatar.Heading.UsedName,Nama yang Sudah Digunakan
@@ -1251,6 +1350,8 @@ Feature.Avatar.Label.Add,Tambahkan
 Feature.Avatar.Label.AddEdit,Tambah/Edit
 Feature.Avatar.Label.AddManage,Tambahkan/Kelola
 Feature.Avatar.Label.AddManage2,
+Feature.Avatar.Label.AllAvatarSets,
+Feature.Avatar.Label.AllFolders,
 Feature.Avatar.Label.AllHeads,Semua Kepala
 Feature.Avatar.Label.AnimationFullSet,Set Lengkap
 Feature.Avatar.Label.AvatarAdjustment,Penyesuaian Avatar
@@ -1318,6 +1419,7 @@ Feature.Avatar.Label.FullBody,Seluruh Tubuh
 Feature.Avatar.Label.FullMasks,Masker Penuh
 Feature.Avatar.Label.FullPair,Pasangan Lengkap
 Feature.Avatar.Label.Gear,Perlengkapan
+Feature.Avatar.Label.GenericSetError,
 Feature.Avatar.Label.GetLookQuestion,Kamu ingin mendapatkan pakaian ini secara gratis?
 Feature.Avatar.Label.GetOutfitMultiple,Kamu ingin mendapatkan [{numItems}] item secara gratis?
 Feature.Avatar.Label.GetOutfitOne,Kamu ingin mendapatkan [1] secara gratis?
@@ -1385,6 +1487,8 @@ Feature.Avatar.Label.PPEViewFullButton,Lihat Avatar secara Keseluruhan
 Feature.Avatar.Label.Pants,Celana Panjang
 Feature.Avatar.Label.PantsClassic,Celana Klasik
 Feature.Avatar.Label.Photobooth,Fotoboks
+Feature.Avatar.Label.ProfileFrames,Bingkai
+Feature.Avatar.Label.ProfileFramesUnlockBanner,Buka bingkai dengan Plus
 Feature.Avatar.Label.Props,Prop
 Feature.Avatar.Label.Purchased,
 Feature.Avatar.Label.QuickMenuCustomizeTitle,Opsi Kustomisasi
@@ -1412,6 +1516,9 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Pencarian Baru-Baru 
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Dilihat Baru-Baru Ini
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Lanjutkan Berbelanja
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetLimitReachedBody,Kamu hanya bisa memiliki maksimal {setLimit} set. Hapus 1 set untuk membuat ruang
+Feature.Avatar.Label.SetNameDuplicateBody,Kamu sudah memiliki set dengan nama ini. Pilih nama lain
+Feature.Avatar.Label.SetNameNotAllowedBody,Pilih nama lain
 Feature.Avatar.Label.SharePublicAvatar.Tooltip,Posting Avatar ke Marketplace
 Feature.Avatar.Label.Shirt,Kemeja
 Feature.Avatar.Label.ShirtClassic,
@@ -1557,6 +1664,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Beri keterangan untuk Avatarmu (Op
 Feature.Avatar.RevokedItems.BodyText,"Item {category} ""{item}"" telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Item berikut telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}{items}{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.ViewInbox,Lihat Inbox
+Feature.Avatar.SetNameDuplicate,Duplikasi nama
 Feature.Avatar.Text.MakeupLayeringTooltip,Ubah urutan lapisan makeup-mu
 Feature.Avatar.Title.AvatarRefinement,Penyempurnaan Avatar
 Feature.Avatar.Title.BulkDeleteMakeupLooks,Hapus {count} tampilan makeup?
@@ -1568,6 +1676,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Hapus semua animasi?
 Feature.Avatar.Title.ClearBodyConfirmation,Hapus bagian tubuh?
 Feature.Avatar.Title.ClearClothesConfirmation,Hapus semua pakaian?
 Feature.Avatar.Title.ClearMakeupConfirmation,Hapus semua makeup?
+Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplikasi Tampilan
 Feature.Avatar.Title.EnhancedAvatarHeads,Kepala Avatar yang Disempurnakan
 Feature.Avatar.Title.GetOutfit,Dapatkan Pakaian
@@ -1648,39 +1757,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Memblokir pengguna ini akan menghapusnya sebagai Koneksi atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
-Feature.Call.Description.ExperienceError,Chat dengan suara tidak didukung oleh pengalaman virtual ini.
-Feature.Call.Description.Friends,Teman yang mungkin memiliki atau tidak memiliki perangkat dan pengaturan untuk pengalaman panggilan yang optimal.
-Feature.Call.Description.NoFriendsFound,Tidak menemukan teman
-Feature.Call.Description.SuggestedFriends,Teman dengan perangkat dan pengaturan yang ditetapkan untuk pengalaman panggilan yang optimal.
-Feature.Call.Error.Description.AlreadyInCall,Kamu sudah berada dalam panggilan
-Feature.Call.Error.Description.DeviceNotSupported,Saat ini panggilan tidak didukung di perangkatmu. Coba lagi nanti.
-Feature.Call.Error.Description.FriendBusy,{calleeCombinedName} sedang sibuk dan tidak dapat menerima panggilan. Coba lagi nanti.
 Feature.Call.Error.Description.Generic,
-Feature.Call.Error.Label.OhNo,Terjadi kesalahan!
-Feature.Call.Error.Title.CouldntMakeCall,Tidak dapat melakukan panggilan
-Feature.Call.Error.Title.ExperienceError,Pengalaman Virtual Bermasalah
-Feature.Call.Error.Title.FriendBusy,Teman sedang sibuk
-Feature.Call.Label.Block,Blokir {combinedName}
-Feature.Call.Label.CallEnded,Panggilan Berakhir
-Feature.Call.Label.Calling,Memanggil...
-Feature.Call.Label.Friends,
-Feature.Call.Label.Incoming,Masuk
-Feature.Call.Label.Missed,Tak Terjawab
-Feature.Call.Label.Outgoing,
-Feature.Call.Label.RecentCalls,Panggilan Baru-Baru Ini
-Feature.Call.Label.Retry,
-Feature.Call.Label.RobloxCall,Panggilan Roblox
-Feature.Call.Label.StartNewCall,Mulai Panggilan Baru
-Feature.Call.Label.Suggested,Disarankan
-Feature.Call.Label.Teleporting,
-Feature.Call.Label.Unfriend,Memutus pertemanan dengan {combinedName}
-Feature.Call.Label.Yesterday,Kemarin
-Feature.Call.Modal.EnableChatVoiceBody,Aktifkan chat dengan suara di Pengaturan> Privasi untuk berbicara dengan pengguna lain di pengalaman virtual ini.
-Feature.Call.Modal.EnableChatVoiceTitle,Aktifkan chat dengan suara
-Feature.Call.Prompt.AddFriends,Tambahkan teman di Roblox untuk melakukan panggilan
-Feature.Call.Prompt.FirstCall,Coba lakukan panggilan pertamamu
-Feature.Call.Prompt.SearchFriends,Cari teman
-Feature.Call.Prompt.StartCall,Mulai panggilan
 Feature.Captures.Action.Allow,Izinkan
 Feature.Captures.Action.AllowPhotoAccessAccepted,
 Feature.Captures.Action.AllowPhotoAccessDeclined,
@@ -1822,9 +1899,11 @@ Feature.Catalog.HeroWidget.CapsulePoolDescription,
 Feature.Catalog.HeroWidget.CapsulePoolTitle,
 Feature.Catalog.HeroWidget.CapsuleTitle,
 Feature.Catalog.Label.Adjustable,Dapat disesuaikan
+Feature.Catalog.Label.AdvancedMaterials,Material Tingkat Lanjut
 Feature.Catalog.Label.AllItems,Semua Item
 Feature.Catalog.Label.AlreadyOwned,Item sudah dimiliki
 Feature.Catalog.Label.Animation,
+Feature.Catalog.Label.Attributes,Atribut
 Feature.Catalog.Label.Attribution,Dibuat di
 Feature.Catalog.Label.AvailableForSale,Tersedia untuk Dijual
 Feature.Catalog.Label.AvailableToPremiumMembers,Tersedia karena kamu memiliki Premium
@@ -1870,6 +1949,8 @@ Feature.Catalog.Label.CustomizeAvatar,Kustomisasi Avatar
 Feature.Catalog.Label.DeleteAvatarConfirmationPromptMessage,Kamu tidak dapat membatalkan tindakan ini jika kamu menghapus Avatar.
 Feature.Catalog.Label.Details,
 Feature.Catalog.Label.DynamicHeads,
+Feature.Catalog.Label.Emissive,Emisif
+Feature.Catalog.Label.EmissiveInfo,"Item emisif bersinar dan memancarkan cahayanya sendiri, sehingga tetap terang dan terlihat bahkan di lingkungan gelap."
 Feature.Catalog.Label.Emotes,Emoji
 Feature.Catalog.Label.EyeMakeup,
 Feature.Catalog.Label.Eyebrow,
@@ -1944,6 +2025,7 @@ Feature.Catalog.Label.NoLongerAvailable,Item ini sudah tidak tersedia
 Feature.Catalog.Label.NoSellersWarning,"Maaf, tidak ada yang menjual item ini"
 Feature.Catalog.Label.None,Tidak ada
 Feature.Catalog.Label.NotAvailable,Item ini tidak tersedia pada saat ini
+Feature.Catalog.Label.OfferApplied,Penawaran Diterapkan
 Feature.Catalog.Label.OnSale,Untuk Dijual
 Feature.Catalog.Label.OriginalPrice,Harga Orisinal
 Feature.Catalog.Label.OutOfStock,
@@ -1953,6 +2035,8 @@ Feature.Catalog.Label.PBR.false,Dasar
 Feature.Catalog.Label.PBR.true,Tingkat Lanjut
 Feature.Catalog.Label.PBRInfo,"Item avatar dengan material tingkat lanjut menggunakan perenderan berbasis fisik (PBR) agar terlihat lebih alami, dengan pencahayaan dan bayangan yang berubah dan berkilau seperti di kehidupan nyata."
 Feature.Catalog.Label.PBRInfoTitle,Merender Berbasis Fisik (PBR)
+Feature.Catalog.Label.ParticleEffects,Efek Partikel
+Feature.Catalog.Label.ParticleEffectsInfo,"Item dengan efek partikel memancarkan visual animasi, sehingga terasa dinamis dan hidup."
 Feature.Catalog.Label.Placement,Penempatan
 Feature.Catalog.Label.PrePremiumPrice,(Harga Item:
 Feature.Catalog.Label.Premium,
@@ -1986,6 +2070,7 @@ Feature.Catalog.Label.SalePrice,Harga Jual:
 Feature.Catalog.Label.SaveAsCharacter,Simpan sebagai Karakter
 Feature.Catalog.Label.SaveOptions,Simpan Opsi
 Feature.Catalog.Label.Search,
+Feature.Catalog.Label.SearchSuggestions,Kamu mungkin mencari
 Feature.Catalog.Label.SellCut,Kamu Mendapatkan:
 Feature.Catalog.Label.SellPageUpsell,Penjualan hanya tersedia untuk pengguna dengan keanggotaan Roblox Plus.
 Feature.Catalog.Label.SellSuccess,Item untuk Dijual
@@ -2047,6 +2132,7 @@ Feature.Catalog.Message.CaptionLimit,
 Feature.Catalog.Message.Checkout.PurchaseFailed,"Untuk melanjutkan, review atau hapus item"
 Feature.Catalog.Message.Checkout.UnavailableItems,Satu atau beberapa item tidak dapat dibeli. Hapus item tersebut sebelum melanjutkan.
 Feature.Catalog.Message.CollectiblesInfo,"Item Koleksi bisa dijual kembali antarpengguna setelah periode kepemilikan, sekalipun stok awal belum habis terjual. Subscriber Roblox Plus dapat mencantumkan item Koleksi untuk dijual kembali."
+Feature.Catalog.Message.FTUXFavoritePillTooltip,Tambahkan ini ke favorit
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Temukan item kreasi terbaik di Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Pembelian dari penjualan kembali akan ditahan hingga {days} hari. Item tersebut hanya dapat dijual kembali setelah periode penahanan ini berakhir. Hanya pengguna Plus yang dapat menjual kembali item.
 Feature.Catalog.Message.HoldingPolicyL2,"Setelah pembelian, item orisinal akan ditahan hingga {purchaseDays} hari. Item tersebut hanya dapat dijual kembali setelah periode penahanan ini berakhir dan penjualan kembali akan memiliki masa penahanan hingga {resaleDays} hari. Hanya pengguna premium yang dapat menjual kembali item."
@@ -2066,6 +2152,7 @@ Feature.Catalog.Response.ReportSubmitted,Laporan sudah dikirim dan akan segera d
 Feature.Catalog.Response.TakenOffSaleSuccess,Berhasil membatalkan penjualan
 Feature.Catalog.Search.LandingPage.Empty,"Cari berdasarkan warna, tipe, tema, dll"
 Feature.Catalog.Search.Placeholder,"Cari item, pakaian"
+Feature.Catalog.Text.OfferAppliedToHighestItem,Penawaran diterapkan pada item tertinggi
 Feature.Catalog.Title.AvatarSharePanel,Avatarmu siap untuk dibagikan
 Feature.Catalog.Title.Checkout,
 Feature.Catalog.Title.Checkout.ClearAllItemsOnAvatarTitle,Hapus semua item?
@@ -2085,11 +2172,13 @@ Feature.Catalog.Title.CheckoutPlural,Checkout {count} item
 Feature.Catalog.Title.CheckoutSingular,
 Feature.Catalog.Title.Makeup.MakeupMax6LayersPromptTitle,Ganti lapisan bawah?
 Feature.Catalog.Title.RentalFtuxText,Sewa untuk mencoba item selama 3 hari
+Feature.Catalog.Toast.AddedToFavorites,Ditambahkan ke favorit
 Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,Harga berubah karena kamu memiliki {number} item
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar sedang di-review
 Kamu dapat membagikan Avatarmu setelah Avatar selesai di-review"
 Feature.Catalog.Toast.FavoritedLook,Menambahkan avatar ke favorit
 Feature.Catalog.Toast.LinkCopied,Tautan tersalin ke clipboard
+Feature.Catalog.Toast.RemovedFromFavorites,Dihapus dari favorit
 Feature.Catalog.Toast.UnfavoritedLook,Menghapus avatar dari favorit
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
@@ -2167,10 +2256,14 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} membalas ke kamu
 Feature.Chat.Label.Group.YouRepliedToThem,Kamu membalas ke {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,Nama Grup
 Feature.Chat.Label.HoverToReplyTooltip,Arahkan kursor untuk membalas
+Feature.Chat.Label.InGameFriendsChatNotifications,Notifikasi chat teman dalam game
+Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,Tekan lama untuk membalas
 Feature.Chat.Label.Members,Anggota
 Feature.Chat.Label.MessageNotAvailable,Pesan ini tidak tersedia
+Feature.Chat.Label.MuteInGameChatToastNotifications,Bisukan notifikasi chat dalam game
 Feature.Chat.Label.New,
+Feature.Chat.Label.NoChatFound,Tidak ada chat yang ditemukan
 Feature.Chat.Label.NoDescriptionYet,Belum ada deskripsi.
 Feature.Chat.Label.NotImplementedMessageType,Pesan ini tidak dapat ditampilkan.
 Feature.Chat.Label.NotSet,Belum Diatur
@@ -2184,7 +2277,7 @@ Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Balas ke diri sendiri
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} mengatakan...
 Feature.Chat.Label.ReplyingToYourself,Kamu mengatakan...
 Feature.Chat.Label.SearchConnections,Cari Koneksi
-Feature.Chat.Label.SearchFriends,
+Feature.Chat.Label.SearchFriends,Cari teman
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SnoozeChatNotifications,Bisukan notifikasi chat dalam pengalaman virtual:
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
@@ -2209,9 +2302,10 @@ Feature.Chat.Message.AddConnectionsPartyLimitSingular,Kamu hanya bisa mengadakan
 Feature.Chat.Message.AddFriendsLimit,Kamu bisa memiliki hingga {connectionsNum} teman di chat group.
 Feature.Chat.Message.AddFriendsPartyLimit,Kamu bisa mengadakan Party dengan maksimal {connectionsNum} teman.
 Feature.Chat.Message.AddFriendsPartyLimitSingular,Kamu hanya bisa mengadakan party dengan 1 teman karena pengaturan privasimu.
+Feature.Chat.Message.CannotBeDisplayedThirdPerson,{displayName} mengirim pesan yang tidak dapat ditampilkan
 Feature.Chat.Message.ChatIsDisabledByPrivacySetting,Chat dinonaktifkan. Kamu dapat mengaktifkannya di pengaturan privasi.
-Feature.Chat.Message.ChatUnavailableRegion,Saat ini Chat belum tersedia di wilayahmu.
-Feature.Chat.Message.ChatUnavailableWithUser,"Saat ini, Chat tidak tersedia dengan pengguna ini."
+Feature.Chat.Message.ChatUnavailableRegion,Saat ini chat belum tersedia di wilayahmu.
+Feature.Chat.Message.ChatUnavailableWithUser,"Saat ini, chat tidak tersedia dengan pengguna ini."
 Feature.Chat.Message.Default,Tidak semua orang di chat ini dapat melihat pesan kamu.
 Feature.Chat.Message.EnableChat,"Untuk chat dengan Koneksi, nyalakan fitur chat di Pengaturan Privasimu."
 Feature.Chat.Message.EnableChat.FriendsRename,"Untuk chat dengan teman, aktifkan chat di Pengaturan Privasi."
@@ -2260,25 +2354,22 @@ Feature.Chat.Text.NoConnections,"Kamu belum menambahkan Koneksi sama sekali. Unt
 Feature.Chat.Text.NoFriends,"Kamu belum menambahkan satu teman pun. Untuk memulai, cari dan tambahkan temanmu di Roblox."
 Feature.Chat.Title.FriendsChat,Chat teman
 Feature.Chat.Title.MuteChatNotifications,Bisukan notifikasi chat dari teman selama gameplay
+Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Izinkan Teman Kamu Menemukan Kamu
-Feature.Contacts.Action.FindFriends,Temukan Teman
 Feature.Contacts.Action.Invite,Undang
 Feature.Contacts.Action.Search,Cari Kontak
-Feature.Contacts.Action.SyncContacts,Sinkronisasi Kontak
 Feature.Contacts.Description.AddFromContactsDescription,"Tambahkan kontak untuk terhubung di Roblox. Jika kedua pengguna berusia 13+ dan usianya telah diperiksa, kalian akan menjadi Koneksi Tepercaya."
 Feature.Contacts.Description.AddFromContactsTrustedFriends,"Tambahkan kontak untuk terhubung di Roblox. Jika kedua pengguna 13+ dan usianya telah diperiksa, kalian akan menjadi teman tepercaya."
 Feature.Contacts.Description.ContactsList,Dengan siapa kamu ingin menjelajahi Roblox? Kirimkan mereka tautan undangan untuk berteman di Roblox.
 Feature.Contacts.Description.ContactsListDescription,"Agar lebih seru, tambahkan Koneksi atau kirim permintaan Koneksi ke kontak."
 Feature.Contacts.Description.ContactsMixedList,Dengan siapa kamu ingin menjelajahi Roblox? Tambahkan teman di Roblox atau kirimkan tautan permintaan kepada kontak.
 Feature.Contacts.Description.ContactsProfileView,"Kontak kamu, {contactName}, ada di Roblox. Kamu akan dapat melihat profil lengkap kontak kamu ini setelah kamu berteman dengannya."
-Feature.Contacts.Description.ExploreWithFriends,Bergabunglah ke pengalaman virtualmu berikutnya dengan seseorang yang kamu kenal
-Feature.Contacts.FindFriendsBanner.Button,
+Feature.Contacts.FindFriendsBanner.Button,Temukan Teman
 Feature.Contacts.FindFriendsBanner.Description,Lihat temanmu yang ada di Roblox dengan menambahkan nomor ponselmu.
 Feature.Contacts.FindFriendsBanner.DescriptionPV,Kontak yang ada di Roblox akan muncul di sini saat tersedia.
 Feature.Contacts.FindFriendsBanner.DescriptionV2,Bantu kami menghubungkanmu dengan temanmu dengan menambahkan nomor ponsel.
-Feature.Contacts.Heading.ExploreWithFriends,Berjelajah dengan Teman
 Feature.Contacts.Heading.HelpFriendsFindYou,Bantu Teman Menemukan Kamu
 Feature.Contacts.Heading.LetFriendsFindYou,Izinkan teman menemukan kamu
 Feature.Contacts.Heading.SettingSaved,Pengaturan disimpan.
@@ -2334,6 +2425,7 @@ Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,"Dengan memainkan peng
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
 Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,Main
+Feature.ExperienceDetails.PlayButtonText.PlayDemo,Mainkan Demo
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
 Feature.ExperienceDetails.PlayButtonText.Unlock,Buka Kunci
 Feature.ExperienceDetails.RestrictedUnplayableModal.Action.Ok,
@@ -2350,6 +2442,7 @@ Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityRegionalComplianc
 Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated,Pengalaman virtual ini tidak bisa diakses karena belum diberi peringkat
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedCustom,Pengalaman ini tidak tersedia di {device}
 Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault,Pengalaman virtual ini tidak tersedia di perangkatmu
+Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted,Pengalaman virtual ini tidak bisa dibeli di perangkat ini
 Feature.ExperienceDetails.UnplayableError.GameUnapproved,
 Feature.ExperienceDetails.UnplayableError.IncorrectConfiguration,
 Feature.ExperienceDetails.UnplayableError.InsufficientPermissionFriendsOnly,Kamu belum memiliki akses ke pengalaman virtual ini
@@ -2369,7 +2462,6 @@ Feature.ExperienceDetails.UpdateMaturitySettingModal.Label.Title,
 Feature.FAE.Action.Continue,
 Feature.FAE.Action.Unlock,
 Feature.FAE.Action.UnlockChat,
-Feature.FAE.Action.UnlockTrial,Buka uji coba
 Feature.FAE.CheckIfYouCanJoinGame,Mari kita periksa apakah kamu bisa bergabung ke game ini.
 Feature.FAE.Label.ChatWithFriends,Chat dengan teman
 Feature.FAE.Label.DayLeft,
@@ -2423,7 +2515,8 @@ Feature.Friends.Action.PendingRequest,Permintaan pending
 Feature.Friends.Action.ShareQR,Bagikan QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,Buka Blokir
-Feature.Friends.Action.Unfriend,Hapus Teman
+Feature.Friends.Action.Unfriend,
+Feature.Friends.Action.ViewMore,Lebih banyak
 Feature.Friends.Action.ViewPlatformProfile,Lihat Kartu Gamer
 Feature.Friends.Button.AddViaLink,Tambahkan melalui link
 Feature.Friends.Button.GotIt,
@@ -2526,7 +2619,7 @@ Feature.Friends.Label.Request,Permintaan
 Feature.Friends.Label.SearchFriends,Cari Teman
 Feature.Friends.Label.SentFromWithContext,Terkirim dari {gameName}
 Feature.Friends.Label.SingularMutualFriend,teman bersama
-Feature.Friends.Label.Suggested,
+Feature.Friends.Label.Suggested,Disarankan
 Feature.Friends.Label.YourLinkedParent,Orang tua yang terhubung
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Akunmu ingin direkomendasikan ke pengguna Roblox yang memiliki nomor ponselmu?
@@ -2615,11 +2708,13 @@ Feature.GameDetails.Message.HelpImproveExperience,Bantu kami meningkatkan pengal
 Feature.GameDetails.Message.HidingExperienceQuestion,Kenapa kamu menyembunyikan pengalaman virtual ini?
 Feature.GameDetails.Message.PurchaseGameV2,Buka kunci akses ke {gameName} seharga {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Informasi sponsor tidak dapat ditampilkan karena kesalahan sementara.
-Feature.GameDetails.Message.SuggestLessExperiences,Kami akan lebih jarang menyarankan pengalaman virtual seperti ini
+Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
+Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan berbagai faktor seperti lokasi, info perangkat, usia, dan perilaku di platform, untuk menayangkan konten yang relevan untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
+Feature.GameDetails.Message.SponsoredDisclosure.U18,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,Kami akan lebih jarang menyarankan ini
 Feature.GameDetails.RatingPercentOnly,Rating {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
-Feature.GameFollows.LabelNotifications,Notifikasi
+Feature.GameFollows.LabelNotifications,
 Feature.GameFollows.TooltipFollowLimitReached,Batasan tercapai. Berhenti mengikuti pengalaman virtual lain untuk mengikuti pengalaman virtual ini.
 Feature.GameFollows.TooltipNotificationsLimitReached,Batas tercapai. Matikan notifikasi pengalaman virtual lain terlebih dahulu.
 Feature.GameFollows.TooltipTurnedOffNotifications,Notifikasi dimatikan untuk {experienceName}
@@ -2729,7 +2824,7 @@ Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,Refresh h
 Feature.Home.HeadingFriends,Teman ({friendCount})
 Feature.Home.Label.HappeningNow,Berlangsung sekarang
 Feature.Home.PeopleList.ChatWith,Chat dengan {username}
-Feature.Home.Robux,Robux
+Feature.Home.Robux,
 Feature.InExperienceIntervention.Action.LetUsKnow,Beri tahu kami
 Feature.InExperienceIntervention.Action.Understand,Saya mengerti
 Feature.InExperienceIntervention.Description.BeRespectful,"Di masa mendatang, ikuti peraturan dan hormati pengguna lain."
@@ -2785,6 +2880,7 @@ Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Nyalakan
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Bantu pengguna yang memiliki nomor ponselmu untuk menambahkanmu sebagai teman di Roblox
 Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Aktifkan penemuan teman
 Feature.Moments.Action.AddMusic,Tambahkan Musik
+Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
@@ -2792,6 +2888,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Perluas
+Feature.Moments.Action.GenerateText,
 Feature.Moments.Action.Hide,Sembunyikan detail
 Feature.Moments.Action.HowToCapture,Cara mengambil Media
 Feature.Moments.Action.Join,Gabung
@@ -2813,6 +2910,7 @@ Feature.Moments.Description.HowToCaptureStep2,Aktifkan kendali Media
 Feature.Moments.Description.HowToCaptureStep3,Ambil foto dan video gameplay
 Feature.Moments.Description.LeaveMomentsCreation,"Semua perubahanmu akan hilang, tetapi kamu masih dapat menemukan tangkapan layar ini di galeri <b>Mediamu</b>."
 Feature.Moments.Description.NoMusicResults,Musik tidak ditemukan
+Feature.Moments.Description.NonInfiniteScrollEndBody,Kamu telah mencapai titik akhir di Moment. Ketuk di bawah untuk terus menonton.
 Feature.Moments.Description.NothingHereYet,Belum ada apa pun di sini...
 Feature.Moments.Description.PublishMoment,Deskripsikan Moment-mu
 Feature.Moments.Description.StayFriendly,Mari kita tetap bersikap ramah
@@ -2824,6 +2922,8 @@ Feature.Moments.Label.CaptureLibrary,Perpustakaan Mediamu
 Feature.Moments.Label.DeleteMomentBody,Kamu tidak bisa memulihkan Moment setelah Moment dihapus.
 Feature.Moments.Label.DeleteMomentTitle,Hapus Moment?
 Feature.Moments.Label.Error,
+Feature.Moments.Label.FeedEndBody,Kembali lagi nanti atau buat Moment-mu sendiri.
+Feature.Moments.Label.FeedEndTitle,Tidak ada permintaan pending
 Feature.Moments.Label.FeedFailedToLoad,Feed gagal di-load
 Feature.Moments.Label.FeedMyMoments,Moment Saya
 Feature.Moments.Label.FeedTrending,Sedang Tren
@@ -2831,26 +2931,38 @@ Feature.Moments.Label.HowToUseCaptureTitle,Cara menggunakan Media
 Feature.Moments.Label.LinkCopied,Link disalin.
 Feature.Moments.Label.LinkCopyFailed,Gagal menyalin link.
 Feature.Moments.Label.ModeratedRodeoBody,"Kami menghapus Moment ini karena bertentangan dengan Standar Komunitas kami. Agar Moment-mu tetap terlihat, pastikan kamu memahami dan mematuhi peraturan."
+Feature.Moments.Label.MomentDeletedBody,
+Feature.Moments.Label.MomentDeletedTitle,
 Feature.Moments.Label.MomentFailedToPostBody,Terjadi masalah.
 Feature.Moments.Label.MomentFailedToPostTitle,Moment gagal diposting
 Feature.Moments.Label.MomentPublishedBody,Momen-mu berhasil dipublikasikan.
 Feature.Moments.Label.MomentPublishedTitle,Momen dipublikasikan
+Feature.Moments.Label.MomentUnavailable,Moment tidak tersedia
 Feature.Moments.Label.MomentUnavailableDefault,Moment ini tidak tersedia.
 Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
+Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
 Feature.Moments.Label.Photos,Foto
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
 Feature.Moments.Label.Reactions,Reaksi
+Feature.Moments.Label.ReportReason.BreaksRules,Postingan ini melanggar aturan
+Feature.Moments.Label.ReportReason.IntellectualProperty,Postingan ini melanggar hak kekayaan intelektual saya
 Feature.Moments.Label.ReportSubmittedBody,
 Feature.Moments.Label.ReportSubmittedTitle,Laporan dikirim
+Feature.Moments.Label.RobloxPartnerContent,Konten mitra Roblox
 Feature.Moments.Label.RodeoPublishingTitle,Memublikasikan Moment-mu
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Moment di Roblox
 Feature.Moments.Label.StayFriendlyModeration,Mari kita selalu bersikap ramah
+Feature.Moments.Label.TextGeneratedBody,Overlay dan deskripsi buatan AI ditambahkan
+Feature.Moments.Label.TextGeneratedTitle,Teks Berhasil Dibuat
+Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba lagi.
+Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,Moment dihapus
+Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.Moments.Tooltip.Creation,Semua orang di pengalaman virtual dapat melihat Moment-mu.
 Feature.NativeAds.Label.Ad,
 Feature.NotApproved.Action.ReportMistake,Laporkan kekeliruan
@@ -2979,10 +3091,10 @@ Feature.Profile.Description.EnterNicknameTextbox,Masukkan nama panggilanmu
 Feature.Profile.Description.InspectAndBuy,Klik untuk melihat dan membeli tampilannya.
 Feature.Profile.Description.NicknamePrivacy,Hanya {displayName} yang akan melihat nama ini.
 Feature.Profile.Description.NicknamePrivacyNoDisplayName,Hanya pengguna ini yang akan melihat nama ini.
-Feature.Profile.Description.QrCodeDescription,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi Koneksi Tepercaya.
+Feature.Profile.Description.QrCodeDescription,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi Teman Tepercaya.
 Feature.Profile.Description.QrCodeDescription.FriendsRename,Izinkan pengguna lain men-scan kode QR-mu untuk terhubung di Roblox. Pengguna berusia 13+ yang usianya telah diperiksa dan terhubung melalui scan QR langsung akan menjadi teman tepercaya.
 Feature.Profile.Description.QrCodeScanning,Izinkan pengguna lain men-scan kode QR Roblox kamu dengan Scanner QR atau kamera perangkat mereka untuk dengan cepat menambahkanmu sebagai teman.
-Feature.Profile.Description.RecognizeConnectionsByCustomName,Kenali Koneksi secara lebih mudah dengan memberinya nama khusus. Nama yang diimpor dari kontak dan nama khusus hanya dapat dilihat olehmu.
+Feature.Profile.Description.RecognizeConnectionsByCustomName,Kenali teman secara lebih mudah dengan mengatur nama kustom untuk mereka. Nama yang diimpor dari kontakmu dan nama kustom yang kamu buat hanya dapat dilihat olehmu.
 Feature.Profile.Description.RecognizeFriendsByCustomName,Kenali teman secara lebih mudah dengan mengatur nama kustom untuk mereka. Nama yang diimpor dari kontak kamu dan nama kustom yang kamu buat hanya dapat dilihat oleh kamu.
 Feature.Profile.Description.SaySomething,
 Feature.Profile.Description.ScanQR,Izinkan orang yang kamu kenal memindai kode QR-mu untuk menambahkanmu.
@@ -2998,6 +3110,7 @@ Feature.Profile.Description.SocialNetworksCaptionFriends,Saat ini terlihat oleh 
 Feature.Profile.Description.SocialNetworksCaptionNoOne,Saat ini tidak terlihat oleh siapa pun.
 Feature.Profile.Description.UsernameInsufficientFunds,Kamu perlu lebih banyak {icon}{rbx} untuk mengubah nama penggunamu. Kamu ingin membeli lebih banyak Robux?
 Feature.Profile.Description.UsernamePrice,1000
+Feature.Profile.Header.BuyWholeLook,Beli seluruh tampilan
 Feature.Profile.Header.InspectAndBuy,Avatar {username}
 Feature.Profile.Header.InspectAndBuy.BuySection,Total ({numberOfSelectedItems}/{totalNumberOfItems} item)
 Feature.Profile.Header.InspectAndBuy.Tooltip,Belanja avatar
@@ -3062,7 +3175,7 @@ Feature.Profile.Message.InvalidAliasError,Nama tidak dapat disimpan. Coba nama y
 Feature.Profile.Message.NoExperienceAccess,{name} ada di pengalaman virtual yang tidak dapat kamu akses.
 Feature.Profile.Message.QRLoadFailed,Gagal me-load.
 Feature.Profile.Message.QRNofificationRequest,mengirimi kamu permintaan pertemanan dari kode QR kamu
-Feature.Profile.Message.QRNotificationRequest,mengirimimu permintaan Koneksi dari kode QR-mu
+Feature.Profile.Message.QRNotificationRequest,mengirim permintaan pertemanan dari kode QR-mu
 Feature.Profile.Message.QRNotificationRequest.FriendsRename,
 Feature.Profile.Title.QrScanner,Scanner QR
 Feature.Profile.Tooltip.CurrencyTransfer.Body,Kini kamu bisa mengirim Robux.
@@ -3074,10 +3187,13 @@ Feature.ProfileBadges.VerifiedBadgeInfoLink,
 Feature.ProfileBadges.VerifiedBadgeInfoTitle,Lencana Terverifikasi
 Feature.ProfileBadges.action.close,
 Feature.QualtricsSurveyPrompt.Action.Close,"Tidak, Terima Kasih"
+Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
+Feature.QualtricsSurveyPrompt.Action.Next,
 Feature.QualtricsSurveyPrompt.Action.Retry,
 Feature.QualtricsSurveyPrompt.Action.Send,
 Feature.QualtricsSurveyPrompt.Description.Error,
+Feature.QualtricsSurveyPrompt.Description.TakeAQuickSurvey,Ikuti survei singkat untuk membantu Roblox menjadi lebih baik.
 Feature.QualtricsSurveyPrompt.Heading.GiveUsFeedback,Beri kami masukan
 Feature.QualtricsSurveyPrompt.Response.SurveySubmitted,
 Feature.ReportAbuse.Action.AttachScreenshot,Lampirkan Screenshot
@@ -3099,7 +3215,7 @@ Feature.ReportAbuse.Action.Submit,
 Feature.ReportAbuse.Action.TextMute,Blokir obrolan dari {name}
 Feature.ReportAbuse.DSAIllegal.ReportLink,Laporkan konten ilegal berdasarkan Undang-Undang Layanan Digital UE.
 Feature.ReportAbuse.DSAIllegal.ReportPageTitle,Laporkan Konten Ilegal
-Feature.ReportAbuse.Description.IpInfringementReportModal,<b>Simpan kode ini.</b> Kamu akan membutuhkannya untuk menyelesaikan <b>Permintaan Penghapusan</b> menggunakan alat <b>Kekayaan Intelektual</b> di <b>Pusat Kreator. Kode ini hanya akan berlaku selama 48 jam.</b>
+Feature.ReportAbuse.Description.IpInfringementReportModal,<b>Simpan kode ini.</b> Kamu akan membutuhkannya untuk menyelesaikan <b>Permintaan Penghapusan</b> menggunakan alat <b>Kekayaan Intelektual</b> di <b>Pusat Kreator</b> atau melalui email <i>(lihat detailnya di Ketentuan Penggunaan)</i>. <b>Kode ini hanya akan berlaku selama 48 jam.</b>
 Feature.ReportAbuse.Heading.ReportAbuse,
 Feature.ReportAbuse.Heading.ReportUsingSelectInScene,Laporkan menggunakan mode sorotan
 Feature.ReportAbuse.Heading.SelectInSceneErrorTitle,Eror: Maksimal 5 lingkaran
@@ -3122,7 +3238,6 @@ Feature.ReportAbuse.Label.FinishChatReport,Selesaikan laporan chat
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,Sorot masalah dengan lingkaran
 Feature.ReportAbuse.Label.HighlightProblemPrecise,Sorot masalah
-Feature.ReportAbuse.Label.NoChatMessagesFound,Tidak ada pesan chat yang ditemukan
 Feature.ReportAbuse.Label.Optional,Opsional
 Feature.ReportAbuse.Label.Person,
 Feature.ReportAbuse.Label.PleaseSelectOne,Pilih satu.
@@ -3204,7 +3319,7 @@ Feature.RobloxSubscription.Action.TryItForFree,Coba gratis
 Feature.RobloxSubscription.Body.AlreadySubscribed,Subscription Plus-mu sudah memberikan manfaat dalam game.
 Feature.RobloxSubscription.Body.GenericError,Kami tidak dapat menyelesaikannya saat ini. Coba lagi.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Subscription ini tidak tersedia untuk dibeli di perangkat ini.
-Feature.RobloxSubscription.Description.AgeCheckTrial,Lakukan pemeriksaan usia untuk membuka manfaat Plus dan mengakses fitur yang sesuai dengan usiamu.
+Feature.RobloxSubscription.Description.AgeCheckTrial,Verifikasi usiamu dengan pemeriksaan usia dan dapatkan Roblox Plus gratis selama 1 minggu sebagai ucapan terima kasih kami. Tidak diperlukan metode pembayaran untuk menikmati uji coba gratis ini.
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Lebih seru, lebih hemat Robux. Subscribe Roblox Plus."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Server privat gratis
@@ -3213,6 +3328,7 @@ Feature.RobloxSubscription.Label.BlackbirdTr,Kirim Robux secara gratis
 Feature.RobloxSubscription.Label.BlackbirdUpsellBanner,Dapatkan diskon {discountPercentage}% dengan Roblox Plus
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountFirst,"Diskon {discountPercent}% untuk item dalam game, avatar, dan banyak lagi"
 Feature.RobloxSubscription.Label.BlackbirdVTDiscountSecond,Diskon {discountPercent}% untuk item ini setelah {periodIndex} {periodType}
+Feature.RobloxSubscription.Label.FreeTrialDisclosureShort,"Dengan mengklik ""Lanjutkan"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox{linkEnd}."
 Feature.RobloxSubscription.Label.FreeTrialDisclosureV2,"Dengan mengklik ""Coba gratis"", kamu menyetujui {linkStart}Ketentuan Subscription Roblox.{linkEnd} Uji coba gratis kamu akan berakhir dalam 1 bulan, dan biaya akan otomatis dibebankan setiap bulan. Kamu bisa membatalkannya kapan saja."
 Feature.RobloxSubscription.Label.FreeTrialText,Dapatkan uji coba gratis
 Feature.RobloxSubscription.Label.RobloxPlusPriceRowV2,"{boldStart}Gratis 1 bulan,{boldEnd} lalu {price}/{periodType}"
@@ -3314,11 +3430,10 @@ Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,Mengirim
 Feature.SettingsHub.Label.Show,
 Feature.SettingsHub.Label.Unmute,
-Feature.SettingsHub.Label.WhichChatOptional,Chat yang mana? (opsional)
+Feature.SettingsHub.Label.VoiceChat,Chat suara
 Feature.SettingsHub.Label.WhichPlayer,Pengguna yang Mana?
 Feature.SettingsHub.LanguageSelection.SettingLabel,Bahasa Pengalaman Virtual
 Feature.SettingsHub.LanguageSelection.Unavailable,
-Feature.SettingsHub.Message.BlockConfirmation,Kamu dan {DISPLAY_NAME} (@{RBX_NAME}) tidak akan lagi dapat berkomunikasi satu sama lain.
 Feature.SettingsHub.Message.InviteToGameTitle,Bergabung dengan saya di {PLACENAME}
 Feature.SettingsHub.MethodOfAbuse.AvatarSubtitle,Avatar pengguna ini memakai pakaian ofensif
 Feature.SettingsHub.MethodOfAbuse.Other.Subtitle,
@@ -3369,6 +3484,7 @@ Feature.SettingsHub.Prompt.Subtitle.Microphone,"Sistem kami telah mendeteksi per
 Feature.SettingsHub.Prompt.Subtitle.MicrophonePermission,"Untuk chat dengan suara, buka Pengaturan perangkat untuk memungkinkan Roblox menggunakan mikrofon"
 Feature.SettingsHub.Prompt.Subtitle.MuteAnyoneAnytime,Kamu dapat membisukan siapa pun kapan saja.
 Feature.SettingsHub.Prompt.Subtitle.NotAudible,Volume game diatur ke '0' di pengaturan. Tingkatkan volume untuk mendengar suara.
+Feature.SettingsHub.Prompt.Subtitle.NotAudibleVoiceChatVolume,Volume chat suara disetel ke ‘0’ di pengaturan. Naikkan volume untuk mendengar suara.
 Feature.SettingsHub.Prompt.Subtitle.Place,Suara spasial hanya tersedia untuk tempat dengan jumlah Pemain Maksimal 30 atau kurang.
 Feature.SettingsHub.Prompt.Subtitle.Respect,Harap bantu agar Roblox tetap menyenangkan dengan menghormati orang lain.
 Feature.SettingsHub.Prompt.Subtitle.Retry,
@@ -3489,6 +3605,9 @@ Feature.Squads.Description.Invited,
 Feature.Squads.Description.InvitedToExperience,"Kamu sudah diundang ke suatu pengalaman virtual. Sesudah undangan itu selesai, kamu bisa mencoba lagi."
 Feature.Squads.Description.JoinAnotherParty,Saat ini kamu berada di Grup aktif. Ingin keluar dari Grup tersebut dan pindah ke Grup ini?
 Feature.Squads.Description.JoinWithLowMemory,Memori perangkatmu hampir penuh. Bergabung tanpa suara dapat mencegah Roblox crash.
+Feature.Squads.Description.LuckyRecommendationRevealed,Seluruh grup bisa bergabung
+Feature.Squads.Description.LuckyRecommendationRolling,Mencari yang cocok untuk grupmu
+Feature.Squads.Description.LuckyRecommendationRow,Ayo mulai
 Feature.Squads.Description.ManyPeopleActive,{userCount} pengguna aktif
 Feature.Squads.Description.NoResponse,Tidak ada respons
 Feature.Squads.Description.NotGoing,Tidak hadir
@@ -3528,6 +3647,9 @@ Feature.Squads.Label.JoinParty,
 Feature.Squads.Label.LeaveParty,Keluar dari Party
 Feature.Squads.Label.Loading,
 Feature.Squads.Label.LowMemory,Memori tersisa sedikit
+Feature.Squads.Label.LuckyRecommendationRevealed,Coba yang ini
+Feature.Squads.Label.LuckyRecommendationRolling,Memilih game
+Feature.Squads.Label.LuckyRecommendationRow,Tidak yakin ingin bermain apa?
 Feature.Squads.Label.MultiplePeopleJoinedYourParty,Beberapa orang bergabung ke Party kamu
 Feature.Squads.Label.MuteMic,Bisukan mikrofon
 Feature.Squads.Label.Party,
@@ -3551,7 +3673,7 @@ Feature.Squads.Label.UserDropdownMenuVoiceErrorUserIneligible,Saat ini mereka ti
 Feature.Squads.Label.UsersParty,Party {displayName}
 Feature.Squads.Label.ViewChat,Lihat chat
 Feature.Squads.Label.ViewParty,Lihat Party
-Feature.Squads.Label.VoiceChats,Chat suara
+Feature.Squads.Label.VoiceChats,
 Feature.Squads.Label.VoiceErrorGeneral,Anda tidak terhubung ke suara
 Feature.Squads.Label.VoiceErrorPartyNotVoiceEligible,Chat suara tidak tersedia di Party ini. Kamu dapat membuat grup baru dengan chat suara dan filter yang tidak terlalu ketat.
 Feature.Squads.Label.VoiceErrorUserIneligible,Saat ini kamu tidak memiliki akses ke chat suara Party
@@ -3588,6 +3710,15 @@ Feature.Toast.VoteError.AssetNotVoteable,Pengalaman virtual mungkin tidak dapat 
 Feature.Toast.VoteError.Default,Tindakan tidak tersedia.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Kamu memilih terlalu cepat.
 Feature.Toast.VoteError.PlayGame,Kamu harus mengunjungi pengalaman virtual sebelum memberi rating.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Kamu telah diblokir dari memainkan game ini karena pelanggaran peraturan yang berulang atau serius.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Kamu tidak dapat memainkan game ini karena perilakumu melanggar peraturan.
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox telah memblokir aksesmu ke game ini
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Day,Roblox telah menangguhkan aksesmu ke game ini selama 1 hari
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Days,Roblox telah menangguhkan aksesmu ke game ini selama {number} hari
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hour,Roblox telah menangguhkan aksesmu ke game ini selama 1 jam
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Hours,Roblox telah menangguhkan aksesmu ke game ini selama {number} jam
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minute,Roblox telah menangguhkan aksesmu ke game ini selama 1 menit
+Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Suspended.Minutes,Roblox telah menangguhkan aksesmu ke game ini selama {number} menit
 Feature.VerificationUpsell.Action.AddPhone,Tambahkan Nomor Ponsel
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Tambahkan Ponsel untuk Chat Suara
@@ -3692,15 +3823,18 @@ Features.OnDemandAds.Reward_Earned,Hadiah yang Diperoleh
 Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
+Features.Transfers.Action.TurnOnTwoStepVerification,Aktifkan Verifikasi 2 Langkah
 Features.Transfers.Action.VPC.Ask,
 Features.Transfers.Action.VPC.AskParentBodyReceive,"Untuk menerima Robux, kamu memerlukan izin orang tua."
 Features.Transfers.Action.VPC.AskParentBodySend,"Untuk mengirim Robux, kamu memerlukan izin orang tua."
 Features.Transfers.Action.VPC.AskParentTitle,
 Features.Transfers.Body.DailyLimitExceededError,Kamu telah melampaui batas harian untuk mengirim Robux. Periksa kembali nanti untuk mencoba lagi.
+Features.Transfers.Body.DailyLimitTwoStepVerificationUpsell,Kamu telah mencapai batas harian untuk mengirim Robux. Aktifkan verifikasi 2 langkah untuk memeriksa apakah kamu memenuhi syarat untuk batas yang lebih tinggi.
 Features.Transfers.Body.ExpiredTransferError,"Karena tidak aktif, Robux yang dikirim dari @{username} telah kedaluwarsa."
 Features.Transfers.Body.GenericReceiveError,Akunmu saat ini tidak bisa menerima Robux.
 Features.Transfers.Body.GenericSentError,"Terjadi kesalahan, dan Robux tidak terkirim. Periksa koneksimu dan coba lagi."
 Features.Transfers.Body.MonthlyLimitExceededError,Kamu telah melampaui batas bulanan untuk mengirim Robux. Periksa kembali nanti untuk mencoba lagi.
+Features.Transfers.Body.MonthlyLimitTwoStepVerificationUpsell,Kamu telah mencapai batas bulanan untuk mengirim Robux. Aktifkan verifikasi 2 langkah untuk memeriksa apakah kamu memenuhi syarat untuk batas yang lebih tinggi.
 Features.Transfers.Body.ReceiverLimitHitError,"Pengguna ini tidak dapat menerima jumlah ini saat ini. Coba kirim lebih sedikit, atau coba lagi nanti."
 Features.Transfers.Body.TransferAmountBelowMinimumError,Kirim {minAmount} Robux atau lebih.
 Features.Transfers.Body.TransferAmountExceedsMaximumError,Kamu bisa mengirim hingga {maxAmount} Robux.
@@ -3746,6 +3880,7 @@ IAPExperience.InsufficientRobux.Action.RobuxStore,Buka Toko Robux
 IAPExperience.InsufficientRobux.Text.BuyRobux,Beli {robux} untuk membeli item ini
 IAPExperience.InsufficientRobux.Text.CurrentBalance,Saldo Saat Ini
 IAPExperience.InsufficientRobux.Text.DontHaveEnough,
+IAPExperience.InsufficientRobux.Text.MissingRobux,
 IAPExperience.InsufficientRobux.Text.YouNeed,Kamu perlu tambah {robux}. Beli paket Robux lagi lalu kembali ke pengalaman virtual.
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux Tidak Cukup
 IAPExperience.LeaveRoblox.Action.Cancel,
@@ -3815,7 +3950,6 @@ IAPExperience.PurchasePrompt.Label.GenericDiscountNoPercent,Diskon
 IAPExperience.PurchasePrompt.Label.Subtotal,Subtotal
 IAPExperience.PurchasePrompt.Label.SubtotalWithItemCount,Subtotal ({itemCount} item)
 IAPExperience.PurchasePrompt.Label.Total,
-IAPExperience.PurchasePrompt.Label.TotalPrice,Total Harga
 IAPExperience.PurchasePrompt.Label.TotalPriceV2,Total harga
 IAPExperience.PurchasePrompt.Text.BuyItemQuestion,Kamu ingin membeli {name}?
 IAPExperience.PurchasePrompt.Text.BuyItemQuestionIncludingWarning,Harap moderasi hiburan kamu dan lakukan penggunaan yang rasional. Kamu ingin membeli {name}?
@@ -3877,18 +4011,14 @@ IAPExperience.U13Confirm.Title.Warning,Peringatan!
 InGame.Chat.ErrorMessageAnimationPlaying,Kamu tidak dapat menggunakan Emote saat melakukan tindakan ini.
 InGame.Chat.ErrorMessageSwitchToR15,Beralih ke avatar R15 kamu untuk menggunakan Emote.
 InGame.Chat.Label.From,Dari
-InGame.Chat.Label.SystemMessagePrefix,Sistem
-InGame.Chat.Label.TeamMessagePrefix,Tim
+InGame.Chat.Label.SystemMessagePrefix,
+InGame.Chat.Label.TeamMessagePrefix,
 InGame.Chat.Label.To,Kepada
 InGame.Chat.Response.EmoteNotAvailable,Kamu tidak dapat menggunakan Emote itu.
 InGame.Chat.Response.EmotesNotSupported,Kamu tidak dapat menggunakan Emote di sini.
 InGame.Chat.Response.EmotesTemporarilyUnavailable,Kamu tidak dapat menggunakan Emote saat ini.
 InGame.Chat.Response.EmotesWrongAvatarType,Hanya avatar R15 yang dapat menggunakan Emote.
-InGame.CommonUI.Badge.BadgeText,BETA
-InGame.CommonUI.Badge.Popup.DisclaimerText2,"Laporkan penyalahgunaan jika kamu menemukan pengguna yang melanggar Panduan Komunitas kami. Jika kamu telah mengaktifkan layanan suara, Roblox akan merekam audio suara di mana saja di platform untuk tujuan moderasi, keamanan, dan untuk meningkatkan layanan dan fitur kami. Dengan terus menggunakan layanan suara, kamu memberikan izin kepada Roblox untuk mengumpulkan, menggunakan, dan menyimpan rekaman suaramu untuk tujuan tersebut. Kamu dapat memilih untuk keluar dari fitur suara kapan saja."
-InGame.CommonUI.Badge.Popup.HeaderList,Kamu telah memilih untuk berpartisipasi dalam satu atau beberapa fitur beta kami:
 InGame.CommonUI.Badge.Popup.LearnMoreLink,
-InGame.CommonUI.Badge.Popup.VoiceChatBullet,
 InGame.CommonUI.Button.KeepPlaying,Terus Putar
 InGame.CommonUI.Button.Ok,
 InGame.CommonUI.Button.Retry,
@@ -3914,6 +4044,7 @@ InGame.ConnectionError.Action.ViewCollaborators,Lihat kolaborator
 InGame.ConnectionError.AndroidAnticheatKick,Roblox mendeteksi file tidak lengkap atau rusak. Uninstall dan instal ulang Roblox dari toko aplikasi resmi.
 InGame.ConnectionError.AndroidEmulatorKick,"Kami tidak mengizinkan pemakaian emulator untuk akun tanpa akses edit tempat. Jika kamu tidak memakai emulator, hubungi dukungan pelanggan dengan menyebutkan kode kesalahan ini."
 InGame.ConnectionError.Button.Reconnect,Hubungkan Kembali
+InGame.ConnectionError.Button.ReconnectNow,Hubungkan Kembali Sekarang
 InGame.ConnectionError.ConnectErrors,Gagal menghubungkan ke pengalaman virtual. Silakan coba lagi.
 InGame.ConnectionError.ConnectionBanned,Gagal menghubungkan ke pengalaman virtual. Diblokir dari pengalaman virtual ini.
 InGame.ConnectionError.ConnectionFailedRobloxVersion,Gagal menghubungkan ke pengalaman virtual. Versi Roblox sudah kedaluwarsa. Silakan update dan coba lagi.
@@ -3978,6 +4109,7 @@ InGame.ConnectionError.DisconnectTryAgain,Koneksi dengan pengalaman virtual terp
 InGame.ConnectionError.DisconnectVerboselyModeratedGame,"Untuk melindungi keamananmu, kami memutus koneksi server ini setelah pengguna melanggar peraturan berulang kali. Kamu dapat membantu menjaga Roblox tetap aman dengan mempelajari peraturan di Standar Komunitas kami."
 InGame.ConnectionError.DisconnectWrongVersion,
 InGame.ConnectionError.Heading.VRDisconnected,Koneksi Headset Terputus
+InGame.ConnectionError.Joining,Bergabung ke server
 InGame.ConnectionError.Message.ChannelName,Channel: {CHANNEL_NAME}
 InGame.ConnectionError.Message.ErrorCode,Kode Eror: {ERROR_CODE}
 InGame.ConnectionError.Message.RestartApp,"Untuk terus bermain, mulai ulang aplikasi."
@@ -3997,11 +4129,15 @@ InGame.ConnectionError.PlacelaunchRestricted,Status pengalaman virtual telah ber
 InGame.ConnectionError.PlacelaunchUnauthorized,Kamu tidak memiliki izin untuk bergabung ke pengalaman virtual ini.
 InGame.ConnectionError.PlacelaunchUserLeft,Pengguna yang kamu ikuti sudah keluar dari pengalaman virtual.
 InGame.ConnectionError.PlacelaunchUserPrivacyUnauthorized,Pengaturan chat mencegah kamu untuk bergabung ke server ini.
+InGame.ConnectionError.Queue,Posisimu dalam antrian: {POSITION}
 InGame.ConnectionError.ReconnectFailed,Menghubungkan kembali tidak berhasil. Coba lagi.
-InGame.ConnectionError.RemoteAttestationBootValidationFailure,Tempat ini memerlukan sistem operasi tepercaya. Jalankan Roblox di perangkat yang didukung dan pastikan bootloader terkunci.
-InGame.ConnectionError.RemoteAttestationGeneralFailure,"Roblox tidak dapat memverifikasi integritas game. Pastikan sistem operasimu tepercaya dan terbaru, lalu instal ulang Roblox dari lokasi download resmi."
-InGame.ConnectionError.RemoteAttestationOSOutOfDate,Tempat ini memerlukan instalasi Android yang terbaru. Pastikan sistem operasimu sudah diperbarui.
-InGame.ConnectionError.RemoteAttestationTimeout,Roblox tidak dapat memverifikasi integritas game karena masalah jaringan. Hubungkan kembali.
+InGame.ConnectionError.ReconnectingAttempt,Menghubungkan kembali (upaya #{RBX_ATTEMPT})...
+InGame.ConnectionError.ReconnectingAttemptInSecond,Menghubungkan kembali (upaya #{RBX_ATTEMPT}) dalam 1 detik...
+InGame.ConnectionError.ReconnectingAttemptInSeconds,Menghubungkan kembali (upaya #{RBX_ATTEMPT}) dalam {RBX_SECONDS} detik...
+InGame.ConnectionError.RemoteAttestationBootValidationFailure,Game ini memerlukan sistem operasi tepercaya. Jalankan Roblox di perangkat yang didukung dan pastikan bootloader terkunci.
+InGame.ConnectionError.RemoteAttestationGeneralFailure,"Roblox tidak dapat memverifikasi integritas aplikasi. Pastikan sistem operasimu tepercaya dan terbaru, lalu instal ulang Roblox dari lokasi download resmi."
+InGame.ConnectionError.RemoteAttestationOSOutOfDate,Game ini memerlukan penginstalan Android terbaru. Pastikan sistem operasimu sudah diperbarui.
+InGame.ConnectionError.RemoteAttestationTimeout,Roblox tidak dapat memverifikasi integritas aplikasi karena masalah jaringan. Hubungkan kembali.
 InGame.ConnectionError.RemoteAttestationUnsupported,Game ini telah mengaktifkan persyaratan keamanan hardware tambahan. Jalankan Roblox di perangkat yang didukung.
 InGame.ConnectionError.ServerShutdown,Koneksi dengan pengalaman virtual terputus. Server telah dimatikan.
 InGame.ConnectionError.TeleportErrors,Teleportasi gagal karena kesalahan tidak terduga. Coba lagi.
@@ -4081,7 +4217,7 @@ InGame.NotificationScript2.Capture.Permission.AlertTitle,Aktifkan Izin Menyimpan
 InGame.NotificationScript2.Capture.Success.ToastText,Tangkapan Layar Disimpan
 InGame.NotificationScript2.FriendRequestEvent.Accept,Sekarang kamu berteman dengan {RBX_NAME}.
 InGame.NotificationScript2.Message.ConnectionRequestEvent.Accepted,
-InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Mengirimimu permintaan Koneksi.
+InGame.NotificationScript2.Message.ConnectionRequestEvent.Sent,Mengirimi kamu permintaan pertemanan.
 InGame.NotificationScript2.Message.FriendRequestEvent.Accepted,
 InGame.NotificationScript2.Message.FriendRequestEvent.Sent,Mengirimi Kamu Permintaan Pertemanan
 InGame.NotificationScript2.Screenshot.ButtonText,Buka Folder
@@ -4097,7 +4233,7 @@ InGame.NotificationScript2.onBadgeAwardedTitle,Lencana Dihadiahkan
 InGame.NotificationScript2.onPointsAwarded.multiple,Kamu menerima {RBX_NUMBER} poin.
 InGame.NotificationScript2.onPointsAwarded.single,
 InGame.PlayerDropDown.Accept,
-InGame.PlayerDropDown.Action.ConnectionRequest,Permintaan Koneksi
+InGame.PlayerDropDown.Action.ConnectionRequest,Permintaan Pertemanan
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,Batalkan Permintaan Pertemanan
 InGame.PlayerDropDown.Examine,
@@ -4110,7 +4246,6 @@ InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,Dalam Studio
 InGame.Presence.Label.Offline,
 InGame.Presence.Label.Online,
-InGame.Presence.Label.RobloxStudio,
 InGame.UnknownNamespace.BACKPACK_SEARCH,
 InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage,Temanmu {RBX_NAME} telah bergabung ke pengalaman virtual ini.
 InGame.UnknownNamespace.GameChat_ChatCommandsTeller_MuteCommand,/mute <speaker> : bisukan pembicara.

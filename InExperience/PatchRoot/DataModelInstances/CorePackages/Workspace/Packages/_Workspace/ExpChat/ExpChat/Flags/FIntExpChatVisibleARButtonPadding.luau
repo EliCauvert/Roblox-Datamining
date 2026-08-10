@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("ExpChatVisibleARButtonPadding", 42)
+﻿return if require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatScrollbarInset) then game:DefineFastInt("ExpChatVisibleARButtonPaddingInset", 34) else game:DefineFastInt("ExpChatVisibleARButtonPadding", 42)

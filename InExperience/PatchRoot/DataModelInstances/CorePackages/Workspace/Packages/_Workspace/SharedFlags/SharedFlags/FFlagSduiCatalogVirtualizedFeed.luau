@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SduiCatalogVirtualizedFeed3", false)
+﻿return game:DefineFastFlag("SduiCatalogVirtualizedFeed4", false)

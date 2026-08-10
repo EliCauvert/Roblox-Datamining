@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("ProgressLoading").Parent.Signals).createComputed(require(script.Parent.createLoadingScreenStore))

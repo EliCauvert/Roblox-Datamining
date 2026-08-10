@@ -15,75 +15,45 @@ local telemetryEventType = analyticsServiceModule.TelemetryEventType
 local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
 local fFlagSupportSubmissionOnAllReportNodes = require(parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
 local fFlagAbuseReportMenuV2 = require(parent.SharedFlags).FFlagAbuseReportMenuV2
-local fFlagAbuseReportConfigStoreResolver = require(parent.SharedFlags).FFlagAbuseReportConfigStoreResolver
+local fFlagAbuseReportInExpPlayerListV3 = require(parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
+local fFlagAbuseReportSceneSelectionSubmitTrackingModule = require(genericAbuseReporting.Flags.FFlagAbuseReportSceneSelectionSubmitTracking)
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "ContentNode" ]]
-	-- upvalues: useAbuseReportAnalytics (ref), fFlagAbuseReportConfigStoreResolver (ref), reactModule (ref), fFlagAbuseReportMenuV2 (ref), listNodeV2Module (ref), listNodeModule (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), telemetryEventType (ref)
+return reactModule.memo(function(p0) --[[ line: 46 | named "ContentNode" ]]
+	-- upvalues: useAbuseReportAnalytics (ref), reactModule (ref), fFlagAbuseReportMenuV2 (ref), listNodeV2Module (ref), listNodeModule (ref), dashModule (ref), commentNodeModule (ref), confirmationNodeModule (ref), fFlagSupportSubmissionOnAllReportNodes (ref), paragraphNodeModule (ref), reviewNodeModule (ref), genericAbuseReporting (ref), fFlagAbuseReportSceneSelectionSubmitTrackingModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), telemetryEventType (ref)
 	local sendEvent = useAbuseReportAnalytics().sendEvent
 	
 	if p0.node.type == "list" then
-		local var12
-		local _ = nil
+		local var12 = if p0.store then p0.store[p0.node.storeAs] else nil
 		
-		if fFlagAbuseReportConfigStoreResolver then
-			local var11 = if p0.store then p0.store[p0.node.storeAs] else nil
-			var12 = if type(var11) == "table" then var11.id else nil
-		else
-			var12 = if p0.data then p0.data[p0.node.formKey] else nil
-		end
 		return reactModule.createElement(if fFlagAbuseReportMenuV2 then listNodeV2Module else listNodeModule, dashModule.join(p0.node, {
-			initialValue = var12,
+			initialValue = if type(var12) == "table" then var12.id else nil,
 			isSubmitting = p0.isSubmitting,
-			onNext = function(p1, p2) --[[ line: 61 ]]
-				-- upvalues: p0 (ref), fFlagAbuseReportConfigStoreResolver (copy)
+			onNext = function(_, p1) --[[ line: 57 ]]
+				-- upvalues: p0 (ref)
 				if p0.onNext then
-					if fFlagAbuseReportConfigStoreResolver then
-						p0.onNext({
-							store = if p0.node.storeAs then { [p0.node.storeAs] = p2 } else {}
-						})
-						
-						return
-					end
-					local t = {}
-					local t_1 = {}
-					
-					if p0.node.formKey and p0.node.formKey ~= "" then
-						t[p0.node.formKey] = p1
-					end
-					if p0.node.storeSelectionAsContext and p0.node.storeSelectionAsContext ~= "" then
-						t_1[p0.node.storeSelectionAsContext] = p2
-					end
-					p0.onNext({ data = t, context = t_1 })
+					p0.onNext({
+						store = if p0.node.storeAs then { [p0.node.storeAs] = p1 } else {}
+					})
 				end
 			end
 		}))
 	elseif p0.node.type == "comment" then
 		return reactModule.createElement(commentNodeModule, dashModule.join(p0.node, {
-			initialValue = if fFlagAbuseReportConfigStoreResolver then if p0.store then p0.store[p0.node.storeAs] else nil elseif p0.data then p0.data[p0.node.formKey] else nil,
+			initialValue = if p0.store then p0.store[p0.node.storeAs] else nil,
 			isSubmitting = p0.isSubmitting,
-			onNext = function(p3) --[[ line: 99 ]]
-				-- upvalues: p0 (ref), fFlagAbuseReportConfigStoreResolver (copy)
+			onNext = function(p2) --[[ line: 75 ]]
+				-- upvalues: p0 (ref)
 				if p0.onNext then
-					if fFlagAbuseReportConfigStoreResolver then
-						p0.onNext({
-							store = if p0.node.storeAs then { [p0.node.storeAs] = p3 } else {}
-						})
-						
-						return
-					end
-					local t = {}
-					
-					if p0.node.formKey and p0.node.formKey ~= "" then
-						t[p0.node.formKey] = p3
-					end
-					p0.onNext({ data = t })
+					p0.onNext({
+						store = if p0.node.storeAs then { [p0.node.storeAs] = p2 } else {}
+					})
 				end
 			end
 		}))
 	elseif p0.node.type == "confirmation" then
 		return reactModule.createElement(confirmationNodeModule, dashModule.join(p0.node, {
 			isSubmitting = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else nil,
-			onNext = if p0.onNext then function() --[[ line: 125 ]]
+			onNext = if p0.onNext then function() --[[ line: 89 ]]
 				-- upvalues: p0 (ref)
 				p0.onNext({})
 			end else nil
@@ -91,7 +61,7 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "ContentNode" ]]
 	elseif p0.node.type == "paragraph" then
 		return reactModule.createElement(paragraphNodeModule, dashModule.join(p0.node, {
 			isSubmitting = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else nil,
-			onNext = if p0.onNext then function() --[[ line: 135 ]]
+			onNext = if p0.onNext then function() --[[ line: 99 ]]
 				-- upvalues: p0 (ref)
 				p0.onNext({})
 			end else nil
@@ -99,67 +69,63 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "ContentNode" ]]
 	elseif fFlagAbuseReportMenuV2 and p0.node.type == "review" then
 		return reactModule.createElement(reviewNodeModule, dashModule.join(p0.node, {
 			isSubmitting = if fFlagSupportSubmissionOnAllReportNodes then p0.isSubmitting else nil,
-			onNext = if p0.onNext then function() --[[ line: 145 ]]
+			onNext = if p0.onNext then function() --[[ line: 109 ]]
 				-- upvalues: p0 (ref)
 				p0.onNext({})
 			end else nil
 		}))
 	elseif fFlagAbuseReportMenuV2 and p0.node.type == "inExpChatSelection" then
-		local var15
-		local inExpChatSelectionNodeModule = require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpChatSelectionNode)
-		local _ = nil
+		local var13 = if p0.store then p0.store[p0.node.storeAs] else nil
 		
-		if fFlagAbuseReportConfigStoreResolver then
-			local var14 = if p0.store then p0.store[p0.node.storeAs] else nil
-			var15 = if type(var14) == "table" then var14.id else nil
-		else
-			var15 = if p0.data then p0.data[p0.node.formKey] else nil
-		end
-		return reactModule.createElement(inExpChatSelectionNodeModule, dashModule.join(p0.node, {
-			initialValue = var15,
+		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpChatSelectionNode), dashModule.join(p0.node, {
+			initialValue = if type(var13) == "table" then var13.id else nil,
 			isSubmitting = p0.isSubmitting,
 			goBack = p0.goBack,
-			onNext = function(p4, p5) --[[ line: 165 ]]
-				-- upvalues: p0 (ref), fFlagAbuseReportConfigStoreResolver (copy)
+			onNext = function(_, p3) --[[ line: 124 ]]
+				-- upvalues: p0 (ref)
 				if p0.onNext then
-					if fFlagAbuseReportConfigStoreResolver then
-						p0.onNext({
-							store = if p0.node.storeAs then { [p0.node.storeAs] = p5 } else {}
-						})
-						
-						return
-					end
-					local t = {}
-					local t_1 = {}
-					
-					if p0.node.formKey and p0.node.formKey ~= "" then
-						t[p0.node.formKey] = p4
-					end
-					if p0.node.storeSelectionAsContext and p0.node.storeSelectionAsContext ~= "" then
-						t_1[p0.node.storeSelectionAsContext] = p5
-					end
-					p0.onNext({ data = t, context = t_1 })
+					p0.onNext({
+						store = if p0.node.storeAs then { [p0.node.storeAs] = p3 } else {}
+					})
 				end
 			end
 		}))
 	elseif fFlagAbuseReportMenuV2 and p0.node.type == "inExpConfirmation" then
 		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpConfirmationNode), dashModule.join(p0.node, {
 			isSubmitting = p0.isSubmitting,
-			onNext = if p0.onNext then function(p6) --[[ line: 197 ]]
+			onNext = if p0.onNext then function(p4) --[[ line: 141 ]]
 				-- upvalues: p0 (ref)
 				p0.onNext({
 					store = if p0.node.storeAs then {
-						[p0.node.storeAs.didBlockUser] = p6.didBlockUser,
-						[p0.node.storeAs.didMuteUser] = p6.didMuteUser
+						[p0.node.storeAs.didBlockUser] = p4.didBlockUser,
+						[p0.node.storeAs.didMuteUser] = p4.didMuteUser
 					} else {}
 				})
 			end else nil
 		}))
 	elseif fFlagAbuseReportMenuV2 and p0.node.type == "inExpSceneSelection" then
 		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpSceneSelectionNode), dashModule.join(p0.node, {
-			onNext = if p0.onNext then function() --[[ line: 215 ]]
+			onNext = if p0.onNext then function() --[[ line: 159 ]]
 				-- upvalues: p0 (ref)
 				p0.onNext({})
+			end else nil,
+			onFailure = p0.onFailure,
+			goBack = p0.goBack,
+			onExternalSubmit = if fFlagAbuseReportSceneSelectionSubmitTrackingModule then p0.onExternalSubmit else nil
+		}))
+	elseif fFlagAbuseReportInExpPlayerListV3 and p0.node.type == "inExpUserSelection" then
+		local var14 = if p0.store then p0.store[p0.node.storeAs] else nil
+		
+		return reactModule.createElement(require(genericAbuseReporting.BeduiV2.Components.Nodes.InExpUserSelectionNode), dashModule.join(p0.node, {
+			initialValue = if type(var14) == "table" then var14.id else nil,
+			isSubmitting = p0.isSubmitting,
+			onNext = if p0.onNext then function(_, p5) --[[ line: 178 ]]
+				-- upvalues: p0 (ref)
+				if p0.onNext then
+					p0.onNext({
+						store = if p0.node.storeAs then { [p0.node.storeAs] = p5 } else {}
+					})
+				end
 			end else nil,
 			goBack = p0.goBack
 		}))

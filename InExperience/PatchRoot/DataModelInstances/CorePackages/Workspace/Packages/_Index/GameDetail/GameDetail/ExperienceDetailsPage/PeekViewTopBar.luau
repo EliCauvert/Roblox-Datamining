@@ -18,18 +18,45 @@ local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagUseNavigationSelectors = sharedFlagsModule.FFlagUseNavigationSelectors
+local fFlagSignalsNavP3fGameDetails = sharedFlagsModule.FFlagSignalsNavP3fGameDetails
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local var5 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local useSignalState = require(parent.SignalsReact).useSignalState
+local createComputed = require(parent.Signals).createComputed
+local getLegacyNavigationStore = require(parent.NavigationRodux).GetLegacyNavigationStore
 local experienceDetailsPageUtilsModule = require(script.Parent.ExperienceDetailsPageUtils)
 
-return reactModule.memo(function(p0) --[[ line: 39 | named "PeekViewTopBar" ]]
-	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref), appPage (ref), reactModule (ref), peekViewState (ref), experienceDetailsPageUtilsModule (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateBack (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref)
+return reactModule.memo(function(p0) --[[ line: 43 | named "PeekViewTopBar" ]]
+	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), fFlagSignalsNavP3fGameDetails (ref), reactModule (ref), getLegacyNavigationStore (ref), createComputed (ref), appPage (ref), useSignalState (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), selectors (ref), peekViewState (ref), experienceDetailsPageUtilsModule (ref), fFlagSignalsNavP3Dispatch (ref), var5 (ref), navigateBack (ref), view (ref), iconButton (ref), iconName (ref), buttonVariant (ref), buttonSize (ref)
 	local pageProps = p0.pageProps
 	local onClose = p0.onClose
 	local var7 = useDispatch()
 	local var8 = useDeviceInsets()
 	local var9 = useTokens()
-	local var10 = useSelector(function(p1) --[[ line: 47 ]]
+	local var10 = if fFlagSignalsNavP3fGameDetails then useSignalState(reactModule.useMemo(function() --[[ line: 53 ]]
+		-- upvalues: getLegacyNavigationStore (copy), createComputed (copy), appPage (copy)
+		local var16 = getLegacyNavigationStore(false)
+		
+		return createComputed(function(p2) --[[ line: 55 ]]
+			-- upvalues: var16 (ref), appPage (copy)
+			local currentLegacyRoute = var16.getCurrentLegacyRoute(p2)
+			local var18 = 0
+			
+			if currentLegacyRoute then
+				for i = 1, #currentLegacyRoute do
+					if currentLegacyRoute[i].name == appPage.GameDetail then
+						var18 += 1
+						
+						if var18 <= 1 then
+							continue
+						end
+						return true
+					end
+				end
+			end
+			return false
+		end)
+	end, {})) else useSelector(function(p1) --[[ line: 73 ]]
 		-- upvalues: fFlagUseNavigationSelectors (copy), selectors (copy), appPage (copy)
 		local var13 = if fFlagUseNavigationSelectors then selectors.selectLegacyHistory(p1) else p1.Navigation.history
 		local var14 = var13 and var13[#var13]
@@ -49,9 +76,9 @@ return reactModule.memo(function(p0) --[[ line: 39 | named "PeekViewTopBar" ]]
 		end
 		return false
 	end)
-	reactModule.useEffect(function() --[[ line: 66 ]]
-		-- upvalues: var10 (ref), var7 (ref), peekViewState (copy)
-		return function() --[[ line: 67 ]]
+	reactModule.useEffect(function() --[[ line: 93 ]]
+		-- upvalues: var10 (write), var7 (ref), peekViewState (copy)
+		return function() --[[ line: 94 ]]
 			-- upvalues: var10 (copy), var7 (copy), peekViewState (copy)
 			if not var10 then
 				var7({
@@ -76,7 +103,7 @@ return reactModule.memo(function(p0) --[[ line: 39 | named "PeekViewTopBar" ]]
 			icon = if var12 then iconName.ChevronLargeLeft else iconName.X,
 			variant = buttonVariant.Utility,
 			size = buttonSize.Medium,
-			onActivated = reactModule.useCallback(function() --[[ line: 81 ]]
+			onActivated = reactModule.useCallback(function() --[[ line: 108 ]]
 				-- upvalues: var12 (ref), fFlagSignalsNavP3Dispatch (copy), var5 (copy), var7 (ref), navigateBack (copy), onClose (ref)
 				if not var12 then
 					onClose()

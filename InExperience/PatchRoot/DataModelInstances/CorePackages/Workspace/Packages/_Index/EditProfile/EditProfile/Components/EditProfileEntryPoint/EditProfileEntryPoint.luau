@@ -36,26 +36,25 @@ local fStringEditProfileToAvatarLayerNameModule = require(editProfile.Flags.FStr
 local socialNetworksInEditProfileIXPModule = require(editProfile.Flags.SocialNetworksInEditProfileIXP)
 local editProfileScrollable = game:DefineFastFlag("EditProfileScrollable", false)
 local fFlagMoveInExperienceModeToEditProfile = require(parent.SharedFlags).FFlagMoveInExperienceModeToEditProfile
-local fFlagAuthSecExclusions = require(parent.SharedFlags).FFlagAuthSecExclusions
 local universalAppPolicyModule = require(parent.UniversalAppPolicy)
 local char = utf8.char(57346)
 
-return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
-	-- upvalues: fFlagEditProfileBackgroundEnabled (ref), useNavigation (ref), useLastInputMode (ref), useFocusGuiObject (ref), useUserExperiment (ref), fStringEditProfileToAvatarLayerNameModule (ref), socialNetworksInEditProfileIXPModule (ref), fFlagAuthSecExclusions (ref), universalAppPolicyModule (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), useDispatch (ref), char (ref), useDisplayNameTextModule (ref), reactModule (ref), userProfileSettingsNetworkingModule (ref), constantsModule (ref), imageSetLabel (ref), images (ref), fFlagEditProfileFixFocusNavigationModule (ref), editTextButtonModule (ref), fFlagAXEnableProfileTab (ref), editProfileScrollable (ref), editProfileTopBarModule (ref), fFlagEditProfileNavigateToAvatarModule (ref), editProfileBackgroundViewportModule (ref), foundationModule (ref), button (ref), buttonSize (ref), loadableImage (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), styledTextLabel (ref), verticalScrollView (ref)
+return function(p0) --[[ line: 94 | named "EditProfileEntryPoint" ]]
+	-- upvalues: fFlagEditProfileBackgroundEnabled (ref), useNavigation (ref), useLastInputMode (ref), useFocusGuiObject (ref), useUserExperiment (ref), fStringEditProfileToAvatarLayerNameModule (ref), socialNetworksInEditProfileIXPModule (ref), universalAppPolicyModule (ref), useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), useDispatch (ref), char (ref), useDisplayNameTextModule (ref), reactModule (ref), userProfileSettingsNetworkingModule (ref), constantsModule (ref), imageSetLabel (ref), images (ref), fFlagEditProfileFixFocusNavigationModule (ref), editTextButtonModule (ref), fFlagAXEnableProfileTab (ref), editProfileScrollable (ref), editProfileTopBarModule (ref), fFlagEditProfileNavigateToAvatarModule (ref), editProfileBackgroundViewportModule (ref), foundationModule (ref), button (ref), buttonSize (ref), loadableImage (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), styledTextLabel (ref), verticalScrollView (ref)
 	local var46
 	local var20 = if fFlagEditProfileBackgroundEnabled then useNavigation() else nil
 	local var21 = useLastInputMode()
 	local var22 = useFocusGuiObject()
-	local var23 = useUserExperiment({ fStringEditProfileToAvatarLayerNameModule }, function(p1) --[[ line: 99 ]]
+	local var23 = useUserExperiment({ fStringEditProfileToAvatarLayerNameModule }, function(p1) --[[ line: 98 ]]
 		-- upvalues: fStringEditProfileToAvatarLayerNameModule (copy)
 		return (p1[fStringEditProfileToAvatarLayerNameModule] or {}).profile_picture_on
 	end)
 	local fFlagSocialNetworksInEditProfileIXPSetupEnabled = socialNetworksInEditProfileIXPModule.GetFFlagSocialNetworksInEditProfileIXPSetupEnabled()
 	local var25 = socialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
 	local var26 = var25 and var25 ~= socialNetworksInEditProfileIXPModule.Variants.Control
-	local var27 = if fFlagAuthSecExclusions then universalAppPolicyModule.useAppPolicy(function(p2) --[[ line: 110 ]]
+	local var27 = universalAppPolicyModule.useAppPolicy(function(p2) --[[ line: 108 ]]
 		return p2.getExcludeUsernameUpdateModeration()
-	end) else nil
+	end)
 	local var28 = useStyle()
 	local theme = var28.Theme
 	local font = var28.Font
@@ -75,11 +74,11 @@ return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
 		SocialNetworksCaption = if fFlagSocialNetworksInEditProfileIXPSetupEnabled and var26 and (p0.socialInfo and p0.socialInfo.visibility) then textKeysModule[p0.socialInfo.visibility] else nil
 	})
 	local var31 = useDisplayNameTextModule()
-	local var32 = if fFlagMoveInExperienceModeToEditProfile then reactModule.useCallback(function() --[[ line: 145 ]]
+	local var32 = if fFlagMoveInExperienceModeToEditProfile then reactModule.useCallback(function() --[[ line: 142 ]]
 		-- upvalues: var29 (ref), userProfileSettingsNetworkingModule (copy), p0 (ref)
 		var29(userProfileSettingsNetworkingModule.SetUserProfileSettings.API({
 			isInExperienceNameEnabled = not p0.isInExperienceNameEnabled
-		})):andThen(function(p3) --[[ line: 148 ]]
+		})):andThen(function(p3) --[[ line: 145 ]]
 			-- upvalues: p0 (copy)
 			if p3.responseBody.successfullyUpdated then
 				p0.onToggleInExperienceMode()
@@ -91,7 +90,7 @@ return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
 		userProfileSettingsNetworkingModule.SetUserProfileSettings
 	}) else nil
 	local var33 = false
-	local var34 = if fFlagSocialNetworksInEditProfileIXPSetupEnabled then reactModule.useMemo(function() --[[ line: 164 ]]
+	local var34 = if fFlagSocialNetworksInEditProfileIXPSetupEnabled then reactModule.useMemo(function() --[[ line: 161 ]]
 		-- upvalues: p0 (ref), constantsModule (copy), reactModule (copy), theme (ref), imageSetLabel (copy), images (copy), var33 (write)
 		local t = {}
 		
@@ -102,7 +101,7 @@ return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
 					BackgroundTransparency = 0,
 					Size = UDim2.new(0, 40, 0, 40),
 					BackgroundColor3 = theme.BackgroundUIDefault.Color,
-					[reactModule.Event.Activated] = if p0.openEditSocialLinksModal then function() --[[ line: 174 ]]
+					[reactModule.Event.Activated] = if p0.openEditSocialLinksModal then function() --[[ line: 171 ]]
 						-- upvalues: p0 (copy), i (ref)
 						p0.openEditSocialLinksModal(i)
 					end else nil
@@ -125,7 +124,7 @@ return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
 		end
 		return t
 	end, { p0.socialInfo, theme, p0.openEditSocialLinksModal }) else nil
-	local var35 = if fFlagEditProfileFixFocusNavigationModule then reactModule.useCallback(function(p4) --[[ line: 203 ]]
+	local var35 = if fFlagEditProfileFixFocusNavigationModule then reactModule.useCallback(function(p4) --[[ line: 200 ]]
 		-- upvalues: var21 (ref), var22 (ref)
 		if p4 and var21 == "Focus" then
 			var22(p4)
@@ -187,7 +186,7 @@ return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
 				}, {
 					Button = reactModule.createElement(button, {
 						text = var30.EditBackground,
-						onActivated = function() --[[ line: 278 ]]
+						onActivated = function() --[[ line: 275 ]]
 							-- upvalues: var20 (ref), p0 (ref)
 							var20.navigate(p0.profileScreens.EditProfileBackground)
 						end,
@@ -396,7 +395,7 @@ return function(p0) --[[ line: 95 | named "EditProfileEntryPoint" ]]
 				Size = UDim2.new(0, 40, 0, 40),
 				BackgroundColor3 = var28.Theme.BackgroundDefault.Color,
 				BorderSizePixel = 0,
-				[reactModule.Event.Activated] = if p0.openEditSocialLinksModal then function() --[[ line: 514 ]]
+				[reactModule.Event.Activated] = if p0.openEditSocialLinksModal then function() --[[ line: 511 ]]
 					-- upvalues: p0 (ref)
 					p0.openEditSocialLinksModal(-1)
 				end else nil

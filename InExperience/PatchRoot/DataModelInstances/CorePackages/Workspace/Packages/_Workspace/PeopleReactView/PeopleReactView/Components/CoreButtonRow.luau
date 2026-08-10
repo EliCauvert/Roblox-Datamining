@@ -6,18 +6,24 @@ local peopleServiceModule = require(parent.PeopleService)
 local view = foundationModule.View
 local coreButtonModule = require(peopleReactView.Components.Buttons.CoreButton)
 local coreButtonConfigsModule = require(peopleReactView.Configs.CoreButtonConfigs)
-local getFFlagAddPeoplePageCardLayout = peopleServiceModule.getService("Flags").GetFFlagAddPeoplePageCardLayout
+local flags = peopleServiceModule.getService("Flags")
+local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
+local fFlagEnablePeoplePageButtonOnMount = flags.FFlagEnablePeoplePageButtonOnMount
 
-local function MemoizedButton(p0) --[[ line: 19 ]]
-	-- upvalues: reactModule (ref), coreButtonModule (ref)
+local function MemoizedButton(p0) --[[ line: 21 ]]
+	-- upvalues: reactModule (ref), fFlagEnablePeoplePageButtonOnMount (ref), coreButtonModule (ref)
 	local config = p0.config
-	local var7 = reactModule.useCallback(function(p1) --[[ line: 25 ]]
-		-- upvalues: p0 (ref), config (ref)
+	local var8 = reactModule.useCallback(function(p1) --[[ line: 27 ]]
+		-- upvalues: p0 (ref), config (ref), fFlagEnablePeoplePageButtonOnMount (copy)
 		p0.onButtonMount(p1, config.id)
-	end, { p0.onButtonMount, config.id })
+		
+		if fFlagEnablePeoplePageButtonOnMount and p1 and config.onMount then
+			config.onMount()
+		end
+	end, { config.onMount, p0.onButtonMount, config.id })
 	
-	return reactModule.useMemo(function() --[[ line: 29 ]]
-		-- upvalues: reactModule (copy), coreButtonModule (copy), config (ref), var7 (ref)
+	return reactModule.useMemo(function() --[[ line: 34 ]]
+		-- upvalues: reactModule (copy), coreButtonModule (copy), config (ref), var8 (ref)
 		return reactModule.createElement(coreButtonModule, {
 			text = config.text,
 			icon = { on = config.onIcon, off = config.offIcon },
@@ -26,55 +32,55 @@ local function MemoizedButton(p0) --[[ line: 19 ]]
 			isNewIcon = config.isNewIcon,
 			LayoutOrder = config.layoutOrder,
 			onActivated = config.onActivated,
-			onMount = var7
+			onMount = var8
 		})
 	end, {
 		config.text, config.onIcon, config.offIcon, config.animatedIcon,
 		config.buttonState, config.isNewIcon, config.layoutOrder, config.onActivated,
-		var7
+		var8
 	})
 end
 
-return function(p2) --[[ line: 57 ]]
+return function(p2) --[[ line: 62 ]]
 	-- upvalues: coreButtonConfigsModule (ref), reactModule (ref), peopleServiceModule (ref), MemoizedButton (ref), view (ref), getFFlagAddPeoplePageCardLayout (ref)
-	local var8 = coreButtonConfigsModule(p2.chromeEnabled, p2.buttonActivatedTable)
-	local var9 = reactModule.useMemo(function() --[[ line: 62 ]]
+	local var9 = coreButtonConfigsModule(p2.chromeEnabled, p2.buttonActivatedTable)
+	local var10 = reactModule.useMemo(function() --[[ line: 67 ]]
 		-- upvalues: peopleServiceModule (copy)
 		return peopleServiceModule.getService("FocusNavigationService")
 	end, {})
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useRef({})
-	local var12 = reactModule.useCallback(function(p3, p4) --[[ line: 72 ]]
-		-- upvalues: var11 (ref)
+	local var11 = reactModule.useRef(nil)
+	local var12 = reactModule.useRef({})
+	local var13 = reactModule.useCallback(function(p3, p4) --[[ line: 77 ]]
+		-- upvalues: var12 (ref)
 		if p3 then
-			var11.current[p4] = p3
+			var12.current[p4] = p3
 			
 			return
 		end
-		var11.current[p4] = nil
+		var12.current[p4] = nil
 	end, {})
-	local var13 = reactModule.useCallback(function(p5) --[[ line: 80 ]]
-		-- upvalues: var10 (ref), peopleServiceModule (copy), var9 (ref)
-		var10.current = p5
+	local var14 = reactModule.useCallback(function(p5) --[[ line: 85 ]]
+		-- upvalues: var11 (ref), peopleServiceModule (copy), var10 (ref)
+		var11.current = p5
 		
 		if p5 then
-			var9.registerScrollCallback(-1, function() --[[ line: 84 ]]
-				-- upvalues: peopleServiceModule (copy), var10 (copy)
-				local var18 = peopleServiceModule.getService("SettingsHubService").hubRef()
+			var10.registerScrollCallback(-1, function() --[[ line: 89 ]]
+				-- upvalues: peopleServiceModule (copy), var11 (copy)
+				local var19 = peopleServiceModule.getService("SettingsHubService").hubRef()
 				
-				if var18 and var18.ScrollToFrame and var10.current then
-					var18:ScrollToFrame(var10.current, true)
+				if var19 and var19.ScrollToFrame and var11.current then
+					var19:ScrollToFrame(var11.current, true)
 				end
 			end)
 		end
-	end, { var9 })
-	reactModule.useEffect(function() --[[ line: 107 ]]
-		-- upvalues: var8 (ref), var11 (ref), var9 (ref)
+	end, { var10 })
+	reactModule.useEffect(function() --[[ line: 112 ]]
+		-- upvalues: var9 (ref), var12 (ref), var10 (ref)
 		local t = {}
 		
-		for i, v in ipairs(var8) do
+		for i, v in ipairs(var9) do
 			if v.shouldShow() then
-				local id = var11.current[v.id]
+				local id = var12.current[v.id]
 				
 				if id then
 					table.insert(t, id)
@@ -82,18 +88,18 @@ return function(p2) --[[ line: 57 ]]
 			end
 		end
 		if #t > 0 then
-			table.sort(t, function(p6, p7) --[[ line: 121 ]]
+			table.sort(t, function(p6, p7) --[[ line: 126 ]]
 				return p6.LayoutOrder < p7.LayoutOrder
 			end)
-			var9.registerButtonRow(-1, t, 0)
+			var10.registerButtonRow(-1, t, 0)
 		end
 	end, {
-		var9,
-		reactModule.useMemo(function() --[[ line: 96 ]]
-			-- upvalues: var8 (ref)
+		var10,
+		reactModule.useMemo(function() --[[ line: 101 ]]
+			-- upvalues: var9 (ref)
 			local t = {}
 			
-			for i, v in ipairs(var8) do
+			for i, v in ipairs(var9) do
 				if v.shouldShow() then
 					table.insert(t, v.id)
 				end
@@ -101,36 +107,36 @@ return function(p2) --[[ line: 57 ]]
 			table.sort(t)
 			
 			return table.concat(t, ",")
-		end, { var8 })
+		end, { var9 })
 	})
-	reactModule.useEffect(function() --[[ line: 130 ]]
-		-- upvalues: var9 (ref)
-		return function() --[[ line: 131 ]]
-			-- upvalues: var9 (copy)
-			var9.unregisterScrollCallback(-1)
-			var9.unregisterButtonRow(-1)
+	reactModule.useEffect(function() --[[ line: 135 ]]
+		-- upvalues: var10 (ref)
+		return function() --[[ line: 136 ]]
+			-- upvalues: var10 (copy)
+			var10.unregisterScrollCallback(-1)
+			var10.unregisterButtonRow(-1)
 		end
-	end, { var9 })
-	local var14 = reactModule.useMemo(function() --[[ line: 138 ]]
-		-- upvalues: var8 (ref), reactModule (copy), MemoizedButton (copy), var12 (ref)
+	end, { var10 })
+	local var15 = reactModule.useMemo(function() --[[ line: 143 ]]
+		-- upvalues: var9 (ref), reactModule (copy), MemoizedButton (copy), var13 (ref)
 		local t = {}
 		
-		for i, v in ipairs(var8) do
+		for i, v in ipairs(var9) do
 			if v.shouldShow() then
-				table.insert(t, reactModule.createElement(MemoizedButton, { key = v.id, config = v, onButtonMount = var12 }))
+				table.insert(t, reactModule.createElement(MemoizedButton, { key = v.id, config = v, onButtonMount = var13 }))
 			end
 		end
 		return t
-	end, { var8, var12 })
+	end, { var9, var13 })
 	
-	if #var14 == 0 then
+	if #var15 == 0 then
 		return nil
 	end
-	local function _() --[[ line: 164 | named "getButtonElements" ]]
-		-- upvalues: var14 (ref)
+	local function _() --[[ line: 169 | named "getButtonElements" ]]
+		-- upvalues: var15 (ref)
 		local t = {}
 		
-		for i, v in ipairs(var14) do
+		for i, v in ipairs(var15) do
 			t["Button" .. i] = v
 		end
 		return t
@@ -140,12 +146,12 @@ return function(p2) --[[ line: 57 ]]
 	local t = {
 		tag = "size-full-0 auto-y row gap-large",
 		LayoutOrder = if getFFlagAddPeoplePageCardLayout() then p2.LayoutOrder else 1,
-		ref = var13
+		ref = var14
 	}
 	local t_1 = {}
 	local t_2 = {}
 	
-	for i, v in ipairs(var14) do
+	for i, v in ipairs(var15) do
 		t_2["Button" .. i] = v
 	end
 	-- Unknown statement at pc 0: <SetList>

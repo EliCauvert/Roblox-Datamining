@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatPresetChatAutocompleteEnabled", false) and require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Flags.FFlagExpChatPresetChatSendEnabled

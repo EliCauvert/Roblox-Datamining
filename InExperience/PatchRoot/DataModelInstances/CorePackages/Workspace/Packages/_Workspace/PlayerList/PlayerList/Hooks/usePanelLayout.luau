@@ -6,7 +6,7 @@ local constantsModule = require(parent.Common.Constants)
 local computeMobilePanelSizeModule = require(parent.Common.computeMobilePanelSize)
 local useViewportSizeModule = require(parent.Hooks.useViewportSize)
 
-return function(p0, p1) --[[ line: 22 | named "usePanelLayout" ]]
+return function(p0, p1, p2) --[[ line: 24 | named "usePanelLayout" ]]
 	-- upvalues: useViewportSizeModule (ref), useTokens (ref), constantsModule (ref), useScaledValue (ref), computeMobilePanelSizeModule (ref)
 	local var16, maxValue
 	local var4 = useViewportSizeModule()
@@ -22,7 +22,7 @@ return function(p0, p1) --[[ line: 22 | named "usePanelLayout" ]]
 	local var12 = useScaledValue(constantsModule.PANEL_SIZE_MIN_CAP)
 	local var13 = useScaledValue(constantsModule.PANEL_SIZE_MAX_CAP)
 	local var14 = if p0 then constantsModule.MOBILE_MAX_STAT_COLUMNS else constantsModule.DESKTOP_MAX_STAT_COLUMNS
-	local minValue = math.min(p1, var14)
+	local var15 = var11 + math.min(p1, var14) * var10
 	local _ = nil
 	local _ = nil
 	
@@ -31,7 +31,7 @@ return function(p0, p1) --[[ line: 22 | named "usePanelLayout" ]]
 		var16 = var18.X
 		maxValue = var18.Y
 	else
-		var16 = 2 * size200 + var11 + minValue * var10
+		var16 = if p2 then 320 * scale else 2 * size200 + var15
 		maxValue = math.max(var4.Y * 0.5, var6 + var7 + 2 * var9)
 	end
 	return {

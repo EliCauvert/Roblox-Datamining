@@ -1,7 +1,11 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+﻿local var10
+local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local parent = genericAbuseReporting.Parent
 local localPlayer = game:GetService("Players").LocalPlayer
+local runService = game:GetService("RunService")
 local telemetryService = game:GetService("TelemetryService")
 local dashModule = require(parent.Dash)
+local fFlagAbuseReportClientVersionModule = require(genericAbuseReporting.Flags.FFlagAbuseReportClientVersion)
 local fFlagFixAnalyticsForDynamicReportV2 = require(parent.SharedFlags).FFlagFixAnalyticsForDynamicReportV2
 local t = {
 	ReportStarted = "OpenDialog",
@@ -20,6 +24,7 @@ local t = {
 	DidMuteUser = "DidMuteUser",
 	HelplineShown = "HelplineShown",
 	HelplineOpened = "HelplineOpened",
+	LinkOpened = "LinkOpened",
 	Error = "Error",
 	CommentInput = "CommentInput",
 	TextChannelSwitch = "TextChannelSwitch",
@@ -27,17 +32,19 @@ local t = {
 	SceneCaptureResult = "SceneCaptureResult",
 	ConfigLoaded = "ConfigLoaded"
 }
+local t_1 = { Footer = "footer", NextAction = "next_action" }
+local t_2 = { Flow = "flow", SceneSelection = "sceneSelection" }
 
-local function _(p0) --[[ line: 84 | named "isArray" ]]
-	local var5 = 0
+local function _(p0) --[[ line: 107 | named "isArray" ]]
+	local var11 = 0
 	
 	for i in p0 do
-		var5 += 1
+		var11 += 1
 	end
-	return var5 == #p0 and var5 > 0
+	return var11 == #p0 and var11 > 0
 end
 
-local function flattenForTelemetry(p1) --[[ line: 97 ]]
+local function flattenForTelemetry(p1) --[[ line: 120 ]]
 	local t = {}
 	
 	for i, v in p1 do
@@ -45,12 +52,12 @@ local function flattenForTelemetry(p1) --[[ line: 97 ]]
 			t[i] = tostring(v)
 			continue
 		end
-		local var7 = 0
+		local var13 = 0
 		
 		for i_1 in v do
-			var7 += 1
+			var13 += 1
 		end
-		if var7 == #v and var7 > 0 then
+		if var13 == #v and var13 > 0 then
 			local t_1 = {}
 			
 			for v_1, i_1 in v do
@@ -66,7 +73,7 @@ local function flattenForTelemetry(p1) --[[ line: 97 ]]
 	return t
 end
 
-local t_1 = {
+local t_3 = {
 	eventName = "DynamicAbuseReportEventV2",
 	description = "Event to track dynamic abuse report v2",
 	links = "https://github.rbx.com/Roblox/proto-schemas/pull/8782",
@@ -75,24 +82,51 @@ local t_1 = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportV2ThrottleHundredthsPercent", 0)
 }
 
+local _ = function() --[[ line: 162 | named "getCoreScriptVersion" ]]
+	-- upvalues: runService (ref)
+	if not game:GetEngineFeature("CoreScriptVersionEnabled") then
+		return nil
+	end
+	local ok, status = pcall(function() --[[ line: 167 ]]
+		-- upvalues: runService (copy)
+		return runService:GetCoreScriptVersion()
+	end)
+	
+	return if ok then status else nil
+end
+
+if not fFlagAbuseReportClientVersionModule then
+	var10 = nil
+elseif game:GetEngineFeature("CoreScriptVersionEnabled") then
+	local ok, status = pcall(function() --[[ line: 167 ]]
+		-- upvalues: runService (ref)
+		return runService:GetCoreScriptVersion()
+	end)
+	var10 = if ok then status else nil
+else
+	var10 = nil
+end
 return {
-	sendAnalyticsEvent = function(p2, p3) --[[ line: 133 ]]
-		-- upvalues: fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), localPlayer (ref), telemetryService (ref), t_1 (ref), flattenForTelemetry (ref)
+	sendAnalyticsEvent = function(p2, p3) --[[ line: 176 ]]
+		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var10 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
+		local t = {
+			user_id = if localPlayer then localPlayer.UserId else nil
+		}
+		
+		if fFlagAbuseReportClientVersionModule then
+			t.client_version = var10
+		end
 		if fFlagFixAnalyticsForDynamicReportV2 then
-			telemetryService:LogEvent(t_1, {
-				customFields = flattenForTelemetry(dashModule.join(p2, p3, {
-					user_id = if localPlayer then localPlayer.UserId else nil
-				})),
+			telemetryService:LogEvent(t_3, {
+				customFields = flattenForTelemetry(dashModule.join(p2, p3, t)),
 				eventContext = p2.abuse_vector
 			})
 			
 			return
 		end
-		telemetryService:LogEvent(dashModule.join(t_1, { eventContext = p2.abuse_vector }), {
-			customFields = dashModule.join(p2, p3, {
-				user_id = if localPlayer then localPlayer.UserId else nil
-			})
-		})
+		telemetryService:LogEvent(dashModule.join(t_3, { eventContext = p2.abuse_vector }), { customFields = dashModule.join(p2, p3, t) })
 	end,
-	TelemetryEventType = t
+	TelemetryEventType = t,
+	LinkOpenedSource = t_1,
+	SubmitSource = t_2
 }

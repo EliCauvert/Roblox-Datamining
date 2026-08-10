@@ -7,11 +7,15 @@ return function(p0) --[[ line: 11 | named "ParentContainerProvider" ]]
 		value = {
 			getParentContainer = p0.getParentContainer,
 			visibilitySignal = p0.visibilitySignal,
+			getRequestedRoute = p0.getRequestedRoute,
+			requestedRouteSignal = p0.requestedRouteSignal,
+			clearRequestedRoute = p0.clearRequestedRoute,
 			getShouldSetAppChatVisible = p0.getShouldSetAppChatVisible,
 			entryPoint = p0.entryPoint,
 			hideParentContainer = p0.hideParentContainer,
 			showParentContainer = p0.showParentContainer,
-			updateCurrentSquadId = p0.updateCurrentSquadId
+			updateCurrentSquadId = p0.updateCurrentSquadId,
+			openFriendsChatConversation = p0.openFriendsChatConversation
 		}
 	}, p0.children)
 end

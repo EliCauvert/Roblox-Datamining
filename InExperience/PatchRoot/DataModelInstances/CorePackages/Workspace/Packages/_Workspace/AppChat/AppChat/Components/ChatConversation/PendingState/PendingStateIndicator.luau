@@ -115,7 +115,7 @@ return memo(function(p0) --[[ line: 113 | named "PendingStateIndicator" ]]
 				Name = "ShimmerMessageList"
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 },
-			keyExtractor = function(_, p2) --[[ line: 151 ]]
+			keyExtractor = function(_, p2) --[[ line: 154 ]]
 				return p2
 			end
 		})

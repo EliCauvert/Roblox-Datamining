@@ -8,7 +8,7 @@ local iconButton = foundationModule.IconButton
 return reactModule.memo(function(p0) --[[ line: 10 | named "PanelHeader" ]]
 	-- upvalues: reactModule (ref), view (ref), text (ref), iconButton (ref), foundationModule (ref)
 	return reactModule.createElement(view, {
-		tag = "row flex-x-between align-y-center padding-x-large",
+		tag = "row flex-x-between align-y-center auto-y padding-x-large",
 		Size = UDim2.new(1, 0, 0, p0.height),
 		LayoutOrder = p0.layoutOrder
 	}, {

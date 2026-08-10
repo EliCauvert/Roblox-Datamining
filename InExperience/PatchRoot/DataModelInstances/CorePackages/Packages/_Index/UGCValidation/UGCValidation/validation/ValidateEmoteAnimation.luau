@@ -17,26 +17,25 @@ local validatePropertiesSensibleModule = require(validation.ValidatePropertiesSe
 local getEngineFeatureEngineUGCValidatePropertiesSensibleModule = require(parent.flags.getEngineFeatureEngineUGCValidatePropertiesSensible)
 local getFFlagUGCValidateMigrateCurveAnimModule = require(parent.flags.getFFlagUGCValidateMigrateCurveAnim)
 local getFFlagUGCValidateMigrateSchemaPropertiesModule = require(parent.flags.getFFlagUGCValidateMigrateSchemaProperties)
-local getFFlagUGCValidationCombineEntrypointResultsModule = require(parent.flags.getFFlagUGCValidationCombineEntrypointResults)
 local t = {
-	validateStructure = function(p0) --[[ line: 49 ]]
+	validateStructure = function(p0) --[[ line: 48 ]]
 		-- upvalues: validateSingleInstanceModule (ref), validateInstanceTreeModule (ref), createEmoteSchemaModule (ref)
-		local var18, var19 = validateSingleInstanceModule(p0.instances or {}, p0)
+		local var17, var18 = validateSingleInstanceModule(p0.instances or {}, p0)
 		
-		if not var18 then
-			return false, var19
+		if not var17 then
+			return false, var18
 		end
-		local var20 = p0.instances[1]
-		local var21, var22 = validateInstanceTreeModule(createEmoteSchemaModule(), var20, p0)
+		local var19 = p0.instances[1]
+		local var20, var21 = validateInstanceTreeModule(createEmoteSchemaModule(), var19, p0)
 		
-		if var21 then
-			return true, nil, var20
+		if var20 then
+			return true, nil, var19
 		end
-		return false, var22
+		return false, var21
 	end
 }
 
-local function reportError(p1, p2, p3) --[[ line: 34 ]]
+local function reportError(p1, p2, p3) --[[ line: 33 ]]
 	-- upvalues: analyticsModule (ref)
 	if p3.isServer ~= nil and p3.isServer then
 		error(p1)
@@ -46,48 +45,48 @@ local function reportError(p1, p2, p3) --[[ line: 34 ]]
 	return false, { p1 }
 end
 
-function t.validate(p4) --[[ line: 70 ]]
-	-- upvalues: t (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), getFFlagUGCValidationCombineEntrypointResultsModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref), validateAttributesModule (ref), getFFlagUGCValidateMigrateCurveAnimModule (ref), pcallDeferredModule (ref), reportError (ref), analyticsModule (ref), validateCurveAnimationModule (ref), validateModerationModule (ref)
+function t.validate(p4) --[[ line: 69 ]]
+	-- upvalues: t (ref), getEngineFeatureEngineUGCValidatePropertiesSensibleModule (ref), validatePropertiesSensibleModule (ref), getFFlagUGCValidateMigrateSchemaPropertiesModule (ref), validateDependenciesModule (ref), failureReasonsAccumulatorModule (ref), validateTagsModule (ref), validateAttributesModule (ref), getFFlagUGCValidateMigrateCurveAnimModule (ref), pcallDeferredModule (ref), reportError (ref), analyticsModule (ref), validateCurveAnimationModule (ref), validateModerationModule (ref)
 	local _ = nil
-	local var23, var24, var25 = t.validateStructure(p4)
+	local var22, var23, var24 = t.validateStructure(p4)
 	
-	if not var23 then
-		return false, var24
+	if not var22 then
+		return false, var23
 	end
-	local var26 = var25
+	local var25 = var24
 	
 	if getEngineFeatureEngineUGCValidatePropertiesSensibleModule() then
-		local var27, var28 = validatePropertiesSensibleModule.validate(var26, p4)
+		local var26, var27 = validatePropertiesSensibleModule.validate(var25, p4)
 		
-		if not var27 then
-			return false, var28
+		if not var26 then
+			return false, var27
 		end
 	end
-	local var29, var30 = validateDependenciesModule(var26, p4, {
-		skipExistenceCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule() and getFFlagUGCValidationCombineEntrypointResultsModule(),
-		skipOwnershipCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule() and getFFlagUGCValidationCombineEntrypointResultsModule()
+	local var28, var29 = validateDependenciesModule(var25, p4, {
+		skipExistenceCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule(),
+		skipOwnershipCheck = getFFlagUGCValidateMigrateSchemaPropertiesModule()
 	})
 	
-	if not var29 then
-		return false, var30
+	if not var28 then
+		return false, var29
 	end
-	local var31 = failureReasonsAccumulatorModule.new()
-	var31:updateReasons(validateTagsModule(var26, p4))
+	local var30 = failureReasonsAccumulatorModule.new()
+	var30:updateReasons(validateTagsModule(var25, p4))
 	
-	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
-		var31:updateReasons(validateAttributesModule(var26, p4))
+	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+		var30:updateReasons(validateAttributesModule(var25, p4))
 	end
-	if not getFFlagUGCValidateMigrateCurveAnimModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
-		local var32 = nil
-		local var33, var34 = pcallDeferredModule(function() --[[ line: 109 ]]
-			-- upvalues: var26 (write)
-			return game:GetObjectsAllOrNone(var26.AnimationId)
+	if not getFFlagUGCValidateMigrateCurveAnimModule() then
+		local var31 = nil
+		local var32, var33 = pcallDeferredModule(function() --[[ line: 106 ]]
+			-- upvalues: var25 (write)
+			return game:GetObjectsAllOrNone(var25.AnimationId)
 		end, p4)
 		
-		if not var33 or not var34 then
+		if not var32 or not var33 then
 			return reportError("Could not download Curve animation.", analyticsModule.ErrorType.validateEmoteAnimation_FailedToDownloadCurveAnimation, p4)
-		elseif #var34 == 1 then
-			var32 = var34[1]
+		elseif #var33 == 1 then
+			var31 = var33[1]
 		else
 			analyticsModule.reportFailure(analyticsModule.ErrorType.validateCurveAnimation_AnimationHierarchyIsIncorrect, nil, p4)
 			
@@ -95,12 +94,12 @@ function t.validate(p4) --[[ line: 70 ]]
 				"Downloaded Curve animation did not have exactly one root. Please fix the animation."
 			}
 		end
-		var31:updateReasons(validateCurveAnimationModule.validate(var32, p4))
+		var30:updateReasons(validateCurveAnimationModule.validate(var31, p4))
 	end
-	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() or not getFFlagUGCValidationCombineEntrypointResultsModule() then
-		var31:updateReasons(validateModerationModule(var26, p4.restrictedUserIds, p4))
+	if not getFFlagUGCValidateMigrateSchemaPropertiesModule() then
+		var30:updateReasons(validateModerationModule(var25, p4.restrictedUserIds, p4))
 	end
-	return var31:getFinalResults()
+	return var30:getFinalResults()
 end
 
 return t

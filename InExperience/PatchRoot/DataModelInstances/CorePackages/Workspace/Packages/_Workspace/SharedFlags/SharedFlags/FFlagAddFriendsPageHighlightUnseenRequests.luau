@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagAddFriendsUserListEnabled) and (require(script.Parent.FFlagAddStatusIndicatorToBaseRow) and game:DefineFastFlag("AddFriendsPageHighlightUnseenRequests_v2", false))

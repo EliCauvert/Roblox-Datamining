@@ -1,19 +1,20 @@
 ﻿local userLib = script:FindFirstAncestor("UserLib")
-local actionHandlers = require(userLib.Parent.SignalsMiddleware).ActionHandlers
+local parent = userLib.Parent
+local actionHandlers = require(parent.SignalsMiddleware).ActionHandlers
 local setLocalUserIdModule = require(userLib.Actions.SetLocalUserId)
 local clearUserSpecificDataModule = require(userLib.Actions.ClearUserSpecificData)
-local localUserIdStoreModule = require(userLib.Stores.LocalUserIdStore)
+local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
 
 local function handleSetLocalUserId(value) --[[ line: 21 ]]
-	-- upvalues: localUserIdStoreModule (ref)
-	localUserIdStoreModule.setCurrentUserId(value.userId)
+	-- upvalues: localUserIdStore (ref)
+	localUserIdStore.setCurrentUserId(value.userId)
 	
 	return false
 end
 
 local function handleClearUserSpecificData(_) --[[ line: 26 ]]
-	-- upvalues: localUserIdStoreModule (ref)
-	localUserIdStoreModule.reset()
+	-- upvalues: localUserIdStore (ref)
+	localUserIdStore.reset()
 	
 	return false
 end

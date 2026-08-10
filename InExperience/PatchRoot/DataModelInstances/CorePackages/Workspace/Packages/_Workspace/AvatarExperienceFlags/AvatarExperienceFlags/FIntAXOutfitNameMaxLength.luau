@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AXOutfitNameMaxLength", 80)

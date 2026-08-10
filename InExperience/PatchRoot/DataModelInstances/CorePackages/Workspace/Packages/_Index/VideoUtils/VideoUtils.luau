@@ -3,6 +3,7 @@
 return {
 	FeedVideoPlaybackContext = require(script.FeedVideoPlaybackContext),
 	VideoPlaybackCoordinator = require(script.VideoPlaybackCoordinator),
+	VideoPlaybackDetectionMethod = require(script.VideoPlaybackDetectionMethod),
 	VideoPlaybackDetector = require(script.VideoPlaybackDetector),
 	ViewportVideoAutoplayController = require(script.ViewportVideoAutoplayController),
 	ViewportVideoAutoplaySync = require(script.ViewportVideoAutoplaySync),
@@ -10,6 +11,7 @@ return {
 	AnalyticsEnums = require(script.Analytics.Enums),
 	VideoLogger = require(script.Analytics.VideoLogger),
 	getIsInstanceVisible = require(script.getIsInstanceVisible),
+	getPlaybackDetectionMethod = require(script.getPlaybackDetectionMethod),
 	RoundIconButton = require(script.RoundIconButton),
 	useCanDevicePlayVideoPreview = require(script.useCanDevicePlayVideoPreview),
 	useTagAsViewportAutoplayCandidate = require(script.useTagAsViewportAutoplayCandidate),

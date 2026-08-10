@@ -5,7 +5,6 @@ local _ = require(gameTile.GameTileTypes)
 local parent = gameTile.Parent
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local useStyle = UIBloxModule.Core.Style.useStyle
 local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local statGroup = UIBloxModule.App.Indicator.StatGroup
@@ -21,8 +20,8 @@ local argCheckModule = require(parent.ArgCheck)
 local getUserInputIsSelectionOnlyModule = require(gameTile.Footer.getUserInputIsSelectionOnly)
 local uDim2 = UDim2.fromScale(1, 1)
 
-return function(p0) --[[ line: 30 ]]
-	-- upvalues: argCheckModule (ref), usePlayerCountTextModule (ref), useStyle (ref), useDesignTokens (ref), useLocalization (ref), getUserInputIsSelectionOnlyModule (ref), reactModule (ref), styledTextLabel (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), fFlagRenameDeprecatedUIBloxTokens (ref), uDim2 (ref), coPlayFooter (ref), colors (ref), coPlayFooterModule (ref), textFooter (ref), socialProofFooter (ref), statGroup (ref)
+return function(p0) --[[ line: 28 ]]
+	-- upvalues: argCheckModule (ref), usePlayerCountTextModule (ref), useStyle (ref), useDesignTokens (ref), useLocalization (ref), getUserInputIsSelectionOnlyModule (ref), reactModule (ref), styledTextLabel (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), uDim2 (ref), coPlayFooter (ref), colors (ref), coPlayFooterModule (ref), textFooter (ref), socialProofFooter (ref), statGroup (ref)
 	if p0.automaticSize then
 		argCheckModule.isNotNil(p0.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
 	end
@@ -56,8 +55,8 @@ return function(p0) --[[ line: 30 ]]
 			return if useExperienceTileMetadata then reactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = (if fFlagRenameDeprecatedUIBloxTokens then var12.Tokens.Color.Shift.Shift_200 else var12.Tokens.Semantic.Color.Ui.Default).Color3,
-				BackgroundTransparency = (if fFlagRenameDeprecatedUIBloxTokens then var12.Tokens.Color.Shift.Shift_200 else var12.Tokens.Semantic.Color.Ui.Default).Transparency
+				BackgroundColor3 = var12.Tokens.Color.Shift.Shift_200.Color3,
+				BackgroundTransparency = var12.Tokens.Color.Shift.Shift_200.Transparency
 			}, {
 				Layout = reactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -77,8 +76,8 @@ return function(p0) --[[ line: 30 ]]
 					TextYAlignment = Enum.TextYAlignment.Center,
 					Font = var12.Font.CaptionHeader.Font,
 					TextSize = var12.Font.BaseSize * var12.Font.CaptionHeader.RelativeSize,
-					TextColor3 = (if fFlagRenameDeprecatedUIBloxTokens then var12.Tokens.Color.Content.Emphasis else var12.Tokens.Semantic.Color.Text.Emphasis).Color3,
-					TextTransparency = (if fFlagRenameDeprecatedUIBloxTokens then var12.Tokens.Color.Content.Emphasis else var12.Tokens.Semantic.Color.Text.Emphasis).Transparency
+					TextColor3 = var12.Tokens.Color.Content.Emphasis.Color3,
+					TextTransparency = var12.Tokens.Color.Content.Emphasis.Transparency
 				}),
 				SponsoredTooltip = reactModule.createElement(sponsoredTooltipHover, {
 					layoutOrder = 2,
@@ -86,13 +85,11 @@ return function(p0) --[[ line: 30 ]]
 					tooltipOrientation = tooltipOrientation.Bottom,
 					onActivateTooltip = onActivateSponsoredTooltip,
 					size = UDim2.new(0, 16, 0, 16),
-					color = (if fFlagRenameDeprecatedUIBloxTokens then var12.Tokens.Color.Content.Emphasis else var12.Tokens.Semantic.Color.Text.Emphasis).Color3,
+					color = var12.Tokens.Color.Content.Emphasis.Color3,
 					selectable = var14
 				})
 			}, {
-				UICorner = reactModule.createElement("UICorner", {
-					CornerRadius = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var12.Tokens.Radius.Small else var12.Tokens.Semantic.Radius.Small)
-				})
+				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var12.Tokens.Radius.Small) })
 			}) else reactModule.createElement("Frame", {
 				Size = p0.size or uDim2,
 				Position = p0.position,

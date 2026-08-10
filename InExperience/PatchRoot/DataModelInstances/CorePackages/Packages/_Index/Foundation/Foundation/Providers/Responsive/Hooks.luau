@@ -1,4 +1,5 @@
 ﻿return {
 	useBreakpoint = require(script.useBreakpoint),
-	useResponsiveValue = require(script.useResponsiveValue)
+	useResponsiveValue = require(script.useResponsiveValue),
+	useViewportBreakpoint = require(script.useViewportBreakpoint)
 }

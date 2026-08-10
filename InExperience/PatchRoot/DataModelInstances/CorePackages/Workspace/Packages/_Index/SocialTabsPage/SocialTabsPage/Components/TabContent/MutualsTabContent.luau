@@ -16,44 +16,48 @@ local useFetchPresencesModule = require(socialTabsPage.Hooks.useFetchPresences)
 local useSortedEntitiesByPresenceModule = require(socialTabsPage.Hooks.useSortedEntitiesByPresence)
 local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
 local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
+local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 
-return function() --[[ line: 23 | named "MutualsTabContent" ]]
-	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref)
-	local var12 = useMutualsListModule(useSocialTabsContextModule().profileId)
-	local var13 = reactModule.useMemo(function() --[[ line: 29 ]]
-		-- upvalues: dashModule (copy), var12 (ref), entityType (copy)
-		return dashModule.map(var12.mutualFriends, function(p0) --[[ line: 30 ]]
+return function() --[[ line: 26 | named "MutualsTabContent" ]]
+	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref)
+	local var13 = useMutualsListModule(useSocialTabsContextModule().profileId)
+	local var14 = reactModule.useMemo(function() --[[ line: 32 ]]
+		-- upvalues: dashModule (copy), var13 (ref), entityType (copy)
+		return dashModule.map(var13.mutualFriends, function(p0) --[[ line: 33 ]]
 			-- upvalues: entityType (copy)
 			return { id = p0.id, type = entityType.User }
 		end)
-	end, { var12.mutualFriends })
-	local var14 = reactModule.useMemo(function() --[[ line: 35 ]]
-		-- upvalues: dashModule (copy), var13 (ref)
-		return dashModule.map(var13, function(p1) --[[ line: 36 ]]
+	end, { var13.mutualFriends })
+	local var15 = reactModule.useMemo(function() --[[ line: 38 ]]
+		-- upvalues: dashModule (copy), var14 (ref)
+		return dashModule.map(var14, function(p1) --[[ line: 39 ]]
 			return p1.id
 		end)
-	end, { var13 })
-	useFetchPresencesModule(var14)
-	local var15 = useSortedEntitiesByPresenceModule(var13)
-	local var16 = useUserListCTAsModule(var14)
-	local var17 = useCTAActionHandlersModule()
+	end, { var14 })
 	
-	return if var12.isLoading and #var13 == 0 then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = reactModule.createElement(loading) }) else reactModule.createElement(view, { tag = "col size-full padding-x-xlarge" }, {
+	if not fFlagSocialTabsPagePresenceSignalsMigrationModule then
+		useFetchPresencesModule(var15)
+	end
+	local var16 = useSortedEntitiesByPresenceModule(var14)
+	local var17 = useUserListCTAsModule(var15)
+	local var18 = useCTAActionHandlersModule()
+	
+	return if var13.isLoading and #var14 == 0 then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = reactModule.createElement(loading) }) else reactModule.createElement(view, { tag = "col size-full padding-x-xlarge" }, {
 		MutualsList = reactModule.createElement(userListLayoutAdaptor, {
 			isScrollEnabled = true,
-			entities = var15,
+			entities = var16,
 			layoutMode = layoutMode.Vertical,
-			hasMore = var12.hasMore,
-			onLoadMore = if var12.hasMore then var12.loadMore else nil,
-			renderRow = reactModule.useCallback(function(p2, p3, _) --[[ line: 48 ]]
-				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var16 (ref), var17 (ref)
+			hasMore = var13.hasMore,
+			onLoadMore = if var13.hasMore then var13.loadMore else nil,
+			renderRow = reactModule.useCallback(function(p2, p3, _) --[[ line: 55 ]]
+				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var17 (ref), var18 (ref)
 				return reactModule.createElement(rowDataProviderModule, {
 					createRow = p2,
 					entity = p3,
-					ctaResult = var16[p3.id],
-					actionHandlers = var17
+					ctaResult = var17[p3.id],
+					actionHandlers = var18
 				})
-			end, { var16, var17 })
+			end, { var17, var18 })
 		})
 	})
 end

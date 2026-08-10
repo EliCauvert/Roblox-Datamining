@@ -1,11 +1,5 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local enumerateModule = require(corePackagesService.Packages.enumerate)
-local list = {
+﻿return require(game:GetService("CorePackages").Packages.enumerate)("PromptType", {
 	"AllowInventoryReadAccess", "SaveAvatar", "CreateOutfit", "EnterOutfitName",
-	"SetFavorite", "DeleteOutfit", "RenameOutfit", "UpdateOutfit"
-}
-
-if require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXAvatarTimeoutFlowIE then
-	table.insert(list, "SaveAvatarTimeout")
-end
-return enumerateModule("PromptType", list)
+	"SetFavorite", "DeleteOutfit", "RenameOutfit", "UpdateOutfit",
+	"SaveAvatarTimeout"
+})

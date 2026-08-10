@@ -224,7 +224,7 @@ function FocusableSearchTopBar(p10) --[[ line: 260 ]]
 		containerRef = var15,
 		focusNavigationEventHandlerRef = reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, function(p11) --[[ line: 268 ]]
 			-- upvalues: var17 (ref), var15 (ref), cancelCallback (ref)
-			if p11.eventData and var17.focusedGuiObject:getValue() == var15.current and p11.eventData.KeyCode ~= Enum.KeyCode.Unknown then
+			if p11.eventData and var17.focusedGuiObject:getValue() == var15.current and p11.eventData.KeyCode ~= Enum.KeyCode.None then
 				p11:cancel()
 				
 				if cancelCallback then

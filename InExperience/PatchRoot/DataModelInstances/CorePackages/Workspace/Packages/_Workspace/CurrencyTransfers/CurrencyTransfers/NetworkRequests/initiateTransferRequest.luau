@@ -15,22 +15,18 @@ local var8 = tModule.strictInterface({
 	transferOrigination = tModule.optional(tModule.string)
 })
 
-return function(p0, p1) --[[ line: 32 | named "initiateTransferRequest" ]]
+return function(p0, p1, p2) --[[ line: 32 | named "initiateTransferRequest" ]]
 	-- upvalues: var8 (ref), httpRequestModule (ref), transferOriginationModule (ref), var7 (ref), initiateTransferModelModule (ref), promiseModule (ref)
 	assert(var8(p0))
 	
-	return httpRequestModule.new(p1):post(var7, {
+	return (if p2 ~= nil then httpRequestModule.new(p1) else httpRequestModule.fromNetworkImpl(p2)):post(var7, {
 		recipientId = p0.recipientId,
 		transferOrigin = transferOriginationModule.toEnumInteger[p0.transferOrigination or transferOriginationModule.Unknown] or transferOriginationModule.toEnumInteger[transferOriginationModule.Unknown]
-	}):andThen(function(p3) --[[ line: 47 ]]
+	}):andThen(function(p4) --[[ line: 49 ]]
 		-- upvalues: initiateTransferModelModule (copy)
-		print("[initiateTransferRequest] Backend response (success):", p3)
-		
-		return initiateTransferModelModule.format(p3)
-	end):catch(function(p2) --[[ line: 52 ]]
+		return initiateTransferModelModule.format(p4)
+	end):catch(function(p3) --[[ line: 52 ]]
 		-- upvalues: promiseModule (copy)
-		print("[initiateTransferRequest] Backend response (error):", p2)
-		
-		return promiseModule.reject(p2)
+		return promiseModule.reject(p3)
 	end)
 end

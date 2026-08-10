@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXFixEmptyMakeupLooks", false) and require(script.Parent.FFlagAXCustomizeMakeupSupport)
+﻿return game:DefineFastFlag("AXFixEmptyMakeupLooks", false)

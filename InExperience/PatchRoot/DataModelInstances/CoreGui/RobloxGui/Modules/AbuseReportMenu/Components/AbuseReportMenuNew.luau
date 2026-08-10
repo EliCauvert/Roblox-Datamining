@@ -18,7 +18,6 @@ local reportExperienceMenuItemsContainerModule = require(abuseReportMenu.Compone
 local reportAnythingAnalyticsModule = require(abuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics)
 local reportAbuseAnalyticsModule = require(abuseReportMenu.Analytics.ReportAbuseAnalytics)
 local annotationModalModule = require(abuseReportMenu.ReportAnything.Components.AnnotationModal)
-local chatModalSelectorDialogControllerModule = require(abuseReportMenu.Components.ChatModalSelectorDialogController)
 local modalBasedSelectorDialogControllerModule = require(abuseReportMenu.Components.ModalBasedSelectorDialogController)
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local setTimeout = require(corePackagesService.Packages.LuauPolyfill).setTimeout
@@ -65,9 +64,9 @@ local segmentedControl = require(corePackagesService.Packages.UIBlox).App.Contro
 local list = { reportModes.Classic, reportModes.SelectInScene }
 local list_1 = { reportTypes.Person, reportTypes.Experience }
 
-local function _() --[[ line: 102 | named "isInSelectInSceneExperiment" ]]
+local function _() --[[ line: 101 | named "isInSelectInSceneExperiment" ]]
 	-- upvalues: IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
-	local ok, status = pcall(function() --[[ line: 104 ]]
+	local ok, status = pcall(function() --[[ line: 103 ]]
 		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 	end)
@@ -80,12 +79,12 @@ local function _() --[[ line: 102 | named "isInSelectInSceneExperiment" ]]
 	return false
 end
 
-local function isInWHAM1707Experiment() --[[ line: 116 ]]
+local function isInWHAM1707Experiment() --[[ line: 115 ]]
 	-- upvalues: getFFlagWHAM1707ExperimentForceEnabledModule (ref), IXPService (ref), fStringEARReportMenuIXPLayer (ref), fStringWHAM1707IXPFieldModule (ref)
 	if getFFlagWHAM1707ExperimentForceEnabledModule() then
 		return true
 	end
-	local ok, status = pcall(function() --[[ line: 122 ]]
+	local ok, status = pcall(function() --[[ line: 121 ]]
 		-- upvalues: IXPService (copy), fStringEARReportMenuIXPLayer (copy)
 		return IXPService:GetUserLayerVariables(fStringEARReportMenuIXPLayer)
 	end)
@@ -98,63 +97,62 @@ local function isInWHAM1707Experiment() --[[ line: 116 ]]
 	return false
 end
 
-local var38 = function(p0) --[[ line: 134 ]]
-	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), list (ref), list_1 (ref), createCleanupModule (ref), useReportAnythingWithScreenshotModule (ref), getMenuItemSizingsModule (ref), useTokens (ref), useLocalization (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707Experiment (ref), safetyService (ref), annotationModalModule (ref), chatModalSelectorDialogControllerModule (ref), modalBasedSelectorDialogControllerModule (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (ref), setTimeout (ref), reportAbuseAnalyticsModule (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), playersService (ref), isShowSelectInSceneReportMenuModule (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref), fFlagReportFocusNavIEMButtonsModule (ref), guiService (ref), fFlagIEMTabFocusNav (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportAnythingAnalyticsModule (ref), reportTypes (ref), reportPersonMenuItemsContainerModule (ref), reportExperienceMenuItemsContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), IEMReportScrollingFix (ref), segmentedControl (ref), reportModes (ref), selectInSceneReportMenuModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariant (ref), reportTypeSelectorModule (ref), view (ref), text (ref), isShowUKOSAIllegalContentReportingLink (ref), fFlagMigrateAllOsaMessagingToCentralService (ref), isShowEUDSAIllegalContentReportingLink (ref), DSAReportLink (ref), OSAReportLink (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref)
-	local var39, var40 = reactModule.useState(false)
-	local var41, var42 = reactModule.useState(1)
-	local var43, var44 = reactModule.useState(1)
-	local var45, var46 = reactModule.useState(nil)
-	local var47, var48 = reactModule.useState(0)
-	local var49, var50 = reactModule.useState(false)
-	local var51, var52 = reactModule.useState(false)
-	local var53, var54 = reactModule.useState(true)
+local var37 = function(p0) --[[ line: 133 ]]
+	-- upvalues: reactModule (ref), analyticsReducerModule (ref), constantsModule (ref), list (ref), list_1 (ref), createCleanupModule (ref), useReportAnythingWithScreenshotModule (ref), getMenuItemSizingsModule (ref), useTokens (ref), useLocalization (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (ref), isInWHAM1707Experiment (ref), safetyService (ref), annotationModalModule (ref), modalBasedSelectorDialogControllerModule (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (ref), setTimeout (ref), reportAbuseAnalyticsModule (ref), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (ref), playersService (ref), isShowSelectInSceneReportMenuModule (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref), fFlagReportFocusNavIEMButtonsModule (ref), guiService (ref), fFlagIEMTabFocusNav (ref), fFlagHideShortcutsOnReportDropdownModule (ref), reportAnythingAnalyticsModule (ref), reportTypes (ref), reportPersonMenuItemsContainerModule (ref), reportExperienceMenuItemsContainerModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), IEMReportScrollingFix (ref), segmentedControl (ref), reportModes (ref), selectInSceneReportMenuModule (ref), fFlagHighlightModePreciseSelectionEnabled (ref), getHighlightModeVariant (ref), reportTypeSelectorModule (ref), view (ref), text (ref), isShowUKOSAIllegalContentReportingLink (ref), fFlagMigrateAllOsaMessagingToCentralService (ref), isShowEUDSAIllegalContentReportingLink (ref), DSAReportLink (ref), OSAReportLink (ref), isShowGenericIllegalContentReportingLink (ref), genericReportLink (ref), fFlagAddTakeItDownReportLinkToSurfaces (ref), getTakeItDownReportLinkVisibility (ref), takeItDownReportLink (ref)
+	local var38, var39 = reactModule.useState(false)
+	local var40, var41 = reactModule.useState(1)
+	local var42, var43 = reactModule.useState(1)
+	local var44, var45 = reactModule.useState(nil)
+	local var46, var47 = reactModule.useState(0)
+	local var48, var49 = reactModule.useState(false)
+	local var50, var51 = reactModule.useState(false)
+	local var52, var53 = reactModule.useState(true)
+	local var54 = reactModule.useRef(nil)
 	local var55 = reactModule.useRef(nil)
-	local var56 = reactModule.useRef(nil)
-	local var57, var58 = reactModule.useState({ width = 0, height = 0 })
-	local var59 = var57.width < var57.height and var57.width < 700
-	local var60, var61 = reactModule.useReducer(analyticsReducerModule, constantsModule.AnalyticsInitialState)
-	local var62 = list[var41]
-	local var63 = list_1[var43]
-	local var64, var65 = useReportAnythingWithScreenshotModule(var39, p0.hideReportTab, p0.showReportTab, reactModule.useCallback(createCleanupModule(var60, var61, var46, var63), { var60, var43 }))
-	local var66 = getMenuItemSizingsModule()
-	local var67 = useTokens()
-	local var68 = useLocalization(constantsModule.localizationKeys)
-	reactModule.useEffect(function() --[[ line: 165 ]]
-		-- upvalues: p0 (ref), var40 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var64 (ref), safetyService (copy), annotationModalModule (copy), chatModalSelectorDialogControllerModule (copy), modalBasedSelectorDialogControllerModule (copy), var46 (ref), var48 (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var65 (ref), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
-		p0.registerOnReportTabDisplayed(function() --[[ line: 166 ]]
-			-- upvalues: var40 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var64 (copy), safetyService (copy)
-			var40(true)
+	local var56, var57 = reactModule.useState({ width = 0, height = 0 })
+	local var58 = var56.width < var56.height and var56.width < 700
+	local var59, var60 = reactModule.useReducer(analyticsReducerModule, constantsModule.AnalyticsInitialState)
+	local var61 = list[var40]
+	local var62 = list_1[var42]
+	local var63, var64 = useReportAnythingWithScreenshotModule(var38, p0.hideReportTab, p0.showReportTab, reactModule.useCallback(createCleanupModule(var59, var60, var45, var62), { var59, var42 }))
+	local var65 = getMenuItemSizingsModule()
+	local var66 = useTokens()
+	local var67 = useLocalization(constantsModule.localizationKeys)
+	reactModule.useEffect(function() --[[ line: 164 ]]
+		-- upvalues: p0 (ref), var39 (ref), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var63 (ref), safetyService (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), var45 (ref), var47 (ref), abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var64 (ref), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
+		p0.registerOnReportTabDisplayed(function() --[[ line: 165 ]]
+			-- upvalues: var39 (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), var63 (copy), safetyService (copy)
+			var39(true)
 			
-			if isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707Experiment() and var64.screenshotContentId ~= "" then
+			if isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707Experiment() and var63.screenshotContentId ~= "" then
 				safetyService:ReportMenuTabOpen()
 			end
 		end)
-		p0.registerOnReportTabHidden(function() --[[ line: 175 ]]
-			-- upvalues: var40 (copy), annotationModalModule (copy), chatModalSelectorDialogControllerModule (copy), modalBasedSelectorDialogControllerModule (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), safetyService (copy)
-			var40(false)
+		p0.registerOnReportTabHidden(function() --[[ line: 174 ]]
+			-- upvalues: var39 (copy), annotationModalModule (copy), modalBasedSelectorDialogControllerModule (copy), isAbuseReportMenuOpenCloseSignalEnabledModule (copy), isInWHAM1707Experiment (copy), safetyService (copy)
+			var39(false)
 			annotationModalModule.unmountAnnotationPage()
-			chatModalSelectorDialogControllerModule.unmountModalSelector()
 			modalBasedSelectorDialogControllerModule.unmountModalSelector()
 			
 			if isAbuseReportMenuOpenCloseSignalEnabledModule() and isInWHAM1707Experiment() then
 				safetyService:ReportMenuTabClose()
 			end
 		end)
-		p0.registerSetNextPlayerToReport(function(p1) --[[ line: 185 ]]
-			-- upvalues: var46 (copy)
-			var46(p1)
+		p0.registerSetNextPlayerToReport(function(p1) --[[ line: 183 ]]
+			-- upvalues: var45 (copy)
+			var45(p1)
 		end)
-		p0.registerOnMenuWidthChange(function(p2) --[[ line: 188 ]]
-			-- upvalues: var48 (copy)
-			var48(p2)
+		p0.registerOnMenuWidthChange(function(p2) --[[ line: 186 ]]
+			-- upvalues: var47 (copy)
+			var47(p2)
 		end)
-		p0.registerOnSettingsHidden(function() --[[ line: 191 ]]
-			-- upvalues: abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var65 (copy), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
+		p0.registerOnSettingsHidden(function() --[[ line: 189 ]]
+			-- upvalues: abuseReportTabClearCapturedScreenshotOnCloseFix (copy), setTimeout (copy), reportAbuseAnalyticsModule (copy), var64 (copy), constantsModule (copy), fIntAbuseReportTabClearCapturedScreenshotOnCloseFixDelayModule (copy)
 			if abuseReportTabClearCapturedScreenshotOnCloseFix then
-				setTimeout(function() --[[ line: 198 ]]
-					-- upvalues: reportAbuseAnalyticsModule (copy), var65 (copy), constantsModule (copy)
+				setTimeout(function() --[[ line: 196 ]]
+					-- upvalues: reportAbuseAnalyticsModule (copy), var64 (copy), constantsModule (copy)
 					if reportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint() == "" then
-						var65({ type = constantsModule.ReportAnythingActions.ClearAll })
+						var64({ type = constantsModule.ReportAnythingActions.ClearAll })
 						
 						return
 					end
@@ -162,52 +160,52 @@ local var38 = function(p0) --[[ line: 134 ]]
 				
 				return
 			elseif reportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint() == "" then
-				var65({ type = constantsModule.ReportAnythingActions.ClearAll })
+				var64({ type = constantsModule.ReportAnythingActions.ClearAll })
 			end
 		end)
-	end, { var64 })
-	reactModule.useEffect(function() --[[ line: 216 ]]
-		-- upvalues: var39 (ref), var44 (ref), var42 (ref), var52 (ref), playersService (copy), var50 (ref)
-		if not var39 then
-			var44(0)
-			var42(1)
-			var52(false)
+	end, { var63 })
+	reactModule.useEffect(function() --[[ line: 214 ]]
+		-- upvalues: var38 (ref), var43 (ref), var41 (ref), var51 (ref), playersService (copy), var49 (ref)
+		if not var38 then
+			var43(0)
+			var41(1)
+			var51(false)
 			
 			return
 		elseif #playersService:GetPlayers() <= 1 then
-			var50(true)
-			var44(2)
+			var49(true)
+			var43(2)
 			
 			return
 		end
-		var44(1)
-		var50(false)
-	end, { var39 })
-	reactModule.useEffect(function() --[[ line: 236 ]]
-		-- upvalues: var39 (ref), var61 (ref), constantsModule (copy), reportAbuseAnalyticsModule (copy), isShowSelectInSceneReportMenuModule (copy), IXPService (copy), fStringReportMenuIXPLayer (copy), fStringSelectInSceneIXPField (copy), var52 (ref), var58 (ref)
+		var43(1)
+		var49(false)
+	end, { var38 })
+	reactModule.useEffect(function() --[[ line: 234 ]]
+		-- upvalues: var38 (ref), var60 (ref), constantsModule (copy), reportAbuseAnalyticsModule (copy), isShowSelectInSceneReportMenuModule (copy), IXPService (copy), fStringReportMenuIXPLayer (copy), fStringSelectInSceneIXPField (copy), var51 (ref), var57 (ref)
 		local ok
-		if var39 then
-			var61({
+		if var38 then
+			var60({
 				type = constantsModule.AnalyticsActions.SetMenuOpenedTimestamp,
 				timestamp = math.floor(workspace:GetServerTimeNow() * 1000)
 			})
 			reportAbuseAnalyticsModule:startAbuseReportSession("ReportPage")
 			
-			if isShowSelectInSceneReportMenuModule(var61) then
-				local var83
-				ok, status = pcall(function() --[[ line: 104 ]]
+			if isShowSelectInSceneReportMenuModule(var60) then
+				local var82
+				ok, status = pcall(function() --[[ line: 103 ]]
 					-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
 					return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
 				end)
 				
 				if ok and status and status[fStringSelectInSceneIXPField] ~= nil then
 					IXPService:LogUserLayerExposure(fStringReportMenuIXPLayer)
-					var83 = status[fStringSelectInSceneIXPField]
+					var82 = status[fStringSelectInSceneIXPField]
 				else
-					var83 = false
+					var82 = false
 				end
-				if var83 then
-					var52(true)
+				if var82 then
+					var51(true)
 				end
 			end
 		end
@@ -215,96 +213,96 @@ local var38 = function(p0) --[[ line: 134 ]]
 		
 		if currentCamera ~= nil then
 			ok = currentCamera.ViewportSize
-			var58({ width = ok.X, height = ok.Y })
-			var61({
+			var57({ width = ok.X, height = ok.Y })
+			var60({
 				type = constantsModule.AnalyticsActions.SetViewportInformation,
 				viewportSizeX = ok.X,
 				viewportSizeY = ok.Y
 			})
 		end
-	end, { var39, var47 })
+	end, { var38, var46 })
 	
 	if fFlagReportFocusNavIEMButtonsModule then
-		reactModule.useEffect(function() --[[ line: 270 ]]
-			-- upvalues: var39 (ref), p0 (ref), guiService (copy), var54 (ref)
-			if not var39 then return end
-			local function _() --[[ line: 275 | named "isMenuSelected" ]]
+		reactModule.useEffect(function() --[[ line: 268 ]]
+			-- upvalues: var38 (ref), p0 (ref), guiService (copy), var53 (ref)
+			if not var38 then return end
+			local function _() --[[ line: 273 | named "isMenuSelected" ]]
 				-- upvalues: p0 (copy), guiService (copy)
 				local getSettingsHubRef = p0.getSettingsHubRef
-				local var87 = getSettingsHubRef and getSettingsHubRef()
-				local menuContainer = var87 and var87.MenuContainer
+				local var86 = getSettingsHubRef and getSettingsHubRef()
+				local menuContainer = var86 and var86.MenuContainer
 				
 				return guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))
 			end
 			
 			local getSettingsHubRef = p0.getSettingsHubRef
-			local var84 = getSettingsHubRef and getSettingsHubRef()
-			local menuContainer = var84 and var84.MenuContainer
-			var54(not (guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))))
-			local var86 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 286 ]]
-				-- upvalues: var54 (copy), p0 (copy), guiService (copy)
+			local var83 = getSettingsHubRef and getSettingsHubRef()
+			local menuContainer = var83 and var83.MenuContainer
+			var53(not (guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))))
+			local var85 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 284 ]]
+				-- upvalues: var53 (copy), p0 (copy), guiService (copy)
 				local getSettingsHubRef = p0.getSettingsHubRef
-				local var89 = getSettingsHubRef and getSettingsHubRef()
-				local menuContainer = var89 and var89.MenuContainer
-				var54(not (guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))))
+				local var88 = getSettingsHubRef and getSettingsHubRef()
+				local menuContainer = var88 and var88.MenuContainer
+				var53(not (guiService.SelectedCoreObject ~= nil and (menuContainer ~= nil and guiService.SelectedCoreObject:IsDescendantOf(menuContainer))))
 			end)
 			
-			return function() --[[ line: 290 ]]
-				-- upvalues: var86 (ref)
-				var86:Disconnect()
+			return function() --[[ line: 288 ]]
+				-- upvalues: var85 (ref)
+				var85:Disconnect()
 			end
-		end, { var39, p0.getSettingsHubRef })
+		end, { var38, p0.getSettingsHubRef })
 	end
 	if fFlagIEMTabFocusNav then
-		reactModule.useEffect(function() --[[ line: 298 ]]
-			-- upvalues: var39 (ref), var55 (ref), p0 (ref)
-			if not var39 then return end
-			local var91 = if var55.current and var55.current.tabRefs then {
-				var55.current.tabRefs[1].current:FindFirstChild("Tab"),
-				var55.current.tabRefs[2].current:FindFirstChild("Tab")
+		reactModule.useEffect(function() --[[ line: 296 ]]
+			-- upvalues: var38 (ref), var54 (ref), p0 (ref)
+			if not var38 then return end
+			local var90 = if var54.current and var54.current.tabRefs then {
+				var54.current.tabRefs[1].current:FindFirstChild("Tab"),
+				var54.current.tabRefs[2].current:FindFirstChild("Tab")
 			} else nil
 			
-			if p0.setFirstSelectableObjects and var91 then
-				p0.setFirstSelectableObjects(var91)
+			if p0.setFirstSelectableObjects and var90 then
+				p0.setFirstSelectableObjects(var90)
 			end
-		end, { var39, var55, p0.setFirstSelectableObjects, var51 })
+		end, { var38, var54, p0.setFirstSelectableObjects, var50 })
 	end
-	if not var39 then
+	if not var38 then
 		return nil
 	end
-	local var69 = nil
+	local var68 = nil
 	local t = {
 		onReportComplete = p0.onReportComplete,
 		onDropdownMenuOpenChange = if fFlagHideShortcutsOnReportDropdownModule then p0.onDropdownMenuOpenChange else nil,
 		reportAnythingAnalytics = reportAnythingAnalyticsModule,
-		reportAnythingState = var64,
-		reportAnythingDispatch = var65,
+		reportAnythingState = var63,
+		reportAnythingDispatch = var64,
 		hideReportTab = p0.hideReportTab,
-		isReportTabVisible = var39,
+		isReportTabVisible = var38,
 		showReportSentPage = p0.showReportSentPage,
-		analyticsState = var60,
-		analyticsDispatch = var61,
-		preselectedPlayer = var45,
-		setPreselectedPlayer = var46,
-		menuWidth = var47,
-		viewportDimension = var57,
+		analyticsState = var59,
+		analyticsDispatch = var60,
+		preselectedPlayer = var44,
+		setPreselectedPlayer = var45,
+		menuWidth = var46,
+		viewportDimension = var56,
 		setLastSelectableObjects = if fFlagReportFocusNavIEMButtonsModule then p0.setLastSelectableObjects else nil
 	}
 	
-	if var63 == reportTypes.Person then
-		var69 = reactModule.createElement(reportPersonMenuItemsContainerModule, { utilityProps = t, isSmallPortraitViewport = var59 })
-	elseif var63 == reportTypes.Experience then
-		var69 = reactModule.createElement(reportExperienceMenuItemsContainerModule, { utilityProps = t, isSmallPortraitViewport = var59 })
+	if var62 == reportTypes.Person then
+		var68 = reactModule.createElement(reportPersonMenuItemsContainerModule, { utilityProps = t, isSmallPortraitViewport = var58 })
+	elseif var62 == reportTypes.Experience then
+		var68 = reactModule.createElement(reportExperienceMenuItemsContainerModule, { utilityProps = t, isSmallPortraitViewport = var58 })
 	end
-	local var82
+	local var81
 	local createElement = reactModule.createElement
-	local var71 = "Frame"
+	local var70 = "Frame"
 	local t_1 = {
 		BackgroundTransparency = 1,
-		ref = var56,
+		ref = var55,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
-		Position = UDim2.new(0, 0, 0, var66.TopPadding)
+		Position = UDim2.new(0, 0, 0, var65.TopPadding)
 	}
 	local t_2 = {}
 	local createElement_1 = reactModule.createElement
@@ -315,13 +313,13 @@ local var38 = function(p0) --[[ line: 134 ]]
 			AutomaticSize = Enum.AutomaticSize.Y
 		},
 		isIsolated = if IEMReportScrollingFix then nil else true,
-		isAutoFocusRoot = if fFlagReportFocusNavIEMButtonsModule then var53 else true,
+		isAutoFocusRoot = if fFlagReportFocusNavIEMButtonsModule then var52 else true,
 		shouldRestoreFocus = if fFlagReportFocusNavIEMButtonsModule then false else true
 	}
 	local t_4 = {}
 	local abuseReportMenuPlaceholderFrame = constantsModule.AbuseReportMenuPlaceholderFrame
 	local createElement_2 = reactModule.createElement
-	local var76 = "Frame"
+	local var75 = "Frame"
 	local t_5 = {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -329,7 +327,7 @@ local var38 = function(p0) --[[ line: 134 ]]
 	}
 	local t_6 = {}
 	local createElement_3 = reactModule.createElement
-	local var79 = "Frame"
+	local var78 = "Frame"
 	local t_7 = {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -343,10 +341,10 @@ local var38 = function(p0) --[[ line: 134 ]]
 			Padding = UDim.new(0, 12)
 		}),
 		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var66.ItemPadding),
-			PaddingBottom = UDim.new(0, var66.ItemPadding)
+			PaddingTop = UDim.new(0, var65.ItemPadding),
+			PaddingBottom = UDim.new(0, var65.ItemPadding)
 		}),
-		SelectInSceneToggleFrame = if var51 then reactModule.createElement("Frame", {
+		SelectInSceneToggleFrame = if var50 then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 0,
 			AutomaticSize = Enum.AutomaticSize.XY,
@@ -354,29 +352,29 @@ local var38 = function(p0) --[[ line: 134 ]]
 			AnchorPoint = Vector2.new(0.5, 0)
 		}, {
 			SelectInSceneToggle = reactModule.createElement(segmentedControl, {
-				onTabActivated = function(p3) --[[ line: 402 ]]
-					-- upvalues: var42 (ref)
-					var42(p3)
+				onTabActivated = function(p3) --[[ line: 400 ]]
+					-- upvalues: var41 (ref)
+					var41(p3)
 				end,
-				selectedTabIndex = var41,
+				selectedTabIndex = var40,
 				tabs = {
-					{ tabName = var68.BuildAReport },
-					{ tabName = var68.SelectInScene }
+					{ tabName = var67.BuildAReport },
+					{ tabName = var67.SelectInScene }
 				},
-				width = UDim.new(0, var47),
-				ref = if fFlagIEMTabFocusNav then var55 else nil
+				width = UDim.new(0, var46),
+				ref = if fFlagIEMTabFocusNav then var54 else nil
 			})
 		}) else nil
 	}
 	
-	if var62 == reportModes.SelectInScene then
-		var82 = reactModule.createElement(selectInSceneReportMenuModule, {
+	if var61 == reportModes.SelectInScene then
+		var81 = reactModule.createElement(selectInSceneReportMenuModule, {
 			hideReportTab = p0.hideReportTab,
 			variant = if fFlagHighlightModePreciseSelectionEnabled then getHighlightModeVariant() else nil
 		})
-	elseif var62 == reportModes.Classic then
-		var82 = reactModule.createElement
-		var82 = var82("Frame", {
+	elseif var61 == reportModes.Classic then
+		var81 = reactModule.createElement
+		var81 = var81("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
@@ -385,35 +383,35 @@ local var38 = function(p0) --[[ line: 134 ]]
 			Layout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var66.ItemPadding)
+				Padding = UDim.new(0, var65.ItemPadding)
 			}),
 			ReportTypeSelector = reactModule.createElement(reportTypeSelectorModule, {
 				layoutOrder = 0,
-				label = var68.ReportType,
-				abuseType = var68[list_1[var43]],
+				label = var67.ReportType,
+				abuseType = var67[list_1[var42]],
 				utilityProps = t,
-				isSelectionDisabled = var49,
-				menuWidth = var47,
-				isSmallPortraitViewport = var59,
-				onClickLeft = function() --[[ line: 445 ]]
-					-- upvalues: var65 (ref), constantsModule (copy), var61 (ref), var44 (ref), var43 (ref), list_1 (copy)
-					var65({
+				isSelectionDisabled = var48,
+				menuWidth = var46,
+				isSmallPortraitViewport = var58,
+				onClickLeft = function() --[[ line: 443 ]]
+					-- upvalues: var64 (ref), constantsModule (copy), var60 (ref), var43 (ref), var42 (ref), list_1 (copy)
+					var64({
 						type = constantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
 					})
-					var61({
+					var60({
 						type = constantsModule.AnalyticsActions.IncrementExperiencePersonChanged
 					})
-					var44((var43 - 1 - 1) % #list_1 + 1)
+					var43((var42 - 1 - 1) % #list_1 + 1)
 				end,
-				onClickRight = function() --[[ line: 455 ]]
-					-- upvalues: var65 (ref), constantsModule (copy), var61 (ref), var44 (ref), var43 (ref), list_1 (copy)
-					var65({
+				onClickRight = function() --[[ line: 453 ]]
+					-- upvalues: var64 (ref), constantsModule (copy), var60 (ref), var43 (ref), var42 (ref), list_1 (copy)
+					var64({
 						type = constantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
 					})
-					var61({
+					var60({
 						type = constantsModule.AnalyticsActions.IncrementExperiencePersonChanged
 					})
-					var44((var43 - 1 + 1) % #list_1 + 1)
+					var43((var42 - 1 + 1) % #list_1 + 1)
 				end
 			}),
 			MenuItemsContainer = reactModule.createElement("Frame", {
@@ -421,7 +419,7 @@ local var38 = function(p0) --[[ line: 134 ]]
 				LayoutOrder = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0)
-			}, { MenuItems = var69 }),
+			}, { MenuItems = var68 }),
 			FooterFrame = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
 				TextFrame = reactModule.createElement(view, {
 					tag = "size-full col align-x-left gap-small padding-top-medium"
@@ -434,9 +432,9 @@ local var38 = function(p0) --[[ line: 134 ]]
 						TextWrapped = true,
 						tag = "auto-xy",
 						LayoutOrder = 2,
-						Text = if isShowUKOSAIllegalContentReportingLink() then var68.FooterInformation2 else var68.FooterInformation1,
-						fontStyle = var67.Typography.BodySmall,
-						textStyle = var67.Color.Content.Muted,
+						Text = if isShowUKOSAIllegalContentReportingLink() then var67.FooterInformation2 else var67.FooterInformation1,
+						fontStyle = var66.Typography.BodySmall,
+						textStyle = var66.Color.Content.Muted,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})
@@ -452,23 +450,23 @@ local var38 = function(p0) --[[ line: 134 ]]
 			TakeItDownReportLink = if fFlagAddTakeItDownReportLinkToSurfaces and getTakeItDownReportLinkVisibility() then reactModule.createElement(takeItDownReportLink, { layoutOrder = 4 }) else nil
 		})
 	else
-		var82 = nil
+		var81 = nil
 	end
-	t_8.Menu = var82
-	t_6.MenuLayoutFrame = createElement_3(var79, t_7, t_8)
-	t_4[abuseReportMenuPlaceholderFrame] = createElement_2(var76, t_5, t_6)
+	t_8.Menu = var81
+	t_6.MenuLayoutFrame = createElement_3(var78, t_7, t_8)
+	t_4[abuseReportMenuPlaceholderFrame] = createElement_2(var75, t_5, t_6)
 	t_2.FocusNavigationCoreScriptsWrapper = createElement_1(focusRoot, t_3, t_4)
 	
-	return createElement(var71, t_1, t_2)
+	return createElement(var70, t_1, t_2)
 end
 
-return function(p4) --[[ line: 539 ]]
-	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), constantsModule (ref), var38 (ref)
+return function(p4) --[[ line: 537 ]]
+	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), coreScriptsRootProvider (ref), localizationProvider (ref), constantsModule (ref), var37 (ref)
 	return reactModule.createElement(coreScriptsRootProvider, {}, {
 		LocalizationProvider = reactModule.createElement(localizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {
-			[constantsModule.AbuseReportMenuRootName] = reactModule.createElement(var38, p4)
+			[constantsModule.AbuseReportMenuRootName] = reactModule.createElement(var37, p4)
 		})
 	})
 end

@@ -2,11 +2,12 @@
 local roduxModule = require(userList.Parent.Rodux)
 local myRoduxNetworkingModule = require(userList.Networking.myRoduxNetworking)
 local presenceModule = require(userList.Rodux.Presence)
+local fFlagUserListPresenceStoreMigrationModule = require(userList.Flags.FFlagUserListPresenceStoreMigration)
 
-return function() --[[ line: 8 ]]
-	-- upvalues: roduxModule (ref), presenceModule (ref), myRoduxNetworkingModule (ref)
+return function() --[[ line: 9 ]]
+	-- upvalues: roduxModule (ref), fFlagUserListPresenceStoreMigrationModule (ref), presenceModule (ref), myRoduxNetworkingModule (ref)
 	return roduxModule.combineReducers({
-		Presence = presenceModule,
+		Presence = if not fFlagUserListPresenceStoreMigrationModule then presenceModule else nil,
 		NetworkStatus = myRoduxNetworkingModule.installReducer()
 	})
 end

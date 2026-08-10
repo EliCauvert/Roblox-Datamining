@@ -20,5 +20,6 @@ return {
 	usePromptEntries = if fFlagEnableHomepagePromptsForModalsAndBanners then sduiV2Module.usePromptEntries else nil,
 	PromptsSystemBanner = if fFlagEnableHomepagePromptsForModalsAndBanners then require(script.PromptsSystemBanner) else nil,
 	reportPromptImpression = if fFlagEnableProfileCompletion then require(script.reportPromptImpression) else nil,
-	PromptsHandler = if fFlagPromptsHandlerEnabled then promptsHandlerModule.PromptsHandler else nil
+	PromptsHandler = if fFlagPromptsHandlerEnabled then promptsHandlerModule.PromptsHandler else nil,
+	EdpGameLeavePromptsHandler = if sharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled then require(script.SduiV2.EdpGameLeavePromptsHandler) else nil
 }

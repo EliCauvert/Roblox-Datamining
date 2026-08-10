@@ -1,12 +1,12 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Enums.ColorMode)
+local _ = require(foundation.Enums.ColorNamespace)
 local reactModule = require(foundation.Parent.React)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 
 return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 ]]
 	-- upvalues: useTokensModule (ref), reactModule (ref)
 	local var3 = useTokensModule()
-	local colorMode = p0.colorMode
+	local colorNamespace = p0.colorNamespace
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -17,8 +17,8 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 19 ]]
 	}, {
 		UICorner = reactModule.createElement("UICorner", { CornerRadius = p0.cornerRadius }),
 		UIStroke = reactModule.createElement("UIStroke", {
-			Color = var3[colorMode].Selection.Start.Color3,
-			Transparency = var3[colorMode].Selection.Start.Transparency,
+			Color = var3[colorNamespace].Selection.Start.Color3,
+			Transparency = var3[colorNamespace].Selection.Start.Transparency,
 			Thickness = p0.borderWidth
 		}, {})
 	})

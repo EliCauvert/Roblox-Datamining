@@ -2,73 +2,70 @@
 local reactModule = require(parent.React)
 local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
 local useDesignTokens = require(parent.Style).useDesignTokens
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagRenameDeprecatedUIBloxTokens = sharedFlagsModule.FFlagRenameDeprecatedUIBloxTokens
-local fFlagReplaceMissingDesignTokens = sharedFlagsModule.FFlagReplaceMissingDesignTokens
+local fFlagReplaceMissingDesignTokens = require(parent.SharedFlags).FFlagReplaceMissingDesignTokens
 local boxModule = require(script.Parent.Box)
 
-local function mapTokens(p0) --[[ line: 15 ]]
-	-- upvalues: fFlagRenameDeprecatedUIBloxTokens (ref)
-	local var4 = if fFlagRenameDeprecatedUIBloxTokens then p0.Size.Size_1200 else p0.Global.Size_600
-	local var5 = if fFlagRenameDeprecatedUIBloxTokens then p0.Size.Size_200 else p0.Global.Space_100
+local function mapTokens(p0) --[[ line: 14 ]]
+	local size1200 = p0.Size.Size_1200
+	local size200 = p0.Size.Size_200
 	
 	return {
-		fontStyle = if fFlagRenameDeprecatedUIBloxTokens then p0.Typography.BodyLarge else p0.Semantic.Typography.Body,
-		colorStyle = if fFlagRenameDeprecatedUIBloxTokens then p0.Color.Content.Default else p0.Semantic.Color.Text.Default,
-		imageRightMargin = if fFlagRenameDeprecatedUIBloxTokens then p0.Size.Size_300 else p0.Global.Space_150,
-		imageBoxSize = var4,
-		imageBoxPadding = var5,
-		imageBoxTransparency = (if fFlagRenameDeprecatedUIBloxTokens then p0.Color.Common.Shimmer else p0.Semantic.Color.Common.Placeholder).Transparency,
-		imageBoxBackgroundColor = (if fFlagRenameDeprecatedUIBloxTokens then p0.Color.Common.Shimmer else p0.Semantic.Color.Common.Placeholder).Color3,
-		imageBoxCornerRadius = if fFlagRenameDeprecatedUIBloxTokens then p0.Radius.Medium else p0.Semantic.Radius.Medium,
-		imageSize = var4 - var5 * 2
+		fontStyle = p0.Typography.BodyLarge,
+		colorStyle = p0.Color.Content.Default,
+		imageRightMargin = p0.Size.Size_300,
+		imageBoxSize = size1200,
+		imageBoxPadding = size200,
+		imageBoxTransparency = p0.Color.Common.Shimmer.Transparency,
+		imageBoxBackgroundColor = p0.Color.Common.Shimmer.Color3,
+		imageBoxCornerRadius = p0.Radius.Medium,
+		imageSize = size1200 - size200 * 2
 	}
 end
 
-return function(p1) --[[ line: 55 | named "Item" ]]
+return function(p1) --[[ line: 38 | named "Item" ]]
 	-- upvalues: useDesignTokens (ref), mapTokens (ref), reactModule (ref), boxModule (ref), styledTextLabel (ref), fFlagReplaceMissingDesignTokens (ref)
-	local var6 = useDesignTokens(mapTokens)
+	local var3 = useDesignTokens(mapTokens)
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, var6.imageBoxSize),
+		Size = UDim2.new(1, 0, 0, var3.imageBoxSize),
 		LayoutOrder = p1.LayoutOrder
 	}, {
 		ImageBox = reactModule.createElement(boxModule, {
 			BorderSizePixel = 0,
-			Size = UDim2.fromOffset(var6.imageBoxSize, var6.imageBoxSize),
-			BackgroundTransparency = var6.imageBoxTransparency,
-			BackgroundColor3 = var6.imageBoxBackgroundColor,
+			Size = UDim2.fromOffset(var3.imageBoxSize, var3.imageBoxSize),
+			BackgroundTransparency = var3.imageBoxTransparency,
+			BackgroundColor3 = var3.imageBoxBackgroundColor,
 			padding = {
-				var6.imageBoxPadding,
-				var6.imageBoxPadding,
-				var6.imageBoxPadding,
-				var6.imageBoxPadding
+				var3.imageBoxPadding,
+				var3.imageBoxPadding,
+				var3.imageBoxPadding,
+				var3.imageBoxPadding
 			},
-			cornerRadius = UDim.new(0, var6.imageBoxCornerRadius)
+			cornerRadius = UDim.new(0, var3.imageBoxCornerRadius)
 		}, {
 			Image = reactModule.createElement("ImageLabel", {
 				Image = p1.image,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(var6.imageSize, var6.imageSize),
+				Size = UDim2.fromOffset(var3.imageSize, var3.imageSize),
 				[reactModule.Tag] = "data-testid=BulkPurchaseApp_ItemImage"
 			})
 		}),
 		LineItem = reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Position = UDim2.fromOffset(var6.imageBoxSize + var6.imageRightMargin, 0),
-			Size = UDim2.new(1, -(var6.imageBoxSize + var6.imageRightMargin), 1, 0)
+			Position = UDim2.fromOffset(var3.imageBoxSize + var3.imageRightMargin, 0),
+			Size = UDim2.new(1, -(var3.imageBoxSize + var3.imageRightMargin), 1, 0)
 		}, reactModule.createElement(styledTextLabel, {
-			fontStyle = var6.fontStyle,
-			colorStyle = var6.colorStyle,
+			fontStyle = var3.fontStyle,
+			colorStyle = var3.colorStyle,
 			text = p1.name,
 			textTruncate = Enum.TextTruncate.AtEnd,
 			textYAlignment = Enum.TextYAlignment.Top,
 			size = UDim2.new(0.66, 0, 1, 0),
-			lineHeight = if fFlagReplaceMissingDesignTokens then var6.fontStyle.LineHeight else var6.fontStyle.lineHeight
+			lineHeight = if fFlagReplaceMissingDesignTokens then var3.fontStyle.LineHeight else var3.fontStyle.lineHeight
 		}), reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,

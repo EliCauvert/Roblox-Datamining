@@ -1,10 +1,7 @@
 ﻿local parent = script:FindFirstAncestor("DiscoveryTypes").Parent
 local fFlagLuaAppHeaderButtonText = require(parent.SharedFlags).FFlagLuaAppHeaderButtonText
-local fFlagLuaAppGameCarouselAmpUpsellAction = require(parent.SharedFlags).FFlagLuaAppGameCarouselAmpUpsellAction
 local fFlagLuaAppRfySignalApportioningIxp = require(parent.SharedFlags).FFlagLuaAppRfySignalApportioningIxp
-local fFlagLuaAppEnableWhyThisAdModal = require(parent.SharedFlags).FFlagLuaAppEnableWhyThisAdModal
 local fFlagLuaAppEnableSponsoredReportAd = require(parent.SharedFlags).FFlagLuaAppEnableSponsoredReportAd
-local fFlagLuaAppChartsStickyHeader = require(parent.SharedFlags).FFlagLuaAppChartsStickyHeader
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppRfyRevealRows = require(parent.SharedFlags).FFlagLuaAppRfyRevealRows
 local _ = require(script.Parent.RoduxTypes)
@@ -12,7 +9,10 @@ local _ = require(script.Parent.RoduxTypes)
 return {
 	EventContext = "HomeOmniFeed",
 	OmniSortRetrievalStatus = { Exception = "Exception", Success = "Success" },
-	GlobalLayoutDataKeys = { JYFRefresh = "JYFRefresh" },
+	GlobalLayoutDataKeys = {
+		JYFRefresh = "JYFRefresh",
+		ShowBackToTop = if require(parent.SharedFlags).FFlagLuaAppSupportHomeBackToTop then "showBackToTop" else nil
+	},
 	TopicLayoutDataKeys = {
 		PYMKFindFriendsEnabled = "PYMKFindFriendsEnabled",
 		PYMKSeeAllEnabled = "PYMKSeeAllEnabled",
@@ -32,19 +32,19 @@ return {
 		HideTileTitle = "hideTileTitle",
 		ContainedTile = "containedTile",
 		EnableExplicitFeedback = "enableExplicitFeedback",
+		SponsoredUserCohort = "sponsoredUserCohort",
 		EnableSponsoredFeedback = "enableSponsoredFeedback",
 		EnableCollectionGrid = "enableCollectionGrid",
 		IsSponsoredRatingFooterAllowed = "isSponsoredRatingFooterAllowed",
+		AmpUpsellFeatureName = "ampUpsellFeatureName",
+		AmpUpsellNamespace = "ampUpsellNamespace",
 		HeaderButtonText = if fFlagLuaAppHeaderButtonText then "headerButtonText" else nil,
 		HasPrevalidatedVideoGamePlayability = if fFlagLuaAppUsePrevalidatedVideoGamePlayability then "hasPrevalidatedVideoGamePlayability" else nil,
 		EnableSignalApportioning = if fFlagLuaAppRfySignalApportioningIxp then "enableSignalApportioning" else nil,
-		SponsoredUserCohort = if fFlagLuaAppEnableWhyThisAdModal then "sponsoredUserCohort" else nil,
 		SortHeaderAnchorTag = if require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
-		InitialVisibleRows = if fFlagLuaAppRfyRevealRows then "initialVisibleRows" else nil,
+		InitialFeedVisibleRows = if fFlagLuaAppRfyRevealRows then "initialFeedVisibleRows" else nil,
 		VisibleRowsPerReveal = if fFlagLuaAppRfyRevealRows then "visibleRowsPerReveal" else nil,
-		EnableReportAd = if fFlagLuaAppEnableSponsoredReportAd then "enableReportAd" else nil,
-		AmpUpsellFeatureName = if fFlagLuaAppGameCarouselAmpUpsellAction then "ampUpsellFeatureName" else nil,
-		AmpUpsellNamespace = if fFlagLuaAppGameCarouselAmpUpsellAction then "ampUpsellNamespace" else nil
+		EnableReportAd = if fFlagLuaAppEnableSponsoredReportAd then "enableReportAd" else nil
 	},
 	ComponentTypeDataKeys = {
 		EventTile = "EventTile",
@@ -59,9 +59,9 @@ return {
 		LogIn = "logIn",
 		LoadMore = "loadMore",
 		GameExit = "gameExit",
-		AmpUpsellFeatureGranted = if fFlagLuaAppGameCarouselAmpUpsellAction then "ampUpsellFeatureGranted" else nil,
-		OptionSelector = if require(parent.SharedFlags).FFlagSduiGenreSelector then "optionSelector" else nil
+		AmpUpsellFeatureGranted = "ampUpsellFeatureGranted",
+		OptionSelector = "optionSelector"
 	},
 	ContentGroupType = { Game = "Game", Text = "Text", User = "User" },
-	OmniFeedPageSection = if fFlagLuaAppChartsStickyHeader then { Header = "Header" } else nil
+	OmniFeedPageSection = { Header = "Header" }
 }

@@ -2,7 +2,7 @@
 local roactModule = require(corePackagesService.Packages.Roact)
 local tModule = require(corePackagesService.Packages.t)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local withStyle = UIBloxModule.Style.withStyle
+local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local textButton = UIBloxModule.App.Button.TextButton
 local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
 
@@ -64,10 +64,34 @@ function reportActionSelection.init(p0) --[[ line: 50 ]]
 end
 
 function reportActionSelection.render(p1) --[[ line: 79 ]]
-	-- upvalues: withStyle (ref), roactModule (ref), textButton (ref), UIBloxModule (ref)
-	return withStyle(function(p2) --[[ line: 80 ]]
+	-- upvalues: withFoundationOrUIBloxStyle (ref), roactModule (ref), textButton (ref), UIBloxModule (ref)
+	return withFoundationOrUIBloxStyle(function(p2) --[[ line: 80 ]]
+		return {
+			Theme = {
+				SystemPrimaryContent = {
+					Color = p2.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = p2.Color.ActionSubEmphasis.Foreground.Transparency
+				},
+				TextEmphasis = {
+					Color = p2.Color.Content.Emphasis.Color3,
+					Transparency = p2.Color.Content.Emphasis.Transparency
+				}
+			},
+			Font = {
+				BaseSize = 1,
+				CaptionHeader = {
+					Font = p2.Typography.CaptionLarge.Font,
+					RelativeSize = p2.Typography.CaptionLarge.FontSize
+				},
+				Header1 = {
+					Font = p2.Typography.HeadingSmall.Font,
+					RelativeSize = p2.Typography.HeadingSmall.FontSize
+				}
+			}
+		}
+	end, function(p3) --[[ line: 104 ]]
 		-- upvalues: roactModule (copy), p1 (ref), textButton (copy), UIBloxModule (copy)
-		local baseSize = p2.Font.BaseSize
+		local baseSize = p3.Font.BaseSize
 		
 		return roactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -88,10 +112,10 @@ function reportActionSelection.render(p1) --[[ line: 79 ]]
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Text = p1.state.titleText,
-				TextColor3 = p2.Theme.TextEmphasis.Color,
-				TextTransparency = p2.Theme.TextEmphasis.Transparency,
-				TextSize = p2.Font.Header1.RelativeSize * baseSize,
-				Font = p2.Font.Header1.Font,
+				TextColor3 = p3.Theme.TextEmphasis.Color,
+				TextTransparency = p3.Theme.TextEmphasis.Transparency,
+				TextSize = p3.Font.Header1.RelativeSize * baseSize,
+				Font = p3.Font.Header1.Font,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
 			subtitle = roactModule.createElement("TextLabel", {
@@ -100,10 +124,10 @@ function reportActionSelection.render(p1) --[[ line: 79 ]]
 				LayoutOrder = 2,
 				Size = UDim2.fromOffset(612, 0),
 				Text = p1.state.subtitleText,
-				TextColor3 = p2.Theme.TextEmphasis.Color,
-				TextTransparency = p2.Theme.TextEmphasis.Transparency,
-				TextSize = p2.Font.CaptionHeader.RelativeSize * baseSize,
-				Font = p2.Font.CaptionHeader.Font,
+				TextColor3 = p3.Theme.TextEmphasis.Color,
+				TextTransparency = p3.Theme.TextEmphasis.Transparency,
+				TextSize = p3.Font.CaptionHeader.RelativeSize * baseSize,
+				Font = p3.Font.CaptionHeader.Font,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
 			spacer = roactModule.createElement("Frame", {
@@ -127,8 +151,8 @@ function reportActionSelection.render(p1) --[[ line: 79 ]]
 				cancelContainer = roactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 1,
-					BackgroundColor3 = p2.Theme.SystemPrimaryContent.Color,
-					BackgroundTransparency = p2.Theme.SystemPrimaryContent.Transparency,
+					BackgroundColor3 = p3.Theme.SystemPrimaryContent.Color,
+					BackgroundTransparency = p3.Theme.SystemPrimaryContent.Transparency,
 					Size = UDim2.fromOffset(234, 44)
 				}, {
 					uiCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),

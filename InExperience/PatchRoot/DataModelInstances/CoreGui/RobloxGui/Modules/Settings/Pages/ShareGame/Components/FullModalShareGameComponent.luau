@@ -31,6 +31,7 @@ function fullModalShareGameComponent.render(p0) --[[ line: 31 ]]
 	local inviteMessageId = p0.props.inviteMessageId
 	local launchData = p0.props.launchData
 	local isLoading = p0.props.isLoading
+	local requestImpl = p0.props.requestImpl
 	
 	if getFFlagExtraInviteModalStringValidationModule() and promptMessage then
 		if not inviteUserId then
@@ -58,7 +59,8 @@ function fullModalShareGameComponent.render(p0) --[[ line: 31 ]]
 					inviteUserId = inviteUserId,
 					inviteMessageId = inviteMessageId,
 					launchData = launchData,
-					onAfterClosePage = function() --[[ line: 74 ]]
+					requestImpl = requestImpl,
+					onAfterClosePage = function() --[[ line: 76 ]]
 						-- upvalues: store (ref), onAfterClosePage (ref)
 						local t = {}
 						

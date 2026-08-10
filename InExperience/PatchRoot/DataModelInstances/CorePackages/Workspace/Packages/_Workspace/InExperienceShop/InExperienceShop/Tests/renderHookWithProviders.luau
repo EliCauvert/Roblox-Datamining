@@ -18,7 +18,7 @@ return function(p0) --[[ line: 19 | named "renderHookWithProviders" ]]
 	
 	reactRobloxModule.act(function() --[[ line: 29 ]]
 		-- upvalues: var4 (ref), reactModule (copy), foundationProvider (copy), TestHarness (ref)
-		var4:render(reactModule.createElement(foundationProvider, { theme = "Dark" }, reactModule.createElement(TestHarness)))
+		var4:render(reactModule.createElement(foundationProvider, { colorMode = "Dark" }, reactModule.createElement(TestHarness)))
 	end)
 	
 	return t, function() --[[ line: 35 | named "cleanup" ]]

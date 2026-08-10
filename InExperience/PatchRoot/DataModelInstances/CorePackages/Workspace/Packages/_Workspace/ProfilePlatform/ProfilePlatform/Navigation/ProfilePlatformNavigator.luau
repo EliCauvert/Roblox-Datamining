@@ -19,6 +19,7 @@ local editProfileBackgroundContainerModule = require(profilePlatform.Components.
 local communityVerificationModalModule = require(profilePlatform.Components.CommunityVerificationModal)
 local inspectAvatarSheetContainerModule = require(profilePlatform.Components.InspectAvatar.InspectAvatarSheetContainer)
 local purchaseConfirmationModalModule = require(profilePlatform.Components.InspectAvatar.PurchaseConfirmationModal)
+local insufficientRobuxDialogModule = require(profilePlatform.Components.InspectAvatar.InsufficientRobuxDialog)
 local momentsGridPageModule = require(profilePlatform.Components.Moments.MomentsGridPage)
 local momentsFeedPageModule = require(profilePlatform.Components.Moments.MomentsFeedPage)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
@@ -40,9 +41,9 @@ local t_1 = {
 	renderUnderlyingPage = true
 }
 
-local function _(p0) --[[ line: 55 | named "makeFullBleedNavigationOptions" ]]
+local function _(p0) --[[ line: 56 | named "makeFullBleedNavigationOptions" ]]
 	-- upvalues: t_1 (ref)
-	return function(p1) --[[ line: 56 ]]
+	return function(p1) --[[ line: 57 ]]
 		-- upvalues: t_1 (copy), p0 (ref)
 		return if p1.navigation.getParam("fullBleed") then t_1 else p0
 	end
@@ -55,7 +56,7 @@ local list = {
 	{
 		[enumsModule.Screens.EditProfilePage] = {
 			screen = if fFlagEditProfileMigration then editProfileLandingModule else editProfilePageModule,
-			navigationOptions = if fFlagAXEnableProfileTab then function(p2) --[[ line: 56 ]]
+			navigationOptions = if fFlagAXEnableProfileTab then function(p2) --[[ line: 57 ]]
 				-- upvalues: t_1 (ref), t (ref)
 				return if p2.navigation.getParam("fullBleed") then t_1 else t
 			end else t
@@ -140,18 +141,18 @@ if fFlagEditProfileMigration then
 			absorbInput = false
 		}
 		
-		local var30 = function(p3) --[[ line: 56 ]]
+		local var31 = function(p3) --[[ line: 57 ]]
 			-- upvalues: t_1 (ref), t_4 (ref)
 			return if p3.navigation.getParam("fullBleed") then t_1 else t_4
 		end
 	else
-		local var30 = {
+		local var31 = {
 			overlayEnabled = true,
 			overlayTransparency = 0.5,
 			absorbInput = false
 		}
 	end
-	t_3.navigationOptions = var30
+	t_3.navigationOptions = var31
 	t_2[editProfileSubScreen] = t_3
 	table.insert(list, t_2)
 	table.insert(list, {
@@ -179,6 +180,12 @@ if fFlagSocialEnableProfileInspectAndBuy then
 	table.insert(list, {
 		[enumsModule.Screens.PurchaseConfirmationModal] = {
 			screen = purchaseConfirmationModalModule,
+			navigationOptions = t
+		}
+	})
+	table.insert(list, {
+		[enumsModule.Screens.InsufficientRobuxDialog] = {
+			screen = insufficientRobuxDialogModule,
 			navigationOptions = t
 		}
 	})

@@ -1,9 +1,10 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
 local roduxModule = require(parent.Rodux)
+local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
 
-return function() --[[ line: 5 ]]
-	-- upvalues: roduxModule (ref), parent (ref), appChat (ref)
+return function() --[[ line: 7 ]]
+	-- upvalues: roduxModule (ref), parent (ref), appChat (ref), fFlagAppChatPresenceStoreMigrationModule (ref)
 	return roduxModule.combineReducers({
 		PlaceInfos = require(parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
 		PlaceInfosAsync = require(parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
@@ -18,7 +19,7 @@ return function() --[[ line: 5 ]]
 		LastEntryPoint = require(script.LastEntryPoint),
 		Modals = require(script.Modals),
 		ParticipantMetadata = require(script.ParticipantMetadata),
-		Presence = require(script.Presence),
+		Presence = if fFlagAppChatPresenceStoreMigrationModule then nil else require(script.Presence),
 		ToggleChatPaused = require(appChat.installReducer.ToggleChatPaused),
 		networkStatus = require(appChat.Http.RoduxNetworking).installReducer(),
 		unreadMessageCount = require(script.UnreadMessageCount)

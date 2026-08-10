@@ -29,9 +29,7 @@ local useEventConnection = require(corePackagesService.Packages.ReactUtils).useE
 local getPlatformTarget = require(corePackagesService.Workspace.Packages.Analytics).getPlatformTarget
 local eventStreamConstants = require(corePackagesService.Workspace.Packages.AuthAnalytics).EventStreamConstants
 local leaveGameModule = require(robloxGui.Modules.Settings.leaveGame)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagRenameDeprecatedUIBloxTokens = sharedFlagsModule.FFlagRenameDeprecatedUIBloxTokens
-local getFFlagDisablePVUpsellDataConsent = sharedFlagsModule.GetFFlagDisablePVUpsellDataConsent
+local getFFlagDisablePVUpsellDataConsent = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagDisablePVUpsellDataConsent
 local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local getFFlagAddMorePhoneUpsellEvents = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAddMorePhoneUpsellEvents
 robloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
@@ -42,15 +40,15 @@ local _ = {
 	CompletedAndClosed = "CompletedAndClosed"
 }
 local _ = nil
-local var14 = (function() --[[ line: 66 | named "Initialize" ]]
-	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), constantsModule_1 (ref), useStyle (ref), useLocalization (ref), constantsModule (ref), useAppPolicy (ref), reactModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), fFlagRenameDeprecatedUIBloxTokens (ref), getFFlagAddMorePhoneUpsellEvents (ref), getPlatformTarget (ref), eventStreamConstants (ref), phoneUpsellController (ref), default (ref), getFFlagDisablePVUpsellDataConsent (ref), phoneLegalDisclaimer (ref), constants (ref), useRoactService (ref), roactNetworking (ref), useInputType (ref), inputTypeConstants (ref), guiService (ref), contextActionService (ref), postPhoneUpsellDisplayed (ref), useEventConnection (ref), buttonStack (ref), leaveGameModule (ref), inExperienceProviderContainer (ref), roactModule (ref)
+local var13 = (function() --[[ line: 65 | named "Initialize" ]]
+	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), constantsModule_1 (ref), useStyle (ref), useLocalization (ref), constantsModule (ref), useAppPolicy (ref), reactModule (ref), styledTextLabel (ref), button (ref), buttonType (ref), getFFlagAddMorePhoneUpsellEvents (ref), getPlatformTarget (ref), eventStreamConstants (ref), phoneUpsellController (ref), default (ref), getFFlagDisablePVUpsellDataConsent (ref), phoneLegalDisclaimer (ref), constants (ref), useRoactService (ref), roactNetworking (ref), useInputType (ref), inputTypeConstants (ref), guiService (ref), contextActionService (ref), postPhoneUpsellDisplayed (ref), useEventConnection (ref), buttonStack (ref), leaveGameModule (ref), inExperienceProviderContainer (ref), roactModule (ref)
 	local leaveGameUpsellPage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	leaveGameUpsellPage.playsessionid = ""
 	
 	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
 		leaveGameUpsellPage.playsessionid = rbxAnalyticsService:GetPlaySessionId()
 	end
-	function leaveGameUpsellPage.DontLeaveFunc(p0) --[[ line: 75 ]]
+	function leaveGameUpsellPage.DontLeaveFunc(p0) --[[ line: 74 ]]
 		-- upvalues: leaveGameUpsellPage (ref), rbxAnalyticsService (copy), constantsModule_1 (copy)
 		if leaveGameUpsellPage.HubRef then
 			leaveGameUpsellPage.HubRef:PopMenu(p0, true)
@@ -63,14 +61,14 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 		})
 	end
 	
-	function leaveGameUpsellPage.DontLeaveFromHotkey(_, p1, p2) --[[ line: 92 ]]
+	function leaveGameUpsellPage.DontLeaveFromHotkey(_, p1, p2) --[[ line: 91 ]]
 		-- upvalues: leaveGameUpsellPage (ref)
 		if p1 == Enum.UserInputState.Begin then
 			leaveGameUpsellPage.DontLeaveFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
 		end
 	end
 	
-	function leaveGameUpsellPage.DontLeaveFromButton(p3) --[[ line: 102 ]]
+	function leaveGameUpsellPage.DontLeaveFromButton(p3) --[[ line: 101 ]]
 		-- upvalues: leaveGameUpsellPage (ref)
 		leaveGameUpsellPage.DontLeaveFunc(p3)
 	end
@@ -81,11 +79,11 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 	leaveGameUpsellPage.ShouldShowHubBar = false
 	leaveGameUpsellPage.DisableTopPadding = true
 	
-	function leaveGameUpsellPage.UpsellComponent(p4) --[[ line: 115 ]]
-		-- upvalues: leaveGameUpsellPage (ref), useStyle (copy), useLocalization (copy), constantsModule (copy), useAppPolicy (copy), reactModule (copy), styledTextLabel (copy), button (copy), buttonType (copy), fFlagRenameDeprecatedUIBloxTokens (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), eventStreamConstants (copy), phoneUpsellController (copy), default (copy), getFFlagDisablePVUpsellDataConsent (copy), phoneLegalDisclaimer (copy), constants (copy)
+	function leaveGameUpsellPage.UpsellComponent(p4) --[[ line: 114 ]]
+		-- upvalues: leaveGameUpsellPage (ref), useStyle (copy), useLocalization (copy), constantsModule (copy), useAppPolicy (copy), reactModule (copy), styledTextLabel (copy), button (copy), buttonType (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), eventStreamConstants (copy), phoneUpsellController (copy), default (copy), getFFlagDisablePVUpsellDataConsent (copy), phoneLegalDisclaimer (copy), constants (copy)
 		local upsellType = leaveGameUpsellPage.upsellType
-		local var16 = useStyle()
-		local var17 = useLocalization({
+		local var15 = useStyle()
+		local var16 = useLocalization({
 			voiceConsent = "Feature.VerificationUpsell.Description.VoiceLegalConsent2",
 			voiceDisclaimer = "Feature.VerificationUpsell.Description.VoiceLegalDisclaimer2",
 			button = "Feature.VerificationUpsell.Action.AddPhoneNumber",
@@ -94,12 +92,12 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 			headerKey = if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then "Feature.VerificationUpsell.Heading.UnlockVoiceChat" else "Feature.VerificationUpsell.Heading.DontLoseAccess",
 			bodyKey = if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then "Feature.VerificationUpsell.Description.UnlockVoiceChatBody" else "Feature.VerificationUpsell.Description.RecoverAccountEasily"
 		})
-		var17.voiceDisclaimer = var17.voiceDisclaimer:gsub("{buttonText}", var17.button)
-		local var18 = useAppPolicy(function(p5) --[[ line: 132 ]]
+		var16.voiceDisclaimer = var16.voiceDisclaimer:gsub("{buttonText}", var16.button)
+		local var17 = useAppPolicy(function(p5) --[[ line: 131 ]]
 			-- upvalues: upsellType (ref), constantsModule (copy)
 			return upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat and p5.RequireExplicitVoiceConsent()
 		end)
-		local var19, var20 = reactModule.useState(false)
+		local var18, var19 = reactModule.useState(false)
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -114,26 +112,26 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 			}),
 			Header = reactModule.createElement(styledTextLabel, {
 				layoutOrder = 1,
-				text = var17.headerKey,
-				fontStyle = var16.Font.Header2,
-				colorStyle = var16.Theme.TextEmphasis
+				text = var16.headerKey,
+				fontStyle = var15.Font.Header2,
+				colorStyle = var15.Theme.TextEmphasis
 			}),
 			Body = reactModule.createElement(styledTextLabel, {
 				textWrapped = true,
 				lineHeight = 1.1,
 				layoutOrder = 2,
-				text = var17.bodyKey,
+				text = var16.bodyKey,
 				size = UDim2.new(1, 0, 0, 0),
 				automaticSize = Enum.AutomaticSize.Y,
-				fontStyle = var16.Font.Body,
-				colorStyle = var16.Theme.TextDefault
+				fontStyle = var15.Font.Body,
+				colorStyle = var15.Theme.TextDefault
 			}),
 			Button = reactModule.createElement(button, {
 				layoutOrder = 3,
 				buttonType = buttonType.Secondary,
-				size = UDim2.new(1, 0, 0, if fFlagRenameDeprecatedUIBloxTokens then var16.Tokens.Size.Size_1200 else var16.Tokens.Global.Size_600),
-				text = var17.button,
-				onActivated = function() --[[ line: 170 ]]
+				size = UDim2.new(1, 0, 0, var15.Tokens.Size.Size_1200),
+				text = var16.button,
+				onActivated = function() --[[ line: 169 ]]
 					-- upvalues: leaveGameUpsellPage (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p4 (ref), eventStreamConstants (copy), phoneUpsellController (copy), default (copy), upsellType (ref), constantsModule (copy)
 					leaveGameUpsellPage.HubRef:SetVisibility(false, true)
 					
@@ -147,14 +145,14 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 					phoneUpsellController.openPhoneUpsell({
 						eventContext = "verificationUpsell",
 						origin = p4.origin,
-						onSuccessBeforeToast = function() --[[ line: 182 ]]
+						onSuccessBeforeToast = function() --[[ line: 181 ]]
 							-- upvalues: default (copy), p4 (copy), leaveGameUpsellPage (copy)
 							default:DisablePhoneVerificationUpsell()
 							p4.onUpsellComplete()
 							leaveGameUpsellPage.HubRef:SetVisibility(true, false)
 							leaveGameUpsellPage.HubRef:SwitchToPage(leaveGameUpsellPage.HubRef.LeaveGameUpsellPage, true)
 						end,
-						onSuccess = function() --[[ line: 188 ]]
+						onSuccess = function() --[[ line: 187 ]]
 							-- upvalues: upsellType (copy), constantsModule (copy), default (copy), p4 (copy)
 							if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
 								default:EnableVoice()
@@ -163,22 +161,22 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 						end
 					})
 				end,
-				isDisabled = var18 and not var19
+				isDisabled = var17 and not var18
 			}),
 			PhoneLegalDisclaimer = if not getFFlagDisablePVUpsellDataConsent() then reactModule.createElement(phoneLegalDisclaimer, {
 				showLegalButtons = true,
 				LayoutOrder = 4,
-				legalText = if var18 then var17.voiceConsent else var17.voiceDisclaimer,
-				termsOfUse = var17.termsOfUse,
-				privacyPolicy = var17.privacyPolicy,
+				legalText = if var17 then var16.voiceConsent else var16.voiceDisclaimer,
+				termsOfUse = var16.termsOfUse,
+				privacyPolicy = var16.privacyPolicy,
 				showLegalText = upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat,
-				showLegalTextCheckbox = var18,
-				legalTextChecked = var19,
-				setLegalTextChecked = function() --[[ line: 209 ]]
-					-- upvalues: var20 (ref), var19 (ref)
-					var20(not var19)
+				showLegalTextCheckbox = var17,
+				legalTextChecked = var18,
+				setLegalTextChecked = function() --[[ line: 208 ]]
+					-- upvalues: var19 (ref), var18 (ref)
+					var19(not var18)
 				end,
-				onTermsOfUseClick = function() --[[ line: 212 ]]
+				onTermsOfUseClick = function() --[[ line: 211 ]]
 					-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p4 (ref), constants (copy)
 					if getFFlagAddMorePhoneUpsellEvents() then
 						rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
@@ -189,7 +187,7 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 					end
 					p4.showWebpage(constants.TERMS_OF_SERVICE_URL)
 				end,
-				onPrivacyPolicyClick = function() --[[ line: 223 ]]
+				onPrivacyPolicyClick = function() --[[ line: 222 ]]
 					-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p4 (ref), constants (copy)
 					if getFFlagAddMorePhoneUpsellEvents() then
 						rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
@@ -204,10 +202,10 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 		})
 	end
 	
-	function leaveGameUpsellPage.LeaveGameComponent(p6) --[[ line: 240 ]]
-		-- upvalues: useStyle (copy), useLocalization (copy), reactModule (copy), leaveGameUpsellPage (ref), constantsModule (copy), getFFlagAddMorePhoneUpsellEvents (copy), useRoactService (copy), roactNetworking (copy), useInputType (copy), inputTypeConstants (copy), guiService (copy), contextActionService (copy), postPhoneUpsellDisplayed (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), eventStreamConstants (copy), useEventConnection (copy), robloxGui (copy), fFlagRenameDeprecatedUIBloxTokens (copy), buttonStack (copy), buttonType (copy), default (copy), leaveGameModule (copy)
-		local var21 = useStyle()
-		local var22 = useLocalization({
+	function leaveGameUpsellPage.LeaveGameComponent(p6) --[[ line: 239 ]]
+		-- upvalues: useStyle (copy), useLocalization (copy), reactModule (copy), leaveGameUpsellPage (ref), constantsModule (copy), getFFlagAddMorePhoneUpsellEvents (copy), useRoactService (copy), roactNetworking (copy), useInputType (copy), inputTypeConstants (copy), guiService (copy), contextActionService (copy), postPhoneUpsellDisplayed (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), eventStreamConstants (copy), useEventConnection (copy), robloxGui (copy), buttonStack (copy), buttonType (copy), default (copy), leaveGameModule (copy)
+		local var20 = useStyle()
+		local var21 = useLocalization({
 			confirmLeave = "Feature.VerificationUpsell.Action.ConfirmLeave",
 			dontLeave = "Feature.VerificationUpsell.Action.DontLeave",
 			returnWithVoice = "Feature.VerificationUpsell.Action.ReturnWithVoice"
@@ -215,14 +213,14 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 		local incomplete, incomplete_1 = reactModule.useState("Incomplete")
 		local isIncomplete = incomplete == "Incomplete"
 		local upsellType = leaveGameUpsellPage.upsellType
-		local var26 = if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then "exitConfirmationScreenVoice" else "exitConfirmationScreenSecurity"
-		local var27 = if getFFlagAddMorePhoneUpsellEvents() then if incomplete == "Incomplete" then "entry" else "verifyPhoneSuccess" else nil
-		local var28 = reactModule.useRef(nil)
-		local var29, var30 = reactModule.useState(false)
-		local var31 = useRoactService(roactNetworking)
-		local var32 = useInputType()
+		local var25 = if upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then "exitConfirmationScreenVoice" else "exitConfirmationScreenSecurity"
+		local var26 = if getFFlagAddMorePhoneUpsellEvents() then if incomplete == "Incomplete" then "entry" else "verifyPhoneSuccess" else nil
+		local var27 = reactModule.useRef(nil)
+		local var28, var29 = reactModule.useState(false)
+		local var30 = useRoactService(roactNetworking)
+		local var31 = useInputType()
 		
-		local var33 = function() --[[ line: 297 ]]
+		local var32 = function() --[[ line: 296 ]]
 			-- upvalues: contextActionService (copy), incomplete (ref), incomplete_1 (ref)
 			contextActionService:UnbindCoreAction("LeaveGameCancelAction")
 			
@@ -231,15 +229,15 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 			end
 		end
 		
-		useEventConnection(leaveGameUpsellPage.Displayed.Event, function() --[[ line: 263 ]]
-			-- upvalues: var32 (ref), inputTypeConstants (copy), guiService (copy), var28 (ref), contextActionService (copy), leaveGameUpsellPage (copy), postPhoneUpsellDisplayed (copy), var31 (ref), constantsModule (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p6 (ref), eventStreamConstants (copy)
-			if var32 ~= inputTypeConstants.Touch then
-				guiService.SelectedCoreObject = var28.current
+		useEventConnection(leaveGameUpsellPage.Displayed.Event, function() --[[ line: 262 ]]
+			-- upvalues: var31 (ref), inputTypeConstants (copy), guiService (copy), var27 (ref), contextActionService (copy), leaveGameUpsellPage (copy), postPhoneUpsellDisplayed (copy), var30 (ref), constantsModule (copy), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), p6 (ref), eventStreamConstants (copy)
+			if var31 ~= inputTypeConstants.Touch then
+				guiService.SelectedCoreObject = var27.current
 			end
 			contextActionService:BindCoreAction("LeaveGameCancelAction", leaveGameUpsellPage.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 			
 			if not leaveGameUpsellPage.postSent then
-				postPhoneUpsellDisplayed(var31, constantsModule.EXIT_CONFIRMATION_PHONE_UPSELL_IXP_LAYER, os.time(), true, true):catch(function(_) --[[ line: 282 ]] end)
+				postPhoneUpsellDisplayed(var30, constantsModule.EXIT_CONFIRMATION_PHONE_UPSELL_IXP_LAYER, os.time(), true, true):catch(function(_) --[[ line: 281 ]] end)
 				
 				if getFFlagAddMorePhoneUpsellEvents() then
 					rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
@@ -251,7 +249,7 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 				leaveGameUpsellPage.postSent = true
 			end
 		end)
-		useEventConnection(leaveGameUpsellPage.Hidden.Event, var33)
+		useEventConnection(leaveGameUpsellPage.Hidden.Event, var32)
 		
 		return reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -271,7 +269,7 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 			}, {
 				ListLayout = reactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var21.Tokens.Size.Size_600 else var21.Tokens.Global.Space_300),
+					Padding = UDim.new(0, var20.Tokens.Size.Size_600),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
 				LeaveGameButtons = reactModule.createElement(buttonStack, {
@@ -283,36 +281,36 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 							buttonType = buttonType.PrimarySystem,
 							props = {
 								layoutOrder = 1,
-								text = var22.confirmLeave,
-								onActivated = function() --[[ line: 341 ]]
-									-- upvalues: var29 (ref), incomplete (ref), upsellType (ref), constantsModule (copy), default (copy), var30 (ref), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), var26 (ref), var27 (ref), leaveGameModule (copy)
-									if not var29 and (incomplete == "Completed" or incomplete == "CompletedAndClosed") and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
+								text = var21.confirmLeave,
+								onActivated = function() --[[ line: 340 ]]
+									-- upvalues: var28 (ref), incomplete (ref), upsellType (ref), constantsModule (copy), default (copy), var29 (ref), getFFlagAddMorePhoneUpsellEvents (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), var25 (ref), var26 (ref), leaveGameModule (copy)
+									if not var28 and (incomplete == "Completed" or incomplete == "CompletedAndClosed") and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
 										default:EnableVoice()
-										var30(true)
+										var29(true)
 									end
 									if getFFlagAddMorePhoneUpsellEvents() then
-										rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "formInteraction", { btn = "confirmLeave", origin = var26, section = var27 })
+										rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "formInteraction", { btn = "confirmLeave", origin = var25, section = var26 })
 									end
 									leaveGameModule(false)
 								end,
-								buttonRef = var28
+								buttonRef = var27
 							}
 						},
 						{
 							buttonType = buttonType.Secondary,
 							props = {
 								layoutOrder = 2,
-								text = if incomplete == "Completed" and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then var22.returnWithVoice else var22.dontLeave,
-								onActivated = function() --[[ line: 372 ]]
-									-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), incomplete (ref), upsellType (ref), constantsModule (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), var26 (ref), var27 (ref), eventStreamConstants (copy), leaveGameUpsellPage (copy)
+								text = if incomplete == "Completed" and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then var21.returnWithVoice else var21.dontLeave,
+								onActivated = function() --[[ line: 371 ]]
+									-- upvalues: getFFlagAddMorePhoneUpsellEvents (copy), incomplete (ref), upsellType (ref), constantsModule (copy), rbxAnalyticsService (copy), getPlatformTarget (copy), var25 (ref), var26 (ref), eventStreamConstants (copy), leaveGameUpsellPage (copy)
 									if getFFlagAddMorePhoneUpsellEvents() then
 										if incomplete == "Completed" and upsellType == constantsModule.PHONE_UPSELL_VALUE_PROP.VoiceChat then
-											rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "formInteraction", { btn = "returnWithVoice", origin = var26, section = var27 })
+											rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "formInteraction", { btn = "returnWithVoice", origin = var25, section = var26 })
 										elseif incomplete == "Incomplete" then
 											rbxAnalyticsService:SendEventDeferred(getPlatformTarget(), "verificationUpsell", "modalAction", {
-												origin = var26,
+												origin = var25,
 												aType = eventStreamConstants.ActionType.Dismiss,
-												section = var27
+												section = var26
 											})
 										end
 									end
@@ -321,56 +319,56 @@ local var14 = (function() --[[ line: 66 | named "Initialize" ]]
 							}
 						}
 					},
-					buttonHeight = if fFlagRenameDeprecatedUIBloxTokens then var21.Tokens.Size.Size_1200 else var21.Tokens.Global.Size_600
+					buttonHeight = var20.Tokens.Size.Size_1200
 				})
 			}),
 			TopSpacer = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, if fFlagRenameDeprecatedUIBloxTokens then var21.Tokens.Size.Size_600 else var21.Tokens.Global.Space_300)
+				Size = UDim2.new(1, 0, 0, var20.Tokens.Size.Size_600)
 			}),
 			UpsellComponents = if isIncomplete then reactModule.createElement(reactModule.Fragment, {}, {
 				Divider = reactModule.createElement("Frame", {
 					LayoutOrder = 3,
 					BorderSizePixel = 0,
-					BackgroundColor3 = (if fFlagRenameDeprecatedUIBloxTokens then var21.Tokens.Color.Stroke.Emphasis else var21.Tokens.Semantic.Color.Common.Divider).Color3,
-					BackgroundTransparency = (if fFlagRenameDeprecatedUIBloxTokens then var21.Tokens.Color.Stroke.Emphasis else var21.Tokens.Semantic.Color.Common.Divider).Transparency,
+					BackgroundColor3 = var20.Tokens.Color.Stroke.Emphasis.Color3,
+					BackgroundTransparency = var20.Tokens.Color.Stroke.Emphasis.Transparency,
 					Size = UDim2.new(1, 0, 0, 1)
 				}),
 				BottomSpacer = reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
-					Size = UDim2.new(1, 0, 0, if fFlagRenameDeprecatedUIBloxTokens then var21.Tokens.Size.Size_600 else var21.Tokens.Global.Space_300)
+					Size = UDim2.new(1, 0, 0, var20.Tokens.Size.Size_600)
 				}),
 				Upsell = reactModule.createElement(leaveGameUpsellPage.UpsellComponent, {
 					LayoutOrder = 5,
-					origin = var26,
-					section = var27,
+					origin = var25,
+					section = var26,
 					showWebpage = p6.showWebpage,
-					onUpsellComplete = function() --[[ line: 431 ]]
+					onUpsellComplete = function() --[[ line: 430 ]]
 						-- upvalues: incomplete_1 (ref)
 						incomplete_1("Completed")
 					end,
-					setVoiceEnabled = var30
+					setVoiceEnabled = var29
 				})
 			}) else nil
 		})
 	end
 	
-	leaveGameUpsellPage.handle = roactModule.mount(reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(leaveGameUpsellPage.LeaveGameComponent, { showWebpage = function() --[[ line: 444 ]] end }, {})), leaveGameUpsellPage.Page, "LeaveGameUpsell")
+	leaveGameUpsellPage.handle = roactModule.mount(reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(leaveGameUpsellPage.LeaveGameComponent, { showWebpage = function() --[[ line: 443 ]] end }, {})), leaveGameUpsellPage.Page, "LeaveGameUpsell")
 	leaveGameUpsellPage.Page.Size = UDim2.new(1, 0, 0, 0)
 	leaveGameUpsellPage.Page.AutomaticSize = Enum.AutomaticSize.Y
 	
 	return leaveGameUpsellPage
 end)()
 
-function var14.SetUpsellProp(value, p7) --[[ line: 458 ]]
+function var13.SetUpsellProp(value, p7) --[[ line: 457 ]]
 	-- upvalues: constantsModule (ref), roactModule (ref), reactModule (ref), inExperienceProviderContainer (ref)
 	if p7 == constantsModule.PHONE_UPSELL_VALUE_PROP.None then
 		return
 	end
 	value.upsellType = p7
-	value.handle = roactModule.update(value.handle, reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(value.LeaveGameComponent, { showWebpage = function() --[[ line: 471 ]] end }, {})))
+	value.handle = roactModule.update(value.handle, reactModule.createElement(inExperienceProviderContainer, {}, reactModule.createElement(value.LeaveGameComponent, { showWebpage = function() --[[ line: 470 ]] end }, {})))
 end
 
-return var14
+return var13

@@ -2,4 +2,4 @@
 local _ = require(onPlatformSurveys.Enums.InlineEventType)
 local _ = require(onPlatformSurveys.Enums.InlineQuestionType)
 
-return {}
+return { NEXT_END = "$end" }

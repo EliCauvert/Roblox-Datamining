@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppEnableHomepageOneByTwoTileDev", false) and require(script.Parent.FFlagLuaAppEnableNxMRoduxApportioning)

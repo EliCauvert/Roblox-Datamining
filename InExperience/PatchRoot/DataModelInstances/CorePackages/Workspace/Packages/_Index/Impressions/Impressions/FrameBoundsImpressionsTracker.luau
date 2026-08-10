@@ -2,20 +2,22 @@
 local reactModule = require(parent.React)
 local impressionsTrackerModule = require(script.Parent.ImpressionsTracker)
 local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
-local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = require(parent.SharedFlags).FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
+local fFlagLuaAppRespectClipAncestorImpressions = sharedFlagsModule.FFlagLuaAppRespectClipAncestorImpressions
 
-return function(p0) --[[ line: 25 ]]
-	-- upvalues: fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref), useViewportBounds (ref), reactModule (ref), impressionsTrackerModule (ref)
-	local var5
+return function(p0) --[[ line: 27 ]]
+	-- upvalues: fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions (ref), useViewportBounds (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), reactModule (ref), impressionsTrackerModule (ref)
+	local var6
 	local _ = nil
-	local var2 = nil
+	local var3 = nil
 	
 	if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then
-		local var3, var4 = useViewportBounds(p0.parentRef)
-		var5 = var3
-		var2 = var4
+		local var4, var5 = useViewportBounds(p0.parentRef, nil, if fFlagLuaAppRespectClipAncestorImpressions then p0.respectClipAncestors else nil)
+		var6 = var4
+		var3 = var5
 	else
-		var5 = useViewportBounds(p0.parentRef)
+		var6 = useViewportBounds(p0.parentRef, nil, if fFlagLuaAppRespectClipAncestorImpressions then p0.respectClipAncestors else nil)
 	end
 	return reactModule.createElement(impressionsTrackerModule, {
 		pageContext = p0.pageContext,
@@ -24,7 +26,7 @@ return function(p0) --[[ line: 25 ]]
 		scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
 		sendImpressions = p0.sendImpressions,
 		dataUpdatedTimestamp = p0.dataUpdatedTimestamp,
-		viewPortBounds = var5,
-		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then var2 else nil
+		viewPortBounds = var6,
+		viewPortFillBounds = if fFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions then var3 else nil
 	})
 end

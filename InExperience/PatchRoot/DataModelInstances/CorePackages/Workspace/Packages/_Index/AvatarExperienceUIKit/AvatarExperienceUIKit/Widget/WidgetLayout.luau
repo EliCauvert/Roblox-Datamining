@@ -1,12 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
 local reactModule = require(parent.React)
-local fFlagRenameDeprecatedUIBloxTokens = require(parent.SharedFlags).FFlagRenameDeprecatedUIBloxTokens
 local useDesignTokens = require(parent.Style).useDesignTokens
 
-return function(p0) --[[ line: 21 | named "WidgetLayout" ]]
-	-- upvalues: useDesignTokens (ref), reactModule (ref), fFlagRenameDeprecatedUIBloxTokens (ref)
-	local var1 = useDesignTokens()
-	
+return function(p0) --[[ line: 19 | named "WidgetLayout" ]]
+	-- upvalues: useDesignTokens (ref), reactModule (ref)
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -23,7 +20,7 @@ return function(p0) --[[ line: 21 | named "WidgetLayout" ]]
 		UIListLayout = reactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if fFlagRenameDeprecatedUIBloxTokens then var1.Size.Size_300 else var1.Global.Space_150)
+			Padding = UDim.new(0, useDesignTokens().Size.Size_300)
 		}),
 		TopContent = if p0.headerSlot then reactModule.createElement("Frame", {
 			LayoutOrder = 1,

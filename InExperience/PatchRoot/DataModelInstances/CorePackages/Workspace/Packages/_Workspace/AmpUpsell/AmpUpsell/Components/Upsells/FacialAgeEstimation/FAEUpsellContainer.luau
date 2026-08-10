@@ -44,7 +44,7 @@ local FAEWithWebViewCallbackPollDelay = game:DefineFastInt("FAEWithWebViewCallba
 local FAEWithWebViewCallbackPollMaxRetries = game:DefineFastInt("FAEWithWebViewCallbackPollMaxRetries", 15)
 
 return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
-	-- upvalues: useNavigation (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), useAppPolicy (ref), appLinking (ref), getFFlagEnableFAEQRCodeHandoffModule (ref), reactModule (ref), authModalShown (ref), authFormInteraction (ref), authMsgShown (ref), getFFlagMoveAmpUpsellOffNavigateDown (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), facialAgeEstimationServiceWrapperModule (ref), FAEWithCallbackPollDelay (ref), FAEWithCallbackPollMaxRetries (ref), getFFlagEnableWebAmpWizardForFAEHandoffModule (ref), FAEWithWebViewCallbackPollDelay (ref), FAEWithWebViewCallbackPollMaxRetries (ref), FAEBackgroundOnlyPollDelay (ref), FAEBackgroundOnlyPollMaxRetries (ref), usePollIDVStatus (ref), playersService (ref), promiseModule (ref), urlUtilsModule (ref), enableValidateFAEVerificationLink (ref), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (ref), logEventOnceIfEnabled (ref), IDVApiProvider (ref), enableFAECancellationAnalytics (ref), FAEFailedModalModule (ref), FAEWithQRCodeUpsellModule (ref), FAEDirectLinkUpsellModule (ref), getFFlagShowFAELoadingModalModule (ref), FAELoadingModalModule (ref), loading (ref), iconSize (ref)
+	-- upvalues: useNavigation (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), useAppPolicy (ref), appLinking (ref), getFFlagEnableFAEQRCodeHandoffModule (ref), reactModule (ref), authModalShown (ref), authFormInteraction (ref), authMsgShown (ref), getFFlagMoveAmpUpsellOffNavigateDown (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var6 (ref), navigateDown (ref), facialAgeEstimationServiceWrapperModule (ref), FAEWithCallbackPollDelay (ref), FAEWithCallbackPollMaxRetries (ref), FAEBackgroundOnlyPollDelay (ref), FAEBackgroundOnlyPollMaxRetries (ref), getFFlagEnableWebAmpWizardForFAEHandoffModule (ref), FAEWithWebViewCallbackPollDelay (ref), FAEWithWebViewCallbackPollMaxRetries (ref), usePollIDVStatus (ref), playersService (ref), promiseModule (ref), urlUtilsModule (ref), enableValidateFAEVerificationLink (ref), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (ref), logEventOnceIfEnabled (ref), IDVApiProvider (ref), enableFAECancellationAnalytics (ref), FAEFailedModalModule (ref), FAEWithQRCodeUpsellModule (ref), FAEDirectLinkUpsellModule (ref), getFFlagShowFAELoadingModalModule (ref), FAELoadingModalModule (ref), loading (ref), iconSize (ref)
 	local var25 = useNavigation()
 	local var26 = useDispatch()
 	local var27 = useRoactService(roactNetworking)
@@ -121,10 +121,13 @@ return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
 		if getFFlagMoveAmpUpsellOffNavigateDown() then var25 else var26
 	})
 	local var49 = reactModule.useMemo(function() --[[ line: 153 ]]
-		-- upvalues: facialAgeEstimationServiceWrapperModule (copy), FAEWithCallbackPollDelay (copy), FAEWithCallbackPollMaxRetries (copy), var28 (ref), getFFlagEnableWebAmpWizardForFAEHandoffModule (copy), FAEWithWebViewCallbackPollDelay (copy), FAEWithWebViewCallbackPollMaxRetries (copy), FAEBackgroundOnlyPollDelay (copy), FAEBackgroundOnlyPollMaxRetries (copy)
+		-- upvalues: facialAgeEstimationServiceWrapperModule (copy), FAEWithCallbackPollDelay (copy), FAEWithCallbackPollMaxRetries (copy), var31 (ref), FAEBackgroundOnlyPollDelay (copy), FAEBackgroundOnlyPollMaxRetries (copy), var28 (ref), getFFlagEnableWebAmpWizardForFAEHandoffModule (copy), FAEWithWebViewCallbackPollDelay (copy), FAEWithWebViewCallbackPollMaxRetries (copy)
 		return if facialAgeEstimationServiceWrapperModule.isAvailable() then {
 			delay = FAEWithCallbackPollDelay,
 			retries = FAEWithCallbackPollMaxRetries
+		} elseif var31 then {
+			delay = FAEBackgroundOnlyPollDelay,
+			retries = FAEBackgroundOnlyPollMaxRetries
 		} elseif var28 and not getFFlagEnableWebAmpWizardForFAEHandoffModule() then {
 			delay = FAEWithWebViewCallbackPollDelay,
 			retries = FAEWithWebViewCallbackPollMaxRetries
@@ -132,9 +135,9 @@ return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
 			delay = FAEBackgroundOnlyPollDelay,
 			retries = FAEBackgroundOnlyPollMaxRetries
 		}
-	end, { var28 })
+	end, { var28, var31 })
 	local var50, var51 = usePollIDVStatus({ delay = var49.delay, retries = var49.retries })
-	local var52 = reactModule.useCallback(function(p6, p7) --[[ line: 175 ]]
+	local var52 = reactModule.useCallback(function(p6, p7) --[[ line: 179 ]]
 		-- upvalues: facialAgeEstimationServiceWrapperModule (copy), authModalShown (copy), entryPointEventCtx (ref), var39 (ref), var31 (ref), playersService (copy), var37 (ref), promiseModule (copy), getFFlagEnableWebAmpWizardForFAEHandoffModule (copy), var35 (ref), urlUtilsModule (copy), enableValidateFAEVerificationLink (copy), var28 (ref), var48 (ref), skipFacialAgeEstimationWebLinkModal (ref), var30 (ref)
 		local sessionIdentifier = p6.sessionIdentifier
 		local verificationLink = p6.verificationLink
@@ -165,9 +168,9 @@ return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
 		var39(false)
 		
 		if var28 then
-			return promiseModule.new(function(p8) --[[ line: 228 ]]
+			return promiseModule.new(function(p8) --[[ line: 232 ]]
 				-- upvalues: sessionIdentifier (ref), var48 (copy), verificationLink (ref)
-				var48(verificationLink, function() --[[ line: 229 ]]
+				var48(verificationLink, function() --[[ line: 233 ]]
 					-- upvalues: p8 (ref), sessionIdentifier (copy)
 					p8(sessionIdentifier)
 				end)
@@ -182,37 +185,37 @@ return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
 		entryPointEventCtx, var28, var48, var39, skipFacialAgeEstimationWebLinkModal,
 		var30, var31
 	})
-	reactModule.useEffect(function() --[[ line: 256 ]]
+	reactModule.useEffect(function() --[[ line: 260 ]]
 		-- upvalues: var42 (ref), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (copy), logEventOnceIfEnabled (copy), IDVApiProvider (copy), var27 (ref), var44 (ref), var52 (ref), var41 (ref), var50 (ref), var47 (ref), enableFAECancellationAnalytics (copy), var46 (ref), var45 (ref), var51 (ref)
 		local var55 = var42
 		
 		if getFFlagEnableRoactNetworkingForChallengeInteceptionModule() then
 			logEventOnceIfEnabled("start_verification_init")
-			IDVApiProvider.startVerificationWithWrappedNetworking(var27, { ageEstimation = true }):andThen(function(p12) --[[ line: 261 ]]
+			IDVApiProvider.startVerificationWithWrappedNetworking(var27, { ageEstimation = true }):andThen(function(p12) --[[ line: 265 ]]
 				-- upvalues: var55 (write), var44 (copy), logEventOnceIfEnabled (copy)
 				var55 = `{var55}_{p12.sessionIdentifier}`
 				var44(var55)
 				logEventOnceIfEnabled("start_verification_end")
 				
 				return p12
-			end):andThen(function(p11) --[[ line: 267 ]]
+			end):andThen(function(p11) --[[ line: 271 ]]
 				-- upvalues: logEventOnceIfEnabled (copy), var52 (copy), var55 (write)
 				logEventOnceIfEnabled("persona_flow_init")
 				
 				return var52(p11, var55)
-			end):andThen(function(p10) --[[ line: 271 ]]
+			end):andThen(function(p10) --[[ line: 275 ]]
 				-- upvalues: logEventOnceIfEnabled (copy), var41 (copy), var50 (copy)
 				logEventOnceIfEnabled("persona_flow_end")
 				var41(true)
 				logEventOnceIfEnabled("status_polling_init")
 				
 				return var50(p10)
-			end):andThen(function() --[[ line: 277 ]]
+			end):andThen(function() --[[ line: 281 ]]
 				-- upvalues: logEventOnceIfEnabled (copy), var47 (copy), var55 (write)
 				logEventOnceIfEnabled("status_polling_end")
 				
 				return var47(var55)
-			end):catch(function(p9) --[[ line: 281 ]]
+			end):catch(function(p9) --[[ line: 285 ]]
 				-- upvalues: logEventOnceIfEnabled (copy), enableFAECancellationAnalytics (copy), var46 (copy), var55 (write), var45 (copy)
 				logEventOnceIfEnabled("status_polling_end")
 				
@@ -224,29 +227,29 @@ return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
 				var45(var55)
 			end)
 			
-			return function() --[[ line: 294 ]]
+			return function() --[[ line: 298 ]]
 				-- upvalues: var51 (copy)
 				var51()
 			end
 		end
-		IDVApiProvider.startVerification({ ageEstimation = true }):andThen(function(p16) --[[ line: 299 ]]
+		IDVApiProvider.startVerification({ ageEstimation = true }):andThen(function(p16) --[[ line: 303 ]]
 			-- upvalues: var55 (write), var44 (copy)
 			var55 = `{var55}_{p16.sessionIdentifier}`
 			var44(var55)
 			
 			return p16
-		end):andThen(function(p15) --[[ line: 304 ]]
+		end):andThen(function(p15) --[[ line: 308 ]]
 			-- upvalues: var52 (copy), var55 (write)
 			return var52(p15, var55)
-		end):andThen(function(p14) --[[ line: 307 ]]
+		end):andThen(function(p14) --[[ line: 311 ]]
 			-- upvalues: var41 (copy), var50 (copy)
 			var41(true)
 			
 			return var50(p14)
-		end):andThen(function() --[[ line: 311 ]]
+		end):andThen(function() --[[ line: 315 ]]
 			-- upvalues: var47 (copy), var55 (write)
 			return var47(var55)
-		end):catch(function(p13) --[[ line: 314 ]]
+		end):catch(function(p13) --[[ line: 318 ]]
 			-- upvalues: enableFAECancellationAnalytics (copy), var46 (copy), var55 (write), var45 (copy)
 			if enableFAECancellationAnalytics and p13 and p13.resultType == Enum.FacialAgeEstimationResultType.Cancel then
 				var46(var55)
@@ -256,7 +259,7 @@ return function() --[[ line: 76 | named "FAEUpsellContainer" ]]
 			var45(var55)
 		end)
 		
-		return function() --[[ line: 326 ]]
+		return function() --[[ line: 330 ]]
 			-- upvalues: var51 (copy)
 			var51()
 		end

@@ -1,38 +1,35 @@
 ﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
+local reactModule = require(parent.Parent.React)
+local leaderboardRowShellModule = require(parent.Components.Presentation.LeaderboardRowShell)
+local peopleCellModule = require(parent.Components.Presentation.PeopleCell)
+local leaderboardTextCellModule = require(parent.Components.Presentation.LeaderboardTextCell)
 local _ = require(parent.Common.computeStatColumns)
-local ROW_FLEX_TAG = require(parent.Common.Constants).ROW_FLEX_TAG
+local gameTextTranslatorContextModule = require(parent.Common.GameTextTranslatorContext)
+local getPeopleHeaderLabelModule = require(parent.Common.getPeopleHeaderLabel)
+local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return reactModule.memo(function(p0) --[[ line: 15 | named "ColumnHeaderRow" ]]
-	-- upvalues: reactModule (ref), view (ref), text (ref), ROW_FLEX_TAG (ref)
+return reactModule.memo(function(p0) --[[ line: 18 | named "ColumnHeaderRow" ]]
+	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), reactModule (ref), gameTextTranslatorContextModule (ref), getPeopleHeaderLabelModule (ref), peopleCellModule (ref), leaderboardTextCellModule (ref), leaderboardRowShellModule (ref)
+	local var7 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useContext(gameTextTranslatorContextModule) else nil
 	local t = {
-		PeopleHeader = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill size-0-full clip" }, {
-			Label = reactModule.createElement(text, {
-				Text = "People",
-				tag = "size-full text-caption-small text-align-x-left content-emphasis"
-			})
+		PeopleHeader = reactModule.createElement(peopleCellModule, {
+			layoutOrder = 1,
+			textTag = "size-full text-caption-small text-align-x-left content-emphasis",
+			displayName = if fFlagPlayerListLocalizeGameTextModule then getPeopleHeaderLabelModule() else "People"
 		})
 	}
 	
 	for i, v in ipairs(p0.statColumns or {}) do
-		t[`StatHeader_{v.name}`] = reactModule.createElement(view, {
-			tag = "clip",
-			Size = UDim2.fromOffset(p0.statWidth, p0.headerHeight),
-			LayoutOrder = i + 1
-		}, {
-			Label = reactModule.createElement(text, {
-				tag = "size-full text-caption-small text-align-x-left content-emphasis",
-				Text = v.name
-			})
+		t[`StatHeader_{v.name}`] = reactModule.createElement(leaderboardTextCellModule, {
+			textTag = "size-full text-caption-small text-align-x-left content-emphasis",
+			text = if var7 then var7(v.name) else v.name,
+			width = p0.statWidth,
+			rowHeight = p0.headerHeight,
+			layoutOrder = i + 1
 		})
 	end
-	return reactModule.createElement(view, {
-		Size = UDim2.new(1, 0, 0, p0.headerHeight),
-		LayoutOrder = p0.layoutOrder,
-		tag = ROW_FLEX_TAG
+	return reactModule.createElement(leaderboardRowShellModule, {
+		rowHeight = p0.headerHeight,
+		layoutOrder = p0.layoutOrder
 	}, t)
 end)

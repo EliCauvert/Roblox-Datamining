@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.PeekView.PeekView)
+﻿return require(script.Parent.Parent.Parent._Index.PeekView.PeekView)

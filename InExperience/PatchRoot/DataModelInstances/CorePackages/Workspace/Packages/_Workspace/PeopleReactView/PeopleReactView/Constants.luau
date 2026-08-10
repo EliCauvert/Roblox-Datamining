@@ -68,6 +68,11 @@ return {
 				REPORT_PLAYER_FLAG = require(parent.Foundation).Enums.IconName.Flag
 			}
 		},
+		CARD_MENU = {
+			LOCALIZED_STRINGS = {
+				VOICE_SECTION_TITLE = "Feature.SettingsHub.Label.VoiceChat"
+			}
+		},
 		CARD_TOOLTIP = {
 			LOCALIZED_STRINGS = {
 				BUY_WHAT_THEYRE_WEARING = "Feature.SettingsHub.Prompt.BuyWhatTheyreWearing",

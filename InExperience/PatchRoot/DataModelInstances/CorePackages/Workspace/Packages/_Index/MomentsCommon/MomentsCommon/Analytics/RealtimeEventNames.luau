@@ -1,0 +1,21 @@
+﻿return {
+	MomentsFeedLoadAttempt = "MomentsFeedLoadAttempt",
+	MomentsFeedLoadMore = "MomentsFeedLoadMore",
+	MomentsFeedMediaLoad = "MomentsFeedMediaLoad",
+	MomentsFeedState = "MomentsFeedState",
+	MomentsSurfaceLoadAbort = "MomentsSurfaceLoadAbort",
+	MomentsViewBegan = "MomentsViewBegan",
+	MomentsSessionStarted = "MomentsSessionStarted",
+	MomentsSessionEnded = "MomentsSessionEnded",
+	MomentsSessionHeartbeat = "MomentsSessionHeartbeat",
+	MomentsEngagement = "MomentsEngagement",
+	MomentsCreationStep = "MomentsCreationStep",
+	MomentsFeedItemsReceived = "MomentsFeedItemsReceived",
+	MomentsFeedItemFiltered = "MomentsFeedItemFiltered",
+	MomentsPublishedWithEdit = "MomentsPublishedWithEdit",
+	MomentsPublishedEditCount = "MomentsPublishedEditCount",
+	MomentsPublishedByCaptureType = "MomentsPublishedByCaptureType",
+	MomentsEditToolOpened = "MomentsEditToolOpened",
+	MomentsEditToolAbandoned = "MomentsEditToolAbandoned",
+	MomentsGenerateText = "MomentsGenerateText"
+}

@@ -8,18 +8,17 @@ local rowOfCollectionItemsModule = require(collectionViews.Carousel.RowOfCollect
 local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagCollectionViewMathChanges = sharedFlagsModule.FFlagCollectionViewMathChanges
-local fFlagLuaAppCompositionSupport = sharedFlagsModule.FFlagLuaAppCompositionSupport
 local fFlagLuaAppFixCarouselCanvasOverflow = sharedFlagsModule.FFlagLuaAppFixCarouselCanvasOverflow
 
-local function _(p0, p1, p2) --[[ line: 82 | named "getNumToRenderWithVirtualization" ]]
+local function _(p0, p1, p2) --[[ line: 81 | named "getNumToRenderWithVirtualization" ]]
 	return if p1 == 0 then 0 else math.min(p1 + (p2 or 6), p0)
 end
 
-return reactModule.memo(function(p3) --[[ line: 99 | named "ScrollingRowOfCollectionItems" ]]
-	-- upvalues: reactModule (ref), useHorizontalScrolledToEndThresholdModule (ref), argCheckModule (ref), useHorizontalWindowStartIndexModule (ref), fFlagCollectionViewMathChanges (ref), fFlagLuaAppFixCarouselCanvasOverflow (ref), fFlagLuaAppCompositionSupport (ref), rowOfCollectionItemsModule (ref)
+return reactModule.memo(function(p3) --[[ line: 98 | named "ScrollingRowOfCollectionItems" ]]
+	-- upvalues: reactModule (ref), useHorizontalScrolledToEndThresholdModule (ref), argCheckModule (ref), useHorizontalWindowStartIndexModule (ref), fFlagCollectionViewMathChanges (ref), fFlagLuaAppFixCarouselCanvasOverflow (ref), rowOfCollectionItemsModule (ref)
 	local minValue
 	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useCallback(function(p4) --[[ line: 102 ]]
+	local var8 = reactModule.useCallback(function(p4) --[[ line: 101 ]]
 		-- upvalues: var7 (ref), p3 (ref)
 		var7.current = p4
 		
@@ -45,7 +44,7 @@ return reactModule.memo(function(p3) --[[ line: 99 | named "ScrollingRowOfCollec
 	local maxValue_1 = math.max(0, math.min(p3.totalItemsOnCanvas, minValue_1 + minValue - 1))
 	argCheckModule.assert(minValue_1 >= 0 and minValue_1 <= #p3.items, `startingIndex: {minValue_1} failed check >= 0 and <= {#p3.items}`)
 	argCheckModule.assert(minValue_1 <= maxValue_1 and maxValue_1 <= #p3.items, `endingIndex: {maxValue_1} failed check >= {minValue_1} and <= {#p3.items}`)
-	reactModule.useEffect(function() --[[ line: 166 ]]
+	reactModule.useEffect(function() --[[ line: 165 ]]
 		-- upvalues: p3 (ref), minValue_1 (ref), maxValue_1 (ref)
 		if p3.onViewableItemsChanged then
 			p3.onViewableItemsChanged(minValue_1, maxValue_1)
@@ -53,7 +52,7 @@ return reactModule.memo(function(p3) --[[ line: 99 | named "ScrollingRowOfCollec
 	end, { minValue_1, maxValue_1, p3.onViewableItemsChanged })
 	
 	return reactModule.createElement("ScrollingFrame", {
-		Size = if fFlagLuaAppCompositionSupport and p3.Size then p3.Size else p3.itemSizeBinding:map(function(p5) --[[ line: 197 ]]
+		Size = if p3.Size then p3.Size else p3.itemSizeBinding:map(function(p5) --[[ line: 196 ]]
 			return UDim2.new(1, 0, 0, p5.Y)
 		end),
 		Position = p3.Position,
@@ -61,9 +60,9 @@ return reactModule.memo(function(p3) --[[ line: 99 | named "ScrollingRowOfCollec
 		ScrollBarThickness = 0,
 		BackgroundTransparency = 1,
 		ClipsDescendants = false,
-		CanvasSize = if fFlagCollectionViewMathChanges then if fFlagCollectionViewMathChanges then reactModule.useMemo(function() --[[ line: 174 ]]
+		CanvasSize = if fFlagCollectionViewMathChanges then if fFlagCollectionViewMathChanges then reactModule.useMemo(function() --[[ line: 173 ]]
 			-- upvalues: reactModule (copy), p3 (ref), fFlagLuaAppFixCarouselCanvasOverflow (copy), maxValue (ref)
-			return reactModule.joinBindings({ p3.spacingMetricsBinding, p3.itemSizeBinding }):map(function(p7) --[[ line: 178 ]]
+			return reactModule.joinBindings({ p3.spacingMetricsBinding, p3.itemSizeBinding }):map(function(p7) --[[ line: 177 ]]
 				-- upvalues: fFlagLuaAppFixCarouselCanvasOverflow (copy), maxValue (copy), p3 (copy)
 				local var14 = p7[1]
 				
@@ -74,7 +73,7 @@ return reactModule.memo(function(p3) --[[ line: 99 | named "ScrollingRowOfCollec
 			p3.itemSizeBinding,
 			p3.numColumns,
 			maxValue
-		}) else nil else p3.itemSizeBinding:map(function(p6) --[[ line: 207 ]]
+		}) else nil else p3.itemSizeBinding:map(function(p6) --[[ line: 206 ]]
 			-- upvalues: maxValue (ref), p3 (ref)
 			return UDim2.new(0, math.max(0, maxValue * (p6.X + p3.columnGap) - p3.columnGap), 0, p6.Y)
 		end),
@@ -90,7 +89,7 @@ return reactModule.memo(function(p3) --[[ line: 99 | named "ScrollingRowOfCollec
 		RowOfCollectionItems = if fFlagCollectionViewMathChanges then reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = false,
-			Size = p3.spacingMetricsBinding:map(function(p8) --[[ line: 225 ]]
+			Size = p3.spacingMetricsBinding:map(function(p8) --[[ line: 224 ]]
 				return UDim2.new(0, p8.effectiveWidth, 1, 0)
 			end)
 		}, {

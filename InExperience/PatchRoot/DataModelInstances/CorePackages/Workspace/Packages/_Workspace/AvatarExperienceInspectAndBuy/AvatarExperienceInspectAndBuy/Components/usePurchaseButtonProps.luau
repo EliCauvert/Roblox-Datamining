@@ -13,41 +13,38 @@ local isCollectible = itemDetailsUtilsModule.isCollectible
 local calculatePurchaseStatusForItem = itemDetailsUtilsModule.calculatePurchaseStatusForItem
 local getPriceInRobux = itemDetailsUtilsModule.getPriceInRobux
 local formatNumberModule = require(avatarExperienceInspectAndBuy.Utils.formatNumber)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXFormatPDPPriceLabel = avatarExperienceFlagsModule.FFlagAXFormatPDPPriceLabel
-local fFlagAXHideInspectAndBuyPriceIfUnavailable = avatarExperienceFlagsModule.FFlagAXHideInspectAndBuyPriceIfUnavailable
 
-return function(p0) --[[ line: 43 | named "usePurchaseButtonProps" ]]
-	-- upvalues: useConvertedItemDataModule (ref), getPriceStatusModule (ref), useItemStatusLocalizationModule (ref), reactModule (ref), foundationModule (ref), priceStatusModule (ref), isCollectible (ref), calculatePurchaseStatusForItem (ref), fFlagAXFormatPDPPriceLabel (ref), formatNumberModule (ref), getPriceInRobux (ref), fFlagAXHideInspectAndBuyPriceIfUnavailable (ref)
-	local var10 = useConvertedItemDataModule(p0.selectedItem)
-	local var11 = getPriceStatusModule(var10)
-	local var12 = useItemStatusLocalizationModule(var10)
+return function(p0) --[[ line: 40 | named "usePurchaseButtonProps" ]]
+	-- upvalues: useConvertedItemDataModule (ref), getPriceStatusModule (ref), useItemStatusLocalizationModule (ref), reactModule (ref), foundationModule (ref), priceStatusModule (ref), isCollectible (ref), calculatePurchaseStatusForItem (ref), formatNumberModule (ref), getPriceInRobux (ref)
+	local var9 = useConvertedItemDataModule(p0.selectedItem)
+	local var10 = getPriceStatusModule(var9)
+	local var11 = useItemStatusLocalizationModule(var9)
 	
 	return if p0.selectedItem then {
-		purchaseButtonProps = reactModule.useMemo(function() --[[ line: 60 ]]
-			-- upvalues: var11 (ref), priceStatusModule (copy), var12 (ref), foundationModule (copy), var10 (ref), isCollectible (copy), calculatePurchaseStatusForItem (copy), p0 (ref)
-			local var13 = if var11 ~= priceStatusModule.Free then if var11 ~= priceStatusModule.PurchaseFromRoblox then var11 == priceStatusModule.PurchaseFromResale else true else true
+		purchaseButtonProps = reactModule.useMemo(function() --[[ line: 57 ]]
+			-- upvalues: var10 (ref), priceStatusModule (copy), var11 (ref), foundationModule (copy), var9 (ref), isCollectible (copy), calculatePurchaseStatusForItem (copy), p0 (ref)
+			local var12 = if var10 ~= priceStatusModule.Free then if var10 ~= priceStatusModule.PurchaseFromRoblox then var10 == priceStatusModule.PurchaseFromResale else true else true
 			
 			return {
-				purchaseButtonText = var12[var11],
-				isDisabled = not var13,
-				variant = if not var13 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
-				onPurchase = function() --[[ line: 73 ]]
-					-- upvalues: var10 (copy), isCollectible (copy), calculatePurchaseStatusForItem (copy), var11 (copy), p0 (copy)
-					if var10 then
-						local var14 = calculatePurchaseStatusForItem(var10, var11)
-						p0.onPromptPurchase(var10.id, var10.itemType, var14.collectibleItemId, var14.collectibleLowestAvailableResaleProductId, var14.collectibleLowestAvailableResaleItemInstanceId, var14.collectibleLowestResalePrice, isCollectible(var10))
+				purchaseButtonText = var11[var10],
+				isDisabled = not var12,
+				variant = if not var12 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
+				onPurchase = function() --[[ line: 70 ]]
+					-- upvalues: var9 (copy), isCollectible (copy), calculatePurchaseStatusForItem (copy), var10 (copy), p0 (copy)
+					if var9 then
+						local var13 = calculatePurchaseStatusForItem(var9, var10)
+						p0.onPromptPurchase(var9.id, var9.itemType, var13.collectibleItemId, var13.collectibleLowestAvailableResaleProductId, var13.collectibleLowestAvailableResaleItemInstanceId, var13.collectibleLowestResalePrice, isCollectible(var9))
 					end
 				end
 			}
-		end, { p0, var11, var10 }),
+		end, { p0, var10, var9 }),
 		priceLabel = {
 			leftLabel = p0.localizedStrings.total or "",
-			priceInRobux = if fFlagAXFormatPDPPriceLabel then formatNumberModule(getPriceInRobux(var10, var11)) else tostring(getPriceInRobux(var10, var11))
+			priceInRobux = formatNumberModule(getPriceInRobux(var9, var10))
 		},
-		priceStatus = if fFlagAXHideInspectAndBuyPriceIfUnavailable then var11 else nil
+		priceStatus = var10
 	} else {
-		purchaseButtonProps = reactModule.useMemo(function() --[[ line: 49 ]]
+		purchaseButtonProps = reactModule.useMemo(function() --[[ line: 46 ]]
 			-- upvalues: p0 (ref), foundationModule (copy)
 			return {
 				showRobuxIcon = false,

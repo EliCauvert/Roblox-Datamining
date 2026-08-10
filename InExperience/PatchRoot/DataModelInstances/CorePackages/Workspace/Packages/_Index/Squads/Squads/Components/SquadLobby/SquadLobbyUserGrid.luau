@@ -14,67 +14,66 @@ local _ = require(squads.Common.ModelTypes)
 local squadUserPartyStatusModule = require(squads.Enums.SquadUserPartyStatus)
 local squadLobbyUserCardModule = require(script.Parent.SquadLobbyUserCard)
 local squadLobbyUpsellCardModule = require(script.Parent.SquadLobbyUpsellCard)
-local emptySquadIdReinviteCheckEnabled = game:DefineFastFlag("EmptySquadIdReinviteCheckEnabled", false)
 local fFlagEnableSquadRegroupExperimentationSmallScreenFix = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentationSmallScreenFix
 
-return function(p0) --[[ line: 46 ]]
-	-- upvalues: useTokens (ref), useLocalUserId (ref), useSquadState (ref), reactModule (ref), squadState (ref), emptySquadIdReinviteCheckEnabled (ref), cryo (ref), squadUserPartyStatusModule (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), useSelector (ref), squadLobbyUserCardModule (ref), squadLobbyUpsellCardModule (ref), roact (ref)
-	local var7 = useTokens()
-	local var8 = tonumber(useLocalUserId()) or 0
-	local var9 = useSquadState()
-	local medium = var7.Gap.Medium
-	local xLarge = var7.Padding.XLarge
-	local var10, var11, var12 = reactModule.useMemo(function() --[[ line: 53 ]]
-		-- upvalues: p0 (ref), xLarge (ref), var9 (ref), squadState (copy), emptySquadIdReinviteCheckEnabled (copy), cryo (copy), squadUserPartyStatusModule (copy), medium (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (copy)
+return function(p0) --[[ line: 45 ]]
+	-- upvalues: useTokens (ref), useLocalUserId (ref), useSquadState (ref), reactModule (ref), squadState (ref), cryo (ref), squadUserPartyStatusModule (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), useSelector (ref), squadLobbyUserCardModule (ref), squadLobbyUpsellCardModule (ref), roact (ref)
+	local var6 = useTokens()
+	local var7 = tonumber(useLocalUserId()) or 0
+	local var8 = useSquadState()
+	local medium = var6.Gap.Medium
+	local xLarge = var6.Padding.XLarge
+	local var9, var10, var11 = reactModule.useMemo(function() --[[ line: 52 ]]
+		-- upvalues: p0 (ref), xLarge (ref), var8 (ref), squadState (copy), cryo (copy), squadUserPartyStatusModule (copy), medium (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (copy)
 		if p0.containerSize.Y == 0 or p0.containerSize.X == 0 then
 			return Vector2.new(0, 0), 0, 0
 		end
-		local var17
-		local var15 = p0.containerSize.X - xLarge * 2
-		local var16 = if var9 == squadState.Initializing and not emptySquadIdReinviteCheckEnabled or emptySquadIdReinviteCheckEnabled and var9 ~= squadState.Active then 1 else math.max(#cryo.List.filter(p0.users, function(p1) --[[ line: 66 ]]
+		local var16
+		local var14 = p0.containerSize.X - xLarge * 2
+		local var15 = if var8 ~= squadState.Active then math.max(#cryo.List.filter(p0.users, function(p1) --[[ line: 64 ]]
 			-- upvalues: squadUserPartyStatusModule (copy)
 			return p1.partyStatus ~= squadUserPartyStatusModule.Inactive
-		end), 2)
+		end), 2) else 1
 		
-		if var16 <= 3 and var15 / p0.containerSize.Y > 1.75 then
-			var17 = var16 * 120 + (var16 - 1) * medium <= var15
-			var17 = nil
+		if var15 <= 3 and var14 / p0.containerSize.Y > 1.75 then
+			var16 = var15 * 120 + (var15 - 1) * medium <= var14
+			var16 = nil
 		else
-			var17 = false
+			var16 = false
 		end
-		local var18, var19
+		local var17, var18
 		local _ = nil
 		local _ = nil
 		
-		if var17 then
+		if var16 then
+			var17 = 1
+			var18 = var15
+		elseif var15 <= 3 then
+			var17 = var15
 			var18 = 1
-			var19 = var16
-		elseif var16 <= 3 then
-			var18 = var16
-			var19 = 1
 		else
-			var18 = math.ceil(var16 / 2)
-			var19 = 2
+			var17 = math.ceil(var15 / 2)
+			var18 = 2
 		end
-		local minValue = math.min(var18, math.clamp(math.floor((p0.containerSize.Y + medium) / (120 + medium)), 1, 3))
+		local minValue = math.min(var17, math.clamp(math.floor((p0.containerSize.Y + medium) / (120 + medium)), 1, 3))
 		
-		return Vector2.new((var15 + medium) / var19 - medium, if fFlagEnableSquadRegroupExperimentationSmallScreenFix then math.max(120, p0.containerSize.Y + medium) / minValue - medium else (p0.containerSize.Y + medium) / minValue - medium), var18, var19
+		return Vector2.new((var14 + medium) / var18 - medium, if fFlagEnableSquadRegroupExperimentationSmallScreenFix then math.max(120, p0.containerSize.Y + medium) / minValue - medium else (p0.containerSize.Y + medium) / minValue - medium), var17, var18
 	end, { medium, p0.containerSize, p0.users, xLarge })
-	local var13 = useSelector(reactModule.useCallback(function(p2) --[[ line: 103 ]]
+	local var12 = useSelector(reactModule.useCallback(function(p2) --[[ line: 101 ]]
 		return p2.Squad.UserBlocking.isBlockedByMe
 	end, {}))
-	local var14 = reactModule.useMemo(function() --[[ line: 109 ]]
-		-- upvalues: var10 (ref), reactModule (copy), squadLobbyUserCardModule (copy), var13 (ref), p0 (ref), squadUserPartyStatusModule (copy), var8 (ref), var9 (ref), squadState (copy), squadLobbyUpsellCardModule (copy), var11 (ref), var12 (ref), medium (ref)
-		if var10.X == 0 or var10.Y == 0 then
+	local var13 = reactModule.useMemo(function() --[[ line: 107 ]]
+		-- upvalues: var9 (ref), reactModule (copy), squadLobbyUserCardModule (copy), var12 (ref), p0 (ref), squadUserPartyStatusModule (copy), var7 (ref), var8 (ref), squadState (copy), squadLobbyUpsellCardModule (copy), var10 (ref), var11 (ref), medium (ref)
+		if var9.X == 0 or var9.Y == 0 then
 			return {}
 		end
 		local t = {}
 		
-		local var22 = function(p3, p4, p5) --[[ line: 115 ]]
-			-- upvalues: reactModule (copy), squadLobbyUserCardModule (copy), var10 (copy), var13 (copy), p0 (copy)
+		local var21 = function(p3, p4, p5) --[[ line: 113 ]]
+			-- upvalues: reactModule (copy), squadLobbyUserCardModule (copy), var9 (copy), var12 (copy), p0 (copy)
 			return reactModule.createElement(squadLobbyUserCardModule, {
-				size = UDim2.fromOffset(var10.X, var10.Y),
-				isBlocked = var13[tostring(p4.userId)],
+				size = UDim2.fromOffset(var9.X, var9.Y),
+				isBlocked = var12[tostring(p4.userId)],
 				isConnecting = p5,
 				layoutOrder = p3,
 				onActivated = p0.onUserCardActivated,
@@ -85,16 +84,16 @@ return function(p0) --[[ line: 46 ]]
 		
 		for i, v in ipairs(p0.users) do
 			if v.partyStatus ~= squadUserPartyStatusModule.Inactive then
-				if v.userId == var8 then
-					table.insert(t, var22(0, v, v.partyStatus == squadUserPartyStatusModule.Connecting))
+				if v.userId == var7 then
+					table.insert(t, var21(0, v, v.partyStatus == squadUserPartyStatusModule.Connecting))
 				else
-					table.insert(t, var22(i, v, v.partyStatus == squadUserPartyStatusModule.Connecting))
+					table.insert(t, var21(i, v, v.partyStatus == squadUserPartyStatusModule.Connecting))
 				end
 			end
 		end
-		if #t == 1 and var9 ~= squadState.Initializing then
+		if #t == 1 and var8 ~= squadState.Initializing then
 			table.insert(t, reactModule.createElement(squadLobbyUpsellCardModule, {
-				size = UDim2.fromOffset(var10.X, var10.Y),
+				size = UDim2.fromOffset(var9.X, var9.Y),
 				layoutOrder = #t + 1,
 				navigateToHomePage = p0.navigateToHomePage,
 				navigateToSquadInviteFriends = p0.navigateToSquadInviteFriends
@@ -102,14 +101,14 @@ return function(p0) --[[ line: 46 ]]
 		end
 		local t_1 = {}
 		
-		for i_2 = 1, var11 do
+		for i_2 = 1, var10 do
 			local t_2 = {}
 			
-			for i_1 = 1, var12 do
-				local var25 = (i_2 - 1) * var12 + i_1
+			for i_1 = 1, var11 do
+				local var24 = (i_2 - 1) * var11 + i_1
 				
-				if t[var25] then
-					t_2["Card" .. var25] = t[var25]
+				if t[var24] then
+					t_2["Card" .. var24] = t[var24]
 				end
 			end
 			t_2.UIListLayout = reactModule.createElement("UIListLayout", {
@@ -120,27 +119,27 @@ return function(p0) --[[ line: 46 ]]
 			})
 			t_1["Row" .. i_2] = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, var10.Y),
+				Size = UDim2.new(1, 0, 0, var9.Y),
 				LayoutOrder = i_2
 			}, t_2)
 		end
 		return t_1
 	end, {
-		var10, medium, var13, var8, var12, var11, p0.navigateToHomePage,
-		p0.navigateToSquadInviteFriends, p0.onUserCardActivated, p0.users, var9
+		var9, medium, var12, var7, var11, var10, p0.navigateToHomePage,
+		p0.navigateToSquadInviteFriends, p0.onUserCardActivated, p0.users, var8
 	})
-	var14.UIListLayout = reactModule.createElement("UIListLayout", {
+	var13.UIListLayout = reactModule.createElement("UIListLayout", {
 		FillDirection = Enum.FillDirection.Vertical,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		Padding = UDim.new(0, medium)
 	})
-	var14.UIPadding = reactModule.createElement("UIPadding", {
+	var13.UIPadding = reactModule.createElement("UIPadding", {
 		PaddingBottom = p0.paddingBottom,
 		PaddingLeft = UDim.new(0, xLarge),
 		PaddingRight = UDim.new(0, xLarge)
 	})
 	
-	return roact.createFragment(var14)
+	return roact.createFragment(var13)
 end

@@ -19,53 +19,57 @@ local useSortedEntitiesByPresenceModule = require(socialTabsPage.Hooks.useSorted
 local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
 local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
 local textKeysModule = require(socialTabsPage.Common.TextKeys)
+local fFlagSocialTabsPagePresenceSignalsMigrationModule = require(socialTabsPage.Flags.FFlagSocialTabsPagePresenceSignalsMigration)
 
-return function() --[[ line: 26 | named "FriendsTabContent" ]]
-	-- upvalues: useSocialTabsContextModule (ref), useFriendsListModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), dashModule (ref), entityType (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), socialTabsEmptyStateModule (ref), userListLayoutAdaptor (ref), layoutMode (ref)
-	local var14 = useSocialTabsContextModule()
-	local title = var14.title
-	local var15 = useFriendsListModule({ targetUserId = var14.profileId })
-	local friends = var15.friends
-	local loading_1 = var15.loading
-	local hasMore = var15.hasMore
-	local fetchMore = var15.fetchMore
-	local var16 = useLocalization({
+return function() --[[ line: 29 | named "FriendsTabContent" ]]
+	-- upvalues: useSocialTabsContextModule (ref), useFriendsListModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), dashModule (ref), entityType (ref), fFlagSocialTabsPagePresenceSignalsMigrationModule (ref), useFetchPresencesModule (ref), useSortedEntitiesByPresenceModule (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), socialTabsEmptyStateModule (ref), userListLayoutAdaptor (ref), layoutMode (ref)
+	local var15 = useSocialTabsContextModule()
+	local title = var15.title
+	local var16 = useFriendsListModule({ targetUserId = var15.profileId })
+	local friends = var16.friends
+	local loading_1 = var16.loading
+	local hasMore = var16.hasMore
+	local fetchMore = var16.fetchMore
+	local var17 = useLocalization({
 		emptyText = { textKeysModule.NoConnectionYet, name = title or "" }
 	})
-	local var17 = reactModule.useMemo(function() --[[ line: 46 ]]
+	local var18 = reactModule.useMemo(function() --[[ line: 49 ]]
 		-- upvalues: dashModule (copy), friends (ref), entityType (copy)
-		return dashModule.map(friends, function(p0) --[[ line: 47 ]]
+		return dashModule.map(friends, function(p0) --[[ line: 50 ]]
 			-- upvalues: entityType (copy)
 			return { id = tostring(p0.id), type = entityType.User }
 		end)
 	end, { friends })
-	local var18 = reactModule.useMemo(function() --[[ line: 52 ]]
-		-- upvalues: dashModule (copy), var17 (ref)
-		return dashModule.map(var17, function(p1) --[[ line: 53 ]]
+	local var19 = reactModule.useMemo(function() --[[ line: 55 ]]
+		-- upvalues: dashModule (copy), var18 (ref)
+		return dashModule.map(var18, function(p1) --[[ line: 56 ]]
 			return p1.id
 		end)
-	end, { var17 })
-	useFetchPresencesModule(var18)
-	local var19 = useSortedEntitiesByPresenceModule(var17)
-	local var20 = useUserListCTAsModule(var18)
-	local var21 = useCTAActionHandlersModule()
+	end, { var18 })
 	
-	return if loading_1 and #var17 == 0 then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = reactModule.createElement(loading) }) elseif loading_1 or #var17 ~= 0 then reactModule.createElement(view, { tag = "col size-full padding-x-xlarge" }, {
+	if not fFlagSocialTabsPagePresenceSignalsMigrationModule then
+		useFetchPresencesModule(var19)
+	end
+	local var20 = useSortedEntitiesByPresenceModule(var18)
+	local var21 = useUserListCTAsModule(var19)
+	local var22 = useCTAActionHandlersModule()
+	
+	return if loading_1 and #var18 == 0 then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = reactModule.createElement(loading) }) elseif loading_1 or #var18 ~= 0 then reactModule.createElement(view, { tag = "col size-full padding-x-xlarge" }, {
 		FriendsList = reactModule.createElement(userListLayoutAdaptor, {
 			isScrollEnabled = true,
-			entities = var19,
+			entities = var20,
 			layoutMode = layoutMode.Vertical,
 			hasMore = hasMore,
 			onLoadMore = if hasMore then fetchMore else nil,
-			renderRow = reactModule.useCallback(function(p2, p3, _) --[[ line: 65 ]]
-				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var20 (ref), var21 (ref)
+			renderRow = reactModule.useCallback(function(p2, p3, _) --[[ line: 72 ]]
+				-- upvalues: reactModule (copy), rowDataProviderModule (copy), var21 (ref), var22 (ref)
 				return reactModule.createElement(rowDataProviderModule, {
 					createRow = p2,
 					entity = p3,
-					ctaResult = var20[p3.id],
-					actionHandlers = var21
+					ctaResult = var21[p3.id],
+					actionHandlers = var22
 				})
-			end, { var20, var21 })
+			end, { var21, var22 })
 		})
-	}) else reactModule.createElement(socialTabsEmptyStateModule, { text = var16.emptyText })
+	}) else reactModule.createElement(socialTabsEmptyStateModule, { text = var17.emptyText })
 end

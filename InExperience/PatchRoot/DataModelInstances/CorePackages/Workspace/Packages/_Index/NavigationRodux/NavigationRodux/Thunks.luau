@@ -11,6 +11,7 @@ return {
 	NavigateDownToGroups = require(navigationRodux.Thunks.NavigateDownToGroups),
 	NavigateDownToNotifications = require(navigationRodux.Thunks.NavigateDownToNotifications),
 	NavigateDownToPrivacySettings = require(navigationRodux.Thunks.NavigateDownToPrivacySettings),
+	NavigateDownToNotificationSettings = require(navigationRodux.Thunks.NavigateDownToNotificationSettings),
 	NavigateDownToReportAbuse = require(navigationRodux.Thunks.NavigateDownToReportAbuse),
 	NavigateDownToViewUserProfile = require(navigationRodux.Thunks.NavigateDownToViewUserProfile)
 }

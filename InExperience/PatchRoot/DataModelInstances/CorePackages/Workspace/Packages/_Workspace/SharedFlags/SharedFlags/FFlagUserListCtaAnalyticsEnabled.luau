@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("UserListCtaAnalyticsEnabled", false) and require(script.Parent.FFlagUserListCtaIntegrationEnabled)

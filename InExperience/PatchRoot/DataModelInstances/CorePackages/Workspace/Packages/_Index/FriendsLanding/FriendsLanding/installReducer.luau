@@ -1,20 +1,20 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
+local dependenciesModule = require(friendsLanding.dependencies)
 local rodux = dependenciesModule.Rodux
 local roduxNetworking = dependenciesModule.RoduxNetworking
-local roduxUserPermissions = dependenciesModule.RoduxUserPermissions
-local roduxAnalytics = dependenciesModule.RoduxAnalytics
+local fFlagFriendsLandingDeprecateUnusedMapToUsersModule = require(friendsLanding.Flags.FFlagFriendsLandingDeprecateUnusedMapToUsers)
 
-return function() --[[ line: 9 ]]
-	-- upvalues: rodux (ref), roduxUserPermissions (ref), roduxNetworking (ref), roduxAnalytics (ref)
+return function() --[[ line: 10 ]]
+	-- upvalues: rodux (ref), fFlagFriendsLandingDeprecateUnusedMapToUsersModule (ref), dependenciesModule (ref), roduxNetworking (ref)
 	return rodux.combineReducers({
-		DeletedUsers = require(script.DeletedUsers),
-		VerifiedUsers = require(script.VerifiedUsers),
-		InactiveFriends = require(script.InactiveFriends),
-		Users = require(script.Users),
+		DeletedUsers = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else require(script.DeletedUsers),
+		VerifiedUsers = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else require(script.VerifiedUsers),
+		InactiveFriends = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else require(script.InactiveFriends),
+		Users = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else require(script.Users),
 		Friends = require(script.Friends)(),
-		Presence = require(script.Presence),
-		UserPermissions = roduxUserPermissions.installReducer(),
+		Presence = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else require(script.Presence),
+		UserPermissions = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else dependenciesModule.RoduxUserPermissions.installReducer(),
 		NetworkStatus = roduxNetworking.installReducer(),
-		Analytics = roduxAnalytics.installReducer()
+		Analytics = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else dependenciesModule.RoduxAnalytics.installReducer()
 	})
 end

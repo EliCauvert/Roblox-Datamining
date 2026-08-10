@@ -1,8 +1,6 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local constantsModule = require(avatarExperienceCommon.Constants)
-local fFlagAXCustomizeMakeupSupport = require(avatarExperienceCommon.Parent.AvatarExperienceFlags).FFlagAXCustomizeMakeupSupport
+﻿local constantsModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants)
 
-return function(value) --[[ line: 11 | named "isMakeupAssetType" ]]
-	-- upvalues: fFlagAXCustomizeMakeupSupport (ref), constantsModule (ref)
-	return if fFlagAXCustomizeMakeupSupport then constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[value] ~= nil else false
+return function(value) --[[ line: 7 | named "isMakeupAssetType" ]]
+	-- upvalues: constantsModule (ref)
+	return constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[value] ~= nil
 end

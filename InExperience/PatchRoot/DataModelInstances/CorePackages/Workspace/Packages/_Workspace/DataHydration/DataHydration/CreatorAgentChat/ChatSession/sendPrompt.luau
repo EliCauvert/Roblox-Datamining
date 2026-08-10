@@ -2,10 +2,10 @@
 local _ = require(script.Parent.Parent.types)
 
 return {
-	createSendPrompt = function(p0) --[[ line: 31 ]]
+	createSendPrompt = function(p0) --[[ line: 30 ]]
 		-- upvalues: signalsModule (ref)
 		return {
-			sendPrompt = function(p1) --[[ line: 32 ]]
+			sendPrompt = function(p1) --[[ line: 31 ]]
 				-- upvalues: p0 (ref), signalsModule (copy)
 				local var1 = p0.incrementAssistantTurnSequence()
 				local var2, var3 = signalsModule.createSignal(nil)
@@ -15,14 +15,19 @@ return {
 				local var8 = false
 				local var9 = nil
 				local var10 = nil
+				local var11 = nil
 				
 				local function fireCompleted(p2) --[[ line: 44 ]]
-					-- upvalues: var7 (write), var1 (ref), p0 (copy), var10 (write), var9 (write), p1 (ref)
+					-- upvalues: var7 (write), var1 (ref), p0 (copy), var11 (write), var10 (write), var9 (write), p1 (ref)
 					if var7 then return end
 					if var1 ~= p0.getAssistantTurnSequence() then return end
 					var7 = true
 					p0.setActiveStop(nil)
 					
+					if var11 ~= nil then
+						var11()
+						var11 = nil
+					end
 					if var10 ~= nil then
 						var10()
 						var10 = nil
@@ -35,30 +40,33 @@ return {
 					end
 				end
 				
-				local function start() --[[ line: 65 ]]
-					-- upvalues: var6 (write), var8 (write), fireCompleted (ref), p0 (copy), var5 (ref), p1 (ref), var9 (write), var3 (ref), var10 (write)
+				local function start() --[[ line: 69 ]]
+					-- upvalues: var6 (write), var8 (write), fireCompleted (ref), p0 (copy), var5 (ref), p1 (ref), var9 (write), var3 (ref), var10 (write), var11 (write), signalsModule (copy)
 					if var6 then
 						return
 					end
 					var6 = true
-					task.spawn(function() --[[ line: 71 ]]
-						-- upvalues: var8 (copy), fireCompleted (copy), p0 (copy), var5 (copy), p1 (copy), var9 (copy), var3 (copy), var10 (copy)
+					task.spawn(function() --[[ line: 75 ]]
+						-- upvalues: var8 (copy), fireCompleted (copy), p0 (copy), var5 (copy), p1 (copy), var9 (copy), var3 (copy), var10 (copy), var11 (copy), signalsModule (copy)
 						if var8 then
 							fireCompleted(nil)
 							
 							return
-						elseif not p0.ensureInitialized() then
-							var5({ stage = "initialize" })
+						end
+						local var15, var16 = p0.ensureInitialized()
+						
+						if not var15 then
+							var5({ stage = "initialize", errorCode = var16 })
 							fireCompleted(nil)
 							
 							return
 						end
 						local _ = nil
 						local _ = nil
-						local var14, var15 = p0.ensureCasSession()
+						local var17, var18 = p0.ensureCasSession()
 						
-						if var14 == nil then
-							var5(var15 or { stage = "session_new" })
+						if var17 == nil then
+							var5(var18 or { stage = "session_new" })
 							fireCompleted(nil)
 							
 							return
@@ -67,45 +75,52 @@ return {
 							
 							return
 						end
-						var14 = p0.sessionPrompt({
-							sessionId = var14,
+						var17 = p0.sessionPrompt({
+							sessionId = var17,
 							prompt = p1.prompt,
 							_meta = p1.promptMeta
 						})
-						var9 = var14
-						var3(var14)
+						var9 = var17
+						var3(var17)
 						
 						if var8 then
-							var14.cancel()
+							var17.cancel()
 						end
-						var10 = p0.startPollingTurnFromHistory(var14, var14, {
+						var10 = p0.startPollingTurnFromHistory(var17, var17, {
 							rtnIdleFallbackSeconds = p1.rtnIdleFallbackSeconds,
+							rtnSequenceGapFallbackSeconds = p1.rtnSequenceGapFallbackSeconds,
 							pollMinIntervalSeconds = p1.pollMinIntervalSeconds,
 							pollMaxIntervalSeconds = p1.pollMaxIntervalSeconds,
-							afterSequenceId = p0.getLatestObservedHistorySequenceId()
+							afterSequenceId = p0.getLatestObservedHistorySequenceId(),
+							onDroppedChatMessage = p1.onDroppedChatMessage
 						})
-						while not var14.state(false).isDone do
-							task.wait()
-						end
-						fireCompleted(var14.state(false))
+						var11 = signalsModule.createEffect(function(p3) --[[ line: 123 ]]
+							-- upvalues: var17 (ref), fireCompleted (copy)
+							if var17.state(p3).isDone then
+								fireCompleted(var17.state(false))
+							end
+						end)
 					end)
 				end
 				
-				local function stop() --[[ line: 123 ]]
-					-- upvalues: var7 (write), var8 (write), var10 (write), var9 (write), fireCompleted (ref)
+				local function stop() --[[ line: 131 ]]
+					-- upvalues: var7 (write), var8 (write), var9 (write), var11 (write), var10 (write), fireCompleted (ref)
 					if var7 then return end
 					var8 = true
 					
+					if var9 ~= nil then
+						var9.cancel()
+						
+						return
+					elseif var11 ~= nil then
+						var11()
+						var11 = nil
+					end
 					if var10 ~= nil then
 						var10()
 						var10 = nil
 					end
-					if var9 == nil then
-						fireCompleted(nil)
-						
-						return
-					end
-					var9.cancel()
+					fireCompleted(nil)
 				end
 				
 				p0.setActiveStop(stop)

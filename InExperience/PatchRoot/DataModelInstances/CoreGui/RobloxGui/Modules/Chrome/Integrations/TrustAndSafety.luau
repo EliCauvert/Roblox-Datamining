@@ -8,17 +8,16 @@ local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Sign
 local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local fFlagStandardizeSafetyIcon = sharedFlagsModule.FFlagStandardizeSafetyIcon
-local fFlagChromeActivatedMappedSignal = sharedFlagsModule.FFlagChromeActivatedMappedSignal
 local var6 = false
 local var7 = signal.new()
-local var8 = mappedSignal.new(var7, function() --[[ line: 27 ]]
+local var8 = mappedSignal.new(var7, function() --[[ line: 26 ]]
 	-- upvalues: var6 (write)
 	return var6
 end)
-task.defer(function() --[[ line: 32 ]]
+task.defer(function() --[[ line: 31 ]]
 	-- upvalues: robloxGui (ref), var6 (write), var7 (ref)
 	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-	settingsHubModule.CurrentPageSignal:connect(function(p0) --[[ line: 34 ]]
+	settingsHubModule.CurrentPageSignal:connect(function(p0) --[[ line: 33 ]]
 		-- upvalues: var6 (copy), settingsHubModule (ref), var7 (copy)
 		var6 = p0 == settingsHubModule.Instance.ReportAbusePage.Page.Name
 		var7:fire()
@@ -30,7 +29,7 @@ return serviceModule:register({
 	label = "CoreScripts.InGameMenu.QuickActions.Report",
 	initialAvailability = serviceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = sideSheetPlacement.Page,
-	activated = function(_) --[[ line: 45 ]]
+	activated = function(_) --[[ line: 44 ]]
 		-- upvalues: robloxGui (ref), var6 (write)
 		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
 		
@@ -45,12 +44,9 @@ return serviceModule:register({
 		end
 		settingsHubModule:SwitchToPage(settingsHubModule.Instance.ReportAbusePage, true)
 	end,
-	isActivated = if fFlagChromeActivatedMappedSignal then var8 else function() --[[ line: 59 ]]
-		-- upvalues: var8 (ref)
-		return var8:get()
-	end,
+	isActivated = var8,
 	components = {
-		Icon = function(_) --[[ line: 63 ]]
+		Icon = function(_) --[[ line: 58 ]]
 			-- upvalues: fFlagStandardizeSafetyIcon (ref), commonIconModule (ref), var8 (ref)
 			return if fFlagStandardizeSafetyIcon then commonIconModule("Flag", nil, var8) else commonIconModule("icons/menu/safety_off", "icons/menu/safety_on", var8)
 		end

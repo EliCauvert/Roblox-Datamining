@@ -1,14 +1,12 @@
-﻿local parent = script:FindFirstAncestor("VideoUtils").Parent
-local reactModule = require(parent.React)
-local fFlagLuaAppVideoFrameSingleTilePooling = require(parent.SharedFlags).FFlagLuaAppVideoFrameSingleTilePooling
+﻿local reactModule = require(script:FindFirstAncestor("VideoUtils").Parent.React)
 
-return function(p0) --[[ line: 22 | named "VideoFrameWrapper" ]]
-	-- upvalues: reactModule (ref), fFlagLuaAppVideoFrameSingleTilePooling (ref)
-	reactModule.useEffect(function() --[[ line: 23 ]]
+return function(p0) --[[ line: 20 | named "VideoFrameWrapper" ]]
+	-- upvalues: reactModule (ref)
+	reactModule.useEffect(function() --[[ line: 21 ]]
 		-- upvalues: p0 (ref)
 		local var1 = if p0.videoFrameRef then p0.videoFrameRef.current else nil
 		
-		return function() --[[ line: 26 ]]
+		return function() --[[ line: 24 ]]
 			-- upvalues: var1 (ref)
 			if var1 then
 				var1.Video = ""
@@ -18,8 +16,8 @@ return function(p0) --[[ line: 22 | named "VideoFrameWrapper" ]]
 	
 	return reactModule.createElement("VideoFrame", {
 		Size = UDim2.fromScale(1, 1),
-		Video = if fFlagLuaAppVideoFrameSingleTilePooling then if p0.isPlaying then p0.video else "" else p0.video,
-		Playing = if fFlagLuaAppVideoFrameSingleTilePooling then p0.isPlaying else true,
+		Video = if p0.isPlaying then p0.video else "",
+		Playing = p0.isPlaying,
 		Looped = p0.looped,
 		Volume = p0.volume,
 		BackgroundTransparency = 1,

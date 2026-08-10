@@ -18,15 +18,15 @@ end
 
 local var7 = tModule.strictInterface({ transferRequestId = tModule.string })
 
-return function(p1, p2) --[[ line: 31 | named "getTransferRequestByIdRequest" ]]
+return function(p1, p2, p3) --[[ line: 31 | named "getTransferRequestByIdRequest" ]]
 	-- upvalues: var7 (ref), httpRequestModule (ref), getTransferByIdUrl (ref), getTransferByIdModelModule (ref), promiseModule (ref)
 	assert(var7(p1))
 	
-	return httpRequestModule.new(p2):get(getTransferByIdUrl(p1.transferRequestId)):andThen(function(p4) --[[ line: 37 ]]
+	return (if p3 ~= nil then httpRequestModule.new(p2) else httpRequestModule.fromNetworkImpl(p3)):get(getTransferByIdUrl(p1.transferRequestId)):andThen(function(p5) --[[ line: 39 ]]
 		-- upvalues: getTransferByIdModelModule (copy)
-		return getTransferByIdModelModule.format(p4)
-	end):catch(function(p3) --[[ line: 40 ]]
+		return getTransferByIdModelModule.format(p5)
+	end):catch(function(p4) --[[ line: 42 ]]
 		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p3)
+		return promiseModule.reject(p4)
 	end)
 end
