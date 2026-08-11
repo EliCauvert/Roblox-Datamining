@@ -173,7 +173,7 @@ local function findCurrentFiberUsingSlowPath(p6) --[[ line: 147 ]]
 						invariant(_return_1, "Child was not found in either parent set. This indicates a bug in React related to the return pointer. Please file an issue.")
 					end
 				end
-				-- [0.000s] <RUNTIME-ERROR> : Error block 49 analysis at pc 0 (list.remove(x): x not in list)
+				-- [0.008s] <RUNTIME-ERROR> : Error block 49 analysis at pc 0 (list.remove(x): x not in list)
 			else
 				var11 = _return
 				var12 = alternate_1

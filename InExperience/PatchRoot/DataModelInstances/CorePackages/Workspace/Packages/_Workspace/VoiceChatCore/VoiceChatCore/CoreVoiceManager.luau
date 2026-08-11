@@ -2164,7 +2164,7 @@ function t_1:ToggleMic(p127) --[[ line: 2625 ]]
 	self:ensureInitialized("toggle mic")
 	
 	if getFFlagCoreMicManagerRefactorModule() then
-		return self.micManager:SetMicActive(not self.micManager.localMuted, p127)
+		return self.micManager:SetMicActive(self.micManager.localMuted, p127)
 	elseif self.localMuted == nil then
 		name:trace("ToggleMic context: {} - Voice not connected yet", p127)
 		

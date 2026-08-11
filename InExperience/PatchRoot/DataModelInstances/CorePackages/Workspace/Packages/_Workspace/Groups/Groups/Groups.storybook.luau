@@ -44,7 +44,7 @@ return {
 			local var9 = if p2 then t[p2.theme] else t.Default
 			
 			return reactModule.createElement(localizationProvider, { localization = t_1 }, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { device = "Desktop", theme = var9.themeName }, {
+				FoundationProvider = reactModule.createElement(foundationProvider, { device = "Desktop", colorMode = var9.themeName }, {
 					AppStyleProvider = reactModule.createElement(appStyleProvider, { style = var9 }, {
 						StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
 							DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = reactModule.createElement(p1, p2) })

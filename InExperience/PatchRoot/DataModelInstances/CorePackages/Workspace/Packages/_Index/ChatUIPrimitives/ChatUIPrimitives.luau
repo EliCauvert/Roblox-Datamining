@@ -24,7 +24,6 @@ return {
 		TextChannelWindowPerfTracker = require(script.Telemetry.TextChannelWindowPerfTracker)
 	},
 	Flags = {
-		FFlagExpChatScrollPerfTracking = require(script.Flags.FFlagExpChatScrollPerfTracking),
 		FFlagExpChatAddressFrame0Flash = require(script.Flags.FFlagExpChatAddressFrame0Flash),
 		FFlagExpChatPresetBoltInMessageLayout = require(script.Flags.FFlagExpChatPresetBoltInMessageLayout),
 		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName)

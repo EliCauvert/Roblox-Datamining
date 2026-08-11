@@ -28,13 +28,14 @@ local list = {
 	"addPlaceId",
 	"addUniverseId"
 }
+local textChannelWindowExcludeStandardizedFieldsFromCounters = game:DefineFastFlag("TextChannelWindowExcludeStandardizedFieldsFromCounters", false)
 
-local function _() --[[ line: 71 | named "passthroughCounterBackend" ]]
-	-- upvalues: list (ref)
+local function _() --[[ line: 78 | named "passthroughCounterBackend" ]]
+	-- upvalues: textChannelWindowExcludeStandardizedFieldsFromCounters (ref), list (ref)
 	return {
 		type = "RobloxTelemetryCounter",
-		standardizedFields = list,
-		format = function(p1, p2) --[[ line: 78 ]]
+		standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
+		format = function(p1, p2) --[[ line: 87 ]]
 			local cloned = table.clone(p1)
 			cloned.enable_protected_chat = tostring(p2.enableProtectedChat)
 			
@@ -51,8 +52,8 @@ t.Counters = {
 		backendsList = {
 			{
 				type = "RobloxTelemetryCounter",
-				standardizedFields = list,
-				format = function(p3, p4) --[[ line: 78 ]]
+				standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
+				format = function(p3, p4) --[[ line: 87 ]]
 					local cloned = table.clone(p3)
 					cloned.enable_protected_chat = tostring(p4.enableProtectedChat)
 					
@@ -69,8 +70,8 @@ t.Counters = {
 		backendsList = {
 			{
 				type = "RobloxTelemetryCounter",
-				standardizedFields = list,
-				format = function(p5, p6) --[[ line: 78 ]]
+				standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
+				format = function(p5, p6) --[[ line: 87 ]]
 					local cloned = table.clone(p5)
 					cloned.enable_protected_chat = tostring(p6.enableProtectedChat)
 					
@@ -87,8 +88,8 @@ t.Counters = {
 		backendsList = {
 			{
 				type = "RobloxTelemetryCounter",
-				standardizedFields = list,
-				format = function(p7, p8) --[[ line: 78 ]]
+				standardizedFields = if textChannelWindowExcludeStandardizedFieldsFromCounters then nil else list,
+				format = function(p7, p8) --[[ line: 87 ]]
 					local cloned = table.clone(p7)
 					cloned.enable_protected_chat = tostring(p8.enableProtectedChat)
 					
@@ -101,16 +102,16 @@ t.Counters = {
 }
 game:SetFlagVersion("TextChannelWindowCountersEnabled", 2)
 local textChannelWindowCountersEnabled = game:DefineFastFlag("TextChannelWindowCountersEnabled", false)
-local var6 = nil
+local var7 = nil
 
-function t._setCountersEnabledForTesting(value) --[[ line: 126 ]]
-	-- upvalues: var6 (write)
-	var6 = value
+function t._setCountersEnabledForTesting(value) --[[ line: 135 ]]
+	-- upvalues: var7 (write)
+	var7 = value
 end
 
-function t.emit(p9, p10) --[[ line: 132 ]]
-	-- upvalues: var6 (write), textChannelWindowCountersEnabled (ref), var3 (ref)
-	if if var6 ~= nil then textChannelWindowCountersEnabled else var6 then
+function t.emit(p9, p10) --[[ line: 141 ]]
+	-- upvalues: var7 (write), textChannelWindowCountersEnabled (ref), var3 (ref)
+	if if var7 ~= nil then textChannelWindowCountersEnabled else var7 then
 		var3.emit(p9, p10)
 		
 		return
@@ -121,17 +122,17 @@ local textChannelWindowEventStreamEnabled = game:DefineFastFlag("TextChannelWind
 local textChannelWindowMessageRenderedEnabled = game:DefineFastFlag("TextChannelWindowMessageRenderedEnabled", false)
 local textChannelWindowMessageRenderedPermyriad = game:DefineFastInt("TextChannelWindowMessageRenderedPermyriad", 0)
 
-function t.getFFlagExpChatTelemetryEnabled() --[[ line: 148 ]]
+function t.getFFlagExpChatTelemetryEnabled() --[[ line: 157 ]]
 	-- upvalues: textChannelWindowEventStreamEnabled (ref)
 	return textChannelWindowEventStreamEnabled and game:GetEngineFeature("ExpChatTelemetryEventTrigger")
 end
 
-function t.getFFlagExpChatUseUpdatedMessageRendered() --[[ line: 152 ]]
+function t.getFFlagExpChatUseUpdatedMessageRendered() --[[ line: 161 ]]
 	-- upvalues: textChannelWindowMessageRenderedEnabled (ref)
 	return textChannelWindowMessageRenderedEnabled and game:GetEngineFeature("ExpChatAddMessageRenderedSurfaceFields")
 end
 
-function t.shouldSendMessageRenderedTelemetry() --[[ line: 157 ]]
+function t.shouldSendMessageRenderedTelemetry() --[[ line: 166 ]]
 	-- upvalues: textChannelWindowMessageRenderedPermyriad (ref)
 	local localPlayer = game:GetService("Players").LocalPlayer
 	
@@ -140,46 +141,46 @@ end
 
 t.FIntTextChannelWindowScrollThrottleMs = game:DefineFastInt("TextChannelWindowScrollThrottleMs", 400)
 
-local _ = function(p11, p12) --[[ line: 172 | named "throttle" ]]
-	local var11 = nil
+local _ = function(p11, p12) --[[ line: 181 | named "throttle" ]]
+	local var12 = nil
 	
-	return function() --[[ line: 174 ]]
-		-- upvalues: var11 (write), p11 (ref), p12 (ref)
-		if var11 then
+	return function() --[[ line: 183 ]]
+		-- upvalues: var12 (write), p11 (ref), p12 (ref)
+		if var12 then
 			return
 		end
 		p11()
-		var11 = task.delay(p12() / 1000, function() --[[ line: 179 ]]
-			-- upvalues: var11 (copy)
-			var11 = nil
+		var12 = task.delay(p12() / 1000, function() --[[ line: 188 ]]
+			-- upvalues: var12 (copy)
+			var12 = nil
 		end)
 	end
 end
 
-function t.createOnScrollCallback(p13) --[[ line: 187 ]]
+function t.createOnScrollCallback(p13) --[[ line: 196 ]]
 	-- upvalues: t (ref), textChatService (ref)
 	if t.getFFlagExpChatTelemetryEnabled() then
-		local var12 = function() --[[ line: 191 ]]
+		local var13 = function() --[[ line: 200 ]]
 			-- upvalues: textChatService (copy), p13 (ref)
 			textChatService:SendExpChatWindowScroll("text_channel_window", p13 or "")
 		end
 		
-		local var13 = function() --[[ line: 193 ]]
+		local var14 = function() --[[ line: 202 ]]
 			-- upvalues: t (copy)
 			return t.FIntTextChannelWindowScrollThrottleMs
 		end
 		
-		local var14 = nil
+		local var15 = nil
 		
-		return function() --[[ line: 174 ]]
-			-- upvalues: var14 (write), var12 (ref), var13 (ref)
-			if var14 then
+		return function() --[[ line: 183 ]]
+			-- upvalues: var15 (write), var13 (ref), var14 (ref)
+			if var12 then
 				return
 			end
-			var12()
-			var14 = task.delay(var13() / 1000, function() --[[ line: 179 ]]
-				-- upvalues: var14 (copy)
-				var11 = nil
+			var13()
+			var12 = task.delay(var14() / 1000, function() --[[ line: 188 ]]
+				-- upvalues: var12 (copy)
+				var12 = nil
 			end)
 		end
 	end

@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatScrollPerfTracking4", false) and require(script:FindFirstAncestor("ChatUIPrimitives").Parent.SharedFlags).FFlagLuaAppPerfTrackerUseLogger
