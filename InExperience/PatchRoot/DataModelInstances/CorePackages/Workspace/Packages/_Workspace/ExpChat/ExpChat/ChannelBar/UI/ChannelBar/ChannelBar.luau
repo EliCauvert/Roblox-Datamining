@@ -16,6 +16,7 @@ local fFlagExpChatFocusChannelBarSupportModule = require(expChat.Flags.FFlagExpC
 local fFlagExpChatChannelBarDropdownZIndexFixModule = require(expChat.Flags.FFlagExpChatChannelBarDropdownZIndexFix)
 local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
 local var11 = require(expChat.Stores.GetFocusNavigationStore)(false)
+local fFlagExpChatPerfTracking = require(parent.SharedFlags).FFlagExpChatPerfTracking
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
@@ -26,7 +27,7 @@ local cycleDown = images["icons/navigation/cycleDown"]
 local color = Color3.fromRGB(255, 255, 255)
 local color_1 = Color3.fromRGB(100, 100, 100)
 
-local function _(value) --[[ line: 76 | named "countAllChannelTabs" ]]
+local function _(value) --[[ line: 77 | named "countAllChannelTabs" ]]
 	local var18 = 0
 	
 	for i in pairs(value) do
@@ -35,15 +36,15 @@ local function _(value) --[[ line: 76 | named "countAllChannelTabs" ]]
 	return var18
 end
 
-local function setTransparency(value, p0) --[[ line: 84 ]]
-	return p0:map(function(p1) --[[ line: 85 ]]
+local function setTransparency(value, p0) --[[ line: 85 ]]
+	return p0:map(function(p1) --[[ line: 86 ]]
 		-- upvalues: value (ref)
 		return if value == nil then 1 else value + p1 * (1 - value)
 	end)
 end
 
-return function(p2) --[[ line: 90 | named "ChannelBar" ]]
-	-- upvalues: configModule (ref), reactModule (ref), fFlagExpChatFixChannelBarInitialWidthModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var11 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatChannelBarDropdownZIndexFixModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
+return function(p2) --[[ line: 91 | named "ChannelBar" ]]
+	-- upvalues: configModule (ref), reactModule (ref), fFlagExpChatFixChannelBarInitialWidthModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), var11 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), fFlagExpChatPerfTracking (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatChannelBarDropdownZIndexFixModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
 	local var19 = 0
 	
 	for i in pairs(p2.allChannelTabs) do
@@ -72,7 +73,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 	local var39 = if not var38 then var19 else math.floor((var37 - configModule.ChannelTabsSettings.DropdownIconContainerWidth) / configModule.ChannelTabsSettings.MinTabWidth)
 	local var40 = (var37 - (if var38 then configModule.ChannelTabsSettings.DropdownIconContainerWidth else 0)) / var39
 	local var41 = (var19 - var39) * 40
-	local var42 = reactModule.useMemo(function() --[[ line: 129 ]]
+	local var42 = reactModule.useMemo(function() --[[ line: 130 ]]
 		-- upvalues: p2 (ref), var39 (ref)
 		for i, v in pairs(p2.allChannelTabs) do
 			if var39 < v.TabIndex and v.HasUnreadMessages then
@@ -118,11 +119,12 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 		t_2.isTabVisibleToUser = if fFlagExpChatEnableTabsImpressionAnalyticsModule then var79 or var23 else nil
 		t_2.isLayoutReady = if fFlagExpChatEnableTabsImpressionAnalyticsModule then var28 else nil
 		
-		function t_2.onTabSelected() --[[ line: 172 ]]
-			-- upvalues: expChatPerfTracker (copy), i_1 (ref), fFlagExpChatPerfTrackerTabName (copy), var79 (ref), var32 (ref), var33 (ref), var34 (ref), p2 (ref), var80 (ref), type (ref), var24 (ref)
-			expChatPerfTracker.cancelAll()
-			expChatPerfTracker.start(expChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = i_1 }, if fFlagExpChatPerfTrackerTabName then { tabName = i_1 } else nil)
-			
+		function t_2.onTabSelected() --[[ line: 173 ]]
+			-- upvalues: fFlagExpChatPerfTracking (copy), expChatPerfTracker (copy), i_1 (ref), fFlagExpChatPerfTrackerTabName (copy), var79 (ref), var32 (ref), var33 (ref), var34 (ref), p2 (ref), var80 (ref), type (ref), var24 (ref)
+			if fFlagExpChatPerfTracking then
+				expChatPerfTracker.cancelAll()
+				expChatPerfTracker.start(expChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = i_1 }, if fFlagExpChatPerfTrackerTabName then { tabName = i_1 } else nil)
+			end
 			if not var79 and var32 and var33.current then
 				var34(var33.current)
 			end
@@ -130,7 +132,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 			var24(false)
 		end
 		
-		function t_2.setTransparency(value) --[[ line: 184 ]]
+		function t_2.setTransparency(value) --[[ line: 187 ]]
 			-- upvalues: setTransparency (copy), p2 (ref)
 			return setTransparency(value, p2.transparencyValue)
 		end
@@ -166,7 +168,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 		ZIndex = if fFlagExpChatChannelBarDropdownZIndexFixModule then 3 else nil,
 		[reactModule.Event.MouseEnter] = p2.onHovered,
 		[reactModule.Event.MouseLeave] = p2.onUnhovered,
-		[reactModule.Change.AbsoluteSize] = function(p3) --[[ line: 222 ]]
+		[reactModule.Change.AbsoluteSize] = function(p3) --[[ line: 225 ]]
 			-- upvalues: var27 (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (copy), var29 (write), channelTabsConfiguration (ref)
 			var27(p3.AbsoluteSize.X)
 			
@@ -177,7 +179,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 				channelTabsConfiguration:SetAbsoluteSize(p3.AbsoluteSize)
 			end
 		end,
-		[reactModule.Change.AbsolutePosition] = function(p4) --[[ line: 231 ]]
+		[reactModule.Change.AbsolutePosition] = function(p4) --[[ line: 234 ]]
 			-- upvalues: channelTabsConfiguration (ref)
 			if channelTabsConfiguration then
 				channelTabsConfiguration:SetAbsolutePosition(p4.AbsolutePosition)
@@ -204,7 +206,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 			Image = "rbxasset://textures/ui/TopRoundedRect8px.png",
 			BorderSizePixel = 0,
 			ImageColor3 = backgroundColor3,
-			ImageTransparency = p2.transparencyValue:map(function(p5) --[[ line: 85 ]]
+			ImageTransparency = p2.transparencyValue:map(function(p5) --[[ line: 86 ]]
 				-- upvalues: backgroundTransparency (ref)
 				return if backgroundTransparency == nil then 1 else backgroundTransparency + p5 * (1 - backgroundTransparency)
 			end),
@@ -225,7 +227,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 		BackgroundColor3 = configModule.ChannelTabsSettings.BorderColor3
 	}
 	local borderTransparency = configModule.ChannelTabsSettings.BorderTransparency
-	t_6.BackgroundTransparency = p2.transparencyValue:map(function(p6) --[[ line: 85 ]]
+	t_6.BackgroundTransparency = p2.transparencyValue:map(function(p6) --[[ line: 86 ]]
 		-- upvalues: borderTransparency (ref)
 		return if borderTransparency == nil then 1 else borderTransparency + p6 * (1 - borderTransparency)
 	end)
@@ -235,7 +237,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 		Size = UDim2.new(1, 0, 0, configModule.ChannelTabsSettings.HorizontalBarHeight - 8 - 1),
 		Position = UDim2.new(0, 0, 0, 8),
 		BackgroundColor3 = backgroundColor3,
-		BackgroundTransparency = p2.transparencyValue:map(function(p7) --[[ line: 85 ]]
+		BackgroundTransparency = p2.transparencyValue:map(function(p7) --[[ line: 86 ]]
 			-- upvalues: backgroundTransparency (ref)
 			return if backgroundTransparency == nil then 1 else backgroundTransparency + p7 * (1 - backgroundTransparency)
 		end)
@@ -263,7 +265,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 			Size = UDim2.new(0, 27, 0, 27)
 		}
 		local var60 = if var21 then 0.3 else 1
-		t_9.BackgroundTransparency = p2.transparencyValue:map(function(p8) --[[ line: 85 ]]
+		t_9.BackgroundTransparency = p2.transparencyValue:map(function(p8) --[[ line: 86 ]]
 			-- upvalues: var60 (ref)
 			return if var60 == nil then 1 else var60 + p8 * (1 - var60)
 		end)
@@ -274,17 +276,17 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 		t_9.SelectionImageObject = var36
 		t_9.ref = if fFlagExpChatFocusChannelBarSupportModule then var33 else nil
 		
-		t_9[reactModule.Event.MouseEnter] = function() --[[ line: 308 ]]
+		t_9[reactModule.Event.MouseEnter] = function() --[[ line: 311 ]]
 			-- upvalues: var22 (ref)
 			var22(true)
 		end
 		
-		t_9[reactModule.Event.MouseLeave] = function() --[[ line: 311 ]]
+		t_9[reactModule.Event.MouseLeave] = function() --[[ line: 314 ]]
 			-- upvalues: var22 (ref)
 			var22(false)
 		end
 		
-		t_9[reactModule.Event.Activated] = function() --[[ line: 314 ]]
+		t_9[reactModule.Event.Activated] = function() --[[ line: 317 ]]
 			-- upvalues: var24 (ref), var23 (ref)
 			var24(not var23)
 		end
@@ -304,7 +306,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 			ImageColor3 = color
 		}
 		local var64 = 0
-		t_11.ImageTransparency = p2.transparencyValue:map(function(p9) --[[ line: 85 ]]
+		t_11.ImageTransparency = p2.transparencyValue:map(function(p9) --[[ line: 86 ]]
 			-- upvalues: var64 (ref)
 			return if var64 == nil then 1 else var64 + p9 * (1 - var64)
 		end)
@@ -324,7 +326,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 				BackgroundColor3 = configModule.ChannelTabsSettings.UnreadDotColor3
 			}
 			local var68 = 0
-			t_12.BackgroundTransparency = p2.transparencyValue:map(function(p10) --[[ line: 85 ]]
+			t_12.BackgroundTransparency = p2.transparencyValue:map(function(p10) --[[ line: 86 ]]
 				-- upvalues: var68 (ref)
 				return if var68 == nil then 1 else var68 + p10 * (1 - var68)
 			end)
@@ -358,7 +360,7 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 			Color = configModule.ChannelTabsSettings.BorderColor3
 		}
 		local borderTransparency_1 = configModule.ChannelTabsSettings.BorderTransparency
-		t_9.Transparency = p2.transparencyValue:map(function(p11) --[[ line: 85 ]]
+		t_9.Transparency = p2.transparencyValue:map(function(p11) --[[ line: 86 ]]
 			-- upvalues: borderTransparency_1 (ref)
 			return if borderTransparency_1 == nil then 1 else borderTransparency_1 + p11 * (1 - borderTransparency_1)
 		end)
@@ -373,12 +375,12 @@ return function(p2) --[[ line: 90 | named "ChannelBar" ]]
 			CanvasSize = UDim2.new(0, 150, 0, var41)
 		}
 		local var77 = 0
-		t_10.BackgroundTransparency = p2.transparencyValue:map(function(p12) --[[ line: 85 ]]
+		t_10.BackgroundTransparency = p2.transparencyValue:map(function(p12) --[[ line: 86 ]]
 			-- upvalues: var77 (ref)
 			return if var77 == nil then 1 else var77 + p12 * (1 - var77)
 		end)
 		local var78 = 0
-		t_10.ScrollBarImageTransparency = p2.transparencyValue:map(function(p13) --[[ line: 85 ]]
+		t_10.ScrollBarImageTransparency = p2.transparencyValue:map(function(p13) --[[ line: 86 ]]
 			-- upvalues: var78 (ref)
 			return if var78 == nil then 1 else var78 + p13 * (1 - var78)
 		end)

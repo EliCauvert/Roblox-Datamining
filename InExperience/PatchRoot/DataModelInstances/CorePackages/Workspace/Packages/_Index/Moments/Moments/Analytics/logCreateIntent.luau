@@ -2,10 +2,9 @@
 local analytics = momentsCommonModule.Analytics
 local funnelEventNames = analytics.FunnelEventNames
 local getFFlagMomentsAnalyticsProducerPrereqs = momentsCommonModule.Flags.GetFFlagMomentsAnalyticsProducerPrereqs
-local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
-return function(p0) --[[ line: 33 | named "logCreateIntent" ]]
-	-- upvalues: analytics (ref), funnelEventNames (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref), fFlagMomentsRealtimeSessionTelemetry (ref)
+return function(p0) --[[ line: 32 | named "logCreateIntent" ]]
+	-- upvalues: analytics (ref), funnelEventNames (ref), getFFlagMomentsAnalyticsProducerPrereqs (ref)
 	local var1 = analytics.SessionManager.startSession(funnelEventNames.FunnelTypes.CreationFlow)
 	analytics.fireFunnelAnalyticsEvent(funnelEventNames.FunnelTypes.CreationFlow, funnelEventNames.CreationFlowSteps.CreateIntent, var1, { source = p0 })
 	local t = { source = p0 }
@@ -14,8 +13,4 @@ return function(p0) --[[ line: 33 | named "logCreateIntent" ]]
 		t.creationSessionId = var1
 	end
 	analytics.fireAnalyticsEvent(analytics.EventNames.MomentCreationStarted, t)
-	
-	if fFlagMomentsRealtimeSessionTelemetry then
-		analytics.reportMomentsCreationStep("create_intent")
-	end
 end

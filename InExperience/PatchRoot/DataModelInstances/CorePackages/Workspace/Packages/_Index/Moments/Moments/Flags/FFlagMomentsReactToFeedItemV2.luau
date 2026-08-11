@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("MomentsReactToFeedItemV2", false) and require(script.Parent.FFlagMomentsEmojiSetsApi)
+﻿return require(script:FindFirstAncestor("Moments").Parent.DataHydration.MomentsFFlagMomentsReactToFeedItemV2)

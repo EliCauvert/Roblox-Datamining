@@ -53,6 +53,7 @@ local isExperienceChatUserProfileApiEnabledModule = require(flags.isExperienceCh
 local fIntExpChatVisibleARButtonPaddingModule = require(flags.FIntExpChatVisibleARButtonPadding)
 local fIntExpChatDefaultARButtonPaddingModule = require(flags.FIntExpChatDefaultARButtonPadding)
 local fFlagAEGIS2EnableGatesForExpChatModule = require(flags.FFlagAEGIS2EnableGatesForExpChat)
+local fFlagExpChatPerfTracking = require(parent.SharedFlags).FFlagExpChatPerfTracking
 local fFlagExpChatTopBannerForPresetChatAccessModule = require(flags.FFlagExpChatTopBannerForPresetChatAccess)
 local fFlagExpChatFixLocalUserVerifiedBadgeModule = require(flags.FFlagExpChatFixLocalUserVerifiedBadge)
 local expChatSharedModule = require(parent_1.ExpChatShared)
@@ -62,12 +63,12 @@ local getPresetIconRichText = expChatSharedModule.getPresetIconRichText
 local useIsARButtonVisibleModule = require(expChat.useIsARButtonVisible)
 local isPresetMessage = expChatSharedModule.isPresetMessage
 
-function appendVerifiedBadge(p0) --[[ line: 78 ]]
+function appendVerifiedBadge(p0) --[[ line: 79 ]]
 	-- upvalues: configModule (ref)
 	return string.gsub(p0, ":(%S-)$", configModule.VERIFIED_EMOJI .. ":%1")
 end
 
-local var48 = function(p1) --[[ line: 82 ]]
+local var48 = function(p1) --[[ line: 83 ]]
 	-- upvalues: userProfileStore (ref), signalsReactModule (ref)
 	local var55 = userProfileStore.get().fetchNamesByUserIds({ tostring(p1.userId) })(false).data[1]
 	
@@ -77,26 +78,26 @@ local var48 = function(p1) --[[ line: 82 ]]
 	}
 end
 
-function trim(p2) --[[ line: 91 ]]
+function trim(p2) --[[ line: 92 ]]
 	return if p2:match("^()%s*$") then "" else p2:match("^%s*(.*%S)")
 end
 
-function getMessageText(p3, p4, p5) --[[ line: 95 ]]
+function getMessageText(p3, p4, p5) --[[ line: 96 ]]
 	return if p4 == nil or p4 == "" then p5 or "" elseif p3 then p4 or "" else p5 or ""
 end
 
-local function _(p6, p7) --[[ line: 105 | named "calculateTransparency" ]]
+local function _(p6, p7) --[[ line: 106 | named "calculateTransparency" ]]
 	return p6 + p7 * (1 - p6)
 end
 
-local _ = function(value, p8) --[[ line: 109 | named "setTransparency" ]]
-	return p8:map(function(p9) --[[ line: 110 ]]
+local _ = function(value, p8) --[[ line: 110 | named "setTransparency" ]]
+	return p8:map(function(p9) --[[ line: 111 ]]
 		-- upvalues: value (ref)
 		return if value == nil then 1 else value + p9 * (1 - value)
 	end)
 end
 
-local function useARButtonRightPadding() --[[ line: 115 ]]
+local function useARButtonRightPadding() --[[ line: 116 ]]
 	-- upvalues: fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref)
 	if fFlagExpChatPresetChatEnabled and fFlagExpChatTopBannerForPresetChatAccessModule then
 		return if useIsARButtonVisibleModule() then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
@@ -108,7 +109,7 @@ local function useARButtonRightPadding() --[[ line: 115 ]]
 	return if not isChatRegionLockedModule() and (if fFlagAEGIS2EnableGatesForExpChatModule then showChatEnabledUIModule(signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)) else true) then fIntExpChatVisibleARButtonPaddingModule else fIntExpChatDefaultARButtonPaddingModule
 end
 
-local function appendTrustedIndicator(p10, p11, p12, p13, p14) --[[ line: 140 ]]
+local function appendTrustedIndicator(p10, p11, p12, p13, p14) --[[ line: 141 ]]
 	local var56 = p14.Color.Shift.Shift_300.Color3:ToHex()
 	local transparency = p14.Color.Shift.Shift_300.Transparency
 	local transparency_1 = p14.Color.Content.Emphasis.Transparency
@@ -119,7 +120,7 @@ end
 
 local var51 = dataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
-local _ = function(p15, p16, p17, p18) --[[ line: 177 | named "applyStyleToText" ]]
+local _ = function(p15, p16, p17, p18) --[[ line: 178 | named "applyStyleToText" ]]
 	-- upvalues: textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref)
 	p16 = p16 or ""
 	
@@ -129,17 +130,19 @@ local _ = function(p15, p16, p17, p18) --[[ line: 177 | named "applyStyleToText"
 	return p16
 end
 
-local var52 = function(p19) --[[ line: 190 ]]
-	-- upvalues: fFlagDebugMessageProfilingModule (ref), reactModule (ref), expChatPerfTracker (ref), localizationModule (ref), fFlagExpChatRewriteInlineModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), foundationModule (ref), getMessageSettingsModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), isExperienceChatUserProfileApiEnabledModule (ref), var48 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), signalsModule (ref), playersService (ref), var51 (ref), signalsReactModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), useStore (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var23 (ref), getChannelTabsStoreModule (ref), textChatService (ref), appendTrustedIndicator (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPolishSummaryMessageUIModule (ref), textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref), expChatTranslationToggleSpacingFix (ref), duplicateInvisibleTextModule (ref), useCursor (ref), fFlagEnableInExpChatRewriteModule (ref), useARButtonRightPadding (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (ref)
+local var52 = function(p19) --[[ line: 191 ]]
+	-- upvalues: fFlagDebugMessageProfilingModule (ref), fFlagExpChatPerfTracking (ref), reactModule (ref), expChatPerfTracker (ref), localizationModule (ref), fFlagExpChatRewriteInlineModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), foundationModule (ref), getMessageSettingsModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), isExperienceChatUserProfileApiEnabledModule (ref), var48 (ref), getFFlagExpChatExcludeFOMORendersModule (ref), signalsModule (ref), playersService (ref), var51 (ref), signalsReactModule (ref), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (ref), fFlagExpChatUseChannelTabsStore (ref), useStore (ref), getFFlagExpChatUseUpdatedMessageRenderedModule (ref), shouldSendHighFrequencyTelemetryModule (ref), var23 (ref), getChannelTabsStoreModule (ref), textChatService (ref), appendTrustedIndicator (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPolishSummaryMessageUIModule (ref), textChatMessageChatActionTypeModule (ref), summaryMessageRichTextModule (ref), fFlagExpChatPresetChatEnabled (ref), isPresetMessage (ref), getPresetIconRichText (ref), expChatTranslationToggleSpacingFix (ref), duplicateInvisibleTextModule (ref), useCursor (ref), fFlagEnableInExpChatRewriteModule (ref), useARButtonRightPadding (ref), fFlagAEGIS2EnableGatesForExpChatModule (ref), getChatStatusStoreModule (ref), showChatEnabledUIModule (ref), isChatRegionLockedModule (ref), fIntExpChatVisibleARButtonPaddingModule (ref), fIntExpChatDefaultARButtonPaddingModule (ref), fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (ref)
 	if fFlagDebugMessageProfilingModule then
 		debug.profilebegin("TranslatedTextMessage")
 	end
-	local messageId = p19.message.messageId or "UNKNOWN_MESSAGE_ID"
-	reactModule.useEffect(function() --[[ line: 195 ]]
-		-- upvalues: expChatPerfTracker (copy), messageId (ref)
-		expChatPerfTracker.finish(expChatPerfTracker.Events.MessageReceiveToWindowRenderInterval, { messageId = messageId })
-		expChatPerfTracker.finish(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = messageId })
-	end, { messageId })
+	if fFlagExpChatPerfTracking then
+		local messageId = p19.message.messageId or "UNKNOWN_MESSAGE_ID"
+		reactModule.useEffect(function() --[[ line: 197 ]]
+			-- upvalues: expChatPerfTracker (copy), messageId (ref)
+			expChatPerfTracker.finish(expChatPerfTracker.Events.MessageReceiveToWindowRenderInterval, { messageId = messageId })
+			expChatPerfTracker.finish(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = messageId })
+		end, { messageId })
+	end
 	local isSpatialUIEnabled = p19.isSpatialUIEnabled
 	local var60 = if isSpatialUIEnabled then p19.chatWindowSettings.SpatialPanelTextSize else p19.chatWindowSettings.TextSize
 	local var61 = localizationModule.useLocalization({
@@ -174,9 +177,9 @@ local var52 = function(p19) --[[ line: 190 ]]
 	local _ = nil
 	local userId = p19.message.userId and tostring(p19.message.userId)
 	local var69 = if getFFlagExpChatExcludeFOMORendersModule() then p19.message.isHiddenMessage else nil
-	local var70 = signalsReactModule.useSignalBinding(reactModule.useMemo(function() --[[ line: 247 ]]
+	local var70 = signalsReactModule.useSignalBinding(reactModule.useMemo(function() --[[ line: 250 ]]
 		-- upvalues: signalsModule (copy), userId (ref), playersService (copy), var69 (ref), var51 (copy)
-		return signalsModule.createComputed(function(p20) --[[ line: 248 ]]
+		return signalsModule.createComputed(function(p20) --[[ line: 251 ]]
 			-- upvalues: userId (copy), playersService (copy), var69 (copy), var51 (copy)
 			local userId_1 = playersService.LocalPlayer and (playersService.LocalPlayer.UserId and tostring(playersService.LocalPlayer.UserId))
 			
@@ -186,7 +189,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 	local var71 = if engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule and not fFlagExpChatUseChannelTabsStore then useStore() else nil
 	
 	if getFFlagExpChatUseUpdatedMessageRenderedModule() then
-		reactModule.useEffect(function() --[[ line: 269 ]]
+		reactModule.useEffect(function() --[[ line: 272 ]]
 			-- upvalues: p19 (ref), shouldSendHighFrequencyTelemetryModule (copy), var23 (copy), getFFlagExpChatExcludeFOMORendersModule (copy), engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule (copy), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy), var71 (ref), textChatService (copy)
 			if p19.message.textChatMessageInstance and shouldSendHighFrequencyTelemetryModule(var23) and (not getFFlagExpChatExcludeFOMORendersModule() or not p19.message.isHiddenMessage) then
 				if engineFeatureExpChatGlobalChatEngineTelemetryEnabledModule then
@@ -222,7 +225,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 	local var72 = if isSpatialUIEnabled then var60 else bodyTextProperties.TextSize
 	local var73 = var72 - 2
 	local var74 = reactModule.joinBindings({
-		reactModule.joinBindings(if var67 ~= nil then {} else { var67.displayName, var67.inExperienceCombinedName }):map(function(p22) --[[ line: 314 ]]
+		reactModule.joinBindings(if var67 ~= nil then {} else { var67.displayName, var67.inExperienceCombinedName }):map(function(p22) --[[ line: 317 ]]
 			-- upvalues: prefixText (ref), p19 (ref)
 			local var107 = p22[1] or ""
 			local var108 = p22[2] or ""
@@ -238,7 +241,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 		end),
 		var70,
 		p19.textTransparency
-	}):map(function(p21) --[[ line: 335 ]]
+	}):map(function(p21) --[[ line: 338 ]]
 		-- upvalues: prefixText (ref), appendTrustedIndicator (copy), var61 (ref), prefixTextProperties (ref), var63 (ref)
 		local var104 = p21[1] or ""
 		local var105 = p21[2] or false
@@ -254,11 +257,11 @@ local var52 = function(p19) --[[ line: 190 ]]
 		end
 		return var104
 	end)
-	var74 = var74:map(function(p23) --[[ line: 356 ]]
+	var74 = var74:map(function(p23) --[[ line: 359 ]]
 		-- upvalues: prefixText (ref)
 		return if string.len(prefixText) == 0 then p23 else trim(p23)
 	end)
-	local var75 = var74:map(function(p24) --[[ line: 363 ]]
+	local var75 = var74:map(function(p24) --[[ line: 366 ]]
 		-- upvalues: var65 (ref), fFlagEnableInExpChatSummaryOnLuaModule (copy), fFlagExpChatPolishSummaryMessageUIModule (copy), var72 (ref), var63 (ref), p19 (ref), textChatMessageChatActionTypeModule (copy), summaryMessageRichTextModule (copy), fFlagExpChatPresetChatEnabled (copy), isPresetMessage (copy), getPresetIconRichText (copy), prefixText (ref), showTranslationButton (ref), expChatTranslationToggleSpacingFix (copy), duplicateInvisibleTextModule (copy), prefixTextProperties (ref)
 		local var110 = var65
 		
@@ -284,7 +287,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 	end)
 	
 	if fFlagExpChatRewriteInlineModule then
-		var75 = reactModule.joinBindings({ var75 }):map(function(p25) --[[ line: 388 ]]
+		var75 = reactModule.joinBindings({ var75 }):map(function(p25) --[[ line: 391 ]]
 			-- upvalues: p19 (ref), foundationModule (copy), prefixTextProperties (ref), var63 (ref), var62 (write)
 			local var114 = p25[1] or ""
 			
@@ -313,7 +316,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 			var78 = p19.chatWindowTransparencyBindable < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
 			var78 = nil
 		else
-			var78 = p19.chatWindowTransparencyBindable:map(function(p26) --[[ line: 445 ]]
+			var78 = p19.chatWindowTransparencyBindable:map(function(p26) --[[ line: 448 ]]
 				-- upvalues: fIntExpChatWindowTransparencyRewriteInteractableThresholdModule (copy)
 				return p26 < fIntExpChatWindowTransparencyRewriteInteractableThresholdModule
 			end)
@@ -353,12 +356,12 @@ local var52 = function(p19) --[[ line: 190 ]]
 			TextStrokeColor3 = prefixTextProperties.TextStrokeColor3
 		}
 		local textStrokeTransparency = prefixTextProperties.TextStrokeTransparency
-		t_4.TextStrokeTransparency = p19.textTransparency:map(function(p27) --[[ line: 110 ]]
+		t_4.TextStrokeTransparency = p19.textTransparency:map(function(p27) --[[ line: 111 ]]
 			-- upvalues: textStrokeTransparency (ref)
 			return if textStrokeTransparency == nil then 1 else textStrokeTransparency + p27 * (1 - textStrokeTransparency)
 		end)
 		local var88 = 0
-		t_4.TextTransparency = p19.textTransparency:map(function(p28) --[[ line: 110 ]]
+		t_4.TextTransparency = p19.textTransparency:map(function(p28) --[[ line: 111 ]]
 			-- upvalues: var88 (ref)
 			return if var88 == nil then 1 else var88 + p28 * (1 - var88)
 		end)
@@ -384,12 +387,12 @@ local var52 = function(p19) --[[ line: 190 ]]
 		TextStrokeColor3 = bodyTextProperties.TextStrokeColor3
 	}
 	local textStrokeTransparency = bodyTextProperties.TextStrokeTransparency
-	t_4.TextStrokeTransparency = p19.textTransparency:map(function(p29) --[[ line: 110 ]]
+	t_4.TextStrokeTransparency = p19.textTransparency:map(function(p29) --[[ line: 111 ]]
 		-- upvalues: textStrokeTransparency (ref)
 		return if textStrokeTransparency == nil then 1 else textStrokeTransparency + p29 * (1 - textStrokeTransparency)
 	end)
 	local var91 = 0
-	t_4.TextTransparency = p19.textTransparency:map(function(p30) --[[ line: 110 ]]
+	t_4.TextTransparency = p19.textTransparency:map(function(p30) --[[ line: 111 ]]
 		-- upvalues: var91 (ref)
 		return if var91 == nil then 1 else var91 + p30 * (1 - var91)
 	end)
@@ -432,7 +435,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				LayoutOrder = 1,
-				[reactModule.Event.Activated] = function() --[[ line: 538 ]]
+				[reactModule.Event.Activated] = function() --[[ line: 541 ]]
 					-- upvalues: p19 (ref)
 					p19.onTextMessageLabelButtonActivated(p19.message)
 				end
@@ -448,7 +451,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 				Image = "rbxasset://textures/translateIcon.png"
 			}
 			local var97 = 0
-			t_7.ImageTransparency = p19.textTransparency:map(function(p31) --[[ line: 110 ]]
+			t_7.ImageTransparency = p19.textTransparency:map(function(p31) --[[ line: 111 ]]
 				-- upvalues: var97 (ref)
 				return if var97 == nil then 1 else var97 + p31 * (1 - var97)
 			end)
@@ -457,7 +460,7 @@ local var52 = function(p19) --[[ line: 190 ]]
 			t_7.SelectionImageObject = var76
 			t_7.Size = UDim2.new(0, var73, 0, var73)
 			
-			t_7[reactModule.Event.Activated] = function() --[[ line: 553 ]]
+			t_7[reactModule.Event.Activated] = function() --[[ line: 556 ]]
 				-- upvalues: p19 (ref)
 				p19.onToggle(not p19.message.useTranslation, p19.message.messageId)
 			end
@@ -479,12 +482,12 @@ local var52 = function(p19) --[[ line: 190 ]]
 	return createElement
 end
 
-local function TranslatedTextMessageWithToggle(_) --[[ line: 568 ]]
+local function TranslatedTextMessageWithToggle(_) --[[ line: 571 ]]
 	-- upvalues: roactRoduxModule (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), var52 (ref)
-	return roactRoduxModule.connect(function() --[[ line: 569 ]] end, function(p32) --[[ line: 569 ]]
+	return roactRoduxModule.connect(function() --[[ line: 572 ]] end, function(p32) --[[ line: 572 ]]
 		-- upvalues: fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy)
 		return {
-			onToggle = function(p33, p34) --[[ line: 571 ]]
+			onToggle = function(p33, p34) --[[ line: 574 ]]
 				-- upvalues: fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), p32 (ref)
 				if fFlagExpChatUseMessagesStore then
 					getMessagesStoreModule(false).toggleMessageTranslation(p33, p34)
@@ -501,7 +504,7 @@ local function TranslatedTextMessageWithToggle(_) --[[ line: 568 ]]
 	end)(var52)
 end
 
-local function RewriteLabelWithButton(p35) --[[ line: 587 ]]
+local function RewriteLabelWithButton(p35) --[[ line: 590 ]]
 	-- upvalues: foundationModule (ref), localizationModule (ref), fStringInExpChatRewriteLabelKeyModule (ref), reactModule (ref)
 	local var115 = foundationModule.Hooks.useTokens()
 	local var116 = localizationModule.useLocalization({
@@ -526,14 +529,14 @@ local function RewriteLabelWithButton(p35) --[[ line: 587 ]]
 	}
 	local t_3 = { Color3 = var115.Color.Content.Muted.Color3 }
 	local transparency = var115.Color.Content.Muted.Transparency
-	t_3.Transparency = p35.textTransparency:map(function(p36) --[[ line: 110 ]]
+	t_3.Transparency = p35.textTransparency:map(function(p36) --[[ line: 111 ]]
 		-- upvalues: transparency (ref)
 		return if transparency == nil then 1 else transparency + p36 * (1 - transparency)
 	end)
 	t_2.textStyle = t_3
 	local t_4 = { Color = Color3.fromRGB(0, 0, 0) }
 	local var123 = 0.5
-	t_4.Transparency = p35.textTransparency:map(function(p37) --[[ line: 110 ]]
+	t_4.Transparency = p35.textTransparency:map(function(p37) --[[ line: 111 ]]
 		-- upvalues: var123 (ref)
 		return if var123 == nil then 1 else var123 + p37 * (1 - var123)
 	end)
@@ -546,7 +549,7 @@ local function RewriteLabelWithButton(p35) --[[ line: 587 ]]
 		size = foundationModule.Enums.InputSize.XSmall,
 		icon = if p35.isRewriteMenuOpen then foundationModule.Enums.IconName.ChevronLargeUp else foundationModule.Enums.IconName.ChevronLargeDown,
 		variant = foundationModule.Enums.ButtonVariant.Utility,
-		Visible = p35.textTransparency:map(function(p38) --[[ line: 625 ]]
+		Visible = p35.textTransparency:map(function(p38) --[[ line: 628 ]]
 			return p38 < 1
 		end),
 		onActivated = p35.onActivated
@@ -555,7 +558,7 @@ local function RewriteLabelWithButton(p35) --[[ line: 587 ]]
 	return createElement(view, t, t_1)
 end
 
-return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMessageWrapper" ]]
+return reactModule.memo(function(p39) --[[ line: 636 | named "TranslatedTextMessageWrapper" ]]
 	-- upvalues: getMessageSettingsModule (ref), fFlagEnableInExpChatRewriteModule (ref), useARButtonRightPadding (ref), fIntExpChatDefaultARButtonPaddingModule (ref), localizationModule (ref), fStringInExpChatRewriteReasonKeyModule (ref), foundationModule (ref), reactModule (ref), fFlagExpChatRewriteToggleAnalyticsModule (ref), expChatSharedModule (ref), fFlagExpChatRewriteInlineIxpEnabledModule (ref), IXPService (ref), fStringExpChatRewriteInlineIxpLayerModule (ref), fFlagExpChatRewriteInlineModule (ref), dictionary (ref), TranslatedTextMessageWithToggle (ref), var52 (ref), RewriteLabelWithButton (ref)
 	local var124 = getMessageSettingsModule(p39.message, p39.chatWindowSettings)
 	local showTranslationButton = p39.showTranslationButton
@@ -584,7 +587,7 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 		wasRewritten = var124.wasRewritten
 		originalText = var124.originalText
 		var128 = wasRewritten and (originalText ~= nil and originalText ~= "")
-		var127 = reactModule.useCallback(function() --[[ line: 664 ]]
+		var127 = reactModule.useCallback(function() --[[ line: 667 ]]
 			-- upvalues: fFlagExpChatRewriteToggleAnalyticsModule (copy), expChatSharedModule (copy), p39 (ref), var126 (write), var128 (write), var134 (write)
 			if fFlagExpChatRewriteToggleAnalyticsModule then
 				expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.RewriteDropdownToggledConfig, {
@@ -593,13 +596,13 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 					showOriginalText = tostring(var128)
 				}, expChatSharedModule.Analytics.DefaultStandardizedFields)
 			end
-			var134(function(p40) --[[ line: 672 ]]
+			var134(function(p40) --[[ line: 675 ]]
 				return not p40
 			end)
 		end, { var126, var128, p39.message.messageId })
 		
 		if fFlagExpChatRewriteInlineIxpEnabledModule then
-			reactModule.useEffect(function() --[[ line: 678 ]]
+			reactModule.useEffect(function() --[[ line: 681 ]]
 				-- upvalues: wasRewritten (write), IXPService (copy), fStringExpChatRewriteInlineIxpLayerModule (copy)
 				if wasRewritten then
 					IXPService:LogFlagLinkedUserLayerExposure(fStringExpChatRewriteInlineIxpLayerModule)
@@ -655,7 +658,7 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 			}
 			local t_3 = { Color3 = var125.Color.Common.Scrim.Color3 }
 			local var143 = 0.7
-			t_3.Transparency = p39.transparencyValue:map(function(p41) --[[ line: 110 ]]
+			t_3.Transparency = p39.transparencyValue:map(function(p41) --[[ line: 111 ]]
 				-- upvalues: var143 (ref)
 				return if var143 == nil then 1 else var143 + p41 * (1 - var143)
 			end)
@@ -676,14 +679,14 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 				}
 				local t_6 = { Color3 = var125.Color.Content.Muted.Color3 }
 				local transparency = var125.Color.Content.Muted.Transparency
-				t_6.Transparency = p39.textTransparency:map(function(p42) --[[ line: 110 ]]
+				t_6.Transparency = p39.textTransparency:map(function(p42) --[[ line: 111 ]]
 					-- upvalues: transparency (ref)
 					return if transparency == nil then 1 else transparency + p42 * (1 - transparency)
 				end)
 				t_5.textStyle = t_6
 				local t_7 = { Color = Color3.fromRGB(0, 0, 0) }
 				local var148 = 0.5
-				t_7.Transparency = p39.textTransparency:map(function(p43) --[[ line: 110 ]]
+				t_7.Transparency = p39.textTransparency:map(function(p43) --[[ line: 111 ]]
 					-- upvalues: var148 (ref)
 					return if var148 == nil then 1 else var148 + p43 * (1 - var148)
 				end)
@@ -697,7 +700,7 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 			t_4.Divider = if var128 then reactModule.createElement(foundationModule.Divider, {
 				LayoutOrder = 2,
 				orientation = foundationModule.Enums.Orientation.Horizontal,
-				Visible = p39.textTransparency:map(function(p44) --[[ line: 766 ]]
+				Visible = p39.textTransparency:map(function(p44) --[[ line: 769 ]]
 					return p44 < 1
 				end),
 				DividerVariant = foundationModule.Enums.DividerVariant.Default
@@ -715,14 +718,14 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 			}
 			local t_6 = { Color3 = var125.Color.Content.Default.Color3 }
 			local transparency = var125.Color.Content.Default.Transparency
-			t_6.Transparency = p39.textTransparency:map(function(p45) --[[ line: 110 ]]
+			t_6.Transparency = p39.textTransparency:map(function(p45) --[[ line: 111 ]]
 				-- upvalues: transparency (ref)
 				return if transparency == nil then 1 else transparency + p45 * (1 - transparency)
 			end)
 			t_5.textStyle = t_6
 			local t_7 = { Color = Color3.fromRGB(0, 0, 0) }
 			local var152 = 0.5
-			t_7.Transparency = p39.textTransparency:map(function(p46) --[[ line: 110 ]]
+			t_7.Transparency = p39.textTransparency:map(function(p46) --[[ line: 111 ]]
 				-- upvalues: var152 (ref)
 				return if var152 == nil then 1 else var152 + p46 * (1 - var152)
 			end)
@@ -739,7 +742,7 @@ return reactModule.memo(function(p39) --[[ line: 633 | named "TranslatedTextMess
 		var137 = var136
 	end
 	return var137
-end, function(p47, p48) --[[ line: 806 | named "areEqual" ]]
+end, function(p47, p48) --[[ line: 809 | named "areEqual" ]]
 	-- upvalues: fFlagExpChatFixLocalUserVerifiedBadgeModule (ref), fFlagEnableInExpChatRewriteModule (ref), fFlagExpChatRewriteInlineModule (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagExpChatPresetChatEnabled (ref)
 	local var153 = false
 	

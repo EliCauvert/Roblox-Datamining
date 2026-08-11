@@ -66,7 +66,6 @@
 	ExperienceDetailsTeleportFailed = "ExperienceDetailsTeleportFailed",
 	MomentsFirstUIRenderedTimestamp = "MomentsFirstUIRenderedTimestamp",
 	MomentsFirstContentLoadedTimestamp = "MomentsFirstContentLoadedTimestamp",
-	MomentsSwipeLatency = "MomentsSwipeLatency",
 	MomentsGalleryAccessGranted = "MomentsGalleryAccessGranted",
 	ReactionEngagementToastImpression = "ReactionEngagementToastImpression",
 	ReactionEngagementToastButtonPressed = "ReactionEngagementToastButtonPressed",

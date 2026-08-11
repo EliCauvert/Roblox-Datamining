@@ -1,0 +1,1 @@
+﻿return require(script.Parent:WaitForChild("FFlagIEMFocusNavToButtons")) and game:DefineFastFlag("IEMResumeButtonPressBugfix", false)

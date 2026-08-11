@@ -625,18 +625,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,의견을
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,어린 플레이어를 보호하기 위해 13세 미만의 사용자 계정은 피드백을 보낼 수 없습니다.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,피드백 이용 불가
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,캡처 추가
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,선택 항목 편집
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,사용 가능한 캡처가 없습니다.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,캡처({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,크리에이터가 문제를 파악할 수 있도록 도와주세요.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,캡처 불러오는 중...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{max}개 중 {count}개 선택됨
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,하나 이상의 캡처를 업로드하지 못했습니다.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,버그 신고
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,아이템 또는 데이터 복원
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,카테고리*
@@ -645,14 +634,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,카테고리
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,구매 문제
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,최대 {MAX}자
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,세부 정보*
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,선택 취소
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,게임 버전 및 해당 문제를 재현하는 단계 등 문제와 관련된 모든 사항을 포함해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"누락된 항목과 마지막으로 본 시기를 설명해 주세요. 계정이 해킹된 경우, Roblox CS 문의 양식 번호와 관련 세부 정보를 포함해 주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,요청 사항이나 문제를 여기에 설명해 주세요. 상황을 이해하는 데 도움이 되도록 가능한 한 많은 정보를 제공해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"구매하려던 아이템, 구매 시도 시기, 총 금액(예: 500 Robux/4.99달러)을 알려주세요. 표시된 오류 메시지가 있다면 포함해주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,신고하기를 진행하시겠어요?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>대신 신고를 제출하세요.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,선택
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,크리에이터가 올바른 계정을 지원하는 데 도움이 됩니다.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,크리에이터와 사용자 정보 공유
@@ -921,7 +908,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,캐릭터를 리스폰할까�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,이 서버를 나가 다른 서버로 전환하려고 합니다.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,이전에 방문한 게임에 참가
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,이 체험에서 나가고 {PREVIOUS_EXPERIENCE}(으)로 돌아갑니다.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,이 게임을 떠나 {PREVIOUS_GAME}에 돌아가려고 합니다.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,진동 
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,을 눌러야 합니다
@@ -1233,7 +1222,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,규정 위반 및 이의 신청
 Feature.Avatar.Action.AddNewMakeupLook,새로운 룩 추가
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,
+Feature.Avatar.Action.CancelSelection,선택 취소
 Feature.Avatar.Action.Clear,지우기
 Feature.Avatar.Action.ComposerPost,게시
 Feature.Avatar.Action.ComposerPreviewAndPost,미리 보기 및 게시
@@ -1270,7 +1259,7 @@ Feature.Avatar.Action.Revert,되돌리기
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,저장
 Feature.Avatar.Action.SaveAsNew,새 코스튬으로 저장
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,선택
 Feature.Avatar.Action.SelectMultipleItems,여러 아이템 선택
 Feature.Avatar.Action.SelectSlot,슬롯 선택
 Feature.Avatar.Action.Share,공유
@@ -2310,6 +2299,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1시간
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1분
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1주
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}주
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,사용 불가
 Feature.Chat.Label.UnknownUser,알 수 없는 사용자
 Feature.Chat.Label.User,사용자

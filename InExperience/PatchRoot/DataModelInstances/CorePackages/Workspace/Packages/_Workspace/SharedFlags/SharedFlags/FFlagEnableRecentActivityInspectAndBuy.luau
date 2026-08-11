@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableRecentActivityInspectAndBuy", false) and require(script.Parent.FFlagSocialEnableProfileInspectAndBuy)

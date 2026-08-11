@@ -1,5 +1,5 @@
-﻿game:DefineFastFlag("SingleUploadMakeupSupport3", false)
+﻿game:DefineFastFlag("SingleUploadMakeupSupport2", false)
 
 return function() --[[ line: 3 ]]
-	return game:GetFastFlag("SingleUploadMakeupSupport3")
+	return game:GetFastFlag("SingleUploadMakeupSupport2")
 end

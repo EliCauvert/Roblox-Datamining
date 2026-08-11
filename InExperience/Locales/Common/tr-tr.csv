@@ -626,18 +626,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Düşünc
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,Genç oyuncuları korumak için 13 yaşından küçüklerin hesapları geri dönüş gönderemez.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Geri Dönüş Gönderilemiyor
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Yakalananları ekle
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Seçimi düzenle
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Hiç yakalanan yok.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Yakalananlar ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Yaratıcının sorununu anlamasına yardımcı ol.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Yakalananlar yükleniyor...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,"{date}, {time}"
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} seçildi
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Yakaladığın bir veya daha fazla görüntü yüklenemedi.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Hata raporu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Öğe veya veri geri yükleme
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategori *
@@ -646,14 +635,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Bir kategori
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Satın alma sorunu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,En fazla {MAX} karakter
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Ayrıntılar *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Seçimi kaldır
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,Oyun sürümü ve sorunun adım adım yeniden oluşturulması gibi konuyla ilgili olabilecek tüm bilgileri ekle.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,Neyin eksik olduğunu ve bunu en son ne zaman gördüğünü açıkla. Hesabın ele geçirildiyse lütfen Roblox Müşteri Desteği'ndeki destek talebi numaranı ve ilgili tüm ayrıntıları ekle.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,İsteğini veya sorununu burada açıkla. Durumu anlamamıza yardımcı olmak için mümkün olduğunca fazla ayrıntı ver.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Bize ne satın almaya çalıştığını, bunun ne zaman gerçekleştiğini ve toplam değerini (ör. 500 Robux/4,99 $) söyle. Gördüğün hata mesajlarını ekle."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Kötüye kullanım bildirmeye mi çalışıyorsun?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Bunun yerine bir rapor gönder.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Seç
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,"Bu, yaratıcının doğru hesabı desteklemesine yardımcı olur."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Kullanıcı bilgilerini yaratıcıyla paylaş
@@ -922,7 +909,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Karakter sıfırlansın mı?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Bu sunucudan ayrılıp başka bir sunucuya geçmek üzeresin.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ayrılıyor musun?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bu oyundan ayrılıp {PREVIOUS_GAME} oyununa dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Titreşim
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,tuşuna basmayı gerektirir
@@ -1271,7 +1260,7 @@ Feature.Avatar.Action.Revert,Geri Döndür
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Kaydet
 Feature.Avatar.Action.SaveAsNew,Yeni olarak kaydet
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,Seç
 Feature.Avatar.Action.SelectMultipleItems,Birden fazla öğe seç
 Feature.Avatar.Action.SelectSlot,Yuvayı Seç
 Feature.Avatar.Action.Share,
@@ -1285,7 +1274,7 @@ Feature.Avatar.Action.Stay,Kal
 Feature.Avatar.Action.Switch,Geçiş yap
 Feature.Avatar.Action.TryOn,Üstüne Dene
 Feature.Avatar.Action.Unequip,Donanmayı bırak
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,Seçimi kaldır
 Feature.Avatar.Action.UnslotEmote,İfadeyi Yuvadan Kaldır
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,Mevcut karakteri güncelle
@@ -2310,6 +2299,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 sa.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı

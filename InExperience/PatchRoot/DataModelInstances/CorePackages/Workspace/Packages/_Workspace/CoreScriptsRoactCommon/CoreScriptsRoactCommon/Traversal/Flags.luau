@@ -9,5 +9,8 @@ return {
 	FFlagUseLocalTraversalHistory = useLocalTraversalHistory699v1,
 	FFlagUseTeleportTraversalHistory = useTeleportTraversalHistory699v1,
 	FIntMaximumTraversalHistoryItemsFetch = game:DefineFastInt("MaximumTraversalHistoryItemsFetch", 20),
-	FFlagTraversalExpPagePaddingFixes = game:DefineFastFlag("TraversalExpPagePaddingFixes709", false)
+	FFlagTraversalExpCardFontSizeFix = game:DefineFastFlag("TraversalExpCardFontSizeFix", false),
+	FFlagTraversalExpPagePaddingFixes = game:DefineFastFlag("TraversalExpPagePaddingFixes709", false),
+	FFlagTraversalHistoryMenuFocusNavFix = game:DefineFastFlag("TraversalHistoryMenuFocusNavFix709", false),
+	FFlagFixTraversalHistoryMenuFixesV3 = game:DefineFastFlag("FixTraversalHistoryMenuFixesV3v1", false)
 }

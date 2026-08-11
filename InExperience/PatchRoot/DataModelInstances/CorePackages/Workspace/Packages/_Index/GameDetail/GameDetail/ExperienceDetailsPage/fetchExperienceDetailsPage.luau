@@ -30,7 +30,6 @@ return function(p0, p1, p2) --[[ line: 16 | named "fetchExperienceDetailsPage" ]
 				client_capabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
 					enabled_capabilities = sduiCapabilities.getEnabledCapabilityNumbers({
 						"CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON",
-						"CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION",
 						"CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION",
 						"CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION"
 					})

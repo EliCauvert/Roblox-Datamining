@@ -7,7 +7,12 @@ local deepLinkNavigationLockThrottlingHundredthsPercent = game:DefineFastInt("De
 local unauthorizedErrorThrottlingHundredthsPercent = game:DefineFastInt("UnauthorizedErrorThrottlingHundredthsPercent", 0)
 local iosAuthServiceLoginThrottlingHundredthsPercent = game:DefineFastInt("IosAuthServiceLoginThrottlingHundredthsPercent", 0)
 local iosAuthServiceHealthCounterThrottlingHundredthsPercent = game:DefineFastInt("IosAuthServiceHealthCounterThrottlingHundredthsPercent", 0)
+local luaLogoutThrottlingHundredthsPercent = game:DefineFastInt("LuaLogoutThrottlingHundredthsPercent", 0)
 local keystoreTelemetryThrottlingHundredthsPercent = game:DefineFastInt("KeystoreTelemetryThrottlingHundredthsPercent", 0)
+local var11 = if game:DefineFastFlag("FixIosAuthServiceCredentialSheetBackends", false) then { loggingProtocolModule.TelemetryBackends.Counter } else {
+	loggingProtocolModule.TelemetryBackends.Counter,
+	loggingProtocolModule.TelemetryBackends.EventIngest
+}
 
 return {
 	LandingPageMountTelemetryConfig = {
@@ -175,7 +180,7 @@ return {
 		description = "Counting logouts by reason.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
 		backends = { "RobloxTelemetryCounter" },
-		throttlingPercentage = game:DefineFastInt("LuaLogoutThrottlingHundredthsPercent", 0),
+		throttlingPercentage = luaLogoutThrottlingHundredthsPercent,
 		lastUpdated = { 26, 1, 21 }
 	},
 	UnauthorizedErrorTelemetryConfig = {
@@ -222,10 +227,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetShown",
 		description = "Report when the iOS credential sheet is shown during login.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 2, 11 }
 	},
@@ -233,10 +235,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetPasswordSelected",
 		description = "Report when a user selects a password from the iOS credential sheet during login.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 2, 11 }
 	},
@@ -244,10 +243,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetPasskeySelected",
 		description = "Report when a user selects a passkey from the iOS credential sheet during login.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 2, 11 }
 	},
@@ -255,10 +251,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetError",
 		description = "Report when the iOS credential sheet returns an error during login.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 2, 11 }
 	},
@@ -266,10 +259,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetDismissed",
 		description = "Report when the iOS credential sheet is dismissed without selection during login.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 2, 11 }
 	},
@@ -317,10 +307,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetLoginSuccess",
 		description = "Report when a login attempt using a credential selected from the iOS credential sheet succeeds.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 6, 23 }
 	},
@@ -328,10 +315,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetLoginFailure",
 		description = "Report when a login attempt using a credential selected from the iOS credential sheet fails.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 6, 23 }
 	},
@@ -339,10 +323,7 @@ return {
 		eventName = "iosAuthServiceLoginCredentialSheetUnavailable",
 		description = "Report when the iOS credential sheet could not be shown during login because no supported credential types (password or passkey) were available.",
 		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
-		backends = {
-			loggingProtocolModule.TelemetryBackends.Counter,
-			loggingProtocolModule.TelemetryBackends.EventIngest
-		},
+		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 6, 24 }
 	},

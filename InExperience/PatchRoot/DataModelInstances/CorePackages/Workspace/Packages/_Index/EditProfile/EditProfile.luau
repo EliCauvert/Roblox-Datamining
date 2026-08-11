@@ -1,5 +1,8 @@
 ﻿return {
 	Analytics = require(script.Analytics),
+	EditProfilePage = require(script.Components.EditProfileEntryPoint),
+	EditDisplayNameModal = require(script.Components.EditDisplayNameModal),
+	EditDescriptionModal = require(script.Components.EditDescriptionModal),
 	EditDisplayNameErrorModal = require(script.Components.ErrorModals.EditDisplayNameErrorModal),
 	EditSocialNetworksErrorModal = require(script.Components.ErrorModals.EditSocialNetworksErrorModal),
 	UsernameInsufficientFundsModal = require(script.Components.ErrorModals.UsernameInsufficientFundsModal),

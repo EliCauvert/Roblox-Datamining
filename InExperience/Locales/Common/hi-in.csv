@@ -608,18 +608,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,अपन
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"युवा प्लेयर्स की सुरक्षा के लिए, 13 साल से कम उम्र वाले यूज़र के अकाउंट से फ़ीडबैक नहीं भेजा जा सकता."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,फ़ीडबैक उपलब्ध नहीं है
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,कैप्चर जोड़ें
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,सिलेक्शन एडिट करें
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,कोई कैप्चर उपलब्ध नहीं है.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,कैप्चर ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,क्रिएटर की मदद करें ताकि वे आपकी समस्या देख सकें.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,कैप्चर लोड हो रहे हैं...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} को चुना गया
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,आपके एक या एक से ज़्यादा स्क्रीनशॉट अपलोड नहीं हो सके.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,बग रिपोर्ट
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,आइटम या डेटा रीस्टोरेशन
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,कैटगरी *
@@ -628,14 +617,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,कोई �
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,खरीदारी से जुड़ी समस्या
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ज़्यादा से ज़्यादा {MAX} कैरेक्टर
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,जानकारी *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,चुने गए का निशान हटाएँ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"समस्या से संबंधित कोई भी जानकारी शामिल करें, जैसे कि गेम का वर्ज़न और स्टेप्स को दोबारा देखने के लिए क्या करना होगा."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"बताएँ कि क्या गायब है और आपने उसे आखिरी बार कब देखा था. अगर आपका अकाउंट हैक कर लिया गया था, तो कृपया अपना Roblox CS टिकट नंबर और कोई भी संबंधित जानकारी शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,अपनी रिक्वेस्ट या समस्या की जानकारी यहाँ दें. स्थिति को समझने में हमारी मदद करने के लिए ज़्यादा से ज़्यादा जानकारी दें.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"हमें बताएँ कि आपने क्या खरीदने की कोशिश की, यह कब हुआ और कुल कीमत क्या थी (जैसे कि 500 Robux / $4.99). आपको दिख रहा कोई भी गड़बड़ी मैसेज शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,दुर्व्यवहार की रिपोर्ट करने की कोशिश की जा रही है?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>इसके बजाय रिपोर्ट सबमिट करें.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,चुनें
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,इससे क्रिएटर को सही अकाउंट को सपोर्ट करने में मदद मिलती है.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,क्रिएटर के साथ यूज़र की जानकारी शेयर करें
@@ -904,7 +891,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,कैरेक्टर र�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,आपको इस सर्वर को छोड़कर दूसरे सर्वर पर स्विच किया जा रहा है.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,आपको जाना है?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,आप इस गेम को छोड़कर वापस {PREVIOUS_GAME} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,वाइब्रेशन
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,मेन्यू नेविगेशन टॉगल करने के लिए
@@ -1252,7 +1241,7 @@ Feature.Avatar.Action.Revert,रिवर्ट करें
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,सेव करें
 Feature.Avatar.Action.SaveAsNew,नए नाम से सेव करें
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,चुनें
 Feature.Avatar.Action.SelectMultipleItems,कई आइटम चुनें
 Feature.Avatar.Action.SelectSlot,स्लॉट चुनें
 Feature.Avatar.Action.Share,शेयर करें
@@ -2291,6 +2280,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 घंटा
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र

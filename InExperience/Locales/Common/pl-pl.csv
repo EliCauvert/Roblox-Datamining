@@ -626,18 +626,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Dziękuje
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Aby chronić młodszych graczy, konta osób poniżej 13 roku życia nie mogą wysyłać opinii."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Opinia niedostępna
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,Wstecz
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Dodaj przechwycone elementy
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Edytuj wybór
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Brak przechwyconych elementów.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Przechwycone elementy ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Pomóż twórcy zrozumieć Twój problem.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Wczytuję przechwycone elementy…
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} – {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,Wybrano {count}/{max}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Nie udało się przesłać co najmniej jednego z przechwyconych elementów.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Zgłoszenie błędu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Przywracanie przedmiotu lub danych
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategoria *
@@ -646,14 +635,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Wybierz kate
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problem z zakupem
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Maksymalna liczba znaków: {MAX}
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Szczegóły *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Odznacz
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Podaj wszelkie istotne informacje dotyczące problemu, takie jak wersja gry i sposób, w jaki można odtworzyć kroki."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Opisz, czego brakuje i kiedy ostatnio to widziałeś(-aś). Jeżeli Twoje konto zostało zhakowane, podaj numer zgłoszenia do zespołu wsparcia klienta Robloxa i wszelkie istotne szczegóły."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,"W tym miejscu opisz swoją prośbę lub problem. Podaj jak najwięcej szczegółów, aby pomóc nam zrozumieć sytuację."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Powiedz nam, co próbowałeś(-aś) kupić, kiedy to się stało i podaj całkowitą wartość (np. 500 Robuxów / 4,99 USD). Dołącz wszelkie wyświetlone komunikaty o błędach."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Próbujesz zgłosić naruszenie?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Zamiast tego prześlij zgłoszenie.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Zaznacz
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,"Dzięki temu twórca może odpowiednio zidentyfikować konto, któremu należy udzielić pomocy."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Udostępnij twórcy dane użytkownika
@@ -922,7 +909,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Odrodzić postać?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Opuścisz ten serwer i przełączysz się na inny.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Wychodzisz?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Dołącz do wcześniej odwiedzonych gier
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Opuścisz tę grę i wrócisz do: {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Opuścisz tę grę i wrócisz do {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Wibracje
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,w celu przełączenia nawigacji w menu
@@ -2310,6 +2299,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 godz.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 tydz.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} tyg.
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,Nieznany użytkownik
 Feature.Chat.Label.User,Użytkownik

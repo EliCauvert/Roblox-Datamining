@@ -26,7 +26,5 @@ return {
 	MarketplaceLook = require(script.MarketplaceLook),
 	Song = require(script.Song),
 	UserSettings = require(script.UserSettings),
-	UserProfile = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then require(script.UserProfile) else nil else nil,
-	Community = if fFlagSduiExperienceDetailsSupport then require(script.Community) else nil,
-	CommunityUserMembership = if fFlagSduiExperienceDetailsSupport then require(script.CommunityUserMembership) else nil
+	UserProfile = if fFlagSduiExperienceDetailsSupport then if fFlagSduiExperienceDetailsSupport then require(script.UserProfile) else nil else nil
 }
