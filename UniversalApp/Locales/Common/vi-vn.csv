@@ -278,6 +278,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Đăng nhập bằng QQ
 Authentication.Login.Action.QuickSignIn,Đăng nhập nhanh
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Gửi mã
 Authentication.Login.Action.SendVerificationEmail,Gửi email xác minh
 Authentication.Login.Action.SignIn,Đăng nhập
 Authentication.Login.Action.UsePasskey,Sử dụng mã xác nhận
@@ -290,8 +291,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Nhập mã chúng tôi v
 Authentication.Login.Description.GetOneTimeCodeHelp,Nhập email đã xác minh cho tài khoản của bạn để nhận mã một lần.
 Authentication.Login.Description.PasskeyDescription,"Tài khoản của bạn có mã xác nhận, phương thức đăng nhập an toàn hơn mật khẩu. Bạn có thể sử dụng vân tay, khuôn mặt hoặc khóa màn hình để đăng nhập trên thiết bị này."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Chúng tôi không thể xác định thiết bị của bạn có hỗ trợ mã xác nhận hay không. Hãy thử lại hoặc chạm vào ""Lỗi Đăng Nhập"" để khôi phục tài khoản của bạn bằng email hoặc số điện thoại."
+Authentication.Login.Description.PasskeyMobileOnly,Mã xác nhận chỉ dùng được trên thiết bị di động. Vui lòng chọn cách đăng nhập khác.
+Authentication.Login.Description.VerificationCodeSentTo,"Nếu tài khoản Roblox tồn tại, bạn sẽ nhận được mã xác minh tại địa chỉ {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
+Authentication.Login.Heading.EnterYourCode,Nhập mã của bạn
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Đăng nhập vào Roblox
@@ -313,6 +317,8 @@ Authentication.Login.Label.ConnectionError.Title,Lỗi kết nối
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Email của bạn cần xác minh
 Authentication.Login.Label.EmailOrPhone,Email hoặc điện thoại
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,Nhập email
 Authentication.Login.Label.EnterOneTimeCode,Nhập mã một lần
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Hãy nhập mã chúng tôi vừa gửi tới email của bạn
 Authentication.Login.Label.ForgotYourPassword,Bạn đã quên mật khẩu?
@@ -974,9 +980,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Âm Lượng
 CoreScripts.InGameMenu.Leave,Rời Khỏi
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Mời Bạn Bè
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
 CoreScripts.PremiumModal.Title.Error,Lỗi
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2561,7 +2565,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1g
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Không có
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
@@ -3021,6 +3024,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Hoạt động gần đây
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Hoạt động gần đây của {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,{num_minutes}p

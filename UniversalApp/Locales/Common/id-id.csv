@@ -278,6 +278,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Log In QQ
 Authentication.Login.Action.QuickSignIn,Log in cepat
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Kirim kode
 Authentication.Login.Action.SendVerificationEmail,Kirim Email Verifikasi
 Authentication.Login.Action.SignIn,Log In
 Authentication.Login.Action.UsePasskey,Gunakan Passkey
@@ -290,8 +291,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Masukkan kode yang baru 
 Authentication.Login.Description.GetOneTimeCodeHelp,Masukkan email terverifikasi di akun kamu untuk menerima kode sekali pakai.
 Authentication.Login.Description.PasskeyDescription,"Akunmu memiliki passkey, yaitu metode log in yang lebih aman daripada password. Kamu bisa menggunakan sidik jari, wajah, atau kunci layar untuk log in di perangkat ini."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,Kami tidak bisa menentukan apakah perangkatmu mendukung passkey. Coba lagi atau ketuk “Masalah log in” untuk memulihkan akunmu dengan email atau nomor ponsel.
+Authentication.Login.Description.PasskeyMobileOnly,Passkey hanya tersedia di ponsel. Pilih cara lain untuk log in.
+Authentication.Login.Description.VerificationCodeSentTo,"Jika ada akun Roblox, kamu akan menerima kode verifikasi di {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
+Authentication.Login.Heading.EnterYourCode,Masukkan kodemu
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
 Authentication.Login.Heading.Login,Log in
 Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
@@ -313,6 +317,8 @@ Authentication.Login.Label.ConnectionError.Title,Kesalahan koneksi
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Email kamu perlu diverifikasi
 Authentication.Login.Label.EmailOrPhone,Alamat email atau nomor ponsel
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,Masukkan alamat email
 Authentication.Login.Label.EnterOneTimeCode,Masukkan Kode Sekali Pakai
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Masukkan kode yang baru saja kami kirim ke email kamu
 Authentication.Login.Label.ForgotYourPassword,Lupa kata sandi?
@@ -974,9 +980,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Undang Teman
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ingin keluar?
 CoreScripts.PremiumModal.Title.Error,Eror
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2559,7 +2563,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1j
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Tidak tersedia
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
@@ -3019,6 +3022,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Tambahkan
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Aktivitas Baru-Baru Ini
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Aktivitas {username} Baru-Baru Ini
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

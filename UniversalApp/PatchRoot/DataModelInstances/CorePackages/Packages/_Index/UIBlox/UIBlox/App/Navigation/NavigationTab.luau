@@ -11,6 +11,9 @@ local label = require(parent.Core.ImageSet.ImageSetComponent).Label
 local navigationTabLayoutModule = require(parent.App.Navigation.Enum.NavigationTabLayout)
 local _ = require(parent.App.ImageSet.ImagesTypes)
 local _ = require(parent.App.Style.StyleTypes)
+local isBuilderIcon = foundationModule.Utility.isBuilderIcon
+local inputSize = foundationModule.Enums.InputSize
+local icon = foundationModule.Icon
 local statusIndicator = foundationModule.StatusIndicator
 local migrateBadgeVariantModule = require(parent.Utility.migrateBadgeVariant)
 local vector2 = Vector2.new(1e999, 1e999)
@@ -21,12 +24,12 @@ local t = {
 	layout = navigationTabLayoutModule.Stacked
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 69 ]]
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), textService (ref), vector2 (ref), label (ref), navigationTabLayoutModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), UIBloxConfigModule (ref), stateLayerModule (ref)
+return reactModule.forwardRef(function(p0, p1) --[[ line: 78 ]]
+	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), reactModule (ref), textService (ref), vector2 (ref), UIBloxConfigModule (ref), isBuilderIcon (ref), icon (ref), inputSize (ref), label (ref), navigationTabLayoutModule (ref), statusIndicator (ref), migrateBadgeVariantModule (ref), stateLayerModule (ref)
 	local var11 = cryoModule.Dictionary.join(t, p0)
 	local tokens = useStyleModule().Tokens
 	local var12, var13 = reactModule.useBinding(UDim2.new())
-	local var14 = reactModule.useCallback(function(p2) --[[ line: 73 ]]
+	local var14 = reactModule.useCallback(function(p2) --[[ line: 82 ]]
 		-- upvalues: var13 (ref)
 		var13(UDim2.fromOffset(p2.AbsoluteSize.X, p2.AbsoluteSize.Y))
 	end, {})
@@ -41,7 +44,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 69 ]]
 		end
 	end
 	local var18
-	local var16 = reactModule.useMemo(function() --[[ line: 86 ]]
+	local var16 = reactModule.useMemo(function() --[[ line: 95 ]]
 		-- upvalues: var11 (ref), textService (copy), value (write), vector2 (copy)
 		if var11.hasLabel and var11.labelText and var11.labelTypography then
 			local labelTextTextSize = textService:GetTextSize(var11.labelText, value, var11.labelTypography.Font, vector2)
@@ -61,14 +64,33 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 69 ]]
 	if var11.renderIcon then
 		var18 = var11.renderIcon(var11.isChecked)
 	else
-		local var19 = if var11.isChecked then tokens.Semantic.Color.Icon.Emphasis else tokens.Semantic.Color.Icon.Default
-		var18 = reactModule.createElement(label, {
+		local var19 = if var11.isChecked and var11.iconCheckedImage then var11.iconCheckedImage else var11.iconImage
+		local var20 = if var11.isChecked then tokens.Semantic.Color.Icon.Emphasis else tokens.Semantic.Color.Icon.Default
+		local name = nil
+		local variant = nil
+		
+		if UIBloxConfigModule.addFoundationNavigationTabIcon then
+			if typeof(var19) == "string" then
+				if isBuilderIcon(var19) then
+					name = var19
+				end
+			elseif typeof(var19) == "table" and var19.name ~= nil and isBuilderIcon(var19.name) then
+				name = var19.name
+				variant = var19.variant
+			end
+		end
+		var18 = if UIBloxConfigModule.addFoundationNavigationTabIcon and name ~= nil then reactModule.createElement(icon, {
+			name = name,
+			size = inputSize.Large,
+			variant = variant,
+			style = var20
+		}) else reactModule.createElement(label, {
 			BackgroundTransparency = 1,
 			Size = uDim2,
-			Image = if var11.isChecked and var11.iconCheckedImage then var11.iconCheckedImage else var11.iconImage,
+			Image = var19,
 			ScaleType = Enum.ScaleType.Fit,
-			ImageColor3 = var19.Color3,
-			ImageTransparency = var19.Transparency
+			ImageColor3 = var20.Color3,
+			ImageTransparency = var20.Transparency
 		})
 	end
 	if var11.layout == navigationTabLayoutModule.Stacked and var11.badgeValue ~= nil then
@@ -90,7 +112,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 69 ]]
 	local textLabel = nil
 	
 	if var11.hasLabel and var11.labelText then
-		local var21 = if var11.isChecked then tokens.Semantic.Color.Text.Emphasis else tokens.Semantic.Color.Text.Default
+		local var22 = if var11.isChecked then tokens.Semantic.Color.Text.Emphasis else tokens.Semantic.Color.Text.Default
 		textLabel = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -102,8 +124,8 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 69 ]]
 			Font = if var11.labelTypography then var11.labelTypography.Font else nil,
 			TextSize = if var11.labelTypography then var11.labelTypography.FontSize else nil,
 			LineHeight = if var11.labelTypography then var11.labelTypography.LineHeight else nil,
-			TextColor3 = var21.Color3,
-			TextTransparency = var21.Transparency
+			TextColor3 = var22.Color3,
+			TextTransparency = var22.Transparency
 		})
 	end
 	local frame = nil
@@ -133,11 +155,11 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 69 ]]
 		})
 	elseif var11.layout == navigationTabLayoutModule.Inline then
 		uDim = UDim.new(0, tokens.Semantic.Radius.Large)
-		local var24 = if var11.isChecked then tokens.Semantic.Color.State.Standard.Pressed else { Transparency = 1, Color3 = nil }
+		local var25 = if var11.isChecked then tokens.Semantic.Color.State.Standard.Pressed else { Transparency = 1, Color3 = nil }
 		frame = reactModule.createElement("Frame", {
 			AutomaticSize = Enum.AutomaticSize.XY,
-			BackgroundTransparency = var24.Transparency,
-			BackgroundColor3 = var24.Color3,
+			BackgroundTransparency = var25.Transparency,
+			BackgroundColor3 = var25.Color3,
 			Size = UDim2.fromOffset(tokens.Global.Space_600, tokens.Global.Space_500),
 			[reactModule.Change.AbsoluteSize] = var14
 		}, {
