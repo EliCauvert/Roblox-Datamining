@@ -69,6 +69,7 @@ return function() --[[ line: 21 | named "useLayoutValues" ]]
 		DropDownHeaderBackgroundSize = if fFlagPlayerListDropDownShowPlatformNameModule then var9.Size.Size_1800 else var9.Size.Size_1600,
 		DropDownHeaderDisplayNameTextSize = if fFlagEnableMobilePlayerListOnConsoleModule then var9.FontSize.FontSize_400 else nil,
 		DropDownHeaderPlayerNameTextSize = if fFlagEnableMobilePlayerListOnConsoleModule then var9.FontSize.FontSize_300 else nil,
-		DropDownScreenSidePadding = size100
+		DropDownScreenSidePadding = size100,
+		PlayerScrollListSizeTwoTabsOnLegacy = UDim2.new(1, 0, 1, -var9.Size.Size_1100)
 	})
 end

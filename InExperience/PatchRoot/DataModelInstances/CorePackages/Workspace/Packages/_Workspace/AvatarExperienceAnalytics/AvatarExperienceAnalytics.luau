@@ -1,6 +1,5 @@
 ﻿return {
 	AnalyticsService = require(script.AnalyticsService),
-	AvatarExperienceAnalyticsService = require(script.AvatarExperienceAnalyticsService),
 	AXUnifiedEventFilter = require(script.AXUnifiedEventFilter),
 	addUnifiedEventLogging = require(script.addUnifiedEventLogging),
 	useUnifiedEventListener = require(script.useUnifiedEventListener),

@@ -29,7 +29,7 @@ local function rankToLayoutOrder(p2) --[[ line: 41 ]]
 	return if p2 == nil then 1000000 else p2
 end
 
-return reactModule.memo(function(p3) --[[ line: 61 | named "PlatformEntryViewImpl" ]]
+return reactModule.memo(function(p3) --[[ line: 63 | named "PlatformEntryViewImpl" ]]
 	-- upvalues: signalsReactModule (ref), var9 (ref), var11 (ref), reactModule (ref), formatScoreCell (ref), formatRankCell (ref), fFlagPlayerListReskinOptimizationModule (ref), rankToLayoutOrder (ref), constantsModule (ref), leaderboardRowShellModule (ref), leaderboardTextCellModule (ref), peopleCellModule (ref)
 	local var15 = p3.isHeader == true
 	local var16 = signalsReactModule.useSignalBinding(p3.scoreGetter or var9)
@@ -39,17 +39,17 @@ return reactModule.memo(function(p3) --[[ line: 61 | named "PlatformEntryViewImp
 	
 	return reactModule.createElement(leaderboardRowShellModule, {
 		rowHeight = rowHeight,
-		layoutOrder = if fFlagPlayerListReskinOptimizationModule then reactModule.useMemo(function() --[[ line: 86 ]]
+		layoutOrder = if fFlagPlayerListReskinOptimizationModule then reactModule.useMemo(function() --[[ line: 88 ]]
 			-- upvalues: p3 (ref), var17 (ref), rankToLayoutOrder (copy)
 			return if p3.layoutOrder == nil then var17:map(rankToLayoutOrder) else p3.layoutOrder
 		end, { p3.layoutOrder, var17 }) elseif p3.layoutOrder ~= nil then var17:map(rankToLayoutOrder) else p3.layoutOrder,
-		isHighlighted = p3.isViewer == true,
+		isHighlighted = p3.isViewer == true and p3.highlightViewerRow ~= false,
 		showDivider = p3.showDivider == true,
 		flexTag = constantsModule.PLATFORM_ROW_FLEX_TAG
 	}, {
 		RankCell = reactModule.createElement(leaderboardTextCellModule, {
 			layoutOrder = 1,
-			text = reactModule.useMemo(function() --[[ line: 75 ]]
+			text = reactModule.useMemo(function() --[[ line: 77 ]]
 				-- upvalues: var15 (ref), var17 (ref), formatRankCell (copy)
 				return if var15 then "Rank" else var17:map(formatRankCell)
 			end, { var15, var17 }),
@@ -65,7 +65,7 @@ return reactModule.memo(function(p3) --[[ line: 61 | named "PlatformEntryViewImp
 		}),
 		ScoreCell = reactModule.createElement(leaderboardTextCellModule, {
 			layoutOrder = 3,
-			text = reactModule.useMemo(function() --[[ line: 68 ]]
+			text = reactModule.useMemo(function() --[[ line: 70 ]]
 				-- upvalues: var15 (ref), scoreLabel (ref), var16 (ref), formatScoreCell (copy)
 				return if var15 then scoreLabel or "-" else var16:map(formatScoreCell)
 			end, { var15, var16, scoreLabel }),

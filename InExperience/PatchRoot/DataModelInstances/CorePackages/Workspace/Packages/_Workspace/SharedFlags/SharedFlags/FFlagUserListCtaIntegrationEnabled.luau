@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("UserListCtaIntegrationEnabled_v2", false)
+﻿return game:DefineFastFlag("UserListCtaIntegrationEnabled", false)

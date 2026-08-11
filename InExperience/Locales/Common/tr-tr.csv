@@ -589,15 +589,15 @@ CoreScripts.Feedback.EntryPoint.OptionText,Çeviri Geri Bildiriminde Bulun
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Çık
 CoreScripts.Feedback.FeedbackBar.HelpButton,Yardım
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Eklemek istediklerini aşağıda belirt
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Eklemek istediklerini aşağıda belirt (isteğe bağlı)
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,Eklemek istediklerini buraya gir
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
-CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Doğru çevirisi nedir? *
+CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Doğru çevirisi nedir? (isteğe bağlı)
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Deneyim Nesnesi: {ObjectType}
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Doğru çeviriyi buraya gir
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Seçilen Görsel
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Bu çevirideki sorun nedir?
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Bu çevirideki sorun nedir? (isteğe bağlı)
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Doğruluk Sorunu
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Uygunsuz veya Aşağılayıcı
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Yazım veya Dil Bilgisi Sorunu
@@ -626,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Düşünc
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,Genç oyuncuları korumak için 13 yaşından küçüklerin hesapları geri dönüş gönderemez.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Geri Dönüş Gönderilemiyor
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Yakalananları ekle
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Seçimi düzenle
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Hiç yakalanan yok.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Yakalananlar ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Yaratıcının sorununu anlamasına yardımcı ol.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Yakalananlar yükleniyor...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,"{date}, {time}"
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} seçildi
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Yakaladığın bir veya daha fazla görüntü yüklenemedi.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Hata raporu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Öğe veya veri geri yükleme
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategori *
@@ -635,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Bir kategori
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Satın alma sorunu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,En fazla {MAX} karakter
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Ayrıntılar *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Seçimi kaldır
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,Oyun sürümü ve sorunun adım adım yeniden oluşturulması gibi konuyla ilgili olabilecek tüm bilgileri ekle.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,Neyin eksik olduğunu ve bunu en son ne zaman gördüğünü açıkla. Hesabın ele geçirildiyse lütfen Roblox Müşteri Desteği'ndeki destek talebi numaranı ve ilgili tüm ayrıntıları ekle.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,İsteğini veya sorununu burada açıkla. Durumu anlamamıza yardımcı olmak için mümkün olduğunca fazla ayrıntı ver.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Bize ne satın almaya çalıştığını, bunun ne zaman gerçekleştiğini ve toplam değerini (ör. 500 Robux/4,99 $) söyle. Gördüğün hata mesajlarını ekle."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Kötüye kullanım bildirmeye mi çalışıyorsun?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Bunun yerine bir rapor gönder.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Seç
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,"Bu, yaratıcının doğru hesabı desteklemesine yardımcı olur."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Kullanıcı bilgilerini yaratıcıyla paylaş
@@ -909,9 +922,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Karakter sıfırlansın mı?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Bu sunucudan ayrılıp başka bir sunucuya geçmek üzeresin.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Ayrılıyor musun?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bu oyundan ayrılıp {PREVIOUS_GAME} oyununa dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Titreşim
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,tuşuna basmayı gerektirir
@@ -1232,7 +1243,6 @@ Feature.Avatar.Action.CreateSetFirstRun,Set oluştur
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Varsayılan Görünüm
 Feature.Avatar.Action.Delete,
-Feature.Avatar.Action.DeleteAvatars,Avatarları sil
 Feature.Avatar.Action.DeleteSet,Seti sil
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Profil Resmini Düzenle
@@ -1249,9 +1259,7 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Şimdi Değil
 Feature.Avatar.Action.Pan,Kamerayı hareket ettir
 Feature.Avatar.Action.Posting,Paylaşılıyor
-Feature.Avatar.Action.Remove,Kaldır
 Feature.Avatar.Action.RemoveAll,Tümünü Kaldır
-Feature.Avatar.Action.RemoveFromSet,Setten kaldır
 Feature.Avatar.Action.Rename,Yeniden Adlandır
 Feature.Avatar.Action.RenameSet,Seti yeniden adlandır
 Feature.Avatar.Action.Reset,
@@ -1260,7 +1268,7 @@ Feature.Avatar.Action.Revert,Geri Döndür
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Kaydet
 Feature.Avatar.Action.SaveAsNew,Yeni olarak kaydet
-Feature.Avatar.Action.Select,Seç
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Birden fazla öğe seç
 Feature.Avatar.Action.SelectSlot,Yuvayı Seç
 Feature.Avatar.Action.Share,
@@ -1274,7 +1282,7 @@ Feature.Avatar.Action.Stay,Kal
 Feature.Avatar.Action.Switch,Geçiş yap
 Feature.Avatar.Action.TryOn,Üstüne Dene
 Feature.Avatar.Action.Unequip,Donanmayı bırak
-Feature.Avatar.Action.Unselect,Seçimi kaldır
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,İfadeyi Yuvadan Kaldır
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,Mevcut karakteri güncelle
@@ -1321,7 +1329,6 @@ Feature.Avatar.Heading.SelectToUpdate,Güncellemek İçin Seç
 Feature.Avatar.Heading.SetLimitReached,Set sınırına ulaşıldı
 Feature.Avatar.Heading.SetNameDuplicate,Yinelenen ad
 Feature.Avatar.Heading.SetNameNotAllowed,Ada izin verilmiyor
-Feature.Avatar.Heading.SetUpdateFailed,Set güncellenemedi
 Feature.Avatar.Heading.SharePublicAvatar,Avatarını paylaş
 Feature.Avatar.Heading.SortBy,Sıralama ölçütü
 Feature.Avatar.Heading.UsedName,Ad Kullanılmış
@@ -1393,7 +1400,6 @@ Feature.Avatar.Label.CountSelected,{itemCount} Öğe Seçildi
 Feature.Avatar.Label.Creations,Yaratımlar
 Feature.Avatar.Label.CurrentlyWearing,Şu anda giyilen
 Feature.Avatar.Label.DefaultBody,Varsayılan Gövde
-Feature.Avatar.Label.DeleteSetBody,Bu set silindiğinde içindeki kıyafetler silinmez.
 Feature.Avatar.Label.Details,Detaylar ({quantity})
 Feature.Avatar.Label.DetailsButton,Ayrıntılar
 Feature.Avatar.Label.DressesAndSkirts,Elbiseler ve Etekler
@@ -1451,7 +1457,6 @@ Feature.Avatar.Label.LeftLegs,Sol Bacaklar
 Feature.Avatar.Label.LeftShoe,Sol Ayakkabı
 Feature.Avatar.Label.LeftShoes,Sol Ayakkabılar
 Feature.Avatar.Label.LipMakeup,Dudaklar
-Feature.Avatar.Label.LoadingSets,Setler yükleniyor
 Feature.Avatar.Label.Looks,Görünümler
 Feature.Avatar.Label.Makeup,Makyaj
 Feature.Avatar.Label.MakeupLayer,Katman {layerIndex}
@@ -1470,7 +1475,6 @@ Feature.Avatar.Label.Newest,En yeni
 Feature.Avatar.Label.NoExpiredItems,Süresi dolmuş {itemType} yok
 Feature.Avatar.Label.NoItems,{itemType} yok
 Feature.Avatar.Label.NoLongerAvailableInCollection,Artık bu koleksiyonda bulunmayacaklar
-Feature.Avatar.Label.NoSets,Henüz set yok
 Feature.Avatar.Label.Outerwear,Dış Giyim
 Feature.Avatar.Label.OutfitIncomplete,Oluşturduğun kıyafet satın alınmadı ve deneyimde gösterilmeyecek
 Feature.Avatar.Label.OutfitPurchaseFailure,Üzgünüz! [{numItems}] satın alım başarısız oldu!
@@ -1496,7 +1500,6 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Yakın zamanda giyilen
-Feature.Avatar.Label.RemoveFromSetBody,Bu avatarlar bu setten kaldırılacak ancak silinmeyecek.
 Feature.Avatar.Label.Replace,Değiştir
 Feature.Avatar.Label.ResetToNewCharacter,Yeni bir karaktere geçiş yapıyorsun. Tüm kıyafet öğelerini sıfırlamak mı yoksa saklamak mı istersin?
 Feature.Avatar.Label.Right,Sağ
@@ -1516,7 +1519,6 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Son Aramalar
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Son Görüntülenenler
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Şunun için alışverişe devam et:
 Feature.Avatar.Label.SelectItem,Öğe seç
-Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,En fazla {setLimit} setin olabilir. Yer açmak için birini sil
 Feature.Avatar.Label.SetNameDuplicateBody,"Bu ada sahip bir setin zaten var, farklı bir ad seç"
 Feature.Avatar.Label.SetNameNotAllowedBody,Lütfen başka bir ad seç
@@ -1678,7 +1680,6 @@ Feature.Avatar.Title.ClearBodyConfirmation,Vücut temizlensin mi?
 Feature.Avatar.Title.ClearClothesConfirmation,Tüm kıyafetler temizlensin mi?
 Feature.Avatar.Title.ClearMakeupConfirmation,Tüm makyaj temizlensin mi?
 Feature.Avatar.Title.CreateSet,
-Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Yinelenen Görünüm
 Feature.Avatar.Title.EnhancedAvatarHeads,Geliştirilmiş Avatar Kafaları
 Feature.Avatar.Title.GetOutfit,Kıyafet Al
@@ -1697,9 +1698,7 @@ Feature.Avatar.Title.NewCustomizeLook,Özelleştir Yeni Bir Görünüme Kavuştu
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Pazar Yerinde Yeniler
 Feature.Avatar.Title.OutfitIncomplete,Tamamlanmamış Kıyafet
 Feature.Avatar.Title.Preview,
-Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Makyaj görünümünü yeniden adlandır
-Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,Yeni Karakter
 Feature.Avatar.Title.RevertToDefault,Varsayılana geri döndür
@@ -1708,7 +1707,6 @@ Feature.Avatar.Title.SavedAvatarsLocation,Kaydedilen Avatarların burada
 Feature.Avatar.Title.SelectEmoteForAvatar,Avatarına poz verdirmek için bir ifade seç
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Bir makyaj görünümü seç
 Feature.Avatar.Title.SelectMakeupLooks,Görünüm seç
-Feature.Avatar.Title.SelectSet,Set seç
 Feature.Avatar.Title.SingleDeleteOutfit,"""{outfitName}"" silinsin mi?"
 Feature.Avatar.Title.TrendingItemWidget,Popüler Öğeler
 Feature.Avatar.Title.TrendingLooksWidget,Popüler Tarzlar
@@ -1852,7 +1850,7 @@ Feature.Catalog.Action.OpenDetails,Ayrıntıları Aç
 Feature.Catalog.Action.Owned,Sahip olunan: {count}
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
-Feature.Catalog.Action.Remove,
+Feature.Catalog.Action.Remove,Kaldır
 Feature.Catalog.Action.RemoveFavorite,
 Feature.Catalog.Action.Rent,Kirala
 Feature.Catalog.Action.Replace,
@@ -2299,7 +2297,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 sa.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı

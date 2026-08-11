@@ -241,8 +241,6 @@ return {
 	Backgrounds = {
 		loadBackgroundAsset = require(script.Backgrounds.loadBackgroundAsset),
 		selectActiveBackground = require(script.Backgrounds.selectActiveBackground),
-		selectActiveBackgroundPreview = require(script.Backgrounds.selectActiveBackgroundPreview),
-		previewImageRegistry = require(script.Backgrounds.previewImageRegistry),
 		buildOutfitProfileConfiguration = require(script.Backgrounds.buildOutfitProfileConfiguration),
 		normalizeBackgroundId = require(script.Backgrounds.normalizeBackgroundId),
 		NO_BACKGROUND_ASSET_ID = require(script.Backgrounds.constants).NO_BACKGROUND_ASSET_ID

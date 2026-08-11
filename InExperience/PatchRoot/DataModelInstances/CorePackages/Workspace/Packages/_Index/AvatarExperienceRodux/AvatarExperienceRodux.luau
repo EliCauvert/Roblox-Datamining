@@ -24,7 +24,6 @@ return {
 		SetAccessoryAdjustments = require(script.Actions.SetAccessoryAdjustments),
 		SetAnimationPreview = require(script.Actions.SetAnimationPreview),
 		SetAvatarSceneRoute = require(script.Actions.SetAvatarSceneRoute),
-		SetBackgroundPreview = require(script.Actions.SetBackgroundPreview),
 		SetEquippedInTryOnManager = require(script.Actions.SetEquippedInTryOnManager),
 		SetItemDetailsPeekViewState = require(script.Actions.SetItemDetailsPeekViewState),
 		SetItemTryOnPeekViewState = require(script.Actions.SetItemTryOnPeekViewState),

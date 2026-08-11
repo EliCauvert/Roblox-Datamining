@@ -1,6 +1,5 @@
 ﻿local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
 local name = require(timeToInteractiveTracker.Logger):new(script.Name)
-local fFlagLuaAppPerfTrackerUseLogger = require(timeToInteractiveTracker.Parent.SharedFlags).FFlagLuaAppPerfTrackerUseLogger
 local fFlagDebugTimeToInteractiveTrackerModule = require(timeToInteractiveTracker.Utils.FFlagDebugTimeToInteractiveTracker)
 local fFlagTimeToInteractiveTrackerWarningsRequireDebugModule = require(timeToInteractiveTracker.Utils.FFlagTimeToInteractiveTrackerWarningsRequireDebug)
 local _ = require(script.Parent.Parent.types)
@@ -8,10 +7,10 @@ local nowModule = require(timeToInteractiveTracker.Utils.now)
 local getMemoryMbModule = require(timeToInteractiveTracker.Utils.getMemoryMb)
 local fFlagTTITrackerMemoryTrackingModule = require(timeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(p0, p1) --[[ line: 24 ]]
-	-- upvalues: nowModule (ref), fFlagLuaAppPerfTrackerUseLogger (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (ref), fFlagDebugTimeToInteractiveTrackerModule (ref), name (ref), fFlagTTITrackerMemoryTrackingModule (ref), getMemoryMbModule (ref)
-	return function(p2, p3, p4) --[[ line: 25 ]]
-		-- upvalues: nowModule (copy), p0 (ref), fFlagLuaAppPerfTrackerUseLogger (copy), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), p1 (ref)
+return function(p0, p1) --[[ line: 22 ]]
+	-- upvalues: nowModule (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (ref), fFlagDebugTimeToInteractiveTrackerModule (ref), name (ref), fFlagTTITrackerMemoryTrackingModule (ref), getMemoryMbModule (ref)
+	return function(p2, p3, p4) --[[ line: 23 ]]
+		-- upvalues: nowModule (copy), p0 (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), p1 (ref)
 		local var7 = nowModule()
 		local var8 = p0(false)[p2]
 		
@@ -25,7 +24,7 @@ return function(p0, p1) --[[ line: 24 ]]
 				totalMemoryMB = if var9 then var9.totalMemoryMB else nil,
 				luaHeapMB = if var9 then var9.luaHeapMB else nil
 			}
-			p1(function(p5) --[[ line: 66 ]]
+			p1(function(p5) --[[ line: 52 ]]
 				-- upvalues: p2 (ref), t (ref)
 				local var11 = p5[p2]
 				
@@ -43,26 +42,14 @@ return function(p0, p1) --[[ line: 24 ]]
 			end)
 			
 			return
-		elseif fFlagLuaAppPerfTrackerUseLogger then
-			if fFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
-				if fFlagDebugTimeToInteractiveTrackerModule then
-					name:warning(`called before trackStart for eventName={p2}`)
-					
-					return
-				end
-			else
+		elseif fFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
+			if fFlagDebugTimeToInteractiveTrackerModule then
 				name:warning(`called before trackStart for eventName={p2}`)
 				
 				return
 			end
-		elseif fFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
-			if fFlagDebugTimeToInteractiveTrackerModule then
-				warn(`TimeToInteractiveTracker.trackMilestone called before trackStart for eventName={p2}`)
-				
-				return
-			end
 		else
-			warn(`TimeToInteractiveTracker.trackMilestone called before trackStart for eventName={p2}`)
+			name:warning(`called before trackStart for eventName={p2}`)
 		end
 	end
 end

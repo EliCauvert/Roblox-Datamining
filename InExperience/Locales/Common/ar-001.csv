@@ -572,15 +572,15 @@ CoreScripts.Feedback.EntryPoint.OptionText,ملاحظات حول الترجمة
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,الخروج
 CoreScripts.Feedback.FeedbackBar.HelpButton,المساعدة
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,يمكنك تقديم أي تعليقات إضافية أدناه
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,تقديم أي تعليقات إضافية أدناه (اختياري)
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,أدخل أي تعليقات إضافية لديك هنا
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
-CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,ما هي الترجمة الصحيحة؟ *
+CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,ما هي الترجمة الصحيحة؟ (إختياري)
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,عنصر الخبرة: {ObjectType}
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,أدخل الترجمة الصحيحة هنا
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,الصورة المحددة
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,ما هي المشكلة في هذه الترجمة؟
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,ما هي المشكلة في هذه الترجمة؟ (اختياري)
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,مشكلة في الدقة
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,غير لائق أو فيه استهزاء
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,مشكلة في الكتابة أو الإعراب
@@ -609,7 +609,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,شكرً�
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,لحماية اللاعبين الأصغر سنًا، لا يمكن للحسابات التي تقل أعمار أصحابها عن 13 عامًا إرسال الملاحظات.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,الملاحظات غير متاحة
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,إضافة لقطات
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,تحرير التحديد
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,لا توجد أي لقطات متاحة.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,اللقطات ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,ساعد المصمّم في الاطلاع على مشكلتك.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,جارٍ تحميل اللقطات...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,تم تحديد {count}/{max}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,تعذَّر رفع لقطة واحدة أو أكثر من لقطاتك.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,الإبلاغ عن خطأ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,استعادة العناصر أو البيانات
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,الفئة *
@@ -618,12 +629,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,تحديد �
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,مشكلة في الشراء
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,بحد أقصى {MAX} من الأحرف
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,التفاصيل *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,إلغاء التحديد
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,قم بتضمين أي شيء ذي صلة بالمشكلة، مثل إصدار اللعبة وكيفية إعادة تكرار الخطوات.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,صِف ما هو مفقود ومتى رأيته آخر مرة. إذا تعرض حسابك للاختراق، يرجى تضمين رقم بطاقة دعم العملاء لدى منصّة Roblox وأي تفاصيل ذات صلة.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,صِف طلبك أو مشكلتك هنا. قدّم أكبر قدر ممكن من التفاصيل لمساعدتنا في فهم الموقف.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,أخبرنا بما حاولت شراؤه، ومتى حدث ذلك، والقيمة الإجمالية (على سبيل المثال 500 Robux / 4.99 دولار أمريكي). قم بتضمين أي رسائل خطأ رأيتها.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,هل تحاول الإبلاغ عن إساءة؟
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>إرسال بلاغ بدلًا من ذلك.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,تحديد
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,يساعد هذا المصمّم في دعم الحساب الصحيح.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,مشاركة معلومات المستخدم مع المصمّم
@@ -892,9 +905,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,استرجاع حياة ال�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,أنت على وشك الخروج من هذا الخادم والتبديل إلى خادم آخر.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,هل تريد الخروج؟
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,اهتزاز
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,لتبديل التنقل في القائمة
@@ -1212,8 +1223,6 @@ Feature.Avatar.Action.CreateSetFirstRun,إنشاء مجموعة
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,العرض الافتراضي
 Feature.Avatar.Action.Delete,
-Feature.Avatar.Action.DeleteAvatars,حذف الأفاتارات
-Feature.Avatar.Action.DeleteSet,حذف المجموعة
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,تحرير صورة الملف الشخصي
 Feature.Avatar.Action.GoBack,
@@ -1229,18 +1238,15 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,ليس الآن
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,جارٍ النشر
-Feature.Avatar.Action.Remove,إزالة
 Feature.Avatar.Action.RemoveAll,إزالة الكل
-Feature.Avatar.Action.RemoveFromSet,إزالة من المجموعة
 Feature.Avatar.Action.Rename,إعادة تسمية
-Feature.Avatar.Action.RenameSet,إعادة تسمية المجموعة
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,استعادة الأفاتار المحفوظ آخر مرة
 Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,حفظ
 Feature.Avatar.Action.SaveAsNew,حفظ كجديد
-Feature.Avatar.Action.Select,تحديد
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,حدد عناصر متعددة
 Feature.Avatar.Action.SelectSlot,حدد خانة
 Feature.Avatar.Action.Share,مشاركة
@@ -1254,7 +1260,7 @@ Feature.Avatar.Action.Stay,البقاء
 Feature.Avatar.Action.Switch,تبديل
 Feature.Avatar.Action.TryOn,تجريب
 Feature.Avatar.Action.Unequip,إلغاء التجهيز
-Feature.Avatar.Action.Unselect,إلغاء التحديد
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,إزالة Emote من الخانة
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,تحديث الشخصية الموجودة
@@ -1299,9 +1305,7 @@ Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,حفظ الشخصية
 Feature.Avatar.Heading.SelectToUpdate,تحديد للتحديث
 Feature.Avatar.Heading.SetLimitReached,تم الوصول إلى الحد الأقصى للمجموعة
-Feature.Avatar.Heading.SetNameDuplicate,اسم مكرر
 Feature.Avatar.Heading.SetNameNotAllowed,الاسم غير مسموح به
-Feature.Avatar.Heading.SetUpdateFailed,تعذَّر تحديث المجموعة
 Feature.Avatar.Heading.SharePublicAvatar,مشاركة أفاتارك
 Feature.Avatar.Heading.SortBy,ترتيب حسب
 Feature.Avatar.Heading.UsedName,الاسم المستخدم
@@ -1373,7 +1377,6 @@ Feature.Avatar.Label.CountSelected,{itemCount} محددة
 Feature.Avatar.Label.Creations,التصاميم
 Feature.Avatar.Label.CurrentlyWearing,يرتدي حاليًا
 Feature.Avatar.Label.DefaultBody,الجسم الافتراضي
-Feature.Avatar.Label.DeleteSetBody,لن يؤدي حذف هذه المجموعة إلى حذف الأزياء الموجودة بداخلها.
 Feature.Avatar.Label.Details,التفاصيل ({quantity})
 Feature.Avatar.Label.DetailsButton,التفاصيل
 Feature.Avatar.Label.DressesAndSkirts,الفساتين والتنانير
@@ -1431,7 +1434,6 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,الحذاء الأيسر
 Feature.Avatar.Label.LeftShoes,الأحذية اليسرى
 Feature.Avatar.Label.LipMakeup,الشفاه
-Feature.Avatar.Label.LoadingSets,جارٍ تحميل المجموعات
 Feature.Avatar.Label.Looks,الإطلالات
 Feature.Avatar.Label.Makeup,المكياج
 Feature.Avatar.Label.MakeupLayer,طبقة {layerIndex}
@@ -1450,7 +1452,6 @@ Feature.Avatar.Label.Newest,الأحدث
 Feature.Avatar.Label.NoExpiredItems,لا توجد {itemType} منتهية الصلاحية
 Feature.Avatar.Label.NoItems,ليس لديك {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,لن تكون متاحة في هذه التشكيلة بعد الآن
-Feature.Avatar.Label.NoSets,لا توجد مجموعات حتى الآن
 Feature.Avatar.Label.Outerwear,ملابس خارجية
 Feature.Avatar.Label.OutfitIncomplete,الزي الذي أنشأته لم يتم شراؤه بعد ولن يظهر في التجربة
 Feature.Avatar.Label.OutfitPurchaseFailure,عذرًا! تعذرت عمليات شراء [{numItems}]!
@@ -1476,7 +1477,6 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,تم ارتداؤها مؤخرًا
-Feature.Avatar.Label.RemoveFromSetBody,ستتم إزالة هذه الأفاتارات من هذه المجموعة. ولن يتم حذفها.
 Feature.Avatar.Label.Replace,استبدال
 Feature.Avatar.Label.ResetToNewCharacter,أنت تبدّل إلى الشخصية الجديدة؛ هل تريد إعادة تعيين جميع عناصر الزي أو تريد الاحتفاظ بها؟
 Feature.Avatar.Label.Right,R
@@ -1496,7 +1496,6 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,عمليات الب�
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,العناصر التي تم عرضها مؤخرًا
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,واصِل التسوّق للعناصر
 Feature.Avatar.Label.SelectItem,حدد العنصر
-Feature.Avatar.Label.SetAvatarCount,{itemCount} من الأفاتارات
 Feature.Avatar.Label.SetLimitReachedBody,يمكنك الحصول على ما يصل إلى {setLimit} من المجموعات فقط. احذف واحدة لإفساح المجال
 Feature.Avatar.Label.SetNameDuplicateBody,لديك مجموعة بهذا الاسم بالفعل، اختر اسمًا مختلفًا
 Feature.Avatar.Label.SetNameNotAllowedBody,يُرجى اختيار اسم آخر
@@ -1645,7 +1644,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,كتابة تسمية توضيحي
 Feature.Avatar.RevokedItems.BodyText,"تمت إزالة العنصر ""{item}"" ضمن الفئة {category} من هذا الأفاتار المحفوظ، لذلك رددنا المبلغ الأصلي الذي دفعته.{lineBreak}يمكنك معاينة صندوق الوارد للحصول على مزيد من التفاصيل."
 Feature.Avatar.RevokedItems.BodyTextMultiple,تمت إزالة العناصر التالية من هذا الأفاتار المحفوظ، لذلك رددنا المبلغ الأصلي الذي دفعته.{lineBreak}{items}{lineBreak}يمكنك معاينة صندوق الوارد للحصول على مزيد من التفاصيل.
 Feature.Avatar.RevokedItems.ViewInbox,معاينة صندوق الوارد
-Feature.Avatar.SetNameDuplicate,
+Feature.Avatar.SetNameDuplicate,اسم مكرر
 Feature.Avatar.Text.MakeupLayeringTooltip,رتّبي مكياجك على طبقات
 Feature.Avatar.Title.AvatarRefinement,تحسين الأفاتار
 Feature.Avatar.Title.BulkDeleteMakeupLooks,هل تريد حذف {count} من إطلالات المكياج؟
@@ -1658,7 +1657,6 @@ Feature.Avatar.Title.ClearBodyConfirmation,هل تريد مسح الجسد؟
 Feature.Avatar.Title.ClearClothesConfirmation,هل تريد مسح كل الثياب؟
 Feature.Avatar.Title.ClearMakeupConfirmation,هل تريد مسح كل المكياج؟
 Feature.Avatar.Title.CreateSet,
-Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,تكرار الإطلالة
 Feature.Avatar.Title.EnhancedAvatarHeads,رؤوس أفاتار محسّنة
 Feature.Avatar.Title.GetOutfit,احصل على زيّ
@@ -1677,9 +1675,7 @@ Feature.Avatar.Title.NewCustomizeLook,ميزات التخصيص تظهر بوا�
 Feature.Avatar.Title.NewToMarketplaceItemWidget,جديد المتجر
 Feature.Avatar.Title.OutfitIncomplete,الزي غير مكتمل
 Feature.Avatar.Title.Preview,
-Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,إعادة تسمية إطلالة المكياج
-Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,شخصية جديدة
 Feature.Avatar.Title.RevertToDefault,
@@ -1688,7 +1684,6 @@ Feature.Avatar.Title.SavedAvatarsLocation,ستجد أفاتاراتك المحف
 Feature.Avatar.Title.SelectEmoteForAvatar,تحديد emote لإعطاء أفاتارك وضعية
 Feature.Avatar.Title.SelectMakeupLookForUpdate,تحديد إطلالة مكياج
 Feature.Avatar.Title.SelectMakeupLooks,تحديد الإطلالات
-Feature.Avatar.Title.SelectSet,تحديد المجموعة
 Feature.Avatar.Title.SingleDeleteOutfit,"هل تريد حذف ""{outfitName}""؟"
 Feature.Avatar.Title.TrendingItemWidget,عناصر دارجة
 Feature.Avatar.Title.TrendingLooksWidget,الأنماط الرائجة
@@ -1829,10 +1824,9 @@ Feature.Catalog.Action.ItemOptions,خيارات العنصر
 Feature.Catalog.Action.LoadMore,تحميل المزيد
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,فتح التفاصيل
-Feature.Catalog.Action.Owned,العناصر المملوكة: {count}
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
-Feature.Catalog.Action.Remove,
+Feature.Catalog.Action.Remove,إزالة
 Feature.Catalog.Action.RemoveFavorite,
 Feature.Catalog.Action.Rent,إيجار
 Feature.Catalog.Action.Replace,
@@ -2181,7 +2175,7 @@ Feature.Chat.Action.LearnMore,
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,كتم الصوت
 Feature.Chat.Action.Remove,
-Feature.Chat.Action.RemoveFromGroup,
+Feature.Chat.Action.RemoveFromGroup,إزالة من المجموعة
 Feature.Chat.Action.RemoveUser,إزالة المستخدم
 Feature.Chat.Action.Reply,رد
 Feature.Chat.Action.Report,
@@ -2279,7 +2273,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1س
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
-Feature.Chat.Label.TryAgain,حاول مرة أخرى
 Feature.Chat.Label.Unavailable,غير متاحة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
@@ -3329,7 +3322,6 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,اشترِك في Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,اشتراك Roblox Plus غير متاح هنا
 Feature.SafetyDashboard.Heading.AccountStatus,حالة الحساب
-Feature.Schools.Label.Classmates,زملاء الدراسة
 Feature.Screentime.Content.ScreentimeLimitDialog,لقد وصلت إلى الحدّ اليومي المخصص لوقت الشاشة. يمكنك العودة غدًا لمواصلة استخدام Roblox مرة أخرى.
 Feature.SecurityFeedback.Header.NewLogin,تنبيه بنشاط جديد
 Feature.Settings.Label.Error,

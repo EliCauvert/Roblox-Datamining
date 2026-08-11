@@ -133,29 +133,29 @@ local _ = function(value) --[[ line: 154 | named "formatSetupErrorMessage" ]]
 	end
 end
 
-local function createLocalToolControllers(p6, p7, p8) --[[ line: 165 ]]
+local function createLocalToolControllers(p6, p7) --[[ line: 165 ]]
 	-- upvalues: localToolOverlayModule (ref), askUserControllerModule (ref), proposePlanControllerModule (ref), clientLogsControllerModule (ref)
 	local t = {}
 	local var23 = localToolOverlayModule()
 	local var24 = askUserControllerModule(p6, t, var23, p7)
 	local var25 = proposePlanControllerModule(p6, t, var23, p7)
-	local var26 = clientLogsControllerModule(p6, t, p8)
+	local var26 = clientLogsControllerModule(p6, t)
 	
 	return {
 		getOptimisticLocalTools = var23.getOptimisticLocalTools,
 		getLocalToolActions = var23.getLocalToolActions,
 		hasDisplayedAnswerStack = var24.hasDisplayedAnswerStack,
-		syncFromTurnState = function(p9) --[[ line: 181 ]]
+		syncFromTurnState = function(p8) --[[ line: 180 ]]
 			-- upvalues: var24 (ref), var25 (ref), var26 (ref)
-			var24.syncAnswerStack(p9)
-			var25.syncPlanProposal(p9)
-			var26.syncClientLogsRequest(p9)
+			var24.syncAnswerStack(p8)
+			var25.syncPlanProposal(p8)
+			var26.syncClientLogsRequest(p8)
 		end,
-		trySubmitComposerText = function(p10) --[[ line: 186 ]]
+		trySubmitComposerText = function(p9) --[[ line: 185 ]]
 			-- upvalues: var24 (ref), var25 (ref)
-			return var24.trySubmitComposerText(p10) or var25.trySubmitComposerText(p10)
+			return var24.trySubmitComposerText(p9) or var25.trySubmitComposerText(p9)
 		end,
-		stopPending = function() --[[ line: 189 ]]
+		stopPending = function() --[[ line: 188 ]]
 			-- upvalues: var24 (ref), var25 (ref)
 			var24.stopPendingAnswer()
 			var25.stopPendingPlan()
@@ -164,13 +164,13 @@ local function createLocalToolControllers(p6, p7, p8) --[[ line: 165 ]]
 end
 
 return {
-	createLiveAssistantTurn = function(p11, p12, p13, p14, p15) --[[ line: 198 ]]
+	createLiveAssistantTurn = function(p10, p11, p12, p13) --[[ line: 197 ]]
 		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
-		local var27 = createLocalToolControllers(p11, p14, p15)
-		local universeId = p11.universeId
+		local var27 = createLocalToolControllers(p10, p13)
+		local universeId = p10.universeId
 		local var28 = nil
-		var28 = p11.sendPrompt({
-			prompt = p12,
+		var28 = p10.sendPrompt({
+			prompt = p11,
 			promptMeta = {
 				_roblox = {
 					localTools = {
@@ -182,18 +182,18 @@ return {
 					teamTestEnabled = fFlagEnableTeamTestLua
 				}
 			},
-			onDroppedChatMessage = function(p16) --[[ line: 224 ]]
-				-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p11 (ref)
+			onDroppedChatMessage = function(p14) --[[ line: 222 ]]
+				-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p10 (ref)
 				sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
 					universeId = universeId,
-					placeId = p11.placeId,
-					conversationId = p11.getCasSessionId(),
-					messageId = p16
+					placeId = p10.placeId,
+					conversationId = p10.getCasSessionId(),
+					messageId = p14
 				})
 			end,
-			onCompleted = function(p17) --[[ line: 238 ]]
-				-- upvalues: resolvePromptFailure (copy), var28 (write), debug (copy), universeId (ref), p11 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p13 (ref)
-				local var30 = resolvePromptFailure(p17, var28.getSetupError(false))
+			onCompleted = function(p15) --[[ line: 236 ]]
+				-- upvalues: resolvePromptFailure (copy), var28 (write), debug (copy), universeId (ref), p10 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p12 (ref)
+				local var30 = resolvePromptFailure(p15, var28.getSetupError(false))
 				
 				if var30 ~= nil then
 					debug.log("info", "prompt send failed", {
@@ -201,19 +201,19 @@ return {
 						isContentPolicy = var30.isContentPolicy,
 						setupStage = var30.setupStage,
 						universeId = universeId,
-						placeId = p11.placeId
+						placeId = p10.placeId
 					})
 					sendBuildExperienceEventModule("SEND_PROMPT_FAILED", {
 						universeId = universeId,
-						placeId = p11.placeId,
-						conversationId = p11.getCasSessionId()
+						placeId = p10.placeId,
+						conversationId = p10.getCasSessionId()
 					}, getPromptFailureTelemetryParameters(var30))
 				end
-				p13(var30)
+				p12(var30)
 			end
 		})
 		
-		local function getSetupErrorText(value) --[[ line: 261 ]]
+		local function getSetupErrorText(value) --[[ line: 259 ]]
 			-- upvalues: var28 (write), localizationStringsModule (copy), t_1 (copy)
 			local setupError = var28.getSetupError(value)
 			
@@ -239,7 +239,7 @@ return {
 		
 		debug.log("info", "creator agent local tools registered for prompt", {
 			universeId = universeId,
-			placeId = p11.placeId,
+			placeId = p10.placeId,
 			toolName = studioAskUserTool.TOOL_NAME,
 			planToolName = studioProposePlanTool.TOOL_NAME,
 			logsToolName = studioClientLogsTool.TOOL_NAME
@@ -249,11 +249,11 @@ return {
 			getOptimisticLocalTools = var27.getOptimisticLocalTools,
 			getLocalToolActions = var27.getLocalToolActions,
 			getSetupErrorText = getSetupErrorText,
-			start = function() --[[ line: 274 ]]
+			start = function() --[[ line: 272 ]]
 				-- upvalues: var28 (write)
 				var28.start()
 			end,
-			stop = function() --[[ line: 280 ]]
+			stop = function() --[[ line: 278 ]]
 				-- upvalues: var27 (ref), var28 (write)
 				var27.stopPending()
 				var28.stop()
@@ -263,16 +263,16 @@ return {
 			trySubmitComposerText = var27.trySubmitComposerText
 		}
 	end,
-	createResumedAssistantTurn = function(p18, p19, p20, p21, p22, p23) --[[ line: 297 ]]
+	createResumedAssistantTurn = function(p16, p17, p18, p19, p20) --[[ line: 295 ]]
 		-- upvalues: createLocalToolControllers (ref), signalsModule (ref), sendBuildExperienceEventModule (ref)
-		local var33 = createLocalToolControllers(p18, p22, p23)
+		local var33 = createLocalToolControllers(p16, p20)
 		local var34 = signalsModule.createSignal(nil)
 		local var35 = false
 		local var36 = false
 		local var37 = nil
 		local var38 = nil
 		
-		local function _() --[[ line: 319 | named "cleanupObservers" ]]
+		local function _() --[[ line: 316 | named "cleanupObservers" ]]
 			-- upvalues: var38 (write), var37 (write)
 			if var38 ~= nil then
 				var38()
@@ -284,8 +284,8 @@ return {
 			end
 		end
 		
-		local _ = function() --[[ line: 330 | named "finish" ]]
-			-- upvalues: var36 (write), var38 (write), var37 (write), p20 (ref)
+		local _ = function() --[[ line: 327 | named "finish" ]]
+			-- upvalues: var36 (write), var38 (write), var37 (write), p18 (ref)
 			if var36 then return end
 			var36 = true
 			
@@ -297,36 +297,36 @@ return {
 				var37()
 				var37 = nil
 			end
-			p20(nil)
+			p18(nil)
 		end
 		
 		return {
 			getOptimisticLocalTools = var33.getOptimisticLocalTools,
 			getLocalToolActions = var33.getLocalToolActions,
 			getSetupErrorText = var34,
-			start = function() --[[ line: 341 ]]
-				-- upvalues: var35 (write), sendBuildExperienceEventModule (copy), p18 (ref), p21 (ref), var37 (write), var38 (write), signalsModule (copy), p19 (ref), var36 (write), p20 (ref)
+			start = function() --[[ line: 338 ]]
+				-- upvalues: var35 (write), sendBuildExperienceEventModule (copy), p16 (ref), p19 (ref), var37 (write), var38 (write), signalsModule (copy), p17 (ref), var36 (write), p18 (ref)
 				if var35 then return end
 				var35 = true
 				local t = {
-					onDroppedChatMessage = function(p24) --[[ line: 347 ]]
-						-- upvalues: sendBuildExperienceEventModule (copy), p18 (copy)
+					onDroppedChatMessage = function(p21) --[[ line: 344 ]]
+						-- upvalues: sendBuildExperienceEventModule (copy), p16 (copy)
 						sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
-							universeId = p18.universeId,
-							placeId = p18.placeId,
-							conversationId = p18.getCasSessionId(),
-							messageId = p24
+							universeId = p16.universeId,
+							placeId = p16.placeId,
+							conversationId = p16.getCasSessionId(),
+							messageId = p21
 						})
 					end
 				}
 				
-				if p21 ~= nil then
-					t.afterSequenceId = p21
+				if p19 ~= nil then
+					t.afterSequenceId = p19
 				end
-				var37 = p18.startPollingActiveTurn(t)
-				var38 = signalsModule.createEffect(function(p25) --[[ line: 361 ]]
-					-- upvalues: p19 (copy), var36 (copy), var38 (copy), var37 (copy), p20 (copy)
-					if p19.state(p25).isDone then
+				var37 = p16.startPollingActiveTurn(t)
+				var38 = signalsModule.createEffect(function(p22) --[[ line: 358 ]]
+					-- upvalues: p17 (copy), var36 (copy), var38 (copy), var37 (copy), p18 (copy)
+					if p17.state(p22).isDone then
 						if var36 then return end
 						var36 = true
 						
@@ -338,12 +338,12 @@ return {
 							var37()
 							var37 = nil
 						end
-						p20(nil)
+						p18(nil)
 					end
 				end)
 			end,
-			stop = function() --[[ line: 373 ]]
-				-- upvalues: var36 (write), var38 (write), var37 (write), var33 (ref), p19 (ref)
+			stop = function() --[[ line: 370 ]]
+				-- upvalues: var36 (write), var38 (write), var37 (write), var33 (ref), p17 (ref)
 				var36 = true
 				
 				if var38 ~= nil then
@@ -355,9 +355,9 @@ return {
 					var37 = nil
 				end
 				var33.stopPending()
-				p19.cancel()
+				p17.cancel()
 			end,
-			detach = function() --[[ line: 379 ]]
+			detach = function() --[[ line: 376 ]]
 				-- upvalues: var36 (write), var38 (write), var37 (write), var33 (ref)
 				var36 = true
 				

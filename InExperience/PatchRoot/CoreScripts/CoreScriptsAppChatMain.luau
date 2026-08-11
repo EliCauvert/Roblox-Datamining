@@ -80,7 +80,7 @@ renderCoreScriptInExperienceAppChatModule(apolloClientModule, {
 	openFriendsChatConversation = if var21 then parentContainerModule.createOpenFriendsChatConversation({
 		isChatAvailable = var21.isAvailable,
 		openConversation = openConversationModule,
-		requestSelectTab = expChatModule.requestSelectTab,
+		requestSelectFriendsTab = expChatModule.requestSelectFriendsTab,
 		ensureOpenChat = var21.ensureOpenChat
 	}) else function(_) --[[ line: 70 ]]
 		-- upvalues: promiseModule (ref)

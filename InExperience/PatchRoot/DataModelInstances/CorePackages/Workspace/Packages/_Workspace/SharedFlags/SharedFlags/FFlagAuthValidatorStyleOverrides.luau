@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AuthValidatorStyleOverrides3", false)
+﻿return game:DefineFastFlag("AuthValidatorStyleOverrides", false)
