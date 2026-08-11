@@ -1338,7 +1338,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsa
 Feature.AddFriends.Label.MyQRTile,QR'ım
 Feature.AddFriends.Label.MyQrCode,QR Kodum
 Feature.AddFriends.Label.QRCodeTitle,QR kodu
-Feature.AddFriends.Label.SchoolTile,Okul
+Feature.AddFriends.Label.SchoolTile,Sınıf arkadaşları
 Feature.AddFriends.Label.SearchForFriendsPrompt,Kullanıcı adlarını veya görünen adlarını arayarak Roblox'taki kişileri bul.
 Feature.AddFriends.Label.ShareQRCodeAddConnection,Tanıdığın insanları eklemek için QR kodunu paylaş
 Feature.AddFriends.Label.SyncContactsInvitePeople,Arkadaşlarını bulup davet etmek için rehberindeki kişileri senkronize et!
@@ -1552,6 +1552,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Set oluştur
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Varsayılan Görünüm
 Feature.Avatar.Action.Delete,Sil
+Feature.Avatar.Action.DeleteAvatars,Avatarları sil
 Feature.Avatar.Action.DeleteSet,Seti sil
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Profil Resmini Düzenle
@@ -1568,7 +1569,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Şimdi Değil
 Feature.Avatar.Action.Pan,Kamerayı hareket ettir
 Feature.Avatar.Action.Posting,Paylaşılıyor
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Tümünü Kaldır
+Feature.Avatar.Action.RemoveFromSet,Setten kaldır
 Feature.Avatar.Action.Rename,Yeniden Adlandır
 Feature.Avatar.Action.RenameSet,Seti yeniden adlandır
 Feature.Avatar.Action.Reset,
@@ -1638,6 +1641,7 @@ Feature.Avatar.Heading.SelectToUpdate,Güncellemek İçin Seç
 Feature.Avatar.Heading.SetLimitReached,Set sınırına ulaşıldı
 Feature.Avatar.Heading.SetNameDuplicate,Yinelenen ad
 Feature.Avatar.Heading.SetNameNotAllowed,Ada izin verilmiyor
+Feature.Avatar.Heading.SetUpdateFailed,Set güncellenemedi
 Feature.Avatar.Heading.SharePublicAvatar,Avatarını paylaş
 Feature.Avatar.Heading.SortBy,Sıralama ölçütü
 Feature.Avatar.Heading.UsedName,Ad Kullanılmış
@@ -1709,6 +1713,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} Öğe Seçildi
 Feature.Avatar.Label.Creations,Yaratımlar
 Feature.Avatar.Label.CurrentlyWearing,Şu anda giyilen
 Feature.Avatar.Label.DefaultBody,Varsayılan Gövde
+Feature.Avatar.Label.DeleteSetBody,Bu set silindiğinde içindeki kıyafetler silinmez.
 Feature.Avatar.Label.Details,Detaylar ({quantity})
 Feature.Avatar.Label.DetailsButton,Ayrıntılar
 Feature.Avatar.Label.DressesAndSkirts,Elbiseler ve Etekler
@@ -1766,6 +1771,7 @@ Feature.Avatar.Label.LeftLegs,Sol Bacaklar
 Feature.Avatar.Label.LeftShoe,Sol Ayakkabı
 Feature.Avatar.Label.LeftShoes,Sol Ayakkabılar
 Feature.Avatar.Label.LipMakeup,Dudaklar
+Feature.Avatar.Label.LoadingSets,Setler yükleniyor
 Feature.Avatar.Label.Looks,Görünümler
 Feature.Avatar.Label.Makeup,Makyaj
 Feature.Avatar.Label.MakeupLayer,Katman {layerIndex}
@@ -1784,6 +1790,7 @@ Feature.Avatar.Label.Newest,En yeni
 Feature.Avatar.Label.NoExpiredItems,Süresi dolmuş {itemType} yok
 Feature.Avatar.Label.NoItems,{itemType} yok
 Feature.Avatar.Label.NoLongerAvailableInCollection,Artık bu koleksiyonda bulunmayacaklar
+Feature.Avatar.Label.NoSets,Henüz set yok
 Feature.Avatar.Label.Outerwear,Dış Giyim
 Feature.Avatar.Label.OutfitIncomplete,Oluşturduğun kıyafet satın alınmadı ve deneyimde gösterilmeyecek
 Feature.Avatar.Label.OutfitPurchaseFailure,Üzgünüz! [{numItems}] satın alım başarısız oldu!
@@ -1809,6 +1816,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Yakın zamanda giyilen
+Feature.Avatar.Label.RemoveFromSetBody,Bu avatarlar bu setten kaldırılacak ancak silinmeyecek.
 Feature.Avatar.Label.Replace,Değiştir
 Feature.Avatar.Label.ResetToNewCharacter,Yeni bir karaktere geçiş yapıyorsun. Tüm kıyafet öğelerini sıfırlamak mı yoksa saklamak mı istersin?
 Feature.Avatar.Label.Right,Sağ
@@ -1828,6 +1836,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Son Aramalar
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Son Görüntülenenler
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Şunun için alışverişe devam et:
 Feature.Avatar.Label.SelectItem,Öğe seç
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,En fazla {setLimit} setin olabilir. Yer açmak için birini sil
 Feature.Avatar.Label.SetNameDuplicateBody,"Bu ada sahip bir setin zaten var, farklı bir ad seç"
 Feature.Avatar.Label.SetNameNotAllowedBody,Lütfen başka bir ad seç
@@ -1989,6 +1998,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Vücut temizlensin mi?
 Feature.Avatar.Title.ClearClothesConfirmation,Tüm kıyafetler temizlensin mi?
 Feature.Avatar.Title.ClearMakeupConfirmation,Tüm makyaj temizlensin mi?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Yinelenen Görünüm
 Feature.Avatar.Title.EnhancedAvatarHeads,Geliştirilmiş Avatar Kafaları
 Feature.Avatar.Title.GetOutfit,Kıyafet Al
@@ -2007,7 +2017,9 @@ Feature.Avatar.Title.NewCustomizeLook,Özelleştir Yeni Bir Görünüme Kavuştu
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Pazar Yerinde Yeniler
 Feature.Avatar.Title.OutfitIncomplete,Tamamlanmamış Kıyafet
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Makyaj görünümünü yeniden adlandır
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,Yeni Karakter
 Feature.Avatar.Title.RevertToDefault,Varsayılana geri döndür
@@ -2016,6 +2028,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Kaydedilen Avatarların burada
 Feature.Avatar.Title.SelectEmoteForAvatar,Avatarına poz verdirmek için bir ifade seç
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Bir makyaj görünümü seç
 Feature.Avatar.Title.SelectMakeupLooks,Görünüm seç
+Feature.Avatar.Title.SelectSet,Set seç
 Feature.Avatar.Title.SingleDeleteOutfit,"""{outfitName}"" silinsin mi?"
 Feature.Avatar.Title.TrendingItemWidget,Popüler Öğeler
 Feature.Avatar.Title.TrendingLooksWidget,Popüler Tarzlar
@@ -4175,12 +4188,12 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Mezuniyet yılı
 Feature.Schools.GiftForYou,Senin için bir hediye
 Feature.Schools.Heading.AddSchool,Okul ekle
-Feature.Schools.Heading.AddSchoolNow,Okuluna katıl
+Feature.Schools.Heading.AddSchoolNow,Sınıf arkadaşlarına katıl
 Feature.Schools.Heading.CantFindSchool,Okulunu bulamıyoruz
 Feature.Schools.Heading.CantVerifySchool,Okulunu doğrulayamıyoruz
 Feature.Schools.Heading.CheckYourEmail,E-postanı kontrol et
 Feature.Schools.Heading.EnterSchoolEmail,Okul e-posta adresini gir
-Feature.Schools.Heading.JoinClassmates,Sınıf arkadaşlarına katıl
+Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} üye
 Feature.Schools.Heading.RemoveYourSchool,Okulunu kaldır
 Feature.Schools.Heading.SchoolIsLive,Okulun artık açık
@@ -4190,7 +4203,7 @@ Feature.Schools.Heading.ThanksForInterest,İlgin için teşekkürler
 Feature.Schools.Heading.YouJoinedSchool,{school} adlı okula katıldın!
 Feature.Schools.Heading.YourFounderReward,Kurucu ödülün
 Feature.Schools.Label.AlumniGroupLaunches,Mezunlar grubu kullanıma sunuluyor
-Feature.Schools.Label.Classmates,Sınıf arkadaşları
+Feature.Schools.Label.Classmates,
 Feature.Schools.Label.ConfirmSchool,Okul seç
 Feature.Schools.Label.ConnectWithClassmates,Sınıf arkadaşlarınla bağlantı kur
 Feature.Schools.Label.DidntGetCode,

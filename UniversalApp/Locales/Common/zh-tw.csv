@@ -1551,6 +1551,7 @@ Feature.Avatar.Action.CreateSetFirstRun,建立組合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,預設檢視模式
 Feature.Avatar.Action.Delete,刪除
+Feature.Avatar.Action.DeleteSet,刪除組合
 Feature.Avatar.Action.Discard,捨棄
 Feature.Avatar.Action.EditProfilePicture,編輯個人檔案圖片
 Feature.Avatar.Action.GoBack,
@@ -1568,6 +1569,7 @@ Feature.Avatar.Action.Pan,平移
 Feature.Avatar.Action.Posting,張貼中
 Feature.Avatar.Action.RemoveAll,移除全部
 Feature.Avatar.Action.Rename,更名
+Feature.Avatar.Action.RenameSet,重新命名組合
 Feature.Avatar.Action.Reset,重設
 Feature.Avatar.Action.RestoreLastSaved,還原上次儲存的虛擬人偶
 Feature.Avatar.Action.Revert,還原
@@ -1633,6 +1635,7 @@ Feature.Avatar.Heading.RenameCharacter,重新命名角色
 Feature.Avatar.Heading.SaveCostume,儲存角色
 Feature.Avatar.Heading.SelectToUpdate,選擇要更新的素材
 Feature.Avatar.Heading.SetLimitReached,已達組合上限
+Feature.Avatar.Heading.SetNameDuplicate,名稱重複
 Feature.Avatar.Heading.SetNameNotAllowed,不允許使用此名稱
 Feature.Avatar.Heading.SharePublicAvatar,分享您的虛擬人偶
 Feature.Avatar.Heading.SortBy,排序方式：
@@ -1972,7 +1975,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,為您的虛擬人偶撰寫說明 
 Feature.Avatar.RevokedItems.BodyText,{category}「{item}」道具已從這個已儲存的虛擬人偶中移除，因此我們退還了你原先支付的金額。{lineBreak}如需更多詳細資訊，請查看收件箱。
 Feature.Avatar.RevokedItems.BodyTextMultiple,以下道具已從這個已儲存的虛擬人偶中移除，因此我們退還了你原先支付的金額。{lineBreak}{items}{lineBreak}如需更多詳細資訊，請查看收件箱。
 Feature.Avatar.RevokedItems.ViewInbox,檢視收件箱
-Feature.Avatar.SetNameDuplicate,名稱重複
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,疊加妝容
 Feature.Avatar.Title.AvatarRefinement,虛擬人偶精緻
 Feature.Avatar.Title.BulkDeleteMakeupLooks,要刪除 {count} 個妝容造型嗎？
@@ -2087,6 +2090,7 @@ Feature.Catalog.Action.ItemOptions,道具選項
 Feature.Catalog.Action.LoadMore,載入更多
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,開啟詳細資料
+Feature.Catalog.Action.Owned,已擁有 {count} 個
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -3534,7 +3538,7 @@ Feature.NotApproved.Heading.BannedOneDayOnly,停權 1 天
 Feature.NotApproved.Heading.BannedOneHour,停權 1 小時
 Feature.NotApproved.Heading.BannedOneMinute,停權 1 分鐘
 Feature.NotApproved.Heading.BannedOneSecond,停權 1 秒
-Feature.NotApproved.Heading.Error,
+Feature.NotApproved.Heading.Error,發生未知錯誤，請稍後再試。
 Feature.NotApproved.Heading.ReactivationNotice,
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,讓每個人都感到友善溫暖
 Feature.NotApproved.Heading.RuleExplanation.Dating,保持友誼關係
@@ -4128,7 +4132,7 @@ Feature.RobloxSubscription.Title.GetBlackbird,取得 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,此處無法使用 Roblox Plus
 Feature.SafetyDashboard.Heading.AccountStatus,帳號狀態
 Feature.Schools.Action.AlreadyGraduated,我已經畢業了
-Feature.Schools.Action.CantFindSchool,找不到我的學校？
+Feature.Schools.Action.CantFindSchool,找不到學校嗎？
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,移除學校
 Feature.Schools.Action.Ok,
@@ -4175,6 +4179,8 @@ Feature.Schools.Heading.CantFindSchool,我們找不到你的學校
 Feature.Schools.Heading.CantVerifySchool,我們無法驗證你的學校
 Feature.Schools.Heading.CheckYourEmail,
 Feature.Schools.Heading.EnterSchoolEmail,輸入你的學校電子郵件
+Feature.Schools.Heading.InviteYourClassmates,邀請同學
+Feature.Schools.Heading.InviteYourFriends,
 Feature.Schools.Heading.JoinClassmates,加入同學的行列
 Feature.Schools.Heading.MembersWithCount,{count} 位成員
 Feature.Schools.Heading.RemoveYourSchool,移除你的學校
@@ -4185,7 +4191,8 @@ Feature.Schools.Heading.ThanksForInterest,感謝你對此感興趣
 Feature.Schools.Heading.YouJoinedSchool,你已加入 {school}！
 Feature.Schools.Heading.YourFounderReward,創辦人獎勵
 Feature.Schools.Label.AlumniGroupLaunches,校友群組已設立
-Feature.Schools.Label.ConfirmSchool,確認哪所學校
+Feature.Schools.Label.Classmates,同學
+Feature.Schools.Label.ConfirmSchool,選擇學校
 Feature.Schools.Label.ConnectWithClassmates,與同學交流互動
 Feature.Schools.Label.DidntGetCode,沒有收到代碼嗎？
 Feature.Schools.Label.MoreToUnlockSchool,還差 {count} 位即可設立學校群組

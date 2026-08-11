@@ -1441,7 +1441,7 @@ Feature.AppealsPortal.Label.ChatEvidenceId,Chat Evidence ID
 Feature.AppealsPortal.Label.Cheating,Cheating
 Feature.AppealsPortal.Label.ContentMaturity,Content Maturity Questionnaire Submission
 Feature.AppealsPortal.Label.DecisionCategory,What kind of decision do you want to appeal?
-Feature.AppealsPortal.Label.DisplayName,Display Name
+Feature.AppealsPortal.Label.DisplayName,Display name
 Feature.AppealsPortal.Label.DropdownPlaceholder,Select one
 Feature.AppealsPortal.Label.EmailConfirmation,Confirm your email
 Feature.AppealsPortal.Label.EmailInput,Your email
@@ -1465,7 +1465,7 @@ Feature.AppealsPortal.Label.LookName,Shared Avatar Name
 Feature.AppealsPortal.Label.PlaceIDPrompt,What's the place ID?
 Feature.AppealsPortal.Label.PlaceId,Place ID
 Feature.AppealsPortal.Label.PlaceName,Place Name
-Feature.AppealsPortal.Label.ProfileDescription,Profile Description
+Feature.AppealsPortal.Label.ProfileDescription,Profile description
 Feature.AppealsPortal.Label.Reason,Reason
 Feature.AppealsPortal.Label.ReportAndAppeals,Violations & Appeals
 Feature.AppealsPortal.Label.Type.Asset,Asset
@@ -1487,7 +1487,7 @@ Feature.AppealsPortal.Label.Type.Mesh,Mesh
 Feature.AppealsPortal.Label.Type.Model,Model
 Feature.AppealsPortal.Label.Type.Plugin,Plugin
 Feature.AppealsPortal.Label.Type.Screenshot,Screenshot
-Feature.AppealsPortal.Label.Type.UserProfile,User Profile
+Feature.AppealsPortal.Label.Type.UserProfile,User profile
 Feature.AppealsPortal.Label.Type.Video,Video
 Feature.AppealsPortal.Label.Type.Voice,Voice Chat
 Feature.AppealsPortal.Label.TypeBrokeRules.Generic,Your behavior broke the rules
@@ -3966,7 +3966,7 @@ Feature.Profile.Header.Inventory,
 Feature.Profile.Header.Store,
 Feature.Profile.Heading.AgedUpDisplayName,
 Feature.Profile.Heading.AgedUpDisplayNameUpdated,Name Updated.
-Feature.Profile.Heading.DisplayName,
+Feature.Profile.Heading.DisplayName,Display Name
 Feature.Profile.Heading.DisplayNameUpdated,Display Name Updated
 Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name

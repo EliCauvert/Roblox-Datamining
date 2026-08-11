@@ -1552,6 +1552,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Criar conjunto
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Visualização padrão
 Feature.Avatar.Action.Delete,Excluir
+Feature.Avatar.Action.DeleteSet,Excluir conjunto
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Editar imagem de perfil
 Feature.Avatar.Action.GoBack,
@@ -1569,6 +1570,7 @@ Feature.Avatar.Action.Pan,Mover
 Feature.Avatar.Action.Posting,Publicando
 Feature.Avatar.Action.RemoveAll,Remover tudo
 Feature.Avatar.Action.Rename,Renomear
+Feature.Avatar.Action.RenameSet,Renomear conjunto
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restaurar último avatar salvo
 Feature.Avatar.Action.Revert,Reverter
@@ -1634,6 +1636,7 @@ Feature.Avatar.Heading.RenameCharacter,Renomear personagem
 Feature.Avatar.Heading.SaveCostume,Salvar personagem
 Feature.Avatar.Heading.SelectToUpdate,Selecione para atualizar
 Feature.Avatar.Heading.SetLimitReached,Limite de conjuntos atingido
+Feature.Avatar.Heading.SetNameDuplicate,Duplicar nome
 Feature.Avatar.Heading.SetNameNotAllowed,Nome não permitido
 Feature.Avatar.Heading.SharePublicAvatar,Compartilhe seu avatar
 Feature.Avatar.Heading.SortBy,Ordenar por
@@ -1973,7 +1976,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Escreva uma legenda para seu avata
 Feature.Avatar.RevokedItems.BodyText,"""{item}"" da categoria {category} foi removido deste avatar salvo, então reembolsamos a quantia original paga.{lineBreak}Confira a caixa de entrada para conferir os detalhes."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Os seguintes itens foram removidos deste avatar salvo, então reembolsamos a quantia original paga.{lineBreak}{items}{lineBreak}Confira a caixa de entrada para conferir os detalhes."
 Feature.Avatar.RevokedItems.ViewInbox,Ver caixa de entrada
-Feature.Avatar.SetNameDuplicate,Duplicar nome
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,Faça camadas na sua maquiagem
 Feature.Avatar.Title.AvatarRefinement,Refinamento de avatar
 Feature.Avatar.Title.BulkDeleteMakeupLooks,Excluir {count} visuais de maquiagem?
@@ -2088,6 +2091,7 @@ Feature.Catalog.Action.ItemOptions,Opções de item
 Feature.Catalog.Action.LoadMore,Carregar mais
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Ver detalhes
+Feature.Catalog.Action.Owned,Itens adquiridos: {count}
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,Pré-visualizar e Publicar
 Feature.Catalog.Action.Remove,
@@ -2514,7 +2518,7 @@ Feature.Chat.Label.Members,Membros
 Feature.Chat.Label.MessageNotAvailable,Esta mensagem não está disponível
 Feature.Chat.Label.MuteInGameChatToastNotifications,Silenciar notificações de chat no jogo
 Feature.Chat.Label.New,
-Feature.Chat.Label.NoChatFound,Nenhuma conversa encontrada
+Feature.Chat.Label.NoChatFound,Nenhum chat encontrado
 Feature.Chat.Label.NoDescriptionYet,Ainda sem descrição.
 Feature.Chat.Label.NotImplementedMessageType,Esta mensagem não pode ser exibida.
 Feature.Chat.Label.NotSet,Não configurado
@@ -3535,7 +3539,7 @@ Feature.NotApproved.Heading.BannedOneDayOnly,Em banimento por 1 dia
 Feature.NotApproved.Heading.BannedOneHour,Banido por 1 hora
 Feature.NotApproved.Heading.BannedOneMinute,Banido por 1 minuto
 Feature.NotApproved.Heading.BannedOneSecond,Banido por 1 segundo
-Feature.NotApproved.Heading.Error,
+Feature.NotApproved.Heading.Error,Ocorreu um erro desconhecido. Tente novamente mais tarde.
 Feature.NotApproved.Heading.ReactivationNotice,Volte a jogar
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,Faça com que todos se sintam bem-recebidos
 Feature.NotApproved.Heading.RuleExplanation.Dating,Fique na friend zone
@@ -4128,7 +4132,7 @@ Feature.RobloxSubscription.Title.GetBlackbird,Assine o Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,O Roblox Plus não está disponível aqui
 Feature.SafetyDashboard.Heading.AccountStatus,Status da conta
 Feature.Schools.Action.AlreadyGraduated,Eu já me formei
-Feature.Schools.Action.CantFindSchool,Não consigo encontrar a minha escola.
+Feature.Schools.Action.CantFindSchool,Não consegue encontrar a sua escola?
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,Remover escola
 Feature.Schools.Action.Ok,
@@ -4185,7 +4189,8 @@ Feature.Schools.Heading.ThanksForInterest,Agradecemos seu interesse
 Feature.Schools.Heading.YouJoinedSchool,Você entrou em {school}!
 Feature.Schools.Heading.YourFounderReward,Sua recompensa de fundador
 Feature.Schools.Label.AlumniGroupLaunches,Lançamento do grupo de ex-alunos
-Feature.Schools.Label.ConfirmSchool,Confirmar escola
+Feature.Schools.Label.Classmates,Colegas da escola
+Feature.Schools.Label.ConfirmSchool,Selecionar escola
 Feature.Schools.Label.ConnectWithClassmates,Interaja com colegas da escola
 Feature.Schools.Label.DidntGetCode,
 Feature.Schools.Label.MoreToUnlockSchool,Faltam {count} para lançar sua escola

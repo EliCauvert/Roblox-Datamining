@@ -1318,7 +1318,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.MyQRTile,मेरा QR
 Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
 Feature.AddFriends.Label.QRCodeTitle,QR कोड
-Feature.AddFriends.Label.SchoolTile,स्कूल
+Feature.AddFriends.Label.SchoolTile,क्लासमेट
 Feature.AddFriends.Label.SearchForFriendsPrompt,"लोगों को उनके यूज़रनेम या डिसप्ले नाम से सर्च करके, उन्हें Roblox पर ढूँढे."
 Feature.AddFriends.Label.ShareQRCodeAddConnection,"अपनी जान-पहचान के लोगों को जोड़ने के लिए, अपना QR कोड शेयर करें"
 Feature.AddFriends.Label.SyncContactsInvitePeople,"फ़्रेंड्स को खोजने और इनवाइट करने के लिए, कॉन्टेक्ट्स को सिंक करें!"
@@ -1532,6 +1532,7 @@ Feature.Avatar.Action.CreateSetFirstRun,सेट क्रिएट करे�
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,डिफ़ॉल्ट व्यू
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,अवतार डिलीट करें
 Feature.Avatar.Action.DeleteSet,सेट डिलीट करें
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,प्रोफ़ाइल पिक्चर एडिट करें
@@ -1548,7 +1549,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,अभी नहीं
 Feature.Avatar.Action.Pan,पैन करें
 Feature.Avatar.Action.Posting,पोस्ट किया जा रहा है
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,सभी को हटाएँ
+Feature.Avatar.Action.RemoveFromSet,सेट से हटाएँ
 Feature.Avatar.Action.Rename,नाम बदलें
 Feature.Avatar.Action.RenameSet,सेट का नाम बदलें
 Feature.Avatar.Action.Reset,
@@ -1618,6 +1621,7 @@ Feature.Avatar.Heading.SelectToUpdate,अपडेट करने के लि
 Feature.Avatar.Heading.SetLimitReached,इससे ज़्यादा अवतार सेट क्रिएट करने की अनुमति नहीं है
 Feature.Avatar.Heading.SetNameDuplicate,डुप्लिकेट नाम
 Feature.Avatar.Heading.SetNameNotAllowed,नाम की अनुमति नहीं है
+Feature.Avatar.Heading.SetUpdateFailed,सेट अपडेट नहीं किया जा सका
 Feature.Avatar.Heading.SharePublicAvatar,अपना अवतार शेयर करें
 Feature.Avatar.Heading.SortBy,इस आधार पर क्रम से लगाएँ
 Feature.Avatar.Heading.UsedName,इस्तेमाल हो चुका नाम
@@ -1689,6 +1693,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} चुना गया
 Feature.Avatar.Label.Creations,क्रिएशन
 Feature.Avatar.Label.CurrentlyWearing,फ़िलहाल पहन रखा है
 Feature.Avatar.Label.DefaultBody,डिफ़ॉल्ट बॉडी
+Feature.Avatar.Label.DeleteSetBody,"इस सेट को डिलीट करने से, इसमें मौजूद आउटफ़िट डिलीट नहीं होंगे."
 Feature.Avatar.Label.Details,जानकारी ({quantity})
 Feature.Avatar.Label.DetailsButton,जानकारी
 Feature.Avatar.Label.DressesAndSkirts,ड्रेस और स्कर्ट
@@ -1746,6 +1751,7 @@ Feature.Avatar.Label.LeftLegs,बायां पैर
 Feature.Avatar.Label.LeftShoe,बायाँ जूता
 Feature.Avatar.Label.LeftShoes,बाएँ जूते
 Feature.Avatar.Label.LipMakeup,होंठ
+Feature.Avatar.Label.LoadingSets,सेट लोड हो रहे हैं
 Feature.Avatar.Label.Looks,लुक्स
 Feature.Avatar.Label.Makeup,मेकअप
 Feature.Avatar.Label.MakeupLayer,लेयर {layerIndex}
@@ -1764,6 +1770,7 @@ Feature.Avatar.Label.Newest,सबसे नया
 Feature.Avatar.Label.NoExpiredItems,कोई भी एक्सपायर्ड {itemType} नहीं है
 Feature.Avatar.Label.NoItems,कोई {itemType} नहीं
 Feature.Avatar.Label.NoLongerAvailableInCollection,वे अब इस कलेक्शन में उपलब्ध नहीं रहेंगे
+Feature.Avatar.Label.NoSets,अभी तक कोई सेट नहीं है
 Feature.Avatar.Label.Outerwear,आउटरवियर
 Feature.Avatar.Label.OutfitIncomplete,आपके बनाए आउटफ़िट को किसी ने नहीं खरीदा है और वह एक्सपीरिएंस में नहीं दिखेगा
 Feature.Avatar.Label.OutfitPurchaseFailure,माफ़ करें! [{numItems}] खरीदारियाँ नहीं हो सकीं!
@@ -1789,6 +1796,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,हाल ही में पहना/इस्तेमाल किया गया था
+Feature.Avatar.Label.RemoveFromSetBody,इन अवतार को इस सेट से हटा दिया जाएगा. ये डिलीट नहीं होंगे.
 Feature.Avatar.Label.Replace,बदलें
 Feature.Avatar.Label.ResetToNewCharacter,आप एक नए कैरेक्टर पर स्विच कर रहे हैं; क्या आप सभी आउटफ़िट आइटम रीसेट करना चाहते हैं या अपने पास रखना चाहते हैं?
 Feature.Avatar.Label.Right,R
@@ -1808,6 +1816,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,हाल ही म
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,हाल ही में देखा गया
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,इसके लिए शॉपिंग करते रहें
 Feature.Avatar.Label.SelectItem,आइटम चुनें
+Feature.Avatar.Label.SetAvatarCount,{itemCount} अवतार
 Feature.Avatar.Label.SetLimitReachedBody,आपके पास ज़्यादा से ज़्यादा {setLimit} सेट हो सकते हैं. जगह बनाने के लिए एक सेट मिटाएँ
 Feature.Avatar.Label.SetNameDuplicateBody,"आपके पास पहले से इस नाम का एक सेट है, दूसरा नाम चुनें"
 Feature.Avatar.Label.SetNameNotAllowedBody,कृपया कोई दूसरा नाम चुनें
@@ -1969,6 +1978,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,बॉडी सेक्शन ड�
 Feature.Avatar.Title.ClearClothesConfirmation,सभी ड्रेस डिलीट करनी हैं?
 Feature.Avatar.Title.ClearMakeupConfirmation,सारा मेकअप हटाना है?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,लुक का डुप्लिकेट बनाएँ
 Feature.Avatar.Title.EnhancedAvatarHeads,बेहतर अवतार हेड
 Feature.Avatar.Title.GetOutfit,आउटफ़िट पाएँ
@@ -1987,7 +1997,9 @@ Feature.Avatar.Title.NewCustomizeLook,कस्टमाइज़ सेक्�
 Feature.Avatar.Title.NewToMarketplaceItemWidget,मार्केटप्लेस में नया
 Feature.Avatar.Title.OutfitIncomplete,आउटफ़िट अधूरा है
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,मेकअप लुक का नाम बदलें
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,नया कैरेक्टर
 Feature.Avatar.Title.RevertToDefault,डिफ़ॉल्ट पर रिवर्ट करें
@@ -1996,6 +2008,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,आपके सेव किए ग�
 Feature.Avatar.Title.SelectEmoteForAvatar,अपने अवतार का पोज़ तय करने के लिए कोई Emote चुनें
 Feature.Avatar.Title.SelectMakeupLookForUpdate,कोई मेकअप लुक चुनें
 Feature.Avatar.Title.SelectMakeupLooks,लुक चुनें
+Feature.Avatar.Title.SelectSet,सेट चुनें
 Feature.Avatar.Title.SingleDeleteOutfit,"""{outfitName}"" को डिलीट करना है?"
 Feature.Avatar.Title.TrendingItemWidget,ट्रेंडिंग आइटम
 Feature.Avatar.Title.TrendingLooksWidget,ट्रेंडिंग स्टाइल
@@ -2063,7 +2076,7 @@ Feature.Catalog.Action.CloseDetails,जानकारी बंद करें
 Feature.Catalog.Action.CopyLink,लिंक कॉपी करें
 Feature.Catalog.Action.Customize,कस्टमाइज़ करें
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,अवतार डिलीट करें
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,अपने अवतार के बारे में बताएँ (ज़रूरी नहीं)
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -4155,7 +4168,7 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,ग्रैजुएशन का साल
 Feature.Schools.GiftForYou,आपके लिए एक गिफ़्ट
 Feature.Schools.Heading.AddSchool,स्कूल जोड़ें
-Feature.Schools.Heading.AddSchoolNow,अपने स्कूल से जुड़ें
+Feature.Schools.Heading.AddSchoolNow,अपने क्लासमेट के साथ शामिल हों
 Feature.Schools.Heading.CantFindSchool,हमें आपका स्कूल नहीं मिल रहा है
 Feature.Schools.Heading.CantVerifySchool,हम आपका स्कूल वेरिफ़ाई नहीं कर सकते
 Feature.Schools.Heading.CheckYourEmail,अपना ईमेल चेक करें
@@ -4170,7 +4183,7 @@ Feature.Schools.Heading.ThanksForInterest,दिलचस्पी दिखा�
 Feature.Schools.Heading.YouJoinedSchool,आपने {school} को जॉइन कर लिया है!
 Feature.Schools.Heading.YourFounderReward,आपका फ़ाउंडर रिवॉर्ड
 Feature.Schools.Label.AlumniGroupLaunches,एल्युमनाई ग्रुप लॉन्च हो गया
-Feature.Schools.Label.Classmates,क्लासमेट
+Feature.Schools.Label.Classmates,
 Feature.Schools.Label.ConfirmSchool,स्कूल चुनें
 Feature.Schools.Label.ConnectWithClassmates,क्लासमेट्स से कनेक्ट करें
 Feature.Schools.Label.DidntGetCode,

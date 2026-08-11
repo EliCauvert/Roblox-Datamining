@@ -1338,7 +1338,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Tìm 
 Feature.AddFriends.Label.MyQRTile,Mã QR của tôi
 Feature.AddFriends.Label.MyQrCode,Mã QR Của Tôi
 Feature.AddFriends.Label.QRCodeTitle,Mã QR
-Feature.AddFriends.Label.SchoolTile,Trường học
+Feature.AddFriends.Label.SchoolTile,Bạn cùng lớp
 Feature.AddFriends.Label.SearchForFriendsPrompt,Tìm người chơi trên Roblox bằng cách tìm kiếm tên người chơi hoặc tên hiển thị của họ.
 Feature.AddFriends.Label.ShareQRCodeAddConnection,Chia sẻ mã QR để thêm những người bạn quen biết
 Feature.AddFriends.Label.SyncContactsInvitePeople,Đồng bộ danh bạ để tìm và mời bạn bè!
@@ -1552,6 +1552,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Tạo bộ
 Feature.Avatar.Action.Default,Mặc Định
 Feature.Avatar.Action.DefaultView,Chế Độ Xem Mặc Định
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Xóa avatar
 Feature.Avatar.Action.DeleteSet,Xóa bộ
 Feature.Avatar.Action.Discard,Bỏ
 Feature.Avatar.Action.EditProfilePicture,Chỉnh Sửa Ảnh Đại Diện
@@ -1568,7 +1569,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Không Phải Lúc Này
 Feature.Avatar.Action.Pan,Lia
 Feature.Avatar.Action.Posting,Đang đăng
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Xóa tất cả
+Feature.Avatar.Action.RemoveFromSet,Gỡ khỏi bộ
 Feature.Avatar.Action.Rename,Thay Đổi Tên
 Feature.Avatar.Action.RenameSet,Đổi tên bộ
 Feature.Avatar.Action.Reset,
@@ -1638,6 +1641,7 @@ Feature.Avatar.Heading.SelectToUpdate,Chọn Để Cập Nhật
 Feature.Avatar.Heading.SetLimitReached,Đã đạt giới hạn về số lượng bộ
 Feature.Avatar.Heading.SetNameDuplicate,Tên bị trùng
 Feature.Avatar.Heading.SetNameNotAllowed,Tên không hợp lệ
+Feature.Avatar.Heading.SetUpdateFailed,Không thể cập nhật bộ
 Feature.Avatar.Heading.SharePublicAvatar,Chia sẻ Avatar của bạn
 Feature.Avatar.Heading.SortBy,Sắp xếp theo
 Feature.Avatar.Heading.UsedName,Tên Đã Dùng
@@ -1709,6 +1713,7 @@ Feature.Avatar.Label.CountSelected,Đã Chọn {itemCount}
 Feature.Avatar.Label.Creations,Sản phẩm sáng tạo
 Feature.Avatar.Label.CurrentlyWearing,Hiện Đang Mặc
 Feature.Avatar.Label.DefaultBody,Thân hình mặc định
+Feature.Avatar.Label.DeleteSetBody,"Dù bộ bị xóa, trang phục trong bộ không bị xóa."
 Feature.Avatar.Label.Details,Chi tiết ({quantity})
 Feature.Avatar.Label.DetailsButton,Chi tiết
 Feature.Avatar.Label.DressesAndSkirts,Đầm & Váy
@@ -1766,6 +1771,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,Giày Trái
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,Môi
+Feature.Avatar.Label.LoadingSets,Đang tải bộ
 Feature.Avatar.Label.Looks,Diện mạo
 Feature.Avatar.Label.Makeup,Trang điểm
 Feature.Avatar.Label.MakeupLayer,Lớp {layerIndex}
@@ -1784,6 +1790,7 @@ Feature.Avatar.Label.Newest,Mới nhất
 Feature.Avatar.Label.NoExpiredItems,Không có {itemType} đã hết hạn
 Feature.Avatar.Label.NoItems,Không Có {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Chúng sẽ không còn có sẵn trong bộ sưu tập này
+Feature.Avatar.Label.NoSets,Chưa có bộ nào
 Feature.Avatar.Label.Outerwear,Áo Khoác Ngoài
 Feature.Avatar.Label.OutfitIncomplete,Trang phục bạn tạo chưa được mua và sẽ không được hiển thị trong trải nghiệm
 Feature.Avatar.Label.OutfitPurchaseFailure,Rất tiếc! [{numItems}] giao dịch mua thất bại!
@@ -1809,6 +1816,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Vừa mặc
+Feature.Avatar.Label.RemoveFromSetBody,Các avatar này sẽ bị gỡ khỏi bộ nhưng sẽ không bị xóa.
 Feature.Avatar.Label.Replace,Thay thế
 Feature.Avatar.Label.ResetToNewCharacter,Bạn đang chuyển sang một hồ sơ mới; bạn muốn đặt lại tất cả vật phẩm trang phục hay giữ chúng?
 Feature.Avatar.Label.Right,P
@@ -1828,6 +1836,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Các tìm kiếm g�
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Đã xem gần đây
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Tiếp tục mua sắm
 Feature.Avatar.Label.SelectItem,Chọn vật phẩm
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Bạn chỉ được có tối đa {setLimit} bộ. Hãy xóa bớt một bộ để có thêm chỗ trống
 Feature.Avatar.Label.SetNameDuplicateBody,"Bạn đã có một bộ lấy tên này, vui lòng chọn tên khác"
 Feature.Avatar.Label.SetNameNotAllowedBody,Vui lòng chọn tên khác
@@ -1989,6 +1998,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Gỡ tất cả đồ khỏi thân?
 Feature.Avatar.Title.ClearClothesConfirmation,Gỡ tất cả trang phục?
 Feature.Avatar.Title.ClearMakeupConfirmation,Xóa hết trang điểm?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Nhân bản kiểu trang điểm
 Feature.Avatar.Title.EnhancedAvatarHeads,Nâng cấp đầu avatar
 Feature.Avatar.Title.GetOutfit,Nhận Trang Phục
@@ -2007,7 +2017,9 @@ Feature.Avatar.Title.NewCustomizeLook,Tính năng tùy chỉnh có diện mạo 
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Vật Phẩm Mới
 Feature.Avatar.Title.OutfitIncomplete,Trang Phục Chưa Hoàn Thiện
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Đổi tên phong cách trang điểm
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Trả về mặc định
 Feature.Avatar.Title.ResetToNewCharacter,Nhân Vật Mới
 Feature.Avatar.Title.RevertToDefault,Hoàn lại về mặc định
@@ -2016,6 +2028,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Đây là nơi chứa Avatar bạn đ�
 Feature.Avatar.Title.SelectEmoteForAvatar,Chọn một biểu cảm và tạo dáng cho Avatar của bạn
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Chọn một kiểu trang điểm
 Feature.Avatar.Title.SelectMakeupLooks,Chọn kiểu trang điểm
+Feature.Avatar.Title.SelectSet,Chọn bộ
 Feature.Avatar.Title.SingleDeleteOutfit,"Xóa ""{outfitName}""?"
 Feature.Avatar.Title.TrendingItemWidget,Vật Phẩm Thịnh Hành
 Feature.Avatar.Title.TrendingLooksWidget,Phong cách thịnh hành
@@ -2083,7 +2096,7 @@ Feature.Catalog.Action.CloseDetails,Đóng Chi Tiết
 Feature.Catalog.Action.CopyLink,Sao Chép Liên Kết
 Feature.Catalog.Action.Customize,Tùy Chỉnh
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,Xóa avatar
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Mô tả avatar của bạn (Không bắt buộc)
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -4175,12 +4188,12 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Năm tốt nghiệp
 Feature.Schools.GiftForYou,Quà tặng dành cho bạn
 Feature.Schools.Heading.AddSchool,Thêm trường học
-Feature.Schools.Heading.AddSchoolNow,Tham gia trường học
+Feature.Schools.Heading.AddSchoolNow,Tham gia với bạn cùng lớp
 Feature.Schools.Heading.CantFindSchool,Chúng tôi không tìm thấy trường học của bạn
 Feature.Schools.Heading.CantVerifySchool,Chúng tôi không xác minh được trường học của bạn
 Feature.Schools.Heading.CheckYourEmail,Kiểm tra email của bạn
 Feature.Schools.Heading.EnterSchoolEmail,Nhập email do trường bạn học cấp
-Feature.Schools.Heading.JoinClassmates,Tham gia với bạn cùng lớp
+Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} thành viên
 Feature.Schools.Heading.RemoveYourSchool,Xóa trường học của bạn
 Feature.Schools.Heading.SchoolIsLive,Trường học hiện đã mở
@@ -4190,7 +4203,7 @@ Feature.Schools.Heading.ThanksForInterest,Cảm ơn bạn đã quan tâm
 Feature.Schools.Heading.YouJoinedSchool,Bạn đã tham gia {school}!
 Feature.Schools.Heading.YourFounderReward,Phần thưởng nhà sáng lập dành cho bạn
 Feature.Schools.Label.AlumniGroupLaunches,Ra mắt nhóm cựu học sinh
-Feature.Schools.Label.Classmates,Bạn cùng lớp
+Feature.Schools.Label.Classmates,
 Feature.Schools.Label.ConfirmSchool,Chọn trường học
 Feature.Schools.Label.ConnectWithClassmates,Kết nối với bạn cùng lớp
 Feature.Schools.Label.DidntGetCode,

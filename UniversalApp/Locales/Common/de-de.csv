@@ -1330,7 +1330,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Nach 
 Feature.AddFriends.Label.MyQRTile,Mein QR-Code
 Feature.AddFriends.Label.MyQrCode,
 Feature.AddFriends.Label.QRCodeTitle,QR-Code
-Feature.AddFriends.Label.SchoolTile,Schule
+Feature.AddFriends.Label.SchoolTile,Mitschüler
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Finde Leute auf Roblox, indem du ihren Benutzernamen oder Anzeigenamen eingibst."
 Feature.AddFriends.Label.ShareQRCodeAddConnection,"Teile deinen QR-Code, um Personen hinzuzufügen, die du kennst"
 Feature.AddFriends.Label.SyncContactsInvitePeople,"Synchronisiere deine Kontakte, um Freunde zu finden und einzuladen!"
@@ -1544,6 +1544,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Set erstellen
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Standardansicht
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Avatare löschen
 Feature.Avatar.Action.DeleteSet,Set löschen
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Profilbild bearbeiten
@@ -1560,7 +1561,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Jetzt nicht
 Feature.Avatar.Action.Pan,Schwenken
 Feature.Avatar.Action.Posting,Wird gepostet
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Alle entfernen
+Feature.Avatar.Action.RemoveFromSet,Aus Set entfernen
 Feature.Avatar.Action.Rename,Umbenennen
 Feature.Avatar.Action.RenameSet,Set umbenennen
 Feature.Avatar.Action.Reset,
@@ -1630,6 +1633,7 @@ Feature.Avatar.Heading.SelectToUpdate,Zum Aktualisieren wählen
 Feature.Avatar.Heading.SetLimitReached,Set-Limit erreicht
 Feature.Avatar.Heading.SetNameDuplicate,Name bereits vorhanden
 Feature.Avatar.Heading.SetNameNotAllowed,Name ist nicht erlaubt
+Feature.Avatar.Heading.SetUpdateFailed,Set konnte nicht aktualisiert werden
 Feature.Avatar.Heading.SharePublicAvatar,Teile deinen Avatar
 Feature.Avatar.Heading.SortBy,Sortieren nach
 Feature.Avatar.Heading.UsedName,Benutzter Name
@@ -1701,6 +1705,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} ausgewählt
 Feature.Avatar.Label.Creations,Schöpfungen
 Feature.Avatar.Label.CurrentlyWearing,Derzeit getragen
 Feature.Avatar.Label.DefaultBody,Standard-Körper
+Feature.Avatar.Label.DeleteSetBody,"Wenn du dieses Set löschst, werden die darin enthaltenen Outfits nicht gelöscht."
 Feature.Avatar.Label.Details,Details ({quantity})
 Feature.Avatar.Label.DetailsButton,Infos
 Feature.Avatar.Label.DressesAndSkirts,Kleider & Röcke
@@ -1758,6 +1763,7 @@ Feature.Avatar.Label.LeftLegs,Linke Beine
 Feature.Avatar.Label.LeftShoe,Linker Schuh
 Feature.Avatar.Label.LeftShoes,Linke Schuhe
 Feature.Avatar.Label.LipMakeup,Lippen
+Feature.Avatar.Label.LoadingSets,Sets werden geladen
 Feature.Avatar.Label.Looks,Looks
 Feature.Avatar.Label.Makeup,Make-up
 Feature.Avatar.Label.MakeupLayer,Schicht {layerIndex}
@@ -1776,6 +1782,7 @@ Feature.Avatar.Label.Newest,Neueste
 Feature.Avatar.Label.NoExpiredItems,Keine abgelaufenen {itemType}
 Feature.Avatar.Label.NoItems,Keine {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Sie werden nicht mehr in dieser Kollektion verfügbar sein.
+Feature.Avatar.Label.NoSets,Noch keine Sets
 Feature.Avatar.Label.Outerwear,Outerwear
 Feature.Avatar.Label.OutfitIncomplete,"Das Outfit, das du erstellt hast, wurde nicht gekauft und wird nicht in der Experience angezeigt"
 Feature.Avatar.Label.OutfitPurchaseFailure,Entschuldigung! [{numItems}] Käufe sind fehlgeschlagen!
@@ -1801,6 +1808,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Kürzlich getragen
+Feature.Avatar.Label.RemoveFromSetBody,Diese Avatare werden aus diesem Set entfernt. Sie werden nicht gelöscht.
 Feature.Avatar.Label.Replace,Ersetzen
 Feature.Avatar.Label.ResetToNewCharacter,Du wechselst zu einem neuen Charakter; möchtest du alle Outfit-Artikel zurücksetzen oder beibehalten?
 Feature.Avatar.Label.Right,R
@@ -1820,6 +1828,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Kürzliche Suchen
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Kürzlich angesehen
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Mach weiter mit deiner Suche nach
 Feature.Avatar.Label.SelectItem,Item wählen
+Feature.Avatar.Label.SetAvatarCount,{itemCount} Avatare
 Feature.Avatar.Label.SetLimitReachedBody,"Du kannst nur bis zu {setLimit} Sets haben. Lösche eines davon, um Platz zu schaffen"
 Feature.Avatar.Label.SetNameDuplicateBody,Du hast bereits ein Set mit diesem Namen. Wähle einen anderen Namen.
 Feature.Avatar.Label.SetNameNotAllowedBody,Bitte wähle einen anderen Namen
@@ -1981,6 +1990,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Körper löschen?
 Feature.Avatar.Title.ClearClothesConfirmation,Alle Kleidungsstücke löschen?
 Feature.Avatar.Title.ClearMakeupConfirmation,Das gesamte Make-up entfernen?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Look duplizieren
 Feature.Avatar.Title.EnhancedAvatarHeads,Verbesserte Avatar-Köpfe
 Feature.Avatar.Title.GetOutfit,Outfit holen
@@ -1999,7 +2009,9 @@ Feature.Avatar.Title.NewCustomizeLook,Wir haben die Anpassungsfunktion überarbe
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Neu auf dem Marktplatz
 Feature.Avatar.Title.OutfitIncomplete,Outfit unvollständig
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Make-up-Look umbenennen
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,Neuer Charakter
 Feature.Avatar.Title.RevertToDefault,
@@ -2008,6 +2020,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Deine gespeicherten Avatare findest du
 Feature.Avatar.Title.SelectEmoteForAvatar,"Wähle ein Emote, um deinen Avatar zu posieren"
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Make-up-Look auswählen
 Feature.Avatar.Title.SelectMakeupLooks,Looks auswählen
+Feature.Avatar.Title.SelectSet,Set auswählen
 Feature.Avatar.Title.SingleDeleteOutfit,Möchtest du „{outfitName}“ löschen?
 Feature.Avatar.Title.TrendingItemWidget,Populäre Artikel
 Feature.Avatar.Title.TrendingLooksWidget,Beliebte Styles
@@ -4164,12 +4177,12 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Abschlussjahr
 Feature.Schools.GiftForYou,Ein Geschenk für dich
 Feature.Schools.Heading.AddSchool,Schule hinzufügen
-Feature.Schools.Heading.AddSchoolNow,Tritt deiner Schule bei
+Feature.Schools.Heading.AddSchoolNow,Spiele mit deinen Mitschülern
 Feature.Schools.Heading.CantFindSchool,Wir können deine Schule nicht finden
 Feature.Schools.Heading.CantVerifySchool,Wir können deine Schule nicht verifizieren
 Feature.Schools.Heading.CheckYourEmail,Überprüfe deine E-Mails
 Feature.Schools.Heading.EnterSchoolEmail,Gib deine Schul-E-Mail-Adresse ein
-Feature.Schools.Heading.JoinClassmates,Spiele mit deinen Mitschülern
+Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} Mitglieder
 Feature.Schools.Heading.RemoveYourSchool,Deine Schule entfernen
 Feature.Schools.Heading.SchoolIsLive,Deine Schule ist jetzt geöffnet
@@ -4179,7 +4192,7 @@ Feature.Schools.Heading.ThanksForInterest,Vielen Dank für dein Interesse
 Feature.Schools.Heading.YouJoinedSchool,Du bist {school} beigetreten!
 Feature.Schools.Heading.YourFounderReward,Deine Gründerbelohnung
 Feature.Schools.Label.AlumniGroupLaunches,Alumni-Gruppe startet
-Feature.Schools.Label.Classmates,Mitschüler
+Feature.Schools.Label.Classmates,
 Feature.Schools.Label.ConfirmSchool,Schule auswählen
 Feature.Schools.Label.ConnectWithClassmates,Vernetze dich mit deinen Mitschülern
 Feature.Schools.Label.DidntGetCode,Hast du deinen Code nicht erhalten?

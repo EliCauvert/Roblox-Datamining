@@ -1318,7 +1318,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,
 Feature.AddFriends.Label.MyQRTile,كود QR الخاص بي
 Feature.AddFriends.Label.MyQrCode,رمز QR الشخصي
 Feature.AddFriends.Label.QRCodeTitle,كود QR
-Feature.AddFriends.Label.SchoolTile,المدرسة
+Feature.AddFriends.Label.SchoolTile,زملاء الدراسة
 Feature.AddFriends.Label.SearchForFriendsPrompt,
 Feature.AddFriends.Label.ShareQRCodeAddConnection,مشاركة كود QR الخاص بك لإضافة الناس الذين تعرفهم
 Feature.AddFriends.Label.SyncContactsInvitePeople,قم بمزامنة جهات الاتصال للعثور على الأصدقاء وإرسال دعوة إليهم!
@@ -1532,6 +1532,8 @@ Feature.Avatar.Action.CreateSetFirstRun,إنشاء مجموعة
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,العرض الافتراضي
 Feature.Avatar.Action.Delete,حذف
+Feature.Avatar.Action.DeleteAvatars,حذف الأفاتارات
+Feature.Avatar.Action.DeleteSet,حذف المجموعة
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,تحرير صورة الملف الشخصي
 Feature.Avatar.Action.GoBack,
@@ -1547,8 +1549,11 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,ليس الآن
 Feature.Avatar.Action.Pan,تحريك لليمين أو اليسار
 Feature.Avatar.Action.Posting,جارٍ النشر
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,إزالة الكل
+Feature.Avatar.Action.RemoveFromSet,إزالة من المجموعة
 Feature.Avatar.Action.Rename,إعادة تسمية
+Feature.Avatar.Action.RenameSet,إعادة تسمية المجموعة
 Feature.Avatar.Action.Reset,إعادة تعيين
 Feature.Avatar.Action.RestoreLastSaved,استعادة الأفاتار المحفوظ آخر مرة
 Feature.Avatar.Action.Revert,
@@ -1614,7 +1619,9 @@ Feature.Avatar.Heading.RenameCharacter,إعادة تسمية الشخصية
 Feature.Avatar.Heading.SaveCostume,حفظ الشخصية
 Feature.Avatar.Heading.SelectToUpdate,تحديد للتحديث
 Feature.Avatar.Heading.SetLimitReached,تم الوصول إلى الحد الأقصى للمجموعة
+Feature.Avatar.Heading.SetNameDuplicate,اسم مكرر
 Feature.Avatar.Heading.SetNameNotAllowed,الاسم غير مسموح به
+Feature.Avatar.Heading.SetUpdateFailed,تعذَّر تحديث المجموعة
 Feature.Avatar.Heading.SharePublicAvatar,مشاركة أفاتارك
 Feature.Avatar.Heading.SortBy,ترتيب حسب
 Feature.Avatar.Heading.UsedName,الاسم المستخدم
@@ -1686,6 +1693,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} محددة
 Feature.Avatar.Label.Creations,التصاميم
 Feature.Avatar.Label.CurrentlyWearing,يرتدي حاليًا
 Feature.Avatar.Label.DefaultBody,الجسم الافتراضي
+Feature.Avatar.Label.DeleteSetBody,لن يؤدي حذف هذه المجموعة إلى حذف الأزياء الموجودة بداخلها.
 Feature.Avatar.Label.Details,التفاصيل ({quantity})
 Feature.Avatar.Label.DetailsButton,التفاصيل
 Feature.Avatar.Label.DressesAndSkirts,الفساتين والتنانير
@@ -1743,6 +1751,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,الحذاء الأيسر
 Feature.Avatar.Label.LeftShoes,الأحذية اليسرى
 Feature.Avatar.Label.LipMakeup,الشفاه
+Feature.Avatar.Label.LoadingSets,جارٍ تحميل المجموعات
 Feature.Avatar.Label.Looks,الإطلالات
 Feature.Avatar.Label.Makeup,المكياج
 Feature.Avatar.Label.MakeupLayer,طبقة {layerIndex}
@@ -1761,6 +1770,7 @@ Feature.Avatar.Label.Newest,الأحدث
 Feature.Avatar.Label.NoExpiredItems,لا توجد {itemType} منتهية الصلاحية
 Feature.Avatar.Label.NoItems,ليس لديك {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,لن تكون متاحة في هذه التشكيلة بعد الآن
+Feature.Avatar.Label.NoSets,لا توجد مجموعات حتى الآن
 Feature.Avatar.Label.Outerwear,ملابس خارجية
 Feature.Avatar.Label.OutfitIncomplete,الزي الذي أنشأته لم يتم شراؤه بعد ولن يظهر في التجربة
 Feature.Avatar.Label.OutfitPurchaseFailure,عذرًا! تعذرت عمليات شراء [{numItems}]!
@@ -1786,6 +1796,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,تم ارتداؤها مؤخرًا
+Feature.Avatar.Label.RemoveFromSetBody,ستتم إزالة هذه الأفاتارات من هذه المجموعة. ولن يتم حذفها.
 Feature.Avatar.Label.Replace,استبدال
 Feature.Avatar.Label.ResetToNewCharacter,أنت تبدّل إلى الشخصية الجديدة؛ هل تريد إعادة تعيين جميع عناصر الزي أو تريد الاحتفاظ بها؟
 Feature.Avatar.Label.Right,R
@@ -1805,6 +1816,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,عمليات الب�
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,العناصر التي تم عرضها مؤخرًا
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,واصِل التسوّق للعناصر
 Feature.Avatar.Label.SelectItem,حدد العنصر
+Feature.Avatar.Label.SetAvatarCount,{itemCount} من الأفاتارات
 Feature.Avatar.Label.SetLimitReachedBody,يمكنك الحصول على ما يصل إلى {setLimit} من المجموعات فقط. احذف واحدة لإفساح المجال
 Feature.Avatar.Label.SetNameDuplicateBody,لديك مجموعة بهذا الاسم بالفعل، اختر اسمًا مختلفًا
 Feature.Avatar.Label.SetNameNotAllowedBody,يُرجى اختيار اسم آخر
@@ -1953,7 +1965,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,كتابة تسمية توضيحي
 Feature.Avatar.RevokedItems.BodyText,"تمت إزالة العنصر ""{item}"" ضمن الفئة {category} من هذا الأفاتار المحفوظ، لذلك رددنا المبلغ الأصلي الذي دفعته.{lineBreak}يمكنك معاينة صندوق الوارد للحصول على مزيد من التفاصيل."
 Feature.Avatar.RevokedItems.BodyTextMultiple,تمت إزالة العناصر التالية من هذا الأفاتار المحفوظ، لذلك رددنا المبلغ الأصلي الذي دفعته.{lineBreak}{items}{lineBreak}يمكنك معاينة صندوق الوارد للحصول على مزيد من التفاصيل.
 Feature.Avatar.RevokedItems.ViewInbox,معاينة صندوق الوارد
-Feature.Avatar.SetNameDuplicate,اسم مكرر
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,رتّبي مكياجك على طبقات
 Feature.Avatar.Title.AvatarRefinement,تحسين الأفاتار
 Feature.Avatar.Title.BulkDeleteMakeupLooks,هل تريد حذف {count} من إطلالات المكياج؟
@@ -1966,6 +1978,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,هل تريد مسح الجسد؟
 Feature.Avatar.Title.ClearClothesConfirmation,هل تريد مسح كل الثياب؟
 Feature.Avatar.Title.ClearMakeupConfirmation,هل تريد مسح كل المكياج؟
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,تكرار الإطلالة
 Feature.Avatar.Title.EnhancedAvatarHeads,رؤوس أفاتار محسّنة
 Feature.Avatar.Title.GetOutfit,احصل على زيّ
@@ -1984,7 +1997,9 @@ Feature.Avatar.Title.NewCustomizeLook,ميزات التخصيص تظهر بوا�
 Feature.Avatar.Title.NewToMarketplaceItemWidget,جديد المتجر
 Feature.Avatar.Title.OutfitIncomplete,الزي غير مكتمل
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,إعادة تسمية إطلالة المكياج
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,شخصية جديدة
 Feature.Avatar.Title.RevertToDefault,
@@ -1993,6 +2008,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,ستجد أفاتاراتك المحف
 Feature.Avatar.Title.SelectEmoteForAvatar,تحديد emote لإعطاء أفاتارك وضعية
 Feature.Avatar.Title.SelectMakeupLookForUpdate,تحديد إطلالة مكياج
 Feature.Avatar.Title.SelectMakeupLooks,تحديد الإطلالات
+Feature.Avatar.Title.SelectSet,تحديد المجموعة
 Feature.Avatar.Title.SingleDeleteOutfit,"هل تريد حذف ""{outfitName}""؟"
 Feature.Avatar.Title.TrendingItemWidget,عناصر دارجة
 Feature.Avatar.Title.TrendingLooksWidget,الأنماط الرائجة
@@ -2068,6 +2084,7 @@ Feature.Catalog.Action.ItemOptions,خيارات العنصر
 Feature.Catalog.Action.LoadMore,تحميل المزيد
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,فتح التفاصيل
+Feature.Catalog.Action.Owned,العناصر المملوكة: {count}
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2419,7 +2436,7 @@ Feature.Chat.Action.LearnMore,معرفة المزيد
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,كتم الصوت
 Feature.Chat.Action.Remove,
-Feature.Chat.Action.RemoveFromGroup,إزالة من المجموعة
+Feature.Chat.Action.RemoveFromGroup,
 Feature.Chat.Action.RemoveUser,إزالة المستخدم
 Feature.Chat.Action.Reply,رد
 Feature.Chat.Action.Report,
@@ -3515,7 +3532,7 @@ Feature.NotApproved.Heading.BannedOneDayOnly,محظور لمدة يوم واحد
 Feature.NotApproved.Heading.BannedOneHour,محظور لساعة واحدة
 Feature.NotApproved.Heading.BannedOneMinute,محظور لمدة دقيقة واحدة
 Feature.NotApproved.Heading.BannedOneSecond,محظور لمدة ثانية واحدة
-Feature.NotApproved.Heading.Error,
+Feature.NotApproved.Heading.Error,حدث خطأ غير معروف. يُرجى المحاولة مرة أخرى لاحقًا.
 Feature.NotApproved.Heading.ReactivationNotice,يمكنك الرجوع إلى اللعب
 Feature.NotApproved.Heading.RuleExplanation.BullyingHarassmentDiscrimination,احرص على أن يشعر الجميع بالترحيب
 Feature.NotApproved.Heading.RuleExplanation.Dating,ابقَ ضمن حدود الصداقة
@@ -4109,7 +4126,7 @@ Feature.RobloxSubscription.Title.GetBlackbird,اشترِك في Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,اشتراك Roblox Plus غير متاح هنا
 Feature.SafetyDashboard.Heading.AccountStatus,حالة الحساب
 Feature.Schools.Action.AlreadyGraduated,لقد تخرجت بالفعل
-Feature.Schools.Action.CantFindSchool,هل تعذر العثور على مدرستك؟
+Feature.Schools.Action.CantFindSchool,هل لا تستطيع العثور على مدرستك؟
 Feature.Schools.Action.Continue,
 Feature.Schools.Action.LeaveSchool,إزالة المدرسة
 Feature.Schools.Action.Ok,
@@ -4151,12 +4168,12 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,سنة التخرج
 Feature.Schools.GiftForYou,هدية لك
 Feature.Schools.Heading.AddSchool,إضافة مدرسة
-Feature.Schools.Heading.AddSchoolNow,انضم إلى مدرستك
+Feature.Schools.Heading.AddSchoolNow,انضم إلى زملائك في الفصل الدراسي
 Feature.Schools.Heading.CantFindSchool,لم نتمكن من العثور على مدرستك
 Feature.Schools.Heading.CantVerifySchool,لم نتمكن من التحقق من مدرستك
 Feature.Schools.Heading.CheckYourEmail,تحقَّق من بريدك الإلكتروني
 Feature.Schools.Heading.EnterSchoolEmail,أدخِل بريدك الإلكتروني المدرسي
-Feature.Schools.Heading.JoinClassmates,انضم إلى زملائك في الفصل الدراسي
+Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} من الأعضاء
 Feature.Schools.Heading.RemoveYourSchool,إزالة مدرستك
 Feature.Schools.Heading.SchoolIsLive,صفحة مدرستك أصبحت مفتوحة الآن
@@ -4166,7 +4183,8 @@ Feature.Schools.Heading.ThanksForInterest,شكرًا على اهتمامك
 Feature.Schools.Heading.YouJoinedSchool,لقد انضممت إلى {school}!
 Feature.Schools.Heading.YourFounderReward,مكافأة المؤسس
 Feature.Schools.Label.AlumniGroupLaunches,فتح مجموعة الخريجين
-Feature.Schools.Label.ConfirmSchool,تأكيد المدرسة
+Feature.Schools.Label.Classmates,
+Feature.Schools.Label.ConfirmSchool,حدد المدرسة
 Feature.Schools.Label.ConnectWithClassmates,تواصل مع زملائك في الفصل الدراسي
 Feature.Schools.Label.DidntGetCode,ألم يصلك الكود؟
 Feature.Schools.Label.MoreToUnlockSchool,تحتاج إلى {count} من الأشخاص الآخرين لإطلاق صفحة مدرستك
