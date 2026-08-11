@@ -588,7 +588,7 @@ CoreScripts.Feedback.EntryPoint.OptionText,번역 피드백 제공
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,나가기
 CoreScripts.Feedback.FeedbackBar.HelpButton,도움말
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,아래에 추가 의견을 제공하세요(선택사항)
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,아래에 추가 의견을 작성하세요.
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,여기에 추가 의견을 입력하세요
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,올바른 번역이 어떤 것인가요?(선택 사항)
@@ -596,7 +596,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,여기에 올바른 번역을 입력하세요
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,선택된 이미지
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,이 번역의 문제점은 무엇인가요?(선택 사항)
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,이 번역에 어떤 문제가 있나요?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,정확하지 않음
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,부적절하거나 경멸적임
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,철자 또는 문법 오류
@@ -1242,6 +1242,7 @@ Feature.Avatar.Action.CreateSetFirstRun,세트 만들기
 Feature.Avatar.Action.Default,기본값
 Feature.Avatar.Action.DefaultView,기본 보기
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,아바타 삭제
 Feature.Avatar.Action.DeleteSet,세트 삭제
 Feature.Avatar.Action.Discard,폐기
 Feature.Avatar.Action.EditProfilePicture,프로필 사진 편집
@@ -1258,7 +1259,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,지금 안 함
 Feature.Avatar.Action.Pan,팬
 Feature.Avatar.Action.Posting,게시 중
+Feature.Avatar.Action.Remove,제거
 Feature.Avatar.Action.RemoveAll,전체 제거
+Feature.Avatar.Action.RemoveFromSet,세트에서 제거
 Feature.Avatar.Action.Rename,이름 변경
 Feature.Avatar.Action.RenameSet,세트 이름 변경
 Feature.Avatar.Action.Reset,
@@ -1328,6 +1331,7 @@ Feature.Avatar.Heading.SelectToUpdate,업데이트 항목 선택
 Feature.Avatar.Heading.SetLimitReached,세트 한도에 도달함
 Feature.Avatar.Heading.SetNameDuplicate,이름 복제
 Feature.Avatar.Heading.SetNameNotAllowed,허용되지 않는 이름
+Feature.Avatar.Heading.SetUpdateFailed,세트를 업데이트할 수 없음
 Feature.Avatar.Heading.SharePublicAvatar,아바타를 공유하세요
 Feature.Avatar.Heading.SortBy,정렬 기준
 Feature.Avatar.Heading.UsedName,이미 사용되었던 이름
@@ -1399,6 +1403,7 @@ Feature.Avatar.Label.CountSelected,{itemCount}개 선택됨
 Feature.Avatar.Label.Creations,작품
 Feature.Avatar.Label.CurrentlyWearing,현재 장착 중
 Feature.Avatar.Label.DefaultBody,기본 신체
+Feature.Avatar.Label.DeleteSetBody,이 세트를 삭제해도 세트 내의 의상은 삭제되지 않습니다.
 Feature.Avatar.Label.Details,세부 정보({quantity}개)
 Feature.Avatar.Label.DetailsButton,세부 정보
 Feature.Avatar.Label.DressesAndSkirts,원피스 및 치마
@@ -1456,6 +1461,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,왼쪽 신발
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,입술
+Feature.Avatar.Label.LoadingSets,세트 불러오는 중
 Feature.Avatar.Label.Looks,룩
 Feature.Avatar.Label.Makeup,메이크업
 Feature.Avatar.Label.MakeupLayer,레이어 {layerIndex}
@@ -1474,6 +1480,7 @@ Feature.Avatar.Label.Newest,최신
 Feature.Avatar.Label.NoExpiredItems,만료된 {itemType} 없음
 Feature.Avatar.Label.NoItems,{itemType} 없음
 Feature.Avatar.Label.NoLongerAvailableInCollection,이 컬렉션에서 더 이상 사용할 수 없게 됩니다
+Feature.Avatar.Label.NoSets,아직 세트 없음
 Feature.Avatar.Label.Outerwear,겉옷
 Feature.Avatar.Label.OutfitIncomplete,만든 코스튬을 구매하지 않았으며 체험에 나타나지 않습니다
 Feature.Avatar.Label.OutfitPurchaseFailure,"죄송합니다, 아이템 [{numItems}]개를 구매하지 못했습니다!"
@@ -1499,6 +1506,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6 / R15
 Feature.Avatar.Label.RecentlyWorn,최근 장착
+Feature.Avatar.Label.RemoveFromSetBody,"해당 아바타가 이 세트에서 제거되며, 삭제되지는 않습니다."
 Feature.Avatar.Label.Replace,교체
 Feature.Avatar.Label.ResetToNewCharacter,새 캐릭터로 전환 중입니다. 전체 코스튬 아이템을 재설정할까요? 아니면 그대로 유지할까요?
 Feature.Avatar.Label.Right,우
@@ -1518,6 +1526,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,최근 검색
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,최근 조회
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,계속 쇼핑하기
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetAvatarCount,아바타 {itemCount}개
 Feature.Avatar.Label.SetLimitReachedBody,최대 {setLimit}개 세트만 보유할 수 있습니다. 공간을 확보하려면 하나를 삭제하세요
 Feature.Avatar.Label.SetNameDuplicateBody,이미 해당 이름의 세트가 있습니다. 다른 이름을 선택하세요.
 Feature.Avatar.Label.SetNameNotAllowedBody,다른 이름을 선택하세요
@@ -1679,6 +1688,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,신체 전체를 지울까요?
 Feature.Avatar.Title.ClearClothesConfirmation,모든 의상을 지울까요?
 Feature.Avatar.Title.ClearMakeupConfirmation,모든 메이크업을 지울까요?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,룩 복제
 Feature.Avatar.Title.EnhancedAvatarHeads,향상된 아바타 머리
 Feature.Avatar.Title.GetOutfit,코스튬 획득
@@ -1697,7 +1707,9 @@ Feature.Avatar.Title.NewCustomizeLook,꾸미기에 새로운 스타일이 추가
 Feature.Avatar.Title.NewToMarketplaceItemWidget,마켓플레이스 첫 등장
 Feature.Avatar.Title.OutfitIncomplete,코스튬 미완성
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,메이크업 룩 이름 바꾸기
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,새 캐릭터
 Feature.Avatar.Title.RevertToDefault,기본값으로 되돌리기
@@ -1706,6 +1718,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,저장된 아바타가 여기 표시�
 Feature.Avatar.Title.SelectEmoteForAvatar,아바타 포즈를 위한 감정 표현을 선택하세요
 Feature.Avatar.Title.SelectMakeupLookForUpdate,메이크업 룩 선택
 Feature.Avatar.Title.SelectMakeupLooks,룩 선택
+Feature.Avatar.Title.SelectSet,세트 선택
 Feature.Avatar.Title.SingleDeleteOutfit,'{outfitName}'을(를) 삭제할까요?
 Feature.Avatar.Title.TrendingItemWidget,트렌드 아이템
 Feature.Avatar.Title.TrendingLooksWidget,트렌드 스타일
@@ -1838,7 +1851,7 @@ Feature.Catalog.Action.CloseDetails,세부 정보 닫기
 Feature.Catalog.Action.CopyLink,링크 복사
 Feature.Catalog.Action.Customize,꾸미기
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,아바타 삭제
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,아바타 설명(선택)
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -1849,7 +1862,7 @@ Feature.Catalog.Action.OpenDetails,세부 정보 열기
 Feature.Catalog.Action.Owned,{count}개 보유 중
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
-Feature.Catalog.Action.Remove,제거
+Feature.Catalog.Action.Remove,
 Feature.Catalog.Action.RemoveFavorite,
 Feature.Catalog.Action.Rent,빌리기
 Feature.Catalog.Action.Replace,

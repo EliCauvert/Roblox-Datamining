@@ -592,7 +592,7 @@ CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Berikan komentar tambahan di bawah ini (opsional)
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,Masukkan komentar tambahan di sini
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
-CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Apa terjemahan yang benar? (opsional)
+CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Apa terjemahan yang benar? *
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Objek Pengalaman Virtual: {ObjectType}
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Masukkan terjemahan yang benar di sini
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Gambar yang Dipilih
@@ -1243,6 +1243,8 @@ Feature.Avatar.Action.CreateSetFirstRun,Buat set
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Tampilan Default
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Hapus avatar
+Feature.Avatar.Action.DeleteSet,Hapus set
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Edit Foto Profil
 Feature.Avatar.Action.GoBack,
@@ -1258,8 +1260,11 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Nanti
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,Memposting
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Hapus Semua
+Feature.Avatar.Action.RemoveFromSet,Keluarkan dari set
 Feature.Avatar.Action.Rename,Ubah Nama
+Feature.Avatar.Action.RenameSet,Ganti nama set
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Pulihkan avatar terakhir yang disimpan
 Feature.Avatar.Action.Revert,Kembalikan
@@ -1325,7 +1330,9 @@ Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,Simpan Karakter
 Feature.Avatar.Heading.SelectToUpdate,Pilih untuk Meng-update
 Feature.Avatar.Heading.SetLimitReached,Batas set tercapai
+Feature.Avatar.Heading.SetNameDuplicate,Duplikasi nama
 Feature.Avatar.Heading.SetNameNotAllowed,Nama tidak diperbolehkan
+Feature.Avatar.Heading.SetUpdateFailed,Tidak dapat memperbarui set
 Feature.Avatar.Heading.SharePublicAvatar,Bagikan Avatarmu
 Feature.Avatar.Heading.SortBy,Urutkan berdasarkan
 Feature.Avatar.Heading.UsedName,Nama yang Sudah Digunakan
@@ -1397,6 +1404,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} Terpilih
 Feature.Avatar.Label.Creations,Kreasi
 Feature.Avatar.Label.CurrentlyWearing,Saat ini Memakai
 Feature.Avatar.Label.DefaultBody,Tubuh Default
+Feature.Avatar.Label.DeleteSetBody,Menghapus set ini tidak akan menghapus pakaian yang menjadi bagiannya.
 Feature.Avatar.Label.Details,Detail ({quantity})
 Feature.Avatar.Label.DetailsButton,Detail
 Feature.Avatar.Label.DressesAndSkirts,Gaun & Rok
@@ -1454,6 +1462,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,Sepatu Kiri
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,Bibir
+Feature.Avatar.Label.LoadingSets,Me-load set
 Feature.Avatar.Label.Looks,Tampilan
 Feature.Avatar.Label.Makeup,Makeup
 Feature.Avatar.Label.MakeupLayer,Layer {layerIndex}
@@ -1472,6 +1481,7 @@ Feature.Avatar.Label.Newest,Terbaru
 Feature.Avatar.Label.NoExpiredItems,Tidak Ada {itemType} yang Kedaluwarsa
 Feature.Avatar.Label.NoItems,Tidak ada {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Aset ini tidak akan lagi tersedia di koleksi ini
+Feature.Avatar.Label.NoSets,Belum ada set
 Feature.Avatar.Label.Outerwear,Pakaian Luar
 Feature.Avatar.Label.OutfitIncomplete,Pakaian yang kamu buat belum dibeli dan tidak akan ditampilkan di dalam pengalaman virtual
 Feature.Avatar.Label.OutfitPurchaseFailure,"Maaf, [{numItems}] pembelian gagal."
@@ -1497,6 +1507,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Dipakai baru-baru ini
+Feature.Avatar.Label.RemoveFromSetBody,Avatar ini akan dikeluarkan dari set ini. Avatar tidak akan dihapus.
 Feature.Avatar.Label.Replace,Ganti
 Feature.Avatar.Label.ResetToNewCharacter,Kamu beralih ke karakter baru. Kamu ingin mereset semua item pakaian atau menyimpannya?
 Feature.Avatar.Label.Right,R
@@ -1516,6 +1527,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Pencarian Baru-Baru 
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Dilihat Baru-Baru Ini
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Lanjutkan Berbelanja
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Kamu hanya bisa memiliki maksimal {setLimit} set. Hapus 1 set untuk membuat ruang
 Feature.Avatar.Label.SetNameDuplicateBody,Kamu sudah memiliki set dengan nama ini. Pilih nama lain
 Feature.Avatar.Label.SetNameNotAllowedBody,Pilih nama lain
@@ -1664,7 +1676,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Beri keterangan untuk Avatarmu (Op
 Feature.Avatar.RevokedItems.BodyText,"Item {category} ""{item}"" telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Item berikut telah dihapus dari avatar tersimpan ini, jadi kami mengembalikan jumlah awal yang kamu bayarkan.{lineBreak}{items}{lineBreak}Periksa inbox-mu untuk detail selengkapnya."
 Feature.Avatar.RevokedItems.ViewInbox,Lihat Inbox
-Feature.Avatar.SetNameDuplicate,Duplikasi nama
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,Ubah urutan lapisan makeup-mu
 Feature.Avatar.Title.AvatarRefinement,Penyempurnaan Avatar
 Feature.Avatar.Title.BulkDeleteMakeupLooks,Hapus {count} tampilan makeup?
@@ -1677,6 +1689,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Hapus bagian tubuh?
 Feature.Avatar.Title.ClearClothesConfirmation,Hapus semua pakaian?
 Feature.Avatar.Title.ClearMakeupConfirmation,Hapus semua makeup?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplikasi Tampilan
 Feature.Avatar.Title.EnhancedAvatarHeads,Kepala Avatar yang Disempurnakan
 Feature.Avatar.Title.GetOutfit,Dapatkan Pakaian
@@ -1695,7 +1708,9 @@ Feature.Avatar.Title.NewCustomizeLook,Kustomisasi Punya Tampilan Baru
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Baru di Marketplace
 Feature.Avatar.Title.OutfitIncomplete,Pakaian Tidak Lengkap
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Ubah nama tampilan makeup
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Reset ke default
 Feature.Avatar.Title.ResetToNewCharacter,Karakter Baru
 Feature.Avatar.Title.RevertToDefault,Kembalikan ke default
@@ -1704,6 +1719,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Avatar yang kamu simpan ada di sini
 Feature.Avatar.Title.SelectEmoteForAvatar,Pilih emote untuk mempose Avatarmu
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Pilih tampilan makeup
 Feature.Avatar.Title.SelectMakeupLooks,Pilih tampilan
+Feature.Avatar.Title.SelectSet,Pilih set
 Feature.Avatar.Title.SingleDeleteOutfit,"Hapus ""{outfitName}""?"
 Feature.Avatar.Title.TrendingItemWidget,Item sedang Tren
 Feature.Avatar.Title.TrendingLooksWidget,Gaya yang Sedang Tren
@@ -1844,6 +1860,7 @@ Feature.Catalog.Action.ItemOptions,Opsi Item
 Feature.Catalog.Action.LoadMore,Tampilkan Lebih Banyak
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Buka Detail
+Feature.Catalog.Action.Owned,{count} dimiliki
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2263,7 +2280,7 @@ Feature.Chat.Label.Members,Anggota
 Feature.Chat.Label.MessageNotAvailable,Pesan ini tidak tersedia
 Feature.Chat.Label.MuteInGameChatToastNotifications,Bisukan notifikasi chat dalam game
 Feature.Chat.Label.New,
-Feature.Chat.Label.NoChatFound,Tidak ada chat yang ditemukan
+Feature.Chat.Label.NoChatFound,Chat tidak ditemukan
 Feature.Chat.Label.NoDescriptionYet,Belum ada deskripsi.
 Feature.Chat.Label.NotImplementedMessageType,Pesan ini tidak dapat ditampilkan.
 Feature.Chat.Label.NotSet,Belum Diatur
@@ -3340,6 +3357,7 @@ Feature.RobloxSubscription.Title.GenericError,Terjadi kesalahan
 Feature.RobloxSubscription.Title.GetBlackbird,Dapatkan Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus tidak tersedia di sini
 Feature.SafetyDashboard.Heading.AccountStatus,Status akun
+Feature.Schools.Label.Classmates,Teman sekelas
 Feature.Screentime.Content.ScreentimeLimitDialog,Kamu telah mencapai batas durasi layar harian. Coba lagi besok untuk mengakses Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Peringatan Aktivitas Baru
 Feature.Settings.Label.Error,

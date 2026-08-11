@@ -572,7 +572,7 @@ CoreScripts.Feedback.EntryPoint.OptionText,Dai un feedback sulla traduzione
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Esci
 CoreScripts.Feedback.FeedbackBar.HelpButton,Guida
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Fornisci eventuali commenti aggiuntivi qui sotto (opzionale)
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Fornisci eventuali commenti aggiuntivi qui sotto
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,Inserisci tutti i commenti aggiuntivi che hai qui
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Qual è la traduzione corretta? (opzionale)
@@ -580,7 +580,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Og
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Inserisci qui la traduzione corretta
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Immagine selezionata
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Qual è il problema con questa traduzione? (opzionale)
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Qual è il problema con questa traduzione?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Problema di precisione
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Inappropriato o Derogatorio
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Problema di ortografia o grammatica
@@ -1224,6 +1224,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Crea set
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Visualizzazione predefinita
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Elimina avatar
 Feature.Avatar.Action.DeleteSet,Elimina set
 Feature.Avatar.Action.Discard,Scarta
 Feature.Avatar.Action.EditProfilePicture,Modifica la foto profilo
@@ -1240,7 +1241,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Non ora
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,Pubblicazione
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Rimuovi tutto
+Feature.Avatar.Action.RemoveFromSet,Rimuovi dal set
 Feature.Avatar.Action.Rename,Rinomina
 Feature.Avatar.Action.RenameSet,Rinomina set
 Feature.Avatar.Action.Reset,Ripristina
@@ -1310,6 +1313,7 @@ Feature.Avatar.Heading.SelectToUpdate,Seleziona Per aggiornare
 Feature.Avatar.Heading.SetLimitReached,Limite di set raggiunto
 Feature.Avatar.Heading.SetNameDuplicate,Duplica nome
 Feature.Avatar.Heading.SetNameNotAllowed,Nome non consentito
+Feature.Avatar.Heading.SetUpdateFailed,Impossibile aggiornare il set
 Feature.Avatar.Heading.SharePublicAvatar,Condividi il tuo avatar
 Feature.Avatar.Heading.SortBy,Ordina per
 Feature.Avatar.Heading.UsedName,Nome utilizzato
@@ -1381,6 +1385,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} Selezionato
 Feature.Avatar.Label.Creations,Creazioni
 Feature.Avatar.Label.CurrentlyWearing,Indossato attualmente
 Feature.Avatar.Label.DefaultBody,Corpo predefinito
+Feature.Avatar.Label.DeleteSetBody,L'eliminazione di questo set non eliminerà gli outfit al suo interno.
 Feature.Avatar.Label.Details,Dettagli ({quantity})
 Feature.Avatar.Label.DetailsButton,Dettagli
 Feature.Avatar.Label.DressesAndSkirts,Abiti e gonne
@@ -1438,6 +1443,7 @@ Feature.Avatar.Label.LeftLegs,Gambe sinistre
 Feature.Avatar.Label.LeftShoe,Scarpa Sinistra
 Feature.Avatar.Label.LeftShoes,Scarpe Sinistre
 Feature.Avatar.Label.LipMakeup,Labbra
+Feature.Avatar.Label.LoadingSets,Caricamento set in corso
 Feature.Avatar.Label.Looks,Look
 Feature.Avatar.Label.Makeup,Trucco
 Feature.Avatar.Label.MakeupLayer,Strato {layerIndex}
@@ -1456,6 +1462,7 @@ Feature.Avatar.Label.Newest,Il più recente
 Feature.Avatar.Label.NoExpiredItems,Nessun articolo {itemType} scaduto
 Feature.Avatar.Label.NoItems,No {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Non saranno più disponibili in questa raccolta
+Feature.Avatar.Label.NoSets,Ancora nessun set
 Feature.Avatar.Label.Outerwear,Cappotto
 Feature.Avatar.Label.OutfitIncomplete,L'outfit creato non è stato acquistato e non verrà mostrato in esperienza
 Feature.Avatar.Label.OutfitPurchaseFailure,Siamo spiacenti! [{numItems}] acquisto fallito!
@@ -1481,6 +1488,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Indossati di recente
+Feature.Avatar.Label.RemoveFromSetBody,Questi avatar saranno rimossi da questo set. Non saranno cancellati.
 Feature.Avatar.Label.Replace,Sostituisci
 Feature.Avatar.Label.ResetToNewCharacter,Stai passando a un nuovo personaggio; vuoi resettare tutti gli oggetti del'outfit o mantenerli?
 Feature.Avatar.Label.Right,R
@@ -1500,6 +1508,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Ricerche recenti
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Visualizzati di recente
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Continua ad acquistare
 Feature.Avatar.Label.SelectItem,Scegliere oggetto
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Puoi avere solo fino a {setLimit} set. Elimina un set per fare spazio
 Feature.Avatar.Label.SetNameDuplicateBody,"Hai già un set con questo nome, scegline uno diverso"
 Feature.Avatar.Label.SetNameNotAllowedBody,"Per favore, scegli un altro nome"
@@ -1661,6 +1670,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Vuoi rimuovere il corpo?
 Feature.Avatar.Title.ClearClothesConfirmation,Vuoi rimuovere tutti i vestiti?
 Feature.Avatar.Title.ClearMakeupConfirmation,Vuoi rimuovere tutto il trucco?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplica look
 Feature.Avatar.Title.EnhancedAvatarHeads,Teste di avatar migliorate
 Feature.Avatar.Title.GetOutfit,Ottieni Outfit
@@ -1679,7 +1689,9 @@ Feature.Avatar.Title.NewCustomizeLook,La funzione Personalizza ha un nuovo look!
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nuovo al Marketplace
 Feature.Avatar.Title.OutfitIncomplete,Outfit Incompleto
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Rinomina il look make-up
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Riportare alle condizioni originali
 Feature.Avatar.Title.ResetToNewCharacter,Nuovo Personaggio
 Feature.Avatar.Title.RevertToDefault,Ripristina a predefinito
@@ -1688,6 +1700,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Gli avatar che hai salvato sono qui
 Feature.Avatar.Title.SelectEmoteForAvatar,Seleziona un'emote per mettere in posa il tuo avatar
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Seleziona un look di trucco
 Feature.Avatar.Title.SelectMakeupLooks,Seleziona look
+Feature.Avatar.Title.SelectSet,Seleziona set
 Feature.Avatar.Title.SingleDeleteOutfit,"Vuoi eliminare ""{outfitName}""?"
 Feature.Avatar.Title.TrendingItemWidget,Articoli di tendenza
 Feature.Avatar.Title.TrendingLooksWidget,Stili in tendenza
@@ -1820,7 +1833,7 @@ Feature.Catalog.Action.CloseDetails,Chiudi dettagli
 Feature.Catalog.Action.CopyLink,Copia Link
 Feature.Catalog.Action.Customize,Personalizza
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,Elimina avatar
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Descrivi il tuo avatar (facoltativo)
 Feature.Catalog.Action.Favorite,Preferito
 Feature.Catalog.Action.GoBack,

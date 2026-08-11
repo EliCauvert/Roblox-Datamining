@@ -1244,6 +1244,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Crear conjunto
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Vista predeterminada
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,Eliminar conjunto
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Editar foto de perfil
 Feature.Avatar.Action.GoBack,
@@ -1261,6 +1262,7 @@ Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,Publicando
 Feature.Avatar.Action.RemoveAll,Eliminar todo
 Feature.Avatar.Action.Rename,Renombrar
+Feature.Avatar.Action.RenameSet,Renombrar conjunto
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,Restaurar último avatar guardado
 Feature.Avatar.Action.Revert,Revertir
@@ -1326,6 +1328,7 @@ Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,Guardar personaje
 Feature.Avatar.Heading.SelectToUpdate,Seleccionar para actualizar
 Feature.Avatar.Heading.SetLimitReached,Se alcanzó el límite de conjuntos
+Feature.Avatar.Heading.SetNameDuplicate,Nombre duplicado
 Feature.Avatar.Heading.SetNameNotAllowed,Nombre no permitido
 Feature.Avatar.Heading.SharePublicAvatar,Comparte tu avatar
 Feature.Avatar.Heading.SortBy,Ordenar por
@@ -1665,7 +1668,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,Describe tu avatar (opcional)
 Feature.Avatar.RevokedItems.BodyText,"El objeto ""{item}"" de la categoría {category} fue eliminado de este avatar guardado, así que te reembolsamos el monto original que pagaste.{lineBreak}Revisa tu bandeja de entrada para más detalles."
 Feature.Avatar.RevokedItems.BodyTextMultiple,"Los siguientes objetos fueron eliminados de este avatar guardado, así que te reembolsamos el monto original que pagaste.{lineBreak}{items}{lineBreak}Revisa tu bandeja de entrada para más detalles."
 Feature.Avatar.RevokedItems.ViewInbox,Ver bandeja de entrada
-Feature.Avatar.SetNameDuplicate,Nombre duplicado
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,Organiza tus capas de maquillaje
 Feature.Avatar.Title.AvatarRefinement,Refinamiento de avatar
 Feature.Avatar.Title.BulkDeleteMakeupLooks,¿Quieres eliminar {count} estilos de maquillaje?
@@ -1845,6 +1848,7 @@ Feature.Catalog.Action.ItemOptions,Opciones del objeto
 Feature.Catalog.Action.LoadMore,Cargar más
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Abrir detalles
+Feature.Catalog.Action.Owned,{count} propio
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2266,7 +2270,7 @@ Feature.Chat.Label.Members,Miembros
 Feature.Chat.Label.MessageNotAvailable,Este mensaje no está disponible
 Feature.Chat.Label.MuteInGameChatToastNotifications,Silenciar las notificaciones de chat en el juego
 Feature.Chat.Label.New,
-Feature.Chat.Label.NoChatFound,No se encontró ningún chat
+Feature.Chat.Label.NoChatFound,No se encontraron chats
 Feature.Chat.Label.NoDescriptionYet,Aún sin descripción.
 Feature.Chat.Label.NotImplementedMessageType,No se puede mostrar este mensaje.
 Feature.Chat.Label.NotSet,Sin conf.
@@ -3343,6 +3347,7 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Obtén Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus no está disponible aquí
 Feature.SafetyDashboard.Heading.AccountStatus,Estado de la cuenta
+Feature.Schools.Label.Classmates,Compañeros de clase
 Feature.Screentime.Content.ScreentimeLimitDialog,Alcanzaste el límite de tiempo diario en pantalla. Vuelve mañana para acceder nuevamente a Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Nueva alerta de actividad
 Feature.Settings.Label.Error,

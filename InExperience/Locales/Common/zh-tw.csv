@@ -1242,6 +1242,7 @@ Feature.Avatar.Action.CreateSetFirstRun,建立組合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,預設檢視模式
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,刪除組合
 Feature.Avatar.Action.Discard,捨棄
 Feature.Avatar.Action.EditProfilePicture,編輯個人檔案圖片
 Feature.Avatar.Action.GoBack,
@@ -1259,6 +1260,7 @@ Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,張貼中
 Feature.Avatar.Action.RemoveAll,移除全部
 Feature.Avatar.Action.Rename,更名
+Feature.Avatar.Action.RenameSet,重新命名組合
 Feature.Avatar.Action.Reset,重設
 Feature.Avatar.Action.RestoreLastSaved,還原上次儲存的虛擬人偶
 Feature.Avatar.Action.Revert,還原
@@ -1324,6 +1326,7 @@ Feature.Avatar.Heading.RenameCharacter,
 Feature.Avatar.Heading.SaveCostume,儲存角色
 Feature.Avatar.Heading.SelectToUpdate,選擇要更新的素材
 Feature.Avatar.Heading.SetLimitReached,已達組合上限
+Feature.Avatar.Heading.SetNameDuplicate,名稱重複
 Feature.Avatar.Heading.SetNameNotAllowed,不允許使用此名稱
 Feature.Avatar.Heading.SharePublicAvatar,分享您的虛擬人偶
 Feature.Avatar.Heading.SortBy,排序方式：
@@ -1663,7 +1666,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,為您的虛擬人偶撰寫說明 
 Feature.Avatar.RevokedItems.BodyText,{category}「{item}」道具已從這個已儲存的虛擬人偶中移除，因此我們退還了你原先支付的金額。{lineBreak}如需更多詳細資訊，請查看收件箱。
 Feature.Avatar.RevokedItems.BodyTextMultiple,以下道具已從這個已儲存的虛擬人偶中移除，因此我們退還了你原先支付的金額。{lineBreak}{items}{lineBreak}如需更多詳細資訊，請查看收件箱。
 Feature.Avatar.RevokedItems.ViewInbox,檢視收件箱
-Feature.Avatar.SetNameDuplicate,名稱重複
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,疊加妝容
 Feature.Avatar.Title.AvatarRefinement,虛擬人偶精緻
 Feature.Avatar.Title.BulkDeleteMakeupLooks,要刪除 {count} 個妝容造型嗎？
@@ -1843,6 +1846,7 @@ Feature.Catalog.Action.ItemOptions,道具選項
 Feature.Catalog.Action.LoadMore,載入更多
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,開啟詳細資料
+Feature.Catalog.Action.Owned,已擁有 {count} 個
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,移除
@@ -3341,6 +3345,7 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,取得 Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,此處無法使用 Roblox Plus
 Feature.SafetyDashboard.Heading.AccountStatus,帳號狀態
+Feature.Schools.Label.Classmates,同學
 Feature.Screentime.Content.ScreentimeLimitDialog,您已達到每日螢幕使用時間上限。請明天再回來 Roblox。
 Feature.SecurityFeedback.Header.NewLogin,新活動提醒
 Feature.Settings.Label.Error,

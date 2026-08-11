@@ -2,24 +2,25 @@
 local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).DebugVisualizationsFormatting.ChartHeaderNames
 local debugVisualizationsStaticContentModule = require(script.Parent.DebugVisualizationsStaticContent)
 local slimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
+local slimTintContextFilter = game:DefineFastFlag("SlimTintContextFilter", false)
 local t = {
-	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 11 ]]
+	[chartHeaderNames[1]] = function(p0, p1) --[[ line: 12 ]]
 		return p0.name < p1.name
 	end,
-	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 14 ]]
+	[chartHeaderNames[2]] = function(p2, p3) --[[ line: 15 ]]
 		return if p2.settingInfo.Value == p3.settingInfo.Value then p2.name < p3.name else p2.settingInfo.Value
 	end,
 	[chartHeaderNames[3]] = function(p4, p5) --[[ line: 18 ]]
 		return if p4.settingInfo.Type == p5.settingInfo.Type then p4.name < p5.name else p4.settingInfo.Type < p5.settingInfo.Type
 	end,
-	[chartHeaderNames[4]] = function(p6, p7) --[[ line: 22 ]]
+	[chartHeaderNames[4]] = function(p6, p7) --[[ line: 23 ]]
 		return p6.name < p7.name
 	end
 }
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 30 ]]
+function t_1.new() --[[ line: 31 ]]
 	-- upvalues: t_1 (ref), signalModule (ref), chartHeaderNames (ref)
 	local t = {}
 	setmetatable(t, t_1)
@@ -33,7 +34,7 @@ function t_1.new() --[[ line: 30 ]]
 	return t
 end
 
-function t_1:setSortType(p8) --[[ line: 43 ]]
+function t_1:setSortType(p8) --[[ line: 44 ]]
 	-- upvalues: t (ref)
 	if t[p8] then
 		self._sortType = p8
@@ -45,19 +46,19 @@ function t_1:setSortType(p8) --[[ line: 43 ]]
 	error(string.format("attempted to pass invalid sortType: %s", tostring(p8)), 2)
 end
 
-function t_1:getSortType() --[[ line: 53 ]]
+function t_1:getSortType() --[[ line: 54 ]]
 	return self._sortType
 end
 
-function t_1:Signal() --[[ line: 57 ]]
+function t_1:Signal() --[[ line: 58 ]]
 	return self._visualizationsUpdated
 end
 
-function t_1:getCurrentData() --[[ line: 61 ]]
+function t_1:getCurrentData() --[[ line: 62 ]]
 	return self._sortedVisualizationData
 end
 
-function t_1:updateDebugVisualizationDataEntry(p9, p10) --[[ line: 67 ]]
+function t_1:updateDebugVisualizationDataEntry(p9, p10) --[[ line: 68 ]]
 	if p10 == nil then
 		self._visualizationsData[p9] = nil
 		
@@ -94,12 +95,12 @@ end
 function t_1:_toggleValue(p13, p14) --[[ line: 99 ]]
 	-- upvalues: slimDevConsole2 (ref), t (ref)
 	if slimDevConsole2 then
-		local var6 = self._visualizationsData[p13]
+		local var7 = self._visualizationsData[p13]
 		
-		if var6 and var6.Kind == "Dropdown" then
-			local service = settings():GetService(var6.Service)
-			service[var6.Setter](service, p14)
-			var6.Value = p14
+		if var7 and var7.Kind == "Dropdown" then
+			local service = settings():GetService(var7.Service)
+			service[var7.Setter](service, p14)
+			var7.Value = p14
 			table.sort(self._sortedVisualizationData, t[self._sortType])
 			self._visualizationsUpdated:Fire(self._sortedVisualizationData)
 			
@@ -125,8 +126,8 @@ function t_1:_toggleValue(p13, p14) --[[ line: 99 ]]
 end
 
 function _constructInfo(p15, p16) --[[ line: 132 ]]
-	-- upvalues: slimDevConsole2 (ref)
-	local var8 = nil
+	-- upvalues: slimDevConsole2 (ref), slimTintContextFilter (ref)
+	local var9 = nil
 	local t = nil
 	local enumItems = nil
 	
@@ -137,30 +138,42 @@ function _constructInfo(p15, p16) --[[ line: 132 ]]
 		end)
 		
 		if ok and status then
-			var8 = status[p16.getter](status)
-			enumItems = var8.EnumType:GetEnumItems()
-			t = {}
+			var9 = status[p16.getter](status)
 			
-			for i, v in ipairs(enumItems) do
-				t[i] = v.Name
+			if slimTintContextFilter then
+				local playerAvailableTintModes = status:GetAvailableTintModes(Enum.SlimViewContext.Player, true)
+				enumItems = {}
+				t = {}
+				
+				for i, v in ipairs(playerAvailableTintModes) do
+					enumItems[i] = Enum.SlimTintMode[v]
+					t[i] = v
+				end
+			else
+				enumItems = var9.EnumType:GetEnumItems()
+				t = {}
+				
+				for i, v in ipairs(enumItems) do
+					t[i] = v.Name
+				end
 			end
 		end
 	else
 		local physics = settings().Physics
-		var8 = physics[p15] ~= nil and physics[p15]
+		var9 = physics[p15] ~= nil and physics[p15]
 	end
-	local var11 = ""
+	local var13 = ""
 	
 	for i, v in ipairs(p16.tags) do
-		var11 = (var11 .. v) .. (if i ~= #p16.tags then "" else ", ")
+		var13 = (var13 .. v) .. (if i ~= #p16.tags then "" else ", ")
 	end
 	local t_1 = {
 		Name = p16.name,
-		Value = var8,
+		Value = var9,
 		Type = p16.type,
 		Kind = if slimDevConsole2 then p16.kind else nil,
 		Tags = p16.tags,
-		Tagstring = var11,
+		Tagstring = var13,
 		Description = p16.description,
 		LearnMoreUrl = if slimDevConsole2 then p16.learnMoreUrl else nil
 	}
@@ -174,7 +187,7 @@ function _constructInfo(p15, p16) --[[ line: 132 ]]
 	return t_1
 end
 
-function t_1:start() --[[ line: 184 ]]
+function t_1:start() --[[ line: 194 ]]
 	-- upvalues: debugVisualizationsStaticContentModule (ref), t (ref)
 	for i, v in pairs(debugVisualizationsStaticContentModule) do
 		self:updateDebugVisualizationDataEntry(i, _constructInfo(i, v))
@@ -183,7 +196,7 @@ function t_1:start() --[[ line: 184 ]]
 	self._isRunning = true
 end
 
-function t_1:stop() --[[ line: 192 ]]
+function t_1:stop() --[[ line: 202 ]]
 	self._isRunning = false
 end
 

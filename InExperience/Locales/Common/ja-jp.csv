@@ -1243,6 +1243,7 @@ Feature.Avatar.Action.CreateSetFirstRun,セットを作成
 Feature.Avatar.Action.Default,デフォルト
 Feature.Avatar.Action.DefaultView,デフォルト表示
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteSet,セットを削除
 Feature.Avatar.Action.Discard,破棄
 Feature.Avatar.Action.EditProfilePicture,プロフィール写真を編集
 Feature.Avatar.Action.GoBack,
@@ -1260,6 +1261,7 @@ Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,投稿中
 Feature.Avatar.Action.RemoveAll,すべて削除
 Feature.Avatar.Action.Rename,名前を変更する
+Feature.Avatar.Action.RenameSet,セット名を変更
 Feature.Avatar.Action.Reset,
 Feature.Avatar.Action.RestoreLastSaved,前回のアバターを復元
 Feature.Avatar.Action.Revert,元に戻す
@@ -1325,6 +1327,7 @@ Feature.Avatar.Heading.RenameCharacter,キャラクターを名前を変更
 Feature.Avatar.Heading.SaveCostume,キャラクターを保存
 Feature.Avatar.Heading.SelectToUpdate,選択して更新
 Feature.Avatar.Heading.SetLimitReached,セット数が上限に達しました
+Feature.Avatar.Heading.SetNameDuplicate,名前を複製
 Feature.Avatar.Heading.SetNameNotAllowed,許可されない名前です
 Feature.Avatar.Heading.SharePublicAvatar,アバターを共有
 Feature.Avatar.Heading.SortBy,並べ替え:
@@ -1664,7 +1667,7 @@ Feature.Avatar.Placeholder.WriteAvatarCaption,アバターの説明文を書く�
 Feature.Avatar.RevokedItems.BodyText,{category}のアイテム「{item}」は、保存されたアバターから削除されました。そのため購入時に支払った金額が返金されました。{lineBreak}詳細は受信トレイをご確認ください。
 Feature.Avatar.RevokedItems.BodyTextMultiple,以下のアイテムは、保存されたアバターから削除されました。そのため購入時に支払った金額が返金されました。{lineBreak}{items}{lineBreak}詳細は受信トレイをご確認ください。
 Feature.Avatar.RevokedItems.ViewInbox,受信トレイを表示
-Feature.Avatar.SetNameDuplicate,名前を複製
+Feature.Avatar.SetNameDuplicate,
 Feature.Avatar.Text.MakeupLayeringTooltip,メイクを重ねる
 Feature.Avatar.Title.AvatarRefinement,アバター微調整
 Feature.Avatar.Title.BulkDeleteMakeupLooks,{count}件のメイクルックを削除しますか？
@@ -1844,6 +1847,7 @@ Feature.Catalog.Action.ItemOptions,アイテムオプション
 Feature.Catalog.Action.LoadMore,さらに読み込む
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,詳細を開く
+Feature.Catalog.Action.Owned,{count}件所有中
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,
@@ -2265,7 +2269,7 @@ Feature.Chat.Label.Members,メンバー
 Feature.Chat.Label.MessageNotAvailable,このメッセージは表示できません
 Feature.Chat.Label.MuteInGameChatToastNotifications,ゲーム内チャット通知をミュート
 Feature.Chat.Label.New,新規
-Feature.Chat.Label.NoChatFound,チャットが見つかりませんでした
+Feature.Chat.Label.NoChatFound,チャットが見つかりません
 Feature.Chat.Label.NoDescriptionYet,まだ詳細はありません。
 Feature.Chat.Label.NotImplementedMessageType,メッセージを表示できませんでした。
 Feature.Chat.Label.NotSet,設定されていません
@@ -3341,6 +3345,7 @@ Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Roblox Plusを取得する
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plusはこちらではご利用いただけません
 Feature.SafetyDashboard.Heading.AccountStatus,アカウント状況
+Feature.Schools.Label.Classmates,クラスメート
 Feature.Screentime.Content.ScreentimeLimitDialog,1日のスクリーン時間制限に達しました。また明日、Robloxにアクセスしてください。
 Feature.SecurityFeedback.Header.NewLogin,新しいアクティビティの通知
 Feature.Settings.Label.Error,

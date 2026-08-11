@@ -581,7 +581,7 @@ CoreScripts.Feedback.EntryPoint.OptionText,给予翻译反馈
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,退出
 CoreScripts.Feedback.FeedbackBar.HelpButton,帮助
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,在下方提供任何额外评论（选填）
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,在下方提供其他补充说明
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,在此输入额外评论
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,正确的翻译是什么？（选填）
@@ -589,7 +589,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,在此输入正确翻译
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,已选择的图片
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,这个翻译有什么问题？（选填）
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,此译文有什么问题？
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,准确度问题
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,不适当或带有贬义
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,拼字或文法问题
@@ -1233,7 +1233,7 @@ Feature.Avatar.Action.CreateSetFirstRun,创建集合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,默认视角
 Feature.Avatar.Action.Delete,
-Feature.Avatar.Action.DeleteAvatars,
+Feature.Avatar.Action.DeleteAvatars,删除虚拟形象
 Feature.Avatar.Action.DeleteSet,删除集合
 Feature.Avatar.Action.Discard,放弃
 Feature.Avatar.Action.EditProfilePicture,编辑个人资料图片
@@ -1250,9 +1250,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,以后再说
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,正在发布
-Feature.Avatar.Action.Remove,
+Feature.Avatar.Action.Remove,移除
 Feature.Avatar.Action.RemoveAll,全部移除
-Feature.Avatar.Action.RemoveFromSet,
+Feature.Avatar.Action.RemoveFromSet,从集合中移除
 Feature.Avatar.Action.Rename,重命名
 Feature.Avatar.Action.RenameSet,重命名集合
 Feature.Avatar.Action.Reset,
@@ -1322,7 +1322,7 @@ Feature.Avatar.Heading.SelectToUpdate,选择要更新的素材
 Feature.Avatar.Heading.SetLimitReached,已达到集合数量上限
 Feature.Avatar.Heading.SetNameDuplicate,名称重复
 Feature.Avatar.Heading.SetNameNotAllowed,不允许使用该名称
-Feature.Avatar.Heading.SetUpdateFailed,
+Feature.Avatar.Heading.SetUpdateFailed,无法更新集合
 Feature.Avatar.Heading.SharePublicAvatar,分享你的虚拟形象
 Feature.Avatar.Heading.SortBy,排序依据
 Feature.Avatar.Heading.UsedName,名称已使用
@@ -1394,7 +1394,7 @@ Feature.Avatar.Label.CountSelected,已选择 {itemCount} 个物品
 Feature.Avatar.Label.Creations,
 Feature.Avatar.Label.CurrentlyWearing,当前穿戴
 Feature.Avatar.Label.DefaultBody,默认身体
-Feature.Avatar.Label.DeleteSetBody,
+Feature.Avatar.Label.DeleteSetBody,删除此集合不会删除其中的穿搭。
 Feature.Avatar.Label.Details,详细信息 ({quantity})
 Feature.Avatar.Label.DetailsButton,详情
 Feature.Avatar.Label.DressesAndSkirts,裙子
@@ -1453,7 +1453,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,左脚鞋子
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,嘴唇
-Feature.Avatar.Label.LoadingSets,
+Feature.Avatar.Label.LoadingSets,正在加载集合
 Feature.Avatar.Label.Looks,造型
 Feature.Avatar.Label.Makeup,妆容
 Feature.Avatar.Label.MakeupLayer,图层 {layerIndex}
@@ -1472,7 +1472,7 @@ Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,没有已过期的{itemType}道具
 Feature.Avatar.Label.NoItems,无{itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,将从此收藏中删除该素材
-Feature.Avatar.Label.NoSets,
+Feature.Avatar.Label.NoSets,尚无集合
 Feature.Avatar.Label.Outerwear,外套
 Feature.Avatar.Label.OutfitIncomplete,你尚未购买你创作的穿搭，因此无法在体验中显示
 Feature.Avatar.Label.OutfitPurchaseFailure,抱歉，无法购买 {numItems} 个道具！
@@ -1498,7 +1498,7 @@ Feature.Avatar.Label.R15,15 型号
 Feature.Avatar.Label.R6,6 型号
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,最近穿戴
-Feature.Avatar.Label.RemoveFromSetBody,
+Feature.Avatar.Label.RemoveFromSetBody,这些虚拟形象将从此集合中移除。它们不会被删除。
 Feature.Avatar.Label.Replace,替换
 Feature.Avatar.Label.ResetToNewCharacter,你即将切换至新角色，是否想要重置全部穿搭道具，或保留？
 Feature.Avatar.Label.Right,右
@@ -1518,7 +1518,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,最近搜索
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,最近查看
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,继续购物
 Feature.Avatar.Label.SelectItem,选择物品
-Feature.Avatar.Label.SetAvatarCount,
+Feature.Avatar.Label.SetAvatarCount,{itemCount} 个虚拟形象
 Feature.Avatar.Label.SetLimitReachedBody,你最多只能有 {setLimit} 个集合。请删除一个以腾出空间
 Feature.Avatar.Label.SetNameDuplicateBody,你已经有一个同名的集合，请选择其他名称
 Feature.Avatar.Label.SetNameNotAllowedBody,请选择其他名称
@@ -1711,7 +1711,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,你保存的虚拟形象在这里
 Feature.Avatar.Title.SelectEmoteForAvatar,选择一个表情动作，给你的虚拟形象摆个造型
 Feature.Avatar.Title.SelectMakeupLookForUpdate,选择一个妆容造型
 Feature.Avatar.Title.SelectMakeupLooks,选择造型
-Feature.Avatar.Title.SelectSet,
+Feature.Avatar.Title.SelectSet,选择集合
 Feature.Avatar.Title.SingleDeleteOutfit,要删除“{outfitName}”吗？
 Feature.Avatar.Title.TrendingItemWidget,热门道具
 Feature.Avatar.Title.TrendingLooksWidget,热门造型
@@ -1844,7 +1844,7 @@ Feature.Catalog.Action.CloseDetails,关闭详情
 Feature.Catalog.Action.CopyLink,复制链接
 Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,删除虚拟形象
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,描述你的虚拟形象（可选）
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -1855,7 +1855,7 @@ Feature.Catalog.Action.OpenDetails,打开详情
 Feature.Catalog.Action.Owned,已有 {count} 个
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
-Feature.Catalog.Action.Remove,移除
+Feature.Catalog.Action.Remove,
 Feature.Catalog.Action.RemoveFavorite,从“最爱”移除
 Feature.Catalog.Action.Rent,租用
 Feature.Catalog.Action.Replace,

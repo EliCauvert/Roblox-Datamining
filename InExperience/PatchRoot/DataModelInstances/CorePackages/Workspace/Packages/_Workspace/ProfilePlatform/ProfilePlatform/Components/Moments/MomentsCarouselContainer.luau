@@ -22,39 +22,49 @@ local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local navigateDown = navigationRoduxModule.Thunks.NavigateDown
 local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
 local fFlagProfileMomentsFeedRootRoute = sharedFlagsModule.FFlagProfileMomentsFeedRootRoute
-local var14 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+local fFlagProfileMomentsLoadFailureAnalyticsModule = require(profilePlatform.Flags.FFlagProfileMomentsLoadFailureAnalytics)
+local var15 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p0) --[[ line: 41 | named "MomentsCarouselContainer" ]]
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useUserMomentsModule (ref), reactModule (ref), eventNamesModule (ref), enumsModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), makeProfileTileFieldsModule (ref), fireAnalyticsEvent (ref), eventNames (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var14 (ref), navigateDown (ref), momentsCarouselModule (ref)
-	local var15 = useProfileWrapperContextModule()
-	local var16 = useProfileAnalyticsContextModule()
-	local var17 = useNavigation()
-	local var18 = if fFlagProfileMomentsFeedRootRoute then useDispatch() else nil
-	local profileId = var15.profileId
-	local moments = useUserMomentsModule(profileId).moments
+return function(p0) --[[ line: 42 | named "MomentsCarouselContainer" ]]
+	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useNavigation (ref), fFlagProfileMomentsFeedRootRoute (ref), useDispatch (ref), useUserMomentsModule (ref), fFlagProfileMomentsLoadFailureAnalyticsModule (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), eventNamesModule (ref), enumsModule (ref), getFFlagMomentsAnalyticsSchemaIdentity (ref), makeProfileTileFieldsModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var15 (ref), navigateDown (ref), momentsCarouselModule (ref)
+	local var16 = useProfileWrapperContextModule()
+	local var17 = useProfileAnalyticsContextModule()
+	local var18 = useNavigation()
+	local var19 = if fFlagProfileMomentsFeedRootRoute then useDispatch() else nil
+	local profileId = var16.profileId
+	local var20 = useUserMomentsModule(profileId)
+	local moments = var20.moments
 	
+	if fFlagProfileMomentsLoadFailureAnalyticsModule then
+		reactModule.useEffect(function() --[[ line: 53 ]]
+			-- upvalues: var20 (ref), profileId (ref), fireAnalyticsEvent (copy), eventNames (copy)
+			if var20.hasFailed and profileId ~= nil then
+				fireAnalyticsEvent(eventNames.ProfileLoadFailed, { userId = profileId })
+			end
+		end, { var20.hasFailed, profileId })
+	end
 	return if #moments == 0 then reactModule.None else reactModule.createElement(momentsCarouselModule, {
 		layoutOrder = p0.layoutOrder,
 		moments = moments,
-		onActivateHeader = reactModule.useCallback(function() --[[ line: 50 ]]
-			-- upvalues: var16 (ref), eventNamesModule (copy), var17 (ref), enumsModule (copy), profileId (ref)
-			var16.fireAnalyticsEvent(eventNamesModule.MomentsSeeAll)
-			var17.navigate(enumsModule.Screens.MomentsAll, { extraProps = { profileId = profileId } })
-		end, { var16, var17, profileId }),
-		onSelectMoment = reactModule.useCallback(function(p1) --[[ line: 59 ]]
-			-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (copy), moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var16 (ref), eventNamesModule (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var14 (copy), var18 (ref), navigateDown (copy), var17 (ref), enumsModule (copy)
+		onActivateHeader = reactModule.useCallback(function() --[[ line: 62 ]]
+			-- upvalues: var17 (ref), eventNamesModule (copy), var18 (ref), enumsModule (copy), profileId (ref)
+			var17.fireAnalyticsEvent(eventNamesModule.MomentsSeeAll)
+			var18.navigate(enumsModule.Screens.MomentsAll, { extraProps = { profileId = profileId } })
+		end, { var17, var18, profileId }),
+		onSelectMoment = reactModule.useCallback(function(p1) --[[ line: 71 ]]
+			-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (copy), moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var17 (ref), eventNamesModule (copy), fFlagProfileMomentsFeedRootRoute (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var15 (copy), var19 (ref), navigateDown (copy), var18 (ref), enumsModule (copy)
 			if getFFlagMomentsAnalyticsSchemaIdentity() then
-				local var19 = moments[p1]
+				local var21 = moments[p1]
 				
-				if var19 and profileId then
-					local carousel = makeProfileTileFieldsModule.makeProfileTileInteractionFields(var19, profileId, "carousel", p1)
+				if var21 and profileId then
+					local carousel = makeProfileTileFieldsModule.makeProfileTileInteractionFields(var21, profileId, "carousel", p1)
 					
 					if carousel then
 						fireAnalyticsEvent(eventNames.ProfileMomentSelected, carousel)
 					end
 				end
 			else
-				var16.fireAnalyticsEvent(eventNamesModule.MomentOpened)
+				var17.fireAnalyticsEvent(eventNamesModule.MomentOpened)
 			end
 			local t = {
 				targetUserId = tonumber(profileId) or 0,
@@ -62,32 +72,32 @@ return function(p0) --[[ line: 41 | named "MomentsCarouselContainer" ]]
 			}
 			
 			if not fFlagProfileMomentsFeedRootRoute then
-				var17.navigate(enumsModule.Screens.MomentsFeed, { extraProps = t })
+				var18.navigate(enumsModule.Screens.MomentsFeed, { extraProps = t })
 				
 				return
 			end
 			local t_1 = { name = appPage.ProfileMomentsFeed, extraProps = t }
 			
 			if fFlagSignalsNavP3Dispatch then
-				var14.down(var14.fromLegacyPage(t_1))
+				var15.down(var15.fromLegacyPage(t_1))
 				
 				return
 			end
-			var18(navigateDown(t_1))
+			var19(navigateDown(t_1))
 		end, {
-			var16,
 			var17,
 			var18,
+			var19,
 			profileId,
 			moments
 		}),
-		onTileImpression = if getFFlagMomentsAnalyticsSchemaIdentity() then reactModule.useCallback(function(p2) --[[ line: 100 ]]
+		onTileImpression = if getFFlagMomentsAnalyticsSchemaIdentity() then reactModule.useCallback(function(p2) --[[ line: 112 ]]
 			-- upvalues: getFFlagMomentsAnalyticsSchemaIdentity (copy), moments (ref), profileId (ref), makeProfileTileFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy)
 			if not getFFlagMomentsAnalyticsSchemaIdentity() then return end
-			local var23 = moments[p2]
+			local var25 = moments[p2]
 			
-			if var23 and profileId and var23.recommendationMetadata then
-				local carousel = makeProfileTileFieldsModule.makeProfileTileImpressionFields(var23, profileId, "carousel", p2)
+			if var25 and profileId and var25.recommendationMetadata then
+				local carousel = makeProfileTileFieldsModule.makeProfileTileImpressionFields(var25, profileId, "carousel", p2)
 				
 				if carousel then
 					fireAnalyticsEvent(eventNames.ProfileMomentTileImpression, carousel)
