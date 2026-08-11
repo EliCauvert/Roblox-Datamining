@@ -1,13 +1,15 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+﻿local foundation = script:FindFirstAncestor("Foundation")
+local reactModule = require(foundation.Parent.React)
 local overlayContextModule = require(script.Parent.OverlayContext)
+local flagsModule = require(foundation.Utility.Flags)
 
-return function() --[[ line: 8 | named "useOverlay" ]]
-	-- upvalues: reactModule (ref), overlayContextModule (ref)
-	local var2 = reactModule.useContext(overlayContextModule)
-	reactModule.useLayoutEffect(function() --[[ line: 11 ]]
-		-- upvalues: var2 (ref)
-		var2.requestOverlay()
-	end, { var2.requestOverlay })
+return function() --[[ line: 10 | named "useOverlay" ]]
+	-- upvalues: reactModule (ref), overlayContextModule (ref), flagsModule (ref)
+	local var4 = reactModule.useContext(overlayContextModule)
+	reactModule.useLayoutEffect(function() --[[ line: 13 ]]
+		-- upvalues: var4 (ref)
+		var4.requestOverlay()
+	end, if flagsModule.FoundationOverlayKeyboardAwarenessHardened then { var4.requestOverlay } else {})
 	
-	return var2.instance
+	return var4.instance
 end

@@ -975,7 +975,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volumen
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invitar amistades
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Únete a juegos visitados anteriormente
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Estás a punto de abandonar este juego y regresar a {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Estás a punto de abandonar este juego y regresar a {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,¿Quieres salir?
 CoreScripts.PremiumModal.Title.Error,Error
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2547,6 +2549,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sems.
+Feature.Chat.Label.TryAgain,Inténtalo de nuevo
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,usuario desconocido
 Feature.Chat.Label.User,
@@ -4619,7 +4622,7 @@ Features.Transfers.Notification.ReceiveSuccess,Ya aceptaste los Robux
 Features.Transfers.RobuxTransfer.Action.Edit,
 Features.Transfers.RobuxTransfer.Action.Next,
 Features.Transfers.RobuxTransfer.Action.Send,
-Features.Transfers.RobuxTransfer.Action.TryAgain,Inténtalo de nuevo
+Features.Transfers.RobuxTransfer.Action.TryAgain,
 Features.Transfers.RobuxTransfer.Disclaimer.AgeEstimationTransfer,"Necesitas una comprobación de edad o el consentimiento de tus padres para enviar Robux. Una vez que envíes Robux, no podrás cancelar la acción."
 Features.Transfers.RobuxTransfer.Error.ReceiverNotAllowed,@{username} no puede recibir Robux en este momento.
 Features.Transfers.RobuxTransfer.Heading.SendRobux,Enviar Robux

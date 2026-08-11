@@ -262,7 +262,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Accesso a QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,Invia codice
 Authentication.Login.Action.SendVerificationEmail,Invia e-mail di verifica
 Authentication.Login.Action.SignIn,Accedi
 Authentication.Login.Action.UsePasskey,Usa Passkey
@@ -275,11 +274,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Inserisci il codice che 
 Authentication.Login.Description.GetOneTimeCodeHelp,Inserisci l'email verificata sul tuo account per ricevere un codice monouso.
 Authentication.Login.Description.PasskeyDescription,"Il tuo account utilizza le passkey, un metodo più sicuro rispetto alle password tradizionali, che permette di accedere al dispositivo tramite impronta digitale, riconoscimento facciale o codice di sblocco."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Non siamo in grado di determinare se il tuo dispositivo supporta la passkey. Prova nuovamente ad accedere o tocca ""Problemi di accesso"" per ripristinare l'account tramite indirizzo email o numero di telefono."
-Authentication.Login.Description.PasskeyMobileOnly,Le passkey sono disponibili solo sui dispositivi mobili. Scegli un altro modo per accedere.
-Authentication.Login.Description.VerificationCodeSentTo,"Se esiste un account Roblox associato, riceverai un codice di verifica all'indirizzo {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Il tuo account dispone solo di una passkey configurata per l'accesso. Prova ad accedere con la passkey o ripristina l'account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossibile verificare l'account della piattaforma. Riprova più tardi.
-Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,Account incompatibili
 Authentication.Login.Heading.Login,Accesso
 Authentication.Login.Heading.LoginRoblox,Accedi a Roblox
@@ -301,8 +297,6 @@ Authentication.Login.Label.ConnectionError.Title,Errore di connessione
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Devi verificare il tuo indirizzo e-mail
 Authentication.Login.Label.EmailOrPhone,Email o telefono
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,Inserisci email
 Authentication.Login.Label.EnterOneTimeCode,Inserisci Codice Unico
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Inserisci il codice che ti abbiamo inviato tramite email
 Authentication.Login.Label.ForgotYourPassword,Hai dimenticato la password?
@@ -964,7 +958,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invita amici
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Partecipa ai giochi visitati in precedenza
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Stai per abbandonare questo gioco e tornare a {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Stai per abbandonare questo gioco e tornare a {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Vai via?
 CoreScripts.PremiumModal.Title.Error,Errore
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2547,6 +2543,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ora
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sett.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sett.
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,utente sconosciuto
 Feature.Chat.Label.User,Utente
@@ -3006,8 +3003,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Aggiungi 
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} è ora un tuo amico affidabile
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amico affidabile rimosso
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Richiesta come amico affidabile inviata
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Attività recenti
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Attività recenti di {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,{num_days} gg
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,{num_hours} ore
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

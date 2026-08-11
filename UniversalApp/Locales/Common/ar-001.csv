@@ -261,7 +261,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,تسجيل دخول QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,إعادة إرسال الرمز
-Authentication.Login.Action.SendCodeSentenceCase,إرسال الكود
 Authentication.Login.Action.SendVerificationEmail,إرسال بريد إلكتروني للتحقق
 Authentication.Login.Action.SignIn,تسجيل الدخول
 Authentication.Login.Action.UsePasskey,استخدام مفتاح مرور
@@ -274,11 +273,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,أدخل الرمز ال
 Authentication.Login.Description.GetOneTimeCodeHelp,أدخل بريدك الإلكتروني الذي تم التحقق منه في حسابك لتلقي رمز مرة واحدة.
 Authentication.Login.Description.PasskeyDescription,يحتوي حسابك على مفتاح مرور، وهو طريقة تسجيل دخول أكثر أمانًا من كلمة المرور. يمكنك استخدام بصمة إصبعك أو وجهك أو قفل الشاشة لتسجيل الدخول على هذا الجهاز.
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"لا يمكننا تحديد ما إذا كان جهازك يدعم مفتاح المرور. حاول مرة أخرى، أو اضغط على ""مشكلة في تسجيل الدخول"" لاسترداد حسابك باستخدام بريد إلكتروني أو رقم هاتف."
-Authentication.Login.Description.PasskeyMobileOnly,مفاتيح المرور متاحة فقط على الهاتف المحمول. اختر طريقة أخرى لتسجيل الدخول.
-Authentication.Login.Description.VerificationCodeSentTo,إذا كان هناك حساب على منصّة Roblox، فستتلقى كود تحقق على البريد الإلكتروني {email}
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
-Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,تسجيل الدخول إلى Roblox
@@ -299,8 +295,6 @@ Authentication.Login.Label.ConnectionError.Title,خطأ في الاتصال
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,نحتاج للتحقق من بريدك الإلكتروني
 Authentication.Login.Label.EmailOrPhone,البريد الإلكتروني أو الهاتف
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,أدخِل البريد الإلكتروني
 Authentication.Login.Label.EnterOneTimeCode,أدخل رمز مرة واحدة
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,أدخل الرمز الذي أرسلناه للتو إلى بريدك الإلكتروني
 Authentication.Login.Label.ForgotYourPassword,هل نسيت كلمة مرورك؟
@@ -962,7 +956,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,المستوى
 CoreScripts.InGameMenu.Leave,مغادرة
 CoreScripts.InGameMenu.PageTitle.InviteFriends,دعوة أصدقاء
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,هل تريد الخروج؟
 CoreScripts.PremiumModal.Title.Error,خطأ
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2545,6 +2541,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1س
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,غير متاحة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
@@ -3004,8 +3001,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,النشاط الأخير
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,نشاط {username} الأخير
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

@@ -261,7 +261,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ लॉग इन
 Authentication.Login.Action.QuickSignIn,क्विक साइन-इन करें
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,कोड भेजें
 Authentication.Login.Action.SendVerificationEmail,वेरिफ़िकेशन ईमेल भेजें
 Authentication.Login.Action.SignIn,साइन इन करें
 Authentication.Login.Action.UsePasskey,पास-की का इस्तेमाल करें
@@ -274,11 +273,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,अभी-अभी आ�
 Authentication.Login.Description.GetOneTimeCodeHelp,"वन-टाइम कोड पाने के लिए, अपना वेरिफ़ाइड ईमेल डालें."
 Authentication.Login.Description.PasskeyDescription,"आपका अकाउंट पास-की का इस्तेमाल करता है. यह पासवर्ड से ज़्यादा सुरक्षित है. आप इस डिवाइस पर अपने फ़िंगरप्रिंट, फ़ेस या स्क्रीन लॉक से साइन इन कर सकते हैं."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"हम यह नहीं तय कर सकते कि आपका डिवाइस पास-की का सपोर्ट करता है या नहीं. ईमेल या फ़ोन इस्तेमाल करके, अपना अकाउंट रिकवर करने के लिए फिर से कोशिश करें या “साइन इन करने में समस्या” पर टैप करें."
-Authentication.Login.Description.PasskeyMobileOnly,पास-की सिर्फ़ मोबाइल पर उपलब्ध हैं. साइन-इन करने का कोई दूसरा तरीका चुनें.
-Authentication.Login.Description.VerificationCodeSentTo,"अगर कोई Roblox अकाउंट मौजूद है, तो आपको {email} पर एक वेरिफ़िकेशन कोड मिलेगा"
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
-Authentication.Login.Heading.EnterYourCode,अपना कोड डालें :
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
 Authentication.Login.Heading.Login,लॉग इन करें
 Authentication.Login.Heading.LoginRoblox,Roblox में लॉग इन करें
@@ -300,8 +296,6 @@ Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,आपके ईमेल को वेरिफ़ाई करना ज़रूरी है
 Authentication.Login.Label.EmailOrPhone,ईमेल या फ़ोन
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,ईमेल डालें
 Authentication.Login.Label.EnterOneTimeCode,वन-टाइम कोड डालें
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,अभी-अभी आपके ईमेल पर भेजा गया कोड डालें.
 Authentication.Login.Label.ForgotYourPassword,पासवर्ड भूल गए हैं?
@@ -962,7 +956,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,वॉल्यूम
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,फ़्रेंड्स को इनवाइट करें
 CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,आप इस गेम को छोड़कर वापस {PREVIOUS_GAME} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,आपको जाना है?
 CoreScripts.PremiumModal.Title.Error,गड़बड़ी
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2545,6 +2541,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 घंटा
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र
@@ -3004,8 +3001,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,भरो
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,हाल ही की ऐक्टिविटी
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username} की हाल ही की ऐक्टिविटी
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,{num_days} दिन
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,{num_hours} घंटे
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

@@ -278,7 +278,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Logowanie – QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,Wyślij kod
 Authentication.Login.Action.SendVerificationEmail,Wyślij weryfikacyjną wiadomość e-mail
 Authentication.Login.Action.SignIn,Zaloguj się
 Authentication.Login.Action.UsePasskey,Użyj klucza dostępu
@@ -291,11 +290,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Wprowadź kod, który w
 Authentication.Login.Description.GetOneTimeCodeHelp,"Aby otrzymać kod jednorazowy, wprowadź adres e-mail zweryfikowany na twoim koncie."
 Authentication.Login.Description.PasskeyDescription,"Na twoim koncie używany jest klucz dostępu – bezpieczniejsza metoda logowania niż hasło. Na tym urządzeniu możesz logować się, używając odcisku palca, twarzy lub blokady ekranu."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Nie jesteśmy w stanie ustalić, czy twoje urządzenie obsługuje klucz dostępu. Spróbuj ponownie lub dotknij opcji „Kłopoty z logowaniem”, aby odzyskać konto za pomocą adresu e-mail lub numeru telefonu."
-Authentication.Login.Description.PasskeyMobileOnly,Klucze dostępu są dostępne wyłącznie na urządzeniach mobilnych. Wybierz inny sposób logowania.
-Authentication.Login.Description.VerificationCodeSentTo,"Jeżeli istnieje konto Roblox, otrzymasz kod weryfikacyjny na {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Na Twoim koncie skonfigurowano wyłącznie logowanie za pomocą klucza dostępu. Spróbuj zalogować się za pomocą klucza dostępu lub odzyskaj konto.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Nie można zweryfikować konta na platformie. Spróbuj ponownie później.
-Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,Niezgodne konta
 Authentication.Login.Heading.Login,Logowanie
 Authentication.Login.Heading.LoginRoblox,Zaloguj się na platformie Roblox
@@ -317,8 +313,6 @@ Authentication.Login.Label.ConnectionError.Title,Błąd połączenia
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Adres e-mail wymaga weryfikacji
 Authentication.Login.Label.EmailOrPhone,Adres e-mail lub numer telefonu
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,Wprowadź adres e-mail
 Authentication.Login.Label.EnterOneTimeCode,Wprowadź kod jednorazowy
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,"Wprowadź kod, który właśnie wysłaliśmy na twój adres e-mail"
 Authentication.Login.Label.ForgotYourPassword,Nie pamiętasz hasła?
@@ -980,7 +974,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,Głośność
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Dołącz do wcześniej odwiedzonych gier
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Opuścisz tę grę i wrócisz do: {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Opuścisz tę grę i wrócisz do {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Wychodzisz?
 CoreScripts.PremiumModal.Title.Error,Błąd
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2565,6 +2561,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 godz.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 tydz.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} tyg.
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,Nieznany użytkownik
 Feature.Chat.Label.User,Użytkownik
@@ -3024,8 +3021,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} jest teraz zaufanym znajomym
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Wysłano prośbę o dodanie do zaufanych znajomych
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Ostatnia aktywność
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Ostatnia aktywność: {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,{num_hours} h
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

@@ -270,7 +270,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ 登录
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,发送验证码
 Authentication.Login.Action.SendVerificationEmail,发送验证电子邮件
 Authentication.Login.Action.SignIn,登录
 Authentication.Login.Action.UsePasskey,使用通行密钥
@@ -283,11 +282,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,请输入我们发送至
 Authentication.Login.Description.GetOneTimeCodeHelp,请输入你帐户中已验证的电子邮件来接收一次性验证码。
 Authentication.Login.Description.PasskeyDescription,你的帐户有通行密钥，这是比密码更安全地登录方式。你可以使用指纹、面部或屏幕锁定在此设备上登录。
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,我们无法确定你的设备是否支持通行密钥。请重试，或点按“登录有问题”来使用电子邮件或手机号码恢复你的帐户。
-Authentication.Login.Description.PasskeyMobileOnly,通行密钥仅适用于移动设备。请选择其他方式登录。
-Authentication.Login.Description.VerificationCodeSentTo,如果 Roblox 帐户存在，你将通过 {email} 收到验证码
 Authentication.Login.Error.PasskeyOnlyAccount,你的帐户只设置了登录密码。请尝试使用你的通行密钥登录，或恢复你的帐户。
 Authentication.Login.Error.PlatformAccountConnectionFailure,无法验证平台帐户。请稍后重试。
-Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,帐户不兼容
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,登录罗布乐思
@@ -309,8 +305,6 @@ Authentication.Login.Label.ConnectionError.Title,连接错误
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,你的电子邮件需要验证
 Authentication.Login.Label.EmailOrPhone,电子邮箱或手机号码
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,输入电子邮箱
 Authentication.Login.Label.EnterOneTimeCode,输入一次性验证码
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,请输入我们刚发送至你电子邮件的验证码
 Authentication.Login.Label.ForgotYourPassword,忘记密码？
@@ -975,7 +969,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即将离开此游戏并返回“{PREVIOUS_GAME}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,你要离开吗？
 CoreScripts.PremiumModal.Title.Error,错误
 CoreScripts.PublishAssetPrompt.ResultModalOk,确定
@@ -2558,6 +2554,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小时
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
@@ -3017,8 +3014,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,近期活动
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username}的近期活动
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

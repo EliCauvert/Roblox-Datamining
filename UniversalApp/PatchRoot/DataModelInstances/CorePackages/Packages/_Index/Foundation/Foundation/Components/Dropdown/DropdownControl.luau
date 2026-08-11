@@ -27,17 +27,34 @@ local chevronLargeDown = builderIconsModule.Icon.ChevronLargeDown
 local t = {
 	isMenuOpen = false,
 	placeholder = "",
-	variant = inputVariantModule.Standard,
+	variant = if flagsModule.FoundationDropdownVariant then inputVariantModule.Standard else nil,
 	Selectable = if flagsModule.FoundationDropdownSelectionProps then true else nil
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 66 | named "DropdownControl" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), useDropdownVariantsModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), viewModule (ref), flagsModule (ref), stateLayerAffordanceModule (ref), blendTransparenciesModule (ref), constantsModule (ref), textModule (ref), iconModule (ref), chevronLargeUp (ref), chevronLargeDown (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), controlStateModule (ref), flagsModule (ref), inputVariantModule (ref), useDropdownVariantsModule (ref), inputFieldModule (ref), withCommonPropsModule (ref), getInputTextSizeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), blendTransparenciesModule (ref), constantsModule (ref), textModule (ref), iconModule (ref), chevronLargeUp (ref), chevronLargeDown (ref)
 	local var19 = withDefaultsModule(p0, t)
 	local var20 = useTokensModule()
 	local var21, var22 = reactModule.useState(controlStateModule.Initialize)
-	local var23 = useDropdownVariantsModule(var20, var19.size, var19.variant, var21, var19.item == nil, var19.hasError or false, var19.isMenuOpen, var21 == controlStateModule.Hover)
-	local var24 = reactModule.useMemo(function() --[[ line: 82 ]]
+	local var23 = var19.item == nil
+	
+	if flagsModule.FoundationDropdownVariant and var19.variant == nil then
+		var19.variant = inputVariantModule.Standard
+	end
+	local var27
+	local size = var19.size
+	local var24 = if flagsModule.FoundationDropdownVariant then var19.variant else nil
+	local hasError = var19.hasError or false
+	local var26 = if flagsModule.FoundationDropdownVariant then var19.isMenuOpen else nil
+	
+	if flagsModule.FoundationDropdownVariant then
+		var27 = var21 == controlStateModule.Hover
+		var27 = nil
+	else
+		var27 = nil
+	end
+	local var28 = useDropdownVariantsModule(var20, size, var24, var21, var23, hasError, var26, var27)
+	local var29 = reactModule.useMemo(function() --[[ line: 86 ]]
 		-- upvalues: var20 (ref)
 		return {
 			radius = UDim.new(0, var20.Radius.Small),
@@ -54,8 +71,8 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 66 | 
 		hint = var19.hint,
 		ref = p1,
 		width = var19.width,
-		input = function(_) --[[ line: 100 ]]
-			-- upvalues: reactModule (copy), viewModule (copy), var22 (ref), var19 (ref), flagsModule (copy), var24 (ref), stateLayerAffordanceModule (copy), var23 (ref), blendTransparenciesModule (copy), constantsModule (copy), textModule (copy), iconModule (copy), chevronLargeUp (copy), chevronLargeDown (copy), var20 (ref)
+		input = function(_) --[[ line: 104 ]]
+			-- upvalues: reactModule (copy), viewModule (copy), var22 (ref), var19 (ref), flagsModule (copy), var29 (ref), stateLayerAffordanceModule (copy), var28 (ref), blendTransparenciesModule (copy), constantsModule (copy), textModule (copy), iconModule (copy), chevronLargeUp (copy), chevronLargeDown (copy), var20 (ref)
 			return reactModule.createElement(viewModule, {
 				onStateChanged = var22,
 				isDisabled = var19.isDisabled,
@@ -67,33 +84,33 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 66 | 
 					NextSelectionLeft = if flagsModule.FoundationDropdownSelectionProps then var19.NextSelectionLeft else nil,
 					NextSelectionRight = if flagsModule.FoundationDropdownSelectionProps then var19.NextSelectionRight else nil
 				},
-				cursor = var24,
+				cursor = var29,
 				stateLayer = { affordance = stateLayerAffordanceModule.None },
-				backgroundStyle = if var23.container.bgStyle then {
-					Color3 = var23.container.bgStyle.Color3,
-					Transparency = if var19.isDisabled then blendTransparenciesModule(var23.container.bgStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var23.container.bgStyle.Transparency
+				backgroundStyle = if flagsModule.FoundationDropdownVariant and var28.container.bgStyle then {
+					Color3 = var28.container.bgStyle.Color3,
+					Transparency = if var19.isDisabled then blendTransparenciesModule(var28.container.bgStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var28.container.bgStyle.Transparency
 				} else nil,
-				stroke = if var23.container.strokeStyle then {
-					Color = var23.container.strokeStyle.Color3,
-					Transparency = if var19.isDisabled then blendTransparenciesModule(var23.container.strokeStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var23.container.strokeStyle.Transparency,
-					Thickness = var23.container.strokeThickness,
+				stroke = if flagsModule.FoundationDropdownVariant and var28.container.strokeStyle then {
+					Color = var28.container.strokeStyle.Color3,
+					Transparency = if var19.isDisabled then blendTransparenciesModule(var28.container.strokeStyle.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var28.container.strokeStyle.Transparency,
+					Thickness = var28.container.strokeThickness,
 					BorderStrokePosition = Enum.BorderStrokePosition.Inner
 				} else nil,
-				tag = var23.container.tag,
+				tag = var28.container.tag,
 				ref = var19.inputRef,
 				testId = `{var19.testId}--control`
 			}, {
 				Text = reactModule.createElement(textModule, {
 					LayoutOrder = 1,
 					Text = if var19.item then var19.item.text else var19.placeholder,
-					tag = var23.text.tag
+					tag = var28.text.tag
 				}),
 				Arrow = reactModule.createElement(iconModule, {
 					LayoutOrder = 2,
 					name = if var19.isMenuOpen then chevronLargeUp else chevronLargeDown,
-					size = var23.arrow.size,
+					size = var28.arrow.size,
 					style = if var19.isDisabled then var20.Color.Content.Muted else nil,
-					tag = var23.text.tag,
+					tag = var28.text.tag,
 					testId = `{var19.testId}--arrow`
 				})
 			})
