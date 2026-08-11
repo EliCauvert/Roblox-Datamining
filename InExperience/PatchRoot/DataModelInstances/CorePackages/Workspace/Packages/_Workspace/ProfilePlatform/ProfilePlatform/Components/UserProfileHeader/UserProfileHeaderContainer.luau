@@ -24,25 +24,26 @@ local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
 local fFlagFriendRequestNicknames = require(parent.SharedFlags).FFlagFriendRequestNicknames
 local fFlagMoveInExperienceModeToEditProfile = require(parent.SharedFlags).FFlagMoveInExperienceModeToEditProfile
 local enumsModule_1 = require(parent.EditProfile.Enums)
+local fFlagEditProfileMigration = require(parent.EditProfile.Flags).FFlagEditProfileMigration
 local fFlagAddPlatformNameToProfileHeader = require(parent.SharedFlags).FFlagAddPlatformNameToProfileHeader
 local userProfilesModule = require(parent.UserProfiles)
 local useUserProfilesFetch = userProfilesModule.Hooks.useUserProfilesFetch
 
-local _ = function(p0, p1, p2) --[[ line: 70 ]]
+local _ = function(p0, p1, p2) --[[ line: 71 ]]
 	local primaryName = p0.names.primaryName or ""
 	
 	return if p1.profileUserNickname and p2 and p1.profileUserNickname ~= "" then p1.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
 end
 
-return function(p3) --[[ line: 87 | named "UserProfileHeaderContainer" ]]
-	-- upvalues: useProfileWrapperContextModule (ref), useNavigation (ref), useDispatch (ref), reactModule (ref), useProfileAnalyticsContextModule (ref), fFlagFriendRequestNicknames (ref), useAppPolicy (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), constantsModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagAddPlatformNameToProfileHeader (ref), useUserProfilesFetch (ref), userProfilesModule (ref), eventNamesModule (ref), enumsModule_1 (ref), socialStopwatchModule (ref), setAliasModule (ref), useEffectOnce (ref), networkingUsersModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), userProfileHeaderModule (ref)
+return function(p3) --[[ line: 88 | named "UserProfileHeaderContainer" ]]
+	-- upvalues: useProfileWrapperContextModule (ref), useNavigation (ref), useDispatch (ref), reactModule (ref), useProfileAnalyticsContextModule (ref), fFlagFriendRequestNicknames (ref), useAppPolicy (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), constantsModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagAddPlatformNameToProfileHeader (ref), useUserProfilesFetch (ref), userProfilesModule (ref), eventNamesModule (ref), fFlagEditProfileMigration (ref), enumsModule_1 (ref), socialStopwatchModule (ref), setAliasModule (ref), useEffectOnce (ref), networkingUsersModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), userProfileHeaderModule (ref)
 	local var18 = useProfileWrapperContextModule()
 	local var19 = useNavigation()
 	local var20 = useDispatch()
 	local var21 = reactModule.useRef(false)
 	local var22 = useProfileAnalyticsContextModule()
 	local profileId = var18.profileId
-	local var23 = if fFlagFriendRequestNicknames then useAppPolicy(function(p4) --[[ line: 97 ]]
+	local var23 = if fFlagFriendRequestNicknames then useAppPolicy(function(p4) --[[ line: 98 ]]
 		return p4.getFriendRequestNicknamesEnabled()
 	end) else false
 	local var24 = getRbxthumbWithTypeSizeAndOptions(profileId, constants.RbxthumbTypes.Avatar, constantsModule.AVATAR_THUMBNAIL_SIZE)
@@ -63,8 +64,8 @@ return function(p3) --[[ line: 87 | named "UserProfileHeaderContainer" ]]
 			end
 		end
 	end
-	local var29 = reactModule.useCallback(function() --[[ line: 124 ]]
-		-- upvalues: var25 (ref), enumsModule (copy), var22 (ref), eventNamesModule (copy), var21 (ref), var19 (ref), enumsModule_1 (copy), socialStopwatchModule (copy), profileId (ref), setAliasModule (copy)
+	local var29 = reactModule.useCallback(function() --[[ line: 125 ]]
+		-- upvalues: var25 (ref), enumsModule (copy), var22 (ref), eventNamesModule (copy), var21 (ref), fFlagEditProfileMigration (copy), var19 (ref), enumsModule_1 (copy), socialStopwatchModule (copy), profileId (ref), setAliasModule (copy)
 		if not var25.editName then return end
 		if var25.editName.field ~= enumsModule.NameTypes.DisplayName then
 			socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CustomizeNameOpened)
@@ -79,26 +80,39 @@ return function(p3) --[[ line: 87 | named "UserProfileHeaderContainer" ]]
 		var22.fireAnalyticsEvent(eventNamesModule.EditDisplayNameButton, { canSetDisplayName = var21.current })
 		
 		if var21.current then
-			var19.navigate(enumsModule_1.Screens.EditProfileSubScreen, {
-				screen = enumsModule_1.Screens.EditDisplayName,
-				initialDisplayName = var25.names.primaryName
+			if fFlagEditProfileMigration then
+				var19.navigate(enumsModule_1.Screens.EditProfileSubScreen, {
+					screen = enumsModule_1.Screens.EditDisplayName,
+					initialDisplayName = var25.names.primaryName
+				})
+				
+				return
+			end
+			var19.navigate(enumsModule.Screens.EditDisplayNameModal, {
+				showToast = function() --[[ line: 143 ]] end,
+				setDisplayNameAvailable = function(value) --[[ line: 146 ]]
+					-- upvalues: var21 (copy)
+					var21.current = value
+				end,
+				displayName = var25.names.primaryName
 			})
 			
 			return
+		else
+			var19.navigate(enumsModule.Screens.EditDisplayNameErrorModal)
 		end
-		var19.navigate(enumsModule.Screens.EditDisplayNameErrorModal)
 	end, { var19, var25.editName, var25.names })
-	useEffectOnce(function() --[[ line: 152 ]]
+	useEffectOnce(function() --[[ line: 165 ]]
 		-- upvalues: var20 (ref), networkingUsersModule (copy), profileId (ref), var21 (ref)
-		local _ = function() --[[ line: 153 ]]
+		local _ = function() --[[ line: 166 ]]
 			-- upvalues: var20 (copy), networkingUsersModule (copy), profileId (copy)
 			return var20(networkingUsersModule.GetDisplayNameValidation.API(profileId, "testName"))
 		end
 		
-		var20(networkingUsersModule.GetDisplayNameValidation.API(profileId, "testName")):andThen(function() --[[ line: 158 ]]
+		var20(networkingUsersModule.GetDisplayNameValidation.API(profileId, "testName")):andThen(function() --[[ line: 171 ]]
 			-- upvalues: var21 (copy)
 			var21.current = true
-		end):catch(function() --[[ line: 161 ]]
+		end):catch(function() --[[ line: 174 ]]
 			-- upvalues: var21 (copy)
 			var21.current = false
 		end)

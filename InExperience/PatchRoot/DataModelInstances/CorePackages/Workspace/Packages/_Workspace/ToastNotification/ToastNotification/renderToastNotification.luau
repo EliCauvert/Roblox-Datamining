@@ -25,7 +25,7 @@ return function(p0) --[[ line: 34 ]]
 	local toastNotification = Instance.new("Folder")
 	toastNotification.Name = "ToastNotification"
 	toastNotification.Parent = coreGuiService
-	reactRoblox.createRoot(toastNotification):render(if clientToastNotificationsEnabledEngineFeature then react.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+	reactRoblox.createRoot(toastNotification):render(if clientToastNotificationsEnabledEngineFeature then react.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
 		StyleProvider = react.createElement(styleProviderWithDefaultTheme, { withUiModeSupport = false, withDarkTheme = true }, {
 			LocalizationProvider = react.createElement(localizationProvider, {
 				localization = localization.new(localizationService.RobloxLocaleId)

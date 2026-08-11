@@ -137,6 +137,8 @@ return {
 		ItemOrBundleDetails = "ItemOrBundleDetails",
 		VideoFullscreen = "VideoFullscreen",
 		EditProfilePage = "EditProfilePage",
+		EditDisplayNameModal = "EditDisplayNameModal",
+		EditDescriptionModal = "EditDescriptionModal",
 		EditDisplayNameErrorModal = "EditDisplayNameErrorModal",
 		UsernameInsufficientFundsModal = "UsernameInsufficientFundsModal",
 		SetAliasModal = "SetAliasModal",

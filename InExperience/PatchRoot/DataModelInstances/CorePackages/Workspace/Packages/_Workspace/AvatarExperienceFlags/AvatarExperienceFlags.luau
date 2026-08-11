@@ -324,7 +324,6 @@
 	FFlagAXCatalogItemCardDarkerBackgroundLogExposure = require(script.FFlagAXCatalogItemCardDarkerBackgroundLogExposure),
 	FFlagAXCategoryMenuVisualFixes = require(script.FFlagAXCategoryMenuVisualFixes),
 	FFlagAXScrollHighlightedTabIntoView = require(script.FFlagAXScrollHighlightedTabIntoView),
-	FFlagAXMeTabTopScrim = require(script.FFlagAXMeTabTopScrim),
 	FFlagAXSortsBodyTabRecExposureLogging = require(script.FFlagAXSortsBodyTabRecExposureLogging),
 	FStringAXSortsBodyTabRecLayerName = require(script.FStringAXSortsBodyTabRecLayerName),
 	FStringAXTaxonomyM20ExperimentLayerName = require(script.FStringAXTaxonomyM20ExperimentLayerName),

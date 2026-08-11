@@ -80,12 +80,12 @@ end
 
 local function _(p1) --[[ line: 92 | named "wrapWithProviders" ]]
 	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, p1)
+	return reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", theme = "Dark" }, p1)
 end
 
-local var10 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement())
-local var11 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement({ useTranslation = true }))
-local var12 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", colorMode = "Dark" }, createMessageElement({ isUserVerified = true }))
+local var10 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", theme = "Dark" }, createMessageElement())
+local var11 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", theme = "Dark" }, createMessageElement({ useTranslation = true }))
+local var12 = reactModule.createElement(foundationModule.FoundationProvider, { device = "Desktop", theme = "Dark" }, createMessageElement({ isUserVerified = true }))
 benchFile(script, function() --[[ line: 103 ]]
 	-- upvalues: benchmark (ref), render (ref), var10 (ref), var11 (ref), var12 (ref), mountComponentTimes (ref), scrollComponentTimes (ref)
 	benchmark("Render TranslatedTextMessage", function() --[[ line: 104 ]]

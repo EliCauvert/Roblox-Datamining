@@ -4,31 +4,17 @@ local profileInsightsStoreModule = require(profileInsights["data-hydration"].Pro
 local signalsReactModule = require(parent.SignalsReact)
 local reactModule = require(parent.React)
 local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 
-return function(value) --[[ line: 20 | named "useSignalProfileInsightsByUserId" ]]
-	-- upvalues: fFlagTFProfileInsightsBypassCache (ref), reactModule (ref), profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref)
-	local var4 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function() --[[ line: 23 ]]
-		-- upvalues: profileInsightsStoreModule (copy), value (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
-		return profileInsightsStoreModule(false).getProfileInsightsByUserId({
-			userIds = { value.userId },
-			rankingStrategy = value.rankingStrategy,
-			skipFetch = if fFlagAddFriendsPageTrustedFriendRequestSection then value.skipFetch else nil,
-			forceFetch = value.forceFetch
-		})
-	end, {
-		value.userId,
-		value.rankingStrategy,
-		value.skipFetch,
-		value.forceFetch
-	}) else profileInsightsStoreModule(false).getProfileInsightsByUserId({
+return function(value) --[[ line: 18 | named "useSignalProfileInsightsByUserId" ]]
+	-- upvalues: profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref), reactModule (ref)
+	local profileInsightsByUserId = profileInsightsStoreModule(false).getProfileInsightsByUserId({
 		userIds = { value.userId },
 		rankingStrategy = value.rankingStrategy,
 		skipFetch = if fFlagAddFriendsPageTrustedFriendRequestSection then value.skipFetch else nil
 	})
-	local var5 = signalsReactModule.useSignalState(var4(false).data.getProfileInsights)
+	local var5 = signalsReactModule.useSignalState(profileInsightsByUserId(false).data.getProfileInsights)
 	
-	return reactModule.useMemo(function() --[[ line: 41 ]]
+	return reactModule.useMemo(function() --[[ line: 26 ]]
 		-- upvalues: var5 (ref), value (ref)
 		for i, v in var5 do
 			if v.targetUserId == value.userId then
@@ -36,5 +22,5 @@ return function(value) --[[ line: 20 | named "useSignalProfileInsightsByUserId" 
 			end
 		end
 		return {}
-	end, { var5 }), var4(false).status == "fetching"
+	end, { var5 }), profileInsightsByUserId(false).status == "fetching"
 end

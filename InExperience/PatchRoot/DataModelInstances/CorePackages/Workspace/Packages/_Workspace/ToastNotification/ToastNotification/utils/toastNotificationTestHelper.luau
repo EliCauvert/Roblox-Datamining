@@ -33,7 +33,7 @@ return {
 		-- upvalues: reactModule (ref), roactRoduxModule (ref), var6 (ref), t_1 (ref), foundationProvider (ref), foundationModule (ref), appStyleProvider (ref), t (ref), localizationProvider (ref), var7 (ref), roactServices (ref)
 		return reactModule.createElement(roactServices.ServiceProvider, {}, {
 			storeProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var6(t_1) }, {
-				foundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
+				foundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
 					styleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
 						localizationProvider = reactModule.createElement(localizationProvider, { localization = var7 }, p3)
 					})

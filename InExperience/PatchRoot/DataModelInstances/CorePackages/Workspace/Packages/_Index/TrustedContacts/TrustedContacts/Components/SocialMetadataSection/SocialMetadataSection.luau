@@ -23,12 +23,11 @@ local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
 local fFlagProfilePlatformAddTC = require(parent.SharedFlags).FFlagProfilePlatformAddTC
 local fStringParentLinkAmpNameSpace = require(parent.SharedFlags).FStringParentLinkAmpNameSpace
 local getFFlagEnableProfileInsightsApolloMigration = require(parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
-local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
 local socialMetadataSectionMigrateUserProfileToSignals = game:DefineFastFlag("SocialMetadataSectionMigrateUserProfileToSignals", false)
 local var11 = if socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Stores.UserProfileStore.get() else nil
 
-return function(p0) --[[ line: 52 ]]
-	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var11 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), fFlagTFProfileInsightsBypassCache (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
+return function(p0) --[[ line: 51 ]]
+	-- upvalues: socialMetadataSectionMigrateUserProfileToSignals (ref), userProfilesModule (ref), reactModule (ref), signalsModule (ref), var11 (ref), signalsReactModule (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), isCustomNilModule (ref), useLocalization (ref), ampApiProvider (ref), fStringParentLinkAmpNameSpace (ref), accessResponseEnum (ref), foundationModule (ref), view (ref), userTile (ref), layoutMode (ref), skeleton (ref), fFlagProfilePlatformAddTC (ref), socialMetadataIconsAndTextsSectionModule (ref)
 	local var12 = if not socialMetadataSectionMigrateUserProfileToSignals then userProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { p0.userId },
 		query = userProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
@@ -41,9 +40,9 @@ return function(p0) --[[ line: 52 ]]
 		var14 = userProfilesModule.Selectors.getUsernameFromId(var12.data, p0.userId) or ""
 	end
 	if socialMetadataSectionMigrateUserProfileToSignals then
-		local var15 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 72 ]]
+		local var15 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 71 ]]
 			-- upvalues: signalsModule (copy), var11 (copy), p0 (ref)
-			return signalsModule.createComputed(function(p1) --[[ line: 73 ]]
+			return signalsModule.createComputed(function(p1) --[[ line: 72 ]]
 				-- upvalues: var11 (copy), p0 (copy)
 				local var27 = var11 and var11.fetchNamesByUserIds({ tostring(p0.userId) })(p1)
 				local var28 = var27 and (var27.data and var27.data[1])
@@ -63,11 +62,7 @@ return function(p0) --[[ line: 52 ]]
 	local _ = nil
 	
 	if getFFlagEnableProfileInsightsApolloMigration() then
-		local var17, var18 = useSignalProfileInsightsByUserId({
-			rankingStrategy = "tc_info_boost",
-			userId = p0.userId,
-			forceFetch = fFlagTFProfileInsightsBypassCache
-		})
+		local var17, var18 = useSignalProfileInsightsByUserId({ rankingStrategy = "tc_info_boost", userId = p0.userId })
 		t = var17
 		var19 = var18
 	else
@@ -106,13 +101,13 @@ return function(p0) --[[ line: 52 ]]
 	local var22, var23 = reactModule.useState(false)
 	local var24 = var22
 	local var25 = var23
-	reactModule.useEffect(function() --[[ line: 141 ]]
+	reactModule.useEffect(function() --[[ line: 139 ]]
 		-- upvalues: p0 (ref), ampApiProvider (copy), fStringParentLinkAmpNameSpace (copy), var25 (write), accessResponseEnum (copy)
 		var25(ampApiProvider.upsellFeatureAccess("IsLinkedChildOf", {}, fStringParentLinkAmpNameSpace, {
 			{ name = "otherUser", type = "UserId", value = p0.userId }
 		}).access == accessResponseEnum.Granted)
 	end, { p0.userId })
-	local var26 = reactModule.useMemo(function() --[[ line: 154 ]]
+	local var26 = reactModule.useMemo(function() --[[ line: 152 ]]
 		-- upvalues: var21 (ref)
 		return if var21.userAgeVerifiedBracket then ` \226\128\162 {var21.userAgeVerifiedBracket}` else nil
 	end, { var21.userAgeVerifiedBracket })
@@ -125,7 +120,7 @@ return function(p0) --[[ line: 52 ]]
 			["gap-large padding-large"] = not p0.isVerticallyConstrained
 		}
 	}, {
-		AvatarWithNames = reactModule.useMemo(function() --[[ line: 165 ]]
+		AvatarWithNames = reactModule.useMemo(function() --[[ line: 163 ]]
 			-- upvalues: foundationModule (copy), reactModule (copy), view (copy), userTile (copy), p0 (ref), layoutMode (copy), var24 (write), var21 (ref), var13 (write), var14 (write), var26 (ref)
 			local var30 = foundationModule.Hooks.useTokens()
 			
@@ -151,7 +146,7 @@ return function(p0) --[[ line: 52 ]]
 			Size = UDim2.new(1, 0, 0, 50),
 			LayoutOrder = if fFlagProfilePlatformAddTC then p0.layoutOrder else 2
 		}) else reactModule.createElement(socialMetadataIconsAndTextsSectionModule, {
-			profileInsightIconItems = reactModule.useMemo(function() --[[ line: 192 ]]
+			profileInsightIconItems = reactModule.useMemo(function() --[[ line: 190 ]]
 				-- upvalues: isCustomNilModule (copy), t (write)
 				return {
 					mutualFriends = if not isCustomNilModule(t.mutualFriends) then t.mutualFriends else nil,
