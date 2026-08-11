@@ -974,9 +974,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,友達を招待
 CoreScripts.InGameMenu.Traversal.HistoryDescription,以前プレイしたゲームに参加
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,このゲームから退出し、{PREVIOUS_EXPERIENCE}に戻ろうとしています。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,このゲームから退出し、{PREVIOUS_GAME}に戻ろうとしています。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,退出しますか？
 CoreScripts.PremiumModal.Title.Error,エラー
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2548,7 +2546,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1時間
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー

@@ -278,6 +278,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Connexion QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Envoyer le code
 Authentication.Login.Action.SendVerificationEmail,Envoyer l'e-mail de vérification
 Authentication.Login.Action.SignIn,Se connecter
 Authentication.Login.Action.UsePasskey,Utiliser le passkey
@@ -290,8 +291,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Entre le code que nous v
 Authentication.Login.Description.GetOneTimeCodeHelp,Entre l'email vérifié sur ton compte pour recevoir un code unique.
 Authentication.Login.Description.PasskeyDescription,"Ton compte dispose de passkey, une méthode de connexion plus sûre que le mot de passe. Tu peux utiliser ton empreinte digitale, ton visage ou le verrouillage de l'écran pour te connecter sur cet appareil."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Nous ne pouvons pas déterminer si ton appareil prend en charge le passkey. Essaie à nouveau, ou appuie sur « Problème de connexion » pour récupérer ton compte avec un email ou un numéro de téléphone."
+Authentication.Login.Description.PasskeyMobileOnly,Les passkeys sont uniquement disponibles sur mobile. Choisis une autre méthode de connexion.
+Authentication.Login.Description.VerificationCodeSentTo,"Si tu as déjà un compte Roblox, un code de vérification te sera envoyé à l'adresse {email} "
 Authentication.Login.Error.PasskeyOnlyAccount,Ton compte n'a qu'un passkey configuré pour te connecter. Essaie de te connecter avec ton mot de passe ou de récupérer ton compte.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossible de vérifier le compte de la plateforme. Réessayer plus tard.
+Authentication.Login.Heading.EnterYourCode,Saisis ton code
 Authentication.Login.Heading.IncompatibleAccounts,Comptes incompatibles
 Authentication.Login.Heading.Login,Connexion
 Authentication.Login.Heading.LoginRoblox,Connexion à Roblox
@@ -313,6 +317,8 @@ Authentication.Login.Label.ConnectionError.Title,Erreur de connexion
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Vous devez vérifier votre adresse e-mail
 Authentication.Login.Label.EmailOrPhone,E-mail ou téléphone
+Authentication.Login.Label.EnterCode,Saisis ton code ici
+Authentication.Login.Label.EnterEmail,Saisis ton adresse e-mail
 Authentication.Login.Label.EnterOneTimeCode,Entrer le code à usage unique
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Saisir le code que nous venons juste de t'envoyer par email
 Authentication.Login.Label.ForgotYourPassword,Mot de passe oublié ?
@@ -974,9 +980,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Quantité
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Inviter des amis
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Rejoindre des jeux visités récemment
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Tu es sur le point de quitter ce jeu pour retourner sur {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Tu es sur le point de quitter ce jeu pour retourner sur {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Tu t'en vas ?
 CoreScripts.PremiumModal.Title.Error,Erreur
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2561,7 +2565,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,utilisateur inconnu
 Feature.Chat.Label.User,Utilisateur
@@ -3021,6 +3024,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,L'utilisateur {name} est devenu un ami de confiance
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Ami de confiance supprimé
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Demande d'ajout aux amis de confiance envoyée
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Activité récente
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Activité récente de : {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

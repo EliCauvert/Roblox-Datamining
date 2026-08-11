@@ -300,7 +300,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 95 | named "Slider" ]]
 					Position = uDim2,
 					Visible = var37,
 					testId = `{var31.testId}--custom-knob`
-				}, var31.knob) elseif flagsModule.FoundationToggleVisualUpdate then reactModule.createElement(presentationContextModule.Provider, { value = t_1 }, {
+				}, var31.knob) else reactModule.createElement(presentationContextModule.Provider, { value = t_1 }, {
 					Knob = reactModule.createElement(knobModule, {
 						AnchorPoint = var58,
 						Position = uDim2,
@@ -310,14 +310,6 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 95 | named "Slider" ]]
 						hasShadow = var47.knob.hasShadow,
 						testId = `{var31.testId}--knob`
 					})
-				}) else reactModule.createElement(knobModule, {
-					AnchorPoint = var58,
-					Position = uDim2,
-					size = var31.size,
-					style = var49.knobStyle,
-					stroke = var47.knob.stroke,
-					hasShadow = var47.knob.hasShadow,
-					testId = `{var31.testId}--knob`
 				})
 			})
 		})

@@ -974,9 +974,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Convidar amizades
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Entrar em jogos acessados anteriormente
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,Entrar em jogos visitados anteriormente
 CoreScripts.InGameMenu.Traversal.LeaveBody,Você está prestes a sair deste jogo e retornar para {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Você está prestes a sair deste jogo e retornar para {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Você está saindo?
 CoreScripts.PremiumModal.Title.Error,Erro
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2548,7 +2546,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem.
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,usuário desconhecido
 Feature.Chat.Label.User,Usuário

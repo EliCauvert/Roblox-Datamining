@@ -278,6 +278,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ Girişi
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Kod gönder
 Authentication.Login.Action.SendVerificationEmail,Doğrulama E-postası Gönder
 Authentication.Login.Action.SignIn,Giriş Yap
 Authentication.Login.Action.UsePasskey,Geçiş anahtarı kullan
@@ -290,8 +291,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Az önce {email} adresin
 Authentication.Login.Description.GetOneTimeCodeHelp,Tek kullanımlık kod almak için hesabında doğruladığın e-posta adresini gir.
 Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha güvenli bir giriş yöntemi olan geçiş anahtarı bulunuyor. Bu cihazda giriş yapmak için parmak izini, yüzünü veya ekran kilidini kullanabilirsin."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Cihazının geçiş anahtarlarını destekleyip desteklemediğini belirleyemiyoruz. Tekrar dene ya da hesabını e-posta veya telefon numarasıyla kurtarmak için ""Giriş yaparken sorun mu yaşıyorsun"" seçeneğine dokun."
+Authentication.Login.Description.PasskeyMobileOnly,Geçiş anahtarları yalnızca mobil cihazlarda kullanılabilir. Giriş yapmak için başka bir yöntem seç.
+Authentication.Login.Description.VerificationCodeSentTo,Bir Roblox hesabı varsa {email} adresine bir doğrulama kodu alacaksın
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
+Authentication.Login.Heading.EnterYourCode,Kodunu gir
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
@@ -313,6 +317,8 @@ Authentication.Login.Label.ConnectionError.Title,Bağlantı Hatası
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,E-postanın doğrulanması gerekiyor
 Authentication.Login.Label.EmailOrPhone,E-posta veya telefon
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,E-posta gir
 Authentication.Login.Label.EnterOneTimeCode,Tek Kullanımlık Kodu Gir
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Az önce e-postana gönderdiğimiz kodu gir
 Authentication.Login.Label.ForgotYourPassword,Şifreni mi unuttun?
@@ -974,9 +980,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Ses Seviyesi
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bu oyundan ayrılıp {PREVIOUS_GAME} oyununa dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ayrılıyor musun?
 CoreScripts.PremiumModal.Title.Error,Hata
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2561,7 +2565,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 sa.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Mevcut değil
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı
@@ -3021,6 +3024,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenili
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Son Etkinlikler
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username} Tarafından Gerçekleştirilen Son Etkinlikler
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
