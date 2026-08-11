@@ -1,4 +1,14 @@
 ! function() {
+    try {
+        var r = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
+        r.SENTRY_RELEASE = {
+            id: "0f9f891a11e52d8edbdcb725ed481f29162419f8"
+        };
+        var e = (new r.Error).stack;
+        e && (r._sentryDebugIds = r._sentryDebugIds || {}, r._sentryDebugIds[e] = "c4cff876-1d99-4bcb-8418-7a9acf132d15", r._sentryDebugIdIdentifier = "sentry-dbid-c4cff876-1d99-4bcb-8418-7a9acf132d15")
+    } catch (r) {}
+}(),
+function() {
     var r = {
             339: function(r, e, t) {
                 "use strict";
@@ -12,12 +22,12 @@
                     } : function(r, e, t, n) {
                         void 0 === n && (n = t), r[n] = e[t]
                     }),
-                    a = this && this.__exportStar || function(r, e) {
+                    o = this && this.__exportStar || function(r, e) {
                         for (var t in r) "default" === t || Object.prototype.hasOwnProperty.call(e, t) || n(e, r, t)
                     };
                 Object.defineProperty(e, "__esModule", {
                     value: !0
-                }), a(t(925), e), a(t(725), e), a(t(11), e), a(t(211), e)
+                }), o(t(925), e), o(t(725), e), o(t(11), e), o(t(211), e)
             },
             925: function(r, e) {
                 "use strict";
@@ -3933,22 +3943,22 @@
                     var t = {}.hasOwnProperty;
 
                     function n() {
-                        for (var r = "", o = 0; o < arguments.length; o++) {
-                            var i = arguments[o];
-                            i && (r = a(r, function(r) {
+                        for (var r = "", i = 0; i < arguments.length; i++) {
+                            var a = arguments[i];
+                            a && (r = o(r, function(r) {
                                 if ("string" == typeof r || "number" == typeof r) return r;
                                 if ((void 0 === r ? "undefined" : e(r)) !== "object") return "";
                                 if (Array.isArray(r)) return n.apply(null, r);
                                 if (r.toString !== Object.prototype.toString && !r.toString.toString().includes("[native code]")) return r.toString();
-                                var o = "";
-                                for (var i in r) t.call(r, i) && r[i] && (o = a(o, i));
-                                return o
-                            }(i)))
+                                var i = "";
+                                for (var a in r) t.call(r, a) && r[a] && (i = o(i, a));
+                                return i
+                            }(a)))
                         }
                         return r
                     }
 
-                    function a(r, e) {
+                    function o(r, e) {
                         return e ? r ? r + " " + e : r + e : r
                     }
                     r.exports ? (n.default = n, r.exports = n) : "function" == typeof define && "object" === e(define.amd) && define.amd ? define("classnames", [], function() {
@@ -3960,12 +3970,12 @@
         e = {};
 
     function t(n) {
-        var a = e[n];
-        if (void 0 !== a) return a.exports;
-        var o = e[n] = {
+        var o = e[n];
+        if (void 0 !== o) return o.exports;
+        var i = e[n] = {
             exports: {}
         };
-        return r[n].call(o.exports, o, o.exports, t), o.exports
+        return r[n].call(i.exports, i, i.exports, t), i.exports
     }
     t.n = function(r) {
             var e = r && r.__esModule ? function() {
@@ -3994,290 +4004,266 @@
         }, t.ruid = "bundler=rspack@1.5.7",
         function() {
             "use strict";
-            var r, e = {};
-            t.r(e), t.d(e, {
-                TranslationProvider: function() {
-                    return B
+            var r, e, n, o, i = {};
+            t.r(i), t.d(i, {
+                Branch: function() {
+                    return X
                 },
-                makeActionCreator: function() {
-                    return Y
+                DismissableLayer: function() {
+                    return R
                 },
-                queryClient: function() {
-                    return r1
+                DismissableLayerBranch: function() {
+                    return x
                 },
-                renderWithErrorBoundary: function() {
-                    return r2
-                },
-                useDebounce: function() {
-                    return q
-                },
-                useInterval: function() {
-                    return U
-                },
-                useLocalStorage: function() {
-                    return $
-                },
-                useOnClickOutside: function() {
-                    return K
-                },
-                usePrevious: function() {
-                    return J
-                },
-                useTheme: function() {
-                    return re
-                },
-                useTokens: function() {
-                    return rn
-                },
-                useTranslation: function() {
-                    return k
-                },
-                useWindowActiveState: function() {
-                    return Z
-                },
-                withComponentStatus: function() {
+                Root: function() {
                     return N
-                },
-                withTranslations: function() {
-                    return T
                 }
             });
-            var n = {};
+            var a = {};
+            t.r(a), t.d(a, {
+                FocusGuards: function() {
+                    return U
+                },
+                Root: function() {
+                    return K
+                },
+                useFocusGuards: function() {
+                    return q
+                }
+            });
+            var g = {};
+            t.r(g), t.d(g, {
+                TranslationProvider: function() {
+                    return rs
+                },
+                makeActionCreator: function() {
+                    return rT
+                },
+                queryClient: function() {
+                    return ex
+                },
+                renderWithErrorBoundary: function() {
+                    return eR
+                },
+                useDebounce: function() {
+                    return rI
+                },
+                useInterval: function() {
+                    return rW
+                },
+                useLocalStorage: function() {
+                    return rD
+                },
+                useOnClickOutside: function() {
+                    return rC
+                },
+                usePrevious: function() {
+                    return rR
+                },
+                useTheme: function() {
+                    return rX
+                },
+                useTokens: function() {
+                    return rU
+                },
+                useTranslation: function() {
+                    return rd
+                },
+                useWindowActiveState: function() {
+                    return rG
+                },
+                withComponentStatus: function() {
+                    return rM
+                },
+                withTranslations: function() {
+                    return rF
+                }
+            });
+            var u = {};
+            t.r(u), t.d(u, {
+                TranslationProvider: function() {
+                    return rs
+                },
+                makeActionCreator: function() {
+                    return rT
+                },
+                queryClient: function() {
+                    return ex
+                },
+                renderWithErrorBoundary: function() {
+                    return eR
+                },
+                useDebounce: function() {
+                    return rI
+                },
+                useInterval: function() {
+                    return rW
+                },
+                useLocalStorage: function() {
+                    return rD
+                },
+                useOnClickOutside: function() {
+                    return rC
+                },
+                usePrevious: function() {
+                    return rR
+                },
+                useTheme: function() {
+                    return rX
+                },
+                useTokens: function() {
+                    return rU
+                },
+                useTranslation: function() {
+                    return rd
+                },
+                useWindowActiveState: function() {
+                    return rG
+                },
+                withComponentStatus: function() {
+                    return rM
+                },
+                withTranslations: function() {
+                    return rF
+                }
+            });
+            var c = window.React,
+                b = t.n(c);
 
-            function a(r, e) {
+            function l(r, e) {
+                var t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
+                    n = t.checkForDefaultPrevented,
+                    o = void 0 === n || n;
+                return function(t) {
+                    if (null == r || r(t), !1 === o || !t.defaultPrevented) return null == e ? void 0 : e(t)
+                }
+            }
+            var s = window.ReactDOM;
+
+            function d(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
-            t.r(n), t.d(n, {
-                TranslationProvider: function() {
-                    return B
-                },
-                makeActionCreator: function() {
-                    return Y
-                },
-                queryClient: function() {
-                    return r1
-                },
-                renderWithErrorBoundary: function() {
-                    return r2
-                },
-                useDebounce: function() {
-                    return q
-                },
-                useInterval: function() {
-                    return U
-                },
-                useLocalStorage: function() {
-                    return $
-                },
-                useOnClickOutside: function() {
-                    return K
-                },
-                usePrevious: function() {
-                    return J
-                },
-                useTheme: function() {
-                    return re
-                },
-                useTokens: function() {
-                    return rn
-                },
-                useTranslation: function() {
-                    return k
-                },
-                useWindowActiveState: function() {
-                    return Z
-                },
-                withComponentStatus: function() {
-                    return N
-                },
-                withTranslations: function() {
-                    return T
-                }
-            });
-            var o = function(r, e) {
-                    var t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
-                    if ("string" == typeof r) t[r] = e;
-                    else {
-                        var n = function(r) {
-                                if (Array.isArray(r)) return a(r)
-                            }(r) || function(r) {
-                                if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
-                            }(r) || function(r, e) {
-                                if (r) {
-                                    if ("string" == typeof r) return a(r, void 0);
-                                    var t = Object.prototype.toString.call(r).slice(8, -1);
-                                    if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return a(r, e)
-                                }
-                            }(r) || function() {
-                                throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                            }(),
-                            o = n.pop(),
-                            i = t,
-                            g = !0,
-                            u = !1,
-                            b = void 0;
-                        try {
-                            for (var c, l = n[Symbol.iterator](); !(g = (c = l.next()).done); g = !0) {
-                                var s, d = c.value;
-                                null != (s = i)[d] || (s[d] = {}), i = i[d]
-                            }
-                        } catch (r) {
-                            u = !0, b = r
-                        } finally {
-                            try {
-                                g || null == l.return || l.return()
-                            } finally {
-                                if (u) throw b
-                            }
-                        }
-                        i[o] = e
-                    }
-                },
-                i = function(r, e) {
-                    o(r, e)
-                },
-                g = window.TanstackQuery,
-                u = window.React,
-                b = t.n(u),
-                c = window.ReactJSX,
-                l = window.Roblox["core-scripts"].intl.intl,
-                s = t.n(l),
-                d = window.Roblox["core-scripts"].intl.translation;
 
             function _(r, e) {
+                if ("function" == typeof r) return r(e);
+                null != r && (r.current = e)
+            }
+
+            function f() {
+                for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
+                return function(r) {
+                    var t = !1,
+                        n = e.map(function(e) {
+                            var n = _(e, r);
+                            return t || "function" != typeof n || (t = !0), n
+                        });
+                    if (t) return function() {
+                        for (var r = 0; r < n.length; r++) {
+                            var t = n[r];
+                            "function" == typeof t ? t() : _(e[r], null)
+                        }
+                    }
+                }
+            }
+
+            function S() {
+                for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
+                return c.useCallback(f.apply(void 0, function(r) {
+                    if (Array.isArray(r)) return d(r)
+                }(e) || function(r) {
+                    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                }(e) || function(r, e) {
+                    if (r) {
+                        if ("string" == typeof r) return d(r, void 0);
+                        var t = Object.prototype.toString.call(r).slice(8, -1);
+                        if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return d(r, e)
+                    }
+                }(e) || function() {
+                    throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()), e)
+            }
+            var p = window.ReactJSX;
+
+            function h(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
 
-            function S(r) {
+            function y(r) {
+                for (var e = 1; e < arguments.length; e++) {
+                    var t = null != arguments[e] ? arguments[e] : {},
+                        n = Object.keys(t);
+                    "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(r) {
+                        return Object.getOwnPropertyDescriptor(t, r).enumerable
+                    }))), n.forEach(function(e) {
+                        var n;
+                        n = t[e], e in r ? Object.defineProperty(r, e, {
+                            value: n,
+                            enumerable: !0,
+                            configurable: !0,
+                            writable: !0
+                        }) : r[e] = n
+                    })
+                }
+                return r
+            }
+
+            function m(r, e) {
+                return e = null != e ? e : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(e)) : (function(r, e) {
+                    var t = Object.keys(r);
+                    if (Object.getOwnPropertySymbols) {
+                        var n = Object.getOwnPropertySymbols(r);
+                        t.push.apply(t, n)
+                    }
+                    return t
+                })(Object(e)).forEach(function(t) {
+                    Object.defineProperty(r, t, Object.getOwnPropertyDescriptor(e, t))
+                }), r
+            }
+
+            function v(r, e) {
+                if (null == r) return {};
+                var t, n, o = function(r, e) {
+                    if (null == r) return {};
+                    var t, n, o = {},
+                        i = Object.keys(r);
+                    for (n = 0; n < i.length; n++) t = i[n], e.indexOf(t) >= 0 || (o[t] = r[t]);
+                    return o
+                }(r, e);
+                if (Object.getOwnPropertySymbols) {
+                    var i = Object.getOwnPropertySymbols(r);
+                    for (n = 0; n < i.length; n++) t = i[n], !(e.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(r, t) && (o[t] = r[t])
+                }
+                return o
+            }
+
+            function F(r) {
                 return function(r) {
-                    if (Array.isArray(r)) return _(r)
+                    if (Array.isArray(r)) return h(r)
                 }(r) || function(r) {
                     if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
                 }(r) || function(r, e) {
                     if (r) {
-                        if ("string" == typeof r) return _(r, void 0);
+                        if ("string" == typeof r) return h(r, void 0);
                         var t = Object.prototype.toString.call(r).slice(8, -1);
                         if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return _(r, e)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return h(r, e)
                     }
                 }(r) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var f = function(r) {
-                    return 2 === r.split(".").length
-                },
-                h = function(r) {
-                    return Array.isArray(r) && r.every(function(r) {
-                        return "string" == typeof r
-                    })
-                },
-                p = function(r) {
-                    var e = r.common,
-                        t = r.feature,
-                        n = r.features;
-                    if (!h(e) || void 0 !== t && void 0 !== n || null != t && "string" != typeof t || null != n && !h(n)) throw Error("Invalid namespaces config!");
-                    return S(e).concat(S(null == t ? [] : [t]), S(null != n ? n : [])).filter(f)
-                },
-                m = function(r) {
-                    if (!Array.isArray(r)) return p(r);
-                    if (h(r)) return r.filter(f);
-                    throw TypeError("Translation Config must be an array of strings.")
-                };
+            var B = Symbol("radix.slottable");
 
-            function y(r, e) {
-                (null == e || e > r.length) && (e = r.length);
-                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
-                return n
-            }
-            var v = function(r, e) {
-                    var t = m(r),
-                        n = new(s()),
-                        a = new d.TranslationResourceProvider(n),
-                        o = t.map(function(r) {
-                            return a.getTranslationResource(r)
-                        }),
-                        i = a.mergeTranslationResources.apply(a, function(r) {
-                            if (Array.isArray(r)) return y(r)
-                        }(o) || function(r) {
-                            if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
-                        }(o) || function(r, e) {
-                            if (r) {
-                                if ("string" == typeof r) return y(r, void 0);
-                                var t = Object.prototype.toString.call(r).slice(8, -1);
-                                if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return y(r, e)
-                            }
-                        }(o) || function() {
-                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                        }());
-                    return {
-                        translate: function(r, t, a) {
-                            var o = i.get(r, t);
-                            return !o && e && e(r, n.locale), o && o.length > 0 ? o : null != a ? a : ""
-                        },
-                        intl: n
-                    }
-                },
-                F = (0, u.createContext)(void 0);
-
-            function B(r) {
-                var e = r.config,
-                    t = r.children,
-                    n = r.onEmptyString;
-                return (0, c.jsx)(F.Provider, {
-                    value: v(e, n),
-                    children: t
-                })
-            }
-            var k = function() {
-                var r = (0, u.useContext)(F);
-                if (!r) throw Error("invalid use of `useTranslation` hook. Ensure your component has an ancestor wrapped in `TranslationProvider`");
-                return r
-            };
-
-            function O(r, e) {
-                (null == e || e > r.length) && (e = r.length);
-                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
-                return n
-            }
-            var z = function(r, e) {
-                    return "".concat(e, "(").concat(r.displayName || r.name || "Component", ")")
-                },
-                L = function(r) {
-                    var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "withHOC";
-                    return function(t) {
-                        for (var n = arguments.length, a = Array(n > 1 ? n - 1 : 0), o = 1; o < n; o++) a[o - 1] = arguments[o];
-                        var i = r.apply(void 0, [t].concat(function(r) {
-                            if (Array.isArray(r)) return O(r)
-                        }(a) || function(r) {
-                            if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
-                        }(a) || function(r, e) {
-                            if (r) {
-                                if ("string" == typeof r) return O(r, void 0);
-                                var t = Object.prototype.toString.call(r).slice(8, -1);
-                                if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return O(r, e)
-                            }
-                        }(a) || function() {
-                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                        }()));
-                        return i.displayName = z(t, e), i
-                    }
-                };
-
-            function w(r, e) {
-                (null == e || e > r.length) && (e = r.length);
-                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
-                return n
+            function k(r) {
+                return c.isValidElement(r) && "function" == typeof r.type && "__radixId" in r.type && r.type.__radixId === B
             }
 
-            function M(r, e, t) {
+            function O(r, e, t) {
                 return e in r ? Object.defineProperty(r, e, {
                     value: t,
                     enumerable: !0,
@@ -4286,68 +4272,686 @@
                 }) : r[e] = t, r
             }
 
-            function E(r) {
-                return (E = Object.setPrototypeOf ? Object.getPrototypeOf : function(r) {
+            function L(r) {
+                for (var e = 1; e < arguments.length; e++) {
+                    var t = null != arguments[e] ? arguments[e] : {},
+                        n = Object.keys(t);
+                    "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(r) {
+                        return Object.getOwnPropertyDescriptor(t, r).enumerable
+                    }))), n.forEach(function(e) {
+                        O(r, e, t[e])
+                    })
+                }
+                return r
+            }
+
+            function z(r, e) {
+                return e = null != e ? e : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(e)) : (function(r, e) {
+                    var t = Object.keys(r);
+                    if (Object.getOwnPropertySymbols) {
+                        var n = Object.getOwnPropertySymbols(r);
+                        t.push.apply(t, n)
+                    }
+                    return t
+                })(Object(e)).forEach(function(t) {
+                    Object.defineProperty(r, t, Object.getOwnPropertyDescriptor(e, t))
+                }), r
+            }
+            var w = ["a", "button", "div", "form", "h2", "h3", "img", "input", "label", "li", "nav", "ol", "p", "span", "svg", "ul"].reduce(function(r, e) {
+                var t, n, o, i, a, g = (t = o = "Primitive.".concat(e), (n = c.forwardRef(function(r, e) {
+                        var t = r.children,
+                            n = v(r, ["children"]);
+                        if (c.isValidElement(t)) {
+                            var o, i, a, g, u, b = (u = (g = null == (i = Object.getOwnPropertyDescriptor((o = t).props, "ref")) ? void 0 : i.get) && "isReactWarning" in g && g.isReactWarning) ? o.ref : (u = (g = null == (a = Object.getOwnPropertyDescriptor(o, "ref")) ? void 0 : a.get) && "isReactWarning" in g && g.isReactWarning) ? o.props.ref : o.props.ref || o.ref,
+                                l = function(r, e) {
+                                    var t = y({}, e);
+                                    for (var n in e) ! function(n) {
+                                        var o = r[n],
+                                            i = e[n];
+                                        /^on[A-Z]/.test(n) ? o && i ? t[n] = function() {
+                                            for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
+                                            i.apply(void 0, F(e)), o.apply(void 0, F(e))
+                                        } : o && (t[n] = o) : "style" === n ? t[n] = y({}, o, i) : "className" === n && (t[n] = [o, i].filter(Boolean).join(" "))
+                                    }(n);
+                                    return y({}, r, t)
+                                }(n, t.props);
+                            return t.type !== c.Fragment && (l.ref = e ? f(e, b) : b), c.cloneElement(t, l)
+                        }
+                        return c.Children.count(t) > 1 ? c.Children.only(null) : null
+                    })).displayName = "".concat(t, ".SlotClone"), i = n, (a = c.forwardRef(function(r, e) {
+                        var t = r.children,
+                            n = v(r, ["children"]),
+                            o = c.Children.toArray(t),
+                            a = o.find(k);
+                        if (a) {
+                            var g = a.props.children,
+                                u = o.map(function(r) {
+                                    return r !== a ? r : c.Children.count(g) > 1 ? c.Children.only(null) : c.isValidElement(g) ? g.props.children : null
+                                });
+                            return (0, p.jsx)(i, m(y({}, n), {
+                                ref: e,
+                                children: c.isValidElement(g) ? c.cloneElement(g, void 0, u) : null
+                            }))
+                        }
+                        return (0, p.jsx)(i, m(y({}, n), {
+                            ref: e,
+                            children: t
+                        }))
+                    })).displayName = "".concat(o, ".Slot"), a),
+                    u = c.forwardRef(function(r, t) {
+                        var n = r.asChild,
+                            o = function(r, e) {
+                                if (null == r) return {};
+                                var t, n, o = function(r, e) {
+                                    if (null == r) return {};
+                                    var t, n, o = {},
+                                        i = Object.keys(r);
+                                    for (n = 0; n < i.length; n++) t = i[n], e.indexOf(t) >= 0 || (o[t] = r[t]);
+                                    return o
+                                }(r, e);
+                                if (Object.getOwnPropertySymbols) {
+                                    var i = Object.getOwnPropertySymbols(r);
+                                    for (n = 0; n < i.length; n++) t = i[n], !(e.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(r, t) && (o[t] = r[t])
+                                }
+                                return o
+                            }(r, ["asChild"]),
+                            i = n ? g : e;
+                        return "undefined" != typeof window && (window[Symbol.for("radix-ui")] = !0), (0, p.jsx)(i, z(L({}, o), {
+                            ref: t
+                        }))
+                    });
+                return u.displayName = "Primitive.".concat(e), z(L({}, r), O({}, e, u))
+            }, {});
+
+            function E(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+
+            function P(r) {
+                var e = c.useRef(r);
+                return c.useEffect(function() {
+                    e.current = r
+                }), c.useMemo(function() {
+                    return function() {
+                        for (var r, t = arguments.length, n = Array(t), o = 0; o < t; o++) n[o] = arguments[o];
+                        return null == (r = e.current) ? void 0 : r.call.apply(r, [e].concat(function(r) {
+                            if (Array.isArray(r)) return E(r)
+                        }(n) || function(r) {
+                            if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                        }(n) || function(r, e) {
+                            if (r) {
+                                if ("string" == typeof r) return E(r, void 0);
+                                var t = Object.prototype.toString.call(r).slice(8, -1);
+                                if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return E(r, e)
+                            }
+                        }(n) || function() {
+                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                        }()))
+                    }
+                }, [])
+            }
+
+            function A(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+
+            function M(r) {
+                for (var e = 1; e < arguments.length; e++) {
+                    var t = null != arguments[e] ? arguments[e] : {},
+                        n = Object.keys(t);
+                    "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(r) {
+                        return Object.getOwnPropertyDescriptor(t, r).enumerable
+                    }))), n.forEach(function(e) {
+                        var n;
+                        n = t[e], e in r ? Object.defineProperty(r, e, {
+                            value: n,
+                            enumerable: !0,
+                            configurable: !0,
+                            writable: !0
+                        }) : r[e] = n
+                    })
+                }
+                return r
+            }
+
+            function j(r, e) {
+                return e = null != e ? e : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(e)) : (function(r, e) {
+                    var t = Object.keys(r);
+                    if (Object.getOwnPropertySymbols) {
+                        var n = Object.getOwnPropertySymbols(r);
+                        t.push.apply(t, n)
+                    }
+                    return t
+                })(Object(e)).forEach(function(t) {
+                    Object.defineProperty(r, t, Object.getOwnPropertyDescriptor(e, t))
+                }), r
+            }
+
+            function T(r, e) {
+                return function(r) {
+                    if (Array.isArray(r)) return r
+                }(r) || function(r, e) {
+                    var t, n, o = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+                    if (null != o) {
+                        var i = [],
+                            a = !0,
+                            g = !1;
+                        try {
+                            for (o = o.call(r); !(a = (t = o.next()).done) && (i.push(t.value), !e || i.length !== e); a = !0);
+                        } catch (r) {
+                            g = !0, n = r
+                        } finally {
+                            try {
+                                a || null == o.return || o.return()
+                            } finally {
+                                if (g) throw n
+                            }
+                        }
+                        return i
+                    }
+                }(r, e) || W(r, e) || function() {
+                    throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+
+            function I(r) {
+                return function(r) {
+                    if (Array.isArray(r)) return A(r)
+                }(r) || function(r) {
+                    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                }(r) || W(r) || function() {
+                    throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+
+            function W(r, e) {
+                if (r) {
+                    if ("string" == typeof r) return A(r, e);
+                    var t = Object.prototype.toString.call(r).slice(8, -1);
+                    if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return A(r, e)
+                }
+            }
+            var D = "dismissableLayer.update",
+                C = c.createContext({
+                    layers: new Set,
+                    layersWithOutsidePointerEventsDisabled: new Set,
+                    branches: new Set
+                }),
+                R = c.forwardRef(function(e, t) {
+                    var n, o, i = e.disableOutsidePointerEvents,
+                        a = void 0 !== i && i,
+                        g = e.onEscapeKeyDown,
+                        u = e.onPointerDownOutside,
+                        b = e.onFocusOutside,
+                        s = e.onInteractOutside,
+                        d = e.onDismiss,
+                        _ = function(r, e) {
+                            if (null == r) return {};
+                            var t, n, o = function(r, e) {
+                                if (null == r) return {};
+                                var t, n, o = {},
+                                    i = Object.keys(r);
+                                for (n = 0; n < i.length; n++) t = i[n], e.indexOf(t) >= 0 || (o[t] = r[t]);
+                                return o
+                            }(r, e);
+                            if (Object.getOwnPropertySymbols) {
+                                var i = Object.getOwnPropertySymbols(r);
+                                for (n = 0; n < i.length; n++) t = i[n], !(e.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(r, t) && (o[t] = r[t])
+                            }
+                            return o
+                        }(e, ["disableOutsidePointerEvents", "onEscapeKeyDown", "onPointerDownOutside", "onFocusOutside", "onInteractOutside", "onDismiss"]),
+                        f = c.useContext(C),
+                        h = T(c.useState(null), 2),
+                        y = h[0],
+                        m = h[1],
+                        v = null != (o = null == y ? void 0 : y.ownerDocument) ? o : null == (n = globalThis) ? void 0 : n.document,
+                        F = T(c.useState({}), 2)[1],
+                        B = S(t, function(r) {
+                            return m(r)
+                        }),
+                        k = Array.from(f.layers),
+                        O = T(I(f.layersWithOutsidePointerEventsDisabled).slice(-1), 1)[0],
+                        L = k.indexOf(O),
+                        z = y ? k.indexOf(y) : -1,
+                        E = f.layersWithOutsidePointerEventsDisabled.size > 0,
+                        A = z >= L,
+                        W = function(r) {
+                            var e, t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null == (e = globalThis) ? void 0 : e.document,
+                                n = P(r),
+                                o = c.useRef(!1),
+                                i = c.useRef(function() {});
+                            return c.useEffect(function() {
+                                var r = function(r) {
+                                        if (r.target && !o.current) {
+                                            var e = function() {
+                                                    G("dismissableLayer.pointerDownOutside", n, a, {
+                                                        discrete: !0
+                                                    })
+                                                },
+                                                a = {
+                                                    originalEvent: r
+                                                };
+                                            "touch" === r.pointerType ? (t.removeEventListener("click", i.current), i.current = e, t.addEventListener("click", i.current, {
+                                                once: !0
+                                            })) : e()
+                                        } else t.removeEventListener("click", i.current);
+                                        o.current = !1
+                                    },
+                                    e = window.setTimeout(function() {
+                                        t.addEventListener("pointerdown", r)
+                                    }, 0);
+                                return function() {
+                                    window.clearTimeout(e), t.removeEventListener("pointerdown", r), t.removeEventListener("click", i.current)
+                                }
+                            }, [t, n]), {
+                                onPointerDownCapture: function() {
+                                    return o.current = !0
+                                }
+                            }
+                        }(function(r) {
+                            var e = r.target,
+                                t = I(f.branches).some(function(r) {
+                                    return r.contains(e)
+                                });
+                            A && !t && (null == u || u(r), null == s || s(r), r.defaultPrevented || null == d || d())
+                        }, v),
+                        R = function(r) {
+                            var e, t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null == (e = globalThis) ? void 0 : e.document,
+                                n = P(r),
+                                o = c.useRef(!1);
+                            return c.useEffect(function() {
+                                var r = function(r) {
+                                    r.target && !o.current && G("dismissableLayer.focusOutside", n, {
+                                        originalEvent: r
+                                    }, {
+                                        discrete: !1
+                                    })
+                                };
+                                return t.addEventListener("focusin", r),
+                                    function() {
+                                        return t.removeEventListener("focusin", r)
+                                    }
+                            }, [t, n]), {
+                                onFocusCapture: function() {
+                                    return o.current = !0
+                                },
+                                onBlurCapture: function() {
+                                    return o.current = !1
+                                }
+                            }
+                        }(function(r) {
+                            var e = r.target;
+                            !I(f.branches).some(function(r) {
+                                return r.contains(e)
+                            }) && (null == b || b(r), null == s || s(r), r.defaultPrevented || null == d || d())
+                        }, v);
+                    return ! function(r) {
+                        var e, t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null == (e = globalThis) ? void 0 : e.document,
+                            n = P(r);
+                        c.useEffect(function() {
+                            var r = function(r) {
+                                "Escape" === r.key && n(r)
+                            };
+                            return t.addEventListener("keydown", r, {
+                                    capture: !0
+                                }),
+                                function() {
+                                    return t.removeEventListener("keydown", r, {
+                                        capture: !0
+                                    })
+                                }
+                        }, [n, t])
+                    }(function(r) {
+                        z === f.layers.size - 1 && (null == g || g(r), !r.defaultPrevented && d && (r.preventDefault(), d()))
+                    }, v), c.useEffect(function() {
+                        if (y) return a && (0 === f.layersWithOutsidePointerEventsDisabled.size && (r = v.body.style.pointerEvents, v.body.style.pointerEvents = "none"), f.layersWithOutsidePointerEventsDisabled.add(y)), f.layers.add(y), H(),
+                            function() {
+                                a && 1 === f.layersWithOutsidePointerEventsDisabled.size && (v.body.style.pointerEvents = r)
+                            }
+                    }, [y, v, a, f]), c.useEffect(function() {
+                        return function() {
+                            y && (f.layers.delete(y), f.layersWithOutsidePointerEventsDisabled.delete(y), H())
+                        }
+                    }, [y, f]), c.useEffect(function() {
+                        var r = function() {
+                            return F({})
+                        };
+                        return document.addEventListener(D, r),
+                            function() {
+                                return document.removeEventListener(D, r)
+                            }
+                    }, []), (0, p.jsx)(w.div, j(M({}, _), {
+                        ref: B,
+                        style: M({
+                            pointerEvents: E ? A ? "auto" : "none" : void 0
+                        }, e.style),
+                        onFocusCapture: l(e.onFocusCapture, R.onFocusCapture),
+                        onBlurCapture: l(e.onBlurCapture, R.onBlurCapture),
+                        onPointerDownCapture: l(e.onPointerDownCapture, W.onPointerDownCapture)
+                    }))
+                });
+            R.displayName = "DismissableLayer";
+            var x = c.forwardRef(function(r, e) {
+                var t = c.useContext(C),
+                    n = c.useRef(null),
+                    o = S(e, n);
+                return c.useEffect(function() {
+                    var r = n.current;
+                    if (r) return t.branches.add(r),
+                        function() {
+                            t.branches.delete(r)
+                        }
+                }, [t.branches]), (0, p.jsx)(w.div, j(M({}, r), {
+                    ref: o
+                }))
+            });
+
+            function H() {
+                var r = new CustomEvent(D);
+                document.dispatchEvent(r)
+            }
+
+            function G(r, e, t, n) {
+                var o = n.discrete,
+                    i = t.originalEvent.target,
+                    a = new CustomEvent(r, {
+                        bubbles: !1,
+                        cancelable: !0,
+                        detail: t
+                    });
+                (e && i.addEventListener(r, e, {
+                    once: !0
+                }), o) ? i && s.flushSync(function() {
+                    return i.dispatchEvent(a)
+                }): i.dispatchEvent(a)
+            }
+            x.displayName = "DismissableLayerBranch";
+            var N = R,
+                X = x,
+                Y = 0;
+
+            function U(r) {
+                return q(), r.children
+            }
+
+            function q() {
+                c.useEffect(function() {
+                    var r, e, t = document.querySelectorAll("[data-radix-focus-guard]");
+                    return document.body.insertAdjacentElement("afterbegin", null != (r = t[0]) ? r : $()), document.body.insertAdjacentElement("beforeend", null != (e = t[1]) ? e : $()), Y++,
+                        function() {
+                            1 === Y && document.querySelectorAll("[data-radix-focus-guard]").forEach(function(r) {
+                                return r.remove()
+                            }), Y--
+                        }
+                }, [])
+            }
+
+            function $() {
+                var r = document.createElement("span");
+                return r.setAttribute("data-radix-focus-guard", ""), r.tabIndex = 0, r.style.outline = "none", r.style.opacity = "0", r.style.position = "fixed", r.style.pointerEvents = "none", r
+            }
+            var K = U;
+
+            function V(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+            var J = function(r, e) {
+                    var t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
+                    if ("string" == typeof r) t[r] = e;
+                    else {
+                        var n = function(r) {
+                                if (Array.isArray(r)) return V(r)
+                            }(r) || function(r) {
+                                if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                            }(r) || function(r, e) {
+                                if (r) {
+                                    if ("string" == typeof r) return V(r, void 0);
+                                    var t = Object.prototype.toString.call(r).slice(8, -1);
+                                    if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                                    if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return V(r, e)
+                                }
+                            }(r) || function() {
+                                throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                            }(),
+                            o = n.pop(),
+                            i = t,
+                            a = !0,
+                            g = !1,
+                            u = void 0;
+                        try {
+                            for (var c, b = n[Symbol.iterator](); !(a = (c = b.next()).done); a = !0) {
+                                var l, s = c.value;
+                                null != (l = i)[s] || (l[s] = {}), i = i[s]
+                            }
+                        } catch (r) {
+                            g = !0, u = r
+                        } finally {
+                            try {
+                                a || null == b.return || b.return()
+                            } finally {
+                                if (g) throw u
+                            }
+                        }
+                        i[o] = e
+                    }
+                },
+                Q = function(r, e) {
+                    J(r, e)
+                },
+                Z = window.TanstackQuery,
+                rr = window.Roblox["core-scripts"].intl.intl,
+                re = t.n(rr),
+                rt = window.Roblox["core-scripts"].intl.translation;
+
+            function rn(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+
+            function ro(r) {
+                return function(r) {
+                    if (Array.isArray(r)) return rn(r)
+                }(r) || function(r) {
+                    if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                }(r) || function(r, e) {
+                    if (r) {
+                        if ("string" == typeof r) return rn(r, void 0);
+                        var t = Object.prototype.toString.call(r).slice(8, -1);
+                        if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rn(r, e)
+                    }
+                }(r) || function() {
+                    throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                }()
+            }
+            var ri = function(r) {
+                    return 2 === r.split(".").length
+                },
+                ra = function(r) {
+                    return Array.isArray(r) && r.every(function(r) {
+                        return "string" == typeof r
+                    })
+                },
+                rg = function(r) {
+                    var e = r.common,
+                        t = r.feature,
+                        n = r.features;
+                    if (!ra(e) || void 0 !== t && void 0 !== n || null != t && "string" != typeof t || null != n && !ra(n)) throw Error("Invalid namespaces config!");
+                    return ro(e).concat(ro(null == t ? [] : [t]), ro(null != n ? n : [])).filter(ri)
+                },
+                ru = function(r) {
+                    if (!Array.isArray(r)) return rg(r);
+                    if (ra(r)) return r.filter(ri);
+                    throw TypeError("Translation Config must be an array of strings.")
+                };
+
+            function rc(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+            var rb = function(r, e) {
+                    var t = ru(r),
+                        n = new(re()),
+                        o = new rt.TranslationResourceProvider(n),
+                        i = t.map(function(r) {
+                            return o.getTranslationResource(r)
+                        }),
+                        a = o.mergeTranslationResources.apply(o, function(r) {
+                            if (Array.isArray(r)) return rc(r)
+                        }(i) || function(r) {
+                            if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                        }(i) || function(r, e) {
+                            if (r) {
+                                if ("string" == typeof r) return rc(r, void 0);
+                                var t = Object.prototype.toString.call(r).slice(8, -1);
+                                if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rc(r, e)
+                            }
+                        }(i) || function() {
+                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                        }());
+                    return {
+                        translate: function(r, t, o) {
+                            var i = a.get(r, t);
+                            return !i && e && e(r, n.locale), i && i.length > 0 ? i : null != o ? o : ""
+                        },
+                        intl: n
+                    }
+                },
+                rl = (0, c.createContext)(void 0);
+
+            function rs(r) {
+                var e = r.config,
+                    t = r.children,
+                    n = r.onEmptyString;
+                return (0, p.jsx)(rl.Provider, {
+                    value: rb(e, n),
+                    children: t
+                })
+            }
+            var rd = function() {
+                var r = (0, c.useContext)(rl);
+                if (!r) throw Error("invalid use of `useTranslation` hook. Ensure your component has an ancestor wrapped in `TranslationProvider`");
+                return r
+            };
+
+            function r_(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+            var rf = function(r, e) {
+                    return "".concat(e, "(").concat(r.displayName || r.name || "Component", ")")
+                },
+                rS = function(r) {
+                    var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "withHOC";
+                    return function(t) {
+                        for (var n = arguments.length, o = Array(n > 1 ? n - 1 : 0), i = 1; i < n; i++) o[i - 1] = arguments[i];
+                        var a = r.apply(void 0, [t].concat(function(r) {
+                            if (Array.isArray(r)) return r_(r)
+                        }(o) || function(r) {
+                            if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
+                        }(o) || function(r, e) {
+                            if (r) {
+                                if ("string" == typeof r) return r_(r, void 0);
+                                var t = Object.prototype.toString.call(r).slice(8, -1);
+                                if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return r_(r, e)
+                            }
+                        }(o) || function() {
+                            throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+                        }()));
+                        return a.displayName = rf(t, e), a
+                    }
+                };
+
+            function rp(r, e) {
+                (null == e || e > r.length) && (e = r.length);
+                for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
+                return n
+            }
+
+            function rh(r, e, t) {
+                return e in r ? Object.defineProperty(r, e, {
+                    value: t,
+                    enumerable: !0,
+                    configurable: !0,
+                    writable: !0
+                }) : r[e] = t, r
+            }
+
+            function ry(r) {
+                return (ry = Object.setPrototypeOf ? Object.getPrototypeOf : function(r) {
                     return r.__proto__ || Object.getPrototypeOf(r)
                 })(r)
             }
 
-            function A(r, e) {
-                return (A = Object.setPrototypeOf || function(r, e) {
+            function rm(r, e) {
+                return (rm = Object.setPrototypeOf || function(r, e) {
                     return r.__proto__ = e, r
                 })(r, e)
             }
 
-            function P() {
+            function rv() {
                 try {
                     var r = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}))
                 } catch (r) {}
-                return (P = function() {
+                return (rv = function() {
                     return !!r
                 })()
             }
-            var T = L(function(r, e) {
-                    var t = m(e);
+            var rF = rS(function(r, e) {
+                    var t = ru(e);
                     return function(e) {
                         var n;
                         if ("function" != typeof e && null !== e) throw TypeError("Super expression must either be null or a function");
 
-                        function a(r) {
-                            if (!(this instanceof a)) throw TypeError("Cannot call a class as a function");
-                            e = a, n = [r], e = E(e), M(o = function(r, e) {
+                        function o(r) {
+                            if (!(this instanceof o)) throw TypeError("Cannot call a class as a function");
+                            e = o, n = [r], e = ry(e), rh(i = function(r, e) {
                                 var t;
                                 if (e && ("object" == ((t = e) && "undefined" != typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) || "function" == typeof e)) return e;
                                 if (void 0 === r) throw ReferenceError("this hasn't been initialised - super() hasn't been called");
                                 return r
-                            }(this, P() ? Reflect.construct(e, n || [], E(this).constructor) : e.apply(this, n)), "intl", void 0), o.intl = new(s()), o.translate = o.translate.bind(o);
-                            var e, n, o, i = new d.TranslationResourceProvider(o.intl),
+                            }(this, rv() ? Reflect.construct(e, n || [], ry(this).constructor) : e.apply(this, n)), "intl", void 0), i.intl = new(re()), i.translate = i.translate.bind(i);
+                            var e, n, i, a = new rt.TranslationResourceProvider(i.intl),
                                 g = t.map(function(r) {
-                                    return i.getTranslationResource(r)
+                                    return a.getTranslationResource(r)
                                 });
-                            return o.state = {
-                                languageResources: i.mergeTranslationResources.apply(i, function(r) {
-                                    if (Array.isArray(r)) return w(r)
+                            return i.state = {
+                                languageResources: a.mergeTranslationResources.apply(a, function(r) {
+                                    if (Array.isArray(r)) return rp(r)
                                 }(g) || function(r) {
                                     if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
                                 }(g) || function(r, e) {
                                     if (r) {
-                                        if ("string" == typeof r) return w(r, void 0);
+                                        if ("string" == typeof r) return rp(r, void 0);
                                         var t = Object.prototype.toString.call(r).slice(8, -1);
                                         if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return w(r, e)
+                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rp(r, e)
                                     }
                                 }(g) || function() {
                                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                                 }())
-                            }, o
+                            }, i
                         }
-                        return a.prototype = Object.create(e && e.prototype, {
+                        return o.prototype = Object.create(e && e.prototype, {
                                 constructor: {
-                                    value: a,
+                                    value: o,
                                     writable: !0,
                                     configurable: !0
                                 }
-                            }), e && A(a, e), n = [{
+                            }), e && rm(o, e), n = [{
                                 key: "translate",
                                 value: function(r, e) {
                                     return this.state.languageResources.get(r, e)
@@ -4356,14 +4960,14 @@
                                 key: "render",
                                 value: function() {
                                     var e, t, n = this;
-                                    return (0, c.jsx)(r, (e = function(r) {
+                                    return (0, p.jsx)(r, (e = function(r) {
                                         for (var e = 1; e < arguments.length; e++) {
                                             var t = null != arguments[e] ? arguments[e] : {},
                                                 n = Object.keys(t);
                                             "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(r) {
                                                 return Object.getOwnPropertyDescriptor(t, r).enumerable
                                             }))), n.forEach(function(e) {
-                                                M(r, e, t[e])
+                                                rh(r, e, t[e])
                                             })
                                         }
                                         return r
@@ -4389,71 +4993,71 @@
                                     var n = e[t];
                                     n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(r, n.key, n)
                                 }
-                            }(a.prototype, n), a
+                            }(o.prototype, n), o
                     }(b().Component)
                 }, "withTranslations"),
-                W = window.PropTypes,
-                j = t.n(W),
-                I = t(942),
-                C = t.n(I),
-                D = function(r, e) {
+                rB = window.PropTypes,
+                rk = t.n(rB),
+                rO = t(942),
+                rL = t.n(rO),
+                rz = function(r, e) {
                     console.warn("The following exception has been caught with the captured component stack:"), console.group(), console.info("".concat(r)), console.info("".concat(e.componentStack)), console.groupEnd()
                 };
 
-            function H(r, e) {
+            function rw(r, e) {
                 for (var t = 0; t < e.length; t++) {
                     var n = e[t];
                     n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(r, n.key, n)
                 }
             }
 
-            function R(r) {
-                return (R = Object.setPrototypeOf ? Object.getPrototypeOf : function(r) {
+            function rE(r) {
+                return (rE = Object.setPrototypeOf ? Object.getPrototypeOf : function(r) {
                     return r.__proto__ || Object.getPrototypeOf(r)
                 })(r)
             }
 
-            function G(r, e) {
-                return (G = Object.setPrototypeOf || function(r, e) {
+            function rP(r, e) {
+                return (rP = Object.setPrototypeOf || function(r, e) {
                     return r.__proto__ = e, r
                 })(r, e)
             }
 
-            function x() {
+            function rA() {
                 try {
                     var r = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}))
                 } catch (r) {}
-                return (x = function() {
+                return (rA = function() {
                     return !!r
                 })()
             }
-            var N = L(function(r) {
+            var rM = rS(function(r) {
                 var e = function(e) {
                     var t, n;
                     if ("function" != typeof e && null !== e) throw TypeError("Super expression must either be null or a function");
 
-                    function a(r) {
-                        if (!(this instanceof a)) throw TypeError("Cannot call a class as a function");
-                        e = a, t = [r], e = R(e);
-                        var e, t, n, o = (n = function(r, e) {
+                    function o(r) {
+                        if (!(this instanceof o)) throw TypeError("Cannot call a class as a function");
+                        e = o, t = [r], e = rE(e);
+                        var e, t, n, i = (n = function(r, e) {
                             var t;
                             if (e && ("object" == ((t = e) && "undefined" != typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) || "function" == typeof e)) return e;
                             if (void 0 === r) throw ReferenceError("this hasn't been initialised - super() hasn't been called");
                             return r
-                        }(this, x() ? Reflect.construct(e, t || [], R(this).constructor) : e.apply(this, t))).props.showAppOnInit;
+                        }(this, rA() ? Reflect.construct(e, t || [], rE(this).constructor) : e.apply(this, t))).props.showAppOnInit;
                         return n.state = {
-                            isLoading: !o,
+                            isLoading: !i,
                             hasError: !1,
                             errorState: null
                         }, n.onLoadStart = n.onLoadStart.bind(n), n.onLoadEnd = n.onLoadEnd.bind(n), n.onError = n.onError.bind(n), n
                     }
-                    return a.prototype = Object.create(e && e.prototype, {
+                    return o.prototype = Object.create(e && e.prototype, {
                         constructor: {
-                            value: a,
+                            value: o,
                             writable: !0,
                             configurable: !0
                         }
-                    }), e && G(a, e), n = [{
+                    }), e && rP(o, e), n = [{
                         key: "getDerivedStateFromError",
                         value: function() {
                             return {
@@ -4464,7 +5068,7 @@
                     }], t = [{
                         key: "componentDidCatch",
                         value: function(r, e) {
-                            D(r, e)
+                            rz(r, e)
                         }
                     }, {
                         key: "onLoadStart",
@@ -4491,33 +5095,33 @@
                     }, {
                         key: "render",
                         value: function() {
-                            var e, t, n, a, o = this.props,
-                                i = o.defaultMessage,
-                                g = o.errorStates,
+                            var e, t, n, o, i = this.props,
+                                a = i.defaultMessage,
+                                g = i.errorStates,
                                 u = function(r, e) {
                                     if (null == r) return {};
-                                    var t, n, a = function(r, e) {
+                                    var t, n, o = function(r, e) {
                                         if (null == r) return {};
-                                        var t, n, a = {},
-                                            o = Object.keys(r);
-                                        for (n = 0; n < o.length; n++) t = o[n], e.indexOf(t) >= 0 || (a[t] = r[t]);
-                                        return a
+                                        var t, n, o = {},
+                                            i = Object.keys(r);
+                                        for (n = 0; n < i.length; n++) t = i[n], e.indexOf(t) >= 0 || (o[t] = r[t]);
+                                        return o
                                     }(r, e);
                                     if (Object.getOwnPropertySymbols) {
-                                        var o = Object.getOwnPropertySymbols(r);
-                                        for (n = 0; n < o.length; n++) t = o[n], !(e.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(r, t) && (a[t] = r[t])
+                                        var i = Object.getOwnPropertySymbols(r);
+                                        for (n = 0; n < i.length; n++) t = i[n], !(e.indexOf(t) >= 0) && Object.prototype.propertyIsEnumerable.call(r, t) && (o[t] = r[t])
                                     }
-                                    return a
-                                }(o, ["defaultMessage", "errorStates"]),
-                                b = this.state,
-                                l = b.isLoading,
-                                s = b.hasError,
-                                d = b.errorState;
-                            s ? n = (0, c.jsx)("h3", {
-                                children: g[d] ? g[d] : i
-                            }) : (n = (0, c.jsx)("span", {
+                                    return o
+                                }(i, ["defaultMessage", "errorStates"]),
+                                c = this.state,
+                                b = c.isLoading,
+                                l = c.hasError,
+                                s = c.errorState;
+                            l ? n = (0, p.jsx)("h3", {
+                                children: g[s] ? g[s] : a
+                            }) : (n = (0, p.jsx)("span", {
                                 className: "spinner spinner-default"
-                            }), a = (0, c.jsx)(r, (e = function(r) {
+                            }), o = (0, p.jsx)(r, (e = function(r) {
                                 for (var e = 1; e < arguments.length; e++) {
                                     var t = null != arguments[e] ? arguments[e] : {},
                                         n = Object.keys(t);
@@ -4535,9 +5139,9 @@
                                 }
                                 return r
                             }({}, u), t = t = {
-                                isLoading: l,
-                                hasError: s,
-                                errorState: d,
+                                isLoading: b,
+                                hasError: l,
+                                errorState: s,
                                 onLoadStart: this.onLoadStart,
                                 onLoadEnd: this.onLoadEnd,
                                 onError: this.onError
@@ -4551,38 +5155,38 @@
                             })(Object(t)).forEach(function(r) {
                                 Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r))
                             }), e)));
-                            var _ = s || l,
-                                S = C()("component-status-container", {
-                                    hidden: !_
+                            var d = l || b,
+                                _ = rL()("component-status-container", {
+                                    hidden: !d
                                 }),
-                                f = C()("component-container", {
-                                    hidden: _
+                                f = rL()("component-container", {
+                                    hidden: d
                                 });
-                            return (0, c.jsxs)("div", {
+                            return (0, p.jsxs)("div", {
                                 className: "component-status",
-                                children: [(0, c.jsx)("div", {
-                                    className: S,
+                                children: [(0, p.jsx)("div", {
+                                    className: _,
                                     children: n
-                                }), (0, c.jsx)("div", {
+                                }), (0, p.jsx)("div", {
                                     className: f,
-                                    children: a
+                                    children: o
                                 })]
                             })
                         }
-                    }], H(a.prototype, t), n && H(a, n), a
+                    }], rw(o.prototype, t), n && rw(o, n), o
                 }(b().Component);
                 return e.defaultProps = {
                     showAppOnInit: !1,
                     defaultMessage: "",
                     errorStates: {}
                 }, e.propTypes = {
-                    showAppOnInit: j().bool,
-                    defaultMessage: j().string,
-                    errorStates: j().objectOf(j().string)
+                    showAppOnInit: rk().bool,
+                    defaultMessage: rk().string,
+                    errorStates: rk().objectOf(rk().string)
                 }, e
             }, "withComponentStatus");
 
-            function X(r, e, t) {
+            function rj(r, e, t) {
                 return e in r ? Object.defineProperty(r, e, {
                     value: t,
                     enumerable: !0,
@@ -4591,10 +5195,10 @@
                 }) : r[e] = t, r
             }
 
-            function Y(r) {
+            function rT(r) {
                 for (var e = arguments.length, t = Array(e > 1 ? e - 1 : 0), n = 1; n < e; n++) t[n - 1] = arguments[n];
                 return function() {
-                    for (var e = arguments.length, n = Array(e), a = 0; a < e; a++) n[a] = arguments[a];
+                    for (var e = arguments.length, n = Array(e), o = 0; o < e; o++) n[o] = arguments[o];
                     return function(r) {
                         for (var e = 1; e < arguments.length; e++) {
                             var t = null != arguments[e] ? arguments[e] : {},
@@ -4602,35 +5206,35 @@
                             "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(r) {
                                 return Object.getOwnPropertyDescriptor(t, r).enumerable
                             }))), n.forEach(function(e) {
-                                X(r, e, t[e])
+                                rj(r, e, t[e])
                             })
                         }
                         return r
                     }({
                         type: r
                     }, t.reduce(function(r, e, t) {
-                        return Object.assign(r, X({}, e, n[t]))
+                        return Object.assign(r, rj({}, e, n[t]))
                     }, {}))
                 }
             }
-            var q = function(r, e) {
-                    var t = (0, u.useState)(r),
+            var rI = function(r, e) {
+                    var t = (0, c.useState)(r),
                         n = t[0],
-                        a = t[1];
-                    return (0, u.useEffect)(function() {
+                        o = t[1];
+                    return (0, c.useEffect)(function() {
                         var t = setTimeout(function() {
-                            a(r)
+                            o(r)
                         }, e);
                         return function() {
                             clearTimeout(t)
                         }
                     }, [r, e]), n
                 },
-                U = function(r, e) {
-                    var t = (0, u.useRef)(r);
-                    (0, u.useEffect)(function() {
+                rW = function(r, e) {
+                    var t = (0, c.useRef)(r);
+                    (0, c.useEffect)(function() {
                         t.current = r
-                    }, [r]), (0, u.useEffect)(function() {
+                    }, [r]), (0, c.useEffect)(function() {
                         if (null !== e) {
                             var r = setInterval(function() {
                                 return t.current()
@@ -4641,7 +5245,7 @@
                         }
                     }, [e])
                 },
-                $ = function(r, e) {
+                rD = function(r, e) {
                     var t = function() {
                             if ("undefined" == typeof window) return e;
                             try {
@@ -4651,38 +5255,38 @@
                                 return console.warn("Error reading localStorage key “" + r + "”:", t), e
                             }
                         },
-                        n = (0, u.useState)(t),
-                        a = n[0],
-                        o = n[1],
-                        i = (0, u.useCallback)(function(e) {
+                        n = (0, c.useState)(t),
+                        o = n[0],
+                        i = n[1],
+                        a = (0, c.useCallback)(function(e) {
                             "undefined" == typeof window && console.warn("Tried setting localStorage key “" + r + "” even though environment is not a client");
                             try {
-                                var t, n = (t = Function, null != t && "undefined" != typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t) ? e(a) : e;
-                                window.localStorage.setItem(r, JSON.stringify(n)), o(n), window.dispatchEvent(new Event("local-storage"))
+                                var t, n = (t = Function, null != t && "undefined" != typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t) ? e(o) : e;
+                                window.localStorage.setItem(r, JSON.stringify(n)), i(n), window.dispatchEvent(new Event("local-storage"))
                             } catch (e) {
                                 console.warn("Error setting localStorage key “" + r + "”:", e)
                             }
-                        }, [r, a]);
-                    return (0, u.useEffect)(function() {
-                        o(t())
-                    }, []), (0, u.useEffect)(function() {
+                        }, [r, o]);
+                    return (0, c.useEffect)(function() {
+                        i(t())
+                    }, []), (0, c.useEffect)(function() {
                         var r = function() {
-                            o(t())
+                            i(t())
                         };
                         return window.addEventListener("storage", r), window.addEventListener("local-storage", r),
                             function() {
                                 window.removeEventListener("storage", r), window.removeEventListener("local-storage", r)
                             }
-                    }, []), [a, i]
+                    }, []), [o, a]
                 },
-                K = function(r, e) {
-                    (0, u.useEffect)(function() {
+                rC = function(r, e) {
+                    (0, c.useEffect)(function() {
                         var t = function(t) {
                             r.every(function(r) {
                                 return !(null == r ? void 0 : r.current)
                             }) || r.findIndex(function(r) {
-                                var e, n, a;
-                                return n = t.target, (null != (a = Node) && "undefined" != typeof Symbol && a[Symbol.hasInstance] ? !!a[Symbol.hasInstance](n) : n instanceof a) && (null == (e = null == r ? void 0 : r.current) ? void 0 : e.contains(t.target))
+                                var e, n, o;
+                                return n = t.target, (null != (o = Node) && "undefined" != typeof Symbol && o[Symbol.hasInstance] ? !!o[Symbol.hasInstance](n) : n instanceof o) && (null == (e = null == r ? void 0 : r.current) ? void 0 : e.contains(t.target))
                             }) > -1 || e(t)
                         };
                         return document.addEventListener("mousedown", t), document.addEventListener("touchstart", t),
@@ -4691,80 +5295,80 @@
                             }
                     }, [r, e])
                 },
-                J = function(r) {
-                    var e = (0, u.useRef)();
-                    return (0, u.useEffect)(function() {
+                rR = function(r) {
+                    var e = (0, c.useRef)();
+                    return (0, c.useEffect)(function() {
                         e.current = r
                     }, [r]), e.current
                 },
-                V = ["focus", "click", "hover", "scroll", "mouseover", "mouseenter", "mousedown", "dblclick", "keypress", "touchstart", "touchmove"],
-                Q = ["blur"],
-                Z = function() {
-                    var r = (0, u.useState)(!1),
+                rx = ["focus", "click", "hover", "scroll", "mouseover", "mouseenter", "mousedown", "dblclick", "keypress", "touchstart", "touchmove"],
+                rH = ["blur"],
+                rG = function() {
+                    var r = (0, c.useState)(!1),
                         e = r[0],
                         t = r[1],
-                        n = (0, u.useCallback)(function() {
+                        n = (0, c.useCallback)(function() {
                             t(!0)
                         }, []),
-                        a = (0, u.useCallback)(function() {
+                        o = (0, c.useCallback)(function() {
                             t(!1)
                         }, []);
-                    return (0, u.useEffect)(function() {
-                        return V.forEach(function(r) {
+                    return (0, c.useEffect)(function() {
+                        return rx.forEach(function(r) {
                                 window.addEventListener(r, n)
-                            }), Q.forEach(function(r) {
-                                window.addEventListener(r, a)
+                            }), rH.forEach(function(r) {
+                                window.addEventListener(r, o)
                             }),
                             function() {
-                                V.forEach(function(r) {
+                                rx.forEach(function(r) {
                                     window.removeEventListener(r, n)
-                                }), Q.forEach(function(r) {
-                                    window.removeEventListener(r, a)
+                                }), rH.forEach(function(r) {
+                                    window.removeEventListener(r, o)
                                 })
                             }
-                    }, [n, a]), e
+                    }, [n, o]), e
                 };
 
-            function rr(r, e) {
+            function rN(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
-            var re = function() {
-                    var r, e = (r = (0, u.useState)(document.body.classList.contains("dark-theme")), function(r) {
+            var rX = function() {
+                    var r, e = (r = (0, c.useState)(document.body.classList.contains("dark-theme")), function(r) {
                             if (Array.isArray(r)) return r
                         }(r) || function(r, e) {
-                            var t, n, a = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-                            if (null != a) {
-                                var o = [],
-                                    i = !0,
+                            var t, n, o = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+                            if (null != o) {
+                                var i = [],
+                                    a = !0,
                                     g = !1;
                                 try {
-                                    for (a = a.call(r); !(i = (t = a.next()).done) && (o.push(t.value), o.length !== e); i = !0);
+                                    for (o = o.call(r); !(a = (t = o.next()).done) && (i.push(t.value), i.length !== e); a = !0);
                                 } catch (r) {
                                     g = !0, n = r
                                 } finally {
                                     try {
-                                        i || null == a.return || a.return()
+                                        a || null == o.return || o.return()
                                     } finally {
                                         if (g) throw n
                                     }
                                 }
-                                return o
+                                return i
                             }
                         }(r, 2) || function(r, e) {
                             if (r) {
-                                if ("string" == typeof r) return rr(r, 2);
+                                if ("string" == typeof r) return rN(r, 2);
                                 var t = Object.prototype.toString.call(r).slice(8, -1);
                                 if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rr(r, e)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rN(r, e)
                             }
                         }(r, 2) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                         }()),
                         t = e[0],
                         n = e[1];
-                    return (0, u.useEffect)(function() {
+                    return (0, c.useEffect)(function() {
                         var r = new MutationObserver(function() {
                             n(document.body.classList.contains("dark-theme"))
                         });
@@ -4776,86 +5380,94 @@
                             }
                     }, []), t ? "dark" : "light"
                 },
-                rt = t(339),
-                rn = function() {
-                    var r = re();
-                    return (0, u.useMemo)(function() {
-                        return "dark" === r ? rt.FoundationDark : rt.FoundationLight
+                rY = t(339),
+                rU = function() {
+                    var r = rX();
+                    return (0, c.useMemo)(function() {
+                        return "dark" === r ? rY.FoundationDark : rY.FoundationLight
                     }, [r])
                 },
-                ra = window.ReactDOM,
-                ro = "9.46.0",
-                ri = globalThis;
+                rq = "10.50.0",
+                r$ = globalThis;
 
-            function rg() {
-                return ru(ri), ri
+            function rK() {
+                return rV(r$), r$
             }
 
-            function ru(r) {
+            function rV(r) {
                 var e = r.__SENTRY__ = r.__SENTRY__ || {};
-                return e.version = e.version || ro, e[ro] = e[ro] || {}
+                return e.version = e.version || rq, e[rq] = e[rq] || {}
             }
 
-            function rb(r, e) {
-                var t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : ri,
+            function rJ(r, e) {
+                var t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : r$,
                     n = t.__SENTRY__ = t.__SENTRY__ || {},
-                    a = n[ro] = n[ro] || {};
-                return a[r] || (a[r] = e())
+                    o = n[rq] = n[rq] || {};
+                return o[r] || (o[r] = e())
             }
-            var rc = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
+            var rQ = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
 
-            function rl() {
-                var r = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : ri.crypto || ri.msCrypto,
-                    e = function() {
-                        return 16 * Math.random()
-                    };
-                try {
-                    if (null == r ? void 0 : r.randomUUID) return r.randomUUID().replace(/-/g, "");
-                    (null == r ? void 0 : r.getRandomValues) && (e = function() {
-                        var e = new Uint8Array(1);
-                        return r.getRandomValues(e), e[0]
-                    })
-                } catch (r) {}
-                return "10000000100040008000100000000000".replace(/[018]/g, function(r) {
-                    return (r ^ (15 & e()) >> r / 4).toString(16)
+            function rZ(r) {
+                if (void 0 !== e) return e ? e(r) : r();
+                var t = Symbol.for("__SENTRY_SAFE_RANDOM_ID_WRAPPER__");
+                return t in r$ && "function" == typeof r$[t] ? (e = r$[t])(r) : (e = null, r())
+            }
+
+            function r0() {
+                return rZ(function() {
+                    return Math.random()
                 })
             }
 
-            function rs() {
-                return Date.now() / 1e3
+            function r2() {
+                var r = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : r$.crypto || r$.msCrypto;
+                try {
+                    if (null == r ? void 0 : r.randomUUID) return rZ(function() {
+                        return r.randomUUID()
+                    }).replace(/-/g, "")
+                } catch (r) {}
+                return n || (n = "10000000100040008000100000000000"), n.replace(/[018]/g, function(r) {
+                    return (r ^ (15 & 16 * r0()) >> r / 4).toString(16)
+                })
             }
 
-            function rd(r, e) {
+            function r1() {
+                return rZ(function() {
+                    return Date.now()
+                }) / 1e3
+            }
+
+            function r5(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
 
-            function r_(r) {
+            function r4(r) {
                 return function(r) {
-                    if (Array.isArray(r)) return rd(r)
+                    if (Array.isArray(r)) return r5(r)
                 }(r) || function(r) {
                     if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
                 }(r) || function(r, e) {
                     if (r) {
-                        if ("string" == typeof r) return rd(r, void 0);
+                        if ("string" == typeof r) return r5(r, void 0);
                         var t = Object.prototype.toString.call(r).slice(8, -1);
                         if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rd(r, e)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return r5(r, e)
                     }
                 }(r) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var rS = {};
+            var r7 = {};
 
-            function rf(r) {
-                if (!("console" in ri)) return r();
-                var e = ri.console,
+            function r3(r) {
+                if (!("console" in r$)) return r();
+                var e = r$.console,
                     t = {},
-                    n = Object.keys(rS);
+                    n = Object.keys(r7);
                 n.forEach(function(r) {
-                    var n = rS[r];
+                    var n = r7[r];
                     t[r] = e[r], e[r] = n
                 });
                 try {
@@ -4867,55 +5479,55 @@
                 }
             }
 
-            function rh(r) {
+            function r8(r) {
                 for (var e = arguments.length, t = Array(e > 1 ? e - 1 : 0), n = 1; n < e; n++) t[n - 1] = arguments[n];
-                rc && function() {
-                    return rc ? rb("loggerSettings", function() {
+                rQ && function() {
+                    return rQ ? rJ("loggerSettings", function() {
                         return {
                             enabled: !1
                         }
                     }) : {
                         enabled: !1
                     }
-                }().enabled && rf(function() {
+                }().enabled && r3(function() {
                     var e;
-                    (e = ri.console)[r].apply(e, ["".concat("Sentry Logger ", "[").concat(r, "]:")].concat(r_(t)))
+                    (e = r$.console)[r].apply(e, ["".concat("Sentry Logger ", "[").concat(r, "]:")].concat(r4(t)))
                 })
             }
-            var rp = function() {
+            var r9 = function() {
                     for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
-                    rh.apply(void 0, ["log"].concat(r_(e)))
+                    r8.apply(void 0, ["log"].concat(r4(e)))
                 },
-                rm = function() {
+                r6 = function() {
                     for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
-                    rh.apply(void 0, ["warn"].concat(r_(e)))
+                    r8.apply(void 0, ["warn"].concat(r4(e)))
                 },
-                ry = function() {
+                er = function() {
                     for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
-                    rh.apply(void 0, ["error"].concat(r_(e)))
+                    r8.apply(void 0, ["error"].concat(r4(e)))
                 },
-                rv = Object.prototype.toString,
-                rF = "_sentrySpan";
+                ee = Object.prototype.toString,
+                et = "_sentrySpan";
 
-            function rB(r, e) {
+            function en(r, e) {
                 if (e) try {
-                    Object.defineProperty(r, rF, {
+                    Object.defineProperty(r, et, {
                         value: e,
                         writable: !0,
                         configurable: !0
                     })
                 } catch (e) {
-                    rc && rp('Failed to add non-enumerable property "'.concat(rF, '" to object'), r)
-                } else delete r[rF]
+                    rQ && r9('Failed to add non-enumerable property "'.concat(et, '" to object'), r)
+                } else delete r[et]
             }
 
-            function rk(r, e) {
+            function eo(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
 
-            function rO(r, e, t) {
+            function ei(r, e, t) {
                 return e in r ? Object.defineProperty(r, e, {
                     value: t,
                     enumerable: !0,
@@ -4924,20 +5536,20 @@
                 }) : r[e] = t, r
             }
 
-            function rz(r) {
+            function ea(r) {
                 for (var e = 1; e < arguments.length; e++) {
                     var t = null != arguments[e] ? arguments[e] : {},
                         n = Object.keys(t);
                     "function" == typeof Object.getOwnPropertySymbols && (n = n.concat(Object.getOwnPropertySymbols(t).filter(function(r) {
                         return Object.getOwnPropertyDescriptor(t, r).enumerable
                     }))), n.forEach(function(e) {
-                        rO(r, e, t[e])
+                        ei(r, e, t[e])
                     })
                 }
                 return r
             }
 
-            function rL(r, e) {
+            function eg(r, e) {
                 return e = null != e ? e : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(e)) : (function(r, e) {
                     var t = Object.keys(r);
                     if (Object.getOwnPropertySymbols) {
@@ -4950,39 +5562,39 @@
                 }), r
             }
 
-            function rw(r) {
+            function eu(r) {
                 return function(r) {
-                    if (Array.isArray(r)) return rk(r)
+                    if (Array.isArray(r)) return eo(r)
                 }(r) || function(r) {
                     if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r)
                 }(r) || function(r, e) {
                     if (r) {
-                        if ("string" == typeof r) return rk(r, void 0);
+                        if ("string" == typeof r) return eo(r, void 0);
                         var t = Object.prototype.toString.call(r).slice(8, -1);
                         if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rk(r, e)
+                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return eo(r, e)
                     }
                 }(r) || function() {
                     throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                 }()
             }
-            var rM = function() {
-                    var e;
+            var ec = function() {
+                    var r;
 
-                    function t() {
-                        if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-                        this._notifyingListeners = !1, this._scopeListeners = [], this._eventProcessors = [], this._breadcrumbs = [], this._attachments = [], this._user = {}, this._tags = {}, this._extra = {}, this._contexts = {}, this._sdkProcessingMetadata = {}, this._propagationContext = {
-                            traceId: rl(),
-                            sampleRand: Math.random()
+                    function e() {
+                        if (!(this instanceof e)) throw TypeError("Cannot call a class as a function");
+                        this._notifyingListeners = !1, this._scopeListeners = [], this._eventProcessors = [], this._breadcrumbs = [], this._attachments = [], this._user = {}, this._tags = {}, this._attributes = {}, this._extra = {}, this._contexts = {}, this._sdkProcessingMetadata = {}, this._propagationContext = {
+                            traceId: r2(),
+                            sampleRand: r0()
                         }
                     }
-                    return e = [{
+                    return r = [{
                             key: "clone",
                             value: function() {
-                                var r = new t;
-                                return r._breadcrumbs = rw(this._breadcrumbs), r._tags = rz({}, this._tags), r._extra = rz({}, this._extra), r._contexts = rz({}, this._contexts), this._contexts.flags && (r._contexts.flags = {
-                                    values: rw(this._contexts.flags.values)
-                                }), r._user = this._user, r._level = this._level, r._session = this._session, r._transactionName = this._transactionName, r._fingerprint = this._fingerprint, r._eventProcessors = rw(this._eventProcessors), r._attachments = rw(this._attachments), r._sdkProcessingMetadata = rz({}, this._sdkProcessingMetadata), r._propagationContext = rz({}, this._propagationContext), r._client = this._client, r._lastEventId = this._lastEventId, rB(r, this[rF]), r
+                                var r = new e;
+                                return r._breadcrumbs = eu(this._breadcrumbs), r._tags = ea({}, this._tags), r._attributes = ea({}, this._attributes), r._extra = ea({}, this._extra), r._contexts = ea({}, this._contexts), this._contexts.flags && (r._contexts.flags = {
+                                    values: eu(this._contexts.flags.values)
+                                }), r._user = this._user, r._level = this._level, r._session = this._session, r._transactionName = this._transactionName, r._fingerprint = this._fingerprint, r._eventProcessors = eu(this._eventProcessors), r._attachments = eu(this._attachments), r._sdkProcessingMetadata = ea({}, this._sdkProcessingMetadata), r._propagationContext = ea({}, this._propagationContext), r._client = this._client, r._lastEventId = this._lastEventId, r._conversationId = this._conversationId, en(r, this[et]), r
                             }
                         }, {
                             key: "setClient",
@@ -5016,30 +5628,32 @@
                             }
                         }, {
                             key: "setUser",
-                            value: function(e) {
-                                return this._user = e || {
+                            value: function(r) {
+                                return this._user = r || {
                                     email: void 0,
                                     id: void 0,
                                     ip_address: void 0,
                                     username: void 0
-                                }, this._session && function(e) {
-                                    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-                                    if (t.user && (!e.ipAddress && t.user.ip_address && (e.ipAddress = t.user.ip_address), e.did || t.did || (e.did = t.user.id || t.user.email || t.user.username)), e.timestamp = t.timestamp || (null != r ? r : r = function() {
-                                            var r = ri.performance;
-                                            if (!(null == r ? void 0 : r.now) || !r.timeOrigin) return rs;
+                                }, this._session && function(r) {
+                                    var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
+                                    if (e.user && (!r.ipAddress && e.user.ip_address && (r.ipAddress = e.user.ip_address), r.did || e.did || (r.did = e.user.id || e.user.email || e.user.username)), r.timestamp = e.timestamp || (null != o ? o : o = function() {
+                                            var r = r$.performance;
+                                            if (!(null == r ? void 0 : r.now) || !r.timeOrigin) return r1;
                                             var e = r.timeOrigin;
                                             return function() {
-                                                return (e + r.now()) / 1e3
+                                                return (e + rZ(function() {
+                                                    return r.now()
+                                                })) / 1e3
                                             }
-                                        }())(), t.abnormal_mechanism && (e.abnormal_mechanism = t.abnormal_mechanism), t.ignoreDuration && (e.ignoreDuration = t.ignoreDuration), t.sid && (e.sid = 32 === t.sid.length ? t.sid : rl()), void 0 !== t.init && (e.init = t.init), !e.did && t.did && (e.did = "".concat(t.did)), "number" == typeof t.started && (e.started = t.started), e.ignoreDuration) e.duration = void 0;
-                                    else if ("number" == typeof t.duration) e.duration = t.duration;
+                                        }())(), e.abnormal_mechanism && (r.abnormal_mechanism = e.abnormal_mechanism), e.ignoreDuration && (r.ignoreDuration = e.ignoreDuration), e.sid && (r.sid = 32 === e.sid.length ? e.sid : r2()), void 0 !== e.init && (r.init = e.init), !r.did && e.did && (r.did = "".concat(e.did)), "number" == typeof e.started && (r.started = e.started), r.ignoreDuration) r.duration = void 0;
+                                    else if ("number" == typeof e.duration) r.duration = e.duration;
                                     else {
-                                        var n = e.timestamp - e.started;
-                                        e.duration = n >= 0 ? n : 0
+                                        var t = r.timestamp - r.started;
+                                        r.duration = t >= 0 ? t : 0
                                     }
-                                    t.release && (e.release = t.release), t.environment && (e.environment = t.environment), !e.ipAddress && t.ipAddress && (e.ipAddress = t.ipAddress), !e.userAgent && t.userAgent && (e.userAgent = t.userAgent), "number" == typeof t.errors && (e.errors = t.errors), t.status && (e.status = t.status)
+                                    e.release && (r.release = e.release), e.environment && (r.environment = e.environment), !r.ipAddress && e.ipAddress && (r.ipAddress = e.ipAddress), !r.userAgent && e.userAgent && (r.userAgent = e.userAgent), "number" == typeof e.errors && (r.errors = e.errors), e.status && (r.status = e.status)
                                 }(this._session, {
-                                    user: e
+                                    user: r
                                 }), this._notifyScopeListeners(), this
                             }
                         }, {
@@ -5048,24 +5662,44 @@
                                 return this._user
                             }
                         }, {
+                            key: "setConversationId",
+                            value: function(r) {
+                                return this._conversationId = r || void 0, this._notifyScopeListeners(), this
+                            }
+                        }, {
                             key: "setTags",
                             value: function(r) {
-                                return this._tags = rz({}, this._tags, r), this._notifyScopeListeners(), this
+                                return this._tags = ea({}, this._tags, r), this._notifyScopeListeners(), this
                             }
                         }, {
                             key: "setTag",
                             value: function(r, e) {
-                                return this._tags = rL(rz({}, this._tags), rO({}, r, e)), this._notifyScopeListeners(), this
+                                return this.setTags(ei({}, r, e))
+                            }
+                        }, {
+                            key: "setAttributes",
+                            value: function(r) {
+                                return this._attributes = ea({}, this._attributes, r), this._notifyScopeListeners(), this
+                            }
+                        }, {
+                            key: "setAttribute",
+                            value: function(r, e) {
+                                return this.setAttributes(ei({}, r, e))
+                            }
+                        }, {
+                            key: "removeAttribute",
+                            value: function(r) {
+                                return r in this._attributes && (delete this._attributes[r], this._notifyScopeListeners()), this
                             }
                         }, {
                             key: "setExtras",
                             value: function(r) {
-                                return this._extra = rz({}, this._extra, r), this._notifyScopeListeners(), this
+                                return this._extra = ea({}, this._extra, r), this._notifyScopeListeners(), this
                             }
                         }, {
                             key: "setExtra",
                             value: function(r, e) {
-                                return this._extra = rL(rz({}, this._extra), rO({}, r, e)), this._notifyScopeListeners(), this
+                                return this._extra = eg(ea({}, this._extra), ei({}, r, e)), this._notifyScopeListeners(), this
                             }
                         }, {
                             key: "setFingerprint",
@@ -5101,24 +5735,26 @@
                             key: "update",
                             value: function(r) {
                                 if (!r) return this;
-                                var e = "function" == typeof r ? r(this) : r,
-                                    n = ((null != t && "undefined" != typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t) ? e.getScopeData() : rv.call(e) === "[object ".concat("Object", "]") ? r : void 0) || {},
-                                    a = n.tags,
-                                    o = n.extra,
-                                    i = n.user,
-                                    g = n.contexts,
-                                    u = n.level,
+                                var t = "function" == typeof r ? r(this) : r,
+                                    n = ((null != e && "undefined" != typeof Symbol && e[Symbol.hasInstance] ? !!e[Symbol.hasInstance](t) : t instanceof e) ? t.getScopeData() : ee.call(t) === "[object ".concat("Object", "]") ? r : void 0) || {},
+                                    o = n.tags,
+                                    i = n.attributes,
+                                    a = n.extra,
+                                    g = n.user,
+                                    u = n.contexts,
+                                    c = n.level,
                                     b = n.fingerprint,
-                                    c = void 0 === b ? [] : b,
-                                    l = n.propagationContext;
-                                return this._tags = rz({}, this._tags, a), this._extra = rz({}, this._extra, o), this._contexts = rz({}, this._contexts, g), i && Object.keys(i).length && (this._user = i), u && (this._level = u), c.length && (this._fingerprint = c), l && (this._propagationContext = l), this
+                                    l = void 0 === b ? [] : b,
+                                    s = n.propagationContext,
+                                    d = n.conversationId;
+                                return this._tags = ea({}, this._tags, o), this._attributes = ea({}, this._attributes, i), this._extra = ea({}, this._extra, a), this._contexts = ea({}, this._contexts, u), g && Object.keys(g).length && (this._user = g), c && (this._level = c), l.length && (this._fingerprint = l), s && (this._propagationContext = s), d && (this._conversationId = d), this
                             }
                         }, {
                             key: "clear",
                             value: function() {
-                                return this._breadcrumbs = [], this._tags = {}, this._extra = {}, this._user = {}, this._contexts = {}, this._level = void 0, this._transactionName = void 0, this._fingerprint = void 0, this._session = void 0, rB(this, void 0), this._attachments = [], this.setPropagationContext({
-                                    traceId: rl(),
-                                    sampleRand: Math.random()
+                                return this._breadcrumbs = [], this._tags = {}, this._attributes = {}, this._extra = {}, this._user = {}, this._contexts = {}, this._level = void 0, this._transactionName = void 0, this._fingerprint = void 0, this._session = void 0, this._conversationId = void 0, en(this, void 0), this._attachments = [], this.setPropagationContext({
+                                    traceId: r2(),
+                                    sampleRand: r0()
                                 }), this._notifyScopeListeners(), this
                             }
                         }, {
@@ -5126,15 +5762,15 @@
                             value: function(r, e) {
                                 var t, n = "number" == typeof e ? e : 100;
                                 if (n <= 0) return this;
-                                var a = rL(rz({
-                                    timestamp: rs()
+                                var o = eg(ea({
+                                    timestamp: r1()
                                 }, r), {
                                     message: r.message ? function(r) {
                                         var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
                                         return "string" != typeof r || 0 === e || r.length <= e ? r : "".concat(r.slice(0, e), "...")
                                     }(r.message, 2048) : r.message
                                 });
-                                return this._breadcrumbs.push(a), this._breadcrumbs.length > n && (this._breadcrumbs = this._breadcrumbs.slice(-n), null == (t = this._client) || t.recordDroppedEvent("buffer_overflow", "log_item")), this._notifyScopeListeners(), this
+                                return this._breadcrumbs.push(o), this._breadcrumbs.length > n && (this._breadcrumbs = this._breadcrumbs.slice(-n), null == (t = this._client) || t.recordDroppedEvent("buffer_overflow", "log_item")), this._notifyScopeListeners(), this
                             }
                         }, {
                             key: "getLastBreadcrumb",
@@ -5164,6 +5800,7 @@
                                     attachments: this._attachments,
                                     contexts: this._contexts,
                                     tags: this._tags,
+                                    attributes: this._attributes,
                                     extra: this._extra,
                                     user: this._user,
                                     level: this._level,
@@ -5172,7 +5809,8 @@
                                     propagationContext: this._propagationContext,
                                     sdkProcessingMetadata: this._sdkProcessingMetadata,
                                     transactionName: this._transactionName,
-                                    span: this[rF]
+                                    span: this[et],
+                                    conversationId: this._conversationId
                                 }
                             }
                         }, {
@@ -5182,7 +5820,7 @@
                                     var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 2;
                                     if (!t || (void 0 === t ? "undefined" : t && "undefined" != typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) != "object" || n <= 0) return t;
                                     if (e && 0 === Object.keys(t).length) return e;
-                                    var a = function(r) {
+                                    var o = function(r) {
                                         for (var e = 1; e < arguments.length; e++) {
                                             var t = null != arguments[e] ? arguments[e] : {},
                                                 n = Object.keys(t);
@@ -5200,8 +5838,8 @@
                                         }
                                         return r
                                     }({}, e);
-                                    for (var o in t) Object.prototype.hasOwnProperty.call(t, o) && (a[o] = r(a[o], t[o], n - 1));
-                                    return a
+                                    for (var i in t) Object.prototype.hasOwnProperty.call(t, i) && (o[i] = r(o[i], t[i], n - 1));
+                                    return o
                                 }(this._sdkProcessingMetadata, r, 2), this
                             }
                         }, {
@@ -5217,10 +5855,10 @@
                         }, {
                             key: "captureException",
                             value: function(r, e) {
-                                var t = (null == e ? void 0 : e.event_id) || rl();
-                                if (!this._client) return rc && rm("No client configured on scope - will not capture exception!"), t;
+                                var t = (null == e ? void 0 : e.event_id) || r2();
+                                if (!this._client) return rQ && r6("No client configured on scope - will not capture exception!"), t;
                                 var n = Error("Sentry syntheticException");
-                                return this._client.captureException(r, rL(rz({
+                                return this._client.captureException(r, eg(ea({
                                     originalException: r,
                                     syntheticException: n
                                 }, e), {
@@ -5230,23 +5868,23 @@
                         }, {
                             key: "captureMessage",
                             value: function(r, e, t) {
-                                var n = (null == t ? void 0 : t.event_id) || rl();
-                                if (!this._client) return rc && rm("No client configured on scope - will not capture message!"), n;
-                                var a = Error(r);
-                                return this._client.captureMessage(r, e, rL(rz({
+                                var n, o = (null == t ? void 0 : t.event_id) || r2();
+                                if (!this._client) return rQ && r6("No client configured on scope - will not capture message!"), o;
+                                var i = null != (n = null == t ? void 0 : t.syntheticException) ? n : Error(r);
+                                return this._client.captureMessage(r, e, eg(ea({
                                     originalException: r,
-                                    syntheticException: a
+                                    syntheticException: i
                                 }, t), {
-                                    event_id: n
-                                }), this), n
+                                    event_id: o
+                                }), this), o
                             }
                         }, {
                             key: "captureEvent",
                             value: function(r, e) {
-                                var t = (null == e ? void 0 : e.event_id) || rl();
-                                return this._client ? this._client.captureEvent(r, rL(rz({}, e), {
+                                var t = r.event_id || (null == e ? void 0 : e.event_id) || r2();
+                                return this._client ? this._client.captureEvent(r, eg(ea({}, e), {
                                     event_id: t
-                                }), this) : rc && rm("No client configured on scope - will not capture event!"), t
+                                }), this) : rQ && r6("No client configured on scope - will not capture event!"), t
                             }
                         }, {
                             key: "_notifyScopeListeners",
@@ -5262,32 +5900,69 @@
                                 var n = e[t];
                                 n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(r, n.key, n)
                             }
-                        }(t.prototype, e), t
+                        }(e.prototype, r), e
                 }(),
-                rE = function() {
+                eb = function(r) {
+                    var e;
+                    return (null != (e = Promise) && "undefined" != typeof Symbol && e[Symbol.hasInstance] ? !!e[Symbol.hasInstance](r) : r instanceof e) && !r[el]
+                },
+                el = Symbol("chained PromiseLike"),
+                es = function(r, e, t) {
+                    var n = r.then(function(r) {
+                        return e(r), r
+                    }, function(r) {
+                        throw t(r), r
+                    });
+                    return eb(n) && eb(r) ? n : ed(r, n)
+                },
+                ed = function(r, e) {
+                    var t, n = !1;
+                    for (var o in r) ! function(t) {
+                        if (!(t in e)) {
+                            n = !0;
+                            var o = r[t];
+                            "function" == typeof o ? Object.defineProperty(e, t, {
+                                value: function() {
+                                    for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
+                                    return o.apply(r, t)
+                                },
+                                enumerable: !0,
+                                configurable: !0,
+                                writable: !0
+                            }) : e[t] = o
+                        }
+                    }(o);
+                    return n && Object.assign(e, (el in (t = {}) ? Object.defineProperty(t, el, {
+                        value: !0,
+                        enumerable: !0,
+                        configurable: !0,
+                        writable: !0
+                    }) : t[el] = !0, t)), e
+                },
+                e_ = function() {
                     var r;
 
                     function e(r, t) {
-                        var n, a;
+                        var n, o;
                         if (!(this instanceof e)) throw TypeError("Cannot call a class as a function");
-                        n = r || new rM, a = t || new rM, this._stack = [{
+                        n = r || new ec, o = t || new ec, this._stack = [{
                             scope: n
-                        }], this._isolationScope = a
+                        }], this._isolationScope = o
                     }
                     return r = [{
                             key: "withScope",
                             value: function(r) {
                                 var e, t, n = this,
-                                    a = this._pushScope();
+                                    o = this._pushScope();
                                 try {
-                                    t = r(a)
+                                    t = r(o)
                                 } catch (r) {
                                     throw this._popScope(), r
                                 }
-                                return (null == (e = t) ? void 0 : e.then) && "function" == typeof e.then ? t.then(function(r) {
-                                    return n._popScope(), r
-                                }, function(r) {
-                                    throw n._popScope(), r
+                                return (null == (e = t) ? void 0 : e.then) && "function" == typeof e.then ? es(t, function() {
+                                    return n._popScope()
+                                }, function() {
+                                    return n._popScope()
                                 }) : (this._popScope(), t)
                             }
                         }, {
@@ -5333,115 +6008,115 @@
                         }(e.prototype, r), e
                 }();
 
-            function rA() {
-                var r = ru(rg());
-                return r.stack = r.stack || new rE(rb("defaultCurrentScope", function() {
-                    return new rM
-                }), rb("defaultIsolationScope", function() {
-                    return new rM
+            function ef() {
+                var r = rV(rK());
+                return r.stack = r.stack || new e_(rJ("defaultCurrentScope", function() {
+                    return new ec
+                }), rJ("defaultIsolationScope", function() {
+                    return new ec
                 }))
             }
 
-            function rP(r) {
-                return rA().withScope(r)
+            function eS(r) {
+                return ef().withScope(r)
             }
 
-            function rT(r, e) {
-                var t = rA();
+            function ep(r, e) {
+                var t = ef();
                 return t.withScope(function() {
                     return t.getStackTop().scope = r, e(r)
                 })
             }
 
-            function rW(r) {
-                return rA().withScope(function() {
-                    return r(rA().getIsolationScope())
+            function eh(r) {
+                return ef().withScope(function() {
+                    return r(ef().getIsolationScope())
                 })
             }
 
-            function rj(r) {
-                var e = ru(r);
+            function ey(r) {
+                var e = rV(r);
                 return e.acs ? e.acs : {
-                    withIsolationScope: rW,
-                    withScope: rP,
-                    withSetScope: rT,
+                    withIsolationScope: eh,
+                    withScope: eS,
+                    withSetScope: ep,
                     withSetIsolationScope: function(r, e) {
-                        return rW(e)
+                        return eh(e)
                     },
                     getCurrentScope: function() {
-                        return rA().getScope()
+                        return ef().getScope()
                     },
                     getIsolationScope: function() {
-                        return rA().getIsolationScope()
+                        return ef().getIsolationScope()
                     }
                 }
             }
 
-            function rI(r, e) {
+            function em(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
 
-            function rC() {
-                return rj(rg()).getCurrentScope()
+            function ev() {
+                return ey(rK()).getCurrentScope()
             }
 
-            function rD() {
+            function eF() {
                 for (var r = arguments.length, e = Array(r), t = 0; t < r; t++) e[t] = arguments[t];
-                var n = rj(rg());
+                var n = ey(rK());
                 if (2 === e.length) {
-                    var a = function(r) {
+                    var o = function(r) {
                             if (Array.isArray(r)) return r
                         }(e) || function(r, e) {
-                            var t, n, a = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-                            if (null != a) {
-                                var o = [],
-                                    i = !0,
+                            var t, n, o = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+                            if (null != o) {
+                                var i = [],
+                                    a = !0,
                                     g = !1;
                                 try {
-                                    for (a = a.call(r); !(i = (t = a.next()).done) && (o.push(t.value), o.length !== e); i = !0);
+                                    for (o = o.call(r); !(a = (t = o.next()).done) && (i.push(t.value), i.length !== e); a = !0);
                                 } catch (r) {
                                     g = !0, n = r
                                 } finally {
                                     try {
-                                        i || null == a.return || a.return()
+                                        a || null == o.return || o.return()
                                     } finally {
                                         if (g) throw n
                                     }
                                 }
-                                return o
+                                return i
                             }
                         }(e, 2) || function(r, e) {
                             if (r) {
-                                if ("string" == typeof r) return rI(r, 2);
+                                if ("string" == typeof r) return em(r, 2);
                                 var t = Object.prototype.toString.call(r).slice(8, -1);
                                 if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rI(r, e)
+                                if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return em(r, e)
                             }
                         }(e, 2) || function() {
                             throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                         }(),
-                        o = a[0],
-                        i = a[1];
-                    return o ? n.withSetScope(o, i) : n.withScope(i)
+                        i = o[0],
+                        a = o[1];
+                    return i ? n.withSetScope(i, a) : n.withScope(a)
                 }
                 return n.withScope(e[0])
             }
 
-            function rH() {
-                return rC().getClient()
+            function eB() {
+                return ev().getClient()
             }
-            var rR = ["user", "level", "extra", "contexts", "tags", "fingerprint", "propagationContext"];
+            var ek = ["user", "level", "extra", "contexts", "tags", "fingerprint", "propagationContext"];
 
-            function rG(r, e) {
+            function eO(r, e) {
                 (null == e || e > r.length) && (e = r.length);
                 for (var t = 0, n = Array(e); t < e; t++) n[t] = r[t];
                 return n
             }
-            var rx = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+)?)?@)([\w.-]+)(?::(\d+))?\/(.+)/;
+            var eL = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+)?)?@)((?:\[[:.%\w]+\]|[\w.-]+))(?::(\d+))?\/(.+)/;
 
-            function rN(r) {
+            function ez(r) {
                 return {
                     protocol: r.protocol,
                     publicKey: r.publicKey || "",
@@ -5452,9 +6127,9 @@
                     projectId: r.projectId
                 }
             }
-            var rX = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
+            var ew = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
 
-            function rY(r) {
+            function eE(r) {
                 for (var e = 1; e < arguments.length; e++) {
                     var t = null != arguments[e] ? arguments[e] : {},
                         n = Object.keys(t);
@@ -5473,24 +6148,24 @@
                 return r
             }
 
-            function rq() {
+            function eP() {
                 var r, e, t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-                    n = ri.document,
-                    a = (null == n ? void 0 : n.head) || (null == n ? void 0 : n.body);
-                if (!a) {
-                    rX && ry("[showReportDialog] Global document not defined");
+                    n = r$.document,
+                    o = (null == n ? void 0 : n.head) || (null == n ? void 0 : n.body);
+                if (!o) {
+                    ew && er("[showReportDialog] Global document not defined");
                     return
                 }
-                var o = rC(),
-                    i = rH(),
-                    g = null == i ? void 0 : i.getDsn();
+                var i = ev(),
+                    a = eB(),
+                    g = null == a ? void 0 : a.getDsn();
                 if (!g) {
-                    rX && ry("[showReportDialog] DSN not configured");
+                    ew && er("[showReportDialog] DSN not configured");
                     return
                 }
-                var u = (r = rY({}, t), e = e = {
-                        user: rY({}, o.getUser(), t.user),
-                        eventId: t.eventId || rj(rg()).getIsolationScope().lastEventId()
+                var u = (r = eE({}, t), e = e = {
+                        user: eE({}, i.getUser(), t.user),
+                        eventId: t.eventId || ey(rK()).getIsolationScope().lastEventId()
                     }, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(e)) : (function(r, e) {
                         var t = Object.keys(r);
                         if (Object.getOwnPropertySymbols) {
@@ -5501,123 +6176,123 @@
                     })(Object(e)).forEach(function(t) {
                         Object.defineProperty(r, t, Object.getOwnPropertyDescriptor(e, t))
                     }), r),
-                    b = ri.document.createElement("script");
-                b.async = !0, b.crossOrigin = "anonymous", b.src = function(r, e) {
-                    var t, n, a = function(r) {
+                    c = r$.document.createElement("script");
+                c.async = !0, c.crossOrigin = "anonymous", c.src = function(r, e) {
+                    var t, n, o = function(r) {
                         var e = "string" == typeof r ? function(r) {
-                            var e, t = rx.exec(r);
-                            if (!t) return void rf(function() {
+                            var e, t = eL.exec(r);
+                            if (!t) return void r3(function() {
                                 console.error("Invalid Sentry Dsn: ".concat(r))
                             });
                             var n = (e = t.slice(1), function(r) {
                                     if (Array.isArray(r)) return r
                                 }(e) || function(r, e) {
-                                    var t, n, a = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-                                    if (null != a) {
-                                        var o = [],
-                                            i = !0,
+                                    var t, n, o = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+                                    if (null != o) {
+                                        var i = [],
+                                            a = !0,
                                             g = !1;
                                         try {
-                                            for (a = a.call(r); !(i = (t = a.next()).done) && (o.push(t.value), o.length !== e); i = !0);
+                                            for (o = o.call(r); !(a = (t = o.next()).done) && (i.push(t.value), i.length !== e); a = !0);
                                         } catch (r) {
                                             g = !0, n = r
                                         } finally {
                                             try {
-                                                i || null == a.return || a.return()
+                                                a || null == o.return || o.return()
                                             } finally {
                                                 if (g) throw n
                                             }
                                         }
-                                        return o
+                                        return i
                                     }
                                 }(e, 6) || function(r, e) {
                                     if (r) {
-                                        if ("string" == typeof r) return rG(r, 6);
+                                        if ("string" == typeof r) return eO(r, 6);
                                         var t = Object.prototype.toString.call(r).slice(8, -1);
                                         if ("Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t) return Array.from(t);
-                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return rG(r, e)
+                                        if ("Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)) return eO(r, e)
                                     }
                                 }(e, 6) || function() {
                                     throw TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
                                 }()),
-                                a = n[0],
-                                o = n[1],
-                                i = n[2],
+                                o = n[0],
+                                i = n[1],
+                                a = n[2],
                                 g = n[3],
                                 u = n[4],
-                                b = n[5],
-                                c = "",
-                                l = void 0 === b ? "" : b,
+                                c = n[5],
+                                b = "",
+                                l = void 0 === c ? "" : c,
                                 s = l.split("/");
-                            if (s.length > 1 && (c = s.slice(0, -1).join("/"), l = s.pop()), l) {
+                            if (s.length > 1 && (b = s.slice(0, -1).join("/"), l = s.pop()), l) {
                                 var d = l.match(/^\d+/);
                                 d && (l = d[0])
                             }
-                            return rN({
+                            return ez({
                                 host: void 0 === g ? "" : g,
-                                pass: void 0 === i ? "" : i,
-                                path: c,
+                                pass: void 0 === a ? "" : a,
+                                path: b,
                                 projectId: l,
                                 port: void 0 === u ? "" : u,
-                                protocol: a,
-                                publicKey: o
+                                protocol: o,
+                                publicKey: i
                             })
-                        }(r) : rN(r);
+                        }(r) : ez(r);
                         if (e && function(r) {
-                                if (!rc) return !0;
+                                if (!rQ) return !0;
                                 var e = r.port,
                                     t = r.projectId,
                                     n = r.protocol;
                                 return !["protocol", "publicKey", "host", "projectId"].find(function(e) {
-                                    return !r[e] && (ry("Invalid Sentry Dsn: ".concat(e, " missing")), !0)
-                                }) && (t.match(/^\d+$/) ? "http" !== n && "https" !== n ? (ry("Invalid Sentry Dsn: Invalid protocol ".concat(n)), !1) : !(e && isNaN(parseInt(e, 10))) || (ry("Invalid Sentry Dsn: Invalid port ".concat(e)), !1) : (ry("Invalid Sentry Dsn: Invalid projectId ".concat(t)), !1))
+                                    return !r[e] && (er("Invalid Sentry Dsn: ".concat(e, " missing")), !0)
+                                }) && (t.match(/^\d+$/) ? "http" !== n && "https" !== n ? (er("Invalid Sentry Dsn: Invalid protocol ".concat(n)), !1) : !(e && isNaN(parseInt(e, 10))) || (er("Invalid Sentry Dsn: Invalid port ".concat(e)), !1) : (er("Invalid Sentry Dsn: Invalid projectId ".concat(t)), !1))
                             }(e)) return e
                     }(r);
-                    if (!a) return "";
-                    var o = "".concat((t = a.protocol ? "".concat(a.protocol, ":") : "", n = a.port ? ":".concat(a.port) : "", "".concat(t, "//").concat(a.host).concat(n).concat(a.path ? "/".concat(a.path) : "", "/api/")), "embed/error-page/"),
-                        i = "dsn=".concat(function(r) {
+                    if (!o) return "";
+                    var i = "".concat((t = o.protocol ? "".concat(o.protocol, ":") : "", n = o.port ? ":".concat(o.port) : "", "".concat(t, "//").concat(o.host).concat(n).concat(o.path ? "/".concat(o.path) : "", "/api/")), "embed/error-page/"),
+                        a = "dsn=".concat(function(r) {
                             var e = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                                 t = r.host,
                                 n = r.path,
-                                a = r.pass,
-                                o = r.port,
-                                i = r.projectId,
+                                o = r.pass,
+                                i = r.port,
+                                a = r.projectId,
                                 g = r.protocol,
                                 u = r.publicKey;
-                            return "".concat(g, "://").concat(u).concat(e && a ? ":".concat(a) : "") + "@".concat(t).concat(o ? ":".concat(o) : "", "/").concat(n ? "".concat(n, "/") : n).concat(i)
-                        }(a));
+                            return "".concat(g, "://").concat(u).concat(e && o ? ":".concat(o) : "") + "@".concat(t).concat(i ? ":".concat(i) : "", "/").concat(n ? "".concat(n, "/") : n).concat(a)
+                        }(o));
                     for (var g in e)
                         if ("dsn" !== g && "onClose" !== g)
                             if ("user" === g) {
                                 var u = e.user;
                                 if (!u) continue;
-                                u.name && (i += "&name=".concat(encodeURIComponent(u.name))), u.email && (i += "&email=".concat(encodeURIComponent(u.email)))
-                            } else i += "&".concat(encodeURIComponent(g), "=").concat(encodeURIComponent(e[g]));
-                    return "".concat(o, "?").concat(i)
+                                u.name && (a += "&name=".concat(encodeURIComponent(u.name))), u.email && (a += "&email=".concat(encodeURIComponent(u.email)))
+                            } else a += "&".concat(encodeURIComponent(g), "=").concat(encodeURIComponent(e[g]));
+                    return "".concat(i, "?").concat(a)
                 }(g, u);
-                var c = u.onLoad,
+                var b = u.onLoad,
                     l = u.onClose;
-                if (c && (b.onload = c), l) {
+                if (b && (c.onload = b), l) {
                     var s = function(r) {
                         if ("__sentry_reportdialog_closed__" === r.data) try {
                             l()
                         } finally {
-                            ri.removeEventListener("message", s)
+                            r$.removeEventListener("message", s)
                         }
                     };
-                    ri.addEventListener("message", s)
+                    r$.addEventListener("message", s)
                 }
-                a.appendChild(b)
+                o.appendChild(c)
             }
-            var rU = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
+            var eA = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
 
-            function r$(r) {
-                return (r$ = Object.setPrototypeOf ? Object.getPrototypeOf : function(r) {
+            function eM(r) {
+                return (eM = Object.setPrototypeOf ? Object.getPrototypeOf : function(r) {
                     return r.__proto__ || Object.getPrototypeOf(r)
                 })(r)
             }
 
-            function rK(r) {
+            function ej(r) {
                 for (var e = 1; e < arguments.length; e++) {
                     var t = null != arguments[e] ? arguments[e] : {},
                         n = Object.keys(t);
@@ -5636,7 +6311,7 @@
                 return r
             }
 
-            function rJ(r, e) {
+            function eT(r, e) {
                 return e = null != e ? e : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(r, Object.getOwnPropertyDescriptors(e)) : (function(r, e) {
                     var t = Object.keys(r);
                     if (Object.getOwnPropertySymbols) {
@@ -5649,43 +6324,43 @@
                 }), r
             }
 
-            function rV(r, e) {
-                return (rV = Object.setPrototypeOf || function(r, e) {
+            function eI(r, e) {
+                return (eI = Object.setPrototypeOf || function(r, e) {
                     return r.__proto__ = e, r
                 })(r, e)
             }
 
-            function rQ() {
+            function eW() {
                 try {
                     var r = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}))
                 } catch (r) {}
-                return (rQ = function() {
+                return (eW = function() {
                     return !!r
                 })()
             }
-            var rZ = {
+            var eD = {
                     componentStack: null,
                     error: null,
                     eventId: null
                 },
-                r0 = function(r) {
+                eC = function(r) {
                     var e;
                     if ("function" != typeof r && null !== r) throw TypeError("Super expression must either be null or a function");
 
                     function t(r) {
                         if (!(this instanceof t)) throw TypeError("Cannot call a class as a function");
-                        e = t, n = [r], e = r$(e), (a = function(r, e) {
+                        e = t, n = [r], e = eM(e), (o = function(r, e) {
                             var t;
                             if (e && ("object" == ((t = e) && "undefined" != typeof Symbol && t.constructor === Symbol ? "symbol" : typeof t) || "function" == typeof e)) return e;
                             if (void 0 === r) throw ReferenceError("this hasn't been initialised - super() hasn't been called");
                             return r
-                        }(this, rQ() ? Reflect.construct(e, n || [], r$(this).constructor) : e.apply(this, n))).state = rZ, a._openFallbackReportDialog = !0;
-                        var e, n, a, o = rH();
-                        return o && r.showDialog && (a._openFallbackReportDialog = !1, a._cleanupHook = o.on("afterSendEvent", function(e) {
-                            !e.type && a._lastEventId && e.event_id === a._lastEventId && rq(rJ(rK({}, r.dialogOptions), {
-                                eventId: a._lastEventId
+                        }(this, eW() ? Reflect.construct(e, n || [], eM(this).constructor) : e.apply(this, n))).state = eD, o._openFallbackReportDialog = !0;
+                        var e, n, o, i = eB();
+                        return i && r.showDialog && (o._openFallbackReportDialog = !1, o._cleanupHook = i.on("afterSendEvent", function(e) {
+                            !e.type && o._lastEventId && e.event_id === o._lastEventId && eP(eT(ej({}, r.dialogOptions), {
+                                eventId: o._lastEventId
                             }))
-                        })), a
+                        })), o
                     }
                     return t.prototype = Object.create(r && r.prototype, {
                             constructor: {
@@ -5693,22 +6368,22 @@
                                 writable: !0,
                                 configurable: !0
                             }
-                        }), r && rV(t, r), e = [{
+                        }), r && eI(t, r), e = [{
                             key: "componentDidCatch",
                             value: function(r, e) {
                                 var t = this,
                                     n = e.componentStack,
-                                    a = this.props,
-                                    o = a.beforeCapture,
-                                    i = a.onError,
-                                    g = a.showDialog,
-                                    b = a.dialogOptions;
-                                rD(function(a) {
-                                    o && o(a, r, n);
-                                    var c = function(r, e, t) {
+                                    o = this.props,
+                                    i = o.beforeCapture,
+                                    a = o.onError,
+                                    g = o.showDialog,
+                                    u = o.dialogOptions;
+                                eF(function(o) {
+                                    i && i(o, r, n);
+                                    var b = function(r, e, t) {
                                         var n = e.componentStack;
-                                        if (null !== (a = u.version.match(/^([^.]+)/)) && parseInt(a[0]) >= 17 && function(r) {
-                                                switch (rv.call(r)) {
+                                        if (null !== (o = c.version.match(/^([^.]+)/)) && parseInt(o[0]) >= 17 && function(r) {
+                                                switch (ee.call(r)) {
                                                     case "[object Error]":
                                                     case "[object Exception]":
                                                     case "[object DOMException]":
@@ -5724,23 +6399,23 @@
                                                         }
                                                 }
                                             }(r) && n) {
-                                            var a, o, i = Error(r.message);
-                                            i.name = "React ErrorBoundary ".concat(r.name), i.stack = n, o = new WeakSet,
+                                            var o, i, a = Error(r.message);
+                                            a.name = "React ErrorBoundary ".concat(r.name), a.stack = n, i = new WeakSet,
                                                 function r(e, t) {
-                                                    if (!o.has(e)) {
-                                                        if (e.cause) return o.add(e), r(e.cause, t);
+                                                    if (!i.has(e)) {
+                                                        if (e.cause) return i.add(e), r(e.cause, t);
                                                         e.cause = t
                                                     }
-                                                }(r, i)
+                                                }(r, a)
                                         }
-                                        return rD(function(e) {
+                                        return eF(function(e) {
                                             return e.setContext("react", {
                                                 componentStack: n
-                                            }), rC().captureException(r, function(r) {
+                                            }), ev().captureException(r, function(r) {
                                                 if (r) return function(r) {
-                                                    return (null != rM && "undefined" != typeof Symbol && rM[Symbol.hasInstance] ? !!rM[Symbol.hasInstance](r) : r instanceof rM) || "function" == typeof r
+                                                    return (null != ec && "undefined" != typeof Symbol && ec[Symbol.hasInstance] ? !!ec[Symbol.hasInstance](r) : r instanceof ec) || "function" == typeof r
                                                 }(r) || Object.keys(r).some(function(r) {
-                                                    return rR.includes(r)
+                                                    return ek.includes(r)
                                                 }) ? {
                                                     captureContext: r
                                                 } : r
@@ -5748,15 +6423,16 @@
                                         })
                                     }(r, e, {
                                         mechanism: {
-                                            handled: null != t.props.handled ? t.props.handled : !!t.props.fallback
+                                            handled: null != t.props.handled ? t.props.handled : !!t.props.fallback,
+                                            type: "auto.function.react.error_boundary"
                                         }
                                     });
-                                    i && i(r, n, c), g && (t._lastEventId = c, t._openFallbackReportDialog && rq(rJ(rK({}, b), {
-                                        eventId: c
+                                    a && a(r, n, b), g && (t._lastEventId = b, t._openFallbackReportDialog && eP(eT(ej({}, u), {
+                                        eventId: b
                                     }))), t.setState({
                                         error: r,
                                         componentStack: n,
-                                        eventId: c
+                                        eventId: b
                                     })
                                 })
                             }
@@ -5773,8 +6449,8 @@
                                     e = r.error,
                                     t = r.componentStack,
                                     n = r.eventId,
-                                    a = this.props.onUnmount;
-                                a && (this.state === rZ ? a(null, null, null) : a(e, t, n)), this._cleanupHook && (this._cleanupHook(), this._cleanupHook = void 0)
+                                    o = this.props.onUnmount;
+                                o && (this.state === eD ? o(null, null, null) : o(e, t, n)), this._cleanupHook && (this._cleanupHook(), this._cleanupHook = void 0)
                             }
                         }, {
                             key: "resetErrorBoundary",
@@ -5783,8 +6459,8 @@
                                     e = this.state,
                                     t = e.error,
                                     n = e.componentStack,
-                                    a = e.eventId;
-                                r && r(t, n, a), this.setState(rZ)
+                                    o = e.eventId;
+                                r && r(t, n, o), this.setState(eD)
                             }
                         }, {
                             key: "render",
@@ -5793,17 +6469,17 @@
                                     e = this.props,
                                     t = e.fallback,
                                     n = e.children,
-                                    a = this.state;
-                                if (null === a.componentStack) return "function" == typeof n ? n() : n;
-                                var o = "function" == typeof t ? u.createElement(t, {
-                                    error: a.error,
-                                    componentStack: a.componentStack,
+                                    o = this.state;
+                                if (null === o.componentStack) return "function" == typeof n ? n() : n;
+                                var i = "function" == typeof t ? c.createElement(t, {
+                                    error: o.error,
+                                    componentStack: o.componentStack,
                                     resetError: function() {
                                         return r.resetErrorBoundary()
                                     },
-                                    eventId: a.eventId
+                                    eventId: o.eventId
                                 }) : t;
-                                return u.isValidElement(o) ? o : (t && rU && rm("fallback did not produce a valid ReactElement"), null)
+                                return c.isValidElement(i) ? i : (t && eA && r6("fallback did not produce a valid ReactElement"), null)
                             }
                         }],
                         function(r, e) {
@@ -5812,15 +6488,15 @@
                                 n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(r, n.key, n)
                             }
                         }(t.prototype, e), t
-                }(u.Component),
-                r2 = function(r, e, t, n, a) {
-                    (0, ra.render)((0, c.jsx)(r0, {
+                }(c.Component),
+                eR = function(r, e, t, n, o) {
+                    (0, s.render)((0, p.jsx)(eC, {
                         fallback: n,
-                        onError: a,
+                        onError: o,
                         children: r
                     }), e, t)
                 },
-                r1 = new g.QueryClient({
+                ex = new Z.QueryClient({
                     defaultOptions: {
                         queries: {
                             retry: !1,
@@ -5830,7 +6506,7 @@
                         }
                     }
                 });
-            i(["Roblox", "core-scripts", "react"], e), i("ReactUtilities", function(r) {
+            Q(["Roblox", "core-scripts", "react"], g), Q("ReactUtilities", function(r) {
                 for (var e = 1; e < arguments.length; e++) {
                     var t = null != arguments[e] ? arguments[e] : {},
                         n = Object.keys(t);
@@ -5847,8 +6523,7 @@
                     })
                 }
                 return r
-            }({}, n))
+            }({}, u)), Q(["RadixUI", "react-dismissable-layer"], i), Q(["RadixUI", "react-focus-guards"], a)
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("ReactUtilities");
-//# debugId=f9da5aa3-037d-4f8b-aae1-71cb226803b6
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/reactUtilities-8fde2d4afbaae60f.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/reactUtilities-9ff0107bd507939c.js.map

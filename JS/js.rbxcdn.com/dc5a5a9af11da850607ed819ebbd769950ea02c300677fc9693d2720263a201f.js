@@ -1,0 +1,35 @@
+var Roblox = Roblox || {};
+Roblox.LangDynamic = Roblox.LangDynamic || {};
+Roblox.LangDynamic["Feature.CustomForms"] = {
+    "Action.AddOption": "Add",
+    "Action.Cancel": "Cancel",
+    "Action.Close": "Close",
+    "Action.RemoveOption": "Remove option {index}",
+    "Action.RemoveSection": "Remove section {index}",
+    "Action.Save": "Save",
+    "Action.Submit": "Submit",
+    "Action.Vote": "Vote",
+    "Label.Description": "Description",
+    "Label.FieldType": "Answer type",
+    "Label.MultipleChoice": "Multiple select",
+    "Label.Option": "Option {index}",
+    "Label.PollOptions": "Poll options",
+    "Label.Question": "Question",
+    "Label.ResponseCount": "{count} responses",
+    "Label.Section": "Section {index}",
+    "Label.SingleChoice": "Single choice",
+    "Label.Text": "Text",
+    "Heading.CreatePoll": "Create poll",
+    "Validation.MaxChars": "Max {n} chars",
+    "Validation.Required": "Required",
+    "Validation.Error.Invalid": "An unknown error occurred.",
+    "Validation.Error.Required": "This field is required.",
+    "Validation.Error.MaxLengthExceeded": "Must be at most {max_length} characters.",
+    "Validation.Error.MinLengthRequired": "Must be at least {min_length} characters.",
+    "Validation.Error.ContentRejected": "This content is not allowed.",
+    "Label.MultiChoiceDescription": "Select all that apply",
+    "Validation.Error.ContentRejectedConcatenated": "Your submission contains content that isn't allowed.",
+    "Validation.Error.Generic": "Something went wrong. Please try again.",
+    "Heading.Poll": "Poll"
+};
+window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.CustomForms");
