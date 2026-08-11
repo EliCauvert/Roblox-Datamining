@@ -1611,7 +1611,7 @@ return {
 	FFlagBackpackResponsiveUnits = game:DefineFastFlag("BackpackResponsiveUnits", false),
 	FFlagEnableShareSheet = game:DefineFastFlag("EnableShareSheetForBuild", false),
 	FFlagFixLoginV2LandscapeLayout = game:DefineFastFlag("FixLoginV2LandscapeLayout", false),
-	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization6", false),
+	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization7", false),
 	FFlagRemoveUnusedConnectionStateRoduxSlice = require(script.FFlagRemoveUnusedConnectionStateRoduxSlice),
 	FFlagRemoveUnusedFriendStatusesRoduxSlice = require(script.FFlagRemoveUnusedFriendStatusesRoduxSlice),
 	FFlagRemoveUnusedGameThumbnailsRoduxSlice = require(script.FFlagRemoveUnusedGameThumbnailsRoduxSlice),
