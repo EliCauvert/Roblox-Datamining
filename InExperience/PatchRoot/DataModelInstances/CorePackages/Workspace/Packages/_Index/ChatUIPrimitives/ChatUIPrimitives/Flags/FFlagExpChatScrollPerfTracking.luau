@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatScrollPerfTracking4", false)

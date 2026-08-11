@@ -3,12 +3,9 @@ local parent = profilePlatform.Parent
 local enumsModule = require(profilePlatform.Common.Enums)
 local setAliasModule = require(parent.SetAlias)
 local profileContextualMenuModule = require(profilePlatform.Components.ProfileContextualMenu)
-local editProfilePageModule = require(parent.EditProfile.EditProfilePage)
 local editProfileLandingModule = require(parent.EditProfile.EditProfileLanding)
-local editDisplayNameModalModule = require(parent.EditProfile.EditDisplayNameModal)
 local editDisplayNameErrorModalModule = require(parent.EditProfile.EditDisplayNameErrorModal)
 local usernameInsufficientFundsModalModule = require(parent.EditProfile.UsernameInsufficientFundsModal)
-local editDescriptionModalModule = require(parent.EditProfile.EditDescriptionModal)
 local enumsModule_1 = require(parent.EditProfile.Enums)
 local profilePlatformViewAdaptorModule = require(profilePlatform.Components.ProfilePlatformViewAdaptor)
 local videoFullscreenPageModule = require(profilePlatform.Components.Videos.VideoFullscreenPage)
@@ -28,7 +25,6 @@ local roactNavigationModule = require(parent.RoactNavigation)
 local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagEditProfileBackgroundEnabled = require(parent.SharedFlags).FFlagEditProfileBackgroundEnabled
 local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
-local fFlagEditProfileMigration = require(parent.EditProfile.Flags).FFlagEditProfileMigration
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local t = {
 	overlayEnabled = true,
@@ -41,9 +37,9 @@ local t_1 = {
 	renderUnderlyingPage = true
 }
 
-local function _(p0) --[[ line: 56 | named "makeFullBleedNavigationOptions" ]]
+local function _(p0) --[[ line: 52 | named "makeFullBleedNavigationOptions" ]]
 	-- upvalues: t_1 (ref)
-	return function(p1) --[[ line: 57 ]]
+	return function(p1) --[[ line: 53 ]]
 		-- upvalues: t_1 (copy), p0 (ref)
 		return if p1.navigation.getParam("fullBleed") then t_1 else p0
 	end
@@ -55,23 +51,11 @@ local list = {
 	},
 	{
 		[enumsModule.Screens.EditProfilePage] = {
-			screen = if fFlagEditProfileMigration then editProfileLandingModule else editProfilePageModule,
-			navigationOptions = if fFlagAXEnableProfileTab then function(p2) --[[ line: 57 ]]
+			screen = editProfileLandingModule,
+			navigationOptions = if fFlagAXEnableProfileTab then function(p2) --[[ line: 53 ]]
 				-- upvalues: t_1 (ref), t (ref)
 				return if p2.navigation.getParam("fullBleed") then t_1 else t
 			end else t
-		}
-	},
-	{
-		[enumsModule.Screens.EditDisplayNameModal] = {
-			screen = editDisplayNameModalModule,
-			navigationOptions = t
-		}
-	},
-	{
-		[enumsModule.Screens.EditDescriptionModal] = {
-			screen = editDescriptionModalModule,
-			navigationOptions = t
 		}
 	},
 	{
@@ -129,43 +113,42 @@ if fFlagEditProfileBackgroundEnabled then
 		}
 	})
 end
-if fFlagEditProfileMigration then
-	local t_2 = {}
-	local editProfileSubScreen = enumsModule_1.Screens.EditProfileSubScreen
-	local t_3 = { screen = editProfileScreenViewAdapterModule }
+local t_2 = {}
+local editProfileSubScreen = enumsModule_1.Screens.EditProfileSubScreen
+local t_3 = { screen = editProfileScreenViewAdapterModule }
+
+if fFlagAXEnableProfileTab then
+	local t_4 = {
+		overlayEnabled = true,
+		overlayTransparency = 0.5,
+		absorbInput = false
+	}
 	
-	if fFlagAXEnableProfileTab then
-		local t_4 = {
-			overlayEnabled = true,
-			overlayTransparency = 0.5,
-			absorbInput = false
-		}
-		
-		local var31 = function(p3) --[[ line: 57 ]]
-			-- upvalues: t_1 (ref), t_4 (ref)
-			return if p3.navigation.getParam("fullBleed") then t_1 else t_4
-		end
-	else
-		local var31 = {
-			overlayEnabled = true,
-			overlayTransparency = 0.5,
-			absorbInput = false
-		}
+	local var28 = function(p3) --[[ line: 53 ]]
+		-- upvalues: t_1 (ref), t_4 (ref)
+		return if p3.navigation.getParam("fullBleed") then t_1 else t_4
 	end
-	t_3.navigationOptions = var31
-	t_2[editProfileSubScreen] = t_3
-	table.insert(list, t_2)
-	table.insert(list, {
-		[enumsModule_1.Screens.EditProfileToast] = {
-			screen = editProfileToastScreenModule,
-			navigationOptions = {
-				overlayEnabled = true,
-				overlayTransparency = 1,
-				absorbInput = false
-			}
-		}
-	})
+else
+	local var28 = {
+		overlayEnabled = true,
+		overlayTransparency = 0.5,
+		absorbInput = false
+	}
 end
+t_3.navigationOptions = var28
+t_2[editProfileSubScreen] = t_3
+table.insert(list, t_2)
+table.insert(list, {
+	[enumsModule_1.Screens.EditProfileToast] = {
+		screen = editProfileToastScreenModule,
+		navigationOptions = {
+			overlayEnabled = true,
+			overlayTransparency = 1,
+			absorbInput = false
+		}
+	}
+})
+
 if fFlagSocialEnableProfileInspectAndBuy then
 	table.insert(list, {
 		[enumsModule.Screens.InspectAvatarSheet] = {

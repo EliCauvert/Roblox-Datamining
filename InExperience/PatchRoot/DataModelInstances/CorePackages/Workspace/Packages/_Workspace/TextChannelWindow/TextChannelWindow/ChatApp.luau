@@ -60,6 +60,6 @@ end
 return function(p1) --[[ line: 89 | named "ChatApp" ]]
 	-- upvalues: expChatTextChannelWindowThemeByBackground (ref), themeFromBackgroundColorModule (ref), foundationModule (ref), reactModule (ref), ChatAppInner (ref)
 	return reactModule.createElement(foundationModule.FoundationProvider, {
-		theme = if expChatTextChannelWindowThemeByBackground and p1.backgroundColor then themeFromBackgroundColorModule(p1.backgroundColor) else foundationModule.Enums.Theme.Dark
+		colorMode = if expChatTextChannelWindowThemeByBackground and p1.backgroundColor then themeFromBackgroundColorModule(p1.backgroundColor) else foundationModule.Enums.ColorMode.Dark
 	}, { inner = reactModule.createElement(ChatAppInner, p1) })
 end

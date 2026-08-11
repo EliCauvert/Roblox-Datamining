@@ -1,25 +1,43 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local localizationService = game:GetService("LocalizationService")
+local playersService = game:GetService("Players")
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local expChatSharedModule = require(corePackagesService.Workspace.Packages.ExpChatShared)
 local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
 local promiseModule = require(corePackagesService.Packages.Promise)
+local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
 local expChatMessageHelpersModule = require(script.Parent.ExpChatMessageHelpers)
 local enrichMissingUsernames = require(script.Parent.inExpChatMessagesLoaderUsernameEnrichment).enrichMissingUsernames
+local channelTabDisplayLabel = expChatSharedModule.ChannelTabDisplayLabel
 local getChannelTabsStore = expChatModule.Stores.GetChannelTabsStore
-local fFlagExpChatUseMessagesStore = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagExpChatUseMessagesStore
-local var6 = localization.new(localizationService.RobloxLocaleId)
+local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
+local fFlagExpChatUseMessagesStore = sharedFlagsModule.FFlagExpChatUseMessagesStore
+local fFlagExpChatUseSharedChannelTabDisplayLabel = sharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
+local var8 = localization.new(localizationService.RobloxLocaleId)
+
+local function getLocalizedChannelTabLabels() --[[ line: 22 ]]
+	-- upvalues: channelTabDisplayLabel (ref), var8 (ref)
+	local localizationKeys = channelTabDisplayLabel.LocalizationKeys
+	
+	return {
+		yourServer = var8:Format(localizationKeys.yourServer),
+		moreServers = var8:Format(localizationKeys.moreServers),
+		friends = var8:Format(localizationKeys.friends),
+		system = var8:Format(localizationKeys.system),
+		team = var8:Format(localizationKeys.team)
+	}
+end
 
 return {
 	type = "groupedListItem",
-	fetch = function(_) --[[ line: 23 ]]
-		-- upvalues: expChatSharedModule (ref), promiseModule (ref), fFlagExpChatUseMessagesStore (ref), expChatMessageHelpersModule (ref), var6 (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref)
+	fetch = function(_) --[[ line: 38 ]]
+		-- upvalues: expChatSharedModule (ref), promiseModule (ref), fFlagExpChatUseMessagesStore (ref), expChatMessageHelpersModule (ref), var8 (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), getLocalizedChannelTabLabels (ref), fFlagExpChatUseChannelTabsStore (ref), channelTabDisplayLabel (ref), playersService (ref)
 		local store = expChatSharedModule.context.store
 		
 		if not store then
 			return promiseModule.resolve({})
 		end
-		local var8, var9, var10
+		local var11, var12, var13
 		local state = store:getState()
 		local _ = nil
 		local _ = nil
@@ -31,46 +49,62 @@ return {
 			if not messagesStore then
 				return promiseModule.resolve({})
 			end
-			var8 = messagesStore.getByMessageId(false) or {}
-			var9 = messagesStore.getWindowMessagesInOrder(false) or {}
-			var10 = messagesStore.getWindowMessagesInOrderByTabId(false) or {}
+			var11 = messagesStore.getByMessageId(false) or {}
+			var12 = messagesStore.getWindowMessagesInOrder(false) or {}
+			var13 = messagesStore.getWindowMessagesInOrderByTabId(false) or {}
 		else
 			local messages = state and state.Messages
 			
 			if not messages then
 				return promiseModule.resolve({})
 			end
-			var8 = messages.byMessageId or {}
-			var9 = messages.windowMessagesInOrder or {}
-			var10 = messages.windowMessagesInOrderByTabId or {}
+			var11 = messages.byMessageId or {}
+			var12 = messages.windowMessagesInOrder or {}
+			var13 = messages.windowMessagesInOrderByTabId or {}
 		end
 		local translator = expChatSharedModule.context.translator
 		
 		if expChatMessageHelpersModule.areChannelTabsEnabled() then
-			local var19 = if state.TextChannels then state.TextChannels.allTextChannels else {}
+			local v_1
+			local var22 = if state.TextChannels then state.TextChannels.allTextChannels else {}
 			local allChannelTabs = getChannelTabsStore(false).getChannelTabsState(false).allChannelTabs
+			local var23 = if fFlagExpChatUseSharedChannelTabDisplayLabel then getLocalizedChannelTabLabels() else nil
 			local t = {}
 			local t_1 = {}
 			
-			for i, v in pairs(var10) do
-				local var23 = expChatMessageHelpersModule.collectItems(var8, v)
+			for i, v in pairs(var13) do
+				v_1 = expChatMessageHelpersModule.collectItems(var11, v)
 				
-				if #var23 > 0 then
-					local var24 = expChatMessageHelpersModule.formatChannelLabel(i, var19[i])
+				if #v_1 > 0 then
+					local var31
+					local _ = nil
+					
+					if fFlagExpChatUseSharedChannelTabDisplayLabel then
+						local var28
+						local _ = nil
+						
+						if fFlagExpChatUseChannelTabsStore then
+							local var27 = allChannelTabs[i]
+							var28 = if var27 then var27.type else nil
+						else
+							local allChannelTabs_1 = state.ChannelTabs and state.ChannelTabs.allChannelTabs
+							local var30 = allChannelTabs_1 and allChannelTabs_1[i]
+							var28 = if var30 then var30.Type else nil
+						end
+						var31 = if var28 then channelTabDisplayLabel.getDisplayLabel(var28, i, var22[i], playersService.LocalPlayer, var23) else i
+					else
+						var31 = expChatMessageHelpersModule.localizeString(translator, expChatMessageHelpersModule.formatChannelLabel(i, var22[i]))
+					end
 					table.insert(t_1, i)
-					t[i] = {
-						id = i,
-						label = expChatMessageHelpersModule.localizeString(translator, var24),
-						items = var23
-					}
+					t[i] = { id = i, label = var31, items = v_1 }
 				end
 			end
-			table.sort(t_1, function(p0, p1) --[[ line: 123 ]]
+			table.sort(t_1, function(p0, p1) --[[ line: 166 ]]
 				-- upvalues: allChannelTabs (ref), expChatMessageHelpersModule (copy)
-				local var25 = allChannelTabs[p0]
-				local var26 = allChannelTabs[p1]
+				local var32 = allChannelTabs[p0]
+				local var33 = allChannelTabs[p1]
 				
-				return if var25 and var26 then var25.tabIndex < var26.tabIndex elseif var25 then true elseif var26 then false else p0 == expChatMessageHelpersModule.CHANNEL_GENERAL or (if p1 == expChatMessageHelpersModule.CHANNEL_GENERAL then false else p0 < p1)
+				return if var32 and var33 then var32.tabIndex < var33.tabIndex elseif var32 then true elseif var33 then false else p0 == expChatMessageHelpersModule.CHANNEL_GENERAL or (if p1 == expChatMessageHelpersModule.CHANNEL_GENERAL then false else p0 < p1)
 			end)
 			local t_2 = {}
 			
@@ -79,15 +113,15 @@ return {
 			end
 			return enrichMissingUsernames(t_2)
 		else
-			local var12 = var9
+			local var15 = var12
 			local t = {}
 			local t_1 = {}
 			
-			for i, v in ipairs(var12) do
-				local var18 = var8[v]
+			for i, v in ipairs(var15) do
+				local var21 = var11[v]
 				
-				if var18 then
-					if var18.textChannel then
+				if var21 then
+					if var21.textChannel then
 						table.insert(t, v)
 					else
 						table.insert(t_1, v)
@@ -95,23 +129,23 @@ return {
 				end
 			end
 			local t_2 = {}
-			local var16 = expChatMessageHelpersModule.collectItems(var8, t)
-			expChatMessageHelpersModule.annotateWhisperItems(var16, var8, var6:Format("Feature.ReportAbuse.Label.SentPrivately"))
+			local var19 = expChatMessageHelpersModule.collectItems(var11, t)
+			expChatMessageHelpersModule.annotateWhisperItems(var19, var11, var8:Format("Feature.ReportAbuse.Label.SentPrivately"))
 			
-			if #var16 > 0 then
+			if #var19 > 0 then
 				table.insert(t_2, {
 					id = expChatMessageHelpersModule.CHANNEL_GENERAL,
-					label = var6:Format("CoreScripts.TextChat.ChannelTabs.Here"),
-					items = var16
+					label = var8:Format("CoreScripts.TextChat.ChannelTabs.Here"),
+					items = var19
 				})
 			end
-			local var17 = expChatMessageHelpersModule.collectItems(var8, t_1)
+			local var20 = expChatMessageHelpersModule.collectItems(var11, t_1)
 			
-			if #var17 > 0 then
+			if #var20 > 0 then
 				table.insert(t_2, {
 					id = expChatMessageHelpersModule.CHANNEL_GLOBAL,
-					label = var6:Format("CoreScripts.TextChat.ChannelTabs.Global2"),
-					items = var17
+					label = var8:Format("CoreScripts.TextChat.ChannelTabs.Global2"),
+					items = var20
 				})
 			end
 			return enrichMissingUsernames(t_2)
