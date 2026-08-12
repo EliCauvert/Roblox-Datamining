@@ -4,7 +4,6 @@ local _ = require(whatsNew.Types)
 local foundationModule = require(whatsNew.Parent.Foundation)
 local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
-local fFlagEnableSideSheet = require(whatsNew.Parent.SharedFlags).FFlagEnableSideSheet
 local roseWhatsNewTourPublishedTime = game:DefineFastString("RoseWhatsNewTourPublishedTime", "2026-08-12T00:00:00Z")
 local roseWhatsNewTourDisabledTime = game:DefineFastString("RoseWhatsNewTourDisabledTime", "2026-09-30T00:00:00Z")
 
@@ -33,7 +32,7 @@ return {
 			title = "CoreScripts.FTUX.Heading.SideSheetUpdate",
 			text = "CoreScripts.FTUX.Label.SideSheetUpdate",
 			icon = "",
-			enabled = fFlagEnableSideSheet,
+			enabled = true,
 			side = popoverSide.Right,
 			align = popoverAlign.Center,
 			publishedTime = roseWhatsNewTourPublishedTime,
@@ -46,7 +45,7 @@ return {
 			title = "CoreScripts.FTUX.Heading.LeaveRespawn",
 			text = "CoreScripts.FTUX.Label.LeaveRespawn",
 			icon = "",
-			enabled = fFlagEnableSideSheet,
+			enabled = true,
 			side = popoverSide.Right,
 			align = popoverAlign.End,
 			publishedTime = roseWhatsNewTourPublishedTime,
@@ -73,7 +72,7 @@ return {
 			title = "CoreScripts.FTUX.Heading.SideSheetUpdate",
 			text = "CoreScripts.FTUX.Label.SideSheetOnboarding",
 			icon = "",
-			enabled = fFlagEnableSideSheet,
+			enabled = true,
 			side = popoverSide.Right,
 			align = popoverAlign.Center,
 			publishedTime = roseWhatsNewTourPublishedTime,
@@ -86,7 +85,7 @@ return {
 			title = "CoreScripts.FTUX.Heading.LeaveRespawn",
 			text = "CoreScripts.FTUX.Label.LeaveRespawn",
 			icon = "",
-			enabled = fFlagEnableSideSheet,
+			enabled = true,
 			side = popoverSide.Right,
 			align = popoverAlign.End,
 			publishedTime = roseWhatsNewTourPublishedTime,

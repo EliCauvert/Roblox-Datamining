@@ -12,6 +12,7 @@ local participantDialogScreenDeprecatedModule = require(chatDetails.ParticipantD
 local removeUserDialogScreenModule = require(chatDetails.RemoveUserDialog.RemoveUserDialogScreen)
 local abuseReportScreenModule = require(appChat.Components.ChatAbuseReport.AbuseReportScreen)
 local fFlagAppChatEnableTrustedFriendEntryPointModule = require(appChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
+local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 local trustedContactsModalScreenModule = require(appChat.Components.TrustedContactsModal.TrustedContactsModalScreen)
 local messageContextMenuScreenModule = require(appChat.Components.ChatConversation.MessageInteraction.MessageContextMenuScreen)
 local squadVoiceChangerOverlayModule = require(parent.Squads.SquadVoiceChangerOverlay)
@@ -34,7 +35,7 @@ local chatLandingStackNavigatorModule = require(script.Parent.chatLandingStackNa
 local chatLandingStackNavigatorConnector = roactModule.Component:extend("ChatLandingStackNavigatorConnector")
 chatLandingStackNavigatorConnector.router = chatLandingStackNavigatorModule.router
 
-function chatLandingStackNavigatorConnector.render(p0) --[[ line: 47 ]]
+function chatLandingStackNavigatorConnector.render(p0) --[[ line: 48 ]]
 	-- upvalues: roactModule (ref), chatLandingStackNavigatorModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -166,5 +167,6 @@ if fFlagEnablePartyVoiceChangersInLua then
 	})
 end
 return roactNavigationModule.createRobloxStackNavigator(list, {
+	defaultNavigationOptions = if fFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
 	mode = roactNavigationModule.StackPresentationStyle.Overlay
 })

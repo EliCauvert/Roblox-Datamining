@@ -3,9 +3,6 @@ local _ = require(parent.InteractionFeedback)
 local sounds = require(parent.SoundManager).Sounds
 
 return {
-	Default = {
-		SecondaryActivated = { Haptic = Enum.HapticEffectType.UIHover }
-	},
 	PlayExperienceButton = { Release = { Sound = sounds.NotificationHigh.Name } },
 	MakePurchase = {
 		Press = {

@@ -589,7 +589,7 @@ CoreScripts.Feedback.EntryPoint.OptionText,Donner des commentaires sur la traduc
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Quitter
 CoreScripts.Feedback.FeedbackBar.HelpButton,Aide
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Fournir tous les commentaires supplémentaires ci-dessous (facultatif)
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Ajoute ci-dessous tout commentaire supplémentaire
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,Entrez tous les commentaires supplémentaires que vous avez ici
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Quelle est la traduction correcte ? (facultatif)
@@ -597,7 +597,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Ob
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Entrez la traduction correcte ici
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Image sélectionnée
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Quel est le problème avec cette traduction ? (facultatif)
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Quel est le problème avec cette traduction ?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Problème de précision
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Inapproprié ou péjoratif
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,Problème d'orthographe ou de grammaire
@@ -626,18 +626,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Merci de 
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Pour protéger les jeunes joueurs, les titulaires de comptes de moins de 13 ans ne peuvent pas envoyer de commentaires."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Commentaire indisponible
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,Précédent
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Ajouter des captures
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Modifier la sélection
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Aucune capture disponible.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Captures ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Aide le créateur à comprendre ton problème.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Chargement des captures…
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} sélectionnées
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Une ou plusieurs de tes captures n'ont pas pu être importées.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Signalement de bug
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Restauration d'items ou de données
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Catégorie*
@@ -646,14 +635,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Choisir une 
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problème d'achat
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,{MAX} caractères max.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Détails*
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Désélectionner
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Ajoute toute information pertinente au problème, comme la version du jeu et les étapes de reproduction."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Décris ce qui manque et indique la dernière fois que tu l'as vu. Si ton compte a été piraté, merci d'inclure ton numéro de ticket Roblox CS ainsi que tout détail pertinent."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Décris ta demande ou ton problème ici. Sois le plus précis possible afin de nous aider à comprendre la situation.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Dis-nous ce que tu as essayé d'acheter, quand cela s'est produit et la valeur totale (par exemple 500 Robux / 4,99 $). Inclus tous les messages d'erreur que tu as pu voir."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Tu essaies de signaler un abus ?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Soumettre un signalement à la place.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Sélectionner
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Cela permet au créateur d'aider le bon compte.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Partager les informations utilisateur avec le créateur
@@ -922,7 +909,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Respawn le personnage?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Tu vas quitter ce serveur pour en rejoindre un autre.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Tu t'en vas ?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Rejoindre des jeux visités récemment
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Tu es sur le point de quitter ce jeu pour retourner sur {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Tu es sur le point de quitter ce jeu pour retourner sur {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Vibration
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,pour basculer la navigation du menu
@@ -1243,6 +1232,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Créer un ensemble
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Vue par défaut
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Supprimer ces avatars
 Feature.Avatar.Action.DeleteSet,Supprimer l'ensemble
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,Modifier l'image du profil
@@ -1259,7 +1249,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Pas maintenant
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,Publication en cours
+Feature.Avatar.Action.Remove,Retirer
 Feature.Avatar.Action.RemoveAll,Tout retirer
+Feature.Avatar.Action.RemoveFromSet,Retirer de l'ensemble
 Feature.Avatar.Action.Rename,Renommer
 Feature.Avatar.Action.RenameSet,Renommer l'ensemble
 Feature.Avatar.Action.Reset,
@@ -1268,7 +1260,7 @@ Feature.Avatar.Action.Revert,Revenir à
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Enregistrer
 Feature.Avatar.Action.SaveAsNew,Enregistrer comme nouveau
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,Sélectionner
 Feature.Avatar.Action.SelectMultipleItems,Sélectionner plusieurs articles
 Feature.Avatar.Action.SelectSlot,Sélectionner une partie
 Feature.Avatar.Action.Share,Partager
@@ -1282,7 +1274,7 @@ Feature.Avatar.Action.Stay,Rester
 Feature.Avatar.Action.Switch,Changer
 Feature.Avatar.Action.TryOn,Essayer sur
 Feature.Avatar.Action.Unequip,Déséquiper
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,Désélectionner
 Feature.Avatar.Action.UnslotEmote,Désélectionner Expression
 Feature.Avatar.Action.Update,Mise à jour
 Feature.Avatar.Action.UpdateExistingCharacter,Mise à jour du personnage existant
@@ -1329,6 +1321,7 @@ Feature.Avatar.Heading.SelectToUpdate,Sélectionner pour mettre à jour
 Feature.Avatar.Heading.SetLimitReached,Limite d'ensembles atteinte
 Feature.Avatar.Heading.SetNameDuplicate,Nom en double
 Feature.Avatar.Heading.SetNameNotAllowed,Nom interdit
+Feature.Avatar.Heading.SetUpdateFailed,Mise à jour de l'ensemble impossible
 Feature.Avatar.Heading.SharePublicAvatar,Partager ton avatar
 Feature.Avatar.Heading.SortBy,Trié par
 Feature.Avatar.Heading.UsedName,Nom utilisé
@@ -1400,6 +1393,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} Sélectionné.e.s
 Feature.Avatar.Label.Creations,Créations
 Feature.Avatar.Label.CurrentlyWearing,Tenue actuelle
 Feature.Avatar.Label.DefaultBody,Corps par défaut
+Feature.Avatar.Label.DeleteSetBody,La suppression de cet ensemble ne supprimera pas les tenues qu'il contient.
 Feature.Avatar.Label.Details,Détails ({quantity})
 Feature.Avatar.Label.DetailsButton,Détails
 Feature.Avatar.Label.DressesAndSkirts,Robes et jupes
@@ -1457,6 +1451,7 @@ Feature.Avatar.Label.LeftLegs,Jambes gauches
 Feature.Avatar.Label.LeftShoe,Chaussure gauche
 Feature.Avatar.Label.LeftShoes,Chaussures gauches
 Feature.Avatar.Label.LipMakeup,Lèvres
+Feature.Avatar.Label.LoadingSets,Chargement des ensembles
 Feature.Avatar.Label.Looks,Looks
 Feature.Avatar.Label.Makeup,Maquillage
 Feature.Avatar.Label.MakeupLayer,Couche {layerIndex}
@@ -1475,6 +1470,7 @@ Feature.Avatar.Label.Newest,Plus récent
 Feature.Avatar.Label.NoExpiredItems,Aucun item {itemType} expiré
 Feature.Avatar.Label.NoItems,Aucun(e) {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Ils ne seront plus disponibles dans cette collection
+Feature.Avatar.Label.NoSets,Aucun ensemble
 Feature.Avatar.Label.Outerwear,
 Feature.Avatar.Label.OutfitIncomplete,La tenue que vous avez créée n'a pas été achetée et ne sera pas montrée dans l'expérience
 Feature.Avatar.Label.OutfitPurchaseFailure,"Désolé, les achats de [{numItems}] ont échoué !"
@@ -1500,6 +1496,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Récemment porté
+Feature.Avatar.Label.RemoveFromSetBody,"Ces avatars seront retirés de cet ensemble, mais ne seront pas supprimés."
 Feature.Avatar.Label.Replace,Remplacer
 Feature.Avatar.Label.ResetToNewCharacter,Tu passes à un nouveau personnage ; veux-tu réinitialiser tous les articles de ta tenue ou les conserver ?
 Feature.Avatar.Label.Right,R
@@ -1519,6 +1516,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Recherches récentes
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Récemment consulté
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Continuer à acheter pour
 Feature.Avatar.Label.SelectItem,Sélectionner un article
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Tu peux créer jusqu'à {setLimit} ensembles. Supprimes-en un pour faire de la place.
 Feature.Avatar.Label.SetNameDuplicateBody,"Un ensemble porte déjà ce nom, choisis-en un autre"
 Feature.Avatar.Label.SetNameNotAllowedBody,Essaie d'en trouver un autre
@@ -1680,6 +1678,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Effacer le corps ?
 Feature.Avatar.Title.ClearClothesConfirmation,Effacer tous les vêtements ?
 Feature.Avatar.Title.ClearMakeupConfirmation,Effacer tout le maquillage ?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Dupliquer le look
 Feature.Avatar.Title.EnhancedAvatarHeads,Têtes d'avatar améliorées
 Feature.Avatar.Title.GetOutfit,Obtenir une tenue
@@ -1698,7 +1697,9 @@ Feature.Avatar.Title.NewCustomizeLook,La personnalisation a un nouveau look !
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Nouveau sur le marketplace
 Feature.Avatar.Title.OutfitIncomplete,Tenue incomplète
 Feature.Avatar.Title.Preview,Prévisualisation
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Renommer le look de maquillage
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Réinitialisation aux valeurs par défaut
 Feature.Avatar.Title.ResetToNewCharacter,Nouveau personnage
 Feature.Avatar.Title.RevertToDefault,Revenir à la valeur par défaut
@@ -1707,6 +1708,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Tes avatars enregistrés sont ici
 Feature.Avatar.Title.SelectEmoteForAvatar,Sélectionner une emote pour poser votre avatar
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Sélectionner un look de maquillage
 Feature.Avatar.Title.SelectMakeupLooks,Sélectionner des looks
+Feature.Avatar.Title.SelectSet,Sélectionner un ensemble
 Feature.Avatar.Title.SingleDeleteOutfit,Supprimer « {outfitName} » ?
 Feature.Avatar.Title.TrendingItemWidget,Items tendance
 Feature.Avatar.Title.TrendingLooksWidget,Styles tendance
@@ -2198,7 +2200,7 @@ Feature.Chat.Action.GroupOSAJoin,
 Feature.Chat.Action.LearnMore,En apprendre plus
 Feature.Chat.Action.Leave,
 Feature.Chat.Action.MuteVoice,
-Feature.Chat.Action.Remove,Retirer
+Feature.Chat.Action.Remove,
 Feature.Chat.Action.RemoveFromGroup,Retirer du groupe
 Feature.Chat.Action.RemoveUser,Retirer l'utilisateur
 Feature.Chat.Action.Reply,Répondre
@@ -2297,6 +2299,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,utilisateur inconnu
 Feature.Chat.Label.User,Utilisateur

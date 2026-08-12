@@ -135,6 +135,7 @@ return reactModule.memo(function(p0) --[[ line: 69 | named "DynamicReportV2InExp
 				abuseVector = abuseVector,
 				targetId = var14,
 				onClose = p0.onClose,
+				open = p0.isReportTabVisible,
 				onCustomSubmit = var26,
 				onFinish = p0.onReportFinish,
 				onResolveError = var27,

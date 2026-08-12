@@ -581,7 +581,7 @@ CoreScripts.Feedback.EntryPoint.OptionText,给予翻译反馈
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,退出
 CoreScripts.Feedback.FeedbackBar.HelpButton,帮助
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,在下方提供任何额外评论（选填）
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,在下方提供其他补充说明
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,在此输入额外评论
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,正确的翻译是什么？（选填）
@@ -589,7 +589,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,在此输入正确翻译
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,已选择的图片
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,这个翻译有什么问题？（选填）
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,此译文有什么问题？
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,准确度问题
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,不适当或带有贬义
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,拼字或文法问题
@@ -618,18 +618,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,感谢你
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,为了保护年龄较小的玩家，13 岁以下的用户无法发送反馈。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,无法提供反馈
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,添加截图
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,编辑选择
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,无可用截图。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,截图 ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,帮助创作者了解你的问题。
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,正在加载截图…
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,已选择 {count} 项，共 {max} 项
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,你的一个或多个截图无法上传。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,漏洞报告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,道具或数据恢复
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,类别 *
@@ -638,14 +627,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,选择一个
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,购买问题
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 个字符
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,详情 *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消选择
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,请提供与问题相关的任何信息，例如游戏版本以及重现问题的步骤。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,请描述缺失的内容以及你最后一次看到该内容的时间。如果你的帐户受到入侵，请提供你的 Roblox 客户支持票单编号以及任何相关详细信息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,在此处描述你的请求或问题。请尽可能详细地提供信息，以帮助我们了解情况。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,请告诉我们你尝试购买的内容、发生的时间以及总价值（例如 500 Robux/4.99 美元）。请提供你看到的任何错误消息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想举报滥用？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改为提交举报。</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,选择
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,这有助于创作者为正确的帐户提供支持。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,与创作者分享用户信息
@@ -914,7 +901,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,重置人物？
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,你即将离开此服务器并切换到另一台服务器。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要离开吗？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即将离开此游戏并返回“{PREVIOUS_GAME}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,震动
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,来切换菜单导航
@@ -1224,7 +1213,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,违规和申诉
 Feature.Avatar.Action.AddNewMakeupLook,添加新造型
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,
+Feature.Avatar.Action.CancelSelection,取消选择
 Feature.Avatar.Action.Clear,清除
 Feature.Avatar.Action.ComposerPost,发布
 Feature.Avatar.Action.ComposerPreviewAndPost,预览并发布
@@ -1233,7 +1222,7 @@ Feature.Avatar.Action.CreateSetFirstRun,创建集合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,默认视角
 Feature.Avatar.Action.Delete,
-Feature.Avatar.Action.DeleteAvatars,
+Feature.Avatar.Action.DeleteAvatars,删除虚拟形象
 Feature.Avatar.Action.DeleteSet,删除集合
 Feature.Avatar.Action.Discard,放弃
 Feature.Avatar.Action.EditProfilePicture,编辑个人资料图片
@@ -1250,9 +1239,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,以后再说
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,正在发布
-Feature.Avatar.Action.Remove,
+Feature.Avatar.Action.Remove,移除
 Feature.Avatar.Action.RemoveAll,全部移除
-Feature.Avatar.Action.RemoveFromSet,
+Feature.Avatar.Action.RemoveFromSet,从集合中移除
 Feature.Avatar.Action.Rename,重命名
 Feature.Avatar.Action.RenameSet,重命名集合
 Feature.Avatar.Action.Reset,
@@ -1261,7 +1250,7 @@ Feature.Avatar.Action.Revert,还原
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,保存
 Feature.Avatar.Action.SaveAsNew,储存为新装扮
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,选择
 Feature.Avatar.Action.SelectMultipleItems,选择多个物品
 Feature.Avatar.Action.SelectSlot,选择栏位
 Feature.Avatar.Action.Share,分享
@@ -1283,6 +1272,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,更新现有造型
 Feature.Avatar.Action.UpdateMakeupLook,更新造型
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,探索风格
+Feature.Avatar.BackgroundGeneration.Error.Moderation,
+Feature.Avatar.BackgroundGeneration.Error.System,
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,
+Feature.Avatar.BackgroundGeneration.Status.Generating,
+Feature.Avatar.BackgroundGeneration.Status.Preparing,
+Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -1290,6 +1285,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,肤色
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,通过无限的妆容组合，打造独一无二的容貌。
 Feature.Avatar.EmoteAlreadyAssigned,此表情动作已分配至一个槽位
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,发生错误，请稍后再试。
 Feature.Avatar.GetInspired,汲取灵感
@@ -1322,7 +1318,7 @@ Feature.Avatar.Heading.SelectToUpdate,选择要更新的素材
 Feature.Avatar.Heading.SetLimitReached,已达到集合数量上限
 Feature.Avatar.Heading.SetNameDuplicate,名称重复
 Feature.Avatar.Heading.SetNameNotAllowed,不允许使用该名称
-Feature.Avatar.Heading.SetUpdateFailed,
+Feature.Avatar.Heading.SetUpdateFailed,无法更新集合
 Feature.Avatar.Heading.SharePublicAvatar,分享你的虚拟形象
 Feature.Avatar.Heading.SortBy,排序依据
 Feature.Avatar.Heading.UsedName,名称已使用
@@ -1394,7 +1390,7 @@ Feature.Avatar.Label.CountSelected,已选择 {itemCount} 个物品
 Feature.Avatar.Label.Creations,
 Feature.Avatar.Label.CurrentlyWearing,当前穿戴
 Feature.Avatar.Label.DefaultBody,默认身体
-Feature.Avatar.Label.DeleteSetBody,
+Feature.Avatar.Label.DeleteSetBody,删除此集合不会删除其中的穿搭。
 Feature.Avatar.Label.Details,详细信息 ({quantity})
 Feature.Avatar.Label.DetailsButton,详情
 Feature.Avatar.Label.DressesAndSkirts,裙子
@@ -1453,7 +1449,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,左脚鞋子
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,嘴唇
-Feature.Avatar.Label.LoadingSets,
+Feature.Avatar.Label.LoadingSets,正在加载集合
 Feature.Avatar.Label.Looks,造型
 Feature.Avatar.Label.Makeup,妆容
 Feature.Avatar.Label.MakeupLayer,图层 {layerIndex}
@@ -1472,7 +1468,7 @@ Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,没有已过期的{itemType}道具
 Feature.Avatar.Label.NoItems,无{itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,将从此收藏中删除该素材
-Feature.Avatar.Label.NoSets,
+Feature.Avatar.Label.NoSets,尚无集合
 Feature.Avatar.Label.Outerwear,外套
 Feature.Avatar.Label.OutfitIncomplete,你尚未购买你创作的穿搭，因此无法在体验中显示
 Feature.Avatar.Label.OutfitPurchaseFailure,抱歉，无法购买 {numItems} 个道具！
@@ -1498,7 +1494,7 @@ Feature.Avatar.Label.R15,15 型号
 Feature.Avatar.Label.R6,6 型号
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,最近穿戴
-Feature.Avatar.Label.RemoveFromSetBody,
+Feature.Avatar.Label.RemoveFromSetBody,这些虚拟形象将从此集合中移除。它们不会被删除。
 Feature.Avatar.Label.Replace,替换
 Feature.Avatar.Label.ResetToNewCharacter,你即将切换至新角色，是否想要重置全部穿搭道具，或保留？
 Feature.Avatar.Label.Right,右
@@ -1518,7 +1514,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,最近搜索
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,最近查看
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,继续购物
 Feature.Avatar.Label.SelectItem,选择物品
-Feature.Avatar.Label.SetAvatarCount,
+Feature.Avatar.Label.SetAvatarCount,{itemCount} 个虚拟形象
 Feature.Avatar.Label.SetLimitReachedBody,你最多只能有 {setLimit} 个集合。请删除一个以腾出空间
 Feature.Avatar.Label.SetNameDuplicateBody,你已经有一个同名的集合，请选择其他名称
 Feature.Avatar.Label.SetNameNotAllowedBody,请选择其他名称
@@ -1711,7 +1707,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,你保存的虚拟形象在这里
 Feature.Avatar.Title.SelectEmoteForAvatar,选择一个表情动作，给你的虚拟形象摆个造型
 Feature.Avatar.Title.SelectMakeupLookForUpdate,选择一个妆容造型
 Feature.Avatar.Title.SelectMakeupLooks,选择造型
-Feature.Avatar.Title.SelectSet,
+Feature.Avatar.Title.SelectSet,选择集合
 Feature.Avatar.Title.SingleDeleteOutfit,要删除“{outfitName}”吗？
 Feature.Avatar.Title.TrendingItemWidget,热门道具
 Feature.Avatar.Title.TrendingLooksWidget,热门造型
@@ -1844,7 +1840,7 @@ Feature.Catalog.Action.CloseDetails,关闭详情
 Feature.Catalog.Action.CopyLink,复制链接
 Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,删除虚拟形象
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,描述你的虚拟形象（可选）
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -1855,7 +1851,7 @@ Feature.Catalog.Action.OpenDetails,打开详情
 Feature.Catalog.Action.Owned,已有 {count} 个
 Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,
-Feature.Catalog.Action.Remove,移除
+Feature.Catalog.Action.Remove,
 Feature.Catalog.Action.RemoveFavorite,从“最爱”移除
 Feature.Catalog.Action.Rent,租用
 Feature.Catalog.Action.Replace,
@@ -2301,6 +2297,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小时
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
@@ -3804,7 +3801,7 @@ Feature.VirtualEvents.HostedByLabel,主办方：
 Feature.VirtualEvents.Join,
 Feature.VirtualEvents.JoinEvent,加入活动
 Feature.VirtualEvents.Label.Challenge,挑战
-Feature.VirtualEvents.Label.DateAtTime,
+Feature.VirtualEvents.Label.DateAtTime,{date} {time}
 Feature.VirtualEvents.Label.EarlyAccess,抢先体验
 Feature.VirtualEvents.Label.Ended,已结束
 Feature.VirtualEvents.Label.Expansion,扩充内容

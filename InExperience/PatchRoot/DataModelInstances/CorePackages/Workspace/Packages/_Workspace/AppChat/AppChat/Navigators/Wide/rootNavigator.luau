@@ -4,11 +4,12 @@ local roactModule = require(parent.Roact)
 local roactNavigationModule = require(parent.RoactNavigation)
 local enumScreensModule = require(appChat.EnumScreens)
 local toastScreenModule = require(appChat.Components.Toast.ToastScreen)
+local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 local chatLandingWithDialogsNavigatorModule = require(script.Parent.chatLandingWithDialogsNavigator)
 local chatLandingWithDialogsNavigatorConnector = roactModule.Component:extend("ChatLandingWithDialogsNavigatorConnector")
 chatLandingWithDialogsNavigatorConnector.router = chatLandingWithDialogsNavigatorModule.router
 
-function chatLandingWithDialogsNavigatorConnector.render(p0) --[[ line: 15 ]]
+function chatLandingWithDialogsNavigatorConnector.render(p0) --[[ line: 16 ]]
 	-- upvalues: roactModule (ref), chatLandingWithDialogsNavigatorModule (ref)
 	return roactModule.createElement(chatLandingWithDialogsNavigatorModule, p0.props)
 end
@@ -28,5 +29,6 @@ return roactNavigationModule.createRobloxStackNavigator({
 		}
 	}
 }, {
+	defaultNavigationOptions = if fFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
 	mode = roactNavigationModule.StackPresentationStyle.Overlay
 })

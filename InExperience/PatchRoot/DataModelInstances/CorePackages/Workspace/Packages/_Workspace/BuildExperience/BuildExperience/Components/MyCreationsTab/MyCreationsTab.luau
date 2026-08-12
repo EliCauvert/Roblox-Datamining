@@ -194,11 +194,14 @@ local var32 = reactModule.memo(function(p15) --[[ line: 275 | named "ExperienceL
 	-- upvalues: reactModule (ref), view (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), list (ref)
 	return reactModule.createElement(list.Item, {
 		LayoutOrder = p15.LayoutOrder,
-		leading = p15.gameIcon,
+		leading = reactModule.useMemo(function() --[[ line: 276 ]]
+			-- upvalues: p15 (ref)
+			return { type = nil, iconVariant = nil, iconName = p15.gameIcon }
+		end, { p15.gameIcon }),
 		title = p15.experienceName,
 		description = p15.description,
 		testId = `MyCreationsTab.ExperienceRow.{p15.universeId}`,
-		onActivated = reactModule.useCallback(function() --[[ line: 278 ]]
+		onActivated = reactModule.useCallback(function() --[[ line: 284 ]]
 			-- upvalues: p15 (ref)
 			p15.onOpenChat({
 				universeId = p15.universeId,
@@ -212,7 +215,7 @@ local var32 = reactModule.memo(function(p15) --[[ line: 275 | named "ExperienceL
 			p15.creatorName, p15.experienceName, p15.gameIcon, p15.onOpenChat, p15.placeId,
 			p15.sessionId, p15.universeId
 		}),
-		trailing = reactModule.useMemo(function() --[[ line: 298 ]]
+		trailing = reactModule.useMemo(function() --[[ line: 304 ]]
 			-- upvalues: p15 (ref), reactModule (copy), view (copy), badge (copy), badgeShape (copy), badgeSize (copy), badgeVariant (copy)
 			return if p15.visibilityLabel == nil then nil else reactModule.createElement(view, { tag = "row align-y-center auto-xy" }, {
 				VisibilityBadge = reactModule.createElement(badge, {
@@ -227,7 +230,7 @@ local var32 = reactModule.memo(function(p15) --[[ line: 275 | named "ExperienceL
 	})
 end)
 
-return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
+return function(p16) --[[ line: 335 | named "MyCreationsTab" ]]
 	-- upvalues: creatorAgentChatModule (ref), fFlagBuildRehydrateOnPublishModule (ref), universeActivationModule (ref), universeConfigurationModule (ref), getSearchQueryStoreModule (ref), getBuildExperienceRefreshStoreModule (ref), appLifecycleObserverService (ref), useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var24 (ref), useSignalState (ref), requestHandleToPromise (ref), signalsModule (ref), myCreationsSessionListPollingIntervalSeconds (ref), privacyType (ref), contentMaturityUtilsModule (ref), t (ref), buildExperienceMetadataByUniverseId (ref), buildSessionItems (ref), chatConstantsModule (ref), playersService (ref), promiseModule (ref), renderLoadingExperienceSkeleton (ref), matchesSearchQueryModule (ref), view (ref), list (ref), inputSize (ref), iconName (ref), localizationStringsModule (ref), buildEmptyStateModule (ref), fFlagBuildExperienceStableMyCreationsListItemsModule (ref), var32 (ref), badge (ref), badgeShape (ref), badgeSize (ref), badgeVariant (ref), refreshScrollingFrame (ref)
 	local creatorAgentChatStore = p16.creatorAgentChatStore or creatorAgentChatModule.getCreatorAgentChatStore()
 	local var48 = if fFlagBuildRehydrateOnPublishModule then universeActivationModule.getUniverseActivationStore() else nil
@@ -253,31 +256,31 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 	local var64 = useSignalState(sessionListStore.getStatus)
 	local var65 = useSignalState(sessionListStore.getLoadMoreStatus)
 	local var66 = if var64 == "pending" then "NotReady" elseif var64 == "succeeded" then "Ready" else "Failed"
-	local var67 = reactModule.useCallback(function() --[[ line: 361 ]]
+	local var67 = reactModule.useCallback(function() --[[ line: 367 ]]
 		-- upvalues: requestHandleToPromise (copy), sessionListStore (ref)
 		return requestHandleToPromise(sessionListStore.refresh())
 	end, { sessionListStore })
-	reactModule.useEffect(function() --[[ line: 365 ]]
+	reactModule.useEffect(function() --[[ line: 371 ]]
 		-- upvalues: appLifecycleObserverService_1 (ref), var53 (ref), sessionListStore (ref)
-		local onUnhideConnection = appLifecycleObserverService_1.OnUnhide:Connect(function() --[[ line: 366 ]]
+		local onUnhideConnection = appLifecycleObserverService_1.OnUnhide:Connect(function() --[[ line: 372 ]]
 			-- upvalues: var53 (copy), sessionListStore (copy)
 			if var53 then
 				sessionListStore.refresh()
 			end
 		end)
 		
-		return function() --[[ line: 372 ]]
+		return function() --[[ line: 378 ]]
 			-- upvalues: onUnhideConnection (ref)
 			onUnhideConnection:Disconnect()
 		end
 	end, { appLifecycleObserverService_1, var53, sessionListStore })
-	reactModule.useEffect(function() --[[ line: 377 ]]
+	reactModule.useEffect(function() --[[ line: 383 ]]
 		-- upvalues: var53 (ref), var58 (ref), sessionListStore (ref), signalsModule (copy)
 		if var53 then
 			var58(false)
 			local var84 = sessionListStore.refresh()
 			
-			return signalsModule.createEffect(function(p17) --[[ line: 385 ]]
+			return signalsModule.createEffect(function(p17) --[[ line: 391 ]]
 				-- upvalues: var84 (ref), var58 (copy)
 				if var84.state(p17).status == "succeeded" then
 					var58(true)
@@ -287,14 +290,14 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 		var58(false)
 	end, { var53, var60, sessionListStore })
 	local maxValue = math.max(0, p16.pollingIntervalSeconds or myCreationsSessionListPollingIntervalSeconds)
-	reactModule.useEffect(function() --[[ line: 394 ]]
+	reactModule.useEffect(function() --[[ line: 400 ]]
 		-- upvalues: var53 (ref), maxValue (ref), sessionListStore (ref)
 		if var53 and maxValue ~= 0 then
 			local var85 = false
 			
-			local function scheduleNextPoll() --[[ line: 400 ]]
+			local function scheduleNextPoll() --[[ line: 406 ]]
 				-- upvalues: maxValue (copy), var85 (write), sessionListStore (copy), scheduleNextPoll (ref)
-				task.delay(maxValue, function() --[[ line: 401 ]]
+				task.delay(maxValue, function() --[[ line: 407 ]]
 					-- upvalues: var85 (copy), sessionListStore (copy), scheduleNextPoll (copy)
 					if var85 then
 						return
@@ -304,7 +307,7 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 				end)
 			end
 			
-			task.delay(maxValue, function() --[[ line: 401 ]]
+			task.delay(maxValue, function() --[[ line: 407 ]]
 				-- upvalues: var85 (write), sessionListStore (copy), scheduleNextPoll (ref)
 				if var85 then
 					return
@@ -313,15 +316,15 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 				scheduleNextPoll()
 			end)
 			
-			return function() --[[ line: 411 ]]
+			return function() --[[ line: 417 ]]
 				-- upvalues: var85 (write)
 				var85 = true
 			end
 		end
 	end, { var53, maxValue, sessionListStore })
-	local var69 = useSignalState(reactModule.useMemo(function() --[[ line: 416 ]]
+	local var69 = useSignalState(reactModule.useMemo(function() --[[ line: 422 ]]
 		-- upvalues: signalsModule (copy), var62 (ref), configurationStore (ref)
-		return signalsModule.createComputed(function(p18) --[[ line: 417 ]]
+		return signalsModule.createComputed(function(p18) --[[ line: 423 ]]
 			-- upvalues: var62 (copy), configurationStore (copy)
 			local t = {}
 			local t_1 = {}
@@ -348,9 +351,9 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 			return t
 		end)
 	end, { configurationStore, var62 }))
-	local var70 = useSignalState(reactModule.useMemo(function() --[[ line: 436 ]]
+	local var70 = useSignalState(reactModule.useMemo(function() --[[ line: 442 ]]
 		-- upvalues: signalsModule (copy), fFlagBuildRehydrateOnPublishModule (copy), var48 (ref), var69 (ref), privacyType (copy), contentMaturityUtilsModule (copy), t (copy)
-		return signalsModule.createComputed(function(p19) --[[ line: 437 ]]
+		return signalsModule.createComputed(function(p19) --[[ line: 443 ]]
 			-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), var48 (copy), var69 (copy), privacyType (copy), contentMaturityUtilsModule (copy), t (copy)
 			local t_1 = {}
 			
@@ -364,11 +367,11 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 			return if next(t_1) == nil then t else t_1
 		end)
 	end, { var48, var69 }))
-	local var71 = reactModule.useMemo(function() --[[ line: 459 ]]
+	local var71 = reactModule.useMemo(function() --[[ line: 465 ]]
 		-- upvalues: buildExperienceMetadataByUniverseId (copy), var69 (ref), var70 (ref)
 		return buildExperienceMetadataByUniverseId(var69, var70)
 	end, { var70, var69 })
-	local var72 = reactModule.useMemo(function() --[[ line: 462 ]]
+	local var72 = reactModule.useMemo(function() --[[ line: 468 ]]
 		-- upvalues: buildSessionItems (copy), var62 (ref), var71 (ref), var69 (ref)
 		local t = {}
 		
@@ -381,7 +384,7 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 		end
 		return t
 	end, { var62, var71, var69 })
-	local var73 = reactModule.useMemo(function() --[[ line: 473 ]]
+	local var73 = reactModule.useMemo(function() --[[ line: 479 ]]
 		-- upvalues: var62 (ref), var69 (ref)
 		local t = {}
 		
@@ -407,7 +410,7 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 	end, { var62, var69 })
 	local var74 = if var66 ~= "Ready" then #var62 > 0 else true
 	local isPending = var65 == "pending"
-	local var76 = reactModule.useCallback(function() --[[ line: 489 ]]
+	local var76 = reactModule.useCallback(function() --[[ line: 495 ]]
 		-- upvalues: var56 (ref), p16 (ref), chatConstantsModule (copy), playersService (copy)
 		var56.current = true
 		p16.onOpenChat({
@@ -416,7 +419,7 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 			creatorName = if playersService.LocalPlayer then playersService.LocalPlayer.Name else nil
 		})
 	end, { p16.onOpenChat })
-	reactModule.useEffect(function() --[[ line: 499 ]]
+	reactModule.useEffect(function() --[[ line: 505 ]]
 		-- upvalues: p16 (ref), var53 (ref), var57 (ref), var66 (ref), var62 (ref), var56 (ref), var76 (ref)
 		if p16.autoOpenNewGame ~= false and var53 and (var57 and var66 == "Ready") and (#var62 == 0 and not var56.current) then
 			var76()
@@ -424,13 +427,13 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 	end, {
 		var76, var57, var53, p16.autoOpenNewGame, var62, var66
 	})
-	local var77 = reactModule.useCallback(function() --[[ line: 521 ]]
+	local var77 = reactModule.useCallback(function() --[[ line: 527 ]]
 		-- upvalues: sessionListStore (ref), promiseModule (copy), requestHandleToPromise (copy)
 		local var97 = sessionListStore.loadMore()
 		
 		return if var97 == nil then promiseModule.resolve() else requestHandleToPromise(var97)
 	end, { isPending, var63, var66, sessionListStore })
-	local var78 = reactModule.useCallback(function(p20) --[[ line: 529 ]]
+	local var78 = reactModule.useCallback(function(p20) --[[ line: 535 ]]
 		-- upvalues: var63 (ref), isPending (ref), var66 (ref), var77 (ref)
 		local y = p20.AbsoluteCanvasSize.Y
 		
@@ -439,11 +442,11 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 			var77()
 		end
 	end, { isPending, var77, var63, var66 })
-	local var79 = reactModule.useCallback(function() --[[ line: 548 ]]
+	local var79 = reactModule.useCallback(function() --[[ line: 554 ]]
 		-- upvalues: isPending (ref), renderLoadingExperienceSkeleton (copy), var54 (ref)
 		return if isPending then renderLoadingExperienceSkeleton(1, 1, var54) else nil
 	end, { isPending, var54 })
-	local var80 = reactModule.useMemo(function() --[[ line: 556 ]]
+	local var80 = reactModule.useMemo(function() --[[ line: 562 ]]
 		-- upvalues: var59 (ref), var72 (ref), matchesSearchQueryModule (copy)
 		if var59 == "" then
 			return var72
@@ -522,7 +525,7 @@ return function(p16) --[[ line: 329 | named "MyCreationsTab" ]]
 						title = experienceName,
 						description = v.description,
 						testId = `MyCreationsTab.ExperienceRow.{v.universeId}`,
-						onActivated = function() --[[ line: 640 ]]
+						onActivated = function() --[[ line: 646 ]]
 							-- upvalues: p16 (ref), v (ref), placeId (ref), experienceName (ref), gameIcon (ref)
 							p16.onOpenChat({
 								universeId = v.universeId,

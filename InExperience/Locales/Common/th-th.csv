@@ -572,15 +572,15 @@ CoreScripts.Feedback.EntryPoint.OptionText,ให้ข้อเสนอแน�
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,ออก
 CoreScripts.Feedback.FeedbackBar.HelpButton,ความช่วยเหลือ
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,ระบุความคิดเห็นเพิ่มเติมได้ที่ด้านล่าง (ไม่จำเป็นต้องระบุ)
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,ระบุความคิดเห็นเพิ่มเติมได้ที่ด้านล่าง
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,กรอกความคิดเห็นเพิ่มเติมของคุณได้ที่นี่
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
-CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,คำแปลที่ถูกต้องคืออะไร? (ไม่จำเป็นต้องระบุ)
+CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,คำแปลที่ถูกต้องคืออะไร? *
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,วัตถุในประสบการณ์: {ObjectType}
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,กรอกคำแปลที่ถูกต้องที่นี่
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,ภาพที่เลือก
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,โปรดให้ข้อเสนอแนะ
-CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,ปัญหาเกี่ยวกับคำแปลนี้คืออะไร? (ไม่จําเป็นต้องระบุ)
+CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,คำแปลนี้มีปัญหาตรงไหน?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,ปัญหาเกี่ยวกับความถูกต้องแม่นยำ
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,ไม่เหมาะสมหรือทำให้เสื่อมเสีย
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.SpellingOrGrammarIssue,ปัญหาเกี่ยวกับการสะกดหรือไวยากรณ์
@@ -609,18 +609,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,ขอข
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,เพื่อปกป้องผู้เล่นอายุน้อย บัญชีที่มีอายุต่ำกว่า 13 ปีจะไม่สามารถส่งข้อเสนอแนะได้
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,ไม่สามารถให้ข้อเสนอแนะได้
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,เพิ่มภาพที่จับ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,แก้ไขภาพที่เลือก
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,ไม่มีภาพที่จับ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,ภาพ ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,ช่วยให้ครีเอเตอร์เห็นปัญหาของคุณ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,กำลังโหลดภาพที่จับ...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,เลือกแล้ว {count}/{max} รายการ
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,อัปโหลดภาพที่จับอย่างน้อย 1 รายการไม่สำเร็จ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,รายงานจุดบกพร่อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,การกู้คืนไอเท็มหรือข้อมูล
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,หมวดหมู่ *
@@ -629,14 +618,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,เลือ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,ปัญหาในการซื้อ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ความยาวสูงสุด {MAX} อักขระ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,รายละเอียด *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,ยกเลิกการเลือก
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ระบุข้อมูลที่เกี่ยวข้องกับปัญหา เช่น เวอร์ชันของเกมและวิธีที่นำไปสู่ปัญหาอีกครั้ง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,อธิบายว่ามีอะไรไม่ครบและคุณเห็นครั้งสุดท้ายเมื่อใด หากบัญชีของคุณถูกแฮ็ก โปรดระบุหมายเลขตั๋ว Roblox CS ของคุณและรายละเอียดที่เกี่ยวข้อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,อธิบายคำขอหรือปัญหาของคุณที่นี่ โปรดระบุรายละเอียดให้มากที่สุดเพื่อช่วยให้เราเข้าใจสถานการณ์
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,ระบุว่าคุณพยายามซื้ออะไร เวลาเกิดเหตุการณ์ และมูลค่ารวม (เช่น 500 Robux / $4.99) รวมถึงข้อความแสดงข้อผิดพลาดที่คุณเห็น
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,พยายามรายงานการกระทำผิดอยู่ใช่ไหม?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>ส่งรายงานแทน</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,เลือก
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,การดำเนินการนี้จะช่วยให้ครีเอเตอร์รู้ว่าต้องช่วยเหลือบัญชีไหน
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,แชร์ข้อมูลผู้ใช้กับครีเอเตอร์
@@ -905,7 +892,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,ต้องการให�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,คุณกำลังจะออกจากเซิร์ฟเวอร์นี้และเปลี่ยนไปใช้เซิร์ฟเวอร์อื่น
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_GAME}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,เพื่อเปิด/ปิดการนำทางบนเมนู
@@ -1217,7 +1206,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,การละเมิดและการอุทธรณ์
 Feature.Avatar.Action.AddNewMakeupLook,เพิ่มลุคใหม่
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,
+Feature.Avatar.Action.CancelSelection,ยกเลิกการเลือก
 Feature.Avatar.Action.Clear,ล้างข้อมูล
 Feature.Avatar.Action.ComposerPost,โพสต์
 Feature.Avatar.Action.ComposerPreviewAndPost,ดูตัวอย่างและโพสต์
@@ -1226,6 +1215,7 @@ Feature.Avatar.Action.CreateSetFirstRun,สร้างชุด
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,มุมมองเริ่มต้น
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,ลบอวาตาร์
 Feature.Avatar.Action.DeleteSet,ลบเซ็ต
 Feature.Avatar.Action.Discard,
 Feature.Avatar.Action.EditProfilePicture,แก้ไขภาพโปรไฟล์
@@ -1242,7 +1232,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,ไม่ใช่ตอนนี้
 Feature.Avatar.Action.Pan,
 Feature.Avatar.Action.Posting,กำลังโพสต์
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,ลบทั้งหมด
+Feature.Avatar.Action.RemoveFromSet,ลบออกจากเซ็ต
 Feature.Avatar.Action.Rename,เปลี่ยนชื่อ
 Feature.Avatar.Action.RenameSet,เปลี่ยนชื่อเซ็ต
 Feature.Avatar.Action.Reset,
@@ -1251,7 +1243,7 @@ Feature.Avatar.Action.Revert,แปลงกลับ
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,บันทึก
 Feature.Avatar.Action.SaveAsNew,บันทึกเป็นรายการใหม่
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,เลือก
 Feature.Avatar.Action.SelectMultipleItems,เลือกหลายไอเท็ม
 Feature.Avatar.Action.SelectSlot,เลือกช่อง
 Feature.Avatar.Action.Share,แชร์
@@ -1312,6 +1304,7 @@ Feature.Avatar.Heading.SelectToUpdate,เลือกเพื่ออัปเ
 Feature.Avatar.Heading.SetLimitReached,สร้างชุดถึงจำนวนสูงสุดแล้ว
 Feature.Avatar.Heading.SetNameDuplicate,ชื่อซ้ำกัน
 Feature.Avatar.Heading.SetNameNotAllowed,ไม่อนุญาตให้ใช้ชื่อนี้
+Feature.Avatar.Heading.SetUpdateFailed,ไม่สามารถอัปเดตเซ็ตได้
 Feature.Avatar.Heading.SharePublicAvatar,แชร์อวาตาร์ของคุณ
 Feature.Avatar.Heading.SortBy,เรียงลำดับตาม
 Feature.Avatar.Heading.UsedName,ชื่อนี้ถูกใช้ไปแล้ว
@@ -1383,6 +1376,7 @@ Feature.Avatar.Label.CountSelected,เลือกแล้ว {itemCount} ไ�
 Feature.Avatar.Label.Creations,ผลงานสร้างสรรค์
 Feature.Avatar.Label.CurrentlyWearing,สวมอยู่ตอนนี้
 Feature.Avatar.Label.DefaultBody,ร่างกายเริ่มต้น
+Feature.Avatar.Label.DeleteSetBody,การลบเซ็ตนี้จะไม่ลบเครื่องแต่งกายที่อยู่ภายใน
 Feature.Avatar.Label.Details,รายละเอียด ({quantity})
 Feature.Avatar.Label.DetailsButton,รายละเอียด
 Feature.Avatar.Label.DressesAndSkirts,เดรสและกระโปรง
@@ -1440,6 +1434,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,รองเท้าข้างซ้าย
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,ริมฝีปาก
+Feature.Avatar.Label.LoadingSets,กำลังโหลดเซ็ต
 Feature.Avatar.Label.Looks,ลุค
 Feature.Avatar.Label.Makeup,การแต่งหน้า
 Feature.Avatar.Label.MakeupLayer,เลเยอร์ {layerIndex}
@@ -1458,6 +1453,7 @@ Feature.Avatar.Label.Newest,ใหม่ล่าสุด
 Feature.Avatar.Label.NoExpiredItems,ไม่มี{itemType}ที่หมดอายุแล้ว
 Feature.Avatar.Label.NoItems,ไม่มี {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,จะไม่มีทรัพยากรนี้อยู่ในคอลเล็กชันนี้อีกต่อไป
+Feature.Avatar.Label.NoSets,ยังไม่มีเซ็ต
 Feature.Avatar.Label.Outerwear,เสื้อชั้นนอก
 Feature.Avatar.Label.OutfitIncomplete,คุณยังไม่ได้ซื้อเครื่องแต่งการที่คุณสร้างขึ้น และเครื่องแต่งกายนั้นจะไม่ปรากฏในประสบการณ์
 Feature.Avatar.Label.OutfitPurchaseFailure,ขออภัย! ซื้อ [{numItems}] ไอเท็มไม่สำเร็จ!
@@ -1483,6 +1479,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,สวมใส่ล่าสุด
+Feature.Avatar.Label.RemoveFromSetBody,อวาตาร์เหล่านี้จะถูกลบออกจากเซ็ต แต่ตัวอวาตาร์จะไม่ถูกลบ
 Feature.Avatar.Label.Replace,แทนที่
 Feature.Avatar.Label.ResetToNewCharacter,คุณกำลังสลับไปยังตัวละครใหม่ คุณต้องการรีเซ็ตไอเท็มเครื่องแต่งกายทั้งหมดหรือเก็บไว้?
 Feature.Avatar.Label.Right,R
@@ -1502,6 +1499,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,การค้น�
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,ดูล่าสุด
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,ช็อปปิ้งต่อสำหรับ
 Feature.Avatar.Label.SelectItem,
+Feature.Avatar.Label.SetAvatarCount,อวาตาร์ {itemCount} ตัว
 Feature.Avatar.Label.SetLimitReachedBody,คุณสร้างได้สูงสุด {setLimit} ชุดเท่านั้น ลบออก 1 ชุดเพื่อเพิ่มพื้นที่
 Feature.Avatar.Label.SetNameDuplicateBody,คุณมีชุดที่ใช้ชื่อนี้อยู่แล้ว โปรดเลือกชื่ออื่น
 Feature.Avatar.Label.SetNameNotAllowedBody,โปรดเลือกชื่ออื่น
@@ -1663,6 +1661,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,ต้องการนำชิ้�
 Feature.Avatar.Title.ClearClothesConfirmation,ต้องการถอดเสื้อผ้าหมดเลยใช่ไหม?
 Feature.Avatar.Title.ClearMakeupConfirmation,ล้างการแต่งหน้าทั้งหมดใช่ไหม?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,ทำซ้ำลุค
 Feature.Avatar.Title.EnhancedAvatarHeads,ศีรษะอวาตาร์ที่ปรับปรุงแล้ว
 Feature.Avatar.Title.GetOutfit,รับเครื่องแต่งกาย
@@ -1681,7 +1680,9 @@ Feature.Avatar.Title.NewCustomizeLook,การปรับแต่งมาพ
 Feature.Avatar.Title.NewToMarketplaceItemWidget,ใหม่ในมาร์เก็ตเพลส
 Feature.Avatar.Title.OutfitIncomplete,มีเครื่องแต่งกายไม่ครบ
 Feature.Avatar.Title.Preview,ดูตัวอย่าง
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,เปลี่ยนชื่อลุคแต่งหน้า
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,ตัวละครใหม่
 Feature.Avatar.Title.RevertToDefault,แปลงกลับเป็นค่าเริ่มต้น
@@ -1690,6 +1691,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,อวาตาร์ที่คุ�
 Feature.Avatar.Title.SelectEmoteForAvatar,เลือกท่าทางเพื่อโพสท่าให้อวาตาร์ของคุณ
 Feature.Avatar.Title.SelectMakeupLookForUpdate,เลือกลุคแต่งหน้า
 Feature.Avatar.Title.SelectMakeupLooks,เลือกลุค
+Feature.Avatar.Title.SelectSet,เลือกเซ็ต
 Feature.Avatar.Title.SingleDeleteOutfit,"ลบ ""{outfitName}"" ใช่ไหม?"
 Feature.Avatar.Title.TrendingItemWidget,ไอเท็มที่กำลังนิยม
 Feature.Avatar.Title.TrendingLooksWidget,สไตล์ที่กำลังนิยม
@@ -1822,7 +1824,7 @@ Feature.Catalog.Action.CloseDetails,ปิดรายละเอียด
 Feature.Catalog.Action.CopyLink,คัดลอกลิงก์
 Feature.Catalog.Action.Customize,ปรับแต่ง
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,ลบอวาตาร์
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,อธิบายเกี่ยวกับอวาตาร์ของคุณ (ไม่บังคับ)
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -2280,6 +2282,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ชม.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 นาที
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 สัปดาห์
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} สัปดาห์
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,ไม่พร้อมให้บริการ
 Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จัก
 Feature.Chat.Label.User,

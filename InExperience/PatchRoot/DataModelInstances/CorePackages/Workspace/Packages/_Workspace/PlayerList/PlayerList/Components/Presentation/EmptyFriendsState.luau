@@ -6,10 +6,10 @@ local view = foundationModule.View
 local text = foundationModule.Text
 local constantsModule = require(parent.Common.Constants)
 
-return reactModule.memo(function(p0) --[[ line: 18 | named "EmptyFriendsStateImpl" ]]
-	-- upvalues: constantsModule (ref), reactModule (ref), view (ref), text (ref)
+return reactModule.memo(function(p0) --[[ line: 16 | named "EmptyFriendsStateImpl" ]]
+	-- upvalues: reactModule (ref), view (ref), constantsModule (ref), text (ref)
 	return reactModule.createElement(view, {
-		tag = if p0.useLegacyPanelStyling then constantsModule.LEGACY_STATE_PANEL_TAG else constantsModule.STATE_PANEL_TAG,
+		tag = constantsModule.STATE_PANEL_TAG,
 		LayoutOrder = p0.layoutOrder
 	}, {
 		Message = reactModule.createElement(text, {

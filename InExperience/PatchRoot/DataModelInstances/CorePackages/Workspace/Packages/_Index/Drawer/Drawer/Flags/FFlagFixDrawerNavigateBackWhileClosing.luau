@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FixDrawerNavigateBackWhileClosing", false)

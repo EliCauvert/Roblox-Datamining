@@ -46,6 +46,7 @@ local getFIntDebounceAIRephraseSettingDelayModule = require(robloxGui.Modules.Fl
 local getFIntDebounceChatSummariesSettingDelayModule = require(robloxGui.Modules.Flags.GetFIntDebounceChatSummariesSettingDelay)
 local touchEnabled = userInputService.TouchEnabled
 local getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice = sharedFlagsModule.GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
+local fFlagIEMFocusNavToButtons = sharedFlagsModule.FFlagIEMFocusNavToButtons
 local fFlagIEMTabFocusNav = sharedFlagsModule.FFlagIEMTabFocusNav
 local showAntiHarassmentSettings = game:DefineFastFlag("ShowAntiHarassmentSettings", false)
 local getFFlagEnablePlayerNamesEnabledSettingModule = require(robloxGui.Modules.Settings.Flags.GetFFlagEnablePlayerNamesEnabledSetting)
@@ -94,11 +95,11 @@ local t = {
 	["Enum.SavedQualitySetting.QualityLevel10"] = 10
 }
 
-local function _(p0) --[[ line: 141 | named "voiceChatVolumeToSlider" ]]
+local function _(p0) --[[ line: 142 | named "voiceChatVolumeToSlider" ]]
 	return math.floor(p0 * 5 + 0.5)
 end
 
-local _ = function(p1) --[[ line: 145 | named "voiceChatVolumeFromSlider" ]]
+local _ = function(p1) --[[ line: 146 | named "voiceChatVolumeFromSlider" ]]
 	return p1 / 5
 end
 
@@ -124,17 +125,17 @@ local var61 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSe
 local var62 = robloxTranslatorModule:FormatByKey("CoreScripts.Feedback.EntryPoint.ButtonText")
 local t_6 = { On = 1, Off = 2 }
 
-local _ = function() --[[ line: 188 | named "getDefaultCameraMode" ]]
+local _ = function() --[[ line: 189 | named "getDefaultCameraMode" ]]
 	-- upvalues: userInputService (ref)
 	return if userInputService.PreferredInput == Enum.PreferredInput.Touch then "Default (Follow)" else "Default (Classic)"
 end
 
-local _ = function() --[[ line: 197 | named "getDefaultMovementMode" ]]
+local _ = function() --[[ line: 198 | named "getDefaultMovementMode" ]]
 	-- upvalues: userInputService (ref), robloxTranslatorModule (ref), constantsModule (ref)
 	return if userInputService.PreferredInput == Enum.PreferredInput.Touch then robloxTranslatorModule:FormatByKey(constantsModule.MovementModeDynamicThumbstickKey) else "Default (Keyboard)"
 end
 
-local _ = function() --[[ line: 206 | named "getDefaultSelectToMove" ]]
+local _ = function() --[[ line: 207 | named "getDefaultSelectToMove" ]]
 	-- upvalues: userInputService (ref)
 	return if userInputService.PreferredInput == Enum.PreferredInput.Touch then "Tap to Move" else "Click to Move"
 end
@@ -210,7 +211,7 @@ local updateVisibilitySettingsCopy = game:DefineFastFlag("UpdateVisibilitySettin
 local expChatDebounceRephraseIndexSelection = game:DefineFastFlag("ExpChatDebounceRephraseIndexSelection", false)
 local eraseFPSFromDefaultSetting = game:DefineFastFlag("EraseFPSFromDefaultSetting", false)
 
-local function reportSettingsChangeForAnalytics(value, p2, p3, p4) --[[ line: 333 ]]
+local function reportSettingsChangeForAnalytics(value, p2, p3, p4) --[[ line: 334 ]]
 	-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), userInputService (ref), cryoModule (ref), rbxAnalyticsService (ref), constantsModule (ref)
 	if not getFFlagEnableExplicitSettingsChangeAnalyticsModule() or p2 == p3 or (p2 == nil or p3 == nil) then return end
 	local t = {
@@ -229,7 +230,7 @@ local function reportSettingsChangeForAnalytics(value, p2, p3, p4) --[[ line: 33
 	rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsExplicitSettingsChangeName, t)
 end
 
-local function reportSettingsForAnalytics() --[[ line: 364 ]]
+local function reportSettingsForAnalytics() --[[ line: 365 ]]
 	-- upvalues: userInputService (ref), gameSettings (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), rbxAnalyticsService (ref), constantsModule (ref)
 	local t = {}
 	local var121 = userInputService.PreferredInput == Enum.PreferredInput.Touch
@@ -284,7 +285,9 @@ game:DefineFastInt("V1MenuLanguageSelectionFeaturePerMillageRollout", 0)
 game:DefineFastString("V1MenuLanguageSelectionFeatureForcedUserIds", "")
 local IGMEnableGFXReset = game:DefineFastFlag("IGMEnableGFXReset", false)
 
-local function getLastValueChangerFrame(p5) --[[ line: 433 ]]
+local function getLastValueChangerFrame(p5) --[[ line: 434 ]]
+	-- upvalues: fFlagIEMFocusNavToButtons (ref)
+	if not fFlagIEMFocusNavToButtons then return end
 	local layoutOrder = nil
 	local valueChangerValueChangerFrame = nil
 	
@@ -299,7 +302,7 @@ local function getLastValueChangerFrame(p5) --[[ line: 433 ]]
 	return valueChangerValueChangerFrame
 end
 
-local function getFirstValueChangerFrame(p6) --[[ line: 449 ]]
+local function getFirstValueChangerFrame(p6) --[[ line: 453 ]]
 	-- upvalues: fFlagIEMTabFocusNav (ref)
 	if not fFlagIEMTabFocusNav then return end
 	local layoutOrder = nil
@@ -316,8 +319,8 @@ local function getFirstValueChangerFrame(p6) --[[ line: 449 ]]
 	return valueChangerValueChangerFrame
 end
 
-return (function() --[[ line: 468 | named "Initialize" ]]
-	-- upvalues: IGMEnableGFXReset (ref), gfxResetModule (ref), robloxGui (ref), getFFlagLazyInitiateExperienceLanguageSwitcherModule (ref), VRService (ref), gameSettings (ref), utilityModule (ref), SETTINGS_MENU_LAYOUT_ORDER (ref), guiService (ref), getFFlagFixCyclicFullscreenIndexEventModule (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), reportSettingsChangeForAnalytics (ref), reportSettingsForAnalytics (ref), rbxAnalyticsService (ref), constantsModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), eraseFPSFromDefaultSetting (ref), robloxTranslatorModule (ref), romarkStartWithGraphicQualityLevelFastInt (ref), t (ref), updateVisibilitySettingsCopy (ref), fFlagUpdatePeopleNamesSettingCopyModule (ref), t_6 (ref), userInputService (ref), create (ref), themeModule (ref), centerShiftLockOverride (ref), microProfilerReadOnlyInformationLabel (ref), touchEnabled (ref), var92 (ref), var91 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), localPlayer (ref), coreUtilityModule (ref), t_3 (ref), getFFlagAlwaysShowVRToggleModule (ref), getAppFeaturePolicies (ref), t_5 (ref), var60 (ref), t_2 (ref), t_1 (ref), url (ref), httpService (ref), feedbackEntryPointImprovedStrictnessCheck (ref), safetyService (ref), var17 (write), feedbackEntryPointButtonSizeAdjustment2 (ref), var62 (ref), disableFeedbackSoothsayerCheck (ref), name (ref), playersService (ref), var61 (ref), runService (ref), getFFlagChatTranslationWaitForIXPModule (ref), IXPServiceWrapper (ref), getFFlagChatTranslationNewDefaultsModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (ref), default_3 (ref), var20 (write), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), corePackagesService (ref), contextActionService (ref), fixDeveloperConsoleButtonSizeAndPositioning (ref), playerPermissionsModule (ref), userFreecamGuiDestabilization (ref), userShowGuiHideToggles (ref), soundService (ref), getFIntVoiceChatDeviceChangeDebounceDelayModule (ref), default_2 (ref), getFFlagEnableCrossExpVoice (ref), signalsModule (ref), getFIntDebounceAIRephraseSettingDelayModule (ref), textChatService (ref), expChatDebounceRephraseIndexSelection (ref), throttleFunctionCallModule (ref), getFIntDebounceChatSummariesSettingDelayModule (ref), var87 (ref), userGameSettingsService (ref), getFFlagVoiceChatUILoggingModule (ref), videoCaptureService (ref), var86 (ref), differentiateVoiceSelectorSystemAndUser (ref), voiceSelectorAvailableAfterFae (ref), getFIntDebounceDisconnectButtonDelayModule (ref), fFlagVoiceRewarmTelemetry (ref), constantsModule_1 (ref), voiceSelectorIgnoreFailedStateDisconnect (ref), voiceChatSelectorReconnectFocus2AEGIS2 (ref), debounceVoiceSelectorIndexChange (ref), deferProgrammaticChange (ref), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (ref), isVoiceFocused (ref), getFFlagEnableVrVoiceConnectDisconnect (ref), getFFlagEnableVoiceUxUpdates (ref), hideVoiceChatSelectorForFaeAEGIS2 (ref), observeIsVoiceFocused (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (ref), voiceVolumeControlsEligibility (ref), getFFlagEnableUniveralVoiceToastsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), t_4 (ref), getFFlagSelfViewCameraSettings (ref), isCamEnabledForUserAndPlaceModule (ref), getCamMicPermissionsModule (ref), default (ref), cameraDevicePermissionGrantedSignalModule (ref), var83 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var52 (ref), showAntiHarassmentSettings (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), playerChoiceTranslationSettingInitializerModule (ref), cachedPolicyServiceModule (ref), var90_1 (ref), fFlagBadgeVisibilitySettingEnabled (ref), fFlagEnableModerateChatRemoteEvent (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getHasGuiHidingPermissionModule (ref), fFlagIEMSettingsGroupsModule (ref), renderSettingsHeaderModule (write), renderSettingsDividerModule (write), migration (ref), builderIconsModule (ref), enableTFFeedbackModeEntryCheck (ref), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (ref), experienceLanguageSwitcherInitializerModule (ref), getLastValueChangerFrame (ref), fFlagIEMTabFocusNav (ref), getFirstValueChangerFrame (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFFlagChatTranslationHoldoutEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), textChatServiceSettingsSavedEngineFeature (ref), getFFlagChatTranslationForceSettingModule (ref), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (ref)
+return (function() --[[ line: 472 | named "Initialize" ]]
+	-- upvalues: IGMEnableGFXReset (ref), gfxResetModule (ref), robloxGui (ref), getFFlagLazyInitiateExperienceLanguageSwitcherModule (ref), VRService (ref), gameSettings (ref), utilityModule (ref), SETTINGS_MENU_LAYOUT_ORDER (ref), guiService (ref), getFFlagFixCyclicFullscreenIndexEventModule (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (ref), reportSettingsChangeForAnalytics (ref), reportSettingsForAnalytics (ref), rbxAnalyticsService (ref), constantsModule (ref), gameBasicSettingsFramerateCapEngineFeature (ref), eraseFPSFromDefaultSetting (ref), robloxTranslatorModule (ref), romarkStartWithGraphicQualityLevelFastInt (ref), t (ref), updateVisibilitySettingsCopy (ref), fFlagUpdatePeopleNamesSettingCopyModule (ref), t_6 (ref), userInputService (ref), create (ref), themeModule (ref), centerShiftLockOverride (ref), microProfilerReadOnlyInformationLabel (ref), touchEnabled (ref), var92 (ref), var91 (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), localPlayer (ref), coreUtilityModule (ref), t_3 (ref), getFFlagAlwaysShowVRToggleModule (ref), getAppFeaturePolicies (ref), t_5 (ref), var60 (ref), t_2 (ref), t_1 (ref), url (ref), httpService (ref), feedbackEntryPointImprovedStrictnessCheck (ref), safetyService (ref), var17 (write), feedbackEntryPointButtonSizeAdjustment2 (ref), var62 (ref), disableFeedbackSoothsayerCheck (ref), name (ref), playersService (ref), var61 (ref), runService (ref), getFFlagChatTranslationWaitForIXPModule (ref), IXPServiceWrapper (ref), getFFlagChatTranslationNewDefaultsModule (ref), fFlagRenameVolumeToMainVolumeModule (ref), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (ref), default_3 (ref), var20 (write), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (ref), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (ref), corePackagesService (ref), contextActionService (ref), fixDeveloperConsoleButtonSizeAndPositioning (ref), playerPermissionsModule (ref), userFreecamGuiDestabilization (ref), userShowGuiHideToggles (ref), soundService (ref), getFIntVoiceChatDeviceChangeDebounceDelayModule (ref), default_2 (ref), getFFlagEnableCrossExpVoice (ref), signalsModule (ref), getFIntDebounceAIRephraseSettingDelayModule (ref), textChatService (ref), expChatDebounceRephraseIndexSelection (ref), throttleFunctionCallModule (ref), getFIntDebounceChatSummariesSettingDelayModule (ref), var87 (ref), userGameSettingsService (ref), getFFlagVoiceChatUILoggingModule (ref), videoCaptureService (ref), var86 (ref), differentiateVoiceSelectorSystemAndUser (ref), voiceSelectorAvailableAfterFae (ref), getFIntDebounceDisconnectButtonDelayModule (ref), fFlagVoiceRewarmTelemetry (ref), constantsModule_1 (ref), voiceSelectorIgnoreFailedStateDisconnect (ref), voiceChatSelectorReconnectFocus2AEGIS2 (ref), debounceVoiceSelectorIndexChange (ref), deferProgrammaticChange (ref), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (ref), isVoiceFocused (ref), getFFlagEnableVrVoiceConnectDisconnect (ref), getFFlagEnableVoiceUxUpdates (ref), hideVoiceChatSelectorForFaeAEGIS2 (ref), observeIsVoiceFocused (ref), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (ref), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (ref), voiceVolumeControlsEligibility (ref), getFFlagEnableUniveralVoiceToastsModule (ref), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (ref), t_4 (ref), getFFlagSelfViewCameraSettings (ref), isCamEnabledForUserAndPlaceModule (ref), getCamMicPermissionsModule (ref), default (ref), cameraDevicePermissionGrantedSignalModule (ref), var83 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var52 (ref), showAntiHarassmentSettings (ref), getFFlagEnablePlayerNamesEnabledSettingModule (ref), playerChoiceTranslationSettingInitializerModule (ref), cachedPolicyServiceModule (ref), var90_1 (ref), fFlagBadgeVisibilitySettingEnabled (ref), fFlagEnableModerateChatRemoteEvent (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getHasGuiHidingPermissionModule (ref), fFlagIEMSettingsGroupsModule (ref), renderSettingsHeaderModule (write), renderSettingsDividerModule (write), migration (ref), builderIconsModule (ref), enableTFFeedbackModeEntryCheck (ref), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (ref), experienceLanguageSwitcherInitializerModule (ref), fFlagIEMFocusNavToButtons (ref), getLastValueChangerFrame (ref), fFlagIEMTabFocusNav (ref), getFirstValueChangerFrame (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFFlagChatTranslationHoldoutEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), textChatServiceSettingsSavedEngineFeature (ref), getFFlagChatTranslationForceSettingModule (ref), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (ref)
 	if IGMEnableGFXReset then
 		gfxResetModule.RunGfxReset()
 	end
@@ -329,7 +332,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	local var125 = false
 	local t_7 = {}
 	
-	local function _() --[[ line: 481 | named "onVRSettingsReady" ]]
+	local function _() --[[ line: 485 | named "onVRSettingsReady" ]]
 		-- upvalues: VRService (copy), t_7 (ref)
 		local VREnabled = VRService.VREnabled
 		
@@ -338,7 +341,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	VRService:GetPropertyChangedSignal("VREnabled"):connect(function() --[[ line: 488 | named "onVREnabled" ]]
+	VRService:GetPropertyChangedSignal("VREnabled"):connect(function() --[[ line: 492 | named "onVREnabled" ]]
 		-- upvalues: VRService (copy), var125 (write), t_7 (ref)
 		if VRService.VREnabled and var125 then
 			local VREnabled = VRService.VREnabled
@@ -348,7 +351,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 	end)
-	local function createGraphicsOptions() --[[ line: 500 ]]
+	local function createGraphicsOptions() --[[ line: 504 ]]
 		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_7 (ref), guiService (copy), getFFlagFixCyclicFullscreenIndexEventModule (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), rbxAnalyticsService (copy), constantsModule (copy), gameBasicSettingsFramerateCapEngineFeature (copy), VRService (copy), eraseFPSFromDefaultSetting (copy), robloxTranslatorModule (copy), IGMEnableGFXReset (copy), gfxResetModule (copy), romarkStartWithGraphicQualityLevelFastInt (copy), t (copy)
 		local var176, var177, var178 = utilityModule:AddNewRow(gameSettingsTab, "Fullscreen", "Selector", { "On", "Off" }, if not gameSettings:InFullScreen() then 2 else 1)
 		gameSettingsTab.FullscreenFrame = var176
@@ -356,7 +359,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.FullscreenEnabler = var178
 		gameSettingsTab.FullscreenFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.FullScreenFrame
 		t_7[gameSettingsTab.FullscreenFrame] = true
-		gameSettingsTab.FullscreenEnabler.IndexChanged:connect(function(p7) --[[ line: 513 ]]
+		gameSettingsTab.FullscreenEnabler.IndexChanged:connect(function(p7) --[[ line: 517 ]]
 			-- upvalues: gameSettings (copy), guiService (copy), getFFlagFixCyclicFullscreenIndexEventModule (copy), gameSettingsTab (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var192 = gameSettings:InFullScreen()
 			
@@ -379,7 +382,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					gameSettingsTab.FullscreenEnabler:SetSelectionIndex(2)
 				end
 			end
-			spawn(function() --[[ line: 538 ]]
+			spawn(function() --[[ line: 542 ]]
 				-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), var192 (ref), gameSettings (copy), reportSettingsForAnalytics (copy)
 				if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then
 					reportSettingsChangeForAnalytics("fullscreen_enabled", var192, gameSettings:InFullScreen())
@@ -387,7 +390,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				reportSettingsForAnalytics()
 			end)
 		end)
-		gameSettings.FullscreenChanged:connect(function(p8) --[[ line: 546 ]]
+		gameSettings.FullscreenChanged:connect(function(p8) --[[ line: 550 ]]
 			-- upvalues: gameSettingsTab (copy), rbxAnalyticsService (copy), constantsModule (copy)
 			if p8 then
 				if gameSettingsTab.FullscreenEnabler:GetSelectedIndex() ~= 1 then
@@ -422,14 +425,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				table.insert(list, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.FramerateEntry", { Frames = v }))
 			end
 			table.insert(cloned, 1, -1)
-			task.defer(function() --[[ line: 612 ]]
+			task.defer(function() --[[ line: 616 ]]
 				-- upvalues: gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), list (ref), cloned (ref), gameSettings (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 				local var193, var194, var195 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MaximumFramerate"), "DropDown", list, table.find(cloned, gameSettings.FramerateCap), nil, robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MaximumFramerate.Description"))
 				gameSettingsTab.FramerateCapFrame = var193
 				gameSettingsTab.FramerateCapLabel = var194
 				gameSettingsTab.FramerateCapMode = var195
 				gameSettingsTab.FramerateCapFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.FramerateCap
-				gameSettingsTab.FramerateCapMode.IndexChanged:Connect(function(p9) --[[ line: 624 ]]
+				gameSettingsTab.FramerateCapMode.IndexChanged:Connect(function(p9) --[[ line: 628 ]]
 					-- upvalues: gameSettings (copy), cloned (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 					local framerateCap = gameSettings.FramerateCap
 					gameSettings.FramerateCap = cloned[p9]
@@ -443,7 +446,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 		settings().Rendering.EnableFRM = true
 		
-		function SetGraphicsQuality(value, p10) --[[ line: 642 ]]
+		function SetGraphicsQuality(value, p10) --[[ line: 646 ]]
 			-- upvalues: IGMEnableGFXReset (copy), gfxResetModule (copy), gameSettings (copy)
 			if IGMEnableGFXReset then
 				local var196, var197 = gfxResetModule.TemporaryOverride(value)
@@ -470,7 +473,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			settings().Rendering.QualityLevel = floored
 		end
 		
-		local function _() --[[ line: 668 | named "setGraphicsToAuto" ]]
+		local function _() --[[ line: 672 | named "setGraphicsToAuto" ]]
 			-- upvalues: gameSettingsTab (copy)
 			gameSettingsTab.GraphicsQualitySlider:SetZIndex(1)
 			gameSettingsTab.GraphicsQualityLabel.ZIndex = 1
@@ -478,7 +481,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			SetGraphicsQuality(Enum.QualityLevel.Automatic.Value, true)
 		end
 		
-		local function setGraphicsToManual(value) --[[ line: 676 ]]
+		local function setGraphicsToManual(value) --[[ line: 680 ]]
 			-- upvalues: gameSettingsTab (copy)
 			gameSettingsTab.GraphicsQualitySlider:SetZIndex(2)
 			gameSettingsTab.GraphicsQualityLabel.ZIndex = 2
@@ -493,7 +496,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 		
 		local var190 = false
-		gameSettingsTab.GraphicsQualitySlider.ValueChanged:connect(function(p11) --[[ line: 690 ]]
+		gameSettingsTab.GraphicsQualitySlider.ValueChanged:connect(function(p11) --[[ line: 694 ]]
 			-- upvalues: var190 (write), reportSettingsForAnalytics (copy)
 			SetGraphicsQuality(p11)
 			
@@ -502,7 +505,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 			var190 = true
 		end)
-		gameSettingsTab.GraphicsQualityEnabler.IndexChanged:connect(function(p12) --[[ line: 698 ]]
+		gameSettingsTab.GraphicsQualityEnabler.IndexChanged:connect(function(p12) --[[ line: 702 ]]
 			-- upvalues: gameSettingsTab (copy), setGraphicsToManual (ref), reportSettingsForAnalytics (copy), reportSettingsChangeForAnalytics (copy)
 			local t = {
 				Automatic = { Name = "Automatic", Value = 1 },
@@ -524,7 +527,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			reportSettingsForAnalytics()
 			reportSettingsChangeForAnalytics("gfx_mode", name, name_1)
 		end)
-		game.GraphicsQualityChangeRequest:Connect(function(p13) --[[ line: 716 ]]
+		game.GraphicsQualityChangeRequest:Connect(function(p13) --[[ line: 720 ]]
 			-- upvalues: gameSettings (copy), gameSettingsTab (copy)
 			if gameSettings.SavedQualityLevel ~= Enum.SavedQualitySetting.Automatic then
 				local value = gameSettingsTab.GraphicsQualitySlider:GetValue()
@@ -553,14 +556,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			local var191 = tostring(gameSettings.SavedQualityLevel)
 			var191 = if t[var191] then t[var191] else 10
 			SetGraphicsQuality(var191)
-			spawn(function() --[[ line: 749 ]]
+			spawn(function() --[[ line: 753 ]]
 				-- upvalues: gameSettingsTab (copy), var191 (write)
 				gameSettingsTab.GraphicsQualitySlider:SetValue(var191)
 			end)
 		end
 	end
 	
-	local function createReducedMotionOptions() --[[ line: 755 ]]
+	local function createReducedMotionOptions() --[[ line: 759 ]]
 		-- upvalues: gameSettings (copy), robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var201, var202, var203 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.Accessibility.Heading.ReducedMotion"), "Selector", {
 			robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.On"),
@@ -570,7 +573,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.ReducedMotionLabel = var202
 		gameSettingsTab.ReducedMotionMode = var203
 		gameSettingsTab.ReducedMotionFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.ReducedMotionFrame
-		gameSettingsTab.ReducedMotionMode.IndexChanged:connect(function(p14) --[[ line: 777 ]]
+		gameSettingsTab.ReducedMotionMode.IndexChanged:connect(function(p14) --[[ line: 781 ]]
 			-- upvalues: gameSettings (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local reducedMotion = gameSettings.ReducedMotion
 			gameSettings.ReducedMotion = p14 == 1
@@ -582,9 +585,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createPlayerNamesEnabledOptions() --[[ line: 788 ]]
+	local function createPlayerNamesEnabledOptions() --[[ line: 792 ]]
 		-- upvalues: updateVisibilitySettingsCopy (copy), robloxTranslatorModule (copy), fFlagUpdatePeopleNamesSettingCopyModule (copy), gameSettings (copy), t_6 (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
-		local function _() --[[ line: 796 | named "GetPlayerNamesEnabledStartIndex" ]]
+		local function _() --[[ line: 800 | named "GetPlayerNamesEnabledStartIndex" ]]
 			-- upvalues: gameSettings (copy)
 			return if gameSettings.PlayerNamesEnabled then 1 else 2
 		end
@@ -597,7 +600,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.playerNamesEnabledLabel = var205
 		gameSettingsTab.playerNamesEnabledMode = var206
 		gameSettingsTab.PlayerNamesEnabledFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.PlayerNamesEnabledFrame
-		gameSettingsTab.playerNamesEnabledMode.IndexChanged:connect(function(p15) --[[ line: 815 ]]
+		gameSettingsTab.playerNamesEnabledMode.IndexChanged:connect(function(p15) --[[ line: 819 ]]
 			-- upvalues: gameSettings (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local playerNamesEnabled = gameSettings.PlayerNamesEnabled
 			gameSettings.PlayerNamesEnabled = p15 == 1
@@ -606,14 +609,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createPreferredTransparencyOptions() --[[ line: 824 ]]
+	local function createPreferredTransparencyOptions() --[[ line: 828 ]]
 		-- upvalues: gameSettings (copy), robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var207, var208, var209 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.Accessibility.Heading.PreferredTransparency"), "Slider", 10, 10 - math.clamp(math.floor(gameSettings.PreferredTransparency * 10 + 0.5), 0, 10), nil, robloxTranslatorModule:FormatByKey("Feature.Accessibility.Description.PreferredTransparency"), robloxTranslatorModule:FormatByKey("Feature.Accessibility.PreferredTransparency.Transparent"), robloxTranslatorModule:FormatByKey("Feature.Accessibility.PreferredTransparency.Opaque"))
 		gameSettingsTab.PreferredTransparencyFrame = var207
 		gameSettingsTab.PreferredTransparencyLabel = var208
 		gameSettingsTab.PreferredTransparencySlider = var209
 		gameSettingsTab.PreferredTransparencyFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.PreferredTransparencyFrame
-		gameSettingsTab.PreferredTransparencySlider.ValueChanged:connect(function(p16) --[[ line: 850 ]]
+		gameSettingsTab.PreferredTransparencySlider.ValueChanged:connect(function(p16) --[[ line: 854 ]]
 			-- upvalues: gameSettings (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local preferredTransparency = gameSettings.PreferredTransparency
 			gameSettings.PreferredTransparency = (10 - math.clamp(math.floor(p16), 0, 10)) / 10
@@ -625,7 +628,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createPreferredTextSizeOptions() --[[ line: 862 ]]
+	local function createPreferredTextSizeOptions() --[[ line: 866 ]]
 		-- upvalues: gameSettings (copy), robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local enumItems = Enum.PreferredTextSize:GetEnumItems()
 		local var211, var212, var213 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.Accessibility.Heading.PreferredTextSize"), "Slider", 3, gameSettings.PreferredTextSize.Value - 1, nil, robloxTranslatorModule:FormatByKey("Feature.Accessibility.Description.PreferredTextSize"), robloxTranslatorModule:FormatByKey("Feature.Accessibility.PreferredTextSize.Default"), robloxTranslatorModule:FormatByKey("Feature.Accessibility.PreferredTextSize.Largest"))
@@ -633,7 +636,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.PreferredTextSizeLabel = var212
 		gameSettingsTab.PreferredTextSizeSlider = var213
 		gameSettingsTab.PreferredTextSizeFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.PreferredTextSizeFrame
-		gameSettingsTab.PreferredTextSizeSlider.ValueChanged:connect(function(p17) --[[ line: 887 ]]
+		gameSettingsTab.PreferredTextSizeSlider.ValueChanged:connect(function(p17) --[[ line: 891 ]]
 			-- upvalues: gameSettings (copy), enumItems (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local preferredTextSize = gameSettings.PreferredTextSize
 			gameSettings.PreferredTextSize = enumItems[p17 + 1]
@@ -645,7 +648,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createUiNavigationKeyBindOptions() --[[ line: 897 ]]
+	local function createUiNavigationKeyBindOptions() --[[ line: 901 ]]
 		-- upvalues: gameSettings (copy), robloxTranslatorModule (copy), userInputService (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local t = { On = 1, Off = 2 }
 		local var215, var216, var217 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("Feature.Accessibility.Heading.UiNavigationKeyBind"), "Selector", {
@@ -658,7 +661,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.UiNavigationKeyBindEnabledLabel = var216
 		gameSettingsTab.UiNavigationKeyBindEnabledMode = var217
 		gameSettingsTab.UiNavigationKeyBindEnabledFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.UiNavigationKeyBindEnabledFrame
-		gameSettingsTab.UiNavigationKeyBindEnabledMode.IndexChanged:connect(function(p18) --[[ line: 928 ]]
+		gameSettingsTab.UiNavigationKeyBindEnabledMode.IndexChanged:connect(function(p18) --[[ line: 932 ]]
 			-- upvalues: gameSettings (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local uiNavigationKeyBindEnabled = gameSettings.UiNavigationKeyBindEnabled
 			gameSettings.UiNavigationKeyBindEnabled = p18 == 1
@@ -669,7 +672,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			reportSettingsForAnalytics()
 		end)
 		
-		local function _() --[[ line: 941 | named "updateUiNavigationKeyBindVisibility" ]]
+		local function _() --[[ line: 945 | named "updateUiNavigationKeyBindVisibility" ]]
 			-- upvalues: userInputService (copy), gameSettingsTab (copy), gameSettings (copy)
 			local keyboardEnabled = userInputService.KeyboardEnabled
 			
@@ -698,7 +701,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettings.UiNavigationKeyBindEnabled = false
 			end
 		end
-		userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 956 ]]
+		userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 960 ]]
 			-- upvalues: userInputService (copy), gameSettingsTab (copy), gameSettings (copy), t (ref)
 			local keyboardEnabled = userInputService.KeyboardEnabled
 			
@@ -716,7 +719,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createPerformanceStatsOptions() --[[ line: 961 ]]
+	local function createPerformanceStatsOptions() --[[ line: 965 ]]
 		-- upvalues: gameSettingsTab (ref), gameSettings (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), create (copy), themeModule (copy), centerShiftLockOverride (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var218 = nil
 		local var219 = nil
@@ -727,7 +730,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.PerformanceStatsMode = var220
 		gameSettingsTab.PerformanceStatsOverrideText = var221
 		
-		function GetDesiredPerformanceStatsIndex() --[[ line: 967 ]]
+		function GetDesiredPerformanceStatsIndex() --[[ line: 971 ]]
 			-- upvalues: gameSettings (copy)
 			return if gameSettings.PerformanceStatsVisible then 1 else 2
 		end
@@ -751,7 +754,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			AnchorPoint = if centerShiftLockOverride then Vector2.new(1, 0.5) else nil,
 			Parent = gameSettingsTab.PerformanceStatsFrame
 		})
-		gameSettingsTab.PerformanceStatsMode.IndexChanged:connect(function(p19) --[[ line: 996 ]]
+		gameSettingsTab.PerformanceStatsMode.IndexChanged:connect(function(p19) --[[ line: 1000 ]]
 			-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var225 = if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then gameSettings.PerformanceStatsVisible else nil
 			
@@ -765,7 +768,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 			reportSettingsForAnalytics()
 		end)
-		gameSettings.PerformanceStatsVisibleChanged:connect(function() --[[ line: 1018 ]]
+		gameSettings.PerformanceStatsVisibleChanged:connect(function() --[[ line: 1022 ]]
 			-- upvalues: gameSettingsTab (copy)
 			local var226 = GetDesiredPerformanceStatsIndex()
 			
@@ -775,7 +778,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createWebServerInformationRow() --[[ line: 1028 ]]
+	local function createWebServerInformationRow() --[[ line: 1032 ]]
 		-- upvalues: gameSettingsTab (ref), utilityModule (copy), microProfilerReadOnlyInformationLabel (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), touchEnabled (copy), create (copy), themeModule (copy)
 		local var227, var228, var229 = utilityModule:AddNewRow(gameSettingsTab, "MicroProfiler Information", "TextBox", nil, nil, 5, nil, nil, nil, if microProfilerReadOnlyInformationLabel then false else nil)
 		gameSettingsTab.InformationFrame = var227
@@ -814,7 +817,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		return gameSettingsTab.InformationFrame, gameSettingsTab.InformationText
 	end
 	
-	local function createMicroProfilerOptions() --[[ line: 1068 ]]
+	local function createMicroProfilerOptions() --[[ line: 1072 ]]
 		-- upvalues: gameSettingsTab (ref), gameSettings (copy), createWebServerInformationRow (ref), var92 (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), var91 (copy), isInExperienceUIVREnabled (copy), isSpatial (copy), rbxAnalyticsService (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), robloxTranslatorModule (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 		local var230 = nil
 		local var231 = nil
@@ -825,7 +828,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.MicroProfilerMode = var232
 		gameSettingsTab.MicroProfilerOverrideText = var233
 		
-		local function _() --[[ line: 1073 | named "tryContentLabel" ]]
+		local function _() --[[ line: 1077 | named "tryContentLabel" ]]
 			-- upvalues: gameSettings (copy), gameSettingsTab (copy), createWebServerInformationRow (copy)
 			local microProfilerWebServerPort = gameSettings.MicroProfilerWebServerPort
 			
@@ -840,9 +843,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			return true
 		end
 		
-		local function setMicroProfilerIndex(value) --[[ line: 1085 ]]
+		local function setMicroProfilerIndex(value) --[[ line: 1089 ]]
 			-- upvalues: gameSettings (copy), gameSettingsTab (copy), var92 (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), createWebServerInformationRow (copy), var91 (copy), isInExperienceUIVREnabled (copy), isSpatial (copy), rbxAnalyticsService (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
-			local function _() --[[ line: 1086 | named "hideContentLabel" ]]
+			local function _() --[[ line: 1090 | named "hideContentLabel" ]]
 				-- upvalues: gameSettings (copy), gameSettingsTab (copy)
 				gameSettings.MicroProfilerWebServerEnabled = false
 				
@@ -929,7 +932,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			reportSettingsForAnalytics()
 		end
 		
-		local _ = function() --[[ line: 1159 | named "GetDesiredWebServerIndex" ]]
+		local _ = function() --[[ line: 1163 | named "GetDesiredWebServerIndex" ]]
 			-- upvalues: var92 (copy), gameSettings (copy), var91 (copy), isInExperienceUIVREnabled (copy), isSpatial (copy)
 			return if var92 then if gameSettings.MicroProfilerWebServerEnabled then 1 else 2 elseif not (not var91 and (not isInExperienceUIVREnabled or not isSpatial())) then if gameSettings.OnScreenProfilerEnabled then 1 else 2 else 2
 		end
@@ -949,7 +952,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.InformationText.Text = gameSettings.MicroProfilerWebServerIP .. microProfilerWebServerPort
 		end
 		local var241 = false
-		gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function() --[[ line: 1188 ]]
+		gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function() --[[ line: 1192 ]]
 			-- upvalues: var241 (write), gameSettings (copy), gameSettingsTab (copy)
 			var241 = true
 			
@@ -960,7 +963,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 			gameSettingsTab.MicroProfilerMode:SetSelectionIndex(2)
 		end)
-		gameSettingsTab.MicroProfilerMode.IndexChanged:connect(function(...) --[[ line: 1198 | named "onIndexChanged" ]]
+		gameSettingsTab.MicroProfilerMode.IndexChanged:connect(function(...) --[[ line: 1202 | named "onIndexChanged" ]]
 			-- upvalues: var241 (write), setMicroProfilerIndex (ref)
 			if var241 then
 				var241 = false
@@ -971,7 +974,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createCameraModeOptions(p20) --[[ line: 1209 ]]
+	local function createCameraModeOptions(p20) --[[ line: 1213 ]]
 		-- upvalues: gameSettingsTab (ref), gameSettings (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_7 (ref), create (copy), themeModule (copy), centerShiftLockOverride (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy), localPlayer (copy), userInputService (copy), coreUtilityModule (copy), t_3 (copy), VRService (copy), getFFlagAlwaysShowVRToggleModule (copy), getAppFeaturePolicies (copy), robloxTranslatorModule (copy), constantsModule (copy), t_5 (copy), var60 (copy), t_2 (copy), t_1 (copy)
 		local var249 = nil
 		local var250 = nil
@@ -1001,7 +1004,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			AnchorPoint = if centerShiftLockOverride then Vector2.new(1, 0.5) else nil,
 			Parent = gameSettingsTab.ShiftLockFrame
 		})
-		gameSettingsTab.ShiftLockMode.IndexChanged:connect(function(p21) --[[ line: 1240 ]]
+		gameSettingsTab.ShiftLockMode.IndexChanged:connect(function(p21) --[[ line: 1244 ]]
 			-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var290 = if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then gameSettings.ControlMode == Enum.ControlMode.MouseLockSwitch else nil
 			
@@ -1016,7 +1019,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			reportSettingsForAnalytics()
 		end)
 		
-		local function _(value) --[[ line: 1262 | named "setShiftLockSelectorVisible" ]]
+		local function _(value) --[[ line: 1266 | named "setShiftLockSelectorVisible" ]]
 			-- upvalues: localPlayer (copy), gameSettingsTab (copy)
 			local devEnableMouseLock = value and localPlayer.DevEnableMouseLock
 			
@@ -1026,7 +1029,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 		
-		local _ = function() --[[ line: 1270 | named "applyDevOverrideShiftLockSelector" ]]
+		local _ = function() --[[ line: 1274 | named "applyDevOverrideShiftLockSelector" ]]
 			-- upvalues: localPlayer (copy), gameSettingsTab (copy)
 			local var292 = not localPlayer.DevEnableMouseLock
 			
@@ -1041,7 +1044,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 		
-		local _ = function() --[[ line: 1278 | named "updateShiftLockVisibility" ]]
+		local _ = function() --[[ line: 1282 | named "updateShiftLockVisibility" ]]
 			-- upvalues: userInputService (copy), gameSettingsTab (copy), localPlayer (copy)
 			local keyboardEnabled = userInputService.MouseEnabled and userInputService.KeyboardEnabled
 			
@@ -1077,7 +1080,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.ShiftLockMode:SetInteractable(devEnableMouseLock)
 			end
 		end
-		userInputService:GetPropertyChangedSignal("MouseEnabled"):Connect(function() --[[ line: 1288 ]]
+		userInputService:GetPropertyChangedSignal("MouseEnabled"):Connect(function() --[[ line: 1292 ]]
 			-- upvalues: userInputService (copy), gameSettingsTab (copy), localPlayer (copy)
 			local keyboardEnabled = userInputService.MouseEnabled and userInputService.KeyboardEnabled
 			
@@ -1096,7 +1099,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				end
 			end
 		end)
-		userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 1292 ]]
+		userInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function() --[[ line: 1296 ]]
 			-- upvalues: userInputService (copy), gameSettingsTab (copy), localPlayer (copy)
 			local keyboardEnabled = userInputService.MouseEnabled and userInputService.KeyboardEnabled
 			
@@ -1116,12 +1119,12 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end)
 		
-		function cameraModeIsUserChoice() --[[ line: 1298 ]]
+		function cameraModeIsUserChoice() --[[ line: 1302 ]]
 			-- upvalues: userInputService (copy), localPlayer (copy)
 			return if userInputService.PreferredInput == Enum.PreferredInput.Touch then localPlayer.DevTouchCameraMode == Enum.DevTouchCameraMovementMode.UserChoice else localPlayer.DevComputerCameraMode == Enum.DevComputerCameraMovementMode.UserChoice
 		end
 		
-		function setCameraModeVisible(value) --[[ line: 1307 ]]
+		function setCameraModeVisible(value) --[[ line: 1311 ]]
 			-- upvalues: gameSettingsTab (copy)
 			if gameSettingsTab.CameraMode then
 				gameSettingsTab.CameraMode.SelectorFrame.Visible = value
@@ -1134,11 +1137,11 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local t = {}
 		local t_4 = {}
 		
-		local function updateCurrentCameraMovementIndex(p22) --[[ line: 1321 ]]
+		local function updateCurrentCameraMovementIndex(p22) --[[ line: 1325 ]]
 			-- upvalues: t_4 (write), t (write), userInputService (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), reportSettingsChangeForAnalytics (copy)
 			local var303 = nil
 			
-			if not pcall(function() --[[ line: 1323 ]]
+			if not pcall(function() --[[ line: 1327 ]]
 				-- upvalues: var303 (write), t_4 (copy), t (copy), p22 (ref)
 				var303 = t_4[t[p22]]
 			end) or var303 == nil then
@@ -1165,7 +1168,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			return var304
 		end
 		
-		local function updateCameraMovementModes() --[[ line: 1357 ]]
+		local function updateCameraMovementModes() --[[ line: 1361 ]]
 			-- upvalues: playerScripts (ref), userInputService (copy), t (write), t_4 (write), t_3 (copy), gameSettingsTab (copy), gameSettings (copy), updateCurrentCameraMovementIndex (ref)
 			local var305 = if playerScripts then if userInputService.PreferredInput == Enum.PreferredInput.Touch then playerScripts:GetRegisteredTouchCameraMovementModes() else playerScripts:GetRegisteredComputerCameraMovementModes() else {}
 			t = {}
@@ -1230,25 +1233,25 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		})
 		
 		if playerScripts then
-			playerScripts.TouchCameraMovementModeRegistered:connect(function(_) --[[ line: 1443 ]]
+			playerScripts.TouchCameraMovementModeRegistered:connect(function(_) --[[ line: 1447 ]]
 				-- upvalues: userInputService (copy), updateCameraMovementModes (ref)
 				if userInputService.TouchEnabled then
 					updateCameraMovementModes()
 				end
 			end)
-			playerScripts.ComputerCameraMovementModeRegistered:connect(function(_) --[[ line: 1449 ]]
+			playerScripts.ComputerCameraMovementModeRegistered:connect(function(_) --[[ line: 1453 ]]
 				-- upvalues: userInputService (copy), updateCameraMovementModes (ref)
 				if userInputService.MouseEnabled then
 					updateCameraMovementModes()
 				end
 			end)
 		end
-		userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ line: 1456 ]]
+		userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ line: 1460 ]]
 			-- upvalues: updateCameraMovementModes (ref)
 			updateCameraMovementModes()
 		end)
 		local t_6 = false
-		gameSettingsTab.CameraMode.IndexChanged:connect(function(p23) --[[ line: 1461 ]]
+		gameSettingsTab.CameraMode.IndexChanged:connect(function(p23) --[[ line: 1465 ]]
 			-- upvalues: updateCurrentCameraMovementIndex (ref), t_6 (write), reportSettingsForAnalytics (copy)
 			if updateCurrentCameraMovementIndex(p23) then
 				if t_6 then
@@ -1260,7 +1263,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		updateCameraMovementModes()
 		local var271 = false
 		
-		t = function() --[[ line: 1477 | named "createVROption" ]]
+		t = function() --[[ line: 1481 | named "createVROption" ]]
 			-- upvalues: var271 (write), gameSettings (copy), gameSettingsTab (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy)
 			if not var271 then
 				var271 = true
@@ -1270,7 +1273,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.VREnabledLabel = var311
 				gameSettingsTab.VREnabledSelector = var312
 				gameSettingsTab.VREnabledFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.VREnabledFrame
-				gameSettingsTab.VREnabledSelector.IndexChanged:connect(function(p24) --[[ line: 1492 ]]
+				gameSettingsTab.VREnabledSelector.IndexChanged:connect(function(p24) --[[ line: 1496 ]]
 					-- upvalues: gameSettings (copy), var309 (write), reportSettingsChangeForAnalytics (copy)
 					local t = {
 						On = { Name = "On", Value = 1 },
@@ -1292,7 +1295,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 		
-		t_4 = function() --[[ line: 1511 | named "onVREnabledChanged" ]]
+		t_4 = function() --[[ line: 1515 | named "onVREnabledChanged" ]]
 			-- upvalues: VRService (copy), gameSettings (copy), t (ref)
 			if VRService.VREnabled then
 				gameSettings.HasEverUsedVR = true
@@ -1318,9 +1321,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		t_6 = {}
 		local t_10 = {}
 		
-		local var275 = function(_) --[[ line: 1536 ]] end
+		local var275 = function(_) --[[ line: 1540 ]] end
 		
-		local _ = function(value) --[[ line: 1540 | named "setMovementModeVisible" ]]
+		local _ = function(value) --[[ line: 1544 | named "setMovementModeVisible" ]]
 			-- upvalues: gameSettingsTab (copy), t_8 (write)
 			if gameSettingsTab.MovementMode then
 				local var316 = value and #t_8 > 0
@@ -1334,7 +1337,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			local t_11 = {}
 			local playerScripts_1 = coreUtilityModule.waitForChildOfClass(localPlayer, "PlayerScripts")
 			
-			local _ = function(p25) --[[ line: 1554 | named "getDisplayName" ]]
+			local _ = function(p25) --[[ line: 1558 | named "getDisplayName" ]]
 				-- upvalues: userInputService (copy), robloxTranslatorModule (copy), constantsModule (copy), t_5 (copy), var60 (copy)
 				local var317 = p25
 				
@@ -1389,7 +1392,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				Parent = gameSettingsTab.MovementModeFrame
 			})
 			
-			local function setMovementMode(value) --[[ line: 1595 ]]
+			local function setMovementMode(value) --[[ line: 1599 ]]
 				-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), reportSettingsChangeForAnalytics (copy)
 				local computerMovementMode = nil
 				
@@ -1407,7 +1410,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				end
 			end
 			
-			var275 = function(p26) --[[ line: 1612 ]]
+			var275 = function(p26) --[[ line: 1616 ]]
 				-- upvalues: localPlayer (copy), gameSettingsTab (copy), t_8 (write)
 				local var318
 				local _ = nil
@@ -1429,7 +1432,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				end
 			end
 			
-			local function updateMovementModes() --[[ line: 1624 ]]
+			local function updateMovementModes() --[[ line: 1628 ]]
 				-- upvalues: userInputService (copy), playerScripts_1 (ref), t_8 (write), t_9 (write), t_6 (write), t_10 (write), gameSettingsTab (copy), robloxTranslatorModule (copy), constantsModule (copy), t_5 (copy), var60 (copy), gameSettings (copy), setMovementMode (ref), var275 (write)
 				local var320 = userInputService.PreferredInput == Enum.PreferredInput.Touch
 				
@@ -1488,24 +1491,24 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			updateMovementModes()
 			
 			if playerScripts_1 then
-				playerScripts_1.TouchMovementModeRegistered:connect(function(_) --[[ line: 1668 ]]
+				playerScripts_1.TouchMovementModeRegistered:connect(function(_) --[[ line: 1672 ]]
 					-- upvalues: userInputService (copy), updateMovementModes (ref)
 					if userInputService.TouchEnabled then
 						updateMovementModes()
 					end
 				end)
-				playerScripts_1.ComputerMovementModeRegistered:connect(function(_) --[[ line: 1674 ]]
+				playerScripts_1.ComputerMovementModeRegistered:connect(function(_) --[[ line: 1678 ]]
 					-- upvalues: userInputService (copy), updateMovementModes (ref)
 					if userInputService.MouseEnabled then
 						updateMovementModes()
 					end
 				end)
 			end
-			userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ line: 1681 ]]
+			userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ line: 1685 ]]
 				-- upvalues: updateMovementModes (ref)
 				updateMovementModes()
 			end)
-			gameSettingsTab.MovementMode.IndexChanged:connect(function(p27) --[[ line: 1685 ]]
+			gameSettingsTab.MovementMode.IndexChanged:connect(function(p27) --[[ line: 1689 ]]
 				-- upvalues: setMovementMode (ref), t_6 (write), reportSettingsForAnalytics (copy)
 				setMovementMode(t_6[p27])
 				reportSettingsForAnalytics()
@@ -1568,7 +1571,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.ShiftLockMode:SetInteractable(devEnableMouseLock)
 			end
 		end
-		local function updateUserSettingsMenu(value) --[[ line: 1731 ]]
+		local function updateUserSettingsMenu(value) --[[ line: 1735 ]]
 			-- upvalues: localPlayer (copy), gameSettingsTab (copy), var275 (write), t_8 (write)
 			if value == "DevEnableMouseLock" then
 				local var325 = not localPlayer.DevEnableMouseLock
@@ -1635,7 +1638,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 		
-		localPlayer.Changed:connect(function(p28) --[[ line: 1766 ]]
+		localPlayer.Changed:connect(function(p28) --[[ line: 1770 ]]
 			-- upvalues: t_2 (copy), updateUserSettingsMenu (ref), t_1 (copy)
 			if t_2[p28] then
 				updateUserSettingsMenu(p28)
@@ -1646,17 +1649,17 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createFeedbackModeOptions() --[[ line: 1779 ]]
+	local function createFeedbackModeOptions() --[[ line: 1783 ]]
 		-- upvalues: url (copy), httpService (copy), feedbackEntryPointImprovedStrictnessCheck (copy), gameSettingsTab (ref), safetyService (copy), var17 (copy), reportSettingsChangeForAnalytics (copy), feedbackEntryPointButtonSizeAdjustment2 (copy), utilityModule (copy), var62 (copy), robloxTranslatorModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), disableFeedbackSoothsayerCheck (copy), name (copy)
 		local text = url.ROLES_URL .. "v1/users/authenticated/roles"
 		local var334 = httpService:RequestInternal({ Method = "GET", Url = text })
 		
-		local function rolesCheckCallback(p29) --[[ line: 1786 ]]
+		local function rolesCheckCallback(p29) --[[ line: 1790 ]]
 			-- upvalues: feedbackEntryPointImprovedStrictnessCheck (copy), gameSettingsTab (copy), safetyService (copy), var17 (copy), reportSettingsChangeForAnalytics (copy), feedbackEntryPointButtonSizeAdjustment2 (copy), utilityModule (copy), var62 (copy), robloxTranslatorModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 			if p29 then
 				if not feedbackEntryPointImprovedStrictnessCheck and game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not gameSettingsTab.FeedbackEntryPointEnabled then return end
 				local var339, var340
-				local function onToggleFeedbackMode() --[[ line: 1798 ]]
+				local function onToggleFeedbackMode() --[[ line: 1802 ]]
 					-- upvalues: feedbackEntryPointImprovedStrictnessCheck (copy), gameSettingsTab (copy), safetyService (copy), var17 (copy), reportSettingsChangeForAnalytics (copy)
 					if feedbackEntryPointImprovedStrictnessCheck and game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not gameSettingsTab.FeedbackEntryPointEnabled then return end
 					gameSettingsTab.HubRef:PopMenu(false, true)
@@ -1710,7 +1713,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			
 			return
 		end
-		var334:Start(function(p30, p31) --[[ line: 1882 ]]
+		var334:Start(function(p30, p31) --[[ line: 1886 ]]
 			-- upvalues: httpService (copy), name (copy), text (ref), rolesCheckCallback (ref)
 			local var345
 			local var343 = false
@@ -1724,7 +1727,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			elseif p31.StatusCode < 200 or p31.StatusCode >= 400 then
 				var345 = "Roles Api Status code: " .. p31.StatusCode
 			else
-				local ok, status = pcall(function() --[[ line: 1894 ]]
+				local ok, status = pcall(function() --[[ line: 1898 ]]
 					-- upvalues: httpService (copy), p31 (ref), var343 (write)
 					for i, v in pairs(httpService:JSONDecode(p31.Body).roles) do
 						if v == "Soothsayer" then
@@ -1742,7 +1745,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createTranslationOptions() --[[ line: 1922 ]]
+	local function createTranslationOptions() --[[ line: 1926 ]]
 		-- upvalues: playersService (copy), url (copy), httpService (copy), name (copy), gameSettingsTab (ref), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), localPlayer (copy), reportSettingsChangeForAnalytics (copy), runService (copy)
 		local var346 = 1
 		local var347 = 1
@@ -1766,7 +1769,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local text_3 = url.GAME_INTERNATIONALIZATION_URL .. string.format("v1/user-localization-settings/universe/%d", game.GameId)
 		local var365 = httpService:RequestInternal({ Method = "GET", Url = text_3 })
 		
-		local function userExperienceLanguageSettingsCallback(value, p32) --[[ line: 1987 ]]
+		local function userExperienceLanguageSettingsCallback(value, p32) --[[ line: 1991 ]]
 			-- upvalues: name (copy), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_4 (ref), t_2 (ref), var349 (write), t (ref), var352 (write), t_1 (ref), var346 (write), var347 (write), localPlayer (copy), var350 (write), reportSettingsChangeForAnalytics (copy), url (copy), httpService (copy), var348 (write), runService (copy)
 			if value then
 				local var370 = false
@@ -1800,7 +1803,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					localPlayer:SetExperienceSettingsLocaleId(t_2[t_1[t_4[var346]]].localeCode)
 				end
 				gameSettingsTab.LanguageSelectorMode.CurrentLanguage = gameSettingsTab.LanguageSelectorMode.DropDownFrame.DropDownFrameTextLabel.Text
-				gameSettingsTab.LanguageSelectorMode.IndexChanged:connect(function(p33) --[[ line: 2067 | named "toggleTranslation" ]]
+				gameSettingsTab.LanguageSelectorMode.IndexChanged:connect(function(p33) --[[ line: 2071 | named "toggleTranslation" ]]
 					-- upvalues: gameSettingsTab (copy), t_2 (copy), var349 (copy), t_1 (copy), t_4 (copy), reportSettingsChangeForAnalytics (copy), url (copy), httpService (copy), var347 (copy), localPlayer (copy), var350 (copy), name (copy), var348 (copy), runService (copy)
 					gameSettingsTab.LanguageSelectorMode:SetInteractable(false)
 					local var374 = if p33 == 1 then t_2[var349].id else t_2[t_1[t_4[p33]]].id
@@ -1821,7 +1824,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						})
 					})
 					
-					local function callback(p34, p35) --[[ line: 2114 ]]
+					local function callback(p34, p35) --[[ line: 2118 ]]
 						-- upvalues: var347 (copy), p33 (ref), localPlayer (copy), var350 (copy), t_1 (copy), t_4 (copy), t_2 (copy), name (copy), var348 (copy), gameSettingsTab (copy)
 						if p34 then
 							var347 = p33
@@ -1851,7 +1854,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						
 						return
 					elseif not var348 then
-						var377:Start(function(p36, p37) --[[ line: 2157 ]]
+						var377:Start(function(p36, p37) --[[ line: 2161 ]]
 							-- upvalues: name (copy), text (ref), callback (ref)
 							local var379 = false
 							local text_1 = nil
@@ -1898,10 +1901,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.LanguageSelectorFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.LanguageSelectorFrame
 		end
 		
-		local function _(p38, p39) --[[ line: 2192 | named "experienceSupportedLanguagesCallback" ]]
+		local function _(p38, p39) --[[ line: 2196 | named "experienceSupportedLanguagesCallback" ]]
 			-- upvalues: var365 (ref), httpService (copy), var352 (write), var351 (write), var349 (write), t_3 (ref), name (copy), text_3 (ref), userExperienceLanguageSettingsCallback (ref), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 			if p38 then
-				var365:Start(function(p40, p41) --[[ line: 2194 ]]
+				var365:Start(function(p40, p41) --[[ line: 2198 ]]
 					-- upvalues: httpService (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 					local var386
 					local var385 = false
@@ -1914,7 +1917,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					elseif p41.StatusCode < 200 or p41.StatusCode >= 400 then
 						var386 = "User Experience Language Setting Request Status code: " .. p41.StatusCode
 					else
-						local ok, status = pcall(function() --[[ line: 2205 ]]
+						local ok, status = pcall(function() --[[ line: 2209 ]]
 							-- upvalues: httpService (copy), p41 (ref), var352 (copy), var351 (copy), var349 (copy), t_3 (copy)
 							local userUniverseLocalizationSettingValue = httpService:JSONDecode(p41.Body).userUniverseLocalizationSettingValue
 							
@@ -1959,10 +1962,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.LanguageSelectorFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.LanguageSelectorFrame
 		end
 		
-		local _ = function(p42, p43) --[[ line: 2254 | named "experienceSourceLanguageCallback" ]]
+		local _ = function(p42, p43) --[[ line: 2258 | named "experienceSourceLanguageCallback" ]]
 			-- upvalues: var363 (ref), httpService (copy), t (ref), name (copy), text_2 (ref), var365 (ref), var352 (write), var351 (write), var349 (write), t_3 (ref), text_3 (ref), userExperienceLanguageSettingsCallback (ref), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 			if p42 then
-				var363:Start(function(p44, p45) --[[ line: 2256 ]]
+				var363:Start(function(p44, p45) --[[ line: 2260 ]]
 					-- upvalues: httpService (copy), t (copy), name (copy), text_2 (copy), p43 (write), p42 (ref), var365 (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 					local var392
 					local var391 = false
@@ -1975,7 +1978,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					elseif p45.StatusCode < 200 or p45.StatusCode >= 400 then
 						var392 = "Experience Supported Language Request Status code: " .. p45.StatusCode
 					else
-						local ok, status = pcall(function() --[[ line: 2266 ]]
+						local ok, status = pcall(function() --[[ line: 2270 ]]
 							-- upvalues: httpService (copy), p45 (ref), t (copy)
 							for i, v in pairs(httpService:JSONDecode(p45.Body).data) do
 								t[i] = v.languageCode
@@ -1993,7 +1996,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					local var393 = p43
 					
 					if var391 and p42 then
-						var365:Start(function(p46, p47) --[[ line: 2194 ]]
+						var365:Start(function(p46, p47) --[[ line: 2198 ]]
 							-- upvalues: httpService (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 							local var386
 							local var385 = false
@@ -2006,7 +2009,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 							elseif p47.StatusCode < 200 or p47.StatusCode >= 400 then
 								var386 = "User Experience Language Setting Request Status code: " .. p47.StatusCode
 							else
-								local ok, status = pcall(function() --[[ line: 2205 ]]
+								local ok, status = pcall(function() --[[ line: 2209 ]]
 									-- upvalues: httpService (copy), p47 (ref), var352 (copy), var351 (copy), var349 (copy), t_3 (copy)
 									local userUniverseLocalizationSettingValue = httpService:JSONDecode(p47.Body).userUniverseLocalizationSettingValue
 									
@@ -2066,10 +2069,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 		
-		local _ = function(p48, p49) --[[ line: 2295 | named "localeCodeToLanguageCodeMappingCallback" ]]
+		local _ = function(p48, p49) --[[ line: 2299 | named "localeCodeToLanguageCodeMappingCallback" ]]
 			-- upvalues: var361 (ref), httpService (copy), var349 (write), var350 (write), t_2 (ref), name (copy), text_1 (ref), var363 (ref), t (ref), text_2 (ref), var365 (ref), var352 (write), var351 (write), t_3 (ref), text_3 (ref), userExperienceLanguageSettingsCallback (ref), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 			if p48 then
-				var361:Start(function(p50, p51) --[[ line: 2297 ]]
+				var361:Start(function(p50, p51) --[[ line: 2301 ]]
 					-- upvalues: httpService (copy), var349 (copy), var350 (copy), t_2 (copy), name (copy), text_1 (copy), p49 (write), p48 (ref), var363 (copy), t (copy), text_2 (copy), var365 (copy), var352 (copy), var351 (copy), t_3 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 					local var403
 					local var402 = false
@@ -2082,7 +2085,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					elseif p51.StatusCode < 200 or p51.StatusCode >= 400 then
 						var403 = "Experience Source Language Status code: " .. p51.StatusCode
 					else
-						local ok, status = pcall(function() --[[ line: 2308 ]]
+						local ok, status = pcall(function() --[[ line: 2312 ]]
 							-- upvalues: httpService (copy), p51 (ref), var349 (copy), var350 (copy), t_2 (copy)
 							var349 = httpService:JSONDecode(p51.Body).languageCode
 							var350 = t_2[var349].localeCode
@@ -2100,7 +2103,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					local var405 = p49
 					
 					if p48_1 then
-						var363:Start(function(p52, p53) --[[ line: 2256 ]]
+						var363:Start(function(p52, p53) --[[ line: 2260 ]]
 							-- upvalues: httpService (copy), t (copy), name (copy), text_2 (copy), var405 (write), p48_1 (ref), var365 (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 							local var392
 							local var391 = false
@@ -2113,7 +2116,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 							elseif p53.StatusCode < 200 or p53.StatusCode >= 400 then
 								var392 = "Experience Supported Language Request Status code: " .. p53.StatusCode
 							else
-								local ok, status = pcall(function() --[[ line: 2266 ]]
+								local ok, status = pcall(function() --[[ line: 2270 ]]
 									-- upvalues: httpService (copy), p53 (ref), t (copy)
 									for i, v in pairs(httpService:JSONDecode(p53.Body).data) do
 										t[i] = v.languageCode
@@ -2129,7 +2132,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 								p43 = var392
 							end
 							if var391 and p48_1 then
-								var365:Start(function(p54, p55) --[[ line: 2194 ]]
+								var365:Start(function(p54, p55) --[[ line: 2198 ]]
 									-- upvalues: httpService (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 									local var386
 									local var385 = false
@@ -2142,7 +2145,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 									elseif p55.StatusCode < 200 or p55.StatusCode >= 400 then
 										var386 = "User Experience Language Setting Request Status code: " .. p55.StatusCode
 									else
-										local ok, status = pcall(function() --[[ line: 2205 ]]
+										local ok, status = pcall(function() --[[ line: 2209 ]]
 											-- upvalues: httpService (copy), p55 (ref), var352 (copy), var351 (copy), var349 (copy), t_3 (copy)
 											local userUniverseLocalizationSettingValue = httpService:JSONDecode(p55.Body).userUniverseLocalizationSettingValue
 											
@@ -2217,7 +2220,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end
 		
-		var359:Start(function(p56, p57) --[[ line: 2339 ]]
+		var359:Start(function(p56, p57) --[[ line: 2343 ]]
 			-- upvalues: httpService (copy), t_2 (ref), t_3 (ref), t_1 (ref), localeId (ref), var351 (write), name (copy), text (ref), var361 (ref), var349 (write), var350 (write), text_1 (ref), var363 (ref), t (ref), text_2 (ref), var365 (ref), var352 (write), text_3 (ref), userExperienceLanguageSettingsCallback (ref), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 			local var411
 			local var410 = false
@@ -2230,7 +2233,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			elseif p57.StatusCode < 200 or p57.StatusCode >= 400 then
 				var411 = "Locale Code to Language Code Mapping Request Status code: " .. p57.StatusCode
 			else
-				local ok, status = pcall(function() --[[ line: 2350 ]]
+				local ok, status = pcall(function() --[[ line: 2354 ]]
 					-- upvalues: httpService (copy), p57 (ref), t_2 (copy), t_3 (copy), t_1 (copy), localeId (copy), var351 (copy)
 					for i, v in pairs(httpService:JSONDecode(p57.Body).data) do
 						local languageCode = v.locale.language.languageCode
@@ -2255,7 +2258,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			local var412 = var411
 			
 			if var410 then
-				var361:Start(function(p58, p59) --[[ line: 2297 ]]
+				var361:Start(function(p58, p59) --[[ line: 2301 ]]
 					-- upvalues: httpService (copy), var349 (copy), var350 (copy), t_2 (copy), name (copy), text_1 (copy), var412 (write), var410 (ref), var363 (copy), t (copy), text_2 (copy), var365 (copy), var352 (copy), var351 (copy), t_3 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 					local var403
 					local var402 = false
@@ -2268,7 +2271,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					elseif p59.StatusCode < 200 or p59.StatusCode >= 400 then
 						var403 = "Experience Source Language Status code: " .. p59.StatusCode
 					else
-						local ok, status = pcall(function() --[[ line: 2308 ]]
+						local ok, status = pcall(function() --[[ line: 2312 ]]
 							-- upvalues: httpService (copy), p59 (ref), var349 (copy), var350 (copy), t_2 (copy)
 							var349 = httpService:JSONDecode(p59.Body).languageCode
 							var350 = t_2[var349].localeCode
@@ -2285,7 +2288,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					local p48_1 = var402 and var410
 					
 					if p48_1 then
-						var363:Start(function(p60, p61) --[[ line: 2256 ]]
+						var363:Start(function(p60, p61) --[[ line: 2260 ]]
 							-- upvalues: httpService (copy), t (copy), name (copy), text_2 (copy), p49 (write), p48_1 (ref), var365 (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy), gameSettingsTab (copy), utilityModule (copy), robloxTranslatorModule (copy), var61 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 							local var392
 							local var391 = false
@@ -2298,7 +2301,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 							elseif p61.StatusCode < 200 or p61.StatusCode >= 400 then
 								var392 = "Experience Supported Language Request Status code: " .. p61.StatusCode
 							else
-								local ok, status = pcall(function() --[[ line: 2266 ]]
+								local ok, status = pcall(function() --[[ line: 2270 ]]
 									-- upvalues: httpService (copy), p61 (ref), t (copy)
 									for i, v in pairs(httpService:JSONDecode(p61.Body).data) do
 										t[i] = v.languageCode
@@ -2314,7 +2317,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 								p43 = var392
 							end
 							if var391 and p48_1 then
-								var365:Start(function(p62, p63) --[[ line: 2194 ]]
+								var365:Start(function(p62, p63) --[[ line: 2198 ]]
 									-- upvalues: httpService (copy), var352 (copy), var351 (copy), var349 (copy), t_3 (copy), name (copy), text_3 (copy), userExperienceLanguageSettingsCallback (copy)
 									local var386
 									local var385 = false
@@ -2327,7 +2330,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 									elseif p63.StatusCode < 200 or p63.StatusCode >= 400 then
 										var386 = "User Experience Language Setting Request Status code: " .. p63.StatusCode
 									else
-										local ok, status = pcall(function() --[[ line: 2205 ]]
+										local ok, status = pcall(function() --[[ line: 2209 ]]
 											-- upvalues: httpService (copy), p63 (ref), var352 (copy), var351 (copy), var349 (copy), t_3 (copy)
 											local userUniverseLocalizationSettingValue = httpService:JSONDecode(p63.Body).userUniverseLocalizationSettingValue
 											
@@ -2403,7 +2406,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function getChatTranslationLayerData(p64) --[[ line: 2389 ]]
+	local function getChatTranslationLayerData(p64) --[[ line: 2393 ]]
 		-- upvalues: getFFlagChatTranslationWaitForIXPModule (copy), IXPServiceWrapper (copy), getFFlagChatTranslationNewDefaultsModule (copy)
 		local t = {
 			ChatTranslationEnabled = false,
@@ -2419,7 +2422,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		elseif getFFlagChatTranslationWaitForIXPModule() then
 			IXPServiceWrapper:WaitForInitialization()
 		end
-		local ok, status = pcall(function() --[[ line: 2411 ]]
+		local ok, status = pcall(function() --[[ line: 2415 ]]
 			-- upvalues: IXPServiceWrapper (copy), p64 (ref)
 			return IXPServiceWrapper:GetLayerData(p64)
 		end)
@@ -2437,7 +2440,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		return t
 	end
 	
-	local function createVolumeOptions() --[[ line: 2429 ]]
+	local function createVolumeOptions() --[[ line: 2433 ]]
 		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), fFlagRenameVolumeToMainVolumeModule (copy), robloxTranslatorModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var418, var419, var420 = utilityModule:AddNewRow(gameSettingsTab, if fFlagRenameVolumeToMainVolumeModule then robloxTranslatorModule:FormatByKey("CoreScripts.InGameMenu.GameSettings.MainVolume") else "Volume", "Slider", 10, math.floor(gameSettings.MasterVolume * 10))
 		gameSettingsTab.VolumeFrame = var418
@@ -2447,7 +2450,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local volumeChangeSound = Instance.new("Sound", game:GetService("CoreGui").RobloxGui.Sounds)
 		volumeChangeSound.Name = "VolumeChangeSound"
 		volumeChangeSound.SoundId = "rbxasset://sounds/uuhhh.mp3"
-		gameSettingsTab.VolumeSlider.ValueChanged:connect(function(p65) --[[ line: 2442 ]]
+		gameSettingsTab.VolumeSlider.ValueChanged:connect(function(p65) --[[ line: 2446 ]]
 			-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), volumeChangeSound (ref), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var422 = if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then math.floor(gameSettings.MasterVolume * 10 + 0.5) else nil
 			local var423 = p65 / 10
@@ -2462,7 +2465,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createPartyVoiceVolumeOptions() --[[ line: 2460 ]]
+	local function createPartyVoiceVolumeOptions() --[[ line: 2464 ]]
 		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty (copy), default_3 (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local floored = math.floor(gameSettings.PartyVoiceVolume * 10)
 		local var425, var426, var427 = utilityModule:AddNewRow(gameSettingsTab, "Party Voice Volume", "Slider", 10, floored)
@@ -2473,16 +2476,16 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		
 		if getFFlagEnablePartyVoiceVolumeOnlyWhenInEligibleParty() then
 			gameSettingsTab.PartyVoiceVolumeFrame.Visible = default_3.hasExperienceStarted
-			default_3.ExperienceJoined.Event:Connect(function() --[[ line: 2469 ]]
+			default_3.ExperienceJoined.Event:Connect(function() --[[ line: 2473 ]]
 				-- upvalues: gameSettingsTab (copy)
 				gameSettingsTab.PartyVoiceVolumeFrame.Visible = true
 			end)
-			default_3.ExperienceLeft.Event:Connect(function() --[[ line: 2472 ]]
+			default_3.ExperienceLeft.Event:Connect(function() --[[ line: 2476 ]]
 				-- upvalues: gameSettingsTab (copy)
 				gameSettingsTab.PartyVoiceVolumeFrame.Visible = false
 			end)
 		end
-		gameSettingsTab.PartyVoiceVolumeSlider.ValueChanged:connect(function(p66) --[[ line: 2477 ]]
+		gameSettingsTab.PartyVoiceVolumeSlider.ValueChanged:connect(function(p66) --[[ line: 2481 ]]
 			-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), floored (ref), gameSettings (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var428 = if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then if floored ~= nil then 0 else math.floor(floored * 10 + 0.5) else nil
 			gameSettings.PartyVoiceVolume = p66 / 10
@@ -2494,10 +2497,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createVoiceChatVolumeOptions() --[[ line: 2493 ]]
+	local function createVoiceChatVolumeOptions() --[[ line: 2497 ]]
 		-- upvalues: gameSettings (copy), var20 (copy), name (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), voiceVolumeControlsDisableInteractionWhenNoMasterVolume (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local floored = math.floor(gameSettings.VoiceChatVolume * 5 + 0.5)
-		local ok, status = pcall(function() --[[ line: 2495 ]]
+		local ok, status = pcall(function() --[[ line: 2499 ]]
 			-- upvalues: var20 (copy)
 			return var20:Format("CoreScripts.InGameMenu.GameSettings.VoiceChatVolume")
 		end)
@@ -2514,7 +2517,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.VoiceChatVolumeFrame.Visible = false
 		
 		if voiceVolumeControlsDisableInteractionWhenNoMasterVolume then
-			local function updateVoiceChatVolumeSliderInteractable(p67) --[[ line: 2510 ]]
+			local function updateVoiceChatVolumeSliderInteractable(p67) --[[ line: 2514 ]]
 				-- upvalues: gameSettings (copy), gameSettingsTab (copy)
 				local var434
 				if p67 == nil then
@@ -2538,7 +2541,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			updateVoiceChatVolumeSliderInteractable()
 			gameSettingsTab.VolumeSlider.ValueChanged:connect(updateVoiceChatVolumeSliderInteractable)
 		end
-		gameSettingsTab.VoiceChatVolumeSlider.ValueChanged:connect(function(p68) --[[ line: 2530 ]]
+		gameSettingsTab.VoiceChatVolumeSlider.ValueChanged:connect(function(p68) --[[ line: 2534 ]]
 			-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), gameSettingsTab (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var435 = if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then math.floor(gameSettings.VoiceChatVolume * 5 + 0.5) else nil
 			gameSettings.VoiceChatVolume = p68 / 5
@@ -2553,14 +2556,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createHapticsToggle() --[[ line: 2555 ]]
+	local function createHapticsToggle() --[[ line: 2559 ]]
 		-- upvalues: gameSettings (copy), getAppFeaturePolicies (copy), var20 (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var436, var437, var438 = utilityModule:AddNewRow(gameSettingsTab, if getAppFeaturePolicies().getShouldUseVibrationInsteadOfHaptics() then var20:Format("CoreScripts.InGameMenu.Vibration") else "Haptics", "Selector", { "Off", "On" }, if gameSettings.HapticStrength == 0 then 1 else 2)
 		gameSettingsTab.HapticsFrame = var436
 		_ = var437
 		gameSettingsTab.HapticsSelector = var438
 		gameSettingsTab.HapticsFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.HapticsFrame
-		gameSettingsTab.HapticsSelector.IndexChanged:connect(function(p69) --[[ line: 2564 ]]
+		gameSettingsTab.HapticsSelector.IndexChanged:connect(function(p69) --[[ line: 2568 ]]
 			-- upvalues: gameSettings (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local hapticStrength = gameSettings.HapticStrength
 			
@@ -2576,11 +2579,11 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createCameraInvertedOptions() --[[ line: 2580 ]]
+	local function createCameraInvertedOptions() --[[ line: 2584 ]]
 		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_7 (ref), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var439 = 1
 		
-		if pcall(function() --[[ line: 2582 ]]
+		if pcall(function() --[[ line: 2586 ]]
 			-- upvalues: gameSettings (copy), var439 (write)
 			if gameSettings.CameraYInverted == true then
 				var439 = 2
@@ -2594,7 +2597,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.CameraInvertedSelector = var442
 		gameSettingsTab.CameraInvertedFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.CameraInvertedFrame
 		t_7[gameSettingsTab.CameraInvertedFrame] = true
-		gameSettingsTab.CameraInvertedSelector.IndexChanged:connect(function(p70) --[[ line: 2597 ]]
+		gameSettingsTab.CameraInvertedSelector.IndexChanged:connect(function(p70) --[[ line: 2601 ]]
 			-- upvalues: getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), gameSettings (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 			local var443 = if getFFlagEnableExplicitSettingsChangeAnalyticsModule() then gameSettings.CameraYInverted else nil
 			
@@ -2610,7 +2613,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function setCameraSensitivity(value) --[[ line: 2616 ]]
+	local function setCameraSensitivity(value) --[[ line: 2620 ]]
 		-- upvalues: userInputService (copy), gameSettings (copy), getFFlagEnableExplicitSettingsChangeAnalyticsModule (copy), reportSettingsChangeForAnalytics (copy), reportSettingsForAnalytics (copy)
 		local var444 = nil
 		local x = nil
@@ -2637,13 +2640,13 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		reportSettingsForAnalytics()
 	end
 	
-	local function createMouseOptions() --[[ line: 2654 ]]
+	local function createMouseOptions() --[[ line: 2658 ]]
 		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), t_7 (ref), create (copy), themeModule (copy), setCameraSensitivity (ref)
-		local function _(p71) --[[ line: 2659 | named "translateEngineMouseSensitivityToGui" ]]
+		local function _(p71) --[[ line: 2663 | named "translateEngineMouseSensitivityToGui" ]]
 			return if p71 <= 0.2 then 0 else p71 <= 1 and math.floor((p71 - 0.2) / 0.16 + 0.5) or math.floor((p71 + 2) / 0.6 + 0.5)
 		end
 		
-		local _ = function(p72) --[[ line: 2667 | named "translateGuiMouseSensitivityToEngine" ]]
+		local _ = function(p72) --[[ line: 2671 | named "translateGuiMouseSensitivityToEngine" ]]
 			local var452 = if p72 <= 5 then 0.16 * p72 + 0.2 else 0.6 * p72 - 2
 			
 			return if var452 <= 0.2 then 0.2 else var452
@@ -2683,7 +2686,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			Parent = var451
 		})
 		
-		local _ = function(value) --[[ line: 2726 | named "setMouseSensitivityText" ]]
+		local _ = function(value) --[[ line: 2730 | named "setMouseSensitivityText" ]]
 			-- upvalues: var451 (ref)
 			var451.Text = tostring(tonumber(string.format("%.3f", math.floor(value * 1000 + 0.5) / 1000)))
 		end
@@ -2692,7 +2695,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local x = gameSettings.MouseSensitivityFirstPerson.X
 		gameSettingsTab.MouseAdvancedEntry:SetValue(if x <= 0.2 then 0 else x <= 1 and math.floor((x - 0.2) / 0.16 + 0.5) or math.floor((x + 2) / 0.6 + 0.5))
 		
-		function clampMouseSensitivity(value) --[[ line: 2741 ]]
+		function clampMouseSensitivity(value) --[[ line: 2745 ]]
 			if value < 0 then
 				value = -value
 			end
@@ -2706,7 +2709,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			return value
 		end
 		
-		function setMouseSensitivity(value, p73) --[[ line: 2759 ]]
+		function setMouseSensitivity(value, p73) --[[ line: 2763 ]]
 			-- upvalues: var447 (write), setCameraSensitivity (copy), gameSettingsTab (copy), var451 (ref)
 			if not var447 then return end
 			setCameraSensitivity(value)
@@ -2719,7 +2722,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			var447 = true
 		end
 		
-		var451.FocusLost:connect(function() --[[ line: 2777 ]]
+		var451.FocusLost:connect(function() --[[ line: 2781 ]]
 			-- upvalues: gameSettingsTab (copy), var451 (ref), gameSettings (copy)
 			gameSettingsTab.MouseAdvancedEntry:SetInteractable(true)
 			local var453 = tonumber(string.match(var451.Text, "([%d%.]+)"))
@@ -2731,11 +2734,11 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 			setMouseSensitivity(gameSettings.MouseSensitivityFirstPerson.X, var451)
 		end)
-		var451.Focused:connect(function() --[[ line: 2789 ]]
+		var451.Focused:connect(function() --[[ line: 2793 ]]
 			-- upvalues: gameSettingsTab (copy)
 			gameSettingsTab.MouseAdvancedEntry:SetInteractable(false)
 		end)
-		gameSettingsTab.MouseAdvancedEntry.ValueChanged:connect(function(p74) --[[ line: 2793 ]]
+		gameSettingsTab.MouseAdvancedEntry.ValueChanged:connect(function(p74) --[[ line: 2797 ]]
 			-- upvalues: gameSettingsTab (copy)
 			local var454 = clampMouseSensitivity(p74)
 			local var455 = if var454 <= 5 then 0.16 * var454 + 0.2 else 0.6 * var454 - 2
@@ -2743,13 +2746,13 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createGamepadOptions() --[[ line: 2800 ]]
+	local function createGamepadOptions() --[[ line: 2804 ]]
 		-- upvalues: gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), setCameraSensitivity (ref)
-		local function _(p75) --[[ line: 2805 | named "translateEngineGamepadSensitivityToGui" ]]
+		local function _(p75) --[[ line: 2809 | named "translateEngineGamepadSensitivityToGui" ]]
 			return if p75 <= 0.2 then 0 else p75 <= 1 and math.floor((p75 - 0.2) / 0.16 + 0.5) or math.floor((p75 + 2) / 0.6 + 0.5)
 		end
 		
-		local _ = function(p76) --[[ line: 2812 | named "translateGuiGamepadSensitivityToEngine" ]]
+		local _ = function(p76) --[[ line: 2816 | named "translateGuiGamepadSensitivityToEngine" ]]
 			local var459 = if p76 <= 5 then 0.16 * p76 + 0.2 else 0.6 * p76 - 2
 			
 			return if var459 <= 0.2 then 0.2 else var459
@@ -2761,16 +2764,16 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.GamepadSensitivityLabel = var457
 		gameSettingsTab.GamepadSensitivitySlider = var458
 		gameSettingsTab.GamepadSensitivityFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.GamepadSensitivityFrame
-		gameSettingsTab.GamepadSensitivitySlider.ValueChanged:connect(function(p77) --[[ line: 2827 ]]
+		gameSettingsTab.GamepadSensitivitySlider.ValueChanged:connect(function(p77) --[[ line: 2831 ]]
 			-- upvalues: setCameraSensitivity (copy)
 			local var460 = if p77 <= 5 then 0.16 * p77 + 0.2 else 0.6 * p77 - 2
 			setCameraSensitivity(if var460 <= 0.2 then 0.2 else var460)
 		end)
 	end
 	
-	local function createOverscanOption() --[[ line: 2832 ]]
+	local function createOverscanOption() --[[ line: 2836 ]]
 		-- upvalues: robloxGui (copy), corePackagesService (copy), contextActionService (copy), utilityModule (copy), gameSettingsTab (ref), themeModule (copy), runService (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
-		local adjustButton, adjustButton_1, adjustButton_2 = utilityModule:MakeStyledButton("AdjustButton", "Adjust", UDim2.new(0, 300, 1, -20), function() --[[ line: 2833 ]]
+		local adjustButton, adjustButton_1, adjustButton_2 = utilityModule:MakeStyledButton("AdjustButton", "Adjust", UDim2.new(0, 300, 1, -20), function() --[[ line: 2837 ]]
 			-- upvalues: robloxGui (copy), corePackagesService (copy), contextActionService (copy)
 			local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
 			local _ = nil
@@ -2778,7 +2781,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			local roactModule = require(corePackagesService.Packages.Roact)
 			local var468 = nil
 			local t = {
-				onUnmount = function() --[[ line: 2844 ]]
+				onUnmount = function() --[[ line: 2848 ]]
 					-- upvalues: var468 (write), roactModule (ref), contextActionService (copy), settingsHubModule (ref)
 					if var468 then
 						roactModule.unmount(var468)
@@ -2790,7 +2793,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				BackgroundTransparency = 0.2
 			}
 			settingsHubModule:SetVisibility(false, true)
-			contextActionService:BindCoreAction("RbxStopOverscanMovement", function() --[[ line: 2860 ]] end, false, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
+			contextActionService:BindCoreAction("RbxStopOverscanMovement", function() --[[ line: 2864 ]] end, false, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
 			local _ = nil
 			var468 = roactModule.mount(roactModule.createElement(var466, t), robloxGui, tostring(var466))
 		end, gameSettingsTab)
@@ -2811,11 +2814,11 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		adjustButton_2(var464)
 	end
 	
-	local function createDeveloperConsoleOption() --[[ line: 2899 ]]
+	local function createDeveloperConsoleOption() --[[ line: 2903 ]]
 		-- upvalues: reportSettingsChangeForAnalytics (copy), fixDeveloperConsoleButtonSizeAndPositioning (copy), utilityModule (copy), gameSettingsTab (ref), themeModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), runService (copy), playerPermissionsModule (copy), playersService (copy)
-		local function makeDevConsoleOption() --[[ line: 2901 ]]
+		local function makeDevConsoleOption() --[[ line: 2905 ]]
 			-- upvalues: reportSettingsChangeForAnalytics (copy), fixDeveloperConsoleButtonSizeAndPositioning (copy), utilityModule (copy), gameSettingsTab (copy), themeModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
-			local function onOpenDevConsole() --[[ line: 2902 ]]
+			local function onOpenDevConsole() --[[ line: 2906 ]]
 				-- upvalues: reportSettingsChangeForAnalytics (copy)
 				local devConsoleMasterModule = require(script.Parent.Parent.Parent.DevConsoleMaster)
 				
@@ -2857,7 +2860,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			
 			return
 		end
-		spawn(function() --[[ line: 2954 ]]
+		spawn(function() --[[ line: 2958 ]]
 			-- upvalues: playerPermissionsModule (copy), playersService (copy), makeDevConsoleOption (ref)
 			if playerPermissionsModule.CanPlayerManagePlaceAsync(playersService.LocalPlayer) then
 				makeDevConsoleOption()
@@ -2865,7 +2868,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createUiToggleOptions() --[[ line: 2963 ]]
+	local function createUiToggleOptions() --[[ line: 2967 ]]
 		-- upvalues: userFreecamGuiDestabilization (copy), userShowGuiHideToggles (copy), robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), guiService (copy), localPlayer (copy)
 		if not userFreecamGuiDestabilization and not userShowGuiHideToggles then
 			local var492, var493, var494 = utilityModule:AddNewRow(gameSettingsTab, "BillboardGui Visibility", "Selector", { "All visible", "Hide nameplates/bubble chat" }, 1)
@@ -2873,7 +2876,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.uiToggleFrame = var493
 			gameSettingsTab.uiToggleSelector = var494
 			gameSettingsTab.uiToggleRow.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.UiToggleRow
-			gameSettingsTab.uiToggleSelector.IndexChanged:connect(function(_) --[[ line: 3032 ]]
+			gameSettingsTab.uiToggleSelector.IndexChanged:connect(function(_) --[[ line: 3036 ]]
 				-- upvalues: guiService (copy)
 				guiService:ToggleGuiIsVisibleIfAllowed(Enum.GuiType.PlayerNameplates)
 			end)
@@ -2905,7 +2908,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			local var488 = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.GuiVisibility.ShowGuiType", { GuiType = v.label })
 			local var489, var490, var491 = utilityModule:AddNewRow(gameSettingsTab, var488, "Selector", { var483, var484 }, 1)
 			var489.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER[v.layoutOrderKey]
-			var491.IndexChanged:Connect(function(p78) --[[ line: 2991 ]]
+			var491.IndexChanged:Connect(function(p78) --[[ line: 2995 ]]
 				-- upvalues: guiService (copy), v (ref)
 				if (if guiService:GetGuiIsVisible(v.type) then 1 else 2) ~= p78 then
 					guiService:ToggleGuiIsVisibleIfAllowed(v.type)
@@ -2924,7 +2927,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.freecamFrame = var486
 		gameSettingsTab.freecamSelector = var487
 		gameSettingsTab.freecamRow.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.FreecamToggleRow
-		gameSettingsTab.freecamSelector.IndexChanged:Connect(function(p79) --[[ line: 3013 ]]
+		gameSettingsTab.freecamSelector.IndexChanged:Connect(function(p79) --[[ line: 3017 ]]
 			-- upvalues: localPlayer (copy)
 			local var495 = p79 == 2
 			local freecamScript = localPlayer:FindFirstChild("FreecamScript", true)
@@ -2938,7 +2941,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function updateUiToggleSelection() --[[ line: 3038 ]]
+	local function updateUiToggleSelection() --[[ line: 3042 ]]
 		-- upvalues: userFreecamGuiDestabilization (copy), userShowGuiHideToggles (copy), gameSettingsTab (ref), guiService (copy), localPlayer (copy)
 		if userFreecamGuiDestabilization or userShowGuiHideToggles then
 			if not gameSettingsTab.uiToggleSelectors then return end
@@ -2963,17 +2966,17 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.uiToggleSelector:SetSelectionIndex(var499)
 	end
 	
-	local _ = function(p80, p81, p82) --[[ line: 3080 | named "isValidDeviceList" ]]
+	local _ = function(p80, p81, p82) --[[ line: 3084 | named "isValidDeviceList" ]]
 		return p80 and (p81 and (p82 and (#p80 > 0 and (p82 > 0 and (p82 <= #p80 and #p80 == #p81)))))
 	end
 	
-	local _ = function(p83, p84) --[[ line: 3093 | named "SwitchOutputDevice" ]]
+	local _ = function(p83, p84) --[[ line: 3097 | named "SwitchOutputDevice" ]]
 		-- upvalues: soundService (copy), name (copy)
 		soundService:SetOutputDevice(p83, p84)
 		name:info("[SwitchOutputDevice] Setting SS Speaker Device To {} {}", p83, p84)
 	end
 	
-	local function createDeviceOptions(p85) --[[ line: 3098 ]]
+	local function createDeviceOptions(p85) --[[ line: 3102 ]]
 		-- upvalues: gameSettingsTab (ref), robloxTranslatorModule (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), getFIntVoiceChatDeviceChangeDebounceDelayModule (copy), default_2 (copy), soundService (copy), name (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), reportSettingsChangeForAnalytics (copy)
 		local var500 = gameSettingsTab[p85 .. "DeviceIndex"] or 0
 		local var501 = gameSettingsTab[p85 .. "DeviceNames"] or {}
@@ -2994,7 +2997,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab[p85 .. "PrevDeviceName"] = gameSettingsTab[p85 .. "DeviceInfo"].Name
 		local var510 = 0
 		local var511 = getFIntVoiceChatDeviceChangeDebounceDelayModule()
-		gameSettingsTab[p85 .. "DeviceSelector"].IndexChanged:connect(function(p86) --[[ line: 3121 ]]
+		gameSettingsTab[p85 .. "DeviceSelector"].IndexChanged:connect(function(p86) --[[ line: 3125 ]]
 			-- upvalues: gameSettingsTab (copy), p85 (ref), var510 (write), var511 (ref), default_2 (copy), soundService (copy), name (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), reportSettingsChangeForAnalytics (copy)
 			if gameSettingsTab[p85 .. "DeviceInfo"].Name == gameSettingsTab[p85 .. "DeviceNames"][p86] and gameSettingsTab[p85 .. "DeviceInfo"].Guid == gameSettingsTab[p85 .. "DeviceGuids"][p86] then return end
 			local var512 = var510 + 1
@@ -3031,9 +3034,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local _ = function() --[[ line: 3163 | named "createBadgeVisibilityOptions" ]]
+	local _ = function() --[[ line: 3167 | named "createBadgeVisibilityOptions" ]]
 		-- upvalues: playerPermissionsModule (copy), localPlayer (copy), robloxTranslatorModule (copy), updateVisibilitySettingsCopy (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), gameSettings (copy)
-		spawn(function() --[[ line: 3164 ]]
+		spawn(function() --[[ line: 3168 ]]
 			-- upvalues: playerPermissionsModule (copy), localPlayer (copy), robloxTranslatorModule (copy), updateVisibilitySettingsCopy (copy), gameSettingsTab (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), gameSettings (copy)
 			local var513, var514, var515 = utilityModule:AddNewRow(gameSettingsTab, if updateVisibilitySettingsCopy then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MyBadges") else robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.DisplayBadges"), "Selector", {
 				robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Hide"),
@@ -3043,7 +3046,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.badgeVisibleFrame = var514
 			gameSettingsTab.badgeVisibleSelector = var515
 			gameSettingsTab.badgeVisibleRow.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.BadgeVisibilityFrame
-			gameSettingsTab.badgeVisibleSelector.IndexChanged:connect(function(p87) --[[ line: 3178 ]]
+			gameSettingsTab.badgeVisibleSelector.IndexChanged:connect(function(p87) --[[ line: 3182 ]]
 				-- upvalues: gameSettings (copy), playerPermissionsModule (copy), localPlayer (copy)
 				gameSettings.BadgeVisible = p87 == 2
 				playerPermissionsModule.SetPlayerInExperienceNameEnabled(localPlayer, p87 == 1)
@@ -3051,7 +3054,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createChatModerationOptions() --[[ line: 3185 ]]
+	local function createChatModerationOptions() --[[ line: 3189 ]]
 		-- upvalues: gameSettingsTab (ref), utilityModule (copy), var20 (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), corePackagesService (copy), signalsModule (copy), reportSettingsChangeForAnalytics (copy)
 		local _ = {
 			title = "CoreScripts.InGameMenu.GameSettings.ReadOnlyView",
@@ -3069,7 +3072,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.ChatModerationFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.ChatModerationFrame
 		gameSettingsTab.ChatModerationFrame.Visible = false
 		local chatModerationStore = require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetChatModerationStore(false)
-		gameSettingsTab.ChatModerationDisposeEffect = signalsModule.createEffect(function(p88) --[[ line: 3209 ]]
+		gameSettingsTab.ChatModerationDisposeEffect = signalsModule.createEffect(function(p88) --[[ line: 3213 ]]
 			-- upvalues: gameSettingsTab (copy), chatModerationStore (ref)
 			gameSettingsTab.ChatModerationFrame.Visible = chatModerationStore.getIsSettingVisible(p88)
 			local var520 = if chatModerationStore.getIsSettingEnabled(p88) then 2 else 1
@@ -3078,7 +3081,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.ChatModerationSelector:SetSelectionIndex(var520)
 			end
 		end)
-		gameSettingsTab.ChatModerationSelector.IndexChanged:connect(function(p89) --[[ line: 3218 ]]
+		gameSettingsTab.ChatModerationSelector.IndexChanged:connect(function(p89) --[[ line: 3222 ]]
 			-- upvalues: chatModerationStore (ref), reportSettingsChangeForAnalytics (copy)
 			local var521 = p89 == 2
 			chatModerationStore.setIsSettingEnabled(var521)
@@ -3087,7 +3090,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		chatModerationStore.initialize()
 	end
 	
-	local function createAIRephraseSettingOptions() --[[ line: 3227 ]]
+	local function createAIRephraseSettingOptions() --[[ line: 3231 ]]
 		-- upvalues: robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), corePackagesService (copy), getFIntDebounceAIRephraseSettingDelayModule (copy), signalsModule (copy), textChatService (copy), reportSettingsChangeForAnalytics (copy), expChatDebounceRephraseIndexSelection (copy), throttleFunctionCallModule (copy)
 		local var522, var523, var524 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("CoreScripts.InGameMenu.GameSettings.AIRephraseMessages"), "Selector", {
 			robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.Off"),
@@ -3102,7 +3105,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local var526 = getFIntDebounceAIRephraseSettingDelayModule()
 		local var527 = var526 > 0
 		local var528 = if AIRephraseSettingStore.getIsSettingEnabled(false) then 2 else 1
-		gameSettingsTab.AIRephraseDisposeEffect = signalsModule.createEffect(function(p90) --[[ line: 3253 ]]
+		gameSettingsTab.AIRephraseDisposeEffect = signalsModule.createEffect(function(p90) --[[ line: 3257 ]]
 			-- upvalues: gameSettingsTab (copy), AIRephraseSettingStore (ref), var528 (write)
 			gameSettingsTab.AIRephraseFrame.Visible = AIRephraseSettingStore.getIsSettingVisible(p90)
 			local var531 = if AIRephraseSettingStore.getIsSettingEnabled(p90) then 2 else 1
@@ -3113,13 +3116,13 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end)
 		
-		local var529 = function(p91) --[[ line: 3264 ]]
+		local var529 = function(p91) --[[ line: 3268 ]]
 			-- upvalues: var528 (write), textChatService (copy), AIRephraseSettingStore (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 			if p91 == var528 then
 				return
 			end
 			local var532 = p91 == 2
-			task.spawn(function() --[[ line: 3270 ]]
+			task.spawn(function() --[[ line: 3274 ]]
 				-- upvalues: textChatService (copy), var532 (ref), AIRephraseSettingStore (copy), var528 (copy), p91 (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 				if textChatService:OnUserChatSettingUpdateAsync("allowAIRephrase", if var532 then "Enabled" else "Disabled") then
 					AIRephraseSettingStore.setIsSettingEnabled(var532)
@@ -3136,12 +3139,12 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.AIRephraseSelector.IndexChanged:connect(if var527 then throttleFunctionCallModule(var526, var529) else var529)
 		elseif var527 then
 			local var530 = nil
-			gameSettingsTab.AIRephraseSelector.IndexChanged:connect(function(p92) --[[ line: 3287 ]]
+			gameSettingsTab.AIRephraseSelector.IndexChanged:connect(function(p92) --[[ line: 3291 ]]
 				-- upvalues: var530 (write), var526 (ref), var528 (write), textChatService (copy), AIRephraseSettingStore (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 				if var530 then
 					task.cancel(var530)
 				end
-				var530 = task.delay(var526, function() --[[ line: 3291 ]]
+				var530 = task.delay(var526, function() --[[ line: 3295 ]]
 					-- upvalues: var530 (copy), p92 (ref), var528 (copy), textChatService (copy), AIRephraseSettingStore (copy), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 					var530 = nil
 					
@@ -3149,7 +3152,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						return
 					end
 					local var533 = p92 == 2
-					task.spawn(function() --[[ line: 3270 ]]
+					task.spawn(function() --[[ line: 3274 ]]
 						-- upvalues: textChatService (copy), var533 (ref), AIRephraseSettingStore (copy), var528 (copy), p92 (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 						if textChatService:OnUserChatSettingUpdateAsync("allowAIRephrase", if var533 then "Enabled" else "Disabled") then
 							AIRephraseSettingStore.setIsSettingEnabled(var533)
@@ -3167,7 +3170,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local function createChatSummariesSettingOptions() --[[ line: 3304 ]]
+	local function createChatSummariesSettingOptions() --[[ line: 3308 ]]
 		-- upvalues: robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), corePackagesService (copy), getFIntDebounceChatSummariesSettingDelayModule (copy), signalsModule (copy), textChatService (copy), reportSettingsChangeForAnalytics (copy)
 		local var534, var535, var536 = utilityModule:AddNewRow(gameSettingsTab, robloxTranslatorModule:FormatByKey("CoreScripts.InGameMenu.GameSettings.ChatSummaries"), "Selector", {
 			robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.Off"),
@@ -3182,7 +3185,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local var538 = getFIntDebounceChatSummariesSettingDelayModule()
 		local var539 = var538 > 0
 		local var540 = if chatSummariesSettingStore.getIsSettingEnabled(false) then 2 else 1
-		gameSettingsTab.ChatSummariesDisposeEffect = signalsModule.createEffect(function(p93) --[[ line: 3330 ]]
+		gameSettingsTab.ChatSummariesDisposeEffect = signalsModule.createEffect(function(p93) --[[ line: 3334 ]]
 			-- upvalues: gameSettingsTab (copy), chatSummariesSettingStore (ref), var540 (write)
 			gameSettingsTab.ChatSummariesFrame.Visible = chatSummariesSettingStore.getIsSettingVisible(p93)
 			local var543 = if chatSummariesSettingStore.getIsSettingEnabled(p93) then 2 else 1
@@ -3193,13 +3196,13 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end)
 		
-		local var541 = function(p94) --[[ line: 3341 ]]
+		local var541 = function(p94) --[[ line: 3345 ]]
 			-- upvalues: var540 (write), textChatService (copy), chatSummariesSettingStore (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 			if p94 == var540 then
 				return
 			end
 			local var544 = p94 == 2
-			task.spawn(function() --[[ line: 3347 ]]
+			task.spawn(function() --[[ line: 3351 ]]
 				-- upvalues: textChatService (copy), var544 (ref), chatSummariesSettingStore (copy), var540 (copy), p94 (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 				if textChatService:OnUserChatSettingUpdateAsync("AllowThirdPartySummary", if var544 then "Enabled" else "Disabled") then
 					chatSummariesSettingStore.setIsSettingEnabled(var544)
@@ -3214,12 +3217,12 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		
 		if var539 then
 			local var542 = nil
-			gameSettingsTab.ChatSummariesSelector.IndexChanged:connect(function(p95) --[[ line: 3363 ]]
+			gameSettingsTab.ChatSummariesSelector.IndexChanged:connect(function(p95) --[[ line: 3367 ]]
 				-- upvalues: var542 (write), var538 (ref), var540 (write), textChatService (copy), chatSummariesSettingStore (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 				if var542 then
 					task.cancel(var542)
 				end
-				var542 = task.delay(var538, function() --[[ line: 3367 ]]
+				var542 = task.delay(var538, function() --[[ line: 3371 ]]
 					-- upvalues: var542 (copy), p95 (ref), var540 (copy), textChatService (copy), chatSummariesSettingStore (copy), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 					var542 = nil
 					
@@ -3227,7 +3230,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						return
 					end
 					local var545 = p95 == 2
-					task.spawn(function() --[[ line: 3347 ]]
+					task.spawn(function() --[[ line: 3351 ]]
 						-- upvalues: textChatService (copy), var545 (ref), chatSummariesSettingStore (copy), var540 (copy), p95 (ref), reportSettingsChangeForAnalytics (copy), gameSettingsTab (copy)
 						if textChatService:OnUserChatSettingUpdateAsync("AllowThirdPartySummary", if var545 then "Enabled" else "Disabled") then
 							chatSummariesSettingStore.setIsSettingEnabled(var545)
@@ -3245,7 +3248,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local function createChatNotificationsSettingOptions() --[[ line: 3377 ]]
+	local function createChatNotificationsSettingOptions() --[[ line: 3381 ]]
 		-- upvalues: corePackagesService (copy), robloxTranslatorModule (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy)
 		local toastNotificationModule = require(corePackagesService.Workspace.Packages.ToastNotification)
 		local default = toastNotificationModule.ToastNotificationSnoozeManager.default
@@ -3259,7 +3262,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local var549 = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.On")
 		local var550 = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.Off")
 		
-		local function _() --[[ line: 3395 | named "getSelectorIndex" ]]
+		local function _() --[[ line: 3399 | named "getSelectorIndex" ]]
 			-- upvalues: default (ref), notificationTypeEnum (ref)
 			return if default:isSnoozedNotificationType(notificationTypeEnum.ChatNewMessage) then 1 else 2
 		end
@@ -3270,7 +3273,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		_ = var553
 		gameSettingsTab.ChatNotificationsSelector = var554
 		gameSettingsTab.ChatNotificationsFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.ChatNotificationsFrame
-		gameSettingsTab.ChatNotificationsSelector.IndexChanged:connect(function(p96) --[[ line: 3410 ]]
+		gameSettingsTab.ChatNotificationsSelector.IndexChanged:connect(function(p96) --[[ line: 3414 ]]
 			-- upvalues: var551 (write), default (ref), notificationGroups (ref), reportSettingsChangeForAnalytics (copy)
 			if p96 == var551 then return end
 			local var555 = var551 == 2
@@ -3291,7 +3294,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 			reportSettingsChangeForAnalytics("chat_notifications", var555, var556)
 		end)
-		notificationSnoozedSignal:connect(function(p97) --[[ line: 3436 ]]
+		notificationSnoozedSignal:connect(function(p97) --[[ line: 3440 ]]
 			-- upvalues: notificationTypeEnum (ref), snoozeActionEnum (ref), gameSettingsTab (copy), var551 (write)
 			if p97.notificationType ~= notificationTypeEnum.ChatNewMessage then return end
 			local var557 = if p97.actionType == snoozeActionEnum.Mute then 1 else 2
@@ -3301,7 +3304,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.ChatNotificationsSelector:SetSelectionIndex(var557)
 			end
 		end)
-		gameSettingsTab.Displayed.Event:Connect(function() --[[ line: 3451 ]]
+		gameSettingsTab.Displayed.Event:Connect(function() --[[ line: 3455 ]]
 			-- upvalues: default (ref), notificationTypeEnum (ref), t (ref), gameSettingsTab (copy), var551 (write)
 			local var558 = if default:isSnoozedNotificationType(notificationTypeEnum.ChatNewMessage) then t.Off else t.On
 			
@@ -3312,7 +3315,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createCameraDeviceOptions() --[[ line: 3463 ]]
+	local function createCameraDeviceOptions() --[[ line: 3467 ]]
 		-- upvalues: gameSettingsTab (ref), var87 (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), name (copy), userGameSettingsService (copy), reportSettingsChangeForAnalytics (copy)
 		local cameraDeviceIndex = gameSettingsTab.CameraDeviceIndex or 1
 		local cameraDeviceNames = gameSettingsTab.CameraDeviceNames or {}
@@ -3327,7 +3330,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			Guid = if cameraDeviceIndex > 0 then cameraDeviceGuids[cameraDeviceIndex] else nil
 		}
 		gameSettingsTab.prevCameraDeviceName = gameSettingsTab.CameraDeviceInfo.Name
-		gameSettingsTab.CameraDeviceSelector.IndexChanged:connect(function(p98) --[[ line: 3480 ]]
+		gameSettingsTab.CameraDeviceSelector.IndexChanged:connect(function(p98) --[[ line: 3484 ]]
 			-- upvalues: gameSettingsTab (copy), name (copy), userGameSettingsService (copy), reportSettingsChangeForAnalytics (copy)
 			if gameSettingsTab.CameraDeviceInfo.Name == gameSettingsTab.CameraDeviceNames[p98] and gameSettingsTab.CameraDeviceInfo.Guid == gameSettingsTab.CameraDeviceGuids[p98] then
 				return
@@ -3344,9 +3347,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function updateAudioDevices(p99) --[[ line: 3505 ]]
+	local function updateAudioDevices(p99) --[[ line: 3509 ]]
 		-- upvalues: soundService (copy), var20 (copy), gameSettingsTab (ref), getFFlagVoiceChatUILoggingModule (copy), name (copy), createDeviceOptions (ref)
-		local ok, status, var565, var566 = pcall(function() --[[ line: 3506 ]]
+		local ok, status, var565, var566 = pcall(function() --[[ line: 3510 ]]
 			-- upvalues: p99 (ref), soundService (copy)
 			return if p99 == "Input" then soundService:GetInputDevices() else soundService:GetOutputDevices()
 		end)
@@ -3373,12 +3376,12 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		createDeviceOptions(p99)
 	end
 	
-	local function updateVoiceChatDevices(p100) --[[ line: 3538 ]]
+	local function updateVoiceChatDevices(p100) --[[ line: 3542 ]]
 		-- upvalues: getFFlagVoiceChatUILoggingModule (copy), name (copy), soundService (copy), var20 (copy), gameSettingsTab (ref), createDeviceOptions (ref)
 		if p100 ~= "Input" and p100 ~= "Output" and getFFlagVoiceChatUILoggingModule() then
 			name:warning("{} is not supported in VoiceChat devices", p100)
 		end
-		local ok, status, var567, var568 = pcall(function() --[[ line: 3545 ]]
+		local ok, status, var567, var568 = pcall(function() --[[ line: 3549 ]]
 			-- upvalues: p100 (ref), soundService (copy)
 			return if p100 == "Input" then soundService:GetInputDevices() else soundService:GetOutputDevices()
 		end)
@@ -3416,7 +3419,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local function updateCameraDevices() --[[ line: 3597 ]]
+	local function updateCameraDevices() --[[ line: 3601 ]]
 		-- upvalues: videoCaptureService (copy), var86 (copy), userGameSettingsService (copy), gameSettingsTab (ref), createCameraDeviceOptions (ref)
 		local cameraDevices = videoCaptureService:GetCameraDevices()
 		local t = {}
@@ -3447,7 +3450,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	local var161 = nil
 	local var162 = nil
 	
-	local function updateAudioOptions() --[[ line: 3627 ]]
+	local function updateAudioOptions() --[[ line: 3631 ]]
 		-- upvalues: gameSettingsTab (ref), updateVoiceChatDevices (ref), getFFlagEnableCrossExpVoice (copy), default_3 (copy), updateAudioDevices (ref)
 		if gameSettingsTab.VoiceChatOptionsEnabled then
 			updateVoiceChatDevices("Input")
@@ -3460,10 +3463,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		updateAudioDevices("Output")
 	end
 	
-	local _ = function() --[[ line: 3639 | named "setupDeviceChangedListener" ]]
+	local _ = function() --[[ line: 3643 | named "setupDeviceChangedListener" ]]
 		-- upvalues: soundService (copy), var161 (write), gameSettingsTab (ref), updateAudioOptions (ref)
 		if soundService.DeviceListChanged then
-			var161 = soundService.DeviceListChanged:Connect(function() --[[ line: 3641 ]]
+			var161 = soundService.DeviceListChanged:Connect(function() --[[ line: 3645 ]]
 				-- upvalues: gameSettingsTab (copy), updateAudioOptions (copy)
 				if gameSettingsTab.PageOpen then
 					updateAudioOptions()
@@ -3472,10 +3475,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 3649 | named "setupVideoCameraDeviceChangedListener" ]]
+	local _ = function() --[[ line: 3653 | named "setupVideoCameraDeviceChangedListener" ]]
 		-- upvalues: videoCaptureService (copy), var162 (write), gameSettingsTab (ref), updateCameraDevices (ref)
 		if videoCaptureService.DevicesChanged then
-			var162 = videoCaptureService.DevicesChanged:Connect(function() --[[ line: 3651 ]]
+			var162 = videoCaptureService.DevicesChanged:Connect(function() --[[ line: 3655 ]]
 				-- upvalues: gameSettingsTab (copy), updateCameraDevices (copy)
 				if gameSettingsTab.PageOpen then
 					updateCameraDevices()
@@ -3484,14 +3487,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 3659 | named "teardownDeviceChangedListener" ]]
+	local _ = function() --[[ line: 3663 | named "teardownDeviceChangedListener" ]]
 		-- upvalues: soundService (copy), var161 (write)
 		if soundService.DeviceListChanged and var161 then
 			var161:Disconnect()
 		end
 	end
 	
-	local _ = function() --[[ line: 3665 | named "teardownVideoCameraDeviceChangedListener" ]]
+	local _ = function() --[[ line: 3669 | named "teardownVideoCameraDeviceChangedListener" ]]
 		-- upvalues: videoCaptureService (copy), var162 (write)
 		if videoCaptureService.DevicesChanged and var162 then
 			var162:Disconnect()
@@ -3499,14 +3502,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local _ = function() --[[ line: 3673 | named "checkVoiceChatOptions" ]]
+	local _ = function() --[[ line: 3677 | named "checkVoiceChatOptions" ]]
 		-- upvalues: default_2 (copy), gameSettingsTab (ref)
 		if default_2:VoiceChatAvailable() then
 			gameSettingsTab.VoiceChatOptionsEnabled = true
 		end
 	end
 	
-	local _ = function() --[[ line: 3679 | named "updateInputDeviceVisibility" ]]
+	local _ = function() --[[ line: 3683 | named "updateInputDeviceVisibility" ]]
 		-- upvalues: gameSettingsTab (ref), getFFlagEnableCrossExpVoice (copy), default_3 (copy)
 		local voiceChatOptionsEnabled = gameSettingsTab.VoiceChatOptionsEnabled or getFFlagEnableCrossExpVoice() and default_3:getIsConnected()
 		
@@ -3518,7 +3521,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	local var164 = false
 	local var165 = if differentiateVoiceSelectorSystemAndUser then false else nil
 	
-	local function createVoiceChatSelector() --[[ line: 3692 ]]
+	local function createVoiceChatSelector() --[[ line: 3696 ]]
 		-- upvalues: voiceSelectorAvailableAfterFae (copy), gameSettingsTab (ref), var20 (copy), default_2 (copy), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), differentiateVoiceSelectorSystemAndUser (copy), getFIntDebounceDisconnectButtonDelayModule (copy), var165 (write), fFlagVoiceRewarmTelemetry (copy), constantsModule_1 (copy), voiceSelectorIgnoreFailedStateDisconnect (copy), var164 (write), throttleFunctionCallModule (copy), voiceChatSelectorReconnectFocus2AEGIS2 (copy), guiService (copy), debounceVoiceSelectorIndexChange (copy), deferProgrammaticChange (copy)
 		if voiceSelectorAvailableAfterFae and gameSettingsTab.VoiceConnectDisconnectFrame and gameSettingsTab.VoiceConnectDisconnectSelector then return end
 		local var574 = var20:Format("Feature.GameDetails.Label.VoiceChat")
@@ -3534,7 +3537,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local service = default_2:getService()
 		
 		if service and not differentiateVoiceSelectorSystemAndUser then
-			service.StateChanged:Connect(function(p101, p102) --[[ line: 3711 ]]
+			service.StateChanged:Connect(function(p101, p102) --[[ line: 3715 ]]
 				-- upvalues: voiceSelectorAvailableAfterFae (copy), gameSettingsTab (copy), default_2 (copy)
 				if voiceSelectorAvailableAfterFae then
 					if p101 == p102 then return end
@@ -3560,7 +3563,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		local var583 = var577
 		local var584 = getFIntDebounceDisconnectButtonDelayModule()
 		
-		local var585 = function(p103) --[[ line: 3745 ]]
+		local var585 = function(p103) --[[ line: 3749 ]]
 			-- upvalues: var583 (write), differentiateVoiceSelectorSystemAndUser (copy), var165 (copy), fFlagVoiceRewarmTelemetry (copy), default_2 (copy), constantsModule_1 (copy), voiceSelectorIgnoreFailedStateDisconnect (copy), var164 (copy), gameSettingsTab (copy)
 			if p103 == var583 then return end
 			var583 = p103
@@ -3587,7 +3590,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				default_2:Leave()
 			end
 			if var164 then
-				task.spawn(function() --[[ line: 3789 ]]
+				task.spawn(function() --[[ line: 3793 ]]
 					-- upvalues: p103 (ref), gameSettingsTab (copy)
 					task.wait(0.5)
 					
@@ -3601,14 +3604,14 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.VoiceConnectDisconnectSelector.IndexChanged:connect(if var584 > 0 then throttleFunctionCallModule(var584, var585) else var585)
 		
 		if voiceChatSelectorReconnectFocus2AEGIS2 then
-			gameSettingsTab.VoiceConnectDisconnectFrame.SelectionChanged:Connect(function(_, p104, p105) --[[ line: 3803 ]]
+			gameSettingsTab.VoiceConnectDisconnectFrame.SelectionChanged:Connect(function(_, p104, p105) --[[ line: 3807 ]]
 				-- upvalues: var574 (ref), gameSettingsTab (copy), guiService (copy)
 				if p105 and p104 and (p104.Parent and p104.Parent.Name == var574 .. "Frame") and (p105.Name == "ImageButton" and gameSettingsTab.Active) then
 					guiService.SelectedCoreObject = p104
 				end
 			end)
 		end
-		default_2:subscribe("OnStateChanged", function(_, p106) --[[ line: 3810 ]]
+		default_2:subscribe("OnStateChanged", function(_, p106) --[[ line: 3814 ]]
 			-- upvalues: differentiateVoiceSelectorSystemAndUser (copy), var165 (copy), debounceVoiceSelectorIndexChange (copy), gameSettingsTab (copy), deferProgrammaticChange (copy)
 			if differentiateVoiceSelectorSystemAndUser then
 				var165 = true
@@ -3630,7 +3633,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 			if differentiateVoiceSelectorSystemAndUser then
 				if deferProgrammaticChange then
-					task.defer(function() --[[ line: 3842 ]]
+					task.defer(function() --[[ line: 3846 ]]
 						-- upvalues: var165 (copy)
 						var165 = false
 					end)
@@ -3640,9 +3643,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				var165 = false
 			end
 		end)
-		default_2:subscribe("OnRequestMicPermissionRejected", function() --[[ line: 3851 ]]
+		default_2:subscribe("OnRequestMicPermissionRejected", function() --[[ line: 3855 ]]
 			-- upvalues: var164 (copy), differentiateVoiceSelectorSystemAndUser (copy), var165 (copy), gameSettingsTab (copy), deferProgrammaticChange (copy)
-			task.spawn(function() --[[ line: 3852 ]]
+			task.spawn(function() --[[ line: 3856 ]]
 				-- upvalues: var164 (copy), differentiateVoiceSelectorSystemAndUser (copy), var165 (copy), gameSettingsTab (copy), deferProgrammaticChange (copy)
 				task.wait(0.5)
 				var164 = true
@@ -3654,7 +3657,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				
 				if differentiateVoiceSelectorSystemAndUser then
 					if deferProgrammaticChange then
-						task.defer(function() --[[ line: 3861 ]]
+						task.defer(function() --[[ line: 3865 ]]
 							-- upvalues: var165 (copy)
 							var165 = false
 						end)
@@ -3667,7 +3670,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createVoiceConnectDisconnect() --[[ line: 3872 ]]
+	local function createVoiceConnectDisconnect() --[[ line: 3876 ]]
 		-- upvalues: default_2 (copy), var20 (copy), getFIntDebounceDisconnectButtonDelayModule (copy), fFlagVoiceRewarmTelemetry (copy), constantsModule_1 (copy), utilityModule (copy), throttleFunctionCallModule (copy), gameSettingsTab (ref), SETTINGS_MENU_LAYOUT_ORDER (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy)
 		if default_2:IsSeamlessVoice() and not default_2.isShowingFTUX then
 			local _ = nil
@@ -3680,12 +3683,12 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			local var594 = getFIntDebounceDisconnectButtonDelayModule()
 			local var595 = var594 > 0
 			
-			local var596 = function() --[[ line: 3882 ]]
+			local var596 = function() --[[ line: 3886 ]]
 				-- upvalues: default_2 (copy), fFlagVoiceRewarmTelemetry (copy), constantsModule_1 (copy)
 				local var610
 				if default_2:getService() then
 					var610 = nil
-					var610 = default_2:getService().StateChanged:Connect(function(_, p107) --[[ line: 3886 ]]
+					var610 = default_2:getService().StateChanged:Connect(function(_, p107) --[[ line: 3890 ]]
 						-- upvalues: fFlagVoiceRewarmTelemetry (copy), default_2 (copy), var610 (write)
 						if p107 == Enum.VoiceChatState.Joined then
 							if fFlagVoiceRewarmTelemetry then
@@ -3707,7 +3710,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				default_2:JoinVoice()
 			end
 			
-			local var597 = function() --[[ line: 3919 ]]
+			local var597 = function() --[[ line: 3923 ]]
 				-- upvalues: default_2 (copy), constantsModule_1 (copy)
 				default_2.Analytics:reportLeaveVoiceButtonEvent("clicked", default_2:GetConnectDisconnectButtonAnalyticsData(true))
 				default_2.pendingDisconnectReason = constantsModule_1.VOICE_DISCONNECT_REASON.USER_DISCONNECT
@@ -3759,7 +3762,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	local function createVRComfortSettingOptions() --[[ line: 3982 ]]
+	local function createVRComfortSettingOptions() --[[ line: 3986 ]]
 		-- upvalues: var20 (copy), gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 		local enumItems = Enum.VRComfortSetting:GetEnumItems()
 		local t = {
@@ -3810,7 +3813,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		gameSettingsTab.VRThirdPersonFixedCamEnabledSelector = var632
 		gameSettingsTab.VRThirdPersonFixedCamEnabledFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.VRThirdPersonFixedCamEnabledFrame
 		
-		local var633 = function(p108) --[[ line: 4048 ]]
+		local var633 = function(p108) --[[ line: 4052 ]]
 			-- upvalues: gameSettingsTab (copy)
 			if p108 == Enum.VRComfortSetting.Custom then
 				gameSettingsTab.VRVignetteEnabledSelector:SetZIndex(2)
@@ -3836,32 +3839,32 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.VRThirdPersonFixedCamEnabledSelector:SetInteractable(false)
 		end
 		
-		gameSettingsTab.VRComfortSettingSelector.IndexChanged:connect(function(p109) --[[ line: 4072 ]]
+		gameSettingsTab.VRComfortSettingSelector.IndexChanged:connect(function(p109) --[[ line: 4076 ]]
 			-- upvalues: enumItems (ref), gameSettings (copy), var633 (ref)
 			local var634 = enumItems[p109]
 			gameSettings.VRComfortSetting = var634
 			var633(var634)
 		end)
 		var633(gameSettings.VRComfortSetting)
-		gameSettingsTab.VRVignetteEnabledSelector.IndexChanged:connect(function(p110) --[[ line: 4079 ]]
+		gameSettingsTab.VRVignetteEnabledSelector.IndexChanged:connect(function(p110) --[[ line: 4083 ]]
 			-- upvalues: gameSettings (copy)
 			if gameSettings.VRComfortSetting == Enum.VRComfortSetting.Custom then
 				gameSettings.VignetteEnabledCustomOption = p110 == 1
 			end
 		end)
-		gameSettingsTab.VRSteppedRotationEnabledSelector.IndexChanged:connect(function(p111) --[[ line: 4085 ]]
+		gameSettingsTab.VRSteppedRotationEnabledSelector.IndexChanged:connect(function(p111) --[[ line: 4089 ]]
 			-- upvalues: gameSettings (copy)
 			if gameSettings.VRComfortSetting == Enum.VRComfortSetting.Custom then
 				gameSettings.VRSmoothRotationEnabledCustomOption = p111 == 2
 			end
 		end)
-		gameSettingsTab.VRThirdPersonFixedCamEnabledSelector.IndexChanged:connect(function(p112) --[[ line: 4091 ]]
+		gameSettingsTab.VRThirdPersonFixedCamEnabledSelector.IndexChanged:connect(function(p112) --[[ line: 4095 ]]
 			-- upvalues: gameSettings (copy)
 			if gameSettings.VRComfortSetting == Enum.VRComfortSetting.Custom then
 				gameSettings.VRThirdPersonFollowCamEnabledCustomOption = p112 == 2
 			end
 		end)
-		gameSettings:GetPropertyChangedSignal("VRComfortSetting"):Connect(function() --[[ line: 4097 ]]
+		gameSettings:GetPropertyChangedSignal("VRComfortSetting"):Connect(function() --[[ line: 4101 ]]
 			-- upvalues: enumItems (ref), gameSettings (copy), gameSettingsTab (copy)
 			local index = table.find(enumItems, gameSettings.VRComfortSetting)
 			
@@ -3869,7 +3872,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.VRComfortSettingSelector:SetSelectionIndex(index)
 			end
 		end)
-		gameSettings:GetPropertyChangedSignal("VignetteEnabled"):Connect(function() --[[ line: 4104 ]]
+		gameSettings:GetPropertyChangedSignal("VignetteEnabled"):Connect(function() --[[ line: 4108 ]]
 			-- upvalues: gameSettings (copy), gameSettingsTab (copy)
 			local var636 = if gameSettings.VignetteEnabled then 1 else 2
 			
@@ -3877,7 +3880,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.VRVignetteEnabledSelector:SetSelectionIndex(var636)
 			end
 		end)
-		gameSettings:GetPropertyChangedSignal("VRSmoothRotationEnabled"):Connect(function() --[[ line: 4111 ]]
+		gameSettings:GetPropertyChangedSignal("VRSmoothRotationEnabled"):Connect(function() --[[ line: 4115 ]]
 			-- upvalues: gameSettings (copy), gameSettingsTab (copy)
 			local var637 = if gameSettings.VRSmoothRotationEnabled then 2 else 1
 			
@@ -3885,7 +3888,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.VRSteppedRotationEnabledSelector:SetSelectionIndex(var637)
 			end
 		end)
-		gameSettings:GetPropertyChangedSignal("VRThirdPersonFollowCamEnabled"):Connect(function() --[[ line: 4118 ]]
+		gameSettings:GetPropertyChangedSignal("VRThirdPersonFollowCamEnabled"):Connect(function() --[[ line: 4122 ]]
 			-- upvalues: gameSettings (copy), gameSettingsTab (copy)
 			local var638 = if gameSettings.VRThirdPersonFollowCamEnabled then 2 else 1
 			
@@ -3895,7 +3898,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	
-	local function createVRSafetyBubbleModeOptions() --[[ line: 4126 ]]
+	local function createVRSafetyBubbleModeOptions() --[[ line: 4130 ]]
 		-- upvalues: var20 (copy), gameSettings (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy)
 		local enumItems = Enum.VRSafetyBubbleMode:GetEnumItems()
 		local t = {
@@ -3911,18 +3914,18 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			t_1[i] = var20:Format(t[tostring(v)])
 		end
 		local index = table.find(enumItems, gameSettings.VRSafetyBubbleMode)
-		task.defer(function() --[[ line: 4142 ]]
+		task.defer(function() --[[ line: 4146 ]]
 			-- upvalues: gameSettingsTab (copy), utilityModule (copy), var20 (copy), t_1 (ref), index (ref), SETTINGS_MENU_LAYOUT_ORDER (copy), enumItems (ref), gameSettings (copy)
 			local var643, var644, var645 = utilityModule:AddNewRow(gameSettingsTab, var20:Format("CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeTitle"), "DropDown", t_1, index, nil, var20:Format("CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeDescription"))
 			gameSettingsTab.VRSafetyBubbleModeFrame = var643
 			gameSettingsTab.VRSafetyBubbleModeLabel = var644
 			gameSettingsTab.VRSafetyBubbleModeSelector = var645
 			gameSettingsTab.VRSafetyBubbleModeFrame.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.VRSafetyBubbleModeFrame
-			gameSettingsTab.VRSafetyBubbleModeSelector.IndexChanged:connect(function(p113) --[[ line: 4155 ]]
+			gameSettingsTab.VRSafetyBubbleModeSelector.IndexChanged:connect(function(p113) --[[ line: 4159 ]]
 				-- upvalues: enumItems (copy), gameSettings (copy)
 				gameSettings.VRSafetyBubbleMode = enumItems[p113]
 			end)
-			gameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function() --[[ line: 4160 ]]
+			gameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function() --[[ line: 4164 ]]
 				-- upvalues: enumItems (copy), gameSettings (copy), gameSettingsTab (copy)
 				local index = table.find(enumItems, gameSettings.VRSafetyBubbleMode)
 				
@@ -3939,7 +3942,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	local var170 = nil
 	
 	if game:GetEngineFeature("VoiceChatSupported") and (getFFlagEnableVrVoiceConnectDisconnect() or (if isInExperienceUIVREnabled then not isSpatial() else true)) then
-		spawn(function() --[[ line: 4174 ]]
+		spawn(function() --[[ line: 4178 ]]
 			-- upvalues: getFFlagEnableVoiceUxUpdates (copy), hideVoiceChatSelectorForFaeAEGIS2 (copy), default_2 (copy), createVoiceChatSelector (ref), isVoiceFocused (copy), gameSettingsTab (ref), observeIsVoiceFocused (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), voiceVolumeControlsEligibility (copy), name (copy), voiceSelectorAvailableAfterFae (copy), getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), differentiateVoiceSelectorSystemAndUser (copy), deferProgrammaticChange (copy), var165 (write), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), createVoiceConnectDisconnect (ref), default_3 (copy), t_4 (copy), getFFlagVoiceChatUILoggingModule (copy)
 			if getFFlagEnableVoiceUxUpdates() and (not hideVoiceChatSelectorForFaeAEGIS2 and default_2:EligibleForFaeUpsell() or default_2:IsSeamlessVoice()) and default_2:verifyUniverseAndPlaceCanUseVoice() then
 				createVoiceChatSelector()
@@ -3947,7 +3950,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				if isVoiceFocused() and gameSettingsTab.VoiceConnectDisconnectFrame then
 					gameSettingsTab.VoiceConnectDisconnectFrame.Visible = false
 				end
-				observeIsVoiceFocused(function(p114) --[[ line: 4184 ]]
+				observeIsVoiceFocused(function(p114) --[[ line: 4188 ]]
 					-- upvalues: gameSettingsTab (copy)
 					if p114 then
 						if gameSettingsTab.VoiceConnectDisconnectFrame then
@@ -3960,7 +3963,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					end
 				end)
 			end
-			default_2:asyncInit():andThen(function() --[[ line: 4197 ]]
+			default_2:asyncInit():andThen(function() --[[ line: 4201 ]]
 				-- upvalues: default_2 (copy), gameSettingsTab (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), voiceVolumeControlsEligibility (copy), name (copy), observeIsVoiceFocused (copy), voiceSelectorAvailableAfterFae (copy), getFFlagEnableVoiceUxUpdates (copy), createVoiceChatSelector (copy), getFFlagEnableUniveralVoiceToastsModule (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), differentiateVoiceSelectorSystemAndUser (copy), deferProgrammaticChange (copy), var165 (copy), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy), createVoiceConnectDisconnect (copy), default_3 (copy), t_4 (copy)
 				VoiceChatService = default_2:getService()
 				
@@ -3968,9 +3971,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					gameSettingsTab.VoiceChatOptionsEnabled = true
 				end
 				if fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule and gameSettingsTab.VoiceChatVolumeFrame then
-					local function _(p115) --[[ line: 4201 | named "updateVoiceChatVolumeVisibility" ]]
+					local function _(p115) --[[ line: 4205 | named "updateVoiceChatVolumeVisibility" ]]
 						-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy), name (copy)
-						local ok, status = pcall(function() --[[ line: 4202 ]]
+						local ok, status = pcall(function() --[[ line: 4206 ]]
 							-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), p115 (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy)
 							local voiceChatService = game:GetService("VoiceChatService")
 							local service = default_2:getService()
@@ -3983,7 +3986,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					end
 					
 					local var647 = nil
-					local ok, status = pcall(function() --[[ line: 4202 ]]
+					local ok, status = pcall(function() --[[ line: 4206 ]]
 						-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), var647 (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy)
 						local voiceChatService = game:GetService("VoiceChatService")
 						local service = default_2:getService()
@@ -3994,10 +3997,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						name:debug("[GameSettings] updateVoiceChatVolumeVisibility ERROR:", status)
 					end
 					if voiceVolumeControlsSuppressInExperienceUiForPartyVoice and getFFlagEnableCrossExpVoice() and getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
-						observeIsVoiceFocused(function() --[[ line: 4230 ]]
+						observeIsVoiceFocused(function() --[[ line: 4234 ]]
 							-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy), name (copy)
 							local var652 = nil
-							local ok, status = pcall(function() --[[ line: 4202 ]]
+							local ok, status = pcall(function() --[[ line: 4206 ]]
 								-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), var652 (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy)
 								local voiceChatService = game:GetService("VoiceChatService")
 								local service = default_2:getService()
@@ -4010,9 +4013,9 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						end)
 					end
 					if voiceVolumeControlsFixSliderVisibilityOnEligibleGames then
-						default_2:subscribe("OnStateChanged", function(_, p116) --[[ line: 4235 ]]
+						default_2:subscribe("OnStateChanged", function(_, p116) --[[ line: 4239 ]]
 							-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy), name (copy)
-							local ok, status = pcall(function() --[[ line: 4202 ]]
+							local ok, status = pcall(function() --[[ line: 4206 ]]
 								-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), p116 (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy)
 								local voiceChatService = game:GetService("VoiceChatService")
 								local service = default_2:getService()
@@ -4027,10 +4030,10 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						local service = default_2:getService()
 						
 						if service then
-							service.StateChanged:Connect(function() --[[ line: 4241 ]]
+							service.StateChanged:Connect(function() --[[ line: 4245 ]]
 								-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy), name (copy)
 								local var653 = nil
-								local ok, status = pcall(function() --[[ line: 4202 ]]
+								local ok, status = pcall(function() --[[ line: 4206 ]]
 									-- upvalues: default_2 (copy), voiceVolumeControlsFixSliderVisibilityOnEligibleGames (copy), var653 (ref), voiceVolumeControlsSuppressInExperienceUiForPartyVoice (copy), getFFlagEnableCrossExpVoice (copy), getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), isVoiceFocused (copy), gameSettingsTab (copy), voiceVolumeControlsEligibility (copy)
 									local voiceChatService = game:GetService("VoiceChatService")
 									local service = default_2:getService()
@@ -4058,7 +4061,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 					if differentiateVoiceSelectorSystemAndUser and deferProgrammaticChange then
 						var165 = true
 						gameSettingsTab.VoiceConnectDisconnectSelector:SetSelectionIndex(2)
-						task.defer(function() --[[ line: 4279 ]]
+						task.defer(function() --[[ line: 4283 ]]
 							-- upvalues: var165 (copy)
 							var165 = false
 						end)
@@ -4076,7 +4079,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						
 						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
 							var649 = isVoiceFocused()
-							observeIsVoiceFocused(function(p117) --[[ line: 4294 ]]
+							observeIsVoiceFocused(function(p117) --[[ line: 4298 ]]
 								-- upvalues: var649 (write), gameSettingsTab (copy), default_2 (copy)
 								var649 = p117
 								
@@ -4110,7 +4113,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 							gameSettingsTab.VoiceDisconnectFrame.Visible = true
 						end
 					end
-					default_2.showVoiceUI.Event:Connect(function() --[[ line: 4327 ]]
+					default_2.showVoiceUI.Event:Connect(function() --[[ line: 4331 ]]
 						-- upvalues: getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), var649 (write), gameSettingsTab (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy)
 						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() and var649 then return end
 						gameSettingsTab.VoiceChatOptionsEnabled = true
@@ -4126,7 +4129,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 							gameSettingsTab.VoiceDisconnectFrame.Visible = true
 						end
 					end)
-					default_2.hideVoiceUI.Event:Connect(function() --[[ line: 4345 ]]
+					default_2.hideVoiceUI.Event:Connect(function() --[[ line: 4349 ]]
 						-- upvalues: getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice (copy), var649 (write), gameSettingsTab (copy), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy), getFFlagEnableConnectDisconnectInSettingsAndChromeModule (copy)
 						if getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() and var649 then return end
 						gameSettingsTab.VoiceChatOptionsEnabled = false
@@ -4143,7 +4146,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						end
 					end)
 				end
-			end):catch(function() --[[ line: 4365 ]]
+			end):catch(function() --[[ line: 4369 ]]
 				-- upvalues: getFFlagVoiceChatUILoggingModule (copy), name (copy), getFFlagEnableUniveralVoiceToastsModule (copy), default_2 (copy)
 				if getFFlagVoiceChatUILoggingModule() then
 					name:warning("Failed to init VoiceChatServiceManager")
@@ -4155,7 +4158,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end)
 	end
 	if getFFlagEnableCrossExpVoice() and (if isInExperienceUIVREnabled then not isSpatial() else true) then
-		local eventConnection = default_3.ExperienceJoined.Event:Connect(function() --[[ line: 4378 ]]
+		local eventConnection = default_3.ExperienceJoined.Event:Connect(function() --[[ line: 4382 ]]
 			-- upvalues: gameSettingsTab (ref), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy)
 			local voiceChatOptionsEnabled = gameSettingsTab.VoiceChatOptionsEnabled or getFFlagEnableCrossExpVoice() and default_3:getIsConnected()
 			
@@ -4163,7 +4166,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab[t_4.Input .. "DeviceFrame"].Visible = voiceChatOptionsEnabled
 			end
 		end)
-		local eventConnection_1 = default_3.ExperienceLeft.Event:Connect(function() --[[ line: 4381 ]]
+		local eventConnection_1 = default_3.ExperienceLeft.Event:Connect(function() --[[ line: 4385 ]]
 			-- upvalues: gameSettingsTab (ref), getFFlagEnableCrossExpVoice (copy), default_3 (copy), t_4 (copy)
 			local voiceChatOptionsEnabled = gameSettingsTab.VoiceChatOptionsEnabled or getFFlagEnableCrossExpVoice() and default_3:getIsConnected()
 			
@@ -4172,7 +4175,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			end
 		end)
 		
-		var170 = function() --[[ line: 4384 ]]
+		var170 = function() --[[ line: 4388 ]]
 			-- upvalues: eventConnection (write), eventConnection_1 (write)
 			if eventConnection then
 				eventConnection:Disconnect()
@@ -4187,7 +4190,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	gameSettingsTab.VideoOptionsEnabled = false
 	local var173 = nil
 	
-	local _ = function() --[[ line: 4398 ]]
+	local _ = function() --[[ line: 4402 ]]
 		-- upvalues: var173 (write)
 		if var173 then
 			var173:disconnect()
@@ -4196,20 +4199,20 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	end
 	
 	if getFFlagSelfViewCameraSettings() and (if isInExperienceUIVREnabled then not isSpatial() else true) then
-		local var174 = function(p118) --[[ line: 4406 ]]
+		local var174 = function(p118) --[[ line: 4410 ]]
 			-- upvalues: gameSettingsTab (ref)
 			gameSettingsTab.VideoOptionsEnabled = p118.hasCameraPermissions
 		end
 		
 		if isCamEnabledForUserAndPlaceModule() then
 			getCamMicPermissionsModule(var174, { default.Permissions.CAMERA_ACCESS }, true)
-			var173 = cameraDevicePermissionGrantedSignalModule:connect(function() --[[ line: 4422 ]]
+			var173 = cameraDevicePermissionGrantedSignalModule:connect(function() --[[ line: 4426 ]]
 				-- upvalues: gameSettingsTab (ref), updateCameraDevices (ref), videoCaptureService (copy), var162 (write)
 				gameSettingsTab.VideoOptionsEnabled = true
 				updateCameraDevices()
 				
 				if videoCaptureService.DevicesChanged then
-					var162 = videoCaptureService.DevicesChanged:Connect(function() --[[ line: 3651 ]]
+					var162 = videoCaptureService.DevicesChanged:Connect(function() --[[ line: 3655 ]]
 						-- upvalues: gameSettingsTab (copy), updateCameraDevices (copy)
 						if gameSettingsTab.PageOpen then
 							updateCameraDevices()
@@ -4223,7 +4226,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		createCameraModeOptions(not var83 and (userInputService.TouchEnabled or (userInputService.MouseEnabled or userInputService.KeyboardEnabled)))
 	end
 	local changedConnection
-	local _ = function() --[[ line: 4438 ]]
+	local _ = function() --[[ line: 4442 ]]
 		-- upvalues: gameSettings (copy), createGamepadOptions (ref)
 		if gameSettings.IsUsingGamepadCameraSensitivity then
 			createGamepadOptions()
@@ -4231,7 +4234,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			return
 		end
 		local var658 = nil
-		var658 = gameSettings:GetPropertyChangedSignal("IsUsingGamepadCameraSensitivity"):connect(function() --[[ line: 4444 ]]
+		var658 = gameSettings:GetPropertyChangedSignal("IsUsingGamepadCameraSensitivity"):connect(function() --[[ line: 4448 ]]
 			-- upvalues: gameSettings (copy), var658 (write), createGamepadOptions (copy)
 			if gameSettings.IsUsingGamepadCameraSensitivity then
 				if var658 then
@@ -4246,7 +4249,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		createMouseOptions()
 	elseif not userInputService.GamepadEnabled then
 		changedConnection = nil
-		changedConnection = userInputService.GamepadConnected:connect(function() --[[ line: 4462 ]]
+		changedConnection = userInputService.GamepadConnected:connect(function() --[[ line: 4466 ]]
 			-- upvalues: changedConnection (write), gameSettings (copy), createGamepadOptions (ref)
 			if changedConnection then
 				changedConnection:disconnect()
@@ -4257,7 +4260,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				return
 			end
 			local var659 = nil
-			var659 = gameSettings:GetPropertyChangedSignal("IsUsingGamepadCameraSensitivity"):connect(function() --[[ line: 4444 ]]
+			var659 = gameSettings:GetPropertyChangedSignal("IsUsingGamepadCameraSensitivity"):connect(function() --[[ line: 4448 ]]
 				-- upvalues: gameSettings (copy), var659 (write), createGamepadOptions (copy)
 				if gameSettings.IsUsingGamepadCameraSensitivity then
 					if var659 then
@@ -4271,7 +4274,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		createGamepadOptions()
 	else
 		changedConnection = nil
-		changedConnection = gameSettings:GetPropertyChangedSignal("IsUsingGamepadCameraSensitivity"):connect(function() --[[ line: 4444 ]]
+		changedConnection = gameSettings:GetPropertyChangedSignal("IsUsingGamepadCameraSensitivity"):connect(function() --[[ line: 4448 ]]
 			-- upvalues: gameSettings (copy), changedConnection (write), createGamepadOptions (ref)
 			if gameSettings.IsUsingGamepadCameraSensitivity then
 				if changedConnection then
@@ -4286,7 +4289,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			createCameraInvertedOptions()
 		else
 			changedConnection = nil
-			changedConnection = gameSettings.Changed:connect(function(p119) --[[ line: 4476 ]]
+			changedConnection = gameSettings.Changed:connect(function(p119) --[[ line: 4480 ]]
 				-- upvalues: gameSettings (copy), changedConnection (write), createCameraInvertedOptions (ref)
 				if p119 == "IsUsingCameraYInverted" and gameSettings.IsUsingCameraYInverted then
 					changedConnection:disconnect()
@@ -4306,7 +4309,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				createCameraInvertedOptions()
 			else
 				changedConnection = nil
-				changedConnection = gameSettings.Changed:connect(function(p120) --[[ line: 4505 ]]
+				changedConnection = gameSettings.Changed:connect(function(p120) --[[ line: 4509 ]]
 					-- upvalues: gameSettings (copy), changedConnection (write), createCameraInvertedOptions (ref)
 					if p120 == "IsUsingCameraYInverted" and gameSettings.IsUsingCameraYInverted then
 						changedConnection:disconnect()
@@ -4325,7 +4328,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	end
 	if fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry and fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule then
 		changedConnection = false
-		gameSettingsTab.Displayed.Event:Connect(function() --[[ line: 4528 ]]
+		gameSettingsTab.Displayed.Event:Connect(function() --[[ line: 4532 ]]
 			-- upvalues: changedConnection (write), gameSettingsTab (ref), default_2 (copy)
 			changedConnection = true
 			
@@ -4333,11 +4336,11 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				default_2:RecordGameSettingsOpened()
 			end
 		end)
-		gameSettingsTab.Hidden.Event:Connect(function() --[[ line: 4535 ]]
+		gameSettingsTab.Hidden.Event:Connect(function() --[[ line: 4539 ]]
 			-- upvalues: changedConnection (write)
 			changedConnection = false
 		end)
-		gameSettingsTab.VoiceChatVolumeFrame:GetPropertyChangedSignal("Visible"):Connect(function() --[[ line: 4539 ]]
+		gameSettingsTab.VoiceChatVolumeFrame:GetPropertyChangedSignal("Visible"):Connect(function() --[[ line: 4543 ]]
 			-- upvalues: gameSettingsTab (ref), changedConnection (write), default_2 (copy)
 			if gameSettingsTab.VoiceChatVolumeFrame.Visible and changedConnection then
 				default_2:RecordGameSettingsOpened()
@@ -4373,7 +4376,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		createOverscanOption()
 	end
 	if showAntiHarassmentSettings and fFlagBadgeVisibilitySettingEnabled then
-		spawn(function() --[[ line: 3164 ]]
+		spawn(function() --[[ line: 3168 ]]
 			-- upvalues: playerPermissionsModule (copy), localPlayer (copy), robloxTranslatorModule (copy), updateVisibilitySettingsCopy (copy), gameSettingsTab (ref), utilityModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), gameSettings (copy)
 			local var513, var514, var515 = utilityModule:AddNewRow(gameSettingsTab, if updateVisibilitySettingsCopy then robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.MyBadges") else robloxTranslatorModule:FormatByKey("Feature.SettingsHub.GameSettings.DisplayBadges"), "Selector", {
 				robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Hide"),
@@ -4383,7 +4386,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			gameSettingsTab.badgeVisibleFrame = var514
 			gameSettingsTab.badgeVisibleSelector = var515
 			gameSettingsTab.badgeVisibleRow.LayoutOrder = SETTINGS_MENU_LAYOUT_ORDER.BadgeVisibilityFrame
-			gameSettingsTab.badgeVisibleSelector.IndexChanged:connect(function(p121) --[[ line: 3178 ]]
+			gameSettingsTab.badgeVisibleSelector.IndexChanged:connect(function(p121) --[[ line: 3182 ]]
 				-- upvalues: gameSettings (copy), playerPermissionsModule (copy), localPlayer (copy)
 				gameSettings.BadgeVisible = p121 == 2
 				playerPermissionsModule.SetPlayerInExperienceNameEnabled(localPlayer, p121 == 1)
@@ -4403,12 +4406,12 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		createChatNotificationsSettingOptions()
 	end
 	createDeveloperConsoleOption()
-	getHasGuiHidingPermissionModule(runService:IsStudio(), localPlayer, playerPermissionsModule):andThen(function(p123) --[[ line: 4604 ]]
+	getHasGuiHidingPermissionModule(runService:IsStudio(), localPlayer, playerPermissionsModule):andThen(function(p123) --[[ line: 4608 ]]
 		-- upvalues: createUiToggleOptions (ref)
 		if p123 then
 			createUiToggleOptions()
 		end
-	end):catch(function(p122) --[[ line: 4609 ]]
+	end):catch(function(p122) --[[ line: 4613 ]]
 		warn(p122)
 	end)
 	var125 = true
@@ -4472,13 +4475,13 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 	if game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") then
 		gameSettingsTab.FeedbackEntryPointEnabled = true
 	end
-	local _ = function() --[[ line: 4678 | named "staticFeedbackEntryPointChecksPassed" ]]
+	local _ = function() --[[ line: 4682 | named "staticFeedbackEntryPointChecksPassed" ]]
 		-- upvalues: runService (copy), enableTFFeedbackModeEntryCheck (copy), var83 (copy)
 		return if runService:IsStudio() then false elseif game:GetEngineFeature("CaptureModeEnabled") == false then false else enableTFFeedbackModeEntryCheck and var83
 	end
 	
-	function gameSettingsTab.OpenSettingsPage() --[[ line: 4694 ]]
-		-- upvalues: gameSettingsTab (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), getFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), experienceLanguageSwitcherInitializerModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy), updateAudioOptions (ref), soundService (copy), var161 (write), gameSettings (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), getFFlagSelfViewCameraSettings (copy), updateCameraDevices (ref), videoCaptureService (copy), var162 (write), updateUiToggleSelection (ref), var17 (copy), var62 (copy), themeModule (copy), var61 (copy), getLastValueChangerFrame (copy), fFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy)
+	function gameSettingsTab.OpenSettingsPage() --[[ line: 4698 ]]
+		-- upvalues: gameSettingsTab (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), getFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), experienceLanguageSwitcherInitializerModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy), updateAudioOptions (ref), soundService (copy), var161 (write), gameSettings (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), getFFlagSelfViewCameraSettings (copy), updateCameraDevices (ref), videoCaptureService (copy), var162 (write), updateUiToggleSelection (ref), var17 (copy), var62 (copy), themeModule (copy), var61 (copy), fFlagIEMFocusNavToButtons (copy), getLastValueChangerFrame (copy), fFlagIEMTabFocusNav (copy), getFirstValueChangerFrame (copy)
 		gameSettingsTab.PageOpen = true
 		
 		if isInExperienceUIVREnabled and isSpatial() then return end
@@ -4489,7 +4492,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		updateAudioOptions()
 		
 		if soundService.DeviceListChanged then
-			var161 = soundService.DeviceListChanged:Connect(function() --[[ line: 3641 ]]
+			var161 = soundService.DeviceListChanged:Connect(function() --[[ line: 3645 ]]
 				-- upvalues: gameSettingsTab (copy), updateAudioOptions (copy)
 				if gameSettingsTab.PageOpen then
 					updateAudioOptions()
@@ -4505,7 +4508,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 			updateCameraDevices()
 			
 			if videoCaptureService.DevicesChanged then
-				var162 = videoCaptureService.DevicesChanged:Connect(function() --[[ line: 3651 ]]
+				var162 = videoCaptureService.DevicesChanged:Connect(function() --[[ line: 3655 ]]
 					-- upvalues: gameSettingsTab (copy), updateCameraDevices (copy)
 					if gameSettingsTab.PageOpen then
 						updateCameraDevices()
@@ -4529,15 +4532,16 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 				gameSettingsTab.toggleFeedbackModeText.Text = var61
 			end
 		end
-		table.insert(gameSettingsTab.LastSelectableObjects, getLastValueChangerFrame(gameSettingsTab))
-		
+		if fFlagIEMFocusNavToButtons then
+			table.insert(gameSettingsTab.LastSelectableObjects, getLastValueChangerFrame(gameSettingsTab))
+		end
 		if fFlagIEMTabFocusNav then
 			table.insert(gameSettingsTab.FirstSelectableObjects, getFirstValueChangerFrame(gameSettingsTab))
 			gameSettingsTab.FirstSelectableObjectsUpdated:fire()
 		end
 	end
 	
-	function gameSettingsTab.CloseSettingsPage() --[[ line: 4761 ]]
+	function gameSettingsTab.CloseSettingsPage() --[[ line: 4769 ]]
 		-- upvalues: gameSettingsTab (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), soundService (copy), var161 (write), getFFlagEnableCrossExpVoice (copy), var170 (write), getFFlagSelfViewCameraSettings (copy), videoCaptureService (copy), var162 (write), var173 (write), default_2 (copy), fFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), fFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy)
 		gameSettingsTab.PageOpen = false
 		
@@ -4566,7 +4570,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		end
 	end
 	
-	function isLangaugeSelectionDropdownEnabled() --[[ line: 4805 ]]
+	function isLangaugeSelectionDropdownEnabled() --[[ line: 4813 ]]
 		-- upvalues: localPlayer (copy)
 		if game:GetEngineFeature("EnableSetExperienceSettingsLocaleIdApi") ~= true then
 			return false
@@ -4581,7 +4585,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 		return false
 	end
 	
-	function gameSettingsTab.SetHub(_, p124) --[[ line: 4828 ]]
+	function gameSettingsTab.SetHub(_, p124) --[[ line: 4836 ]]
 		-- upvalues: gameSettingsTab (ref), isInExperienceUIVREnabled (copy), isSpatial (copy), getFFlagEnableLocalesForExperienceLanguageSwitcherModule (copy), getFFlagLazyInitiateExperienceLanguageSwitcherModule (copy), experienceLanguageSwitcherInitializerModule (copy), SETTINGS_MENU_LAYOUT_ORDER (copy), reportSettingsChangeForAnalytics (copy), createTranslationOptions (ref), getFFlagChatTranslationSettingEnabledModule (copy), getFFlagChatTranslationHoldoutEnabledModule (copy), getFStringChatTranslationLayerNameModule (copy), getChatTranslationLayerData (ref), textChatServiceSettingsSavedEngineFeature (copy), getFFlagChatTranslationNewDefaultsModule (copy), gameSettings (copy), textChatService (copy), getFFlagChatTranslationForceSettingModule (copy), chatTranslationOptionsWithChatLanguageSwitcherInitializerModule (copy), runService (copy), enableTFFeedbackModeEntryCheck (copy), var83 (copy), createFeedbackModeOptions (ref)
 		gameSettingsTab.HubRef = p124
 		
@@ -4600,7 +4604,7 @@ return (function() --[[ line: 468 | named "Initialize" ]]
 						gameSettings.ChatTranslationEnabled = true
 					end
 				elseif not textChatServiceSettingsSavedEngineFeature then
-					pcall(function() --[[ line: 4866 ]]
+					pcall(function() --[[ line: 4874 ]]
 						-- upvalues: textChatService (copy)
 						textChatService.ChatTranslationEnabled = false
 					end)

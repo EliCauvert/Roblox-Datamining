@@ -589,10 +589,10 @@ CoreScripts.Feedback.EntryPoint.OptionText,Đưa Ra Phản Hồi Về Bản Dị
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Thoát
 CoreScripts.Feedback.FeedbackBar.HelpButton,Trợ Giúp
 CoreScripts.Feedback.FeedbackBar.MainLabel,
-CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Cung cấp bất kỳ bình luận bổ sung nào dưới đây (không bắt buộc)
+CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,"Hãy để lại bình luận bổ sung ở bên dưới, nếu có"
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsPlaceholder,Nhập bất kỳ bình luận bổ sung nào bạn có ở đây
 CoreScripts.Feedback.FeedbackReportDialog.Cancel,
-CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Bản dịch chính xác là gì? (không bắt buộc)
+CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationHeader,Bản dịch chính xác là gì? *
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Đối tượng trải nghiệm: {ObjectType}
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Nhập bản dịch chính xác ở đây
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Hình ảnh đã chọn
@@ -626,18 +626,7 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Cảm ơn
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Để bảo vệ người chơi nhỏ tuổi, các tài khoản dưới 13 tuổi không được gửi ý kiến đóng góp."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Tính năng góp ý không khả dụng
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Thêm ảnh/video ghi lại
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Chỉnh sửa lựa chọn
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Không có ảnh/video ghi lại nào.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Ảnh/video ghi lại ({count}/{max})
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Giúp nhà sáng tạo hiểu được vấn đề của bạn.
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Đang tải ảnh/video ghi lại...
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} – {time}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,Đã chọn {count}/{max}
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Một hoặc nhiều ảnh/video ghi lại của bạn chưa được tải lên thành công.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Báo cáo lỗi
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Khôi phục vật phẩm hoặc dữ liệu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Danh mục *
@@ -646,14 +635,12 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Chọn một
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Vấn đề với việc mua hàng
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Tối đa {MAX} ký tự
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Chi tiết *
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Bỏ chọn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Hãy cung cấp mọi thông tin liên quan đến sự cố, chẳng hạn như phiên bản trò chơi và các bước để tái hiện lỗi."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Hãy mô tả vật phẩm bị mất và lần cuối bạn nhìn thấy vật phẩm là khi nào. Nếu tài khoản của bạn bị hack, vui lòng cho biết mã biên bản CS của Roblox và mọi chi tiết liên quan."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Vui lòng mô tả yêu cầu hoặc sự cố bạn gặp tại đây. Hãy chia sẻ thật cụ thể để giúp chúng tôi hiểu rõ tình hình.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Hãy cho chúng tôi biết khi đó bạn muốn mua gì, sự cố xảy ra khi nào và tổng giá trị (ví dụ: 500 Robux hoặc 4,99 USD). Vui lòng gửi kèm thông báo lỗi mà bạn gặp (nếu có)."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Bạn muốn báo cáo vi phạm?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Vậy hãy gửi báo cáo.</u>
-CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Chọn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Điều này giúp nhà sáng tạo hỗ trợ đúng tài khoản.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Chia sẻ thông tin người dùng với nhà sáng tạo
@@ -922,7 +909,9 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Hồi Sinh Nhân Vật?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Bạn sắp rời khỏi máy chủ này để chuyển sang máy chủ khác.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Bạn muốn rời đi?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
 CoreScripts.InGameMenu.Vibration,Rung
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,để chuyển điều hướng trình đơn
@@ -1243,6 +1232,7 @@ Feature.Avatar.Action.CreateSetFirstRun,Tạo bộ
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,Chế Độ Xem Mặc Định
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,Xóa avatar
 Feature.Avatar.Action.DeleteSet,Xóa bộ
 Feature.Avatar.Action.Discard,Bỏ
 Feature.Avatar.Action.EditProfilePicture,Chỉnh Sửa Ảnh Đại Diện
@@ -1259,7 +1249,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,Không Phải Lúc Này
 Feature.Avatar.Action.Pan,Lia
 Feature.Avatar.Action.Posting,Đang đăng
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,Xóa tất cả
+Feature.Avatar.Action.RemoveFromSet,Gỡ khỏi bộ
 Feature.Avatar.Action.Rename,Thay Đổi Tên
 Feature.Avatar.Action.RenameSet,Đổi tên bộ
 Feature.Avatar.Action.Reset,
@@ -1268,7 +1260,7 @@ Feature.Avatar.Action.Revert,Hoàn lại
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Lưu
 Feature.Avatar.Action.SaveAsNew,Lưu mới
-Feature.Avatar.Action.Select,
+Feature.Avatar.Action.Select,Chọn
 Feature.Avatar.Action.SelectMultipleItems,Chọn nhiều vật phẩm
 Feature.Avatar.Action.SelectSlot,Chọn Ô
 Feature.Avatar.Action.Share,Chia Sẻ
@@ -1282,7 +1274,7 @@ Feature.Avatar.Action.Stay,Ở Lại
 Feature.Avatar.Action.Switch,Chuyển
 Feature.Avatar.Action.TryOn,Mặc Thử
 Feature.Avatar.Action.Unequip,Cởi Bỏ
-Feature.Avatar.Action.Unselect,
+Feature.Avatar.Action.Unselect,Bỏ chọn
 Feature.Avatar.Action.UnslotEmote,Gỡ Biểu Cảm Khỏi Ô
 Feature.Avatar.Action.Update,Cập Nhật
 Feature.Avatar.Action.UpdateExistingCharacter,Cập nhật nhân vật đang tồn tại
@@ -1329,6 +1321,7 @@ Feature.Avatar.Heading.SelectToUpdate,Chọn Để Cập Nhật
 Feature.Avatar.Heading.SetLimitReached,Đã đạt giới hạn về số lượng bộ
 Feature.Avatar.Heading.SetNameDuplicate,Tên bị trùng
 Feature.Avatar.Heading.SetNameNotAllowed,Tên không hợp lệ
+Feature.Avatar.Heading.SetUpdateFailed,Không thể cập nhật bộ
 Feature.Avatar.Heading.SharePublicAvatar,Chia sẻ Avatar của bạn
 Feature.Avatar.Heading.SortBy,Sắp xếp theo
 Feature.Avatar.Heading.UsedName,Tên Đã Dùng
@@ -1400,6 +1393,7 @@ Feature.Avatar.Label.CountSelected,Đã Chọn {itemCount}
 Feature.Avatar.Label.Creations,Sản phẩm sáng tạo
 Feature.Avatar.Label.CurrentlyWearing,Hiện Đang Mặc
 Feature.Avatar.Label.DefaultBody,Thân hình mặc định
+Feature.Avatar.Label.DeleteSetBody,"Dù bộ bị xóa, trang phục trong bộ không bị xóa."
 Feature.Avatar.Label.Details,Chi tiết ({quantity})
 Feature.Avatar.Label.DetailsButton,Chi tiết
 Feature.Avatar.Label.DressesAndSkirts,Đầm & Váy
@@ -1457,6 +1451,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,Giày Trái
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,Môi
+Feature.Avatar.Label.LoadingSets,Đang tải bộ
 Feature.Avatar.Label.Looks,Diện mạo
 Feature.Avatar.Label.Makeup,Trang điểm
 Feature.Avatar.Label.MakeupLayer,Lớp {layerIndex}
@@ -1475,6 +1470,7 @@ Feature.Avatar.Label.Newest,Mới nhất
 Feature.Avatar.Label.NoExpiredItems,Không có {itemType} đã hết hạn
 Feature.Avatar.Label.NoItems,Không Có {itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,Chúng sẽ không còn có sẵn trong bộ sưu tập này
+Feature.Avatar.Label.NoSets,Chưa có bộ nào
 Feature.Avatar.Label.Outerwear,Áo Khoác Ngoài
 Feature.Avatar.Label.OutfitIncomplete,Trang phục bạn tạo chưa được mua và sẽ không được hiển thị trong trải nghiệm
 Feature.Avatar.Label.OutfitPurchaseFailure,Rất tiếc! [{numItems}] giao dịch mua thất bại!
@@ -1500,6 +1496,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,Vừa mặc
+Feature.Avatar.Label.RemoveFromSetBody,Các avatar này sẽ bị gỡ khỏi bộ nhưng sẽ không bị xóa.
 Feature.Avatar.Label.Replace,Thay thế
 Feature.Avatar.Label.ResetToNewCharacter,Bạn đang chuyển sang một hồ sơ mới; bạn muốn đặt lại tất cả vật phẩm trang phục hay giữ chúng?
 Feature.Avatar.Label.Right,P
@@ -1519,6 +1516,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,Các tìm kiếm g�
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,Đã xem gần đây
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,Tiếp tục mua sắm
 Feature.Avatar.Label.SelectItem,Chọn vật phẩm
+Feature.Avatar.Label.SetAvatarCount,{itemCount} avatar
 Feature.Avatar.Label.SetLimitReachedBody,Bạn chỉ được có tối đa {setLimit} bộ. Hãy xóa bớt một bộ để có thêm chỗ trống
 Feature.Avatar.Label.SetNameDuplicateBody,"Bạn đã có một bộ lấy tên này, vui lòng chọn tên khác"
 Feature.Avatar.Label.SetNameNotAllowedBody,Vui lòng chọn tên khác
@@ -1680,6 +1678,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,Gỡ tất cả đồ khỏi thân?
 Feature.Avatar.Title.ClearClothesConfirmation,Gỡ tất cả trang phục?
 Feature.Avatar.Title.ClearMakeupConfirmation,Xóa hết trang điểm?
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Nhân bản kiểu trang điểm
 Feature.Avatar.Title.EnhancedAvatarHeads,Nâng cấp đầu avatar
 Feature.Avatar.Title.GetOutfit,Nhận Trang Phục
@@ -1698,7 +1697,9 @@ Feature.Avatar.Title.NewCustomizeLook,Tính năng tùy chỉnh có diện mạo 
 Feature.Avatar.Title.NewToMarketplaceItemWidget,Vật Phẩm Mới
 Feature.Avatar.Title.OutfitIncomplete,Trang Phục Chưa Hoàn Thiện
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,Đổi tên phong cách trang điểm
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,Trả về mặc định
 Feature.Avatar.Title.ResetToNewCharacter,Nhân Vật Mới
 Feature.Avatar.Title.RevertToDefault,Hoàn lại về mặc định
@@ -1707,6 +1708,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,Đây là nơi chứa Avatar bạn đ�
 Feature.Avatar.Title.SelectEmoteForAvatar,Chọn một biểu cảm và tạo dáng cho Avatar của bạn
 Feature.Avatar.Title.SelectMakeupLookForUpdate,Chọn một kiểu trang điểm
 Feature.Avatar.Title.SelectMakeupLooks,Chọn kiểu trang điểm
+Feature.Avatar.Title.SelectSet,Chọn bộ
 Feature.Avatar.Title.SingleDeleteOutfit,"Xóa ""{outfitName}""?"
 Feature.Avatar.Title.TrendingItemWidget,Vật Phẩm Thịnh Hành
 Feature.Avatar.Title.TrendingLooksWidget,Phong cách thịnh hành
@@ -1839,7 +1841,7 @@ Feature.Catalog.Action.CloseDetails,Đóng Chi Tiết
 Feature.Catalog.Action.CopyLink,Sao Chép Liên Kết
 Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,Xóa avatar
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Mô tả avatar của bạn (Không bắt buộc)
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -2297,6 +2299,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1g
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Không có
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng

@@ -289,6 +289,7 @@
 	FFlagAXFixCycloramaOrphanRemount = require(script.FFlagAXFixCycloramaOrphanRemount),
 	FFlagAXCycloramaAssetFallback = require(script.FFlagAXCycloramaAssetFallback),
 	FStringAXCycloramaFallbackAssetId = require(script.FStringAXCycloramaFallbackAssetId),
+	FStringAXBackgroundGenerationCanvasAssetId = require(script.FStringAXBackgroundGenerationCanvasAssetId),
 	FFlagAXDebugMobileRbxlContentProbe = require(script.FFlagAXDebugMobileRbxlContentProbe),
 	FFlagAXBackgroundsCycloramaVR = require(script.FFlagAXBackgroundsCycloramaVR),
 	FFlagAXBackgroundsCustomizeHydration = require(script.FFlagAXBackgroundsCustomizeHydration),
