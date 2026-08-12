@@ -973,7 +973,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀請好友
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入先前造訪過的遊戲
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即將離開此遊戲，並返回「{PREVIOUS_EXPERIENCE}」。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即將離開此遊戲，並返回「{PREVIOUS_GAME}」。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,你要離開了嗎？
 CoreScripts.PremiumModal.Title.Error,錯誤
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1335,7 +1337,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜�
 Feature.AddFriends.Label.MyQRTile,我的 QR 碼
 Feature.AddFriends.Label.MyQrCode,
 Feature.AddFriends.Label.QRCodeTitle,QR 碼
-Feature.AddFriends.Label.SchoolTile,學校
+Feature.AddFriends.Label.SchoolTile,同學
 Feature.AddFriends.Label.SearchForFriendsPrompt,搜尋使用者名稱或顯示名稱，在 Roblox 找到其他人。
 Feature.AddFriends.Label.ShareQRCodeAddConnection,分享你的 QR 碼，即可新增認識的人
 Feature.AddFriends.Label.SyncContactsInvitePeople,同步通訊錄以尋找及邀請好友！
@@ -1549,6 +1551,7 @@ Feature.Avatar.Action.CreateSetFirstRun,建立組合
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,預設檢視模式
 Feature.Avatar.Action.Delete,刪除
+Feature.Avatar.Action.DeleteAvatars,刪除虛擬人偶
 Feature.Avatar.Action.DeleteSet,刪除組合
 Feature.Avatar.Action.Discard,捨棄
 Feature.Avatar.Action.EditProfilePicture,編輯個人檔案圖片
@@ -1565,7 +1568,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,
 Feature.Avatar.Action.Pan,平移
 Feature.Avatar.Action.Posting,張貼中
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,移除全部
+Feature.Avatar.Action.RemoveFromSet,從組合中移除
 Feature.Avatar.Action.Rename,更名
 Feature.Avatar.Action.RenameSet,重新命名組合
 Feature.Avatar.Action.Reset,重設
@@ -1635,6 +1640,7 @@ Feature.Avatar.Heading.SelectToUpdate,選擇要更新的素材
 Feature.Avatar.Heading.SetLimitReached,已達組合上限
 Feature.Avatar.Heading.SetNameDuplicate,名稱重複
 Feature.Avatar.Heading.SetNameNotAllowed,不允許使用此名稱
+Feature.Avatar.Heading.SetUpdateFailed,無法更新組合
 Feature.Avatar.Heading.SharePublicAvatar,分享您的虛擬人偶
 Feature.Avatar.Heading.SortBy,排序方式：
 Feature.Avatar.Heading.UsedName,名稱已使用
@@ -1706,6 +1712,7 @@ Feature.Avatar.Label.CountSelected,已選擇 {itemCount} 個道具
 Feature.Avatar.Label.Creations,作品
 Feature.Avatar.Label.CurrentlyWearing,目前穿戴
 Feature.Avatar.Label.DefaultBody,預設身體
+Feature.Avatar.Label.DeleteSetBody,刪除此組合不會刪除其中的服裝。
 Feature.Avatar.Label.Details,詳情（{quantity}）
 Feature.Avatar.Label.DetailsButton,詳細資料
 Feature.Avatar.Label.DressesAndSkirts,裙子
@@ -1763,6 +1770,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,左鞋
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,嘴唇
+Feature.Avatar.Label.LoadingSets,正在載入組合
 Feature.Avatar.Label.Looks,造型
 Feature.Avatar.Label.Makeup,妝容
 Feature.Avatar.Label.MakeupLayer,圖層 {layerIndex}
@@ -1781,6 +1789,7 @@ Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,沒有過期的{itemType}
 Feature.Avatar.Label.NoItems,沒有{itemType}
 Feature.Avatar.Label.NoLongerAvailableInCollection,它將不再出現在此收藏中
+Feature.Avatar.Label.NoSets,尚無組合
 Feature.Avatar.Label.Outerwear,外衣
 Feature.Avatar.Label.OutfitIncomplete,您尚未購買創作的服飾，服飾不會在體驗中顯示
 Feature.Avatar.Label.OutfitPurchaseFailure,很抱歉！無法購買 [{numItems}] 個道具！
@@ -1806,6 +1815,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6 / R15
 Feature.Avatar.Label.RecentlyWorn,最近穿戴
+Feature.Avatar.Label.RemoveFromSetBody,這些虛擬人偶將從此組合中移除，但不會遭刪除。
 Feature.Avatar.Label.Replace,取代
 Feature.Avatar.Label.ResetToNewCharacter,您即將切換到新角色，您想重置還是保留所有服飾道具？
 Feature.Avatar.Label.Right,右
@@ -1825,6 +1835,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,近期搜尋
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,最近檢視
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,繼續選購物品：
 Feature.Avatar.Label.SelectItem,選擇道具
+Feature.Avatar.Label.SetAvatarCount,{itemCount} 個虛擬人偶
 Feature.Avatar.Label.SetLimitReachedBody,最多只能有 {setLimit} 個組合。請刪除一個組合以騰出空間
 Feature.Avatar.Label.SetNameDuplicateBody,你已有一個同名的組合，請選擇其他名稱
 Feature.Avatar.Label.SetNameNotAllowedBody,請選擇其他名稱
@@ -1986,6 +1997,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,要清除身體嗎？
 Feature.Avatar.Title.ClearClothesConfirmation,要清除所有服裝嗎？
 Feature.Avatar.Title.ClearMakeupConfirmation,要清除所有妝容嗎？
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,複製造型
 Feature.Avatar.Title.EnhancedAvatarHeads,強化虛擬人偶頭部
 Feature.Avatar.Title.GetOutfit,取得服飾
@@ -2004,7 +2016,9 @@ Feature.Avatar.Title.NewCustomizeLook,自訂功能推出新外觀！
 Feature.Avatar.Title.NewToMarketplaceItemWidget,剛開始使用市集
 Feature.Avatar.Title.OutfitIncomplete,服飾未完成
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,重新命名妝容造型
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,新角色
 Feature.Avatar.Title.RevertToDefault,還原為預設
@@ -2013,6 +2027,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,已儲存的虛擬人偶會顯示在�
 Feature.Avatar.Title.SelectEmoteForAvatar,選擇動作，為虛擬人偶擺個姿勢
 Feature.Avatar.Title.SelectMakeupLookForUpdate,選擇妝容造型
 Feature.Avatar.Title.SelectMakeupLooks,選擇造型
+Feature.Avatar.Title.SelectSet,選擇組合
 Feature.Avatar.Title.SingleDeleteOutfit,要刪除「{outfitName}」嗎？
 Feature.Avatar.Title.TrendingItemWidget,熱門項目
 Feature.Avatar.Title.TrendingLooksWidget,熱門造型
@@ -2080,7 +2095,7 @@ Feature.Catalog.Action.CloseDetails,關閉詳細資料
 Feature.Catalog.Action.CopyLink,複製連結
 Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,刪除虛擬人偶
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,描述您的虛擬人偶（可略）
 Feature.Catalog.Action.Favorite,設為最愛
 Feature.Catalog.Action.GoBack,
@@ -2545,6 +2560,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小時
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
+Feature.Chat.Label.TryAgain,再試一次
 Feature.Chat.Label.Unavailable,無法使用
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
@@ -4171,14 +4187,14 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,畢業年份
 Feature.Schools.GiftForYou,專屬於你的禮物
 Feature.Schools.Heading.AddSchool,新增學校
-Feature.Schools.Heading.AddSchoolNow,加入你的學校
+Feature.Schools.Heading.AddSchoolNow,加入同學的行列
 Feature.Schools.Heading.CantFindSchool,我們找不到你的學校
 Feature.Schools.Heading.CantVerifySchool,我們無法驗證你的學校
 Feature.Schools.Heading.CheckYourEmail,
 Feature.Schools.Heading.EnterSchoolEmail,輸入你的學校電子郵件
 Feature.Schools.Heading.InviteYourClassmates,邀請同學
 Feature.Schools.Heading.InviteYourFriends,
-Feature.Schools.Heading.JoinClassmates,加入同學的行列
+Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} 位成員
 Feature.Schools.Heading.RemoveYourSchool,移除你的學校
 Feature.Schools.Heading.SchoolIsLive,你的學校現已開設
@@ -4188,7 +4204,7 @@ Feature.Schools.Heading.ThanksForInterest,感謝你對此感興趣
 Feature.Schools.Heading.YouJoinedSchool,你已加入 {school}！
 Feature.Schools.Heading.YourFounderReward,創辦人獎勵
 Feature.Schools.Label.AlumniGroupLaunches,校友群組已設立
-Feature.Schools.Label.Classmates,同學
+Feature.Schools.Label.Classmates,
 Feature.Schools.Label.ConfirmSchool,選擇學校
 Feature.Schools.Label.ConnectWithClassmates,與同學交流互動
 Feature.Schools.Label.DidntGetCode,沒有收到代碼嗎？

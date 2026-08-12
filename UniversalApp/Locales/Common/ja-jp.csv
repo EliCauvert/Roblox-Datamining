@@ -974,7 +974,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,友達を招待
 CoreScripts.InGameMenu.Traversal.HistoryDescription,以前プレイしたゲームに参加
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,このゲームから退出し、{PREVIOUS_EXPERIENCE}に戻ろうとしています。
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,このゲームから退出し、{PREVIOUS_GAME}に戻ろうとしています。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,退出しますか？
 CoreScripts.PremiumModal.Title.Error,エラー
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1336,7 +1338,7 @@ Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,人�
 Feature.AddFriends.Label.MyQRTile,自分のQR
 Feature.AddFriends.Label.MyQrCode,マイQRコード
 Feature.AddFriends.Label.QRCodeTitle,QRコード
-Feature.AddFriends.Label.SchoolTile,学校
+Feature.AddFriends.Label.SchoolTile,クラスメート
 Feature.AddFriends.Label.SearchForFriendsPrompt,Robloxで人を見つけるには、ユーザーネームや表示名で検索してください。
 Feature.AddFriends.Label.ShareQRCodeAddConnection,QRコードを共有して知り合いを追加しましょう
 Feature.AddFriends.Label.SyncContactsInvitePeople,連絡先を同期して友達を見つけ、招待しましょう！
@@ -1550,6 +1552,7 @@ Feature.Avatar.Action.CreateSetFirstRun,セットを作成
 Feature.Avatar.Action.Default,
 Feature.Avatar.Action.DefaultView,デフォルト表示
 Feature.Avatar.Action.Delete,
+Feature.Avatar.Action.DeleteAvatars,アバターを削除
 Feature.Avatar.Action.DeleteSet,セットを削除
 Feature.Avatar.Action.Discard,破棄
 Feature.Avatar.Action.EditProfilePicture,プロフィール写真を編集
@@ -1566,7 +1569,9 @@ Feature.Avatar.Action.Next,
 Feature.Avatar.Action.NotNow,
 Feature.Avatar.Action.Pan,パン
 Feature.Avatar.Action.Posting,投稿中
+Feature.Avatar.Action.Remove,
 Feature.Avatar.Action.RemoveAll,すべて削除
+Feature.Avatar.Action.RemoveFromSet,セットから削除
 Feature.Avatar.Action.Rename,名前を変更する
 Feature.Avatar.Action.RenameSet,セット名を変更
 Feature.Avatar.Action.Reset,
@@ -1636,6 +1641,7 @@ Feature.Avatar.Heading.SelectToUpdate,選択して更新
 Feature.Avatar.Heading.SetLimitReached,セット数が上限に達しました
 Feature.Avatar.Heading.SetNameDuplicate,名前を複製
 Feature.Avatar.Heading.SetNameNotAllowed,許可されない名前です
+Feature.Avatar.Heading.SetUpdateFailed,セットを更新できませんでした
 Feature.Avatar.Heading.SharePublicAvatar,アバターを共有
 Feature.Avatar.Heading.SortBy,並べ替え:
 Feature.Avatar.Heading.UsedName,使用済みの名前
@@ -1707,6 +1713,7 @@ Feature.Avatar.Label.CountSelected,{itemCount} 点を選択済み
 Feature.Avatar.Label.Creations,作品
 Feature.Avatar.Label.CurrentlyWearing,装備中
 Feature.Avatar.Label.DefaultBody,デフォルトのボディ
+Feature.Avatar.Label.DeleteSetBody,このセットを削除しても、その中の服装は削除されません。
 Feature.Avatar.Label.Details,詳細（{quantity}）
 Feature.Avatar.Label.DetailsButton,
 Feature.Avatar.Label.DressesAndSkirts,ワンピースとスカート
@@ -1764,6 +1771,7 @@ Feature.Avatar.Label.LeftLegs,
 Feature.Avatar.Label.LeftShoe,靴（左）
 Feature.Avatar.Label.LeftShoes,
 Feature.Avatar.Label.LipMakeup,唇
+Feature.Avatar.Label.LoadingSets,セットを読み込み中
 Feature.Avatar.Label.Looks,ルックス
 Feature.Avatar.Label.Makeup,メイク
 Feature.Avatar.Label.MakeupLayer,レイヤー{layerIndex}
@@ -1782,6 +1790,7 @@ Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,有効期限切れの{itemType}なし
 Feature.Avatar.Label.NoItems,{itemType} がありません
 Feature.Avatar.Label.NoLongerAvailableInCollection,このコレクションではもう利用できません
+Feature.Avatar.Label.NoSets,まだセットがありません
 Feature.Avatar.Label.Outerwear,上着
 Feature.Avatar.Label.OutfitIncomplete,作成した衣装は購入していないため、バーチャル空間内では表示されません
 Feature.Avatar.Label.OutfitPurchaseFailure,申し訳ありません！ [{numItems}] 件、購入できませんでした！
@@ -1807,6 +1816,7 @@ Feature.Avatar.Label.R15,R15
 Feature.Avatar.Label.R6,R6
 Feature.Avatar.Label.R6R15,R6/R15
 Feature.Avatar.Label.RecentlyWorn,最近の装備
+Feature.Avatar.Label.RemoveFromSetBody,これらのアバターはこのセットから削除されます。アバター自体は削除されません。
 Feature.Avatar.Label.Replace,置き換え
 Feature.Avatar.Label.ResetToNewCharacter,新しいキャラクターに切りかえています。すべての衣装アイテムをリセットしますか。それともキープしますか。
 Feature.Avatar.Label.Right,右
@@ -1826,6 +1836,7 @@ Feature.Avatar.Label.SearchLandingPage.Title.RecentSearches,最近のサーチ
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedItems,最近、閲覧
 Feature.Avatar.Label.SearchLandingPage.Title.RecentlyViewedSearchItems,買い物を続ける
 Feature.Avatar.Label.SelectItem,アイテムを選択
+Feature.Avatar.Label.SetAvatarCount,{itemCount}個のアバター
 Feature.Avatar.Label.SetLimitReachedBody,セットは最大{setLimit}件までに制限されています。容量を確保するには、1件削除してください
 Feature.Avatar.Label.SetNameDuplicateBody,この名前のセットはすでにあります。別の名前を入力してください
 Feature.Avatar.Label.SetNameNotAllowedBody,別の名前を入力してください
@@ -1987,6 +1998,7 @@ Feature.Avatar.Title.ClearBodyConfirmation,ボディを消しますか？
 Feature.Avatar.Title.ClearClothesConfirmation,衣装をすべて消しますか？
 Feature.Avatar.Title.ClearMakeupConfirmation,すべてのメイクを消しますか？
 Feature.Avatar.Title.CreateSet,
+Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,ルックを複製
 Feature.Avatar.Title.EnhancedAvatarHeads,アバターの頭を強化
 Feature.Avatar.Title.GetOutfit,衣装をゲット
@@ -2005,7 +2017,9 @@ Feature.Avatar.Title.NewCustomizeLook,カスタマイズ機能をリニューア
 Feature.Avatar.Title.NewToMarketplaceItemWidget,マーケットプレイスでの新着
 Feature.Avatar.Title.OutfitIncomplete,服装が未完成です
 Feature.Avatar.Title.Preview,
+Feature.Avatar.Title.RemoveFromSet,
 Feature.Avatar.Title.RenameMakeupLook,メイクのルック名を変更
+Feature.Avatar.Title.RenameSet,
 Feature.Avatar.Title.ResetToDefault,
 Feature.Avatar.Title.ResetToNewCharacter,新しいキャラクター
 Feature.Avatar.Title.RevertToDefault,デフォルトに戻す
@@ -2014,6 +2028,7 @@ Feature.Avatar.Title.SavedAvatarsLocation,保存済みアバターはこちら
 Feature.Avatar.Title.SelectEmoteForAvatar,
 Feature.Avatar.Title.SelectMakeupLookForUpdate,メイクルックを選択
 Feature.Avatar.Title.SelectMakeupLooks,ルックを選択
+Feature.Avatar.Title.SelectSet,セットを選択
 Feature.Avatar.Title.SingleDeleteOutfit,「{outfitName}」を削除しますか？
 Feature.Avatar.Title.TrendingItemWidget,人気急上昇アイテム
 Feature.Avatar.Title.TrendingLooksWidget,人気のスタイル
@@ -2081,7 +2096,7 @@ Feature.Catalog.Action.CloseDetails,詳細を閉じる
 Feature.Catalog.Action.CopyLink,リンクをコピー
 Feature.Catalog.Action.Customize,
 Feature.Catalog.Action.Delete,
-Feature.Catalog.Action.DeleteAvatar,アバターを削除
+Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,アバターの説明をしてください（任意）
 Feature.Catalog.Action.Favorite,
 Feature.Catalog.Action.GoBack,
@@ -2546,6 +2561,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1時間
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー
@@ -4170,12 +4186,14 @@ Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,卒業年
 Feature.Schools.GiftForYou,受け取れるギフト
 Feature.Schools.Heading.AddSchool,学校を追加
-Feature.Schools.Heading.AddSchoolNow,学校に参加
+Feature.Schools.Heading.AddSchoolNow,クラスメートと一緒に参加
 Feature.Schools.Heading.CantFindSchool,学校が見つかりません
 Feature.Schools.Heading.CantVerifySchool,学校を確認できません
 Feature.Schools.Heading.CheckYourEmail,メールをチェックしてください
 Feature.Schools.Heading.EnterSchoolEmail,学校のメールアドレスを入力
-Feature.Schools.Heading.JoinClassmates,クラスメートと一緒に参加
+Feature.Schools.Heading.InviteYourClassmates,クラスメートを招待する
+Feature.Schools.Heading.InviteYourFriends,友達を招待する
+Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,メンバー{count}人
 Feature.Schools.Heading.RemoveYourSchool,
 Feature.Schools.Heading.SchoolIsLive,あなたの学校が公開されました
@@ -4185,7 +4203,7 @@ Feature.Schools.Heading.ThanksForInterest,ご関心をお寄せくださりあ�
 Feature.Schools.Heading.YouJoinedSchool,{school}に参加しました！
 Feature.Schools.Heading.YourFounderReward,あなたの創立者報酬
 Feature.Schools.Label.AlumniGroupLaunches,卒業生グループの立ち上げ
-Feature.Schools.Label.Classmates,クラスメート
+Feature.Schools.Label.Classmates,
 Feature.Schools.Label.ConfirmSchool,学校を選択
 Feature.Schools.Label.ConnectWithClassmates,同級生とつながる
 Feature.Schools.Label.DidntGetCode,コードを受信しませんでしたか？

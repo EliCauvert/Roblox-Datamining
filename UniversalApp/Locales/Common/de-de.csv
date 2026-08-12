@@ -278,7 +278,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ-Anmeldung
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,
 Authentication.Login.Action.SendVerificationEmail,E-Mail zur Verifizierung senden
 Authentication.Login.Action.SignIn,Anmelden
 Authentication.Login.Action.UsePasskey,Passkey nutzen
@@ -291,11 +290,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Gib den Code ein, den w
 Authentication.Login.Description.GetOneTimeCodeHelp,"Gib die auf deinem Konto verifizierte E-Mail ein, um einen einmaligen Code zu erhalten."
 Authentication.Login.Description.PasskeyDescription,"Dein Konto hat Passkey. Diese Anmeldemethode ist sicherer, als ein Passwort zu verwenden. Du kannst dich auf diesem Gerät mit deinem Fingerabdruck, deinem Gesicht oder der Bildschirmsperre anmelden."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Wir können nicht feststellen, ob dein Gerät Passkey unterstützt. Versuche es erneut oder tippe auf ""Probleme bei der Anmeldung"", um dein Konto mit einer E-Mail-Adresse oder Telefonnummer wiederherzustellen."
-Authentication.Login.Description.PasskeyMobileOnly,"Passkeys sind nur auf Mobilgeräten verfügbar. Versuche, dich auf eine andere Weise anzumelden."
-Authentication.Login.Description.VerificationCodeSentTo,"Wenn das Roblox-Konto existiert, erhältst du einen Verifizierungscode an {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,"Für dein Konto ist nur ein Passkey für die Anmeldung eingerichtet. Versuche, dich mit deinem Passkey anzumelden, oder stelle dein Konto wieder her."
 Authentication.Login.Error.PlatformAccountConnectionFailure,Das Plattform-Konto kann nicht verifiziert werden. Bitte versuche es später erneut.
-Authentication.Login.Heading.EnterYourCode,Gib deinen Code ein
 Authentication.Login.Heading.IncompatibleAccounts,Konten nicht kompatibel
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Bei Roblox anmelden
@@ -317,8 +313,6 @@ Authentication.Login.Label.ConnectionError.Title,Verbindungsfehler
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Deine E-Mail-Adresse muss verifiziert werden.
 Authentication.Login.Label.EmailOrPhone,E-Mail-Adresse oder Telefon
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,E-Mail-Adresse eingeben
 Authentication.Login.Label.EnterOneTimeCode,Einmaligen Code eingeben
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,"Gib den Code ein, den wir dir gerade per E-Mail geschickt haben"
 Authentication.Login.Label.ForgotYourPassword,Passwort vergessen?
@@ -2559,6 +2553,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 Std.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 Monat
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 Woche
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} Woche(n)
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,unbekannter Benutzer
 Feature.Chat.Label.User,Benutzer
@@ -3018,8 +3013,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ist jetzt ein vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrauter Freund entfernt
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzufügen als vertrauter Freund gesendet
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Kürzliche Aktivität
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Kürzliche Aktivität von {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -4189,6 +4182,8 @@ Feature.Schools.Heading.CantFindSchool,Wir können deine Schule nicht finden
 Feature.Schools.Heading.CantVerifySchool,Wir können deine Schule nicht verifizieren
 Feature.Schools.Heading.CheckYourEmail,Überprüfe deine E-Mails
 Feature.Schools.Heading.EnterSchoolEmail,Gib deine Schul-E-Mail-Adresse ein
+Feature.Schools.Heading.InviteYourClassmates,Lade deine Mitschüler ein
+Feature.Schools.Heading.InviteYourFriends,Lade deine Freunde ein
 Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} Mitglieder
 Feature.Schools.Heading.RemoveYourSchool,Deine Schule entfernen

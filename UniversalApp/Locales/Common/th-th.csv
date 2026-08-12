@@ -261,7 +261,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,ลงชื่อเข้าใช้ด้วย QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,ส่งรหัส
 Authentication.Login.Action.SendVerificationEmail,ส่งอีเมลการตรวจสอบยืนยัน
 Authentication.Login.Action.SignIn,ลงชื่อเข้าใช้
 Authentication.Login.Action.UsePasskey,ใช้พาสคีย์
@@ -274,11 +273,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,กรอกรหัส
 Authentication.Login.Description.GetOneTimeCodeHelp,กรอกอีเมลที่ตรวจสอบยืนยันแล้วในบัญชีของคุณเพื่อรับรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Description.PasskeyDescription,บัญชีของคุณมีพาสคีย์ ซึ่งเป็นวิธีลงชื่อเข้าใช้ที่ปลอดภัยกว่ารหัสผ่าน คุณใช้ลายนิ้วมือ ใบหน้า หรือการล็อคหน้าจอเพื่อเข้าสู่ระบบบนอุปกรณ์นี้ได้
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,เราไม่สามารถระบุได้ว่าอุปกรณ์ของคุณรองรับพาสคีย์หรือไม่ โปรดลองอีกครั้งหรือแตะ “ปัญหาในการเข้าสู่ระบบ” เพื่อกู้คืนบัญชีของคุณด้วยอีเมลหรือหมายเลขโทรศัพท์
-Authentication.Login.Description.PasskeyMobileOnly,ใช้พาสคีย์ได้เฉพาะบนมือถือ โปรดเลือกวิธีอื่นในการลงชื่อเข้าใช้
-Authentication.Login.Description.VerificationCodeSentTo,หากมีบัญชี Roblox คุณจะได้รับรหัสการตรวจสอบยืนยันที่ {email}
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
-Authentication.Login.Heading.EnterYourCode,กรอกรหัสของคุณ
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,ลงชื่อเข้าใช้ Roblox
@@ -300,8 +296,6 @@ Authentication.Login.Label.ConnectionError.Title,เกิดข้อผิด�
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,อีเมลของคุณจำเป็นต้องได้รับการตรวจสอบยืนยัน
 Authentication.Login.Label.EmailOrPhone,อีเมลหรือหมายเลขโทรศัพท์
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,กรอกอีเมล
 Authentication.Login.Label.EnterOneTimeCode,กรอกรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,กรอกรหัสที่เราเพิ่งส่งไปยังอีเมลของคุณ
 Authentication.Login.Label.ForgotYourPassword,ลืมรหัสผ่านหรือไม่?
@@ -963,7 +957,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,ระดับเสียง
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,เชิญเพื่อน
 CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_GAME}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,ต้องการออกใช่ไหม?
 CoreScripts.PremiumModal.Title.Error,ข้อผิดพลาด
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2548,6 +2544,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ชม.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 นาที
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 สัปดาห์
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} สัปดาห์
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,ไม่พร้อมให้บริการ
 Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จัก
 Feature.Chat.Label.User,
@@ -3007,8 +3004,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,กิจกรรมล่าสุด
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,กิจกรรมล่าสุดของ {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,

@@ -279,7 +279,6 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ Login
 Authentication.Login.Action.QuickSignIn,Quick sign-in
 Authentication.Login.Action.ResendCode,
-Authentication.Login.Action.SendCodeSentenceCase,Send code
 Authentication.Login.Action.SendVerificationEmail,Send Verification Email
 Authentication.Login.Action.SignIn,Sign In
 Authentication.Login.Action.UsePasskey,Use passkey
@@ -292,11 +291,8 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Enter the code we just s
 Authentication.Login.Description.GetOneTimeCodeHelp,Enter the email verified on your account to receive a one-time code.
 Authentication.Login.Description.PasskeyDescription,"Your account has passkey, a more secure sign-in method than password. You can use your fingerprint, face, or screen lock to sign in on this device."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"We cannot determine whether your device supports passkey. Try again, or tap “Trouble signing in” to recover your account with an email or phone number."
-Authentication.Login.Description.PasskeyMobileOnly,Passkeys are only available on mobile. Choose another way to sign in.
-Authentication.Login.Description.VerificationCodeSentTo,"If a Roblox account exists, you'll receive a verification code at {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
-Authentication.Login.Heading.EnterYourCode,Enter your code
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
 Authentication.Login.Heading.Login,Login
 Authentication.Login.Heading.LoginRoblox,Login to Roblox
@@ -318,8 +314,6 @@ Authentication.Login.Label.ConnectionError.Title,Connection Error
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Your email needs verification
 Authentication.Login.Label.EmailOrPhone,Email or phone
-Authentication.Login.Label.EnterCode,
-Authentication.Login.Label.EnterEmail,Enter email
 Authentication.Login.Label.EnterOneTimeCode,Enter One-Time Code
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Enter the code we just sent to your email
 Authentication.Login.Label.ForgotYourPassword,Forgot your password?
@@ -984,7 +978,9 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Invite Friends
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Join previously visited games
+CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,You're about to leave this game and return to {PREVIOUS_EXPERIENCE}.
+CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,You're about to leave this game and return to {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Are you leaving?
 CoreScripts.PremiumModal.Title.Error,Error
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1608,6 +1604,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Update existing look
 Feature.Avatar.Action.UpdateMakeupLook,Update look
 Feature.Avatar.Action.Zoom,Zoom
 Feature.Avatar.AvatarWidgetTitle,Explore Styles
+Feature.Avatar.BackgroundGeneration.Error.Moderation,That prompt doesn't follow our guidelines. Try describing something else.
+Feature.Avatar.BackgroundGeneration.Error.System,Something went wrong generating your background. Please try again.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background…
+Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background…
+Feature.Avatar.BackgroundGeneration.Title,Create Background
 Feature.Avatar.Backgrounds.Title,Backgrounds
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Adjustment is not available for this body style.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Default to original body colors
@@ -1615,6 +1617,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Skin Color
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Create your own one-of-a-kind look with endless makeup combinations.
 Feature.Avatar.EmoteAlreadyAssigned,This Emote is already assigned to a slot
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Get Inspired
@@ -2568,6 +2571,7 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1h
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1m
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
+Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,unknown user
 Feature.Chat.Label.User,User
@@ -3027,8 +3031,6 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Add Trust
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} is a trusted friend now
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Trusted friend removed
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Trusted friend request sent
-Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Recent Activity
-Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username}'s Recent Activity
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
