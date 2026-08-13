@@ -2,10 +2,10 @@
     try {
         var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "3f260b298c73a1b92b0dc210e8102a23b50dcd94"
+            id: "f83264e474eb5bd2c3925263d577d87c5dd2bf8a"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "b37ab830-e4bb-41e5-9a14-ec35ab1bf50d", e._sentryDebugIdIdentifier = "sentry-dbid-b37ab830-e4bb-41e5-9a14-ec35ab1bf50d")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "0eb4becc-f8b0-46d5-a1b8-a6f69bce3612", e._sentryDebugIdIdentifier = "sentry-dbid-0eb4becc-f8b0-46d5-a1b8-a6f69bce3612")
     } catch (e) {}
 }(),
 function() {
@@ -15472,9 +15472,9 @@ function() {
                             }
                         },
                         c = function(e) {
-                            var t = e.Notifications,
-                                r = e.NamespacesWithGap,
-                                o = e.UpdatedSequenceNumbers;
+                            var t = e.notifications,
+                                r = e.namespacesWithGap,
+                                o = e.updatedSequenceNumbers;
                             if (t.length > 0) {
                                 var i = !0,
                                     a = !1,
@@ -15482,16 +15482,16 @@ function() {
                                 try {
                                     for (var u, l = t[Symbol.iterator](); !(i = (u = l.next()).done); i = !0) {
                                         var f = u.value;
-                                        if (f.Namespace && f.Detail) {
+                                        if (f.namespace && f.detail) {
                                             var d = void 0;
                                             try {
-                                                var p = JSON.parse(f.Detail);
+                                                var p = JSON.parse(f.detail);
                                                 if (!lZ(p)) continue;
                                                 d = p
                                             } catch (e) {
                                                 continue
                                             }
-                                            n(f.Namespace, d, f.SequenceNumber)
+                                            n(f.namespace, d, f.sequenceNumber)
                                         }
                                     }
                                 } catch (e) {
@@ -20112,4 +20112,4 @@ function() {
             R(["Roblox", "core-scripts", "realtime"], C), R(["Roblox", "RealTime", "Factory"], d2)
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("RealTime");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/realTime-539b4a5b33e97a60.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/realTime-4f677592a138e503.js.map
