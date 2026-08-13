@@ -16,6 +16,7 @@ local function defaultRenderTile(p0, p1, _, p2, p3, p4, p5) --[[ line: 40 ]]
 		name = p0.name,
 		thumbnail = p0.thumbnail,
 		price = p0.price,
+		userBasePriceInRobux = p0.userBasePriceInRobux,
 		universeId = p0.universeId,
 		categoryId = p4,
 		gridPositionRow = if p2 then p2.gridPositionRow else nil,
@@ -26,7 +27,7 @@ local function defaultRenderTile(p0, p1, _, p2, p3, p4, p5) --[[ line: 40 ]]
 	})
 end
 
-local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11) --[[ line: 67 ]]
+local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11) --[[ line: 68 ]]
 	-- upvalues: computeShopRowTileWidths (ref)
 	local var6 = false
 	
@@ -48,15 +49,15 @@ local function buildTileLayoutContext(p6, p7, p8, p9, p10, p11) --[[ line: 67 ]]
 	}
 end
 
-local function _(p12) --[[ line: 101 | named "makeChildKey" ]]
+local function _(p12) --[[ line: 102 | named "makeChildKey" ]]
 	return "Item:" .. tostring(p12.itemType) .. ":" .. p12.id
 end
 
-return reactModule.memo(function(p13) --[[ line: 105 | named "ItemRow" ]]
+return reactModule.memo(function(p13) --[[ line: 106 | named "ItemRow" ]]
 	-- upvalues: useTokens (ref), reactModule (ref), buildTileLayoutContext (ref), defaultRenderTile (ref), view (ref)
 	local medium = useTokens().Gap.Medium
 	local var8, var9 = reactModule.useState(0)
-	local var10 = reactModule.useCallback(function(p14) --[[ line: 110 ]]
+	local var10 = reactModule.useCallback(function(p14) --[[ line: 111 ]]
 		-- upvalues: var9 (ref)
 		local x = p14.AbsoluteSize.X
 		
@@ -65,10 +66,10 @@ return reactModule.memo(function(p13) --[[ line: 105 | named "ItemRow" ]]
 		end
 		var9(x)
 	end, {})
-	local isFeaturedDoubleWidthRobux = p13.isFeaturedDoubleWidthRobux or function(_, _) --[[ line: 119 ]]
+	local isFeaturedDoubleWidthRobux = p13.isFeaturedDoubleWidthRobux or function(_, _) --[[ line: 120 ]]
 		return false
 	end
-	local var12 = reactModule.useMemo(function() --[[ line: 123 ]]
+	local var12 = reactModule.useMemo(function() --[[ line: 124 ]]
 		-- upvalues: buildTileLayoutContext (copy), p13 (ref), var8 (ref), medium (ref), isFeaturedDoubleWidthRobux (ref)
 		return buildTileLayoutContext(p13.items, p13.columnCount, var8, medium, p13.rowIndex, isFeaturedDoubleWidthRobux)
 	end, {

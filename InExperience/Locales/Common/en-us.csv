@@ -2329,6 +2329,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1m
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Unfiltered chat
 Feature.Chat.Label.UnknownUser,unknown user
 Feature.Chat.Label.User,User
 Feature.Chat.Label.ViewProfile,View Profile
@@ -2983,6 +2984,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,You're all caught up for now
 Feature.Moments.Label.Photos,Photos
+Feature.Moments.Label.PostDeleted,Moment deleted
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
 Feature.Moments.Label.PublishingRodeoBody,This shouldn't take too long.
 Feature.Moments.Label.Reactions,Reactions

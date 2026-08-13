@@ -108,6 +108,14 @@ t.ExpChatGlobalChatTabClickedConfig = {
 	throttlingPercentage = game:DefineFastInt("ExpChatGlobalChatTabClickedThrottlePerMyriad", 0),
 	lastUpdated = { 26, 5, 13 }
 }
+t.ExpChatTabClickedConfig = {
+	eventName = "ExpChatTabClicked",
+	description = "When a user clicks any tab in the experience chat channel bar.",
+	links = "https://roblox.atlassian.net/wiki/spaces/SOCIAL/pages/4777640083/Friends+Chat+In+Exp+Tech+Spec#Experience-Chat-Tab-Events-Proposal",
+	backends = { "EventIngest" },
+	throttlingPercentage = game:DefineFastInt("ExpChatTabClickedThrottlePerMyriad", 10000),
+	lastUpdated = { 26, 8, 12 }
+}
 t.ExpChatTabImpressionConfig = {
 	eventName = "ExpChatTabImpression",
 	description = "When an experience chat tab is rendered or a tracked field (index, overflow, visibility, badge count) changes.",

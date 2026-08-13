@@ -2308,6 +2308,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
 Feature.Chat.Label.Unavailable,غير متاحة
+Feature.Chat.Label.UnfilteredChat,الدردشة غير خاضعة للفلترة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
 Feature.Chat.Label.ViewProfile,عرض الملف الشخصي
@@ -2962,6 +2963,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,أنت على اطلاع بكل جديد حاليًا
 Feature.Moments.Label.Photos,الصور
+Feature.Moments.Label.PostDeleted,تم حذف اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.
 Feature.Moments.Label.PublishingRodeoBody,لن يستغرق الأمر وقتًا طويلاً.
 Feature.Moments.Label.Reactions,التفاعلات

@@ -2328,6 +2328,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
 Feature.Chat.Label.Unavailable,Không có
+Feature.Chat.Label.UnfilteredChat,Trò chuyện không kiểm duyệt
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
 Feature.Chat.Label.ViewProfile,Xem Hồ Sơ
@@ -2982,6 +2983,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,Âm nhạc
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Bạn hiện đã xem hết toàn bộ nội dung
 Feature.Moments.Label.Photos,Ảnh
+Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
 Feature.Moments.Label.PublishingRodeoBody,Quá trình này sẽ không mất quá nhiều thời gian.
 Feature.Moments.Label.Reactions,Lượt bày tỏ cảm xúc

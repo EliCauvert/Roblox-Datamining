@@ -162,6 +162,7 @@ return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
 					name = p12.name,
 					thumbnail = p12.thumbnail,
 					price = p12.price,
+					userBasePriceInRobux = p12.userBasePriceInRobux,
 					universeId = p12.universeId,
 					categoryId = t.categoryId,
 					gridPositionRow = t.gridPositionRow,
@@ -199,16 +200,16 @@ return function(p11) --[[ line: 131 | named "useCategoryPageViewModel" ]]
 		sectionId = p11.sectionId,
 		onItemActivated = onItemActivated,
 		renderTile = if fFlagEnableInExperienceShopUnifiedLoggingModule then var18 elseif var17 ~= nil then nil else var18,
-		isFeaturedDoubleWidthRobux = reactModule.useMemo(function() --[[ line: 251 ]]
+		isFeaturedDoubleWidthRobux = reactModule.useMemo(function() --[[ line: 252 ]]
 			-- upvalues: var14 (ref), var15 (ref), var12 (ref)
 			if var14 then
-				return function(_, _) --[[ line: 253 ]]
+				return function(_, _) --[[ line: 254 ]]
 					return true
 				end
 			elseif var15 then
 				local id = var12.id
 				
-				return function(p15, p16) --[[ line: 263 ]]
+				return function(p15, p16) --[[ line: 264 ]]
 					-- upvalues: id (ref)
 					return p16 == 1 and p15.id == id
 				end

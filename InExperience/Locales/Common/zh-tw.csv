@@ -2320,6 +2320,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,無過濾聊天
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
 Feature.Chat.Label.ViewProfile,檢視個人檔案
@@ -2675,7 +2676,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,即將推出新的方式，讓您能
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,透過 QR 碼或通訊錄新增其他已驗證年齡的使用者時，對方將成為信任的聯絡對象。更多選項即將推出。
 Feature.Friends.TCEducation.Title,新增您認識的人
 Feature.Friends.TCFeature.AndMore,更多功能即將推出
-Feature.Friends.TCFeature.ChatWithoutFilters,無過濾聊天
+Feature.Friends.TCFeature.ChatWithoutFilters,
 Feature.Friends.TCFeature.PartyVoice,Party 語音
 Feature.Friends.TFEducation.Modal.TextIntro,與認識的人一起玩 Roblox 更有趣。透過 QR 碼或通訊錄新增已完成年齡驗證的使用者，便可成為信任的聯絡對象，並解鎖額外的福利，例如：
 Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus,身為已完成年齡驗證且年滿 18 歲的使用者，你可以與其他已完成年齡驗證且年滿 18 歲的好友，以及信任的聯絡對象一起解鎖更多功能。
@@ -2974,6 +2975,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,已查看所有目前的通知
 Feature.Moments.Label.Photos,相片
+Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
 Feature.Moments.Label.Reactions,反應

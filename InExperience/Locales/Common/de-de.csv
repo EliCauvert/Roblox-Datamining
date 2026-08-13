@@ -2270,6 +2270,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 Monat
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 Woche
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} Woche(n)
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Ungefilterter Chat
 Feature.Chat.Label.UnknownUser,unbekannter Benutzer
 Feature.Chat.Label.User,Benutzer
 Feature.Chat.Label.ViewProfile,Profil ansehen
@@ -2924,6 +2925,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Du bist vorerst auf dem neuesten Stand
 Feature.Moments.Label.Photos,Fotos
+Feature.Moments.Label.PostDeleted,Moment gelöscht
 Feature.Moments.Label.PostRemovedBody,"Der Moment, den du gepostet hast, verstößt gegen unsere Community-Regeln."
 Feature.Moments.Label.PublishingRodeoBody,Dies sollte nicht allzu lange dauern.
 Feature.Moments.Label.Reactions,Reaktionen

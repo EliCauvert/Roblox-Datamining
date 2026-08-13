@@ -169,6 +169,7 @@ return reactModule.memo(function(p11) --[[ line: 132 | named "CategorySection" ]
 					name = p12.name,
 					thumbnail = p12.thumbnail,
 					price = p12.price,
+					userBasePriceInRobux = p12.userBasePriceInRobux,
 					universeId = p12.universeId,
 					categoryId = t.categoryId,
 					gridPositionRow = t.gridPositionRow,
@@ -208,7 +209,7 @@ return reactModule.memo(function(p11) --[[ line: 132 | named "CategorySection" ]
 		Title = reactModule.createElement(sectionTitleModule, {
 			LayoutOrder = 1,
 			title = p11.title,
-			onActivated = if p11.onCategoryActivated then reactModule.useCallback(function() --[[ line: 286 ]]
+			onActivated = if p11.onCategoryActivated then reactModule.useCallback(function() --[[ line: 287 ]]
 				-- upvalues: p11 (ref)
 				if p11.onCategoryActivated then
 					p11.onCategoryActivated(p11.sectionId)
@@ -222,16 +223,16 @@ return reactModule.memo(function(p11) --[[ line: 132 | named "CategorySection" ]
 			sectionId = p11.sectionId,
 			onItemActivated = onItemActivated,
 			renderTile = if fFlagEnableInExperienceShopUnifiedLoggingModule then var18 elseif var17 ~= nil then nil else var18,
-			isFeaturedDoubleWidthRobux = reactModule.useMemo(function() --[[ line: 269 ]]
+			isFeaturedDoubleWidthRobux = reactModule.useMemo(function() --[[ line: 270 ]]
 				-- upvalues: var13 (ref), var14 (ref), featuredRobuxPackage (ref)
 				if var13 then
-					return function(_, _) --[[ line: 271 ]]
+					return function(_, _) --[[ line: 272 ]]
 						return true
 					end
 				elseif var14 then
 					local id = featuredRobuxPackage.id
 					
-					return function(p15, p16) --[[ line: 281 ]]
+					return function(p15, p16) --[[ line: 282 ]]
 						-- upvalues: id (ref)
 						return p16 == 1 and p15.id == id
 					end

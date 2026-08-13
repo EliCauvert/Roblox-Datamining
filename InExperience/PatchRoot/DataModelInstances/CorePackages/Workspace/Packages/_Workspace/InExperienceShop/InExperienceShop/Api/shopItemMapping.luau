@@ -31,6 +31,7 @@ return {
 		local iconImageAssetId = p5.IconImageAssetId
 		t.thumbnail = if iconImageAssetId == nil then "" else "rbxassetid://" .. tostring(iconImageAssetId)
 		t.price = p5.PriceInRobux
+		t.userBasePriceInRobux = p5.UserBasePriceInRobux or p5.BasePriceInRobux
 		t.description = p5.Description
 		t.updated = formatUpdatedDateModule(p5.Updated)
 		t.itemType = p6

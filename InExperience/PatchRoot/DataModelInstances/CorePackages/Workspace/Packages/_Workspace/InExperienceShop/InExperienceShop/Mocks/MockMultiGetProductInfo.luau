@@ -8,6 +8,7 @@ local list = {
 		name = "product1",
 		thumbnail = "rbxassetid://139209047523431",
 		price = 1,
+		userBasePriceInRobux = 2,
 		isOwned = false,
 		itemType = "Product",
 		universeId = "9238531179",
@@ -323,7 +324,7 @@ local list_1 = {
 		creator = { name = "MockCreator", hasVerifiedBadge = false }
 	}
 }
-local var4 = (function() --[[ line: 441 | named "buildLookup" ]]
+local var4 = (function() --[[ line: 443 | named "buildLookup" ]]
 	-- upvalues: list (ref), list_1 (ref)
 	local t = {}
 	
@@ -336,11 +337,11 @@ local var4 = (function() --[[ line: 441 | named "buildLookup" ]]
 	return t
 end)()
 
-local function _(value) --[[ line: 455 | named "parseIconImageAssetId" ]]
+local function _(value) --[[ line: 457 | named "parseIconImageAssetId" ]]
 	return if value then tonumber(string.match(value, "rbxassetid://(%d+)")) or 0 else 0
 end
 
-local function shopItemToProductInfo(p0) --[[ line: 463 ]]
+local function shopItemToProductInfo(p0) --[[ line: 465 ]]
 	local id = tonumber(p0.id) or 0
 	local creator = p0.creator or { name = "", hasVerifiedBadge = false }
 	local t = {
@@ -349,6 +350,7 @@ local function shopItemToProductInfo(p0) --[[ line: 463 ]]
 		DisplayName = p0.displayName,
 		Description = p0.description or "",
 		PriceInRobux = p0.price or 0,
+		UserBasePriceInRobux = p0.userBasePriceInRobux,
 		ProductId = id,
 		AssetId = id,
 		Updated = p0.updated
@@ -363,7 +365,7 @@ local function shopItemToProductInfo(p0) --[[ line: 463 ]]
 	return t
 end
 
-local function resolveRequest(p1) --[[ line: 484 ]]
+local function resolveRequest(p1) --[[ line: 487 ]]
 	-- upvalues: var4 (ref), shopItemToProductInfo (ref)
 	local var11 = var4[p1.infoType.Name .. ":" .. tostring(p1.id)]
 	
@@ -378,16 +380,16 @@ local function resolveRequest(p1) --[[ line: 484 ]]
 	}
 end
 
-local _ = function(p2) --[[ line: 506 | named "resolveStreamDelaySeconds" ]]
+local _ = function(p2) --[[ line: 509 | named "resolveStreamDelaySeconds" ]]
 	return if p2 == nil then math.random() * 0.5 elseif p2 == 0 then 0 else math.random() * p2
 end
 
 return {
 	MOCK_PRODUCT_ITEMS_FOR_TESTING = list,
 	MOCK_GAMEPASS_ITEMS_FOR_TESTING = list_1,
-	multiGetProductInfo = function(p3, p4) --[[ line: 528 ]]
+	multiGetProductInfo = function(p3, p4) --[[ line: 531 ]]
 		-- upvalues: promiseModule (ref), resolveRequest (ref)
-		return promiseModule.delay(if p4 ~= nil then 0.5 else p4):andThen(function() --[[ line: 533 ]]
+		return promiseModule.delay(if p4 ~= nil then 0.5 else p4):andThen(function() --[[ line: 536 ]]
 			-- upvalues: p3 (ref), resolveRequest (copy)
 			local list = table.create(#p3)
 			
@@ -397,7 +399,7 @@ return {
 			return list
 		end)
 	end,
-	streamMultiGetProductInfo = function(p5, p6, p7) --[[ line: 549 ]]
+	streamMultiGetProductInfo = function(p5, p6, p7) --[[ line: 552 ]]
 		-- upvalues: promiseModule (ref), resolveRequest (ref)
 		local p5Count = #p5
 		
@@ -407,10 +409,10 @@ return {
 		local list = table.create(p5Count)
 		local var15 = 0
 		
-		return promiseModule.new(function(p8) --[[ line: 562 ]]
+		return promiseModule.new(function(p8) --[[ line: 565 ]]
 			-- upvalues: p5 (ref), promiseModule (copy), p7 (ref), resolveRequest (copy), list (ref), p6 (ref), var15 (write), p5Count (ref)
 			for i, v in ipairs(p5) do
-				promiseModule.delay(if p7 ~= nil then math.random() * 0.5 elseif p7 == 0 then 0 else math.random() * p7):andThen(function() --[[ line: 564 ]]
+				promiseModule.delay(if p7 ~= nil then math.random() * 0.5 elseif p7 == 0 then 0 else math.random() * p7):andThen(function() --[[ line: 567 ]]
 					-- upvalues: resolveRequest (copy), v (ref), list (copy), i (ref), p6 (copy), var15 (copy), p5Count (copy), p8 (ref)
 					local var16 = resolveRequest(v)
 					list[i] = var16

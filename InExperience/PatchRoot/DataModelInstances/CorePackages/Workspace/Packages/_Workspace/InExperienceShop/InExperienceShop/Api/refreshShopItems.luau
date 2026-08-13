@@ -18,6 +18,7 @@ local function refreshShopItemFromProductInfo(p0, p1) --[[ line: 200 ]]
 		name = var2.name,
 		thumbnail = var2.thumbnail,
 		price = var2.price,
+		userBasePriceInRobux = var2.userBasePriceInRobux,
 		description = var2.description,
 		updated = var2.updated
 	}
@@ -71,7 +72,7 @@ return {
 		return p4
 	end,
 	refreshShopItemFromProductInfo = refreshShopItemFromProductInfo,
-	mergeProductInfoIntoSections = function(p6, p7) --[[ line: 230 ]]
+	mergeProductInfoIntoSections = function(p6, p7) --[[ line: 231 ]]
 		-- upvalues: makeRequestKey (ref), refreshShopItemFromProductInfo (ref)
 		local t = {}
 		

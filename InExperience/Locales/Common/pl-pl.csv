@@ -2328,6 +2328,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 tydz.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} tyg.
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Czat bez filtrów
 Feature.Chat.Label.UnknownUser,Nieznany użytkownik
 Feature.Chat.Label.User,Użytkownik
 Feature.Chat.Label.ViewProfile,Wyświetl profil
@@ -2683,7 +2684,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,"Wkrótce udostępnimy nowe sposoby 
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Gdy dodasz innego użytkownika, którego wiek został zweryfikowany, za pomocą kodu QR lub kontaktów, zostanie on dodany do zaufanych znajomych. Wkrótce pojawi się więcej opcji."
 Feature.Friends.TCEducation.Title,"Dodaj osoby, które znasz"
 Feature.Friends.TCFeature.AndMore,i jeszcze więcej wkrótce
-Feature.Friends.TCFeature.ChatWithoutFilters,Czat bez filtrów
+Feature.Friends.TCFeature.ChatWithoutFilters,
 Feature.Friends.TCFeature.PartyVoice,Czat głosowy w ramach Party
 Feature.Friends.TFEducation.Modal.TextIntro,
 Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus,
@@ -2982,6 +2983,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Na razie jesteś na bieżąco
 Feature.Moments.Label.Photos,Zdjęcia
+Feature.Moments.Label.PostDeleted,Moment usunięty
 Feature.Moments.Label.PostRemovedBody,Opublikowany przez Ciebie moment jest niezgodny z naszymi Standardami społeczności.
 Feature.Moments.Label.PublishingRodeoBody,Nie powinno to zająć zbyt długo.
 Feature.Moments.Label.Reactions,Reakcje
@@ -3000,7 +3002,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Nie udało się wygenerować teks
 Feature.Moments.Label.TextGenerationFailedTitle,Nie udało się wygenerować
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
-Feature.Moments.Title.MomentRemoved,Moment usunięty
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta
 Feature.Moments.Tooltip.Creation,Wszystkie osoby w tym projekcie mogą wyświetlić Twoje momenty.
 Feature.NativeAds.Label.Ad,

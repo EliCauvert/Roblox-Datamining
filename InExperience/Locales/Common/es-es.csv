@@ -2322,6 +2322,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sems.
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Chat sin filtros
 Feature.Chat.Label.UnknownUser,usuario desconocido
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,Ver perfil
@@ -2677,7 +2678,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,Pronto estarán disponibles nuevas f
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Cuando añadas a otro usuario cuya edad haya sido comprobada mediante un código QR o Contactos, este se convertirá en una Conexión de confianza. Próximamente habrá más opciones disponibles."
 Feature.Friends.TCEducation.Title,Añade a gente que conoces
 Feature.Friends.TCFeature.AndMore,y más por venir
-Feature.Friends.TCFeature.ChatWithoutFilters,Chat sin filtros
+Feature.Friends.TCFeature.ChatWithoutFilters,
 Feature.Friends.TCFeature.PartyVoice,Voz de Equipo
 Feature.Friends.TFEducation.Modal.TextIntro,"Roblox es más divertido con las personas que conoces. Los usuarios con edad verificada que agregues a través del código QR o Contactos se convertirán en amigos de confianza, y desbloquearás beneficios adicionales, como:"
 Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus,"Como usuario de 18 años o más con edad verificada, puedes hacer más cosas con amigos de 18 años o más con edad verificada y con tus amigos de confianza."
@@ -2976,6 +2977,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Estás al día por ahora
 Feature.Moments.Label.Photos,Fotos
+Feature.Moments.Label.PostDeleted,Momento eliminado
 Feature.Moments.Label.PostRemovedBody,El Momento que publicaste va en contra de nuestras Normas de la comunidad.
 Feature.Moments.Label.PublishingRodeoBody,Esto no tomará mucho tiempo.
 Feature.Moments.Label.Reactions,Reacciones
@@ -2994,7 +2996,7 @@ Feature.Moments.Label.TextGenerationFailedBody,No se pudo generar el texto. Int�
 Feature.Moments.Label.TextGenerationFailedTitle,Error en la generación
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
-Feature.Moments.Title.MomentRemoved,Momento eliminado
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Reportar publicación
 Feature.Moments.Tooltip.Creation,Todas las personas que participan en la experiencia pueden ver tus Momentos.
 Feature.NativeAds.Label.Ad,
