@@ -7,9 +7,10 @@ local genericInterventionDialogModule = require(interventionShared.Components.ge
 local _ = require(interventionShared.Utils.Types)
 local useParsedBadUtterancesModule = require(interventionShared.Hooks.useParsedBadUtterances)
 local useRestrictionEndDateInfoModule = require(interventionShared.Hooks.useRestrictionEndDateInfo)
+local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImprovements)
 
-return reactModule.memo(function(p0) --[[ line: 45 | named "UniversalFeatureRestrictionDialog" ]]
-	-- upvalues: determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
+return reactModule.memo(function(p0) --[[ line: 47 | named "UniversalFeatureRestrictionDialog" ]]
+	-- upvalues: determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useCallback (ref), fFlagUFRImprovementsModule (ref), reactModule (ref), genericInterventionDialogModule (ref)
 	local moderationDetail = p0.moderationDetail
 	local consequenceTransparencyMessage = moderationDetail.consequenceTransparencyMessage
 	local interventionId = moderationDetail.interventionId
@@ -17,12 +18,12 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "UniversalFeatureRest
 	local badUtterances = moderationDetail.badUtterances
 	local labelTranslationKey = moderationDetail.labelTranslationKey
 	local messageToUser = moderationDetail.messageToUser
-	local var7 = determineUFRInterventionTypeModule(moderationDetail.punishmentTypeDescription)
-	local var8 = useParsedBadUtterancesModule(badUtterances or {}, labelTranslationKey)
-	local joined = table.concat(var8.textItems, "\n")
-	local joined_1 = table.concat(var8.abuseTypes, ", ")
-	local var11 = useRestrictionEndDateInfoModule(moderationDetail.endDate)
-	local var12 = determineAppealsStateModule({
+	local var8 = determineUFRInterventionTypeModule(moderationDetail.punishmentTypeDescription)
+	local var9 = useParsedBadUtterancesModule(badUtterances or {}, labelTranslationKey)
+	local joined = table.concat(var9.textItems, "\n")
+	local joined_1 = table.concat(var9.abuseTypes, ", ")
+	local var12 = useRestrictionEndDateInfoModule(moderationDetail.endDate)
+	local var13 = determineAppealsStateModule({
 		onAppeal = p0.onAppeal,
 		beginDate = moderationDetail.beginDate,
 		endDate = moderationDetail.endDate,
@@ -31,13 +32,13 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "UniversalFeatureRest
 	
 	return reactModule.createElement(genericInterventionDialogModule, {
 		useDetailedLayout = true,
-		titleText = p0.titleOverride or "Chat suspended for 2 days",
-		bodyText = p0.bodyOverride or "You can't use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned.",
+		titleText = p0.titleOverride or (if fFlagUFRImprovementsModule then moderationDetail.header or "" else "Chat suspended for 2 days"),
+		bodyText = p0.bodyOverride or (if fFlagUFRImprovementsModule then moderationDetail.body or "" else "You can't use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned."),
 		userNote = messageToUser,
-		isAppealable = var12.isAppealable,
+		isAppealable = var13.isAppealable,
 		evidence = joined,
 		violationReason = joined_1,
-		onDismiss = useCallback(function() --[[ line: 69 ]]
+		onDismiss = useCallback(function() --[[ line: 71 ]]
 			-- upvalues: p0 (ref)
 			p0.onDismiss()
 			
@@ -49,11 +50,11 @@ return reactModule.memo(function(p0) --[[ line: 45 | named "UniversalFeatureRest
 		interventionId = interventionId,
 		acknowledgeable = acknowledgeable,
 		eventId = interventionId,
-		interventionTypeForAnalytics = var7,
+		interventionTypeForAnalytics = var8,
 		abuseVectorForAnalytics = p0.abuseVector,
-		formattedEndDate = var11.formattedEndDate,
-		countdownText = var11.countdownText,
+		formattedEndDate = var12.formattedEndDate,
+		countdownText = var12.countdownText,
 		onAppeal = p0.onAppeal,
-		shouldOpenAppealsPortal = var12.shouldOpenAppealsPortal
+		shouldOpenAppealsPortal = var13.shouldOpenAppealsPortal
 	})
 end)

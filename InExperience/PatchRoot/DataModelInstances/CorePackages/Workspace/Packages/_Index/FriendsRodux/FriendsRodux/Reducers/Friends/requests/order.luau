@@ -1,12 +1,15 @@
 ﻿local friendsRodux = script:FindFirstAncestor("FriendsRodux")
-local roduxModule = require(friendsRodux.Parent.Rodux)
+local parent = friendsRodux.Parent
+local roduxModule = require(parent.Rodux)
 local _ = require(friendsRodux.roduxFriendsTypes)
+local fFlagAddFriendsPageHighlightUnseenRequests = require(parent.SharedFlags).FFlagAddFriendsPageHighlightUnseenRequests
 local t = {}
 
-return function(p0) --[[ line: 11 ]]
-	-- upvalues: roduxModule (ref), t (ref)
+return function(p0) --[[ line: 14 ]]
+	-- upvalues: roduxModule (ref), t (ref), fFlagAddFriendsPageHighlightUnseenRequests (ref)
 	return roduxModule.createReducer(t, {
-		[p0.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p1, p2) --[[ line: 15 ]]
+		[p0.friendsNetworking.GetFriendRequests.Succeeded.name] = function(p1, p2) --[[ line: 18 ]]
+			-- upvalues: fFlagAddFriendsPageHighlightUnseenRequests (copy)
 			p1 = p1 or {}
 			local count = p1.count or 0
 			local requestsById = p1.requestsById or {}
@@ -20,7 +23,13 @@ return function(p0) --[[ line: 11 ]]
 				local var6 = count + i
 				
 				if not requestsById[tostring(v.id)] then
-					requestsById[tostring(v.id)] = var6
+					if not fFlagAddFriendsPageHighlightUnseenRequests then
+						requestsById[tostring(v.id)] = var6
+					elseif v.isUnseen then
+						requestsById[tostring(v.id)] = -(tonumber(string.gsub(string.gsub(v.friendRequest.sentAt, "%.%d+Z$", "Z"), "%D", "")) or 0)
+					else
+						requestsById[tostring(v.id)] = var6
+					end
 				end
 			end
 			return {

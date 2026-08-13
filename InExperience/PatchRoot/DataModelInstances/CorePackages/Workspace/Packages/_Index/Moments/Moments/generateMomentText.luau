@@ -66,8 +66,6 @@ local function runGeneration(p3, p4, p5) --[[ line: 92 ]]
 					var13 = if ok_1 and typeof(status_1) == "string" then status_1 else nil
 				end
 				if var13 == "Success" and typeof(var12) == "string" and #var12 ~= 0 then
-					log("generation started for %s \226\134\146 token=%s, polling", p4, var12)
-					
 					for _ = 1, maxPollAttempts do
 						local var16
 						task.wait(pollIntervalSeconds)
@@ -92,45 +90,40 @@ local function runGeneration(p3, p4, p5) --[[ line: 92 ]]
 							if var16 ~= "Failed" then
 								continue
 							end
-							log("generation failed for %s", p4)
 							p6({ error = "GENERATION_FAILED" })
 							
 							return
 						end
-						log("generation complete for %s", p4)
 						p6({ summary = var14, description = var15 })
 						
 						return
 					end
-					log("generation timed out for %s", p4)
 					p6({ error = "TIMEOUT" })
 					
 					return
-				else
+				elseif not ok then
 					log("generation start failed for %s", p4)
-					
-					if isStudioModule() then
-						log("resolving with mock result (Studio, backend unreachable)")
-						p6({
-							summary = "insane save",
-							description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
-							error = nil
-						})
-						
-						return
-					end
-					p6({ error = "REQUEST_FAILED" })
 				end
+				if isStudioModule() then
+					p6({
+						summary = "insane save",
+						description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
+						error = nil
+					})
+					
+					return
+				end
+				p6({ error = "REQUEST_FAILED" })
 			end
 		end)
 	end)
 end
 
-return function(p7, p8) --[[ line: 146 | named "generateMomentText" ]]
-	-- upvalues: log (ref), isStudioModule (ref), promiseModule (ref), captureKey (ref), getFFlagMomentTextGenerationDisableCacheModule (ref), runGeneration (ref), t (ref)
+return function(p7, p8) --[[ line: 143 | named "generateMomentText" ]]
+	-- upvalues: isStudioModule (ref), promiseModule (ref), captureKey (ref), getFFlagMomentTextGenerationDisableCacheModule (ref), runGeneration (ref), t (ref), log (ref)
 	p8 = p8 or {}
 	
-	if (p8.isEngineEnabled or function() --[[ line: 149 ]]
+	if (p8.isEngineEnabled or function() --[[ line: 146 ]]
 		return game:GetEngineFeature("CaptureServiceGenerateMomentText")
 	end)() then
 		local var18 = captureKey(p7)
@@ -162,8 +155,6 @@ return function(p7, p8) --[[ line: 146 | named "generateMomentText" ]]
 							var13 = if ok_1 and typeof(status_1) == "string" then status_1 else nil
 						end
 						if var13 == "Success" and typeof(var23) == "string" and #var23 ~= 0 then
-							log("generation started for %s \226\134\146 token=%s, polling", var18, var23)
-							
 							for _ = 1, maxPollAttempts do
 								local var16
 								task.wait(pollIntervalSeconds)
@@ -190,57 +181,48 @@ return function(p7, p8) --[[ line: 146 | named "generateMomentText" ]]
 										continue
 										continue
 									end
-									log("generation failed for %s", var18)
 									p9({ error = "GENERATION_FAILED" })
 									
 									return
 								end
-								log("generation complete for %s", var18)
 								p9({ summary = var24, description = var25 })
 								
 								return
 							end
-							log("generation timed out for %s", var18)
 							p9({ error = "TIMEOUT" })
 							
 							return
-						else
+						elseif not ok then
 							log("generation start failed for %s", var18)
-							
-							if isStudioModule() then
-								log("resolving with mock result (Studio, backend unreachable)")
-								p9({
-									summary = "insane save",
-									description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
-									error = nil
-								})
-								
-								return
-							end
-							p9({ error = "REQUEST_FAILED" })
 						end
+						if isStudioModule() then
+							p9({
+								summary = "insane save",
+								description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
+								error = nil
+							})
+							
+							return
+						end
+						p9({ error = "REQUEST_FAILED" })
 					end
 				end)
 			end)
 			t[var18] = var22
-			var22:andThen(function(p10) --[[ line: 179 ]]
+			var22:andThen(function(p10) --[[ line: 174 ]]
 				-- upvalues: t (copy), var18 (ref)
 				if p10 == nil or p10.error ~= nil then
 					t[var18] = nil
 				end
-			end, function() --[[ line: 183 ]]
+			end, function() --[[ line: 178 ]]
 				-- upvalues: t (copy), var18 (ref)
 				t[var18] = nil
 			end)
 			
 			return var22
 		end
-		log("reusing cached generation for %s (no re-send)", var18)
-		
 		return t[var18]
 	else
-		log("engine feature %s unavailable", "CaptureServiceGenerateMomentText")
-		
 		return if isStudioModule() then promiseModule.resolve({
 			summary = "insane save",
 			description = "no way i pulled this off \226\128\148 clutch save on the last second, everyone was screaming lol",
