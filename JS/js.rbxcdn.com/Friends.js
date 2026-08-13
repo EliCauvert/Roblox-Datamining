@@ -605,7 +605,7 @@
                         var t = {
                                 url: fe(),
                                 retryable: !0,
-                                withCredentials: !1
+                                withCredentials: !0
                             },
                             r = {
                                 universeIds: e
@@ -3564,7 +3564,7 @@
             }))
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/69df2adbc13c0540fabdae9e9204e5b4-friends.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/9187d208be88c16d7f0988a1fb86988a-friends.bundle.min.js.map
 
 /* Bundle detector */
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Friends");
