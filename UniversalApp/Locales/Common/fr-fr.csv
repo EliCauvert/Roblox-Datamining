@@ -3475,6 +3475,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Tu es à jour pour le moment
 Feature.Moments.Label.Photos,Photos
+Feature.Moments.Label.PostDeleted,Moment supprimé
 Feature.Moments.Label.PostRemovedBody,Le Moment que tu as publié va à l'encontre des normes de la communauté.
 Feature.Moments.Label.PublishingRodeoBody,Cela ne devrait prendre qu'un instant.
 Feature.Moments.Label.Reactions,Réactions
@@ -3493,7 +3494,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Impossible de générer du texte.
 Feature.Moments.Label.TextGenerationFailedTitle,Échec de la génération
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
-Feature.Moments.Title.MomentRemoved,Moment supprimé
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Signaler un post
 Feature.MusicPlayer.Action.GoToSongDetails,Aller aux détails de la chanson
 Feature.MusicPlayer.Action.Report,

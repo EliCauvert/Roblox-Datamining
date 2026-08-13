@@ -3468,6 +3468,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,現在、新着のモーメントはありません
 Feature.Moments.Label.Photos,写真
+Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
 Feature.Moments.Label.PublishingRodeoBody,あまり時間はかかりません。
 Feature.Moments.Label.Reactions,
@@ -3486,7 +3487,7 @@ Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませ
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
-Feature.Moments.Title.MomentRemoved,モーメントが削除されました
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.MusicPlayer.Action.GoToSongDetails,曲の詳細へ
 Feature.MusicPlayer.Action.Report,

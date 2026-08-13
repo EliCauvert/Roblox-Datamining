@@ -3478,6 +3478,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,지금은 모두 확인했습니다
 Feature.Moments.Label.Photos,사진
+Feature.Moments.Label.PostDeleted,모멘트 삭제됨
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
 Feature.Moments.Label.PublishingRodeoBody,오래 걸리지 않을 겁니다.
 Feature.Moments.Label.Reactions,반응
@@ -3496,7 +3497,7 @@ Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했�
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
-Feature.Moments.Title.MomentRemoved,모멘트 삭제됨
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고
 Feature.MusicPlayer.Action.GoToSongDetails,'노래 세부 정보'로 이동
 Feature.MusicPlayer.Action.Report,리포트
