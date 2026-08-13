@@ -5,7 +5,9 @@ local foundationModule = require(parent_1.Foundation)
 local view = foundationModule.View
 local text = foundationModule.Text
 local playerBadgeModule = require(parent.Components.Presentation.PlayerBadge)
+local playerBadgeGroupModule = require(parent.Components.Presentation.PlayerBadgeGroup)
 local fFlagPlayerListPeopleCellGapFixModule = require(parent.Flags.FFlagPlayerListPeopleCellGapFix)
+local fFlagPlayerListReskinVerifiedIconModule = require(parent.Flags.FFlagPlayerListReskinVerifiedIcon)
 local t = {
 	["text-body-small text-align-x-left content-default text-truncate-end"] = true,
 	["shrink auto-xy"] = fFlagPlayerListPeopleCellGapFixModule,
@@ -17,8 +19,8 @@ local t_1 = {
 	["gap-xsmall"] = not fFlagPlayerListPeopleCellGapFixModule
 }
 
-return reactModule.memo(function(p0) --[[ line: 32 | named "PeopleCell" ]]
-	-- upvalues: t (ref), reactModule (ref), text (ref), playerBadgeModule (ref), view (ref), t_1 (ref)
+return reactModule.memo(function(p0) --[[ line: 34 | named "PeopleCell" ]]
+	-- upvalues: t (ref), reactModule (ref), text (ref), fFlagPlayerListReskinVerifiedIconModule (ref), playerBadgeGroupModule (ref), playerBadgeModule (ref), view (ref), t_1 (ref)
 	local t_2 = {
 		NameText = reactModule.createElement(text, {
 			LayoutOrder = 1,
@@ -28,7 +30,11 @@ return reactModule.memo(function(p0) --[[ line: 32 | named "PeopleCell" ]]
 	}
 	
 	if p0.player then
-		t_2.Badge = reactModule.createElement(playerBadgeModule, { layoutOrder = 2, player = p0.player })
+		if fFlagPlayerListReskinVerifiedIconModule then
+			t_2.Badge = reactModule.createElement(playerBadgeGroupModule, { layoutOrder = 2, player = p0.player })
+		else
+			t_2.Badge = reactModule.createElement(playerBadgeModule, { layoutOrder = 2, player = p0.player })
+		end
 	end
 	return reactModule.createElement(view, { LayoutOrder = p0.layoutOrder, tag = t_1 }, t_2)
 end)

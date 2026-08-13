@@ -286,6 +286,7 @@
 	FFlagAXSubscriptionRefetchEvictStores = require(script.FFlagAXSubscriptionRefetchEvictStores),
 	FFlagAXBackgroundsRoot = require(script.FFlagAXBackgroundsRoot),
 	FFlagAXCatalogBackgroundsSupport = require(script.FFlagAXCatalogBackgroundsSupport),
+	FFlagAXCatalogBackgroundsFilters = require(script.FFlagAXCatalogBackgroundsFilters),
 	FFlagAXBackgroundCycloramaRendering = require(script.FFlagAXBackgroundCycloramaRendering),
 	FFlagAXBackgroundDisableFogWhileActive = require(script.FFlagAXBackgroundDisableFogWhileActive),
 	FIntAXBackgroundFogDisabledDistance = require(script.FIntAXBackgroundFogDisabledDistance),

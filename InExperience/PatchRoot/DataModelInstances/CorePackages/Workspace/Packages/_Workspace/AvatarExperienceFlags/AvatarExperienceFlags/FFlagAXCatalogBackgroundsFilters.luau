@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXCatalogBackgroundsFilters", false) and require(script.Parent.FFlagAXCatalogBackgroundsSupport)

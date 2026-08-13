@@ -103,7 +103,11 @@ return reactModule.memo(function(p0) --[[ line: 31 | named "PlayerContextualMenu
 		uDim2 = UDim2.fromOffset(anchorPosition.X - 8, anchorPosition.Y)
 	end
 	local t_2 = {
-		Header = reactModule.createElement(playerContextMenuHeaderModule, { layoutOrder = 1, header = var10.header }),
+		Header = reactModule.createElement(playerContextMenuHeaderModule, {
+			layoutOrder = 1,
+			header = var10.header,
+			player = var10.player
+		}),
 		HeaderDivider = reactModule.createElement(divider, { LayoutOrder = 2 })
 	}
 	
