@@ -117,6 +117,8 @@ Authentication.AccountPicker.Label.SignedOut,Çıkış yapıldı
 Authentication.AccountRecovery.Action.AddAPasskey,"Evet, yeni bir geçiş anahtarı ekle"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,"Hayır, tanıyamadım"
+Authentication.AccountRecovery.Action.DontDeleteCredentials,"Evet, tanıdım"
 Authentication.AccountRecovery.Action.Next,Sonraki
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,Şifreyi sıfırla
@@ -131,6 +133,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,Bunun yerine e-posta kulla
 Authentication.AccountRecovery.Action.UsePhone,Telefon kullan
 Authentication.AccountRecovery.Action.UsePhoneInstead,Bunun yerine telefon kullan
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,Bunun yerine kullanıcı adı veya e-posta kullan
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,Tanıyamadığın değişiklikler kaldırıldı. Fazladan bir koruma katmanı ekleyerek hesabını güvende tut.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,2 Aşamalı Doğrulama özelliğinin etkin olduğu hesabını kurtarmak için kendi güvenliğin açısından ikinci ve farklı bir doğrulama yöntemi gerekiyor. Bu hesapta güvenli kurtarma amacıyla kullanılabilecek bir yedek yöntem yok. Lütfen birincil 2 aşamalı doğrulama yöntemine yeniden erişmeyi dene veya yedek kod kullanarak 2 aşamalı doğrulama işlemini atla.
 Authentication.AccountRecovery.Description.ChooseAccount,Kurtarmak istediğin hesabı seç.
 Authentication.AccountRecovery.Description.CreateNewPassword,Eski şifrenden farklı güçlü bir şifre oluştur.
@@ -138,6 +141,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,Gelecekte h
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"Gelişmiş Koruma Programına kaydoldun. Giriş yaparken hesabının güvenliği için geçiş anahtarı veya güvenlik anahtarı kullanman gerekecek. Bu cihaz geçiş anahtarlarını desteklemediği için giriş yapmak zor olabilir. Bundan sonra kullanabileceğin Hızlı Giriş özelliği, zaten giriş yapmış olduğun başka bir cihaz üzerinden giriş yapmanı sağlar."
 Authentication.AccountRecovery.Description.EmailCodeSent,Bu e-posta adresiyle ilişkili bir Roblox hesabı varsa doğrulama kodu alacaksın. Spam klasörü de dâhil olmak üzere tüm klasörlerini kontrol et.
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,Hesabınla ilişkiliyse verdiğin e-posta adresine 6 haneli bir doğrulama kodu gönderdik. Spam klasörü de dâhil olmak üzere tüm klasörlerini kontrol et.
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,Bazı e-postalar yaş değişimi nedeniyle değiştirildikleri için kullanılamayabilir. Yine de bu e-postalar hesap kurtarma işlemi için kullanılabilirler.
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Gelişmiş Koruma Programına kaydoldun. Giriş yaparken hesabının güvenliği için geçiş anahtarı veya güvenlik anahtarı kullanman gerekecek.{lineBreak}{lineBreak}Kişisel cihazını kullanıyorsan şimdi yeni bir geçiş anahtarı ayarlamanı öneririz. Bu, ileride bu cihazdan giriş yapmanı kolaylaştırır. Paylaşılan veya herkese açık bir cihaz kullanıyorsan bu adımı atla."
 Authentication.AccountRecovery.Description.EnterABackupCode,Şimdi kaydettiğin bir yedek kodu gir.
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,Hesabınla ilişkili olabilecek bir e-posta adresi veya telefon numarası gir. Daha önce bir satın alma işlemi yaptıysan faturalandırma e-postanı deneyebilirsin.
@@ -145,7 +149,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"Şimdi bir e-posta
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Şimdi bir telefon numarası, yedek kod veya başka bir e-posta adresi gir. Bu, Roblox'ta bir şey satın alırken kullandığın bir e-posta olabilir."
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,Şimdi hesabınla ilişkilendirilmiş bir telefon numarası gir.
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"Şimdi bir telefon numarası veya başka bir e-posta adresi gir. Bu, Roblox'ta bir şey satın alırken kullandığın bir e-posta olabilir."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,Hesabında senin yapmamış olabileceğin bir güvenlik değişikliği bulduk. Bir göz at ve bunu senin yapıp yapmadığını bize bildir.
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,Hesabında senin yapmamış olabileceğin güvenlik değişiklikleri bulduk. Bir göz at ve bunları senin yapıp yapmadığını bize bildir.
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,Tanıdık olmayan öğeleri tutarsam başka biri hâlâ giriş yapma imkanına sahip olabilir ve beni dışarıda bırakabilir. Bu işlem geri alınamaz.
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,Hesabında {twoStepMethod} etkinleştirildi. Hâlâ erişebiliyorsan bunu sakla. Tekrar oturum açtığında kullanmanı isteyeceğiz.
+Authentication.AccountRecovery.Description.NoChangesMade,Fazladan bir koruma katmanı ekleyerek hesabını güvende tut.
 Authentication.AccountRecovery.Description.PhoneCodeSent,Bu telefon numarası için bir Roblox hesabı varsa doğrulama kodu alacaksın. SMS veya WhatsApp'ı kontrol et.
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"Hesabınla ilişkiliyse verdiğin telefon numarasına 6 haneli bir doğrulama kodu gönderdik. Kod, WhatsApp veya SMS ile gönderilebilir."
 Authentication.AccountRecovery.Description.PlatformNotSupported,Hesap kurtarma bu platformda veya cihazda desteklenmiyor. Tamam'ı seçerek bu pencereyi kapat ve Giriş sayfasına dön. Lütfen başka bir cihazda hesabını kurtar. Ardından Hızlı Giriş'i seç ve giriş yapmış olduğun diğer cihazla güvenli şekilde giriş yapmak için talimatları izle.
@@ -157,21 +165,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"Merhaba {username}, hesabına güvenilir bir konumdan erişiyorsun. 2 adımlı doğrulamayı atlayarak kurtarma işlemini tamamlayabilirsin."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,Hesabını kurtarmak için farklı bir e-posta kullandığını fark ettik. E-posta adresini şu şekilde güncelleyeceğiz: {email}
 Authentication.AccountRecovery.Description.VerifyAgain,"2 Aşamalı Doğrulama özelliğinin etkin olduğu hesabını kurtarmadan önce kimliğini doğrula. 2 aşamalı doğrulama işlemini yeniden başlatmak için ""Devam et"" düğmesine bas."
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,Hesabın güvende!
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,Yedek kodlar oluşturuldu
+Authentication.AccountRecovery.Heading.BillingEmailAdded,Fatura e-postası eklendi
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,Hesabını kurtaramıyoruz
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,Bir doğrulama yöntemi seç
+Authentication.AccountRecovery.Heading.EmailAdded,E-posta eklendi
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,Bu senin kişisel cihazın mı?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,Geçiş anahtarını desteklemediği için bu cihazda yapabileceklerin sınırlı olabilir
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,Gelişmiş Koruma Programına kayıt yapıldı
 Authentication.AccountRecovery.Heading.EnterSecondMethod,İkinci bir doğrulama yöntemi gir
+Authentication.AccountRecovery.Heading.InvalidateCredential,Bu değişikliği tanıdın mı?
+Authentication.AccountRecovery.Heading.InvalidateCredentials,Bu değişiklikleri tanıdın mı?
+Authentication.AccountRecovery.Heading.NoChangesMade,Değişiklik yapılmadı
+Authentication.AccountRecovery.Heading.PasskeyAdded,Geçiş anahtarı eklendi
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,Telefon numarası eklendi
 Authentication.AccountRecovery.Heading.ResetPassword,Şifreyi Sıfırla
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Roblox Hesap Kurtarma
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Mevcut iki aşamalı doğrulama yöntemi saklansın mı?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} eklendi
 Authentication.AccountRecovery.Heading.UpdateEmail,E-postanı Güncelle
 Authentication.AccountRecovery.Heading.UseAnotherDevice,Başka bir cihaz kullan
 Authentication.AccountRecovery.Label.AddEmail,Bir e-posta ekle
 Authentication.AccountRecovery.Label.Authenticator2sv,kimlik doğrulama uygulaması 2 aşamalı doğrulama
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,Kimlik Doğrulayıcı 2 Aşamalı Doğrulama
 Authentication.AccountRecovery.Label.BackupCode,Yedek kod
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,Yeni şifreyi doğrula
 Authentication.AccountRecovery.Label.Email2sv,e-posta 2 aşamalı doğrulama
+Authentication.AccountRecovery.Label.Email2svCapitalized,E-posta 2 Aşamalı Doğrulama
+Authentication.AccountRecovery.Label.EmailUnavailable,e-posta kullanılamıyor
 Authentication.AccountRecovery.Label.EnterCode,Kodu gir
 Authentication.AccountRecovery.Label.NewPasswordV2,Yeni şifre
 Authentication.AccountRecovery.Label.Or,Veya
@@ -179,6 +201,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,Kodu tekrar gönder
 Authentication.AccountRecovery.Label.ResendCodeTimer,Kodu {timeLeft} saniye sonra tekrar gönder
 Authentication.AccountRecovery.Label.SecurityKey2sv,güvenlik anahtarı 2 aşamalı doğrulama
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,Güvenlik Anahtarı 2 Aşamalı Doğrulama
 Authentication.AccountRecovery.Label.UsernameEmail,Kullanıcı Adı/E-posta
 Authentication.AccountRecovery.LabelEmail,E-posta
 Authentication.AccountRecovery.LabelPhone,Telefon
@@ -278,6 +301,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ Girişi
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Kod gönder
 Authentication.Login.Action.SendVerificationEmail,Doğrulama E-postası Gönder
 Authentication.Login.Action.SignIn,Giriş Yap
 Authentication.Login.Action.UsePasskey,Geçiş anahtarı kullan
@@ -290,8 +314,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Az önce {email} adresin
 Authentication.Login.Description.GetOneTimeCodeHelp,Tek kullanımlık kod almak için hesabında doğruladığın e-posta adresini gir.
 Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha güvenli bir giriş yöntemi olan geçiş anahtarı bulunuyor. Bu cihazda giriş yapmak için parmak izini, yüzünü veya ekran kilidini kullanabilirsin."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Cihazının geçiş anahtarlarını destekleyip desteklemediğini belirleyemiyoruz. Tekrar dene ya da hesabını e-posta veya telefon numarasıyla kurtarmak için ""Giriş yaparken sorun mu yaşıyorsun"" seçeneğine dokun."
+Authentication.Login.Description.PasskeyMobileOnly,Geçiş anahtarları yalnızca mobil cihazlarda kullanılabilir. Giriş yapmak için başka bir yöntem seç.
+Authentication.Login.Description.VerificationCodeSentTo,Bir Roblox hesabı varsa {email} adresine bir doğrulama kodu alacaksın
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
+Authentication.Login.Heading.EnterYourCode,Kodunu gir
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
@@ -313,6 +340,8 @@ Authentication.Login.Label.ConnectionError.Title,Bağlantı Hatası
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,E-postanın doğrulanması gerekiyor
 Authentication.Login.Label.EmailOrPhone,E-posta veya telefon
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,E-posta gir
 Authentication.Login.Label.EnterOneTimeCode,Tek Kullanımlık Kodu Gir
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Az önce e-postana gönderdiğimiz kodu gir
 Authentication.Login.Label.ForgotYourPassword,Şifreni mi unuttun?
@@ -974,9 +1003,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Ses Seviyesi
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Arkadaşları Davet Et
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Daha önce ziyaret edilen oyunlara katıl
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bu oyundan ayrılıp {PREVIOUS_EXPERIENCE} oyununa dönmek üzeresin.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bu oyundan ayrılıp {PREVIOUS_GAME} oyununa dönmek üzeresin.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ayrılıyor musun?
 CoreScripts.PremiumModal.Title.Error,Hata
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1602,6 +1629,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Mevcut görünümü güncelle
 Feature.Avatar.Action.UpdateMakeupLook,Görünümü güncelle
 Feature.Avatar.Action.Zoom,Yakınlaştır
 Feature.Avatar.AvatarWidgetTitle,Tarzları Keşfet
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
+Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
+Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor…
+Feature.Avatar.BackgroundGeneration.Title,Arka Plan Oluştur
 Feature.Avatar.Backgrounds.Title,Arka planlar
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Düzenlemeler bu vücut stilinde kullanılamıyor.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Varsayılan orijinal vücut renklerine dön
@@ -1609,6 +1642,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Cilt Rengi
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Sonsuz makyaj kombinasyonlarıyla kendi eşsiz görünümünü oluştur.
 Feature.Avatar.EmoteAlreadyAssigned,Bu İfade zaten bir yuvaya atanmış
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,İlham Al
@@ -2099,6 +2133,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatarı Sil
 Feature.Catalog.Action.DescribeAvatar,Avatarını tarif et (İsteğe Bağlı)
 Feature.Catalog.Action.Favorite,Favori
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Pazar Yerine Göz At
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Öğe Seçenekleri
 Feature.Catalog.Action.LoadMore,Daha Fazlasını Yükle
@@ -2394,6 +2429,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,Devam etmek için öğeleri ince
 Feature.Catalog.Message.Checkout.UnavailableItems,Bir veya daha fazla öğe satın alınamıyor. Devam etmeden önce lütfen bunları kaldır.
 Feature.Catalog.Message.CollectiblesInfo,"Koleksiyon öğeleri, belirli bir elde tutma süresinden sonra orijinal stok tükenmese bile kullanıcıdan kullanıcıya yeniden satılabilir. Roblox Plus aboneleri, Koleksiyon öğelerini yeniden satış için listeleyebilir."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Bunu favorilerine ekle
+Feature.Catalog.Message.Favorites.CategoryEmpty,Bu kategoride henüz hiçbir şey kaydetmedin.
+Feature.Catalog.Message.Favorites.Empty,Henüz hiçbir şey kaydetmedin.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox'taki en usta işi öğeleri keşfet
 Feature.Catalog.Message.HoldingPolicyL1,"Yeniden satışlar {days} güne kadar bekletilir. Öğe ancak bu bekletme süresi sona erdikten sonra yeniden satılabilir. Yalnızca Plus kullanıcıları, öğeleri bekletme süresine takılmadan yeniden satabilir."
 Feature.Catalog.Message.HoldingPolicyL2,"Satın alım sonrasında orijinal satışlar {purchaseDays} güne kadar askıya alınır. Öğe ancak bu bekletme süresi sona erdikten sonra yeniden satılabilir. Yeniden satışlar {resaleDays} güne kadar bekletilir. Yalnızca premium kullanıcılar, öğeleri bekletme süresine takılmadan yeniden satabilir."
@@ -2479,6 +2516,7 @@ Bu grubun tüm üyeleri davet edilecek ama yalnızca uygun şartları sağlayan 
 Feature.Chat.Description.ExpressiveChatLearnMore,"Açık sohbet özellikleri, filtresiz sohbet ve parti sesini içerir.
 
 Açık sohbete erişim, tüm üyeler uygun şartları sağlayana ve sohbetin yükseltilene kadar sınırlıdır."
+Feature.Chat.Description.InlineContextCardDescription,Yabancılarla sohbet ederken dikkatli ol. Kişisel bilgilerini paylaşmaktan veya başka bir sohbet uygulamasına geçmekten kaçın. İstediğin kişiyi o kişinin profilinden engelleyebilir veya raporlayabilirsin.
 Feature.Chat.Description.NameGroup,Grubunu adlandır
 Feature.Chat.Description.NameGroupChat,Sohbet grubunu adlandır
 Feature.Chat.Description.OSAContextCardDescription,Güvenliğin bizim için önemli. Kendini rahat hissetmiyor musun? Bu kişiyi dilediğin zaman profilinden engelleyebilir veya raporlayabilirsin.
@@ -2501,6 +2539,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Bu kişiyle ilk etkileşim
 Feature.Chat.Heading.LeaveGroup,Gruptan Ayrıl
 Feature.Chat.Heading.PartyWithConnections,Bağlantılarla Parti
 Feature.Chat.Heading.PartyWithFriends,Arkadaşlarla Parti
+Feature.Chat.Heading.SafeChattingWithThisUser,Bu kişiyle sohbet ederken dikkatli ol
+Feature.Chat.Heading.SafeChattingWithUsername,{displayName} ile sohbet ederken dikkatli ol
 Feature.Chat.Heading.ShareGameToChat,Sohbet etmek için deneyimi paylaş
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} seni katılmaya davet etti
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} seni bir gruba katılmaya davet etti
@@ -2561,7 +2601,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 sa.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Mevcut değil
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı
@@ -3021,6 +3060,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Güvenili
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} artık güvenilir arkadaşın
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Güvenilir arkadaş kaldırıldı
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Güvenilir arkadaş olma talebi gönderildi
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Son Etkinlikler
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username} Tarafından Gerçekleştirilen Son Etkinlikler
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3129,6 +3170,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Geçici bir hata nedeniyle
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bu sponsorlu içeriği, sana alakalı içerik sunmak için kullandığımız konum, cihaz bilgileri, yaş ve platform davranışı gibi farklı faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Bu sponsorlu içeriği, sana alakalı içerik sunmak için kullandığımız konum, cihaz bilgileri, yaş ve platform davranışı gibi farklı faktörlere dayalı olarak görüyorsun. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Sponsorluk için {PayerName} ödeme yaptı."
 Feature.GameDetails.Message.SuggestLessOften,Bunu daha az sıklıkta önereceğiz
 Feature.GameDetails.RatingPercentOnly,%{percentRating} Derecelendirme
 Feature.GameDetails.Toast.LinkCopied,
@@ -4883,6 +4927,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,Bu deneyimi geliştirmeye destek ol
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,Yaratıcının bu deneyimi geliştirmesine destek ol
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,Satın alınamıyor
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,Daha fazla ürün almadan önce satın alımlarını elde etmek için deneyime katıl.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,Satın aldığın ürünü kullanmak için katıl
 Purchasing.RobloxProducts.Label.RobuxBalance,Bakiye: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,Ek İçerik Oluşturucu Şartları
 Roblox.ReferralRewards.Expires,

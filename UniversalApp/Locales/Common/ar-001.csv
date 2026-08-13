@@ -100,6 +100,8 @@ Authentication.AccountPicker.Label.SignedOut,تم تسجيل الخروج
 Authentication.AccountRecovery.Action.AddAPasskey,نعم، أضِف مفتاح مرور جديدًا
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,لا، لا أتعرف عليها
+Authentication.AccountRecovery.Action.DontDeleteCredentials,نعم، أتعرف عليها
 Authentication.AccountRecovery.Action.Next,التالي
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,إعادة تعيين كلمة المرور
@@ -114,6 +116,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,استخدام البري�
 Authentication.AccountRecovery.Action.UsePhone,استخدام الهاتف
 Authentication.AccountRecovery.Action.UsePhoneInstead,استخدام الهاتف بدلاً من ذلك
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,استخدم اسم المستخدم أو البريد الإلكتروني بدلاً من ذلك
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,تمت إزالة التغييرات التي لم تتعرّف عليها. حافظ على أمان حسابك من خلال إضافة طبقة حماية إضافية.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,حرصًا على أمانك، يلزم وجود طريقة تحقُّق ثانية ومختلفة لاستعادة حسابك المفعّل عليه ميزة التحقُّق بخطوتين. لا تتوفر لهذا الحساب طريقة احتياطية لاستعادة آمنة. يُرجى محاولة استعادة الوصول إلى طريقة التحقُّق الأساسية بخطوتين، أو استخدام كود احتياطي لتجاوز إجراء التحقُّق بخطوتين.
 Authentication.AccountRecovery.Description.ChooseAccount,اختر الحساب الذي تريد استعادته.
 Authentication.AccountRecovery.Description.CreateNewPassword,أنشئ كلمة مرور قوية ومختلفة عن كلمة مرورك القديمة.
@@ -121,6 +124,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,أنشئ ك
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,أنت مسجّل في برنامج الحماية المعزَّز. للحفاظ على أمان حسابك، ستحتاج إلى مفتاح مرور أو مفتاح أمان لتسجيل الدخول. لا يدعم هذا الجهاز مفاتيح المرور، لذا قد تواجه تحديًا عند تسجيل الدخول إلى هذا الجهاز. من الآن فصاعدًا، يمكنك استخدام تسجيل الدخول السريع لاستخدام جهاز آخر تم تسجيل الدخول عليه لتسهيل عملية تسجيل الدخول.
 Authentication.AccountRecovery.Description.EmailCodeSent,إذا كان هناك حساب Roblox مرتبط بعنوان البريد الإلكتروني هذا، فستتلقى كود تحقق. يُرجى التحقق من كل مجلداتك، بما في ذلك مجلد الرسائل غير المرغوب بها.
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,لقد أرسلنا إليك الآن كود تحقق مكون من 6 أرقام إلى عنوان البريد الإلكتروني الذي قدمته، إذا كان مرتبطًا بحسابك. يُرجى التحقق من كل مجلداتك، بما في ذلك مجلد الرسائل غير المرغوب بها.
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,قد لا تتوفر بعض عناوين البريد الإلكتروني نظرًا لتغييرها نتيجة لتعديل العمر. ومع ذلك، سيظل بإمكانك استخدامها لاستعادة الحساب.
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,أنت مسجّل في برنامج الحماية المعزَّز. للحفاظ على أمان حسابك، ستحتاج إلى مفتاح مرور أو مفتاح أمان لتسجيل الدخول.{lineBreak}{lineBreak}إذا كنت تستخدم جهازك الشخصي، نقترح عليك إعداد مفتاح مرور جديد الآن. سيجعل ذلك تسجيل الدخول على هذا الجهاز أسهل في المستقبل. إذا كنت تستخدم جهازًا مشتركًا أو عامًا، يمكنك تخطي هذه الخطوة.
 Authentication.AccountRecovery.Description.EnterABackupCode,الآن، أدخل كودًا احتياطيًا قمت بحفظه.
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,أدخِل بريدًا إلكترونيًا أو رقم هاتف قد يكون مرتبطًا بحسابك. إذا أجريت عملية شراء مُسبقًا، يمكنك تجربة استخدام البريد الإلكتروني للفوترة.
@@ -128,7 +132,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,الآن، أدخِ
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,الآن، أدخِل رقم هاتف أو كود احتياطي أو عنوان بريد إلكتروني آخر. يمكن أن يكون هذا البريد الإلكتروني قد سبق لك استخدامه لإجراء عملية شراء على منصّة Roblox
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,الآن، أدخِل رقم هاتف مرتبط بحسابك.
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,الآن، أدخِل رقم هاتف أو عنوان بريد إلكتروني آخر. يمكن أن يكون بريدًا إلكترونيًا قد سبق لك استخدامه لإجراء عملية شراء على منصّة Roblox.
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,لقد رصدنا تغييرًا أمنيًا في حسابك ربما لم تكن أنت من أجراه. ألقِ نظرة وأخبرنا ما إذا كنت أنت من أجراه.
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,لقد رصدنا تغييرات أمنية في حسابك ربما لم تكن أنت من أجراها. ألقِ نظرة وأبلِغنا ما إذا كنت أنت من أجراها.
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,إذا احتفظت بالعناصر التي لم تتعرّف عليها، فقد يظل بإمكان شخص آخر تسجيل الدخول ومنعي من الدخول. لا يمكن التراجع عن هذا الإجراء.
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,لقد قمت بتمكين طريقة التحقّق بخطوتين {twoStepMethod} على حسابك. احتفظ بطريقة التحقّق هذه إذا كان لا يزال بإمكانك الوصول إليها. سنطلب منك استخدامها عند تسجيل الدخول مرة أخرى.
+Authentication.AccountRecovery.Description.NoChangesMade,حافِظ على أمان حسابك من خلال إضافة طبقة إضافية من الحماية.
 Authentication.AccountRecovery.Description.PhoneCodeSent,إذا كان هناك حساب Roblox مرتبط برقم الهاتف هذا، فستتلقى كود تحقق. يُرجى التحقق من الرسائل القصيرة أو رسائل تطبيق WhatsApp.
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,لقد أرسلنا إليك الآن كود تحقق مكون من 6 أرقام إلى رقم الهاتف الذي قدمته، إذا كان مرتبطًا بحسابك. قد يتم إرسال الكود عبر تطبيق WhatsApp أو عبر رسالة نصية قصيرة (SMS).
 Authentication.AccountRecovery.Description.PlatformNotSupported,"عملية استعادة الحساب غير مدعومة على هذه المنصة أو على هذا الجهاز. اضغط على ""موافق"" لإغلاق هذه النافذة والعودة إلى صفحة تسجيل الدخول. يرجى استعادة حسابك على جهاز آخر، ثم اختر ""تسجيل الدخول السريع"" واتبع التعليمات لتسجيل الدخول بأمان باستخدام الجهاز الآخر الذي تم تسجيل الدخول عليه."
@@ -140,21 +148,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,�
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,مرحبًا {username}، أنت تحاول الوصول إلى حسابك من موقع موثوق به. يمكنك تخطي عملية التحقُّق بخطوتين وإكمال عملية الاستعادة.
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,لاحظنا أنك استخدمت بريدًا إلكترونيًا مختلفًا لاستعادة حسابك. سنحدِّث عنوان بريدك الإلكتروني ليكون: {email}
 Authentication.AccountRecovery.Description.VerifyAgain,"تحقّق من هويتك قبل استعادة الحساب المفعّل عليه ميزة التحقق بخطوتين. اضغط على ""متابعة"" لإعادة تشغيل تحدي التحقق بخطوتين."
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,تم تأمين حسابك!
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,تم إنشاء الأكواد الاحتياطية
+Authentication.AccountRecovery.Heading.BillingEmailAdded,تمت إضافة البريد الإلكتروني للفوترة
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,لا يمكننا استعادة حسابك
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,اختر طريقة التحقق
+Authentication.AccountRecovery.Heading.EmailAdded,تم إضافة البريد الإلكتروني
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,هل هذا جهازك الشخصي؟
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,قد تواجه سلوكيات محدودة عند استخدام هذا الجهاز لأنه لا يدعم مفتاح المرور
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,تم التسجيل في برنامج الحماية المعزَّز
 Authentication.AccountRecovery.Heading.EnterSecondMethod,أدخِل طريقة التحقُّق الثانية
+Authentication.AccountRecovery.Heading.InvalidateCredential,هل تتعرّف على هذا التغيير؟
+Authentication.AccountRecovery.Heading.InvalidateCredentials,هل تتعرّف على هذه التغييرات؟
+Authentication.AccountRecovery.Heading.NoChangesMade,لم يتم إجراء أي تغييرات
+Authentication.AccountRecovery.Heading.PasskeyAdded,تمت إضافة مفتاح المرور
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,تمت إضافة رقم الهاتف
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,استرداد حساب Roblox
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,هل ترغب في الاحتفاظ بطريقة التحقُّق بخطوتين الحالية؟
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,تمت إضافة {value}
 Authentication.AccountRecovery.Heading.UpdateEmail,تحديث بريدك الإلكتروني
 Authentication.AccountRecovery.Heading.UseAnotherDevice,استخدام جهاز آخر
 Authentication.AccountRecovery.Label.AddEmail,إضافة بريد إلكتروني
 Authentication.AccountRecovery.Label.Authenticator2sv,تطبيق المصادقة لعملية التحقُّق بخطوتين
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,عملية التحقُّق بخطوتين عبر تطبيق المصادقة (Authenticator)
 Authentication.AccountRecovery.Label.BackupCode,الكود الاحتياطي
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,تأكيد كلمة المرور الجديدة
 Authentication.AccountRecovery.Label.Email2sv,البريد الإلكتروني لعملية التحقُّق بخطوتين
+Authentication.AccountRecovery.Label.Email2svCapitalized,عملية التحقُّق بخطوتين عبر البريد الإلكتروني
+Authentication.AccountRecovery.Label.EmailUnavailable,البريد الإلكتروني غير متوفر
 Authentication.AccountRecovery.Label.EnterCode,أدخِل الكود
 Authentication.AccountRecovery.Label.NewPasswordV2,كلمة المرور الجديدة
 Authentication.AccountRecovery.Label.Or,أو
@@ -162,6 +184,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,تم ال
 Authentication.AccountRecovery.Label.ResendCode,إعادة إرسال الكود
 Authentication.AccountRecovery.Label.ResendCodeTimer,إعادة إرسال الكود في {timeLeft} من الثواني
 Authentication.AccountRecovery.Label.SecurityKey2sv,مفتاح الأمان لعملية التحقُّق بخطوتين
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,عملية التحقُّق بخطوتين عبر مفتاح الأمان
 Authentication.AccountRecovery.Label.UsernameEmail,اسم المستخدم/البريد الإلكتروني
 Authentication.AccountRecovery.LabelEmail,البريد الإلكتروني
 Authentication.AccountRecovery.LabelPhone,الهاتف
@@ -261,6 +284,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,تسجيل دخول QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,إعادة إرسال الرمز
+Authentication.Login.Action.SendCodeSentenceCase,إرسال الكود
 Authentication.Login.Action.SendVerificationEmail,إرسال بريد إلكتروني للتحقق
 Authentication.Login.Action.SignIn,تسجيل الدخول
 Authentication.Login.Action.UsePasskey,استخدام مفتاح مرور
@@ -273,8 +297,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,أدخل الرمز ال
 Authentication.Login.Description.GetOneTimeCodeHelp,أدخل بريدك الإلكتروني الذي تم التحقق منه في حسابك لتلقي رمز مرة واحدة.
 Authentication.Login.Description.PasskeyDescription,يحتوي حسابك على مفتاح مرور، وهو طريقة تسجيل دخول أكثر أمانًا من كلمة المرور. يمكنك استخدام بصمة إصبعك أو وجهك أو قفل الشاشة لتسجيل الدخول على هذا الجهاز.
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"لا يمكننا تحديد ما إذا كان جهازك يدعم مفتاح المرور. حاول مرة أخرى، أو اضغط على ""مشكلة في تسجيل الدخول"" لاسترداد حسابك باستخدام بريد إلكتروني أو رقم هاتف."
+Authentication.Login.Description.PasskeyMobileOnly,مفاتيح المرور متاحة فقط على الهاتف المحمول. اختر طريقة أخرى لتسجيل الدخول.
+Authentication.Login.Description.VerificationCodeSentTo,إذا كان هناك حساب على منصّة Roblox، فستتلقى كود تحقق على البريد الإلكتروني {email}
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
+Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,تسجيل الدخول إلى Roblox
@@ -295,6 +322,8 @@ Authentication.Login.Label.ConnectionError.Title,خطأ في الاتصال
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,نحتاج للتحقق من بريدك الإلكتروني
 Authentication.Login.Label.EmailOrPhone,البريد الإلكتروني أو الهاتف
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,أدخِل البريد الإلكتروني
 Authentication.Login.Label.EnterOneTimeCode,أدخل رمز مرة واحدة
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,أدخل الرمز الذي أرسلناه للتو إلى بريدك الإلكتروني
 Authentication.Login.Label.ForgotYourPassword,هل نسيت كلمة مرورك؟
@@ -956,9 +985,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,المستوى
 CoreScripts.InGameMenu.Leave,مغادرة
 CoreScripts.InGameMenu.PageTitle.InviteFriends,دعوة أصدقاء
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,هل تريد الخروج؟
 CoreScripts.PremiumModal.Title.Error,خطأ
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1582,6 +1609,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,تحديث الإطلالة ال�
 Feature.Avatar.Action.UpdateMakeupLook,تحديث الإطلالة
 Feature.Avatar.Action.Zoom,تكبير
 Feature.Avatar.AvatarWidgetTitle,استكشاف الأنماط
+Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
+Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
+Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
+Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخلفية...
+Feature.Avatar.BackgroundGeneration.Title,إنشاء خلفية
 Feature.Avatar.Backgrounds.Title,الخلفيات
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,التعديل غير متاح لنمط الجسد هذا.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,الرجوع إلى ألوان الجسد الأصلية
@@ -1589,6 +1622,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,لون البشرة
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,ابتكِر إطلالة فريدة خاصة بك من خلال تركيبات لا حصر لها من المكياج.
 Feature.Avatar.EmoteAlreadyAssigned,هذا Emote تم تعيينه في خانة مسبقًا
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,حدث خطأ ما. الرجاء المحاولة مرة أخرى لاحقًا.
 Feature.Avatar.GetInspired,احصل على الإلهام
@@ -2079,6 +2113,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,حذف الأفاتار
 Feature.Catalog.Action.DescribeAvatar,وصف أفاتارك (اختياري)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,استعراض المتجر
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,خيارات العنصر
 Feature.Catalog.Action.LoadMore,تحميل المزيد
@@ -2374,6 +2409,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,للمتابعة، راجِع ا
 Feature.Catalog.Message.Checkout.UnavailableItems,لا يمكن شراء واحد أو أكثر من العناصر. يرجى إزالتها قبل المتابعة.
 Feature.Catalog.Message.CollectiblesInfo,يمكن إعادة بيع عناصر التذكارات من مستخدم لآخر بعد فترة احتفاظ معينة، حتى لو لم تنفد الكمية الأصلية. كما يمكن لمشتركي Roblox Plus عرض عناصر التذكارات لإعادة البيع.
 Feature.Catalog.Message.FTUXFavoritePillTooltip,أضِف هذا إلى المفضلة
+Feature.Catalog.Message.Favorites.CategoryEmpty,لم تقم بحفظ أي شيء في هذه الفئة حتى الآن.
+Feature.Catalog.Message.Favorites.Empty,لم تقم بحفظ أي شيء حتى الآن.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,اكتشف أفضل العناصر المصمَّمة بإتقان على منصّة Roblox
 Feature.Catalog.Message.HoldingPolicyL1,ستخضع عمليات الشراء من إعادة البيع لفترة تعليق تصل إلى {days} من الأيام. لا يمكن إعادة بيع العنصر إلا بعد انتهاء فترة التعليق هذه. يمكن لمستخدمي Plus فقط إعادة بيع العناصر.
 Feature.Catalog.Message.HoldingPolicyL2,بعد الشراء، تصير المبيعات الأصلية معلقة لمدة تصل إلى {purchaseDays} (يوم). لا يمكن إعادة بيع العنصر إلا بعد انتهاء مدة التعليق هذه وسوف يكون لإعادة البيع مهلة تعليق أيضًا تصل إلى {resaleDays} (يوم). يمكن لمستخدمي Premium فقط إعادة بيع العناصر.
@@ -2459,6 +2496,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"بفضل ميزات ال
 Feature.Chat.Description.ExpressiveChatLearnMore,"تتيح لك ميزات الدردشة المتقدمة إمكانية إجراء الدردشة بدون فلترة والدردشة الصوتية الجماعية.
 
 يتطلب الوصول إلى الدردشة المتقدمة أن يكون كل الأعضاء مؤهلين وأن تتم ترقية الدردشة في حسابك."
+Feature.Chat.Description.InlineContextCardDescription,كن حذرًا عند الدردشة مع الأشخاص المجهولين. لا تقم بمشاركة معلوماتك الشخصية أو الانتقال إلى تطبيق آخر للدردشة. يمكنك حظر أي شخص أو الإبلاغ عنه من ملفه الشخصي.
 Feature.Chat.Description.NameGroup,اسم مجموعتك
 Feature.Chat.Description.NameGroupChat,اعط اسمًا لمجموعة الدردشة
 Feature.Chat.Description.OSAContextCardDescription,سلامتك تهمنا. هل تشعر بعدم ارتياح تجاه هذا الشخص؟ يمكنك حظره أو الإبلاغ عنه في أي وقت من ملفه الشخصي.
@@ -2481,6 +2519,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,أول تفاعل مع هذ�
 Feature.Chat.Heading.LeaveGroup,مغادرة المجموعة
 Feature.Chat.Heading.PartyWithConnections,فرقة مع جهات التواصل
 Feature.Chat.Heading.PartyWithFriends,فرقة مع الأصدقاء
+Feature.Chat.Heading.SafeChattingWithThisUser,حافِظ على سلامتك أثناء الدردشة مع هذا الشخص
+Feature.Chat.Heading.SafeChattingWithUsername,حافِظ على سلامتك أثناء الدردشة مع {displayName}
 Feature.Chat.Heading.ShareGameToChat,شارك التجربة في الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoin,تمت دعوتك من {combinedName} للانضمام إلى الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,تمت دعوتك من {combinedName} للانضمام إلى مجموعة
@@ -2541,7 +2581,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1س
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,غير متاحة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
@@ -3001,6 +3040,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,أصبح {name} الآن من أصدقائك الموثوقين
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,تم إزالة الصديق الموثوق
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,تم إرسال طلب إضافة كصديق موثوق
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,النشاط الأخير
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,نشاط {username} الأخير
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3109,6 +3150,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,تعذّر عرض معلو
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُصمِّم التجربة: {CreatorName}. مموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل بناءً على عوامل مختلفة مثل موقعك الجغرافي ومعلومات الجهاز والعمر وسلوكك على المنصّة، بهدف عرض محتوى ملائم لك. مُصمِّم التجربة: {CreatorName}. مُموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُصمِّم التجربة: {CreatorName}. مُموِّل هذا الإعلان: {PayerName}.
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مموِّل هذا الإعلان هو {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل بناءً على عوامل مختلفة مثل موقعك الجغرافي ومعلومات الجهاز والعمر وسلوكك على المنصّة، بهدف عرض محتوى ملائم لك. مُموِّل هذا الإعلان هو {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُموِّل هذا الإعلان هو {PayerName}.
 Feature.GameDetails.Message.SuggestLessOften,سنقترح هذا بشكل أقل تكرارًا
 Feature.GameDetails.RatingPercentOnly,التقييم {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -4862,6 +4906,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,المساعدة على تحسين �
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,ساعِد المصمّم في تحسين هذه التجربة
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,لا يمكنك الشراء
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,انضم إلى التجربة لتحصيل عمليات الشراء السابقة قبل شراء المزيد من المنتجات.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,انضم لتحصيل عملية الشراء
 Purchasing.RobloxProducts.Label.RobuxBalance,الرصيد: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,شروط المصمّم الإضافية
 Roblox.ReferralRewards.Expires,وقت الانتهاء

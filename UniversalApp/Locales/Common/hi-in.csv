@@ -100,6 +100,8 @@ Authentication.AccountPicker.Label.SignedOut,साइन-आउट किया
 Authentication.AccountRecovery.Action.AddAPasskey,"हाँ, एक नई पास-की जोड़ें"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,"नहीं, मुझे नहीं पता"
+Authentication.AccountRecovery.Action.DontDeleteCredentials,"हाँ, मुझे पता है"
 Authentication.AccountRecovery.Action.Next,आगे जाएँ
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,पासवर्ड रीसेट करें
@@ -114,6 +116,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,इसके बजाय 
 Authentication.AccountRecovery.Action.UsePhone,फ़ोन इस्तेमाल करें
 Authentication.AccountRecovery.Action.UsePhoneInstead,इसके बजाय फ़ोन का इस्तेमाल करें
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,इसके बजाय यूज़रनेम या ईमेल इस्तेमाल करें
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,"उन बदलावों को हटा दिया गया है, जिनके बारे में आपको नहीं पता था. अतिरिक्त सुरक्षा सुविधा जोड़कर अपना अकाउंट सुरक्षित रखें."
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"आपकी सुरक्षा के लिए, 2-स्टेप वेरिफ़िकेशन की सुविधा वाले आपके अकाउंट को रिकवर करने के लिए, वेरिफ़िकेशन के एक और, नए तरीके की ज़रूरत होती है. इस अकाउंट में सुरक्षित रिकवरी के लिए कोई बैकअप तरीका उपलब्ध नहीं है. कृपया अपने प्राथमिक 2SV तरीके का ऐक्सेस फिर से पाने की कोशिश करें या 2SV चैलेंज को स्किप करने के लिए किसी बैकअप कोड का इस्तेमाल करें."
 Authentication.AccountRecovery.Description.ChooseAccount,"वह अकाउंट चुनें, जिसे आपको रिकवर करना है."
 Authentication.AccountRecovery.Description.CreateNewPassword,"एक मज़बूत पासवर्ड बनाएँ, जो आपके पुराने पासवर्ड से अलग हो."
@@ -121,6 +124,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,नया �
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"आपने एन्हांस्ड प्रोटेक्शन प्रोग्राम में एनरोल किया हुआ है. अपने अकाउंट को सुरक्षित रखने के लिए, आपको पास-की या सिक्योरिटी-की से साइन इन करना होगा. इस डिवाइस पर पास-की काम नहीं करती है, इसलिए इस डिवाइस में साइन इन करना मुश्किल हो सकता है. आगे से, लॉग इन किए गए किसी और डिवाइस से साइन इन करने के लिए क्विक साइन-इन का इस्तेमाल किया जा सकता है."
 Authentication.AccountRecovery.Description.EmailCodeSent,"अगर इस ईमेल से जुड़ा कोई Roblox अकाउंट मौजूद है, तो आपको एक वेरिफ़िकेशन कोड मिलेगा. स्पैम सहित सभी फ़ोल्डर चेक करें."
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,"अगर यह आपके अकाउंट से जुड़ा है, तो हमने अभी-अभी आपको दिए गए फ़ोन नंबर पर 6 अंकों का वेरिफ़िकेशन कोड भेजा है. स्पैम के साथ-साथ सभी फ़ोल्डर्स चेक करें."
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,"हो सकता है कि कुछ ईमेल उपलब्ध न हों, क्योंकि उम्र में बदलाव की वजह से उन्हें बदला गया था. हालाँकि, अभी भी अकाउंट रिकवरी के लिए उनका इस्तेमाल किया जा सकता है."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"आपने एन्हांस्ड प्रोटेक्शन प्रोग्राम में एनरोल किया हुआ है. अपने अकाउंट को सुरक्षित रखने के लिए, आपको पास-की या सिक्योरिटी-की से साइन इन करना होगा.{lineBreak}{lineBreak}अगर आप अपने निजी डिवाइस पर हैं, तो हम आपको अभी एक नई पास-की सेट अप करने का सुझाव देते हैं. इससे भविष्य में इस डिवाइस पर साइन इन करना आसान हो जाता है. अगर आप शेयर किए गए या सार्वजनिक डिवाइस पर हैं, तो इस स्टेप को छोड़ दें."
 Authentication.AccountRecovery.Description.EnterABackupCode,"अब, अपना सेव किया हुआ बैकअप कोड डालें."
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"ऐसा ईमेल या फ़ोन नंबर डालें, जो आपके अकाउंट से जुड़ा हो. अगर आपने पहले खरीदारी की है, तो बिलिंग पते में दिया गया ईमेल डालकर देखें."
@@ -128,7 +132,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"अब, एक ई
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"अब एक फ़ोन नंबर, बैकअप कोड या कोई दूसरा ईमेल पता डालें. यह ऐसा कोई ईमेल हो सकता है जिसका इस्तेमाल करके आपने Roblox पर कुछ खरीदा हो."
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"अब, अपने अकाउंट से जुड़ा फ़ोन नंबर डालें"
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"अब, एक फ़ोन नंबर या कोई दूसरा ईमेल पता डालें. यह ऐसा कोई ईमेल हो सकता है जिसका इस्तेमाल करके आपने Roblox पर कुछ खरीदा था."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,"हमें आपके अकाउंट में सुरक्षा संबंधी बदलाव मिला है, जो शायद आपने नहीं किया है. देखें और हमें बताएँ कि क्या यह आपने किया है."
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,"हमें आपके अकाउंट में सुरक्षा संबंधी ऐसे बदलाव मिले हैं, जो शायद आपने नहीं किए हैं. देखें और हमें बताएँ कि क्या वे आपने किए हैं."
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"जिन आइटम के बारे में मुझे नहीं पता, उन्हें रखने पर कोई भी अन्य व्यक्ति साइन-इन करके मुझे लॉक आउट कर सकता है. इस ऐक्शन को वापस नहीं लिया जा सकता."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,"आपने अपने अकाउंट पर {twoStepMethod} चालू कर दिया है. अगर यह अभी भी ऐक्सेस किया जा सकता है, तो इसे रखें. फिर से साइन इन करने पर, हम आपसे इसका इस्तेमाल करने के लिए कहेंगे."
+Authentication.AccountRecovery.Description.NoChangesMade,सुरक्षा का एक और स्टेप जोड़कर अपना अकाउंट सुरक्षित रखें.
 Authentication.AccountRecovery.Description.PhoneCodeSent,"अगर इस फ़ोन नंबर से जुड़ा कोई Roblox अकाउंट मौजूद है, तो आपको एक वेरिफ़िकेशन कोड मिलेगा. SMS या WhatsApp चेक करें."
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"अगर यह आपके अकाउंट से जुड़ा है, तो हमने अभी-अभी आपको दिए गए फ़ोन नंबर पर 6 अंकों का वेरिफ़िकेशन कोड भेजा है. यह कोड आपको WhatsApp या SMS के ज़रिये मिल सकता है."
 Authentication.AccountRecovery.Description.PlatformNotSupported,"इस प्लैटफ़ॉर्म या डिवाइस पर अकाउंट रिकवरी की सुविधा उपलब्ध नहीं है. इस विंडो को बंद करने और साइन इन पेज पर लौटने के लिए ‘ठीक है’ चुनें. कृपया किसी दूसरे डिवाइस पर अपना अकाउंट रिकवर करें. फिर, 'क्विक साइन-इन' चुनें और लॉग इन किए गए दूसरे डिवाइस से सुरक्षित तरीके से साइन इन करने के निर्देशों का पालन करें."
@@ -140,21 +148,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"हैलो {username}, आपने किसी भरोसेमंद लोकेशन से अपना अकाउंट ऐक्सेस किया है. आपके पास अपना 2-स्टेप वेरिफ़िकेशन छोड़कर रिकवरी पूरी करने का विकल्प है."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,हमने देखा है कि आपने अपना अकाउंट रिकवर करने के लिए किसी दूसरे ईमेल का इस्तेमाल किया है. हम आपका ईमेल पता अपडेट कर देंगे : {email}
 Authentication.AccountRecovery.Description.VerifyAgain,"2-स्टेप वेरिफ़िकेशन की सुविधा वाले अपने अकाउंट को रिकवर करने से पहले, वेरिफ़ाई करें कि यह आप ही हैं. 2-स्टेप वेरिफ़िकेशन चैलेंज को फिर से ट्रिगर करने के लिए, ""जारी रखें"" दबाएँ."
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,आपका अकाउंट सुरक्षित है!
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,बैकअप कोड जनरेट किए गए
+Authentication.AccountRecovery.Heading.BillingEmailAdded,बिलिंग ईमेल जोड़ा गया
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,हम आपका अकाउंट रिकवर नहीं कर सकते
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,वेरिफ़िकेशन का तरीका चुनें
+Authentication.AccountRecovery.Heading.EmailAdded,ईमेल जोड़ा गया
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,क्या यह आपका निजी डिवाइस है?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,"इस डिवाइस पर आपको लिमिटेड बिहेवियर का अनुभव हो सकता है, क्योंकि इस पर पास-की काम नहीं करती है"
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,एन्हैंस्ड प्रोटेक्शन प्रोग्राम में एनरोल किया गया
 Authentication.AccountRecovery.Heading.EnterSecondMethod,वेरिफ़िकेशन का दूसरा तरीका डालें
+Authentication.AccountRecovery.Heading.InvalidateCredential,क्या आपको इस बदलाव के बारे में पता है?
+Authentication.AccountRecovery.Heading.InvalidateCredentials,क्या आपको इन बदलावों के बारे में पता है?
+Authentication.AccountRecovery.Heading.NoChangesMade,कोई बदलाव नहीं किया गया
+Authentication.AccountRecovery.Heading.PasskeyAdded,पास-की जोड़ी गई
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,फ़ोन नंबर जोड़ा गया
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Roblox अकाउंट की रिकवरी
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,क्या हमें दो-स्टेप वेरिफ़िकेशन का मौजूदा तरीका रखना चाहिए?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} जोड़ा गया
 Authentication.AccountRecovery.Heading.UpdateEmail,अपना ईमेल ऐड्रेस अपडेट करें
 Authentication.AccountRecovery.Heading.UseAnotherDevice,कोई दूसरा डिवाइस इस्तेमाल करें
 Authentication.AccountRecovery.Label.AddEmail,ईमेल एड्रेस जोड़ें
 Authentication.AccountRecovery.Label.Authenticator2sv,ऑथेंटिकेटर ऐप 2SV (2-स्टेप वेरिफ़िकेशन)
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,ऑथेंटिकेटर 2SV (टू-स्टेप वेरिफ़िकेशन)
 Authentication.AccountRecovery.Label.BackupCode,बैकअप कोड
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,नया पासवर्ड कन्फ़र्म करें
 Authentication.AccountRecovery.Label.Email2sv,ईमेल 2SV (2-स्टेप वेरिफ़िकेशन)
+Authentication.AccountRecovery.Label.Email2svCapitalized,
+Authentication.AccountRecovery.Label.EmailUnavailable,ईमेल उपलब्ध नहीं है
 Authentication.AccountRecovery.Label.EnterCode,कोड डालें
 Authentication.AccountRecovery.Label.NewPasswordV2,नया पासवर्ड
 Authentication.AccountRecovery.Label.Or,या
@@ -162,6 +184,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,कोड फिर से भेजें
 Authentication.AccountRecovery.Label.ResendCodeTimer,{timeLeft} सेकंड में फिर से कोड भेजें
 Authentication.AccountRecovery.Label.SecurityKey2sv,सिक्योरिटी-की (key) 2SV (2-स्टेप वेरिफ़िकेशन)
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,सिक्योरिटी-की 2SV (2-स्टेप वेरिफ़िकेशन)
 Authentication.AccountRecovery.Label.UsernameEmail,यूज़रनेम/ईमेल
 Authentication.AccountRecovery.LabelEmail,ईमेल
 Authentication.AccountRecovery.LabelPhone,फ़ोन नंबर
@@ -261,6 +284,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ लॉग इन
 Authentication.Login.Action.QuickSignIn,क्विक साइन-इन करें
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,कोड भेजें
 Authentication.Login.Action.SendVerificationEmail,वेरिफ़िकेशन ईमेल भेजें
 Authentication.Login.Action.SignIn,साइन इन करें
 Authentication.Login.Action.UsePasskey,पास-की का इस्तेमाल करें
@@ -273,8 +297,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,अभी-अभी आ�
 Authentication.Login.Description.GetOneTimeCodeHelp,"वन-टाइम कोड पाने के लिए, अपना वेरिफ़ाइड ईमेल डालें."
 Authentication.Login.Description.PasskeyDescription,"आपका अकाउंट पास-की का इस्तेमाल करता है. यह पासवर्ड से ज़्यादा सुरक्षित है. आप इस डिवाइस पर अपने फ़िंगरप्रिंट, फ़ेस या स्क्रीन लॉक से साइन इन कर सकते हैं."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"हम यह नहीं तय कर सकते कि आपका डिवाइस पास-की का सपोर्ट करता है या नहीं. ईमेल या फ़ोन इस्तेमाल करके, अपना अकाउंट रिकवर करने के लिए फिर से कोशिश करें या “साइन इन करने में समस्या” पर टैप करें."
+Authentication.Login.Description.PasskeyMobileOnly,पास-की सिर्फ़ मोबाइल पर उपलब्ध हैं. साइन-इन करने का कोई दूसरा तरीका चुनें.
+Authentication.Login.Description.VerificationCodeSentTo,"अगर कोई Roblox अकाउंट मौजूद है, तो आपको {email} पर एक वेरिफ़िकेशन कोड मिलेगा"
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
+Authentication.Login.Heading.EnterYourCode,अपना कोड डालें :
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
 Authentication.Login.Heading.Login,लॉग इन करें
 Authentication.Login.Heading.LoginRoblox,Roblox में लॉग इन करें
@@ -296,6 +323,8 @@ Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,आपके ईमेल को वेरिफ़ाई करना ज़रूरी है
 Authentication.Login.Label.EmailOrPhone,ईमेल या फ़ोन
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,ईमेल डालें
 Authentication.Login.Label.EnterOneTimeCode,वन-टाइम कोड डालें
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,अभी-अभी आपके ईमेल पर भेजा गया कोड डालें.
 Authentication.Login.Label.ForgotYourPassword,पासवर्ड भूल गए हैं?
@@ -956,9 +985,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,वॉल्यूम
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,फ़्रेंड्स को इनवाइट करें
 CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,आप इस गेम को छोड़कर वापस {PREVIOUS_GAME} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,आपको जाना है?
 CoreScripts.PremiumModal.Title.Error,गड़बड़ी
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1582,6 +1609,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,मौजूदा लुक अ�
 Feature.Avatar.Action.UpdateMakeupLook,लुक अपडेट करें
 Feature.Avatar.Action.Zoom,ज़ूम करें
 Feature.Avatar.AvatarWidgetTitle,स्टाइल एक्सप्लोर करें
+Feature.Avatar.BackgroundGeneration.Error.Moderation,वह प्रॉम्प्ट हमारी गाइडलाइन के मुताबिक नहीं है. कोई और प्रॉम्प्ट आज़माएँ.
+Feature.Avatar.BackgroundGeneration.Error.System,आपका बैकग्राउंड जेनरेट नहीं हो सका. फिर से कोशिश करें.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,अपने बैकग्राउंड के बारे में बताएँ…
+Feature.Avatar.BackgroundGeneration.Status.Generating,आपका बैकग्राउंड जेनरेट हो रहा है…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,आपका बैकग्राउंड तैयार हो रहा है…
+Feature.Avatar.BackgroundGeneration.Title,बैकग्राउंड क्रिएट करें
 Feature.Avatar.Backgrounds.Title,बैकग्राउंड
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,इस बॉडी स्टाइल के लिए एडजस्टमेंट उपलब्ध नहीं है.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,डिफ़ॉल्ट रूप से ओरिजनल बॉडी कलर
@@ -1589,6 +1622,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,स्किन कलर
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,मेकअप के अनगिनत कॉम्बिनेशन के साथ अपना अनोखा लुक तैयार करें.
 Feature.Avatar.EmoteAlreadyAssigned,यह Emote पहले से ही किसी स्लॉट में असाइन किया जा चुका है
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,कुछ गड़बड़ी हुई. बाद में फिर से कोशिश करें.
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,आइडिया पाएँ
@@ -2079,6 +2113,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,अपने अवतार के बारे में बताएँ (ज़रूरी नहीं)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,मार्केटप्लेस ब्राउज़ करें
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,आइटम ऑप्शंस
 Feature.Catalog.Action.LoadMore,और लोड करें
@@ -2374,6 +2409,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"जारी रखने क�
 Feature.Catalog.Message.Checkout.UnavailableItems,एक या एक से ज़्यादा आइटम खरीदे नहीं जा सकते. जारी रखने से पहले कृपया उन्हें हटा दें.
 Feature.Catalog.Message.CollectiblesInfo,"होल्डिंग पीरियड के बाद एक यूज़र दूसरे यूज़र को कलेक्टिबल आइटम रीसेल कर सकता है, भले ही ओरिजनल स्टॉक न बिका हो. Roblox Plus सब्सक्राइबर्स रीसेल के लिए कलेक्टिबल आइटम लिस्ट कर सकते हैं."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,इसे अपने पसंदीदा में जोड़ें
+Feature.Catalog.Message.Favorites.CategoryEmpty,आपने अभी तक इस कैटगरी में कुछ भी सेव नहीं किया है.
+Feature.Catalog.Message.Favorites.Empty,आपने अभी तक कुछ भी सेव नहीं किया है.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox पर सबसे अच्छी तरह से तैयार किए गए आइटम खोजें
 Feature.Catalog.Message.HoldingPolicyL1,रीसेल में की गई खरीदारियाँ {days} दिनों तक होल्ड पर रहेंगी. होल्ड करने की इस अवधि के खत्म होने के बाद ही आइटम को रीसेल किया जा सकता है. सिर्फ़ Plus यूज़र्स ही आइटम रीसेल कर सकते हैं.
 Feature.Catalog.Message.HoldingPolicyL2,"खरीदारी करने के बाद, ओरिजनल बिक्री {purchaseDays} दिनों तक होल्ड में रहती है. होल्डिंग की यह अवधि खत्म होने के बाद ही आइटम को फिर से बेचा जा सकता है और फिर यह आइटम {resaleDays} दिनों तक रीसेल में होल्ड पर रहता है. सिर्फ़ Premium यूज़र्स ही आइटम को रीसेल कर सकते हैं."
@@ -2459,6 +2496,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"विस्तारि
 Feature.Chat.Description.ExpressiveChatLearnMore,"एक्सप्रेसिव चैट फ़ीचर में फ़िल्टर और पार्टी वॉइस के बिना चैट शामिल हैं.
 
 जब तक सभी मेंबर्स एक्सप्रेसिव चैट की ज़रूरी शर्तें पूरी नहीं करते और आपकी चैट अपग्रेड नहीं हो जाती, तब तक एक्सप्रेसिव चैट का ऐक्सेस सीमित है."
+Feature.Chat.Description.InlineContextCardDescription,अनजान लोगों से चैट करते समय सावधान रहें. न तो निजी जानकारी शेयर करें और न ही किसी दूसरे चैट ऐप पर जाएँ. आपके पास किसी को भी उनकी प्रोफ़ाइल से ब्लॉक या रिपोर्ट करने का विकल्प है.
 Feature.Chat.Description.NameGroup,अपने ग्रुप का नाम रखें
 Feature.Chat.Description.NameGroupChat,अपने चैट ग्रुप का नाम रखें
 Feature.Chat.Description.OSAContextCardDescription,आपकी सुरक्षा बहुत मायने रखती है. सहज महसूस नहीं हो रहा है? किसी भी समय इस व्यक्ति को उसकी प्रोफ़ाइल से ब्लॉक या रिपोर्ट किया जा सकता है.
@@ -2481,6 +2519,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,
 Feature.Chat.Heading.LeaveGroup,ग्रुप छोड़ें
 Feature.Chat.Heading.PartyWithConnections,कनेक्शंस के साथ पार्टी करें
 Feature.Chat.Heading.PartyWithFriends,फ़्रेंड्स के साथ पार्टी
+Feature.Chat.Heading.SafeChattingWithThisUser,इस व्यक्ति से चैट करते समय सावधान रहें
+Feature.Chat.Heading.SafeChattingWithUsername,{displayName} से चैट करते समय सावधान रहें
 Feature.Chat.Heading.ShareGameToChat,चैट के लिए एक्सपीरिएंस शेयर करें
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} ने आपको जॉइन करने के लिए इनवाइट किया है
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} ने आपको एक ग्रुप में जॉइन करने के लिए इनवाइट किया है
@@ -2541,7 +2581,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 घंटा
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र
@@ -3001,6 +3040,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,भरो
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} अब एक भरोसेमंद फ़्रेंड हैं
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमंद फ़्रेंड को हटाया गया
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,हाल ही की ऐक्टिविटी
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username} की हाल ही की ऐक्टिविटी
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,{num_days} दिन
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,{num_hours} घंटे
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3109,6 +3150,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,इस समय किस
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट आपके लोकेशन, डिवाइस की जानकारी, उम्र और प्लैटफ़ॉर्म पर बिहेवियर जैसे अलग-अलग फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"स्पॉन्सर किया गया यह कॉन्टेंट आपको डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़्ड फ़ैक्टर्स के आधार पर दिखाया जा रहा है, ताकि आपको सही कॉन्टेंट देखने को मिले. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग्स में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"स्पॉन्सर किया गया यह कॉन्टेंट आपको आपके लोकेशन, डिवाइस की जानकारी, उम्र और प्लैटफ़ॉर्म पर बिहेवियर जैसे अलग-अलग फ़ैक्टर्स के आधार पर दिखाया जा रहा है, ताकि आपको सही कॉन्टेंट देखने को मिले. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग्स में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"स्पॉन्सर किया गया यह कॉन्टेंट आपको डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़्ड फ़ैक्टर्स के आधार पर दिखाया जा रहा है, ताकि आपको सही कॉन्टेंट देखने को मिले. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है."
 Feature.GameDetails.Message.SuggestLessOften,हम इसका सुझाव कम देंगे
 Feature.GameDetails.RatingPercentOnly,{percentRating}% रेटिंग
 Feature.GameDetails.Toast.LinkCopied,
@@ -4862,6 +4906,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,इस एक्सपीरिए�
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,इस एक्सपीरिएंस को बेहतर बनाने में क्रिएटर की मदद करें
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,खरीदा नहीं जा सकता
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,"ज़्यादा प्रोडक्ट खरीदने से पहले, अपनी पिछली खरीदारी रिडीम करने के लिए एक्सपीरिएंस जॉइन करें."
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,अपनी खरीदारी रिडीम करने के लिए जॉइन करें
 Purchasing.RobloxProducts.Label.RobuxBalance,बैलेंस: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,Roblox Creator की अन्य शर्तें
 Roblox.ReferralRewards.Expires,समयसीमा खत्म हो रही है

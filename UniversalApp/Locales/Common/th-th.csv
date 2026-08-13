@@ -100,6 +100,8 @@ Authentication.AccountPicker.Label.SignedOut,ออกจากระบบแ�
 Authentication.AccountRecovery.Action.AddAPasskey,ใช่ เพิ่มพาสคีย์ใหม่
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,ไม่ ฉันไม่รู้มาก่อน
+Authentication.AccountRecovery.Action.DontDeleteCredentials,ใช่ ฉันรู้
 Authentication.AccountRecovery.Action.Next,ถัดไป
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,รีเซ็ตรหัสผ่าน
@@ -114,6 +116,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,ใช้อีเมล�
 Authentication.AccountRecovery.Action.UsePhone,ใช้โทรศัพท์
 Authentication.AccountRecovery.Action.UsePhoneInstead,ใช้โทรศัพท์แทน
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,ใช้ชื่อผู้ใช้หรืออีเมลแทน
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,การเปลี่ยนแปลงที่คุณไม่รู้จักถูกลบออกแล้ว รักษาบัญชีของคุณให้ปลอดภัยโดยเพิ่มเกราะปกป้องอีกชั้น
 Authentication.AccountRecovery.Description.CannotRecoverAccount,เพื่อความปลอดภัยของคุณ จึงจำเป็นต้องใช้วิธีการตรวจสอบยืนยันตัวตนที่แตกต่างกันเพื่อกู้คืนบัญชีที่เปิดใช้งานการตรวจสอบยืนยันตัวตน 2 ขั้นตอน บัญชีนี้ไม่มีวิธีการสำรองที่พร้อมใช้งานสำหรับการกู้คืนที่ปลอดภัย โปรดลองเข้าถึงวิธีการตรวจสอบยืนยันตัวตน 2 ขั้นตอนหลักของคุณอีกครั้ง หรือใช้รหัสสำรองเพื่อข้ามการตรวจสอบยืนยันตัวตน 2 ขั้นตอน
 Authentication.AccountRecovery.Description.ChooseAccount,เลือกบัญชีที่คุณต้องการกู้คืน
 Authentication.AccountRecovery.Description.CreateNewPassword,สร้างรหัสผ่านที่คาดเดายากซึ่งแตกต่างจากรหัสผ่านเดิม
@@ -121,6 +124,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,สร้�
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,คุณลงทะเบียนในโปรแกรมการป้องกันขั้นสูงแล้ว เพื่อรักษาบัญชีของคุณให้ปลอดภัย คุณจะต้องใช้พาสคีย์หรือคีย์รักษาความปลอดภัยเพื่อลงชื่อเข้าใช้ อุปกรณ์นี้ไม่รองรับพาสคีย์ จึงอาจลงชื่อเข้าใช้ได้ยาก ในอนาคต คุณสามารถใช้การลงชื่อเข้าใช้ด่วนเพื่อใช้อุปกรณ์อื่นที่เข้าสู่ระบบอยู่ได้
 Authentication.AccountRecovery.Description.EmailCodeSent,หากมีบัญชี Roblox ที่เชื่อมโยงกับอีเมลนี้ คุณจะได้รับรหัสยืนยัน โปรดตรวจสอบโฟลเดอร์ทั้งหมดของคุณ รวมถึงโฟลเดอร์สแปม
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,เราเพิ่งส่งรหัสยืนยัน 6 หลักไปยังอีเมลที่คุณระบุไว้หากเชื่อมโยงกับบัญชี โปรดตรวจสอบโฟลเดอร์ทั้งหมดของคุณ รวมถึงโฟลเดอร์สแปม
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,อีเมลบางรายการอาจไม่พร้อมใช้งานเนื่องจากมีการเปลี่ยนแปลงอายุ อย่างไรก็ตาม อีเมลเหล่านั้นยังคงใช้สำหรับการกู้คืนบัญชีได้
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,คุณลงทะเบียนในโปรแกรมการป้องกันขั้นสูงแล้ว เพื่อรักษาบัญชีของคุณให้ปลอดภัย คุณจะต้องใช้พาสคีย์หรือคีย์รักษาความปลอดภัยเพื่อลงชื่อเข้าใช้{lineBreak}{lineBreak}หากคุณใช้อุปกรณ์ส่วนตัว ขอแนะนำให้ตั้งค่าพาสคีย์ใหม่ทันที จะได้ลงชื่อเข้าใช้บนอุปกรณ์นี้ง่ายขึ้นในอนาคต หากใช้อุปกรณ์ที่ใช้ร่วมกันหรืออุปกรณ์สาธารณะ ให้ข้ามขั้นตอนนี้ไป
 Authentication.AccountRecovery.Description.EnterABackupCode,ต่อไป ให้กรอกรหัสสำรองที่คุณบันทึกไว้
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,กรอกอีเมลหรือหมายเลขโทรศัพท์ที่อาจเชื่อมโยงกับบัญชีของคุณ หากเคยทำการซื้อมาก่อน ลองใช้อีเมลสำหรับการเรียกเก็บเงินของคุณดู
@@ -128,7 +132,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,ต่อไป ก
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,ต่อไป กรอกหมายเลขโทรศัพท์ รหัสสำรอง หรืออีเมลอื่น อาจเป็นอีเมลที่คุณเคยใช้ซื้อของใน Roblox
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,ต่อไป ให้กรอกหมายเลขโทรศัพท์ที่เชื่อมโยงกับบัญชีของคุณ
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,ต่อไป กรอกหมายเลขโทรศัพท์หรืออีเมลอื่น อาจเป็นอีเมลที่คุณเคยใช้ซื้อของใน Roblox
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,เราพบการเปลี่ยนแปลงด้านความปลอดภัยในบัญชีของคุณ ซึ่งคุณอาจไม่ได้เป็นผู้ดำเนินการ โปรดตรวจสอบและแจ้งให้เราทราบหากคุณเป็นผู้ดำเนินการ
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,หากฉันเก็บรายการที่ไม่รู้จักไว้ บุคคลอื่นอาจยังลงชื่อเข้าใช้และกันไม่ให้ฉันเข้าระบบได้ การดำเนินการนี้ไม่สามารถยกเลิกได้
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,คุณเปิดใช้งาน {twoStepMethod} ในบัญชีของคุณแล้ว โปรดเก็บไว้หากคุณยังเข้าถึงได้ เราจะขอให้คุณใช้เมื่อลงชื่อเข้าใช้อีกครั้ง
+Authentication.AccountRecovery.Description.NoChangesMade,รักษาบัญชีของคุณให้ปลอดภัยโดยเพิ่มเกราะปกป้องอีกชั้น
 Authentication.AccountRecovery.Description.PhoneCodeSent,หากมีบัญชี Roblox ที่ใช้หมายเลขโทรศัพท์นี้ คุณจะได้รับรหัสการตรวจสอบยืนยัน โปรดตรวจสอบ SMS หรือ WhatsApp
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,เราเพิ่งส่งรหัสยืนยัน 6 หลักไปยังหมายเลขโทรศัพท์ที่คุณระบุไว้หากเชื่อมโยงกับบัญชี ระบบอาจส่งรหัสไปให้ทาง WhatsApp หรือ SMS
 Authentication.AccountRecovery.Description.PlatformNotSupported,แพลตฟอร์มหรืออุปกรณ์นี้ไม่รองรับการกู้คืนบัญชี เลือก “ตกลง” เพื่อปิดหน้าต่างนี้และกลับไปที่หน้าลงชื่อเข้าใช้ โปรดกู้คืนบัญชีของคุณโดยใช้อุปกรณ์อื่น จากนั้นเลือก “ลงชื่อเข้าใช้ด่วน” และทำตามคำแนะนำเพื่อลงชื่อเข้าใช้อย่างปลอดภัยด้วยอุปกรณ์อื่นที่ลงชื่อเข้าใช้อยู่
@@ -140,21 +148,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,�
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,สวัสดีคุณ {username} คุณกำลังเข้าถึงบัญชีจากตำแหน่งที่เชื่อถือได้ ข้ามการตรวจสอบยืนยันตัวตน 2 ขั้นตอนและกู้คืนบัญชีให้เสร็จได้เลย
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,เราสังเกตเห็นว่าคุณใช้อีเมลอื่นในการกู้คืนบัญชี เราจะอัปเดตที่อยู่อีเมลของคุณเป็น: {email}
 Authentication.AccountRecovery.Description.VerifyAgain,ยืนยันว่าเป็นคุณก่อนกู้คืนบัญชีที่เปิดใช้งานการตรวจสอบยืนยันตัวตน 2 ขั้นตอน กด “ดำเนินการต่อ” เพื่อเรียกใช้การตรวจสอบยืนยันตัวตน 2 ขั้นตอนอีกครั้ง
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,บัญชีของคุณปลอดภัยแล้ว!
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,มีการสร้างรหัสสำรอง
+Authentication.AccountRecovery.Heading.BillingEmailAdded,มีการเพิ่มอีเมลสำหรับการเรียกเก็บเงิน
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,เราไม่สามารถกู้คืนบัญชีของคุณได้
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,เลือกวิธีการตรวจสอบยืนยัน
+Authentication.AccountRecovery.Heading.EmailAdded,มีการเพิ่มอีเมล
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,คุณใช้อุปกรณ์ส่วนตัวของคุณอยู่ใช่ไหม?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,คุณอาจใช้งานได้จำกัดบนอุปกรณ์นี้ เนื่องจากไม่รองรับพาสคีย์
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,มีการลงทะเบียนในโปรแกรมการป้องกันขั้นสูง
 Authentication.AccountRecovery.Heading.EnterSecondMethod,ระบุวิธีตรวจสอบยืนยันตัวตนที่สอง
+Authentication.AccountRecovery.Heading.InvalidateCredential,ทราบการเปลี่ยนแปลงนี้ไหม?
+Authentication.AccountRecovery.Heading.InvalidateCredentials,ทราบการเปลี่ยนแปลงเหล่านี้ไหม?
+Authentication.AccountRecovery.Heading.NoChangesMade,ไม่มีการเปลี่ยนแปลงใดๆ
+Authentication.AccountRecovery.Heading.PasskeyAdded,มีการเพิ่มพาสคีย์
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,มีการเพิ่มหมายเลขโทรศัพท์
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,การกู้คืนบัญชี Roblox
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,ให้เราเก็บวิธีตรวจสอบยืนยันตัวตน 2 ขั้นตอนที่มีอยู่ไว้ไหม?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,มีการเพิ่ม{value}
 Authentication.AccountRecovery.Heading.UpdateEmail,อัปเดตอีเมลของคุณ
 Authentication.AccountRecovery.Heading.UseAnotherDevice,ใช้อุปกรณ์อื่น
 Authentication.AccountRecovery.Label.AddEmail,เพิ่มอีเมล
 Authentication.AccountRecovery.Label.Authenticator2sv,แอปเครื่องมือยืนยันตัวตนสำหรับการตรวจสอบยืนยันตัวตน 2 ขั้นตอน
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,การตรวจสอบยืนยันตัวตน 2 ขั้นตอนด้วยเครื่องมือยืนยันตัวตน
 Authentication.AccountRecovery.Label.BackupCode,รหัสสำรอง
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,ยืนยันรหัสผ่านใหม่
 Authentication.AccountRecovery.Label.Email2sv,อีเมลสำหรับการตรวจสอบยืนยันตัวตน 2 ขั้นตอน
+Authentication.AccountRecovery.Label.Email2svCapitalized,การตรวจสอบยืนยันตัวตน 2 ขั้นตอนด้วยอีเมล
+Authentication.AccountRecovery.Label.EmailUnavailable,อีเมลไม่พร้อมใช้งาน
 Authentication.AccountRecovery.Label.EnterCode,กรอกรหัส
 Authentication.AccountRecovery.Label.NewPasswordV2,รหัสผ่านใหม่
 Authentication.AccountRecovery.Label.Or,หรือ
@@ -162,6 +184,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,ส่งรหัสอีกครั้ง
 Authentication.AccountRecovery.Label.ResendCodeTimer,ส่งรหัสอีกครั้งในอีก {timeLeft} วินาที
 Authentication.AccountRecovery.Label.SecurityKey2sv,คีย์รักษาความปลอดภัยสำหรับการตรวจสอบยืนยันตัวตน 2 ขั้นตอน
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,การตรวจสอบยืนยันตัวตน 2 ขั้นตอนด้วยคีย์รักษาความปลอดภัย
 Authentication.AccountRecovery.Label.UsernameEmail,ชื่อผู้ใช้/อีเมล
 Authentication.AccountRecovery.LabelEmail,อีเมล
 Authentication.AccountRecovery.LabelPhone,หมายเลขโทรศัพท์
@@ -261,6 +284,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,ลงชื่อเข้าใช้ด้วย QQ
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,ส่งรหัส
 Authentication.Login.Action.SendVerificationEmail,ส่งอีเมลการตรวจสอบยืนยัน
 Authentication.Login.Action.SignIn,ลงชื่อเข้าใช้
 Authentication.Login.Action.UsePasskey,ใช้พาสคีย์
@@ -273,8 +297,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,กรอกรหัส
 Authentication.Login.Description.GetOneTimeCodeHelp,กรอกอีเมลที่ตรวจสอบยืนยันแล้วในบัญชีของคุณเพื่อรับรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Description.PasskeyDescription,บัญชีของคุณมีพาสคีย์ ซึ่งเป็นวิธีลงชื่อเข้าใช้ที่ปลอดภัยกว่ารหัสผ่าน คุณใช้ลายนิ้วมือ ใบหน้า หรือการล็อคหน้าจอเพื่อเข้าสู่ระบบบนอุปกรณ์นี้ได้
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,เราไม่สามารถระบุได้ว่าอุปกรณ์ของคุณรองรับพาสคีย์หรือไม่ โปรดลองอีกครั้งหรือแตะ “ปัญหาในการเข้าสู่ระบบ” เพื่อกู้คืนบัญชีของคุณด้วยอีเมลหรือหมายเลขโทรศัพท์
+Authentication.Login.Description.PasskeyMobileOnly,ใช้พาสคีย์ได้เฉพาะบนมือถือ โปรดเลือกวิธีอื่นในการลงชื่อเข้าใช้
+Authentication.Login.Description.VerificationCodeSentTo,หากมีบัญชี Roblox คุณจะได้รับรหัสการตรวจสอบยืนยันที่ {email}
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
+Authentication.Login.Heading.EnterYourCode,กรอกรหัสของคุณ
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,ลงชื่อเข้าใช้ Roblox
@@ -296,6 +323,8 @@ Authentication.Login.Label.ConnectionError.Title,เกิดข้อผิด�
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,อีเมลของคุณจำเป็นต้องได้รับการตรวจสอบยืนยัน
 Authentication.Login.Label.EmailOrPhone,อีเมลหรือหมายเลขโทรศัพท์
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,กรอกอีเมล
 Authentication.Login.Label.EnterOneTimeCode,กรอกรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,กรอกรหัสที่เราเพิ่งส่งไปยังอีเมลของคุณ
 Authentication.Login.Label.ForgotYourPassword,ลืมรหัสผ่านหรือไม่?
@@ -957,9 +986,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,ระดับเสียง
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,เชิญเพื่อน
 CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_GAME}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,ต้องการออกใช่ไหม?
 CoreScripts.PremiumModal.Title.Error,ข้อผิดพลาด
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2082,6 +2109,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,อธิบายเกี่ยวกับอวาตาร์ของคุณ (ไม่บังคับ)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,เลือกดูในมาร์เก็ตเพลส
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,ตัวเลือกสำหรับไอเท็ม
 Feature.Catalog.Action.LoadMore,โหลดเพิ่มเติม
@@ -2377,6 +2405,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,หากต้องการ�
 Feature.Catalog.Message.Checkout.UnavailableItems,ซื้อไม่ได้อย่างน้อย 1 รายการ โปรดลบออกก่อนดำเนินการต่อ
 Feature.Catalog.Message.CollectiblesInfo,ผู้ใช้สามารถขายต่อไอเท็มของสะสมให้กับผู้อื่นได้หลังช่วงพักสิ้นสุดลง แม้ว่าจะยังมีไอเท็มต้นฉบับเหลืออยู่ในสต็อคก็ตาม สมาชิก Premium สามารถขายต่อไอเท็มของสะสมได้
 Feature.Catalog.Message.FTUXFavoritePillTooltip,เพิ่มรายการนี้ไปยังรายการโปรดของคุณ
+Feature.Catalog.Message.Favorites.CategoryEmpty,คุณยังไม่ได้บันทึกอะไรในหมวดหมู่นี้
+Feature.Catalog.Message.Favorites.Empty,คุณยังไม่ได้บันทึกอะไรเลย
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,สำรวจไอเท็มที่สร้างขึ้นอย่างประณีตที่สุดใน Roblox
 Feature.Catalog.Message.HoldingPolicyL1,การซื้อจากการขายต่อจะมีช่วงเวลาถือครอง {days} วัน ซึ่งไอเท็มดังกล่าวจะสามารถนำไปขายต่อได้หลังจากช่วงเวลาถือครองสิ้นสุดลง โดยสมาชิก Plus เท่านั้นที่สามารถทำการขายต่อไอเท็มได้
 Feature.Catalog.Message.HoldingPolicyL2,หลังจากทำการซื้อแล้ว ไอเท็มที่ซื้อโดยตรงจากครีเอเตอร์จะเข้าสู่ช่วงพักเป็นเวลาไม่เกิน {purchaseDays} วัน ซึ่งไอเท็มดังกล่าวจะสามารถนำไปขายต่อได้หลังจากช่วงพักสิ้นสุดลง ส่วนการขายต่อจะมีช่วงพักเป็นเวลาไม่เกิน {resaleDays} วัน โดยสมาชิก Premium เท่านั้นที่สามารถทำการขายต่อไอเท็มได้
@@ -2462,6 +2492,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"คุณสมบัต
 Feature.Chat.Description.ExpressiveChatLearnMore,"คุณสมบัติแชทที่สื่ออารมณ์จะให้คุณแชทโดยไม่มีตัวกรองและพูดคุยด้วยเสียงใน Party
 
 การเข้าถึงแชทที่สื่ออารมณ์จะถูกจำกัดจนกว่าสมาชิกทุกคนจะมีสิทธิ์และคุณอัปเกรดแชทแล้ว"
+Feature.Chat.Description.InlineContextCardDescription,โปรดใช้ความระมัดระวังเมื่อแชทกับคนแปลกหน้า อย่าแชร์ข้อมูลส่วนตัวหรือย้ายไปแชทในแอปอื่น คุณสามารถบล็อคหรือรายงานผู้ใช้จากโปรไฟล์ของบุคคลดังกล่าวได้
 Feature.Chat.Description.NameGroup,ตั้งชื่อกลุ่มของคุณ
 Feature.Chat.Description.NameGroupChat,ตั้งชื่อกลุ่มแชทของคุณ
 Feature.Chat.Description.OSAContextCardDescription,เราให้ความสำคัญกับความปลอดภัยของคุณ หากรู้สึกไม่สบายใจ คุณสามารถบล็อคหรือรายงานบุคคลนี้จากโปรไฟล์ของเขาได้ทุกเมื่อ
@@ -2484,6 +2515,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,การโต้ตอบ�
 Feature.Chat.Heading.LeaveGroup,ออกจากกลุ่ม
 Feature.Chat.Heading.PartyWithConnections,Party กับเครือข่าย
 Feature.Chat.Heading.PartyWithFriends,Party กับเพื่อน
+Feature.Chat.Heading.SafeChattingWithThisUser,โปรดใช้ความระมัดระวังเมื่อแชทกับบุคคลนี้
+Feature.Chat.Heading.SafeChattingWithUsername,โปรดใช้ความระมัดระวังเมื่อแชทกับ {displayName}
 Feature.Chat.Heading.ShareGameToChat,แชร์ประสบการณ์ไปยังแชท
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} ชวนคุณเข้าร่วม
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} เชิญคุณเข้าร่วมกลุ่ม
@@ -2544,7 +2577,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ชม.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 นาที
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 สัปดาห์
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} สัปดาห์
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,ไม่พร้อมให้บริการ
 Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จัก
 Feature.Chat.Label.User,
@@ -3004,6 +3036,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} เป็นเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,ลบเพื่อนที่เชื่อได้แล้ว
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,ส่งคำขอเป็นเพื่อนที่เชื่อได้แล้ว
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,กิจกรรมล่าสุด
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,กิจกรรมล่าสุดของ {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3112,6 +3146,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,ไม่สามาร�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {CreatorName} เป็นครีเอเตอร์ของประสบการณ์ และ {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณ ที่นี่:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยต่างๆ เช่น ตำแหน่งที่ตั้ง ข้อมูลอุปกรณ์ อายุ และพฤติกรรมบนแพลตฟอร์ม เพื่อแสดงเนื้อหาที่เกี่ยวข้องแก่คุณ โดยมี {CreatorName} เป็นครีเอเตอร์ของประสบการณ์ และ {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณ ที่นี่:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {CreatorName} เป็นครีเอเตอร์ของประสบการณ์ และ {PayerName} เป็นผู้ชำระค่าสนับสนุน
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณที่นี่:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยต่างๆ เช่น ตำแหน่งที่ตั้ง ข้อมูลอุปกรณ์ อายุ และพฤติกรรมบนแพลตฟอร์ม เพื่อแสดงเนื้อหาที่เกี่ยวข้องแก่คุณ โดยมี {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณที่นี่:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {PayerName} เป็นผู้ชำระค่าสนับสนุน
 Feature.GameDetails.Message.SuggestLessOften,เราจะแนะนำประสบการณ์นี้น้อยลง
 Feature.GameDetails.RatingPercentOnly,เรตติ้ง {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -4866,6 +4903,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,ช่วยปรับปรุง
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,ช่วยให้ครีเอเตอร์นำไปปรับปรุงประสบการณ์นี้
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,ซื้อไม่ได้
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,เข้าร่วมประสบการณ์เพื่อแลกใช้สิทธิ์ในการซื้อก่อนหน้าของคุณก่อนที่จะซื้อผลิตภัณฑ์เพิ่มเติม
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,เข้าร่วมเพื่อแลกรับของที่ซื้อ
 Purchasing.RobloxProducts.Label.RobuxBalance,ยอดคงเหลือ: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,ข้อกำหนดเพิ่มเติมสำหรับครีเอเตอร์
 Roblox.ReferralRewards.Expires,หมดอายุ

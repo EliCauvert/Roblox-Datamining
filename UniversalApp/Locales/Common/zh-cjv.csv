@@ -109,6 +109,8 @@ Authentication.AccountPicker.Label.SignedOut,已注销
 Authentication.AccountRecovery.Action.AddAPasskey,是的，添加新的通行密钥
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,不，我不认识
+Authentication.AccountRecovery.Action.DontDeleteCredentials,是的，我认识
 Authentication.AccountRecovery.Action.Next,下一步
 Authentication.AccountRecovery.Action.Ok,好的
 Authentication.AccountRecovery.Action.ResetPassword,重置密码
@@ -123,6 +125,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,改用电子邮件
 Authentication.AccountRecovery.Action.UsePhone,使用手机
 Authentication.AccountRecovery.Action.UsePhoneInstead,
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,改用用户名或电子邮件
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,你不认识的更改均已移除。请添加额外的安全防护措施，确保帐户安全。
 Authentication.AccountRecovery.Description.CannotRecoverAccount,为了你的安全，恢复启用了两步验证的帐户需要第二种不同的验证方法。此帐户没有可用于安全恢复的备用方法。请尝试重新访问你的主要两步验证方法，或使用备用码跳过两步验证。
 Authentication.AccountRecovery.Description.ChooseAccount,选择你想要恢复的帐户。
 Authentication.AccountRecovery.Description.CreateNewPassword,创建一个强密码，并确保与旧密码不同。
@@ -130,6 +133,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,创建一�
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,你已加入增强保护计划。为了确保帐户安全，登录时需要使用通行密钥或安全密钥。此设备不支持通行密钥，因此登录此设备可能会遇到困难。今后，你可以使用快速登录功能，通过其他已登录的设备登录。
 Authentication.AccountRecovery.Description.EmailCodeSent,我们刚刚向你提供的电子邮件地址发送了一组 6 位数的验证码（如果该邮箱已关联帐户）。请检查你的所有邮箱文件夹，包括垃圾邮件夹。
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,我们刚刚向你提供的电子邮件地址发送了一组 6 位数的验证码（如果该邮箱已关联你的帐户）。请检查你的所有邮箱文件夹，包括垃圾邮件夹。
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,某些电子邮件地址因年龄变更而发生变动，因此可能无法显示。不过，这些电子邮件地址仍可用于帐户恢复。
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,你已加入增强保护计划。为了确保帐户安全，登录时需要使用通行密钥或安全密钥。{lineBreak}{lineBreak}如果你使用的是个人设备，我们建议你立即设置新的通行密钥。这样以后就可以更轻松地在此设备上登录。如果你使用的是共享或公共设备，请跳过此步骤。
 Authentication.AccountRecovery.Description.EnterABackupCode,现在，请输入你保存的备用码。
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,请输入可能与你帐户关联的电子邮件地址或手机号码。如果你曾有过购买记录，也可以尝试填写你的账单邮箱。
@@ -137,7 +141,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,现在，请输入�
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,现在，请输入手机号码、备用码或其他邮箱。这可以是你在 Roblox 上购买商品时使用的邮箱
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,现在，请输入与你帐户关联的手机号码。
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,现在，请输入手机号码或其他电子邮件地址。这可以是你在 Roblox 上购买商品时使用的电子邮箱。
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,我们发现你的帐户存在一项可能并非由你本人操作的安全设置变更。请查看这一变更，并告知我们是否由你本人操作。
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,我们发现你的帐户存在一些可能并非由你本人操作的安全设置变更。请查看这些变更，并告知我们是否由你本人操作。
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,如果我保留这些无法识别的项目，其他人仍可能登录我的帐户并导致我无法登录。此操作无法撤消。
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,你已在账号中启用了{twoStepMethod}。如果你仍然可以访问它，请将其保留好。在你下次登录时，我们会要求你提供它。
+Authentication.AccountRecovery.Description.NoChangesMade,请添加额外的安全防护措施，确保帐户安全。
 Authentication.AccountRecovery.Description.PhoneCodeSent,我们刚刚向你提供的手机号码发送了一组 6 位数的验证码（如果该号码已关联帐户）。验证码可能通过 WhatsApp 或短信发送。
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,我们刚刚向你提供的手机号码发送了一组 6 位数的验证码（如果该号码已关联你的帐户）。验证码可能通过 WhatsApp 或短信发送。
 Authentication.AccountRecovery.Description.PlatformNotSupported,此平台或设备不支持帐户恢复。请选择“好的”关闭此窗口并返回登录页面。请使用其他设备恢复帐户。随后选择“快速登录”，并按照说明使用其他已登录设备安全登录。
@@ -149,21 +157,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,{
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,你好 {username}，你正在从受信任的位置访问你的帐户。你可以跳过两步验证并完成帐户恢复。
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,我们注意到你使用了不同的电子邮件地址来恢复帐户。我们将把你的电子邮件地址更新为：{email}
 Authentication.AccountRecovery.Description.VerifyAgain,在恢复启用了两步验证的帐户之前，请先验证你的身份。按“继续”再次触发两步验证。
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,你的帐户现已安全！
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,已生成备用码
+Authentication.AccountRecovery.Heading.BillingEmailAdded,已添加账单电子邮件
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,我们无法恢复你的帐户
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,选择一种验证方式
+Authentication.AccountRecovery.Heading.EmailAdded,已添加电子邮件
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,这是你的个人设备吗？
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,由于此设备不支持通行密钥，你在该设备上可能会遇到部分功能受限的情况
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,已加入增强保护计划
 Authentication.AccountRecovery.Heading.EnterSecondMethod,输入第二种验证方式
+Authentication.AccountRecovery.Heading.InvalidateCredential,你认识此更改吗？
+Authentication.AccountRecovery.Heading.InvalidateCredentials,你认识这些更改吗？
+Authentication.AccountRecovery.Heading.NoChangesMade,未进行任何更改
+Authentication.AccountRecovery.Heading.PasskeyAdded,已添加通行密钥
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,已添加手机号码
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Roblox 帐户恢复
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,需要我们保留现有的两步验证方式吗？
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,已添加{value}
 Authentication.AccountRecovery.Heading.UpdateEmail,更新你的电子邮件
 Authentication.AccountRecovery.Heading.UseAnotherDevice,使用另一台设备
 Authentication.AccountRecovery.Label.AddEmail,添加电子邮件
 Authentication.AccountRecovery.Label.Authenticator2sv,身份验证程序两步验证
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,验证程序两步验证
 Authentication.AccountRecovery.Label.BackupCode,备用码
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,确认新密码
 Authentication.AccountRecovery.Label.Email2sv,电子邮件两步验证
+Authentication.AccountRecovery.Label.Email2svCapitalized,
+Authentication.AccountRecovery.Label.EmailUnavailable,电子邮件地址无法显示
 Authentication.AccountRecovery.Label.EnterCode,输入验证码
 Authentication.AccountRecovery.Label.NewPasswordV2,新密码
 Authentication.AccountRecovery.Label.Or,或者
@@ -171,6 +193,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,重新发送验证码
 Authentication.AccountRecovery.Label.ResendCodeTimer,{timeLeft} 秒后重新发送验证码
 Authentication.AccountRecovery.Label.SecurityKey2sv,安全密钥两步验证
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,
 Authentication.AccountRecovery.Label.UsernameEmail,用户名/电子邮件
 Authentication.AccountRecovery.LabelEmail,电子邮件
 Authentication.AccountRecovery.LabelPhone,手机
@@ -270,6 +293,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ 登录
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,发送验证码
 Authentication.Login.Action.SendVerificationEmail,发送验证电子邮件
 Authentication.Login.Action.SignIn,登录
 Authentication.Login.Action.UsePasskey,使用通行密钥
@@ -282,8 +306,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,请输入我们发送至
 Authentication.Login.Description.GetOneTimeCodeHelp,请输入你帐户中已验证的电子邮件来接收一次性验证码。
 Authentication.Login.Description.PasskeyDescription,你的帐户有通行密钥，这是比密码更安全地登录方式。你可以使用指纹、面部或屏幕锁定在此设备上登录。
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,我们无法确定你的设备是否支持通行密钥。请重试，或点按“登录有问题”来使用电子邮件或手机号码恢复你的帐户。
+Authentication.Login.Description.PasskeyMobileOnly,通行密钥仅适用于移动设备。请选择其他方式登录。
+Authentication.Login.Description.VerificationCodeSentTo,如果 Roblox 帐户存在，你将通过 {email} 收到验证码
 Authentication.Login.Error.PasskeyOnlyAccount,你的帐户只设置了登录密码。请尝试使用你的通行密钥登录，或恢复你的帐户。
 Authentication.Login.Error.PlatformAccountConnectionFailure,无法验证平台帐户。请稍后重试。
+Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,帐户不兼容
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,登录罗布乐思
@@ -305,6 +332,8 @@ Authentication.Login.Label.ConnectionError.Title,连接错误
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,你的电子邮件需要验证
 Authentication.Login.Label.EmailOrPhone,电子邮箱或手机号码
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,输入电子邮箱
 Authentication.Login.Label.EnterOneTimeCode,输入一次性验证码
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,请输入我们刚发送至你电子邮件的验证码
 Authentication.Login.Label.ForgotYourPassword,忘记密码？
@@ -969,9 +998,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即将离开此游戏并返回“{PREVIOUS_GAME}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,你要离开吗？
 CoreScripts.PremiumModal.Title.Error,错误
 CoreScripts.PublishAssetPrompt.ResultModalOk,确定
@@ -1138,6 +1165,7 @@ Feature.Accessibility.Description.DeviceAppThemeUpsell,探索 Plus 专属主题�
 Feature.Accessibility.Description.DeviceLevelTheme,请选择此设备的主题。(注意：这不会改变 Roblox 在其他设备上的外观。)
 Feature.Accessibility.Description.Haptics,控制 Roblox 应用程序的整体振动
 Feature.Accessibility.Description.LaunchAtStartup,电脑开机时自动启动 Roblox
+Feature.Accessibility.Description.LaunchDestination,
 Feature.Accessibility.Description.Main,这些设置仅适用于此设备。你还可以在任何体验中的“设置”菜单中调整图形、移动和辅助功能。
 Feature.Accessibility.Description.MinimizeToTray,关闭窗口时，将 Roblox 最小化到系统托盘，而非完全退出。
 Feature.Accessibility.Description.PreferredTextSize,根据你的喜好调整 Roblox 上显示的文本大小
@@ -1158,6 +1186,7 @@ Feature.Accessibility.Heading.DevicePreferences,设备偏好设置
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.LaunchAtLogin,登录时启动
 Feature.Accessibility.Heading.LaunchAtStartup,开机时启动
+Feature.Accessibility.Heading.LaunchDestination,
 Feature.Accessibility.Heading.MinimizeToTray,关闭时最小化到托盘
 Feature.Accessibility.Heading.PreferredTextSize,文本大小
 Feature.Accessibility.Heading.PreferredTransparency,背景透明度
@@ -1167,6 +1196,8 @@ Feature.Accessibility.Heading.UiNavigationKeyBind,
 Feature.Accessibility.Heading.VREnvironmentSetting,VR 环境
 Feature.Accessibility.Label.AppThemeBadgeNew,新
 Feature.Accessibility.Label.AppThemeUnlockBanner,订阅 Plus，解锁 App 主题
+Feature.Accessibility.LaunchDestination.Home,
+Feature.Accessibility.LaunchDestination.MostRecentGame,
 Feature.Accessibility.PreferredTextSize.Default,
 Feature.Accessibility.PreferredTextSize.Largest,最大
 Feature.Accessibility.PreferredTransparency.Opaque,不透明
@@ -2101,6 +2132,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,描述你的虚拟形象（可选）
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,浏览商城
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,物品选项
 Feature.Catalog.Action.LoadMore,加载更多
@@ -2396,6 +2428,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,要继续，请查看或移除�
 Feature.Catalog.Message.Checkout.UnavailableItems,无法购买一个或多个道具。请在继续前将其移除。
 Feature.Catalog.Message.CollectiblesInfo,收藏类道具可以在存放期后转卖给其他用户，即使原始库存依然在售。Roblox Plus 订阅用户可以转卖收藏类道具。
 Feature.Catalog.Message.FTUXFavoritePillTooltip,将此添加到你的最爱
+Feature.Catalog.Message.Favorites.CategoryEmpty,你尚未在此类别中保存任何内容。
+Feature.Catalog.Message.Favorites.Empty,你尚未保存任何内容。
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,浏览 Roblox 上制作精良的道具
 Feature.Catalog.Message.HoldingPolicyL1,从转售中购买将最多存放 {days} 天。道具只能在存放期结束后转售。只有 Premium 用户可以转售道具。
 Feature.Catalog.Message.HoldingPolicyL2,购买后，原始销售将会进入最多 {purchaseDays} 天的存放期。道具只能在存放期结束后进行转售，转售将会进入最多 {resaleDays} 天的存放期。只有 Premium 用户可以转售道具。
@@ -2479,6 +2513,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"使用扩展聊天功能
 Feature.Chat.Description.ExpressiveChatLearnMore,"“畅谈”功能包括无过滤聊天和 Party语音等功能。
 
 在所有成员符合资格并升级聊天权限之前，暂无法使用畅谈功能。"
+Feature.Chat.Description.InlineContextCardDescription,与陌生人聊天时请小心，不要分享个人信息或转移至其他聊天 App。你可以在任何用户的个人资料页面选择屏蔽或举报该用户。
 Feature.Chat.Description.NameGroup,命名你的群组
 Feature.Chat.Description.NameGroupChat,命名你的群聊
 Feature.Chat.Description.OSAContextCardDescription,你的安全至关重要。感到不舒服？你可以随时从这名用户的个人资料页面将他们屏蔽或举报。
@@ -2501,6 +2536,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,
 Feature.Chat.Heading.LeaveGroup,离开群组
 Feature.Chat.Heading.PartyWithConnections,与联系人组队游玩
 Feature.Chat.Heading.PartyWithFriends,与好友组队
+Feature.Chat.Heading.SafeChattingWithThisUser,与此用户聊天时请注意安全
+Feature.Chat.Heading.SafeChattingWithUsername,与 {displayName} 聊天时请注意安全
 Feature.Chat.Heading.ShareGameToChat,分享挑战至聊天窗口
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName}邀请你加入
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,“{combinedName}”邀请你加入群组
@@ -2561,7 +2598,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小时
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
@@ -3021,6 +3057,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}现已成为你的信赖好友
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信赖的好友已移除
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,“信赖的好友”请求已发送
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,近期活动
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username}的近期活动
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3129,6 +3167,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,由于临时错误，无�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,你看到的这个赞助内容基于不同因素（如地理位置、设备信息、年龄和平台行为）推送，旨在向你展示相关的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
 Feature.GameDetails.Message.SponsoredDisclosure.U18,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,你看到的这条赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。此赞助由 {PayerName} 付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,你看到的这条赞助内容基于多种因素（如地理位置、设备信息、年龄和平台行为）推送，旨在向你展示相关的内容。此赞助由 {PayerName} 付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,你看到的这条赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。此赞助由 {PayerName} 付费。
 Feature.GameDetails.Message.SuggestLessOften,我们会减少推荐此体验
 Feature.GameDetails.RatingPercentOnly,{percentRating}% 评分
 Feature.GameDetails.Toast.LinkCopied,链接已复制至剪贴板
@@ -4889,6 +4930,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,帮助改善这个体验
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,帮助创作者改善此体验
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,无法购买
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,购买更多产品前，请先加入体验以兑换你先前的购买项目。
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,加入以兑换购买项目
 Purchasing.RobloxProducts.Label.RobuxBalance,余额：{var1} 罗宝
 Roblox.ReferralRewards.AdditionalCreatorTerms,附加创作者条款
 Roblox.ReferralRewards.Expires,过期时间：

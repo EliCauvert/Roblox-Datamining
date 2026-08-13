@@ -8,7 +8,7 @@ local shareLinkDataModule = require(script.Parent.share_link_data)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 5603 ]]
+function t_1.new(p0) --[[ line: 5605 ]]
 	-- upvalues: t (ref), t_1 (ref)
 	return setmetatable({
 		action_type = if p0 == nil or p0.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p0.action_type,
@@ -16,7 +16,7 @@ function t_1.new(p0) --[[ line: 5603 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 5612 ]]
+function t_1:encode() --[[ line: 5614 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var185 = 0
@@ -40,7 +40,7 @@ function t_1:encode() --[[ line: 5612 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 5638 ]]
+function t_1.decode(p1) --[[ line: 5640 ]]
 	-- upvalues: t_1 (ref), protoModule (ref), t (ref)
 	local var192 = t_1.new()
 	local var193 = 0
@@ -94,7 +94,7 @@ function t_1.decode(p1) --[[ line: 5638 ]]
 	return var192
 end
 
-function t_1:jsonEncode() --[[ line: 5686 ]]
+function t_1:jsonEncode() --[[ line: 5688 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -107,7 +107,7 @@ function t_1:jsonEncode() --[[ line: 5686 ]]
 	return t_1
 end
 
-function t_1:jsonDecode() --[[ line: 5708 ]]
+function t_1:jsonDecode() --[[ line: 5710 ]]
 	-- upvalues: t_1 (ref), t (ref)
 	local var213 = t_1.new()
 	
@@ -135,14 +135,14 @@ typeRegistryModule.default:register(t.DismissDialogAction)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 5748 ]]
+function t_2.new(p2) --[[ line: 5750 ]]
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		dialog_type = if p2 == nil or p2.dialog_type == nil then nil else p2.dialog_type
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 5756 ]]
+function t_2:encode() --[[ line: 5758 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var215 = 0
@@ -160,7 +160,7 @@ function t_2:encode() --[[ line: 5756 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 5771 ]]
+function t_2.decode(p3) --[[ line: 5773 ]]
 	-- upvalues: t_2 (ref), protoModule (ref), propTypesModule (ref)
 	local var220 = t_2.new()
 	local var221 = 0
@@ -207,7 +207,7 @@ function t_2.decode(p3) --[[ line: 5771 ]]
 	return var220
 end
 
-function t_2:jsonEncode() --[[ line: 5814 ]]
+function t_2:jsonEncode() --[[ line: 5816 ]]
 	local t = {}
 	
 	if self.dialog_type ~= nil then
@@ -216,7 +216,7 @@ function t_2:jsonEncode() --[[ line: 5814 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 5824 ]]
+function t_2:jsonDecode() --[[ line: 5826 ]]
 	-- upvalues: t_2 (ref), propTypesModule (ref)
 	local var238 = t_2.new()
 	
@@ -238,7 +238,7 @@ typeRegistryModule.default:register(t.DismissDialogAction_Params)
 local t_3 = {}
 t_3.__index = t_3
 
-function t_3.new(p4) --[[ line: 5853 ]]
+function t_3.new(p4) --[[ line: 5855 ]]
 	-- upvalues: t (ref), t_3 (ref)
 	return setmetatable({
 		action_type = if p4 == nil or p4.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p4.action_type,
@@ -246,7 +246,7 @@ function t_3.new(p4) --[[ line: 5853 ]]
 	}, t_3)
 end
 
-function t_3:encode() --[[ line: 5862 ]]
+function t_3:encode() --[[ line: 5864 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var240 = 0
@@ -270,7 +270,7 @@ function t_3:encode() --[[ line: 5862 ]]
 	return buff_1
 end
 
-function t_3.decode(p5) --[[ line: 5888 ]]
+function t_3.decode(p5) --[[ line: 5890 ]]
 	-- upvalues: t_3 (ref), protoModule (ref), t (ref)
 	local var247 = t_3.new()
 	local var248 = 0
@@ -324,7 +324,7 @@ function t_3.decode(p5) --[[ line: 5888 ]]
 	return var247
 end
 
-function t_3:jsonEncode() --[[ line: 5936 ]]
+function t_3:jsonEncode() --[[ line: 5938 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -337,7 +337,7 @@ function t_3:jsonEncode() --[[ line: 5936 ]]
 	return t_1
 end
 
-function t_3:jsonDecode() --[[ line: 5958 ]]
+function t_3:jsonDecode() --[[ line: 5960 ]]
 	-- upvalues: t_3 (ref), t (ref)
 	local var268 = t_3.new()
 	
@@ -365,7 +365,7 @@ typeRegistryModule.default:register(t.LinkAction)
 local t_4 = {}
 t_4.__index = t_4
 
-function t_4.new(p6) --[[ line: 5998 ]]
+function t_4.new(p6) --[[ line: 6000 ]]
 	-- upvalues: t_4 (ref)
 	return setmetatable({
 		url = if p6 == nil or p6.url == nil then nil else p6.url,
@@ -374,7 +374,7 @@ function t_4.new(p6) --[[ line: 5998 ]]
 	}, t_4)
 end
 
-function t_4:encode() --[[ line: 6006 ]]
+function t_4:encode() --[[ line: 6008 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var270 = 0
@@ -406,7 +406,7 @@ function t_4:encode() --[[ line: 6006 ]]
 	return buff_1
 end
 
-function t_4.decode(p7) --[[ line: 6033 ]]
+function t_4.decode(p7) --[[ line: 6035 ]]
 	-- upvalues: t_4 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var281 = t_4.new()
 	local var282 = 0
@@ -463,7 +463,7 @@ function t_4.decode(p7) --[[ line: 6033 ]]
 	return var281
 end
 
-function t_4:jsonEncode() --[[ line: 6086 ]]
+function t_4:jsonEncode() --[[ line: 6088 ]]
 	local t = {}
 	
 	if self.url ~= nil then
@@ -478,7 +478,7 @@ function t_4:jsonEncode() --[[ line: 6086 ]]
 	return t
 end
 
-function t_4:jsonDecode() --[[ line: 6104 ]]
+function t_4:jsonDecode() --[[ line: 6106 ]]
 	-- upvalues: t_4 (ref), propTypesModule (ref), t (ref)
 	local var303 = t_4.new()
 	
@@ -509,7 +509,7 @@ typeRegistryModule.default:register(t.LinkAction_Params)
 local t_5 = {}
 t_5.__index = t_5
 
-function t_5.new(p8) --[[ line: 6144 ]]
+function t_5.new(p8) --[[ line: 6146 ]]
 	-- upvalues: t (ref), t_5 (ref)
 	return setmetatable({
 		action_type = if p8 == nil or p8.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p8.action_type,
@@ -517,7 +517,7 @@ function t_5.new(p8) --[[ line: 6144 ]]
 	}, t_5)
 end
 
-function t_5:encode() --[[ line: 6153 ]]
+function t_5:encode() --[[ line: 6155 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var305 = 0
@@ -541,7 +541,7 @@ function t_5:encode() --[[ line: 6153 ]]
 	return buff_1
 end
 
-function t_5.decode(p9) --[[ line: 6179 ]]
+function t_5.decode(p9) --[[ line: 6181 ]]
 	-- upvalues: t_5 (ref), protoModule (ref), t (ref)
 	local var312 = t_5.new()
 	local var313 = 0
@@ -595,7 +595,7 @@ function t_5.decode(p9) --[[ line: 6179 ]]
 	return var312
 end
 
-function t_5:jsonEncode() --[[ line: 6227 ]]
+function t_5:jsonEncode() --[[ line: 6229 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -608,7 +608,7 @@ function t_5:jsonEncode() --[[ line: 6227 ]]
 	return t_1
 end
 
-function t_5:jsonDecode() --[[ line: 6249 ]]
+function t_5:jsonDecode() --[[ line: 6251 ]]
 	-- upvalues: t_5 (ref), t (ref)
 	local var333 = t_5.new()
 	
@@ -636,7 +636,7 @@ typeRegistryModule.default:register(t.OpenSocialLinkAction)
 local t_6 = {}
 t_6.__index = t_6
 
-function t_6.new(p10) --[[ line: 6289 ]]
+function t_6.new(p10) --[[ line: 6291 ]]
 	-- upvalues: t_6 (ref)
 	return setmetatable({
 		assignment_id = if p10 == nil or p10.assignment_id == nil then nil else p10.assignment_id,
@@ -647,7 +647,7 @@ function t_6.new(p10) --[[ line: 6289 ]]
 	}, t_6)
 end
 
-function t_6:encode() --[[ line: 6303 ]]
+function t_6:encode() --[[ line: 6305 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var335 = 0
@@ -693,7 +693,7 @@ function t_6:encode() --[[ line: 6303 ]]
 	return buff_1
 end
 
-function t_6.decode(p11) --[[ line: 6342 ]]
+function t_6.decode(p11) --[[ line: 6344 ]]
 	-- upvalues: t_6 (ref), protoModule (ref), propTypesModule (ref)
 	local var352 = t_6.new()
 	local var353 = 0
@@ -760,7 +760,7 @@ function t_6.decode(p11) --[[ line: 6342 ]]
 	return var352
 end
 
-function t_6:jsonEncode() --[[ line: 6406 ]]
+function t_6:jsonEncode() --[[ line: 6408 ]]
 	local t = {}
 	
 	if self.assignment_id ~= nil then
@@ -781,7 +781,7 @@ function t_6:jsonEncode() --[[ line: 6406 ]]
 	return t
 end
 
-function t_6:jsonDecode() --[[ line: 6432 ]]
+function t_6:jsonDecode() --[[ line: 6434 ]]
 	-- upvalues: t_6 (ref), propTypesModule (ref)
 	local var378 = t_6.new()
 	
@@ -827,7 +827,7 @@ typeRegistryModule.default:register(t.OpenSocialLinkAction_Params)
 local t_7 = {}
 t_7.__index = t_7
 
-function t_7.new(p12) --[[ line: 6502 ]]
+function t_7.new(p12) --[[ line: 6504 ]]
 	-- upvalues: t (ref), t_7 (ref)
 	return setmetatable({
 		action_type = if p12 == nil or p12.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p12.action_type,
@@ -835,7 +835,7 @@ function t_7.new(p12) --[[ line: 6502 ]]
 	}, t_7)
 end
 
-function t_7:encode() --[[ line: 6511 ]]
+function t_7:encode() --[[ line: 6513 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var380 = 0
@@ -859,7 +859,7 @@ function t_7:encode() --[[ line: 6511 ]]
 	return buff_1
 end
 
-function t_7.decode(p13) --[[ line: 6537 ]]
+function t_7.decode(p13) --[[ line: 6539 ]]
 	-- upvalues: t_7 (ref), protoModule (ref), t (ref)
 	local var387 = t_7.new()
 	local var388 = 0
@@ -913,7 +913,7 @@ function t_7.decode(p13) --[[ line: 6537 ]]
 	return var387
 end
 
-function t_7:jsonEncode() --[[ line: 6585 ]]
+function t_7:jsonEncode() --[[ line: 6587 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -926,7 +926,7 @@ function t_7:jsonEncode() --[[ line: 6585 ]]
 	return t_1
 end
 
-function t_7:jsonDecode() --[[ line: 6607 ]]
+function t_7:jsonDecode() --[[ line: 6609 ]]
 	-- upvalues: t_7 (ref), t (ref)
 	local var408 = t_7.new()
 	
@@ -954,7 +954,7 @@ typeRegistryModule.default:register(t.OpenGameDetailsAction)
 local t_8 = {}
 t_8.__index = t_8
 
-function t_8.new(p14) --[[ line: 6647 ]]
+function t_8.new(p14) --[[ line: 6649 ]]
 	-- upvalues: t_8 (ref)
 	return setmetatable({
 		place_id = if p14 == nil or p14.place_id == nil then nil else p14.place_id,
@@ -963,7 +963,7 @@ function t_8.new(p14) --[[ line: 6647 ]]
 	}, t_8)
 end
 
-function t_8:encode() --[[ line: 6659 ]]
+function t_8:encode() --[[ line: 6661 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var410 = 0
@@ -995,7 +995,7 @@ function t_8:encode() --[[ line: 6659 ]]
 	return buff_1
 end
 
-function t_8.decode(p15) --[[ line: 6686 ]]
+function t_8.decode(p15) --[[ line: 6688 ]]
 	-- upvalues: t_8 (ref), protoModule (ref), propTypesModule (ref)
 	local var421 = t_8.new()
 	local var422 = 0
@@ -1052,7 +1052,7 @@ function t_8.decode(p15) --[[ line: 6686 ]]
 	return var421
 end
 
-function t_8:jsonEncode() --[[ line: 6740 ]]
+function t_8:jsonEncode() --[[ line: 6742 ]]
 	local t = {}
 	
 	if self.place_id ~= nil then
@@ -1067,7 +1067,7 @@ function t_8:jsonEncode() --[[ line: 6740 ]]
 	return t
 end
 
-function t_8:jsonDecode() --[[ line: 6758 ]]
+function t_8:jsonDecode() --[[ line: 6760 ]]
 	-- upvalues: t_8 (ref), propTypesModule (ref)
 	local var443 = t_8.new()
 	
@@ -1101,7 +1101,7 @@ typeRegistryModule.default:register(t.OpenGameDetailsAction_Params)
 local t_9 = {}
 t_9.__index = t_9
 
-function t_9.new(p16) --[[ line: 6805 ]]
+function t_9.new(p16) --[[ line: 6807 ]]
 	-- upvalues: t (ref), t_9 (ref)
 	return setmetatable({
 		action_type = if p16 == nil or p16.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p16.action_type,
@@ -1109,7 +1109,7 @@ function t_9.new(p16) --[[ line: 6805 ]]
 	}, t_9)
 end
 
-function t_9:encode() --[[ line: 6814 ]]
+function t_9:encode() --[[ line: 6816 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var445 = 0
@@ -1133,7 +1133,7 @@ function t_9:encode() --[[ line: 6814 ]]
 	return buff_1
 end
 
-function t_9.decode(p17) --[[ line: 6840 ]]
+function t_9.decode(p17) --[[ line: 6842 ]]
 	-- upvalues: t_9 (ref), protoModule (ref), t (ref)
 	local var452 = t_9.new()
 	local var453 = 0
@@ -1187,7 +1187,7 @@ function t_9.decode(p17) --[[ line: 6840 ]]
 	return var452
 end
 
-function t_9:jsonEncode() --[[ line: 6888 ]]
+function t_9:jsonEncode() --[[ line: 6890 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1200,7 +1200,7 @@ function t_9:jsonEncode() --[[ line: 6888 ]]
 	return t_1
 end
 
-function t_9:jsonDecode() --[[ line: 6910 ]]
+function t_9:jsonDecode() --[[ line: 6912 ]]
 	-- upvalues: t_9 (ref), t (ref)
 	local var473 = t_9.new()
 	
@@ -1228,7 +1228,7 @@ typeRegistryModule.default:register(t.OpenJoinFriendsAction)
 local t_10 = {}
 t_10.__index = t_10
 
-function t_10.new(p18) --[[ line: 6950 ]]
+function t_10.new(p18) --[[ line: 6952 ]]
 	-- upvalues: t_10 (ref)
 	return setmetatable({
 		place_id = if p18 == nil or p18.place_id == nil then nil else p18.place_id,
@@ -1236,7 +1236,7 @@ function t_10.new(p18) --[[ line: 6950 ]]
 	}, t_10)
 end
 
-function t_10:encode() --[[ line: 6959 ]]
+function t_10:encode() --[[ line: 6961 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var475 = 0
@@ -1261,7 +1261,7 @@ function t_10:encode() --[[ line: 6959 ]]
 	return buff_1
 end
 
-function t_10.decode(p19) --[[ line: 6980 ]]
+function t_10.decode(p19) --[[ line: 6982 ]]
 	-- upvalues: t_10 (ref), protoModule (ref), propTypesModule (ref)
 	local var483 = t_10.new()
 	local var484 = 0
@@ -1313,7 +1313,7 @@ function t_10.decode(p19) --[[ line: 6980 ]]
 	return var483
 end
 
-function t_10:jsonEncode() --[[ line: 7028 ]]
+function t_10:jsonEncode() --[[ line: 7030 ]]
 	local t = {}
 	
 	if self.place_id ~= nil then
@@ -1325,7 +1325,7 @@ function t_10:jsonEncode() --[[ line: 7028 ]]
 	return t
 end
 
-function t_10:jsonDecode() --[[ line: 7042 ]]
+function t_10:jsonDecode() --[[ line: 7044 ]]
 	-- upvalues: t_10 (ref), propTypesModule (ref)
 	local var503 = t_10.new()
 	
@@ -1353,7 +1353,7 @@ typeRegistryModule.default:register(t.OpenJoinFriendsAction_Params)
 local t_11 = {}
 t_11.__index = t_11
 
-function t_11.new(p20) --[[ line: 7079 ]]
+function t_11.new(p20) --[[ line: 7081 ]]
 	-- upvalues: t (ref), t_11 (ref)
 	return setmetatable({
 		action_type = if p20 == nil or p20.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p20.action_type,
@@ -1361,7 +1361,7 @@ function t_11.new(p20) --[[ line: 7079 ]]
 	}, t_11)
 end
 
-function t_11:encode() --[[ line: 7090 ]]
+function t_11:encode() --[[ line: 7092 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var505 = 0
@@ -1385,7 +1385,7 @@ function t_11:encode() --[[ line: 7090 ]]
 	return buff_1
 end
 
-function t_11.decode(p21) --[[ line: 7116 ]]
+function t_11.decode(p21) --[[ line: 7118 ]]
 	-- upvalues: t_11 (ref), protoModule (ref), t (ref)
 	local var512 = t_11.new()
 	local var513 = 0
@@ -1439,7 +1439,7 @@ function t_11.decode(p21) --[[ line: 7116 ]]
 	return var512
 end
 
-function t_11:jsonEncode() --[[ line: 7164 ]]
+function t_11:jsonEncode() --[[ line: 7166 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1452,7 +1452,7 @@ function t_11:jsonEncode() --[[ line: 7164 ]]
 	return t_1
 end
 
-function t_11:jsonDecode() --[[ line: 7186 ]]
+function t_11:jsonDecode() --[[ line: 7188 ]]
 	-- upvalues: t_11 (ref), t (ref)
 	local var533 = t_11.new()
 	
@@ -1480,7 +1480,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceTryOnAction)
 local t_12 = {}
 t_12.__index = t_12
 
-function t_12.new(p22) --[[ line: 7226 ]]
+function t_12.new(p22) --[[ line: 7228 ]]
 	-- upvalues: t_12 (ref)
 	return setmetatable({
 		item_id = if p22 == nil or p22.item_id == nil then nil else p22.item_id,
@@ -1489,7 +1489,7 @@ function t_12.new(p22) --[[ line: 7226 ]]
 	}, t_12)
 end
 
-function t_12:encode() --[[ line: 7236 ]]
+function t_12:encode() --[[ line: 7238 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var535 = 0
@@ -1521,7 +1521,7 @@ function t_12:encode() --[[ line: 7236 ]]
 	return buff_1
 end
 
-function t_12.decode(p23) --[[ line: 7263 ]]
+function t_12.decode(p23) --[[ line: 7265 ]]
 	-- upvalues: t_12 (ref), protoModule (ref), propTypesModule (ref)
 	local var546 = t_12.new()
 	local var547 = 0
@@ -1578,7 +1578,7 @@ function t_12.decode(p23) --[[ line: 7263 ]]
 	return var546
 end
 
-function t_12:jsonEncode() --[[ line: 7316 ]]
+function t_12:jsonEncode() --[[ line: 7318 ]]
 	local t = {}
 	
 	if self.item_id ~= nil then
@@ -1593,7 +1593,7 @@ function t_12:jsonEncode() --[[ line: 7316 ]]
 	return t
 end
 
-function t_12:jsonDecode() --[[ line: 7334 ]]
+function t_12:jsonDecode() --[[ line: 7336 ]]
 	-- upvalues: t_12 (ref), propTypesModule (ref)
 	local var568 = t_12.new()
 	
@@ -1627,7 +1627,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceTryOnAction_Params)
 local t_13 = {}
 t_13.__index = t_13
 
-function t_13.new(p24) --[[ line: 7382 ]]
+function t_13.new(p24) --[[ line: 7384 ]]
 	-- upvalues: t (ref), t_13 (ref)
 	return setmetatable({
 		action_type = if p24 == nil or p24.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p24.action_type,
@@ -1635,7 +1635,7 @@ function t_13.new(p24) --[[ line: 7382 ]]
 	}, t_13)
 end
 
-function t_13:encode() --[[ line: 7391 ]]
+function t_13:encode() --[[ line: 7393 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var570 = 0
@@ -1659,7 +1659,7 @@ function t_13:encode() --[[ line: 7391 ]]
 	return buff_1
 end
 
-function t_13.decode(p25) --[[ line: 7417 ]]
+function t_13.decode(p25) --[[ line: 7419 ]]
 	-- upvalues: t_13 (ref), protoModule (ref), t (ref)
 	local var577 = t_13.new()
 	local var578 = 0
@@ -1713,7 +1713,7 @@ function t_13.decode(p25) --[[ line: 7417 ]]
 	return var577
 end
 
-function t_13:jsonEncode() --[[ line: 7465 ]]
+function t_13:jsonEncode() --[[ line: 7467 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -1726,7 +1726,7 @@ function t_13:jsonEncode() --[[ line: 7465 ]]
 	return t_1
 end
 
-function t_13:jsonDecode() --[[ line: 7487 ]]
+function t_13:jsonDecode() --[[ line: 7489 ]]
 	-- upvalues: t_13 (ref), t (ref)
 	local var598 = t_13.new()
 	
@@ -1754,7 +1754,7 @@ typeRegistryModule.default:register(t.OpenSeeAllAction)
 local t_14 = {}
 t_14.__index = t_14
 
-function t_14.new(p26) --[[ line: 7527 ]]
+function t_14.new(p26) --[[ line: 7529 ]]
 	-- upvalues: t_14 (ref)
 	return setmetatable({
 		collection_id = if p26 == nil or p26.collection_id == nil then nil else p26.collection_id,
@@ -1763,7 +1763,7 @@ function t_14.new(p26) --[[ line: 7527 ]]
 	}, t_14)
 end
 
-function t_14:encode() --[[ line: 7537 ]]
+function t_14:encode() --[[ line: 7539 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var600 = 0
@@ -1795,7 +1795,7 @@ function t_14:encode() --[[ line: 7537 ]]
 	return buff_1
 end
 
-function t_14.decode(p27) --[[ line: 7564 ]]
+function t_14.decode(p27) --[[ line: 7566 ]]
 	-- upvalues: t_14 (ref), protoModule (ref), propTypesModule (ref)
 	local var611 = t_14.new()
 	local var612 = 0
@@ -1852,7 +1852,7 @@ function t_14.decode(p27) --[[ line: 7564 ]]
 	return var611
 end
 
-function t_14:jsonEncode() --[[ line: 7618 ]]
+function t_14:jsonEncode() --[[ line: 7620 ]]
 	local t = {}
 	
 	if self.collection_id ~= nil then
@@ -1867,7 +1867,7 @@ function t_14:jsonEncode() --[[ line: 7618 ]]
 	return t
 end
 
-function t_14:jsonDecode() --[[ line: 7636 ]]
+function t_14:jsonDecode() --[[ line: 7638 ]]
 	-- upvalues: t_14 (ref), propTypesModule (ref)
 	local var633 = t_14.new()
 	
@@ -1901,7 +1901,7 @@ typeRegistryModule.default:register(t.OpenSeeAllAction_Params)
 local t_15 = {}
 t_15.__index = t_15
 
-function t_15.new(p28) --[[ line: 7686 ]]
+function t_15.new(p28) --[[ line: 7688 ]]
 	-- upvalues: t (ref), t_15 (ref)
 	return setmetatable({
 		action_type = if p28 == nil or p28.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p28.action_type,
@@ -1909,7 +1909,7 @@ function t_15.new(p28) --[[ line: 7686 ]]
 	}, t_15)
 end
 
-function t_15:encode() --[[ line: 7697 ]]
+function t_15:encode() --[[ line: 7699 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var635 = 0
@@ -1933,7 +1933,7 @@ function t_15:encode() --[[ line: 7697 ]]
 	return buff_1
 end
 
-function t_15.decode(p29) --[[ line: 7723 ]]
+function t_15.decode(p29) --[[ line: 7725 ]]
 	-- upvalues: t_15 (ref), protoModule (ref), t (ref)
 	local var642 = t_15.new()
 	local var643 = 0
@@ -1987,7 +1987,7 @@ function t_15.decode(p29) --[[ line: 7723 ]]
 	return var642
 end
 
-function t_15:jsonEncode() --[[ line: 7771 ]]
+function t_15:jsonEncode() --[[ line: 7773 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2000,7 +2000,7 @@ function t_15:jsonEncode() --[[ line: 7771 ]]
 	return t_1
 end
 
-function t_15:jsonDecode() --[[ line: 7793 ]]
+function t_15:jsonDecode() --[[ line: 7795 ]]
 	-- upvalues: t_15 (ref), t (ref)
 	local var663 = t_15.new()
 	
@@ -2028,19 +2028,19 @@ typeRegistryModule.default:register(t.OpenSponsoredTooltipAction)
 local t_16 = {}
 t_16.__index = t_16
 
-function t_16.new(_) --[[ line: 7833 ]]
+function t_16.new(_) --[[ line: 7835 ]]
 	-- upvalues: t_16 (ref)
 	return setmetatable({}, t_16)
 end
 
-function t_16.encode(_) --[[ line: 7839 ]]
+function t_16.encode(_) --[[ line: 7841 ]]
 	local buff = buffer.create(0)
 	buffer.copy(buff, 0, buffer.create(0), 0, 0)
 	
 	return buff
 end
 
-function t_16.decode(p30) --[[ line: 7848 ]]
+function t_16.decode(p30) --[[ line: 7850 ]]
 	-- upvalues: t_16 (ref), protoModule (ref)
 	local var665 = t_16.new()
 	local var666 = 0
@@ -2078,11 +2078,11 @@ function t_16.decode(p30) --[[ line: 7848 ]]
 	return var665
 end
 
-function t_16.jsonEncode(_) --[[ line: 7886 ]]
+function t_16.jsonEncode(_) --[[ line: 7888 ]]
 	return {}
 end
 
-function t_16.jsonDecode(_) --[[ line: 7892 ]]
+function t_16.jsonDecode(_) --[[ line: 7894 ]]
 	-- upvalues: t_16 (ref)
 	return t_16.new()
 end
@@ -2096,7 +2096,7 @@ typeRegistryModule.default:register(t.OpenSponsoredTooltipAction_Params)
 local t_17 = {}
 t_17.__index = t_17
 
-function t_17.new(p31) --[[ line: 7914 ]]
+function t_17.new(p31) --[[ line: 7916 ]]
 	-- upvalues: t (ref), t_17 (ref)
 	return setmetatable({
 		action_type = if p31 == nil or p31.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p31.action_type,
@@ -2104,7 +2104,7 @@ function t_17.new(p31) --[[ line: 7914 ]]
 	}, t_17)
 end
 
-function t_17:encode() --[[ line: 7923 ]]
+function t_17:encode() --[[ line: 7925 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var681 = 0
@@ -2128,7 +2128,7 @@ function t_17:encode() --[[ line: 7923 ]]
 	return buff_1
 end
 
-function t_17.decode(p32) --[[ line: 7949 ]]
+function t_17.decode(p32) --[[ line: 7951 ]]
 	-- upvalues: t_17 (ref), protoModule (ref), t (ref)
 	local var688 = t_17.new()
 	local var689 = 0
@@ -2182,7 +2182,7 @@ function t_17.decode(p32) --[[ line: 7949 ]]
 	return var688
 end
 
-function t_17:jsonEncode() --[[ line: 7997 ]]
+function t_17:jsonEncode() --[[ line: 7999 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2195,7 +2195,7 @@ function t_17:jsonEncode() --[[ line: 7997 ]]
 	return t_1
 end
 
-function t_17:jsonDecode() --[[ line: 8019 ]]
+function t_17:jsonDecode() --[[ line: 8021 ]]
 	-- upvalues: t_17 (ref), t (ref)
 	local var709 = t_17.new()
 	
@@ -2223,19 +2223,19 @@ typeRegistryModule.default:register(t.PlayButtonClickAction)
 local t_18 = {}
 t_18.__index = t_18
 
-function t_18.new(_) --[[ line: 8059 ]]
+function t_18.new(_) --[[ line: 8061 ]]
 	-- upvalues: t_18 (ref)
 	return setmetatable({}, t_18)
 end
 
-function t_18.encode(_) --[[ line: 8065 ]]
+function t_18.encode(_) --[[ line: 8067 ]]
 	local buff = buffer.create(0)
 	buffer.copy(buff, 0, buffer.create(0), 0, 0)
 	
 	return buff
 end
 
-function t_18.decode(p33) --[[ line: 8074 ]]
+function t_18.decode(p33) --[[ line: 8076 ]]
 	-- upvalues: t_18 (ref), protoModule (ref)
 	local var711 = t_18.new()
 	local var712 = 0
@@ -2273,11 +2273,11 @@ function t_18.decode(p33) --[[ line: 8074 ]]
 	return var711
 end
 
-function t_18.jsonEncode(_) --[[ line: 8112 ]]
+function t_18.jsonEncode(_) --[[ line: 8114 ]]
 	return {}
 end
 
-function t_18.jsonDecode(_) --[[ line: 8118 ]]
+function t_18.jsonDecode(_) --[[ line: 8120 ]]
 	-- upvalues: t_18 (ref)
 	return t_18.new()
 end
@@ -2291,7 +2291,7 @@ typeRegistryModule.default:register(t.PlayButtonClickAction_Params)
 local t_19 = {}
 t_19.__index = t_19
 
-function t_19.new(p34) --[[ line: 8138 ]]
+function t_19.new(p34) --[[ line: 8140 ]]
 	-- upvalues: t (ref), t_19 (ref)
 	return setmetatable({
 		action_type = if p34 == nil or p34.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p34.action_type,
@@ -2299,7 +2299,7 @@ function t_19.new(p34) --[[ line: 8138 ]]
 	}, t_19)
 end
 
-function t_19:encode() --[[ line: 8147 ]]
+function t_19:encode() --[[ line: 8149 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var727 = 0
@@ -2323,7 +2323,7 @@ function t_19:encode() --[[ line: 8147 ]]
 	return buff_1
 end
 
-function t_19.decode(p35) --[[ line: 8173 ]]
+function t_19.decode(p35) --[[ line: 8175 ]]
 	-- upvalues: t_19 (ref), protoModule (ref), t (ref)
 	local var734 = t_19.new()
 	local var735 = 0
@@ -2377,7 +2377,7 @@ function t_19.decode(p35) --[[ line: 8173 ]]
 	return var734
 end
 
-function t_19:jsonEncode() --[[ line: 8221 ]]
+function t_19:jsonEncode() --[[ line: 8223 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2390,7 +2390,7 @@ function t_19:jsonEncode() --[[ line: 8221 ]]
 	return t_1
 end
 
-function t_19:jsonDecode() --[[ line: 8243 ]]
+function t_19:jsonDecode() --[[ line: 8245 ]]
 	-- upvalues: t_19 (ref), t (ref)
 	local var755 = t_19.new()
 	
@@ -2418,7 +2418,7 @@ typeRegistryModule.default:register(t.UpdateUserSettingsAction)
 local t_20 = {}
 t_20.__index = t_20
 
-function t_20.new(p36) --[[ line: 8283 ]]
+function t_20.new(p36) --[[ line: 8285 ]]
 	-- upvalues: t_20 (ref)
 	return setmetatable({
 		settings = if p36 == nil or p36.settings == nil then nil else p36.settings,
@@ -2426,7 +2426,7 @@ function t_20.new(p36) --[[ line: 8283 ]]
 	}, t_20)
 end
 
-function t_20:encode() --[[ line: 8292 ]]
+function t_20:encode() --[[ line: 8294 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var757 = 0
@@ -2451,7 +2451,7 @@ function t_20:encode() --[[ line: 8292 ]]
 	return buff_1
 end
 
-function t_20.decode(p37) --[[ line: 8313 ]]
+function t_20.decode(p37) --[[ line: 8315 ]]
 	-- upvalues: t_20 (ref), protoModule (ref), propTypesModule (ref)
 	local var765 = t_20.new()
 	local var766 = 0
@@ -2503,7 +2503,7 @@ function t_20.decode(p37) --[[ line: 8313 ]]
 	return var765
 end
 
-function t_20:jsonEncode() --[[ line: 8361 ]]
+function t_20:jsonEncode() --[[ line: 8363 ]]
 	local t = {}
 	
 	if self.settings ~= nil then
@@ -2515,7 +2515,7 @@ function t_20:jsonEncode() --[[ line: 8361 ]]
 	return t
 end
 
-function t_20:jsonDecode() --[[ line: 8375 ]]
+function t_20:jsonDecode() --[[ line: 8377 ]]
 	-- upvalues: t_20 (ref), propTypesModule (ref)
 	local var785 = t_20.new()
 	
@@ -2540,7 +2540,7 @@ typeRegistryModule.default:register(t.UpdateUserSettingsAction_Params)
 local t_21 = {}
 t_21.__index = t_21
 
-function t_21.new(p38) --[[ line: 8407 ]]
+function t_21.new(p38) --[[ line: 8409 ]]
 	-- upvalues: t (ref), t_21 (ref)
 	return setmetatable({
 		action_type = if p38 == nil or p38.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p38.action_type,
@@ -2548,7 +2548,7 @@ function t_21.new(p38) --[[ line: 8407 ]]
 	}, t_21)
 end
 
-function t_21:encode() --[[ line: 8416 ]]
+function t_21:encode() --[[ line: 8418 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var787 = 0
@@ -2572,7 +2572,7 @@ function t_21:encode() --[[ line: 8416 ]]
 	return buff_1
 end
 
-function t_21.decode(p39) --[[ line: 8442 ]]
+function t_21.decode(p39) --[[ line: 8444 ]]
 	-- upvalues: t_21 (ref), protoModule (ref), t (ref)
 	local var794 = t_21.new()
 	local var795 = 0
@@ -2626,7 +2626,7 @@ function t_21.decode(p39) --[[ line: 8442 ]]
 	return var794
 end
 
-function t_21:jsonEncode() --[[ line: 8490 ]]
+function t_21:jsonEncode() --[[ line: 8492 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2639,7 +2639,7 @@ function t_21:jsonEncode() --[[ line: 8490 ]]
 	return t_1
 end
 
-function t_21:jsonDecode() --[[ line: 8512 ]]
+function t_21:jsonDecode() --[[ line: 8514 ]]
 	-- upvalues: t_21 (ref), t (ref)
 	local var815 = t_21.new()
 	
@@ -2667,7 +2667,7 @@ typeRegistryModule.default:register(t.OpenTooltipAction)
 local t_22 = {}
 t_22.__index = t_22
 
-function t_22.new(p40) --[[ line: 8552 ]]
+function t_22.new(p40) --[[ line: 8554 ]]
 	-- upvalues: t_22 (ref)
 	return setmetatable({
 		tooltip_title = if p40 == nil or p40.tooltip_title == nil then nil else p40.tooltip_title,
@@ -2675,7 +2675,7 @@ function t_22.new(p40) --[[ line: 8552 ]]
 	}, t_22)
 end
 
-function t_22:encode() --[[ line: 8559 ]]
+function t_22:encode() --[[ line: 8561 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var817 = 0
@@ -2700,7 +2700,7 @@ function t_22:encode() --[[ line: 8559 ]]
 	return buff_1
 end
 
-function t_22.decode(p41) --[[ line: 8580 ]]
+function t_22.decode(p41) --[[ line: 8582 ]]
 	-- upvalues: t_22 (ref), protoModule (ref), propTypesModule (ref)
 	local var825 = t_22.new()
 	local var826 = 0
@@ -2752,7 +2752,7 @@ function t_22.decode(p41) --[[ line: 8580 ]]
 	return var825
 end
 
-function t_22:jsonEncode() --[[ line: 8628 ]]
+function t_22:jsonEncode() --[[ line: 8630 ]]
 	local t = {}
 	
 	if self.tooltip_title ~= nil then
@@ -2764,7 +2764,7 @@ function t_22:jsonEncode() --[[ line: 8628 ]]
 	return t
 end
 
-function t_22:jsonDecode() --[[ line: 8642 ]]
+function t_22:jsonDecode() --[[ line: 8644 ]]
 	-- upvalues: t_22 (ref), propTypesModule (ref)
 	local var845 = t_22.new()
 	
@@ -2792,7 +2792,7 @@ typeRegistryModule.default:register(t.OpenTooltipAction_Params)
 local t_23 = {}
 t_23.__index = t_23
 
-function t_23.new(p42) --[[ line: 8682 ]]
+function t_23.new(p42) --[[ line: 8684 ]]
 	-- upvalues: t (ref), t_23 (ref)
 	return setmetatable({
 		action_type = if p42 == nil or p42.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p42.action_type,
@@ -2800,7 +2800,7 @@ function t_23.new(p42) --[[ line: 8682 ]]
 	}, t_23)
 end
 
-function t_23:encode() --[[ line: 8691 ]]
+function t_23:encode() --[[ line: 8693 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var847 = 0
@@ -2824,7 +2824,7 @@ function t_23:encode() --[[ line: 8691 ]]
 	return buff_1
 end
 
-function t_23.decode(p43) --[[ line: 8717 ]]
+function t_23.decode(p43) --[[ line: 8719 ]]
 	-- upvalues: t_23 (ref), protoModule (ref), t (ref)
 	local var854 = t_23.new()
 	local var855 = 0
@@ -2878,7 +2878,7 @@ function t_23.decode(p43) --[[ line: 8717 ]]
 	return var854
 end
 
-function t_23:jsonEncode() --[[ line: 8765 ]]
+function t_23:jsonEncode() --[[ line: 8767 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -2891,7 +2891,7 @@ function t_23:jsonEncode() --[[ line: 8765 ]]
 	return t_1
 end
 
-function t_23:jsonDecode() --[[ line: 8787 ]]
+function t_23:jsonDecode() --[[ line: 8789 ]]
 	-- upvalues: t_23 (ref), t (ref)
 	local var875 = t_23.new()
 	
@@ -2919,7 +2919,7 @@ typeRegistryModule.default:register(t.OpenBadgeDetailsAction)
 local t_24 = {}
 t_24.__index = t_24
 
-function t_24.new(p44) --[[ line: 8827 ]]
+function t_24.new(p44) --[[ line: 8829 ]]
 	-- upvalues: t_24 (ref)
 	return setmetatable({
 		badge_id = if p44 == nil or p44.badge_id == nil then nil else p44.badge_id,
@@ -2927,7 +2927,7 @@ function t_24.new(p44) --[[ line: 8827 ]]
 	}, t_24)
 end
 
-function t_24:encode() --[[ line: 8836 ]]
+function t_24:encode() --[[ line: 8838 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var877 = 0
@@ -2952,7 +2952,7 @@ function t_24:encode() --[[ line: 8836 ]]
 	return buff_1
 end
 
-function t_24.decode(p45) --[[ line: 8857 ]]
+function t_24.decode(p45) --[[ line: 8859 ]]
 	-- upvalues: t_24 (ref), protoModule (ref), propTypesModule (ref)
 	local var885 = t_24.new()
 	local var886 = 0
@@ -3004,7 +3004,7 @@ function t_24.decode(p45) --[[ line: 8857 ]]
 	return var885
 end
 
-function t_24:jsonEncode() --[[ line: 8905 ]]
+function t_24:jsonEncode() --[[ line: 8907 ]]
 	local t = {}
 	
 	if self.badge_id ~= nil then
@@ -3016,7 +3016,7 @@ function t_24:jsonEncode() --[[ line: 8905 ]]
 	return t
 end
 
-function t_24:jsonDecode() --[[ line: 8919 ]]
+function t_24:jsonDecode() --[[ line: 8921 ]]
 	-- upvalues: t_24 (ref), propTypesModule (ref)
 	local var905 = t_24.new()
 	
@@ -3044,7 +3044,7 @@ typeRegistryModule.default:register(t.OpenBadgeDetailsAction_Params)
 local t_25 = {}
 t_25.__index = t_25
 
-function t_25.new(p46) --[[ line: 8955 ]]
+function t_25.new(p46) --[[ line: 8957 ]]
 	-- upvalues: t (ref), t_25 (ref)
 	return setmetatable({
 		action_type = if p46 == nil or p46.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p46.action_type,
@@ -3052,7 +3052,7 @@ function t_25.new(p46) --[[ line: 8955 ]]
 	}, t_25)
 end
 
-function t_25:encode() --[[ line: 8964 ]]
+function t_25:encode() --[[ line: 8966 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var907 = 0
@@ -3076,7 +3076,7 @@ function t_25:encode() --[[ line: 8964 ]]
 	return buff_1
 end
 
-function t_25.decode(p47) --[[ line: 8990 ]]
+function t_25.decode(p47) --[[ line: 8992 ]]
 	-- upvalues: t_25 (ref), protoModule (ref), t (ref)
 	local var914 = t_25.new()
 	local var915 = 0
@@ -3130,7 +3130,7 @@ function t_25.decode(p47) --[[ line: 8990 ]]
 	return var914
 end
 
-function t_25:jsonEncode() --[[ line: 9038 ]]
+function t_25:jsonEncode() --[[ line: 9040 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3143,7 +3143,7 @@ function t_25:jsonEncode() --[[ line: 9038 ]]
 	return t_1
 end
 
-function t_25:jsonDecode() --[[ line: 9060 ]]
+function t_25:jsonDecode() --[[ line: 9062 ]]
 	-- upvalues: t_25 (ref), t (ref)
 	local var935 = t_25.new()
 	
@@ -3171,7 +3171,7 @@ typeRegistryModule.default:register(t.LoadMoreFromApiAction)
 local t_26 = {}
 t_26.__index = t_26
 
-function t_26.new(p48) --[[ line: 9100 ]]
+function t_26.new(p48) --[[ line: 9102 ]]
 	-- upvalues: t_26 (ref)
 	return setmetatable({
 		surface_key = if p48 == nil or p48.surface_key == nil then nil else p48.surface_key,
@@ -3179,7 +3179,7 @@ function t_26.new(p48) --[[ line: 9100 ]]
 	}, t_26)
 end
 
-function t_26:encode() --[[ line: 9109 ]]
+function t_26:encode() --[[ line: 9111 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var937 = 0
@@ -3204,7 +3204,7 @@ function t_26:encode() --[[ line: 9109 ]]
 	return buff_1
 end
 
-function t_26.decode(p49) --[[ line: 9130 ]]
+function t_26.decode(p49) --[[ line: 9132 ]]
 	-- upvalues: t_26 (ref), protoModule (ref), propTypesModule (ref)
 	local var945 = t_26.new()
 	local var946 = 0
@@ -3256,7 +3256,7 @@ function t_26.decode(p49) --[[ line: 9130 ]]
 	return var945
 end
 
-function t_26:jsonEncode() --[[ line: 9178 ]]
+function t_26:jsonEncode() --[[ line: 9180 ]]
 	local t = {}
 	
 	if self.surface_key ~= nil then
@@ -3268,7 +3268,7 @@ function t_26:jsonEncode() --[[ line: 9178 ]]
 	return t
 end
 
-function t_26:jsonDecode() --[[ line: 9192 ]]
+function t_26:jsonDecode() --[[ line: 9194 ]]
 	-- upvalues: t_26 (ref), propTypesModule (ref)
 	local var965 = t_26.new()
 	
@@ -3296,7 +3296,7 @@ typeRegistryModule.default:register(t.LoadMoreFromApiAction_Params)
 local t_27 = {}
 t_27.__index = t_27
 
-function t_27.new(p50) --[[ line: 9229 ]]
+function t_27.new(p50) --[[ line: 9231 ]]
 	-- upvalues: t (ref), t_27 (ref)
 	return setmetatable({
 		action_type = if p50 == nil or p50.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p50.action_type,
@@ -3304,7 +3304,7 @@ function t_27.new(p50) --[[ line: 9229 ]]
 	}, t_27)
 end
 
-function t_27:encode() --[[ line: 9238 ]]
+function t_27:encode() --[[ line: 9240 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var967 = 0
@@ -3328,7 +3328,7 @@ function t_27:encode() --[[ line: 9238 ]]
 	return buff_1
 end
 
-function t_27.decode(p51) --[[ line: 9264 ]]
+function t_27.decode(p51) --[[ line: 9266 ]]
 	-- upvalues: t_27 (ref), protoModule (ref), t (ref)
 	local var974 = t_27.new()
 	local var975 = 0
@@ -3382,7 +3382,7 @@ function t_27.decode(p51) --[[ line: 9264 ]]
 	return var974
 end
 
-function t_27:jsonEncode() --[[ line: 9312 ]]
+function t_27:jsonEncode() --[[ line: 9314 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3395,7 +3395,7 @@ function t_27:jsonEncode() --[[ line: 9312 ]]
 	return t_1
 end
 
-function t_27:jsonDecode() --[[ line: 9334 ]]
+function t_27:jsonDecode() --[[ line: 9336 ]]
 	-- upvalues: t_27 (ref), t (ref)
 	local var995 = t_27.new()
 	
@@ -3423,14 +3423,14 @@ typeRegistryModule.default:register(t.ShareAction)
 local t_28 = {}
 t_28.__index = t_28
 
-function t_28.new(p52) --[[ line: 9374 ]]
+function t_28.new(p52) --[[ line: 9376 ]]
 	-- upvalues: t_28 (ref)
 	return setmetatable({
 		oneof_prop = if p52 == nil or p52.oneof_prop == nil then nil else p52.oneof_prop
 	}, t_28)
 end
 
-function t_28:encode() --[[ line: 9382 ]]
+function t_28:encode() --[[ line: 9384 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var997 = 0
@@ -3456,7 +3456,7 @@ function t_28:encode() --[[ line: 9382 ]]
 	return buff_1
 end
 
-function t_28.decode(p53) --[[ line: 9403 ]]
+function t_28.decode(p53) --[[ line: 9405 ]]
 	-- upvalues: t_28 (ref), protoModule (ref), shareLinkDataModule (ref)
 	local var1005 = t_28.new()
 	local var1006 = 0
@@ -3514,7 +3514,7 @@ function t_28.decode(p53) --[[ line: 9403 ]]
 	return var1005
 end
 
-function t_28:jsonEncode() --[[ line: 9459 ]]
+function t_28:jsonEncode() --[[ line: 9461 ]]
 	local t = {}
 	
 	if self.oneof_prop ~= nil then
@@ -3529,7 +3529,7 @@ function t_28:jsonEncode() --[[ line: 9459 ]]
 	return t
 end
 
-function t_28:jsonDecode() --[[ line: 9473 ]]
+function t_28:jsonDecode() --[[ line: 9475 ]]
 	-- upvalues: t_28 (ref), shareLinkDataModule (ref)
 	local var1025 = t_28.new()
 	
@@ -3569,7 +3569,7 @@ typeRegistryModule.default:register(t.ShareAction_ShareLinkData)
 local t_29 = {}
 t_29.__index = t_29
 
-function t_29.new(p54) --[[ line: 9529 ]]
+function t_29.new(p54) --[[ line: 9531 ]]
 	-- upvalues: t_29 (ref)
 	return setmetatable({
 		share_link_type = if p54 == nil or p54.share_link_type == nil then nil else p54.share_link_type,
@@ -3578,7 +3578,7 @@ function t_29.new(p54) --[[ line: 9529 ]]
 	}, t_29)
 end
 
-function t_29:encode() --[[ line: 9537 ]]
+function t_29:encode() --[[ line: 9539 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1027 = 0
@@ -3610,7 +3610,7 @@ function t_29:encode() --[[ line: 9537 ]]
 	return buff_1
 end
 
-function t_29.decode(p55) --[[ line: 9564 ]]
+function t_29.decode(p55) --[[ line: 9566 ]]
 	-- upvalues: t_29 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var1038 = t_29.new()
 	local var1039 = 0
@@ -3667,7 +3667,7 @@ function t_29.decode(p55) --[[ line: 9564 ]]
 	return var1038
 end
 
-function t_29:jsonEncode() --[[ line: 9617 ]]
+function t_29:jsonEncode() --[[ line: 9619 ]]
 	local t = {}
 	
 	if self.share_link_type ~= nil then
@@ -3682,7 +3682,7 @@ function t_29:jsonEncode() --[[ line: 9617 ]]
 	return t
 end
 
-function t_29:jsonDecode() --[[ line: 9635 ]]
+function t_29:jsonDecode() --[[ line: 9637 ]]
 	-- upvalues: t_29 (ref), propTypesModule (ref), t (ref)
 	local var1060 = t_29.new()
 	
@@ -3716,7 +3716,7 @@ typeRegistryModule.default:register(t.ShareAction_Params)
 local t_30 = {}
 t_30.__index = t_30
 
-function t_30.new(p56) --[[ line: 9683 ]]
+function t_30.new(p56) --[[ line: 9685 ]]
 	-- upvalues: t (ref), t_30 (ref)
 	return setmetatable({
 		action_type = if p56 == nil or p56.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p56.action_type,
@@ -3724,7 +3724,7 @@ function t_30.new(p56) --[[ line: 9683 ]]
 	}, t_30)
 end
 
-function t_30:encode() --[[ line: 9692 ]]
+function t_30:encode() --[[ line: 9694 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1062 = 0
@@ -3748,7 +3748,7 @@ function t_30:encode() --[[ line: 9692 ]]
 	return buff_1
 end
 
-function t_30.decode(p57) --[[ line: 9718 ]]
+function t_30.decode(p57) --[[ line: 9720 ]]
 	-- upvalues: t_30 (ref), protoModule (ref), t (ref)
 	local var1069 = t_30.new()
 	local var1070 = 0
@@ -3802,7 +3802,7 @@ function t_30.decode(p57) --[[ line: 9718 ]]
 	return var1069
 end
 
-function t_30:jsonEncode() --[[ line: 9766 ]]
+function t_30:jsonEncode() --[[ line: 9768 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -3815,7 +3815,7 @@ function t_30:jsonEncode() --[[ line: 9766 ]]
 	return t_1
 end
 
-function t_30:jsonDecode() --[[ line: 9788 ]]
+function t_30:jsonDecode() --[[ line: 9790 ]]
 	-- upvalues: t_30 (ref), t (ref)
 	local var1090 = t_30.new()
 	
@@ -3843,7 +3843,7 @@ typeRegistryModule.default:register(t.OpenAbuseReportAction)
 local t_31 = {}
 t_31.__index = t_31
 
-function t_31.new(p58) --[[ line: 9828 ]]
+function t_31.new(p58) --[[ line: 9830 ]]
 	-- upvalues: t_31 (ref)
 	return setmetatable({
 		target_id = if p58 == nil or p58.target_id == nil then nil else p58.target_id,
@@ -3853,7 +3853,7 @@ function t_31.new(p58) --[[ line: 9828 ]]
 	}, t_31)
 end
 
-function t_31:encode() --[[ line: 9839 ]]
+function t_31:encode() --[[ line: 9841 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1092 = 0
@@ -3892,7 +3892,7 @@ function t_31:encode() --[[ line: 9839 ]]
 	return buff_1
 end
 
-function t_31.decode(p59) --[[ line: 9872 ]]
+function t_31.decode(p59) --[[ line: 9874 ]]
 	-- upvalues: t_31 (ref), protoModule (ref), propTypesModule (ref)
 	local var1106 = t_31.new()
 	local var1107 = 0
@@ -3954,7 +3954,7 @@ function t_31.decode(p59) --[[ line: 9872 ]]
 	return var1106
 end
 
-function t_31:jsonEncode() --[[ line: 9930 ]]
+function t_31:jsonEncode() --[[ line: 9932 ]]
 	local t = {}
 	
 	if self.target_id ~= nil then
@@ -3972,7 +3972,7 @@ function t_31:jsonEncode() --[[ line: 9930 ]]
 	return t
 end
 
-function t_31:jsonDecode() --[[ line: 9952 ]]
+function t_31:jsonDecode() --[[ line: 9954 ]]
 	-- upvalues: t_31 (ref), propTypesModule (ref)
 	local var1130 = t_31.new()
 	
@@ -4012,7 +4012,7 @@ typeRegistryModule.default:register(t.OpenAbuseReportAction_Params)
 local t_32 = {}
 t_32.__index = t_32
 
-function t_32.new(p60) --[[ line: 10009 ]]
+function t_32.new(p60) --[[ line: 10011 ]]
 	-- upvalues: t (ref), t_32 (ref)
 	return setmetatable({
 		action_type = if p60 == nil or p60.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p60.action_type,
@@ -4020,7 +4020,7 @@ function t_32.new(p60) --[[ line: 10009 ]]
 	}, t_32)
 end
 
-function t_32:encode() --[[ line: 10020 ]]
+function t_32:encode() --[[ line: 10022 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1132 = 0
@@ -4044,7 +4044,7 @@ function t_32:encode() --[[ line: 10020 ]]
 	return buff_1
 end
 
-function t_32.decode(p61) --[[ line: 10046 ]]
+function t_32.decode(p61) --[[ line: 10048 ]]
 	-- upvalues: t_32 (ref), protoModule (ref), t (ref)
 	local var1139 = t_32.new()
 	local var1140 = 0
@@ -4098,7 +4098,7 @@ function t_32.decode(p61) --[[ line: 10046 ]]
 	return var1139
 end
 
-function t_32:jsonEncode() --[[ line: 10094 ]]
+function t_32:jsonEncode() --[[ line: 10096 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4111,7 +4111,7 @@ function t_32:jsonEncode() --[[ line: 10094 ]]
 	return t_1
 end
 
-function t_32:jsonDecode() --[[ line: 10116 ]]
+function t_32:jsonDecode() --[[ line: 10118 ]]
 	-- upvalues: t_32 (ref), t (ref)
 	local var1160 = t_32.new()
 	
@@ -4139,14 +4139,14 @@ typeRegistryModule.default:register(t.RemoveBadgeFromInventoryAction)
 local t_33 = {}
 t_33.__index = t_33
 
-function t_33.new(p62) --[[ line: 10156 ]]
+function t_33.new(p62) --[[ line: 10158 ]]
 	-- upvalues: t_33 (ref)
 	return setmetatable({
 		asset_id = if p62 == nil or p62.asset_id == nil then nil else p62.asset_id
 	}, t_33)
 end
 
-function t_33:encode() --[[ line: 10164 ]]
+function t_33:encode() --[[ line: 10166 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1162 = 0
@@ -4164,7 +4164,7 @@ function t_33:encode() --[[ line: 10164 ]]
 	return buff_1
 end
 
-function t_33.decode(p63) --[[ line: 10179 ]]
+function t_33.decode(p63) --[[ line: 10181 ]]
 	-- upvalues: t_33 (ref), protoModule (ref), propTypesModule (ref)
 	local var1167 = t_33.new()
 	local var1168 = 0
@@ -4211,7 +4211,7 @@ function t_33.decode(p63) --[[ line: 10179 ]]
 	return var1167
 end
 
-function t_33:jsonEncode() --[[ line: 10222 ]]
+function t_33:jsonEncode() --[[ line: 10224 ]]
 	local t = {}
 	
 	if self.asset_id ~= nil then
@@ -4220,7 +4220,7 @@ function t_33:jsonEncode() --[[ line: 10222 ]]
 	return t
 end
 
-function t_33:jsonDecode() --[[ line: 10232 ]]
+function t_33:jsonDecode() --[[ line: 10234 ]]
 	-- upvalues: t_33 (ref), propTypesModule (ref)
 	local var1185 = t_33.new()
 	
@@ -4242,7 +4242,7 @@ typeRegistryModule.default:register(t.RemoveBadgeFromInventoryAction_Params)
 local t_34 = {}
 t_34.__index = t_34
 
-function t_34.new(p64) --[[ line: 10262 ]]
+function t_34.new(p64) --[[ line: 10264 ]]
 	-- upvalues: t (ref), t_34 (ref)
 	return setmetatable({
 		action_type = if p64 == nil or p64.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p64.action_type,
@@ -4250,7 +4250,7 @@ function t_34.new(p64) --[[ line: 10262 ]]
 	}, t_34)
 end
 
-function t_34:encode() --[[ line: 10271 ]]
+function t_34:encode() --[[ line: 10273 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1187 = 0
@@ -4274,7 +4274,7 @@ function t_34:encode() --[[ line: 10271 ]]
 	return buff_1
 end
 
-function t_34.decode(p65) --[[ line: 10297 ]]
+function t_34.decode(p65) --[[ line: 10299 ]]
 	-- upvalues: t_34 (ref), protoModule (ref), t (ref)
 	local var1194 = t_34.new()
 	local var1195 = 0
@@ -4328,7 +4328,7 @@ function t_34.decode(p65) --[[ line: 10297 ]]
 	return var1194
 end
 
-function t_34:jsonEncode() --[[ line: 10345 ]]
+function t_34:jsonEncode() --[[ line: 10347 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4341,7 +4341,7 @@ function t_34:jsonEncode() --[[ line: 10345 ]]
 	return t_1
 end
 
-function t_34:jsonDecode() --[[ line: 10367 ]]
+function t_34:jsonDecode() --[[ line: 10369 ]]
 	-- upvalues: t_34 (ref), t (ref)
 	local var1215 = t_34.new()
 	
@@ -4369,7 +4369,7 @@ typeRegistryModule.default:register(t.OpenProfileAction)
 local t_35 = {}
 t_35.__index = t_35
 
-function t_35.new(p66) --[[ line: 10407 ]]
+function t_35.new(p66) --[[ line: 10409 ]]
 	-- upvalues: t_35 (ref)
 	return setmetatable({
 		profile_id = if p66 == nil or p66.profile_id == nil then nil else p66.profile_id,
@@ -4378,7 +4378,7 @@ function t_35.new(p66) --[[ line: 10407 ]]
 	}, t_35)
 end
 
-function t_35:encode() --[[ line: 10415 ]]
+function t_35:encode() --[[ line: 10417 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1217 = 0
@@ -4410,7 +4410,7 @@ function t_35:encode() --[[ line: 10415 ]]
 	return buff_1
 end
 
-function t_35.decode(p67) --[[ line: 10442 ]]
+function t_35.decode(p67) --[[ line: 10444 ]]
 	-- upvalues: t_35 (ref), protoModule (ref), propTypesModule (ref)
 	local var1228 = t_35.new()
 	local var1229 = 0
@@ -4467,7 +4467,7 @@ function t_35.decode(p67) --[[ line: 10442 ]]
 	return var1228
 end
 
-function t_35:jsonEncode() --[[ line: 10495 ]]
+function t_35:jsonEncode() --[[ line: 10497 ]]
 	local t = {}
 	
 	if self.profile_id ~= nil then
@@ -4482,7 +4482,7 @@ function t_35:jsonEncode() --[[ line: 10495 ]]
 	return t
 end
 
-function t_35:jsonDecode() --[[ line: 10513 ]]
+function t_35:jsonDecode() --[[ line: 10515 ]]
 	-- upvalues: t_35 (ref), propTypesModule (ref)
 	local var1250 = t_35.new()
 	
@@ -4513,7 +4513,7 @@ typeRegistryModule.default:register(t.OpenProfileAction_Params)
 local t_36 = {}
 t_36.__index = t_36
 
-function t_36.new(p68) --[[ line: 10555 ]]
+function t_36.new(p68) --[[ line: 10557 ]]
 	-- upvalues: t (ref), t_36 (ref)
 	return setmetatable({
 		action_type = if p68 == nil or p68.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p68.action_type,
@@ -4521,7 +4521,7 @@ function t_36.new(p68) --[[ line: 10555 ]]
 	}, t_36)
 end
 
-function t_36:encode() --[[ line: 10566 ]]
+function t_36:encode() --[[ line: 10568 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1252 = 0
@@ -4545,7 +4545,7 @@ function t_36:encode() --[[ line: 10566 ]]
 	return buff_1
 end
 
-function t_36.decode(p69) --[[ line: 10592 ]]
+function t_36.decode(p69) --[[ line: 10594 ]]
 	-- upvalues: t_36 (ref), protoModule (ref), t (ref)
 	local var1259 = t_36.new()
 	local var1260 = 0
@@ -4599,7 +4599,7 @@ function t_36.decode(p69) --[[ line: 10592 ]]
 	return var1259
 end
 
-function t_36:jsonEncode() --[[ line: 10640 ]]
+function t_36:jsonEncode() --[[ line: 10642 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4612,7 +4612,7 @@ function t_36:jsonEncode() --[[ line: 10640 ]]
 	return t_1
 end
 
-function t_36:jsonDecode() --[[ line: 10662 ]]
+function t_36:jsonDecode() --[[ line: 10664 ]]
 	-- upvalues: t_36 (ref), t (ref)
 	local var1280 = t_36.new()
 	
@@ -4640,7 +4640,7 @@ typeRegistryModule.default:register(t.OpenFacialAgeEstimationAction)
 local t_37 = {}
 t_37.__index = t_37
 
-function t_37.new(p70) --[[ line: 10702 ]]
+function t_37.new(p70) --[[ line: 10704 ]]
 	-- upvalues: t_37 (ref)
 	return setmetatable({
 		user_id = if p70 == nil or p70.user_id == nil then nil else p70.user_id,
@@ -4653,7 +4653,7 @@ function t_37.new(p70) --[[ line: 10702 ]]
 	}, t_37)
 end
 
-function t_37:encode() --[[ line: 10716 ]]
+function t_37:encode() --[[ line: 10718 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1282 = 0
@@ -4713,7 +4713,7 @@ function t_37:encode() --[[ line: 10716 ]]
 	return buff_1
 end
 
-function t_37.decode(p71) --[[ line: 10767 ]]
+function t_37.decode(p71) --[[ line: 10769 ]]
 	-- upvalues: t_37 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var1305 = t_37.new()
 	local var1306 = 0
@@ -4790,7 +4790,7 @@ function t_37.decode(p71) --[[ line: 10767 ]]
 	return var1305
 end
 
-function t_37:jsonEncode() --[[ line: 10840 ]]
+function t_37:jsonEncode() --[[ line: 10842 ]]
 	local t = {}
 	
 	if self.user_id ~= nil then
@@ -4817,7 +4817,7 @@ function t_37:jsonEncode() --[[ line: 10840 ]]
 	return t
 end
 
-function t_37:jsonDecode() --[[ line: 10874 ]]
+function t_37:jsonDecode() --[[ line: 10876 ]]
 	-- upvalues: t_37 (ref), propTypesModule (ref), t (ref)
 	local var1335 = t_37.new()
 	
@@ -4869,7 +4869,7 @@ typeRegistryModule.default:register(t.OpenFacialAgeEstimationAction_Params)
 local t_38 = {}
 t_38.__index = t_38
 
-function t_38.new(p72) --[[ line: 10948 ]]
+function t_38.new(p72) --[[ line: 10950 ]]
 	-- upvalues: t (ref), t_38 (ref)
 	return setmetatable({
 		action_type = if p72 == nil or p72.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p72.action_type,
@@ -4877,7 +4877,7 @@ function t_38.new(p72) --[[ line: 10948 ]]
 	}, t_38)
 end
 
-function t_38:encode() --[[ line: 10957 ]]
+function t_38:encode() --[[ line: 10959 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1337 = 0
@@ -4901,7 +4901,7 @@ function t_38:encode() --[[ line: 10957 ]]
 	return buff_1
 end
 
-function t_38.decode(p73) --[[ line: 10983 ]]
+function t_38.decode(p73) --[[ line: 10985 ]]
 	-- upvalues: t_38 (ref), protoModule (ref), t (ref)
 	local var1344 = t_38.new()
 	local var1345 = 0
@@ -4955,7 +4955,7 @@ function t_38.decode(p73) --[[ line: 10983 ]]
 	return var1344
 end
 
-function t_38:jsonEncode() --[[ line: 11031 ]]
+function t_38:jsonEncode() --[[ line: 11033 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -4968,7 +4968,7 @@ function t_38:jsonEncode() --[[ line: 11031 ]]
 	return t_1
 end
 
-function t_38:jsonDecode() --[[ line: 11053 ]]
+function t_38:jsonDecode() --[[ line: 11055 ]]
 	-- upvalues: t_38 (ref), t (ref)
 	local var1365 = t_38.new()
 	
@@ -4996,7 +4996,7 @@ typeRegistryModule.default:register(t.ShowToastAction)
 local t_39 = {}
 t_39.__index = t_39
 
-function t_39.new(p74) --[[ line: 11093 ]]
+function t_39.new(p74) --[[ line: 11095 ]]
 	-- upvalues: t_39 (ref)
 	return setmetatable({
 		toast_message = if p74 == nil or p74.toast_message == nil then nil else p74.toast_message,
@@ -5007,7 +5007,7 @@ function t_39.new(p74) --[[ line: 11093 ]]
 	}, t_39)
 end
 
-function t_39:encode() --[[ line: 11103 ]]
+function t_39:encode() --[[ line: 11105 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1367 = 0
@@ -5053,7 +5053,7 @@ function t_39:encode() --[[ line: 11103 ]]
 	return buff_1
 end
 
-function t_39.decode(p75) --[[ line: 11142 ]]
+function t_39.decode(p75) --[[ line: 11144 ]]
 	-- upvalues: t_39 (ref), protoModule (ref), propTypesModule (ref)
 	local var1384 = t_39.new()
 	local var1385 = 0
@@ -5120,7 +5120,7 @@ function t_39.decode(p75) --[[ line: 11142 ]]
 	return var1384
 end
 
-function t_39:jsonEncode() --[[ line: 11205 ]]
+function t_39:jsonEncode() --[[ line: 11207 ]]
 	local t = {}
 	
 	if self.toast_message ~= nil then
@@ -5141,7 +5141,7 @@ function t_39:jsonEncode() --[[ line: 11205 ]]
 	return t
 end
 
-function t_39:jsonDecode() --[[ line: 11231 ]]
+function t_39:jsonDecode() --[[ line: 11233 ]]
 	-- upvalues: t_39 (ref), propTypesModule (ref)
 	local var1410 = t_39.new()
 	
@@ -5187,7 +5187,7 @@ typeRegistryModule.default:register(t.ShowToastAction_Params)
 local t_40 = {}
 t_40.__index = t_40
 
-function t_40.new(p76) --[[ line: 11296 ]]
+function t_40.new(p76) --[[ line: 11298 ]]
 	-- upvalues: t (ref), t_40 (ref)
 	return setmetatable({
 		action_type = if p76 == nil or p76.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p76.action_type,
@@ -5195,7 +5195,7 @@ function t_40.new(p76) --[[ line: 11296 ]]
 	}, t_40)
 end
 
-function t_40:encode() --[[ line: 11307 ]]
+function t_40:encode() --[[ line: 11309 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1412 = 0
@@ -5219,7 +5219,7 @@ function t_40:encode() --[[ line: 11307 ]]
 	return buff_1
 end
 
-function t_40.decode(p77) --[[ line: 11333 ]]
+function t_40.decode(p77) --[[ line: 11335 ]]
 	-- upvalues: t_40 (ref), protoModule (ref), t (ref)
 	local var1419 = t_40.new()
 	local var1420 = 0
@@ -5273,7 +5273,7 @@ function t_40.decode(p77) --[[ line: 11333 ]]
 	return var1419
 end
 
-function t_40:jsonEncode() --[[ line: 11381 ]]
+function t_40:jsonEncode() --[[ line: 11383 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -5286,7 +5286,7 @@ function t_40:jsonEncode() --[[ line: 11381 ]]
 	return t_1
 end
 
-function t_40:jsonDecode() --[[ line: 11403 ]]
+function t_40:jsonDecode() --[[ line: 11405 ]]
 	-- upvalues: t_40 (ref), t (ref)
 	local var1440 = t_40.new()
 	
@@ -5314,7 +5314,7 @@ typeRegistryModule.default:register(t.OpenPhoneUpsellModalAction)
 local t_41 = {}
 t_41.__index = t_41
 
-function t_41.new(p78) --[[ line: 11443 ]]
+function t_41.new(p78) --[[ line: 11445 ]]
 	-- upvalues: t_41 (ref)
 	return setmetatable({
 		voice_opt_in = if p78 == nil or p78.voice_opt_in == nil then nil else p78.voice_opt_in,
@@ -5328,7 +5328,7 @@ function t_41.new(p78) --[[ line: 11443 ]]
 	}, t_41)
 end
 
-function t_41:encode() --[[ line: 11463 ]]
+function t_41:encode() --[[ line: 11465 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1442 = 0
@@ -5395,7 +5395,7 @@ function t_41:encode() --[[ line: 11463 ]]
 	return buff_1
 end
 
-function t_41.decode(p79) --[[ line: 11520 ]]
+function t_41.decode(p79) --[[ line: 11522 ]]
 	-- upvalues: t_41 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var1468 = t_41.new()
 	local var1469 = 0
@@ -5477,7 +5477,7 @@ function t_41.decode(p79) --[[ line: 11520 ]]
 	return var1468
 end
 
-function t_41:jsonEncode() --[[ line: 11600 ]]
+function t_41:jsonEncode() --[[ line: 11602 ]]
 	local t = {}
 	
 	if self.voice_opt_in ~= nil then
@@ -5507,7 +5507,7 @@ function t_41:jsonEncode() --[[ line: 11600 ]]
 	return t
 end
 
-function t_41:jsonDecode() --[[ line: 11639 ]]
+function t_41:jsonDecode() --[[ line: 11641 ]]
 	-- upvalues: t_41 (ref), propTypesModule (ref), t (ref)
 	local var1500 = t_41.new()
 	
@@ -5568,7 +5568,7 @@ typeRegistryModule.default:register(t.OpenPhoneUpsellModalAction_Params)
 local t_42 = {}
 t_42.__index = t_42
 
-function t_42.new(p80) --[[ line: 11732 ]]
+function t_42.new(p80) --[[ line: 11734 ]]
 	-- upvalues: t (ref), t_42 (ref)
 	return setmetatable({
 		action_type = if p80 == nil or p80.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p80.action_type,
@@ -5576,7 +5576,7 @@ function t_42.new(p80) --[[ line: 11732 ]]
 	}, t_42)
 end
 
-function t_42:encode() --[[ line: 11743 ]]
+function t_42:encode() --[[ line: 11745 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1502 = 0
@@ -5600,7 +5600,7 @@ function t_42:encode() --[[ line: 11743 ]]
 	return buff_1
 end
 
-function t_42.decode(p81) --[[ line: 11769 ]]
+function t_42.decode(p81) --[[ line: 11771 ]]
 	-- upvalues: t_42 (ref), protoModule (ref), t (ref)
 	local var1509 = t_42.new()
 	local var1510 = 0
@@ -5654,7 +5654,7 @@ function t_42.decode(p81) --[[ line: 11769 ]]
 	return var1509
 end
 
-function t_42:jsonEncode() --[[ line: 11817 ]]
+function t_42:jsonEncode() --[[ line: 11819 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -5667,7 +5667,7 @@ function t_42:jsonEncode() --[[ line: 11817 ]]
 	return t_1
 end
 
-function t_42:jsonDecode() --[[ line: 11839 ]]
+function t_42:jsonDecode() --[[ line: 11841 ]]
 	-- upvalues: t_42 (ref), t (ref)
 	local var1530 = t_42.new()
 	
@@ -5695,7 +5695,7 @@ typeRegistryModule.default:register(t.OpenEmailUpsellModalAction)
 local t_43 = {}
 t_43.__index = t_43
 
-function t_43.new(p82) --[[ line: 11879 ]]
+function t_43.new(p82) --[[ line: 11881 ]]
 	-- upvalues: t_43 (ref)
 	return setmetatable({
 		add_email_over13_text_key = if p82 == nil or p82.add_email_over13_text_key == nil then nil else p82.add_email_over13_text_key,
@@ -5709,7 +5709,7 @@ function t_43.new(p82) --[[ line: 11879 ]]
 	}, t_43)
 end
 
-function t_43:encode() --[[ line: 11901 ]]
+function t_43:encode() --[[ line: 11903 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1532 = 0
@@ -5776,7 +5776,7 @@ function t_43:encode() --[[ line: 11901 ]]
 	return buff_1
 end
 
-function t_43.decode(p83) --[[ line: 11958 ]]
+function t_43.decode(p83) --[[ line: 11960 ]]
 	-- upvalues: t_43 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var1558 = t_43.new()
 	local var1559 = 0
@@ -5858,7 +5858,7 @@ function t_43.decode(p83) --[[ line: 11958 ]]
 	return var1558
 end
 
-function t_43:jsonEncode() --[[ line: 12039 ]]
+function t_43:jsonEncode() --[[ line: 12041 ]]
 	local t = {}
 	
 	if self.add_email_over13_text_key ~= nil then
@@ -5888,7 +5888,7 @@ function t_43:jsonEncode() --[[ line: 12039 ]]
 	return t
 end
 
-function t_43:jsonDecode() --[[ line: 12077 ]]
+function t_43:jsonDecode() --[[ line: 12079 ]]
 	-- upvalues: t_43 (ref), propTypesModule (ref), t (ref)
 	local var1590 = t_43.new()
 	
@@ -5946,7 +5946,7 @@ typeRegistryModule.default:register(t.OpenEmailUpsellModalAction_Params)
 local t_44 = {}
 t_44.__index = t_44
 
-function t_44.new(p84) --[[ line: 12167 ]]
+function t_44.new(p84) --[[ line: 12169 ]]
 	-- upvalues: t (ref), t_44 (ref)
 	return setmetatable({
 		action_type = if p84 == nil or p84.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p84.action_type,
@@ -5954,7 +5954,7 @@ function t_44.new(p84) --[[ line: 12167 ]]
 	}, t_44)
 end
 
-function t_44:encode() --[[ line: 12178 ]]
+function t_44:encode() --[[ line: 12180 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1592 = 0
@@ -5978,7 +5978,7 @@ function t_44:encode() --[[ line: 12178 ]]
 	return buff_1
 end
 
-function t_44.decode(p85) --[[ line: 12204 ]]
+function t_44.decode(p85) --[[ line: 12206 ]]
 	-- upvalues: t_44 (ref), protoModule (ref), t (ref)
 	local var1599 = t_44.new()
 	local var1600 = 0
@@ -6032,7 +6032,7 @@ function t_44.decode(p85) --[[ line: 12204 ]]
 	return var1599
 end
 
-function t_44:jsonEncode() --[[ line: 12252 ]]
+function t_44:jsonEncode() --[[ line: 12254 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -6045,7 +6045,7 @@ function t_44:jsonEncode() --[[ line: 12252 ]]
 	return t_1
 end
 
-function t_44:jsonDecode() --[[ line: 12274 ]]
+function t_44:jsonDecode() --[[ line: 12276 ]]
 	-- upvalues: t_44 (ref), t (ref)
 	local var1620 = t_44.new()
 	
@@ -6073,7 +6073,7 @@ typeRegistryModule.default:register(t.OpenAddConnectionsPageAction)
 local t_45 = {}
 t_45.__index = t_45
 
-function t_45.new(p86) --[[ line: 12314 ]]
+function t_45.new(p86) --[[ line: 12316 ]]
 	-- upvalues: t_45 (ref)
 	return setmetatable({
 		user_id = if p86 == nil or p86.user_id == nil then nil else p86.user_id,
@@ -6081,7 +6081,7 @@ function t_45.new(p86) --[[ line: 12314 ]]
 	}, t_45)
 end
 
-function t_45:encode() --[[ line: 12323 ]]
+function t_45:encode() --[[ line: 12325 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1622 = 0
@@ -6106,7 +6106,7 @@ function t_45:encode() --[[ line: 12323 ]]
 	return buff_1
 end
 
-function t_45.decode(p87) --[[ line: 12344 ]]
+function t_45.decode(p87) --[[ line: 12346 ]]
 	-- upvalues: t_45 (ref), protoModule (ref), propTypesModule (ref)
 	local var1630 = t_45.new()
 	local var1631 = 0
@@ -6158,7 +6158,7 @@ function t_45.decode(p87) --[[ line: 12344 ]]
 	return var1630
 end
 
-function t_45:jsonEncode() --[[ line: 12392 ]]
+function t_45:jsonEncode() --[[ line: 12394 ]]
 	local t = {}
 	
 	if self.user_id ~= nil then
@@ -6170,7 +6170,7 @@ function t_45:jsonEncode() --[[ line: 12392 ]]
 	return t
 end
 
-function t_45:jsonDecode() --[[ line: 12406 ]]
+function t_45:jsonDecode() --[[ line: 12408 ]]
 	-- upvalues: t_45 (ref), propTypesModule (ref)
 	local var1650 = t_45.new()
 	
@@ -6195,7 +6195,7 @@ typeRegistryModule.default:register(t.OpenAddConnectionsPageAction_Params)
 local t_46 = {}
 t_46.__index = t_46
 
-function t_46.new(p88) --[[ line: 12440 ]]
+function t_46.new(p88) --[[ line: 12442 ]]
 	-- upvalues: t (ref), t_46 (ref)
 	return setmetatable({
 		action_type = if p88 == nil or p88.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p88.action_type,
@@ -6203,7 +6203,7 @@ function t_46.new(p88) --[[ line: 12440 ]]
 	}, t_46)
 end
 
-function t_46:encode() --[[ line: 12449 ]]
+function t_46:encode() --[[ line: 12451 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1652 = 0
@@ -6227,7 +6227,7 @@ function t_46:encode() --[[ line: 12449 ]]
 	return buff_1
 end
 
-function t_46.decode(p89) --[[ line: 12475 ]]
+function t_46.decode(p89) --[[ line: 12477 ]]
 	-- upvalues: t_46 (ref), protoModule (ref), t (ref)
 	local var1659 = t_46.new()
 	local var1660 = 0
@@ -6281,7 +6281,7 @@ function t_46.decode(p89) --[[ line: 12475 ]]
 	return var1659
 end
 
-function t_46:jsonEncode() --[[ line: 12523 ]]
+function t_46:jsonEncode() --[[ line: 12525 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -6294,7 +6294,7 @@ function t_46:jsonEncode() --[[ line: 12523 ]]
 	return t_1
 end
 
-function t_46:jsonDecode() --[[ line: 12545 ]]
+function t_46:jsonDecode() --[[ line: 12547 ]]
 	-- upvalues: t_46 (ref), t (ref)
 	local var1680 = t_46.new()
 	
@@ -6322,7 +6322,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceAction)
 local t_47 = {}
 t_47.__index = t_47
 
-function t_47.new(p90) --[[ line: 12585 ]]
+function t_47.new(p90) --[[ line: 12587 ]]
 	-- upvalues: t_47 (ref)
 	return setmetatable({
 		user_id = if p90 == nil or p90.user_id == nil then nil else p90.user_id,
@@ -6330,7 +6330,7 @@ function t_47.new(p90) --[[ line: 12585 ]]
 	}, t_47)
 end
 
-function t_47:encode() --[[ line: 12594 ]]
+function t_47:encode() --[[ line: 12596 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1682 = 0
@@ -6355,7 +6355,7 @@ function t_47:encode() --[[ line: 12594 ]]
 	return buff_1
 end
 
-function t_47.decode(p91) --[[ line: 12615 ]]
+function t_47.decode(p91) --[[ line: 12617 ]]
 	-- upvalues: t_47 (ref), protoModule (ref), propTypesModule (ref)
 	local var1690 = t_47.new()
 	local var1691 = 0
@@ -6407,7 +6407,7 @@ function t_47.decode(p91) --[[ line: 12615 ]]
 	return var1690
 end
 
-function t_47:jsonEncode() --[[ line: 12663 ]]
+function t_47:jsonEncode() --[[ line: 12665 ]]
 	local t = {}
 	
 	if self.user_id ~= nil then
@@ -6419,7 +6419,7 @@ function t_47:jsonEncode() --[[ line: 12663 ]]
 	return t
 end
 
-function t_47:jsonDecode() --[[ line: 12677 ]]
+function t_47:jsonDecode() --[[ line: 12679 ]]
 	-- upvalues: t_47 (ref), propTypesModule (ref)
 	local var1710 = t_47.new()
 	
@@ -6444,7 +6444,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceAction_Params)
 local t_48 = {}
 t_48.__index = t_48
 
-function t_48.new(p92) --[[ line: 12709 ]]
+function t_48.new(p92) --[[ line: 12711 ]]
 	-- upvalues: t (ref), t_48 (ref)
 	return setmetatable({
 		action_type = if p92 == nil or p92.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p92.action_type,
@@ -6452,7 +6452,7 @@ function t_48.new(p92) --[[ line: 12709 ]]
 	}, t_48)
 end
 
-function t_48:encode() --[[ line: 12720 ]]
+function t_48:encode() --[[ line: 12722 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1712 = 0
@@ -6476,7 +6476,7 @@ function t_48:encode() --[[ line: 12720 ]]
 	return buff_1
 end
 
-function t_48.decode(p93) --[[ line: 12746 ]]
+function t_48.decode(p93) --[[ line: 12748 ]]
 	-- upvalues: t_48 (ref), protoModule (ref), t (ref)
 	local var1719 = t_48.new()
 	local var1720 = 0
@@ -6530,7 +6530,7 @@ function t_48.decode(p93) --[[ line: 12746 ]]
 	return var1719
 end
 
-function t_48:jsonEncode() --[[ line: 12794 ]]
+function t_48:jsonEncode() --[[ line: 12796 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -6543,7 +6543,7 @@ function t_48:jsonEncode() --[[ line: 12794 ]]
 	return t_1
 end
 
-function t_48:jsonDecode() --[[ line: 12816 ]]
+function t_48:jsonDecode() --[[ line: 12818 ]]
 	-- upvalues: t_48 (ref), t (ref)
 	local var1740 = t_48.new()
 	
@@ -6571,7 +6571,7 @@ typeRegistryModule.default:register(t.HideProfileCompletionAction)
 local t_49 = {}
 t_49.__index = t_49
 
-function t_49.new(p94) --[[ line: 12856 ]]
+function t_49.new(p94) --[[ line: 12858 ]]
 	-- upvalues: t_49 (ref)
 	return setmetatable({
 		user_id = if p94 == nil or p94.user_id == nil then nil else p94.user_id,
@@ -6581,7 +6581,7 @@ function t_49.new(p94) --[[ line: 12856 ]]
 	}, t_49)
 end
 
-function t_49:encode() --[[ line: 12867 ]]
+function t_49:encode() --[[ line: 12869 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1742 = 0
@@ -6620,7 +6620,7 @@ function t_49:encode() --[[ line: 12867 ]]
 	return buff_1
 end
 
-function t_49.decode(p95) --[[ line: 12900 ]]
+function t_49.decode(p95) --[[ line: 12902 ]]
 	-- upvalues: t_49 (ref), protoModule (ref), propTypesModule (ref)
 	local var1756 = t_49.new()
 	local var1757 = 0
@@ -6682,7 +6682,7 @@ function t_49.decode(p95) --[[ line: 12900 ]]
 	return var1756
 end
 
-function t_49:jsonEncode() --[[ line: 12958 ]]
+function t_49:jsonEncode() --[[ line: 12960 ]]
 	local t = {}
 	
 	if self.user_id ~= nil then
@@ -6700,7 +6700,7 @@ function t_49:jsonEncode() --[[ line: 12958 ]]
 	return t
 end
 
-function t_49:jsonDecode() --[[ line: 12980 ]]
+function t_49:jsonDecode() --[[ line: 12982 ]]
 	-- upvalues: t_49 (ref), propTypesModule (ref)
 	local var1780 = t_49.new()
 	
@@ -6737,7 +6737,7 @@ typeRegistryModule.default:register(t.HideProfileCompletionAction_Params)
 local t_50 = {}
 t_50.__index = t_50
 
-function t_50.new(p96) --[[ line: 13031 ]]
+function t_50.new(p96) --[[ line: 13033 ]]
 	-- upvalues: t (ref), t_50 (ref)
 	return setmetatable({
 		action_type = if p96 == nil or p96.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p96.action_type,
@@ -6745,7 +6745,7 @@ function t_50.new(p96) --[[ line: 13031 ]]
 	}, t_50)
 end
 
-function t_50:encode() --[[ line: 13042 ]]
+function t_50:encode() --[[ line: 13044 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1782 = 0
@@ -6769,7 +6769,7 @@ function t_50:encode() --[[ line: 13042 ]]
 	return buff_1
 end
 
-function t_50.decode(p97) --[[ line: 13068 ]]
+function t_50.decode(p97) --[[ line: 13070 ]]
 	-- upvalues: t_50 (ref), protoModule (ref), t (ref)
 	local var1789 = t_50.new()
 	local var1790 = 0
@@ -6823,7 +6823,7 @@ function t_50.decode(p97) --[[ line: 13068 ]]
 	return var1789
 end
 
-function t_50:jsonEncode() --[[ line: 13116 ]]
+function t_50:jsonEncode() --[[ line: 13118 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -6836,7 +6836,7 @@ function t_50:jsonEncode() --[[ line: 13116 ]]
 	return t_1
 end
 
-function t_50:jsonDecode() --[[ line: 13138 ]]
+function t_50:jsonDecode() --[[ line: 13140 ]]
 	-- upvalues: t_50 (ref), t (ref)
 	local var1810 = t_50.new()
 	
@@ -6864,14 +6864,14 @@ typeRegistryModule.default:register(t.SelectMarketplaceCatalogCategory)
 local t_51 = {}
 t_51.__index = t_51
 
-function t_51.new(p98) --[[ line: 13180 ]]
+function t_51.new(p98) --[[ line: 13182 ]]
 	-- upvalues: t_51 (ref)
 	return setmetatable({
 		category_id = if p98 == nil or p98.category_id == nil then nil else p98.category_id
 	}, t_51)
 end
 
-function t_51:encode() --[[ line: 13188 ]]
+function t_51:encode() --[[ line: 13190 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1812 = 0
@@ -6889,7 +6889,7 @@ function t_51:encode() --[[ line: 13188 ]]
 	return buff_1
 end
 
-function t_51.decode(p99) --[[ line: 13203 ]]
+function t_51.decode(p99) --[[ line: 13205 ]]
 	-- upvalues: t_51 (ref), protoModule (ref), propTypesModule (ref)
 	local var1817 = t_51.new()
 	local var1818 = 0
@@ -6936,7 +6936,7 @@ function t_51.decode(p99) --[[ line: 13203 ]]
 	return var1817
 end
 
-function t_51:jsonEncode() --[[ line: 13246 ]]
+function t_51:jsonEncode() --[[ line: 13248 ]]
 	local t = {}
 	
 	if self.category_id ~= nil then
@@ -6945,7 +6945,7 @@ function t_51:jsonEncode() --[[ line: 13246 ]]
 	return t
 end
 
-function t_51:jsonDecode() --[[ line: 13256 ]]
+function t_51:jsonDecode() --[[ line: 13258 ]]
 	-- upvalues: t_51 (ref), propTypesModule (ref)
 	local var1835 = t_51.new()
 	
@@ -6967,7 +6967,7 @@ typeRegistryModule.default:register(t.SelectMarketplaceCatalogCategory_Params)
 local t_52 = {}
 t_52.__index = t_52
 
-function t_52.new(p100) --[[ line: 13287 ]]
+function t_52.new(p100) --[[ line: 13289 ]]
 	-- upvalues: t (ref), t_52 (ref)
 	return setmetatable({
 		action_type = if p100 == nil or p100.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p100.action_type,
@@ -6975,7 +6975,7 @@ function t_52.new(p100) --[[ line: 13287 ]]
 	}, t_52)
 end
 
-function t_52:encode() --[[ line: 13298 ]]
+function t_52:encode() --[[ line: 13300 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1837 = 0
@@ -6999,7 +6999,7 @@ function t_52:encode() --[[ line: 13298 ]]
 	return buff_1
 end
 
-function t_52.decode(p101) --[[ line: 13324 ]]
+function t_52.decode(p101) --[[ line: 13326 ]]
 	-- upvalues: t_52 (ref), protoModule (ref), t (ref)
 	local var1844 = t_52.new()
 	local var1845 = 0
@@ -7053,7 +7053,7 @@ function t_52.decode(p101) --[[ line: 13324 ]]
 	return var1844
 end
 
-function t_52:jsonEncode() --[[ line: 13372 ]]
+function t_52:jsonEncode() --[[ line: 13374 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -7066,7 +7066,7 @@ function t_52:jsonEncode() --[[ line: 13372 ]]
 	return t_1
 end
 
-function t_52:jsonDecode() --[[ line: 13394 ]]
+function t_52:jsonDecode() --[[ line: 13396 ]]
 	-- upvalues: t_52 (ref), t (ref)
 	local var1865 = t_52.new()
 	
@@ -7094,14 +7094,14 @@ typeRegistryModule.default:register(t.SelectMarketplaceCatalogSubcategory)
 local t_53 = {}
 t_53.__index = t_53
 
-function t_53.new(p102) --[[ line: 13436 ]]
+function t_53.new(p102) --[[ line: 13438 ]]
 	-- upvalues: t_53 (ref)
 	return setmetatable({
 		subcategory_id = if p102 == nil or p102.subcategory_id == nil then nil else p102.subcategory_id
 	}, t_53)
 end
 
-function t_53:encode() --[[ line: 13444 ]]
+function t_53:encode() --[[ line: 13446 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1867 = 0
@@ -7119,7 +7119,7 @@ function t_53:encode() --[[ line: 13444 ]]
 	return buff_1
 end
 
-function t_53.decode(p103) --[[ line: 13461 ]]
+function t_53.decode(p103) --[[ line: 13463 ]]
 	-- upvalues: t_53 (ref), protoModule (ref), propTypesModule (ref)
 	local var1872 = t_53.new()
 	local var1873 = 0
@@ -7166,7 +7166,7 @@ function t_53.decode(p103) --[[ line: 13461 ]]
 	return var1872
 end
 
-function t_53:jsonEncode() --[[ line: 13506 ]]
+function t_53:jsonEncode() --[[ line: 13508 ]]
 	local t = {}
 	
 	if self.subcategory_id ~= nil then
@@ -7175,7 +7175,7 @@ function t_53:jsonEncode() --[[ line: 13506 ]]
 	return t
 end
 
-function t_53:jsonDecode() --[[ line: 13518 ]]
+function t_53:jsonDecode() --[[ line: 13520 ]]
 	-- upvalues: t_53 (ref), propTypesModule (ref)
 	local var1890 = t_53.new()
 	
@@ -7197,7 +7197,7 @@ typeRegistryModule.default:register(t.SelectMarketplaceCatalogSubcategory_Params
 local t_54 = {}
 t_54.__index = t_54
 
-function t_54.new(p104) --[[ line: 13550 ]]
+function t_54.new(p104) --[[ line: 13552 ]]
 	-- upvalues: t (ref), t_54 (ref)
 	return setmetatable({
 		action_type = if p104 == nil or p104.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p104.action_type,
@@ -7205,7 +7205,7 @@ function t_54.new(p104) --[[ line: 13550 ]]
 	}, t_54)
 end
 
-function t_54:encode() --[[ line: 13561 ]]
+function t_54:encode() --[[ line: 13563 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1892 = 0
@@ -7229,7 +7229,7 @@ function t_54:encode() --[[ line: 13561 ]]
 	return buff_1
 end
 
-function t_54.decode(p105) --[[ line: 13587 ]]
+function t_54.decode(p105) --[[ line: 13589 ]]
 	-- upvalues: t_54 (ref), protoModule (ref), t (ref)
 	local var1899 = t_54.new()
 	local var1900 = 0
@@ -7283,7 +7283,7 @@ function t_54.decode(p105) --[[ line: 13587 ]]
 	return var1899
 end
 
-function t_54:jsonEncode() --[[ line: 13635 ]]
+function t_54:jsonEncode() --[[ line: 13637 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -7296,7 +7296,7 @@ function t_54:jsonEncode() --[[ line: 13635 ]]
 	return t_1
 end
 
-function t_54:jsonDecode() --[[ line: 13657 ]]
+function t_54:jsonDecode() --[[ line: 13659 ]]
 	-- upvalues: t_54 (ref), t (ref)
 	local var1920 = t_54.new()
 	
@@ -7324,7 +7324,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceCatalogSeeAll)
 local t_55 = {}
 t_55.__index = t_55
 
-function t_55.new(p106) --[[ line: 13697 ]]
+function t_55.new(p106) --[[ line: 13699 ]]
 	-- upvalues: t_55 (ref)
 	return setmetatable({
 		sort_id = if p106 == nil or p106.sort_id == nil then nil else p106.sort_id,
@@ -7334,7 +7334,7 @@ function t_55.new(p106) --[[ line: 13697 ]]
 	}, t_55)
 end
 
-function t_55:encode() --[[ line: 13708 ]]
+function t_55:encode() --[[ line: 13710 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1922 = 0
@@ -7373,7 +7373,7 @@ function t_55:encode() --[[ line: 13708 ]]
 	return buff_1
 end
 
-function t_55.decode(p107) --[[ line: 13741 ]]
+function t_55.decode(p107) --[[ line: 13743 ]]
 	-- upvalues: t_55 (ref), protoModule (ref), propTypesModule (ref)
 	local var1936 = t_55.new()
 	local var1937 = 0
@@ -7435,7 +7435,7 @@ function t_55.decode(p107) --[[ line: 13741 ]]
 	return var1936
 end
 
-function t_55:jsonEncode() --[[ line: 13799 ]]
+function t_55:jsonEncode() --[[ line: 13801 ]]
 	local t = {}
 	
 	if self.sort_id ~= nil then
@@ -7453,7 +7453,7 @@ function t_55:jsonEncode() --[[ line: 13799 ]]
 	return t
 end
 
-function t_55:jsonDecode() --[[ line: 13821 ]]
+function t_55:jsonDecode() --[[ line: 13823 ]]
 	-- upvalues: t_55 (ref), propTypesModule (ref)
 	local var1960 = t_55.new()
 	
@@ -7487,7 +7487,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceCatalogSeeAll_Params)
 local t_56 = {}
 t_56.__index = t_56
 
-function t_56.new(p108) --[[ line: 13870 ]]
+function t_56.new(p108) --[[ line: 13872 ]]
 	-- upvalues: t (ref), t_56 (ref)
 	return setmetatable({
 		action_type = if p108 == nil or p108.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p108.action_type,
@@ -7495,7 +7495,7 @@ function t_56.new(p108) --[[ line: 13870 ]]
 	}, t_56)
 end
 
-function t_56:encode() --[[ line: 13881 ]]
+function t_56:encode() --[[ line: 13883 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var1962 = 0
@@ -7519,7 +7519,7 @@ function t_56:encode() --[[ line: 13881 ]]
 	return buff_1
 end
 
-function t_56.decode(p109) --[[ line: 13907 ]]
+function t_56.decode(p109) --[[ line: 13909 ]]
 	-- upvalues: t_56 (ref), protoModule (ref), t (ref)
 	local var1969 = t_56.new()
 	local var1970 = 0
@@ -7573,7 +7573,7 @@ function t_56.decode(p109) --[[ line: 13907 ]]
 	return var1969
 end
 
-function t_56:jsonEncode() --[[ line: 13955 ]]
+function t_56:jsonEncode() --[[ line: 13957 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -7586,7 +7586,7 @@ function t_56:jsonEncode() --[[ line: 13955 ]]
 	return t_1
 end
 
-function t_56:jsonDecode() --[[ line: 13977 ]]
+function t_56:jsonDecode() --[[ line: 13979 ]]
 	-- upvalues: t_56 (ref), t (ref)
 	local var1990 = t_56.new()
 	
@@ -7614,14 +7614,14 @@ typeRegistryModule.default:register(t.CloseMarketplaceCategoryTooltip)
 local t_57 = {}
 t_57.__index = t_57
 
-function t_57.new(p110) --[[ line: 14017 ]]
+function t_57.new(p110) --[[ line: 14019 ]]
 	-- upvalues: t_57 (ref)
 	return setmetatable({
 		tooltip_id = if p110 == nil or p110.tooltip_id == nil then nil else p110.tooltip_id
 	}, t_57)
 end
 
-function t_57:encode() --[[ line: 14025 ]]
+function t_57:encode() --[[ line: 14027 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var1992 = 0
@@ -7639,7 +7639,7 @@ function t_57:encode() --[[ line: 14025 ]]
 	return buff_1
 end
 
-function t_57.decode(p111) --[[ line: 14040 ]]
+function t_57.decode(p111) --[[ line: 14042 ]]
 	-- upvalues: t_57 (ref), protoModule (ref), propTypesModule (ref)
 	local var1997 = t_57.new()
 	local var1998 = 0
@@ -7686,7 +7686,7 @@ function t_57.decode(p111) --[[ line: 14040 ]]
 	return var1997
 end
 
-function t_57:jsonEncode() --[[ line: 14083 ]]
+function t_57:jsonEncode() --[[ line: 14085 ]]
 	local t = {}
 	
 	if self.tooltip_id ~= nil then
@@ -7695,7 +7695,7 @@ function t_57:jsonEncode() --[[ line: 14083 ]]
 	return t
 end
 
-function t_57:jsonDecode() --[[ line: 14093 ]]
+function t_57:jsonDecode() --[[ line: 14095 ]]
 	-- upvalues: t_57 (ref), propTypesModule (ref)
 	local var2015 = t_57.new()
 	
@@ -7717,7 +7717,7 @@ typeRegistryModule.default:register(t.CloseMarketplaceCategoryTooltip_Params)
 local t_58 = {}
 t_58.__index = t_58
 
-function t_58.new(p112) --[[ line: 14123 ]]
+function t_58.new(p112) --[[ line: 14125 ]]
 	-- upvalues: t (ref), t_58 (ref)
 	return setmetatable({
 		action_type = if p112 == nil or p112.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p112.action_type,
@@ -7725,7 +7725,7 @@ function t_58.new(p112) --[[ line: 14123 ]]
 	}, t_58)
 end
 
-function t_58:encode() --[[ line: 14132 ]]
+function t_58:encode() --[[ line: 14134 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2017 = 0
@@ -7749,7 +7749,7 @@ function t_58:encode() --[[ line: 14132 ]]
 	return buff_1
 end
 
-function t_58.decode(p113) --[[ line: 14158 ]]
+function t_58.decode(p113) --[[ line: 14160 ]]
 	-- upvalues: t_58 (ref), protoModule (ref), t (ref)
 	local var2024 = t_58.new()
 	local var2025 = 0
@@ -7803,7 +7803,7 @@ function t_58.decode(p113) --[[ line: 14158 ]]
 	return var2024
 end
 
-function t_58:jsonEncode() --[[ line: 14206 ]]
+function t_58:jsonEncode() --[[ line: 14208 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -7816,7 +7816,7 @@ function t_58:jsonEncode() --[[ line: 14206 ]]
 	return t_1
 end
 
-function t_58:jsonDecode() --[[ line: 14228 ]]
+function t_58:jsonDecode() --[[ line: 14230 ]]
 	-- upvalues: t_58 (ref), t (ref)
 	local var2045 = t_58.new()
 	
@@ -7844,7 +7844,7 @@ typeRegistryModule.default:register(t.ResizeMarketplaceCatalog)
 local t_59 = {}
 t_59.__index = t_59
 
-function t_59.new(p114) --[[ line: 14268 ]]
+function t_59.new(p114) --[[ line: 14270 ]]
 	-- upvalues: t_59 (ref)
 	return setmetatable({
 		category_id = if p114 == nil or p114.category_id == nil then nil else p114.category_id,
@@ -7853,7 +7853,7 @@ function t_59.new(p114) --[[ line: 14268 ]]
 	}, t_59)
 end
 
-function t_59:encode() --[[ line: 14278 ]]
+function t_59:encode() --[[ line: 14280 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2047 = 0
@@ -7885,7 +7885,7 @@ function t_59:encode() --[[ line: 14278 ]]
 	return buff_1
 end
 
-function t_59.decode(p115) --[[ line: 14305 ]]
+function t_59.decode(p115) --[[ line: 14307 ]]
 	-- upvalues: t_59 (ref), protoModule (ref), propTypesModule (ref)
 	local var2058 = t_59.new()
 	local var2059 = 0
@@ -7942,7 +7942,7 @@ function t_59.decode(p115) --[[ line: 14305 ]]
 	return var2058
 end
 
-function t_59:jsonEncode() --[[ line: 14358 ]]
+function t_59:jsonEncode() --[[ line: 14360 ]]
 	local t = {}
 	
 	if self.category_id ~= nil then
@@ -7957,7 +7957,7 @@ function t_59:jsonEncode() --[[ line: 14358 ]]
 	return t
 end
 
-function t_59:jsonDecode() --[[ line: 14376 ]]
+function t_59:jsonDecode() --[[ line: 14378 ]]
 	-- upvalues: t_59 (ref), propTypesModule (ref)
 	local var2080 = t_59.new()
 	
@@ -7991,7 +7991,7 @@ typeRegistryModule.default:register(t.ResizeMarketplaceCatalog_Params)
 local t_60 = {}
 t_60.__index = t_60
 
-function t_60.new(p116) --[[ line: 14424 ]]
+function t_60.new(p116) --[[ line: 14426 ]]
 	-- upvalues: t (ref), t_60 (ref)
 	return setmetatable({
 		action_type = if p116 == nil or p116.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p116.action_type,
@@ -7999,7 +7999,7 @@ function t_60.new(p116) --[[ line: 14424 ]]
 	}, t_60)
 end
 
-function t_60:encode() --[[ line: 14435 ]]
+function t_60:encode() --[[ line: 14437 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2082 = 0
@@ -8023,7 +8023,7 @@ function t_60:encode() --[[ line: 14435 ]]
 	return buff_1
 end
 
-function t_60.decode(p117) --[[ line: 14461 ]]
+function t_60.decode(p117) --[[ line: 14463 ]]
 	-- upvalues: t_60 (ref), protoModule (ref), t (ref)
 	local var2089 = t_60.new()
 	local var2090 = 0
@@ -8077,7 +8077,7 @@ function t_60.decode(p117) --[[ line: 14461 ]]
 	return var2089
 end
 
-function t_60:jsonEncode() --[[ line: 14509 ]]
+function t_60:jsonEncode() --[[ line: 14511 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -8090,7 +8090,7 @@ function t_60:jsonEncode() --[[ line: 14509 ]]
 	return t_1
 end
 
-function t_60:jsonDecode() --[[ line: 14531 ]]
+function t_60:jsonDecode() --[[ line: 14533 ]]
 	-- upvalues: t_60 (ref), t (ref)
 	local var2110 = t_60.new()
 	
@@ -8118,7 +8118,7 @@ typeRegistryModule.default:register(t.OpenChartsSortDetailAction)
 local t_61 = {}
 t_61.__index = t_61
 
-function t_61.new(p118) --[[ line: 14571 ]]
+function t_61.new(p118) --[[ line: 14573 ]]
 	-- upvalues: t_61 (ref)
 	return setmetatable({
 		sort_id = if p118 == nil or p118.sort_id == nil then nil else p118.sort_id,
@@ -8126,7 +8126,7 @@ function t_61.new(p118) --[[ line: 14571 ]]
 	}, t_61)
 end
 
-function t_61:encode() --[[ line: 14580 ]]
+function t_61:encode() --[[ line: 14582 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2112 = 0
@@ -8151,7 +8151,7 @@ function t_61:encode() --[[ line: 14580 ]]
 	return buff_1
 end
 
-function t_61.decode(p119) --[[ line: 14601 ]]
+function t_61.decode(p119) --[[ line: 14603 ]]
 	-- upvalues: t_61 (ref), protoModule (ref), propTypesModule (ref)
 	local var2120 = t_61.new()
 	local var2121 = 0
@@ -8203,7 +8203,7 @@ function t_61.decode(p119) --[[ line: 14601 ]]
 	return var2120
 end
 
-function t_61:jsonEncode() --[[ line: 14649 ]]
+function t_61:jsonEncode() --[[ line: 14651 ]]
 	local t = {}
 	
 	if self.sort_id ~= nil then
@@ -8215,7 +8215,7 @@ function t_61:jsonEncode() --[[ line: 14649 ]]
 	return t
 end
 
-function t_61:jsonDecode() --[[ line: 14663 ]]
+function t_61:jsonDecode() --[[ line: 14665 ]]
 	-- upvalues: t_61 (ref), propTypesModule (ref)
 	local var2140 = t_61.new()
 	
@@ -8243,7 +8243,7 @@ typeRegistryModule.default:register(t.OpenChartsSortDetailAction_Params)
 local t_62 = {}
 t_62.__index = t_62
 
-function t_62.new(p120) --[[ line: 14703 ]]
+function t_62.new(p120) --[[ line: 14705 ]]
 	-- upvalues: t (ref), t_62 (ref)
 	return setmetatable({
 		action_type = if p120 == nil or p120.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p120.action_type,
@@ -8251,7 +8251,7 @@ function t_62.new(p120) --[[ line: 14703 ]]
 	}, t_62)
 end
 
-function t_62:encode() --[[ line: 14712 ]]
+function t_62:encode() --[[ line: 14714 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2142 = 0
@@ -8275,7 +8275,7 @@ function t_62:encode() --[[ line: 14712 ]]
 	return buff_1
 end
 
-function t_62.decode(p121) --[[ line: 14738 ]]
+function t_62.decode(p121) --[[ line: 14740 ]]
 	-- upvalues: t_62 (ref), protoModule (ref), t (ref)
 	local var2149 = t_62.new()
 	local var2150 = 0
@@ -8329,7 +8329,7 @@ function t_62.decode(p121) --[[ line: 14738 ]]
 	return var2149
 end
 
-function t_62:jsonEncode() --[[ line: 14786 ]]
+function t_62:jsonEncode() --[[ line: 14788 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -8342,7 +8342,7 @@ function t_62:jsonEncode() --[[ line: 14786 ]]
 	return t_1
 end
 
-function t_62:jsonDecode() --[[ line: 14808 ]]
+function t_62:jsonDecode() --[[ line: 14810 ]]
 	-- upvalues: t_62 (ref), t (ref)
 	local var2170 = t_62.new()
 	
@@ -8370,14 +8370,14 @@ typeRegistryModule.default:register(t.OpenSongDetailAction)
 local t_63 = {}
 t_63.__index = t_63
 
-function t_63.new(p122) --[[ line: 14848 ]]
+function t_63.new(p122) --[[ line: 14850 ]]
 	-- upvalues: t_63 (ref)
 	return setmetatable({
 		song_id = if p122 == nil or p122.song_id == nil then nil else p122.song_id
 	}, t_63)
 end
 
-function t_63:encode() --[[ line: 14856 ]]
+function t_63:encode() --[[ line: 14858 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2172 = 0
@@ -8395,7 +8395,7 @@ function t_63:encode() --[[ line: 14856 ]]
 	return buff_1
 end
 
-function t_63.decode(p123) --[[ line: 14871 ]]
+function t_63.decode(p123) --[[ line: 14873 ]]
 	-- upvalues: t_63 (ref), protoModule (ref), propTypesModule (ref)
 	local var2177 = t_63.new()
 	local var2178 = 0
@@ -8442,7 +8442,7 @@ function t_63.decode(p123) --[[ line: 14871 ]]
 	return var2177
 end
 
-function t_63:jsonEncode() --[[ line: 14914 ]]
+function t_63:jsonEncode() --[[ line: 14916 ]]
 	local t = {}
 	
 	if self.song_id ~= nil then
@@ -8451,7 +8451,7 @@ function t_63:jsonEncode() --[[ line: 14914 ]]
 	return t
 end
 
-function t_63:jsonDecode() --[[ line: 14924 ]]
+function t_63:jsonDecode() --[[ line: 14926 ]]
 	-- upvalues: t_63 (ref), propTypesModule (ref)
 	local var2195 = t_63.new()
 	
@@ -8473,7 +8473,7 @@ typeRegistryModule.default:register(t.OpenSongDetailAction_Params)
 local t_64 = {}
 t_64.__index = t_64
 
-function t_64.new(p124) --[[ line: 14952 ]]
+function t_64.new(p124) --[[ line: 14954 ]]
 	-- upvalues: t (ref), t_64 (ref)
 	return setmetatable({
 		action_type = if p124 == nil or p124.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p124.action_type,
@@ -8481,7 +8481,7 @@ function t_64.new(p124) --[[ line: 14952 ]]
 	}, t_64)
 end
 
-function t_64:encode() --[[ line: 14963 ]]
+function t_64:encode() --[[ line: 14965 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2197 = 0
@@ -8505,7 +8505,7 @@ function t_64:encode() --[[ line: 14963 ]]
 	return buff_1
 end
 
-function t_64.decode(p125) --[[ line: 14989 ]]
+function t_64.decode(p125) --[[ line: 14991 ]]
 	-- upvalues: t_64 (ref), protoModule (ref), t (ref)
 	local var2204 = t_64.new()
 	local var2205 = 0
@@ -8559,7 +8559,7 @@ function t_64.decode(p125) --[[ line: 14989 ]]
 	return var2204
 end
 
-function t_64:jsonEncode() --[[ line: 15037 ]]
+function t_64:jsonEncode() --[[ line: 15039 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -8572,7 +8572,7 @@ function t_64:jsonEncode() --[[ line: 15037 ]]
 	return t_1
 end
 
-function t_64:jsonDecode() --[[ line: 15059 ]]
+function t_64:jsonDecode() --[[ line: 15061 ]]
 	-- upvalues: t_64 (ref), t (ref)
 	local var2225 = t_64.new()
 	
@@ -8600,19 +8600,19 @@ typeRegistryModule.default:register(t.OpenMarketplaceCatalogFilters)
 local t_65 = {}
 t_65.__index = t_65
 
-function t_65.new(_) --[[ line: 15099 ]]
+function t_65.new(_) --[[ line: 15101 ]]
 	-- upvalues: t_65 (ref)
 	return setmetatable({}, t_65)
 end
 
-function t_65.encode(_) --[[ line: 15105 ]]
+function t_65.encode(_) --[[ line: 15107 ]]
 	local buff = buffer.create(0)
 	buffer.copy(buff, 0, buffer.create(0), 0, 0)
 	
 	return buff
 end
 
-function t_65.decode(p126) --[[ line: 15114 ]]
+function t_65.decode(p126) --[[ line: 15116 ]]
 	-- upvalues: t_65 (ref), protoModule (ref)
 	local var2227 = t_65.new()
 	local var2228 = 0
@@ -8650,11 +8650,11 @@ function t_65.decode(p126) --[[ line: 15114 ]]
 	return var2227
 end
 
-function t_65.jsonEncode(_) --[[ line: 15152 ]]
+function t_65.jsonEncode(_) --[[ line: 15154 ]]
 	return {}
 end
 
-function t_65.jsonDecode(_) --[[ line: 15158 ]]
+function t_65.jsonDecode(_) --[[ line: 15160 ]]
 	-- upvalues: t_65 (ref)
 	return t_65.new()
 end
@@ -8668,7 +8668,7 @@ typeRegistryModule.default:register(t.OpenMarketplaceCatalogFilters_Params)
 local t_66 = {}
 t_66.__index = t_66
 
-function t_66.new(p127) --[[ line: 15180 ]]
+function t_66.new(p127) --[[ line: 15182 ]]
 	-- upvalues: t (ref), t_66 (ref)
 	return setmetatable({
 		action_type = if p127 == nil or p127.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p127.action_type,
@@ -8676,7 +8676,7 @@ function t_66.new(p127) --[[ line: 15180 ]]
 	}, t_66)
 end
 
-function t_66:encode() --[[ line: 15189 ]]
+function t_66:encode() --[[ line: 15191 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2243 = 0
@@ -8700,7 +8700,7 @@ function t_66:encode() --[[ line: 15189 ]]
 	return buff_1
 end
 
-function t_66.decode(p128) --[[ line: 15215 ]]
+function t_66.decode(p128) --[[ line: 15217 ]]
 	-- upvalues: t_66 (ref), protoModule (ref), t (ref)
 	local var2250 = t_66.new()
 	local var2251 = 0
@@ -8754,7 +8754,7 @@ function t_66.decode(p128) --[[ line: 15215 ]]
 	return var2250
 end
 
-function t_66:jsonEncode() --[[ line: 15263 ]]
+function t_66:jsonEncode() --[[ line: 15265 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -8767,7 +8767,7 @@ function t_66:jsonEncode() --[[ line: 15263 ]]
 	return t_1
 end
 
-function t_66:jsonDecode() --[[ line: 15285 ]]
+function t_66:jsonDecode() --[[ line: 15287 ]]
 	-- upvalues: t_66 (ref), t (ref)
 	local var2271 = t_66.new()
 	
@@ -8795,7 +8795,7 @@ typeRegistryModule.default:register(t.RefreshFromApiAction)
 local t_67 = {}
 t_67.__index = t_67
 
-function t_67.new(p129) --[[ line: 15325 ]]
+function t_67.new(p129) --[[ line: 15327 ]]
 	-- upvalues: t_67 (ref)
 	return setmetatable({
 		surface_key = if p129 == nil or p129.surface_key == nil then nil else p129.surface_key,
@@ -8803,7 +8803,7 @@ function t_67.new(p129) --[[ line: 15325 ]]
 	}, t_67)
 end
 
-function t_67:encode() --[[ line: 15334 ]]
+function t_67:encode() --[[ line: 15336 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2273 = 0
@@ -8828,7 +8828,7 @@ function t_67:encode() --[[ line: 15334 ]]
 	return buff_1
 end
 
-function t_67.decode(p130) --[[ line: 15355 ]]
+function t_67.decode(p130) --[[ line: 15357 ]]
 	-- upvalues: t_67 (ref), protoModule (ref), propTypesModule (ref)
 	local var2281 = t_67.new()
 	local var2282 = 0
@@ -8880,7 +8880,7 @@ function t_67.decode(p130) --[[ line: 15355 ]]
 	return var2281
 end
 
-function t_67:jsonEncode() --[[ line: 15403 ]]
+function t_67:jsonEncode() --[[ line: 15405 ]]
 	local t = {}
 	
 	if self.surface_key ~= nil then
@@ -8892,7 +8892,7 @@ function t_67:jsonEncode() --[[ line: 15403 ]]
 	return t
 end
 
-function t_67:jsonDecode() --[[ line: 15417 ]]
+function t_67:jsonDecode() --[[ line: 15419 ]]
 	-- upvalues: t_67 (ref), propTypesModule (ref)
 	local var2301 = t_67.new()
 	
@@ -8920,7 +8920,7 @@ typeRegistryModule.default:register(t.RefreshFromApiAction_Params)
 local t_68 = {}
 t_68.__index = t_68
 
-function t_68.new(p131) --[[ line: 15454 ]]
+function t_68.new(p131) --[[ line: 15456 ]]
 	-- upvalues: t (ref), t_68 (ref)
 	return setmetatable({
 		action_type = if p131 == nil or p131.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p131.action_type,
@@ -8928,7 +8928,7 @@ function t_68.new(p131) --[[ line: 15454 ]]
 	}, t_68)
 end
 
-function t_68:encode() --[[ line: 15465 ]]
+function t_68:encode() --[[ line: 15467 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2303 = 0
@@ -8952,7 +8952,7 @@ function t_68:encode() --[[ line: 15465 ]]
 	return buff_1
 end
 
-function t_68.decode(p132) --[[ line: 15491 ]]
+function t_68.decode(p132) --[[ line: 15493 ]]
 	-- upvalues: t_68 (ref), protoModule (ref), t (ref)
 	local var2310 = t_68.new()
 	local var2311 = 0
@@ -9006,7 +9006,7 @@ function t_68.decode(p132) --[[ line: 15491 ]]
 	return var2310
 end
 
-function t_68:jsonEncode() --[[ line: 15539 ]]
+function t_68:jsonEncode() --[[ line: 15541 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -9019,7 +9019,7 @@ function t_68:jsonEncode() --[[ line: 15539 ]]
 	return t_1
 end
 
-function t_68:jsonDecode() --[[ line: 15561 ]]
+function t_68:jsonDecode() --[[ line: 15563 ]]
 	-- upvalues: t_68 (ref), t (ref)
 	local var2331 = t_68.new()
 	
@@ -9047,7 +9047,7 @@ typeRegistryModule.default:register(t.RefreshOmniRecommendationFeedItemAction)
 local t_69 = {}
 t_69.__index = t_69
 
-function t_69.new(p133) --[[ line: 15603 ]]
+function t_69.new(p133) --[[ line: 15605 ]]
 	-- upvalues: t_69 (ref)
 	return setmetatable({
 		topic_id = if p133 == nil or p133.topic_id == nil then nil else p133.topic_id,
@@ -9057,7 +9057,7 @@ function t_69.new(p133) --[[ line: 15603 ]]
 	}, t_69)
 end
 
-function t_69:encode() --[[ line: 15614 ]]
+function t_69:encode() --[[ line: 15616 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2333 = 0
@@ -9096,7 +9096,7 @@ function t_69:encode() --[[ line: 15614 ]]
 	return buff_1
 end
 
-function t_69.decode(p134) --[[ line: 15649 ]]
+function t_69.decode(p134) --[[ line: 15651 ]]
 	-- upvalues: t_69 (ref), protoModule (ref), propTypesModule (ref)
 	local var2347 = t_69.new()
 	local var2348 = 0
@@ -9158,7 +9158,7 @@ function t_69.decode(p134) --[[ line: 15649 ]]
 	return var2347
 end
 
-function t_69:jsonEncode() --[[ line: 15709 ]]
+function t_69:jsonEncode() --[[ line: 15711 ]]
 	local t = {}
 	
 	if self.topic_id ~= nil then
@@ -9176,7 +9176,7 @@ function t_69:jsonEncode() --[[ line: 15709 ]]
 	return t
 end
 
-function t_69:jsonDecode() --[[ line: 15733 ]]
+function t_69:jsonDecode() --[[ line: 15735 ]]
 	-- upvalues: t_69 (ref), propTypesModule (ref)
 	local var2371 = t_69.new()
 	
@@ -9216,7 +9216,7 @@ typeRegistryModule.default:register(t.RefreshOmniRecommendationFeedItemAction_Pa
 local t_70 = {}
 t_70.__index = t_70
 
-function t_70.new(p135) --[[ line: 15793 ]]
+function t_70.new(p135) --[[ line: 15795 ]]
 	-- upvalues: t (ref), t_70 (ref)
 	return setmetatable({
 		action_type = if p135 == nil or p135.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p135.action_type,
@@ -9224,7 +9224,7 @@ function t_70.new(p135) --[[ line: 15793 ]]
 	}, t_70)
 end
 
-function t_70:encode() --[[ line: 15802 ]]
+function t_70:encode() --[[ line: 15804 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2373 = 0
@@ -9248,7 +9248,7 @@ function t_70:encode() --[[ line: 15802 ]]
 	return buff_1
 end
 
-function t_70.decode(p136) --[[ line: 15828 ]]
+function t_70.decode(p136) --[[ line: 15830 ]]
 	-- upvalues: t_70 (ref), protoModule (ref), t (ref)
 	local var2380 = t_70.new()
 	local var2381 = 0
@@ -9302,7 +9302,7 @@ function t_70.decode(p136) --[[ line: 15828 ]]
 	return var2380
 end
 
-function t_70:jsonEncode() --[[ line: 15876 ]]
+function t_70:jsonEncode() --[[ line: 15878 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -9315,7 +9315,7 @@ function t_70:jsonEncode() --[[ line: 15876 ]]
 	return t_1
 end
 
-function t_70:jsonDecode() --[[ line: 15898 ]]
+function t_70:jsonDecode() --[[ line: 15900 ]]
 	-- upvalues: t_70 (ref), t (ref)
 	local var2401 = t_70.new()
 	
@@ -9343,7 +9343,7 @@ typeRegistryModule.default:register(t.RsvpToEventAction)
 local t_71 = {}
 t_71.__index = t_71
 
-function t_71.new(p137) --[[ line: 15938 ]]
+function t_71.new(p137) --[[ line: 15940 ]]
 	-- upvalues: t_71 (ref)
 	return setmetatable({
 		event_id = if p137 == nil or p137.event_id == nil then nil else p137.event_id,
@@ -9352,7 +9352,7 @@ function t_71.new(p137) --[[ line: 15938 ]]
 	}, t_71)
 end
 
-function t_71:encode() --[[ line: 15948 ]]
+function t_71:encode() --[[ line: 15950 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2403 = 0
@@ -9384,7 +9384,7 @@ function t_71:encode() --[[ line: 15948 ]]
 	return buff_1
 end
 
-function t_71.decode(p138) --[[ line: 15975 ]]
+function t_71.decode(p138) --[[ line: 15977 ]]
 	-- upvalues: t_71 (ref), protoModule (ref), propTypesModule (ref)
 	local var2414 = t_71.new()
 	local var2415 = 0
@@ -9441,7 +9441,7 @@ function t_71.decode(p138) --[[ line: 15975 ]]
 	return var2414
 end
 
-function t_71:jsonEncode() --[[ line: 16029 ]]
+function t_71:jsonEncode() --[[ line: 16031 ]]
 	local t = {}
 	
 	if self.event_id ~= nil then
@@ -9456,7 +9456,7 @@ function t_71:jsonEncode() --[[ line: 16029 ]]
 	return t
 end
 
-function t_71:jsonDecode() --[[ line: 16047 ]]
+function t_71:jsonDecode() --[[ line: 16049 ]]
 	-- upvalues: t_71 (ref), propTypesModule (ref)
 	local var2436 = t_71.new()
 	
@@ -9490,7 +9490,7 @@ typeRegistryModule.default:register(t.RsvpToEventAction_Params)
 local t_72 = {}
 t_72.__index = t_72
 
-function t_72.new(p139) --[[ line: 16097 ]]
+function t_72.new(p139) --[[ line: 16099 ]]
 	-- upvalues: t (ref), t_72 (ref)
 	return setmetatable({
 		action_type = if p139 == nil or p139.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p139.action_type,
@@ -9498,7 +9498,7 @@ function t_72.new(p139) --[[ line: 16097 ]]
 	}, t_72)
 end
 
-function t_72:encode() --[[ line: 16106 ]]
+function t_72:encode() --[[ line: 16108 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2438 = 0
@@ -9522,7 +9522,7 @@ function t_72:encode() --[[ line: 16106 ]]
 	return buff_1
 end
 
-function t_72.decode(p140) --[[ line: 16132 ]]
+function t_72.decode(p140) --[[ line: 16134 ]]
 	-- upvalues: t_72 (ref), protoModule (ref), t (ref)
 	local var2445 = t_72.new()
 	local var2446 = 0
@@ -9576,7 +9576,7 @@ function t_72.decode(p140) --[[ line: 16132 ]]
 	return var2445
 end
 
-function t_72:jsonEncode() --[[ line: 16180 ]]
+function t_72:jsonEncode() --[[ line: 16182 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -9589,7 +9589,7 @@ function t_72:jsonEncode() --[[ line: 16180 ]]
 	return t_1
 end
 
-function t_72:jsonDecode() --[[ line: 16202 ]]
+function t_72:jsonDecode() --[[ line: 16204 ]]
 	-- upvalues: t_72 (ref), t (ref)
 	local var2466 = t_72.new()
 	
@@ -9617,14 +9617,14 @@ typeRegistryModule.default:register(t.OpenEventDetailsAction)
 local t_73 = {}
 t_73.__index = t_73
 
-function t_73.new(p141) --[[ line: 16242 ]]
+function t_73.new(p141) --[[ line: 16244 ]]
 	-- upvalues: t_73 (ref)
 	return setmetatable({
 		event_id = if p141 == nil or p141.event_id == nil then nil else p141.event_id
 	}, t_73)
 end
 
-function t_73:encode() --[[ line: 16250 ]]
+function t_73:encode() --[[ line: 16252 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2468 = 0
@@ -9642,7 +9642,7 @@ function t_73:encode() --[[ line: 16250 ]]
 	return buff_1
 end
 
-function t_73.decode(p142) --[[ line: 16265 ]]
+function t_73.decode(p142) --[[ line: 16267 ]]
 	-- upvalues: t_73 (ref), protoModule (ref), propTypesModule (ref)
 	local var2473 = t_73.new()
 	local var2474 = 0
@@ -9689,7 +9689,7 @@ function t_73.decode(p142) --[[ line: 16265 ]]
 	return var2473
 end
 
-function t_73:jsonEncode() --[[ line: 16308 ]]
+function t_73:jsonEncode() --[[ line: 16310 ]]
 	local t = {}
 	
 	if self.event_id ~= nil then
@@ -9698,7 +9698,7 @@ function t_73:jsonEncode() --[[ line: 16308 ]]
 	return t
 end
 
-function t_73:jsonDecode() --[[ line: 16318 ]]
+function t_73:jsonDecode() --[[ line: 16320 ]]
 	-- upvalues: t_73 (ref), propTypesModule (ref)
 	local var2491 = t_73.new()
 	
@@ -9720,7 +9720,7 @@ typeRegistryModule.default:register(t.OpenEventDetailsAction_Params)
 local t_74 = {}
 t_74.__index = t_74
 
-function t_74.new(p143) --[[ line: 16346 ]]
+function t_74.new(p143) --[[ line: 16348 ]]
 	-- upvalues: t (ref), t_74 (ref)
 	return setmetatable({
 		action_type = if p143 == nil or p143.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p143.action_type,
@@ -9728,7 +9728,7 @@ function t_74.new(p143) --[[ line: 16346 ]]
 	}, t_74)
 end
 
-function t_74:encode() --[[ line: 16355 ]]
+function t_74:encode() --[[ line: 16357 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2493 = 0
@@ -9752,7 +9752,7 @@ function t_74:encode() --[[ line: 16355 ]]
 	return buff_1
 end
 
-function t_74.decode(p144) --[[ line: 16381 ]]
+function t_74.decode(p144) --[[ line: 16383 ]]
 	-- upvalues: t_74 (ref), protoModule (ref), t (ref)
 	local var2500 = t_74.new()
 	local var2501 = 0
@@ -9806,7 +9806,7 @@ function t_74.decode(p144) --[[ line: 16381 ]]
 	return var2500
 end
 
-function t_74:jsonEncode() --[[ line: 16429 ]]
+function t_74:jsonEncode() --[[ line: 16431 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -9819,7 +9819,7 @@ function t_74:jsonEncode() --[[ line: 16429 ]]
 	return t_1
 end
 
-function t_74:jsonDecode() --[[ line: 16451 ]]
+function t_74:jsonDecode() --[[ line: 16453 ]]
 	-- upvalues: t_74 (ref), t (ref)
 	local var2521 = t_74.new()
 	
@@ -9847,14 +9847,14 @@ typeRegistryModule.default:register(t.OpenBadgesSeeAllAction)
 local t_75 = {}
 t_75.__index = t_75
 
-function t_75.new(p145) --[[ line: 16491 ]]
+function t_75.new(p145) --[[ line: 16493 ]]
 	-- upvalues: t_75 (ref)
 	return setmetatable({
 		universe_id = if p145 == nil or p145.universe_id == nil then nil else p145.universe_id
 	}, t_75)
 end
 
-function t_75:encode() --[[ line: 16499 ]]
+function t_75:encode() --[[ line: 16501 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2523 = 0
@@ -9872,7 +9872,7 @@ function t_75:encode() --[[ line: 16499 ]]
 	return buff_1
 end
 
-function t_75.decode(p146) --[[ line: 16514 ]]
+function t_75.decode(p146) --[[ line: 16516 ]]
 	-- upvalues: t_75 (ref), protoModule (ref), propTypesModule (ref)
 	local var2528 = t_75.new()
 	local var2529 = 0
@@ -9919,7 +9919,7 @@ function t_75.decode(p146) --[[ line: 16514 ]]
 	return var2528
 end
 
-function t_75:jsonEncode() --[[ line: 16557 ]]
+function t_75:jsonEncode() --[[ line: 16559 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -9928,7 +9928,7 @@ function t_75:jsonEncode() --[[ line: 16557 ]]
 	return t
 end
 
-function t_75:jsonDecode() --[[ line: 16567 ]]
+function t_75:jsonDecode() --[[ line: 16569 ]]
 	-- upvalues: t_75 (ref), propTypesModule (ref)
 	local var2546 = t_75.new()
 	
@@ -9950,7 +9950,7 @@ typeRegistryModule.default:register(t.OpenBadgesSeeAllAction_Params)
 local t_76 = {}
 t_76.__index = t_76
 
-function t_76.new(p147) --[[ line: 16596 ]]
+function t_76.new(p147) --[[ line: 16598 ]]
 	-- upvalues: t (ref), t_76 (ref)
 	return setmetatable({
 		action_type = if p147 == nil or p147.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p147.action_type,
@@ -9958,7 +9958,7 @@ function t_76.new(p147) --[[ line: 16596 ]]
 	}, t_76)
 end
 
-function t_76:encode() --[[ line: 16607 ]]
+function t_76:encode() --[[ line: 16609 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2548 = 0
@@ -9982,7 +9982,7 @@ function t_76:encode() --[[ line: 16607 ]]
 	return buff_1
 end
 
-function t_76.decode(p148) --[[ line: 16633 ]]
+function t_76.decode(p148) --[[ line: 16635 ]]
 	-- upvalues: t_76 (ref), protoModule (ref), t (ref)
 	local var2555 = t_76.new()
 	local var2556 = 0
@@ -10036,7 +10036,7 @@ function t_76.decode(p148) --[[ line: 16633 ]]
 	return var2555
 end
 
-function t_76:jsonEncode() --[[ line: 16681 ]]
+function t_76:jsonEncode() --[[ line: 16683 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -10049,7 +10049,7 @@ function t_76:jsonEncode() --[[ line: 16681 ]]
 	return t_1
 end
 
-function t_76:jsonDecode() --[[ line: 16703 ]]
+function t_76:jsonDecode() --[[ line: 16705 ]]
 	-- upvalues: t_76 (ref), t (ref)
 	local var2576 = t_76.new()
 	
@@ -10077,14 +10077,14 @@ typeRegistryModule.default:register(t.OpenExperienceStoreSeeAllAction)
 local t_77 = {}
 t_77.__index = t_77
 
-function t_77.new(p149) --[[ line: 16743 ]]
+function t_77.new(p149) --[[ line: 16745 ]]
 	-- upvalues: t_77 (ref)
 	return setmetatable({
 		universe_id = if p149 == nil or p149.universe_id == nil then nil else p149.universe_id
 	}, t_77)
 end
 
-function t_77:encode() --[[ line: 16751 ]]
+function t_77:encode() --[[ line: 16753 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2578 = 0
@@ -10102,7 +10102,7 @@ function t_77:encode() --[[ line: 16751 ]]
 	return buff_1
 end
 
-function t_77.decode(p150) --[[ line: 16766 ]]
+function t_77.decode(p150) --[[ line: 16768 ]]
 	-- upvalues: t_77 (ref), protoModule (ref), propTypesModule (ref)
 	local var2583 = t_77.new()
 	local var2584 = 0
@@ -10149,7 +10149,7 @@ function t_77.decode(p150) --[[ line: 16766 ]]
 	return var2583
 end
 
-function t_77:jsonEncode() --[[ line: 16809 ]]
+function t_77:jsonEncode() --[[ line: 16811 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -10158,7 +10158,7 @@ function t_77:jsonEncode() --[[ line: 16809 ]]
 	return t
 end
 
-function t_77:jsonDecode() --[[ line: 16819 ]]
+function t_77:jsonDecode() --[[ line: 16821 ]]
 	-- upvalues: t_77 (ref), propTypesModule (ref)
 	local var2601 = t_77.new()
 	
@@ -10180,7 +10180,7 @@ typeRegistryModule.default:register(t.OpenExperienceStoreSeeAllAction_Params)
 local t_78 = {}
 t_78.__index = t_78
 
-function t_78.new(p151) --[[ line: 16850 ]]
+function t_78.new(p151) --[[ line: 16852 ]]
 	-- upvalues: t (ref), t_78 (ref)
 	return setmetatable({
 		action_type = if p151 == nil or p151.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p151.action_type,
@@ -10188,7 +10188,7 @@ function t_78.new(p151) --[[ line: 16850 ]]
 	}, t_78)
 end
 
-function t_78:encode() --[[ line: 16861 ]]
+function t_78:encode() --[[ line: 16863 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2603 = 0
@@ -10212,7 +10212,7 @@ function t_78:encode() --[[ line: 16861 ]]
 	return buff_1
 end
 
-function t_78.decode(p152) --[[ line: 16887 ]]
+function t_78.decode(p152) --[[ line: 16889 ]]
 	-- upvalues: t_78 (ref), protoModule (ref), t (ref)
 	local var2610 = t_78.new()
 	local var2611 = 0
@@ -10266,7 +10266,7 @@ function t_78.decode(p152) --[[ line: 16887 ]]
 	return var2610
 end
 
-function t_78:jsonEncode() --[[ line: 16935 ]]
+function t_78:jsonEncode() --[[ line: 16937 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -10279,7 +10279,7 @@ function t_78:jsonEncode() --[[ line: 16935 ]]
 	return t_1
 end
 
-function t_78:jsonDecode() --[[ line: 16957 ]]
+function t_78:jsonDecode() --[[ line: 16959 ]]
 	-- upvalues: t_78 (ref), t (ref)
 	local var2631 = t_78.new()
 	
@@ -10307,7 +10307,7 @@ typeRegistryModule.default:register(t.OpenSubscriptionPurchasePageAction)
 local t_79 = {}
 t_79.__index = t_79
 
-function t_79.new(p153) --[[ line: 16999 ]]
+function t_79.new(p153) --[[ line: 17001 ]]
 	-- upvalues: t_79 (ref)
 	return setmetatable({
 		subscription_id = if p153 == nil or p153.subscription_id == nil then nil else p153.subscription_id,
@@ -10326,7 +10326,7 @@ function t_79.new(p153) --[[ line: 16999 ]]
 	}, t_79)
 end
 
-function t_79:encode() --[[ line: 17019 ]]
+function t_79:encode() --[[ line: 17021 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2633 = 0
@@ -10428,7 +10428,7 @@ function t_79:encode() --[[ line: 17019 ]]
 	return buff_1
 end
 
-function t_79.decode(p154) --[[ line: 17108 ]]
+function t_79.decode(p154) --[[ line: 17110 ]]
 	-- upvalues: t_79 (ref), protoModule (ref), propTypesModule (ref)
 	local var2674 = t_79.new()
 	local var2675 = 0
@@ -10535,7 +10535,7 @@ function t_79.decode(p154) --[[ line: 17108 ]]
 	return var2674
 end
 
-function t_79:jsonEncode() --[[ line: 17213 ]]
+function t_79:jsonEncode() --[[ line: 17215 ]]
 	local t = {}
 	
 	if self.subscription_id ~= nil then
@@ -10580,7 +10580,7 @@ function t_79:jsonEncode() --[[ line: 17213 ]]
 	return t
 end
 
-function t_79:jsonDecode() --[[ line: 17273 ]]
+function t_79:jsonDecode() --[[ line: 17275 ]]
 	-- upvalues: t_79 (ref), propTypesModule (ref)
 	local var2716 = t_79.new()
 	
@@ -10668,7 +10668,7 @@ typeRegistryModule.default:register(t.OpenSubscriptionPurchasePageAction_Params)
 local t_80 = {}
 t_80.__index = t_80
 
-function t_80.new(p155) --[[ line: 17410 ]]
+function t_80.new(p155) --[[ line: 17412 ]]
 	-- upvalues: t (ref), t_80 (ref)
 	return setmetatable({
 		action_type = if p155 == nil or p155.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p155.action_type,
@@ -10676,7 +10676,7 @@ function t_80.new(p155) --[[ line: 17410 ]]
 	}, t_80)
 end
 
-function t_80:encode() --[[ line: 17419 ]]
+function t_80:encode() --[[ line: 17421 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2718 = 0
@@ -10700,7 +10700,7 @@ function t_80:encode() --[[ line: 17419 ]]
 	return buff_1
 end
 
-function t_80.decode(p156) --[[ line: 17445 ]]
+function t_80.decode(p156) --[[ line: 17447 ]]
 	-- upvalues: t_80 (ref), protoModule (ref), t (ref)
 	local var2725 = t_80.new()
 	local var2726 = 0
@@ -10754,7 +10754,7 @@ function t_80.decode(p156) --[[ line: 17445 ]]
 	return var2725
 end
 
-function t_80:jsonEncode() --[[ line: 17493 ]]
+function t_80:jsonEncode() --[[ line: 17495 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -10767,7 +10767,7 @@ function t_80:jsonEncode() --[[ line: 17493 ]]
 	return t_1
 end
 
-function t_80:jsonDecode() --[[ line: 17515 ]]
+function t_80:jsonDecode() --[[ line: 17517 ]]
 	-- upvalues: t_80 (ref), t (ref)
 	local var2746 = t_80.new()
 	
@@ -10795,14 +10795,14 @@ typeRegistryModule.default:register(t.RefreshGamePassesAction)
 local t_81 = {}
 t_81.__index = t_81
 
-function t_81.new(p157) --[[ line: 17555 ]]
+function t_81.new(p157) --[[ line: 17557 ]]
 	-- upvalues: t_81 (ref)
 	return setmetatable({
 		universe_id = if p157 == nil or p157.universe_id == nil then nil else p157.universe_id
 	}, t_81)
 end
 
-function t_81:encode() --[[ line: 17563 ]]
+function t_81:encode() --[[ line: 17565 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2748 = 0
@@ -10820,7 +10820,7 @@ function t_81:encode() --[[ line: 17563 ]]
 	return buff_1
 end
 
-function t_81.decode(p158) --[[ line: 17578 ]]
+function t_81.decode(p158) --[[ line: 17580 ]]
 	-- upvalues: t_81 (ref), protoModule (ref), propTypesModule (ref)
 	local var2753 = t_81.new()
 	local var2754 = 0
@@ -10867,7 +10867,7 @@ function t_81.decode(p158) --[[ line: 17578 ]]
 	return var2753
 end
 
-function t_81:jsonEncode() --[[ line: 17621 ]]
+function t_81:jsonEncode() --[[ line: 17623 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -10876,7 +10876,7 @@ function t_81:jsonEncode() --[[ line: 17621 ]]
 	return t
 end
 
-function t_81:jsonDecode() --[[ line: 17631 ]]
+function t_81:jsonDecode() --[[ line: 17633 ]]
 	-- upvalues: t_81 (ref), propTypesModule (ref)
 	local var2771 = t_81.new()
 	
@@ -10898,7 +10898,7 @@ typeRegistryModule.default:register(t.RefreshGamePassesAction_Params)
 local t_82 = {}
 t_82.__index = t_82
 
-function t_82.new(p159) --[[ line: 17660 ]]
+function t_82.new(p159) --[[ line: 17662 ]]
 	-- upvalues: t (ref), t_82 (ref)
 	return setmetatable({
 		action_type = if p159 == nil or p159.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p159.action_type,
@@ -10906,7 +10906,7 @@ function t_82.new(p159) --[[ line: 17660 ]]
 	}, t_82)
 end
 
-function t_82:encode() --[[ line: 17669 ]]
+function t_82:encode() --[[ line: 17671 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2773 = 0
@@ -10930,7 +10930,7 @@ function t_82:encode() --[[ line: 17669 ]]
 	return buff_1
 end
 
-function t_82.decode(p160) --[[ line: 17695 ]]
+function t_82.decode(p160) --[[ line: 17697 ]]
 	-- upvalues: t_82 (ref), protoModule (ref), t (ref)
 	local var2780 = t_82.new()
 	local var2781 = 0
@@ -10984,7 +10984,7 @@ function t_82.decode(p160) --[[ line: 17695 ]]
 	return var2780
 end
 
-function t_82:jsonEncode() --[[ line: 17743 ]]
+function t_82:jsonEncode() --[[ line: 17745 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -10997,7 +10997,7 @@ function t_82:jsonEncode() --[[ line: 17743 ]]
 	return t_1
 end
 
-function t_82:jsonDecode() --[[ line: 17765 ]]
+function t_82:jsonDecode() --[[ line: 17767 ]]
 	-- upvalues: t_82 (ref), t (ref)
 	local var2801 = t_82.new()
 	
@@ -11025,14 +11025,14 @@ typeRegistryModule.default:register(t.RefreshPlayabilityAction)
 local t_83 = {}
 t_83.__index = t_83
 
-function t_83.new(p161) --[[ line: 17805 ]]
+function t_83.new(p161) --[[ line: 17807 ]]
 	-- upvalues: t_83 (ref)
 	return setmetatable({
 		universe_id = if p161 == nil or p161.universe_id == nil then nil else p161.universe_id
 	}, t_83)
 end
 
-function t_83:encode() --[[ line: 17813 ]]
+function t_83:encode() --[[ line: 17815 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2803 = 0
@@ -11050,7 +11050,7 @@ function t_83:encode() --[[ line: 17813 ]]
 	return buff_1
 end
 
-function t_83.decode(p162) --[[ line: 17828 ]]
+function t_83.decode(p162) --[[ line: 17830 ]]
 	-- upvalues: t_83 (ref), protoModule (ref), propTypesModule (ref)
 	local var2808 = t_83.new()
 	local var2809 = 0
@@ -11097,7 +11097,7 @@ function t_83.decode(p162) --[[ line: 17828 ]]
 	return var2808
 end
 
-function t_83:jsonEncode() --[[ line: 17871 ]]
+function t_83:jsonEncode() --[[ line: 17873 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -11106,7 +11106,7 @@ function t_83:jsonEncode() --[[ line: 17871 ]]
 	return t
 end
 
-function t_83:jsonDecode() --[[ line: 17881 ]]
+function t_83:jsonDecode() --[[ line: 17883 ]]
 	-- upvalues: t_83 (ref), propTypesModule (ref)
 	local var2826 = t_83.new()
 	
@@ -11128,7 +11128,7 @@ typeRegistryModule.default:register(t.RefreshPlayabilityAction_Params)
 local t_84 = {}
 t_84.__index = t_84
 
-function t_84.new(p163) --[[ line: 17910 ]]
+function t_84.new(p163) --[[ line: 17912 ]]
 	-- upvalues: t (ref), t_84 (ref)
 	return setmetatable({
 		action_type = if p163 == nil or p163.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p163.action_type,
@@ -11136,7 +11136,7 @@ function t_84.new(p163) --[[ line: 17910 ]]
 	}, t_84)
 end
 
-function t_84:encode() --[[ line: 17921 ]]
+function t_84:encode() --[[ line: 17923 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2828 = 0
@@ -11160,7 +11160,7 @@ function t_84:encode() --[[ line: 17921 ]]
 	return buff_1
 end
 
-function t_84.decode(p164) --[[ line: 17947 ]]
+function t_84.decode(p164) --[[ line: 17949 ]]
 	-- upvalues: t_84 (ref), protoModule (ref), t (ref)
 	local var2835 = t_84.new()
 	local var2836 = 0
@@ -11214,7 +11214,7 @@ function t_84.decode(p164) --[[ line: 17947 ]]
 	return var2835
 end
 
-function t_84:jsonEncode() --[[ line: 17995 ]]
+function t_84:jsonEncode() --[[ line: 17997 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -11227,7 +11227,7 @@ function t_84:jsonEncode() --[[ line: 17995 ]]
 	return t_1
 end
 
-function t_84:jsonDecode() --[[ line: 18017 ]]
+function t_84:jsonDecode() --[[ line: 18019 ]]
 	-- upvalues: t_84 (ref), t (ref)
 	local var2856 = t_84.new()
 	
@@ -11255,14 +11255,14 @@ typeRegistryModule.default:register(t.RefreshDeveloperProductsAction)
 local t_85 = {}
 t_85.__index = t_85
 
-function t_85.new(p165) --[[ line: 18057 ]]
+function t_85.new(p165) --[[ line: 18059 ]]
 	-- upvalues: t_85 (ref)
 	return setmetatable({
 		place_id = if p165 == nil or p165.place_id == nil then nil else p165.place_id
 	}, t_85)
 end
 
-function t_85:encode() --[[ line: 18065 ]]
+function t_85:encode() --[[ line: 18067 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2858 = 0
@@ -11280,7 +11280,7 @@ function t_85:encode() --[[ line: 18065 ]]
 	return buff_1
 end
 
-function t_85.decode(p166) --[[ line: 18080 ]]
+function t_85.decode(p166) --[[ line: 18082 ]]
 	-- upvalues: t_85 (ref), protoModule (ref), propTypesModule (ref)
 	local var2863 = t_85.new()
 	local var2864 = 0
@@ -11327,7 +11327,7 @@ function t_85.decode(p166) --[[ line: 18080 ]]
 	return var2863
 end
 
-function t_85:jsonEncode() --[[ line: 18123 ]]
+function t_85:jsonEncode() --[[ line: 18125 ]]
 	local t = {}
 	
 	if self.place_id ~= nil then
@@ -11336,7 +11336,7 @@ function t_85:jsonEncode() --[[ line: 18123 ]]
 	return t
 end
 
-function t_85:jsonDecode() --[[ line: 18133 ]]
+function t_85:jsonDecode() --[[ line: 18135 ]]
 	-- upvalues: t_85 (ref), propTypesModule (ref)
 	local var2881 = t_85.new()
 	
@@ -11358,7 +11358,7 @@ typeRegistryModule.default:register(t.RefreshDeveloperProductsAction_Params)
 local t_86 = {}
 t_86.__index = t_86
 
-function t_86.new(p167) --[[ line: 18163 ]]
+function t_86.new(p167) --[[ line: 18165 ]]
 	-- upvalues: t (ref), t_86 (ref)
 	return setmetatable({
 		action_type = if p167 == nil or p167.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p167.action_type,
@@ -11366,7 +11366,7 @@ function t_86.new(p167) --[[ line: 18163 ]]
 	}, t_86)
 end
 
-function t_86:encode() --[[ line: 18172 ]]
+function t_86:encode() --[[ line: 18174 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2883 = 0
@@ -11390,7 +11390,7 @@ function t_86:encode() --[[ line: 18172 ]]
 	return buff_1
 end
 
-function t_86.decode(p168) --[[ line: 18198 ]]
+function t_86.decode(p168) --[[ line: 18200 ]]
 	-- upvalues: t_86 (ref), protoModule (ref), t (ref)
 	local var2890 = t_86.new()
 	local var2891 = 0
@@ -11444,7 +11444,7 @@ function t_86.decode(p168) --[[ line: 18198 ]]
 	return var2890
 end
 
-function t_86:jsonEncode() --[[ line: 18246 ]]
+function t_86:jsonEncode() --[[ line: 18248 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -11457,7 +11457,7 @@ function t_86:jsonEncode() --[[ line: 18246 ]]
 	return t_1
 end
 
-function t_86:jsonDecode() --[[ line: 18268 ]]
+function t_86:jsonDecode() --[[ line: 18270 ]]
 	-- upvalues: t_86 (ref), t (ref)
 	local var2911 = t_86.new()
 	
@@ -11485,7 +11485,7 @@ typeRegistryModule.default:register(t.OpenFaeTrialUpsellAction)
 local t_87 = {}
 t_87.__index = t_87
 
-function t_87.new(p169) --[[ line: 18308 ]]
+function t_87.new(p169) --[[ line: 18310 ]]
 	-- upvalues: t_87 (ref)
 	return setmetatable({
 		source = if p169 == nil or p169.source == nil then nil else p169.source,
@@ -11495,7 +11495,7 @@ function t_87.new(p169) --[[ line: 18308 ]]
 	}, t_87)
 end
 
-function t_87:encode() --[[ line: 18319 ]]
+function t_87:encode() --[[ line: 18321 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2913 = 0
@@ -11534,7 +11534,7 @@ function t_87:encode() --[[ line: 18319 ]]
 	return buff_1
 end
 
-function t_87.decode(p170) --[[ line: 18352 ]]
+function t_87.decode(p170) --[[ line: 18354 ]]
 	-- upvalues: t_87 (ref), protoModule (ref), propTypesModule (ref)
 	local var2927 = t_87.new()
 	local var2928 = 0
@@ -11596,7 +11596,7 @@ function t_87.decode(p170) --[[ line: 18352 ]]
 	return var2927
 end
 
-function t_87:jsonEncode() --[[ line: 18410 ]]
+function t_87:jsonEncode() --[[ line: 18412 ]]
 	local t = {}
 	
 	if self.source ~= nil then
@@ -11614,7 +11614,7 @@ function t_87:jsonEncode() --[[ line: 18410 ]]
 	return t
 end
 
-function t_87:jsonDecode() --[[ line: 18432 ]]
+function t_87:jsonDecode() --[[ line: 18434 ]]
 	-- upvalues: t_87 (ref), propTypesModule (ref)
 	local var2951 = t_87.new()
 	
@@ -11651,7 +11651,7 @@ typeRegistryModule.default:register(t.OpenFaeTrialUpsellAction_Params)
 local t_88 = {}
 t_88.__index = t_88
 
-function t_88.new(p171) --[[ line: 18482 ]]
+function t_88.new(p171) --[[ line: 18484 ]]
 	-- upvalues: t (ref), t_88 (ref)
 	return setmetatable({
 		action_type = if p171 == nil or p171.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p171.action_type,
@@ -11659,7 +11659,7 @@ function t_88.new(p171) --[[ line: 18482 ]]
 	}, t_88)
 end
 
-function t_88:encode() --[[ line: 18493 ]]
+function t_88:encode() --[[ line: 18495 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var2953 = 0
@@ -11683,7 +11683,7 @@ function t_88:encode() --[[ line: 18493 ]]
 	return buff_1
 end
 
-function t_88.decode(p172) --[[ line: 18519 ]]
+function t_88.decode(p172) --[[ line: 18521 ]]
 	-- upvalues: t_88 (ref), protoModule (ref), t (ref)
 	local var2960 = t_88.new()
 	local var2961 = 0
@@ -11737,7 +11737,7 @@ function t_88.decode(p172) --[[ line: 18519 ]]
 	return var2960
 end
 
-function t_88:jsonEncode() --[[ line: 18567 ]]
+function t_88:jsonEncode() --[[ line: 18569 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -11750,7 +11750,7 @@ function t_88:jsonEncode() --[[ line: 18567 ]]
 	return t_1
 end
 
-function t_88:jsonDecode() --[[ line: 18589 ]]
+function t_88:jsonDecode() --[[ line: 18591 ]]
 	-- upvalues: t_88 (ref), t (ref)
 	local var2981 = t_88.new()
 	
@@ -11778,7 +11778,7 @@ typeRegistryModule.default:register(t.OpenIncomingTransferUpsellAction)
 local t_89 = {}
 t_89.__index = t_89
 
-function t_89.new(p173) --[[ line: 18631 ]]
+function t_89.new(p173) --[[ line: 18633 ]]
 	-- upvalues: t_89 (ref)
 	return setmetatable({
 		url = if p173 == nil or p173.url == nil then nil else p173.url,
@@ -11787,7 +11787,7 @@ function t_89.new(p173) --[[ line: 18631 ]]
 	}, t_89)
 end
 
-function t_89:encode() --[[ line: 18641 ]]
+function t_89:encode() --[[ line: 18643 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var2983 = 0
@@ -11819,7 +11819,7 @@ function t_89:encode() --[[ line: 18641 ]]
 	return buff_1
 end
 
-function t_89.decode(p174) --[[ line: 18668 ]]
+function t_89.decode(p174) --[[ line: 18670 ]]
 	-- upvalues: t_89 (ref), protoModule (ref), propTypesModule (ref)
 	local var2994 = t_89.new()
 	local var2995 = 0
@@ -11876,7 +11876,7 @@ function t_89.decode(p174) --[[ line: 18668 ]]
 	return var2994
 end
 
-function t_89:jsonEncode() --[[ line: 18721 ]]
+function t_89:jsonEncode() --[[ line: 18723 ]]
 	local t = {}
 	
 	if self.url ~= nil then
@@ -11891,7 +11891,7 @@ function t_89:jsonEncode() --[[ line: 18721 ]]
 	return t
 end
 
-function t_89:jsonDecode() --[[ line: 18739 ]]
+function t_89:jsonDecode() --[[ line: 18741 ]]
 	-- upvalues: t_89 (ref), propTypesModule (ref)
 	local var3016 = t_89.new()
 	
@@ -11922,7 +11922,7 @@ typeRegistryModule.default:register(t.OpenIncomingTransferUpsellAction_Params)
 local t_90 = {}
 t_90.__index = t_90
 
-function t_90.new(p175) --[[ line: 18782 ]]
+function t_90.new(p175) --[[ line: 18784 ]]
 	-- upvalues: t (ref), t_90 (ref)
 	return setmetatable({
 		action_type = if p175 == nil or p175.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p175.action_type,
@@ -11930,7 +11930,7 @@ function t_90.new(p175) --[[ line: 18782 ]]
 	}, t_90)
 end
 
-function t_90:encode() --[[ line: 18791 ]]
+function t_90:encode() --[[ line: 18793 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3018 = 0
@@ -11954,7 +11954,7 @@ function t_90:encode() --[[ line: 18791 ]]
 	return buff_1
 end
 
-function t_90.decode(p176) --[[ line: 18817 ]]
+function t_90.decode(p176) --[[ line: 18819 ]]
 	-- upvalues: t_90 (ref), protoModule (ref), t (ref)
 	local var3025 = t_90.new()
 	local var3026 = 0
@@ -12008,7 +12008,7 @@ function t_90.decode(p176) --[[ line: 18817 ]]
 	return var3025
 end
 
-function t_90:jsonEncode() --[[ line: 18865 ]]
+function t_90:jsonEncode() --[[ line: 18867 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -12021,7 +12021,7 @@ function t_90:jsonEncode() --[[ line: 18865 ]]
 	return t_1
 end
 
-function t_90:jsonDecode() --[[ line: 18887 ]]
+function t_90:jsonDecode() --[[ line: 18889 ]]
 	-- upvalues: t_90 (ref), t (ref)
 	local var3046 = t_90.new()
 	
@@ -12049,7 +12049,7 @@ typeRegistryModule.default:register(t.OpenSduiOverlayAction)
 local t_91 = {}
 t_91.__index = t_91
 
-function t_91.new(p177) --[[ line: 18927 ]]
+function t_91.new(p177) --[[ line: 18929 ]]
 	-- upvalues: t_91 (ref)
 	return setmetatable({
 		config_key = if p177 == nil or p177.config_key == nil then nil else p177.config_key,
@@ -12057,7 +12057,7 @@ function t_91.new(p177) --[[ line: 18927 ]]
 	}, t_91)
 end
 
-function t_91:encode() --[[ line: 18936 ]]
+function t_91:encode() --[[ line: 18938 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3048 = 0
@@ -12082,7 +12082,7 @@ function t_91:encode() --[[ line: 18936 ]]
 	return buff_1
 end
 
-function t_91.decode(p178) --[[ line: 18957 ]]
+function t_91.decode(p178) --[[ line: 18959 ]]
 	-- upvalues: t_91 (ref), protoModule (ref), propTypesModule (ref)
 	local var3056 = t_91.new()
 	local var3057 = 0
@@ -12134,7 +12134,7 @@ function t_91.decode(p178) --[[ line: 18957 ]]
 	return var3056
 end
 
-function t_91:jsonEncode() --[[ line: 19005 ]]
+function t_91:jsonEncode() --[[ line: 19007 ]]
 	local t = {}
 	
 	if self.config_key ~= nil then
@@ -12146,7 +12146,7 @@ function t_91:jsonEncode() --[[ line: 19005 ]]
 	return t
 end
 
-function t_91:jsonDecode() --[[ line: 19019 ]]
+function t_91:jsonDecode() --[[ line: 19021 ]]
 	-- upvalues: t_91 (ref), propTypesModule (ref)
 	local var3076 = t_91.new()
 	
@@ -12171,7 +12171,7 @@ typeRegistryModule.default:register(t.OpenSduiOverlayAction_Params)
 local t_92 = {}
 t_92.__index = t_92
 
-function t_92.new(p179) --[[ line: 19051 ]]
+function t_92.new(p179) --[[ line: 19053 ]]
 	-- upvalues: t (ref), t_92 (ref)
 	return setmetatable({
 		action_type = if p179 == nil or p179.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p179.action_type,
@@ -12179,7 +12179,7 @@ function t_92.new(p179) --[[ line: 19051 ]]
 	}, t_92)
 end
 
-function t_92:encode() --[[ line: 19060 ]]
+function t_92:encode() --[[ line: 19062 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3078 = 0
@@ -12203,7 +12203,7 @@ function t_92:encode() --[[ line: 19060 ]]
 	return buff_1
 end
 
-function t_92.decode(p180) --[[ line: 19086 ]]
+function t_92.decode(p180) --[[ line: 19088 ]]
 	-- upvalues: t_92 (ref), protoModule (ref), t (ref)
 	local var3085 = t_92.new()
 	local var3086 = 0
@@ -12257,7 +12257,7 @@ function t_92.decode(p180) --[[ line: 19086 ]]
 	return var3085
 end
 
-function t_92:jsonEncode() --[[ line: 19134 ]]
+function t_92:jsonEncode() --[[ line: 19136 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -12270,7 +12270,7 @@ function t_92:jsonEncode() --[[ line: 19134 ]]
 	return t_1
 end
 
-function t_92:jsonDecode() --[[ line: 19156 ]]
+function t_92:jsonDecode() --[[ line: 19158 ]]
 	-- upvalues: t_92 (ref), t (ref)
 	local var3106 = t_92.new()
 	
@@ -12298,14 +12298,14 @@ typeRegistryModule.default:register(t.ApplyChartsFilterAction)
 local t_93 = {}
 t_93.__index = t_93
 
-function t_93.new(p181) --[[ line: 19196 ]]
+function t_93.new(p181) --[[ line: 19198 ]]
 	-- upvalues: t_93 (ref)
 	return setmetatable({
 		session_id = if p181 == nil or p181.session_id == nil then nil else p181.session_id
 	}, t_93)
 end
 
-function t_93:encode() --[[ line: 19204 ]]
+function t_93:encode() --[[ line: 19206 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3108 = 0
@@ -12323,7 +12323,7 @@ function t_93:encode() --[[ line: 19204 ]]
 	return buff_1
 end
 
-function t_93.decode(p182) --[[ line: 19219 ]]
+function t_93.decode(p182) --[[ line: 19221 ]]
 	-- upvalues: t_93 (ref), protoModule (ref), propTypesModule (ref)
 	local var3113 = t_93.new()
 	local var3114 = 0
@@ -12370,7 +12370,7 @@ function t_93.decode(p182) --[[ line: 19219 ]]
 	return var3113
 end
 
-function t_93:jsonEncode() --[[ line: 19262 ]]
+function t_93:jsonEncode() --[[ line: 19264 ]]
 	local t = {}
 	
 	if self.session_id ~= nil then
@@ -12379,7 +12379,7 @@ function t_93:jsonEncode() --[[ line: 19262 ]]
 	return t
 end
 
-function t_93:jsonDecode() --[[ line: 19272 ]]
+function t_93:jsonDecode() --[[ line: 19274 ]]
 	-- upvalues: t_93 (ref), propTypesModule (ref)
 	local var3131 = t_93.new()
 	
@@ -12401,7 +12401,7 @@ typeRegistryModule.default:register(t.ApplyChartsFilterAction_Params)
 local t_94 = {}
 t_94.__index = t_94
 
-function t_94.new(p183) --[[ line: 19300 ]]
+function t_94.new(p183) --[[ line: 19302 ]]
 	-- upvalues: t (ref), t_94 (ref)
 	return setmetatable({
 		action_type = if p183 == nil or p183.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p183.action_type,
@@ -12409,7 +12409,7 @@ function t_94.new(p183) --[[ line: 19300 ]]
 	}, t_94)
 end
 
-function t_94:encode() --[[ line: 19311 ]]
+function t_94:encode() --[[ line: 19313 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3133 = 0
@@ -12433,7 +12433,7 @@ function t_94:encode() --[[ line: 19311 ]]
 	return buff_1
 end
 
-function t_94.decode(p184) --[[ line: 19337 ]]
+function t_94.decode(p184) --[[ line: 19339 ]]
 	-- upvalues: t_94 (ref), protoModule (ref), t (ref)
 	local var3140 = t_94.new()
 	local var3141 = 0
@@ -12487,7 +12487,7 @@ function t_94.decode(p184) --[[ line: 19337 ]]
 	return var3140
 end
 
-function t_94:jsonEncode() --[[ line: 19385 ]]
+function t_94:jsonEncode() --[[ line: 19387 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -12500,7 +12500,7 @@ function t_94:jsonEncode() --[[ line: 19385 ]]
 	return t_1
 end
 
-function t_94:jsonDecode() --[[ line: 19407 ]]
+function t_94:jsonDecode() --[[ line: 19409 ]]
 	-- upvalues: t_94 (ref), t (ref)
 	local var3161 = t_94.new()
 	
@@ -12528,7 +12528,7 @@ typeRegistryModule.default:register(t.RefreshChartsSortDetailAction)
 local t_95 = {}
 t_95.__index = t_95
 
-function t_95.new(p185) --[[ line: 19447 ]]
+function t_95.new(p185) --[[ line: 19449 ]]
 	-- upvalues: t_95 (ref)
 	return setmetatable({
 		config_key = if p185 == nil or p185.config_key == nil then nil else p185.config_key,
@@ -12538,7 +12538,7 @@ function t_95.new(p185) --[[ line: 19447 ]]
 	}, t_95)
 end
 
-function t_95:encode() --[[ line: 19458 ]]
+function t_95:encode() --[[ line: 19460 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3163 = 0
@@ -12577,7 +12577,7 @@ function t_95:encode() --[[ line: 19458 ]]
 	return buff_1
 end
 
-function t_95.decode(p186) --[[ line: 19491 ]]
+function t_95.decode(p186) --[[ line: 19493 ]]
 	-- upvalues: t_95 (ref), protoModule (ref), propTypesModule (ref)
 	local var3177 = t_95.new()
 	local var3178 = 0
@@ -12639,7 +12639,7 @@ function t_95.decode(p186) --[[ line: 19491 ]]
 	return var3177
 end
 
-function t_95:jsonEncode() --[[ line: 19549 ]]
+function t_95:jsonEncode() --[[ line: 19551 ]]
 	local t = {}
 	
 	if self.config_key ~= nil then
@@ -12657,7 +12657,7 @@ function t_95:jsonEncode() --[[ line: 19549 ]]
 	return t
 end
 
-function t_95:jsonDecode() --[[ line: 19571 ]]
+function t_95:jsonDecode() --[[ line: 19573 ]]
 	-- upvalues: t_95 (ref), propTypesModule (ref)
 	local var3201 = t_95.new()
 	
@@ -12697,7 +12697,7 @@ typeRegistryModule.default:register(t.RefreshChartsSortDetailAction_Params)
 local t_96 = {}
 t_96.__index = t_96
 
-function t_96.new(p187) --[[ line: 19628 ]]
+function t_96.new(p187) --[[ line: 19630 ]]
 	-- upvalues: t (ref), t_96 (ref)
 	return setmetatable({
 		action_type = if p187 == nil or p187.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p187.action_type,
@@ -12705,7 +12705,7 @@ function t_96.new(p187) --[[ line: 19628 ]]
 	}, t_96)
 end
 
-function t_96:encode() --[[ line: 19637 ]]
+function t_96:encode() --[[ line: 19639 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3203 = 0
@@ -12729,7 +12729,7 @@ function t_96:encode() --[[ line: 19637 ]]
 	return buff_1
 end
 
-function t_96.decode(p188) --[[ line: 19663 ]]
+function t_96.decode(p188) --[[ line: 19665 ]]
 	-- upvalues: t_96 (ref), protoModule (ref), t (ref)
 	local var3210 = t_96.new()
 	local var3211 = 0
@@ -12783,7 +12783,7 @@ function t_96.decode(p188) --[[ line: 19663 ]]
 	return var3210
 end
 
-function t_96:jsonEncode() --[[ line: 19711 ]]
+function t_96:jsonEncode() --[[ line: 19713 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -12796,7 +12796,7 @@ function t_96:jsonEncode() --[[ line: 19711 ]]
 	return t_1
 end
 
-function t_96:jsonDecode() --[[ line: 19733 ]]
+function t_96:jsonDecode() --[[ line: 19735 ]]
 	-- upvalues: t_96 (ref), t (ref)
 	local var3231 = t_96.new()
 	
@@ -12824,14 +12824,14 @@ typeRegistryModule.default:register(t.JoinCommunityAction)
 local t_97 = {}
 t_97.__index = t_97
 
-function t_97.new(p189) --[[ line: 19773 ]]
+function t_97.new(p189) --[[ line: 19775 ]]
 	-- upvalues: t_97 (ref)
 	return setmetatable({
 		community_id = if p189 == nil or p189.community_id == nil then nil else p189.community_id
 	}, t_97)
 end
 
-function t_97:encode() --[[ line: 19781 ]]
+function t_97:encode() --[[ line: 19783 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3233 = 0
@@ -12849,7 +12849,7 @@ function t_97:encode() --[[ line: 19781 ]]
 	return buff_1
 end
 
-function t_97.decode(p190) --[[ line: 19796 ]]
+function t_97.decode(p190) --[[ line: 19798 ]]
 	-- upvalues: t_97 (ref), protoModule (ref), propTypesModule (ref)
 	local var3238 = t_97.new()
 	local var3239 = 0
@@ -12896,7 +12896,7 @@ function t_97.decode(p190) --[[ line: 19796 ]]
 	return var3238
 end
 
-function t_97:jsonEncode() --[[ line: 19839 ]]
+function t_97:jsonEncode() --[[ line: 19841 ]]
 	local t = {}
 	
 	if self.community_id ~= nil then
@@ -12905,7 +12905,7 @@ function t_97:jsonEncode() --[[ line: 19839 ]]
 	return t
 end
 
-function t_97:jsonDecode() --[[ line: 19849 ]]
+function t_97:jsonDecode() --[[ line: 19851 ]]
 	-- upvalues: t_97 (ref), propTypesModule (ref)
 	local var3256 = t_97.new()
 	
@@ -12927,7 +12927,7 @@ typeRegistryModule.default:register(t.JoinCommunityAction_Params)
 local t_98 = {}
 t_98.__index = t_98
 
-function t_98.new(p191) --[[ line: 19879 ]]
+function t_98.new(p191) --[[ line: 19881 ]]
 	-- upvalues: t (ref), t_98 (ref)
 	return setmetatable({
 		action_type = if p191 == nil or p191.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p191.action_type,
@@ -12935,7 +12935,7 @@ function t_98.new(p191) --[[ line: 19879 ]]
 	}, t_98)
 end
 
-function t_98:encode() --[[ line: 19888 ]]
+function t_98:encode() --[[ line: 19890 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3258 = 0
@@ -12959,7 +12959,7 @@ function t_98:encode() --[[ line: 19888 ]]
 	return buff_1
 end
 
-function t_98.decode(p192) --[[ line: 19914 ]]
+function t_98.decode(p192) --[[ line: 19916 ]]
 	-- upvalues: t_98 (ref), protoModule (ref), t (ref)
 	local var3265 = t_98.new()
 	local var3266 = 0
@@ -13013,7 +13013,7 @@ function t_98.decode(p192) --[[ line: 19914 ]]
 	return var3265
 end
 
-function t_98:jsonEncode() --[[ line: 19962 ]]
+function t_98:jsonEncode() --[[ line: 19964 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -13026,7 +13026,7 @@ function t_98:jsonEncode() --[[ line: 19962 ]]
 	return t_1
 end
 
-function t_98:jsonDecode() --[[ line: 19984 ]]
+function t_98:jsonDecode() --[[ line: 19986 ]]
 	-- upvalues: t_98 (ref), t (ref)
 	local var3286 = t_98.new()
 	
@@ -13054,14 +13054,14 @@ typeRegistryModule.default:register(t.ViewCommunityAction)
 local t_99 = {}
 t_99.__index = t_99
 
-function t_99.new(p193) --[[ line: 20024 ]]
+function t_99.new(p193) --[[ line: 20026 ]]
 	-- upvalues: t_99 (ref)
 	return setmetatable({
 		community_id = if p193 == nil or p193.community_id == nil then nil else p193.community_id
 	}, t_99)
 end
 
-function t_99:encode() --[[ line: 20032 ]]
+function t_99:encode() --[[ line: 20034 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3288 = 0
@@ -13079,7 +13079,7 @@ function t_99:encode() --[[ line: 20032 ]]
 	return buff_1
 end
 
-function t_99.decode(p194) --[[ line: 20047 ]]
+function t_99.decode(p194) --[[ line: 20049 ]]
 	-- upvalues: t_99 (ref), protoModule (ref), propTypesModule (ref)
 	local var3293 = t_99.new()
 	local var3294 = 0
@@ -13126,7 +13126,7 @@ function t_99.decode(p194) --[[ line: 20047 ]]
 	return var3293
 end
 
-function t_99:jsonEncode() --[[ line: 20090 ]]
+function t_99:jsonEncode() --[[ line: 20092 ]]
 	local t = {}
 	
 	if self.community_id ~= nil then
@@ -13135,7 +13135,7 @@ function t_99:jsonEncode() --[[ line: 20090 ]]
 	return t
 end
 
-function t_99:jsonDecode() --[[ line: 20100 ]]
+function t_99:jsonDecode() --[[ line: 20102 ]]
 	-- upvalues: t_99 (ref), propTypesModule (ref)
 	local var3311 = t_99.new()
 	
@@ -13157,7 +13157,7 @@ typeRegistryModule.default:register(t.ViewCommunityAction_Params)
 local t_100 = {}
 t_100.__index = t_100
 
-function t_100.new(p195) --[[ line: 20130 ]]
+function t_100.new(p195) --[[ line: 20132 ]]
 	-- upvalues: t (ref), t_100 (ref)
 	return setmetatable({
 		action_type = if p195 == nil or p195.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p195.action_type,
@@ -13165,7 +13165,7 @@ function t_100.new(p195) --[[ line: 20130 ]]
 	}, t_100)
 end
 
-function t_100:encode() --[[ line: 20139 ]]
+function t_100:encode() --[[ line: 20141 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3313 = 0
@@ -13189,7 +13189,7 @@ function t_100:encode() --[[ line: 20139 ]]
 	return buff_1
 end
 
-function t_100.decode(p196) --[[ line: 20165 ]]
+function t_100.decode(p196) --[[ line: 20167 ]]
 	-- upvalues: t_100 (ref), protoModule (ref), t (ref)
 	local var3320 = t_100.new()
 	local var3321 = 0
@@ -13243,7 +13243,7 @@ function t_100.decode(p196) --[[ line: 20165 ]]
 	return var3320
 end
 
-function t_100:jsonEncode() --[[ line: 20213 ]]
+function t_100:jsonEncode() --[[ line: 20215 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -13256,7 +13256,7 @@ function t_100:jsonEncode() --[[ line: 20213 ]]
 	return t_1
 end
 
-function t_100:jsonDecode() --[[ line: 20235 ]]
+function t_100:jsonDecode() --[[ line: 20237 ]]
 	-- upvalues: t_100 (ref), t (ref)
 	local var3341 = t_100.new()
 	
@@ -13284,7 +13284,7 @@ typeRegistryModule.default:register(t.AnalyticsEventAction)
 local t_101 = {}
 t_101.__index = t_101
 
-function t_101.new(p197) --[[ line: 20275 ]]
+function t_101.new(p197) --[[ line: 20277 ]]
 	-- upvalues: t_101 (ref)
 	return setmetatable({
 		event_name = if p197 == nil or p197.event_name == nil then nil else p197.event_name,
@@ -13292,7 +13292,7 @@ function t_101.new(p197) --[[ line: 20275 ]]
 	}, t_101)
 end
 
-function t_101:encode() --[[ line: 20284 ]]
+function t_101:encode() --[[ line: 20286 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3343 = 0
@@ -13317,7 +13317,7 @@ function t_101:encode() --[[ line: 20284 ]]
 	return buff_1
 end
 
-function t_101.decode(p198) --[[ line: 20305 ]]
+function t_101.decode(p198) --[[ line: 20307 ]]
 	-- upvalues: t_101 (ref), protoModule (ref), propTypesModule (ref)
 	local var3351 = t_101.new()
 	local var3352 = 0
@@ -13369,7 +13369,7 @@ function t_101.decode(p198) --[[ line: 20305 ]]
 	return var3351
 end
 
-function t_101:jsonEncode() --[[ line: 20353 ]]
+function t_101:jsonEncode() --[[ line: 20355 ]]
 	local t = {}
 	
 	if self.event_name ~= nil then
@@ -13381,7 +13381,7 @@ function t_101:jsonEncode() --[[ line: 20353 ]]
 	return t
 end
 
-function t_101:jsonDecode() --[[ line: 20367 ]]
+function t_101:jsonDecode() --[[ line: 20369 ]]
 	-- upvalues: t_101 (ref), propTypesModule (ref)
 	local var3371 = t_101.new()
 	
@@ -13409,7 +13409,7 @@ typeRegistryModule.default:register(t.AnalyticsEventAction_Params)
 local t_102 = {}
 t_102.__index = t_102
 
-function t_102.new(p199) --[[ line: 20405 ]]
+function t_102.new(p199) --[[ line: 20407 ]]
 	-- upvalues: t (ref), t_102 (ref)
 	return setmetatable({
 		action_type = if p199 == nil or p199.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p199.action_type,
@@ -13417,7 +13417,7 @@ function t_102.new(p199) --[[ line: 20405 ]]
 	}, t_102)
 end
 
-function t_102:encode() --[[ line: 20416 ]]
+function t_102:encode() --[[ line: 20418 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3373 = 0
@@ -13441,7 +13441,7 @@ function t_102:encode() --[[ line: 20416 ]]
 	return buff_1
 end
 
-function t_102.decode(p200) --[[ line: 20442 ]]
+function t_102.decode(p200) --[[ line: 20444 ]]
 	-- upvalues: t_102 (ref), protoModule (ref), t (ref)
 	local var3380 = t_102.new()
 	local var3381 = 0
@@ -13495,7 +13495,7 @@ function t_102.decode(p200) --[[ line: 20442 ]]
 	return var3380
 end
 
-function t_102:jsonEncode() --[[ line: 20490 ]]
+function t_102:jsonEncode() --[[ line: 20492 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -13508,7 +13508,7 @@ function t_102:jsonEncode() --[[ line: 20490 ]]
 	return t_1
 end
 
-function t_102:jsonDecode() --[[ line: 20512 ]]
+function t_102:jsonDecode() --[[ line: 20514 ]]
 	-- upvalues: t_102 (ref), t (ref)
 	local var3401 = t_102.new()
 	
@@ -13536,7 +13536,7 @@ typeRegistryModule.default:register(t.CustomAnalyticsEventAction)
 local t_103 = {}
 t_103.__index = t_103
 
-function t_103.new(p201) --[[ line: 20552 ]]
+function t_103.new(p201) --[[ line: 20554 ]]
 	-- upvalues: t_103 (ref)
 	return setmetatable({
 		event_name = if p201 == nil or p201.event_name == nil then nil else p201.event_name,
@@ -13544,7 +13544,7 @@ function t_103.new(p201) --[[ line: 20552 ]]
 	}, t_103)
 end
 
-function t_103:encode() --[[ line: 20561 ]]
+function t_103:encode() --[[ line: 20563 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3403 = 0
@@ -13569,7 +13569,7 @@ function t_103:encode() --[[ line: 20561 ]]
 	return buff_1
 end
 
-function t_103.decode(p202) --[[ line: 20582 ]]
+function t_103.decode(p202) --[[ line: 20584 ]]
 	-- upvalues: t_103 (ref), protoModule (ref), propTypesModule (ref)
 	local var3411 = t_103.new()
 	local var3412 = 0
@@ -13621,7 +13621,7 @@ function t_103.decode(p202) --[[ line: 20582 ]]
 	return var3411
 end
 
-function t_103:jsonEncode() --[[ line: 20630 ]]
+function t_103:jsonEncode() --[[ line: 20632 ]]
 	local t = {}
 	
 	if self.event_name ~= nil then
@@ -13633,7 +13633,7 @@ function t_103:jsonEncode() --[[ line: 20630 ]]
 	return t
 end
 
-function t_103:jsonDecode() --[[ line: 20644 ]]
+function t_103:jsonDecode() --[[ line: 20646 ]]
 	-- upvalues: t_103 (ref), propTypesModule (ref)
 	local var3431 = t_103.new()
 	
@@ -13661,7 +13661,7 @@ typeRegistryModule.default:register(t.CustomAnalyticsEventAction_Params)
 local t_104 = {}
 t_104.__index = t_104
 
-function t_104.new(p203) --[[ line: 20684 ]]
+function t_104.new(p203) --[[ line: 20686 ]]
 	-- upvalues: t (ref), t_104 (ref)
 	return setmetatable({
 		action_type = if p203 == nil or p203.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p203.action_type,
@@ -13669,7 +13669,7 @@ function t_104.new(p203) --[[ line: 20684 ]]
 	}, t_104)
 end
 
-function t_104:encode() --[[ line: 20693 ]]
+function t_104:encode() --[[ line: 20695 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3433 = 0
@@ -13693,7 +13693,7 @@ function t_104:encode() --[[ line: 20693 ]]
 	return buff_1
 end
 
-function t_104.decode(p204) --[[ line: 20719 ]]
+function t_104.decode(p204) --[[ line: 20721 ]]
 	-- upvalues: t_104 (ref), protoModule (ref), t (ref)
 	local var3440 = t_104.new()
 	local var3441 = 0
@@ -13747,7 +13747,7 @@ function t_104.decode(p204) --[[ line: 20719 ]]
 	return var3440
 end
 
-function t_104:jsonEncode() --[[ line: 20767 ]]
+function t_104:jsonEncode() --[[ line: 20769 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -13760,7 +13760,7 @@ function t_104:jsonEncode() --[[ line: 20767 ]]
 	return t_1
 end
 
-function t_104:jsonDecode() --[[ line: 20789 ]]
+function t_104:jsonDecode() --[[ line: 20791 ]]
 	-- upvalues: t_104 (ref), t (ref)
 	local var3461 = t_104.new()
 	
@@ -13788,7 +13788,7 @@ typeRegistryModule.default:register(t.OpenGameInviteAction)
 local t_105 = {}
 t_105.__index = t_105
 
-function t_105.new(p205) --[[ line: 20829 ]]
+function t_105.new(p205) --[[ line: 20831 ]]
 	-- upvalues: t_105 (ref)
 	return setmetatable({
 		universe_id = if p205 == nil or p205.universe_id == nil then nil else p205.universe_id,
@@ -13798,7 +13798,7 @@ function t_105.new(p205) --[[ line: 20829 ]]
 	}, t_105)
 end
 
-function t_105:encode() --[[ line: 20840 ]]
+function t_105:encode() --[[ line: 20842 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3463 = 0
@@ -13837,7 +13837,7 @@ function t_105:encode() --[[ line: 20840 ]]
 	return buff_1
 end
 
-function t_105.decode(p206) --[[ line: 20873 ]]
+function t_105.decode(p206) --[[ line: 20875 ]]
 	-- upvalues: t_105 (ref), protoModule (ref), propTypesModule (ref)
 	local var3477 = t_105.new()
 	local var3478 = 0
@@ -13899,7 +13899,7 @@ function t_105.decode(p206) --[[ line: 20873 ]]
 	return var3477
 end
 
-function t_105:jsonEncode() --[[ line: 20931 ]]
+function t_105:jsonEncode() --[[ line: 20933 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -13917,7 +13917,7 @@ function t_105:jsonEncode() --[[ line: 20931 ]]
 	return t
 end
 
-function t_105:jsonDecode() --[[ line: 20953 ]]
+function t_105:jsonDecode() --[[ line: 20955 ]]
 	-- upvalues: t_105 (ref), propTypesModule (ref)
 	local var3501 = t_105.new()
 	
@@ -13954,7 +13954,7 @@ typeRegistryModule.default:register(t.OpenGameInviteAction_Params)
 local t_106 = {}
 t_106.__index = t_106
 
-function t_106.new(p207) --[[ line: 21005 ]]
+function t_106.new(p207) --[[ line: 21007 ]]
 	-- upvalues: t (ref), t_106 (ref)
 	return setmetatable({
 		action_type = if p207 == nil or p207.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p207.action_type,
@@ -13962,7 +13962,7 @@ function t_106.new(p207) --[[ line: 21005 ]]
 	}, t_106)
 end
 
-function t_106:encode() --[[ line: 21014 ]]
+function t_106:encode() --[[ line: 21016 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3503 = 0
@@ -13986,7 +13986,7 @@ function t_106:encode() --[[ line: 21014 ]]
 	return buff_1
 end
 
-function t_106.decode(p208) --[[ line: 21040 ]]
+function t_106.decode(p208) --[[ line: 21042 ]]
 	-- upvalues: t_106 (ref), protoModule (ref), t (ref)
 	local var3510 = t_106.new()
 	local var3511 = 0
@@ -14040,7 +14040,7 @@ function t_106.decode(p208) --[[ line: 21040 ]]
 	return var3510
 end
 
-function t_106:jsonEncode() --[[ line: 21088 ]]
+function t_106:jsonEncode() --[[ line: 21090 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -14053,7 +14053,7 @@ function t_106:jsonEncode() --[[ line: 21088 ]]
 	return t_1
 end
 
-function t_106:jsonDecode() --[[ line: 21110 ]]
+function t_106:jsonDecode() --[[ line: 21112 ]]
 	-- upvalues: t_106 (ref), t (ref)
 	local var3531 = t_106.new()
 	
@@ -14081,14 +14081,14 @@ typeRegistryModule.default:register(t.LaunchExperienceAction)
 local t_107 = {}
 t_107.__index = t_107
 
-function t_107.new(p209) --[[ line: 21150 ]]
+function t_107.new(p209) --[[ line: 21152 ]]
 	-- upvalues: t_107 (ref)
 	return setmetatable({
 		kind = if p209 == nil or p209.kind == nil then nil else p209.kind
 	}, t_107)
 end
 
-function t_107:encode() --[[ line: 21158 ]]
+function t_107:encode() --[[ line: 21160 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3533 = 0
@@ -14113,7 +14113,7 @@ function t_107:encode() --[[ line: 21158 ]]
 	return buff_1
 end
 
-function t_107.decode(p210) --[[ line: 21180 ]]
+function t_107.decode(p210) --[[ line: 21182 ]]
 	-- upvalues: t_107 (ref), protoModule (ref), t (ref)
 	local var3540 = t_107.new()
 	local var3541 = 0
@@ -14168,7 +14168,7 @@ function t_107.decode(p210) --[[ line: 21180 ]]
 	return var3540
 end
 
-function t_107:jsonEncode() --[[ line: 21235 ]]
+function t_107:jsonEncode() --[[ line: 21237 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -14183,7 +14183,7 @@ function t_107:jsonEncode() --[[ line: 21235 ]]
 	return t
 end
 
-function t_107:jsonDecode() --[[ line: 21251 ]]
+function t_107:jsonDecode() --[[ line: 21253 ]]
 	-- upvalues: t_107 (ref), t (ref)
 	local var3560 = t_107.new()
 	
@@ -14211,7 +14211,7 @@ typeRegistryModule.default:register(t.LaunchExperienceAction_ExperienceJoinData)
 local t_108 = {}
 t_108.__index = t_108
 
-function t_108.new(p211) --[[ line: 21291 ]]
+function t_108.new(p211) --[[ line: 21293 ]]
 	-- upvalues: t_108 (ref)
 	return setmetatable({
 		launch_data = if p211 == nil or p211.launch_data == nil then nil else p211.launch_data,
@@ -14219,7 +14219,7 @@ function t_108.new(p211) --[[ line: 21291 ]]
 	}, t_108)
 end
 
-function t_108:encode() --[[ line: 21303 ]]
+function t_108:encode() --[[ line: 21305 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3562 = 0
@@ -14244,7 +14244,7 @@ function t_108:encode() --[[ line: 21303 ]]
 	return buff_1
 end
 
-function t_108.decode(p212) --[[ line: 21326 ]]
+function t_108.decode(p212) --[[ line: 21328 ]]
 	-- upvalues: t_108 (ref), protoModule (ref), propTypesModule (ref)
 	local var3570 = t_108.new()
 	local var3571 = 0
@@ -14296,7 +14296,7 @@ function t_108.decode(p212) --[[ line: 21326 ]]
 	return var3570
 end
 
-function t_108:jsonEncode() --[[ line: 21376 ]]
+function t_108:jsonEncode() --[[ line: 21378 ]]
 	local t = {}
 	
 	if self.launch_data ~= nil then
@@ -14308,7 +14308,7 @@ function t_108:jsonEncode() --[[ line: 21376 ]]
 	return t
 end
 
-function t_108:jsonDecode() --[[ line: 21392 ]]
+function t_108:jsonDecode() --[[ line: 21394 ]]
 	-- upvalues: t_108 (ref), propTypesModule (ref)
 	local var3590 = t_108.new()
 	
@@ -14336,7 +14336,7 @@ typeRegistryModule.default:register(t.LaunchExperienceAction_ExperienceJoinData_
 local t_109 = {}
 t_109.__index = t_109
 
-function t_109.new(p213) --[[ line: 21432 ]]
+function t_109.new(p213) --[[ line: 21434 ]]
 	-- upvalues: t_109 (ref)
 	return setmetatable({
 		place_id = if p213 == nil or p213.place_id == nil then nil else p213.place_id,
@@ -14346,7 +14346,7 @@ function t_109.new(p213) --[[ line: 21432 ]]
 	}, t_109)
 end
 
-function t_109:encode() --[[ line: 21445 ]]
+function t_109:encode() --[[ line: 21447 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3592 = 0
@@ -14385,7 +14385,7 @@ function t_109:encode() --[[ line: 21445 ]]
 	return buff_1
 end
 
-function t_109.decode(p214) --[[ line: 21478 ]]
+function t_109.decode(p214) --[[ line: 21480 ]]
 	-- upvalues: t_109 (ref), protoModule (ref), propTypesModule (ref), t (ref)
 	local var3606 = t_109.new()
 	local var3607 = 0
@@ -14447,7 +14447,7 @@ function t_109.decode(p214) --[[ line: 21478 ]]
 	return var3606
 end
 
-function t_109:jsonEncode() --[[ line: 21536 ]]
+function t_109:jsonEncode() --[[ line: 21538 ]]
 	local t = {}
 	
 	if self.place_id ~= nil then
@@ -14465,7 +14465,7 @@ function t_109:jsonEncode() --[[ line: 21536 ]]
 	return t
 end
 
-function t_109:jsonDecode() --[[ line: 21558 ]]
+function t_109:jsonDecode() --[[ line: 21560 ]]
 	-- upvalues: t_109 (ref), propTypesModule (ref), t (ref)
 	local var3630 = t_109.new()
 	
@@ -14505,7 +14505,7 @@ typeRegistryModule.default:register(t.LaunchExperienceAction_Params)
 local t_110 = {}
 t_110.__index = t_110
 
-function t_110.new(p215) --[[ line: 21615 ]]
+function t_110.new(p215) --[[ line: 21617 ]]
 	-- upvalues: t (ref), t_110 (ref)
 	return setmetatable({
 		action_type = if p215 == nil or p215.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p215.action_type,
@@ -14513,7 +14513,7 @@ function t_110.new(p215) --[[ line: 21615 ]]
 	}, t_110)
 end
 
-function t_110:encode() --[[ line: 21626 ]]
+function t_110:encode() --[[ line: 21628 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3632 = 0
@@ -14537,7 +14537,7 @@ function t_110:encode() --[[ line: 21626 ]]
 	return buff_1
 end
 
-function t_110.decode(p216) --[[ line: 21652 ]]
+function t_110.decode(p216) --[[ line: 21654 ]]
 	-- upvalues: t_110 (ref), protoModule (ref), t (ref)
 	local var3639 = t_110.new()
 	local var3640 = 0
@@ -14591,7 +14591,7 @@ function t_110.decode(p216) --[[ line: 21652 ]]
 	return var3639
 end
 
-function t_110:jsonEncode() --[[ line: 21700 ]]
+function t_110:jsonEncode() --[[ line: 21702 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -14604,7 +14604,7 @@ function t_110:jsonEncode() --[[ line: 21700 ]]
 	return t_1
 end
 
-function t_110:jsonDecode() --[[ line: 21722 ]]
+function t_110:jsonDecode() --[[ line: 21724 ]]
 	-- upvalues: t_110 (ref), t (ref)
 	local var3660 = t_110.new()
 	
@@ -14632,7 +14632,7 @@ typeRegistryModule.default:register(t.ToggleExperienceFavoriteAction)
 local t_111 = {}
 t_111.__index = t_111
 
-function t_111.new(p217) --[[ line: 21762 ]]
+function t_111.new(p217) --[[ line: 21764 ]]
 	-- upvalues: t_111 (ref)
 	return setmetatable({
 		universe_id = if p217 == nil or p217.universe_id == nil then nil else p217.universe_id,
@@ -14641,7 +14641,7 @@ function t_111.new(p217) --[[ line: 21762 ]]
 	}, t_111)
 end
 
-function t_111:encode() --[[ line: 21772 ]]
+function t_111:encode() --[[ line: 21774 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3662 = 0
@@ -14673,7 +14673,7 @@ function t_111:encode() --[[ line: 21772 ]]
 	return buff_1
 end
 
-function t_111.decode(p218) --[[ line: 21799 ]]
+function t_111.decode(p218) --[[ line: 21801 ]]
 	-- upvalues: t_111 (ref), protoModule (ref), propTypesModule (ref)
 	local var3673 = t_111.new()
 	local var3674 = 0
@@ -14730,7 +14730,7 @@ function t_111.decode(p218) --[[ line: 21799 ]]
 	return var3673
 end
 
-function t_111:jsonEncode() --[[ line: 21852 ]]
+function t_111:jsonEncode() --[[ line: 21854 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -14745,7 +14745,7 @@ function t_111:jsonEncode() --[[ line: 21852 ]]
 	return t
 end
 
-function t_111:jsonDecode() --[[ line: 21870 ]]
+function t_111:jsonDecode() --[[ line: 21872 ]]
 	-- upvalues: t_111 (ref), propTypesModule (ref)
 	local var3695 = t_111.new()
 	
@@ -14776,7 +14776,7 @@ typeRegistryModule.default:register(t.ToggleExperienceFavoriteAction_Params)
 local t_112 = {}
 t_112.__index = t_112
 
-function t_112.new(p219) --[[ line: 21913 ]]
+function t_112.new(p219) --[[ line: 21915 ]]
 	-- upvalues: t (ref), t_112 (ref)
 	return setmetatable({
 		action_type = if p219 == nil or p219.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p219.action_type,
@@ -14784,7 +14784,7 @@ function t_112.new(p219) --[[ line: 21913 ]]
 	}, t_112)
 end
 
-function t_112:encode() --[[ line: 21924 ]]
+function t_112:encode() --[[ line: 21926 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3697 = 0
@@ -14808,7 +14808,7 @@ function t_112:encode() --[[ line: 21924 ]]
 	return buff_1
 end
 
-function t_112.decode(p220) --[[ line: 21950 ]]
+function t_112.decode(p220) --[[ line: 21952 ]]
 	-- upvalues: t_112 (ref), protoModule (ref), t (ref)
 	local var3704 = t_112.new()
 	local var3705 = 0
@@ -14862,7 +14862,7 @@ function t_112.decode(p220) --[[ line: 21950 ]]
 	return var3704
 end
 
-function t_112:jsonEncode() --[[ line: 21998 ]]
+function t_112:jsonEncode() --[[ line: 22000 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -14875,7 +14875,7 @@ function t_112:jsonEncode() --[[ line: 21998 ]]
 	return t_1
 end
 
-function t_112:jsonDecode() --[[ line: 22020 ]]
+function t_112:jsonDecode() --[[ line: 22022 ]]
 	-- upvalues: t_112 (ref), t (ref)
 	local var3725 = t_112.new()
 	
@@ -14903,7 +14903,7 @@ typeRegistryModule.default:register(t.ToggleExperienceFollowAction)
 local t_113 = {}
 t_113.__index = t_113
 
-function t_113.new(p221) --[[ line: 22060 ]]
+function t_113.new(p221) --[[ line: 22062 ]]
 	-- upvalues: t_113 (ref)
 	return setmetatable({
 		universe_id = if p221 == nil or p221.universe_id == nil then nil else p221.universe_id,
@@ -14912,7 +14912,7 @@ function t_113.new(p221) --[[ line: 22060 ]]
 	}, t_113)
 end
 
-function t_113:encode() --[[ line: 22070 ]]
+function t_113:encode() --[[ line: 22072 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3727 = 0
@@ -14944,7 +14944,7 @@ function t_113:encode() --[[ line: 22070 ]]
 	return buff_1
 end
 
-function t_113.decode(p222) --[[ line: 22097 ]]
+function t_113.decode(p222) --[[ line: 22099 ]]
 	-- upvalues: t_113 (ref), protoModule (ref), propTypesModule (ref)
 	local var3738 = t_113.new()
 	local var3739 = 0
@@ -15001,7 +15001,7 @@ function t_113.decode(p222) --[[ line: 22097 ]]
 	return var3738
 end
 
-function t_113:jsonEncode() --[[ line: 22150 ]]
+function t_113:jsonEncode() --[[ line: 22152 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -15016,7 +15016,7 @@ function t_113:jsonEncode() --[[ line: 22150 ]]
 	return t
 end
 
-function t_113:jsonDecode() --[[ line: 22168 ]]
+function t_113:jsonDecode() --[[ line: 22170 ]]
 	-- upvalues: t_113 (ref), propTypesModule (ref)
 	local var3760 = t_113.new()
 	
@@ -15047,7 +15047,7 @@ typeRegistryModule.default:register(t.ToggleExperienceFollowAction_Params)
 local t_114 = {}
 t_114.__index = t_114
 
-function t_114.new(p223) --[[ line: 22211 ]]
+function t_114.new(p223) --[[ line: 22213 ]]
 	-- upvalues: t (ref), t_114 (ref)
 	return setmetatable({
 		action_type = if p223 == nil or p223.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p223.action_type,
@@ -15055,7 +15055,7 @@ function t_114.new(p223) --[[ line: 22211 ]]
 	}, t_114)
 end
 
-function t_114:encode() --[[ line: 22222 ]]
+function t_114:encode() --[[ line: 22224 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3762 = 0
@@ -15079,7 +15079,7 @@ function t_114:encode() --[[ line: 22222 ]]
 	return buff_1
 end
 
-function t_114.decode(p224) --[[ line: 22248 ]]
+function t_114.decode(p224) --[[ line: 22250 ]]
 	-- upvalues: t_114 (ref), protoModule (ref), t (ref)
 	local var3769 = t_114.new()
 	local var3770 = 0
@@ -15133,7 +15133,7 @@ function t_114.decode(p224) --[[ line: 22248 ]]
 	return var3769
 end
 
-function t_114:jsonEncode() --[[ line: 22296 ]]
+function t_114:jsonEncode() --[[ line: 22298 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -15146,7 +15146,7 @@ function t_114:jsonEncode() --[[ line: 22296 ]]
 	return t_1
 end
 
-function t_114:jsonDecode() --[[ line: 22318 ]]
+function t_114:jsonDecode() --[[ line: 22320 ]]
 	-- upvalues: t_114 (ref), t (ref)
 	local var3790 = t_114.new()
 	
@@ -15174,7 +15174,7 @@ typeRegistryModule.default:register(t.ToggleExperienceVoteAction)
 local t_115 = {}
 t_115.__index = t_115
 
-function t_115.new(p225) --[[ line: 22358 ]]
+function t_115.new(p225) --[[ line: 22360 ]]
 	-- upvalues: t_115 (ref)
 	return setmetatable({
 		universe_id = if p225 == nil or p225.universe_id == nil then nil else p225.universe_id,
@@ -15184,7 +15184,7 @@ function t_115.new(p225) --[[ line: 22358 ]]
 	}, t_115)
 end
 
-function t_115:encode() --[[ line: 22369 ]]
+function t_115:encode() --[[ line: 22371 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3792 = 0
@@ -15223,7 +15223,7 @@ function t_115:encode() --[[ line: 22369 ]]
 	return buff_1
 end
 
-function t_115.decode(p226) --[[ line: 22402 ]]
+function t_115.decode(p226) --[[ line: 22404 ]]
 	-- upvalues: t_115 (ref), protoModule (ref), propTypesModule (ref)
 	local var3806 = t_115.new()
 	local var3807 = 0
@@ -15285,7 +15285,7 @@ function t_115.decode(p226) --[[ line: 22402 ]]
 	return var3806
 end
 
-function t_115:jsonEncode() --[[ line: 22460 ]]
+function t_115:jsonEncode() --[[ line: 22462 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -15303,7 +15303,7 @@ function t_115:jsonEncode() --[[ line: 22460 ]]
 	return t
 end
 
-function t_115:jsonDecode() --[[ line: 22482 ]]
+function t_115:jsonDecode() --[[ line: 22484 ]]
 	-- upvalues: t_115 (ref), propTypesModule (ref)
 	local var3830 = t_115.new()
 	
@@ -15340,7 +15340,7 @@ typeRegistryModule.default:register(t.ToggleExperienceVoteAction_Params)
 local t_116 = {}
 t_116.__index = t_116
 
-function t_116.new(p227) --[[ line: 22535 ]]
+function t_116.new(p227) --[[ line: 22537 ]]
 	-- upvalues: t (ref), t_116 (ref)
 	return setmetatable({
 		action_type = if p227 == nil or p227.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p227.action_type,
@@ -15348,7 +15348,7 @@ function t_116.new(p227) --[[ line: 22535 ]]
 	}, t_116)
 end
 
-function t_116:encode() --[[ line: 22544 ]]
+function t_116:encode() --[[ line: 22546 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var3832 = 0
@@ -15372,7 +15372,7 @@ function t_116:encode() --[[ line: 22544 ]]
 	return buff_1
 end
 
-function t_116.decode(p228) --[[ line: 22570 ]]
+function t_116.decode(p228) --[[ line: 22572 ]]
 	-- upvalues: t_116 (ref), protoModule (ref), t (ref)
 	local var3839 = t_116.new()
 	local var3840 = 0
@@ -15426,7 +15426,7 @@ function t_116.decode(p228) --[[ line: 22570 ]]
 	return var3839
 end
 
-function t_116:jsonEncode() --[[ line: 22618 ]]
+function t_116:jsonEncode() --[[ line: 22620 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -15439,7 +15439,7 @@ function t_116:jsonEncode() --[[ line: 22618 ]]
 	return t_1
 end
 
-function t_116:jsonDecode() --[[ line: 22640 ]]
+function t_116:jsonDecode() --[[ line: 22642 ]]
 	-- upvalues: t_116 (ref), t (ref)
 	local var3860 = t_116.new()
 	
@@ -15467,14 +15467,14 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction)
 local t_117 = {}
 t_117.__index = t_117
 
-function t_117.new(p229) --[[ line: 22680 ]]
+function t_117.new(p229) --[[ line: 22682 ]]
 	-- upvalues: t_117 (ref)
 	return setmetatable({
 		kind = if p229 == nil or p229.kind == nil then nil else p229.kind
 	}, t_117)
 end
 
-function t_117:encode() --[[ line: 22688 ]]
+function t_117:encode() --[[ line: 22690 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3862 = 0
@@ -15499,7 +15499,7 @@ function t_117:encode() --[[ line: 22688 ]]
 	return buff_1
 end
 
-function t_117.decode(p230) --[[ line: 22708 ]]
+function t_117.decode(p230) --[[ line: 22710 ]]
 	-- upvalues: t_117 (ref), protoModule (ref), t (ref)
 	local var3869 = t_117.new()
 	local var3870 = 0
@@ -15554,7 +15554,7 @@ function t_117.decode(p230) --[[ line: 22708 ]]
 	return var3869
 end
 
-function t_117:jsonEncode() --[[ line: 22759 ]]
+function t_117:jsonEncode() --[[ line: 22761 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -15569,7 +15569,7 @@ function t_117:jsonEncode() --[[ line: 22759 ]]
 	return t
 end
 
-function t_117:jsonDecode() --[[ line: 22773 ]]
+function t_117:jsonDecode() --[[ line: 22775 ]]
 	-- upvalues: t_117 (ref), t (ref)
 	local var3889 = t_117.new()
 	
@@ -15597,7 +15597,7 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_ProductPayload)
 local t_118 = {}
 t_118.__index = t_118
 
-function t_118.new(p231) --[[ line: 22813 ]]
+function t_118.new(p231) --[[ line: 22815 ]]
 	-- upvalues: t_118 (ref)
 	return setmetatable({
 		kind = if p231 == nil or p231.kind == nil then nil else p231.kind,
@@ -15613,7 +15613,7 @@ function t_118.new(p231) --[[ line: 22813 ]]
 	}, t_118)
 end
 
-function t_118:encode() --[[ line: 22839 ]]
+function t_118:encode() --[[ line: 22841 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3891 = 0
@@ -15694,7 +15694,7 @@ function t_118:encode() --[[ line: 22839 ]]
 	return buff_1
 end
 
-function t_118.decode(p232) --[[ line: 22910 ]]
+function t_118.decode(p232) --[[ line: 22912 ]]
 	-- upvalues: t_118 (ref), protoModule (ref), propTypesModule (ref)
 	local var3923 = t_118.new()
 	local var3924 = 0
@@ -15786,7 +15786,7 @@ function t_118.decode(p232) --[[ line: 22910 ]]
 	return var3923
 end
 
-function t_118:jsonEncode() --[[ line: 23001 ]]
+function t_118:jsonEncode() --[[ line: 23003 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -15822,7 +15822,7 @@ function t_118:jsonEncode() --[[ line: 23001 ]]
 	return t
 end
 
-function t_118:jsonDecode() --[[ line: 23049 ]]
+function t_118:jsonDecode() --[[ line: 23051 ]]
 	-- upvalues: t_118 (ref), propTypesModule (ref)
 	local var3959 = t_118.new()
 	
@@ -15889,14 +15889,14 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_ProductPayload_Pr
 local t_119 = {}
 t_119.__index = t_119
 
-function t_119.new(p233) --[[ line: 23153 ]]
+function t_119.new(p233) --[[ line: 23155 ]]
 	-- upvalues: t_119 (ref)
 	return setmetatable({
 		kind = if p233 == nil or p233.kind == nil then nil else p233.kind
 	}, t_119)
 end
 
-function t_119:encode() --[[ line: 23161 ]]
+function t_119:encode() --[[ line: 23163 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3961 = 0
@@ -15921,7 +15921,7 @@ function t_119:encode() --[[ line: 23161 ]]
 	return buff_1
 end
 
-function t_119.decode(p234) --[[ line: 23181 ]]
+function t_119.decode(p234) --[[ line: 23183 ]]
 	-- upvalues: t_119 (ref), protoModule (ref), t (ref)
 	local var3968 = t_119.new()
 	local var3969 = 0
@@ -15976,7 +15976,7 @@ function t_119.decode(p234) --[[ line: 23181 ]]
 	return var3968
 end
 
-function t_119:jsonEncode() --[[ line: 23232 ]]
+function t_119:jsonEncode() --[[ line: 23234 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -15991,7 +15991,7 @@ function t_119:jsonEncode() --[[ line: 23232 ]]
 	return t
 end
 
-function t_119:jsonDecode() --[[ line: 23246 ]]
+function t_119:jsonDecode() --[[ line: 23248 ]]
 	-- upvalues: t_119 (ref), t (ref)
 	local var3988 = t_119.new()
 	
@@ -16019,7 +16019,7 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_DisplayInfo)
 local t_120 = {}
 t_120.__index = t_120
 
-function t_120.new(p235) --[[ line: 23284 ]]
+function t_120.new(p235) --[[ line: 23286 ]]
 	-- upvalues: t_120 (ref)
 	return setmetatable({
 		product_name = if p235 == nil or p235.product_name == nil then nil else p235.product_name,
@@ -16037,7 +16037,7 @@ function t_120.new(p235) --[[ line: 23284 ]]
 	}, t_120)
 end
 
-function t_120:encode() --[[ line: 23312 ]]
+function t_120:encode() --[[ line: 23314 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var3990 = 0
@@ -16132,7 +16132,7 @@ function t_120:encode() --[[ line: 23312 ]]
 	return buff_1
 end
 
-function t_120.decode(p236) --[[ line: 23395 ]]
+function t_120.decode(p236) --[[ line: 23397 ]]
 	-- upvalues: t_120 (ref), protoModule (ref), propTypesModule (ref)
 	local var4028 = t_120.new()
 	local var4029 = 0
@@ -16234,7 +16234,7 @@ function t_120.decode(p236) --[[ line: 23395 ]]
 	return var4028
 end
 
-function t_120:jsonEncode() --[[ line: 23496 ]]
+function t_120:jsonEncode() --[[ line: 23498 ]]
 	local t = {}
 	
 	if self.product_name ~= nil then
@@ -16276,7 +16276,7 @@ function t_120:jsonEncode() --[[ line: 23496 ]]
 	return t
 end
 
-function t_120:jsonDecode() --[[ line: 23552 ]]
+function t_120:jsonDecode() --[[ line: 23554 ]]
 	-- upvalues: t_120 (ref), propTypesModule (ref)
 	local var4068 = t_120.new()
 	
@@ -16361,14 +16361,14 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_DisplayInfo_Displ
 local t_121 = {}
 t_121.__index = t_121
 
-function t_121.new(p237) --[[ line: 23686 ]]
+function t_121.new(p237) --[[ line: 23688 ]]
 	-- upvalues: t_121 (ref)
 	return setmetatable({
 		kind = if p237 == nil or p237.kind == nil then nil else p237.kind
 	}, t_121)
 end
 
-function t_121:encode() --[[ line: 23694 ]]
+function t_121:encode() --[[ line: 23696 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4070 = 0
@@ -16393,7 +16393,7 @@ function t_121:encode() --[[ line: 23694 ]]
 	return buff_1
 end
 
-function t_121.decode(p238) --[[ line: 23716 ]]
+function t_121.decode(p238) --[[ line: 23718 ]]
 	-- upvalues: t_121 (ref), protoModule (ref), t (ref)
 	local var4077 = t_121.new()
 	local var4078 = 0
@@ -16448,7 +16448,7 @@ function t_121.decode(p238) --[[ line: 23716 ]]
 	return var4077
 end
 
-function t_121:jsonEncode() --[[ line: 23769 ]]
+function t_121:jsonEncode() --[[ line: 23771 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -16463,7 +16463,7 @@ function t_121:jsonEncode() --[[ line: 23769 ]]
 	return t
 end
 
-function t_121:jsonDecode() --[[ line: 23785 ]]
+function t_121:jsonDecode() --[[ line: 23787 ]]
 	-- upvalues: t_121 (ref), t (ref)
 	local var4097 = t_121.new()
 	
@@ -16491,7 +16491,7 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseOptions)
 local t_122 = {}
 t_122.__index = t_122
 
-function t_122.new(p239) --[[ line: 23825 ]]
+function t_122.new(p239) --[[ line: 23827 ]]
 	-- upvalues: t_122 (ref)
 	return setmetatable({
 		should_skip_ownership_check = if p239 == nil or p239.should_skip_ownership_check == nil then nil else p239.should_skip_ownership_check,
@@ -16504,7 +16504,7 @@ function t_122.new(p239) --[[ line: 23825 ]]
 	}, t_122)
 end
 
-function t_122:encode() --[[ line: 23857 ]]
+function t_122:encode() --[[ line: 23859 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4099 = 0
@@ -16564,7 +16564,7 @@ function t_122:encode() --[[ line: 23857 ]]
 	return buff_1
 end
 
-function t_122.decode(p240) --[[ line: 23910 ]]
+function t_122.decode(p240) --[[ line: 23912 ]]
 	-- upvalues: t_122 (ref), protoModule (ref), propTypesModule (ref)
 	local var4122 = t_122.new()
 	local var4123 = 0
@@ -16641,7 +16641,7 @@ function t_122.decode(p240) --[[ line: 23910 ]]
 	return var4122
 end
 
-function t_122:jsonEncode() --[[ line: 23991 ]]
+function t_122:jsonEncode() --[[ line: 23993 ]]
 	local t = {}
 	
 	if self.should_skip_ownership_check ~= nil then
@@ -16668,7 +16668,7 @@ function t_122:jsonEncode() --[[ line: 23991 ]]
 	return t
 end
 
-function t_122:jsonDecode() --[[ line: 24027 ]]
+function t_122:jsonDecode() --[[ line: 24029 ]]
 	-- upvalues: t_122 (ref), propTypesModule (ref)
 	local var4152 = t_122.new()
 	
@@ -16726,14 +16726,14 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseOptions_P
 local t_123 = {}
 t_123.__index = t_123
 
-function t_123.new(p241) --[[ line: 24126 ]]
+function t_123.new(p241) --[[ line: 24128 ]]
 	-- upvalues: t_123 (ref)
 	return setmetatable({
 		kind = if p241 == nil or p241.kind == nil then nil else p241.kind
 	}, t_123)
 end
 
-function t_123:encode() --[[ line: 24137 ]]
+function t_123:encode() --[[ line: 24139 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4154 = 0
@@ -16758,7 +16758,7 @@ function t_123:encode() --[[ line: 24137 ]]
 	return buff_1
 end
 
-function t_123.decode(p242) --[[ line: 24159 ]]
+function t_123.decode(p242) --[[ line: 24161 ]]
 	-- upvalues: t_123 (ref), protoModule (ref), t (ref)
 	local var4161 = t_123.new()
 	local var4162 = 0
@@ -16813,7 +16813,7 @@ function t_123.decode(p242) --[[ line: 24159 ]]
 	return var4161
 end
 
-function t_123:jsonEncode() --[[ line: 24214 ]]
+function t_123:jsonEncode() --[[ line: 24216 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -16828,7 +16828,7 @@ function t_123:jsonEncode() --[[ line: 24214 ]]
 	return t
 end
 
-function t_123:jsonDecode() --[[ line: 24230 ]]
+function t_123:jsonDecode() --[[ line: 24232 ]]
 	-- upvalues: t_123 (ref), t (ref)
 	local var4181 = t_123.new()
 	
@@ -16856,7 +16856,7 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseAnalytics
 local t_124 = {}
 t_124.__index = t_124
 
-function t_124.new(p243) --[[ line: 24271 ]]
+function t_124.new(p243) --[[ line: 24273 ]]
 	-- upvalues: t_124 (ref)
 	return setmetatable({
 		surface = if p243 == nil or p243.surface == nil then nil else p243.surface,
@@ -16864,7 +16864,7 @@ function t_124.new(p243) --[[ line: 24271 ]]
 	}, t_124)
 end
 
-function t_124:encode() --[[ line: 24285 ]]
+function t_124:encode() --[[ line: 24287 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4183 = 0
@@ -16889,7 +16889,7 @@ function t_124:encode() --[[ line: 24285 ]]
 	return buff_1
 end
 
-function t_124.decode(p244) --[[ line: 24308 ]]
+function t_124.decode(p244) --[[ line: 24310 ]]
 	-- upvalues: t_124 (ref), protoModule (ref), propTypesModule (ref)
 	local var4191 = t_124.new()
 	local var4192 = 0
@@ -16941,7 +16941,7 @@ function t_124.decode(p244) --[[ line: 24308 ]]
 	return var4191
 end
 
-function t_124:jsonEncode() --[[ line: 24359 ]]
+function t_124:jsonEncode() --[[ line: 24361 ]]
 	local t = {}
 	
 	if self.surface ~= nil then
@@ -16953,7 +16953,7 @@ function t_124:jsonEncode() --[[ line: 24359 ]]
 	return t
 end
 
-function t_124:jsonDecode() --[[ line: 24375 ]]
+function t_124:jsonDecode() --[[ line: 24377 ]]
 	-- upvalues: t_124 (ref), propTypesModule (ref)
 	local var4211 = t_124.new()
 	
@@ -16978,7 +16978,7 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_PurchaseAnalytics
 local t_125 = {}
 t_125.__index = t_125
 
-function t_125.new(p245) --[[ line: 24416 ]]
+function t_125.new(p245) --[[ line: 24418 ]]
 	-- upvalues: t_125 (ref)
 	return setmetatable({
 		product_payload = if p245 == nil or p245.product_payload == nil then nil else p245.product_payload,
@@ -16989,7 +16989,7 @@ function t_125.new(p245) --[[ line: 24416 ]]
 	}, t_125)
 end
 
-function t_125:encode() --[[ line: 24430 ]]
+function t_125:encode() --[[ line: 24432 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4213 = 0
@@ -17035,7 +17035,7 @@ function t_125:encode() --[[ line: 24430 ]]
 	return buff_1
 end
 
-function t_125.decode(p246) --[[ line: 24469 ]]
+function t_125.decode(p246) --[[ line: 24471 ]]
 	-- upvalues: t_125 (ref), protoModule (ref), t (ref), propTypesModule (ref)
 	local var4230 = t_125.new()
 	local var4231 = 0
@@ -17102,7 +17102,7 @@ function t_125.decode(p246) --[[ line: 24469 ]]
 	return var4230
 end
 
-function t_125:jsonEncode() --[[ line: 24533 ]]
+function t_125:jsonEncode() --[[ line: 24535 ]]
 	local t = {}
 	
 	if self.product_payload ~= nil then
@@ -17123,7 +17123,7 @@ function t_125:jsonEncode() --[[ line: 24533 ]]
 	return t
 end
 
-function t_125:jsonDecode() --[[ line: 24559 ]]
+function t_125:jsonDecode() --[[ line: 24561 ]]
 	-- upvalues: t_125 (ref), t (ref), propTypesModule (ref)
 	local var4256 = t_125.new()
 	
@@ -17169,7 +17169,7 @@ typeRegistryModule.default:register(t.OpenPurchasePromptAction_Params)
 local t_126 = {}
 t_126.__index = t_126
 
-function t_126.new(p247) --[[ line: 24624 ]]
+function t_126.new(p247) --[[ line: 24626 ]]
 	-- upvalues: t (ref), t_126 (ref)
 	return setmetatable({
 		action_type = if p247 == nil or p247.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p247.action_type,
@@ -17177,7 +17177,7 @@ function t_126.new(p247) --[[ line: 24624 ]]
 	}, t_126)
 end
 
-function t_126:encode() --[[ line: 24635 ]]
+function t_126:encode() --[[ line: 24637 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4258 = 0
@@ -17201,7 +17201,7 @@ function t_126:encode() --[[ line: 24635 ]]
 	return buff_1
 end
 
-function t_126.decode(p248) --[[ line: 24661 ]]
+function t_126.decode(p248) --[[ line: 24663 ]]
 	-- upvalues: t_126 (ref), protoModule (ref), t (ref)
 	local var4265 = t_126.new()
 	local var4266 = 0
@@ -17255,7 +17255,7 @@ function t_126.decode(p248) --[[ line: 24661 ]]
 	return var4265
 end
 
-function t_126:jsonEncode() --[[ line: 24709 ]]
+function t_126:jsonEncode() --[[ line: 24711 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -17268,7 +17268,7 @@ function t_126:jsonEncode() --[[ line: 24709 ]]
 	return t_1
 end
 
-function t_126:jsonDecode() --[[ line: 24731 ]]
+function t_126:jsonDecode() --[[ line: 24733 ]]
 	-- upvalues: t_126 (ref), t (ref)
 	local var4286 = t_126.new()
 	
@@ -17296,7 +17296,7 @@ typeRegistryModule.default:register(t.ReportSurfaceLoadTimeMilestoneAction)
 local t_127 = {}
 t_127.__index = t_127
 
-function t_127.new(p249) --[[ line: 24773 ]]
+function t_127.new(p249) --[[ line: 24775 ]]
 	-- upvalues: t_127 (ref)
 	return setmetatable({
 		milestone = if p249 == nil or p249.milestone == nil then nil else p249.milestone,
@@ -17304,7 +17304,7 @@ function t_127.new(p249) --[[ line: 24773 ]]
 	}, t_127)
 end
 
-function t_127:encode() --[[ line: 24782 ]]
+function t_127:encode() --[[ line: 24784 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4288 = 0
@@ -17329,7 +17329,7 @@ function t_127:encode() --[[ line: 24782 ]]
 	return buff_1
 end
 
-function t_127.decode(p250) --[[ line: 24805 ]]
+function t_127.decode(p250) --[[ line: 24807 ]]
 	-- upvalues: t_127 (ref), protoModule (ref), propTypesModule (ref)
 	local var4296 = t_127.new()
 	local var4297 = 0
@@ -17381,7 +17381,7 @@ function t_127.decode(p250) --[[ line: 24805 ]]
 	return var4296
 end
 
-function t_127:jsonEncode() --[[ line: 24855 ]]
+function t_127:jsonEncode() --[[ line: 24857 ]]
 	local t = {}
 	
 	if self.milestone ~= nil then
@@ -17393,7 +17393,7 @@ function t_127:jsonEncode() --[[ line: 24855 ]]
 	return t
 end
 
-function t_127:jsonDecode() --[[ line: 24871 ]]
+function t_127:jsonDecode() --[[ line: 24873 ]]
 	-- upvalues: t_127 (ref), propTypesModule (ref)
 	local var4316 = t_127.new()
 	
@@ -17415,7 +17415,7 @@ typeRegistryModule.default:register(t.ReportSurfaceLoadTimeMilestoneAction_Param
 local t_128 = {}
 t_128.__index = t_128
 
-function t_128.new(p251) --[[ line: 24901 ]]
+function t_128.new(p251) --[[ line: 24903 ]]
 	-- upvalues: t (ref), t_128 (ref)
 	return setmetatable({
 		action_type = if p251 == nil or p251.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p251.action_type,
@@ -17423,7 +17423,7 @@ function t_128.new(p251) --[[ line: 24901 ]]
 	}, t_128)
 end
 
-function t_128:encode() --[[ line: 24912 ]]
+function t_128:encode() --[[ line: 24914 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4318 = 0
@@ -17447,7 +17447,7 @@ function t_128:encode() --[[ line: 24912 ]]
 	return buff_1
 end
 
-function t_128.decode(p252) --[[ line: 24938 ]]
+function t_128.decode(p252) --[[ line: 24940 ]]
 	-- upvalues: t_128 (ref), protoModule (ref), t (ref)
 	local var4325 = t_128.new()
 	local var4326 = 0
@@ -17501,7 +17501,7 @@ function t_128.decode(p252) --[[ line: 24938 ]]
 	return var4325
 end
 
-function t_128:jsonEncode() --[[ line: 24986 ]]
+function t_128:jsonEncode() --[[ line: 24988 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -17514,7 +17514,7 @@ function t_128:jsonEncode() --[[ line: 24986 ]]
 	return t_1
 end
 
-function t_128:jsonDecode() --[[ line: 25008 ]]
+function t_128:jsonDecode() --[[ line: 25010 ]]
 	-- upvalues: t_128 (ref), t (ref)
 	local var4346 = t_128.new()
 	
@@ -17542,14 +17542,14 @@ typeRegistryModule.default:register(t.DismissGameFeedbackAction)
 local t_129 = {}
 t_129.__index = t_129
 
-function t_129.new(p253) --[[ line: 25048 ]]
+function t_129.new(p253) --[[ line: 25050 ]]
 	-- upvalues: t_129 (ref)
 	return setmetatable({
 		root_place_id = if p253 == nil or p253.root_place_id == nil then nil else p253.root_place_id
 	}, t_129)
 end
 
-function t_129:encode() --[[ line: 25056 ]]
+function t_129:encode() --[[ line: 25058 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4348 = 0
@@ -17567,7 +17567,7 @@ function t_129:encode() --[[ line: 25056 ]]
 	return buff_1
 end
 
-function t_129.decode(p254) --[[ line: 25071 ]]
+function t_129.decode(p254) --[[ line: 25073 ]]
 	-- upvalues: t_129 (ref), protoModule (ref), propTypesModule (ref)
 	local var4353 = t_129.new()
 	local var4354 = 0
@@ -17614,7 +17614,7 @@ function t_129.decode(p254) --[[ line: 25071 ]]
 	return var4353
 end
 
-function t_129:jsonEncode() --[[ line: 25114 ]]
+function t_129:jsonEncode() --[[ line: 25116 ]]
 	local t = {}
 	
 	if self.root_place_id ~= nil then
@@ -17623,7 +17623,7 @@ function t_129:jsonEncode() --[[ line: 25114 ]]
 	return t
 end
 
-function t_129:jsonDecode() --[[ line: 25124 ]]
+function t_129:jsonDecode() --[[ line: 25126 ]]
 	-- upvalues: t_129 (ref), propTypesModule (ref)
 	local var4371 = t_129.new()
 	
@@ -17645,7 +17645,7 @@ typeRegistryModule.default:register(t.DismissGameFeedbackAction_Params)
 local t_130 = {}
 t_130.__index = t_130
 
-function t_130.new(p255) --[[ line: 25156 ]]
+function t_130.new(p255) --[[ line: 25158 ]]
 	-- upvalues: t (ref), t_130 (ref)
 	return setmetatable({
 		action_type = if p255 == nil or p255.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p255.action_type,
@@ -17653,7 +17653,7 @@ function t_130.new(p255) --[[ line: 25156 ]]
 	}, t_130)
 end
 
-function t_130:encode() --[[ line: 25167 ]]
+function t_130:encode() --[[ line: 25169 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4373 = 0
@@ -17677,7 +17677,7 @@ function t_130:encode() --[[ line: 25167 ]]
 	return buff_1
 end
 
-function t_130.decode(p256) --[[ line: 25193 ]]
+function t_130.decode(p256) --[[ line: 25195 ]]
 	-- upvalues: t_130 (ref), protoModule (ref), t (ref)
 	local var4380 = t_130.new()
 	local var4381 = 0
@@ -17731,7 +17731,7 @@ function t_130.decode(p256) --[[ line: 25193 ]]
 	return var4380
 end
 
-function t_130:jsonEncode() --[[ line: 25241 ]]
+function t_130:jsonEncode() --[[ line: 25243 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -17744,7 +17744,7 @@ function t_130:jsonEncode() --[[ line: 25241 ]]
 	return t_1
 end
 
-function t_130:jsonDecode() --[[ line: 25263 ]]
+function t_130:jsonDecode() --[[ line: 25265 ]]
 	-- upvalues: t_130 (ref), t (ref)
 	local var4401 = t_130.new()
 	
@@ -17772,7 +17772,7 @@ typeRegistryModule.default:register(t.OpenGameFeedbackFormAction)
 local t_131 = {}
 t_131.__index = t_131
 
-function t_131.new(p257) --[[ line: 25303 ]]
+function t_131.new(p257) --[[ line: 25305 ]]
 	-- upvalues: t_131 (ref)
 	return setmetatable({
 		universe_id = if p257 == nil or p257.universe_id == nil then nil else p257.universe_id,
@@ -17780,7 +17780,7 @@ function t_131.new(p257) --[[ line: 25303 ]]
 	}, t_131)
 end
 
-function t_131:encode() --[[ line: 25312 ]]
+function t_131:encode() --[[ line: 25314 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4403 = 0
@@ -17805,7 +17805,7 @@ function t_131:encode() --[[ line: 25312 ]]
 	return buff_1
 end
 
-function t_131.decode(p258) --[[ line: 25333 ]]
+function t_131.decode(p258) --[[ line: 25335 ]]
 	-- upvalues: t_131 (ref), protoModule (ref), propTypesModule (ref)
 	local var4411 = t_131.new()
 	local var4412 = 0
@@ -17857,7 +17857,7 @@ function t_131.decode(p258) --[[ line: 25333 ]]
 	return var4411
 end
 
-function t_131:jsonEncode() --[[ line: 25381 ]]
+function t_131:jsonEncode() --[[ line: 25383 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -17869,7 +17869,7 @@ function t_131:jsonEncode() --[[ line: 25381 ]]
 	return t
 end
 
-function t_131:jsonDecode() --[[ line: 25395 ]]
+function t_131:jsonDecode() --[[ line: 25397 ]]
 	-- upvalues: t_131 (ref), propTypesModule (ref)
 	local var4431 = t_131.new()
 	
@@ -17897,7 +17897,7 @@ typeRegistryModule.default:register(t.OpenGameFeedbackFormAction_Params)
 local t_132 = {}
 t_132.__index = t_132
 
-function t_132.new(p259) --[[ line: 25436 ]]
+function t_132.new(p259) --[[ line: 25438 ]]
 	-- upvalues: t (ref), t_132 (ref)
 	return setmetatable({
 		action_type = if p259 == nil or p259.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p259.action_type,
@@ -17905,7 +17905,7 @@ function t_132.new(p259) --[[ line: 25436 ]]
 	}, t_132)
 end
 
-function t_132:encode() --[[ line: 25445 ]]
+function t_132:encode() --[[ line: 25447 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4433 = 0
@@ -17929,7 +17929,7 @@ function t_132:encode() --[[ line: 25445 ]]
 	return buff_1
 end
 
-function t_132.decode(p260) --[[ line: 25471 ]]
+function t_132.decode(p260) --[[ line: 25473 ]]
 	-- upvalues: t_132 (ref), protoModule (ref), t (ref)
 	local var4440 = t_132.new()
 	local var4441 = 0
@@ -17983,7 +17983,7 @@ function t_132.decode(p260) --[[ line: 25471 ]]
 	return var4440
 end
 
-function t_132:jsonEncode() --[[ line: 25519 ]]
+function t_132:jsonEncode() --[[ line: 25521 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -17996,7 +17996,7 @@ function t_132:jsonEncode() --[[ line: 25519 ]]
 	return t_1
 end
 
-function t_132:jsonDecode() --[[ line: 25541 ]]
+function t_132:jsonDecode() --[[ line: 25543 ]]
 	-- upvalues: t_132 (ref), t (ref)
 	local var4461 = t_132.new()
 	
@@ -18024,7 +18024,7 @@ typeRegistryModule.default:register(t.AiOverviewFeedbackAction)
 local t_133 = {}
 t_133.__index = t_133
 
-function t_133.new(p261) --[[ line: 25581 ]]
+function t_133.new(p261) --[[ line: 25583 ]]
 	-- upvalues: t_133 (ref)
 	return setmetatable({
 		sentiment = if p261 == nil or p261.sentiment == nil then nil else p261.sentiment,
@@ -18034,7 +18034,7 @@ function t_133.new(p261) --[[ line: 25581 ]]
 	}, t_133)
 end
 
-function t_133:encode() --[[ line: 25592 ]]
+function t_133:encode() --[[ line: 25594 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4463 = 0
@@ -18073,7 +18073,7 @@ function t_133:encode() --[[ line: 25592 ]]
 	return buff_1
 end
 
-function t_133.decode(p262) --[[ line: 25625 ]]
+function t_133.decode(p262) --[[ line: 25627 ]]
 	-- upvalues: t_133 (ref), protoModule (ref), propTypesModule (ref)
 	local var4477 = t_133.new()
 	local var4478 = 0
@@ -18135,7 +18135,7 @@ function t_133.decode(p262) --[[ line: 25625 ]]
 	return var4477
 end
 
-function t_133:jsonEncode() --[[ line: 25683 ]]
+function t_133:jsonEncode() --[[ line: 25685 ]]
 	local t = {}
 	
 	if self.sentiment ~= nil then
@@ -18153,7 +18153,7 @@ function t_133:jsonEncode() --[[ line: 25683 ]]
 	return t
 end
 
-function t_133:jsonDecode() --[[ line: 25705 ]]
+function t_133:jsonDecode() --[[ line: 25707 ]]
 	-- upvalues: t_133 (ref), propTypesModule (ref)
 	local var4501 = t_133.new()
 	
@@ -18190,7 +18190,7 @@ typeRegistryModule.default:register(t.AiOverviewFeedbackAction_Params)
 local t_134 = {}
 t_134.__index = t_134
 
-function t_134.new(p263) --[[ line: 25758 ]]
+function t_134.new(p263) --[[ line: 25760 ]]
 	-- upvalues: t (ref), t_134 (ref)
 	return setmetatable({
 		action_type = if p263 == nil or p263.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p263.action_type,
@@ -18198,7 +18198,7 @@ function t_134.new(p263) --[[ line: 25758 ]]
 	}, t_134)
 end
 
-function t_134:encode() --[[ line: 25769 ]]
+function t_134:encode() --[[ line: 25771 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4503 = 0
@@ -18222,7 +18222,7 @@ function t_134:encode() --[[ line: 25769 ]]
 	return buff_1
 end
 
-function t_134.decode(p264) --[[ line: 25795 ]]
+function t_134.decode(p264) --[[ line: 25797 ]]
 	-- upvalues: t_134 (ref), protoModule (ref), t (ref)
 	local var4510 = t_134.new()
 	local var4511 = 0
@@ -18276,7 +18276,7 @@ function t_134.decode(p264) --[[ line: 25795 ]]
 	return var4510
 end
 
-function t_134:jsonEncode() --[[ line: 25843 ]]
+function t_134:jsonEncode() --[[ line: 25845 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -18289,7 +18289,7 @@ function t_134:jsonEncode() --[[ line: 25843 ]]
 	return t_1
 end
 
-function t_134:jsonDecode() --[[ line: 25865 ]]
+function t_134:jsonDecode() --[[ line: 25867 ]]
 	-- upvalues: t_134 (ref), t (ref)
 	local var4531 = t_134.new()
 	
@@ -18317,7 +18317,7 @@ typeRegistryModule.default:register(t.EnableEventNotificationsAction)
 local t_135 = {}
 t_135.__index = t_135
 
-function t_135.new(p265) --[[ line: 25905 ]]
+function t_135.new(p265) --[[ line: 25907 ]]
 	-- upvalues: t_135 (ref)
 	return setmetatable({
 		event_id = if p265 == nil or p265.event_id == nil then nil else p265.event_id,
@@ -18326,7 +18326,7 @@ function t_135.new(p265) --[[ line: 25905 ]]
 	}, t_135)
 end
 
-function t_135:encode() --[[ line: 25915 ]]
+function t_135:encode() --[[ line: 25917 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4533 = 0
@@ -18358,7 +18358,7 @@ function t_135:encode() --[[ line: 25915 ]]
 	return buff_1
 end
 
-function t_135.decode(p266) --[[ line: 25942 ]]
+function t_135.decode(p266) --[[ line: 25944 ]]
 	-- upvalues: t_135 (ref), protoModule (ref), propTypesModule (ref)
 	local var4544 = t_135.new()
 	local var4545 = 0
@@ -18415,7 +18415,7 @@ function t_135.decode(p266) --[[ line: 25942 ]]
 	return var4544
 end
 
-function t_135:jsonEncode() --[[ line: 25995 ]]
+function t_135:jsonEncode() --[[ line: 25997 ]]
 	local t = {}
 	
 	if self.event_id ~= nil then
@@ -18430,7 +18430,7 @@ function t_135:jsonEncode() --[[ line: 25995 ]]
 	return t
 end
 
-function t_135:jsonDecode() --[[ line: 26013 ]]
+function t_135:jsonDecode() --[[ line: 26015 ]]
 	-- upvalues: t_135 (ref), propTypesModule (ref)
 	local var4566 = t_135.new()
 	
@@ -18461,7 +18461,7 @@ typeRegistryModule.default:register(t.EnableEventNotificationsAction_Params)
 local t_136 = {}
 t_136.__index = t_136
 
-function t_136.new(p267) --[[ line: 26056 ]]
+function t_136.new(p267) --[[ line: 26058 ]]
 	-- upvalues: t (ref), t_136 (ref)
 	return setmetatable({
 		action_type = if p267 == nil or p267.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p267.action_type,
@@ -18469,7 +18469,7 @@ function t_136.new(p267) --[[ line: 26056 ]]
 	}, t_136)
 end
 
-function t_136:encode() --[[ line: 26067 ]]
+function t_136:encode() --[[ line: 26069 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4568 = 0
@@ -18493,7 +18493,7 @@ function t_136:encode() --[[ line: 26067 ]]
 	return buff_1
 end
 
-function t_136.decode(p268) --[[ line: 26093 ]]
+function t_136.decode(p268) --[[ line: 26095 ]]
 	-- upvalues: t_136 (ref), protoModule (ref), t (ref)
 	local var4575 = t_136.new()
 	local var4576 = 0
@@ -18547,7 +18547,7 @@ function t_136.decode(p268) --[[ line: 26093 ]]
 	return var4575
 end
 
-function t_136:jsonEncode() --[[ line: 26141 ]]
+function t_136:jsonEncode() --[[ line: 26143 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -18560,7 +18560,7 @@ function t_136:jsonEncode() --[[ line: 26141 ]]
 	return t_1
 end
 
-function t_136:jsonDecode() --[[ line: 26163 ]]
+function t_136:jsonDecode() --[[ line: 26165 ]]
 	-- upvalues: t_136 (ref), t (ref)
 	local var4596 = t_136.new()
 	
@@ -18588,14 +18588,14 @@ typeRegistryModule.default:register(t.DismissEventNotificationsModalAction)
 local t_137 = {}
 t_137.__index = t_137
 
-function t_137.new(p269) --[[ line: 26205 ]]
+function t_137.new(p269) --[[ line: 26207 ]]
 	-- upvalues: t_137 (ref)
 	return setmetatable({
 		event_id = if p269 == nil or p269.event_id == nil then nil else p269.event_id
 	}, t_137)
 end
 
-function t_137:encode() --[[ line: 26213 ]]
+function t_137:encode() --[[ line: 26215 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4598 = 0
@@ -18613,7 +18613,7 @@ function t_137:encode() --[[ line: 26213 ]]
 	return buff_1
 end
 
-function t_137.decode(p270) --[[ line: 26230 ]]
+function t_137.decode(p270) --[[ line: 26232 ]]
 	-- upvalues: t_137 (ref), protoModule (ref), propTypesModule (ref)
 	local var4603 = t_137.new()
 	local var4604 = 0
@@ -18660,7 +18660,7 @@ function t_137.decode(p270) --[[ line: 26230 ]]
 	return var4603
 end
 
-function t_137:jsonEncode() --[[ line: 26275 ]]
+function t_137:jsonEncode() --[[ line: 26277 ]]
 	local t = {}
 	
 	if self.event_id ~= nil then
@@ -18669,7 +18669,7 @@ function t_137:jsonEncode() --[[ line: 26275 ]]
 	return t
 end
 
-function t_137:jsonDecode() --[[ line: 26287 ]]
+function t_137:jsonDecode() --[[ line: 26289 ]]
 	-- upvalues: t_137 (ref), propTypesModule (ref)
 	local var4621 = t_137.new()
 	
@@ -18691,7 +18691,7 @@ typeRegistryModule.default:register(t.DismissEventNotificationsModalAction_Param
 local t_138 = {}
 t_138.__index = t_138
 
-function t_138.new(p271) --[[ line: 26317 ]]
+function t_138.new(p271) --[[ line: 26319 ]]
 	-- upvalues: t (ref), t_138 (ref)
 	return setmetatable({
 		action_type = if p271 == nil or p271.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p271.action_type,
@@ -18699,7 +18699,7 @@ function t_138.new(p271) --[[ line: 26317 ]]
 	}, t_138)
 end
 
-function t_138:encode() --[[ line: 26326 ]]
+function t_138:encode() --[[ line: 26328 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4623 = 0
@@ -18723,7 +18723,7 @@ function t_138:encode() --[[ line: 26326 ]]
 	return buff_1
 end
 
-function t_138.decode(p272) --[[ line: 26352 ]]
+function t_138.decode(p272) --[[ line: 26354 ]]
 	-- upvalues: t_138 (ref), protoModule (ref), t (ref)
 	local var4630 = t_138.new()
 	local var4631 = 0
@@ -18777,7 +18777,7 @@ function t_138.decode(p272) --[[ line: 26352 ]]
 	return var4630
 end
 
-function t_138:jsonEncode() --[[ line: 26400 ]]
+function t_138:jsonEncode() --[[ line: 26402 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -18790,7 +18790,7 @@ function t_138:jsonEncode() --[[ line: 26400 ]]
 	return t_1
 end
 
-function t_138:jsonDecode() --[[ line: 26422 ]]
+function t_138:jsonDecode() --[[ line: 26424 ]]
 	-- upvalues: t_138 (ref), t (ref)
 	local var4651 = t_138.new()
 	
@@ -18818,7 +18818,7 @@ typeRegistryModule.default:register(t.OpenAmpWizardAction)
 local t_139 = {}
 t_139.__index = t_139
 
-function t_139.new(p273) --[[ line: 26462 ]]
+function t_139.new(p273) --[[ line: 26464 ]]
 	-- upvalues: t_139 (ref)
 	return setmetatable({
 		feature_name = if p273 == nil or p273.feature_name == nil then nil else p273.feature_name,
@@ -18828,7 +18828,7 @@ function t_139.new(p273) --[[ line: 26462 ]]
 	}, t_139)
 end
 
-function t_139:encode() --[[ line: 26478 ]]
+function t_139:encode() --[[ line: 26480 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4653 = 0
@@ -18867,7 +18867,7 @@ function t_139:encode() --[[ line: 26478 ]]
 	return buff_1
 end
 
-function t_139.decode(p274) --[[ line: 26511 ]]
+function t_139.decode(p274) --[[ line: 26513 ]]
 	-- upvalues: t_139 (ref), protoModule (ref), propTypesModule (ref)
 	local var4667 = t_139.new()
 	local var4668 = 0
@@ -18929,7 +18929,7 @@ function t_139.decode(p274) --[[ line: 26511 ]]
 	return var4667
 end
 
-function t_139:jsonEncode() --[[ line: 26571 ]]
+function t_139:jsonEncode() --[[ line: 26573 ]]
 	local t = {}
 	
 	if self.feature_name ~= nil then
@@ -18947,7 +18947,7 @@ function t_139:jsonEncode() --[[ line: 26571 ]]
 	return t
 end
 
-function t_139:jsonDecode() --[[ line: 26593 ]]
+function t_139:jsonDecode() --[[ line: 26595 ]]
 	-- upvalues: t_139 (ref), propTypesModule (ref)
 	local var4691 = t_139.new()
 	
@@ -18987,7 +18987,7 @@ typeRegistryModule.default:register(t.OpenAmpWizardAction_Params)
 local t_140 = {}
 t_140.__index = t_140
 
-function t_140.new(p275) --[[ line: 26655 ]]
+function t_140.new(p275) --[[ line: 26657 ]]
 	-- upvalues: t (ref), t_140 (ref)
 	return setmetatable({
 		action_type = if p275 == nil or p275.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p275.action_type,
@@ -18995,7 +18995,7 @@ function t_140.new(p275) --[[ line: 26655 ]]
 	}, t_140)
 end
 
-function t_140:encode() --[[ line: 26666 ]]
+function t_140:encode() --[[ line: 26668 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4693 = 0
@@ -19019,7 +19019,7 @@ function t_140:encode() --[[ line: 26666 ]]
 	return buff_1
 end
 
-function t_140.decode(p276) --[[ line: 26692 ]]
+function t_140.decode(p276) --[[ line: 26694 ]]
 	-- upvalues: t_140 (ref), protoModule (ref), t (ref)
 	local var4700 = t_140.new()
 	local var4701 = 0
@@ -19073,7 +19073,7 @@ function t_140.decode(p276) --[[ line: 26692 ]]
 	return var4700
 end
 
-function t_140:jsonEncode() --[[ line: 26740 ]]
+function t_140:jsonEncode() --[[ line: 26742 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -19086,7 +19086,7 @@ function t_140:jsonEncode() --[[ line: 26740 ]]
 	return t_1
 end
 
-function t_140:jsonDecode() --[[ line: 26762 ]]
+function t_140:jsonDecode() --[[ line: 26764 ]]
 	-- upvalues: t_140 (ref), t (ref)
 	local var4721 = t_140.new()
 	
@@ -19114,7 +19114,7 @@ typeRegistryModule.default:register(t.OpenSocialProofUserListSheetAction)
 local t_141 = {}
 t_141.__index = t_141
 
-function t_141.new(p277) --[[ line: 26804 ]]
+function t_141.new(p277) --[[ line: 26806 ]]
 	-- upvalues: t_141 (ref)
 	return setmetatable({
 		universe_id = if p277 == nil or p277.universe_id == nil then nil else p277.universe_id,
@@ -19125,7 +19125,7 @@ function t_141.new(p277) --[[ line: 26804 ]]
 	}, t_141)
 end
 
-function t_141:encode() --[[ line: 26816 ]]
+function t_141:encode() --[[ line: 26818 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4723 = 0
@@ -19171,7 +19171,7 @@ function t_141:encode() --[[ line: 26816 ]]
 	return buff_1
 end
 
-function t_141.decode(p278) --[[ line: 26857 ]]
+function t_141.decode(p278) --[[ line: 26859 ]]
 	-- upvalues: t_141 (ref), protoModule (ref), propTypesModule (ref)
 	local var4740 = t_141.new()
 	local var4741 = 0
@@ -19238,7 +19238,7 @@ function t_141.decode(p278) --[[ line: 26857 ]]
 	return var4740
 end
 
-function t_141:jsonEncode() --[[ line: 26922 ]]
+function t_141:jsonEncode() --[[ line: 26924 ]]
 	local t = {}
 	
 	if self.universe_id ~= nil then
@@ -19259,7 +19259,7 @@ function t_141:jsonEncode() --[[ line: 26922 ]]
 	return t
 end
 
-function t_141:jsonDecode() --[[ line: 26950 ]]
+function t_141:jsonDecode() --[[ line: 26952 ]]
 	-- upvalues: t_141 (ref), propTypesModule (ref)
 	local var4766 = t_141.new()
 	
@@ -19305,7 +19305,7 @@ typeRegistryModule.default:register(t.OpenSocialProofUserListSheetAction_Params)
 local t_142 = {}
 t_142.__index = t_142
 
-function t_142.new(p279) --[[ line: 27018 ]]
+function t_142.new(p279) --[[ line: 27020 ]]
 	-- upvalues: t (ref), t_142 (ref)
 	return setmetatable({
 		action_type = if p279 == nil or p279.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p279.action_type,
@@ -19313,7 +19313,7 @@ function t_142.new(p279) --[[ line: 27018 ]]
 	}, t_142)
 end
 
-function t_142:encode() --[[ line: 27029 ]]
+function t_142:encode() --[[ line: 27031 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4768 = 0
@@ -19337,7 +19337,7 @@ function t_142:encode() --[[ line: 27029 ]]
 	return buff_1
 end
 
-function t_142.decode(p280) --[[ line: 27055 ]]
+function t_142.decode(p280) --[[ line: 27057 ]]
 	-- upvalues: t_142 (ref), protoModule (ref), t (ref)
 	local var4775 = t_142.new()
 	local var4776 = 0
@@ -19391,7 +19391,7 @@ function t_142.decode(p280) --[[ line: 27055 ]]
 	return var4775
 end
 
-function t_142:jsonEncode() --[[ line: 27103 ]]
+function t_142:jsonEncode() --[[ line: 27105 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -19404,7 +19404,7 @@ function t_142:jsonEncode() --[[ line: 27103 ]]
 	return t_1
 end
 
-function t_142:jsonDecode() --[[ line: 27125 ]]
+function t_142:jsonDecode() --[[ line: 27127 ]]
 	-- upvalues: t_142 (ref), t (ref)
 	local var4796 = t_142.new()
 	
@@ -19432,14 +19432,14 @@ typeRegistryModule.default:register(t.OpenSearchResultsTabAction)
 local t_143 = {}
 t_143.__index = t_143
 
-function t_143.new(p281) --[[ line: 27165 ]]
+function t_143.new(p281) --[[ line: 27167 ]]
 	-- upvalues: t_143 (ref)
 	return setmetatable({
 		search_type = if p281 == nil or p281.search_type == nil then nil else p281.search_type
 	}, t_143)
 end
 
-function t_143:encode() --[[ line: 27173 ]]
+function t_143:encode() --[[ line: 27175 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4798 = 0
@@ -19457,7 +19457,7 @@ function t_143:encode() --[[ line: 27173 ]]
 	return buff_1
 end
 
-function t_143.decode(p282) --[[ line: 27188 ]]
+function t_143.decode(p282) --[[ line: 27190 ]]
 	-- upvalues: t_143 (ref), protoModule (ref), propTypesModule (ref)
 	local var4803 = t_143.new()
 	local var4804 = 0
@@ -19504,7 +19504,7 @@ function t_143.decode(p282) --[[ line: 27188 ]]
 	return var4803
 end
 
-function t_143:jsonEncode() --[[ line: 27231 ]]
+function t_143:jsonEncode() --[[ line: 27233 ]]
 	local t = {}
 	
 	if self.search_type ~= nil then
@@ -19513,7 +19513,7 @@ function t_143:jsonEncode() --[[ line: 27231 ]]
 	return t
 end
 
-function t_143:jsonDecode() --[[ line: 27241 ]]
+function t_143:jsonDecode() --[[ line: 27243 ]]
 	-- upvalues: t_143 (ref), propTypesModule (ref)
 	local var4821 = t_143.new()
 	
@@ -19535,7 +19535,7 @@ typeRegistryModule.default:register(t.OpenSearchResultsTabAction_Params)
 local t_144 = {}
 t_144.__index = t_144
 
-function t_144.new(p283) --[[ line: 27272 ]]
+function t_144.new(p283) --[[ line: 27274 ]]
 	-- upvalues: t (ref), t_144 (ref)
 	return setmetatable({
 		action_type = if p283 == nil or p283.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p283.action_type,
@@ -19543,7 +19543,7 @@ function t_144.new(p283) --[[ line: 27272 ]]
 	}, t_144)
 end
 
-function t_144:encode() --[[ line: 27281 ]]
+function t_144:encode() --[[ line: 27283 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4823 = 0
@@ -19567,7 +19567,7 @@ function t_144:encode() --[[ line: 27281 ]]
 	return buff_1
 end
 
-function t_144.decode(p284) --[[ line: 27307 ]]
+function t_144.decode(p284) --[[ line: 27309 ]]
 	-- upvalues: t_144 (ref), protoModule (ref), t (ref)
 	local var4830 = t_144.new()
 	local var4831 = 0
@@ -19621,7 +19621,7 @@ function t_144.decode(p284) --[[ line: 27307 ]]
 	return var4830
 end
 
-function t_144:jsonEncode() --[[ line: 27355 ]]
+function t_144:jsonEncode() --[[ line: 27357 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -19634,7 +19634,7 @@ function t_144:jsonEncode() --[[ line: 27355 ]]
 	return t_1
 end
 
-function t_144:jsonDecode() --[[ line: 27377 ]]
+function t_144:jsonDecode() --[[ line: 27379 ]]
 	-- upvalues: t_144 (ref), t (ref)
 	local var4851 = t_144.new()
 	
@@ -19662,7 +19662,7 @@ typeRegistryModule.default:register(t.DismissPromptAction)
 local t_145 = {}
 t_145.__index = t_145
 
-function t_145.new(p285) --[[ line: 27417 ]]
+function t_145.new(p285) --[[ line: 27419 ]]
 	-- upvalues: t_145 (ref)
 	return setmetatable({
 		prompt_type = if p285 == nil or p285.prompt_type == nil then nil else p285.prompt_type,
@@ -19672,7 +19672,7 @@ function t_145.new(p285) --[[ line: 27417 ]]
 	}, t_145)
 end
 
-function t_145:encode() --[[ line: 27428 ]]
+function t_145:encode() --[[ line: 27430 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4853 = 0
@@ -19711,7 +19711,7 @@ function t_145:encode() --[[ line: 27428 ]]
 	return buff_1
 end
 
-function t_145.decode(p286) --[[ line: 27461 ]]
+function t_145.decode(p286) --[[ line: 27463 ]]
 	-- upvalues: t_145 (ref), protoModule (ref), propTypesModule (ref)
 	local var4867 = t_145.new()
 	local var4868 = 0
@@ -19773,7 +19773,7 @@ function t_145.decode(p286) --[[ line: 27461 ]]
 	return var4867
 end
 
-function t_145:jsonEncode() --[[ line: 27519 ]]
+function t_145:jsonEncode() --[[ line: 27521 ]]
 	local t = {}
 	
 	if self.prompt_type ~= nil then
@@ -19791,7 +19791,7 @@ function t_145:jsonEncode() --[[ line: 27519 ]]
 	return t
 end
 
-function t_145:jsonDecode() --[[ line: 27541 ]]
+function t_145:jsonDecode() --[[ line: 27543 ]]
 	-- upvalues: t_145 (ref), propTypesModule (ref)
 	local var4891 = t_145.new()
 	
@@ -19831,7 +19831,7 @@ typeRegistryModule.default:register(t.DismissPromptAction_Params)
 local t_146 = {}
 t_146.__index = t_146
 
-function t_146.new(p287) --[[ line: 27596 ]]
+function t_146.new(p287) --[[ line: 27598 ]]
 	-- upvalues: t (ref), t_146 (ref)
 	return setmetatable({
 		action_type = if p287 == nil or p287.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p287.action_type,
@@ -19839,7 +19839,7 @@ function t_146.new(p287) --[[ line: 27596 ]]
 	}, t_146)
 end
 
-function t_146:encode() --[[ line: 27610 ]]
+function t_146:encode() --[[ line: 27612 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4893 = 0
@@ -19863,7 +19863,7 @@ function t_146:encode() --[[ line: 27610 ]]
 	return buff_1
 end
 
-function t_146.decode(p288) --[[ line: 27638 ]]
+function t_146.decode(p288) --[[ line: 27640 ]]
 	-- upvalues: t_146 (ref), protoModule (ref), t (ref)
 	local var4900 = t_146.new()
 	local var4901 = 0
@@ -19917,7 +19917,7 @@ function t_146.decode(p288) --[[ line: 27638 ]]
 	return var4900
 end
 
-function t_146:jsonEncode() --[[ line: 27689 ]]
+function t_146:jsonEncode() --[[ line: 27691 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -19930,7 +19930,7 @@ function t_146:jsonEncode() --[[ line: 27689 ]]
 	return t_1
 end
 
-function t_146:jsonDecode() --[[ line: 27713 ]]
+function t_146:jsonDecode() --[[ line: 27715 ]]
 	-- upvalues: t_146 (ref), t (ref)
 	local var4921 = t_146.new()
 	
@@ -19958,7 +19958,7 @@ typeRegistryModule.default:register(t.RecordPartyChatConversationUpsellAcknowled
 local t_147 = {}
 t_147.__index = t_147
 
-function t_147.new(p289) --[[ line: 27759 ]]
+function t_147.new(p289) --[[ line: 27761 ]]
 	-- upvalues: t_147 (ref)
 	return setmetatable({
 		modal_action = if p289 == nil or p289.modal_action == nil then nil else p289.modal_action,
@@ -19969,7 +19969,7 @@ function t_147.new(p289) --[[ line: 27759 ]]
 	}, t_147)
 end
 
-function t_147:encode() --[[ line: 27774 ]]
+function t_147:encode() --[[ line: 27776 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4923 = 0
@@ -20015,7 +20015,7 @@ function t_147:encode() --[[ line: 27774 ]]
 	return buff_1
 end
 
-function t_147.decode(p290) --[[ line: 27815 ]]
+function t_147.decode(p290) --[[ line: 27817 ]]
 	-- upvalues: t_147 (ref), protoModule (ref), propTypesModule (ref)
 	local var4940 = t_147.new()
 	local var4941 = 0
@@ -20082,7 +20082,7 @@ function t_147.decode(p290) --[[ line: 27815 ]]
 	return var4940
 end
 
-function t_147:jsonEncode() --[[ line: 27880 ]]
+function t_147:jsonEncode() --[[ line: 27882 ]]
 	local t = {}
 	
 	if self.modal_action ~= nil then
@@ -20103,7 +20103,7 @@ function t_147:jsonEncode() --[[ line: 27880 ]]
 	return t
 end
 
-function t_147:jsonDecode() --[[ line: 27908 ]]
+function t_147:jsonDecode() --[[ line: 27910 ]]
 	-- upvalues: t_147 (ref), propTypesModule (ref)
 	local var4966 = t_147.new()
 	
@@ -20149,7 +20149,7 @@ typeRegistryModule.default:register(t.RecordPartyChatConversationUpsellAcknowled
 local t_148 = {}
 t_148.__index = t_148
 
-function t_148.new(p291) --[[ line: 27979 ]]
+function t_148.new(p291) --[[ line: 27981 ]]
 	-- upvalues: t (ref), t_148 (ref)
 	return setmetatable({
 		action_type = if p291 == nil or p291.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p291.action_type,
@@ -20157,7 +20157,7 @@ function t_148.new(p291) --[[ line: 27979 ]]
 	}, t_148)
 end
 
-function t_148:encode() --[[ line: 27988 ]]
+function t_148:encode() --[[ line: 27990 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var4968 = 0
@@ -20181,7 +20181,7 @@ function t_148:encode() --[[ line: 27988 ]]
 	return buff_1
 end
 
-function t_148.decode(p292) --[[ line: 28014 ]]
+function t_148.decode(p292) --[[ line: 28016 ]]
 	-- upvalues: t_148 (ref), protoModule (ref), t (ref)
 	local var4975 = t_148.new()
 	local var4976 = 0
@@ -20235,7 +20235,7 @@ function t_148.decode(p292) --[[ line: 28014 ]]
 	return var4975
 end
 
-function t_148:jsonEncode() --[[ line: 28062 ]]
+function t_148:jsonEncode() --[[ line: 28064 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -20248,7 +20248,7 @@ function t_148:jsonEncode() --[[ line: 28062 ]]
 	return t_1
 end
 
-function t_148:jsonDecode() --[[ line: 28084 ]]
+function t_148:jsonDecode() --[[ line: 28086 ]]
 	-- upvalues: t_148 (ref), t (ref)
 	local var4996 = t_148.new()
 	
@@ -20276,7 +20276,7 @@ typeRegistryModule.default:register(t.RequestFriendshipAction)
 local t_149 = {}
 t_149.__index = t_149
 
-function t_149.new(p293) --[[ line: 28124 ]]
+function t_149.new(p293) --[[ line: 28126 ]]
 	-- upvalues: t_149 (ref)
 	return setmetatable({
 		target_user_id = if p293 == nil or p293.target_user_id == nil then nil else p293.target_user_id,
@@ -20284,7 +20284,7 @@ function t_149.new(p293) --[[ line: 28124 ]]
 	}, t_149)
 end
 
-function t_149:encode() --[[ line: 28133 ]]
+function t_149:encode() --[[ line: 28135 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var4998 = 0
@@ -20309,7 +20309,7 @@ function t_149:encode() --[[ line: 28133 ]]
 	return buff_1
 end
 
-function t_149.decode(p294) --[[ line: 28154 ]]
+function t_149.decode(p294) --[[ line: 28156 ]]
 	-- upvalues: t_149 (ref), protoModule (ref), propTypesModule (ref)
 	local var5006 = t_149.new()
 	local var5007 = 0
@@ -20361,7 +20361,7 @@ function t_149.decode(p294) --[[ line: 28154 ]]
 	return var5006
 end
 
-function t_149:jsonEncode() --[[ line: 28202 ]]
+function t_149:jsonEncode() --[[ line: 28204 ]]
 	local t = {}
 	
 	if self.target_user_id ~= nil then
@@ -20373,7 +20373,7 @@ function t_149:jsonEncode() --[[ line: 28202 ]]
 	return t
 end
 
-function t_149:jsonDecode() --[[ line: 28216 ]]
+function t_149:jsonDecode() --[[ line: 28218 ]]
 	-- upvalues: t_149 (ref), propTypesModule (ref)
 	local var5026 = t_149.new()
 	
@@ -20398,7 +20398,7 @@ typeRegistryModule.default:register(t.RequestFriendshipAction_Params)
 local t_150 = {}
 t_150.__index = t_150
 
-function t_150.new(p295) --[[ line: 28250 ]]
+function t_150.new(p295) --[[ line: 28252 ]]
 	-- upvalues: t (ref), t_150 (ref)
 	return setmetatable({
 		action_type = if p295 == nil or p295.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p295.action_type,
@@ -20406,7 +20406,7 @@ function t_150.new(p295) --[[ line: 28250 ]]
 	}, t_150)
 end
 
-function t_150:encode() --[[ line: 28261 ]]
+function t_150:encode() --[[ line: 28263 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5028 = 0
@@ -20430,7 +20430,7 @@ function t_150:encode() --[[ line: 28261 ]]
 	return buff_1
 end
 
-function t_150.decode(p296) --[[ line: 28287 ]]
+function t_150.decode(p296) --[[ line: 28289 ]]
 	-- upvalues: t_150 (ref), protoModule (ref), t (ref)
 	local var5035 = t_150.new()
 	local var5036 = 0
@@ -20484,7 +20484,7 @@ function t_150.decode(p296) --[[ line: 28287 ]]
 	return var5035
 end
 
-function t_150:jsonEncode() --[[ line: 28335 ]]
+function t_150:jsonEncode() --[[ line: 28337 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -20497,7 +20497,7 @@ function t_150:jsonEncode() --[[ line: 28335 ]]
 	return t_1
 end
 
-function t_150:jsonDecode() --[[ line: 28357 ]]
+function t_150:jsonDecode() --[[ line: 28359 ]]
 	-- upvalues: t_150 (ref), t (ref)
 	local var5056 = t_150.new()
 	
@@ -20525,14 +20525,14 @@ typeRegistryModule.default:register(t.OpenTrustedFriendsUpsellModalAction)
 local t_151 = {}
 t_151.__index = t_151
 
-function t_151.new(p297) --[[ line: 28399 ]]
+function t_151.new(p297) --[[ line: 28401 ]]
 	-- upvalues: t_151 (ref)
 	return setmetatable({
 		target_user_id = if p297 == nil or p297.target_user_id == nil then nil else p297.target_user_id
 	}, t_151)
 end
 
-function t_151:encode() --[[ line: 28407 ]]
+function t_151:encode() --[[ line: 28409 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5058 = 0
@@ -20550,7 +20550,7 @@ function t_151:encode() --[[ line: 28407 ]]
 	return buff_1
 end
 
-function t_151.decode(p298) --[[ line: 28424 ]]
+function t_151.decode(p298) --[[ line: 28426 ]]
 	-- upvalues: t_151 (ref), protoModule (ref), propTypesModule (ref)
 	local var5063 = t_151.new()
 	local var5064 = 0
@@ -20597,7 +20597,7 @@ function t_151.decode(p298) --[[ line: 28424 ]]
 	return var5063
 end
 
-function t_151:jsonEncode() --[[ line: 28469 ]]
+function t_151:jsonEncode() --[[ line: 28471 ]]
 	local t = {}
 	
 	if self.target_user_id ~= nil then
@@ -20606,7 +20606,7 @@ function t_151:jsonEncode() --[[ line: 28469 ]]
 	return t
 end
 
-function t_151:jsonDecode() --[[ line: 28481 ]]
+function t_151:jsonDecode() --[[ line: 28483 ]]
 	-- upvalues: t_151 (ref), propTypesModule (ref)
 	local var5081 = t_151.new()
 	
@@ -20628,7 +20628,7 @@ typeRegistryModule.default:register(t.OpenTrustedFriendsUpsellModalAction_Params
 local t_152 = {}
 t_152.__index = t_152
 
-function t_152.new(p299) --[[ line: 28513 ]]
+function t_152.new(p299) --[[ line: 28515 ]]
 	-- upvalues: t (ref), t_152 (ref)
 	return setmetatable({
 		action_type = if p299 == nil or p299.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p299.action_type,
@@ -20636,7 +20636,7 @@ function t_152.new(p299) --[[ line: 28513 ]]
 	}, t_152)
 end
 
-function t_152:encode() --[[ line: 28524 ]]
+function t_152:encode() --[[ line: 28526 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5083 = 0
@@ -20660,7 +20660,7 @@ function t_152:encode() --[[ line: 28524 ]]
 	return buff_1
 end
 
-function t_152.decode(p300) --[[ line: 28550 ]]
+function t_152.decode(p300) --[[ line: 28552 ]]
 	-- upvalues: t_152 (ref), protoModule (ref), t (ref)
 	local var5090 = t_152.new()
 	local var5091 = 0
@@ -20714,7 +20714,7 @@ function t_152.decode(p300) --[[ line: 28550 ]]
 	return var5090
 end
 
-function t_152:jsonEncode() --[[ line: 28598 ]]
+function t_152:jsonEncode() --[[ line: 28600 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -20727,7 +20727,7 @@ function t_152:jsonEncode() --[[ line: 28598 ]]
 	return t_1
 end
 
-function t_152:jsonDecode() --[[ line: 28620 ]]
+function t_152:jsonDecode() --[[ line: 28622 ]]
 	-- upvalues: t_152 (ref), t (ref)
 	local var5111 = t_152.new()
 	
@@ -20755,7 +20755,7 @@ typeRegistryModule.default:register(t.OpenSearchResultsWithQueryAction)
 local t_153 = {}
 t_153.__index = t_153
 
-function t_153.new(p301) --[[ line: 28662 ]]
+function t_153.new(p301) --[[ line: 28664 ]]
 	-- upvalues: t_153 (ref)
 	return setmetatable({
 		search_query = if p301 == nil or p301.search_query == nil then nil else p301.search_query,
@@ -20763,7 +20763,7 @@ function t_153.new(p301) --[[ line: 28662 ]]
 	}, t_153)
 end
 
-function t_153:encode() --[[ line: 28671 ]]
+function t_153:encode() --[[ line: 28673 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5113 = 0
@@ -20788,7 +20788,7 @@ function t_153:encode() --[[ line: 28671 ]]
 	return buff_1
 end
 
-function t_153.decode(p302) --[[ line: 28692 ]]
+function t_153.decode(p302) --[[ line: 28694 ]]
 	-- upvalues: t_153 (ref), protoModule (ref), propTypesModule (ref)
 	local var5121 = t_153.new()
 	local var5122 = 0
@@ -20840,7 +20840,7 @@ function t_153.decode(p302) --[[ line: 28692 ]]
 	return var5121
 end
 
-function t_153:jsonEncode() --[[ line: 28740 ]]
+function t_153:jsonEncode() --[[ line: 28742 ]]
 	local t = {}
 	
 	if self.search_query ~= nil then
@@ -20852,7 +20852,7 @@ function t_153:jsonEncode() --[[ line: 28740 ]]
 	return t
 end
 
-function t_153:jsonDecode() --[[ line: 28754 ]]
+function t_153:jsonDecode() --[[ line: 28756 ]]
 	-- upvalues: t_153 (ref), propTypesModule (ref)
 	local var5141 = t_153.new()
 	
@@ -20880,7 +20880,7 @@ typeRegistryModule.default:register(t.OpenSearchResultsWithQueryAction_Params)
 local t_154 = {}
 t_154.__index = t_154
 
-function t_154.new(p303) --[[ line: 28795 ]]
+function t_154.new(p303) --[[ line: 28797 ]]
 	-- upvalues: t (ref), t_154 (ref)
 	return setmetatable({
 		action_type = if p303 == nil or p303.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p303.action_type,
@@ -20888,7 +20888,7 @@ function t_154.new(p303) --[[ line: 28795 ]]
 	}, t_154)
 end
 
-function t_154:encode() --[[ line: 28806 ]]
+function t_154:encode() --[[ line: 28808 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5143 = 0
@@ -20912,7 +20912,7 @@ function t_154:encode() --[[ line: 28806 ]]
 	return buff_1
 end
 
-function t_154.decode(p304) --[[ line: 28832 ]]
+function t_154.decode(p304) --[[ line: 28834 ]]
 	-- upvalues: t_154 (ref), protoModule (ref), t (ref)
 	local var5150 = t_154.new()
 	local var5151 = 0
@@ -20966,7 +20966,7 @@ function t_154.decode(p304) --[[ line: 28832 ]]
 	return var5150
 end
 
-function t_154:jsonEncode() --[[ line: 28880 ]]
+function t_154:jsonEncode() --[[ line: 28882 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -20979,7 +20979,7 @@ function t_154:jsonEncode() --[[ line: 28880 ]]
 	return t_1
 end
 
-function t_154:jsonDecode() --[[ line: 28902 ]]
+function t_154:jsonDecode() --[[ line: 28904 ]]
 	-- upvalues: t_154 (ref), t (ref)
 	local var5171 = t_154.new()
 	
@@ -21007,14 +21007,14 @@ typeRegistryModule.default:register(t.SelectMarketplaceFavoritesCategory)
 local t_155 = {}
 t_155.__index = t_155
 
-function t_155.new(p305) --[[ line: 28944 ]]
+function t_155.new(p305) --[[ line: 28946 ]]
 	-- upvalues: t_155 (ref)
 	return setmetatable({
 		category_id = if p305 == nil or p305.category_id == nil then nil else p305.category_id
 	}, t_155)
 end
 
-function t_155:encode() --[[ line: 28952 ]]
+function t_155:encode() --[[ line: 28954 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5173 = 0
@@ -21032,7 +21032,7 @@ function t_155:encode() --[[ line: 28952 ]]
 	return buff_1
 end
 
-function t_155.decode(p306) --[[ line: 28969 ]]
+function t_155.decode(p306) --[[ line: 28971 ]]
 	-- upvalues: t_155 (ref), protoModule (ref), propTypesModule (ref)
 	local var5178 = t_155.new()
 	local var5179 = 0
@@ -21079,7 +21079,7 @@ function t_155.decode(p306) --[[ line: 28969 ]]
 	return var5178
 end
 
-function t_155:jsonEncode() --[[ line: 29014 ]]
+function t_155:jsonEncode() --[[ line: 29016 ]]
 	local t = {}
 	
 	if self.category_id ~= nil then
@@ -21088,7 +21088,7 @@ function t_155:jsonEncode() --[[ line: 29014 ]]
 	return t
 end
 
-function t_155:jsonDecode() --[[ line: 29026 ]]
+function t_155:jsonDecode() --[[ line: 29028 ]]
 	-- upvalues: t_155 (ref), propTypesModule (ref)
 	local var5196 = t_155.new()
 	
@@ -21110,7 +21110,7 @@ typeRegistryModule.default:register(t.SelectMarketplaceFavoritesCategory_Params)
 local t_156 = {}
 t_156.__index = t_156
 
-function t_156.new(p307) --[[ line: 29057 ]]
+function t_156.new(p307) --[[ line: 29059 ]]
 	-- upvalues: t (ref), t_156 (ref)
 	return setmetatable({
 		action_type = if p307 == nil or p307.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p307.action_type,
@@ -21118,7 +21118,7 @@ function t_156.new(p307) --[[ line: 29057 ]]
 	}, t_156)
 end
 
-function t_156:encode() --[[ line: 29068 ]]
+function t_156:encode() --[[ line: 29070 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5198 = 0
@@ -21142,7 +21142,7 @@ function t_156:encode() --[[ line: 29068 ]]
 	return buff_1
 end
 
-function t_156.decode(p308) --[[ line: 29094 ]]
+function t_156.decode(p308) --[[ line: 29096 ]]
 	-- upvalues: t_156 (ref), protoModule (ref), t (ref)
 	local var5205 = t_156.new()
 	local var5206 = 0
@@ -21196,7 +21196,7 @@ function t_156.decode(p308) --[[ line: 29094 ]]
 	return var5205
 end
 
-function t_156:jsonEncode() --[[ line: 29142 ]]
+function t_156:jsonEncode() --[[ line: 29144 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -21209,7 +21209,7 @@ function t_156:jsonEncode() --[[ line: 29142 ]]
 	return t_1
 end
 
-function t_156:jsonDecode() --[[ line: 29164 ]]
+function t_156:jsonDecode() --[[ line: 29166 ]]
 	-- upvalues: t_156 (ref), t (ref)
 	local var5226 = t_156.new()
 	
@@ -21237,14 +21237,14 @@ typeRegistryModule.default:register(t.SelectMarketplaceFavoritesSubcategory)
 local t_157 = {}
 t_157.__index = t_157
 
-function t_157.new(p309) --[[ line: 29206 ]]
+function t_157.new(p309) --[[ line: 29208 ]]
 	-- upvalues: t_157 (ref)
 	return setmetatable({
 		subcategory_id = if p309 == nil or p309.subcategory_id == nil then nil else p309.subcategory_id
 	}, t_157)
 end
 
-function t_157:encode() --[[ line: 29214 ]]
+function t_157:encode() --[[ line: 29216 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5228 = 0
@@ -21262,7 +21262,7 @@ function t_157:encode() --[[ line: 29214 ]]
 	return buff_1
 end
 
-function t_157.decode(p310) --[[ line: 29231 ]]
+function t_157.decode(p310) --[[ line: 29233 ]]
 	-- upvalues: t_157 (ref), protoModule (ref), propTypesModule (ref)
 	local var5233 = t_157.new()
 	local var5234 = 0
@@ -21309,7 +21309,7 @@ function t_157.decode(p310) --[[ line: 29231 ]]
 	return var5233
 end
 
-function t_157:jsonEncode() --[[ line: 29276 ]]
+function t_157:jsonEncode() --[[ line: 29278 ]]
 	local t = {}
 	
 	if self.subcategory_id ~= nil then
@@ -21318,7 +21318,7 @@ function t_157:jsonEncode() --[[ line: 29276 ]]
 	return t
 end
 
-function t_157:jsonDecode() --[[ line: 29288 ]]
+function t_157:jsonDecode() --[[ line: 29290 ]]
 	-- upvalues: t_157 (ref), propTypesModule (ref)
 	local var5251 = t_157.new()
 	
@@ -21340,7 +21340,7 @@ typeRegistryModule.default:register(t.SelectMarketplaceFavoritesSubcategory_Para
 local t_158 = {}
 t_158.__index = t_158
 
-function t_158.new(p311) --[[ line: 29320 ]]
+function t_158.new(p311) --[[ line: 29322 ]]
 	-- upvalues: t (ref), t_158 (ref)
 	return setmetatable({
 		action_type = if p311 == nil or p311.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p311.action_type,
@@ -21348,7 +21348,7 @@ function t_158.new(p311) --[[ line: 29320 ]]
 	}, t_158)
 end
 
-function t_158:encode() --[[ line: 29331 ]]
+function t_158:encode() --[[ line: 29333 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5253 = 0
@@ -21372,7 +21372,7 @@ function t_158:encode() --[[ line: 29331 ]]
 	return buff_1
 end
 
-function t_158.decode(p312) --[[ line: 29357 ]]
+function t_158.decode(p312) --[[ line: 29359 ]]
 	-- upvalues: t_158 (ref), protoModule (ref), t (ref)
 	local var5260 = t_158.new()
 	local var5261 = 0
@@ -21426,7 +21426,7 @@ function t_158.decode(p312) --[[ line: 29357 ]]
 	return var5260
 end
 
-function t_158:jsonEncode() --[[ line: 29405 ]]
+function t_158:jsonEncode() --[[ line: 29407 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -21439,7 +21439,7 @@ function t_158:jsonEncode() --[[ line: 29405 ]]
 	return t_1
 end
 
-function t_158:jsonDecode() --[[ line: 29427 ]]
+function t_158:jsonDecode() --[[ line: 29429 ]]
 	-- upvalues: t_158 (ref), t (ref)
 	local var5281 = t_158.new()
 	
@@ -21467,7 +21467,7 @@ typeRegistryModule.default:register(t.PinExperienceShortcutAction)
 local t_159 = {}
 t_159.__index = t_159
 
-function t_159.new(p313) --[[ line: 29467 ]]
+function t_159.new(p313) --[[ line: 29469 ]]
 	-- upvalues: t_159 (ref)
 	return setmetatable({
 		place_id = if p313 == nil or p313.place_id == nil then nil else p313.place_id,
@@ -21476,7 +21476,7 @@ function t_159.new(p313) --[[ line: 29467 ]]
 	}, t_159)
 end
 
-function t_159:encode() --[[ line: 29477 ]]
+function t_159:encode() --[[ line: 29479 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5283 = 0
@@ -21508,7 +21508,7 @@ function t_159:encode() --[[ line: 29477 ]]
 	return buff_1
 end
 
-function t_159.decode(p314) --[[ line: 29504 ]]
+function t_159.decode(p314) --[[ line: 29506 ]]
 	-- upvalues: t_159 (ref), protoModule (ref), propTypesModule (ref)
 	local var5294 = t_159.new()
 	local var5295 = 0
@@ -21565,7 +21565,7 @@ function t_159.decode(p314) --[[ line: 29504 ]]
 	return var5294
 end
 
-function t_159:jsonEncode() --[[ line: 29557 ]]
+function t_159:jsonEncode() --[[ line: 29559 ]]
 	local t = {}
 	
 	if self.place_id ~= nil then
@@ -21580,7 +21580,7 @@ function t_159:jsonEncode() --[[ line: 29557 ]]
 	return t
 end
 
-function t_159:jsonDecode() --[[ line: 29575 ]]
+function t_159:jsonDecode() --[[ line: 29577 ]]
 	-- upvalues: t_159 (ref), propTypesModule (ref)
 	local var5316 = t_159.new()
 	
@@ -21614,7 +21614,7 @@ typeRegistryModule.default:register(t.PinExperienceShortcutAction_Params)
 local t_160 = {}
 t_160.__index = t_160
 
-function t_160.new(p315) --[[ line: 29622 ]]
+function t_160.new(p315) --[[ line: 29624 ]]
 	-- upvalues: t (ref), t_160 (ref)
 	return setmetatable({
 		action_type = if p315 == nil or p315.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p315.action_type,
@@ -21622,7 +21622,7 @@ function t_160.new(p315) --[[ line: 29622 ]]
 	}, t_160)
 end
 
-function t_160:encode() --[[ line: 29631 ]]
+function t_160:encode() --[[ line: 29633 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5318 = 0
@@ -21646,7 +21646,7 @@ function t_160:encode() --[[ line: 29631 ]]
 	return buff_1
 end
 
-function t_160.decode(p316) --[[ line: 29657 ]]
+function t_160.decode(p316) --[[ line: 29659 ]]
 	-- upvalues: t_160 (ref), protoModule (ref), t (ref)
 	local var5325 = t_160.new()
 	local var5326 = 0
@@ -21700,7 +21700,7 @@ function t_160.decode(p316) --[[ line: 29657 ]]
 	return var5325
 end
 
-function t_160:jsonEncode() --[[ line: 29705 ]]
+function t_160:jsonEncode() --[[ line: 29707 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -21713,7 +21713,7 @@ function t_160:jsonEncode() --[[ line: 29705 ]]
 	return t_1
 end
 
-function t_160:jsonDecode() --[[ line: 29727 ]]
+function t_160:jsonDecode() --[[ line: 29729 ]]
 	-- upvalues: t_160 (ref), t (ref)
 	local var5346 = t_160.new()
 	
@@ -21741,7 +21741,7 @@ typeRegistryModule.default:register(t.DownloadAppAction)
 local t_161 = {}
 t_161.__index = t_161
 
-function t_161.new(p317) --[[ line: 29767 ]]
+function t_161.new(p317) --[[ line: 29769 ]]
 	-- upvalues: t_161 (ref)
 	return setmetatable({
 		source = if p317 == nil or p317.source == nil then nil else p317.source,
@@ -21749,7 +21749,7 @@ function t_161.new(p317) --[[ line: 29767 ]]
 	}, t_161)
 end
 
-function t_161:encode() --[[ line: 29774 ]]
+function t_161:encode() --[[ line: 29776 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5348 = 0
@@ -21774,7 +21774,7 @@ function t_161:encode() --[[ line: 29774 ]]
 	return buff_1
 end
 
-function t_161.decode(p318) --[[ line: 29795 ]]
+function t_161.decode(p318) --[[ line: 29797 ]]
 	-- upvalues: t_161 (ref), protoModule (ref), propTypesModule (ref)
 	local var5356 = t_161.new()
 	local var5357 = 0
@@ -21826,7 +21826,7 @@ function t_161.decode(p318) --[[ line: 29795 ]]
 	return var5356
 end
 
-function t_161:jsonEncode() --[[ line: 29843 ]]
+function t_161:jsonEncode() --[[ line: 29845 ]]
 	local t = {}
 	
 	if self.source ~= nil then
@@ -21838,7 +21838,7 @@ function t_161:jsonEncode() --[[ line: 29843 ]]
 	return t
 end
 
-function t_161:jsonDecode() --[[ line: 29857 ]]
+function t_161:jsonDecode() --[[ line: 29859 ]]
 	-- upvalues: t_161 (ref), propTypesModule (ref)
 	local var5376 = t_161.new()
 	
@@ -21863,7 +21863,7 @@ typeRegistryModule.default:register(t.DownloadAppAction_Params)
 local t_162 = {}
 t_162.__index = t_162
 
-function t_162.new(p319) --[[ line: 29891 ]]
+function t_162.new(p319) --[[ line: 29893 ]]
 	-- upvalues: t (ref), t_162 (ref)
 	return setmetatable({
 		action_type = if p319 == nil or p319.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p319.action_type,
@@ -21871,7 +21871,7 @@ function t_162.new(p319) --[[ line: 29891 ]]
 	}, t_162)
 end
 
-function t_162:encode() --[[ line: 29900 ]]
+function t_162:encode() --[[ line: 29902 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5378 = 0
@@ -21895,7 +21895,7 @@ function t_162:encode() --[[ line: 29900 ]]
 	return buff_1
 end
 
-function t_162.decode(p320) --[[ line: 29926 ]]
+function t_162.decode(p320) --[[ line: 29928 ]]
 	-- upvalues: t_162 (ref), protoModule (ref), t (ref)
 	local var5385 = t_162.new()
 	local var5386 = 0
@@ -21949,7 +21949,7 @@ function t_162.decode(p320) --[[ line: 29926 ]]
 	return var5385
 end
 
-function t_162:jsonEncode() --[[ line: 29974 ]]
+function t_162:jsonEncode() --[[ line: 29976 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -21962,7 +21962,7 @@ function t_162:jsonEncode() --[[ line: 29974 ]]
 	return t_1
 end
 
-function t_162:jsonDecode() --[[ line: 29996 ]]
+function t_162:jsonDecode() --[[ line: 29998 ]]
 	-- upvalues: t_162 (ref), t (ref)
 	local var5406 = t_162.new()
 	
@@ -21990,14 +21990,14 @@ typeRegistryModule.default:register(t.ActionSequenceAction)
 local t_163 = {}
 t_163.__index = t_163
 
-function t_163.new(p321) --[[ line: 30036 ]]
+function t_163.new(p321) --[[ line: 30038 ]]
 	-- upvalues: t_163 (ref)
 	return setmetatable({
 		actions = if p321 == nil or p321.actions == nil then {} else p321.actions
 	}, t_163)
 end
 
-function t_163:encode() --[[ line: 30044 ]]
+function t_163:encode() --[[ line: 30046 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5408 = 0
@@ -22017,7 +22017,7 @@ function t_163:encode() --[[ line: 30044 ]]
 	return buff_1
 end
 
-function t_163.decode(p322) --[[ line: 30061 ]]
+function t_163.decode(p322) --[[ line: 30063 ]]
 	-- upvalues: t_163 (ref), protoModule (ref), t (ref)
 	local var5413 = t_163.new()
 	local var5414 = 0
@@ -22064,7 +22064,7 @@ function t_163.decode(p322) --[[ line: 30061 ]]
 	return var5413
 end
 
-function t_163:jsonEncode() --[[ line: 30104 ]]
+function t_163:jsonEncode() --[[ line: 30106 ]]
 	local t = {}
 	
 	if self.actions ~= nil and #self.actions > 0 then
@@ -22078,7 +22078,7 @@ function t_163:jsonEncode() --[[ line: 30104 ]]
 	return t
 end
 
-function t_163:jsonDecode() --[[ line: 30118 ]]
+function t_163:jsonDecode() --[[ line: 30120 ]]
 	-- upvalues: t_163 (ref), t (ref)
 	local var5432 = t_163.new()
 	
@@ -22102,7 +22102,7 @@ typeRegistryModule.default:register(t.ActionSequenceAction_Params)
 local t_164 = {}
 t_164.__index = t_164
 
-function t_164.new(p323) --[[ line: 30147 ]]
+function t_164.new(p323) --[[ line: 30149 ]]
 	-- upvalues: t (ref), t_164 (ref)
 	return setmetatable({
 		action_type = if p323 == nil or p323.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p323.action_type,
@@ -22110,7 +22110,7 @@ function t_164.new(p323) --[[ line: 30147 ]]
 	}, t_164)
 end
 
-function t_164:encode() --[[ line: 30158 ]]
+function t_164:encode() --[[ line: 30160 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5435 = 0
@@ -22134,7 +22134,7 @@ function t_164:encode() --[[ line: 30158 ]]
 	return buff_1
 end
 
-function t_164.decode(p324) --[[ line: 30184 ]]
+function t_164.decode(p324) --[[ line: 30186 ]]
 	-- upvalues: t_164 (ref), protoModule (ref), t (ref)
 	local var5442 = t_164.new()
 	local var5443 = 0
@@ -22188,7 +22188,7 @@ function t_164.decode(p324) --[[ line: 30184 ]]
 	return var5442
 end
 
-function t_164:jsonEncode() --[[ line: 30232 ]]
+function t_164:jsonEncode() --[[ line: 30234 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -22201,7 +22201,7 @@ function t_164:jsonEncode() --[[ line: 30232 ]]
 	return t_1
 end
 
-function t_164:jsonDecode() --[[ line: 30254 ]]
+function t_164:jsonDecode() --[[ line: 30256 ]]
 	-- upvalues: t_164 (ref), t (ref)
 	local var5463 = t_164.new()
 	
@@ -22229,7 +22229,7 @@ typeRegistryModule.default:register(t.RefreshFeedEntryFromApiAction)
 local t_165 = {}
 t_165.__index = t_165
 
-function t_165.new(p325) --[[ line: 30294 ]]
+function t_165.new(p325) --[[ line: 30296 ]]
 	-- upvalues: t_165 (ref)
 	return setmetatable({
 		page_entry_identifier = if p325 == nil or p325.page_entry_identifier == nil then nil else p325.page_entry_identifier,
@@ -22238,7 +22238,7 @@ function t_165.new(p325) --[[ line: 30294 ]]
 	}, t_165)
 end
 
-function t_165:encode() --[[ line: 30310 ]]
+function t_165:encode() --[[ line: 30312 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5465 = 0
@@ -22270,7 +22270,7 @@ function t_165:encode() --[[ line: 30310 ]]
 	return buff_1
 end
 
-function t_165.decode(p326) --[[ line: 30337 ]]
+function t_165.decode(p326) --[[ line: 30339 ]]
 	-- upvalues: t_165 (ref), protoModule (ref), propTypesModule (ref)
 	local var5476 = t_165.new()
 	local var5477 = 0
@@ -22327,7 +22327,7 @@ function t_165.decode(p326) --[[ line: 30337 ]]
 	return var5476
 end
 
-function t_165:jsonEncode() --[[ line: 30393 ]]
+function t_165:jsonEncode() --[[ line: 30395 ]]
 	local t = {}
 	
 	if self.page_entry_identifier ~= nil then
@@ -22342,7 +22342,7 @@ function t_165:jsonEncode() --[[ line: 30393 ]]
 	return t
 end
 
-function t_165:jsonDecode() --[[ line: 30411 ]]
+function t_165:jsonDecode() --[[ line: 30413 ]]
 	-- upvalues: t_165 (ref), propTypesModule (ref)
 	local var5498 = t_165.new()
 	
@@ -22376,7 +22376,7 @@ typeRegistryModule.default:register(t.RefreshFeedEntryFromApiAction_Params)
 local t_166 = {}
 t_166.__index = t_166
 
-function t_166.new(p327) --[[ line: 30463 ]]
+function t_166.new(p327) --[[ line: 30465 ]]
 	-- upvalues: t (ref), t_166 (ref)
 	return setmetatable({
 		action_type = if p327 == nil or p327.action_type == nil then assert(t.ActionType.fromNumber(0), "Enum has no 0 default") else p327.action_type,
@@ -22384,7 +22384,7 @@ function t_166.new(p327) --[[ line: 30463 ]]
 	}, t_166)
 end
 
-function t_166:encode() --[[ line: 30474 ]]
+function t_166:encode() --[[ line: 30476 ]]
 	-- upvalues: t (ref), protoModule (ref)
 	local buff = buffer.create(0)
 	local var5500 = 0
@@ -22408,7 +22408,7 @@ function t_166:encode() --[[ line: 30474 ]]
 	return buff_1
 end
 
-function t_166.decode(p328) --[[ line: 30500 ]]
+function t_166.decode(p328) --[[ line: 30502 ]]
 	-- upvalues: t_166 (ref), protoModule (ref), t (ref)
 	local var5507 = t_166.new()
 	local var5508 = 0
@@ -22462,7 +22462,7 @@ function t_166.decode(p328) --[[ line: 30500 ]]
 	return var5507
 end
 
-function t_166:jsonEncode() --[[ line: 30548 ]]
+function t_166:jsonEncode() --[[ line: 30550 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -22475,7 +22475,7 @@ function t_166:jsonEncode() --[[ line: 30548 ]]
 	return t_1
 end
 
-function t_166:jsonDecode() --[[ line: 30570 ]]
+function t_166:jsonDecode() --[[ line: 30572 ]]
 	-- upvalues: t_166 (ref), t (ref)
 	local var5528 = t_166.new()
 	
@@ -22503,7 +22503,7 @@ typeRegistryModule.default:register(t.OpenProfileFramesEditorAction)
 local t_167 = {}
 t_167.__index = t_167
 
-function t_167.new(p329) --[[ line: 30610 ]]
+function t_167.new(p329) --[[ line: 30612 ]]
 	-- upvalues: t_167 (ref)
 	return setmetatable({
 		prompt_id = if p329 == nil or p329.prompt_id == nil then nil else p329.prompt_id,
@@ -22512,7 +22512,7 @@ function t_167.new(p329) --[[ line: 30610 ]]
 	}, t_167)
 end
 
-function t_167:encode() --[[ line: 30620 ]]
+function t_167:encode() --[[ line: 30622 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5530 = 0
@@ -22544,7 +22544,7 @@ function t_167:encode() --[[ line: 30620 ]]
 	return buff_1
 end
 
-function t_167.decode(p330) --[[ line: 30647 ]]
+function t_167.decode(p330) --[[ line: 30649 ]]
 	-- upvalues: t_167 (ref), protoModule (ref), propTypesModule (ref)
 	local var5541 = t_167.new()
 	local var5542 = 0
@@ -22601,7 +22601,7 @@ function t_167.decode(p330) --[[ line: 30647 ]]
 	return var5541
 end
 
-function t_167:jsonEncode() --[[ line: 30700 ]]
+function t_167:jsonEncode() --[[ line: 30702 ]]
 	local t = {}
 	
 	if self.prompt_id ~= nil then
@@ -22616,7 +22616,7 @@ function t_167:jsonEncode() --[[ line: 30700 ]]
 	return t
 end
 
-function t_167:jsonDecode() --[[ line: 30718 ]]
+function t_167:jsonDecode() --[[ line: 30720 ]]
 	-- upvalues: t_167 (ref), propTypesModule (ref)
 	local var5563 = t_167.new()
 	
@@ -22647,17 +22647,18 @@ typeRegistryModule.default:register(t.OpenProfileFramesEditorAction_Params)
 local t_168 = {}
 t_168.__index = t_168
 
-function t_168.new(p331) --[[ line: 30761 ]]
+function t_168.new(p331) --[[ line: 30763 ]]
 	-- upvalues: t_168 (ref)
 	return setmetatable({
 		kind = if p331 == nil or p331.kind == nil then nil else p331.kind,
 		telemetry_handler = if p331 == nil or p331.telemetry_handler == nil then nil else p331.telemetry_handler,
 		accessibility_label = if p331 == nil or p331.accessibility_label == nil then nil else p331.accessibility_label,
-		skip_unified_logging = if p331 == nil or p331.skip_unified_logging == nil then nil else p331.skip_unified_logging
+		skip_unified_logging = if p331 == nil or p331.skip_unified_logging == nil then nil else p331.skip_unified_logging,
+		action_event_name = if p331 == nil or p331.action_event_name == nil then nil else p331.action_event_name
 	}, t_168)
 end
 
-function t_168:encode() --[[ line: 30774 ]]
+function t_168:encode() --[[ line: 30777 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5565 = 0
@@ -23154,694 +23155,706 @@ function t_168:encode() --[[ line: 30774 ]]
 		buff = var5807
 		var5565 = var5808
 	end
+	if self.action_event_name ~= nil then
+		local var5809 = self.action_event_name:encode()
+		local var5810, var5811 = protoModule.writeTag(buff, var5565, 1003, protoModule.wireTypes.lengthDelimited)
+		var5810, var5811 = protoModule.writeBuffer(var5810, var5811, var5809, buffer.len(var5809))
+		buff = var5810
+		var5565 = var5811
+	end
 	local buff_1 = buffer.create(var5565)
 	buffer.copy(buff_1, 0, buff, 0, var5565)
 	
 	return buff_1
 end
 
-function t_168.decode(p332) --[[ line: 31117 ]]
+function t_168.decode(p332) --[[ line: 31126 ]]
 	-- upvalues: t_168 (ref), protoModule (ref), t (ref), propTypesModule (ref)
-	local var5810 = t_168.new()
-	local var5811 = 0
-	while var5811 < buffer.len(p332) do
+	local var5813 = t_168.new()
+	local var5814 = 0
+	while var5814 < buffer.len(p332) do
 		local _ = nil
-		local var5812 = nil
-		local var5813, var5814, var5815 = protoModule.readTag(p332, var5811)
-		local var5816 = var5813
-		var5812 = var5814
-		var5811 = var5815
+		local var5815 = nil
+		local var5816, var5817, var5818 = protoModule.readTag(p332, var5814)
+		local var5819 = var5816
+		var5815 = var5817
+		var5814 = var5818
 		
-		if var5812 == protoModule.wireTypes.varint then
+		if var5815 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var5817, var5818 = protoModule.readVarInt(p332, var5811)
-			local _ = var5817
-			var5811 = var5818
+			local var5820, var5821 = protoModule.readVarInt(p332, var5814)
+			local _ = var5820
+			var5814 = var5821
 			continue
 		end
-		if var5812 == protoModule.wireTypes.lengthDelimited then
-			if var5816 == 1 then
+		if var5815 == protoModule.wireTypes.lengthDelimited then
+			if var5819 == 1 then
 				local _ = nil
-				local var5819, var5820 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5820
-				var5810.kind = {
+				local var5822, var5823 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5823
+				var5813.kind = {
 					type = "dismiss_dialog_action",
-					value = t.DismissDialogAction.decode(var5819)
+					value = t.DismissDialogAction.decode(var5822)
 				}
-			elseif var5816 == 2 then
+			elseif var5819 == 2 then
 				local _ = nil
-				local var5821, var5822 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5822
-				var5810.kind = {
+				local var5824, var5825 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5825
+				var5813.kind = {
 					type = "link_action",
-					value = t.LinkAction.decode(var5821)
+					value = t.LinkAction.decode(var5824)
 				}
-			elseif var5816 == 3 then
+			elseif var5819 == 3 then
 				local _ = nil
-				local var5823, var5824 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5824
-				var5810.kind = {
+				local var5826, var5827 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5827
+				var5813.kind = {
 					type = "open_game_details_action",
-					value = t.OpenGameDetailsAction.decode(var5823)
+					value = t.OpenGameDetailsAction.decode(var5826)
 				}
-			elseif var5816 == 4 then
+			elseif var5819 == 4 then
 				local _ = nil
-				local var5825, var5826 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5826
-				var5810.kind = {
+				local var5828, var5829 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5829
+				var5813.kind = {
 					type = "open_join_friends_action",
-					value = t.OpenJoinFriendsAction.decode(var5825)
+					value = t.OpenJoinFriendsAction.decode(var5828)
 				}
-			elseif var5816 == 5 then
+			elseif var5819 == 5 then
 				local _ = nil
-				local var5827, var5828 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5828
-				var5810.kind = {
+				local var5830, var5831 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5831
+				var5813.kind = {
 					type = "open_marketplace_try_on_action",
-					value = t.OpenMarketplaceTryOnAction.decode(var5827)
+					value = t.OpenMarketplaceTryOnAction.decode(var5830)
 				}
-			elseif var5816 == 6 then
+			elseif var5819 == 6 then
 				local _ = nil
-				local var5829, var5830 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5830
-				var5810.kind = {
+				local var5832, var5833 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5833
+				var5813.kind = {
 					type = "open_see_all_action",
-					value = t.OpenSeeAllAction.decode(var5829)
+					value = t.OpenSeeAllAction.decode(var5832)
 				}
-			elseif var5816 == 7 then
+			elseif var5819 == 7 then
 				local _ = nil
-				local var5831, var5832 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5832
-				var5810.kind = {
+				local var5834, var5835 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5835
+				var5813.kind = {
 					type = "open_sponsored_tooltip_action",
-					value = t.OpenSponsoredTooltipAction.decode(var5831)
+					value = t.OpenSponsoredTooltipAction.decode(var5834)
 				}
-			elseif var5816 == 8 then
+			elseif var5819 == 8 then
 				local _ = nil
-				local var5833, var5834 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5834
-				var5810.kind = {
+				local var5836, var5837 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5837
+				var5813.kind = {
 					type = "play_button_click_action",
-					value = t.PlayButtonClickAction.decode(var5833)
+					value = t.PlayButtonClickAction.decode(var5836)
 				}
-			elseif var5816 == 9 then
+			elseif var5819 == 9 then
 				local _ = nil
-				local var5835, var5836 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5836
-				var5810.kind = {
+				local var5838, var5839 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5839
+				var5813.kind = {
 					type = "update_user_settings_action",
-					value = t.UpdateUserSettingsAction.decode(var5835)
+					value = t.UpdateUserSettingsAction.decode(var5838)
 				}
-			elseif var5816 == 10 then
+			elseif var5819 == 10 then
 				local _ = nil
-				local var5837, var5838 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5838
-				var5810.kind = {
+				local var5840, var5841 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5841
+				var5813.kind = {
 					type = "open_tooltip_action",
-					value = t.OpenTooltipAction.decode(var5837)
+					value = t.OpenTooltipAction.decode(var5840)
 				}
-			elseif var5816 == 11 then
+			elseif var5819 == 11 then
 				local _ = nil
-				local var5839, var5840 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5840
-				var5810.kind = {
+				local var5842, var5843 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5843
+				var5813.kind = {
 					type = "open_badge_details_action",
-					value = t.OpenBadgeDetailsAction.decode(var5839)
+					value = t.OpenBadgeDetailsAction.decode(var5842)
 				}
-			elseif var5816 == 12 then
+			elseif var5819 == 12 then
 				local _ = nil
-				local var5841, var5842 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5842
-				var5810.kind = {
+				local var5844, var5845 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5845
+				var5813.kind = {
 					type = "load_more_from_api_action",
-					value = t.LoadMoreFromApiAction.decode(var5841)
+					value = t.LoadMoreFromApiAction.decode(var5844)
 				}
-			elseif var5816 == 13 then
+			elseif var5819 == 13 then
 				local _ = nil
-				local var5843, var5844 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5844
-				var5810.kind = {
+				local var5846, var5847 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5847
+				var5813.kind = {
 					type = "share_action",
-					value = t.ShareAction.decode(var5843)
+					value = t.ShareAction.decode(var5846)
 				}
-			elseif var5816 == 14 then
+			elseif var5819 == 14 then
 				local _ = nil
-				local var5845, var5846 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5846
-				var5810.kind = {
+				local var5848, var5849 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5849
+				var5813.kind = {
 					type = "open_abuse_report_action",
-					value = t.OpenAbuseReportAction.decode(var5845)
+					value = t.OpenAbuseReportAction.decode(var5848)
 				}
-			elseif var5816 == 15 then
+			elseif var5819 == 15 then
 				local _ = nil
-				local var5847, var5848 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5848
-				var5810.kind = {
+				local var5850, var5851 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5851
+				var5813.kind = {
 					type = "remove_badge_from_inventory_action",
-					value = t.RemoveBadgeFromInventoryAction.decode(var5847)
+					value = t.RemoveBadgeFromInventoryAction.decode(var5850)
 				}
-			elseif var5816 == 16 then
+			elseif var5819 == 16 then
 				local _ = nil
-				local var5849, var5850 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5850
-				var5810.kind = {
+				local var5852, var5853 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5853
+				var5813.kind = {
 					type = "open_profile_action",
-					value = t.OpenProfileAction.decode(var5849)
+					value = t.OpenProfileAction.decode(var5852)
 				}
-			elseif var5816 == 17 then
+			elseif var5819 == 17 then
 				local _ = nil
-				local var5851, var5852 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5852
-				var5810.kind = {
+				local var5854, var5855 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5855
+				var5813.kind = {
 					type = "open_facial_age_estimation_action",
-					value = t.OpenFacialAgeEstimationAction.decode(var5851)
+					value = t.OpenFacialAgeEstimationAction.decode(var5854)
 				}
-			elseif var5816 == 18 then
+			elseif var5819 == 18 then
 				local _ = nil
-				local var5853, var5854 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5854
-				var5810.kind = {
+				local var5856, var5857 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5857
+				var5813.kind = {
 					type = "open_add_connections_page_action",
-					value = t.OpenAddConnectionsPageAction.decode(var5853)
+					value = t.OpenAddConnectionsPageAction.decode(var5856)
 				}
-			elseif var5816 == 19 then
+			elseif var5819 == 19 then
 				local _ = nil
-				local var5855, var5856 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5856
-				var5810.kind = {
+				local var5858, var5859 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5859
+				var5813.kind = {
 					type = "open_marketplace_action",
-					value = t.OpenMarketplaceAction.decode(var5855)
+					value = t.OpenMarketplaceAction.decode(var5858)
 				}
-			elseif var5816 == 20 then
+			elseif var5819 == 20 then
 				local _ = nil
-				local var5857, var5858 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5858
-				var5810.kind = {
+				local var5860, var5861 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5861
+				var5813.kind = {
 					type = "hide_profile_completion_action",
-					value = t.HideProfileCompletionAction.decode(var5857)
+					value = t.HideProfileCompletionAction.decode(var5860)
 				}
-			elseif var5816 == 21 then
+			elseif var5819 == 21 then
 				local _ = nil
-				local var5859, var5860 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5860
-				var5810.kind = {
+				local var5862, var5863 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5863
+				var5813.kind = {
 					type = "select_marketplace_catalog_category",
-					value = t.SelectMarketplaceCatalogCategory.decode(var5859)
+					value = t.SelectMarketplaceCatalogCategory.decode(var5862)
 				}
-			elseif var5816 == 22 then
+			elseif var5819 == 22 then
 				local _ = nil
-				local var5861, var5862 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5862
-				var5810.kind = {
+				local var5864, var5865 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5865
+				var5813.kind = {
 					type = "select_marketplace_catalog_subcategory",
-					value = t.SelectMarketplaceCatalogSubcategory.decode(var5861)
+					value = t.SelectMarketplaceCatalogSubcategory.decode(var5864)
 				}
-			elseif var5816 == 23 then
+			elseif var5819 == 23 then
 				local _ = nil
-				local var5863, var5864 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5864
-				var5810.kind = {
+				local var5866, var5867 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5867
+				var5813.kind = {
 					type = "open_marketplace_catalog_see_all",
-					value = t.OpenMarketplaceCatalogSeeAll.decode(var5863)
+					value = t.OpenMarketplaceCatalogSeeAll.decode(var5866)
 				}
-			elseif var5816 == 24 then
+			elseif var5819 == 24 then
 				local _ = nil
-				local var5865, var5866 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5866
-				var5810.kind = {
+				local var5868, var5869 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5869
+				var5813.kind = {
 					type = "close_marketplace_category_tooltip",
-					value = t.CloseMarketplaceCategoryTooltip.decode(var5865)
+					value = t.CloseMarketplaceCategoryTooltip.decode(var5868)
 				}
-			elseif var5816 == 25 then
+			elseif var5819 == 25 then
 				local _ = nil
-				local var5867, var5868 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5868
-				var5810.kind = {
+				local var5870, var5871 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5871
+				var5813.kind = {
 					type = "resize_marketplace_catalog",
-					value = t.ResizeMarketplaceCatalog.decode(var5867)
+					value = t.ResizeMarketplaceCatalog.decode(var5870)
 				}
-			elseif var5816 == 26 then
+			elseif var5819 == 26 then
 				local _ = nil
-				local var5869, var5870 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5870
-				var5810.kind = {
+				local var5872, var5873 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5873
+				var5813.kind = {
 					type = "open_marketplace_catalog_filters",
-					value = t.OpenMarketplaceCatalogFilters.decode(var5869)
+					value = t.OpenMarketplaceCatalogFilters.decode(var5872)
 				}
-			elseif var5816 == 27 then
+			elseif var5819 == 27 then
 				local _ = nil
-				local var5871, var5872 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5872
-				var5810.kind = {
+				local var5874, var5875 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5875
+				var5813.kind = {
 					type = "open_social_link_action",
-					value = t.OpenSocialLinkAction.decode(var5871)
+					value = t.OpenSocialLinkAction.decode(var5874)
 				}
-			elseif var5816 == 28 then
+			elseif var5819 == 28 then
 				local _ = nil
-				local var5873, var5874 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5874
-				var5810.kind = {
+				local var5876, var5877 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5877
+				var5813.kind = {
 					type = "open_charts_sort_detail_action",
-					value = t.OpenChartsSortDetailAction.decode(var5873)
+					value = t.OpenChartsSortDetailAction.decode(var5876)
 				}
-			elseif var5816 == 29 then
+			elseif var5819 == 29 then
 				local _ = nil
-				local var5875, var5876 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5876
-				var5810.kind = {
+				local var5878, var5879 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5879
+				var5813.kind = {
 					type = "open_song_detail_action",
-					value = t.OpenSongDetailAction.decode(var5875)
+					value = t.OpenSongDetailAction.decode(var5878)
 				}
-			elseif var5816 == 30 then
+			elseif var5819 == 30 then
 				local _ = nil
-				local var5877, var5878 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5878
-				var5810.kind = {
+				local var5880, var5881 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5881
+				var5813.kind = {
 					type = "refresh_from_api_action",
-					value = t.RefreshFromApiAction.decode(var5877)
+					value = t.RefreshFromApiAction.decode(var5880)
 				}
-			elseif var5816 == 31 then
+			elseif var5819 == 31 then
 				local _ = nil
-				local var5879, var5880 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5880
-				var5810.kind = {
+				local var5882, var5883 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5883
+				var5813.kind = {
 					type = "rsvp_to_event_action",
-					value = t.RsvpToEventAction.decode(var5879)
+					value = t.RsvpToEventAction.decode(var5882)
 				}
-			elseif var5816 == 32 then
+			elseif var5819 == 32 then
 				local _ = nil
-				local var5881, var5882 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5882
-				var5810.kind = {
+				local var5884, var5885 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5885
+				var5813.kind = {
 					type = "apply_charts_filter_action",
-					value = t.ApplyChartsFilterAction.decode(var5881)
+					value = t.ApplyChartsFilterAction.decode(var5884)
 				}
-			elseif var5816 == 33 then
+			elseif var5819 == 33 then
 				local _ = nil
-				local var5883, var5884 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5884
-				var5810.kind = {
+				local var5886, var5887 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5887
+				var5813.kind = {
 					type = "analytics_event_action",
-					value = t.AnalyticsEventAction.decode(var5883)
+					value = t.AnalyticsEventAction.decode(var5886)
 				}
-			elseif var5816 == 34 then
+			elseif var5819 == 34 then
 				local _ = nil
-				local var5885, var5886 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5886
-				var5810.kind = {
+				local var5888, var5889 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5889
+				var5813.kind = {
 					type = "custom_analytics_event_action",
-					value = t.CustomAnalyticsEventAction.decode(var5885)
+					value = t.CustomAnalyticsEventAction.decode(var5888)
 				}
-			elseif var5816 == 35 then
+			elseif var5819 == 35 then
 				local _ = nil
-				local var5887, var5888 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5888
-				var5810.kind = {
+				local var5890, var5891 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5891
+				var5813.kind = {
 					type = "open_game_invite_action",
-					value = t.OpenGameInviteAction.decode(var5887)
+					value = t.OpenGameInviteAction.decode(var5890)
 				}
-			elseif var5816 == 36 then
+			elseif var5819 == 36 then
 				local _ = nil
-				local var5889, var5890 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5890
-				var5810.kind = {
+				local var5892, var5893 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5893
+				var5813.kind = {
 					type = "open_event_details_action",
-					value = t.OpenEventDetailsAction.decode(var5889)
+					value = t.OpenEventDetailsAction.decode(var5892)
 				}
-			elseif var5816 == 37 then
+			elseif var5819 == 37 then
 				local _ = nil
-				local var5891, var5892 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5892
-				var5810.kind = {
+				local var5894, var5895 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5895
+				var5813.kind = {
 					type = "launch_experience_action",
-					value = t.LaunchExperienceAction.decode(var5891)
+					value = t.LaunchExperienceAction.decode(var5894)
 				}
-			elseif var5816 == 38 then
+			elseif var5819 == 38 then
 				local _ = nil
-				local var5893, var5894 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5894
-				var5810.kind = {
+				local var5896, var5897 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5897
+				var5813.kind = {
 					type = "toggle_experience_favorite_action",
-					value = t.ToggleExperienceFavoriteAction.decode(var5893)
+					value = t.ToggleExperienceFavoriteAction.decode(var5896)
 				}
-			elseif var5816 == 39 then
+			elseif var5819 == 39 then
 				local _ = nil
-				local var5895, var5896 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5896
-				var5810.kind = {
+				local var5898, var5899 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5899
+				var5813.kind = {
 					type = "toggle_experience_follow_action",
-					value = t.ToggleExperienceFollowAction.decode(var5895)
+					value = t.ToggleExperienceFollowAction.decode(var5898)
 				}
-			elseif var5816 == 40 then
+			elseif var5819 == 40 then
 				local _ = nil
-				local var5897, var5898 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5898
-				var5810.kind = {
+				local var5900, var5901 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5901
+				var5813.kind = {
 					type = "toggle_experience_vote_action",
-					value = t.ToggleExperienceVoteAction.decode(var5897)
+					value = t.ToggleExperienceVoteAction.decode(var5900)
 				}
-			elseif var5816 == 41 then
+			elseif var5819 == 41 then
 				local _ = nil
-				local var5899, var5900 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5900
-				var5810.kind = {
+				local var5902, var5903 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5903
+				var5813.kind = {
 					type = "open_purchase_prompt_action",
-					value = t.OpenPurchasePromptAction.decode(var5899)
+					value = t.OpenPurchasePromptAction.decode(var5902)
 				}
-			elseif var5816 == 42 then
+			elseif var5819 == 42 then
 				local _ = nil
-				local var5901, var5902 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5902
-				var5810.kind = {
+				local var5904, var5905 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5905
+				var5813.kind = {
 					type = "open_sdui_overlay_action",
-					value = t.OpenSduiOverlayAction.decode(var5901)
+					value = t.OpenSduiOverlayAction.decode(var5904)
 				}
-			elseif var5816 == 43 then
+			elseif var5819 == 43 then
 				local _ = nil
-				local var5903, var5904 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5904
-				var5810.kind = {
+				local var5906, var5907 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5907
+				var5813.kind = {
 					type = "open_badges_see_all_action",
-					value = t.OpenBadgesSeeAllAction.decode(var5903)
+					value = t.OpenBadgesSeeAllAction.decode(var5906)
 				}
-			elseif var5816 == 44 then
+			elseif var5819 == 44 then
 				local _ = nil
-				local var5905, var5906 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5906
-				var5810.kind = {
+				local var5908, var5909 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5909
+				var5813.kind = {
 					type = "open_experience_store_see_all_action",
-					value = t.OpenExperienceStoreSeeAllAction.decode(var5905)
+					value = t.OpenExperienceStoreSeeAllAction.decode(var5908)
 				}
-			elseif var5816 == 45 then
+			elseif var5819 == 45 then
 				local _ = nil
-				local var5907, var5908 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5908
-				var5810.kind = {
+				local var5910, var5911 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5911
+				var5813.kind = {
 					type = "dismiss_game_feedback_action",
-					value = t.DismissGameFeedbackAction.decode(var5907)
+					value = t.DismissGameFeedbackAction.decode(var5910)
 				}
-			elseif var5816 == 46 then
+			elseif var5819 == 46 then
 				local _ = nil
-				local var5909, var5910 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5910
-				var5810.kind = {
+				local var5912, var5913 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5913
+				var5813.kind = {
 					type = "open_game_feedback_form_action",
-					value = t.OpenGameFeedbackFormAction.decode(var5909)
+					value = t.OpenGameFeedbackFormAction.decode(var5912)
 				}
-			elseif var5816 == 47 then
+			elseif var5819 == 47 then
 				local _ = nil
-				local var5911, var5912 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5912
-				var5810.kind = {
+				local var5914, var5915 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5915
+				var5813.kind = {
 					type = "enable_event_notifications_action",
-					value = t.EnableEventNotificationsAction.decode(var5911)
+					value = t.EnableEventNotificationsAction.decode(var5914)
 				}
-			elseif var5816 == 48 then
+			elseif var5819 == 48 then
 				local _ = nil
-				local var5913, var5914 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5914
-				var5810.kind = {
+				local var5916, var5917 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5917
+				var5813.kind = {
 					type = "dismiss_event_notifications_modal_action",
-					value = t.DismissEventNotificationsModalAction.decode(var5913)
+					value = t.DismissEventNotificationsModalAction.decode(var5916)
 				}
-			elseif var5816 == 49 then
+			elseif var5819 == 49 then
 				local _ = nil
-				local var5915, var5916 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5916
-				var5810.kind = {
+				local var5918, var5919 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5919
+				var5813.kind = {
 					type = "open_amp_wizard_action",
-					value = t.OpenAmpWizardAction.decode(var5915)
+					value = t.OpenAmpWizardAction.decode(var5918)
 				}
-			elseif var5816 == 50 then
+			elseif var5819 == 50 then
 				local _ = nil
-				local var5917, var5918 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5918
-				var5810.kind = {
+				local var5920, var5921 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5921
+				var5813.kind = {
 					type = "open_subscription_purchase_page_action",
-					value = t.OpenSubscriptionPurchasePageAction.decode(var5917)
+					value = t.OpenSubscriptionPurchasePageAction.decode(var5920)
 				}
-			elseif var5816 == 51 then
+			elseif var5819 == 51 then
 				local _ = nil
-				local var5919, var5920 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5920
-				var5810.kind = {
+				local var5922, var5923 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5923
+				var5813.kind = {
 					type = "refresh_game_passes_action",
-					value = t.RefreshGamePassesAction.decode(var5919)
+					value = t.RefreshGamePassesAction.decode(var5922)
 				}
-			elseif var5816 == 52 then
+			elseif var5819 == 52 then
 				local _ = nil
-				local var5921, var5922 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5922
-				var5810.kind = {
+				local var5924, var5925 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5925
+				var5813.kind = {
 					type = "refresh_playability_action",
-					value = t.RefreshPlayabilityAction.decode(var5921)
+					value = t.RefreshPlayabilityAction.decode(var5924)
 				}
-			elseif var5816 == 53 then
+			elseif var5819 == 53 then
 				local _ = nil
-				local var5923, var5924 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5924
-				var5810.kind = {
+				local var5926, var5927 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5927
+				var5813.kind = {
 					type = "open_social_proof_user_list_sheet_action",
-					value = t.OpenSocialProofUserListSheetAction.decode(var5923)
+					value = t.OpenSocialProofUserListSheetAction.decode(var5926)
 				}
-			elseif var5816 == 54 then
+			elseif var5819 == 54 then
 				local _ = nil
-				local var5925, var5926 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5926
-				var5810.kind = {
+				local var5928, var5929 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5929
+				var5813.kind = {
 					type = "report_surface_load_time_milestone_action",
-					value = t.ReportSurfaceLoadTimeMilestoneAction.decode(var5925)
+					value = t.ReportSurfaceLoadTimeMilestoneAction.decode(var5928)
 				}
-			elseif var5816 == 55 then
+			elseif var5819 == 55 then
 				local _ = nil
-				local var5927, var5928 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5928
-				var5810.kind = {
+				local var5930, var5931 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5931
+				var5813.kind = {
 					type = "open_search_results_tab_action",
-					value = t.OpenSearchResultsTabAction.decode(var5927)
+					value = t.OpenSearchResultsTabAction.decode(var5930)
 				}
-			elseif var5816 == 56 then
+			elseif var5819 == 56 then
 				local _ = nil
-				local var5929, var5930 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5930
-				var5810.kind = {
+				local var5932, var5933 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5933
+				var5813.kind = {
 					type = "open_phone_upsell_modal_action",
-					value = t.OpenPhoneUpsellModalAction.decode(var5929)
+					value = t.OpenPhoneUpsellModalAction.decode(var5932)
 				}
-			elseif var5816 == 57 then
+			elseif var5819 == 57 then
 				local _ = nil
-				local var5931, var5932 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5932
-				var5810.kind = {
+				local var5934, var5935 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5935
+				var5813.kind = {
 					type = "open_email_upsell_modal_action",
-					value = t.OpenEmailUpsellModalAction.decode(var5931)
+					value = t.OpenEmailUpsellModalAction.decode(var5934)
 				}
-			elseif var5816 == 58 then
+			elseif var5819 == 58 then
 				local _ = nil
-				local var5933, var5934 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5934
-				var5810.kind = {
+				local var5936, var5937 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5937
+				var5813.kind = {
 					type = "dismiss_prompt_action",
-					value = t.DismissPromptAction.decode(var5933)
+					value = t.DismissPromptAction.decode(var5936)
 				}
-			elseif var5816 == 59 then
+			elseif var5819 == 59 then
 				local _ = nil
-				local var5935, var5936 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5936
-				var5810.kind = {
+				local var5938, var5939 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5939
+				var5813.kind = {
 					type = "request_friendship_action",
-					value = t.RequestFriendshipAction.decode(var5935)
+					value = t.RequestFriendshipAction.decode(var5938)
 				}
-			elseif var5816 == 60 then
+			elseif var5819 == 60 then
 				local _ = nil
-				local var5937, var5938 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5938
-				var5810.kind = {
+				local var5940, var5941 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5941
+				var5813.kind = {
 					type = "refresh_developer_products_action",
-					value = t.RefreshDeveloperProductsAction.decode(var5937)
+					value = t.RefreshDeveloperProductsAction.decode(var5940)
 				}
-			elseif var5816 == 61 then
+			elseif var5819 == 61 then
 				local _ = nil
-				local var5939, var5940 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5940
-				var5810.kind = {
+				local var5942, var5943 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5943
+				var5813.kind = {
 					type = "open_fae_trial_upsell_action",
-					value = t.OpenFaeTrialUpsellAction.decode(var5939)
+					value = t.OpenFaeTrialUpsellAction.decode(var5942)
 				}
-			elseif var5816 == 62 then
+			elseif var5819 == 62 then
 				local _ = nil
-				local var5941, var5942 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5942
-				var5810.kind = {
+				local var5944, var5945 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5945
+				var5813.kind = {
 					type = "refresh_omni_recommendation_feed_item_action",
-					value = t.RefreshOmniRecommendationFeedItemAction.decode(var5941)
+					value = t.RefreshOmniRecommendationFeedItemAction.decode(var5944)
 				}
-			elseif var5816 == 63 then
+			elseif var5819 == 63 then
 				local _ = nil
-				local var5943, var5944 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5944
-				var5810.kind = {
+				local var5946, var5947 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5947
+				var5813.kind = {
 					type = "ai_overview_feedback_action",
-					value = t.AiOverviewFeedbackAction.decode(var5943)
+					value = t.AiOverviewFeedbackAction.decode(var5946)
 				}
-			elseif var5816 == 64 then
+			elseif var5819 == 64 then
 				local _ = nil
-				local var5945, var5946 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5946
-				var5810.kind = {
+				local var5948, var5949 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5949
+				var5813.kind = {
 					type = "open_trusted_friends_upsell_modal_action",
-					value = t.OpenTrustedFriendsUpsellModalAction.decode(var5945)
+					value = t.OpenTrustedFriendsUpsellModalAction.decode(var5948)
 				}
-			elseif var5816 == 65 then
+			elseif var5819 == 65 then
 				local _ = nil
-				local var5947, var5948 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5948
-				var5810.kind = {
+				local var5950, var5951 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5951
+				var5813.kind = {
 					type = "record_party_chat_conversation_upsell_acknowledgement_action",
-					value = t.RecordPartyChatConversationUpsellAcknowledgementAction.decode(var5947)
+					value = t.RecordPartyChatConversationUpsellAcknowledgementAction.decode(var5950)
 				}
-			elseif var5816 == 66 then
+			elseif var5819 == 66 then
 				local _ = nil
-				local var5949, var5950 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5950
-				var5810.kind = {
+				local var5952, var5953 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5953
+				var5813.kind = {
 					type = "open_search_results_with_query_action",
-					value = t.OpenSearchResultsWithQueryAction.decode(var5949)
+					value = t.OpenSearchResultsWithQueryAction.decode(var5952)
 				}
-			elseif var5816 == 67 then
+			elseif var5819 == 67 then
 				local _ = nil
-				local var5951, var5952 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5952
-				var5810.kind = {
+				local var5954, var5955 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5955
+				var5813.kind = {
 					type = "select_marketplace_favorites_category",
-					value = t.SelectMarketplaceFavoritesCategory.decode(var5951)
+					value = t.SelectMarketplaceFavoritesCategory.decode(var5954)
 				}
-			elseif var5816 == 68 then
+			elseif var5819 == 68 then
 				local _ = nil
-				local var5953, var5954 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5954
-				var5810.kind = {
+				local var5956, var5957 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5957
+				var5813.kind = {
 					type = "download_app_action",
-					value = t.DownloadAppAction.decode(var5953)
+					value = t.DownloadAppAction.decode(var5956)
 				}
-			elseif var5816 == 69 then
+			elseif var5819 == 69 then
 				local _ = nil
-				local var5955, var5956 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5956
-				var5810.kind = {
+				local var5958, var5959 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5959
+				var5813.kind = {
 					type = "refresh_charts_sort_detail_action",
-					value = t.RefreshChartsSortDetailAction.decode(var5955)
+					value = t.RefreshChartsSortDetailAction.decode(var5958)
 				}
-			elseif var5816 == 70 then
+			elseif var5819 == 70 then
 				local _ = nil
-				local var5957, var5958 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5958
-				var5810.kind = {
+				local var5960, var5961 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5961
+				var5813.kind = {
 					type = "join_community_action",
-					value = t.JoinCommunityAction.decode(var5957)
+					value = t.JoinCommunityAction.decode(var5960)
 				}
-			elseif var5816 == 71 then
+			elseif var5819 == 71 then
 				local _ = nil
-				local var5959, var5960 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5960
-				var5810.kind = {
+				local var5962, var5963 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5963
+				var5813.kind = {
 					type = "view_community_action",
-					value = t.ViewCommunityAction.decode(var5959)
+					value = t.ViewCommunityAction.decode(var5962)
 				}
-			elseif var5816 == 72 then
+			elseif var5819 == 72 then
 				local _ = nil
-				local var5961, var5962 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5962
-				var5810.kind = {
+				local var5964, var5965 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5965
+				var5813.kind = {
 					type = "pin_experience_shortcut_action",
-					value = t.PinExperienceShortcutAction.decode(var5961)
+					value = t.PinExperienceShortcutAction.decode(var5964)
 				}
-			elseif var5816 == 73 then
+			elseif var5819 == 73 then
 				local _ = nil
-				local var5963, var5964 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5964
-				var5810.kind = {
+				local var5966, var5967 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5967
+				var5813.kind = {
 					type = "select_marketplace_favorites_subcategory",
-					value = t.SelectMarketplaceFavoritesSubcategory.decode(var5963)
+					value = t.SelectMarketplaceFavoritesSubcategory.decode(var5966)
 				}
-			elseif var5816 == 74 then
+			elseif var5819 == 74 then
 				local _ = nil
-				local var5965, var5966 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5966
-				var5810.kind = {
+				local var5968, var5969 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5969
+				var5813.kind = {
 					type = "show_toast_action",
-					value = t.ShowToastAction.decode(var5965)
+					value = t.ShowToastAction.decode(var5968)
 				}
-			elseif var5816 == 75 then
+			elseif var5819 == 75 then
 				local _ = nil
-				local var5967, var5968 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5968
-				var5810.kind = {
+				local var5970, var5971 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5971
+				var5813.kind = {
 					type = "open_incoming_transfer_upsell_action",
-					value = t.OpenIncomingTransferUpsellAction.decode(var5967)
+					value = t.OpenIncomingTransferUpsellAction.decode(var5970)
 				}
-			elseif var5816 == 76 then
+			elseif var5819 == 76 then
 				local _ = nil
-				local var5969, var5970 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5970
-				var5810.kind = {
+				local var5972, var5973 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5973
+				var5813.kind = {
 					type = "action_sequence_action",
-					value = t.ActionSequenceAction.decode(var5969)
+					value = t.ActionSequenceAction.decode(var5972)
 				}
-			elseif var5816 == 77 then
+			elseif var5819 == 77 then
 				local _ = nil
-				local var5971, var5972 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5972
-				var5810.kind = {
+				local var5974, var5975 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5975
+				var5813.kind = {
 					type = "refresh_feed_entry_from_api_action",
-					value = t.RefreshFeedEntryFromApiAction.decode(var5971)
+					value = t.RefreshFeedEntryFromApiAction.decode(var5974)
 				}
-			elseif var5816 == 78 then
+			elseif var5819 == 78 then
 				local _ = nil
-				local var5973, var5974 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5974
-				var5810.kind = {
+				local var5976, var5977 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5977
+				var5813.kind = {
 					type = "open_profile_frames_editor_action",
-					value = t.OpenProfileFramesEditorAction.decode(var5973)
+					value = t.OpenProfileFramesEditorAction.decode(var5976)
 				}
-			elseif var5816 == 1000 then
+			elseif var5819 == 1000 then
 				local _ = nil
-				local var5975, var5976 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5976
-				var5810.telemetry_handler = propTypesModule.StringProp.decode(var5975)
-			elseif var5816 == 1001 then
+				local var5978, var5979 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5979
+				var5813.telemetry_handler = propTypesModule.StringProp.decode(var5978)
+			elseif var5819 == 1001 then
 				local _ = nil
-				local var5977, var5978 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5978
-				var5810.accessibility_label = propTypesModule.StringFormat.decode(var5977)
-			elseif var5816 == 1002 then
+				local var5980, var5981 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5981
+				var5813.accessibility_label = propTypesModule.StringFormat.decode(var5980)
+			elseif var5819 == 1002 then
 				local _ = nil
-				local var5979, var5980 = protoModule.readBuffer(p332, var5811)
-				var5811 = var5980
-				var5810.skip_unified_logging = propTypesModule.BoolProp.decode(var5979)
+				local var5982, var5983 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5983
+				var5813.skip_unified_logging = propTypesModule.BoolProp.decode(var5982)
+			elseif var5819 == 1003 then
+				local _ = nil
+				local var5984, var5985 = protoModule.readBuffer(p332, var5814)
+				var5814 = var5985
+				var5813.action_event_name = propTypesModule.StringProp.decode(var5984)
 			else
 				local _ = nil
-				local var5981, var5982 = protoModule.readVarInt(p332, var5811)
-				var5811 = var5982 + var5981
+				local var5986, var5987 = protoModule.readVarInt(p332, var5814)
+				var5814 = var5987 + var5986
 			end
-		elseif var5812 == protoModule.wireTypes.i32 then
+		elseif var5815 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var5983, var5984 = protoModule.readFixed32(p332, var5811)
-			local _ = var5983
-			var5811 = var5984
-		elseif var5812 == protoModule.wireTypes.i64 then
+			local var5988, var5989 = protoModule.readFixed32(p332, var5814)
+			local _ = var5988
+			var5814 = var5989
+		elseif var5815 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var5985, var5986 = protoModule.readFixed64(p332, var5811)
-			local _ = var5985
-			var5811 = var5986
+			local var5990, var5991 = protoModule.readFixed64(p332, var5814)
+			local _ = var5990
+			var5814 = var5991
 		else
-			error("Unsupported wire type: " .. var5812)
+			error("Unsupported wire type: " .. var5815)
 		end
 	end
-	return var5810
+	return var5813
 end
 
-function t_168:jsonEncode() --[[ line: 31710 ]]
+function t_168:jsonEncode() --[[ line: 31724 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -24012,968 +24025,977 @@ function t_168:jsonEncode() --[[ line: 31710 ]]
 	if self.skip_unified_logging ~= nil then
 		t.skipUnifiedLogging = self.skip_unified_logging:jsonEncode()
 	end
+	if self.action_event_name ~= nil then
+		t.actionEventName = self.action_event_name:jsonEncode()
+	end
 	return t
 end
 
-function t_168:jsonDecode() --[[ line: 31888 ]]
+function t_168:jsonDecode() --[[ line: 31906 ]]
 	-- upvalues: t_168 (ref), t (ref), propTypesModule (ref)
-	local var5988 = t_168.new()
+	local var5993 = t_168.new()
 	
 	if self.dismiss_dialog_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_dialog_action",
 			value = t.DismissDialogAction.jsonDecode(self.dismiss_dialog_action)
 		}
 	end
 	if self.dismissDialogAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_dialog_action",
 			value = t.DismissDialogAction.jsonDecode(self.dismissDialogAction)
 		}
 	end
 	if self.link_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "link_action",
 			value = t.LinkAction.jsonDecode(self.link_action)
 		}
 	end
 	if self.linkAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "link_action",
 			value = t.LinkAction.jsonDecode(self.linkAction)
 		}
 	end
 	if self.open_game_details_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_game_details_action",
 			value = t.OpenGameDetailsAction.jsonDecode(self.open_game_details_action)
 		}
 	end
 	if self.openGameDetailsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_game_details_action",
 			value = t.OpenGameDetailsAction.jsonDecode(self.openGameDetailsAction)
 		}
 	end
 	if self.open_join_friends_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_join_friends_action",
 			value = t.OpenJoinFriendsAction.jsonDecode(self.open_join_friends_action)
 		}
 	end
 	if self.openJoinFriendsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_join_friends_action",
 			value = t.OpenJoinFriendsAction.jsonDecode(self.openJoinFriendsAction)
 		}
 	end
 	if self.open_marketplace_try_on_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_try_on_action",
 			value = t.OpenMarketplaceTryOnAction.jsonDecode(self.open_marketplace_try_on_action)
 		}
 	end
 	if self.openMarketplaceTryOnAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_try_on_action",
 			value = t.OpenMarketplaceTryOnAction.jsonDecode(self.openMarketplaceTryOnAction)
 		}
 	end
 	if self.open_see_all_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_see_all_action",
 			value = t.OpenSeeAllAction.jsonDecode(self.open_see_all_action)
 		}
 	end
 	if self.openSeeAllAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_see_all_action",
 			value = t.OpenSeeAllAction.jsonDecode(self.openSeeAllAction)
 		}
 	end
 	if self.open_sponsored_tooltip_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_sponsored_tooltip_action",
 			value = t.OpenSponsoredTooltipAction.jsonDecode(self.open_sponsored_tooltip_action)
 		}
 	end
 	if self.openSponsoredTooltipAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_sponsored_tooltip_action",
 			value = t.OpenSponsoredTooltipAction.jsonDecode(self.openSponsoredTooltipAction)
 		}
 	end
 	if self.play_button_click_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "play_button_click_action",
 			value = t.PlayButtonClickAction.jsonDecode(self.play_button_click_action)
 		}
 	end
 	if self.playButtonClickAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "play_button_click_action",
 			value = t.PlayButtonClickAction.jsonDecode(self.playButtonClickAction)
 		}
 	end
 	if self.update_user_settings_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "update_user_settings_action",
 			value = t.UpdateUserSettingsAction.jsonDecode(self.update_user_settings_action)
 		}
 	end
 	if self.updateUserSettingsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "update_user_settings_action",
 			value = t.UpdateUserSettingsAction.jsonDecode(self.updateUserSettingsAction)
 		}
 	end
 	if self.open_tooltip_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_tooltip_action",
 			value = t.OpenTooltipAction.jsonDecode(self.open_tooltip_action)
 		}
 	end
 	if self.openTooltipAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_tooltip_action",
 			value = t.OpenTooltipAction.jsonDecode(self.openTooltipAction)
 		}
 	end
 	if self.open_badge_details_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_badge_details_action",
 			value = t.OpenBadgeDetailsAction.jsonDecode(self.open_badge_details_action)
 		}
 	end
 	if self.openBadgeDetailsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_badge_details_action",
 			value = t.OpenBadgeDetailsAction.jsonDecode(self.openBadgeDetailsAction)
 		}
 	end
 	if self.load_more_from_api_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "load_more_from_api_action",
 			value = t.LoadMoreFromApiAction.jsonDecode(self.load_more_from_api_action)
 		}
 	end
 	if self.loadMoreFromApiAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "load_more_from_api_action",
 			value = t.LoadMoreFromApiAction.jsonDecode(self.loadMoreFromApiAction)
 		}
 	end
 	if self.share_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "share_action",
 			value = t.ShareAction.jsonDecode(self.share_action)
 		}
 	end
 	if self.shareAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "share_action",
 			value = t.ShareAction.jsonDecode(self.shareAction)
 		}
 	end
 	if self.open_abuse_report_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_abuse_report_action",
 			value = t.OpenAbuseReportAction.jsonDecode(self.open_abuse_report_action)
 		}
 	end
 	if self.openAbuseReportAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_abuse_report_action",
 			value = t.OpenAbuseReportAction.jsonDecode(self.openAbuseReportAction)
 		}
 	end
 	if self.remove_badge_from_inventory_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "remove_badge_from_inventory_action",
 			value = t.RemoveBadgeFromInventoryAction.jsonDecode(self.remove_badge_from_inventory_action)
 		}
 	end
 	if self.removeBadgeFromInventoryAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "remove_badge_from_inventory_action",
 			value = t.RemoveBadgeFromInventoryAction.jsonDecode(self.removeBadgeFromInventoryAction)
 		}
 	end
 	if self.open_profile_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_profile_action",
 			value = t.OpenProfileAction.jsonDecode(self.open_profile_action)
 		}
 	end
 	if self.openProfileAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_profile_action",
 			value = t.OpenProfileAction.jsonDecode(self.openProfileAction)
 		}
 	end
 	if self.open_facial_age_estimation_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_facial_age_estimation_action",
 			value = t.OpenFacialAgeEstimationAction.jsonDecode(self.open_facial_age_estimation_action)
 		}
 	end
 	if self.openFacialAgeEstimationAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_facial_age_estimation_action",
 			value = t.OpenFacialAgeEstimationAction.jsonDecode(self.openFacialAgeEstimationAction)
 		}
 	end
 	if self.open_add_connections_page_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_add_connections_page_action",
 			value = t.OpenAddConnectionsPageAction.jsonDecode(self.open_add_connections_page_action)
 		}
 	end
 	if self.openAddConnectionsPageAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_add_connections_page_action",
 			value = t.OpenAddConnectionsPageAction.jsonDecode(self.openAddConnectionsPageAction)
 		}
 	end
 	if self.open_marketplace_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_action",
 			value = t.OpenMarketplaceAction.jsonDecode(self.open_marketplace_action)
 		}
 	end
 	if self.openMarketplaceAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_action",
 			value = t.OpenMarketplaceAction.jsonDecode(self.openMarketplaceAction)
 		}
 	end
 	if self.hide_profile_completion_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "hide_profile_completion_action",
 			value = t.HideProfileCompletionAction.jsonDecode(self.hide_profile_completion_action)
 		}
 	end
 	if self.hideProfileCompletionAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "hide_profile_completion_action",
 			value = t.HideProfileCompletionAction.jsonDecode(self.hideProfileCompletionAction)
 		}
 	end
 	if self.select_marketplace_catalog_category ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_catalog_category",
 			value = t.SelectMarketplaceCatalogCategory.jsonDecode(self.select_marketplace_catalog_category)
 		}
 	end
 	if self.selectMarketplaceCatalogCategory ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_catalog_category",
 			value = t.SelectMarketplaceCatalogCategory.jsonDecode(self.selectMarketplaceCatalogCategory)
 		}
 	end
 	if self.select_marketplace_catalog_subcategory ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_catalog_subcategory",
 			value = t.SelectMarketplaceCatalogSubcategory.jsonDecode(self.select_marketplace_catalog_subcategory)
 		}
 	end
 	if self.selectMarketplaceCatalogSubcategory ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_catalog_subcategory",
 			value = t.SelectMarketplaceCatalogSubcategory.jsonDecode(self.selectMarketplaceCatalogSubcategory)
 		}
 	end
 	if self.open_marketplace_catalog_see_all ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_catalog_see_all",
 			value = t.OpenMarketplaceCatalogSeeAll.jsonDecode(self.open_marketplace_catalog_see_all)
 		}
 	end
 	if self.openMarketplaceCatalogSeeAll ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_catalog_see_all",
 			value = t.OpenMarketplaceCatalogSeeAll.jsonDecode(self.openMarketplaceCatalogSeeAll)
 		}
 	end
 	if self.close_marketplace_category_tooltip ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "close_marketplace_category_tooltip",
 			value = t.CloseMarketplaceCategoryTooltip.jsonDecode(self.close_marketplace_category_tooltip)
 		}
 	end
 	if self.closeMarketplaceCategoryTooltip ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "close_marketplace_category_tooltip",
 			value = t.CloseMarketplaceCategoryTooltip.jsonDecode(self.closeMarketplaceCategoryTooltip)
 		}
 	end
 	if self.resize_marketplace_catalog ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "resize_marketplace_catalog",
 			value = t.ResizeMarketplaceCatalog.jsonDecode(self.resize_marketplace_catalog)
 		}
 	end
 	if self.resizeMarketplaceCatalog ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "resize_marketplace_catalog",
 			value = t.ResizeMarketplaceCatalog.jsonDecode(self.resizeMarketplaceCatalog)
 		}
 	end
 	if self.open_marketplace_catalog_filters ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_catalog_filters",
 			value = t.OpenMarketplaceCatalogFilters.jsonDecode(self.open_marketplace_catalog_filters)
 		}
 	end
 	if self.openMarketplaceCatalogFilters ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_marketplace_catalog_filters",
 			value = t.OpenMarketplaceCatalogFilters.jsonDecode(self.openMarketplaceCatalogFilters)
 		}
 	end
 	if self.open_social_link_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_social_link_action",
 			value = t.OpenSocialLinkAction.jsonDecode(self.open_social_link_action)
 		}
 	end
 	if self.openSocialLinkAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_social_link_action",
 			value = t.OpenSocialLinkAction.jsonDecode(self.openSocialLinkAction)
 		}
 	end
 	if self.open_charts_sort_detail_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_charts_sort_detail_action",
 			value = t.OpenChartsSortDetailAction.jsonDecode(self.open_charts_sort_detail_action)
 		}
 	end
 	if self.openChartsSortDetailAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_charts_sort_detail_action",
 			value = t.OpenChartsSortDetailAction.jsonDecode(self.openChartsSortDetailAction)
 		}
 	end
 	if self.open_song_detail_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_song_detail_action",
 			value = t.OpenSongDetailAction.jsonDecode(self.open_song_detail_action)
 		}
 	end
 	if self.openSongDetailAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_song_detail_action",
 			value = t.OpenSongDetailAction.jsonDecode(self.openSongDetailAction)
 		}
 	end
 	if self.refresh_from_api_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_from_api_action",
 			value = t.RefreshFromApiAction.jsonDecode(self.refresh_from_api_action)
 		}
 	end
 	if self.refreshFromApiAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_from_api_action",
 			value = t.RefreshFromApiAction.jsonDecode(self.refreshFromApiAction)
 		}
 	end
 	if self.rsvp_to_event_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "rsvp_to_event_action",
 			value = t.RsvpToEventAction.jsonDecode(self.rsvp_to_event_action)
 		}
 	end
 	if self.rsvpToEventAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "rsvp_to_event_action",
 			value = t.RsvpToEventAction.jsonDecode(self.rsvpToEventAction)
 		}
 	end
 	if self.apply_charts_filter_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "apply_charts_filter_action",
 			value = t.ApplyChartsFilterAction.jsonDecode(self.apply_charts_filter_action)
 		}
 	end
 	if self.applyChartsFilterAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "apply_charts_filter_action",
 			value = t.ApplyChartsFilterAction.jsonDecode(self.applyChartsFilterAction)
 		}
 	end
 	if self.analytics_event_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "analytics_event_action",
 			value = t.AnalyticsEventAction.jsonDecode(self.analytics_event_action)
 		}
 	end
 	if self.analyticsEventAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "analytics_event_action",
 			value = t.AnalyticsEventAction.jsonDecode(self.analyticsEventAction)
 		}
 	end
 	if self.custom_analytics_event_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "custom_analytics_event_action",
 			value = t.CustomAnalyticsEventAction.jsonDecode(self.custom_analytics_event_action)
 		}
 	end
 	if self.customAnalyticsEventAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "custom_analytics_event_action",
 			value = t.CustomAnalyticsEventAction.jsonDecode(self.customAnalyticsEventAction)
 		}
 	end
 	if self.open_game_invite_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_game_invite_action",
 			value = t.OpenGameInviteAction.jsonDecode(self.open_game_invite_action)
 		}
 	end
 	if self.openGameInviteAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_game_invite_action",
 			value = t.OpenGameInviteAction.jsonDecode(self.openGameInviteAction)
 		}
 	end
 	if self.open_event_details_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_event_details_action",
 			value = t.OpenEventDetailsAction.jsonDecode(self.open_event_details_action)
 		}
 	end
 	if self.openEventDetailsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_event_details_action",
 			value = t.OpenEventDetailsAction.jsonDecode(self.openEventDetailsAction)
 		}
 	end
 	if self.launch_experience_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "launch_experience_action",
 			value = t.LaunchExperienceAction.jsonDecode(self.launch_experience_action)
 		}
 	end
 	if self.launchExperienceAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "launch_experience_action",
 			value = t.LaunchExperienceAction.jsonDecode(self.launchExperienceAction)
 		}
 	end
 	if self.toggle_experience_favorite_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "toggle_experience_favorite_action",
 			value = t.ToggleExperienceFavoriteAction.jsonDecode(self.toggle_experience_favorite_action)
 		}
 	end
 	if self.toggleExperienceFavoriteAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "toggle_experience_favorite_action",
 			value = t.ToggleExperienceFavoriteAction.jsonDecode(self.toggleExperienceFavoriteAction)
 		}
 	end
 	if self.toggle_experience_follow_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "toggle_experience_follow_action",
 			value = t.ToggleExperienceFollowAction.jsonDecode(self.toggle_experience_follow_action)
 		}
 	end
 	if self.toggleExperienceFollowAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "toggle_experience_follow_action",
 			value = t.ToggleExperienceFollowAction.jsonDecode(self.toggleExperienceFollowAction)
 		}
 	end
 	if self.toggle_experience_vote_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "toggle_experience_vote_action",
 			value = t.ToggleExperienceVoteAction.jsonDecode(self.toggle_experience_vote_action)
 		}
 	end
 	if self.toggleExperienceVoteAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "toggle_experience_vote_action",
 			value = t.ToggleExperienceVoteAction.jsonDecode(self.toggleExperienceVoteAction)
 		}
 	end
 	if self.open_purchase_prompt_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_purchase_prompt_action",
 			value = t.OpenPurchasePromptAction.jsonDecode(self.open_purchase_prompt_action)
 		}
 	end
 	if self.openPurchasePromptAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_purchase_prompt_action",
 			value = t.OpenPurchasePromptAction.jsonDecode(self.openPurchasePromptAction)
 		}
 	end
 	if self.open_sdui_overlay_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_sdui_overlay_action",
 			value = t.OpenSduiOverlayAction.jsonDecode(self.open_sdui_overlay_action)
 		}
 	end
 	if self.openSduiOverlayAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_sdui_overlay_action",
 			value = t.OpenSduiOverlayAction.jsonDecode(self.openSduiOverlayAction)
 		}
 	end
 	if self.open_badges_see_all_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_badges_see_all_action",
 			value = t.OpenBadgesSeeAllAction.jsonDecode(self.open_badges_see_all_action)
 		}
 	end
 	if self.openBadgesSeeAllAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_badges_see_all_action",
 			value = t.OpenBadgesSeeAllAction.jsonDecode(self.openBadgesSeeAllAction)
 		}
 	end
 	if self.open_experience_store_see_all_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_experience_store_see_all_action",
 			value = t.OpenExperienceStoreSeeAllAction.jsonDecode(self.open_experience_store_see_all_action)
 		}
 	end
 	if self.openExperienceStoreSeeAllAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_experience_store_see_all_action",
 			value = t.OpenExperienceStoreSeeAllAction.jsonDecode(self.openExperienceStoreSeeAllAction)
 		}
 	end
 	if self.dismiss_game_feedback_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_game_feedback_action",
 			value = t.DismissGameFeedbackAction.jsonDecode(self.dismiss_game_feedback_action)
 		}
 	end
 	if self.dismissGameFeedbackAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_game_feedback_action",
 			value = t.DismissGameFeedbackAction.jsonDecode(self.dismissGameFeedbackAction)
 		}
 	end
 	if self.open_game_feedback_form_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_game_feedback_form_action",
 			value = t.OpenGameFeedbackFormAction.jsonDecode(self.open_game_feedback_form_action)
 		}
 	end
 	if self.openGameFeedbackFormAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_game_feedback_form_action",
 			value = t.OpenGameFeedbackFormAction.jsonDecode(self.openGameFeedbackFormAction)
 		}
 	end
 	if self.enable_event_notifications_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "enable_event_notifications_action",
 			value = t.EnableEventNotificationsAction.jsonDecode(self.enable_event_notifications_action)
 		}
 	end
 	if self.enableEventNotificationsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "enable_event_notifications_action",
 			value = t.EnableEventNotificationsAction.jsonDecode(self.enableEventNotificationsAction)
 		}
 	end
 	if self.dismiss_event_notifications_modal_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_event_notifications_modal_action",
 			value = t.DismissEventNotificationsModalAction.jsonDecode(self.dismiss_event_notifications_modal_action)
 		}
 	end
 	if self.dismissEventNotificationsModalAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_event_notifications_modal_action",
 			value = t.DismissEventNotificationsModalAction.jsonDecode(self.dismissEventNotificationsModalAction)
 		}
 	end
 	if self.open_amp_wizard_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_amp_wizard_action",
 			value = t.OpenAmpWizardAction.jsonDecode(self.open_amp_wizard_action)
 		}
 	end
 	if self.openAmpWizardAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_amp_wizard_action",
 			value = t.OpenAmpWizardAction.jsonDecode(self.openAmpWizardAction)
 		}
 	end
 	if self.open_subscription_purchase_page_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_subscription_purchase_page_action",
 			value = t.OpenSubscriptionPurchasePageAction.jsonDecode(self.open_subscription_purchase_page_action)
 		}
 	end
 	if self.openSubscriptionPurchasePageAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_subscription_purchase_page_action",
 			value = t.OpenSubscriptionPurchasePageAction.jsonDecode(self.openSubscriptionPurchasePageAction)
 		}
 	end
 	if self.refresh_game_passes_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_game_passes_action",
 			value = t.RefreshGamePassesAction.jsonDecode(self.refresh_game_passes_action)
 		}
 	end
 	if self.refreshGamePassesAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_game_passes_action",
 			value = t.RefreshGamePassesAction.jsonDecode(self.refreshGamePassesAction)
 		}
 	end
 	if self.refresh_playability_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_playability_action",
 			value = t.RefreshPlayabilityAction.jsonDecode(self.refresh_playability_action)
 		}
 	end
 	if self.refreshPlayabilityAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_playability_action",
 			value = t.RefreshPlayabilityAction.jsonDecode(self.refreshPlayabilityAction)
 		}
 	end
 	if self.open_social_proof_user_list_sheet_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_social_proof_user_list_sheet_action",
 			value = t.OpenSocialProofUserListSheetAction.jsonDecode(self.open_social_proof_user_list_sheet_action)
 		}
 	end
 	if self.openSocialProofUserListSheetAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_social_proof_user_list_sheet_action",
 			value = t.OpenSocialProofUserListSheetAction.jsonDecode(self.openSocialProofUserListSheetAction)
 		}
 	end
 	if self.report_surface_load_time_milestone_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "report_surface_load_time_milestone_action",
 			value = t.ReportSurfaceLoadTimeMilestoneAction.jsonDecode(self.report_surface_load_time_milestone_action)
 		}
 	end
 	if self.reportSurfaceLoadTimeMilestoneAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "report_surface_load_time_milestone_action",
 			value = t.ReportSurfaceLoadTimeMilestoneAction.jsonDecode(self.reportSurfaceLoadTimeMilestoneAction)
 		}
 	end
 	if self.open_search_results_tab_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_search_results_tab_action",
 			value = t.OpenSearchResultsTabAction.jsonDecode(self.open_search_results_tab_action)
 		}
 	end
 	if self.openSearchResultsTabAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_search_results_tab_action",
 			value = t.OpenSearchResultsTabAction.jsonDecode(self.openSearchResultsTabAction)
 		}
 	end
 	if self.open_phone_upsell_modal_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_phone_upsell_modal_action",
 			value = t.OpenPhoneUpsellModalAction.jsonDecode(self.open_phone_upsell_modal_action)
 		}
 	end
 	if self.openPhoneUpsellModalAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_phone_upsell_modal_action",
 			value = t.OpenPhoneUpsellModalAction.jsonDecode(self.openPhoneUpsellModalAction)
 		}
 	end
 	if self.open_email_upsell_modal_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_email_upsell_modal_action",
 			value = t.OpenEmailUpsellModalAction.jsonDecode(self.open_email_upsell_modal_action)
 		}
 	end
 	if self.openEmailUpsellModalAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_email_upsell_modal_action",
 			value = t.OpenEmailUpsellModalAction.jsonDecode(self.openEmailUpsellModalAction)
 		}
 	end
 	if self.dismiss_prompt_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_prompt_action",
 			value = t.DismissPromptAction.jsonDecode(self.dismiss_prompt_action)
 		}
 	end
 	if self.dismissPromptAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "dismiss_prompt_action",
 			value = t.DismissPromptAction.jsonDecode(self.dismissPromptAction)
 		}
 	end
 	if self.request_friendship_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "request_friendship_action",
 			value = t.RequestFriendshipAction.jsonDecode(self.request_friendship_action)
 		}
 	end
 	if self.requestFriendshipAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "request_friendship_action",
 			value = t.RequestFriendshipAction.jsonDecode(self.requestFriendshipAction)
 		}
 	end
 	if self.refresh_developer_products_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_developer_products_action",
 			value = t.RefreshDeveloperProductsAction.jsonDecode(self.refresh_developer_products_action)
 		}
 	end
 	if self.refreshDeveloperProductsAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_developer_products_action",
 			value = t.RefreshDeveloperProductsAction.jsonDecode(self.refreshDeveloperProductsAction)
 		}
 	end
 	if self.open_fae_trial_upsell_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_fae_trial_upsell_action",
 			value = t.OpenFaeTrialUpsellAction.jsonDecode(self.open_fae_trial_upsell_action)
 		}
 	end
 	if self.openFaeTrialUpsellAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_fae_trial_upsell_action",
 			value = t.OpenFaeTrialUpsellAction.jsonDecode(self.openFaeTrialUpsellAction)
 		}
 	end
 	if self.refresh_omni_recommendation_feed_item_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_omni_recommendation_feed_item_action",
 			value = t.RefreshOmniRecommendationFeedItemAction.jsonDecode(self.refresh_omni_recommendation_feed_item_action)
 		}
 	end
 	if self.refreshOmniRecommendationFeedItemAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_omni_recommendation_feed_item_action",
 			value = t.RefreshOmniRecommendationFeedItemAction.jsonDecode(self.refreshOmniRecommendationFeedItemAction)
 		}
 	end
 	if self.ai_overview_feedback_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "ai_overview_feedback_action",
 			value = t.AiOverviewFeedbackAction.jsonDecode(self.ai_overview_feedback_action)
 		}
 	end
 	if self.aiOverviewFeedbackAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "ai_overview_feedback_action",
 			value = t.AiOverviewFeedbackAction.jsonDecode(self.aiOverviewFeedbackAction)
 		}
 	end
 	if self.open_trusted_friends_upsell_modal_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_trusted_friends_upsell_modal_action",
 			value = t.OpenTrustedFriendsUpsellModalAction.jsonDecode(self.open_trusted_friends_upsell_modal_action)
 		}
 	end
 	if self.openTrustedFriendsUpsellModalAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_trusted_friends_upsell_modal_action",
 			value = t.OpenTrustedFriendsUpsellModalAction.jsonDecode(self.openTrustedFriendsUpsellModalAction)
 		}
 	end
 	if self.record_party_chat_conversation_upsell_acknowledgement_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "record_party_chat_conversation_upsell_acknowledgement_action",
 			value = t.RecordPartyChatConversationUpsellAcknowledgementAction.jsonDecode(self.record_party_chat_conversation_upsell_acknowledgement_action)
 		}
 	end
 	if self.recordPartyChatConversationUpsellAcknowledgementAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "record_party_chat_conversation_upsell_acknowledgement_action",
 			value = t.RecordPartyChatConversationUpsellAcknowledgementAction.jsonDecode(self.recordPartyChatConversationUpsellAcknowledgementAction)
 		}
 	end
 	if self.open_search_results_with_query_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_search_results_with_query_action",
 			value = t.OpenSearchResultsWithQueryAction.jsonDecode(self.open_search_results_with_query_action)
 		}
 	end
 	if self.openSearchResultsWithQueryAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_search_results_with_query_action",
 			value = t.OpenSearchResultsWithQueryAction.jsonDecode(self.openSearchResultsWithQueryAction)
 		}
 	end
 	if self.select_marketplace_favorites_category ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_favorites_category",
 			value = t.SelectMarketplaceFavoritesCategory.jsonDecode(self.select_marketplace_favorites_category)
 		}
 	end
 	if self.selectMarketplaceFavoritesCategory ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_favorites_category",
 			value = t.SelectMarketplaceFavoritesCategory.jsonDecode(self.selectMarketplaceFavoritesCategory)
 		}
 	end
 	if self.download_app_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "download_app_action",
 			value = t.DownloadAppAction.jsonDecode(self.download_app_action)
 		}
 	end
 	if self.downloadAppAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "download_app_action",
 			value = t.DownloadAppAction.jsonDecode(self.downloadAppAction)
 		}
 	end
 	if self.refresh_charts_sort_detail_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_charts_sort_detail_action",
 			value = t.RefreshChartsSortDetailAction.jsonDecode(self.refresh_charts_sort_detail_action)
 		}
 	end
 	if self.refreshChartsSortDetailAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_charts_sort_detail_action",
 			value = t.RefreshChartsSortDetailAction.jsonDecode(self.refreshChartsSortDetailAction)
 		}
 	end
 	if self.join_community_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "join_community_action",
 			value = t.JoinCommunityAction.jsonDecode(self.join_community_action)
 		}
 	end
 	if self.joinCommunityAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "join_community_action",
 			value = t.JoinCommunityAction.jsonDecode(self.joinCommunityAction)
 		}
 	end
 	if self.view_community_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "view_community_action",
 			value = t.ViewCommunityAction.jsonDecode(self.view_community_action)
 		}
 	end
 	if self.viewCommunityAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "view_community_action",
 			value = t.ViewCommunityAction.jsonDecode(self.viewCommunityAction)
 		}
 	end
 	if self.pin_experience_shortcut_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "pin_experience_shortcut_action",
 			value = t.PinExperienceShortcutAction.jsonDecode(self.pin_experience_shortcut_action)
 		}
 	end
 	if self.pinExperienceShortcutAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "pin_experience_shortcut_action",
 			value = t.PinExperienceShortcutAction.jsonDecode(self.pinExperienceShortcutAction)
 		}
 	end
 	if self.select_marketplace_favorites_subcategory ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_favorites_subcategory",
 			value = t.SelectMarketplaceFavoritesSubcategory.jsonDecode(self.select_marketplace_favorites_subcategory)
 		}
 	end
 	if self.selectMarketplaceFavoritesSubcategory ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "select_marketplace_favorites_subcategory",
 			value = t.SelectMarketplaceFavoritesSubcategory.jsonDecode(self.selectMarketplaceFavoritesSubcategory)
 		}
 	end
 	if self.show_toast_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "show_toast_action",
 			value = t.ShowToastAction.jsonDecode(self.show_toast_action)
 		}
 	end
 	if self.showToastAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "show_toast_action",
 			value = t.ShowToastAction.jsonDecode(self.showToastAction)
 		}
 	end
 	if self.open_incoming_transfer_upsell_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_incoming_transfer_upsell_action",
 			value = t.OpenIncomingTransferUpsellAction.jsonDecode(self.open_incoming_transfer_upsell_action)
 		}
 	end
 	if self.openIncomingTransferUpsellAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_incoming_transfer_upsell_action",
 			value = t.OpenIncomingTransferUpsellAction.jsonDecode(self.openIncomingTransferUpsellAction)
 		}
 	end
 	if self.action_sequence_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "action_sequence_action",
 			value = t.ActionSequenceAction.jsonDecode(self.action_sequence_action)
 		}
 	end
 	if self.actionSequenceAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "action_sequence_action",
 			value = t.ActionSequenceAction.jsonDecode(self.actionSequenceAction)
 		}
 	end
 	if self.refresh_feed_entry_from_api_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_feed_entry_from_api_action",
 			value = t.RefreshFeedEntryFromApiAction.jsonDecode(self.refresh_feed_entry_from_api_action)
 		}
 	end
 	if self.refreshFeedEntryFromApiAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "refresh_feed_entry_from_api_action",
 			value = t.RefreshFeedEntryFromApiAction.jsonDecode(self.refreshFeedEntryFromApiAction)
 		}
 	end
 	if self.open_profile_frames_editor_action ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_profile_frames_editor_action",
 			value = t.OpenProfileFramesEditorAction.jsonDecode(self.open_profile_frames_editor_action)
 		}
 	end
 	if self.openProfileFramesEditorAction ~= nil then
-		var5988.kind = {
+		var5993.kind = {
 			type = "open_profile_frames_editor_action",
 			value = t.OpenProfileFramesEditorAction.jsonDecode(self.openProfileFramesEditorAction)
 		}
 	end
 	if self.telemetry_handler ~= nil then
-		var5988.telemetry_handler = propTypesModule.StringProp.jsonDecode(self.telemetry_handler)
+		var5993.telemetry_handler = propTypesModule.StringProp.jsonDecode(self.telemetry_handler)
 	end
 	if self.telemetryHandler ~= nil then
-		var5988.telemetry_handler = propTypesModule.StringProp.jsonDecode(self.telemetryHandler)
+		var5993.telemetry_handler = propTypesModule.StringProp.jsonDecode(self.telemetryHandler)
 	end
 	if self.accessibility_label ~= nil then
-		var5988.accessibility_label = propTypesModule.StringFormat.jsonDecode(self.accessibility_label)
+		var5993.accessibility_label = propTypesModule.StringFormat.jsonDecode(self.accessibility_label)
 	end
 	if self.accessibilityLabel ~= nil then
-		var5988.accessibility_label = propTypesModule.StringFormat.jsonDecode(self.accessibilityLabel)
+		var5993.accessibility_label = propTypesModule.StringFormat.jsonDecode(self.accessibilityLabel)
 	end
 	if self.skip_unified_logging ~= nil then
-		var5988.skip_unified_logging = propTypesModule.BoolProp.jsonDecode(self.skip_unified_logging)
+		var5993.skip_unified_logging = propTypesModule.BoolProp.jsonDecode(self.skip_unified_logging)
 	end
 	if self.skipUnifiedLogging ~= nil then
-		var5988.skip_unified_logging = propTypesModule.BoolProp.jsonDecode(self.skipUnifiedLogging)
+		var5993.skip_unified_logging = propTypesModule.BoolProp.jsonDecode(self.skipUnifiedLogging)
 	end
-	return var5988
+	if self.action_event_name ~= nil then
+		var5993.action_event_name = propTypesModule.StringProp.jsonDecode(self.action_event_name)
+	end
+	if self.actionEventName ~= nil then
+		var5993.action_event_name = propTypesModule.StringProp.jsonDecode(self.actionEventName)
+	end
+	return var5993
 end
 
 t_168.descriptor = {
@@ -24985,95 +25007,95 @@ typeRegistryModule.default:register(t.Action)
 local t_169 = {}
 t_169.__index = t_169
 
-function t_169.new(p333) --[[ line: 33050 ]]
+function t_169.new(p333) --[[ line: 33078 ]]
 	-- upvalues: t_169 (ref)
 	return setmetatable({
 		kind = if p333 == nil or p333.kind == nil then nil else p333.kind
 	}, t_169)
 end
 
-function t_169:encode() --[[ line: 33056 ]]
+function t_169:encode() --[[ line: 33084 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var5990 = 0
+	local var5995 = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "value" then
-			local var5991 = self.kind.value:encode()
-			local var5992, var5993 = protoModule.writeTag(buff, var5990, 1, protoModule.wireTypes.lengthDelimited)
-			var5992, var5993 = protoModule.writeBuffer(var5992, var5993, var5991, buffer.len(var5991))
-			buff = var5992
-			var5990 = var5993
+			local var5996 = self.kind.value:encode()
+			local var5997, var5998 = protoModule.writeTag(buff, var5995, 1, protoModule.wireTypes.lengthDelimited)
+			var5997, var5998 = protoModule.writeBuffer(var5997, var5998, var5996, buffer.len(var5996))
+			buff = var5997
+			var5995 = var5998
 		elseif self.kind.type == "conditional" then
-			local var5994 = self.kind.value:encode()
-			local var5995, var5996 = protoModule.writeTag(buff, var5990, 2, protoModule.wireTypes.lengthDelimited)
-			var5995, var5996 = protoModule.writeBuffer(var5995, var5996, var5994, buffer.len(var5994))
-			buff = var5995
-			var5990 = var5996
+			local var5999 = self.kind.value:encode()
+			local var6000, var6001 = protoModule.writeTag(buff, var5995, 2, protoModule.wireTypes.lengthDelimited)
+			var6000, var6001 = protoModule.writeBuffer(var6000, var6001, var5999, buffer.len(var5999))
+			buff = var6000
+			var5995 = var6001
 		end
 	end
-	local buff_1 = buffer.create(var5990)
-	buffer.copy(buff_1, 0, buff, 0, var5990)
+	local buff_1 = buffer.create(var5995)
+	buffer.copy(buff_1, 0, buff, 0, var5995)
 	
 	return buff_1
 end
 
-function t_169.decode(p334) --[[ line: 33077 ]]
+function t_169.decode(p334) --[[ line: 33105 ]]
 	-- upvalues: t_169 (ref), protoModule (ref), t (ref)
-	local var5998 = t_169.new()
-	local var5999 = 0
-	while var5999 < buffer.len(p334) do
+	local var6003 = t_169.new()
+	local var6004 = 0
+	while var6004 < buffer.len(p334) do
 		local _ = nil
-		local var6000 = nil
-		local var6001, var6002, var6003 = protoModule.readTag(p334, var5999)
-		local var6004 = var6001
-		var6000 = var6002
-		var5999 = var6003
+		local var6005 = nil
+		local var6006, var6007, var6008 = protoModule.readTag(p334, var6004)
+		local var6009 = var6006
+		var6005 = var6007
+		var6004 = var6008
 		
-		if var6000 == protoModule.wireTypes.varint then
+		if var6005 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6005, var6006 = protoModule.readVarInt(p334, var5999)
-			local _ = var6005
-			var5999 = var6006
+			local var6010, var6011 = protoModule.readVarInt(p334, var6004)
+			local _ = var6010
+			var6004 = var6011
 			continue
 		end
-		if var6000 == protoModule.wireTypes.lengthDelimited then
-			if var6004 == 1 then
+		if var6005 == protoModule.wireTypes.lengthDelimited then
+			if var6009 == 1 then
 				local _ = nil
-				local var6007, var6008 = protoModule.readBuffer(p334, var5999)
-				var5999 = var6008
-				var5998.kind = { type = "value", value = t.Action.decode(var6007) }
-			elseif var6004 == 2 then
+				local var6012, var6013 = protoModule.readBuffer(p334, var6004)
+				var6004 = var6013
+				var6003.kind = { type = "value", value = t.Action.decode(var6012) }
+			elseif var6009 == 2 then
 				local _ = nil
-				local var6009, var6010 = protoModule.readBuffer(p334, var5999)
-				var5999 = var6010
-				var5998.kind = {
+				local var6014, var6015 = protoModule.readBuffer(p334, var6004)
+				var6004 = var6015
+				var6003.kind = {
 					type = "conditional",
-					value = t.ActionProp_ConditionalOptions.decode(var6009)
+					value = t.ActionProp_ConditionalOptions.decode(var6014)
 				}
 			else
 				local _ = nil
-				local var6011, var6012 = protoModule.readVarInt(p334, var5999)
-				var5999 = var6012 + var6011
+				local var6016, var6017 = protoModule.readVarInt(p334, var6004)
+				var6004 = var6017 + var6016
 			end
-		elseif var6000 == protoModule.wireTypes.i32 then
+		elseif var6005 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6013, var6014 = protoModule.readFixed32(p334, var5999)
-			local _ = var6013
-			var5999 = var6014
-		elseif var6000 == protoModule.wireTypes.i64 then
+			local var6018, var6019 = protoModule.readFixed32(p334, var6004)
+			local _ = var6018
+			var6004 = var6019
+		elseif var6005 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6015, var6016 = protoModule.readFixed64(p334, var5999)
-			local _ = var6015
-			var5999 = var6016
+			local var6020, var6021 = protoModule.readFixed64(p334, var6004)
+			local _ = var6020
+			var6004 = var6021
 		else
-			error("Unsupported wire type: " .. var6000)
+			error("Unsupported wire type: " .. var6005)
 		end
 	end
-	return var5998
+	return var6003
 end
 
-function t_169:jsonEncode() --[[ line: 33125 ]]
+function t_169:jsonEncode() --[[ line: 33153 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -25088,20 +25110,20 @@ function t_169:jsonEncode() --[[ line: 33125 ]]
 	return t
 end
 
-function t_169:jsonDecode() --[[ line: 33139 ]]
+function t_169:jsonDecode() --[[ line: 33167 ]]
 	-- upvalues: t_169 (ref), t (ref)
-	local var6018 = t_169.new()
+	local var6023 = t_169.new()
 	
 	if self.value ~= nil then
-		var6018.kind = { type = "value", value = t.Action.jsonDecode(self.value) }
+		var6023.kind = { type = "value", value = t.Action.jsonDecode(self.value) }
 	end
 	if self.conditional ~= nil then
-		var6018.kind = {
+		var6023.kind = {
 			type = "conditional",
 			value = t.ActionProp_ConditionalOptions.jsonDecode(self.conditional)
 		}
 	end
-	return var6018
+	return var6023
 end
 
 t_169.descriptor = {
@@ -25113,7 +25135,7 @@ typeRegistryModule.default:register(t.ActionProp)
 local t_170 = {}
 t_170.__index = t_170
 
-function t_170.new(p335) --[[ line: 33168 ]]
+function t_170.new(p335) --[[ line: 33196 ]]
 	-- upvalues: t_170 (ref)
 	return setmetatable({
 		condition = if p335 == nil or p335.condition == nil then nil else p335.condition,
@@ -25121,84 +25143,84 @@ function t_170.new(p335) --[[ line: 33168 ]]
 	}, t_170)
 end
 
-function t_170:encode() --[[ line: 33177 ]]
+function t_170:encode() --[[ line: 33205 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6020 = 0
+	local var6025 = 0
 	
 	if self.condition ~= nil then
-		local var6021 = self.condition:encode()
-		local var6022, var6023 = protoModule.writeTag(buff, var6020, 1, protoModule.wireTypes.lengthDelimited)
-		var6022, var6023 = protoModule.writeBuffer(var6022, var6023, var6021, buffer.len(var6021))
-		buff = var6022
-		var6020 = var6023
+		local var6026 = self.condition:encode()
+		local var6027, var6028 = protoModule.writeTag(buff, var6025, 1, protoModule.wireTypes.lengthDelimited)
+		var6027, var6028 = protoModule.writeBuffer(var6027, var6028, var6026, buffer.len(var6026))
+		buff = var6027
+		var6025 = var6028
 	end
 	if self.kind ~= nil and self.kind.type == "value" then
-		local var6024 = self.kind.value:encode()
-		local var6025, var6026 = protoModule.writeTag(buff, var6020, 3, protoModule.wireTypes.lengthDelimited)
-		var6025, var6026 = protoModule.writeBuffer(var6025, var6026, var6024, buffer.len(var6024))
-		buff = var6025
-		var6020 = var6026
+		local var6029 = self.kind.value:encode()
+		local var6030, var6031 = protoModule.writeTag(buff, var6025, 3, protoModule.wireTypes.lengthDelimited)
+		var6030, var6031 = protoModule.writeBuffer(var6030, var6031, var6029, buffer.len(var6029))
+		buff = var6030
+		var6025 = var6031
 	end
-	local buff_1 = buffer.create(var6020)
-	buffer.copy(buff_1, 0, buff, 0, var6020)
+	local buff_1 = buffer.create(var6025)
+	buffer.copy(buff_1, 0, buff, 0, var6025)
 	
 	return buff_1
 end
 
-function t_170.decode(p336) --[[ line: 33200 ]]
+function t_170.decode(p336) --[[ line: 33228 ]]
 	-- upvalues: t_170 (ref), protoModule (ref), propConditionModule (ref), t (ref)
-	local var6028 = t_170.new()
-	local var6029 = 0
-	while var6029 < buffer.len(p336) do
+	local var6033 = t_170.new()
+	local var6034 = 0
+	while var6034 < buffer.len(p336) do
 		local _ = nil
-		local var6030 = nil
-		local var6031, var6032, var6033 = protoModule.readTag(p336, var6029)
-		local var6034 = var6031
-		var6030 = var6032
-		var6029 = var6033
+		local var6035 = nil
+		local var6036, var6037, var6038 = protoModule.readTag(p336, var6034)
+		local var6039 = var6036
+		var6035 = var6037
+		var6034 = var6038
 		
-		if var6030 == protoModule.wireTypes.varint then
+		if var6035 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6035, var6036 = protoModule.readVarInt(p336, var6029)
-			local _ = var6035
-			var6029 = var6036
+			local var6040, var6041 = protoModule.readVarInt(p336, var6034)
+			local _ = var6040
+			var6034 = var6041
 			continue
 		end
-		if var6030 == protoModule.wireTypes.lengthDelimited then
-			if var6034 == 1 then
+		if var6035 == protoModule.wireTypes.lengthDelimited then
+			if var6039 == 1 then
 				local _ = nil
-				local var6037, var6038 = protoModule.readBuffer(p336, var6029)
-				var6029 = var6038
-				var6028.condition = propConditionModule.PropCondition.decode(var6037)
-			elseif var6034 == 3 then
+				local var6042, var6043 = protoModule.readBuffer(p336, var6034)
+				var6034 = var6043
+				var6033.condition = propConditionModule.PropCondition.decode(var6042)
+			elseif var6039 == 3 then
 				local _ = nil
-				local var6039, var6040 = protoModule.readBuffer(p336, var6029)
-				var6029 = var6040
-				var6028.kind = { type = "value", value = t.Action.decode(var6039) }
+				local var6044, var6045 = protoModule.readBuffer(p336, var6034)
+				var6034 = var6045
+				var6033.kind = { type = "value", value = t.Action.decode(var6044) }
 			else
 				local _ = nil
-				local var6041, var6042 = protoModule.readVarInt(p336, var6029)
-				var6029 = var6042 + var6041
+				local var6046, var6047 = protoModule.readVarInt(p336, var6034)
+				var6034 = var6047 + var6046
 			end
-		elseif var6030 == protoModule.wireTypes.i32 then
+		elseif var6035 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6043, var6044 = protoModule.readFixed32(p336, var6029)
-			local _ = var6043
-			var6029 = var6044
-		elseif var6030 == protoModule.wireTypes.i64 then
+			local var6048, var6049 = protoModule.readFixed32(p336, var6034)
+			local _ = var6048
+			var6034 = var6049
+		elseif var6035 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6045, var6046 = protoModule.readFixed64(p336, var6029)
-			local _ = var6045
-			var6029 = var6046
+			local var6050, var6051 = protoModule.readFixed64(p336, var6034)
+			local _ = var6050
+			var6034 = var6051
 		else
-			error("Unsupported wire type: " .. var6030)
+			error("Unsupported wire type: " .. var6035)
 		end
 	end
-	return var6028
+	return var6033
 end
 
-function t_170:jsonEncode() --[[ line: 33248 ]]
+function t_170:jsonEncode() --[[ line: 33276 ]]
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -25210,17 +25232,17 @@ function t_170:jsonEncode() --[[ line: 33248 ]]
 	return t
 end
 
-function t_170:jsonDecode() --[[ line: 33264 ]]
+function t_170:jsonDecode() --[[ line: 33292 ]]
 	-- upvalues: t_170 (ref), propConditionModule (ref), t (ref)
-	local var6048 = t_170.new()
+	local var6053 = t_170.new()
 	
 	if self.condition ~= nil then
-		var6048.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
+		var6053.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
 	end
 	if self.value ~= nil then
-		var6048.kind = { type = "value", value = t.Action.jsonDecode(self.value) }
+		var6053.kind = { type = "value", value = t.Action.jsonDecode(self.value) }
 	end
-	return var6048
+	return var6053
 end
 
 t_170.descriptor = {
@@ -25232,81 +25254,81 @@ typeRegistryModule.default:register(t.ActionProp_ConditionalOption)
 local t_171 = {}
 t_171.__index = t_171
 
-function t_171.new(p337) --[[ line: 33293 ]]
+function t_171.new(p337) --[[ line: 33321 ]]
 	-- upvalues: t_171 (ref)
 	return setmetatable({
 		options = if p337 == nil or p337.options == nil then {} else p337.options
 	}, t_171)
 end
 
-function t_171:encode() --[[ line: 33301 ]]
+function t_171:encode() --[[ line: 33329 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6050 = 0
+	local var6055 = 0
 	
 	if self.options ~= nil and #self.options > 0 then
 		for i, v in self.options do
-			local var6051 = v:encode()
-			local var6052, var6053 = protoModule.writeTag(buff, var6050, 1, protoModule.wireTypes.lengthDelimited)
-			var6052, var6053 = protoModule.writeBuffer(var6052, var6053, var6051, buffer.len(var6051))
-			buff = var6052
-			var6050 = var6053
+			local var6056 = v:encode()
+			local var6057, var6058 = protoModule.writeTag(buff, var6055, 1, protoModule.wireTypes.lengthDelimited)
+			var6057, var6058 = protoModule.writeBuffer(var6057, var6058, var6056, buffer.len(var6056))
+			buff = var6057
+			var6055 = var6058
 		end
 	end
-	local buff_1 = buffer.create(var6050)
-	buffer.copy(buff_1, 0, buff, 0, var6050)
+	local buff_1 = buffer.create(var6055)
+	buffer.copy(buff_1, 0, buff, 0, var6055)
 	
 	return buff_1
 end
 
-function t_171.decode(p338) --[[ line: 33318 ]]
+function t_171.decode(p338) --[[ line: 33346 ]]
 	-- upvalues: t_171 (ref), protoModule (ref), t (ref)
-	local var6055 = t_171.new()
-	local var6056 = 0
-	while var6056 < buffer.len(p338) do
+	local var6060 = t_171.new()
+	local var6061 = 0
+	while var6061 < buffer.len(p338) do
 		local _ = nil
-		local var6057 = nil
-		local var6058, var6059, var6060 = protoModule.readTag(p338, var6056)
-		local var6061 = var6058
-		var6057 = var6059
-		var6056 = var6060
+		local var6062 = nil
+		local var6063, var6064, var6065 = protoModule.readTag(p338, var6061)
+		local var6066 = var6063
+		var6062 = var6064
+		var6061 = var6065
 		
-		if var6057 == protoModule.wireTypes.varint then
+		if var6062 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6062, var6063 = protoModule.readVarInt(p338, var6056)
-			local _ = var6062
-			var6056 = var6063
+			local var6067, var6068 = protoModule.readVarInt(p338, var6061)
+			local _ = var6067
+			var6061 = var6068
 			continue
 		end
-		if var6057 == protoModule.wireTypes.lengthDelimited then
-			if var6061 == 1 then
+		if var6062 == protoModule.wireTypes.lengthDelimited then
+			if var6066 == 1 then
 				local _ = nil
-				local var6064, var6065 = protoModule.readBuffer(p338, var6056)
-				var6056 = var6065
-				table.insert(var6055.options, t.ActionProp_ConditionalOption.decode(var6064))
+				local var6069, var6070 = protoModule.readBuffer(p338, var6061)
+				var6061 = var6070
+				table.insert(var6060.options, t.ActionProp_ConditionalOption.decode(var6069))
 			else
 				local _ = nil
-				local var6066, var6067 = protoModule.readVarInt(p338, var6056)
-				var6056 = var6067 + var6066
+				local var6071, var6072 = protoModule.readVarInt(p338, var6061)
+				var6061 = var6072 + var6071
 			end
-		elseif var6057 == protoModule.wireTypes.i32 then
+		elseif var6062 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6068, var6069 = protoModule.readFixed32(p338, var6056)
-			local _ = var6068
-			var6056 = var6069
-		elseif var6057 == protoModule.wireTypes.i64 then
+			local var6073, var6074 = protoModule.readFixed32(p338, var6061)
+			local _ = var6073
+			var6061 = var6074
+		elseif var6062 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6070, var6071 = protoModule.readFixed64(p338, var6056)
-			local _ = var6070
-			var6056 = var6071
+			local var6075, var6076 = protoModule.readFixed64(p338, var6061)
+			local _ = var6075
+			var6061 = var6076
 		else
-			error("Unsupported wire type: " .. var6057)
+			error("Unsupported wire type: " .. var6062)
 		end
 	end
-	return var6055
+	return var6060
 end
 
-function t_171:jsonEncode() --[[ line: 33361 ]]
+function t_171:jsonEncode() --[[ line: 33389 ]]
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -25320,9 +25342,9 @@ function t_171:jsonEncode() --[[ line: 33361 ]]
 	return t
 end
 
-function t_171:jsonDecode() --[[ line: 33375 ]]
+function t_171:jsonDecode() --[[ line: 33403 ]]
 	-- upvalues: t_171 (ref), t (ref)
-	local var6074 = t_171.new()
+	local var6079 = t_171.new()
 	
 	if self.options ~= nil then
 		local t_1 = {}
@@ -25330,9 +25352,9 @@ function t_171:jsonDecode() --[[ line: 33375 ]]
 		for i, v in self.options do
 			table.insert(t_1, t.ActionProp_ConditionalOption.jsonDecode(v))
 		end
-		var6074.options = t_1
+		var6079.options = t_1
 	end
-	return var6074
+	return var6079
 end
 
 t_171.descriptor = {
@@ -25344,108 +25366,108 @@ typeRegistryModule.default:register(t.ActionProp_ConditionalOptions)
 local t_172 = {}
 t_172.__index = t_172
 
-function t_172.new(p339) --[[ line: 33404 ]]
+function t_172.new(p339) --[[ line: 33432 ]]
 	-- upvalues: t_172 (ref)
 	return setmetatable({
 		kind = if p339 == nil or p339.kind == nil then nil else p339.kind
 	}, t_172)
 end
 
-function t_172:encode() --[[ line: 33410 ]]
+function t_172:encode() --[[ line: 33438 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6077 = 0
+	local var6082 = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var6078 = self.kind.value:encode()
-			local var6079, var6080 = protoModule.writeTag(buff, var6077, 1, protoModule.wireTypes.lengthDelimited)
-			var6079, var6080 = protoModule.writeBuffer(var6079, var6080, var6078, buffer.len(var6078))
-			buff = var6079
-			var6077 = var6080
-		elseif self.kind.type == "conditional" then
-			local var6081 = self.kind.value:encode()
-			local var6082, var6083 = protoModule.writeTag(buff, var6077, 2, protoModule.wireTypes.lengthDelimited)
-			var6082, var6083 = protoModule.writeBuffer(var6082, var6083, var6081, buffer.len(var6081))
-			buff = var6082
-			var6077 = var6083
-		elseif self.kind.type == "binding_path" then
-			local var6084, var6085 = protoModule.writeTag(buff, var6077, 3, protoModule.wireTypes.lengthDelimited)
-			var6084, var6085 = protoModule.writeString(var6084, var6085, self.kind.value)
+			local var6083 = self.kind.value:encode()
+			local var6084, var6085 = protoModule.writeTag(buff, var6082, 1, protoModule.wireTypes.lengthDelimited)
+			var6084, var6085 = protoModule.writeBuffer(var6084, var6085, var6083, buffer.len(var6083))
 			buff = var6084
-			var6077 = var6085
+			var6082 = var6085
+		elseif self.kind.type == "conditional" then
+			local var6086 = self.kind.value:encode()
+			local var6087, var6088 = protoModule.writeTag(buff, var6082, 2, protoModule.wireTypes.lengthDelimited)
+			var6087, var6088 = protoModule.writeBuffer(var6087, var6088, var6086, buffer.len(var6086))
+			buff = var6087
+			var6082 = var6088
+		elseif self.kind.type == "binding_path" then
+			local var6089, var6090 = protoModule.writeTag(buff, var6082, 3, protoModule.wireTypes.lengthDelimited)
+			var6089, var6090 = protoModule.writeString(var6089, var6090, self.kind.value)
+			buff = var6089
+			var6082 = var6090
 		end
 	end
-	local buff_1 = buffer.create(var6077)
-	buffer.copy(buff_1, 0, buff, 0, var6077)
+	local buff_1 = buffer.create(var6082)
+	buffer.copy(buff_1, 0, buff, 0, var6082)
 	
 	return buff_1
 end
 
-function t_172.decode(p340) --[[ line: 33434 ]]
+function t_172.decode(p340) --[[ line: 33462 ]]
 	-- upvalues: t_172 (ref), protoModule (ref), t (ref)
-	local var6087 = t_172.new()
-	local var6088 = 0
-	while var6088 < buffer.len(p340) do
+	local var6092 = t_172.new()
+	local var6093 = 0
+	while var6093 < buffer.len(p340) do
 		local _ = nil
-		local var6089 = nil
-		local var6090, var6091, var6092 = protoModule.readTag(p340, var6088)
-		local var6093 = var6090
-		var6089 = var6091
-		var6088 = var6092
+		local var6094 = nil
+		local var6095, var6096, var6097 = protoModule.readTag(p340, var6093)
+		local var6098 = var6095
+		var6094 = var6096
+		var6093 = var6097
 		
-		if var6089 == protoModule.wireTypes.varint then
+		if var6094 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6094, var6095 = protoModule.readVarInt(p340, var6088)
-			local _ = var6094
-			var6088 = var6095
+			local var6099, var6100 = protoModule.readVarInt(p340, var6093)
+			local _ = var6099
+			var6093 = var6100
 			continue
 		end
-		if var6089 == protoModule.wireTypes.lengthDelimited then
-			if var6093 == 1 then
+		if var6094 == protoModule.wireTypes.lengthDelimited then
+			if var6098 == 1 then
 				local _ = nil
-				local var6096, var6097 = protoModule.readBuffer(p340, var6088)
-				var6088 = var6097
-				var6087.kind = {
+				local var6101, var6102 = protoModule.readBuffer(p340, var6093)
+				var6093 = var6102
+				var6092.kind = {
 					type = "literal",
-					value = t.FocusNavActionsProp_FocusNavData.decode(var6096)
+					value = t.FocusNavActionsProp_FocusNavData.decode(var6101)
 				}
-			elseif var6093 == 2 then
+			elseif var6098 == 2 then
 				local _ = nil
-				local var6098, var6099 = protoModule.readBuffer(p340, var6088)
-				var6088 = var6099
-				var6087.kind = {
+				local var6103, var6104 = protoModule.readBuffer(p340, var6093)
+				var6093 = var6104
+				var6092.kind = {
 					type = "conditional",
-					value = t.FocusNavActionsProp_ConditionalOptions.decode(var6098)
+					value = t.FocusNavActionsProp_ConditionalOptions.decode(var6103)
 				}
-			elseif var6093 == 3 then
+			elseif var6098 == 3 then
 				local _ = nil
-				local var6100, var6101 = protoModule.readBuffer(p340, var6088)
-				var6088 = var6101
-				var6087.kind = { type = "binding_path", value = buffer.tostring(var6100) }
+				local var6105, var6106 = protoModule.readBuffer(p340, var6093)
+				var6093 = var6106
+				var6092.kind = { type = "binding_path", value = buffer.tostring(var6105) }
 			else
 				local _ = nil
-				local var6102, var6103 = protoModule.readVarInt(p340, var6088)
-				var6088 = var6103 + var6102
+				local var6107, var6108 = protoModule.readVarInt(p340, var6093)
+				var6093 = var6108 + var6107
 			end
-		elseif var6089 == protoModule.wireTypes.i32 then
+		elseif var6094 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6104, var6105 = protoModule.readFixed32(p340, var6088)
-			local _ = var6104
-			var6088 = var6105
-		elseif var6089 == protoModule.wireTypes.i64 then
+			local var6109, var6110 = protoModule.readFixed32(p340, var6093)
+			local _ = var6109
+			var6093 = var6110
+		elseif var6094 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6106, var6107 = protoModule.readFixed64(p340, var6088)
-			local _ = var6106
-			var6088 = var6107
+			local var6111, var6112 = protoModule.readFixed64(p340, var6093)
+			local _ = var6111
+			var6093 = var6112
 		else
-			error("Unsupported wire type: " .. var6089)
+			error("Unsupported wire type: " .. var6094)
 		end
 	end
-	return var6087
+	return var6092
 end
 
-function t_172:jsonEncode() --[[ line: 33488 ]]
+function t_172:jsonEncode() --[[ line: 33516 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -25464,29 +25486,29 @@ function t_172:jsonEncode() --[[ line: 33488 ]]
 	return t
 end
 
-function t_172:jsonDecode() --[[ line: 33504 ]]
+function t_172:jsonDecode() --[[ line: 33532 ]]
 	-- upvalues: t_172 (ref), t (ref)
-	local var6109 = t_172.new()
+	local var6114 = t_172.new()
 	
 	if self.literal ~= nil then
-		var6109.kind = {
+		var6114.kind = {
 			type = "literal",
 			value = t.FocusNavActionsProp_FocusNavData.jsonDecode(self.literal)
 		}
 	end
 	if self.conditional ~= nil then
-		var6109.kind = {
+		var6114.kind = {
 			type = "conditional",
 			value = t.FocusNavActionsProp_ConditionalOptions.jsonDecode(self.conditional)
 		}
 	end
 	if self.binding_path ~= nil then
-		var6109.kind = { type = "binding_path", value = self.binding_path }
+		var6114.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var6109.kind = { type = "binding_path", value = self.bindingPath }
+		var6114.kind = { type = "binding_path", value = self.bindingPath }
 	end
-	return var6109
+	return var6114
 end
 
 t_172.descriptor = {
@@ -25498,7 +25520,7 @@ typeRegistryModule.default:register(t.FocusNavActionsProp)
 local t_173 = {}
 t_173.__index = t_173
 
-function t_173.new(p341) --[[ line: 33544 ]]
+function t_173.new(p341) --[[ line: 33572 ]]
 	-- upvalues: t_173 (ref)
 	return setmetatable({
 		condition = if p341 == nil or p341.condition == nil then nil else p341.condition,
@@ -25506,99 +25528,99 @@ function t_173.new(p341) --[[ line: 33544 ]]
 	}, t_173)
 end
 
-function t_173:encode() --[[ line: 33553 ]]
+function t_173:encode() --[[ line: 33581 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6111 = 0
+	local var6116 = 0
 	
 	if self.condition ~= nil then
-		local var6112 = self.condition:encode()
-		local var6113, var6114 = protoModule.writeTag(buff, var6111, 1, protoModule.wireTypes.lengthDelimited)
-		var6113, var6114 = protoModule.writeBuffer(var6113, var6114, var6112, buffer.len(var6112))
-		buff = var6113
-		var6111 = var6114
+		local var6117 = self.condition:encode()
+		local var6118, var6119 = protoModule.writeTag(buff, var6116, 1, protoModule.wireTypes.lengthDelimited)
+		var6118, var6119 = protoModule.writeBuffer(var6118, var6119, var6117, buffer.len(var6117))
+		buff = var6118
+		var6116 = var6119
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var6115 = self.kind.value:encode()
-			local var6116, var6117 = protoModule.writeTag(buff, var6111, 3, protoModule.wireTypes.lengthDelimited)
-			var6116, var6117 = protoModule.writeBuffer(var6116, var6117, var6115, buffer.len(var6115))
-			buff = var6116
-			var6111 = var6117
+			local var6120 = self.kind.value:encode()
+			local var6121, var6122 = protoModule.writeTag(buff, var6116, 3, protoModule.wireTypes.lengthDelimited)
+			var6121, var6122 = protoModule.writeBuffer(var6121, var6122, var6120, buffer.len(var6120))
+			buff = var6121
+			var6116 = var6122
 		elseif self.kind.type == "binding_path" then
-			local var6118, var6119 = protoModule.writeTag(buff, var6111, 4, protoModule.wireTypes.lengthDelimited)
-			var6118, var6119 = protoModule.writeString(var6118, var6119, self.kind.value)
-			buff = var6118
-			var6111 = var6119
+			local var6123, var6124 = protoModule.writeTag(buff, var6116, 4, protoModule.wireTypes.lengthDelimited)
+			var6123, var6124 = protoModule.writeString(var6123, var6124, self.kind.value)
+			buff = var6123
+			var6116 = var6124
 		end
 	end
-	local buff_1 = buffer.create(var6111)
-	buffer.copy(buff_1, 0, buff, 0, var6111)
+	local buff_1 = buffer.create(var6116)
+	buffer.copy(buff_1, 0, buff, 0, var6116)
 	
 	return buff_1
 end
 
-function t_173.decode(p342) --[[ line: 33579 ]]
+function t_173.decode(p342) --[[ line: 33607 ]]
 	-- upvalues: t_173 (ref), protoModule (ref), propConditionModule (ref), t (ref)
-	local var6121 = t_173.new()
-	local var6122 = 0
-	while var6122 < buffer.len(p342) do
+	local var6126 = t_173.new()
+	local var6127 = 0
+	while var6127 < buffer.len(p342) do
 		local _ = nil
-		local var6123 = nil
-		local var6124, var6125, var6126 = protoModule.readTag(p342, var6122)
-		local var6127 = var6124
-		var6123 = var6125
-		var6122 = var6126
+		local var6128 = nil
+		local var6129, var6130, var6131 = protoModule.readTag(p342, var6127)
+		local var6132 = var6129
+		var6128 = var6130
+		var6127 = var6131
 		
-		if var6123 == protoModule.wireTypes.varint then
+		if var6128 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6128, var6129 = protoModule.readVarInt(p342, var6122)
-			local _ = var6128
-			var6122 = var6129
+			local var6133, var6134 = protoModule.readVarInt(p342, var6127)
+			local _ = var6133
+			var6127 = var6134
 			continue
 		end
-		if var6123 == protoModule.wireTypes.lengthDelimited then
-			if var6127 == 1 then
+		if var6128 == protoModule.wireTypes.lengthDelimited then
+			if var6132 == 1 then
 				local _ = nil
-				local var6130, var6131 = protoModule.readBuffer(p342, var6122)
-				var6122 = var6131
-				var6121.condition = propConditionModule.PropCondition.decode(var6130)
-			elseif var6127 == 3 then
+				local var6135, var6136 = protoModule.readBuffer(p342, var6127)
+				var6127 = var6136
+				var6126.condition = propConditionModule.PropCondition.decode(var6135)
+			elseif var6132 == 3 then
 				local _ = nil
-				local var6132, var6133 = protoModule.readBuffer(p342, var6122)
-				var6122 = var6133
-				var6121.kind = {
+				local var6137, var6138 = protoModule.readBuffer(p342, var6127)
+				var6127 = var6138
+				var6126.kind = {
 					type = "literal",
-					value = t.FocusNavActionsProp_FocusNavData.decode(var6132)
+					value = t.FocusNavActionsProp_FocusNavData.decode(var6137)
 				}
-			elseif var6127 == 4 then
+			elseif var6132 == 4 then
 				local _ = nil
-				local var6134, var6135 = protoModule.readBuffer(p342, var6122)
-				var6122 = var6135
-				var6121.kind = { type = "binding_path", value = buffer.tostring(var6134) }
+				local var6139, var6140 = protoModule.readBuffer(p342, var6127)
+				var6127 = var6140
+				var6126.kind = { type = "binding_path", value = buffer.tostring(var6139) }
 			else
 				local _ = nil
-				local var6136, var6137 = protoModule.readVarInt(p342, var6122)
-				var6122 = var6137 + var6136
+				local var6141, var6142 = protoModule.readVarInt(p342, var6127)
+				var6127 = var6142 + var6141
 			end
-		elseif var6123 == protoModule.wireTypes.i32 then
+		elseif var6128 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6138, var6139 = protoModule.readFixed32(p342, var6122)
-			local _ = var6138
-			var6122 = var6139
-		elseif var6123 == protoModule.wireTypes.i64 then
+			local var6143, var6144 = protoModule.readFixed32(p342, var6127)
+			local _ = var6143
+			var6127 = var6144
+		elseif var6128 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6140, var6141 = protoModule.readFixed64(p342, var6122)
-			local _ = var6140
-			var6122 = var6141
+			local var6145, var6146 = protoModule.readFixed64(p342, var6127)
+			local _ = var6145
+			var6127 = var6146
 		else
-			error("Unsupported wire type: " .. var6123)
+			error("Unsupported wire type: " .. var6128)
 		end
 	end
-	return var6121
+	return var6126
 end
 
-function t_173:jsonEncode() --[[ line: 33632 ]]
+function t_173:jsonEncode() --[[ line: 33660 ]]
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -25616,26 +25638,26 @@ function t_173:jsonEncode() --[[ line: 33632 ]]
 	return t
 end
 
-function t_173:jsonDecode() --[[ line: 33650 ]]
+function t_173:jsonDecode() --[[ line: 33678 ]]
 	-- upvalues: t_173 (ref), propConditionModule (ref), t (ref)
-	local var6143 = t_173.new()
+	local var6148 = t_173.new()
 	
 	if self.condition ~= nil then
-		var6143.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
+		var6148.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
 	end
 	if self.literal ~= nil then
-		var6143.kind = {
+		var6148.kind = {
 			type = "literal",
 			value = t.FocusNavActionsProp_FocusNavData.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var6143.kind = { type = "binding_path", value = self.binding_path }
+		var6148.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var6143.kind = { type = "binding_path", value = self.bindingPath }
+		var6148.kind = { type = "binding_path", value = self.bindingPath }
 	end
-	return var6143
+	return var6148
 end
 
 t_173.descriptor = {
@@ -25647,81 +25669,81 @@ typeRegistryModule.default:register(t.FocusNavActionsProp_ConditionalOption)
 local t_174 = {}
 t_174.__index = t_174
 
-function t_174.new(p343) --[[ line: 33690 ]]
+function t_174.new(p343) --[[ line: 33718 ]]
 	-- upvalues: t_174 (ref)
 	return setmetatable({
 		options = if p343 == nil or p343.options == nil then {} else p343.options
 	}, t_174)
 end
 
-function t_174:encode() --[[ line: 33698 ]]
+function t_174:encode() --[[ line: 33726 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6145 = 0
+	local var6150 = 0
 	
 	if self.options ~= nil and #self.options > 0 then
 		for i, v in self.options do
-			local var6146 = v:encode()
-			local var6147, var6148 = protoModule.writeTag(buff, var6145, 1, protoModule.wireTypes.lengthDelimited)
-			var6147, var6148 = protoModule.writeBuffer(var6147, var6148, var6146, buffer.len(var6146))
-			buff = var6147
-			var6145 = var6148
+			local var6151 = v:encode()
+			local var6152, var6153 = protoModule.writeTag(buff, var6150, 1, protoModule.wireTypes.lengthDelimited)
+			var6152, var6153 = protoModule.writeBuffer(var6152, var6153, var6151, buffer.len(var6151))
+			buff = var6152
+			var6150 = var6153
 		end
 	end
-	local buff_1 = buffer.create(var6145)
-	buffer.copy(buff_1, 0, buff, 0, var6145)
+	local buff_1 = buffer.create(var6150)
+	buffer.copy(buff_1, 0, buff, 0, var6150)
 	
 	return buff_1
 end
 
-function t_174.decode(p344) --[[ line: 33715 ]]
+function t_174.decode(p344) --[[ line: 33743 ]]
 	-- upvalues: t_174 (ref), protoModule (ref), t (ref)
-	local var6150 = t_174.new()
-	local var6151 = 0
-	while var6151 < buffer.len(p344) do
+	local var6155 = t_174.new()
+	local var6156 = 0
+	while var6156 < buffer.len(p344) do
 		local _ = nil
-		local var6152 = nil
-		local var6153, var6154, var6155 = protoModule.readTag(p344, var6151)
-		local var6156 = var6153
-		var6152 = var6154
-		var6151 = var6155
+		local var6157 = nil
+		local var6158, var6159, var6160 = protoModule.readTag(p344, var6156)
+		local var6161 = var6158
+		var6157 = var6159
+		var6156 = var6160
 		
-		if var6152 == protoModule.wireTypes.varint then
+		if var6157 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6157, var6158 = protoModule.readVarInt(p344, var6151)
-			local _ = var6157
-			var6151 = var6158
+			local var6162, var6163 = protoModule.readVarInt(p344, var6156)
+			local _ = var6162
+			var6156 = var6163
 			continue
 		end
-		if var6152 == protoModule.wireTypes.lengthDelimited then
-			if var6156 == 1 then
+		if var6157 == protoModule.wireTypes.lengthDelimited then
+			if var6161 == 1 then
 				local _ = nil
-				local var6159, var6160 = protoModule.readBuffer(p344, var6151)
-				var6151 = var6160
-				table.insert(var6150.options, t.FocusNavActionsProp_ConditionalOption.decode(var6159))
+				local var6164, var6165 = protoModule.readBuffer(p344, var6156)
+				var6156 = var6165
+				table.insert(var6155.options, t.FocusNavActionsProp_ConditionalOption.decode(var6164))
 			else
 				local _ = nil
-				local var6161, var6162 = protoModule.readVarInt(p344, var6151)
-				var6151 = var6162 + var6161
+				local var6166, var6167 = protoModule.readVarInt(p344, var6156)
+				var6156 = var6167 + var6166
 			end
-		elseif var6152 == protoModule.wireTypes.i32 then
+		elseif var6157 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6163, var6164 = protoModule.readFixed32(p344, var6151)
-			local _ = var6163
-			var6151 = var6164
-		elseif var6152 == protoModule.wireTypes.i64 then
+			local var6168, var6169 = protoModule.readFixed32(p344, var6156)
+			local _ = var6168
+			var6156 = var6169
+		elseif var6157 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6165, var6166 = protoModule.readFixed64(p344, var6151)
-			local _ = var6165
-			var6151 = var6166
+			local var6170, var6171 = protoModule.readFixed64(p344, var6156)
+			local _ = var6170
+			var6156 = var6171
 		else
-			error("Unsupported wire type: " .. var6152)
+			error("Unsupported wire type: " .. var6157)
 		end
 	end
-	return var6150
+	return var6155
 end
 
-function t_174:jsonEncode() --[[ line: 33758 ]]
+function t_174:jsonEncode() --[[ line: 33786 ]]
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
@@ -25735,9 +25757,9 @@ function t_174:jsonEncode() --[[ line: 33758 ]]
 	return t
 end
 
-function t_174:jsonDecode() --[[ line: 33772 ]]
+function t_174:jsonDecode() --[[ line: 33800 ]]
 	-- upvalues: t_174 (ref), t (ref)
-	local var6169 = t_174.new()
+	local var6174 = t_174.new()
 	
 	if self.options ~= nil then
 		local t_1 = {}
@@ -25745,9 +25767,9 @@ function t_174:jsonDecode() --[[ line: 33772 ]]
 		for i, v in self.options do
 			table.insert(t_1, t.FocusNavActionsProp_ConditionalOption.jsonDecode(v))
 		end
-		var6169.options = t_1
+		var6174.options = t_1
 	end
-	return var6169
+	return var6174
 end
 
 t_174.descriptor = {
@@ -25759,7 +25781,7 @@ typeRegistryModule.default:register(t.FocusNavActionsProp_ConditionalOptions)
 local t_175 = {}
 t_175.__index = t_175
 
-function t_175.new(p345) --[[ line: 33803 ]]
+function t_175.new(p345) --[[ line: 33831 ]]
 	-- upvalues: t_175 (ref)
 	return setmetatable({
 		keys = if p345 == nil or p345.keys == nil then {} else p345.keys,
@@ -25767,102 +25789,102 @@ function t_175.new(p345) --[[ line: 33803 ]]
 	}, t_175)
 end
 
-function t_175:encode() --[[ line: 33812 ]]
+function t_175:encode() --[[ line: 33840 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6172 = 0
+	local var6177 = 0
 	
 	if self.keys ~= nil and next(self.keys) ~= nil then
 		for i, v in self.keys do
-			local var6173, var6174 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var6173, var6174 = protoModule.writeString(var6173, var6174, i)
-			local var6175 = v:encode()
-			var6174, var6176 = protoModule.writeTag(var6173, var6174, 2, protoModule.wireTypes.lengthDelimited)
-			var6174, var6176 = protoModule.writeBuffer(var6174, var6176, var6175, buffer.len(var6175))
-			local var6177 = var6174
-			local var6178 = var6176
-			local var6179, var6180 = protoModule.writeTag(buff, var6172, 3, protoModule.wireTypes.lengthDelimited)
-			var6179, var6180 = protoModule.writeBuffer(var6179, var6180, var6177, var6178)
-			buff = var6179
-			var6172 = var6180
+			local var6178, var6179 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var6178, var6179 = protoModule.writeString(var6178, var6179, i)
+			local var6180 = v:encode()
+			var6179, var6181 = protoModule.writeTag(var6178, var6179, 2, protoModule.wireTypes.lengthDelimited)
+			var6179, var6181 = protoModule.writeBuffer(var6179, var6181, var6180, buffer.len(var6180))
+			local var6182 = var6179
+			local var6183 = var6181
+			local var6184, var6185 = protoModule.writeTag(buff, var6177, 3, protoModule.wireTypes.lengthDelimited)
+			var6184, var6185 = protoModule.writeBuffer(var6184, var6185, var6182, var6183)
+			buff = var6184
+			var6177 = var6185
 		end
 	end
 	if self.events ~= nil and next(self.events) ~= nil then
 		for i, v in self.events do
-			local var6181, var6182 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var6181, var6182 = protoModule.writeString(var6181, var6182, i)
-			local var6183 = v:encode()
-			var6182, var6184 = protoModule.writeTag(var6181, var6182, 2, protoModule.wireTypes.lengthDelimited)
-			var6182, var6184 = protoModule.writeBuffer(var6182, var6184, var6183, buffer.len(var6183))
-			local var6185 = var6182
-			local var6186 = var6184
-			local var6187, var6188 = protoModule.writeTag(buff, var6172, 4, protoModule.wireTypes.lengthDelimited)
-			var6187, var6188 = protoModule.writeBuffer(var6187, var6188, var6185, var6186)
-			buff = var6187
-			var6172 = var6188
+			local var6186, var6187 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
+			var6186, var6187 = protoModule.writeString(var6186, var6187, i)
+			local var6188 = v:encode()
+			var6187, var6189 = protoModule.writeTag(var6186, var6187, 2, protoModule.wireTypes.lengthDelimited)
+			var6187, var6189 = protoModule.writeBuffer(var6187, var6189, var6188, buffer.len(var6188))
+			local var6190 = var6187
+			local var6191 = var6189
+			local var6192, var6193 = protoModule.writeTag(buff, var6177, 4, protoModule.wireTypes.lengthDelimited)
+			var6192, var6193 = protoModule.writeBuffer(var6192, var6193, var6190, var6191)
+			buff = var6192
+			var6177 = var6193
 		end
 	end
-	local buff_1 = buffer.create(var6172)
-	buffer.copy(buff_1, 0, buff, 0, var6172)
+	local buff_1 = buffer.create(var6177)
+	buffer.copy(buff_1, 0, buff, 0, var6177)
 	
 	return buff_1
 end
 
-function t_175.decode(p346) --[[ line: 33849 ]]
+function t_175.decode(p346) --[[ line: 33877 ]]
 	-- upvalues: t_175 (ref), protoModule (ref), t (ref), propTypesEngineModule (ref)
-	local var6190 = t_175.new()
-	local var6191 = 0
-	while var6191 < buffer.len(p346) do
+	local var6195 = t_175.new()
+	local var6196 = 0
+	while var6196 < buffer.len(p346) do
 		local _ = nil
-		local var6192 = nil
-		local var6193, var6194, var6195 = protoModule.readTag(p346, var6191)
-		local var6196 = var6193
-		var6192 = var6194
-		var6191 = var6195
+		local var6197 = nil
+		local var6198, var6199, var6200 = protoModule.readTag(p346, var6196)
+		local var6201 = var6198
+		var6197 = var6199
+		var6196 = var6200
 		
-		if var6192 == protoModule.wireTypes.varint then
+		if var6197 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6197, var6198 = protoModule.readVarInt(p346, var6191)
-			local _ = var6197
-			var6191 = var6198
+			local var6202, var6203 = protoModule.readVarInt(p346, var6196)
+			local _ = var6202
+			var6196 = var6203
 			continue
 		end
-		if var6192 == protoModule.wireTypes.lengthDelimited then
-			if var6196 == 3 then
+		if var6197 == protoModule.wireTypes.lengthDelimited then
+			if var6201 == 3 then
 				local _ = nil
-				local var6199, var6200 = protoModule.readBuffer(p346, var6191)
-				var6191 = var6200
-				var6199 = t.FocusNavActionsProp_FocusNavData_KeysEntry.decode(var6199)
-				var6190.keys[var6199.key or ""] = var6199.value or propTypesEngineModule.KeyCodeProp.new()
-			elseif var6196 == 4 then
+				local var6204, var6205 = protoModule.readBuffer(p346, var6196)
+				var6196 = var6205
+				var6204 = t.FocusNavActionsProp_FocusNavData_KeysEntry.decode(var6204)
+				var6195.keys[var6204.key or ""] = var6204.value or propTypesEngineModule.KeyCodeProp.new()
+			elseif var6201 == 4 then
 				local _ = nil
-				local var6201, var6202 = protoModule.readBuffer(p346, var6191)
-				var6191 = var6202
-				var6201 = t.FocusNavActionsProp_FocusNavData_EventsEntry.decode(var6201)
-				var6190.events[var6201.key or ""] = var6201.value or t.ActionProp.new()
+				local var6206, var6207 = protoModule.readBuffer(p346, var6196)
+				var6196 = var6207
+				var6206 = t.FocusNavActionsProp_FocusNavData_EventsEntry.decode(var6206)
+				var6195.events[var6206.key or ""] = var6206.value or t.ActionProp.new()
 			else
 				local _ = nil
-				local var6203, var6204 = protoModule.readVarInt(p346, var6191)
-				var6191 = var6204 + var6203
+				local var6208, var6209 = protoModule.readVarInt(p346, var6196)
+				var6196 = var6209 + var6208
 			end
-		elseif var6192 == protoModule.wireTypes.i32 then
+		elseif var6197 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6205, var6206 = protoModule.readFixed32(p346, var6191)
-			local _ = var6205
-			var6191 = var6206
-		elseif var6192 == protoModule.wireTypes.i64 then
+			local var6210, var6211 = protoModule.readFixed32(p346, var6196)
+			local _ = var6210
+			var6196 = var6211
+		elseif var6197 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6207, var6208 = protoModule.readFixed64(p346, var6191)
-			local _ = var6207
-			var6191 = var6208
+			local var6212, var6213 = protoModule.readFixed64(p346, var6196)
+			local _ = var6212
+			var6196 = var6213
 		else
-			error("Unsupported wire type: " .. var6192)
+			error("Unsupported wire type: " .. var6197)
 		end
 	end
-	return var6190
+	return var6195
 end
 
-function t_175:jsonEncode() --[[ line: 33911 ]]
+function t_175:jsonEncode() --[[ line: 33939 ]]
 	local t = {}
 	
 	if self.keys ~= nil and next(self.keys) ~= nil then
@@ -25884,9 +25906,9 @@ function t_175:jsonEncode() --[[ line: 33911 ]]
 	return t
 end
 
-function t_175:jsonDecode() --[[ line: 33933 ]]
+function t_175:jsonDecode() --[[ line: 33961 ]]
 	-- upvalues: t_175 (ref), propTypesEngineModule (ref), t (ref)
-	local var6212 = t_175.new()
+	local var6217 = t_175.new()
 	
 	if self.keys ~= nil then
 		local t_1 = {}
@@ -25894,7 +25916,7 @@ function t_175:jsonDecode() --[[ line: 33933 ]]
 		for i, v in self.keys do
 			t_1[i] = propTypesEngineModule.KeyCodeProp.jsonDecode(v)
 		end
-		var6212.keys = t_1
+		var6217.keys = t_1
 	end
 	if self.events ~= nil then
 		local t_1 = {}
@@ -25902,9 +25924,9 @@ function t_175:jsonDecode() --[[ line: 33933 ]]
 		for i, v in self.events do
 			t_1[i] = t.ActionProp.jsonDecode(v)
 		end
-		var6212.events = t_1
+		var6217.events = t_1
 	end
-	return var6212
+	return var6217
 end
 
 t_175.descriptor = {
@@ -25916,7 +25938,7 @@ typeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData)
 local t_176 = {}
 t_176.__index = t_176
 
-function t_176.new(p347) --[[ line: 33973 ]]
+function t_176.new(p347) --[[ line: 34001 ]]
 	-- upvalues: t_176 (ref)
 	return setmetatable({
 		key = if p347 == nil or p347.key == nil then "" else p347.key,
@@ -25924,83 +25946,83 @@ function t_176.new(p347) --[[ line: 33973 ]]
 	}, t_176)
 end
 
-function t_176:encode() --[[ line: 33982 ]]
+function t_176:encode() --[[ line: 34010 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6216 = 0
+	local var6221 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var6217, var6218 = protoModule.writeTag(buff, var6216, 1, protoModule.wireTypes.lengthDelimited)
-		var6217, var6218 = protoModule.writeString(var6217, var6218, self.key)
-		buff = var6217
-		var6216 = var6218
+		local var6222, var6223 = protoModule.writeTag(buff, var6221, 1, protoModule.wireTypes.lengthDelimited)
+		var6222, var6223 = protoModule.writeString(var6222, var6223, self.key)
+		buff = var6222
+		var6221 = var6223
 	end
 	if self.value ~= nil then
-		local var6219 = self.value:encode()
-		local var6220, var6221 = protoModule.writeTag(buff, var6216, 2, protoModule.wireTypes.lengthDelimited)
-		var6220, var6221 = protoModule.writeBuffer(var6220, var6221, var6219, buffer.len(var6219))
-		buff = var6220
-		var6216 = var6221
+		local var6224 = self.value:encode()
+		local var6225, var6226 = protoModule.writeTag(buff, var6221, 2, protoModule.wireTypes.lengthDelimited)
+		var6225, var6226 = protoModule.writeBuffer(var6225, var6226, var6224, buffer.len(var6224))
+		buff = var6225
+		var6221 = var6226
 	end
-	local buff_1 = buffer.create(var6216)
-	buffer.copy(buff_1, 0, buff, 0, var6216)
+	local buff_1 = buffer.create(var6221)
+	buffer.copy(buff_1, 0, buff, 0, var6221)
 	
 	return buff_1
 end
 
-function t_176.decode(p348) --[[ line: 34004 ]]
+function t_176.decode(p348) --[[ line: 34032 ]]
 	-- upvalues: t_176 (ref), protoModule (ref), propTypesEngineModule (ref)
-	local var6223 = t_176.new()
-	local var6224 = 0
-	while var6224 < buffer.len(p348) do
+	local var6228 = t_176.new()
+	local var6229 = 0
+	while var6229 < buffer.len(p348) do
 		local _ = nil
-		local var6225 = nil
-		local var6226, var6227, var6228 = protoModule.readTag(p348, var6224)
-		local var6229 = var6226
-		var6225 = var6227
-		var6224 = var6228
+		local var6230 = nil
+		local var6231, var6232, var6233 = protoModule.readTag(p348, var6229)
+		local var6234 = var6231
+		var6230 = var6232
+		var6229 = var6233
 		
-		if var6225 == protoModule.wireTypes.varint then
+		if var6230 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6230, var6231 = protoModule.readVarInt(p348, var6224)
-			local _ = var6230
-			var6224 = var6231
+			local var6235, var6236 = protoModule.readVarInt(p348, var6229)
+			local _ = var6235
+			var6229 = var6236
 			continue
 		end
-		if var6225 == protoModule.wireTypes.lengthDelimited then
-			if var6229 == 1 then
+		if var6230 == protoModule.wireTypes.lengthDelimited then
+			if var6234 == 1 then
 				local _ = nil
-				local var6232, var6233 = protoModule.readBuffer(p348, var6224)
-				var6224 = var6233
-				var6223.key = buffer.tostring(var6232)
-			elseif var6229 == 2 then
+				local var6237, var6238 = protoModule.readBuffer(p348, var6229)
+				var6229 = var6238
+				var6228.key = buffer.tostring(var6237)
+			elseif var6234 == 2 then
 				local _ = nil
-				local var6234, var6235 = protoModule.readBuffer(p348, var6224)
-				var6224 = var6235
-				var6223.value = propTypesEngineModule.KeyCodeProp.decode(var6234)
+				local var6239, var6240 = protoModule.readBuffer(p348, var6229)
+				var6229 = var6240
+				var6228.value = propTypesEngineModule.KeyCodeProp.decode(var6239)
 			else
 				local _ = nil
-				local var6236, var6237 = protoModule.readVarInt(p348, var6224)
-				var6224 = var6237 + var6236
+				local var6241, var6242 = protoModule.readVarInt(p348, var6229)
+				var6229 = var6242 + var6241
 			end
-		elseif var6225 == protoModule.wireTypes.i32 then
+		elseif var6230 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6238, var6239 = protoModule.readFixed32(p348, var6224)
-			local _ = var6238
-			var6224 = var6239
-		elseif var6225 == protoModule.wireTypes.i64 then
+			local var6243, var6244 = protoModule.readFixed32(p348, var6229)
+			local _ = var6243
+			var6229 = var6244
+		elseif var6230 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6240, var6241 = protoModule.readFixed64(p348, var6224)
-			local _ = var6240
-			var6224 = var6241
+			local var6245, var6246 = protoModule.readFixed64(p348, var6229)
+			local _ = var6245
+			var6229 = var6246
 		else
-			error("Unsupported wire type: " .. var6225)
+			error("Unsupported wire type: " .. var6230)
 		end
 	end
-	return var6223
+	return var6228
 end
 
-function t_176:jsonEncode() --[[ line: 34054 ]]
+function t_176:jsonEncode() --[[ line: 34082 ]]
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -26012,17 +26034,17 @@ function t_176:jsonEncode() --[[ line: 34054 ]]
 	return t
 end
 
-function t_176:jsonDecode() --[[ line: 34070 ]]
+function t_176:jsonDecode() --[[ line: 34098 ]]
 	-- upvalues: t_176 (ref), propTypesEngineModule (ref)
-	local var6243 = t_176.new()
+	local var6248 = t_176.new()
 	
 	if self.key ~= nil then
-		var6243.key = self.key
+		var6248.key = self.key
 	end
 	if self.value ~= nil then
-		var6243.value = propTypesEngineModule.KeyCodeProp.jsonDecode(self.value)
+		var6248.value = propTypesEngineModule.KeyCodeProp.jsonDecode(self.value)
 	end
-	return var6243
+	return var6248
 end
 
 t_176.descriptor = {
@@ -26034,7 +26056,7 @@ typeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData_KeysEntry
 local t_177 = {}
 t_177.__index = t_177
 
-function t_177.new(p349) --[[ line: 34100 ]]
+function t_177.new(p349) --[[ line: 34128 ]]
 	-- upvalues: t_177 (ref)
 	return setmetatable({
 		key = if p349 == nil or p349.key == nil then "" else p349.key,
@@ -26042,83 +26064,83 @@ function t_177.new(p349) --[[ line: 34100 ]]
 	}, t_177)
 end
 
-function t_177:encode() --[[ line: 34109 ]]
+function t_177:encode() --[[ line: 34137 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
-	local var6245 = 0
+	local var6250 = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var6246, var6247 = protoModule.writeTag(buff, var6245, 1, protoModule.wireTypes.lengthDelimited)
-		var6246, var6247 = protoModule.writeString(var6246, var6247, self.key)
-		buff = var6246
-		var6245 = var6247
+		local var6251, var6252 = protoModule.writeTag(buff, var6250, 1, protoModule.wireTypes.lengthDelimited)
+		var6251, var6252 = protoModule.writeString(var6251, var6252, self.key)
+		buff = var6251
+		var6250 = var6252
 	end
 	if self.value ~= nil then
-		local var6248 = self.value:encode()
-		local var6249, var6250 = protoModule.writeTag(buff, var6245, 2, protoModule.wireTypes.lengthDelimited)
-		var6249, var6250 = protoModule.writeBuffer(var6249, var6250, var6248, buffer.len(var6248))
-		buff = var6249
-		var6245 = var6250
+		local var6253 = self.value:encode()
+		local var6254, var6255 = protoModule.writeTag(buff, var6250, 2, protoModule.wireTypes.lengthDelimited)
+		var6254, var6255 = protoModule.writeBuffer(var6254, var6255, var6253, buffer.len(var6253))
+		buff = var6254
+		var6250 = var6255
 	end
-	local buff_1 = buffer.create(var6245)
-	buffer.copy(buff_1, 0, buff, 0, var6245)
+	local buff_1 = buffer.create(var6250)
+	buffer.copy(buff_1, 0, buff, 0, var6250)
 	
 	return buff_1
 end
 
-function t_177.decode(p350) --[[ line: 34131 ]]
+function t_177.decode(p350) --[[ line: 34159 ]]
 	-- upvalues: t_177 (ref), protoModule (ref), t (ref)
-	local var6252 = t_177.new()
-	local var6253 = 0
-	while var6253 < buffer.len(p350) do
+	local var6257 = t_177.new()
+	local var6258 = 0
+	while var6258 < buffer.len(p350) do
 		local _ = nil
-		local var6254 = nil
-		local var6255, var6256, var6257 = protoModule.readTag(p350, var6253)
-		local var6258 = var6255
-		var6254 = var6256
-		var6253 = var6257
+		local var6259 = nil
+		local var6260, var6261, var6262 = protoModule.readTag(p350, var6258)
+		local var6263 = var6260
+		var6259 = var6261
+		var6258 = var6262
 		
-		if var6254 == protoModule.wireTypes.varint then
+		if var6259 == protoModule.wireTypes.varint then
 			local _ = nil
-			local var6259, var6260 = protoModule.readVarInt(p350, var6253)
-			local _ = var6259
-			var6253 = var6260
+			local var6264, var6265 = protoModule.readVarInt(p350, var6258)
+			local _ = var6264
+			var6258 = var6265
 			continue
 		end
-		if var6254 == protoModule.wireTypes.lengthDelimited then
-			if var6258 == 1 then
+		if var6259 == protoModule.wireTypes.lengthDelimited then
+			if var6263 == 1 then
 				local _ = nil
-				local var6261, var6262 = protoModule.readBuffer(p350, var6253)
-				var6253 = var6262
-				var6252.key = buffer.tostring(var6261)
-			elseif var6258 == 2 then
+				local var6266, var6267 = protoModule.readBuffer(p350, var6258)
+				var6258 = var6267
+				var6257.key = buffer.tostring(var6266)
+			elseif var6263 == 2 then
 				local _ = nil
-				local var6263, var6264 = protoModule.readBuffer(p350, var6253)
-				var6253 = var6264
-				var6252.value = t.ActionProp.decode(var6263)
+				local var6268, var6269 = protoModule.readBuffer(p350, var6258)
+				var6258 = var6269
+				var6257.value = t.ActionProp.decode(var6268)
 			else
 				local _ = nil
-				local var6265, var6266 = protoModule.readVarInt(p350, var6253)
-				var6253 = var6266 + var6265
+				local var6270, var6271 = protoModule.readVarInt(p350, var6258)
+				var6258 = var6271 + var6270
 			end
-		elseif var6254 == protoModule.wireTypes.i32 then
+		elseif var6259 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var6267, var6268 = protoModule.readFixed32(p350, var6253)
-			local _ = var6267
-			var6253 = var6268
-		elseif var6254 == protoModule.wireTypes.i64 then
+			local var6272, var6273 = protoModule.readFixed32(p350, var6258)
+			local _ = var6272
+			var6258 = var6273
+		elseif var6259 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var6269, var6270 = protoModule.readFixed64(p350, var6253)
-			local _ = var6269
-			var6253 = var6270
+			local var6274, var6275 = protoModule.readFixed64(p350, var6258)
+			local _ = var6274
+			var6258 = var6275
 		else
-			error("Unsupported wire type: " .. var6254)
+			error("Unsupported wire type: " .. var6259)
 		end
 	end
-	return var6252
+	return var6257
 end
 
-function t_177:jsonEncode() --[[ line: 34181 ]]
+function t_177:jsonEncode() --[[ line: 34209 ]]
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -26130,17 +26152,17 @@ function t_177:jsonEncode() --[[ line: 34181 ]]
 	return t
 end
 
-function t_177:jsonDecode() --[[ line: 34197 ]]
+function t_177:jsonDecode() --[[ line: 34225 ]]
 	-- upvalues: t_177 (ref), t (ref)
-	local var6272 = t_177.new()
+	local var6277 = t_177.new()
 	
 	if self.key ~= nil then
-		var6272.key = self.key
+		var6277.key = self.key
 	end
 	if self.value ~= nil then
-		var6272.value = t.ActionProp.jsonDecode(self.value)
+		var6277.value = t.ActionProp.jsonDecode(self.value)
 	end
-	return var6272
+	return var6277
 end
 
 t_177.descriptor = {
@@ -26150,13 +26172,13 @@ t_177.descriptor = {
 t.FocusNavActionsProp_FocusNavData_EventsEntry = t_177
 typeRegistryModule.default:register(t.FocusNavActionsProp_FocusNavData_EventsEntry)
 t.ActionType = {
-	fromNumber = function(p351) --[[ line: 34224 ]]
+	fromNumber = function(p351) --[[ line: 34252 ]]
 		return if p351 == 0 then "ACTION_TYPE_INVALID" elseif p351 == 1 then "ACTION_TYPE_DISMISS_DIALOG" elseif p351 == 2 then "ACTION_TYPE_LINK" elseif p351 == 3 then "ACTION_TYPE_OPEN_GAME_DETAILS" elseif p351 == 4 then "ACTION_TYPE_OPEN_JOIN_FRIENDS" elseif p351 == 5 then "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" elseif p351 == 6 then "ACTION_TYPE_OPEN_SEE_ALL" elseif p351 == 7 then "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" elseif p351 == 8 then "ACTION_TYPE_PLAY_BUTTON_CLICK" elseif p351 == 9 then "ACTION_TYPE_UPDATE_USER_SETTINGS" elseif p351 == 10 then "ACTION_TYPE_OPEN_TOOLTIP" elseif p351 == 11 then "ACTION_TYPE_OPEN_BADGE_DETAILS" elseif p351 == 12 then "ACTION_TYPE_LOAD_MORE_FROM_API" elseif p351 == 13 then "ACTION_TYPE_SHARE" elseif p351 == 14 then "ACTION_TYPE_OPEN_ABUSE_REPORT" elseif p351 == 15 then "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" elseif p351 == 16 then "ACTION_TYPE_OPEN_PROFILE" elseif p351 == 17 then "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" elseif p351 == 18 then "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" elseif p351 == 19 then "ACTION_TYPE_OPEN_MARKETPLACE" elseif p351 == 20 then "ACTION_TYPE_HIDE_PROFILE_COMPLETION" elseif p351 == 21 then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" elseif p351 == 22 then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" elseif p351 == 23 then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" elseif p351 == 24 then "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" elseif p351 == 25 then "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" elseif p351 == 26 then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" elseif p351 == 27 then "ACTION_TYPE_OPEN_SOCIAL_LINK" elseif p351 == 28 then "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" elseif p351 == 29 then "ACTION_TYPE_OPEN_SONG_DETAIL" elseif p351 == 30 then "ACTION_TYPE_REFRESH_FROM_API" elseif p351 == 31 then "ACTION_TYPE_RSVP_TO_EVENT" elseif p351 == 32 then "ACTION_TYPE_APPLY_CHARTS_FILTER" elseif p351 == 33 then "ACTION_TYPE_ANALYTICS_EVENT" elseif p351 == 34 then "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" elseif p351 == 35 then "ACTION_TYPE_OPEN_GAME_INVITE" elseif p351 == 36 then "ACTION_TYPE_OPEN_EVENT_DETAILS" elseif p351 == 37 then "ACTION_TYPE_LAUNCH_EXPERIENCE" elseif p351 == 38 then "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" elseif p351 == 39 then "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" elseif p351 == 40 then "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" elseif p351 == 41 then "ACTION_TYPE_OPEN_PURCHASE_PROMPT" elseif p351 == 42 then "ACTION_TYPE_OPEN_SDUI_OVERLAY" elseif p351 == 43 then "ACTION_TYPE_OPEN_BADGES_SEE_ALL" elseif p351 == 44 then "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" elseif p351 == 45 then "ACTION_TYPE_DISMISS_GAME_FEEDBACK" elseif p351 == 46 then "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" elseif p351 == 47 then "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" elseif p351 == 48 then "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" elseif p351 == 49 then "ACTION_TYPE_OPEN_AMP_WIZARD" elseif p351 == 50 then "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" elseif p351 == 51 then "ACTION_TYPE_REFRESH_GAME_PASSES" elseif p351 == 52 then "ACTION_TYPE_REFRESH_PLAYABILITY" elseif p351 == 53 then "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" elseif p351 == 54 then "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" elseif p351 == 55 then "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" elseif p351 == 56 then "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" elseif p351 == 57 then "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" elseif p351 == 58 then "ACTION_TYPE_DISMISS_PROMPT" elseif p351 == 59 then "ACTION_TYPE_REQUEST_FRIENDSHIP" elseif p351 == 60 then "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" elseif p351 == 61 then "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" elseif p351 == 62 then "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" elseif p351 == 63 then "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" elseif p351 == 64 then "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" elseif p351 == 65 then "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" elseif p351 == 66 then "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" elseif p351 == 67 then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" elseif p351 == 68 then "ACTION_TYPE_DOWNLOAD_APP" elseif p351 == 69 then "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" elseif p351 == 70 then "ACTION_TYPE_JOIN_COMMUNITY" elseif p351 == 71 then "ACTION_TYPE_VIEW_COMMUNITY" elseif p351 == 72 then "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" elseif p351 == 73 then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" elseif p351 == 74 then "ACTION_TYPE_SHOW_TOAST" elseif p351 == 75 then "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" elseif p351 == 76 then "ACTION_TYPE_ACTION_SEQUENCE" elseif p351 == 77 then "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" elseif p351 == 78 then "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" else nil
 	end,
-	toNumber = function(p352) --[[ line: 34388 ]]
+	toNumber = function(p352) --[[ line: 34416 ]]
 		return if p352 == "ACTION_TYPE_INVALID" then 0 elseif p352 == "ACTION_TYPE_DISMISS_DIALOG" then 1 elseif p352 == "ACTION_TYPE_LINK" then 2 elseif p352 == "ACTION_TYPE_OPEN_GAME_DETAILS" then 3 elseif p352 == "ACTION_TYPE_OPEN_JOIN_FRIENDS" then 4 elseif p352 == "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" then 5 elseif p352 == "ACTION_TYPE_OPEN_SEE_ALL" then 6 elseif p352 == "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" then 7 elseif p352 == "ACTION_TYPE_PLAY_BUTTON_CLICK" then 8 elseif p352 == "ACTION_TYPE_UPDATE_USER_SETTINGS" then 9 elseif p352 == "ACTION_TYPE_OPEN_TOOLTIP" then 10 elseif p352 == "ACTION_TYPE_OPEN_BADGE_DETAILS" then 11 elseif p352 == "ACTION_TYPE_LOAD_MORE_FROM_API" then 12 elseif p352 == "ACTION_TYPE_SHARE" then 13 elseif p352 == "ACTION_TYPE_OPEN_ABUSE_REPORT" then 14 elseif p352 == "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" then 15 elseif p352 == "ACTION_TYPE_OPEN_PROFILE" then 16 elseif p352 == "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" then 17 elseif p352 == "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" then 18 elseif p352 == "ACTION_TYPE_OPEN_MARKETPLACE" then 19 elseif p352 == "ACTION_TYPE_HIDE_PROFILE_COMPLETION" then 20 elseif p352 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" then 21 elseif p352 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" then 22 elseif p352 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" then 23 elseif p352 == "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" then 24 elseif p352 == "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" then 25 elseif p352 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" then 26 elseif p352 == "ACTION_TYPE_OPEN_SOCIAL_LINK" then 27 elseif p352 == "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" then 28 elseif p352 == "ACTION_TYPE_OPEN_SONG_DETAIL" then 29 elseif p352 == "ACTION_TYPE_REFRESH_FROM_API" then 30 elseif p352 == "ACTION_TYPE_RSVP_TO_EVENT" then 31 elseif p352 == "ACTION_TYPE_APPLY_CHARTS_FILTER" then 32 elseif p352 == "ACTION_TYPE_ANALYTICS_EVENT" then 33 elseif p352 == "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" then 34 elseif p352 == "ACTION_TYPE_OPEN_GAME_INVITE" then 35 elseif p352 == "ACTION_TYPE_OPEN_EVENT_DETAILS" then 36 elseif p352 == "ACTION_TYPE_LAUNCH_EXPERIENCE" then 37 elseif p352 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" then 38 elseif p352 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" then 39 elseif p352 == "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" then 40 elseif p352 == "ACTION_TYPE_OPEN_PURCHASE_PROMPT" then 41 elseif p352 == "ACTION_TYPE_OPEN_SDUI_OVERLAY" then 42 elseif p352 == "ACTION_TYPE_OPEN_BADGES_SEE_ALL" then 43 elseif p352 == "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" then 44 elseif p352 == "ACTION_TYPE_DISMISS_GAME_FEEDBACK" then 45 elseif p352 == "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" then 46 elseif p352 == "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" then 47 elseif p352 == "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" then 48 elseif p352 == "ACTION_TYPE_OPEN_AMP_WIZARD" then 49 elseif p352 == "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" then 50 elseif p352 == "ACTION_TYPE_REFRESH_GAME_PASSES" then 51 elseif p352 == "ACTION_TYPE_REFRESH_PLAYABILITY" then 52 elseif p352 == "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" then 53 elseif p352 == "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" then 54 elseif p352 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" then 55 elseif p352 == "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" then 56 elseif p352 == "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" then 57 elseif p352 == "ACTION_TYPE_DISMISS_PROMPT" then 58 elseif p352 == "ACTION_TYPE_REQUEST_FRIENDSHIP" then 59 elseif p352 == "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" then 60 elseif p352 == "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" then 61 elseif p352 == "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" then 62 elseif p352 == "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" then 63 elseif p352 == "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" then 64 elseif p352 == "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" then 65 elseif p352 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" then 66 elseif p352 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" then 67 elseif p352 == "ACTION_TYPE_DOWNLOAD_APP" then 68 elseif p352 == "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" then 69 elseif p352 == "ACTION_TYPE_JOIN_COMMUNITY" then 70 elseif p352 == "ACTION_TYPE_VIEW_COMMUNITY" then 71 elseif p352 == "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" then 72 elseif p352 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" then 73 elseif p352 == "ACTION_TYPE_SHOW_TOAST" then 74 elseif p352 == "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" then 75 elseif p352 == "ACTION_TYPE_ACTION_SEQUENCE" then 76 elseif p352 == "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" then 77 elseif p352 == "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" then 78 else p352
 	end,
-	fromName = function(p353) --[[ line: 34552 ]]
+	fromName = function(p353) --[[ line: 34580 ]]
 		return if p353 == "ACTION_TYPE_INVALID" then "ACTION_TYPE_INVALID" elseif p353 == "ACTION_TYPE_DISMISS_DIALOG" then "ACTION_TYPE_DISMISS_DIALOG" elseif p353 == "ACTION_TYPE_LINK" then "ACTION_TYPE_LINK" elseif p353 == "ACTION_TYPE_OPEN_GAME_DETAILS" then "ACTION_TYPE_OPEN_GAME_DETAILS" elseif p353 == "ACTION_TYPE_OPEN_JOIN_FRIENDS" then "ACTION_TYPE_OPEN_JOIN_FRIENDS" elseif p353 == "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" then "ACTION_TYPE_OPEN_MARKETPLACE_TRY_ON" elseif p353 == "ACTION_TYPE_OPEN_SEE_ALL" then "ACTION_TYPE_OPEN_SEE_ALL" elseif p353 == "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" then "ACTION_TYPE_OPEN_SPONSORED_TOOLTIP" elseif p353 == "ACTION_TYPE_PLAY_BUTTON_CLICK" then "ACTION_TYPE_PLAY_BUTTON_CLICK" elseif p353 == "ACTION_TYPE_UPDATE_USER_SETTINGS" then "ACTION_TYPE_UPDATE_USER_SETTINGS" elseif p353 == "ACTION_TYPE_OPEN_TOOLTIP" then "ACTION_TYPE_OPEN_TOOLTIP" elseif p353 == "ACTION_TYPE_OPEN_BADGE_DETAILS" then "ACTION_TYPE_OPEN_BADGE_DETAILS" elseif p353 == "ACTION_TYPE_LOAD_MORE_FROM_API" then "ACTION_TYPE_LOAD_MORE_FROM_API" elseif p353 == "ACTION_TYPE_SHARE" then "ACTION_TYPE_SHARE" elseif p353 == "ACTION_TYPE_OPEN_ABUSE_REPORT" then "ACTION_TYPE_OPEN_ABUSE_REPORT" elseif p353 == "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" then "ACTION_TYPE_REMOVE_BADGE_FROM_INVENTORY" elseif p353 == "ACTION_TYPE_OPEN_PROFILE" then "ACTION_TYPE_OPEN_PROFILE" elseif p353 == "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" then "ACTION_TYPE_OPEN_FACIAL_AGE_ESTIMATION" elseif p353 == "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" then "ACTION_TYPE_OPEN_ADD_CONNECTIONS_PAGE" elseif p353 == "ACTION_TYPE_OPEN_MARKETPLACE" then "ACTION_TYPE_OPEN_MARKETPLACE" elseif p353 == "ACTION_TYPE_HIDE_PROFILE_COMPLETION" then "ACTION_TYPE_HIDE_PROFILE_COMPLETION" elseif p353 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_CATEGORY" elseif p353 == "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_CATALOG_SUBCATEGORY" elseif p353 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_SEE_ALL" elseif p353 == "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" then "ACTION_TYPE_CLOSE_MARKETPLACE_CATEGORY_TOOLTIP" elseif p353 == "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" then "ACTION_TYPE_RESIZE_MARKETPLACE_CATALOG" elseif p353 == "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" then "ACTION_TYPE_OPEN_MARKETPLACE_CATALOG_FILTERS" elseif p353 == "ACTION_TYPE_OPEN_SOCIAL_LINK" then "ACTION_TYPE_OPEN_SOCIAL_LINK" elseif p353 == "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" then "ACTION_TYPE_OPEN_CHARTS_SORT_DETAIL" elseif p353 == "ACTION_TYPE_OPEN_SONG_DETAIL" then "ACTION_TYPE_OPEN_SONG_DETAIL" elseif p353 == "ACTION_TYPE_REFRESH_FROM_API" then "ACTION_TYPE_REFRESH_FROM_API" elseif p353 == "ACTION_TYPE_RSVP_TO_EVENT" then "ACTION_TYPE_RSVP_TO_EVENT" elseif p353 == "ACTION_TYPE_APPLY_CHARTS_FILTER" then "ACTION_TYPE_APPLY_CHARTS_FILTER" elseif p353 == "ACTION_TYPE_ANALYTICS_EVENT" then "ACTION_TYPE_ANALYTICS_EVENT" elseif p353 == "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" then "ACTION_TYPE_CUSTOM_ANALYTICS_EVENT" elseif p353 == "ACTION_TYPE_OPEN_GAME_INVITE" then "ACTION_TYPE_OPEN_GAME_INVITE" elseif p353 == "ACTION_TYPE_OPEN_EVENT_DETAILS" then "ACTION_TYPE_OPEN_EVENT_DETAILS" elseif p353 == "ACTION_TYPE_LAUNCH_EXPERIENCE" then "ACTION_TYPE_LAUNCH_EXPERIENCE" elseif p353 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" then "ACTION_TYPE_TOGGLE_EXPERIENCE_FAVORITE" elseif p353 == "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" then "ACTION_TYPE_TOGGLE_EXPERIENCE_FOLLOW" elseif p353 == "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" then "ACTION_TYPE_TOGGLE_EXPERIENCE_VOTE" elseif p353 == "ACTION_TYPE_OPEN_PURCHASE_PROMPT" then "ACTION_TYPE_OPEN_PURCHASE_PROMPT" elseif p353 == "ACTION_TYPE_OPEN_SDUI_OVERLAY" then "ACTION_TYPE_OPEN_SDUI_OVERLAY" elseif p353 == "ACTION_TYPE_OPEN_BADGES_SEE_ALL" then "ACTION_TYPE_OPEN_BADGES_SEE_ALL" elseif p353 == "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" then "ACTION_TYPE_OPEN_EXPERIENCE_STORE_SEE_ALL" elseif p353 == "ACTION_TYPE_DISMISS_GAME_FEEDBACK" then "ACTION_TYPE_DISMISS_GAME_FEEDBACK" elseif p353 == "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" then "ACTION_TYPE_OPEN_GAME_FEEDBACK_FORM" elseif p353 == "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" then "ACTION_TYPE_ENABLE_EVENT_NOTIFICATIONS" elseif p353 == "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" then "ACTION_TYPE_DISMISS_EVENT_NOTIFICATIONS_MODAL" elseif p353 == "ACTION_TYPE_OPEN_AMP_WIZARD" then "ACTION_TYPE_OPEN_AMP_WIZARD" elseif p353 == "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" then "ACTION_TYPE_OPEN_SUBSCRIPTION_PURCHASE_PAGE" elseif p353 == "ACTION_TYPE_REFRESH_GAME_PASSES" then "ACTION_TYPE_REFRESH_GAME_PASSES" elseif p353 == "ACTION_TYPE_REFRESH_PLAYABILITY" then "ACTION_TYPE_REFRESH_PLAYABILITY" elseif p353 == "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" then "ACTION_TYPE_OPEN_SOCIAL_PROOF_USER_LIST_SHEET" elseif p353 == "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" then "ACTION_TYPE_REPORT_SURFACE_LOAD_TIME_MILESTONE" elseif p353 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" then "ACTION_TYPE_OPEN_SEARCH_RESULTS_TAB" elseif p353 == "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" then "ACTION_TYPE_OPEN_PHONE_UPSELL_MODAL" elseif p353 == "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" then "ACTION_TYPE_OPEN_EMAIL_UPSELL_MODAL" elseif p353 == "ACTION_TYPE_DISMISS_PROMPT" then "ACTION_TYPE_DISMISS_PROMPT" elseif p353 == "ACTION_TYPE_REQUEST_FRIENDSHIP" then "ACTION_TYPE_REQUEST_FRIENDSHIP" elseif p353 == "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" then "ACTION_TYPE_REFRESH_DEVELOPER_PRODUCTS" elseif p353 == "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" then "ACTION_TYPE_OPEN_FAE_TRIAL_UPSELL" elseif p353 == "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" then "ACTION_TYPE_REFRESH_OMNI_RECOMMENDATION_FEED_ITEM" elseif p353 == "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" then "ACTION_TYPE_AI_OVERVIEW_FEEDBACK" elseif p353 == "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" then "ACTION_TYPE_OPEN_TRUSTED_FRIENDS_UPSELL_MODAL" elseif p353 == "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" then "ACTION_TYPE_RECORD_PARTY_CHAT_CONVERSATION_UPSELL_ACKNOWLEDGEMENT" elseif p353 == "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" then "ACTION_TYPE_OPEN_SEARCH_RESULTS_WITH_QUERY" elseif p353 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_CATEGORY" elseif p353 == "ACTION_TYPE_DOWNLOAD_APP" then "ACTION_TYPE_DOWNLOAD_APP" elseif p353 == "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" then "ACTION_TYPE_REFRESH_CHARTS_SORT_DETAIL" elseif p353 == "ACTION_TYPE_JOIN_COMMUNITY" then "ACTION_TYPE_JOIN_COMMUNITY" elseif p353 == "ACTION_TYPE_VIEW_COMMUNITY" then "ACTION_TYPE_VIEW_COMMUNITY" elseif p353 == "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" then "ACTION_TYPE_PIN_EXPERIENCE_SHORTCUT" elseif p353 == "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" then "ACTION_TYPE_SELECT_MARKETPLACE_FAVORITES_SUBCATEGORY" elseif p353 == "ACTION_TYPE_SHOW_TOAST" then "ACTION_TYPE_SHOW_TOAST" elseif p353 == "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" then "ACTION_TYPE_OPEN_INCOMING_TRANSFER_UPSELL" elseif p353 == "ACTION_TYPE_ACTION_SEQUENCE" then "ACTION_TYPE_ACTION_SEQUENCE" elseif p353 == "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" then "ACTION_TYPE_REFRESH_FEED_ENTRY_FROM_API" elseif p353 == "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" then "ACTION_TYPE_OPEN_PROFILE_FRAMES_EDITOR" else nil
 	end
 }

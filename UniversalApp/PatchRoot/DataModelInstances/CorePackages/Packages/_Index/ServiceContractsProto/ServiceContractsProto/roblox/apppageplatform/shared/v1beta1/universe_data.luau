@@ -1,10 +1,11 @@
 ﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
 local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
+local _ = require(script.Parent.custom_options)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 91 ]]
+function t_1.new(p0) --[[ line: 93 ]]
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		id = if p0 == nil or p0.id == nil then nil else p0.id,
@@ -37,7 +38,7 @@ function t_1.new(p0) --[[ line: 91 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 133 ]]
+function t_1:encode() --[[ line: 135 ]]
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var5 = 0
@@ -210,7 +211,7 @@ function t_1:encode() --[[ line: 133 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 277 ]]
+function t_1.decode(p1) --[[ line: 279 ]]
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var61 = t_1.new()
 	local var62 = 0
@@ -388,7 +389,7 @@ function t_1.decode(p1) --[[ line: 277 ]]
 	return var61
 end
 
-function t_1:jsonEncode() --[[ line: 450 ]]
+function t_1:jsonEncode() --[[ line: 452 ]]
 	local t = {}
 	
 	if self.id ~= nil then
@@ -475,7 +476,7 @@ function t_1:jsonEncode() --[[ line: 450 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 564 ]]
+function t_1:jsonDecode() --[[ line: 566 ]]
 	-- upvalues: t_1 (ref)
 	local var131 = t_1.new()
 	

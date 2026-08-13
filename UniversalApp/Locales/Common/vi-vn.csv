@@ -117,6 +117,8 @@ Authentication.AccountPicker.Label.SignedOut,Đã đăng xuất
 Authentication.AccountRecovery.Action.AddAPasskey,"Có, thêm mã xác nhận mới"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,Xóa
+Authentication.AccountRecovery.Action.DeleteAll,"Không, tôi không nhận ra"
+Authentication.AccountRecovery.Action.DontDeleteCredentials,"Có, tôi nhận ra"
 Authentication.AccountRecovery.Action.Next,Tiếp theo
 Authentication.AccountRecovery.Action.Ok,Ok
 Authentication.AccountRecovery.Action.ResetPassword,Đặt lại mật khẩu
@@ -131,6 +133,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,
 Authentication.AccountRecovery.Action.UsePhone,Sử dụng điện thoại
 Authentication.AccountRecovery.Action.UsePhoneInstead,
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,"Thay vào đó, hãy sử dụng tên tài khoản hoặc email"
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,Những thay đổi bạn không nhận ra đã bị xóa. Hãy trang bị thêm một lớp bảo vệ để giữ an toàn cho tài khoản của bạn.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"Vì lý do bảo mật, bạn cần có một phương thức xác minh thứ hai (khác với phương thức ban đầu) để khôi phục tài khoản đã bật Xác thực 2 bước. Tài khoản này không có sẵn phương thức dự phòng để khôi phục an toàn. Vui lòng thử lấy lại quyền truy cập phương thức Xác thực 2 bước chính của bạn, hoặc sử dụng mã dự phòng để bỏ qua quy trình Xác thực 2 bước."
 Authentication.AccountRecovery.Description.ChooseAccount,Chọn tài khoản bạn muốn khôi phục.
 Authentication.AccountRecovery.Description.CreateNewPassword,"Hãy tạo một mật khẩu mạnh, không trùng với mật khẩu cũ."
@@ -138,6 +141,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,Tạo mật
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"Bạn đã đăng ký tham gia Chương trình bảo vệ nâng cao. Để giữ an toàn cho tài khoản, bạn sẽ cần dùng mã xác nhận hoặc khóa bảo mật để đăng nhập. Thiết bị này không hỗ trợ mã xác nhận, vì vậy bạn có thể gặp khó khăn khi đăng nhập vào thiết bị. Từ giờ trở đi, bạn có thể sử dụng tính năng Đăng nhập nhanh để đăng nhập bằng một thiết bị khác đã đăng nhập."
 Authentication.AccountRecovery.Description.EmailCodeSent,"Nếu đã có sẵn tài khoản Roblox cho email này, bạn sẽ nhận được mã xác minh. Vui lòng kiểm tra tất cả các thư mục, kể cả mục thư rác."
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,"Chúng tôi vừa gửi mã xác minh gồm 6 chữ số đến địa chỉ email bạn cung cấp, nếu email đó được liên kết với tài khoản của bạn. Vui lòng kiểm tra tất cả các thư mục, kể cả mục thư rác."
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Một số email có thể không hiển thị vì đã bị thay đổi do điều chỉnh độ tuổi. Tuy nhiên, bạn vẫn có thể sử dụng các email đó để khôi phục tài khoản."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Bạn đã đăng ký tham gia Chương trình bảo vệ nâng cao. Để giữ an toàn cho tài khoản, bạn sẽ cần dùng mã xác nhận hoặc khóa bảo mật để đăng nhập.{lineBreak}{lineBreak}Nếu bạn đang sử dụng thiết bị cá nhân, chúng tôi khuyến nghị nên thiết lập mã xác nhận mới ngay bây giờ. Điều này giúp bạn đăng nhập trên thiết bị này dễ dàng hơn trong tương lai. Nếu bạn đang sử dụng thiết bị dùng chung hoặc công cộng, hãy bỏ qua bước này."
 Authentication.AccountRecovery.Description.EnterABackupCode,"Bây giờ, hãy nhập mã dự phòng mà bạn đã lưu."
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Nhập địa chỉ email hoặc số điện thoại được liên kết với tài khoản của bạn. Nếu đã từng mua hàng, bạn có thể thử dùng email thanh toán của mình."
@@ -145,7 +149,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"Bây giờ, hãy n
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Bây giờ, hãy nhập số điện thoại, mã dự phòng hoặc địa chỉ email khác. Đây có thể là email bạn đã từng sử dụng để mua hàng trên Roblox"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Bây giờ, hãy nhập số điện thoại được liên kết với tài khoản của bạn."
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"Bây giờ, hãy nhập một số điện thoại hoặc địa chỉ email khác. Đây có thể là email bạn đã từng sử dụng để mua hàng trên Roblox."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,Chúng tôi đã phát hiện sự thay đổi về bảo mật trên tài khoản của bạn có thể không phải do bạn thực hiện. Hãy kiểm tra rồi cho chúng tôi biết sự thay đổi đó có phải do bạn thực hiện hay không.
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,Chúng tôi đã phát hiện những thay đổi về bảo mật trên tài khoản của bạn có thể không phải do bạn thực hiện. Hãy kiểm tra rồi cho chúng tôi biết những thay đổi đó có phải do bạn thực hiện hay không.
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"Tôi hiểu rằng nếu giữ lại những mục không nhận diện được, người khác vẫn có thể đăng nhập và khiến tôi không thể truy cập tài khoản. Đây là hành động không thể hoàn tác."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,Bạn đã bật {twoStepMethod} trên tài khoản của mình. Hãy giữ lại nếu bạn vẫn có thể dùng phương thức này. Chúng tôi sẽ yêu cầu bạn sử dụng phương thức này khi đăng nhập lại.
+Authentication.AccountRecovery.Description.NoChangesMade,Hãy trang bị thêm một lớp bảo vệ để giữ an toàn cho tài khoản của bạn.
 Authentication.AccountRecovery.Description.PhoneCodeSent,"Nếu đã có sẵn tài khoản Roblox cho số điện thoại này, bạn sẽ nhận được mã xác minh. Vui lòng kiểm tra SMS hoặc WhatsApp."
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"Chúng tôi vừa gửi mã xác minh gồm 6 chữ số đến số điện thoại bạn đã cung cấp, nếu số điện thoại đó được liên kết với tài khoản của bạn. Mã có thể được gửi qua WhatsApp hoặc SMS."
 Authentication.AccountRecovery.Description.PlatformNotSupported,Tính năng khôi phục tài khoản không được hỗ trợ trên nền tảng hoặc thiết bị này. Chọn Ok để đóng cửa sổ này và quay về trang Đăng nhập. Vui lòng khôi phục tài khoản của bạn trên một thiết bị khác. Sau đó chọn Đăng nhập nhanh và làm theo hướng dẫn để đăng nhập an toàn bằng thiết bị khác đã đăng nhập.
@@ -157,21 +165,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"Xin chào {username}, bạn đang truy cập tài khoản của mình từ một địa điểm đáng tin cậy. Bạn có thể bỏ qua quy trình xác thực 2 bước và hoàn tất việc khôi phục."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,Chúng tôi nhận thấy bạn đã sử dụng một email khác để khôi phục tài khoản của mình. Chúng tôi sẽ cập nhật địa chỉ email của bạn thành: {email}
 Authentication.AccountRecovery.Description.VerifyAgain,"Vui lòng xác minh danh tính trước khi khôi phục tài khoản đang bật Xác minh 2 bước. Nhấn ""Tiếp tục"" để kích hoạt lại yêu cầu xác minh."
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,Tài khoản của bạn đã được bảo mật!
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,Đã tạo mã dự phòng
+Authentication.AccountRecovery.Heading.BillingEmailAdded,Email thanh toán được thêm vào
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,Chúng tôi không thể khôi phục tài khoản của bạn
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,Chọn phương thức xác minh
+Authentication.AccountRecovery.Heading.EmailAdded,Email được thêm vào
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,Đây có phải là thiết bị cá nhân của bạn không?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,Bạn có thể gặp phải một số hạn chế trên thiết bị này vì thiết bị không hỗ trợ mã xác nhận
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,Đã đăng ký tham gia Chương trình bảo vệ nâng cao
 Authentication.AccountRecovery.Heading.EnterSecondMethod,Nhập phương thức xác minh thứ hai
+Authentication.AccountRecovery.Heading.InvalidateCredential,Bạn có nhận ra sự thay đổi này không?
+Authentication.AccountRecovery.Heading.InvalidateCredentials,Bạn có nhận ra những thay đổi này không?
+Authentication.AccountRecovery.Heading.NoChangesMade,Không có thay đổi nào được thực hiện
+Authentication.AccountRecovery.Heading.PasskeyAdded,Mã xác nhận được thêm vào
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,Số điện thoại được thêm vào
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Khôi phục tài khoản Roblox
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Bạn có muốn giữ lại phương thức xác thực hai bước hiện tại không?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} được thêm vào
 Authentication.AccountRecovery.Heading.UpdateEmail,Cập nhật email của bạn
 Authentication.AccountRecovery.Heading.UseAnotherDevice,Sử dụng một thiết bị khác
 Authentication.AccountRecovery.Label.AddEmail,Thêm email
 Authentication.AccountRecovery.Label.Authenticator2sv,ứng dụng xác thực 2sv
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,Trình xác thực xác thực hai bước
 Authentication.AccountRecovery.Label.BackupCode,Mã dự phòng
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,Xác nhận mật khẩu mới
 Authentication.AccountRecovery.Label.Email2sv,email 2sv
+Authentication.AccountRecovery.Label.Email2svCapitalized,Email xác thực hai bước
+Authentication.AccountRecovery.Label.EmailUnavailable,email không thể hiển thị
 Authentication.AccountRecovery.Label.EnterCode,Nhập mã
 Authentication.AccountRecovery.Label.NewPasswordV2,Mật khẩu mới
 Authentication.AccountRecovery.Label.Or,Hoặc
@@ -179,6 +201,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,Đã xác
 Authentication.AccountRecovery.Label.ResendCode,Gửi lại mã
 Authentication.AccountRecovery.Label.ResendCodeTimer,Gửi lại mã sau {timeLeft} giây
 Authentication.AccountRecovery.Label.SecurityKey2sv,khóa bảo mật 2sv
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,Khóa bảo mật xác thực hai bước
 Authentication.AccountRecovery.Label.UsernameEmail,Tên người dùng/Email
 Authentication.AccountRecovery.LabelEmail,Email
 Authentication.AccountRecovery.LabelPhone,Điện Thoại
@@ -278,6 +301,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Đăng nhập bằng QQ
 Authentication.Login.Action.QuickSignIn,Đăng nhập nhanh
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Gửi mã
 Authentication.Login.Action.SendVerificationEmail,Gửi email xác minh
 Authentication.Login.Action.SignIn,Đăng nhập
 Authentication.Login.Action.UsePasskey,Sử dụng mã xác nhận
@@ -290,8 +314,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Nhập mã chúng tôi v
 Authentication.Login.Description.GetOneTimeCodeHelp,Nhập email đã xác minh cho tài khoản của bạn để nhận mã một lần.
 Authentication.Login.Description.PasskeyDescription,"Tài khoản của bạn có mã xác nhận, phương thức đăng nhập an toàn hơn mật khẩu. Bạn có thể sử dụng vân tay, khuôn mặt hoặc khóa màn hình để đăng nhập trên thiết bị này."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Chúng tôi không thể xác định thiết bị của bạn có hỗ trợ mã xác nhận hay không. Hãy thử lại hoặc chạm vào ""Lỗi Đăng Nhập"" để khôi phục tài khoản của bạn bằng email hoặc số điện thoại."
+Authentication.Login.Description.PasskeyMobileOnly,Mã xác nhận chỉ dùng được trên thiết bị di động. Vui lòng chọn cách đăng nhập khác.
+Authentication.Login.Description.VerificationCodeSentTo,"Nếu tài khoản Roblox tồn tại, bạn sẽ nhận được mã xác minh tại địa chỉ {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
+Authentication.Login.Heading.EnterYourCode,Nhập mã của bạn
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Đăng nhập vào Roblox
@@ -313,6 +340,8 @@ Authentication.Login.Label.ConnectionError.Title,Lỗi kết nối
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Email của bạn cần xác minh
 Authentication.Login.Label.EmailOrPhone,Email hoặc điện thoại
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,Nhập email
 Authentication.Login.Label.EnterOneTimeCode,Nhập mã một lần
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Hãy nhập mã chúng tôi vừa gửi tới email của bạn
 Authentication.Login.Label.ForgotYourPassword,Bạn đã quên mật khẩu?
@@ -974,9 +1003,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Âm Lượng
 CoreScripts.InGameMenu.Leave,Rời Khỏi
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Mời Bạn Bè
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
 CoreScripts.PremiumModal.Title.Error,Lỗi
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1602,6 +1629,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.UpdateMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.Zoom,Thu Phóng
 Feature.Avatar.AvatarWidgetTitle,Khám phá phong cách
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
+Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
+Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
+Feature.Avatar.BackgroundGeneration.Title,Tạo hình nền
 Feature.Avatar.Backgrounds.Title,Hình nền
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Không thể điều chỉnh kiểu thân này.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Chuyển về màu thân mặc định ban đầu
@@ -1609,6 +1642,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Màu da
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,"Vô vàn cách kết hợp vật phẩm trang điểm để bạn tạo phong cách riêng, không đụng hàng."
 Feature.Avatar.EmoteAlreadyAssigned,Biểu cảm này đã được gán vào một ô
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Lấy cảm hứng
@@ -2099,6 +2133,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Mô tả avatar của bạn (Không bắt buộc)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Ghé Chợ
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Tùy Chọn Vật Phẩm
 Feature.Catalog.Action.LoadMore,Tải Thêm
@@ -2394,6 +2429,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"Để tiếp tục, hãy xem l�
 Feature.Catalog.Message.Checkout.UnavailableItems,Không thể mua một hoặc nhiều vật phẩm. Vui lòng xóa các vật phẩm đó trước khi tiếp tục.
 Feature.Catalog.Message.CollectiblesInfo,"Người dùng có thể mua đi bán lại vật phẩm Sưu tập cho nhau sau khi hết thời gian nắm giữ theo quy định, ngay cả khi lượng hàng ban đầu chưa bán hết. Người dùng đăng ký Roblox Plus có thể niêm yết vật phẩm Sưu tập để bán lại."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Thêm mục này vào danh sách yêu thích của bạn
+Feature.Catalog.Message.Favorites.CategoryEmpty,Bạn chưa lưu bất kỳ vật phẩm nào trong danh mục này.
+Feature.Catalog.Message.Favorites.Empty,Bạn chưa lưu bất kỳ vật phẩm nào.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Khám phá những vật phẩm được chế tác tinh xảo nhất trên Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Các giao dịch từ việc bán lại sẽ vào trạng thái nắm giữ tối đa {days} ngày. Vật phẩm này chỉ có thể được bán lại sau khi thời gian nắm giữ kết thúc. Chỉ người chơi Premium mới có thể bán lại vật phẩm.
 Feature.Catalog.Message.HoldingPolicyL2,"Sau khi mua, các giao dịch gốc sẽ vào trạng thái nắm giữ tối đa {purchaseDays} ngày. Vật phẩm chỉ có thể bán lại sau khi thời gian nắm giữ này kết thúc và giao dịch bán lại sẽ vào trạng thái nắm giữ tối đa {resaleDays} ngày. Chỉ có người chơi Premium mới có thể bán lại vật phẩm."
@@ -2479,6 +2516,7 @@ Tất cả các thành viên của nhóm này sẽ được mời, nhưng một 
 Feature.Chat.Description.ExpressiveChatLearnMore,"Tính năng Trò chuyện tự nhiên bao gồm trò chuyện không bị kiểm duyệt và trò chuyện thoại trong Party.
 
 Quyền truy cập tính năng Trò chuyện tự nhiên sẽ bị giới hạn cho đến khi tất cả thành viên đều đủ điều kiện và cuộc trò chuyện của bạn được nâng cấp."
+Feature.Chat.Description.InlineContextCardDescription,Hãy cẩn thận khi trò chuyện với người lạ. Đừng chia sẻ thông tin cá nhân hay chuyển sang ứng dụng trò chuyện khác. Bạn có thể chặn hoặc báo cáo bất kỳ ai từ hồ sơ của họ.
 Feature.Chat.Description.NameGroup,Đặt tên cho nhóm của bạn
 Feature.Chat.Description.NameGroupChat,Đặt tên cuộc trò chuyện nhóm
 Feature.Chat.Description.OSAContextCardDescription,Chúng tôi coi trọng sự an toàn của bạn. Bạn thấy lo ngại? Trong hồ sơ của người dùng này có chức năng cho phép bạn chặn họ.
@@ -2501,6 +2539,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Lần tương tác đầu ti
 Feature.Chat.Heading.LeaveGroup,Rời Nhóm
 Feature.Chat.Heading.PartyWithConnections,Lập Party với Người quen
 Feature.Chat.Heading.PartyWithFriends,Lập Party với Bạn Bè
+Feature.Chat.Heading.SafeChattingWithThisUser,Hãy thận trọng khi trò chuyện với người này
+Feature.Chat.Heading.SafeChattingWithUsername,Hãy thận trọng khi trò chuyện với {displayName}
 Feature.Chat.Heading.ShareGameToChat,Chia sẻ trải nghiệm để trò chuyện
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} đã mời bạn tham gia
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} đã mời bạn tham gia nhóm
@@ -2561,7 +2601,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1g
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Không có
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
@@ -3021,6 +3060,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} đã trở thành bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Đã xóa Bạn bè đáng tin cậy
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Đã gửi yêu cầu trở thành bạn bè đáng tin cậy
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Hoạt động gần đây
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Hoạt động gần đây của {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,{num_minutes}p
@@ -3129,6 +3170,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Không thể hiển thị 
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố không được cá nhân hóa như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố khác như vị trí, thông tin thiết bị, độ tuổi và hoạt động trên nền tảng để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Bạn đang thấy nội dung được tài trợ này dựa trên các yếu tố không mang tính cá nhân như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được chi trả bởi {PayerName}."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Bạn đang xem nội dung được tài trợ này dựa trên những yếu tố không mang tính cá nhân như thông tin thiết bị, vị trí và độ tuổi, nhằm hiển thị nội dung phù hợp với bạn. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang ""Quyền riêng tư và mức độ nội dung người lớn"" trong phần Cài đặt tài khoản tại đây:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Bạn đang xem nội dung được tài trợ này dựa trên nhiều yếu tố khác nhau như vị trí, thông tin thiết bị, độ tuổi và hành vi trên nền tảng, nhằm hiển thị nội dung phù hợp với bạn. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang ""Quyền riêng tư và mức độ nội dung người lớn"" trong phần Cài đặt tài khoản tại đây:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Bạn đang xem nội dung được tài trợ này dựa trên những yếu tố không mang tính cá nhân như thông tin thiết bị, vị trí và độ tuổi, nhằm hiển thị nội dung phù hợp với bạn. Khoản tài trợ được {PayerName} chi trả."
 Feature.GameDetails.Message.SuggestLessOften,Chúng tôi sẽ hạn chế đề xuất nội dung này
 Feature.GameDetails.RatingPercentOnly,Xếp Hạng {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,Đã sao chép liên kết vào khay nhớ tạm
@@ -4883,6 +4927,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,Giúp nâng cao trải nghiệm này
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,Hãy giúp nhà sáng tạo cải thiện trải nghiệm này
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,Không Thể Mua
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,Tham gia trải nghiệm để đổi thưởng sản phẩm đã mua trước đó trước khi mua thêm sản phẩm khác.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,Tham gia để đổi thưởng cho giao dịch mua hàng của bạn
 Purchasing.RobloxProducts.Label.RobuxBalance,Số Dư: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,Điều khoản bổ sung dành cho Nhà sáng tạo
 Roblox.ReferralRewards.Expires,Hết hạn

@@ -117,6 +117,8 @@ Authentication.AccountPicker.Label.SignedOut,Log out
 Authentication.AccountRecovery.Action.AddAPasskey,"Ya, tambahkan passkey baru"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,"Tidak, saya tidak mengenalinya"
+Authentication.AccountRecovery.Action.DontDeleteCredentials,"Ya, saya mengenalinya"
 Authentication.AccountRecovery.Action.Next,Selanjutnya
 Authentication.AccountRecovery.Action.Ok,Oke
 Authentication.AccountRecovery.Action.ResetPassword,Reset password
@@ -131,6 +133,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,Gunakan email saja
 Authentication.AccountRecovery.Action.UsePhone,Gunakan ponsel
 Authentication.AccountRecovery.Action.UsePhoneInstead,Gunakan nomor ponsel saja
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,Gunakan nama pengguna atau email saja
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,Perubahan yang tidak kamu kenali telah dihapus. Jaga akunmu tetap aman dengan menambahkan lapisan perlindungan tambahan.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"Demi keamananmu, diperlukan metode verifikasi kedua yang berbeda untuk memulihkan akunmu yang mengaktifkan Verifikasi 2 Langkah. Akun ini tidak memiliki metode cadangan yang tersedia untuk pemulihan yang aman. Coba dapatkan kembali akses ke metode Verifikasi 2 Langkah utama, atau gunakan kode pemulihan untuk melewati tantangan Verifikasi 2 Langkah."
 Authentication.AccountRecovery.Description.ChooseAccount,Pilih akun yang ingin kamu pulihkan.
 Authentication.AccountRecovery.Description.CreateNewPassword,Buat password yang kuat dan beda dari password lamamu.
@@ -138,6 +141,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,Buat passwo
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"Kamu terdaftar dalam Program Perlindungan yang Ditingkatkan. Untuk menjaga keamanan akunmu, kamu memerlukan passkey atau kunci keamanan untuk log in. Perangkat ini tidak mendukung passkey, jadi log in ke perangkat ini mungkin akan sulit. Ke depannya, kamu bisa menggunakan Log in Cepat untuk log in di perangkat lain yang sudah log in."
 Authentication.AccountRecovery.Description.EmailCodeSent,"Jika ada akun Roblox untuk email ini, kamu akan menerima kode verifikasi. Periksa semua foldermu, termasuk spam."
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,"Kami baru saja mengirim kode verifikasi 6 digit ke alamat email yang kamu berikan, jika alamat email tersebut terhubung dengan akunmu. Periksa semua foldermu, termasuk spam."
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Beberapa email mungkin tidak tersedia karena telah diubah akibat perubahan usia. Namun, email tersebut tetap dapat digunakan untuk pemulihan akun."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Kamu terdaftar dalam Program Perlindungan yang Ditingkatkan. Untuk menjaga keamanan akunmu, kamu memerlukan passkey atau kunci keamanan untuk log in.{lineBreak}{lineBreak}Jika kamu menggunakan perangkat pribadi, kami merekomendasikan untuk mengatur passkey baru sekarang. Ini akan memudahkanmu untuk log in di perangkat ini di masa mendatang. Jika kamu menggunakan perangkat bersama atau publik, lewati langkah ini."
 Authentication.AccountRecovery.Description.EnterABackupCode,"Sekarang, masukkan kode pemulihan yang telah kamu simpan."
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Masukkan alamat email atau nomor ponsel yang mungkin terhubung dengan akunmu. Jika kamu pernah melakukan pembelian sebelumnya, coba gunakan alamat email penagihanmu."
@@ -145,7 +149,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"Sekarang, masukkan
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Sekarang, masukkan nomor ponsel, kode pemulihan, atau alamat email lain. Ini bisa berupa email yang pernah kamu gunakan untuk membeli sesuatu di Roblox"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Sekarang, masukkan nomor ponsel yang terhubung dengan akunmu."
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"Sekarang, masukkan nomor ponsel atau alamat email lain. Ini bisa berupa email yang pernah kamu gunakan untuk membeli sesuatu di Roblox."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,Kami menemukan perubahan keamanan pada akunmu yang mungkin tidak kamu lakukan. Coba lihat dan beri tahu kami jika kamu yang melakukannya.
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"Jika saya menyimpan item yang tidak dikenali, orang lain mungkin masih dapat log in dan mengunci saya dari akun ini. Tindakan ini tidak bisa dibatalkan."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,Kamu telah mengaktifkan {twoStepMethod} di akunmu. Pertahankan jika kamu masih bisa mengaksesnya. Kami akan memintanya saat kamu log in lagi.
+Authentication.AccountRecovery.Description.NoChangesMade,Jaga akunmu tetap aman dengan menambahkan lapisan perlindungan tambahan.
 Authentication.AccountRecovery.Description.PhoneCodeSent,"Jika ada akun Roblox untuk nomor ponsel ini, kamu akan menerima kode verifikasi. Periksa SMS atau WhatsApp."
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"Kami baru saja mengirim kode verifikasi 6 digit ke nomor ponsel yang kamu berikan, jika nomor tersebut terhubung dengan akunmu. Kode tersebut mungkin dikirim melalui WhatsApp atau SMS."
 Authentication.AccountRecovery.Description.PlatformNotSupported,"Pemulihan akun tidak didukung di platform atau perangkat ini. Pilih Oke untuk menutup jendela ini dan kembali ke halaman Log In. Pulihkan akunmu di perangkat lain. Kemudian, pilih Log In Cepat dan ikuti instruksinya untuk log in dengan aman menggunakan perangkat lain yang sudah log in."
@@ -157,21 +165,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"Hai {username}, kamu mengakses akunmu dari lokasi tepercaya. Kamu dapat melewati verifikasi 2 langkah dan menyelesaikan pemulihan."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,Kami mendapati kamu memakai alamat email lain untuk memulihkan akunmu. Kami akan memperbarui alamat email-mu menjadi: {email}
 Authentication.AccountRecovery.Description.VerifyAgain,Verifikasi bahwa ini adalah kamu sebelum memulihkan akun dengan Verifikasi 2 Langkah yang diaktifkan. Tekan “Lanjutkan” untuk memicu tantangan verifikasi 2 langkah lagi.
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,Akunmu aman.
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,Kode pemulihan dibuat
+Authentication.AccountRecovery.Heading.BillingEmailAdded,Email penagihan ditambahkan
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,Kami tidak dapat memulihkan akunmu
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,Pilih metode verifikasi
+Authentication.AccountRecovery.Heading.EmailAdded,Email ditambahkan
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,Apakah ini perangkat pribadimu?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,Kamu mungkin mengalami keterbatasan fitur pada perangkat ini karena tidak mendukung passkey
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,Terdaftar di Program Perlindungan yang Ditingkatkan
 Authentication.AccountRecovery.Heading.EnterSecondMethod,Masukkan metode verifikasi kedua
+Authentication.AccountRecovery.Heading.InvalidateCredential,Mengenali perubahan ini?
+Authentication.AccountRecovery.Heading.InvalidateCredentials,
+Authentication.AccountRecovery.Heading.NoChangesMade,Tidak ada perubahan yang dilakukan
+Authentication.AccountRecovery.Heading.PasskeyAdded,Passkey ditambahkan
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,Nomor ponsel ditambahkan
 Authentication.AccountRecovery.Heading.ResetPassword,Reset Password
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Pemulihan Akun Roblox
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Apakah kami perlu mempertahankan metode verifikasi 2 langkah yang sudah ada?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} ditambahkan
 Authentication.AccountRecovery.Heading.UpdateEmail,Update Email-mu
 Authentication.AccountRecovery.Heading.UseAnotherDevice,Gunakan perangkat lain
 Authentication.AccountRecovery.Label.AddEmail,Tambahkan email
 Authentication.AccountRecovery.Label.Authenticator2sv,verifikasi 2 langkah dengan aplikasi autentikasi
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,Verifikasi 2 Langkah dengan Aplikasi Autentikasi
 Authentication.AccountRecovery.Label.BackupCode,Kode pemulihan
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,Konfirmasi password baru
 Authentication.AccountRecovery.Label.Email2sv,verifikasi 2 langkah dengan email
+Authentication.AccountRecovery.Label.Email2svCapitalized,Verifikasi 2 Langkah dengan Email
+Authentication.AccountRecovery.Label.EmailUnavailable,email tidak tersedia
 Authentication.AccountRecovery.Label.EnterCode,Masukkan kode
 Authentication.AccountRecovery.Label.NewPasswordV2,Password baru
 Authentication.AccountRecovery.Label.Or,Atau
@@ -179,6 +201,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,Kirim ulang kode
 Authentication.AccountRecovery.Label.ResendCodeTimer,Kirim ulang kode setelah {timeLeft}d
 Authentication.AccountRecovery.Label.SecurityKey2sv,verifikasi 2 langkah dengan kunci keamanan
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,Verifikasi 2 Langkah dengan Kunci Keamanan
 Authentication.AccountRecovery.Label.UsernameEmail,Nama Pengguna/Email
 Authentication.AccountRecovery.LabelEmail,Email
 Authentication.AccountRecovery.LabelPhone,Nomor Ponsel
@@ -278,6 +301,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,Log In QQ
 Authentication.Login.Action.QuickSignIn,Log in cepat
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,Kirim kode
 Authentication.Login.Action.SendVerificationEmail,Kirim Email Verifikasi
 Authentication.Login.Action.SignIn,Log In
 Authentication.Login.Action.UsePasskey,Gunakan Passkey
@@ -290,8 +314,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,Masukkan kode yang baru 
 Authentication.Login.Description.GetOneTimeCodeHelp,Masukkan email terverifikasi di akun kamu untuk menerima kode sekali pakai.
 Authentication.Login.Description.PasskeyDescription,"Akunmu memiliki passkey, yaitu metode log in yang lebih aman daripada password. Kamu bisa menggunakan sidik jari, wajah, atau kunci layar untuk log in di perangkat ini."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,Kami tidak bisa menentukan apakah perangkatmu mendukung passkey. Coba lagi atau ketuk “Masalah log in” untuk memulihkan akunmu dengan email atau nomor ponsel.
+Authentication.Login.Description.PasskeyMobileOnly,Passkey hanya tersedia di ponsel. Pilih cara lain untuk log in.
+Authentication.Login.Description.VerificationCodeSentTo,"Jika ada akun Roblox, kamu akan menerima kode verifikasi di {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
+Authentication.Login.Heading.EnterYourCode,Masukkan kodemu
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
 Authentication.Login.Heading.Login,Log in
 Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
@@ -313,6 +340,8 @@ Authentication.Login.Label.ConnectionError.Title,Kesalahan koneksi
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Email kamu perlu diverifikasi
 Authentication.Login.Label.EmailOrPhone,Alamat email atau nomor ponsel
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,Masukkan alamat email
 Authentication.Login.Label.EnterOneTimeCode,Masukkan Kode Sekali Pakai
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Masukkan kode yang baru saja kami kirim ke email kamu
 Authentication.Login.Label.ForgotYourPassword,Lupa kata sandi?
@@ -974,9 +1003,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,Volume
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,Undang Teman
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Gabung ke game yang dikunjungi sebelumnya
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Kamu akan keluar dari game ini dan kembali ke {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Ingin keluar?
 CoreScripts.PremiumModal.Title.Error,Eror
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -1439,7 +1466,7 @@ Feature.AppealsPortal.Label.ChatEvidenceId,ID Bukti Chat
 Feature.AppealsPortal.Label.Cheating,Kecurangan
 Feature.AppealsPortal.Label.ContentMaturity,Pengiriman Kuesioner Kedewasaan Konten
 Feature.AppealsPortal.Label.DecisionCategory,Tipe keputusan apa yang ingin kamu ajukan banding?
-Feature.AppealsPortal.Label.DisplayName,Nama Tampilan
+Feature.AppealsPortal.Label.DisplayName,Nama tampilan
 Feature.AppealsPortal.Label.DropdownPlaceholder,Pilih satu
 Feature.AppealsPortal.Label.EmailConfirmation,Konfirmasi emailmu
 Feature.AppealsPortal.Label.EmailInput,Email kamu
@@ -1463,7 +1490,7 @@ Feature.AppealsPortal.Label.LookName,Nama Avatar Bersama
 Feature.AppealsPortal.Label.PlaceIDPrompt,Apa ID tempatnya?
 Feature.AppealsPortal.Label.PlaceId,ID Tempat
 Feature.AppealsPortal.Label.PlaceName,Nama Tempat
-Feature.AppealsPortal.Label.ProfileDescription,Deskripsi Profil
+Feature.AppealsPortal.Label.ProfileDescription,Deskripsi profil
 Feature.AppealsPortal.Label.Reason,Alasan
 Feature.AppealsPortal.Label.ReportAndAppeals,Pelanggaran & Banding
 Feature.AppealsPortal.Label.Type.Asset,Aset
@@ -1485,7 +1512,7 @@ Feature.AppealsPortal.Label.Type.Mesh,Mesh
 Feature.AppealsPortal.Label.Type.Model,Model
 Feature.AppealsPortal.Label.Type.Plugin,Plugin
 Feature.AppealsPortal.Label.Type.Screenshot,Screenshot
-Feature.AppealsPortal.Label.Type.UserProfile,Profil Pengguna
+Feature.AppealsPortal.Label.Type.UserProfile,Profil pengguna
 Feature.AppealsPortal.Label.Type.Video,Video
 Feature.AppealsPortal.Label.Type.Voice,Chat Suara
 Feature.AppealsPortal.Label.TypeBrokeRules.Generic,Perilakumu melanggar peraturan
@@ -2099,6 +2126,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Hapus Avatar
 Feature.Catalog.Action.DescribeAvatar,Deskripsikan avatarmu (Opsional)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Jelajahi Marketplace
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Opsi Item
 Feature.Catalog.Action.LoadMore,Tampilkan Lebih Banyak
@@ -2394,6 +2422,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"Untuk melanjutkan, review atau 
 Feature.Catalog.Message.Checkout.UnavailableItems,Satu atau beberapa item tidak dapat dibeli. Hapus item tersebut sebelum melanjutkan.
 Feature.Catalog.Message.CollectiblesInfo,"Item Koleksi bisa dijual kembali antarpengguna setelah periode kepemilikan, sekalipun stok awal belum habis terjual. Subscriber Roblox Plus dapat mencantumkan item Koleksi untuk dijual kembali."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Tambahkan ini ke favorit
+Feature.Catalog.Message.Favorites.CategoryEmpty,Kamu belum menyimpan apa pun di kategori ini.
+Feature.Catalog.Message.Favorites.Empty,Kamu belum menyimpan apa pun.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Temukan item kreasi terbaik di Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Pembelian dari penjualan kembali akan ditahan hingga {days} hari. Item tersebut hanya dapat dijual kembali setelah periode penahanan ini berakhir. Hanya pengguna Plus yang dapat menjual kembali item.
 Feature.Catalog.Message.HoldingPolicyL2,"Setelah pembelian, item orisinal akan ditahan hingga {purchaseDays} hari. Item tersebut hanya dapat dijual kembali setelah periode penahanan ini berakhir dan penjualan kembali akan memiliki masa penahanan hingga {resaleDays} hari. Hanya pengguna premium yang dapat menjual kembali item."
@@ -2477,6 +2507,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,
 Feature.Chat.Description.ExpressiveChatLearnMore,"Fitur chat Ekspresif memungkinkan chat tanpa filter dan chat suara Party.
 
 Akses ke chat Ekspresif dibatasi hingga semua anggota memenuhi syarat dan chat-mu diupgrade."
+Feature.Chat.Description.InlineContextCardDescription,Berhati-hatilah saat chat dengan orang asing. Jangan bagikan informasi pribadi atau pindah ke aplikasi chat lain. Kamu bisa memblokir atau melaporkan siapa pun dari profilnya.
 Feature.Chat.Description.NameGroup,Beri nama grupmu
 Feature.Chat.Description.NameGroupChat,Beri nama chat grup kamu
 Feature.Chat.Description.OSAContextCardDescription,Keamananmu penting bagi kami. Merasa tidak nyaman? Kamu dapat memblokir atau melaporkan pengguna ini kapan saja dari profilnya.
@@ -2499,6 +2530,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Interaksi pertama dengan ora
 Feature.Chat.Heading.LeaveGroup,Keluar dari Grup
 Feature.Chat.Heading.PartyWithConnections,Party dengan Koneksi
 Feature.Chat.Heading.PartyWithFriends,Party dengan Teman
+Feature.Chat.Heading.SafeChattingWithThisUser,Berhati-hatilah saat chat dengan orang ini
+Feature.Chat.Heading.SafeChattingWithUsername,Berhati-hatilah saat chat dengan {displayName}
 Feature.Chat.Heading.ShareGameToChat,Bagikan pengalaman virtual ke chat
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} mengundangmu untuk bergabung
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} mengundangmu bergabung ke grup
@@ -2559,7 +2592,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1j
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Tidak tersedia
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
@@ -3019,6 +3051,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,Tambahkan
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} sekarang adalah teman tepercaya
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Teman tepercaya dihapus
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Permintaan teman tepercaya terkirim
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Aktivitas Baru-Baru Ini
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Aktivitas {username} Baru-Baru Ini
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3127,6 +3161,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Informasi sponsor tidak da
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan berbagai faktor seperti lokasi, info perangkat, usia, dan perilaku di platform, untuk menayangkan konten yang relevan untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan berbagai faktor seperti lokasi, info perangkat, usia, dan perilaku di platform, untuk menayangkan konten yang relevan untukmu. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Sponsor ini dibayar oleh {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,Kami akan lebih jarang menyarankan ini
 Feature.GameDetails.RatingPercentOnly,Rating {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -4191,6 +4228,8 @@ Feature.Schools.Heading.CantFindSchool,Kami tidak dapat menemukan sekolahmu
 Feature.Schools.Heading.CantVerifySchool,Kami tidak dapat memverifikasi sekolahmu
 Feature.Schools.Heading.CheckYourEmail,Periksa emailmu
 Feature.Schools.Heading.EnterSchoolEmail,Masukkan email sekolahmu
+Feature.Schools.Heading.InviteYourClassmates,Undang teman sekelasmu
+Feature.Schools.Heading.InviteYourFriends,Undang teman-temanmu
 Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} anggota
 Feature.Schools.Heading.RemoveYourSchool,Hapus sekolahmu
@@ -4879,6 +4918,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,Bantu kami meningkatkan kualitas pen
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,Bantu kreator meningkatkan pengalaman virtual ini
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,Tidak Bisa Membeli
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,Bergabunglah dengan pengalaman virtual untuk me-redeem pembelianmu sebelumnya sebelum membeli produk lain.
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,Bergabunglah untuk me-redeem pembelianmu
 Purchasing.RobloxProducts.Label.RobuxBalance,Saldo: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,Ketentuan Kreator Tambahan
 Roblox.ReferralRewards.Expires,

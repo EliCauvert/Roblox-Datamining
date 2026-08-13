@@ -29,7 +29,7 @@ local t = {
 	testId = "--foundation-badge",
 	variant = badgeVariantModule.Contrast,
 	shape = badgeShapeModule.Pill,
-	size = badgeSizeModule.XSmall
+	size = badgeSizeModule.Small
 }
 local t_1 = {
 	[badgeVariantModule.Primary] = badgeVariantModule.Contrast,

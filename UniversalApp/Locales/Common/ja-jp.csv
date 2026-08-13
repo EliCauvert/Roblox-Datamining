@@ -117,6 +117,8 @@ Authentication.AccountPicker.Label.SignedOut,ログアウト済み
 Authentication.AccountRecovery.Action.AddAPasskey,はい、新しいパスキーを追加します
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,削除
+Authentication.AccountRecovery.Action.DeleteAll,いいえ、心当たりはありません
+Authentication.AccountRecovery.Action.DontDeleteCredentials,はい、心当たりがあります
 Authentication.AccountRecovery.Action.Next,次へ
 Authentication.AccountRecovery.Action.Ok,了解
 Authentication.AccountRecovery.Action.ResetPassword,パスワードのリセット
@@ -131,6 +133,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,
 Authentication.AccountRecovery.Action.UsePhone,電話番号を使用
 Authentication.AccountRecovery.Action.UsePhoneInstead,
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,ユーザーネームまたはメールアドレスを使用
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,不明な変更は削除されました。保護機能をもう一つ追加して、アカウントを安全に保ちましょう。
 Authentication.AccountRecovery.Description.CannotRecoverAccount,セキュリティのため、2段階認証を有効化したアカウントを復元するには、2つ目の異なる認証方法が必要です。このアカウントには、安全な復元に使用できるバックアップ方法がありません。主要な2段階認証へのアクセスを再取得するか、バックアップコードを使用して2段階認証の手続きをスキップしてください。
 Authentication.AccountRecovery.Description.ChooseAccount,回復したいアカウントを選択してください。
 Authentication.AccountRecovery.Description.CreateNewPassword,古いパスワードとは違う強力なパスワードを作成してください。
@@ -138,6 +141,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,新しい�
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,保護強化プログラムに登録されています。アカウントを安全に保つため、ログインするにはパスキーまたはセキュリティキーが必要になります。このデバイスはパスキーをサポートしていないため、ログインが難しい場合があります。今後は、クイックサインインを使用することで、別のログイン済みのデバイスにログインできます。
 Authentication.AccountRecovery.Description.EmailCodeSent,このメールアドレスのRobloxアカウントが存在する場合、認証コードが送信されます。スパムを含むすべてのフォルダを確認してください。
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,お持ちのアカウントに関連付けられている場合、ご入力いただいたメールアドレスに6桁の認証コードを送信しました。迷惑メールを含むフォルダをすべて確認してください。
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,年齢の変更によりメールアドレスが変更されたため、一部が利用できなくなる場合があります。ただし、アカウント復元には引き続き使用できます。
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,保護強化プログラムに登録されています。アカウントを安全に保つため、ログインするにはパスキーまたはセキュリティキーが必要になります。{lineBreak}{lineBreak}個人用デバイスをご利用の場合は、今すぐ新しいパスキーを設定することをおすすめします。これにより、今後このデバイスで簡単にログインできるようになります。共有または公共のデバイスをご利用の場合は、この手順をスキップしてください。
 Authentication.AccountRecovery.Description.EnterABackupCode,次に、保存したバックアップコードを入力してください。
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,アカウントに関連付けられている可能性のあるメールアドレスまたは電話番号を入力してください。過去に購入したことがある場合は、支払いに使用したメールアドレスをお試しください。
@@ -145,7 +149,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,今度は、メー�
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,今度は、電話番号、バックアップコード、または他のメールアドレスを入力してください。Robloxで何かを買う際に使うメールアドレスなどです
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,次に、アカウントに関連付けられている電話番号を入力してください。
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,今度は、電話番号または別のメールアドレスを入力してください。Robloxで何かを購入する際に使うメールアドレスなどです。
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,お客様のアカウントに、第三者によるものと思われるセキュリティの変更が見つかりました。ご確認の上、心当たりの有無をお知らせください。
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,心当たりがない項目を残しておくと、第三者がログインし、あなた自身がロックアウトされる可能性があります。この操作は取り消せません。
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,アカウントで{twoStepMethod}を有効にしました。まだアクセス可能な場合は維持してください。次回再びログインする際に使用するよう求められます。
+Authentication.AccountRecovery.Description.NoChangesMade,保護機能をもう一つ追加して、アカウントを安全に保ちましょう。
 Authentication.AccountRecovery.Description.PhoneCodeSent,この電話番号のRobloxアカウントが存在する場合、認証コードが送信されます。SMSまたはWhatsAppを確認してください。
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,アカウントに関連付けられている場合、ご入力いただいた電話番号に6桁の認証コードを送信しました。コードは、WhatsAppまたはショートメッセージ（SMS）を介して送信できます。
 Authentication.AccountRecovery.Description.PlatformNotSupported,このプラットフォームまたはデバイスは、アカウントの復元には対応していません。[OK] を選択してこのウィンドウを閉じ、[ログイン] ページに戻ってください。まずは別のデバイスでアカウントを復元させてください。次に、[クイックサインイン] を選択し、指示に従って、別のログイン済みデバイスを使って安全にログインしてください。
@@ -157,21 +165,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,�
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,こんにちは、{username}さん。現在あなたは信頼できる場所からアカウントにアクセスされているため、2段階認証をスキップし、復元を完了していただけます。
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,アカウント回復に別のメールアドレスが使用されました。メールアドレスを {email} 更新します。
 Authentication.AccountRecovery.Description.VerifyAgain,2段階認証の復元でアカウントを有効化する前に、ご本人であることを確認してください。[続行]を押して、2段階認証プロセスを再度開始します。
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,あなたのアカウントは保護されました！
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,バックアップコードが生成されました
+Authentication.AccountRecovery.Heading.BillingEmailAdded,請求先メールアドレスが追加されました
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,アカウントを回復できません
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,認証方法を選択
+Authentication.AccountRecovery.Heading.EmailAdded,メールアドレスが追加されました
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,これはあなたの個人用デバイスですか？
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,このデバイスはパスキーに対応していないため、動作が制限される場合があります
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,強化保護プログラムに登録されました
 Authentication.AccountRecovery.Heading.EnterSecondMethod,二番目の認証方法を入力
+Authentication.AccountRecovery.Heading.InvalidateCredential,この変更に心当たりはありますか？
+Authentication.AccountRecovery.Heading.InvalidateCredentials,これらの変更に心当たりはありますか？
+Authentication.AccountRecovery.Heading.NoChangesMade,変更は行われていません
+Authentication.AccountRecovery.Heading.PasskeyAdded,パスキーが追加されました
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,電話番号が追加されました
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Robloxアカウントの回復
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,既存の2段階認証方法を維持しますか？
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value}が追加されました
 Authentication.AccountRecovery.Heading.UpdateEmail,メールアドレスを更新
 Authentication.AccountRecovery.Heading.UseAnotherDevice,別のデバイスを使用
 Authentication.AccountRecovery.Label.AddEmail,メールアドレスを追加
 Authentication.AccountRecovery.Label.Authenticator2sv,認証システムアプリによる2段階認証
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,認証システムによる2段階認証
 Authentication.AccountRecovery.Label.BackupCode,バックアップコード
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,新しいパスワードを確認
 Authentication.AccountRecovery.Label.Email2sv,メールアドレスによる2段階認証
+Authentication.AccountRecovery.Label.Email2svCapitalized,
+Authentication.AccountRecovery.Label.EmailUnavailable,メールアドレスは利用できません
 Authentication.AccountRecovery.Label.EnterCode,コードを入力
 Authentication.AccountRecovery.Label.NewPasswordV2,新しいパスワード
 Authentication.AccountRecovery.Label.Or,または
@@ -179,6 +201,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,コードを再送信
 Authentication.AccountRecovery.Label.ResendCodeTimer,あと {timeLeft} 秒後にコードを再送信
 Authentication.AccountRecovery.Label.SecurityKey2sv,セキュリティキーによる2段階認証
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,
 Authentication.AccountRecovery.Label.UsernameEmail,ユーザーネーム/メールアドレス
 Authentication.AccountRecovery.LabelEmail,メールアドレス
 Authentication.AccountRecovery.LabelPhone,電話番号
@@ -278,6 +301,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,テンセントQQログイン
 Authentication.Login.Action.QuickSignIn,クイックサインイン
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,コードを送信
 Authentication.Login.Action.SendVerificationEmail,確認メールを送信
 Authentication.Login.Action.SignIn,サインイン
 Authentication.Login.Action.UsePasskey,パスキーを使用
@@ -290,8 +314,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email} に送信され�
 Authentication.Login.Description.GetOneTimeCodeHelp,あなたのアカウントで認証済みのメールアドレスを入力し、ワンタイムコード（一回のみ使用可）を受け取ります。
 Authentication.Login.Description.PasskeyDescription,お持ちのアカウントには、パスワードよりもセキュリティが強力なログイン方法であるパスキーがついています。このデバイスでは指紋、顔認証、または画面ロックを使用できます。
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,お使いのデバイスがパスキーに対応しているかどうかを判断できません。もう一度お試しいただくか、「ログインできない」をタップしてメールアドレスまたは電話番号でアカウントを復元してください。
+Authentication.Login.Description.PasskeyMobileOnly,パスキーはモバイルでのみ利用可能です。別の方法でログインしてください。
+Authentication.Login.Description.VerificationCodeSentTo,Robloxアカウントが存在する場合、{email}に認証コードが届きます
 Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン用のパスキーが設定されています。パスキーでログインするか、アカウントを回復してください。
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
+Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
 Authentication.Login.Heading.Login,ログイン
 Authentication.Login.Heading.LoginRoblox,ロブロックスにログイン
@@ -313,6 +340,8 @@ Authentication.Login.Label.ConnectionError.Title,接続エラー
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,メール確認の手続きが必要です
 Authentication.Login.Label.EmailOrPhone,メールアドレスまたは電話番号
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,メールアドレスを入力
 Authentication.Login.Label.EnterOneTimeCode,ワンタイムコードを入力
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,メールに記載されたコードを入力
 Authentication.Login.Label.ForgotYourPassword,パスワードをお忘れですか？
@@ -461,7 +490,7 @@ Authentication.SignUp.Label.ConfirmBirthday,生年月日を確認してくださ
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,日
 Authentication.SignUp.Label.EmailAddress,
-Authentication.SignUp.Label.EnterYourEmail,メールアドレスを入力
+Authentication.SignUp.Label.EnterYourEmail,
 Authentication.SignUp.Label.EnterYourParentsEmail,保護者のメールアドレスを入力
 Authentication.SignUp.Label.Error.MinimumAge5,新規アカウントの設定年齢は5歳以上でなければなりません
 Authentication.SignUp.Label.Error.UsernameAlreadyInUse,このユーザーネームはすでに使用されています
@@ -974,9 +1003,7 @@ CoreScripts.InGameMenu.GameSettings.Volume,音量
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,友達を招待
 CoreScripts.InGameMenu.Traversal.HistoryDescription,以前プレイしたゲームに参加
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,このゲームから退出し、{PREVIOUS_EXPERIENCE}に戻ろうとしています。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,このゲームから退出し、{PREVIOUS_GAME}に戻ろうとしています。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,退出しますか？
 CoreScripts.PremiumModal.Title.Error,エラー
 CoreScripts.PublishAssetPrompt.ResultModalOk,
@@ -2099,6 +2126,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,アバターの説明をしてください（任意）
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,マーケットプレイスを閲覧
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,アイテムオプション
 Feature.Catalog.Action.LoadMore,さらに読み込む
@@ -2394,6 +2422,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,続けるには、アイテム�
 Feature.Catalog.Message.Checkout.UnavailableItems,1点以上のアイテムは購入できません。続ける前に削除してください。
 Feature.Catalog.Message.CollectiblesInfo,コレクタブルアイテムは、元の在庫が売り切れていない場合でも、保留期間後にユーザーから他のユーザーへの再販が可能です。Roblox Plus会員は、再販用のコレクタブルアイテムをリスト表示できます。
 Feature.Catalog.Message.FTUXFavoritePillTooltip,お気に入りに追加
+Feature.Catalog.Message.Favorites.CategoryEmpty,このカテゴリにはまだ何も保存していません。
+Feature.Catalog.Message.Favorites.Empty,まだ何も保存していません。
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Robloxで最高の職人技が光るアイテムを見つけよう
 Feature.Catalog.Message.HoldingPolicyL1,再販売からの購入には、最長{days}日間の保留期間があります。アイテムはこの保留期間の終了後にしか再販売できません。アイテムを再販売できるのは、Plus会員のユーザーのみです。
 Feature.Catalog.Message.HoldingPolicyL2,購入後、最初の販売は最長で{purchaseDays} 日間保留状態になります。アイテムは保留期間終了後しか再販売できず、再販売には最長 {resaleDays} 日間保留状態になります。アイテムの再販売は、プレミアム会員のユーザーしかできません。
@@ -2479,6 +2509,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"チャット拡張機能
 Feature.Chat.Description.ExpressiveChatLearnMore,"広範囲対応チャット機能には、伏字フィルタ処理なしのチャットとパーティボイスが含まれています。
 
 広範囲対応チャットは、メンバー全員が利用対象となり、あなたのチャット機能がアップグレードされるまでアクセス制限がかかります。"
+Feature.Chat.Description.InlineContextCardDescription,見知らぬ人とチャットする場合はご注意ください。個人情報をシェアしたり、別のチャットアプリに会話を移したりしないでください。相手のプロフィールから、そのユーザーをブロックしたり、規約違反を報告したりできます。
 Feature.Chat.Description.NameGroup,グループに名前をつける
 Feature.Chat.Description.NameGroupChat,チャットグループに名前を付ける
 Feature.Chat.Description.OSAContextCardDescription,不快に感じた場合は、このユーザーを相手のプロフィールからいつでもブロックまたは通報できます。
@@ -2501,6 +2532,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,この相手との最初の�
 Feature.Chat.Heading.LeaveGroup,グループから退出
 Feature.Chat.Heading.PartyWithConnections,つながりとパーティ結成
 Feature.Chat.Heading.PartyWithFriends,友達とパーティ機能を使おう
+Feature.Chat.Heading.SafeChattingWithThisUser,この相手とのチャットにご注意ください
+Feature.Chat.Heading.SafeChattingWithUsername,{displayName}さんとのチャットにご注意ください
 Feature.Chat.Heading.ShareGameToChat,チャットしてバーチャル空間を共有
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName}さんがあなたを次のグループに招待しました：
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName}さんからグループに招待されました
@@ -2561,7 +2594,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1時間
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー
@@ -3021,6 +3053,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,信頼で
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name}さんが信頼する友達になりました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信頼する友達が削除されました
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,信頼する友達リクエストが送信されました
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,最近のアクティビティ
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username}さんの最近のアクティビティ
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3129,6 +3163,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,一時的なエラーの�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,表示されているスポンサーコンテンツは、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて、適切なコンテンツを提供しています。このバーチャル空間を提供するのは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,表示されているスポンサーコンテンツは、位置情報、デバイス情報、年齢、プラットフォーム上の行動などのさまざまな要素に基づいて、関連するコンテンツを提供しています。このバーチャル空間を提供するのは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
 Feature.GameDetails.Message.SponsoredDisclosure.U18,デバイス情報、位置、年齢などの非個人化要素に基づいて、適切なコンテンツを提供するために、このスポンサーコンテンツが表示されます。このバーチャル空間のクリエーターは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,このスポンサーコンテンツは、適切なコンテンツを提供するため、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて表示されています。{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,このスポンサーコンテンツは、関連するコンテンツを提供するため、位置情報、デバイス情報、年齢、プラットフォーム上の行動などのさまざまな要素に基づいて表示されています。{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,このスポンサーコンテンツは、適切なコンテンツを提供するため、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて表示されています。{PayerName}がスポンサー費用を負担しています。
 Feature.GameDetails.Message.SuggestLessOften,この作品のおすすめを減らします
 Feature.GameDetails.RatingPercentOnly,評価 {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -4881,6 +4918,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,このバーチャル空間の向上
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,このバーチャル空間の向上のためクリエーターに協力する
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,購入できません
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,新しく製品を購入する前にバーチャル空間に参加して購入済みアイテムを引き換えましょう。
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,購入したものを受け取るには参加
 Purchasing.RobloxProducts.Label.RobuxBalance,残高: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,その他のクリエーター規約
 Roblox.ReferralRewards.Expires,有効期限：

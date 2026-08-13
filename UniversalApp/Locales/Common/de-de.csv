@@ -117,6 +117,8 @@ Authentication.AccountPicker.Label.SignedOut,Abgemeldet
 Authentication.AccountRecovery.Action.AddAPasskey,"Ja, neuen Passkey hinzufügen"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
+Authentication.AccountRecovery.Action.DeleteAll,"Nein, ich erkenne sie nicht"
+Authentication.AccountRecovery.Action.DontDeleteCredentials,"Ja, ich erkenne sie"
 Authentication.AccountRecovery.Action.Next,
 Authentication.AccountRecovery.Action.Ok,Ok
 Authentication.AccountRecovery.Action.ResetPassword,Passwort zurücksetzen
@@ -131,6 +133,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,Stattdessen E-Mail-Adresse
 Authentication.AccountRecovery.Action.UsePhone,Telefon verwenden
 Authentication.AccountRecovery.Action.UsePhoneInstead,Stattdessen Smartphone verwenden
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,Stattdessen Benutzernamen oder E-Mail-Adresse verwenden
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,"Die Änderungen, die du nicht erkannt hast, wurden entfernt. Schütze dein Konto, indem du eine zusätzliche Schutzebene hinzufügst."
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"Zu deiner Sicherheit ist eine zweite, alternative Verifizierungsmethode erforderlich, um den Zugriff auf dein Konto mit zweistufiger Verifizierung wiederherzustellen. Für dieses Konto ist keine Backup-Methode für eine sichere Wiederherstellung hinterlegt. Bitte versuche, den Zugriff auf deine primäre 2SV-Methode wiederherzustellen, oder verwende einen Backup-Code, um die 2SV-Challenge zu überspringen."
 Authentication.AccountRecovery.Description.ChooseAccount,"Wähle das Konto aus, das du wiederherstellen möchtest."
 Authentication.AccountRecovery.Description.CreateNewPassword,"Erstelle ein sicheres Passwort, das sich von deinem alten Passwort unterscheidet."
@@ -138,6 +141,7 @@ Authentication.AccountRecovery.Description.CreateNewPasswordAddEmail,"Erstelle e
 Authentication.AccountRecovery.Description.DeviceDoesNotSupportPasskey,"Du bist für das erweiterte Schutzprogramm angemeldet. Um dein Konto zu schützen, benötigst du einen Passkey oder Sicherheitsschlüssel, um dich anzumelden. Dieses Gerät unterstützt keine Passkeys, daher kann die Anmeldung auf diesem Gerät schwierig sein. In Zukunft kannst du die Schnellanmeldung verwenden, um dich mit einem anderen, bereits angemeldeten Gerät anzumelden."
 Authentication.AccountRecovery.Description.EmailCodeSent,"Wenn für diese E-Mail-Adresse ein Roblox-Konto existiert, erhältst du einen Verifizierungscode. Überprüfe alle Ordner in deinem Postfach, einschließlich des Spam-Ordners."
 Authentication.AccountRecovery.Description.EmailCodeSentForUser,"Wir haben gerade einen 6-stelligen Verifizierungscode an die von dir angegebene E-Mail-Adresse gesendet, sofern sie mit deinem Roblox-Konto verknüpft ist. Überprüfe alle Ordner in deinem Postfach, einschließlich des Spam-Ordners."
+Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Einige E-Mail-Adressen sind möglicherweise nicht verfügbar, da sie aufgrund einer Altersänderung geändert wurden. Sie können jedoch weiterhin zur Kontowiederherstellung verwendet werden."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Du bist für das erweiterte Schutzprogramm angemeldet. Um dein Konto zu schützen, benötigst du einen Passkey oder Sicherheitsschlüssel, um dich anzumelden.{lineBreak}{lineBreak}Wenn du gerade dein persönliches Gerät verwendest, solltest du jetzt einen neuen Passkey einrichten. So kannst du dich in Zukunft leichter auf diesem Gerät anmelden. Wenn du gerade ein gemeinsam genutztes oder öffentliches Gerät verwendest, überspringe bitte diesen Schritt."
 Authentication.AccountRecovery.Description.EnterABackupCode,Gib jetzt einen von dir gespeicherten Backup-Code ein.
 Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Gib eine E-Mail-Adresse oder Telefonnummer ein, von der du denkst, dass sie mit deinem Konto verknüpft sein könnte. Wenn du schon einmal einen Kauf getätigt hast, versuche es mit der E-Mail-Adresse, die du für die Zahlung verwendet hast."
@@ -145,7 +149,11 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"Gib jetzt eine E-M
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Gib jetzt eine Telefonnummer, deinen Backup-Code oder eine andere E-Mail-Adresse ein. Dies kann eine E-Mail-Adresse sein, die du verwendet hast, um etwas auf Roblox zu kaufen."
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Gib jetzt eine Telefonnummer ein, die mit deinem Konto verknüpft ist."
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"Gib jetzt eine Telefonnummer oder eine andere E-Mail-Adresse ein. Dies kann eine E-Mail-Adresse sein, die du verwendet hast, um etwas auf Roblox zu kaufen."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,"Wir haben eine Sicherheitsänderung an deinem Konto festgestellt, die du möglicherweise nicht vorgenommen hast. Sieh sie dir an und teile uns mit, ob sie von dir stammt."
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,"Wir haben Sicherheitsänderungen an deinem Konto festgestellt, die du möglicherweise nicht vorgenommen hast. Sieh sie dir an und teile uns mit, ob sie von dir stammen."
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"Wenn ich nicht erkannte Elemente beibehalte, kann sich möglicherweise trotzdem jemand anderes anmelden und mich aussperren. Diese Aktion kann nicht rückgängig gemacht werden."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,"Du hast die {twoStepMethod} für dein Konto aktiviert. Behalte sie bei, wenn du noch darauf zugreifen kannst. Wir werden dich darum bitten, sie zu verwenden, wenn du dich erneut anmeldest."
+Authentication.AccountRecovery.Description.NoChangesMade,"Schütze dein Konto, indem du eine zusätzliche Schutzebene hinzufügst."
 Authentication.AccountRecovery.Description.PhoneCodeSent,"Wenn für diese Telefonnummer ein Roblox-Konto existiert, erhältst du einen Verifizierungscode. Überprüfe deine SMS oder WhatsApp."
 Authentication.AccountRecovery.Description.PhoneCodeSentForUser,"Wir haben gerade einen 6-stelligen Verifizierungscode an die von dir angegebene Telefonnummer gesendet, sofern sie mit deinem Roblox-Konto verknüpft ist. Der Code kann per WhatsApp oder SMS gesendet werden."
 Authentication.AccountRecovery.Description.PlatformNotSupported,"Die Kontowiederherstellung wird auf dieser Plattform oder diesem Gerät nicht unterstützt. Wähle ""OK"", um dieses Fenster zu schließen und zur Anmeldeseite zurückzukehren. Bitte stelle dein Konto auf einem anderen Gerät wieder her. Wähle anschließend ""Schnellanmeldung"" und befolge die Anweisungen, um dich sicher mit dem anderen bereits angemeldeten Gerät anzumelden."
@@ -157,21 +165,35 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"Hallo {username}, du greifst von einem vertrauenswürdigen Ort aus auf dein Konto zu. Du kannst die zweistufige Verifizierung überspringen und die Wiederherstellung abschließen."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,"Wir haben festgestellt, dass du eine andere E-Mail-Adresse verwendet hast, um dein Konto wiederherzustellen. Wir ändern deine E-Mail-Adresse jetzt zu: {email}"
 Authentication.AccountRecovery.Description.VerifyAgain,"Bestätige deine Identität, bevor du den Zugriff auf dein Konto mit zweistufiger Verifizierung wiederherstellst. Tippe auf ""Weiter"", um die zweistufige Verifizierung erneut zu starten."
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,Dein Konto ist gesichert!
+Authentication.AccountRecovery.Heading.BackupCodesGenerated,Backup-Codes generiert
+Authentication.AccountRecovery.Heading.BillingEmailAdded,Rechnungs-E-Mail-Adresse hinzugefügt
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,Wir können dein Konto nicht wiederherstellen
 Authentication.AccountRecovery.Heading.ChooseVerificationMethod,Wähle eine Verifizierungsmethode aus
+Authentication.AccountRecovery.Heading.EmailAdded,E-Mail-Adresse hinzugefügt
 Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,Ist das dein persönliches Gerät?
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,"Auf diesem Gerät kann es zu Einschränkungen kommen, weil es Passkeys nicht unterstützt"
+Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,Für das erweiterte Schutzprogramm angemeldet
 Authentication.AccountRecovery.Heading.EnterSecondMethod,Gib eine zweite Verifizierungsmethode ein
+Authentication.AccountRecovery.Heading.InvalidateCredential,Erkennst du diese Änderung?
+Authentication.AccountRecovery.Heading.InvalidateCredentials,Erkennst du diese Änderungen?
+Authentication.AccountRecovery.Heading.NoChangesMade,Es wurden keine Änderungen vorgenommen
+Authentication.AccountRecovery.Heading.PasskeyAdded,Passkey hinzugefügt
+Authentication.AccountRecovery.Heading.PhoneNumberAdded,Telefonnummer hinzugefügt
 Authentication.AccountRecovery.Heading.ResetPassword,
 Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Kontowiederherstellung auf Roblox
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Sollen wir die bestehende zweistufige Verifizierungsmethode beibehalten?
+Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} hinzugefügt
 Authentication.AccountRecovery.Heading.UpdateEmail,Aktualisiere deine E-Mail-Adresse
 Authentication.AccountRecovery.Heading.UseAnotherDevice,Ein anderes Gerät verwenden
 Authentication.AccountRecovery.Label.AddEmail,E-Mail-Adresse hinzufügen
 Authentication.AccountRecovery.Label.Authenticator2sv,Authenticator-App für die 2SV
+Authentication.AccountRecovery.Label.Authenticator2svCapitalized,Authenticator für die 2SV
 Authentication.AccountRecovery.Label.BackupCode,Backup-Code
 Authentication.AccountRecovery.Label.ConfirmNewPasswordV2,Neues Passwort bestätigen
 Authentication.AccountRecovery.Label.Email2sv,E-Mail-Adresse für die 2SV
+Authentication.AccountRecovery.Label.Email2svCapitalized,
+Authentication.AccountRecovery.Label.EmailUnavailable,E-Mail-Adresse nicht verfügbar
 Authentication.AccountRecovery.Label.EnterCode,Code eingeben
 Authentication.AccountRecovery.Label.NewPasswordV2,Neues Passwort
 Authentication.AccountRecovery.Label.Or,Oder
@@ -179,6 +201,7 @@ Authentication.AccountRecovery.Label.PreviousContactMethodVerification,{contactM
 Authentication.AccountRecovery.Label.ResendCode,Code erneut senden
 Authentication.AccountRecovery.Label.ResendCodeTimer,Code erneut senden in {timeLeft} Sek.
 Authentication.AccountRecovery.Label.SecurityKey2sv,Sicherheitsschlüssel für die 2SV
+Authentication.AccountRecovery.Label.SecurityKey2svCapitalized,
 Authentication.AccountRecovery.Label.UsernameEmail,Benutzername/E-Mail-Adresse
 Authentication.AccountRecovery.LabelEmail,E-Mail-Adresse
 Authentication.AccountRecovery.LabelPhone,Telefonnummer
@@ -278,6 +301,7 @@ Authentication.Login.Action.Next,
 Authentication.Login.Action.QQLogin,QQ-Anmeldung
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.ResendCode,
+Authentication.Login.Action.SendCodeSentenceCase,
 Authentication.Login.Action.SendVerificationEmail,E-Mail zur Verifizierung senden
 Authentication.Login.Action.SignIn,Anmelden
 Authentication.Login.Action.UsePasskey,Passkey nutzen
@@ -290,8 +314,11 @@ Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Gib den Code ein, den w
 Authentication.Login.Description.GetOneTimeCodeHelp,"Gib die auf deinem Konto verifizierte E-Mail ein, um einen einmaligen Code zu erhalten."
 Authentication.Login.Description.PasskeyDescription,"Dein Konto hat Passkey. Diese Anmeldemethode ist sicherer, als ein Passwort zu verwenden. Du kannst dich auf diesem Gerät mit deinem Fingerabdruck, deinem Gesicht oder der Bildschirmsperre anmelden."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Wir können nicht feststellen, ob dein Gerät Passkey unterstützt. Versuche es erneut oder tippe auf ""Probleme bei der Anmeldung"", um dein Konto mit einer E-Mail-Adresse oder Telefonnummer wiederherzustellen."
+Authentication.Login.Description.PasskeyMobileOnly,"Passkeys sind nur auf Mobilgeräten verfügbar. Versuche, dich auf eine andere Weise anzumelden."
+Authentication.Login.Description.VerificationCodeSentTo,"Wenn das Roblox-Konto existiert, erhältst du einen Verifizierungscode an {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,"Für dein Konto ist nur ein Passkey für die Anmeldung eingerichtet. Versuche, dich mit deinem Passkey anzumelden, oder stelle dein Konto wieder her."
 Authentication.Login.Error.PlatformAccountConnectionFailure,Das Plattform-Konto kann nicht verifiziert werden. Bitte versuche es später erneut.
+Authentication.Login.Heading.EnterYourCode,Gib deinen Code ein
 Authentication.Login.Heading.IncompatibleAccounts,Konten nicht kompatibel
 Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Bei Roblox anmelden
@@ -313,6 +340,8 @@ Authentication.Login.Label.ConnectionError.Title,Verbindungsfehler
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Deine E-Mail-Adresse muss verifiziert werden.
 Authentication.Login.Label.EmailOrPhone,E-Mail-Adresse oder Telefon
+Authentication.Login.Label.EnterCode,
+Authentication.Login.Label.EnterEmail,E-Mail-Adresse eingeben
 Authentication.Login.Label.EnterOneTimeCode,Einmaligen Code eingeben
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,"Gib den Code ein, den wir dir gerade per E-Mail geschickt haben"
 Authentication.Login.Label.ForgotYourPassword,Passwort vergessen?
@@ -1594,6 +1623,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Bestehenden Look aktualisieren
 Feature.Avatar.Action.UpdateMakeupLook,Look aktualisieren
 Feature.Avatar.Action.Zoom,Zoomen
 Feature.Avatar.AvatarWidgetTitle,Stile entdecken
+Feature.Avatar.BackgroundGeneration.Error.Moderation,"Dieser Prompt entspricht nicht unseren Richtlinien. Versuche, etwas anderes zu beschreiben."
+Feature.Avatar.BackgroundGeneration.Error.System,Beim Generieren deines Hintergrunds ist etwas schiefgelaufen. Bitte versuche es erneut.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
+Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
+Feature.Avatar.BackgroundGeneration.Title,Hintergrund erstellen
 Feature.Avatar.Backgrounds.Title,Hintergründe
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Für diesen Körperstil ist keine Anpassung verfügbar.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Zur Standard-Körperfarbe zurückkehren
@@ -1601,6 +1636,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Hautfarbe
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Erstelle deinen eigenen einzigartigen Look mit endlosen Make-up-Kombinationen.
 Feature.Avatar.EmoteAlreadyAssigned,Dieses Emote hat schon einen Slot
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Lass dich inspirieren
@@ -2091,6 +2127,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatar löschen
 Feature.Catalog.Action.DescribeAvatar,Beschreibe deinen Avatar (optional)
 Feature.Catalog.Action.Favorite,Favorit
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Marktplatz durchsuchen
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Artikeloptionen
 Feature.Catalog.Action.LoadMore,Mehr laden
@@ -2386,6 +2423,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"Überprüfe oder entferne Artik
 Feature.Catalog.Message.Checkout.UnavailableItems,"Einer oder mehrere Artikel können nicht gekauft werden. Bitte entferne sie, bevor du fortfährst."
 Feature.Catalog.Message.CollectiblesInfo,"Sammler-Items können nach einer bestimmten Haltedauer von Benutzer zu Butzer weiterverkauft werden, auch wenn der Originalbestand nicht ausverkauft ist. Roblox-Plus-Abonnenten können Sammler-Items zum Weiterverkauf anbieten."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Füge das zu deinen Favoriten hinzu
+Feature.Catalog.Message.Favorites.CategoryEmpty,Du hast noch nichts in dieser Kategorie gespeichert.
+Feature.Catalog.Message.Favorites.Empty,Du hast noch nichts gespeichert.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Entdecke die am besten erstellten Artikel auf Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Käufe aus Weiterverkäufen werden für bis zu {days} Tage gehalten. Der Artikel kann erst nach dieser Haltefrist weiterverkauft werden. Nur Plus-Benutzer können Artikel weiterverkaufen.
 Feature.Catalog.Message.HoldingPolicyL2,Nach dem Kauf werden Original-Verkäufe für bis zu {purchaseDays} Tage gehalten. Der Artikel kann erst nach dieser Haltedauer weiterverkauft werden und Weiterverkäufe werden für bis zu {resaleDays} Tage gehalten. Nur Premium-Benutzer können Artikel weiterverkaufen.
@@ -2471,6 +2510,7 @@ Alle Mitglieder dieser Gruppe werden eingeladen, aber einige sind nicht berechti
 Feature.Chat.Description.ExpressiveChatLearnMore,"Expressive Chat-Funktionen umfassen den Chat ohne Filter und Party-Sprachchat.
 
 Der Zugriff auf den expressiven Chat ist eingeschränkt, bis alle Mitglieder berechtigt sind und dein Chat aktualisiert wurde."
+Feature.Chat.Description.InlineContextCardDescription,"Sei vorsichtig, wenn du mit Fremden chattest. Teile keine persönlichen Informationen mit anderen und wechsle nicht zu einer anderen Chat-App. Du kannst jede Person über ihr Profil blockieren oder melden."
 Feature.Chat.Description.NameGroup,Benenne deine Gruppe
 Feature.Chat.Description.NameGroupChat,Benenne deine Chatgruppe
 Feature.Chat.Description.OSAContextCardDescription,Deine Sicherheit zählt. Du hast ein ungutes Gefühl? Du kannst diese Person jederzeit über ihr Profil blockieren oder melden.
@@ -2493,6 +2533,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Erste Interaktion mit dieser
 Feature.Chat.Heading.LeaveGroup,Gruppe verlassen
 Feature.Chat.Heading.PartyWithConnections,Party mit Connections
 Feature.Chat.Heading.PartyWithFriends,Party mit Freunden
+Feature.Chat.Heading.SafeChattingWithThisUser,"Sei vorsichtig, wenn du mit dieser Person chattest"
+Feature.Chat.Heading.SafeChattingWithUsername,"Sei vorsichtig, wenn du mit {displayName} chattest"
 Feature.Chat.Heading.ShareGameToChat,Teile Experience zum Chatten
 Feature.Chat.Heading.UserInvitedYouToJoin,"{combinedName} hat dich eingeladen, beizutreten"
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,"{combinedName} hat dich eingeladen, einer Gruppe beizutreten"
@@ -2553,7 +2595,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 Std.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 Monat
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 Woche
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} Woche(n)
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,unbekannter Benutzer
 Feature.Chat.Label.User,Benutzer
@@ -3013,6 +3054,8 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriendsAltCapitalization,
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ist jetzt ein vertrauter Freund
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Vertrauter Freund entfernt
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Anfrage zum Hinzufügen als vertrauter Freund gesendet
+Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Kürzliche Aktivität
+Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Kürzliche Aktivität von {username}
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3121,6 +3164,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Die Sponsoring-Information
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Du siehst diesen gesponserten Inhalt auf der Grundlage nicht personalisierter Faktoren wie Geräteinformationen, Standort und Alter, um dir angemessene Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" unter Einstellungen in deinem Konto, hier:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Du siehst diesen gesponserten Inhalt auf der Grundlage verschiedener Faktoren wie Standort, Geräteinformationen, Alter und Plattformverhalten, um dir relevante Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" unter Einstellungen in deinem Konto, hier:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Du siehst diesen gesponserten Inhalt auf der Grundlage nicht personalisierter Faktoren wie Geräteinformationen, Standort und Alter, dir eingesetzt werden, um dir angemessene Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Du siehst diesen gesponserten Inhalt aufgrund von nicht personalisierten Faktoren wie Geräteinformationen, Standort und Alter, um dir angemessene Inhalte bereitzustellen. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" in den Einstellungen deines Kontos:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Du siehst diesen gesponserten Inhalt aufgrund von verschiedenen Faktoren wie Standort, Geräteinformationen, Alter und Plattformverhalten, um dir relevante Inhalte bereitzustellen. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" in den Einstellungen deines Kontos:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Du siehst diesen gesponserten Inhalt aufgrund von nicht personalisierten Faktoren wie Geräteinformationen, Standort und Alter, die eingesetzt werden, um dir angemessene Inhalte bereitzustellen. Das Sponsoring wurde von {PayerName} bezahlt."
 Feature.GameDetails.Message.SuggestLessOften,Wir werden dir weniger häufig Inhalte wie diese vorschlagen
 Feature.GameDetails.RatingPercentOnly,{percentRating} % Rating
 Feature.GameDetails.Toast.LinkCopied,
@@ -4870,6 +4916,7 @@ PlayerFeedbacks.VoteForm.PromptBanner.Title,"Hilf mit, diese Experience zu verbe
 PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly,"Hilf dem Creator, diese Experience zu verbessern"
 Purchasing.PurchaseDialog.Heading.PendingDeveloperProductLimitReached,Kauf nicht möglich
 Purchasing.PurchaseDialog.Message.PendingDeveloperProductLimitReached,"Betritt die Experience, um deine vorherigen Käufe einzulösen, bevor du weitere Produkte kaufst."
+Purchasing.PurchaseDialog.Message.PendingDeveloperProductOnHome,"Tritt bei, um deinen Kauf einzulösen"
 Purchasing.RobloxProducts.Label.RobuxBalance,Kontostand: {var1} Robux
 Roblox.ReferralRewards.AdditionalCreatorTerms,Zusätzliche Creator-Bedingungen
 Roblox.ReferralRewards.Expires,Ablaufdatum
@@ -4882,7 +4929,7 @@ Roblox.ReferralRewards.RewardBannerModalTitle,Belohnung für Empfehlungen
 Search.GlobalSearch.Action.LoadMore,
 Search.GlobalSearch.Example.SearchCatalog,Katalog durchsuchen
 Search.GlobalSearch.Example.SearchGames,
-Search.GlobalSearch.Example.SearchMarketplace,Marktplatz durchsuchen
+Search.GlobalSearch.Example.SearchMarketplace,
 Search.GlobalSearch.TopResultsLabel,Top
 Verification.Identity.Action.SkipVoiceChat,Ohne Sprachchat beitreten
 Verification.Identity.Heading.LetsChat,Lass uns chatten!
