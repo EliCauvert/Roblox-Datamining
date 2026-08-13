@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXMigrateMaterialsToAttributes", false) and require(script.Parent.FFlagAXAddSectionsToItemInfoRowPrompt)

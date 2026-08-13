@@ -1,6 +1,7 @@
 ﻿local appChat = script:FindFirstAncestor("AppChat")
 local parent = appChat.Parent
 local reactModule = require(parent.React)
+local _ = require(parent.MomentsTypes)
 local roactUtilsModule = require(parent.RoactUtils)
 local useSignalState = require(parent.SignalsReact).useSignalState
 local gameCardContainerModule = require(script.Parent.GameCardComponents.GameCardContainer)
@@ -14,14 +15,14 @@ local getShareLinkV2StoreModule = require(appChat.Stores.GetShareLinkV2Store)
 local fFlagAppChatResolveShareLinkV2Module = require(appChat.Flags.FFlagAppChatResolveShareLinkV2)
 local fFlagAppChatMomentShareCardModule = require(appChat.Flags.FFlagAppChatMomentShareCard)
 
-local function ShareLinkV1Container(p0) --[[ line: 45 ]]
+local function ShareLinkV1Container(p0) --[[ line: 47 ]]
 	-- upvalues: getShareLinkStoreModule (ref), useSignalState (ref), useDispatch (ref), useEffect (ref), name (ref), reactModule (ref), gameCardContainerModule (ref)
 	local linkId = p0.shareLink.linkId
 	local linkType = p0.shareLink.linkType
 	local var13 = getShareLinkStoreModule(false)
 	local var14 = useSignalState(var13.getShareLinkMetadataComputed(linkId))
 	local var15 = useDispatch()
-	useEffect(function() --[[ line: 53 ]]
+	useEffect(function() --[[ line: 55 ]]
 		-- upvalues: var14 (ref), var13 (ref), var15 (ref), linkId (ref), linkType (ref), name (copy)
 		if var14 then
 			name:warning("ShareLinkContainer: Missing linkId or linkType in props.")
@@ -50,11 +51,11 @@ local function ShareLinkV1Container(p0) --[[ line: 45 ]]
 	})
 end
 
-local function ShareLinkV2Container(p1) --[[ line: 80 ]]
+local function ShareLinkV2Container(p1) --[[ line: 82 ]]
 	-- upvalues: getShareLinkV2StoreModule (ref), reactModule (ref), useSignalState (ref), fFlagAppChatMomentShareCardModule (ref), shareLinkClassificationModule (ref), momentShareCardContainerModule (ref)
 	local linkId = p1.shareLink.linkId
 	local var16 = getShareLinkV2StoreModule(false)
-	local var17 = useSignalState(reactModule.useMemo(function() --[[ line: 83 ]]
+	local var17 = useSignalState(reactModule.useMemo(function() --[[ line: 85 ]]
 		-- upvalues: var16 (ref), linkId (ref)
 		return var16.getAndFetchClassification(linkId)
 	end, { var16, linkId }).data)
@@ -69,7 +70,7 @@ local function ShareLinkV2Container(p1) --[[ line: 80 ]]
 	}) else nil
 end
 
-return function(p2) --[[ line: 102 | named "ShareLinkContainer" ]]
+return function(p2) --[[ line: 104 | named "ShareLinkContainer" ]]
 	-- upvalues: fFlagAppChatResolveShareLinkV2Module (ref), reactModule (ref), ShareLinkV2Container (ref), ShareLinkV1Container (ref)
 	return if fFlagAppChatResolveShareLinkV2Module and p2.shareLink.version == 2 then reactModule.createElement(ShareLinkV2Container, p2) else reactModule.createElement(ShareLinkV1Container, p2)
 end

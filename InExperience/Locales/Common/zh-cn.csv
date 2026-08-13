@@ -580,6 +580,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,在此输入正确翻译
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,已选择的图片
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,原始文本（{SourceLanguage}）
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,此译文有什么问题？
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,准确度问题
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,不适当或带有贬义
@@ -609,7 +610,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,感谢你
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,为了保护年龄较小的玩家，13 岁以下的用户无法发送反馈。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,无法提供反馈
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,添加截图
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,编辑选择
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,无可用截图。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,截图 ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,帮助创作者了解你的问题。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,正在加载截图…
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,已选择 {count} 项，共 {max} 项
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,你的一个或多个截图无法上传。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,漏洞报告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,道具或数据恢复
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,类别 *
@@ -618,12 +630,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,选择一个
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,购买问题
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 个字符
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,详情 *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消选择
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,请提供与问题相关的任何信息，例如游戏版本以及重现问题的步骤。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,请描述缺失的内容以及你最后一次看到该内容的时间。如果你的帐户受到入侵，请提供你的 Roblox 客户支持票单编号以及任何相关详细信息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,在此处描述你的请求或问题。请尽可能详细地提供信息，以帮助我们了解情况。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,请告诉我们你尝试购买的内容、发生的时间以及总价值（例如 500 Robux/4.99 美元）。请提供你看到的任何错误消息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想举报滥用？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改为提交举报。</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,选择
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,这有助于创作者为正确的帐户提供支持。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,与创作者分享用户信息
@@ -704,6 +718,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,向右移动
 CoreScripts.InGameMenu.Controls.NextTab,下一个标签页
 CoreScripts.InGameMenu.Controls.PerformanceStats,性能统计
 CoreScripts.InGameMenu.Controls.Playerlist,
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,全球
+CoreScripts.InGameMenu.Controls.Playerlist.Here,这里
 CoreScripts.InGameMenu.Controls.PreviousTab,上一个标签页
 CoreScripts.InGameMenu.Controls.RecordVideo,录制视频
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,移动 / 重置摄像头
@@ -892,9 +909,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,重置人物？
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,你即将离开此服务器并切换到另一台服务器。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要离开吗？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入之前访问过的游戏
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即将离开此游戏并返回“{PREVIOUS_EXPERIENCE}”。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即将离开此游戏并返回“{PREVIOUS_GAME}”。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,震动
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,来切换菜单导航
@@ -970,7 +985,7 @@ CoreScripts.ScreenshotHud.Action.TakePhoto,拍照
 CoreScripts.TextChat.Action.SendQuickWords,发送短语
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,全域
-CoreScripts.TextChat.ChannelTabs.Here,这里
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,系统
 CoreScripts.TextChat.ChannelTabs.Team,团队
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>：将某位发言者静音。
@@ -1204,7 +1219,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,违规和申诉
 Feature.Avatar.Action.AddNewMakeupLook,添加新造型
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,取消选择
+Feature.Avatar.Action.CancelSelection,
 Feature.Avatar.Action.Clear,清除
 Feature.Avatar.Action.ComposerPost,发布
 Feature.Avatar.Action.ComposerPreviewAndPost,预览并发布
@@ -1241,7 +1256,7 @@ Feature.Avatar.Action.Revert,还原
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,保存
 Feature.Avatar.Action.SaveAsNew,储存为新装扮
-Feature.Avatar.Action.Select,选择
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,选择多个物品
 Feature.Avatar.Action.SelectSlot,选择栏位
 Feature.Avatar.Action.Share,分享
@@ -1825,6 +1840,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,描述你的虚拟形象（可选）
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,浏览商城
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,物品选项
 Feature.Catalog.Action.LoadMore,加载更多
@@ -2120,6 +2136,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,要继续，请查看或移除�
 Feature.Catalog.Message.Checkout.UnavailableItems,无法购买一个或多个道具。请在继续前将其移除。
 Feature.Catalog.Message.CollectiblesInfo,收藏类道具可以在存放期后转卖给其他用户，即使原始库存依然在售。Roblox Plus 订阅用户可以转卖收藏类道具。
 Feature.Catalog.Message.FTUXFavoritePillTooltip,将此添加到你的最爱
+Feature.Catalog.Message.Favorites.CategoryEmpty,你尚未在此类别中保存任何内容。
+Feature.Catalog.Message.Favorites.Empty,你尚未保存任何内容。
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,浏览 Roblox 上制作精良的道具
 Feature.Catalog.Message.HoldingPolicyL1,从转售中购买将最多存放 {days} 天。道具只能在存放期结束后转售。只有 Premium 用户可以转售道具。
 Feature.Catalog.Message.HoldingPolicyL2,购买后，原始销售将会进入最多 {purchaseDays} 天的存放期。道具只能在存放期结束后进行转售，转售将会进入最多 {resaleDays} 天的存放期。只有 Premium 用户可以转售道具。
@@ -2202,6 +2220,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"使用扩展聊天功能
 Feature.Chat.Description.ExpressiveChatLearnMore,"“畅谈”功能包括无过滤聊天和 Party语音等功能。
 
 在所有成员符合资格并升级聊天权限之前，暂无法使用畅谈功能。"
+Feature.Chat.Description.InlineContextCardDescription,与陌生人聊天时请小心，不要分享个人信息或转移至其他聊天 App。你可以在任何用户的个人资料页面选择屏蔽或举报该用户。
 Feature.Chat.Description.NameGroup,命名你的群组
 Feature.Chat.Description.NameGroupChat,命名你的群聊
 Feature.Chat.Description.OSAContextCardDescription,你的安全至关重要。感到不舒服？你可以随时从这名用户的个人资料页面将他们屏蔽或举报。
@@ -2221,6 +2240,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,
 Feature.Chat.Heading.LeaveGroup,离开群组
 Feature.Chat.Heading.PartyWithConnections,与联系人组队游玩
 Feature.Chat.Heading.PartyWithFriends,与好友组队
+Feature.Chat.Heading.SafeChattingWithThisUser,与此用户聊天时请注意安全
+Feature.Chat.Heading.SafeChattingWithUsername,与 {displayName} 聊天时请注意安全
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName}邀请你加入
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,“{combinedName}”邀请你加入群组
 Feature.Chat.Heading.YouWereInvitedToGroup,你已受邀加入群组
@@ -2278,7 +2299,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小时
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
@@ -2699,6 +2719,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,由于临时错误，无�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,你看到的这个赞助内容基于不同因素（如地理位置、设备信息、年龄和平台行为）推送，旨在向你展示相关的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
 Feature.GameDetails.Message.SponsoredDisclosure.U18,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,你看到的这条赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。此赞助由 {PayerName} 付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,你看到的这条赞助内容基于多种因素（如地理位置、设备信息、年龄和平台行为）推送，旨在向你展示相关的内容。此赞助由 {PayerName} 付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,你看到的这条赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。此赞助由 {PayerName} 付费。
 Feature.GameDetails.Message.SuggestLessOften,我们会减少推荐此体验
 Feature.GameDetails.RatingPercentOnly,{percentRating}% 评分
 Feature.GameDetails.Toast.LinkCopied,链接已复制至剪贴板
@@ -3776,7 +3799,7 @@ Feature.VirtualEvents.HostedByLabel,主办方：
 Feature.VirtualEvents.Join,
 Feature.VirtualEvents.JoinEvent,加入活动
 Feature.VirtualEvents.Label.Challenge,挑战
-Feature.VirtualEvents.Label.DateAtTime,{date} {time}
+Feature.VirtualEvents.Label.DateAtTime,
 Feature.VirtualEvents.Label.EarlyAccess,抢先体验
 Feature.VirtualEvents.Label.Ended,已结束
 Feature.VirtualEvents.Label.Expansion,扩充内容
@@ -4227,8 +4250,14 @@ InGame.PlayerDropDown.Examine,查看虚拟形象
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 的好友人数已达上限。
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,上次更新时间：{minutes} 分钟前
+InGame.PlayerList.FooterUnableToLoad,无法加载
+InGame.PlayerList.FriendsEmpty,你的好友中还没有人游玩过此体验。
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,排行榜不可用。请稍后重试。
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,排名
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,正在 Studio 中
 InGame.Presence.Label.Offline,

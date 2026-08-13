@@ -56,7 +56,7 @@ return function(p0) --[[ line: 37 | named "TestProviders" ]]
 				layoutValues = p0.layoutValues or createLayoutValuesModule(false)
 			}, {
 				ThemeProvider = roactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {}, {
-					FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+					FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 						LayoutValuesProvider = roactModule.createElement(layoutValuesContext.Provider, {
 							value = p0.layoutValues or createLayoutValuesModule(false)
 						}, {

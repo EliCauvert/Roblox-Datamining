@@ -11,6 +11,7 @@
 	PLATFORM_ROW_HEIGHT = 30,
 	PLATFORM_HEADER_HEIGHT = 24,
 	STATE_PANEL_TAG = "col fill size-full-0 padding-large gap-medium align-x-center align-y-center bg-over-media-0",
+	LEGACY_STATE_PANEL_TAG = "col fill size-full-0 padding-large gap-medium align-x-center align-y-center",
 	DESKTOP_MAX_STAT_COLUMNS = 3,
 	MOBILE_MAX_STAT_COLUMNS = 2,
 	PANEL_SIZE_MIN_CAP = 500,

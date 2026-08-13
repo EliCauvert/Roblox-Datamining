@@ -65,5 +65,6 @@
 	OpenFaeTrialUpsell = "OpenFaeTrialUpsell",
 	OpenIncomingTransferUpsell = "OpenIncomingTransferUpsell",
 	PinExperienceShortcut = "PinExperienceShortcut",
-	ShowToast = "ShowToast"
+	ShowToast = "ShowToast",
+	JoinCommunity = "JoinCommunity"
 }

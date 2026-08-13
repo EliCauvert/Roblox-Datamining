@@ -16,7 +16,7 @@ local localizationProvider = localizationModule.LocalizationProvider
 local getLocalizationServiceStore = localizationModule.GetLocalizationServiceStore
 local localization = inExperienceLocalesModule.Localization
 local foundationProvider = foundationModule.FoundationProvider
-local t = { theme = foundationModule.Enums.Theme.Dark }
+local t = { colorMode = foundationModule.Enums.ColorMode.Dark }
 
 return reactModule.memo(function(p0) --[[ line: 38 | named "InExperienceMenuReact" ]]
 	-- upvalues: getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), reactModule (ref), serviceProvider (ref), appEventIngestService (ref), eventIngest (ref), eventIngestService (ref), roactAnalytics (ref), analytics (ref), localizationProvider (ref), foundationProvider (ref), t (ref), utilsModule (ref)
@@ -30,7 +30,7 @@ return reactModule.memo(function(p0) --[[ line: 38 | named "InExperienceMenuReac
 			localization = localization.new(signalsReactModule.useSignalState(getLocalizationServiceStore(false).getRobloxLocaleId))
 		}, {
 			FoundationProvider = reactModule.createElement(foundationProvider, {
-				theme = p0.theme or t.theme,
+				colorMode = p0.theme or t.colorMode,
 				device = utilsModule.getDeviceType()
 			}, p0.children)
 		})

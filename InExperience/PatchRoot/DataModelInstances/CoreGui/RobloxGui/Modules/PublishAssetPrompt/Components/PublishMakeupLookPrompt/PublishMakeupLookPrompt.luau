@@ -118,16 +118,18 @@ function publishMakeupLookPrompt.updatePreviewModel(p6) --[[ line: 133 ]]
 	local accessoryInstance = p6.props.accessoryInstance
 	
 	if accessoryInstance and accessoryInstance:IsA("Folder") then
-		task.spawn(function() --[[ line: 139 ]]
-			-- upvalues: makeupPreviewUtilsModule (copy), accessoryInstance (ref), p6 (ref)
+		local makeupEntries = p6.props.makeupEntries
+		task.spawn(function() --[[ line: 141 ]]
+			-- upvalues: makeupPreviewUtilsModule (copy), accessoryInstance (ref), makeupEntries (ref), p6 (ref)
 			local var17 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
+			local folderAccessories = makeupPreviewUtilsModule.getFolderAccessories(accessoryInstance, makeupEntries)
 			
-			if not var17 or not p6.isMounted then return end
-			local var18 = makeupPreviewUtilsModule.createMakeupHeadPreview(var17, Enum.AvatarAssetType.FaceMakeup)
+			if not var17 and #folderAccessories == 0 or not p6.isMounted then return end
+			local var19 = makeupPreviewUtilsModule.createMakeupHeadPreview(var17, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
 			
-			if var18 and p6.isMounted then
+			if var19 and p6.isMounted then
 				local previewModel = p6.state.previewModel
-				p6:setState({ previewModel = var18 }, function() --[[ line: 148 ]]
+				p6:setState({ previewModel = var19 }, function() --[[ line: 152 ]]
 					-- upvalues: previewModel (ref)
 					if previewModel then
 						previewModel:Destroy()
@@ -140,7 +142,7 @@ function publishMakeupLookPrompt.updatePreviewModel(p6) --[[ line: 133 ]]
 	end
 end
 
-function publishMakeupLookPrompt.didMount(p7) --[[ line: 157 ]]
+function publishMakeupLookPrompt.didMount(p7) --[[ line: 161 ]]
 	-- upvalues: purchasePromptModule (ref), mutedError (ref), publishAssetAnalytics (ref)
 	p7.isMounted = true
 	p7:updatePreviewModel()
@@ -158,13 +160,13 @@ function publishMakeupLookPrompt.didMount(p7) --[[ line: 157 ]]
 	publishAssetAnalytics.sendPageLoad(publishAssetAnalytics.Section.BuyCreationPage)
 end
 
-function publishMakeupLookPrompt.didUpdate(p8, p9) --[[ line: 178 ]]
+function publishMakeupLookPrompt.didUpdate(p8, p9) --[[ line: 182 ]]
 	if p9.accessoryInstance ~= p8.props.accessoryInstance then
 		p8:updatePreviewModel()
 	end
 end
 
-function publishMakeupLookPrompt.willUnmount(p10) --[[ line: 184 ]]
+function publishMakeupLookPrompt.willUnmount(p10) --[[ line: 188 ]]
 	-- upvalues: mutedError (ref)
 	p10.isMounted = false
 	
@@ -184,7 +186,7 @@ function publishMakeupLookPrompt.willUnmount(p10) --[[ line: 184 ]]
 	mutedError("promptStateSetToNoneConnection was not established")
 end
 
-function publishMakeupLookPrompt.renderPromptBody(p11) --[[ line: 204 ]]
+function publishMakeupLookPrompt.renderPromptBody(p11) --[[ line: 208 ]]
 	-- upvalues: roactModule (ref), uDim (ref), objectViewportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref)
 	local previewModel = p11.state.previewModel
 	
@@ -228,7 +230,7 @@ function publishMakeupLookPrompt.renderPromptBody(p11) --[[ line: 204 ]]
 	})
 end
 
-function publishMakeupLookPrompt.render(p12) --[[ line: 250 ]]
+function publishMakeupLookPrompt.render(p12) --[[ line: 254 ]]
 	-- upvalues: roactModule (ref), basePublishPromptModule (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement(basePublishPromptModule, {
 		delayInputSeconds = 3,
@@ -248,7 +250,7 @@ function publishMakeupLookPrompt.render(p12) --[[ line: 250 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p13) --[[ line: 269 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p13) --[[ line: 273 | named "mapStateToProps" ]]
 	return {
 		accessoryInstance = p13.promptRequest.promptInfo.accessoryInstance,
 		guid = p13.promptRequest.promptInfo.guid,
@@ -256,10 +258,10 @@ return roactRoduxModule.connect(function(p13) --[[ line: 269 | named "mapStateTo
 		priceInRobux = p13.promptRequest.promptInfo.priceInRobux,
 		makeupEntries = p13.promptRequest.promptInfo.makeupEntries
 	}
-end, function(p14) --[[ line: 279 | named "mapDispatchToProps" ]]
+end, function(p14) --[[ line: 283 | named "mapDispatchToProps" ]]
 	-- upvalues: setPromptVisibilityModule (ref)
 	return {
-		SetPromptVisibility = function(value) --[[ line: 281 ]]
+		SetPromptVisibility = function(value) --[[ line: 285 ]]
 			-- upvalues: p14 (ref), setPromptVisibilityModule (copy)
 			p14(setPromptVisibilityModule(value))
 		end

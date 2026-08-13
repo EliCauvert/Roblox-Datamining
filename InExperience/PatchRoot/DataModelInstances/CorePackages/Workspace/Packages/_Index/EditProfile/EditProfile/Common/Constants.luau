@@ -1,10 +1,7 @@
 ﻿return {
 	RODUX_KEY = "EditProfile",
-	ProfileScreens = "profileScreens",
 	CloseUpdateUsernameModal = "CloseUpdateUsernameModal",
 	UpdateUsernameModalSuccess = "UpdateUsernameModalSuccess",
-	EditProfilePage = "EditProfilePage",
-	EditDisplayNameModal = "EditDisplayNameModal",
 	EditProfileBackground = "EditProfileBackground",
 	EditUserNameWebView = "navigateToEditUsername",
 	ChangeUsernamePrice = 1000,

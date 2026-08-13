@@ -7,9 +7,9 @@ local foundationModule = require(parent.Foundation)
 local localizationProvider = require(parent.Localization).LocalizationProvider
 local localization = require(parent.RobloxAppLocales).Localization
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
-local t = { Dark = theme.Dark, Light = theme.Light }
+local t = { Dark = colorMode.Dark, Light = colorMode.Light }
 local useStyleSheet = foundationModule.Hooks.useStyleSheet
 
 local function StyleLinkPortal(p0) --[[ line: 26 ]]
@@ -22,9 +22,9 @@ return {
 	roact = reactModule,
 	reactRoblox = reactRobloxModule,
 	mapStory = function(p1) --[[ line: 36 ]]
-		-- upvalues: reactModule (ref), localization (ref), localizationService (ref), localizationProvider (ref), foundationProvider (ref), t (ref), theme (ref), device (ref), StyleLinkPortal (ref)
+		-- upvalues: reactModule (ref), localization (ref), localizationService (ref), localizationProvider (ref), foundationProvider (ref), t (ref), colorMode (ref), device (ref), StyleLinkPortal (ref)
 		return function(p2) --[[ line: 37 ]]
-			-- upvalues: reactModule (copy), localization (copy), localizationService (copy), localizationProvider (copy), foundationProvider (copy), t (copy), theme (copy), device (copy), p1 (ref), StyleLinkPortal (copy)
+			-- upvalues: reactModule (copy), localization (copy), localizationService (copy), localizationProvider (copy), foundationProvider (copy), t (copy), colorMode (copy), device (copy), p1 (ref), StyleLinkPortal (copy)
 			local var7 = reactModule.useRef(Instance.new("Frame"))
 			
 			if var7.current.Parent ~= p2.focus then
@@ -43,7 +43,7 @@ return {
 				end, {})
 			}, {
 				reactModule.createElement(foundationProvider, {
-					theme = t[p2.theme] or theme.Dark,
+					colorMode = t[p2.theme] or colorMode.Dark,
 					device = device[p2.platform] or device.Phone,
 					preferences = p2.settings,
 					scale = p2.settings and p2.settings.scale,

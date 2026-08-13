@@ -10,11 +10,12 @@ local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
 local videoPlayer = videoUtilsModule.VideoPlayer
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
+local fFlagMediaGalleryVideoVisiblePercent = require(parent.SharedFlags).FFlagMediaGalleryVideoVisiblePercent
 local getImageUriModule = require(mediaGallery.getImageUri)
 local mediaGalleryConstantsModule = require(mediaGallery.MediaGalleryConstants)
 
-return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoItem" ]]
-	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
+return reactModule.memo(function(p0) --[[ line: 65 | named "MediaGalleryVideoItem" ]]
+	-- upvalues: useTokens (ref), getImageUriModule (ref), videoPlaybackCoordinator (ref), mediaGalleryConstantsModule (ref), fFlagMediaGalleryVideoVisiblePercent (ref), reactModule (ref), fFlagSduiExperienceDetailsSupport (ref), videoPlayer (ref), videoPlaybackDetector (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), videoPlaybackDetectionMethod (ref)
 	local var5 = useTokens()
 	local videoId = `rbxassetid://{p0.videoId}`
 	local var7 = getImageUriModule(p0.thumbnail or "")
@@ -25,7 +26,7 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 	local cornerRadius = p0.cornerRadius or var5.Radius.Medium
 	local isFullscreen = p0.isFullscreen
 	local var11 = (p0.videoDwellTimeHundredthsSec or mediaGalleryConstantsModule.VIDEO_DWELL_TIME_HUNDREDTHS_SEC) / 100
-	local videoVisiblePercent = p0.videoVisiblePercent or mediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT
+	local videoVisiblePercent = p0.videoVisiblePercent or (if fFlagMediaGalleryVideoVisiblePercent then mediaGalleryConstantsModule.VIDEO_PLAYBACK_VISIBLE_PERCENT else mediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT)
 	local _ = "media_gallery_item_%*_video_%*%*"
 	local _ = p0.itemIndex or "0"
 	local _ = p0.videoId or "0"
@@ -37,12 +38,12 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 	local var17 = if var9 then p0.onMutedChanged else nil
 	local var18, var19 = reactModule.useState(false)
 	local var20 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 93 ]]
+	reactModule.useEffect(function() --[[ line: 99 ]]
 		-- upvalues: var9 (ref), setIsVideoActive (ref)
 		if var9 and setIsVideoActive then
 			setIsVideoActive(true)
 			
-			return function() --[[ line: 96 ]]
+			return function() --[[ line: 102 ]]
 				-- upvalues: setIsVideoActive (copy)
 				setIsVideoActive(false)
 			end
@@ -66,7 +67,7 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 			looped = if p0.looped ~= nil then false else p0.looped,
 			Size = UDim2.fromScale(1, 1),
 			cornerRadius = cornerRadius,
-			onMuteButtonActivated = reactModule.useCallback(function(p1) --[[ line: 126 ]]
+			onMuteButtonActivated = reactModule.useCallback(function(p1) --[[ line: 132 ]]
 				-- upvalues: videoAnalytics (ref), p0 (ref), videoPlaybackCoordinator_1 (ref)
 				if videoAnalytics and videoAnalytics.reportVideoMute then
 					videoAnalytics.reportVideoMute(p0.itemIndex, videoPlaybackCoordinator_1.currentPlaybackSessionId, p1)
@@ -79,7 +80,7 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 			showPlayButton = if p0.showPlayButton ~= nil then isFullscreen else p0.showPlayButton,
 			showProgressBar = if p0.showProgressBar ~= nil then isFullscreen else p0.showProgressBar,
 			videoAnalyticsContext = p0.videoAnalyticsContext,
-			onVideoLoaded = reactModule.useCallback(function(p2, p3) --[[ line: 104 ]]
+			onVideoLoaded = reactModule.useCallback(function(p2, p3) --[[ line: 110 ]]
 				-- upvalues: videoAnalytics (ref), p0 (ref), videoPlaybackCoordinator_1 (ref), fFlagSduiExperienceDetailsSupport (copy)
 				if videoAnalytics then
 					videoAnalytics.reportVideoLoad(p0.itemIndex, videoPlaybackCoordinator_1.currentPlaybackSessionId, p2, p3)
@@ -101,7 +102,7 @@ return reactModule.memo(function(p0) --[[ line: 64 | named "MediaGalleryVideoIte
 		}),
 		VideoPlaybackDetector = reactModule.createElement(videoPlaybackDetector, {
 			isVideoEligible = true,
-			videoKey = u197,
+			videoKey = u207,
 			itemIndex = p0.itemIndex,
 			itemFrameRef = var20,
 			isItemOccluded = p0.isMediaGalleryOccluded,

@@ -1,21 +1,61 @@
 ﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local reactModule = require(socialCarousel.Parent.React)
+local parent = socialCarousel.Parent
+local reactModule = require(parent.React)
+local impressionsModule = require(parent.Impressions)
+local sharedFlagsModule = require(parent.SharedFlags)
+local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
 local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSocialCarouselAnalytics)
 local tile = require(socialCarousel.Common.Enums).Tile
-local userSeenCollectionBatchTimeMs = game:DefineFastInt("UserSeenCollectionBatchTimeMs", 200)
+local buildUserSeenCollectionPayload = socialLuaAnalyticsModule.Analytics.buildUserSeenCollectionPayload
+local useBatchedImpressions = impressionsModule.useBatchedImpressions
+local fIntUserSeenCollectionBatchTimeMs = sharedFlagsModule.FIntUserSeenCollectionBatchTimeMs
+local fFlagLuaAppPYMKSendUserSeenCollection = sharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection
 local _ = { Friend = "Friend", NotFriend = "NotFriend" }
 
-return function() --[[ line: 42 | named "useTilesSeenCollection" ]]
-	-- upvalues: useSocialCarouselAnalyticsModule (ref), reactModule (ref), tile (ref), userSeenCollectionBatchTimeMs (ref)
-	local var4 = useSocialCarouselAnalyticsModule()
-	local var5 = reactModule.useRef({})
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef({})
+return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
+	-- upvalues: useSocialCarouselAnalyticsModule (ref), fFlagLuaAppPYMKSendUserSeenCollection (ref), reactModule (ref), tile (ref), buildUserSeenCollectionPayload (ref), useBatchedImpressions (ref), fIntUserSeenCollectionBatchTimeMs (ref)
+	local var6 = useSocialCarouselAnalyticsModule()
+	
+	if fFlagLuaAppPYMKSendUserSeenCollection then
+		local tilesSeenCollection = var6.tilesSeenCollection
+		local var7 = useBatchedImpressions({
+			batchTimeMs = fIntUserSeenCollectionBatchTimeMs,
+			mapItem = reactModule.useCallback(function(p0, p1, p2) --[[ line: 53 ]]
+				-- upvalues: tile (copy)
+				return {
+					userId = p0,
+					index = p1,
+					presence = if p2 and p2.presence then p2.presence.userPresenceType else "Offline",
+					friendStatus = if p2 and p2.tileType == tile.Friend then "Friend" else "NotFriend",
+					recommendationContextType = if p2 and p2.recommendationContextType then p2.recommendationContextType else "None",
+					recommendationRank = if p2 and p2.recommendationRank then p2.recommendationRank else -1,
+					isRecommendation = p2 and p2.tileType == tile.Recommendation,
+					universeId = if p2 and p2.presence and (p2.presence.universeId and p2.presence.universeId ~= "") then p2.presence.universeId else -1
+				}
+			end, {}),
+			onFlush = if tilesSeenCollection then reactModule.useCallback(function(p3, p4) --[[ line: 82 ]]
+				-- upvalues: tilesSeenCollection (ref), buildUserSeenCollectionPayload (copy)
+				if tilesSeenCollection then
+					tilesSeenCollection(buildUserSeenCollectionPayload(p3, p4))
+					
+					return
+				end
+			end, { tilesSeenCollection }) else nil
+		})
+		
+		return reactModule.useMemo(function() --[[ line: 96 ]]
+			-- upvalues: var7 (ref)
+			return { addTileToCollection = var7.addImpression }
+		end, { var7.addImpression })
+	end
 	local var8 = reactModule.useRef({})
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useCallback(function() --[[ line: 52 ]]
-		-- upvalues: var5 (ref), var7 (ref), var4 (ref), var9 (ref), var8 (ref)
-		local current = var5.current
+	local var9 = reactModule.useRef(nil)
+	local var10 = reactModule.useRef({})
+	local var11 = reactModule.useRef({})
+	local var12 = reactModule.useRef(0)
+	local var13 = reactModule.useCallback(function() --[[ line: 110 ]]
+		-- upvalues: var8 (ref), var10 (ref), var6 (ref), var12 (ref), var11 (ref)
+		local current = var8.current
 		
 		if #current == 0 then return end
 		local t = {}
@@ -29,7 +69,7 @@ return function() --[[ line: 42 | named "useTilesSeenCollection" ]]
 		
 		for i, v in current do
 			if v and v.userId and v.index then
-				var7.current[v.userId] = true
+				var10.current[v.userId] = true
 				table.insert(t, tostring(v.userId))
 				table.insert(t_1, tostring(v.index))
 				table.insert(t_4, v.friendStatus)
@@ -40,9 +80,9 @@ return function() --[[ line: 42 | named "useTilesSeenCollection" ]]
 				table.insert(t_3, tostring(v.recommendationRank))
 			end
 		end
-		if var4.tilesSeenCollection then
-			var9.current += 1
-			var4.tilesSeenCollection({
+		if var6.tilesSeenCollection then
+			var12.current += 1
+			var6.tilesSeenCollection({
 				userIds = table.concat(t, ","),
 				absolutePositions = table.concat(t_1, ","),
 				presences = table.concat(t_2, ","),
@@ -52,43 +92,43 @@ return function() --[[ line: 42 | named "useTilesSeenCollection" ]]
 				isRecommendations = table.concat(t_6, ","),
 				universeIds = table.concat(t_7, ","),
 				tileCount = #t,
-				sessionEventCount = var9.current
+				sessionEventCount = var12.current
 			})
 		end
-		var5.current = {}
 		var8.current = {}
-	end, { var4 })
-	local var11 = reactModule.useCallback(function(p0, p1, p2) --[[ line: 108 ]]
-		-- upvalues: var7 (ref), var8 (ref), var5 (ref), tile (copy), var6 (ref), userSeenCollectionBatchTimeMs (copy), var10 (ref)
-		if not p0 or not p1 or (var7.current[p0] or var8.current[p0]) then return end
-		var8.current[p0] = true
-		table.insert(var5.current, {
-			userId = p0,
-			index = p1,
-			presence = if p2 and p2.presence then p2.presence.userPresenceType else "Offline",
-			friendStatus = if p2 and p2.tileType == tile.Friend then "Friend" else "NotFriend",
-			recommendationContextType = if p2 and p2.recommendationContextType then p2.recommendationContextType else "None",
-			recommendationRank = if p2 and p2.recommendationRank then p2.recommendationRank else -1,
-			isRecommendation = p2 and p2.tileType == tile.Recommendation,
-			universeId = if p2 and p2.presence and (p2.presence.universeId and p2.presence.universeId ~= "") then p2.presence.universeId else -1
+		var11.current = {}
+	end, { var6 })
+	local var14 = reactModule.useCallback(function(p5, p6, p7) --[[ line: 166 ]]
+		-- upvalues: var10 (ref), var11 (ref), var8 (ref), tile (copy), var9 (ref), fIntUserSeenCollectionBatchTimeMs (copy), var13 (ref)
+		if not p5 or not p6 or (var10.current[p5] or var11.current[p5]) then return end
+		var11.current[p5] = true
+		table.insert(var8.current, {
+			userId = p5,
+			index = p6,
+			presence = if p7 and p7.presence then p7.presence.userPresenceType else "Offline",
+			friendStatus = if p7 and p7.tileType == tile.Friend then "Friend" else "NotFriend",
+			recommendationContextType = if p7 and p7.recommendationContextType then p7.recommendationContextType else "None",
+			recommendationRank = if p7 and p7.recommendationRank then p7.recommendationRank else -1,
+			isRecommendation = p7 and p7.tileType == tile.Recommendation,
+			universeId = if p7 and p7.presence and (p7.presence.universeId and p7.presence.universeId ~= "") then p7.presence.universeId else -1
 		})
 		
-		if var6.current then
-			pcall(task.cancel, var6.current)
+		if var9.current then
+			pcall(task.cancel, var9.current)
 		end
-		var6.current = task.delay(userSeenCollectionBatchTimeMs * 0.001, var10)
-	end, { var10 })
-	reactModule.useEffect(function() --[[ line: 148 ]]
-		-- upvalues: var6 (ref), var10 (ref)
-		return function() --[[ line: 149 ]]
-			-- upvalues: var6 (copy), var10 (copy)
-			if var6.current then
-				pcall(task.cancel, var6.current)
+		var9.current = task.delay(fIntUserSeenCollectionBatchTimeMs * 0.001, var13)
+	end, { var13 })
+	reactModule.useEffect(function() --[[ line: 206 ]]
+		-- upvalues: var9 (ref), var13 (ref)
+		return function() --[[ line: 207 ]]
+			-- upvalues: var9 (copy), var13 (copy)
+			if var9.current then
+				pcall(task.cancel, var9.current)
 			end
-			var6.current = nil
-			var10()
+			var9.current = nil
+			var13()
 		end
 	end, {})
 	
-	return { addTileToCollection = var11 }
+	return { addTileToCollection = var14 }
 end

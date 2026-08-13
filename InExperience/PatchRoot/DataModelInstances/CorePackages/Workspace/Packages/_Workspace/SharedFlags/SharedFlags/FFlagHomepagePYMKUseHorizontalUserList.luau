@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("HomepagePYMKUseHorizontalUserList_V7", false)

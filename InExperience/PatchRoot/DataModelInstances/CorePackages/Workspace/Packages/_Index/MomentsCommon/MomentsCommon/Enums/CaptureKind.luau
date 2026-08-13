@@ -1,0 +1,1 @@
+﻿return { Video = "video", Screenshot = "screenshot" }

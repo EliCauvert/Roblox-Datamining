@@ -15,31 +15,32 @@ local openTypeSupport = UIBloxModule.Utility.OpenTypeSupport
 local getFFlagLuaAppFixSelectionCursor = require(parent.SharedFlags).GetFFlagLuaAppFixSelectionCursor
 local getFFlagEnableTextFieldContentType = require(parent.SharedFlags).GetFFlagEnableTextFieldContentType
 local getFFlagLuaAppEnableOpenTypeSupport = require(parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
+local guiObjectInputSinkEngineFeature = game:GetEngineFeature("GuiObjectInputSink")
 local enableKeyboardVisibilityCheckOnPasswordFocus = game:DefineFastFlag("EnableKeyboardVisibilityCheckOnPasswordFocus", false)
 local enableAndroidPasswordSuggestionEngineFeature = game:GetEngineFeature("EnableAndroidPasswordSuggestion")
 local fFlagAndroidPasswordSuggestionExperimentEnrollmentBypass = require(parent.SharedFlags).FFlagAndroidPasswordSuggestionExperimentEnrollmentBypass
 local fStringLuaMultiPageSignupIxpLayer = require(parent.SharedFlags).FStringLuaMultiPageSignupIxpLayer
 local passwordBox = roactModule.PureComponent:extend("PasswordBox")
 
-function passwordBox.init(p0) --[[ line: 47 ]]
+function passwordBox.init(p0) --[[ line: 49 ]]
 	-- upvalues: roactModule (ref), areaTestModule (ref), enableKeyboardVisibilityCheckOnPasswordFocus (ref), userInputService (ref)
 	p0.state = { hidePassword = true, containerSize = Vector2.new(0, 0) }
 	
-	function p0.getHidePassword() --[[ line: 54 ]]
+	function p0.getHidePassword() --[[ line: 56 ]]
 		-- upvalues: p0 (ref)
 		return if p0.props.hidePassword == nil then p0.state.hidePassword else p0.props.hidePassword
 	end
 	
 	p0.isMounted = false
 	p0.passwordBoxRef = roactModule.createRef()
-	local var10 = roactModule.createRef()
+	local var11 = roactModule.createRef()
 	
-	function p0.getPasswordTextBoxRef() --[[ line: 66 ]]
-		-- upvalues: p0 (ref), var10 (ref)
-		return p0.props.TextBoxRef or var10
+	function p0.getPasswordTextBoxRef() --[[ line: 68 ]]
+		-- upvalues: p0 (ref), var11 (ref)
+		return p0.props.TextBoxRef or var11
 	end
 	
-	function p0.isTouchPositionInPasswordBox(p1) --[[ line: 70 ]]
+	function p0.isTouchPositionInPasswordBox(p1) --[[ line: 72 ]]
 		-- upvalues: p0 (ref), areaTestModule (copy)
 		if p0.passwordBoxRef.current then
 			local absolutePosition = p0.passwordBoxRef.current.AbsolutePosition
@@ -51,7 +52,7 @@ function passwordBox.init(p0) --[[ line: 47 ]]
 	
 	p0.tapBeganInTextbox = false
 	
-	function p0.tapEventBegan(p2, _) --[[ line: 84 ]]
+	function p0.tapEventBegan(p2, _) --[[ line: 86 ]]
 		-- upvalues: p0 (ref), enableKeyboardVisibilityCheckOnPasswordFocus (copy), userInputService (copy)
 		if p0.props.CentralOverlayBlocksInput and p0.props.centralOverlay and p0.props.centralOverlay.OverlayType ~= nil then return end
 		if enableKeyboardVisibilityCheckOnPasswordFocus and not userInputService.OnScreenKeyboardVisible then return end
@@ -67,7 +68,7 @@ function passwordBox.init(p0) --[[ line: 47 ]]
 		end
 	end
 	
-	function p0.tapEventEnded(p3, _) --[[ line: 118 ]]
+	function p0.tapEventEnded(p3, _) --[[ line: 120 ]]
 		-- upvalues: p0 (ref), userInputService (copy)
 		if p0.tapBeganInTextbox then
 			p0.tapBeganInTextbox = false
@@ -83,12 +84,12 @@ function passwordBox.init(p0) --[[ line: 47 ]]
 		end
 	end
 	
-	function p0.onAbsoluteSizeChanged(p4) --[[ line: 136 ]]
+	function p0.onAbsoluteSizeChanged(p4) --[[ line: 138 ]]
 		-- upvalues: p0 (ref)
 		local absoluteSize = p4.AbsoluteSize
 		
 		if absoluteSize.X > 0 and absoluteSize.Y > 0 and p0.state.containerSize ~= absoluteSize then
-			spawn(function() --[[ line: 142 ]]
+			spawn(function() --[[ line: 144 ]]
 				-- upvalues: p0 (copy), absoluteSize (ref)
 				if p0.isMounted then
 					p0:setState({ containerSize = absoluteSize })
@@ -97,7 +98,7 @@ function passwordBox.init(p0) --[[ line: 47 ]]
 		end
 	end
 	
-	function p0.onTogglerActivated(_) --[[ line: 152 ]]
+	function p0.onTogglerActivated(_) --[[ line: 154 ]]
 		-- upvalues: p0 (ref)
 		local onToggleCallback = p0.props.onToggleCallback
 		local hidePassword = p0.getHidePassword()
@@ -110,7 +111,7 @@ function passwordBox.init(p0) --[[ line: 47 ]]
 		end
 	end
 	
-	function p0.shouldTakeInput(p5) --[[ line: 167 ]]
+	function p0.shouldTakeInput(p5) --[[ line: 169 ]]
 		-- upvalues: p0 (ref)
 		return if p0.props.Disabled then false else not p0.props.ManualFocusRelease and (if p5.UserInputType ~= Enum.UserInputType.MouseButton1 then p5.UserInputType == Enum.UserInputType.Touch else true)
 	end
@@ -124,18 +125,18 @@ passwordBox.defaultProps = {
 	TextXAlignment = Enum.TextXAlignment.Left
 }
 
-function passwordBox.didMount(p6) --[[ line: 187 ]]
+function passwordBox.didMount(p6) --[[ line: 189 ]]
 	-- upvalues: userInputService (ref)
 	p6.isMounted = true
 	
 	if p6.props.IsKeyboardOverlayUsed then
-		p6.inputBeganConnection = userInputService.InputBegan:connect(function(p7, p8) --[[ line: 191 ]]
+		p6.inputBeganConnection = userInputService.InputBegan:connect(function(p7, p8) --[[ line: 193 ]]
 			-- upvalues: p6 (ref)
 			if p6.shouldTakeInput(p7) then
 				p6.tapEventBegan(p7.Position, p8)
 			end
 		end)
-		p6.inputEndedConnection = userInputService.InputEnded:connect(function(p9, p10) --[[ line: 197 ]]
+		p6.inputEndedConnection = userInputService.InputEnded:connect(function(p9, p10) --[[ line: 199 ]]
 			-- upvalues: p6 (ref)
 			if p6.shouldTakeInput(p9) then
 				p6.tapEventEnded(p9.Position, p10)
@@ -144,7 +145,7 @@ function passwordBox.didMount(p6) --[[ line: 187 ]]
 	end
 end
 
-function passwordBox.willUnmount(p11) --[[ line: 205 ]]
+function passwordBox.willUnmount(p11) --[[ line: 207 ]]
 	p11.isMounted = false
 	
 	if p11.props.IsKeyboardOverlayUsed then
@@ -157,30 +158,30 @@ function passwordBox.willUnmount(p11) --[[ line: 205 ]]
 	end
 end
 
-function passwordBox.render(p12) --[[ line: 217 ]]
+function passwordBox.render(p12) --[[ line: 219 ]]
 	-- upvalues: getFFlagLuaAppFixSelectionCursor (ref), withSelectionCursorProvider (ref)
-	return if getFFlagLuaAppFixSelectionCursor() then withSelectionCursorProvider(function(p13) --[[ line: 219 ]]
+	return if getFFlagLuaAppFixSelectionCursor() then withSelectionCursorProvider(function(p13) --[[ line: 221 ]]
 		-- upvalues: p12 (ref)
 		return p12:renderWithSelectionCursor(p13)
 	end) else p12:renderWithSelectionCursor(nil)
 end
 
-function passwordBox.renderWithSelectionCursor(_, _) --[[ line: 228 ]]
-	-- upvalues: enableAndroidPasswordSuggestionEngineFeature (ref), getFFlagEnableTextFieldContentType (ref), withStyle (ref), getFFlagLuaAppFixSelectionCursor (ref), cursorKind (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
+function passwordBox.renderWithSelectionCursor(_, _) --[[ line: 230 ]]
+	-- upvalues: enableAndroidPasswordSuggestionEngineFeature (ref), getFFlagEnableTextFieldContentType (ref), withStyle (ref), getFFlagLuaAppFixSelectionCursor (ref), cursorKind (ref), roactModule (ref), imageSetLabel (ref), getImageData (ref), guiObjectInputSinkEngineFeature (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref)
 -- FATAL: Failed to generate AST for `renderWithSelectionCursor` function:
-runtime : [KeyError] :11990: 147
+runtime : [KeyError] :11990: 148
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg
 	runtime : [lunaux]:1320 function match_weird_patterns
 end
 
-passwordBox = roactRoduxModule.connect(function(p14, _) --[[ line: 366 ]]
+passwordBox = roactRoduxModule.connect(function(p14, _) --[[ line: 369 ]]
 	return { centralOverlay = p14.CentralOverlay }
 end)(passwordBox)
 
 if enableAndroidPasswordSuggestionEngineFeature then
-	passwordBox = roactAppExperimentModule.connectBrowserTrackerLayer({ fStringLuaMultiPageSignupIxpLayer }, function(p15, _) --[[ line: 375 ]]
+	passwordBox = roactAppExperimentModule.connectBrowserTrackerLayer({ fStringLuaMultiPageSignupIxpLayer }, function(p15, _) --[[ line: 378 ]]
 		-- upvalues: fStringLuaMultiPageSignupIxpLayer (ref), fFlagAndroidPasswordSuggestionExperimentEnrollmentBypass (ref)
 		return {
 			enablePasswordSuggestion = (p15[fStringLuaMultiPageSignupIxpLayer] or {}).enablePasswordSuggestion or (fFlagAndroidPasswordSuggestionExperimentEnrollmentBypass or false)

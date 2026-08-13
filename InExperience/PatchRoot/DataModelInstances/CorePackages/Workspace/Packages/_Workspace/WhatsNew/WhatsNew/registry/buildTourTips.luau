@@ -272,7 +272,7 @@ local function buildScopeTourForScreen(p46, p47) --[[ line: 298 ]]
 	local t_1 = {}
 	
 	for i, v in var32 do
-		local var36 = deriveResolvedFieldsModule.deriveEntryDisplay(v, p46.tourType, p46.deps, p46.constants)
+		local var36 = deriveResolvedFieldsModule.deriveEntryDisplay(v, p46.tourType, p46.deps)
 		
 		if var36.toShow and ensureScopeChainForEntry(v.scopeId, var33, t_1, t, p46) then
 			local warnings
@@ -319,7 +319,7 @@ local function buildScopeTourForScreen(p46, p47) --[[ line: 298 ]]
 	}
 end
 
-return function(p48, p49, p50, p51, p52, p53) --[[ line: 351 | named "buildTourTips" ]]
+return function(p48, p49, p50, p51, p52, p53) --[[ line: 350 | named "buildTourTips" ]]
 	-- upvalues: buildScopeTourForScreen (ref)
 	return buildScopeTourForScreen({
 		document = p48,

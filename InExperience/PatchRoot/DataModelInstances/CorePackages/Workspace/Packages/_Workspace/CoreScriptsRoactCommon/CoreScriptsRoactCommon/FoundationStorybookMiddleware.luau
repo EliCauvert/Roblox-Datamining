@@ -4,9 +4,9 @@ local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
 local foundationProvider = foundationModule.FoundationProvider
 local t = {
-	Default = foundationModule.Enums.Theme.Dark,
-	Light = foundationModule.Enums.Theme.Light,
-	Dark = foundationModule.Enums.Theme.Dark
+	Default = foundationModule.Enums.ColorMode.Dark,
+	Light = foundationModule.Enums.ColorMode.Light,
+	Dark = foundationModule.Enums.ColorMode.Dark
 }
 local t_1 = {
 	Default = "Desktop",
@@ -59,7 +59,7 @@ return function(p2) --[[ line: 62 | named "FoundationStorybookMiddleware" ]]
 				PaddingRight = UDim.new(0, 10)
 			}),
 			FoundationContext = reactModule.createElement(foundationProvider, {
-				theme = t[p3.theme],
+				colorMode = t[p3.theme],
 				device = t_1[p3.platform],
 				preferences = p3.settings,
 				scale = p3.settings and p3.settings.scale,

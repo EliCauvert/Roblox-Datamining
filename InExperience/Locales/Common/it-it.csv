@@ -580,6 +580,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Og
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Inserisci qui la traduzione corretta
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Immagine selezionata
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Testo originale ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Qual è il problema con questa traduzione?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Problema di precisione
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Inappropriato o Derogatorio
@@ -609,7 +610,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Grazie pe
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Per proteggere i giocatori più giovani, gli account di età inferiore a 13 anni non possono inviare feedback."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Feedback non disponibile
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Aggiungi screenshot
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Modifica selezione
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Nessuno screenshot disponibile.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Screenshot ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Aiuta il creatore a capire il problema.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Caricamento degli screenshot...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} selezionati
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Impossibile caricare uno o più dei tuoi screenshot.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Segnalazione bug
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Ripristino di articoli o dati
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Categoria *
@@ -618,12 +630,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Seleziona un
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problema con l'acquisto
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Fino a {MAX} caratteri
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Dettagli *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Deseleziona
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Includi qualsiasi informazione pertinente sul problema, come la versione del gioco e come riprodurre i passaggi."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Descrivi cosa manca e quando l'hai visto l'ultima volta. Se il tuo account è stato violato, includi il tuo numero di ticket Roblox CS e tutti i dettagli pertinenti."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Descrivi qui la tua richiesta o il tuo problema. Fornisci quanti più dettagli possibile per aiutarci a capire la situazione.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Spiegaci cosa hai provato ad acquistare, quando è successo e il valore totale (ad esempio 500 Robux/4,99 $). Includi eventuali messaggi di errore che hai visualizzato."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Stai cercando di segnalare un abuso?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Invia invece una segnalazione.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Seleziona
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Questo aiuta il creatore a fornire assistenza all'account corretto.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Condividi le informazioni utente con il creatore
@@ -704,6 +718,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,Muovi a destra
 CoreScripts.InGameMenu.Controls.NextTab,Scheda successiva
 CoreScripts.InGameMenu.Controls.PerformanceStats,Stat. prest.
 CoreScripts.InGameMenu.Controls.Playerlist,Classifica
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,Globale
+CoreScripts.InGameMenu.Controls.Playerlist.Here,Qui
 CoreScripts.InGameMenu.Controls.PreviousTab,Scheda precedente
 CoreScripts.InGameMenu.Controls.RecordVideo,Registra video
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,Sposta / Reimposta Fotocamera
@@ -892,9 +909,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Vuoi rigenerare il personaggi
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Stai per abbandonare questo server e passare a un altro.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Vai via?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Partecipa ai giochi visitati in precedenza
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Stai per abbandonare questo gioco e tornare a {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Stai per abbandonare questo gioco e tornare a {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,Vibrazione
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,per attivare/disattivare il menu navigazione
@@ -969,8 +984,8 @@ CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,Scatta Foto
 CoreScripts.TextChat.Action.SendQuickWords,Invia messaggi rapidi
 CoreScripts.TextChat.ChannelTabs.Friends,
-CoreScripts.TextChat.ChannelTabs.Global2,Globale
-CoreScripts.TextChat.ChannelTabs.Here,Qui
+CoreScripts.TextChat.ChannelTabs.Global2,
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,Sistema
 CoreScripts.TextChat.ChannelTabs.Team,Team
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: togli la parola a un presentatore.
@@ -1241,7 +1256,7 @@ Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Salva
 Feature.Avatar.Action.SaveAsNew,Salva come nuovo
-Feature.Avatar.Action.Select,Seleziona
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Seleziona più elementi
 Feature.Avatar.Action.SelectSlot,Seleziona scomparto
 Feature.Avatar.Action.Share,Condividi
@@ -1255,7 +1270,7 @@ Feature.Avatar.Action.Stay,Rimani
 Feature.Avatar.Action.Switch,Cambiare
 Feature.Avatar.Action.TryOn,Prova
 Feature.Avatar.Action.Unequip,Disequipaggia
-Feature.Avatar.Action.Unselect,Deseleziona
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,Rimuovi emoticon
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,Aggiorna il personaggio esistente
@@ -1263,6 +1278,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Aggiorna un look esistente
 Feature.Avatar.Action.UpdateMakeupLook,Aggiorna look
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Esplora gli stili
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Questo prompt non rispetta le nostre linee guida. Prova a descrivere qualcos'altro.
+Feature.Avatar.BackgroundGeneration.Error.System,Si è verificato un errore durante la generazione del tuo sfondo. Riprova.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Descrivi il tuo sfondo...
+Feature.Avatar.BackgroundGeneration.Status.Generating,Generazione dello sfondo in corso...
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparazione dello sfondo in corso...
+Feature.Avatar.BackgroundGeneration.Title,Crea sfondo
 Feature.Avatar.Backgrounds.Title,Sfondi
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Non è possibile apportare modifiche a questo stile del corpo.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Ripristina i colori originali del corpo
@@ -1270,6 +1291,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Colore della pelle
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Crea il tuo look unico grazie alle infinite combinazioni.
 Feature.Avatar.EmoteAlreadyAssigned,Questa emote è già assegnata a uno slot
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,"Qualcosa è andato storto, per favore riprova più tardi."
 Feature.Avatar.GetInspired,Lasciati ispirare
@@ -1825,6 +1847,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Descrivi il tuo avatar (facoltativo)
 Feature.Catalog.Action.Favorite,Preferito
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Sfoglia Marketplace
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Opzioni oggetto
 Feature.Catalog.Action.LoadMore,Carica di più
@@ -2120,6 +2143,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"Per continuare, revisiona o rim
 Feature.Catalog.Message.Checkout.UnavailableItems,Uno o più articoli non possono essere acquistati. Rimuovili prima di continuare.
 Feature.Catalog.Message.CollectiblesInfo,"Gli articoli da collezione possono essere rivenduti tra utenti dopo essere stati conservati per un certo periodo, anche se il magazzino originale non è ancora esaurito. Gli abbonati Roblox Plus possono mettere in evidenza gli articoli da collezione per la rivendita."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Aggiungi questo ai tuoi preferiti
+Feature.Catalog.Message.Favorites.CategoryEmpty,Non hai ancora salvato nulla in questa categoria.
+Feature.Catalog.Message.Favorites.Empty,Non hai ancora salvato nulla.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Scopri i migliori articoli realizzati su Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Gli acquisti effettuati a scopo di rivendita rimarranno in sospeso per {days} giorni al massimo. L'articolo può essere rivenduto solo dopo la fine di questo periodo di sospensione. Solo gli utenti Plus possono rivendere articoli.
 Feature.Catalog.Message.HoldingPolicyL2,"Dopo l'acquisto, le vendite originali entrano in una sospensione per un massimo di {purchaseDays} giorni. L'articolo può essere rivenduto solo dopo questo periodo di detenzione e le rivendite avranno una sospensione fino a {resaleDays} giorni. Solo gli utenti premium possono rivendere gli articoli."
@@ -2204,6 +2229,7 @@ Tutti i membri di questo gruppo saranno invitati, ma alcuni non sono idonei a pa
 Feature.Chat.Description.ExpressiveChatLearnMore,"Le funzionalità di chat espressive includono la chat senza filtri e la chat vocale del Party.
 
 L'accesso alla chat espressiva è limitato fino a quando tutti i membri non sono idonei e la chat non viene aggiornata."
+Feature.Chat.Description.InlineContextCardDescription,Fai attenzione quando chatti con estranei. Non condividere informazioni personali e non passare a chat esterne. Puoi bloccare o segnalare chiunque dal suo profilo.
 Feature.Chat.Description.NameGroup,Dai un nome al tuo gruppo
 Feature.Chat.Description.NameGroupChat,Dai un nome alla tua chat di gruppo
 Feature.Chat.Description.OSAContextCardDescription,La sicurezza prima di tutto. Non ti senti a tuo agio? Puoi bloccare o segnalare questa persona in qualsiasi momento dal suo profilo.
@@ -2223,6 +2249,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Prima interazione con questa
 Feature.Chat.Heading.LeaveGroup,Lascia gruppo
 Feature.Chat.Heading.PartyWithConnections,Crea Party con contatti
 Feature.Chat.Heading.PartyWithFriends,Party con gli amici
+Feature.Chat.Heading.SafeChattingWithThisUser,Fai attenzione quando chatti con questa persona
+Feature.Chat.Heading.SafeChattingWithUsername,Fai attenzione quando chatti con {displayName}
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} ti ha invitato a unirti
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} ti ha invitato a unirti a un gruppo
 Feature.Chat.Heading.YouWereInvitedToGroup,Hai ricevuto un invito a unirti al gruppo
@@ -2280,7 +2308,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ora
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sett.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sett.
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,utente sconosciuto
 Feature.Chat.Label.User,Utente
@@ -2701,6 +2728,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Impossibile visualizzare l
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Stai visualizzando questo annuncio sponsorizzato che si basa su fattori non personalizzati, come le informazioni sul dispositivo, la posizione e l'età, perché desideriamo offrirti contenuti appropriati. Il creatore dell'esperienza è {CreatorName}. La sponsorizzazione è stata pagata da {PayerName}. Per saperne di più, visita la pagina ""Privacy e livello di maturità dei contenuti"" nella sezione Impostazioni del tuo account, disponibile qui:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Stai visualizzando questo annuncio sponsorizzato che si base su fattori differenti, come le informazioni sul dispositivo, la posizione e l'età, e il comportamento sulla piattaforma, perché desideriamo offrirti contenuti appropriati. Il creatore dell'esperienza è {CreatorName}. La sponsorizzazione è stata pagata da {PayerName}. Per saperne di più, visita la pagina ""Privacy e livello di maturità dei contenuti"" nella sezione Impostazioni del tuo account, disponibile qui:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Visualizzi questo annuncio sponsorizzato che si basa su fattori non personalizzati, come informazioni relative al dispositivo, alla posizione e all'età, perché desideriamo offrirti contenuti pertinenti. Il creatore dell'esperienza è {CreatorName}. La sponsorizzazione è stata pagata da {PayerName}."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Visualizzi questo annuncio sponsorizzato che si basa su fattori non personalizzati, come le informazioni sul dispositivo, la posizione e l'età, perché desideriamo offrirti contenuti appropriati. La sponsorizzazione è stata pagata da {PayerName}. Per saperne di più, visita la pagina ""Privacy e livello di maturità dei contenuti"" nella sezione Impostazioni del tuo account, disponibile qui:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Visualizzi questo annuncio sponsorizzato che si basa su fattori differenti, come le informazioni sul dispositivo, la posizione, l'età e il comportamento sulla piattaforma, perché desideriamo offrirti contenuti appropriati. La sponsorizzazione è stata pagata da {PayerName}. Per saperne di più, visita la pagina ""Privacy e livello di maturità dei contenuti"" nella sezione Impostazioni del tuo account, disponibile qui:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Visualizzi questo annuncio sponsorizzato che si basa su fattori non personalizzati, come informazioni relative al dispositivo, alla posizione e all'età, perché desideriamo offrirti contenuti pertinenti. La sponsorizzazione è stata pagata da {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,Te la suggeriremo meno spesso
 Feature.GameDetails.RatingPercentOnly,Rating {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,Testo copiato negli appunti
@@ -3358,7 +3388,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Seleziona Permesso
 2. Seleziona Contatti
 3. Consenti a Roblox di accedere ai tuoi contatti"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Per connetterti con gli amici, consenti a Roblox di accedere ai tuoi contatti."
-Feature.SettingsHub.Description.PeoplesNames,Mostra o nascondi i tuoi badge alle altre persone nelle esperienze.
+Feature.SettingsHub.Description.PeoplesNames,Mostra o nascondi i tuoi badge alle altre persone nei giochi.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Seleziona Permesso
 2. Seleziona Videocamera
 3. Consenti a Roblox di accedere alla tua videocamera"
@@ -3380,7 +3410,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,MicroProfiler
 Feature.SettingsHub.GameSettings.MyBadges,I miei badge
 Feature.SettingsHub.GameSettings.OutputDevice,Dispositivo di uscita
 Feature.SettingsHub.GameSettings.PeopleNames,Mostra i nomi delle persone
-Feature.SettingsHub.GameSettings.PeopleNames.Description,Mostra o nascondi i nomi che compaiono sopra le persone nelle esperienze. Alcune di queste potrebbero avere impostazioni personalizzate che prevalgono sulle tue preferenze.
+Feature.SettingsHub.GameSettings.PeopleNames.Description,Mostra o nascondi i nomi che compaiono sopra le persone nei giochi. Alcuni di questi potrebbero avere impostazioni personalizzate che prevalgono sulle tue preferenze.
 Feature.SettingsHub.GameSettings.PeoplesNames,Nomi delle persone
 Feature.SettingsHub.Heading.InviteFriends,
 Feature.SettingsHub.Heading.InviteUser,Invita {DisplayName}?
@@ -4231,8 +4261,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} ha raggiunto il limite massimo di amici.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,Ultimo aggiornamento: {minutes} minuti fa
+InGame.PlayerList.FooterUnableToLoad,Impossibile caricare
+InGame.PlayerList.FriendsEmpty,Nessuno dei tuoi amici ha ancora giocato a questa esperienza.
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,Classifica non disponibile. Riprova più tardi.
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,Grado
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,In Studio
 InGame.Presence.Label.Offline,Offline

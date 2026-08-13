@@ -7,6 +7,7 @@ return {
 	enableTooltipV2BodyFontFix = UIBlox.GetFFlagUIBloxEnableTooltipV2BodyFontFix(),
 	enableOpenTypeSupport = sharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport(),
 	didMountUpdateFullPageModal = UIBlox.GetFFlagUIBloxDidMountUpdateFullPageModal(),
+	useFoundationToastButtonSizing = UIBlox.FFlagUIBloxToastFoundationButtonSizing,
 	useTokenizedShortcutBar = sharedFlagsModule.FFlagEnableConsoleExpControls,
 	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling
 }

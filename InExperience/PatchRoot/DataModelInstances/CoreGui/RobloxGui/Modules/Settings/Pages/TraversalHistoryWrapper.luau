@@ -28,7 +28,7 @@ return function() --[[ line: 24 | named "createTraversalHistoryWrapper" ]]
 	traversalHistoryPage.ShouldShowHubBar = true
 	traversalHistoryPage.Page.Size = UDim2.fromScale(1, 0)
 	reactRobloxModule.createRoot(traversalHistoryPage.Page):render(reactModule.createElement(foundationProvider, {
-		theme = foundationModule.Enums.Theme.Dark,
+		colorMode = foundationModule.Enums.ColorMode.Dark,
 		device = utilsModule.getDeviceType()
 	}, {
 		Localization = reactModule.createElement(localizationProvider, { localization = var11 }, {

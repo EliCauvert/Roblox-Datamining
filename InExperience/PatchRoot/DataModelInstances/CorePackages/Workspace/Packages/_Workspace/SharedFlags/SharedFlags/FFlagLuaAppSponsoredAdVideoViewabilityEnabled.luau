@@ -1,0 +1,1 @@
+﻿return require(script.Parent.FFlagLuaAppSponsoredAdViewabilityEnabled) and game:DefineFastFlag("LuaAppSponsoredAdVideoViewabilityEnabledDev", false)

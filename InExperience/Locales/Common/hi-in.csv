@@ -579,6 +579,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,सही अनुवाद यहाँ टाइप करें
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,चुनी गई इमेज
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,ओरिजनल टेक्स्ट ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,इस अनुवाद में क्या समस्या है?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,गलत अनुवाद
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,अनुचित या अपमानजनक
@@ -608,7 +609,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,अपन
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"युवा प्लेयर्स की सुरक्षा के लिए, 13 साल से कम उम्र वाले यूज़र के अकाउंट से फ़ीडबैक नहीं भेजा जा सकता."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,फ़ीडबैक उपलब्ध नहीं है
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,कैप्चर जोड़ें
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,सिलेक्शन एडिट करें
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,कोई कैप्चर उपलब्ध नहीं है.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,कैप्चर ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,क्रिएटर की मदद करें ताकि वे आपकी समस्या देख सकें.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,कैप्चर लोड हो रहे हैं...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} को चुना गया
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,आपके एक या एक से ज़्यादा स्क्रीनशॉट अपलोड नहीं हो सके.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,बग रिपोर्ट
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,आइटम या डेटा रीस्टोरेशन
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,कैटगरी *
@@ -617,12 +629,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,कोई �
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,खरीदारी से जुड़ी समस्या
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ज़्यादा से ज़्यादा {MAX} कैरेक्टर
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,जानकारी *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,चुने गए का निशान हटाएँ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"समस्या से संबंधित कोई भी जानकारी शामिल करें, जैसे कि गेम का वर्ज़न और स्टेप्स को दोबारा देखने के लिए क्या करना होगा."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"बताएँ कि क्या गायब है और आपने उसे आखिरी बार कब देखा था. अगर आपका अकाउंट हैक कर लिया गया था, तो कृपया अपना Roblox CS टिकट नंबर और कोई भी संबंधित जानकारी शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,अपनी रिक्वेस्ट या समस्या की जानकारी यहाँ दें. स्थिति को समझने में हमारी मदद करने के लिए ज़्यादा से ज़्यादा जानकारी दें.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"हमें बताएँ कि आपने क्या खरीदने की कोशिश की, यह कब हुआ और कुल कीमत क्या थी (जैसे कि 500 Robux / $4.99). आपको दिख रहा कोई भी गड़बड़ी मैसेज शामिल करें."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,दुर्व्यवहार की रिपोर्ट करने की कोशिश की जा रही है?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>इसके बजाय रिपोर्ट सबमिट करें.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,चुनें
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,इससे क्रिएटर को सही अकाउंट को सपोर्ट करने में मदद मिलती है.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,क्रिएटर के साथ यूज़र की जानकारी शेयर करें
@@ -703,6 +717,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,दाएँ जाएँ
 CoreScripts.InGameMenu.Controls.NextTab,अगला टैब
 CoreScripts.InGameMenu.Controls.PerformanceStats,परफ़ॉर्मेंस के आँकड़े
 CoreScripts.InGameMenu.Controls.Playerlist,लीडरबोर्ड
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,ग्लोबल
+CoreScripts.InGameMenu.Controls.Playerlist.Here,यहाँ
 CoreScripts.InGameMenu.Controls.PreviousTab,पिछला टैब
 CoreScripts.InGameMenu.Controls.RecordVideo,वीडियो रिकॉर्ड करें
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,कैमरे को मूव / रीसेट करें
@@ -891,9 +908,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,कैरेक्टर र�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,आपको इस सर्वर को छोड़कर दूसरे सर्वर पर स्विच किया जा रहा है.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,आपको जाना है?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,पहले विज़िट किए गए गेम्स जॉइन करें
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,आप इस गेम को छोड़कर वापस {PREVIOUS_EXPERIENCE} पर जाने वाले हैं.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,आप इस गेम को छोड़कर वापस {PREVIOUS_GAME} पर जाने वाले हैं.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,वाइब्रेशन
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,मेन्यू नेविगेशन टॉगल करने के लिए
@@ -969,8 +984,8 @@ CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,फ़ोटो लें
 CoreScripts.TextChat.Action.SendQuickWords,क्विक वर्ड्स भेजें
 CoreScripts.TextChat.ChannelTabs.Friends,
-CoreScripts.TextChat.ChannelTabs.Global2,ग्लोबल
-CoreScripts.TextChat.ChannelTabs.Here,यहाँ
+CoreScripts.TextChat.ChannelTabs.Global2,
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,सिस्टम
 CoreScripts.TextChat.ChannelTabs.Team,टीम
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: स्पीकर म्यूट करें.
@@ -1241,7 +1256,7 @@ Feature.Avatar.Action.Revert,रिवर्ट करें
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,सेव करें
 Feature.Avatar.Action.SaveAsNew,नए नाम से सेव करें
-Feature.Avatar.Action.Select,चुनें
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,कई आइटम चुनें
 Feature.Avatar.Action.SelectSlot,स्लॉट चुनें
 Feature.Avatar.Action.Share,शेयर करें
@@ -1263,6 +1278,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,मौजूदा लुक अ�
 Feature.Avatar.Action.UpdateMakeupLook,लुक अपडेट करें
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,स्टाइल एक्सप्लोर करें
+Feature.Avatar.BackgroundGeneration.Error.Moderation,वह प्रॉम्प्ट हमारी गाइडलाइन के मुताबिक नहीं है. कोई और प्रॉम्प्ट आज़माएँ.
+Feature.Avatar.BackgroundGeneration.Error.System,आपका बैकग्राउंड जेनरेट नहीं हो सका. फिर से कोशिश करें.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,अपने बैकग्राउंड के बारे में बताएँ…
+Feature.Avatar.BackgroundGeneration.Status.Generating,आपका बैकग्राउंड जेनरेट हो रहा है…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,आपका बैकग्राउंड तैयार हो रहा है…
+Feature.Avatar.BackgroundGeneration.Title,बैकग्राउंड क्रिएट करें
 Feature.Avatar.Backgrounds.Title,बैकग्राउंड
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,इस बॉडी स्टाइल के लिए एडजस्टमेंट उपलब्ध नहीं है.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,डिफ़ॉल्ट रूप से ओरिजनल बॉडी कलर
@@ -1270,6 +1291,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,स्किन कलर
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,मेकअप के अनगिनत कॉम्बिनेशन के साथ अपना अनोखा लुक तैयार करें.
 Feature.Avatar.EmoteAlreadyAssigned,यह Emote पहले से ही किसी स्लॉट में असाइन किया जा चुका है
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,कुछ गड़बड़ी हुई. बाद में फिर से कोशिश करें.
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,आइडिया पाएँ
@@ -1825,6 +1847,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,अपने अवतार के बारे में बताएँ (ज़रूरी नहीं)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,मार्केटप्लेस ब्राउज़ करें
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,आइटम ऑप्शंस
 Feature.Catalog.Action.LoadMore,और लोड करें
@@ -2120,6 +2143,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"जारी रखने क�
 Feature.Catalog.Message.Checkout.UnavailableItems,एक या एक से ज़्यादा आइटम खरीदे नहीं जा सकते. जारी रखने से पहले कृपया उन्हें हटा दें.
 Feature.Catalog.Message.CollectiblesInfo,"होल्डिंग पीरियड के बाद एक यूज़र दूसरे यूज़र को कलेक्टिबल आइटम रीसेल कर सकता है, भले ही ओरिजनल स्टॉक न बिका हो. Roblox Plus सब्सक्राइबर्स रीसेल के लिए कलेक्टिबल आइटम लिस्ट कर सकते हैं."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,इसे अपने पसंदीदा में जोड़ें
+Feature.Catalog.Message.Favorites.CategoryEmpty,आपने अभी तक इस कैटगरी में कुछ भी सेव नहीं किया है.
+Feature.Catalog.Message.Favorites.Empty,आपने अभी तक कुछ भी सेव नहीं किया है.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox पर सबसे अच्छी तरह से तैयार किए गए आइटम खोजें
 Feature.Catalog.Message.HoldingPolicyL1,रीसेल में की गई खरीदारियाँ {days} दिनों तक होल्ड पर रहेंगी. होल्ड करने की इस अवधि के खत्म होने के बाद ही आइटम को रीसेल किया जा सकता है. सिर्फ़ Plus यूज़र्स ही आइटम रीसेल कर सकते हैं.
 Feature.Catalog.Message.HoldingPolicyL2,"खरीदारी करने के बाद, ओरिजनल बिक्री {purchaseDays} दिनों तक होल्ड में रहती है. होल्डिंग की यह अवधि खत्म होने के बाद ही आइटम को फिर से बेचा जा सकता है और फिर यह आइटम {resaleDays} दिनों तक रीसेल में होल्ड पर रहता है. सिर्फ़ Premium यूज़र्स ही आइटम को रीसेल कर सकते हैं."
@@ -2204,6 +2229,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"विस्तारि
 Feature.Chat.Description.ExpressiveChatLearnMore,"एक्सप्रेसिव चैट फ़ीचर में फ़िल्टर और पार्टी वॉइस के बिना चैट शामिल हैं.
 
 जब तक सभी मेंबर्स एक्सप्रेसिव चैट की ज़रूरी शर्तें पूरी नहीं करते और आपकी चैट अपग्रेड नहीं हो जाती, तब तक एक्सप्रेसिव चैट का ऐक्सेस सीमित है."
+Feature.Chat.Description.InlineContextCardDescription,अनजान लोगों से चैट करते समय सावधान रहें. न तो निजी जानकारी शेयर करें और न ही किसी दूसरे चैट ऐप पर जाएँ. आपके पास किसी को भी उनकी प्रोफ़ाइल से ब्लॉक या रिपोर्ट करने का विकल्प है.
 Feature.Chat.Description.NameGroup,अपने ग्रुप का नाम रखें
 Feature.Chat.Description.NameGroupChat,अपने चैट ग्रुप का नाम रखें
 Feature.Chat.Description.OSAContextCardDescription,आपकी सुरक्षा बहुत मायने रखती है. सहज महसूस नहीं हो रहा है? किसी भी समय इस व्यक्ति को उसकी प्रोफ़ाइल से ब्लॉक या रिपोर्ट किया जा सकता है.
@@ -2223,6 +2249,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,
 Feature.Chat.Heading.LeaveGroup,ग्रुप छोड़ें
 Feature.Chat.Heading.PartyWithConnections,कनेक्शंस के साथ पार्टी करें
 Feature.Chat.Heading.PartyWithFriends,फ़्रेंड्स के साथ पार्टी
+Feature.Chat.Heading.SafeChattingWithThisUser,इस व्यक्ति से चैट करते समय सावधान रहें
+Feature.Chat.Heading.SafeChattingWithUsername,{displayName} से चैट करते समय सावधान रहें
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} ने आपको जॉइन करने के लिए इनवाइट किया है
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} ने आपको एक ग्रुप में जॉइन करने के लिए इनवाइट किया है
 Feature.Chat.Heading.YouWereInvitedToGroup,आपको ग्रुप में शामिल होने का इनवाइट भेजा गया था
@@ -2280,7 +2308,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 घंटा
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र
@@ -2701,6 +2728,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,इस समय किस
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट आपके लोकेशन, डिवाइस की जानकारी, उम्र और प्लैटफ़ॉर्म पर बिहेवियर जैसे अलग-अलग फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"स्पॉन्सर किया गया यह कॉन्टेंट आपको डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़्ड फ़ैक्टर्स के आधार पर दिखाया जा रहा है, ताकि आपको सही कॉन्टेंट देखने को मिले. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग्स में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"स्पॉन्सर किया गया यह कॉन्टेंट आपको आपके लोकेशन, डिवाइस की जानकारी, उम्र और प्लैटफ़ॉर्म पर बिहेवियर जैसे अलग-अलग फ़ैक्टर्स के आधार पर दिखाया जा रहा है, ताकि आपको सही कॉन्टेंट देखने को मिले. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग्स में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"स्पॉन्सर किया गया यह कॉन्टेंट आपको डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़्ड फ़ैक्टर्स के आधार पर दिखाया जा रहा है, ताकि आपको सही कॉन्टेंट देखने को मिले. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है."
 Feature.GameDetails.Message.SuggestLessOften,हम इसका सुझाव कम देंगे
 Feature.GameDetails.RatingPercentOnly,{percentRating}% रेटिंग
 Feature.GameDetails.Toast.LinkCopied,
@@ -3358,7 +3388,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. परमिशन
 2. कॉन्टैक्ट्स चुनें
 3. Roblox को अपने कॉन्टैक्ट्स ऐक्सेस करने की परमिशन दें"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"फ़्रेंड्स के साथ कनेक्ट करने के लिए, Roblox को अपने कॉन्टैक्ट्स को ऐक्सेस करने की परमिशन दें."
-Feature.SettingsHub.Description.PeoplesNames,एक्सपीरिएंस में अपने बैज दूसरे लोगों को दिखाएँ या उनसे छिपाएँ.
+Feature.SettingsHub.Description.PeoplesNames,गेम्स में अपने बैज दूसरे लोगों को दिखाएँ या उनसे छिपाएँ.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. परमिशन चुनें
 2. कैमरा चुनें
 3. Roblox को अपना कैमरा ऐक्सेस करने की परमिशन दें"
@@ -3380,7 +3410,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,माइक्रोप्रो
 Feature.SettingsHub.GameSettings.MyBadges,मेरे बैज
 Feature.SettingsHub.GameSettings.OutputDevice,आउटपुट डिवाइस
 Feature.SettingsHub.GameSettings.PeopleNames,लोगों के नाम दिखाएँ
-Feature.SettingsHub.GameSettings.PeopleNames.Description,एक्सपीरिएंस में लोगों के ऊपर नाम दिखाएं या छिपाएं. कुछ एक्सपीरिएंस में कस्टम सेटिंग हो सकती हैं जो आपकी पसंद को ओवरराइड करती हैं.
+Feature.SettingsHub.GameSettings.PeopleNames.Description,"गेम में लोगों के ऊपर नाम दिखाएँ या छिपाएँ. कुछ गेम्स में कस्टम सेटिंग हो सकती हैं, जो आपकी पसंद को ओवरराइड करती हैं."
 Feature.SettingsHub.GameSettings.PeoplesNames,लोगों के नाम
 Feature.SettingsHub.Heading.InviteFriends,
 Feature.SettingsHub.Heading.InviteUser,{DisplayName} को इनवाइट करना है?
@@ -4232,8 +4262,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} की फ़्रेंड लिस्ट फ़ुल हो चुकी है.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,पिछली बार {minutes} मिनट पहले अपडेट किया गया
+InGame.PlayerList.FooterUnableToLoad,
+InGame.PlayerList.FriendsEmpty,आपके किसी भी फ़्रेंड ने अभी तक यह एक्सपीरिएंस नहीं खेला है.
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,लीडरबोर्ड उपलब्ध नहीं है. कृपया बाद में फिर से कोशिश करें.
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,रैंक
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,स्टूडियो में हैं
 InGame.Presence.Label.Offline,

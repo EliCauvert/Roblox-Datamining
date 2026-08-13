@@ -596,6 +596,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,여기에 올바른 번역을 입력하세요
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,선택된 이미지
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,원본 텍스트({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,이 번역에 어떤 문제가 있나요?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,정확하지 않음
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,부적절하거나 경멸적임
@@ -625,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,의견을
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,어린 플레이어를 보호하기 위해 13세 미만의 사용자 계정은 피드백을 보낼 수 없습니다.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,피드백 이용 불가
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,캡처 추가
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,선택 항목 편집
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,사용 가능한 캡처가 없습니다.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,캡처({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,크리에이터가 문제를 파악할 수 있도록 도와주세요.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,캡처 불러오는 중...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{max}개 중 {count}개 선택됨
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,하나 이상의 캡처를 업로드하지 못했습니다.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,버그 신고
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,아이템 또는 데이터 복원
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,카테고리*
@@ -634,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,카테고리
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,구매 문제
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,최대 {MAX}자
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,세부 정보*
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,선택 취소
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,게임 버전 및 해당 문제를 재현하는 단계 등 문제와 관련된 모든 사항을 포함해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"누락된 항목과 마지막으로 본 시기를 설명해 주세요. 계정이 해킹된 경우, Roblox CS 문의 양식 번호와 관련 세부 정보를 포함해 주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,요청 사항이나 문제를 여기에 설명해 주세요. 상황을 이해하는 데 도움이 되도록 가능한 한 많은 정보를 제공해 주세요.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"구매하려던 아이템, 구매 시도 시기, 총 금액(예: 500 Robux/4.99달러)을 알려주세요. 표시된 오류 메시지가 있다면 포함해주세요."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,신고하기를 진행하시겠어요?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>대신 신고를 제출하세요.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,선택
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,크리에이터가 올바른 계정을 지원하는 데 도움이 됩니다.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,크리에이터와 사용자 정보 공유
@@ -720,6 +734,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,오른쪽으로 이동
 CoreScripts.InGameMenu.Controls.NextTab,다음 탭
 CoreScripts.InGameMenu.Controls.PerformanceStats,성능 통계
 CoreScripts.InGameMenu.Controls.Playerlist,리더보드
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,글로벌
+CoreScripts.InGameMenu.Controls.Playerlist.Here,여기
 CoreScripts.InGameMenu.Controls.PreviousTab,이전 탭
 CoreScripts.InGameMenu.Controls.RecordVideo,동영상 녹화
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,카메라 이동 / 재설정
@@ -908,9 +925,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,캐릭터를 리스폰할까�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,이 서버를 나가 다른 서버로 전환하려고 합니다.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,이전에 방문한 게임에 참가
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,이 체험에서 나가고 {PREVIOUS_EXPERIENCE}(으)로 돌아갑니다.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,이 게임을 떠나 {PREVIOUS_GAME}에 돌아가려고 합니다.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,진동 
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,을 눌러야 합니다
@@ -987,8 +1002,8 @@ CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,사진 찍기
 CoreScripts.TextChat.Action.SendQuickWords,간단한 메시지 보내기
 CoreScripts.TextChat.ChannelTabs.Friends,
-CoreScripts.TextChat.ChannelTabs.Global2,글로벌
-CoreScripts.TextChat.ChannelTabs.Here,여기
+CoreScripts.TextChat.ChannelTabs.Global2,
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,시스템
 CoreScripts.TextChat.ChannelTabs.Team,팀
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: 사용자 음소거
@@ -1222,7 +1237,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,규정 위반 및 이의 신청
 Feature.Avatar.Action.AddNewMakeupLook,새로운 룩 추가
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,선택 취소
+Feature.Avatar.Action.CancelSelection,
 Feature.Avatar.Action.Clear,지우기
 Feature.Avatar.Action.ComposerPost,게시
 Feature.Avatar.Action.ComposerPreviewAndPost,미리 보기 및 게시
@@ -1259,7 +1274,7 @@ Feature.Avatar.Action.Revert,되돌리기
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,저장
 Feature.Avatar.Action.SaveAsNew,새 코스튬으로 저장
-Feature.Avatar.Action.Select,선택
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,여러 아이템 선택
 Feature.Avatar.Action.SelectSlot,슬롯 선택
 Feature.Avatar.Action.Share,공유
@@ -1281,6 +1296,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,기존 룩 업데이트
 Feature.Avatar.Action.UpdateMakeupLook,룩 업데이트
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,스타일 탐색
+Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
+Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세요...
+Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
+Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
+Feature.Avatar.BackgroundGeneration.Title,배경 만들기
 Feature.Avatar.Backgrounds.Title,배경
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,이 신체 스타일은 조정할 수 없습니다.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,원래 신체의 색상으로 설정
@@ -1288,6 +1309,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,피부색
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,끝없는 메이크업 조합으로 나만의 독특한 룩을 만들어보세요.
 Feature.Avatar.EmoteAlreadyAssigned,이미 슬롯에 추가되어 있는 감정 표현이에요
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,영감 얻기
@@ -1843,6 +1865,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,아바타 설명(선택)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,마켓플레이스 둘러보기
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,아이템 옵션
 Feature.Catalog.Action.LoadMore,더 불러오기
@@ -2139,6 +2162,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,계속 진행하려면 아이템
 Feature.Catalog.Message.Checkout.UnavailableItems,구매할 수 없는 아이템이 있습니다. 계속하려면 해당 아이템을 삭제하세요.
 Feature.Catalog.Message.CollectiblesInfo,컬렉터블 아이템은 보류 기간이 지나면 원래 재고가 남아 있더라도 다른 사용자에게 재판매할 수 있습니다. Roblox Plus 멤버가 되면 컬렉터블 아이템을 재판매할 수 있습니다.
 Feature.Catalog.Message.FTUXFavoritePillTooltip,즐겨찾기에 추가하기
+Feature.Catalog.Message.Favorites.CategoryEmpty,이 카테고리에 아직 저장한 항목이 없습니다.
+Feature.Catalog.Message.Favorites.Empty,아직 저장한 항목이 없습니다.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Roblox에서 최고급으로 제작된 아이템을 찾아 보세요
 Feature.Catalog.Message.HoldingPolicyL1,구매한 재판매 아이템은 최대 {days}일 동안 보류됩니다. 아이템은 이 보류 기간이 종료된 후에만 재판매할 수 있습니다. 아이템을 재판매하려면 Plus 사용자여야 합니다.
 Feature.Catalog.Message.HoldingPolicyL2,아이템 구매를 완료하면 오리지널 판매는 최대 {purchaseDays}일 동안 보류됩니다. 아이템은 이 보류 기간이 종료된 후에만 재판매할 수 있으며 재판매는 최대 {resaleDays}일 동안 보류됩니다. 재판매를 하려면 Premium 사용자여야 합니다.
@@ -2223,6 +2248,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"확장된 채팅 기능�
 Feature.Chat.Description.ExpressiveChatLearnMore,"다채로운 채팅 기능에는 필터링 없는 채팅 및 파티 음성 기능 등이 포함되어 있습니다.
 
 다채로운 채팅은 모든 멤버가 조건을 충족하며 내 채팅이 업그레이드될 때까지 이용이 제한됩니다."
+Feature.Chat.Description.InlineContextCardDescription,낯선 사람과 채팅할 때는 주의하세요. 개인정보를 공유하거나 다른 채팅 앱으로 이동하지 마세요. 다른 사람의 프로필에서 그 사람을 차단 또는 신고할 수 있습니다.
 Feature.Chat.Description.NameGroup,그룹 이름을 설정해 주세요
 Feature.Chat.Description.NameGroupChat,채팅그룹 이름 설정
 Feature.Chat.Description.OSAContextCardDescription,회원님의 안전은 중요합니다. 불편하신가요? 언제든 이 사람의 프로필에서 이 사람을 차단하거나 신고할 수 있습니다.
@@ -2242,6 +2268,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,이 사람과의 첫 상호�
 Feature.Chat.Heading.LeaveGroup,그룹 나가기
 Feature.Chat.Heading.PartyWithConnections,인맥과 파티하기
 Feature.Chat.Heading.PartyWithFriends,친구와 파티하기
+Feature.Chat.Heading.SafeChattingWithThisUser,이 사람과 안전하게 채팅하세요
+Feature.Chat.Heading.SafeChattingWithUsername,{displayName} 님과 안전하게 채팅하기
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} 님이 나를 초대했습니다
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} 님이 나를 그룹에 초대했습니다
 Feature.Chat.Heading.YouWereInvitedToGroup,그룹에 참가하도록 초대되었습니다
@@ -2299,7 +2327,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1시간
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1분
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1주
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}주
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,사용 불가
 Feature.Chat.Label.UnknownUser,알 수 없는 사용자
 Feature.Chat.Label.User,사용자
@@ -2720,6 +2747,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,일시적인 오류로 인
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"이 스폰서 콘텐츠는 적절한 콘텐츠를 제공하기 위해 기기 정보, 위치, 나이와 같은 개인 맞춤화되지 않은 요소를 기반으로 표시됩니다. 이 체험의 크리에이터는 {CreatorName}입니다. 스폰서십 비용은 {PayerName}에서 지급했습니다. 자세한 내용은 계정 설정 내 '개인정보 보호 및 콘텐츠 성숙도' 페이지에서 확인하실 수 있습니다."
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"이 스폰서 콘텐츠는 위치, 기기 정보, 연령, 플랫폼 이용 행태 등 다양한 요소를 기반으로 관련성 높은 콘텐츠를 제공하기 위해 표시됩니다. 이 체험의 크리에이터는 {CreatorName}입니다. 스폰서십 비용은 {PayerName}에서 지급했습니다. 자세한 내용은 계정 설정 내 '개인정보 및 콘텐츠 수위' 페이지에서 확인하실 수 있습니다."
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"이 스폰서 콘텐츠는 적절한 콘텐츠를 제공하기 위해 기기 정보, 위치, 나이와 같은 개인 맞춤화되지 않은 요소를 기반으로 표시됩니다. 이 체험의 크리에이터는 {CreatorName}입니다. 스폰서십을 지불한 자는 {PayerName}입니다."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"이 스폰서 콘텐츠는 적절한 콘텐츠를 제공하기 위해 기기 정보, 위치, 나이와 같은 비개인화 요소를 기반으로 표시됩니다. 스폰서십 비용은 {PayerName}에서 지급했습니다. 자세한 내용은 계정 설정 내 '개인정보 및 콘텐츠 수위' 페이지에서 확인하실 수 있습니다."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"이 스폰서 콘텐츠는 관련성 높은 콘텐츠를 제공하기 위해 위치, 기기 정보, 연령, 플랫폼 이용 행태 등의 다양한 요소를 기반으로 표시됩니다. 스폰서십 비용은 {PayerName}에서 지급했습니다. 자세한 내용은 계정 설정 내 '개인정보 및 콘텐츠 수위' 페이지에서 확인하실 수 있습니다."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"이 스폰서 콘텐츠는 적절한 콘텐츠를 제공하기 위해 기기 정보, 위치, 연령 등의 비개인화 요소를 기반으로 표시됩니다. 스폰서십 비용은 {PayerName}에서 지급했습니다."
 Feature.GameDetails.Message.SuggestLessOften,이런 제안은 앞으로 덜 보여 드릴게요
 Feature.GameDetails.RatingPercentOnly,평점 {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -3378,7 +3408,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. '권한'을 선택
 2. '연락처'를 선택합니다
 3. Roblox의 연락처 접근 권한을 허용합니다"
 Feature.SettingsHub.Description.ContactsPermissionIOS,친구와 소통하려면 Roblox가 연락처를 사용할 수 있도록 허용해 주세요.
-Feature.SettingsHub.Description.PeoplesNames,체험에서 다른 사람에가 배지를 표시하거나 숨깁니다.
+Feature.SettingsHub.Description.PeoplesNames,게임에서 다른 사람에게 내 배지를 표시하거나 숨깁니다.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. '권한'을 선택합니다
 2. '카메라'를 선택합니다
 3. Roblox의 카메라 접근 권한을 허용합니다"
@@ -3400,7 +3430,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,MicroProfiler
 Feature.SettingsHub.GameSettings.MyBadges,내 배지
 Feature.SettingsHub.GameSettings.OutputDevice,출력 기기
 Feature.SettingsHub.GameSettings.PeopleNames,사람 이름 표시
-Feature.SettingsHub.GameSettings.PeopleNames.Description,체험 내에서 사람 이름을 표시하거나 숨깁니다. 일부 체험은 이러한 선호 사항보다 우선시되는 맞춤 설정이 적용될 수 있습니다.
+Feature.SettingsHub.GameSettings.PeopleNames.Description,게임 내 플레이어 위에 이름을 표시하거나 숨깁니다. 일부 게임에는 사용자 기본 설정을 재정의하는 사용자 지정 설정이 포함될 수 있습니다.
 Feature.SettingsHub.GameSettings.PeoplesNames,사람 이름
 Feature.SettingsHub.Heading.InviteFriends,
 Feature.SettingsHub.Heading.InviteUser,{DisplayName} 님을 초대할까요?
@@ -4251,8 +4281,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 님의 친구 수가 최대 한도에 도달했어요.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,마지막 업데이트: {minutes}분 전
+InGame.PlayerList.FooterUnableToLoad,불러오지 못함
+InGame.PlayerList.FriendsEmpty,아직 이 체험을 플레이한 친구가 없습니다.
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,현재 리더보드를 이용할 수 없습니다. 나중에 다시 시도하세요.
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,순위
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,체험 이용 중
 InGame.Presence.Label.InStudio,Studio 사용 중
 InGame.Presence.Label.Offline,

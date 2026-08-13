@@ -6,6 +6,7 @@ local signalsReactModule = require(parent.SignalsReact)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
+local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
 local educationalTooltip = foundationModule.EducationalTooltip
 local iconButton = foundationModule.IconButton
 local iconName = foundationModule.Enums.IconName
@@ -14,39 +15,43 @@ local popoverAlign = foundationModule.Enums.PopoverAlign
 local popoverSide = foundationModule.Enums.PopoverSide
 local view = foundationModule.View
 
-return reactModule.memo(function(p0) --[[ line: 28 | named "AssistantBuild" ]]
-	-- upvalues: getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref), localizationStringsModule (ref)
-	local var7 = getAssistantBuildStoreModule()
-	local var8 = getPlayButtonStoreModule()
-	local var9 = signalsReactModule.useSignalState(var7.getIsDisabled)
-	local var10 = signalsReactModule.useSignalState(var7.getIsDisabledTooltipOpen)
-	local var11 = reactModule.useCallback(function() --[[ line: 34 ]]
-		-- upvalues: var9 (ref), var7 (ref), var10 (ref), var8 (ref)
-		if var9 then
-			var7.setIsDisabledTooltipOpen(not var10)
+return reactModule.memo(function(p0) --[[ line: 29 | named "AssistantBuild" ]]
+	-- upvalues: getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref), localizationStringsModule (ref)
+	local var8 = getAssistantBuildStoreModule()
+	local var9 = getPlayButtonStoreModule()
+	local var10 = signalsReactModule.useSignalState(var8.getIsDisabled)
+	local var11 = signalsReactModule.useSignalState(var8.getIsDisabledTooltipOpen)
+	local var12 = reactModule.useCallback(function() --[[ line: 35 ]]
+		-- upvalues: var10 (ref), var8 (ref), var11 (ref), var9 (ref)
+		if var10 then
+			var8.setIsDisabledTooltipOpen(not var11)
 			
 			return
 		end
-		var7.setIsDisabledTooltipOpen(false)
-		var8.setIsActive(true)
-	end, { var7, var9, var10, var8 })
-	reactModule.useEffect(function() --[[ line: 43 ]]
-		-- upvalues: var9 (ref), var8 (ref), var7 (ref)
-		if var9 then
-			var8.setIsActive(false)
+		var8.setIsDisabledTooltipOpen(false)
+		var9.setIsActive(true)
+	end, { var8, var10, var11, var9 })
+	local var13 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function() --[[ line: 44 ]]
+		-- upvalues: var8 (ref)
+		var8.setIsDisabledTooltipOpen(false)
+	end, { var8 }) else nil
+	reactModule.useEffect(function() --[[ line: 49 ]]
+		-- upvalues: var10 (ref), var9 (ref), var8 (ref)
+		if var10 then
+			var9.setIsActive(false)
 			
 			return
 		end
-		var7.setIsDisabledTooltipOpen(false)
-	end, { var7, var9, var8 })
-	local var12 = reactModule.createElement(iconButton, {
+		var8.setIsDisabledTooltipOpen(false)
+	end, { var8, var10, var9 })
+	local var14 = reactModule.createElement(iconButton, {
 		isCircular = true,
 		testId = "build-header-play-button",
 		icon = iconName.Nebula,
 		variant = p0.variant,
 		size = inputSize.Medium,
-		isDisabled = var9,
-		onActivated = var11
+		isDisabled = var10,
+		onActivated = var12
 	})
 	
 	return reactModule.createElement(view, {
@@ -54,9 +59,11 @@ return reactModule.memo(function(p0) --[[ line: 28 | named "AssistantBuild" ]]
 		LayoutOrder = p0.layoutOrder,
 		testId = p0.testId or "assistant-build"
 	}, {
-		Tooltip = if var9 then reactModule.createElement(educationalTooltip, {
+		Tooltip = if var10 then reactModule.createElement(educationalTooltip, {
+			testId = "build-assistant-disabled-tooltip",
 			align = popoverAlign.Start,
-			isOpen = var10,
+			isOpen = var11,
+			onPressedOutside = var13,
 			side = popoverSide.Bottom,
 			text = localizationStringsModule.CHAT_PORTRAIT_REQUIRED,
 			title = localizationStringsModule.CHAT_ASSISTANT_DISABLED
@@ -64,9 +71,9 @@ return reactModule.memo(function(p0) --[[ line: 28 | named "AssistantBuild" ]]
 			Button = reactModule.createElement(view, {
 				tag = "auto-xy",
 				testId = "build-header-play-button-disabled",
-				onActivated = var11
-			}, { Button = var12 })
+				onActivated = var12
+			}, { Button = var14 })
 		}) else nil,
-		Button = if not var9 then var12 else nil
+		Button = if not var10 then var14 else nil
 	})
 end)

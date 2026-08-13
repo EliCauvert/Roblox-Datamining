@@ -24,7 +24,7 @@ return function() --[[ line: 24 | named "renderInExperienceOverlay" ]]
 	inExperienceOverlay.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
 	inExperienceOverlay.Parent = coreGuiService
 	local var9 = reactRobloxModule.createRoot(inExperienceOverlay)
-	var9:render(reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+	var9:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 		LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
 			localization = localization.new(localizationService.RobloxLocaleId)
 		}, {

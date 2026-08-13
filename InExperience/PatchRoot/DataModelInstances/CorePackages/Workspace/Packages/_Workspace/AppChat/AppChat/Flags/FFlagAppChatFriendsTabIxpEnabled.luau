@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatFriendsTabIxpEnabled", false)
+﻿return game:DefineFastFlag("AppChatFriendsTabIxpEnabledRC1", false)

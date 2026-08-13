@@ -1,4 +1,5 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
+﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
+local sharedFlagsModule = require(buildExperience.Parent.SharedFlags)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local t = {
@@ -94,6 +95,18 @@ local t = {
 	}
 }
 
+if require(buildExperience.Flags.FFlagBuildExperienceClientDataModelTools) then
+	t.inspect_client_instance = {
+		completed = "Inspected client instance",
+		failed = "Couldn't inspect client instance",
+		running = "Inspecting client instance"
+	}
+	t.search_client_datamodel = {
+		completed = "Searched client DataModel",
+		failed = "Couldn't search client DataModel",
+		running = "Searching client DataModel"
+	}
+end
 return {
 	AGENT_PLAN_BUILD = "Build",
 	AGENT_PLAN_OVERVIEW = "Overview",
@@ -112,11 +125,9 @@ return {
 	BUILD_ELIGIBILITY_ERROR_TITLE = "Something went wrong",
 	BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION = "Your account doesn't meet the requirements to use Build.",
 	BUILD_ELIGIBILITY_INELIGIBLE_TITLE = "Build isn't available",
-	BUILD_GREETING = "Hi",
 	BUILD_HEADER_TITLE = "Build",
 	BUILD_SEARCH_PLACEHOLDER = "Search games",
 	BUILD_SUBLINE = "What do you want to create today?",
-	BUILD_MENU_AGENTS = "Tasks",
 	BUILD_MENU_AUDIENCE = "Audience",
 	BUILD_MENU_BACK_TO_BUILD = "Back to Build",
 	BUILD_MENU_INVITE_TO_PLAYTEST = "Add to playtest",
@@ -125,12 +136,6 @@ return {
 	BUILD_MENU_PUBLISH = "Publish",
 	BUILD_MENU_PUBLISH_LATEST = "Publish latest",
 	CREATOR_CREDIT_BUY = "Buy",
-	CREATOR_CREDIT_DAILY_CAPTION = "Build usage resets daily",
-	CREATOR_CREDIT_DAILY_LABEL = "Daily Build usage",
-	CREATOR_CREDIT_EXTRA_DESCRIPTION = "Additional Build usage starts after your free daily usage runs out.",
-	CREATOR_CREDIT_EXTRA_LABEL = "Additional Build usage",
-	CREATOR_CREDIT_INSUFFICIENT_FUNDS = "You need more Build usage to continue.",
-	CREATOR_CREDIT_LOADING = "Loading Build usage\226\128\166",
 	CREATOR_CREDIT_MENU_ITEM = "Usage",
 	CREATOR_CREDIT_PAGE_TITLE = "Build usage",
 	CREATOR_CREDIT_FREE_USAGE_LABEL = "Free Build usage",
@@ -238,112 +243,6 @@ return {
 	GAME_CONFIGURATION_SHARE = "Share",
 	GAME_CONFIGURATION_UPDATE_RATING = "Update rating",
 	GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = "Title & description",
-	GENRE_ACTION_NAME = "Action",
-	GENRE_ACTION_DESCRIPTION = "Combat, shooting, brawling, and action-oriented gameplay.",
-	GENRE_BATTLE_ROYALE_NAME = "Battle Royale",
-	GENRE_BATTLE_ROYALE_DESCRIPTION = "Last-player-standing matches.",
-	GENRE_FIGHTING_NAME = "Fighting",
-	GENRE_FIGHTING_DESCRIPTION = "One-on-one or team combat.",
-	GENRE_ACTION_SHOOTER_NAME = "Shooter",
-	GENRE_ACTION_SHOOTER_DESCRIPTION = "First- or third-person shooting.",
-	GENRE_ADVENTURE_NAME = "Adventure",
-	GENRE_ADVENTURE_DESCRIPTION = "Exploration-driven gameplay with narrative or world goals.",
-	GENRE_EXPLORATION_NAME = "Exploration",
-	GENRE_EXPLORATION_DESCRIPTION = "Discover worlds and lore.",
-	GENRE_STORY_NAME = "Story",
-	GENRE_STORY_DESCRIPTION = "Narrative-driven adventures.",
-	GENRE_SCAVENGER_HUNT_NAME = "Scavenger Hunt",
-	GENRE_SCAVENGER_HUNT_DESCRIPTION = "Find-and-collect quests.",
-	GENRE_COMEDY_NAME = "Comedy",
-	GENRE_COMEDY_DESCRIPTION = "Humour-first experiences and party games.",
-	GENRE_MEMES_NAME = "Memes",
-	GENRE_MEMES_DESCRIPTION = "Memetic, parodic content.",
-	GENRE_FUNNY_ANIMATIONS_NAME = "Funny Animations",
-	GENRE_FUNNY_ANIMATIONS_DESCRIPTION = "Animation showcases.",
-	GENRE_HORROR_NAME = "Horror",
-	GENRE_HORROR_DESCRIPTION = "Scary, suspenseful, or thriller content.",
-	GENRE_SURVIVAL_HORROR_NAME = "Survival Horror",
-	GENRE_SURVIVAL_HORROR_DESCRIPTION = "Escape monsters or threats.",
-	GENRE_JUMPSCARE_NAME = "Jumpscare",
-	GENRE_JUMPSCARE_DESCRIPTION = "Reactive scare-driven gameplay.",
-	GENRE_LIFE_NAME = "Life",
-	GENRE_LIFE_DESCRIPTION = "Roleplay, avatar simulation, and slice-of-life experiences.",
-	GENRE_ROLEPLAY_NAME = "Roleplay",
-	GENRE_ROLEPLAY_DESCRIPTION = "Player-driven roleplay scenarios.",
-	GENRE_AVATAR_SIMULATOR_NAME = "Avatar Simulator",
-	GENRE_AVATAR_SIMULATOR_DESCRIPTION = "Avatar customisation and showcases.",
-	GENRE_SOCIAL_HANGOUT_NAME = "Social Hangout",
-	GENRE_SOCIAL_HANGOUT_DESCRIPTION = "Chat and hangout spaces.",
-	GENRE_PARTY_NAME = "Party",
-	GENRE_PARTY_DESCRIPTION = "Minigames and casual social play.",
-	GENRE_MINIGAMES_NAME = "Minigames",
-	GENRE_MINIGAMES_DESCRIPTION = "Collections of quick-play games.",
-	GENRE_OBBY_NAME = "Obby",
-	GENRE_OBBY_DESCRIPTION = "Obstacle courses and parkour.",
-	GENRE_PUZZLE_NAME = "Puzzle",
-	GENRE_PUZZLE_DESCRIPTION = "Logic, escape-room, and puzzle-solving gameplay.",
-	GENRE_ESCAPE_ROOM_NAME = "Escape Room",
-	GENRE_ESCAPE_ROOM_DESCRIPTION = "Locked-room puzzles.",
-	GENRE_TRIVIA_NAME = "Trivia",
-	GENRE_TRIVIA_DESCRIPTION = "Quiz-style questions.",
-	GENRE_RPG_NAME = "RPG",
-	GENRE_RPG_DESCRIPTION = "Character progression, classes, and stats.",
-	GENRE_MMORPG_NAME = "MMORPG",
-	GENRE_MMORPG_DESCRIPTION = "Massively multiplayer RPGs.",
-	GENRE_ACTION_RPG_NAME = "Action RPG",
-	GENRE_ACTION_RPG_DESCRIPTION = "Real-time combat RPGs.",
-	GENRE_TURN_BASED_RPG_NAME = "Turn-Based RPG",
-	GENRE_TURN_BASED_RPG_DESCRIPTION = "Strategic, turn-taking combat.",
-	GENRE_SHOOTER_NAME = "Shooter",
-	GENRE_SHOOTER_DESCRIPTION = "Dedicated shooting-mechanic experiences.",
-	GENRE_FPS_NAME = "FPS",
-	GENRE_FPS_DESCRIPTION = "First-person shooting.",
-	GENRE_TPS_NAME = "Third-Person Shooter",
-	GENRE_TPS_DESCRIPTION = "Third-person shooting.",
-	GENRE_SIMULATOR_NAME = "Simulator",
-	GENRE_SIMULATOR_DESCRIPTION = "Progression and collection-driven simulators.",
-	GENRE_INCREMENTAL_NAME = "Incremental",
-	GENRE_INCREMENTAL_DESCRIPTION = "Tap-and-grow gameplay.",
-	GENRE_TYCOON_NAME = "Tycoon",
-	GENRE_TYCOON_DESCRIPTION = "Build-and-manage tycoons.",
-	GENRE_SOCIAL_NAME = "Social",
-	GENRE_SOCIAL_DESCRIPTION = "Hangouts, dancing, and social-focused experiences.",
-	GENRE_DANCE_CLUB_NAME = "Dance Club",
-	GENRE_DANCE_CLUB_DESCRIPTION = "Dance and music venues.",
-	GENRE_SHOWCASE_NAME = "Showcase",
-	GENRE_SHOWCASE_DESCRIPTION = "Showcase or gallery worlds.",
-	GENRE_SPORTS_NAME = "Sports & Racing",
-	GENRE_SPORTS_DESCRIPTION = "Sports, racing, and athletics.",
-	GENRE_RACING_NAME = "Racing",
-	GENRE_RACING_DESCRIPTION = "Vehicle or foot races.",
-	GENRE_TEAM_SPORTS_NAME = "Team Sports",
-	GENRE_TEAM_SPORTS_DESCRIPTION = "Football, basketball, etc.",
-	GENRE_STRATEGY_NAME = "Strategy",
-	GENRE_STRATEGY_DESCRIPTION = "Real-time and turn-based strategy games.",
-	GENRE_RTS_NAME = "RTS",
-	GENRE_RTS_DESCRIPTION = "Real-time strategy.",
-	GENRE_TOWER_DEFENSE_NAME = "Tower Defense",
-	GENRE_TOWER_DEFENSE_DESCRIPTION = "Defend against waves.",
-	GENRE_SURVIVAL_NAME = "Survival",
-	GENRE_SURVIVAL_DESCRIPTION = "Resource management and survival gameplay.",
-	GENRE_OPEN_WORLD_SURVIVAL_NAME = "Open World Survival",
-	GENRE_OPEN_WORLD_SURVIVAL_DESCRIPTION = "Sandbox survival.",
-	GENRE_ZOMBIE_SURVIVAL_NAME = "Zombie Survival",
-	GENRE_ZOMBIE_SURVIVAL_DESCRIPTION = "Survive waves of enemies.",
-	GENRE_UTILITY_NAME = "Utility",
-	GENRE_UTILITY_DESCRIPTION = "Non-game experiences (showrooms, education).",
-	GENRE_EDUCATION_NAME = "Education",
-	GENRE_EDUCATION_DESCRIPTION = "Learning-focused experiences.",
-	GENRE_SHOWROOM_NAME = "Showroom",
-	GENRE_SHOWROOM_DESCRIPTION = "Brand or product showcases.",
-	GENRE_VEHICLE_NAME = "Vehicle Sim",
-	GENRE_VEHICLE_DESCRIPTION = "Vehicle-centric simulation gameplay.",
-	GENRE_DRIVING_NAME = "Driving",
-	GENRE_DRIVING_DESCRIPTION = "Open-world driving sims.",
-	GENRE_FLIGHT_NAME = "Flight",
-	GENRE_FLIGHT_DESCRIPTION = "Aircraft simulators.",
-	GENRE_NONE_NAME = "None",
-	GENRE_NONE_DESCRIPTION = "No genre selected.",
 	MEDIA_SELECTION_CAPTURE_LIBRARY = "Capture library",
 	MEDIA_SELECTION_DELETE = "Delete",
 	MEDIA_SELECTION_TITLE = "Icon & thumbnails",
@@ -372,7 +271,6 @@ return {
 	PRIVATE_INVITES_ROW_TITLE = "Playtesters",
 	PRIVATE_INVITES_ROW_TITLE_EMPTY = "Add to playtest",
 	PRIVATE_INVITES_SEARCH_PLACEHOLDER = "Search",
-	PRIVATE_INVITES_SEND = "Send invites separately",
 	PRIVATE_INVITES_SHARE_LINK = "Share link",
 	PRIVATE_INVITES_SHARE_LINK_ERROR = "Couldn't create the share link. Try again.",
 	PRIVATE_INVITES_SHARE_WITH_FRIENDS = "Share with friends you added",
@@ -382,9 +280,6 @@ return {
 	PUBLISH_CONTENT_BODY = "By publishing, you agree that this content rating is accurate.",
 	PUBLISH_CONTENT_MATURITY = "Content maturity",
 	PUBLISH_CONTENT_TITLE = "Content",
-	PUBLISH_GAME_SHEET_CAPTION = "Who can play your game depends on our account verification criteria.",
-	PUBLISH_GAME_SHEET_PUBLISH = "Publish",
-	PUBLISH_GAME_SHEET_TITLE = "Configure game",
 	PUBLISH_VERSION_INFORMATION_BODY = "Tell players what's changed in this version.",
 	PUBLISH_VERSION_INFORMATION_TITLE = "Version Information",
 	PUBLISH_VERSION_TITLE_DESCRIPTION = "Version title & description",
@@ -425,90 +320,90 @@ return {
 	VERSION_HISTORY_RESTORE = "Restore",
 	VERSION_HISTORY_RESTORE_FAILED = "Couldn't restore this version. Try again.",
 	VERSION_HISTORY_TITLE = "Version history",
-	formatBuildGreeting = function(p0) --[[ line: 110 ]]
+	formatBuildGreeting = function(p0) --[[ line: 123 ]]
 		return if p0 == "" then "Hi" else `Hi, {p0}`
 	end,
-	formatChatRevertConfirmationDescription = function(p1) --[[ line: 189 ]]
+	formatChatRevertConfirmationDescription = function(p1) --[[ line: 202 ]]
 		return `Confirm to revert the latest change and go back to {if p1 < 10 then `v0{p1}` else `v{p1}`}.`
 	end,
-	formatGameSharedWithTarget = function(p2) --[[ line: 118 ]]
+	formatGameSharedWithTarget = function(p2) --[[ line: 131 ]]
 		return if p2 == "" then "Game shared" else `Game shared with {p2}`
 	end,
-	formatShareExperience = function(p3) --[[ line: 114 ]]
+	formatShareExperience = function(p3) --[[ line: 127 ]]
 		return `Share {p3}`
 	end,
-	formatChatFailedTool = function(p4) --[[ line: 160 ]]
+	formatChatFailedTool = function(p4) --[[ line: 173 ]]
 		return `Failed {p4}`
 	end,
-	formatChatFinishedTool = function(p5) --[[ line: 156 ]]
+	formatChatFinishedTool = function(p5) --[[ line: 169 ]]
 		return `Finished {p5}`
 	end,
-	formatChatRunningTool = function(p6) --[[ line: 164 ]]
+	formatChatRunningTool = function(p6) --[[ line: 177 ]]
 		return `Running {p6}`
 	end,
-	formatChatTaskCount = function(p7) --[[ line: 137 ]]
+	formatChatTaskCount = function(p7) --[[ line: 150 ]]
 		return if p7 == 1 then "1 task completed" else `{p7} tasks completed`
 	end,
-	formatChatThinkingDuration = function(p8) --[[ line: 151 ]]
+	formatChatThinkingDuration = function(p8) --[[ line: 164 ]]
 		return `Thinking for {math.max(0, math.floor(p8))}s`
 	end,
-	formatChatTurnFailureMessage = function(p9, p10) --[[ line: 133 ]]
+	formatChatTurnFailureMessage = function(p9, p10) --[[ line: 146 ]]
 		return if p10 == nil then p9 else `({p10}) {p9}`
 	end,
-	formatChatWorkedDuration = function(p11) --[[ line: 141 ]]
+	formatChatWorkedDuration = function(p11) --[[ line: 154 ]]
 		local maxValue = math.max(0, math.floor(p11 + 0.5))
 		
 		return if maxValue < 60 then `Worked for {maxValue}s` else `Worked for {math.floor(maxValue / 60)}m{maxValue % 60}s`
 	end,
-	getChatToolActivityLabel = function(p12, p13) --[[ line: 168 ]]
+	getChatToolActivityLabel = function(p12, p13) --[[ line: 181 ]]
 		-- upvalues: t (ref)
-		local var3 = t[p12]
+		local var4 = t[p12]
 		
-		return if var3 == nil then nil elseif p13 == "completed" then var3.completed elseif p13 == "failed" then var3.failed else var3.running
+		return if var4 == nil then nil elseif p13 == "completed" then var4.completed elseif p13 == "failed" then var4.failed else var4.running
 	end,
-	formatMyCreationsUniverseName = function(p14) --[[ line: 125 ]]
+	formatMyCreationsUniverseName = function(p14) --[[ line: 138 ]]
 		return `Universe {p14}`
 	end,
-	formatPrivateInvitesCount = function(p15, p16) --[[ line: 217 ]]
+	formatPrivateInvitesCount = function(p15, p16) --[[ line: 230 ]]
 		return `{p15}/{p16}`
 	end,
-	formatPrivateInvitesSent = function(p17, p18) --[[ line: 213 ]]
+	formatPrivateInvitesSent = function(p17, p18) --[[ line: 226 ]]
 		return `{p17} of {p18} playtesters added`
 	end,
-	formatPrivateInvitesSubtitle = function(p19) --[[ line: 209 ]]
+	formatPrivateInvitesSubtitle = function(p19) --[[ line: 222 ]]
 		return `Choose up to {p19} friends, then share the link to the game.`
 	end,
-	formatSubagentStatusCompletedTasks = function(p20) --[[ line: 129 ]]
+	formatSubagentStatusCompletedTasks = function(p20) --[[ line: 142 ]]
 		return `{p20} completed tasks`
 	end,
-	formatUserPickerUsername = function(p21) --[[ line: 221 ]]
+	formatUserPickerUsername = function(p21) --[[ line: 234 ]]
 		return `@{p21}`
 	end,
-	formatVersionHistoryCreatedDate = function(p22, p23, p24) --[[ line: 197 ]]
+	formatVersionHistoryCreatedDate = function(p22, p23, p24) --[[ line: 210 ]]
 		return `{p22} {p23}, {p24}`
 	end,
-	formatVersionHistoryRestoredBadge = function(p25) --[[ line: 193 ]]
+	formatVersionHistoryRestoredBadge = function(p25) --[[ line: 206 ]]
 		return `Restored {if p25 < 10 then `v0{p25}` else `v{p25}`}`
 	end,
-	formatVersionHistoryVersionLabel = function(p26, p27) --[[ line: 205 ]]
+	formatVersionHistoryVersionLabel = function(p26, p27) --[[ line: 218 ]]
 		return `{if p26 < 10 then `v0{p26}` else `v{p26}`} \194\183 {p27}`
 	end,
-	formatVersionHistoryVersionNumber = function(p28) --[[ line: 182 ]]
+	formatVersionHistoryVersionNumber = function(p28) --[[ line: 195 ]]
 		return if p28 < 10 then `v0{p28}` else `v{p28}`
 	end,
-	formatVersionHistoryVersionTitle = function(p29) --[[ line: 201 ]]
+	formatVersionHistoryVersionTitle = function(p29) --[[ line: 214 ]]
 		return `Version {p29}`
 	end,
-	formatCreatorCreditAdditionalUsed = function(p30, p31) --[[ line: 255 ]]
+	formatCreatorCreditAdditionalUsed = function(p30, p31) --[[ line: 264 ]]
 		return `{p30} of {p31} used`
 	end,
-	formatCreatorCreditAdditionalUsedNoLimit = function(p32) --[[ line: 259 ]]
+	formatCreatorCreditAdditionalUsedNoLimit = function(p32) --[[ line: 268 ]]
 		return `{p32} used \226\128\162 No limit`
 	end,
-	formatCreatorCreditLimitBelowSpend = function(p33) --[[ line: 263 ]]
+	formatCreatorCreditLimitBelowSpend = function(p33) --[[ line: 272 ]]
 		return `Limit can't be below the {p33} Robux already spent today.`
 	end,
-	formatCreatorCreditPercentUsed = function(p34) --[[ line: 229 ]]
+	formatCreatorCreditPercentUsed = function(p34) --[[ line: 238 ]]
 		local floored = math.floor(p34 + 0.5)
 		
 		if floored < 0 then
@@ -519,16 +414,13 @@ return {
 		end
 		return `{floored}% used`
 	end,
-	formatCreatorCreditRobuxUsage = function(p35, p36) --[[ line: 240 ]]
+	formatCreatorCreditRobuxUsage = function(p35, p36) --[[ line: 249 ]]
 		return `{p35}/{p36}`
 	end,
-	formatCreatorCreditRobuxUsageUnlimited = function(p37) --[[ line: 244 ]]
+	formatCreatorCreditRobuxUsageUnlimited = function(p37) --[[ line: 253 ]]
 		return `{p37} used`
 	end,
-	formatCreatorCreditResetHours = function(value) --[[ line: 248 ]]
+	formatCreatorCreditResetHours = function(value) --[[ line: 257 ]]
 		return if value == 1 then "Resets in 1 hour" else `Resets in {value} hours`
-	end,
-	formatCreatorCreditUsageTrailing = function(p38, p39) --[[ line: 225 ]]
-		return `{p38} of {p39}`
 	end
 }

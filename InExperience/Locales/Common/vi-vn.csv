@@ -597,6 +597,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Đ
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Nhập bản dịch chính xác ở đây
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Hình ảnh đã chọn
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Văn bản gốc ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Bản dịch này gặp vấn đề gì? (không bắt buộc)
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Vấn Đề về Độ Chính Xác
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Không Phù Hợp hoặc Xúc Phạm
@@ -626,7 +627,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,Cảm ơn
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Để bảo vệ người chơi nhỏ tuổi, các tài khoản dưới 13 tuổi không được gửi ý kiến đóng góp."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Tính năng góp ý không khả dụng
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Thêm ảnh/video ghi lại
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Chỉnh sửa lựa chọn
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Không có ảnh/video ghi lại nào.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Ảnh/video ghi lại ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,Giúp nhà sáng tạo hiểu được vấn đề của bạn.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Đang tải ảnh/video ghi lại...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} – {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,Đã chọn {count}/{max}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Một hoặc nhiều ảnh/video ghi lại của bạn chưa được tải lên thành công.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Báo cáo lỗi
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Khôi phục vật phẩm hoặc dữ liệu
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Danh mục *
@@ -635,12 +647,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Chọn một
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Vấn đề với việc mua hàng
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Tối đa {MAX} ký tự
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Chi tiết *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Bỏ chọn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Hãy cung cấp mọi thông tin liên quan đến sự cố, chẳng hạn như phiên bản trò chơi và các bước để tái hiện lỗi."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Hãy mô tả vật phẩm bị mất và lần cuối bạn nhìn thấy vật phẩm là khi nào. Nếu tài khoản của bạn bị hack, vui lòng cho biết mã biên bản CS của Roblox và mọi chi tiết liên quan."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,Vui lòng mô tả yêu cầu hoặc sự cố bạn gặp tại đây. Hãy chia sẻ thật cụ thể để giúp chúng tôi hiểu rõ tình hình.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Hãy cho chúng tôi biết khi đó bạn muốn mua gì, sự cố xảy ra khi nào và tổng giá trị (ví dụ: 500 Robux hoặc 4,99 USD). Vui lòng gửi kèm thông báo lỗi mà bạn gặp (nếu có)."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Bạn muốn báo cáo vi phạm?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Vậy hãy gửi báo cáo.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Chọn
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,Điều này giúp nhà sáng tạo hỗ trợ đúng tài khoản.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Chia sẻ thông tin người dùng với nhà sáng tạo
@@ -721,6 +735,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,Sang phải
 CoreScripts.InGameMenu.Controls.NextTab,Tab tiếp theo
 CoreScripts.InGameMenu.Controls.PerformanceStats,Thông số hiệu năng
 CoreScripts.InGameMenu.Controls.Playerlist,Bảng Xếp Hạng
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,Toàn cầu
+CoreScripts.InGameMenu.Controls.Playerlist.Here,Ở đây
 CoreScripts.InGameMenu.Controls.PreviousTab,Tab trước
 CoreScripts.InGameMenu.Controls.RecordVideo,Quay video
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,Di Chuyển/Đặt Lại Camera
@@ -909,9 +926,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,Hồi Sinh Nhân Vật?
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,Bạn sắp rời khỏi máy chủ này để chuyển sang máy chủ khác.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,Bạn muốn rời đi?
 CoreScripts.InGameMenu.Traversal.HistoryDescription,Tham gia trò chơi bạn từng truy cập
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,Bạn sắp thoát khỏi trò chơi này để quay về {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,Bạn chắc chắn rời đi chứ?
 CoreScripts.InGameMenu.Vibration,Rung
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,để chuyển điều hướng trình đơn
@@ -989,7 +1004,7 @@ CoreScripts.ScreenshotHud.Action.TakePhoto,Chụp Ảnh
 CoreScripts.TextChat.Action.SendQuickWords,Gửi tin nhắn nhanh
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,Toàn Cầu
-CoreScripts.TextChat.ChannelTabs.Here,Ở đây
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,Hệ thống
 CoreScripts.TextChat.ChannelTabs.Team,Nhóm
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: tắt tiếng người nói.
@@ -1260,7 +1275,7 @@ Feature.Avatar.Action.Revert,Hoàn lại
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Lưu
 Feature.Avatar.Action.SaveAsNew,Lưu mới
-Feature.Avatar.Action.Select,Chọn
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Chọn nhiều vật phẩm
 Feature.Avatar.Action.SelectSlot,Chọn Ô
 Feature.Avatar.Action.Share,Chia Sẻ
@@ -1274,7 +1289,7 @@ Feature.Avatar.Action.Stay,Ở Lại
 Feature.Avatar.Action.Switch,Chuyển
 Feature.Avatar.Action.TryOn,Mặc Thử
 Feature.Avatar.Action.Unequip,Cởi Bỏ
-Feature.Avatar.Action.Unselect,Bỏ chọn
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,Gỡ Biểu Cảm Khỏi Ô
 Feature.Avatar.Action.Update,Cập Nhật
 Feature.Avatar.Action.UpdateExistingCharacter,Cập nhật nhân vật đang tồn tại
@@ -1282,6 +1297,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.UpdateMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.Zoom,Thu Phóng
 Feature.Avatar.AvatarWidgetTitle,Khám phá phong cách
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
+Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
+Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
+Feature.Avatar.BackgroundGeneration.Title,Tạo hình nền
 Feature.Avatar.Backgrounds.Title,Hình nền
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Không thể điều chỉnh kiểu thân này.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Chuyển về màu thân mặc định ban đầu
@@ -1289,6 +1310,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Màu da
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,"Vô vàn cách kết hợp vật phẩm trang điểm để bạn tạo phong cách riêng, không đụng hàng."
 Feature.Avatar.EmoteAlreadyAssigned,Biểu cảm này đã được gán vào một ô
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Lấy cảm hứng
@@ -1844,6 +1866,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,Mô tả avatar của bạn (Không bắt buộc)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Ghé Chợ
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Tùy Chọn Vật Phẩm
 Feature.Catalog.Action.LoadMore,Tải Thêm
@@ -2139,6 +2162,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"Để tiếp tục, hãy xem l�
 Feature.Catalog.Message.Checkout.UnavailableItems,Không thể mua một hoặc nhiều vật phẩm. Vui lòng xóa các vật phẩm đó trước khi tiếp tục.
 Feature.Catalog.Message.CollectiblesInfo,"Người dùng có thể mua đi bán lại vật phẩm Sưu tập cho nhau sau khi hết thời gian nắm giữ theo quy định, ngay cả khi lượng hàng ban đầu chưa bán hết. Người dùng đăng ký Roblox Plus có thể niêm yết vật phẩm Sưu tập để bán lại."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Thêm mục này vào danh sách yêu thích của bạn
+Feature.Catalog.Message.Favorites.CategoryEmpty,Bạn chưa lưu bất kỳ vật phẩm nào trong danh mục này.
+Feature.Catalog.Message.Favorites.Empty,Bạn chưa lưu bất kỳ vật phẩm nào.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Khám phá những vật phẩm được chế tác tinh xảo nhất trên Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Các giao dịch từ việc bán lại sẽ vào trạng thái nắm giữ tối đa {days} ngày. Vật phẩm này chỉ có thể được bán lại sau khi thời gian nắm giữ kết thúc. Chỉ người chơi Premium mới có thể bán lại vật phẩm.
 Feature.Catalog.Message.HoldingPolicyL2,"Sau khi mua, các giao dịch gốc sẽ vào trạng thái nắm giữ tối đa {purchaseDays} ngày. Vật phẩm chỉ có thể bán lại sau khi thời gian nắm giữ này kết thúc và giao dịch bán lại sẽ vào trạng thái nắm giữ tối đa {resaleDays} ngày. Chỉ có người chơi Premium mới có thể bán lại vật phẩm."
@@ -2223,6 +2248,7 @@ Tất cả các thành viên của nhóm này sẽ được mời, nhưng một 
 Feature.Chat.Description.ExpressiveChatLearnMore,"Tính năng Trò chuyện tự nhiên bao gồm trò chuyện không bị kiểm duyệt và trò chuyện thoại trong Party.
 
 Quyền truy cập tính năng Trò chuyện tự nhiên sẽ bị giới hạn cho đến khi tất cả thành viên đều đủ điều kiện và cuộc trò chuyện của bạn được nâng cấp."
+Feature.Chat.Description.InlineContextCardDescription,Hãy cẩn thận khi trò chuyện với người lạ. Đừng chia sẻ thông tin cá nhân hay chuyển sang ứng dụng trò chuyện khác. Bạn có thể chặn hoặc báo cáo bất kỳ ai từ hồ sơ của họ.
 Feature.Chat.Description.NameGroup,Đặt tên cho nhóm của bạn
 Feature.Chat.Description.NameGroupChat,Đặt tên cuộc trò chuyện nhóm
 Feature.Chat.Description.OSAContextCardDescription,Chúng tôi coi trọng sự an toàn của bạn. Bạn thấy lo ngại? Trong hồ sơ của người dùng này có chức năng cho phép bạn chặn họ.
@@ -2242,6 +2268,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Lần tương tác đầu ti
 Feature.Chat.Heading.LeaveGroup,Rời Nhóm
 Feature.Chat.Heading.PartyWithConnections,Lập Party với Người quen
 Feature.Chat.Heading.PartyWithFriends,Lập Party với Bạn Bè
+Feature.Chat.Heading.SafeChattingWithThisUser,Hãy thận trọng khi trò chuyện với người này
+Feature.Chat.Heading.SafeChattingWithUsername,Hãy thận trọng khi trò chuyện với {displayName}
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} đã mời bạn tham gia
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} đã mời bạn tham gia nhóm
 Feature.Chat.Heading.YouWereInvitedToGroup,Bạn đã được mời tham gia nhóm
@@ -2299,7 +2327,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1g
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,Không có
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
@@ -2720,6 +2747,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Không thể hiển thị 
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố không được cá nhân hóa như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố khác như vị trí, thông tin thiết bị, độ tuổi và hoạt động trên nền tảng để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Bạn đang thấy nội dung được tài trợ này dựa trên các yếu tố không mang tính cá nhân như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được chi trả bởi {PayerName}."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Bạn đang xem nội dung được tài trợ này dựa trên những yếu tố không mang tính cá nhân như thông tin thiết bị, vị trí và độ tuổi, nhằm hiển thị nội dung phù hợp với bạn. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang ""Quyền riêng tư và mức độ nội dung người lớn"" trong phần Cài đặt tài khoản tại đây:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Bạn đang xem nội dung được tài trợ này dựa trên nhiều yếu tố khác nhau như vị trí, thông tin thiết bị, độ tuổi và hành vi trên nền tảng, nhằm hiển thị nội dung phù hợp với bạn. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang ""Quyền riêng tư và mức độ nội dung người lớn"" trong phần Cài đặt tài khoản tại đây:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Bạn đang xem nội dung được tài trợ này dựa trên những yếu tố không mang tính cá nhân như thông tin thiết bị, vị trí và độ tuổi, nhằm hiển thị nội dung phù hợp với bạn. Khoản tài trợ được {PayerName} chi trả."
 Feature.GameDetails.Message.SuggestLessOften,Chúng tôi sẽ hạn chế đề xuất nội dung này
 Feature.GameDetails.RatingPercentOnly,Xếp Hạng {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,Đã sao chép liên kết vào khay nhớ tạm
@@ -3377,7 +3407,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Chọn Quyền
 2. Chọn Danh bạ
 3. Cho phép Roblox truy cập vào Danh bạ của bạn"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Để kết nối với bạn bè, hãy cho phép Roblox truy cập vào danh bạ của bạn."
-Feature.SettingsHub.Description.PeoplesNames,Ẩn/hiện huy hiệu của bạn với những người khác trong trải nghiệm.
+Feature.SettingsHub.Description.PeoplesNames,Ẩn/hiện huy hiệu của bạn với những người khác trong trò chơi.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Chọn Quyền
 2. Chọn Camera
 3. Cho phép Roblox truy cập vào Camera của bạn"
@@ -3399,7 +3429,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,MicroProfiler
 Feature.SettingsHub.GameSettings.MyBadges,Huy hiệu của tôi
 Feature.SettingsHub.GameSettings.OutputDevice,Thiết Bị Đầu Ra
 Feature.SettingsHub.GameSettings.PeopleNames,Hiển thị tên của mọi người
-Feature.SettingsHub.GameSettings.PeopleNames.Description,Hiển thị hoặc ẩn tên ở phía trên mọi người trong trải nghiệm. Một số trải nghiệm có thể có cài đặt tùy chỉnh ghi chồng tùy chọn ưu tiên của bạn.
+Feature.SettingsHub.GameSettings.PeopleNames.Description,Ẩn hoặc hiện tên trên đầu người chơi trong trò chơi. Một số trò chơi có thể có tùy chọn cài đặt tùy chỉnh sẽ được ưu tiên sử dụng thay cho tùy chọn của bạn.
 Feature.SettingsHub.GameSettings.PeoplesNames,Tên của mọi người
 Feature.SettingsHub.Heading.InviteFriends,
 Feature.SettingsHub.Heading.InviteUser,Mời {DisplayName}?
@@ -4250,8 +4280,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} đã đạt giới hạn bạn bè tối đa.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,Lần cập nhật gần nhất cách đây {minutes} phút
+InGame.PlayerList.FooterUnableToLoad,Không thể tải
+InGame.PlayerList.FriendsEmpty,Chưa có bạn bè nào của bạn chơi trải nghiệm này.
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,Không có bảng xếp hạng. Vui lòng thử lại sau.
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,Thứ hạng
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,Trong Studio
 InGame.Presence.Label.Offline,Ngoại tuyến

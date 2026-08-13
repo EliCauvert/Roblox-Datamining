@@ -53,7 +53,7 @@ return {
 	end,
 	renderWithFoundation = function(p1, p2) --[[ line: 58 ]]
 		-- upvalues: reactModule (ref), foundationModule (ref), localizationModule (ref), inExperienceLocalesModule (ref), localizationService (ref)
-		return p1(reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		return p1(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			Localization = reactModule.createElement(localizationModule.LocalizationProvider, {
 				localization = inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
 			}, { Subject = p2 })

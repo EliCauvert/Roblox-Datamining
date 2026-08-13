@@ -1,4 +1,5 @@
-﻿local _ = require(script.Parent.types)
+﻿local fFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
+local _ = require(script.Parent.types)
 local httpService = game:GetService("HttpService")
 local t = {
 	single_select = "single_select",
@@ -34,31 +35,31 @@ local t_1 = {
 	}
 }
 
-local function _(p0) --[[ line: 74 | named "valueLooksLikeToolName" ]]
+local function _(p0) --[[ line: 76 | named "valueLooksLikeToolName" ]]
 	return typeof(p0) == "string" and string.lower(p0) == "studio_ask_user"
 end
 
-local _ = function(p1) --[[ line: 78 | named "getQuestionsPayload" ]]
+local _ = function(p1) --[[ line: 80 | named "getQuestionsPayload" ]]
 	return if typeof(p1) == "table" then if typeof(p1[1]) == "table" then p1 elseif typeof(p1.questions) == "table" then p1.questions elseif typeof(p1.data) == "table" then p1.data else nil else nil
 end
 
-local _ = function(value, p2) --[[ line: 98 | named "resolveResponseType" ]]
+local _ = function(value, p2) --[[ line: 100 | named "resolveResponseType" ]]
 	-- upvalues: t (ref)
-	local var14 = if typeof(value) == "string" then t[value] else nil
+	local var15 = if typeof(value) == "string" then t[value] else nil
 	
-	return if var14 == nil then if p2 > 0 then "single_select" else "free_text" else var14
+	return if var15 == nil then if p2 > 0 then "single_select" else "free_text" else var15
 end
 
-local function toAnswerQuestions(p3) --[[ line: 109 ]]
+local function toAnswerQuestions(p3) --[[ line: 111 ]]
 	-- upvalues: t (ref)
-	local var15 = if typeof(p3) ~= "table" then if typeof(p3[1]) == "table" then p3 elseif typeof(p3.questions) == "table" then p3.questions elseif typeof(p3.data) == "table" then p3.data else nil else nil
+	local var16 = if typeof(p3) ~= "table" then if typeof(p3[1]) == "table" then p3 elseif typeof(p3.questions) == "table" then p3.questions elseif typeof(p3.data) == "table" then p3.data else nil else nil
 	
-	if typeof(var15) ~= "table" then
+	if typeof(var16) ~= "table" then
 		return nil
 	end
 	local t_1 = {}
 	
-	for i, v in var15 do
+	for i, v in var16 do
 		if typeof(v) == "table" and typeof(v.question) == "string" then
 			local v_1
 			local t_2 = {}
@@ -77,19 +78,19 @@ local function toAnswerQuestions(p3) --[[ line: 109 ]]
 			end
 			local t_3 = { id = `q{i}`, question = v.question, options = t_2 }
 			v_1 = v.responseType
-			local var19 = if typeof(v_1) == "string" then t[v_1] else nil
-			t_3.responseType = if var19 == nil then if #t_2 > 0 then "single_select" else "free_text" else var19
+			local var20 = if typeof(v_1) == "string" then t[v_1] else nil
+			t_3.responseType = if var20 == nil then if #t_2 > 0 then "single_select" else "free_text" else var20
 			table.insert(t_1, t_3)
 		end
 	end
 	return if #t_1 > 0 then t_1 else nil
 end
 
-local function extractQuestionsFromToolCall(p4) --[[ line: 146 ]]
+local function extractQuestionsFromToolCall(p4) --[[ line: 148 ]]
 	-- upvalues: toAnswerQuestions (ref)
-	local var20 = toAnswerQuestions(p4.rawInput)
+	local var21 = toAnswerQuestions(p4.rawInput)
 	
-	if var20 == nil then
+	if var21 == nil then
 		return nil
 	end
 	local kind = p4.kind
@@ -98,7 +99,7 @@ local function extractQuestionsFromToolCall(p4) --[[ line: 146 ]]
 		kind = p4.title
 		
 		if typeof(kind) == "string" and string.lower(kind) == "studio_ask_user" then
-			return var20
+			return var21
 		end
 		local rawInput = p4.rawInput
 		
@@ -108,20 +109,20 @@ local function extractQuestionsFromToolCall(p4) --[[ line: 146 ]]
 			if not (typeof(name) == "string" and string.lower(name) == "studio_ask_user") then
 				name = rawInput.toolName
 				
-				return if typeof(name) == "string" and string.lower(name) == "studio_ask_user" then var20 else var20
+				return if typeof(name) == "string" and string.lower(name) == "studio_ask_user" then var21 else var21
 			end
 		end
 	end
 end
 
-local _ = function(p5) --[[ line: 170 | named "decodePersistedToolResultText" ]]
+local _ = function(p5) --[[ line: 172 | named "decodePersistedToolResultText" ]]
 	-- upvalues: httpService (ref)
 	local ok, status = pcall(httpService.JSONDecode, httpService, p5)
 	
 	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
 end
 
-local function getPersistedToolResultText(p6) --[[ line: 180 ]]
+local function getPersistedToolResultText(p6) --[[ line: 182 ]]
 	-- upvalues: httpService (ref)
 	if p6.content == nil then
 		return nil
@@ -134,10 +135,10 @@ local function getPersistedToolResultText(p6) --[[ line: 180 ]]
 			
 			if content.type == "text" and typeof(content.text) == "string" then
 				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
-				local var22 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
+				local var23 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
 				
-				if var22 ~= nil and var22 ~= "" then
-					table.insert(t, var22)
+				if var23 ~= nil and var23 ~= "" then
+					table.insert(t, var23)
 				end
 			end
 		end
@@ -145,8 +146,8 @@ local function getPersistedToolResultText(p6) --[[ line: 180 ]]
 	return if #t > 0 then table.concat(t) else nil
 end
 
-local function findQuestionsInTurnState(p7, p8) --[[ line: 208 ]]
-	-- upvalues: getPersistedToolResultText (ref), extractQuestionsFromToolCall (ref)
+local function findQuestionsInTurnState(p7, p8) --[[ line: 210 ]]
+	-- upvalues: fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), getPersistedToolResultText (ref), extractQuestionsFromToolCall (ref)
 	local t = {}
 	
 	for i in p7.toolCalls do
@@ -156,13 +157,13 @@ local function findQuestionsInTurnState(p7, p8) --[[ line: 208 ]]
 	
 	for i_1, v in t do
 		if not p8 or not p8[v] then
-			local var24 = p7.toolCalls[v]
+			local var25 = p7.toolCalls[v]
 			
-			if getPersistedToolResultText(var24) == nil then
-				local var25 = extractQuestionsFromToolCall(var24)
+			if (not fFlagCreatorAgentChatFilterTerminalClientToolsModule or var25.status ~= "completed" and var25.status ~= "failed" and var25.status ~= "cancelled") and getPersistedToolResultText(var25) == nil then
+				local var26 = extractQuestionsFromToolCall(var25)
 				
-				if var25 ~= nil then
-					return var25, v, var24.rawInput, var24.turnId, var24.referenceId
+				if var26 ~= nil then
+					return var26, v, var25.rawInput, var25.turnId, var25.referenceId
 				end
 			end
 		end
@@ -170,7 +171,7 @@ local function findQuestionsInTurnState(p7, p8) --[[ line: 208 ]]
 	return nil, nil, nil, nil, nil
 end
 
-local function formatToolResultText(p9) --[[ line: 235 ]]
+local function formatToolResultText(p9) --[[ line: 243 ]]
 	-- upvalues: httpService (ref)
 	local t = {}
 	
@@ -208,12 +209,12 @@ local function formatToolResultText(p9) --[[ line: 235 ]]
 	return httpService:JSONEncode({ answers = t })
 end
 
-local function formatToolResultContent(p10) --[[ line: 270 ]]
+local function formatToolResultContent(p10) --[[ line: 278 ]]
 	-- upvalues: formatToolResultText (ref)
 	return { text = formatToolResultText(p10) }
 end
 
-local _ = function(p11, p12) --[[ line: 276 | named "findSelectedOptionById" ]]
+local _ = function(p11, p12) --[[ line: 284 | named "findSelectedOptionById" ]]
 	if p12 == nil then
 		return nil
 	end
@@ -225,7 +226,7 @@ local _ = function(p11, p12) --[[ line: 276 | named "findSelectedOptionById" ]]
 	return nil
 end
 
-local function findSelectedOptionsByIds(p13, p14) --[[ line: 288 ]]
+local function findSelectedOptionsByIds(p13, p14) --[[ line: 296 ]]
 	local t = {}
 	
 	for i, v in p13.options do
@@ -234,10 +235,10 @@ local function findSelectedOptionsByIds(p13, p14) --[[ line: 288 ]]
 	local t_1 = {}
 	
 	for i_1, v_1 in p14 do
-		local var31 = t[v_1]
+		local var32 = t[v_1]
 		
-		if var31 ~= nil then
-			table.insert(t_1, var31)
+		if var32 ~= nil then
+			table.insert(t_1, var32)
 			continue
 		end
 		return nil
@@ -245,7 +246,7 @@ local function findSelectedOptionsByIds(p13, p14) --[[ line: 288 ]]
 	return t_1
 end
 
-local function normalizeSelectedOptionId(p15) --[[ line: 305 ]]
+local function normalizeSelectedOptionId(p15) --[[ line: 313 ]]
 	if typeof(p15) == "string" then
 		return p15
 	elseif typeof(p15) ~= "table" then
@@ -263,7 +264,7 @@ local function normalizeSelectedOptionId(p15) --[[ line: 305 ]]
 	return if #t > 0 then t else nil
 end
 
-local function getAnswersByQuestionId(p16) --[[ line: 323 ]]
+local function getAnswersByQuestionId(p16) --[[ line: 331 ]]
 	-- upvalues: httpService (ref), normalizeSelectedOptionId (ref)
 	local t = {}
 	local ok, status = pcall(httpService.JSONDecode, httpService, p16)
@@ -288,12 +289,12 @@ local function getAnswersByQuestionId(p16) --[[ line: 323 ]]
 	return t
 end
 
-local function getPromptFromToolResult(p17, p18, p19, p20) --[[ line: 350 ]]
+local function getPromptFromToolResult(p17, p18, p19, p20) --[[ line: 358 ]]
 	-- upvalues: findSelectedOptionsByIds (ref)
 	if p18 == nil then
 		return nil
 	end
-	local var34
+	local var35
 	local selectedOptionId = p18.selectedOptionId
 	
 	if typeof(selectedOptionId) == "table" then
@@ -304,25 +305,25 @@ local function getPromptFromToolResult(p17, p18, p19, p20) --[[ line: 350 ]]
 			callOrder = p20
 		}
 	elseif selectedOptionId == nil then
-		var34 = nil
+		var35 = nil
 	else
 		for i, v in p17.options do
 			if v.id == selectedOptionId then
-				var34 = v
+				var35 = v
 			end
 		end
-		var34 = nil
+		var35 = nil
 	end
-	return if selectedOptionId == nil or var34 ~= nil then {
+	return if selectedOptionId == nil or var35 ~= nil then {
 		question = p17,
-		selectedOptionId = if var34 ~= nil then nil else var34.id,
-		customResponseText = if var34 == nil then p18.content else nil,
+		selectedOptionId = if var35 ~= nil then nil else var35.id,
+		customResponseText = if var35 == nil then p18.content else nil,
 		toolCallId = p19,
 		callOrder = p20
 	} else nil
 end
 
-local function getToolCallOrder(p21, p22) --[[ line: 389 ]]
+local function getToolCallOrder(p21, p22) --[[ line: 397 ]]
 	if p21.activityItems ~= nil then
 		for i, v in p21.activityItems do
 			if v.kind == "tool_call" and v.toolCallId == p22 then
@@ -353,7 +354,7 @@ return {
 	findQuestionsInTurnState = findQuestionsInTurnState,
 	formatToolResultText = formatToolResultText,
 	formatToolResultContent = formatToolResultContent,
-	getAnsweredPromptsFromTurnState = function(p23) --[[ line: 412 ]]
+	getAnsweredPromptsFromTurnState = function(p23) --[[ line: 420 ]]
 		-- upvalues: extractQuestionsFromToolCall (ref), getPersistedToolResultText (ref), getAnswersByQuestionId (ref), getPromptFromToolResult (ref), getToolCallOrder (ref)
 		local t = {}
 		local t_1 = {}
@@ -364,25 +365,25 @@ return {
 		table.sort(t_1)
 		
 		for i_1, v in t_1 do
-			local var38 = p23.toolCalls[v]
-			local var39 = extractQuestionsFromToolCall(var38)
-			local var40 = getPersistedToolResultText(var38)
+			local var39 = p23.toolCalls[v]
+			local var40 = extractQuestionsFromToolCall(var39)
+			local var41 = getPersistedToolResultText(var39)
 			
-			if var39 ~= nil and var40 ~= nil then
-				local var41 = getAnswersByQuestionId(var40)
+			if var40 ~= nil and var41 ~= nil then
+				local var42 = getAnswersByQuestionId(var41)
 				
-				for i_2, v_1 in var39 do
-					local var42 = getPromptFromToolResult(v_1, var41[v_1.id], v, getToolCallOrder(p23, v))
+				for i_2, v_1 in var40 do
+					local var43 = getPromptFromToolResult(v_1, var42[v_1.id], v, getToolCallOrder(p23, v))
 					
-					if var42 ~= nil then
-						table.insert(t, var42)
+					if var43 ~= nil then
+						table.insert(t, var43)
 					end
 				end
 			end
 		end
 		return t
 	end,
-	formatCancellationContent = function() --[[ line: 448 ]]
+	formatCancellationContent = function() --[[ line: 456 ]]
 		return { text = "User cancelled answering the question" }
 	end
 }

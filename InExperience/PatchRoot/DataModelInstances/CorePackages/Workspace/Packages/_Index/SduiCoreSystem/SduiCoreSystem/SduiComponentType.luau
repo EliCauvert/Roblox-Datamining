@@ -41,6 +41,7 @@
 	FocusNavActions = "FocusNavActions",
 	Fragment = "Fragment",
 	FriendRequestButton = "FriendRequestButton",
+	VirtualGameItemText = "VirtualGameItemText",
 	GameSortDropDown = "GameSortDropDown",
 	GameTile = "GameTile",
 	GameTileActiveFriendsFooter = "GameTileActiveFriendsFooter",

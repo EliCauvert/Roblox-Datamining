@@ -9,5 +9,7 @@
 	FFlagUIBloxAddTestIdToActionBar = game:DefineFastFlag("UIBloxAddTestIdToActionBar", false),
 	FFlagUIBloxFixCoplayFooterConditionalHooks = game:DefineFastFlag("UIBloxFixCoplayFooterConditionalHooks", false),
 	FFlagUIBloxDisableTokenScaling = game:DefineFastFlag("UIBloxDisableTokenScaling", false),
-	FFlagUIBloxRemoveStackedNavigationTabIconLabelSpacing = game:DefineFastFlag("UIBloxRemoveStackedNavigationTabIconLabelSpacing", false)
+	FFlagUIBloxRemoveStackedNavigationTabIconLabelSpacing = game:DefineFastFlag("UIBloxRemoveStackedNavigationTabIconLabelSpacing", false),
+	FFlagUIBloxToastFoundationButtonSizing = game:DefineFastFlag("UIBloxToastFoundationButtonSizing", false),
+	FFlagUIBloxAddFoundationNavigationTabIcon = game:DefineFastFlag("UIBloxAddFoundationNavigationTabIcon", false)
 }

@@ -21,7 +21,7 @@ return {
 			-- upvalues: reactModule (copy), localizationProvider (copy), var5 (copy), keybindContextProviderModule (copy), foundationProvider (copy), foundationModule (copy), p0 (ref)
 			return reactModule.createElement(localizationProvider, { localization = var5 }, {
 				KeybindContextProvider = reactModule.createElement(keybindContextProviderModule, nil, {
-					FoundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, { reactModule.createElement(p0, p1) })
+					FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { reactModule.createElement(p0, p1) })
 				})
 			})
 		end

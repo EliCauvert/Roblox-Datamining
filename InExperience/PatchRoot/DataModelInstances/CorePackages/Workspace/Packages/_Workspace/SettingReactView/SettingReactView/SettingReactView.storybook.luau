@@ -5,9 +5,9 @@ local reactRobloxModule = require(parent.ReactRoblox)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
 local t = {
-	Default = foundationModule.Enums.Theme.Dark,
-	Light = foundationModule.Enums.Theme.Light,
-	Dark = foundationModule.Enums.Theme.Dark
+	Default = foundationModule.Enums.ColorMode.Dark,
+	Light = foundationModule.Enums.ColorMode.Light,
+	Dark = foundationModule.Enums.ColorMode.Dark
 }
 local t_1 = {
 	Default = "Desktop",
@@ -25,7 +25,7 @@ return {
 		return function(p1) --[[ line: 27 ]]
 			-- upvalues: reactModule (copy), foundationProvider (copy), t (copy), t_1 (copy), p0 (ref)
 			return reactModule.createElement(foundationProvider, {
-				theme = if p1 then t[p1.theme] else t.Default,
+				colorMode = if p1 then t[p1.theme] else t.Default,
 				device = if p1 then t_1[p1.platform] else "Desktop"
 			}, reactModule.createElement(p0, p1))
 		end

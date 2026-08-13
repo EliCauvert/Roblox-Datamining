@@ -14,71 +14,71 @@ return {
 		-- upvalues: t (ref)
 		local t_1 = {
 			Badges = if p0 then p0.Badges else {
-				getBadgeInfoStore = function() --[[ line: 46 ]]
+				getBadgeInfoStore = function() --[[ line: 48 ]]
 					return {
-						getBadgeInfo = function() --[[ line: 48 ]]
+						getBadgeInfo = function() --[[ line: 50 ]]
 							return {
-								data = function() --[[ line: 50 ]]
+								data = function() --[[ line: 52 ]]
 									return nil
 								end,
-								status = function() --[[ line: 53 ]]
+								status = function() --[[ line: 55 ]]
 									return "NotReady"
 								end
 							}
 						end,
-						getBadgeInfos = function() --[[ line: 58 ]]
+						getBadgeInfos = function() --[[ line: 60 ]]
 							return {}
 						end,
-						clear = function() --[[ line: 61 ]] end,
-						dispose = function() --[[ line: 62 ]] end
+						clear = function() --[[ line: 63 ]] end,
+						dispose = function() --[[ line: 64 ]] end
 					}
 				end
 			},
 			Game = if p0 then p0.Game else nil,
 			SocialLink = if p0 then p0.SocialLink else nil,
 			MarketplaceCatalogCategory = if p0 then p0.MarketplaceCatalogCategory else {
-				getMarketplaceCatalogCategoryStore = function() --[[ line: 69 ]]
+				getMarketplaceCatalogCategoryStore = function() --[[ line: 71 ]]
 					return {
-						getMarketplaceCatalogCategory = function() --[[ line: 71 ]]
+						getMarketplaceCatalogCategory = function() --[[ line: 73 ]]
 							return {
-								data = function() --[[ line: 73 ]]
+								data = function() --[[ line: 75 ]]
 									return nil
 								end,
-								status = function() --[[ line: 76 ]]
+								status = function() --[[ line: 78 ]]
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogCategories = function() --[[ line: 81 ]]
+						getMarketplaceCatalogCategories = function() --[[ line: 83 ]]
 							return {}
 						end,
-						updateMarketplaceCatalogCategories = function() --[[ line: 84 ]] end,
-						updateMarketplaceCatalogCategory = function() --[[ line: 85 ]] end,
-						clear = function() --[[ line: 86 ]] end,
-						dispose = function() --[[ line: 87 ]] end
+						updateMarketplaceCatalogCategories = function() --[[ line: 86 ]] end,
+						updateMarketplaceCatalogCategory = function() --[[ line: 87 ]] end,
+						clear = function() --[[ line: 88 ]] end,
+						dispose = function() --[[ line: 89 ]] end
 					}
 				end
 			},
 			MarketplaceCatalogSort = if p0 then p0.MarketplaceCatalogSort else {
-				getMarketplaceCatalogSortStore = function() --[[ line: 92 ]]
+				getMarketplaceCatalogSortStore = function() --[[ line: 94 ]]
 					return {
-						getMarketplaceCatalogSort = function() --[[ line: 94 ]]
+						getMarketplaceCatalogSort = function() --[[ line: 96 ]]
 							return {
-								data = function() --[[ line: 96 ]]
+								data = function() --[[ line: 98 ]]
 									return nil
 								end,
-								status = function() --[[ line: 99 ]]
+								status = function() --[[ line: 101 ]]
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogSorts = function() --[[ line: 104 ]]
+						getMarketplaceCatalogSorts = function() --[[ line: 106 ]]
 							return {}
 						end,
-						updateMarketplaceCatalogSorts = function() --[[ line: 107 ]] end,
-						updateMarketplaceCatalogSort = function() --[[ line: 108 ]] end,
-						clear = function() --[[ line: 109 ]] end,
-						dispose = function() --[[ line: 110 ]] end
+						updateMarketplaceCatalogSorts = function() --[[ line: 109 ]] end,
+						updateMarketplaceCatalogSort = function() --[[ line: 110 ]] end,
+						clear = function() --[[ line: 111 ]] end,
+						dispose = function() --[[ line: 112 ]] end
 					}
 				end
 			},
@@ -88,6 +88,8 @@ return {
 			MarketplaceLook = if p0 then p0.MarketplaceLook else nil,
 			MediaAsset = if p0 then p0.MediaAsset else nil,
 			UserProfile = if p0 then p0.UserProfile else nil,
+			Community = if p0 then p0.Community else nil,
+			CommunityUserMembership = if p0 then p0.CommunityUserMembership else nil,
 			DataHydrationTypes = t
 		}
 		
@@ -98,7 +100,7 @@ return {
 		end
 		return t_1
 	end,
-	createSduiDataBinderTransformUtilsMock = function() --[[ line: 137 ]]
+	createSduiDataBinderTransformUtilsMock = function() --[[ line: 141 ]]
 		-- upvalues: snakeToCamel (ref), protobufTimestampToLocalTimeString (ref)
 		return {
 			snakeToCamel = snakeToCamel,

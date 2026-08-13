@@ -142,7 +142,7 @@ function InExperienceInterventionEventReceiver(p0) --[[ line: 32 ]]
 				})
 			end):await()
 		end) else nil
-		local var19 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplayDirectSignalModule:connect(function(p15) --[[ line: 250 ]]
+		local var19 = if fFlagUniversalFeatureRestrictionReceivers then featureRestrictionDisplayDirectSignalModule:connect(function(p15) --[[ line: 245 ]]
 			-- upvalues: p0 (copy), constants (copy)
 			local abuseVector = p15.abuseVector
 			local moderationDetail = p15.moderationDetail
@@ -164,7 +164,7 @@ function InExperienceInterventionEventReceiver(p0) --[[ line: 32 ]]
 			end
 		end) else nil
 		
-		return function() --[[ line: 273 ]]
+		return function() --[[ line: 268 ]]
 			-- upvalues: robloxEventReceivedConnection (ref), timeoutChatAttemptConnection (ref), getFFlagGameJoinTimeoutChatAttemptEnabled (copy), var13 (write), featureTimeoutAttemptConnection (ref), showFeatureInterventionDetailsConnection (ref), featureTimeoutRestoredConnection (ref), var17 (ref), fFlagUniversalFeatureRestrictionReceivers (copy), var18 (write), var19 (write)
 			robloxEventReceivedConnection:Disconnect()
 			timeoutChatAttemptConnection:Disconnect()

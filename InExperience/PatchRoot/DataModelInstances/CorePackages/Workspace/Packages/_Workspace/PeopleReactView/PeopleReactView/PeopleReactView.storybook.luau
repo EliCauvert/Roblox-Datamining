@@ -64,7 +64,7 @@ return {
 			
 			return reactModule.createElement(localizationProvider, { localization = t_2 }, {
 				FoundationProvider = reactModule.createElement(foundationProvider, {
-					theme = foundationModule.Enums.Theme.Dark,
+					colorMode = foundationModule.Enums.ColorMode.Dark,
 					device = if p3 then t[p3.platform] else "Desktop",
 					overlayGui = var8.current
 				}, {

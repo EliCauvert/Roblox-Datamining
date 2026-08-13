@@ -72,15 +72,15 @@ return function(p0) --[[ line: 35 | named "useMomentShareCardViewModel" ]]
 		username = var16,
 		metadataText = var19,
 		onActivated = reactModule.useCallback(function() --[[ line: 90 ]]
-			-- upvalues: openMomentsDeepLink (ref), var12 (ref), p0 (ref), creatorId (ref)
+			-- upvalues: openMomentsDeepLink (ref), var12 (ref), p0 (ref)
 			if openMomentsDeepLink and var12.status == "ready" then
-				openMomentsDeepLink(p0.momentId, if creatorId then tostring(creatorId) else nil)
+				openMomentsDeepLink(p0.momentId, p0.targetIdType)
 			end
 		end, {
 			openMomentsDeepLink,
 			var12.status,
 			p0.momentId,
-			creatorId
+			p0.targetIdType
 		}),
 		selectable = status == "ready" and openMomentsDeepLink ~= nil,
 		LayoutOrder = p0.LayoutOrder

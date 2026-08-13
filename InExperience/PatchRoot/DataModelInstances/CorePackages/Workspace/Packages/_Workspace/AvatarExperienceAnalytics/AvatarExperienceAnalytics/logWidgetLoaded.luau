@@ -1,8 +1,26 @@
-﻿local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+﻿local avatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
+local fFlagAXDeferWidgetLoadedUntilMarketplaceEntered = avatarExperienceFlagsModule.FFlagAXDeferWidgetLoadedUntilMarketplaceEntered
+local fFlagAXLimitWidgetLoadedItemCount = avatarExperienceFlagsModule.FFlagAXLimitWidgetLoadedItemCount
+local fIntAXWidgetLoadedItemCountLimit = avatarExperienceFlagsModule.FIntAXWidgetLoadedItemCountLimit
+local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
+local getUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
+local WIDGET_LOADED = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED
 
-return function(p0, p1) --[[ line: 4 | named "logWidgetLoaded" ]]
-	-- upvalues: sendUnifiedEventLogModule (ref), unifiedEventLogEnumsModule (ref)
+local function logWidgetLoaded(p0, p1) --[[ line: 16 ]]
+	-- upvalues: fFlagAXDeferWidgetLoadedUntilMarketplaceEntered (ref), getUnifiedDeferredEventStoreModule (ref), WIDGET_LOADED (ref), logWidgetLoaded (ref), fFlagAXLimitWidgetLoadedItemCount (ref), fIntAXWidgetLoadedItemCountLimit (ref), sendUnifiedEventLogModule (ref), unifiedEventLogEnumsModule (ref)
+	if fFlagAXDeferWidgetLoadedUntilMarketplaceEntered then
+		local var5 = getUnifiedDeferredEventStoreModule(false)
+		
+		if not var5.isEntered(false) then
+			var5.enqueue(WIDGET_LOADED, function() --[[ line: 20 ]]
+				-- upvalues: logWidgetLoaded (copy), p0 (ref), p1 (ref)
+				logWidgetLoaded(p0, p1)
+			end)
+			
+			return
+		end
+	end
 	for i, v in p0 do
 		local t = {}
 		local t_1 = {}
@@ -10,6 +28,7 @@ return function(p0, p1) --[[ line: 4 | named "logWidgetLoaded" ]]
 		
 		if v.content then
 			for i_1, v_1 in v.content do
+				if fFlagAXLimitWidgetLoadedItemCount and fIntAXWidgetLoadedItemCountLimit <= #t_2 then break end
 				if v_1.type == "Asset" then
 					table.insert(t, v_1.id)
 				elseif v_1.type == "Bundle" then
@@ -32,3 +51,5 @@ return function(p0, p1) --[[ line: 4 | named "logWidgetLoaded" ]]
 		})
 	end
 end
+
+return logWidgetLoaded

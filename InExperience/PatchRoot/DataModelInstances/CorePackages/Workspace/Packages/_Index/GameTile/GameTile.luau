@@ -23,6 +23,7 @@
 	getValidTileBadges = require(script.Overlays.getValidTileBadges),
 	useIsVideoEligible = require(script.Video.useIsVideoEligible),
 	useVideoAnalytics = require(script.Video.Analytics.useVideoAnalytics),
+	TileVideoBlockingConfig = require(script.Video.TileVideoBlockingConfig),
 	formatExperienceIcon = require(script.formatExperienceIcon),
 	formatExperienceRating = require(script.formatExperienceRating),
 	formatExperienceThumbnail = require(script.formatExperienceThumbnail),

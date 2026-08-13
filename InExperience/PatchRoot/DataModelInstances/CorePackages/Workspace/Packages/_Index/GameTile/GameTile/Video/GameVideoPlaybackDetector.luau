@@ -14,40 +14,23 @@ local getPlaybackDetectionMethod = videoUtilsModule.getPlaybackDetectionMethod
 local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
 local videoEndReason = videoUtilsModule.AnalyticsEnums.VideoEndReason
 local useCanDevicePlayVideoPreview = videoUtilsModule.useCanDevicePlayVideoPreview
+local tileVideoBlockingConfigModule = require(gameTile.Video.TileVideoBlockingConfig)
 local fetchGamePlayabilityAndProductInfo = require(parent.GameDetailRodux).FetchGamePlayabilityAndProductInfo
 local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
-local luaAppGameTileVideoManufacturerDeny = game:DefineFastFlag("LuaAppGameTileVideoManufacturerDeny", false)
-local luaAppGameTileVideoDeviceDeny = game:DefineFastFlag("LuaAppGameTileVideoDeviceDeny", false)
-local luaAppGameTileVideoMaxMemoryDeny = game:DefineFastFlag("LuaAppGameTileVideoMaxMemoryDeny", false)
-local luaAppGameTileVideoAvailableRamDeny = game:DefineFastFlag("LuaAppGameTileVideoAvailableRamDeny", false)
-local luaAppGameTileVideoMaxMemoryThresholdMb = game:DefineFastInt("LuaAppGameTileVideoMaxMemoryThresholdMb", -1)
-local luaAppGameTileVideoAvailableRamThresholdMb = game:DefineFastInt("LuaAppGameTileVideoAvailableRamThresholdMb", -1)
-local luaAppGameTileVideoManufacturerPipeDenyList = game:DefineFastString("LuaAppGameTileVideoManufacturerPipeDenyList", "")
-local luaAppGameTileVideoDevicePipeDenyList = game:DefineFastString("LuaAppGameTileVideoDevicePipeDenyList", "")
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
-local t = {
-	enableManufacturerDeny = luaAppGameTileVideoManufacturerDeny,
-	enableDeviceDeny = luaAppGameTileVideoDeviceDeny,
-	enableMaxMemoryDeny = luaAppGameTileVideoMaxMemoryDeny,
-	enableAvailableRamDeny = luaAppGameTileVideoAvailableRamDeny,
-	maxMemoryThresholdMb = luaAppGameTileVideoMaxMemoryThresholdMb,
-	availableRamThresholdMb = luaAppGameTileVideoAvailableRamThresholdMb,
-	manufacturerDenyList = luaAppGameTileVideoManufacturerPipeDenyList,
-	deviceDenyList = luaAppGameTileVideoDevicePipeDenyList
-}
 
-return function(p0) --[[ line: 74 | named "GameVideoPlaybackDetector" ]]
-	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), useIsVideoEligibleModule (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), t (ref), retrievalStatus (ref), videoEndReason (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), usePreferredInput (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref)
-	local var14 = useDispatch()
-	local var15 = useRoactService(roactNetworking)
-	local var16 = useSelector(function(p1) --[[ line: 78 ]]
+return function(p0) --[[ line: 54 | named "GameVideoPlaybackDetector" ]]
+	-- upvalues: useDispatch (ref), useRoactService (ref), roactNetworking (ref), useSelector (ref), fetchGamePlayabilityAndProductInfo (ref), useIsVideoEligibleModule (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), reactModule (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfigModule (ref), retrievalStatus (ref), videoEndReason (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), usePreferredInput (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref)
+	local var6 = useDispatch()
+	local var7 = useRoactService(roactNetworking)
+	local var8 = useSelector(function(p1) --[[ line: 58 ]]
 		-- upvalues: fetchGamePlayabilityAndProductInfo (copy), p0 (ref)
 		return fetchGamePlayabilityAndProductInfo.GetFetchingStatus(p1, p0.universeId)
 	end)
-	local var17 = useIsVideoEligibleModule(p0.universeId, if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p0.hasPrevalidatedVideoGamePlayability else nil)
-	local var18, var19 = reactModule.useState(false)
-	local var20 = useCanDevicePlayVideoPreview(t, p0.universeId, p0.pageContext)
+	local var9 = useIsVideoEligibleModule(p0.universeId, if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p0.hasPrevalidatedVideoGamePlayability else nil)
+	local var10, var11 = reactModule.useState(false)
+	local var12 = useCanDevicePlayVideoPreview(tileVideoBlockingConfigModule, p0.universeId, p0.pageContext)
 	
 	return reactModule.createElement(videoPlaybackDetector, {
 		videoKey = p0.videoKey,
@@ -63,21 +46,21 @@ return function(p0) --[[ line: 74 | named "GameVideoPlaybackDetector" ]]
 		videoAnalytics = p0.videoAnalytics,
 		videoDwellTimeInSec = p0.videoDwellTimeInSec,
 		videoVisiblePercent = p0.videoVisiblePercent,
-		isVideoEligible = var17 and var18,
-		onVideoIneligible = reactModule.useCallback(function(p2) --[[ line: 94 ]]
-			-- upvalues: p0 (ref), var16 (ref), retrievalStatus (copy), videoEndReason (copy)
-			if p0.videoAnalytics and var16 == retrievalStatus.Done then
+		isVideoEligible = var9 and var10,
+		onVideoIneligible = reactModule.useCallback(function(p2) --[[ line: 74 ]]
+			-- upvalues: p0 (ref), var8 (ref), retrievalStatus (copy), videoEndReason (copy)
+			if p0.videoAnalytics and var8 == retrievalStatus.Done then
 				p0.videoAnalytics.reportVideoEnd(p0.itemIndex, videoEndReason.PlayabilityCheckFailed, p2, -1)
 			end
-		end, { p0.videoAnalytics, var16 }),
-		onPlaybackCandidate = reactModule.useCallback(function() --[[ line: 101 ]]
-			-- upvalues: var16 (ref), retrievalStatus (copy), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p0 (ref), var14 (ref), fetchGamePlayabilityAndProductInfo (copy), var15 (ref), var19 (ref), var20 (ref)
-			if (var16 == retrievalStatus.NotStarted or var16 == retrievalStatus.Failed) and (if fFlagLuaAppUsePrevalidatedVideoGamePlayability then not p0.hasPrevalidatedVideoGamePlayability else true) then
-				var14(fetchGamePlayabilityAndProductInfo.Fetch(var15, p0.universeId))
+		end, { p0.videoAnalytics, var8 }),
+		onPlaybackCandidate = reactModule.useCallback(function() --[[ line: 81 ]]
+			-- upvalues: var8 (ref), retrievalStatus (copy), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p0 (ref), var6 (ref), fetchGamePlayabilityAndProductInfo (copy), var7 (ref), var11 (ref), var12 (ref)
+			if (var8 == retrievalStatus.NotStarted or var8 == retrievalStatus.Failed) and (if fFlagLuaAppUsePrevalidatedVideoGamePlayability then not p0.hasPrevalidatedVideoGamePlayability else true) then
+				var6(fetchGamePlayabilityAndProductInfo.Fetch(var7, p0.universeId))
 			end
-			var19(var20())
+			var11(var12())
 		end, {
-			p0.universeId, var16, var14, var15, var20,
+			p0.universeId, var8, var6, var7, var12,
 			if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p0.hasPrevalidatedVideoGamePlayability else nil
 		}),
 		viewportVideoAutoplayController = if p0.videoPlaybackContext then p0.videoPlaybackContext.viewportVideoAutoplayController else nil

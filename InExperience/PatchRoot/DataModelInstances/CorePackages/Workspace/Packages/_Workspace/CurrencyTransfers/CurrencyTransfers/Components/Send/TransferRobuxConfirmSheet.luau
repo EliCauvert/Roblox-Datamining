@@ -27,52 +27,51 @@ local currencyTransferTelemetryModule = require(currencyTransfers.Events.Currenc
 local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
 local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
 local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
-local getFFlagCurrencyTransferFixBalanceReRenderModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFixBalanceReRender)
 local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
 local getFIntCurrencyTransferDeveloperCommissionRateModule = require(currencyTransfers.Flags.GetFIntCurrencyTransferDeveloperCommissionRate)
 local getFIntCurrencyTransferPlatformFeeRateModule = require(currencyTransfers.Flags.GetFIntCurrencyTransferPlatformFeeRate)
 
-return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), getFFlagCurrencyTransferFixBalanceReRenderModule (ref), signalsReactModule (ref), transferOriginationModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (ref), getFIntCurrencyTransferPlatformFeeRateModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), transferProfileThumbnailModule (ref), text (ref), getIconRichText (ref), enums (ref), iconVariant (ref), robuxTextModule (ref), button (ref), setTransferPromptStateModule (ref), promptStateModule (ref), processTransferModule (ref), buttonVariant (ref), fillBehavior (ref), foundationModule (ref)
-	local var22 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxConfirmSheet)
-	local var23 = useTransferStoreModule()
-	reactModule.useEffect(function() --[[ line: 66 ]]
-		-- upvalues: logCurrencyTransferCounterModule (copy), var23 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		logCurrencyTransferCounterModule(var23, currencyTransferTelemetryModule.CurrencyTransferConfirmSheetShownCounter)
+return function(_) --[[ line: 57 | named "TransferRobuxConfirmSheet" ]]
+	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), transferOriginationModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (ref), getFIntCurrencyTransferPlatformFeeRateModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), transferProfileThumbnailModule (ref), text (ref), getIconRichText (ref), enums (ref), iconVariant (ref), robuxTextModule (ref), button (ref), setTransferPromptStateModule (ref), promptStateModule (ref), processTransferModule (ref), buttonVariant (ref), fillBehavior (ref), foundationModule (ref)
+	local var21 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxConfirmSheet)
+	local var22 = useTransferStoreModule()
+	reactModule.useEffect(function() --[[ line: 62 ]]
+		-- upvalues: logCurrencyTransferCounterModule (copy), var22 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
+		logCurrencyTransferCounterModule(var22, currencyTransferTelemetryModule.CurrencyTransferConfirmSheetShownCounter)
 		
 		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(var23, robuxTransferFlowEventNameModule.confirm_shown)
+			logRobuxTransferFlowEventModule(var22, robuxTransferFlowEventNameModule.confirm_shown)
 		end
 		return nil
-	end, { var23 })
-	local var24 = if getFFlagCurrencyTransferFixBalanceReRenderModule() then signalsReactModule.useSignalState(var23.getRobuxBalanceAmount) or 0 else var23.getRobuxBalanceAmount(false)
-	local var25 = if getFFlagCurrencyTransferFixBalanceReRenderModule() then signalsReactModule.useSignalState(var23.getSelectedAmount) or 0 else var23.getSelectedAmount(false) or 0
-	local userRelationshipDetail = var23.getUserRelationshipDetail(false)
-	local recipient = var23.getRecipient(false)
-	local var28 = var23.getTransferOrigination(false) == transferOriginationModule.InExperience
-	local triggerOnClose = var23.triggerOnClose
+	end, { var22 })
+	local getRobuxBalanceAmount = signalsReactModule.useSignalState(var22.getRobuxBalanceAmount) or 0
+	local getSelectedAmount = signalsReactModule.useSignalState(var22.getSelectedAmount) or 0
+	local userRelationshipDetail = var22.getUserRelationshipDetail(false)
+	local recipient = var22.getRecipient(false)
+	local var27 = var22.getTransferOrigination(false) == transferOriginationModule.InExperience
+	local triggerOnClose = var22.triggerOnClose
 	local year = os.date("*t").year
-	local var29, var30 = reactModule.useState(userRelationshipDetail)
-	local var31, var32 = reactModule.useState(recipient)
-	reactModule.useEffect(function() --[[ line: 90 ]]
-		-- upvalues: userRelationshipDetail (ref), var30 (ref)
+	local var28, var29 = reactModule.useState(userRelationshipDetail)
+	local var30, var31 = reactModule.useState(recipient)
+	reactModule.useEffect(function() --[[ line: 82 ]]
+		-- upvalues: userRelationshipDetail (ref), var29 (ref)
 		if userRelationshipDetail then
-			var30(userRelationshipDetail)
+			var29(userRelationshipDetail)
 		end
 	end, { userRelationshipDetail })
-	reactModule.useEffect(function() --[[ line: 96 ]]
-		-- upvalues: recipient (ref), var32 (ref)
+	reactModule.useEffect(function() --[[ line: 88 ]]
+		-- upvalues: recipient (ref), var31 (ref)
 		if recipient then
-			var32(recipient)
+			var31(recipient)
 		end
 	end, { recipient })
-	local var33 = reactModule.useMemo(function() --[[ line: 103 ]]
-		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var29 (ref), var22 (ref), year (ref)
+	local var32 = reactModule.useMemo(function() --[[ line: 95 ]]
+		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var28 (ref), var21 (ref), year (ref)
 		if getFFlagCurrencyTransferFlowUIImprovementFixModule() then
-			if not var29 or not var29.friendSinceDate then
-				return var22.NewConnection
+			if not var28 or not var28.friendSinceDate then
+				return var21.NewConnection
 			end
-			local friendSinceDate = var29.friendSinceDate
+			local friendSinceDate = var28.friendSinceDate
 			local timestamp = os.time()
 			local floored = math.floor((timestamp - os.time({
 				hour = 0,
@@ -84,54 +83,57 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 			})) / 86400)
 			
 			if floored < 1 then
-				return var22.NewConnection
+				return var21.NewConnection
 			end
 			local dateString = os.date("*t", timestamp)
-			local var41 = (dateString.year - friendSinceDate.year) * 12 + (dateString.month - friendSinceDate.month)
+			local var40 = (dateString.year - friendSinceDate.year) * 12 + (dateString.month - friendSinceDate.month)
 			
 			if dateString.day < friendSinceDate.day then
-				var41 -= 1
+				var40 -= 1
 			end
-			return if var41 >= 12 then string.gsub(var22.ConnectedYear, "{year}", tostring(math.floor(var41 / 12))) elseif var41 >= 1 then if var41 <= 1 then string.gsub(var22.ConnectedMonthsSingular, "{amount}", tostring(var41)) else string.gsub(var22.ConnectedMonths, "{amount}", tostring(var41)) elseif floored <= 1 then string.gsub(var22.ConnectedDaysSingular, "{amount}", tostring(floored)) else string.gsub(var22.ConnectedDays, "{amount}", tostring(floored))
-		elseif not var29 or not var29.friendSinceYear then
-			return var22.NewConnection
+			return if var40 >= 12 then string.gsub(var21.ConnectedYear, "{year}", tostring(math.floor(var40 / 12))) elseif var40 >= 1 then if var40 <= 1 then string.gsub(var21.ConnectedMonthsSingular, "{amount}", tostring(var40)) else string.gsub(var21.ConnectedMonths, "{amount}", tostring(var40)) elseif floored <= 1 then string.gsub(var21.ConnectedDaysSingular, "{amount}", tostring(floored)) else string.gsub(var21.ConnectedDays, "{amount}", tostring(floored))
+		elseif not var28 or not var28.friendSinceYear then
+			return var21.NewConnection
 		end
-		local var42 = year - var29.friendSinceYear
+		local var41 = year - var28.friendSinceYear
 		
-		return if var42 == 0 then var22.NewConnection else string.gsub(var22.ConnectedYear, "{year}", tostring(var42))
+		return if var41 == 0 then var21.NewConnection else string.gsub(var21.ConnectedYear, "{year}", tostring(var41))
 	end, {
-		year, var29, var22.ConnectedYear, var22.ConnectedMonths,
-		var22.ConnectedMonthsSingular, var22.ConnectedDays,
-		var22.ConnectedDaysSingular, var22.NewConnection
+		year, var28, var21.ConnectedYear, var21.ConnectedMonths,
+		var21.ConnectedMonthsSingular, var21.ConnectedDays,
+		var21.ConnectedDaysSingular, var21.NewConnection
 	})
-	local var34 = reactModule.useMemo(function() --[[ line: 166 ]]
-		-- upvalues: var29 (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var22 (ref)
-		local mutualFriendsCount = var29.mutualFriendsCount
+	local var33 = reactModule.useMemo(function() --[[ line: 158 ]]
+		-- upvalues: var28 (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var21 (ref)
+		local mutualFriendsCount = var28.mutualFriendsCount
 		
-		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() and var29.areFriends and mutualFriendsCount <= 1 then string.gsub(var22.MutualConnectionSingular, "{amount}", tostring(mutualFriendsCount)) else string.gsub(var22.MutualConnection, "{amount}", tostring(mutualFriendsCount))
+		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() and var28.areFriends and mutualFriendsCount <= 1 then string.gsub(var21.MutualConnectionSingular, "{amount}", tostring(mutualFriendsCount)) else string.gsub(var21.MutualConnection, "{amount}", tostring(mutualFriendsCount))
 	end, {
-		var29.mutualFriendsCount,
-		var29.areFriends,
-		var22.MutualConnection,
-		var22.MutualConnectionSingular
+		var28.mutualFriendsCount,
+		var28.areFriends,
+		var21.MutualConnection,
+		var21.MutualConnectionSingular
 	})
-	local var35 = reactModule.useMemo(function() --[[ line: 185 ]]
-		-- upvalues: var22 (ref), var29 (ref)
-		return string.gsub(var22.JoinedInYear, "{year}", tostring(var29.userAccountSinceYear))
-	end, { var29.userAccountSinceYear })
-	local var36 = reactModule.useMemo(function() --[[ line: 190 ]]
-		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var28 (ref), var25 (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (copy), getFIntCurrencyTransferPlatformFeeRateModule (copy), var22 (ref)
-		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() then if var28 and var25 then string.gsub(string.gsub(var22.RecipientWillGetInGame, "{amount}", tostring(math.ceil(var25 * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))), "{commissionPercentage}", tostring(getFIntCurrencyTransferDeveloperCommissionRateModule())) elseif var25 then string.gsub(var22.RecipientWillGetInApp, "{amount}", tostring(var25)) else nil elseif var28 and var25 then string.gsub(var22.RecipientWillGet, "{amount}", tostring(math.ceil(var25 * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))) else nil
+	local var34 = reactModule.useMemo(function() --[[ line: 177 ]]
+		-- upvalues: var21 (ref), var28 (ref)
+		return string.gsub(var21.JoinedInYear, "{year}", tostring(var28.userAccountSinceYear))
+	end, { var28.userAccountSinceYear })
+	local var35 = reactModule.useMemo(function() --[[ line: 182 ]]
+		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var27 (ref), getSelectedAmount (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (copy), getFIntCurrencyTransferPlatformFeeRateModule (copy), var21 (ref)
+		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() then if var27 and getSelectedAmount then string.gsub(string.gsub(var21.RecipientWillGetInGame, "{amount}", tostring(math.ceil(getSelectedAmount * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))), "{commissionPercentage}", tostring(getFIntCurrencyTransferDeveloperCommissionRateModule())) elseif getSelectedAmount then string.gsub(var21.RecipientWillGetInApp, "{amount}", tostring(getSelectedAmount)) else nil elseif var27 and getSelectedAmount then string.gsub(var21.RecipientWillGet, "{amount}", tostring(math.ceil(getSelectedAmount * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))) else nil
 	end, {
-		var28, var25, var22.RecipientWillGet, var22.RecipientWillGetInGame,
-		var22.RecipientWillGetInApp,
+		var27, getSelectedAmount, var21.RecipientWillGet, var21.RecipientWillGetInGame,
+		var21.RecipientWillGetInApp,
 		getFFlagCurrencyTransferFlowUIImprovementFixModule()
 	})
-	local var37 = getFFlagCurrencyTransferFlowUIImprovementFixModule() and not var29.areFriends
+	local var36 = getFFlagCurrencyTransferFlowUIImprovementFixModule() and not var28.areFriends
 	
 	return reactModule.createElement(sheet.Root, { preferCenterSheet = true, onClose = triggerOnClose }, {
 		Header = reactModule.createElement(sheet.Header, {}, {
-			TransferRobuxHeader = reactModule.createElement(transferRobuxHeaderModule, { titleText = var22.SendRobux, robuxBalanceAmount = var24 })
+			TransferRobuxHeader = reactModule.createElement(transferRobuxHeaderModule, {
+				titleText = var21.SendRobux,
+				robuxBalanceAmount = getRobuxBalanceAmount
+			})
 		}),
 		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
 			SheetContentContainer = reactModule.createElement(view, { tag = "col gap-large auto-y size-full-0 align-x-center" }, {
@@ -140,12 +142,12 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 					Size = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then nil else UDim2.new(1, 0, 0, 250),
 					tag = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then "col gap-xlarge align-x-center bg-shift-100 size-full-0 auto-y radius-medium padding-large" else "col gap-xlarge align-x-center bg-shift-100 align-y-center radius-medium padding-large"
 				}, {
-					RecipientProfile = if var31 and var31.targetId then reactModule.createElement(transferProfileThumbnailModule, {
+					RecipientProfile = if var30 and var30.targetId then reactModule.createElement(transferProfileThumbnailModule, {
 						showUsername = true,
 						layoutOrder = 1,
-						userId = tostring(var31.targetId),
-						username = var31.targetName,
-						displayName = var31.targetDisplayName,
+						userId = tostring(var30.targetId),
+						username = var30.targetName,
+						displayName = var30.targetDisplayName,
 						size = UDim2.fromOffset(60, 60),
 						thumbnailSize = Enum.ThumbnailSize.Size48x48
 					}) else nil,
@@ -157,13 +159,13 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 							tag = "row align-x-center align-y-center auto-xy",
 							LayoutOrder = 1
 						}, {
-							ConnectedDetail = if var29 and var29.areFriends then reactModule.createElement(text, {
+							ConnectedDetail = if var28 and var28.areFriends then reactModule.createElement(text, {
 								tag = "auto-xy text-body-medium content-default text-no-wrap",
 								RichText = true,
 								LayoutOrder = 1,
-								Text = `{getIconRichText(enums.IconName.Calendar, iconVariant.Filled)} {var33}`
+								Text = `{getIconRichText(enums.IconName.Calendar, iconVariant.Filled)} {var32}`
 							}) else nil,
-							Spacer = if var29 and var29.areFriends then reactModule.createElement(view, {
+							Spacer = if var28 and var28.areFriends then reactModule.createElement(view, {
 								tag = "auto-xy",
 								LayoutOrder = 2,
 								Size = UDim2.new(0, 8, 0, 0)
@@ -172,25 +174,25 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 								tag = "auto-xy text-body-medium content-default text-no-wrap",
 								RichText = true,
 								LayoutOrder = 3,
-								Text = `{getIconRichText(enums.IconName.TwoPeople, iconVariant.Filled)} {var34}`
+								Text = `{getIconRichText(enums.IconName.TwoPeople, iconVariant.Filled)} {var33}`
 							}),
-							Spacer2 = if var37 then reactModule.createElement(view, {
+							Spacer2 = if var36 then reactModule.createElement(view, {
 								tag = "auto-xy",
 								LayoutOrder = 4,
 								Size = UDim2.new(0, 8, 0, 0)
 							}) else nil,
-							InlineJoinedDetail = if var37 then reactModule.createElement(text, {
+							InlineJoinedDetail = if var36 then reactModule.createElement(text, {
 								tag = "auto-xy text-body-medium content-default text-no-wrap",
 								RichText = true,
 								LayoutOrder = 5,
-								Text = `{getIconRichText(enums.IconName.CircleI, iconVariant.Filled)} {var35}`
+								Text = `{getIconRichText(enums.IconName.CircleI, iconVariant.Filled)} {var34}`
 							}) else nil
 						}),
-						JoinedDetail = if var37 then nil else reactModule.createElement(text, {
+						JoinedDetail = if var36 then nil else reactModule.createElement(text, {
 							tag = "auto-xy text-body-medium content-default text-no-wrap padding-y-xsmall",
 							RichText = true,
 							LayoutOrder = 2,
-							Text = `{getIconRichText(enums.IconName.CircleI, iconVariant.Filled)} {var35}`
+							Text = `{getIconRichText(enums.IconName.CircleI, iconVariant.Filled)} {var34}`
 						})
 					})
 				}),
@@ -198,10 +200,10 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 					LayoutOrder = 2,
 					tag = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then "col align-x-center align-y-center size-full-0 auto-y radius-medium bg-shift-100 padding-large" else "col align-x-center align-y-center size-full-2000 radius-medium bg-shift-100"
 				}, {
-					Amount = reactModule.createElement(robuxTextModule, { layoutOrder = 1, amount = var25 or 0 }),
-					RecipientText = if var36 then reactModule.createElement(text, {
+					Amount = reactModule.createElement(robuxTextModule, { layoutOrder = 1, amount = getSelectedAmount or 0 }),
+					RecipientText = if var35 then reactModule.createElement(text, {
 						LayoutOrder = 2,
-						Text = var36,
+						Text = var35,
 						tag = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then "size-full-0 auto-y text-body-small text-wrap text-align-x-center content-default" else "auto-xy text-caption-small text-align-x-center content-muted"
 					}) else nil
 				})
@@ -217,26 +219,26 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 				}, {
 					SendButton = reactModule.createElement(button, {
 						LayoutOrder = 1,
-						text = var22.Send,
-						onActivated = function() --[[ line: 369 ]]
-							-- upvalues: var25 (ref), var24 (ref), setTransferPromptStateModule (copy), var23 (ref), promptStateModule (copy), processTransferModule (copy)
-							if var25 and var24 < var25 then
-								setTransferPromptStateModule(var23, promptStateModule.TransferInsufficientBalance)
+						text = var21.Send,
+						onActivated = function() --[[ line: 361 ]]
+							-- upvalues: getSelectedAmount (ref), getRobuxBalanceAmount (ref), setTransferPromptStateModule (copy), var22 (ref), promptStateModule (copy), processTransferModule (copy)
+							if getSelectedAmount and getRobuxBalanceAmount < getSelectedAmount then
+								setTransferPromptStateModule(var22, promptStateModule.TransferInsufficientBalance)
 								
 								return
 							end
-							processTransferModule(var23, var25 or 0)
+							processTransferModule(var22, getSelectedAmount or 0)
 						end,
-						inputDelay = if var28 then 2.5 else nil,
+						inputDelay = if var27 then 2.5 else nil,
 						variant = buttonVariant.Emphasis,
 						fillBehavior = fillBehavior.Fill
 					}),
-					EditButton = if not var28 then reactModule.createElement(button, {
+					EditButton = if not var27 then reactModule.createElement(button, {
 						LayoutOrder = 2,
-						text = var22.Edit,
-						onActivated = function() --[[ line: 384 ]]
-							-- upvalues: setTransferPromptStateModule (copy), var23 (ref), promptStateModule (copy)
-							setTransferPromptStateModule(var23, promptStateModule.TransferInput)
+						text = var21.Edit,
+						onActivated = function() --[[ line: 376 ]]
+							-- upvalues: setTransferPromptStateModule (copy), var22 (ref), promptStateModule (copy)
+							setTransferPromptStateModule(var22, promptStateModule.TransferInput)
 						end,
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill
@@ -245,7 +247,7 @@ return function(_) --[[ line: 61 | named "TransferRobuxConfirmSheet" ]]
 				Disclaimer = reactModule.createElement(foundationModule.Text, {
 					tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-left",
 					LayoutOrder = 2,
-					Text = var22.AgeEstimationDisclaimer
+					Text = var21.AgeEstimationDisclaimer
 				})
 			})
 		})

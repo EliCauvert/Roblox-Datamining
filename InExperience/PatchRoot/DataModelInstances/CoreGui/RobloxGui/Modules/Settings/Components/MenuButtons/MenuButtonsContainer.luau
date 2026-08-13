@@ -13,7 +13,7 @@ return function(p0) --[[ line: 27 | named "Container" ]]
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			MenuButtons = reactModule.createElement(menuButtonsModule, p0)
 		})
 	})

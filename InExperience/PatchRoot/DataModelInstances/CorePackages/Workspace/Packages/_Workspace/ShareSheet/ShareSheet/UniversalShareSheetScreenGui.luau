@@ -23,7 +23,7 @@ local function UniversalShareSheetScreenGui() --[[ line: 22 ]]
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 		ref = var9
 	}, {
-		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			LocalizationProvider = reactModule.createElement(localizationProvider, {
 				localization = reactModule.useMemo(function() --[[ line: 26 ]]
 					-- upvalues: localization (copy), var10 (ref)

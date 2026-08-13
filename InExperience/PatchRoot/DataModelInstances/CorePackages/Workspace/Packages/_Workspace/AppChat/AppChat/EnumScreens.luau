@@ -24,6 +24,7 @@
 	TrustedConnectionsUpsell = "TrustedConnectionsUpsell",
 	GroupOSADialog = "GroupOSADialog",
 	GameDetail = "GameDetail",
+	MomentsImmersive = "MomentsImmersive",
 	Notifications = "Notifications",
 	PrivacySettings = "PrivacySettings",
 	ReportAbuse = "ReportAbuse",

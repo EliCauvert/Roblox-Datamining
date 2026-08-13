@@ -567,6 +567,7 @@ function chatConversation.render(p38) --[[ line: 588 ]]
 							messageHiddenNoticeText = p38.props.messageHiddenNoticeText,
 							unknownUserText = p38.props.unknownUserText,
 							openGameDetailsPage = p38.props.openGameDetailsPage,
+							openMomentsDeepLink = p38.props.openMomentsDeepLink,
 							scrollToTopOnInitialOsaLoad = p38.props.scrollToTopOnInitialOsaLoad,
 							isInitialMessageLoading = p38.props.isInitialMessageLoading
 						}),

@@ -111,7 +111,7 @@ local function ResetCharacterContainer(value) --[[ line: 147 ]]
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var25 }, {
 				ResetCharacterButtonsContainer = reactModule.createElement(ResetCharacterButtonsContainer, value)
 			})

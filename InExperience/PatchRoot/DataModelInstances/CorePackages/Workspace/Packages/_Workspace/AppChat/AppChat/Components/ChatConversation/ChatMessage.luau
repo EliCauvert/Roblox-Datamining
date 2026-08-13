@@ -3,6 +3,7 @@
 if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local parent = appChat.Parent
 	local cryoModule = require(parent.Cryo)
+	local _ = require(parent.MomentsTypes)
 	local reactModule = require(parent.React)
 	local text = require(parent.AppCommonLib).Text
 	local plainTextAutomaticSizeModule = require(script.Parent.PlainTextAutomaticSize)
@@ -35,7 +36,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		component = hiddenMessageModule
 	}
 	
-	local function _(p0) --[[ line: 51 | named "getMessageComponent" ]]
+	local function _(p0) --[[ line: 52 | named "getMessageComponent" ]]
 		-- upvalues: messageModelModule (ref), t_1 (ref), t (ref)
 		return if p0 and p0.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[p0.messageType]
 	end
@@ -47,8 +48,8 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 			placeId = nil,
 			universeId = nil,
 			senderUserId = nil,
-			onDetailsOpened = function() --[[ line: 114 ]] end,
-			openGameDetailsPage = function() --[[ line: 115 ]] end
+			onDetailsOpened = function() --[[ line: 118 ]] end,
+			openGameDetailsPage = function() --[[ line: 119 ]] end
 		},
 		conversationId = nil,
 		BackgroundColor3 = nil,
@@ -74,7 +75,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		Transparency = nil,
 		wideMode = false,
 		viewProfileOnAvatarPressed = true,
-		closeKeyboard = function() --[[ line: 141 ]] end,
+		closeKeyboard = function() --[[ line: 145 ]] end,
 		inputBoxRef = nil,
 		repliesTo = nil,
 		translatedText = nil,
@@ -85,15 +86,15 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		unknownUserText = "PLACEHOLDER unknown user"
 	}
 	
-	return function(p1) --[[ line: 153 ]]
+	return function(p1) --[[ line: 157 ]]
 		-- upvalues: cryoModule (ref), t_2 (ref), useTokens (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), text (ref), messageModelModule (ref), t_1 (ref), t (ref), pruneConsecutiveNewLines (ref), loggerModule (ref), view (ref), chatMessageContainerAutomaticSizeModule (ref), image (ref)
 		local var15 = cryoModule.Dictionary.union(t_2, p1)
 		
-		local function _(p2) --[[ line: 158 | named "getModeratedText" ]]
+		local function _(p2) --[[ line: 162 | named "getModeratedText" ]]
 			return string.gsub(p2, "[^%s]", "#")
 		end
 		
-		local function messageMaxWidth(a, b) --[[ line: 162 ]]
+		local function messageMaxWidth(a, b) --[[ line: 166 ]]
 			local var23 = 128
 			
 			if a then
@@ -103,15 +104,15 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 		end
 		
 		local var17 = useTokens()
-		local var18 = if fFlagAppChatEnableAutotranslationModule then reactModule.useCallback(function(p7, p8, p9, p10, p11) --[[ line: 176 ]]
+		local var18 = if fFlagAppChatEnableAutotranslationModule then reactModule.useCallback(function(p7, p8, p9, p10, p11) --[[ line: 180 ]]
 			-- upvalues: text (copy), var17 (ref)
 			return if p11 then math.max(text.GetTextBounds(p8, p10, var17.Typography.BodySmall.FontSize, Vector2.new(p7, 10000)).X, text.GetTextBounds(p11, p10, p9, Vector2.new(p7, 10000)).X) + 20 else text.GetTextBounds(p8, p10, p9, Vector2.new(p7, 10000)).X + 20
-		end) else reactModule.useCallback(function(p3, p4, p5, p6) --[[ line: 193 ]]
+		end) else reactModule.useCallback(function(p3, p4, p5, p6) --[[ line: 197 ]]
 			-- upvalues: text (copy)
 			return text.GetTextBounds(p4, p6, p5, Vector2.new(p3, 10000)).X + 20
 		end)
 		local var19 = if var15 and var15.visibility == messageModelModule.VisibilityTypes.Hidden then t_1 else t[var15.messageType]
-		local var20 = reactModule.useMemo(function() --[[ line: 200 ]]
+		local var20 = reactModule.useMemo(function() --[[ line: 204 ]]
 			-- upvalues: var15 (ref)
 			local wideMode = var15.wideMode
 			local parentWidth = var15.parentWidth
@@ -136,7 +137,7 @@ if require(appChat.Flags.FFlagAppChatRefactorChatMessage) then
 				messageId = var15.messageId,
 				isPending = var15.isSending or (var15.moderated or var15.failed),
 				visibility = var15.visibility,
-				renderMessage = function(p12, p13) --[[ line: 236 ]]
+				renderMessage = function(p12, p13) --[[ line: 240 ]]
 					-- upvalues: reactModule (copy), image (copy), cryoModule (copy), var15 (ref), content (ref), messageModelModule (copy), t_1 (copy), t (copy), bodyLarge (ref), var20 (ref), fontSize_1 (ref), view (copy), var19 (ref), fFlagAppChatEnableAutotranslationModule (copy), var18 (write), var21 (ref), fontSize (ref)
 					local var27
 					local createElement = reactModule.createElement

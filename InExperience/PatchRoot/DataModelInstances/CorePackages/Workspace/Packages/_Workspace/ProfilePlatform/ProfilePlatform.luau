@@ -24,6 +24,7 @@ return {
 	AvatarHeadshotComponent = if fFlagAddIEMProfilePage then require(script.Components.UserProfileHeader.AvatarHeadshotComponent) else nil,
 	SocialChipCountsRow = if fFlagAddIEMProfilePage then require(script.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer else nil,
 	AboutDetailsSheet = require(script.Components.AboutDetailsSheet),
+	RecentActivityInspectAndBuy = if sharedFlagsModule.FFlagEnableRecentActivityInspectAndBuy then require(script.Components.RecentActivityInspectAndBuy.RecentActivityInspectAndBuyContainer) else nil,
 	MomentsFeedPage = if require(script.Flags.FFlagProfilePlatformEnableMoments) then require(script.Components.Moments.MomentsFeedPage) else nil,
 	useDynamicSizeMargin = if fFlagAddIEMProfilePage then require(script.Hooks.useDynamicSizeMargin) else nil,
 	useProfileJsonComponent = if fFlagAddIEMProfilePage then require(script.Hooks.useProfileJsonComponent) else nil,

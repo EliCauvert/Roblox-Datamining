@@ -13,7 +13,7 @@ return {
 	AssistantBuild = if fFlagAppNavMyStatsTab then require(script.AssistantBuild) else nil,
 	Chat = require(script.ExpChat.ChatChromeIntegration),
 	ConnectUnibar = if argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconUnibar),
-	ConnectDropdown = if sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and sharedFlagsModule.FFlagExpChatEnableFriendsTab and argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),
+	ConnectDropdown = if sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints and sharedFlagsModule.FFlagExpChatCanShowFriendsTab and argoPartyExperimentation.getIsRenameEnabled() then nil else require(script.Connect.ConnectIconDropdown),
 	TrustAndSafety = require(script.TrustAndSafety),
 	DummyWindow = require(script.DummyWindow),
 	DummyWindow2 = require(script.DummyWindow2),

@@ -117,6 +117,9 @@
 	FFlagAXFixCatalogPageButtonSduiCrash = require(script.FFlagAXFixCatalogPageButtonSduiCrash),
 	FFlagAXSduiCatalogScrollImpressions = require(script.FFlagAXSduiCatalogScrollImpressions),
 	FFlagAXFixSingleItemPurchaseWidgetLogging = require(script.FFlagAXFixSingleItemPurchaseWidgetLogging),
+	FFlagAXDeferWidgetLoadedUntilMarketplaceEntered = require(script.FFlagAXDeferWidgetLoadedUntilMarketplaceEntered),
+	FFlagAXLimitWidgetLoadedItemCount = require(script.FFlagAXLimitWidgetLoadedItemCount),
+	FIntAXWidgetLoadedItemCountLimit = require(script.FIntAXWidgetLoadedItemCountLimit),
 	FFlagAXOrganicItemPosition = require(script.FFlagAXOrganicItemPosition),
 	FFlagAXFixSelectedItemIndexBleed = require(script.FFlagAXFixSelectedItemIndexBleed),
 	FFlagAXFixItemDetailsPurchaseAttribution = require(script.FFlagAXFixItemDetailsPurchaseAttribution),
@@ -305,6 +308,7 @@
 	FFlagAXTTIEditorEnableMilestones = require(script.FFlagAXTTIEditorEnableMilestones),
 	FFlagAXEditorEnableThumbnailLatencyStore = require(script.FFlagAXEditorEnableThumbnailLatencyStore),
 	FStringAXRecommendedItemsExposureLayer = require(script.FStringAXRecommendedItemsExposureLayer),
+	FFlagAXAddSearchTrendingChips = require(script.FFlagAXAddSearchTrendingChips),
 	FFlagAXAddHDRowInItemDetailsPage = require(script.FFlagAXAddHDRowInItemDetailsPage),
 	FFlagAXWidgetHeaderTreatEmptyTextAsNil = require(script.FFlagAXWidgetHeaderTreatEmptyTextAsNil),
 	FIntAXOutfitNameMaxLength = require(script.FIntAXOutfitNameMaxLength),
@@ -325,6 +329,7 @@
 	FFlagAXCatalogItemCardDarkerBackgroundLogExposure = require(script.FFlagAXCatalogItemCardDarkerBackgroundLogExposure),
 	FFlagAXCategoryMenuVisualFixes = require(script.FFlagAXCategoryMenuVisualFixes),
 	FFlagAXScrollHighlightedTabIntoView = require(script.FFlagAXScrollHighlightedTabIntoView),
+	FFlagAXMeTabTopScrim = require(script.FFlagAXMeTabTopScrim),
 	FFlagAXSortsBodyTabRecExposureLogging = require(script.FFlagAXSortsBodyTabRecExposureLogging),
 	FStringAXSortsBodyTabRecLayerName = require(script.FStringAXSortsBodyTabRecLayerName),
 	FStringAXTaxonomyM20ExperimentLayerName = require(script.FStringAXTaxonomyM20ExperimentLayerName),
@@ -335,5 +340,6 @@
 	FFlagAXFixLimitedUniqueResale = require(script.FFlagAXFixLimitedUniqueResale),
 	FFlagAXBackgroundGeneration = require(script.FFlagAXBackgroundGeneration),
 	FFlagAXAddSectionsToItemInfoRowPrompt = require(script.FFlagAXAddSectionsToItemInfoRowPrompt),
+	FFlagAXMigrateMaterialsToAttributes = require(script.FFlagAXMigrateMaterialsToAttributes),
 	FFlagAXEnableMakeupOutfitCreation = require(script.FFlagAXEnableMakeupOutfitCreation)
 }

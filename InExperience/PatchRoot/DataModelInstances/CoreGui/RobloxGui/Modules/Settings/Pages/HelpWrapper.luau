@@ -43,7 +43,7 @@ return if fFlagRefactorHelpPage then (function() --[[ line: 45 | named "createHe
 		local var15 = function() --[[ line: 64 ]]
 			-- upvalues: signalsReactModule (copy), var12 (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utils (copy), localizationProvider (copy), var4 (copy), helpReactView (copy)
 			return if signalsReactModule.useSignalState(var12) then reactModule.createElement(foundationProvider, {
-				theme = foundationModule.Enums.Theme.Dark,
+				colorMode = foundationModule.Enums.ColorMode.Dark,
 				device = utils.getDeviceType()
 			}, {
 				Child = reactModule.createElement(localizationProvider, { localization = var4 }, { Root = reactModule.createElement(helpReactView) })
@@ -63,7 +63,7 @@ return if fFlagRefactorHelpPage then (function() --[[ line: 45 | named "createHe
 			local var16 = function() --[[ line: 64 ]]
 				-- upvalues: signalsReactModule (copy), var12 (copy), reactModule (copy), foundationProvider (copy), foundationModule (copy), utils (copy), localizationProvider (copy), var4 (copy), helpReactView (copy)
 				return if signalsReactModule.useSignalState(var12) then reactModule.createElement(foundationProvider, {
-					theme = foundationModule.Enums.Theme.Dark,
+					colorMode = foundationModule.Enums.ColorMode.Dark,
 					device = utils.getDeviceType()
 				}, {
 					Child = reactModule.createElement(localizationProvider, { localization = var4 }, { Root = reactModule.createElement(helpReactView) })

@@ -13,7 +13,8 @@ local t = {
 	Maquettes = "Maquettes",
 	Palisades = "Palisades",
 	Microsoft = "Microsoft",
-	MilkyWay = "MilkyWay"
+	MilkyWay = "MilkyWay",
+	Pioneer = "Pioneer"
 }
 local var3 = enumerate(script.Name, t)
 addRawValueMethodToEnumModule(var3, t)

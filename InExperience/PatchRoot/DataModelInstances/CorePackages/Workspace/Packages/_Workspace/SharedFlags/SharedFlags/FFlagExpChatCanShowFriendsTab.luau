@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatCanShowFriendsTabRC1", false) and (require(script.Parent.GetFFlagEnableAppChatInExperience)() and require(script.Parent.FFlagExpChatEnableFriendsTab))

@@ -596,6 +596,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,Ex
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,Gib hier die korrekte Übersetzung ein
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,Ausgewähltes Bild
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,Originaltext ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,Was ist das Problem mit dieser Übersetzung?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,Falsch übersetzt
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,Unangemessen oder abwertend
@@ -625,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,"Vielen D
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,"Um jüngere Spieler zu schützen, kann über Konten von Personen unter 13 Jahren kein Feedback gesendet werden."
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,Feedback nicht verfügbar
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,Aufnahmen hinzufügen
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,Auswahl bearbeiten
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,Keine Aufnahmen verfügbar.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,Aufnahmen ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,"Hilf dem Creator, dein Problem besser zu verstehen."
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,Aufnahmen werden geladen …
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} – {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max} ausgewählt
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,Eine oder mehrere deiner Aufnahmen konnten nicht hochgeladen werden.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,Fehlerbericht
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,Artikel- oder Datenwiederherstellung
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,Kategorie *
@@ -634,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,Wähle eine 
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,Problem beim Kauf
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,Bis zu {MAX} Zeichen
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,Details *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,Auswahl aufheben
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,"Gib alle relevanten Informationen zum Problem an, z. B. die Spielversion und die Schritte, um das Problem zu reproduzieren."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,"Beschreibe, was fehlt und wann du es zuletzt gesehen hast. Wenn dein Konto gehackt wurde, gib bitte deine Roblox-CS-Ticketnummer und alle relevanten Details an."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,"Beschreibe hier deine Anfrage oder dein Problem. Gib so viele Details wie möglich an, damit wir die Situation verstehen können."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,"Sag uns, was du kaufen wolltest, wann es passiert ist und wie hoch der Gesamtwert war (z. B. 500 Robux / 4,99 USD). Gib auch alle Fehlermeldungen an, die dir angezeigt wurden."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,Möchtest du einen Verstoß melden?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>Reiche stattdessen eine Meldung ein.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,Auswählen
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,"Dies hilft dem Creator, das richtige Konto zu unterstützen."
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,Benutzerinformationen mit dem Creator teilen
@@ -1203,7 +1217,7 @@ Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,Speichern
 Feature.Avatar.Action.SaveAsNew,Als neu speichern
-Feature.Avatar.Action.Select,Auswählen
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,Mehrere Items auswählen
 Feature.Avatar.Action.SelectSlot,Wähle Slot
 Feature.Avatar.Action.Share,Teilen
@@ -1225,6 +1239,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Bestehenden Look aktualisieren
 Feature.Avatar.Action.UpdateMakeupLook,Look aktualisieren
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Stile entdecken
+Feature.Avatar.BackgroundGeneration.Error.Moderation,"Dieser Prompt entspricht nicht unseren Richtlinien. Versuche, etwas anderes zu beschreiben."
+Feature.Avatar.BackgroundGeneration.Error.System,Beim Generieren deines Hintergrunds ist etwas schiefgelaufen. Bitte versuche es erneut.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
+Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
+Feature.Avatar.BackgroundGeneration.Title,Hintergrund erstellen
 Feature.Avatar.Backgrounds.Title,Hintergründe
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Für diesen Körperstil ist keine Anpassung verfügbar.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Zur Standard-Körperfarbe zurückkehren
@@ -1232,6 +1252,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Hautfarbe
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Erstelle deinen eigenen einzigartigen Look mit endlosen Make-up-Kombinationen.
 Feature.Avatar.EmoteAlreadyAssigned,Dieses Emote hat schon einen Slot
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Lass dich inspirieren
@@ -1787,6 +1808,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,Avatar löschen
 Feature.Catalog.Action.DescribeAvatar,Beschreibe deinen Avatar (optional)
 Feature.Catalog.Action.Favorite,Favorit
+Feature.Catalog.Action.Favorites.BrowseMarketplace,Marktplatz durchsuchen
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,Artikeloptionen
 Feature.Catalog.Action.LoadMore,Mehr laden
@@ -2082,6 +2104,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,"Überprüfe oder entferne Artik
 Feature.Catalog.Message.Checkout.UnavailableItems,"Einer oder mehrere Artikel können nicht gekauft werden. Bitte entferne sie, bevor du fortfährst."
 Feature.Catalog.Message.CollectiblesInfo,"Sammler-Items können nach einer bestimmten Haltedauer von Benutzer zu Butzer weiterverkauft werden, auch wenn der Originalbestand nicht ausverkauft ist. Roblox-Plus-Abonnenten können Sammler-Items zum Weiterverkauf anbieten."
 Feature.Catalog.Message.FTUXFavoritePillTooltip,Füge das zu deinen Favoriten hinzu
+Feature.Catalog.Message.Favorites.CategoryEmpty,Du hast noch nichts in dieser Kategorie gespeichert.
+Feature.Catalog.Message.Favorites.Empty,Du hast noch nichts gespeichert.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Entdecke die am besten erstellten Artikel auf Roblox
 Feature.Catalog.Message.HoldingPolicyL1,Käufe aus Weiterverkäufen werden für bis zu {days} Tage gehalten. Der Artikel kann erst nach dieser Haltefrist weiterverkauft werden. Nur Plus-Benutzer können Artikel weiterverkaufen.
 Feature.Catalog.Message.HoldingPolicyL2,Nach dem Kauf werden Original-Verkäufe für bis zu {purchaseDays} Tage gehalten. Der Artikel kann erst nach dieser Haltedauer weiterverkauft werden und Weiterverkäufe werden für bis zu {resaleDays} Tage gehalten. Nur Premium-Benutzer können Artikel weiterverkaufen.
@@ -2166,6 +2190,7 @@ Alle Mitglieder dieser Gruppe werden eingeladen, aber einige sind nicht berechti
 Feature.Chat.Description.ExpressiveChatLearnMore,"Expressive Chat-Funktionen umfassen den Chat ohne Filter und Party-Sprachchat.
 
 Der Zugriff auf den expressiven Chat ist eingeschränkt, bis alle Mitglieder berechtigt sind und dein Chat aktualisiert wurde."
+Feature.Chat.Description.InlineContextCardDescription,"Sei vorsichtig, wenn du mit Fremden chattest. Teile keine persönlichen Informationen mit anderen und wechsle nicht zu einer anderen Chat-App. Du kannst jede Person über ihr Profil blockieren oder melden."
 Feature.Chat.Description.NameGroup,Benenne deine Gruppe
 Feature.Chat.Description.NameGroupChat,Benenne deine Chatgruppe
 Feature.Chat.Description.OSAContextCardDescription,Deine Sicherheit zählt. Du hast ein ungutes Gefühl? Du kannst diese Person jederzeit über ihr Profil blockieren oder melden.
@@ -2185,6 +2210,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,Erste Interaktion mit dieser
 Feature.Chat.Heading.LeaveGroup,Gruppe verlassen
 Feature.Chat.Heading.PartyWithConnections,Party mit Connections
 Feature.Chat.Heading.PartyWithFriends,Party mit Freunden
+Feature.Chat.Heading.SafeChattingWithThisUser,"Sei vorsichtig, wenn du mit dieser Person chattest"
+Feature.Chat.Heading.SafeChattingWithUsername,"Sei vorsichtig, wenn du mit {displayName} chattest"
 Feature.Chat.Heading.UserInvitedYouToJoin,"{combinedName} hat dich eingeladen, beizutreten"
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,"{combinedName} hat dich eingeladen, einer Gruppe beizutreten"
 Feature.Chat.Heading.YouWereInvitedToGroup,"Du wurdest eingeladen, der Gruppe beizutreten"
@@ -2242,7 +2269,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 Std.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 Monat
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 Woche
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} Woche(n)
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,unbekannter Benutzer
 Feature.Chat.Label.User,Benutzer
@@ -2663,6 +2689,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,Die Sponsoring-Information
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Du siehst diesen gesponserten Inhalt auf der Grundlage nicht personalisierter Faktoren wie Geräteinformationen, Standort und Alter, um dir angemessene Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" unter Einstellungen in deinem Konto, hier:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Du siehst diesen gesponserten Inhalt auf der Grundlage verschiedener Faktoren wie Standort, Geräteinformationen, Alter und Plattformverhalten, um dir relevante Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" unter Einstellungen in deinem Konto, hier:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,"Du siehst diesen gesponserten Inhalt auf der Grundlage nicht personalisierter Faktoren wie Geräteinformationen, Standort und Alter, dir eingesetzt werden, um dir angemessene Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt."
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"Du siehst diesen gesponserten Inhalt aufgrund von nicht personalisierten Faktoren wie Geräteinformationen, Standort und Alter, um dir angemessene Inhalte bereitzustellen. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" in den Einstellungen deines Kontos:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Du siehst diesen gesponserten Inhalt aufgrund von verschiedenen Faktoren wie Standort, Geräteinformationen, Alter und Plattformverhalten, um dir relevante Inhalte bereitzustellen. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" in den Einstellungen deines Kontos:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Du siehst diesen gesponserten Inhalt aufgrund von nicht personalisierten Faktoren wie Geräteinformationen, Standort und Alter, die eingesetzt werden, um dir angemessene Inhalte bereitzustellen. Das Sponsoring wurde von {PayerName} bezahlt."
 Feature.GameDetails.Message.SuggestLessOften,Wir werden dir weniger häufig Inhalte wie diese vorschlagen
 Feature.GameDetails.RatingPercentOnly,{percentRating} % Rating
 Feature.GameDetails.Toast.LinkCopied,
@@ -3317,7 +3346,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Wähle Berechtigun
 2. Wähle Kontakte
 3. Gewähre Roblox Zugriff auf deine Kontakte"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Um dich mit Freunden zu verbinden, erlaube Roblox, auf deine Kontakte zuzugreifen."
-Feature.SettingsHub.Description.PeoplesNames,Deine Abzeichen für andere Personen in Experiences anzeigen oder verbergen.
+Feature.SettingsHub.Description.PeoplesNames,Zeige oder verberge deine Abzeichen für andere Personen in Spielen.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Wähle Berechtigung
 2. Wähle Kamera
 3. Gewähre Roblox Zugriff auf deine Kamera"
@@ -3339,7 +3368,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,MicroProfiler
 Feature.SettingsHub.GameSettings.MyBadges,Meine Abzeichen
 Feature.SettingsHub.GameSettings.OutputDevice,Ausgabegerät
 Feature.SettingsHub.GameSettings.PeopleNames,Namen von Personen anzeigen
-Feature.SettingsHub.GameSettings.PeopleNames.Description,"Zeige oder verberge Namen über Personen in Experiences. Einige Experiences haben möglicherweise benutzerdefinierte Einstellungen, die deine Auswahl überschreiben."
+Feature.SettingsHub.GameSettings.PeopleNames.Description,"Zeige oder verberge Namen über Personen in Spielen. Einige Spiele haben möglicherweise benutzerdefinierte Einstellungen, die deine Auswahl überschreiben."
 Feature.SettingsHub.GameSettings.PeoplesNames,Namen von Personen
 Feature.SettingsHub.Heading.InviteFriends,Freunde einladen
 Feature.SettingsHub.Heading.InviteUser,{DisplayName} einladen?
@@ -4190,8 +4219,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} hat die max. Anzahl an Freunden erreicht.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,Zuletzt aktualisiert vor {minutes} Minuten
+InGame.PlayerList.FooterUnableToLoad,Kann nicht geladen werden
+InGame.PlayerList.FriendsEmpty,Noch keiner deiner Freunde hat diese Experience gespielt.
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,Bestenliste nicht verfügbar. Bitte versuche es später erneut.
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,Rang
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,In Studio
 InGame.Presence.Label.Offline,

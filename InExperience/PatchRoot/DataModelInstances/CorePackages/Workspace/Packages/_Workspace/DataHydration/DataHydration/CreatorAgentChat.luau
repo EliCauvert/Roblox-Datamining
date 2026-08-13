@@ -13,6 +13,7 @@ return {
 	SubagentTaskStatus = typesModule.SubagentTaskStatus,
 	SubagentTaskCategory = typesModule.SubagentTaskCategory,
 	StudioClientLogsTool = require(script.StudioClientLogsTool),
+	StudioClientDataModelTools = require(script.StudioClientDataModelTools),
 	ClientToolItems = require(script.ClientToolItems),
 	debug = require(script.debug),
 	experimentOverride = require(script.experimentOverride),

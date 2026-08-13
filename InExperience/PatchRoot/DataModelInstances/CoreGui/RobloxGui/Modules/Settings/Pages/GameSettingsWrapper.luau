@@ -40,7 +40,7 @@ return if fFlagRefactorInExpSettingsInDevelopment then (function() --[[ line: 27
 	end
 	
 	reactRobloxModule.createRoot(var7.Page):render(reactModule.createElement(foundationProvider, {
-		theme = foundationModule.Enums.Theme.Dark,
+		colorMode = foundationModule.Enums.ColorMode.Dark,
 		device = utils.getDeviceType()
 	}, {}))
 	

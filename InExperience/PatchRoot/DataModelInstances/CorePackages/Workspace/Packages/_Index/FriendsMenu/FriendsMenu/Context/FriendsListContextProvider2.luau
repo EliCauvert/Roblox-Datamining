@@ -114,7 +114,7 @@ return function(p0) --[[ line: 57 ]]
 		return if t_1 then cryoModule.List.join(t_1, p1) else p1
 	end
 	
-	t_1 = reactModule.useMemo(function() --[[ line: 154 ]]
+	t_1 = reactModule.useMemo(function() --[[ line: 155 ]]
 		-- upvalues: var20 (ref), getFriendsSearchModule (copy), var17 (write), var18 (ref), var16 (ref), sortInvitesByScoreIXPModule (copy), cryoModule (copy), var29 (ref), var27 (ref), t_1 (write), fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), var26 (ref), var23 (ref)
 		if var20 == "" then
 			if not var27.onlineFriends or not var27.offlineFriends then
@@ -142,18 +142,18 @@ return function(p0) --[[ line: 57 ]]
 			
 			return {}
 		else
-			getFriendsSearchModule(var17, var18, var20, 20):andThen(function(p6) --[[ line: 156 ]]
+			getFriendsSearchModule(var17, var18, var20, 20):andThen(function(p6) --[[ line: 157 ]]
 				-- upvalues: var16 (copy), sortInvitesByScoreIXPModule (copy), cryoModule (copy), var29 (copy)
 				local var33 = if var16 or sortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then {} else nil
 				
-				return var29(cryoModule.List.map(p6.responseBody.PageItems, function(p7, p8) --[[ line: 161 ]]
+				return var29(cryoModule.List.map(p6.responseBody.PageItems, function(p7, p8) --[[ line: 162 ]]
 					-- upvalues: var16 (copy), sortInvitesByScoreIXPModule (copy), var33 (ref)
 					if var16 or sortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then
 						var33[p7.id] = p8
 					end
 					return tostring(p7.id)
 				end), var33)
-			end):catch(function(p5) --[[ line: 168 ]]
+			end):catch(function(p5) --[[ line: 171 ]]
 				print("error", p5)
 			end)
 		end

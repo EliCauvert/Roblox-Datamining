@@ -596,6 +596,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,請在這裡輸入正確的翻譯
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,已選擇的圖片
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,原始文字（{SourceLanguage}）
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,這個翻譯有什麼問題？
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,正確性問題
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,不當或具有貶義
@@ -625,7 +626,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,感謝你
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,為了保護未成年玩家，使用者年齡未滿 13 歲的帳號無法傳送回饋。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,無法提交回饋
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,新增截圖
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,編輯選取內容
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,沒有可用的截圖。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,截圖（{count} 個，共 {max} 個）
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,協助創作者瞭解你的問題。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,正在載入截圖...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,已選擇 {count} 個，共 {max} 個
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,你有一或多個截圖無法上傳。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,錯誤報告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,道具或資料還原
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,類別*
@@ -634,12 +646,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,選擇類別
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,購買問題
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最多 {MAX} 個字元
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,詳細資訊*
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,取消選擇
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,請提供與問題相關的所有資訊，例如遊戲版本和重現問題的步驟。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,請描述遺失的物品，以及最後一次看到該物品的時間。若帳號遭到駭客入侵，請提供你的 Roblox 客服票證編號，以及任何相關的詳細資訊。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,請在此描述你的請求或問題。請盡可能提供詳細資訊，以利我們瞭解情況。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,請告訴我們你嘗試購買的商品、購買時間以及總價值（例如 500 Robux／$4.99），並附上你看到的任何錯誤訊息。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,想檢舉濫用嗎？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>改為提交檢舉。</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,選擇
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,這有助於創作者為正確的帳號提供支援。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,與創作者分享使用者資訊
@@ -720,6 +734,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,向右移動
 CoreScripts.InGameMenu.Controls.NextTab,下一個分頁
 CoreScripts.InGameMenu.Controls.PerformanceStats,效能統計資料
 CoreScripts.InGameMenu.Controls.Playerlist,排行榜
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,全域
+CoreScripts.InGameMenu.Controls.Playerlist.Here,此處
 CoreScripts.InGameMenu.Controls.PreviousTab,上一個分頁
 CoreScripts.InGameMenu.Controls.RecordVideo,錄影
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,移動 / 重設相機
@@ -908,9 +925,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,重生角色？
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,你即將離開此伺服器，並切換至另一個伺服器。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,你要離開了嗎？
 CoreScripts.InGameMenu.Traversal.HistoryDescription,加入先前造訪過的遊戲
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,你即將離開此遊戲，並返回「{PREVIOUS_EXPERIENCE}」。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,你即將離開此遊戲，並返回「{PREVIOUS_GAME}」。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,震動
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,來切換選單導航
@@ -988,7 +1003,7 @@ CoreScripts.ScreenshotHud.Action.TakePhoto,拍照
 CoreScripts.TextChat.Action.SendQuickWords,傳送簡短文字
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,全球
-CoreScripts.TextChat.ChannelTabs.Here,此處
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,系統
 CoreScripts.TextChat.ChannelTabs.Team,團隊
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>：將這名使用者靜音。
@@ -1259,7 +1274,7 @@ Feature.Avatar.Action.Revert,還原
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,儲存
 Feature.Avatar.Action.SaveAsNew,儲存為新裝扮
-Feature.Avatar.Action.Select,選擇
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,選擇多個道具
 Feature.Avatar.Action.SelectSlot,選擇欄位
 Feature.Avatar.Action.Share,分享
@@ -1273,7 +1288,7 @@ Feature.Avatar.Action.Stay,
 Feature.Avatar.Action.Switch,切換
 Feature.Avatar.Action.TryOn,試穿
 Feature.Avatar.Action.Unequip,解除裝備
-Feature.Avatar.Action.Unselect,取消選擇
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,移除動作
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,更新現有角色
@@ -1843,6 +1858,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,描述您的虛擬人偶（可略）
 Feature.Catalog.Action.Favorite,設為最愛
+Feature.Catalog.Action.Favorites.BrowseMarketplace,瀏覽市集
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,道具選項
 Feature.Catalog.Action.LoadMore,載入更多
@@ -2138,6 +2154,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,若要繼續，請審核或移�
 Feature.Catalog.Message.Checkout.UnavailableItems,無法購買一個以上的道具。繼續前請先移除這些道具。
 Feature.Catalog.Message.CollectiblesInfo,收藏道具可在過渡期後轉售給其他使用者，即使道具還有庫存也一樣。Roblox Plus 訂閱者可以轉售收藏道具。
 Feature.Catalog.Message.FTUXFavoritePillTooltip,將此新增至「我的最愛」
+Feature.Catalog.Message.Favorites.CategoryEmpty,尚未在此類別中儲存任何內容。
+Feature.Catalog.Message.Favorites.Empty,尚未儲存任何內容。
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,探索 Roblox 上精心打造的優質道具
 Feature.Catalog.Message.HoldingPolicyL1,從轉售中購買將被扣留最多 {days} 天。物品只能在此持有期間結束後轉售。只有 Plus 使用者可以轉售物品。
 Feature.Catalog.Message.HoldingPolicyL2,"購買後,原始銷售進入保留最多 {purchaseDays} 天。物品只能在這個持有期結束後轉售,轉售將被保留最多 {resaleDays} 天。只有高級用戶可以轉售物品。"
@@ -2222,6 +2240,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"透過擴充聊天功能
 Feature.Chat.Description.ExpressiveChatLearnMore,"暢談功能包含無過濾聊天和 Party 語音。
 
 在所有成員皆符合使用資格且聊天功能升級之前，暢談功能的使用將受到限制。"
+Feature.Chat.Description.InlineContextCardDescription,與陌生人聊天時請小心。請勿分享個人資訊或移至其他聊天 App。你可以透過對方的個人檔案，封鎖或檢舉對方。
 Feature.Chat.Description.NameGroup,命名群組
 Feature.Chat.Description.NameGroupChat,
 Feature.Chat.Description.OSAContextCardDescription,你的安全至關重要。感到不舒服嗎？你可以隨時透過對方的個人檔案封鎖或檢舉此人。
@@ -2241,6 +2260,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,與此使用者的第一次�
 Feature.Chat.Heading.LeaveGroup,離開群組
 Feature.Chat.Heading.PartyWithConnections,與聯繫對象組隊同樂
 Feature.Chat.Heading.PartyWithFriends,與好友利用 Party 同樂
+Feature.Chat.Heading.SafeChattingWithThisUser,與此使用者聊天時請注意安全
+Feature.Chat.Heading.SafeChattingWithUsername,與 {displayName} 聊天時請注意安全
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} 邀請你加入
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} 邀請你加入群組
 Feature.Chat.Heading.YouWereInvitedToGroup,你已受邀加入群組
@@ -2298,7 +2319,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 小時
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
-Feature.Chat.Label.TryAgain,再試一次
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
@@ -2719,6 +2739,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,由於暫時發生錯誤�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,目前看到的這項贊助內容，是根據非個人化因素（例如裝置資訊、地點與年齡）所顯示的相關內容。此體驗的創作者為 {CreatorName}，贊助費用由 {PayerName} 支付。如需瞭解詳情，請前往帳號中「設定」下的「隱私與成年適宜內容」頁面：
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,目前看到的這項贊助內容，是根據地點、裝置資訊、年齡與平台行為等各種因素，所顯示的相關內容。此體驗的創作者是 {CreatorName}，贊助費用由 {PayerName} 支付。如需瞭解詳情，請前往帳號中「設定」下的「隱私與成年適宜內容」頁面：
 Feature.GameDetails.Message.SponsoredDisclosure.U18,目前看到的這項贊助內容，是根據非個人化因素（例如裝置資訊、地點與年齡）所顯示的相關內容。此體驗的創作者為 {CreatorName}，贊助費用由 {PayerName} 支付。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,目前看到的這項贊助內容，是根據非個人化因素（例如裝置資訊、地點與年齡）所顯示的相關內容。贊助費用由 {PayerName} 支付。如要瞭解詳情，請造訪帳號「設定」中的「隱私與成年適宜內容」頁面：
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,目前看到的這項贊助內容，是根據地點、裝置資訊、年齡與平台行為等各種因素，所顯示的相關內容。贊助費用由 {PayerName} 支付。如要瞭解詳情，請造訪帳號「設定」中的「隱私與成年適宜內容」頁面：
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,目前看到的這項贊助內容，是根據非個人化因素（例如裝置資訊、地點與年齡）所顯示的相關內容。贊助費用由 {PayerName} 支付。
 Feature.GameDetails.Message.SuggestLessOften,我們會減少推薦此體驗
 Feature.GameDetails.RatingPercentOnly,{percentRating}% 評分
 Feature.GameDetails.Toast.LinkCopied,
@@ -4249,8 +4272,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 已達好友人數上限。
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,最後更新時間為 {minutes} 分鐘前
+InGame.PlayerList.FooterUnableToLoad,無法載入
+InGame.PlayerList.FriendsEmpty,你的好友都沒玩過這項體驗。
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,無法使用排行榜，請稍後再試。
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,排名
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,在 Studio 中
 InGame.Presence.Label.Offline,

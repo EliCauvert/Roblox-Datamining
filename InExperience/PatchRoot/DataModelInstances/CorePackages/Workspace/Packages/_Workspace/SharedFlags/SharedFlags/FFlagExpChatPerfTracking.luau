@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatPerfTracking3", false) and require(script.Parent.FFlagLuaAppPerfTrackerUseLogger)

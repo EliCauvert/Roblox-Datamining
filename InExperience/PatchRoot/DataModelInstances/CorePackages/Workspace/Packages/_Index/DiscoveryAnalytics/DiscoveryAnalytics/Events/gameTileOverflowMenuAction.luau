@@ -3,25 +3,27 @@ local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local gameTileOverflowMenuActionThrottleHundrethsPercent = game:DefineFastInt("GameTileOverflowMenuActionThrottleHundrethsPercent", 0)
-local fFlagLuaAppFixExplicitFeedbackTelemetry = require(parent.SharedFlags).FFlagLuaAppFixExplicitFeedbackTelemetry
-local var3 = tModule.strictInterface({
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagLuaAppFixExplicitFeedbackTelemetry = sharedFlagsModule.FFlagLuaAppFixExplicitFeedbackTelemetry
+local var4 = tModule.strictInterface({
 	ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else tModule.string,
 	universeId = tModule.string,
 	sortId = tModule.optional(tModule.string),
 	actionType = tModule.string,
 	menuItem = tModule.optional(tModule.string),
-	availableMenuItems = tModule.optional(tModule.string)
+	availableMenuItems = tModule.optional(tModule.string),
+	contentType = if sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then tModule.optional(tModule.string) else nil
 })
 
-return function(p0, p1) --[[ line: 22 ]]
-	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var3 (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
+return function(p0, p1) --[[ line: 25 ]]
+	-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (ref), discoveryEventErrorLogger (ref), var4 (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
 	if fFlagLuaAppFixExplicitFeedbackTelemetry and not p1 then
 		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")
 	end
-	local var4, var5 = var3(p0)
+	local var5, var6 = var4(p0)
 	
-	if not var4 then
-		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var5)
+	if not var5 then
+		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var6)
 	end
 	telemetryService:LogEvent({
 		eventName = "gameTileOverflowMenuAction",

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableSchoolEntry_DEV", false) and (game:GetEngineFeature("SchoolEntryTooltipSeenStorageKey") and game:GetEngineFeature("SchoolEntryLiveTooltipSeenStorageKey"))
+﻿return game:DefineFastFlag("EnableSchoolEntry", false) and (require(script.Parent.FFlagAddFriendsBannersNewUI_IXP) and (require(script.Parent.FFlagConnectionChannelsTileSize) and (game:GetEngineFeature("SchoolEntryTooltipSeenStorageKey") and game:GetEngineFeature("SchoolEntryLiveTooltipSeenStorageKey"))))

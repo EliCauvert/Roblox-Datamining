@@ -19,19 +19,20 @@ local upsellEntrySurfaceType = socialUpsellModule.Analytics.Enum.UpsellEntrySurf
 local upsellComponent = socialUpsellModule.Analytics.Enum.UpsellComponent
 local TCOpenAmpInGame = game:DefineFastFlag("TCOpenAmpInGame", false)
 local fFlagTFWithActionsCheck = require(parent.SharedFlags).FFlagTFWithActionsCheck
+local fFlagEnableTrustedFriendsWizardVPCPrologueModule = require(trustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue)
 local _ = require(trustedContacts.Common.Types)
 
-return function(value) --[[ line: 44 | named "useExternalNavigationSetUp" ]]
-	-- upvalues: useDispatch (ref), fFlagTFWithActionsCheck (ref), useSocialUpsellOverlayController (ref), reactModule (ref), notificationModalsManagerModule (ref), useOpenWebView (ref), TCOpenAmpInGame (ref), getFFlagEnableAmpWizardVPCNavigationFix (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateBack (ref), inExpAmpWizardController (ref), openAmpWizardContainer (ref), default (ref), upsellEntrySurfaceType (ref), socialUpsellType (ref), upsellComponent (ref)
-	local var7 = useDispatch()
-	local var8 = nil
+return function(value) --[[ line: 46 | named "useExternalNavigationSetUp" ]]
+	-- upvalues: useDispatch (ref), fFlagTFWithActionsCheck (ref), useSocialUpsellOverlayController (ref), reactModule (ref), notificationModalsManagerModule (ref), useOpenWebView (ref), TCOpenAmpInGame (ref), getFFlagEnableAmpWizardVPCNavigationFix (ref), fFlagSignalsNavP3Dispatch (ref), var4 (ref), navigateBack (ref), fFlagEnableTrustedFriendsWizardVPCPrologueModule (ref), inExpAmpWizardController (ref), openAmpWizardContainer (ref), default (ref), upsellEntrySurfaceType (ref), socialUpsellType (ref), upsellComponent (ref)
+	local var8 = useDispatch()
 	local var9 = nil
+	local var10 = nil
 	
 	if fFlagTFWithActionsCheck then
-		var8 = game.GameId ~= 0
-		var9 = useSocialUpsellOverlayController(var8)
+		var9 = game.GameId ~= 0
+		var10 = useSocialUpsellOverlayController(var9)
 	end
-	local var10 = reactModule.useCallback(function() --[[ line: 98 ]]
+	local var11 = reactModule.useCallback(function() --[[ line: 130 ]]
 		-- upvalues: value (ref)
 		if value.onClosed then
 			value.onClosed()
@@ -43,43 +44,52 @@ return function(value) --[[ line: 44 | named "useExternalNavigationSetUp" ]]
 	end, { value, value.navigation })
 	
 	return {
-		closeModal = var10,
-		openAmpWizard = reactModule.useCallback(function(p0) --[[ line: 62 ]]
-			-- upvalues: TCOpenAmpInGame (copy), getFFlagEnableAmpWizardVPCNavigationFix (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var7 (ref), navigateBack (copy), inExpAmpWizardController (copy), openAmpWizardContainer (copy)
-			local var11 = function(p1, p2) --[[ line: 63 ]]
-				-- upvalues: TCOpenAmpInGame (copy), getFFlagEnableAmpWizardVPCNavigationFix (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var7 (copy), navigateBack (copy), p0 (ref)
+		closeModal = var11,
+		openAmpWizard = reactModule.useCallback(function(p0) --[[ line: 64 ]]
+			-- upvalues: TCOpenAmpInGame (copy), getFFlagEnableAmpWizardVPCNavigationFix (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var8 (ref), navigateBack (copy), fFlagEnableTrustedFriendsWizardVPCPrologueModule (copy), inExpAmpWizardController (copy), openAmpWizardContainer (copy)
+			local var12 = function(p1, p2) --[[ line: 65 ]]
+				-- upvalues: TCOpenAmpInGame (copy), getFFlagEnableAmpWizardVPCNavigationFix (copy), fFlagSignalsNavP3Dispatch (copy), var4 (copy), var8 (copy), navigateBack (copy), p0 (ref)
 				if not TCOpenAmpInGame and not getFFlagEnableAmpWizardVPCNavigationFix() then
 					if fFlagSignalsNavP3Dispatch then
 						var4.back(true)
 					else
-						var7(navigateBack(true))
+						var8(navigateBack(true))
 					end
 				end
 				p0.completionCallback(p1, p2)
 			end
 			
-			if TCOpenAmpInGame then
-				inExpAmpWizardController.OpenAmpWizardContainerInExp(p0.featureName, var11, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace)
+			if fFlagEnableTrustedFriendsWizardVPCPrologueModule then
+				if TCOpenAmpInGame then
+					inExpAmpWizardController.OpenAmpWizardContainerInExp(p0.featureName, var12, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace, nil, nil, nil, p0.usePrologue, p0.prologueOptions)
+					
+					return
+				end
+				var8(openAmpWizardContainer(p0.featureName, var12, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace, nil, nil, nil, p0.usePrologue, p0.prologueOptions))
+				
+				return
+			elseif TCOpenAmpInGame then
+				inExpAmpWizardController.OpenAmpWizardContainerInExp(p0.featureName, var12, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace)
 				
 				return
 			end
-			var7(openAmpWizardContainer(p0.featureName, var11, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace))
-		end, { var7 }),
-		openFacialAgeEstimationUpsell = if fFlagTFWithActionsCheck then if fFlagTFWithActionsCheck then reactModule.useCallback(function(p3) --[[ line: 111 ]]
-			-- upvalues: var8 (write), upsellEntrySurfaceType (copy), var9 (write), socialUpsellType (copy), upsellComponent (copy), var10 (ref)
-			local var12 = if var8 then upsellEntrySurfaceType.TrustedFriendsInExperience else upsellEntrySurfaceType.TrustedFriends
-			var9.openSocialOverlay(socialUpsellType.FacialAgeEstimation, {
+			var8(openAmpWizardContainer(p0.featureName, var12, p0.recourseData, p0.entryPointEventCtx, p0.extraParameters, p0.nameSpace))
+		end, { var8 }),
+		openFacialAgeEstimationUpsell = if fFlagTFWithActionsCheck then if fFlagTFWithActionsCheck then reactModule.useCallback(function(p3) --[[ line: 143 ]]
+			-- upvalues: var9 (write), upsellEntrySurfaceType (copy), var10 (write), socialUpsellType (copy), upsellComponent (copy), var11 (ref)
+			local var13 = if var9 then upsellEntrySurfaceType.TrustedFriendsInExperience else upsellEntrySurfaceType.TrustedFriends
+			var10.openSocialOverlay(socialUpsellType.FacialAgeEstimation, {
 				shouldIncludeVPC = true,
-				upsellEntrySurface = var12,
+				upsellEntrySurface = var13,
 				upsellEntryComponent = upsellComponent.Modal,
-				entryPointEventCtx = socialUpsellType.FacialAgeEstimation .. var12,
+				entryPointEventCtx = socialUpsellType.FacialAgeEstimation .. var13,
 				onSuccess = p3 and p3.onSuccess,
 				onFailure = p3 and p3.onFailure,
 				onAccept = p3 and p3.onAccept,
-				onDismiss = var10
+				onDismiss = var11
 			})
-		end, { var10, var8, var9.openSocialOverlay }) else nil else nil,
-		showToast = reactModule.useCallback(function(p4) --[[ line: 53 ]]
+		end, { var11, var9, var10.openSocialOverlay }) else nil else nil,
+		showToast = reactModule.useCallback(function(p4) --[[ line: 55 ]]
 			-- upvalues: notificationModalsManagerModule (copy)
 			notificationModalsManagerModule.SetUIBloxToast({
 				sequenceNumber = DateTime.now().UnixTimestamp,
@@ -87,7 +97,7 @@ return function(value) --[[ line: 44 | named "useExternalNavigationSetUp" ]]
 			})
 		end, {}),
 		openWebView = useOpenWebView(),
-		shareUrl = reactModule.useCallback(function(p5) --[[ line: 106 ]]
+		shareUrl = reactModule.useCallback(function(p5) --[[ line: 138 ]]
 			-- upvalues: default (copy)
 			default:shareUrl(p5)
 		end, {})

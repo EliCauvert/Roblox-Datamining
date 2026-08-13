@@ -26,6 +26,7 @@ return {
 		SetAvatarSceneRoute = require(script.Actions.SetAvatarSceneRoute),
 		SetBackgroundPreview = require(script.Actions.SetBackgroundPreview),
 		SetEquippedInTryOnManager = require(script.Actions.SetEquippedInTryOnManager),
+		SetFullView = require(script.Actions.SetFullView),
 		SetItemDetailsPeekViewState = require(script.Actions.SetItemDetailsPeekViewState),
 		SetItemTryOnPeekViewState = require(script.Actions.SetItemTryOnPeekViewState),
 		SetLastToggledLookType = require(script.Actions.SetLastToggledLookType),

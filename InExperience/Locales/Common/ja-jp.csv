@@ -597,6 +597,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,ここに正しい翻訳を入力
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,選択した画像
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,元のテキスト（{SourceLanguage}）
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,この翻訳内容の問題点は何ですか？
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,誤訳
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,不適切な内容や暴言がある
@@ -626,7 +627,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,ご意見
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,児童のプレイヤーを保護するため、13歳未満のアカウントはフィードバックを送信できません。
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,フィードバックは利用できません
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,切り抜きを追加
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,選択内容を編集
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,利用可能な切り抜きはありません。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,切り抜き（{count}/{max}枚）
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,クリエーターが問題を把握できるようご協力ください。
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,切り抜きを読み込み中...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,{count}/{max}枚選択済み
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,1枚以上の切り抜きをアップロードできませんでした。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,バグ報告
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,アイテムまたはデータの復元
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,カテゴリ*
@@ -635,12 +647,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,カテゴリ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,購入に関する問題
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,最大{MAX}文字
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,詳細*
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,選択解除
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ゲームのバージョンや問題箇所を再現する手順など、問題に関連する情報をすべて記載してください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,不足しているものと、最後にそれを見た時期を説明してください。アカウントがハッキングされた場合は、Roblox CSチケット番号と関連する詳細も書き添えてください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,リクエストまたは問題をこちらに記入してください。状況を把握するため、できるだけ詳しく説明してください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,購入しようとしたもの、購入しようとした日時、合計金額（例：500 Robux / 4.99ドル）をお知らせください。表示されたエラーメッセージがあれば、それも含めてください。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,規約違反を報告しますか？
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>代わりに報告を送信してください。</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,選択
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,これにより、クリエーターは適切なアカウントをサポートできます。
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,ユーザー情報をクリエーターとシェアする
@@ -721,6 +735,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,右に移動
 CoreScripts.InGameMenu.Controls.NextTab,次のタブへ
 CoreScripts.InGameMenu.Controls.PerformanceStats,パフォーマンス状態
 CoreScripts.InGameMenu.Controls.Playerlist,スコアボード
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,グローバル
+CoreScripts.InGameMenu.Controls.Playerlist.Here,こちら
 CoreScripts.InGameMenu.Controls.PreviousTab,前のタブへ
 CoreScripts.InGameMenu.Controls.RecordVideo,ビデオ録画
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,カメラ視点の移動 / リセット
@@ -909,9 +926,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,キャラクターをリス�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,このサーバーから退出し、別のサーバーに切り替えようとしています。
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,以前プレイしたゲームに参加
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,このゲームから退出し、{PREVIOUS_EXPERIENCE}に戻ろうとしています。
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,このゲームから退出し、{PREVIOUS_GAME}に戻ろうとしています。
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,バイブレーション
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,必要がある場合もあります。
@@ -988,8 +1003,8 @@ CoreScripts.ScreenshotHud.Action.Cancel,
 CoreScripts.ScreenshotHud.Action.TakePhoto,写真を撮る
 CoreScripts.TextChat.Action.SendQuickWords,短いメッセージを送信
 CoreScripts.TextChat.ChannelTabs.Friends,
-CoreScripts.TextChat.ChannelTabs.Global2,グローバル
-CoreScripts.TextChat.ChannelTabs.Here,こちら
+CoreScripts.TextChat.ChannelTabs.Global2,
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,システム
 CoreScripts.TextChat.ChannelTabs.Team,チーム
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>：相手をミュート。
@@ -1260,7 +1275,7 @@ Feature.Avatar.Action.Revert,元に戻す
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,保存
 Feature.Avatar.Action.SaveAsNew,新規として保存
-Feature.Avatar.Action.Select,選択
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,複数のアイテムを選択
 Feature.Avatar.Action.SelectSlot,スロットを選択
 Feature.Avatar.Action.Share,シェアする
@@ -1274,7 +1289,7 @@ Feature.Avatar.Action.Stay,
 Feature.Avatar.Action.Switch,切りかえ
 Feature.Avatar.Action.TryOn,試着する
 Feature.Avatar.Action.Unequip,装備を外す
-Feature.Avatar.Action.Unselect,選択解除
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,エモート装備を外す
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,既存のキャラクターを更新
@@ -1844,6 +1859,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,アバターの説明をしてください（任意）
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,マーケットプレイスを閲覧
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,アイテムオプション
 Feature.Catalog.Action.LoadMore,さらに読み込む
@@ -2139,6 +2155,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,続けるには、アイテム�
 Feature.Catalog.Message.Checkout.UnavailableItems,1点以上のアイテムは購入できません。続ける前に削除してください。
 Feature.Catalog.Message.CollectiblesInfo,コレクタブルアイテムは、元の在庫が売り切れていない場合でも、保留期間後にユーザーから他のユーザーへの再販が可能です。Roblox Plus会員は、再販用のコレクタブルアイテムをリスト表示できます。
 Feature.Catalog.Message.FTUXFavoritePillTooltip,お気に入りに追加
+Feature.Catalog.Message.Favorites.CategoryEmpty,このカテゴリにはまだ何も保存していません。
+Feature.Catalog.Message.Favorites.Empty,まだ何も保存していません。
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,Robloxで最高の職人技が光るアイテムを見つけよう
 Feature.Catalog.Message.HoldingPolicyL1,再販売からの購入には、最長{days}日間の保留期間があります。アイテムはこの保留期間の終了後にしか再販売できません。アイテムを再販売できるのは、Plus会員のユーザーのみです。
 Feature.Catalog.Message.HoldingPolicyL2,購入後、最初の販売は最長で{purchaseDays} 日間保留状態になります。アイテムは保留期間終了後しか再販売できず、再販売には最長 {resaleDays} 日間保留状態になります。アイテムの再販売は、プレミアム会員のユーザーしかできません。
@@ -2223,6 +2241,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"チャット拡張機能
 Feature.Chat.Description.ExpressiveChatLearnMore,"広範囲対応チャット機能には、伏字フィルタ処理なしのチャットとパーティボイスが含まれています。
 
 広範囲対応チャットは、メンバー全員が利用対象となり、あなたのチャット機能がアップグレードされるまでアクセス制限がかかります。"
+Feature.Chat.Description.InlineContextCardDescription,見知らぬ人とチャットする場合はご注意ください。個人情報をシェアしたり、別のチャットアプリに会話を移したりしないでください。相手のプロフィールから、そのユーザーをブロックしたり、規約違反を報告したりできます。
 Feature.Chat.Description.NameGroup,グループに名前をつける
 Feature.Chat.Description.NameGroupChat,チャットグループに名前を付ける
 Feature.Chat.Description.OSAContextCardDescription,不快に感じた場合は、このユーザーを相手のプロフィールからいつでもブロックまたは通報できます。
@@ -2242,6 +2261,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,この相手との最初の�
 Feature.Chat.Heading.LeaveGroup,グループから退出
 Feature.Chat.Heading.PartyWithConnections,つながりとパーティ結成
 Feature.Chat.Heading.PartyWithFriends,友達とパーティ機能を使おう
+Feature.Chat.Heading.SafeChattingWithThisUser,この相手とのチャットにご注意ください
+Feature.Chat.Heading.SafeChattingWithUsername,{displayName}さんとのチャットにご注意ください
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName}さんがあなたを次のグループに招待しました：
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName}さんからグループに招待されました
 Feature.Chat.Heading.YouWereInvitedToGroup,グループに招待されました
@@ -2299,7 +2320,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1時間
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー
@@ -2720,6 +2740,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,一時的なエラーの�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,表示されているスポンサーコンテンツは、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて、適切なコンテンツを提供しています。このバーチャル空間を提供するのは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,表示されているスポンサーコンテンツは、位置情報、デバイス情報、年齢、プラットフォーム上の行動などのさまざまな要素に基づいて、関連するコンテンツを提供しています。このバーチャル空間を提供するのは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
 Feature.GameDetails.Message.SponsoredDisclosure.U18,デバイス情報、位置、年齢などの非個人化要素に基づいて、適切なコンテンツを提供するために、このスポンサーコンテンツが表示されます。このバーチャル空間のクリエーターは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,このスポンサーコンテンツは、適切なコンテンツを提供するため、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて表示されています。{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,このスポンサーコンテンツは、関連するコンテンツを提供するため、位置情報、デバイス情報、年齢、プラットフォーム上の行動などのさまざまな要素に基づいて表示されています。{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,このスポンサーコンテンツは、適切なコンテンツを提供するため、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて表示されています。{PayerName}がスポンサー費用を負担しています。
 Feature.GameDetails.Message.SuggestLessOften,この作品のおすすめを減らします
 Feature.GameDetails.RatingPercentOnly,評価 {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -4249,8 +4272,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} さんで友達の数が上限に達しました。
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,最終更新：{minutes}分前
+InGame.PlayerList.FooterUnableToLoad,読み込めません
+InGame.PlayerList.FriendsEmpty,まだこのバーチャル空間をプレイした友達はいません。
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,スコアボードが利用できません。後でもう一度お試しください。
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,ランク
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,Studio内
 InGame.Presence.Label.Offline,

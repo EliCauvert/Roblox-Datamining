@@ -4,7 +4,7 @@
 		SelectionPreview = "SelectionPreview"
 	},
 	Action = {
-		Activate = "VirtualCursorActivate",
+		DirectionalMove = "VirtualCursorDirectionalMovement",
 		Move = "VirtualCursorMovement",
 		Scroll = "VirtualCursorScroll"
 	},

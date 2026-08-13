@@ -4,14 +4,11 @@ local messageBus = require(parent.MessageBus).MessageBus
 local tModule = require(parent.t)
 local promiseModule = require(parent.Promise)
 local _ = require(script.Parent.CredentialsProtocolTypes)
-local t = {
-	FIDO2 = "FIDO2",
-	password = "password",
-	all = "all",
-	iosKeychainPassword = "iosKeychainPassword",
-	keystore = "keystore"
-}
-local var4 = tModule.strictInterface({
+local constantsModule = require(script.Parent.Constants)
+local normalizeUnifiedGetCredentialsResponseModule = require(script.Parent.normalizeUnifiedGetCredentialsResponse)
+local fFlagLuaAppNormalizeUnifiedPasskeyResponseModule = require(script.Parent.Flags.FFlagLuaAppNormalizeUnifiedPasskeyResponse)
+local credentialsTypes = constantsModule.CredentialsTypes
+local var6 = tModule.strictInterface({
 	keyType = tModule.optional(tModule.string),
 	publicKey = tModule.interface({
 		challenge = tModule.string,
@@ -24,17 +21,17 @@ local var4 = tModule.strictInterface({
 	}),
 	deviceBoundOnly = tModule.optional(tModule.boolean)
 })
-local t_1 = {
-	[t.FIDO2] = tModule.strictInterface({ credentialType = tModule.string, parameters = var4 }),
-	[t.all] = tModule.strictInterface({
-		FIDO2 = tModule.optional(var4),
+local t = {
+	[credentialsTypes.FIDO2] = tModule.strictInterface({ credentialType = tModule.string, parameters = var6 }),
+	[credentialsTypes.all] = tModule.strictInterface({
+		FIDO2 = tModule.optional(var6),
 		password = tModule.optional(tModule.strictInterface({ username = tModule.optional(tModule.string) }))
 	}),
-	[t.iosKeychainPassword] = tModule.strictInterface({
+	[credentialsTypes.iosKeychainPassword] = tModule.strictInterface({
 		credentialType = tModule.string,
 		parameters = tModule.interface({ server = tModule.optional(tModule.string) })
 	}),
-	[t.keystore] = tModule.strictInterface({
+	[credentialsTypes.keystore] = tModule.strictInterface({
 		credentialType = tModule.string,
 		parameters = tModule.interface({
 			server = tModule.optional(tModule.string),
@@ -42,7 +39,7 @@ local t_1 = {
 		})
 	})
 }
-local var6 = tModule.strictInterface({
+local var8 = tModule.strictInterface({
 	id = tModule.optional(tModule.string),
 	rawId = tModule.optional(tModule.string),
 	type = tModule.optional(tModule.string),
@@ -55,18 +52,19 @@ local var6 = tModule.strictInterface({
 	errorCode = tModule.optional(tModule.string),
 	errorMsg = tModule.optional(tModule.string)
 })
-local t_2 = {
-	[t.FIDO2] = var6,
-	[t.all] = tModule.strictInterface({
-		credentialType = tModule.string,
-		response = tModule.union(var6, tModule.strictInterface({
-			username = tModule.optional(tModule.string),
-			password = tModule.optional(tModule.string),
-			errorCode = tModule.optional(tModule.string),
-			errorMsg = tModule.optional(tModule.string)
-		}))
-	}),
-	[t.iosKeychainPassword] = tModule.array(tModule.strictInterface({
+local var9 = tModule.strictInterface({
+	credentialType = tModule.string,
+	response = tModule.union(var8, tModule.strictInterface({
+		username = tModule.optional(tModule.string),
+		password = tModule.optional(tModule.string),
+		errorCode = tModule.optional(tModule.string),
+		errorMsg = tModule.optional(tModule.string)
+	}))
+})
+local t_1 = {
+	[credentialsTypes.FIDO2] = var8,
+	[credentialsTypes.all] = if fFlagLuaAppNormalizeUnifiedPasskeyResponseModule then tModule.union(var9, var8) else var9,
+	[credentialsTypes.iosKeychainPassword] = tModule.array(tModule.strictInterface({
 		experimentGroup = tModule.optional(tModule.string),
 		username = tModule.optional(tModule.string),
 		userId = tModule.optional(tModule.string),
@@ -74,7 +72,7 @@ local t_2 = {
 		errorCode = tModule.optional(tModule.string),
 		errorMsg = tModule.optional(tModule.string)
 	})),
-	[t.keystore] = tModule.array(tModule.strictInterface({
+	[credentialsTypes.keystore] = tModule.array(tModule.strictInterface({
 		experimentGroup = tModule.optional(tModule.string),
 		username = tModule.optional(tModule.string),
 		userId = tModule.optional(tModule.string),
@@ -83,8 +81,8 @@ local t_2 = {
 		errorMsg = tModule.optional(tModule.string)
 	}))
 }
-local t_3 = {
-	[t.FIDO2] = tModule.strictInterface({
+local t_2 = {
+	[credentialsTypes.FIDO2] = tModule.strictInterface({
 		credentialType = tModule.string,
 		parameters = tModule.interface({
 			keyType = tModule.optional(tModule.string),
@@ -106,11 +104,11 @@ local t_3 = {
 			})
 		})
 	}),
-	[t.password] = tModule.strictInterface({
+	[credentialsTypes.password] = tModule.strictInterface({
 		credentialType = tModule.string,
 		parameters = tModule.strictInterface({ username = tModule.string, password = tModule.string })
 	}),
-	[t.iosKeychainPassword] = tModule.strictInterface({
+	[credentialsTypes.iosKeychainPassword] = tModule.strictInterface({
 		credentialType = tModule.string,
 		parameters = tModule.strictInterface({
 			server = tModule.string,
@@ -120,7 +118,7 @@ local t_3 = {
 			experimentGroup = tModule.optional(tModule.string)
 		})
 	}),
-	[t.keystore] = tModule.strictInterface({
+	[credentialsTypes.keystore] = tModule.strictInterface({
 		credentialType = tModule.string,
 		parameters = tModule.strictInterface({
 			server = tModule.string,
@@ -132,8 +130,8 @@ local t_3 = {
 		})
 	})
 }
-local t_4 = {
-	[t.FIDO2] = tModule.strictInterface({
+local t_3 = {
+	[credentialsTypes.FIDO2] = tModule.strictInterface({
 		id = tModule.optional(tModule.string),
 		rawId = tModule.optional(tModule.string),
 		type = tModule.optional(tModule.string),
@@ -146,59 +144,59 @@ local t_4 = {
 		errorCode = tModule.optional(tModule.string),
 		errorMsg = tModule.optional(tModule.string)
 	}),
-	[t.password] = tModule.strictInterface({
+	[credentialsTypes.password] = tModule.strictInterface({
 		errorCode = tModule.optional(tModule.string),
 		errorMsg = tModule.optional(tModule.string)
 	}),
-	[t.iosKeychainPassword] = tModule.strictInterface({
+	[credentialsTypes.iosKeychainPassword] = tModule.strictInterface({
 		errorCode = tModule.optional(tModule.string),
 		errorMsg = tModule.optional(tModule.string)
 	}),
-	[t.keystore] = tModule.strictInterface({
+	[credentialsTypes.keystore] = tModule.strictInterface({
 		errorCode = tModule.optional(tModule.string),
 		errorMsg = tModule.optional(tModule.string)
 	})
 }
-local t_5 = {
-	CredentialsTypes = t,
+local t_4 = {
+	CredentialsTypes = credentialsTypes,
 	GET_CREDENTIALS_REQUEST_DESCRIPTOR = {
-		[t.FIDO2] = {
+		[credentialsTypes.FIDO2] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsRequest"),
-			validateParams = t_1[t.FIDO2]
+			validateParams = t[credentialsTypes.FIDO2]
 		},
-		[t.all] = {
+		[credentialsTypes.all] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsRequest"),
-			validateParams = t_1[t.all]
+			validateParams = t[credentialsTypes.all]
 		},
-		[t.iosKeychainPassword] = {
+		[credentialsTypes.iosKeychainPassword] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsRequest"),
-			validateParams = t_1[t.iosKeychainPassword]
+			validateParams = t[credentialsTypes.iosKeychainPassword]
 		},
-		[t.keystore] = {
+		[credentialsTypes.keystore] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsRequest"),
-			validateParams = t_1[t.keystore]
+			validateParams = t[credentialsTypes.keystore]
 		}
 	},
 	GET_CREDENTIALS_RESPONSE_DESCRIPTOR = {
-		[t.FIDO2] = {
+		[credentialsTypes.FIDO2] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsResponse"),
-			validateParams = t_2[t.FIDO2]
+			validateParams = t_1[credentialsTypes.FIDO2]
 		},
-		[t.all] = {
+		[credentialsTypes.all] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsResponse"),
-			validateParams = t_2[t.all]
+			validateParams = t_1[credentialsTypes.all]
 		},
-		[t.iosKeychainPassword] = {
+		[credentialsTypes.iosKeychainPassword] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsResponse"),
-			validateParams = t_2[t.iosKeychainPassword]
+			validateParams = t_1[credentialsTypes.iosKeychainPassword]
 		},
-		[t.keystore] = {
+		[credentialsTypes.keystore] = {
 			mid = messageBus.getMessageId("Credentials", "getCredentialsResponse"),
-			validateParams = t_2[t.keystore]
+			validateParams = t_1[credentialsTypes.keystore]
 		}
 	},
 	DELETE_IOS_KEYCHAIN_CREDENTIALS_REQUEST_DESCRIPTOR = {
-		[t.iosKeychainPassword] = {
+		[credentialsTypes.iosKeychainPassword] = {
 			mid = messageBus.getMessageId("Credentials", "deleteIosKeychainCredentialsRequest"),
 			validateParams = tModule.strictInterface({
 				credentialType = tModule.string,
@@ -207,7 +205,7 @@ local t_5 = {
 		}
 	},
 	DELETE_KEYSTORE_CREDENTIALS_REQUEST_DESCRIPTOR = {
-		[t.keystore] = {
+		[credentialsTypes.keystore] = {
 			mid = messageBus.getMessageId("Credentials", "deleteKeystoreCredentialsRequest"),
 			validateParams = tModule.strictInterface({
 				credentialType = tModule.string,
@@ -219,7 +217,7 @@ local t_5 = {
 		}
 	},
 	DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR = {
-		[t.iosKeychainPassword] = {
+		[credentialsTypes.iosKeychainPassword] = {
 			mid = messageBus.getMessageId("Credentials", "deleteIosKeychainCredentialsResponse"),
 			validateParams = tModule.strictInterface({
 				credentialType = tModule.string,
@@ -231,7 +229,7 @@ local t_5 = {
 		}
 	},
 	DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR = {
-		[t.keystore] = {
+		[credentialsTypes.keystore] = {
 			mid = messageBus.getMessageId("Credentials", "deleteKeystoreCredentialsResponse"),
 			validateParams = tModule.strictInterface({
 				credentialType = tModule.string,
@@ -243,44 +241,46 @@ local t_5 = {
 		}
 	},
 	REGISTER_CREDENTIALS_REQUEST_DESCRIPTOR = {
-		[t.FIDO2] = {
+		[credentialsTypes.FIDO2] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsRequest"),
-			validateParams = t_3[t.FIDO2]
+			validateParams = t_2[credentialsTypes.FIDO2]
 		},
-		[t.password] = {
+		[credentialsTypes.password] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsRequest"),
-			validateParams = t_3[t.password]
+			validateParams = t_2[credentialsTypes.password]
 		},
-		[t.iosKeychainPassword] = {
+		[credentialsTypes.iosKeychainPassword] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsRequest"),
-			validateParams = t_3[t.iosKeychainPassword]
+			validateParams = t_2[credentialsTypes.iosKeychainPassword]
 		},
-		[t.keystore] = {
+		[credentialsTypes.keystore] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsRequest"),
-			validateParams = t_3[t.keystore]
+			validateParams = t_2[credentialsTypes.keystore]
 		}
 	},
 	REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR = {
-		[t.FIDO2] = {
+		[credentialsTypes.FIDO2] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsResponse"),
-			validateParams = t_4[t.FIDO2]
+			validateParams = t_3[credentialsTypes.FIDO2]
 		},
-		[t.password] = {
+		[credentialsTypes.password] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsResponse"),
-			validateParams = t_4[t.password]
+			validateParams = t_3[credentialsTypes.password]
 		},
-		[t.iosKeychainPassword] = {
+		[credentialsTypes.iosKeychainPassword] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsResponse"),
-			validateParams = t_4[t.iosKeychainPassword]
+			validateParams = t_3[credentialsTypes.iosKeychainPassword]
 		},
-		[t.keystore] = {
+		[credentialsTypes.keystore] = {
 			mid = messageBus.getMessageId("Credentials", "registerCredentialsResponse"),
-			validateParams = t_4[t.keystore]
+			validateParams = t_3[credentialsTypes.keystore]
 		}
 	},
 	IS_AVAILABLE_REQUEST_DESCRIPTOR = {
 		mid = messageBus.getMessageId("Credentials", "isAvailableRequest"),
-		validateParams = tModule.strictInterface({ credentialType = tModule.optional(tModule.valueOf(t)) })
+		validateParams = tModule.strictInterface({
+			credentialType = tModule.optional(tModule.valueOf(credentialsTypes))
+		})
 	},
 	IS_AVAILABLE_RESPONSE_DESCRIPTOR = {
 		mid = messageBus.getMessageId("Credentials", "isAvailableResponse"),
@@ -299,35 +299,35 @@ local t_5 = {
 		})
 	}
 }
-t_5.__index = t_5
+t_4.__index = t_4
 
-function t_5.new() --[[ line: 407 ]]
-	-- upvalues: messageBus (ref), t_5 (ref)
+function t_4.new() --[[ line: 413 ]]
+	-- upvalues: messageBus (ref), t_4 (ref)
 	return setmetatable({
 		getCredentialsRequestInFlight = false,
 		registerCredentialsRequestInFlight = false,
 		deleteIosKeychainCredentialsRequestInFlight = false,
 		deleteKeystoreCredentialsRequestInFlight = false,
 		subscriber = messageBus.Subscriber.new()
-	}, t_5)
+	}, t_4)
 end
 
-function t_5:getCredentials(p0, p1, p2) --[[ line: 421 ]]
-	-- upvalues: promiseModule (ref), httpService (ref), t (ref), messageBus (ref)
+function t_4:getCredentials(p0, p1, p2) --[[ line: 427 ]]
+	-- upvalues: promiseModule (ref), fFlagLuaAppNormalizeUnifiedPasskeyResponseModule (ref), credentialsTypes (ref), normalizeUnifiedGetCredentialsResponseModule (ref), httpService (ref), messageBus (ref)
 	if self.getCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var11 = promiseModule.race({
-		promiseModule.new(function(p3, _) --[[ line: 425 ]]
-			-- upvalues: self (ref), p0 (ref), httpService (copy)
-			self.subscriber:subscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[p0], function(p4) --[[ line: 426 ]]
-				-- upvalues: self (copy), p0 (copy), httpService (copy), p3 (ref)
+	local var14 = promiseModule.race({
+		promiseModule.new(function(p3, _) --[[ line: 431 ]]
+			-- upvalues: self (ref), p0 (ref), fFlagLuaAppNormalizeUnifiedPasskeyResponseModule (copy), credentialsTypes (copy), normalizeUnifiedGetCredentialsResponseModule (copy), httpService (copy)
+			self.subscriber:subscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[p0], function(p4) --[[ line: 432 ]]
+				-- upvalues: self (copy), p0 (copy), fFlagLuaAppNormalizeUnifiedPasskeyResponseModule (copy), credentialsTypes (copy), normalizeUnifiedGetCredentialsResponseModule (copy), httpService (copy), p3 (ref)
 				self.subscriber:unsubscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[p0])
 				self.getCredentialsRequestInFlight = false
-				p3(httpService:JSONEncode(p4))
+				p3(httpService:JSONEncode(if fFlagLuaAppNormalizeUnifiedPasskeyResponseModule and p0 == credentialsTypes.all then normalizeUnifiedGetCredentialsResponseModule(p4) else p4))
 			end)
 		end),
-		promiseModule.delay(p2):andThen(function() --[[ line: 433 ]]
+		promiseModule.delay(p2):andThen(function() --[[ line: 443 ]]
 			-- upvalues: self (ref), p0 (ref)
 			self.subscriber:unsubscribe(self.GET_CREDENTIALS_RESPONSE_DESCRIPTOR[p0])
 			self.getCredentialsRequestInFlight = false
@@ -335,35 +335,35 @@ function t_5:getCredentials(p0, p1, p2) --[[ line: 421 ]]
 	})
 	self.getCredentialsRequestInFlight = true
 	
-	if p0 == t.all then
+	if p0 == credentialsTypes.all then
 		messageBus.publish(self.GET_CREDENTIALS_REQUEST_DESCRIPTOR[p0], httpService:JSONDecode(p1))
 		
-		return var11
+		return var14
 	end
 	messageBus.publish(self.GET_CREDENTIALS_REQUEST_DESCRIPTOR[p0], {
 		credentialType = p0,
 		parameters = httpService:JSONDecode(p1)
 	})
 	
-	return var11
+	return var14
 end
 
-function t_5:registerCredentials(p5, p6, p7) --[[ line: 459 ]]
+function t_4:registerCredentials(p5, p6, p7) --[[ line: 469 ]]
 	-- upvalues: promiseModule (ref), httpService (ref), messageBus (ref)
 	if self.registerCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var12 = promiseModule.race({
-		promiseModule.new(function(p8, _) --[[ line: 467 ]]
+	local var15 = promiseModule.race({
+		promiseModule.new(function(p8, _) --[[ line: 477 ]]
 			-- upvalues: self (ref), p5 (ref), httpService (copy)
-			self.subscriber:subscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p5], function(p9) --[[ line: 470 ]]
+			self.subscriber:subscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p5], function(p9) --[[ line: 480 ]]
 				-- upvalues: self (copy), p5 (copy), httpService (copy), p8 (ref)
 				self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p5])
 				self.registerCredentialsRequestInFlight = false
 				p8(httpService:JSONEncode(p9))
 			end)
 		end),
-		promiseModule.delay(p7):andThen(function() --[[ line: 478 ]]
+		promiseModule.delay(p7):andThen(function() --[[ line: 488 ]]
 			-- upvalues: self (ref), p5 (ref)
 			self.subscriber:unsubscribe(self.REGISTER_CREDENTIALS_RESPONSE_DESCRIPTOR[p5])
 			self.registerCredentialsRequestInFlight = false
@@ -375,25 +375,25 @@ function t_5:registerCredentials(p5, p6, p7) --[[ line: 459 ]]
 		parameters = httpService:JSONDecode(p6)
 	})
 	
-	return var12
+	return var15
 end
 
-function t_5:deleteAllCredentialsFromiOSKeychain(p10, p11, p12) --[[ line: 495 ]]
+function t_4:deleteAllCredentialsFromiOSKeychain(p10, p11, p12) --[[ line: 505 ]]
 	-- upvalues: promiseModule (ref), httpService (ref), messageBus (ref)
 	if self.deleteIosKeychainCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var13 = promiseModule.race({
-		promiseModule.new(function(p13, _) --[[ line: 503 ]]
+	local var16 = promiseModule.race({
+		promiseModule.new(function(p13, _) --[[ line: 513 ]]
 			-- upvalues: self (ref), p10 (ref), httpService (copy)
-			self.subscriber:subscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p10], function(p14) --[[ line: 506 ]]
+			self.subscriber:subscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p10], function(p14) --[[ line: 516 ]]
 				-- upvalues: self (copy), p10 (copy), httpService (copy), p13 (ref)
 				self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p10])
 				self.deleteIosKeychainCredentialsRequestInFlight = false
 				p13(httpService:JSONEncode(p14))
 			end)
 		end),
-		promiseModule.delay(p12):andThen(function() --[[ line: 514 ]]
+		promiseModule.delay(p12):andThen(function() --[[ line: 524 ]]
 			-- upvalues: self (ref), p10 (ref)
 			self.subscriber:unsubscribe(self.DELETE_IOS_KEYCHAIN_CREDENTIALS_RESPONSE_DESCRIPTOR[p10])
 			self.deleteIosKeychainCredentialsRequestInFlight = false
@@ -405,25 +405,25 @@ function t_5:deleteAllCredentialsFromiOSKeychain(p10, p11, p12) --[[ line: 495 ]
 		parameters = httpService:JSONDecode(p11)
 	})
 	
-	return var13
+	return var16
 end
 
-function t_5:deleteAllCredentialsFromKeystore(p15, p16, p17) --[[ line: 533 ]]
+function t_4:deleteAllCredentialsFromKeystore(p15, p16, p17) --[[ line: 543 ]]
 	-- upvalues: promiseModule (ref), httpService (ref), messageBus (ref)
 	if self.deleteKeystoreCredentialsRequestInFlight then
 		return promiseModule.reject()
 	end
-	local var14 = promiseModule.race({
-		promiseModule.new(function(p18, _) --[[ line: 541 ]]
+	local var17 = promiseModule.race({
+		promiseModule.new(function(p18, _) --[[ line: 551 ]]
 			-- upvalues: self (ref), p15 (ref), httpService (copy)
-			self.subscriber:subscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p15], function(p19) --[[ line: 544 ]]
+			self.subscriber:subscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p15], function(p19) --[[ line: 554 ]]
 				-- upvalues: self (copy), p15 (copy), httpService (copy), p18 (ref)
 				self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p15])
 				self.deleteKeystoreCredentialsRequestInFlight = false
 				p18(httpService:JSONEncode(p19))
 			end)
 		end),
-		promiseModule.delay(p17):andThen(function() --[[ line: 552 ]]
+		promiseModule.delay(p17):andThen(function() --[[ line: 562 ]]
 			-- upvalues: self (ref), p15 (ref)
 			self.subscriber:unsubscribe(self.DELETE_KEYSTORE_CREDENTIALS_RESPONSE_DESCRIPTOR[p15])
 			self.deleteKeystoreCredentialsRequestInFlight = false
@@ -435,21 +435,21 @@ function t_5:deleteAllCredentialsFromKeystore(p15, p16, p17) --[[ line: 533 ]]
 		parameters = httpService:JSONDecode(p16)
 	})
 	
-	return var14
+	return var17
 end
 
-function t_5:isAvailable(p20, p21) --[[ line: 573 ]]
+function t_4:isAvailable(p20, p21) --[[ line: 583 ]]
 	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var15 = promiseModule.race({
-		promiseModule.new(function(p22, _) --[[ line: 578 ]]
+	local var18 = promiseModule.race({
+		promiseModule.new(function(p22, _) --[[ line: 588 ]]
 			-- upvalues: self (ref)
-			self.subscriber:subscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR, function(p23) --[[ line: 579 ]]
+			self.subscriber:subscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR, function(p23) --[[ line: 589 ]]
 				-- upvalues: self (copy), p22 (ref)
 				self.subscriber:unsubscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR)
 				p22(p23)
 			end)
 		end),
-		promiseModule.delay(p21):andThen(function() --[[ line: 584 ]]
+		promiseModule.delay(p21):andThen(function() --[[ line: 594 ]]
 			-- upvalues: self (ref), promiseModule (copy)
 			self.subscriber:unsubscribe(self.IS_AVAILABLE_RESPONSE_DESCRIPTOR)
 			
@@ -458,9 +458,9 @@ function t_5:isAvailable(p20, p21) --[[ line: 573 ]]
 	})
 	messageBus.publish(self.IS_AVAILABLE_REQUEST_DESCRIPTOR, { credentialType = p20 })
 	
-	return var15
+	return var18
 end
 
-t_5.default = t_5.new()
+t_4.default = t_4.new()
 
-return t_5
+return t_4

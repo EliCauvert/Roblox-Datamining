@@ -580,6 +580,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,ع
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,أدخل الترجمة الصحيحة هنا
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,الصورة المحددة
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,النص الأصلي ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,ما هي المشكلة في هذه الترجمة؟
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,مشكلة في الدقة
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,غير لائق أو فيه استهزاء
@@ -609,7 +610,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,شكرً�
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,لحماية اللاعبين الأصغر سنًا، لا يمكن للحسابات التي تقل أعمار أصحابها عن 13 عامًا إرسال الملاحظات.
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,الملاحظات غير متاحة
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,إضافة لقطات
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,تحرير التحديد
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,لا توجد أي لقطات متاحة.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,اللقطات ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,ساعد المصمّم في الاطلاع على مشكلتك.
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,جارٍ تحميل اللقطات...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,تم تحديد {count}/{max}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,تعذَّر رفع لقطة واحدة أو أكثر من لقطاتك.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,الإبلاغ عن خطأ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,استعادة العناصر أو البيانات
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,الفئة *
@@ -618,12 +630,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,تحديد �
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,مشكلة في الشراء
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,بحد أقصى {MAX} من الأحرف
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,التفاصيل *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,إلغاء التحديد
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,قم بتضمين أي شيء ذي صلة بالمشكلة، مثل إصدار اللعبة وكيفية إعادة تكرار الخطوات.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,صِف ما هو مفقود ومتى رأيته آخر مرة. إذا تعرض حسابك للاختراق، يرجى تضمين رقم بطاقة دعم العملاء لدى منصّة Roblox وأي تفاصيل ذات صلة.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,صِف طلبك أو مشكلتك هنا. قدّم أكبر قدر ممكن من التفاصيل لمساعدتنا في فهم الموقف.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,أخبرنا بما حاولت شراؤه، ومتى حدث ذلك، والقيمة الإجمالية (على سبيل المثال 500 Robux / 4.99 دولار أمريكي). قم بتضمين أي رسائل خطأ رأيتها.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,هل تحاول الإبلاغ عن إساءة؟
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>إرسال بلاغ بدلًا من ذلك.</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,تحديد
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,يساعد هذا المصمّم في دعم الحساب الصحيح.
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,مشاركة معلومات المستخدم مع المصمّم
@@ -704,6 +718,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,التحرك لليمين
 CoreScripts.InGameMenu.Controls.NextTab,علامة التبويب التالية
 CoreScripts.InGameMenu.Controls.PerformanceStats,إحصاءات الأداء
 CoreScripts.InGameMenu.Controls.Playerlist,المشاركون
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,عالمي
+CoreScripts.InGameMenu.Controls.Playerlist.Here,هنا
 CoreScripts.InGameMenu.Controls.PreviousTab,علامة التبويب السابقة
 CoreScripts.InGameMenu.Controls.RecordVideo,تسجيل فيديو
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,نقل / إعادة تعيين الكاميرا
@@ -892,9 +909,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,استرجاع حياة ال�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,أنت على وشك الخروج من هذا الخادم والتبديل إلى خادم آخر.
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,هل تريد الخروج؟
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_EXPERIENCE}.
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,أنت على وشك الخروج من هذه اللعبة والرجوع إلى {PREVIOUS_GAME}.
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,اهتزاز
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,لتبديل التنقل في القائمة
@@ -970,7 +985,7 @@ CoreScripts.ScreenshotHud.Action.TakePhoto,التقط صورة
 CoreScripts.TextChat.Action.SendQuickWords,إرسال عبارات سريعة
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,عام
-CoreScripts.TextChat.ChannelTabs.Here,هنا
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,النظام
 CoreScripts.TextChat.ChannelTabs.Team,الفريق
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: كتم صوت المُتحدث.
@@ -1240,7 +1255,7 @@ Feature.Avatar.Action.Revert,
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,حفظ
 Feature.Avatar.Action.SaveAsNew,حفظ كجديد
-Feature.Avatar.Action.Select,تحديد
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,حدد عناصر متعددة
 Feature.Avatar.Action.SelectSlot,حدد خانة
 Feature.Avatar.Action.Share,مشاركة
@@ -1254,7 +1269,7 @@ Feature.Avatar.Action.Stay,البقاء
 Feature.Avatar.Action.Switch,تبديل
 Feature.Avatar.Action.TryOn,تجريب
 Feature.Avatar.Action.Unequip,إلغاء التجهيز
-Feature.Avatar.Action.Unselect,إلغاء التحديد
+Feature.Avatar.Action.Unselect,
 Feature.Avatar.Action.UnslotEmote,إزالة Emote من الخانة
 Feature.Avatar.Action.Update,
 Feature.Avatar.Action.UpdateExistingCharacter,تحديث الشخصية الموجودة
@@ -1262,6 +1277,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,تحديث الإطلالة ال�
 Feature.Avatar.Action.UpdateMakeupLook,تحديث الإطلالة
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,استكشاف الأنماط
+Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
+Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
+Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
+Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخلفية...
+Feature.Avatar.BackgroundGeneration.Title,إنشاء خلفية
 Feature.Avatar.Backgrounds.Title,الخلفيات
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,التعديل غير متاح لنمط الجسد هذا.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,الرجوع إلى ألوان الجسد الأصلية
@@ -1269,6 +1290,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,لون البشرة
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,ابتكِر إطلالة فريدة خاصة بك من خلال تركيبات لا حصر لها من المكياج.
 Feature.Avatar.EmoteAlreadyAssigned,هذا Emote تم تعيينه في خانة مسبقًا
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,حدث خطأ ما. الرجاء المحاولة مرة أخرى لاحقًا.
 Feature.Avatar.GetInspired,احصل على الإلهام
@@ -1824,6 +1846,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,حذف الأفاتار
 Feature.Catalog.Action.DescribeAvatar,وصف أفاتارك (اختياري)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,استعراض المتجر
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,خيارات العنصر
 Feature.Catalog.Action.LoadMore,تحميل المزيد
@@ -2119,6 +2142,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,للمتابعة، راجِع ا
 Feature.Catalog.Message.Checkout.UnavailableItems,لا يمكن شراء واحد أو أكثر من العناصر. يرجى إزالتها قبل المتابعة.
 Feature.Catalog.Message.CollectiblesInfo,يمكن إعادة بيع عناصر التذكارات من مستخدم لآخر بعد فترة احتفاظ معينة، حتى لو لم تنفد الكمية الأصلية. كما يمكن لمشتركي Roblox Plus عرض عناصر التذكارات لإعادة البيع.
 Feature.Catalog.Message.FTUXFavoritePillTooltip,أضِف هذا إلى المفضلة
+Feature.Catalog.Message.Favorites.CategoryEmpty,لم تقم بحفظ أي شيء في هذه الفئة حتى الآن.
+Feature.Catalog.Message.Favorites.Empty,لم تقم بحفظ أي شيء حتى الآن.
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,اكتشف أفضل العناصر المصمَّمة بإتقان على منصّة Roblox
 Feature.Catalog.Message.HoldingPolicyL1,ستخضع عمليات الشراء من إعادة البيع لفترة تعليق تصل إلى {days} من الأيام. لا يمكن إعادة بيع العنصر إلا بعد انتهاء فترة التعليق هذه. يمكن لمستخدمي Plus فقط إعادة بيع العناصر.
 Feature.Catalog.Message.HoldingPolicyL2,بعد الشراء، تصير المبيعات الأصلية معلقة لمدة تصل إلى {purchaseDays} (يوم). لا يمكن إعادة بيع العنصر إلا بعد انتهاء مدة التعليق هذه وسوف يكون لإعادة البيع مهلة تعليق أيضًا تصل إلى {resaleDays} (يوم). يمكن لمستخدمي Premium فقط إعادة بيع العناصر.
@@ -2203,6 +2228,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"بفضل ميزات ال
 Feature.Chat.Description.ExpressiveChatLearnMore,"تتيح لك ميزات الدردشة المتقدمة إمكانية إجراء الدردشة بدون فلترة والدردشة الصوتية الجماعية.
 
 يتطلب الوصول إلى الدردشة المتقدمة أن يكون كل الأعضاء مؤهلين وأن تتم ترقية الدردشة في حسابك."
+Feature.Chat.Description.InlineContextCardDescription,كن حذرًا عند الدردشة مع الأشخاص المجهولين. لا تقم بمشاركة معلوماتك الشخصية أو الانتقال إلى تطبيق آخر للدردشة. يمكنك حظر أي شخص أو الإبلاغ عنه من ملفه الشخصي.
 Feature.Chat.Description.NameGroup,اسم مجموعتك
 Feature.Chat.Description.NameGroupChat,اعط اسمًا لمجموعة الدردشة
 Feature.Chat.Description.OSAContextCardDescription,سلامتك تهمنا. هل تشعر بعدم ارتياح تجاه هذا الشخص؟ يمكنك حظره أو الإبلاغ عنه في أي وقت من ملفه الشخصي.
@@ -2222,6 +2248,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,أول تفاعل مع هذ�
 Feature.Chat.Heading.LeaveGroup,مغادرة المجموعة
 Feature.Chat.Heading.PartyWithConnections,فرقة مع جهات التواصل
 Feature.Chat.Heading.PartyWithFriends,فرقة مع الأصدقاء
+Feature.Chat.Heading.SafeChattingWithThisUser,حافِظ على سلامتك أثناء الدردشة مع هذا الشخص
+Feature.Chat.Heading.SafeChattingWithUsername,حافِظ على سلامتك أثناء الدردشة مع {displayName}
 Feature.Chat.Heading.UserInvitedYouToJoin,تمت دعوتك من {combinedName} للانضمام إلى الدردشة
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,تمت دعوتك من {combinedName} للانضمام إلى مجموعة
 Feature.Chat.Heading.YouWereInvitedToGroup,لقد تلقيتَ دعوة للانضمام إلى المجموعة
@@ -2279,7 +2307,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1س
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
-Feature.Chat.Label.TryAgain,حاول مرة أخرى
 Feature.Chat.Label.Unavailable,غير متاحة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
@@ -2700,6 +2727,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,تعذّر عرض معلو
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُصمِّم التجربة: {CreatorName}. مموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل بناءً على عوامل مختلفة مثل موقعك الجغرافي ومعلومات الجهاز والعمر وسلوكك على المنصّة، بهدف عرض محتوى ملائم لك. مُصمِّم التجربة: {CreatorName}. مُموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُصمِّم التجربة: {CreatorName}. مُموِّل هذا الإعلان: {PayerName}.
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مموِّل هذا الإعلان هو {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل بناءً على عوامل مختلفة مثل موقعك الجغرافي ومعلومات الجهاز والعمر وسلوكك على المنصّة، بهدف عرض محتوى ملائم لك. مُموِّل هذا الإعلان هو {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُموِّل هذا الإعلان هو {PayerName}.
 Feature.GameDetails.Message.SuggestLessOften,سنقترح هذا بشكل أقل تكرارًا
 Feature.GameDetails.RatingPercentOnly,التقييم {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -3357,7 +3387,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. حدِّد ""ال�
 2. حدِّد ""جهات الاتصال""
 3. اسمح لمنصة Roblox بالوصول إلى جهات اتصالك"
 Feature.SettingsHub.Description.ContactsPermissionIOS,للتواصل مع الأصدقاء، اسمح لمنصة Roblox بالوصول إلى جهات اتصالك.
-Feature.SettingsHub.Description.PeoplesNames,إظهار الأوسمة الخاصة بك أو إخفاؤها عن الأشخاص في التجارب.
+Feature.SettingsHub.Description.PeoplesNames,إظهار الأوسمة لديك أو إخفاؤها عن الأشخاص في الألعاب.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. حدِّد ""الإذن""
 2. حدِّد ""الكاميرا""
 3. اسمح لمنصة Roblox بالوصول إلى الكاميرا"
@@ -3379,7 +3409,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,أداة تحليل الأداء
 Feature.SettingsHub.GameSettings.MyBadges,أوسمتي
 Feature.SettingsHub.GameSettings.OutputDevice,جهاز الإخراج
 Feature.SettingsHub.GameSettings.PeopleNames,عرض أسماء الأشخاص
-Feature.SettingsHub.GameSettings.PeopleNames.Description,عرض الأسماء فوق الأشخاص أو إخفاؤها في التجارب. قد تحتوي بعض التجارب على إعدادات مخصصة تتجاوز تفضيلاتك.
+Feature.SettingsHub.GameSettings.PeopleNames.Description,عرض الأسماء فوق الأشخاص أو إخفاؤها في الألعاب. قد تحتوي بعض الألعاب على إعدادات مخصصة تتجاوز تفضيلاتك.
 Feature.SettingsHub.GameSettings.PeoplesNames,أسماء الأشخاص
 Feature.SettingsHub.Heading.InviteFriends,
 Feature.SettingsHub.Heading.InviteUser,دعوة {DisplayName}؟
@@ -4230,8 +4260,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} وصل للحد الأقصى للأصدقاء.
 InGame.PlayerDropDown.Report,الإبلاغ عن إساءة
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,آخر تحديث قبل {minutes} من الدقائق
+InGame.PlayerList.FooterUnableToLoad,
+InGame.PlayerList.FriendsEmpty,لم يلعب أي من أصدقائك هذه التجربة حتى الآن.
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,قائمة المشاركين غير متاحة. يُرجى المحاولة مرة أخرى لاحقًا.
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,الترتيب
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,في الاستوديو
 InGame.Presence.Label.Offline,

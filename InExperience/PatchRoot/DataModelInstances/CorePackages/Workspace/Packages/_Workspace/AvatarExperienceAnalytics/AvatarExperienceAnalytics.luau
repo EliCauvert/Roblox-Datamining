@@ -7,6 +7,7 @@
 	sendUnifiedEventLog = require(script.sendUnifiedEventLog),
 	sendUnifiedEventLogForInstance = require(script.sendUnifiedEventLogForInstance),
 	logWidgetLoaded = require(script.logWidgetLoaded),
+	flushDeferredWidgetLoaded = require(script.flushDeferredWidgetLoaded),
 	sendUnifiedEventForDeferredAction = require(script.sendUnifiedEventForDeferredAction),
 	sendUnifiedClickItemDetailsEvent = require(script.sendUnifiedClickItemDetailsEvent),
 	sendUnifiedEventsForMultiItemShopping = require(script.sendUnifiedEventsForMultiItemShopping),

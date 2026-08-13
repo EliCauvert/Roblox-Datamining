@@ -32,7 +32,7 @@ return function(p0) --[[ line: 61 | named "CoreScriptsRootProvider" ]]
 	return reactModule.createElement(appInteractionFeedbackProvider, {}, {
 		tree = reactModule.createElement(feedbackManagerInjectionContextProvider, nil, {
 			tree = reactModule.createElement(foundationModule.FoundationProvider, {
-				theme = if var13.themeName == "dark" then foundationModule.Enums.Theme.Dark else foundationModule.Enums.Theme.Light,
+				colorMode = if var13.themeName == "dark" then foundationModule.Enums.ColorMode.Dark else foundationModule.Enums.ColorMode.Light,
 				device = if var13.deviceType == deviceType.Console then foundationModule.Enums.Device.Console else foundationModule.Enums.Device.Desktop
 			}, {
 				tree = reactModule.createElement(roactRoduxModule.StoreProvider, {

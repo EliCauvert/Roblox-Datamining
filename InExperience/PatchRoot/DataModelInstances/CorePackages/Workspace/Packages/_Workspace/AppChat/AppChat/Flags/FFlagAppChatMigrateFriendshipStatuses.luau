@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppChatMigrateFriendshipStatuses", false) and require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).FFlagEnableGetFriendshipStatus

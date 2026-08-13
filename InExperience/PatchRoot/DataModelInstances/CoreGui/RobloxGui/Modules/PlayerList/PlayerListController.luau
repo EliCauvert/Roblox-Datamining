@@ -355,7 +355,7 @@ function t:_setupReskin() --[[ line: 346 ]]
 	local constantsModule = require(robloxGui.Modules.TopBar.Constants)
 	local foundationModule = require(corePackagesService.Packages.Foundation)
 	local foundationProvider = foundationModule.FoundationProvider
-	local theme = foundationModule.Enums.Theme
+	local colorMode = foundationModule.Enums.ColorMode
 	local device = foundationModule.Enums.Device
 	local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
 	local playerListPanel = playerListModule.Presentation.PlayerListPanel
@@ -523,9 +523,9 @@ function t:_setupReskin() --[[ line: 346 ]]
 	end
 	
 	local function buildReskinElement() --[[ line: 498 ]]
-		-- upvalues: reactModule (ref), foundationProvider (ref), theme (ref), var60 (ref), userGameSettingsService (copy), leaderboardScrim (ref), status (ref), foundationModule (ref), resolveContainerProps (ref), playerListContainer (copy), leaderboardStoreInstanceManager (copy), constantsModule (ref), ok (ref), playerListPanel (ref), var57 (ref), playerContextualMenuView (ref)
+		-- upvalues: reactModule (ref), foundationProvider (ref), colorMode (ref), var60 (ref), userGameSettingsService (copy), leaderboardScrim (ref), status (ref), foundationModule (ref), resolveContainerProps (ref), playerListContainer (copy), leaderboardStoreInstanceManager (copy), constantsModule (ref), ok (ref), playerListPanel (ref), var57 (ref), playerContextualMenuView (ref)
 		return reactModule.createElement(foundationProvider, {
-			theme = theme.Dark,
+			colorMode = colorMode.Dark,
 			device = var60,
 			preferences = {
 				preferredTransparency = userGameSettingsService.PreferredTransparency

@@ -22,19 +22,15 @@ local robloxAppEnumsModule = require(parent.RobloxAppEnums)
 local roactUtilsModule = require(parent.RoactUtils)
 local socialExperienceJoinModule = require(parent.SocialExperienceJoin)
 local useNavigation = require(parent.Navigation).useNavigation
-local useQuery = require(parent.ApolloClient).useQuery
-local apolloLocalStateModule = require(parent.ApolloLocalState)
-local playersService = game:GetService("Players")
 local userProfilesModule = require(parent.UserProfiles)
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagSocialCarouselUseProfileStore = sharedFlagsModule.FFlagSocialCarouselUseProfileStore
-local fFlagFriendSortedByPresenceSignalsImplementation = sharedFlagsModule.FFlagFriendSortedByPresenceSignalsImplementation
 local fFlagJoinCardAgeCheckUpsell = sharedFlagsModule.FFlagJoinCardAgeCheckUpsell
 local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
 local dataHydrationModule = require(parent.DataHydration)
-local var19 = if fFlagSocialCarouselUseProfileStore or fFlagFriendSortedByPresenceSignalsImplementation then require(parent.Signals) else nil
-local var20 = if fFlagSocialCarouselUseProfileStore or fFlagFriendSortedByPresenceSignalsImplementation then require(parent.SignalsReact) else nil
-local var21 = if fFlagSocialCarouselUseProfileStore then userProfilesModule.Stores.UserProfileStore.get() else nil
+local signalsModule = require(parent.Signals)
+local signalsReactModule = require(parent.SignalsReact)
+local var19 = if fFlagSocialCarouselUseProfileStore then userProfilesModule.Stores.UserProfileStore.get() else nil
 local gameDetailModule = require(parent.GameDetail)
 local useExperienceBannerImage = gameDetailModule.useExperienceBannerImage
 local openGameDetails = gameDetailModule.OpenGameDetails
@@ -57,7 +53,7 @@ local dependencyArray = roactUtilsModule.Hooks.dependencyArray
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
 local useJoinUserInExperience = socialExperienceJoinModule.useJoinUserInExperience
 local mobileGameJoinCardModule = require(script.Parent.MobileGameJoinCard)
-local var27 = if fFlagFriendSortedByPresenceSignalsImplementation then dataHydrationModule.Presence.PresenceStore.get() else nil
+local var25 = dataHydrationModule.Presence.PresenceStore.get()
 local t = {
 	universeId = "",
 	lastLocation = "",
@@ -67,10 +63,10 @@ local t = {
 	gameId = ""
 }
 
-return function() --[[ line: 97 | named "MobileGameJoinCardContainer" ]]
-	-- upvalues: fFlagMobileGameJoinCardEDPFromTitleModule (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), useDispatch (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appGuiService (ref), appSessionService (ref), useAppPolicy (ref), playersService (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), reactModule (ref), var19 (ref), var27 (ref), var20 (ref), useQuery (ref), apolloLocalStateModule (ref), useGameJoinCardAnalyticsModule (ref), fFlagSocialCarouselUseProfileStore (ref), var21 (ref), userProfilesModule (ref), useExperienceBannerImage (ref), fFlagMobileGameJoinCardThumbnailModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), gameJoinCardTelemetryModule (ref), fFlagJoinCardAgeCheckUpsell (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), t (ref), useAgeCheckPressLogger (ref), gameJoinCardButtonAction (ref), gamePlayIntent (ref), peopleListInHomePage (ref), httpService (ref), dependencyArray (ref), fFlagEnableSplitPane (ref), appPage (ref), viewProfileSourceValues (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), notificationType (ref), mobileGameJoinCardModule (ref)
+return function() --[[ line: 85 | named "MobileGameJoinCardContainer" ]]
+	-- upvalues: fFlagMobileGameJoinCardEDPFromTitleModule (ref), fFlagMobileGameJoinCardEDPFromThumbnailModule (ref), useDispatch (ref), useNavigation (ref), useRoactService (ref), appEventIngestService (ref), appGuiService (ref), appSessionService (ref), useAppPolicy (ref), reactModule (ref), signalsModule (ref), var25 (ref), signalsReactModule (ref), useGameJoinCardAnalyticsModule (ref), fFlagSocialCarouselUseProfileStore (ref), var19 (ref), userProfilesModule (ref), useExperienceBannerImage (ref), fFlagMobileGameJoinCardThumbnailModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), gameJoinCardTelemetryModule (ref), fFlagJoinCardAgeCheckUpsell (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), t (ref), useAgeCheckPressLogger (ref), gameJoinCardButtonAction (ref), gamePlayIntent (ref), peopleListInHomePage (ref), httpService (ref), dependencyArray (ref), fFlagEnableSplitPane (ref), appPage (ref), viewProfileSourceValues (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), notificationType (ref), mobileGameJoinCardModule (ref)
 -- FATAL: Failed to generate AST for `MobileGameJoinCardContainer` function:
-runtime : [KeyError] :11990: 179
+runtime : [KeyError] :11990: 165
 Traceback:
 	runtime : [lunaux]:11990 function decompile_function
 	runtime : [lunaux]:1933 function normalize_cfg

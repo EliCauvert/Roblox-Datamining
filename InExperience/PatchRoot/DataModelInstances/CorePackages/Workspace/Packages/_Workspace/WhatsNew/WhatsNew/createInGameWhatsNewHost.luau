@@ -24,7 +24,7 @@ return {
 			return var7
 		end
 		ensureWhatsNewStoreInitializedModule.ensureWhatsNewStoreInitialized({ scopeActions = p0.scopeActions })
-		local var8 = reactModule.createElement(foundationModule.FoundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		local var8 = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			LocalizationProvider = reactModule.createElement(localizationProvider, {
 				localization = localization.new(localizationService.RobloxLocaleId)
 			}, {

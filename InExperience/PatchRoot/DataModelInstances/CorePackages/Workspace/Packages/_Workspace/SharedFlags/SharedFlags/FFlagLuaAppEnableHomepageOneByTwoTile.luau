@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppEnableHomepageOneByTwoTileDev", false) and require(script.Parent.FFlagLuaAppEnableNxMRoduxApportioning)
+﻿return game:DefineFastFlag("LuaAppEnableHomepageOneByTwoTileDev", false) and (require(script.Parent.FFlagLuaAppEnableNxMRoduxApportioning) and require(script.Parent.FFlagLuaAppBroadenVideoAnalytics))

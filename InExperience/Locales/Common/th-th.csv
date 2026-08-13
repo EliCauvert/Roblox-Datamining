@@ -580,6 +580,7 @@ CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationObjectPlaceholder,�
 CoreScripts.Feedback.FeedbackReportDialog.CorrectTranslationPlaceholder,กรอกคำแปลที่ถูกต้องที่นี่
 CoreScripts.Feedback.FeedbackReportDialog.ImageSelectionHeader,ภาพที่เลือก
 CoreScripts.Feedback.FeedbackReportDialog.MainHeader,โปรดให้ข้อเสนอแนะ
+CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader,ข้อความเดิม ({SourceLanguage})
 CoreScripts.Feedback.FeedbackReportDialog.ProblemDropdownSelectionHeader,คำแปลนี้มีปัญหาตรงไหน?
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.AccuracyIssue,ปัญหาเกี่ยวกับความถูกต้องแม่นยำ
 CoreScripts.Feedback.FeedbackReportDialog.ProblemOption.InappropriateOrDerogatory,ไม่เหมาะสมหรือทำให้เสื่อมเสีย
@@ -609,7 +610,18 @@ CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.RateLimited,ขอข
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13,เพื่อปกป้องผู้เล่นอายุน้อย บัญชีที่มีอายุต่ำกว่า 13 ปีจะไม่สามารถส่งข้อเสนอแนะได้
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton,
 CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title,ไม่สามารถให้ข้อเสนอแนะได้
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Add,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Cancel,
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add,เพิ่มภาพที่จับ
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection,แก้ไขภาพที่เลือก
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty,ไม่มีภาพที่จับ
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading,ภาพ ({count}/{max})
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint,ช่วยให้ครีเอเตอร์เห็นปัญหาของคุณ
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading,กำลังโหลดภาพที่จับ...
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime,{date} - {time}
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected,เลือกแล้ว {count}/{max} รายการ
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError,อัปโหลดภาพที่จับอย่างน้อย 1 รายการไม่สำเร็จ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport,รายงานจุดบกพร่อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest,การกู้คืนไอเท็มหรือข้อมูล
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Label,หมวดหมู่ *
@@ -618,12 +630,14 @@ CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Placeholder,เลือ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue,ปัญหาในการซื้อ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint,ความยาวสูงสุด {MAX} อักขระ
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label,รายละเอียด *
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Deselect,ยกเลิกการเลือก
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport,ระบุข้อมูลที่เกี่ยวข้องกับปัญหา เช่น เวอร์ชันของเกมและวิธีที่นำไปสู่ปัญหาอีกครั้ง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest,อธิบายว่ามีอะไรไม่ครบและคุณเห็นครั้งสุดท้ายเมื่อใด หากบัญชีของคุณถูกแฮ็ก โปรดระบุหมายเลขตั๋ว Roblox CS ของคุณและรายละเอียดที่เกี่ยวข้อง
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other,อธิบายคำขอหรือปัญหาของคุณที่นี่ โปรดระบุรายละเอียดให้มากที่สุดเพื่อช่วยให้เราเข้าใจสถานการณ์
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue,ระบุว่าคุณพยายามซื้ออะไร เวลาเกิดเหตุการณ์ และมูลค่ารวม (เช่น 500 Robux / $4.99) รวมถึงข้อความแสดงข้อผิดพลาดที่คุณเห็น
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead,พยายามรายงานการกระทำผิดอยู่ใช่ไหม?
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link,<u>ส่งรายงานแทน</u>
+CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Select,เลือก
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Send,
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Hint,การดำเนินการนี้จะช่วยให้ครีเอเตอร์รู้ว่าต้องช่วยเหลือบัญชีไหน
 CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label,แชร์ข้อมูลผู้ใช้กับครีเอเตอร์
@@ -704,6 +718,9 @@ CoreScripts.InGameMenu.Controls.MoveRight,เลื่อนไปทางข�
 CoreScripts.InGameMenu.Controls.NextTab,แท็บถัดไป
 CoreScripts.InGameMenu.Controls.PerformanceStats,สถิติประสิทธิภาพ
 CoreScripts.InGameMenu.Controls.Playerlist,ตารางอันดับ
+CoreScripts.InGameMenu.Controls.Playerlist.Friends,
+CoreScripts.InGameMenu.Controls.Playerlist.Global,Global
+CoreScripts.InGameMenu.Controls.Playerlist.Here,ที่นี่
 CoreScripts.InGameMenu.Controls.PreviousTab,แท็บก่อนหน้า
 CoreScripts.InGameMenu.Controls.RecordVideo,บันทึกวิดีโอ
 CoreScripts.InGameMenu.Controls.ResetCameraLabel,เคลื่อนที่ / รีเซ็ตกล้อง
@@ -892,9 +909,7 @@ CoreScripts.InGameMenu.RespawnCharacterDialogTitle,ต้องการให�
 CoreScripts.InGameMenu.SwitchServer.ConfirmBody,คุณกำลังจะออกจากเซิร์ฟเวอร์นี้และเปลี่ยนไปใช้เซิร์ฟเวอร์อื่น
 CoreScripts.InGameMenu.SwitchServer.ConfirmHeader,
 CoreScripts.InGameMenu.Traversal.HistoryDescription,เข้าร่วมเกมที่เคยเล่น
-CoreScripts.InGameMenu.Traversal.HistoryDescriptionUsingGame,
 CoreScripts.InGameMenu.Traversal.LeaveBody,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_EXPERIENCE}
-CoreScripts.InGameMenu.Traversal.LeaveBodyUsingGame,คุณกำลังจะออกจากเกมนี้และกลับไปที่ {PREVIOUS_GAME}
 CoreScripts.InGameMenu.Traversal.LeaveHeader,
 CoreScripts.InGameMenu.Vibration,
 CoreScripts.InGameMenu.VirtualCursorHintPostIcon,เพื่อเปิด/ปิดการนำทางบนเมนู
@@ -972,7 +987,7 @@ CoreScripts.ScreenshotHud.Action.TakePhoto,ถ่ายรูป
 CoreScripts.TextChat.Action.SendQuickWords,ส่งข้อความด่วน
 CoreScripts.TextChat.ChannelTabs.Friends,
 CoreScripts.TextChat.ChannelTabs.Global2,ส่วนกลาง
-CoreScripts.TextChat.ChannelTabs.Here,ที่นี่
+CoreScripts.TextChat.ChannelTabs.Here,
 CoreScripts.TextChat.ChannelTabs.System,ระบบ
 CoreScripts.TextChat.ChannelTabs.Team,ทีม
 CoreScripts.TextChat.ChatCommands.Mute.Description,/mute <speaker>: ปิดเสียงผู้พูด
@@ -1206,7 +1221,7 @@ Feature.AppealsPortal.Action.OK,
 Feature.AppealsPortal.Label.ReportAndAppeals,การละเมิดและการอุทธรณ์
 Feature.Avatar.Action.AddNewMakeupLook,เพิ่มลุคใหม่
 Feature.Avatar.Action.Cancel,
-Feature.Avatar.Action.CancelSelection,ยกเลิกการเลือก
+Feature.Avatar.Action.CancelSelection,
 Feature.Avatar.Action.Clear,ล้างข้อมูล
 Feature.Avatar.Action.ComposerPost,โพสต์
 Feature.Avatar.Action.ComposerPreviewAndPost,ดูตัวอย่างและโพสต์
@@ -1243,7 +1258,7 @@ Feature.Avatar.Action.Revert,แปลงกลับ
 Feature.Avatar.Action.Rotate,
 Feature.Avatar.Action.Save,บันทึก
 Feature.Avatar.Action.SaveAsNew,บันทึกเป็นรายการใหม่
-Feature.Avatar.Action.Select,เลือก
+Feature.Avatar.Action.Select,
 Feature.Avatar.Action.SelectMultipleItems,เลือกหลายไอเท็ม
 Feature.Avatar.Action.SelectSlot,เลือกช่อง
 Feature.Avatar.Action.Share,แชร์
@@ -1827,6 +1842,7 @@ Feature.Catalog.Action.Delete,
 Feature.Catalog.Action.DeleteAvatar,
 Feature.Catalog.Action.DescribeAvatar,อธิบายเกี่ยวกับอวาตาร์ของคุณ (ไม่บังคับ)
 Feature.Catalog.Action.Favorite,
+Feature.Catalog.Action.Favorites.BrowseMarketplace,เลือกดูในมาร์เก็ตเพลส
 Feature.Catalog.Action.GoBack,
 Feature.Catalog.Action.ItemOptions,ตัวเลือกสำหรับไอเท็ม
 Feature.Catalog.Action.LoadMore,โหลดเพิ่มเติม
@@ -2122,6 +2138,8 @@ Feature.Catalog.Message.Checkout.PurchaseFailed,หากต้องการ�
 Feature.Catalog.Message.Checkout.UnavailableItems,ซื้อไม่ได้อย่างน้อย 1 รายการ โปรดลบออกก่อนดำเนินการต่อ
 Feature.Catalog.Message.CollectiblesInfo,ผู้ใช้สามารถขายต่อไอเท็มของสะสมให้กับผู้อื่นได้หลังช่วงพักสิ้นสุดลง แม้ว่าจะยังมีไอเท็มต้นฉบับเหลืออยู่ในสต็อคก็ตาม สมาชิก Premium สามารถขายต่อไอเท็มของสะสมได้
 Feature.Catalog.Message.FTUXFavoritePillTooltip,เพิ่มรายการนี้ไปยังรายการโปรดของคุณ
+Feature.Catalog.Message.Favorites.CategoryEmpty,คุณยังไม่ได้บันทึกอะไรในหมวดหมู่นี้
+Feature.Catalog.Message.Favorites.Empty,คุณยังไม่ได้บันทึกอะไรเลย
 Feature.Catalog.Message.HighDefinitionCategoryTooltip,สำรวจไอเท็มที่สร้างขึ้นอย่างประณีตที่สุดใน Roblox
 Feature.Catalog.Message.HoldingPolicyL1,การซื้อจากการขายต่อจะมีช่วงเวลาถือครอง {days} วัน ซึ่งไอเท็มดังกล่าวจะสามารถนำไปขายต่อได้หลังจากช่วงเวลาถือครองสิ้นสุดลง โดยสมาชิก Plus เท่านั้นที่สามารถทำการขายต่อไอเท็มได้
 Feature.Catalog.Message.HoldingPolicyL2,หลังจากทำการซื้อแล้ว ไอเท็มที่ซื้อโดยตรงจากครีเอเตอร์จะเข้าสู่ช่วงพักเป็นเวลาไม่เกิน {purchaseDays} วัน ซึ่งไอเท็มดังกล่าวจะสามารถนำไปขายต่อได้หลังจากช่วงพักสิ้นสุดลง ส่วนการขายต่อจะมีช่วงพักเป็นเวลาไม่เกิน {resaleDays} วัน โดยสมาชิก Premium เท่านั้นที่สามารถทำการขายต่อไอเท็มได้
@@ -2206,6 +2224,7 @@ Feature.Chat.Description.CreateUnfilteredChatWithVoice,"คุณสมบัต
 Feature.Chat.Description.ExpressiveChatLearnMore,"คุณสมบัติแชทที่สื่ออารมณ์จะให้คุณแชทโดยไม่มีตัวกรองและพูดคุยด้วยเสียงใน Party
 
 การเข้าถึงแชทที่สื่ออารมณ์จะถูกจำกัดจนกว่าสมาชิกทุกคนจะมีสิทธิ์และคุณอัปเกรดแชทแล้ว"
+Feature.Chat.Description.InlineContextCardDescription,โปรดใช้ความระมัดระวังเมื่อแชทกับคนแปลกหน้า อย่าแชร์ข้อมูลส่วนตัวหรือย้ายไปแชทในแอปอื่น คุณสามารถบล็อคหรือรายงานผู้ใช้จากโปรไฟล์ของบุคคลดังกล่าวได้
 Feature.Chat.Description.NameGroup,ตั้งชื่อกลุ่มของคุณ
 Feature.Chat.Description.NameGroupChat,ตั้งชื่อกลุ่มแชทของคุณ
 Feature.Chat.Description.OSAContextCardDescription,เราให้ความสำคัญกับความปลอดภัยของคุณ หากรู้สึกไม่สบายใจ คุณสามารถบล็อคหรือรายงานบุคคลนี้จากโปรไฟล์ของเขาได้ทุกเมื่อ
@@ -2225,6 +2244,8 @@ Feature.Chat.Heading.FirstInteractionWithThisPerson,การโต้ตอบ�
 Feature.Chat.Heading.LeaveGroup,ออกจากกลุ่ม
 Feature.Chat.Heading.PartyWithConnections,Party กับเครือข่าย
 Feature.Chat.Heading.PartyWithFriends,Party กับเพื่อน
+Feature.Chat.Heading.SafeChattingWithThisUser,โปรดใช้ความระมัดระวังเมื่อแชทกับบุคคลนี้
+Feature.Chat.Heading.SafeChattingWithUsername,โปรดใช้ความระมัดระวังเมื่อแชทกับ {displayName}
 Feature.Chat.Heading.UserInvitedYouToJoin,{combinedName} ชวนคุณเข้าร่วม
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} เชิญคุณเข้าร่วมกลุ่ม
 Feature.Chat.Heading.YouWereInvitedToGroup,คุณได้รับเชิญให้เข้าร่วมกลุ่ม
@@ -2282,7 +2303,6 @@ Feature.Chat.Label.TimestampOneHourAbbreviated,1 ชม.
 Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 นาที
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 สัปดาห์
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} สัปดาห์
-Feature.Chat.Label.TryAgain,
 Feature.Chat.Label.Unavailable,ไม่พร้อมให้บริการ
 Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จัก
 Feature.Chat.Label.User,
@@ -2703,6 +2723,9 @@ Feature.GameDetails.Message.SponsoredDisclosure.Error,ไม่สามาร�
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {CreatorName} เป็นครีเอเตอร์ของประสบการณ์ และ {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณ ที่นี่:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยต่างๆ เช่น ตำแหน่งที่ตั้ง ข้อมูลอุปกรณ์ อายุ และพฤติกรรมบนแพลตฟอร์ม เพื่อแสดงเนื้อหาที่เกี่ยวข้องแก่คุณ โดยมี {CreatorName} เป็นครีเอเตอร์ของประสบการณ์ และ {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณ ที่นี่:"
 Feature.GameDetails.Message.SponsoredDisclosure.U18,เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {CreatorName} เป็นครีเอเตอร์ของประสบการณ์ และ {PayerName} เป็นผู้ชำระค่าสนับสนุน
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณที่นี่:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยต่างๆ เช่น ตำแหน่งที่ตั้ง ข้อมูลอุปกรณ์ อายุ และพฤติกรรมบนแพลตฟอร์ม เพื่อแสดงเนื้อหาที่เกี่ยวข้องแก่คุณ โดยมี {PayerName} เป็นผู้ชำระค่าสนับสนุน หากต้องการเรียนรู้เพิ่มเติม โปรดไปที่หน้า ""ความเป็นส่วนตัวและระดับความเหมาะสมของเนื้อหา"" ในส่วนการตั้งค่าในบัญชีของคุณที่นี่:"
+Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,เนื้อหาที่ได้รับการสนับสนุนที่คุณเห็นนี้อ้างอิงจากปัจจัยที่ไม่ใช่ข้อมูลส่วนบุคคล เช่น ข้อมูลอุปกรณ์ ตำแหน่งที่ตั้ง และอายุ เพื่อแสดงเนื้อหาที่เหมาะสมแก่คุณ โดยมี {PayerName} เป็นผู้ชำระค่าสนับสนุน
 Feature.GameDetails.Message.SuggestLessOften,เราจะแนะนำประสบการณ์นี้น้อยลง
 Feature.GameDetails.RatingPercentOnly,เรตติ้ง {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
@@ -4233,8 +4256,14 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} มีเพื่อนถึงจำนวนสูงสุดแล้ว
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerList.FooterLastUpdated,อัปเดตล่าสุดเมื่อ {minutes} นาทีก่อน
+InGame.PlayerList.FooterUnableToLoad,ไม่สามารถโหลดได้
+InGame.PlayerList.FriendsEmpty,ยังไม่มีเพื่อนของคุณคนไหนเล่นประสบการณ์นี้เลย
 InGame.PlayerList.Leaderboard,
+InGame.PlayerList.LeaderboardUnavailable,ตารางอันดับไม่พร้อมใช้งาน โปรดลองอีกครั้งในภายหลัง
 InGame.PlayerList.Players,
+InGame.PlayerList.RankHeader,
+InGame.PlayerList.Retry,
 InGame.Presence.Label.InGame,
 InGame.Presence.Label.InStudio,ใน Studio
 InGame.Presence.Label.Offline,

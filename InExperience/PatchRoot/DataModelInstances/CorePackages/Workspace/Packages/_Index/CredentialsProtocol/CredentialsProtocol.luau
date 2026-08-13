@@ -7,6 +7,7 @@ return {
 	Flags = {
 		GetFFlagLuaAppEnableCredentialsProtocol = require(script.Flags.GetFFlagLuaAppEnableCredentialsProtocol),
 		GetFIntLuaAppCredentialsProtocolTimeout = require(script.Flags.GetFIntLuaAppCredentialsProtocolTimeout),
-		GetFIntLuaAppCredentialsProtocolAvailableTimeout = require(script.Flags.GetFIntLuaAppCredentialsProtocolAvailableTimeout)
+		GetFIntLuaAppCredentialsProtocolAvailableTimeout = require(script.Flags.GetFIntLuaAppCredentialsProtocolAvailableTimeout),
+		FFlagLuaAppNormalizeUnifiedPasskeyResponse = require(script.Flags.FFlagLuaAppNormalizeUnifiedPasskeyResponse)
 	}
 }

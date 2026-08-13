@@ -22,7 +22,7 @@ local fFlagEnableInExperienceShop = sharedFlagsModule.FFlagEnableInExperienceSho
 local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
 local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
 local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
-local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
+local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 
 local function _() --[[ line: 34 | named "initializeIntegrations" ]]
@@ -36,7 +36,7 @@ local _ = function() --[[ line: 38 ]]
 end
 
 local function configureUnibar() --[[ line: 42 ]]
-	-- upvalues: fFlagAddMapToNineDot (ref), buildMenuOrderModule (ref), isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), fFlagExpChatEnableFriendsTab (ref), argoPartyExperimentation (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), constantsModule (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), constantsModule_1 (ref), guiService (ref), fFlagEnableInExperienceShop (ref)
+	-- upvalues: fFlagAddMapToNineDot (ref), buildMenuOrderModule (ref), isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), fFlagExpChatCanShowFriendsTab (ref), argoPartyExperimentation (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), constantsModule (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), constantsModule_1 (ref), guiService (ref), fFlagEnableInExperienceShop (ref)
 	local var12
 	local _ = nil
 	
@@ -47,7 +47,7 @@ local function configureUnibar() --[[ line: 42 ]]
 		table.insert(var12, "respawn")
 		table.insert(var12, 1, "trust_and_safety")
 		
-		if isConnectDropdownEnabledModule() and (not fFlagRemoveFriendsChatUnibarEntrypoints or not fFlagExpChatEnableFriendsTab or not argoPartyExperimentation.getIsRenameEnabled()) then
+		if isConnectDropdownEnabledModule() and (not fFlagRemoveFriendsChatUnibarEntrypoints or not fFlagExpChatCanShowFriendsTab or not argoPartyExperimentation.getIsRenameEnabled()) then
 			table.insert(var12, 1, "connect_dropdown")
 		end
 	end

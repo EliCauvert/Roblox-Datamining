@@ -15,9 +15,10 @@ local _ = require(inGameAssetReporting.Analysis.SceneAnalysis)
 local fFlagPrefillPreciseSelectionChoices = require(parent.SharedFlags).FFlagPrefillPreciseSelectionChoices
 local fFlagGenericAbuseReportingGranularExports = require(parent.SharedFlags).FFlagGenericAbuseReportingGranularExports
 local fFlagUpdateInGameAssetReportingCTAs = require(parent.SharedFlags).FFlagUpdateInGameAssetReportingCTAs
+local fFlagDropUnroutableMultiReportOptions = require(parent.SharedFlags).FFlagDropUnroutableMultiReportOptions
 
-return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
-	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagUpdateInGameAssetReportingCTAs (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
+return function(value) --[[ line: 38 | named "InGameAssetReportSubmitDialog" ]]
+	-- upvalues: fFlagPrefillPreciseSelectionChoices (ref), useLocalization (ref), getPreselectedSurfaceValueModule (ref), reactModule (ref), constantsModule (ref), fFlagDropUnroutableMultiReportOptions (ref), defaultDualDropdownDialogV2Module (ref), defaultDualDropdownDialogModule (ref), fFlagUpdateInGameAssetReportingCTAs (ref), fFlagGenericAbuseReportingGranularExports (ref), isShowUKOSAIllegalContentReportingLink (ref), view (ref), OSAReportLink (ref)
 	local var8 = if fFlagPrefillPreciseSelectionChoices then useLocalization({
 		title = "Feature.ReportAbuse.Title.SelectInSceneFinishYourReport",
 		problemBullying = "Feature.ReportAbuse.Problem.Bullying",
@@ -53,7 +54,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 	if fFlagPrefillPreciseSelectionChoices then
 		local var9 = getPreselectedSurfaceValueModule(value.extractionResult)
 		local var10 = if var9 == "avatar" then var8.surfaceAvatar elseif var9 == "item" then var8.surfaceItem elseif var9 == "text" then var8.surfaceTextChat else nil
-		reactModule.useEffect(function() --[[ line: 81 ]]
+		reactModule.useEffect(function() --[[ line: 82 ]]
 			-- upvalues: var10 (ref), value (ref), constantsModule (copy)
 			if var10 then
 				value.analyticsDispatch({
@@ -62,9 +63,15 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 				})
 			end
 		end, { var10 })
-		local var11 = reactModule.useMemo(function() --[[ line: 142 ]]
-			-- upvalues: var8 (write)
-			return {
+		local var11 = reactModule.useMemo(function() --[[ line: 196 ]]
+			-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var8 (write)
+			return if fFlagDropUnroutableMultiReportOptions then {
+				{ value = "avatar", label = var8.surfaceAvatar },
+				{ value = "drawing", label = var8.surfaceDrawing },
+				{ value = "experience", label = var8.surfaceExperience },
+				{ value = "item", label = var8.surfaceItem },
+				{ value = "text", label = var8.surfaceTextChat }
+			} else {
 				{ value = "avatar", label = var8.surfaceAvatar },
 				{ value = "drawing", label = var8.surfaceDrawing },
 				{ value = "experience", label = var8.surfaceExperience },
@@ -82,9 +89,50 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 		
 		return reactModule.createElement(defaultDualDropdownDialogV2Module, {
 			title = var8.title,
-			problems = reactModule.useMemo(function() --[[ line: 90 ]]
-				-- upvalues: var8 (write)
-				return {
+			problems = reactModule.useMemo(function() --[[ line: 91 ]]
+				-- upvalues: fFlagDropUnroutableMultiReportOptions (copy), var8 (write)
+				return if fFlagDropUnroutableMultiReportOptions then {
+					{
+						value = "bullying",
+						label = var8.problemBullying,
+						description = var8.problemBullyingDesc
+					},
+					{
+						value = "dating",
+						label = var8.problemDating,
+						description = var8.problemDatingDesc
+					},
+					{
+						value = "hate",
+						label = var8.problemHate,
+						description = var8.problemHateDesc
+					},
+					{
+						value = "offsite links",
+						label = var8.problemLinks,
+						description = var8.problemLinksDesc
+					},
+					{
+						value = "personal question",
+						label = var8.problemPersonal,
+						description = var8.problemPersonalDesc
+					},
+					{
+						value = "swearing",
+						label = var8.problemSwearing,
+						description = var8.problemSwearingDesc
+					},
+					{
+						value = "violence",
+						label = var8.problemViolence,
+						description = var8.problemViolenceDesc
+					},
+					{
+						value = "ip infringement",
+						label = var8.problemIPInfringement,
+						description = var8.problemIPInfringementDesc
+					}
+				} else {
 					{
 						value = "bullying",
 						label = var8.problemBullying,
@@ -146,7 +194,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 				var8.problemIPInfringement, var8.problemIPInfringementDesc
 			}),
 			surfaces = var11,
-			preselected = reactModule.useMemo(function() --[[ line: 164 ]]
+			preselected = reactModule.useMemo(function() --[[ line: 228 ]]
 				-- upvalues: var9 (ref), var11 (ref)
 				local var12 = nil
 				
@@ -183,7 +231,7 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 			},
 			onSubmitProps = {
 				hasNextSteps = true,
-				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p0, p1, p2) --[[ line: 205 ]]
+				onProceedToNextStep = if fFlagGenericAbuseReportingGranularExports then function(p0, p1, p2) --[[ line: 374 ]]
 					-- upvalues: value (ref)
 					value.onSubmit(p0, p1, p2)
 					
@@ -191,11 +239,47 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 				end else value.onSubmit
 			},
 			onCloseProps = { hasPreviousSteps = false, onAbandon = value.onBack },
-			footerContent = function() --[[ line: 215 ]]
+			footerContent = function() --[[ line: 384 ]]
 				-- upvalues: isShowUKOSAIllegalContentReportingLink (copy), reactModule (copy), view (copy), OSAReportLink (copy)
 				return if isShowUKOSAIllegalContentReportingLink() then reactModule.createElement(view, { tag = "size-full-0 auto-y" }, { OSALink = reactModule.createElement(OSAReportLink) }) else nil
 			end,
-			reportProblems = {
+			reportProblems = if fFlagDropUnroutableMultiReportOptions then {
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Bullying",
+					value = "bullying",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Bullying"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Dating",
+					value = "dating",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Dating"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Hate",
+					value = "hate",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Hate"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Links",
+					value = "offsite links",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Links"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Personal",
+					value = "personal question",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Personal"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Swearing",
+					value = "swearing",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Swearing"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.Problem.Violence",
+					value = "violence",
+					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Violence"
+				}
+			} else {
 				{
 					localizationKey = "Feature.ReportAbuse.Problem.Bullying",
 					value = "bullying",
@@ -242,7 +326,28 @@ return function(value) --[[ line: 37 | named "InGameAssetReportSubmitDialog" ]]
 					descriptionLocalizationKey = "Feature.ReportAbuse.ProblemDescription.Violence"
 				}
 			},
-			reportSurfaces = {
+			reportSurfaces = if fFlagDropUnroutableMultiReportOptions then {
+				{
+					localizationKey = "Feature.ReportAbuse.ProblemSurface.Avatar",
+					value = "avatar"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.ProblemSurface.DrawingOrCreation",
+					value = "drawing"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.ProblemSurface.Experience",
+					value = "experience"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.ProblemSurface.ItemOrAsset",
+					value = "item"
+				},
+				{
+					localizationKey = "Feature.ReportAbuse.ProblemSurface.TextChat",
+					value = "text"
+				}
+			} else {
 				{
 					localizationKey = "Feature.ReportAbuse.ProblemSurface.Avatar",
 					value = "avatar"

@@ -7,5 +7,6 @@ return {
 	RoduxAnalytics = require(_script.RoduxAnalytics),
 	AnalyticsFactory = require(_script.AnalyticsFactory),
 	DefaultAnalyticsService = require(_script.DefaultAnalyticsService),
-	Timing = require(_script.Timing)
+	Timing = require(_script.Timing),
+	buildUserSeenCollectionPayload = require(_script.buildUserSeenCollectionPayload)
 }

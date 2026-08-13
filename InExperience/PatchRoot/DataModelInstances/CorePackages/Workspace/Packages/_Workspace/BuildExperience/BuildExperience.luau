@@ -9,10 +9,8 @@
 	GetAssistantBuildStore = require(script.Stores.GetAssistantBuildStore),
 	GetCreatorAgentResumeStore = require(script.Stores.GetCreatorAgentResumeStore),
 	GetPlayButtonStore = require(script.Stores.GetPlayButtonStore),
-	mountBuildControls = require(script.mountBuildControls),
 	mountChatSheet = require(script.mountChatSheet),
 	mountCreatorAgentResumeToastReceiver = require(script.mountCreatorAgentResumeToastReceiver),
-	mountPublishGameSheet = require(script.mountPublishGameSheet),
 	sendBuildExperienceEvent = require(script.Telemetry.sendBuildExperienceEvent),
 	UnpublishedPlaytestModeTooltip = require(script.Components.UnpublishedPlaytestModeTooltip.UnpublishedPlaytestModeTooltip),
 	["jest.config"] = script["jest.config"]

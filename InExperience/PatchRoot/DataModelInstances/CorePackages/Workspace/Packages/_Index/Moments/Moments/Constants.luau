@@ -26,6 +26,7 @@ return {
 			LocationId = "User Profile"
 		}
 	},
+	ImmersiveFeedKind = { Trending = "trending", User = "user" },
 	DefaultReaction = require(moments.Parent.MomentsTypes).Enums.ReactionType.ThumbsUp,
 	PlaceholderTracingId = {
 		DeepLinked = "deep-linked-placeholder",

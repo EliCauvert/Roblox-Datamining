@@ -14,7 +14,7 @@ local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriends
 local fFlagIntegrateTraversalHistoryInSideSheet = sharedFlagsModule.FFlagIntegrateTraversalHistoryInSideSheet
 local fFlagEnableInExperienceShop = sharedFlagsModule.FFlagEnableInExperienceShop
 local fFlagRemoveFriendsChatUnibarEntrypoints = sharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
-local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
+local fFlagExpChatCanShowFriendsTab = sharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local fIntSideSheetVariant = sharedFlagsModule.FIntSideSheetVariant
 local fFlagDebugEnablePioneerUX = sharedFlagsModule.FFlagDebugEnablePioneerUX
 local var7 = if fFlagIntegrateTraversalHistoryInSideSheet then require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).Traversal else nil
@@ -27,11 +27,11 @@ local function _(p0, p1, p2) --[[ line: 34 | named "reorder" ]]
 end
 
 return function() --[[ line: 41 | named "buildMenuOrder" ]]
-	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatEnableFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var8 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), fFlagDebugEnablePioneerUX (ref)
+	-- upvalues: isConnectDropdownEnabledModule (ref), fFlagRemoveFriendsChatUnibarEntrypoints (ref), argoPartyExperimentation (ref), fFlagExpChatCanShowFriendsTab (ref), isSpatial (ref), guiService (ref), isInExperienceUIVREnabled (ref), var8 (ref), fFlagIntegrateTraversalHistoryInSideSheet (ref), fFlagAddInviteFriendsIntegration (ref), constantsModule (ref), fFlagEnableInExperienceAvatarSwitcher (ref), fFlagEnableInExperienceShop (ref), inExperienceSideSheetModule (ref), fFlagEnableSideSheet (ref), fIntSideSheetVariant (ref), fFlagDebugEnablePioneerUX (ref)
 	local var9 = isConnectDropdownEnabledModule()
 	
 	if var9 then
-		var9 = not (fFlagRemoveFriendsChatUnibarEntrypoints and (argoPartyExperimentation.getIsRenameEnabled() and fFlagExpChatEnableFriendsTab))
+		var9 = not (fFlagRemoveFriendsChatUnibarEntrypoints and (argoPartyExperimentation.getIsRenameEnabled() and fFlagExpChatCanShowFriendsTab))
 	end
 	local var10 = not isInExperienceUIVREnabled or not isSpatial()
 	local t = {

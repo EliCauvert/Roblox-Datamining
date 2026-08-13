@@ -62,6 +62,7 @@ local statusIndicatorShapeModule = require(script.Enums.StatusIndicatorShape)
 local statusIndicatorSizeModule = require(script.Enums.StatusIndicatorSize)
 local statusIndicatorVariantModule = require(script.Enums.StatusIndicatorVariant)
 local themeModule = require(script.Enums.Theme)
+local themeNameModule = require(script.Enums.ThemeName)
 local thumbnailSizeModule = require(script.Enums.ThumbnailSize)
 local thumbnailTypeModule = require(script.Enums.ThumbnailType)
 local userPresenceModule = require(script.Enums.UserPresence)
@@ -80,7 +81,7 @@ local coachmarkModule = require(script.Components.Coachmark)
 local educationalTooltipModule = require(script.Components.EducationalTooltip)
 local chipModule = require(script.Components.Chip)
 local _ = require(script.Components.AlertActions)
-local var76 = strictModule({
+local var77 = strictModule({
 	Accordion = accordionModule,
 	Avatar = avatarModule,
 	AvatarGroup = avatarGroupModule,
@@ -106,6 +107,7 @@ local var76 = strictModule({
 	Icon = require(script.Components.Icon),
 	IconButton = require(script.Components.IconButton),
 	Image = require(script.Components.Image),
+	InputChip = require(script.Components.InputChip),
 	InputLabel = require(script.Components.InputLabel),
 	KeyLabel = require(script.Components.KeyLabel),
 	Knob = require(script.Components.Knob),
@@ -228,6 +230,7 @@ local var76 = strictModule({
 		StatusIndicatorSize = statusIndicatorSizeModule,
 		StatusIndicatorVariant = statusIndicatorVariantModule,
 		Theme = themeModule,
+		ThemeName = themeNameModule,
 		ThumbnailType = thumbnailTypeModule,
 		ThumbnailSize = thumbnailSizeModule,
 		ToggleSize = require(script.Enums.InputSize),
@@ -237,6 +240,7 @@ local var76 = strictModule({
 	Utility = {
 		getStyleSheet = styleSheetRegistryModule.getStyleSheet,
 		addStyleTags = styleSheetRegistryModule.addStyleTags,
+		releaseStyleSheet = styleSheetRegistryModule.releaseStyleSheet,
 		getTokens = tokensModule.getTokens,
 		blendColors = require(script.Utility.blendColors),
 		composeStyleVariant = require(script.Utility.composeStyleVariant),
@@ -264,9 +268,9 @@ local var76 = strictModule({
 
 if _G.__FOUNDATION_TRACK_USAGE__ then
 	local usageTrackerModule = require(script.Parent.UsageTracker)
-	var76 = usageTrackerModule.trackMemberAccess("Foundation", var76, usageTrackerModule.isReactComponent)
+	var77 = usageTrackerModule.trackMemberAccess("Foundation", var77, usageTrackerModule.isReactComponent)
 end
 if _G.__FOUNDATION_TRACE_LOG__ then
 	require(script.Utility.Logger):enableTraceLog()
 end
-return var76
+return var77

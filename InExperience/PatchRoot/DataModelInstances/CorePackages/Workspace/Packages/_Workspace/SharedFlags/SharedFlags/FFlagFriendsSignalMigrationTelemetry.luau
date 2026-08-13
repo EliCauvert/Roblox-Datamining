@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FriendsSignalMigrationTelemetry_v1", false) and require(script.Parent.FFlagFriendSortedByPresenceSignalsImplementation)
+﻿return game:DefineFastFlag("FriendsSignalMigrationTelemetry_v1", false)

@@ -7,6 +7,7 @@ local dictionary = require(parent.llama).Dictionary
 local UIBloxModule = require(parent.UIBlox)
 local expChatSharedModule = require(parent.ExpChatShared)
 local sharedFlagsModule = require(parent.SharedFlags)
+local channelTabDisplayLabel = expChatSharedModule.ChannelTabDisplayLabel
 local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local interactable = UIBloxModule.Core.Control.Interactable
 local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
@@ -14,6 +15,7 @@ local fFlagExpChatFocusChannelBarSupportModule = require(expChat.Flags.FFlagExpC
 local fFlagExpChatChannelTabSizingUpdateModule = require(expChat.Flags.FFlagExpChatChannelTabSizingUpdate)
 local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
+local fFlagExpChatUseSharedChannelTabDisplayLabel = sharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
 local var10 = if fFlagExpChatChannelTabSizingUpdateModule then game:GetService("TextService") else nil
 local localizationModule = require(expChat.Localization)
 local getOtherDisplayNameInWhisperChannelModule = require(expChat.getOtherDisplayNameInWhisperChannel)
@@ -35,7 +37,7 @@ local t = {
 	isLayoutReady = if fFlagExpChatEnableTabsImpressionAnalyticsModule then true else nil
 }
 
-local function createUnreadDot(vectorA, vectorB) --[[ line: 70 ]]
+local function createUnreadDot(vectorA, vectorB) --[[ line: 72 ]]
 	-- upvalues: reactModule (ref), configModule (ref)
 	return reactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -49,8 +51,8 @@ local function createUnreadDot(vectorA, vectorB) --[[ line: 70 ]]
 	})
 end
 
-return function(p0) --[[ line: 85 | named "ChannelTab" ]]
-	-- upvalues: dictionary (ref), t (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), useTabImpressionModule (ref), localizationModule (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), reactModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var10 (ref), getUnreadIndicatorLayoutModule (ref), var15 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
+return function(p0) --[[ line: 87 | named "ChannelTab" ]]
+	-- upvalues: dictionary (ref), t (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), useTabImpressionModule (ref), localizationModule (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), fFlagExpChatEnableFriendsTab (ref), unreachable (ref), playersService (ref), getOtherDisplayNameInWhisperChannelModule (ref), reactModule (ref), fFlagExpChatFocusChannelBarSupportModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatChannelTabSizingUpdateModule (ref), var10 (ref), getUnreadIndicatorLayoutModule (ref), var15 (ref), interactable (ref), createUnreadDot (ref), color (ref), configModule (ref)
 	local var19 = dictionary.join(t, p0)
 	
 	if fFlagExpChatEnableTabsImpressionAnalyticsModule then
@@ -64,8 +66,7 @@ return function(p0) --[[ line: 85 | named "ChannelTab" ]]
 			hasUnreadMessages = var19.hasUnreadMessages
 		})
 	end
-	local channelName = var19.channelName
-	local var20 = localizationModule.useLocalization({
+	local var20 = localizationModule.useLocalization(if fFlagExpChatUseSharedChannelTabDisplayLabel then channelTabDisplayLabel.LocalizationKeys else {
 		yourServer = "CoreScripts.TextChat.ChannelTabs.Here",
 		moreServers = "CoreScripts.TextChat.ChannelTabs.Global2",
 		friends = "CoreScripts.TextChat.ChannelTabs.Friends",
@@ -73,8 +74,14 @@ return function(p0) --[[ line: 85 | named "ChannelTab" ]]
 		team = "CoreScripts.TextChat.ChannelTabs.Team"
 	})
 	local tabType = var19.tabType
+	local channelName = var19.channelName
 	
-	if tabType == "TextChat" then
+	if fFlagExpChatUseSharedChannelTabDisplayLabel then
+		if tabType == "FriendsChat" and not fFlagExpChatEnableFriendsTab then
+			unreachable(tabType)
+		end
+		channelName = channelTabDisplayLabel.getDisplayLabel(tabType, var19.channelName, var19.textChannel, playersService.LocalPlayer, var20)
+	elseif tabType == "TextChat" then
 		local channelName_1 = var19.channelName
 		
 		if string.find(channelName_1, "RBXGeneral") then
@@ -110,25 +117,25 @@ return function(p0) --[[ line: 85 | named "ChannelTab" ]]
 		local var29, var30 = reactModule.useBinding(nil)
 		local var31, var32 = reactModule.useBinding(nil)
 		
-		var26 = function(p1) --[[ line: 149 ]]
+		var26 = function(p1) --[[ line: 164 ]]
 			-- upvalues: var32 (ref)
 			var32(p1.AbsoluteSize.X)
 		end
 		
-		reactModule.useEffect(function() --[[ line: 154 ]]
+		reactModule.useEffect(function() --[[ line: 169 ]]
 			-- upvalues: var30 (ref), var19 (ref), channelName (ref), var10 (copy)
 			var30(nil)
 			
 			if var19.hasUnreadMessages and not var19.isTabCollapsed then
 				local var34 = false
-				task.spawn(function() --[[ line: 161 ]]
+				task.spawn(function() --[[ line: 176 ]]
 					-- upvalues: channelName (copy), var19 (copy), var10 (copy), var34 (write), var30 (copy)
 					local getTextBoundsParams = Instance.new("GetTextBoundsParams")
 					getTextBoundsParams.Text = channelName
 					getTextBoundsParams.Font = var19.channelTabsSettings.FontFace
 					getTextBoundsParams.Size = var19.channelTabsSettings.TextSize
 					getTextBoundsParams.Width = 1e999
-					local ok, status = pcall(function() --[[ line: 168 ]]
+					local ok, status = pcall(function() --[[ line: 183 ]]
 						-- upvalues: var10 (copy), getTextBoundsParams (ref)
 						return var10:GetTextBoundsAsync(getTextBoundsParams)
 					end)
@@ -138,7 +145,7 @@ return function(p0) --[[ line: 85 | named "ChannelTab" ]]
 					end
 				end)
 				
-				return function() --[[ line: 176 ]]
+				return function() --[[ line: 191 ]]
 					-- upvalues: var34 (write)
 					var34 = true
 				end
@@ -152,15 +159,15 @@ return function(p0) --[[ line: 85 | named "ChannelTab" ]]
 		})
 		
 		if var25 then
-			local var33 = reactModule.joinBindings({ naturalTextWidth = var29, tabWidth = var31 }):map(function(p2) --[[ line: 193 ]]
+			local var33 = reactModule.joinBindings({ naturalTextWidth = var29, tabWidth = var31 }):map(function(p2) --[[ line: 208 ]]
 				-- upvalues: getUnreadIndicatorLayoutModule (copy), var19 (ref), var15 (copy)
 				return getUnreadIndicatorLayoutModule(var19.hasUnreadMessages, var19.isTabCollapsed, p2.tabWidth, p2.naturalTextWidth, var15, 8, 8)
 			end)
-			var27 = var33:map(function(p3) --[[ line: 204 ]]
+			var27 = var33:map(function(p3) --[[ line: 219 ]]
 				-- upvalues: var15 (copy)
 				return if p3 then UDim2.new(0, p3.textWidth, 1, 0) else UDim2.new(1, -(var15 * 2 + 8 + 8), 1, 0)
 			end)
-			var28 = var33:map(function(p4) --[[ line: 209 ]]
+			var28 = var33:map(function(p4) --[[ line: 224 ]]
 				-- upvalues: var15 (copy)
 				return if p4 then UDim2.fromOffset(p4.textLeft, 0) else UDim2.fromOffset(var15 + 8 + 8, 0)
 			end)
@@ -172,16 +179,16 @@ return function(p0) --[[ line: 85 | named "ChannelTab" ]]
 		BackgroundColor3 = if var19.isTabCollapsed then var22 else var19.channelTabsSettings.BackgroundColor3,
 		BorderSizePixel = 0,
 		SelectionImageObject = var24,
-		onStateChanged = function() --[[ line: 225 ]] end,
+		onStateChanged = function() --[[ line: 240 ]] end,
 		[reactModule.Change.AbsoluteSize] = var26,
 		[reactModule.Event.Activated] = var19.onTabSelected,
-		[reactModule.Event.MouseEnter] = function() --[[ line: 228 ]]
+		[reactModule.Event.MouseEnter] = function() --[[ line: 243 ]]
 			-- upvalues: var19 (ref), var23 (ref)
 			if var19.isTabCollapsed then
 				var23(var19.channelTabsSettings.HoverBackgroundColor3)
 			end
 		end,
-		[reactModule.Event.MouseLeave] = function() --[[ line: 233 ]]
+		[reactModule.Event.MouseLeave] = function() --[[ line: 248 ]]
 			-- upvalues: var19 (ref), var23 (ref)
 			if var19.isTabCollapsed then
 				var23(var19.channelTabsSettings.BackgroundColor3)

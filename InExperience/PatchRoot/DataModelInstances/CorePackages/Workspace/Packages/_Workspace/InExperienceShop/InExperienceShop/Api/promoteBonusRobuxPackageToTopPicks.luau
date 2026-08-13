@@ -1,11 +1,12 @@
 ﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local sharedFlagsModule = require(inExperienceShop.Parent.SharedFlags)
 local _ = require(inExperienceShop.Types)
+local findTopPicksSectionIndexModule = require(inExperienceShop.Utils.findTopPicksSectionIndex)
 local fFlagPromoteRobuxInTopPicksModule = require(inExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
 local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
 local bonusPromotionEligibilityModule = require(inExperienceShop.Api.BonusPromotionEligibility)
 
-local function findFirstBonusRobuxPackageWithPaymentSession(p0) --[[ line: 17 ]]
+local function findFirstBonusRobuxPackageWithPaymentSession(p0) --[[ line: 16 ]]
 	for i, v in p0 do
 		local robuxPackages = v.robuxPackages
 		
@@ -20,113 +21,95 @@ local function findFirstBonusRobuxPackageWithPaymentSession(p0) --[[ line: 17 ]]
 	return nil, nil
 end
 
-local function findFirstBonusRobuxPackage(p1) --[[ line: 32 ]]
+local function findFirstBonusRobuxPackage(p1) --[[ line: 31 ]]
 	-- upvalues: findFirstBonusRobuxPackageWithPaymentSession (ref)
-	local var7, _ = findFirstBonusRobuxPackageWithPaymentSession(p1)
+	local var8, _ = findFirstBonusRobuxPackageWithPaymentSession(p1)
 	
-	return var7
+	return var8
 end
 
-local function _(p2) --[[ line: 37 | named "findTopPicksSectionIndex" ]]
-	for i, v in p2 do
-		if string.lower(v.name) == "top picks" then
-			return i
-		end
+local function withoutFeaturedPromotion(p2) --[[ line: 36 ]]
+	-- upvalues: findTopPicksSectionIndexModule (ref)
+	local var9 = findTopPicksSectionIndexModule(p2)
+	
+	if var9 == nil then
+		return p2
 	end
-	return nil
-end
-
-local function withoutFeaturedPromotion(p3) --[[ line: 46 ]]
-	local var8
-	for i, v in p3 do
-		if string.lower(v.name) == "top picks" then
-			var8 = i
-			if var8 == nil then
-				return p3
-			end
-			local var9 = p3[var8]
-			
-			if var9.featuredRobuxPackage == nil then
-				return p3
-			end
-			local cloned = table.clone(p3)
-			cloned[var8] = {
-				featuredRobuxPackage = nil,
-				id = var9.id,
-				name = var9.name,
-				items = var9.items,
-				robuxPackages = var9.robuxPackages
-			}
-			
-			return cloned
-		end
+	local var10 = p2[var9]
+	
+	if var10.featuredRobuxPackage == nil then
+		return p2
 	end
-	var8 = nil
+	local cloned = table.clone(p2)
+	cloned[var9] = {
+		featuredRobuxPackage = nil,
+		id = var10.id,
+		name = var10.name,
+		items = var10.items,
+		robuxPackages = var10.robuxPackages
+	}
+	
+	return cloned
 end
 
-local _ = function(p4, p5) --[[ line: 76 | named "canPromoteBonusPackage" ]]
+local function _(p3, p4) --[[ line: 66 | named "canPromoteBonusPackage" ]]
 	-- upvalues: bonusPromotionEligibilityModule (ref)
-	local bonusItem = p4.bonusItem
-	local var11 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
+	local bonusItem = p3.bonusItem
+	local var12 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
 	
-	return if var11 == nil then false elseif p4.bonusItemDetails == nil then false else p5[var11] == bonusPromotionEligibilityModule.Eligible
+	return if var12 == nil then false elseif p3.bonusItemDetails == nil then false else p4[var12] == bonusPromotionEligibilityModule.Eligible
 end
 
 return {
 	findFirstBonusRobuxPackage = findFirstBonusRobuxPackage,
-	getBonusGamePassId = function(p6) --[[ line: 68 ]]
-		local bonusItem = p6.bonusItem
+	getBonusGamePassId = function(p5) --[[ line: 58 ]]
+		local bonusItem = p5.bonusItem
 		
 		return if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
 	end,
 	withoutFeaturedPromotion = withoutFeaturedPromotion,
-	promoteBonusRobuxPackageToTopPicks = function(p7, p8) --[[ line: 99 ]]
-		-- upvalues: fFlagEnableRobuxInExperienceShop (ref), fFlagPromoteRobuxInTopPicksModule (ref), withoutFeaturedPromotion (ref), findFirstBonusRobuxPackageWithPaymentSession (ref), bonusPromotionEligibilityModule (ref)
+	promoteBonusRobuxPackageToTopPicks = function(p6, p7) --[[ line: 89 ]]
+		-- upvalues: fFlagEnableRobuxInExperienceShop (ref), fFlagPromoteRobuxInTopPicksModule (ref), withoutFeaturedPromotion (ref), findFirstBonusRobuxPackageWithPaymentSession (ref), findTopPicksSectionIndexModule (ref), bonusPromotionEligibilityModule (ref)
 		if not fFlagEnableRobuxInExperienceShop or not fFlagPromoteRobuxInTopPicksModule then
-			return withoutFeaturedPromotion(p7)
+			return withoutFeaturedPromotion(p6)
 		end
-		local var12, var13 = findFirstBonusRobuxPackageWithPaymentSession(p7)
+		local var13, var14 = findFirstBonusRobuxPackageWithPaymentSession(p6)
 		
-		if var12 == nil then
-			return withoutFeaturedPromotion(p7)
+		if var13 == nil then
+			return withoutFeaturedPromotion(p6)
 		end
-		local var14
-		for i, v in p7 do
-			if string.lower(v.name) == "top picks" then
-				var14 = i
-				if var14 == nil then
-					return withoutFeaturedPromotion(p7)
-				end
-				local bonusItem = var12.bonusItem
-				local var15 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
-				
-				if not (if var15 == nil then false elseif var12.bonusItemDetails == nil then false else p8[var15] == bonusPromotionEligibilityModule.Eligible) then
-					return withoutFeaturedPromotion(p7)
-				end
-				local var16 = p7[var14]
-				local featuredRobuxPackage = var16.featuredRobuxPackage
-				
-				if featuredRobuxPackage ~= nil and featuredRobuxPackage.id == var12.id and var16.paymentSessionId == var13 then
-					return p7
-				end
-				bonusItem = table.clone(p7)
-				local t = {
-					id = var16.id,
-					name = var16.name,
-					items = var16.items,
-					paymentSessionId = var16.paymentSessionId,
-					robuxPackages = var16.robuxPackages,
-					featuredRobuxPackage = var12
-				}
-				
-				if var13 ~= nil then
-					t.paymentSessionId = var13
-				end
-				bonusItem[var14] = t
-				
-				return bonusItem
-			end
+		local var15 = findTopPicksSectionIndexModule(p6)
+		
+		if var15 == nil then
+			return withoutFeaturedPromotion(p6)
 		end
-		var14 = nil
+		local bonusItem = var13.bonusItem
+		local var16 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
+		
+		if not (if var16 == nil then false elseif var13.bonusItemDetails == nil then false else p7[var16] == bonusPromotionEligibilityModule.Eligible) then
+			return withoutFeaturedPromotion(p6)
+		end
+		local var17 = p6[var15]
+		local featuredRobuxPackage = var17.featuredRobuxPackage
+		
+		if featuredRobuxPackage ~= nil and featuredRobuxPackage.id == var13.id and var17.paymentSessionId == var14 then
+			return p6
+		end
+		bonusItem = table.clone(p6)
+		local t = {
+			id = var17.id,
+			name = var17.name,
+			items = var17.items,
+			paymentSessionId = var17.paymentSessionId,
+			robuxPackages = var17.robuxPackages,
+			featuredRobuxPackage = var13
+		}
+		
+		if var14 ~= nil then
+			t.paymentSessionId = var14
+		end
+		bonusItem[var15] = t
+		
+		return bonusItem
 	end
 }

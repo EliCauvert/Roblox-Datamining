@@ -120,7 +120,7 @@ local function LeaveGameContainer(p1) --[[ line: 165 ]]
 	return reactModule.createElement(localizationProvider, {
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, { theme = foundationModule.Enums.Theme.Dark }, {
+		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
 			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var23 }, {
 				LeaveButtonsContainer = reactModule.createElement(LeaveButtonsContainer, p1)
 			})

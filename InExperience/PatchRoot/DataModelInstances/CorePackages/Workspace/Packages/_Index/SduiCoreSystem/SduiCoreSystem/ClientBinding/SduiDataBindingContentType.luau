@@ -23,6 +23,8 @@
 	universeUserFollow = "universeUserFollow",
 	universeUserVoteFeedbackMetadata = "universeUserVoteFeedbackMetadata",
 	userProfile = "userProfile",
+	community = "community",
+	communityUserMembership = "communityUserMembership",
 	clientPageScope = "clientPageScope",
 	capability = "capability"
 }

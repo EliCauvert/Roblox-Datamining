@@ -135,26 +135,55 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 		end
 	end, { scrollingFrame, var38, var35 })
 	local var40 = reactModule.useCallback(function(p5, p6) --[[ line: 242 ]]
-		-- upvalues: scrollingFrame (ref), var11 (ref), snapMathModule (copy), var27 (ref), var12 (ref), var13 (ref), var18 (ref), var38 (ref), var36 (ref), var35 (ref), var21 (ref), var39 (ref)
+		-- upvalues: scrollingFrame (ref), var11 (ref), snapMathModule (copy), var16 (ref), var27 (ref), var12 (ref), var13 (ref), var18 (ref), var38 (ref), var36 (ref), var35 (ref), var21 (ref), var39 (ref)
 		if not scrollingFrame then return end
 		local current = var11.current
 		local var54 = snapMathModule.clampIndex(p5, current.getCount(false))
+		local currentIndex = current.getCurrentIndex(false)
+		local current_1 = var16.current
+		local var56 = if var54 == currentIndex or current_1 == nil then nil else current_1.onTargetCommitted
+		
+		local function _() --[[ line: 254 | named "commitTarget" ]]
+			-- upvalues: var56 (ref), currentIndex (ref), var54 (ref), current (ref)
+			if var56 ~= nil then
+				var56(currentIndex, var54, current.getItems(false)[var54])
+			end
+			current.goToItem(var54)
+		end
+		
 		var27.current = var54
-		current.goToItem(var54)
 		
-		if var12.current <= 0 then return end
-		local var55 = snapMathModule.offsetForIndex(var54, var13.current)
-		
-		if var18.current then
-			var38()
-			scrollingFrame.CanvasPosition = Vector2.new(0, var55)
-			var36(var54)
-			var35("Idle")
+		if var12.current <= 0 then
+			if var56 ~= nil then
+				var56(currentIndex, var54, current.getItems(false)[var54])
+			end
+			current.goToItem(var54)
 			
 			return
+		else
+			local var57 = snapMathModule.offsetForIndex(var54, var13.current)
+			
+			if var18.current then
+				if var56 ~= nil then
+					var56(currentIndex, var54, current.getItems(false)[var54])
+				end
+				current.goToItem(var54)
+				var38()
+				scrollingFrame.CanvasPosition = Vector2.new(0, var57)
+				var36(var54)
+				var35("Idle")
+				
+				return
+			elseif var56 ~= nil then
+				var35("Settling")
+			end
+			if var56 ~= nil then
+				var56(currentIndex, var54, current.getItems(false)[var54])
+			end
+			current.goToItem(var54)
+			var21.current = p6
+			var39(var57)
 		end
-		var21.current = p6
-		var39(var55)
 	end, {
 		scrollingFrame,
 		var39,
@@ -162,7 +191,7 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 		var35,
 		var36
 	})
-	local var41 = reactModule.useCallback(function(p7) --[[ line: 274 ]]
+	local var41 = reactModule.useCallback(function(p7) --[[ line: 302 ]]
 		-- upvalues: scrollingFrame (ref), var11 (ref), var12 (ref), var13 (ref), snapMathModule (copy), var14 (ref), var16 (ref), var40 (ref)
 		if not scrollingFrame then return end
 		local count = var11.current.getCount(false)
@@ -170,31 +199,31 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 		if count <= 0 or var12.current <= 0 then return end
 		local y = scrollingFrame.CanvasPosition.Y
 		local current = var13.current
-		local var57 = snapMathModule.resolveSnapIndex(y, p7, current, count, var14.current)
+		local var59 = snapMathModule.resolveSnapIndex(y, p7, current, count, var14.current)
 		local current_1 = var16.current
 		
 		if current_1 and current_1.onSnap then
 			current_1.onSnap({
 				fromIndex = snapMathModule.nearestIndexForOffset(y, current, count),
-				toIndex = var57,
+				toIndex = var59,
 				velocity = p7
 			})
 		end
-		var40(var57, -p7)
+		var40(var59, -p7)
 	end, { scrollingFrame, var40 })
-	local var42 = reactModule.useCallback(function(p8) --[[ line: 302 ]]
+	local var42 = reactModule.useCallback(function(p8) --[[ line: 330 ]]
 		-- upvalues: var40 (ref)
 		var40(p8, 0)
 	end, { var40 })
-	local var43 = reactModule.useCallback(function() --[[ line: 306 ]]
+	local var43 = reactModule.useCallback(function() --[[ line: 334 ]]
 		-- upvalues: var40 (ref), var11 (ref)
 		var40(var11.current.getCurrentIndex(false) + 1, 0)
 	end, { var40 })
-	local var44 = reactModule.useCallback(function() --[[ line: 310 ]]
+	local var44 = reactModule.useCallback(function() --[[ line: 338 ]]
 		-- upvalues: var40 (ref), var11 (ref)
 		var40(var11.current.getCurrentIndex(false) - 1, 0)
 	end, { var40 })
-	local var45 = reactModule.useCallback(function(p9) --[[ line: 317 ]]
+	local var45 = reactModule.useCallback(function(p9) --[[ line: 345 ]]
 		-- upvalues: var11 (ref), var32 (ref), snapMathModule (copy), var12 (ref), scrollingFrame (ref), var18 (ref), var27 (ref), var21 (ref), var39 (ref), var13 (ref)
 		local current = var11.current
 		
@@ -211,22 +240,22 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 			
 			return
 		end
-		local var60 = snapMathModule.neighborForRemoval(currentIndex, count)
+		local var62 = snapMathModule.neighborForRemoval(currentIndex, count)
 		
 		if scrollingFrame and var12.current > 0 and not var18.current then
-			var27.current = var60
+			var27.current = var62
 			var21.current = 0
-			var39(snapMathModule.offsetForIndex(var60, var13.current))
+			var39(snapMathModule.offsetForIndex(var62, var13.current))
 			var32.current = p9
 			
 			return
 		end
 		current.removeItem(p9)
 	end, { scrollingFrame, var39 })
-	reactModule.useEffect(function() --[[ line: 359 ]]
+	reactModule.useEffect(function() --[[ line: 387 ]]
 		-- upvalues: scrollingFrame (ref), var12 (ref), var11 (ref), var36 (ref), snapMathModule (copy), var13 (ref), var23 (ref), var20 (ref), active (ref), var29 (ref), var30 (ref), var31 (ref), var17 (ref), constantsModule (copy), var40 (ref)
 		if scrollingFrame then
-			local var61 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 365 ]]
+			local var63 = scrollingFrame:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 393 ]]
 				-- upvalues: var12 (copy), var11 (copy), var36 (copy), snapMathModule (copy), scrollingFrame (ref), var13 (copy), var23 (copy), var20 (copy), active (copy), var29 (copy), var30 (copy), var31 (copy), var17 (copy), constantsModule (copy), var40 (copy)
 				if var12.current <= 0 then return end
 				var36(snapMathModule.nearestIndexForOffset(scrollingFrame.CanvasPosition.Y, var13.current, var11.current.getCount(false)))
@@ -239,7 +268,7 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 				end
 				var30.current = true
 				
-				local function runSettle() --[[ line: 387 ]]
+				local function runSettle() --[[ line: 415 ]]
 					-- upvalues: var31 (copy), var23 (copy), var20 (copy), var17 (copy), var30 (copy), var29 (copy), constantsModule (copy), runSettle (ref), var12 (copy), var13 (copy), scrollingFrame (copy), var11 (copy), snapMathModule (copy), var40 (copy)
 					if not var31.current or var23.current or (var20.current or not var17.current) then
 						var30.current = false
@@ -256,34 +285,34 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 					local current = var13.current
 					local y = scrollingFrame.CanvasPosition.Y
 					local currentIndex = var11.current.getCurrentIndex(false)
-					local var64 = snapMathModule.resolveSettleIndex(currentIndex, y, current, var11.current.getCount(false), constantsModule.WHEEL_PAGE_TURN_FRACTION, 1)
+					local var66 = snapMathModule.resolveSettleIndex(currentIndex, y, current, var11.current.getCount(false), constantsModule.WHEEL_PAGE_TURN_FRACTION, 1)
 					
-					if var64 ~= currentIndex or constantsModule.POSITION_THRESHOLD < math.abs(y - snapMathModule.offsetForIndex(currentIndex, current)) then
-						var40(var64, 0)
+					if var66 ~= currentIndex or constantsModule.POSITION_THRESHOLD < math.abs(y - snapMathModule.offsetForIndex(currentIndex, current)) then
+						var40(var66, 0)
 					end
 				end
 				
 				task.delay(constantsModule.SETTLE_DEBOUNCE_SECONDS, runSettle)
 			end)
 			
-			return function() --[[ line: 427 ]]
-				-- upvalues: var61 (ref), var30 (copy)
-				var61:Disconnect()
+			return function() --[[ line: 455 ]]
+				-- upvalues: var63 (ref), var30 (copy)
+				var63:Disconnect()
 				var30.current = false
 			end
 		end
 	end, { scrollingFrame, active, var36, var40 })
-	reactModule.useEffect(function() --[[ line: 438 ]]
+	reactModule.useEffect(function() --[[ line: 466 ]]
 		-- upvalues: scrollingFrame (ref), active (ref), pagerNavigationModule (copy), getFFlagMomentsFixNavButtonSnapModule (copy), nativeScrollEnabled (ref), var24 (ref), userInputService (copy), var23 (ref), var25 (ref), var38 (ref), var35 (ref), constantsModule (copy), var41 (ref), var26 (ref), var40 (ref), var11 (ref)
 		if not scrollingFrame or not active then return end
-		local function _(p10) --[[ line: 444 | named "isDragInput" ]]
+		local function _(p10) --[[ line: 472 | named "isDragInput" ]]
 			return if p10.UserInputType ~= Enum.UserInputType.Touch then p10.UserInputType == Enum.UserInputType.MouseButton1 else true
 		end
 		
-		local var65 = pagerNavigationModule.shouldTrackDrag(getFFlagMomentsFixNavButtonSnapModule(), nativeScrollEnabled)
+		local var67 = pagerNavigationModule.shouldTrackDrag(getFFlagMomentsFixNavButtonSnapModule(), nativeScrollEnabled)
 		var24.current = {}
 		
-		local _ = function(p11) --[[ line: 465 | named "isWithinFrame" ]]
+		local _ = function(p11) --[[ line: 493 | named "isWithinFrame" ]]
 			-- upvalues: scrollingFrame (ref)
 			local position = p11.Position
 			local absolutePosition = scrollingFrame.AbsolutePosition
@@ -292,22 +321,22 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 			return absolutePosition.X <= position.X and (position.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= position.Y and position.Y <= absolutePosition.Y + absoluteSize.Y))
 		end
 		
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p12) --[[ line: 475 ]]
-			-- upvalues: var65 (ref), var24 (copy), scrollingFrame (ref), var23 (copy), var25 (copy), var38 (copy), var35 (copy)
-			local var69
-			if var65 then
-				var69 = if p12.UserInputType ~= Enum.UserInputType.Touch then p12.UserInputType == Enum.UserInputType.MouseButton1 else true
+		local inputBeganConnection = userInputService.InputBegan:Connect(function(p12) --[[ line: 503 ]]
+			-- upvalues: var67 (ref), var24 (copy), scrollingFrame (ref), var23 (copy), var25 (copy), var38 (copy), var35 (copy)
+			local var71
+			if var67 then
+				var71 = if p12.UserInputType ~= Enum.UserInputType.Touch then p12.UserInputType == Enum.UserInputType.MouseButton1 else true
 				
-				if var69 and not var24.current[p12] then
+				if var71 and not var24.current[p12] then
 					local position = p12.Position
 					local absolutePosition = scrollingFrame.AbsolutePosition
 					local absoluteSize = scrollingFrame.AbsoluteSize
 					
 					if not (absolutePosition.X <= position.X and (position.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= position.Y and position.Y <= absolutePosition.Y + absoluteSize.Y))) then return end
-					var69 = next(var24.current) == nil
+					var71 = next(var24.current) == nil
 					var24.current[p12] = true
 					
-					if var69 then
+					if var71 then
 						var23.current = true
 						var25.current = scrollingFrame.CanvasPosition.Y
 						var38()
@@ -317,7 +346,7 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 				end
 			end
 		end)
-		local inputEndedConnection = userInputService.InputEnded:Connect(function(p13) --[[ line: 494 ]]
+		local inputEndedConnection = userInputService.InputEnded:Connect(function(p13) --[[ line: 522 ]]
 			-- upvalues: var24 (copy), var23 (copy), scrollingFrame (ref), var25 (copy), constantsModule (copy), var35 (copy), var41 (copy)
 			if not var24.current[p13] then return end
 			var24.current[p13] = nil
@@ -335,18 +364,18 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 		end)
 		local inputChangedConnection = nil
 		
-		local _ = function(p14) --[[ line: 526 | named "onWheel" ]]
+		local _ = function(p14) --[[ line: 554 | named "onWheel" ]]
 			-- upvalues: pagerNavigationModule (copy), var26 (copy), constantsModule (copy), var40 (copy), var11 (copy)
-			local var70, var71 = pagerNavigationModule.resolveWheelGesture(os.clock(), var26.current, constantsModule.WHEEL_COOLDOWN_SECONDS)
-			var26.current = var71
+			local var72, var73 = pagerNavigationModule.resolveWheelGesture(os.clock(), var26.current, constantsModule.WHEEL_COOLDOWN_SECONDS)
+			var26.current = var73
 			
-			if var70 then
+			if var72 then
 				var40(var11.current.getCurrentIndex(false) + p14, 0)
 			end
 		end
 		
 		if not nativeScrollEnabled then
-			inputChangedConnection = userInputService.InputChanged:Connect(function(p15) --[[ line: 546 ]]
+			inputChangedConnection = userInputService.InputChanged:Connect(function(p15) --[[ line: 574 ]]
 				-- upvalues: scrollingFrame (ref), pagerNavigationModule (copy), var26 (copy), constantsModule (copy), var40 (copy), var11 (copy)
 				if p15.UserInputType == Enum.UserInputType.MouseWheel then
 					local position = p15.Position
@@ -357,19 +386,19 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 					local z = p15.Position.Z
 					
 					if z > 0 then
-						local var72, var73 = pagerNavigationModule.resolveWheelGesture(os.clock(), var26.current, constantsModule.WHEEL_COOLDOWN_SECONDS)
-						var26.current = var73
+						local var74, var75 = pagerNavigationModule.resolveWheelGesture(os.clock(), var26.current, constantsModule.WHEEL_COOLDOWN_SECONDS)
+						var26.current = var75
 						
-						if var72 then
+						if var74 then
 							var40(var11.current.getCurrentIndex(false) + -1, 0)
 							
 							return
 						end
 					elseif z < 0 then
-						local var74, var75 = pagerNavigationModule.resolveWheelGesture(os.clock(), var26.current, constantsModule.WHEEL_COOLDOWN_SECONDS)
-						var26.current = var75
+						local var76, var77 = pagerNavigationModule.resolveWheelGesture(os.clock(), var26.current, constantsModule.WHEEL_COOLDOWN_SECONDS)
+						var26.current = var77
 						
-						if var74 then
+						if var76 then
 							var40(var11.current.getCurrentIndex(false) + 1, 0)
 						end
 					end
@@ -377,7 +406,7 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 				end
 			end)
 		end
-		return function() --[[ line: 561 ]]
+		return function() --[[ line: 589 ]]
 			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref), inputChangedConnection (write)
 			inputBeganConnection:Disconnect()
 			inputEndedConnection:Disconnect()
@@ -392,47 +421,47 @@ return function(p0) --[[ line: 65 | named "usePagerController" ]]
 	})
 	local var46 = signalsReactModule.useSignalState(store.getCount)
 	local var47 = signalsReactModule.useSignalState(store.getCurrentIndex)
-	reactModule.useEffect(function() --[[ line: 595 ]]
+	reactModule.useEffect(function() --[[ line: 623 ]]
 		-- upvalues: scrollingFrame (ref), itemHeight (ref), gap (ref), var28 (ref), snapMathModule (copy), var47 (ref), var46 (ref), var27 (ref), var38 (ref), var36 (ref), var35 (ref)
-		local var76 = itemHeight + gap
+		local var78 = itemHeight + gap
 		
 		if not scrollingFrame or itemHeight <= 0 then
-			var28.current = var76
+			var28.current = var78
 			
 			return
 		end
-		local var77 = snapMathModule.clampIndex(var47, var46)
+		local var79 = snapMathModule.clampIndex(var47, var46)
 		
-		if var76 ~= var28.current or var77 ~= var27.current then
+		if var78 ~= var28.current or var79 ~= var27.current then
 			var38()
-			scrollingFrame.CanvasPosition = Vector2.new(0, snapMathModule.offsetForIndex(var77, var76))
-			var27.current = var77
-			var36(var77)
+			scrollingFrame.CanvasPosition = Vector2.new(0, snapMathModule.offsetForIndex(var79, var78))
+			var27.current = var79
+			var36(var79)
 			var35("Idle")
 		end
-		var28.current = var76
+		var28.current = var78
 	end, {
 		scrollingFrame, var46, var47, itemHeight, gap, var38, var36, var35
 	})
-	reactModule.useEffect(function() --[[ line: 635 ]]
+	reactModule.useEffect(function() --[[ line: 663 ]]
 		-- upvalues: active (ref), var38 (ref), var35 (ref)
 		if not active then
 			var38()
 			var35("Idle")
 		end
 	end, { active, var38, var35 })
-	reactModule.useEffect(function() --[[ line: 644 ]]
+	reactModule.useEffect(function() --[[ line: 672 ]]
 		-- upvalues: var31 (ref), var38 (ref)
 		var31.current = true
 		
-		return function() --[[ line: 646 ]]
+		return function() --[[ line: 674 ]]
 			-- upvalues: var31 (copy), var38 (copy)
 			var31.current = false
 			var38()
 		end
 	end, { var38 })
 	
-	return reactModule.useMemo(function() --[[ line: 653 ]]
+	return reactModule.useMemo(function() --[[ line: 682 ]]
 		-- upvalues: var33 (ref), var34 (ref), var42 (ref), var43 (ref), var44 (ref), var45 (ref)
 		return {
 			getActiveIndex = var33.get,

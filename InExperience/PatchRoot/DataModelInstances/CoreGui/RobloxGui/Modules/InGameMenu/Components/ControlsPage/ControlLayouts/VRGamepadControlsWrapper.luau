@@ -22,7 +22,7 @@ return if fFlagHelpPageMountVR then reactModule.memo(function() --[[ line: 30 | 
 	}, {
 		Inner = reactModule.createElement(localizationProvider, { localization = var6 }, {
 			FoundationProvider = reactModule.createElement(foundationProvider, {
-				theme = foundationModule.Enums.Theme.Dark,
+				colorMode = foundationModule.Enums.ColorMode.Dark,
 				device = var8.getDeviceType()
 			}, { HelpReactView = reactModule.createElement(helpReactView) })
 		})
