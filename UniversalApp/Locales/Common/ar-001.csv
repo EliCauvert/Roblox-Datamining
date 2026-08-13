@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.QrCodeError,نواجه مشكلة في عرض �
 Authentication.CrossDevice.Label.QrCodeLogin,رمز QR لتسجيل دخول
 Authentication.CrossDevice.Label.QrHeader,الخيار 1
 Authentication.CrossDevice.Label.QrInstructions,امسح رمز QR بواسطة كاميرا الجهاز الذي سجلت منه الدخول.
-Authentication.CrossDevice.Label.QrTroubleshooting,هل تواجه مشكلة؟
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,اذهب إلى <b>roblox.com/quest</b> على الحاسوب أو على هاتفك لإدخال هذا الرمز لإتمام تسجيل الدخول.
-Authentication.CrossDevice.Label.QuickSignInInstructions,امسح كود الاستجابة السريعة (QR) أو انتقل على جهازك المُسجَّل الدخول إليه إلى <b>المزيد > تسجيل الدخول السريع</b> وأدخل الكود.
 Authentication.CrossDevice.Label.QuickSignInWarning,حرصًا على أمانك، أدخِل فقط الأكواد التي أنشأتها من جهازك الجديد.
 Authentication.CrossDevice.Label.SigninInstructionHeading,لتسجيل الدخول باسم {username} على جهاز جديد:
 Authentication.CrossDevice.Label.SigninInstructionOne,1. على جهازك الجديد، افتح صفحة تسجيل الدخول
@@ -2584,7 +2582,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
 Feature.Chat.Label.Unavailable,غير متاحة
-Feature.Chat.Label.UnfilteredChat,الدردشة غير خاضعة للفلترة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
 Feature.Chat.Label.ViewProfile,عرض الملف الشخصي
@@ -3458,7 +3455,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,أنت على اطلاع بكل جديد حاليًا
 Feature.Moments.Label.Photos,
-Feature.Moments.Label.PostDeleted,تم حذف اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.
 Feature.Moments.Label.PublishingRodeoBody,لن يستغرق الأمر وقتًا طويلاً.
 Feature.Moments.Label.Reactions,التفاعلات

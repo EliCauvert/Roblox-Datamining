@@ -276,9 +276,7 @@ Authentication.CrossDevice.Label.QrCodeError,目前無法顯示 QR 碼。請重�
 Authentication.CrossDevice.Label.QrCodeLogin,QR 碼登入
 Authentication.CrossDevice.Label.QrHeader,選項 1
 Authentication.CrossDevice.Label.QrInstructions,使用已登入的裝置的攝影機掃描 QR 碼。
-Authentication.CrossDevice.Label.QrTroubleshooting,有問題嗎？
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,前往 <b>roblox.com/quest</b> 在您的電腦或手機上輸入此代碼並完成登入。
-Authentication.CrossDevice.Label.QuickSignInInstructions,掃描 QR 碼，或在已登入的裝置上，前往「更多」>「快速登入」<b></b>，然後輸入代碼。
 Authentication.CrossDevice.Label.QuickSignInWarning,基於安全考量，請僅輸入你在新裝置上產生的代碼。
 Authentication.CrossDevice.Label.SigninInstructionHeading,若要在新裝置上以 {username} 的身分登入，請按照以下步驟操作：
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 在新裝置上開啟登入頁面
@@ -2596,7 +2594,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
 Feature.Chat.Label.Unavailable,無法使用
-Feature.Chat.Label.UnfilteredChat,無過濾聊天
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
 Feature.Chat.Label.ViewProfile,檢視個人檔案
@@ -3028,7 +3025,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,即將推出新的方式，讓您能
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,透過 QR 碼或通訊錄新增其他已驗證年齡的使用者時，對方將成為信任的聯絡對象。更多選項即將推出。
 Feature.Friends.TCEducation.Title,新增您認識的人
 Feature.Friends.TCFeature.AndMore,更多功能即將推出
-Feature.Friends.TCFeature.ChatWithoutFilters,
+Feature.Friends.TCFeature.ChatWithoutFilters,無過濾聊天
 Feature.Friends.TCFeature.PartyVoice,Party 語音
 Feature.Friends.TFEducation.Banner.Text,透過 QR 碼或通訊錄新增信任的好友，即可解鎖無過濾聊天、Party 語音等功能。
 Feature.Friends.TFEducation.Modal.TextIntro,與認識的人一起玩 Roblox 更有趣。透過 QR 碼或通訊錄新增已完成年齡驗證的使用者，便可成為信任的聯絡對象，並解鎖額外的福利，例如：
@@ -3470,7 +3467,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,已查看所有目前的通知
 Feature.Moments.Label.Photos,相片
-Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
 Feature.Moments.Label.Reactions,反應

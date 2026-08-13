@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.QrCodeError,Kami mengalami masalah saat menampi
 Authentication.CrossDevice.Label.QrCodeLogin,Kode QR Log In
 Authentication.CrossDevice.Label.QrHeader,Opsi 1
 Authentication.CrossDevice.Label.QrInstructions,Scan kode QR ini dengan kamera perangkat kamu yang sudah log in.
-Authentication.CrossDevice.Label.QrTroubleshooting,Mengalami masalah?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Buka <b>roblox.com/quest</b> di komputer atau ponsel kamu untuk memasukkan kode ini dan selesaikan log in.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Scan kode QR. Atau, dari perangkat yang sudah kamu gunakan untuk log in, buka <b>Lainnya > Log in cepat</b> dan masukkan kode."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Demi keamananmu, hanya masukkan kode yang kamu buat dari perangkat barumu."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Untuk log in sebagai {username} di perangkat baru:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. Di perangkat barumu, buka halaman log in"
@@ -2595,7 +2593,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
 Feature.Chat.Label.Unavailable,Tidak tersedia
-Feature.Chat.Label.UnfilteredChat,Chat tanpa filter
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,Lihat Profil
@@ -3027,7 +3024,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,Cara baru untuk menambahkan orang la
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Saat kamu menambahkan pengguna lain yang usianya telah diperiksa melalui kode QR atau Kontak, dia akan menjadi Koneksi Tepercaya. Opsi lain akan segera tersedia."
 Feature.Friends.TCEducation.Title,Tambahkan orang yang kamu kenal
 Feature.Friends.TCFeature.AndMore,dan banyak lagi yang akan tersedia
-Feature.Friends.TCFeature.ChatWithoutFilters,
+Feature.Friends.TCFeature.ChatWithoutFilters,Chat tanpa filter
 Feature.Friends.TCFeature.PartyVoice,Chat suara Party
 Feature.Friends.TFEducation.Banner.Text,"Tambahkan teman tepercaya dengan kode QR atau Kontak untuk menggunakan Chat tanpa filter, chat suara Party, dan banyak lagi."
 Feature.Friends.TFEducation.Modal.TextIntro,"Main Roblox lebih seru dengan pengguna yang kamu kenal. Pengguna yang usianya telah diperiksa yang kamu tambahkan melalui Kode QR atau Kontak akan menjadi teman tepercaya, sehingga membuka manfaat ekstra, seperti:"
@@ -3469,7 +3466,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
 Feature.Moments.Label.Photos,Foto
-Feature.Moments.Label.PostDeleted,Moment dihapus
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
 Feature.Moments.Label.Reactions,Reaksi
@@ -3488,7 +3484,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba la
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,Moment dihapus
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.MusicPlayer.Action.GoToSongDetails,Buka Detail Lagu
 Feature.MusicPlayer.Action.Report,

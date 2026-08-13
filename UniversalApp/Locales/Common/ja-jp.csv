@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.QrCodeError,QRコードの表示に問題が発
 Authentication.CrossDevice.Label.QrCodeLogin,QRコードでログイン
 Authentication.CrossDevice.Label.QrHeader,オプション1
 Authentication.CrossDevice.Label.QrInstructions,ログインしたお持ちのデバイスのカメラから、このQRコードをスキャンします。
-Authentication.CrossDevice.Label.QrTroubleshooting,問題がある場合
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,ログインを完了するには、お使いのパソコンまたはスマホで <b>roblox.com/quest</b> にアクセスしてこのコードを入力してください。
-Authentication.CrossDevice.Label.QuickSignInInstructions,QRコードをスキャンするか、ログインしたデバイスで <b>[その他] > [クイックサインイン]</b> に移動し、コードを入力してください。
 Authentication.CrossDevice.Label.QuickSignInWarning,セキュリティ保護のため、新しいデバイスで生成したコードのみを入力してください。
 Authentication.CrossDevice.Label.SigninInstructionHeading,新しいデバイスで{username}としてログインするには：
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 新しいデバイスで、ログインページを開きます
@@ -2597,7 +2595,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,伏字フィルタ処理なしのチャット
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー
 Feature.Chat.Label.ViewProfile,プロフィールを見る
@@ -3029,7 +3026,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,他のユーザーを「信頼でき
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,QRコードまたは連絡先を使用して、別の年齢チェック済みユーザーを追加すると、信頼できるつながりになります。その他のオプションは、近日公開されます。
 Feature.Friends.TCEducation.Title,知り合いを追加しましょう
 Feature.Friends.TCFeature.AndMore,その他の新機能も近日公開
-Feature.Friends.TCFeature.ChatWithoutFilters,
+Feature.Friends.TCFeature.ChatWithoutFilters,伏字フィルタ処理なしのチャット
 Feature.Friends.TCFeature.PartyVoice,パーティボイス
 Feature.Friends.TFEducation.Banner.Text,伏字フィルタ処理なしのチャットとパーティボイスなどの機能を使用できるようにするには、QRコードか連絡先リストで信頼する友達を追加してください。
 Feature.Friends.TFEducation.Modal.TextIntro,知り合いと一緒にプレイしてRobloxをさらに楽しく。QRコードまたは連絡先リストで追加した年齢確認済みのユーザーは、「信頼する友達」となり、以下のような追加特典を利用できます：
@@ -3471,7 +3468,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,現在、新着のモーメントはありません
 Feature.Moments.Label.Photos,写真
-Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
 Feature.Moments.Label.PublishingRodeoBody,あまり時間はかかりません。
 Feature.Moments.Label.Reactions,
@@ -3490,7 +3486,7 @@ Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませ
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,モーメントが削除されました
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.MusicPlayer.Action.GoToSongDetails,曲の詳細へ
 Feature.MusicPlayer.Action.Report,

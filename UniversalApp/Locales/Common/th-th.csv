@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.QrCodeError,เรากำลังประ�
 Authentication.CrossDevice.Label.QrCodeLogin,ลงชื่อเข้าใช้ด้วยรหัส QR
 Authentication.CrossDevice.Label.QrHeader,ตัวเลือกที่ 1
 Authentication.CrossDevice.Label.QrInstructions,สแกนรหัส QR นี้ด้วยกล้องของอุปกรณ์ที่ลงชื่อเข้าใช้อยู่ของคุณ
-Authentication.CrossDevice.Label.QrTroubleshooting,หากประสบปัญหา
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,ไปที่ <b>roblox.com/quest</b> บนคอมพิวเตอร์หรือโทรศัพท์ของคุณเพื่อกรอกรหัสนี้แล้วลงชื่อเข้าใช้ให้เสร็จสิ้น
-Authentication.CrossDevice.Label.QuickSignInInstructions,สแกนรหัส QR หรือใช้อุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่ ไปที่ <b>เพิ่มเติม > ลงชื่อเข้าใช้ด่วน</b> แล้วกรอกรหัส
 Authentication.CrossDevice.Label.QuickSignInWarning,เพื่อความปลอดภัย โปรดกรอกเฉพาะรหัสที่สร้างขึ้นจากอุปกรณ์ใหม่ของคุณเท่านั้น
 Authentication.CrossDevice.Label.SigninInstructionHeading,หากต้องการลงชื่อเข้าใช้เป็น {username} บนอุปกรณ์ใหม่:
 Authentication.CrossDevice.Label.SigninInstructionOne,1. ใช้อุปกรณ์ใหม่เปิดหน้าลงชื่อเข้าใช้
@@ -2580,7 +2578,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 นาที
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 สัปดาห์
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} สัปดาห์
 Feature.Chat.Label.Unavailable,ไม่พร้อมให้บริการ
-Feature.Chat.Label.UnfilteredChat,แชทที่ไม่มีการกรอง
 Feature.Chat.Label.UnknownUser,ผู้ใช้ที่ไม่รู้จัก
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,ดูโปรไฟล์
@@ -3454,7 +3451,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,ดูหมดแล้วในตอนนี้
 Feature.Moments.Label.Photos,รูปภาพ
-Feature.Moments.Label.PostDeleted,ลบโมเมนต์แล้ว
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
 Feature.Moments.Label.PublishingRodeoBody,การดำเนินการนี้น่าจะใช้เวลาไม่นาน
 Feature.Moments.Label.Reactions,การแสดงความรู้สึก
@@ -3473,7 +3469,7 @@ Feature.Moments.Label.TextGenerationFailedBody,ไม่สามารถสร
 Feature.Moments.Label.TextGenerationFailedTitle,สร้างไม่สำเร็จ
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,ลบโมเมนต์แล้ว
 Feature.Moments.Title.ReportPost,รายงานโพสต์
 Feature.MusicPlayer.Action.GoToSongDetails,ไปที่รายละเอียดเพลง
 Feature.MusicPlayer.Action.Report,

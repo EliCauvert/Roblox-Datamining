@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.QrCodeError,"Estamos teniendo problemas para mo
 Authentication.CrossDevice.Label.QrCodeLogin,Código QR de inicio de sesión
 Authentication.CrossDevice.Label.QrHeader,Opción 1
 Authentication.CrossDevice.Label.QrInstructions,Escanea este código QR desde la cámara de tu dispositivo conectado.
-Authentication.CrossDevice.Label.QrTroubleshooting,¿Estás teniendo problemas?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Ve a <b>roblox.com/quest</b> en tu equipo de escritorio o teléfono para ingresar este código y completar el inicio de sesión.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Escanea el código QR o, en tu dispositivo en el que iniciaste sesión, ve a <b>Más > Inicio de sesión rápido</b> e ingresa el código."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Por tu seguridad, ingresa únicamente los códigos que hayas generado desde tu nuevo dispositivo."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Para iniciar sesión como {username} en un dispositivo nuevo:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. En tu nuevo dispositivo, abre la página de inicio de sesión."
@@ -2598,7 +2596,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sems.
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Chat sin filtros
 Feature.Chat.Label.UnknownUser,usuario desconocido
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,Ver perfil
@@ -3030,7 +3027,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,Pronto estarán disponibles nuevas f
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Cuando añadas a otro usuario cuya edad haya sido comprobada mediante un código QR o Contactos, este se convertirá en una Conexión de confianza. Próximamente habrá más opciones disponibles."
 Feature.Friends.TCEducation.Title,Añade a gente que conoces
 Feature.Friends.TCFeature.AndMore,y más por venir
-Feature.Friends.TCFeature.ChatWithoutFilters,
+Feature.Friends.TCFeature.ChatWithoutFilters,Chat sin filtros
 Feature.Friends.TCFeature.PartyVoice,Voz de Equipo
 Feature.Friends.TFEducation.Banner.Text,"Agrega amigos de confianza por código QR o desde Contactos para desbloquear Chat sin filtros, Voz de equipo, y más."
 Feature.Friends.TFEducation.Modal.TextIntro,"Roblox es más divertido con las personas que conoces. Los usuarios con edad verificada que agregues a través del código QR o Contactos se convertirán en amigos de confianza, y desbloquearás beneficios adicionales, como:"
@@ -3472,7 +3469,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Estás al día por ahora
 Feature.Moments.Label.Photos,Fotos
-Feature.Moments.Label.PostDeleted,Momento eliminado
 Feature.Moments.Label.PostRemovedBody,El Momento que publicaste va en contra de nuestras Normas de la comunidad.
 Feature.Moments.Label.PublishingRodeoBody,Esto no tomará mucho tiempo.
 Feature.Moments.Label.Reactions,Reacciones
@@ -3491,7 +3487,7 @@ Feature.Moments.Label.TextGenerationFailedBody,No se pudo generar el texto. Int�
 Feature.Moments.Label.TextGenerationFailedTitle,Error en la generación
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,Momento eliminado
 Feature.Moments.Title.ReportPost,Reportar publicación
 Feature.MusicPlayer.Action.GoToSongDetails,Ir a detalles de la canción
 Feature.MusicPlayer.Action.Report,

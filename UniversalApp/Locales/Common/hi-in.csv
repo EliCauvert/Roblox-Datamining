@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.QrCodeError,"हमें QR कोड दि�
 Authentication.CrossDevice.Label.QrCodeLogin,QR कोड लॉग इन करें
 Authentication.CrossDevice.Label.QrHeader,विकल्प 1
 Authentication.CrossDevice.Label.QrInstructions,अपने लॉग इन किए गए डिवाइस के कैमरे से इस QR कोड को स्कैन करें.
-Authentication.CrossDevice.Label.QrTroubleshooting,परेशानी हो रही है?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,"यह कोड डालने और लॉग इन पूरा करने के लिए, अपने कंप्यूटर या फ़ोन पर <b>roblox.com/quest</b> पर जाएँ."
-Authentication.CrossDevice.Label.QuickSignInInstructions,"QR कोड स्कैन करें या अपने साइन-इन किए हुए डिवाइस पर, <b>ज़्यादा > क्विक साइन-इन</b> पर जाकर कोड डालें."
 Authentication.CrossDevice.Label.QuickSignInWarning,"अपनी सुरक्षा के लिए, सिर्फ़ अपने नए डिवाइस से जनरेट हुए कोड डालें."
 Authentication.CrossDevice.Label.SigninInstructionHeading,नए डिवाइस पर {username} के तौर पर साइन-इन करने के लिए :
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. अपने नए डिवाइस पर, लॉगिन पेज खोलें"
@@ -2584,7 +2582,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,चैट फ़िल्टर नहीं की गई है
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र
 Feature.Chat.Label.ViewProfile,प्रोफ़ाइल देखें
@@ -3458,7 +3455,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
-Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ

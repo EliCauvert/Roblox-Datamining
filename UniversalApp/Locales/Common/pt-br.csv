@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.QrCodeError,Estamos tendo problemas para exibir
 Authentication.CrossDevice.Label.QrCodeLogin,Código QR de entrada
 Authentication.CrossDevice.Label.QrHeader,Opção 1
 Authentication.CrossDevice.Label.QrInstructions,Escaneie este código QR com a câmera de seu dispositivo conectado.
-Authentication.CrossDevice.Label.QrTroubleshooting,Com problemas?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Vá para <b>roblox.com/quest</b> no seu computador ou telefone para digitar este código e completar o login.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Escaneie o código QR ou, no dispositivo onde você iniciou a sessão, vá para <b>Mais > Entrada rápida</b> e insira o código."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Para sua segurança, insira apenas códigos que você gerou no seu novo dispositivo."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Para entrar como {username} em um novo dispositivo:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. No seu novo dispositivo, abra a página de entrada"
@@ -2597,7 +2595,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem.
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Chat sem filtro
 Feature.Chat.Label.UnknownUser,usuário desconhecido
 Feature.Chat.Label.User,Usuário
 Feature.Chat.Label.ViewProfile,Ver perfil
@@ -3471,7 +3468,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Você conferiu tudo por enquanto
 Feature.Moments.Label.Photos,Fotos
-Feature.Moments.Label.PostDeleted,Momento excluído
 Feature.Moments.Label.PostRemovedBody,O Momento que você publicou vai contra as Regras da Comunidade.
 Feature.Moments.Label.PublishingRodeoBody,Isso não deve demorar muito.
 Feature.Moments.Label.Reactions,Reações

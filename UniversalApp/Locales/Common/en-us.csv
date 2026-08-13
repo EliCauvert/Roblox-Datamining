@@ -278,9 +278,7 @@ Authentication.CrossDevice.Label.QrCodeError,"We are having problems displaying 
 Authentication.CrossDevice.Label.QrCodeLogin,QR Code Log In
 Authentication.CrossDevice.Label.QrHeader,Option 1
 Authentication.CrossDevice.Label.QrInstructions,Scan this QR code from your logged in device's camera.
-Authentication.CrossDevice.Label.QrTroubleshooting,Having trouble?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Go to <b>roblox.com/quest</b> on your computer or phone to enter this code and complete login.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Scan the QR code or on your signed in device, go to <b>More > Quick sign in</b> and enter the code."
 Authentication.CrossDevice.Label.QuickSignInWarning,"For your security, only enter codes you generated from your new device."
 Authentication.CrossDevice.Label.SigninInstructionHeading,To sign in as {username} on a new device:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. On your new device, open the login page"
@@ -2611,7 +2609,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1m
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Unfiltered chat
 Feature.Chat.Label.UnknownUser,unknown user
 Feature.Chat.Label.User,User
 Feature.Chat.Label.ViewProfile,View Profile
@@ -3485,7 +3482,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,You're all caught up for now
 Feature.Moments.Label.Photos,Photos
-Feature.Moments.Label.PostDeleted,Moment deleted
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
 Feature.Moments.Label.PublishingRodeoBody,This shouldn't take too long.
 Feature.Moments.Label.Reactions,Reactions

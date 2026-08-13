@@ -277,9 +277,7 @@ Authentication.CrossDevice.Label.QrCodeError,Nous avons des problèmes pour affi
 Authentication.CrossDevice.Label.QrCodeLogin,Code QR de connexion
 Authentication.CrossDevice.Label.QrHeader,Option 1
 Authentication.CrossDevice.Label.QrInstructions,Scanne ce code QR depuis l'appareil photo de ton appareil connecté.
-Authentication.CrossDevice.Label.QrTroubleshooting,Tu rencontres un problème ?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Rendez-vous sur <b>roblox.com/quest</b> sur votre ordinateur ou téléphone pour entrer ce code et compléter la connexion.
-Authentication.CrossDevice.Label.QuickSignInInstructions,Scanne le code QR ou accède à <b>Plus > Connexion rapide</b> et saisis le code sur ton appareil déjà connecté.
 Authentication.CrossDevice.Label.QuickSignInWarning,"Pour ta sécurité, ne saisis que les codes générés depuis ton nouvel appareil."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Pour te connecter en tant que {username} :
 Authentication.CrossDevice.Label.SigninInstructionOne,1. Ouvre la page de connexion sur ton nouvel appareil
@@ -2604,7 +2602,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Chat non filtré
 Feature.Chat.Label.UnknownUser,utilisateur inconnu
 Feature.Chat.Label.User,Utilisateur
 Feature.Chat.Label.ViewProfile,Voir le profil
@@ -3478,7 +3475,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Tu es à jour pour le moment
 Feature.Moments.Label.Photos,Photos
-Feature.Moments.Label.PostDeleted,Moment supprimé
 Feature.Moments.Label.PostRemovedBody,Le Moment que tu as publié va à l'encontre des normes de la communauté.
 Feature.Moments.Label.PublishingRodeoBody,Cela ne devrait prendre qu'un instant.
 Feature.Moments.Label.Reactions,Réactions
@@ -3497,7 +3493,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Impossible de générer du texte.
 Feature.Moments.Label.TextGenerationFailedTitle,Échec de la génération
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,Moment supprimé
 Feature.Moments.Title.ReportPost,Signaler un post
 Feature.MusicPlayer.Action.GoToSongDetails,Aller aux détails de la chanson
 Feature.MusicPlayer.Action.Report,
