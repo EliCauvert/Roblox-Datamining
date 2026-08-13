@@ -2328,7 +2328,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 ay
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 hafta
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} hafta
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Filtrelenmemiş sohbet
 Feature.Chat.Label.UnknownUser,bilinmeyen kullanıcı
 Feature.Chat.Label.User,Kullanıcı
 Feature.Chat.Label.ViewProfile,Profili Görüntüle
@@ -2983,7 +2982,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Şimdilik yeni bir şey yok
 Feature.Moments.Label.Photos,Fotoğraflar
-Feature.Moments.Label.PostDeleted,An silindi
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
 Feature.Moments.Label.PublishingRodeoBody,Bu işlem pek uzun sürmez.
 Feature.Moments.Label.Reactions,Tepkiler

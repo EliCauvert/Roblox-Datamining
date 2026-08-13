@@ -2309,7 +2309,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sett.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sett.
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Chat non filtrata
 Feature.Chat.Label.UnknownUser,utente sconosciuto
 Feature.Chat.Label.User,Utente
 Feature.Chat.Label.ViewProfile,Visualizza profilo
@@ -2964,7 +2963,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,È tutto aggiornato per ora
 Feature.Moments.Label.Photos,Foto
-Feature.Moments.Label.PostDeleted,Momento eliminato
 Feature.Moments.Label.PostRemovedBody,Il Momento che hai pubblicato viola le nostre norme della community.
 Feature.Moments.Label.PublishingRodeoBody,Non dovrebbe volerci molto.
 Feature.Moments.Label.Reactions,Reazioni

@@ -2319,7 +2319,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Chat tanpa filter
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,Lihat Profil
@@ -2675,7 +2674,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,Cara baru untuk menambahkan orang la
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Saat kamu menambahkan pengguna lain yang usianya telah diperiksa melalui kode QR atau Kontak, dia akan menjadi Koneksi Tepercaya. Opsi lain akan segera tersedia."
 Feature.Friends.TCEducation.Title,Tambahkan orang yang kamu kenal
 Feature.Friends.TCFeature.AndMore,dan banyak lagi yang akan tersedia
-Feature.Friends.TCFeature.ChatWithoutFilters,
+Feature.Friends.TCFeature.ChatWithoutFilters,Chat tanpa filter
 Feature.Friends.TCFeature.PartyVoice,Chat suara Party
 Feature.Friends.TFEducation.Modal.TextIntro,"Main Roblox lebih seru dengan pengguna yang kamu kenal. Pengguna yang usianya telah diperiksa yang kamu tambahkan melalui Kode QR atau Kontak akan menjadi teman tepercaya, sehingga membuka manfaat ekstra, seperti:"
 Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus,"Sebagai pengguna 18+ yang usianya telah diperiksa, kamu dapat melakukan lebih banyak hal dengan teman 18+ yang usianya telah diperiksa dan teman tepercayamu."
@@ -2974,7 +2973,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
 Feature.Moments.Label.Photos,Foto
-Feature.Moments.Label.PostDeleted,Moment dihapus
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
 Feature.Moments.Label.Reactions,Reaksi
@@ -2993,7 +2991,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba la
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,Moment dihapus
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.Moments.Tooltip.Creation,Semua orang di pengalaman virtual dapat melihat Moment-mu.
 Feature.NativeAds.Label.Ad,

@@ -84,7 +84,6 @@ local momentsSurfaceLoadTTI = game:DefineFastFlag("MomentsSurfaceLoadTTI", false
 local momentsSurfaceLoadTTISamplingRate = game:DefineFastInt("MomentsSurfaceLoadTTISamplingRate", 1000)
 local momentsSurfaceLoadTTIMaxMs = game:DefineFastInt("MomentsSurfaceLoadTTIMaxMs", 0)
 local momentsRemoveDeletedFromProfile = game:DefineFastFlag("MomentsRemoveDeletedFromProfile", false)
-local momentsRefreshOwnMomentsAfterPublish = game:DefineFastFlag("MomentsRefreshOwnMomentsAfterPublish", false)
 local momentsIPReporting = game:DefineFastFlag("MomentsIPReporting", false)
 local momentsPassFeedItemIdToBackendApis = game:DefineFastFlag("MomentsPassFeedItemIdToBackendApis", false)
 local momentsTabReactiveIXP = game:DefineFastFlag("MomentsTabReactiveIXP", false)
@@ -180,7 +179,6 @@ return {
 	FIntMomentsSurfaceLoadTTISamplingRate = momentsSurfaceLoadTTISamplingRate,
 	FIntMomentsSurfaceLoadTTIMaxMs = momentsSurfaceLoadTTIMaxMs,
 	FFlagMomentsRemoveDeletedFromProfile = momentsRemoveDeletedFromProfile,
-	FFlagMomentsRefreshOwnMomentsAfterPublish = momentsRefreshOwnMomentsAfterPublish,
 	FFlagMomentsIPReporting = momentsIPReporting,
 	FFlagMomentsPassFeedItemIdToBackendApis = momentsPassFeedItemIdToBackendApis,
 	FFlagMomentsTabReactiveIXP = momentsTabReactiveIXP,
@@ -521,7 +519,6 @@ return {
 	FFlagUserTileShowBadges = require(script.FFlagUserTileShowBadges),
 	FFlagUserTileAddContextualInfoIcon = require(script.FFlagUserTileAddContextualInfoIcon),
 	FFlagUserTileTitleStackAddExtraInfo = require(script.FFlagUserTileTitleStackAddExtraInfo),
-	FFlagUserTileUnfilteredChatIndicator = game:DefineFastFlag("UserTileUnfilteredChatIndicator", false),
 	FFlagEnableModerateChatRemoteEvent = game:DefineFastFlag("EnableModerateChatRemoteEvent", false) and game:GetEngineFeature("EnableChatModerationMode"),
 	FFlagEnableSummarySystemMessageOnLua = enableSummarySystemMessage,
 	FFlagEnableClientSummarySystemMessageOnLua = enableSummarySystemMessage or game:DefineFastFlag("EnableClientSummarySystemMessageOnLua", false),
@@ -542,7 +539,6 @@ return {
 	FFlagTCPolicyCheckRedirect = require(script.FFlagTCPolicyCheckRedirect),
 	FFlagEnableUserRecentActivityEntryPoint = require(script.FFlagEnableUserRecentActivityEntryPoint),
 	FFlagEnableRecentActivityInspectAndBuy = require(script.FFlagEnableRecentActivityInspectAndBuy),
-	FFlagEnableRecentActivitySingleItemDetails = require(script.FFlagEnableRecentActivitySingleItemDetails),
 	GetFFlagEnableChatNewMessage = require(script.GetFFlagEnableChatNewMessage),
 	GetFStringPCGDKFilteredNotificationTypes = require(script.GetFStringPCGDKFilteredNotificationTypes),
 	GetFStringNotificationsStreamNotificationUXLayer = require(script.GetFStringNotificationsStreamNotificationUXLayer),
@@ -660,6 +656,7 @@ return {
 	GetFFlagGetHumanoidDescription = require(script.GetFFlagGetHumanoidDescription),
 	GetFFlagRAEnableCircleRegion = require(script.GetFFlagRAEnableCircleRegion),
 	FFlagEnableModularizedUserAgreementsList = require(script.FFlagEnableModularizedUserAgreementsList),
+	GetFFlagFixCatalogContextItemReportURLConstruction = require(script.GetFFlagFixCatalogContextItemReportURLConstruction),
 	GetFFlagEnableAbuseReportMutedError = require(script.GetFFlagEnableAbuseReportMutedError),
 	GetFFlagEnableChatLineReporting = require(script.GetFFlagEnableChatLineReporting),
 	GetFFlagAddMorePhoneUpsellEvents = require(script.GetFFlagAddMorePhoneUpsellEvents),
@@ -932,7 +929,6 @@ return {
 	FFlagSduiEdpStoreImpressionsLogging = game:DefineFastFlag("SduiEdpStoreImpressionsLogging", false),
 	FFlagSduiDevStoreSeeAllImpressionsLogging = game:DefineFastFlag("SduiDevStoreSeeAllImpressionsLogging", false),
 	FFlagSduiQueryImpressionsLogging = game:DefineFastFlag("SduiQueryImpressionsLogging", false),
-	FFlagLuaAppSduiQuerySuggestionClickedTelemetry = game:DefineFastFlag("LuaAppSduiQuerySuggestionClickedTelemetry", false),
 	FFlagSduiSearchPeoplePlayerTileTelemetry = game:DefineFastFlag("SduiSearchPeoplePlayerTileTelemetry", false),
 	FFlagLuaAppParentUpsellPolicy = require(script.FFlagLuaAppParentUpsellPolicy),
 	FFlagLuaAppPlayButtonAmpAgeCheckFlow = game:DefineFastFlag("LuaAppPlayButtonAmpAgeCheckFlow", false),
@@ -1635,7 +1631,7 @@ return {
 	FFlagBackpackResponsiveUnits = game:DefineFastFlag("BackpackResponsiveUnits", false),
 	FFlagEnableShareSheet = game:DefineFastFlag("EnableShareSheetForBuild", false),
 	FFlagFixLoginV2LandscapeLayout = game:DefineFastFlag("FixLoginV2LandscapeLayout", false),
-	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization8", false),
+	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization7", false),
 	FFlagRemoveUnusedConnectionStateRoduxSlice = require(script.FFlagRemoveUnusedConnectionStateRoduxSlice),
 	FFlagRemoveUnusedFriendStatusesRoduxSlice = require(script.FFlagRemoveUnusedFriendStatusesRoduxSlice),
 	FFlagRemoveUnusedGameThumbnailsRoduxSlice = require(script.FFlagRemoveUnusedGameThumbnailsRoduxSlice),
@@ -1677,7 +1673,7 @@ return {
 	FFlagReplaceNavbarIconsWithFoundation = game:DefineFastFlag("ReplaceNavbarIconsWithFoundation", false),
 	FFlagEnableBuildTabOverride = game:DefineFastFlag("EnableBuildTabOverride", false),
 	FFlagBuildExperienceShareUseUniverseSummary = game:DefineFastFlag("BuildExperienceShareUseUniverseSummary", false),
-	FFlagMyStatsMediaSelector = game:DefineFastFlag("MyStatsMediaSelector3", false),
+	FFlagMyStatsMediaSelector = game:DefineFastFlag("MyStatsMediaSelector2", false),
 	FFlagCreatorAgentChatParseDirectPublishVersion = game:DefineFastFlag("CreatorAgentChatParseDirectPublishVersion", false),
 	FFlagAndroidTVExitWithB = game:DefineFastFlag("AndroidTVExitWithB2", false) and game:GetEngineFeature("PTFBackButtonAlwaysAsButtonB"),
 	FFlagEnableMeTabProfile = enableMeTabProfile,

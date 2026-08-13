@@ -2309,7 +2309,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,चैट फ़िल्टर नहीं की गई है
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र
 Feature.Chat.Label.ViewProfile,प्रोफ़ाइल देखें
@@ -2964,7 +2963,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
-Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ

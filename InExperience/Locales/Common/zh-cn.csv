@@ -2300,7 +2300,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,未经过滤的聊天
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,查看个人资料
@@ -2954,7 +2953,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,全部都看完啦
 Feature.Moments.Label.Photos,照片
-Feature.Moments.Label.PostDeleted,精彩瞬间已删除
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
 Feature.Moments.Label.PublishingRodeoBody,此过程不会花太长时间。
 Feature.Moments.Label.Reactions,回应
