@@ -277,7 +277,9 @@ Authentication.CrossDevice.Label.QrCodeError,Gặp sự cố khi hiển thị M�
 Authentication.CrossDevice.Label.QrCodeLogin,Mã QR Đăng Nhập
 Authentication.CrossDevice.Label.QrHeader,Tùy Chọn 1
 Authentication.CrossDevice.Label.QrInstructions,Quét mã QR này bằng camera của thiết bị đã đăng nhập của bạn.
+Authentication.CrossDevice.Label.QrTroubleshooting,Gặp vấn đề?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Đi đến <b>roblox.com/quest</b> trên máy tính hoặc điện thoại của bạn để nhập mã này và hoàn thành đăng nhập.
+Authentication.CrossDevice.Label.QuickSignInInstructions,"Quét mã QR, hoặc vào phần <b>Thêm > Đăng nhập nhanh</b> trên thiết bị bạn đã đăng nhập rồi nhập mã."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Vì lý do bảo mật, chỉ nhập mã do bạn tạo ra trên thiết bị mới."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Để đăng nhập bằng tên {username} trên một thiết bị mới:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. Trên thiết bị mới của bạn, hãy mở trang đăng nhập"
@@ -2602,6 +2604,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
 Feature.Chat.Label.Unavailable,Không có
+Feature.Chat.Label.UnfilteredChat,Trò chuyện không kiểm duyệt
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
 Feature.Chat.Label.ViewProfile,Xem Hồ Sơ

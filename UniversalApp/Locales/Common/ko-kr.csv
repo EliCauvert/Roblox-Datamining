@@ -278,7 +278,9 @@ Authentication.CrossDevice.Label.QrCodeError,"QR 코드를 표시하는 데 문�
 Authentication.CrossDevice.Label.QrCodeLogin,QR 코드 로그인
 Authentication.CrossDevice.Label.QrHeader,옵션 1
 Authentication.CrossDevice.Label.QrInstructions,로그인 중인 기기의 카메라로 이 QR 코드를 스캔하세요.
+Authentication.CrossDevice.Label.QrTroubleshooting,문제가 발생했나요?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,컴퓨터나 휴대폰에서 <b>roblox.com/quest</b>로 이동해 이 코드를 입력하고 로그인을 완료하세요.
+Authentication.CrossDevice.Label.QuickSignInInstructions,QR 코드를 스캔하거나 로그인된 기기에서 <b>더 보기 > 빠른 로그인</b>으로 이동하여 코드를 입력하세요.
 Authentication.CrossDevice.Label.QuickSignInWarning,보안을 위해 새 기기에서 생성한 코드만 입력해 주세요.
 Authentication.CrossDevice.Label.SigninInstructionHeading,새로운 기기에서 {username} 계정으로 로그인하려면
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 새로운 기기에서 로그인 페이지를 엽니다.
@@ -2604,6 +2606,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1분
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1주
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}주
 Feature.Chat.Label.Unavailable,사용 불가
+Feature.Chat.Label.UnfilteredChat,필터링되지 않은 채팅
 Feature.Chat.Label.UnknownUser,알 수 없는 사용자
 Feature.Chat.Label.User,사용자
 Feature.Chat.Label.ViewProfile,프로필 보기

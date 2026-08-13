@@ -277,7 +277,9 @@ Authentication.CrossDevice.Label.QrCodeError,Nous avons des problèmes pour affi
 Authentication.CrossDevice.Label.QrCodeLogin,Code QR de connexion
 Authentication.CrossDevice.Label.QrHeader,Option 1
 Authentication.CrossDevice.Label.QrInstructions,Scanne ce code QR depuis l'appareil photo de ton appareil connecté.
+Authentication.CrossDevice.Label.QrTroubleshooting,Tu rencontres un problème ?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Rendez-vous sur <b>roblox.com/quest</b> sur votre ordinateur ou téléphone pour entrer ce code et compléter la connexion.
+Authentication.CrossDevice.Label.QuickSignInInstructions,Scanne le code QR ou accède à <b>Plus > Connexion rapide</b> et saisis le code sur ton appareil déjà connecté.
 Authentication.CrossDevice.Label.QuickSignInWarning,"Pour ta sécurité, ne saisis que les codes générés depuis ton nouvel appareil."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Pour te connecter en tant que {username} :
 Authentication.CrossDevice.Label.SigninInstructionOne,1. Ouvre la page de connexion sur ton nouvel appareil
@@ -2602,6 +2604,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sem
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Chat non filtré
 Feature.Chat.Label.UnknownUser,utilisateur inconnu
 Feature.Chat.Label.User,Utilisateur
 Feature.Chat.Label.ViewProfile,Voir le profil

@@ -260,7 +260,9 @@ Authentication.CrossDevice.Label.QrCodeError,当前无法显示二维码。请�
 Authentication.CrossDevice.Label.QrCodeLogin,二维码登录
 Authentication.CrossDevice.Label.QrHeader,选项 1
 Authentication.CrossDevice.Label.QrInstructions,使用已登录的设置摄像头扫描二维码。
+Authentication.CrossDevice.Label.QrTroubleshooting,遇到问题？ 
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,使用电脑或手机前往 <b>roblox.com/quest</b>，输入此验证码并完成登录。
+Authentication.CrossDevice.Label.QuickSignInInstructions,扫描二维码，或在已登录的设备上，依次前往<b>更多 > 快速登录</b>，然后输入此代码。
 Authentication.CrossDevice.Label.QuickSignInWarning,为了你的安全，请仅输入你在新设备上生成的验证码。
 Authentication.CrossDevice.Label.SigninInstructionHeading,如要在新设备上以“{username}”身份登录：
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 在你的新设备上，打开登录页面
@@ -2574,6 +2576,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 分钟
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 周
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 周
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,未经过滤的聊天
 Feature.Chat.Label.UnknownUser,未知用户
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,查看个人资料
