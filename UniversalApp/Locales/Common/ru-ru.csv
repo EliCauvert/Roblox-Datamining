@@ -137,7 +137,6 @@ Authentication.CrossDevice.Label.QrCodeError,"Возникла проблема 
 Authentication.CrossDevice.Label.QrCodeLogin,Вход с QR-кодом
 Authentication.CrossDevice.Label.QrHeader,Вариант 1
 Authentication.CrossDevice.Label.QrInstructions,"Отсканируй этот QR-код c устройства, на котором выполнен вход."
-Authentication.CrossDevice.Label.QrTroubleshooting,Возникла проблема?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,"Перейди по адресу <b>roblox.com/quest</b> на компьютере или телефоне, чтобы ввести этот код и завершить вход."
 Authentication.CrossDevice.Label.Warning1,"• Вводи только коды, запрошенные тобой."
 Authentication.CrossDevice.Label.Warning2,• Никогда не вводи коды других пользователей.
