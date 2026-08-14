@@ -100,8 +100,8 @@ Authentication.AccountPicker.Label.SignedOut,साइन-आउट किया
 Authentication.AccountRecovery.Action.AddAPasskey,"हाँ, एक नई पास-की जोड़ें"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
-Authentication.AccountRecovery.Action.DeleteAll,"नहीं, मुझे नहीं पता"
-Authentication.AccountRecovery.Action.DontDeleteCredentials,"हाँ, मुझे पता है"
+Authentication.AccountRecovery.Action.DeleteAll,बदलाव हटाएँ
+Authentication.AccountRecovery.Action.DontDeleteCredentials,सभी को बनाए रखें
 Authentication.AccountRecovery.Action.Next,आगे जाएँ
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,पासवर्ड रीसेट करें
@@ -116,7 +116,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,इसके बजाय 
 Authentication.AccountRecovery.Action.UsePhone,फ़ोन इस्तेमाल करें
 Authentication.AccountRecovery.Action.UsePhoneInstead,इसके बजाय फ़ोन का इस्तेमाल करें
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,इसके बजाय यूज़रनेम या ईमेल इस्तेमाल करें
-Authentication.AccountRecovery.Description.AccountSecuredConfirmation,"उन बदलावों को हटा दिया गया है, जिनके बारे में आपको नहीं पता था. अतिरिक्त सुरक्षा सुविधा जोड़कर अपना अकाउंट सुरक्षित रखें."
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,सभी बदलाव हटा दिए गए हैं.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"आपकी सुरक्षा के लिए, 2-स्टेप वेरिफ़िकेशन की सुविधा वाले आपके अकाउंट को रिकवर करने के लिए, वेरिफ़िकेशन के एक और, नए तरीके की ज़रूरत होती है. इस अकाउंट में सुरक्षित रिकवरी के लिए कोई बैकअप तरीका उपलब्ध नहीं है. कृपया अपने प्राथमिक 2SV तरीके का ऐक्सेस फिर से पाने की कोशिश करें या 2SV चैलेंज को स्किप करने के लिए किसी बैकअप कोड का इस्तेमाल करें."
 Authentication.AccountRecovery.Description.ChooseAccount,"वह अकाउंट चुनें, जिसे आपको रिकवर करना है."
 Authentication.AccountRecovery.Description.CreateNewPassword,"एक मज़बूत पासवर्ड बनाएँ, जो आपके पुराने पासवर्ड से अलग हो."
@@ -132,9 +132,9 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"अब, एक ई
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"अब एक फ़ोन नंबर, बैकअप कोड या कोई दूसरा ईमेल पता डालें. यह ऐसा कोई ईमेल हो सकता है जिसका इस्तेमाल करके आपने Roblox पर कुछ खरीदा हो."
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"अब, अपने अकाउंट से जुड़ा फ़ोन नंबर डालें"
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"अब, एक फ़ोन नंबर या कोई दूसरा ईमेल पता डालें. यह ऐसा कोई ईमेल हो सकता है जिसका इस्तेमाल करके आपने Roblox पर कुछ खरीदा था."
-Authentication.AccountRecovery.Description.InvalidateCredentialInfo,"हमें आपके अकाउंट में सुरक्षा संबंधी बदलाव मिला है, जो शायद आपने नहीं किया है. देखें और हमें बताएँ कि क्या यह आपने किया है."
-Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,"हमें आपके अकाउंट में सुरक्षा संबंधी ऐसे बदलाव मिले हैं, जो शायद आपने नहीं किए हैं. देखें और हमें बताएँ कि क्या वे आपने किए हैं."
-Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"जिन आइटम के बारे में मुझे नहीं पता, उन्हें रखने पर कोई भी अन्य व्यक्ति साइन-इन करके मुझे लॉक आउट कर सकता है. इस ऐक्शन को वापस नहीं लिया जा सकता."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,"हमें सुरक्षा संबंधी एक ऐसा बदलाव मिला है, जो शायद आपने नहीं किया है. अगर आपको इसके बारे में नहीं पता, तो इसे हटा दें"
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,"हमें सुरक्षा संबंधी ऐसे बदलाव मिले हैं, जो शायद आपने नहीं किए हैं. हर उस बदलाव को हटाएँ, जिनके बारे में आपको नहीं पता."
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"आपको जिन बदलावों के बारे में नहीं पता, उन्हें बनाए रखने पर आपका अकाउंट खतरे में पड़ सकता है. बदलावों को हटाने के बाद उन्हें वापस नहीं लिया जा सकता."
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,"आपने अपने अकाउंट पर {twoStepMethod} चालू कर दिया है. अगर यह अभी भी ऐक्सेस किया जा सकता है, तो इसे रखें. फिर से साइन इन करने पर, हम आपसे इसका इस्तेमाल करने के लिए कहेंगे."
 Authentication.AccountRecovery.Description.NoChangesMade,सुरक्षा का एक और स्टेप जोड़कर अपना अकाउंट सुरक्षित रखें.
 Authentication.AccountRecovery.Description.PhoneCodeSent,"अगर इस फ़ोन नंबर से जुड़ा कोई Roblox अकाउंट मौजूद है, तो आपको एक वेरिफ़िकेशन कोड मिलेगा. SMS या WhatsApp चेक करें."
@@ -148,7 +148,7 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"हैलो {username}, आपने किसी भरोसेमंद लोकेशन से अपना अकाउंट ऐक्सेस किया है. आपके पास अपना 2-स्टेप वेरिफ़िकेशन छोड़कर रिकवरी पूरी करने का विकल्प है."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,हमने देखा है कि आपने अपना अकाउंट रिकवर करने के लिए किसी दूसरे ईमेल का इस्तेमाल किया है. हम आपका ईमेल पता अपडेट कर देंगे : {email}
 Authentication.AccountRecovery.Description.VerifyAgain,"2-स्टेप वेरिफ़िकेशन की सुविधा वाले अपने अकाउंट को रिकवर करने से पहले, वेरिफ़ाई करें कि यह आप ही हैं. 2-स्टेप वेरिफ़िकेशन चैलेंज को फिर से ट्रिगर करने के लिए, ""जारी रखें"" दबाएँ."
-Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,आपका अकाउंट सुरक्षित है!
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,आपका अकाउंट सुरक्षित है
 Authentication.AccountRecovery.Heading.BackupCodesGenerated,बैकअप कोड जनरेट किए गए
 Authentication.AccountRecovery.Heading.BillingEmailAdded,बिलिंग ईमेल जोड़ा गया
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,हम आपका अकाउंट रिकवर नहीं कर सकते
@@ -158,8 +158,8 @@ Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,क
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,"इस डिवाइस पर आपको लिमिटेड बिहेवियर का अनुभव हो सकता है, क्योंकि इस पर पास-की काम नहीं करती है"
 Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,एन्हैंस्ड प्रोटेक्शन प्रोग्राम में एनरोल किया गया
 Authentication.AccountRecovery.Heading.EnterSecondMethod,वेरिफ़िकेशन का दूसरा तरीका डालें
-Authentication.AccountRecovery.Heading.InvalidateCredential,क्या आपको इस बदलाव के बारे में पता है?
-Authentication.AccountRecovery.Heading.InvalidateCredentials,क्या आपको इन बदलावों के बारे में पता है?
+Authentication.AccountRecovery.Heading.InvalidateCredential,आपके अकाउंट में हुआ बदलाव
+Authentication.AccountRecovery.Heading.InvalidateCredentials,आपके अकाउंट में हुए बदलाव
 Authentication.AccountRecovery.Heading.NoChangesMade,कोई बदलाव नहीं किया गया
 Authentication.AccountRecovery.Heading.PasskeyAdded,पास-की जोड़ी गई
 Authentication.AccountRecovery.Heading.PhoneNumberAdded,फ़ोन नंबर जोड़ा गया
@@ -260,7 +260,9 @@ Authentication.CrossDevice.Label.QrCodeError,"हमें QR कोड दि�
 Authentication.CrossDevice.Label.QrCodeLogin,QR कोड लॉग इन करें
 Authentication.CrossDevice.Label.QrHeader,विकल्प 1
 Authentication.CrossDevice.Label.QrInstructions,अपने लॉग इन किए गए डिवाइस के कैमरे से इस QR कोड को स्कैन करें.
+Authentication.CrossDevice.Label.QrTroubleshooting,परेशानी हो रही है?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,"यह कोड डालने और लॉग इन पूरा करने के लिए, अपने कंप्यूटर या फ़ोन पर <b>roblox.com/quest</b> पर जाएँ."
+Authentication.CrossDevice.Label.QuickSignInInstructions,"QR कोड स्कैन करें या अपने साइन-इन किए हुए डिवाइस पर, <b>ज़्यादा > क्विक साइन-इन</b> पर जाकर कोड डालें."
 Authentication.CrossDevice.Label.QuickSignInWarning,"अपनी सुरक्षा के लिए, सिर्फ़ अपने नए डिवाइस से जनरेट हुए कोड डालें."
 Authentication.CrossDevice.Label.SigninInstructionHeading,नए डिवाइस पर {username} के तौर पर साइन-इन करने के लिए :
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. अपने नए डिवाइस पर, लॉगिन पेज खोलें"
@@ -2087,7 +2089,135 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} को ब्लॉक करना है?
 Feature.BlockingModal.Message.BlockConfirmation,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक किया है."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"इस यूज़र को ब्लॉक करने से उन्हें फ़्रेंड या फ़ॉलोअर के तौर पर हटा दिया जाएगा. वे आपको मैसेज, रिक्वेस्ट या इनवाइट नहीं भेज पाएँगे.<br /><br />उन्हें यह नहीं बताया जाएगा कि आपने उन्हें ब्लॉक कर दिया है."
-Feature.BuyRobux.Heading.Banner,Robux खरीदें
+Feature.Build.Action.AddFriends,
+Feature.Build.Action.AddPlaytester,प्लेटेस्टर जोड़ें
+Feature.Build.Action.AddPlaytesters,प्लेटेस्टर्स जोड़ें
+Feature.Build.Action.AddToPlaytest,प्ले-टेस्ट में जोड़ें
+Feature.Build.Action.Archive,आर्काइव करें
+Feature.Build.Action.ArchiveGame,गेम को आर्काइव में भेजें
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,
+Feature.Build.Action.BuyRobux,Robux खरीदें
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,टेक्स्ट कॉपी करें
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,ऑटो-सेव किए गए छिपाएँ
+Feature.Build.Action.ManageLimit,लिमिट मैनेज करें
+Feature.Build.Action.Next,आगे बढ़ें
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,मुझे नोटिफ़ाई करें
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,सेटिंग्स खोलें
+Feature.Build.Action.Playtest,प्लेटेस्ट
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,पब्लिश करें
+Feature.Build.Action.PublishLatest,सबसे नया पब्लिश करें
+Feature.Build.Action.Restore,रीस्टोर करें
+Feature.Build.Action.SetDailyLimit,रोज़ाना लिमिट सेट करें
+Feature.Build.Action.SetLimit,लिमिट सेट करें
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,लिंक शेयर करें
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,रेटिंग अपडेट करें
+Feature.Build.Action.UpdateWithChanges,बदलावों के साथ अपडेट करें
+Feature.Build.Action.View,
+Feature.Build.Action.ViewUsage,इस्तेमाल देखें
+Feature.Build.Content.NewGame,नया गेम
+Feature.Build.Description.ArchiveRemoval,"अगर इस गेम को आर्काइव किया जाता है, तो इसे 'बिल्ड' से हटा दिया जाएगा. आपके पास अभी भी Creator Hub या Roblox Studio से इसे ऐक्सेस और रीस्टोर करने की सुविधा रहेगी."
+Feature.Build.Description.AutoBuyUsage,"क्रिएट करते समय, बिल्ड का अतिरिक्त इस्तेमाल अपने-आप खरीदने के लिए अपने Robux का इस्तेमाल करें. आप जब चाहें, रोज़ाना खर्च की लिमिट सेट की जा सकती है."
+Feature.Build.Description.BuildIdeaGame,अपने आइडिया को गेम में बदलें
+Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके लिए कोई जवाब आने पर नोटिफ़िकेशन पाएँ.
+Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
+Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
+Feature.Build.Description.ChoosePlaytesters,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स चुनें.
+Feature.Build.Description.EnableBuildNotifs,"बिल्ड से अपडेट्स पाने के लिए, अपने डिवाइस की सेटिंग्स में नोटिफ़िकेशंस चालू करें."
+Feature.Build.Description.FriendsLinkOnly,"सिर्फ़ आपके फ़्रेंड्स ही इस लिंक को ऐक्सेस कर सकते हैं. अगर आपका मन है कि ज़्यादा लोग खेलें, तो अपने गेम की ऑडियंस सेटिंग बदलें."
+Feature.Build.Description.HubSettings,Creator Hub पर सभी सेटिंग्स मैनेज करें
+Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
+Feature.Build.Description.ManageAppearance,यह मैनेज करें कि आपका गेम दूसरों को कैसा दिखता है.
+Feature.Build.Description.PlayAfterPublish,यह चुनें कि इस एक्सपीरिएंस के पब्लिश होने के बाद इसे कौन-कौन खेल सकता है.
+Feature.Build.Description.PlaytestLocked,"अपना पहला गेम क्रिएट करने के बाद, प्लेटेस्टिंग शुरू की जा सकती है."
+Feature.Build.Description.PlaytesterAccess,"दोस्तों को प्लेटेस्टर के रूप में जोड़ें या ज़्यादा लोगों को खेलने देने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
+Feature.Build.Description.PrivateShare,"इसे शेयर करने के लिए, अपने गेम की ऑडियंस सेटिंग बदलें."
+Feature.Build.Description.RaiseLimitOrWait,"क्रिएट करना जारी रखने के लिए, अपनी रोज़ाना की Robux लिमिट बढ़ाएँ या कल उसके रीसेट होने का इंतज़ार करें."
+Feature.Build.Description.RatingAgreement,पब्लिश करने का मतलब है कि आपने सहमति दी है कि यह कॉन्टेंट रेटिंग सटीक है.
+Feature.Build.Description.RestoreLatest,यह वर्ज़न आपका सबसे हाल में पब्लिश किया गया वर्ज़न बन जाएगा.
+Feature.Build.Description.VersionChanges,खिलाड़ियों को इस वर्ज़न में हुए बदलावों के बारे में बताएँ.
+Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
+Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
+Feature.Build.Header.CustomAnswer,कस्टम जवाब
+Feature.Build.Header.GameDetails,गेम की जानकारी
+Feature.Build.Header.Overview,ओवरव्यू
+Feature.Build.Label.Access,ऐक्सेस
+Feature.Build.Label.AdditionalUsage,अतिरिक्त बिल्ड का इस्तेमाल
+Feature.Build.Label.Available,उपलब्ध है
+Feature.Build.Label.BackToBuild,बिल्ड पर वापस जाएँ
+Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
+Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
+Feature.Build.Label.CreatorHub,Creator Hub
+Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
+Feature.Build.Label.Description,विवरण
+Feature.Build.Label.FreeBuildUsage,मुफ़्त बिल्ड का इस्तेमाल
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
+Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
+Feature.Build.Label.Loading,लोड किया जा रहा है...
+Feature.Build.Label.NoLimit,कोई लिमिट नहीं
+Feature.Build.Label.ResetsDaily,रोज़ाना रीसेट होता है
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,गेम्स सर्च करें
+Feature.Build.Label.SearchTasks,टास्क सर्च करें
+Feature.Build.Label.SelectOption,कोई विकल्प चुनें
+Feature.Build.Label.ShareAddedFriends,"उन फ़्रेंड्स के साथ शेयर करें, जिन्हें आपने जोड़ा है"
+Feature.Build.Label.Title,टाइटल
+Feature.Build.Label.TitleDescription,टाइटल और विवरण
+Feature.Build.Label.Unknown,अज्ञात
+Feature.Build.Label.Version,
+Feature.Build.Label.VersionTitleDesc,वर्ज़न का टाइटल और विवरण
+Feature.Build.Label.Video,
+Feature.Build.Message.AccountRequirements,"आपका अकाउंट, बिल्ड इस्तेमाल करने की शर्तों को पूरा नहीं करता."
+Feature.Build.Message.AccountTooNew,आपका अकाउंट बिल्कुल नया होने की वजह से पब्लिश नहीं किया जा सकता. 2 दिन बाद फिर से कोशिश करें.
+Feature.Build.Message.AllFriendsAdded,आपने अपने सभी फ़्रेंड्स को प्लेटेस्टर्स के रूप में जोड़ लिया है.
+Feature.Build.Message.AudienceIneligible,इस ऑडियंस के लिए योग्य नहीं है
+Feature.Build.Message.ExpandAudience,Creator Hub पर अपने कॉन्टेंट के लिए ऑडियंस के दायरे को बड़ा करें
+Feature.Build.Message.ExperiencesLoadFailed,एक्सपीरिएंस लोड नहीं हो सके
+Feature.Build.Message.FriendsLoadFailed,फ़्रेंड्स लोड नहीं हो सके. फिर से कोशिश करें.
+Feature.Build.Message.GamePublishFailed,आपका गेम पब्लिश नहीं किया जा सका. फिर से कोशिश करें.
+Feature.Build.Message.InvitesLoadFailed,इनवाइट्स लोड नहीं हो सके
+Feature.Build.Message.LinkCopied,लिंक को क्लिपबोर्ड पर कॉपी किया गया.
+Feature.Build.Message.NoFriendsToAdd,फ़िलहाल आपके पास जोड़ने के लिए कोई दोस्त नहीं है. पहले Roblox पर लोगों से जुड़ें.
+Feature.Build.Message.PublicPublishFailed,"आपका गेम पब्लिश किया गया, लेकिन पब्लिक नहीं किया जा सका. फिर से कोशिश करें."
+Feature.Build.Message.PublishExpandAudience,अपनी ऑडियंस बढ़ाने के लिए पब्लिश करें
+Feature.Build.Message.QuestionnaireNeeded,"इस गेम को बिल्ड के बाहर एडिट किया गया था. पब्लिश करने के लिए, कॉन्टेंट क्वेश्चनेयर पूरा करें."
+Feature.Build.Message.ReadyToPlay,आपका गेम Roblox पर खेलने के लिए तैयार है!
+Feature.Build.Message.RestoreVersionFailed,यह वर्ज़न रीस्टोर नहीं किया जा सका. फिर से कोशिश करें.
+Feature.Build.Message.SaveChangesFailed,बदलाव सेव नहीं किए जा सके. फिर से कोशिश करें.
+Feature.Build.Message.ShareLinkFailed,शेयर लिंक नहीं बनाया जा सका. फिर से कोशिश करें.
+Feature.Build.Message.TryAgain,फिर से कोशिश करें.
+Feature.Build.Message.TurnToPortrait,"अपने गेम पर काम जारी रखने के लिए, अपने डिवाइस को पोर्ट्रेट मोड पर रखें."
+Feature.Build.Message.WhatToCreate,आपको आज क्या क्रिएट करना है?
+Feature.Build.Title.AddFriendsToPlaytest,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स जोड़ें
+Feature.Build.Title.ArchiveThisGame,इस गेम को आर्काइव में भेजना है?
+Feature.Build.Title.Audience,ऑडियंस
+Feature.Build.Title.BuildUnavailable,बिल्ड उपलब्ध नहीं है
+Feature.Build.Title.ChatBuildUnavailable,बिल्ड उपलब्ध नहीं है.
+Feature.Build.Title.Content,कॉन्टेंट
+Feature.Build.Title.DailyRobuxReached,रोज़ाना की Robux लिमिट पूरी हो गई
+Feature.Build.Title.ExperienceAudience,एक्सपीरिएंस की ऑडियंस
+Feature.Build.Title.FreeUsageReached,मुफ़्त बिल्ड के इस्तेमाल की लिमिट पूरी हो गई
+Feature.Build.Title.FriendsOnlyPlay,सिर्फ़ फ़्रेंड्स ही खेल सकते हैं
+Feature.Build.Title.GameCreationDone,गेम क्रिएशन पूरा हुआ
+Feature.Build.Title.GamePrivate,यह गेम प्राइवेट है
+Feature.Build.Title.GenericError,
+Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
+Feature.Build.Title.Playtesters,प्लेटेस्टर्स
+Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
+Feature.Build.Title.PushNotifications,पुश नोटिफ़िकेशंस
+Feature.Build.Title.Tasks,टास्क
+Feature.Build.Title.VersionHistory,वर्ज़न हिस्ट्री
+Feature.Build.Title.VersionInformation,वर्ज़न की जानकारी
+Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"नहीं, रहने दें"
 Feature.Captures.Action.Share,
@@ -2157,7 +2287,7 @@ Feature.Catalog.Heading.ItemInfo,आइटम की जानकारी
 Feature.Catalog.Heading.ItemRemoved,आइटम हटाया गया
 Feature.Catalog.Heading.ItemsOnSale,आइटम बिक्री पर हैं
 Feature.Catalog.Heading.NotForSale,बिक्री के लिए नहीं
-Feature.Catalog.Heading.Overview,ओवरव्यू
+Feature.Catalog.Heading.Overview,
 Feature.Catalog.Heading.PremiumOnly,सिर्फ़ Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,क्रिएटर लिमिट पूरी हो गई
 Feature.Catalog.Heading.QuickMenu,क्विक मेन्यू
@@ -2527,7 +2657,7 @@ Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} ने आपक�
 Feature.Chat.Heading.YouWereInvitedToGroup,आपको ग्रुप में शामिल होने का इनवाइट भेजा गया था
 Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,फ़्रेंड्स को जोड़ें
-Feature.Chat.Label.Available,उपलब्ध है
+Feature.Chat.Label.Available,
 Feature.Chat.Label.Blocked,ब्लॉक किया गया
 Feature.Chat.Label.ByBuilder,{USERNAME} के ज़रिए
 Feature.Chat.Label.ChatDetails,चैट की जानकारी
@@ -2545,7 +2675,7 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} ने आपको ज
 Feature.Chat.Label.Group.YouRepliedToThem,आपने {DISPLAY_NAME} को जवाब दिया
 Feature.Chat.Label.GroupName,ग्रुप का नाम
 Feature.Chat.Label.HoverToReplyTooltip,जवाब देने के लिए होवर करें
-Feature.Chat.Label.Loading,लोड किया जा रहा है...
+Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,जवाब देने के लिए थोड़ा लंबा दबाएँ
 Feature.Chat.Label.Members,मेंबर्स
 Feature.Chat.Label.MessageNotAvailable,यह मैसेज उपलब्ध नहीं है
@@ -2582,6 +2712,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 मिनट
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 सप्ताह
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} सप्ताह
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,चैट फ़िल्टर नहीं की गई है
 Feature.Chat.Label.UnknownUser,अननोन यूज़र
 Feature.Chat.Label.User,यूज़र
 Feature.Chat.Label.ViewProfile,प्रोफ़ाइल देखें
@@ -2772,7 +2903,7 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,इस गेम को जॉइन करने के लिए आपको पेरेंट की परमिशन चाहिए.
-Feature.ExperienceDetails.Body.DescriptionTitle,विवरण
+Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,नोट्स
 Feature.ExperienceDetails.Body.StatsInfoTitle,आँकड़े और जानकारी
 Feature.ExperienceDetails.Label.NotPlayable,खेलने लायक नहीं है
@@ -3042,6 +3173,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,भरोसेमं�
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,भरोसेमंद फ़्रेंड की रिक्वेस्ट भेजी गई
 Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,हाल ही की ऐक्टिविटी
 Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username} की हाल ही की ऐक्टिविटी
+Feature.FriendsActivityFeed.Label.ViewRecentActivity,
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,{num_days} दिन
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,{num_hours} घंटे
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3080,7 +3212,7 @@ Feature.GameDetails.Label.Camera,कैमरा
 Feature.GameDetails.Label.ChatFeatures,चैट के फ़ीचर
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,इसमें स्ट्रॉन्ग भाषा है
-Feature.GameDetails.Label.ContentMaturity,कॉन्टेंट मैच्योरिटी
+Feature.GameDetails.Label.ContentMaturity,
 Feature.GameDetails.Label.Created,क्रिएट किया गया
 Feature.GameDetails.Label.Developer,डेवलपर
 Feature.GameDetails.Label.DontLikeGame,यह गेम पसंद नहीं है
@@ -3455,6 +3587,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,अभी कुछ नया नहीं है
 Feature.Moments.Label.Photos,फ़ोटो
+Feature.Moments.Label.PostDeleted,Moment डिलीट किया गया
 Feature.Moments.Label.PostRemovedBody,आपका पोस्ट किया गया Moment हमारे कम्यूनिटी स्टैंडर्ड के मुताबिक नहीं है.
 Feature.Moments.Label.PublishingRodeoBody,इसमें ज़्यादा समय नहीं लगना चाहिए.
 Feature.Moments.Label.Reactions,प्रतिक्रियाएँ
@@ -4053,7 +4186,7 @@ Feature.QualtricsSurveyPrompt.Action.Cancel,
 Feature.QualtricsSurveyPrompt.Action.Close,
 Feature.QualtricsSurveyPrompt.Action.Continue,
 Feature.QualtricsSurveyPrompt.Action.Done,
-Feature.QualtricsSurveyPrompt.Action.Next,आगे बढ़ें
+Feature.QualtricsSurveyPrompt.Action.Next,
 Feature.QualtricsSurveyPrompt.Action.Retry,
 Feature.QualtricsSurveyPrompt.Action.Send,
 Feature.QualtricsSurveyPrompt.Description.Error,
@@ -4280,7 +4413,7 @@ Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,सेटिंग्स खोलें
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. परमिशन चुनें
 2. कॉन्टैक्ट्स चुनें
 3. Roblox को अपने कॉन्टैक्ट्स ऐक्सेस करने की परमिशन दें"
@@ -4400,7 +4533,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,वाकई इस व्यक्ति को ग्रुप से हटाना है?
 Feature.Squads.Description.RemoveFromParty,{displayName} को ग्रुप चैट से हटा दिया जाएगा.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,चुने गए समय के लिए एक पार्टी पहले से ही शेड्यूल की जा चुकी है
-Feature.Squads.Description.Title,टाइटल
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,आपने {username} और {userCountMinusOne} अन्य को ग्रुप में जोड़ा है
 Feature.Squads.Description.YouAddedToChat,आपने {username} को ग्रुप में जोड़ा है
