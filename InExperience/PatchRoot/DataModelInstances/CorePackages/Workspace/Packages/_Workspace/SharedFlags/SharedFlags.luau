@@ -543,6 +543,7 @@ return {
 	FFlagEnableUserRecentActivityEntryPoint = require(script.FFlagEnableUserRecentActivityEntryPoint),
 	FFlagEnableRecentActivityInspectAndBuy = require(script.FFlagEnableRecentActivityInspectAndBuy),
 	FFlagEnableRecentActivitySingleItemDetails = require(script.FFlagEnableRecentActivitySingleItemDetails),
+	FFlagFriendsActivityFeedFetchItemNames = require(script.FFlagFriendsActivityFeedFetchItemNames),
 	GetFFlagEnableChatNewMessage = require(script.GetFFlagEnableChatNewMessage),
 	GetFStringPCGDKFilteredNotificationTypes = require(script.GetFStringPCGDKFilteredNotificationTypes),
 	GetFStringNotificationsStreamNotificationUXLayer = require(script.GetFStringNotificationsStreamNotificationUXLayer),
