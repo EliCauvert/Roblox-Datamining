@@ -21,7 +21,7 @@ local guiService = game:GetService("GuiService")
 local gamepadUtils = require(corePackagesService.Workspace.Packages.InputUi).Gamepad.GamepadUtils
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local default = require(script.Parent.ChatIconVisibleSignals).default
-local signalsRobloxModule = require(corePackagesService.Packages.SignalsRoblox)
+local signalsUtilsModule = require(corePackagesService.Workspace.Packages.SignalsUtils)
 local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
 local focusNavigationStore = expChatModule.Stores.GetFocusNavigationStore(false)
@@ -309,7 +309,7 @@ var30.chatOpenCapability = if fFlagExpChatEnableFriendsTab then {
 } else nil
 
 if expChatUnibarAvailabilityRefactor then
-	signalsRobloxModule.createDetachedEffect(function(p8) --[[ line: 306 ]]
+	signalsUtilsModule.createDetachedEffect(function(p8) --[[ line: 306 ]]
 		-- upvalues: default (ref), var30 (write), fFlagExpChatWindowSyncUnibar (ref), expChatModule (ref)
 		if default.getIsChatIconVisible(p8) then
 			var30.availability:available()
@@ -326,7 +326,7 @@ if expChatUnibarAvailabilityRefactor then
 	end)
 end
 if fFlagChatIntegrationFixShortcutModule and fFlagEnableConsoleExpControls then
-	signalsRobloxModule.createDetachedEffect(function(p10) --[[ line: 329 ]]
+	signalsUtilsModule.createDetachedEffect(function(p10) --[[ line: 329 ]]
 		-- upvalues: focusNavigationStore (ref), serviceModule (ref), constantsModule (ref)
 		if focusNavigationStore.getChatInputBarFocused(p10) then
 			serviceModule:setShortcutBar(constantsModule.UNIBAR_SHORTCUTBAR_ID)
@@ -337,7 +337,7 @@ if fFlagChatIntegrationFixShortcutModule and fFlagEnableConsoleExpControls then
 	end)
 end
 if fFlagExpChatEnableFriendsTab then
-	signalsRobloxModule.createDetachedEffect(function(p11) --[[ line: 341 ]]
+	signalsUtilsModule.createDetachedEffect(function(p11) --[[ line: 341 ]]
 		-- upvalues: getFriendsChatIconUnreadStoreModule (ref), updateUnreadNotification (ref)
 		getFriendsChatIconUnreadStoreModule(p11).getUnreadCountToDisplay(p11)
 		updateUnreadNotification()

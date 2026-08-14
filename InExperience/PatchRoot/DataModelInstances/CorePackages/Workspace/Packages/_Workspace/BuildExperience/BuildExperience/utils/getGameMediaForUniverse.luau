@@ -32,21 +32,23 @@ return function(p0) --[[ line: 22 | named "useGameMediaForUniverse" ]]
 			local t = {}
 			
 			for i, v in var2 do
+				local text
 				local var6 = "image"
-				local text = nil
+				local _ = nil
+				local var7 = tostring(v.videoId or v.imageId)
 				
 				if v.videoId then
 					var6 = "video"
 					text = "rbxassetid://" .. tostring(v.videoId)
+					table.insert(t, {
+						id = var7,
+						mediaType = var6,
+						assetSource = text,
+						assetResourceName = if v.imageId then `assets/{v.imageId}` else nil
+					})
 				elseif v.imageId then
 					text = "rbxassetid://" .. tostring(v.imageId)
 				end
-				table.insert(t, {
-					id = `thumbnail_{i}`,
-					mediaType = var6,
-					assetSource = text,
-					assetResourceName = if v.imageId then `assets/{v.imageId}` else nil
-				})
 			end
 			return t
 		end, { var2 })

@@ -27,10 +27,11 @@ local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMob
 local fFlagUserTileAddContextualInfoIcon = require(parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
 local userTileRemoveContextualInfoTag = game:DefineFastFlag("UserTileRemoveContextualInfoTag", false)
 local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
+local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 local t = { layoutOrder = 2 }
 
-return function(p0) --[[ line: 68 | named "TitleStack" ]]
-	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), iconSize (ref), userTileRemoveContextualInfoTag (ref)
+return function(p0) --[[ line: 70 | named "TitleStack" ]]
+	-- upvalues: llama (ref), t (ref), useTokens (ref), layoutModeModule (ref), reactModule (ref), image (ref), fFlagUserTileTitleStackAddExtraInfo (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), constantsModule (ref), fFlagEnableBlackbirdCheck (ref), fFlagHidePremiumIconography (ref), fFlagUserTileTextTCIndicator (ref), useLocalization (ref), textKeysModule (ref), fFlagUserTileUnfilteredChatIndicator (ref), view (ref), skeleton (ref), radius (ref), fFlagProfilePlatformNewProfileHeader (ref), text (ref), fFlagUserTileShowBadges (ref), foundationModule (ref), fFlagEnableMobileGameJoinCard (ref), stateLayerAffordance (ref), fFlagUserTileAddContextualInfoIcon (ref), icon (ref), iconSize (ref), userTileRemoveContextualInfoTag (ref)
 	local var17
 	p0 = llama.Dictionary.join(t, p0 or {})
 	local var9 = useTokens()
@@ -83,7 +84,13 @@ return function(p0) --[[ line: 68 | named "TitleStack" ]]
 	end
 	local createElement_1
 	local var22 = if fFlagHidePremiumIconography then false else p0.isPremium and not var21
-	local var23 = if fFlagUserTileTextTCIndicator then useLocalization({ trustedLabel = textKeysModule.trustedLabel }) else nil
+	local var23 = if fFlagUserTileTextTCIndicator then useLocalization({
+		trustedLabel = textKeysModule.trustedLabel,
+		unfilteredChatLabel = textKeysModule.unfilteredChatLabel
+	}) else nil
+	local var24 = fFlagUserTileUnfilteredChatIndicator and p0.shouldShowUnfilteredChatIndicator == true
+	local var25 = (p0.trustedConnectionIndicatorEnabled and p0.isTrustedConnection) == true
+	local var26 = p0.subtitle ~= nil and p0.subtitle ~= ""
 	local createElement = reactModule.createElement
 	local t_1 = { tag = `{var19} auto-y col`, LayoutOrder = p0.layoutOrder }
 	local t_2 = {
@@ -199,27 +206,30 @@ return function(p0) --[[ line: 68 | named "TitleStack" ]]
 			fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
 			Text = p0.subtitle or "",
 			TextTruncate = customTextTruncation,
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 268 ]]
+			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 276 ]]
 				-- upvalues: p0 (write)
 				p0.onSubtitleClicked()
 			end else nil,
 			stateLayer = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then { affordance = stateLayerAffordance.None } else nil
 		})
-	elseif fFlagUserTileTextTCIndicator and var12 then
+	elseif fFlagUserTileTextTCIndicator and (var12 or var24) then
+		local var32
 		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1(view, {
+		local var29 = view
+		local t_3 = {
 			LayoutOrder = 2,
 			tag = {
 				["row auto-y size-full-0 align-y-center"] = true,
 				["align-x-center"] = p0.layoutMode == layoutModeModule.compact,
 				["align-x-left"] = p0.layoutMode == layoutModeModule.wide
 			},
-			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 289 ]]
+			onActivated = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then function() --[[ line: 297 ]]
 				-- upvalues: p0 (write)
 				p0.onSubtitleClicked()
 			end else nil,
 			stateLayer = if (fFlagProfilePlatformNewProfileHeader or fFlagEnableMobileGameJoinCard) and p0.onSubtitleClicked then { affordance = stateLayerAffordance.None } else nil
-		}, {
+		}
+		local t_4 = {
 			SubtitleText = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				RichText = true,
@@ -231,8 +241,12 @@ return function(p0) --[[ line: 68 | named "TitleStack" ]]
 				fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
 				Text = p0.subtitle or "",
 				TextTruncate = customTextTruncation
-			}),
-			TCTextLabel = if p0.trustedConnectionIndicatorEnabled and p0.isTrustedConnection then reactModule.createElement(text, {
+			})
+		}
+		
+		if p0.trustedConnectionIndicatorEnabled and p0.isTrustedConnection then
+			var32 = reactModule.createElement
+			var32 = var32(text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = {
@@ -241,18 +255,42 @@ return function(p0) --[[ line: 68 | named "TitleStack" ]]
 					["text-align-x-left"] = p0.layoutMode == layoutModeModule.wide
 				},
 				fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
-				Text = " \226\128\162 " .. var23.trustedLabel,
+				Text = (if fFlagUserTileUnfilteredChatIndicator and not var26 then "" else " \226\128\162 ") .. var23.trustedLabel,
 				TextTruncate = customTextTruncation
-			}) else nil
-		})
+			})
+		else
+			var32 = nil
+		end
+		local createElement_2
+		t_4.TCTextLabel = var32
+		
+		if var24 then
+			createElement_2 = reactModule.createElement
+			createElement_2 = createElement_2(text, {
+				LayoutOrder = 3,
+				RichText = true,
+				tag = {
+					["auto-xy content-default"] = true,
+					["text-align-x-center"] = p0.layoutMode == layoutModeModule.compact,
+					["text-align-x-left"] = p0.layoutMode == layoutModeModule.wide
+				},
+				fontStyle = p0.subtitleStyle or var9.Typography.BodyMedium,
+				Text = (if var26 or var25 then " \226\128\162 " else "") .. var23.unfilteredChatLabel,
+				TextTruncate = customTextTruncation
+			})
+		else
+			createElement_2 = nil
+		end
+		t_4.UnfilteredChatLabel = createElement_2
+		createElement_1 = createElement_1(var29, t_3, t_4)
 	else
 		createElement_1 = nil
 	end
-	local var26
+	local var33
 	t_2.Subtitle = createElement_1
 	
 	if fFlagUserTileShowShimmerWhenLoadingModule and p0.isContextualInfoLoading then
-		var26 = reactModule.createElement(view, {
+		var33 = reactModule.createElement(view, {
 			LayoutOrder = 3,
 			tag = `size-full-0 auto-y padding-xsmall {var18}`
 		}, {
@@ -262,7 +300,7 @@ return function(p0) --[[ line: 68 | named "TitleStack" ]]
 			})
 		})
 	elseif p0.contextualInfo then
-		var26 = if fFlagUserTileAddContextualInfoIcon and p0.contextualInfoIcon then reactModule.createElement(view, {
+		var33 = if fFlagUserTileAddContextualInfoIcon and p0.contextualInfoIcon then reactModule.createElement(view, {
 			LayoutOrder = 3,
 			tag = {
 				["row align-y-center gap-xsmall size-full-0 auto-y"] = true,
@@ -299,9 +337,9 @@ return function(p0) --[[ line: 68 | named "TitleStack" ]]
 			TextTruncate = customTextTruncation,
 			Text = p0.contextualInfo
 		})
-		var26 = var26 or nil
+		var33 = var33 or nil
 	end
-	t_2.ContextualInfo = var26
+	t_2.ContextualInfo = var33
 	t_2.ExtraInfo = if fFlagUserTileTitleStackAddExtraInfo and p0.isExtraInfoLoading then reactModule.createElement(view, {
 		LayoutOrder = 4,
 		tag = `size-full-0 auto-y padding-xsmall {var18}`

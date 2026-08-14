@@ -36,6 +36,7 @@ return {
 	Unfriend = "Feature.Friends.Action.Unfriend",
 	RemoveConnection = if fFlagConnectionsToFriendsRename then nil else "CommonUI.Features.Label.RemoveConnection",
 	ViewFullProfile = "Feature.Profile.Action.ViewFullProfile",
+	ViewRecentActivity = "Feature.FriendsActivityFeed.Label.ViewRecentActivity",
 	RemoveTrustedConnection = if fFlagConnectionsToFriendsRename then "Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend" else "Feature.Friends.TrustedConnection.Action.RemoveTrustedConnection",
 	ViewPlatformProfile = "Feature.Friends.Action.ViewPlatformProfile",
 	CurrencyTransfer = "Features.Transfers.RobuxTransfer.Heading.SendRobux",

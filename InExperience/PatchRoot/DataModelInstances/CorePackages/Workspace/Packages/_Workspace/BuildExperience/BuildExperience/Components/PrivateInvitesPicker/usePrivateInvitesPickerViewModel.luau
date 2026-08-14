@@ -1,7 +1,9 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
 local signalsReactModule = require(parent.SignalsReact)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
 local friendsStore = require(parent.DataHydration.Friends).FriendsStore
 local searchFriendsAsyncModule = require(script.Parent.searchFriendsAsync)
@@ -10,152 +12,184 @@ local _ = require(buildExperience.Components.UserPicker.UserPickerTypes)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
 local _ = require(script.Parent.PrivateInvitesPickerView)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 37 | named "usePrivateInvitesPickerViewModel" ]]
-	-- upvalues: reactModule (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), friendsStore (ref), searchFriendsAsyncModule (ref), useUserPickerModule (ref), localizationStringsModule (ref)
+return function(p0) --[[ line: 41 | named "usePrivateInvitesPickerViewModel" ]]
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), signalsReactModule (ref), friendsStore (ref), searchFriendsAsyncModule (ref), useUserPickerModule (ref)
+	local PRIVATE_INVITES_ADD_PLAYTESTER, PRIVATE_INVITES_ADD_PLAYTESTERS, PRIVATE_INVITES_ALL_FRIENDS_ADDED, PRIVATE_INVITES_FRIENDS_LOAD_ERROR, PRIVATE_INVITES_NO_FRIENDS, PRIVATE_INVITES_SEARCH_PLACEHOLDER
+	local var8 = if fFlagBuildLocalization then useLocalization({
+		addPlaytester = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER,
+		addPlaytesters = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS,
+		allFriendsAdded = localizationStringsModule.PRIVATE_INVITES_ALL_FRIENDS_ADDED,
+		friendsLoadError = localizationStringsModule.PRIVATE_INVITES_FRIENDS_LOAD_ERROR,
+		noFriends = localizationStringsModule.PRIVATE_INVITES_NO_FRIENDS,
+		searchPlaceholder = localizationStringsModule.PRIVATE_INVITES_SEARCH_PLACEHOLDER
+	}) else nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	
+	if fFlagBuildLocalization then
+		PRIVATE_INVITES_ADD_PLAYTESTER = var8.addPlaytester
+		PRIVATE_INVITES_ADD_PLAYTESTERS = var8.addPlaytesters
+		PRIVATE_INVITES_ALL_FRIENDS_ADDED = var8.allFriendsAdded
+		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = var8.friendsLoadError
+		PRIVATE_INVITES_NO_FRIENDS = var8.noFriends
+		PRIVATE_INVITES_SEARCH_PLACEHOLDER = var8.searchPlaceholder
+	else
+		PRIVATE_INVITES_ADD_PLAYTESTER = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER
+		PRIVATE_INVITES_ADD_PLAYTESTERS = localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS
+		PRIVATE_INVITES_ALL_FRIENDS_ADDED = localizationStringsModule.PRIVATE_INVITES_ALL_FRIENDS_ADDED
+		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = localizationStringsModule.PRIVATE_INVITES_FRIENDS_LOAD_ERROR
+		PRIVATE_INVITES_NO_FRIENDS = localizationStringsModule.PRIVATE_INVITES_NO_FRIENDS
+		PRIVATE_INVITES_SEARCH_PLACEHOLDER = localizationStringsModule.PRIVATE_INVITES_SEARCH_PLACEHOLDER
+	end
 	local universeId = p0.universeId
 	local onInvitesSent = p0.onInvitesSent
-	local var7 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 43 ]]
-		-- upvalues: var7 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
-		if var7.current then
+	local var9 = reactModule.useRef(false)
+	reactModule.useEffect(function() --[[ line: 78 ]]
+		-- upvalues: var9 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
+		if var9.current then
 			return
 		end
-		var7.current = true
+		var9.current = true
 		sendBuildExperienceEventModule("PLAYTEST_PICKER_IMPRESSION", { universeId = universeId })
 	end, { universeId })
-	local var8 = getPrivatePlaytestersStore(false)
-	local var9 = reactModule.useMemo(function() --[[ line: 52 ]]
-		-- upvalues: var8 (ref), universeId (ref)
-		return var8.getAndFetchInvitedPlayers(universeId)
-	end, { var8, universeId })
-	local var10 = signalsReactModule.useSignalState(var9.players)
-	local var11 = if signalsReactModule.useSignalState(var9.status) == "Ready" then math.max(0, var8.MAX_INVITES - #var10) else 0
-	local var12 = reactModule.useMemo(function() --[[ line: 65 ]]
-		-- upvalues: var10 (ref)
+	local var10 = getPrivatePlaytestersStore(false)
+	local var11 = reactModule.useMemo(function() --[[ line: 87 ]]
+		-- upvalues: var10 (ref), universeId (ref)
+		return var10.getAndFetchInvitedPlayers(universeId)
+	end, { var10, universeId })
+	local var12 = signalsReactModule.useSignalState(var11.players)
+	local var13 = if signalsReactModule.useSignalState(var11.status) == "Ready" then math.max(0, var10.MAX_INVITES - #var12) else 0
+	local var14 = reactModule.useMemo(function() --[[ line: 100 ]]
+		-- upvalues: var12 (ref)
 		local t = {}
 		
-		for i, v in var10 do
+		for i, v in var12 do
 			t[v] = true
 		end
 		return t
-	end, { var10 })
-	local var13 = reactModule.useMemo(function() --[[ line: 75 ]]
+	end, { var12 })
+	local var15 = reactModule.useMemo(function() --[[ line: 110 ]]
 		-- upvalues: friendsStore (copy)
 		return friendsStore.get()
 	end, {})
-	local var14 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 78 ]]
-		-- upvalues: var13 (ref)
-		return var13.GetAllFriends()
-	end, { var13 }))
-	local var15 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 81 ]]
-		-- upvalues: var13 (ref)
-		return var13.GetAllFriendsStatus()
-	end, { var13 }))
-	local var16 = reactModule.useMemo(function() --[[ line: 87 ]]
-		-- upvalues: var14 (ref)
+	local var16 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 113 ]]
+		-- upvalues: var15 (ref)
+		return var15.GetAllFriends()
+	end, { var15 }))
+	local var17 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 116 ]]
+		-- upvalues: var15 (ref)
+		return var15.GetAllFriendsStatus()
+	end, { var15 }))
+	local var18 = reactModule.useMemo(function() --[[ line: 122 ]]
+		-- upvalues: var16 (ref)
 		local t = {}
 		
-		if var14 ~= nil then
-			for i, v in var14.friends do
-				local var30 = tonumber(v.id)
+		if var16 ~= nil then
+			for i, v in var16.friends do
+				local var32 = tonumber(v.id)
 				
-				if var30 ~= nil then
-					table.insert(t, var30)
+				if var32 ~= nil then
+					table.insert(t, var32)
 				end
 			end
 		end
 		return t
-	end, { var14 })
-	local isNotReady = var15 == "NotReady"
-	local var18 = reactModule.useCallback(function() --[[ line: 101 ]]
-		-- upvalues: var13 (ref)
-		var13.FetchMoreFriends()
-	end, { var13 })
-	local var19 = reactModule.useCallback(function(p1, p2) --[[ line: 107 ]]
+	end, { var16 })
+	local isNotReady = var17 == "NotReady"
+	local var20 = reactModule.useCallback(function() --[[ line: 136 ]]
+		-- upvalues: var15 (ref)
+		var15.FetchMoreFriends()
+	end, { var15 })
+	local var21 = reactModule.useCallback(function(p1, p2) --[[ line: 142 ]]
 		-- upvalues: searchFriendsAsyncModule (copy)
 		return searchFriendsAsyncModule(p1, p2, 20)
 	end, {})
-	local var20 = reactModule.useCallback(function(p3, p4) --[[ line: 111 ]]
-		-- upvalues: var8 (ref), universeId (ref), sendBuildExperienceEventModule (copy), onInvitesSent (ref)
-		return var8.sendInvites(universeId, p3, p4):andThen(function() --[[ line: 114 ]]
+	local var22 = reactModule.useCallback(function(p3, p4) --[[ line: 146 ]]
+		-- upvalues: var10 (ref), universeId (ref), sendBuildExperienceEventModule (copy), onInvitesSent (ref)
+		return var10.sendInvites(universeId, p3, p4):andThen(function() --[[ line: 149 ]]
 			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p3 (ref), onInvitesSent (copy)
 			sendBuildExperienceEventModule("PLAYTESTERS_ADDED", { universeId = universeId }, { count = tostring(#p3) })
 			onInvitesSent()
-		end):catch(function(p5) --[[ line: 120 ]]
+		end):catch(function(p5) --[[ line: 155 ]]
 			-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy), p3 (ref)
 			sendBuildExperienceEventModule("PLAYTESTERS_ADD_FAILED", { universeId = universeId }, { count = tostring(#p3) })
 			error(p5)
 		end)
-	end, { var8, universeId, onInvitesSent })
-	local var21 = useUserPickerModule(reactModule.useMemo(function() --[[ line: 131 ]]
-		-- upvalues: var16 (ref), isNotReady (ref), var18 (ref), var19 (ref), var20 (ref), var11 (ref), var12 (ref)
+	end, { var10, universeId, onInvitesSent })
+	local var23 = useUserPickerModule(reactModule.useMemo(function() --[[ line: 166 ]]
+		-- upvalues: var18 (ref), isNotReady (ref), var20 (ref), var21 (ref), var22 (ref), var13 (ref), var14 (ref)
 		return {
-			browseIds = var16,
+			browseIds = var18,
 			browseIsLoading = isNotReady,
-			loadMoreBrowse = var18,
-			onSearch = var19,
-			onSubmit = var20,
-			selectionLimit = var11,
-			excludeUserIds = var12
+			loadMoreBrowse = var20,
+			onSearch = var21,
+			onSubmit = var22,
+			selectionLimit = var13,
+			excludeUserIds = var14
 		}
 	end, {
-		var16, isNotReady, var18, var19, var20, var11, var12
+		var18, isNotReady, var20, var21, var22, var13, var14
 	}))
-	local var22, var23 = reactModule.useState(true)
-	local var24 = reactModule.useCallback(function() --[[ line: 158 ]]
-		-- upvalues: var23 (ref)
-		var23(false)
+	local var24, var25 = reactModule.useState(true)
+	local var26 = reactModule.useCallback(function() --[[ line: 193 ]]
+		-- upvalues: var25 (ref)
+		var25(false)
 	end, {})
-	local var25, var26 = reactModule.useState(nil)
-	local var27 = reactModule.useCallback(function(p6) --[[ line: 167 ]]
-		-- upvalues: var26 (ref)
-		var26(p6)
+	local var27, var28 = reactModule.useState(nil)
+	local var29 = reactModule.useCallback(function(p6) --[[ line: 202 ]]
+		-- upvalues: var28 (ref)
+		var28(p6)
 	end, {})
-	local loadMore = var21.loadMore
-	reactModule.useEffect(function() --[[ line: 171 ]]
-		-- upvalues: var25 (ref), loadMore (ref)
-		if var25 == nil then return end
-		local function maybeLoadMore() --[[ line: 176 ]]
-			-- upvalues: var25 (ref), loadMore (copy)
-			if var25.AbsoluteCanvasSize.Y > 0 and var25.AbsoluteCanvasSize.Y - (var25.CanvasPosition.Y + var25.AbsoluteWindowSize.Y) <= 240 then
+	local loadMore = var23.loadMore
+	reactModule.useEffect(function() --[[ line: 206 ]]
+		-- upvalues: var27 (ref), loadMore (ref)
+		if var27 == nil then return end
+		local function maybeLoadMore() --[[ line: 211 ]]
+			-- upvalues: var27 (ref), loadMore (copy)
+			if var27.AbsoluteCanvasSize.Y > 0 and var27.AbsoluteCanvasSize.Y - (var27.CanvasPosition.Y + var27.AbsoluteWindowSize.Y) <= 240 then
 				loadMore()
 			end
 		end
 		
-		local var32 = var25:GetPropertyChangedSignal("CanvasPosition"):Connect(maybeLoadMore)
-		local var33 = var25:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(maybeLoadMore)
-		local var34 = var25:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(maybeLoadMore)
+		local var34 = var27:GetPropertyChangedSignal("CanvasPosition"):Connect(maybeLoadMore)
+		local var35 = var27:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(maybeLoadMore)
+		local var36 = var27:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(maybeLoadMore)
 		
-		if var25.AbsoluteCanvasSize.Y > 0 and var25.AbsoluteCanvasSize.Y - (var25.CanvasPosition.Y + var25.AbsoluteWindowSize.Y) <= 240 then
+		if var27.AbsoluteCanvasSize.Y > 0 and var27.AbsoluteCanvasSize.Y - (var27.CanvasPosition.Y + var27.AbsoluteWindowSize.Y) <= 240 then
 			loadMore()
 		end
-		return function() --[[ line: 187 ]]
-			-- upvalues: var32 (ref), var33 (ref), var34 (ref)
-			var32:Disconnect()
-			var33:Disconnect()
+		return function() --[[ line: 222 ]]
+			-- upvalues: var34 (ref), var35 (ref), var36 (ref)
 			var34:Disconnect()
+			var35:Disconnect()
+			var36:Disconnect()
 		end
-	end, { var25, loadMore })
+	end, { var27, loadMore })
 	
 	return {
-		isOpen = var22,
+		isOpen = var24,
 		onClose = p0.onClose,
-		onRequestClose = var24,
-		scrollingFrameRef = var27,
-		searchText = var21.searchText,
-		setSearchText = var21.setSearchText,
-		searchPlaceholder = localizationStringsModule.PRIVATE_INVITES_SEARCH_PLACEHOLDER,
-		userIds = var21.userIds,
-		isLoading = var21.isLoading,
-		emptyText = if var15 == "Failed" then localizationStringsModule.PRIVATE_INVITES_FRIENDS_LOAD_ERROR elseif #var16 > 0 then localizationStringsModule.PRIVATE_INVITES_ALL_FRIENDS_ADDED else localizationStringsModule.PRIVATE_INVITES_NO_FRIENDS,
-		isSelected = var21.isSelected,
-		canSelect = var21.canSelect,
-		toggleSelected = var21.toggleSelected,
-		hasSelection = var21.hasSelection,
-		submit = var21.submit,
-		isSubmitting = var21.isSubmitting,
-		sendButtonText = if var21.selectedCount > 1 then localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTERS else localizationStringsModule.PRIVATE_INVITES_ADD_PLAYTESTER,
+		onRequestClose = var26,
+		scrollingFrameRef = var29,
+		searchText = var23.searchText,
+		setSearchText = var23.setSearchText,
+		searchPlaceholder = PRIVATE_INVITES_SEARCH_PLACEHOLDER,
+		userIds = var23.userIds,
+		isLoading = var23.isLoading,
+		emptyText = if var17 == "Failed" then PRIVATE_INVITES_FRIENDS_LOAD_ERROR elseif #var18 > 0 then PRIVATE_INVITES_ALL_FRIENDS_ADDED else PRIVATE_INVITES_NO_FRIENDS,
+		isSelected = var23.isSelected,
+		canSelect = var23.canSelect,
+		toggleSelected = var23.toggleSelected,
+		hasSelection = var23.hasSelection,
+		submit = var23.submit,
+		isSubmitting = var23.isSubmitting,
+		sendButtonText = if var23.selectedCount > 1 then PRIVATE_INVITES_ADD_PLAYTESTERS else PRIVATE_INVITES_ADD_PLAYTESTER,
 		testId = p0.testId
 	}
 end

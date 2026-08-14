@@ -3,7 +3,8 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
-local var4 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
+local fFlagBuildBackButtonChevronModule = require(buildExperience.Flags.FFlagBuildBackButtonChevron)
+local var5 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
 local iconButton = foundationModule.IconButton
 local divider = foundationModule.Divider
 local scrollView = foundationModule.ScrollView
@@ -13,13 +14,13 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 35 | named "OverflowMenuPageShell" ]]
-	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var4 (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
+return function(p0) --[[ line: 36 | named "OverflowMenuPageShell" ]]
+	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var5 (ref), view (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
 	local testId = p0.testId or "overflow-menu-page"
-	local var6 = reactModule.useRef(nil)
+	local var7 = reactModule.useRef(nil)
 	
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
-		var4(p0.scrollPerformanceIntervalName, var6)
+		var5(p0.scrollPerformanceIntervalName, var7)
 	end
 	return reactModule.createElement(view, {
 		tag = "col align-x-center size-full bg-surface-0",
@@ -34,7 +35,7 @@ return function(p0) --[[ line: 35 | named "OverflowMenuPageShell" ]]
 			Close = reactModule.createElement(iconButton, {
 				LayoutOrder = 1,
 				isCircular = true,
-				icon = p0.closeIcon or iconName.X,
+				icon = p0.closeIcon or (if fFlagBuildBackButtonChevronModule then iconName.ChevronLargeLeft else iconName.X),
 				onActivated = p0.onClose,
 				size = inputSize.Medium,
 				testId = `{testId}-close`,
@@ -54,7 +55,7 @@ return function(p0) --[[ line: 35 | named "OverflowMenuPageShell" ]]
 		Body = reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
 			tag = "fill size-full-0 bg-surface-0",
-			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var6 else nil,
+			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var7 else nil,
 			testId = `{testId}-scroll-view`,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
