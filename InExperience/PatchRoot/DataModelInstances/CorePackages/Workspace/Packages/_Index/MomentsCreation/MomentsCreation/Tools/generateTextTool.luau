@@ -1,5 +1,7 @@
 ﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
 local parent = momentsCreation.Parent
+local builderIconsModule = require(parent.BuilderIcons)
+local momentsCommonModule = require(parent.MomentsCommon)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 
 return {
@@ -7,15 +9,15 @@ return {
 	presentation = "InstantAction",
 	cta = {
 		localizationKey = "Feature.Moments.Action.GenerateText",
-		order = 4,
-		icon = require(parent.BuilderIcons).Icon.TagSparkle,
-		analyticsEvent = require(parent.MomentsCommon).Analytics.EventNames.EditingFlowGenerateTextButtonPressed
+		icon = builderIconsModule.Icon.TagSparkle,
+		analyticsEvent = momentsCommonModule.Analytics.EventNames.EditingFlowGenerateTextButtonPressed,
+		order = if momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration() then 5 else 4
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	isAvailable = function(p0) --[[ line: 22 ]]
+	isAvailable = function(p0) --[[ line: 24 ]]
 		return p0.canGenerateText == true
 	end,
-	apply = function(p1) --[[ line: 25 ]]
+	apply = function(p1) --[[ line: 27 ]]
 		p1.generateText()
 	end
 }

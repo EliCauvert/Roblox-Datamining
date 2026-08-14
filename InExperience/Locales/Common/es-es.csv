@@ -1298,6 +1298,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Actualizar el aspecto existente
 Feature.Avatar.Action.UpdateMakeupLook,Actualizar estilo
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Explora los estilos
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Esa indicación no cumple con nuestras pautas. Intenta describir otra cosa.
+Feature.Avatar.BackgroundGeneration.Error.System,Algo salió mal al generar tu fondo. Inténtalo de nuevo.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe tu fondo…
+Feature.Avatar.BackgroundGeneration.Status.Generating,Generando tu fondo…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparando tu fondo…
+Feature.Avatar.BackgroundGeneration.Title,Crear fondo
 Feature.Avatar.Backgrounds.Title,Fondos
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,El ajuste no está disponible para este tipo de cuerpo.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Volver al color del cuerpo predeterminado
@@ -1305,6 +1311,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Color de piel
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Crea tu propio look único con infinitas combinaciones de maquillaje.
 Feature.Avatar.EmoteAlreadyAssigned,Este emote ya tiene un espacio asignado
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Inspírate
@@ -1778,6 +1785,134 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,¿Bloquear a {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Bloquear a este usuario lo eliminará como conexión o seguidor. No podrá enviarte mensajes, solicitudes ni invitaciones.<br /><br />El usuario no recibirá una notificación de que fue bloqueado."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloquear a este usuario lo eliminará como amistad o seguidor. No podrá enviarte mensajes, solicitudes ni invitaciones.<br /><br />No se le notificará que fue bloqueado."
+Feature.Build.Action.AddFriends,Añadir amistades
+Feature.Build.Action.AddPlaytester,Añadir probador de juego
+Feature.Build.Action.AddPlaytesters,Añadir evaluadores de juego
+Feature.Build.Action.AddToPlaytest,Añadir a la prueba de jugabilidad
+Feature.Build.Action.Archive,Archivar
+Feature.Build.Action.ArchiveGame,Archivar juego
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,Comprar
+Feature.Build.Action.BuyRobux,Compra Robux
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,Copiar texto
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,Ocultar guardado automático
+Feature.Build.Action.ManageLimit,Administrar límite
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,Notificarme
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,Abrir Configuración
+Feature.Build.Action.Playtest,Prueba de juego
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,
+Feature.Build.Action.PublishLatest,Publicar la más reciente
+Feature.Build.Action.Restore,Restaurar
+Feature.Build.Action.SetDailyLimit,Establecer un límite diario
+Feature.Build.Action.SetLimit,Establecer límite
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,Compartir enlace
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,Actualizar la clasificación
+Feature.Build.Action.UpdateWithChanges,Actualización con cambios
+Feature.Build.Action.View,Ver
+Feature.Build.Action.ViewUsage,Ver uso
+Feature.Build.Content.NewGame,Juego nuevo
+Feature.Build.Description.ArchiveRemoval,"Si archivas este juego, se eliminará de la compilación. Aún podrás acceder a él y restaurarlo desde Creator Hub o Roblox Studio."
+Feature.Build.Description.AutoBuyUsage,Usa tus Robux para comprar automáticamente más uso de la compilación a medida que creas. Puedes establecer un límite de gasto diario en cualquier momento.
+Feature.Build.Description.BuildIdeaGame,Convierte tus ideas en un juego
+Feature.Build.Description.BuildReplyNotif,Recibe una notificación cuando la compilación tenga una respuesta para ti.
+Feature.Build.Description.BuyRobuxToCreate,Compra más Robux para seguir creando o espera a que tu uso gratuito de la compilación se restablezca mañana.
+Feature.Build.Description.BuyUsageOrWait,Compra más uso de la compilación con Robux o espera a que se restablezca tu límite diario.
+Feature.Build.Description.ChoosePlaytesters,Elige amistades para que te ayuden con la prueba de juego.
+Feature.Build.Description.EnableBuildNotifs,Activa las notificaciones en la configuración de tu dispositivo para recibir actualizaciones de la compilación.
+Feature.Build.Description.FriendsLinkOnly,Solo tus amistades pueden acceder a este enlace. Cambia la configuración de público de tu juego si quieres que más gente juegue.
+Feature.Build.Description.HubSettings,Gestiona toda la configuración en el Centro de creación
+Feature.Build.Description.MakeAudienceAvail,Publica tu experiencia para que esté disponible para este público.
+Feature.Build.Description.ManageAppearance,Gestiona cómo se muestra tu juego a otras personas.
+Feature.Build.Description.PlayAfterPublish,Elige quién puede jugar después de que publiques esta experiencia.
+Feature.Build.Description.PlaytestLocked,Puedes comenzar la prueba de juego después de crear tu primer juego.
+Feature.Build.Description.PlaytesterAccess,Añade amistades como evaluadores de juego o cambia la configuración de público de tu juego para permitir que más personas jueguen.
+Feature.Build.Description.PrivateShare,Cambia la configuración de público de tu juego para compartirlo.
+Feature.Build.Description.RaiseLimitOrWait,Aumenta tu límite diario de Robux para seguir creando o espera a que se restablezca mañana.
+Feature.Build.Description.RatingAgreement,"Al publicar, aceptas que esta valoración de contenido es precisa."
+Feature.Build.Description.RestoreLatest,Esta versión se convertirá en su última versión publicada.
+Feature.Build.Description.VersionChanges,Dile a los jugadores qué cambió en esta versión.
+Feature.Build.Header.AccessSharing,Acceso y uso compartido
+Feature.Build.Header.ContentMaturity,Madurez de contenido
+Feature.Build.Header.CustomAnswer,Respuesta personalizada
+Feature.Build.Header.GameDetails,Detalles del juego
+Feature.Build.Header.Overview,
+Feature.Build.Label.Access,Acceso
+Feature.Build.Label.AdditionalUsage,Uso adicional de la compilación
+Feature.Build.Label.Available,disponible
+Feature.Build.Label.BackToBuild,Volver a Crear
+Feature.Build.Label.CaptureLibrary,Biblioteca de capturas
+Feature.Build.Label.ContentRating,Clasificación de contenido
+Feature.Build.Label.CreatorHub,Centro de creación
+Feature.Build.Label.DescribeIdea,Describe una idea
+Feature.Build.Label.Description,
+Feature.Build.Label.FreeBuildUsage,Uso gratuito de la compilación
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,Obtener más uso de la compilación
+Feature.Build.Label.IconThumbnails,Ícono y miniaturas
+Feature.Build.Label.Loading,Cargando…
+Feature.Build.Label.NoLimit,Sin límite
+Feature.Build.Label.ResetsDaily,Se restablece diariamente
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,Buscar juegos
+Feature.Build.Label.SearchTasks,Buscar tareas
+Feature.Build.Label.SelectOption,Elige una opción
+Feature.Build.Label.ShareAddedFriends,Comparte con las amistades que añadiste
+Feature.Build.Label.Title,Título
+Feature.Build.Label.TitleDescription,Título y descripción
+Feature.Build.Label.Unknown,Desconocido
+Feature.Build.Label.Version,Versión
+Feature.Build.Label.VersionTitleDesc,Título y descripción de la versión
+Feature.Build.Label.Video,Video
+Feature.Build.Message.AccountRequirements,Tu cuenta no cumple los requisitos para usar la compilación.
+Feature.Build.Message.AccountTooNew,Tu cuenta es demasiado nueva para publicar. Inténtalo de nuevo cuando tenga 2 días.
+Feature.Build.Message.AllFriendsAdded,Añadiste a todas tus amistades como evaluadores de juego.
+Feature.Build.Message.AudienceIneligible,No es elegible para este público
+Feature.Build.Message.ExpandAudience,Amplía la elegibilidad de tu público en el Centro de creación
+Feature.Build.Message.ExperiencesLoadFailed,No se pudieron cargar las experiencias
+Feature.Build.Message.FriendsLoadFailed,No se pudieron cargar las amistades. Inténtalo de nuevo.
+Feature.Build.Message.GamePublishFailed,No pudimos publicar tu juego. Inténtalo de nuevo.
+Feature.Build.Message.InvitesLoadFailed,No se pudieron cargar las invitaciones
+Feature.Build.Message.LinkCopied,Enlace copiado al portapapeles
+Feature.Build.Message.NoFriendsToAdd,"Aún no tienes amistades. Primero, busca personas para añadir a Roblox."
+Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
+Feature.Build.Message.PublishExpandAudience,Publica para ampliar tu público
+Feature.Build.Message.QuestionnaireNeeded,Este juego se editó fuera de la compilación. Completa el cuestionario de contenido para publicarlo.
+Feature.Build.Message.ReadyToPlay,¡Tu juego está listo para jugar en Roblox!
+Feature.Build.Message.RestoreVersionFailed,No se pudo restaurar esta versión. Inténtalo de nuevo.
+Feature.Build.Message.SaveChangesFailed,No se pudieron guardar los cambios. Inténtalo de nuevo.
+Feature.Build.Message.ShareLinkFailed,No se pudieron crear los enlaces para compartir. Inténtalo de nuevo.
+Feature.Build.Message.TryAgain,Inténtalo de nuevo.
+Feature.Build.Message.TurnToPortrait,Pon tu dispositivo en modo vertical para seguir trabajando en tu juego.
+Feature.Build.Message.WhatToCreate,¿Qué quieres crear hoy?
+Feature.Build.Title.AddFriendsToPlaytest,Añade amistades para que te ayuden con la prueba de jugabilidad
+Feature.Build.Title.ArchiveThisGame,¿Quieres archivar este juego?
+Feature.Build.Title.Audience,Público
+Feature.Build.Title.BuildUnavailable,La compilación no está disponible
+Feature.Build.Title.ChatBuildUnavailable,La compilación no está disponible.
+Feature.Build.Title.Content,Contenido
+Feature.Build.Title.DailyRobuxReached,Se alcanzó el límite diario de Robux
+Feature.Build.Title.ExperienceAudience,Público de la experiencia
+Feature.Build.Title.FreeUsageReached,Se alcanzó el límite de uso gratuito de la compilación
+Feature.Build.Title.FriendsOnlyPlay,Solo las amistades pueden jugar
+Feature.Build.Title.GameCreationDone,Se completó la creación del juego
+Feature.Build.Title.GamePrivate,Este juego es un servidor privado
+Feature.Build.Title.GenericError,
+Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
+Feature.Build.Title.Playtesters,Evaluadores de juego
+Feature.Build.Title.PlaytestersOnlyPlay,Solo los evaluadores de juego pueden jugar
+Feature.Build.Title.PushNotifications,Notificaciones push
+Feature.Build.Title.Tasks,Tareas
+Feature.Build.Title.VersionHistory,Historial de la versión
+Feature.Build.Title.VersionInformation,Información de la versión
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Permitir
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -1793,7 +1928,7 @@ Feature.Captures.Action.Save,
 Feature.Captures.Action.SelectAllCaptures,Seleccionar todo
 Feature.Captures.Action.Share,
 Feature.Captures.Action.ShareYourCapture,Comparte tu captura
-Feature.Captures.Action.ViewCapture,Ver
+Feature.Captures.Action.ViewCapture,
 Feature.Captures.Body.AllowAccessToCaptures,Esta experiencia quiere ver y usar tus capturas.
 Feature.Captures.Body.SaveCapturesPrompt,¿Quieres guardar tus capturas?
 Feature.Captures.Body.ShareCapturePrompt,¿Quieres compartir tu captura?
@@ -1831,7 +1966,7 @@ Feature.Captures.Title.DeleteMultipleCapturesWarning,Eliminar capturas
 Feature.Captures.Title.Gallery,Galería
 Feature.Captures.Title.SaveCapturesPrompt,Guardar capturas
 Feature.Captures.Title.ShareCapturePrompt,Compartir captura
-Feature.Captures.Title.VideoCTA,Video
+Feature.Captures.Title.VideoCTA,
 Feature.Captures.Title.VideoCaptureInProgressTooltip,Captura de video en curso
 Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Chat de voz silenciado durante la captura
 Feature.Captures.Toast.CaptureSaved,Captura guardada
@@ -1845,7 +1980,7 @@ Feature.Captures.Toast.VideoCaptureInitializationNoDeviceSupportError,El disposi
 Feature.Captures.Toast.VideoCaptureInitializationNoSpaceOnDeviceError,El dispositivo no tiene suficiente espacio para grabar video
 Feature.Captures.Toast.VideoCaptureInitializationOtherError,Se produjo un error al iniciar el video
 Feature.Captures.Toast.VideoCaptureOtherError,Se produjo un error al grabar el video
-Feature.Catalog.Action.Buy,Comprar
+Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Ir a Personalizar
 Feature.Catalog.Action.Checkout.ManageInCustomize,Gestionar en Personalizar
@@ -2202,7 +2337,7 @@ Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,El precio cambió porque 
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar en revisión
 Puedes compartir tu avatar después de que se revise"
 Feature.Catalog.Toast.FavoritedLook,¡Avatar añadido a favoritos!
-Feature.Catalog.Toast.LinkCopied,Enlace copiado al portapapeles
+Feature.Catalog.Toast.LinkCopied,
 Feature.Catalog.Toast.RemovedFromFavorites,Eliminado de favoritos
 Feature.Catalog.Toast.UnfavoritedLook,Avatar eliminado de tus favoritos
 Feature.Catalog.TrustedConnection.Label.Trusted,
@@ -2287,7 +2422,7 @@ Feature.Chat.Label.Group.YouRepliedToThem,Respondiste a {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,Nombre del grupo
 Feature.Chat.Label.HoverToReplyTooltip,Pasa el cursor para responder
 Feature.Chat.Label.InGameFriendsChatNotifications,Notificaciones de chat de amistades dentro del juego
-Feature.Chat.Label.Loading,Cargando…
+Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,Mantén presionado para responder
 Feature.Chat.Label.Members,Miembros
 Feature.Chat.Label.MessageNotAvailable,Este mensaje no está disponible
@@ -2322,6 +2457,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sem.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sems.
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Chat sin filtros
 Feature.Chat.Label.UnknownUser,usuario desconocido
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,Ver perfil
@@ -2677,7 +2813,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,Pronto estarán disponibles nuevas f
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Cuando añadas a otro usuario cuya edad haya sido comprobada mediante un código QR o Contactos, este se convertirá en una Conexión de confianza. Próximamente habrá más opciones disponibles."
 Feature.Friends.TCEducation.Title,Añade a gente que conoces
 Feature.Friends.TCFeature.AndMore,y más por venir
-Feature.Friends.TCFeature.ChatWithoutFilters,Chat sin filtros
+Feature.Friends.TCFeature.ChatWithoutFilters,
 Feature.Friends.TCFeature.PartyVoice,Voz de Equipo
 Feature.Friends.TFEducation.Modal.TextIntro,"Roblox es más divertido con las personas que conoces. Los usuarios con edad verificada que agregues a través del código QR o Contactos se convertirán en amigos de confianza, y desbloquearás beneficios adicionales, como:"
 Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus,"Como usuario de 18 años o más con edad verificada, puedes hacer más cosas con amigos de 18 años o más con edad verificada y con tus amigos de confianza."
@@ -2701,6 +2837,7 @@ Feature.Friends.TrustedFriend.Label.AddTrustedFriend,Agregar como amistad de con
 Feature.Friends.TrustedFriend.Toast.IsATrustedFriendNow,{name} ahora es una amistad de confianza
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amistad de confianza eliminada
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser amistad de confianza enviada
+Feature.FriendsActivityFeed.Label.ViewRecentActivity,Ver Actividad reciente
 Feature.FriendsMenu.Label.SearchForConnections,
 Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} conexiones seleccionadas
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} conexiones seleccionadas
@@ -2745,7 +2882,7 @@ Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"
 Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Estás viendo este contenido patrocinado basado en diferentes factores, como tu ubicación, información del dispositivo, edad y comportamiento en la plataforma, para ofrecerte contenido relevante. El patrocinio fue pagado por {PayerName}. Para obtener más información, visita la página Privacidad y madurez de contenido en Configuración en tu cuenta, aquí:"
 Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Estás viendo este contenido patrocinado basado en factores no personalizados, como la información del dispositivo, ubicación y edad, para ofrecerte contenido apropiado. El patrocinio fue pagado por {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,Lo sugeriremos con menos frecuencia
-Feature.GameDetails.RatingPercentOnly,Valoración {percentRating}%
+Feature.GameDetails.RatingPercentOnly,Valoración de {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
 Feature.GameFollows.LabelNotifications,Notificar
 Feature.GameFollows.TooltipFollowLimitReached,Límite alcanzado. Deja de seguir otras experiencias para poder seguir esta.
@@ -2976,6 +3113,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Estás al día por ahora
 Feature.Moments.Label.Photos,Fotos
+Feature.Moments.Label.PostDeleted,Momento eliminado
 Feature.Moments.Label.PostRemovedBody,El Momento que publicaste va en contra de nuestras Normas de la comunidad.
 Feature.Moments.Label.PublishingRodeoBody,Esto no tomará mucho tiempo.
 Feature.Moments.Label.Reactions,Reacciones
@@ -2994,7 +3132,7 @@ Feature.Moments.Label.TextGenerationFailedBody,No se pudo generar el texto. Int�
 Feature.Moments.Label.TextGenerationFailedTitle,Error en la generación
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
-Feature.Moments.Title.MomentRemoved,Momento eliminado
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Reportar publicación
 Feature.Moments.Tooltip.Creation,Todas las personas que participan en la experiencia pueden ver tus Momentos.
 Feature.NativeAds.Label.Ad,
@@ -3387,7 +3525,7 @@ Feature.SettingsHub.Action.InviteFriendsBack,
 Feature.SettingsHub.Action.MuteAll,Silenciar a todos
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,Abrir Configuración
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Action.Report.Done,
 Feature.SettingsHub.Action.TurnOn,
 Feature.SettingsHub.Action.Unblock,
@@ -3401,7 +3539,7 @@ Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Selecciona Permiso
 2. Selecciona Contactos
 3. Permite que Roblox acceda a tus contactos"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Para conectar con amigos, permite que Roblox acceda a tus contactos."
-Feature.SettingsHub.Description.PeoplesNames,Muéstrales u ocúltales tus insignias a otras personas en las experiencias.
+Feature.SettingsHub.Description.PeoplesNames,Muestra u oculta tus insignias a otras personas en los juegos.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Selecciona Permiso
 2. Selecciona Cámara
 3. Permite que Roblox acceda a tu cámara"
@@ -3423,7 +3561,7 @@ Feature.SettingsHub.GameSettings.MicroProfiler,MicroProfiler
 Feature.SettingsHub.GameSettings.MyBadges,Mis emblemas
 Feature.SettingsHub.GameSettings.OutputDevice,Salida del dispositivo
 Feature.SettingsHub.GameSettings.PeopleNames,Mostrar nombres de personas
-Feature.SettingsHub.GameSettings.PeopleNames.Description,Mostrar u ocultar nombres arriba de las personas en las experiencias. Algunas experiencias pueden tener ajustes personalizados que anulan tus preferencias.
+Feature.SettingsHub.GameSettings.PeopleNames.Description,Muestra u oculta los nombres a las personas en los juegos. Es posible que algunos juegos tengan configuraciones personalizadas que anulen tu preferencia.
 Feature.SettingsHub.GameSettings.PeoplesNames,Nombres de las personas
 Feature.SettingsHub.Heading.InviteFriends,Invitar amigos
 Feature.SettingsHub.Heading.InviteUser,¿Invitar a {DisplayName}?
@@ -3653,7 +3791,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,¿Realmente quieres eliminar a esta persona del grupo?
 Feature.Squads.Description.RemoveFromParty,Se eliminará a {displayName} del chat de grupo.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,Ya hay un equipo programado para la hora seleccionada
-Feature.Squads.Description.Title,Título
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,Añadiste {username} y {userCountMinusOne} personas más al grupo
 Feature.Squads.Description.YouAddedToChat,Añadiste {username} al grupo
@@ -3998,7 +4136,7 @@ IAPExperience.PurchasePrompt.Title.BuyItemV2,
 IAPExperience.PurchasePrompt.Title.BuyItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItem,Comprar Robux y objeto
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,Comprar Robux y objetos
-IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,Compra Robux
+IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,Compra completada
 IAPExperience.PurchaseSuccess.Action.BackToGame,Volver al juego
 IAPExperience.PurchaseSuccess.Action.BackToShop,Volver a Tienda
