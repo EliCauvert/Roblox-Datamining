@@ -51,6 +51,7 @@
 	Icon = "Icon",
 	IconButton = "IconButton",
 	Image = "Image",
+	VerticalListWithImpressions = "VerticalListWithImpressions",
 	InfoTable = "InfoTable",
 	InfoTableCell = "InfoTableCell",
 	LinkText = "LinkText",

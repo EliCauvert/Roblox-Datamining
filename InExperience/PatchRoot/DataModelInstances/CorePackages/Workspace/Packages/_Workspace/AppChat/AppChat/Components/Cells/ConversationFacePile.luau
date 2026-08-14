@@ -6,7 +6,6 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local foundationModule = require(parent.Foundation)
 local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 local fFlagAppChatSanitizeConversationTitleRichText = require(parent.SharedFlags).FFlagAppChatSanitizeConversationTitleRichText
 local escapeRichFormatting = require(parent.InlineRichText).escapeRichFormatting
 local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
@@ -24,11 +23,11 @@ local userPresence = foundationModule.Enums.UserPresence
 local var10 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
 local var11 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceStore.get() else nil
 
-local function groupPresenceAggregateEquals(p0, p1) --[[ line: 45 ]]
+local function groupPresenceAggregateEquals(p0, p1) --[[ line: 44 ]]
 	return p0.hasInExperienceUser == p1.hasInExperienceUser and p0.hasOnlineUser == p1.hasOnlineUser
 end
 
-local function _(p2) --[[ line: 78 | named "getParticipantId" ]]
+local function _(p2) --[[ line: 75 | named "getParticipantId" ]]
 	if type(p2) == "table" then
 		local id = p2.id or p2.userId
 		
@@ -37,12 +36,12 @@ local function _(p2) --[[ line: 78 | named "getParticipantId" ]]
 	return if p2 == nil then nil else tostring(p2)
 end
 
-local _ = function(p3) --[[ line: 87 | named "getNonEmptyLocalUserId" ]]
+local _ = function(p3) --[[ line: 84 | named "getNonEmptyLocalUserId" ]]
 	return if p3 == nil or p3 == "" then nil else tostring(p3)
 end
 
-local function ConversationFacePileInner(p4) --[[ line: 95 ]]
-	-- upvalues: useLocalUserId (ref), reactModule (ref), useSelector (ref), fFlagAppChatPresenceStoreMigrationModule (ref), signalsModule (ref), var11 (ref), var10 (ref), groupPresenceAggregateEquals (ref), signalsReactModule (ref), useFoundationPresenceModule (ref), userPresence (ref), presenceType (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), userTile (ref), layoutMode (ref), fFlagAppChatSanitizeConversationTitleRichText (ref), escapeRichFormatting (ref), fFlagUserTileUnfilteredChatIndicator (ref)
+local function ConversationFacePileInner(p4) --[[ line: 92 ]]
+	-- upvalues: useLocalUserId (ref), reactModule (ref), useSelector (ref), fFlagAppChatPresenceStoreMigrationModule (ref), signalsModule (ref), var11 (ref), var10 (ref), groupPresenceAggregateEquals (ref), signalsReactModule (ref), useFoundationPresenceModule (ref), userPresence (ref), presenceType (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), userTile (ref), layoutMode (ref), fFlagAppChatSanitizeConversationTitleRichText (ref), escapeRichFormatting (ref)
 	local conversationId = p4.conversationId
 	local var15 = useLocalUserId()
 	local localUserId = p4.localUserId
@@ -52,11 +51,11 @@ local function ConversationFacePileInner(p4) --[[ line: 95 ]]
 		var16 = if var15 == nil or var15 == "" then nil else tostring(var15)
 		var16 = var16 or ""
 	end
-	local var17 = useSelector(reactModule.useCallback(function(p5) --[[ line: 100 ]]
+	local var17 = useSelector(reactModule.useCallback(function(p5) --[[ line: 97 ]]
 		-- upvalues: conversationId (ref)
 		return if p5 and p5.ChatAppReducer and p5.ChatAppReducer.Conversations then p5.ChatAppReducer.Conversations[conversationId] else nil
 	end, { conversationId }))
-	local var18 = if not fFlagAppChatPresenceStoreMigrationModule then useSelector(function(p6) --[[ line: 109 ]]
+	local var18 = if not fFlagAppChatPresenceStoreMigrationModule then useSelector(function(p6) --[[ line: 106 ]]
 		return if p6 and p6.ChatAppReducer and p6.ChatAppReducer.Presence then p6.ChatAppReducer.Presence.byUserId else nil
 	end) else nil
 	local participants = p4.participants
@@ -83,9 +82,9 @@ local function ConversationFacePileInner(p4) --[[ line: 95 ]]
 		end
 	end
 	local userPresenceType
-	local var22 = if fFlagAppChatPresenceStoreMigrationModule then signalsReactModule.useSignalState(if fFlagAppChatPresenceStoreMigrationModule then reactModule.useMemo(function() --[[ line: 133 ]]
+	local var22 = if fFlagAppChatPresenceStoreMigrationModule then signalsReactModule.useSignalState(if fFlagAppChatPresenceStoreMigrationModule then reactModule.useMemo(function() --[[ line: 130 ]]
 		-- upvalues: signalsModule (copy), t (ref), var11 (copy), var10 (copy), groupPresenceAggregateEquals (copy)
-		return signalsModule.createComputed(function(p7) --[[ line: 134 ]]
+		return signalsModule.createComputed(function(p7) --[[ line: 131 ]]
 			-- upvalues: t (copy), var11 (copy), var10 (copy)
 			local var29 = false
 			local var30 = false
@@ -168,12 +167,11 @@ local function ConversationFacePileInner(p4) --[[ line: 95 ]]
 		selectable = p4.selectable,
 		customTextTruncation = Enum.TextTruncate.SplitWord,
 		trustedConnectionIndicatorEnabled = p4.trustedConnectionIndicatorEnabled,
-		isRobloxSubscriber = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(var27) else nil,
-		shouldShowUnfilteredChatIndicator = if fFlagUserTileUnfilteredChatIndicator then p4.shouldShowUnfilteredChatIndicator else nil
+		isRobloxSubscriber = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(var27) else nil
 	})
 end
 
-return function(p8) --[[ line: 237 | named "ConversationFacePile" ]]
+return function(p8) --[[ line: 231 | named "ConversationFacePile" ]]
 	-- upvalues: name (ref), reactModule (ref), ConversationFacePileInner (ref)
 	local conversationId = p8.conversationId
 	

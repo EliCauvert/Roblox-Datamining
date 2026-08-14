@@ -2,10 +2,7 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
 local iconButton = foundationModule.IconButton
 local text = foundationModule.Text
@@ -16,57 +13,38 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 34 | named "TitleDescriptionPage" ]]
-	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
-	local TITLE_DESCRIPTION_DESCRIPTION_LABEL, TITLE_DESCRIPTION_TITLE, TITLE_DESCRIPTION_TITLE_LABEL
+return function(p0) --[[ line: 31 | named "TitleDescriptionPage" ]]
+	-- upvalues: reactModule (ref), gameConfigurationActionsModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), localizationStringsModule (ref), textInput (ref), textArea (ref)
 	local testId = p0.testId or "title-description-page"
 	local titleText = p0.titleText or ""
 	local descriptionText = p0.descriptionText or ""
-	local var9, var10 = reactModule.useBinding(titleText)
-	local var11, var12 = reactModule.useBinding(descriptionText)
-	local var13 = if fFlagBuildLocalization then useLocalization({
-		descriptionLabel = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,
-		title = localizationStringsModule.TITLE_DESCRIPTION_TITLE,
-		titleLabel = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
-	}) else nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		TITLE_DESCRIPTION_DESCRIPTION_LABEL = var13.descriptionLabel
-		TITLE_DESCRIPTION_TITLE = var13.title
-		TITLE_DESCRIPTION_TITLE_LABEL = var13.titleLabel
-	else
-		TITLE_DESCRIPTION_DESCRIPTION_LABEL = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL
-		TITLE_DESCRIPTION_TITLE = localizationStringsModule.TITLE_DESCRIPTION_TITLE
-		TITLE_DESCRIPTION_TITLE_LABEL = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
-	end
-	local var14 = reactModule.useCallback(function() --[[ line: 61 ]]
-		-- upvalues: p0 (ref), var9 (ref), var11 (ref), titleText (ref), descriptionText (ref), gameConfigurationActionsModule (copy)
+	local var8, var9 = reactModule.useBinding(titleText)
+	local var10, var11 = reactModule.useBinding(descriptionText)
+	local var12 = reactModule.useCallback(function() --[[ line: 39 ]]
+		-- upvalues: p0 (ref), var8 (ref), var10 (ref), titleText (ref), descriptionText (ref), gameConfigurationActionsModule (copy)
 		local universeId = p0.universeId
 		
 		if universeId == nil then return end
-		local value = var9:getValue()
-		local value_1 = var11:getValue()
+		local value = var8:getValue()
+		local value_1 = var10:getValue()
 		
 		if value == titleText and value_1 == descriptionText then
 			return
 		end
-		gameConfigurationActionsModule.updateTitleDescription(universeId, value, value_1):catch(function(p1) --[[ line: 74 ]]
+		gameConfigurationActionsModule.updateTitleDescription(universeId, value, value_1):catch(function(p1) --[[ line: 52 ]]
 			warn(`[BuildExperience] Failed to save title and description: {tostring(p1)}`)
 		end)
 	end, {
-		var11,
+		var10,
 		descriptionText,
 		titleText,
 		p0.universeId,
-		var9
+		var8
 	})
-	reactModule.useEffect(function() --[[ line: 87 ]]
-		-- upvalues: var14 (ref)
-		return var14
-	end, { var14 })
+	reactModule.useEffect(function() --[[ line: 65 ]]
+		-- upvalues: var12 (ref)
+		return var12
+	end, { var12 })
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center size-full bg-surface-0",
@@ -82,11 +60,11 @@ return function(p0) --[[ line: 34 | named "TitleDescriptionPage" ]]
 				LayoutOrder = 1,
 				isCircular = true,
 				icon = iconName.ArrowLargeLeft,
-				onActivated = reactModule.useCallback(function() --[[ line: 91 ]]
-					-- upvalues: var14 (ref), p0 (ref)
-					var14()
+				onActivated = reactModule.useCallback(function() --[[ line: 69 ]]
+					-- upvalues: var12 (ref), p0 (ref)
+					var12()
 					p0.onBack()
-				end, { p0.onBack, var14 }),
+				end, { p0.onBack, var12 }),
 				size = inputSize.Medium,
 				variant = buttonVariant.Utility,
 				testId = `{testId}-back`
@@ -94,7 +72,7 @@ return function(p0) --[[ line: 34 | named "TitleDescriptionPage" ]]
 			Title = reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",
-				Text = TITLE_DESCRIPTION_TITLE
+				Text = localizationStringsModule.TITLE_DESCRIPTION_TITLE
 			})
 		}),
 		Content = reactModule.createElement(view, {
@@ -104,23 +82,23 @@ return function(p0) --[[ line: 34 | named "TitleDescriptionPage" ]]
 		}, {
 			TitleInput = reactModule.createElement(textInput, {
 				LayoutOrder = 1,
-				label = TITLE_DESCRIPTION_TITLE_LABEL,
+				label = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL,
 				placeholder = p0.titlePlaceholder,
-				text = var9,
+				text = var8,
 				width = UDim.new(1, 0),
-				onChanged = var10,
-				onFocusLost = var14,
+				onChanged = var9,
+				onFocusLost = var12,
 				testId = `{testId}-title-input`
 			}),
 			DescriptionInput = reactModule.createElement(textArea, {
 				LayoutOrder = 2,
 				numLines = 4,
-				label = TITLE_DESCRIPTION_DESCRIPTION_LABEL,
+				label = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,
 				placeholder = p0.descriptionPlaceholder,
-				text = var11,
+				text = var10,
 				width = UDim.new(1, 0),
-				onChanged = var12,
-				onFocusLost = var14,
+				onChanged = var11,
+				onFocusLost = var12,
 				testId = `{testId}-description-input`
 			})
 		})

@@ -36,7 +36,6 @@
 	showMoreClickEvent = require(script.showMoreClickEvent),
 	backToTopClickEvent = require(script.backToTopClickEvent),
 	openSearchResultsWithQueryDeeplink = require(script.openSearchResultsWithQueryDeeplink),
-	querySuggestionClicked = require(script.querySuggestionClicked),
 	aiOverviewSentiment = require(script.aiOverviewSentiment),
 	aiOverviewExplicitFeedback = require(script.aiOverviewExplicitFeedback)
 }

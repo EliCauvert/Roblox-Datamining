@@ -4,10 +4,7 @@ local localizationService = game:GetService("LocalizationService")
 local foundationModule = require(parent.Foundation)
 local numberLocalization = require(parent.Localization).NumberLocalization
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local button = foundationModule.Button
 local icon = foundationModule.Icon
 local progress = foundationModule.Progress
@@ -21,36 +18,21 @@ local inputSize = foundationModule.Enums.InputSize
 local progressShape = foundationModule.Enums.ProgressShape
 local progressSize = foundationModule.Enums.ProgressSize
 
-local function noop() --[[ line: 30 ]] end
+local function noop() --[[ line: 26 ]] end
 
-local function _(value) --[[ line: 50 | named "clampPct" ]]
+local function _(value) --[[ line: 46 | named "clampPct" ]]
 	return if value < 0 then 0 elseif value > 100 then 100 else value
 end
 
-local function formatNumber(p0) --[[ line: 59 ]]
+local function formatNumber(p0) --[[ line: 55 ]]
 	-- upvalues: numberLocalization (ref), localizationService (ref)
 	return numberLocalization.localize(string.format("%.0f", math.floor(p0)), localizationService.RobloxLocaleId)
 end
 
-local function FreeUsageCard(p1) --[[ line: 63 ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), progress (ref), progressShape (ref), progressSize (ref)
-	local CREATOR_CREDIT_FREE_USAGE_CAPTION, CREATOR_CREDIT_FREE_USAGE_LABEL
-	local var11 = if fFlagBuildLocalization then useLocalization({
-		caption = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_CAPTION,
-		label = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_LABEL
-	}) else nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		CREATOR_CREDIT_FREE_USAGE_CAPTION = var11.caption
-		CREATOR_CREDIT_FREE_USAGE_LABEL = var11.label
-	else
-		CREATOR_CREDIT_FREE_USAGE_CAPTION = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_CAPTION
-		CREATOR_CREDIT_FREE_USAGE_LABEL = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_LABEL
-	end
+local function FreeUsageCard(p1) --[[ line: 59 ]]
+	-- upvalues: localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), progress (ref), progressShape (ref), progressSize (ref)
 	local pctUsed = p1.pctUsed
-	local var12 = if pctUsed < 0 then 0 elseif pctUsed > 100 then 100 else pctUsed
+	local var10 = if pctUsed < 0 then 0 elseif pctUsed > 100 then 100 else pctUsed
 	
 	return reactModule.createElement(view, {
 		tag = "col gap-small size-full-0 auto-y padding-large radius-large bg-shift-100",
@@ -61,44 +43,41 @@ local function FreeUsageCard(p1) --[[ line: 63 ]]
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-align-x-left content-emphasis",
 			testId = "creator-credit-page-free-usage-label",
-			Text = CREATOR_CREDIT_FREE_USAGE_LABEL
+			Text = localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_LABEL
 		}),
 		Value = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 			testId = "creator-credit-page-free-usage-value",
-			Text = localizationStringsModule.formatCreatorCreditPercentUsed(var12)
+			Text = localizationStringsModule.formatCreatorCreditPercentUsed(var10)
 		}),
 		Bar = reactModule.createElement(progress, {
 			LayoutOrder = 3,
 			testId = "creator-credit-page-daily-progress",
 			shape = progressShape.Bar,
 			size = progressSize.Medium,
-			value = var12,
+			value = var10,
 			width = UDim.new(1, 0)
 		}),
 		Caption = reactModule.createElement(text, {
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y padding-top-medium text-body-small text-align-x-left content-muted",
 			testId = "creator-credit-page-free-usage-reset",
-			Text = if math.floor(var12 + 0.5) > 0 and p1.resetHours ~= nil then localizationStringsModule.formatCreatorCreditResetHours(p1.resetHours) else CREATOR_CREDIT_FREE_USAGE_CAPTION
+			Text = if math.floor(var10 + 0.5) > 0 and p1.resetHours ~= nil then localizationStringsModule.formatCreatorCreditResetHours(p1.resetHours) else localizationStringsModule.CREATOR_CREDIT_FREE_USAGE_CAPTION
 		})
 	})
 end
 
-local function RobuxLine(p2) --[[ line: 122 ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), numberLocalization (ref), localizationService (ref), formatNumber (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var14
-	local var13 = if fFlagBuildLocalization then useLocalization({
-		available = localizationStringsModule.CREATOR_CREDIT_AVAILABLE_SUFFIX
-	}) else nil
+local function RobuxLine(p2) --[[ line: 103 ]]
+	-- upvalues: localizationStringsModule (ref), numberLocalization (ref), localizationService (ref), formatNumber (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
+	local var11
 	local _ = nil
 	
 	if p2.kind == "used" then
 		assert(p2.usedOf ~= nil, "usedOf required when kind == 'used'")
-		var14 = localizationStringsModule.formatCreatorCreditAdditionalUsed(numberLocalization.localize(string.format("%.0f", math.floor(p2.amount)), localizationService.RobloxLocaleId), formatNumber(p2.usedOf))
+		var11 = localizationStringsModule.formatCreatorCreditAdditionalUsed(numberLocalization.localize(string.format("%.0f", math.floor(p2.amount)), localizationService.RobloxLocaleId), formatNumber(p2.usedOf))
 	else
-		var14 = if p2.kind == "usedNoLimit" then localizationStringsModule.formatCreatorCreditAdditionalUsedNoLimit(formatNumber(p2.amount)) else `{numberLocalization.localize(string.format("%.0f", math.floor(p2.amount)), localizationService.RobloxLocaleId)} {if fFlagBuildLocalization then var13.available else localizationStringsModule.CREATOR_CREDIT_AVAILABLE_SUFFIX}`
+		var11 = if p2.kind == "usedNoLimit" then localizationStringsModule.formatCreatorCreditAdditionalUsedNoLimit(formatNumber(p2.amount)) else `{numberLocalization.localize(string.format("%.0f", math.floor(p2.amount)), localizationService.RobloxLocaleId)} {localizationStringsModule.CREATOR_CREDIT_AVAILABLE_SUFFIX}`
 	end
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-bottom-medium",
@@ -117,7 +96,7 @@ local function RobuxLine(p2) --[[ line: 122 ]]
 		Amount = reactModule.createElement(text, {
 			LayoutOrder = 2,
 			testId = "creator-credit-page-robux-line",
-			Text = var14,
+			Text = var11,
 			tag = {
 				["auto-xy text-heading-small"] = true,
 				["content-muted"] = not p2.isEnabled,
@@ -127,46 +106,11 @@ local function RobuxLine(p2) --[[ line: 122 ]]
 	})
 end
 
-local function AdditionalUsageCard(p3) --[[ line: 177 ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), toggle (ref), inputSize (ref), RobuxLine (ref), button (ref), buttonVariant (ref), noop (ref)
-	local CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL, CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL, CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION, CREATOR_CREDIT_SET_DAILY_LIMIT, CREATOR_CREDIT_MANAGE_LIMIT, CREATOR_CREDIT_SETTINGS_SAVE_ERROR, CREATOR_CREDIT_BUY_ROBUX_BUTTON
-	local var15 = if fFlagBuildLocalization then useLocalization({
-		additionalDailyUsage = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL,
-		additionalUsage = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL,
-		description = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION,
-		setDailyLimit = localizationStringsModule.CREATOR_CREDIT_SET_DAILY_LIMIT,
-		manageLimit = localizationStringsModule.CREATOR_CREDIT_MANAGE_LIMIT,
-		settingsSaveError = localizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR,
-		buyRobux = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON
-	}) else nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL = var15.additionalDailyUsage
-		CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL = var15.additionalUsage
-		CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION = var15.description
-		CREATOR_CREDIT_SET_DAILY_LIMIT = var15.setDailyLimit
-		CREATOR_CREDIT_MANAGE_LIMIT = var15.manageLimit
-		CREATOR_CREDIT_SETTINGS_SAVE_ERROR = var15.settingsSaveError
-		CREATOR_CREDIT_BUY_ROBUX_BUTTON = var15.buyRobux
-	else
-		CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL
-		CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL
-		CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION
-		CREATOR_CREDIT_SET_DAILY_LIMIT = localizationStringsModule.CREATOR_CREDIT_SET_DAILY_LIMIT
-		CREATOR_CREDIT_MANAGE_LIMIT = localizationStringsModule.CREATOR_CREDIT_MANAGE_LIMIT
-		CREATOR_CREDIT_SETTINGS_SAVE_ERROR = localizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR
-		CREATOR_CREDIT_BUY_ROBUX_BUTTON = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON
-	end
-	local var16 = p3.additionalEnabled and p3.dailyLimit ~= nil
-	local var16_1 = var16 or p3.additionalEnabled and p3.hasLimitConfigured == true
-	local var18 = var16_1 and not var16
+local function AdditionalUsageCard(p3) --[[ line: 150 ]]
+	-- upvalues: localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), toggle (ref), inputSize (ref), RobuxLine (ref), button (ref), buttonVariant (ref), noop (ref)
+	local var12 = p3.additionalEnabled and p3.dailyLimit ~= nil
+	local var12_1 = var12 or p3.additionalEnabled and p3.hasLimitConfigured == true
+	local var14 = var12_1 and not var12
 	local t = {
 		Header = reactModule.createElement(view, {
 			LayoutOrder = 1,
@@ -175,7 +119,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 			Label = reactModule.createElement(text, {
 				LayoutOrder = 1,
 				testId = "creator-credit-page-additional-usage-label",
-				Text = if p3.additionalEnabled then CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL else CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL,
+				Text = if p3.additionalEnabled then localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL else localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL,
 				tag = {
 					["fill auto-y text-title-medium text-align-x-left"] = true,
 					["content-default"] = not p3.additionalEnabled,
@@ -189,7 +133,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 				size = inputSize.Medium,
 				isChecked = p3.additionalEnabled,
 				isDisabled = p3.settingsDisabled == true,
-				onActivated = function(p4) --[[ line: 253 ]]
+				onActivated = function(p4) --[[ line: 193 ]]
 					-- upvalues: p3 (ref)
 					if not p3.settingsDisabled then
 						p3.onToggleAdditional(p4)
@@ -199,7 +143,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 		})
 	}
 	
-	if var16 then
+	if var12 then
 		assert(p3.dailyLimit ~= nil, "dailyLimit must be provided when a numeric limit is configured")
 		t.UsageLine = reactModule.createElement(RobuxLine, {
 			LayoutOrder = 2,
@@ -208,7 +152,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 			usedOf = p3.dailyLimit,
 			isEnabled = p3.additionalEnabled
 		})
-	elseif var18 then
+	elseif var14 then
 		t.UsageLine = reactModule.createElement(RobuxLine, {
 			LayoutOrder = 2,
 			kind = "usedNoLimit",
@@ -231,7 +175,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 			BuyRobuxButton = if p3.showBuyRobux then reactModule.createElement(button, {
 				LayoutOrder = 1,
 				testId = "creator-credit-page-buy-robux",
-				text = CREATOR_CREDIT_BUY_ROBUX_BUTTON,
+				text = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON,
 				variant = buttonVariant.Emphasis,
 				size = inputSize.Medium,
 				onActivated = p3.onOpenBuyRobux or noop,
@@ -239,19 +183,19 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 			}) else nil,
 			LimitButton = reactModule.createElement(button, {
 				LayoutOrder = 2,
-				text = if var16_1 then CREATOR_CREDIT_MANAGE_LIMIT else CREATOR_CREDIT_SET_DAILY_LIMIT,
+				text = if var12_1 then localizationStringsModule.CREATOR_CREDIT_MANAGE_LIMIT else localizationStringsModule.CREATOR_CREDIT_SET_DAILY_LIMIT,
 				variant = buttonVariant.Standard,
 				size = inputSize.Medium,
 				onActivated = p3.onOpenLimitSheet or noop,
 				isDisabled = if p3.settingsDisabled ~= true then p3.onOpenLimitSheet == nil else true,
-				testId = if var16_1 then "creator-credit-page-manage-limit" else "creator-credit-page-set-daily-limit"
+				testId = if var12_1 then "creator-credit-page-manage-limit" else "creator-credit-page-set-daily-limit"
 			})
 		})
 	else
 		t.Description = reactModule.createElement(text, {
 			LayoutOrder = 3,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
-			Text = CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION
+			Text = localizationStringsModule.CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION
 		})
 	end
 	if p3.settingsError then
@@ -259,7 +203,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 			LayoutOrder = 4,
 			tag = "size-full-0 auto-y text-caption-medium text-wrap text-align-x-left content-system-alert",
 			testId = "creator-credit-page-settings-error",
-			Text = CREATOR_CREDIT_SETTINGS_SAVE_ERROR
+			Text = localizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR
 		})
 	end
 	return reactModule.createElement(view, {
@@ -273,7 +217,7 @@ local function AdditionalUsageCard(p3) --[[ line: 177 ]]
 	}, t)
 end
 
-return function(p5) --[[ line: 346 | named "CreatorCreditPageView" ]]
+return function(p5) --[[ line: 288 | named "CreatorCreditPageView" ]]
 	-- upvalues: reactModule (ref), view (ref), FreeUsageCard (ref), AdditionalUsageCard (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-y-xlarge",

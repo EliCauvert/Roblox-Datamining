@@ -33,5 +33,6 @@
 	SduiSkeleton = require(script.Components.SduiSkeleton),
 	SduiSharedRegister = require(script.SduiSharedRegister),
 	useCollectionAnalyticsContext = require(script.Components.useCollectionAnalyticsContext),
+	SduiFeedContext = require(script.Components.SduiFeedContext),
 	reportPromptDismiss = require(script.Actions.reportPromptDismiss)
 }

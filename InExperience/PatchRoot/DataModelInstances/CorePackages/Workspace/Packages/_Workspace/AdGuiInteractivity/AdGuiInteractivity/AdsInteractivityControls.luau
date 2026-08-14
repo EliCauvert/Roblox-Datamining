@@ -1,7 +1,6 @@
 ﻿local parent = script.Parent
 local parent_1 = parent.Parent
 local roactModule = require(parent_1.Roact)
-local colorMode = require(parent_1.Foundation).Enums.ColorMode
 local fadeControllerModule = require(parent.FadeController)
 local adLabelModule = require(parent.AdLabel)
 local circularButtonModule = require(parent.CircularButton)
@@ -30,17 +29,17 @@ local var14 = if fFlagEnableReportAdDropdown then require(parent.AdDropdownMenu)
 local adsInteractivityTelemetryModule = require(parent.AdsInteractivityTelemetry)
 local adsInteractivityControls = roactModule.PureComponent:extend("AdsInteractivityControls")
 
-local function _(p0) --[[ line: 47 | named "opacityToTransparency" ]]
+local function _(p0) --[[ line: 44 | named "opacityToTransparency" ]]
 	return 1 - p0
 end
 
 local adGuiInteractivityPixelsPerStud = flagsModule.GetAdGuiInteractivityPixelsPerStud()
 
-local _ = function(p1) --[[ line: 54 | named "getAdornee" ]]
+local _ = function(p1) --[[ line: 51 | named "getAdornee" ]]
 	return if p1 == nil then nil elseif p1.Adornee == nil then if p1.Parent == nil or not p1.Parent:IsA("BasePart") then nil else p1.Parent else p1.Adornee
 end
 
-function adsInteractivityControls.init(p2) --[[ line: 69 ]]
+function adsInteractivityControls.init(p2) --[[ line: 66 ]]
 	-- upvalues: fadeControllerModule (ref), roactModule (ref)
 	if game:GetEngineFeature("DeprecateCpv15") then
 		p2.state = {
@@ -68,7 +67,7 @@ function adsInteractivityControls.init(p2) --[[ line: 69 ]]
 			adGuiRectStuds = Vector2.new(0, 0)
 		}
 	end
-	local function onAdorneeChanged() --[[ line: 97 ]]
+	local function onAdorneeChanged() --[[ line: 94 ]]
 		-- upvalues: p2 (ref)
 		local t = {}
 		local adGui = p2.props.adGui
@@ -80,7 +79,7 @@ function adsInteractivityControls.init(p2) --[[ line: 69 ]]
 		p2.props.adGui:GetPropertyChangedSignal("Adornee"):Connect(onAdorneeChanged),
 		p2.props.adGui:GetPropertyChangedSignal("Parent"):Connect(onAdorneeChanged)
 	}
-	p2.props.adGui.adGuiStateChanged:Connect(function(p3) --[[ line: 108 ]]
+	p2.props.adGui.adGuiStateChanged:Connect(function(p3) --[[ line: 105 ]]
 		-- upvalues: p2 (ref)
 		p2:setState(p3)
 	end)
@@ -88,20 +87,20 @@ function adsInteractivityControls.init(p2) --[[ line: 69 ]]
 	local var19, var20 = roactModule.createBinding(1)
 	p2.controlsOpacity = var19
 	p2.updateControlsOpacity = var20
-	p2.fadeController:subscribe(function(p4) --[[ line: 115 ]]
+	p2.fadeController:subscribe(function(p4) --[[ line: 112 ]]
 		-- upvalues: p2 (ref)
 		p2.updateControlsOpacity(p4)
 	end)
 	p2.props.adGui:forwardStateToLuaUI()
 end
 
-function adsInteractivityControls.willUnmount(p5) --[[ line: 122 ]]
+function adsInteractivityControls.willUnmount(p5) --[[ line: 119 ]]
 	for i, v in ipairs(p5.signalConnections) do
 		v:Disconnect()
 	end
 end
 
-function adsInteractivityControls.render(p6) --[[ line: 128 ]]
+function adsInteractivityControls.render(p6) --[[ line: 125 ]]
 	-- upvalues: var9 (ref), var8 (ref), speaker (ref), speakerMute (ref), previewShrink (ref), previewExpand (ref), roactModule (ref), fFlagEnableReportAdDropdown (ref), adGuiInteractivityPixelsPerStud (ref), adsInteractivityTelemetryModule (ref), var13 (ref), enableHideReportAdModalDuringScreenshot (ref), fFlagFixReportAdInfoDuringRotation (ref), var12 (write), var14 (ref), adLabelModule (ref), circularButtonModule (ref), close (ref), imageSetLabel (ref), circle42Stroke3 (ref), livePreviewWatermarkModule (ref)
 	if not p6.props.adGui then
 		return nil
@@ -131,11 +130,11 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 	if not p6.state.isFullscreen then
 		vector2 *= 1.5
 	end
-	local var30 = if not p6.state.isViewable then false else p6.controlsOpacity:map(function(p7) --[[ line: 174 ]]
+	local var30 = if not p6.state.isViewable then false else p6.controlsOpacity:map(function(p7) --[[ line: 171 ]]
 		-- upvalues: var24 (write), var8 (copy)
 		return var24 == var8 or (var24 ~= nil and (p7 and p7 > 0))
 	end)
-	local var31 = p6.controlsOpacity:map(function(p8) --[[ line: 185 ]]
+	local var31 = p6.controlsOpacity:map(function(p8) --[[ line: 182 ]]
 		-- upvalues: var24 (write), var8 (copy)
 		return if var24 == var8 then 0.2 else 1 - p8 * 0.8
 	end)
@@ -159,18 +158,18 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.new(0, 0, 0),
-			BackgroundTransparency = p6.controlsOpacity:map(function(p9) --[[ line: 212 ]]
+			BackgroundTransparency = p6.controlsOpacity:map(function(p9) --[[ line: 209 ]]
 				-- upvalues: var24 (write), var8 (copy)
 				return if var24 == var8 then 0.7 else 1 - p9 * 0.3
 			end),
 			Text = "",
-			[roactModule.Event.MouseMoved] = function(_, _) --[[ line: 221 ]]
+			[roactModule.Event.MouseMoved] = function(_, _) --[[ line: 218 ]]
 				-- upvalues: var22 (ref), p6 (ref)
 				if var22 and p6.state.isFullscreen then
 					p6.fadeController:updateLastInputTime()
 				end
 			end,
-			[roactModule.Event.Activated] = function(_, p10) --[[ line: 226 ]]
+			[roactModule.Event.Activated] = function(_, p10) --[[ line: 223 ]]
 				-- upvalues: fFlagEnableReportAdDropdown (copy), p6 (ref), adsInteractivityTelemetryModule (copy), var22 (ref)
 				if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then
 					p6:setState({ isDropDownOpen = false })
@@ -207,11 +206,11 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 		}, {
 			AbuseReportingModal = fFlagEnableReportAdDropdown and (var13 and (p6.state.isReportAdPopupOpen and (roactModule.createElement(var13, {
 				showReportAdPopup = p6.state.isReportAdPopupOpen,
-				onClose = function() --[[ line: 264 ]]
+				onClose = function() --[[ line: 261 ]]
 					-- upvalues: p6 (ref)
 					p6:setState({ isReportAdPopupOpen = false })
 				end,
-				onOpen = if enableHideReportAdModalDuringScreenshot then function() --[[ line: 270 ]]
+				onOpen = if enableHideReportAdModalDuringScreenshot then function() --[[ line: 267 ]]
 					-- upvalues: p6 (ref), adsInteractivityTelemetryModule (copy)
 					p6:setState({ isReportAdPopupOpen = true })
 					adsInteractivityTelemetryModule.logReportAdEvent("open")
@@ -220,19 +219,19 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 			}) or nil))),
 			AdDropdownMenu = if fFlagEnableReportAdDropdown and var14 then roactModule.createElement(var14, {
 				showDropDownMenu = p6.state.isDropDownOpen,
-				onWhyThisAdActivated = function() --[[ line: 287 ]]
+				onWhyThisAdActivated = function() --[[ line: 284 ]]
 					-- upvalues: p6 (ref), adsInteractivityTelemetryModule (copy)
 					p6.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.WhyThisAdClicked)
 					adsInteractivityTelemetryModule.logWhyThisAdEvent()
 				end,
-				onReportAdActivated = function() --[[ line: 292 ]]
+				onReportAdActivated = function() --[[ line: 289 ]]
 					-- upvalues: p6 (ref)
 					p6:setState({ isReportAdPopupOpen = true })
 				end,
 				transparency = 0.2
 			}) else nil,
 			AdLabel = roactModule.createElement(adLabelModule, {
-				onActivated = if fFlagEnableReportAdDropdown then function() --[[ line: 302 ]]
+				onActivated = if fFlagEnableReportAdDropdown then function() --[[ line: 299 ]]
 					-- upvalues: fFlagFixReportAdInfoDuringRotation (copy), p6 (ref), adsInteractivityTelemetryModule (copy)
 					if fFlagFixReportAdInfoDuringRotation then
 						local t = { isDropDownOpen = not p6.state.isDropDownOpen }
@@ -252,7 +251,7 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 						p6.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.PauseButtonClicked)
 					end
 					adsInteractivityTelemetryModule.logAdMenuEvent(if p6.state.isDropDownOpen then "open" else "close")
-				end else function() --[[ line: 326 ]]
+				end else function() --[[ line: 323 ]]
 					-- upvalues: p6 (ref)
 					p6.props.adGui:HandleLuaUIEvent(Enum.AdUIEventType.AdLabelClicked)
 				end,
@@ -268,7 +267,7 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 				Visible = isFullscreen,
 				Transparency = var31,
 				AutoButtonColor = if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then false else true,
-				onActivated = function() --[[ line: 341 ]]
+				onActivated = function() --[[ line: 338 ]]
 					-- upvalues: fFlagEnableReportAdDropdown (copy), p6 (ref), adsInteractivityTelemetryModule (copy)
 					if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then
 						p6:setState({ isDropDownOpen = false })
@@ -288,7 +287,7 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 				Size = UDim2.fromScale(vector2.X, vector2.Y),
 				Visible = var30,
 				AutoButtonColor = if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then false else true,
-				[roactModule.Event.Activated] = function() --[[ line: 362 ]]
+				[roactModule.Event.Activated] = function() --[[ line: 359 ]]
 					-- upvalues: fFlagEnableReportAdDropdown (copy), p6 (ref), adsInteractivityTelemetryModule (copy), var24 (write), var8 (copy), var9 (copy)
 					if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then
 						p6:setState({ isDropDownOpen = false })
@@ -330,7 +329,7 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 				Image = var27,
 				ImageSize = UDim2.fromScale(0.8, 0.8),
 				AutoButtonColor = if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then false else true,
-				onActivated = function() --[[ line: 404 ]]
+				onActivated = function() --[[ line: 401 ]]
 					-- upvalues: fFlagEnableReportAdDropdown (copy), p6 (ref), adsInteractivityTelemetryModule (copy)
 					if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then
 						p6:setState({ isDropDownOpen = false })
@@ -351,7 +350,7 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 				Image = var28,
 				ImageSize = UDim2.fromScale(0.7, 0.7),
 				AutoButtonColor = if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then false else true,
-				onActivated = function() --[[ line: 426 ]]
+				onActivated = function() --[[ line: 423 ]]
 					-- upvalues: fFlagEnableReportAdDropdown (copy), p6 (ref), adsInteractivityTelemetryModule (copy)
 					if fFlagEnableReportAdDropdown and p6.state.isDropDownOpen then
 						p6:setState({ isDropDownOpen = false })
@@ -372,9 +371,13 @@ function adsInteractivityControls.render(p6) --[[ line: 128 ]]
 	return createElement(var32, t, t_1)
 end
 
-return if fFlagInExperienceUseAppStyleProvider then function(p11) --[[ line: 448 | named "AdsInteractivityFunctionalWrapper" ]]
-	-- upvalues: roactModule (ref), appStyleProvider (ref), colorMode (ref), adsInteractivityControls (ref)
-	return roactModule.createElement(appStyleProvider, { style = { themeName = colorMode.Dark } }, {
+return if fFlagInExperienceUseAppStyleProvider then function(p11) --[[ line: 445 | named "AdsInteractivityFunctionalWrapper" ]]
+	-- upvalues: UIBloxModule (ref), roactModule (ref), appStyleProvider (ref), adsInteractivityControls (ref)
+	return roactModule.createElement(appStyleProvider, {
+		style = {
+			themeName = UIBloxModule.App.Style.Constants.ThemeName.Dark
+		}
+	}, {
 		AdsInteractivityControls = roactModule.createElement(adsInteractivityControls, p11)
 	})
 end else adsInteractivityControls

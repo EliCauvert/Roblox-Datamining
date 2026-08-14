@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("AXBackgroundGenerationMaxPromptLength", 1000)

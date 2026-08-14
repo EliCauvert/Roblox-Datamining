@@ -2,10 +2,7 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local button = foundationModule.Button
 local iconName = foundationModule.Enums.IconName
 local text = foundationModule.Text
@@ -13,13 +10,8 @@ local view = foundationModule.View
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 29 | named "PlaytestCompletedCard" ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	local var5 = if fFlagBuildLocalization then useLocalization({
-		playtest = localizationStringsModule.CHAT_PLAYTEST,
-		title = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE
-	}) else nil
-	
+return function(p0) --[[ line: 25 | named "PlaytestCompletedCard" ]]
+	-- upvalues: reactModule (ref), view (ref), text (ref), localizationStringsModule (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
 	return reactModule.createElement(view, {
 		tag = "col gap-medium size-full-0 auto-y padding-medium stroke-standard stroke-emphasis radius-medium clip",
 		LayoutOrder = p0.LayoutOrder,
@@ -28,7 +20,7 @@ return function(p0) --[[ line: 29 | named "PlaytestCompletedCard" ]]
 		Title = reactModule.createElement(text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = p0.title or (if fFlagBuildLocalization then var5.title else localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE)
+			Text = p0.title or localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE
 		}),
 		Description = reactModule.createElement(text, {
 			LayoutOrder = 2,
@@ -38,7 +30,7 @@ return function(p0) --[[ line: 29 | named "PlaytestCompletedCard" ]]
 		Playtest = reactModule.createElement(button, {
 			LayoutOrder = 3,
 			testId = "playtest-completed-card-playtest-button",
-			text = if fFlagBuildLocalization then var5.playtest else localizationStringsModule.CHAT_PLAYTEST,
+			text = localizationStringsModule.CHAT_PLAYTEST,
 			icon = iconName.PlaySmall,
 			size = inputSize.Small,
 			variant = buttonVariant.Emphasis,
