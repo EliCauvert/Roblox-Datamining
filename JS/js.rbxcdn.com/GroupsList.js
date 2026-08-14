@@ -1954,7 +1954,6 @@
                             getGroupConfigurationMetadata: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/configuration/metadata"),
                             updateGroupSettings: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/{id}/settings"),
                             searchGroups: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/search"),
-                            deleteWallPostsByUser: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/{groupId}/wall/users/{userId}/posts"),
                             deleteForumPostsByUser: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/{groupId}/forums/{userId}/posts"),
                             getGroupRelationships: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/{groupId}/relationships/{groupRelationshipType}"),
                             groupLookup: "".concat(n.EnvironmentUrls.groupsApi, "/v1/groups/search/lookup"),
@@ -3047,28 +3046,21 @@
                             return e.httpGet(i)
                         },
                         deletePostsByUser: function(t, e) {
-                            var n = function(t) {
-                                    return new Promise((function(e, r) {
-                                        i().ajax({
-                                            method: "DELETE",
-                                            url: t,
-                                            contentType: "application/json",
-                                            timeout: 1e4,
-                                            success: e,
-                                            error: r,
-                                            withCredentials: !0
-                                        })
-                                    }))
-                                },
-                                a = o("formatString")(r.urls.deleteWallPostsByUser, {
-                                    groupId: t,
-                                    userId: e
-                                }),
-                                c = o("formatString")(r.urls.deleteForumPostsByUser, {
-                                    groupId: t,
-                                    userId: e
-                                });
-                            return Promise.all([n(a), n(c)])
+                            var n = o("formatString")(r.urls.deleteForumPostsByUser, {
+                                groupId: t,
+                                userId: e
+                            });
+                            return new Promise((function(t, e) {
+                                i().ajax({
+                                    method: "DELETE",
+                                    url: n,
+                                    contentType: "application/json",
+                                    timeout: 1e4,
+                                    success: t,
+                                    error: e,
+                                    withCredentials: !0
+                                })
+                            }))
                         },
                         getGroupSettings: function(n) {
                             return t((function(t, i) {
@@ -6673,7 +6665,7 @@
             (0, n.templateCacheGenerator)(e(), "groupsTemplates", o)
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/716ea24e49d8086613ed2af4d18bfe10-groups.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/7f1b4c23354a8895abb5a2ce96589931-groups.bundle.min.js.map
 
 ! function() {
     var r = {
