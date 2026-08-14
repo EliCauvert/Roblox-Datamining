@@ -117,8 +117,8 @@ Authentication.AccountPicker.Label.SignedOut,Sesión cerrada
 Authentication.AccountRecovery.Action.AddAPasskey,"Sí, agregar una nueva clave de acceso"
 Authentication.AccountRecovery.Action.Continue,Continuar
 Authentication.AccountRecovery.Action.Delete,
-Authentication.AccountRecovery.Action.DeleteAll,"No, no lo reconozco"
-Authentication.AccountRecovery.Action.DontDeleteCredentials,"Sí, lo reconozco"
+Authentication.AccountRecovery.Action.DeleteAll,Eliminar cambios
+Authentication.AccountRecovery.Action.DontDeleteCredentials,Guardar todo
 Authentication.AccountRecovery.Action.Next,Siguiente
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,Restablecer contraseña
@@ -133,7 +133,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,Utilizar el correo electr�
 Authentication.AccountRecovery.Action.UsePhone,Usar teléfono
 Authentication.AccountRecovery.Action.UsePhoneInstead,O número de teléfono
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,Utilizar nombre de usuario o correo electrónico en su lugar
-Authentication.AccountRecovery.Description.AccountSecuredConfirmation,Se eliminaron los cambios que no reconociste. Mantén tu cuenta protegida agregando una capa adicional de seguridad.
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,Se eliminaron todos los cambios.
 Authentication.AccountRecovery.Description.CannotRecoverAccount,"Por tu seguridad, se requiere un segundo método de verificación distinto para recuperar tu cuenta habilitada para la verificación en 2 pasos. Esta cuenta no tiene un método de respaldo disponible para una recuperación segura. Intenta recuperar el acceso a tu método principal de 2SV o usa un código de respaldo para omitir el desafío de 2SV."
 Authentication.AccountRecovery.Description.ChooseAccount,Elige la cuenta que quieres recuperar.
 Authentication.AccountRecovery.Description.CreateNewPassword,Crea una contraseña segura que sea diferente de la anterior.
@@ -149,9 +149,9 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,"Ahora, ingresa una
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Ahora, ingresa un número de teléfono, un código de respaldo u otra dirección de correo electrónico. Puede ser un correo electrónico que hayas utilizado para comprar algo en Roblox."
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Ahora, ingresa un número de teléfono que esté asociado con tu cuenta."
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,"Ahora, ingresa un número de teléfono u otra dirección de correo electrónico. Este podría ser un correo electrónico que hayas utilizado para comprar algo en Roblox."
-Authentication.AccountRecovery.Description.InvalidateCredentialInfo,Encontramos un cambio de seguridad en tu cuenta que es posible que no hayas realizado. Échale un vistazo y avísanos si es tuyo.
-Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,Encontramos cambios de seguridad en tu cuenta que es posible que no hayas realizado. Échales un vistazo y avísanos si son tuyos.
-Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,"Si conservo elementos no reconocidos, es posible que otra persona aún pueda iniciar sesión y bloquearme. Esta acción no se puede deshacer."
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,Encontramos un cambio de seguridad que es posible que no hayas realizado. Elimínalo si no lo reconoces
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,Encontramos cambios de seguridad que es posible que no hayas realizado. Elimina los que no reconozcas.
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,Conservar cambios no reconocidos puede poner en riesgo tu cuenta. La eliminación de los cambios no puede revertirse.
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,Activaste {twoStepMethod} en tu cuenta. Consérvalo si aún puedes acceder a él. Te lo pediremos cuando vuelvas a iniciar sesión.
 Authentication.AccountRecovery.Description.NoChangesMade,Mantén tu cuenta protegida agregando una capa adicional de seguridad.
 Authentication.AccountRecovery.Description.PhoneCodeSent,"Si existe una cuenta de Roblox para este número de teléfono, recibirás un código de verificación. Revisa tu SMS o WhatsApp."
@@ -165,7 +165,7 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,"
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,"Hola, {username}. Estás accediendo a tu cuenta desde una ubicación de confianza. Puedes omitir la verificación en 2 pasos y completar la recuperación."
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,Nos dimos cuenta de que usaste un correo electrónico diferente para recuperar tu cuenta. Actualizaremos tu dirección de correo electrónico a {email}
 Authentication.AccountRecovery.Description.VerifyAgain,Verifica que eres tú antes de recuperar tu cuenta habilitada para la verificación en 2 pasos. Presiona “Continuar” para activar nuevamente el desafío de verificación en 2 pasos.
-Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,¡Tu cuenta está protegida!
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,Tu cuenta está protegida
 Authentication.AccountRecovery.Heading.BackupCodesGenerated,Códigos de respaldo generados
 Authentication.AccountRecovery.Heading.BillingEmailAdded,Correo electrónico de facturación añadido
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,No podemos recuperar tu cuenta
@@ -175,8 +175,8 @@ Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,¿E
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,Es posible que experimentes comportamientos limitados en este dispositivo porque no admite la clave de acceso
 Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,Inscrito en el Programa de protección mejorada
 Authentication.AccountRecovery.Heading.EnterSecondMethod,Ingresa un segundo método de verificación
-Authentication.AccountRecovery.Heading.InvalidateCredential,¿Reconoces este cambio?
-Authentication.AccountRecovery.Heading.InvalidateCredentials,¿Reconoces estos cambios?
+Authentication.AccountRecovery.Heading.InvalidateCredential,Cambio en tu cuenta
+Authentication.AccountRecovery.Heading.InvalidateCredentials,Cambios en tu cuenta
 Authentication.AccountRecovery.Heading.NoChangesMade,No se realizaron cambios
 Authentication.AccountRecovery.Heading.PasskeyAdded,Clave de acceso añadida
 Authentication.AccountRecovery.Heading.PhoneNumberAdded,Número de teléfono añadido
@@ -1632,6 +1632,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Actualizar el aspecto existente
 Feature.Avatar.Action.UpdateMakeupLook,Actualizar estilo
 Feature.Avatar.Action.Zoom,Hacer zoom
 Feature.Avatar.AvatarWidgetTitle,Explora los estilos
+Feature.Avatar.BackgroundGeneration.Error.Moderation,Esa indicación no cumple con nuestras pautas. Intenta describir otra cosa.
+Feature.Avatar.BackgroundGeneration.Error.System,Algo salió mal al generar tu fondo. Inténtalo de nuevo.
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe tu fondo…
+Feature.Avatar.BackgroundGeneration.Status.Generating,Generando tu fondo…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparando tu fondo…
+Feature.Avatar.BackgroundGeneration.Title,Crear fondo
 Feature.Avatar.Backgrounds.Title,Fondos
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,El ajuste no está disponible para este tipo de cuerpo.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Volver al color del cuerpo predeterminado
@@ -1639,6 +1645,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,Color de piel
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,Crea tu propio look único con infinitas combinaciones de maquillaje.
 Feature.Avatar.EmoteAlreadyAssigned,Este emote ya tiene un espacio asignado
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,Inspírate
@@ -2103,6 +2110,134 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,¿Bloquear a {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Bloquear a este usuario lo eliminará como conexión o seguidor. No podrá enviarte mensajes, solicitudes ni invitaciones.<br /><br />El usuario no recibirá una notificación de que fue bloqueado."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloquear a este usuario lo eliminará como amistad o seguidor. No podrá enviarte mensajes, solicitudes ni invitaciones.<br /><br />No se le notificará que fue bloqueado."
+Feature.Build.Action.AddFriends,Añadir amistades
+Feature.Build.Action.AddPlaytester,Añadir probador de juego
+Feature.Build.Action.AddPlaytesters,Añadir evaluadores de juego
+Feature.Build.Action.AddToPlaytest,Añadir a la prueba de jugabilidad
+Feature.Build.Action.Archive,Archivar
+Feature.Build.Action.ArchiveGame,Archivar juego
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,Comprar
+Feature.Build.Action.BuyRobux,Compra Robux
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,Copiar texto
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,Ocultar guardado automático
+Feature.Build.Action.ManageLimit,Administrar límite
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,Notificarme
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,Abrir Configuración
+Feature.Build.Action.Playtest,Prueba de juego
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,
+Feature.Build.Action.PublishLatest,Publicar la más reciente
+Feature.Build.Action.Restore,Restaurar
+Feature.Build.Action.SetDailyLimit,Establecer un límite diario
+Feature.Build.Action.SetLimit,Establecer límite
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,Compartir enlace
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,Actualizar la clasificación
+Feature.Build.Action.UpdateWithChanges,Actualización con cambios
+Feature.Build.Action.View,
+Feature.Build.Action.ViewUsage,Ver uso
+Feature.Build.Content.NewGame,Juego nuevo
+Feature.Build.Description.ArchiveRemoval,"Si archivas este juego, se eliminará de la compilación. Aún podrás acceder a él y restaurarlo desde Creator Hub o Roblox Studio."
+Feature.Build.Description.AutoBuyUsage,Usa tus Robux para comprar automáticamente más uso de la compilación a medida que creas. Puedes establecer un límite de gasto diario en cualquier momento.
+Feature.Build.Description.BuildIdeaGame,Convierte tus ideas en un juego
+Feature.Build.Description.BuildReplyNotif,Recibe una notificación cuando la compilación tenga una respuesta para ti.
+Feature.Build.Description.BuyRobuxToCreate,Compra más Robux para seguir creando o espera a que tu uso gratuito de la compilación se restablezca mañana.
+Feature.Build.Description.BuyUsageOrWait,Compra más uso de la compilación con Robux o espera a que se restablezca tu límite diario.
+Feature.Build.Description.ChoosePlaytesters,Elige amistades para que te ayuden con la prueba de juego.
+Feature.Build.Description.EnableBuildNotifs,Activa las notificaciones en la configuración de tu dispositivo para recibir actualizaciones de la compilación.
+Feature.Build.Description.FriendsLinkOnly,Solo tus amistades pueden acceder a este enlace. Cambia la configuración de público de tu juego si quieres que más gente juegue.
+Feature.Build.Description.HubSettings,Gestiona toda la configuración en el Centro de creación
+Feature.Build.Description.MakeAudienceAvail,Publica tu experiencia para que esté disponible para este público.
+Feature.Build.Description.ManageAppearance,Gestiona cómo se muestra tu juego a otras personas.
+Feature.Build.Description.PlayAfterPublish,Elige quién puede jugar después de que publiques esta experiencia.
+Feature.Build.Description.PlaytestLocked,Puedes comenzar la prueba de juego después de crear tu primer juego.
+Feature.Build.Description.PlaytesterAccess,Añade amistades como evaluadores de juego o cambia la configuración de público de tu juego para permitir que más personas jueguen.
+Feature.Build.Description.PrivateShare,Cambia la configuración de público de tu juego para compartirlo.
+Feature.Build.Description.RaiseLimitOrWait,Aumenta tu límite diario de Robux para seguir creando o espera a que se restablezca mañana.
+Feature.Build.Description.RatingAgreement,"Al publicar, aceptas que esta valoración de contenido es precisa."
+Feature.Build.Description.RestoreLatest,Esta versión se convertirá en su última versión publicada.
+Feature.Build.Description.VersionChanges,Dile a los jugadores qué cambió en esta versión.
+Feature.Build.Header.AccessSharing,Acceso y uso compartido
+Feature.Build.Header.ContentMaturity,Madurez de contenido
+Feature.Build.Header.CustomAnswer,Respuesta personalizada
+Feature.Build.Header.GameDetails,Detalles del juego
+Feature.Build.Header.Overview,Resumen
+Feature.Build.Label.Access,Acceso
+Feature.Build.Label.AdditionalUsage,Uso adicional de la compilación
+Feature.Build.Label.Available,disponible
+Feature.Build.Label.BackToBuild,Volver a Crear
+Feature.Build.Label.CaptureLibrary,Biblioteca de capturas
+Feature.Build.Label.ContentRating,Clasificación de contenido
+Feature.Build.Label.CreatorHub,
+Feature.Build.Label.DescribeIdea,Describe una idea
+Feature.Build.Label.Description,Descripción
+Feature.Build.Label.FreeBuildUsage,Uso gratuito de la compilación
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,Obtener más uso de la compilación
+Feature.Build.Label.IconThumbnails,Ícono y miniaturas
+Feature.Build.Label.Loading,Cargando…
+Feature.Build.Label.NoLimit,Sin límite
+Feature.Build.Label.ResetsDaily,Se restablece diariamente
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,Buscar juegos
+Feature.Build.Label.SearchTasks,Buscar tareas
+Feature.Build.Label.SelectOption,Elige una opción
+Feature.Build.Label.ShareAddedFriends,Comparte con las amistades que añadiste
+Feature.Build.Label.Title,Título
+Feature.Build.Label.TitleDescription,Título y descripción
+Feature.Build.Label.Unknown,Desconocido
+Feature.Build.Label.Version,
+Feature.Build.Label.VersionTitleDesc,Título y descripción de la versión
+Feature.Build.Label.Video,
+Feature.Build.Message.AccountRequirements,Tu cuenta no cumple los requisitos para usar la compilación.
+Feature.Build.Message.AccountTooNew,Tu cuenta es demasiado nueva para publicar. Inténtalo de nuevo cuando tenga 2 días.
+Feature.Build.Message.AllFriendsAdded,Añadiste a todas tus amistades como evaluadores de juego.
+Feature.Build.Message.AudienceIneligible,No es elegible para este público
+Feature.Build.Message.ExpandAudience,Amplía la elegibilidad de tu público en el Centro de creación
+Feature.Build.Message.ExperiencesLoadFailed,No se pudieron cargar las experiencias
+Feature.Build.Message.FriendsLoadFailed,No se pudieron cargar las amistades. Inténtalo de nuevo.
+Feature.Build.Message.GamePublishFailed,No pudimos publicar tu juego. Inténtalo de nuevo.
+Feature.Build.Message.InvitesLoadFailed,No se pudieron cargar las invitaciones
+Feature.Build.Message.LinkCopied,Enlace copiado al portapapeles
+Feature.Build.Message.NoFriendsToAdd,"Aún no tienes amistades. Primero, busca personas para añadir a Roblox."
+Feature.Build.Message.PublicPublishFailed,"Tu juego se publicó, pero no se pudo hacer público. Inténtalo de nuevo."
+Feature.Build.Message.PublishExpandAudience,Publica para ampliar tu público
+Feature.Build.Message.QuestionnaireNeeded,Este juego se editó fuera de la compilación. Completa el cuestionario de contenido para publicarlo.
+Feature.Build.Message.ReadyToPlay,¡Tu juego está listo para jugar en Roblox!
+Feature.Build.Message.RestoreVersionFailed,No se pudo restaurar esta versión. Inténtalo de nuevo.
+Feature.Build.Message.SaveChangesFailed,No se pudieron guardar los cambios. Inténtalo de nuevo.
+Feature.Build.Message.ShareLinkFailed,No se pudieron crear los enlaces para compartir. Inténtalo de nuevo.
+Feature.Build.Message.TryAgain,Inténtalo de nuevo.
+Feature.Build.Message.TurnToPortrait,Pon tu dispositivo en modo vertical para seguir trabajando en tu juego.
+Feature.Build.Message.WhatToCreate,¿Qué quieres crear hoy?
+Feature.Build.Title.AddFriendsToPlaytest,Añade amistades para que te ayuden con la prueba de jugabilidad
+Feature.Build.Title.ArchiveThisGame,¿Quieres archivar este juego?
+Feature.Build.Title.Audience,Público
+Feature.Build.Title.BuildUnavailable,La compilación no está disponible
+Feature.Build.Title.ChatBuildUnavailable,La compilación no está disponible.
+Feature.Build.Title.Content,Contenido
+Feature.Build.Title.DailyRobuxReached,Se alcanzó el límite diario de Robux
+Feature.Build.Title.ExperienceAudience,Público de la experiencia
+Feature.Build.Title.FreeUsageReached,Se alcanzó el límite de uso gratuito de la compilación
+Feature.Build.Title.FriendsOnlyPlay,Solo las amistades pueden jugar
+Feature.Build.Title.GameCreationDone,Se completó la creación del juego
+Feature.Build.Title.GamePrivate,Este juego es un servidor privado
+Feature.Build.Title.GenericError,
+Feature.Build.Title.NoRobuxForUsage,No quedan Robux para el uso de la compilación
+Feature.Build.Title.Playtesters,Evaluadores de juego
+Feature.Build.Title.PlaytestersOnlyPlay,Solo los evaluadores de juego pueden jugar
+Feature.Build.Title.PushNotifications,Notificaciones push
+Feature.Build.Title.Tasks,Tareas
+Feature.Build.Title.VersionHistory,Historial de la versión
+Feature.Build.Title.VersionInformation,Información de la versión
 Feature.BuyRobux.Heading.Banner,Comprar Robux
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"No, gracias"
@@ -2114,7 +2249,7 @@ Feature.Captures.Title.AllowPhotoAccessInfo,Permitir acceso a Fotos
 Feature.Captures.Title.ShareCapturePrompt,Compartir captura
 Feature.Captures.Toast.CaptureSaved,Captura guardada
 Feature.Captures.Toast.CaptureSavedToDevice,Guardada en el dispositivo
-Feature.Catalog.Action.Buy,Comprar
+Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Ir a Personalizar
 Feature.Catalog.Action.Checkout.ManageInCustomize,Gestionar en Personalizar
@@ -2173,7 +2308,7 @@ Feature.Catalog.Heading.ItemInfo,Información del objeto
 Feature.Catalog.Heading.ItemRemoved,Objeto eliminado
 Feature.Catalog.Heading.ItemsOnSale,Objetos en venta
 Feature.Catalog.Heading.NotForSale,Fuera de venta
-Feature.Catalog.Heading.Overview,Resumen
+Feature.Catalog.Heading.Overview,
 Feature.Catalog.Heading.PremiumOnly,Solo Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,Límite de creador alcanzado
 Feature.Catalog.Heading.QuickMenu,Menú rápido
@@ -2471,7 +2606,7 @@ Feature.Catalog.Toast.AvatarPriceChangedBecauseOfOwned,El precio cambió porque 
 Feature.Catalog.Toast.AvatarUnderReview,"Avatar en revisión
 Puedes compartir tu avatar después de que se revise"
 Feature.Catalog.Toast.FavoritedLook,¡Avatar añadido a favoritos!
-Feature.Catalog.Toast.LinkCopied,Enlace copiado al portapapeles
+Feature.Catalog.Toast.LinkCopied,
 Feature.Catalog.Toast.RemovedFromFavorites,Eliminado de favoritos
 Feature.Catalog.Toast.UnfavoritedLook,Avatar eliminado de tus favoritos
 Feature.Catalog.TrustedConnection.Label.Trusted,
@@ -2561,7 +2696,7 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} te respondió
 Feature.Chat.Label.Group.YouRepliedToThem,Respondiste a {DISPLAY_NAME}
 Feature.Chat.Label.GroupName,Nombre del grupo
 Feature.Chat.Label.HoverToReplyTooltip,Pasa el cursor para responder
-Feature.Chat.Label.Loading,Cargando…
+Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,Mantén presionado para responder
 Feature.Chat.Label.Members,Miembros
 Feature.Chat.Label.MessageNotAvailable,Este mensaje no está disponible
@@ -2789,7 +2924,7 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,"Para unirte a esta experiencia, necesita el permiso parental."
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Necesitas permiso de tus padres para unirte a este juego.
-Feature.ExperienceDetails.Body.DescriptionTitle,Descripción
+Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Notas
 Feature.ExperienceDetails.Body.StatsInfoTitle,Estadísticas e información
 Feature.ExperienceDetails.Label.NotPlayable,No jugable
@@ -3059,6 +3194,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,Amistad de confianza el
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,Solicitud para ser amistad de confianza enviada
 Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,Actividad reciente
 Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,Actividad reciente de {username}
+Feature.FriendsActivityFeed.Label.ViewRecentActivity,Ver Actividad reciente
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,{num_hours} h
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,
@@ -3171,7 +3307,7 @@ Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18NonPersonalNoLink,"
 Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.O18PersonalizedNoLink,"Estás viendo este contenido patrocinado basado en diferentes factores, como tu ubicación, información del dispositivo, edad y comportamiento en la plataforma, para ofrecerte contenido relevante. El patrocinio fue pagado por {PayerName}. Para obtener más información, visita la página Privacidad y madurez de contenido en Configuración en tu cuenta, aquí:"
 Feature.GameDetails.Message.SponsoredDisclosureNoUniverse.U18,"Estás viendo este contenido patrocinado basado en factores no personalizados, como la información del dispositivo, ubicación y edad, para ofrecerte contenido apropiado. El patrocinio fue pagado por {PayerName}."
 Feature.GameDetails.Message.SuggestLessOften,Lo sugeriremos con menos frecuencia
-Feature.GameDetails.RatingPercentOnly,Valoración {percentRating}%
+Feature.GameDetails.RatingPercentOnly,Valoración de {percentRating}%
 Feature.GameDetails.Toast.LinkCopied,
 Feature.GameFollows.LabelNotifications,Notificar
 Feature.GameFollows.TooltipFollowLimitReached,Límite alcanzado. Deja de seguir otras experiencias para poder seguir esta.
@@ -4299,7 +4435,7 @@ Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,Abrir Configuración
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Selecciona Permiso
 2. Selecciona Contactos
 3. Permite que Roblox acceda a tus contactos"
@@ -4419,7 +4555,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,¿Realmente quieres eliminar a esta persona del grupo?
 Feature.Squads.Description.RemoveFromParty,Se eliminará a {displayName} del chat de grupo.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,Ya hay un equipo programado para la hora seleccionada
-Feature.Squads.Description.Title,Título
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,Añadiste {username} y {userCountMinusOne} personas más al grupo
 Feature.Squads.Description.YouAddedToChat,Añadiste {username} al grupo
@@ -4791,7 +4927,7 @@ IAPExperience.PurchasePrompt.Title.BuyItemV2,
 IAPExperience.PurchasePrompt.Title.BuyItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItem,Comprar Robux y objeto
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,Comprar Robux y objetos
-IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,Compra Robux
+IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,Compra completada
 IAPExperience.PurchaseSuccess.Action.BackToGame,Volver al juego
 IAPExperience.PurchaseSuccess.Action.BackToShop,

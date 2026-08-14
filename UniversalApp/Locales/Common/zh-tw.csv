@@ -116,8 +116,8 @@ Authentication.AccountPicker.Label.SignedOut,已登出
 Authentication.AccountRecovery.Action.AddAPasskey,是，新增密碼金鑰
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
-Authentication.AccountRecovery.Action.DeleteAll,否，我不認得
-Authentication.AccountRecovery.Action.DontDeleteCredentials,是，我認得
+Authentication.AccountRecovery.Action.DeleteAll,移除變更
+Authentication.AccountRecovery.Action.DontDeleteCredentials,全部保留
 Authentication.AccountRecovery.Action.Next,下一步
 Authentication.AccountRecovery.Action.Ok,
 Authentication.AccountRecovery.Action.ResetPassword,重置密碼
@@ -132,7 +132,7 @@ Authentication.AccountRecovery.Action.UseEmailInstead,改用電子郵件地址
 Authentication.AccountRecovery.Action.UsePhone,使用手機
 Authentication.AccountRecovery.Action.UsePhoneInstead,改為使用手機號碼
 Authentication.AccountRecovery.Action.UseUsernameEmailInstead,改為使用使用者名稱或電子郵件
-Authentication.AccountRecovery.Description.AccountSecuredConfirmation,你無法識別的變更已被移除。多增添一層防護，確保帳號安全。
+Authentication.AccountRecovery.Description.AccountSecuredConfirmation,所有變更均已移除。
 Authentication.AccountRecovery.Description.CannotRecoverAccount,基於安全考量，若要復原已啟用雙步驟驗證的帳號，需要使用第二種不同的驗證方式。此帳號沒有可用於安全復原的備用方式。請嘗試重新存取主要的雙步驟驗證方式，或使用備份碼以略過雙步驟驗證。
 Authentication.AccountRecovery.Description.ChooseAccount,請選擇要復原的帳號。
 Authentication.AccountRecovery.Description.CreateNewPassword,請建立一個與舊密碼不同的高強度密碼。
@@ -148,9 +148,9 @@ Authentication.AccountRecovery.Description.EnterEmailAddress,現在，請輸入�
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,現在，請輸入手機號碼、備份碼或其他電子郵件地址。這可以是你在 Roblox 上購買商品時使用的電子郵件
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,現在，請輸入與你的帳號綁定的手機號碼。
 Authentication.AccountRecovery.Description.EnterPhoneOrAnotherEmail,現在，請輸入手機號碼或其他電子郵件地址。這可以是你在 Roblox 上購買商品時使用的電子郵件。
-Authentication.AccountRecovery.Description.InvalidateCredentialInfo,我們發現你的帳號出現安全性變更，這項變更可能並非你所做，請查看並告訴我們這項變更是否由你所為。
-Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,我們發現你的帳號出現安全性變更，這些變更可能並非你所做，請查看並告訴我們這些變更是否由你所為。
-Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,如果保留無法識別的項目，其他人能可能登入我的帳號並導致我無法登入。此動作無法復原。
+Authentication.AccountRecovery.Description.InvalidateCredentialInfo,我們發現一項可能不是你執行的安全性變更。請移除你無法識別的變更
+Authentication.AccountRecovery.Description.InvalidateCredentialsIntro,我們發現一些可能不是你執行的安全性變更。請移除你無法識別的變更。
+Authentication.AccountRecovery.Description.InvalidateCredentialsWarning,保留無法識別的變更可能會造成帳號風險。變更移除後即無法復原。
 Authentication.AccountRecovery.Description.KeepTwoStepMethodDynamic,你已在帳號中啟用{twoStepMethod}。若仍可存取，請保留。下次登入時，我們會要求你使用。
 Authentication.AccountRecovery.Description.NoChangesMade,多增添一層防護，確保帳號安全。
 Authentication.AccountRecovery.Description.PhoneCodeSent,如果此電話號碼已有 Roblox 帳號，你將收到驗證碼。請檢查簡訊或 WhatsApp。
@@ -164,7 +164,7 @@ Authentication.AccountRecovery.Description.TrustedLocationResetPasswordSkip2SV,{
 Authentication.AccountRecovery.Description.TrustedLocationSkip2SV,{username}，你好：你正在從信任的位置存取帳號。你可以略過雙步驟驗證並完成復原。
 Authentication.AccountRecovery.Description.UpdateEmailConfirmation,我們注意到您使用其他電子郵件地址來復原帳號。我們會將您的電子郵件地址更新為：{email}
 Authentication.AccountRecovery.Description.VerifyAgain,在恢復啟用雙步驟驗證的帳號前，請先驗證身分。按下「繼續」，即可再次觸發雙步驟驗證。
-Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,你的帳號已安全無虞！
+Authentication.AccountRecovery.Heading.AccountSecuredConfirmation,你的帳號已安全無虞
 Authentication.AccountRecovery.Heading.BackupCodesGenerated,已產生備份碼
 Authentication.AccountRecovery.Heading.BillingEmailAdded,已新增帳務電子郵件
 Authentication.AccountRecovery.Heading.CannotRecoverAccount,我們無法復原你的帳號
@@ -174,8 +174,8 @@ Authentication.AccountRecovery.Heading.EnhancedProtectionPostRecoveryPasskey,這
 Authentication.AccountRecovery.Heading.EnhancedProtectionProgramPostRecoveryNoPasskey,由於此裝置不支援密碼金鑰，因此你可能會遇到行為受限的情況
 Authentication.AccountRecovery.Heading.EnrolledInEnhancedProtection,已加入升級版防護計畫
 Authentication.AccountRecovery.Heading.EnterSecondMethod,輸入第二種驗證方式
-Authentication.AccountRecovery.Heading.InvalidateCredential,是否認得此變更？
-Authentication.AccountRecovery.Heading.InvalidateCredentials,是否認得這些變更？
+Authentication.AccountRecovery.Heading.InvalidateCredential,帳號變更
+Authentication.AccountRecovery.Heading.InvalidateCredentials,
 Authentication.AccountRecovery.Heading.NoChangesMade,未進行任何變更
 Authentication.AccountRecovery.Heading.PasskeyAdded,已新增密碼金鑰
 Authentication.AccountRecovery.Heading.PhoneNumberAdded,已新增手機號碼
@@ -1630,6 +1630,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,更新現有外觀
 Feature.Avatar.Action.UpdateMakeupLook,更新外觀
 Feature.Avatar.Action.Zoom,縮放
 Feature.Avatar.AvatarWidgetTitle,探索造型
+Feature.Avatar.BackgroundGeneration.Error.Moderation,該提示不符合我們的準則。請嘗試描述其他內容。
+Feature.Avatar.BackgroundGeneration.Error.System,生成背景時發生錯誤，請再試一次。
+Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述你的背景…
+Feature.Avatar.BackgroundGeneration.Status.Generating,正在生成你的背景…
+Feature.Avatar.BackgroundGeneration.Status.Preparing,正在準備你的背景…
+Feature.Avatar.BackgroundGeneration.Title,建立背景
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,無法針對這個身體造型進行調整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,預設為原始膚色
@@ -1637,6 +1643,7 @@ Feature.Avatar.ColorAdjustmentPage.Title,膚色
 Feature.Avatar.ComposerPosting,
 Feature.Avatar.Description.MakeupIntroFtux,自由搭配組合妝容，玩出專屬個性造型。
 Feature.Avatar.EmoteAlreadyAssigned,此動作已在欄位裡
+Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,找尋靈感
@@ -2101,7 +2108,135 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,要封鎖 {DisplayName} 嗎？
 Feature.BlockingModal.Message.BlockConfirmation,封鎖此使用者，系統會一併將對方從「聯絡對象」或「追蹤者」名單移除。移除後將無法向您傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,若封鎖此使用者，系統會一併將其從「好友」或「追蹤者」名單移除，對方將無法向你傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
-Feature.BuyRobux.Heading.Banner,購買 Robux
+Feature.Build.Action.AddFriends,
+Feature.Build.Action.AddPlaytester,新增遊戲測試員
+Feature.Build.Action.AddPlaytesters,
+Feature.Build.Action.AddToPlaytest,新增至試玩
+Feature.Build.Action.Archive,封存
+Feature.Build.Action.ArchiveGame,封存遊戲
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,購買
+Feature.Build.Action.BuyRobux,購買 Robux
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,複製文字
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,隱藏自動儲存
+Feature.Build.Action.ManageLimit,管理上限
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,通知我
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,開啟設定
+Feature.Build.Action.Playtest,試玩
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,發佈
+Feature.Build.Action.PublishLatest,發佈最新版本
+Feature.Build.Action.Restore,復原
+Feature.Build.Action.SetDailyLimit,設定每日上限
+Feature.Build.Action.SetLimit,設定上限
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,分享連結
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,更新分級
+Feature.Build.Action.UpdateWithChanges,更新變更
+Feature.Build.Action.View,
+Feature.Build.Action.ViewUsage,查看使用量
+Feature.Build.Content.NewGame,新遊戲
+Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
+Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
+Feature.Build.Description.BuildIdeaGame,將想法化為遊戲
+Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
+Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
+Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
+Feature.Build.Description.ChoosePlaytesters,選擇好友協助你試玩。
+Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
+Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
+Feature.Build.Description.HubSettings,在創作者中心管理所有設定
+Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
+Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
+Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
+Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
+Feature.Build.Description.PlaytesterAccess,新增好友為遊戲測試員，或變更遊戲的受眾設定，讓更多人玩。
+Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
+Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
+Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
+Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
+Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
+Feature.Build.Header.AccessSharing,存取權與分享
+Feature.Build.Header.ContentMaturity,成年適宜內容
+Feature.Build.Header.CustomAnswer,自訂答案
+Feature.Build.Header.GameDetails,遊戲詳情
+Feature.Build.Header.Overview,概覽
+Feature.Build.Label.Access,存取權
+Feature.Build.Label.AdditionalUsage,額外組建使用量
+Feature.Build.Label.Available,可供使用
+Feature.Build.Label.BackToBuild,返回建立
+Feature.Build.Label.CaptureLibrary,截圖資料庫
+Feature.Build.Label.ContentRating,內容分級
+Feature.Build.Label.CreatorHub,創作者中心
+Feature.Build.Label.DescribeIdea,描述想法
+Feature.Build.Label.Description,說明
+Feature.Build.Label.FreeBuildUsage,免費組建使用量
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
+Feature.Build.Label.IconThumbnails,圖示和縮圖
+Feature.Build.Label.Loading,
+Feature.Build.Label.NoLimit,無上限
+Feature.Build.Label.ResetsDaily,每日重置
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,搜尋遊戲
+Feature.Build.Label.SearchTasks,搜尋任務
+Feature.Build.Label.SelectOption,選擇一個選項
+Feature.Build.Label.ShareAddedFriends,與你新增的好友分享
+Feature.Build.Label.Title,標題
+Feature.Build.Label.TitleDescription,標題和說明
+Feature.Build.Label.Unknown,未知
+Feature.Build.Label.Version,
+Feature.Build.Label.VersionTitleDesc,版本標題和說明
+Feature.Build.Label.Video,
+Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
+Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
+Feature.Build.Message.AllFriendsAdded,你已將所有好友新增為遊戲測試員。
+Feature.Build.Message.AudienceIneligible,不符合向此受眾發佈的資格
+Feature.Build.Message.ExpandAudience,在創作者中心擴大你的受眾資格
+Feature.Build.Message.ExperiencesLoadFailed,無法載入體驗
+Feature.Build.Message.FriendsLoadFailed,無法載入好友，請再試一次。
+Feature.Build.Message.GamePublishFailed,無法發佈遊戲，請再試一次。
+Feature.Build.Message.InvitesLoadFailed,無法載入邀請
+Feature.Build.Message.LinkCopied,連結已複製到剪貼簿。
+Feature.Build.Message.NoFriendsToAdd,你沒有可新增的好友。請先在 Roblox 上尋找可交流的對象。
+Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
+Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
+Feature.Build.Message.QuestionnaireNeeded,此遊戲是在組建之外編輯的。請完成內容問卷以發佈。
+Feature.Build.Message.ReadyToPlay,你的遊戲已可在 Roblox 上遊玩！
+Feature.Build.Message.RestoreVersionFailed,無法還原此版本，請再試一次。
+Feature.Build.Message.SaveChangesFailed,無法儲存變更，請再試一次。
+Feature.Build.Message.ShareLinkFailed,無法建立分享連結，請再試一次。
+Feature.Build.Message.TryAgain,再試一次。
+Feature.Build.Message.TurnToPortrait,將裝置切換為直放模式，以繼續進行遊戲。
+Feature.Build.Message.WhatToCreate,今天你想要建立什麼呢？
+Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
+Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
+Feature.Build.Title.Audience,受眾
+Feature.Build.Title.BuildUnavailable,無法使用組建
+Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
+Feature.Build.Title.Content,內容
+Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
+Feature.Build.Title.ExperienceAudience,體驗受眾
+Feature.Build.Title.FreeUsageReached,已達到免費組建使用量上限
+Feature.Build.Title.FriendsOnlyPlay,只有好友可以遊玩
+Feature.Build.Title.GameCreationDone,已完成遊戲創作
+Feature.Build.Title.GamePrivate,此遊戲僅限私人存取
+Feature.Build.Title.GenericError,
+Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
+Feature.Build.Title.Playtesters,遊戲測試員
+Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
+Feature.Build.Title.PushNotifications,推播通知
+Feature.Build.Title.Tasks,任務
+Feature.Build.Title.VersionHistory,版本歷史紀錄
+Feature.Build.Title.VersionInformation,版本資訊
+Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,不，謝了
 Feature.Captures.Action.Share,
@@ -2112,7 +2247,7 @@ Feature.Captures.Title.AllowPhotoAccessInfo,允許存取相片
 Feature.Captures.Title.ShareCapturePrompt,分享截圖
 Feature.Captures.Toast.CaptureSaved,已儲存截圖
 Feature.Captures.Toast.CaptureSavedToDevice,儲存到裝置
-Feature.Catalog.Action.Buy,購買
+Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,前往「自訂」頁面
 Feature.Catalog.Action.Checkout.ManageInCustomize,在「自訂」頁面中管理
@@ -2171,7 +2306,7 @@ Feature.Catalog.Heading.ItemInfo,道具資訊
 Feature.Catalog.Heading.ItemRemoved,道具已移除
 Feature.Catalog.Heading.ItemsOnSale,上架道具
 Feature.Catalog.Heading.NotForSale,非賣品
-Feature.Catalog.Heading.Overview,概覽
+Feature.Catalog.Heading.Overview,
 Feature.Catalog.Heading.PremiumOnly,僅限 Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,已達創作者上限
 Feature.Catalog.Heading.QuickMenu,快速選單
@@ -2541,7 +2676,7 @@ Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} 邀請你加入�
 Feature.Chat.Heading.YouWereInvitedToGroup,你已受邀加入群組
 Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
-Feature.Chat.Label.Available,可供使用
+Feature.Chat.Label.Available,
 Feature.Chat.Label.Blocked,已封鎖
 Feature.Chat.Label.ByBuilder,創作者：{USERNAME}
 Feature.Chat.Label.ChatDetails,聊天室資料
@@ -2787,7 +2922,7 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,若要加入此體驗，您需要家長許可。
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,請詢問您的家長
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,你必須取得家長許可才能加入此遊戲。
-Feature.ExperienceDetails.Body.DescriptionTitle,說明
+Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,注意事項
 Feature.ExperienceDetails.Body.StatsInfoTitle,統計資料與資訊
 Feature.ExperienceDetails.Label.NotPlayable,無法遊玩
@@ -3057,6 +3192,7 @@ Feature.Friends.TrustedFriend.Toast.TrustedFriendRemoved,信任的好友已移�
 Feature.Friends.TrustedFriend.Toast.TrustedFriendRequestSent,已傳送信任的好友邀請
 Feature.FriendsActivityFeed.Label.ScreenTitleNoUsername,近期活動
 Feature.FriendsActivityFeed.Label.ScreenTitleWithUsername,{username} 的近期活動
+Feature.FriendsActivityFeed.Label.ViewRecentActivity,檢視近期活動
 Feature.FriendsActivityFeed.Timestamp.DaysAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.HoursAbbreviatedPlural,
 Feature.FriendsActivityFeed.Timestamp.MinutesAbbreviatedPlural,{num_minutes} 分鐘
@@ -3082,7 +3218,7 @@ Feature.GameDetails.Action.NotInterested,沒有興趣
 Feature.GameDetails.Action.Refund,請求退款
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,檢舉廣告
-Feature.GameDetails.Action.Undo,復原
+Feature.GameDetails.Action.Undo,
 Feature.GameDetails.Action.Unlock,
 Feature.GameDetails.Action.WhyThisAd,為何會顯示這則廣告
 Feature.GameDetails.Heading.FeaturedSongs,在{experienceName}的熱門歌曲
@@ -3095,7 +3231,7 @@ Feature.GameDetails.Label.Camera,攝影機
 Feature.GameDetails.Label.ChatFeatures,聊天功能
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,含有激烈措辭
-Feature.GameDetails.Label.ContentMaturity,成年適宜內容
+Feature.GameDetails.Label.ContentMaturity,
 Feature.GameDetails.Label.Created,創作時間
 Feature.GameDetails.Label.Developer,開發者
 Feature.GameDetails.Label.DontLikeGame,不喜歡這個遊戲
@@ -4297,7 +4433,7 @@ Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,開啟設定
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. 選擇「權限」
 2. 選擇「聯絡人」
 3. 允許 Roblox 存取您的聯絡人"
@@ -4417,7 +4553,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,確定要從群組中移除此人嗎？
 Feature.Squads.Description.RemoveFromParty,{displayName} 將從群組聊天中移除。
 Feature.Squads.Description.ScheduledPartyAlreadyExists,已有其他隊伍安排於所選時段
-Feature.Squads.Description.Title,標題
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,您已新增 {username} 和其他 {userCountMinusOne} 人到群組中
 Feature.Squads.Description.YouAddedToChat,您已新增 {username} 到群組中
@@ -4629,7 +4765,7 @@ Feature.VirtualEvents.Label.NewFeature,
 Feature.VirtualEvents.Label.NewLocation,新地點
 Feature.VirtualEvents.Label.NewMap,新地圖
 Feature.VirtualEvents.Label.NewSeason,新賽季
-Feature.VirtualEvents.Label.Quest,任務
+Feature.VirtualEvents.Label.Quest,
 Feature.VirtualEvents.Label.Rating,
 Feature.VirtualEvents.Label.ReminderSetForEventTime,「{eventName}」已設定提醒時間在 {eventTime}。
 Feature.VirtualEvents.Label.StartsInHours,{number} 小時後
@@ -4638,7 +4774,7 @@ Feature.VirtualEvents.Label.StartsInOneDay,1 天後
 Feature.VirtualEvents.Label.StartsInOneHour,1 小時後
 Feature.VirtualEvents.Label.StartsNow,立即開始
 Feature.VirtualEvents.NotNowButton,
-Feature.VirtualEvents.NotifyMe,通知我
+Feature.VirtualEvents.NotifyMe,
 Feature.VirtualEvents.ShareModalBody,複製下方活動連結即可邀請其他人參加活動或在聊天室分享活動。
 Feature.VirtualEvents.ShareModalCallToAction,分享到聊天室……
 Feature.VirtualEvents.ShareModalLinkCopy,
