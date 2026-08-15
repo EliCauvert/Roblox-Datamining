@@ -278,9 +278,7 @@ Authentication.CrossDevice.Label.QrCodeError,"QR 코드를 표시하는 데 문�
 Authentication.CrossDevice.Label.QrCodeLogin,QR 코드 로그인
 Authentication.CrossDevice.Label.QrHeader,옵션 1
 Authentication.CrossDevice.Label.QrInstructions,로그인 중인 기기의 카메라로 이 QR 코드를 스캔하세요.
-Authentication.CrossDevice.Label.QrTroubleshooting,문제가 발생했나요?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,컴퓨터나 휴대폰에서 <b>roblox.com/quest</b>로 이동해 이 코드를 입력하고 로그인을 완료하세요.
-Authentication.CrossDevice.Label.QuickSignInInstructions,QR 코드를 스캔하거나 로그인된 기기에서 <b>더 보기 > 빠른 로그인</b>으로 이동하여 코드를 입력하세요.
 Authentication.CrossDevice.Label.QuickSignInWarning,보안을 위해 새 기기에서 생성한 코드만 입력해 주세요.
 Authentication.CrossDevice.Label.SigninInstructionHeading,새로운 기기에서 {username} 계정으로 로그인하려면
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 새로운 기기에서 로그인 페이지를 엽니다.
@@ -2038,6 +2036,7 @@ Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,룩 복제
 Feature.Avatar.Title.EnhancedAvatarHeads,향상된 아바타 머리
+Feature.Avatar.Title.FindYourStyle,나만의 스타일 찾기
 Feature.Avatar.Title.GetOutfit,코스튬 획득
 Feature.Avatar.Title.LCSortPage,복장 정렬
 Feature.Avatar.Title.LCSortReset,기본값으로 재설정
@@ -2110,134 +2109,6 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} 님을 차단할까요?
 Feature.BlockingModal.Message.BlockConfirmation,"이 사용자를 차단하면 인맥 또는 팔로워 목록에서 삭제되며, 메시지, 요청, 초대 등을 나에게 보낼 수 없게 됩니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"이 사용자를 차단하면 친구 또는 팔로워 목록에서 삭제됩니다. 상대가 메시지나 요청, 초대 등을 내게 보낼 수 없습니다.<br /><br />차단한 사실은 상대에게 알려지지 않습니다."
-Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,플레이테스터 추가
-Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,플레이테스트에 추가
-Feature.Build.Action.Archive,보관
-Feature.Build.Action.ArchiveGame,게임 보관
-Feature.Build.Action.Build,
-Feature.Build.Action.Buy,구매하기
-Feature.Build.Action.BuyRobux,Robux 구매하기
-Feature.Build.Action.Cancel,
-Feature.Build.Action.CopyText,텍스트 복사
-Feature.Build.Action.Delete,
-Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
-Feature.Build.Action.ManageLimit,한도 관리
-Feature.Build.Action.Next,
-Feature.Build.Action.NotNow,
-Feature.Build.Action.NotifyMe,알림 받기
-Feature.Build.Action.OK,
-Feature.Build.Action.OpenSettings,설정 열기
-Feature.Build.Action.Playtest,플레이테스트
-Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,
-Feature.Build.Action.PublishLatest,최신 게시
-Feature.Build.Action.Restore,복원
-Feature.Build.Action.SetDailyLimit,일일 한도 설정
-Feature.Build.Action.SetLimit,한도 설정
-Feature.Build.Action.Settings,
-Feature.Build.Action.Share,
-Feature.Build.Action.ShareLink,링크 공유
-Feature.Build.Action.Submit,제출하기
-Feature.Build.Action.UpdateRating,등급 업데이트
-Feature.Build.Action.UpdateWithChanges,변경 사항으로 업데이트
-Feature.Build.Action.View,
-Feature.Build.Action.ViewUsage,사용량 보기
-Feature.Build.Content.NewGame,새 게임
-Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
-Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
-Feature.Build.Description.BuildIdeaGame,나만의 아이디어로 게임을 만들어 보세요
-Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알림을 받으세요.
-Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
-Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
-Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
-Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
-Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
-Feature.Build.Description.HubSettings,크리에이터 허브에서 모든 설정을 관리하세요
-Feature.Build.Description.MakeAudienceAvail,이 대상에게 체험을 제공하려면 게시하세요.
-Feature.Build.Description.ManageAppearance,게임이 다른 사람에게 표시되는 방식을 관리하세요.
-Feature.Build.Description.PlayAfterPublish,이 체험을 게시한 후 플레이할 수 있는 사람을 선택하세요.
-Feature.Build.Description.PlaytestLocked,첫 게임을 만든 후 플레이테스트를 시작할 수 있습니다.
-Feature.Build.Description.PlaytesterAccess,친구를 플레이테스터로 추가하거나 게임의 대상 설정을 변경하여 더 많은 사람이 플레이할 수 있도록 하세요.
-Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대상 설정을 변경하세요.
-Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
-Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
-Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
-Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
-Feature.Build.Header.AccessSharing,액세스 및 공유
-Feature.Build.Header.ContentMaturity,콘텐츠 수위
-Feature.Build.Header.CustomAnswer,사용자 정의 답변
-Feature.Build.Header.GameDetails,게임 세부 정보
-Feature.Build.Header.Overview,개요
-Feature.Build.Label.Access,액세스
-Feature.Build.Label.AdditionalUsage,추가 Build 사용량
-Feature.Build.Label.Available,이용 가능
-Feature.Build.Label.BackToBuild,빌드로 돌아가기
-Feature.Build.Label.CaptureLibrary,캡처 라이브러리
-Feature.Build.Label.ContentRating,콘텐츠 등급
-Feature.Build.Label.CreatorHub,크리에이터 허브
-Feature.Build.Label.DescribeIdea,아이디어 설명
-Feature.Build.Label.Description,설명
-Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
-Feature.Build.Label.Friends,
-Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
-Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
-Feature.Build.Label.Loading,
-Feature.Build.Label.NoLimit,한도 없음
-Feature.Build.Label.ResetsDaily,매일 재설정
-Feature.Build.Label.Search,
-Feature.Build.Label.SearchGames,게임 검색
-Feature.Build.Label.SearchTasks,작업 검색
-Feature.Build.Label.SelectOption,옵션 선택
-Feature.Build.Label.ShareAddedFriends,추가한 친구와 공유
-Feature.Build.Label.Title,제목
-Feature.Build.Label.TitleDescription,제목 및 설명
-Feature.Build.Label.Unknown,알 수 없음
-Feature.Build.Label.Version,
-Feature.Build.Label.VersionTitleDesc,버전 이름 및 설명
-Feature.Build.Label.Video,
-Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 요건을 충족하지 않습니다.
-Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
-Feature.Build.Message.AllFriendsAdded,모든 친구를 플레이테스터로 추가했습니다.
-Feature.Build.Message.AudienceIneligible,이 오디언스에 대한 자격 없음
-Feature.Build.Message.ExpandAudience,크리에이터 허브에서 오디언스 자격을 확대하세요
-Feature.Build.Message.ExperiencesLoadFailed,체험을 불러오지 못함
-Feature.Build.Message.FriendsLoadFailed,친구를 불러오지 못했습니다. 다시 시도해 보세요.
-Feature.Build.Message.GamePublishFailed,게임을 게시하지 못했습니다. 다시 시도하세요.
-Feature.Build.Message.InvitesLoadFailed,초대를 불러오지 못함
-Feature.Build.Message.LinkCopied,링크가 클립보드에 복사되었습니다.
-Feature.Build.Message.NoFriendsToAdd,아직 추가할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
-Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
-Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
-Feature.Build.Message.QuestionnaireNeeded,이 게임은 Build 외부에서 편집되었습니다. 게시하려면 콘텐츠 설문지를 작성해 주세요.
-Feature.Build.Message.ReadyToPlay,게임을 Roblox에서 플레이할 준비가 되었습니다!
-Feature.Build.Message.RestoreVersionFailed,이 버전을 복원하지 못했습니다. 다시 시도하세요.
-Feature.Build.Message.SaveChangesFailed,변경 사항을 저장하지 못했습니다. 다시 시도해 보세요.
-Feature.Build.Message.ShareLinkFailed,공유 링크를 생성하지 못했습니다. 다시 시도해 보세요.
-Feature.Build.Message.TryAgain,다시 시도하세요.
-Feature.Build.Message.TurnToPortrait,게임을 계속 진행하려면 기기를 세로 모드로 전환하세요.
-Feature.Build.Message.WhatToCreate,오늘 무엇을 만들어 보시겠어요?
-Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
-Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
-Feature.Build.Title.Audience,오디언스
-Feature.Build.Title.BuildUnavailable,Build를 이용할 수 없음
-Feature.Build.Title.ChatBuildUnavailable,Build를 이용할 수 없습니다.
-Feature.Build.Title.Content,콘텐츠
-Feature.Build.Title.DailyRobuxReached,일일 Robux 한도에 도달함
-Feature.Build.Title.ExperienceAudience,체험 오디언스
-Feature.Build.Title.FreeUsageReached,무료 Build 사용량 한도에 도달함
-Feature.Build.Title.FriendsOnlyPlay,친구만 플레이할 수 있습니다
-Feature.Build.Title.GameCreationDone,게임 제작 완료
-Feature.Build.Title.GamePrivate,비공개 게임입니다
-Feature.Build.Title.GenericError,오류 발생
-Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
-Feature.Build.Title.Playtesters,플레이테스터
-Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
-Feature.Build.Title.PushNotifications,푸시 알림
-Feature.Build.Title.Tasks,작업
-Feature.Build.Title.VersionHistory,버전 기록
-Feature.Build.Title.VersionInformation,버전 정보
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,아니요 안 할래요
@@ -2308,7 +2179,7 @@ Feature.Catalog.Heading.ItemInfo,아이템 정보
 Feature.Catalog.Heading.ItemRemoved,아이템 삭제 완료
 Feature.Catalog.Heading.ItemsOnSale,판매 중 아이템
 Feature.Catalog.Heading.NotForSale,구매 불가 아이템
-Feature.Catalog.Heading.Overview,
+Feature.Catalog.Heading.Overview,개요
 Feature.Catalog.Heading.PremiumOnly,Roblox Plus 멤버 전용
 Feature.Catalog.Heading.QuantityLimitReached,크리에이터가 설정해 둔 한도에 도달했습니다.
 Feature.Catalog.Heading.QuickMenu,퀵 메뉴
@@ -2679,7 +2550,7 @@ Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} 님이 나를 그
 Feature.Chat.Heading.YouWereInvitedToGroup,그룹에 참가하도록 초대되었습니다
 Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
-Feature.Chat.Label.Available,
+Feature.Chat.Label.Available,이용 가능
 Feature.Chat.Label.Blocked,차단됨
 Feature.Chat.Label.ByBuilder,개발자: {USERNAME}
 Feature.Chat.Label.ChatDetails,채팅 정보
@@ -2734,7 +2605,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1분
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1주
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}주
 Feature.Chat.Label.Unavailable,사용 불가
-Feature.Chat.Label.UnfilteredChat,필터링되지 않은 채팅
 Feature.Chat.Label.UnknownUser,알 수 없는 사용자
 Feature.Chat.Label.User,사용자
 Feature.Chat.Label.ViewProfile,프로필 보기
@@ -2925,7 +2795,7 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,이 체험에 참가하려면 보호자의 허락을 받아야 합니다
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,이 게임에 참가하려면 보호자의 허락이 필요합니다.
-Feature.ExperienceDetails.Body.DescriptionTitle,
+Feature.ExperienceDetails.Body.DescriptionTitle,설명
 Feature.ExperienceDetails.Body.NotesTitle,참고
 Feature.ExperienceDetails.Body.StatsInfoTitle,통계 및 정보
 Feature.ExperienceDetails.Label.NotPlayable,플레이할 수 없음
@@ -3234,7 +3104,7 @@ Feature.GameDetails.Label.Camera,카메라
 Feature.GameDetails.Label.ChatFeatures,채팅 기능
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,과격한 표현 포함
-Feature.GameDetails.Label.ContentMaturity,
+Feature.GameDetails.Label.ContentMaturity,콘텐츠 수위
 Feature.GameDetails.Label.Created,개발 완료일
 Feature.GameDetails.Label.Developer,개발자
 Feature.GameDetails.Label.DontLikeGame,게임이 마음에 들지 않음
@@ -3585,7 +3455,7 @@ Feature.Moments.Description.TooManyUploads,오늘 업로드한 동영상이 너�
 Feature.Moments.Disclaimer.EveryoneMoments,모멘트에 참여하는 모든 사람이 게시된 내용을 볼 수 있습니다
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}에 참가하려고 시도 중입니다. 몇 초 정도 걸릴 수 있습니다.
-Feature.Moments.Label.CaptureLibrary,
+Feature.Moments.Label.CaptureLibrary,캡처 라이브러리
 Feature.Moments.Label.DeleteMomentBody,모멘트가 삭제되면 복구할 수 없습니다.
 Feature.Moments.Label.DeleteMomentTitle,모멘트를 삭제할까요?
 Feature.Moments.Label.Error,
@@ -3610,7 +3480,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,지금은 모두 확인했습니다
 Feature.Moments.Label.Photos,사진
-Feature.Moments.Label.PostDeleted,모멘트 삭제됨
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
 Feature.Moments.Label.PublishingRodeoBody,오래 걸리지 않을 겁니다.
 Feature.Moments.Label.Reactions,반응
@@ -3629,7 +3498,7 @@ Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했�
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
-Feature.Moments.Title.MomentRemoved,
+Feature.Moments.Title.MomentRemoved,모멘트 삭제됨
 Feature.Moments.Title.ReportPost,게시물 신고
 Feature.MusicPlayer.Action.GoToSongDetails,'노래 세부 정보'로 이동
 Feature.MusicPlayer.Action.Report,리포트
@@ -4347,7 +4216,7 @@ Feature.Schools.Description.InviteFriendsExclusiveItem,다른 사람을 초대�
 Feature.Schools.Description.InviteFriendsUnlockSooner,학교 동문 그룹을 더 빨리 시작할 수 있게 도움을 주세요.
 Feature.Schools.Description.InviteOthersToVerify,다른 사람을 초대해서 인증하세요
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,인증된 동문이 더 필요합니다
-Feature.Schools.Description.NotAvailableInRegion,현재 계신 지역에서는 아직 학교 기능을 이용할 수 없습니다.
+Feature.Schools.Description.NotAvailableInRegion,아직 이용할 수 없는 학교 기능입니다.
 Feature.Schools.Description.RemoveSchoolBody,학교에 다시 가입하려면 학교 이메일 주소를 재확인해야 합니다. 지금까지 받은 보상 아이템은 전부 삭제됩니다.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.UpsellDisclaimer,학교는 같은 학교 출신인 사람들에게만 표시됩니다. 언제든지 학교를 변경하거나 삭제할 수 있습니다.
@@ -4437,7 +4306,7 @@ Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Action.OpenSettings,설정 열기
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. '권한'을 선택합니다
 2. '연락처'를 선택합니다
 3. Roblox의 연락처 접근 권한을 허용합니다"
@@ -4557,7 +4426,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,이 사람을 그룹에서 정말 삭제할까요?
 Feature.Squads.Description.RemoveFromParty,그룹 채팅에서 {displayName} 님이 제거됩니다.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,선택한 시간에 이미 파티가 예정되어 있습니다
-Feature.Squads.Description.Title,
+Feature.Squads.Description.Title,제목
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,{username} 님 및 {userCountMinusOne}명을 그룹에 추가했습니다
 Feature.Squads.Description.YouAddedToChat,{username} 님을 그룹에 추가했습니다
@@ -4778,13 +4647,13 @@ Feature.VirtualEvents.Label.StartsInOneDay,1일 후
 Feature.VirtualEvents.Label.StartsInOneHour,1시간 후
 Feature.VirtualEvents.Label.StartsNow,지금 시작
 Feature.VirtualEvents.NotNowButton,
-Feature.VirtualEvents.NotifyMe,
+Feature.VirtualEvents.NotifyMe,알림 받기
 Feature.VirtualEvents.ShareModalBody,아래의 이벤트 링크를 복사해 다른 사람을 이벤트에 초대하거나 채팅방에서 이벤트를 공유하세요.
 Feature.VirtualEvents.ShareModalCallToAction,채팅을 통해 공유...
 Feature.VirtualEvents.ShareModalLinkCopy,
 Feature.VirtualEvents.ShareModalTitle,이 이벤트 공유
 Feature.VirtualEvents.UnfollowEvent,이벤트 언팔로우
-Features.Transfers.Action.BuyRobux,
+Features.Transfers.Action.BuyRobux,구매하기
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
 Features.Transfers.Action.TurnOnTwoStepVerification,2단계 인증 켜기
@@ -4929,7 +4798,7 @@ IAPExperience.PurchasePrompt.Title.BuyItemV2,
 IAPExperience.PurchasePrompt.Title.BuyItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItem,Robux 및 아이템 구매
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,
-IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
+IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,Robux 구매하기
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,
 IAPExperience.PurchaseSuccess.Action.BackToGame,게임으로 돌아가기
 IAPExperience.PurchaseSuccess.Action.BackToShop,

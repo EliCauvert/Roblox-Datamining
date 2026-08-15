@@ -278,9 +278,7 @@ Authentication.CrossDevice.Label.QrCodeError,"We are having problems displaying 
 Authentication.CrossDevice.Label.QrCodeLogin,QR Code Log In
 Authentication.CrossDevice.Label.QrHeader,Option 1
 Authentication.CrossDevice.Label.QrInstructions,Scan this QR code from your logged in device's camera.
-Authentication.CrossDevice.Label.QrTroubleshooting,Having trouble?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Go to <b>roblox.com/quest</b> on your computer or phone to enter this code and complete login.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Scan the QR code or on your signed in device, go to <b>More > Quick sign in</b> and enter the code."
 Authentication.CrossDevice.Label.QuickSignInWarning,"For your security, only enter codes you generated from your new device."
 Authentication.CrossDevice.Label.SigninInstructionHeading,To sign in as {username} on a new device:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. On your new device, open the login page"
@@ -2044,6 +2042,7 @@ Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplicate Look
 Feature.Avatar.Title.EnhancedAvatarHeads,Enhanced Avatar Heads
+Feature.Avatar.Title.FindYourStyle,Find Your Style
 Feature.Avatar.Title.GetOutfit,Get Outfit
 Feature.Avatar.Title.LCSortPage,Clothing Sorting
 Feature.Avatar.Title.LCSortReset,Reset to Default
@@ -2116,135 +2115,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Block {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Blocking this user will remove them as a Connection or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Blocking this user will remove them as a friend or follower. They won't be able to send messages, requests or invites to you.<br /><br />They won't be notified that you blocked them."
-Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,Add playtester
-Feature.Build.Action.AddPlaytesters,Add playtesters
-Feature.Build.Action.AddToPlaytest,Add to playtest
-Feature.Build.Action.Archive,Archive
-Feature.Build.Action.ArchiveGame,Archive game
-Feature.Build.Action.Build,
-Feature.Build.Action.Buy,Buy
-Feature.Build.Action.BuyRobux,Buy Robux
-Feature.Build.Action.Cancel,
-Feature.Build.Action.CopyText,Copy text
-Feature.Build.Action.Delete,
-Feature.Build.Action.HideAutosaved,Hide autosaved
-Feature.Build.Action.ManageLimit,Manage limit
-Feature.Build.Action.Next,
-Feature.Build.Action.NotNow,Not now
-Feature.Build.Action.NotifyMe,Notify me
-Feature.Build.Action.OK,
-Feature.Build.Action.OpenSettings,Open settings
-Feature.Build.Action.Playtest,Playtest
-Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publish
-Feature.Build.Action.PublishLatest,Publish latest
-Feature.Build.Action.Restore,Restore
-Feature.Build.Action.SetDailyLimit,Set a daily limit
-Feature.Build.Action.SetLimit,Set limit
-Feature.Build.Action.Settings,
-Feature.Build.Action.Share,
-Feature.Build.Action.ShareLink,Share link
-Feature.Build.Action.Submit,
-Feature.Build.Action.UpdateRating,Update rating
-Feature.Build.Action.UpdateWithChanges,Update with changes
-Feature.Build.Action.View,
-Feature.Build.Action.ViewUsage,View usage
-Feature.Build.Content.NewGame,New game
-Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
-Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
-Feature.Build.Description.BuildIdeaGame,Turn your ideas into a game
-Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply for you.
-Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
-Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
-Feature.Build.Description.ChoosePlaytesters,Choose friends to help you playtest.
-Feature.Build.Description.EnableBuildNotifs,Turn on notifications in your device settings to get updates from Build.
-Feature.Build.Description.FriendsLinkOnly,Only your friends can access this link. Change your game's Audience setting if you want more people to play.
-Feature.Build.Description.HubSettings,Manage all settings on Creator Hub
-Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
-Feature.Build.Description.ManageAppearance,Manage how your game appears to others.
-Feature.Build.Description.PlayAfterPublish,Choose who can play after you publish this experience.
-Feature.Build.Description.PlaytestLocked,You can start playtesting after you create your first game.
-Feature.Build.Description.PlaytesterAccess,Add friends as playtesters or change your game's Audience setting to let more people play.
-Feature.Build.Description.PrivateShare,Change your game's Audience setting to share it.
-Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
-Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
-Feature.Build.Description.RestoreLatest,This version will become your latest published version.
-Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
-Feature.Build.Header.AccessSharing,Access & sharing
-Feature.Build.Header.ContentMaturity,Content maturity
-Feature.Build.Header.CustomAnswer,Custom answer
-Feature.Build.Header.GameDetails,Game details
-Feature.Build.Header.Overview,Overview
-Feature.Build.Label.Access,Access
-Feature.Build.Label.AdditionalUsage,Additional Build usage
-Feature.Build.Label.Available,available
-Feature.Build.Label.BackToBuild,Back to Build
-Feature.Build.Label.CaptureLibrary,Capture library
-Feature.Build.Label.ContentRating,Content rating
-Feature.Build.Label.CreatorHub,Creator Hub
-Feature.Build.Label.DescribeIdea,Describe an idea
-Feature.Build.Label.Description,Description
-Feature.Build.Label.FreeBuildUsage,Free Build usage
-Feature.Build.Label.Friends,
-Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
-Feature.Build.Label.IconThumbnails,Icon & thumbnails
-Feature.Build.Label.Loading,
-Feature.Build.Label.NoLimit,No limit
-Feature.Build.Label.ResetsDaily,Resets daily
-Feature.Build.Label.Search,
-Feature.Build.Label.SearchGames,Search games
-Feature.Build.Label.SearchTasks,Search tasks
-Feature.Build.Label.SelectOption,Select an option
-Feature.Build.Label.ShareAddedFriends,Share with friends you added
-Feature.Build.Label.Title,Title
-Feature.Build.Label.TitleDescription,Title & description
-Feature.Build.Label.Unknown,Unknown
-Feature.Build.Label.Version,
-Feature.Build.Label.VersionTitleDesc,Version title & description
-Feature.Build.Label.Video,
-Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
-Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
-Feature.Build.Message.AllFriendsAdded,You've added all your friends as playtesters.
-Feature.Build.Message.AudienceIneligible,Not eligible for this audience
-Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
-Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
-Feature.Build.Message.FriendsLoadFailed,Couldn't load friends. Try again.
-Feature.Build.Message.GamePublishFailed,Your game couldn't be published. Try again.
-Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
-Feature.Build.Message.LinkCopied,Link copied to clipboard.
-Feature.Build.Message.NoFriendsToAdd,You don't have any friends to add yet. Find people to connect with on Roblox first.
-Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
-Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
-Feature.Build.Message.QuestionnaireNeeded,This game was edited outside of Build. Complete the content questionnaire to publish.
-Feature.Build.Message.ReadyToPlay,Your game is ready to play on Roblox!
-Feature.Build.Message.RestoreVersionFailed,Couldn't restore this version. Try again.
-Feature.Build.Message.SaveChangesFailed,Couldn't save changes. Try again.
-Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
-Feature.Build.Message.TryAgain,Try again.
-Feature.Build.Message.TurnToPortrait,Turn your device to portrait mode to continue working on your game.
-Feature.Build.Message.WhatToCreate,What do you want to create today?
-Feature.Build.Title.AddFriendsToPlaytest,Add friends to help you playtest
-Feature.Build.Title.ArchiveThisGame,Archive this game?
-Feature.Build.Title.Audience,Audience
-Feature.Build.Title.BuildUnavailable,Build isn't available
-Feature.Build.Title.ChatBuildUnavailable,Build unavailable.
-Feature.Build.Title.Content,Content
-Feature.Build.Title.DailyRobuxReached,Daily Robux limit reached
-Feature.Build.Title.ExperienceAudience,Experience audience
-Feature.Build.Title.FreeUsageReached,Free Build usage limit reached
-Feature.Build.Title.FriendsOnlyPlay,Only friends can play
-Feature.Build.Title.GameCreationDone,Completed game creation
-Feature.Build.Title.GamePrivate,This game is private
-Feature.Build.Title.GenericError,
-Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
-Feature.Build.Title.Playtesters,Playtesters
-Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
-Feature.Build.Title.PushNotifications,Push notifications
-Feature.Build.Title.Tasks,Tasks
-Feature.Build.Title.VersionHistory,Version history
-Feature.Build.Title.VersionInformation,Version Information
-Feature.BuyRobux.Heading.Banner,
+Feature.BuyRobux.Heading.Banner,Buy Robux
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,No thanks
 Feature.Captures.Action.Share,
@@ -2255,7 +2126,7 @@ Feature.Captures.Title.AllowPhotoAccessInfo,Allow Access to Photos
 Feature.Captures.Title.ShareCapturePrompt,Share Capture
 Feature.Captures.Toast.CaptureSaved,Capture saved
 Feature.Captures.Toast.CaptureSavedToDevice,Saved to Device
-Feature.Catalog.Action.Buy,
+Feature.Catalog.Action.Buy,Buy
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Go to Customize
 Feature.Catalog.Action.Checkout.ManageInCustomize,Manage in Customize
@@ -2314,7 +2185,7 @@ Feature.Catalog.Heading.ItemInfo,Item Info
 Feature.Catalog.Heading.ItemRemoved,Item Removed
 Feature.Catalog.Heading.ItemsOnSale,Items On Sale
 Feature.Catalog.Heading.NotForSale,Not For Sale
-Feature.Catalog.Heading.Overview,
+Feature.Catalog.Heading.Overview,Overview
 Feature.Catalog.Heading.PremiumOnly,Roblox Plus Only
 Feature.Catalog.Heading.QuantityLimitReached,Creator Limit Reached
 Feature.Catalog.Heading.QuickMenu,Quick Menu
@@ -2739,7 +2610,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1m
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,Unfiltered chat
 Feature.Chat.Label.UnknownUser,unknown user
 Feature.Chat.Label.User,User
 Feature.Chat.Label.ViewProfile,View Profile
@@ -2930,7 +2800,7 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,You need parent permission to join this game.
-Feature.ExperienceDetails.Body.DescriptionTitle,
+Feature.ExperienceDetails.Body.DescriptionTitle,Description
 Feature.ExperienceDetails.Body.NotesTitle,Notes
 Feature.ExperienceDetails.Body.StatsInfoTitle,Stats & Info
 Feature.ExperienceDetails.Label.NotPlayable,Not Playable
@@ -3540,7 +3410,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,ADVISORY RATING: 16 YE
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,In-Game Purchases (Includes Random Items)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Users Interact
 Feature.Landing.Label.InvitedBy,Invited by {name}
-Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
+Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,Not now
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Turn on
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Help people who have your phone number add you as a friend on Roblox
 Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Turn on friend discovery
@@ -3614,7 +3484,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,You're all caught up for now
 Feature.Moments.Label.Photos,Photos
-Feature.Moments.Label.PostDeleted,Moment deleted
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
 Feature.Moments.Label.PublishingRodeoBody,This shouldn't take too long.
 Feature.Moments.Label.Reactions,Reactions
@@ -4568,7 +4437,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,Are you sure you want to remove this person from the group?
 Feature.Squads.Description.RemoveFromParty,{displayName} will be removed from the group chat.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,A Party is already scheduled for the selected time
-Feature.Squads.Description.Title,
+Feature.Squads.Description.Title,Title
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,You added {username} and {userCountMinusOne} others to the group
 Feature.Squads.Description.YouAddedToChat,You added {username} to the group
