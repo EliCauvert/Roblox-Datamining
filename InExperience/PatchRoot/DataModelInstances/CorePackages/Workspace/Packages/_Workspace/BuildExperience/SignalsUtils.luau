@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.SignalsUtils.SignalsUtils)
+﻿return require(script.Parent.Parent.Parent._Index.SignalsUtils.SignalsUtils)

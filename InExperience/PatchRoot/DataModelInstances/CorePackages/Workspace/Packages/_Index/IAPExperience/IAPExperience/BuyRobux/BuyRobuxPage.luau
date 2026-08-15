@@ -14,7 +14,7 @@ local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local withStyle = UIBloxModule.Core.Style.withStyle
 local useStyleMetadata = UIBloxModule.Core.Style.useStyleMetadata
-local colorMode = require(parent_2.Foundation).Enums.ColorMode
+local constants = UIBloxModule.App.Style.Constants
 local roactFitComponentsModule = require(parent_2.RoactFitComponents)
 local fitFrameHorizontal = roactFitComponentsModule.FitFrameHorizontal
 local fitTextLabel = roactFitComponentsModule.FitTextLabel
@@ -39,23 +39,23 @@ local list = {
 }
 local close = images["icons/navigation/close"]
 
-function name.init(p0) --[[ line: 82 ]]
+function name.init(p0) --[[ line: 81 ]]
 	-- upvalues: roactGamepadModule (ref), roactModule (ref), guiService (ref)
 	p0.state = { selectedPackage = nil, showMessageBanner = false }
 	p0.buttonRefs = roactGamepadModule.createRefCache()
 	p0.scrollingFrameRef = roactModule.createRef()
 	
-	function p0.getGamepadNextSelectionLeft(p1) --[[ line: 91 ]]
+	function p0.getGamepadNextSelectionLeft(p1) --[[ line: 90 ]]
 		-- upvalues: p0 (ref)
 		return if p1 > 1 then p0.buttonRefs[p1 - 1] else nil
 	end
 	
-	function p0.getGamepadNextSelectionRight(p2) --[[ line: 95 ]]
+	function p0.getGamepadNextSelectionRight(p2) --[[ line: 94 ]]
 		-- upvalues: p0 (ref)
 		return if p2 < #p0.buttonRefs then p0.buttonRefs[p2 + 1] else nil
 	end
 	
-	function p0.initSelectionChangedListener() --[[ line: 99 ]]
+	function p0.initSelectionChangedListener() --[[ line: 98 ]]
 		-- upvalues: p0 (ref), guiService (copy)
 		if p0.selectionListener ~= nil then
 			p0.selectionListener:Disconnect()
@@ -65,7 +65,7 @@ function name.init(p0) --[[ line: 82 ]]
 			p0.selectionListener:Disconnect()
 			p0.selectionListener = nil
 		end
-		p0.selectionListener = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 110 ]]
+		p0.selectionListener = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 109 ]]
 			-- upvalues: p0 (copy), guiService (copy)
 			if p0.state.selectedPackage == nil or guiService.SelectedCoreObject == nil or p0.state.selectedPackage ~= guiService.SelectedCoreObject then
 				p0:setState({ selectedPackage = guiService.SelectedCoreObject })
@@ -74,34 +74,34 @@ function name.init(p0) --[[ line: 82 ]]
 	end
 end
 
-function name.didMount(p3) --[[ line: 122 ]]
+function name.didMount(p3) --[[ line: 121 ]]
 	p3.initSelectionChangedListener()
 end
 
-function name.didUpdate(p4, p5, _) --[[ line: 126 ]]
+function name.didUpdate(p4, p5, _) --[[ line: 125 ]]
 	local props = p4.props
 	
 	if p5.hasNativePurchaseSucceeded ~= props.hasNativePurchaseSucceeded and props.hasNativePurchaseSucceeded then
 		p4:setState({ showMessageBanner = true })
-		task.delay(3, function() --[[ line: 132 ]]
+		task.delay(3, function() --[[ line: 131 ]]
 			-- upvalues: p4 (ref)
 			p4:setState({ showMessageBanner = false })
 		end)
 	end
 end
 
-function name.willUnmount(p6) --[[ line: 139 ]]
+function name.willUnmount(p6) --[[ line: 138 ]]
 	if p6.selectionListener ~= nil then
 		p6.selectionListener:Disconnect()
 		p6.selectionListener = nil
 	end
 end
 
-function name.getScale(p7) --[[ line: 147 ]]
+function name.getScale(p7) --[[ line: 146 ]]
 	return if p7.props.isConsoleSize then 1 else 0.65
 end
 
-function name.render(p8) --[[ line: 157 ]]
+function name.render(p8) --[[ line: 156 ]]
 	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref), withSelectionCursorProvider (ref)
 	return roactModule.createElement(multiTextLocalizerModule, {
 		keys = {
@@ -109,9 +109,9 @@ function name.render(p8) --[[ line: 157 ]]
 			BannerTitle = { key = "IAPExperience.BuyRobux.Banner.Title" },
 			SuccessfulMessage = { key = "IAPExperience.BuyRobux.Alert.SuccessfulMessage" }
 		},
-		render = function(p9) --[[ line: 170 ]]
+		render = function(p9) --[[ line: 169 ]]
 			-- upvalues: withSelectionCursorProvider (copy), p8 (ref)
-			return withSelectionCursorProvider(function(p10) --[[ line: 171 ]]
+			return withSelectionCursorProvider(function(p10) --[[ line: 170 ]]
 				-- upvalues: p8 (copy), p9 (ref)
 				return p8:renderWithLocale(p9, p10)
 			end)
@@ -119,7 +119,7 @@ function name.render(p8) --[[ line: 157 ]]
 	})
 end
 
-function name.movePackageToAttentionArea(p11, p12) --[[ line: 179 ]]
+function name.movePackageToAttentionArea(p11, p12) --[[ line: 178 ]]
 	-- upvalues: getEnableCompensatingScrollingFrameModule (ref)
 	if not getEnableCompensatingScrollingFrameModule() then return end
 	local current = p11.scrollingFrameRef.current
@@ -142,7 +142,7 @@ function name.movePackageToAttentionArea(p11, p12) --[[ line: 179 ]]
 	end
 end
 
-function name.reportScrollingFrameCompensationHappened(p13) --[[ line: 208 ]]
+function name.reportScrollingFrameCompensationHappened(p13) --[[ line: 207 ]]
 	-- upvalues: getUserInputEventDataModule (ref)
 	local props = p13.props
 	
@@ -153,12 +153,12 @@ function name.reportScrollingFrameCompensationHappened(p13) --[[ line: 208 ]]
 	end
 end
 
-function name.renderWithLocale(p14, p15, p16) --[[ line: 219 ]]
-	-- upvalues: withStyle (ref), roactModule (ref), robuxPackageModule (ref), list (ref), fFlagEnableLeftNavOnConsole (ref), fullscreenFrame (ref), roactGamepadModule (ref), colorMode (ref), imageSetButton (ref), close (ref), cursorKind (ref), animatorModule (ref), imageSetLabel (ref), block (ref), fitTextLabel (ref), fitFrameHorizontal (ref), goldrobux (ref), formatNumberModule (ref), localizationService (ref)
+function name.renderWithLocale(p14, p15, p16) --[[ line: 218 ]]
+	-- upvalues: withStyle (ref), roactModule (ref), robuxPackageModule (ref), list (ref), fFlagEnableLeftNavOnConsole (ref), fullscreenFrame (ref), roactGamepadModule (ref), constants (ref), imageSetButton (ref), close (ref), cursorKind (ref), animatorModule (ref), imageSetLabel (ref), block (ref), fitTextLabel (ref), fitFrameHorizontal (ref), goldrobux (ref), formatNumberModule (ref), localizationService (ref)
 	local props = p14.props
 	
-	return withStyle(function(p17) --[[ line: 222 ]]
-		-- upvalues: props (ref), p14 (ref), roactModule (copy), robuxPackageModule (copy), list (copy), fFlagEnableLeftNavOnConsole (copy), fullscreenFrame (copy), roactGamepadModule (copy), colorMode (copy), imageSetButton (copy), close (copy), p16 (ref), cursorKind (copy), animatorModule (copy), imageSetLabel (copy), block (copy), fitTextLabel (copy), p15 (ref), fitFrameHorizontal (copy), goldrobux (copy), formatNumberModule (copy), localizationService (copy)
+	return withStyle(function(p17) --[[ line: 221 ]]
+		-- upvalues: props (ref), p14 (ref), roactModule (copy), robuxPackageModule (copy), list (copy), fFlagEnableLeftNavOnConsole (copy), fullscreenFrame (copy), roactGamepadModule (copy), constants (copy), imageSetButton (copy), close (copy), p16 (ref), cursorKind (copy), animatorModule (copy), imageSetLabel (copy), block (copy), fitTextLabel (copy), p15 (ref), fitFrameHorizontal (copy), goldrobux (copy), formatNumberModule (copy), localizationService (copy)
 		local theme = p17.Theme
 		local font = p17.Font
 		local var17 = props.robuxPackages ~= nil
@@ -199,15 +199,15 @@ function name.renderWithLocale(p14, p15, p16) --[[ line: 219 ]]
 				forwardRef = p14.buttonRefs[i],
 				nextSelectionLeft = p14.getGamepadNextSelectionLeft(i),
 				nextSelectionRight = p14.getGamepadNextSelectionRight(i),
-				onActivated = function(p18) --[[ line: 272 ]]
+				onActivated = function(p18) --[[ line: 271 ]]
 					-- upvalues: props (copy)
 					props.robuxPackageActivated(p18)
 				end,
-				onSelect = function(p19) --[[ line: 275 ]]
+				onSelect = function(p19) --[[ line: 274 ]]
 					-- upvalues: p14 (copy)
 					p14:movePackageToAttentionArea(p19:getValue())
 				end,
-				onHover = function(p20, p21) --[[ line: 278 ]]
+				onHover = function(p20, p21) --[[ line: 277 ]]
 					-- upvalues: p14 (copy)
 					if p21 then
 						if p14.state.selectedPackage == p20:getValue() then
@@ -238,11 +238,11 @@ function name.renderWithLocale(p14, p15, p16) --[[ line: 219 ]]
 				BackgroundImage = roactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					ImageTransparency = 0,
-					Image = if props.themeName == colorMode.Dark then "rbxasset://textures/AvatarEditorImages/AvatarEditor.png" else "rbxasset://textures/AvatarEditorImages/AvatarEditor_LightTheme.png",
+					Image = if props.themeName == constants.ThemeName.Dark then "rbxasset://textures/AvatarEditorImages/AvatarEditor.png" else "rbxasset://textures/AvatarEditorImages/AvatarEditor_LightTheme.png",
 					Size = UDim2.new(1, 0, 1, 0)
 				}),
 				Backdrop = roactModule.createElement("Frame", {
-					BackgroundTransparency = if props.themeName == colorMode.Dark then 0.5 else 0.7,
+					BackgroundTransparency = if props.themeName == constants.ThemeName.Dark then 0.5 else 0.7,
 					BackgroundColor3 = Color3.new(0, 0, 0),
 					Size = UDim2.new(1, 0, 1, 0)
 				})
@@ -266,12 +266,12 @@ function name.renderWithLocale(p14, p15, p16) --[[ line: 219 ]]
 				ZIndex = 10,
 				shouldAnimate = props.shouldAnimate,
 				shouldShow = p14.state.showMessageBanner,
-				renderChildren = function() --[[ line: 343 ]]
-					-- upvalues: roactModule (copy), props (copy), colorMode (copy), p14 (copy), var19 (ref), imageSetLabel (copy), block (copy), theme (ref), fitTextLabel (copy), p15 (copy), font (ref)
+				renderChildren = function() --[[ line: 344 ]]
+					-- upvalues: roactModule (copy), props (copy), constants (copy), p14 (copy), var19 (ref), imageSetLabel (copy), block (copy), theme (ref), fitTextLabel (copy), p15 (copy), font (ref)
 					return roactModule.createElement("Frame", {
 						BackgroundTransparency = 0,
 						AnchorPoint = Vector2.new(0, 0),
-						BackgroundColor3 = if props.themeName == colorMode.Dark then Color3.fromRGB(17, 18, 20) else Color3.fromRGB(198, 203, 206),
+						BackgroundColor3 = if props.themeName == constants.ThemeName.Dark then Color3.fromRGB(17, 18, 20) else Color3.fromRGB(198, 203, 206),
 						Position = UDim2.fromOffset(48 * p14:getScale(), 40 * p14:getScale()),
 						Size = UDim2.new(1, -96 * p14:getScale(), 0, var19 * 2)
 					}, {
@@ -382,7 +382,7 @@ function name.renderWithLocale(p14, p15, p16) --[[ line: 219 ]]
 	end)
 end
 
-return function(p22) --[[ line: 497 ]]
+return function(p22) --[[ line: 498 ]]
 	-- upvalues: useStyleMetadata (ref), roactModule (ref), name (ref), cryoModule (ref)
 	return roactModule.createElement(name, cryoModule.Dictionary.join(p22, { themeName = useStyleMetadata().ThemeName }))
 end

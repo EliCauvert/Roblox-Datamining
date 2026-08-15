@@ -21,6 +21,7 @@ local thunkModule = require(purchasePrompt.Thunk)
 local _ = require(parent.AppCommonLib).Logging
 local loggingProtocolModule = require(parent.LoggingProtocol)
 local fFlagEnableUnifiedProductPurchaseFlow = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
+local fFlagEnableFetchCartPricingDuringInExperience = require(purchasePrompt.Parent.SharedFlags).FFlagEnableFetchCartPricingDuringInExperience
 local getUnifiedPurchaseFlowEligibilityModule = require(purchasePrompt.Network.getUnifiedPurchaseFlowEligibility)
 local fFlagRemoveAcountInfoFetchFromPurchaseModule = require(purchasePrompt.Flags.FFlagRemoveAcountInfoFetchFromPurchase)
 local resolveBundlePromptStateModule = require(script.Parent.resolveBundlePromptState)
@@ -28,7 +29,7 @@ local fetchCartPricingModule = require(script.Parent.fetchCartPricing)
 local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
 local fFlagPurchasePromptOfferMarginUpsellEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptOfferMarginUpsellEnabled)
 
-local function _(p0) --[[ line: 37 | named "maybeDispatchCartPricingFetch" ]]
+local function _(p0) --[[ line: 39 | named "maybeDispatchCartPricingFetch" ]]
 	-- upvalues: fFlagPurchasePromptCartPricingEnabledModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), fetchCartPricingModule (ref)
 	if fFlagPurchasePromptCartPricingEnabledModule and not fFlagPurchasePromptOfferMarginUpsellEnabledModule then
 		p0:dispatch(fetchCartPricingModule())
@@ -44,10 +45,10 @@ local fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal = require(purchasePrompt.
 local purchaseFlowUUIDTelemetryModule = require(purchasePrompt.Events.PurchaseFlowUUIDTelemetry)
 local list = { networkModule, externalSettingsModule }
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 64 | named "initiateBundlePurchase" ]]
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), hasPendingRequestModule (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), buildProductPayloadFromInitiateArgsModule (ref), setProductPayloadModule (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (ref), httpService (ref), setPurchaseFlowUUIDModule (ref), loggingProtocolModule (ref), purchaseFlowUUIDTelemetryModule (ref), requestBundlePurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), fetchCartPricingModule (ref), promiseModule (ref), getBundleDetailsModule (ref), fFlagRemoveAcountInfoFetchFromPurchaseModule (ref), playersService (ref), getAccountInfoModule (ref), getBalanceInfoModule (ref), getIsAlreadyOwnedModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), getUnifiedPurchaseFlowEligibilityModule (ref), getRobloxSubscriptionProducts (ref), var28 (ref), resolveBundlePromptStateModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getProductPurchasableDetailsModule (ref)
-	return thunkModule.new(script.Name, list, function(p9, p10) --[[ line: 74 ]]
-		-- upvalues: networkModule (copy), externalSettingsModule (copy), hasPendingRequestModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), p8 (ref), buildProductPayloadFromInitiateArgsModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), setProductPayloadModule (copy), fFlagEnablePurchaseFlowUUIDMigrationModule (copy), httpService (copy), setPurchaseFlowUUIDModule (copy), loggingProtocolModule (copy), purchaseFlowUUIDTelemetryModule (copy), requestBundlePurchaseModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), fFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), fetchCartPricingModule (copy), promiseModule (copy), getBundleDetailsModule (copy), fFlagRemoveAcountInfoFetchFromPurchaseModule (copy), playersService (copy), getAccountInfoModule (copy), getBalanceInfoModule (copy), getIsAlreadyOwnedModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), getUnifiedPurchaseFlowEligibilityModule (copy), getRobloxSubscriptionProducts (copy), var28 (copy), resolveBundlePromptStateModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), getProductPurchasableDetailsModule (copy)
+return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 66 | named "initiateBundlePurchase" ]]
+	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), hasPendingRequestModule (ref), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (ref), buildProductPayloadFromInitiateArgsModule (ref), setProductPayloadModule (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (ref), httpService (ref), setPurchaseFlowUUIDModule (ref), loggingProtocolModule (ref), purchaseFlowUUIDTelemetryModule (ref), requestBundlePurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), fFlagPurchasePromptOfferMarginUpsellEnabledModule (ref), fFlagEnableFetchCartPricingDuringInExperience (ref), fetchCartPricingModule (ref), promiseModule (ref), getBundleDetailsModule (ref), fFlagRemoveAcountInfoFetchFromPurchaseModule (ref), playersService (ref), getAccountInfoModule (ref), getBalanceInfoModule (ref), getIsAlreadyOwnedModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), getUnifiedPurchaseFlowEligibilityModule (ref), getRobloxSubscriptionProducts (ref), var28 (ref), resolveBundlePromptStateModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), getProductPurchasableDetailsModule (ref)
+	return thunkModule.new(script.Name, list, function(p9, p10) --[[ line: 76 ]]
+		-- upvalues: networkModule (copy), externalSettingsModule (copy), hasPendingRequestModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), p8 (ref), buildProductPayloadFromInitiateArgsModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), setProductPayloadModule (copy), fFlagEnablePurchaseFlowUUIDMigrationModule (copy), httpService (copy), setPurchaseFlowUUIDModule (copy), loggingProtocolModule (copy), purchaseFlowUUIDTelemetryModule (copy), requestBundlePurchaseModule (copy), errorOccurredModule (copy), purchaseErrorModule (copy), fFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), fFlagEnableFetchCartPricingDuringInExperience (copy), fetchCartPricingModule (copy), promiseModule (copy), getBundleDetailsModule (copy), fFlagRemoveAcountInfoFetchFromPurchaseModule (copy), playersService (copy), getAccountInfoModule (copy), getBalanceInfoModule (copy), getIsAlreadyOwnedModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), getUnifiedPurchaseFlowEligibilityModule (copy), getRobloxSubscriptionProducts (copy), var28 (copy), resolveBundlePromptStateModule (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), getProductPurchasableDetailsModule (copy)
 		local productPayload
 		local var31 = p10[networkModule]
 		local var32 = p10[externalSettingsModule]
@@ -106,18 +107,21 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 64 | named "initiateB
 			}
 		end
 		return promiseModule.all({
-			bundleDetails = if fFlagUnifiedPurchaseOptimizeTTIMarketplace and fetchProductInfo ~= nil and (not fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal or not p8) then fetchProductInfo() else getBundleDetailsModule(var31, p1, if fFlagRefreshPriceOnRetryAfterUpsellModule then t else nil),
+			bundleDetails = if fFlagUnifiedPurchaseOptimizeTTIMarketplace and fetchProductInfo ~= nil and (not fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal or not p8) then fetchProductInfo() else getBundleDetailsModule(var31, p1, if fFlagRefreshPriceOnRetryAfterUpsellModule then t else nil, if fFlagEnableFetchCartPricingDuringInExperience then if fFlagEnableFetchCartPricingDuringInExperience and not p9:getState().purchaseOptions.shouldFetchCartPricing and not p8 then function(p14) --[[ line: 186 ]]
+				-- upvalues: p9 (ref), fetchCartPricingModule (copy)
+				return p9:dispatch(fetchCartPricingModule(nil, p14))
+			end else nil else nil),
 			accountInfo = if fFlagRemoveAcountInfoFetchFromPurchaseModule then promiseModule.resolve({
 				isPremium = playersService.LocalPlayer.MembershipType == Enum.MembershipType.Premium
 			}) else getAccountInfoModule(var31, var32),
 			balanceInfo = getBalanceInfoModule(var31, var32, false, nil, if fFlagUnifiedPurchaseOptimizeTTIMarketplace then providedRobuxBalance else nil),
 			alreadyOwned = getIsAlreadyOwnedModule(var31, p1, Enum.InfoType.Bundle, if fFlagUnifiedPurchaseOptimizeTTIMarketplace then productPayload else nil),
 			isUserEligibleForUnifiedPurchaseFlow = if fFlagEnableUnifiedProductPurchaseFlow then getUnifiedPurchaseFlowEligibilityModule(var31) else nil,
-			robloxSubscriptionProducts = if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then getRobloxSubscriptionProducts(var31):catch(function() --[[ line: 204 ]]
+			robloxSubscriptionProducts = if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then getRobloxSubscriptionProducts(var31):catch(function() --[[ line: 224 ]]
 				return nil
 			end) else nil,
-			cartPricingResponse = if fFlagPurchasePromptOfferMarginUpsellEnabledModule then if fFlagPurchasePromptOfferMarginUpsellEnabledModule then p9:dispatch(fetchCartPricingModule()) else nil else nil
-		}):andThen(function(p12) --[[ line: 213 ]]
+			cartPricingResponse = if fFlagPurchasePromptOfferMarginUpsellEnabledModule then if fFlagPurchasePromptOfferMarginUpsellEnabledModule then if fFlagEnableFetchCartPricingDuringInExperience then if p9:getState().purchaseOptions.shouldFetchCartPricing then p9:dispatch(fetchCartPricingModule()) else nil else p9:dispatch(fetchCartPricingModule()) else nil else nil
+		}):andThen(function(p12) --[[ line: 233 ]]
 			-- upvalues: p7 (copy), fFlagRefreshPriceOnRetryAfterUpsellModule (copy), p8 (copy), var28 (copy), p9 (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), resolveBundlePromptStateModule (copy), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), fetchCartPricingModule (copy), getProductPurchasableDetailsModule (copy), var31 (ref), errorOccurredModule (copy), purchaseErrorModule (copy)
 			local var36 = p7
 			
@@ -139,7 +143,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 64 | named "initiateB
 					end
 					return
 				else
-					getProductPurchasableDetailsModule(var31, p12.bundleDetails.product.id):andThen(function(p13) --[[ line: 244 ]]
+					getProductPurchasableDetailsModule(var31, p12.bundleDetails.product.id):andThen(function(p13) --[[ line: 264 ]]
 						-- upvalues: p9 (copy), resolveBundlePromptStateModule (copy), p12 (ref), var36 (write), fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), fFlagPurchasePromptOfferMarginUpsellEnabledModule (copy), fetchCartPricingModule (copy)
 						p9:dispatch(resolveBundlePromptStateModule(p13, p12.bundleDetails, p12.accountInfo, p12.balanceInfo, var36, p12.alreadyOwned, p12.isUserEligibleForUnifiedPurchaseFlow, if fFlagEnableBlackbirdUpsellInUnifiedPurchaseModal then p12.robloxSubscriptionProducts else nil))
 						
@@ -151,7 +155,7 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 64 | named "initiateB
 			else
 				p9:dispatch(errorOccurredModule(purchaseErrorModule.NotForSale))
 			end
-		end):catch(function(p11) --[[ line: 266 ]]
+		end):catch(function(p11) --[[ line: 286 ]]
 			-- upvalues: p9 (ref), errorOccurredModule (copy)
 			p9:dispatch(errorOccurredModule(p11))
 		end)

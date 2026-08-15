@@ -3,50 +3,44 @@ local contentProviderService = game:GetService("ContentProvider")
 local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-local function _() --[[ line: 20 | named "getPurchaseRobuxUrl" ]]
+local function _() --[[ line: 16 | named "getPurchaseRobuxUrl" ]]
 	-- upvalues: contentProviderService (ref)
 	return string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:") .. "upgrades/robux?ctx=navpopover"
 end
 
-return function(p0, p1) --[[ line: 26 | named "useOpenBuyRobuxWebView" ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), reactModule (ref), appLifecycleObserverService (ref), contentProviderService (ref)
-	local var6 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
-		title = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
-	}) else nil).title else localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
-	local var7 = useOpenWebView()
-	local var8 = reactModule.useRef(false)
-	local var9 = reactModule.useCallback(function() --[[ line: 40 ]]
-		-- upvalues: var8 (ref), p0 (ref)
-		if not var8.current then return end
-		var8.current = false
+return function(p0, p1) --[[ line: 22 | named "useOpenBuyRobuxWebView" ]]
+	-- upvalues: useOpenWebView (ref), reactModule (ref), appLifecycleObserverService (ref), contentProviderService (ref), localizationStringsModule (ref)
+	local var5 = useOpenWebView()
+	local var6 = reactModule.useRef(false)
+	local var7 = reactModule.useCallback(function() --[[ line: 28 ]]
+		-- upvalues: var6 (ref), p0 (ref)
+		if not var6.current then return end
+		var6.current = false
 		
 		if p0 then
 			p0()
 		end
 	end, { p0 })
-	reactModule.useEffect(function() --[[ line: 50 ]]
-		-- upvalues: p0 (ref), p1 (ref), appLifecycleObserverService (copy), var9 (ref), var8 (ref)
+	reactModule.useEffect(function() --[[ line: 38 ]]
+		-- upvalues: p0 (ref), p1 (ref), appLifecycleObserverService (copy), var7 (ref), var6 (ref)
 		if p0 == nil then
-			return function() --[[ line: 52 ]] end
+			return function() --[[ line: 40 ]] end
 		end
-		local onUnhideConnection = (p1 or appLifecycleObserverService).OnUnhide:Connect(var9)
+		local onUnhideConnection = (p1 or appLifecycleObserverService).OnUnhide:Connect(var7)
 		
-		return function() --[[ line: 56 ]]
-			-- upvalues: var8 (copy), onUnhideConnection (ref)
-			var8.current = false
+		return function() --[[ line: 44 ]]
+			-- upvalues: var6 (copy), onUnhideConnection (ref)
+			var6.current = false
 			onUnhideConnection:Disconnect()
 		end
-	end, { p1, var9, p0 })
+	end, { p1, var7, p0 })
 	
-	return reactModule.useCallback(function() --[[ line: 62 ]]
-		-- upvalues: var8 (ref), p0 (ref), var7 (ref), contentProviderService (copy), var6 (ref), var9 (ref)
-		var8.current = p0 ~= nil
-		var7(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:") .. "upgrades/robux?ctx=navpopover", var6, if p0 ~= nil then nil else var9)
-	end, { var9, p0, var7, var6 })
+	return reactModule.useCallback(function() --[[ line: 50 ]]
+		-- upvalues: var6 (ref), p0 (ref), var5 (ref), contentProviderService (copy), localizationStringsModule (copy), var7 (ref)
+		var6.current = p0 ~= nil
+		var5(string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:") .. "upgrades/robux?ctx=navpopover", localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE, if p0 ~= nil then nil else var7)
+	end, { var7, p0, var5 })
 end

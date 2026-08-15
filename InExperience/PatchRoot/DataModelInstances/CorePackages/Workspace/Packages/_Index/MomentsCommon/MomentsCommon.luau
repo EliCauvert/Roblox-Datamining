@@ -2,12 +2,11 @@
 
 return {
 	Analytics = require(script.Analytics),
-	canRenderNativeMoments = function(p0) --[[ line: 97 ]]
+	canRenderNativeMoments = function(p0) --[[ line: 96 ]]
 		return p0.isTabEnabled or p0.isFlyoutEntryEnabled and p0.platformIntegrationEnabled
 	end,
 	Flags = {
 		ArgusExperiment = require(script.Flags.ArgusExperiment),
-		GetFFlagEnableMomentTextGeneration = require(script.Flags.GetFFlagEnableMomentTextGeneration),
 		GetFFlagMomentsAnalyticsProducerPrereqs = require(script.Flags.GetFFlagMomentsAnalyticsProducerPrereqs),
 		GetFFlagMomentsStickerButton = require(script.Flags.GetFFlagMomentsStickerButton),
 		GetFFlagMomentsAnalyticsSchemaIdentity = require(script.Flags.GetFFlagMomentsAnalyticsSchemaIdentity),
@@ -42,7 +41,7 @@ return {
 		useDeviceInsets = require(script.Hooks.useDeviceInsets),
 		useFormFactor = require(script.Hooks.useFormFactor),
 		useImageLoadingState = require(script.Hooks.useImageLoadingState),
-		useMomentsGating = function(...) --[[ line: 101 ]]
+		useMomentsGating = function(...) --[[ line: 100 ]]
 			return require(script.Hooks.useMomentsGating)(...)
 		end,
 		useScreenSize = require(script.Hooks.useScreenSize),

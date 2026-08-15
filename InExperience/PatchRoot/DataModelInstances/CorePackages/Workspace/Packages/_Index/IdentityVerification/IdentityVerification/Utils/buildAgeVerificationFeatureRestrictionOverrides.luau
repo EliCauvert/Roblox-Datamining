@@ -1,9 +1,7 @@
 ﻿local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("IdentityVerification").Parent
-local localization = require(parent.RobloxAppLocales).Localization
-local _ = require(parent.UniversalFeatureRestrictions)
+local localization = require(script:FindFirstAncestor("IdentityVerification").Parent.RobloxAppLocales).Localization
 
-return function() --[[ line: 24 | named "buildAgeVerificationFeatureRestrictionOverrides" ]]
+return function() --[[ line: 28 | named "buildAgeVerificationFeatureRestrictionOverrides" ]]
 	-- upvalues: localization (ref), localizationService (ref)
 	local var1 = localization.new(localizationService.RobloxLocaleId)
 	

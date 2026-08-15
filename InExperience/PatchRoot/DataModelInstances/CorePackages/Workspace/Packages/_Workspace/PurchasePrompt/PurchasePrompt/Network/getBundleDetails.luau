@@ -1,15 +1,17 @@
 ﻿local parent = script.Parent.Parent
 local purchaseErrorModule = require(parent.Enums.PurchaseError)
 local promiseModule = require(parent.Promise)
+local _ = require(parent.Parent.LuauPolyfill)
 local fFlagRefreshPriceOnRetryAfterUpsellModule = require(parent.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 local fFlagEnableDiscountInfoInUnifiedPurchaseModal = require(parent.Parent.SharedFlags).FFlagEnableDiscountInfoInUnifiedPurchaseModal
+local fFlagEnableFetchCartPricingDuringInExperience = require(parent.Parent.SharedFlags).FFlagEnableFetchCartPricingDuringInExperience
 local getCatalogItemDetailsModule = require(parent.Network.getCatalogItemDetails)
 local getResellersModule = require(parent.Network.getResellers)
 local resolveRefreshedExpectedPriceModule = require(parent.Utils.resolveRefreshedExpectedPrice)
 local fFlagFixTimedOptionRefreshModule = require(parent.Flags.FFlagFixTimedOptionRefresh)
 local resolveRefreshedProductInfoModule = require(parent.Utils.resolveRefreshedProductInfo)
 
-local function convertDiscountInfoToPriceDiscountDetails(p0) --[[ line: 21 ]]
+local function convertDiscountInfoToPriceDiscountDetails(p0) --[[ line: 28 ]]
 	if not p0 or type(p0.discounts) ~= "table" then
 		return nil
 	end
@@ -25,7 +27,7 @@ local function convertDiscountInfoToPriceDiscountDetails(p0) --[[ line: 21 ]]
 	return t
 end
 
-local function normalizeBundleFields(p1) --[[ line: 36 ]]
+local function normalizeBundleFields(p1) --[[ line: 43 ]]
 	-- upvalues: fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), convertDiscountInfoToPriceDiscountDetails (ref)
 	if not fFlagEnableDiscountInfoInUnifiedPurchaseModal then
 		return p1
@@ -39,12 +41,18 @@ local function normalizeBundleFields(p1) --[[ line: 36 ]]
 	return p1
 end
 
-return function(p2, p3, p4) --[[ line: 57 | named "getBundleDetails" ]]
-	-- upvalues: promiseModule (ref), normalizeBundleFields (ref), purchaseErrorModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetailsModule (ref), getResellersModule (ref), fFlagFixTimedOptionRefreshModule (ref), resolveRefreshedProductInfoModule (ref), resolveRefreshedExpectedPriceModule (ref)
-	local var11 = p2.getBundleDetails(p3):andThen(function(p5) --[[ line: 60 ]]
-		-- upvalues: promiseModule (copy), normalizeBundleFields (copy)
-		return promiseModule.resolve(normalizeBundleFields(p5))
-	end):catch(function(_) --[[ line: 63 ]]
+return function(p2, p3, p4, p5) --[[ line: 64 | named "getBundleDetails" ]]
+	-- upvalues: fFlagEnableFetchCartPricingDuringInExperience (ref), normalizeBundleFields (ref), promiseModule (ref), purchaseErrorModule (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetailsModule (ref), getResellersModule (ref), fFlagFixTimedOptionRefreshModule (ref), resolveRefreshedProductInfoModule (ref), resolveRefreshedExpectedPriceModule (ref)
+	local var11 = p2.getBundleDetails(p3):andThen(function(p6) --[[ line: 72 ]]
+		-- upvalues: fFlagEnableFetchCartPricingDuringInExperience (copy), p5 (ref), normalizeBundleFields (copy), promiseModule (copy)
+		return if fFlagEnableFetchCartPricingDuringInExperience and p6.collectibleItemDetail and (p6.collectibleItemDetail.collectibleItemId and p5) then p5(p6.collectibleItemDetail.collectibleItemId):andThen(function() --[[ line: 80 ]]
+			-- upvalues: normalizeBundleFields (copy), p6 (ref)
+			return normalizeBundleFields(p6)
+		end):catch(function() --[[ line: 83 ]]
+			-- upvalues: normalizeBundleFields (copy), p6 (ref)
+			return normalizeBundleFields(p6)
+		end) else promiseModule.resolve(normalizeBundleFields(p6))
+	end):catch(function(_) --[[ line: 89 ]]
 		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
 		return promiseModule.reject(purchaseErrorModule.UnknownFailure)
 	end)
@@ -58,22 +66,22 @@ return function(p2, p3, p4) --[[ line: 57 | named "getBundleDetails" ]]
 	return promiseModule.all({
 		bundleDetails = var11,
 		refreshedExpectedPrice = promiseModule.all({
-			catalogItemDetails = getCatalogItemDetailsModule(p2, p3, "bundle"):catch(function() --[[ line: 76 ]]
+			catalogItemDetails = getCatalogItemDetailsModule(p2, p3, "bundle"):catch(function() --[[ line: 102 ]]
 				return nil
 			end),
-			resellersData = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" and (collectibleItemId and collectibleItemId ~= "") then getResellersModule(p2, collectibleItemId, 10):catch(function() --[[ line: 83 ]]
+			resellersData = if collectibleItemInstanceId and collectibleItemInstanceId ~= "" and (collectibleItemId and collectibleItemId ~= "") then getResellersModule(p2, collectibleItemId, 10):catch(function() --[[ line: 109 ]]
 				return nil
 			end) else promiseModule.resolve(nil)
-		}):andThen(function(p7) --[[ line: 87 ]]
+		}):andThen(function(p8) --[[ line: 113 ]]
 			-- upvalues: fFlagFixTimedOptionRefreshModule (copy), resolveRefreshedProductInfoModule (copy), collectibleItemInstanceId (ref), p4 (ref), resolveRefreshedExpectedPriceModule (copy)
-			return if fFlagFixTimedOptionRefreshModule then resolveRefreshedProductInfoModule(p7.catalogItemDetails, p7.resellersData, collectibleItemInstanceId, p4.timedOptionDays) else resolveRefreshedExpectedPriceModule(p7.catalogItemDetails, p7.resellersData, collectibleItemInstanceId, p4.timedOptionDays)
+			return if fFlagFixTimedOptionRefreshModule then resolveRefreshedProductInfoModule(p8.catalogItemDetails, p8.resellersData, collectibleItemInstanceId, p4.timedOptionDays) else resolveRefreshedExpectedPriceModule(p8.catalogItemDetails, p8.resellersData, collectibleItemInstanceId, p4.timedOptionDays)
 		end)
-	}):andThen(function(p6) --[[ line: 107 ]]
+	}):andThen(function(p7) --[[ line: 133 ]]
 		-- upvalues: fFlagFixTimedOptionRefreshModule (copy)
-		local bundleDetails = p6.bundleDetails
+		local bundleDetails = p7.bundleDetails
 		
 		if fFlagFixTimedOptionRefreshModule then
-			local refreshedExpectedPrice = p6.refreshedExpectedPrice
+			local refreshedExpectedPrice = p7.refreshedExpectedPrice
 			
 			if refreshedExpectedPrice == nil then
 				return bundleDetails
@@ -83,7 +91,7 @@ return function(p2, p3, p4) --[[ line: 57 | named "getBundleDetails" ]]
 			end
 			return bundleDetails
 		else
-			bundleDetails.refreshedExpectedPrice = p6.refreshedExpectedPrice
+			bundleDetails.refreshedExpectedPrice = p7.refreshedExpectedPrice
 		end
 	end)
 end
