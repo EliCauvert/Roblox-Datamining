@@ -1,12 +1,12 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
+local parent = foundation.Parent
+local reactModule = require(parent.React)
+local reactIsModule = require(parent.ReactIs)
 local constantsModule = require(script.Parent.constants)
-local flagsModule = require(foundation.Utility.Flags)
 local imageModule = require(foundation.Components.Image)
 local textModule = require(foundation.Components.Text)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
-local mapBindableModule = require(foundation.Utility.mapBindable)
 local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
 local useProgressBindingModule = require(script.Parent.useProgressBinding)
 local useProgressVariantsModule = require(script.Parent.useProgressVariants)
@@ -18,113 +18,122 @@ local withDefaultsModule = require(foundation.Utility.withDefaults)
 local _ = require(foundation.Enums.ProgressShape)
 local t = { size = require(foundation.Enums.ProgressSize).Medium }
 
-local function _(p0, p1) --[[ line: 60 | named "getRotationFromProgress" ]]
+local function _(p0, p1) --[[ line: 42 | named "getRotationFromProgress" ]]
 	return if p0 == nil then 0 else math.clamp(p0 * 360, if p1 == Enum.HorizontalAlignment.Left then 180 else 0, if p1 == Enum.HorizontalAlignment.Left then 360 else 180)
 end
 
-local function getLabelFromProgress(p2) --[[ line: 66 ]]
+local function getLabelFromProgress(p2) --[[ line: 48 ]]
 	return if p2 == nil then "0%" else `{math.floor(p2 * 100)}%`
 end
 
-local function getCapAngleFromProgress(vectorA) --[[ line: 70 ]]
-	return math.clamp(vectorA or 0, 0, 1) * 360
-end
-
-local function hasVisibleArc(p3) --[[ line: 74 ]]
-	return (p3 or 0) > 0
-end
-
-local function ArcCap(p4) --[[ line: 84 ]]
-	-- upvalues: useTokensModule (ref), reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
-		ZIndex = 2,
-		Size = UDim2.fromScale(1, 1),
-		Rotation = p4.angle,
-		Visible = p4.isVisible,
-		testId = p4.testId
-	}, {
-		Cap = reactModule.createElement(viewModule, {
-			tag = "anchor-center-center radius-circle",
-			ZIndex = 2,
-			Position = UDim2.fromScale(0.5, 0.043103448276),
-			Size = UDim2.fromScale(0.086206896552, 0.086206896552),
-			backgroundStyle = useTokensModule().Color.Content.Emphasis
-		})
-	})
-end
-
-local function ArcCaps(p5) --[[ line: 108 ]]
-	-- upvalues: mapBindableModule (ref), hasVisibleArc (ref), reactModule (ref), ArcCap (ref), getCapAngleFromProgress (ref)
-	local var25 = mapBindableModule(p5.progress, hasVisibleArc)
+local function ProgressGradient(p3) --[[ line: 52 ]]
+	-- upvalues: useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), reactIsModule (ref)
+	local side = p3.side
+	local isIndeterminate = p3.isIndeterminate
+	local progress = p3.progress
+	local var18 = useTokensModule()
 	
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		StartCap = reactModule.createElement(ArcCap, {
-			angle = 0,
-			isVisible = var25,
-			testId = `{p5.testId}--start-cap`
-		}),
-		EndCap = reactModule.createElement(ArcCap, {
-			angle = mapBindableModule(p5.progress, getCapAngleFromProgress),
-			isVisible = var25,
-			testId = `{p5.testId}--end-cap`
-		})
-	})
-end
-
-local function ProgressGradient(p6) --[[ line: 128 ]]
-	-- upvalues: useTokensModule (ref), usePreferencesModule (ref), reactModule (ref), mapBindableModule (ref)
-	local side = p6.side
-	local isIndeterminate = p6.isIndeterminate
-	local progress = p6.progress
-	local pulse = p6.pulse
-	local var26 = useTokensModule()
-	
-	return if isIndeterminate and usePreferencesModule().reducedMotion and pulse then reactModule.createElement("UIGradient", {
-		Transparency = pulse:map(function(p8) --[[ line: 165 ]]
-			-- upvalues: var26 (ref)
-			return NumberSequence.new(math.lerp(var26.Color.Content.Emphasis.Transparency, var26.Color.Shift.Shift_200.Transparency, p8))
+	return if isIndeterminate and usePreferencesModule().reducedMotion then reactModule.createElement("UIGradient", {
+		Transparency = p3.pulse:map(function(p5) --[[ line: 96 ]]
+			-- upvalues: var18 (ref)
+			return NumberSequence.new(math.lerp(var18.Color.Content.Emphasis.Transparency, var18.Color.Shift.Shift_200.Transparency, p5))
 		end),
-		Color = pulse:map(function(p9) --[[ line: 174 ]]
-			-- upvalues: var26 (ref)
-			return ColorSequence.new(var26.Color.Content.Emphasis.Color3:Lerp(var26.Color.Shift.Shift_200.Color3, p9))
+		Color = p3.pulse:map(function(p6) --[[ line: 105 ]]
+			-- upvalues: var18 (ref)
+			return ColorSequence.new(var18.Color.Content.Emphasis.Color3:Lerp(var18.Color.Shift.Shift_200.Color3, p6))
 		end),
-		Rotation = if side == Enum.HorizontalAlignment.Left then 0 else 180
+		Rotation = if not isIndeterminate then p3.rotation elseif side == Enum.HorizontalAlignment.Left then 0 else 180
 	}) else reactModule.createElement("UIGradient", {
-		Transparency = reactModule.useMemo(function() --[[ line: 142 ]]
-			-- upvalues: var26 (ref), isIndeterminate (ref)
-			local transparency = var26.Color.Content.Emphasis.Transparency
-			local var27 = if isIndeterminate then 1 else var26.Color.Shift.Shift_200.Transparency
+		Transparency = reactModule.useMemo(function() --[[ line: 66 ]]
+			-- upvalues: var18 (ref), isIndeterminate (ref)
+			local transparency = var18.Color.Content.Emphasis.Transparency
+			local var19 = if isIndeterminate then 1 else var18.Color.Shift.Shift_200.Transparency
 			
 			return NumberSequence.new({
 				NumberSequenceKeypoint.new(0, transparency),
 				NumberSequenceKeypoint.new(0.4999, transparency),
-				NumberSequenceKeypoint.new(0.5, var27),
-				NumberSequenceKeypoint.new(1, var27)
+				NumberSequenceKeypoint.new(0.5, var19),
+				NumberSequenceKeypoint.new(1, var19)
 			})
-		end, { var26, isIndeterminate }),
-		Color = reactModule.useMemo(function() --[[ line: 154 ]]
-			-- upvalues: var26 (ref)
+		end, { var18, isIndeterminate }),
+		Color = reactModule.useMemo(function() --[[ line: 78 ]]
+			-- upvalues: var18 (ref)
 			return ColorSequence.new({
-				ColorSequenceKeypoint.new(0, var26.Color.Content.Emphasis.Color3),
-				ColorSequenceKeypoint.new(0.4999, var26.Color.Content.Emphasis.Color3),
-				ColorSequenceKeypoint.new(0.5, var26.Color.Shift.Shift_200.Color3),
-				ColorSequenceKeypoint.new(1, var26.Color.Shift.Shift_200.Color3)
+				ColorSequenceKeypoint.new(0, var18.Color.Content.Emphasis.Color3),
+				ColorSequenceKeypoint.new(0.4999, var18.Color.Content.Emphasis.Color3),
+				ColorSequenceKeypoint.new(0.5, var18.Color.Shift.Shift_200.Color3),
+				ColorSequenceKeypoint.new(1, var18.Color.Shift.Shift_200.Color3)
 			})
-		end, { var26 }),
-		Rotation = mapBindableModule(progress, function(p7) --[[ line: 185 ]]
+		end, { var18 }),
+		Rotation = if reactIsModule.isBinding(progress) then progress:map(function(p4) --[[ line: 117 ]]
 			-- upvalues: side (ref)
-			return if p7 == nil then 0 else math.clamp(p7 * 360, if side == Enum.HorizontalAlignment.Left then 180 else 0, if side == Enum.HorizontalAlignment.Left then 360 else 180)
-		end)
+			return if p4 == nil then 0 else math.clamp(p4 * 360, if side == Enum.HorizontalAlignment.Left then 180 else 0, if side == Enum.HorizontalAlignment.Left then 360 else 180)
+		end) elseif progress == nil then 0 else math.clamp(progress * 360, if side == Enum.HorizontalAlignment.Left then 180 else 0, if side == Enum.HorizontalAlignment.Left then 360 else 180)
 	})
 end
 
-local function ProgressRing(p10) --[[ line: 193 ]]
-	-- upvalues: reactModule (ref), viewModule (ref), imageModule (ref), ProgressGradient (ref), ArcCaps (ref)
-	return reactModule.createElement(reactModule.Fragment, {}, {
+return function(p7) --[[ line: 125 | named "ProgressCircle" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), useProgressVariantsModule (ref), useProgressBindingModule (ref), reactModule (ref), useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), ProgressGradient (ref), textModule (ref), reactIsModule (ref), getLabelFromProgress (ref)
+	local var20 = withDefaultsModule(p7, t)
+	local var21 = usePreferencesModule()
+	local var22 = useProgressVariantsModule(useTokensModule(), var20.size)
+	local var23, var24 = useProgressBindingModule(var20.value)
+	local var25 = reactModule.useBinding(0.8)
+	local var26 = useRotationModule(1)
+	local var27 = usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED)
+	local uDim2 = UDim2.fromOffset(var22.circle.size, var22.circle.size)
+	
+	return if var24 and not var21.reducedMotion then reactModule.createElement(viewModule, withCommonPropsModule(var20, { tag = "auto-xy", ref = var20.ref }), {
+		IndeterminateContainer = reactModule.createElement(viewModule, {
+			Size = uDim2,
+			Rotation = var26,
+			testId = `{var20.testId}--indeterminate-container`
+		}, {
+			LeftGradient = reactModule.createElement(viewModule, {
+				tag = "position-top-left clip",
+				Size = UDim2.fromScale(0.5, 1),
+				testId = `{var20.testId}--left-gradient`
+			}, {
+				Image = reactModule.createElement(imageModule, {
+					Image = "rbxasset://textures/ui/Controls/RadialFill.png",
+					tag = "position-top-left content-emphasis",
+					Size = UDim2.fromScale(2, 1)
+				}, {
+					Gradient = reactModule.createElement(ProgressGradient, {
+						side = Enum.HorizontalAlignment.Left,
+						isIndeterminate = var24,
+						rotation = var26,
+						progress = var25,
+						pulse = var27
+					})
+				})
+			}),
+			RightGradient = reactModule.createElement(viewModule, {
+				tag = "position-top-center clip",
+				Size = UDim2.fromScale(0.5, 1),
+				testId = `{var20.testId}--right-gradient`
+			}, {
+				Image = reactModule.createElement(imageModule, {
+					Image = "rbxasset://textures/ui/Controls/RadialFill.png",
+					tag = "content-emphasis",
+					Size = UDim2.fromScale(2, 1),
+					Position = UDim2.fromScale(-1, 0)
+				}, {
+					Gradient = reactModule.createElement(ProgressGradient, {
+						side = Enum.HorizontalAlignment.Right,
+						isIndeterminate = var24,
+						rotation = var26,
+						progress = var25,
+						pulse = var27
+					})
+				})
+			})
+		})
+	}) else reactModule.createElement(viewModule, withCommonPropsModule(var20, { Size = uDim2, ref = var20.ref }), {
 		LeftGradient = reactModule.createElement(viewModule, {
 			tag = "position-top-left clip",
 			Size = UDim2.fromScale(0.5, 1),
-			testId = `{p10.testId}--left-gradient`
+			testId = `{var20.testId}--left-gradient`
 		}, {
 			Image = reactModule.createElement(imageModule, {
 				Image = "rbxasset://textures/ui/Controls/RadialFill.png",
@@ -133,16 +142,17 @@ local function ProgressRing(p10) --[[ line: 193 ]]
 			}, {
 				Gradient = reactModule.createElement(ProgressGradient, {
 					side = Enum.HorizontalAlignment.Left,
-					isIndeterminate = p10.isIndeterminate,
-					progress = p10.progress,
-					pulse = p10.pulse
+					isIndeterminate = var24,
+					rotation = var26,
+					progress = var23,
+					pulse = var27
 				})
 			})
 		}),
 		RightGradient = reactModule.createElement(viewModule, {
 			tag = "position-top-center clip",
 			Size = UDim2.fromScale(0.5, 1),
-			testId = `{p10.testId}--right-gradient`
+			testId = `{var20.testId}--right-gradient`
 		}, {
 			Image = reactModule.createElement(imageModule, {
 				Image = "rbxasset://textures/ui/Controls/RadialFill.png",
@@ -152,60 +162,18 @@ local function ProgressRing(p10) --[[ line: 193 ]]
 			}, {
 				Gradient = reactModule.createElement(ProgressGradient, {
 					side = Enum.HorizontalAlignment.Right,
-					isIndeterminate = p10.isIndeterminate,
-					progress = p10.progress,
-					pulse = p10.pulse
+					isIndeterminate = var24,
+					rotation = var26,
+					progress = var23,
+					pulse = var27
 				})
 			})
 		}),
-		Caps = if p10.hasCaps then reactModule.createElement(ArcCaps, { progress = p10.progress, testId = p10.testId }) else nil
-	})
-end
-
-local function SpinningRing(p11) --[[ line: 248 ]]
-	-- upvalues: reactModule (ref), viewModule (ref), ProgressRing (ref)
-	return reactModule.createElement(viewModule, {
-		Size = p11.size,
-		Rotation = p11.rotation,
-		testId = `{p11.testId}--indeterminate-container`
-	}, {
-		Ring = reactModule.createElement(ProgressRing, {
-			progress = 0.8,
-			isIndeterminate = true,
-			hasCaps = p11.hasCaps,
-			testId = p11.testId
-		})
-	})
-end
-
-return function(p12) --[[ line: 268 | named "ProgressCircle" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePreferencesModule (ref), useProgressVariantsModule (ref), useProgressBindingModule (ref), useRotationModule (ref), usePulseBindingModule (ref), constantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), SpinningRing (ref), flagsModule (ref), ProgressRing (ref), textModule (ref), mapBindableModule (ref), getLabelFromProgress (ref)
-	local var28 = withDefaultsModule(p12, t)
-	local var29 = usePreferencesModule()
-	local var30 = useProgressVariantsModule(useTokensModule(), var28.size)
-	local var31, var32 = useProgressBindingModule(var28.value)
-	local uDim2 = UDim2.fromOffset(var30.circle.size, var30.circle.size)
-	
-	return if var32 and not var29.reducedMotion then reactModule.createElement(viewModule, withCommonPropsModule(var28, { tag = "auto-xy", ref = var28.ref }), {
-		IndeterminateContainer = reactModule.createElement(SpinningRing, {
-			size = uDim2,
-			rotation = useRotationModule(1),
-			hasCaps = flagsModule.FoundationProgressCircleRoundCaps,
-			testId = var28.testId
-		})
-	}) else reactModule.createElement(viewModule, withCommonPropsModule(var28, { Size = uDim2, ref = var28.ref }), {
-		Ring = reactModule.createElement(ProgressRing, {
-			progress = var31,
-			isIndeterminate = var32,
-			pulse = usePulseBindingModule(1 / constantsModule.INDETERMINATE_SHIMMER_SPEED),
-			hasCaps = flagsModule.FoundationProgressCircleRoundCaps and not var32,
-			testId = var28.testId
-		}),
-		ProgressLabel = if var30.circle.labelFont and not var32 then reactModule.createElement(textModule, {
+		ProgressLabel = if var22.circle.labelFont and not var24 then reactModule.createElement(textModule, {
 			tag = "position-center-center anchor-center-center",
-			Text = mapBindableModule(var31, getLabelFromProgress),
-			fontStyle = var30.circle.labelFont,
-			testId = `{var28.testId}--label`
+			Text = if reactIsModule.isBinding(var23) then var23:map(getLabelFromProgress) elseif var23 == nil then "0%" else `{math.floor(var23 * 100)}%`,
+			fontStyle = var22.circle.labelFont,
+			testId = `{var20.testId}--label`
 		}) else nil
 	})
 end

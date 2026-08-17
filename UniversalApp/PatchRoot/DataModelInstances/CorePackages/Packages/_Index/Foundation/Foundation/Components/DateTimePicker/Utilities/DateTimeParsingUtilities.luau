@@ -85,25 +85,29 @@ local function parseDateTimeFromText(p1) --[[ line: 83 ]]
 	return if ok and status then adjustForDaylightSaving(status) else nil
 end
 
+local function _(p2) --[[ line: 124 | named "trimEndpointText" ]]
+	return p2:gsub("^%s*(.-)%s*$", "%1")
+end
+
 return {
 	adjustForDaylightSaving = adjustForDaylightSaving,
-	formatInputText = function(p2) --[[ line: 176 ]]
+	formatInputText = function(p3) --[[ line: 176 ]]
 		-- upvalues: dateTimePickerVariantModule (ref), dateTimeUtilitiesModule (ref)
-		local var29 = p2.dates[1]
+		local var29 = p3.dates[1]
 		
 		if not var29 then
 			return ""
-		elseif if p2.variant ~= dateTimePickerVariantModule.Dual then p2.variant == dateTimePickerVariantModule.DualWithPresets else true then
-			local var30 = p2.dates[2]
+		elseif if p3.variant ~= dateTimePickerVariantModule.Dual then p3.variant == dateTimePickerVariantModule.DualWithPresets else true then
+			local var30 = p3.dates[2]
 			
 			return `{dateTimeUtilitiesModule.formatLocalTime(var29)} - {if var30 then dateTimeUtilitiesModule.formatLocalTime(var30) else ""}`
 		end
-		return dateTimeUtilitiesModule.formatLocalTime(var29, p2.variant == dateTimePickerVariantModule.SingleWithTime)
+		return dateTimeUtilitiesModule.formatLocalTime(var29, p3.variant == dateTimePickerVariantModule.SingleWithTime)
 	end,
 	parseDateTimeFromText = parseDateTimeFromText,
-	parseDualInputEndpoints = function(p3) --[[ line: 132 ]]
+	parseDualInputEndpoints = function(p4) --[[ line: 132 ]]
 		-- upvalues: parseDateTimeFromText (ref)
-		local var31 = p3:split(" - ")
+		local var31 = p4:split(" - ")
 		local var32 = if var31[1] then parseDateTimeFromText(var31[1]:gsub("^%s*(.-)%s*$", "%1")) else nil
 		
 		if var31[2] then
@@ -111,12 +115,12 @@ return {
 		end
 		return var32, nil
 	end,
-	parseInputToDraftDates = function(p4, p5) --[[ line: 145 ]]
+	parseInputToDraftDates = function(p5, p6) --[[ line: 145 ]]
 		-- upvalues: parseDateTimeFromText (ref), dateTimeUtilitiesModule (ref), dateTimeEqualityUtilitiesModule (ref)
-		if #p4:split(" - ") ~= 2 then
+		if #p5:split(" - ") ~= 2 then
 			return nil
 		end
-		local var33 = p4:split(" - ")
+		local var33 = p5:split(" - ")
 		local var34 = if var33[1] then parseDateTimeFromText(var33[1]:gsub("^%s*(.-)%s*$", "%1")) else nil
 		local var35 = if var33[2] then parseDateTimeFromText(var33[2]:gsub("^%s*(.-)%s*$", "%1")) else nil
 		
@@ -127,9 +131,6 @@ return {
 			var35 = var34
 			var34 = var36
 		end
-		return if p5 and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange({ startDate = var34, endDate = var35 }, p5) then nil else { var34, var35 }
-	end,
-	trimInputText = function(a) --[[ line: 124 ]]
-		return a:gsub("^%s*(.-)%s*$", "%1")
+		return if p6 and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange({ startDate = var34, endDate = var35 }, p6) then nil else { var34, var35 }
 	end
 }

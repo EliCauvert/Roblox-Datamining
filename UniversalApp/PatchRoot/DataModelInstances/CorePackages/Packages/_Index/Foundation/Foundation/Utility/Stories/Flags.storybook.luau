@@ -2,7 +2,7 @@
 local parent_1 = script:FindFirstAncestor("Foundation").Parent
 
 return {
-	name = "Flags",
+	name = " Flags",
 	group = "Foundation",
 	roact = require(parent_1.Roact),
 	storyRoots = require(parent.GetStories)("flags"),

@@ -19,11 +19,15 @@ local function _(p0, p1) --[[ line: 39 | named "strokeFromStyle" ]]
 end
 
 local function variantsFactory_DEPRECATED(p2) --[[ line: 48 ]]
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
+	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
-			container = { tag = "row align-y-center auto-x bg-surface-300" },
-			segment = { tag = "row align-y-center size-0-full auto-x" },
+			container = {
+				tag = if flagsModule.FoundationSegmentedControlAutoXFix then "row align-y-center auto-x bg-surface-300" else "row align-y-center auto-xy bg-surface-300"
+			},
+			segment = {
+				tag = if flagsModule.FoundationSegmentedControlAutoXFix then "row align-y-center size-0-full auto-x" else "row align-y-center size-0-full auto-xy"
+			},
 			text = { tag = "auto-x text-truncate-end content-emphasis" },
 			icon = { style = p2.Color.Content.Emphasis },
 			divider = { tag = "row" }
@@ -83,7 +87,7 @@ local function variantsFactory_DEPRECATED(p2) --[[ line: 48 ]]
 	}
 end
 
-local function variantsFactory(p3) --[[ line: 124 ]]
+local function variantsFactory(p3) --[[ line: 128 ]]
 	-- upvalues: segmentedControlVariantModule (ref), inputSizeModule (ref), iconSizeModule (ref), fillBehaviorModule (ref)
 	local t = {
 		[segmentedControlVariantModule.Filled] = { container = { tag = "bg-shift-200" } }
@@ -191,7 +195,7 @@ local function variantsFactory(p3) --[[ line: 124 ]]
 	}
 end
 
-return function(p4, p5, p6, p7, p8, p9) --[[ line: 244 ]]
+return function(p4, p5, p6, p7, p8, p9) --[[ line: 248 ]]
 	-- upvalues: flagsModule (ref), variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref), segmentedControlVariantModule (ref), fillBehaviorModule (ref), variantsFactory_DEPRECATED (ref)
 	if flagsModule.FoundationSegmentedControlBeta then
 		local segmentedControl = variantsContextModule.useVariants("SegmentedControl", variantsFactory, p4)

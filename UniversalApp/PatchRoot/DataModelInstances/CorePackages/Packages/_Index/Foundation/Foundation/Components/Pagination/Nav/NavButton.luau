@@ -33,7 +33,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 60 | 
 	
 	return reactModule.createElement(iconButtonModule, {
 		isCircular = true,
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = p1.layoutOrder,
 		testId = `{p1.baseTestId}--{direction.testIdSuffix}`,
 		ref = p2,
 		icon = direction.icon,

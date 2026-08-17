@@ -9,7 +9,6 @@ local _ = require(foundation.Enums.ControlState)
 local _ = require(foundation.Enums.ButtonVariant)
 local _ = require(foundation.Enums.InputFocusBehavior)
 local _ = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.InputPlacement)
 local _ = require(foundation.Enums.InputVariant)
 local _ = require(parent.React)
 

@@ -47,7 +47,7 @@ return reactModule.memo(function(p4) --[[ line: 76 | named "NavControls" ]]
 				slotSize = p4.size,
 				direction = var10,
 				isDisabled = if var10 == paginationDirectionModule.First then p4.isFirstDisabled elseif var10 == paginationDirectionModule.Backward then p4.isBackDisabled elseif var10 == paginationDirectionModule.Forward then p4.isForwardDisabled else p4.isLastDisabled,
-				LayoutOrder = var9,
+				layoutOrder = var9,
 				onDirectionActivated = p4.onDirectionActivated,
 				ref = p4.selection.getSlotRef(var11),
 				Selectable = slotBindings.Selectable,
@@ -60,7 +60,7 @@ return reactModule.memo(function(p4) --[[ line: 76 | named "NavControls" ]]
 	end
 	return reactModule.createElement(viewModule, {
 		tag = "row gap-xsmall auto-xy",
-		LayoutOrder = p4.LayoutOrder,
+		LayoutOrder = p4.layoutOrder,
 		testId = `{p4.testId}--{t_1[p4.side]}`
 	}, t_2)
 end)
