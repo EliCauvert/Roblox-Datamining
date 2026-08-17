@@ -261,7 +261,9 @@ Authentication.CrossDevice.Label.QrCodeError,"Stiamo avendo problemi a visualizz
 Authentication.CrossDevice.Label.QrCodeLogin,Codice QR Log In
 Authentication.CrossDevice.Label.QrHeader,Opzione 1
 Authentication.CrossDevice.Label.QrInstructions,Scansiona questo codice QR dalla telecamera del dispositivo di accesso.
+Authentication.CrossDevice.Label.QrTroubleshooting,Stai avendo problemi?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Vai a <b>roblox.com/quest</b> sul tuo computer o telefono per inserire questo codice e completare il login.
+Authentication.CrossDevice.Label.QuickSignInInstructions,"Scansiona il codice QR o, sul dispositivo da cui hai effettuato l'accesso, vai su <b>Altro > Accesso rapido</b> e inserisci il codice."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Per motivi di sicurezza, inserisci solo i codici che hai generato dal tuo nuovo dispositivo."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Per accedere come {username} su un nuovo dispositivo:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. Sul nuovo dispositivo, apri la pagina di accesso"
@@ -1131,8 +1133,6 @@ Feature.Accessibility.Action.ScrollDown,Scorri giù
 Feature.Accessibility.Action.ScrollUp,Scorri su
 Feature.Accessibility.AppTheme.CategoryCalm,Calmo
 Feature.Accessibility.AppTheme.CategoryDynamic,Dinamico
-Feature.Accessibility.AppTheme.CategoryEnergetic,Energetico
-Feature.Accessibility.AppTheme.CategoryKinetic,Cinetico
 Feature.Accessibility.AppTheme.CircuitRush,Circuiti
 Feature.Accessibility.AppTheme.CosmicDust,Polvere cosmica
 Feature.Accessibility.AppTheme.Default,Predefinito
@@ -2090,7 +2090,135 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Vuoi bloccare {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Bloccando questo utente, lo rimuoverai dai contatti o dai follower e non potrà più inviarti messaggi, richieste o inviti.<br /><br />L'utente non riceverà alcuna notifica relativa al blocco."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Bloccando questo utente, lo rimuoverai dagli amici o dai follower e non potrà più inviarti messaggi, richieste o inviti.<br /><br />L'utente non riceverà alcuna notifica relativa al blocco."
-Feature.BuyRobux.Heading.Banner,Acquista Robux
+Feature.Build.Action.AddFriends,
+Feature.Build.Action.AddPlaytester,Aggiungi playtester
+Feature.Build.Action.AddPlaytesters,
+Feature.Build.Action.AddToPlaytest,Aggiungi al test di giocabilità
+Feature.Build.Action.Archive,Archivia
+Feature.Build.Action.ArchiveGame,Archivia gioco
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,Acquista
+Feature.Build.Action.BuyRobux,Acquista Robux
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,Copia testo
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,Nascondi salvataggi automatici
+Feature.Build.Action.ManageLimit,Gestisci limite
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,Notificami
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,Apri Impostazioni
+Feature.Build.Action.Playtest,Test di giocabilità
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,
+Feature.Build.Action.PublishLatest,Pubblica l'ultima
+Feature.Build.Action.Restore,
+Feature.Build.Action.SetDailyLimit,Imposta un limite giornaliero
+Feature.Build.Action.SetLimit,Imposta limite
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,Condividi link
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,Aggiorna classificazione
+Feature.Build.Action.UpdateWithChanges,Aggiorna con modifiche
+Feature.Build.Action.View,
+Feature.Build.Action.ViewUsage,Visualizza utilizzo
+Feature.Build.Content.NewGame,Nuovo gioco
+Feature.Build.Description.ArchiveRemoval,"Se archivi questo gioco, verrà rimosso da Costruisci. Puoi ancora accedervi e ripristinarlo dall'Hub Creatore o da Roblox Studio."
+Feature.Build.Description.AutoBuyUsage,Usa i tuoi Robux per acquistare automaticamente un utilizzo aggiuntivo di Build mentre crei. Puoi impostare un limite di spesa giornaliero in qualsiasi momento.
+Feature.Build.Description.BuildIdeaGame,Trasforma le tue idee in un gioco
+Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha una risposta per te.
+Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
+Feature.Build.Description.BuyUsageOrWait,Acquista più utilizzo di Build con Robux o attendi il ripristino del limite giornaliero.
+Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che ti aiuteranno nel test di giocabilità.
+Feature.Build.Description.EnableBuildNotifs,Attiva le notifiche dalle impostazioni del tuo dispositivo per ricevere aggiornamenti da Build.
+Feature.Build.Description.FriendsLinkOnly,Solo i tuoi amici possono accedere a questo link. Modifica l'impostazione Pubblico del tuo gioco se vuoi che più persone possano giocare.
+Feature.Build.Description.HubSettings,Gestisci tutte le impostazioni sull'Hub Creatore.
+Feature.Build.Description.MakeAudienceAvail,Pubblica la tua esperienza per renderla disponibile a questo pubblico.
+Feature.Build.Description.ManageAppearance,Gestisci il modo in cui il tuo gioco appare agli altri.
+Feature.Build.Description.PlayAfterPublish,Scegli chi può giocare a questa esperienza dopo la pubblicazione.
+Feature.Build.Description.PlaytestLocked,Puoi iniziare il playtest dopo aver creato il tuo primo gioco.
+Feature.Build.Description.PlaytesterAccess,Aggiungi amici come playtester o modifica l'impostazione Pubblico del tuo gioco per consentire a più persone di giocare.
+Feature.Build.Description.PrivateShare,Modifica l'impostazione Pubblico del tuo gioco per condividerlo.
+Feature.Build.Description.RaiseLimitOrWait,Aumenta il tuo limite giornaliero di Robux per continuare a creare o attendi che venga ripristinato domani.
+Feature.Build.Description.RatingAgreement,"Pubblicando, confermi che questa classificazione dei contenuti è corretta."
+Feature.Build.Description.RestoreLatest,Questa versione diventerà la tua ultima versione pubblicata.
+Feature.Build.Description.VersionChanges,Spiega ai giocatori cosa è cambiato in questa versione.
+Feature.Build.Header.AccessSharing,Accesso e condivisione
+Feature.Build.Header.ContentMaturity,Maturità contenuti
+Feature.Build.Header.CustomAnswer,Risposta personalizzata
+Feature.Build.Header.GameDetails,Dettagli del gioco
+Feature.Build.Header.Overview,Panoramica
+Feature.Build.Label.Access,
+Feature.Build.Label.AdditionalUsage,Utilizzo aggiuntivo di Costruisci
+Feature.Build.Label.Available,disponibile
+Feature.Build.Label.BackToBuild,Torna a Costruisci
+Feature.Build.Label.CaptureLibrary,Libreria delle acquisizioni
+Feature.Build.Label.ContentRating,Classificazione del contenuto
+Feature.Build.Label.CreatorHub,Hub Creatore
+Feature.Build.Label.DescribeIdea,Descrivi un'idea
+Feature.Build.Label.Description,Descrizione
+Feature.Build.Label.FreeBuildUsage,Utilizzo gratuito di Build
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,Ottieni più utilizzo di Build
+Feature.Build.Label.IconThumbnails,Icona e miniature
+Feature.Build.Label.Loading,
+Feature.Build.Label.NoLimit,Senza limiti
+Feature.Build.Label.ResetsDaily,Si ripristina giornalmente
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,Cerca giochi
+Feature.Build.Label.SearchTasks,Cerca attività
+Feature.Build.Label.SelectOption,
+Feature.Build.Label.ShareAddedFriends,Condividi con gli amici che hai aggiunto
+Feature.Build.Label.Title,Titolo
+Feature.Build.Label.TitleDescription,Titolo e descrizione
+Feature.Build.Label.Unknown,Sconosciuto
+Feature.Build.Label.Version,
+Feature.Build.Label.VersionTitleDesc,Titolo e descrizione della versione
+Feature.Build.Label.Video,
+Feature.Build.Message.AccountRequirements,Il tuo account non soddisfa i requisiti per l'utilizzo di Build.
+Feature.Build.Message.AccountTooNew,Il tuo account è troppo recente per essere pubblicato. Riprova tra 2 giorni.
+Feature.Build.Message.AllFriendsAdded,Hai aggiunto tutti i tuoi amici come playtester.
+Feature.Build.Message.AudienceIneligible,Non idoneo per questo pubblico
+Feature.Build.Message.ExpandAudience,Espandi l'idoneità del tuo pubblico sull'Hub Creatore
+Feature.Build.Message.ExperiencesLoadFailed,Impossibile caricare le esperienze
+Feature.Build.Message.FriendsLoadFailed,Impossibile caricare gli amici. Riprova.
+Feature.Build.Message.GamePublishFailed,Non è stato possibile pubblicare il gioco. Riprova.
+Feature.Build.Message.InvitesLoadFailed,Impossibile caricare gli inviti
+Feature.Build.Message.LinkCopied,Link copiato negli appunti.
+Feature.Build.Message.NoFriendsToAdd,Non hai ancora amici da aggiungere. Trova prima persone con cui connetterti su Roblox.
+Feature.Build.Message.PublicPublishFailed,"Il tuo gioco è stato pubblicato, ma non è stato possibile renderlo pubblico. Riprova."
+Feature.Build.Message.PublishExpandAudience,Pubblica per ampliare il tuo pubblico
+Feature.Build.Message.QuestionnaireNeeded,Questo gioco è stato modificato al di fuori di Build. Compila il questionario sui contenuti per pubblicarlo.
+Feature.Build.Message.ReadyToPlay,Il tuo gioco è pronto per essere giocato su Roblox!
+Feature.Build.Message.RestoreVersionFailed,Non è stato possibile ripristinare questa versione. Riprova.
+Feature.Build.Message.SaveChangesFailed,Non è stato possibile salvare le modifiche. Riprova.
+Feature.Build.Message.ShareLinkFailed,Non è stato possibile creare il link di condivisione. Riprova.
+Feature.Build.Message.TryAgain,
+Feature.Build.Message.TurnToPortrait,Passa il dispositivo in modalità verticale per continuare a lavorare al tuo gioco.
+Feature.Build.Message.WhatToCreate,Cosa vuoi creare oggi?
+Feature.Build.Title.AddFriendsToPlaytest,Aggiungi gli amici che ti aiuteranno nel test di giocabilità
+Feature.Build.Title.ArchiveThisGame,Archiviare questo gioco?
+Feature.Build.Title.Audience,Pubblico
+Feature.Build.Title.BuildUnavailable,Build non è disponibile
+Feature.Build.Title.ChatBuildUnavailable,Build non disponibile.
+Feature.Build.Title.Content,Contenuto
+Feature.Build.Title.DailyRobuxReached,Limite giornaliero di Robux raggiunto
+Feature.Build.Title.ExperienceAudience,Pubblico dell'esperienza
+Feature.Build.Title.FreeUsageReached,Limite di utilizzo gratuito di Build raggiunto
+Feature.Build.Title.FriendsOnlyPlay,Solo gli amici possono giocare
+Feature.Build.Title.GameCreationDone,Creazione del gioco completata
+Feature.Build.Title.GamePrivate,Questo gioco è privato
+Feature.Build.Title.GenericError,Si è verificato un errore
+Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
+Feature.Build.Title.Playtesters,Tester di gioco
+Feature.Build.Title.PlaytestersOnlyPlay,Solo i playtester possono giocare
+Feature.Build.Title.PushNotifications,Notifiche push
+Feature.Build.Title.Tasks,Attività
+Feature.Build.Title.VersionHistory,Cronologia versioni
+Feature.Build.Title.VersionInformation,Informazioni sulla versione
+Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"No, grazie"
 Feature.Captures.Action.Share,
@@ -2160,7 +2288,7 @@ Feature.Catalog.Heading.ItemInfo,Informazioni Elemento
 Feature.Catalog.Heading.ItemRemoved,Oggetto rimosso
 Feature.Catalog.Heading.ItemsOnSale,Articoli In Vendita
 Feature.Catalog.Heading.NotForSale,Non in vendita
-Feature.Catalog.Heading.Overview,Panoramica
+Feature.Catalog.Heading.Overview,
 Feature.Catalog.Heading.PremiumOnly,Solo con Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,Limite creatore raggiunto
 Feature.Catalog.Heading.QuickMenu,Menu rapido
@@ -2585,6 +2713,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 min
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 sett.
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} sett.
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,Chat non filtrata
 Feature.Chat.Label.UnknownUser,utente sconosciuto
 Feature.Chat.Label.User,Utente
 Feature.Chat.Label.ViewProfile,Visualizza profilo
@@ -2775,14 +2904,14 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Hai bisogno dell'autorizzazione dei genitori per partecipare a questo gioco.
-Feature.ExperienceDetails.Body.DescriptionTitle,Descrizione
+Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,
 Feature.ExperienceDetails.Body.StatsInfoTitle,Statistiche & Informazioni
 Feature.ExperienceDetails.Label.NotPlayable,Non Giocabile
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Potrebbe esserci un'opzione per acquistare articoli che possono essere scambiati con altri articoli o funzionalità mediante Robux (""token dell'esperienza""). I token dell'esperienza servono esclusivamente a fruire di quest'ultima, non possono essere utilizzati al di fuori di essa e non costituiscono strumenti di pagamento prepagati. L'acquisto di token dell'esperienza è definitivo e in nessun caso non rimborsabile. Altri articoli e funzionalità che possono essere scambiati con token dell'esperienza possono essere modificati come richiesto a discrezione del creatore."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Confermo di accettare l'avviso giocando a questa esperienza
 Feature.ExperienceDetails.PlayButtonText.ActionNeeded,
-Feature.ExperienceDetails.PlayButtonText.Buy,Acquista
+Feature.ExperienceDetails.PlayButtonText.Buy,
 Feature.ExperienceDetails.PlayButtonText.Play,Gioca
 Feature.ExperienceDetails.PlayButtonText.PlayDemo,Riproduci demo
 Feature.ExperienceDetails.PlayButtonText.Unavailable,
@@ -2900,7 +3029,7 @@ Feature.Friends.Error.UserBlockedError,Non puoi eseguire questa operazione perch
 Feature.Friends.Error.UserNotPassedCaptcha,Non hai superato il captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
 Feature.Friends.FriendingTooltipBody,Alcune richieste di amicizia potrebbero provenire da utenti che ti trovano dal tuo numero di telefono. Assicurati di conoscerle prima di diventare amici.
-Feature.Friends.Heading.Activities,Attività
+Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,Filtra per
 Feature.Friends.Heading.Friends,
 Feature.Friends.Heading.MyConnections,I miei amici
@@ -3459,6 +3588,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,È tutto aggiornato per ora
 Feature.Moments.Label.Photos,Foto
+Feature.Moments.Label.PostDeleted,Momento eliminato
 Feature.Moments.Label.PostRemovedBody,Il Momento che hai pubblicato viola le nostre norme della community.
 Feature.Moments.Label.PublishingRodeoBody,Non dovrebbe volerci molto.
 Feature.Moments.Label.Reactions,Reazioni
@@ -3471,7 +3601,11 @@ Feature.Moments.Label.RodeoPublishingTitle,Pubblicazione del tuo Momento
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Momenti su Roblox
 Feature.Moments.Label.StayFriendlyModeration,Manteniamo un tono amichevole
-Feature.Moments.Label.TextGeneratedBody,Sovrapposizione generata dall'IA e descrizione aggiunte
+Feature.Moments.Label.TextGenerateInProgressBody,Attendi il testo generato dall'IA prima di modificare manualmente la sovrapposizione.
+Feature.Moments.Label.TextGenerateInProgressTitle,Generazione in corso
+Feature.Moments.Label.TextGenerateOverrideBody,La generazione sostituirà la sovrapposizione di testo e la descrizione correnti.
+Feature.Moments.Label.TextGenerateOverrideTitle,Il testo verrà sostituito
+Feature.Moments.Label.TextGeneratedBody,Testo in sovrapposizione e descrizione generati dall'IA aggiunti
 Feature.Moments.Label.TextGeneratedTitle,Testo generato
 Feature.Moments.Label.TextGenerationFailedBody,Non è stato possibile generare il testo. Riprova.
 Feature.Moments.Label.TextGenerationFailedTitle,Generazione non riuscita
@@ -4169,7 +4303,7 @@ Feature.RobloxSubscription.Label.month,mese
 Feature.RobloxSubscription.Label.months,mesi
 Feature.RobloxSubscription.Title.AgeCheckTrial,Ottieni 1 settimana gratuita di Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Buone notizie
-Feature.RobloxSubscription.Title.GenericError,Si è verificato un errore
+Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Ottieni Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus non è disponibile qui
 Feature.SafetyDashboard.Heading.AccountStatus,Stato dell'account
@@ -4285,7 +4419,7 @@ Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,Apri Impostazioni
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Seleziona Permesso
 2. Seleziona Contatti
 3. Consenti a Roblox di accedere ai tuoi contatti"
@@ -4405,7 +4539,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,Vuoi davvero rimuovere questa persona dal gruppo?
 Feature.Squads.Description.RemoveFromParty,{displayName} non potrà più partecipare alla chat di gruppo.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,È già stato programmato un Party per l'orario selezionato
-Feature.Squads.Description.Title,Titolo
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,Hai aggiunto {username} e altri {userCountMinusOne} utenti al gruppo
 Feature.Squads.Description.YouAddedToChat,Hai aggiunto {username} al gruppo

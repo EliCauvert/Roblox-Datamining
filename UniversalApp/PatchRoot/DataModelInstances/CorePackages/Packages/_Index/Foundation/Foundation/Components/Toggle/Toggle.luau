@@ -20,6 +20,7 @@ local inputSizeModule = require(foundation.Enums.InputSize)
 local _ = require(foundation.Enums.InputLabelSize)
 local inputPlacementModule = require(foundation.Enums.InputPlacement)
 local flagsModule = require(foundation.Utility.Flags)
+local useInputGroupDefaultsModule = require(components.InternalInputGroup.useInputGroupDefaults)
 local t = { frequency = 4 }
 local t_1 = {
 	Selectable = true,
@@ -29,71 +30,71 @@ local t_1 = {
 }
 local t_2 = { colorNamespace = colorNamespaceModule.Color }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | named "Toggle" ]]
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTokensModule (ref), useToggleVariantsModule (ref), useUncontrolledStateModule (ref), inputSizeModule (ref), reactModule (ref), otterModule (ref), t (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), flagsModule (ref), presentationContextModule (ref), t_2 (ref), knobModule (ref), builderIconsModule (ref)
-	local var20 = withDefaultsModule(p0, t_1)
-	local var21 = useToggleVariantsModule(useTokensModule(), var20.size)
-	local var22, var23 = useUncontrolledStateModule(var20.isChecked, var20.onActivated)
-	local var24 = if p0.size == inputSizeModule.Large then inputSizeModule.Medium else var20.size
-	local var25 = if var22 then 1 else 0
-	local var26, var27 = reactModule.useBinding(var25)
-	local var28 = reactModule.useRef(nil)
-	local var29 = var26:map(function(p2) --[[ line: 82 ]]
-		-- upvalues: var21 (ref)
-		return var21.knob.offPosition:Lerp(var21.knob.onPosition, p2)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 70 | named "Toggle" ]]
+	-- upvalues: flagsModule (ref), useInputGroupDefaultsModule (ref), t_1 (ref), withDefaultsModule (ref), useTokensModule (ref), useToggleVariantsModule (ref), useUncontrolledStateModule (ref), inputSizeModule (ref), reactModule (ref), otterModule (ref), t (ref), internalInputModule (ref), withCommonPropsModule (ref), constantsModule (ref), presentationContextModule (ref), t_2 (ref), knobModule (ref), builderIconsModule (ref)
+	local var21 = if flagsModule.FoundationInputGroup then useInputGroupDefaultsModule(p0, t_1) else withDefaultsModule(p0, t_1)
+	local var22 = useToggleVariantsModule(useTokensModule(), var21.size)
+	local var23, var24 = useUncontrolledStateModule(var21.isChecked, var21.onActivated)
+	local var25 = if var21.size == inputSizeModule.Large then inputSizeModule.Medium else var21.size
+	local var26 = if var23 then 1 else 0
+	local var27, var28 = reactModule.useBinding(var26)
+	local var29 = reactModule.useRef(nil)
+	local var30 = var27:map(function(p2) --[[ line: 85 ]]
+		-- upvalues: var22 (ref)
+		return var22.knob.offPosition:Lerp(var22.knob.onPosition, p2)
 	end)
-	reactModule.useEffect(function() --[[ line: 86 ]]
-		-- upvalues: otterModule (copy), var25 (ref), var28 (ref), var27 (ref)
-		local var30 = otterModule.createSingleMotor(var25)
-		var28.current = var30
-		var30:start()
-		var30:onStep(function(p3) --[[ line: 91 ]]
-			-- upvalues: var27 (copy)
-			var27(p3)
+	reactModule.useEffect(function() --[[ line: 89 ]]
+		-- upvalues: otterModule (copy), var26 (ref), var29 (ref), var28 (ref)
+		local var31 = otterModule.createSingleMotor(var26)
+		var29.current = var31
+		var31:start()
+		var31:onStep(function(p3) --[[ line: 94 ]]
+			-- upvalues: var28 (copy)
+			var28(p3)
 		end)
 		
-		return function() --[[ line: 95 ]]
-			-- upvalues: var30 (ref)
-			var30:destroy()
+		return function() --[[ line: 98 ]]
+			-- upvalues: var31 (ref)
+			var31:destroy()
 		end
 	end, {})
-	reactModule.useEffect(function() --[[ line: 100 ]]
-		-- upvalues: var22 (ref), var28 (ref), otterModule (copy), t (copy)
-		local var31 = if var22 then 1 else 0
+	reactModule.useEffect(function() --[[ line: 103 ]]
+		-- upvalues: var23 (ref), var29 (ref), otterModule (copy), t (copy)
+		local var32 = if var23 then 1 else 0
 		
-		if var28.current then
-			var28.current:setGoal(otterModule.spring(var31, t))
+		if var29.current then
+			var29.current:setGoal(otterModule.spring(var32, t))
 		end
-	end, { var22 })
+	end, { var23 })
 	
-	return reactModule.createElement(internalInputModule, withCommonPropsModule(var20, {
-		isChecked = var22,
-		isDisabled = var20.isDisabled,
-		onActivated = var23,
+	return reactModule.createElement(internalInputModule, withCommonPropsModule(var21, {
+		isChecked = var23,
+		isDisabled = var21.isDisabled,
+		onActivated = var24,
 		label = {
-			text = var20.label,
-			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var20.placement],
-			hint = if flagsModule.FoundationToggleBetaUpdate then var20.hint else nil
+			text = var21.label,
+			position = constantsModule.INPUT_PLACEMENT_TO_LABEL_ALIGNMENT[var21.placement],
+			hint = if flagsModule.FoundationToggleBetaUpdate then var21.hint else nil
 		},
-		customVariantProps = var21.input,
-		size = var20.size,
-		Selectable = var20.Selectable,
-		NextSelectionUp = var20.NextSelectionUp,
-		NextSelectionDown = var20.NextSelectionDown,
-		NextSelectionLeft = var20.NextSelectionLeft,
-		NextSelectionRight = var20.NextSelectionRight,
+		customVariantProps = var22.input,
+		size = var21.size,
+		Selectable = var21.Selectable,
+		NextSelectionUp = var21.NextSelectionUp,
+		NextSelectionDown = var21.NextSelectionDown,
+		NextSelectionLeft = var21.NextSelectionLeft,
+		NextSelectionRight = var21.NextSelectionRight,
 		ref = p1
 	}), reactModule.createElement(presentationContextModule.Provider, { value = t_2 }, {
 		Knob = reactModule.createElement(knobModule, {
 			hasShadow = false,
-			size = var24,
+			size = var25,
 			AnchorPoint = Vector2.new(0, 0.5),
-			Position = var29,
-			icon = if var22 then {
+			Position = var30,
+			icon = if var23 then {
 				name = builderIconsModule.Icon.Check,
 				variant = builderIconsModule.IconVariant.Regular
 			} else nil,
-			testId = `{var20.testId}--knob`
+			testId = `{var21.testId}--knob`
 		})
 	}))
 end))

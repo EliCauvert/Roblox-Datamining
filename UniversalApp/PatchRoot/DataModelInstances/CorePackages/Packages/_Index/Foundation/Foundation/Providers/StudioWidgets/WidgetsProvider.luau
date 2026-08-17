@@ -25,25 +25,37 @@ return function(p0) --[[ line: 22 | named "WidgetsProvider" ]]
 			var7:destroy()
 		end
 	end, { var7 })
+	local var8 = reactModule.useCallback(function(p1, p2) --[[ line: 38 ]]
+		-- upvalues: var7 (ref)
+		var7:register(p1, p2)
+	end, { var7 })
+	local var9 = reactModule.useCallback(function(p3, p4) --[[ line: 42 ]]
+		-- upvalues: var7 (ref)
+		var7:deregister(p3, p4)
+	end, { var7 })
+	local var10 = if flagsModule.FoundationPopoverPluginAnchorRefresh then reactModule.useCallback(function(p5) --[[ line: 47 ]]
+		-- upvalues: var7 (ref)
+		return var7:refreshAsync(p5)
+	end, { var7 }) else nil
+	local var11 = reactModule.useCallback(function() --[[ line: 52 ]]
+		-- upvalues: var7 (ref)
+		return var7:nextId()
+	end, { var7 })
 	
 	return reactModule.createElement(widgetsContextModule.Provider, {
-		value = {
-			register = reactModule.useCallback(function(p1, p2) --[[ line: 38 ]]
-				-- upvalues: var7 (ref)
-				var7:register(p1, p2)
-			end, { var7 }),
-			deregister = reactModule.useCallback(function(p3, p4) --[[ line: 42 ]]
-				-- upvalues: var7 (ref)
-				var7:deregister(p3, p4)
-			end, { var7 }),
-			refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then if flagsModule.FoundationPopoverPluginAnchorRefresh then reactModule.useCallback(function(p5) --[[ line: 47 ]]
-				-- upvalues: var7 (ref)
-				return var7:refreshAsync(p5)
-			end, { var7 }) else nil else nil,
-			nextId = reactModule.useCallback(function() --[[ line: 52 ]]
-				-- upvalues: var7 (ref)
-				return var7:nextId()
-			end, { var7 })
+		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 57 ]]
+			-- upvalues: var8 (ref), var9 (ref), flagsModule (copy), var10 (ref), var11 (ref)
+			return {
+				register = var8,
+				deregister = var9,
+				refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var10 else nil,
+				nextId = var11
+			}
+		end, { var8, var9, var10, var11 }) else {
+			register = var8,
+			deregister = var9,
+			refreshAsync = if flagsModule.FoundationPopoverPluginAnchorRefresh then var10 else nil,
+			nextId = var11
 		}
 	}, p0.children)
 end
