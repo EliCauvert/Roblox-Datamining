@@ -93,7 +93,7 @@ function t.hasValidFilter(p9) --[[ line: 254 ]]
 	
 	if category == nil or category == "" then
 		if not fFlagAXUnifiedImpressionsOnThumbnail then
-			var6 = if p9.action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then if p9.action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then p9.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT else true else true
+			var6 = if p9.action ~= marketplaceUnifiedAction.WIDGET_IMPRESSION then if p9.action ~= marketplaceUnifiedAction.UI_ELEMENT_CLICK then if p9.action ~= marketplaceUnifiedAction.PAGE_VIEW then p9.action == marketplaceUnifiedAction.PURCHASE_ATTEMPT else true else true else true
 		end
 	elseif subcategory ~= nil and subcategory == "" then
 		var6 = false
@@ -106,7 +106,7 @@ function t.hasValidFilter(p9) --[[ line: 254 ]]
 	return var7 and (var6 and ((if filterPriceMin and filterPriceMin ~= "" or filterPriceMax and filterPriceMax ~= "" then filterPrice == unifiedEventLogEnumsModule.FiltersPrice.PRICE_RANGE else true) and (if filterCreatorsName and filterCreatorsName ~= "" then filterCreators == unifiedEventLogEnumsModule.FiltersCreators.CREATORS_BY_USERNAME else true)))
 end
 
-function t.hasValidEntityData(p10) --[[ line: 300 ]]
+function t.hasValidEntityData(p10) --[[ line: 301 ]]
 	-- upvalues: unifiedLoggingSurface (ref), AXSendPurchaseAttempt (ref), marketplaceUnifiedAction (ref), t (ref), marketplaceUnifiedItemType (ref), t_1 (ref), widgetUiTreatment (ref)
 	if p10.surface == unifiedLoggingSurface.CUSTOMIZE then
 		return true
@@ -179,7 +179,7 @@ function t.hasValidEntityData(p10) --[[ line: 300 ]]
 	end
 end
 
-function t.filter(p11) --[[ line: 410 ]]
+function t.filter(p11) --[[ line: 411 ]]
 	-- upvalues: t (ref), marketplaceUnifiedAction (ref), sendAXCounterV2Module (ref), unifiedLoggingSurface (ref)
 	local var23 = t.hasItemId(p11)
 	local var24 = t.hasValidItemType(p11)

@@ -1,36 +1,25 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
-local flagsModule = require(foundation.Utility.Flags)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local popoverContextModule = require(script.Parent.PopoverContext)
 local _ = require(foundation.Utility.Plugin.StudioUri)
 local _ = require(foundation.Components.Types)
 local t = { testId = "--foundation-popover" }
 
-return function(p0) --[[ line: 26 | named "Popover" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), popoverContextModule (ref)
-	local var6 = withDefaultsModule(p0, t)
-	local var7, var8 = reactModule.useState(nil)
-	local var9, var10 = reactModule.useState(nil)
+return function(p0) --[[ line: 25 | named "Popover" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), popoverContextModule (ref)
+	local var5 = withDefaultsModule(p0, t)
+	local var6, var7 = reactModule.useState(nil)
+	local var8, var9 = reactModule.useState(nil)
 	
 	return reactModule.createElement(popoverContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 32 ]]
-			-- upvalues: var7 (ref), var8 (ref), var9 (ref), var10 (ref), var6 (ref)
-			return {
-				anchor = var7,
-				setAnchor = var8,
-				anchorUri = var9,
-				setAnchorUri = var10,
-				isOpen = var6.isOpen,
-				testId = var6.testId
-			}
-		end, { var7, var9, var6.isOpen, var6.testId }) else nil else {
-			anchor = var7,
-			setAnchor = var8,
-			anchorUri = var9,
-			setAnchorUri = var10,
-			isOpen = var6.isOpen,
-			testId = var6.testId
+		value = {
+			anchor = var6,
+			setAnchor = var7,
+			anchorUri = var8,
+			setAnchorUri = var9,
+			isOpen = var5.isOpen,
+			testId = var5.testId
 		}
-	}, var6.children)
+	}, var5.children)
 end

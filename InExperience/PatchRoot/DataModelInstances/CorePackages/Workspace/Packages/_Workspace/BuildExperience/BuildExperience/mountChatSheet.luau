@@ -6,26 +6,20 @@ local foundationModule = require(parent.Foundation)
 local localizationModule = require(parent.Localization)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
+local robloxAppLocalesModule = require(parent.RobloxAppLocales)
 local roactUtilsModule = require(parent.RoactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
 local buildExperienceCompositionStyleSheetModule = require(buildExperience.Components.BuildExperienceCompositionStyleSheet)
 local _ = require(buildExperience.Components.BuildPillMenu.BuildPillMenuPortal)
 local chatSheetModule = require(buildExperience.Components.ChatSheet.ChatSheet)
 local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
 local clientLogsCollectorModule = require(buildExperience.Chat.clientLogsCollector)
 local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local localizationProvider = localizationModule.LocalizationProvider
+local localization = robloxAppLocalesModule.Localization
 local var14 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.RobloxAppInteractionFeedbackConfig).AppInteractionFeedbackProvider else nil
-
-local function _(p0) --[[ line: 27 | named "createAppLocalization" ]]
-	-- upvalues: fFlagBuildLocalization (ref), parent (ref)
-	return if fFlagBuildLocalization then require(parent.InExperienceLocales).Localization.new(p0) else require(parent.RobloxAppLocales).Localization.new(p0)
-end
-
 local fIntInGameBuildChatSheetSnapPoint = game:DefineFastInt("FIntInGameBuildChatSheetSnapPoint", 50)
 
-local function ConnectedChatSheet() --[[ line: 42 ]]
+local function ConnectedChatSheet() --[[ line: 35 ]]
 	-- upvalues: getPlayButtonStoreModule (ref), reactModule (ref), chatSheetModule (ref), fIntInGameBuildChatSheetSnapPoint (ref)
 	local var18 = getPlayButtonStoreModule()
 	local var19 = var18.useIsActive()
@@ -34,7 +28,7 @@ local function ConnectedChatSheet() --[[ line: 42 ]]
 	return reactModule.createElement(chatSheetModule, {
 		defaultSnapPointIndex = 1,
 		isOpen = var19,
-		onClose = reactModule.useCallback(function() --[[ line: 52 ]]
+		onClose = reactModule.useCallback(function() --[[ line: 45 ]]
 			-- upvalues: var18 (ref)
 			var18.setIsActive(false)
 		end, { var18 }),
@@ -50,13 +44,13 @@ local function ConnectedChatSheet() --[[ line: 42 ]]
 	})
 end
 
-local var17 = roactUtilsModule.Components.createLazyComponent(function() --[[ line: 68 ]]
+local var17 = roactUtilsModule.Components.createLazyComponent(function() --[[ line: 61 ]]
 	-- upvalues: ConnectedChatSheet (ref)
 	return ConnectedChatSheet
 end)
 
-return function() --[[ line: 72 | named "mountChatSheet" ]]
-	-- upvalues: clientLogsCollectorModule (ref), coreGuiService (ref), reactRobloxModule (ref), localizationService (ref), fFlagBuildLocalization (ref), parent (ref), reactModule (ref), foundationModule (ref), buildExperienceCompositionStyleSheetModule (ref), var17 (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var14 (ref), localizationProvider (ref)
+return function() --[[ line: 65 | named "mountChatSheet" ]]
+	-- upvalues: clientLogsCollectorModule (ref), coreGuiService (ref), reactRobloxModule (ref), localization (ref), localizationService (ref), reactModule (ref), foundationModule (ref), buildExperienceCompositionStyleSheetModule (ref), var17 (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var14 (ref), localizationProvider (ref)
 	clientLogsCollectorModule.startServerLogCollection()
 	local buildExperienceChatSheet = Instance.new("ScreenGui")
 	buildExperienceChatSheet.Name = "BuildExperienceChatSheet"
@@ -66,8 +60,7 @@ return function() --[[ line: 72 | named "mountChatSheet" ]]
 	buildExperienceChatSheet.Parent = coreGuiService
 	buildExperienceChatSheet.DisplayOrder = 9
 	local var22 = reactRobloxModule.createRoot(buildExperienceChatSheet)
-	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var23 = if fFlagBuildLocalization then require(parent.InExperienceLocales).Localization.new(robloxLocaleId) else require(parent.RobloxAppLocales).Localization.new(robloxLocaleId)
+	local var23 = localization.new(localizationService.RobloxLocaleId)
 	local var24 = reactModule.createElement(foundationModule.FoundationProvider, {
 		colorMode = foundationModule.Enums.ColorMode.Dark,
 		overlayGui = { DisplayOrder = 9 }

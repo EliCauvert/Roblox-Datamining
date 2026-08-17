@@ -1,9 +1,9 @@
 ﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p0) --[[ line: 7 | named "useClippingRect" ]]
+return function(p0) --[[ line: 6 | named "useClippingRect" ]]
 	-- upvalues: reactModule (ref)
 	local var1, var2 = reactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
-	reactModule.useEffect(function() --[[ line: 10 ]]
+	reactModule.useEffect(function() --[[ line: 9 ]]
 		-- upvalues: p0 (ref), var2 (ref)
 		if not p0.current then return end
 		local var3 = nil
@@ -23,7 +23,7 @@ return function(p0) --[[ line: 7 | named "useClippingRect" ]]
 				var3 = layerCollector
 			end
 		end
-		local function update() --[[ line: 32 ]]
+		local function update() --[[ line: 31 ]]
 			-- upvalues: var3 (write), var2 (copy)
 			if var3 then
 				var2(Rect.new(var3.AbsolutePosition, var3.AbsolutePosition + var3.AbsoluteSize))
@@ -39,7 +39,7 @@ return function(p0) --[[ line: 7 | named "useClippingRect" ]]
 		if var3 then
 			var2(Rect.new(var3.AbsolutePosition, var3.AbsolutePosition + var3.AbsoluteSize))
 		end
-		return function() --[[ line: 46 ]]
+		return function() --[[ line: 45 ]]
 			-- upvalues: t (ref)
 			for i, v in t do
 				v:Disconnect()

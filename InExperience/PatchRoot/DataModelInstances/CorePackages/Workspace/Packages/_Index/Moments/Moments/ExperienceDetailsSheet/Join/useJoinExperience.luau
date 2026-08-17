@@ -85,7 +85,7 @@ return function() --[[ line: 59 | named "useJoinExperience" ]]
 			sessionUtilModule.setPlayIntent(var24)
 		end
 		if var18 then
-			var16.current = listenForTeleportFailureModule(function() --[[ line: 155 ]]
+			var16.current = listenForTeleportFailureModule(function() --[[ line: 152 ]]
 				-- upvalues: var16 (copy), var17 (ref)
 				var16.current = nil
 				var17.setTeleporting(false)
@@ -94,7 +94,7 @@ return function() --[[ line: 59 | named "useJoinExperience" ]]
 		launchGame(tostring(p1), constantsModule_1.JoinReferralPage, { moments_play_intent_id = var24 }, nil, constantsModule_1.JoinLaunchSource)
 		
 		if not var18 then
-			task.delay(6, function() --[[ line: 172 ]]
+			task.delay(6, function() --[[ line: 169 ]]
 				-- upvalues: var17 (ref)
 				var17.setTeleporting(false)
 			end)

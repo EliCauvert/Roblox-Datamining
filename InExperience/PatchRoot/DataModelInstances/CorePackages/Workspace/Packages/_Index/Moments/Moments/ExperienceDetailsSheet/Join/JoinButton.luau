@@ -5,12 +5,16 @@ local reactModule = require(parent.React)
 local button = foundationModule.Button
 local useSignalState = require(parent.SignalsReact).useSignalState
 local _ = require(moments.ExperienceDetailsSheet.Types)
+local feedContextModule = require(moments.Components.Feed.FeedContext)
 local useJoinExperienceModule = require(script.Parent.useJoinExperience)
 local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
+local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 
-return reactModule.memo(function(p0) --[[ line: 30 | named "JoinButton" ]]
-	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), reactModule (ref), button (ref), foundationModule (ref)
-	local var5 = useJoinExperienceModule()
+return reactModule.memo(function(p0) --[[ line: 34 | named "JoinButton" ]]
+	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
+	local var7 = useJoinExperienceModule()
+	local var8 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
+	local var9 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
 	local context = p0.context
 	
 	return reactModule.createElement(button, {
@@ -18,11 +22,14 @@ return reactModule.memo(function(p0) --[[ line: 30 | named "JoinButton" ]]
 		text = p0.text,
 		size = foundationModule.Enums.InputSize.Medium,
 		variant = foundationModule.Enums.ButtonVariant.Emphasis,
-		isDisabled = if p0.isDisabled ~= true then useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting) else true,
+		isDisabled = if p0.isDisabled ~= true then var8 else true,
 		testId = p0.testId,
-		onActivated = function() --[[ line: 43 ]]
-			-- upvalues: var5 (ref), context (ref)
-			var5(context)
+		onActivated = function() --[[ line: 51 ]]
+			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var9 (write), var7 (ref), context (ref)
+			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var9 ~= nil then
+				var9.flushView()
+			end
+			var7(context)
 		end
 	})
 end)

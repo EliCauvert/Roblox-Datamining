@@ -1,4 +1,3 @@
 ﻿return {
-	trustedLabel = "Feature.Friends.TrustedConnection.Label.Trusted",
-	unfilteredChatLabel = "Feature.Chat.Label.UnfilteredChat"
+	trustedLabel = "Feature.Friends.TrustedConnection.Label.Trusted"
 }

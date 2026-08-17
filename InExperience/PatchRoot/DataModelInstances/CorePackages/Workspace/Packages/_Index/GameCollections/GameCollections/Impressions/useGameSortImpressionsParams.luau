@@ -14,31 +14,32 @@ local apportioningDiagnosticTelemetry = require(parent.DiscoveryUtils).Apportion
 local gameCollectionItemTypes = discoveryTypesModule.GameCollectionItemTypes
 local sendGameImpressionsModule = require(script.Parent.SendGameImpressions)
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
+local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local fFlagLuaAppFixSearchImpressions = require(parent.SharedFlags).FFlagLuaAppFixSearchImpressions
 local fFlagLuaAppEnableNxMRoduxApportioning = require(parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local fFlagLuaAppEnableNxMApportioningExtraLogging = require(parent.SharedFlags).FFlagLuaAppEnableNxMApportioningExtraLogging
 
-local function _(value, p0) --[[ line: 32 | named "getGameSetTypeId" ]]
+local function _(value, p0) --[[ line: 33 | named "getGameSetTypeId" ]]
 	return if value == nil then nil elseif p0 then value.topicId else value.gameSetTypeId
 end
 
-local _ = function(value, p1) --[[ line: 44 | named "getGameSetTargetId" ]]
+local _ = function(value, p1) --[[ line: 45 | named "getGameSetTargetId" ]]
 	return if p1 or value == nil then nil else value.gameSetTargetId
 end
 
-local _ = function(p2, p3) --[[ line: 54 | named "getAppliedFilters" ]]
+local _ = function(p2, p3) --[[ line: 55 | named "getAppliedFilters" ]]
 	return if p3 or not p2 then nil else p2.appliedFilters
 end
 
-return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ line: 70 | named "useGameSortImpressionsParams" ]]
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), gameCollectionItemTypes (ref), apportioningDiagnosticTelemetry (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), reportWarning (ref), loggingProtocolModule (ref), sendGameImpressionsModule (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagLuaAppFixSearchImpressions (ref), signal (ref)
+return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ line: 71 | named "useGameSortImpressionsParams" ]]
+	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), appPage (ref), gameSortLoadSource (ref), fFlagLuaAppAddSubIdToHomeEvents (ref), reactModule (ref), discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), gameCollectionItemTypes (ref), apportioningDiagnosticTelemetry (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), reportWarning (ref), loggingProtocolModule (ref), sendGameImpressionsModule (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), fFlagLuaAppFixSearchImpressions (ref), signal (ref)
 	local var4 = useRoactService(appEventIngestService)
 	local var5 = useRoactService(roactAnalytics)
 	local var6 = if p7 == appPage.Home and p4 and p4.topicId then gameSortLoadSource.getSortLoadSource(p4.topicId) else nil
-	local var7 = if p4 then p4.sortSubId else nil
+	local var7 = if fFlagLuaAppAddSubIdToHomeEvents and p4 then p4.sortSubId else nil
 	local var8 = if p4 then p4.analyticsData else nil
-	local var9 = reactModule.useCallback(function(p17) --[[ line: 98 ]]
-		-- upvalues: p15 (ref), discoveryEventErrorLogger (copy), p7 (ref), p11 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), gameCollectionItemTypes (copy), apportioningDiagnosticTelemetry (copy), p6 (ref), p4 (ref), fFlagLuaAppEnableNxMRoduxApportioning (copy), appPage (copy), p16 (ref), reportWarning (copy), loggingProtocolModule (copy), sendGameImpressionsModule (copy), var4 (ref), var5 (ref), p13 (ref), p14 (ref), p8 (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (copy), p9 (ref), p5 (ref), p10 (ref), var6 (ref), var7 (ref), var8 (ref)
+	local var9 = reactModule.useCallback(function(p17) --[[ line: 99 ]]
+		-- upvalues: p15 (ref), discoveryEventErrorLogger (copy), p7 (ref), p11 (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), gameCollectionItemTypes (copy), apportioningDiagnosticTelemetry (copy), p6 (ref), p4 (ref), fFlagLuaAppEnableNxMRoduxApportioning (copy), appPage (copy), p16 (ref), reportWarning (copy), loggingProtocolModule (copy), sendGameImpressionsModule (copy), var4 (ref), var5 (ref), p13 (ref), p14 (ref), p8 (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (copy), p9 (ref), p5 (ref), p10 (ref), var6 (ref), fFlagLuaAppAddSubIdToHomeEvents (copy), var7 (ref), var8 (ref)
 		if p15 == nil or #p15 == 0 then
 			discoveryEventErrorLogger.reportError("useGameSortImpressionsParams_MissingEntries", "useGameSortImpressionsParams: entries is nil or empty for game sort impressions", { pageContext = p7, gameSortId = p11 })
 			
@@ -96,10 +97,11 @@ return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ 
 			
 			return
 		else
-			sendGameImpressionsModule.sendFromTopicContents(var4, var5, p17, p15, p7, if p4 ~= nil then nil elseif p5 then p4.topicId else p4.gameSetTypeId, p6, p14, if p5 or p4 == nil then nil else p4.gameSetTargetId, p10, p13, p8, p9, if p5 or not p4 then nil else p4.appliedFilters, var6, nil, var7, var8)
+			sendGameImpressionsModule.sendFromTopicContents(var4, var5, p17, p15, p7, if p4 ~= nil then nil elseif p5 then p4.topicId else p4.gameSetTypeId, p6, p14, if p5 or p4 == nil then nil else p4.gameSetTargetId, p10, p13, p8, p9, if p5 or not p4 then nil else p4.appliedFilters, var6, nil, if fFlagLuaAppAddSubIdToHomeEvents then var7 else nil, var8)
 		end
 	end, {
-		var4, var5, p6, p8, p9, p5, p4, p7, p13, p14, p10, p15, var6, var7, var8,
+		var4, var5, p6, p8, p9, p5, p4, p7, p13, p14, p10, p15, var6,
+		if fFlagLuaAppAddSubIdToHomeEvents then var7 else nil, var8,
 		if fFlagLuaAppFixSearchImpressions then p16 else nil,
 		if fFlagLuaAppFixSearchImpressions then p11 else nil
 	})
@@ -109,15 +111,15 @@ return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ 
 		var10.current = signal.new()
 	end
 	local current = var10.current
-	reactModule.useEffect(function() --[[ line: 234 ]]
+	reactModule.useEffect(function() --[[ line: 235 ]]
 		-- upvalues: current (ref), p12 (ref)
 		current:fire()
-		local var17 = if p12 then p12:connect(function() --[[ line: 243 ]]
+		local var17 = if p12 then p12:connect(function() --[[ line: 244 ]]
 			-- upvalues: current (copy)
 			current:fire()
 		end) else nil
 		
-		return function() --[[ line: 248 ]]
+		return function() --[[ line: 249 ]]
 			-- upvalues: var17 (write)
 			if var17 then
 				var17:disconnect()
@@ -125,7 +127,7 @@ return function(p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) --[[ 
 		end
 	end, { p12, current })
 	
-	return var9, current, reactModule.useCallback(function() --[[ line: 255 ]]
+	return var9, current, reactModule.useCallback(function() --[[ line: 256 ]]
 		-- upvalues: current (ref)
 		current:fire()
 	end, { current })

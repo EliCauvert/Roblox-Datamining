@@ -40,7 +40,6 @@ local listItemInputTypeModule = require(script.Enums.ListItemInputType)
 local numberInputControlsVariantModule = require(script.Enums.NumberInputControlsVariant)
 local onChangeCallbackReasonModule = require(script.Enums.OnChangeCallbackReason)
 local onCloseCallbackReasonModule = require(script.Enums.OnCloseCallbackReason)
-local optionSelectorGroupSizeModule = require(script.Enums.OptionSelectorGroupSize)
 local orientationModule = require(script.Enums.Orientation)
 local paginationSizeModule = require(script.Enums.PaginationSize)
 local paginationVariantModule = require(script.Enums.PaginationVariant)
@@ -78,12 +77,11 @@ local baseMenuModule = require(script.Components.BaseMenu)
 local buttonModule = require(script.Components.Button)
 local buttonGroupModule = require(script.Components.ButtonGroup)
 local checkboxModule = require(script.Components.Checkbox)
-local checkboxGroupModule = require(script.Components.CheckboxGroup)
 local coachmarkModule = require(script.Components.Coachmark)
 local educationalTooltipModule = require(script.Components.EducationalTooltip)
 local chipModule = require(script.Components.Chip)
 local _ = require(script.Components.AlertActions)
-local var79 = strictModule({
+local var77 = strictModule({
 	Accordion = accordionModule,
 	Avatar = avatarModule,
 	AvatarGroup = avatarGroupModule,
@@ -93,7 +91,6 @@ local var79 = strictModule({
 	Button = buttonModule,
 	ButtonGroup = buttonGroupModule,
 	Checkbox = checkboxModule,
-	CheckboxGroup = checkboxGroupModule,
 	Chip = chipModule,
 	ChipGroup = require(script.Components.ChipGroup),
 	Coachmark = coachmarkModule,
@@ -140,7 +137,6 @@ local var79 = strictModule({
 	TextArea = require(script.Components.TextArea),
 	TextInput = require(script.Components.TextInput),
 	Toggle = require(script.Components.Toggle),
-	ToggleGroup = require(script.Components.ToggleGroup),
 	Tooltip = require(script.Components.Tooltip),
 	Toast = require(script.Components.Toast),
 	View = require(script.Components.View),
@@ -212,7 +208,6 @@ local var79 = strictModule({
 		ScrubBehavior = scrubBehaviorModule,
 		OnChangeCallbackReason = onChangeCallbackReasonModule,
 		OnCloseCallbackReason = onCloseCallbackReasonModule,
-		OptionSelectorGroupSize = optionSelectorGroupSizeModule,
 		Orientation = orientationModule,
 		PaginationSize = paginationSizeModule,
 		PaginationVariant = paginationVariantModule,
@@ -273,9 +268,9 @@ local var79 = strictModule({
 
 if _G.__FOUNDATION_TRACK_USAGE__ then
 	local usageTrackerModule = require(script.Parent.UsageTracker)
-	var79 = usageTrackerModule.trackMemberAccess("Foundation", var79, usageTrackerModule.isReactComponent)
+	var77 = usageTrackerModule.trackMemberAccess("Foundation", var77, usageTrackerModule.isReactComponent)
 end
 if _G.__FOUNDATION_TRACE_LOG__ then
 	require(script.Utility.Logger):enableTraceLog()
 end
-return var79
+return var77

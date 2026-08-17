@@ -9,6 +9,7 @@ local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventE
 local fFlagEnableShareLinksInGameDetailEvent = require(parent.SharedFlags).FFlagEnableShareLinksInGameDetailEvent
 local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
 local fFlagLuaAppGameDetailEventMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGameDetailEventMobileAdsId
+local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
 local fFlagLuaAppAddSeeAllFlagToGameDetailReferral = require(parent.SharedFlags).FFlagLuaAppAddSeeAllFlagToGameDetailReferral
@@ -62,12 +63,12 @@ local var7 = tModule.strictInterface({
 	heroUnitId = tModule.optional(tModule.string),
 	loadSource = tModule.optional(tModule.string),
 	tileType = tModule.optional(tModule.string),
-	sortSubId = tModule.optional(tModule.string),
+	sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then tModule.optional(tModule.string) else nil,
 	analyticsData = tModule.optional(tModule.table),
 	seeAllFlag = if fFlagLuaAppAddSeeAllFlagToGameDetailReferral then tModule.optional(tModule.number) else nil
 })
 
-local function _(p0) --[[ line: 92 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p0) --[[ line: 93 | named "addMobileAdvertisingIdToEventParams" ]]
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -76,7 +77,7 @@ local function _(p0) --[[ line: 92 | named "addMobileAdvertisingIdToEventParams"
 	end
 end
 
-return function(p1, p2, p3) --[[ line: 99 ]]
+return function(p1, p2, p3) --[[ line: 100 ]]
 	-- upvalues: var7 (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGameDetailEventMobileAdsId (ref), appStorageService (ref), cryoModule (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var5 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var6 (write)
 	local var9, var10 = var7(p3)
 	

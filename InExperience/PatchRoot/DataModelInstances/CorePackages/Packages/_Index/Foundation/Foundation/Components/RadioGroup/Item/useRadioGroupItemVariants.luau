@@ -6,10 +6,9 @@ local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant
 local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local flagsModule = require(foundation.Utility.Flags)
 
-local function variantsFactory(p0) --[[ line: 30 ]]
-	-- upvalues: inputSizeModule (ref), flagsModule (ref)
+local function variantsFactory(p0) --[[ line: 28 ]]
+	-- upvalues: inputSizeModule (ref)
 	return {
 		common = {
 			input = {
@@ -42,17 +41,15 @@ local function variantsFactory(p0) --[[ line: 30 ]]
 			},
 			[inputSizeModule.Large] = {
 				input = {
-					size = if flagsModule.FoundationRadioBeta then UDim2.fromOffset(p0.Size.Size_600, p0.Size.Size_600) else UDim2.fromOffset(p0.Size.Size_700, p0.Size.Size_700)
+					size = UDim2.fromOffset(p0.Size.Size_700, p0.Size.Size_700)
 				},
-				checkmark = {
-					tag = if flagsModule.FoundationRadioBeta then "size-250" else "size-300"
-				}
+				checkmark = { tag = "size-300" }
 			}
 		}
 	}
 end
 
-return function(p1, p2) --[[ line: 65 ]]
+return function(p1, p2) --[[ line: 59 ]]
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local radioItem = variantsContextModule.useVariants("RadioItem", variantsFactory, p1)
 	

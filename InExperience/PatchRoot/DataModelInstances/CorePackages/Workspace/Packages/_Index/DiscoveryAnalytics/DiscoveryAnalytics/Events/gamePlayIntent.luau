@@ -9,6 +9,7 @@ local tModule = require(parent.t)
 local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local fFlagLuaAppGamePlayIntentEventMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGamePlayIntentEventMobileAdsId
 local fFlagTraversalHistoryDiscoveryTelemetry = require(parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
+local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local luaAppRemoveNumericalSortIndexSearch = game:DefineFastFlag("LuaAppRemoveNumericalSortIndexSearch", false)
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
@@ -62,7 +63,7 @@ local t = {
 		heroUnitId = tModule.optional(tModule.string),
 		loadSource = tModule.optional(tModule.string),
 		launchData = tModule.optional(tModule.string),
-		sortSubId = tModule.optional(tModule.string),
+		sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then tModule.optional(tModule.string) else nil,
 		tileType = tModule.string,
 		analyticsData = tModule.optional(tModule.table),
 		actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then tModule.optional(tModule.string) else nil
@@ -162,7 +163,7 @@ local t = {
 	}) else nil else nil
 }
 
-local function _(p0) --[[ line: 210 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p0) --[[ line: 211 | named "addMobileAdvertisingIdToEventParams" ]]
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -171,8 +172,8 @@ local function _(p0) --[[ line: 210 | named "addMobileAdvertisingIdToEventParams
 	end
 end
 
-return function(p1, p2, p3) --[[ line: 217 ]]
-	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), cryoModule (ref), telemetryService (ref), var10 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
+return function(p1, p2, p3) --[[ line: 218 ]]
+	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), fFlagLuaAppAddSubIdToHomeEvents (ref), cryoModule (ref), telemetryService (ref), var10 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
 	if t[p2] == nil then
 		discoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {p2} to type check gamePlayIntent event parameters`, { eventContext = p2 })
 	else
@@ -231,7 +232,7 @@ return function(p1, p2, p3) --[[ line: 217 ]]
 			mobileAdvertisingId = if fFlagLuaAppGamePlayIntentEventMobileAdsId then p3.mobileAdvertisingId else nil,
 			loadSource = p3.loadSource,
 			launchData = if p3.launchData then p3.launchData else nil,
-			sortSubId = p3.sortSubId,
+			sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then p3.sortSubId else nil,
 			tileType = p3.tileType
 		}
 		
@@ -275,7 +276,7 @@ return function(p1, p2, p3) --[[ line: 217 ]]
 			mobileAdvertisingId = if fFlagLuaAppGamePlayIntentEventMobileAdsId then p3.mobileAdvertisingId else nil,
 			loadSource = p3.loadSource,
 			launchData = if p3.launchData then p3.launchData else nil,
-			sortSubId = p3.sortSubId,
+			sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then p3.sortSubId else nil,
 			tileType = p3.tileType
 		}
 		
@@ -318,7 +319,7 @@ return function(p1, p2, p3) --[[ line: 217 ]]
 				mobileAdvertisingId = if fFlagLuaAppGamePlayIntentEventMobileAdsId then p3.mobileAdvertisingId else nil,
 				loadSource = p3.loadSource,
 				launchData = if p3.launchData then p3.launchData else nil,
-				sortSubId = p3.sortSubId,
+				sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then p3.sortSubId else nil,
 				tileType = p3.tileType
 			},
 			legacyOverrideTargetForEventIngest = getPlatformTarget()

@@ -2,25 +2,15 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local useBuildPageEligibilityModule = require(buildExperience.useBuildPageEligibility)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 
-return function(p0) --[[ line: 24 | named "BuildEligibilityDialog" ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useBuildPageEligibilityModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local var6 = if fFlagBuildLocalization then useLocalization({
-		dialogAction = localizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,
-		errorDescription = localizationStringsModule.BUILD_ELIGIBILITY_ERROR_DESCRIPTION,
-		errorTitle = localizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE,
-		ineligibleDescription = localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION,
-		ineligibleTitle = localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_TITLE
-	}) else nil
-	local var7 = p0.variant == useBuildPageEligibilityModule.Status.Ineligible
+return function(p0) --[[ line: 20 | named "BuildEligibilityDialog" ]]
+	-- upvalues: useBuildPageEligibilityModule (ref), localizationStringsModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
+	local var5 = p0.variant == useBuildPageEligibilityModule.Status.Ineligible
 	
 	return reactModule.createElement(dialog.Root, {
 		testId = "build-eligibility-dialog",
@@ -28,18 +18,18 @@ return function(p0) --[[ line: 24 | named "BuildEligibilityDialog" ]]
 	}, {
 		Title = reactModule.createElement(dialog.Title, {
 			LayoutOrder = 1,
-			text = if var7 then if fFlagBuildLocalization then var6.ineligibleTitle else localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_TITLE elseif fFlagBuildLocalization then var6.errorTitle else localizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE
+			text = if var5 then localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_TITLE else localizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE
 		}),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			Description = reactModule.createElement(dialog.Text, {
-				Text = if var7 then if fFlagBuildLocalization then var6.ineligibleDescription else localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION elseif fFlagBuildLocalization then var6.errorDescription else localizationStringsModule.BUILD_ELIGIBILITY_ERROR_DESCRIPTION
+				Text = if var5 then localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION else localizationStringsModule.BUILD_ELIGIBILITY_ERROR_DESCRIPTION
 			})
 		}),
 		Actions = reactModule.createElement(dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = if fFlagBuildLocalization then var6.dialogAction else localizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,
+					text = localizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,
 					variant = buttonVariant.Emphasis,
 					onActivated = p0.onDismiss
 				}

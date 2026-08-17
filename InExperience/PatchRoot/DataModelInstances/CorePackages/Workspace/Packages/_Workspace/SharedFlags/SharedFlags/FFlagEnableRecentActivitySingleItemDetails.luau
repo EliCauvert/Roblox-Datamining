@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EnableRecentActivitySingleItemDetails", false) and require(script.Parent.FFlagEnableRecentActivityInspectAndBuy)

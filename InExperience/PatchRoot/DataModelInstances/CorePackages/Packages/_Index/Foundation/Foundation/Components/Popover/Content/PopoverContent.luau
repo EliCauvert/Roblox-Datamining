@@ -2,7 +2,6 @@
 local parent = foundation.Parent
 local constantsModule = require(foundation.Constants)
 local dashModule = require(parent.Dash)
-local flagsModule = require(foundation.Utility.Flags)
 local imageModule = require(foundation.Components.Image)
 local popoverContextModule = require(script.Parent.Parent.PopoverContext)
 local viewModule = require(foundation.Components.View)
@@ -38,131 +37,124 @@ local t_1 = {
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverContent" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), popoverContextModule (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePointerPositionModule (ref), useFloatingModule (ref), isPointInGuiObjectBoundsModule (ref), flagsModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), dashModule (ref), t_1 (ref), elevationOwnerScope (ref), reactRobloxModule (ref)
-	local var46
-	local var23 = withDefaultsModule(p0, t)
-	local var24 = reactModule.useContext(popoverContextModule)
-	local isInstance = typeof(var24.anchor) == "Instance"
-	local var26 = if isInstance then var23.hasArrow else false
-	local var27 = useOverlayModule()
-	local var28 = useTokensModule()
-	local var29 = useElevationModule(elevationLayerModule.Popover, { stackAboveOwner = true })
-	local size200 = var28.Size.Size_200
-	local var30 = size200 * 1.414213562373 / 2
-	local backgroundStyle = var23.backgroundStyle or var28.Color.Surface.Surface_100
-	local var32, var33 = reactModule.useState(nil)
-	local var34, var35 = reactModule.useState(nil)
-	local var36 = usePointerPositionModule(var34)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 96 ]]
-		-- upvalues: var32 (ref)
-		return var32
-	end, { var32 })
-	local var37, var38, var39, var40, var41, var42 = useFloatingModule(var24.isOpen, var24.anchor, var32, var27, var23.side, var23.align, if var26 then var30 else 0)
-	local var43 = reactModule.useRef(nil)
-	local var44 = reactModule.useCallback(function(p2) --[[ line: 112 ]]
-		-- upvalues: var43 (ref), var35 (ref), var23 (ref), var24 (ref), isInstance (ref), var36 (ref), isPointInGuiObjectBoundsModule (copy)
-		if var43.current then
-			var43.current:Disconnect()
+return reactModule.forwardRef(function(p0, p1) --[[ line: 76 | named "PopoverContent" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), popoverContextModule (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePointerPositionModule (ref), useFloatingModule (ref), isPointInGuiObjectBoundsModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), dashModule (ref), t_1 (ref), elevationOwnerScope (ref), reactRobloxModule (ref)
+	local var44
+	local var22 = withDefaultsModule(p0, t)
+	local var23 = reactModule.useContext(popoverContextModule)
+	local isInstance = typeof(var23.anchor) == "Instance"
+	local var25 = if isInstance then var22.hasArrow else false
+	local var26 = useOverlayModule()
+	local var27 = useTokensModule()
+	local var28 = useElevationModule(elevationLayerModule.Popover, { stackAboveOwner = true })
+	local size200 = var27.Size.Size_200
+	local var29 = size200 * 1.414213562373 / 2
+	local backgroundStyle = var22.backgroundStyle or var27.Color.Surface.Surface_100
+	local var31, var32 = reactModule.useState(nil)
+	local var33, var34 = reactModule.useState(nil)
+	local var35 = usePointerPositionModule(var33)
+	reactModule.useImperativeHandle(p1, function() --[[ line: 95 ]]
+		-- upvalues: var31 (ref)
+		return var31
+	end, { var31 })
+	local var36, var37, var38, var39, var40, var41 = useFloatingModule(var23.isOpen, var23.anchor, var31, var26, var22.side, var22.align, if var25 then var29 else 0)
+	local var42 = reactModule.useRef(nil)
+	local var43 = reactModule.useCallback(function(p2) --[[ line: 111 ]]
+		-- upvalues: var42 (ref), var34 (ref), var22 (ref), var23 (ref), isInstance (ref), var35 (ref), isPointInGuiObjectBoundsModule (copy)
+		if var42.current then
+			var42.current:Disconnect()
 		end
-		var35(p2)
+		var34(p2)
 		
-		if p2 ~= nil and var23.onPressedOutside then
-			var43.current = p2:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ line: 119 ]]
-				-- upvalues: p2 (ref), var24 (copy), isInstance (copy), var36 (copy), isPointInGuiObjectBoundsModule (copy), var23 (copy)
+		if p2 ~= nil and var22.onPressedOutside then
+			var42.current = p2:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ line: 118 ]]
+				-- upvalues: p2 (ref), var23 (copy), isInstance (copy), var35 (copy), isPointInGuiObjectBoundsModule (copy), var22 (copy)
 				if p2.GuiState == Enum.GuiState.Press then
-					if var24.anchor and isInstance then
-						local anchor = var24.anchor
+					if var23.anchor and isInstance then
+						local anchor = var23.anchor
 						
-						if isPointInGuiObjectBoundsModule(anchor, var36:getValue()) then return end
+						if isPointInGuiObjectBoundsModule(anchor, var35:getValue()) then return end
 						if anchor.GuiState ~= Enum.GuiState.Idle then return end
 					end
-					var23.onPressedOutside()
+					var22.onPressedOutside()
 				end
 			end)
 		end
-	end, { var23.onPressedOutside, var24.anchor })
-	reactModule.useEffect(function() --[[ line: 142 ]]
-		-- upvalues: var43 (ref)
-		return function() --[[ line: 143 ]]
-			-- upvalues: var43 (copy)
-			if var43.current then
-				var43.current:Disconnect()
+	end, { var22.onPressedOutside, var23.anchor })
+	reactModule.useEffect(function() --[[ line: 141 ]]
+		-- upvalues: var42 (ref)
+		return function() --[[ line: 142 ]]
+			-- upvalues: var42 (copy)
+			if var42.current then
+				var42.current:Disconnect()
 			end
 		end
 	end, {})
-	local var45 = if flagsModule.FoundationPopoverContentAnchorFix then reactModule.joinBindings({ var37, var42, var39 }):map(function(p3) --[[ line: 156 ]]
-		local var47 = p3[1]
-		local var48 = p3[2]
-		local var49 = p3[3]
-		
-		return UDim2.fromOffset(var47.X - var48.X * var49.X.Offset, var47.Y - var48.Y * var49.Y.Offset)
-	end) else nil
 	
-	if var24.isOpen then
-		var46 = reactModule.createElement
-		var46 = var46(viewModule, {
+	if var23.isOpen then
+		var44 = reactModule.createElement
+		var44 = var44(viewModule, {
 			tag = "size-full",
-			ZIndex = var29.zIndex,
-			Visible = var38,
-			testId = `{var24.testId}--container`
+			ZIndex = var28.zIndex,
+			Visible = var37,
+			testId = `{var23.testId}--container`
 		}, {
-			Backdrop = if var23.onPressedOutside and var24.isOpen then reactModule.createElement(viewModule, {
+			Backdrop = if var22.onPressedOutside and var23.isOpen then reactModule.createElement(viewModule, {
 				ZIndex = 1,
 				tag = "position-center-center anchor-center-center",
 				stateLayer = { affordance = stateLayerAffordanceModule.None },
 				Size = UDim2.fromScale(2, 2),
-				ref = var44,
-				testId = `{var24.testId}--backdrop`
+				ref = var43,
+				testId = `{var23.testId}--backdrop`
 			}) else nil,
 			Shadow = reactModule.createElement(imageModule, {
 				ZIndex = 2,
-				AnchorPoint = var42,
+				AnchorPoint = var41,
 				Image = SHADOW_IMAGE,
-				Size = var39:map(function(p4) --[[ line: 190 ]]
+				Size = var38:map(function(p3) --[[ line: 172 ]]
 					-- upvalues: SHADOW_SIZE (copy)
-					return p4 + UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE)
+					return p3 + UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE)
 				end),
-				Position = reactModule.joinBindings({ var37, var42 }):map(function(p5) --[[ line: 193 ]]
+				Position = reactModule.joinBindings({ var36, var41 }):map(function(p4) --[[ line: 175 ]]
 					-- upvalues: SHADOW_SIZE (copy)
-					return UDim2.fromOffset(p5[1].X + SHADOW_SIZE / 2 * (if p5[2].X == 0 then -1 else 1), p5[1].Y + SHADOW_SIZE / 2 * (if p5[2].Y == 0 then -1 else 1) + 2)
+					return UDim2.fromOffset(p4[1].X + SHADOW_SIZE / 2 * (if p4[2].X == 0 then -1 else 1), p4[1].Y + SHADOW_SIZE / 2 * (if p4[2].Y == 0 then -1 else 1) + 2)
 				end),
 				slice = {
 					center = Rect.new(SHADOW_SIZE, SHADOW_SIZE, SHADOW_SIZE + 1, SHADOW_SIZE + 1)
 				},
-				imageStyle = var28.Color.Extended.Black.Black_20,
-				testId = `{var24.testId}--shadow`
+				imageStyle = var27.Color.Extended.Black.Black_20,
+				testId = `{var23.testId}--shadow`
 			}),
-			Arrow = if var26 then reactModule.createElement(viewModule, {
+			Arrow = if var25 then reactModule.createElement(viewModule, {
 				Rotation = 45,
 				ZIndex = 3,
 				tag = "anchor-center-center",
 				Size = UDim2.fromOffset(size200, size200),
-				Position = var40:map(function(p6) --[[ line: 211 ]]
-					return UDim2.fromOffset(p6.X, p6.Y)
+				Position = var39:map(function(p5) --[[ line: 193 ]]
+					return UDim2.fromOffset(p5.X, p5.Y)
 				end),
 				backgroundStyle = backgroundStyle,
-				testId = `{var24.testId}--arrow`
+				testId = `{var23.testId}--arrow`
 			}) else nil,
 			Content = reactModule.createElement(viewModule, {
 				ZIndex = 4,
-				AnchorPoint = if flagsModule.FoundationPopoverContentAnchorFix then Vector2.zero else var42,
-				Position = if flagsModule.FoundationPopoverContentAnchorFix then var45 else var37:map(function(p7) --[[ line: 225 ]]
-					return UDim2.fromOffset(p7.X, p7.Y)
+				AnchorPoint = var41,
+				Position = var36:map(function(p6) --[[ line: 205 ]]
+					return UDim2.fromOffset(p6.X, p6.Y)
 				end),
-				selection = var23.selection,
-				selectionGroup = var23.selectionGroup,
-				sizeConstraint = { MaxSize = var41 },
+				selection = var22.selection,
+				selectionGroup = var22.selectionGroup,
+				sizeConstraint = { MaxSize = var40 },
 				stateLayer = { affordance = stateLayerAffordanceModule.None },
-				onActivated = if var23.onPressedOutside or var23.DO_NOT_USE_hasContentInputSink then dashModule.noop else nil,
+				onActivated = if var22.onPressedOutside or var22.DO_NOT_USE_hasContentInputSink then dashModule.noop else nil,
 				backgroundStyle = backgroundStyle,
-				tag = `auto-xy {t_1[var23.radius]}`,
-				ref = var33,
-				testId = `{var24.testId}--content`
-			}, reactModule.createElement(elevationOwnerScope, { owner = var29 }, var23.children))
+				tag = `auto-xy {t_1[var22.radius]}`,
+				ref = var32,
+				testId = `{var23.testId}--content`
+			}, reactModule.createElement(elevationOwnerScope, { owner = var28 }, var22.children))
 		})
 	else
-		var46 = nil
+		var44 = nil
 	end
-	return if var27 == nil then var46 else reactRobloxModule.createPortal(var46, var27)
+	return if var26 == nil then var44 else reactRobloxModule.createPortal(var44, var26)
 end)
