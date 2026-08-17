@@ -34,7 +34,7 @@ return {
 			table.insert(t, {
 				day = daysInMonth - var11 + i,
 				keyPrefix = dateTimePickerCalendarDayKeyPrefixModule.PrevMonth,
-				layoutOrder = var6,
+				LayoutOrder = var6,
 				month = prevMonthInfo,
 				year = prevMonthInfo_1
 			})
@@ -45,7 +45,7 @@ return {
 				applyEmphasis = true,
 				day = i_1,
 				keyPrefix = dateTimePickerCalendarDayKeyPrefixModule.CurrentMonth,
-				layoutOrder = var6,
+				LayoutOrder = var6,
 				month = p4.month,
 				year = p4.year
 			})
@@ -63,7 +63,7 @@ return {
 			table.insert(t, {
 				day = i_2,
 				keyPrefix = dateTimePickerCalendarDayKeyPrefixModule.NextMonth,
-				layoutOrder = var6,
+				LayoutOrder = var6,
 				month = nextMonthInfo,
 				year = nextMonthInfo_1
 			})
@@ -78,7 +78,7 @@ return {
 		local firstDayOfWeek = dateTimeUtilitiesModule.getFirstDayOfWeek(p5, p6)
 		
 		for i = 1, firstDayOfWeek do
-			table.insert(t, { key = `lead-{i}`, layoutOrder = var18 })
+			table.insert(t, { key = `lead-{i}`, LayoutOrder = var18 })
 			var18 += 1
 		end
 		local daysInMonth = dateTimeUtilitiesModule.getDaysInMonth(p5, p6)
@@ -87,14 +87,14 @@ return {
 			table.insert(t, {
 				day = i_1,
 				key = `day-{i_1}`,
-				layoutOrder = var18,
+				LayoutOrder = var18,
 				month = p5,
 				year = p6
 			})
 			var18 += 1
 		end
 		for i_2 = 1, (DAYS_PER_WEEK - (firstDayOfWeek + daysInMonth) % DAYS_PER_WEEK) % DAYS_PER_WEEK do
-			table.insert(t, { key = `trail-{i_2}`, layoutOrder = var18 })
+			table.insert(t, { key = `trail-{i_2}`, LayoutOrder = var18 })
 			var18 += 1
 		end
 		return t

@@ -277,7 +277,9 @@ Authentication.CrossDevice.Label.QrCodeError,QRコードの表示に問題が発
 Authentication.CrossDevice.Label.QrCodeLogin,QRコードでログイン
 Authentication.CrossDevice.Label.QrHeader,オプション1
 Authentication.CrossDevice.Label.QrInstructions,ログインしたお持ちのデバイスのカメラから、このQRコードをスキャンします。
+Authentication.CrossDevice.Label.QrTroubleshooting,問題がある場合
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,ログインを完了するには、お使いのパソコンまたはスマホで <b>roblox.com/quest</b> にアクセスしてこのコードを入力してください。
+Authentication.CrossDevice.Label.QuickSignInInstructions,QRコードをスキャンするか、ログインしたデバイスで <b>[その他] > [クイックサインイン]</b> に移動し、コードを入力してください。
 Authentication.CrossDevice.Label.QuickSignInWarning,セキュリティ保護のため、新しいデバイスで生成したコードのみを入力してください。
 Authentication.CrossDevice.Label.SigninInstructionHeading,新しいデバイスで{username}としてログインするには：
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 新しいデバイスで、ログインページを開きます
@@ -1149,8 +1151,6 @@ Feature.Accessibility.Action.ScrollDown,下スクロール
 Feature.Accessibility.Action.ScrollUp,上スクロール
 Feature.Accessibility.AppTheme.CategoryCalm,穏やか
 Feature.Accessibility.AppTheme.CategoryDynamic,動的
-Feature.Accessibility.AppTheme.CategoryEnergetic,エネルギッシュ
-Feature.Accessibility.AppTheme.CategoryKinetic,躍動的
 Feature.Accessibility.AppTheme.CircuitRush,サイバーグリーン
 Feature.Accessibility.AppTheme.CosmicDust,宇宙の粉
 Feature.Accessibility.AppTheme.Default,
@@ -2108,7 +2108,135 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,{DisplayName} さんをブロックしますか？
 Feature.BlockingModal.Message.BlockConfirmation,このユーザーをブロックするとつながりまたはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,このユーザーをブロックすると友達またはフォロワーから削除されます。ブロックされた人は、あなたにメッセージやリクエスト、招待状を送れなくなります。<br /><br />あなたがブロックしたことは相手に通知されません。
-Feature.BuyRobux.Heading.Banner,Robuxを買う
+Feature.Build.Action.AddFriends,
+Feature.Build.Action.AddPlaytester,プレイテスターを追加
+Feature.Build.Action.AddPlaytesters,
+Feature.Build.Action.AddToPlaytest,プレイテストに追加
+Feature.Build.Action.Archive,アーカイブ
+Feature.Build.Action.ArchiveGame,ゲームをアーカイブする
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,買う
+Feature.Build.Action.BuyRobux,Robuxを買う
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,テキストをコピー
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
+Feature.Build.Action.ManageLimit,限度額を管理
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,通知する
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,設定を開く
+Feature.Build.Action.Playtest,プレイテスト
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,公開する
+Feature.Build.Action.PublishLatest,最新のものを公開
+Feature.Build.Action.Restore,復元
+Feature.Build.Action.SetDailyLimit,1日あたりの限度額を設定
+Feature.Build.Action.SetLimit,限度額を設定
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,シェア
+Feature.Build.Action.ShareLink,リンクを共有
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,レーティングを更新
+Feature.Build.Action.UpdateWithChanges,変更を反映して更新
+Feature.Build.Action.View,
+Feature.Build.Action.ViewUsage,使用量を表示
+Feature.Build.Content.NewGame,新規のゲーム
+Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
+Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
+Feature.Build.Description.BuildIdeaGame,アイデアをゲームに変えよう
+Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたときに通知を受け取りましょう。
+Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
+Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
+Feature.Build.Description.ChoosePlaytesters,プレイテストに協力してもらう友達を選択してください。
+Feature.Build.Description.EnableBuildNotifs,ビルドからの最新情報を受け取るには、デバイス設定で通知を有効化してください。
+Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスできるのはあなたの友達のみです。より多くの人にプレイしてもらいたい場合は、ゲームのオーディエンス設定を変更してください。
+Feature.Build.Description.HubSettings,クリエーターハブですべての設定を管理します
+Feature.Build.Description.MakeAudienceAvail,このオーディエンスが利用できるようにするには、バーチャル空間を公開してください。
+Feature.Build.Description.ManageAppearance,他のユーザーへのゲームの表示のされ方を管理しましょう。
+Feature.Build.Description.PlayAfterPublish,このバーチャル空間を公開した後、誰がプレイできるかを選択します。
+Feature.Build.Description.PlaytestLocked,プレイテストは、最初のゲームを制作した後に開始可能です。
+Feature.Build.Description.PlaytesterAccess,友達をプレイテスターとして追加するか、ゲームのオーディエンス設定を変更して、より多くの人にプレイしてもらいましょう。
+Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定を変更してシェアしてください。
+Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
+Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
+Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
+Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
+Feature.Build.Header.AccessSharing,アクセスとシェア
+Feature.Build.Header.ContentMaturity,コンテンツ成熟度
+Feature.Build.Header.CustomAnswer,カスタムの回答
+Feature.Build.Header.GameDetails,ゲームの詳細
+Feature.Build.Header.Overview,概要
+Feature.Build.Label.Access,アクセス
+Feature.Build.Label.AdditionalUsage,追加のビルド使用量
+Feature.Build.Label.Available,利用可能
+Feature.Build.Label.BackToBuild,ビルドに戻る
+Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
+Feature.Build.Label.ContentRating,コンテンツのレーティング
+Feature.Build.Label.CreatorHub,クリエーターハブ
+Feature.Build.Label.DescribeIdea,アイデアを説明してください
+Feature.Build.Label.Description,
+Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
+Feature.Build.Label.IconThumbnails,アイコンとサムネイル
+Feature.Build.Label.Loading,読み込み中...
+Feature.Build.Label.NoLimit,制限なし
+Feature.Build.Label.ResetsDaily,毎日リセット
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,ゲームをサーチ
+Feature.Build.Label.SearchTasks,タスクをサーチ
+Feature.Build.Label.SelectOption,オプションを選択
+Feature.Build.Label.ShareAddedFriends,追加した友達とシェア
+Feature.Build.Label.Title,タイトル
+Feature.Build.Label.TitleDescription,タイトルと詳細
+Feature.Build.Label.Unknown,不明
+Feature.Build.Label.Version,
+Feature.Build.Label.VersionTitleDesc,バージョンタイトルと詳細
+Feature.Build.Label.Video,
+Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
+Feature.Build.Message.AccountTooNew,お持ちのアカウントは公開するには新しすぎます。2日目になってからもう一度お試しください。
+Feature.Build.Message.AllFriendsAdded,すべての友達をプレイテスターとして追加しました。
+Feature.Build.Message.AudienceIneligible,このオーディエンスの対象外
+Feature.Build.Message.ExpandAudience,クリエーターハブでオーディエンスの適格性を拡大
+Feature.Build.Message.ExperiencesLoadFailed,バーチャル空間を読み込めませんでした
+Feature.Build.Message.FriendsLoadFailed,友達を読み込めませんでした。もう一度お試しください。
+Feature.Build.Message.GamePublishFailed,ゲームを公開できませんでした。もう一度お試しください。
+Feature.Build.Message.InvitesLoadFailed,招待を読み込めませんでした
+Feature.Build.Message.LinkCopied,リンクをクリップボードにコピーしました。
+Feature.Build.Message.NoFriendsToAdd,まだ追加する友達がいません。まずはRobloxでつながる人を見つけましょう。
+Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
+Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
+Feature.Build.Message.QuestionnaireNeeded,このゲームはビルド外で編集されました。公開するには、コンテンツに関する質問フォームに回答してください。
+Feature.Build.Message.ReadyToPlay,あなたのゲームをRobloxでプレイするための準備完了です！
+Feature.Build.Message.RestoreVersionFailed,このバージョンを復元できませんでした。もう一度お試しください。
+Feature.Build.Message.SaveChangesFailed,変更を保存できませんでした。もう一度お試しください。
+Feature.Build.Message.ShareLinkFailed,共有リンクを作成できませんでした。もう一度お試しください。
+Feature.Build.Message.TryAgain,やり直してください。
+Feature.Build.Message.TurnToPortrait,ゲームの作業を続けるには、デバイスをポートレートモードにしてください。
+Feature.Build.Message.WhatToCreate,今日は何を制作したいですか？
+Feature.Build.Title.AddFriendsToPlaytest,プレイテストに協力してもらう友達を追加してください
+Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？
+Feature.Build.Title.Audience,オーディエンス
+Feature.Build.Title.BuildUnavailable,ビルドは利用できません
+Feature.Build.Title.ChatBuildUnavailable,ビルドは利用できません。
+Feature.Build.Title.Content,コンテンツ
+Feature.Build.Title.DailyRobuxReached,Robuxが1日の限度額に達しました
+Feature.Build.Title.ExperienceAudience,バーチャル空間のオーディエンス
+Feature.Build.Title.FreeUsageReached,無料のビルド使用量の限度額に達しました
+Feature.Build.Title.FriendsOnlyPlay,友達だけがプレイできます
+Feature.Build.Title.GameCreationDone,ゲームの作成が完了しました
+Feature.Build.Title.GamePrivate,このゲームは非公開です
+Feature.Build.Title.GenericError,
+Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
+Feature.Build.Title.Playtesters,プレイテスター
+Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
+Feature.Build.Title.PushNotifications,プッシュ通知
+Feature.Build.Title.Tasks,タスク
+Feature.Build.Title.VersionHistory,バージョン履歴
+Feature.Build.Title.VersionInformation,バージョン情報
+Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,しない
 Feature.Captures.Action.Share,
@@ -2178,7 +2306,7 @@ Feature.Catalog.Heading.ItemInfo,アイテム情報
 Feature.Catalog.Heading.ItemRemoved,アイテム削除済み
 Feature.Catalog.Heading.ItemsOnSale,販売中のアイテム
 Feature.Catalog.Heading.NotForSale,非売品
-Feature.Catalog.Heading.Overview,概要
+Feature.Catalog.Heading.Overview,
 Feature.Catalog.Heading.PremiumOnly,Roblox Plus限定
 Feature.Catalog.Heading.QuantityLimitReached,クリエーターが設定した限度に達しました。
 Feature.Catalog.Heading.QuickMenu,クイックメニュー
@@ -2548,7 +2676,7 @@ Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName}さんからグル
 Feature.Chat.Heading.YouWereInvitedToGroup,グループに招待されました
 Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
-Feature.Chat.Label.Available,利用可能
+Feature.Chat.Label.Available,
 Feature.Chat.Label.Blocked,ブロック済み
 Feature.Chat.Label.ByBuilder,制作: {USERNAME}
 Feature.Chat.Label.ChatDetails,チャット詳細
@@ -2566,7 +2694,7 @@ Feature.Chat.Label.Group.ThemRepliedToYou,{DISPLAY_NAME} さんが返信しま�
 Feature.Chat.Label.Group.YouRepliedToThem,{DISPLAY_NAME} さんに返信しました
 Feature.Chat.Label.GroupName,グループ名
 Feature.Chat.Label.HoverToReplyTooltip,マウスオーバーして返信
-Feature.Chat.Label.Loading,読み込み中...
+Feature.Chat.Label.Loading,
 Feature.Chat.Label.LongPressToReplyTooltip,長押しで返信
 Feature.Chat.Label.Members,メンバー
 Feature.Chat.Label.MessageNotAvailable,このメッセージは表示できません
@@ -2603,6 +2731,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1分
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1週間
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}週間
 Feature.Chat.Label.Unavailable,
+Feature.Chat.Label.UnfilteredChat,伏字フィルタ処理なしのチャット
 Feature.Chat.Label.UnknownUser,未知のユーザー
 Feature.Chat.Label.User,ユーザー
 Feature.Chat.Label.ViewProfile,プロフィールを見る
@@ -3034,7 +3163,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,他のユーザーを「信頼でき
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,QRコードまたは連絡先を使用して、別の年齢チェック済みユーザーを追加すると、信頼できるつながりになります。その他のオプションは、近日公開されます。
 Feature.Friends.TCEducation.Title,知り合いを追加しましょう
 Feature.Friends.TCFeature.AndMore,その他の新機能も近日公開
-Feature.Friends.TCFeature.ChatWithoutFilters,伏字フィルタ処理なしのチャット
+Feature.Friends.TCFeature.ChatWithoutFilters,
 Feature.Friends.TCFeature.PartyVoice,パーティボイス
 Feature.Friends.TFEducation.Banner.Text,伏字フィルタ処理なしのチャットとパーティボイスなどの機能を使用できるようにするには、QRコードか連絡先リストで信頼する友達を追加してください。
 Feature.Friends.TFEducation.Modal.TextIntro,知り合いと一緒にプレイしてRobloxをさらに楽しく。QRコードまたは連絡先リストで追加した年齢確認済みのユーザーは、「信頼する友達」となり、以下のような追加特典を利用できます：
@@ -3102,7 +3231,7 @@ Feature.GameDetails.Label.Camera,カメラ
 Feature.GameDetails.Label.ChatFeatures,チャット機能
 Feature.GameDetails.Label.Community,
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,強烈な表現が含まれます
-Feature.GameDetails.Label.ContentMaturity,コンテンツ成熟度
+Feature.GameDetails.Label.ContentMaturity,
 Feature.GameDetails.Label.Created,作成日
 Feature.GameDetails.Label.Developer,開発者
 Feature.GameDetails.Label.DontLikeGame,このゲームは好きではない
@@ -3452,7 +3581,7 @@ Feature.Moments.Description.TooManyUploads,本日アップロードしたビデ�
 Feature.Moments.Disclaimer.EveryoneMoments,モーメント内の全員が、公開されているものを閲覧できます
 Feature.Moments.Label.All,
 Feature.Moments.Label.AttemptingJoinExperience,{placeName}に参加しようとしています。これには数秒かかる場合があります。
-Feature.Moments.Label.CaptureLibrary,切り抜きライブラリ
+Feature.Moments.Label.CaptureLibrary,
 Feature.Moments.Label.DeleteMomentBody,削除したモーメントは復元できません。
 Feature.Moments.Label.DeleteMomentTitle,モーメントを削除しますか？
 Feature.Moments.Label.Error,
@@ -3477,6 +3606,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,現在、新着のモーメントはありません
 Feature.Moments.Label.Photos,写真
+Feature.Moments.Label.PostDeleted,モーメントが削除されました
 Feature.Moments.Label.PostRemovedBody,投稿したモーメントは、コミュニティ基準に違反しています。
 Feature.Moments.Label.PublishingRodeoBody,あまり時間はかかりません。
 Feature.Moments.Label.Reactions,
@@ -3489,13 +3619,15 @@ Feature.Moments.Label.RodeoPublishingTitle,モーメントを公開中
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Roblox上のモーメント
 Feature.Moments.Label.StayFriendlyModeration,フレンドリーな雰囲気を保ちましょう
+Feature.Moments.Label.TextGenerateOverrideBody,生成により、現在のテキストオーバーレイおよび詳細が置き換えられます。
+Feature.Moments.Label.TextGenerateOverrideTitle,テキストは置き換えられます
 Feature.Moments.Label.TextGeneratedBody,AIが生成したオーバーレイと詳細が追加されました
 Feature.Moments.Label.TextGeneratedTitle,テキストが生成されました
 Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませんでした。もう一度お試しください。
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
-Feature.Moments.Title.MomentRemoved,モーメントが削除されました
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
 Feature.MusicPlayer.Action.GoToSongDetails,曲の詳細へ
 Feature.MusicPlayer.Action.Report,
@@ -4301,7 +4433,7 @@ Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,招待
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,設定を開く
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. [権限] を選択
 2. [連絡先] を選択
 3. Robloxに [連絡先] へのアクセスを許可"
@@ -4331,7 +4463,7 @@ Feature.SettingsHub.Prompt.RestartOnMicAccessChange,マイクへのアクセス�
 Feature.SettingsHub.Prompt.Subtitle.AllowMicrophoneAccess,ボイスチャットを開始するにはRobloxがマイクにアクセスできるようにしてください。
 Feature.SocialShare.Action.CopyLink,
 Feature.SocialShare.Action.Redirect,リダイレクト中...
-Feature.SocialShare.Action.Share,シェア
+Feature.SocialShare.Action.Share,
 Feature.SocialShare.Description.InvalidLinkError,このリンクは存在しません。
 Feature.SocialShare.Description.InviteExpiredError,招待リンクの有効期限が切れました。 {experienceName} に参加しますか？
 Feature.SocialShare.Description.InviterNotHereError,招待者がバーチャル空間から退出しました。 {experienceName} に参加しますか？
@@ -4421,7 +4553,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,この人をグループから削除しますか？
 Feature.Squads.Description.RemoveFromParty,{displayName} はグループチャットから削除されます。
 Feature.Squads.Description.ScheduledPartyAlreadyExists,選択した時間にはすでにパーティが予定されています
-Feature.Squads.Description.Title,タイトル
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,グループに {username} さんとその他 {userCountMinusOne} 人のユーザーが追加されました
 Feature.Squads.Description.YouAddedToChat,チャットに {username} さんを追加しました
@@ -4642,13 +4774,13 @@ Feature.VirtualEvents.Label.StartsInOneDay,1日後
 Feature.VirtualEvents.Label.StartsInOneHour,1時間後
 Feature.VirtualEvents.Label.StartsNow,今すぐ開始
 Feature.VirtualEvents.NotNowButton,
-Feature.VirtualEvents.NotifyMe,通知する
+Feature.VirtualEvents.NotifyMe,
 Feature.VirtualEvents.ShareModalBody,このイベントに人を招待するか、チャットでイベントについて共有するには、以下のイベントリンクをコピーしてください。
 Feature.VirtualEvents.ShareModalCallToAction,チャットでシェア...
 Feature.VirtualEvents.ShareModalLinkCopy,コピーする
 Feature.VirtualEvents.ShareModalTitle,このイベントをシェアする
 Feature.VirtualEvents.UnfollowEvent,イベントのフォロー解除
-Features.Transfers.Action.BuyRobux,買う
+Features.Transfers.Action.BuyRobux,
 Features.Transfers.Action.Continue,
 Features.Transfers.Action.Ok,
 Features.Transfers.Action.TurnOnTwoStepVerification,2段階認証をオンにする
