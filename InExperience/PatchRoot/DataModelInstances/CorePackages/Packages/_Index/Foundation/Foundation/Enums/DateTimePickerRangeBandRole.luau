@@ -1,0 +1,1 @@
+﻿return { Full = "Full", Start = "Start", End = "End" }

@@ -2,9 +2,9 @@
 local _ = require(foundation.Components.Types)
 local dialogSizeModule = require(foundation.Enums.DialogSize)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
+local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Providers.Style.Tokens)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
-local flagsModule = require(foundation.Utility.Flags)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 local useDialogModule = require(script.Parent.useDialog)
 local t = {
@@ -13,8 +13,8 @@ local t = {
 	[dialogSizeModule.Large] = 640
 }
 
-local function variantsFactory(p0) --[[ line: 44 ]]
-	-- upvalues: dialogSizeModule (ref), t (ref), flagsModule (ref)
+local function variantsFactory(p0) --[[ line: 45 ]]
+	-- upvalues: flagsModule (ref), dialogSizeModule (ref), t (ref)
 	return {
 		common = {
 			backdrop = { backgroundStyle = p0.Color.Common.Backdrop },
@@ -23,9 +23,13 @@ local function variantsFactory(p0) --[[ line: 44 ]]
 				imageStyle = p0.Color.Extended.Black.Black_15
 			},
 			container = { tag = "col align-x-center align-y-center size-full-full" },
-			inner = { tag = "shrink-1 size-full-0 auto-y clip bg-surface-100" },
+			inner = {
+				tag = if flagsModule.FoundationDialogBetaUpdate then "shrink-1 size-full-0 auto-y clip bg-surface-100 stroke-default" else "shrink-1 size-full-0 auto-y clip bg-surface-100"
+			},
 			body = { tag = "col size-full auto-y padding-bottom-xlarge" },
-			heroMediaWrapper = { tag = "shrink position-top-center size-full-full auto-y" },
+			heroMediaWrapper = {
+				tag = if flagsModule.FoundationDialogBetaUpdate then "position-top-center size-full-full auto-y" else "shrink position-top-center size-full-full auto-y"
+			},
 			title = { tag = "size-full-0 auto-y" },
 			titleText = {
 				tag = "size-full-0 auto-y text-wrap text-align-x-left content-emphasis"
@@ -42,13 +46,13 @@ local function variantsFactory(p0) --[[ line: 44 ]]
 			[dialogSizeModule.Small] = {
 				shadow = { tag = "padding-large" },
 				inner = {
-					tag = "radius-medium",
-					maxWidth = t[dialogSizeModule.Small]
+					maxWidth = t[dialogSizeModule.Small],
+					tag = if flagsModule.FoundationDialogBetaUpdate then "radius-large" else "radius-medium"
 				},
 				body = { tag = "gap-large padding-x-large" },
 				closeAffordance = { offset = p0.Size.Size_300 },
 				heroMedia = {
-					tag = if flagsModule.FoundationMediaRoundedCornerTags then "radius-top-medium" else "radius-medium",
+					tag = if flagsModule.FoundationDialogBetaUpdate then "radius-top-large" else "radius-top-medium",
 					offsetX = p0.Padding.Large
 				},
 				titleText = { tag = "text-heading-small" },
@@ -63,10 +67,7 @@ local function variantsFactory(p0) --[[ line: 44 ]]
 				},
 				body = { tag = "gap-xlarge padding-x-xlarge" },
 				closeAffordance = { offset = p0.Size.Size_400 },
-				heroMedia = {
-					tag = if flagsModule.FoundationMediaRoundedCornerTags then "radius-top-large" else "radius-large",
-					offsetX = p0.Padding.XLarge
-				},
+				heroMedia = { tag = "radius-top-large", offsetX = p0.Padding.XLarge },
 				titleText = { tag = "text-heading-medium" },
 				contentText = { tag = "text-body-medium" },
 				actionsLabel = { tag = "padding-top-xlarge" }
@@ -79,10 +80,7 @@ local function variantsFactory(p0) --[[ line: 44 ]]
 				},
 				body = { tag = "gap-xlarge padding-x-xlarge" },
 				closeAffordance = { offset = p0.Size.Size_400 },
-				heroMedia = {
-					tag = if flagsModule.FoundationMediaRoundedCornerTags then "radius-top-large" else "radius-large",
-					offsetX = p0.Padding.XLarge
-				},
+				heroMedia = { tag = "radius-top-large", offsetX = p0.Padding.XLarge },
 				titleText = { tag = "text-heading-large" },
 				contentText = { tag = "text-body-large" },
 				actionsLabel = { tag = "padding-top-xlarge" }
@@ -91,7 +89,7 @@ local function variantsFactory(p0) --[[ line: 44 ]]
 	}
 end
 
-function useDialogVariants() --[[ line: 176 ]]
+function useDialogVariants() --[[ line: 181 ]]
 	-- upvalues: useTokensModule (ref), variantsContextModule (ref), variantsFactory (ref), useDialogModule (ref), composeStyleVariantModule (ref)
 	local dialog = variantsContextModule.useVariants("Dialog", variantsFactory, useTokensModule())
 	

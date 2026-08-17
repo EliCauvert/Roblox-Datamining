@@ -31,6 +31,7 @@ local squadOverlayModule = require(parent.SquadsCore.SquadOverlay)
 local useParentContainerVisibilitySignalModule = require(appChat.App.Hooks.useParentContainerVisibilitySignal)
 local parentContainerContextModule = require(appChat.Contexts.ParentContainer.ParentContainerContext)
 local foundationModule = require(parent.Foundation)
+local colorMode = foundationModule.Enums.ColorMode
 local overlayHostModule = require(appChat.Components.OSA.OverlayHost)
 local debugAppChatDisplayOnJoin = game:DefineFastFlag("DebugAppChatDisplayOnJoin", false)
 local appChatInExperienceDisplayOrder = game:DefineFastInt("AppChatInExperienceDisplayOrder", 5)
@@ -53,7 +54,7 @@ local t = {
 	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
 }
 
-function wrapWithFocusRoot(p0, p1, p2) --[[ line: 74 ]]
+function wrapWithFocusRoot(p0, p1, p2) --[[ line: 75 ]]
 	-- upvalues: reactModule (ref), focusRoot (ref), t (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), focusNavigableSurfaceIdentifierEnum (ref)
 	return reactModule.createElement(focusRoot, {
 		isIsolated = true,
@@ -64,8 +65,8 @@ function wrapWithFocusRoot(p0, p1, p2) --[[ line: 74 ]]
 	}, p0)
 end
 
-function InExperienceAppChat() --[[ line: 84 ]]
-	-- upvalues: reactModule (ref), useDispatch (ref), useIsAppChatVisibleModule (ref), debugAppChatDisplayOnJoin (ref), parentContainerContextModule (ref), getFFlagAppChatRequestedRouteModule (ref), useParentContainerVisibilitySignalModule (ref), useAppChatUpdateSessionModule (ref), usePreventExperienceControlsModule (ref), setAppLoadedModule (ref), getAllFriendsAsyncModule (ref), partyPageCarouselExperimentation (ref), getLocalUserFriendsCountModule (ref), getLocalUser (ref), getFFlagIsSquadEnabled (ref), useSelector (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppPolicy (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), notificationSnoozeMenuVisibleSignal (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), fFlagExpChatEnableFriendsTab (ref), squadEventReceiverModule (ref), appChatPersistentEventReceiversModule (ref), appChatToastManagerInExpModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), uiModeStyleProvider (ref), constants (ref), designTokenProvider (ref), appChatInExperienceDisplayOrder (ref), squadOverlayModule (ref), layerCollectorProvider (ref), responsiveModule (ref), roactServices (ref), appSessionService (ref), sessionService (ref), inExperienceAppChatContainerModule (ref), overlayHostModule (ref), foundationModule (ref)
+function InExperienceAppChat() --[[ line: 85 ]]
+	-- upvalues: reactModule (ref), useDispatch (ref), useIsAppChatVisibleModule (ref), debugAppChatDisplayOnJoin (ref), parentContainerContextModule (ref), getFFlagAppChatRequestedRouteModule (ref), useParentContainerVisibilitySignalModule (ref), useAppChatUpdateSessionModule (ref), usePreventExperienceControlsModule (ref), setAppLoadedModule (ref), getAllFriendsAsyncModule (ref), partyPageCarouselExperimentation (ref), getLocalUserFriendsCountModule (ref), getLocalUser (ref), getFFlagIsSquadEnabled (ref), useSelector (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppPolicy (ref), fFlagEnableAppChatSnoozeMenuFocus (ref), notificationSnoozeMenuVisibleSignal (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), fFlagExpChatEnableFriendsTab (ref), squadEventReceiverModule (ref), appChatPersistentEventReceiversModule (ref), appChatToastManagerInExpModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), designTokenProvider (ref), appChatInExperienceDisplayOrder (ref), squadOverlayModule (ref), layerCollectorProvider (ref), responsiveModule (ref), roactServices (ref), appSessionService (ref), sessionService (ref), inExperienceAppChatContainerModule (ref), overlayHostModule (ref), foundationModule (ref)
 	local var30 = reactModule.useRef(nil)
 	local var31 = useDispatch()
 	local var32, var33 = useIsAppChatVisibleModule(debugAppChatDisplayOnJoin)
@@ -91,7 +92,7 @@ function InExperienceAppChat() --[[ line: 84 ]]
 	useParentContainerVisibilitySignalModule()
 	useAppChatUpdateSessionModule(var32)
 	usePreventExperienceControlsModule(var32)
-	reactModule.useEffect(function() --[[ line: 110 ]]
+	reactModule.useEffect(function() --[[ line: 111 ]]
 		-- upvalues: var32 (ref), var31 (ref), setAppLoadedModule (copy), getAllFriendsAsyncModule (copy), partyPageCarouselExperimentation (copy), getLocalUserFriendsCountModule (copy)
 		if var32 then
 			var31(setAppLoadedModule(true))
@@ -102,58 +103,58 @@ function InExperienceAppChat() --[[ line: 84 ]]
 			end
 		end
 	end, { var31, var32 })
-	reactModule.useEffect(function() --[[ line: 121 ]]
+	reactModule.useEffect(function() --[[ line: 122 ]]
 		-- upvalues: var31 (ref), getLocalUser (copy)
 		var31(getLocalUser())
 	end, { var31 })
-	reactModule.useEffect(function() --[[ line: 126 ]]
+	reactModule.useEffect(function() --[[ line: 127 ]]
 		-- upvalues: visibilitySignal (ref), var30 (ref)
-		local var49 = visibilitySignal:connect(function(p3) --[[ line: 127 ]]
+		local var49 = visibilitySignal:connect(function(p3) --[[ line: 128 ]]
 			-- upvalues: var30 (copy)
 			if not p3 and var30.current then
 				var30.current.Enabled = false
 			end
 		end)
 		
-		return function() --[[ line: 133 ]]
+		return function() --[[ line: 134 ]]
 			-- upvalues: var49 (ref)
 			var49:disconnect()
 		end
 	end, { visibilitySignal })
 	
 	if var37 then
-		reactModule.useEffect(function() --[[ line: 140 ]]
+		reactModule.useEffect(function() --[[ line: 141 ]]
 			-- upvalues: requestedRouteSignal (ref), var39 (write)
-			local var50 = requestedRouteSignal:connect(function(p4) --[[ line: 141 ]]
+			local var50 = requestedRouteSignal:connect(function(p4) --[[ line: 142 ]]
 				-- upvalues: var39 (copy)
 				var39(p4)
 			end)
 			
-			return function() --[[ line: 145 ]]
+			return function() --[[ line: 146 ]]
 				-- upvalues: var50 (ref)
 				var50:disconnect()
 			end
 		end, { requestedRouteSignal })
 	end
 	if getFFlagIsSquadEnabled() then
-		local var44 = useSelector(function(p5) --[[ line: 152 ]]
+		local var44 = useSelector(function(p5) --[[ line: 153 ]]
 			local currentSquad = p5.Squad and (p5.Squad.Squad and p5.Squad.Squad.currentSquad)
 			
 			return if currentSquad and currentSquad.squadId then currentSquad.squadId else ""
 		end)
-		reactModule.useEffect(function() --[[ line: 157 ]]
+		reactModule.useEffect(function() --[[ line: 158 ]]
 			-- upvalues: updateCurrentSquadId (ref), var44 (ref)
 			updateCurrentSquadId(var44)
 		end, { var44, updateCurrentSquadId })
 	end
-	local var45 = if getFFlagIsSquadEnabled() then useSelector(function(p6) --[[ line: 163 ]]
+	local var45 = if getFFlagIsSquadEnabled() then useSelector(function(p6) --[[ line: 164 ]]
 		return p6.Squad.SquadPrompt.arguments
 	end) else nil
-	local var46 = reactModule.useMemo(function() --[[ line: 168 ]]
+	local var46 = reactModule.useMemo(function() --[[ line: 169 ]]
 		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), hideParentContainer (ref)
 		return {
 			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p7) --[[ line: 171 ]]
+				handler = inputHandlersModule.onRelease(function(p7) --[[ line: 172 ]]
 					-- upvalues: hideParentContainer (copy)
 					hideParentContainer()
 					p7:cancel()
@@ -161,20 +162,20 @@ function InExperienceAppChat() --[[ line: 84 ]]
 			}
 		}
 	end, { hideParentContainer })
-	local var47 = useAppPolicy(function(p8) --[[ line: 179 ]]
+	local var47 = useAppPolicy(function(p8) --[[ line: 180 ]]
 		return p8.getCanAccessParty()
 	end)
 	local promptType = getFFlagIsSquadEnabled() and (var45 and var45.promptType)
 	
 	if fFlagEnableAppChatSnoozeMenuFocus then
-		reactModule.useEffect(function() --[[ line: 186 ]]
+		reactModule.useEffect(function() --[[ line: 187 ]]
 			-- upvalues: notificationSnoozeMenuVisibleSignal (copy), var43 (ref)
-			local var52 = notificationSnoozeMenuVisibleSignal:connect(function(p9) --[[ line: 187 ]]
+			local var52 = notificationSnoozeMenuVisibleSignal:connect(function(p9) --[[ line: 188 ]]
 				-- upvalues: var43 (copy)
 				var43(not p9.visible)
 			end)
 			
-			return function() --[[ line: 191 ]]
+			return function() --[[ line: 192 ]]
 				-- upvalues: var52 (ref)
 				var52:disconnect()
 			end
@@ -186,9 +187,9 @@ function InExperienceAppChat() --[[ line: 84 ]]
 		AppChatToastManagerInExp = reactModule.createElement(appChatToastManagerInExpModule, {
 			hideAllChatToasts = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then nil else var32,
 			isAppChatVisible = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then var32 else nil,
-			navigateToChat = reactModule.useCallback(function(p10) --[[ line: 197 ]]
+			navigateToChat = reactModule.useCallback(function(p10) --[[ line: 198 ]]
 				-- upvalues: showParentContainer (ref), var36 (ref), var31 (ref), enteredChatFromEntryPointModule (copy), socialCommonModule (copy), fFlagExpChatEnableFriendsTab (copy), var34 (ref)
-				local function _() --[[ line: 198 | named "openLegacyAppChat" ]]
+				local function _() --[[ line: 199 | named "openLegacyAppChat" ]]
 					-- upvalues: showParentContainer (copy), var36 (copy), p10 (ref), var31 (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
 					showParentContainer()
 					var36(p10)
@@ -196,7 +197,7 @@ function InExperienceAppChat() --[[ line: 84 ]]
 				end
 				
 				if fFlagExpChatEnableFriendsTab then
-					return var34.openFriendsChatConversation(p10):andThen(function(p11) --[[ line: 205 ]]
+					return var34.openFriendsChatConversation(p10):andThen(function(p11) --[[ line: 206 ]]
 						-- upvalues: showParentContainer (copy), var36 (copy), p10 (ref), var31 (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
 						if not p11 then
 							showParentContainer()
@@ -219,7 +220,7 @@ function InExperienceAppChat() --[[ line: 84 ]]
 		}),
 		AppChatContainer = reactModule.createElement(uiModeStyleProvider, {
 			style = {
-				themeName = constants.ThemeName.Dark,
+				themeName = colorMode.Dark,
 				fontName = constants.FontName.Gotham
 			}
 		}, {
@@ -252,7 +253,7 @@ function InExperienceAppChat() --[[ line: 84 ]]
 			providers = {
 				{
 					class = foundationModule.FoundationProvider,
-					props = { colorMode = foundationModule.Enums.ColorMode.Dark }
+					props = { colorMode = colorMode.Dark }
 				}
 			}
 		})

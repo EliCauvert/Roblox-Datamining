@@ -1,13 +1,12 @@
 ﻿local corePackagesService = game:GetService("CorePackages")
 local roactModule = require(corePackagesService.Packages.Roact)
 local coreGuiService = game:GetService("CoreGui")
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local dark = UIBloxModule.App.Style.Constants.ThemeName.Dark
+local appStyleProvider = require(corePackagesService.Packages.UIBlox).App.Style.AppStyleProvider
+local dark = require(corePackagesService.Packages.Foundation).Enums.ColorMode.Dark
 local promiseModule = require(corePackagesService.Packages.Promise)
 local selfViewTooltipFTUXModule = require(script.Parent.SelfViewTooltipFTUX)
 
-return function(p0) --[[ line: 13 ]]
+return function(p0) --[[ line: 15 ]]
 	-- upvalues: coreGuiService (ref), roactModule (ref), appStyleProvider (ref), dark (ref), selfViewTooltipFTUXModule (ref), promiseModule (ref)
 	local selfViewTooltipOnOpenGui = Instance.new("ScreenGui")
 	selfViewTooltipOnOpenGui.Name = "SelfViewTooltipOnOpenGui"
@@ -43,21 +42,21 @@ return function(p0) --[[ line: 13 ]]
 		})
 	}), selfViewTooltipOnOpenGui, "SelfViewTooltipOnOpenGui")
 	
-	local var8 = function() --[[ line: 57 ]]
+	local var7 = function() --[[ line: 59 ]]
 		-- upvalues: roactModule (copy), selfViewTooltipOnOpenGui_1 (ref)
-		pcall(function() --[[ line: 58 ]]
+		pcall(function() --[[ line: 60 ]]
 			-- upvalues: roactModule (copy), selfViewTooltipOnOpenGui_1 (copy)
 			roactModule.unmount(selfViewTooltipOnOpenGui_1)
 		end)
 	end
 	
-	promiseModule.delay(p0.tooltipLifetime + 5):andThen(function() --[[ line: 62 ]]
+	promiseModule.delay(p0.tooltipLifetime + 5):andThen(function() --[[ line: 64 ]]
 		-- upvalues: roactModule (copy), selfViewTooltipOnOpenGui_1 (ref)
-		pcall(function() --[[ line: 58 ]]
+		pcall(function() --[[ line: 60 ]]
 			-- upvalues: roactModule (copy), selfViewTooltipOnOpenGui_1 (copy)
 			roactModule.unmount(selfViewTooltipOnOpenGui_1)
 		end)
 	end)
 	
-	return { instance = selfViewTooltipOnOpenGui_1, unmount = var8 }
+	return { instance = selfViewTooltipOnOpenGui_1, unmount = var7 }
 end

@@ -24,9 +24,9 @@ local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):Wai
 local reactSchedulingTrackerModule = require(robloxGui.Modules.Common.ReactSchedulingTracker)
 local var19 = if fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default else nil
 
-return function(p0, p1) --[[ line: 50 ]]
+return function(p0, p1) --[[ line: 52 ]]
 	-- upvalues: fFlagEnableGameLeftMessage (ref), messageBus (ref), constantsModule (ref), getFFlagEnableInGameMenuDurationLoggerModule (ref), perfUtilsModule (ref), reactSchedulingTrackerModule (ref), corePackagesService (ref), guiService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), fFlagLeaveActionChromeShortcutTelemetryModule (ref), cryoModule (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), var14 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var19 (ref), runService (ref), fFlagRemoveExitModalModule (ref), getDefaultQualityLevel (ref)
-	if fFlagEnableGameLeftMessage then
+	if fFlagEnableGameLeftMessage and (not p1 or not p1.inhibitAppRating) then
 		messageBus.publish(constantsModule.OnAppRatingPromptEventDescriptor, { gameTime = game:getGameTime() })
 	end
 	if getFFlagEnableInGameMenuDurationLoggerModule() then
@@ -49,7 +49,7 @@ return function(p0, p1) --[[ line: 50 ]]
 	if fFlagLeaveActionChromeShortcutTelemetryModule and p1 and p1.telemetryFields then
 		t = cryoModule.Dictionary.join(t, p1.telemetryFields)
 	end
-	rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsLeaveGameName, t)
+	rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, if p1 and p1.telemetryContext then p1.telemetryContext else constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsLeaveGameName, t)
 	
 	if p0 then
 		if fFlagSurvBloxEventTypeEnabled then

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("FriendsActivityFeedFetchItemNames", false) and require(script.Parent.FFlagSocialEnableProfileInspectAndBuy)

@@ -68,8 +68,6 @@ local function getHoursAndMinutesFromString(a) --[[ line: 118 ]]
 end
 
 return {
-	DATE_COMPOSITE_TOKEN = "L",
-	TIME_COMPOSITE_TOKEN = "LT",
 	formatLocalTime = function(p2, p3) --[[ line: 243 ]]
 		-- upvalues: localizationService (ref)
 		local l = p2:FormatLocalTime("L", localizationService.RobloxLocaleId)

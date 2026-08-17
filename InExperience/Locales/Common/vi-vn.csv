@@ -1785,6 +1785,134 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Chặn {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Khi bị chặn, người dùng này sẽ không còn là Người quen hoặc người theo dõi nữa. Họ sẽ không thể nhắn tin, gửi yêu cầu hoặc gửi lời mời cho bạn.<br /><br />Họ sẽ không được thông báo về việc bạn đã chặn họ."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Khi bị chặn, người dùng này sẽ không còn là bạn bè hoặc người theo dõi bạn nữa. Họ sẽ không thể nhắn tin, gửi yêu cầu hoặc gửi lời mời cho bạn.<br /><br />Họ sẽ không được thông báo là bạn đã chặn họ."
+Feature.Build.Action.AddFriends,Thêm bạn
+Feature.Build.Action.AddPlaytester,Thêm người chơi thử
+Feature.Build.Action.AddPlaytesters,
+Feature.Build.Action.AddToPlaytest,Thêm vào danh sách chơi thử
+Feature.Build.Action.Archive,Lưu trữ
+Feature.Build.Action.ArchiveGame,Lưu trữ trò chơi
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,Mua
+Feature.Build.Action.BuyRobux,
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,Sao chép văn bản
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
+Feature.Build.Action.ManageLimit,Quản lý hạn mức
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,Để sau
+Feature.Build.Action.NotifyMe,Thông báo cho tôi
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,Mở phần cài đặt
+Feature.Build.Action.Playtest,Chơi thử
+Feature.Build.Action.Preview,Xem trước
+Feature.Build.Action.Publish,
+Feature.Build.Action.PublishLatest,Đăng bản mới nhất
+Feature.Build.Action.Restore,Khôi phục
+Feature.Build.Action.SetDailyLimit,Thiết lập hạn mức hằng ngày
+Feature.Build.Action.SetLimit,Thiết lập hạn mức
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,Chia sẻ
+Feature.Build.Action.ShareLink,Chia sẻ đường liên kết
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,Cập nhật mức phân loại
+Feature.Build.Action.UpdateWithChanges,Cập nhật các thay đổi
+Feature.Build.Action.View,Xem
+Feature.Build.Action.ViewUsage,Xem mức sử dụng
+Feature.Build.Content.NewGame,Trò chơi mới
+Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
+Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
+Feature.Build.Description.BuildIdeaGame,Biến ý tưởng thành trò chơi
+Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi phản hồi cho bạn.
+Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
+Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
+Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để giúp bạn chơi thử.
+Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
+Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
+Feature.Build.Description.HubSettings,Quản lý tất cả cài đặt trong Trung tâm nhà sáng tạo
+Feature.Build.Description.MakeAudienceAvail,Đăng trải nghiệm của bạn để cho phép đối tượng này tham gia.
+Feature.Build.Description.ManageAppearance,Quản lý giao diện hiển thị của trò chơi với người khác.
+Feature.Build.Description.PlayAfterPublish,Chọn đối tượng người chơi có thể tham gia sau khi bạn đăng trải nghiệm này.
+Feature.Build.Description.PlaytestLocked,Bạn có thể bắt đầu chơi thử sau khi tạo trò chơi đầu tiên.
+Feature.Build.Description.PlaytesterAccess,Hãy thêm bạn bè làm người chơi thử hoặc thay đổi cài đặt Đối tượng của trò chơi để cho phép có thêm người chơi.
+Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tượng của trò chơi để chia sẻ.
+Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày của bạn để tiếp tục sáng tạo, hoặc đợi hạn mức làm mới vào ngày mai."
+Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng ý rằng mức phân loại nội dung này là chính xác."
+Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
+Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
+Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
+Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
+Feature.Build.Header.CustomAnswer,Câu trả lời tùy chỉnh
+Feature.Build.Header.GameDetails,Chi tiết về trò chơi
+Feature.Build.Header.Overview,Tổng quan
+Feature.Build.Label.Access,Quyền truy cập
+Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
+Feature.Build.Label.Available,còn lại
+Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
+Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
+Feature.Build.Label.ContentRating,Mức phân loại nội dung
+Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
+Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
+Feature.Build.Label.Description,Mô tả
+Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
+Feature.Build.Label.Friends,
+Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
+Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
+Feature.Build.Label.Loading,
+Feature.Build.Label.NoLimit,Không giới hạn
+Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
+Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
+Feature.Build.Label.SelectOption,Chọn một tùy chọn
+Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
+Feature.Build.Label.Title,Tiêu đề
+Feature.Build.Label.TitleDescription,Tiêu đề và mô tả
+Feature.Build.Label.Unknown,Không xác định
+Feature.Build.Label.Version,Phiên bản
+Feature.Build.Label.VersionTitleDesc,Tiêu đề và mô tả phiên bản
+Feature.Build.Label.Video,Video
+Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
+Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
+Feature.Build.Message.AllFriendsAdded,Bạn đã thêm tất cả bạn bè làm người chơi thử.
+Feature.Build.Message.AudienceIneligible,Không đủ điều kiện cho đối tượng này
+Feature.Build.Message.ExpandAudience,Mở rộng đối tượng người chơi trong Trung tâm nhà sáng tạo
+Feature.Build.Message.ExperiencesLoadFailed,Không tải được trải nghiệm
+Feature.Build.Message.FriendsLoadFailed,Không tải được danh sách bạn bè. Vui lòng thử lại.
+Feature.Build.Message.GamePublishFailed,Trò chơi của bạn chưa thể đăng. Vui lòng thử lại.
+Feature.Build.Message.InvitesLoadFailed,Không tải được lời mời
+Feature.Build.Message.LinkCopied,Đã sao chép đường liên kết vào bộ nhớ tạm.
+Feature.Build.Message.NoFriendsToAdd,Bạn chưa có người bạn nào để thêm. Hãy tìm mọi người để kết nối trên Roblox trước.
+Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
+Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
+Feature.Build.Message.QuestionnaireNeeded,Trò chơi này đã được chỉnh sửa bên ngoài Build. Vui lòng trả lời khảo sát nội dung để đăng.
+Feature.Build.Message.ReadyToPlay,Trò chơi của bạn đã sẵn sàng để chơi trên Roblox!
+Feature.Build.Message.RestoreVersionFailed,Không thể khôi phục phiên bản này. Vui lòng thử lại.
+Feature.Build.Message.SaveChangesFailed,Không thể lưu các thay đổi. Vui lòng thử lại.
+Feature.Build.Message.ShareLinkFailed,Không thể tạo đường liên kết chia sẻ. Vui lòng thử lại.
+Feature.Build.Message.TryAgain,Hãy thử lại.
+Feature.Build.Message.TurnToPortrait,Hãy xoay thiết bị sang chế độ dọc để tiếp tục thao tác trên trò chơi của bạn.
+Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
+Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
+Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
+Feature.Build.Title.Audience,Đối tượng
+Feature.Build.Title.BuildUnavailable,Build không sử dụng được
+Feature.Build.Title.ChatBuildUnavailable,Build không sử dụng được.
+Feature.Build.Title.Content,Nội dung
+Feature.Build.Title.DailyRobuxReached,Đã dùng hết hạn mức Robux hằng ngày
+Feature.Build.Title.ExperienceAudience,Đối tượng của trải nghiệm
+Feature.Build.Title.FreeUsageReached,Đã hết lượt sử dụng Build miễn phí
+Feature.Build.Title.FriendsOnlyPlay,Chỉ bạn bè mới có thể chơi
+Feature.Build.Title.GameCreationDone,Đã tạo xong trò chơi
+Feature.Build.Title.GamePrivate,Trò chơi này ở chế độ riêng tư
+Feature.Build.Title.GenericError,Đã xảy ra lỗi
+Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
+Feature.Build.Title.Playtesters,Người chơi thử
+Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
+Feature.Build.Title.PushNotifications,Thông báo đẩy
+Feature.Build.Title.Tasks,Nhiệm vụ
+Feature.Build.Title.VersionHistory,Lịch sử phiên bản
+Feature.Build.Title.VersionInformation,Thông tin phiên bản
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Cho phép
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -1798,9 +1926,9 @@ Feature.Captures.Action.NoThanks,"Không, cảm ơn"
 Feature.Captures.Action.OpenInFiles,Mở trong Tập tin
 Feature.Captures.Action.Save,
 Feature.Captures.Action.SelectAllCaptures,Chọn Tất Cả
-Feature.Captures.Action.Share,Chia sẻ
+Feature.Captures.Action.Share,
 Feature.Captures.Action.ShareYourCapture,Chia sẻ ảnh chụp màn hình/video quay màn hình của bạn
-Feature.Captures.Action.ViewCapture,Xem
+Feature.Captures.Action.ViewCapture,
 Feature.Captures.Body.AllowAccessToCaptures,Trải nghiệm này muốn xem và sử dụng bản ghi màn hình của bạn.
 Feature.Captures.Body.SaveCapturesPrompt,Bạn có muốn lưu ảnh chụp/video ghi màn hình của mình không?
 Feature.Captures.Body.ShareCapturePrompt,Bạn có muốn chia sẻ ảnh chụp/bản ghi màn hình của mình không?
@@ -1838,7 +1966,7 @@ Feature.Captures.Title.DeleteMultipleCapturesWarning,Xóa Ảnh chụp/Video qua
 Feature.Captures.Title.Gallery,Thư Viện
 Feature.Captures.Title.SaveCapturesPrompt,Lưu ảnh chụp/video ghi màn hình
 Feature.Captures.Title.ShareCapturePrompt,
-Feature.Captures.Title.VideoCTA,Video
+Feature.Captures.Title.VideoCTA,
 Feature.Captures.Title.VideoCaptureInProgressTooltip,Hiện đang quay video
 Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,Trò chuyện sẽ bị tắt tiếng khi quay
 Feature.Captures.Toast.CaptureSaved,Ảnh Chụp đã lưu
@@ -1852,7 +1980,7 @@ Feature.Captures.Toast.VideoCaptureInitializationNoDeviceSupportError,Thiết b�
 Feature.Captures.Toast.VideoCaptureInitializationNoSpaceOnDeviceError,Thiết bị không đủ dung lượng để quay video
 Feature.Captures.Toast.VideoCaptureInitializationOtherError,Đã xảy ra lỗi khi bắt đầu quay video
 Feature.Captures.Toast.VideoCaptureOtherError,Đã xảy ra lỗi khi quay video
-Feature.Catalog.Action.Buy,Mua
+Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Tùy chỉnh
 Feature.Catalog.Action.Checkout.ManageInCustomize,Quản lý trong mục Tùy chỉnh
@@ -2329,6 +2457,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1thg
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1w
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}w
 Feature.Chat.Label.Unavailable,Không có
+Feature.Chat.Label.UnfilteredChat,Trò chuyện không kiểm duyệt
 Feature.Chat.Label.UnknownUser,người chơi không xác định
 Feature.Chat.Label.User,Người dùng
 Feature.Chat.Label.ViewProfile,Xem Hồ Sơ
@@ -2781,7 +2910,7 @@ Feature.Groups.Action.JoinGroup,Tham Gia Cộng Đồng
 Feature.Groups.Action.LeaveGroup,Rời Khỏi Cộng Đồng
 Feature.Groups.Action.MakePrimary,Đặt Làm Chính
 Feature.Groups.Action.More,hiện thêm
-Feature.Groups.Action.NotNow,Để sau
+Feature.Groups.Action.NotNow,
 Feature.Groups.Action.RemovePrimary,Bỏ Làm Chính
 Feature.Groups.Action.SeeAll,
 Feature.Groups.Action.Unfollow,Hủy theo dõi
@@ -2984,6 +3113,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,Âm nhạc
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Bạn hiện đã xem hết toàn bộ nội dung
 Feature.Moments.Label.Photos,Ảnh
+Feature.Moments.Label.PostDeleted,Khoảnh khắc đã bị xóa
 Feature.Moments.Label.PostRemovedBody,Khoảnh khắc bạn đăng vi phạm Tiêu chuẩn cộng đồng của chúng tôi.
 Feature.Moments.Label.PublishingRodeoBody,Quá trình này sẽ không mất quá nhiều thời gian.
 Feature.Moments.Label.Reactions,Lượt bày tỏ cảm xúc
@@ -2996,7 +3126,11 @@ Feature.Moments.Label.RodeoPublishingTitle,Đang đăng Khoảnh khắc của b�
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Khoảnh khắc trên Roblox
 Feature.Moments.Label.StayFriendlyModeration,
-Feature.Moments.Label.TextGeneratedBody,Đã thêm lớp phủ và phần mô tả do AI tạo
+Feature.Moments.Label.TextGenerateInProgressBody,Vui lòng chờ AI tạo văn bản trước khi tự chỉnh sửa lớp phủ.
+Feature.Moments.Label.TextGenerateInProgressTitle,Đang trong quá trình tạo
+Feature.Moments.Label.TextGenerateOverrideBody,"Nếu tạo, lớp phủ văn bản và nội dung mô tả hiện tại của bạn sẽ bị thay thế."
+Feature.Moments.Label.TextGenerateOverrideTitle,Văn bản sẽ bị thay thế
+Feature.Moments.Label.TextGeneratedBody,Đã thêm mô tả và lớp phủ văn bản do AI tạo
 Feature.Moments.Label.TextGeneratedTitle,Đã tạo văn bản
 Feature.Moments.Label.TextGenerationFailedBody,Không tạo được văn bản. Vui lòng thử lại.
 Feature.Moments.Label.TextGenerationFailedTitle,Tạo không thành công
@@ -3461,6 +3595,7 @@ Feature.SettingsHub.Label.NoConnectionsPageMessage,Thêm Người quen để cù
 Feature.SettingsHub.Label.NoConnectionsScreen,Tạo Người quen để có thể mời họ tham gia cùng bạn!
 Feature.SettingsHub.Label.NoFriendsPageMessage,Thêm bạn bè để cùng nhau khám phá.
 Feature.SettingsHub.Label.NoFriendsScreen,Kết bạn để bạn có thể mời họ tham gia cùng bạn!
+Feature.SettingsHub.Label.QuitButton,
 Feature.SettingsHub.Label.ReasonForAbuse,Lý Do Vi Phạm?
 Feature.SettingsHub.Label.Report.BlockDisplayName,Chặn {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,Các bước khác bạn có thể thực hiện
@@ -3661,7 +3796,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,Bạn có chắc muốn xóa người này khỏi nhóm không?
 Feature.Squads.Description.RemoveFromParty,{displayName} sẽ bị xóa khỏi cuộc trò chuyện nhóm.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,Đã có Party được lên lịch tổ chức vào thời gian bạn chọn
-Feature.Squads.Description.Title,Tiêu đề
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,Bạn đã thêm {username} và {userCountMinusOne} người khác vào nhóm
 Feature.Squads.Description.YouAddedToChat,Bạn đã thêm {username} vào nhóm

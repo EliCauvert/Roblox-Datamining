@@ -1,5 +1,6 @@
 ﻿local localizationService = game:GetService("LocalizationService")
 local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
+local colorMode = require(parent.Foundation).Enums.ColorMode
 local chromeModule = require(parent.Chrome)
 local localization = require(parent.InExperienceLocales).Localization
 local localizationProvider = require(parent.Localization).LocalizationProvider
@@ -19,17 +20,17 @@ local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
 local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
 local var10 = if fFlagSideSheetFocusNav then reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui) else nil
 local t = {
-	isFocused = function() --[[ line: 38 ]]
+	isFocused = function() --[[ line: 41 ]]
 		return true
 	end,
-	addListener = function(_, _) --[[ line: 41 ]]
-		return { remove = function() --[[ line: 43 ]] end }
+	addListener = function(_, _) --[[ line: 44 ]]
+		return { remove = function() --[[ line: 46 ]] end }
 	end
 }
 
-return function(p0, p1, p2) --[[ line: 48 | named "wrapWithProviders" ]]
-	-- upvalues: roduxModule (ref), reactModule (ref), fFlagEnableDrawerFocusNav (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), uiModeStyleProvider (ref), constants (ref), fFlagSideSheetFocusNav (ref), unibarStyle (ref), reactFocusNavigationModule (ref), var10 (write), provider (ref)
-	p2 = p2 or roduxModule.Store.new(function(p3) --[[ line: 49 ]]
+return function(p0, p1, p2) --[[ line: 51 | named "wrapWithProviders" ]]
+	-- upvalues: roduxModule (ref), reactModule (ref), fFlagEnableDrawerFocusNav (ref), roactNavigationModule (ref), t (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), uiModeStyleProvider (ref), colorMode (ref), constants (ref), fFlagSideSheetFocusNav (ref), unibarStyle (ref), reactFocusNavigationModule (ref), var10 (write), provider (ref)
+	p2 = p2 or roduxModule.Store.new(function(p3) --[[ line: 52 ]]
 		return p3 or {}
 	end)
 	local var13 = p0
@@ -46,7 +47,7 @@ return function(p0, p1, p2) --[[ line: 48 | named "wrapWithProviders" ]]
 		}, {
 			UiModeStyleProvider = reactModule.createElement(uiModeStyleProvider, {
 				style = {
-					themeName = constants.ThemeName.Dark,
+					themeName = colorMode.Dark,
 					fontName = constants.FontName.Gotham
 				}
 			}, {

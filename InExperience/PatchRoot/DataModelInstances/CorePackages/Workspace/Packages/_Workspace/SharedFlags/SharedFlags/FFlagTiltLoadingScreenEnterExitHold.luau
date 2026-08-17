@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("TiltLoadingScreenEnterExitHold", false)
+﻿return game:DefineFastFlag("TiltLoadingScreenEnterExitHold2", false)

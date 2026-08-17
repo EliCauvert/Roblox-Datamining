@@ -16,6 +16,7 @@ local roactModule = require(corePackagesService.Packages.Roact)
 local roduxModule = require(corePackagesService.Packages.Rodux)
 local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
 local UIBloxModule = require(corePackagesService.Packages.UIBlox)
+local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
 local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
 local roactAppPolicy = universalAppPolicyModule.RoactAppPolicy
 local appFeaturePolicies = universalAppPolicyModule.AppFeaturePolicies
@@ -47,7 +48,7 @@ local fFlagTopBarRefactor = require(corePackagesService.Workspace.Packages.InExp
 local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
 
 if var22 then
-	(function() --[[ line: 62 | named "SetGlobalGuiInset" ]]
+	(function() --[[ line: 65 | named "SetGlobalGuiInset" ]]
 		-- upvalues: guiService (ref), constantsModule (ref), displayModule (ref)
 		local guiInset, guiInset_1 = guiService:GetGuiInset()
 		guiService:SetGlobalGuiInset(guiInset.X, constantsModule.ApplyDisplayScale(constantsModule.TopBarHeight), guiInset_1.X, guiInset_1.Y)
@@ -87,8 +88,8 @@ local isRunningInStudio = require(corePackagesService.Workspace.Packages.AppComm
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 119 ]]
-	-- upvalues: t (ref), globalConfigModule (ref), roactModule (ref), tenFootInterfaceModule (ref), var22 (ref), guiService (ref), constantsModule (ref), fFlagEnablePlaytestModeUnibar (ref), roduxModule (ref), reducerModule (ref), fFlagTopBarSignalizeSetCores (ref), registerSetCoresModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), getCanChatModule (ref), fFlagTopBarDeprecateGameInfoRoduxModule (ref), getGameNameModule (ref), getFFlagDebugEnableVRFTUXExperienceInStudioModule (ref), isRunningInStudio (ref), FTUXModule (ref), platformEnumModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setSmallTouchDeviceModule (ref), utilityModule (ref), constants (ref), uiModeStyleProvider (ref), var31 (ref), fFlagAddMenuNavigationToggleDialog (ref), fFlagGamepadNavigationDialogABTestModule (ref), designTokenProvider (ref), menuNavigationPromptTokenMapperModule (ref), serviceModule (write), fFlagAddTopBarScrimModule (ref), reactModule (ref), topBarScrimModule (write), roactRoduxModule (ref), fFlagTopBarRefactor (ref), fFlagShowGameAgeRating (ref), roactAppPolicy (ref), topBarAppPolicyModule (ref), appFeaturePolicies (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), getFFlagEnableCrossExpVoice (ref), component (ref), reactSceneUnderstandingModule (ref), songbirdModule (ref), voiceStateContextModule (ref), coreGuiService (ref), updateUnreadMessagesBadgeModule (ref), fFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (ref)
+function t.new() --[[ line: 124 ]]
+	-- upvalues: t (ref), globalConfigModule (ref), roactModule (ref), tenFootInterfaceModule (ref), var22 (ref), guiService (ref), constantsModule (ref), fFlagEnablePlaytestModeUnibar (ref), roduxModule (ref), reducerModule (ref), fFlagTopBarSignalizeSetCores (ref), registerSetCoresModule (ref), fFlagTopBarDeprecateChatRoduxModule (ref), getCanChatModule (ref), fFlagTopBarDeprecateGameInfoRoduxModule (ref), getGameNameModule (ref), getFFlagDebugEnableVRFTUXExperienceInStudioModule (ref), isRunningInStudio (ref), FTUXModule (ref), platformEnumModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), isNewInGameMenuEnabledModule (ref), robloxGui (ref), fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setSmallTouchDeviceModule (ref), utilityModule (ref), colorMode (ref), constants (ref), uiModeStyleProvider (ref), var31 (ref), fFlagAddMenuNavigationToggleDialog (ref), fFlagGamepadNavigationDialogABTestModule (ref), designTokenProvider (ref), menuNavigationPromptTokenMapperModule (ref), serviceModule (write), fFlagAddTopBarScrimModule (ref), reactModule (ref), topBarScrimModule (write), roactRoduxModule (ref), fFlagTopBarRefactor (ref), fFlagShowGameAgeRating (ref), roactAppPolicy (ref), topBarAppPolicyModule (ref), appFeaturePolicies (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), getFFlagEnableCrossExpVoice (ref), component (ref), reactSceneUnderstandingModule (ref), songbirdModule (ref), voiceStateContextModule (ref), coreGuiService (ref), updateUnreadMessagesBadgeModule (ref), fFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (ref)
 	local tbl = setmetatable({}, t)
 	
 	if globalConfigModule.propValidation then
@@ -124,17 +125,17 @@ function t.new() --[[ line: 119 ]]
 		require(robloxGui.Modules.InGameMenuInit).mountInGameMenu()
 	end
 	if not fFlagTopBarDeprecateDisplayOptionsRoduxModule then
-		coroutine.wrap(function() --[[ line: 176 ]]
+		coroutine.wrap(function() --[[ line: 181 ]]
 			-- upvalues: tbl (ref), setSmallTouchDeviceModule (copy), utilityModule (copy)
 			tbl.store:dispatch(setSmallTouchDeviceModule(utilityModule:IsSmallTouchScreen()))
 		end)()
 	end
 	local t_1 = {
-		themeName = constants.ThemeName.Dark,
+		themeName = colorMode.Dark,
 		fontName = constants.FontName.Gotham
 	}
 	
-	local function wrapWithUiModeStyleProvider(p0) --[[ line: 186 ]]
+	local function wrapWithUiModeStyleProvider(p0) --[[ line: 191 ]]
 		-- upvalues: roactModule (copy), uiModeStyleProvider (copy), t_1 (ref)
 		return {
 			UiModeStyleProvider = roactModule.createElement(uiModeStyleProvider, { style = t_1 }, p0)
@@ -180,7 +181,7 @@ function t.new() --[[ line: 119 ]]
 	tbl.element = roactModule.mount(tbl.root, coreGuiService, "TopBar")
 	
 	if not fFlagTopBarDeprecateChatRoduxModule then
-		game:GetService("TextChatService").MessageReceived:Connect(function() --[[ line: 263 ]]
+		game:GetService("TextChatService").MessageReceived:Connect(function() --[[ line: 271 ]]
 			-- upvalues: tbl (ref), updateUnreadMessagesBadgeModule (copy)
 			tbl.store:dispatch(updateUnreadMessagesBadgeModule(1))
 		end)
@@ -189,7 +190,7 @@ function t.new() --[[ line: 119 ]]
 		local userInputService = game:GetService("UserInputService")
 		local gamepadConnectedConnection = nil
 		
-		local function disconnectGamepadConnected() --[[ line: 271 ]]
+		local function disconnectGamepadConnected() --[[ line: 279 ]]
 			-- upvalues: gamepadConnectedConnection (write)
 			if gamepadConnectedConnection then
 				gamepadConnectedConnection:Disconnect()
@@ -200,7 +201,7 @@ function t.new() --[[ line: 119 ]]
 		if userInputService:GetGamepadConnected(Enum.UserInputType.Gamepad1) then
 			tbl:setGamepadNavigationDialogOpen(true)
 		else
-			gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function() --[[ line: 280 ]]
+			gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function() --[[ line: 288 ]]
 				-- upvalues: tbl (ref), gamepadConnectedConnection (write)
 				tbl:setGamepadNavigationDialogOpen(true)
 				
@@ -215,7 +216,7 @@ function t.new() --[[ line: 119 ]]
 	return tbl
 end
 
-function t:setInspectMenuOpen(p1) --[[ line: 292 ]]
+function t:setInspectMenuOpen(p1) --[[ line: 300 ]]
 	-- upvalues: fFlagTopBarSignalizeMenuOpen (ref), setInspectMenuOpenModule (ref)
 	if fFlagTopBarSignalizeMenuOpen then
 		return
@@ -223,12 +224,12 @@ function t:setInspectMenuOpen(p1) --[[ line: 292 ]]
 	self.store:dispatch(setInspectMenuOpenModule(p1))
 end
 
-function t:setGamepadMenuOpen(p2) --[[ line: 299 ]]
+function t:setGamepadMenuOpen(p2) --[[ line: 307 ]]
 	-- upvalues: setGamepadMenuOpenModule (ref)
 	self.store:dispatch(setGamepadMenuOpenModule(p2))
 end
 
-function t:setGamepadNavigationDialogOpen(p3) --[[ line: 303 ]]
+function t:setGamepadNavigationDialogOpen(p3) --[[ line: 311 ]]
 	-- upvalues: fFlagTopBarDeprecateDisplayOptionsRoduxModule (ref), setGamepadNavigationDialogOpenModule (ref)
 	if not fFlagTopBarDeprecateDisplayOptionsRoduxModule then
 		self.store:dispatch(setGamepadNavigationDialogOpenModule(p3))

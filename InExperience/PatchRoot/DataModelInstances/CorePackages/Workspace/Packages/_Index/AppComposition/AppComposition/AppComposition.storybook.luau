@@ -11,7 +11,7 @@ return {
 		-- upvalues: reactModule (ref), foundationProvider (ref)
 		return function(p1) --[[ line: 15 ]]
 			-- upvalues: reactModule (copy), foundationProvider (copy), p0 (ref)
-			return reactModule.createElement(foundationProvider, { theme = p1.theme, device = p1.platform }, reactModule.createElement(p0, p1))
+			return reactModule.createElement(foundationProvider, { colorMode = p1.theme, device = p1.platform }, reactModule.createElement(p0, p1))
 		end
 	end,
 	storyRoots = { appComposition }

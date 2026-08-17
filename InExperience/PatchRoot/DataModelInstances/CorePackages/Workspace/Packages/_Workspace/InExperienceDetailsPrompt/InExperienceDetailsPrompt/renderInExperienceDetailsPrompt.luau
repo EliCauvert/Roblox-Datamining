@@ -42,7 +42,7 @@ return function() --[[ line: 27 | named "renderInExperienceDetailsPrompt" ]]
 		localization = localization.new(localizationService.RobloxLocaleId)
 	}, {
 		FoundationProvider = reactModule.createElement(foundationProvider, {
-			theme = foundationModule.Enums.Theme.Dark,
+			colorMode = foundationModule.Enums.ColorMode.Dark,
 			overlayGui = if fFlagLuaAppIedpOverlayAndNavigationFix then inExperienceDetailsPromptOverlay else nil
 		}, {
 			FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {

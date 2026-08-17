@@ -1,1 +1,0 @@
-﻿return if game:DefineFastFlag("AddFriendsRenderTileRefactor_v1", false) then require(script.Parent.FFlagPPVEnabledOnConsole) or require(script.Parent.FFlagAddFriendsTileRefactorWithContextualMenu) else game:DefineFastFlag("AddFriendsRenderTileRefactor_v1", false)

@@ -3,11 +3,11 @@ local reactModule = require(parent.React)
 local roduxModule = require(parent.Rodux)
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local theme = foundationModule.Enums.Theme
+local colorMode = foundationModule.Enums.ColorMode
 local device = foundationModule.Enums.Device
 local reactRobloxModule = require(parent.Dev.ReactRoblox)
 local roactRoduxModule = require(parent.Dev.RoactRodux)
-local t = { Light = theme.Light, Dark = theme.Dark }
+local t = { Light = colorMode.Light, Dark = colorMode.Dark }
 local var6 = roduxModule.Store.new(function(p0) --[[ line: 17 ]]
 	return p0
 end, {
@@ -46,7 +46,7 @@ return {
 				}),
 				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var6 }, {
 					FoundationContext = reactModule.createElement(foundationProvider, {
-						theme = t[p2.theme],
+						colorMode = t[p2.theme],
 						device = device[p2.platform],
 						preferences = p2.settings,
 						scale = p2.settings and p2.settings.scale

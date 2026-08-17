@@ -16,5 +16,6 @@
 	disableTokenScaling = false,
 	removeStackedNavigationTabIconLabelSpacing = false,
 	addFoundationNavigationTabIcon = false,
+	deprecateComponentGlobalSemanticTokenUse = false,
 	useFoundationToastButtonSizing = false
 }

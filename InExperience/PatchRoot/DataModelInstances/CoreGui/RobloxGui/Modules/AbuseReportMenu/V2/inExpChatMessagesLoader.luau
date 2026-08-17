@@ -31,7 +31,7 @@ end
 return {
 	type = "groupedListItem",
 	fetch = function(_) --[[ line: 38 ]]
-		-- upvalues: expChatSharedModule (ref), promiseModule (ref), fFlagExpChatUseMessagesStore (ref), expChatMessageHelpersModule (ref), var8 (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), getLocalizedChannelTabLabels (ref), fFlagExpChatUseChannelTabsStore (ref), channelTabDisplayLabel (ref), playersService (ref)
+		-- upvalues: expChatSharedModule (ref), promiseModule (ref), fFlagExpChatUseMessagesStore (ref), expChatMessageHelpersModule (ref), var8 (ref), fFlagExpChatUseSharedChannelTabDisplayLabel (ref), channelTabDisplayLabel (ref), enrichMissingUsernames (ref), getChannelTabsStore (ref), getLocalizedChannelTabLabels (ref), fFlagExpChatUseChannelTabsStore (ref), playersService (ref)
 		local store = expChatSharedModule.context.store
 		
 		if not store then
@@ -99,7 +99,7 @@ return {
 					t[i] = { id = i, label = var31, items = v_1 }
 				end
 			end
-			table.sort(t_1, function(p0, p1) --[[ line: 166 ]]
+			table.sort(t_1, function(p0, p1) --[[ line: 170 ]]
 				-- upvalues: allChannelTabs (ref), expChatMessageHelpersModule (copy)
 				local var32 = allChannelTabs[p0]
 				local var33 = allChannelTabs[p1]
@@ -135,7 +135,7 @@ return {
 			if #var19 > 0 then
 				table.insert(t_2, {
 					id = expChatMessageHelpersModule.CHANNEL_GENERAL,
-					label = var8:Format("CoreScripts.TextChat.ChannelTabs.Here"),
+					label = var8:Format(if fFlagExpChatUseSharedChannelTabDisplayLabel then channelTabDisplayLabel.LocalizationKeys.yourServer else "CoreScripts.TextChat.ChannelTabs.Here"),
 					items = var19
 				})
 			end

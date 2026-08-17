@@ -43,74 +43,73 @@ local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Fl
 local fFlagAboutBeforeActionClientModule = require(profilePlatform.Flags.FFlagAboutBeforeActionClient)
 local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
-local fixCTARowOnContactProfile = game:DefineFastFlag("FixCTARowOnContactProfile", false)
 
-local function orderWithAboutBeforeActions(p0) --[[ line: 55 ]]
+local function orderWithAboutBeforeActions(p0) --[[ line: 54 ]]
 	-- upvalues: fFlagAboutBeforeActionClientModule (ref), enumsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), cryoModule (ref)
 	if not fFlagAboutBeforeActionClientModule then
 		return p0
 	end
+	local var42 = nil
 	local var43 = nil
 	local var44 = nil
-	local var45 = nil
 	
 	for i, v in ipairs(p0) do
 		if v == enumsModule.Components.About then
-			var43 = i
+			var42 = i
 		elseif v == enumsModule.Components.Actions then
-			var44 = i
+			var43 = i
 		elseif fFlagProfilePlatformAddCurrentlyPlayingModule and v == enumsModule.Components.CurrentlyPlaying then
-			var45 = i
+			var44 = i
 		end
 	end
-	if var43 == nil or var44 == nil or var43 < var44 then
+	if var42 == nil or var43 == nil or var42 < var43 then
 		return p0
 	end
-	local var46 = cryoModule.List.join({}, p0)
+	local var45 = cryoModule.List.join({}, p0)
 	
-	if fFlagProfilePlatformAddCurrentlyPlayingModule and var45 then
-		local var47 = var46[var43]
-		local var48 = var46[var45]
-		local var49 = var46[var44]
-		var46[var45] = var47
-		var46[var44] = var48
-		var46[var43] = var49
+	if fFlagProfilePlatformAddCurrentlyPlayingModule and var44 then
+		local var46 = var45[var42]
+		local var47 = var45[var44]
+		local var48 = var45[var43]
+		var45[var44] = var46
+		var45[var43] = var47
+		var45[var42] = var48
 		
-		return var46
+		return var45
 	end
-	local var50 = var46[var43]
-	var46[var43] = var46[var44]
-	var46[var44] = var50
+	local var49 = var45[var42]
+	var45[var42] = var45[var43]
+	var45[var43] = var49
 	
-	return var46
+	return var45
 end
 
-local function moveMomentsToTop(p1) --[[ line: 83 ]]
+local function moveMomentsToTop(p1) --[[ line: 82 ]]
 	-- upvalues: enumsModule (ref), cryoModule (ref)
-	local var51 = nil
+	local var50 = nil
 	
 	for i, v in ipairs(p1) do
 		if v == enumsModule.Components.Moments then
-			var51 = i
+			var50 = i
 			break
 		end
 	end
-	if var51 == nil then
+	if var50 == nil then
 		return p1
 	end
-	local var52 = cryoModule.List.join({}, p1)
-	table.remove(var52, var51)
-	local var53 = 1
+	local var51 = cryoModule.List.join({}, p1)
+	table.remove(var51, var50)
+	local var52 = 1
 	
-	for i_1, v_1 in ipairs(var52) do
+	for i_1, v_1 in ipairs(var51) do
 		if v_1 == enumsModule.Components.CurrentlyWearing then
-			var53 = i_1
+			var52 = i_1
 			break
 		end
 	end
-	table.insert(var52, var53, enumsModule.Components.Moments)
+	table.insert(var51, var52, enumsModule.Components.Moments)
 	
-	return var52
+	return var51
 end
 
 local t = {
@@ -143,15 +142,15 @@ local t_1 = {
 local t_2 = {
 	[enumsModule.Components.ContactProfileHeader] = contactProfileHeaderModule,
 	[enumsModule.Components.ContactDescription] = contactDescriptionModule,
-	[enumsModule.Components.Actions] = if fixCTARowOnContactProfile and fFlagProfilePlatformCTAsRefactorModule then CTARowModule else profileActionBarModule
+	[enumsModule.Components.Actions] = if fFlagProfilePlatformCTAsRefactorModule then CTARowModule else profileActionBarModule
 }
-local var42 = if fFlagAXEnableProfileTab then cryoModule.Dictionary.join(t, {
+local var41 = if fFlagAXEnableProfileTab then cryoModule.Dictionary.join(t, {
 	[enumsModule.Components.UserProfileHeader] = meTabUserProfileHeaderModule,
 	[enumsModule.Components.Actions] = cryoModule.None
 }) else nil
 
-return function(p2, p3, p4, p5, p6) --[[ line: 161 ]]
-	-- upvalues: reactModule (ref), constantsModule (ref), cryoModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), var42 (ref), t (ref), t_1 (ref), t_2 (ref), fFlagAboutBeforeActionClientModule (ref), orderWithAboutBeforeActions (ref), fFlagProfilePlatformEnableMomentsModule (ref), moveMomentsToTop (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref)
+return function(p2, p3, p4, p5, p6) --[[ line: 158 ]]
+	-- upvalues: reactModule (ref), constantsModule (ref), cryoModule (ref), getPeekViewOpenHeightByProfileTypeModule (ref), enumsModule (ref), fFlagAXEnableProfileTab (ref), var41 (ref), t (ref), t_1 (ref), t_2 (ref), fFlagAboutBeforeActionClientModule (ref), orderWithAboutBeforeActions (ref), fFlagProfilePlatformEnableMomentsModule (ref), moveMomentsToTop (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref)
 	p3 = p3 or {}
 	local t_3 = {
 		Layout = reactModule.createElement("UIListLayout", {
@@ -174,26 +173,26 @@ return function(p2, p3, p4, p5, p6) --[[ line: 161 ]]
 	local t_4 = {}
 	
 	if p4 == enumsModule.ProfileTypes.User then
-		t_4 = if fFlagAXEnableProfileTab and p6 then var42 else t
+		t_4 = if fFlagAXEnableProfileTab and p6 then var41 else t
 	elseif p4 == enumsModule.ProfileTypes.Community then
 		t_4 = t_1
 	elseif p4 == enumsModule.ProfileTypes.Contact then
 		t_4 = t_2
 	end
-	local var57 = if fFlagAboutBeforeActionClientModule and p4 == enumsModule.ProfileTypes.User then orderWithAboutBeforeActions(p3) else p3
+	local var56 = if fFlagAboutBeforeActionClientModule and p4 == enumsModule.ProfileTypes.User then orderWithAboutBeforeActions(p3) else p3
 	
 	if fFlagProfilePlatformEnableMomentsModule and p4 == enumsModule.ProfileTypes.User and p5 == enumsModule.Sources.MomentsFeed then
-		var57 = moveMomentsToTop(var57)
+		var56 = moveMomentsToTop(var56)
 	end
-	for i, v in var57 do
-		local var58 = t_4[v]
+	for i, v in var56 do
+		local var57 = t_4[v]
 		
 		if fFlagProfilePlatformEnableLazyLoadingComponentsModule then
-			if var58 ~= nil and p2[v] ~= nil then
-				t_3[v] = reactModule.createElement(var58, { layoutOrder = i })
+			if var57 ~= nil and p2[v] ~= nil then
+				t_3[v] = reactModule.createElement(var57, { layoutOrder = i })
 			end
-		elseif var58 ~= nil then
-			t_3[v] = reactModule.createElement(var58, { layoutOrder = i })
+		elseif var57 ~= nil then
+			t_3[v] = reactModule.createElement(var57, { layoutOrder = i })
 		end
 	end
 	return t_3
