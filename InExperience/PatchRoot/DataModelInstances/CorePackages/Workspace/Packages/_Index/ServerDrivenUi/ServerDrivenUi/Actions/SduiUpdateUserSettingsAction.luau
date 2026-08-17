@@ -1,14 +1,18 @@
 ﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local updateUserSettings = require(parent.LegallySensitiveContent).updateUserSettings
+local linkingProtocolModule = require(parent.LinkingProtocol)
+local linkingProtocol = linkingProtocolModule.LinkingProtocol
+local adConsentAttributionAdapter = linkingProtocolModule.AdConsentAttributionAdapter
+local enableAdConsentUserSettingsPublish = game:DefineFastFlag("EnableAdConsentUserSettingsPublish", false)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local sduiActionType = sduiCoreSystemModule.SduiActionType
 local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
 
-return function(p0, _, p1, _) --[[ line: 14 ]]
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref)
-	local var1 = if p0 then p0.actionParams else nil
+return function(p0, _, p1, _) --[[ line: 21 ]]
+	-- upvalues: sduiErrorType (ref), sduiActionType (ref), updateUserSettings (ref), enableAdConsentUserSettingsPublish (ref), adConsentAttributionAdapter (ref), linkingProtocol (ref)
+	local var3 = if p0 then p0.actionParams else nil
 	
-	if var1 == nil then
+	if var3 == nil then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			name = sduiActionType.UpdateUserSettings
@@ -16,8 +20,8 @@ return function(p0, _, p1, _) --[[ line: 14 ]]
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local settings = var1.settings
+	assert(var3, "actionParams must exist")
+	local settings = var3.settings
 	
 	if typeof(settings) ~= "table" or next(settings) == nil then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -27,7 +31,7 @@ return function(p0, _, p1, _) --[[ line: 14 ]]
 		
 		return
 	end
-	local auditData = var1.auditData
+	local auditData = var3.auditData
 	
 	if auditData ~= nil and typeof(auditData) ~= "string" then
 		p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
@@ -37,9 +41,24 @@ return function(p0, _, p1, _) --[[ line: 14 ]]
 		
 		return
 	end
-	local ok, status = pcall(function() --[[ line: 48 ]]
-		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), p1 (ref), sduiErrorType (copy), sduiActionType (copy)
-		updateUserSettings(settings, auditData):catch(function(p2) --[[ line: 49 ]]
+	local ok, status = pcall(function() --[[ line: 55 ]]
+		-- upvalues: updateUserSettings (copy), settings (ref), auditData (ref), enableAdConsentUserSettingsPublish (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy), p1 (ref), sduiErrorType (copy), sduiActionType (copy)
+		local var4 = updateUserSettings(settings, auditData)
+		
+		if enableAdConsentUserSettingsPublish then
+			var4 = var4:andThen(function() --[[ line: 61 ]]
+				-- upvalues: settings (copy), adConsentAttributionAdapter (copy), linkingProtocol (copy)
+				local allowSellShareData = settings.allowSellShareData
+				
+				if allowSellShareData ~= nil then
+					adConsentAttributionAdapter.resolveAndPublish(linkingProtocol.default, "ConsentChanged", function() --[[ line: 64 ]]
+						-- upvalues: allowSellShareData (ref)
+						return allowSellShareData
+					end)
+				end
+			end)
+		end
+		var4:catch(function(p2) --[[ line: 70 ]]
 			-- upvalues: p1 (copy), sduiErrorType (copy), sduiActionType (copy)
 			p1.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
 				name = sduiActionType.UpdateUserSettings,

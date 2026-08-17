@@ -2,7 +2,10 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local badge = foundationModule.Badge
 local button = foundationModule.Button
 local text = foundationModule.Text
@@ -13,8 +16,8 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 30 | named "VersionHistoryCard" ]]
-	-- upvalues: reactModule (ref), view (ref), text (ref), badge (ref), badgeShape (ref), badgeVariant (ref), button (ref), localizationStringsModule (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
+return function(p0) --[[ line: 33 | named "VersionHistoryCard" ]]
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), badge (ref), badgeShape (ref), badgeVariant (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
 	local testId = p0.testId or "version-history-card"
 	
 	return reactModule.createElement(view, {
@@ -64,12 +67,14 @@ return function(p0) --[[ line: 30 | named "VersionHistoryCard" ]]
 				}),
 				RestoreRow = reactModule.createElement(view, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
 					Restore = reactModule.createElement(button, {
-						text = localizationStringsModule.VERSION_HISTORY_RESTORE,
+						text = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+							restore = localizationStringsModule.VERSION_HISTORY_RESTORE
+						}) else nil).restore else localizationStringsModule.VERSION_HISTORY_RESTORE,
 						size = inputSize.Small,
 						variant = buttonVariant.Standard,
 						fillBehavior = fillBehavior.Fill,
 						isDisabled = p0.isRestoreDisabled,
-						onActivated = reactModule.useCallback(function() --[[ line: 32 ]]
+						onActivated = reactModule.useCallback(function() --[[ line: 41 ]]
 							-- upvalues: p0 (ref)
 							p0.onRestore()
 						end, { p0.onRestore }),

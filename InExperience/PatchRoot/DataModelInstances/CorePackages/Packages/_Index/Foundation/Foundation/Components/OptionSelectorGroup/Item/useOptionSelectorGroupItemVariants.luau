@@ -1,6 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local iconSizeModule = require(foundation.Enums.IconSize)
 local inputSizeModule = require(foundation.Enums.InputSize)
+local optionSelectorGroupSizeModule = require(foundation.Enums.OptionSelectorGroupSize)
 local fillBehaviorModule = require(foundation.Enums.FillBehavior)
 local orientationModule = require(foundation.Enums.Orientation)
 local flagsModule = require(foundation.Utility.Flags)
@@ -9,7 +10,7 @@ local _ = require(foundation.Providers.Style.Tokens)
 local _ = require(foundation.Components.Types)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(p0) --[[ line: 43 ]]
+local function legacyVariantsFactory(p0) --[[ line: 60 ]]
 	-- upvalues: flagsModule (ref), inputSizeModule (ref), iconSizeModule (ref)
 	return {
 		common = {
@@ -73,9 +74,101 @@ local function variantsFactory(p0) --[[ line: 43 ]]
 	}
 end
 
-return function(p1, p2, p3, p4) --[[ line: 116 ]]
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), orientationModule (ref), fillBehaviorModule (ref), composeStyleVariantModule (ref)
-	local optionSelectorGroupItem = variantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p1)
+local function groupSizeVariantsFactory(p1) --[[ line: 133 ]]
+	-- upvalues: iconSizeModule (ref), optionSelectorGroupSizeModule (ref), composeStyleVariantModule (ref)
+	local t = {
+		label = { tag = "size-full-0 auto-y" },
+		metadata = { tag = "size-full-0 auto-y" },
+		description = { tag = "size-full-0 auto-y" }
+	}
 	
-	return if flagsModule.FoundationOptionSelectorGroupFixes then composeStyleVariantModule(optionSelectorGroupItem.common, optionSelectorGroupItem.sizes[p2], if p3 == orientationModule.Horizontal then optionSelectorGroupItem.layouts.Inline elseif p3 == orientationModule.Vertical and p4 == fillBehaviorModule.Fit then optionSelectorGroupItem.layouts.StackedFit else optionSelectorGroupItem.layouts.StackedFill) else composeStyleVariantModule(optionSelectorGroupItem.common, optionSelectorGroupItem.sizes[p2])
+	return {
+		common = {
+			container = { tag = "col align-x-left align-y-center gap-xsmall" },
+			content = p1.Color.Content.Emphasis,
+			supportingContent = p1.Color.Content.Default,
+			label = { tag = "content-emphasis" },
+			metadata = { tag = "content-default" },
+			description = { tag = "content-default" }
+		},
+		sizes = {
+			[optionSelectorGroupSizeModule.XSmall] = {
+				container = {
+					tag = "padding-medium radius-small",
+					radius = p1.Radius.Small
+				},
+				icon = { size = iconSizeModule.XSmall, extent = p1.Size.Size_300 },
+				label = { tag = "text-title-small" },
+				metadata = { tag = "text-caption-small" },
+				description = { tag = "text-body-small" }
+			},
+			[optionSelectorGroupSizeModule.Small] = {
+				container = {
+					tag = "padding-large radius-medium",
+					radius = p1.Radius.Medium
+				},
+				icon = { size = iconSizeModule.Small, extent = p1.Size.Size_400 },
+				label = { tag = "text-title-small" },
+				metadata = { tag = "text-caption-small" },
+				description = { tag = "text-body-small" }
+			},
+			[optionSelectorGroupSizeModule.Medium] = {
+				container = {
+					tag = "padding-xlarge radius-medium",
+					radius = p1.Radius.Medium
+				},
+				icon = { size = iconSizeModule.Medium, extent = p1.Size.Size_500 },
+				label = { tag = "text-title-medium" },
+				metadata = { tag = "text-caption-medium" },
+				description = { tag = "text-body-medium" }
+			}
+		},
+		layouts = {
+			Inline = composeStyleVariantModule({
+				container = { tag = "size-full-0 auto-y" },
+				itemInner = { tag = "row align-y-center gap-small size-full-0 auto-y" },
+				textContainer = { tag = "col fill gap-xsmall size-full-0 auto-y" }
+			}, t),
+			StackedFill = composeStyleVariantModule({
+				container = { tag = "fill auto-y" },
+				itemInner = { tag = "col gap-small size-full-0 auto-y" },
+				textContainer = { tag = "col gap-xsmall size-full-0 auto-y" }
+			}, t),
+			StackedFit = composeStyleVariantModule({
+				container = { tag = "auto-xy" },
+				itemInner = { tag = "col gap-small auto-xy" },
+				textContainer = { tag = "col gap-xsmall auto-xy" }
+			}, {
+				label = { tag = "auto-xy" },
+				metadata = { tag = "auto-xy" },
+				description = { tag = "auto-xy" }
+			})
+		},
+		selection = {
+			[false] = { container = { stroke = p1.Color.Stroke.Emphasis } },
+			[true] = { container = { stroke = p1.Color.System.Contrast } }
+		}
+	}
+end
+
+local function variantsFactory(p2) --[[ line: 247 ]]
+	-- upvalues: legacyVariantsFactory (ref), groupSizeVariantsFactory (ref)
+	return {
+		legacy = legacyVariantsFactory(p2),
+		groupSize = groupSizeVariantsFactory(p2)
+	}
+end
+
+return function(p3, p4, p5, p6, p7) --[[ line: 254 ]]
+	-- upvalues: variantsContextModule (ref), variantsFactory (ref), flagsModule (ref), orientationModule (ref), fillBehaviorModule (ref), composeStyleVariantModule (ref)
+	local optionSelectorGroupItem = variantsContextModule.useVariants("OptionSelectorGroupItem", variantsFactory, p3)
+	
+	if flagsModule.FoundationOptionSelectorGroupBeta then
+		local groupSize = optionSelectorGroupItem.groupSize
+		
+		return composeStyleVariantModule(groupSize.common, groupSize.sizes[p4], if p5 == orientationModule.Horizontal then groupSize.layouts.Inline elseif p5 == orientationModule.Vertical and p6 == fillBehaviorModule.Fit then groupSize.layouts.StackedFit else groupSize.layouts.StackedFill, groupSize.selection[p7 == true])
+	end
+	local legacy = optionSelectorGroupItem.legacy
+	
+	return if flagsModule.FoundationOptionSelectorGroupFixes then composeStyleVariantModule(legacy.common, legacy.sizes[p4], if p5 == orientationModule.Horizontal then legacy.layouts.Inline elseif p5 == orientationModule.Vertical and p6 == fillBehaviorModule.Fit then legacy.layouts.StackedFit else legacy.layouts.StackedFill) else composeStyleVariantModule(legacy.common, legacy.sizes[p4])
 end

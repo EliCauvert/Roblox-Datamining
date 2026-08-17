@@ -73,7 +73,8 @@
 		MainWindowBold = Enum.Font.SourceSansBold,
 		MainWindowHeader = Enum.Font.SourceSansBold,
 		Log = Enum.Font.Code,
-		Search = Enum.Font.Code
+		Search = Enum.Font.Code,
+		Mono = Enum.Font.Code
 	},
 	GeneralFormatting = {
 		NoResultSearchStr = "Did not find results for \"%s.\"",

@@ -83,5 +83,9 @@
 	MomentsEditingFlowExited = "MomentsEditingFlowExited",
 	MomentsEditingFlowContinueToEditButtonPressed = "MomentsEditingFlowContinueToEditButtonPressed",
 	MomentsEditingFlowContinueToDescriptionButtonPressed = "MomentsEditingFlowContinueToDescriptionButtonPressed",
-	MomentsSessionEnded = "MomentsSessionEnded"
+	MomentsSessionEnded = "MomentsSessionEnded",
+	DraftSaveFailedEvent = "DraftSaveFailedEvent",
+	MomentsReturnToGallery = "MomentsReturnToGallery",
+	DraftRestoreSucceededEvent = "DraftRestoreSucceededEvent",
+	DraftRestoreFailedEvent = "DraftRestoreFailedEvent"
 }

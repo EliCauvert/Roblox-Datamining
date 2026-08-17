@@ -46,7 +46,7 @@ local stores = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Sto
 local signalsModule = require(corePackagesService.Packages.Signals)
 local createSignal = signalsModule.createSignal
 local appStyleProvider = require(corePackagesService.Packages.UIBlox).App.Style.AppStyleProvider
-local dark = require(corePackagesService.Packages.UIBlox).App.Style.Constants.ThemeName.Dark
+local dark = require(corePackagesService.Packages.Foundation).Enums.ColorMode.Dark
 local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
 local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
 local helpPageModule = require(corePackagesService.Workspace.Packages.HelpPage)
@@ -2716,7 +2716,7 @@ local function CreateSettingsHub() --[[ line: 381 ]]
 			local _ = nil
 			local _ = t_2.Pages.CurrentPage
 			
-			if u9682 ~= nil and u9682.ShouldDisableDefaultScroll == true then
+			if u9680 ~= nil and u9680.ShouldDisableDefaultScroll == true then
 				t_2.PageView.ScrollBarThickness = 0
 				t_2.PageView.ScrollingEnabled = false
 				t_2.PageView.CanvasPosition = Vector2.new(0, 0)
@@ -2738,7 +2738,7 @@ local function CreateSettingsHub() --[[ line: 381 ]]
 		if t.FFlagAddAbilityToDisableIGMScroll then
 			local _ = nil
 			local _ = t_2.Pages.CurrentPage
-			var285 = u9688
+			var285 = u9686
 			
 			if not (var285 ~= nil and var285.ShouldDisableDefaultScroll == true) then
 				t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)
@@ -2752,7 +2752,7 @@ local function CreateSettingsHub() --[[ line: 381 ]]
 				if t.FFlagAddAbilityToDisableIGMScroll then
 					local _ = nil
 					local _ = t_2.Pages.CurrentPage
-					local var287 = u10225
+					local var287 = u10223
 					
 					if not (var287 ~= nil and var287.ShouldDisableDefaultScroll == true) then
 						t_2.PageView.CanvasSize = UDim2.new(0, 0, 0, t_2.Pages.CurrentPage:GetSize().Y)

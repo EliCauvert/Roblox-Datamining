@@ -8,7 +8,7 @@ local tokenProcessingUtilitiesModule = require(script.TokenProcessingUtilities)
 local _ = require(foundation.Components.Types)
 local themeGeneratorsModule = require(script.themeGenerators)
 
-local function _(p0, p1) --[[ line: 23 | named "getPlatformScale" ]]
+local function _(p0, p1) --[[ line: 24 | named "getPlatformScale" ]]
 	-- upvalues: flagsModule (ref), deviceModule (ref)
 	if flagsModule.FoundationDisableTokenScaling then
 		return 1
@@ -18,7 +18,7 @@ local function _(p0, p1) --[[ line: 23 | named "getPlatformScale" ]]
 	return (if p0 == deviceModule.Console then 1.5 else 1) * u155
 end
 
-local function applyTokenOverrides(p2, p3) --[[ line: 38 ]]
+local function applyTokenOverrides(p2, p3) --[[ line: 39 ]]
 	-- upvalues: flagsModule (ref), tokenProcessingUtilitiesModule (ref)
 	if not flagsModule.FoundationTokenOverrides then
 		return p2
@@ -33,7 +33,7 @@ local function applyTokenOverrides(p2, p3) --[[ line: 38 ]]
 	return p2
 end
 
-local function buildTokens(p4, p5, p6) --[[ line: 53 ]]
+local function buildTokens(p4, p5, p6) --[[ line: 54 ]]
 	-- upvalues: applyTokenOverrides (ref)
 	local var11 = p4(p5)
 	local t = {
@@ -64,7 +64,7 @@ local function buildTokens(p4, p5, p6) --[[ line: 53 ]]
 	return t
 end
 
-local function getTokens(p7, p8, p9, p10, p11) --[[ line: 85 ]]
+local function getTokens(p7, p8, p9, p10, p11) --[[ line: 86 ]]
 	-- upvalues: deviceModule (ref), flagsModule (ref), themeGeneratorsModule (ref), themeNameModule (ref), buildTokens (ref)
 	local var15
 	p8 = p8 or deviceModule.Desktop
@@ -88,7 +88,7 @@ end
 
 return {
 	getTokens = getTokens,
-	getThemedTokens = function(p12, p13, p14, p15, p16) --[[ line: 108 ]]
+	getThemedTokens = function(p12, p13, p14, p15, p16) --[[ line: 109 ]]
 		-- upvalues: deviceModule (ref), flagsModule (ref), themeGeneratorsModule (ref), themeNameModule (ref), buildTokens (ref)
 		local var18
 		p14 = p14 or deviceModule.Desktop
@@ -102,7 +102,7 @@ return {
 		var18 = (if p14 == deviceModule.Console then 1.5 else 1) * math.clamp(var17, 0, 1e999)
 		return buildTokens(themeGeneratorsModule.getGenerator(p12 or themeNameModule.Default, p13), var18, p16)
 	end,
-	getLegacyTokens = function(p17, p18, p19) --[[ line: 121 ]]
+	getLegacyTokens = function(p17, p18, p19) --[[ line: 122 ]]
 		-- upvalues: deviceModule (ref), flagsModule (ref), themeGeneratorsModule (ref), buildTokens (ref)
 		local var21
 		p18 = p18 or deviceModule.Desktop

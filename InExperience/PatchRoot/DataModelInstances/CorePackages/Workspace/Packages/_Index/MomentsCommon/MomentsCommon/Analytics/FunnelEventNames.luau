@@ -4,7 +4,8 @@
 	MusicEnhancement = "Music Enhancement",
 	TextOverlayEnhancement = "Text Enhancement",
 	StickerOverlayEnhancement = "Sticker Enhancement",
-	TrimEnhancement = "Trim Enhancement"
+	TrimEnhancement = "Trim Enhancement",
+	DraftRecovery = "Draft Recovery"
 }
 local t_1 = {
 	AppLaunched = "AppLaunched",
@@ -37,6 +38,10 @@ local t_6 = {
 local t_7 = {
 	TrimButtonPressed = "TrimButtonPressed",
 	TrimCompleted = "TrimCompleted"
+}
+local t_8 = {
+	DraftRestored = "DraftRestored",
+	DraftPublished = "DraftPublished"
 }
 
 return {
@@ -81,6 +86,10 @@ return {
 			},
 			[t_6.StickerOverlaySelected] = { stepNumber = 2, stepName = "Sticker Overlay Selected" },
 			[t_6.StickerOverlayCompleted] = { stepNumber = 3, stepName = "Sticker Overlay Completed" }
+		},
+		[t.DraftRecovery] = {
+			[t_8.DraftRestored] = { stepNumber = 1, stepName = "Draft Restored" },
+			[t_8.DraftPublished] = { stepNumber = 2, stepName = "Draft Published" }
 		}
 	},
 	CreationIntentSource = t_2,
@@ -89,5 +98,6 @@ return {
 	MusicEnhancementSteps = t_4,
 	TrimEnhancementSteps = t_7,
 	TextOverlayEnhancementSteps = t_5,
-	StickerOverlayEnhancementSteps = t_6
+	StickerOverlayEnhancementSteps = t_6,
+	DraftRecoverySteps = t_8
 }

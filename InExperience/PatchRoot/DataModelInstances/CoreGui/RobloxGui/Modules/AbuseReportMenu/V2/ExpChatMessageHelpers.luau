@@ -4,7 +4,7 @@ local fFlagEnableGlobalChatAbuseReporting = require(game:GetService("CorePackage
 local t = {
 	CHANNEL_GENERAL = "RBXGeneral",
 	CHANNEL_GLOBAL = "RBXGlobal",
-	areChannelTabsEnabled = function() --[[ line: 30 ]]
+	areChannelTabsEnabled = function() --[[ line: 27 ]]
 		-- upvalues: textChatService (ref)
 		if not game:GetEngineFeature("EnableChannelTabsConfiguration") then
 			return false
@@ -13,7 +13,7 @@ local t = {
 		
 		return channelTabsConfiguration ~= nil and channelTabsConfiguration.Enabled
 	end,
-	localizeString = function(p0, p1) --[[ line: 42 ]]
+	localizeString = function(p0, p1) --[[ line: 39 ]]
 		if not p0 then
 			return p1
 		end
@@ -21,10 +21,10 @@ local t = {
 		
 		return if ok and type(status) == "string" then status else p1
 	end,
-	isSystemMessage = function(p2) --[[ line: 53 ]]
+	isSystemMessage = function(p2) --[[ line: 49 ]]
 		return if p2.textChannel and p2.textChannel.Name == "RBXSystem" then true else p2.userId and p2.userId ~= "0"
 	end,
-	formatChannelLabel = function(p3, p4) --[[ line: 65 ]]
+	formatChannelLabel = function(p3, p4) --[[ line: 60 ]]
 		-- upvalues: playersService (ref), fFlagEnableGlobalChatAbuseReporting (ref)
 		if string.find(p3, "RBXGeneral") then
 			return "General"
@@ -47,13 +47,13 @@ local t = {
 			return if fFlagEnableGlobalChatAbuseReporting and p3 == "RBXGlobal" then "Global" else p3
 		end
 	end,
-	formatMessageLabel = function(p5) --[[ line: 89 ]]
+	formatMessageLabel = function(p5) --[[ line: 84 ]]
 		local prefixText = p5.prefixText or ""
 		local text = p5.text or ""
 		
 		return if #prefixText > 0 then prefixText .. " " .. text else text
 	end,
-	getMessageUsername = function(p6) --[[ line: 95 ]]
+	getMessageUsername = function(p6) --[[ line: 90 ]]
 		-- upvalues: playersService (ref)
 		local var7 = tonumber(p6.userId)
 		
@@ -74,7 +74,7 @@ local t = {
 	end
 }
 
-function t.collectItems(p7, p8) --[[ line: 123 ]]
+function t.collectItems(p7, p8) --[[ line: 118 ]]
 	-- upvalues: t (ref)
 	local t_1 = {}
 	
@@ -98,7 +98,7 @@ function t.collectItems(p7, p8) --[[ line: 123 ]]
 	return t_1
 end
 
-function t.annotateWhisperItems(p9, p10, p11) --[[ line: 147 ]]
+function t.annotateWhisperItems(p9, p10, p11) --[[ line: 142 ]]
 	for i, v in ipairs(p9) do
 		local id = p10[v.id]
 		

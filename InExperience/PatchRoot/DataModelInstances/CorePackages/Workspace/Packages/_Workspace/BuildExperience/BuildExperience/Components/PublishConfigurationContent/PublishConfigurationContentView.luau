@@ -2,31 +2,85 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local buildMaturityBannerModule = require(buildExperience.Components.GameConfigurations.BuildMaturityBanner.BuildMaturityBanner)
 local gameConfigurationListModule = require(buildExperience.Components.GameConfigurations.GameConfigurationList.GameConfigurationList)
 local view = foundationModule.View
 local iconName = foundationModule.Enums.IconName
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-return function(p0) --[[ line: 30 | named "PublishConfigurationContentView" ]]
-	-- upvalues: localizationStringsModule (ref), iconName (ref), reactModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref)
+return function(p0) --[[ line: 34 | named "PublishConfigurationContentView" ]]
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), iconName (ref), reactModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref)
+	local PUBLISH_CONTENT_BODY, PUBLISH_CONTENT_MATURITY, PUBLISH_CONTENT_TITLE, GAME_CONFIGURATION_GAME_DETAILS, GAME_CONFIGURATION_GAME_DETAILS_BODY, GAME_CONFIGURATION_ICON_AND_THUMBNAILS, GAME_CONFIGURATION_TITLE_AND_DESCRIPTION, PUBLISH_VERSION_INFORMATION_BODY, PUBLISH_VERSION_INFORMATION_TITLE, VERSION_HISTORY_TITLE, PUBLISH_VERSION_TITLE_DESCRIPTION
 	local testId = p0.testId or "game-configuration-content"
+	local var8 = if fFlagBuildLocalization then useLocalization({
+		contentBody = localizationStringsModule.PUBLISH_CONTENT_BODY,
+		contentMaturity = localizationStringsModule.PUBLISH_CONTENT_MATURITY,
+		contentTitle = localizationStringsModule.PUBLISH_CONTENT_TITLE,
+		gameDetails = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS,
+		gameDetailsBody = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY,
+		iconAndThumbnails = localizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
+		titleAndDescription = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
+		versionInformationBody = localizationStringsModule.PUBLISH_VERSION_INFORMATION_BODY,
+		versionInformationTitle = localizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE,
+		versionHistory = localizationStringsModule.VERSION_HISTORY_TITLE,
+		versionTitleDescription = localizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
+	}) else nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	local _ = nil
+	
+	if fFlagBuildLocalization then
+		PUBLISH_CONTENT_BODY = var8.contentBody
+		PUBLISH_CONTENT_MATURITY = var8.contentMaturity
+		PUBLISH_CONTENT_TITLE = var8.contentTitle
+		GAME_CONFIGURATION_GAME_DETAILS = var8.gameDetails
+		GAME_CONFIGURATION_GAME_DETAILS_BODY = var8.gameDetailsBody
+		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = var8.iconAndThumbnails
+		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = var8.titleAndDescription
+		PUBLISH_VERSION_INFORMATION_BODY = var8.versionInformationBody
+		PUBLISH_VERSION_INFORMATION_TITLE = var8.versionInformationTitle
+		VERSION_HISTORY_TITLE = var8.versionHistory
+		PUBLISH_VERSION_TITLE_DESCRIPTION = var8.versionTitleDescription
+	else
+		PUBLISH_CONTENT_BODY = localizationStringsModule.PUBLISH_CONTENT_BODY
+		PUBLISH_CONTENT_MATURITY = localizationStringsModule.PUBLISH_CONTENT_MATURITY
+		PUBLISH_CONTENT_TITLE = localizationStringsModule.PUBLISH_CONTENT_TITLE
+		GAME_CONFIGURATION_GAME_DETAILS = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS
+		GAME_CONFIGURATION_GAME_DETAILS_BODY = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY
+		GAME_CONFIGURATION_ICON_AND_THUMBNAILS = localizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS
+		GAME_CONFIGURATION_TITLE_AND_DESCRIPTION = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION
+		PUBLISH_VERSION_INFORMATION_BODY = localizationStringsModule.PUBLISH_VERSION_INFORMATION_BODY
+		PUBLISH_VERSION_INFORMATION_TITLE = localizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE
+		VERSION_HISTORY_TITLE = localizationStringsModule.VERSION_HISTORY_TITLE
+		PUBLISH_VERSION_TITLE_DESCRIPTION = localizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
+	end
 	local list = {
 		{
 			id = "icon-thumbnails",
-			title = localizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
+			title = GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
 			onActivated = p0.onOpenIconAndThumbnails
 		},
 		{
 			id = "title-description",
-			title = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
+			title = GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
 			onActivated = p0.onOpenTitleDescriptionPage
 		}
 	}
 	local list_1 = {
 		{
 			id = "content-rating",
-			title = localizationStringsModule.PUBLISH_CONTENT_MATURITY,
+			title = PUBLISH_CONTENT_MATURITY,
 			description = p0.contentMaturityText,
 			trailingIcon = iconName.ArrowUpRightFromSquare,
 			onActivated = p0.onOpenContentMaturity
@@ -37,13 +91,13 @@ return function(p0) --[[ line: 30 | named "PublishConfigurationContentView" ]]
 	if p0.showVersionTitleDescription then
 		table.insert(t, {
 			id = "version-title-description",
-			title = localizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION,
+			title = PUBLISH_VERSION_TITLE_DESCRIPTION,
 			onActivated = p0.onOpenVersionTitleDescriptionPage
 		})
 	end
 	table.insert(t, {
 		id = "version-history",
-		title = localizationStringsModule.VERSION_HISTORY_TITLE,
+		title = VERSION_HISTORY_TITLE,
 		onActivated = p0.onOpenVersionHistory
 	})
 	
@@ -54,15 +108,15 @@ return function(p0) --[[ line: 30 | named "PublishConfigurationContentView" ]]
 	}, {
 		VersionInformation = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 1,
-			title = localizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE,
-			body = localizationStringsModule.PUBLISH_VERSION_INFORMATION_BODY,
+			title = PUBLISH_VERSION_INFORMATION_TITLE,
+			body = PUBLISH_VERSION_INFORMATION_BODY,
 			rows = t,
 			testId = `{testId}-version-information`
 		}),
 		GameDetails = reactModule.createElement(gameConfigurationListModule, {
 			layoutOrder = 2,
-			title = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS,
-			body = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY,
+			title = GAME_CONFIGURATION_GAME_DETAILS,
+			body = GAME_CONFIGURATION_GAME_DETAILS_BODY,
 			rows = list,
 			testId = `{testId}-game-details`
 		}),
@@ -73,8 +127,8 @@ return function(p0) --[[ line: 30 | named "PublishConfigurationContentView" ]]
 		}, {
 			Configuration = reactModule.createElement(gameConfigurationListModule, {
 				layoutOrder = 1,
-				title = localizationStringsModule.PUBLISH_CONTENT_TITLE,
-				body = localizationStringsModule.PUBLISH_CONTENT_BODY,
+				title = PUBLISH_CONTENT_TITLE,
+				body = PUBLISH_CONTENT_BODY,
 				rows = list_1,
 				testId = `{testId}-content`
 			}),

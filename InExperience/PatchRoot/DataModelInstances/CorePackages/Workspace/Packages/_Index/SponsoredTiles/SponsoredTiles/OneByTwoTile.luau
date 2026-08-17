@@ -445,7 +445,11 @@ return reactModule.memo(function(p0) --[[ line: 135 | named "OneByTwoTile" ]]
 						preferSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then true else nil,
 						onActivated = var54,
 						reportExperienceLaunched = var56,
-						experienceJoinData = if p0.launchDataOverride then { launchData = p0.launchDataOverride } else nil
+						experienceJoinData = {
+							launchData = p0.launchDataOverride,
+							tileType = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+							nativeAdData = p0.adId
+						}
 					}) else nil
 				})
 			})

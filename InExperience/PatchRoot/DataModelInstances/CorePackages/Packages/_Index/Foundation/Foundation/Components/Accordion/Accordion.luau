@@ -1,5 +1,6 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local reactModule = require(foundation.Parent.React)
+local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
@@ -12,21 +13,28 @@ local t = {
 	width = UDim.new(1, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 35 | named "Accordion" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
-	local var7 = withDefaultsModule(p0, t)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | named "Accordion" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), accordionContextModule (ref)
+	local var8 = withDefaultsModule(p0, t)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var7, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var8, {
 		tag = "col flex-y-evenly auto-y",
-		Size = UDim2.new(var7.width, UDim.new(0, 0)),
+		Size = UDim2.new(var8.width, UDim.new(0, 0)),
 		ref = p1
 	}), {
 		AccordionContext = reactModule.createElement(accordionContextModule.Provider, {
-			value = {
-				onAccordionItemActivated = var7.onActivated,
-				itemSize = var7.size,
-				testId = var7.testId
+			value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 40 ]]
+				-- upvalues: var8 (ref)
+				return {
+					onAccordionItemActivated = var8.onActivated,
+					itemSize = var8.size,
+					testId = var8.testId
+				}
+			end, { var8.onActivated, var8.size, var8.testId }) else nil else {
+				onAccordionItemActivated = var8.onActivated,
+				itemSize = var8.size,
+				testId = var8.testId
 			}
-		}, var7.children)
+		}, var8.children)
 	})
 end))

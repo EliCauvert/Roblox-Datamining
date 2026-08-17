@@ -4,7 +4,7 @@ local viewportVideoAutoplayControllerModule = require(videoUtils.ViewportVideoAu
 local t = {}
 t.__index = t
 
-function t.new(p0) --[[ line: 22 ]]
+function t.new(p0) --[[ line: 24 ]]
 	-- upvalues: videoPlaybackCoordinatorModule (ref), viewportVideoAutoplayControllerModule (ref), t (ref)
 	local var4 = videoPlaybackCoordinatorModule.new()
 	local t_1 = {

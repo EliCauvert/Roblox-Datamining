@@ -16,27 +16,28 @@ local versionHistoryUtilsModule = require(script.Parent.VersionHistoryUtils)
 local useScrollToTopAfterRestoreModule = require(script.Parent.useScrollToTopAfterRestore)
 local dataStatus = dataHydrationModule.DataStatus
 local dateHelper = timeModule.DateHelper
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local fFlagBuildNoPublishOnRevertModule = require(buildExperience.Flags.FFlagBuildNoPublishOnRevert)
 local useLocalization = localizationModule.Hooks.useLocalization
 
-local function _(p0) --[[ line: 39 | named "toNumber" ]]
+local function _(p0) --[[ line: 40 | named "toNumber" ]]
 	return if type(p0) == "number" then p0 elseif type(p0) == "string" then tonumber(p0) else nil
 end
 
-local _ = function(p1) --[[ line: 49 | named "getVersionNumber" ]]
+local _ = function(p1) --[[ line: 50 | named "getVersionNumber" ]]
 	local version = p1.version
 	
 	return assert(if type(version) == "number" then version elseif type(version) == "string" then tonumber(version) else nil, `Place version must be numeric: {p1.version}`)
 end
 
-local _ = function(p2, p3) --[[ line: 53 | named "getRequiredString" ]]
+local _ = function(p2, p3) --[[ line: 54 | named "getRequiredString" ]]
 	assert(type(p2) == "string" and p2 ~= "", `Place version {p3} must not be empty`)
 	
 	return p2
 end
 
-local function formatCreatedDate(p4, p5) --[[ line: 58 ]]
+local function formatCreatedDate(p4, p5) --[[ line: 59 ]]
 	-- upvalues: localizationStringsModule (ref)
 	assert(type(p4) == "string" and p4 ~= "", "Place version createdTime must not be empty")
 	local match, match_1, match_2 = string.match(p4, "^(%d%d%d%d)%-(%d%d)%-(%d%d)")
@@ -47,7 +48,7 @@ local function formatCreatedDate(p4, p5) --[[ line: 58 ]]
 	return localizationStringsModule.formatVersionHistoryCreatedDate(p5[var22], var23, match)
 end
 
-local function mapVersionToEntry(p6, p7) --[[ line: 71 ]]
+local function mapVersionToEntry(p6, p7) --[[ line: 72 ]]
 	-- upvalues: localizationStringsModule (ref), formatCreatedDate (ref), versionHistoryUtilsModule (ref)
 	local version = p6.version
 	local var24 = assert(if type(version) == "number" then version elseif type(version) == "string" then tonumber(version) else nil, `Place version must be numeric: {p6.version}`)
@@ -64,7 +65,7 @@ local function mapVersionToEntry(p6, p7) --[[ line: 71 ]]
 	}
 end
 
-local function mapHistoryToEntries(p8, p9) --[[ line: 93 ]]
+local function mapHistoryToEntries(p8, p9) --[[ line: 94 ]]
 	-- upvalues: mapVersionToEntry (ref)
 	if p8 == nil or p8.placeVersions == nil then
 		return {}
@@ -77,71 +78,70 @@ local function mapHistoryToEntries(p8, p9) --[[ line: 93 ]]
 	return t
 end
 
-local _ = function(p10, p11, p12) --[[ line: 108 | named "getStatusText" ]]
+local _ = function(p10, p11, p12) --[[ line: 109 | named "getStatusText" ]]
 	-- upvalues: dataStatus (ref), localizationStringsModule (ref)
 	return if p12 == nil then if p10 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif p10 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #p11 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else p12
 end
 
-return function(p13) --[[ line: 122 | named "VersionHistoryContainer" ]]
-	-- upvalues: useLocalization (ref), dateHelper (ref), reactModule (ref), placeVersionHistoryModule (ref), signalsReactModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), mapHistoryToEntries (ref), dataStatus (ref), localizationStringsModule (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagBuildNoPublishOnRevertModule (ref), fFlagisPublishOnBuildRevertModule (ref), versionHistoryBottomSheetModule (ref)
+return function(p13) --[[ line: 123 | named "VersionHistoryContainer" ]]
+	-- upvalues: useLocalization (ref), dateHelper (ref), fFlagBuildLocalization (ref), localizationStringsModule (ref), reactModule (ref), placeVersionHistoryModule (ref), signalsReactModule (ref), useScrollToTopAfterRestoreModule (ref), getPlaytestLoadingStoreModule (ref), mapHistoryToEntries (ref), dataStatus (ref), rollbackPlaceWithRetryModule (ref), fFlagEnableTeamTestLua (ref), fFlagBuildNoPublishOnRevertModule (ref), fFlagisPublishOnBuildRevertModule (ref), versionHistoryBottomSheetModule (ref)
 	local var26 = useLocalization(dateHelper.MonthsLocalizationKeys)
-	local var27 = reactModule.useMemo(function() --[[ line: 124 ]]
+	local var27 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+		restoreFailed = localizationStringsModule.VERSION_HISTORY_RESTORE_FAILED
+	}) else nil).restoreFailed else localizationStringsModule.VERSION_HISTORY_RESTORE_FAILED
+	local var28 = reactModule.useMemo(function() --[[ line: 133 ]]
 		-- upvalues: p13 (ref), placeVersionHistoryModule (copy)
 		return p13.store or placeVersionHistoryModule.getPlaceVersionHistoryStore()
 	end, { p13.store })
-	local var28 = reactModule.useMemo(function() --[[ line: 127 ]]
-		-- upvalues: var27 (ref), p13 (ref)
-		return var27.getAndFetchHistory(p13.placeId)
-	end, { var27, p13.placeId })
-	local var29 = signalsReactModule.useSignalState(var28.data)
-	local var30 = signalsReactModule.useSignalState(var28.status)
-	local var31, var32 = reactModule.useState(false)
-	local var33, var34 = reactModule.useState(nil)
-	local var35 = useScrollToTopAfterRestoreModule()
-	local var36 = signalsReactModule.useSignalState(reactModule.useCallback(function(p14) --[[ line: 135 ]]
+	local var29 = reactModule.useMemo(function() --[[ line: 136 ]]
+		-- upvalues: var28 (ref), p13 (ref)
+		return var28.getAndFetchHistory(p13.placeId)
+	end, { var28, p13.placeId })
+	local var30 = signalsReactModule.useSignalState(var29.data)
+	local var31 = signalsReactModule.useSignalState(var29.status)
+	local var32, var33 = reactModule.useState(false)
+	local var34, var35 = reactModule.useState(nil)
+	local var36 = useScrollToTopAfterRestoreModule()
+	local var37 = signalsReactModule.useSignalState(reactModule.useCallback(function(p14) --[[ line: 144 ]]
 		-- upvalues: getPlaytestLoadingStoreModule (copy), p13 (ref)
 		return getPlaytestLoadingStoreModule(p14).getAgentStatusForPlaceId(p13.placeId)(p14) == "Loading"
 	end, { p13.placeId }))
-	local var37 = reactModule.useMemo(function() --[[ line: 140 ]]
-		-- upvalues: mapHistoryToEntries (copy), var29 (ref), var26 (ref)
-		return mapHistoryToEntries(var29, var26)
-	end, { var29, var26 })
+	local var38 = reactModule.useMemo(function() --[[ line: 149 ]]
+		-- upvalues: mapHistoryToEntries (copy), var30 (ref), var26 (ref)
+		return mapHistoryToEntries(var30, var26)
+	end, { var30, var26 })
 	
 	return reactModule.createElement(versionHistoryBottomSheetModule, {
 		isOpen = p13.isOpen,
-		entries = var37,
-		statusText = if var33 ~= nil then if var30 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif var30 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #var37 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else var33,
-		isRestoreDisabled = var31 or var36,
+		entries = var38,
+		statusText = if var34 ~= nil then if var31 == dataStatus.NotReady then localizationStringsModule.VERSION_HISTORY_LOADING elseif var31 == dataStatus.Failed then localizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #var38 == 0 then localizationStringsModule.VERSION_HISTORY_EMPTY else nil else var34,
+		isRestoreDisabled = var32 or var37,
 		onClose = p13.onClose,
-		onRestore = reactModule.useCallback(function(p15) --[[ line: 145 ]]
-			-- upvalues: var31 (ref), var36 (ref), var32 (ref), var34 (ref), rollbackPlaceWithRetryModule (copy), p13 (ref), fFlagEnableTeamTestLua (copy), fFlagBuildNoPublishOnRevertModule (copy), fFlagisPublishOnBuildRevertModule (copy), var35 (ref), localizationStringsModule (copy)
-			if var31 or var36 then
+		onRestore = reactModule.useCallback(function(p15) --[[ line: 154 ]]
+			-- upvalues: var32 (ref), var37 (ref), var33 (ref), var35 (ref), rollbackPlaceWithRetryModule (copy), p13 (ref), fFlagEnableTeamTestLua (copy), fFlagBuildNoPublishOnRevertModule (copy), fFlagisPublishOnBuildRevertModule (copy), var36 (ref), var27 (ref)
+			if var32 or var37 then
 				return
 			end
-			var32(true)
-			var34(nil)
+			var33(true)
+			var35(nil)
 			rollbackPlaceWithRetryModule(p13.placeId, p15.versionNumber, {
 				debugSource = "version_history restore",
 				note = { title = p15.noteTitle, description = p15.noteDescription },
 				published = if fFlagEnableTeamTestLua then if fFlagBuildNoPublishOnRevertModule then false else true else fFlagisPublishOnBuildRevertModule
-			}):andThen(function() --[[ line: 162 ]]
-				-- upvalues: var35 (copy)
-				var35.scrollToTopAfterRestore()
-			end):catch(function(_) --[[ line: 165 ]]
-				-- upvalues: var34 (copy), localizationStringsModule (copy)
-				var34(localizationStringsModule.VERSION_HISTORY_RESTORE_FAILED)
-			end):finally(function() --[[ line: 168 ]]
-				-- upvalues: var32 (copy)
-				var32(false)
+			}):andThen(function() --[[ line: 171 ]]
+				-- upvalues: var36 (copy)
+				var36.scrollToTopAfterRestore()
+			end):catch(function(_) --[[ line: 174 ]]
+				-- upvalues: var35 (copy), var27 (copy)
+				var35(var27)
+			end):finally(function() --[[ line: 177 ]]
+				-- upvalues: var33 (copy)
+				var33(false)
 			end)
 		end, {
-			var31,
-			var36,
-			var35,
-			var27,
-			p13.placeId
+			var32, var37, var27, var36, var28, p13.placeId
 		}),
-		scrollingFrameRef = var35.scrollingFrameRef,
+		scrollingFrameRef = var36.scrollingFrameRef,
 		testId = p13.testId
 	})
 end

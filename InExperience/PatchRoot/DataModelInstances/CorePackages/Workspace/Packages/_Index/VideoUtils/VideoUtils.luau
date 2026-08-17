@@ -14,6 +14,7 @@ return {
 	getPlaybackDetectionMethod = require(script.getPlaybackDetectionMethod),
 	RoundIconButton = require(script.RoundIconButton),
 	useCanDevicePlayVideoPreview = require(script.useCanDevicePlayVideoPreview),
+	useFeedVideoPlaybackContext = require(script.useFeedVideoPlaybackContext),
 	useTagAsViewportAutoplayCandidate = require(script.useTagAsViewportAutoplayCandidate),
 	EdpVideoBlockingConfig = require(script.EdpVideoBlockingConfig),
 	VideoBlockingHelpers = require(script.VideoBlockingHelpers),

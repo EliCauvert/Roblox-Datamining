@@ -50,31 +50,45 @@ local function AnchorWrapper(p0) --[[ line: 47 ]]
 end
 
 return reactModule.memo(function(p1) --[[ line: 72 | named "Tooltip" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useScaledValueModule (ref), userInputService (ref), popoverModule (ref), AnchorWrapper (ref), withCommonPropsModule (ref), radiusModule (ref), flagsModule (ref), viewModule (ref), textModule (ref)
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), useTokensModule (ref), useScaledValueModule (ref), flagsModule (ref), userInputService (ref), popoverModule (ref), AnchorWrapper (ref), withCommonPropsModule (ref), radiusModule (ref), viewModule (ref), textModule (ref)
 	local var19 = withDefaultsModule(p1, t)
 	local var20, var21 = reactModule.useState(false)
 	local var22 = useTokensModule()
+	local var23 = var19.text ~= nil and var19.text ~= ""
 	
 	return reactModule.createElement(popoverModule.Root, { isOpen = var20, testId = var19.testId }, {
 		Anchor = reactModule.createElement(AnchorWrapper, withCommonPropsModule(var19, { onHover = var21 }), var19.children),
 		Content = reactModule.createElement(popoverModule.Content, {
-			hasArrow = false,
 			selectionGroup = false,
+			hasArrow = if flagsModule.FoundationTooltipBeta then true else false,
 			align = var19.align,
 			side = { position = var19.side, offset = var22.Size.Size_200 },
 			radius = radiusModule.Small,
 			backgroundStyle = var22.Inverse.Surface.Surface_0,
-			onPressedOutside = if flagsModule.FoundationTooltipPressedOutside then function() --[[ line: 121 ]]
+			onPressedOutside = if flagsModule.FoundationTooltipPressedOutside then function() --[[ line: 138 ]]
 				-- upvalues: var21 (ref)
 				var21(false)
 			end else nil
 		}, reactModule.createElement(viewModule, {
 			tag = {
 				["col gap-xsmall auto-xy"] = true,
-				["padding-x-medium padding-y-small"] = var19.text ~= nil,
-				["padding-x-small padding-y-xsmall"] = var19.text == nil
+				["padding-x-medium padding-y-small"] = not flagsModule.FoundationTooltipBeta and var19.text ~= nil,
+				["padding-x-small padding-y-xsmall"] = not flagsModule.FoundationTooltipBeta and var19.text == nil
 			},
-			sizeConstraint = { MaxSize = Vector2.new(useScaledValueModule(320), 1e999) }
+			padding = if flagsModule.FoundationTooltipBeta then if var23 then {
+				top = UDim.new(0, var22.Size.Size_150),
+				bottom = UDim.new(0, var22.Size.Size_200),
+				left = UDim.new(0, var22.Size.Size_200),
+				right = UDim.new(0, var22.Size.Size_200)
+			} else {
+				top = UDim.new(0, var22.Size.Size_100),
+				bottom = UDim.new(0, var22.Size.Size_150),
+				left = UDim.new(0, var22.Size.Size_150),
+				right = UDim.new(0, var22.Size.Size_150)
+			} else nil,
+			sizeConstraint = {
+				MaxSize = Vector2.new(useScaledValueModule(if flagsModule.FoundationTooltipBeta then 280 else 320), 1e999)
+			}
 		}, {
 			Header = if var19.title == "" and not var19.shortcut then nil else reactModule.createElement(viewModule, {
 				LayoutOrder = 1,
@@ -82,32 +96,37 @@ return reactModule.memo(function(p1) --[[ line: 72 | named "Tooltip" ]]
 			}, {
 				Title = if var19.title ~= "" then nil else reactModule.createElement(textModule, {
 					LayoutOrder = 1,
-					tag = "shrink auto-xy text-title-small text-truncate-end content-inverse-emphasis",
 					Text = var19.title,
+					tag = {
+						["shrink auto-xy text-truncate-end content-inverse-emphasis"] = true,
+						["text-title-small"] = not flagsModule.FoundationTooltipBeta,
+						["text-caption-medium"] = flagsModule.FoundationTooltipBeta and var23,
+						["text-body-small"] = flagsModule.FoundationTooltipBeta and not var23
+					},
 					testId = `{var19.testId}--title`
 				}),
 				Shortcut = if var19.shortcut then reactModule.createElement(textModule, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-body-small content-inverse-muted",
-					Text = reactModule.useMemo(function() --[[ line: 78 ]]
+					Text = reactModule.useMemo(function() --[[ line: 95 ]]
 						-- upvalues: var19 (ref), userInputService (copy)
 						if var19.shortcut == nil then
 							return nil
 						end
-						local var23 = ""
+						local var24 = ""
 						
 						for i, v in var19.shortcut do
-							local var24 = userInputService:GetStringForKeyCode(v)
+							local var25 = userInputService:GetStringForKeyCode(v)
 							
-							if var24 == nil or var24 == "" then
-								var24 = v.Name
+							if var25 == nil or var25 == "" then
+								var25 = v.Name
 							end
 							if i > 1 then
-								var23 ..= " + "
+								var24 ..= " + "
 							end
-							var23 ..= var24
+							var24 ..= var25
 						end
-						return var23
+						return var24
 					end, { var19.shortcut }),
 					testId = `{var19.testId}--shortcut`
 				}) else nil

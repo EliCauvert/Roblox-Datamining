@@ -9,23 +9,15 @@ return function(startValue) --[[ line: 24 | named "CreationControllerProvider" ]
 	-- upvalues: reactModule (ref), createCreationControllerModule (ref), getCreationFlowStoreModule (ref), creationControllerContextModule (ref)
 	local host = startValue.host
 	local excludeGallery = startValue.excludeGallery
-	local var5 = reactModule.useMemo(function() --[[ line: 28 ]]
-		-- upvalues: createCreationControllerModule (copy), getCreationFlowStoreModule (copy), host (ref), excludeGallery (ref)
-		return createCreationControllerModule({
-			store = getCreationFlowStoreModule(false),
-			host = host,
-			excludeGallery = excludeGallery
-		})
-	end, { host, excludeGallery })
-	reactModule.useEffect(function() --[[ line: 37 ]]
-		-- upvalues: var5 (ref)
-		return function() --[[ line: 38 ]]
-			-- upvalues: var5 (copy)
-			if var5.ttsAudio ~= nil then
-				var5.ttsAudio.destroy()
-			end
-		end
-	end, { var5 })
 	
-	return reactModule.createElement(creationControllerContextModule.Provider, { value = var5 }, startValue.children)
+	return reactModule.createElement(creationControllerContextModule.Provider, {
+		value = reactModule.useMemo(function() --[[ line: 28 ]]
+			-- upvalues: createCreationControllerModule (copy), getCreationFlowStoreModule (copy), host (ref), excludeGallery (ref)
+			return createCreationControllerModule({
+				store = getCreationFlowStoreModule(false),
+				host = host,
+				excludeGallery = excludeGallery
+			})
+		end, { host, excludeGallery })
+	}, startValue.children)
 end
