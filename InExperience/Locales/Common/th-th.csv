@@ -2546,6 +2546,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,ชื่อที่แสด
 Feature.DisplayName.ErrorMessage.NameTooLong,ชื่อที่แสดงควรมีความยาวไม่เกิน 20 อักขระ
 Feature.DisplayName.ErrorMessage.NameTooShort,ชื่อที่แสดงควรมีความยาวอย่างน้อย 3 อักขระ
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,ชื่อที่แสดงมีอักขระที่ไม่ได้รับการรองรับ
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,เป็นเวลา {num} วัน
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,เลือกว่าต้องการเป็นเจ้าของไอเท็มกี่วัน เวลาจะเริ่มเดินหลังจากซื้อเสร็จ
@@ -2556,6 +2557,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} วัน
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,ตัวเลือก
 Feature.Durables.Label.ItemExpires,ไอเท็มหมดอายุ
+Feature.Durables.PartiallyExpiredItems.BodyText,บางไอเท็มในอวาตาร์ที่บันทึกไว้หมดอายุและถูกลบออกแล้ว
+Feature.Durables.PartiallyExpiredItems.TitleText,ไอเท็มหมดอายุแล้ว
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} วัน (เริ่มหลังจากซื้อเสร็จ)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,ไม่มีการเชื่อมต่ออินเทอร์เน็ต
@@ -3035,6 +3038,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,เปิดกา
 Feature.Moments.Action.AddMusic,เพิ่มดนตรี
 Feature.Moments.Action.AddSticker,เพิ่มสติกเกอร์
 Feature.Moments.Action.AddText,เพิ่มข้อความ
+Feature.Moments.Action.AddVoice,เพิ่มเสียง
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3117,6 +3121,8 @@ Feature.Moments.Label.TextGeneratedBody,เพิ่มข้อความท�
 Feature.Moments.Label.TextGeneratedTitle,สร้างข้อความแล้ว
 Feature.Moments.Label.TextGenerationFailedBody,ไม่สามารถสร้างข้อความได้ โปรดลองอีกครั้ง
 Feature.Moments.Label.TextGenerationFailedTitle,สร้างไม่สำเร็จ
+Feature.Moments.Label.TextGenerationFilteredBody,ไม่สามารถสร้างข้อความบนวิดีโอนี้ได้ เนื่องจากเนื้อหาถูกกรอง
+Feature.Moments.Label.TextGenerationFilteredTitle,มีการกรองการสร้าง
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
@@ -3282,6 +3288,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,กรอบโปรไฟล์
+Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,สถิติ
 Feature.Profile.Heading.Username,
@@ -3502,6 +3510,7 @@ Feature.Schools.Label.Classmates,เพื่อนร่วมชั้น
 Feature.Screentime.Content.ScreentimeLimitDialog,คุณใช้งานจนถึงขีดจำกัดเวลาการใช้หน้าจอต่อวันแล้ว โปรดกลับมาใหม่ในวันพรุ่งนี้เพื่อใช้งาน Roblox อีกครั้ง
 Feature.SecurityFeedback.Header.NewLogin,การแจ้งเตือนกิจกรรมใหม่
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,อนุญาตในการตั้งค่า
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3521,11 +3530,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,ภาษาสำหรั�
 Feature.SettingsHub.Chat.TranslationSetting,การแปลแชทโดยอัตโนมัติ
 Feature.SettingsHub.Chat.TranslationToggleSetting,ตัวเลือกเพื่อดูข้อความที่ยังไม่ได้แปล
 Feature.SettingsHub.Default.DynamicThumbstick,ค่าเริ่มต้น (ทัมบ์สติกแบบไดนามิก)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,เราจำเป็นต้องเข้าถึงกล้องของคุณเพื่อให้คุณสแกนรหัส QR ได้
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,การเข้าถึงการแชทด้วยเสียงของคุณถูกปิดการใช้งานจนถึงวันที่ {dateTime} เนื่องจากพฤติกรรมที่อาจละเมิดมาตรฐานชุมชนของเรา
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. เลือกสิทธิ์
 2. เลือกรายชื่อผู้ติดต่อ
 3. อนุญาตให้ Roblox เข้าถึงรายชื่อผู้ติดต่อ"
 Feature.SettingsHub.Description.ContactsPermissionIOS,หากต้องการเชื่อมต่อกับเพื่อนๆ โปรดอนุญาตให้ Roblox เข้าถึงรายชื่อผู้ติดต่อของคุณ
+Feature.SettingsHub.Description.ContactsPermissionRequest,เราจำเป็นต้องเข้าถึงรายชื่อผู้ติดต่อของคุณเพื่อให้คุณเชื่อมต่อกับเพื่อนๆ ได้
 Feature.SettingsHub.Description.PeoplesNames,แสดงหรือซ่อนเหรียญตราของคุณจากผู้ใช้คนอื่นในเกม
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. เลือกสิทธิ์
 2. เลือกกล้อง
@@ -3602,6 +3613,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,ผู้ใช้คนนี�
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,บุคคลนี้กำลังส่งเสียงดัง
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,ในเซิร์ฟเวอร์นี้
+Feature.SettingsHub.Prompt.AllowAccessToCamera,อนุญาตให้เข้าถึงกล้องหรือไม่?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,อนุญาตให้เข้าถึงรายชื่อผู้ติดต่อหรือไม่?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. เลือกสิทธิ์<br />2. เลือกไมโครโฟน<br />3. อนุญาตให้ Roblox เข้าถึงไมโครโฟน</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. ไปที่การตั้งค่า > ความเป็นส่วนตัว > สิทธิ์<br />2. เลือกไมโครโฟน<br />3. อนุญาตให้ Roblox เข้าถึงไมโครโฟน</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,ซื้อสิ่งที่ผู้เล่นสวมใส่อยู่
@@ -3853,6 +3866,7 @@ Feature.Subscription.Text.PerMonth,/เดือน
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,อวาตาร์ของคุณถูกรีเซ็ตตาม{rule} คุณยังคงใช้มาร์เก็ตเพลสได้ แต่จะไม่มีการบันทึกการเปลี่ยนแปลงอวาตาร์จนกว่าจะถึง {time}
 Feature.Timeout.Prompt.SaveTitleText,การบันทึกถูกปิดใช้งานอยู่ในขณะนี้
+Feature.Timeout.Prompt.TitleText,เรารีเซ็ตอวาตาร์ของคุณ
 Feature.Timeout.WarningBanner.DisabledMessage,การบันทึกอวาตาร์ถูกปิดใช้งาน
 Feature.Timeout.WarningBanner.DisabledUntilMessage,การบันทึกอวาตาร์ถูกปิดใช้งานจนถึง {time}
 Feature.Toast.Heading.PurchaseMessage.Success,

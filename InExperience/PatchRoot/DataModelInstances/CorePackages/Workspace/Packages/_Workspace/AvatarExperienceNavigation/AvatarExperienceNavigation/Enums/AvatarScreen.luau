@@ -36,6 +36,8 @@ return {
 	BodyShape = "BodyShape",
 	Photobooth = "Photobooth",
 	BackgroundGeneration = "BackgroundGeneration",
+	EditProfileImage = "EditProfileImage",
+	AppCatalogContextMenuHost = "AppCatalogContextMenuHost",
 	ProfilePictureEditorCamera = "ProfilePictureEditorCamera",
 	ProfilePictureEditorFinal = "ProfilePictureEditorFinal",
 	ProfilePictureEditorRevertToDefaultPrompt = "ProfilePictureEditorRevertToDefaultPrompt",

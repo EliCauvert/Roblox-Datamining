@@ -94,7 +94,7 @@ local _ = function(p9) --[[ line: 191 | named "normalizeCaptureType" ]]
 end
 
 local _ = function(p10) --[[ line: 195 | named "normalizeGenerateTextStatus" ]]
-	return if p10 == "succeeded" or p10 == "failed" then p10 else "unknown"
+	return if p10 == "succeeded" or p10 == "failed" or p10 == "filtered" then p10 else "unknown"
 end
 
 local _ = function(p11, p12) --[[ line: 199 | named "formatFeedOperationInfo" ]]
@@ -420,10 +420,10 @@ return {
 		}
 	}),
 	[realtimeEventNamesModule.MomentsGenerateText] = telemetry.new({
-		description = "Counts AI generate-text attempts by bounded status (succeeded/failed).",
+		description = "Counts AI generate-text attempts by bounded status (succeeded/failed/filtered).",
 		throttlingThousandths = 10000,
 		name = realtimeEventNamesModule.MomentsGenerateText,
-		lastUpdated = { 2026, 8, 5 },
+		lastUpdated = { 2026, 8, 17 },
 		backendsList = {
 			{
 				incrementValue = 1,
@@ -431,7 +431,7 @@ return {
 				format = function(p31) --[[ line: 530 ]]
 					local t = {}
 					local status = p31.status
-					t.status = if status == "succeeded" or status == "failed" then status else "unknown"
+					t.status = if status == "succeeded" or status == "failed" or status == "filtered" then status else "unknown"
 					
 					return t
 				end

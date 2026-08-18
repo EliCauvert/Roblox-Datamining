@@ -2544,6 +2544,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Il nome visualizzato non è di
 Feature.DisplayName.ErrorMessage.NameTooLong,Il nome visualizzato deve includere al massimo 20 caratteri.
 Feature.DisplayName.ErrorMessage.NameTooShort,
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Il nome visualizzato contiene caratteri non supportati.
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Per {num} giorno
 Feature.Durables.BottomBar.RentalDurationPlural,Per {num} giorni
 Feature.Durables.FTUX.Tooltip,Scegli per quanti giorni vuoi possedere l'articolo. Il timer si avvia dopo l'acquisto.
@@ -2554,6 +2555,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} giorno
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} giorni
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opzioni
 Feature.Durables.Label.ItemExpires,L'articolo scade
+Feature.Durables.PartiallyExpiredItems.BodyText,Alcuni articoli di questo avatar salvato sono scaduti e sono stati rimossi.
+Feature.Durables.PartiallyExpiredItems.TitleText,Articoli scaduti
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} giorni (inizia dopo l'acquisto)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Nessuna connessione a Internet
@@ -3033,6 +3036,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Attiva la ricerca 
 Feature.Moments.Action.AddMusic,Aggiungi musica
 Feature.Moments.Action.AddSticker,Aggiungi adesivo
 Feature.Moments.Action.AddText,Aggiungi testo
+Feature.Moments.Action.AddVoice,Aggiungi Voce
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3115,6 +3119,8 @@ Feature.Moments.Label.TextGeneratedBody,Testo in sovrapposizione e descrizione g
 Feature.Moments.Label.TextGeneratedTitle,Testo generato
 Feature.Moments.Label.TextGenerationFailedBody,Non è stato possibile generare il testo. Riprova.
 Feature.Moments.Label.TextGenerationFailedTitle,Generazione non riuscita
+Feature.Moments.Label.TextGenerationFilteredBody,Impossibile eseguire la generazione per questo video acquisito: contenuto filtrato.
+Feature.Moments.Label.TextGenerationFilteredTitle,Generazione filtrata
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
@@ -3280,6 +3286,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifica nome
 Feature.Profile.Heading.EditDisplayName,Modifica Nome visualizzato
 Feature.Profile.Heading.InsufficientFunds,Fondi Insufficienti
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Cornice del profilo
+Feature.Profile.Heading.ProfilePictureSaved,Immagine del profilo salvata correttamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiche
 Feature.Profile.Heading.Username,Nome Utente
@@ -3500,6 +3508,7 @@ Feature.Schools.Label.Classmates,Compagni di classe
 Feature.Screentime.Content.ScreentimeLimitDialog,Hai raggiunto il limite giornaliero di tempo davanti allo schermo. Torna domani per accedere di nuovo a Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Avviso di nuova attività
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,Consenti in Impostazioni
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3519,11 +3528,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,Lingua di traduzione della c
 Feature.SettingsHub.Chat.TranslationSetting,Traduzione automatica della chat
 Feature.SettingsHub.Chat.TranslationToggleSetting,Opzione per visualizzare il messaggio non tradotto
 Feature.SettingsHub.Default.DynamicThumbstick,Predefinita (Levetta dinamica)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Abbiamo bisogno di accedere alla tua fotocamera per permetterti di scansionare un codice QR.
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,Il tuo accesso alla chat con la voce è stato disabilitato finché {dateTime} a causa di un comportamento che potrebbe violare i nostri Standard della Comunità.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Seleziona Permesso
 2. Seleziona Contatti
 3. Consenti a Roblox di accedere ai tuoi contatti"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Per connetterti con gli amici, consenti a Roblox di accedere ai tuoi contatti."
+Feature.SettingsHub.Description.ContactsPermissionRequest,Abbiamo bisogno di accedere ai tuoi contatti per permetterti di connetterti con gli amici.
 Feature.SettingsHub.Description.PeoplesNames,Mostra o nascondi i tuoi badge alle altre persone nei giochi.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Seleziona Permesso
 2. Seleziona Videocamera
@@ -3600,6 +3611,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Questa persona ha scritto una pa
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Questa persona stava urlando a squarciagola
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,In questo server
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Consentire l'accesso alla fotocamera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Consentire l'accesso ai contatti?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Seleziona Permesso<br />2. Seleziona Microfono<br />3. Consenti a Roblox di accedere al tuo Microfono</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. Vai a Impostazioni > Privacy > Permesso<br />2. Seleziona Microfono<br />3. Consenti a Roblox di accedere al tuo Microfono</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,Acquista ciò che indossano
@@ -3851,6 +3864,7 @@ Feature.Subscription.Text.PerMonth,/mese
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,Il tuo avatar è stato ripristinato per il seguente motivo: {rule}. Puoi continuare a utilizzare il Marketplace ma le modifiche al tuo avatar non verranno salvate fino alle ore {time}.
 Feature.Timeout.Prompt.SaveTitleText,Il salvataggio è disabilitato per il momento
+Feature.Timeout.Prompt.TitleText,Abbiamo ripristinato il tuo avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Salvataggio dell'avatar disabilitato
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Salvataggio dell'avatar disabilitato fino alle ore {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Sbloccato

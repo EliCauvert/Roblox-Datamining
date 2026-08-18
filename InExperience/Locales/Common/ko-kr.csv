@@ -2563,6 +2563,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,표시 이름을 사용할 수
 Feature.DisplayName.ErrorMessage.NameTooLong,표시 이름의 최대 길이는 20자입니다
 Feature.DisplayName.ErrorMessage.NameTooShort,표시 이름의 길이는 최소 3자 이상이어야 합니다
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,표시 이름에 지원되지 않는 문자가 있습니다
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num}일 동안
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,아이템을 보유할 기간을 선택하세요. 구매 후 타이머가 시작됩니다.
@@ -2573,6 +2574,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num}일
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,옵션
 Feature.Durables.Label.ItemExpires,아이템 만료 일자
+Feature.Durables.PartiallyExpiredItems.BodyText,저장된 아바타의 일부 아이템이 만료되어 삭제되었습니다.
+Feature.Durables.PartiallyExpiredItems.TitleText,만료된 아이템
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}일(구매 후 시작)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,인터넷에 연결되지 않음
@@ -3053,6 +3056,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,친구 찾기 켜�
 Feature.Moments.Action.AddMusic,음악 추가
 Feature.Moments.Action.AddSticker,스티커 추가
 Feature.Moments.Action.AddText,텍스트 추가
+Feature.Moments.Action.AddVoice,음성 추가
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3135,6 +3139,8 @@ Feature.Moments.Label.TextGeneratedBody,AI가 생성한 오버레이와 설명�
 Feature.Moments.Label.TextGeneratedTitle,텍스트 생성됨
 Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했습니다. 다시 시도해 보세요.
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
+Feature.Moments.Label.TextGenerationFilteredBody,콘텐츠 필터링으로 인해 이 캡처된 동영상에서 생성 기능을 사용할 수 없습니다.
+Feature.Moments.Label.TextGenerationFilteredTitle,생성이 차단되었습니다
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
@@ -3300,6 +3306,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,프로필 프레임
+Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,통계
 Feature.Profile.Heading.Username,
@@ -3520,6 +3528,7 @@ Feature.Schools.Label.Classmates,학급 친구
 Feature.Screentime.Content.ScreentimeLimitDialog,일일 스크린 타임 한도에 도달했습니다. Roblox에 액세스하려면 내일 다시 오세요.
 Feature.SecurityFeedback.Header.NewLogin,새로운 활동 알림
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,설정에서 허용
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3539,11 +3548,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,채팅 번역 언어
 Feature.SettingsHub.Chat.TranslationSetting,자동 채팅 번역
 Feature.SettingsHub.Chat.TranslationToggleSetting,번역되지 않은 메시지 보기 옵션
 Feature.SettingsHub.Default.DynamicThumbstick,기본값(다이내믹 엄지스틱)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,QR 코드를 스캔하려면 카메라 액세스가 필요합니다.
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,"커뮤니티 규정에 위반될 수 있는 행위로 인해 음성으로 채팅하기 기능이 비활성화되었으며, {dateTime}에 다시 활성화됩니다."
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. '권한'을 선택합니다
 2. '연락처'를 선택합니다
 3. Roblox의 연락처 접근 권한을 허용합니다"
 Feature.SettingsHub.Description.ContactsPermissionIOS,친구와 소통하려면 Roblox가 연락처를 사용할 수 있도록 허용해 주세요.
+Feature.SettingsHub.Description.ContactsPermissionRequest,친구와 소통하려면 연락처 액세스가 필요합니다.
 Feature.SettingsHub.Description.PeoplesNames,게임에서 다른 사람에게 내 배지를 표시하거나 숨깁니다.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. '권한'을 선택합니다
 2. '카메라'를 선택합니다
@@ -3620,6 +3631,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,텍스트 채팅으로 악의적
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,목이 터져라 비명을 지르던 사람입니다
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,이 서버 내
+Feature.SettingsHub.Prompt.AllowAccessToCamera,카메라 액세스를 허용하시겠습니까?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,연락처 액세스를 허용하시겠습니까?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. '권한'을 선택합니다<br />2. '마이크'를 선택합니다<br />3. Roblox에 대한 마이크 접근 권한을 허용합니다</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. '설정' > '개인 정보 보호' > '권한'으로 이동합니다<br />2. '마이크'를 선택합니다<br />3. Roblox에 대한 마이크 접근 권한을 허용합니다</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,플레이어가 착용 중인 아이템 구매하기
@@ -3871,6 +3884,7 @@ Feature.Subscription.Text.PerMonth,/월
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,아바타가 {rule}에 따라 재설정되었습니다. 마켓플레이스는 계속 사용할 수 있지만 {time}까지 아바타 변경 사항은 저장되지 않습니다.
 Feature.Timeout.Prompt.SaveTitleText,현재 저장 기능이 비활성화되어 있습니다
+Feature.Timeout.Prompt.TitleText,아바타를 재설정했습니다
 Feature.Timeout.WarningBanner.DisabledMessage,아바타 저장이 비활성화됨
 Feature.Timeout.WarningBanner.DisabledUntilMessage,{time}까지 아바타 저장이 비활성화됨
 Feature.Toast.Heading.PurchaseMessage.Success,

@@ -2563,6 +2563,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Tên hiển thị không dùng
 Feature.DisplayName.ErrorMessage.NameTooLong,Tên hiển thị chỉ được tối đa 20 ký tự
 Feature.DisplayName.ErrorMessage.NameTooShort,Tên hiển thị phải có ít nhất 3 ký tự
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Tên hiển thị chứa các ký tự không được hỗ trợ
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Trong {num} ngày
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,Chọn số ngày bạn muốn sở hữu vật phẩm. Bắt đầu tính thời gian từ thời điểm mua.
@@ -2573,6 +2574,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} ngày
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Tùy chọn
 Feature.Durables.Label.ItemExpires,Vật phẩm hết hạn
+Feature.Durables.PartiallyExpiredItems.BodyText,Một số vật phẩm trong avatar đã lưu này đã hết hạn và bị xóa.
+Feature.Durables.PartiallyExpiredItems.TitleText,Vật phẩm đã hết hạn
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} ngày (Bắt đầu tính từ thời điểm mua)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Không có kết nối internet
@@ -3052,6 +3055,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Bật tính năng 
 Feature.Moments.Action.AddMusic,Thêm nhạc
 Feature.Moments.Action.AddSticker,Thêm nhãn dán
 Feature.Moments.Action.AddText,Thêm văn bản
+Feature.Moments.Action.AddVoice,Thêm giọng nói
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3134,6 +3138,8 @@ Feature.Moments.Label.TextGeneratedBody,Đã thêm mô tả và lớp phủ văn
 Feature.Moments.Label.TextGeneratedTitle,Đã tạo văn bản
 Feature.Moments.Label.TextGenerationFailedBody,Không tạo được văn bản. Vui lòng thử lại.
 Feature.Moments.Label.TextGenerationFailedTitle,Tạo không thành công
+Feature.Moments.Label.TextGenerationFilteredBody,Không thể tạo văn bản cho video đã quay này vì nội dung đã bị lọc.
+Feature.Moments.Label.TextGenerationFilteredTitle,Nội dung tạo sinh bị chặn
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
@@ -3299,6 +3305,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Chỉnh Sửa Tên
 Feature.Profile.Heading.EditDisplayName,Chỉnh Sửa Tên Hiển Thị
 Feature.Profile.Heading.InsufficientFunds,Số Dư Không Đủ
 Feature.Profile.Heading.NicknameRequestSent,Đã Gửi Yêu Cầu Thêm Bạn Bè
+Feature.Profile.Heading.ProfileFrame,Khung hồ sơ
+Feature.Profile.Heading.ProfilePictureSaved,Đã lưu ảnh đại diện thành công
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Số Liệu
 Feature.Profile.Heading.Username,
@@ -3519,6 +3527,7 @@ Feature.Schools.Label.Classmates,Bạn cùng lớp
 Feature.Screentime.Content.ScreentimeLimitDialog,Bạn đã đạt giới hạn thời gian dùng máy hàng ngày. Hãy quay lại vào ngày mai để truy cập lại vào Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Cảnh báo hoạt động mới
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,Mở phần cài đặt để cho phép
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3538,11 +3547,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,Ngôn ngữ dịch trong tr�
 Feature.SettingsHub.Chat.TranslationSetting,Tự Động Dịch Cuộc Trò Chuyện
 Feature.SettingsHub.Chat.TranslationToggleSetting,Tùy Chọn Xem Tin Nhắn Chưa Dịch
 Feature.SettingsHub.Default.DynamicThumbstick,Mặc định (Cần Điều Khiển Động)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Chúng tôi cần quyền truy cập vào camera để bạn có thể quét mã QR.
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,Quyền truy cập của bạn vào trò chuyện bằng giọng nói đã bị vô hiệu hóa đến {dateTime} do hành vi nghi ngờ là vi phạm Tiêu chuẩn Cộng đồng.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Chọn Quyền
 2. Chọn Danh bạ
 3. Cho phép Roblox truy cập vào Danh bạ của bạn"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Để kết nối với bạn bè, hãy cho phép Roblox truy cập vào danh bạ của bạn."
+Feature.SettingsHub.Description.ContactsPermissionRequest,Chúng tôi cần quyền truy cập vào danh bạ để bạn có thể kết nối với bạn bè.
 Feature.SettingsHub.Description.PeoplesNames,Ẩn/hiện huy hiệu của bạn với những người khác trong trò chơi.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Chọn Quyền
 2. Chọn Camera
@@ -3619,6 +3630,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Người này đã nhập một 
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Người này đã la hét rất to
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,Trong máy chủ này
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Cho phép truy cập camera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Cho phép truy cập danh bạ?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Chọn Quyền<br />2. Chọn Micrô<br />3. Cho phép Roblox truy cập Micrô của bạn</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. Vào mục Cài đặt > Quyền riêng tư > Quyền<br />2. Chọn Micrô<br />3. Cho phép Roblox truy cập Micrô của bạn</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,Mua những gì họ đang mặc
@@ -3870,6 +3883,7 @@ Feature.Subscription.Text.PerMonth,/tháng
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Avatar của bạn đã được trả về mặc định để đảm bảo {rule}. Bạn vẫn có thể sử dụng Chợ, nhưng các thay đổi đối với avatar của bạn sẽ chưa được lưu cho đến {time}."
 Feature.Timeout.Prompt.SaveTitleText,Tính năng lưu đang bị tắt
+Feature.Timeout.Prompt.TitleText,Chúng tôi đã trả avatar của bạn về mặc định
 Feature.Timeout.WarningBanner.DisabledMessage,Tính năng lưu avatar đã bị vô hiệu hóa
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Tính năng lưu avatar bị vô hiệu hóa cho đến {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Đã Mở Khoá

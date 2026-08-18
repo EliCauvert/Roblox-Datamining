@@ -2562,6 +2562,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,顯示名稱無法使用
 Feature.DisplayName.ErrorMessage.NameTooLong,顯示名稱應含有 20 個字元以下
 Feature.DisplayName.ErrorMessage.NameTooShort,顯示名稱至少要有 3 個字元
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,顯示名稱含有未支援的字元
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} 天
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,選擇想擁有該物品的天數。計時器會在購買後開始。
@@ -2572,6 +2573,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,選項
 Feature.Durables.Label.ItemExpires,物品有效期限
+Feature.Durables.PartiallyExpiredItems.BodyText,此已儲存虛擬人偶的部分道具已過期並已移除。
+Feature.Durables.PartiallyExpiredItems.TitleText,道具已過期
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（購買後開始計算）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要依據歐盟《數位服務法》 檢舉違法內容，請前往：https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,沒有網路連線
@@ -3051,6 +3054,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,開啟好友探索
 Feature.Moments.Action.AddMusic,新增音樂
 Feature.Moments.Action.AddSticker,新增貼紙
 Feature.Moments.Action.AddText,新增文字
+Feature.Moments.Action.AddVoice,新增語音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3133,6 +3137,8 @@ Feature.Moments.Label.TextGeneratedBody,已新增 AI 生成的文字疊加圖層
 Feature.Moments.Label.TextGeneratedTitle,已生成的文字
 Feature.Moments.Label.TextGenerationFailedBody,無法生成文字，請再試一次。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
+Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
+Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
@@ -3298,6 +3304,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,個人檔案外框
+Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,數據
 Feature.Profile.Heading.Username,
@@ -3518,6 +3526,7 @@ Feature.Schools.Label.Classmates,同學
 Feature.Screentime.Content.ScreentimeLimitDialog,您已達到每日螢幕使用時間上限。請明天再回來 Roblox。
 Feature.SecurityFeedback.Header.NewLogin,新活動提醒
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,在「設定」中允許
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3537,11 +3546,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,聊天翻譯語言
 Feature.SettingsHub.Chat.TranslationSetting,自動翻譯聊天
 Feature.SettingsHub.Chat.TranslationToggleSetting,檢視未翻譯訊息的選項
 Feature.SettingsHub.Default.DynamicThumbstick,預設（動態類比搖桿）
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,我們需要存取你的相機，以便你掃描 QR 碼。
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,由於您的行為可能違反社群標準，您的語音聊天使用權已被停用，直到 {dateTime}為止。
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. 選擇「權限」
 2. 選擇「聯絡人」
 3. 允許 Roblox 存取您的聯絡人"
 Feature.SettingsHub.Description.ContactsPermissionIOS,請先允許 Roblox 存取您的聯絡人，才能尋找好友。
+Feature.SettingsHub.Description.ContactsPermissionRequest,我們需要存取你的通訊錄，以便你與好友交流。
 Feature.SettingsHub.Description.PeoplesNames,在遊戲中向其他人員顯示或隱藏你的徽章。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. 選擇「權限」
 2. 選擇「相機」
@@ -3618,6 +3629,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,此人在文字聊天使用了�
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,此人在語音聊天叫得異常大聲
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,在此伺服器中
+Feature.SettingsHub.Prompt.AllowAccessToCamera,要允許存取相機嗎？
+Feature.SettingsHub.Prompt.AllowAccessToContacts,要允許存取通訊錄嗎？
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. 選擇權限<br />2. 選擇麥克風<br />3. 允許 Roblox 存取您的麥克風</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. 前往「設定」>「隱私權」>「權限」<br />2. 選擇麥克風<br />3. 允許 Roblox 存取您的麥克風</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,購買對方穿戴的道具
@@ -3869,6 +3882,7 @@ Feature.Subscription.Text.PerMonth,/ 月
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,由於{rule}，你的虛擬人偶已重置。你仍然可以使用市集，但虛擬人偶的變更將不會儲存，時間持續至 {time} 為止。
 Feature.Timeout.Prompt.SaveTitleText,目前已停用儲存功能
+Feature.Timeout.Prompt.TitleText,你的虛擬人偶已重置
 Feature.Timeout.WarningBanner.DisabledMessage,已停用虛擬人偶儲存功能
 Feature.Timeout.WarningBanner.DisabledUntilMessage,虛擬人偶儲存功能已停用，時間持續至 {time} 為止
 Feature.Toast.Heading.PurchaseMessage.Success,已解鎖

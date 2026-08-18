@@ -6,5 +6,6 @@ return {
 	useGetOnlineFriendsByUniverseId = require(script.useGetOnlineFriendsByUniverseId),
 	useGetAllFriends = require(script.useGetAllFriends),
 	useGetIsFriendWith = require(script.useGetIsFriendWith),
-	useGetFriendshipStatus = require(script.useGetFriendshipStatus)
+	useGetFriendshipStatus = require(script.useGetFriendshipStatus),
+	useGetFriendsCountByUserId = require(script.useGetFriendsCountByUserId)
 }

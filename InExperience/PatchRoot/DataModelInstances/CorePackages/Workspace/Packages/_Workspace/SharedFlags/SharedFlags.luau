@@ -8,6 +8,7 @@ local useSignalsForScreenGuiBlur = game:DefineFastFlag("UseSignalsForScreenGuiBl
 local useSignalsForGameInvitesStatus = game:DefineFastFlag("UseSignalsForGameInvitesStatus", false)
 local useSignalsForIsLocalUserUnder13 = game:DefineFastFlag("UseSignalsForIsLocalUserUnder13", false)
 local useSignalsForPlatform = game:DefineFastFlag("UseSignalsForPlatform", false)
+local useSignalsForAppTopBanner = game:DefineFastFlag("UseSignalsForAppTopBanner", false)
 local luaAppLayoutParamsInContext2 = game:DefineFastFlag("LuaAppLayoutParamsInContext2", false)
 local luaAppRfySignalApportioningIxp4 = luaAppLayoutParamsInContext2 and game:DefineFastFlag("LuaAppRfySignalApportioningIxp4", false)
 local connectionAmpUpsellOnLeave = game:DefineFastFlag("ConnectionAmpUpsellOnLeave", false)
@@ -283,6 +284,7 @@ return {
 	FFlagFixCohubSearchYNavigation = require(script.FFlagFixCohubSearchYNavigation),
 	FFlagPlayerSearchEnableOnlineFrequentsForAll = game:DefineFastFlag("PlayerSearchEnableOnlineFrequentsForAll", false),
 	FFlagFriendsStoreSortOnlineFriendsByRank = require(script.FFlagFriendsStoreSortOnlineFriendsByRank),
+	FFlagFriendsCountDataHydrationMigrationEnabled = require(script.FFlagFriendsCountDataHydrationMigrationEnabled),
 	FFlagFriendsActivityFeedEnabled = require(script.FFlagFriendsActivityFeedEnabled),
 	FFlagBadgeVisibilitySettingEnabled = require(script.FFlagBadgeVisibilitySettingEnabled),
 	FStringIsVerified18PlusAmpFeature = require(script.FStringIsVerified18PlusAmpFeature),
@@ -491,8 +493,9 @@ return {
 	GetFFlagExpChatUseVoiceParticipantsStore = require(script.GetFFlagExpChatUseVoiceParticipantsStore),
 	GetFFlagDebugShowAudioDeviceInputDebugger = require(script.GetFFlagDebugShowAudioDeviceInputDebugger),
 	FFlagEditProfileBackgroundEnabled = require(script.FFlagEditProfileBackgroundEnabled),
-	FFlagEditProfileImageV2Enabled = require(script.FFlagEditProfileImageV2Enabled),
-	FFlagEditProfileFramesEnabled = require(script.FFlagEditProfileFramesEnabled),
+	FFlagEditProfileImageV2Enabled2 = require(script.FFlagEditProfileImageV2Enabled2),
+	FFlagEditProfileFramesEnabled2 = require(script.FFlagEditProfileFramesEnabled2),
+	FFlagEditProfileImageV2Telemetry = require(script.FFlagEditProfileImageV2Telemetry),
 	FFlagReadAppChatFetchingVariable = require(script.FFlagReadAppChatFetchingVariable),
 	FFlagEnableChatIconUnibarDropdownFixEnabled = game:DefineFastFlag("EnableChatIconUnibarDropdownFixEnabled", false),
 	FFlagMakeCreateOrJoinSquadAThunks = require(script.FFlagMakeCreateOrJoinSquadAThunks),
@@ -573,6 +576,9 @@ return {
 	GetFFlagEnableVrVoiceConnectDisconnect = require(script.GetFFlagEnableVrVoiceConnectDisconnect),
 	FFlagVoiceRewarmTelemetry = require(script.FFlagVoiceRewarmTelemetry),
 	FFlagFriendsChatPlaceholderRenameFix = game:DefineFastFlag("FriendsChatPlaceholderRenameFix", false),
+	FIntFriendsChatModeratedMaskMinLength = game:DefineFastInt("FriendsChatModeratedMaskMinLength", 3),
+	FIntFriendsChatModeratedMaskMaxLength = game:DefineFastInt("FriendsChatModeratedMaskMaxLength", 8),
+	FFlagChatModeratedMaskRandomLength = game:DefineFastFlag("ChatModeratedMaskRandomLength", false),
 	FFlagEnableAppChatSnoozeMenuFocus = require(script.FFlagEnableAppChatSnoozeMenuFocus),
 	FFlagAppChatFixRootChatBackNavigation = require(script.FFlagAppChatFixRootChatBackNavigation),
 	FFlagAppChatDisclosureUpdateEnabled = game:DefineFastFlag("AppChatDisclosureUpdateEnabled", false),
@@ -729,6 +735,7 @@ return {
 	FFlagAccountUnlockAllowMissingUserId = require(script.FFlagAccountUnlockAllowMissingUserId),
 	GetFFlagEnhancedPersonaLivenessEvents = require(script.GetFFlagEnhancedPersonaLivenessEvents),
 	FFlagAbuseReportInExpPlayerListV3 = require(script.FFlagAbuseReportInExpPlayerListV3),
+	FFlagAbuseReportSubmissionTargetV4 = require(script.FFlagAbuseReportSubmissionTargetV4),
 	FFlagAbuseReportVoiceMute = require(script.FFlagAbuseReportVoiceMute),
 	FFlagEnableChatReportingTextChannelTag = require(script.FFlagEnableChatReportingTextChannelTag),
 	FFlagSduiExperienceDetailsSupport = luaAppVoteOptimisticUpdateRaceFix_1,
@@ -880,6 +887,7 @@ return {
 	FFlagSduiEnableAssociatedItemsRow = require(script.FFlagSduiEnableAssociatedItemsRow),
 	FFlagSduiCardComponent = require(script.FFlagSduiCardComponent),
 	FFlagAXVirtualizedFeedVerticalPadding = require(script.FFlagAXVirtualizedFeedVerticalPadding),
+	FFlagVirtualizedFeedFooterWrapperProp = require(script.FFlagVirtualizedFeedFooterWrapperProp),
 	FFlagSduiCatalogVirtualizedFeed = require(script.FFlagSduiCatalogVirtualizedFeed),
 	FFlagSduiCatalogCategoryMenu = game:DefineFastFlag("SduiCatalogCategoryMenu", false),
 	FFlagFixSduiCardFocusNavScroll = game:DefineFastFlag("FixSduiCardFocusNavScroll", false),
@@ -890,6 +898,7 @@ return {
 	FFlagLuaAppSduiRemoveAbuseReportActionFromLegacyRegistry = game:DefineFastFlag("LuaAppSduiRemoveAbuseReportActionFromLegacyRegistry", false),
 	FFlagLuaAppUseOverlayInAppContainer = game:DefineFastFlag("LuaAppUseOverlayInAppContainer", false),
 	FFlagLuaAppSduiPageEntryPointSnackbar = luaAppSduiPageEntryPointSnackbar2,
+	FFlagLuaAppSduiVideoThumbnail = require(script.FFlagLuaAppSduiVideoThumbnail),
 	FFlagLuaAppResponsiveEnginePreferredInput = require(script.FFlagLuaAppResponsiveEnginePreferredInput),
 	FFlagLuaAppPlayButtonLoadingPrimary = require(script.FFlagLuaAppPlayButtonLoadingPrimary),
 	FFlagLuaAppEnableRelativeGuiHomeWithIxp = require(script.FFlagLuaAppEnableRelativeGuiHomeWithIxp),
@@ -1628,6 +1637,7 @@ return {
 	FFlagUseSignalsForGameInvitesStatus = useSignalsForGameInvitesStatus,
 	FFlagUseSignalsForIsLocalUserUnder13 = useSignalsForIsLocalUserUnder13,
 	FFlagUseSignalsForPlatform = useSignalsForPlatform,
+	FFlagUseSignalsForAppTopBanner = useSignalsForAppTopBanner,
 	FFlagUseNavigationSelectors = game:DefineFastFlag("UseNavigationSelectors", false),
 	FFlagInlineRichTextUseWebViewService = require(script.FFlagInlineRichTextUseWebViewService),
 	FFlagFixCrossExperienceVoiceExecutePrint = game:DefineFastFlag("FixCrossExperienceVoiceExecutePrint", false),
@@ -1636,7 +1646,7 @@ return {
 	FFlagBackpackResponsiveUnits = game:DefineFastFlag("BackpackResponsiveUnits", false),
 	FFlagEnableShareSheet = game:DefineFastFlag("EnableShareSheetForBuild", false),
 	FFlagFixLoginV2LandscapeLayout = game:DefineFastFlag("FixLoginV2LandscapeLayout", false),
-	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization9", false),
+	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization10", false),
 	FFlagRemoveUnusedConnectionStateRoduxSlice = require(script.FFlagRemoveUnusedConnectionStateRoduxSlice),
 	FFlagRemoveUnusedFriendStatusesRoduxSlice = require(script.FFlagRemoveUnusedFriendStatusesRoduxSlice),
 	FFlagRemoveUnusedGameThumbnailsRoduxSlice = require(script.FFlagRemoveUnusedGameThumbnailsRoduxSlice),
@@ -1658,7 +1668,7 @@ return {
 	FFlagSeedAccountThemeFromDisk = game:DefineFastFlag("SeedAccountThemeFromDisk", false) and game:GetEngineFeature("UserIdToAccountThemeMapKeyAvailable"),
 	FFlagMomentsDarkAppNavBar = game:DefineFastFlag("MomentsDarkAppNavBar", false),
 	FFlagMomentsReportWithFeedId = game:DefineFastFlag("MomentsReportWithFeedId", false),
-	FFlagAppNavBarPerItemThemeOverride = game:DefineFastFlag("AppNavBarPerItemThemeOverride", false),
+	FFlagAppNavBarPerItemThemeOverride = game:DefineFastFlag("AppNavBarPerItemThemeOverride2", false),
 	FFlagEnableCoreContentThemeVRScene = game:DefineFastFlag("EnableCoreContentThemeVRScene", false),
 	FFlagEnableFlyoutUncheckedBadge = require(script.FFlagEnableFlyoutUncheckedBadge),
 	FFlagDefaultKidsToDarkTheme = require(script.FFlagDefaultKidsToDarkTheme),

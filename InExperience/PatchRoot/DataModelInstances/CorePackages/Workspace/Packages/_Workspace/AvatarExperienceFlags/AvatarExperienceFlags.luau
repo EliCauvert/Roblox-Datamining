@@ -312,6 +312,7 @@
 	FFlagAXBackgroundsEquipTryOnCounters = require(script.FFlagAXBackgroundsEquipTryOnCounters),
 	FIntAXBackgroundsCatalogTabPosition = require(script.FIntAXBackgroundsCatalogTabPosition),
 	FFlagAXTTIEditorEnableMilestones = require(script.FFlagAXTTIEditorEnableMilestones),
+	FFlagAXTTIEditorColdStartDetection = require(script.FFlagAXTTIEditorColdStartDetection),
 	FFlagAXEditorEnableThumbnailLatencyStore = require(script.FFlagAXEditorEnableThumbnailLatencyStore),
 	FStringAXRecommendedItemsExposureLayer = require(script.FStringAXRecommendedItemsExposureLayer),
 	FFlagAXAddSearchTrendingChips = require(script.FFlagAXAddSearchTrendingChips),
@@ -348,5 +349,6 @@
 	FFlagAXBackgroundGeneration = require(script.FFlagAXBackgroundGeneration),
 	FFlagAXAddSectionsToItemInfoRowPrompt = require(script.FFlagAXAddSectionsToItemInfoRowPrompt),
 	FFlagAXMigrateMaterialsToAttributes = require(script.FFlagAXMigrateMaterialsToAttributes),
-	FFlagAXEnableMakeupOutfitCreation = require(script.FFlagAXEnableMakeupOutfitCreation)
+	FFlagAXEnableMakeupOutfitCreation = require(script.FFlagAXEnableMakeupOutfitCreation),
+	FFlagAXFixSearchLandingQuickButtonsOffset = require(script.FFlagAXFixSearchLandingQuickButtonsOffset)
 }

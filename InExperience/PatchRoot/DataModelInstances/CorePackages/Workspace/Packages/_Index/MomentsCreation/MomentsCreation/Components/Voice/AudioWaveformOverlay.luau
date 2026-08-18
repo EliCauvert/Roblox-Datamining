@@ -11,15 +11,15 @@ local resampleWaveformPeaksModule = require(momentsCreation.Utils.resampleWavefo
 local getFIntMomentsTTSWaveformMinBarHeightPercentModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMinBarHeightPercent)
 local getFIntMomentsTTSWaveformMaxBarHeightPercentModule = require(momentsCreation.Flags.GetFIntMomentsTTSWaveformMaxBarHeightPercent)
 
-return function(p0) --[[ line: 46 | named "AudioWaveformOverlay" ]]
+return function(p0) --[[ line: 47 | named "AudioWaveformOverlay" ]]
 	-- upvalues: useTokens (ref), useState (ref), useCallback (ref), useMemo (ref), getFIntMomentsTTSWaveformMinBarHeightPercentModule (ref), getFIntMomentsTTSWaveformMaxBarHeightPercentModule (ref), resampleWaveformPeaksModule (ref), reactModule (ref), view (ref)
 	local var6 = useTokens()
 	local var7, var8 = useState(0)
-	local var9 = useCallback(function(p1) --[[ line: 50 ]]
+	local var9 = useCallback(function(p1) --[[ line: 51 ]]
 		-- upvalues: var8 (ref)
 		var8(p1.AbsoluteSize.X)
 	end, {})
-	local var10 = useMemo(function() --[[ line: 54 ]]
+	local var10 = useMemo(function() --[[ line: 55 ]]
 		-- upvalues: var7 (ref)
 		return if var7 <= 0 then 0 else math.max(1, math.floor((var7 - 8) / 4))
 	end, { var7 })
@@ -38,8 +38,8 @@ return function(p0) --[[ line: 46 | named "AudioWaveformOverlay" ]]
 		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 6) }),
 		Stroke = reactModule.createElement("UIStroke", {
 			Transparency = 0.6,
-			Color = Color3.new(1, 1, 1),
-			Thickness = var6.Stroke.Standard
+			Thickness = 1,
+			Color = Color3.new(1, 1, 1)
 		}),
 		BarsContainer = reactModule.createElement(view, {
 			tag = "size-full-full clip",
@@ -53,7 +53,7 @@ return function(p0) --[[ line: 46 | named "AudioWaveformOverlay" ]]
 			},
 			padding = { left = UDim.new(0, 4), right = UDim.new(0, 4) }
 		}, {
-			Bars = reactModule.createElement(reactModule.Fragment, nil, useMemo(function() --[[ line: 63 ]]
+			Bars = reactModule.createElement(reactModule.Fragment, nil, useMemo(function() --[[ line: 64 ]]
 				-- upvalues: getFIntMomentsTTSWaveformMinBarHeightPercentModule (copy), getFIntMomentsTTSWaveformMaxBarHeightPercentModule (copy), resampleWaveformPeaksModule (copy), samples (ref), var10 (ref), reactModule (copy), var6 (ref)
 				local t = {}
 				

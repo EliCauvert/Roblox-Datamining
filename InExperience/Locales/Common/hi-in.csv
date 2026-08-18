@@ -2544,6 +2544,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,डिसप्ले ना�
 Feature.DisplayName.ErrorMessage.NameTooLong,डिसप्ले नाम में ज़्यादा-से-ज़्यादा 20 कैरेक्टर होने चाहिए
 Feature.DisplayName.ErrorMessage.NameTooShort,डिसप्ले नाम में कम-से-कम 3 कैरेक्टर होने चाहिए
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,डिसप्ले नाम में सपोर्ट न करने वाले कैरेक्टर हैं
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} दिन के लिए
 Feature.Durables.BottomBar.RentalDurationPlural,{num} दिनों के लिए
 Feature.Durables.FTUX.Tooltip,चुनें कि आपको कितने दिनों तक आइटम का मालिक बनना है. खरीदने के बाद टाइमर शुरू होता है.
@@ -2554,6 +2555,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} दिन
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,विकल्प
 Feature.Durables.Label.ItemExpires,आइटम की समयसीमा खत्म हो रही है
+Feature.Durables.PartiallyExpiredItems.BodyText,सेव किए गए इस अवतार में कुछ आइटम की समय-सीमा खत्म हो गई है और उन्हें हटा दिया गया है.
+Feature.Durables.PartiallyExpiredItems.TitleText,आइटम की समय-सीमा खत्म हो गई है
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} दिन (खरीदारी के बाद शुरू)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"EU डिजिटल सर्विसेज़ ऐक्ट के तहत गैर-कानूनी कॉन्टेंट की रिपोर्ट करने के लिए, यहाँ जाएँ : https://www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,इंटरनेट कनेक्शन नहीं है
@@ -3033,6 +3036,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,फ़्रें
 Feature.Moments.Action.AddMusic,म्यूज़िक जोड़ें
 Feature.Moments.Action.AddSticker,स्टिकर जोड़ें
 Feature.Moments.Action.AddText,टेक्स्ट जोड़ें
+Feature.Moments.Action.AddVoice,वॉइस जोड़ें
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3115,6 +3119,8 @@ Feature.Moments.Label.TextGeneratedBody,AI से जेनरेट किय�
 Feature.Moments.Label.TextGeneratedTitle,टेक्स्ट जेनरेट हो गया
 Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेनरेट नहीं हो सका. कृपया फिर से कोशिश करें.
 Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
+Feature.Moments.Label.TextGenerationFilteredBody,"कैप्चर किए गए इस वीडियो के लिए टेक्स्ट जेनरेट नहीं हो सकता, कॉन्टेंट फ़िल्टर किया गया."
+Feature.Moments.Label.TextGenerationFilteredTitle,जेनरेशन फ़िल्टर किया गया
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
@@ -3280,6 +3286,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करे�
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
 Feature.Profile.Heading.InsufficientFunds,फ़ंड काफ़ी नहीं हैं
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,प्रोफ़ाइल फ़्रेम
+Feature.Profile.Heading.ProfilePictureSaved,प्रोफ़ाइल फ़ोटो सेव हो गई
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,आँकड़े
 Feature.Profile.Heading.Username,
@@ -3500,6 +3508,7 @@ Feature.Schools.Label.Classmates,क्लासमेट
 Feature.Screentime.Content.ScreentimeLimitDialog,आपकी डेली स्क्रीन टाइम लिमिट पूरी हो गई हैं. फिर से Roblox ऐक्सेस करने के लिए कल वापस आएं.
 Feature.SecurityFeedback.Header.NewLogin,नया ऐक्टिविटी अलर्ट
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,सेटिंग में परमिशन दें
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3519,11 +3528,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,चैट के अनु�
 Feature.SettingsHub.Chat.TranslationSetting,चैट का ऑटोमैटिक अनुवाद
 Feature.SettingsHub.Chat.TranslationToggleSetting,अनुवाद न किए गए मैसेज देखने का विकल्प
 Feature.SettingsHub.Default.DynamicThumbstick,डिफ़ॉल्ट (डायनैमिक थंबस्टिक)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,"हमें आपके कैमरे का ऐक्सेस चाहिए, ताकि आप QR कोड स्कैन कर सकें."
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,"हमारे कम्यूनिटी स्टैंडर्ड का उल्लंघन करने वाले व्यवहार की वजह से, {dateTime} तक वॉइस चैट का आपका ऐक्सेस बंद कर दिया गया है."
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. परमिशन चुनें
 2. कॉन्टैक्ट्स चुनें
 3. Roblox को अपने कॉन्टैक्ट्स ऐक्सेस करने की परमिशन दें"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"फ़्रेंड्स के साथ कनेक्ट करने के लिए, Roblox को अपने कॉन्टैक्ट्स को ऐक्सेस करने की परमिशन दें."
+Feature.SettingsHub.Description.ContactsPermissionRequest,"हमें आपके कॉन्टैक्ट्स का ऐक्सेस चाहिए, ताकि आप फ़्रेंड्स से कनेक्ट कर सकें."
 Feature.SettingsHub.Description.PeoplesNames,गेम्स में अपने बैज दूसरे लोगों को दिखाएँ या उनसे छिपाएँ.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. परमिशन चुनें
 2. कैमरा चुनें
@@ -3600,6 +3611,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,इस व्यक्ति न
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,यह व्यक्ति बहुत तेज़ आवाज़ में चिल्ला रहा था
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,इस सर्वर में
+Feature.SettingsHub.Prompt.AllowAccessToCamera,कैमरे का ऐक्सेस देना है?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,कॉन्टैक्ट्स का ऐक्सेस देना है?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. परमिशन चुनें<br />2. माइक्रोफ़ोन चुनें<br />3. Roblox को अपना माइक्रोफ़ोन ऐक्सेस करने की अनुमति दें</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. सेटिंग्स > प्राइवेसी > परमिशन पर जाएँ<br />2. माइक्रोफ़ोन चुनें<br />3. Roblox को अपना माइक्रोफ़ोन ऐक्सेस करने की अनुमति दें</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,उनकी पहनी गई ड्रेस खरीदें
@@ -3852,6 +3865,7 @@ Feature.Subscription.Text.PerMonth,/महीना
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"{rule} के लिए आपका अवतार रीसेट कर दिया गया था. अभी भी मार्केटप्लेस का इस्तेमाल किया जा सकता है, लेकिन आपके अवतार में किए गए बदलाव {time} तक सेव नहीं होंगे."
 Feature.Timeout.Prompt.SaveTitleText,सेव करने की सुविधा अभी बंद है
+Feature.Timeout.Prompt.TitleText,हमने आपका अवतार रीसेट कर दिया है
 Feature.Timeout.WarningBanner.DisabledMessage,अवतार सेव करने की सुविधा बंद है
 Feature.Timeout.WarningBanner.DisabledUntilMessage,अवतार सेव करने की सुविधा {time} तक बंद है
 Feature.Toast.Heading.PurchaseMessage.Success,अनलॉक हो गया है

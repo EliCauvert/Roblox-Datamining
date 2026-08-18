@@ -17,7 +17,6 @@ local useFetchContactImporterInfoOnce = require(parent.Utils).useFetchContactImp
 local useAutoSyncContacts = require(parent.Utils).useAutoSyncContacts
 local userIdExists = socialCommonModule.Utils.userIdExists
 local permissionsProtocol = require(parent_1.PermissionsProtocol).PermissionsProtocol
-local rolloutByApplicationId = require(parent_1.AppCommonLib).rolloutByApplicationId
 local userProfilesModule = require(parent_1.UserProfiles)
 local useLocalUserId = robloxAppHooksModule.useLocalUserId
 local universalAppPolicy = dependenciesModule.UniversalAppPolicy
@@ -26,14 +25,12 @@ local networkingFriends = dependenciesModule.NetworkingFriends
 local earlierFetchTimeForFriendsCarouselV1 = game:DefineFastFlag("EarlierFetchTimeForFriendsCarousel_v1", false)
 local prefetchProfileNamesOnStartupV2 = game:DefineFastFlag("PrefetchProfileNamesOnStartup_v2", false)
 local fFlagRegisterQRCodeKeyInEngine = require(parent_1.SharedFlags).FFlagRegisterQRCodeKeyInEngine
+local fFlagFriendsCountDataHydrationMigrationEnabled = require(parent_1.SharedFlags).FFlagFriendsCountDataHydrationMigrationEnabled
 local useSignalState = require(parent_1.SignalsReact).useSignalState
 local var11 = require(parent_1.DataHydration).Friends.FriendsStore.get()
 local var12 = if fFlagRegisterQRCodeKeyInEngine then "ProfileQrCodeCameraSettingsModalSeen" else "ScreenshotEventTracking"
-local var13 = rolloutByApplicationId(function() --[[ line: 47 ]]
-	return game:DefineFastInt("CallFriendCountAtStartupRollout", 0)
-end)
 local realtimeMessageId = messageBusService:GetMessageId("Realtime", "appResume")
-local var15 = if prefetchProfileNamesOnStartupV2 then userProfilesModule.Stores.UserProfileStore.get() else nil
+local var14 = if prefetchProfileNamesOnStartupV2 then userProfilesModule.Stores.UserProfileStore.get() else nil
 local t = {
 	ProfileQRCodeCameraSettingsModalSeen = {
 		context = contexts.ProfileQRCode,
@@ -42,92 +39,94 @@ local t = {
 	}
 }
 
-return universalAppPolicy.connect(function(p2) --[[ line: 190 ]]
+return universalAppPolicy.connect(function(p2) --[[ line: 189 ]]
 	return {
 		isContactImporterPolicyEnabled = p2.getContactImporterEnabled()
 	}
-end)(function(p0) --[[ line: 85 | named "Container" ]]
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), reactModule (ref), var11 (ref), useSignalState (ref), prefetchProfileNamesOnStartupV2 (ref), userIdExists (ref), var15 (ref), useAutoSyncContacts (ref), var13 (ref), networkingFriends (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var12 (ref), permissionsProtocol (ref)
-	local var17 = useDispatch()
-	local var18 = useLocalUserId()
+end)(function(p0) --[[ line: 82 | named "Container" ]]
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), getAppFeaturePolicies (ref), useFetchContactImporterInfoOnce (ref), earlierFetchTimeForFriendsCarouselV1 (ref), reactModule (ref), var11 (ref), useSignalState (ref), prefetchProfileNamesOnStartupV2 (ref), userIdExists (ref), var14 (ref), useAutoSyncContacts (ref), fFlagFriendsCountDataHydrationMigrationEnabled (ref), networkingFriends (ref), messageBusService (ref), realtimeMessageId (ref), analyticsFactory (ref), t (ref), defaultAnalyticsService (ref), appStorageService (ref), var12 (ref), permissionsProtocol (ref)
+	local var16 = useDispatch()
+	local var17 = useLocalUserId()
 	useFetchContactImporterInfoOnce({
 		policyIsEnabled = p0.isContactImporterPolicyEnabled or getAppFeaturePolicies().getContactImporterEnabled()
 	})
-	local var19 = nil
+	local var18 = nil
 	
 	if earlierFetchTimeForFriendsCarouselV1 then
-		local var20 = useSignalState(reactModule.useMemo(function() --[[ line: 98 ]]
+		local var19 = useSignalState(reactModule.useMemo(function() --[[ line: 95 ]]
 			-- upvalues: var11 (copy)
 			return var11.GetAllFriends()
 		end, {}))
-		var19 = if var20 then var20.friends else nil
-		reactModule.useEffect(function() --[[ line: 105 ]]
+		var18 = if var19 then var19.friends else nil
+		reactModule.useEffect(function() --[[ line: 102 ]]
 			-- upvalues: var11 (copy)
 			var11.GetOnlineFriends()
 		end, {})
 	end
 	if prefetchProfileNamesOnStartupV2 then
-		local var21 = var19
-		reactModule.useEffect(function() --[[ line: 114 ]]
-			-- upvalues: userIdExists (copy), var18 (ref), var21 (ref), var15 (copy)
-			if userIdExists(var18) then
-				local list = { tostring(var18) }
+		local var20 = var18
+		reactModule.useEffect(function() --[[ line: 111 ]]
+			-- upvalues: userIdExists (copy), var17 (ref), var20 (ref), var14 (copy)
+			if userIdExists(var17) then
+				local list = { tostring(var17) }
 				
-				if var21 then
-					for i, v in var21 do
+				if var20 then
+					for i, v in var20 do
 						if v and v.id then
 							table.insert(list, tostring(v.id))
 						end
 					end
 				end
-				var15.fetchNamesByUserIds(list)
+				var14.fetchNamesByUserIds(list)
 			end
-		end, { var18, var21 })
+		end, { var17, var20 })
 	end
 	useAutoSyncContacts()
-	
-	if var13() then
-		reactModule.useEffect(function() --[[ line: 135 ]]
-			-- upvalues: userIdExists (copy), var18 (ref), var17 (ref), networkingFriends (copy)
-			if userIdExists(var18) then
-				var17(networkingFriends.GetFriendsCountFromUserId.API(var18))
+	reactModule.useEffect(function() --[[ line: 131 ]]
+		-- upvalues: userIdExists (copy), var17 (ref), fFlagFriendsCountDataHydrationMigrationEnabled (copy), var11 (copy), var16 (ref), networkingFriends (copy)
+		if userIdExists(var17) then
+			if fFlagFriendsCountDataHydrationMigrationEnabled then
+				var11.GetFriendsCountByUserId(tostring(var17))
+				
+				return
 			end
-		end, { var18 })
-	end
-	reactModule.useEffect(function() --[[ line: 142 ]]
-		-- upvalues: userIdExists (copy), var18 (ref), var17 (ref), networkingFriends (copy), messageBusService (copy), realtimeMessageId (copy)
-		if userIdExists(var18) then
-			var17(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var18 }))
-			local var24 = messageBusService:Subscribe(realtimeMessageId, function() --[[ line: 147 ]]
-				-- upvalues: var17 (copy), networkingFriends (copy), var18 (copy)
-				var17(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var18 }))
+			var16(networkingFriends.GetFriendsCountFromUserId.API(var17))
+		end
+	end, { var17 })
+	reactModule.useEffect(function() --[[ line: 141 ]]
+		-- upvalues: userIdExists (copy), var17 (ref), var16 (ref), networkingFriends (copy), messageBusService (copy), realtimeMessageId (copy)
+		if userIdExists(var17) then
+			var16(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var17 }))
+			local var23 = messageBusService:Subscribe(realtimeMessageId, function() --[[ line: 146 ]]
+				-- upvalues: var16 (copy), networkingFriends (copy), var17 (copy)
+				var16(networkingFriends.GetNewFriendRequestsCount.API({ currentUserId = var17 }))
 			end, false, true)
 			
-			return function() --[[ line: 152 ]]
-				-- upvalues: var24 (ref)
-				var24:Disconnect()
+			return function() --[[ line: 151 ]]
+				-- upvalues: var23 (ref)
+				var23:Disconnect()
 			end
 		end
-		return function() --[[ line: 156 ]] end
-	end, { var18 })
-	local var22 = reactModule.useMemo(function() --[[ line: 159 ]]
+		return function() --[[ line: 155 ]] end
+	end, { var17 })
+	local var21 = reactModule.useMemo(function() --[[ line: 158 ]]
 		-- upvalues: analyticsFactory (copy), t (copy), defaultAnalyticsService (copy)
 		return analyticsFactory.setUpAnalyticsFactory({
 			eventLists = { EventStream = t },
 			analyticsImpl = { EventStream = defaultAnalyticsService.EventStream }
 		})()
 	end, {})
-	reactModule.useEffect(function() --[[ line: 169 ]]
-		-- upvalues: appStorageService (copy), var12 (copy), permissionsProtocol (copy), var22 (ref)
+	reactModule.useEffect(function() --[[ line: 168 ]]
+		-- upvalues: appStorageService (copy), var12 (copy), permissionsProtocol (copy), var21 (ref)
 		if appStorageService:GetItem(var12) == "true" then
-			permissionsProtocol.default:checkOrRequestPermissions({ permissionsProtocol.Permissions.CAMERA_ACCESS }):andThen(function(p1) --[[ line: 177 ]]
-				-- upvalues: var22 (copy)
-				var22.fireAnalyticsEvent("ProfileQRCodeCameraSettingsModalSeen", { cameraPermissionResponseStatus = p1 })
+			permissionsProtocol.default:checkOrRequestPermissions({ permissionsProtocol.Permissions.CAMERA_ACCESS }):andThen(function(p1) --[[ line: 176 ]]
+				-- upvalues: var21 (copy)
+				var21.fireAnalyticsEvent("ProfileQRCodeCameraSettingsModalSeen", { cameraPermissionResponseStatus = p1 })
 			end)
 			appStorageService:SetItem(var12, "false")
 			appStorageService:Flush()
 		end
-	end, { var18, var22 })
+	end, { var17, var21 })
 	
 	return nil
 end)

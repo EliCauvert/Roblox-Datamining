@@ -2564,6 +2564,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Display name is not available
 Feature.DisplayName.ErrorMessage.NameTooLong,Display name should have 20 characters at the most
 Feature.DisplayName.ErrorMessage.NameTooShort,Display name should have at least 3 characters
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Display name contains unsupported characters
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,For {num} day
 Feature.Durables.BottomBar.RentalDurationPlural,For {num} days
 Feature.Durables.FTUX.Tooltip,Choose how many days you want to own the item. The timer starts after purchase.
@@ -2574,6 +2575,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} day
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} days
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Options
 Feature.Durables.Label.ItemExpires,Item expires
+Feature.Durables.PartiallyExpiredItems.BodyText,Some items in this saved avatar expired and were removed.
+Feature.Durables.PartiallyExpiredItems.TitleText,Items expired
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} days (Starts after purchase)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,No internet connection
@@ -3053,6 +3056,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Turn on friend dis
 Feature.Moments.Action.AddMusic,Add Music
 Feature.Moments.Action.AddSticker,Add Sticker
 Feature.Moments.Action.AddText,Add Text
+Feature.Moments.Action.AddVoice,Add Voice
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3060,6 +3064,8 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
 Feature.Moments.Action.GenerateText,Generate
+Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or violates guidelines
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,How to Capture
 Feature.Moments.Action.Join,
@@ -3076,6 +3082,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI-generated text. Review before posting — you're responsible for what's published.
 Feature.Moments.Description.HowToCaptureStep1,Join an Experience with Captures enabled and select the hamburger menu
 Feature.Moments.Description.HowToCaptureStep2,Enable the Capture controls
 Feature.Moments.Description.HowToCaptureStep3,Capture photos and videos of gameplay
@@ -3135,7 +3142,10 @@ Feature.Moments.Label.TextGeneratedBody,AI-generated text overlay and descriptio
 Feature.Moments.Label.TextGeneratedTitle,Text Generated
 Feature.Moments.Label.TextGenerationFailedBody,Couldn't generate text. Please try again.
 Feature.Moments.Label.TextGenerationFailedTitle,Generation Failed
+Feature.Moments.Label.TextGenerationFilteredBody,"Can't perform generation for this captured video, content filtered."
+Feature.Moments.Label.TextGenerationFilteredTitle,Generation Filtered
 Feature.Moments.Label.Videos,
+Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.ReportPost,Report post
@@ -3300,6 +3310,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Profile frame
+Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,
@@ -3524,6 +3536,7 @@ Feature.Schools.Label.Classmates,Classmates
 Feature.Screentime.Content.ScreentimeLimitDialog,You've reached your daily screen time limit. Come back tomorrow to access Roblox again.
 Feature.SecurityFeedback.Header.NewLogin,New Activity Alert
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,Allow in Settings
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3543,11 +3556,16 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,Chat Translation Language
 Feature.SettingsHub.Chat.TranslationSetting,Automatic Chat Translation
 Feature.SettingsHub.Chat.TranslationToggleSetting,Option to View Untranslated Message
 Feature.SettingsHub.Default.DynamicThumbstick,Default (Dynamic Thumbstick)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,We need access to your camera so you can scan a QR code.
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,Your access to chat with voice has been disabled until {dateTime} due to behavior that may violate our Community Standards.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Select Permission
 2. Select Contacts
 3. Allow Roblox to access your Contacts"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. Go to Settings > Permission
+2. Select Contacts
+3. Allow Roblox to access your Contacts"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"To connect with friends, allow Roblox to access your contacts."
+Feature.SettingsHub.Description.ContactsPermissionRequest,We need access to your contacts so you can connect with friends.
 Feature.SettingsHub.Description.PeoplesNames,Show or hide your badges from other people in games.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Select Permission
 2. Select Camera
@@ -3624,6 +3642,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,This person typed a mean word in
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,This person was screaming at the top of their lungs
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,In this server
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Allow access to camera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Allow access to contacts?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Select Permission<br />2. Select Microphone<br />3. Allow Roblox to access your Microphone</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. Go to Settings > Privacy > Permission<br />2. Select Microphone<br />3. Allow Roblox to access your Microphone</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,Buy what they’re wearing
@@ -3876,6 +3896,7 @@ Feature.Subscription.Text.PerMonth,/month
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Your avatar was reset for {rule}. You can still use the Marketplace, but changes to your avatar will not save until {time}."
 Feature.Timeout.Prompt.SaveTitleText,Saving is disabled for now
+Feature.Timeout.Prompt.TitleText,We reset your avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Avatar saving disabled
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Avatar saving disabled until {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Unlocked

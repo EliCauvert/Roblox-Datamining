@@ -55,6 +55,7 @@ return function(p0) --[[ line: 35 | named "useMomentShareCardViewModel" ]]
 	else
 		var25 = var24
 	end
+	local size500 = var14.Size.Size_500
 	local openMomentsDeepLink = p0.openMomentsDeepLink
 	
 	return {
@@ -65,13 +66,13 @@ return function(p0) --[[ line: 35 | named "useMomentShareCardViewModel" ]]
 		playIconStyle = var14.Color.Content.Emphasis,
 		posterContent = var23,
 		isPosterLoaded = var25,
-		cornerRadii = reactModule.useMemo(function() --[[ line: 85 ]]
-			-- upvalues: getMomentShareCardCornerRadiiModule (copy), p0 (ref)
-			return getMomentShareCardCornerRadiiModule(p0.isStartOfGroup, p0.isIncoming)
-		end, { p0.isStartOfGroup, p0.isIncoming }),
+		cornerRadii = reactModule.useMemo(function() --[[ line: 86 ]]
+			-- upvalues: getMomentShareCardCornerRadiiModule (copy), p0 (ref), size500 (ref)
+			return getMomentShareCardCornerRadiiModule(p0.isStartOfGroup, p0.isIncoming, size500)
+		end, { p0.isStartOfGroup, p0.isIncoming, size500 }),
 		username = var16,
 		metadataText = var19,
-		onActivated = reactModule.useCallback(function() --[[ line: 90 ]]
+		onActivated = reactModule.useCallback(function() --[[ line: 91 ]]
 			-- upvalues: openMomentsDeepLink (ref), var12 (ref), p0 (ref)
 			if openMomentsDeepLink and var12.status == "ready" then
 				openMomentsDeepLink(p0.momentId, p0.targetIdType)

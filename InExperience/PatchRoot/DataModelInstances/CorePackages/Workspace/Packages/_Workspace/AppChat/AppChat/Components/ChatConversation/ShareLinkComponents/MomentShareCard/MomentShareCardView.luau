@@ -1,26 +1,29 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
+﻿local appChat = script:FindFirstAncestor("AppChat")
+local parent = appChat.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
+local image = foundationModule.Image
 local text = foundationModule.Text
 local icon = foundationModule.Icon
 local skeleton = foundationModule.Skeleton
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local radius = foundationModule.Enums.Radius
+local fFlagAppChatMomentShareCardUseFoundationImage = require(appChat.Flags.FFlagAppChatNativeFoundationCornerRadii) and (foundationModule.Utility.Flags.FoundationImageContentSupport and require(appChat.Flags.FFlagAppChatMomentShareCardUseFoundationImage))
 local gameCardErrorModule = require(script.Parent.Parent.GameCardComponents.GameCardError)
 
-local function _(p0) --[[ line: 41 | named "toUDim" ]]
+local function _(p0) --[[ line: 52 | named "toUDim" ]]
 	return if type(p0) == "number" then UDim.new(0, p0) else p0
 end
 
-local function roundedCorner(value) --[[ line: 45 ]]
+local function roundedCorner(value) --[[ line: 56 ]]
 	-- upvalues: reactModule (ref)
 	if value == nil then
 		return nil
 	end
 	local createElement = reactModule.createElement
-	local var4 = "UICorner"
+	local var6 = "UICorner"
 	local t = {}
 	local topLeft = value.topLeft
 	t.TopLeftRadius = if type(topLeft) == "number" then UDim.new(0, topLeft) else topLeft
@@ -31,11 +34,11 @@ local function roundedCorner(value) --[[ line: 45 ]]
 	local bottomRight = value.bottomRight
 	t.BottomRightRadius = if type(bottomRight) == "number" then UDim.new(0, bottomRight) else bottomRight
 	
-	return createElement(var4, t)
+	return createElement(var6, t)
 end
 
-return reactModule.memo(function(p1) --[[ line: 57 | named "MomentShareCardView" ]]
-	-- upvalues: reactModule (ref), gameCardErrorModule (ref), view (ref), roundedCorner (ref), skeleton (ref), radius (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
+return reactModule.memo(function(p1) --[[ line: 68 | named "MomentShareCardView" ]]
+	-- upvalues: reactModule (ref), gameCardErrorModule (ref), view (ref), roundedCorner (ref), skeleton (ref), radius (ref), fFlagAppChatMomentShareCardUseFoundationImage (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
 	return if p1.status == "error" then reactModule.createElement(gameCardErrorModule) else reactModule.createElement(view, {
 		tag = "col auto-y",
 		testId = "MomentShareCardView",
@@ -59,7 +62,14 @@ return reactModule.memo(function(p1) --[[ line: 57 | named "MomentShareCardView"
 					Corner = roundedCorner(p1.cornerRadii),
 					Shimmer = reactModule.createElement(skeleton, { radius = radius.None, Size = UDim2.fromScale(1, 1) })
 				}) else nil,
-				Poster = if p1.posterContent ~= nil then nil else reactModule.createElement("ImageLabel", {
+				Poster = if p1.posterContent ~= nil then nil elseif fFlagAppChatMomentShareCardUseFoundationImage then reactModule.createElement(image, {
+					tag = "size-full",
+					ZIndex = 2,
+					testId = "MomentShareCardPosterImage",
+					ImageContent = p1.posterContent,
+					ScaleType = Enum.ScaleType.Crop,
+					cornerRadius = p1.cornerRadii
+				}) else reactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
 					ImageContent = p1.posterContent,

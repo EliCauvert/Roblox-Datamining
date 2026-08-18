@@ -9,7 +9,6 @@ local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavi
 local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
 local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
 local contextualMenuModule = require(profilePlatform.Components.CTARow.ContextualMenu)
-local fFlagAddCTAButtonAnalyticsModule = require(profilePlatform.Flags.FFlagAddCTAButtonAnalytics)
 local foundationModule = require(parent.Foundation)
 local view = foundationModule.View
 local button = foundationModule.Button
@@ -17,80 +16,80 @@ local iconButton = foundationModule.IconButton
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local fillBehavior = foundationModule.Enums.FillBehavior
 
-return function(p0) --[[ line: 42 | named "CTAButton" ]]
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonVariant (ref), fFlagAddCTAButtonAnalyticsModule (ref), iconButton (ref), button (ref), fillBehavior (ref), view (ref), contextualMenuModule (ref)
-	local var7, var8 = reactModule.useState(false)
-	local var9 = reactModule.useCallback(function() --[[ line: 45 ]]
-		-- upvalues: var8 (ref)
-		var8(false)
+return function(p0) --[[ line: 40 | named "CTAButton" ]]
+	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonVariant (ref), iconButton (ref), button (ref), fillBehavior (ref), view (ref), contextualMenuModule (ref)
+	local var6, var7 = reactModule.useState(false)
+	local var8 = reactModule.useCallback(function() --[[ line: 43 ]]
+		-- upvalues: var7 (ref)
+		var7(false)
 	end, {})
-	local var10 = reactModule.useCallback(function() --[[ line: 49 ]]
-		-- upvalues: var8 (ref)
-		var8(function(p1) --[[ line: 50 ]]
+	local var9 = reactModule.useCallback(function() --[[ line: 47 ]]
+		-- upvalues: var7 (ref)
+		var7(function(p1) --[[ line: 48 ]]
 			return not p1
 		end)
 	end, {})
-	local var11 = useAppFocusRoot({
+	local var10 = useAppFocusRoot({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		customEventHandlers = reactModule.useMemo(function() --[[ line: 55 ]]
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var9 (ref)
+		customEventHandlers = reactModule.useMemo(function() --[[ line: 53 ]]
+			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var8 (ref)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var9) }
+				[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var8) }
 			}
-		end, { var9 }),
-		isFocusable = var7
+		end, { var8 }),
+		isFocusable = var6
 	})
-	local var12 = reactModule.useRef(nil)
+	local var11 = reactModule.useRef(nil)
 	local menuItem = p0.buttonItem.menuItem
 	local displayValue = menuItem.displayValue
 	local icon = displayValue.icon
 	local text = displayValue.text
 	local contextualMenuItems = p0.buttonItem.contextualMenuItems
-	local var13 = if p0.buttonItem.buttonStyle then p0.buttonItem.buttonStyle else buttonVariant.Standard
-	local var14 = contextualMenuItems and #contextualMenuItems > 0
+	local var12 = if p0.buttonItem.buttonStyle then p0.buttonItem.buttonStyle else buttonVariant.Standard
+	local var13 = contextualMenuItems and #contextualMenuItems > 0
 	local isDisabled = p0.buttonItem.menuItem.isDisabled
-	local var15 = if fFlagAddCTAButtonAnalyticsModule then reactModule.useCallback(function() --[[ line: 81 ]]
-		-- upvalues: var14 (ref), var7 (ref), menuItem (ref), var10 (ref)
-		if not var14 then
+	local var14 = reactModule.useCallback(function() --[[ line: 78 ]]
+		-- upvalues: var13 (ref), var6 (ref), menuItem (ref), var9 (ref)
+		if not var13 then
 			menuItem.onActivated()
 			
 			return
-		elseif not var7 then
+		elseif not var6 then
 			menuItem.onActivated()
 		end
-		var10()
-	end, { var14, var7, menuItem.onActivated, var10 }) elseif var14 then var10 else menuItem.onActivated
-	local var16 = icon ~= nil and text == nil
+		var9()
+	end, { var13, var6, menuItem.onActivated, var9 })
+	local var15 = icon ~= nil and text == nil
 	
 	return reactModule.createElement(view, {
-		tag = { ["auto-xy"] = var16, ["fill auto-y"] = not var16 },
+		tag = { ["auto-xy"] = var15, ["fill auto-y"] = not var15 },
 		LayoutOrder = p0.layoutOrder
 	}, {
-		Button = if var16 then reactModule.createElement(iconButton, {
+		Button = if var15 then reactModule.createElement(iconButton, {
 			icon = icon,
 			LayoutOrder = p0.layoutOrder,
-			onActivated = var15,
+			onActivated = var14,
 			variant = buttonVariant.Standard,
-			ref = var12,
+			ref = var11,
 			isDisabled = isDisabled
 		}) else reactModule.createElement(button, {
 			text = text,
 			icon = icon,
-			onActivated = var15,
+			onActivated = var14,
 			fillBehavior = fillBehavior.Fill,
-			variant = var13,
+			variant = var12,
 			isLoading = p0.buttonItem.isLoading,
 			LayoutOrder = p0.layoutOrder,
-			ref = var12,
+			ref = var11,
 			isDisabled = isDisabled
 		}),
-		ContextualMenu = if var14 then reactModule.createElement(contextualMenuModule, {
-			isOpen = var7,
+		ContextualMenu = if var13 then reactModule.createElement(contextualMenuModule, {
+			isOpen = var6,
 			menuItems = contextualMenuItems,
-			anchorRef = var12,
-			menuRef = var11,
-			closeMenu = var9,
+			anchorRef = var11,
+			menuRef = var10,
+			closeMenu = var8,
 			align = p0.align
 		}) else nil
 	})

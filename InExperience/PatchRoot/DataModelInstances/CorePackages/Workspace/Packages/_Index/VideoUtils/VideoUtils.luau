@@ -12,6 +12,7 @@ return {
 	VideoLogger = require(script.Analytics.VideoLogger),
 	getIsInstanceVisible = require(script.getIsInstanceVisible),
 	getPlaybackDetectionMethod = require(script.getPlaybackDetectionMethod),
+	isVideoEligibleForPlayability = require(script.isVideoEligibleForPlayability),
 	RoundIconButton = require(script.RoundIconButton),
 	useCanDevicePlayVideoPreview = require(script.useCanDevicePlayVideoPreview),
 	useFeedVideoPlaybackContext = require(script.useFeedVideoPlaybackContext),

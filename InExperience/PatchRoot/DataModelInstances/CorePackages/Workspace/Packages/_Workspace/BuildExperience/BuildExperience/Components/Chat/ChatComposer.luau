@@ -4,53 +4,61 @@ local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local chatActionsRowModule = require(script.Parent.ChatActionsRow)
-local var5 = if require(buildExperience.Flags.FFlagBuildExperienceUseCommonTextArea) then require(parent.AppBlox).Composer else require(buildExperience.FoundationFork.TextArea)
+local fFlagBuildExperienceFixChatComposerInitialSendStateModule = require(buildExperience.Flags.FFlagBuildExperienceFixChatComposerInitialSendState)
+local var6 = if require(buildExperience.Flags.FFlagBuildExperienceUseCommonTextArea) then require(parent.AppBlox).Composer else require(buildExperience.FoundationFork.TextArea)
 local useReleaseFocusOnDownSwipeModule = require(script.Parent.useReleaseFocusOnDownSwipe)
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 
-local function _(p0) --[[ line: 40 | named "trimMessage" ]]
+local function _(p0) --[[ line: 42 | named "trimMessage" ]]
 	return string.gsub(p0, "^%s*(.-)%s*$", "%1")
 end
 
-return function(p1) --[[ line: 44 | named "ChatComposer" ]]
-	-- upvalues: reactModule (ref), signalsModule (ref), useReleaseFocusOnDownSwipeModule (ref), var5 (ref), inputSize (ref), view (ref), chatActionsRowModule (ref)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useMemo(function() --[[ line: 46 ]]
-		-- upvalues: signalsModule (copy)
-		local var13, var14 = signalsModule.createSignal(true)
-		
-		return { getIsComposerEmpty = var13, setIsComposerEmpty = var14 }
-	end, {})
-	local var9 = p1.isAssistantResponding and p1.canSendWhileResponding ~= true
-	local var10 = p1.composerErrorText ~= nil
-	local var11 = reactModule.useCallback(function(p2) --[[ line: 57 ]]
-		-- upvalues: var8 (ref), p1 (ref)
-		var8.setIsComposerEmpty(string.gsub(p2, "^%s*(.-)%s*$", "%1") == "")
-		p1.onChanged(p2)
-	end, { p1.onChanged, var8 })
-	local var12 = reactModule.useCallback(function() --[[ line: 62 ]]
-		-- upvalues: p1 (ref), var8 (ref)
-		if p1.onSend() then
-			var8.setIsComposerEmpty(true)
+return function(p1) --[[ line: 46 | named "ChatComposer" ]]
+	-- upvalues: reactModule (ref), fFlagBuildExperienceFixChatComposerInitialSendStateModule (ref), signalsModule (ref), useReleaseFocusOnDownSwipeModule (ref), var6 (ref), inputSize (ref), view (ref), chatActionsRowModule (ref)
+	local var8 = reactModule.useRef(nil)
+	local var9 = reactModule.useMemo(function() --[[ line: 48 ]]
+		-- upvalues: fFlagBuildExperienceFixChatComposerInitialSendStateModule (copy), p1 (ref), signalsModule (copy)
+		local var14
+		if fFlagBuildExperienceFixChatComposerInitialSendStateModule then
+			var14 = string.gsub(p1.text:getValue(), "^%s*(.-)%s*$", "%1") == ""
+			var14 = nil
+		else
+			var14 = true
 		end
-	end, { p1.onSend, var8 })
-	useReleaseFocusOnDownSwipeModule(var7, p1.textBoxRef)
+		local var15, var16 = signalsModule.createSignal(var14)
+		
+		return { getIsComposerEmpty = var15, setIsComposerEmpty = var16 }
+	end, { p1.text })
+	local var10 = p1.isAssistantResponding and p1.canSendWhileResponding ~= true
+	local var11 = p1.composerErrorText ~= nil
+	local var12 = reactModule.useCallback(function(p2) --[[ line: 62 ]]
+		-- upvalues: var9 (ref), p1 (ref)
+		var9.setIsComposerEmpty(string.gsub(p2, "^%s*(.-)%s*$", "%1") == "")
+		p1.onChanged(p2)
+	end, { p1.onChanged, var9 })
+	local var13 = reactModule.useCallback(function() --[[ line: 67 ]]
+		-- upvalues: p1 (ref), var9 (ref)
+		if p1.onSend() then
+			var9.setIsComposerEmpty(true)
+		end
+	end, { p1.onSend, var9 })
+	useReleaseFocusOnDownSwipeModule(var8, p1.textBoxRef)
 	
-	return reactModule.createElement(var5, {
+	return reactModule.createElement(var6, {
 		label = "",
 		text = p1.text,
-		onChanged = var11,
+		onChanged = var12,
 		hint = p1.composerErrorText,
-		hasError = var10,
+		hasError = var11,
 		placeholder = p1.placeholder or "",
 		width = UDim.new(1, 0),
 		size = inputSize.Large,
 		maxLines = p1.maxLines or 5,
-		isDisabled = var9,
-		onReturnPressed = var12,
+		isDisabled = var10,
+		onReturnPressed = var13,
 		textBoxRef = p1.textBoxRef,
-		ref = var7,
+		ref = var8,
 		composerDebug = p1.composerDebug,
 		LayoutOrder = p1.LayoutOrder,
 		trailingElement = reactModule.createElement(view, { tag = "auto-xy padding-x-xsmall padding-y-small" }, {
@@ -58,9 +66,9 @@ return function(p1) --[[ line: 44 | named "ChatComposer" ]]
 				isAssistantResponding = p1.isAssistantResponding,
 				canStopAssistantResponse = p1.canStopAssistantResponse,
 				canSendWhileResponding = p1.canSendWhileResponding,
-				getIsComposerEmpty = var8.getIsComposerEmpty,
-				isSendDisabled = var10,
-				onSend = var12,
+				getIsComposerEmpty = var9.getIsComposerEmpty,
+				isSendDisabled = var11,
+				onSend = var13,
 				onStop = p1.onStop
 			})
 		})

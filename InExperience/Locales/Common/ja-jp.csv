@@ -2563,6 +2563,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,表示名を利用できませ
 Feature.DisplayName.ErrorMessage.NameTooLong,表示名の文字数制限は最大20文字です
 Feature.DisplayName.ErrorMessage.NameTooShort,表示名は少なくとも3文字以上にしてください
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,表示名に対応していない文字が含まれています
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num}日間
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,アイテムを所有する日数を選択してください。タイマーは購入後に開始されます。
@@ -2573,6 +2574,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num}日
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,オプション
 Feature.Durables.Label.ItemExpires,アイテムの有効期限
+Feature.Durables.PartiallyExpiredItems.BodyText,この保存されたアバターの一部のアイテムは有効期限が切れたため削除されました。
+Feature.Durables.PartiallyExpiredItems.TitleText,アイテムの有効期限が切れました
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}日間（購入後から開始）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,EU・デジタルサービス法に基づく違法コンテンツを報告するにはこちらへ。 https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,インターネット接続がありません
@@ -3052,6 +3055,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,友達発見をオ
 Feature.Moments.Action.AddMusic,音楽を追加
 Feature.Moments.Action.AddSticker,ステッカーを追加
 Feature.Moments.Action.AddText,テキストを追加
+Feature.Moments.Action.AddVoice,ボイスを追加
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3134,6 +3138,8 @@ Feature.Moments.Label.TextGeneratedBody,AIが生成したテキストオーバ�
 Feature.Moments.Label.TextGeneratedTitle,テキストが生成されました
 Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませんでした。もう一度お試しください。
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
+Feature.Moments.Label.TextGenerationFilteredBody,この切り抜きビデオの生成を実行できません。コンテンツが内容規制されています。
+Feature.Moments.Label.TextGenerationFilteredTitle,生成が内容規制されました
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
@@ -3298,6 +3304,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,名前を編集
 Feature.Profile.Heading.EditDisplayName,表示名を編集
 Feature.Profile.Heading.InsufficientFunds,資金が足りません
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,プロフィールフレーム
+Feature.Profile.Heading.ProfilePictureSaved,プロフィール写真が正常に保存されました
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,統計
 Feature.Profile.Heading.Username,
@@ -3518,6 +3526,7 @@ Feature.Schools.Label.Classmates,クラスメート
 Feature.Screentime.Content.ScreentimeLimitDialog,1日のスクリーン時間制限に達しました。また明日、Robloxにアクセスしてください。
 Feature.SecurityFeedback.Header.NewLogin,新しいアクティビティの通知
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,設定で許可
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3537,11 +3546,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,チャット翻訳の言語
 Feature.SettingsHub.Chat.TranslationSetting,チャットの自動翻訳
 Feature.SettingsHub.Chat.TranslationToggleSetting,未翻訳のメッセージを表示するオプション
 Feature.SettingsHub.Default.DynamicThumbstick,初期設定（動的サムスティック）
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,QRコードをスキャンするには、カメラへのアクセスが必要です。
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,「音声でチャット」へのアクセスは当社のコミュニティ基準に違反する可能性がある言動があったため、 {dateTime} まで無効になりました。
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. [権限] を選択
 2. [連絡先] を選択
 3. Robloxに [連絡先] へのアクセスを許可"
 Feature.SettingsHub.Description.ContactsPermissionIOS,友達とつながるには、Robloxが連絡先にアクセスできるようにします。
+Feature.SettingsHub.Description.ContactsPermissionRequest,友達とつながるには、連絡先へのアクセスが必要です。
 Feature.SettingsHub.Description.PeoplesNames,ゲーム内で他の人に対して自分のバッジを表示または非表示にします。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. [権限] を選択
 2. [カメラ] を選択
@@ -3618,6 +3629,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,この人はテキストチャ�
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,この人は絶叫していました
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,このサーバー上
+Feature.SettingsHub.Prompt.AllowAccessToCamera,カメラへのアクセスを許可しますか？
+Feature.SettingsHub.Prompt.AllowAccessToContacts,連絡先へのアクセスを許可しますか？
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. 権限を選択<br />2. マイクを選択<br />3. Robloxがあなたのマイクにアクセスすることを許可</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. [設定] > [プライバシー] > [権限]<br />2. [マイク] を選択<br />3. Robloxがあなたのマイクにアクセスすることを許可</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,彼らが着ているものを買う
@@ -3869,6 +3882,7 @@ Feature.Subscription.Text.PerMonth,（月額）
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,{rule}のため、アバターがリセットされました。マーケットプレイスは引き続きご利用いただけますが、アバターに変更を行っても{time}まで保存されません。
 Feature.Timeout.Prompt.SaveTitleText,保存は現在無効です
+Feature.Timeout.Prompt.TitleText,アバターをリセットしました
 Feature.Timeout.WarningBanner.DisabledMessage,アバターの保存が無効になっています
 Feature.Timeout.WarningBanner.DisabledUntilMessage,アバターの保存は、{time}まで無効になっています
 Feature.Toast.Heading.PurchaseMessage.Success,アンロック済み

@@ -17,14 +17,13 @@ local useAbbreviatedNumberLocalization = require(parent.Localization).Hooks.useA
 local gameCardThumbnailModule = require(script.Parent.GameCardThumbnail)
 local t = {
 	thumbnailAspectRatio = 1.777777777778,
-	cornerRadius = 20,
 	isRepliedTo = false,
 	isIncoming = false,
 	isPending = false,
 	thumbnailRoundedVariant = roundedVariantModule.Top
 }
 
-function GameCardGroupable(p0) --[[ line: 62 ]]
+function GameCardGroupable(p0) --[[ line: 60 ]]
 	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useAbbreviatedNumberLocalization (ref), useScaledValue (ref), constantsModule (ref), reactModule (ref), view (ref), gameCardThumbnailModule (ref), skeleton (ref), foundationModule (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
 	local var8 = cryoModule.Dictionary.union(t, p0)
 	local var9 = useTokens()
@@ -38,7 +37,6 @@ function GameCardGroupable(p0) --[[ line: 62 ]]
 			Thumbnail = reactModule.createElement(gameCardThumbnailModule, {
 				LayoutOrder = 1,
 				gameThumbnail = var8.gameThumbnail,
-				cornerRadius = var8.cornerRadius,
 				roundedVariant = var8.thumbnailRoundedVariant,
 				aspectRatio = var8.thumbnailAspectRatio,
 				onActivated = var8.onThumbnailActivated,

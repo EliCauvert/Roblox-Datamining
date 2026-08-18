@@ -1,4 +1,5 @@
 ﻿return {
 	ExitCreationConfirmation = "ExitCreationConfirmation",
-	TextFiltered = "TextFiltered"
+	TextFiltered = "TextFiltered",
+	VoiceoverError = "VoiceoverError"
 }

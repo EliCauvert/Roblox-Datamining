@@ -5,11 +5,13 @@ local computeNameColor = chatUIPrimitivesModule.Utils.computeNameColor
 local formatInlineIcon = chatUIPrimitivesModule.Utils.formatInlineIcon
 local escapeRichText = chatUIPrimitivesModule.Utils.escapeRichText
 local getReplyLabelDescriptorModule = require(parent.AppChat.getReplyLabelDescriptor)
+local getModeratedMaskTextModule = require(parent.AppChat.getModeratedMaskText)
+local fFlagChatModeratedMaskRandomLength = require(parent.SharedFlags).FFlagChatModeratedMaskRandomLength
 local _ = require(script.Parent.classifyMessage)
 local iconName = foundationModule.Enums.IconName
 local color = Color3.fromRGB(255, 255, 255)
 
-local function _(value) --[[ line: 82 | named "ceilToEven" ]]
+local function _(value) --[[ line: 86 | named "ceilToEven" ]]
 	local ceiled = math.ceil(value)
 	
 	if ceiled % 2 == 1 then
@@ -18,7 +20,7 @@ local function _(value) --[[ line: 82 | named "ceilToEven" ]]
 	return math.max(0, ceiled)
 end
 
-local function getSystemIconAttributes(p0) --[[ line: 94 ]]
+local function getSystemIconAttributes(p0) --[[ line: 98 ]]
 	if p0 == nil then
 		return { weight = "600" }
 	end
@@ -30,50 +32,51 @@ local function getSystemIconAttributes(p0) --[[ line: 94 ]]
 	return { weight = "600", size = tostring(math.max(0, ceiled)) }
 end
 
-local _ = function(p1) --[[ line: 115 | named "hashContent" ]]
-	return string.gsub(p1, "[^%s]", "#")
+local _ = function(p1) --[[ line: 119 | named "hashContent" ]]
+	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref)
+	return if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p1.messageId or p1.body) else string.gsub(p1.body, "[^%s]", "#")
 end
 
-local _ = function(p2) --[[ line: 119 | named "isNameLoading" ]]
+local _ = function(p2) --[[ line: 127 | named "isNameLoading" ]]
 	return if p2.name ~= nil then p2.name == "" else true
 end
 
-local function makeSystemRow(p3) --[[ line: 126 ]]
+local function makeSystemRow(p3) --[[ line: 134 ]]
 	-- upvalues: escapeRichText (ref), formatInlineIcon (ref), getSystemIconAttributes (ref)
-	local var11 = escapeRichText(p3.content)
+	local var12 = escapeRichText(p3.content)
 	
 	return {
 		displayStyle = "system",
-		content = if p3.icon ~= nil then var11 else `{formatInlineIcon(p3.icon, getSystemIconAttributes(p3.systemTextSize))} {var11}`,
+		content = if p3.icon ~= nil then var12 else `{formatInlineIcon(p3.icon, getSystemIconAttributes(p3.systemTextSize))} {var12}`,
 		skeletonWidth = p3.skeletonWidth or "none"
 	}
 end
 
-local function buildReplyHeader(p4, p5, p6) --[[ line: 138 ]]
+local function buildReplyHeader(p4, p5, p6) --[[ line: 146 ]]
 	-- upvalues: makeSystemRow (ref), getReplyLabelDescriptorModule (ref), iconName (ref)
-	local var18
+	local var19
 	local localize = p6.localize
 	local systemTextSize = p6.systemTextSize
 	local localUserId = p5.localUserId
-	local var12 = localUserId ~= nil and p4.senderUserId == localUserId
-	local var13 = localUserId ~= nil and p4.repliedToUserId == localUserId
-	local var14 = p4.senderUserId == p4.repliedToUserId
+	local var13 = localUserId ~= nil and p4.senderUserId == localUserId
+	local var14 = localUserId ~= nil and p4.repliedToUserId == localUserId
+	local var15 = p4.senderUserId == p4.repliedToUserId
 	local namesByUserId = p5.namesByUserId or {}
 	local senderUserId = namesByUserId[p4.senderUserId] or {}
 	local repliedToUserId = namesByUserId[p4.repliedToUserId] or {}
 	
 	if if senderUserId.name ~= nil then senderUserId.name == "" else true then
-		var18 = not var12
+		var19 = not var13
 		
-		if not var18 then
-			var18 = if repliedToUserId.name ~= nil then repliedToUserId.name == "" else true
-			var18 = var18 and not var13
+		if not var19 then
+			var19 = if repliedToUserId.name ~= nil then repliedToUserId.name == "" else true
+			var19 = var19 and not var14
 		end
-		return if var18 then makeSystemRow({ content = "", skeletonWidth = "full" }) else makeSystemRow({
+		return if var19 then makeSystemRow({ content = "", skeletonWidth = "full" }) else makeSystemRow({
 			content = if localize then localize(getReplyLabelDescriptorModule({
-				senderIsLocalUser = var12,
-				senderRepliedToSelf = var14,
-				senderRepliedToLocalUser = var13,
+				senderIsLocalUser = var13,
+				senderRepliedToSelf = var15,
+				senderRepliedToLocalUser = var14,
 				isGroup = p5.isGroup == true,
 				senderName = senderUserId.name or "",
 				repliedToName = repliedToUserId.name or ""
@@ -84,7 +87,7 @@ local function buildReplyHeader(p4, p5, p6) --[[ line: 138 ]]
 	end
 end
 
-local function buildHiddenUser(p7, p8) --[[ line: 179 ]]
+local function buildHiddenUser(p7, p8) --[[ line: 187 ]]
 	-- upvalues: makeSystemRow (ref), iconName (ref)
 	if if p7.name ~= nil then p7.name == "" else true then
 		return makeSystemRow({ content = "", skeletonWidth = "full" })
@@ -101,16 +104,16 @@ local function buildHiddenUser(p7, p8) --[[ line: 179 ]]
 	})
 end
 
-local function buildUserText(p9, p10) --[[ line: 194 ]]
-	-- upvalues: escapeRichText (ref), computeNameColor (ref), color (ref)
-	local var19 = if p9.moderated then string.gsub(p9.body, "[^%s]", "#") else escapeRichText(p9.body)
+local function buildUserText(p9, p10) --[[ line: 202 ]]
+	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), escapeRichText (ref), computeNameColor (ref), color (ref)
+	local var20 = if not p9.moderated then if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p9.messageId or p9.body) else string.gsub(p9.body, "[^%s]", "#") else escapeRichText(p9.body)
 	local name = p10.name
 	
 	if name == nil or name == "" then
 		return {
 			skeletonWidth = "prefix",
 			displayStyle = "user",
-			content = `: {var19}`
+			content = `: {var20}`
 		}
 	end
 	local username = p10.username
@@ -118,11 +121,11 @@ local function buildUserText(p9, p10) --[[ line: 194 ]]
 	return {
 		skeletonWidth = "none",
 		displayStyle = "user",
-		content = string.format("<font color=\"#%s\">%s</font>: %s", (if username == nil or username == "" then color else computeNameColor(username)):ToHex(), escapeRichText(name), var19)
+		content = string.format("<font color=\"#%s\">%s</font>: %s", (if username == nil or username == "" then color else computeNameColor(username)):ToHex(), escapeRichText(name), var20)
 	}
 end
 
-return function(p11, p12, p13) --[[ line: 227 | named "buildRowDisplay" ]]
+return function(p11, p12, p13) --[[ line: 235 | named "buildRowDisplay" ]]
 	-- upvalues: iconName (ref), makeSystemRow (ref), buildHiddenUser (ref), buildReplyHeader (ref), buildUserText (ref)
 	local localize = p13.localize
 	local systemTextSize = p13.systemTextSize

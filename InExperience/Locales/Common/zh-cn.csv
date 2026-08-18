@@ -2542,6 +2542,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,昵称不可用
 Feature.DisplayName.ErrorMessage.NameTooLong,昵称应不超过20个字符
 Feature.DisplayName.ErrorMessage.NameTooShort,昵称应至少包含 3 个字符
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,昵称包含不受支持的字符
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} 天
 Feature.Durables.BottomBar.RentalDurationPlural, {num} 天
 Feature.Durables.FTUX.Tooltip,选择你想拥有该道具的天数。购买后开始计时。
@@ -2552,6 +2553,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,选项
 Feature.Durables.Label.ItemExpires,道具到期
+Feature.Durables.PartiallyExpiredItems.BodyText,此已保存虚拟形象中的部分道具已过期且已被移除。
+Feature.Durables.PartiallyExpiredItems.TitleText,道具已过期
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（购买后开始计时）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要举报《欧盟数字服务法》定义的非法内容，请访问 https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,无网络连接
@@ -3030,6 +3033,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,开启好友探索
 Feature.Moments.Action.AddMusic,添加音乐
 Feature.Moments.Action.AddSticker,添加贴纸
 Feature.Moments.Action.AddText,添加文本
+Feature.Moments.Action.AddVoice,添加语音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3112,6 +3116,8 @@ Feature.Moments.Label.TextGeneratedBody,已添加 AI 生成的文本叠加层和
 Feature.Moments.Label.TextGeneratedTitle,已生成文本
 Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
+Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
+Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
@@ -3276,6 +3282,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,个人资料边框
+Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料
 Feature.Profile.Heading.Username,
@@ -3496,6 +3504,7 @@ Feature.Schools.Label.Classmates,同学
 Feature.Screentime.Content.ScreentimeLimitDialog,你已达到每日屏幕时间限制。明天再回来访问 Roblox。
 Feature.SecurityFeedback.Header.NewLogin,新活动提醒
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,在“设置”中允许
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3515,11 +3524,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,聊天翻译语言
 Feature.SettingsHub.Chat.TranslationSetting,聊天自动翻译
 Feature.SettingsHub.Chat.TranslationToggleSetting,查看未翻译的选项
 Feature.SettingsHub.Default.DynamicThumbstick,默认（动态摇杆）
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,我们需要访问你的相机，以便你能扫描二维码。
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,由于你可能违反我们社区准则的行为，{dateTime} 前你已无法使用语音聊天。
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. 选择权限
 2. 选择联系人
 3. 允许 Roblox 访问你的联系人"
 Feature.SettingsHub.Description.ContactsPermissionIOS,要与好友联系，请允许 Roblox 访问你的联系人。
+Feature.SettingsHub.Description.ContactsPermissionRequest,我们需要访问你的联系人，以便你能与好友联系。
 Feature.SettingsHub.Description.PeoplesNames,向游戏中的其他人显示或隐藏你的徽章。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. 选择权限
 2. 选择摄像头
@@ -3596,6 +3607,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,此人在文字聊天使用恶�
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,在此服务器中
+Feature.SettingsHub.Prompt.AllowAccessToCamera,要允许访问相机吗？
+Feature.SettingsHub.Prompt.AllowAccessToContacts,要允许访问联系人吗？
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. 选择权限<br />2. 选择麦克风<br />3. 允许 Roblox 访问你的麦克风</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. 前往设置 > 隐私 > 权限<br />2. 选择麦克风<br />3. 允许 Roblox 访问你的麦克风</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,购买他们穿戴的道具
@@ -3847,6 +3860,7 @@ Feature.Subscription.Text.PerMonth,/月
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,你的虚拟形象已针对{rule}重置。你仍然可以使用商城，但对虚拟形象的更改将不会保存，直到 {time}。
 Feature.Timeout.Prompt.SaveTitleText,保存功能目前已停用
+Feature.Timeout.Prompt.TitleText,我们重置了你的虚拟形象
 Feature.Timeout.WarningBanner.DisabledMessage,虚拟形象保存已停用
 Feature.Timeout.WarningBanner.DisabledUntilMessage,虚拟形象保存已停用，直到 {time}
 Feature.Toast.Heading.PurchaseMessage.Success,已解锁

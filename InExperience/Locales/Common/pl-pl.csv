@@ -2563,6 +2563,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Nazwa wyświetlana jest niedos
 Feature.DisplayName.ErrorMessage.NameTooLong,Nazwa wyświetlana powinna zawierać maksymalnie 20 znaków
 Feature.DisplayName.ErrorMessage.NameTooShort,Nazwa wyświetlana powinna zawierać co najmniej 3 znaki
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Nazwa wyświetlana zawiera nieobsługiwane znaki
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Na {num} dzień
 Feature.Durables.BottomBar.RentalDurationPlural,Na {num} dni
 Feature.Durables.FTUX.Tooltip,"Wybierz, przez ile dni chcesz posiadać ten przedmiot. Licznik czasu uruchamia się po zakupie."
@@ -2573,6 +2574,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} dzień
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} dni
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opcje
 Feature.Durables.Label.ItemExpires,Termin wygaśnięcia
+Feature.Durables.PartiallyExpiredItems.BodyText,Niektóre elementy tego zapisanego awatara wygasły i zostały usunięte.
+Feature.Durables.PartiallyExpiredItems.TitleText,Przedmioty wygasły
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} dni (licznik czasu uruchamia się po zakupie)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Brak połączenia z Internetem
@@ -3052,6 +3055,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Włącz wyszukiwan
 Feature.Moments.Action.AddMusic,Dodaj muzykę
 Feature.Moments.Action.AddSticker,Dodaj naklejkę
 Feature.Moments.Action.AddText,Dodaj tekst
+Feature.Moments.Action.AddVoice,Dodaj głos
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3134,6 +3138,7 @@ Feature.Moments.Label.TextGeneratedBody,Dodano tekstową nakładkę i opis wygen
 Feature.Moments.Label.TextGeneratedTitle,Wygenerowano tekst
 Feature.Moments.Label.TextGenerationFailedBody,Nie udało się wygenerować tekstu. Spróbuj ponownie.
 Feature.Moments.Label.TextGenerationFailedTitle,Nie udało się wygenerować
+Feature.Moments.Label.TextGenerationFilteredTitle,Generowanie przefiltrowane
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
@@ -3299,6 +3304,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edycja nazwy
 Feature.Profile.Heading.EditDisplayName,Edytuj nazwę wyświetlaną
 Feature.Profile.Heading.InsufficientFunds,Za mało środków
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Ramka profilu
+Feature.Profile.Heading.ProfilePictureSaved,Zdjęcie profilowe zostało zapisane
 Feature.Profile.Heading.ProfileQRCode,Udostępnianie kodu QR
 Feature.Profile.Heading.Statistics,Statystyki
 Feature.Profile.Heading.Username,
@@ -3519,6 +3526,7 @@ Feature.Schools.Label.Classmates,Koledzy z klasy
 Feature.Screentime.Content.ScreentimeLimitDialog,"Twój limit dzienny czasu przy ekranie został przekroczony. Wróć jutro, aby znów korzystać z platformy Roblox."
 Feature.SecurityFeedback.Header.NewLogin,Alert o nowej aktywności
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,Zezwól w Ustawieniach
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3538,11 +3546,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,Język tłumaczenia czatu
 Feature.SettingsHub.Chat.TranslationSetting,Automatyczne tłumaczenie czatu
 Feature.SettingsHub.Chat.TranslationToggleSetting,Opcja umożliwiająca przeczytanie nieprzetłumaczonej wiadomości
 Feature.SettingsHub.Default.DynamicThumbstick,Domyślne (drążek dynamiczny)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,"Potrzebujemy dostępu do Twojego aparatu, aby umożliwić Ci zeskanowanie kodu QR."
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,"Ze względu na zachowanie, które może stanowić naruszenie naszych Standardów Społeczności, twój dostęp do czatu głosowego będzie wyłączony do {dateTime}."
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Wybierz Uprawnienia
 2. Wybierz Kontakty
 3. Zezwól aplikacji Roblox na dostęp do kontaktów"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Aby móc kontaktować się ze znajomymi, zezwól aplikacji Roblox na dostęp do kontaktów."
+Feature.SettingsHub.Description.ContactsPermissionRequest,"Potrzebujemy dostępu do Twoich kontaktów, aby umożliwić Ci nawiązanie kontaktu ze znajomymi."
 Feature.SettingsHub.Description.PeoplesNames,Pokaż lub ukryj swoje odznaki przed innymi osobami w grach.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Wybierz Uprawnienia
 2. Wybierz Aparat
@@ -3619,6 +3629,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Ta osoba napisała nieodpowiedni
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Ta osoba głośno krzyczała
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,Na tym serwerze
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Zezwolić na dostęp do aparatu?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Zezwolić na dostęp do kontaktów?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Wybierz Uprawnienia<br />2. Wybierz mikrofon<br />3. Zezwalaj aplikacji Roblox na dostęp do mikrofonu</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. Wybierz kolejno Ustawienia > Prywatność > Uprawnienia<br />2. Wybierz Mikrofon<br />3. Zezwalaj aplikacji Roblox na dostęp do mikrofonu</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,"Kup to, co mają na sobie"
@@ -3870,6 +3882,7 @@ Feature.Subscription.Text.PerMonth,/miesiąc
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Twój awatar został zresetowany z powodu {rule}. Nadal możesz korzystać z Rynku, ale zmiany w awatarze nie zostaną zapisane do {time}."
 Feature.Timeout.Prompt.SaveTitleText,Zapisywanie jest obecnie wyłączone
+Feature.Timeout.Prompt.TitleText,Zresetowaliśmy Twojego awatara
 Feature.Timeout.WarningBanner.DisabledMessage,Zapisywanie awatara zostało wyłączone
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Zapisywanie awatara zostało wyłączone do {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Odblokowano

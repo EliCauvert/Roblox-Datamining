@@ -2561,6 +2561,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Nama display tidak tersedia
 Feature.DisplayName.ErrorMessage.NameTooLong,Nama display harus terdiri dari maksimal 20 karakter
 Feature.DisplayName.ErrorMessage.NameTooShort,Nama display harus terdiri dari minimum 3 karakter
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Nama display mengandung karakter yang tidak didukung
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Selama {num} hari
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,Pilih berapa hari kamu ingin memiliki item tersebut. Timer dimulai setelah pembelian.
@@ -2571,6 +2572,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} hari
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opsi
 Feature.Durables.Label.ItemExpires,Item kedaluwarsa
+Feature.Durables.PartiallyExpiredItems.BodyText,Beberapa item dalam avatar yang tersimpan ini kedaluwarsa dan telah dihapus.
+Feature.Durables.PartiallyExpiredItems.TitleText,
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} hari (Dimulai setelah pembelian)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Tidak ada koneksi internet
@@ -3050,6 +3053,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Aktifkan penemuan 
 Feature.Moments.Action.AddMusic,Tambahkan Musik
 Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
+Feature.Moments.Action.AddVoice,Tambahkan Suara
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3132,6 +3136,7 @@ Feature.Moments.Label.TextGeneratedBody,Overlay teks dan deskripsi buatan AI dit
 Feature.Moments.Label.TextGeneratedTitle,Teks Berhasil Dibuat
 Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba lagi.
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
+Feature.Moments.Label.TextGenerationFilteredTitle,Pembuatan Difilter
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
@@ -3297,6 +3302,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Nama
 Feature.Profile.Heading.EditDisplayName,Edit Nama Display
 Feature.Profile.Heading.InsufficientFunds,Dana Tidak Cukup
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Bingkai profil
+Feature.Profile.Heading.ProfilePictureSaved,Foto profil berhasil disimpan
 Feature.Profile.Heading.ProfileQRCode,Bagikan Kode QR
 Feature.Profile.Heading.Statistics,Statistik
 Feature.Profile.Heading.Username,
@@ -3517,6 +3524,7 @@ Feature.Schools.Label.Classmates,Teman sekelas
 Feature.Screentime.Content.ScreentimeLimitDialog,Kamu telah mencapai batas durasi layar harian. Coba lagi besok untuk mengakses Roblox.
 Feature.SecurityFeedback.Header.NewLogin,Peringatan Aktivitas Baru
 Feature.Settings.Label.Error,
+Feature.SettingsHub.Action.AllowInSettings,Izinkan di Pengaturan
 Feature.SettingsHub.Action.Block,
 Feature.SettingsHub.Action.Cancel,
 Feature.SettingsHub.Action.CancelSearch,
@@ -3536,11 +3544,13 @@ Feature.SettingsHub.Chat.ChatLanguageSelectionLabel,Bahasa Terjemahan Chat
 Feature.SettingsHub.Chat.TranslationSetting,Terjemahan Chat Otomatis
 Feature.SettingsHub.Chat.TranslationToggleSetting,Opsi untuk melihat Pesan yang Tidak Diterjemahkan
 Feature.SettingsHub.Default.DynamicThumbstick,Default (Thumbstick Dinamis)
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Kami memerlukan akses ke kameramu agar kamu dapat men-scan kode QR.
 Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,Akses kamu ke chat dengan suara telah dinonaktifkan hingga {dateTime} karena tindakan yang mungkin melanggar Standar Komunitas kami.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Pilih Izin
 2. Pilih Kontak
 3. Izinkan Roblox mengakses Kontakmu"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Untuk terhubung dengan teman, izinkan Roblox mengakses kontakmu."
+Feature.SettingsHub.Description.ContactsPermissionRequest,Kami memerlukan akses ke kontakmu agar kamu dapat terhubung dengan teman.
 Feature.SettingsHub.Description.PeoplesNames,Tampilkan atau sembunyikan lencanamu dari pengguna lain di game.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Pilih Izin
 2. Pilih Kamera
@@ -3617,6 +3627,8 @@ Feature.SettingsHub.MethodOfAbuse.Text.Subtitle,Pengguna ini mengetik kata kasar
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Subtitle,Pengguna ini berteriak sangat keras
 Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title,
 Feature.SettingsHub.PageTitle.InThisServer,Di server ini
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Izinkan akses ke kamera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Izinkan akses ke kontak?
 Feature.SettingsHub.Prompt.AndroidWithDeeplink,<b>1. Pilih Izin<br />2. Pilih Mikrofon<br />3. Izinkan Roblox mengakses Mikrofon Anda</b>
 Feature.SettingsHub.Prompt.AndroidWithoutDeeplink,<b>1. Buka Pengaturan > Privasi > Izin<br />2. Pilih Mikrofon<br />3. Izinkan Roblox mengakses Mikrofon Anda</b>
 Feature.SettingsHub.Prompt.BuyWhatTheyreWearing,Beli pakaian mereka
@@ -3868,6 +3880,7 @@ Feature.Subscription.Text.PerMonth,/bulan
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Avatarmu telah direset karena {rule}. Kamu masih bisa menggunakan Marketplace, tetapi perubahan pada avatarmu tidak akan tersimpan hingga {time}."
 Feature.Timeout.Prompt.SaveTitleText,Fitur menyimpan dinonaktifkan untuk saat ini
+Feature.Timeout.Prompt.TitleText,Kami mereset avatarmu
 Feature.Timeout.WarningBanner.DisabledMessage,Penyimpanan avatar dinonaktifkan
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Penyimpanan avatar dinonaktifkan hingga {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Terbuka

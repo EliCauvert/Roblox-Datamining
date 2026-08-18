@@ -1,44 +1,50 @@
 ﻿local collectionService = game:GetService("CollectionService")
-local _ = require(script:FindFirstAncestor("SponsoredAdViewability").Parent.DiscoveryTypes)
+local sharedFlagsModule = require(script:FindFirstAncestor("SponsoredAdViewability").Parent.SharedFlags)
 local constantsModule = require(script.Parent.Constants)
+local _ = require(script.Parent.sponsoredAdViewabilityTypes)
+local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
 local t = {}
-local var3 = 0
+local var4 = 0
 
 return {
 	bind = function(p0, p1) --[[ line: 23 ]]
-		-- upvalues: var3 (write), t (ref), constantsModule (ref), collectionService (ref)
-		var3 += 1
-		local var4 = tostring(var3)
-		t[var4] = p1
-		p0:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, var4)
+		-- upvalues: fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), var4 (write), t (ref), constantsModule (ref), collectionService (ref)
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
+			assert(if p1.mediaType ~= "image" then p1.mediaType == "video" else true, "ad media type must be image or video")
+			assert(p1.mediaType == "video" == (p1.videoPlaybackStateRef ~= nil), "video metadata must include playback state and image metadata must not")
+		end
+		var4 += 1
+		local var5 = tostring(var4)
+		t[var5] = p1
+		p0:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, var5)
 		collectionService:AddTag(p0, constantsModule.CandidateTag)
 		
-		return function() --[[ line: 30 ]]
-			-- upvalues: p0 (ref), constantsModule (copy), var4 (ref), collectionService (copy), t (copy)
-			if p0:GetAttribute(constantsModule.ViewabilityTargetIdAttribute) == var4 then
+		return function() --[[ line: 37 ]]
+			-- upvalues: p0 (ref), constantsModule (copy), var5 (ref), collectionService (copy), t (copy)
+			if p0:GetAttribute(constantsModule.ViewabilityTargetIdAttribute) == var5 then
 				collectionService:RemoveTag(p0, constantsModule.CandidateTag)
 				p0:SetAttribute(constantsModule.ViewabilityTargetIdAttribute, nil)
 			end
-			t[var4] = nil
+			t[var5] = nil
 		end
 	end,
-	get = function(p2) --[[ line: 40 ]]
+	get = function(p2) --[[ line: 47 ]]
 		-- upvalues: t (ref)
 		return t[p2]
 	end,
-	_clear = function() --[[ line: 44 ]]
+	_clear = function() --[[ line: 51 ]]
 		-- upvalues: t (ref)
 		for i in t do
 			t[i] = nil
 		end
 	end,
-	_size = function() --[[ line: 50 ]]
+	_size = function() --[[ line: 57 ]]
 		-- upvalues: t (ref)
-		local var5 = 0
+		local var6 = 0
 		
 		for i in t do
-			var5 += 1
+			var6 += 1
 		end
-		return var5
+		return var6
 	end
 }

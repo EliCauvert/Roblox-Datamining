@@ -19,6 +19,7 @@ local textOverlay = momentsCommonModule.Components.TextOverlay
 local textOverlayDisplay = momentsCommonModule.Components.TextOverlayDisplay
 local getScale = momentsCommonModule.Utils.getScale
 local getFFlagMomentsStickerButton = momentsCommonModule.Flags.GetFFlagMomentsStickerButton
+local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
 local _ = require(parent.MomentsTypes)
@@ -28,8 +29,8 @@ local makeTextOverlayEditsForEditorModule = require(momentsCreation.Utils.makeTe
 local getFFlagMomentsTextOverlayClampToBoundsModule = require(momentsCreation.Flags.GetFFlagMomentsTextOverlayClampToBounds)
 local getFFlagMomentsCreationTextOverlayResolutionScaleModule = require(momentsCreation.Flags.GetFFlagMomentsCreationTextOverlayResolutionScale)
 
-return function(p0) --[[ line: 77 | named "TextOverlayLayer" ]]
-	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref)
+return function(p0) --[[ line: 78 | named "TextOverlayLayer" ]]
+	-- upvalues: useSignalState (ref), getFFlagMomentsCreationTextOverlayResolutionScaleModule (ref), getScale (ref), useMemo (ref), signalsModule (ref), creationFlowStateModule (ref), useRef (ref), useBinding (ref), useOnScreenKeyboardHeightModule (ref), useCallback (ref), getFFlagMomentsStickerButton (ref), dashModule (ref), getFFlagEnableMomentTextGeneration (ref), useEffect (ref), makeTextOverlayEditsForEditorModule (ref), makeDefaultTextOverlayEditModule (ref), textService (ref), reactModule (ref), view (ref), foundationModule (ref), textOverlay (ref), overlayDisplay (ref), getFFlagMomentsTextOverlayClampToBoundsModule (ref), textOverlayDisplay (ref)
 	local controller = p0.controller
 	local var14 = useSignalState(controller.getStep)
 	local var15 = useSignalState(p0.ctx.getItemSize)
@@ -37,9 +38,9 @@ return function(p0) --[[ line: 77 | named "TextOverlayLayer" ]]
 	local textOverlays = useSignalState(controller.getComposedEdits).textOverlays
 	local var17 = getFFlagMomentsCreationTextOverlayResolutionScaleModule()
 	local var18 = if var17 then getScale(var15, var16, Enum.ScaleType.Crop) else 1
-	local var19 = useSignalState(useMemo(function() --[[ line: 94 ]]
+	local var19 = useSignalState(useMemo(function() --[[ line: 95 ]]
 		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 95 ]]
+		return signalsModule.createComputed(function(p1) --[[ line: 96 ]]
 			-- upvalues: controller (copy)
 			local activeSession = controller.getActiveSession(p1)
 			
@@ -51,13 +52,13 @@ return function(p0) --[[ line: 77 | named "TextOverlayLayer" ]]
 	local var22 = useRef(nil)
 	local var23, var24 = useBinding(UDim2.fromOffset(0, 0))
 	local var25 = useOnScreenKeyboardHeightModule()
-	local var26 = useCallback(function() --[[ line: 109 ]]
+	local var26 = useCallback(function() --[[ line: 110 ]]
 		-- upvalues: var22 (ref)
 		if var22.current then
 			var22.current:CaptureFocus()
 		end
 	end, {})
-	local var27 = useCallback(function(p2) --[[ line: 115 ]]
+	local var27 = useCallback(function(p2) --[[ line: 116 ]]
 		-- upvalues: controller (ref), getFFlagMomentsStickerButton (copy), dashModule (copy)
 		local activeSession = controller.getActiveSession(false)
 		
@@ -79,15 +80,20 @@ return function(p0) --[[ line: 77 | named "TextOverlayLayer" ]]
 		end
 		activeSession.update({ dashModule.joinDeep(var35, { text = p2.Text }) })
 	end, { controller })
-	local var28 = useCallback(function() --[[ line: 142 ]]
-		-- upvalues: controller (ref)
+	local var28 = useCallback(function() --[[ line: 143 ]]
+		-- upvalues: getFFlagEnableMomentTextGeneration (copy), controller (ref)
+		if getFFlagEnableMomentTextGeneration() and controller.getIsGenerating(false) then
+			controller.onDisabledToolActivated("text")
+			
+			return
+		end
 		controller.beginTool("text")
 	end, { controller })
-	local var29 = useCallback(function(p3) --[[ line: 146 ]]
+	local var29 = useCallback(function(p3) --[[ line: 156 ]]
 		-- upvalues: controller (ref)
 		controller.updateCommittedEdit("text", p3)
 	end, { controller })
-	useEffect(function() --[[ line: 152 ]]
+	useEffect(function() --[[ line: 162 ]]
 		-- upvalues: var20 (ref), controller (ref), makeTextOverlayEditsForEditorModule (copy), textOverlays (ref), makeDefaultTextOverlayEditModule (copy), var18 (ref)
 		if not var20 then return end
 		local activeSession = controller.getActiveSession(false)
@@ -98,7 +104,7 @@ return function(p0) --[[ line: 77 | named "TextOverlayLayer" ]]
 		activeSession.update(makeTextOverlayEditsForEditorModule(textOverlays, makeDefaultTextOverlayEditModule(), var18))
 	end, { var20, textOverlays, controller, var18 })
 	local var30 = useRef(false)
-	useEffect(function() --[[ line: 168 ]]
+	useEffect(function() --[[ line: 178 ]]
 		-- upvalues: var20 (ref), var30 (ref), var22 (ref), var21 (ref), var26 (ref)
 		if var20 then
 			if var30.current or var22.current == nil or var21 == nil then
@@ -116,7 +122,7 @@ return function(p0) --[[ line: 77 | named "TextOverlayLayer" ]]
 			end
 		end
 	end, { var20, var21, var26 })
-	useEffect(function() --[[ line: 183 ]]
+	useEffect(function() --[[ line: 193 ]]
 		-- upvalues: var20 (ref), var21 (ref), var25 (ref), var24 (ref), textService (copy), var15 (ref)
 		if not var20 or var21 == nil then return end
 		if var25 == 0 then

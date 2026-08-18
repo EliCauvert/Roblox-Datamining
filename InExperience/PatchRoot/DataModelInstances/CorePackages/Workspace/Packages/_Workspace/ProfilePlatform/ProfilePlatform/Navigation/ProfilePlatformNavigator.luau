@@ -21,10 +21,12 @@ local momentsGridPageModule = require(profilePlatform.Components.Moments.Moments
 local momentsFeedPageModule = require(profilePlatform.Components.Moments.MomentsFeedPage)
 local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
+local reactModule = require(parent.React)
 local roactNavigationModule = require(parent.RoactNavigation)
 local fFlagAddVideoToCommunityProfile = require(parent.SharedFlags).FFlagAddVideoToCommunityProfile
 local fFlagEditProfileBackgroundEnabled = require(parent.SharedFlags).FFlagEditProfileBackgroundEnabled
 local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
+local fFlagEditProfileImageV2Enabled2 = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled2
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
 local t = {
 	overlayEnabled = true,
@@ -37,12 +39,17 @@ local t_1 = {
 	renderUnderlyingPage = true
 }
 
-local function _(p0) --[[ line: 52 | named "makeFullBleedNavigationOptions" ]]
+local function _(p0) --[[ line: 54 | named "makeFullBleedNavigationOptions" ]]
 	-- upvalues: t_1 (ref)
-	return function(p1) --[[ line: 53 ]]
+	return function(p1) --[[ line: 55 ]]
 		-- upvalues: t_1 (copy), p0 (ref)
 		return if p1.navigation.getParam("fullBleed") then t_1 else p0
 	end
+end
+
+local function LazyEditProfileImageContainer(p2) --[[ line: 65 ]]
+	-- upvalues: profilePlatform (ref), reactModule (ref)
+	return reactModule.createElement(require(profilePlatform.Components.EditProfileImage.EditProfileImageContainer), p2)
 end
 
 local list = {
@@ -52,9 +59,9 @@ local list = {
 	{
 		[enumsModule.Screens.EditProfilePage] = {
 			screen = editProfileLandingModule,
-			navigationOptions = if fFlagAXEnableProfileTab then function(p2) --[[ line: 53 ]]
+			navigationOptions = if fFlagAXEnableProfileTab then function(p3) --[[ line: 55 ]]
 				-- upvalues: t_1 (ref), t (ref)
-				return if p2.navigation.getParam("fullBleed") then t_1 else t
+				return if p3.navigation.getParam("fullBleed") then t_1 else t
 			end else t
 		}
 	},
@@ -124,18 +131,18 @@ if fFlagAXEnableProfileTab then
 		absorbInput = false
 	}
 	
-	local var28 = function(p3) --[[ line: 53 ]]
+	local var30 = function(p4) --[[ line: 55 ]]
 		-- upvalues: t_1 (ref), t_4 (ref)
-		return if p3.navigation.getParam("fullBleed") then t_1 else t_4
+		return if p4.navigation.getParam("fullBleed") then t_1 else t_4
 	end
 else
-	local var28 = {
+	local var30 = {
 		overlayEnabled = true,
 		overlayTransparency = 0.5,
 		absorbInput = false
 	}
 end
-t_3.navigationOptions = var28
+t_3.navigationOptions = var30
 t_2[editProfileSubScreen] = t_3
 table.insert(list, t_2)
 table.insert(list, {
@@ -149,6 +156,33 @@ table.insert(list, {
 	}
 })
 
+if fFlagEditProfileImageV2Enabled2 then
+	local t_4 = {}
+	local editProfileImageProfilePlatform = enumsModule_1.Screens.EditProfileImageProfilePlatform
+	local t_5 = { screen = LazyEditProfileImageContainer }
+	
+	if fFlagAXEnableProfileTab then
+		local t_6 = {
+			overlayEnabled = true,
+			overlayTransparency = 1,
+			absorbInput = true
+		}
+		
+		local var34 = function(p5) --[[ line: 55 ]]
+			-- upvalues: t_1 (ref), t_6 (ref)
+			return if p5.navigation.getParam("fullBleed") then t_1 else t_6
+		end
+	else
+		local var34 = {
+			overlayEnabled = true,
+			overlayTransparency = 1,
+			absorbInput = true
+		}
+	end
+	t_5.navigationOptions = var34
+	t_4[editProfileImageProfilePlatform] = t_5
+	table.insert(list, t_4)
+end
 if fFlagSocialEnableProfileInspectAndBuy then
 	table.insert(list, {
 		[enumsModule.Screens.InspectAvatarSheet] = {
