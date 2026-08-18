@@ -2563,7 +2563,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Nazwa wyświetlana jest niedos
 Feature.DisplayName.ErrorMessage.NameTooLong,Nazwa wyświetlana powinna zawierać maksymalnie 20 znaków
 Feature.DisplayName.ErrorMessage.NameTooShort,Nazwa wyświetlana powinna zawierać co najmniej 3 znaki
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Nazwa wyświetlana zawiera nieobsługiwane znaki
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Na {num} dzień
 Feature.Durables.BottomBar.RentalDurationPlural,Na {num} dni
 Feature.Durables.FTUX.Tooltip,"Wybierz, przez ile dni chcesz posiadać ten przedmiot. Licznik czasu uruchamia się po zakupie."
@@ -2574,8 +2573,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} dzień
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} dni
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opcje
 Feature.Durables.Label.ItemExpires,Termin wygaśnięcia
-Feature.Durables.PartiallyExpiredItems.BodyText,Niektóre elementy tego zapisanego awatara wygasły i zostały usunięte.
-Feature.Durables.PartiallyExpiredItems.TitleText,Przedmioty wygasły
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} dni (licznik czasu uruchamia się po zakupie)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Brak połączenia z Internetem
@@ -2846,6 +2843,7 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,Liczba wybranych znajomych: {
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,Liczba wybranych znajomych: {selectedCount}
 Feature.FriendsMenu.Label.SelectedFriendsCount,Wybrano {numerator}/{denominator} znajomych
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Wybrano {selectedCount} znajomych
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Nie interesuje mnie
 Feature.GameDetails.Action.Report,
@@ -3304,8 +3302,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edycja nazwy
 Feature.Profile.Heading.EditDisplayName,Edytuj nazwę wyświetlaną
 Feature.Profile.Heading.InsufficientFunds,Za mało środków
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Ramka profilu
-Feature.Profile.Heading.ProfilePictureSaved,Zdjęcie profilowe zostało zapisane
 Feature.Profile.Heading.ProfileQRCode,Udostępnianie kodu QR
 Feature.Profile.Heading.Statistics,Statystyki
 Feature.Profile.Heading.Username,
@@ -3882,7 +3878,6 @@ Feature.Subscription.Text.PerMonth,/miesiąc
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Twój awatar został zresetowany z powodu {rule}. Nadal możesz korzystać z Rynku, ale zmiany w awatarze nie zostaną zapisane do {time}."
 Feature.Timeout.Prompt.SaveTitleText,Zapisywanie jest obecnie wyłączone
-Feature.Timeout.Prompt.TitleText,Zresetowaliśmy Twojego awatara
 Feature.Timeout.WarningBanner.DisabledMessage,Zapisywanie awatara zostało wyłączone
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Zapisywanie awatara zostało wyłączone do {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Odblokowano

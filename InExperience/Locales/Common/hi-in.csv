@@ -2544,7 +2544,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,डिसप्ले ना�
 Feature.DisplayName.ErrorMessage.NameTooLong,डिसप्ले नाम में ज़्यादा-से-ज़्यादा 20 कैरेक्टर होने चाहिए
 Feature.DisplayName.ErrorMessage.NameTooShort,डिसप्ले नाम में कम-से-कम 3 कैरेक्टर होने चाहिए
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,डिसप्ले नाम में सपोर्ट न करने वाले कैरेक्टर हैं
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} दिन के लिए
 Feature.Durables.BottomBar.RentalDurationPlural,{num} दिनों के लिए
 Feature.Durables.FTUX.Tooltip,चुनें कि आपको कितने दिनों तक आइटम का मालिक बनना है. खरीदने के बाद टाइमर शुरू होता है.
@@ -2555,8 +2554,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} दिन
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,विकल्प
 Feature.Durables.Label.ItemExpires,आइटम की समयसीमा खत्म हो रही है
-Feature.Durables.PartiallyExpiredItems.BodyText,सेव किए गए इस अवतार में कुछ आइटम की समय-सीमा खत्म हो गई है और उन्हें हटा दिया गया है.
-Feature.Durables.PartiallyExpiredItems.TitleText,आइटम की समय-सीमा खत्म हो गई है
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} दिन (खरीदारी के बाद शुरू)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"EU डिजिटल सर्विसेज़ ऐक्ट के तहत गैर-कानूनी कॉन्टेंट की रिपोर्ट करने के लिए, यहाँ जाएँ : https://www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,इंटरनेट कनेक्शन नहीं है
@@ -2827,6 +2824,7 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} क
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} कनेक्शंस चुने गए
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} फ़्रेंड्स चुने गए
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} फ़्रेंड्स चुने गए
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,दिलचस्पी नहीं है
 Feature.GameDetails.Action.Report,
@@ -3286,8 +3284,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करे�
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
 Feature.Profile.Heading.InsufficientFunds,फ़ंड काफ़ी नहीं हैं
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,प्रोफ़ाइल फ़्रेम
-Feature.Profile.Heading.ProfilePictureSaved,प्रोफ़ाइल फ़ोटो सेव हो गई
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,आँकड़े
 Feature.Profile.Heading.Username,
@@ -3865,7 +3861,6 @@ Feature.Subscription.Text.PerMonth,/महीना
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"{rule} के लिए आपका अवतार रीसेट कर दिया गया था. अभी भी मार्केटप्लेस का इस्तेमाल किया जा सकता है, लेकिन आपके अवतार में किए गए बदलाव {time} तक सेव नहीं होंगे."
 Feature.Timeout.Prompt.SaveTitleText,सेव करने की सुविधा अभी बंद है
-Feature.Timeout.Prompt.TitleText,हमने आपका अवतार रीसेट कर दिया है
 Feature.Timeout.WarningBanner.DisabledMessage,अवतार सेव करने की सुविधा बंद है
 Feature.Timeout.WarningBanner.DisabledUntilMessage,अवतार सेव करने की सुविधा {time} तक बंद है
 Feature.Toast.Heading.PurchaseMessage.Success,अनलॉक हो गया है

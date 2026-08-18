@@ -29,7 +29,7 @@ local t = {
 
 return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 	-- upvalues: getFIntMomentsTTSMaxCharactersModule (ref), useDescriptionKeyboardInsetModule (ref), useState (ref), reactModule (ref), useSignalState (ref), useEffect (ref), signalsModule (ref), dialogTypeModule (ref), t (ref), useCallback (ref), var9 (ref), computeVoiceButtonStateModule (ref)
-	local var48
+	local var49
 	local controller = p1.controller
 	local var11 = getFIntMomentsTTSMaxCharactersModule()
 	local playback = controller.preview.playback
@@ -132,12 +132,12 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 	useEffect(function() --[[ line: 179 ]]
 		-- upvalues: var29 (ref), playback (ref), ttsAudio (ref)
 		if var29 <= 0 then return end
-		local var51 = 0 + var29
+		local var52 = 0 + var29
 		
 		if playback.getIsPlaying(false) then
 			local position = playback.getPosition(false)
 			
-			if position >= 0 and position < var51 then
+			if position >= 0 and position < var52 then
 				ttsAudio.play()
 				
 				return
@@ -151,15 +151,15 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 		if var29 <= 0 then
 			return
 		end
-		local var53 = 0 + var29
+		local var54 = 0 + var29
 		
 		return signalsModule.createEffect(function(p4) --[[ line: 205 ]]
-			-- upvalues: playback (copy), var26 (copy), var53 (ref), ttsAudio (copy)
+			-- upvalues: playback (copy), var26 (copy), var54 (ref), ttsAudio (copy)
 			local position = playback.getPosition(p4)
 			local current = var26.current
 			var26.current = position
 			
-			if current - position > 0.5 and playback.getIsPlaying(false) and (position >= 0 and position < var53) then
+			if current - position > 0.5 and playback.getIsPlaying(false) and (position >= 0 and position < var54) then
 				ttsAudio.seek(position - 0)
 				ttsAudio.play()
 			end
@@ -174,18 +174,18 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 	end, { var29 })
 	local var37 = useCallback(function(p6) --[[ line: 231 ]]
 		-- upvalues: var15 (ref), controller (ref), var9 (copy)
-		local var55 = p6.Text:gsub("[\r\n]+", " ")
+		local var56 = p6.Text:gsub("[\r\n]+", " ")
 		
-		if var55 ~= p6.Text then
-			p6.Text = var55
+		if var56 ~= p6.Text then
+			p6.Text = var56
 		end
-		var15(var55)
+		var15(var56)
 		local activeSession = controller.getActiveSession(false)
 		
 		if activeSession == nil then
 			return
 		end
-		activeSession.update(if var55 ~= "" then nil else { startTime = 0, text = var55, voiceId = var9 })
+		activeSession.update(if var56 ~= "" then nil else { startTime = 0, text = var56, voiceId = var9 })
 	end, { controller })
 	local var38 = computeVoiceButtonStateModule({
 		text = var14,
@@ -217,11 +217,11 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 		if ttsAudio.getState(false) == "loading" then return end
 		if not canGenerate then return end
 		var40.current = true
-		local var57 = var14:gsub("^%s*(.-)%s*$", "%1")
-		var23.current = var57
+		local var58 = var14:gsub("^%s*(.-)%s*$", "%1")
+		var23.current = var58
 		local activeSession = controller.getActiveSession(false)
 		
-		if var57 == "" then
+		if var58 == "" then
 			var40.current = false
 			controller.clearActiveTool()
 			var18(false)
@@ -232,10 +232,10 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 		var20(false)
 		
 		if activeSession ~= nil then
-			activeSession.update({ startTime = 0, text = var57, voiceId = var9 })
+			activeSession.update({ startTime = 0, text = var58, voiceId = var9 })
 		end
 		var24.current = false
-		ttsAudio.generate(var57, var9)
+		ttsAudio.generate(var58, var9)
 	end, { var14, controller, canGenerate })
 	var25.current = var41
 	local var42 = useCallback(function() --[[ line: 328 ]]
@@ -249,20 +249,45 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 		var22(current)
 		controller.commitActiveTool()
 	end, { controller })
-	local var43, var44 = useState(controller.preview.getCapture(false))
-	local var45, var46 = useState(playback.getDuration(false))
-	useEffect(function() --[[ line: 353 ]]
-		-- upvalues: signalsModule (copy), var44 (ref), controller (ref), var46 (ref), playback (ref)
-		return signalsModule.createEffect(function(p7) --[[ line: 354 ]]
-			-- upvalues: var44 (copy), controller (copy), var46 (copy), playback (copy)
-			var44(controller.preview.getCapture(p7))
-			var46(playback.getDuration(p7))
+	local var43 = useCallback(function() --[[ line: 349 ]]
+		-- upvalues: controller (ref), var15 (ref), var16 (ref), var18 (ref), var20 (ref), var23 (ref), var24 (ref), var22 (ref), dialogTypeModule (copy)
+		controller.showModal({
+			modalType = dialogTypeModule.VoiceoverDelete,
+			modalProps = {
+				onConfirm = function() --[[ line: 350 ]]
+					-- upvalues: controller (copy), var15 (copy), var16 (copy), var18 (copy), var20 (copy), var23 (copy), var24 (copy), var22 (copy)
+					controller.dismissModal()
+					var15("")
+					
+					if var16.current then
+						var16.current.Text = ""
+					end
+					var18(false)
+					var20(false)
+					var23.current = ""
+					var24.current = false
+					controller.clearActiveTool()
+					controller.saveActiveTool()
+					var22("")
+				end,
+				onCancel = controller.dismissModal
+			}
+		})
+	end, { controller })
+	local var44, var45 = useState(controller.preview.getCapture(false))
+	local var46, var47 = useState(playback.getDuration(false))
+	useEffect(function() --[[ line: 382 ]]
+		-- upvalues: signalsModule (copy), var45 (ref), controller (ref), var47 (ref), playback (ref)
+		return signalsModule.createEffect(function(p7) --[[ line: 383 ]]
+			-- upvalues: var45 (copy), controller (copy), var47 (copy), playback (copy)
+			var45(controller.preview.getCapture(p7))
+			var47(playback.getDuration(p7))
 		end)
 	end, { controller, playback })
-	local var47 = if isOverLimit then "Exceeds character limit" elseif isModerated then "Your script must follow the safety rules" elseif isGenerating then "Creating your voiceover..." else "Voice trimmed to video length"
+	local var48 = if isOverLimit then "Exceeds character limit" elseif isModerated then "Your script must follow the safety rules" elseif isGenerating then "Creating your voiceover..." else "Voice trimmed to video length"
 	
 	if var27 ~= "ready" then
-		var48 = var27 == "playing" and (var29 > 0 and var45 > 0)
+		var49 = var27 == "playing" and (var29 > 0 and var46 > 0)
 	end
 	return {
 		placeholderText = "Type what you want your voiceover to say. Up to 300 characters.",
@@ -272,24 +297,26 @@ return function(p1) --[[ line: 65 | named "useVoiceEditorViewModel" ]]
 		keyboardInset = var12,
 		onContainerMeasured = var13,
 		playback = playback,
-		capture = var43,
+		capture = var44,
 		onTimelineSeek = var36,
-		showAudioWaveform = var48,
+		showAudioWaveform = var49,
 		audioDuration = var29,
-		videoDuration = var45,
+		videoDuration = var46,
 		waveformSamples = var30,
 		text = var14,
 		textBoxRef = var16,
 		onTextChanged = var37,
 		isGenerating = isGenerating,
 		isInputInvalid = isOverLimit_1,
-		helperText = var47,
+		helperText = var48,
 		charCount = charCount,
 		maxChars = var11,
 		isOverLimit = isOverLimit,
 		showSave = showSave,
 		canGenerate = canGenerate,
 		onSave = var42,
-		onCreateVoiceover = var41
+		onCreateVoiceover = var41,
+		showDelete = var49,
+		onDelete = var43
 	}
 end

@@ -27,8 +27,7 @@ return {
 					currentSquad = var11,
 					currentSquadPersist = var12,
 					currentExperienceInvite = reducersModule.currentExperienceInvite(p0),
-					currentExperienceInviteStatus = reducersModule.currentExperienceInviteStatus(),
-					partialSquads = reducersModule.partialSquads()
+					currentExperienceInviteStatus = reducersModule.currentExperienceInviteStatus()
 				})
 			end,
 			PersistManagers = { currentSquadPersistManager = var13 },

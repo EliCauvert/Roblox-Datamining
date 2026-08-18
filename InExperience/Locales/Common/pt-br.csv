@@ -2563,7 +2563,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,O nome de exibição não est�
 Feature.DisplayName.ErrorMessage.NameTooLong,O nome de exibição deve ter no máximo 20 caracteres
 Feature.DisplayName.ErrorMessage.NameTooShort,
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,O nome de exibição contém caracteres incompatíveis
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Por {num} dia
 Feature.Durables.BottomBar.RentalDurationPlural,Por {num} dias
 Feature.Durables.FTUX.Tooltip,Escolha por quantos dias você quer ter o item. A contagem de tempo começa após a compra.
@@ -2574,8 +2573,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} dia
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} dias
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opções
 Feature.Durables.Label.ItemExpires,O item expira
-Feature.Durables.PartiallyExpiredItems.BodyText,Alguns itens deste avatar salvo expiraram e foram removidos.
-Feature.Durables.PartiallyExpiredItems.TitleText,Itens expirados
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} dias (começa após a compra)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"Para denunciar conteúdo ilegal de acordo com o Regulamento Serviços Digitais da UE, visite: https:// www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,Sem conexão com a internet
@@ -2846,6 +2843,7 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} con
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} conexões selecionadas
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amizades selecionadas
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amizades selecionadas
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Sem interesse
 Feature.GameDetails.Action.Report,
@@ -3303,8 +3301,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nome
 Feature.Profile.Heading.EditDisplayName,Editar nome de exibição
 Feature.Profile.Heading.InsufficientFunds,Saldo insuficiente
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Moldura do perfil
-Feature.Profile.Heading.ProfilePictureSaved,Imagem de perfil salva com sucesso
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estatísticas
 Feature.Profile.Heading.Username,
@@ -3879,7 +3875,6 @@ Feature.Subscription.Text.PerMonth,/mês
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Seu avatar foi redefinido por {rule}. Você ainda pode usar o Mercado, mas as alterações no avatar não serão salvas até {time}."
 Feature.Timeout.Prompt.SaveTitleText,Você não pode salvar no momento
-Feature.Timeout.Prompt.TitleText,Redefinimos seu avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Salvamento de avatar desativado
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Salvamento de avatar desativado até {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Desbloqueado

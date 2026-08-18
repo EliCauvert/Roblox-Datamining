@@ -2544,7 +2544,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Il nome visualizzato non è di
 Feature.DisplayName.ErrorMessage.NameTooLong,Il nome visualizzato deve includere al massimo 20 caratteri.
 Feature.DisplayName.ErrorMessage.NameTooShort,
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Il nome visualizzato contiene caratteri non supportati.
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Per {num} giorno
 Feature.Durables.BottomBar.RentalDurationPlural,Per {num} giorni
 Feature.Durables.FTUX.Tooltip,Scegli per quanti giorni vuoi possedere l'articolo. Il timer si avvia dopo l'acquisto.
@@ -2555,8 +2554,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} giorno
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} giorni
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opzioni
 Feature.Durables.Label.ItemExpires,L'articolo scade
-Feature.Durables.PartiallyExpiredItems.BodyText,Alcuni articoli di questo avatar salvato sono scaduti e sono stati rimossi.
-Feature.Durables.PartiallyExpiredItems.TitleText,Articoli scaduti
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} giorni (inizia dopo l'acquisto)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Nessuna connessione a Internet
@@ -2827,6 +2824,7 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} con
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} contatti selezionati
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amici selezionati
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amici selezionati
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Lascia un feedback
 Feature.GameDetails.Action.NotInterested,Non mi interessa
 Feature.GameDetails.Action.Report,
@@ -3286,8 +3284,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifica nome
 Feature.Profile.Heading.EditDisplayName,Modifica Nome visualizzato
 Feature.Profile.Heading.InsufficientFunds,Fondi Insufficienti
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Cornice del profilo
-Feature.Profile.Heading.ProfilePictureSaved,Immagine del profilo salvata correttamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiche
 Feature.Profile.Heading.Username,Nome Utente
@@ -3864,7 +3860,6 @@ Feature.Subscription.Text.PerMonth,/mese
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,Il tuo avatar è stato ripristinato per il seguente motivo: {rule}. Puoi continuare a utilizzare il Marketplace ma le modifiche al tuo avatar non verranno salvate fino alle ore {time}.
 Feature.Timeout.Prompt.SaveTitleText,Il salvataggio è disabilitato per il momento
-Feature.Timeout.Prompt.TitleText,Abbiamo ripristinato il tuo avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Salvataggio dell'avatar disabilitato
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Salvataggio dell'avatar disabilitato fino alle ore {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Sbloccato

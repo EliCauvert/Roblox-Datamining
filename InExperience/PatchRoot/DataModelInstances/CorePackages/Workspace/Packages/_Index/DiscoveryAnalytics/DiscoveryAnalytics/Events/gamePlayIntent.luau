@@ -13,6 +13,7 @@ local luaAppRemoveNumericalSortIndexSearch = game:DefineFastFlag("LuaAppRemoveNu
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
+local fFlagLuaAppContinueSortInstantPlay = require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local luaAppGamePlayIntentEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGamePlayIntentEventThrottlingHundredthsPercent", 10000)
 local luaAppGamePlayIntentShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGamePlayIntentShadowThrottlingHundredthsPercent", 10000)
@@ -31,6 +32,30 @@ local var11 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	throttlingPercentage = luaAppGamePlayIntentShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
+local var12 = tModule.strictInterface({
+	placeId = tModule.string,
+	rootPlaceId = tModule.number,
+	universeId = tModule.string,
+	referralSource = tModule.optional(tModule.string),
+	sortIndex = tModule.string,
+	sortEntryIndex = tModule.string,
+	gameSetTypeId = tModule.optional(tModule.string),
+	gameSetTargetId = tModule.optional(tModule.number),
+	appliedFilters = tModule.optional(tModule.string),
+	topicDataPosition = tModule.optional(tModule.number),
+	nativeAdData = tModule.optional(tModule.string),
+	pageName = tModule.optional(tModule.string),
+	positionInRow = tModule.optional(tModule.number),
+	rowNumber = tModule.optional(tModule.number),
+	feedRowNumber = tModule.optional(tModule.number),
+	heroUnitId = tModule.optional(tModule.string),
+	loadSource = tModule.optional(tModule.string),
+	launchData = tModule.optional(tModule.string),
+	sortSubId = tModule.optional(tModule.string),
+	tileType = tModule.string,
+	analyticsData = tModule.optional(tModule.table),
+	actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then tModule.optional(tModule.string) else nil
+})
 local t = {
 	PlayButton = tModule.strictInterface({
 		placeId = tModule.union(tModule.string, tModule.number),
@@ -43,30 +68,7 @@ local t = {
 		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil,
 		actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then tModule.optional(tModule.string) else nil
 	}),
-	[constantsModule.Context.ExperienceTile] = tModule.strictInterface({
-		placeId = tModule.string,
-		rootPlaceId = tModule.number,
-		universeId = tModule.string,
-		referralSource = tModule.optional(tModule.string),
-		sortIndex = tModule.string,
-		sortEntryIndex = tModule.string,
-		gameSetTypeId = tModule.optional(tModule.string),
-		gameSetTargetId = tModule.optional(tModule.number),
-		appliedFilters = tModule.optional(tModule.string),
-		topicDataPosition = tModule.optional(tModule.number),
-		nativeAdData = tModule.optional(tModule.string),
-		pageName = tModule.optional(tModule.string),
-		positionInRow = tModule.optional(tModule.number),
-		rowNumber = tModule.optional(tModule.number),
-		feedRowNumber = tModule.optional(tModule.number),
-		heroUnitId = tModule.optional(tModule.string),
-		loadSource = tModule.optional(tModule.string),
-		launchData = tModule.optional(tModule.string),
-		sortSubId = tModule.optional(tModule.string),
-		tileType = tModule.string,
-		analyticsData = tModule.optional(tModule.table),
-		actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then tModule.optional(tModule.string) else nil
-	}),
+	[constantsModule.Context.ExperienceTile] = var12,
 	[constantsModule.Context.SearchExperienceTile] = tModule.strictInterface({
 		placeId = tModule.string,
 		rootPlaceId = tModule.number,
@@ -159,10 +161,11 @@ local t = {
 		universeId = tModule.string,
 		sortEntryIndex = tModule.string,
 		pageName = if fFlagSduiExperienceDetailsSupport then tModule.optional(tModule.string) else nil
-	}) else nil else nil
+	}) else nil else nil,
+	[constantsModule.Context.InstantPlay] = if fFlagLuaAppContinueSortInstantPlay then var12 else nil
 }
 
-local function _(p0) --[[ line: 210 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p0) --[[ line: 214 | named "addMobileAdvertisingIdToEventParams" ]]
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -171,15 +174,15 @@ local function _(p0) --[[ line: 210 | named "addMobileAdvertisingIdToEventParams
 	end
 end
 
-return function(p1, p2, p3) --[[ line: 217 ]]
+return function(p1, p2, p3) --[[ line: 221 ]]
 	-- upvalues: t (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGamePlayIntentEventMobileAdsId (ref), appStorageService (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), cryoModule (ref), telemetryService (ref), var10 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var11 (write)
 	if t[p2] == nil then
 		discoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {p2} to type check gamePlayIntent event parameters`, { eventContext = p2 })
 	else
-		local var14, var15 = t[p2](p3)
+		local var15, var16 = t[p2](p3)
 		
-		if not var14 then
-			discoveryEventErrorLogger.reportError("GamePlayIntentInvalidInterface", var15)
+		if not var15 then
+			discoveryEventErrorLogger.reportError("GamePlayIntentInvalidInterface", var16)
 		end
 	end
 	local analyticsData = p3.analyticsData

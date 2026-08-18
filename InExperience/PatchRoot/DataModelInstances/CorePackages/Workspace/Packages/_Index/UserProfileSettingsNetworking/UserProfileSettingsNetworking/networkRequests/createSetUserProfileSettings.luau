@@ -2,7 +2,7 @@
 
 return function(p0) --[[ line: 12 ]]
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.POST({ Name = "SetUserProfileSettings" }, function(p1, p2) --[[ line: 15 ]]
+	return p0.roduxNetworking.POST("SetUserProfileSettings", function(p1, p2) --[[ line: 15 ]]
 		-- upvalues: API_URLModule (copy)
 		return p1(API_URLModule):path("user-profile-api"):path("v1"):path("user"):path("profiles"):path("settings"):body({
 			userProfileSettings = { isInExperienceNameEnabled = p2.isInExperienceNameEnabled }

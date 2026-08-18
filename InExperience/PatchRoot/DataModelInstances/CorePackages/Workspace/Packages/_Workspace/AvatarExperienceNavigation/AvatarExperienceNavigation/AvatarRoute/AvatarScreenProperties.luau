@@ -17,7 +17,6 @@ local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScr
 local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
 local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagEditProfileImageV2Enabled2 = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled2
 local t = {
 	isTransparent = false,
 	coversSceneWhenExpanded = false,
@@ -382,10 +381,6 @@ if fFlagAXEnableExpiredUserLookCheckout then
 			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	}
-end
-if fFlagEditProfileImageV2Enabled2 then
-	t_1[avatarScreenModule.EditProfileImage] = { isTryOnOutfitResetPage = true }
-	t_1[avatarScreenModule.AppCatalogContextMenuHost] = { isTransparent = true }
 end
 local t_2 = {}
 

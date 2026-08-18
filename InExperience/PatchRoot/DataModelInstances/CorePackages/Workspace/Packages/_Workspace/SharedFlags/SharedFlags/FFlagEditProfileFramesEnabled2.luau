@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("EditProfileFramesEnabled2", false) and (require(script.Parent.FFlagEditProfileImageV2Enabled2) and game:GetEngineFeature("FrameAssetInProfileConfigurationEnabled"))

@@ -7,8 +7,7 @@
 		EditProfileToast = "EditProfileToast",
 		AvatarCatalog = "Catalog",
 		ProfilePictureEditorCamera = "ProfilePictureEditorCamera",
-		ProfilePictureEditorEmotes = "ProfilePictureEditorEmotes",
-		EditProfileImageProfilePlatform = "EditProfileImageProfilePlatform"
+		ProfilePictureEditorEmotes = "ProfilePictureEditorEmotes"
 	},
 	RequestMethods = {
 		GET = "GET",

@@ -2561,7 +2561,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Nama display tidak tersedia
 Feature.DisplayName.ErrorMessage.NameTooLong,Nama display harus terdiri dari maksimal 20 karakter
 Feature.DisplayName.ErrorMessage.NameTooShort,Nama display harus terdiri dari minimum 3 karakter
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Nama display mengandung karakter yang tidak didukung
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Selama {num} hari
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,Pilih berapa hari kamu ingin memiliki item tersebut. Timer dimulai setelah pembelian.
@@ -2572,8 +2571,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} hari
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opsi
 Feature.Durables.Label.ItemExpires,Item kedaluwarsa
-Feature.Durables.PartiallyExpiredItems.BodyText,Beberapa item dalam avatar yang tersimpan ini kedaluwarsa dan telah dihapus.
-Feature.Durables.PartiallyExpiredItems.TitleText,
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} hari (Dimulai setelah pembelian)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Tidak ada koneksi internet
@@ -2844,6 +2841,7 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,{numerator}/{denominator} Kon
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,{selectedCount} Koneksi dipilih
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} teman dipilih
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} teman dipilih
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Berikan masukan
 Feature.GameDetails.Action.NotInterested,Tidak tertarik
 Feature.GameDetails.Action.Report,
@@ -3302,8 +3300,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Nama
 Feature.Profile.Heading.EditDisplayName,Edit Nama Display
 Feature.Profile.Heading.InsufficientFunds,Dana Tidak Cukup
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Bingkai profil
-Feature.Profile.Heading.ProfilePictureSaved,Foto profil berhasil disimpan
 Feature.Profile.Heading.ProfileQRCode,Bagikan Kode QR
 Feature.Profile.Heading.Statistics,Statistik
 Feature.Profile.Heading.Username,
@@ -3880,7 +3876,6 @@ Feature.Subscription.Text.PerMonth,/bulan
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Avatarmu telah direset karena {rule}. Kamu masih bisa menggunakan Marketplace, tetapi perubahan pada avatarmu tidak akan tersimpan hingga {time}."
 Feature.Timeout.Prompt.SaveTitleText,Fitur menyimpan dinonaktifkan untuk saat ini
-Feature.Timeout.Prompt.TitleText,Kami mereset avatarmu
 Feature.Timeout.WarningBanner.DisabledMessage,Penyimpanan avatar dinonaktifkan
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Penyimpanan avatar dinonaktifkan hingga {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Terbuka

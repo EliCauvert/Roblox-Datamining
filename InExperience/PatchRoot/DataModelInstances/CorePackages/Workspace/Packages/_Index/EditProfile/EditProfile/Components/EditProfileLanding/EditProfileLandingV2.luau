@@ -2,13 +2,10 @@
 local parent = editProfile.Parent
 local reactModule = require(parent.React)
 local foundationModule = require(parent.Foundation)
-local badgeShape = foundationModule.Enums.BadgeShape
-local badgeVariant = foundationModule.Enums.BadgeVariant
 local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local radius = foundationModule.Enums.Radius
-local badge = foundationModule.Badge
 local iconButton = foundationModule.IconButton
 local list = foundationModule.List
 local skeleton = foundationModule.Skeleton
@@ -19,16 +16,14 @@ local useLocalization = require(parent.Localization).Hooks.useLocalization
 local useProfileCardWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
 local userTileModule = require(parent.UserTile)
 local editProfileHeaderBarModule = require(editProfile.BaseComponents.EditProfileHeaderBar)
-local profileFramePreviewThumbnail = require(parent.AvatarExperienceProfilePictureEditor).ProfileFramePreviewThumbnail
 local textKeysModule = require(editProfile.Common.TextKeys)
 local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagEditProfileFramesEnabled2 = require(parent.SharedFlags).FFlagEditProfileFramesEnabled2
 local t = {
 	isContained = true,
 	hasDivider = { hasDivider = true, isInset = false }
 }
 
-local function renderRowTrailing(p0, p1, p2) --[[ line: 64 ]]
+local function renderRowTrailing(p0, p1, p2) --[[ line: 54 ]]
 	-- upvalues: reactModule (ref), skeleton (ref), radius (ref), text (ref)
 	return if p0 then reactModule.createElement(skeleton, { Size = UDim2.new(0.3, 0, 0, p2), radius = radius.Medium }) else reactModule.createElement(text, {
 		tag = "auto-xy text-body-small text-truncate-end",
@@ -36,8 +31,8 @@ local function renderRowTrailing(p0, p1, p2) --[[ line: 64 ]]
 	})
 end
 
-return function(p3) --[[ line: 78 | named "EditProfileLandingV2" ]]
-	-- upvalues: useProfileCardWidth (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), list (ref), t (ref), renderRowTrailing (ref), fFlagEditProfileFramesEnabled2 (ref), badge (ref), badgeVariant (ref), badgeShape (ref), profileFramePreviewThumbnail (ref)
+return function(p3) --[[ line: 68 | named "EditProfileLandingV2" ]]
+	-- upvalues: useProfileCardWidth (ref), useTokens (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), list (ref), t (ref), renderRowTrailing (ref)
 	local var8 = useProfileCardWidth()
 	local var9 = useTokens()
 	local var10 = fFlagAXEnableProfileTab and p3.fullBleed == true
@@ -46,9 +41,7 @@ return function(p3) --[[ line: 78 | named "EditProfileLandingV2" ]]
 		UsernameLabel = textKeysModule.Username,
 		DisplayNameLabel = if p3.isPolicyEnabled then textKeysModule.AgedUpDisplayName else textKeysModule.DisplayName,
 		BioLabel = textKeysModule.About,
-		BioPlaceholder = textKeysModule.AboutPlaceholder,
-		ProfileFrameLabel = textKeysModule.ProfileFrame,
-		NewLabel = textKeysModule.New
+		BioPlaceholder = textKeysModule.AboutPlaceholder
 	})
 	local size400 = var9.Size.Size_400
 	
@@ -116,31 +109,7 @@ return function(p3) --[[ line: 78 | named "EditProfileLandingV2" ]]
 					trailing = renderRowTrailing(p3.isBioLoading, if p3.bioText == "" or p3.bioText == nil then var11.BioPlaceholder else string.gsub(p3.bioText, "\n", " "), size400),
 					onActivated = if p3.isBioLoading then nil else { onActivated = p3.settingButtonOnActivated.bio }
 				})
-			}),
-			ProfileFramesList = if fFlagEditProfileFramesEnabled2 then reactModule.createElement(list.Root, {
-				testId = "ProfileFramesList",
-				LayoutOrder = 3,
-				isContained = t.isContained,
-				hasDivider = t.hasDivider
-			}, {
-				ProfileFramesRow = reactModule.createElement(list.Item, {
-					testId = "ProfileFramesRow",
-					LayoutOrder = 1,
-					title = var11.ProfileFrameLabel,
-					trailing = reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, {
-						NewLabel = if p3.showProfileFramesNewLabel then reactModule.createElement(badge, {
-							text = var11.NewLabel,
-							variant = badgeVariant.Neutral,
-							shape = badgeShape.Box
-						}) else nil,
-						ProfileFramePreview = reactModule.createElement(profileFramePreviewThumbnail, {
-							frameAssetId = p3.profileFrameAssetId,
-							isLoading = p3.isProfileFrameLoading == true
-						})
-					}),
-					onActivated = if p3.isProfileFrameLoading then nil else { onActivated = p3.settingButtonOnActivated.profileFrames }
-				})
-			}) else nil
+			})
 		})
 	})
 end

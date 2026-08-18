@@ -2543,7 +2543,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,اسم العرض غير مت�
 Feature.DisplayName.ErrorMessage.NameTooLong,لا يمكن أن يحتوي الاسم على أكثر من 20 حرفاً
 Feature.DisplayName.ErrorMessage.NameTooShort,لا بد أن يكون اسم العرض 3 أحرف على الأقل
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,اسم العرض يحتوي على أحرف غير مدعومة
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,لمدة {num} يوم
 Feature.Durables.BottomBar.RentalDurationPlural,لمدة {num} من الأيام
 Feature.Durables.FTUX.Tooltip,اختَر عدد الأيام التي تريد امتلاك العنصر فيها. يبدأ المؤقت بعد الشراء.
@@ -2554,8 +2553,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} يوم
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} من الأيام
 Feature.Durables.ItemDetails.WearTimeOptions.Title,الخيارات
 Feature.Durables.Label.ItemExpires,انتهاء صلاحية العنصر
-Feature.Durables.PartiallyExpiredItems.BodyText,انتهت صلاحية بعض العناصر في هذا الأفاتار المحفوظ وتمت إزالتها.
-Feature.Durables.PartiallyExpiredItems.TitleText,انتهت صلاحية العناصر
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} من الأيام (تبدأ بعد الشراء)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,للإبلاغ عن محتوى غير قانوني كما حدده قانون الخدمات الرقمية الأوروبي، يرجى زيارة الموقع التالي: https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,لا يوجد اتصال بالإنترنت
@@ -2826,6 +2823,7 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,تم تحديد {numerator}/{
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,تم تحديد {selectedCount} من جهات الاتصال
 Feature.FriendsMenu.Label.SelectedFriendsCount,تم تحديد {numerator}/{denominator} من الأصدقاء
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,تم تحديد {selectedCount} من الأصدقاء
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,تقديم الملاحظات
 Feature.GameDetails.Action.NotInterested,غير مهتم
 Feature.GameDetails.Action.Report,
@@ -3285,8 +3283,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
-Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
 Feature.Profile.Heading.Statistics,الإحصائيات
 Feature.Profile.Heading.Username,
@@ -3863,7 +3859,6 @@ Feature.Subscription.Text.PerMonth,/ شهر
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,تمت إعادة تعيين أفاتارك بسبب {rule}. لا يزال بإمكانك استخدام المتجر، ولكن لن يتم حفظ التغييرات التي تطرأ على أفاتارك حتى {time}.
 Feature.Timeout.Prompt.SaveTitleText,تم تعطيل الحفظ في الوقت الحالي
-Feature.Timeout.Prompt.TitleText,أعدنا تعيين أفاتارك
 Feature.Timeout.WarningBanner.DisabledMessage,تم تعطيل حفظ الأفاتار
 Feature.Timeout.WarningBanner.DisabledUntilMessage,تم تعطيل حفظ أفاتارك حتى {time}
 Feature.Toast.Heading.PurchaseMessage.Success,فتح القفل

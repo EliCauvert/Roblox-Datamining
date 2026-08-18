@@ -2,7 +2,7 @@
 
 return function(p0) --[[ line: 15 ]]
 	-- upvalues: GROUPS_URLModule (ref)
-	return p0.roduxNetworking.DELETE({ Name = "LeaveGroup" }, function(p1, p2) --[[ line: 18 ]]
+	return p0.roduxNetworking.DELETE("LeaveGroup", function(p1, p2) --[[ line: 18 ]]
 		-- upvalues: GROUPS_URLModule (copy)
 		return p1(GROUPS_URLModule):path("v1"):path("groups"):id(p2.groupId):path("users"):id(p2.userId)
 	end)

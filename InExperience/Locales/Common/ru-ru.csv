@@ -1715,7 +1715,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Отображаемое им�
 Feature.DisplayName.ErrorMessage.NameTooLong,В отображаемом имени должно быть не более 20 символов.
 Feature.DisplayName.ErrorMessage.NameTooShort,Отображаемое имя должно быть не менее 3 символов
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Отображаемое имя содержит неподдерживаемые символы.
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.InfoModal.Description,Lorem ipsum
 Feature.Durables.InfoModal.Title,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,
