@@ -11,7 +11,6 @@ local withStyleModule = require(parent_1.Core.Style.withStyle)
 local imagesModule = require(parent.ImageSet.Images)
 local imageSetComponentModule = require(core.ImageSet.ImageSetComponent)
 local useCursorModule = require(parent_1.App.SelectionCursor.useCursor)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local uDim = UDim.new(0, 8)
 local alertTitle = roactModule.PureComponent:extend("AlertTitle")
 alertTitle.validateProps = tModule.strictInterface({
@@ -33,15 +32,15 @@ alertTitle.defaultProps = {
 	margin = { top = 0, bottom = 24, left = 24, right = 24 }
 }
 
-function alertTitle.render(p0) --[[ line: 58 ]]
-	-- upvalues: withStyleModule (ref), UIBloxConfigModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), imagesModule (ref), genericTextLabelModule (ref)
-	local var11 = math.clamp(p0.props.screenSize.X - p0.props.margin.left - p0.props.margin.right, p0.props.minWidth, p0.props.maxWidth) - p0.props.margin.left - p0.props.margin.right
+function alertTitle.render(p0) --[[ line: 57 ]]
+	-- upvalues: withStyleModule (ref), roactModule (ref), fitFrameOnAxis (ref), imageSetComponentModule (ref), imagesModule (ref), genericTextLabelModule (ref)
+	local var10 = math.clamp(p0.props.screenSize.X - p0.props.margin.left - p0.props.margin.right, p0.props.minWidth, p0.props.maxWidth) - p0.props.margin.left - p0.props.margin.right
 	
-	return withStyleModule(function(p1) --[[ line: 66 ]]
-		-- upvalues: UIBloxConfigModule (copy), roactModule (copy), fitFrameOnAxis (copy), p0 (ref), imageSetComponentModule (copy), imagesModule (copy), genericTextLabelModule (copy), var11 (ref)
+	return withStyleModule(function(p1) --[[ line: 65 ]]
+		-- upvalues: roactModule (copy), fitFrameOnAxis (copy), p0 (ref), imageSetComponentModule (copy), imagesModule (copy), genericTextLabelModule (copy), var10 (ref)
 		local theme = p1.Theme
-		local var12 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p1.Tokens.Typography.HeadingSmall else p1.Tokens.Semantic.Typography.Header
-		local fontSize = var12.FontSize
+		local header = p1.Tokens.Semantic.Typography.Header
+		local fontSize = header.FontSize
 		
 		return roactModule.createElement(fitFrameOnAxis, {
 			BackgroundTransparency = 1,
@@ -84,7 +83,7 @@ function alertTitle.render(p0) --[[ line: 58 ]]
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0.5, 0),
 						colorStyle = theme.TextEmphasis,
-						fontStyle = var12,
+						fontStyle = header,
 						Size = UDim2.new(1, -(2 * (36 + p0.props.titlePadding)), 0, fontSize * 2),
 						Text = p0.props.title,
 						TextSize = fontSize,
@@ -93,8 +92,8 @@ function alertTitle.render(p0) --[[ line: 58 ]]
 				}) else roactModule.createElement(genericTextLabelModule, {
 					LayoutOrder = 1,
 					colorStyle = theme.TextEmphasis,
-					fontStyle = var12,
-					maxSize = Vector2.new(var11, fontSize * 2),
+					fontStyle = header,
+					maxSize = Vector2.new(var10, fontSize * 2),
 					Text = p0.props.title,
 					TextSize = fontSize,
 					TextTruncate = Enum.TextTruncate.AtEnd
@@ -111,7 +110,7 @@ function alertTitle.render(p0) --[[ line: 58 ]]
 	end)
 end
 
-return function(p2) --[[ line: 152 | named "AlertTitleFunctionalWrapper" ]]
+return function(p2) --[[ line: 149 | named "AlertTitleFunctionalWrapper" ]]
 	-- upvalues: useCursorModule (ref), uDim (ref), roactModule (ref), alertTitle (ref), cryoModule (ref)
 	return roactModule.createElement(alertTitle, cryoModule.Dictionary.join(p2, { closeCursor = useCursorModule(uDim) }))
 end

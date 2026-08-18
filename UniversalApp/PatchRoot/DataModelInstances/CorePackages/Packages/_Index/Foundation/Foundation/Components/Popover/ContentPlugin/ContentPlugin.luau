@@ -30,7 +30,6 @@ local usePanelSizingModule = require(script.Parent.usePanelSizing)
 local usePluginAnchorModule = require(script.Parent.usePluginAnchor)
 local useTokensModule = require(foundation.Providers.Style.useTokens)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
-local isPointInGuiObjectBoundsModule = require(foundation.Utility.isPointInGuiObjectBounds)
 local elevationOwnerScope = require(foundation.Providers.Elevation.ElevationProvider).ElevationOwnerScope
 local _ = require(foundation.Providers.StudioPanels.Types)
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
@@ -46,24 +45,24 @@ local t_1 = {
 	[radiusModule.Circle] = "radius-circle"
 }
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverContentPlugin" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), usePanelsContextModule (ref), flagsModule (ref), reactModule (ref), pluginPopoverParentContextModule (ref), popoverContextModule (ref), useStyleSheet (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), elevationModule (ref), useOverlayModule (ref), popoverSideModule (ref), popoverAlignModule (ref), usePluginAnchorModule (ref), getPanelPositionModule (ref), SHADOW_SIZE (ref), loggerModule (ref), usePanelModule (ref), usePanelSizingModule (ref), isPointInGuiObjectBoundsModule (ref), positioningModule (ref), useArrowPositionModule (ref), reactRobloxModule (ref), viewModule (ref), popoverShadowModule (ref), popoverArrowModule (ref), t_1 (ref), elevationOwnerScope (ref)
-	local var30 = withDefaultsModule(p0, t)
-	local var31 = usePanelsContextModule()
-	local var32 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useContext(pluginPopoverParentContextModule) else nil
-	local var33 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var32.id else reactModule.useContext(pluginPopoverParentContextModule)
-	local var34 = reactModule.useContext(popoverContextModule)
-	local var35 = useStyleSheet()
-	local var36 = useTokensModule()
-	local var37 = useElevationModule(elevationLayerModule.Popover, { stackAboveOwner = true })
-	local relativeIndex = elevationModule.getRelativeIndex(var37)
-	local var39, var40 = reactModule.useState(nil)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 90 ]]
-		-- upvalues: var39 (ref)
-		return var39
-	end, { var39 })
-	local var41 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then useOverlayModule() else nil
-	local var42 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 100 ]]
+return reactModule.forwardRef(function(p0, p1) --[[ line: 66 | named "PopoverContentPlugin" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), usePanelsContextModule (ref), flagsModule (ref), reactModule (ref), pluginPopoverParentContextModule (ref), popoverContextModule (ref), useStyleSheet (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), elevationModule (ref), useOverlayModule (ref), popoverSideModule (ref), popoverAlignModule (ref), usePluginAnchorModule (ref), getPanelPositionModule (ref), SHADOW_SIZE (ref), loggerModule (ref), usePanelModule (ref), usePanelSizingModule (ref), positioningModule (ref), useArrowPositionModule (ref), reactRobloxModule (ref), viewModule (ref), popoverShadowModule (ref), popoverArrowModule (ref), t_1 (ref), elevationOwnerScope (ref)
+	local var29 = withDefaultsModule(p0, t)
+	local var30 = usePanelsContextModule()
+	local var31 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useContext(pluginPopoverParentContextModule) else nil
+	local var32 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var31.id else reactModule.useContext(pluginPopoverParentContextModule)
+	local var33 = reactModule.useContext(popoverContextModule)
+	local var34 = useStyleSheet()
+	local var35 = useTokensModule()
+	local var36 = useElevationModule(elevationLayerModule.Popover, { stackAboveOwner = true })
+	local relativeIndex = elevationModule.getRelativeIndex(var36)
+	local var38, var39 = reactModule.useState(nil)
+	reactModule.useImperativeHandle(p1, function() --[[ line: 88 ]]
+		-- upvalues: var38 (ref)
+		return var38
+	end, { var38 })
+	local var40 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then useOverlayModule() else nil
+	local var41 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 98 ]]
 		local popoverPluginContainer = Instance.new("Frame")
 		popoverPluginContainer.Name = "PopoverPluginContainer"
 		popoverPluginContainer.BackgroundTransparency = 1
@@ -75,282 +74,259 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, {}) else nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useEffect(function() --[[ line: 112 ]]
-			-- upvalues: var42 (ref)
-			return function() --[[ line: 113 ]]
-				-- upvalues: var42 (copy)
-				var42:Destroy()
+		reactModule.useEffect(function() --[[ line: 110 ]]
+			-- upvalues: var41 (ref)
+			return function() --[[ line: 111 ]]
+				-- upvalues: var41 (copy)
+				var41:Destroy()
 			end
-		end, { var42 })
+		end, { var41 })
 	end
+	local var42 = nil
 	local var43 = nil
 	local var44 = nil
 	local var45 = nil
 	local var46 = nil
 	local var47 = nil
-	local var48 = nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		local var49, var50 = reactModule.useBinding(UDim2.new())
+		local var48, var49 = reactModule.useBinding(UDim2.new())
+		var42 = var48
 		var43 = var49
+		local var50, var51 = reactModule.useBinding(UDim2.new())
 		var44 = var50
-		local var51, var52 = reactModule.useBinding(UDim2.new())
 		var45 = var51
+		local var52, var53 = reactModule.useState(nil)
 		var46 = var52
-		local var53, var54 = reactModule.useState(nil)
 		var47 = var53
-		var48 = var54
 	end
-	local size200 = var36.Size.Size_200
-	local var55 = size200 * 1.414213562373 / 2
-	local backgroundStyle = var30.backgroundStyle or var36.Color.Surface.Surface_100
+	local size200 = var35.Size.Size_200
+	local var54 = size200 * 1.414213562373 / 2
+	local backgroundStyle = var29.backgroundStyle or var35.Color.Surface.Surface_100
+	local var56 = nil
 	local var57 = nil
 	local var58 = nil
 	local var59 = nil
-	local var60 = nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		var57 = if var30.side then var30.side else popoverSideModule.Bottom
-		var58 = if var30.align then var30.align else popoverAlignModule.Center
+		var56 = if var29.side then var29.side else popoverSideModule.Bottom
+		var57 = if var29.align then var29.align else popoverAlignModule.Center
+		var58 = if type(var56) == "table" then var56.offset else 0
 		var59 = if type(var57) == "table" then var57.offset else 0
-		var60 = if type(var58) == "table" then var58.offset else 0
 	end
-	local var61, var62
+	local var60, var61
 	local _ = nil
 	local _ = nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
+		var60 = if type(var56) == "table" then var56.position else var56
 		var61 = if type(var57) == "table" then var57.position else var57
-		var62 = if type(var58) == "table" then var58.position else var58
 	else
-		var61 = if type(var30.side) == "table" then var30.side.position else var30.side or popoverSideModule.Bottom
-		var62 = if type(var30.align) == "table" then var30.align.position else var30.align or popoverAlignModule.Center
+		var60 = if type(var29.side) == "table" then var29.side.position else var29.side or popoverSideModule.Bottom
+		var61 = if type(var29.align) == "table" then var29.align.position else var29.align or popoverAlignModule.Center
 	end
-	local var63 = 0
+	local var62 = 0
 	
-	if var62 == popoverAlignModule.Center then
-		var63 = 0.5
-	elseif var62 == popoverAlignModule.End then
-		var63 = 1
+	if var61 == popoverAlignModule.Center then
+		var62 = 0.5
+	elseif var61 == popoverAlignModule.End then
+		var62 = 1
 	end
-	local var64 = usePluginAnchorModule(var34.anchor, var34.anchorUri)
-	local var65 = if var64.isVirtual then false else var30.hasArrow
+	local var63 = usePluginAnchorModule(var33.anchor, if flagsModule.FoundationPopoverPluginUriAnchor then var33.anchorUri else nil)
+	local var64 = if var63.isVirtual then false else var29.hasArrow
 	local ready = nil
+	local var66 = nil
 	local var67 = nil
-	local var68 = nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		ready = var34.isOpen and (var64.isReady and var32.ready)
-		var67 = ready and var41 ~= nil
-		var68 = var67 and var47 == nil
-		reactModule.useEffect(function() --[[ line: 173 ]]
-			-- upvalues: ready (write), var48 (write)
+		ready = var33.isOpen and (var63.isReady and var31.ready)
+		var66 = ready and var40 ~= nil
+		var67 = var66 and var46 == nil
+		reactModule.useEffect(function() --[[ line: 172 ]]
+			-- upvalues: ready (write), var47 (write)
 			if not ready then
-				var48(nil)
+				var47(nil)
 			end
 		end, { ready })
 	end
-	local var76, var77
-	local var69 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useCallback(function(p2) --[[ line: 181 ]]
-		-- upvalues: flagsModule (copy), var68 (write), var48 (write)
-		if not flagsModule.FoundationPopoverRecomputeContentSize and not var68 then return end
+	local var75, var76
+	local var68 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useCallback(function(p2) --[[ line: 180 ]]
+		-- upvalues: var67 (write), var47 (write)
+		if not var67 then return end
 		local absoluteSize = p2.AbsoluteSize
 		
 		if absoluteSize.X > 0 and absoluteSize.Y > 0 then
-			var48(absoluteSize)
+			var47(absoluteSize)
 		end
+	end, { var67 }) else nil
+	local var69 = reactModule.useMemo(function() --[[ line: 192 ]]
+		-- upvalues: getPanelPositionModule (copy), flagsModule (copy), var56 (write), var29 (ref), popoverSideModule (copy), popoverAlignModule (copy), SHADOW_SIZE (copy), var64 (ref), var54 (ref)
+		return getPanelPositionModule(if flagsModule.FoundationPopoverPluginOverlayMeasurement then var56 else var29.side or popoverSideModule.Bottom, var29.align or popoverAlignModule.Start, nil, SHADOW_SIZE, if var64 then var54 else 0)
 	end, {
-		if flagsModule.FoundationPopoverRecomputeContentSize then nil else var68
-	}) else nil
-	local var70 = reactModule.useMemo(function() --[[ line: 193 ]]
-		-- upvalues: getPanelPositionModule (copy), flagsModule (copy), var57 (write), var30 (ref), popoverSideModule (copy), popoverAlignModule (copy), SHADOW_SIZE (copy), var65 (ref), var55 (ref)
-		return getPanelPositionModule(if flagsModule.FoundationPopoverPluginOverlayMeasurement then var57 else var30.side or popoverSideModule.Bottom, var30.align or popoverAlignModule.Start, nil, SHADOW_SIZE, if var65 then var55 else 0)
-	end, {
-		if flagsModule.FoundationPopoverPluginOverlayMeasurement then var57 else var30.side,
-		var30.align,
-		var65,
-		var55
+		if flagsModule.FoundationPopoverPluginOverlayMeasurement then var56 else var29.side,
+		var29.align,
+		var64,
+		var54
 	})
-	local var71 = reactModule.useCallback(function(p3, p4, p5, p6) --[[ line: 211 ]]
-		-- upvalues: var33 (ref), var31 (ref)
-		return var31.registerPopoverAsync(p3, p4, p5, p6, var33)
-	end, { var31.registerPopoverAsync, var33 })
-	local var72 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 219 ]]
-		-- upvalues: var30 (ref), var72 (ref), loggerModule (copy)
-		if not var30.onPressedOutside and not var72.current then
-			var72.current = true
+	local var70 = reactModule.useCallback(function(p3, p4, p5, p6) --[[ line: 210 ]]
+		-- upvalues: var32 (ref), var30 (ref)
+		return var30.registerPopoverAsync(p3, p4, p5, p6, var32)
+	end, { var30.registerPopoverAsync, var32 })
+	local var71 = reactModule.useRef(false)
+	reactModule.useEffect(function() --[[ line: 218 ]]
+		-- upvalues: var29 (ref), var71 (ref), loggerModule (copy)
+		if not var29.onPressedOutside and not var71.current then
+			var71.current = true
 			loggerModule:warning("PopoverContent rendered in a plugin context without onPressedOutside. In Studio, the QWidget popup will close on focus loss, but the parent's isOpen state will not update. Provide onPressedOutside to stay in sync.")
 		end
-	end, { var30.onPressedOutside })
-	local var73 = usePanelModule({
-		isOpen = if flagsModule.FoundationPopoverPluginOverlayMeasurement then ready else var34.isOpen and var64.isReady,
-		onClose = reactModule.useCallback(function() --[[ line: 230 ]]
-			-- upvalues: var30 (ref), flagsModule (copy), var34 (ref)
-			if var30.onPressedOutside then
-				if flagsModule.FoundationPopoverClickOutsideInGuiShadow and typeof(var34.anchor) == "Instance" and var34.anchor.GuiState ~= Enum.GuiState.Idle then return end
-				var30.onPressedOutside()
+	end, { var29.onPressedOutside })
+	local var72 = usePanelModule({
+		isOpen = if flagsModule.FoundationPopoverPluginOverlayMeasurement then ready else var33.isOpen and var63.isReady,
+		onClose = reactModule.useCallback(function() --[[ line: 229 ]]
+			-- upvalues: var29 (ref)
+			if var29.onPressedOutside then
+				var29.onPressedOutside()
 			end
-		end, { var30.onPressedOutside, var34.anchor }),
-		anchorUri = var64.uri,
-		registerPanelAsync = var71,
-		position = var70,
+		end, { var29.onPressedOutside }),
+		anchorUri = var63.uri,
+		registerPanelAsync = var70,
+		position = var69,
 		depth = if relativeIndex ~= nil then 0 else relativeIndex,
-		parentPopoverId = var33
+		parentPopoverId = var32
 	})
 	local _ = nil
 	local _ = nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		var76 = var43
-		var77 = var45
+		var75 = var42
+		var76 = var44
 	else
-		local var74, var75 = usePanelSizingModule(var30.side, var30.align, var39, if var65 then var55 else 0, var73)
+		local var73, var74 = usePanelSizingModule(var29.side, var29.align, var38, if var64 then var54 else 0, var72)
+		var75 = var73
 		var76 = var74
-		var77 = var75
 	end
-	reactModule.useEffect(function() --[[ line: 269 ]]
-		-- upvalues: flagsModule (copy), var73 (ref), var30 (ref), var39 (ref), isPointInGuiObjectBoundsModule (copy)
-		if not flagsModule.FoundationPopoverClickOutsideInGuiShadow then return end
-		if var73 and var73.container and var30.onPressedOutside then
-			local inputBeganConnection = var73.container.InputBegan:Connect(function(p7) --[[ line: 278 ]]
-				-- upvalues: var39 (copy), isPointInGuiObjectBoundsModule (copy), var30 (copy)
-				if p7.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
-				if not var39 then return end
-				if not isPointInGuiObjectBoundsModule(var39, Vector2.new(p7.Position.X, p7.Position.Y)) then
-					var30.onPressedOutside()
-				end
-			end)
-			
-			return function() --[[ line: 290 ]]
-				-- upvalues: inputBeganConnection (ref)
-				inputBeganConnection:Disconnect()
-			end
-		end
-	end, { var73, var39, var30.onPressedOutside })
-	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useLayoutEffect(function() --[[ line: 297 ]]
-			-- upvalues: var68 (write), var39 (ref), var48 (write)
-			if not var68 or var39 == nil then return end
-			local absoluteSize = var39.AbsoluteSize
+		reactModule.useLayoutEffect(function() --[[ line: 259 ]]
+			-- upvalues: var67 (write), var38 (ref), var47 (write)
+			if not var67 or var38 == nil then return end
+			local absoluteSize = var38.AbsoluteSize
 			
 			if absoluteSize.X > 0 and absoluteSize.Y > 0 then
-				var48(absoluteSize)
+				var47(absoluteSize)
 			end
-		end, { var68, var39 })
+		end, { var67, var38 })
 	end
-	local var78 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 310 ]]
-		-- upvalues: var47 (write), positioningModule (copy), var61 (write), var59 (write), var60 (write), var65 (ref), var55 (ref), SHADOW_SIZE (copy)
-		return if var47 then positioningModule.calculatePopoverBounds(var61, var59, var60, if var65 then var55 else 0, var47) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2) else nil
+	local var77 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 272 ]]
+		-- upvalues: var46 (write), positioningModule (copy), var60 (write), var58 (write), var59 (write), var64 (ref), var54 (ref), SHADOW_SIZE (copy)
+		return if var46 then positioningModule.calculatePopoverBounds(var60, var58, var59, if var64 then var54 else 0, var46) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2) else nil
 	end, {
-		var47, var61, var59, var60, var65, var55
+		var46, var60, var58, var59, var64, var54
 	}) else nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useLayoutEffect(function() --[[ line: 328 ]]
-			-- upvalues: var47 (write), var78 (ref), var46 (write), var44 (write), var73 (ref)
-			if var47 == nil or var78 == nil then
-				var46(UDim2.new())
-				var44(UDim2.new())
+		reactModule.useLayoutEffect(function() --[[ line: 290 ]]
+			-- upvalues: var46 (write), var77 (ref), var45 (write), var43 (write), var72 (ref)
+			if var46 == nil or var77 == nil then
+				var45(UDim2.new())
+				var43(UDim2.new())
 				
 				return
 			end
-			var46(UDim2.fromOffset(var47.X, var47.Y))
-			var44(UDim2.fromOffset(var78.X, var78.Y))
+			var45(UDim2.fromOffset(var46.X, var46.Y))
+			var43(UDim2.fromOffset(var77.X, var77.Y))
 			
-			if var73 then
-				var73.setSizeAsync(var78)
+			if var72 then
+				var72.setSizeAsync(var77)
 			end
-		end, { var47, var78, var73 })
-		reactModule.useLayoutEffect(function() --[[ line: 344 ]]
-			-- upvalues: var67 (write), var42 (ref), var73 (ref), var78 (ref), var41 (ref)
-			if not var67 then
-				var42.Parent = nil
+		end, { var46, var77, var72 })
+		reactModule.useLayoutEffect(function() --[[ line: 306 ]]
+			-- upvalues: var66 (write), var41 (ref), var72 (ref), var77 (ref), var40 (ref)
+			if not var66 then
+				var41.Parent = nil
 				
 				return
-			elseif var73 and var78 then
-				var42.AutomaticSize = Enum.AutomaticSize.None
-				var42.Size = UDim2.fromOffset(var78.X, var78.Y)
-				var42.Position = UDim2.new()
-				var42.Parent = var73.container
+			elseif var72 and var77 then
+				var41.AutomaticSize = Enum.AutomaticSize.None
+				var41.Size = UDim2.fromOffset(var77.X, var77.Y)
+				var41.Position = UDim2.new()
+				var41.Parent = var72.container
 				
 				return
 			end
-			var42.AutomaticSize = Enum.AutomaticSize.XY
-			var42.Size = UDim2.new()
-			var42.Position = UDim2.fromOffset(-10000, -10000)
-			var42.Parent = var41
+			var41.AutomaticSize = Enum.AutomaticSize.XY
+			var41.Size = UDim2.new()
+			var41.Position = UDim2.fromOffset(-10000, -10000)
+			var41.Parent = var40
 		end, {
-			var67,
-			var41,
-			var73,
-			var78,
-			var42
+			var66,
+			var40,
+			var72,
+			var77,
+			var41
 		})
 	end
-	local var80
-	local var79 = useArrowPositionModule(var77, var61, var30.radius, var63, var55, if var64.isVirtual or typeof(var34.anchor) ~= "Instance" then nil else var34.anchor)
+	local var79
+	local var78 = useArrowPositionModule(var76, var60, var29.radius, var62, var54, if var63.isVirtual or typeof(var33.anchor) ~= "Instance" then nil else var33.anchor)
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		var80 = false
+		var79 = false
 		
-		if var73 ~= nil then
-			local _ = var78 ~= nil
+		if var72 ~= nil then
+			local _ = var77 ~= nil
 		end
 	else
-		var80 = true
+		var79 = true
 	end
-	local var84
-	local var81 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var67 else var73 ~= nil
-	local var82 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var42 elseif var73 then var73.container else nil
-	local var83 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 382 ]]
-		-- upvalues: var73 (ref), var80 (ref)
+	local var83
+	local var80 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var66 else var72 ~= nil
+	local var81 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var41 elseif var72 then var72.container else nil
+	local var82 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 344 ]]
+		-- upvalues: var72 (ref), var79 (ref)
 		return {
-			id = if var73 then var73.popoverId else nil,
-			ready = var80
+			id = if var72 then var72.popoverId else nil,
+			ready = var79
 		}
-	end, { var73, var80 }) else nil
+	end, { var72, var79 }) else nil
 	
-	if var81 and var82 then
-		var84 = reactRobloxModule.createPortal
-		var84 = var84(reactModule.createElement(reactModule.Fragment, nil, {
-			StyleLink = reactModule.createElement("StyleLink", { StyleSheet = var35 }),
+	if var80 and var81 then
+		var83 = reactRobloxModule.createPortal
+		var83 = var83(reactModule.createElement(reactModule.Fragment, nil, {
+			StyleLink = reactModule.createElement("StyleLink", { StyleSheet = var34 }),
 			Container = reactModule.createElement(viewModule, {
-				AutomaticSize = if flagsModule.FoundationPopoverPluginOverlayMeasurement and var78 == nil then Enum.AutomaticSize.XY else nil,
-				Size = if flagsModule.FoundationPopoverPluginOverlayMeasurement and var78 == nil then nil else var76,
-				testId = `{var34.testId}--container`
+				AutomaticSize = if flagsModule.FoundationPopoverPluginOverlayMeasurement and var77 == nil then Enum.AutomaticSize.XY else nil,
+				Size = if flagsModule.FoundationPopoverPluginOverlayMeasurement and var77 == nil then nil else var75,
+				testId = `{var33.testId}--container`
 			}, {
 				Shadow = reactModule.createElement(popoverShadowModule, {
 					ZIndex = 1,
-					contentSize = var77,
+					contentSize = var76,
 					position = UDim2.fromOffset(SHADOW_SIZE / 2, SHADOW_SIZE / 2 + 2),
-					testId = `{var34.testId}--shadow`
+					testId = `{var33.testId}--shadow`
 				}),
-				Arrow = if var65 then reactModule.createElement(popoverArrowModule, {
+				Arrow = if var64 then reactModule.createElement(popoverArrowModule, {
 					ZIndex = 2,
 					size = size200,
-					position = var79,
+					position = var78,
 					backgroundStyle = backgroundStyle,
-					testId = `{var34.testId}--arrow`
+					testId = `{var33.testId}--arrow`
 				}) else nil,
 				Content = reactModule.createElement(viewModule, {
 					ZIndex = 3,
-					tag = `auto-xy {t_1[var30.radius]}`,
+					tag = `auto-xy {t_1[var29.radius]}`,
 					Position = UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE),
-					ref = var40,
-					onAbsoluteSizeChanged = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var69 else nil,
+					ref = var39,
+					onAbsoluteSizeChanged = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var68 else nil,
 					backgroundStyle = backgroundStyle,
-					testId = `{var34.testId}--content`
+					testId = `{var33.testId}--content`
 				}, reactModule.createElement(pluginPopoverParentContextModule.Provider, {
-					value = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var83 else var73.popoverId
+					value = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var82 else var72.popoverId
 				}, {
-					Nested = reactModule.createElement(elevationOwnerScope, { owner = var37 }, var30.children)
+					Nested = reactModule.createElement(elevationOwnerScope, { owner = var36 }, var29.children)
 				}))
 			})
-		}), if flagsModule.FoundationPopoverPluginOverlayMeasurement then var82 else var73.container)
+		}), if flagsModule.FoundationPopoverPluginOverlayMeasurement then var81 else var72.container)
 	else
-		var84 = nil
+		var83 = nil
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, { Anchor = var64.element, Panel = var84 })
+	return reactModule.createElement(reactModule.Fragment, nil, { Anchor = var63.element, Panel = var83 })
 end)

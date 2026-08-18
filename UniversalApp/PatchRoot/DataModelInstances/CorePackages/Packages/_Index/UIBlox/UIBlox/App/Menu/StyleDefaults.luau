@@ -1,9 +1,7 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.App.Style.StyleTypes)
-local UIBloxConfigModule = require(parent.UIBloxConfig)
+﻿local _ = require(script.Parent.Parent.Parent.App.Style.StyleTypes)
 
 return {
-	getBaseMenuDefaultTokens = function(p0) --[[ line: 28 ]]
+	getBaseMenuDefaultTokens = function(p0) --[[ line: 27 ]]
 		assert(p0.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
@@ -15,7 +13,7 @@ return {
 			}
 		}
 	end,
-	getCellDefaultTokens = function(p1) --[[ line: 8 ]]
+	getCellDefaultTokens = function(p1) --[[ line: 7 ]]
 		assert(p1.Tokens ~= nil, "Design token support is not enabled!")
 		
 		return {
@@ -35,38 +33,36 @@ return {
 			selectedIconPaddingRight = p1.Tokens.Component.MenuCell.Base.Container.Spacing.Trailing
 		}
 	end,
-	getDropdownMenuCellDefaultTokens = function(p2) --[[ line: 40 ]]
-		-- upvalues: UIBloxConfigModule (ref)
+	getDropdownMenuCellDefaultTokens = function(p2) --[[ line: 39 ]]
 		return {
-			iconSize = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_900 else p2.Tokens.Global.Size_450,
+			iconSize = p2.Tokens.Global.Size_450,
 			containerPadding = {
-				left = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Global.Space_200,
-				right = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_600 else p2.Tokens.Global.Space_300
+				left = p2.Tokens.Global.Space_200,
+				right = p2.Tokens.Global.Space_300
 			},
-			textFont = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Typography.TitleLarge else p2.Tokens.Semantic.Typography.Subheader,
-			iconTextSpacing = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Size.Size_400 else p2.Tokens.Global.Space_200,
+			textFont = p2.Tokens.Semantic.Typography.Subheader,
+			iconTextSpacing = p2.Tokens.Global.Space_200,
 			border = {
-				cornerRadius = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Radius.Medium else p2.Tokens.Semantic.Radius.Medium,
-				size = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p2.Tokens.Stroke.Standard else p2.Tokens.Global.Stroke_100
+				cornerRadius = p2.Tokens.Semantic.Radius.Medium,
+				size = p2.Tokens.Global.Stroke_100
 			}
 		}
 	end,
-	getDropdownMenuDefaultTokens = function(p3) --[[ line: 70 ]]
-		-- upvalues: UIBloxConfigModule (ref)
+	getDropdownMenuDefaultTokens = function(p3) --[[ line: 55 ]]
 		return {
-			height = UDim.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Size.Size_1200 else p3.Tokens.Global.Size_600),
+			height = UDim.new(0, p3.Tokens.Global.Size_600),
 			menuStateColors = {
 				buttonDefault = {
-					Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Color.ActionSubtle.Border.Color3 else p3.Tokens.Semantic.Color.Action.Secondary.Border.Color3,
-					Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Color.ActionSubtle.Border.Transparency else p3.Tokens.Semantic.Color.Action.Secondary.Border.Transparency
+					Color = p3.Tokens.Semantic.Color.Action.Secondary.Border.Color3,
+					Transparency = p3.Tokens.Semantic.Color.Action.Secondary.Border.Transparency
 				},
 				contentDefault = {
-					Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Color.Content.Default.Color3 else p3.Tokens.Semantic.Color.Text.Default.Color3,
-					Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Color.Content.Default.Transparency else p3.Tokens.Semantic.Color.Text.Default.Transparency
+					Color = p3.Tokens.Semantic.Color.Text.Default.Color3,
+					Transparency = p3.Tokens.Semantic.Color.Text.Default.Transparency
 				},
 				alert = {
-					Color = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Color.ActionAlert.Border.Color3 else p3.Tokens.Semantic.Color.Action.Alert.Border.Color3,
-					Transparency = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then p3.Tokens.Color.ActionAlert.Border.Transparency else p3.Tokens.Semantic.Color.Action.Alert.Border.Transparency
+					Color = p3.Tokens.Semantic.Color.Action.Alert.Border.Color3,
+					Transparency = p3.Tokens.Semantic.Color.Action.Alert.Border.Transparency
 				}
 			}
 		}

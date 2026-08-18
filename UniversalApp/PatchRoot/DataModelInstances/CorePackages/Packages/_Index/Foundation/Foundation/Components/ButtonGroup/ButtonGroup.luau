@@ -7,7 +7,6 @@ local inputSizeModule = require(foundation.Enums.InputSize)
 local orientationModule = require(foundation.Enums.Orientation)
 local _ = require(foundation.Components.Types)
 local viewModule = require(foundation.Components.View)
-local devAssertModule = require(foundation.Utility.devAssert)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = {
@@ -16,17 +15,17 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | named "ButtonGroup" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), devAssertModule (ref), orientationModule (ref), fillBehaviorModule (ref), reactModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var11 = withDefaultsModule(p0, t)
-	devAssertModule(#var11.buttons <= 3, `ButtonGroup: a maximum of 3 buttons is supported, got {#var11.buttons}.`)
-	local var12 = var11.orientation == orientationModule.Vertical
-	local var12_1 = var12 or var11.fillBehavior == fillBehaviorModule.Fill
-	local var14 = if var12 or not var12_1 then nil else fillBehaviorModule.Fill
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 52 | named "ButtonGroup" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), orientationModule (ref), fillBehaviorModule (ref), reactModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
+	local var10 = withDefaultsModule(p0, t)
+	assert(#var10.buttons <= 3, `ButtonGroup: a maximum of 3 buttons is supported, got {#var10.buttons}.`)
+	local var11 = var10.orientation == orientationModule.Vertical
+	local var11_1 = var11 or var10.fillBehavior == fillBehaviorModule.Fill
+	local var13 = if var11 or not var11_1 then nil else fillBehaviorModule.Fill
 	local t_1 = {}
 	
-	for i, v in var11.buttons do
-		t_1[`{i}-{v.text}`] = reactModule.createElement(buttonModule, {
+	for i, v in var10.buttons do
+		t_1["Button" .. i] = reactModule.createElement(buttonModule, {
 			text = v.text,
 			onActivated = v.onActivated,
 			variant = v.variant,
@@ -35,20 +34,20 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | 
 			icon = v.icon,
 			inputDelay = v.inputDelay,
 			ref = v.ref,
-			size = var11.size,
-			fillBehavior = var14,
+			size = var10.size,
+			fillBehavior = var13,
 			LayoutOrder = i,
-			testId = v.testId or `{var11.testId}--button-{i}`
+			testId = `{var10.testId}--button-{i}`
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var11, {
+	return reactModule.createElement(viewModule, withCommonPropsModule(var10, {
 		tag = {
 			["gap-small"] = true,
-			["col flex-x-fill"] = var12,
-			row = not var12 and var12_1,
-			["row wrap"] = not var12 and not var12_1,
-			["size-full-0 auto-y"] = var12_1,
-			["auto-xy"] = not var12_1
+			["col flex-x-fill"] = var11,
+			row = not var11 and var11_1,
+			["row wrap"] = not var11 and not var11_1,
+			["size-full-0 auto-y"] = var11_1,
+			["auto-xy"] = not var11_1
 		},
 		ref = p1
 	}), t_1)

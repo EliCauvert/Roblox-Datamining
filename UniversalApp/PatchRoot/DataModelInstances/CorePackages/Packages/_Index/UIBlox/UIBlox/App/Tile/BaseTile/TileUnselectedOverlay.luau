@@ -1,6 +1,5 @@
 ﻿local parent = script.Parent.Parent.Parent.Parent
 local parent_1 = parent.Parent
-local UIBloxConfigModule = require(parent.UIBloxConfig)
 local roactModule = require(parent_1.Roact)
 local tModule = require(parent_1.t)
 local imagesModule = require(parent.App.ImageSet.Images)
@@ -10,12 +9,12 @@ local tileUnselectedOverlay = roactModule.PureComponent:extend("TileUnselectedOv
 local hollow = imagesModule["squircles/hollow"]
 tileUnselectedOverlay.validateProps = tModule.strictInterface({ ZIndex = tModule.optional(tModule.integer) })
 
-function tileUnselectedOverlay.render(p0) --[[ line: 29 ]]
-	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), hollow (ref), UIBloxConfigModule (ref)
+function tileUnselectedOverlay.render(p0) --[[ line: 28 ]]
+	-- upvalues: withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), hollow (ref)
 	local zIndex = p0.props.ZIndex
 	
-	return withStyleModule(function(p1) --[[ line: 32 ]]
-		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), hollow (copy), UIBloxConfigModule (copy)
+	return withStyleModule(function(p1) --[[ line: 31 ]]
+		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), hollow (copy)
 		local tokens = p1.Tokens
 		
 		return roactModule.createElement("Frame", {
@@ -28,7 +27,7 @@ function tileUnselectedOverlay.render(p0) --[[ line: 29 ]]
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Image = hollow,
-				Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100),
+				Position = UDim2.new(1, -tokens.Global.Size_100, 0, tokens.Global.Size_100),
 				Size = UDim2.fromOffset(24, 24)
 			})
 		})

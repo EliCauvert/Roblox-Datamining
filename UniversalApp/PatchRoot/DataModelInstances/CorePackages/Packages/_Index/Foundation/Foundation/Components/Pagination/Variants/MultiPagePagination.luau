@@ -104,7 +104,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 				if v == "ellipsis" then
 					t[if i == 2 then "ellipsis-leading" else "ellipsis-trailing"] = reactModule.createElement(ellipsisModule, {
 						slotSize = size,
-						LayoutOrder = i,
+						layoutOrder = i,
 						testId = `{var16.testId}--ellipsis-{i}`
 					})
 				else
@@ -113,7 +113,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 44 | 
 					t[`Page-{v}`] = reactModule.createElement(pageNumberSlotModule, {
 						slotSize = size,
 						isChecked = v == var16.page,
-						LayoutOrder = i,
+						layoutOrder = i,
 						onPageActivated = var16.onActivated,
 						page = v,
 						testId = `{var16.testId}--page-{v}`,

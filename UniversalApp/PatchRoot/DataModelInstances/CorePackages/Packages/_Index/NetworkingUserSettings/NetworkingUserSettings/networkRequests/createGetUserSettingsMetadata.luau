@@ -4,7 +4,7 @@ local _ = require(parent.Types.networkRequestsTypes)
 
 return function(p0) --[[ line: 5 ]]
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.GET(script.Name, function(p1) --[[ line: 8 ]]
+	return p0.roduxNetworking.GET(script, function(p1) --[[ line: 8 ]]
 		-- upvalues: API_URLModule (copy)
 		return p1(API_URLModule):path("user-settings-api"):path("v1"):path("user-settings"):path("metadata")
 	end)
