@@ -275,11 +275,13 @@ Authentication.CrossDevice.Response.LoginFail,تعذر تسجيل الدخول
 Authentication.CrossDevice.Response.LoginSuccess,تم تسجيل الدخول بنجاح
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,إعادة المحاولة في: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,تنزيل الآن
 Authentication.Login.Action.EmailACode,إرسال كود عبر البريد الإلكتروني
 Authentication.Login.Action.EmailOtpWaitTime,إعادة إرسال الكود في {WaitTime} ث
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,نسيت كلمة المرور أو اسم المستخدم؟
 Authentication.Login.Action.ForgotUsername,هل نسيت اسم المستخدم؟
+Authentication.Login.Action.ForgotUsernameOrPassword,هل نسيت اسم المستخدم أو كلمة المرور؟
 Authentication.Login.Action.LogInEmailOneTimeCode,إرسال رمز صالح لمرة واحدة عبر البريد إلكتروني
 Authentication.Login.Action.NeedHelp,بحاجة إلى مساعدة؟
 Authentication.Login.Action.Next,
@@ -311,6 +313,7 @@ Authentication.Login.Heading.LoginRoblox,تسجيل الدخول إلى Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,تسجيل الدخول إلى حساب حاليّ
 Authentication.Login.Heading.NewAppAvailable,تنزيل تطبيق Roblox الجديد
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,تسجيل الدخول إلى منصّة Roblox
 Authentication.Login.Label.AccountSelectorTitle,حدد حسابًا لتسجيل الدخول إليه
 Authentication.Login.Label.AgedUpUsername,أضف username@ فريد
 Authentication.Login.Label.ConnectionError.RetryDisabled,"عذراً، حدثت مشكلة في الوصول إلى خوادمنا.
@@ -4130,8 +4133,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
-Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
 Feature.Profile.Heading.Statistics,الإحصائيات
 Feature.Profile.Heading.Username,

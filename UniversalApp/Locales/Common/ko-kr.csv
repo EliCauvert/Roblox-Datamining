@@ -293,11 +293,13 @@ Authentication.CrossDevice.Response.LoginFail,로그인 실패
 Authentication.CrossDevice.Response.LoginSuccess,로그인 완료
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,잠시 후 다시 시도: {WaitTime}
+Authentication.Login.Action.Continue,계속
 Authentication.Login.Action.DownloadNow,지금 다운로드
 Authentication.Login.Action.EmailACode,이메일로 로그인 코드 받기
 Authentication.Login.Action.EmailOtpWaitTime,{WaitTime}초 후 코드 다시 보내기
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,비밀번호 또는 사용자 이름을 잊으셨나요?
 Authentication.Login.Action.ForgotUsername,사용자 이름을 잊어버리셨나요?
+Authentication.Login.Action.ForgotUsernameOrPassword,사용자 이름이나 비밀번호를 잊어버리셨나요?
 Authentication.Login.Action.LogInEmailOneTimeCode,이메일로 일회용 코드 받기
 Authentication.Login.Action.NeedHelp,도움이 필요하세요?
 Authentication.Login.Action.Next,
@@ -329,6 +331,7 @@ Authentication.Login.Heading.LoginRoblox,Roblox에 로그인
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,새로운 Roblox 앱 다운로드
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,로그인할 계정 선택
 Authentication.Login.Label.AgedUpUsername,고유한 @사용자 이름을 추가하세요
 Authentication.Login.Label.ConnectionError.RetryDisabled,"죄송합니다. 서버에 접속하는 동안 문제가 발생했습니다.
@@ -396,7 +399,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,인증되지 않�
 Authentication.Login.WeChat.AntiAddictionText,"건전하지 않은 체험과 저작권 문제가 있는 체험은 방문하지 마시고, 사기 행위에 연루되지 않도록 스스로를 보호하세요. 이곳에서의 체험은 두뇌 발달에 도움이 되지만, 지나치게 오래 방문하는 것은 건강에 좋지 않습니다. 방문 시간을 잘 조절해서 건강한 생활을 유지하세요."
 Authentication.Login.WeChat.NotInstalled,Wechat이 설치되어 있지 않습니다
 Authentication.OneTimePasscode.Action.ChangeEmailV2,이메일 변경
-Authentication.OneTimePasscode.Action.Continue,계속
+Authentication.OneTimePasscode.Action.Continue,
 Authentication.OneTimePasscode.Action.GetHelp,지원 받기
 Authentication.OneTimePasscode.Action.Resend,재전송
 Authentication.OneTimePasscode.Description.DidntReceiveCode,코드를 받지 못하셨나요?
@@ -4153,8 +4156,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,프로필 프레임
-Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,통계
 Feature.Profile.Heading.Username,

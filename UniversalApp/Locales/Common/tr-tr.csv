@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Giriş Başarısız
 Authentication.CrossDevice.Response.LoginSuccess,Giriş Başarılı
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Tekrar Deneme Bekleme Süresi: {WaitTime}
+Authentication.Login.Action.Continue,Devam Et
 Authentication.Login.Action.DownloadNow,Şimdi İndir
 Authentication.Login.Action.EmailACode,E-postayla bir kod gönder
 Authentication.Login.Action.EmailOtpWaitTime,Kodu {WaitTime} sn. sonra tekrar gönder
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Kullanıcı Adını veya Şifreni mi unuttun?
 Authentication.Login.Action.ForgotUsername,Kullanıcı adını mı unuttun?
+Authentication.Login.Action.ForgotUsernameOrPassword,Kullanıcı adını veya şifreni mi unuttun?
 Authentication.Login.Action.LogInEmailOneTimeCode,Tek Kullanımlık Kodu Bana E-postayla Gönder
 Authentication.Login.Action.NeedHelp,Yardıma mı ihtiyacın var?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Mevcut Hesaba Giriş
 Authentication.Login.Heading.NewAppAvailable,Yeni Roblox Uygulamasını İndir
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Roblox'a giriş yap
 Authentication.Login.Label.AccountSelectorTitle,Giriş Yapılacak Hesabı Seç
 Authentication.Login.Label.AgedUpUsername,Eşsiz bir @kullanıcıadı ekle
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Üzgünüz, sunucularımıza ulaşırken bir sorun oluştu.
@@ -395,7 +398,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,E-postan doğrula
 Authentication.Login.WeChat.AntiAddictionText,"Kötü deneyimleri boykot et ve korsan deneyimlerden kaçın. Kandırılma ve kendini savunma konusunda bilinçli ol. Deneyim ziyaretleri, zihnin için faydalıdır ancak çok fazla deneyim ziyareti, sağlığına zarar verebilir. Zamanını iyi kullan ve sağlıklı bir yaşam tarzı benimsemeye özen göster."
 Authentication.Login.WeChat.NotInstalled,WeChat yüklü değil
 Authentication.OneTimePasscode.Action.ChangeEmailV2,E-postayı Değiştir
-Authentication.OneTimePasscode.Action.Continue,Devam Et
+Authentication.OneTimePasscode.Action.Continue,
 Authentication.OneTimePasscode.Action.GetHelp,Yardım Al
 Authentication.OneTimePasscode.Action.Resend,Tekrar Gönder
 Authentication.OneTimePasscode.Description.DidntReceiveCode,Kodu almadın mı?
@@ -4150,8 +4153,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Adı Düzenle
 Feature.Profile.Heading.EditDisplayName,Görünen Adı Düzenle
 Feature.Profile.Heading.InsufficientFunds,Yetersiz Kaynak
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Profil çerçevesi
-Feature.Profile.Heading.ProfilePictureSaved,Profil resmi başarıyla kaydedildi
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,İstatistikler
 Feature.Profile.Heading.Username,

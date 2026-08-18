@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Anmeldung fehlgeschlagen
 Authentication.CrossDevice.Response.LoginSuccess,Anmeldung erfolgreich
 Authentication.Login.Action.ConnectionError.RetryReady,Erneut
 Authentication.Login.Action.ConnectionError.RetryWait,Wiederholen in: {WaitTime}
+Authentication.Login.Action.Continue,Fortsetzen
 Authentication.Login.Action.DownloadNow,Jetzt herunterladen
 Authentication.Login.Action.EmailACode,Einen Code per E-Mail senden
 Authentication.Login.Action.EmailOtpWaitTime,Code erneut senden in {WaitTime} Sek.
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Passwort oder Benutzername vergessen?
 Authentication.Login.Action.ForgotUsername,Benutzernamen vergessen?
+Authentication.Login.Action.ForgotUsernameOrPassword,Benutzername oder Passwort vergessen?
 Authentication.Login.Action.LogInEmailOneTimeCode,Einmaligen Code per E-Mail senden
 Authentication.Login.Action.NeedHelp,Brauchst du Hilfe?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Bei Roblox anmelden
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Bei vorhandenem Konto anmelden
 Authentication.Login.Heading.NewAppAvailable,Neue Roblox-App herunterladen
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,Wähle Konto zum Anmelden
 Authentication.Login.Label.AgedUpUsername,Füge einen eindeutigen @Benutzernamen hinzu
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Sorry, es gab ein Problem mit der Verbindung zu den Servern.
@@ -1208,7 +1211,7 @@ Feature.Accessibility.SkyStyle.Night,Nacht
 Feature.Accessibility.VREnvironmentSetting.Dark,
 Feature.Accessibility.VREnvironmentSetting.Light,
 Feature.Accessibility.VREnvironmentSetting.System,
-Feature.AccountLock.Action.Continue,Fortsetzen
+Feature.AccountLock.Action.Continue,
 Feature.AccountLock.Action.Ok,
 Feature.AccountLock.Action.Signout,
 Feature.AccountLock.Content.AccountMismatchDialog,
@@ -4144,8 +4147,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Namen bearbeiten
 Feature.Profile.Heading.EditDisplayName,Anzeigenamen bearbeiten
 Feature.Profile.Heading.InsufficientFunds,Zu wenig Guthaben
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Profilrahmen
-Feature.Profile.Heading.ProfilePictureSaved,Profilbild erfolgreich gespeichert
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiken
 Feature.Profile.Heading.Username,

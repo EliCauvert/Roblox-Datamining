@@ -275,11 +275,13 @@ Authentication.CrossDevice.Response.LoginFail,ลงชื่อเข้าใ�
 Authentication.CrossDevice.Response.LoginSuccess,ลงชื่อเข้าใช้สำเร็จแล้ว
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,ลองอีกครั้งในอีก: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,ดาวน์โหลดตอนนี้
 Authentication.Login.Action.EmailACode,ส่งรหัสทางอีเมล
 Authentication.Login.Action.EmailOtpWaitTime,ส่งรหัสอีกครั้งในอีก {WaitTime} วินาที
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,ลืมรหัสผ่านหรือชื่อผู้ใช้ใช่ไหม?
 Authentication.Login.Action.ForgotUsername,ลืมชื่อผู้ใช้ใช่ไหม?
+Authentication.Login.Action.ForgotUsernameOrPassword,ลืมชื่อผู้ใช้หรือรหัสผ่านใช่ไหม?
 Authentication.Login.Action.LogInEmailOneTimeCode,ส่งรหัสแบบใช้ครั้งเดียวให้ฉันทางอีเมล
 Authentication.Login.Action.NeedHelp,ต้องการความช่วยเหลือใช่หรือไม่?
 Authentication.Login.Action.Next,
@@ -311,6 +313,7 @@ Authentication.Login.Heading.LoginRoblox,ลงชื่อเข้าใช้
 Authentication.Login.Heading.LoginRobloxAccountSwitching,ลงชื่อเข้าใช้บัญชีที่มีอยู่แล้ว
 Authentication.Login.Heading.NewAppAvailable,ดาวน์โหลดแอป Roblox เวอร์ชันใหม่
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,เลือกบัญชีเพื่อลงชื่อเข้าใช้
 Authentication.Login.Label.AgedUpUsername,"เพิ่ม ""@ชื่อผู้ใช้"" ที่ไม่ซ้ำใคร"
 Authentication.Login.Label.ConnectionError.RetryDisabled,"ขออภัย เกิดปัญหาในการติดต่อกับเซิร์ฟเวอร์ของเรา
@@ -4133,8 +4136,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,กรอบโปรไฟล์
-Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,สถิติ
 Feature.Profile.Heading.Username,

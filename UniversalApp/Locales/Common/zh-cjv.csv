@@ -284,11 +284,13 @@ Authentication.CrossDevice.Response.LoginFail,登录失败
 Authentication.CrossDevice.Response.LoginSuccess,登录成功
 Authentication.Login.Action.ConnectionError.RetryReady,重试...
 Authentication.Login.Action.ConnectionError.RetryWait,重试在: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,立即下载
 Authentication.Login.Action.EmailACode,通过电子邮件发送验证码
 Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} 秒后重新发送验证码
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,忘记密码或用户名？
 Authentication.Login.Action.ForgotUsername,忘记用户名？
+Authentication.Login.Action.ForgotUsernameOrPassword,忘记了用户名或密码？
 Authentication.Login.Action.LogInEmailOneTimeCode,通过电子邮件向我发送一次性验证码
 Authentication.Login.Action.NeedHelp,需要帮助？
 Authentication.Login.Action.Next,
@@ -320,6 +322,7 @@ Authentication.Login.Heading.LoginRoblox,登录罗布乐思
 Authentication.Login.Heading.LoginRobloxAccountSwitching,登录至现有帐户
 Authentication.Login.Heading.NewAppAvailable,下载新的 Roblox App
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,登录 Roblox
 Authentication.Login.Label.AccountSelectorTitle,选择要登录的帐户
 Authentication.Login.Label.AgedUpUsername,添加一个独特的 @username
 Authentication.Login.Label.ConnectionError.RetryDisabled,"抱歉，连接服务器时发生问题。
@@ -4156,8 +4159,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,个人资料边框
-Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料
 Feature.Profile.Heading.Username,

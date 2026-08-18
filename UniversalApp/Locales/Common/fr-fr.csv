@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Échec de la connection
 Authentication.CrossDevice.Response.LoginSuccess,Connexion réussie
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Réessayer dans: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Télécharger
 Authentication.Login.Action.EmailACode,Envoyer un code par e-mail
 Authentication.Login.Action.EmailOtpWaitTime,Renvoyer le code dans {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Mot de passe ou nom d'utilisateur oublié ?
 Authentication.Login.Action.ForgotUsername,Nom d'utilisateur oublié ?
+Authentication.Login.Action.ForgotUsernameOrPassword,Nom d'utilisateur ou mot de passe oublié ?
 Authentication.Login.Action.LogInEmailOneTimeCode,Envoyez-moi un code unique par email
 Authentication.Login.Action.NeedHelp,Besoin d'aide?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Connexion à Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Se connecter au compte existant
 Authentication.Login.Heading.NewAppAvailable,Télécharge la nouvelle application Roblox
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Connecte-toi à Roblox
 Authentication.Login.Label.AccountSelectorTitle,Sélectionner le compte pour te connecter
 Authentication.Login.Label.AgedUpUsername,Ajouter un @nomdutilisateur unique
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Désolé, il y a un problème pour atteindre nos serveurs.
@@ -4150,8 +4153,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifier le nom
 Feature.Profile.Heading.EditDisplayName,Modifier nom d'affichage
 Feature.Profile.Heading.InsufficientFunds,Fonds insuffisants
 Feature.Profile.Heading.NicknameRequestSent,Demande d'amitié envoyée
-Feature.Profile.Heading.ProfileFrame,Cadre du profil
-Feature.Profile.Heading.ProfilePictureSaved,Photo de profil enregistrée avec succès
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiques
 Feature.Profile.Heading.Username,Nom d'utilisateur 

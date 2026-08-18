@@ -275,11 +275,13 @@ Authentication.CrossDevice.Response.LoginFail,लॉग इन नहीं ह�
 Authentication.CrossDevice.Response.LoginSuccess,लॉग इन हो गया
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,इतनी देर बाद कोशिश करें : {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,अभी डाउनलोड करें
 Authentication.Login.Action.EmailACode,कोड ईमेल करें
 Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} सेकंड में फिर से कोड भेजें
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,क्या आप पासवर्ड या यूज़रनेम भूल गए हैं?
 Authentication.Login.Action.ForgotUsername,यूज़रनेम भूल गए हैं?
+Authentication.Login.Action.ForgotUsernameOrPassword,यूज़रनेम या पासवर्ड याद नहीं है?
 Authentication.Login.Action.LogInEmailOneTimeCode,मुझे वन-टाइम कोड ईमेल करें
 Authentication.Login.Action.NeedHelp,मदद चाहिए?
 Authentication.Login.Action.Next,
@@ -311,6 +313,7 @@ Authentication.Login.Heading.LoginRoblox,Roblox में लॉग इन क�
 Authentication.Login.Heading.LoginRobloxAccountSwitching,मौजूदा अकाउंट में लॉग इन करें
 Authentication.Login.Heading.NewAppAvailable,नया Roblox ऐप डाउनलोड करें
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Roblox में साइन-इन करें
 Authentication.Login.Label.AccountSelectorTitle,लॉग इन करने के लिए अकाउंट चुनें
 Authentication.Login.Label.AgedUpUsername,कोई यूनीक @यूज़रनेम जोड़ें
 Authentication.Login.Label.ConnectionError.RetryDisabled,"माफ़ करें, हमारे सर्वर तक पहुँचने में कोई समस्या हुई.
@@ -4130,8 +4133,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करे�
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
 Feature.Profile.Heading.InsufficientFunds,फ़ंड काफ़ी नहीं हैं
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,प्रोफ़ाइल फ़्रेम
-Feature.Profile.Heading.ProfilePictureSaved,प्रोफ़ाइल फ़ोटो सेव हो गई
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,आँकड़े
 Feature.Profile.Heading.Username,

@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Falha ao entrar
 Authentication.CrossDevice.Response.LoginSuccess,Sucesso ao entrar na conta
 Authentication.Login.Action.ConnectionError.RetryReady,Repetir
 Authentication.Login.Action.ConnectionError.RetryWait,Tentar novamente em: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Baixar agora
 Authentication.Login.Action.EmailACode,Enviar um código por e-mail
 Authentication.Login.Action.EmailOtpWaitTime,Reenviar código em {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Esqueceu a senha ou nome de usuário?
 Authentication.Login.Action.ForgotUsername,Esqueceu o nome de usuário?
+Authentication.Login.Action.ForgotUsernameOrPassword,Esqueceu o nome de usuário/senha?
 Authentication.Login.Action.LogInEmailOneTimeCode,Envie-me um código único por e-mail
 Authentication.Login.Action.NeedHelp,Precisa de ajuda?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Entrar na Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Entrar em conta existente
 Authentication.Login.Heading.NewAppAvailable,Faça o download do novo aplicativo Roblox
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,Selecione uma conta para entrar
 Authentication.Login.Label.AgedUpUsername,Adicione um @username único
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Ocorreu um problema na comunicação com nossos servidores.
@@ -4146,8 +4149,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nome
 Feature.Profile.Heading.EditDisplayName,Editar nome de exibição
 Feature.Profile.Heading.InsufficientFunds,Saldo insuficiente
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Moldura do perfil
-Feature.Profile.Heading.ProfilePictureSaved,Imagem de perfil salva com sucesso
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estatísticas
 Feature.Profile.Heading.Username,

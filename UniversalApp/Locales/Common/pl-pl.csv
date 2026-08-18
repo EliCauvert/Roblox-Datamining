@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Nie udało się zalogować
 Authentication.CrossDevice.Response.LoginSuccess,Zalogowano
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Spróbuj ponownie za: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Pobierz teraz
 Authentication.Login.Action.EmailACode,Wyślij wiadomość e-mail z kodem
 Authentication.Login.Action.EmailOtpWaitTime,Wyślij kod ponownie za {WaitTime} s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Nie pamiętasz hasła lub nazwy użytkownika?
 Authentication.Login.Action.ForgotUsername,Nie pamiętasz nazwy użytkownika?
+Authentication.Login.Action.ForgotUsernameOrPassword,Nie pamiętasz nazwy użytkownika lub hasła?
 Authentication.Login.Action.LogInEmailOneTimeCode,Wyślij kod jednorazowy na mój adres e-mail
 Authentication.Login.Action.NeedHelp,Potrzebujesz pomocy?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Zaloguj się na platformie Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,Pobierz nową aplikację Roblox
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Zaloguj się na Robloxie
 Authentication.Login.Label.AccountSelectorTitle,"Wybierz konto, na które chcesz się zalogować"
 Authentication.Login.Label.AgedUpUsername,Dodaj niepowtarzalną @nazwę_użytkownika
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Wystąpił problem z nawiązaniem połączenia z naszymi serwerami.
@@ -4149,8 +4152,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edycja nazwy
 Feature.Profile.Heading.EditDisplayName,Edytuj nazwę wyświetlaną
 Feature.Profile.Heading.InsufficientFunds,Za mało środków
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Ramka profilu
-Feature.Profile.Heading.ProfilePictureSaved,Zdjęcie profilowe zostało zapisane
 Feature.Profile.Heading.ProfileQRCode,Udostępnianie kodu QR
 Feature.Profile.Heading.Statistics,Statystyki
 Feature.Profile.Heading.Username,

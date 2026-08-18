@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Error al iniciar sesión
 Authentication.CrossDevice.Response.LoginSuccess,Inicio de sesión correcto
 Authentication.Login.Action.ConnectionError.RetryReady,Reintentarlo
 Authentication.Login.Action.ConnectionError.RetryWait,Volver a intentar: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Descarga ahora
 Authentication.Login.Action.EmailACode,Enviar un código por correo electrónico
 Authentication.Login.Action.EmailOtpWaitTime,Reenviar código en {WaitTime} s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,¿Olvidaste la contraseña o el nombre de usuario?
 Authentication.Login.Action.ForgotUsername,¿Olvidaste el nombre de usuario?
+Authentication.Login.Action.ForgotUsernameOrPassword,¿Olvidaste el nombre de usuario o la contraseña?
 Authentication.Login.Action.LogInEmailOneTimeCode,Envíame un código de un solo uso
 Authentication.Login.Action.NeedHelp,¿Necesitas ayuda?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Iniciar sesión en Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,Descarga la nueva aplicación de Roblox
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Inicia sesión en Roblox
 Authentication.Login.Label.AccountSelectorTitle,Seleccionar cuenta para iniciar sesión
 Authentication.Login.Label.AgedUpUsername,Añade un @nombredeusuario único
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Lo sentimos, hubo un problema al conectar a nuestros servidores.
@@ -4146,8 +4149,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nombre
 Feature.Profile.Heading.EditDisplayName,Editar nombre de visualización
 Feature.Profile.Heading.InsufficientFunds,Fondos insuficientes
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Marco del perfil
-Feature.Profile.Heading.ProfilePictureSaved,Imagen de perfil guardada correctamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estadísticas
 Feature.Profile.Heading.Username,

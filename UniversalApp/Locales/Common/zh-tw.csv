@@ -291,11 +291,13 @@ Authentication.CrossDevice.Response.LoginFail,登入失敗
 Authentication.CrossDevice.Response.LoginSuccess,登入成功
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,請在 {WaitTime} 後重試
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,立即下載
 Authentication.Login.Action.EmailACode,透過電子郵件發送代碼
 Authentication.Login.Action.EmailOtpWaitTime,{WaitTime} 秒後重新傳送代碼
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,忘記密碼或使用者名稱？
 Authentication.Login.Action.ForgotUsername,忘記使用者名稱了?
+Authentication.Login.Action.ForgotUsernameOrPassword,忘記使用者名稱或密碼了嗎？
 Authentication.Login.Action.LogInEmailOneTimeCode,透過電子郵件給我一次性驗證碼
 Authentication.Login.Action.NeedHelp,需要幫助嗎？
 Authentication.Login.Action.Next,
@@ -327,6 +329,7 @@ Authentication.Login.Heading.LoginRoblox,登入 Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,登入現有帳戶
 Authentication.Login.Heading.NewAppAvailable,下載新版 Roblox App
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,選擇要登入的帳號
 Authentication.Login.Label.AgedUpUsername,新增獨特的 @使用者名稱
 Authentication.Login.Label.ConnectionError.RetryDisabled,"對不起，連線到伺服器時發生問題。
@@ -4149,8 +4152,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,個人檔案外框
-Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,數據
 Feature.Profile.Heading.Username,

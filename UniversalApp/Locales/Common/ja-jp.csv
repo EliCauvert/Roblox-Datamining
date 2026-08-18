@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,ログインできませんでし�
 Authentication.CrossDevice.Response.LoginSuccess,ログインできました
 Authentication.Login.Action.ConnectionError.RetryReady,再試行する
 Authentication.Login.Action.ConnectionError.RetryWait,{WaitTime} で再試行する
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,今すぐダウンロード
 Authentication.Login.Action.EmailACode,コードをメールで送信
 Authentication.Login.Action.EmailOtpWaitTime,あと {WaitTime}秒でコードを再送信
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,パスワード、またはユーザーネームをお忘れですか？
 Authentication.Login.Action.ForgotUsername,ユーザーネームを忘れた場合
+Authentication.Login.Action.ForgotUsernameOrPassword,ユーザーネームまたはパスワードをお忘れですか？
 Authentication.Login.Action.LogInEmailOneTimeCode,ワンタイムコードをメールで送信
 Authentication.Login.Action.NeedHelp,ヘルプが必要ですか？
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,ロブロックスにログイン
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,新しいRobloxアプリをダウンロード
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Robloxにログイン
 Authentication.Login.Label.AccountSelectorTitle,ログインするアカウントを選ぶ
 Authentication.Login.Label.AgedUpUsername,一意の @ユーザーネーム を追加
 Authentication.Login.Label.ConnectionError.RetryDisabled,"申し訳ありませんが、サーバーへの接続中に問題が発生しました。
@@ -4148,8 +4151,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,名前を編集
 Feature.Profile.Heading.EditDisplayName,表示名を編集
 Feature.Profile.Heading.InsufficientFunds,資金が足りません
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,プロフィールフレーム
-Feature.Profile.Heading.ProfilePictureSaved,プロフィール写真が正常に保存されました
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,統計
 Feature.Profile.Heading.Username,

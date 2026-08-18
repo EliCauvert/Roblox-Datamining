@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Đăng Nhập Thất Bại
 Authentication.CrossDevice.Response.LoginSuccess,Đăng Nhập Thành Công
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Thử lại: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Tải Xuống Ngay
 Authentication.Login.Action.EmailACode,Gửi mã qua email
 Authentication.Login.Action.EmailOtpWaitTime,Gửi lại mã sau {WaitTime} giây
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Bạn quên Mật khẩu hoặc Tên người dùng?
 Authentication.Login.Action.ForgotUsername,Đã quên tên tài khoản?
+Authentication.Login.Action.ForgotUsernameOrPassword,Quên tên tài khoản hoặc mật khẩu?
 Authentication.Login.Action.LogInEmailOneTimeCode,Gửi mã một lần cho tôi qua email
 Authentication.Login.Action.NeedHelp,Bạn cần trợ giúp?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Đăng nhập vào Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Đăng nhập vào tài khoản hiện có
 Authentication.Login.Heading.NewAppAvailable,Tải ứng dụng Roblox mới
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,Chọn tài khoản để đăng nhập
 Authentication.Login.Label.AgedUpUsername,Thêm một @ten_nguoi_dung độc nhất
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Rất tiếc, tiến trình kết nối với máy chủ của chúng tôi đã xảy ra vấn đề.
@@ -4150,8 +4153,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Chỉnh Sửa Tên
 Feature.Profile.Heading.EditDisplayName,Chỉnh Sửa Tên Hiển Thị
 Feature.Profile.Heading.InsufficientFunds,Số Dư Không Đủ
 Feature.Profile.Heading.NicknameRequestSent,Đã Gửi Yêu Cầu Thêm Bạn Bè
-Feature.Profile.Heading.ProfileFrame,Khung hồ sơ
-Feature.Profile.Heading.ProfilePictureSaved,Đã lưu ảnh đại diện thành công
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Số Liệu
 Feature.Profile.Heading.Username,

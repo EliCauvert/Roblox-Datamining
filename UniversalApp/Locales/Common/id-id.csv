@@ -292,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Gagal Log In
 Authentication.CrossDevice.Response.LoginSuccess,Berhasil Log In
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Coba lagi dalam: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Download Sekarang
 Authentication.Login.Action.EmailACode,Kirim kode via email
 Authentication.Login.Action.EmailOtpWaitTime,Kirim ulang kode dalam {WaitTime}
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Lupa Password atau Nama Pengguna?
 Authentication.Login.Action.ForgotUsername,Lupa nama pengguna?
+Authentication.Login.Action.ForgotUsernameOrPassword,Lupa nama pengguna atau password?
 Authentication.Login.Action.LogInEmailOneTimeCode,Kirimi Saya Kode Sekali Pakai
 Authentication.Login.Action.NeedHelp,Butuh bantuan?
 Authentication.Login.Action.Next,
@@ -328,6 +330,7 @@ Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Log In ke Akun yang Sudah Ada
 Authentication.Login.Heading.NewAppAvailable,Download Aplikasi Roblox Baru
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,Pilih Akun untuk Log In
 Authentication.Login.Label.AgedUpUsername,Tambahkan @namapengguna yang unik
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Maaf, terjadi eror saat menghubungi server kami.
@@ -4147,8 +4150,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Nama
 Feature.Profile.Heading.EditDisplayName,Edit Nama Display
 Feature.Profile.Heading.InsufficientFunds,Dana Tidak Cukup
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Bingkai profil
-Feature.Profile.Heading.ProfilePictureSaved,Foto profil berhasil disimpan
 Feature.Profile.Heading.ProfileQRCode,Bagikan Kode QR
 Feature.Profile.Heading.Statistics,Statistik
 Feature.Profile.Heading.Username,

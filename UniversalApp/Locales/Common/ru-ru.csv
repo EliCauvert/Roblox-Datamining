@@ -146,6 +146,7 @@ Authentication.CrossDevice.Response.LoginFail,Не удалось войти
 Authentication.CrossDevice.Response.LoginSuccess,Вход выполнен
 Authentication.Login.Action.ConnectionError.RetryReady,Повторно
 Authentication.Login.Action.ConnectionError.RetryWait,Повторите в: {WaitTime}
+Authentication.Login.Action.Continue,Продолжить
 Authentication.Login.Action.DownloadNow,Загрузить сейчас
 Authentication.Login.Action.EmailACode,Отправить код по электронной почте
 Authentication.Login.Action.EmailOtpWaitTime,Отправить код повторно через {WaitTime}с
@@ -233,7 +234,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,"Этот адр�
 Authentication.Login.WeChat.AntiAddictionText,"Не участвуй в плохих и пиратских проектах. Будь начеку, чтобы избежать обмана. Не проводи слишком много времени в сети, это может навредить здоровью. Разумно распределяй своё время и наслаждайся правильным образом жизни."
 Authentication.Login.WeChat.NotInstalled,WeChat не установлен
 Authentication.OneTimePasscode.Action.ChangeEmailV2,Изменить адрес эл. почты
-Authentication.OneTimePasscode.Action.Continue,Продолжить
+Authentication.OneTimePasscode.Action.Continue,
 Authentication.OneTimePasscode.Action.GetHelp,Нужна помощь
 Authentication.OneTimePasscode.Action.Resend,Отправить заново
 Authentication.OneTimePasscode.Description.DidntReceiveCode,Код не получен?

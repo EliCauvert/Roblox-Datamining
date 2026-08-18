@@ -293,11 +293,13 @@ Authentication.CrossDevice.Response.LoginFail,Log in Failed
 Authentication.CrossDevice.Response.LoginSuccess,Log in Successful
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Retry in: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Download Now
 Authentication.Login.Action.EmailACode,Email a code
 Authentication.Login.Action.EmailOtpWaitTime,Resend code in {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Forgot Password or Username?
 Authentication.Login.Action.ForgotUsername,Forgot username?
+Authentication.Login.Action.ForgotUsernameOrPassword,Forgot username or password?
 Authentication.Login.Action.LogInEmailOneTimeCode,Email Me a One-Time Code
 Authentication.Login.Action.NeedHelp,Need help?
 Authentication.Login.Action.Next,
@@ -329,6 +331,7 @@ Authentication.Login.Heading.LoginRoblox,Login to Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Login To Existing Account
 Authentication.Login.Heading.NewAppAvailable,Download New Roblox App
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,Sign in to Roblox
 Authentication.Login.Label.AccountSelectorTitle,Select Account to Log In
 Authentication.Login.Label.AgedUpUsername,Add a unique @username
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Sorry, there was a problem reaching our servers.
@@ -4167,8 +4170,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Profile frame
-Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,

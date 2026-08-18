@@ -276,11 +276,13 @@ Authentication.CrossDevice.Response.LoginFail,Accesso fallito
 Authentication.CrossDevice.Response.LoginSuccess,Accesso riuscito
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Riprova in: {WaitTime}
+Authentication.Login.Action.Continue,Prosegui
 Authentication.Login.Action.DownloadNow,Scarica ora
 Authentication.Login.Action.EmailACode,Invia un codice via email
 Authentication.Login.Action.EmailOtpWaitTime,Invia nuovamente il codice in {WaitTime}
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Hai dimenticato la password o il nome utente?
 Authentication.Login.Action.ForgotUsername,Hai dimenticato il tuo nome utente?
+Authentication.Login.Action.ForgotUsernameOrPassword,Ho dimenticato il nome utente o la password
 Authentication.Login.Action.LogInEmailOneTimeCode,Inviami un codice monouso
 Authentication.Login.Action.NeedHelp,Hai bisogno d'aiuto?
 Authentication.Login.Action.Next,
@@ -312,6 +314,7 @@ Authentication.Login.Heading.LoginRoblox,Accedi a Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,Scarica la nuova app Roblox
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,Seleziona l'account da accedere
 Authentication.Login.Label.AgedUpUsername,Aggiungi un @username originale
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Siamo spiacenti, si è verificato un problema raggiungendo i nostri server.
@@ -379,7 +382,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,Il tuo indirizzo 
 Authentication.Login.WeChat.AntiAddictionText,"Boicotta le brutte esperienze, rifiuta le esperienze piratate. Sii consapevole dell'autodifesa e dell'essere ingannati. Le esperienze di visita fanno bene al cervello, ma troppe visite di esperienza possono danneggiare la tua salute. Gestisci bene il tuo tempo e goditi uno stile di vita sano."
 Authentication.Login.WeChat.NotInstalled,WeChat non è installato
 Authentication.OneTimePasscode.Action.ChangeEmailV2,Modifica email
-Authentication.OneTimePasscode.Action.Continue,Prosegui
+Authentication.OneTimePasscode.Action.Continue,
 Authentication.OneTimePasscode.Action.GetHelp,Richiedi assistenza
 Authentication.OneTimePasscode.Action.Resend,Invia di nuovo
 Authentication.OneTimePasscode.Description.DidntReceiveCode,Non hai ricevuto il codice?
@@ -4132,8 +4135,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifica nome
 Feature.Profile.Heading.EditDisplayName,Modifica Nome visualizzato
 Feature.Profile.Heading.InsufficientFunds,Fondi Insufficienti
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfileFrame,Cornice del profilo
-Feature.Profile.Heading.ProfilePictureSaved,Immagine del profilo salvata correttamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiche
 Feature.Profile.Heading.Username,Nome Utente
