@@ -306,6 +306,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Kod gönder
 Authentication.Login.Action.SendVerificationEmail,Doğrulama E-postası Gönder
 Authentication.Login.Action.SignIn,Giriş Yap
+Authentication.Login.Action.SignInSentenceCase,Giriş yap
 Authentication.Login.Action.UsePasskey,Geçiş anahtarı kullan
 Authentication.Login.Action.WeChatLogin,WeChat Girişi
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
@@ -326,7 +327,7 @@ Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Mevcut Hesaba Giriş
 Authentication.Login.Heading.NewAppAvailable,Yeni Roblox Uygulamasını İndir
-Authentication.Login.Heading.SignIn,Giriş yap
+Authentication.Login.Heading.SignIn,
 Authentication.Login.Label.AccountSelectorTitle,Giriş Yapılacak Hesabı Seç
 Authentication.Login.Label.AgedUpUsername,Eşsiz bir @kullanıcıadı ekle
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Üzgünüz, sunucularımıza ulaşırken bir sorun oluştu.
@@ -344,8 +345,10 @@ Authentication.Login.Label.EmailNeedsVerification,E-postanın doğrulanması ger
 Authentication.Login.Label.EmailOrPhone,E-posta veya telefon
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,E-posta gir
+Authentication.Login.Label.EnterHere,Buraya gir
 Authentication.Login.Label.EnterOneTimeCode,Tek Kullanımlık Kodu Gir
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Az önce e-postana gönderdiğimiz kodu gir
+Authentication.Login.Label.EnterPassword,Şifreyi gir
 Authentication.Login.Label.ForgotYourPassword,Şifreni mi unuttun?
 Authentication.Login.Label.GetOneTimeCode,Tek Kullanımlık Kod Al
 Authentication.Login.Label.LearnMore,Daha fazla bilgi edin
@@ -354,6 +357,7 @@ Authentication.Login.Label.PasskeyIncompatible,Geçiş anahtarı uyumsuz
 Authentication.Login.Label.Password,Şifre
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,QQ'dan çıkış yaptın. Lütfen QQ'ya giriş yap.
+Authentication.Login.Label.SelectAnAccount,Bir hesap seç
 Authentication.Login.Label.TroubleSigningIn,Giriş yaparken sorun mu yaşıyorsun?
 Authentication.Login.Label.UnverifiedEmailInstructions,E-postanla giriş yapmak için bu e-posta adresinin doğrulanmış olması gerekiyor. Ayrıca kullanıcı adınla da giriş yapabilirsin.
 Authentication.Login.Label.Username,Kullanıcı adı
@@ -3547,6 +3551,7 @@ Feature.Moderation.Link.SupportForm,Destek Formu
 Feature.Moments.Action.AddMusic,Müzik Ekle
 Feature.Moments.Action.AddSticker,Çıkartma Ekle
 Feature.Moments.Action.AddText,Metin Ekle
+Feature.Moments.Action.AddVoice,Ses Ekle
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3627,6 +3632,8 @@ Feature.Moments.Label.TextGeneratedBody,Yapay zekâ tarafından oluşturulan met
 Feature.Moments.Label.TextGeneratedTitle,Metin Oluşturuldu
 Feature.Moments.Label.TextGenerationFailedBody,Metin oluşturulamadı. Lütfen tekrar dene.
 Feature.Moments.Label.TextGenerationFailedTitle,Oluşturma Başarısız
+Feature.Moments.Label.TextGenerationFilteredBody,"Bu yakalanan video için oluşturma işlemi gerçekleştirilemiyor, içerik filtrelendi."
+Feature.Moments.Label.TextGenerationFilteredTitle,Oluşturma Filtrelendi
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
@@ -4143,6 +4150,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Adı Düzenle
 Feature.Profile.Heading.EditDisplayName,Görünen Adı Düzenle
 Feature.Profile.Heading.InsufficientFunds,Yetersiz Kaynak
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Profil çerçevesi
+Feature.Profile.Heading.ProfilePictureSaved,Profil resmi başarıyla kaydedildi
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,İstatistikler
 Feature.Profile.Heading.Username,
@@ -4433,15 +4442,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,Paylaşılan İçerik
 Feature.Settings.Subheading.AccountSettingsScan,QR Kodunu Tara
 Feature.Settings.Subheading.AccountSettingsWebsite,Web Sitesini Ziyaret Et
+Feature.SettingsHub.Action.AllowInSettings,Ayarlar'dan izin ver
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,Ayarları Aç
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,QR kodunu tarayabilmen için kamerana erişmemiz gerekiyor.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. İzinler seçeneğini seç
 2. Rehberi seç
 3. Rehberine erişebilmesi için Roblox'a izin ver"
 Feature.SettingsHub.Description.ContactsPermissionIOS,Arkadaşlarla iletişim kurabilmek için Roblox'un kameraya erişmesine izin ver.
+Feature.SettingsHub.Description.ContactsPermissionRequest,Arkadaşlarınla bağlantı kurabilmen için kişiler listene erişmemiz gerekiyor.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. İzinler seçeneğini seç
 2. Kamerayı seç
 3. Kamerana erişebilmesi için Roblox'a izin ver"
@@ -4461,6 +4473,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,Sana katılmaları için davet edebilm
 Feature.SettingsHub.Label.ReportComment,"Kendi sözlerinle, neyin yanlış gittiğini anlamamıza yardım et."
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Kameraya erişim izni verilsin mi?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Kişilere erişim izni verilsin mi?
 Feature.SettingsHub.Prompt.NeedCameraAccess,Kamera Erişimi Gerekli
 Feature.SettingsHub.Prompt.NeedContactsAccess,Rehber Erişimi Gerekli
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,Mikrofon erişim değişikliklerinin uygulanabilmesi için uygulamayı yeniden başlatman gerekiyor.

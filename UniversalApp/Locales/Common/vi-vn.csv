@@ -306,6 +306,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Gửi mã
 Authentication.Login.Action.SendVerificationEmail,Gửi email xác minh
 Authentication.Login.Action.SignIn,Đăng nhập
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,Sử dụng mã xác nhận
 Authentication.Login.Action.WeChatLogin,Đăng nhập bằng WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
@@ -344,8 +345,10 @@ Authentication.Login.Label.EmailNeedsVerification,Email của bạn cần xác m
 Authentication.Login.Label.EmailOrPhone,Email hoặc điện thoại
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,Nhập email
+Authentication.Login.Label.EnterHere,Nhập tại đây
 Authentication.Login.Label.EnterOneTimeCode,Nhập mã một lần
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Hãy nhập mã chúng tôi vừa gửi tới email của bạn
+Authentication.Login.Label.EnterPassword,Nhập mật khẩu
 Authentication.Login.Label.ForgotYourPassword,Bạn đã quên mật khẩu?
 Authentication.Login.Label.GetOneTimeCode,Nhận mã một lần
 Authentication.Login.Label.LearnMore,Tìm hiểu thêm
@@ -354,6 +357,7 @@ Authentication.Login.Label.PasskeyIncompatible,Mã xác nhận không tương th
 Authentication.Login.Label.Password,Mật khẩu
 Authentication.Login.Label.Phone,Điện thoại
 Authentication.Login.Label.QQUserCancel,Bạn đã đăng xuất khỏi QQ. Vui lòng đăng nhập QQ.
+Authentication.Login.Label.SelectAnAccount,Chọn một tài khoản
 Authentication.Login.Label.TroubleSigningIn,Lỗi đăng nhập?
 Authentication.Login.Label.UnverifiedEmailInstructions,Email của bạn phải được xác minh để bạn có thể đăng nhập bằng email. Bạn cũng có thể đăng nhập bằng tên người dùng của mình.
 Authentication.Login.Label.Username,Tên người dùng
@@ -3547,6 +3551,7 @@ Feature.Moderation.Link.SupportForm,Mẫu Hỗ Trợ
 Feature.Moments.Action.AddMusic,Thêm nhạc
 Feature.Moments.Action.AddSticker,Thêm nhãn dán
 Feature.Moments.Action.AddText,Thêm văn bản
+Feature.Moments.Action.AddVoice,Thêm giọng nói
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3627,6 +3632,8 @@ Feature.Moments.Label.TextGeneratedBody,Đã thêm mô tả và lớp phủ văn
 Feature.Moments.Label.TextGeneratedTitle,Đã tạo văn bản
 Feature.Moments.Label.TextGenerationFailedBody,Không tạo được văn bản. Vui lòng thử lại.
 Feature.Moments.Label.TextGenerationFailedTitle,Tạo không thành công
+Feature.Moments.Label.TextGenerationFilteredBody,Không thể tạo văn bản cho video đã quay này vì nội dung đã bị lọc.
+Feature.Moments.Label.TextGenerationFilteredTitle,Nội dung tạo sinh bị chặn
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
@@ -4143,6 +4150,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Chỉnh Sửa Tên
 Feature.Profile.Heading.EditDisplayName,Chỉnh Sửa Tên Hiển Thị
 Feature.Profile.Heading.InsufficientFunds,Số Dư Không Đủ
 Feature.Profile.Heading.NicknameRequestSent,Đã Gửi Yêu Cầu Thêm Bạn Bè
+Feature.Profile.Heading.ProfileFrame,Khung hồ sơ
+Feature.Profile.Heading.ProfilePictureSaved,Đã lưu ảnh đại diện thành công
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Số Liệu
 Feature.Profile.Heading.Username,
@@ -4433,15 +4442,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,Nội Dung Đã Chia Sẻ
 Feature.Settings.Subheading.AccountSettingsScan,Quét Mã QR
 Feature.Settings.Subheading.AccountSettingsWebsite,Truy Cập Trang Web
+Feature.SettingsHub.Action.AllowInSettings,Mở phần cài đặt để cho phép
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,Mở Cài Đặt
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Chúng tôi cần quyền truy cập vào camera để bạn có thể quét mã QR.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Chọn Quyền
 2. Chọn Danh bạ
 3. Cho phép Roblox truy cập vào Danh bạ của bạn"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Để kết nối với bạn bè, hãy cho phép Roblox truy cập vào danh bạ của bạn."
+Feature.SettingsHub.Description.ContactsPermissionRequest,Chúng tôi cần quyền truy cập vào danh bạ để bạn có thể kết nối với bạn bè.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Chọn Quyền
 2. Chọn Camera
 3. Cho phép Roblox truy cập vào Camera của bạn"
@@ -4461,6 +4473,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,Kết bạn để bạn có thể mờ
 Feature.SettingsHub.Label.ReportComment,Hãy giải thích chi tiết trục trặc mà bạn gặp phải.
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,Tìm bạn bè
 Feature.SettingsHub.Label.Sending,Đang Gửi
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Cho phép truy cập camera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Cho phép truy cập danh bạ?
 Feature.SettingsHub.Prompt.NeedCameraAccess,Cần Quyền Truy Cập Camera
 Feature.SettingsHub.Prompt.NeedContactsAccess,Cần Quyền Truy Cập Danh Bạ
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,Bạn cần khởi động lại ứng dụng để những thay đổi về quyền truy cập micrô có hiệu lực.

@@ -298,6 +298,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,发送验证码
 Authentication.Login.Action.SendVerificationEmail,发送验证电子邮件
 Authentication.Login.Action.SignIn,登录
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,使用通行密钥
 Authentication.Login.Action.WeChatLogin,微信登录
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,退出 Roblox 以切换为 {platformAccountName} 帐户
@@ -336,8 +337,10 @@ Authentication.Login.Label.EmailNeedsVerification,你的电子邮件需要验证
 Authentication.Login.Label.EmailOrPhone,电子邮箱或手机号码
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,输入电子邮箱
+Authentication.Login.Label.EnterHere,在此输入
 Authentication.Login.Label.EnterOneTimeCode,输入一次性验证码
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,请输入我们刚发送至你电子邮件的验证码
+Authentication.Login.Label.EnterPassword,输入密码
 Authentication.Login.Label.ForgotYourPassword,忘记密码？
 Authentication.Login.Label.GetOneTimeCode,获取一次性验证码
 Authentication.Login.Label.LearnMore,了解更多
@@ -346,6 +349,7 @@ Authentication.Login.Label.PasskeyIncompatible,密码不兼容
 Authentication.Login.Label.Password,密码
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,你已退出 QQ。请重新登录 QQ。
+Authentication.Login.Label.SelectAnAccount,选择一个帐户
 Authentication.Login.Label.TroubleSigningIn,登录出现问题？
 Authentication.Login.Label.UnverifiedEmailInstructions,要使用电子邮件登录，必须先进行验证。你也可以使用你的用户名登录。
 Authentication.Login.Label.Username,用户名
@@ -3543,6 +3547,7 @@ Feature.Moderation.Link.SupportForm,支持表格
 Feature.Moments.Action.AddMusic,添加音乐
 Feature.Moments.Action.AddSticker,添加贴纸
 Feature.Moments.Action.AddText,添加文本
+Feature.Moments.Action.AddVoice,添加语音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3550,6 +3555,8 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,
 Feature.Moments.Action.GenerateText,生成
+Feature.Moments.Action.GenerateTextFeedbackNotHelpful,
+Feature.Moments.Action.GenerateTextFeedbackPolicy,
 Feature.Moments.Action.Hide,隐藏详情
 Feature.Moments.Action.HowToCapture,如何截取
 Feature.Moments.Action.Join,
@@ -3566,6 +3573,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪视频
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,
 Feature.Moments.Description.HowToCaptureStep1,加入已启用“截图”功能的体验，然后选择汉堡菜单
 Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
@@ -3623,7 +3631,10 @@ Feature.Moments.Label.TextGeneratedBody,已添加 AI 生成的文本叠加层和
 Feature.Moments.Label.TextGeneratedTitle,已生成文本
 Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
+Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
+Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
 Feature.Moments.Label.Videos,
+Feature.Moments.Title.GenerateTextFeedbackReason,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
@@ -4145,6 +4156,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,编辑名称
 Feature.Profile.Heading.EditDisplayName,编辑昵称
 Feature.Profile.Heading.InsufficientFunds,资金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,个人资料边框
+Feature.Profile.Heading.ProfilePictureSaved,个人资料图片已成功保存
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,统计资料
 Feature.Profile.Heading.Username,
@@ -4435,15 +4448,19 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,共享内容
 Feature.Settings.Subheading.AccountSettingsScan,扫描二维码
 Feature.Settings.Subheading.AccountSettingsWebsite,访问网站
+Feature.SettingsHub.Action.AllowInSettings,在“设置”中允许
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,现在不要
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,我们需要访问你的相机，以便你能扫描二维码。
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. 选择权限
 2. 选择联系人
 3. 允许 Roblox 访问你的联系人"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,
 Feature.SettingsHub.Description.ContactsPermissionIOS,要与好友联系，请允许 Roblox 访问你的联系人。
+Feature.SettingsHub.Description.ContactsPermissionRequest,我们需要访问你的联系人，以便你能与好友联系。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. 选择权限
 2. 选择摄像头
 3. 允许 Roblox 访问摄像头"
@@ -4463,6 +4480,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,认识更多朋友，邀请他们和�
 Feature.SettingsHub.Label.ReportComment,请自行描述不当的事项。
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,要允许访问相机吗？
+Feature.SettingsHub.Prompt.AllowAccessToContacts,要允许访问联系人吗？
 Feature.SettingsHub.Prompt.NeedCameraAccess,需要摄像头访问权限
 Feature.SettingsHub.Prompt.NeedContactsAccess,需要联系人访问权限
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,你需要重新启动应用程序才能应用麦克风访问更改。

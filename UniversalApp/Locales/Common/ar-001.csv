@@ -289,6 +289,7 @@ Authentication.Login.Action.ResendCode,إعادة إرسال الرمز
 Authentication.Login.Action.SendCodeSentenceCase,إرسال الكود
 Authentication.Login.Action.SendVerificationEmail,إرسال بريد إلكتروني للتحقق
 Authentication.Login.Action.SignIn,تسجيل الدخول
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,استخدام مفتاح مرور
 Authentication.Login.Action.WeChatLogin,تسجيل دخول عبر WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
@@ -326,8 +327,10 @@ Authentication.Login.Label.EmailNeedsVerification,نحتاج للتحقق من �
 Authentication.Login.Label.EmailOrPhone,البريد الإلكتروني أو الهاتف
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,أدخِل البريد الإلكتروني
+Authentication.Login.Label.EnterHere,أدخِل هنا
 Authentication.Login.Label.EnterOneTimeCode,أدخل رمز مرة واحدة
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,أدخل الرمز الذي أرسلناه للتو إلى بريدك الإلكتروني
+Authentication.Login.Label.EnterPassword,أدخِل كلمة المرور
 Authentication.Login.Label.ForgotYourPassword,هل نسيت كلمة مرورك؟
 Authentication.Login.Label.GetOneTimeCode,احصل على رمز مرة واحدة
 Authentication.Login.Label.LearnMore,اعرف المزيد
@@ -336,6 +339,7 @@ Authentication.Login.Label.PasskeyIncompatible,مفتاح المرور غير م
 Authentication.Login.Label.Password,كلمة المرور
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,أنت سجلتَ الخروج من QQ. الرجاء تسجيل الدخول إلى QQ.
+Authentication.Login.Label.SelectAnAccount,حدّد حسابًا
 Authentication.Login.Label.TroubleSigningIn,هل تواجه مشكلة في تسجيل الدخول؟
 Authentication.Login.Label.UnverifiedEmailInstructions,لتسجيل الدخول ببريدك الإلكتروني، يتعيّن عليك التحقق منه. يمكنك أيضًا تسجيل الدخول باسم المستخدم الخاص بك.
 Authentication.Login.Label.Username,اسم المستخدم
@@ -3527,6 +3531,7 @@ Feature.Moderation.Link.SupportForm,نموذج الدعم
 Feature.Moments.Action.AddMusic,أضِف موسيقى
 Feature.Moments.Action.AddSticker,إضافة ملصق
 Feature.Moments.Action.AddText,أضِف نص
+Feature.Moments.Action.AddVoice,إضافة صوت
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3607,6 +3612,8 @@ Feature.Moments.Label.TextGeneratedBody,تمت إضافة تراكب نص ووص
 Feature.Moments.Label.TextGeneratedTitle,تم إنشاء النص
 Feature.Moments.Label.TextGenerationFailedBody,تعذّر إنشاء النص. يُرجى المحاولة مرة أخرى.
 Feature.Moments.Label.TextGenerationFailedTitle,تعذَّر الإنشاء
+Feature.Moments.Label.TextGenerationFilteredBody,تعذَّر إجراء الإنشاء لهذا الفيديو الذي تم التقاطه، وتمت فلترة المحتوى.
+Feature.Moments.Label.TextGenerationFilteredTitle,تمت فلترة الإنشاء
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
@@ -4123,6 +4130,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,تحرير الاسم
 Feature.Profile.Heading.EditDisplayName,تعديل اسم العرض
 Feature.Profile.Heading.InsufficientFunds,رصيد غير كافي
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,إطار الملف الشخصي
+Feature.Profile.Heading.ProfilePictureSaved,تم حفظ صورة الملف الشخصي بنجاح
 Feature.Profile.Heading.ProfileQRCode,مشاركة رمز QR
 Feature.Profile.Heading.Statistics,الإحصائيات
 Feature.Profile.Heading.Username,
@@ -4412,15 +4421,18 @@ Feature.Settings.Label.Recommended,مقترحة
 Feature.Settings.Label.SharedContent,محتوى مشترك
 Feature.Settings.Subheading.AccountSettingsScan,مسح رمز QR
 Feature.Settings.Subheading.AccountSettingsWebsite,زيارة الموقع الإلكتروني
+Feature.SettingsHub.Action.AllowInSettings,السماح في الإعدادات
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,نحتاج إلى الوصول إلى كاميرتك لتتمكن من مسح كود الاستجابة السريعة (QR).
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. حدِّد ""الإذن""
 2. حدِّد ""جهات الاتصال""
 3. اسمح لمنصة Roblox بالوصول إلى جهات اتصالك"
 Feature.SettingsHub.Description.ContactsPermissionIOS,للتواصل مع الأصدقاء، اسمح لمنصة Roblox بالوصول إلى جهات اتصالك.
+Feature.SettingsHub.Description.ContactsPermissionRequest,نحتاج إلى الوصول إلى جهات اتصالك لتتمكن من التواصل مع الأصدقاء.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. حدِّد ""الإذن""
 2. حدِّد ""الكاميرا""
 3. اسمح لمنصة Roblox بالوصول إلى الكاميرا"
@@ -4440,6 +4452,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,أنشئ صداقات لكي تتمك�
 Feature.SettingsHub.Label.ReportComment,الرجاء شرح المشكلة بدقة لنتمكن من مساعدتك.
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,هل تريد السماح بالوصول إلى الكاميرا؟
+Feature.SettingsHub.Prompt.AllowAccessToContacts,هل تريد السماح بالوصول إلى جهات الاتصال؟
 Feature.SettingsHub.Prompt.NeedCameraAccess,بحاجة إلى الوصول إلى الكاميرا
 Feature.SettingsHub.Prompt.NeedContactsAccess,بحاجة إلى الوصول إلى جهات اتصال
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,تحتاج إلى إعادة تشغيل التطبيق لتفعيل تغييرات الوصول التي أجريتها في الميكروفون.

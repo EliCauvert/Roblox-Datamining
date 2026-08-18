@@ -307,6 +307,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Send code
 Authentication.Login.Action.SendVerificationEmail,Send Verification Email
 Authentication.Login.Action.SignIn,Sign In
+Authentication.Login.Action.SignInSentenceCase,Sign in
 Authentication.Login.Action.UsePasskey,Use passkey
 Authentication.Login.Action.WeChatLogin,WeChat Login
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
@@ -327,7 +328,7 @@ Authentication.Login.Heading.Login,Login
 Authentication.Login.Heading.LoginRoblox,Login to Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Login To Existing Account
 Authentication.Login.Heading.NewAppAvailable,Download New Roblox App
-Authentication.Login.Heading.SignIn,Sign in
+Authentication.Login.Heading.SignIn,
 Authentication.Login.Label.AccountSelectorTitle,Select Account to Log In
 Authentication.Login.Label.AgedUpUsername,Add a unique @username
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Sorry, there was a problem reaching our servers.
@@ -345,8 +346,10 @@ Authentication.Login.Label.EmailNeedsVerification,Your email needs verification
 Authentication.Login.Label.EmailOrPhone,Email or phone
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,Enter email
+Authentication.Login.Label.EnterHere,Enter here
 Authentication.Login.Label.EnterOneTimeCode,Enter One-Time Code
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Enter the code we just sent to your email
+Authentication.Login.Label.EnterPassword,Enter password
 Authentication.Login.Label.ForgotYourPassword,Forgot your password?
 Authentication.Login.Label.GetOneTimeCode,Get One-Time Code
 Authentication.Login.Label.LearnMore,Learn more
@@ -355,6 +358,7 @@ Authentication.Login.Label.PasskeyIncompatible,Passkey incompatible
 Authentication.Login.Label.Password,Password
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,You are logged out of QQ. Please log in to QQ.
+Authentication.Login.Label.SelectAnAccount,Select an account
 Authentication.Login.Label.TroubleSigningIn,Trouble signing in?
 Authentication.Login.Label.UnverifiedEmailInstructions,"To log in with your email, it must be verified. You can also log in with your username."
 Authentication.Login.Label.Username,Username
@@ -3554,6 +3558,7 @@ Feature.Moderation.Link.SupportForm,Support Form
 Feature.Moments.Action.AddMusic,Add Music
 Feature.Moments.Action.AddSticker,Add Sticker
 Feature.Moments.Action.AddText,Add Text
+Feature.Moments.Action.AddVoice,Add Voice
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3561,6 +3566,8 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
 Feature.Moments.Action.GenerateText,Generate
+Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or violates guidelines
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,How to Capture
 Feature.Moments.Action.Join,
@@ -3577,6 +3584,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI-generated text. Review before posting — you're responsible for what's published.
 Feature.Moments.Description.HowToCaptureStep1,Join an Experience with Captures enabled and select the hamburger menu
 Feature.Moments.Description.HowToCaptureStep2,Enable the Capture controls
 Feature.Moments.Description.HowToCaptureStep3,Capture photos and videos of gameplay
@@ -3634,7 +3642,10 @@ Feature.Moments.Label.TextGeneratedBody,AI-generated text overlay and descriptio
 Feature.Moments.Label.TextGeneratedTitle,Text Generated
 Feature.Moments.Label.TextGenerationFailedBody,Couldn't generate text. Please try again.
 Feature.Moments.Label.TextGenerationFailedTitle,Generation Failed
+Feature.Moments.Label.TextGenerationFilteredBody,"Can't perform generation for this captured video, content filtered."
+Feature.Moments.Label.TextGenerationFilteredTitle,Generation Filtered
 Feature.Moments.Label.Videos,
+Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.ReportPost,Report post
@@ -4156,6 +4167,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Profile frame
+Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,
@@ -4446,15 +4459,21 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,Shared Content
 Feature.Settings.Subheading.AccountSettingsScan,Scan QR Code
 Feature.Settings.Subheading.AccountSettingsWebsite,Visit Website
+Feature.SettingsHub.Action.AllowInSettings,Allow in Settings
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,Open Settings
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,We need access to your camera so you can scan a QR code.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Select Permission
 2. Select Contacts
 3. Allow Roblox to access your Contacts"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. Go to Settings > Permission
+2. Select Contacts
+3. Allow Roblox to access your Contacts"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"To connect with friends, allow Roblox to access your contacts."
+Feature.SettingsHub.Description.ContactsPermissionRequest,We need access to your contacts so you can connect with friends.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Select Permission
 2. Select Camera
 3. Allow Roblox to access your Camera"
@@ -4474,6 +4493,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,Make friends so you can invite them to
 Feature.SettingsHub.Label.ReportComment,"In your own words, help us understand what went wrong."
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Allow access to camera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Allow access to contacts?
 Feature.SettingsHub.Prompt.NeedCameraAccess,Need Camera Access
 Feature.SettingsHub.Prompt.NeedContactsAccess,Need Contacts Access
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,You need to restart the app for the microphone access changes to be applied.

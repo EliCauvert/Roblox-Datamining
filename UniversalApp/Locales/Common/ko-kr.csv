@@ -307,6 +307,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,코드 전송
 Authentication.Login.Action.SendVerificationEmail,인증 이메일 보내기
 Authentication.Login.Action.SignIn,로그인
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,패스키 사용
 Authentication.Login.Action.WeChatLogin,WeChat 로그인
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
@@ -345,8 +346,10 @@ Authentication.Login.Label.EmailNeedsVerification,이메일 인증이 필요합�
 Authentication.Login.Label.EmailOrPhone,이메일 또는 전화번호
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,이메일 입력
+Authentication.Login.Label.EnterHere,여기에 입력
 Authentication.Login.Label.EnterOneTimeCode,일회용 코드 입력
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,방금 이메일로 전송된 코드를 입력하세요
+Authentication.Login.Label.EnterPassword,비밀번호를 입력하세요.
 Authentication.Login.Label.ForgotYourPassword,비밀번호를 잊으셨나요?
 Authentication.Login.Label.GetOneTimeCode,일회용 코드 받기
 Authentication.Login.Label.LearnMore,더 알아보기
@@ -355,6 +358,7 @@ Authentication.Login.Label.PasskeyIncompatible,패스키가 호환되지 않음
 Authentication.Login.Label.Password,비밀번호
 Authentication.Login.Label.Phone,전화번호
 Authentication.Login.Label.QQUserCancel,QQ에서 로그아웃하셨어요. QQ에 다시 로그인하세요.
+Authentication.Login.Label.SelectAnAccount,계정을 선택하세요
 Authentication.Login.Label.TroubleSigningIn,로그인에 문제가 있나요?
 Authentication.Login.Label.UnverifiedEmailInstructions,이메일로 로그인하려면 먼저 인증해야 합니다. 사용자 이름으로도 로그인할 수 있어요.
 Authentication.Login.Label.Username,사용자 이름
@@ -3550,6 +3554,7 @@ Feature.Moderation.Link.SupportForm,문의 양식
 Feature.Moments.Action.AddMusic,음악 추가
 Feature.Moments.Action.AddSticker,스티커 추가
 Feature.Moments.Action.AddText,텍스트 추가
+Feature.Moments.Action.AddVoice,음성 추가
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3630,6 +3635,8 @@ Feature.Moments.Label.TextGeneratedBody,AI가 생성한 오버레이와 설명�
 Feature.Moments.Label.TextGeneratedTitle,텍스트 생성됨
 Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했습니다. 다시 시도해 보세요.
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
+Feature.Moments.Label.TextGenerationFilteredBody,콘텐츠 필터링으로 인해 이 캡처된 동영상에서 생성 기능을 사용할 수 없습니다.
+Feature.Moments.Label.TextGenerationFilteredTitle,생성이 차단되었습니다
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
@@ -4146,6 +4153,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,프로필 프레임
+Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,통계
 Feature.Profile.Heading.Username,
@@ -4436,15 +4445,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,공유된 콘텐츠
 Feature.Settings.Subheading.AccountSettingsScan,QR 코드 스캔
 Feature.Settings.Subheading.AccountSettingsWebsite,웹사이트 방문
+Feature.SettingsHub.Action.AllowInSettings,설정에서 허용
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,QR 코드를 스캔하려면 카메라 액세스가 필요합니다.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. '권한'을 선택합니다
 2. '연락처'를 선택합니다
 3. Roblox의 연락처 접근 권한을 허용합니다"
 Feature.SettingsHub.Description.ContactsPermissionIOS,친구와 소통하려면 Roblox가 연락처를 사용할 수 있도록 허용해 주세요.
+Feature.SettingsHub.Description.ContactsPermissionRequest,친구와 소통하려면 연락처 액세스가 필요합니다.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. '권한'을 선택합니다
 2. '카메라'를 선택합니다
 3. Roblox의 카메라 접근 권한을 허용합니다"
@@ -4464,6 +4476,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,친구를 사귄 후 초대해 함께 
 Feature.SettingsHub.Label.ReportComment,위반 사항에 대해 직접 설명해 주세요.
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,카메라 액세스를 허용하시겠습니까?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,연락처 액세스를 허용하시겠습니까?
 Feature.SettingsHub.Prompt.NeedCameraAccess,카메라 접근 권한 필요
 Feature.SettingsHub.Prompt.NeedContactsAccess,연락처 접근 권한 필요
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,마이크 액세스 권한 변경 사항을 적용하려면 앱을 다시 시작해야 합니다.
@@ -4698,7 +4712,7 @@ Feature.VerificationUpsell.Description.AddEmailTextUnder13,구매를 계속하�
 Feature.VerificationUpsell.Description.AddParentalEmail,"보호자 복구 이메일을 추가해 계정 설정을 완료해 두면, 진행 중인 게임이나 아이템, Robux에 대한 액세스 권한을 안전하게 유지할 수 있습니다."
 Feature.VerificationUpsell.Description.AddPhoneBody,WhatsApp 또는 문자로 일회성 인증 코드를 받게 됩니다. 메시지 및 데이터 요금이 부과될 수 있습니다.
 Feature.VerificationUpsell.Description.AddPhoneBodyVoice,
-Feature.VerificationUpsell.Description.EnterPassword,비밀번호를 입력하세요.
+Feature.VerificationUpsell.Description.EnterPassword,
 Feature.VerificationUpsell.Description.IDVerificationAddEmailText,나이 인증에 앞서 이메일 주소를 입력하세요. 이는 계정 접근 권한을 잃을 경우 복구 방법으로 사용됩니다.
 Feature.VerificationUpsell.Description.LogoutAddEmailTextOver13,"로그아웃에 앞서, 계정이 잠기는 일을 방지할 수 있도록 이메일 주소를 추가해 두세요."
 Feature.VerificationUpsell.Description.LogoutAddEmailTextUnder13,"로그아웃에 앞서, 계정이 잠기는 일을 방지할 수 있도록 보호자의 이메일 주소를 추가해 두세요."

@@ -305,6 +305,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,傳送驗證碼
 Authentication.Login.Action.SendVerificationEmail,傳送驗證電子郵件
 Authentication.Login.Action.SignIn,登入
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,使用密碼金鑰
 Authentication.Login.Action.WeChatLogin,微信登入
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,離開 Roblox 以切換成 {platformAccountName} 帳號
@@ -343,8 +344,10 @@ Authentication.Login.Label.EmailNeedsVerification,您的電子郵件地址需要
 Authentication.Login.Label.EmailOrPhone,電子郵件或電話號碼
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,輸入電子郵件地址
+Authentication.Login.Label.EnterHere,在此輸入
 Authentication.Login.Label.EnterOneTimeCode,輸入一次性驗證碼
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,請輸入傳送到您電子郵件信箱的驗證碼
+Authentication.Login.Label.EnterPassword,輸入密碼
 Authentication.Login.Label.ForgotYourPassword,忘記密碼？
 Authentication.Login.Label.GetOneTimeCode,取得一次性驗證碼
 Authentication.Login.Label.LearnMore,了解更多
@@ -353,6 +356,7 @@ Authentication.Login.Label.PasskeyIncompatible,密碼金鑰不相容
 Authentication.Login.Label.Password,密碼
 Authentication.Login.Label.Phone,手機號碼
 Authentication.Login.Label.QQUserCancel,您已登出 QQ，請重新登入 QQ。
+Authentication.Login.Label.SelectAnAccount,選擇一個帳號
 Authentication.Login.Label.TroubleSigningIn,登入時遇到問題？
 Authentication.Login.Label.UnverifiedEmailInstructions,若要以您的電子郵件地址登入，請先驗證電子郵件地址。您也能以使用者名稱登入。
 Authentication.Login.Label.Username,使用者名稱
@@ -3546,6 +3550,7 @@ Feature.Moderation.Link.SupportForm,聯絡表格
 Feature.Moments.Action.AddMusic,新增音樂
 Feature.Moments.Action.AddSticker,新增貼紙
 Feature.Moments.Action.AddText,新增文字
+Feature.Moments.Action.AddVoice,新增語音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3626,6 +3631,8 @@ Feature.Moments.Label.TextGeneratedBody,已新增 AI 生成的文字疊加圖層
 Feature.Moments.Label.TextGeneratedTitle,已生成的文字
 Feature.Moments.Label.TextGenerationFailedBody,無法生成文字，請再試一次。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
+Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
+Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
@@ -4142,6 +4149,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,個人檔案外框
+Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,數據
 Feature.Profile.Heading.Username,
@@ -4432,15 +4441,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,共享內容
 Feature.Settings.Subheading.AccountSettingsScan,掃描 QR 碼
 Feature.Settings.Subheading.AccountSettingsWebsite,造訪網站
+Feature.SettingsHub.Action.AllowInSettings,在「設定」中允許
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,我們需要存取你的相機，以便你掃描 QR 碼。
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. 選擇「權限」
 2. 選擇「聯絡人」
 3. 允許 Roblox 存取您的聯絡人"
 Feature.SettingsHub.Description.ContactsPermissionIOS,請先允許 Roblox 存取您的聯絡人，才能尋找好友。
+Feature.SettingsHub.Description.ContactsPermissionRequest,我們需要存取你的通訊錄，以便你與好友交流。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. 選擇「權限」
 2. 選擇「相機」
 3. 允許 Roblox 存取您的相機"
@@ -4460,6 +4472,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,結交好友，開始同樂！
 Feature.SettingsHub.Label.ReportComment,請自行描述不當的事項。
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,要允許存取相機嗎？
+Feature.SettingsHub.Prompt.AllowAccessToContacts,要允許存取通訊錄嗎？
 Feature.SettingsHub.Prompt.NeedCameraAccess,需要相機存取權
 Feature.SettingsHub.Prompt.NeedContactsAccess,需要聯絡人存取權
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,您需要重新啟動 App 以套用麥克風存取權變更。

@@ -306,6 +306,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Enviar código
 Authentication.Login.Action.SendVerificationEmail,Enviar e-mail de verificação
 Authentication.Login.Action.SignIn,
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,Usar chave de acesso
 Authentication.Login.Action.WeChatLogin,Entrar no WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Saia da Roblox para mudar de conta para {platformAccountName}
@@ -346,6 +347,7 @@ Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,Insira o e-mail
 Authentication.Login.Label.EnterOneTimeCode,Digitar código único
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Insira o código que enviamos para o seu e-mail
+Authentication.Login.Label.EnterPassword,Digite a senha
 Authentication.Login.Label.ForgotYourPassword,Esqueceu sua senha?
 Authentication.Login.Label.GetOneTimeCode,Obter código único
 Authentication.Login.Label.LearnMore,Saiba mais
@@ -3547,6 +3549,7 @@ Feature.Moderation.Link.SupportForm,Formulário de suporte
 Feature.Moments.Action.AddMusic,Adicionar música
 Feature.Moments.Action.AddSticker,Adicionar adesivo
 Feature.Moments.Action.AddText,Adicionar texto
+Feature.Moments.Action.AddVoice,Adicionar voz
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3625,6 +3628,7 @@ Feature.Moments.Label.TextGeneratedBody,Sobreposição de tela gerada por IA e d
 Feature.Moments.Label.TextGeneratedTitle,Texto gerado
 Feature.Moments.Label.TextGenerationFailedBody,Não foi possível gerar o texto. Tente novamente.
 Feature.Moments.Label.TextGenerationFailedTitle,Falha na geração
+Feature.Moments.Label.TextGenerationFilteredTitle,Geração filtrada
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
@@ -4142,6 +4146,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nome
 Feature.Profile.Heading.EditDisplayName,Editar nome de exibição
 Feature.Profile.Heading.InsufficientFunds,Saldo insuficiente
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Moldura do perfil
+Feature.Profile.Heading.ProfilePictureSaved,Imagem de perfil salva com sucesso
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estatísticas
 Feature.Profile.Heading.Username,
@@ -4430,15 +4436,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,Conteúdo compartilhado
 Feature.Settings.Subheading.AccountSettingsScan,Digitalize o código QR
 Feature.Settings.Subheading.AccountSettingsWebsite,Visite o site
+Feature.SettingsHub.Action.AllowInSettings,Permitir nas Configurações
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,Abrir as configurações
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Precisamos de acesso à sua câmera para que você possa escanear um código QR.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Selecione Permissões
 2. Selecione Contatos
 3. Permita que o aplicativo Roblox acesse seus contatos"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Para se conectar com amigos, permita que a Roblox acesse seus contatos."
+Feature.SettingsHub.Description.ContactsPermissionRequest,Precisamos de acesso aos seus contatos para que você possa se conectar com suas amizades.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Selecione Permissões
 2. Selecione Câmera
 3. Permita que o aplicativo Roblox acesse sua câmera"
@@ -4458,6 +4467,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,Faça amizades e convide-as para visit
 Feature.SettingsHub.Label.ReportComment,"Em suas próprias palavras, ajude-nos a entender o que deu errado."
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,Pesquisar amigos
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Permitir acesso à câmera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Permitir acesso aos contatos?
 Feature.SettingsHub.Prompt.NeedCameraAccess,É necessário acesso à câmera
 Feature.SettingsHub.Prompt.NeedContactsAccess,É necessário acesso aos contatos
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,Você precisa reiniciar o aplicativo para que as alterações de acesso ao microfone sejam aplicadas.

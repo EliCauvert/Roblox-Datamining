@@ -306,6 +306,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Envoyer le code
 Authentication.Login.Action.SendVerificationEmail,Envoyer l'e-mail de vérification
 Authentication.Login.Action.SignIn,Se connecter
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,Utiliser le passkey
 Authentication.Login.Action.WeChatLogin,Connexion WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Quitter Roblox pour changer de compte pour {platformAccountName}
@@ -344,8 +345,10 @@ Authentication.Login.Label.EmailNeedsVerification,Vous devez vérifier votre adr
 Authentication.Login.Label.EmailOrPhone,E-mail ou téléphone
 Authentication.Login.Label.EnterCode,Saisis ton code ici
 Authentication.Login.Label.EnterEmail,Saisis ton adresse e-mail
+Authentication.Login.Label.EnterHere,Remplis ce champ
 Authentication.Login.Label.EnterOneTimeCode,Entrer le code à usage unique
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Saisir le code que nous venons juste de t'envoyer par email
+Authentication.Login.Label.EnterPassword,Saisis ton mot de passe
 Authentication.Login.Label.ForgotYourPassword,Mot de passe oublié ?
 Authentication.Login.Label.GetOneTimeCode,Obtenir un code unique
 Authentication.Login.Label.LearnMore,En savoir plus
@@ -354,6 +357,7 @@ Authentication.Login.Label.PasskeyIncompatible,Passkey incompatible
 Authentication.Login.Label.Password,Mot de passe
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,Tu n'es pas connecté à QQ. Connecte-toi à QQ.
+Authentication.Login.Label.SelectAnAccount,Sélectionner un compte
 Authentication.Login.Label.TroubleSigningIn,Problème lors de la connexion ?
 Authentication.Login.Label.UnverifiedEmailInstructions,"Avant de vous connecter au moyen de votre adresse e-mail, celle-ci doit être vérifiée. Vous pouvez également vous connecter avec votre nom d'utilisateur."
 Authentication.Login.Label.Username,Nom d'utilisateur
@@ -3547,6 +3551,7 @@ Feature.Moderation.Link.SupportForm,Formulaire de support
 Feature.Moments.Action.AddMusic,Ajouter de la musique
 Feature.Moments.Action.AddSticker,Ajouter un autocollant
 Feature.Moments.Action.AddText,Ajouter du texte
+Feature.Moments.Action.AddVoice,Ajouter une voix
 Feature.Moments.Action.Back,Précédent
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3627,6 +3632,8 @@ Feature.Moments.Label.TextGeneratedBody,Superposition de texte et description g�
 Feature.Moments.Label.TextGeneratedTitle,Texte généré
 Feature.Moments.Label.TextGenerationFailedBody,Impossible de générer du texte. Réessaie.
 Feature.Moments.Label.TextGenerationFailedTitle,Échec de la génération
+Feature.Moments.Label.TextGenerationFilteredBody,Impossible de générer du contenu à partir de cette vidéo capturée : contenu filtré.
+Feature.Moments.Label.TextGenerationFilteredTitle,Génération filtrée
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
@@ -4143,6 +4150,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifier le nom
 Feature.Profile.Heading.EditDisplayName,Modifier nom d'affichage
 Feature.Profile.Heading.InsufficientFunds,Fonds insuffisants
 Feature.Profile.Heading.NicknameRequestSent,Demande d'amitié envoyée
+Feature.Profile.Heading.ProfileFrame,Cadre du profil
+Feature.Profile.Heading.ProfilePictureSaved,Photo de profil enregistrée avec succès
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiques
 Feature.Profile.Heading.Username,Nom d'utilisateur 
@@ -4433,15 +4442,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,Contenu partagé
 Feature.Settings.Subheading.AccountSettingsScan,Scanne le code QR
 Feature.Settings.Subheading.AccountSettingsWebsite,Visiter le site Web
+Feature.SettingsHub.Action.AllowInSettings,Autoriser depuis les paramètres
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,"Pour que tu puisses scanner un code QR, nous avons besoin d'accéder à ton appareil photo."
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Sélectionner Permission
 2. Sélectionner Contacts
 3. Autoriser Roblox à accéder à tes Contacts"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Pour te connecter avec des amis, autoriser Roblox à accéder à tes contacts."
+Feature.SettingsHub.Description.ContactsPermissionRequest,"Pour que tu puisses te connecter avec tes amis, nous avons besoin d'accéder à tes contacts."
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Sélectionner Permission
 2. Sélectionner Caméra
 3. Autoriser Roblox à accéder à ta Caméra"
@@ -4461,6 +4473,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,Fais-toi des amis pour pouvoir les inv
 Feature.SettingsHub.Label.ReportComment,Explique ce qui s'est mal passé avec tes mots.
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,Cherche des amis
 Feature.SettingsHub.Label.Sending,En cours d'envoi
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Autoriser l'accès à la caméra ?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Autoriser l'accès aux contacts ?
 Feature.SettingsHub.Prompt.NeedCameraAccess,Besoin de l'accès à la caméra
 Feature.SettingsHub.Prompt.NeedContactsAccess,Besoin d'accès aux contacts
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,Vous devez redémarrer l'application pour appliquer les modifications d'accès au microphone.

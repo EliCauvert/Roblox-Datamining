@@ -306,6 +306,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Kirim kode
 Authentication.Login.Action.SendVerificationEmail,Kirim Email Verifikasi
 Authentication.Login.Action.SignIn,Log In
+Authentication.Login.Action.SignInSentenceCase,Log in
 Authentication.Login.Action.UsePasskey,Gunakan Passkey
 Authentication.Login.Action.WeChatLogin,Log In WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
@@ -322,7 +323,7 @@ Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
 Authentication.Login.Heading.EnterYourCode,Masukkan kodemu
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
-Authentication.Login.Heading.Login,Log in
+Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Log In ke Akun yang Sudah Ada
 Authentication.Login.Heading.NewAppAvailable,Download Aplikasi Roblox Baru
@@ -344,8 +345,10 @@ Authentication.Login.Label.EmailNeedsVerification,Email kamu perlu diverifikasi
 Authentication.Login.Label.EmailOrPhone,Alamat email atau nomor ponsel
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,Masukkan alamat email
+Authentication.Login.Label.EnterHere,Masukkan di sini
 Authentication.Login.Label.EnterOneTimeCode,Masukkan Kode Sekali Pakai
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Masukkan kode yang baru saja kami kirim ke email kamu
+Authentication.Login.Label.EnterPassword,Masukkan password
 Authentication.Login.Label.ForgotYourPassword,Lupa kata sandi?
 Authentication.Login.Label.GetOneTimeCode,Dapatkan Kode Sekali Pakai
 Authentication.Login.Label.LearnMore,Pelajari selengkapnya
@@ -354,6 +357,7 @@ Authentication.Login.Label.PasskeyIncompatible,Passkey tidak kompatibel
 Authentication.Login.Label.Password,Password
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,Kamu sudah log out dari QQ. Harap log in ke QQ.
+Authentication.Login.Label.SelectAnAccount,Pilih akun
 Authentication.Login.Label.TroubleSigningIn,Masalah saat log in?
 Authentication.Login.Label.UnverifiedEmailInstructions,"Untuk log in menggunakan email, email harus diverifikasi terlebih dahulu. Kamu juga dapat log in menggunakan nama pengguna kamu."
 Authentication.Login.Label.Username,Nama pengguna
@@ -3545,6 +3549,7 @@ Feature.Moderation.Link.SupportForm,Formulir Bantuan
 Feature.Moments.Action.AddMusic,Tambahkan Musik
 Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
+Feature.Moments.Action.AddVoice,Tambahkan Suara
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3625,6 +3630,7 @@ Feature.Moments.Label.TextGeneratedBody,Overlay teks dan deskripsi buatan AI dit
 Feature.Moments.Label.TextGeneratedTitle,Teks Berhasil Dibuat
 Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba lagi.
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
+Feature.Moments.Label.TextGenerationFilteredTitle,Pembuatan Difilter
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
@@ -4141,6 +4147,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Nama
 Feature.Profile.Heading.EditDisplayName,Edit Nama Display
 Feature.Profile.Heading.InsufficientFunds,Dana Tidak Cukup
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,Bingkai profil
+Feature.Profile.Heading.ProfilePictureSaved,Foto profil berhasil disimpan
 Feature.Profile.Heading.ProfileQRCode,Bagikan Kode QR
 Feature.Profile.Heading.Statistics,Statistik
 Feature.Profile.Heading.Username,
@@ -4431,15 +4439,18 @@ Feature.Settings.Label.Recommended,Direkomendasikan
 Feature.Settings.Label.SharedContent,Konten yang Dibagikan
 Feature.Settings.Subheading.AccountSettingsScan,Scan Kode QR
 Feature.Settings.Subheading.AccountSettingsWebsite,Kunjungi Situs Web
+Feature.SettingsHub.Action.AllowInSettings,Izinkan di Pengaturan
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Kami memerlukan akses ke kameramu agar kamu dapat men-scan kode QR.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Pilih Izin
 2. Pilih Kontak
 3. Izinkan Roblox mengakses Kontakmu"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Untuk terhubung dengan teman, izinkan Roblox mengakses kontakmu."
+Feature.SettingsHub.Description.ContactsPermissionRequest,Kami memerlukan akses ke kontakmu agar kamu dapat terhubung dengan teman.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. Pilih Izin
 2. Pilih Kamera
 3. Izinkan Roblox mengakses Kameramu"
@@ -4459,6 +4470,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,Bertemanlah agar kamu dapat mengundang
 Feature.SettingsHub.Label.ReportComment,Beri penjelasan untuk membantu kami memahami masalahnya.
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,Izinkan akses ke kamera?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,Izinkan akses ke kontak?
 Feature.SettingsHub.Prompt.NeedCameraAccess,Perlu Akses Kamera
 Feature.SettingsHub.Prompt.NeedContactsAccess,Perlu Akses Kontak
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,Kamu perlu memulai ulang aplikasi agar perubahan akses mikrofon dapat diterapkan.

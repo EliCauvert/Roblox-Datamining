@@ -289,6 +289,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,ส่งรหัส
 Authentication.Login.Action.SendVerificationEmail,ส่งอีเมลการตรวจสอบยืนยัน
 Authentication.Login.Action.SignIn,ลงชื่อเข้าใช้
+Authentication.Login.Action.SignInSentenceCase,
 Authentication.Login.Action.UsePasskey,ใช้พาสคีย์
 Authentication.Login.Action.WeChatLogin,ลงชื่อเข้าใช้ด้วย WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,ออกจาก Roblox เพื่อสลับไปใช้บัญชี {platformAccountName}
@@ -327,8 +328,10 @@ Authentication.Login.Label.EmailNeedsVerification,อีเมลของคุ
 Authentication.Login.Label.EmailOrPhone,อีเมลหรือหมายเลขโทรศัพท์
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,กรอกอีเมล
+Authentication.Login.Label.EnterHere,กรอกที่นี่
 Authentication.Login.Label.EnterOneTimeCode,กรอกรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,กรอกรหัสที่เราเพิ่งส่งไปยังอีเมลของคุณ
+Authentication.Login.Label.EnterPassword,กรอกรหัสผ่าน
 Authentication.Login.Label.ForgotYourPassword,ลืมรหัสผ่านหรือไม่?
 Authentication.Login.Label.GetOneTimeCode,รับรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.LearnMore,เรียนรู้เพิ่มเติม
@@ -337,6 +340,7 @@ Authentication.Login.Label.PasskeyIncompatible,ไม่รองรับพา
 Authentication.Login.Label.Password,รหัสผ่าน
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,คุณลงชื่อออกจาก QQ แล้ว โปรดลงชื่อเข้าใช้ QQ
+Authentication.Login.Label.SelectAnAccount,เลือกบัญชี
 Authentication.Login.Label.TroubleSigningIn,เกิดปัญหากับการลงชื่อเข้าใช้ใช่ไหม?
 Authentication.Login.Label.UnverifiedEmailInstructions,หากต้องการลงชื่อเข้าใช้ด้วยอีเมลของคุณ อีเมลนั้นต้องได้รับการตรวจสอบยืนยันก่อน หรือคุณสามารถลงชื่อเข้าใช้ด้วยชื่อผู้ใช้ของคุณได้
 Authentication.Login.Label.Username,ชื่อผู้ใช้
@@ -3530,6 +3534,7 @@ Feature.Moderation.Link.SupportForm,แบบฟอร์มบริการ�
 Feature.Moments.Action.AddMusic,เพิ่มดนตรี
 Feature.Moments.Action.AddSticker,เพิ่มสติกเกอร์
 Feature.Moments.Action.AddText,เพิ่มข้อความ
+Feature.Moments.Action.AddVoice,เพิ่มเสียง
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3610,6 +3615,8 @@ Feature.Moments.Label.TextGeneratedBody,เพิ่มข้อความท�
 Feature.Moments.Label.TextGeneratedTitle,สร้างข้อความแล้ว
 Feature.Moments.Label.TextGenerationFailedBody,ไม่สามารถสร้างข้อความได้ โปรดลองอีกครั้ง
 Feature.Moments.Label.TextGenerationFailedTitle,สร้างไม่สำเร็จ
+Feature.Moments.Label.TextGenerationFilteredBody,ไม่สามารถสร้างข้อความบนวิดีโอนี้ได้ เนื่องจากเนื้อหาถูกกรอง
+Feature.Moments.Label.TextGenerationFilteredTitle,มีการกรองการสร้าง
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
@@ -4126,6 +4133,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,กรอบโปรไฟล์
+Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,สถิติ
 Feature.Profile.Heading.Username,
@@ -4416,15 +4425,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,เนื้อหาที่แชร์
 Feature.Settings.Subheading.AccountSettingsScan,สแกนรหัส QR
 Feature.Settings.Subheading.AccountSettingsWebsite,ไปที่เว็บไซต์
+Feature.SettingsHub.Action.AllowInSettings,อนุญาตในการตั้งค่า
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,เราจำเป็นต้องเข้าถึงกล้องของคุณเพื่อให้คุณสแกนรหัส QR ได้
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. เลือกสิทธิ์
 2. เลือกรายชื่อผู้ติดต่อ
 3. อนุญาตให้ Roblox เข้าถึงรายชื่อผู้ติดต่อ"
 Feature.SettingsHub.Description.ContactsPermissionIOS,หากต้องการเชื่อมต่อกับเพื่อนๆ โปรดอนุญาตให้ Roblox เข้าถึงรายชื่อผู้ติดต่อของคุณ
+Feature.SettingsHub.Description.ContactsPermissionRequest,เราจำเป็นต้องเข้าถึงรายชื่อผู้ติดต่อของคุณเพื่อให้คุณเชื่อมต่อกับเพื่อนๆ ได้
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. เลือกสิทธิ์
 2. เลือกกล้อง
 3. อนุญาตให้ Roblox เข้าถึงกล้อง"
@@ -4444,6 +4456,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,หาเพื่อนแล้ว�
 Feature.SettingsHub.Label.ReportComment,โปรดอธิบายเพื่อช่วยให้เราเข้าใจถึงปัญหา
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,กำลังส่ง
+Feature.SettingsHub.Prompt.AllowAccessToCamera,อนุญาตให้เข้าถึงกล้องหรือไม่?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,อนุญาตให้เข้าถึงรายชื่อผู้ติดต่อหรือไม่?
 Feature.SettingsHub.Prompt.NeedCameraAccess,ต้องการเข้าถึงกล้อง
 Feature.SettingsHub.Prompt.NeedContactsAccess,ต้องการเข้าถึงรายชื่อผู้ติดต่อ
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,ต้องรีสตาร์ทแอปก่อน การเปลี่ยนแปลงสิทธิ์เข้าถึงไมโครโฟนจึงจะมีผล

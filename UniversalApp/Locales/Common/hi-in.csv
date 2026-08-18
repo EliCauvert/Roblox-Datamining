@@ -289,6 +289,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,कोड भेजें
 Authentication.Login.Action.SendVerificationEmail,वेरिफ़िकेशन ईमेल भेजें
 Authentication.Login.Action.SignIn,साइन इन करें
+Authentication.Login.Action.SignInSentenceCase,साइन-इन करें
 Authentication.Login.Action.UsePasskey,पास-की का इस्तेमाल करें
 Authentication.Login.Action.WeChatLogin,WeChat से लॉग इन करें
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} के अकाउंट पर स्विच करने के लिए Roblox से बाहर निकलें
@@ -309,7 +310,7 @@ Authentication.Login.Heading.Login,लॉग इन करें
 Authentication.Login.Heading.LoginRoblox,Roblox में लॉग इन करें
 Authentication.Login.Heading.LoginRobloxAccountSwitching,मौजूदा अकाउंट में लॉग इन करें
 Authentication.Login.Heading.NewAppAvailable,नया Roblox ऐप डाउनलोड करें
-Authentication.Login.Heading.SignIn,साइन-इन करें
+Authentication.Login.Heading.SignIn,
 Authentication.Login.Label.AccountSelectorTitle,लॉग इन करने के लिए अकाउंट चुनें
 Authentication.Login.Label.AgedUpUsername,कोई यूनीक @यूज़रनेम जोड़ें
 Authentication.Login.Label.ConnectionError.RetryDisabled,"माफ़ करें, हमारे सर्वर तक पहुँचने में कोई समस्या हुई.
@@ -327,8 +328,10 @@ Authentication.Login.Label.EmailNeedsVerification,आपके ईमेल क�
 Authentication.Login.Label.EmailOrPhone,ईमेल या फ़ोन
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,ईमेल डालें
+Authentication.Login.Label.EnterHere,यहाँ डालें
 Authentication.Login.Label.EnterOneTimeCode,वन-टाइम कोड डालें
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,अभी-अभी आपके ईमेल पर भेजा गया कोड डालें.
+Authentication.Login.Label.EnterPassword,पासवर्ड डालें
 Authentication.Login.Label.ForgotYourPassword,पासवर्ड भूल गए हैं?
 Authentication.Login.Label.GetOneTimeCode,वन-टाइम कोड पाएँ
 Authentication.Login.Label.LearnMore,ज़्यादा जानें
@@ -337,6 +340,7 @@ Authentication.Login.Label.PasskeyIncompatible,पास-की काम नह
 Authentication.Login.Label.Password,पासवर्ड
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,आप QQ से लॉग आउट हो गए हैं. QQ में लॉग इन करें.
+Authentication.Login.Label.SelectAnAccount,कोई अकाउंट चुनें
 Authentication.Login.Label.TroubleSigningIn,साइन-इन करने में समस्या हो रही है?
 Authentication.Login.Label.UnverifiedEmailInstructions,"अपने ईमेल से लॉग इन करने के लिए, उसे वेरिफ़ाई किया हुआ होना चाहिए. आप अपने यूज़रनेम से भी लॉग इन कर सकते हैं."
 Authentication.Login.Label.Username,यूज़रनेम
@@ -3527,6 +3531,7 @@ Feature.Moderation.Link.SupportForm,सपोर्ट टीम का फ़�
 Feature.Moments.Action.AddMusic,म्यूज़िक जोड़ें
 Feature.Moments.Action.AddSticker,स्टिकर जोड़ें
 Feature.Moments.Action.AddText,टेक्स्ट जोड़ें
+Feature.Moments.Action.AddVoice,वॉइस जोड़ें
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3607,6 +3612,8 @@ Feature.Moments.Label.TextGeneratedBody,AI से जेनरेट किय�
 Feature.Moments.Label.TextGeneratedTitle,टेक्स्ट जेनरेट हो गया
 Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेनरेट नहीं हो सका. कृपया फिर से कोशिश करें.
 Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
+Feature.Moments.Label.TextGenerationFilteredBody,"कैप्चर किए गए इस वीडियो के लिए टेक्स्ट जेनरेट नहीं हो सकता, कॉन्टेंट फ़िल्टर किया गया."
+Feature.Moments.Label.TextGenerationFilteredTitle,जेनरेशन फ़िल्टर किया गया
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
@@ -4123,6 +4130,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,नाम एडिट करे�
 Feature.Profile.Heading.EditDisplayName,डिसप्ले नाम एडिट करें
 Feature.Profile.Heading.InsufficientFunds,फ़ंड काफ़ी नहीं हैं
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,प्रोफ़ाइल फ़्रेम
+Feature.Profile.Heading.ProfilePictureSaved,प्रोफ़ाइल फ़ोटो सेव हो गई
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,आँकड़े
 Feature.Profile.Heading.Username,
@@ -4412,15 +4421,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,शेयर्ड कॉन्टेंट
 Feature.Settings.Subheading.AccountSettingsScan,QR कोड स्कैन करें
 Feature.Settings.Subheading.AccountSettingsWebsite,वेबसाइट पर विज़िट करें
+Feature.SettingsHub.Action.AllowInSettings,सेटिंग में परमिशन दें
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,"हमें आपके कैमरे का ऐक्सेस चाहिए, ताकि आप QR कोड स्कैन कर सकें."
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. परमिशन चुनें
 2. कॉन्टैक्ट्स चुनें
 3. Roblox को अपने कॉन्टैक्ट्स ऐक्सेस करने की परमिशन दें"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"फ़्रेंड्स के साथ कनेक्ट करने के लिए, Roblox को अपने कॉन्टैक्ट्स को ऐक्सेस करने की परमिशन दें."
+Feature.SettingsHub.Description.ContactsPermissionRequest,"हमें आपके कॉन्टैक्ट्स का ऐक्सेस चाहिए, ताकि आप फ़्रेंड्स से कनेक्ट कर सकें."
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. परमिशन चुनें
 2. कैमरा चुनें
 3. Roblox को अपना कैमरा ऐक्सेस करने की परमिशन दें"
@@ -4440,6 +4452,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,"फ़्रेंड्स बना
 Feature.SettingsHub.Label.ReportComment,"अपने शब्दों में, हमें यह समझने में मदद करें कि क्या गड़बड़ी हुई."
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,
+Feature.SettingsHub.Prompt.AllowAccessToCamera,कैमरे का ऐक्सेस देना है?
+Feature.SettingsHub.Prompt.AllowAccessToContacts,कॉन्टैक्ट्स का ऐक्सेस देना है?
 Feature.SettingsHub.Prompt.NeedCameraAccess,कैमरे का ऐक्सेस चाहिए
 Feature.SettingsHub.Prompt.NeedContactsAccess,कॉन्टैक्ट्स का ऐक्सेस चाहिए
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,"माइक्रोफ़ोन ऐक्सेस से जुड़े बदलाव लागू करने के लिए, ऐप रीस्टार्ट करें."

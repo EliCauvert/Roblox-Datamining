@@ -306,6 +306,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,コードを送信
 Authentication.Login.Action.SendVerificationEmail,確認メールを送信
 Authentication.Login.Action.SignIn,サインイン
+Authentication.Login.Action.SignInSentenceCase,ログイン
 Authentication.Login.Action.UsePasskey,パスキーを使用
 Authentication.Login.Action.WeChatLogin,WeChatログイン
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Robloxから退出して {platformAccountName} のアカウントを切り替え
@@ -322,7 +323,7 @@ Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン�
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
-Authentication.Login.Heading.Login,ログイン
+Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,ロブロックスにログイン
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,新しいRobloxアプリをダウンロード
@@ -344,8 +345,10 @@ Authentication.Login.Label.EmailNeedsVerification,メール確認の手続きが
 Authentication.Login.Label.EmailOrPhone,メールアドレスまたは電話番号
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,メールアドレスを入力
+Authentication.Login.Label.EnterHere,ここに入力
 Authentication.Login.Label.EnterOneTimeCode,ワンタイムコードを入力
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,メールに記載されたコードを入力
+Authentication.Login.Label.EnterPassword,パスワードを入力
 Authentication.Login.Label.ForgotYourPassword,パスワードをお忘れですか？
 Authentication.Login.Label.GetOneTimeCode,ワンタイムコードを取得
 Authentication.Login.Label.LearnMore,もっと詳しく
@@ -354,6 +357,7 @@ Authentication.Login.Label.PasskeyIncompatible,パスキーと互換性があり
 Authentication.Login.Label.Password,パスワード
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,テンセントQQからログアウトしています。テンセントQQにログインしてください。
+Authentication.Login.Label.SelectAnAccount,アカウントを選択
 Authentication.Login.Label.TroubleSigningIn,ログインに問題がありますか？
 Authentication.Login.Label.UnverifiedEmailInstructions,メールアドレスでログインするためには、まず認証が必要です。ユーザーネームでログインすることもできます。
 Authentication.Login.Label.Username,ユーザーネーム
@@ -3547,6 +3551,7 @@ Feature.Moderation.Link.SupportForm,サポートフォーム
 Feature.Moments.Action.AddMusic,音楽を追加
 Feature.Moments.Action.AddSticker,ステッカーを追加
 Feature.Moments.Action.AddText,テキストを追加
+Feature.Moments.Action.AddVoice,ボイスを追加
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3627,6 +3632,8 @@ Feature.Moments.Label.TextGeneratedBody,AIが生成したテキストオーバ�
 Feature.Moments.Label.TextGeneratedTitle,テキストが生成されました
 Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませんでした。もう一度お試しください。
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
+Feature.Moments.Label.TextGenerationFilteredBody,この切り抜きビデオの生成を実行できません。コンテンツが内容規制されています。
+Feature.Moments.Label.TextGenerationFilteredTitle,生成が内容規制されました
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
@@ -4141,6 +4148,8 @@ Feature.Profile.Heading.EditAgedUpDisplayName,名前を編集
 Feature.Profile.Heading.EditDisplayName,表示名を編集
 Feature.Profile.Heading.InsufficientFunds,資金が足りません
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfileFrame,プロフィールフレーム
+Feature.Profile.Heading.ProfilePictureSaved,プロフィール写真が正常に保存されました
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,統計
 Feature.Profile.Heading.Username,
@@ -4431,15 +4440,18 @@ Feature.Settings.Label.Recommended,
 Feature.Settings.Label.SharedContent,共有済みコンテンツ
 Feature.Settings.Subheading.AccountSettingsScan,QRコードをスキャン
 Feature.Settings.Subheading.AccountSettingsWebsite,ウェブサイトに行く
+Feature.SettingsHub.Action.AllowInSettings,設定で許可
 Feature.SettingsHub.Action.CancelSearch,
 Feature.SettingsHub.Action.InviteFriend,招待
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Description.CameraPermissionRequestQRCode,QRコードをスキャンするには、カメラへのアクセスが必要です。
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. [権限] を選択
 2. [連絡先] を選択
 3. Robloxに [連絡先] へのアクセスを許可"
 Feature.SettingsHub.Description.ContactsPermissionIOS,友達とつながるには、Robloxが連絡先にアクセスできるようにします。
+Feature.SettingsHub.Description.ContactsPermissionRequest,友達とつながるには、連絡先へのアクセスが必要です。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. [権限] を選択
 2. [カメラ] を選択
 3. Robloxに [カメラ] へのアクセスを許可"
@@ -4459,6 +4471,8 @@ Feature.SettingsHub.Label.NoFriendsScreen,友達を作って一緒に参加で�
 Feature.SettingsHub.Label.ReportComment,何が良くなかったかを分かるように説明してください。
 Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename,
 Feature.SettingsHub.Label.Sending,送信しています
+Feature.SettingsHub.Prompt.AllowAccessToCamera,カメラへのアクセスを許可しますか？
+Feature.SettingsHub.Prompt.AllowAccessToContacts,連絡先へのアクセスを許可しますか？
 Feature.SettingsHub.Prompt.NeedCameraAccess,カメラへのアクセスが必要です
 Feature.SettingsHub.Prompt.NeedContactsAccess,連絡先へのアクセスが必要です
 Feature.SettingsHub.Prompt.RestartOnMicAccessChange,マイクへのアクセス設定の変更を適用するにはアプリを再起動する必要があります。
