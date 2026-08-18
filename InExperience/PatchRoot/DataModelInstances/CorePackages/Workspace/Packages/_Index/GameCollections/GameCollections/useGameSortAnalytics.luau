@@ -15,10 +15,11 @@ local calculateRowPositionFields = require(parent.UnifiedLogging).calculateRowPo
 local cryoModule = require(parent.Cryo)
 local fFlagLuaAppLogGameAttributionError = require(parent.SharedFlags).FFlagLuaAppLogGameAttributionError
 local fFlagLuaAppGameDetailsAttributionFix = require(parent.SharedFlags).FFlagLuaAppGameDetailsAttributionFix
+local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local t = {}
 
-local function _(p0, p1) --[[ line: 29 | named "mergeAnalyticsData" ]]
+local function _(p0, p1) --[[ line: 30 | named "mergeAnalyticsData" ]]
 	-- upvalues: cryoModule (ref), t (ref)
 	if not p0 and not p1 then
 		return nil
@@ -30,20 +31,20 @@ end
 
 local var3 = if fFlagLuaAppLogGameAttributionError then { GameDetail = "GameDetail", PlayIntent = "PlayIntent" } else nil
 
-local _ = function(value, p2, p3) --[[ line: 50 | named "getGameSetTypeId" ]]
+local _ = function(value, p2, p3) --[[ line: 51 | named "getGameSetTypeId" ]]
 	return if value == nil then nil elseif p2 or p3 then value.topicId else value.gameSetTypeId
 end
 
-local _ = function(value, p4) --[[ line: 62 | named "getGameSetTargetId" ]]
+local _ = function(value, p4) --[[ line: 63 | named "getGameSetTargetId" ]]
 	return if p4 or value == nil then nil else value.gameSetTargetId
 end
 
-local _ = function(p5, p6) --[[ line: 72 | named "getAppliedFilters" ]]
+local _ = function(p5, p6) --[[ line: 73 | named "getAppliedFilters" ]]
 	return if p6 or not p5 then nil else p5.appliedFilters
 end
 
-return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useGameSortAnalytics" ]]
-	-- upvalues: useStore (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), appEventIngestService (ref), appPage (ref), gameSortLoadSource (ref), reactModule (ref), fFlagLuaAppGameDetailsAttributionFix (ref), reportGameAttributionError (ref), var3 (ref), mutedError (ref), calculateRowPositionFields (ref), cryoModule (ref), t (ref), gameCollectionItemTypes (ref), fFlagLuaAppLogGameAttributionError (ref), gamePlayIntent (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), feedScroll (ref)
+return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 86 | named "useGameSortAnalytics" ]]
+	-- upvalues: useStore (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), appEventIngestService (ref), appPage (ref), gameSortLoadSource (ref), fFlagLuaAppAddSubIdToHomeEvents (ref), reactModule (ref), fFlagLuaAppGameDetailsAttributionFix (ref), reportGameAttributionError (ref), var3 (ref), mutedError (ref), calculateRowPositionFields (ref), cryoModule (ref), t (ref), gameCollectionItemTypes (ref), fFlagLuaAppLogGameAttributionError (ref), gamePlayIntent (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), feedScroll (ref)
 	local var5 = useStore()
 	local var6 = useRoactService(roactAnalyticsCommonGameEvents)
 	local var7 = useRoactService(appEventIngestService)
@@ -51,11 +52,11 @@ return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useG
 	local var9 = if p8 or p7 == nil then nil else p7.gameSetTargetId
 	local var10 = if p8 or not p7 then nil else p7.appliedFilters
 	local var11 = if p10 == appPage.Home and p7 and p7.topicId then gameSortLoadSource.getSortLoadSource(p7.topicId) else nil
-	local var12 = if p7 then p7.sortSubId else nil
+	local var12 = if fFlagLuaAppAddSubIdToHomeEvents and p7 then p7.sortSubId else nil
 	local var13 = if p7 then p7.analyticsData else nil
 	
-	return reactModule.useCallback(function(p15, p16) --[[ line: 115 ]]
-		-- upvalues: fFlagLuaAppGameDetailsAttributionFix (copy), p12 (ref), reportGameAttributionError (copy), p10 (ref), var3 (copy), var8 (ref), var9 (ref), p9 (ref), mutedError (copy), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), var6 (ref), var10 (ref), var11 (ref), gameCollectionItemTypes (copy), var12 (ref)
+	return reactModule.useCallback(function(p15, p16) --[[ line: 116 ]]
+		-- upvalues: fFlagLuaAppGameDetailsAttributionFix (copy), p12 (ref), reportGameAttributionError (copy), p10 (ref), var3 (copy), var8 (ref), var9 (ref), p9 (ref), mutedError (copy), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), var6 (ref), var10 (ref), var11 (ref), gameCollectionItemTypes (copy), fFlagLuaAppAddSubIdToHomeEvents (copy), var12 (ref)
 		if fFlagLuaAppGameDetailsAttributionFix then
 			local var15
 			local _ = nil
@@ -95,12 +96,13 @@ return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useG
 			else
 				var18 = nil
 			end
-			var6.reportOpenGameDetailWithId(var16.placeIdOverride or var16.placeId, var8, var9, p9, p15, #p12, var16.isSponsored, var16.adId, var16.universeId, p10, p16, var10, var16.topicContentsIndex or p15, nil, var17.positionInRow, var17.rowInSort, var17.rowOnPage, nil, var11, var16.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile, var12, var18)
+			var6.reportOpenGameDetailWithId(var16.placeIdOverride or var16.placeId, var8, var9, p9, p15, #p12, var16.isSponsored, var16.adId, var16.universeId, p10, p16, var10, var16.topicContentsIndex or p15, nil, var17.positionInRow, var17.rowInSort, var17.rowOnPage, nil, var11, var16.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile, if fFlagLuaAppAddSubIdToHomeEvents then var12 else nil, var18)
 		end
 	end, {
-		var6, p9, p10, var8, var9, p12, p13, p14, var11, var12, var13
-	}), reactModule.useCallback(function(p17, p18, _, p19, p20, p21) --[[ line: 193 ]]
-		-- upvalues: fFlagLuaAppLogGameAttributionError (copy), p12 (ref), reportGameAttributionError (copy), var3 (copy), var8 (ref), var9 (ref), p9 (ref), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), gamePlayIntent (copy), var7 (ref), var10 (ref), p10 (ref), var11 (ref), var12 (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
+		var6, p9, p10, var8, var9, p12, p13, p14, var11,
+		if fFlagLuaAppAddSubIdToHomeEvents then var12 else nil, var13
+	}), reactModule.useCallback(function(p17, p18, _, p19, p20, p21) --[[ line: 194 ]]
+		-- upvalues: fFlagLuaAppLogGameAttributionError (copy), p12 (ref), reportGameAttributionError (copy), var3 (copy), var8 (ref), var9 (ref), p9 (ref), calculateRowPositionFields (copy), p13 (ref), p14 (ref), var13 (ref), cryoModule (copy), t (copy), gamePlayIntent (copy), var7 (ref), var10 (ref), p10 (ref), var11 (ref), fFlagLuaAppAddSubIdToHomeEvents (copy), var12 (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
 		if fFlagLuaAppLogGameAttributionError then
 			local var21
 			local _ = nil
@@ -152,18 +154,19 @@ return function(p7, p8, p9, p10, p11, p12, p13, p14) --[[ line: 85 | named "useG
 			feedRowNumber = var22.rowOnPage,
 			loadSource = var11,
 			launchData = p17.launchDataOverride,
-			sortSubId = var12,
+			sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then var12 else nil,
 			tileType = p17.tileType or gameCollectionItemTypes.GameCollectionItemType.GameTile,
 			analyticsData = var23,
 			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p21 else nil
 		})
 	end, {
 		p9, var7, var8, var9, if fFlagLuaAppLogGameAttributionError then p12 else nil,
-		p10, p13, p14, var11, var12, var13
-	}), reactModule.useCallback(function() --[[ line: 274 ]]
+		p10, p13, p14, var11, if fFlagLuaAppAddSubIdToHomeEvents then var12 else nil,
+		var13
+	}), reactModule.useCallback(function() --[[ line: 275 ]]
 		-- upvalues: var6 (ref), var8 (ref), var9 (ref), p9 (ref)
 		var6.reportSeeAllWithId(var8, var9, p9)
-	end, { var6, var8, var9, p9 }), reactModule.useCallback(function(p22, p23, p24) --[[ line: 287 ]]
+	end, { var6, var8, var9, p9 }), reactModule.useCallback(function(p22, p23, p24) --[[ line: 288 ]]
 		-- upvalues: p11 (ref), mutedError (copy), var5 (ref), p9 (ref), var8 (ref), var9 (ref), feedScroll (copy), var7 (ref), p10 (ref)
 		if p11 and p11.current ~= nil then
 			local scrollingDirection = p11.current.ScrollingDirection

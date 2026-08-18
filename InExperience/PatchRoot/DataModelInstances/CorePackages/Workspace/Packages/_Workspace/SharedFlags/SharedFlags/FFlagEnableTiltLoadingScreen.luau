@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableTiltLoadingScreen2", false)
+﻿return game:DefineFastFlag("EnableTiltLoadingScreen", false)

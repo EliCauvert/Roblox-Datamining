@@ -44,8 +44,7 @@ return {
 		SortHeaderAnchorTag = if require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
 		InitialFeedVisibleRows = if fFlagLuaAppRfyRevealRows then "initialFeedVisibleRows" else nil,
 		VisibleRowsPerReveal = if fFlagLuaAppRfyRevealRows then "visibleRowsPerReveal" else nil,
-		EnableReportAd = if fFlagLuaAppEnableSponsoredReportAd then "enableReportAd" else nil,
-		EnableInstantPlay = if require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay then "enableInstantPlay" else nil
+		EnableReportAd = if fFlagLuaAppEnableSponsoredReportAd then "enableReportAd" else nil
 	},
 	ComponentTypeDataKeys = {
 		EventTile = "EventTile",

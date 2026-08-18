@@ -35,7 +35,7 @@ local setTabListModule = require(actions.SetTabList)
 local devConsoleAnalyticsModule = require(devConsole.MiddleWare.DevConsoleAnalytics)
 local playerPermissionsModule = require(coreGuiService.RobloxGui.Modules.PlayerPermissionsModule)
 local scriptProfilerEngineFeature = game:GetEngineFeature("ScriptProfiler")
-local devConsoleRequestOrchestratorTab2 = game:DefineFastFlag("DevConsoleRequestOrchestratorTab2", false)
+local devConsoleRequestOrchestratorTab = game:DefineFastFlag("DevConsoleRequestOrchestratorTab", false)
 local devConsoleAdminSeesDevTabs = game:DefineFastFlag("DevConsoleAdminSeesDevTabs", false)
 local default = require(coreGuiService.RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local t = {
@@ -91,8 +91,8 @@ local t_3 = {
 		layoutOrder = 100,
 		tab = mainViewRequestOrchestratorModule,
 		isEnabled = function() --[[ line: 168 ]]
-			-- upvalues: devConsoleRequestOrchestratorTab2 (ref)
-			return devConsoleRequestOrchestratorTab2
+			-- upvalues: devConsoleRequestOrchestratorTab (ref)
+			return devConsoleRequestOrchestratorTab
 		end
 	}
 }

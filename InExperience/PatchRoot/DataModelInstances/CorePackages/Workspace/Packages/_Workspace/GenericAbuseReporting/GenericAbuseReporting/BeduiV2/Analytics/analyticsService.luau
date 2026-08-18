@@ -1,4 +1,4 @@
-﻿local var11
+﻿local var10
 local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local parent = genericAbuseReporting.Parent
 local localPlayer = game:GetService("Players").LocalPlayer
@@ -35,52 +35,29 @@ local t = {
 local t_1 = { Footer = "footer", NextAction = "next_action" }
 local t_2 = { Flow = "flow", SceneSelection = "sceneSelection" }
 
-local function formatHttpErrorMessageForAnalytics(p0, p1) --[[ line: 85 ]]
-	-- upvalues: dashModule (ref)
-	local t = {}
+local function _(p0) --[[ line: 107 | named "isArray" ]]
+	local var11 = 0
 	
-	if type(p1) == "table" then
-		if type(p1.StatusCode) == "number" then
-			table.insert(t, `status={p1.StatusCode}`)
-		end
-		if typeof(p1.HttpError) == "EnumItem" then
-			table.insert(t, `httpError={p1.HttpError}`)
-		end
-		if p1.isJSONValid == false then
-			table.insert(t, "reason=invalid_json")
-		end
+	for i in p0 do
+		var11 += 1
 	end
-	if #t == 0 then
-		table.insert(t, "reason=unknown")
-	end
-	table.insert(t, `error={string.sub(dashModule.pretty(p1, { depth = 10 }), 1, 1000)}`)
-	
-	return p0 .. " " .. table.concat(t, " ")
+	return var11 == #p0 and var11 > 0
 end
 
-local function _(p2) --[[ line: 131 | named "isArray" ]]
-	local var13 = 0
-	
-	for i in p2 do
-		var13 += 1
-	end
-	return var13 == #p2 and var13 > 0
-end
-
-local function flattenForTelemetry(p3) --[[ line: 144 ]]
+local function flattenForTelemetry(p1) --[[ line: 120 ]]
 	local t = {}
 	
-	for i, v in p3 do
+	for i, v in p1 do
 		if type(v) ~= "table" then
 			t[i] = tostring(v)
 			continue
 		end
-		local var15 = 0
+		local var13 = 0
 		
 		for i_1 in v do
-			var15 += 1
+			var13 += 1
 		end
-		if var15 == #v and var15 > 0 then
+		if var13 == #v and var13 > 0 then
 			local t_1 = {}
 			
 			for v_1, i_1 in v do
@@ -105,12 +82,12 @@ local t_3 = {
 	throttlingPercentage = game:DefineFastInt("DynamicAbuseReportV2ThrottleHundredthsPercent", 0)
 }
 
-local _ = function() --[[ line: 186 | named "getCoreScriptVersion" ]]
+local _ = function() --[[ line: 162 | named "getCoreScriptVersion" ]]
 	-- upvalues: runService (ref)
 	if not game:GetEngineFeature("CoreScriptVersionEnabled") then
 		return nil
 	end
-	local ok, status = pcall(function() --[[ line: 191 ]]
+	local ok, status = pcall(function() --[[ line: 167 ]]
 		-- upvalues: runService (copy)
 		return runService:GetCoreScriptVersion()
 	end)
@@ -119,38 +96,37 @@ local _ = function() --[[ line: 186 | named "getCoreScriptVersion" ]]
 end
 
 if not fFlagAbuseReportClientVersionModule then
-	var11 = nil
+	var10 = nil
 elseif game:GetEngineFeature("CoreScriptVersionEnabled") then
-	local ok, status = pcall(function() --[[ line: 191 ]]
+	local ok, status = pcall(function() --[[ line: 167 ]]
 		-- upvalues: runService (ref)
 		return runService:GetCoreScriptVersion()
 	end)
-	var11 = if ok then status else nil
+	var10 = if ok then status else nil
 else
-	var11 = nil
+	var10 = nil
 end
 return {
-	sendAnalyticsEvent = function(p4, p5) --[[ line: 200 ]]
-		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var11 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
+	sendAnalyticsEvent = function(p2, p3) --[[ line: 176 ]]
+		-- upvalues: localPlayer (ref), fFlagAbuseReportClientVersionModule (ref), var10 (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), telemetryService (ref), t_3 (ref), flattenForTelemetry (ref)
 		local t = {
 			user_id = if localPlayer then localPlayer.UserId else nil
 		}
 		
 		if fFlagAbuseReportClientVersionModule then
-			t.client_version = var11
+			t.client_version = var10
 		end
 		if fFlagFixAnalyticsForDynamicReportV2 then
 			telemetryService:LogEvent(t_3, {
-				customFields = flattenForTelemetry(dashModule.join(p4, p5, t)),
-				eventContext = p4.abuse_vector
+				customFields = flattenForTelemetry(dashModule.join(p2, p3, t)),
+				eventContext = p2.abuse_vector
 			})
 			
 			return
 		end
-		telemetryService:LogEvent(dashModule.join(t_3, { eventContext = p4.abuse_vector }), { customFields = dashModule.join(p4, p5, t) })
+		telemetryService:LogEvent(dashModule.join(t_3, { eventContext = p2.abuse_vector }), { customFields = dashModule.join(p2, p3, t) })
 	end,
 	TelemetryEventType = t,
 	LinkOpenedSource = t_1,
-	SubmitSource = t_2,
-	formatHttpErrorMessageForAnalytics = formatHttpErrorMessageForAnalytics
+	SubmitSource = t_2
 }

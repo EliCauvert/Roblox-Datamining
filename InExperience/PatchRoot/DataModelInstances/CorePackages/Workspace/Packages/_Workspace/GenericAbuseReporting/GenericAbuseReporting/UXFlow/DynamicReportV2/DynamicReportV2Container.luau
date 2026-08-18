@@ -45,7 +45,7 @@ local fFlagEnableInlineSurveyOnUserReport = require(parent.SharedFlags).FFlagEna
 local fFlagSurvBloxEventTypeEnabled = require(parent.SharedFlags).FFlagSurvBloxEventTypeEnabled
 local fFlagEnableReportingFlowForMomentsFeed = require(parent.SharedFlags).FFlagEnableReportingFlowForMomentsFeed
 
-return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 235 | named "DynamicReportV2ContainerV2" ]]
+return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 233 | named "DynamicReportV2ContainerV2" ]]
 	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), fFlagEnableInlineSurveyOnUserReport (ref), fetchConfigWithAttributesModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), getNewRunId (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), abuseVectorModule (ref), sendBoundaryErrorTelemetryModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), coreGuiService (ref), useIsSpatial (ref), fixDynamicReportV2VRAsync (ref), useVrOverlayModule (ref), sheet (ref), dialogSize (ref), abuseReportErrorBoundaryModule (ref), abuseReportContentModule (ref), dynamicReportV2LoadingModule (ref), dynamicReportV2ErrorModule (ref), overlayProvider (ref), inlineSurveyModule (ref), inlineEventTypeModule (ref)
 	local var43 = useRoactService(roactNetworking)
 	local var44, var45 = reactModule.useState(nil)
@@ -61,11 +61,11 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 		var51 = var54
 		var52 = reactModule.useRef(false)
 	end
-	reactModule.useEffect(function() --[[ line: 249 ]]
+	reactModule.useEffect(function() --[[ line: 247 ]]
 		-- upvalues: fetchConfigWithAttributesModule (copy), var43 (ref), p6 (ref), var45 (ref), sendAnalyticsEvent (copy), telemetryEventType (copy), var47 (ref), fFlagFixAnalyticsForDynamicReportV2 (copy), dashModule (copy), getNewRunId (copy)
 		local var74 = false
 		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-		fetchConfigWithAttributesModule(var43, p6.abuseVector, { targetId = p6.targetId }):andThen(function(p8) --[[ line: 256 ]]
+		fetchConfigWithAttributesModule(var43, p6.abuseVector, { targetId = p6.targetId }):andThen(function(p8) --[[ line: 254 ]]
 			-- upvalues: var74 (write), unixTimestampMillis (ref), var45 (copy), sendAnalyticsEvent (copy), p6 (copy), telemetryEventType (copy)
 			if var74 then
 				return
@@ -88,7 +88,7 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 					load_duration_ms = var75
 				}
 			})
-		end):catch(function(p7) --[[ line: 281 ]]
+		end):catch(function(p7) --[[ line: 279 ]]
 			-- upvalues: var74 (write), var47 (copy), fFlagFixAnalyticsForDynamicReportV2 (copy), dashModule (copy), sendAnalyticsEvent (copy), p6 (copy), getNewRunId (copy), telemetryEventType (copy)
 			if var74 then
 				return
@@ -109,7 +109,7 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 			})
 		end)
 		
-		return function() --[[ line: 306 ]]
+		return function() --[[ line: 304 ]]
 			-- upvalues: var74 (write)
 			var74 = true
 		end
@@ -124,7 +124,7 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 	
 	if fFlagEnableInlineSurveyOnUserReport then
 		var57 = reactModule.useRef(false)
-		var58 = reactModule.useCallback(function(p9) --[[ line: 330 ]]
+		var58 = reactModule.useCallback(function(p9) --[[ line: 328 ]]
 			-- upvalues: var57 (write), fFlagEnableReportingFlowForMomentsFeed (copy), p6 (ref)
 			if p9.didSubmit then
 				var57.current = true
@@ -134,17 +134,17 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 				end
 			end
 		end, { p6.onSubmit })
-		var59 = reactModule.useCallback(function() --[[ line: 339 ]]
+		var59 = reactModule.useCallback(function() --[[ line: 337 ]]
 			-- upvalues: fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy)
 			if fFlagSurvBloxEventTypeEnabled then
 				surveyEventPublisherModule.publishSurveyEvent(webViewEventTypeModule.ReportSubmitted)
 			end
 		end, {})
-		var60 = reactModule.useCallback(function() --[[ line: 345 ]]
+		var60 = reactModule.useCallback(function() --[[ line: 343 ]]
 			-- upvalues: var52 (write)
 			var52.current = true
 		end, {})
-		var61 = reactModule.useCallback(function() --[[ line: 349 ]]
+		var61 = reactModule.useCallback(function() --[[ line: 347 ]]
 			-- upvalues: var52 (write), var59 (write), p6 (ref)
 			if not var52.current then
 				var59()
@@ -152,12 +152,12 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 			p6.onClose()
 		end, { var59, p6.onClose })
 	end
-	local var62 = reactModule.useCallback(function() --[[ line: 357 ]]
+	local var62 = reactModule.useCallback(function() --[[ line: 355 ]]
 		-- upvalues: var56 (ref), var49 (ref)
 		var56.current = true
 		var49(false)
 	end, {})
-	local var63 = reactModule.useCallback(function() --[[ line: 365 ]]
+	local var63 = reactModule.useCallback(function() --[[ line: 363 ]]
 		-- upvalues: var56 (ref), var55 (ref), var49 (ref), fFlagEnableInlineSurveyOnUserReport (copy), var57 (write), p6 (ref), abuseVectorModule (copy), var51 (write), var59 (write)
 		if not var56.current and var55.current then
 			var55.current.requestClose()
@@ -178,26 +178,26 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 		end
 		p6.onClose()
 	end, { p6.onClose, p6.abuseVector, var59 })
-	local var64 = reactModule.useCallback(function() --[[ line: 389 ]]
+	local var64 = reactModule.useCallback(function() --[[ line: 387 ]]
 		-- upvalues: var47 (ref)
 		var47(true)
 	end, {})
-	local var65 = reactModule.useCallback(function(p10) --[[ line: 393 ]]
+	local var65 = reactModule.useCallback(function(p10) --[[ line: 391 ]]
 		-- upvalues: sendBoundaryErrorTelemetryModule (copy), p6 (ref), var47 (ref)
 		warn("AbuseReportErrorBoundary caught:", p10)
 		sendBoundaryErrorTelemetryModule(p10, { abuse_vector = p6.abuseVector, target_id = p6.targetId })
 		var47(true)
 	end, { p6.abuseVector, p6.targetId })
-	local var66 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ line: 402 ]]
+	local var66 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ line: 400 ]]
 		-- upvalues: var49 (ref)
 		var49(false)
 	end)
 	local var67, var68 = reactModule.useState(true)
-	local var69 = reactModule.useCallback(function(p11) --[[ line: 406 ]]
+	local var69 = reactModule.useCallback(function(p11) --[[ line: 404 ]]
 		-- upvalues: var68 (ref)
 		var68(not p11)
 	end, {})
-	local var70 = reactModule.useCallback(function(p12) --[[ line: 409 ]]
+	local var70 = reactModule.useCallback(function(p12) --[[ line: 407 ]]
 		-- upvalues: var67 (ref), var66 (ref)
 		local var76 = if var67 then p12 else nil
 		
@@ -233,7 +233,6 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 				takeoverFocus = var69,
 				onResolveError = var64,
 				onCustomSubmit = p6.onCustomSubmit,
-				clientActionHandlers = p6.clientActionHandlers,
 				onFinish = var58
 			})
 		}) else nil,
@@ -248,18 +247,18 @@ return reactModule.memo(if fFlagAbuseReportMenuV2 then function(p6) --[[ line: 2
 			onClose = var61
 		})
 	}) else reactModule.createElement(overlayProvider, { gui = var73 }, { Sheet = createElement })
-end else function(p0) --[[ line: 77 | named "DynamicReportV2Container" ]]
+end else function(p0) --[[ line: 76 | named "DynamicReportV2Container" ]]
 	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), fetchConfigWithAttributesModule (ref), fFlagFixAnalyticsForDynamicReportV2 (ref), dashModule (ref), sendAnalyticsEvent (ref), getNewRunId (ref), telemetryEventType (ref), useAbuseSheetFlowModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), coreGuiService (ref), useIsSpatial (ref), fixDynamicReportV2VRAsync (ref), useVrOverlayModule (ref), sheet (ref), dialogSize (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), layoutSlotsProvider (ref), sheetSlots (ref), abuseReportDialogModule (ref), dynamicReportV2LoadingModule (ref), dynamicReportV2ErrorModule (ref), overlayProvider (ref)
 	local var25 = useRoactService(roactNetworking)
 	local var26, var27 = reactModule.useState(nil)
 	local var28, var29 = reactModule.useState(false)
 	local var30, var31 = reactModule.useState(true)
-	reactModule.useEffect(function() --[[ line: 83 ]]
+	reactModule.useEffect(function() --[[ line: 82 ]]
 		-- upvalues: fetchConfigWithAttributesModule (copy), var25 (ref), p0 (ref), var27 (ref), var29 (ref), fFlagFixAnalyticsForDynamicReportV2 (copy), dashModule (copy), sendAnalyticsEvent (copy), getNewRunId (copy), telemetryEventType (copy)
-		fetchConfigWithAttributesModule(var25, p0.abuseVector, { targetId = p0.targetId }):andThen(function(p2) --[[ line: 87 ]]
+		fetchConfigWithAttributesModule(var25, p0.abuseVector, { targetId = p0.targetId }):andThen(function(p2) --[[ line: 86 ]]
 			-- upvalues: var27 (copy)
 			var27(p2.responseBody)
-		end):catch(function(p1) --[[ line: 90 ]]
+		end):catch(function(p1) --[[ line: 89 ]]
 			-- upvalues: var29 (copy), fFlagFixAnalyticsForDynamicReportV2 (copy), dashModule (copy), sendAnalyticsEvent (copy), p0 (copy), getNewRunId (copy), telemetryEventType (copy)
 			warn("Failed to fetch Dynamic Report V2 config:", p1)
 			var29(true)
@@ -282,8 +281,7 @@ end else function(p0) --[[ line: 77 | named "DynamicReportV2Container" ]]
 		targetId = p0.targetId,
 		onClose = p0.onClose,
 		onCustomSubmit = p0.onCustomSubmit,
-		clientActionHandlers = p0.clientActionHandlers,
-		onFinish = if fFlagEnableReportingFlowForMomentsFeed and p0.onSubmit then reactModule.useCallback(function(p3) --[[ line: 114 ]]
+		onFinish = if fFlagEnableReportingFlowForMomentsFeed and p0.onSubmit then reactModule.useCallback(function(p3) --[[ line: 113 ]]
 			-- upvalues: p0 (ref)
 			if p3.didSubmit and p0.onSubmit then
 				p0.onSubmit()
@@ -295,7 +293,7 @@ end else function(p0) --[[ line: 77 | named "DynamicReportV2Container" ]]
 	if not var32 and var26 then
 		var28 = true
 	end
-	local var33 = reactModule.useCallback(function() --[[ line: 134 ]]
+	local var33 = reactModule.useCallback(function() --[[ line: 132 ]]
 		-- upvalues: var32 (ref), var31 (ref), p0 (ref)
 		if var32 then
 			var32.onClose()
@@ -303,16 +301,16 @@ end else function(p0) --[[ line: 77 | named "DynamicReportV2Container" ]]
 		var31(false)
 		p0.onClose()
 	end, { var32, p0.onClose })
-	local var34 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ line: 148 ]]
+	local var34 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ line: 146 ]]
 		-- upvalues: var33 (ref)
 		var33()
 	end)
 	local var35, var36 = reactModule.useState(true)
-	local var37 = reactModule.useCallback(function(p4) --[[ line: 153 ]]
+	local var37 = reactModule.useCallback(function(p4) --[[ line: 151 ]]
 		-- upvalues: var36 (ref)
 		var36(not p4)
 	end, {})
-	local var38 = reactModule.useCallback(function(p5) --[[ line: 157 ]]
+	local var38 = reactModule.useCallback(function(p5) --[[ line: 155 ]]
 		-- upvalues: var35 (ref), var34 (ref)
 		local var42 = if var35 then p5 else nil
 		

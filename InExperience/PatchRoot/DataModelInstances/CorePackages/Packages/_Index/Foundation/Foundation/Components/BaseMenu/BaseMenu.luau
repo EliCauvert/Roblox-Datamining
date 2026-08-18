@@ -79,26 +79,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | 
 	end
 	local var31 = if var19.radius ~= nil then "" else t_1[var19.radius]
 	local var32 = reactModule.createElement(baseMenuContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 142 ]]
-			-- upvalues: var19 (ref), var24 (ref), var27 (ref), var26 (ref)
-			return {
-				depth = 1,
-				onActivated = var19.onActivated,
-				onNestedLeafActivated = var19.onNestedLeafActivated,
-				size = var19.size,
-				hasLeading = var24,
-				setHasLeading = var27,
-				hoverOpenPath = var26.openPath,
-				hoverOpenAtDepth = var26.openAtDepth,
-				hoverCloseAtDepth = var26.closeAtDepth,
-				hoverReset = var26.reset,
-				maxHeight = var19.maxHeight
-			}
-		end, {
-			var19.onActivated, var19.onNestedLeafActivated, var19.size, var24,
-			var26.openPath, var26.openAtDepth, var26.closeAtDepth, var26.reset,
-			var19.maxHeight
-		}) else nil else {
+		value = {
 			depth = 1,
 			onActivated = var19.onActivated,
 			onNestedLeafActivated = var19.onNestedLeafActivated,
@@ -125,10 +106,10 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 69 | 
 		})
 	}, var32) else reactModule.createElement(viewModule, withCommonPropsModule(var19, {
 		tag = `col stroke-standard stroke-default {var31}`,
-		AutomaticSize = var29:map(function(p6) --[[ line: 206 ]]
+		AutomaticSize = var29:map(function(p6) --[[ line: 173 ]]
 			return if p6 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y
 		end),
-		Size = reactModule.joinBindings({ var29, var20 }):map(function(p7) --[[ line: 209 ]]
+		Size = reactModule.joinBindings({ var29, var20 }):map(function(p7) --[[ line: 176 ]]
 			return if p7[1] then nil else UDim2.new(p7[2], UDim.new())
 		end),
 		ref = p1,

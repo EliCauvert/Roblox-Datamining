@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AbuseReportSubmissionTargetV4", false) and require(script.Parent.FFlagAbuseReportInExpPlayerListV3)

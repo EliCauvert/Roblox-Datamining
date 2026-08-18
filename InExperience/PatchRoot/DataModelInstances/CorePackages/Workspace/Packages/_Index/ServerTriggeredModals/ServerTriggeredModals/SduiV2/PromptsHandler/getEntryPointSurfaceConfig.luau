@@ -1,10 +1,9 @@
 ﻿local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
 local appPage = require(parent.RobloxAppEnums).AppPage
 local promptsEntryPointModule = require(script.Parent.Parent.PromptsEntryPoint)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEdpGameLeavePromptsHandlerEnabled = sharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
+local fFlagEdpGameLeavePromptsHandlerEnabled = require(parent.SharedFlags).FFlagEdpGameLeavePromptsHandlerEnabled
 local t = {
-	[promptsEntryPointModule.HomepageLaunch] = if game:DefineFastFlag("LuaAppPromptsHomepageConfigName", false) or sharedFlagsModule.FFlagLuaAppEnableSduiHomePage then {
+	[promptsEntryPointModule.HomepageLaunch] = if game:DefineFastFlag("LuaAppPromptsHomepageConfigName", false) then {
 		surfaceKey = "Prompts",
 		appPage = appPage.Home,
 		configKey = "Prompts" .. promptsEntryPointModule.HomepageLaunch
@@ -30,14 +29,14 @@ local t = {
 	} else nil
 }
 
-return function(p0, p1) --[[ line: 80 | named "getEntryPointSurfaceConfig" ]]
+return function(p0, p1) --[[ line: 78 | named "getEntryPointSurfaceConfig" ]]
 	-- upvalues: t (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref)
-	local var3 = t[p0]
-	assert(var3 ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)
+	local var2 = t[p0]
+	assert(var2 ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)
 	
 	return if fFlagEdpGameLeavePromptsHandlerEnabled and p1 ~= nil then {
-		appPage = var3.appPage,
-		surfaceKey = var3.surfaceKey,
-		configKey = `{var3.configKey}-{p1}`
-	} else var3
+		appPage = var2.appPage,
+		surfaceKey = var2.surfaceKey,
+		configKey = `{var2.configKey}-{p1}`
+	} else var2
 end

@@ -5,55 +5,46 @@ local appStyleProvider = dependenciesModule.UIBlox.App.Style.AppStyleProvider
 local roact = dependenciesModule.Roact
 local universalAppPolicy = dependenciesModule.UniversalAppPolicy
 local llama = dependenciesModule.llama
-local parent = friendsLanding.Parent
-local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local var4 = dependenciesModule.Lumberyak.Logger.new()
-var4:addSink({
-	maxLevel = var4.Levels.fromString("info"),
-	log = function(_, p0, _) --[[ line: 29 ]]
+local mockLocale = require(friendsLanding.Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+local var3 = dependenciesModule.Lumberyak.Logger.new()
+var3:addSink({
+	maxLevel = var3.Levels.fromString("info"),
+	log = function(_, p0, _) --[[ line: 25 ]]
 		print(p0)
 	end
 })
-loggerModule:setParent(var4)
+loggerModule:setParent(var3)
 local t = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
-local t_1 = { Light = colorMode.Light, Dark = colorMode.Dark }
-local t_2 = { language = "en-us" }
+local t_1 = { language = "en-us" }
 
 return {
-	mapDefinition = function(p1) --[[ line: 61 ]]
-		-- upvalues: llama (ref), t_2 (ref)
-		return llama.Dictionary.join(p1, { controls = llama.Dictionary.join(t_2, p1.controls or {}) })
+	mapDefinition = function(p1) --[[ line: 52 ]]
+		-- upvalues: llama (ref), t_1 (ref)
+		return llama.Dictionary.join(p1, { controls = llama.Dictionary.join(t_1, p1.controls or {}) })
 	end,
 	roact = roact,
-	mapStory = function(p2) --[[ line: 66 ]]
-		-- upvalues: t (ref), roact (ref), foundationProvider (ref), t_1 (ref), appStyleProvider (ref), universalAppPolicy (ref), mockLocale (ref)
-		return function(p3) --[[ line: 67 ]]
-			-- upvalues: t (copy), roact (copy), foundationProvider (copy), t_1 (copy), appStyleProvider (copy), universalAppPolicy (copy), mockLocale (copy), p2 (ref)
-			local var8 = if p3 then t[p3.theme] else t.Default
-			
-			return roact.createElement(foundationProvider, { colorMode = t_1[var8.themeName] }, {
-				AppStyle = roact.createElement(appStyleProvider, { style = var8 }, {
-					roact.createElement(universalAppPolicy.Provider, {
-						policy = {
-							function() --[[ line: 80 ]]
-								-- upvalues: p3 (ref)
-								return {
-									getShowDisplayName = function() --[[ line: 82 ]]
-										-- upvalues: p3 (copy)
-										return p3.controls.getShowDisplayName
-									end
-								}
-							end
-						}
-					}, { Child = mockLocale(p2, p3) })
-				})
+	mapStory = function(p2) --[[ line: 57 ]]
+		-- upvalues: roact (ref), appStyleProvider (ref), t (ref), universalAppPolicy (ref), mockLocale (ref)
+		return function(p3) --[[ line: 58 ]]
+			-- upvalues: roact (copy), appStyleProvider (copy), t (copy), universalAppPolicy (copy), mockLocale (copy), p2 (ref)
+			return roact.createElement(appStyleProvider, { style = if p3 then t[p3.theme] else t.Default }, {
+				roact.createElement(universalAppPolicy.Provider, {
+					policy = {
+						function() --[[ line: 64 ]]
+							-- upvalues: p3 (ref)
+							return {
+								getShowDisplayName = function() --[[ line: 66 ]]
+									-- upvalues: p3 (copy)
+									return p3.controls.getShowDisplayName
+								end
+							}
+						end
+					}
+				}, { Child = mockLocale(p2, p3) })
 			})
 		end
 	end

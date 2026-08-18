@@ -2,7 +2,7 @@
 
 return function(p0) --[[ line: 13 ]]
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.POST("UnblockUserById", function(p1, p2) --[[ line: 16 ]]
+	return p0.roduxNetworking.POST({ Name = "UnblockUserById" }, function(p1, p2) --[[ line: 16 ]]
 		-- upvalues: API_URLModule (copy)
 		return p1(API_URLModule, { params = p2.currentUserId }):path("user-blocking-api"):path("v1"):path("users"):id(p2.userId):path("unblock-user"):body({})
 	end)

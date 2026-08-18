@@ -152,7 +152,6 @@
 	FFlagAXStrictCheckForPrefetchMarketplace = require(script.FFlagAXStrictCheckForPrefetchMarketplace),
 	FFlagAXCatalogMakeupSupport = require(script.FFlagAXCatalogMakeupSupport),
 	FFlagAXUnifiedPurchasePromptMakeupLooksSaveLookType = require(script.FFlagAXUnifiedPurchasePromptMakeupLooksSaveLookType),
-	FFlagAXSearchTrendingChipLogging = require(script.FFlagAXSearchTrendingChipLogging),
 	FFlagAXCatalogMakeupTaxonomy = require(script.FFlagAXCatalogMakeupTaxonomy),
 	FFlagAXEnableTaxonomyM20ExposureLoggingCatalog = require(script.FFlagAXEnableTaxonomyM20ExposureLoggingCatalog),
 	FFlagAXEnableTaxonomyM20ExposureLoggingClothing = require(script.FFlagAXEnableTaxonomyM20ExposureLoggingClothing),
@@ -295,10 +294,6 @@
 	FFlagAXCycloramaAssetFallback = require(script.FFlagAXCycloramaAssetFallback),
 	FStringAXCycloramaFallbackAssetId = require(script.FStringAXCycloramaFallbackAssetId),
 	FStringAXBackgroundGenerationCanvasAssetId = require(script.FStringAXBackgroundGenerationCanvasAssetId),
-	FIntAXBackgroundGenerationPollIntervalSeconds = require(script.FIntAXBackgroundGenerationPollIntervalSeconds),
-	FIntAXBackgroundGenerationPollTimeoutSeconds = require(script.FIntAXBackgroundGenerationPollTimeoutSeconds),
-	FIntAXBackgroundGenerationMaxConsecutivePollFailures = require(script.FIntAXBackgroundGenerationMaxConsecutivePollFailures),
-	FIntAXBackgroundGenerationMaxPromptLength = require(script.FIntAXBackgroundGenerationMaxPromptLength),
 	FFlagAXDebugMobileRbxlContentProbe = require(script.FFlagAXDebugMobileRbxlContentProbe),
 	FFlagAXBackgroundsCycloramaVR = require(script.FFlagAXBackgroundsCycloramaVR),
 	FFlagAXBackgroundsCustomizeHydration = require(script.FFlagAXBackgroundsCustomizeHydration),
@@ -349,6 +344,5 @@
 	FFlagAXBackgroundGeneration = require(script.FFlagAXBackgroundGeneration),
 	FFlagAXAddSectionsToItemInfoRowPrompt = require(script.FFlagAXAddSectionsToItemInfoRowPrompt),
 	FFlagAXMigrateMaterialsToAttributes = require(script.FFlagAXMigrateMaterialsToAttributes),
-	FFlagAXEnableMakeupOutfitCreation = require(script.FFlagAXEnableMakeupOutfitCreation),
-	FFlagAXFixSearchLandingQuickButtonsOffset = require(script.FFlagAXFixSearchLandingQuickButtonsOffset)
+	FFlagAXEnableMakeupOutfitCreation = require(script.FFlagAXEnableMakeupOutfitCreation)
 }

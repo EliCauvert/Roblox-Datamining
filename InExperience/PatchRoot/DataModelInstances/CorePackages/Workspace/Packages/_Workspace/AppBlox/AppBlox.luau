@@ -17,13 +17,11 @@ local infoTableModule = require(script.InfoTable)
 local infoTableCellModule = require(script.InfoTableCell)
 local expandableTextModule = require(script.ExpandableText)
 local animateScrollViewToSelectionHelperModule = require(script.AnimateScrollViewToSelectionHelper)
-local composerModule = require(script.Composer)
 local sharedFlagsModule = require(parent.SharedFlags)
 local _ = require(script.MediaGallery.MediaGalleryTypes)
 
 return {
 	CloseOnlyInteractiveAlert = closeOnlyInteractiveAlertModule,
-	Composer = composerModule,
 	ConfirmationDialog = confirmationDialogModule,
 	LoadingBar = require(script.LoadingBar),
 	InlinePrompt = require(script.InlinePrompt),

@@ -31,7 +31,7 @@ return {
 			
 			if var6 == nil then break end
 			if var6 == 0 then
-				error("Frame length of zero is not a valid frame")
+				error("Frame length of zero is not a valid protobuf message")
 			end
 			if var6 > 52428800 then
 				error(`Frame length {var6} exceeds maximum supported size`)

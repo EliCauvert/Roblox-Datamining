@@ -35,28 +35,26 @@ return function(p0) --[[ line: 28 | named "PanelsProvider" ]]
 			var9:destroy()
 		end
 	end, { var9 })
-	local var10 = reactModule.useCallback(function(p1, p2, p3, p4, p5) --[[ line: 54 ]]
-		-- upvalues: flagsModule (copy), var8 (ref), var9 (ref)
-		if flagsModule.FoundationPopoverPluginAnchorRefresh then
-			var8.refreshAsync(p1)
-		end
-		local var12 = var9:openAtAsync({
-			targetWidgetUri = p1,
-			targetAnchorPoint = p2.targetAnchorPoint,
-			subjectAnchorPoint = p2.subjectAnchorPoint,
-			offset = p2.offset
-		}, p3, p4, p5)
-		
-		return var12, function() --[[ line: 71 ]]
-			-- upvalues: var12 (ref)
-			var12.close()
-		end
-	end, { var9, var8 })
 	
 	return reactModule.createElement(panelsContextModule.Provider, {
-		value = if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 79 ]]
-			-- upvalues: var10 (ref)
-			return { registerPopoverAsync = var10 }
-		end, { var10 }) else { registerPopoverAsync = var10 }
+		value = {
+			registerPopoverAsync = reactModule.useCallback(function(p1, p2, p3, p4, p5) --[[ line: 54 ]]
+				-- upvalues: flagsModule (copy), var8 (ref), var9 (ref)
+				if flagsModule.FoundationPopoverPluginAnchorRefresh then
+					var8.refreshAsync(p1)
+				end
+				local var11 = var9:openAtAsync({
+					targetWidgetUri = p1,
+					targetAnchorPoint = p2.targetAnchorPoint,
+					subjectAnchorPoint = p2.subjectAnchorPoint,
+					offset = p2.offset
+				}, p3, p4, p5)
+				
+				return var11, function() --[[ line: 71 ]]
+					-- upvalues: var11 (ref)
+					var11.close()
+				end
+			end, { var9, var8 })
+		}
 	}, p0.children)
 end

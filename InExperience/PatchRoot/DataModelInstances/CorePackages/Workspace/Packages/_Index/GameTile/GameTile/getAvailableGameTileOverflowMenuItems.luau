@@ -1,11 +1,9 @@
 ﻿local gameTile = script:FindFirstAncestor("GameTile")
-local sharedFlagsModule = require(gameTile.Parent.SharedFlags)
 local tileOverflowMenuItems = require(gameTile.GameTileConstants).TileOverflowMenuItems
-local fFlagLuaAppEnableSponsoredReportAd = sharedFlagsModule.FFlagLuaAppEnableSponsoredReportAd
-local fFlagLuaAppContinueSortInstantPlay = sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
+local fFlagLuaAppEnableSponsoredReportAd = require(gameTile.Parent.SharedFlags).FFlagLuaAppEnableSponsoredReportAd
 
-return function(p0) --[[ line: 11 | named "getAvailableGameTileOverflowMenuItems" ]]
-	-- upvalues: fFlagLuaAppEnableSponsoredReportAd (ref), tileOverflowMenuItems (ref), fFlagLuaAppContinueSortInstantPlay (ref)
+return function(p0) --[[ line: 10 | named "getAvailableGameTileOverflowMenuItems" ]]
+	-- upvalues: fFlagLuaAppEnableSponsoredReportAd (ref), tileOverflowMenuItems (ref)
 	local t = {}
 	
 	if fFlagLuaAppEnableSponsoredReportAd then
@@ -22,9 +20,6 @@ return function(p0) --[[ line: 11 | named "getAvailableGameTileOverflowMenuItems
 	end
 	if p0.enableExplicitFeedback then
 		t[tileOverflowMenuItems.NotInterested] = true
-	end
-	if fFlagLuaAppContinueSortInstantPlay and p0.enableGameDetails then
-		t[tileOverflowMenuItems.GameDetails] = true
 	end
 	return t
 end

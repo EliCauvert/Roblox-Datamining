@@ -7,7 +7,7 @@ local fFlagEnablePrivatePartyStartJoin = require(packages.SharedFlags).FFlagEnab
 
 return function(p0) --[[ line: 11 ]]
 	-- upvalues: SQUAD_URLModule (ref), httpService (ref), fFlagEnableSquadRegroupExperimentation (ref), fFlagEnablePrivatePartyStartJoin (ref)
-	return p0.roduxNetworking.POST("CreateExperienceInvite", function(p1, p2) --[[ line: 15 ]]
+	return p0.roduxNetworking.POST({ Name = "CreateExperienceInvite" }, function(p1, p2) --[[ line: 15 ]]
 		-- upvalues: SQUAD_URLModule (copy), httpService (copy), fFlagEnableSquadRegroupExperimentation (copy), fFlagEnablePrivatePartyStartJoin (copy)
 		return p1(SQUAD_URLModule):path("group-up"):path("v1"):path("invite-to-experience"):body({
 			membershipEntityId = p2.membershipEntityId,

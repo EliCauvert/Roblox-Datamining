@@ -13,7 +13,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | 
 	return reactModule.createElement(viewModule, withCommonPropsModule(p0, { tag = "row align-y-center gap-small auto-xy", ref = p1 }), {
 		LeftNav = reactModule.createElement(navControlsModule, {
 			side = "start",
-			LayoutOrder = 1,
+			layoutOrder = 1,
 			size = p0.size,
 			isFirstDisabled = p0.isFirstDisabled,
 			isBackDisabled = p0.isBackDisabled,
@@ -28,7 +28,7 @@ return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 36 | 
 		RightNav = reactModule.createElement(navControlsModule, {
 			side = "end",
 			size = p0.size,
-			LayoutOrder = if p0.pageContent then 3 else 2,
+			layoutOrder = if p0.pageContent then 3 else 2,
 			isFirstDisabled = p0.isFirstDisabled,
 			isBackDisabled = p0.isBackDisabled,
 			isForwardDisabled = p0.isForwardDisabled,

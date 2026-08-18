@@ -3,12 +3,9 @@ local parent = buildExperience.Parent
 local dataHydrationModule = require(parent.DataHydration)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
 local view = foundationModule.View
 local audienceConfigurationContentModule = require(buildExperience.Components.GameConfigurations.AudienceConfigurationContent.AudienceConfigurationContent)
@@ -39,7 +36,7 @@ local t = {
 }
 local t_1 = { publish = t.BuildPublish, settings = t.BuildSettings }
 
-local function _(p0) --[[ line: 72 | named "normalizeTarget" ]]
+local function _(p0) --[[ line: 68 | named "normalizeTarget" ]]
 	return if p0 == nil then nil else {
 		universeId = p0.universeId,
 		placeId = p0.placeId,
@@ -50,99 +47,98 @@ local function _(p0) --[[ line: 72 | named "normalizeTarget" ]]
 	}
 end
 
-local _ = function(p1) --[[ line: 87 | named "getGameInfoName" ]]
+local _ = function(p1) --[[ line: 83 | named "getGameInfoName" ]]
 	return if p1 == nil or p1.isUnavailable or (typeof(p1.name) ~= "string" or p1.name == "") then nil else p1.name
 end
 
-local function getTargetWithGameInfo(p2, p3, p4) --[[ line: 95 ]]
-	-- upvalues: fFlagBuildLocalization (ref), localizationStringsModule (ref)
+local function getTargetWithGameInfo(p2, p3) --[[ line: 91 ]]
+	-- upvalues: localizationStringsModule (ref)
 	if p2 == nil then
 		return p2
 	end
-	local var32
-	local var29 = if p3 ~= nil and not p3.isUnavailable then p3 else nil
-	local var30 = if var29 then var29.creator else nil
+	local var31
+	local var28 = if p3 ~= nil and not p3.isUnavailable then p3 else nil
+	local var29 = if var28 then var28.creator else nil
 	local t = {
 		universeId = p2.universeId,
-		placeId = p2.placeId or (if var29 then tonumber(var29.rootPlaceId) else nil),
+		placeId = p2.placeId or (if var28 then tonumber(var28.rootPlaceId) else nil),
 		sessionId = p2.sessionId,
 		experienceName = if p3 == nil or p3.isUnavailable or (typeof(p3.name) ~= "string" or p3.name == "") then nil else p3.name,
-		description = if var29 then var29.description or "" elseif fFlagBuildLocalization then p4 else localizationStringsModule.BUILD_MENU_LOADING,
-		creatorName = if var30 and var30.name ~= "" then var30.name elseif fFlagBuildLocalization then p4 else localizationStringsModule.BUILD_MENU_LOADING,
+		description = if var28 then var28.description or "" else localizationStringsModule.BUILD_MENU_LOADING,
+		creatorName = if var29 and var29.name ~= "" then var29.name else localizationStringsModule.BUILD_MENU_LOADING,
 		gameIcon = p2.gameIcon
 	}
 	
-	if var30 then
-		var32 = var30.hasVerifiedBadge == true
-		var32 = nil
+	if var29 then
+		var31 = var29.hasVerifiedBadge == true
+		var31 = nil
 	else
-		var32 = false
+		var31 = false
 	end
-	t.isCreatorVerified = var32
+	t.isCreatorVerified = var31
 	t.isNewGameTarget = p2.isNewGameTarget
 	
 	return t
 end
 
-local _ = function(p5) --[[ line: 125 | named "isTitleDescriptionReady" ]]
-	return (if p5 == nil or p5.isUnavailable or (typeof(p5.name) ~= "string" or p5.name == "") then nil else p5.name) ~= nil
+local _ = function(p4) --[[ line: 116 | named "isTitleDescriptionReady" ]]
+	return (if p4 == nil or p4.isUnavailable or (typeof(p4.name) ~= "string" or p4.name == "") then nil else p4.name) ~= nil
 end
 
-local function useGameInfo(p6) --[[ line: 129 ]]
+local function useGameInfo(p5) --[[ line: 120 ]]
 	-- upvalues: reactModule (ref), signalsModule (ref), dataHydrationModule (ref), signalsReactModule (ref)
-	local var33 = if p6 == nil then nil else tostring(p6)
+	local var32 = if p5 == nil then nil else tostring(p5)
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 131 ]]
-		-- upvalues: signalsModule (copy), var33 (ref), dataHydrationModule (copy)
-		return signalsModule.createComputed(function(p7) --[[ line: 132 ]]
-			-- upvalues: var33 (copy), dataHydrationModule (copy)
-			return if var33 == nil then nil else dataHydrationModule.Game.getGameInfoStore(p7).getAndFetchGameInfo(var33).data(p7)
+	return signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 122 ]]
+		-- upvalues: signalsModule (copy), var32 (ref), dataHydrationModule (copy)
+		return signalsModule.createComputed(function(p6) --[[ line: 123 ]]
+			-- upvalues: var32 (copy), dataHydrationModule (copy)
+			return if var32 == nil then nil else dataHydrationModule.Game.getGameInfoStore(p6).getAndFetchGameInfo(var32).data(p6)
 		end)
-	end, { var33 }))
+	end, { var32 }))
 end
 
-local function BuildFullscreenPage(p8) --[[ line: 149 ]]
+local function BuildFullscreenPage(p7) --[[ line: 140 ]]
 	-- upvalues: useBuildPageLayoutModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref)
-	local var34 = useBuildPageLayoutModule()
+	local var33 = useBuildPageLayoutModule()
 	
 	return reactModule.createElement(fullscreenPageWithSafeArea, {
 		includeStatusBar = true,
-		BackgroundColor3 = var34.tokens.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var34.tokens.Color.Surface.Surface_0.Transparency,
-		includeBottomBar = var34.shouldIncludeBottomBar and p8.hideBottomBar ~= true
-	}, { Page = p8.pageContent })
+		BackgroundColor3 = var33.tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var33.tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = var33.shouldIncludeBottomBar and p7.hideBottomBar ~= true
+	}, { Page = p7.pageContent })
 end
 
-local function BuildSheetPage(p9) --[[ line: 162 ]]
+local function BuildSheetPage(p8) --[[ line: 153 ]]
 	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
-	local var35 = useTokens()
+	local var34 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "size-full",
-		BackgroundColor3 = var35.Color.Surface.Surface_0.Color3,
-		BackgroundTransparency = var35.Color.Surface.Surface_0.Transparency
-	}, { Page = p9.pageContent })
+		BackgroundColor3 = var34.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = var34.Color.Surface.Surface_0.Transparency
+	}, { Page = p8.pageContent })
 end
 
-local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), useGameInfo (ref), getTargetWithGameInfo (ref), reactModule (ref), t (ref), buildOverflowMenuPageModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref), buildExperience (ref)
-	local var36 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }) else nil).loading else nil
-	local navigation = p10.navigation
-	local screenProps = p10.screenProps or {}
-	local var38 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
-	local var39 = if var38 == nil then nil else {
-		universeId = var38.universeId,
-		placeId = var38.placeId,
-		sessionId = var38.sessionId,
-		experienceName = var38.experienceName,
-		gameIcon = var38.gameIcon,
-		isNewGameTarget = var38.isNewGameTarget
+local function ConfigurationScreen(p9, p10, p11) --[[ line: 165 ]]
+	-- upvalues: buildNavigationParamsModule (ref), useGameInfo (ref), getTargetWithGameInfo (ref), reactModule (ref), t (ref), buildOverflowMenuPageModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref), buildExperience (ref)
+	local navigation = p9.navigation
+	local screenProps = p9.screenProps or {}
+	local var36 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
+	local var37 = if var36 == nil then nil else {
+		universeId = var36.universeId,
+		placeId = var36.placeId,
+		sessionId = var36.sessionId,
+		experienceName = var36.experienceName,
+		gameIcon = var36.gameIcon,
+		isNewGameTarget = var36.isNewGameTarget
 	}
-	local var40 = useGameInfo(if var39 then var39.universeId else nil)
-	local var41 = getTargetWithGameInfo(var39, var40, var36)
+	local var38 = useGameInfo(if var37 then var37.universeId else nil)
+	local var39 = getTargetWithGameInfo(var37, var38)
+	local var40, var41 = reactModule.useState(false)
 	local var42, var43 = reactModule.useState(false)
-	local var44, var45 = reactModule.useState(false)
-	local var46 = reactModule.useCallback(function() --[[ line: 189 ]]
+	local var44 = reactModule.useCallback(function() --[[ line: 174 ]]
 		-- upvalues: screenProps (ref), navigation (ref)
 		if screenProps.onClose then
 			screenProps.onClose()
@@ -151,149 +147,174 @@ local function ConfigurationScreen(p10, p11, p12) --[[ line: 174 ]]
 		end
 		navigation.goBack()
 	end, { navigation, screenProps.onClose })
-	local var47 = reactModule.useCallback(function() --[[ line: 196 ]]
-		-- upvalues: screenProps (ref), navigation (ref), t (copy), var41 (ref)
+	local var45 = reactModule.useCallback(function() --[[ line: 181 ]]
+		-- upvalues: screenProps (ref), navigation (ref), t (copy), var39 (ref)
 		if screenProps.onOpenAudiencePage then
 			screenProps.onOpenAudiencePage()
 			
 			return
 		end
-		navigation.navigate(t.BuildAudience, { target = var41 })
-	end, { navigation, screenProps.onOpenAudiencePage, var41 })
-	local var48 = reactModule.useCallback(function() --[[ line: 205 ]]
-		-- upvalues: var40 (ref), screenProps (ref), navigation (ref), t (copy), var41 (ref)
-		if (if var40 == nil or var40.isUnavailable or (typeof(var40.name) ~= "string" or var40.name == "") then nil else var40.name) == nil then return end
+		navigation.navigate(t.BuildAudience, { target = var39 })
+	end, { navigation, screenProps.onOpenAudiencePage, var39 })
+	local var46 = reactModule.useCallback(function() --[[ line: 190 ]]
+		-- upvalues: var38 (ref), screenProps (ref), navigation (ref), t (copy), var39 (ref)
+		if (if var38 == nil or var38.isUnavailable or (typeof(var38.name) ~= "string" or var38.name == "") then nil else var38.name) == nil then return end
 		if screenProps.onOpenTitleDescriptionPage then
 			screenProps.onOpenTitleDescriptionPage()
 			
 			return
 		end
-		navigation.navigate(t.BuildTitleDescription, { target = var41 })
+		navigation.navigate(t.BuildTitleDescription, { target = var39 })
 	end, {
-		var40,
+		var38,
 		navigation,
 		screenProps.onOpenTitleDescriptionPage,
-		var41
+		var39
 	})
-	local var49 = reactModule.useCallback(function() --[[ line: 217 ]]
-		-- upvalues: screenProps (ref), navigation (ref), t (copy), var41 (ref)
+	local var47 = reactModule.useCallback(function() --[[ line: 202 ]]
+		-- upvalues: screenProps (ref), navigation (ref), t (copy), var39 (ref)
 		if screenProps.onOpenMediaSelectionPage then
 			screenProps.onOpenMediaSelectionPage()
 			
 			return
 		end
-		navigation.navigate(t.BuildMediaSelection, { target = var41 })
-	end, { navigation, screenProps.onOpenMediaSelectionPage, var41 })
-	local var50 = reactModule.useCallback(function() --[[ line: 226 ]]
-		-- upvalues: var41 (ref), screenProps (ref), navigation (ref), t (copy)
-		if var41 == nil or var41.placeId == nil then return end
+		navigation.navigate(t.BuildMediaSelection, { target = var39 })
+	end, { navigation, screenProps.onOpenMediaSelectionPage, var39 })
+	local var48 = reactModule.useCallback(function() --[[ line: 211 ]]
+		-- upvalues: var39 (ref), screenProps (ref), navigation (ref), t (copy)
+		if var39 == nil or var39.placeId == nil then return end
 		if screenProps.onOpenVersionTitleDescriptionPage then
 			screenProps.onOpenVersionTitleDescriptionPage()
 			
 			return
 		end
-		navigation.navigate(t.BuildVersionTitleDescription, { target = var41 })
+		navigation.navigate(t.BuildVersionTitleDescription, { target = var39 })
 	end, {
 		navigation,
 		screenProps.onOpenVersionTitleDescriptionPage,
-		var41
+		var39
 	})
-	local var51 = reactModule.useCallback(function() --[[ line: 238 ]]
-		-- upvalues: var41 (ref), screenProps (ref), var45 (ref)
-		if var41 == nil or var41.placeId == nil then return end
+	local var49 = reactModule.useCallback(function() --[[ line: 223 ]]
+		-- upvalues: var39 (ref), screenProps (ref), var43 (ref)
+		if var39 == nil or var39.placeId == nil then return end
 		if screenProps.onOpenVersionHistory then
 			screenProps.onOpenVersionHistory()
 			
 			return
 		end
-		var45(true)
-	end, { screenProps.onOpenVersionHistory, var41 })
-	local var52 = reactModule.useCallback(function() --[[ line: 248 ]]
-		-- upvalues: var45 (ref)
-		var45(false)
-	end, {})
-	local var53 = reactModule.useCallback(function() --[[ line: 251 ]]
-		-- upvalues: var43 (ref)
 		var43(true)
-	end, {})
-	local var54 = reactModule.useCallback(function() --[[ line: 254 ]]
+	end, { screenProps.onOpenVersionHistory, var39 })
+	local var50 = reactModule.useCallback(function() --[[ line: 233 ]]
 		-- upvalues: var43 (ref)
 		var43(false)
 	end, {})
-	local var55 = reactModule.useCallback(function() --[[ line: 257 ]]
-		-- upvalues: navigation (ref), t (copy), var41 (ref)
-		navigation.navigate(t.BuildPlaytestInviteManagement, { target = var41 })
-	end, { navigation, var41 })
-	local var56 = reactModule.useCallback(function() --[[ line: 264 ]]
-		-- upvalues: var43 (ref), var55 (ref)
-		var43(false)
-		var55()
-	end, { var55 })
-	local isSettings = p11 == "settings"
-	local var58 = if var41 == nil then nil else reactModule.createElement(buildOverflowMenuPageModule, {
-		page = p11,
-		target = var41,
-		testId = p12,
-		onClose = var46,
-		onOpenAudiencePage = var47,
-		onOpenTitleDescriptionPage = var48,
-		onOpenMediaSelectionPage = var49,
-		onOpenVersionTitleDescriptionPage = var50,
-		onOpenVersionHistory = var51,
-		onOpenPlaytestPicker = if isSettings then var53 else nil,
-		onOpenPlaytestManagement = if isSettings then var55 else nil,
+	local var51 = reactModule.useCallback(function() --[[ line: 236 ]]
+		-- upvalues: var41 (ref)
+		var41(true)
+	end, {})
+	local var52 = reactModule.useCallback(function() --[[ line: 239 ]]
+		-- upvalues: var41 (ref)
+		var41(false)
+	end, {})
+	local var53 = reactModule.useCallback(function() --[[ line: 242 ]]
+		-- upvalues: navigation (ref), t (copy), var39 (ref)
+		navigation.navigate(t.BuildPlaytestInviteManagement, { target = var39 })
+	end, { navigation, var39 })
+	local var54 = reactModule.useCallback(function() --[[ line: 249 ]]
+		-- upvalues: var41 (ref), var53 (ref)
+		var41(false)
+		var53()
+	end, { var53 })
+	local isSettings = p10 == "settings"
+	local var56 = if var39 == nil then nil else reactModule.createElement(buildOverflowMenuPageModule, {
+		page = p10,
+		target = var39,
+		testId = p11,
+		onClose = var44,
+		onOpenAudiencePage = var45,
+		onOpenTitleDescriptionPage = var46,
+		onOpenMediaSelectionPage = var47,
+		onOpenVersionTitleDescriptionPage = var48,
+		onOpenVersionHistory = var49,
+		onOpenPlaytestPicker = if isSettings then var51 else nil,
+		onOpenPlaytestManagement = if isSettings then var53 else nil,
 		showPreviewButton = screenProps.showPreviewButton
 	})
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
-		Page = if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var58 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var58 }),
-		Picker = if var42 and var41 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
-			universeId = var41.universeId,
-			onClose = var54,
-			onInvitesSent = var56
+		Page = if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var56 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var56 }),
+		Picker = if var40 and var39 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
+			universeId = var39.universeId,
+			onClose = var52,
+			onInvitesSent = var54
 		}) else nil,
-		VersionHistory = if var44 and var41 ~= nil and var41.placeId ~= nil then reactModule.createElement(require(buildExperience.Components.VersionHistory.VersionHistoryContainer), {
+		VersionHistory = if var42 and var39 ~= nil and var39.placeId ~= nil then reactModule.createElement(require(buildExperience.Components.VersionHistory.VersionHistoryContainer), {
 			isOpen = true,
 			testId = "build-publish-version-history",
-			placeId = var41.placeId,
-			onClose = var52
+			placeId = var39.placeId,
+			onClose = var50
 		}) else nil
 	})
 end
 
-local function BuildTitleDescriptionContent(p13) --[[ line: 464 ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useGameInfo (ref), getTargetWithGameInfo (ref), reactModule (ref), titleDescriptionPageModule (ref)
-	local var59 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({ loading = localizationStringsModule.BUILD_MENU_LOADING }) else nil).loading else nil
-	local var60 = useGameInfo(p13.target.universeId)
+local function BuildTitleDescriptionContent(p12) --[[ line: 436 ]]
+	-- upvalues: useGameInfo (ref), getTargetWithGameInfo (ref), reactModule (ref), titleDescriptionPageModule (ref), localizationStringsModule (ref)
+	local var57 = useGameInfo(p12.target.universeId)
 	
-	if (if var60 == nil or var60.isUnavailable or (typeof(var60.name) ~= "string" or var60.name == "") then nil else var60.name) == nil then
+	if (if var57 == nil or var57.isUnavailable or (typeof(var57.name) ~= "string" or var57.name == "") then nil else var57.name) == nil then
 		return nil
 	end
-	local var61 = getTargetWithGameInfo(p13.target, var60, var59)
+	local var58 = getTargetWithGameInfo(p12.target, var57)
 	
-	return if var61 == nil then nil else reactModule.createElement(titleDescriptionPageModule, {
-		universeId = var61.universeId,
-		titleText = var61.experienceName or (if fFlagBuildLocalization then var59 else localizationStringsModule.BUILD_MENU_LOADING),
-		descriptionText = var61.description or "",
-		onBack = p13.onBack,
-		testId = p13.testId
+	return if var58 == nil then nil else reactModule.createElement(titleDescriptionPageModule, {
+		universeId = var58.universeId,
+		titleText = var58.experienceName or localizationStringsModule.BUILD_MENU_LOADING,
+		descriptionText = var58.description or "",
+		onBack = p12.onBack,
+		testId = p12.testId
 	})
 end
 
 return {
 	Screens = t,
 	SCREEN_BY_PAGE = t_1,
-	BuildPublishScreen = function(p14) --[[ line: 322 ]]
+	BuildPublishScreen = function(p13) --[[ line: 307 ]]
 		-- upvalues: ConfigurationScreen (ref)
-		return ConfigurationScreen(p14, "publish", "BuildPage.publish.Page")
+		return ConfigurationScreen(p13, "publish", "BuildPage.publish.Page")
 	end,
-	BuildSettingsScreen = function(value) --[[ line: 326 ]]
+	BuildSettingsScreen = function(value) --[[ line: 311 ]]
 		-- upvalues: ConfigurationScreen (ref)
 		return ConfigurationScreen(value, "settings", "BuildPage.settings.Page")
 	end,
-	BuildAudienceScreen = function(p15) --[[ line: 330 ]]
-		-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), reactModule (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), audienceConfigurationContentModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
-		local var62 = if fFlagBuildLocalization then useLocalization({ audience = localizationStringsModule.BUILD_MENU_AUDIENCE }) else nil
+	BuildAudienceScreen = function(p14) --[[ line: 315 ]]
+		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), overflowMenuPageShellModule (ref), localizationStringsModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), audienceConfigurationContentModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
+		local navigation = p14.navigation
+		local screenProps = p14.screenProps or {}
+		local var60 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
+		local var61 = if var60 == nil then nil else {
+			universeId = var60.universeId,
+			placeId = var60.placeId,
+			sessionId = var60.sessionId,
+			experienceName = var60.experienceName,
+			gameIcon = var60.gameIcon,
+			isNewGameTarget = var60.isNewGameTarget
+		}
+		local var62 = if var61 == nil then nil else reactModule.createElement(overflowMenuPageShellModule, {
+			testId = "BuildPage.audience.Page",
+			title = localizationStringsModule.BUILD_MENU_AUDIENCE,
+			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
+			onClose = reactModule.useCallback(function() --[[ line: 320 ]]
+				-- upvalues: navigation (ref)
+				navigation.goBack()
+			end, { navigation }),
+			scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_Audience_Scroll" else nil,
+			content = reactModule.createElement(audienceConfigurationContentModule, { universeId = var61.universeId })
+		})
+		
+		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var62 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var62 })
+	end,
+	BuildPrivateInvitesPickerScreen = function(p15) --[[ line: 354 ]]
+		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), privateInvitesPickerContainerModule (ref)
 		local navigation = p15.navigation
 		local screenProps = p15.screenProps or {}
 		local var64 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
@@ -305,22 +326,24 @@ return {
 			gameIcon = var64.gameIcon,
 			isNewGameTarget = var64.isNewGameTarget
 		}
-		local var66 = if var65 == nil then nil else reactModule.createElement(overflowMenuPageShellModule, {
-			testId = "BuildPage.audience.Page",
-			title = if fFlagBuildLocalization then var62.audience else localizationStringsModule.BUILD_MENU_AUDIENCE,
-			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
-			onClose = reactModule.useCallback(function() --[[ line: 340 ]]
-				-- upvalues: navigation (ref)
-				navigation.goBack()
-			end, { navigation }),
-			scrollPerformanceIntervalName = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then "LuaApp_Build_Audience_Scroll" else nil,
-			content = reactModule.createElement(audienceConfigurationContentModule, { universeId = var65.universeId })
-		})
+		local var66 = reactModule.useCallback(function() --[[ line: 359 ]]
+			-- upvalues: screenProps (ref), navigation (ref)
+			if screenProps.onClose then
+				screenProps.onClose()
+				
+				return
+			end
+			navigation.goBack()
+		end, { navigation, screenProps.onClose })
 		
-		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var66 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var66 })
+		return if var65 == nil then nil else reactModule.createElement(privateInvitesPickerContainerModule, {
+			universeId = var65.universeId,
+			onClose = var66,
+			onInvitesSent = var66
+		})
 	end,
-	BuildPrivateInvitesPickerScreen = function(p16) --[[ line: 374 ]]
-		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), privateInvitesPickerContainerModule (ref)
+	BuildPlaytestInviteManagementScreen = function(p16) --[[ line: 378 ]]
+		-- upvalues: buildNavigationParamsModule (ref), reactModule (ref), overflowMenuPageShellModule (ref), localizationStringsModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), privateInvitesManagementContainerModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref)
 		local navigation = p16.navigation
 		local screenProps = p16.screenProps or {}
 		local var68 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
@@ -332,131 +355,99 @@ return {
 			gameIcon = var68.gameIcon,
 			isNewGameTarget = var68.isNewGameTarget
 		}
-		local var70 = reactModule.useCallback(function() --[[ line: 379 ]]
-			-- upvalues: screenProps (ref), navigation (ref)
-			if screenProps.onClose then
-				screenProps.onClose()
-				
-				return
-			end
-			navigation.goBack()
-		end, { navigation, screenProps.onClose })
-		
-		return if var69 == nil then nil else reactModule.createElement(privateInvitesPickerContainerModule, {
-			universeId = var69.universeId,
-			onClose = var70,
-			onInvitesSent = var70
-		})
-	end,
-	BuildPlaytestInviteManagementScreen = function(p17) --[[ line: 398 ]]
-		-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), buildNavigationParamsModule (ref), reactModule (ref), overflowMenuPageShellModule (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), privateInvitesManagementContainerModule (ref), BuildSheetPage (ref), BuildFullscreenPage (ref), privateInvitesPickerHostModule (ref)
-		local var71 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
-			pageTitle = localizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
-		}) else nil).pageTitle else localizationStringsModule.PRIVATE_INVITES_PAGE_TITLE
-		local navigation = p17.navigation
-		local screenProps = p17.screenProps or {}
-		local var73 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
-		local var74 = if var73 == nil then nil else {
-			universeId = var73.universeId,
-			placeId = var73.placeId,
-			sessionId = var73.sessionId,
-			experienceName = var73.experienceName,
-			gameIcon = var73.gameIcon,
-			isNewGameTarget = var73.isNewGameTarget
-		}
-		local var75, var76 = reactModule.useState(false)
-		local var77 = reactModule.useCallback(function() --[[ line: 418 ]]
-			-- upvalues: var76 (ref)
-			var76(false)
+		local var70, var71 = reactModule.useState(false)
+		local var72 = reactModule.useCallback(function() --[[ line: 390 ]]
+			-- upvalues: var71 (ref)
+			var71(false)
 		end, {})
-		local var78 = if var74 == nil then nil else reactModule.createElement(overflowMenuPageShellModule, {
+		local var73 = if var69 == nil then nil else reactModule.createElement(overflowMenuPageShellModule, {
 			testId = "BuildPage.playtestInviteManagement.Page",
-			title = var71,
+			title = localizationStringsModule.PRIVATE_INVITES_PAGE_TITLE,
 			closeIcon = if fFlagBuildBackButtonChevronModule then nil else iconName.ChevronLargeLeft,
-			onClose = reactModule.useCallback(function() --[[ line: 412 ]]
+			onClose = reactModule.useCallback(function() --[[ line: 384 ]]
 				-- upvalues: navigation (ref)
 				navigation.goBack()
 			end, { navigation }),
 			content = reactModule.createElement(privateInvitesManagementContainerModule, {
-				universeId = var74.universeId,
-				onOpenInvitePicker = reactModule.useCallback(function() --[[ line: 415 ]]
-					-- upvalues: var76 (ref)
-					var76(true)
+				universeId = var69.universeId,
+				onOpenInvitePicker = reactModule.useCallback(function() --[[ line: 387 ]]
+					-- upvalues: var71 (ref)
+					var71(true)
 				end, {})
 			})
 		})
 		
 		return reactModule.createElement(reactModule.Fragment, nil, {
-			Page = if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var78 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var78 }),
-			Picker = if var75 and var74 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
-				universeId = var74.universeId,
-				onClose = var77,
-				onInvitesSent = var77
+			Page = if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var73 }) else reactModule.createElement(BuildFullscreenPage, { pageContent = var73 }),
+			Picker = if var70 and var69 ~= nil then reactModule.createElement(privateInvitesPickerHostModule, {
+				universeId = var69.universeId,
+				onClose = var72,
+				onInvitesSent = var72
 			}) else nil
 		})
 	end,
-	BuildTitleDescriptionScreen = function(p18) --[[ line: 493 ]]
+	BuildTitleDescriptionScreen = function(p17) --[[ line: 458 ]]
 		-- upvalues: buildNavigationParamsModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), BuildTitleDescriptionContent (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
+		local navigation = p17.navigation
+		local screenProps = p17.screenProps or {}
+		local var75 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
+		local var76 = if var75 == nil then nil else {
+			universeId = var75.universeId,
+			placeId = var75.placeId,
+			sessionId = var75.sessionId,
+			experienceName = var75.experienceName,
+			gameIcon = var75.gameIcon,
+			isNewGameTarget = var75.isNewGameTarget
+		}
+		local var77 = if var76 == nil then nil else reactModule.createElement(BuildTitleDescriptionContent, {
+			testId = "BuildPage.titleDescription.Page",
+			target = var76,
+			onBack = navigation.goBack
+		})
+		
+		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var77 }) else reactModule.createElement(BuildFullscreenPage, {
+			hideBottomBar = useOnScreenKeyboardVisibleModule(),
+			pageContent = var77
+		})
+	end,
+	BuildVersionTitleDescriptionScreen = function(p18) --[[ line: 484 ]]
+		-- upvalues: buildNavigationParamsModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildExperience (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
 		local navigation = p18.navigation
 		local screenProps = p18.screenProps or {}
-		local var80 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
-		local var81 = if var80 == nil then nil else {
-			universeId = var80.universeId,
-			placeId = var80.placeId,
-			sessionId = var80.sessionId,
-			experienceName = var80.experienceName,
-			gameIcon = var80.gameIcon,
-			isNewGameTarget = var80.isNewGameTarget
+		local var79 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
+		local var80 = if var79 == nil then nil else {
+			universeId = var79.universeId,
+			placeId = var79.placeId,
+			sessionId = var79.sessionId,
+			experienceName = var79.experienceName,
+			gameIcon = var79.gameIcon,
+			isNewGameTarget = var79.isNewGameTarget
 		}
-		local var82 = if var81 == nil then nil else reactModule.createElement(BuildTitleDescriptionContent, {
-			testId = "BuildPage.titleDescription.Page",
-			target = var81,
-			onBack = navigation.goBack
-		})
-		
-		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var82 }) else reactModule.createElement(BuildFullscreenPage, {
-			hideBottomBar = useOnScreenKeyboardVisibleModule(),
-			pageContent = var82
-		})
-	end,
-	BuildVersionTitleDescriptionScreen = function(p19) --[[ line: 519 ]]
-		-- upvalues: buildNavigationParamsModule (ref), useOnScreenKeyboardVisibleModule (ref), reactModule (ref), buildExperience (ref), BuildSheetPage (ref), BuildFullscreenPage (ref)
-		local navigation = p19.navigation
-		local screenProps = p19.screenProps or {}
-		local var84 = buildNavigationParamsModule.getTarget(navigation) or screenProps.target
-		local var85 = if var84 == nil then nil else {
-			universeId = var84.universeId,
-			placeId = var84.placeId,
-			sessionId = var84.sessionId,
-			experienceName = var84.experienceName,
-			gameIcon = var84.gameIcon,
-			isNewGameTarget = var84.isNewGameTarget
-		}
-		local var86 = if var85 == nil or var85.placeId == nil then nil else reactModule.createElement(require(buildExperience.Components.VersionTitleDescriptionPage.VersionTitleDescriptionPageContainer), {
+		local var81 = if var80 == nil or var80.placeId == nil then nil else reactModule.createElement(require(buildExperience.Components.VersionTitleDescriptionPage.VersionTitleDescriptionPageContainer), {
 			testId = "BuildPage.versionTitleDescription.Page",
-			placeId = var85.placeId,
+			placeId = var80.placeId,
 			onBack = navigation.goBack
 		})
 		
-		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var86 }) else reactModule.createElement(BuildFullscreenPage, {
+		return if screenProps.onClose then reactModule.createElement(BuildSheetPage, { pageContent = var81 }) else reactModule.createElement(BuildFullscreenPage, {
 			hideBottomBar = useOnScreenKeyboardVisibleModule(),
-			pageContent = var86
+			pageContent = var81
 		})
 	end,
-	BuildMediaSelectionScreen = function(p20) --[[ line: 548 ]]
+	BuildMediaSelectionScreen = function(p19) --[[ line: 513 ]]
 		-- upvalues: buildNavigationParamsModule (ref), useBuildPageLayoutModule (ref), reactModule (ref), mediaSelectionPageModule (ref), fullscreenPageWithSafeArea (ref)
-		local navigation = p20.navigation
+		local navigation = p19.navigation
 		local target = buildNavigationParamsModule.getTarget(navigation)
-		local var88 = useBuildPageLayoutModule()
+		local var83 = useBuildPageLayoutModule()
 		
 		return reactModule.createElement(fullscreenPageWithSafeArea, {
 			includeStatusBar = true,
-			BackgroundColor3 = var88.tokens.Color.Surface.Surface_0.Color3,
-			BackgroundTransparency = var88.tokens.Color.Surface.Surface_0.Transparency,
-			includeBottomBar = var88.shouldIncludeBottomBar
+			BackgroundColor3 = var83.tokens.Color.Surface.Surface_0.Color3,
+			BackgroundTransparency = var83.tokens.Color.Surface.Surface_0.Transparency,
+			includeBottomBar = var83.shouldIncludeBottomBar
 		}, {
 			Page = if target == nil or target.universeId == nil then nil else reactModule.createElement(mediaSelectionPageModule, {
-				onClose = reactModule.useCallback(function() --[[ line: 553 ]]
+				onClose = reactModule.useCallback(function() --[[ line: 518 ]]
 					-- upvalues: navigation (ref)
 					navigation.goBack()
 				end, { navigation }),

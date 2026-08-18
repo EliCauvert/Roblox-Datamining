@@ -10,7 +10,7 @@ local createEditsStoreModule = require(momentsCreation.Stores.createEditsStore)
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 
-return function() --[[ line: 91 | named "createCreationFlowStore" ]]
+return function() --[[ line: 87 | named "createCreationFlowStore" ]]
 	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref)
 	local var7 = createNavigationMachineModule(creationFlowStateModule.Gallery)
 	local var8 = createSelectionStoreModule()
@@ -21,7 +21,6 @@ return function() --[[ line: 91 | named "createCreationFlowStore" ]]
 	local var15, var16 = createSignal(nil)
 	local var17, var18 = createSignal(false)
 	local var19, var20 = createSignal(nil)
-	local var21, var22 = createSignal(nil)
 	
 	return {
 		getStep = var7.getStep,
@@ -33,15 +32,15 @@ return function() --[[ line: 91 | named "createCreationFlowStore" ]]
 		getDescription = var9.getDescription,
 		getGeneratedDescription = var9.getGeneratedDescription,
 		getMusicList = var13,
-		getMusicEdit = createComputed(function(p0) --[[ line: 122 ]]
+		getMusicEdit = createComputed(function(p0) --[[ line: 115 ]]
 			-- upvalues: var10 (ref)
 			return var10.getMap(p0).music
 		end),
-		getTextOverlayEdits = createComputed(function(p1) --[[ line: 125 ]]
+		getTextOverlayEdits = createComputed(function(p1) --[[ line: 118 ]]
 			-- upvalues: var10 (ref)
 			return var10.getMap(p1).text
 		end),
-		getTrimEdit = createComputed(function(p2) --[[ line: 119 ]]
+		getTrimEdit = createComputed(function(p2) --[[ line: 112 ]]
 			-- upvalues: var10 (ref)
 			return var10.getMap(p2).trim
 		end),
@@ -49,32 +48,31 @@ return function() --[[ line: 91 | named "createCreationFlowStore" ]]
 		getActiveSession = var15,
 		getIsGenerating = var17,
 		getActiveGeneration = var19,
-		getTTSAudio = var21,
-		updateCurrentState = function(p3) --[[ line: 131 ]]
+		updateCurrentState = function(p3) --[[ line: 124 ]]
 			-- upvalues: var7 (ref)
 			var7.reset(p3)
 		end,
-		onSelectedCaptureUpdated = function(p4) --[[ line: 136 ]]
+		onSelectedCaptureUpdated = function(p4) --[[ line: 129 ]]
 			-- upvalues: var8 (ref)
 			var8.setSelectedCapture(p4)
 		end,
-		updateDescription = function(p5) --[[ line: 141 ]]
+		updateDescription = function(p5) --[[ line: 134 ]]
 			-- upvalues: var9 (ref)
 			var9.setDescription(p5)
 		end,
-		setGeneratedDescription = function(value) --[[ line: 145 ]]
+		setGeneratedDescription = function(value) --[[ line: 138 ]]
 			-- upvalues: var9 (ref)
 			var9.setGeneratedDescription(value)
 		end,
-		updateTrimEdit = function(p6) --[[ line: 150 ]]
+		updateTrimEdit = function(p6) --[[ line: 143 ]]
 			-- upvalues: var10 (ref)
 			var10.setCommitted("trim", p6)
 		end,
-		updateMusicEdit = function(p7) --[[ line: 155 ]]
+		updateMusicEdit = function(p7) --[[ line: 148 ]]
 			-- upvalues: var10 (ref)
 			var10.setCommitted("music", p7)
 		end,
-		updateTextOverlayEdits = function(p8) --[[ line: 160 ]]
+		updateTextOverlayEdits = function(p8) --[[ line: 153 ]]
 			-- upvalues: var10 (ref)
 			var10.setCommitted("text", p8)
 		end,
@@ -82,12 +80,11 @@ return function() --[[ line: 91 | named "createCreationFlowStore" ]]
 		setActiveSession = var16,
 		setIsGenerating = var18,
 		setActiveGeneration = var20,
-		setTTSAudio = var22,
-		onMusicSearchRetrieved = function(p9) --[[ line: 165 ]]
+		onMusicSearchRetrieved = function(p9) --[[ line: 158 ]]
 			-- upvalues: var14 (ref)
 			var14(p9)
 		end,
-		clearEdits = function(p10) --[[ line: 170 ]]
+		clearEdits = function(p10) --[[ line: 163 ]]
 			-- upvalues: var12 (ref), var8 (ref), var7 (ref), var9 (ref), var14 (ref), var10 (ref), var16 (ref)
 			var12(true)
 			var8.setSelectedCapture(nil)

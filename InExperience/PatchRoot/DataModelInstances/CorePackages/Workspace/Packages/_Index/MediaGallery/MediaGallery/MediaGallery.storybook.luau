@@ -10,9 +10,9 @@ UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
 local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local foundationModule = require(parent.Foundation)
 local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
+local theme = foundationModule.Enums.Theme
 local device = foundationModule.Enums.Device
-local t = { Light = colorMode.Light, Dark = colorMode.Dark }
+local t = { Light = theme.Light, Dark = theme.Dark }
 local var9 = roduxModule.Store.new(function(p0) --[[ line: 23 ]]
 	return p0
 end, {
@@ -51,7 +51,7 @@ return {
 				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = var9 }, {
 					NavigationContext = reactModule.createElement(roactNavigationModule.Context.Provider, { value = t_1 }, {
 						FoundationContext = reactModule.createElement(foundationProvider, {
-							colorMode = t[p2.theme],
+							theme = t[p2.theme],
 							device = device[p2.platform],
 							preferences = p2.settings,
 							scale = p2.settings and p2.settings.scale

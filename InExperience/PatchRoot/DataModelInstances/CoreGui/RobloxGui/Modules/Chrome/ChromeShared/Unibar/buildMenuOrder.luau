@@ -78,8 +78,6 @@ return function() --[[ line: 41 | named "buildMenuOrder" ]]
 			t[constantsModule.AVATAR_SWITCHER_ID] = nil
 			t.emotes = nil
 			t.traversal_history = nil
-			t.camera_entrypoint = nil
-			t.gallery = nil
 		end
 	elseif t.connect_dropdown ~= nil then
 		t.connect_dropdown = 10
@@ -120,7 +118,7 @@ return function() --[[ line: 41 | named "buildMenuOrder" ]]
 	for i in t do
 		table.insert(t_1, i)
 	end
-	table.sort(t_1, function(p3, p4) --[[ line: 120 ]]
+	table.sort(t_1, function(p3, p4) --[[ line: 118 ]]
 		-- upvalues: t (ref)
 		return t[p3] < t[p4]
 	end)

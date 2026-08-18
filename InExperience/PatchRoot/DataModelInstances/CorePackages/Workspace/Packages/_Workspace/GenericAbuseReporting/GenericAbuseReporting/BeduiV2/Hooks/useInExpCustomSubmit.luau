@@ -16,11 +16,11 @@ local submitPlaceReport = reportHelperModule.submitPlaceReport
 
 return {
 	REPORT_MESSAGE_NOT_SHOWN_ITEM_ID = "__MSG_NOT_SHOWN_ID",
-	useInExpCustomSubmit = function(p0) --[[ line: 42 ]]
+	useInExpCustomSubmit = function(p0) --[[ line: 41 ]]
 		-- upvalues: useVoiceSnapshot (ref), reactModule (ref), computeImpactedUserCountModule (ref), submitVoiceReport (ref), promiseModule (ref), submitChatReportWithoutMessage (ref), submitChatReport (ref), submitAvatarReport (ref), submitPlaceReport (ref)
 		local var5 = useVoiceSnapshot(p0.voiceChatServiceManager)
 		
-		return reactModule.useCallback(function(p1) --[[ line: 46 ]]
+		return reactModule.useCallback(function(p1) --[[ line: 45 ]]
 			-- upvalues: var5 (ref), computeImpactedUserCountModule (copy), p0 (ref), submitVoiceReport (copy), promiseModule (copy), submitChatReportWithoutMessage (copy), submitChatReport (copy), submitAvatarReport (copy), submitPlaceReport (copy)
 			if not p1.endpoint then
 				error("SubmissionConfig must have an endpoint")
@@ -43,7 +43,7 @@ return {
 				end
 				local textChatMessageId = p1.data.custom and p1.data.custom.textChatMessageId
 				
-				return if textChatMessageId == "__MSG_NOT_SHOWN_ID" then submitChatReportWithoutMessage(p1) else inExpChatMessagesLoader.fetch({}):andThen(function(p2) --[[ line: 92 ]]
+				return if textChatMessageId == "__MSG_NOT_SHOWN_ID" then submitChatReportWithoutMessage(p1) else inExpChatMessagesLoader.fetch({}):andThen(function(p2) --[[ line: 91 ]]
 					-- upvalues: textChatMessageId (ref), submitChatReport (copy), p1 (ref)
 					local t = {}
 					local t_1 = {}
@@ -73,70 +73,5 @@ return {
 			p0.menuOpenTimeRef,
 			p0.reportAnythingSnapshotRef
 		})
-	end,
-	useInExpClientActionHandlers = function(p3) --[[ line: 141 ]]
-		-- upvalues: useVoiceSnapshot (ref), reactModule (ref), computeImpactedUserCountModule (ref), submitVoiceReport (ref), promiseModule (ref), submitChatReportWithoutMessage (ref), submitChatReport (ref), submitAvatarReport (ref), submitPlaceReport (ref)
-		local var9 = useVoiceSnapshot(p3.voiceChatServiceManager)
-		local var10 = reactModule.useCallback(function(p4) --[[ line: 145 ]]
-			-- upvalues: var9 (ref), computeImpactedUserCountModule (copy), p3 (ref), submitVoiceReport (copy)
-			local current = var9.current
-			
-			return submitVoiceReport(p4, {
-				sortedPlayerListUserIds = current.sortedPlayerListUserIds,
-				channelId = current.channelId,
-				voiceUserCount = current.voiceUserCount,
-				voiceImpactedUserCount = computeImpactedUserCountModule(p3.voiceChatServiceManager, p4.data.targetIdStr),
-				menuOpenedUnixMilli = p3.menuOpenTimeRef.current
-			})
-		end, { p3.voiceChatServiceManager, p3.menuOpenTimeRef })
-		local var11 = reactModule.useCallback(function(p5) --[[ line: 165 ]]
-			-- upvalues: p3 (ref), promiseModule (copy), submitChatReportWithoutMessage (copy), submitChatReport (copy)
-			local inExpChatMessagesLoader = p3.inExpChatMessagesLoader
-			
-			if not inExpChatMessagesLoader then
-				return promiseModule.reject("inExpChatMessagesLoader is required for chat reports")
-			end
-			local textChatMessageId = p5.data.custom and p5.data.custom.textChatMessageId
-			
-			return if textChatMessageId == "__MSG_NOT_SHOWN_ID" then submitChatReportWithoutMessage(p5) else inExpChatMessagesLoader.fetch({}):andThen(function(p6) --[[ line: 180 ]]
-				-- upvalues: textChatMessageId (ref), submitChatReport (copy), p5 (ref)
-				local t = {}
-				local t_1 = {}
-				
-				for i, v in ipairs(p6 or {}) do
-					for i_1, v_1 in ipairs(v.items or {}) do
-						table.insert(t, { channel = v_1.meta.textChannel, messageId = v_1.id })
-						
-						if v_1.id == textChatMessageId then
-							table.insert(t_1, {
-								channel = v_1.meta.textChannel,
-								messageId = v_1.id,
-								presetId = v_1.meta.presetId,
-								presetChatVersion = v_1.meta.presetChatVersion
-							})
-						end
-					end
-				end
-				return submitChatReport(p5, { eligibleMessages = t, targetMessages = t_1 })
-			end)
-		end, { p3.inExpChatMessagesLoader })
-		local var12 = reactModule.useCallback(function(p7) --[[ line: 204 ]]
-			-- upvalues: submitAvatarReport (copy), p3 (ref)
-			return submitAvatarReport(p7, p3.reportAnythingSnapshotRef and p3.reportAnythingSnapshotRef.current)
-		end, { p3.reportAnythingSnapshotRef })
-		local var13 = reactModule.useCallback(function(p8) --[[ line: 211 ]]
-			-- upvalues: submitPlaceReport (copy), p3 (ref)
-			return submitPlaceReport(p8, p3.reportAnythingSnapshotRef and p3.reportAnythingSnapshotRef.current)
-		end, { p3.reportAnythingSnapshotRef })
-		
-		return reactModule.useMemo(function() --[[ line: 218 ]]
-			-- upvalues: var10 (ref), var11 (ref), var12 (ref), var13 (ref)
-			return {
-				voice = var10,
-				chat = var11,
-				avatar = var12,
-				place = var13
-			}
-		end, { var10, var11, var12, var13 })
 	end
 }

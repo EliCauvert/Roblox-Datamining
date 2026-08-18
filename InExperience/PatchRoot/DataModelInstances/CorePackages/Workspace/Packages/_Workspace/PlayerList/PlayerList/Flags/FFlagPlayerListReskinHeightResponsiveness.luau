@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("PlayerListReskinHeightResponsiveness", false) and require(script.Parent.FFlagPlayerListReskin)

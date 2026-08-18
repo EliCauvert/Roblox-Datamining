@@ -11,6 +11,7 @@ local fFlagSearchOmniAutocompletePage = require(parent.SharedFlags).FFlagSearchO
 local fFlagLuaAppGameImpressionsMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGameImpressionsMobileAdsId
 local fFlagTraversalHistoryDiscoveryTelemetry = require(parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
+local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
 local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
 local luaAppGameImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsEventThrottlingHundredthsPercent", 10000)
@@ -20,7 +21,6 @@ local fFlagLuaAppGameImpressionsAddUnifiedFields = require(parent.SharedFlags).F
 local fFlagLuaAppSduiLandingPageEnabled = require(parent.SharedFlags).FFlagLuaAppSduiLandingPageEnabled
 local fFlagLuaAppAddAnalyticsDataToSeeAllImpressions = require(parent.SharedFlags).FFlagLuaAppAddAnalyticsDataToSeeAllImpressions
 local fFlagSduiSearchResultsPageEnabled = require(parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
-local fFlagLuaAppSearchResultsPageGameTileVideo = require(parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
 local var7 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gameImpressions",
 	description = "Fires when game tiles become visible to the user",
@@ -61,7 +61,7 @@ local var9 = tModule.strictInterface({
 	footerLocalizationKeys = tModule.optional(tModule.string),
 	loadSource = tModule.optional(tModule.string),
 	tileTypes = tModule.optional(tModule.string),
-	sortSubId = tModule.optional(tModule.string),
+	sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then tModule.optional(tModule.string) else nil,
 	analyticsData = tModule.optional(tModule.table),
 	contentType = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
 	interactionUuid = if fFlagLuaAppGameImpressionsAddUnifiedFields then tModule.optional(tModule.string) else nil,
@@ -116,7 +116,6 @@ local t = {
 		mobileAdvertisingId = if fFlagLuaAppGameImpressionsMobileAdsId then tModule.optional(tModule.string) else nil,
 		thumbnailAssetIds = tModule.optional(tModule.string),
 		thumbnailListIds = tModule.optional(tModule.string),
-		videoThumbnailAssetIds = if fFlagLuaAppSearchResultsPageGameTileVideo then tModule.optional(tModule.string) else nil,
 		footerTextLiterals = tModule.optional(tModule.string),
 		footerLocalizationKeys = tModule.optional(tModule.string),
 		tileBadgeContexts = tModule.optional(tModule.string),
@@ -184,7 +183,7 @@ local t = {
 	}) else nil
 }
 
-return function(p0, p1, p2) --[[ line: 236 ]]
+return function(p0, p1, p2) --[[ line: 234 ]]
 	-- upvalues: appPage (ref), var10 (ref), t (ref), discoveryEventErrorLogger (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref), cryoModule (ref), httpService (ref), contentType (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var7 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var8 (write)
 	local _ = nil
 	local var12 = if p2.seeAllFlag and (p1 == appPage.Home or p1 == appPage.Games) then var10 else t[p1]

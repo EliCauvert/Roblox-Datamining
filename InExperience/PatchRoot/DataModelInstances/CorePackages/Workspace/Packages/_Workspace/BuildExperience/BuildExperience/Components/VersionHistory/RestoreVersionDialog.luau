@@ -3,36 +3,19 @@ local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 
-return function(p0) --[[ line: 27 | named "RestoreVersionDialog" ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagEnableTeamTestLua (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local VERSION_HISTORY_CANCEL, VERSION_HISTORY_RESTORE
-	local var5 = if fFlagBuildLocalization then useLocalization({
-		cancel = localizationStringsModule.VERSION_HISTORY_CANCEL,
-		restore = localizationStringsModule.VERSION_HISTORY_RESTORE
-	}) else nil
-	local _ = nil
-	local _ = nil
-	
-	if fFlagBuildLocalization then
-		VERSION_HISTORY_CANCEL = var5.cancel
-		VERSION_HISTORY_RESTORE = var5.restore
-	else
-		VERSION_HISTORY_CANCEL = localizationStringsModule.VERSION_HISTORY_CANCEL
-		VERSION_HISTORY_RESTORE = localizationStringsModule.VERSION_HISTORY_RESTORE
-	end
-	local var6 = reactModule.useCallback(function() --[[ line: 43 ]]
+return function(p0) --[[ line: 25 | named "RestoreVersionDialog" ]]
+	-- upvalues: reactModule (ref), fFlagEnableTeamTestLua (ref), localizationStringsModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
+	local var5 = reactModule.useCallback(function() --[[ line: 26 ]]
 		-- upvalues: p0 (ref)
 		p0.onRestore()
 	end, { p0.onRestore })
-	local var7 = reactModule.useCallback(function() --[[ line: 46 ]]
+	local var6 = reactModule.useCallback(function() --[[ line: 29 ]]
 		-- upvalues: p0 (ref)
 		p0.onCancel()
 	end, { p0.onCancel })
@@ -47,28 +30,23 @@ return function(p0) --[[ line: 27 | named "RestoreVersionDialog" ]]
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			Description = reactModule.createElement(dialog.Text, { Text = p0.description })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function() --[[ line: 50 ]]
-			-- upvalues: fFlagEnableTeamTestLua (copy), localizationStringsModule (copy), VERSION_HISTORY_RESTORE (write), buttonVariant (copy), var6 (ref), VERSION_HISTORY_CANCEL (write), var7 (ref)
+		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function() --[[ line: 33 ]]
+			-- upvalues: fFlagEnableTeamTestLua (copy), localizationStringsModule (copy), buttonVariant (copy), var5 (ref), var6 (ref)
 			return {
 				LayoutOrder = 3,
 				actions = {
 					{
-						text = if fFlagEnableTeamTestLua then localizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION else VERSION_HISTORY_RESTORE,
+						text = if fFlagEnableTeamTestLua then localizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION else localizationStringsModule.VERSION_HISTORY_RESTORE,
 						variant = buttonVariant.Emphasis,
-						onActivated = var6
+						onActivated = var5
 					},
 					{
-						text = VERSION_HISTORY_CANCEL,
+						text = localizationStringsModule.VERSION_HISTORY_CANCEL,
 						variant = buttonVariant.Standard,
-						onActivated = var7
+						onActivated = var6
 					}
 				}
 			}
-		end, {
-			VERSION_HISTORY_CANCEL,
-			var6,
-			var7,
-			VERSION_HISTORY_RESTORE
-		}))
+		end, { var5, var6 }))
 	})
 end

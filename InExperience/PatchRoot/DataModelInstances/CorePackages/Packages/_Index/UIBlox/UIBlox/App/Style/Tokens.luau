@@ -1,12 +1,14 @@
 ﻿local dependenciesModule = require(script.dependencies)
 local parent = script.Parent.Parent.Parent
+local tModule = require(parent.Parent.t)
 local getTokenGenerators = dependenciesModule.GetTokenGenerators
+local validators = dependenciesModule.SchemaPackage.Validators
 local getFoundationTokens = dependenciesModule.GetFoundationTokens
 local UIBloxConfigModule = require(parent.UIBloxConfig)
 local typesModule = require(script.Types)
 local constantsModule = require(script.Parent.Constants)
 
-local function _(p0, p1) --[[ line: 16 | named "getPlatformScale" ]]
+local function _(p0, p1) --[[ line: 19 | named "getPlatformScale" ]]
 	-- upvalues: UIBloxConfigModule (ref), constantsModule (ref)
 	if UIBloxConfigModule.disableTokenScaling then
 		return 1
@@ -17,40 +19,45 @@ local function _(p0, p1) --[[ line: 16 | named "getPlatformScale" ]]
 end
 
 return {
-	getTokens = function(p2, p3, p4) --[[ line: 36 ]]
+	getTokens = function(p2, p3, p4) --[[ line: 39 ]]
 		-- upvalues: getTokenGenerators (ref), constantsModule (ref), UIBloxConfigModule (ref)
-		local var6
-		local var4 = getTokenGenerators(p3) or getTokenGenerators(constantsModule.DefaultThemeName)
-		local var5 = p4
+		local var7
+		local var5 = getTokenGenerators(p3) or getTokenGenerators(constantsModule.DefaultThemeName)
+		local var6 = p4
 		
 		if UIBloxConfigModule.disableTokenScaling then
+			var7 = 1
+		elseif var6 == nil then
 			var6 = 1
-		elseif var5 == nil then
-			var5 = 1
 		end
-		var6 = (if p2 == constantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(var5, 0, 1e999)
+		var7 = (if p2 == constantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(var6, 0, 1e999)
 		return {
-			Global = require(var4.Global)(var6),
-			Semantic = require(var4.Semantic)(var6),
-			Component = require(var4.Component)(var6)
+			Global = require(var5.Global)(var7),
+			Semantic = require(var5.Semantic)(var7),
+			Component = require(var5.Component)(var7)
 		}
 	end,
+	validateTokens = tModule.interface({
+		Global = tModule.strictInterface(validators.Global),
+		Semantic = tModule.strictInterface(validators.Semantic),
+		Component = tModule.strictInterface(validators.Component)
+	}),
 	Types = typesModule,
-	getFoundationTokens = function(p5, p6, p7) --[[ line: 47 ]]
+	getFoundationTokens = function(p5, p6, p7) --[[ line: 55 ]]
 		-- upvalues: getFoundationTokens (ref), constantsModule (ref), UIBloxConfigModule (ref)
-		local var9
-		local var7 = getFoundationTokens(p6) or getFoundationTokens(constantsModule.DefaultThemeName)
-		local var8 = p7
+		local var10
+		local var8 = getFoundationTokens(p6) or getFoundationTokens(constantsModule.DefaultThemeName)
+		local var9 = p7
 		
 		if UIBloxConfigModule.disableTokenScaling then
+			var10 = 1
+		elseif var9 == nil then
 			var9 = 1
-		elseif var8 == nil then
-			var8 = 1
 		end
-		var9 = (if p5 == constantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(var8, 0, 1e999)
-		return var7(var9)
+		var10 = (if p5 == constantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(var9, 0, 1e999)
+		return var8(var10)
 	end,
-	getFoundationTokensDefaultScale = function(p8) --[[ line: 57 ]]
+	getFoundationTokensDefaultScale = function(p8) --[[ line: 65 ]]
 		-- upvalues: getFoundationTokens (ref), constantsModule (ref)
 		return (getFoundationTokens(p8) or getFoundationTokens(constantsModule.DefaultThemeName))(1)
 	end,

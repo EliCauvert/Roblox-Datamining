@@ -6,7 +6,7 @@ local contactImporterFindFriendsUrlFastString = game:GetFastString("ContactImpor
 
 return function(p0) --[[ line: 8 ]]
 	-- upvalues: API_URLModule (ref), contactImporterFindFriendsUrlFastString (ref)
-	return p0.roduxNetworking.GET("FindContactFriends", function(p1) --[[ line: 11 ]]
+	return p0.roduxNetworking.GET({ Name = "FindContactFriends" }, function(p1) --[[ line: 11 ]]
 		-- upvalues: API_URLModule (copy), contactImporterFindFriendsUrlFastString (copy)
 		return p1(API_URLModule):path("contacts-api"):path("v1"):path(contactImporterFindFriendsUrlFastString)
 	end)

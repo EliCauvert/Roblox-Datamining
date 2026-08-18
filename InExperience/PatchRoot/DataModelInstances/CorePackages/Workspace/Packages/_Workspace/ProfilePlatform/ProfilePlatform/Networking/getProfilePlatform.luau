@@ -7,7 +7,7 @@ local fFlagProfilePlatformEnableLazyLoadingComponentsModule = require(profilePla
 local _ = require(parent.SocialCommon)
 local _ = require(profilePlatform.Types.Component)
 
-return myRoduxNetworkingModule.POST("GetProfile", function(p0, p1) --[[ line: 27 ]]
+return myRoduxNetworkingModule.POST({ Name = "GetProfile" }, function(p0, p1) --[[ line: 27 ]]
 	-- upvalues: httpModule (ref), fFlagProfilePlatformEnableLazyLoadingComponentsModule (ref)
 	return p0(httpModule.Url.APIS_URL .. "profile-platform-api"):path("v1"):path("profiles"):path("get"):body({
 		profileType = p1.profileType,

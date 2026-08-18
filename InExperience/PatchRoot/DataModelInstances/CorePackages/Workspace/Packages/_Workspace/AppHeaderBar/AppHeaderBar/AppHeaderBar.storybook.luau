@@ -4,11 +4,10 @@ local roactCompatModule = require(parent.Dev.RoactCompat)
 local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
 UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local colorMode = require(parent.Foundation).Enums.ColorMode
 local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local constants = UIBloxModule.App.Style.Constants
-local light = colorMode.Light
-local dark = colorMode.Dark
+local light = constants.ThemeName.Light
+local dark = constants.ThemeName.Dark
 local gotham = constants.FontName.Gotham
 roactCompatModule.setGlobalConfig({ elementTracing = true })
 local t = {
@@ -25,9 +24,9 @@ return {
 	name = "AppHeaderBar",
 	storyRoots = { appHeaderBar },
 	roact = roactCompatModule,
-	mapStory = function(p0) --[[ line: 48 ]]
+	mapStory = function(p0) --[[ line: 45 ]]
 		-- upvalues: t (ref), reactModule (ref), appStyleProvider (ref), t_1 (ref)
-		return function(p1) --[[ line: 49 ]]
+		return function(p1) --[[ line: 46 ]]
 			-- upvalues: t (copy), reactModule (copy), appStyleProvider (copy), t_1 (copy), p0 (ref)
 			local theme = t[p1.theme]
 			

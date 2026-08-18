@@ -1,1 +1,0 @@
-﻿return require(script:FindFirstAncestor("AppTopBanner").Parent.Signals).createComputed(require(script.createAppTopBannerStore))

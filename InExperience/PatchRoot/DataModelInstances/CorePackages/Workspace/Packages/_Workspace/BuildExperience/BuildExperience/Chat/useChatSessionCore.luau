@@ -8,11 +8,10 @@ local universeCreateModule = require(parent.DataHydration.UniverseCreate)
 local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
 local reactModule = require(parent.React)
 local reactUtilsModule = require(parent.ReactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local signalsReactModule = require(parent.SignalsReact)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
+local fFlagBuildExperienceClientDataModelToolsModule = require(buildExperience.Flags.FFlagBuildExperienceClientDataModelTools)
 local fFlagBuildExperienceFixChatBottomLockModule = require(buildExperience.Flags.FFlagBuildExperienceFixChatBottomLock)
 local fFlagBuildExperienceToolResultFailureRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
 local fFlagBuildExperiencePersistPlaytestLogsModule = require(buildExperience.Flags.FFlagBuildExperiencePersistPlaytestLogs)
@@ -42,11 +41,11 @@ local var26 = signalsModule.createSignal({
 local var27 = signalsModule.createSignal(nil)
 local var28 = signalsModule.createSignal({ session = nil, sessionId = nil, events = {} })
 
-local function _(p0, p1, p2) --[[ line: 148 | named "sessionOwnerMatches" ]]
+local function _(p0, p1, p2) --[[ line: 147 | named "sessionOwnerMatches" ]]
 	return if p0 == nil or p0.session ~= p1 then false else p2 == nil or p2 == "" or (if p0.sessionId ~= p2 then p0.sessionId == nil and p0.session.getCasSessionId() == p2 else true)
 end
 
-local function hasPendingLocalToolResponse(p3) --[[ line: 158 ]]
+local function hasPendingLocalToolResponse(p3) --[[ line: 157 ]]
 	for i in p3.askUserByToolCallId do
 		if not p3.submittedToolCallIds[i] then
 			return true
@@ -60,11 +59,11 @@ local function hasPendingLocalToolResponse(p3) --[[ line: 158 ]]
 	return false
 end
 
-local _ = function(p4) --[[ line: 172 | named "trimMessage" ]]
+local _ = function(p4) --[[ line: 171 | named "trimMessage" ]]
 	return string.gsub(p4, "^%s*(.-)%s*$", "%1")
 end
 
-local _ = function(p5) --[[ line: 176 | named "refreshVersionHistoryAfterPublish" ]]
+local _ = function(p5) --[[ line: 175 | named "refreshVersionHistoryAfterPublish" ]]
 	-- upvalues: placeVersionHistoryModule (ref)
 	if p5 == nil then
 		return
@@ -72,10 +71,10 @@ local _ = function(p5) --[[ line: 176 | named "refreshVersionHistoryAfterPublish
 	placeVersionHistoryModule.getPlaceVersionHistoryStore().fetchHistory(p5)
 end
 
-local _ = function(p6, p7) --[[ line: 183 | named "scheduleComposerAutoFocus" ]]
+local _ = function(p6, p7) --[[ line: 182 | named "scheduleComposerAutoFocus" ]]
 	local var30 = 8
 	
-	local function tryFocus() --[[ line: 185 ]]
+	local function tryFocus() --[[ line: 184 ]]
 		-- upvalues: p7 (ref), p6 (ref), var30 (write), tryFocus (ref)
 		if p7() then return end
 		local current = p6.current
@@ -95,7 +94,7 @@ local _ = function(p6, p7) --[[ line: 183 | named "scheduleComposerAutoFocus" ]]
 	task.defer(tryFocus)
 end
 
-local _ = function(p8) --[[ line: 202 | named "getResumeSessionKey" ]]
+local _ = function(p8) --[[ line: 201 | named "getResumeSessionKey" ]]
 	local casSessionId = p8.getCasSessionId()
 	
 	if typeof(casSessionId) == "string" and casSessionId ~= "" then
@@ -107,17 +106,17 @@ local _ = function(p8) --[[ line: 202 | named "getResumeSessionKey" ]]
 	return if universeId == nil or placeId == nil then nil else `{universeId}:{placeId}`
 end
 
-return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
-	-- upvalues: reactModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelTools (ref), creatorAgentChatModule (ref), var28 (ref), signalsModule (ref), signalsReactModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), var25 (ref), var26 (ref), var27 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), hasPendingLocalToolResponse (ref), placeVersionHistoryModule (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), messageBusService (ref), gameMessageId (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), CHAT_CREATE_UNIVERSE_ERROR (ref), launchPlaytestWithLoadingStateModule (ref)
+return function(p9) --[[ line: 214 | named "useChatSessionCore" ]]
+	-- upvalues: reactModule (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fFlagBuildExperienceClientDataModelToolsModule (ref), creatorAgentChatModule (ref), var28 (ref), signalsModule (ref), signalsReactModule (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), var25 (ref), var26 (ref), var27 (ref), fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (ref), parseSessionStreamModule (ref), hasPendingLocalToolResponse (ref), placeVersionHistoryModule (ref), reactUtilsModule (ref), useChatScrollModule (ref), getPlaytestLoadingStoreModule (ref), messageBusService (ref), gameMessageId (ref), appLifecycleObserverService (ref), fFlagBuildExperienceFixChatBottomLockModule (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), creatorAgentChatModule_1 (ref), universeCreateModule (ref), getDefaultTemplatePlaceIdModule (ref), debug (ref), universeConfigurationModule (ref), CHAT_CREATE_UNIVERSE_ERROR (ref), launchPlaytestWithLoadingStateModule (ref)
 	local var33, var34 = reactModule.useState(nil)
 	local var35, var36 = reactModule.useState(nil)
 	local var37 = nil
 	local var38 = nil
 	
-	if fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelTools then
+	if fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelToolsModule then
 		local var39 = reactModule.useRef(true)
 		var37 = var39
-		var38 = reactModule.useCallback(function() --[[ line: 225 ]]
+		var38 = reactModule.useCallback(function() --[[ line: 224 ]]
 			-- upvalues: var39 (ref)
 			return var39.current
 		end, { var39 })
@@ -136,20 +135,20 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	end
 	local var40 = p9.hydrateHistoryWhen == nil or p9.hydrateHistoryWhen
 	local creatorAgentChatStore = creatorAgentChatModule.getCreatorAgentChatStore()
-	local var42 = reactModule.useMemo(function() --[[ line: 248 ]]
+	local var42 = reactModule.useMemo(function() --[[ line: 247 ]]
 		-- upvalues: universeId (write), creatorAgentChatStore (ref), placeId (write), sessionId (write)
 		return if universeId == nil then nil else creatorAgentChatStore.getSessionForProject(universeId, placeId, sessionId)
 	end, { universeId, placeId, sessionId, creatorAgentChatStore })
-	reactModule.useLayoutEffect(function() --[[ line: 255 ]]
+	reactModule.useLayoutEffect(function() --[[ line: 254 ]]
 		-- upvalues: var42 (ref), sessionId (write)
 		if var42 == nil or sessionId == nil or sessionId == "" then
 			return
 		end
 		var42.setCasSessionId(sessionId)
 	end, { var42, sessionId })
-	local var43 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 262 ]]
+	local var43 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 261 ]]
 		-- upvalues: var42 (ref), var28 (copy), signalsModule (copy)
-		return if var42 == nil then var28 else signalsModule.createComputed(function(p10) --[[ line: 267 ]]
+		return if var42 == nil then var28 else signalsModule.createComputed(function(p10) --[[ line: 266 ]]
 			-- upvalues: var42 (copy)
 			return {
 				session = var42,
@@ -182,7 +181,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local var49 = nil
 	
 	if fFlagBuildExperienceChatHistoryLoadingSkeletonModule then
-		local var50, var51 = reactModule.useState(function() --[[ line: 292 ]]
+		local var50, var51 = reactModule.useState(function() --[[ line: 291 ]]
 			-- upvalues: var42 (ref), sessionId (write), universeId (write), var40 (ref), var47 (ref)
 			return {
 				session = var42,
@@ -199,7 +198,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local var53 = fFlagBuildExperienceChatHistoryLoadingSkeletonModule and ((if var52 then var48.isLoading else var47) or (var42 ~= nil and var42.getNextHistoryPageToken() ~= nil))
 	local var54, var55 = reactModule.useState(nil)
 	local var56, var57 = reactModule.useState(nil)
-	reactModule.useEffect(function() --[[ line: 331 ]]
+	reactModule.useEffect(function() --[[ line: 330 ]]
 		-- upvalues: var57 (ref)
 		var57(nil)
 	end, { var42, sessionId })
@@ -210,7 +209,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local var62 = reactModule.useRef(nil)
 	local var63 = reactModule.useRef(0)
 	local var64 = reactModule.useRef(nil)
-	local var65 = reactModule.useCallback(function(p11, p12) --[[ line: 346 ]]
+	local var65 = reactModule.useCallback(function(p11, p12) --[[ line: 345 ]]
 		-- upvalues: var61 (ref), var62 (ref), var58 (ref)
 		assert(if p11 ~= nil then p12 ~= nil else true, "Active turns require an owning session")
 		var61.current = p11
@@ -220,7 +219,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local current = var62.current
 	local var66 = sessionId
 	local var67 = if if current == nil or current.session ~= var42 then false else var66 == nil or var66 == "" or (if current.sessionId ~= var66 then current.sessionId == nil and current.session.getCasSessionId() == var66 else true) then var60 else nil
-	reactModule.useLayoutEffect(function() --[[ line: 363 ]]
+	reactModule.useLayoutEffect(function() --[[ line: 362 ]]
 		-- upvalues: var60 (ref), var62 (ref), var42 (ref), sessionId (write), var63 (ref), var64 (ref), var65 (ref), var55 (ref), var57 (ref)
 		if var60 ~= nil then
 			local current = var62.current
@@ -244,7 +243,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local var69 = signalsReactModule.useSignalState(var68)
 	local var70 = signalsReactModule.useSignalState(current)
 	local var71 = signalsReactModule.useSignalState(var66)
-	local var72 = reactModule.useMemo(function() --[[ line: 391 ]]
+	local var72 = reactModule.useMemo(function() --[[ line: 390 ]]
 		-- upvalues: fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule (copy), p9 (ref), var42 (ref), var54 (ref), var67 (ref), var71 (ref)
 		return if var67 == nil and not (fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule and (p9.createUniverseOnFirstPrompt == true and (var42 == nil and var54 ~= nil))) then nil else { setupErrorText = var71 }
 	end, {
@@ -254,7 +253,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		if fFlagBuildExperienceShowThinkingBeforeUniverseCreationModule then var42 else nil,
 		var71
 	})
-	local var73 = reactModule.useMemo(function() --[[ line: 411 ]]
+	local var73 = reactModule.useMemo(function() --[[ line: 410 ]]
 		-- upvalues: parseSessionStreamModule (copy), var44 (ref), var42 (ref), sessionId (write), universeId (write), placeId (write), var69 (ref), var54 (ref), var72 (ref), var59 (ref)
 		return parseSessionStreamModule(var44, {
 			sessionId = if var42 ~= nil then sessionId else var42.getCasSessionId() or sessionId,
@@ -276,14 +275,14 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local var75 = if var67 == nil then var74 ~= nil and (var74.kind == "assistant_turn" and not var74.isDone) else true
 	local var76 = var75 and hasPendingLocalToolResponse(var69)
 	local activeTurnState = var73.activeTurnState
-	reactModule.useEffect(function() --[[ line: 454 ]]
+	reactModule.useEffect(function() --[[ line: 453 ]]
 		-- upvalues: var67 (ref), activeTurnState (ref)
 		if var67 == nil or activeTurnState == nil then
 			return
 		end
 		var67.syncFromTurnState(activeTurnState)
 	end, { var67, activeTurnState })
-	reactModule.useEffect(function() --[[ line: 461 ]]
+	reactModule.useEffect(function() --[[ line: 460 ]]
 		-- upvalues: var73 (ref), placeId (write), placeVersionHistoryModule (copy)
 		if not var73.includesPublishTool then return end
 		if placeId == nil then
@@ -297,23 +296,23 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	local var82 = reactModule.useRef(nil)
 	local var83 = reactUtilsModule.useClock()
 	local var84 = useChatScrollModule()
-	local var85 = reactModule.useCallback(function(p13, p14) --[[ line: 476 ]]
+	local var85 = reactModule.useCallback(function(p13, p14) --[[ line: 475 ]]
 		-- upvalues: getPlaytestLoadingStoreModule (copy)
 		getPlaytestLoadingStoreModule().setAgentStatusForPlaceId(p13, p14)
 	end, {})
-	local var86 = reactModule.useCallback(function(p15) --[[ line: 480 ]]
+	local var86 = reactModule.useCallback(function(p15) --[[ line: 479 ]]
 		-- upvalues: var84 (ref), var42 (ref)
-		local var101 = function() --[[ line: 481 ]]
+		local var101 = function() --[[ line: 480 ]]
 			-- upvalues: p15 (ref)
 			return if p15 == nil then false else p15()
 		end
 		
 		var84.captureDistanceFromBottom()
-		task.spawn(function() --[[ line: 488 ]]
+		task.spawn(function() --[[ line: 487 ]]
 			-- upvalues: var42 (copy), var101 (ref), var84 (copy), p15 (ref)
 			if var42 == nil then return end
 			if var42.loadOlderHistory(var101) and var42.getNextHistoryPageToken() ~= nil and var84.isAtTopRef.current then
-				task.delay(0.1, function() --[[ line: 494 ]]
+				task.delay(0.1, function() --[[ line: 493 ]]
 					-- upvalues: p15 (copy), var84 (copy), var42 (copy), var101 (copy)
 					if if p15 ~= nil then false else p15() then return end
 					if var84.isViewportUnderfilled() then
@@ -323,9 +322,9 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			end
 		end)
 	end, { var42, var84 })
-	local var87 = reactModule.useCallback(function(p16) --[[ line: 506 ]]
+	local var87 = reactModule.useCallback(function(p16) --[[ line: 505 ]]
 		-- upvalues: var42 (ref), var84 (ref), var86 (ref)
-		task.delay(0.1, function() --[[ line: 507 ]]
+		task.delay(0.1, function() --[[ line: 506 ]]
 			-- upvalues: p16 (ref), var42 (copy), var84 (copy), var86 (copy)
 			if p16() then return end
 			if var42 == nil then return end
@@ -337,7 +336,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			end
 		end)
 	end, { var86, var84, var42 })
-	local var88 = reactModule.useCallback(function(p17) --[[ line: 525 ]]
+	local var88 = reactModule.useCallback(function(p17) --[[ line: 524 ]]
 		-- upvalues: var42 (ref), var87 (ref)
 		if var42 == nil then return end
 		if var42.getNextHistoryPageToken() == nil then
@@ -347,24 +346,24 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	end, { var87, var42 })
 	local var89 = reactModule.useRef(var88)
 	var89.current = var88
-	reactModule.useEffect(function() --[[ line: 537 ]]
+	reactModule.useEffect(function() --[[ line: 536 ]]
 		-- upvalues: var84 (ref), var86 (ref)
-		var84.setOnScrolledToTop(function() --[[ line: 538 ]]
+		var84.setOnScrolledToTop(function() --[[ line: 537 ]]
 			-- upvalues: var86 (copy)
 			var86(nil)
 		end)
 		
-		return function() --[[ line: 541 ]]
+		return function() --[[ line: 540 ]]
 			-- upvalues: var84 (copy)
 			var84.setOnScrolledToTop(nil)
 		end
 	end, { var84.setOnScrolledToTop, var86 })
-	reactModule.useEffect(function() --[[ line: 546 ]]
+	reactModule.useEffect(function() --[[ line: 545 ]]
 		-- upvalues: var40 (ref), var42 (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), var49 (write), sessionId (write), universeId (write), var89 (ref), creatorAgentChatStore (ref), var36 (ref), placeId (write)
 		if var40 and var42 ~= nil then
 			local var102 = false
 			
-			local function _(value) --[[ line: 561 | named "setHistoryLoading" ]]
+			local function _(value) --[[ line: 560 | named "setHistoryLoading" ]]
 				-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), var49 (copy), var102 (write), var42 (copy), sessionId (copy), universeId (copy), var40 (copy)
 				if fFlagBuildExperienceChatHistoryLoadingSkeletonModule and var49 ~= nil and not var102 then
 					var49({
@@ -390,12 +389,12 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 					isLoading = var103
 				})
 			end
-			local function isHydrateCancelled() --[[ line: 576 ]]
+			local function isHydrateCancelled() --[[ line: 575 ]]
 				-- upvalues: var102 (write), sessionId (ref), var42 (copy)
 				return if var102 then true elseif sessionId == nil or sessionId == "" then false else var42.getCasSessionId() ~= sessionId
 			end
 			
-			local _ = function() --[[ line: 585 | named "continueAfterSessionReady" ]]
+			local _ = function() --[[ line: 584 | named "continueAfterSessionReady" ]]
 				-- upvalues: var102 (write), sessionId (ref), var42 (copy), var89 (copy), isHydrateCancelled (ref)
 				local var106
 				if var102 then
@@ -412,7 +411,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 				var89.current(isHydrateCancelled)
 			end
 			
-			local function hydrateKnownSession(p18) --[[ line: 592 ]]
+			local function hydrateKnownSession(p18) --[[ line: 591 ]]
 				-- upvalues: var42 (copy), var102 (write), sessionId (ref), var89 (copy), isHydrateCancelled (ref), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), var49 (copy), sessionId (copy), universeId (copy), var40 (copy)
 				var42.setCasSessionId(p18)
 				
@@ -476,7 +475,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 				end
 			end
 			
-			task.spawn(function() --[[ line: 605 ]]
+			task.spawn(function() --[[ line: 604 ]]
 				-- upvalues: sessionId (copy), hydrateKnownSession (ref), universeId (copy), var42 (copy), fFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), var49 (copy), var102 (write), var40 (copy), creatorAgentChatStore (copy), sessionId (ref), var36 (copy), placeId (copy)
 				if sessionId ~= nil and sessionId ~= "" then
 					hydrateKnownSession(sessionId)
@@ -561,7 +560,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 				end
 			end)
 			
-			return function() --[[ line: 649 ]]
+			return function() --[[ line: 648 ]]
 				-- upvalues: var102 (write)
 				var102 = true
 			end
@@ -577,14 +576,14 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	end, {
 		var42, sessionId, universeId, placeId, creatorAgentChatStore, var40
 	})
-	reactModule.useEffect(function() --[[ line: 654 ]]
-		-- upvalues: var42 (ref), sessionId (write), var89 (ref), messageBusService (copy), gameMessageId (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var37 (write), appLifecycleObserverService (copy)
+	reactModule.useEffect(function() --[[ line: 653 ]]
+		-- upvalues: var42 (ref), sessionId (write), var89 (ref), messageBusService (copy), gameMessageId (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelToolsModule (copy), var37 (write), appLifecycleObserverService (copy)
 		if var42 == nil then
 			return
 		end
 		local var114 = false
 		
-		local function refreshKnownSession() --[[ line: 659 ]]
+		local function refreshKnownSession() --[[ line: 658 ]]
 			-- upvalues: var42 (copy), sessionId (copy), var114 (write), var89 (copy)
 			local casSessionId = var42.getCasSessionId()
 			
@@ -594,13 +593,13 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			if casSessionId == nil or casSessionId == "" then
 				return
 			end
-			task.spawn(function() --[[ line: 667 ]]
+			task.spawn(function() --[[ line: 666 ]]
 				-- upvalues: var42 (copy), var114 (copy), var89 (copy)
-				if var42.refreshSession(function() --[[ line: 668 ]]
+				if var42.refreshSession(function() --[[ line: 667 ]]
 					-- upvalues: var114 (copy)
 					return var114
 				end) and not var114 then
-					var89.current(function() --[[ line: 671 ]]
+					var89.current(function() --[[ line: 670 ]]
 						-- upvalues: var114 (copy)
 						return var114
 					end)
@@ -608,23 +607,23 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			end)
 		end
 		
-		local var116 = messageBusService:Subscribe(gameMessageId, function(_) --[[ line: 678 ]]
-			-- upvalues: fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), var37 (copy), refreshKnownSession (ref)
-			if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelTools) and var37 ~= nil then
+		local var116 = messageBusService:Subscribe(gameMessageId, function(_) --[[ line: 677 ]]
+			-- upvalues: fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelToolsModule (copy), var37 (copy), refreshKnownSession (ref)
+			if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelToolsModule) and var37 ~= nil then
 				var37.current = true
 			end
 			refreshKnownSession()
 		end, false, true)
 		local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(refreshKnownSession)
 		
-		return function() --[[ line: 689 ]]
+		return function() --[[ line: 688 ]]
 			-- upvalues: var114 (write), var116 (ref), onUnhideConnection (ref)
 			var114 = true
 			var116:Disconnect()
 			onUnhideConnection:Disconnect()
 		end
 	end, { var42, sessionId, var37 })
-	reactModule.useEffect(function() --[[ line: 696 ]]
+	reactModule.useEffect(function() --[[ line: 695 ]]
 		-- upvalues: fFlagBuildExperienceFixChatBottomLockModule (copy), var40 (ref), var84 (ref)
 		if fFlagBuildExperienceFixChatBottomLockModule and var40 then
 			var84.lockToBottom()
@@ -632,15 +631,15 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			return
 		end
 	end, { var40, var42, sessionId, var84 })
-	local var90 = reactModule.useCallback(function(p19) --[[ line: 703 ]]
+	local var90 = reactModule.useCallback(function(p19) --[[ line: 702 ]]
 		-- upvalues: var81 (ref), var78 (ref), var80 (ref)
 		var81.current = p19
 		var78(p19)
 		var80(nil)
 	end, { var78, var80 })
-	local var91 = if fFlagBuildExperienceToolResultFailureRecoveryModule then reactModule.useCallback(function(p20) --[[ line: 711 ]]
+	local var91 = if fFlagBuildExperienceToolResultFailureRecoveryModule then reactModule.useCallback(function(p20) --[[ line: 710 ]]
 		-- upvalues: var63 (ref), var62 (ref), var42 (ref), sessionId (write), var81 (ref), var90 (ref), var80 (ref), creatorAgentChatModule_1 (copy)
-		return function(p21, p22) --[[ line: 712 ]]
+		return function(p21, p22) --[[ line: 711 ]]
 			-- upvalues: var63 (copy), p20 (ref), var62 (copy), var42 (copy), sessionId (copy), var81 (copy), var90 (copy), var80 (copy), creatorAgentChatModule_1 (copy)
 			if var63.current == p20 then
 				local current = var62.current
@@ -656,7 +655,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			end
 		end
 	end, { var42, sessionId, var90, var80 }) else nil
-	local var92 = reactModule.useCallback(function(p23, p24, p25, p26) --[[ line: 728 ]]
+	local var92 = reactModule.useCallback(function(p23, p24, p25, p26) --[[ line: 727 ]]
 		-- upvalues: var63 (ref), var65 (ref), var64 (ref), var55 (ref), p9 (ref), var85 (ref), var90 (ref), var80 (ref), creatorAgentChatModule_1 (copy), var84 (ref), sessionId (write), var34 (ref)
 		if var63.current ~= p23 then return end
 		var65(nil)
@@ -683,9 +682,9 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 						p9.onProjectResolved(t)
 					end
 				end
-				task.spawn(function() --[[ line: 784 ]]
+				task.spawn(function() --[[ line: 783 ]]
 					-- upvalues: p26 (ref), var63 (copy), p23 (ref)
-					p26.refreshSession(function() --[[ line: 785 ]]
+					p26.refreshSession(function() --[[ line: 784 ]]
 						-- upvalues: var63 (copy), p23 (copy)
 						return var63.current ~= p23
 					end)
@@ -702,9 +701,9 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			var90(p25)
 			var80(creatorAgentChatModule_1.getPromptFailureComposerError(p24))
 		end
-		task.spawn(function() --[[ line: 755 ]]
+		task.spawn(function() --[[ line: 754 ]]
 			-- upvalues: p26 (ref), var63 (copy), p23 (ref)
-			p26.refreshSession(function() --[[ line: 756 ]]
+			p26.refreshSession(function() --[[ line: 755 ]]
 				-- upvalues: var63 (copy), p23 (copy)
 				return var63.current ~= p23
 			end)
@@ -714,7 +713,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		sessionId, var85, var34, var84, var90, var80, var65, var55
 	})
 	local var93 = reactModule.useRef(var40)
-	reactModule.useEffect(function() --[[ line: 808 ]]
+	reactModule.useEffect(function() --[[ line: 807 ]]
 		-- upvalues: var40 (ref), var93 (ref), var75 (ref), var67 (ref), var84 (ref)
 		local var122 = var40 and not var93.current
 		var93.current = var40
@@ -734,7 +733,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		#messages,
 		var84
 	})
-	reactModule.useEffect(function() --[[ line: 834 ]]
+	reactModule.useEffect(function() --[[ line: 833 ]]
 		-- upvalues: var61 (ref), var62 (ref), var42 (ref), sessionId (write), var59 (ref), var63 (ref), var64 (ref), placeId (write), var85 (ref), creatorAgentChatModule_1 (copy), var92 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var91 (write), var38 (write), var65 (ref), var84 (ref), var73 (ref), var67 (ref), creatorAgentChatStore (ref), var75 (ref)
 		local var123
 		if var61.current ~= nil then
@@ -756,7 +755,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			var125 = if var123 == nil or placeId_1 == nil then nil else `{var123}:{placeId_1}`
 		end
 		if var125 == nil then return end
-		local function current(p27, p28) --[[ line: 856 | named "attachResumedTurn" ]]
+		local function current(p27, p28) --[[ line: 855 | named "attachResumedTurn" ]]
 			-- upvalues: var63 (copy), var64 (copy), placeId (copy), var85 (copy), creatorAgentChatModule_1 (copy), var42 (copy), var92 (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var91 (copy), var38 (copy), var65 (copy), var84 (copy)
 			var63.current += 1
 			local current = var63.current
@@ -765,7 +764,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			if placeId ~= nil then
 				var85(placeId, "Loading")
 			end
-			local var127 = creatorAgentChatModule_1.createResumedAssistantTurn(var42, p27, function(p29) --[[ line: 866 ]]
+			local var127 = creatorAgentChatModule_1.createResumedAssistantTurn(var42, p27, function(p29) --[[ line: 865 ]]
 				-- upvalues: var92 (copy), current (ref), var42 (copy)
 				var92(current, p29, nil, var42)
 			end, if p28 ~= nil then nil else p28 - 1, if fFlagBuildExperienceToolResultFailureRecoveryModule then var91(current) else nil, var38)
@@ -799,11 +798,11 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		var73, var42, sessionId, creatorAgentChatStore, var75, var67, placeId, var85,
 		var92, var84, var65, var59, var91, var38
 	})
-	local var94 = reactModule.useCallback(function(p30, p31, p32, p33) --[[ line: 934 ]]
+	local var94 = reactModule.useCallback(function(p30, p31, p32, p33) --[[ line: 933 ]]
 		-- upvalues: var55 (ref), creatorAgentChatModule_1 (copy), var92 (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), var91 (write), var38 (write), var85 (ref), var65 (ref), var84 (ref)
 		var55({ text = p31, afterSequenceId = p33 })
 		local _ = nil
-		local var128 = creatorAgentChatModule_1.createLiveAssistantTurn(p30, p31, function(p34) --[[ line: 941 ]]
+		local var128 = creatorAgentChatModule_1.createLiveAssistantTurn(p30, p31, function(p34) --[[ line: 940 ]]
 			-- upvalues: var92 (copy), p32 (ref), p31 (ref), p30 (ref)
 			var92(p32, p34, p31, p30)
 		end, if fFlagBuildExperienceToolResultFailureRecoveryModule then var91(p32) else nil, var38)
@@ -817,14 +816,14 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	end, {
 		var92, var85, var84, var65, var55, var91, var38
 	})
-	local var95 = reactModule.useCallback(function(p35, p36, p37) --[[ line: 969 ]]
+	local var95 = reactModule.useCallback(function(p35, p36, p37) --[[ line: 968 ]]
 		-- upvalues: var55 (ref), universeCreateModule (copy), getDefaultTemplatePlaceIdModule (copy), debug (copy), var63 (ref), universeConfigurationModule (copy), var34 (ref), p9 (ref), creatorAgentChatStore (ref), sessionId (write), var94 (ref), var65 (ref), var90 (ref), var80 (ref), CHAT_CREATE_UNIVERSE_ERROR (copy)
 		var55({ text = p35, afterSequenceId = p37 })
 		local processTime = os.clock()
 		universeCreateModule.getUniverseCreateStore().createUniverse({
 			isPublish = true,
 			templatePlaceId = getDefaultTemplatePlaceIdModule()
-		}):andThen(function(p39) --[[ line: 977 ]]
+		}):andThen(function(p39) --[[ line: 976 ]]
 			-- upvalues: debug (copy), processTime (ref), var63 (copy), p36 (ref), universeConfigurationModule (copy), var34 (copy), p9 (copy), creatorAgentChatStore (copy), sessionId (copy), var94 (copy), p35 (ref), p37 (ref)
 			debug.log("info", "build_experience create_universe succeeded", {
 				durationMs = math.floor((os.clock() - processTime) * 1000 + 0.5),
@@ -835,10 +834,10 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			if var63.current == p36 then
 				local universeConfigurationStore = universeConfigurationModule.getUniverseConfigurationStore()
 				
-				return universeConfigurationStore.patchConfiguration(p39.universeId, { audiences = { 1 } }):andThen(function() --[[ line: 992 ]]
+				return universeConfigurationStore.patchConfiguration(p39.universeId, { audiences = { 1 } }):andThen(function() --[[ line: 991 ]]
 					-- upvalues: universeConfigurationStore (ref), p39 (ref)
 					return universeConfigurationStore.setTeamCreate(p39.universeId, true)
-				end):andThen(function() --[[ line: 995 ]]
+				end):andThen(function() --[[ line: 994 ]]
 					-- upvalues: var63 (copy), p36 (copy), p39 (ref), var34 (copy), p9 (copy), creatorAgentChatStore (copy), sessionId (copy), var94 (copy), p35 (copy), p37 (copy)
 					if var63.current ~= p36 then
 						return nil
@@ -855,7 +854,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 				end)
 			end
 			return nil
-		end):catch(function(p38) --[[ line: 1018 ]]
+		end):catch(function(p38) --[[ line: 1017 ]]
 			-- upvalues: debug (copy), processTime (ref), var63 (copy), p36 (ref), var65 (copy), var55 (copy), var90 (copy), p35 (ref), var80 (copy), CHAT_CREATE_UNIVERSE_ERROR (copy)
 			debug.log("warn", "build_experience create_or_configure_universe failed", {
 				durationMs = math.floor((os.clock() - processTime) * 1000 + 0.5),
@@ -875,7 +874,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		sessionId, creatorAgentChatStore, p9.onProjectResolved, var65, var90, var80,
 		var34, var55, var94
 	})
-	local var96 = reactModule.useCallback(function() --[[ line: 1046 ]]
+	local var96 = reactModule.useCallback(function() --[[ line: 1045 ]]
 		-- upvalues: var81 (ref), var90 (ref), var75 (ref), var62 (ref), var42 (ref), sessionId (write), var61 (ref), var82 (ref), var84 (ref), p9 (ref), universeId (write), var63 (ref), var57 (ref), var95 (ref), var73 (ref), var94 (ref)
 		local replaced = string.gsub(var81.current, "^%s*(.-)%s*$", "%1")
 		
@@ -925,7 +924,7 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		var42, sessionId, universeId, var75, var84, var90, var95, var94,
 		p9.createUniverseOnFirstPrompt, var57, var73
 	})
-	local var97 = reactModule.useCallback(function() --[[ line: 1103 ]]
+	local var97 = reactModule.useCallback(function() --[[ line: 1102 ]]
 		-- upvalues: var62 (ref), var42 (ref), sessionId (write), var61 (ref), var63 (ref), var65 (ref), var64 (ref), var55 (ref), var57 (ref), var73 (ref), placeId (write), var85 (ref)
 		local current = var62.current
 		local var136 = if if current == nil or current.session ~= var42 then false else sessionId == nil or sessionId == "" or (if current.sessionId ~= sessionId then current.sessionId == nil and current.session.getCasSessionId() == sessionId else true) then var61.current else nil
@@ -950,19 +949,19 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 	})
 	local var98 = p9.autoFocusComposer == nil or p9.autoFocusComposer
 	local var99 = if p9.focusComposerWhen == nil then var98 else p9.focusComposerWhen
-	reactModule.useEffect(function() --[[ line: 1138 ]]
+	reactModule.useEffect(function() --[[ line: 1137 ]]
 		-- upvalues: var98 (ref), var99 (ref), var82 (ref)
 		if var98 and var99 then
 			local var137 = false
 			
-			local var138 = function() --[[ line: 1143 ]]
+			local var138 = function() --[[ line: 1142 ]]
 				-- upvalues: var137 (write)
 				return var137
 			end
 			
 			local var139 = 8
 			
-			local function tryFocus() --[[ line: 185 ]]
+			local function tryFocus() --[[ line: 184 ]]
 				-- upvalues: var138 (ref), var82 (ref), var139 (write), tryFocus (ref)
 				if var138() then return end
 				local current = var82.current
@@ -981,12 +980,12 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 			
 			task.defer(tryFocus)
 			
-			return function() --[[ line: 1146 ]]
+			return function() --[[ line: 1145 ]]
 				-- upvalues: var137 (write)
 				var137 = true
 			end
 		end
-		return function() --[[ line: 1140 ]] end
+		return function() --[[ line: 1139 ]] end
 	end, { var98, var99 })
 	
 	return {
@@ -1004,10 +1003,10 @@ return function(p9) --[[ line: 215 | named "useChatSessionCore" ]]
 		textBoxRef = var82,
 		clockBinding = var83,
 		playtestPlaceId = placeId,
-		launchPlaytest = if placeId ~= nil then nil else reactModule.useCallback(function(p40) --[[ line: 1151 ]]
-			-- upvalues: placeId (write), var37 (write), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelTools (copy), launchPlaytestWithLoadingStateModule (copy)
+		launchPlaytest = if placeId ~= nil then nil else reactModule.useCallback(function(p40) --[[ line: 1150 ]]
+			-- upvalues: placeId (write), var37 (write), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fFlagBuildExperienceClientDataModelToolsModule (copy), launchPlaytestWithLoadingStateModule (copy)
 			if placeId == nil then return end
-			local var141 = if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelTools) and (game.GameId == 0 and var37 ~= nil) then function() --[[ line: 1162 ]]
+			local var141 = if (fFlagBuildExperiencePersistPlaytestLogsModule or fFlagBuildExperienceClientDataModelToolsModule) and (game.GameId == 0 and var37 ~= nil) then function() --[[ line: 1161 ]]
 				-- upvalues: var37 (ref)
 				var37.current = true
 			end else nil

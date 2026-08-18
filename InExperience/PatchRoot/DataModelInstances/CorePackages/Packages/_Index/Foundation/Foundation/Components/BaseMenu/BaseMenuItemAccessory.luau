@@ -10,15 +10,10 @@ local presentationContextModule = require(foundation.Providers.Style.Presentatio
 local _ = require(foundation.Providers.Style.Tokens)
 local accessoryTypeModule = require(foundation.Enums.AccessoryType)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local flagsModule = require(foundation.Utility.Flags)
 local _ = require(foundation.Enums.InputSize)
-local t = {
-	isIconSize = true,
-	colorNamespace = colorNamespaceModule.Color
-}
 
-return function(p0) --[[ line: 49 | named "Accessory" ]]
-	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), flagsModule (ref), t (ref), colorNamespaceModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
+return function(p0) --[[ line: 46 | named "Accessory" ]]
+	-- upvalues: accessoryTypeModule (ref), reactModule (ref), viewModule (ref), presentationContextModule (ref), colorNamespaceModule (ref), avatarModule (ref), textModule (ref), badgeModule (ref), iconModule (ref)
 	local accessory = p0.accessory
 	
 	if accessory == nil then
@@ -32,7 +27,7 @@ return function(p0) --[[ line: 49 | named "Accessory" ]]
 		testId = p0.testId
 	}, {
 		Avatar = reactModule.createElement(presentationContextModule.Provider, {
-			value = if flagsModule.FoundationStableContextValues then t else {
+			value = {
 				isIconSize = true,
 				colorNamespace = colorNamespaceModule.Color
 			}

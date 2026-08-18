@@ -2,7 +2,7 @@
 
 return function(p0) --[[ line: 17 ]]
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.POST("SetSocialLinks", function(p1, p2) --[[ line: 20 ]]
+	return p0.roduxNetworking.POST({ Name = "SetSocialLinks" }, function(p1, p2) --[[ line: 20 ]]
 		-- upvalues: API_URLModule (copy)
 		return p1(API_URLModule):path("v1"):path("promotion-channels"):body({
 			promotionChannelsVisibilityPrivacy = p2.promotionChannelsVisibilityPrivacy,

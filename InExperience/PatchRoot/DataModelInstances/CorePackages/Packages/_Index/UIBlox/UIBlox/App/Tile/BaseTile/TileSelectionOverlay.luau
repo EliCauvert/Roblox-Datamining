@@ -1,6 +1,5 @@
 ﻿local parent = script.Parent.Parent.Parent.Parent
 local parent_1 = parent.Parent
-local UIBloxConfigModule = require(parent.UIBloxConfig)
 local roactModule = require(parent_1.Roact)
 local tModule = require(parent_1.t)
 local withStyleModule = require(parent.Core.Style.withStyle)
@@ -13,15 +12,15 @@ tileSelectionOverlay.validateProps = tModule.strictInterface({
 })
 tileSelectionOverlay.defaultProps = { cornerRadius = UDim.new(0, 0) }
 
-function tileSelectionOverlay.render(p0) --[[ line: 27 ]]
-	-- upvalues: imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
+function tileSelectionOverlay.render(p0) --[[ line: 26 ]]
+	-- upvalues: imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref)
 	local zIndex = p0.props.ZIndex
 	local cornerRadius = p0.props.cornerRadius
 	local selectOn = imagesModule["icons/actions/selectOn"]
-	local var7 = selectOn.ImageRectSize / imagesModule.ImagesResolutionScale
+	local var6 = selectOn.ImageRectSize / imagesModule.ImagesResolutionScale
 	
-	return withStyleModule(function(p1) --[[ line: 34 ]]
-		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), selectOn (ref), UIBloxConfigModule (copy), var7 (ref), cornerRadius (ref)
+	return withStyleModule(function(p1) --[[ line: 33 ]]
+		-- upvalues: roactModule (copy), zIndex (ref), imageSetComponentModule (copy), selectOn (ref), var6 (ref), cornerRadius (ref)
 		local theme = p1.Theme
 		local tokens = p1.Tokens
 		
@@ -36,8 +35,8 @@ function tileSelectionOverlay.render(p0) --[[ line: 27 ]]
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Image = selectOn,
-				Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_50 else -tokens.Global.Size_25, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_50 else tokens.Global.Size_25),
-				Size = UDim2.new(0, var7.X, 0, var7.Y)
+				Position = UDim2.new(1, -tokens.Global.Size_25, 0, tokens.Global.Size_25),
+				Size = UDim2.new(0, var6.X, 0, var6.Y)
 			}),
 			UICorner = cornerRadius ~= UDim.new(0, 0) and roactModule.createElement("UICorner", { CornerRadius = cornerRadius }) or nil
 		})

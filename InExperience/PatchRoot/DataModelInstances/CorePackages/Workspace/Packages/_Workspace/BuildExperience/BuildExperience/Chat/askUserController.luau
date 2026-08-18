@@ -84,7 +84,7 @@ local _ = function(p6, p7, p8) --[[ line: 126 | named "createAnswerStackSync" ]]
 		
 		if var16 == nil or var17 == nil then
 			if var15 then
-				debug.log("info", "ask_user answer stack cleared", { turn = debug.formatTurnState(p9) })
+				debug.log("info", "studio_ask_user answer stack cleared", { turn = debug.formatTurnState(p9) })
 				var15 = false
 				var13 = nil
 				var14 = nil
@@ -118,7 +118,7 @@ local _ = function(p6, p7, p8) --[[ line: 126 | named "createAnswerStackSync" ]]
 					callOrder = t.callOrder,
 					isLastQuestion = #t.questions <= t.currentIndex
 				})
-				debug.log("info", "ask_user answer stack displayed", {
+				debug.log("info", "studio_ask_user answer stack displayed", {
 					toolCallId = var17,
 					turnId = var18,
 					referenceId = var19,
@@ -185,7 +185,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		
 		if var16 == nil or var17 == nil then
 			if submitAskUserCancellation then
-				debug.log("info", "ask_user answer stack cleared", { turn = debug.formatTurnState(p16) })
+				debug.log("info", "studio_ask_user answer stack cleared", { turn = debug.formatTurnState(p16) })
 				submitAskUserCancellation = false
 				var13 = nil
 				var14 = nil
@@ -219,7 +219,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 					callOrder = t.callOrder,
 					isLastQuestion = #t.questions <= t.currentIndex
 				})
-				debug.log("info", "ask_user answer stack displayed", {
+				debug.log("info", "studio_ask_user answer stack displayed", {
 					toolCallId = var17,
 					turnId = var18,
 					referenceId = var19,
@@ -252,7 +252,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			return
 		end
 		local var33 = studioAskUserTool.formatToolResultContent(t)
-		debug.log("info", "ask_user tool_result submitting", {
+		debug.log("info", "studio_ask_user tool_result submitting", {
 			sessionId = p17.sessionId,
 			toolCallId = p17.toolCallId,
 			turnId = p17.turnId,
@@ -263,7 +263,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		local var35 = p10.submitActiveToolResult(var33, false, p17.turnId, p17.referenceId)
 		
 		if var35 == nil then
-			debug.log("warn", "ask_user tool_result submit aborted (no active session)", { toolCallId = p17.toolCallId })
+			debug.log("warn", "studio_ask_user tool_result submit aborted (no active session)", { toolCallId = p17.toolCallId })
 			
 			if fFlagBuildExperienceToolResultFailureRecoveryModule then
 				p17.submitted = false
@@ -288,7 +288,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			local floored = math.floor((os.clock() - processTime) * 1000 + 0.5)
 			
 			if var37.status == "succeeded" then
-				debug.log("info", "ask_user tool_result submitted", {
+				debug.log("info", "studio_ask_user tool_result submitted", {
 					sessionId = p17.sessionId,
 					toolCallId = p17.toolCallId,
 					turnId = p17.turnId,
@@ -316,7 +316,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			else
 				p17.submitted = false
 			end
-			debug.log("warn", "ask_user tool_result submit failed", {
+			debug.log("warn", "studio_ask_user tool_result submit failed", {
 				sessionId = p17.sessionId,
 				toolCallId = p17.toolCallId,
 				turnId = p17.turnId,
@@ -343,7 +343,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		local var41 = p10.submitActiveToolResult(var40, false, p18.turnId, p18.referenceId)
 		
 		if var41 == nil then
-			debug.log("warn", "ask_user cancel aborted (no active session)", { toolCallId = p18.toolCallId })
+			debug.log("warn", "studio_ask_user cancel aborted (no active session)", { toolCallId = p18.toolCallId })
 			
 			return
 		end
@@ -390,7 +390,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		if currentIndex.responseType == "multi_select" then
 			var21.selections[var21.currentIndex] = toggleOptionInSelection(var21.selections[var21.currentIndex], p22)
 			p12.setAskUserTool(buildOptimisticAskUserTool(var21))
-			debug.log("info", "ask_user multi-select toggled", {
+			debug.log("info", "studio_ask_user multi-select toggled", {
 				toolCallId = var21.toolCallId,
 				questionId = p21.id,
 				questionIndex = var21.currentIndex,
@@ -401,7 +401,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 			return
 		end
 		local var43
-		debug.log("info", "ask_user answer selected", {
+		debug.log("info", "studio_ask_user answer selected", {
 			toolCallId = var21.toolCallId,
 			questionId = p21.id,
 			questionIndex = var21.currentIndex,
@@ -439,7 +439,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 		
 		if var44 == nil or #var44 == 0 then return end
 		local var45
-		debug.log("info", "ask_user multi-select confirmed", {
+		debug.log("info", "studio_ask_user multi-select confirmed", {
 			toolCallId = var21.toolCallId,
 			questionId = currentIndex.id,
 			questionIndex = var21.currentIndex,
@@ -504,7 +504,7 @@ return function(p10, p11, p12, p13) --[[ line: 181 | named "createAskUserControl
 				return false
 			end
 			local var46
-			debug.log("info", "ask_user custom answer submitted", {
+			debug.log("info", "studio_ask_user custom answer submitted", {
 				toolCallId = var21.toolCallId,
 				questionId = currentIndex.id,
 				questionIndex = var21.currentIndex

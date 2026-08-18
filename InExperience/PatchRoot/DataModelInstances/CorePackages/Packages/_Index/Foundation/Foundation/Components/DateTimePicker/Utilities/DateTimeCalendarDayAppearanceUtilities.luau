@@ -1,85 +1,66 @@
 ﻿local dateTimeCalendarViewUtilitiesModule = require(script.Parent.DateTimeCalendarViewUtilities)
-local dateTimePickerRangeBandRoleModule = require(script:FindFirstAncestor("Foundation").Enums.DateTimePickerRangeBandRole)
 local dateTimeRangeSelectionUtilitiesModule = require(script.Parent.DateTimeRangeSelectionUtilities)
 local dateTimeUtilitiesModule = require(script.Parent.Parent.DateTimeUtilities)
 
-local function isDaySelected(p0, p1, p2) --[[ line: 19 ]]
-	-- upvalues: dateTimeUtilitiesModule (ref)
-	local var6 = dateTimeUtilitiesModule.toLocalTime(p0)
-	
-	for i, v in if p2 then p1 elseif p1[1] ~= nil then {} else { p1[1] } do
-		if v.Day == var6.Day and v.Month == var6.Month and v.Year == var6.Year then
-			return true
-		end
-	end
-	return false
-end
-
-local function getRangeBand(p3, p4, p5, p6) --[[ line: 69 ]]
-	-- upvalues: dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref), dateTimePickerRangeBandRoleModule (ref)
-	local var7 = p4[1]
-	local var8 = p4[2]
-	
-	if not p5 or not var7 or not var8 then
-		return nil, nil, nil
-	end
-	local t = { startDate = var7, endDate = var8 }
-	local rangeDayBounds, rangeDayBounds_1 = dateTimeCalendarViewUtilitiesModule.getRangeDayBounds(t)
-	
-	if rangeDayBounds == rangeDayBounds_1 then
-		return nil, nil, nil
-	end
-	local var12 = dateTimeUtilitiesModule.roundToStartOfDay(p3)
-	local var13 = p6 ~= false
-	
-	local function fullCellBand() --[[ line: 89 ]]
-		-- upvalues: dateTimeCalendarViewUtilitiesModule (copy), p3 (ref), t (ref), dateTimePickerRangeBandRoleModule (copy)
-		return nil, nil, dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p3, t, dateTimePickerRangeBandRoleModule.Full)
-	end
-	
-	if var12 == rangeDayBounds then
-		if var13 then
-			return UDim2.fromScale(0.5, 0), UDim2.fromScale(0.5, 1), dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p3, t, dateTimePickerRangeBandRoleModule.Start)
-		end
-		return fullCellBand()
-	elseif var12 == rangeDayBounds_1 then
-		if var13 then
-			return UDim2.fromScale(0, 0), UDim2.fromScale(0.5, 1), dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p3, t, dateTimePickerRangeBandRoleModule.End)
-		end
-		return fullCellBand()
-	elseif not p5 and (if p4[1] and p4[2] then dateTimeUtilitiesModule.isDateWithinRange(p3, { startDate = p4[1], endDate = p4[2] }) else false) then
-		return fullCellBand()
-	end
-	return nil, nil, nil
-end
-
 return {
-	getDayCellAppearance = function(p7, p8, p9, p10, p11) --[[ line: 130 ]]
-		-- upvalues: isDaySelected (ref), getRangeBand (ref), dateTimeUtilitiesModule (ref)
-		local var15 = isDaySelected(p7, p8, p10)
-		local var16, var17, var18 = getRangeBand(p7, p9, p10, var15)
+	getRangeBand = function(p0, p1, p2, p3) --[[ line: 57 ]]
+		-- upvalues: dateTimeCalendarViewUtilitiesModule (ref), dateTimeUtilitiesModule (ref)
+		local var3 = p1[1]
+		local var4 = p1[2]
 		
-		return {
-			bandPosition = var16,
-			bandRadiusTag = var18,
-			bandSize = var17,
-			isHighlighted = not p10 and (if p9[1] and p9[2] then dateTimeUtilitiesModule.isDateWithinRange(p7, { startDate = p9[1], endDate = p9[2] }) else false),
-			isSelectable = if p11 and not dateTimeUtilitiesModule.isDateWithinRange(p7, p11) then false else true,
-			isSelected = var15
-		}
+		if not p2 or not var3 or not var4 then
+			return nil, nil, nil
+		end
+		local t = { startDate = var3, endDate = var4 }
+		local rangeDayBounds, rangeDayBounds_1 = dateTimeCalendarViewUtilitiesModule.getRangeDayBounds(t)
+		
+		if rangeDayBounds == rangeDayBounds_1 then
+			return nil, nil, nil
+		end
+		local var8 = dateTimeUtilitiesModule.roundToStartOfDay(p0)
+		local var9 = p3 ~= false
+		
+		local function fullCellBand() --[[ line: 77 ]]
+			-- upvalues: dateTimeCalendarViewUtilitiesModule (copy), p0 (ref), t (ref)
+			return nil, nil, dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p0, t, "full")
+		end
+		
+		if var8 == rangeDayBounds then
+			if var9 then
+				return UDim2.fromScale(0.5, 0), UDim2.fromScale(0.5, 1), dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p0, t, "start")
+			end
+			return fullCellBand()
+		elseif var8 == rangeDayBounds_1 then
+			if var9 then
+				return UDim2.fromScale(0, 0), UDim2.fromScale(0.5, 1), dateTimeCalendarViewUtilitiesModule.getRangeBandRadiusTag(p0, t, "end")
+			end
+			return fullCellBand()
+		elseif not p2 and (if p1[1] and p1[2] then dateTimeUtilitiesModule.isDateWithinRange(p0, { startDate = p1[1], endDate = p1[2] }) else false) then
+			return fullCellBand()
+		end
+		return nil, nil, nil
 	end,
-	getRangeBand = getRangeBand,
-	isDayHighlighted = function(p12, p13, p14) --[[ line: 59 ]]
+	isDayHighlighted = function(p4, p5, p6) --[[ line: 47 ]]
 		-- upvalues: dateTimeUtilitiesModule (ref)
-		return if p14 then if p13[1] and p13[2] then dateTimeUtilitiesModule.isDateWithinRange(p12, { startDate = p13[1], endDate = p13[2] }) else false else false
+		return if p6 then if p5[1] and p5[2] then dateTimeUtilitiesModule.isDateWithinRange(p4, { startDate = p5[1], endDate = p5[2] }) else false else false
 	end,
-	isDaySelectable = function(p15, p16) --[[ line: 123 ]]
+	isDaySelectable = function(p7, p8) --[[ line: 101 ]]
 		-- upvalues: dateTimeUtilitiesModule (ref)
-		return p16 and not dateTimeUtilitiesModule.isDateWithinRange(p15, p16)
+		return p8 and not dateTimeUtilitiesModule.isDateWithinRange(p7, p8)
 	end,
-	isDaySelected = isDaySelected,
-	resolveHighlightDates = function(p17, p18) --[[ line: 49 ]]
+	isDaySelected = function(p9, p10, p11) --[[ line: 7 ]]
+		-- upvalues: dateTimeUtilitiesModule (ref)
+		local var11 = dateTimeUtilitiesModule.toLocalTime(p9)
+		
+		for i, v in if p11 then p10 elseif p10[1] ~= nil then {} else { p10[1] } do
+			if v.Day == var11.Day and v.Month == var11.Month and v.Year == var11.Year then
+				return true
+			end
+		end
+		return false
+	end,
+	resolveHighlightDates = function(p12, p13) --[[ line: 37 ]]
 		-- upvalues: dateTimeRangeSelectionUtilitiesModule (ref)
-		return if not (not p17 or not p17[1]) then if p17[2] or not p18 then p17 else dateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(p17, p18) else p17 or {}
+		return if not (not p12 or not p12[1]) then if p12[2] or not p13 then p12 else dateTimeRangeSelectionUtilitiesModule.selectRangeEndpoint(p12, p13) else p12 or {}
 	end
 }

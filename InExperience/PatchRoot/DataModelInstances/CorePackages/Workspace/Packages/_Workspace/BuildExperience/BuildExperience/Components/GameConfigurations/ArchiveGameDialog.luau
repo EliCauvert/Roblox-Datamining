@@ -2,28 +2,19 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local dialog = foundationModule.Dialog
 local dialogSize = foundationModule.Enums.DialogSize
 local buttonVariant = foundationModule.Enums.ButtonVariant
 
-return function(p0) --[[ line: 30 | named "ArchiveGameDialog" ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local var5 = if fFlagBuildLocalization then useLocalization({
-		archiveGame = localizationStringsModule.ARCHIVE_GAME_ARCHIVE,
-		cancel = localizationStringsModule.ARCHIVE_GAME_CANCEL,
-		description = localizationStringsModule.ARCHIVE_GAME_DESCRIPTION,
-		title = localizationStringsModule.ARCHIVE_GAME_TITLE
-	}) else nil
+return function(p0) --[[ line: 26 | named "ArchiveGameDialog" ]]
+	-- upvalues: reactModule (ref), localizationStringsModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
 	local testId = p0.testId or "archive-game-dialog"
-	local var7 = reactModule.useCallback(function() --[[ line: 40 ]]
+	local var5 = reactModule.useCallback(function() --[[ line: 28 ]]
 		-- upvalues: p0 (ref)
 		p0.onArchive()
 	end, { p0.onArchive })
-	local var8 = reactModule.useCallback(function() --[[ line: 43 ]]
+	local var6 = reactModule.useCallback(function() --[[ line: 31 ]]
 		-- upvalues: p0 (ref)
 		p0.onCancel()
 	end, { p0.onCancel })
@@ -36,30 +27,30 @@ return function(p0) --[[ line: 30 | named "ArchiveGameDialog" ]]
 	}, {
 		Title = reactModule.createElement(dialog.Title, {
 			LayoutOrder = 1,
-			text = p0.title or (if fFlagBuildLocalization then var5.title else localizationStringsModule.ARCHIVE_GAME_TITLE)
+			text = p0.title or localizationStringsModule.ARCHIVE_GAME_TITLE
 		}),
 		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
 			Description = reactModule.createElement(dialog.Text, {
-				Text = p0.description or (if fFlagBuildLocalization then var5.description else localizationStringsModule.ARCHIVE_GAME_DESCRIPTION)
+				Text = p0.description or localizationStringsModule.ARCHIVE_GAME_DESCRIPTION
 			})
 		}),
-		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function() --[[ line: 47 ]]
-			-- upvalues: fFlagBuildLocalization (copy), var5 (ref), localizationStringsModule (copy), buttonVariant (copy), var7 (ref), var8 (ref)
+		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function() --[[ line: 35 ]]
+			-- upvalues: localizationStringsModule (copy), buttonVariant (copy), var5 (ref), var6 (ref)
 			return {
 				LayoutOrder = 3,
 				actions = {
 					{
-						text = if fFlagBuildLocalization then var5.archiveGame else localizationStringsModule.ARCHIVE_GAME_ARCHIVE,
+						text = localizationStringsModule.ARCHIVE_GAME_ARCHIVE,
 						variant = buttonVariant.Standard,
-						onActivated = var7
+						onActivated = var5
 					},
 					{
-						text = if fFlagBuildLocalization then var5.cancel else localizationStringsModule.ARCHIVE_GAME_CANCEL,
+						text = localizationStringsModule.ARCHIVE_GAME_CANCEL,
 						variant = buttonVariant.Standard,
-						onActivated = var8
+						onActivated = var6
 					}
 				}
 			}
-		end, { var7, var8 }))
+		end, { var5, var6 }))
 	})
 end

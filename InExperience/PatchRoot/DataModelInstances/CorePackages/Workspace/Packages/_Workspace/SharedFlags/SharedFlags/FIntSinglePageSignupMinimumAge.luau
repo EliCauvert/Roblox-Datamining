@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("SinglePageSignupMinimumAge", 5)

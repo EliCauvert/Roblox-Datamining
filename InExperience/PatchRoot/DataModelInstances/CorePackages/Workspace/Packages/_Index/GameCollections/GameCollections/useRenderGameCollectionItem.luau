@@ -16,7 +16,6 @@ local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionIte
 local _ = require(parent.HoldToPlay)
 local _ = require(parent.VideoUtils)
 local fFlagLuaAppGameTileInteractionFeedback = require(parent.SharedFlags).FFlagLuaAppGameTileInteractionFeedback
-local fFlagLuaAppContinueSortInstantPlay = require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local fFlagLuaAppEnableSponsoredReportAd = require(parent.SharedFlags).FFlagLuaAppEnableSponsoredReportAd
 local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 local fFlagLuaAppNarrowTileSmallerFooterFont = require(parent.SharedFlags).FFlagLuaAppNarrowTileSmallerFooterFont
@@ -26,8 +25,8 @@ local fFlagLuaAppEnableHomepageOneByTwoTile = require(parent.SharedFlags).FFlagL
 local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local gameCollectionItemType = gameCollectionItemTypes.GameCollectionItemType
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, _, _, _, p39, p40, p41, p42, p43, p44, p45) --[[ line: 39 | named "useRenderGameCollectionItem" ]]
-	-- upvalues: usePreferredInput (ref), useNavigateToGameDetails (ref), fFlagLuaAppGameTileInteractionFeedback (ref), useTriggerGameTileFeedbackCallbacksModule (ref), responsiveModule (ref), useBreakpointXOrSmaller (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), gameTileConstants (ref), gameTileLayoutType (ref), reactModule (ref), seeAllTileModule (ref), gameCollectionItemType (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), getTileBadgeByPositionConfigFromEntry (ref), appGameTile (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), fFlagLuaAppContinueSortInstantPlay (ref)
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, _, _, _, p39, p40, p41, p42, p43, p44) --[[ line: 38 | named "useRenderGameCollectionItem" ]]
+	-- upvalues: usePreferredInput (ref), useNavigateToGameDetails (ref), fFlagLuaAppGameTileInteractionFeedback (ref), useTriggerGameTileFeedbackCallbacksModule (ref), responsiveModule (ref), useBreakpointXOrSmaller (ref), fFlagLuaAppNarrowTileHideRating (ref), fFlagLuaAppNarrowTileHidePlayerCount (ref), gameTileConstants (ref), gameTileLayoutType (ref), reactModule (ref), seeAllTileModule (ref), gameCollectionItemType (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), getTileBadgeByPositionConfigFromEntry (ref), appGameTile (ref), fFlagLuaAppEnableSponsoredReportAd (ref), fFlagLuaAppNarrowTileSmallerFooterFont (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref)
 	local var6 = usePreferredInput()
 	local var7 = useNavigateToGameDetails()
 	local var8 = nil
@@ -46,22 +45,22 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
 	local var14 = useBreakpointXOrSmaller(responsiveModule.Keys.XSmall)
 	local var15 = if useBreakpointXOrSmaller(responsiveModule.Keys.Small) and (p23 > 0 and not (if fFlagLuaAppNarrowTileHideRating then p41 else fFlagLuaAppNarrowTileHidePlayerCount and p42)) then gameTileConstants.TileTextLines[p2 or gameTileLayoutType.Narrow].largeMetadataTextLines else gameTileConstants.TileTextLines[p2 or gameTileLayoutType.Narrow].metadataTextLines
 	
-	return reactModule.useCallback(function(p46, p47, p48, p49) --[[ line: 170 ]]
-		-- upvalues: p14 (ref), p12 (ref), reactModule (copy), seeAllTileModule (copy), gameCollectionItemType (copy), p22 (ref), p31 (ref), p29 (ref), p37 (ref), p20 (ref), p21 (ref), p13 (ref), p11 (ref), p10 (ref), p0 (ref), p15 (ref), p2 (ref), var12 (ref), p17 (ref), p7 (ref), p8 (ref), p9 (ref), p28 (ref), var7 (ref), p5 (ref), p23 (ref), p33 (ref), p32 (ref), p34 (ref), p35 (ref), p36 (ref), p30 (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (copy), p39 (ref), p43 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), p27 (ref), getTileBadgeByPositionConfigFromEntry (copy), appGameTile (copy), p3 (ref), p4 (ref), var13 (ref), p1 (ref), p16 (ref), p18 (ref), p19 (ref), fFlagLuaAppGameTileInteractionFeedback (copy), var8 (write), var9 (write), p24 (ref), var15 (write), p25 (ref), p26 (ref), var14 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), p38 (ref), fFlagLuaAppNarrowTileSmallerFooterFont (copy), p40 (ref), fFlagLuaAppNarrowTileHideRating (copy), p41 (ref), fFlagLuaAppNarrowTileHidePlayerCount (copy), p42 (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p44 (ref), fFlagLuaAppContinueSortInstantPlay (copy), p45 (ref)
-		if p14 and p47 == p14 and p12 then
-			return reactModule.createElement(seeAllTileModule, { onActivated = p12, size = p48, layoutOrder = p47 }), gameCollectionItemType.SeeAllTile
+	return reactModule.useCallback(function(p45, p46, p47, p48) --[[ line: 167 ]]
+		-- upvalues: p14 (ref), p12 (ref), reactModule (copy), seeAllTileModule (copy), gameCollectionItemType (copy), p22 (ref), p31 (ref), p29 (ref), p37 (ref), p20 (ref), p21 (ref), p13 (ref), p11 (ref), p10 (ref), p0 (ref), p15 (ref), p2 (ref), var12 (ref), p17 (ref), p7 (ref), p8 (ref), p9 (ref), p28 (ref), var7 (ref), p5 (ref), p23 (ref), p33 (ref), p32 (ref), p34 (ref), p35 (ref), p36 (ref), p30 (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (copy), p39 (ref), p43 (ref), fFlagLuaAppEnableHomepageOneByTwoTile (copy), p27 (ref), getTileBadgeByPositionConfigFromEntry (copy), appGameTile (copy), p3 (ref), p4 (ref), var13 (ref), p1 (ref), p16 (ref), p18 (ref), p19 (ref), fFlagLuaAppGameTileInteractionFeedback (copy), var8 (write), var9 (write), p24 (ref), var15 (write), p25 (ref), p26 (ref), var14 (ref), fFlagLuaAppEnableSponsoredReportAd (copy), p38 (ref), fFlagLuaAppNarrowTileSmallerFooterFont (copy), p40 (ref), fFlagLuaAppNarrowTileHideRating (copy), p41 (ref), fFlagLuaAppNarrowTileHidePlayerCount (copy), p42 (ref), fFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), p44 (ref)
+		if p14 and p46 == p14 and p12 then
+			return reactModule.createElement(seeAllTileModule, { onActivated = p12, size = p47, layoutOrder = p46 }), gameCollectionItemType.SeeAllTile
 		end
-		local var16 = if p22 then p22(p47) else nil
-		local universeId = p31 and p31[p46.universeId]
-		local var18 = if p29 then p29 + p47 else nil
+		local var16 = if p22 then p22(p46) else nil
+		local universeId = p31 and p31[p45.universeId]
+		local var18 = if p29 then p29 + p46 else nil
 		
-		if p46.customRenderFunction then
-			return p46.customRenderFunction({
-				item = p46,
-				index = p47,
-				itemSize = p48,
-				rowNum = p49,
-				zIndex = -p47,
+		if p45.customRenderFunction then
+			return p45.customRenderFunction({
+				item = p45,
+				index = p46,
+				itemSize = p47,
+				rowNum = p48,
+				zIndex = -p46,
 				maxItemIndex = p37,
 				SelectionOrder = var18,
 				isDisabled = var16,
@@ -95,13 +94,13 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
 			})
 		end
 		return reactModule.createElement(appGameTile, {
-			Size = p48,
-			entry = p46,
-			layoutOrder = p47,
-			ZIndex = -p47,
+			Size = p47,
+			entry = p45,
+			layoutOrder = p46,
+			ZIndex = -p46,
 			reportGameDetailOpened = p7,
 			reportExperienceLaunched = p8,
-			index = p47,
+			index = p46,
 			friendFooterEnabled = p3,
 			showFriendActivity = p4,
 			impressionsTag = p5,
@@ -114,7 +113,7 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
 			launchExperienceEventContext = p9,
 			referralSource = p10,
 			source = p11,
-			rowNum = p49,
+			rowNum = p48,
 			navigateToGameDetails = var7,
 			hideGameStats = p15,
 			playButtonStyle = p16,
@@ -143,14 +142,13 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
 			enableSponsoredFeedback = p35,
 			enableReportAd = if fFlagLuaAppEnableSponsoredReportAd then p36 else nil,
 			isSponsoredRatingFooterAllowed = p38,
-			badgeOverride = getTileBadgeByPositionConfigFromEntry(p46),
+			badgeOverride = getTileBadgeByPositionConfigFromEntry(p45),
 			onTileImageLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone and p39 and not universeId then p39 else nil,
 			compactMetadataFormat = if fFlagLuaAppNarrowTileSmallerFooterFont then p40 else nil,
 			hideRating = if fFlagLuaAppNarrowTileHideRating then p41 else nil,
 			hidePlayerCount = if fFlagLuaAppNarrowTileHidePlayerCount then p42 else nil,
 			hasPrevalidatedVideoGamePlayability = if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p44 else nil,
-			videoPlaybackContext = p43,
-			enableInstantPlay = if fFlagLuaAppContinueSortInstantPlay then p45 else nil
+			videoPlaybackContext = p43
 		}), gameCollectionItemType.GameTile
 	end, {
 		var13, p3, p15, p4, p5, p0, p1, p2, p13, p7, p8, p12, p9, p11, p10, p14, var12,
@@ -163,7 +161,6 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14,
 		if fFlagLuaAppNarrowTileSmallerFooterFont then p40 else nil,
 		if fFlagLuaAppNarrowTileHideRating then p41 else nil,
 		if fFlagLuaAppNarrowTileHidePlayerCount then p42 else nil,
-		if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p44 else nil, p43,
-		if fFlagLuaAppContinueSortInstantPlay then p45 else nil
+		if fFlagLuaAppUsePrevalidatedVideoGamePlayability then p44 else nil, p43
 	})
 end

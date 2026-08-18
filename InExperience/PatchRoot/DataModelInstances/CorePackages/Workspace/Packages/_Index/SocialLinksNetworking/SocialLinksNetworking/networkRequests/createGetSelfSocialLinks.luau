@@ -2,7 +2,7 @@
 
 return function(p0) --[[ line: 13 ]]
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.GET("GetSelfSocialLinks", function(p1, p2) --[[ line: 16 ]]
+	return p0.roduxNetworking.GET({ Name = "GetSelfSocialLinks" }, function(p1, p2) --[[ line: 16 ]]
 		-- upvalues: API_URLModule (copy)
 		return p1(API_URLModule):path("v1"):path("promotion-channels"):queryArgs({
 			alwaysReturnUrls = p2.alwaysReturnUrls,

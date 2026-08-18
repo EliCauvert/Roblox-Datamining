@@ -1784,134 +1784,6 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,要封鎖 {DisplayName} 嗎？
 Feature.BlockingModal.Message.BlockConfirmation,封鎖此使用者，系統會一併將對方從「聯絡對象」或「追蹤者」名單移除。移除後將無法向您傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,若封鎖此使用者，系統會一併將其從「好友」或「追蹤者」名單移除，對方將無法向你傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
-Feature.Build.Action.AddFriends,
-Feature.Build.Action.AddPlaytester,新增遊戲測試員
-Feature.Build.Action.AddPlaytesters,
-Feature.Build.Action.AddToPlaytest,新增至試玩
-Feature.Build.Action.Archive,封存
-Feature.Build.Action.ArchiveGame,封存遊戲
-Feature.Build.Action.Build,
-Feature.Build.Action.Buy,購買
-Feature.Build.Action.BuyRobux,
-Feature.Build.Action.Cancel,
-Feature.Build.Action.CopyText,複製文字
-Feature.Build.Action.Delete,
-Feature.Build.Action.HideAutosaved,隱藏自動儲存
-Feature.Build.Action.ManageLimit,管理上限
-Feature.Build.Action.Next,
-Feature.Build.Action.NotNow,
-Feature.Build.Action.NotifyMe,通知我
-Feature.Build.Action.OK,
-Feature.Build.Action.OpenSettings,開啟設定
-Feature.Build.Action.Playtest,試玩
-Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,發佈
-Feature.Build.Action.PublishLatest,發佈最新版本
-Feature.Build.Action.Restore,復原
-Feature.Build.Action.SetDailyLimit,設定每日上限
-Feature.Build.Action.SetLimit,設定上限
-Feature.Build.Action.Settings,
-Feature.Build.Action.Share,
-Feature.Build.Action.ShareLink,分享連結
-Feature.Build.Action.Submit,
-Feature.Build.Action.UpdateRating,更新分級
-Feature.Build.Action.UpdateWithChanges,更新變更
-Feature.Build.Action.View,檢視
-Feature.Build.Action.ViewUsage,查看使用量
-Feature.Build.Content.NewGame,新遊戲
-Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
-Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
-Feature.Build.Description.BuildIdeaGame,將想法化為遊戲
-Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
-Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
-Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
-Feature.Build.Description.ChoosePlaytesters,選擇好友協助你試玩。
-Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
-Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
-Feature.Build.Description.HubSettings,在創作者中心管理所有設定
-Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
-Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
-Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
-Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
-Feature.Build.Description.PlaytesterAccess,新增好友為遊戲測試員，或變更遊戲的受眾設定，讓更多人玩。
-Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
-Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
-Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
-Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
-Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
-Feature.Build.Header.AccessSharing,存取權與分享
-Feature.Build.Header.ContentMaturity,成年適宜內容
-Feature.Build.Header.CustomAnswer,自訂答案
-Feature.Build.Header.GameDetails,遊戲詳情
-Feature.Build.Header.Overview,概覽
-Feature.Build.Label.Access,存取權
-Feature.Build.Label.AdditionalUsage,額外組建使用量
-Feature.Build.Label.Available,可供使用
-Feature.Build.Label.BackToBuild,返回建立
-Feature.Build.Label.CaptureLibrary,截圖資料庫
-Feature.Build.Label.ContentRating,內容分級
-Feature.Build.Label.CreatorHub,創作者中心
-Feature.Build.Label.DescribeIdea,描述想法
-Feature.Build.Label.Description,
-Feature.Build.Label.FreeBuildUsage,免費組建使用量
-Feature.Build.Label.Friends,
-Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
-Feature.Build.Label.IconThumbnails,圖示和縮圖
-Feature.Build.Label.Loading,
-Feature.Build.Label.NoLimit,無上限
-Feature.Build.Label.ResetsDaily,每日重置
-Feature.Build.Label.Search,
-Feature.Build.Label.SearchGames,搜尋遊戲
-Feature.Build.Label.SearchTasks,搜尋任務
-Feature.Build.Label.SelectOption,選擇一個選項
-Feature.Build.Label.ShareAddedFriends,與你新增的好友分享
-Feature.Build.Label.Title,標題
-Feature.Build.Label.TitleDescription,標題和說明
-Feature.Build.Label.Unknown,未知
-Feature.Build.Label.Version,版本
-Feature.Build.Label.VersionTitleDesc,版本標題和說明
-Feature.Build.Label.Video,影片
-Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
-Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
-Feature.Build.Message.AllFriendsAdded,你已將所有好友新增為遊戲測試員。
-Feature.Build.Message.AudienceIneligible,不符合向此受眾發佈的資格
-Feature.Build.Message.ExpandAudience,在創作者中心擴大你的受眾資格
-Feature.Build.Message.ExperiencesLoadFailed,無法載入體驗
-Feature.Build.Message.FriendsLoadFailed,無法載入好友，請再試一次。
-Feature.Build.Message.GamePublishFailed,無法發佈遊戲，請再試一次。
-Feature.Build.Message.InvitesLoadFailed,無法載入邀請
-Feature.Build.Message.LinkCopied,連結已複製到剪貼簿。
-Feature.Build.Message.NoFriendsToAdd,你沒有可新增的好友。請先在 Roblox 上尋找可交流的對象。
-Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
-Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
-Feature.Build.Message.QuestionnaireNeeded,此遊戲是在組建之外編輯的。請完成內容問卷以發佈。
-Feature.Build.Message.ReadyToPlay,你的遊戲已可在 Roblox 上遊玩！
-Feature.Build.Message.RestoreVersionFailed,無法還原此版本，請再試一次。
-Feature.Build.Message.SaveChangesFailed,無法儲存變更，請再試一次。
-Feature.Build.Message.ShareLinkFailed,無法建立分享連結，請再試一次。
-Feature.Build.Message.TryAgain,再試一次。
-Feature.Build.Message.TurnToPortrait,將裝置切換為直放模式，以繼續進行遊戲。
-Feature.Build.Message.WhatToCreate,今天你想要建立什麼呢？
-Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
-Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
-Feature.Build.Title.Audience,受眾
-Feature.Build.Title.BuildUnavailable,無法使用組建
-Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
-Feature.Build.Title.Content,內容
-Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
-Feature.Build.Title.ExperienceAudience,體驗受眾
-Feature.Build.Title.FreeUsageReached,已達到免費組建使用量上限
-Feature.Build.Title.FriendsOnlyPlay,只有好友可以遊玩
-Feature.Build.Title.GameCreationDone,已完成遊戲創作
-Feature.Build.Title.GamePrivate,此遊戲僅限私人存取
-Feature.Build.Title.GenericError,
-Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
-Feature.Build.Title.Playtesters,遊戲測試員
-Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
-Feature.Build.Title.PushNotifications,推播通知
-Feature.Build.Title.Tasks,任務
-Feature.Build.Title.VersionHistory,版本歷史紀錄
-Feature.Build.Title.VersionInformation,版本資訊
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,允許
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -1927,7 +1799,7 @@ Feature.Captures.Action.Save,
 Feature.Captures.Action.SelectAllCaptures,全部選擇
 Feature.Captures.Action.Share,
 Feature.Captures.Action.ShareYourCapture,分享您的截圖
-Feature.Captures.Action.ViewCapture,
+Feature.Captures.Action.ViewCapture,檢視
 Feature.Captures.Body.AllowAccessToCaptures,這項體驗想要檢視並使用你的截圖。
 Feature.Captures.Body.SaveCapturesPrompt,您想儲存您的擷取內容嗎？
 Feature.Captures.Body.ShareCapturePrompt,您願意分享您的截圖嗎？
@@ -1965,7 +1837,7 @@ Feature.Captures.Title.DeleteMultipleCapturesWarning,
 Feature.Captures.Title.Gallery,圖庫
 Feature.Captures.Title.SaveCapturesPrompt,分享截圖
 Feature.Captures.Title.ShareCapturePrompt,
-Feature.Captures.Title.VideoCTA,
+Feature.Captures.Title.VideoCTA,影片
 Feature.Captures.Title.VideoCaptureInProgressTooltip,正在進行影片擷取
 Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,擷取期間語音聊天會靜音
 Feature.Captures.Toast.CaptureSaved,已儲存截圖
@@ -1979,7 +1851,7 @@ Feature.Captures.Toast.VideoCaptureInitializationNoDeviceSupportError,裝置不�
 Feature.Captures.Toast.VideoCaptureInitializationNoSpaceOnDeviceError,裝置的儲存空間不足，無法擷取影片
 Feature.Captures.Toast.VideoCaptureInitializationOtherError,啟動影片時發生錯誤
 Feature.Captures.Toast.VideoCaptureOtherError,錄製影片時發生錯誤
-Feature.Catalog.Action.Buy,
+Feature.Catalog.Action.Buy,購買
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,前往「自訂」頁面
 Feature.Catalog.Action.Checkout.ManageInCustomize,在「自訂」頁面中管理
@@ -2038,7 +1910,7 @@ Feature.Catalog.Heading.ItemInfo,道具資訊
 Feature.Catalog.Heading.ItemRemoved,道具已移除
 Feature.Catalog.Heading.ItemsOnSale,上架道具
 Feature.Catalog.Heading.NotForSale,
-Feature.Catalog.Heading.Overview,
+Feature.Catalog.Heading.Overview,概覽
 Feature.Catalog.Heading.PremiumOnly,僅限 Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,已達創作者上限
 Feature.Catalog.Heading.QuickMenu,快速選單
@@ -2403,7 +2275,7 @@ Feature.Chat.Heading.UserInvitedYouToJoinAGroup,{combinedName} 邀請你加入�
 Feature.Chat.Heading.YouWereInvitedToGroup,你已受邀加入群組
 Feature.Chat.Label.AddConnections,
 Feature.Chat.Label.AddFriends,
-Feature.Chat.Label.Available,
+Feature.Chat.Label.Available,可供使用
 Feature.Chat.Label.Blocked,
 Feature.Chat.Label.ChatDetails,聊天室資料
 Feature.Chat.Label.ChatDisabled,
@@ -2456,7 +2328,6 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1 個月
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1 週
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks} 週
 Feature.Chat.Label.Unavailable,
-Feature.Chat.Label.UnfilteredChat,無過濾聊天
 Feature.Chat.Label.UnknownUser,未知使用者
 Feature.Chat.Label.User,使用者
 Feature.Chat.Label.ViewProfile,檢視個人檔案
@@ -2812,7 +2683,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,即將推出新的方式，讓您能
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,透過 QR 碼或通訊錄新增其他已驗證年齡的使用者時，對方將成為信任的聯絡對象。更多選項即將推出。
 Feature.Friends.TCEducation.Title,新增您認識的人
 Feature.Friends.TCFeature.AndMore,更多功能即將推出
-Feature.Friends.TCFeature.ChatWithoutFilters,
+Feature.Friends.TCFeature.ChatWithoutFilters,無過濾聊天
 Feature.Friends.TCFeature.PartyVoice,Party 語音
 Feature.Friends.TFEducation.Modal.TextIntro,與認識的人一起玩 Roblox 更有趣。透過 QR 碼或通訊錄新增已完成年齡驗證的使用者，便可成為信任的聯絡對象，並解鎖額外的福利，例如：
 Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus,身為已完成年齡驗證且年滿 18 歲的使用者，你可以與其他已完成年齡驗證且年滿 18 歲的好友，以及信任的聯絡對象一起解鎖更多功能。
@@ -2842,12 +2713,11 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,已選取 {numerator} 位聯�
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,已選取 {selectedCount} 位聯繫對象
 Feature.FriendsMenu.Label.SelectedFriendsCount,已選取 {numerator}/{denominator} 名好友
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已選取 {selectedCount} 名好友
-Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,沒有興趣
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,
-Feature.GameDetails.Action.Undo,
+Feature.GameDetails.Action.Undo,復原
 Feature.GameDetails.Action.Unlock,
 Feature.GameDetails.Action.WhyThisAd,為何會顯示這則廣告
 Feature.GameDetails.Heading.PurchaseGame,解鎖此體驗
@@ -3052,7 +2922,6 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,開啟好友探索
 Feature.Moments.Action.AddMusic,新增音樂
 Feature.Moments.Action.AddSticker,新增貼紙
 Feature.Moments.Action.AddText,新增文字
-Feature.Moments.Action.AddVoice,新增語音
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3114,7 +2983,6 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,已查看所有目前的通知
 Feature.Moments.Label.Photos,相片
-Feature.Moments.Label.PostDeleted,美好時光已刪除
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
 Feature.Moments.Label.Reactions,反應
@@ -3127,15 +2995,13 @@ Feature.Moments.Label.RodeoPublishingTitle,正在發佈你的「美好時光」
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Roblox 上的美好時光
 Feature.Moments.Label.StayFriendlyModeration,請保持友善的互動
-Feature.Moments.Label.TextGenerateInProgressBody,請等候 AI 生成的文字，然後再手動編輯疊加圖層。
-Feature.Moments.Label.TextGenerateInProgressTitle,生成中
 Feature.Moments.Label.TextGenerateOverrideBody,生成的內容將取代目前的文字疊加圖層與說明。
 Feature.Moments.Label.TextGenerateOverrideTitle,文字將被取代
-Feature.Moments.Label.TextGeneratedBody,已新增 AI 生成的文字疊加圖層與說明
+Feature.Moments.Label.TextGeneratedBody,已新增 AI 生成的疊加圖層與說明
 Feature.Moments.Label.TextGeneratedTitle,已生成的文字
 Feature.Moments.Label.TextGenerationFailedBody,無法生成文字，請再試一次。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
-Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
+Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖執行生成程序，內容已遭到過濾。
 Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
@@ -3533,7 +3399,7 @@ Feature.SettingsHub.Action.InviteFriendsBack,
 Feature.SettingsHub.Action.MuteAll,全面靜音
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,
+Feature.SettingsHub.Action.OpenSettings,開啟設定
 Feature.SettingsHub.Action.Report.Done,
 Feature.SettingsHub.Action.TurnOn,
 Feature.SettingsHub.Action.Unblock,
@@ -3601,7 +3467,6 @@ Feature.SettingsHub.Label.NoConnectionsPageMessage,新增聯繫對象一起探�
 Feature.SettingsHub.Label.NoConnectionsScreen,建立聯繫對象，一起同樂！
 Feature.SettingsHub.Label.NoFriendsPageMessage,新增好友一起探索。
 Feature.SettingsHub.Label.NoFriendsScreen,結交好友，開始同樂！
-Feature.SettingsHub.Label.QuitButton,退出
 Feature.SettingsHub.Label.ReasonForAbuse,檢舉濫用的原因？
 Feature.SettingsHub.Label.Report.BlockDisplayName,封鎖 {DISPLAY_NAME}（@{RBX_NAME}）
 Feature.SettingsHub.Label.Report.OtherActionsHeader,其他可以採取的步驟
@@ -3804,7 +3669,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,確定要從群組中移除此人嗎？
 Feature.Squads.Description.RemoveFromParty,{displayName} 將從群組聊天中移除。
 Feature.Squads.Description.ScheduledPartyAlreadyExists,已有其他隊伍安排於所選時段
-Feature.Squads.Description.Title,
+Feature.Squads.Description.Title,標題
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,您已新增 {username} 和其他 {userCountMinusOne} 人到群組中
 Feature.Squads.Description.YouAddedToChat,您已新增 {username} 到群組中
@@ -3988,7 +3853,7 @@ Feature.VirtualEvents.Label.NewFeature,
 Feature.VirtualEvents.Label.NewLocation,新地點
 Feature.VirtualEvents.Label.NewMap,新地圖
 Feature.VirtualEvents.Label.NewSeason,新賽季
-Feature.VirtualEvents.Label.Quest,
+Feature.VirtualEvents.Label.Quest,任務
 Feature.VirtualEvents.Label.Rating,{rating}% 評分
 Feature.VirtualEvents.Label.ReminderSetForEventTime,「{eventName}」已設定提醒時間在 {eventTime}。
 Feature.VirtualEvents.Label.StartsInHours,{number} 小時後
@@ -3997,7 +3862,7 @@ Feature.VirtualEvents.Label.StartsInOneDay,1 天後
 Feature.VirtualEvents.Label.StartsInOneHour,1 小時後
 Feature.VirtualEvents.Label.StartsNow,立即開始
 Feature.VirtualEvents.NotNowButton,
-Feature.VirtualEvents.NotifyMe,
+Feature.VirtualEvents.NotifyMe,通知我
 Feature.VirtualEvents.ShareModalBody,複製下方活動連結即可邀請其他人參加活動或在聊天室分享活動。
 Feature.VirtualEvents.ShareModalCallToAction,分享到聊天室……
 Feature.VirtualEvents.ShareModalLinkCopy,

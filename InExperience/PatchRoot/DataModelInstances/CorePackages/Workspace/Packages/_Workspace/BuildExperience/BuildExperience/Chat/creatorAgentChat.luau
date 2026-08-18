@@ -1,13 +1,13 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local fFlagBuildExperienceClientDataModelToolsModule = require(buildExperience.Flags.FFlagBuildExperienceClientDataModelTools)
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local sharedFlagsModule = require(parent.SharedFlags)
 local signalsModule = require(parent.Signals)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
 local _ = require(script.Parent.chatTypes)
 local askUserControllerModule = require(script.Parent.askUserController)
-local var6 = if fFlagBuildExperienceClientDataModelTools then require(script.Parent.clientDataModelController) else nil
+local var7 = if fFlagBuildExperienceClientDataModelToolsModule then require(script.Parent.clientDataModelController) else nil
 local clientLogsControllerModule = require(script.Parent.clientLogsController)
 local localToolOverlayModule = require(script.Parent.localToolOverlay)
 local proposePlanControllerModule = require(script.Parent.proposePlanController)
@@ -37,7 +37,7 @@ local t_1 = {
 	[errorCodes.OutOfCredits] = localizationStringsModule.CHAT_ERROR_OUT_OF_CREDITS
 }
 
-local function getPromptFailureComposerError(p0) --[[ line: 85 ]]
+local function getPromptFailureComposerError(p0) --[[ line: 86 ]]
 	-- upvalues: localizationStringsModule (ref), t_1 (ref)
 	if p0.isContentPolicy then
 		return localizationStringsModule.CHAT_POLICY_REJECTION
@@ -50,7 +50,7 @@ local function getPromptFailureComposerError(p0) --[[ line: 85 ]]
 	end
 end
 
-local function getToolResultFailureComposerError(p1) --[[ line: 101 ]]
+local function getToolResultFailureComposerError(p1) --[[ line: 102 ]]
 	-- upvalues: forbidden (ref), localizationStringsModule (ref), t_1 (ref)
 	local t = {
 		outOfCreditsReason = nil,
@@ -70,12 +70,12 @@ local function getToolResultFailureComposerError(p1) --[[ line: 101 ]]
 	end
 end
 
-local function _(p2) --[[ line: 110 | named "getOutOfCreditsReason" ]]
+local function _(p2) --[[ line: 111 | named "getOutOfCreditsReason" ]]
 	-- upvalues: t (ref)
 	return if p2 == nil then nil else t[p2]
 end
 
-local function resolvePromptFailure(p3, p4) --[[ line: 119 ]]
+local function resolvePromptFailure(p3, p4) --[[ line: 120 ]]
 	-- upvalues: errorCodes (ref), t (ref), forbidden (ref)
 	if p3 == nil then
 		return if p4 == nil then nil else {
@@ -87,22 +87,22 @@ local function resolvePromptFailure(p3, p4) --[[ line: 119 ]]
 	elseif p3.status ~= "failed" then
 		return nil
 	end
-	local var20
+	local var21
 	local t_1 = { errorCode = p3.errorCode }
 	
 	if p3.errorCode == errorCodes.OutOfCredits then
 		local error = p3.error
-		var20 = if error == nil then nil else t[error]
+		var21 = if error == nil then nil else t[error]
 	else
-		var20 = nil
+		var21 = nil
 	end
-	t_1.outOfCreditsReason = var20
+	t_1.outOfCreditsReason = var21
 	t_1.isContentPolicy = p3.errorCode == forbidden
 	
 	return t_1
 end
 
-local function getPromptFailureTelemetryParameters(p5) --[[ line: 143 ]]
+local function getPromptFailureTelemetryParameters(p5) --[[ line: 144 ]]
 	local t = { isContentPolicy = tostring(p5.isContentPolicy) }
 	
 	if p5.errorCode ~= nil then
@@ -117,7 +117,7 @@ local function getPromptFailureTelemetryParameters(p5) --[[ line: 143 ]]
 	return t
 end
 
-local _ = function(value) --[[ line: 159 | named "formatSetupErrorMessage" ]]
+local _ = function(value) --[[ line: 160 | named "formatSetupErrorMessage" ]]
 	-- upvalues: localizationStringsModule (ref), t_1 (ref)
 	local t = {
 		isContentPolicy = false,
@@ -136,49 +136,49 @@ local _ = function(value) --[[ line: 159 | named "formatSetupErrorMessage" ]]
 	end
 end
 
-local function createLocalToolControllers(p6, p7, p8) --[[ line: 170 ]]
-	-- upvalues: localToolOverlayModule (ref), askUserControllerModule (ref), proposePlanControllerModule (ref), clientLogsControllerModule (ref), var6 (ref)
+local function createLocalToolControllers(p6, p7, p8) --[[ line: 171 ]]
+	-- upvalues: localToolOverlayModule (ref), askUserControllerModule (ref), proposePlanControllerModule (ref), clientLogsControllerModule (ref), var7 (ref)
 	local t = {}
-	local var24 = localToolOverlayModule()
-	local var25 = askUserControllerModule(p6, t, var24, p7)
-	local var26 = proposePlanControllerModule(p6, t, var24, p7)
-	local var27 = clientLogsControllerModule(p6, t, p8)
-	local var28 = if var6 ~= nil then nil else var6(p6, t, p8)
+	local var25 = localToolOverlayModule()
+	local var26 = askUserControllerModule(p6, t, var25, p7)
+	local var27 = proposePlanControllerModule(p6, t, var25, p7)
+	local var28 = clientLogsControllerModule(p6, t, p8)
+	local var29 = if var7 ~= nil then nil else var7(p6, t, p8)
 	
 	return {
-		getOptimisticLocalTools = var24.getOptimisticLocalTools,
-		getLocalToolActions = var24.getLocalToolActions,
-		hasDisplayedAnswerStack = var25.hasDisplayedAnswerStack,
-		syncFromTurnState = function(p9) --[[ line: 190 ]]
-			-- upvalues: var25 (ref), var26 (ref), var27 (ref), var28 (ref)
-			var25.syncAnswerStack(p9)
-			var26.syncPlanProposal(p9)
-			var27.syncClientLogsRequest(p9)
+		getOptimisticLocalTools = var25.getOptimisticLocalTools,
+		getLocalToolActions = var25.getLocalToolActions,
+		hasDisplayedAnswerStack = var26.hasDisplayedAnswerStack,
+		syncFromTurnState = function(p9) --[[ line: 191 ]]
+			-- upvalues: var26 (ref), var27 (ref), var28 (ref), var29 (ref)
+			var26.syncAnswerStack(p9)
+			var27.syncPlanProposal(p9)
+			var28.syncClientLogsRequest(p9)
 			
-			if var28 ~= nil then
-				var28.syncClientDataModelRequests(p9)
+			if var29 ~= nil then
+				var29.syncClientDataModelRequests(p9)
 			end
 		end,
-		trySubmitComposerText = function(p10) --[[ line: 198 ]]
-			-- upvalues: var25 (ref), var26 (ref)
-			return var25.trySubmitComposerText(p10) or var26.trySubmitComposerText(p10)
+		trySubmitComposerText = function(p10) --[[ line: 199 ]]
+			-- upvalues: var26 (ref), var27 (ref)
+			return var26.trySubmitComposerText(p10) or var27.trySubmitComposerText(p10)
 		end,
-		stopPending = function() --[[ line: 201 ]]
-			-- upvalues: var25 (ref), var26 (ref), var28 (ref)
-			var25.stopPendingAnswer()
-			var26.stopPendingPlan()
+		stopPending = function() --[[ line: 202 ]]
+			-- upvalues: var26 (ref), var27 (ref), var29 (ref)
+			var26.stopPendingAnswer()
+			var27.stopPendingPlan()
 			
-			if var28 ~= nil then
-				var28.revokePending()
+			if var29 ~= nil then
+				var29.revokePending()
 			end
 		end
 	}
 end
 
 return {
-	createLiveAssistantTurn = function(p11, p12, p13, p14, p15) --[[ line: 213 ]]
-		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelTools (ref), studioClientDataModelTools (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
-		local var29 = createLocalToolControllers(p11, p14, p15)
+	createLiveAssistantTurn = function(p11, p12, p13, p14, p15) --[[ line: 214 ]]
+		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelToolsModule (ref), studioClientDataModelTools (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
+		local var30 = createLocalToolControllers(p11, p14, p15)
 		local universeId = p11.universeId
 		local list = {
 			studioAskUserTool.LOCAL_TOOL_DEFINITION,
@@ -186,22 +186,22 @@ return {
 			studioClientLogsTool.LOCAL_TOOL_DEFINITION
 		}
 		
-		if fFlagBuildExperienceClientDataModelTools then
+		if fFlagBuildExperienceClientDataModelToolsModule then
 			table.insert(list, studioClientDataModelTools.SEARCH_LOCAL_TOOL_DEFINITION)
 			table.insert(list, studioClientDataModelTools.INSPECT_LOCAL_TOOL_DEFINITION)
 		end
-		local var31 = nil
-		var31 = p11.sendPrompt({
+		local var32 = nil
+		var32 = p11.sendPrompt({
 			prompt = p12,
 			promptMeta = {
 				_roblox = {
-					application = if fFlagBuildExperienceClientDataModelTools then "build-on-mobile" else nil,
+					application = if fFlagBuildExperienceClientDataModelToolsModule then "build-on-mobile" else nil,
 					localTools = list,
 					providerConfig = { universeId = universeId },
 					teamTestEnabled = fFlagEnableTeamTestLua
 				}
 			},
-			onDroppedChatMessage = function(p16) --[[ line: 244 ]]
+			onDroppedChatMessage = function(p16) --[[ line: 245 ]]
 				-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p11 (ref)
 				sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
 					universeId = universeId,
@@ -210,15 +210,15 @@ return {
 					messageId = p16
 				})
 			end,
-			onCompleted = function(p17) --[[ line: 258 ]]
-				-- upvalues: resolvePromptFailure (copy), var31 (write), debug (copy), universeId (ref), p11 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p13 (ref)
-				local var32 = resolvePromptFailure(p17, var31.getSetupError(false))
+			onCompleted = function(p17) --[[ line: 259 ]]
+				-- upvalues: resolvePromptFailure (copy), var32 (write), debug (copy), universeId (ref), p11 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p13 (ref)
+				local var33 = resolvePromptFailure(p17, var32.getSetupError(false))
 				
-				if var32 ~= nil then
+				if var33 ~= nil then
 					debug.log("info", "prompt send failed", {
-						errorCode = var32.errorCode,
-						isContentPolicy = var32.isContentPolicy,
-						setupStage = var32.setupStage,
+						errorCode = var33.errorCode,
+						isContentPolicy = var33.isContentPolicy,
+						setupStage = var33.setupStage,
 						universeId = universeId,
 						placeId = p11.placeId
 					})
@@ -226,18 +226,18 @@ return {
 						universeId = universeId,
 						placeId = p11.placeId,
 						conversationId = p11.getCasSessionId()
-					}, getPromptFailureTelemetryParameters(var32))
+					}, getPromptFailureTelemetryParameters(var33))
 				end
-				p13(var32)
+				p13(var33)
 			end
 		})
 		
 		return {
-			getOptimisticLocalTools = var29.getOptimisticLocalTools,
-			getLocalToolActions = var29.getLocalToolActions,
-			getSetupErrorText = function(value) --[[ line: 281 ]]
-				-- upvalues: var31 (write), localizationStringsModule (copy), t_1 (copy)
-				local setupError = var31.getSetupError(value)
+			getOptimisticLocalTools = var30.getOptimisticLocalTools,
+			getLocalToolActions = var30.getLocalToolActions,
+			getSetupErrorText = function(value) --[[ line: 282 ]]
+				-- upvalues: var32 (write), localizationStringsModule (copy), t_1 (copy)
+				local setupError = var32.getSetupError(value)
 				
 				if setupError == nil then
 					return nil
@@ -258,67 +258,67 @@ return {
 					return if errorCode == nil then localizationStringsModule.CHAT_DEFAULT_FAILURE else errorCode
 				end
 			end,
-			start = function() --[[ line: 286 ]]
-				-- upvalues: var31 (write)
-				var31.start()
+			start = function() --[[ line: 287 ]]
+				-- upvalues: var32 (write)
+				var32.start()
 			end,
-			stop = function() --[[ line: 292 ]]
-				-- upvalues: var29 (ref), var31 (write)
-				var29.stopPending()
-				var31.stop()
+			stop = function() --[[ line: 293 ]]
+				-- upvalues: var30 (ref), var32 (write)
+				var30.stopPending()
+				var32.stop()
 			end,
-			detach = var29.stopPending,
-			syncFromTurnState = var29.syncFromTurnState,
-			trySubmitComposerText = var29.trySubmitComposerText
+			detach = var30.stopPending,
+			syncFromTurnState = var30.syncFromTurnState,
+			trySubmitComposerText = var30.trySubmitComposerText
 		}
 	end,
-	createResumedAssistantTurn = function(p18, p19, p20, p21, p22, p23) --[[ line: 309 ]]
+	createResumedAssistantTurn = function(p18, p19, p20, p21, p22, p23) --[[ line: 310 ]]
 		-- upvalues: createLocalToolControllers (ref), signalsModule (ref), sendBuildExperienceEventModule (ref)
-		local var35 = createLocalToolControllers(p18, p22, p23)
-		local var36 = signalsModule.createSignal(nil)
-		local var37 = false
+		local var36 = createLocalToolControllers(p18, p22, p23)
+		local var37 = signalsModule.createSignal(nil)
 		local var38 = false
-		local var39 = nil
+		local var39 = false
 		local var40 = nil
+		local var41 = nil
 		
-		local function _() --[[ line: 331 | named "cleanupObservers" ]]
-			-- upvalues: var40 (write), var39 (write)
+		local function _() --[[ line: 332 | named "cleanupObservers" ]]
+			-- upvalues: var41 (write), var40 (write)
+			if var41 ~= nil then
+				var41()
+				var41 = nil
+			end
 			if var40 ~= nil then
 				var40()
 				var40 = nil
-			end
-			if var39 ~= nil then
-				var39()
-				var39 = nil
 			end
 		end
 		
-		local _ = function() --[[ line: 342 | named "finish" ]]
-			-- upvalues: var38 (write), var40 (write), var39 (write), p20 (ref)
-			if var38 then return end
-			var38 = true
+		local _ = function() --[[ line: 343 | named "finish" ]]
+			-- upvalues: var39 (write), var41 (write), var40 (write), p20 (ref)
+			if var39 then return end
+			var39 = true
 			
+			if var41 ~= nil then
+				var41()
+				var41 = nil
+			end
 			if var40 ~= nil then
 				var40()
 				var40 = nil
-			end
-			if var39 ~= nil then
-				var39()
-				var39 = nil
 			end
 			p20(nil)
 		end
 		
 		return {
-			getOptimisticLocalTools = var35.getOptimisticLocalTools,
-			getLocalToolActions = var35.getLocalToolActions,
-			getSetupErrorText = var36,
-			start = function() --[[ line: 353 ]]
-				-- upvalues: var37 (write), sendBuildExperienceEventModule (copy), p18 (ref), p21 (ref), var39 (write), var40 (write), signalsModule (copy), p19 (ref), var38 (write), p20 (ref)
-				if var37 then return end
-				var37 = true
+			getOptimisticLocalTools = var36.getOptimisticLocalTools,
+			getLocalToolActions = var36.getLocalToolActions,
+			getSetupErrorText = var37,
+			start = function() --[[ line: 354 ]]
+				-- upvalues: var38 (write), sendBuildExperienceEventModule (copy), p18 (ref), p21 (ref), var40 (write), var41 (write), signalsModule (copy), p19 (ref), var39 (write), p20 (ref)
+				if var38 then return end
+				var38 = true
 				local t = {
-					onDroppedChatMessage = function(p24) --[[ line: 359 ]]
+					onDroppedChatMessage = function(p24) --[[ line: 360 ]]
 						-- upvalues: sendBuildExperienceEventModule (copy), p18 (copy)
 						sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
 							universeId = p18.universeId,
@@ -332,56 +332,56 @@ return {
 				if p21 ~= nil then
 					t.afterSequenceId = p21
 				end
-				var39 = p18.startPollingActiveTurn(t)
-				var40 = signalsModule.createEffect(function(p25) --[[ line: 373 ]]
-					-- upvalues: p19 (copy), var38 (copy), var40 (copy), var39 (copy), p20 (copy)
+				var40 = p18.startPollingActiveTurn(t)
+				var41 = signalsModule.createEffect(function(p25) --[[ line: 374 ]]
+					-- upvalues: p19 (copy), var39 (copy), var41 (copy), var40 (copy), p20 (copy)
 					if p19.state(p25).isDone then
-						if var38 then return end
-						var38 = true
+						if var39 then return end
+						var39 = true
 						
+						if var41 ~= nil then
+							var41()
+							var41 = nil
+						end
 						if var40 ~= nil then
 							var40()
 							var40 = nil
-						end
-						if var39 ~= nil then
-							var39()
-							var39 = nil
 						end
 						p20(nil)
 					end
 				end)
 			end,
-			stop = function() --[[ line: 385 ]]
-				-- upvalues: var38 (write), var40 (write), var39 (write), var35 (ref), p19 (ref)
-				var38 = true
+			stop = function() --[[ line: 386 ]]
+				-- upvalues: var39 (write), var41 (write), var40 (write), var36 (ref), p19 (ref)
+				var39 = true
 				
+				if var41 ~= nil then
+					var41()
+					var41 = nil
+				end
 				if var40 ~= nil then
 					var40()
 					var40 = nil
 				end
-				if var39 ~= nil then
-					var39()
-					var39 = nil
-				end
-				var35.stopPending()
+				var36.stopPending()
 				p19.cancel()
 			end,
-			detach = function() --[[ line: 391 ]]
-				-- upvalues: var38 (write), var40 (write), var39 (write), var35 (ref)
-				var38 = true
+			detach = function() --[[ line: 392 ]]
+				-- upvalues: var39 (write), var41 (write), var40 (write), var36 (ref)
+				var39 = true
 				
+				if var41 ~= nil then
+					var41()
+					var41 = nil
+				end
 				if var40 ~= nil then
 					var40()
 					var40 = nil
 				end
-				if var39 ~= nil then
-					var39()
-					var39 = nil
-				end
-				var35.stopPending()
+				var36.stopPending()
 			end,
-			syncFromTurnState = var35.syncFromTurnState,
-			trySubmitComposerText = var35.trySubmitComposerText
+			syncFromTurnState = var36.syncFromTurnState,
+			trySubmitComposerText = var36.trySubmitComposerText
 		}
 	end,
 	getPromptFailureComposerError = getPromptFailureComposerError,

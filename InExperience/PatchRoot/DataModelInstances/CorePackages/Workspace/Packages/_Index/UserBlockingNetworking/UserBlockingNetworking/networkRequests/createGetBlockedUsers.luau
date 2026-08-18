@@ -2,7 +2,7 @@
 
 return function(p0) --[[ line: 14 ]]
 	-- upvalues: API_URLModule (ref)
-	return p0.roduxNetworking.GET("GetBlockedUsers", function(p1, p2) --[[ line: 17 ]]
+	return p0.roduxNetworking.GET({ Name = "GetBlockedUsers" }, function(p1, p2) --[[ line: 17 ]]
 		-- upvalues: API_URLModule (copy)
 		return p1(API_URLModule, { currentUserId = if p2 then p2.currentUserId else nil }):path("user-blocking-api"):path("v1"):path("users"):path("get-blocked-users"):queryArgs({
 			cursor = if p2 then p2.cursor else nil,
