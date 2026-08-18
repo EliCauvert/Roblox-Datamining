@@ -13,7 +13,7 @@ Roblox.LangDynamic["Feature.Accessibility"] = {
     "DeviceLevelTheme.Dark": "Dark",
     "DeviceLevelTheme.Light": "Light",
     "DeviceLevelTheme.System": "System",
-    "Heading.DevicePreferencesV2": "Device preferences",
+    "Heading.DevicePreferencesV2": "Device Preferences",
     "Heading.AppThemeMode": "Mode",
     "Description.AppThemeMode": "Select an app mode. Your other devices will not be affected.",
     "Heading.DeviceAppTheme": "App theme",

@@ -1299,6 +1299,26 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Message.SupportTicketDetailsTooLong": "The support ticket details are too long.",
     "Action.Start": "Start",
     "Label.HiddenPostsHeader": "Posts below are hidden",
-    "Label.HiddenPostHeader": "Post below is hidden"
+    "Label.HiddenPostHeader": "Post below is hidden",
+    "Action.Reset": "Reset",
+    "Label.NoSearchResults": "No results found",
+    "Action.SearchForums": "Search for keywords or @users",
+    "Action.SearchFilters": "Filters",
+    "Action.Filters": "Filters",
+    "Action.Apply": "Apply",
+    "Label.SearchAll": "Any",
+    "Label.SearchPosts": "Posts",
+    "Label.SearchComments": "Comments",
+    "Label.Category": "Category",
+    "Label.AllCategories": "All categories",
+    "Label.TimeRange": "Time range",
+    "Label.TimeRangeDay": "Last 24 hours",
+    "Label.TimeRangeWeek": "Last 7 days",
+    "Label.TimeRangeMonth": "Last 30 days",
+    "Label.TimeRangeAll": "All time",
+    "Label.NoSearchResultsText": "Try different keywords or adjust your filters",
+    "Label.MemberSearchHint": "Start typing to search members",
+    "Label.NoMembersFound": "No members found",
+    "Label.MemberSearchError": "Something went wrong. Please try again."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");
