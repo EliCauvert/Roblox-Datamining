@@ -178,6 +178,7 @@ Roblox.LangDynamic["Feature.Transactions"] = {
     "Tooltip.O18OneTimePayoutCombinedRateStandardAmount": "Standard rate: {robuxAmount} Robux",
     "Label.PrivateServerEngagementPayouts": "Private Server Engagement Payouts",
     "Description.AccessThroughCreatorHub": "You can now access your creator transactions on Creator Hub.",
-    "Description.GoToCreatorHubTransactions": "Go to {linkStart}Creator Hub Transactions{linkEnd}"
+    "Description.GoToCreatorHubTransactions": "Go to {linkStart}Creator Hub Transactions{linkEnd}",
+    "Label.TransactionTypeCreatorRewards": "Creator Rewards"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Transactions");

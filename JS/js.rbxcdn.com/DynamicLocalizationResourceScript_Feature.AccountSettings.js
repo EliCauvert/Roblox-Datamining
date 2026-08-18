@@ -1876,6 +1876,11 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Label.LiftPlatformAccessRestriction": "join Roblox, an age-based gaming platform",
     "Heading.LiftPlatformAccessRestriction": "Roblox access",
     "Label.RobuxTransferDailyLimit": "robux transfer daily limit",
-    "Label.RobuxTransferMonthlyLimit": "robux transfer monthly limit"
+    "Label.RobuxTransferMonthlyLimit": "robux transfer monthly limit",
+    "Response.PasskeyRenamedSuccessfully": "Passkey renamed successfully.",
+    "Heading.RenamePasskey": "Rename Passkey",
+    "Heading.RenameSecurityKey": "Rename Security Key",
+    "Action.Rename": "Rename",
+    "Description.SecurityKey.RenameKey": "Name your key descriptively so that you will know which one it is."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

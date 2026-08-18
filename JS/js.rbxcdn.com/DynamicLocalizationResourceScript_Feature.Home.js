@@ -254,6 +254,21 @@ Roblox.LangDynamic["Feature.Home"] = {
     "ClientCacheFallbackBanner.Label.RefreshPageToLoadContents": "Refresh page to load contents",
     "ClientCacheFallbackBanner.Action.Refresh": "Refresh",
     "BecauseYouPlayedX": "Because you played {ExperienceName}",
-    "Label.GameItemsSubtitle": "Enhance play with these recommended items"
+    "Label.GameItemsSubtitle": "Enhance play with these recommended items",
+    "Experiment.TextFilterEducation.Kids.Title.Warning": "Your chat could go away",
+    "Experiment.TextFilterEducation.General.Body.Romance.Modified": "To avoid losing access to chat, stay away from romance or dating.",
+    "Experiment.TextFilterEducation.Kids.Title.Modified": "We had to change or block some of your messages",
+    "Experiment.TextFilterEducation.Kids.Body.Respect": "Remember: Always use kind words.",
+    "Experiment.TextFilterEducation.Kids.Body.Spam": "Remember: Send each message only once.",
+    "Experiment.TextFilterEducation.Kids.Body.Pii": "Remember: keep your name, school, and where you live to yourself.",
+    "Experiment.TextFilterEducation.General.Title.Modified": "We had to change or block some of your recent messages",
+    "Experiment.TextFilterEducation.General.Title.Warning": "You’re close to losing chat",
+    "Experiment.TextFilterEducation.General.Body.Respect.Modified": "To avoid losing access to chat, always keep messages respectful.",
+    "Experiment.TextFilterEducation.General.Body.Respect.Warning": "We had to change or block some of your messages. Remember: always keep messages respectful.",
+    "Experiment.TextFilterEducation.General.Body.Spam.Modified": "To avoid losing access to chat, send each message only once.",
+    "Experiment.TextFilterEducation.General.Body.Spam.Warning": "We had to change or block some of your messages. Remember: send each message only once.",
+    "Experiment.TextFilterEducation.General.Body.Pii.Modified": "To avoid losing access to chat, keep your personal info to yourself.",
+    "Experiment.TextFilterEducation.General.Body.Pii.Warning": "We had to change or block some of your messages. Remember: keep your personal info to yourself.",
+    "Experiment.TextFilterEducation.General.Body.Romance.Warning": "We had to change or block some of your messages. Remember: stay away from romance or dating."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Home");
