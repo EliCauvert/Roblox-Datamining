@@ -216,5 +216,33 @@ return {
 		end
 		return if #substring_1 > 0 then substring .. var14.decimalSeparator .. substring_1 .. var16 else substring .. var16
 	end,
+	localizeDecimal = function(p12, p13, p14) --[[ line: 327 ]]
+		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
+		if p12 == 0 then
+			return "0"
+		elseif p14 == nil then
+			p14 = 2
+		end
+		local var24 = t[p13]
+		
+		if not var24 then
+			var24 = t["en-us"]
+			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p13), "en-us"))
+		end
+		local var25 = 10 ^ p14
+		local var26 = math.floor(math.abs(p12) * var25 + 0.5) / var25
+		local var27 = if p12 < 0 and var26 ~= 0 then "-" else ""
+		local formattedText = string.format(string.format("%%.%df", p14), var26)
+		local var29 = string.find(formattedText, "%.") or #formattedText + 1
+		local substring = string.sub(formattedText, 1, var29 - 1)
+		local substring_1 = string.sub(formattedText, var29 + 1, #formattedText)
+		
+		if var24.groupDelimiter then
+			substring = addGroupDelimiters(substring, var24.groupDelimiter)
+		end
+		local replaced = string.gsub(substring_1, "0+$", "")
+		
+		return if #replaced > 0 then var27 .. substring .. var24.decimalSeparator .. replaced else var27 .. substring
+	end,
 	logger = loggerModule
 }

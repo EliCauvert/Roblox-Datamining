@@ -77,6 +77,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,الهاتف أو كلم�
 Authentication.Login.Response.IncorrectUsernamePassword,اسم المستخدم أو كلمة المرور غير صحيحة.
 Authentication.Login.Response.InvalidPasskeyCredential,"تعذّر تسجيل الدخول باستخدام مفتاح المرور الذي أدخلته. لاستعادة الوصول، انتقل إلى ""نسيت كلمة المرور أو اسم المستخدم."""
 Authentication.Login.Response.MoreThanOneUsername,هذا البريد الإلكتروني مرتبط بأكثر من اسم مستخدم واحد. الرجاء تسجيل الدخول باستخدام اسم المستخدم الخاص بك.
+Authentication.Login.Response.PlatformAlreadyLinked,حساب منصّة {platform} هذا مرتبط بالفعل بحساب آخر على منصّة Roblox. يُرجى تسجيل الدخول باستخدام حساب منصّة Roblox المرتبط بهذا الحساب.
 Authentication.Login.Response.RelinkingFreeze,حساب Roblox هذا تم ربطه حساب آخر على {platform} خلال 90 يومًا الماضية. الرجاء محاولة تسجيل الدخول بحساب Roblox آخر.
 Authentication.Login.Response.Require2FA,التحقق بخطوتين غير مدعوم على الكونسول. الرجاء اتباع التعليمات المرفقة على جهة اليمين لتسجيل الدخول بشكل آمن.
 Authentication.Login.Response.Require2FAGeneric,عملية التحقق الإضافية المطلوبة غير مدعومة على هذا الجهاز. يُرجى اتّباع التعليمات الموضحة على جهة اليمين لتسجيل الدخول بشكل آمن.

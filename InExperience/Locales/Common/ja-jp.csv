@@ -94,6 +94,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,電話番号またはパ�
 Authentication.Login.Response.IncorrectUsernamePassword,ユーザーネーム、またはパスワードが間違っています。
 Authentication.Login.Response.InvalidPasskeyCredential,このパスキーではログインできません。アクセスを回復するには、「パスワードまたはユーザーネームを忘れた場合」にアクセスしてください。
 Authentication.Login.Response.MoreThanOneUsername,メールアドレスが複数のユーザーネームに関連付けられています。ユーザーネームでログインしてください。
+Authentication.Login.Response.PlatformAlreadyLinked,この{platform}アカウントは、すでに別のRobloxアカウントに紐づけられています。紐づけられているRobloxアカウントでログインしてください。
 Authentication.Login.Response.RelinkingFreeze,このRobloxアカウントは過去90日間に {platform} で別のアカウントに紐づけられています。別のRobloxアカウントでログインしてみてください。
 Authentication.Login.Response.Require2FA,2段階認証はコンソールには対応していません。右の手順に従って安全にログインしてください。
 Authentication.Login.Response.Require2FAGeneric,このデバイス上では追加の認証には対応していません。右側にある手順に従って安全にログインしてください。

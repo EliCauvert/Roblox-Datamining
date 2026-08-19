@@ -77,6 +77,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,Numero di telefono o pass
 Authentication.Login.Response.IncorrectUsernamePassword,Nome utente o password incorretti.
 Authentication.Login.Response.InvalidPasskeyCredential,"Impossibile accedere con questa passkey. Per riottenere l'accesso, vai su ""Password o nome utente dimenticati""."
 Authentication.Login.Response.MoreThanOneUsername,Il tuo indirizzo e-mail è associato a più di un nome utente. Accedi con il tuo nome utente.
+Authentication.Login.Response.PlatformAlreadyLinked,Questo account {platform} è già collegato a un altro account Roblox. Accedi con quest'ultimo.
 Authentication.Login.Response.RelinkingFreeze,Questo account Roblox è collegato a un altro account per {platform} negli ultimi 90 giorni. Prova ad accedere con un altro account Roblox.
 Authentication.Login.Response.Require2FA,La verifica in 2 passaggi non è supportata sulla console. Segui le istruzioni a destra per accedere in modo sicuro.
 Authentication.Login.Response.Require2FAGeneric,Su questo dispositivo non è supportato il metodo di verifica aggiuntivo. Segui le istruzioni a destra per accedere in modo sicuro.
@@ -3169,6 +3170,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Riduci a icona
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

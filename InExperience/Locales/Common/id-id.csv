@@ -94,6 +94,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,Nomor ponsel atau passwor
 Authentication.Login.Response.IncorrectUsernamePassword,Nama pengguna atau password salah.
 Authentication.Login.Response.InvalidPasskeyCredential,"Tidak dapat log in dengan passkey ini. Untuk mendapatkan kembali akses, buka ""Lupa Password atau Nama Pengguna""."
 Authentication.Login.Response.MoreThanOneUsername,Email kamu terhubung dengan lebih dari 1 nama pengguna. Harap log in dengan nama pengguna kamu.
+Authentication.Login.Response.PlatformAlreadyLinked,Akun {platform} ini sudah terhubung ke akun Roblox lain. Log in dengan akun Roblox yang terhubung.
 Authentication.Login.Response.RelinkingFreeze,Akun Roblox ini sudah terhubung ke akun di {platform} dalam 90 hari terakhir. Coba log in dengan akun Roblox yang berbeda.
 Authentication.Login.Response.Require2FA,Verifikasi 2 Langkah tidak didukung di konsol. Harap ikuti petunjuk di bagian kanan untuk log in dengan aman.
 Authentication.Login.Response.Require2FAGeneric,Verifikasi tambahan yang diperlukan tidak didukung di perangkat ini. Ikuti petunjuk di bagian kanan untuk log in secara aman.
@@ -3186,6 +3187,7 @@ Feature.Moments.Action.Join,Gabung
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Ciutkan
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

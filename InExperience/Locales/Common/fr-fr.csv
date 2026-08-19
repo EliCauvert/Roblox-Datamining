@@ -94,6 +94,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,Numéro de téléphone ou
 Authentication.Login.Response.IncorrectUsernamePassword,Nom d'utilisateur ou mot de passe incorrect.
 Authentication.Login.Response.InvalidPasskeyCredential,"Impossible de se connecter avec ce mot de passe. Pour regagner l'accès, allez dans ""Mot de passe oublié ou Nom d'utilisateur""."
 Authentication.Login.Response.MoreThanOneUsername,Ton adresse e-mail est associée à plus d'un nom d'utilisateur. Connecte-toi avec ton nom d'utilisateur.
+Authentication.Login.Response.PlatformAlreadyLinked,Ce compte {platform} est déjà associé à un autre compte Roblox. Connecte-toi avec ce dernier.
 Authentication.Login.Response.RelinkingFreeze,Ce compte Roblox a été lié à un autre compte sur {platform} au cours des 90 derniers jours. Essaie de te connecter avec un autre compte Roblox.
 Authentication.Login.Response.Require2FA,La vérification en 2 étapes n'est pas prise en charge sur la console. Suivre les instructions à droite pour vous connecter en toute sécurité.
 Authentication.Login.Response.Require2FAGeneric,La vérification supplémentaire requise n'est pas prise en charge sur cet appareil. Suivre les instructions à droite pour te connecter en toute sécurité.

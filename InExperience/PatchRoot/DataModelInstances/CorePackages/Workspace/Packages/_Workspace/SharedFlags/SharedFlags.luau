@@ -97,7 +97,9 @@ local sduiClientTemplateCache = sduiConfigFetchTakesPostBody and game:DefineFast
 local sduiEdpClientTemplateCache = sduiClientTemplateCache and game:DefineFastFlag("SduiEdpClientTemplateCache", false)
 local sduiPaginatePostBody = sduiConfigFetchTakesPostBody and game:DefineFastFlag("SduiPaginatePostBody", false)
 local fFlagSduiEdpPersistentActionBarPlayButtonModule = require(script.FFlagSduiEdpPersistentActionBarPlayButton)
+local sduiEdpActionBarJitterFix = fFlagSduiEdpPersistentActionBarPlayButtonModule and game:DefineFastFlag("SduiEdpActionBarJitterFix", false)
 local fFlagLuaAppPlayButtonViewRefactorModule = require(script.FFlagLuaAppPlayButtonViewRefactor)
+local appChatDiscloseUpdateSecondVersion = game:DefineFastFlag("AppChatDiscloseUpdateSecondVersion", false)
 
 return {
 	Debug = require(script.Debug),
@@ -264,6 +266,7 @@ return {
 	FFlagConnectionsToFriendsRename = require(script.FFlagConnectionsToFriendsRename),
 	FFlagConnectionsToFriendsRenameP1_v1 = require(script.FFlagConnectionsToFriendsRenameP1_v1),
 	FFlagAddFriendsPageCapitalization = require(script.FFlagAddFriendsPageCapitalization),
+	FFlagUserListFooterViewMore = require(script.FFlagUserListFooterViewMore),
 	FFlagAddFriendsPresenceStoreMigration = require(script.FFlagAddFriendsPresenceStoreMigration),
 	FFlagEnablePlatformProfileContextualMenuOption = require(script.FFlagEnablePlatformProfileContextualMenuOption),
 	FFlagPlayerSearchEnableOnlineFrequents = game:DefineFastFlag("PlayerSearchEnableOnlineFrequents", false),
@@ -581,7 +584,8 @@ return {
 	FFlagChatModeratedMaskRandomLength = game:DefineFastFlag("ChatModeratedMaskRandomLength", false),
 	FFlagEnableAppChatSnoozeMenuFocus = require(script.FFlagEnableAppChatSnoozeMenuFocus),
 	FFlagAppChatFixRootChatBackNavigation = require(script.FFlagAppChatFixRootChatBackNavigation),
-	FFlagAppChatDisclosureUpdateEnabled = game:DefineFastFlag("AppChatDisclosureUpdateEnabled", false),
+	FFlagAppChatDisclosureUpdateEnabled = game:DefineFastFlag("AppChatDisclosureUpdateEnabled", false) or appChatDiscloseUpdateSecondVersion,
+	FFlagAppChatDiscloseUpdateSecondVersion = appChatDiscloseUpdateSecondVersion,
 	FFlagStreamNotificationBellEntryPoint = require(script.FFlagStreamNotificationBellEntryPoint),
 	FFlagStreamNotificationsStandardizeClickEvents = require(script.FFlagStreamNotificationsStandardizeClickEvents),
 	FFlagStreamNotificationUXDropdown = require(script.FFlagStreamNotificationUXDropdown),
@@ -696,6 +700,7 @@ return {
 	FFlagInlineSurveyBranching = require(script.FFlagInlineSurveyBranching),
 	FFlagInlineSurveyChoiceTextEntry = require(script.FFlagInlineSurveyChoiceTextEntry),
 	FFlagEnableGlobalChatAbuseReporting = require(script.FFlagEnableGlobalChatAbuseReporting),
+	FFlagAbuseReportAttributedRBXSystemMessages = game:DefineFastFlag("AbuseReportAttributedRBXSystemMessages", false),
 	FFlagGenericAbuseReportingGranularExports = require(script.FFlagGenericAbuseReportingGranularExports),
 	FFlagChatLineReportingFocusFixesEnabled = require(script.FFlagChatLineReportingFocusFixesEnabled),
 	FFlagChatLineReportingGlobalMuteEnabled = game:DefineFastFlag("ChatLineReportingGlobalMuteEnabled2", false),
@@ -941,7 +946,7 @@ return {
 	FFlagSduiActionTelemetryHandler = game:DefineFastFlag("SduiActionTelemetryHandler2", false),
 	FFlagSduiActionSkipUnifiedLogging = game:DefineFastFlag("SduiActionSkipUnifiedLogging", false),
 	FFlagSduiEdpPersistentActionBarPlayButton = fFlagSduiEdpPersistentActionBarPlayButtonModule,
-	FFlagSduiEdpActionBarJitterFix = fFlagSduiEdpPersistentActionBarPlayButtonModule and game:DefineFastFlag("SduiEdpActionBarJitterFix", false),
+	FFlagSduiEdpActionBarJitterFix = sduiEdpActionBarJitterFix,
 	FFlagSduiEdpStoreImpressionsLogging = game:DefineFastFlag("SduiEdpStoreImpressionsLogging", false),
 	FFlagSduiDevStoreSeeAllImpressionsLogging = game:DefineFastFlag("SduiDevStoreSeeAllImpressionsLogging", false),
 	FFlagSduiQueryImpressionsLogging = game:DefineFastFlag("SduiQueryImpressionsLogging", false),
@@ -1653,7 +1658,7 @@ return {
 	FFlagBackpackResponsiveUnits = game:DefineFastFlag("BackpackResponsiveUnits", false),
 	FFlagEnableShareSheet = game:DefineFastFlag("EnableShareSheetForBuild", false),
 	FFlagFixLoginV2LandscapeLayout = game:DefineFastFlag("FixLoginV2LandscapeLayout", false),
-	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization12", false),
+	FFlagEnableLoginV2Modalization = game:DefineFastFlag("EnableLoginV2Modalization14", false),
 	FFlagRemoveUnusedConnectionStateRoduxSlice = require(script.FFlagRemoveUnusedConnectionStateRoduxSlice),
 	FFlagRemoveUnusedFriendStatusesRoduxSlice = require(script.FFlagRemoveUnusedFriendStatusesRoduxSlice),
 	FFlagRemoveUnusedGameThumbnailsRoduxSlice = require(script.FFlagRemoveUnusedGameThumbnailsRoduxSlice),

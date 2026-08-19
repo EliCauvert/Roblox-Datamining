@@ -85,6 +85,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,电话或密码不正确�
 Authentication.Login.Response.IncorrectUsernamePassword,用户名或密码不正确。
 Authentication.Login.Response.InvalidPasskeyCredential,无法使用此通行密钥登录。若要重新获取权限，请前往“忘记密码或用户名。”
 Authentication.Login.Response.MoreThanOneUsername,你的电子邮件与不止一个用户名关联。请使用你的用户名登录。
+Authentication.Login.Response.PlatformAlreadyLinked,此{platform}帐户已关联至另一个 Roblox 帐户。请使用已关联的 Roblox 帐户登录。
 Authentication.Login.Response.RelinkingFreeze,在过去的 90 天内，此 Roblox 帐户已访问{platform}的账号一个帐户。请使用一个不同的 Roblox 帐户尝试登录。
 Authentication.Login.Response.Require2FA,主机版不支援两步验证。请遵循右侧指示以安全登录。
 Authentication.Login.Response.Require2FAGeneric,此设备不支持额外验证。请遵循右侧指示以安全登录。
@@ -3194,6 +3195,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,播放
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

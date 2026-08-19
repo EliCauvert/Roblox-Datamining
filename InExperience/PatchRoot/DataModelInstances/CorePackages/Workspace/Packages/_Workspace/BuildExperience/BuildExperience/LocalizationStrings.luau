@@ -248,6 +248,14 @@ local t_1 = {
 	AGENT_PLAN_BUILD = "Build",
 	AGENT_PLAN_OVERVIEW = "Overview",
 	AGENT_PLAN_VIEW = "View",
+	ANALYTICS_DURATION_TEMPLATE = "{number} hrs",
+	ANALYTICS_METRIC_TITLE_ARPPU = "ARPPU",
+	ANALYTICS_METRIC_TITLE_D1_RETENTION = "D1 retention",
+	ANALYTICS_METRIC_TITLE_DAILY_ACTIVE_USERS = "Daily active users",
+	ANALYTICS_METRIC_TITLE_PAYER_CONVERSION = "Payer conversion",
+	ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE = "Playthrough rate",
+	ANALYTICS_METRIC_TITLE_TOTAL_PLAYTIME = "Total playtime",
+	ANALYTICS_PERCENT_TEMPLATE = "{number}%",
 	ANSWER_STACK_CUSTOM_ANSWER = "Custom answer",
 	ANSWER_STACK_NEXT = "Next",
 	ANSWER_STACK_SELECT_AN_OPTION = "Select an option",
@@ -603,6 +611,14 @@ if fFlagBuildLocalization then
 		AGENT_PLAN_BUILD = "Feature.Build.Action.Build",
 		AGENT_PLAN_OVERVIEW = "Feature.Build.Header.Overview",
 		AGENT_PLAN_VIEW = "Feature.Build.Action.View",
+		ANALYTICS_DURATION_TEMPLATE = "Feature.Build.Analytics.DurationHours",
+		ANALYTICS_METRIC_TITLE_ARPPU = "Feature.Build.Analytics.Title.Arppu",
+		ANALYTICS_METRIC_TITLE_D1_RETENTION = "Feature.Build.Analytics.Title.D1Retention",
+		ANALYTICS_METRIC_TITLE_DAILY_ACTIVE_USERS = "Feature.Build.Analytics.Title.DailyActiveUsers",
+		ANALYTICS_METRIC_TITLE_PAYER_CONVERSION = "Feature.Build.Analytics.Title.PayerConversion",
+		ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE = "Feature.Build.Analytics.Title.PlaythroughRate",
+		ANALYTICS_METRIC_TITLE_TOTAL_PLAYTIME = "Feature.Build.Analytics.Title.TotalPlaytime",
+		ANALYTICS_PERCENT_TEMPLATE = "Feature.Build.Analytics.Percent",
 		ANSWER_STACK_CUSTOM_ANSWER = "Feature.Build.Header.CustomAnswer",
 		ANSWER_STACK_NEXT = "Feature.Build.Action.Next",
 		ANSWER_STACK_SELECT_AN_OPTION = "Feature.Build.Label.SelectOption",
@@ -828,7 +844,7 @@ if fFlagBuildLocalization then
 		formatChatTurnFailureMessage = formatChatTurnFailureMessage,
 		formatChatWorkedDuration = formatChatWorkedDuration,
 		getChatToolActivityLabel = getChatToolActivityLabel,
-		getChatToolActivityLocalizationKey = function(p38, p39) --[[ line: 671 ]]
+		getChatToolActivityLocalizationKey = function(p38, p39) --[[ line: 683 ]]
 			-- upvalues: t_2 (ref)
 			if p38 == nil then
 				return nil

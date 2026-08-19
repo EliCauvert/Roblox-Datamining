@@ -441,7 +441,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 		clearActiveTool = clearActiveTool,
 		discardActiveTool = discardActiveTool,
 		updateCommittedEdit = updateCommittedEdit,
-		onDisabledToolActivated = function(p16) --[[ line: 745 ]]
+		onDisabledToolActivated = function(p16) --[[ line: 763 ]]
 			-- upvalues: getFFlagEnableMomentTextGeneration (copy), getIsGenerating (write), host (ref)
 			if getFFlagEnableMomentTextGeneration() and p16 == "text" and (getIsGenerating(false) and host.onGenerateTextManualEditBlocked ~= nil) then
 				host.onGenerateTextManualEditBlocked()
@@ -453,7 +453,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 		getVoiceCoachmarkDismissed = var29,
 		dismissVoiceCoachmark = dismissVoiceCoachmark,
 		publish = function() --[[ line: 538 ]]
-			-- upvalues: store (ref), host (ref), var23 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var24 (ref), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
+			-- upvalues: store (ref), host (ref), var23 (ref), dialogTypeModule (copy), dismissModal (ref), fFlagMomentTextGenerationFilteredSignal (copy), emitGeneratedTextFeedback (ref), getFFlagMomentsAnalyticsProducerPrereqs (copy), sessionManager (copy), funnelEventNames (copy), preview (ref), var24 (ref), cryoModule (copy), makeCreationEventFieldsModule (copy), eventNames (copy), getFFlagEnableMomentTextGeneration (copy), fireAnalyticsEventModule (copy), fFlagMomentsRealtimeSessionTelemetry (copy), momentsCommonModule (copy), fFlagMomentsContentStatsTelemetry (copy), dismiss (ref)
 			local description = store.getDescription(false)
 			
 			if host.isTextFiltered ~= nil and host.isTextFiltered(description) then
@@ -475,51 +475,58 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 			if host.createMoment ~= nil then
 				host.createMoment(store.getSelectedCapture(false), var24(false), description, var87, preview.playback.getTimeLength(false))
 			end
-			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(var87)))
+			local textOverlayEdits
+			local var88 = cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowPublished), makeCreationEventFieldsModule.makeCreationBaseFields(var87))
+			
+			if getFFlagEnableMomentTextGeneration() then
+				textOverlayEdits = store.getTextOverlayEdits(false)
+				var88 = cryoModule.Dictionary.join(var88, makeCreationEventFieldsModule.makeGeneratedTextOutcomeFields(store.getGeneratedDescription(false), description, store.getGeneratedSummary(false), if textOverlayEdits == nil or textOverlayEdits[1] == nil then nil else textOverlayEdits[1].text))
+			end
+			fireAnalyticsEventModule(eventNames.MomentsEditingFlowPublished, var88)
 			
 			if fFlagMomentsRealtimeSessionTelemetry then
 				momentsCommonModule.Analytics.reportMomentsCreationStep("published")
 			end
 			if fFlagMomentsContentStatsTelemetry then
-				local analytics = momentsCommonModule.Analytics
-				local var88 = var24(false)
-				local var89 = 0
+				textOverlayEdits = momentsCommonModule.Analytics
+				local var90 = var24(false)
+				local var91 = 0
 				
-				if var88.music ~= nil then
-					var89 += 1
-					analytics.reportMomentsPublishedWithEdit("music")
+				if var90.music ~= nil then
+					var91 += 1
+					textOverlayEdits.reportMomentsPublishedWithEdit("music")
 				end
-				if var88.trim ~= nil then
-					var89 += 1
-					analytics.reportMomentsPublishedWithEdit("trim")
+				if var90.trim ~= nil then
+					var91 += 1
+					textOverlayEdits.reportMomentsPublishedWithEdit("trim")
 				end
-				if var88.textOverlays ~= nil and #var88.textOverlays > 0 then
-					var89 += 1
-					analytics.reportMomentsPublishedWithEdit("text_overlay")
+				if var90.textOverlays ~= nil and #var90.textOverlays > 0 then
+					var91 += 1
+					textOverlayEdits.reportMomentsPublishedWithEdit("text_overlay")
 				end
-				if var88.stickerOverlays ~= nil and #var88.stickerOverlays > 0 then
-					var89 += 1
-					analytics.reportMomentsPublishedWithEdit("sticker")
+				if var90.stickerOverlays ~= nil and #var90.stickerOverlays > 0 then
+					var91 += 1
+					textOverlayEdits.reportMomentsPublishedWithEdit("sticker")
 				end
 				if description ~= nil and description ~= "" then
-					var89 += 1
-					analytics.reportMomentsPublishedWithEdit("description")
+					var91 += 1
+					textOverlayEdits.reportMomentsPublishedWithEdit("description")
 				end
-				analytics.reportMomentsPublishedEditCount(var89)
+				textOverlayEdits.reportMomentsPublishedEditCount(var91)
 				local selectedCapture = store.getSelectedCapture(false)
 				
 				if selectedCapture ~= nil then
-					analytics.reportMomentsPublishedByCaptureType(if selectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif selectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
+					textOverlayEdits.reportMomentsPublishedByCaptureType(if selectedCapture.CaptureType == Enum.CaptureType.Video then "video" elseif selectedCapture.CaptureType == Enum.CaptureType.Screenshot then "screenshot" else "unknown")
 				end
 			end
 			dismiss()
 		end,
-		exit = function() --[[ line: 753 ]]
+		exit = function() --[[ line: 771 ]]
 			-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), dismiss (ref)
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowExited, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowExited)))
 			dismiss()
 		end,
-		generateText = function() --[[ line: 629 ]]
+		generateText = function() --[[ line: 642 ]]
 			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy)
 			if getIsGenerating(false) then return end
 			if host.generateMomentText == nil then return end
@@ -534,16 +541,16 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 				end
 			end
 			setIsGenerating(true)
-			local var93 = host.generateMomentText(selectedCapture)
+			local var95 = host.generateMomentText(selectedCapture)
 			
-			if var93 == nil then
+			if var95 == nil then
 				setIsGenerating(false)
 				
 				return
 			elseif getFFlagEnableMomentTextGeneration() then
-				setActiveGeneration({ promise = var93, capture = selectedCapture })
+				setActiveGeneration({ promise = var95, capture = selectedCapture })
 			end
-			var93:andThen(function(p17) --[[ line: 656 ]]
+			var95:andThen(function(p17) --[[ line: 669 ]]
 				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)
@@ -573,30 +580,33 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 					
 					return
 				elseif p17.summary ~= nil and p17.summary ~= "" then
-					local var96
+					local var98
 					local textOverlayEdits = store.getTextOverlayEdits(false)
-					local var95 = if textOverlayEdits ~= nil then nil else textOverlayEdits[1]
+					local var97 = if textOverlayEdits ~= nil then nil else textOverlayEdits[1]
 					local _ = nil
 					
-					if getFFlagEnableMomentTextGeneration() and var95 ~= nil then
-						var96 = table.clone(var95)
-						var96.text = p17.summary
+					if getFFlagEnableMomentTextGeneration() and var97 ~= nil then
+						var98 = table.clone(var97)
+						var98.text = p17.summary
 					else
-						var96 = makeDefaultTextOverlayEditModule()
-						var96.text = p17.summary
+						var98 = makeDefaultTextOverlayEditModule()
+						var98.text = p17.summary
 					end
 					if textOverlayEdits == nil or #textOverlayEdits == 0 then
-						store.updateTextOverlayEdits({ var96 })
+						store.updateTextOverlayEdits({ var98 })
 					else
 						local cloned = table.clone(textOverlayEdits)
-						cloned[1] = var96
+						cloned[1] = var98
 						store.updateTextOverlayEdits(cloned)
+					end
+					if getFFlagEnableMomentTextGeneration() then
+						store.setGeneratedSummary(p17.summary)
 					end
 				end
 				if p17.description ~= nil and p17.description ~= "" then
 					store.updateDescription(p17.description)
 					
-					if fFlagMomentTextGenerationFilteredSignal then
+					if fFlagMomentTextGenerationFilteredSignal or getFFlagEnableMomentTextGeneration() then
 						store.setGeneratedDescription(p17.description)
 						store.setGenerationToken(p17.generationToken)
 						store.setGeneratedTextFeedback(nil)
@@ -611,7 +621,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 					host.onGenerateTextSuccess()
 				end
 				setIsGenerating(false)
-			end):catch(function() --[[ line: 727 ]]
+			end):catch(function() --[[ line: 745 ]]
 				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)

@@ -77,6 +77,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,หมายเลขโ�
 Authentication.Login.Response.IncorrectUsernamePassword,ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
 Authentication.Login.Response.InvalidPasskeyCredential,"ไม่สามารถลงชื่อเข้าใช้ด้วยพาสคีย์นี้ หากต้องการเข้าถึงอีกครั้ง ให้ไปที่ ""ลืมรหัสผ่านหรือชื่อผู้ใช้"""
 Authentication.Login.Response.MoreThanOneUsername,อีเมลของคุณเชื่อมโยงกับชื่อผู้ใช้มากกว่าหนึ่งชื่อ โปรดลงชื่อเข้าใช้ด้วยชื่อผู้ใช้ของคุณ
+Authentication.Login.Response.PlatformAlreadyLinked,บัญชี {platform} นี้เชื่อมโยงกับบัญชี Roblox อื่นอยู่แล้ว โปรดลงชื่อเข้าใช้ด้วยบัญชี Roblox ที่เชื่อมโยงอยู่
 Authentication.Login.Response.RelinkingFreeze,บัญชี Roblox นี้เชื่อมโยงอยู่กับบัญชีสำหรับ {platform} ใน 90 วันที่ผ่านมา โปรดลงชื่อเข้าใช้ด้วยบัญชี Roblox บัญชีอื่น
 Authentication.Login.Response.Require2FA,คอนโซลไม่รองรับการตรวจสอบยืนยันตัวตน 2 ขั้นตอน โปรดดำเนินการตามคำแนะนำด้านขวามือเพื่อลงชื่อเข้าใช้อย่างปลอดภัย
 Authentication.Login.Response.Require2FAGeneric,อุปกรณ์นี้ไม่รองรับการตรวจสอบยืนยันตัวตนเพิ่มเติม โปรดดำเนินการตามคำแนะนำด้านขวามือเพื่อลงชื่อเข้าใช้อย่างปลอดภัย
@@ -3173,6 +3174,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,ย่อ
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

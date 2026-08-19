@@ -77,6 +77,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,फ़ोन नंबर
 Authentication.Login.Response.IncorrectUsernamePassword,यूज़रनेम या पासवर्ड गलत है.
 Authentication.Login.Response.InvalidPasskeyCredential,"इस पास-की से साइन-इन नहीं किया जा सका. ऐक्सेस फिर से पाने के लिए, ""पासवर्ड या यूज़रनेम याद नहीं है"" पर जाएँ."
 Authentication.Login.Response.MoreThanOneUsername,आपका ईमेल एक से ज़्यादा यूज़रनेम से जुड़ा हुआ है. अपने यूज़रनेम से लॉग इन करें.
+Authentication.Login.Response.PlatformAlreadyLinked,यह {platform} अकाउंट पहले से ही किसी दूसरे Roblox अकाउंट से जुड़ा है. कृपया उस Roblox अकाउंट से लॉग इन करें.
 Authentication.Login.Response.RelinkingFreeze,"इस Roblox अकाउंट को पिछले 90 दिनों में, {platform} पर किसी दूसरे अकाउंट से लिंक किया गया है. किसी दूसरे Roblox अकाउंट से लॉग इन करने की कोशिश करें."
 Authentication.Login.Response.Require2FA,कंसोल पर 2-स्टेप वेरिफ़िकेशन सपोर्टेड नहीं है. सुरक्षित रूप से लॉग इन करने के लिए दाईं ओर दिए गए निर्देश फ़ॉलो करें.
 Authentication.Login.Response.Require2FAGeneric,डिवाइस पर अतिरिक्त ज़रूरी वेरिफ़िकेशन नहीं किया जा सकता. सुरक्षित रूप से लॉग-इन करने के लिए दाईं ओर दिए गए निर्देशों का पालन करें.
@@ -3171,6 +3172,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,छोटा करें
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

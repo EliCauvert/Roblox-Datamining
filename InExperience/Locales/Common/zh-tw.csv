@@ -93,6 +93,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,手機或密碼不正確�
 Authentication.Login.Response.IncorrectUsernamePassword,使用者名稱或密碼不正確。
 Authentication.Login.Response.InvalidPasskeyCredential,無法使用此密碼金鑰登入。如要重新獲得存取權，請前往「忘記密碼或使用者名稱」。
 Authentication.Login.Response.MoreThanOneUsername,有多組帳號加入此電子郵件地址，請以您的使用者名稱登入。
+Authentication.Login.Response.PlatformAlreadyLinked,此 {platform} 帳號已連結到其他 Roblox 帳號。請使用已連結的 Roblox 帳號登入。
 Authentication.Login.Response.RelinkingFreeze,這個 Roblox 帳號在過去 90 天內已連結到 {platform} 的其他帳號。請嘗試用其他 Roblox 帳號登入。
 Authentication.Login.Response.Require2FA,主機上不支持兩步驗證。請按照右邊的指示安全登入。
 Authentication.Login.Response.Require2FAGeneric,此裝置不支援必要的額外驗證。請按照右邊指示安全登入。
@@ -3187,6 +3188,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

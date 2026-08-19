@@ -92,7 +92,7 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 		useDraftRestoreEffectModule(p1.captureSource)
 		useDraftSaveEffectModule()
 	end
-	local var94
+	local var96
 	local var44 = useDeviceInsets()
 	local var45 = useTokens()
 	local var46 = useFormFactor()
@@ -220,58 +220,66 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 		if var54 == nil or var54.presentation ~= p5 or var50 ~= var54.step then
 			return nil
 		elseif var54.renderEditor ~= nil then
-			local var95 = var54.renderEditor(var43)
+			local var97 = var54.renderEditor(var43)
 			
-			return if var95 == nil then reactModule.createElement(stepStubModule(var54.kind), {}) else var95
+			return if var97 == nil then reactModule.createElement(stepStubModule(var54.kind), {}) else var97
 		end
 	end, { var54, var50, var43 })
 	local var73 = useMemo(function() --[[ line: 364 ]]
 		-- upvalues: signalsModule (copy)
-		local var96, var97 = signalsModule.createSignal(Vector2.zero)
+		local var98, var99 = signalsModule.createSignal(Vector2.zero)
 		
-		return { getItemSize = var96, setItemSize = var97 }
+		return { getItemSize = var98, setItemSize = var99 }
 	end, {})
 	local var74 = useMemo(function() --[[ line: 372 ]]
 		-- upvalues: signalsModule (copy)
-		local var98, var99 = signalsModule.createSignal(Vector2.zero)
+		local var100, var101 = signalsModule.createSignal(Vector2.zero)
 		
-		return { getItemResolution = var98, setItemResolution = var99 }
+		return { getItemResolution = var100, setItemResolution = var101 }
 	end, {})
 	local var75 = useMemo(function() --[[ line: 377 ]]
-		-- upvalues: var73 (ref), var74 (ref)
+		-- upvalues: signalsModule (copy)
+		local var102, var103 = signalsModule.createSignal(false)
+		
+		return { get = var102, set = var103 }
+	end, {})
+	local var76 = useSignalState(var75.get)
+	local var77 = useMemo(function() --[[ line: 383 ]]
+		-- upvalues: var73 (ref), var74 (ref), var75 (ref)
 		return {
 			getItemSize = var73.getItemSize,
-			getItemResolution = var74.getItemResolution
+			getItemResolution = var74.getItemResolution,
+			setIsOverlayDragging = var75.set
 		}
-	end, { var73, var74 })
-	local var76 = useCallback(function(p6) --[[ line: 381 ]]
+	end, { var73, var74, var75 })
+	local var78 = useCallback(function(p6) --[[ line: 391 ]]
 		-- upvalues: var73 (ref)
 		var73.setItemSize(p6.AbsoluteSize)
 	end, { var73 })
-	local var77 = useCallback(function(p7) --[[ line: 385 ]]
+	local var79 = useCallback(function(p7) --[[ line: 395 ]]
 		-- upvalues: var74 (ref)
 		var74.setItemResolution(p7)
 	end, { var74 })
-	local var78 = useMemo(function() --[[ line: 389 ]]
-		-- upvalues: var53 (ref), var43 (ref), var75 (ref)
+	local var80 = useMemo(function() --[[ line: 399 ]]
+		-- upvalues: var53 (ref), var43 (ref), var77 (ref)
 		local t = {}
 		
 		for i, v in var53 do
 			if v.renderPreviewLayer ~= nil then
-				t[v.kind .. "PreviewLayer"] = v.renderPreviewLayer(var43, var75)
+				t[v.kind .. "PreviewLayer"] = v.renderPreviewLayer(var43, var77)
 			end
 		end
 		return t
-	end, { var53, var43, var75 })
-	local var79 = if var47.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop
-	local var80 = getFFlagMomentsCreationBlockBackgroundInteractionModule()
+	end, { var53, var43, var77 })
+	local var81 = if var47.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop
+	local var82 = getFFlagMomentsCreationBlockBackgroundInteractionModule()
 	local createElement = reactModule.createElement
 	local t_1 = {
 		tag = "position-center-center anchor-center-center size-full-full",
 		backgroundStyle = var45.Color.Common.Scrim,
-		onActivated = if var80 then var69 else nil,
-		stateLayer = if var80 then t else nil,
-		testId = if var80 then "moments-creation-background-scrim" else nil
+		onActivated = if var82 then var69 else nil,
+		stateLayer = if var82 then t else nil,
+		testId = if var82 then "moments-creation-background-scrim" else nil
 	}
 	local t_2 = {}
 	local createElement_1 = reactModule.createElement
@@ -280,9 +288,9 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 		sizeConstraint = {
 			MaxSize = if var46 == formFactor.Wide then Vector2.new(600, 700) else nil
 		},
-		onActivated = if var80 then noopActivated else nil,
-		stateLayer = if var80 then t else nil,
-		testId = if var80 then "moments-creation-panel" else nil
+		onActivated = if var82 then noopActivated else nil,
+		stateLayer = if var82 then t else nil,
+		testId = if var82 then "moments-creation-panel" else nil
 	}
 	local t_4 = {
 		VoiceBackControls = if getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice then reactModule.createElement(voiceBackControlsModule) else nil,
@@ -315,13 +323,13 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 	local createElement_3 = reactModule.createElement
 	local t_7 = {
 		tag = "col align-x-center",
-		Size = var57:map(function(p8) --[[ line: 466 ]]
+		Size = var57:map(function(p8) --[[ line: 476 ]]
 			return UDim2.new(1, 0, 1, -p8)
 		end)
 	}
 	local t_8 = {}
 	local createElement_4 = reactModule.createElement
-	local var89 = "CanvasGroup"
+	local var91 = "CanvasGroup"
 	local t_9 = {
 		LayoutOrder = 1,
 		Size = UDim2.fromScale(1, 1),
@@ -343,10 +351,10 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 		}),
 		CaptureView = reactModule.createElement(captureViewModule, {
 			preview = var43.preview,
-			scaleType = var79,
-			onAbsoluteSizeChanged = var76,
-			onResolutionChanged = if getFFlagMomentsCreationTextOverlayResolutionScaleModule() then var77 else nil
-		}, var78)
+			scaleType = var81,
+			onAbsoluteSizeChanged = var78,
+			onResolutionChanged = if getFFlagMomentsCreationTextOverlayResolutionScaleModule() then var79 else nil
+		}, var80)
 	}
 	local createElement_5 = reactModule.createElement
 	local t_11 = {
@@ -369,14 +377,14 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 		})
 	}
 	
-	if var51 and var51.CaptureType == Enum.CaptureType.Video and (var50 == creationFlowStateModule.Gallery or var50 == creationFlowStateModule.Preview or getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice) and (var48 or getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice) then
-		var94 = reactModule.createElement
-		var94 = var94(playbackControlsModule, {
+	if var51 and var51.CaptureType == Enum.CaptureType.Video and (var50 == creationFlowStateModule.Gallery or var50 == creationFlowStateModule.Preview or getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice) and ((var48 or getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice) and not var76) then
+		var96 = reactModule.createElement
+		var96 = var96(playbackControlsModule, {
 			layoutOrder = 2,
 			preview = var43.preview,
 			toggleFitMode = var47.toggle,
 			isFitMode = var47.enabled,
-			onSeek = if getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice then function(p9) --[[ line: 544 ]]
+			onSeek = if getFFlagMomentsTTSAudioOverlayModule and var50 == creationFlowStateModule.Voice then function(p9) --[[ line: 554 ]]
 				-- upvalues: var43 (ref)
 				local ttsAudio = var43.ttsAudio
 				
@@ -389,10 +397,10 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 			end else nil
 		})
 	else
-		var94 = nil
+		var96 = nil
 	end
 	local createElement_6
-	t_12.PlaybackControls = var94
+	t_12.PlaybackControls = var96
 	t_10.PreviewMediaOverlay = createElement_5(view, t_11, t_12)
 	
 	if var50 == creationFlowStateModule.Preview then
@@ -415,7 +423,7 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 		createElement_6 = nil
 	end
 	t_10.EditCTABar = createElement_6
-	t_8.PreviewContainer = createElement_4(var89, t_9, t_10)
+	t_8.PreviewContainer = createElement_4(var91, t_9, t_10)
 	t_8.GalleryView = if var50 ~= creationFlowStateModule.Gallery then if captureSource ~= nil then reactModule.createElement(galleryViewModule, {
 		layoutOrder = 2,
 		hasMoreCaptures = false,
@@ -454,28 +462,28 @@ local function CreationFlowContent(p1) --[[ line: 143 ]]
 	}, createElement(view, t_1, t_2))
 end
 
-return function(p10) --[[ line: 651 | named "CreationFlowScreen" ]]
+return function(p10) --[[ line: 661 | named "CreationFlowScreen" ]]
 	-- upvalues: reactModule (ref), isTextFilteredModule (ref), var37 (ref), publishMomentModule (ref), foundationProvider (ref), colorMode (ref), creationControllerProvider (ref), CreationFlowContent (ref)
 	local onExit = p10.onExit
 	local host = p10.host
 	local captureSource = p10.captureSource
-	local var102 = reactModule.useMemo(function() --[[ line: 656 ]]
+	local var106 = reactModule.useMemo(function() --[[ line: 666 ]]
 		-- upvalues: host (ref), onExit (ref), captureSource (ref), isTextFilteredModule (copy), var37 (copy), publishMomentModule (copy)
 		return if host == nil then {
 			exitCreationFlow = onExit,
 			captureSource = captureSource,
 			isTextFiltered = isTextFilteredModule,
-			createMoment = if var37 then function(_, _, p11) --[[ line: 665 ]]
+			createMoment = if var37 then function(_, _, p11) --[[ line: 675 ]]
 				print(`[moments-creation] dev publish (not uploaded): "{p11}"`)
 			end else publishMomentModule
 		} else host
 	end, { host, onExit, captureSource })
 	
 	return reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
-		Root = reactModule.createElement(creationControllerProvider, { host = var102, excludeGallery = p10.excludeGallery }, {
+		Root = reactModule.createElement(creationControllerProvider, { host = var106, excludeGallery = p10.excludeGallery }, {
 			Content = reactModule.createElement(CreationFlowContent, {
 				excludeGallery = p10.excludeGallery,
-				captureSource = var102.captureSource
+				captureSource = var106.captureSource
 			})
 		})
 	})
