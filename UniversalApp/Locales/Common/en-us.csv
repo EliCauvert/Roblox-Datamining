@@ -1642,12 +1642,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Update existing look
 Feature.Avatar.Action.UpdateMakeupLook,Update look
 Feature.Avatar.Action.Zoom,Zoom
 Feature.Avatar.AvatarWidgetTitle,Explore Styles
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,Okay
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publish
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Your creation is ready to use.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"This background was generated with AI. By publishing, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory, and published items can't be edited."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item didn’t meet Community Standards
 Feature.Avatar.BackgroundGeneration.Error.Moderation,That prompt doesn't follow our guidelines. Try describing something else.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"This background doesn't follow the Roblox Community Standards, so it wasn't added to your inventory. Try generating a new one."
 Feature.Avatar.BackgroundGeneration.Error.System,Something went wrong generating your background. Please try again.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Description
+Feature.Avatar.BackgroundGeneration.Label.Name,Name
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background…
 Feature.Avatar.BackgroundGeneration.Title,Create Background
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publish to inventory
 Feature.Avatar.Backgrounds.Title,Backgrounds
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Adjustment is not available for this body style.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Default to original body colors
@@ -1832,7 +1846,7 @@ Feature.Avatar.Label.ModerationFailed,Moderation Failed
 Feature.Avatar.Label.Mood,Mood
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,These assets will no longer be available in this collection:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Posted Avatars will be public on Marketplace
-Feature.Avatar.Label.Name,Name
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Neck
 Feature.Avatar.Label.Newest,Newest
 Feature.Avatar.Label.NoExpiredItems,No Expired {itemType}
@@ -2145,7 +2159,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Open settings
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publish
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publish latest
 Feature.Build.Action.Restore,Restore
 Feature.Build.Action.Revert,
@@ -2200,7 +2214,7 @@ Feature.Build.Label.ContentRating,Content rating
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
-Feature.Build.Label.Description,Description
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Free Build usage
@@ -2747,7 +2761,7 @@ Feature.Catalog.Toast.UnfavoritedLook,Removed avatar from favorites
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
 Feature.Chat.Action.Cancel,
-Feature.Chat.Action.Confirm,Okay
+Feature.Chat.Action.Confirm,
 Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,Copy
 Feature.Chat.Action.Create,

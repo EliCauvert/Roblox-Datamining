@@ -759,6 +759,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,Ukuran mesh {partName} p
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Ukuran mesh {partName} pada sumbu {axis} sebesar '{currentSize}' kotak lebih kecil dari ukuran minimum yang diizinkan untuk setiap bagian yaitu '{minSize}' kotak. Perbesar mesh.
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Sambungan {attName} harus ada tepat 1 kali di dalam {partName} descendant.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (atau descendant-nya) berisi Atribut. Kamu perlu menghapus Atribut dari daftar berikut: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' memiliki properti yang tidak valid: {ProblematicProperties}. Batas byte yang ditampilkan terlampaui (batas 0 berarti properti harus kosong); properti lain berisi nilai NaN/Inf atau melebihi batas ukuran defaultnya.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Untuk meng-upload aset ke Roblox, kamu harus memilih persis 1 kejadian dan tipe upload yang terhubung."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} tidak boleh memiliki tag.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,String kesalahan uji kedua yang digunakan untuk memverifikasi alur kerja sinkronisasi terjemahan Hub-first dari awal hingga akhir.
@@ -1194,7 +1195,7 @@ Feature.Accessibility.Header.ShowInMenuBar,Tampilkan di bilah menu
 Feature.Accessibility.Heading.AppThemeMode,Mode
 Feature.Accessibility.Heading.DeviceAppTheme,Tema aplikasi
 Feature.Accessibility.Heading.DeviceLevelTheme,Tema level perangkat
-Feature.Accessibility.Heading.DevicePreferences,Preferensi perangkat
+Feature.Accessibility.Heading.DevicePreferences,Preferensi Perangkat
 Feature.Accessibility.Heading.DevicePreferencesV2,
 Feature.Accessibility.Heading.LaunchAtLogin,Luncurkan saat log in
 Feature.Accessibility.Heading.LaunchAtStartup,Luncurkan saat startup
@@ -2125,7 +2126,9 @@ Feature.Build.Action.Buy,Beli
 Feature.Build.Action.BuyRobux,Beli Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Salin teks
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,Jangan tanya lagi
 Feature.Build.Action.HideAutosaved,Sembunyikan yang disimpan otomatis
 Feature.Build.Action.ManageLimit,Kelola batas
 Feature.Build.Action.Next,
@@ -4569,6 +4572,9 @@ Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Kami memerlukan akses ke kameramu agar kamu dapat men-scan kode QR.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Pilih Izin
+2. Pilih Kontak
+3. Izinkan Roblox mengakses Kontakmu"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. Buka Pengaturan > Izin
 2. Pilih Kontak
 3. Izinkan Roblox mengakses Kontakmu"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Untuk terhubung dengan teman, izinkan Roblox mengakses kontakmu."

@@ -741,6 +741,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} मेश �
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} मेश के {axis} ऐक्सिस पर '{currentSize}' स्टड्स का साइज़, किसी अलग हिस्से के लिए मंज़ूर किए गए न्यूनतम साइज़ '{minSize}' स्टड्स से छोटा है. मेश का साइज़ बढ़ाएँ."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,अटैचमेंट {attName} को {partName} डिसेंडेंट के अंदर सिर्फ़ एक बार मौजूद होना चाहिए.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (या इसके डिसेंडेंट) में ऐट्रिब्यूट हैं. आपको इनसे ऐट्रिब्यूट हटाने होंगे: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' में अमान्य प्रॉपर्टी हैं : {ProblematicProperties}. दिखाई गई बाइट लिमिट पार हो गई है (0 की लिमिट का मतलब है कि प्रॉपर्टी खाली होनी चाहिए); किसी भी अन्य प्रॉपर्टी में NaN/Inf वैल्यू हैं या वह अपनी डिफ़ॉल्ट साइज़ लिमिट से ज़्यादा है.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Roblox पर कोई ऐसेट अपलोड करने के लिए, आपको ठीक 1 इंस्टैंस और उससे जुड़ा अपलोड टाइप चुनना होगा."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} इंस्टैंस में टैग नहीं होने चाहिए.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,दूसरे टेस्ट की एरर स्ट्रिंग का इस्तेमाल हब-फ़र्स्ट अनुवाद सिंक वर्कफ़्लो को एंड-टू-एंड वेरिफ़ाई करने के लिए किया जाता है.
@@ -2105,7 +2106,9 @@ Feature.Build.Action.Buy,
 Feature.Build.Action.BuyRobux,Robux खरीदें
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,टेक्स्ट कॉपी करें
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,दोबारा न पूछें
 Feature.Build.Action.HideAutosaved,ऑटो-सेव किए गए छिपाएँ
 Feature.Build.Action.ManageLimit,लिमिट मैनेज करें
 Feature.Build.Action.Next,आगे बढ़ें

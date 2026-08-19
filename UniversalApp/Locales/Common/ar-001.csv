@@ -4553,6 +4553,9 @@ Feature.SettingsHub.Description.CameraPermissionRequestQRCode,نحتاج إلى 
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. حدِّد ""الإذن""
 2. حدِّد ""جهات الاتصال""
 3. اسمح لمنصة Roblox بالوصول إلى جهات اتصالك"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. انتقِل إلى ""الإعدادات"" > ""الإذن""
+2. حدِّد ""جهات الاتصال""
+3. اسمح لمنصّة Roblox بالوصول إلى جهات اتصالك"
 Feature.SettingsHub.Description.ContactsPermissionIOS,للتواصل مع الأصدقاء، اسمح لمنصة Roblox بالوصول إلى جهات اتصالك.
 Feature.SettingsHub.Description.ContactsPermissionRequest,نحتاج إلى الوصول إلى جهات اتصالك لتتمكن من التواصل مع الأصدقاء.
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. حدِّد ""الإذن""

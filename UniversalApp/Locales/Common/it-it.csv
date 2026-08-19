@@ -743,6 +743,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"La dimensione dell'asse
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"La dimensione dell'asse {axis} della mesh {partName} (""{currentSize}"" stud) è inferiore alla dimensione minima consentita per le singole parti di ""{minSize}"" stud. Ingrandisci la mesh."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,L'allegato {attName} deve esistere esattamente una volta all'interno dei discendenti di {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (o i suoi discendenti) contengono attributi. È necessario rimuovere questi ultimi da quanto segue: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' ha proprietà non valide: {ProblematicProperties}. È stato superato un limite di byte mostrato (un limite di 0 significa che la proprietà deve essere vuota); qualsiasi altra proprietà contiene valori NaN/Inf o supera il suo limite di dimensione predefinito.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Per caricare una risorsa su Roblox, devi selezionare esattamente 1 istanza e il tipo di caricamento associato."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,L'istanza {ProblematicDescendantPath} non deve avere tag.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Seconda stringa di errore del test utilizzata per verificare il flusso di lavoro di sincronizzazione della traduzione Hub-first end-to-end.
@@ -2107,7 +2108,9 @@ Feature.Build.Action.Buy,Acquista
 Feature.Build.Action.BuyRobux,Acquista Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copia testo
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,Non chiedermelo più
 Feature.Build.Action.HideAutosaved,Nascondi salvataggi automatici
 Feature.Build.Action.ManageLimit,Gestisci limite
 Feature.Build.Action.Next,
@@ -4554,6 +4557,9 @@ Feature.SettingsHub.Action.Ok,
 Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Description.CameraPermissionRequestQRCode,Abbiamo bisogno di accedere alla tua fotocamera per permetterti di scansionare un codice QR.
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Seleziona Permesso
+2. Seleziona Contatti
+3. Consenti a Roblox di accedere ai tuoi contatti"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. Vai su Impostazioni > Permesso
 2. Seleziona Contatti
 3. Consenti a Roblox di accedere ai tuoi contatti"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Per connetterti con gli amici, consenti a Roblox di accedere ai tuoi contatti."

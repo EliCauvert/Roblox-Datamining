@@ -752,7 +752,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,“{partName}“网格�
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,“{partName}“网格在 {axis} 轴上的尺寸为“{currentSize}”格，小于单个部件允许的最小尺寸“{minSize}”格。请放大网格。
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件“{attName}”必须存在于“{partName}”的后代中，且只能存在一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,“{RootInstanceName}”（或其后代）包含属性。你需要从以下实例中移除属性：{InstanceNameList}
-Common.UGCValidation.ErrorLabel.PropertiesNotSensible,
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' 有无效属性： {ProblematicProperties}。超出了显示的字节限制（限制为 0 表示属性必须为空）；任何其他属性包含 NaN/Inf 值或超出其默认大小限制。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,要将素材上传到 Roblox，你必须选择恰好 1 个实例及其关联的上传类型。
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,实例 {ProblematicDescendantPath} 不应有标签。
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,第二个测试错误字符串，用于验证端到端 Hub-first 翻译同步工作流程。
@@ -1633,12 +1633,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,更新现有造型
 Feature.Avatar.Action.UpdateMakeupLook,更新造型
 Feature.Avatar.Action.Zoom,缩放
 Feature.Avatar.AvatarWidgetTitle,探索风格
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -2127,7 +2141,7 @@ Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,复制文本
 Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
-Feature.Build.Action.DontAskAgain,
+Feature.Build.Action.DontAskAgain,不再询问
 Feature.Build.Action.HideAutosaved,隐藏自动保存版本
 Feature.Build.Action.ManageLimit,管理限额
 Feature.Build.Action.Next,下一个

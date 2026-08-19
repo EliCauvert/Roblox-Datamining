@@ -4572,6 +4572,9 @@ Feature.SettingsHub.Description.CameraPermissionRequestQRCode,QRコードをス�
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. [権限] を選択
 2. [連絡先] を選択
 3. Robloxに [連絡先] へのアクセスを許可"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. [設定] > [権限] に移動
+2. 連絡先を選択
+3. Robloxに連絡先へのアクセスを許可"
 Feature.SettingsHub.Description.ContactsPermissionIOS,友達とつながるには、Robloxが連絡先にアクセスできるようにします。
 Feature.SettingsHub.Description.ContactsPermissionRequest,友達とつながるには、連絡先へのアクセスが必要です。
 Feature.SettingsHub.Description.QRCodeCameraPermissionAndroid,"1. [権限] を選択

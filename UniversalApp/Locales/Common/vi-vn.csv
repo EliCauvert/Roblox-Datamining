@@ -759,6 +759,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"Lưới bề mặt {par
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"Lưới bề mặt {partName} có kích thước trục {axis} là ""{currentSize}"" stud và nhỏ hơn kích thước tối thiểu được phép (""{minSize}"" stud) cho từng bộ phận riêng lẻ. Hãy tăng kích thước của lưới bề mặt."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Chỗ đính {attName} phải tồn tại duy nhất một lần trong các mục con của {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (hoặc các mục con) có chứa Thuộc tính. Bạn cần xóa Thuộc tính khỏi các mục sau: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" có các thuộc tính không hợp lệ: {ProblematicProperties}. Đã vượt quá giới hạn số byte được hiển thị (giới hạn 0 có nghĩa là thuộc tính phải trống). Bất kỳ thuộc tính nào khác đều có thể chứa các giá trị NaN/Inf hoặc vượt quá giới hạn kích thước mặc định của nó."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Để tải một tài sản lên Roblox, bạn phải chọn chính xác 1 trường hợp và loại tải lên tương ứng."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Phiên bản {ProblematicDescendantPath} không được phép gắn thẻ.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Chuỗi lỗi thử nghiệm thứ hai được sử dụng để xác minh quy trình đồng bộ hóa bản dịch Hub-first (ưu tiên xử lý tại Trung tâm) từ đầu đến cuối.
@@ -2125,7 +2126,9 @@ Feature.Build.Action.Buy,Mua
 Feature.Build.Action.BuyRobux,Mua Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Sao chép văn bản
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,Không hỏi lại
 Feature.Build.Action.HideAutosaved,Ẩn phiên bản lưu tự động
 Feature.Build.Action.ManageLimit,Quản lý hạn mức
 Feature.Build.Action.Next,
