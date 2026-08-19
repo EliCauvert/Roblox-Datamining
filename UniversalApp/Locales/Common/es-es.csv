@@ -386,6 +386,7 @@ Authentication.Login.Response.InvalidEmail,Dirección de correo electrónico no 
 Authentication.Login.Response.InvalidPasskeyCredential,"No se puede iniciar sesión con esta llave. Para recuperar el acceso, ve a ""Olvidé la contraseña o el nombre de usuario."""
 Authentication.Login.Response.MoreThanOneUsername,Tu correo electrónico está asociado a más de un nombre de usuario. Inicia sesión con tu nombre de usuario.
 Authentication.Login.Response.NoLoginMethods,No hay métodos de inicio de sesión disponibles para esta cuenta. Intenta recuperar la cuenta o ponte en contacto con Soporte.
+Authentication.Login.Response.PlatformAlreadyLinked,Esta cuenta de {platform} ya está vinculada a otra cuenta de Roblox. Inicia sesión con la cuenta de Roblox vinculada.
 Authentication.Login.Response.RelinkingFreeze,Esta cuenta de Roblox se vinculó a otra cuenta en {platform} en los últimos 90 días. Intenta iniciar sesión con una cuenta Roblox diferente.
 Authentication.Login.Response.Require2FA,La verificación de 2 pasos no es compatible con la consola. Sigue las instrucciones de la derecha para iniciar sesión de forma segura.
 Authentication.Login.Response.Require2FAGeneric,La verificación obligatoria adicional no es compatible con este dispositivo. Sigue las instrucciones de la derecha para iniciar sesión de forma segura.

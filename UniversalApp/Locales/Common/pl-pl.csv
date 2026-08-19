@@ -386,6 +386,7 @@ Authentication.Login.Response.InvalidEmail,Nieprawidłowy adres e-mail.
 Authentication.Login.Response.InvalidPasskeyCredential,"Nie można zalogować się za pomocą tego klucza dostępu. Aby odzyskać dostęp, kliknij „Nie pamiętam hasła lub nazwy użytkownika”."
 Authentication.Login.Response.MoreThanOneUsername,Twój adres e-mail jest powiązany z więcej niż jedną nazwą użytkownika. Zaloguj się za pomocą nazwy użytkownika.
 Authentication.Login.Response.NoLoginMethods,Dla tego konta nie są dostępne żadne metody logowania. Spróbuj odzyskać konto lub skontaktuj się z działem wsparcia.
+Authentication.Login.Response.PlatformAlreadyLinked,To konto {platform} jest już powiązane z innym kontem Roblox. Zaloguj się na powiązane konto Roblox.
 Authentication.Login.Response.RelinkingFreeze,To konto Roblox zostało już powiązane z innym konto w {platform} w ciągu ostatnich 90 dni. Zaloguj się na inne konto Roblox.
 Authentication.Login.Response.Require2FA,"Weryfikacja dwuetapowa nie jest obsługiwana na konsoli. Aby bezpiecznie się zalogować, postępuj zgodnie z instrukcjami po prawej stronie."
 Authentication.Login.Response.Require2FAGeneric,"Wymagana dodatkowa weryfikacja nie jest obsługiwana na tym urządzeniu. Aby bezpiecznie się zalogować, postępuj zgodnie z instrukcjami po prawej stronie."
@@ -3694,6 +3695,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimalizuj
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,Odtwórz
 Feature.Moments.Action.Post,Zamieść
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

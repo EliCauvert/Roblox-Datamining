@@ -386,6 +386,7 @@ Authentication.Login.Response.InvalidEmail,
 Authentication.Login.Response.InvalidPasskeyCredential,"Die Anmeldung mit diesem Passkey ist nicht möglich. Um wieder Zugang zu erhalten, wähle ""Passwort oder Benutzernamen vergessen?"" aus."
 Authentication.Login.Response.MoreThanOneUsername,Deine E-Mail-Adresse ist mehr als 1 Benutzernamen zugeordnet. Melde dich bitte mit deinem Benutzernamen an.
 Authentication.Login.Response.NoLoginMethods,"Für dieses Konto sind keine Anmeldemethoden verfügbar. Bitte versuche, dein Konto wiederherzustellen, oder wende dich an den Support."
+Authentication.Login.Response.PlatformAlreadyLinked,Dieses {platform}-Konto ist bereits mit einem anderen Roblox-Konto verknüpft. Bitte melde dich mit dem verknüpften Roblox-Konto an.
 Authentication.Login.Response.RelinkingFreeze,Dieses Roblox-Konto wurde in den letzten 90 Tagen bereits mit einem anderen Konto auf {platform} verknüpft. Bitte versuche dich mit einem anderen Roblox-Konto anzumelden.
 Authentication.Login.Response.Require2FA,"Zweistufige Verifizierung wird auf Konsolen nicht unterstützt. Bitte folge den Anweisungen rechts, um dich sicher anzumelden."
 Authentication.Login.Response.Require2FAGeneric,"Eine zusätzlich erforderliche Verifizierung wird auf diesem Gerät nicht unterstützt. Bitte folge den Anweisungen rechts, um dich sicher anzumelden."

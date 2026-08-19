@@ -386,6 +386,7 @@ Authentication.Login.Response.InvalidEmail,Địa chỉ email không hợp lệ.
 Authentication.Login.Response.InvalidPasskeyCredential,"Không thể đăng nhập bằng mã xác nhận này. Để lấy lại quyền truy cập, hãy truy cập ""Quên mật khẩu hoặc tên người dùng""."
 Authentication.Login.Response.MoreThanOneUsername,Địa chỉ email của bạn được liên kết với nhiều hơn một tên người dùng. Vui lòng đăng nhập bằng tên người dùng của bạn.
 Authentication.Login.Response.NoLoginMethods,Không có phương thức đăng nhập nào khả dụng cho tài khoản này. Vui lòng thử khôi phục tài khoản hoặc liên hệ với bộ phận hỗ trợ.
+Authentication.Login.Response.PlatformAlreadyLinked,Tài khoản {platform} này đã được liên kết với một tài khoản Roblox khác. Vui lòng đăng nhập bằng tài khoản Roblox đã liên kết.
 Authentication.Login.Response.RelinkingFreeze,Tài khoản Roblox này đã được liên kết với một tài khoản dùng cho {platform} trong vòng 90 ngày gần đây. Vui lòng thử đăng nhập bằng một tài khoản Roblox khác.
 Authentication.Login.Response.Require2FA,Xác thực 2 bước không được hỗ trợ trên máy chơi game. Vui lòng tuân theo hướng dẫn bên phải để đăng nhập một cách an toàn.
 Authentication.Login.Response.Require2FAGeneric,Bước xác minh bổ sung bắt buộc không được hỗ trợ trên thiết bị này. Vui lòng làm theo hướng dẫn ở bên phải để đăng nhập an toàn.
@@ -3694,6 +3695,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Thu nhỏ
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,Phát
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,Báo cáo
 Feature.Moments.Action.Retry,

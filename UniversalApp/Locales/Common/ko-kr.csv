@@ -387,6 +387,7 @@ Authentication.Login.Response.InvalidEmail,유효하지 않은 이메일 주소�
 Authentication.Login.Response.InvalidPasskeyCredential,이 패스키로 로그인할 수 없습니다. 액세스를 다시 확보하려면 '비밀번호 또는 사용자 이름 분실'을 이용하세요.
 Authentication.Login.Response.MoreThanOneUsername,이메일이 1개 이상의 사용자 이름과 연결되어 있습니다. 사용자 이름으로 로그인하세요.
 Authentication.Login.Response.NoLoginMethods,이 계정에 로그인할 수 있는 방법이 없습니다. 계정 복구를 시도하거나 지원 센터에 문의하세요.
+Authentication.Login.Response.PlatformAlreadyLinked,이 {platform} 계정은 이미 다른 Roblox 계정에 연결되어 있습니다. 연결된 Roblox 계정으로 로그인하세요.
 Authentication.Login.Response.RelinkingFreeze,지난 90일 동안 {platform}상의 다른 계정에 연결된 Roblox 계정입니다. 다른 Roblox 계정으로 로그인해 보세요.
 Authentication.Login.Response.Require2FA,콘솔에서는 2단계 인증이 지원되지 않습니다. 안전하게 로그인하려면 오른쪽의 안내 사항을 따르세요.
 Authentication.Login.Response.Require2FAGeneric,이 기기에서는 추가적인 필수 인증이 지원되지 않습니다. 안전하게 로그인하려면 오른쪽의 안내 사항을 따르세요.
@@ -3697,6 +3698,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,최소화
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

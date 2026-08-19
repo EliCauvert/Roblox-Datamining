@@ -386,6 +386,7 @@ Authentication.Login.Response.InvalidEmail,Geçersiz e-posta adresi.
 Authentication.Login.Response.InvalidPasskeyCredential,"Bu geçiş anahtarıyla giriş yapılamıyor. Yeniden erişim sağlamak için şuraya git: ""Şifreyi veya Kullanıcı Adını Unuttum""."
 Authentication.Login.Response.MoreThanOneUsername,E-postan birden fazla kullanıcı adıyla ilişkilendirilmiş. Lütfen kullanıcı adınla giriş yap.
 Authentication.Login.Response.NoLoginMethods,Bu hesap için hiçbir giriş yapma yöntemi mevcut değil. Lütfen hesap kurtarmayı dene ya da destek ekibiyle iletişime geç.
+Authentication.Login.Response.PlatformAlreadyLinked,Bu {platform} hesabı zaten başka bir Roblox hesabına bağlı. Lütfen bağlı Roblox hesabıyla giriş yap.
 Authentication.Login.Response.RelinkingFreeze,Bu Roblox hesabı son 90 gün içinde {platform} için hesap bir hesaba bağlandı. Lütfen farklı bir Roblox hesabıyla giriş yapmayı dene.
 Authentication.Login.Response.Require2FA,"2 Aşamalı Doğrulama, konsolda desteklenmiyor. Güvenli bir şekilde oturum açmak için lütfen sağdaki talimatları izle."
 Authentication.Login.Response.Require2FAGeneric,"Gerekli ek doğrulama, bu cihazda desteklenmiyor. Güvenli bir şekilde oturum açmak için lütfen sağdaki talimatları izle."

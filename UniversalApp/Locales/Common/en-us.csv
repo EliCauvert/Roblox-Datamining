@@ -387,6 +387,7 @@ Authentication.Login.Response.InvalidEmail,Invalid email address.
 Authentication.Login.Response.InvalidPasskeyCredential,"Unable to sign in with this passkey. To regain access, go to ""Forgot Password or Username."""
 Authentication.Login.Response.MoreThanOneUsername,Your email is associated with more than one username. Please log in with your username.
 Authentication.Login.Response.NoLoginMethods,No sign-in methods are available for this account. Please try account recovery or contact support.
+Authentication.Login.Response.PlatformAlreadyLinked,This {platform} account is already linked to another Roblox account. Please log in with the linked Roblox account.
 Authentication.Login.Response.RelinkingFreeze,This Roblox account has linked to another account on {platform} in the past 90 days. Please try logging in with a different Roblox account.
 Authentication.Login.Response.Require2FA,2-Step Verification is not supported on console. Please follow the instructions on the right to securely log in.
 Authentication.Login.Response.Require2FAGeneric,Additional required verification is not supported on this device. Please follow the instructions on the right to securely log in.
@@ -3715,6 +3716,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimize
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
