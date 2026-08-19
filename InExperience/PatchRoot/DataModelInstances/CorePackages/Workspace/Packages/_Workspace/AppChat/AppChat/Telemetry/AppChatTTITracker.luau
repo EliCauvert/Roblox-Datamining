@@ -3,6 +3,8 @@ local parent = appChat.Parent
 local appChatPerf = require(appChat.Logger):new("AppChatPerf")
 local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
 local milestone = timeToInteractiveTracker.Milestone
+local pageGateModule = require(parent.PageGate)
+local fFlagEnablePLTPrefetchCallbacks = pageGateModule.FFlagEnablePLTPrefetchCallbacks
 local cryoModule = require(parent.Cryo)
 local _ = require(parent.SocialCommon)
 local appChatPerfEventInfoModule = require(appChat.Telemetry.AppChatPerfEventInfo)
@@ -15,7 +17,7 @@ local t = {
 }
 local t_1 = {}
 
-local function _(p0) --[[ line: 60 | named "getTTIState" ]]
+local function _(p0) --[[ line: 62 | named "getTTIState" ]]
 	-- upvalues: t_1 (ref), t (ref)
 	if not t_1[p0] then
 		t_1[p0] = table.clone(t)
@@ -23,18 +25,18 @@ local function _(p0) --[[ line: 60 | named "getTTIState" ]]
 	return t_1[p0]
 end
 
-local var6 = nil
+local var7 = nil
 local t_2 = {}
 local t_3 = { category = appChatPerfEventInfoModule.TTI_CATEGORY }
-local var9 = nil
+local var10 = nil
 
-local function alwaysMatch(_) --[[ line: 101 ]]
+local function alwaysMatch(_) --[[ line: 103 ]]
 	return true, nil
 end
 
-local function matchConversation(p1) --[[ line: 105 ]]
-	-- upvalues: var6 (write)
-	if p1.conversationId and var6 and p1.conversationId ~= var6 then
+local function matchConversation(p1) --[[ line: 107 ]]
+	-- upvalues: var7 (write)
+	if p1.conversationId and var7 and p1.conversationId ~= var7 then
 		return false, "conversation_id_mismatch"
 	end
 	return true, nil
@@ -43,39 +45,39 @@ end
 local t_4 = {
 	useBaseName = true,
 	noInteractiveState = true,
-	getColdStart = function(_) --[[ line: 123 ]]
+	getColdStart = function(_) --[[ line: 125 ]]
 		return false
 	end,
 	isContextMatching = matchConversation
 }
 local t_5 = {
 	ChatLandingTTI = {
-		getColdStart = function(p2) --[[ line: 136 ]]
+		getColdStart = function(p2) --[[ line: 138 ]]
 			return p2.coldStart == true
 		end,
 		isContextMatching = alwaysMatch
 	},
 	ChatConversationTTI = {
-		getColdStart = function(p3) --[[ line: 142 ]]
+		getColdStart = function(p3) --[[ line: 144 ]]
 			-- upvalues: t_2 (ref)
 			local conversationId = p3.conversationId
-			local var15 = conversationId ~= nil and not t_2[conversationId]
+			local var16 = conversationId ~= nil and not t_2[conversationId]
 			
 			if conversationId then
 				t_2[conversationId] = true
 			end
-			return var15
+			return var16
 		end,
 		isContextMatching = matchConversation,
-		onStart = function(p4) --[[ line: 112 ]]
-			-- upvalues: var6 (write), var9 (write)
+		onStart = function(p4) --[[ line: 114 ]]
+			-- upvalues: var7 (write), var10 (write)
 			local conversationId = p4.conversationId
 			
-			if conversationId ~= nil and conversationId ~= var6 then
-				var6 = conversationId
+			if conversationId ~= nil and conversationId ~= var7 then
+				var7 = conversationId
 				
-				if var9 then
-					var9("ChatConversationTTI")
+				if var10 then
+					var10("ChatConversationTTI")
 				end
 			end
 		end
@@ -84,7 +86,7 @@ local t_5 = {
 	MessageReceiveTTI = t_4
 }
 
-local function buildTTIMetadata(p5, p6) --[[ line: 162 ]]
+local function buildTTIMetadata(p5, p6) --[[ line: 164 ]]
 	-- upvalues: appChatPerfEventInfoModule (ref), cryoModule (ref), t_3 (write)
 	local TTIPage = appChatPerfEventInfoModule.getTTIPage(p5)
 	
@@ -92,69 +94,69 @@ local function buildTTIMetadata(p5, p6) --[[ line: 162 ]]
 end
 
 return {
-	setSharedContext = function(value) --[[ line: 176 ]]
+	setSharedContext = function(value) --[[ line: 178 ]]
 		-- upvalues: t_3 (write), cryoModule (ref), appChatPerf (ref)
 		t_3 = cryoModule.Dictionary.join(t_3, value)
 		appChatPerf:debug("Shared context updated: placement={}, entryPoint={}, hasActiveParty={}", value.placement or "nil", value.entryPoint or "nil", value.hasActiveParty or false)
 	end,
-	getSharedContext = function() --[[ line: 186 ]]
+	getSharedContext = function() --[[ line: 188 ]]
 		-- upvalues: t_3 (write)
 		return t_3
 	end,
-	setOnConversationSwitch = function(value) --[[ line: 192 ]]
-		-- upvalues: var9 (write)
-		var9 = value
+	setOnConversationSwitch = function(value) --[[ line: 194 ]]
+		-- upvalues: var10 (write)
+		var10 = value
 	end,
-	start = function(p7, p8) --[[ line: 196 ]]
+	start = function(p7, p8) --[[ line: 198 ]]
 		-- upvalues: t_1 (ref), appChatPerf (ref), t_5 (ref), appChatPerfEventInfoModule (ref), t_3 (write), timeToInteractiveTracker (ref), buildTTIMetadata (ref), cryoModule (ref)
-		local var17 = t_1[p7]
+		local var18 = t_1[p7]
 		
-		if var17 and var17.started then
-			appChatPerf:debug("TTI Start ignored: {} (reason=already_started, eventName={})", p7, var17.eventName)
+		if var18 and var18.started then
+			appChatPerf:debug("TTI Start ignored: {} (reason=already_started, eventName={})", p7, var18.eventName)
 			
 			return false
 		end
-		local var18 = t_5[p7]
+		local var19 = t_5[p7]
 		
-		if var18.onStart then
-			var18.onStart(p8)
+		if var19.onStart then
+			var19.onStart(p8)
 		end
-		local coldStart = var18.getColdStart(p8)
-		local var20 = if var18.useBaseName then appChatPerfEventInfoModule.getTTIBaseName(p7) else appChatPerfEventInfoModule.buildTTIEventName(p7, t_3.placement, coldStart)
+		local coldStart = var19.getColdStart(p8)
+		local var21 = if var19.useBaseName then appChatPerfEventInfoModule.getTTIBaseName(p7) else appChatPerfEventInfoModule.buildTTIEventName(p7, t_3.placement, coldStart)
 		t_1[p7] = {
 			started = true,
 			interactive = false,
 			interactiveTimestamp = nil,
-			eventName = var20
+			eventName = var21
 		}
-		appChatPerf:debug("TTI Start: {} (coldStart={}, conversationId={}, entryPoint={})", var20, coldStart, p8.conversationId, p8.entryPoint)
-		timeToInteractiveTracker.trackStart(var20)
-		timeToInteractiveTracker.updateMetadata(var20, buildTTIMetadata(p7, cryoModule.Dictionary.join(p8, { coldStart = coldStart })))
+		appChatPerf:debug("TTI Start: {} (coldStart={}, conversationId={}, entryPoint={})", var21, coldStart, p8.conversationId, p8.entryPoint)
+		timeToInteractiveTracker.trackStart(var21)
+		timeToInteractiveTracker.updateMetadata(var21, buildTTIMetadata(p7, cryoModule.Dictionary.join(p8, { coldStart = coldStart })))
 		
 		return true
 	end,
-	finish = function(p9, p10) --[[ line: 243 ]]
-		-- upvalues: t_5 (ref), t_1 (ref), t (ref), appChatPerf (ref), timeToInteractiveTracker (ref), buildTTIMetadata (ref), milestone (ref)
-		local var21 = t_5[p9]
+	finish = function(p9, p10) --[[ line: 245 ]]
+		-- upvalues: t_5 (ref), t_1 (ref), t (ref), appChatPerf (ref), timeToInteractiveTracker (ref), buildTTIMetadata (ref), milestone (ref), fFlagEnablePLTPrefetchCallbacks (ref), pageGateModule (ref)
+		local var22 = t_5[p9]
 		
 		if not t_1[p9] then
 			t_1[p9] = table.clone(t)
 		end
-		local var22 = t_1[p9]
+		local var23 = t_1[p9]
 		
-		if not var22.started then
+		if not var23.started then
 			appChatPerf:debug("TTI End ignored: {} (reason=not_started)", p9)
 			
 			return false
 		end
-		local var23, var24 = var21.isContextMatching(p10)
+		local var24, var25 = var22.isContextMatching(p10)
 		
-		if not var23 then
-			appChatPerf:debug("TTI End ignored: {} (reason={})", p9, var24 or "unknown")
+		if not var24 then
+			appChatPerf:debug("TTI End ignored: {} (reason={})", p9, var25 or "unknown")
 			
 			return false
 		end
-		local eventName = var22.eventName
+		local eventName = var23.eventName
 		
 		if eventName == nil then
 			appChatPerf:debug("TTI End ignored: {} (reason=missing_event_name)", p9)
@@ -167,30 +169,33 @@ return {
 		if timeToInteractiveTracker.trackMilestone then
 			timeToInteractiveTracker.trackMilestone(eventName, milestone.SurfaceReady)
 		end
-		timeToInteractiveTracker.trackEnd(eventName)
-		var22.started = false
-		
-		if not var21.noInteractiveState then
-			var22.interactive = true
-			var22.interactiveTimestamp = os.clock()
+		if fFlagEnablePLTPrefetchCallbacks and p9 == "ChatLandingTTI" then
+			pageGateModule.signal(pageGateModule.Page.Party, pageGateModule.Milestone.SurfaceReady)
 		end
-		var22.eventName = nil
+		timeToInteractiveTracker.trackEnd(eventName)
+		var23.started = false
+		
+		if not var22.noInteractiveState then
+			var23.interactive = true
+			var23.interactiveTimestamp = os.clock()
+		end
+		var23.eventName = nil
 		
 		return true
 	end,
-	cancel = function(p11, _) --[[ line: 282 ]]
+	cancel = function(p11, _) --[[ line: 291 ]]
 		-- upvalues: t_1 (ref), t (ref), appChatPerf (ref), timeToInteractiveTracker (ref)
 		if not t_1[p11] then
 			t_1[p11] = table.clone(t)
 		end
-		local var25 = t_1[p11]
+		local var26 = t_1[p11]
 		
-		if not var25.started then
+		if not var26.started then
 			appChatPerf:debug("TTI Cancel ignored: {} (reason=not_started)", p11)
 			
 			return false
 		end
-		local eventName = var25.eventName
+		local eventName = var26.eventName
 		
 		if eventName == nil then
 			appChatPerf:debug("TTI Cancel ignored: {} (reason=missing_event_name)", p11)
@@ -199,107 +204,107 @@ return {
 		end
 		appChatPerf:debug("TTI Cancel: {}", eventName)
 		timeToInteractiveTracker.resetEvent(eventName)
-		var25.started = false
-		var25.interactive = false
-		var25.interactiveTimestamp = nil
-		var25.eventName = nil
+		var26.started = false
+		var26.interactive = false
+		var26.interactiveTimestamp = nil
+		var26.eventName = nil
 		
 		return true
 	end,
-	isActive = function(p12, p13) --[[ line: 306 ]]
+	isActive = function(p12, p13) --[[ line: 315 ]]
 		-- upvalues: t_5 (ref), t_1 (ref), t (ref)
-		local var26 = t_5[p12]
+		local var27 = t_5[p12]
 		
 		if not t_1[p12] then
 			t_1[p12] = table.clone(t)
 		end
-		return if t_1[p12].started then var26.isContextMatching(p13) else false
+		return if t_1[p12].started then var27.isContextMatching(p13) else false
 	end,
-	trackMilestone = function(p14, p15, p16) --[[ line: 320 ]]
+	trackMilestone = function(p14, p15, p16) --[[ line: 329 ]]
 		-- upvalues: timeToInteractiveTracker (ref), t_5 (ref), t_1 (ref), t (ref), appChatPerf (ref)
 		if not timeToInteractiveTracker.trackMilestone then
 			return false
 		end
-		local var27 = t_5[p14]
+		local var28 = t_5[p14]
 		
 		if not t_1[p14] then
 			t_1[p14] = table.clone(t)
 		end
-		local var28 = t_1[p14]
+		local var29 = t_1[p14]
 		
-		if not var28.started or not var28.eventName then
+		if not var29.started or not var29.eventName then
 			return false
-		elseif var27.isContextMatching(p16) then
-			appChatPerf:debug("TTI Milestone: {} -> {}", var28.eventName, p15)
-			timeToInteractiveTracker.trackMilestone(var28.eventName, p15)
+		elseif var28.isContextMatching(p16) then
+			appChatPerf:debug("TTI Milestone: {} -> {}", var29.eventName, p15)
+			timeToInteractiveTracker.trackMilestone(var29.eventName, p15)
 			
 			return true
 		end
 		return false
 	end,
-	trackSubphase = function(p17, p18, p19, p20) --[[ line: 338 ]]
+	trackSubphase = function(p17, p18, p19, p20) --[[ line: 347 ]]
 		-- upvalues: timeToInteractiveTracker (ref), t_5 (ref), t_1 (ref), t (ref), appChatPerf (ref)
 		if not timeToInteractiveTracker.trackSubphase then
 			return false
 		end
-		local var29 = t_5[p17]
+		local var30 = t_5[p17]
 		
 		if not t_1[p17] then
 			t_1[p17] = table.clone(t)
 		end
-		local var30 = t_1[p17]
+		local var31 = t_1[p17]
 		
-		if not var30.started or not var30.eventName then
+		if not var31.started or not var31.eventName then
 			return false
-		elseif var29.isContextMatching(p20) then
-			appChatPerf:debug("TTI Subphase: {} -> {}.{}", var30.eventName, p18, p19)
-			timeToInteractiveTracker.trackSubphase(var30.eventName, p18, p19)
+		elseif var30.isContextMatching(p20) then
+			appChatPerf:debug("TTI Subphase: {} -> {}.{}", var31.eventName, p18, p19)
+			timeToInteractiveTracker.trackSubphase(var31.eventName, p18, p19)
 			
 			return true
 		end
 		return false
 	end,
-	trackRequest = function(p21, p22, p23, p24) --[[ line: 361 ]]
+	trackRequest = function(p21, p22, p23, p24) --[[ line: 370 ]]
 		-- upvalues: timeToInteractiveTracker (ref), t_5 (ref), t_1 (ref), t (ref), appChatPerf (ref)
 		if not timeToInteractiveTracker.trackRequest then
 			return false
 		end
-		local var31 = t_5[p21]
+		local var32 = t_5[p21]
 		
 		if not t_1[p21] then
 			t_1[p21] = table.clone(t)
 		end
-		local var32 = t_1[p21]
+		local var33 = t_1[p21]
 		
-		if not var32.started or not var32.eventName then
+		if not var33.started or not var33.eventName then
 			return false
-		elseif var31.isContextMatching(p24) then
-			appChatPerf:debug("TTI Request: {} -> {}.{}", var32.eventName, p22, p23)
-			timeToInteractiveTracker.trackRequest(var32.eventName, p22, p23)
+		elseif var32.isContextMatching(p24) then
+			appChatPerf:debug("TTI Request: {} -> {}.{}", var33.eventName, p22, p23)
+			timeToInteractiveTracker.trackRequest(var33.eventName, p22, p23)
 			
 			return true
 		end
 		return false
 	end,
-	getEventName = function(p25) --[[ line: 386 ]]
+	getEventName = function(p25) --[[ line: 395 ]]
 		-- upvalues: t_1 (ref), t (ref)
 		if not t_1[p25] then
 			t_1[p25] = table.clone(t)
 		end
-		local var33 = t_1[p25]
+		local var34 = t_1[p25]
 		
-		return if var33.started then var33.eventName else nil
+		return if var34.started then var34.eventName else nil
 	end,
 	Milestone = milestone,
 	Hooks = timeToInteractiveTracker.Hooks,
-	isInteractive = function(p26) --[[ line: 398 ]]
+	isInteractive = function(p26) --[[ line: 407 ]]
 		-- upvalues: t_1 (ref), t (ref)
 		if not t_1[p26] then
 			t_1[p26] = table.clone(t)
 		end
 		return t_1[p26].interactive
 	end,
-	getInteractiveTimestamp = function(p27) --[[ line: 402 ]]
+	getInteractiveTimestamp = function(p27) --[[ line: 411 ]]
 		-- upvalues: t_1 (ref), t (ref)
 		if not t_1[p27] then
 			t_1[p27] = table.clone(t)

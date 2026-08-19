@@ -33,5 +33,7 @@
 	MinimizeToTray = "MinimizeToTray",
 	ExpChatFOMOUpsellImpressionsCount = "ExpChatFOMOUpsellImpressionsCount",
 	IosAuthServiceEnabled = "IosAuthServiceEnabled",
-	ScheduledSquadTooltipSeen = "ScheduledSquadTooltipSeen"
+	ScheduledSquadTooltipSeen = "ScheduledSquadTooltipSeen",
+	MeTabBadgeDismissed = "MeTabBadgeDismissed",
+	MeTabBadgeSessionCount = "MeTabBadgeSessionCount"
 }

@@ -11,23 +11,24 @@ local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
 local playerContextMenuHeaderModule = require(parent.Components.Presentation.PlayerContextMenuHeader)
 local menuActionRowModule = require(parent.Components.Presentation.MenuActionRow)
-local fFlagPlayerListReskinConsoleFocusNavModule = require(parent.Flags.FFlagPlayerListReskinConsoleFocusNav)
+local usePreferredBackgroundStyleModule = require(parent.Hooks.usePreferredBackgroundStyle)
 local t = { Transparency = 1, Color3 = Color3.new(0, 0, 0) }
 local t_1 = { affordance = stateLayerAffordance.None }
 
-return reactModule.memo(function(p0) --[[ line: 31 | named "PlayerContextualMenuView" ]]
-	-- upvalues: signalsReactModule (ref), playerContextualMenuStoreModule (ref), useTokens (ref), reactModule (ref), fFlagPlayerListReskinConsoleFocusNavModule (ref), contextActionService (ref), playerContextMenuHeaderModule (ref), divider (ref), menuActionRowModule (ref), view (ref), t (ref), t_1 (ref)
+return reactModule.memo(function(p0) --[[ line: 30 | named "PlayerContextualMenuView" ]]
+	-- upvalues: signalsReactModule (ref), playerContextualMenuStoreModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), reactModule (ref), contextActionService (ref), playerContextMenuHeaderModule (ref), divider (ref), menuActionRowModule (ref), view (ref), t (ref), t_1 (ref)
 	local var10 = signalsReactModule.useSignalState(playerContextualMenuStoreModule.getMenuData)
 	local var11 = useTokens()
-	local var12, var13 = reactModule.useBinding(false)
-	local var14 = reactModule.useRef(false)
-	local var15 = reactModule.useRef(nil)
+	local var12 = usePreferredBackgroundStyleModule(var11.Color.OverMedia.OverMedia_100)
+	local var13, var14 = reactModule.useBinding(false)
+	local var15 = reactModule.useRef(false)
 	local var16 = reactModule.useRef(nil)
-	local var17 = var10 ~= nil
+	local var17 = reactModule.useRef(nil)
+	local var18 = var10 ~= nil
 	local contextActionServiceOverride = p0.contextActionServiceOverride
 	reactModule.useEffect(function() --[[ line: 61 ]]
-		-- upvalues: fFlagPlayerListReskinConsoleFocusNavModule (copy), p0 (ref), var17 (ref), contextActionServiceOverride (ref), contextActionService (copy), playerContextualMenuStoreModule (copy)
-		if fFlagPlayerListReskinConsoleFocusNavModule and p0.isSmallTouchDevice and var17 then
+		-- upvalues: p0 (ref), var18 (ref), contextActionServiceOverride (ref), contextActionService (copy), playerContextualMenuStoreModule (copy)
+		if p0.isSmallTouchDevice and var18 then
 			local contextActionServiceOverride_1 = contextActionServiceOverride or contextActionService
 			contextActionServiceOverride_1:BindCoreAction("RbxPlayerListReskinGamepadMenuClose", function(_, p1, _) --[[ line: 66 ]]
 				-- upvalues: playerContextualMenuStoreModule (copy)
@@ -46,47 +47,47 @@ return reactModule.memo(function(p0) --[[ line: 31 | named "PlayerContextualMenu
 		end
 		return function() --[[ line: 63 ]] end
 	end, {
-		var17,
+		var18,
 		p0.isSmallTouchDevice,
 		contextActionServiceOverride
 	})
 	reactModule.useEffect(function() --[[ line: 78 ]]
-		-- upvalues: var13 (ref), var14 (ref), var10 (ref), var15 (ref), var16 (ref)
-		var13(false)
-		var14.current = false
+		-- upvalues: var14 (ref), var15 (ref), var10 (ref), var16 (ref), var17 (ref)
+		var14(false)
+		var15.current = false
 		
 		if var10 == nil then return end
-		local current = var15.current
+		local current = var16.current
 		
 		if current ~= nil and current.AbsoluteSize.Y > 0 then
-			var13(true)
-			var14.current = true
+			var14(true)
+			var15.current = true
 			
 			return
 		elseif current == nil then
 			return
 		end
-		var16.current = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 93 ]]
-			-- upvalues: var15 (copy), var16 (copy), var14 (copy), var13 (copy)
-			local current = var15.current
+		var17.current = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 93 ]]
+			-- upvalues: var16 (copy), var17 (copy), var15 (copy), var14 (copy)
+			local current = var16.current
 			
 			if current ~= nil and current.AbsoluteSize.Y > 0 then
-				if var16.current then
-					var16.current:Disconnect()
-					var16.current = nil
+				if var17.current then
+					var17.current:Disconnect()
+					var17.current = nil
 				end
-				if not var14.current then
-					var14.current = true
-					var13(true)
+				if not var15.current then
+					var15.current = true
+					var14(true)
 				end
 			end
 		end)
 		
 		return function() --[[ line: 106 ]]
-			-- upvalues: var16 (copy)
-			if var16.current then
-				var16.current:Disconnect()
-				var16.current = nil
+			-- upvalues: var17 (copy)
+			if var17.current then
+				var17.current:Disconnect()
+				var17.current = nil
 			end
 		end
 	end, { var10 })
@@ -124,12 +125,13 @@ return reactModule.memo(function(p0) --[[ line: 31 | named "PlayerContextualMenu
 		}),
 		Menu = reactModule.createElement(view, {
 			ZIndex = 2,
-			tag = "col align-x-left gap-xxsmall auto-y padding-small stroke-standard stroke-default radius-large bg-over-media-100",
+			tag = "col align-x-left gap-xxsmall auto-y padding-small stroke-standard stroke-default radius-large",
 			AnchorPoint = vector2,
 			Position = uDim2,
 			Size = UDim2.fromOffset(260, 0),
-			Visible = var12,
-			ref = var15
+			Visible = var13,
+			ref = var16,
+			backgroundStyle = var12
 		}, t_2)
 	})
 end)

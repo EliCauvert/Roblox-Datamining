@@ -4,7 +4,6 @@ local reactModule = require(parent.React)
 local UIBloxModule = require(parent.UIBlox)
 local colorSystem = UIBloxModule.Common.Style.ColorSystem
 local cryoModule = require(parent.Cryo)
-local constants = UIBloxModule.App.Style.Constants
 local chatBubbleEnumModule = require(script.Parent.ChatBubbleEnum)
 local chatBubbleGroupableModule = require(script.Parent.ChatBubbleGroupable)
 local useStyle = UIBloxModule.Core.Style.useStyle
@@ -13,6 +12,7 @@ local repliedToMarkerModule = require(script.Parent.RepliedToMarker)
 local foundationModule = require(parent.Foundation)
 local useTokens = foundationModule.Hooks.useTokens
 local useCursor = foundationModule.Hooks.useCursor
+local colorMode = foundationModule.Enums.ColorMode
 local unfilteredMessageColorConfigModule = require(appChat.Flags.unfilteredMessageColorConfig)
 local BUBBLE_VARIANTS = chatBubbleEnumModule.BUBBLE_VARIANTS
 local t = {
@@ -30,7 +30,7 @@ local t = {
 }
 
 return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer" ]]
-	-- upvalues: cryoModule (ref), t (ref), useCursor (ref), foundationModule (ref), useTokens (ref), useStyle (ref), useSelectedTheme (ref), reactModule (ref), constants (ref), colorSystem (ref), unfilteredMessageColorConfigModule (ref), BUBBLE_VARIANTS (ref), chatBubbleEnumModule (ref), chatBubbleGroupableModule (ref), repliedToMarkerModule (ref)
+	-- upvalues: cryoModule (ref), t (ref), useCursor (ref), foundationModule (ref), useTokens (ref), useStyle (ref), useSelectedTheme (ref), reactModule (ref), colorMode (ref), colorSystem (ref), unfilteredMessageColorConfigModule (ref), BUBBLE_VARIANTS (ref), chatBubbleEnumModule (ref), chatBubbleGroupableModule (ref), repliedToMarkerModule (ref)
 	local var10 = cryoModule.Dictionary.join(t, p0)
 	local var11 = useCursor(foundationModule.Enums.CursorType.RoundedSlot)
 	local var12 = useTokens()
@@ -43,10 +43,10 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer"
 	local var16, var17 = reactModule.useState(var13.Theme.UIDefault)
 	
 	local function setBubbleStyle() --[[ line: 66 ]]
-		-- upvalues: var10 (ref), var15 (ref), constants (copy), colorSystem (copy), var12 (ref), isIncoming (ref), isUnfiltered (ref), var17 (ref)
+		-- upvalues: var10 (ref), var15 (ref), colorMode (copy), colorSystem (copy), var12 (ref), isIncoming (ref), isUnfiltered (ref), var17 (ref)
 		var17(if var10.isRepliedTo then {
 			Transparency = 0,
-			Color = if var15 == string.lower(constants.ThemeName.Light) then colorSystem.Gray[30] else colorSystem.Gray[90]
+			Color = if var15 == string.lower(colorMode.Light) then colorSystem.Gray[30] else colorSystem.Gray[90]
 		} elseif var10.isAssetCard then {
 			Color = var12.Color.Shift.Shift_400.Color3,
 			Transparency = var12.Color.Shift.Shift_400.Transparency
@@ -63,18 +63,18 @@ return reactModule.memo(function(p0) --[[ line: 51 | named "ChatBubbleContainer"
 	end
 	
 	local function setPressedBubbleStyle() --[[ line: 104 ]]
-		-- upvalues: var10 (ref), isIncoming (ref), var15 (ref), constants (copy), colorSystem (copy), isUnfiltered (ref), unfilteredMessageColorConfigModule (copy), var17 (ref)
+		-- upvalues: var10 (ref), isIncoming (ref), var15 (ref), colorMode (copy), colorSystem (copy), isUnfiltered (ref), unfilteredMessageColorConfigModule (copy), var17 (ref)
 		if var10.isRepliedTo or var10.isPending then return end
 		local _ = nil
 		var17(if isIncoming then {
 			Transparency = 0.35,
-			Color = if var15 == string.lower(constants.ThemeName.Light) then colorSystem.Gray[50] else colorSystem.Gray[70]
+			Color = if var15 == string.lower(colorMode.Light) then colorSystem.Gray[50] else colorSystem.Gray[70]
 		} elseif isUnfiltered and not var10.isAssetCard then {
-			Color = if var15 == constants.ThemeName.Light then unfilteredMessageColorConfigModule.UnfilteredMessagePressedLightColor3 else unfilteredMessageColorConfigModule.UnfilteredMessagePressedDarkColor3,
+			Color = if var15 == colorMode.Light then unfilteredMessageColorConfigModule.UnfilteredMessagePressedLightColor3 else unfilteredMessageColorConfigModule.UnfilteredMessagePressedDarkColor3,
 			Transparency = unfilteredMessageColorConfigModule.UnfilteredMessageTransparency
 		} else {
 			Transparency = 0.4,
-			Color = if var15 == string.lower(constants.ThemeName.Light) then colorSystem.Gray[50] else colorSystem.Gray[70]
+			Color = if var15 == string.lower(colorMode.Light) then colorSystem.Gray[50] else colorSystem.Gray[70]
 		})
 	end
 	

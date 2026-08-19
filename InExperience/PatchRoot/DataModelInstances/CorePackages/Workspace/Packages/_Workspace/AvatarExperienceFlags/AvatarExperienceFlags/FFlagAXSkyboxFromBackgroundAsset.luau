@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXSkyboxFromBackgroundAsset", false) and require(script.Parent.FFlagAXBackgroundCycloramaRendering)

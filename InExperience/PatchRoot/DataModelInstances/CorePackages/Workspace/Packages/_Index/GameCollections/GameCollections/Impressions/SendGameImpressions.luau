@@ -18,11 +18,10 @@ local feedItemRowDataMissingCounterModule = require(script.Parent.FeedItemRowDat
 local fFlagLuaAppGameImpressionsMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGameImpressionsMobileAdsId
 local fFlagTraversalHistoryDiscoveryTelemetry = require(parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
 local fFlagLuaAppAddComponentTypeToSearchImpressions = require(parent.SharedFlags).FFlagLuaAppAddComponentTypeToSearchImpressions
-local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local fFlagLuaAppFixSearchImpressions = require(parent.SharedFlags).FFlagLuaAppFixSearchImpressions
 local fFlagLuaAppGameImpressionsAddUnifiedFields = require(parent.SharedFlags).FFlagLuaAppGameImpressionsAddUnifiedFields
 
-local function addGameFields(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 ]]
+local function addGameFields(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 57 ]]
 	-- upvalues: fFlagLuaAppFixSearchImpressions (ref), gameCollectionItemTypes (ref), discoveryEventErrorLogger (ref), calculateRowPositionFields (ref), argCheckModule (ref), getGameTileLayoutData (ref), getTileBadgeByPositionConfigFromEntry (ref), getValidTileBadges (ref), cryoModule (ref), itemLayoutDataParsingUtils (ref), fFlagLuaAppGameImpressionsAddUnifiedFields (ref)
 	local t = {}
 	local t_1 = {}
@@ -101,7 +100,7 @@ local function addGameFields(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 ]
 				local t_18 = {}
 				
 				for i_1, v_1 in getValidTileBadges(var39) do
-					local var42 = cryoModule.List.map(v_1, function(p9) --[[ line: 175 ]]
+					local var42 = cryoModule.List.map(v_1, function(p9) --[[ line: 174 ]]
 						return p9.analyticsId
 					end)
 					
@@ -243,7 +242,7 @@ local function addGameFields(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 58 ]
 	return t_18, tCount
 end
 
-local function _(p10) --[[ line: 349 | named "addMobileAdvertisingIdToEventParams" ]]
+local function _(p10) --[[ line: 348 | named "addMobileAdvertisingIdToEventParams" ]]
 	-- upvalues: appStorageService (ref)
 	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
 	
@@ -253,8 +252,8 @@ local function _(p10) --[[ line: 349 | named "addMobileAdvertisingIdToEventParam
 end
 
 return {
-	sendFromTopicContents = function(p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28) --[[ line: 356 ]]
-		-- upvalues: loggingProtocolModule (ref), feedItemRowDataHitCounterModule (ref), feedItemRowDataMissingCounterModule (ref), addGameFields (ref), cryoModule (ref), localizationService (ref), fFlagLuaAppAddSubIdToHomeEvents (ref), fFlagLuaAppGameImpressionsMobileAdsId (ref), appStorageService (ref), gameImpressionsEventModule (ref), reportGameImpressionCountsModule (ref)
+	sendFromTopicContents = function(p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28) --[[ line: 355 ]]
+		-- upvalues: loggingProtocolModule (ref), feedItemRowDataHitCounterModule (ref), feedItemRowDataMissingCounterModule (ref), addGameFields (ref), cryoModule (ref), localizationService (ref), fFlagLuaAppGameImpressionsMobileAdsId (ref), appStorageService (ref), gameImpressionsEventModule (ref), reportGameImpressionCountsModule (ref)
 		if p11 and p12 then
 			if p13 and #p13 ~= 0 then
 				if p14 and #p14 ~= 0 then
@@ -275,7 +274,7 @@ return {
 						locale = localizationService.RobloxLocaleId,
 						appliedFilters = p24,
 						loadSource = p25,
-						sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then p27 else nil
+						sortSubId = p27
 					})
 					
 					if fFlagLuaAppGameImpressionsMobileAdsId then
@@ -302,7 +301,7 @@ return {
 			p26(`Missing analytics service eventIngest: {p11} appAnalytics: {p12}`)
 		end
 	end,
-	sendFromSearch = function(p29, p30, p31, p32, p33, p34, p35, p36, p37, p38) --[[ line: 434 ]]
+	sendFromSearch = function(p29, p30, p31, p32, p33, p34, p35, p36, p37, p38) --[[ line: 433 ]]
 		-- upvalues: addGameFields (ref), fFlagLuaAppFixSearchImpressions (ref), fFlagLuaAppAddComponentTypeToSearchImpressions (ref), cryoModule (ref), localizationService (ref), fFlagLuaAppGameImpressionsMobileAdsId (ref), appStorageService (ref), gameImpressionsEventModule (ref), reportGameImpressionCountsModule (ref)
 		if not p29 or not p30 then return end
 		if not p31 or #p31 == 0 then return end
@@ -329,7 +328,7 @@ return {
 		gameImpressionsEventModule(p29, p33, var47)
 		reportGameImpressionCountsModule(p30, p33, var48)
 	end,
-	sendFromGameDetails = function(p39, p40, p41, p42, p43) --[[ line: 487 ]]
+	sendFromGameDetails = function(p39, p40, p41, p42, p43) --[[ line: 486 ]]
 		-- upvalues: addGameFields (ref), localizationService (ref), fFlagLuaAppGameImpressionsMobileAdsId (ref), appStorageService (ref), gameImpressionsEventModule (ref), reportGameImpressionCountsModule (ref)
 		local var51, var52 = addGameFields(p41, p42)
 		var51.locale = localizationService.RobloxLocaleId
@@ -345,7 +344,7 @@ return {
 		gameImpressionsEventModule(p39, "recommended", var51)
 		reportGameImpressionCountsModule(p40, "recommended", var52)
 	end,
-	sendFromSeeAll = function(p44, p45, p46, p47, p48, p49, p50, p51, p52, p53) --[[ line: 507 ]]
+	sendFromSeeAll = function(p44, p45, p46, p47, p48, p49, p50, p51, p52, p53) --[[ line: 506 ]]
 		-- upvalues: addGameFields (ref), cryoModule (ref), localizationService (ref), fFlagLuaAppGameImpressionsMobileAdsId (ref), appStorageService (ref), gameImpressionsEventModule (ref), reportGameImpressionCountsModule (ref)
 		if not p44 or not p45 then return end
 		if not p46 or #p46 == 0 then return end
@@ -371,7 +370,7 @@ return {
 		gameImpressionsEventModule(p44, p48, var56)
 		reportGameImpressionCountsModule(p45, p48, var55, 1)
 	end,
-	sendFromTraversalHistoryPage = if fFlagTraversalHistoryDiscoveryTelemetry then function(p54, p55, p56, p57, p58, p59) --[[ line: 555 ]]
+	sendFromTraversalHistoryPage = if fFlagTraversalHistoryDiscoveryTelemetry then function(p54, p55, p56, p57, p58, p59) --[[ line: 554 ]]
 		-- upvalues: addGameFields (ref), cryoModule (ref), localizationService (ref), gameImpressionsEventModule (ref), reportGameImpressionCountsModule (ref)
 		if p54 and p55 then
 			local var58, var59 = addGameFields(p56, p57, p58, false, p59)

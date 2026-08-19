@@ -115,7 +115,8 @@ function InExperienceInterventionDialogManager(p1) --[[ line: 49 ]]
 				onDismissCallback = var15 and var15.onDismiss,
 				titleOverride = var15 and var15.titleOverride,
 				bodyOverride = var15 and var15.bodyOverride,
-				onAppeal = var15 and var15.onAppeal
+				onAppeal = var15 and var15.onAppeal,
+				onShownCallback = var15 and var15.onShown
 			})
 		}) elseif fFlagTemporaryAvatarKickWarningDialogModule and treatmentType == constants.TreatmentType.TemporaryAvatarKickWarning then reactModule.createElement(var13, {}, {
 			reactModule.createElement(temporaryAvatarKickWarningDialogModule, {

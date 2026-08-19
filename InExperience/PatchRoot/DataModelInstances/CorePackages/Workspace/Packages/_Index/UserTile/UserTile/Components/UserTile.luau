@@ -17,9 +17,10 @@ local fFlagUserTileShowBadges = require(parent.SharedFlags).FFlagUserTileShowBad
 local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
 local fFlagUserTileAddContextualInfoIcon = require(parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
 local fFlagUserTileTitleStackAddExtraInfo = require(parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
+local fFlagUserTileUnfilteredChatIndicator = require(parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 
-return function(p0) --[[ line: 61 | named "UserTile" ]]
-	-- upvalues: reactModule (ref), controlState (ref), view (ref), layoutModeModule (ref), enums (ref), avatarPileModule (ref), avatarModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), titleStackModule (ref), fFlagUserTileShowBadges (ref), fFlagUserTileAddContextualInfoIcon (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnableMobileGameJoinCard (ref), fFlagUserTileTextTCIndicator (ref), fFlagEnableBlackbirdCheck (ref), fFlagUserTileTitleStackAddExtraInfo (ref)
+return function(p0) --[[ line: 63 | named "UserTile" ]]
+	-- upvalues: reactModule (ref), controlState (ref), view (ref), layoutModeModule (ref), enums (ref), avatarPileModule (ref), avatarModule (ref), fFlagUserTileShowShimmerWhenLoadingModule (ref), titleStackModule (ref), fFlagUserTileShowBadges (ref), fFlagUserTileAddContextualInfoIcon (ref), fFlagProfilePlatformNewProfileHeader (ref), fFlagEnableMobileGameJoinCard (ref), fFlagUserTileTextTCIndicator (ref), fFlagUserTileUnfilteredChatIndicator (ref), fFlagEnableBlackbirdCheck (ref), fFlagUserTileTitleStackAddExtraInfo (ref)
 	local var8, var9 = reactModule.useState(false)
 	local var10 = p0.onActivated ~= nil
 	
@@ -30,7 +31,7 @@ return function(p0) --[[ line: 61 | named "UserTile" ]]
 			["row align-y-center gap-medium"] = p0.layoutMode == layoutModeModule.wide
 		},
 		selection = { Selectable = p0.selectable },
-		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 64 ]]
+		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 66 ]]
 			-- upvalues: var9 (ref), var10 (ref), controlState (copy), p0 (ref)
 			var9(var10 and (if p1 ~= controlState.Hover then p1 == controlState.Pressed else true))
 			
@@ -86,6 +87,7 @@ return function(p0) --[[ line: 61 | named "UserTile" ]]
 			customTextTruncation = p0.customTextTruncation,
 			isTrustedConnection = if fFlagUserTileTextTCIndicator then p0.isTrustedConnection else nil,
 			trustedConnectionIndicatorEnabled = if fFlagUserTileTextTCIndicator then p0.trustedConnectionIndicatorEnabled else nil,
+			shouldShowUnfilteredChatIndicator = if fFlagUserTileUnfilteredChatIndicator then p0.shouldShowUnfilteredChatIndicator else nil,
 			isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p0.isRobloxSubscriber else nil,
 			extraInfo = p0.extraInfo,
 			isExtraInfoLoading = if fFlagUserTileTitleStackAddExtraInfo then p0.isExtraInfoLoading else nil,

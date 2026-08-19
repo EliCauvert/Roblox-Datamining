@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AXFixVRControlBarFlicker", false)

@@ -24,8 +24,9 @@ local var6 = dependenciesModule.logger:new("FriendsCarousel/" .. script.Name)
 local isSubjectToDesktopPolicies = dependenciesModule.isSubjectToDesktopPolicies
 local fFlagEnableRecommendationsForPCGDK = require(parent_1.SharedFlags).FFlagEnableRecommendationsForPCGDK
 local fFlagFixIsConsoleCheckForSocialCarousel = require(parent_1.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
+local fFlagSocialCarouselMigrateRecommendations = require(parent_1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 
-local var7 = function(_) --[[ line: 40 ]]
+local var7 = function(_) --[[ line: 42 ]]
 	-- upvalues: showRecommendationsModule (ref), isSubjectToDesktopPolicies (ref), fFlagEnableRecommendationsForPCGDK (ref), thirdPartyUserService (ref), fFlagFixIsConsoleCheckForSocialCarousel (ref), userInputService (ref)
 -- FATAL: Failed to generate AST for `unnamed` function:
 runtime : [KeyError] :11990: 3
@@ -37,21 +38,21 @@ end
 
 local var8 = 0
 
-return function(p0) --[[ line: 58 ]]
-	-- upvalues: analytics (ref), timers (ref), networkingFriends (ref), userSortsModule (ref), var8 (write), dash (ref), eventNames (ref), retrievalStatus (ref), fetchNamesModule (ref), networkingAliases (ref), promise (ref), var6 (ref), var7 (ref), contextualInfoTypes (ref), roduxFriends (ref), recommendationSourceEnum (ref), roduxAnalytics (ref), RECOMMENDATION_SESSION_ID_KEY (ref)
-	return function(p1) --[[ line: 59 ]]
-		-- upvalues: analytics (copy), timers (copy), networkingFriends (copy), userSortsModule (copy), var8 (copy), p0 (ref), dash (copy), eventNames (copy), retrievalStatus (copy), fetchNamesModule (copy), networkingAliases (copy), promise (copy), var6 (copy), var7 (copy), contextualInfoTypes (copy), roduxFriends (copy), recommendationSourceEnum (copy), roduxAnalytics (copy), RECOMMENDATION_SESSION_ID_KEY (copy)
+return function(p0) --[[ line: 60 ]]
+	-- upvalues: analytics (ref), timers (ref), networkingFriends (ref), userSortsModule (ref), var8 (write), dash (ref), eventNames (ref), retrievalStatus (ref), fetchNamesModule (ref), networkingAliases (ref), promise (ref), var6 (ref), var7 (ref), fFlagSocialCarouselMigrateRecommendations (ref), contextualInfoTypes (ref), roduxFriends (ref), recommendationSourceEnum (ref), roduxAnalytics (ref), RECOMMENDATION_SESSION_ID_KEY (ref)
+	return function(p1) --[[ line: 61 ]]
+		-- upvalues: analytics (copy), timers (copy), networkingFriends (copy), userSortsModule (copy), var8 (copy), p0 (ref), dash (copy), eventNames (copy), retrievalStatus (copy), fetchNamesModule (copy), networkingAliases (copy), promise (copy), var6 (copy), var7 (copy), fFlagSocialCarouselMigrateRecommendations (copy), contextualInfoTypes (copy), roduxFriends (copy), recommendationSourceEnum (copy), roduxAnalytics (copy), RECOMMENDATION_SESSION_ID_KEY (copy)
 		local var9 = tostring(p1:getState().LocalUserId)
 		local fireAnalyticsEvent = analytics({ infoForAllEvents = { uid = var9 } }).fireAnalyticsEvent
 		local var10 = timers()
 		local var11 = var10.start()
 		
-		return p1:dispatch(networkingFriends.GetFriendsFromUserId.API(var9, { userSort = userSortsModule.StatusFrequents })):andThen(function(p2) --[[ line: 73 ]]
-			-- upvalues: var8 (copy), p0 (copy), dash (copy), var10 (ref), var11 (ref), fireAnalyticsEvent (ref), eventNames (copy), retrievalStatus (copy), fetchNamesModule (copy), p1 (ref), networkingAliases (copy), promise (copy), var6 (copy), var7 (copy), networkingFriends (copy), var9 (ref), contextualInfoTypes (copy), roduxFriends (copy), recommendationSourceEnum (copy), roduxAnalytics (copy), RECOMMENDATION_SESSION_ID_KEY (copy)
+		return p1:dispatch(networkingFriends.GetFriendsFromUserId.API(var9, { userSort = userSortsModule.StatusFrequents })):andThen(function(p2) --[[ line: 75 ]]
+			-- upvalues: var8 (copy), p0 (copy), dash (copy), var10 (ref), var11 (ref), fireAnalyticsEvent (ref), eventNames (copy), retrievalStatus (copy), fetchNamesModule (copy), p1 (ref), networkingAliases (copy), promise (copy), var6 (copy), var7 (copy), fFlagSocialCarouselMigrateRecommendations (copy), networkingFriends (copy), var9 (ref), contextualInfoTypes (copy), roduxFriends (copy), recommendationSourceEnum (copy), roduxAnalytics (copy), RECOMMENDATION_SESSION_ID_KEY (copy)
 			local data = p2.responseBody.data
 			local var12 = if data then #data else 0
 			var8 = if p0 and p0.refresh then var8 + 1 else var8
-			local var13 = if data then dash.map(data, function(p3) --[[ line: 78 ]]
+			local var13 = if data then dash.map(data, function(p3) --[[ line: 80 ]]
 				return p3.id
 			end) else {}
 			fireAnalyticsEvent(eventNames.FriendsEndpointLoadingTime, {
@@ -59,20 +60,20 @@ return function(p0) --[[ line: 58 ]]
 				loadingTime = var10.stop(var11),
 				fetch = fetchNamesModule.OldAllFriends
 			})
-			p1:dispatch(networkingAliases.GetTagsFromUserIds.API(var13)):andThen(function() --[[ line: 93 ]]
+			p1:dispatch(networkingAliases.GetTagsFromUserIds.API(var13)):andThen(function() --[[ line: 95 ]]
 				-- upvalues: promise (copy)
 				return promise.resolve()
-			end):catch(function(p4) --[[ line: 96 ]]
+			end):catch(function(p4) --[[ line: 98 ]]
 				-- upvalues: var6 (copy)
 				var6:info(`GetTagsFromUserIds failed: {p4}`)
 			end)
 			
-			if var7(var12) then
-				p1:dispatch(networkingFriends.GetFriendRecommendationsFromUserId.API({ targetUserId = var9 })):andThen(function(p6) --[[ line: 105 ]]
+			if var7(var12) and not fFlagSocialCarouselMigrateRecommendations then
+				p1:dispatch(networkingFriends.GetFriendRecommendationsFromUserId.API({ targetUserId = var9 })):andThen(function(p6) --[[ line: 107 ]]
 					-- upvalues: dash (copy), contextualInfoTypes (copy), p1 (copy), roduxFriends (copy), recommendationSourceEnum (copy), roduxAnalytics (copy), RECOMMENDATION_SESSION_ID_KEY (copy), promise (copy), fireAnalyticsEvent (copy), eventNames (copy), var12 (ref), var8 (copy)
 					p1:dispatch(roduxFriends.Actions.RecommendationSourceCreated({
 						source = recommendationSourceEnum.HomepageFriendsCarousel,
-						recommendationIds = dash.map(p6.responseBody.data, function(p7) --[[ line: 107 ]]
+						recommendationIds = dash.map(p6.responseBody.data, function(p7) --[[ line: 109 ]]
 							-- upvalues: contextualInfoTypes (copy)
 							return if p7.contextType == contextualInfoTypes.Contacts then p7.contactId else p7.id
 						end)
@@ -82,7 +83,7 @@ return function(p0) --[[ line: 58 ]]
 						sessionId = p6.responseBody.recommendationRequestId
 					}))
 					
-					return promise.resolve(p6):andThen(function(p8) --[[ line: 123 ]]
+					return promise.resolve(p6):andThen(function(p8) --[[ line: 125 ]]
 						-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var12 (copy), var8 (copy)
 						if fireAnalyticsEvent then
 							local data = p8.responseBody.data
@@ -96,7 +97,7 @@ return function(p0) --[[ line: 58 ]]
 							})
 						end
 					end)
-				end):catch(function(p5) --[[ line: 141 ]]
+				end):catch(function(p5) --[[ line: 143 ]]
 					-- upvalues: var6 (copy)
 					var6:info(`GetFriendRecommendationsFromUserId failed: {p5}`)
 				end)

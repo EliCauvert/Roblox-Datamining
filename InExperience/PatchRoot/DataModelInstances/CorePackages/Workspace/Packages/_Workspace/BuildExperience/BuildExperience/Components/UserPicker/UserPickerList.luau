@@ -2,6 +2,8 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local userPickerRowModule = require(script.Parent.UserPickerRow)
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local list = foundationModule.List
@@ -10,13 +12,13 @@ local text = foundationModule.Text
 local view = foundationModule.View
 local inputSize = foundationModule.Enums.InputSize
 local radius = foundationModule.Enums.Radius
-local USER_PICKER_NO_RESULTS = localizationStringsModule.USER_PICKER_NO_RESULTS
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 
-local function _(p0) --[[ line: 42 | named "trim" ]]
+local function _(p0) --[[ line: 44 | named "trim" ]]
 	return string.gsub(p0, "^%s*(.-)%s*$", "%1")
 end
 
-local function renderSkeletonRow(p1, p2) --[[ line: 48 ]]
+local function renderSkeletonRow(p1, p2) --[[ line: 50 ]]
 	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
 	return reactModule.createElement(view, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
@@ -43,8 +45,11 @@ local function renderSkeletonRow(p1, p2) --[[ line: 48 ]]
 	})
 end
 
-return function(p3) --[[ line: 77 | named "UserPickerList" ]]
-	-- upvalues: renderSkeletonRow (ref), reactModule (ref), view (ref), USER_PICKER_NO_RESULTS (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
+return function(p3) --[[ line: 79 | named "UserPickerList" ]]
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), renderSkeletonRow (ref), reactModule (ref), view (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
+	local var7 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+		noResults = localizationStringsModule.USER_PICKER_NO_RESULTS
+	}) else nil).noResults else localizationStringsModule.USER_PICKER_NO_RESULTS
 	local testId = p3.testId or "user-picker-list"
 	local userIds = p3.userIds
 	
@@ -60,9 +65,9 @@ return function(p3) --[[ line: 77 | named "UserPickerList" ]]
 			testId = `{testId}-loading`
 		}, t)
 	elseif #userIds == 0 and not p3.isLoading then
-		local var8 = if string.gsub(p3.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p3.emptyText else USER_PICKER_NO_RESULTS
+		local var10 = if string.gsub(p3.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p3.emptyText else var7
 		
-		if var8 ~= nil then
+		if var10 ~= nil then
 			return reactModule.createElement(view, {
 				tag = "col align-x-center size-full-0 auto-y padding-y-xlarge",
 				LayoutOrder = p3.layoutOrder,
@@ -70,7 +75,7 @@ return function(p3) --[[ line: 77 | named "UserPickerList" ]]
 			}, {
 				Text = reactModule.createElement(text, {
 					tag = "auto-xy text-body-large text-align-x-center content-muted",
-					Text = var8
+					Text = var10
 				})
 			})
 		end
@@ -82,7 +87,7 @@ return function(p3) --[[ line: 77 | named "UserPickerList" ]]
 			userId = v,
 			isSelected = p3.isSelected(v),
 			isDisabled = not p3.canSelect(v),
-			onToggle = function() --[[ line: 118 ]]
+			onToggle = function() --[[ line: 128 ]]
 				-- upvalues: p3 (ref), v (ref)
 				p3.toggleSelected(v)
 			end,

@@ -19,26 +19,27 @@ local assets = foundationCloudAssetsModule.Assets
 local preloadAsset = foundationCloudAssetsModule.preloadAsset
 local migrateEmptyResultsViewToFoundation = game:DefineFastFlag("MigrateEmptyResultsViewToFoundation", false)
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+local fFlagFriendsEmptyStateIllustrationThemingModule = require(friendsLanding.Flags.FFlagFriendsEmptyStateIllustrationTheming)
 local emptyResultsView = roact.PureComponent:extend("EmptyResultsView")
 emptyResultsView.defaultProps = { layoutOrder = 0, pageLoadingTimeReport = nil }
 
-local function _(value) --[[ line: 45 | named "loadFoundationCloudAsset" ]]
+local function _(value) --[[ line: 47 | named "loadFoundationCloudAsset" ]]
 	-- upvalues: preloadAsset (ref), assets (ref)
 	preloadAsset(value)
-	local var9 = assets[value]
+	local var10 = assets[value]
 	
-	return var9.assetId, var9.size
+	return var10.assetId, var10.size
 end
 
-function emptyResultsView.render(p0) --[[ line: 51 ]]
-	-- upvalues: withStyle (ref), withLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), roact (ref), constantsModule (ref), migrateEmptyResultsViewToFoundation (ref), image (ref), imageSetLabel (ref), images (ref), appFonts (ref)
-	return withStyle(function(p1) --[[ line: 52 ]]
-		-- upvalues: withLocalization (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy), roact (copy), constantsModule (copy), p0 (ref), migrateEmptyResultsViewToFoundation (copy), image (copy), imageSetLabel (copy), images (copy), appFonts (copy)
+function emptyResultsView.render(p0) --[[ line: 53 ]]
+	-- upvalues: withStyle (ref), withLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), roact (ref), constantsModule (ref), migrateEmptyResultsViewToFoundation (ref), image (ref), fFlagFriendsEmptyStateIllustrationThemingModule (ref), imageSetLabel (ref), images (ref), appFonts (ref)
+	return withStyle(function(p1) --[[ line: 54 ]]
+		-- upvalues: withLocalization (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy), roact (copy), constantsModule (copy), p0 (ref), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), appFonts (copy)
 		return withLocalization({
 			noResultsText = "CommonUI.Messages.Response.NoResults",
 			addFriendsBtn = if fFlagConnectionsToFriendsRename then textKeysModule.ADD_FRIENDS_BTN else textKeysModule.ADD_CONNECTIONS_BTN
-		})(function(p2) --[[ line: 58 ]]
-			-- upvalues: roact (copy), constantsModule (copy), p0 (copy), migrateEmptyResultsViewToFoundation (copy), image (copy), imageSetLabel (copy), images (copy), p1 (ref), appFonts (copy)
+		})(function(p2) --[[ line: 60 ]]
+			-- upvalues: roact (copy), constantsModule (copy), p0 (copy), migrateEmptyResultsViewToFoundation (copy), image (copy), fFlagFriendsEmptyStateIllustrationThemingModule (copy), imageSetLabel (copy), images (copy), p1 (ref), appFonts (copy)
 			return roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, -(constantsModule.TOP_BAR_HEIGHT + 45)),
@@ -61,6 +62,7 @@ function emptyResultsView.render(p0) --[[ line: 51 ]]
 					Imagelabel = if migrateEmptyResultsViewToFoundation then roact.createElement(image, {
 						LayoutOrder = 1,
 						Image = p0.props.assetId,
+						imageStyle = if fFlagFriendsEmptyStateIllustrationThemingModule then p0.props.tokens.Color.Content.Emphasis else nil,
 						Size = UDim2.fromOffset(p0.props.assetSize.X, p0.props.assetSize.Y)
 					}) else roact.createElement(imageSetLabel, {
 						BackgroundTransparency = 1,
@@ -87,7 +89,7 @@ function emptyResultsView.render(p0) --[[ line: 51 ]]
 	end)
 end
 
-return if migrateEmptyResultsViewToFoundation then function(p3) --[[ line: 109 | named "EmptyResultsViewContainer" ]]
+return if migrateEmptyResultsViewToFoundation then function(p3) --[[ line: 114 | named "EmptyResultsViewContainer" ]]
 	-- upvalues: preloadAsset (ref), assets (ref), useTokens (ref), roact (ref), emptyResultsView (ref), cryoModule (ref)
 	preloadAsset("pictograms/collaborators")
 	local collaborators = assets["pictograms/collaborators"]

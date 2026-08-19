@@ -27,7 +27,10 @@
 		FFlagAllowCustomUnifiedEventFilter = require(script.FFlagAllowCustomUnifiedEventFilter)
 	},
 	reportBackgroundUserActionCounter = require(script.reportBackgroundUserActionCounter),
-	Enums = { ImpressionEnums = require(script.Enums.ImpressionEnums) },
+	Enums = {
+		ImpressionEnums = require(script.Enums.ImpressionEnums),
+		UnifiedLoggingElementNameEnums = require(script.Enums.UnifiedLoggingElementNameEnums)
+	},
 	Lib = { CartIdService = require(script.Lib.CartIdService) },
 	Store = {
 		SeenImpressionsStore = require(script.Store.SeenImpressionsStore),

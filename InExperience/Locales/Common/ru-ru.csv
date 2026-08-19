@@ -731,9 +731,6 @@ CoreScripts.TopBar.GameNamePlaceHolder,
 CoreScripts.TopBar.HideChat,Спрятать чат
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,Включить голосовой чат
-CoreScripts.TopBar.Label.InappropriateAudio,Недопустимое аудио
-CoreScripts.TopBar.Label.Report,
-CoreScripts.TopBar.Label.ReportAudio,Пожаловаться на аудио
 CoreScripts.TopBar.Label.UILessHintDescription,"Нажми ESC, чтобы открыть меню Roblox"
 CoreScripts.TopBar.Label.UILessHintTitle,Новый способ открыть меню Roblox
 CoreScripts.TopBar.Leaderboard,
@@ -2505,8 +2502,8 @@ Feature.SocialTab.Label.CreateAndExploreGroups,Создавай и исслед�
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,
-Feature.SongDetails.Label.InappropriateAudio,
+Feature.SongDetails.Action.ReportAudio,Пожаловаться на аудио
+Feature.SongDetails.Label.InappropriateAudio,Недопустимое аудио
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Добавить других
 Feature.Squads.Action.ConnectToVoice,Подключиться к голосу

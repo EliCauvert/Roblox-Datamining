@@ -14,7 +14,7 @@ local layoutSlotsProvider = layoutSlotsModule.LayoutSlotsProvider
 local loaderProvider = loaderContextModule.LoaderProvider
 local sheetSlots = layoutSlotsModule.sheetSlots
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
+return reactModule.forwardRef(function(p0, p1) --[[ line: 50 ]]
 	-- upvalues: useAbuseSheetFlowModule (ref), fFlagEnableInlineSurveyOnUserReport (ref), reactModule (ref), abuseReportDialogModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), loaderProvider (ref), layoutSlotsProvider (ref), sheetSlots (ref)
 	local var6 = useAbuseSheetFlowModule(p0.rawConfig, {
 		abuseVector = p0.abuseVector,
@@ -22,12 +22,13 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
 		onClose = p0.onClose,
 		open = p0.open,
 		onCustomSubmit = p0.onCustomSubmit,
+		clientActionHandlers = p0.clientActionHandlers,
 		onFinish = if fFlagEnableInlineSurveyOnUserReport then p0.onFinish else nil
 	})
-	reactModule.useImperativeHandle(p1, function() --[[ line: 59 ]]
+	reactModule.useImperativeHandle(p1, function() --[[ line: 61 ]]
 		-- upvalues: var6 (ref)
 		return {
-			requestClose = function() --[[ line: 61 ]]
+			requestClose = function() --[[ line: 63 ]]
 				-- upvalues: var6 (copy)
 				if var6 then
 					var6.onClose()
@@ -35,7 +36,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 49 ]]
 			end
 		}
 	end, { var6 })
-	reactModule.useEffect(function() --[[ line: 69 ]]
+	reactModule.useEffect(function() --[[ line: 71 ]]
 		-- upvalues: var6 (ref), p0 (ref)
 		if not var6 then
 			p0.onResolveError()

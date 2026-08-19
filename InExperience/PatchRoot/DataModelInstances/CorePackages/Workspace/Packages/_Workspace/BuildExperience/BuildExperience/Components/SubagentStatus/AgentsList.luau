@@ -3,6 +3,8 @@ local parent = buildExperience.Parent
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
 local loadingIndicatorModule = require(script.Parent.LoadingIndicator)
 local icon = foundationModule.Icon
@@ -15,6 +17,7 @@ local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
 local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
 local useScaledValue = foundationModule.Hooks.useScaledValue
 local useTokens = foundationModule.Hooks.useTokens
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local subagentTaskCategory = creatorAgentChatModule.SubagentTaskCategory
 local list = {
 	subagentTaskCategory.Gameplay,
@@ -29,7 +32,7 @@ local t = {
 	Marketing = iconName.Wallet
 }
 
-local function getDisplayGroups(p0) --[[ line: 49 ]]
+local function getDisplayGroups(p0) --[[ line: 53 ]]
 	-- upvalues: list (ref)
 	local t = {}
 	
@@ -56,25 +59,25 @@ local function getDisplayGroups(p0) --[[ line: 49 ]]
 	return t_1
 end
 
-local function _(p1) --[[ line: 77 | named "getStatusText" ]]
+local function _(p1) --[[ line: 81 | named "getStatusText" ]]
 	-- upvalues: localizationStringsModule (ref)
 	return if #p1.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif p1.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#p1.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
 end
 
-local function AgentTaskList(p2) --[[ line: 95 ]]
+local function AgentTaskList(p2) --[[ line: 99 ]]
 	-- upvalues: reactModule (ref), scrollView (ref), scrollBarVisibility (ref), view (ref), stateLayerAffordance (ref)
-	local var13, var14 = reactModule.useBinding(0)
+	local var14, var15 = reactModule.useBinding(0)
 	
 	return reactModule.createElement(scrollView, {
 		tag = "shrink",
 		LayoutOrder = p2.LayoutOrder,
-		Size = var13:map(function(p3) --[[ line: 97 ]]
+		Size = var14:map(function(p3) --[[ line: 101 ]]
 			return UDim2.new(1, 0, 0, p3)
 		end),
-		onAbsoluteCanvasSizeChanged = reactModule.useCallback(function(p4) --[[ line: 100 ]]
-			-- upvalues: var14 (ref)
-			var14(p4.AbsoluteCanvasSize.Y)
-		end, { var14 }),
+		onAbsoluteCanvasSizeChanged = reactModule.useCallback(function(p4) --[[ line: 104 ]]
+			-- upvalues: var15 (ref)
+			var15(p4.AbsoluteCanvasSize.Y)
+		end, { var15 }),
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.new(1, 0, 0, 0),
@@ -96,11 +99,17 @@ local function AgentTaskList(p2) --[[ line: 95 ]]
 	})
 end
 
-local function AgentCard(p5) --[[ line: 141 ]]
-	-- upvalues: t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), localizationStringsModule (ref), AgentTaskList (ref)
+local function AgentCard(p5) --[[ line: 145 ]]
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), AgentTaskList (ref)
+	local var16 = if fFlagBuildLocalization then useLocalization({
+		building = localizationStringsModule.SUBAGENT_STATUS_BUILDING,
+		notStarted = localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED
+	}) else nil
 	local group = p5.group
+	local var17 = if #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
+	local var18 = if fFlagBuildLocalization and var17 == localizationStringsModule.SUBAGENT_STATUS_BUILDING then var16.building elseif fFlagBuildLocalization and var17 == localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED then var16.notStarted else var17
 	local name = t[group.name]
-	local var15 = reactModule.useCallback(function() --[[ line: 144 ]]
+	local var19 = reactModule.useCallback(function() --[[ line: 162 ]]
 		-- upvalues: p5 (ref), group (ref)
 		p5.onAgentActivated(group)
 	end, { p5.onAgentActivated, group })
@@ -127,7 +136,7 @@ local function AgentCard(p5) --[[ line: 141 ]]
 	return reactModule.createElement(view, {
 		tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-emphasis radius-large",
 		LayoutOrder = p5.index,
-		onActivated = if #group.tasks > 0 then var15 else nil,
+		onActivated = if #group.tasks > 0 then var19 else nil,
 		sizeConstraint = { MaxSize = Vector2.new(1e999, p5.maxHeight) },
 		testId = `{p5.testId}-card-{p5.index}-container`
 	}, {
@@ -151,22 +160,22 @@ local function AgentCard(p5) --[[ line: 141 ]]
 			Status = reactModule.createElement(text, {
 				LayoutOrder = 3,
 				tag = "auto-xy padding-left-large text-body-small text-align-x-right content-emphasis",
-				Text = if #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
+				Text = var18
 			})
 		}),
 		Tasks = if #group.tasks > 0 then reactModule.createElement(AgentTaskList, {
 			LayoutOrder = 2,
-			onActivated = var15,
+			onActivated = var19,
 			taskGap = p5.taskGap,
 			testId = `{p5.testId}-card-{p5.index}-tasks`
 		}, t_1) else nil
 	})
 end
 
-return reactModule.memo(function(p6) --[[ line: 213 | named "AgentsList" ]]
+return reactModule.memo(function(p6) --[[ line: 231 | named "AgentsList" ]]
 	-- upvalues: useTokens (ref), useScaledValue (ref), getDisplayGroups (ref), reactModule (ref), AgentCard (ref), view (ref)
-	local var17 = useTokens()
-	local var18 = useScaledValue(156)
+	local var21 = useTokens()
+	local var22 = useScaledValue(156)
 	local testId = p6.testId or "build-agent-list"
 	local t = {}
 	
@@ -174,9 +183,9 @@ return reactModule.memo(function(p6) --[[ line: 213 | named "AgentsList" ]]
 		t[`Card{i}`] = reactModule.createElement(AgentCard, {
 			group = v,
 			index = i,
-			maxHeight = var18,
+			maxHeight = var22,
 			onAgentActivated = p6.onAgentActivated,
-			taskGap = var17.Gap.Small,
+			taskGap = var21.Gap.Small,
 			testId = testId
 		})
 	end

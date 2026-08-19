@@ -9,10 +9,5 @@
 	StartThumbnailReport = "StartThumbnailReport",
 	Appear = "Appear",
 	SelfDismiss = "SelfDismiss",
-	UserDismiss = "UserDismiss",
-	SeeMore = "SeeMore",
-	OpenReport = "OpenReport",
-	SubmitReport = "SubmitReport",
-	SubmitAudioReport = "SubmitAudioReport",
-	PreventNonAudioReport = "PreventNonAudioReport"
+	UserDismiss = "UserDismiss"
 }

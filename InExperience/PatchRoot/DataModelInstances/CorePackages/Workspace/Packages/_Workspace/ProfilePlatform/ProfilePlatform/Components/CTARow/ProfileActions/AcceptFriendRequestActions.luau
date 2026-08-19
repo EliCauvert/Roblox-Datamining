@@ -9,16 +9,18 @@ local enumsModule = require(profilePlatform.Common.Enums)
 local _ = require(profilePlatform.Components.CTARow.Types)
 local eventNamesModule = require(profilePlatform.Analytics.EventNames)
 local profileTypes = enumsModule.ProfileTypes
+local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
+local var5 = require(parent.DataHydration).Friends.FriendsStore.get()
 
 return {
-	[enumsModule.ProfileActions.AcceptFriendRequest] = function(p0) --[[ line: 19 ]]
-		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
+	[enumsModule.ProfileActions.AcceptFriendRequest] = function(p0) --[[ line: 23 ]]
+		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var5 (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
 			text = p0.localized[enumsModule.ProfileActions.AcceptFriendRequest],
 			variant = buttonVariant.Emphasis,
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 24 ]]
-					-- upvalues: p0 (ref), eventNamesModule (copy), enumsModule (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
+				[profileTypes.User] = function() --[[ line: 28 ]]
+					-- upvalues: p0 (ref), eventNamesModule (copy), enumsModule (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var5 (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
 					p0.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonAcceptFriendRequest, {
 						buttonSurface = p0.buttonSurface,
 						absolutePosition = p0.profileWrapperContext.sourceInfo.homepageCarouselAbsolutePosition,
@@ -31,10 +33,10 @@ return {
 						recommendationSessionId = p0.profileWrapperContext.sourceInfo.recommendationSessionId
 					})
 					
-					return p0.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
+					return (if fFlagMigrateFriendshipStatusesRemainingActions then var5.AcceptFriendRequest(p0.profileId) else p0.dispatch(networkingFriendsModule.AcceptFriendRequestFromUserId.API({
 						targetUserId = p0.profileId,
 						currentUserId = p0.localUserId
-					})):andThen(function() --[[ line: 42 ]]
+					}))):andThen(function() --[[ line: 47 ]]
 						-- upvalues: p0 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
 						p0.dispatch(setCurrentToastMessage({
 							isLocalized = true,
@@ -48,12 +50,12 @@ return {
 			}
 		}
 	end,
-	[enumsModule.ProfileActions.AcceptOffNetworkFriendRequest] = function(p1) --[[ line: 57 ]]
+	[enumsModule.ProfileActions.AcceptOffNetworkFriendRequest] = function(p1) --[[ line: 62 ]]
 		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), networkingFriendsModule (ref), setCurrentToastMessage (ref), images (ref), refreshProfilePlatformActionInfoModule (ref)
 		return {
 			text = p1.localized[enumsModule.ProfileActions.AcceptOffNetworkFriendRequest],
 			onActivated = {
-				[profileTypes.User] = function() --[[ line: 61 ]]
+				[profileTypes.User] = function() --[[ line: 66 ]]
 					-- upvalues: p1 (ref), eventNamesModule (copy), networkingFriendsModule (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
 					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonAddFriendFromContacts, {
 						shareLinkId = p1.profileWrapperContext.sourceInfo.shareLinkId
@@ -63,7 +65,7 @@ return {
 						targetUserId = p1.profileId,
 						currentUserId = p1.localUserId,
 						friendingToken = p1.profileWrapperContext.offNetworkFriendRequestToken
-					})):andThen(function() --[[ line: 71 ]]
+					})):andThen(function() --[[ line: 76 ]]
 						-- upvalues: p1 (copy), setCurrentToastMessage (copy), images (copy), refreshProfilePlatformActionInfoModule (copy)
 						p1.dispatch(setCurrentToastMessage({
 							isLocalized = true,

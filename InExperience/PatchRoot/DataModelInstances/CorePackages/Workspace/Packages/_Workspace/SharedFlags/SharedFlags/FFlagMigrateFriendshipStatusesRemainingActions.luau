@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MigrateFriendshipStatusesRemainingActions", false) and require(script.Parent.FFlagEnableGetFriendshipStatus)

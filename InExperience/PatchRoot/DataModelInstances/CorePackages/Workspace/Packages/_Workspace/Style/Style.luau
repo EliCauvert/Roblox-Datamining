@@ -17,7 +17,7 @@ return {
 	GetTextSize = require(script.Utils.GetTextSize),
 	StyleProviderWithDefaultTheme = require(script.StyleProviderWithDefaultTheme),
 	AppFonts = require(script.AppFonts),
-	ThemeContext = require(script.ThemeContext),
+	AppearanceContext = require(script.AppearanceContext),
 	UiModeTokenOverridesContext = if require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride then require(script.UiModeTokenOverridesContext) else nil,
 	getSceneOverridesStore = require(script.getSceneOverridesStore),
 	["jest.config"] = script["jest.config"]

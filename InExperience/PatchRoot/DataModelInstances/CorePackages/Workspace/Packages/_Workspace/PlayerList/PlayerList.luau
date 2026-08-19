@@ -18,18 +18,11 @@ return {
 		FFlagPlayerListDropDownShowPlatformName = require(script.Flags.FFlagPlayerListDropDownShowPlatformName),
 		FFlagPlayerListFoundationSubscriptionIcon = require(script.Flags.FFlagPlayerListFoundationSubscriptionIcon),
 		FFlagPlayerListReskin = require(script.Flags.FFlagPlayerListReskin),
-		FFlagPlayerListReskinConsoleFocusNav = require(script.Flags.FFlagPlayerListReskinConsoleFocusNav),
-		FFlagPlayerListReskinConsoleMobileRouting = require(script.Flags.FFlagPlayerListReskinConsoleMobileRouting),
-		FFlagPlayerListReskinStickySelfRow = require(script.Flags.FFlagPlayerListReskinStickySelfRow),
-		FFlagPlayerListReskinMobileLayoutFix = require(script.Flags.FFlagPlayerListReskinMobileLayoutFix),
-		FFlagPlayerListReskinOptimization = require(script.Flags.FFlagPlayerListReskinOptimization),
 		FFlagPlayerListTwoTabs = require(script.Flags.FFlagPlayerListTwoTabs),
 		FFlagPlayerListTwoTabsOnLegacy = require(script.Flags.FFlagPlayerListTwoTabsOnLegacy),
-		FFlagPlayerListReskinPreferredTransparency = require(script.Flags.FFlagPlayerListReskinPreferredTransparency),
 		FFlagPlayerListLocalizeGameText = require(script.Flags.FFlagPlayerListLocalizeGameText),
 		FFlagEnablePlayerListExposureEvents = require(script.Flags.FFlagEnablePlayerListExposureEvents),
-		FStringPlayerListIXPLayer = require(script.Flags.FStringPlayerListIXPLayer),
-		FFlagPlayerListContextMenuTelemetry = require(script.Flags.FFlagPlayerListContextMenuTelemetry)
+		FStringPlayerListIXPLayer = require(script.Flags.FStringPlayerListIXPLayer)
 	},
 	Hooks = {
 		useLeaderboardStore = require(script.Hooks.useLeaderboardStore),

@@ -7,7 +7,7 @@ local httpService = game:GetService("HttpService")
 
 return function(p0) --[[ line: 10 ]]
 	-- upvalues: tutilsModule (ref), API_URLModule (ref), httpService (ref)
-	local var3 = p0.roduxNetworking.POST({ Name = "get-or-create-link" }, function(p1, p2) --[[ line: 15 ]]
+	local var3 = p0.roduxNetworking.POST("get-or-create-link", function(p1, p2) --[[ line: 15 ]]
 		-- upvalues: tutilsModule (copy), API_URLModule (copy), httpService (copy)
 		local var4 = tutilsModule.deepCopy(p2)
 		var4.linkType = nil

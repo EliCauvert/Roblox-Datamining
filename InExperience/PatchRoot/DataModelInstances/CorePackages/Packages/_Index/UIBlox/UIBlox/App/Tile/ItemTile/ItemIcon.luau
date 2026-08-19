@@ -1,6 +1,7 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent.Parent
 local parent_2 = parent_1.Parent
+local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local roactModule = require(parent_2.Roact)
 local tModule = require(parent_2.t)
 local withStyleModule = require(parent_1.Core.Style.withStyle)
@@ -14,7 +15,7 @@ local t = {
 	[itemTileEnumsModule.ItemIconType.DynamicHead] = imagesModule["icons/status/dynamicHead_small"]
 }
 itemIcon.validateProps = tModule.strictInterface({
-	itemIconType = tModule.intersection(itemTileEnumsModule.ItemIconType.isEnumValue, function(p0) --[[ line: 24 | named "isValidItemIconType" ]]
+	itemIconType = tModule.intersection(itemTileEnumsModule.ItemIconType.isEnumValue, function(p0) --[[ line: 25 | named "isValidItemIconType" ]]
 		-- upvalues: t (ref)
 		if t[p0] then
 			return true
@@ -23,13 +24,13 @@ itemIcon.validateProps = tModule.strictInterface({
 	end)
 })
 
-function itemIcon.render(p1) --[[ line: 37 ]]
-	-- upvalues: t (ref), imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref)
+function itemIcon.render(p1) --[[ line: 38 ]]
+	-- upvalues: t (ref), imagesModule (ref), withStyleModule (ref), roactModule (ref), imageSetComponentModule (ref), UIBloxConfigModule (ref)
 	local itemIconType = t[p1.props.itemIconType]
-	local var8 = itemIconType.ImageRectSize / imagesModule.ImagesResolutionScale
+	local var9 = itemIconType.ImageRectSize / imagesModule.ImagesResolutionScale
 	
-	return withStyleModule(function(p2) --[[ line: 43 ]]
-		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), var8 (ref)
+	return withStyleModule(function(p2) --[[ line: 44 ]]
+		-- upvalues: roactModule (copy), imageSetComponentModule (copy), itemIconType (ref), UIBloxConfigModule (copy), var9 (ref)
 		local theme = p2.Theme
 		local tokens = p2.Tokens
 		
@@ -39,8 +40,8 @@ function itemIcon.render(p1) --[[ line: 37 ]]
 			Image = itemIconType,
 			ImageColor3 = theme.IconEmphasis.Color,
 			ImageTransparency = theme.IconEmphasis.Transparency,
-			Position = UDim2.new(1, -tokens.Global.Size_100, 1, -tokens.Global.Size_100),
-			Size = UDim2.new(0, var8.X, 0, var8.Y)
+			Position = UDim2.new(1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100, 1, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then -tokens.Size.Size_200 else -tokens.Global.Size_100),
+			Size = UDim2.new(0, var9.X, 0, var9.Y)
 		})
 	end)
 end

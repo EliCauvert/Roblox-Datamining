@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("PlayerListReskin2", false)
+﻿return game:DefineFastFlag("PlayerListReskin3", false)

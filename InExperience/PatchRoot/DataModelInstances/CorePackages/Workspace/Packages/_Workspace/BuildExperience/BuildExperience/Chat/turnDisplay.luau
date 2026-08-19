@@ -143,7 +143,7 @@ local function getToolActivityLabel(p14) --[[ line: 126 ]]
 	return if chatToolActivityLabel == nil then if typeof(var24) == "string" and string.lower(string.gsub(var24, "[_%-%s]", "")) == string.lower(string.gsub(subagentTasks.TOOL_NAME, "[_%-%s]", "")) then localizationStringsModule.CHAT_ASSIGNING_TASKS elseif p14.status == "completed" then localizationStringsModule.formatChatFinishedTool(var24) elseif p14.status == "failed" then localizationStringsModule.formatChatFailedTool(var24) else localizationStringsModule.formatChatRunningTool(var24) else chatToolActivityLabel
 end
 
-local function getActiveActivityLabel(p15, _) --[[ line: 160 ]]
+local function getActiveActivityLabel(p15, _) --[[ line: 181 ]]
 	-- upvalues: getToolActivityLabel (ref), localizationStringsModule (ref)
 	for i = #p15, 1, -1 do
 		local var26 = p15[i]
@@ -175,11 +175,11 @@ return {
 	formatStepCount = formatStepCount,
 	formatWorkedDuration = formatWorkedDuration,
 	getActiveActivityLabel = getActiveActivityLabel,
-	getAskUserActivityLabel = function(p17, p18) --[[ line: 185 ]]
+	getAskUserActivityLabel = function(p17, p18) --[[ line: 206 ]]
 		-- upvalues: localizationStringsModule (ref)
 		return if p18 == 0 then localizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER elseif p17 == 1 then localizationStringsModule.CHAT_QUESTION_SINGLE else localizationStringsModule.CHAT_QUESTION_MULTIPLE
 	end,
-	getCompletedActivityLabel = function(p19) --[[ line: 170 ]]
+	getCompletedActivityLabel = function(p19) --[[ line: 191 ]]
 		-- upvalues: getToolActivityLabel (ref), formatStepCount (ref), getActiveActivityLabel (ref)
 		local var28 = 0
 		
@@ -198,6 +198,34 @@ return {
 		return if var28 > 0 then formatStepCount(var28) else getActiveActivityLabel(p19, false)
 	end,
 	getLocalToolWaitSeconds = getLocalToolWaitSeconds,
+	getSummaryToolActivity = function(p20, p21) --[[ line: 160 ]]
+		if p21 == "active" then
+			for i = #p20, 1, -1 do
+				local var29 = p20[i]
+				
+				if not (var29.kind == "tool_call" and (if var29.status ~= "pending" then if var29.status ~= "in_progress" then var29.status == nil else true else true)) then
+					continue
+				end
+				return var29
+			end
+		else
+			local var30 = 0
+			
+			for i_1, v in p20 do
+				if v.kind == "tool_call" then
+					var30 += 1
+				end
+			end
+			if var30 == 1 then
+				for i_2, v_1 in p20 do
+					if v_1.kind == "tool_call" then
+						return v_1
+					end
+				end
+			end
+		end
+		return nil
+	end,
 	getToolActivityLabel = getToolActivityLabel,
 	getTurnWorkedDurationLabel = getTurnWorkedDurationLabel
 }

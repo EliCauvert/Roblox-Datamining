@@ -2,7 +2,6 @@
 local discoveryTypesModule = require(parent.DiscoveryTypes)
 local fFlagSearchOmniAutocompletePage = require(parent.SharedFlags).FFlagSearchOmniAutocompletePage
 local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
-local fFlagLuaAppAddSubIdToHomeEvents = require(parent.SharedFlags).FFlagLuaAppAddSubIdToHomeEvents
 local t = {
 	default = "LuaApp/category/filter_default",
 	Featured = "LuaApp/category/filter_featured",
@@ -18,7 +17,7 @@ local t = {
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new() --[[ line: 38 ]]
+function t_1.new() --[[ line: 37 ]]
 	-- upvalues: discoveryTypesModule (ref), t_1 (ref)
 	local t = { dataSource = discoveryTypesModule.DataSourceType.Unknown }
 	setmetatable(t, t_1)
@@ -26,7 +25,7 @@ function t_1.new() --[[ line: 38 ]]
 	return t
 end
 
-function t_1.mockFromExploreJsonData(p0, p1, p2) --[[ line: 48 ]]
+function t_1.mockFromExploreJsonData(p0, p1, p2) --[[ line: 47 ]]
 	-- upvalues: t_1 (ref)
 	return t_1.fromExploreJsonData({
 		sortDisplayName = "",
@@ -38,12 +37,12 @@ function t_1.mockFromExploreJsonData(p0, p1, p2) --[[ line: 48 ]]
 	})
 end
 
-function t_1.mockFromOmniApi(p3) --[[ line: 61 ]]
+function t_1.mockFromOmniApi(p3) --[[ line: 60 ]]
 	-- upvalues: t_1 (ref)
 	return t_1.fromOmniApi({ topic = "", treatmentType = "", topicId = p3 })
 end
 
-function t_1:fromExploreJsonData() --[[ line: 70 ]]
+function t_1:fromExploreJsonData() --[[ line: 69 ]]
 	-- upvalues: t_1 (ref), discoveryTypesModule (ref), fFlagEnableTopSongsSort (ref), t (ref)
 	local var4 = t_1.new()
 	var4.dataSource = discoveryTypesModule.DataSourceType.ExploreApi
@@ -73,14 +72,14 @@ function t_1:fromExploreJsonData() --[[ line: 70 ]]
 	return var4
 end
 
-function t_1:fromOmniApi() --[[ line: 102 ]]
-	-- upvalues: t_1 (ref), discoveryTypesModule (ref), fFlagLuaAppAddSubIdToHomeEvents (ref)
+function t_1:fromOmniApi() --[[ line: 101 ]]
+	-- upvalues: t_1 (ref), discoveryTypesModule (ref)
 	local var5 = t_1.new()
 	var5.dataSource = discoveryTypesModule.DataSourceType.DiscoveryApi
 	var5.displayName = self.topic
 	var5.topicId = tostring(self.topicId)
 	var5.subtitle = self.subtitle
-	var5.sortSubId = if fFlagLuaAppAddSubIdToHomeEvents then self.sortSubId else nil
+	var5.sortSubId = self.sortSubId
 	var5.analyticsData = self.analyticsData
 	var5.treatmentType = self.treatmentType
 	var5.uniqueKey = var5.topicId
@@ -90,7 +89,7 @@ function t_1:fromOmniApi() --[[ line: 102 ]]
 end
 
 if fFlagSearchOmniAutocompletePage then
-	function t_1:fromOmniAutocompleteApi() --[[ line: 119 ]]
+	function t_1:fromOmniAutocompleteApi() --[[ line: 118 ]]
 		-- upvalues: t_1 (ref), discoveryTypesModule (ref)
 		local var6 = t_1.new()
 		var6.dataSource = discoveryTypesModule.DataSourceType.OmniAutocompleteApi
@@ -104,11 +103,11 @@ if fFlagSearchOmniAutocompletePage then
 		return var6
 	end
 end
-function t_1.makeTopSearchTopicKey(p4, p5) --[[ line: 134 ]]
+function t_1.makeTopSearchTopicKey(p4, p5) --[[ line: 133 ]]
 	return `{p4}_{p5}`
 end
 
-function t_1:fromTopSearchApi(p6) --[[ line: 138 ]]
+function t_1:fromTopSearchApi(p6) --[[ line: 137 ]]
 	-- upvalues: t_1 (ref), discoveryTypesModule (ref)
 	local var7 = t_1.new()
 	var7.dataSource = discoveryTypesModule.DataSourceType.SearchApi
@@ -122,22 +121,22 @@ function t_1:fromTopSearchApi(p6) --[[ line: 138 ]]
 	return var7
 end
 
-function t_1.makeSearchTopicKey(p7, p8) --[[ line: 152 ]]
+function t_1.makeSearchTopicKey(p7, p8) --[[ line: 151 ]]
 	-- upvalues: t_1 (ref)
 	return t_1.makeTopSearchTopicKey(p7, p8)
 end
 
-function t_1.fromSearchApi(p9, p10) --[[ line: 156 ]]
+function t_1.fromSearchApi(p9, p10) --[[ line: 155 ]]
 	-- upvalues: t_1 (ref)
 	return t_1.fromTopSearchApi(p9, p10)
 end
 
-function t_1:isOmni() --[[ line: 160 ]]
+function t_1:isOmni() --[[ line: 159 ]]
 	-- upvalues: discoveryTypesModule (ref)
 	return self.dataSource == discoveryTypesModule.DataSourceType.DiscoveryApi
 end
 
-function t_1:isSponsored() --[[ line: 168 ]]
+function t_1:isSponsored() --[[ line: 167 ]]
 	return self.topicId == "400000000" or self.gameSetTypeId == "27"
 end
 

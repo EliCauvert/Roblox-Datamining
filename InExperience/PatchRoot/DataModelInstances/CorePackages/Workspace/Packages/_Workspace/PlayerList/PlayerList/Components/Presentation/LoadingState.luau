@@ -5,13 +5,16 @@ local foundationModule = require(parent_1.Foundation)
 local view = foundationModule.View
 local loading = foundationModule.Loading
 local iconSize = foundationModule.Enums.IconSize
-local constantsModule = require(parent.Common.Constants)
+local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
 return reactModule.memo(function(p0) --[[ line: 19 | named "LoadingStateImpl" ]]
-	-- upvalues: constantsModule (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref)
+	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref)
+	local var3 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
+	
 	return reactModule.createElement(view, {
-		tag = if p0.useLegacyPanelStyling then constantsModule.LEGACY_STATE_PANEL_TAG else constantsModule.STATE_PANEL_TAG,
-		LayoutOrder = p0.layoutOrder
+		tag = var3.panelTag,
+		LayoutOrder = p0.layoutOrder,
+		backgroundStyle = var3.backgroundStyle
 	}, {
 		Spinner = reactModule.createElement(loading, { size = iconSize.XLarge })
 	})

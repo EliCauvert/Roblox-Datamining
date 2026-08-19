@@ -58,7 +58,7 @@ local t_1 = {
 }
 
 return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 100 | named "Button" ]]
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), reactModule (ref), controlStateModule (ref), reactOtterModule (ref), endAlignedIconsModule (ref), useTokensModule (ref), usePresentationContext (ref), useButtonVariantsModule (ref), useButtonMotionStatesModule (ref), constantsModule (ref), useMotion (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), flagsModule (ref), fillBehaviorModule (ref), animatePresence (ref), spinnerModule (ref), buttonIconModule (ref), textModule (ref), onProgressChange (ref)
+	-- upvalues: withDefaultsModule (ref), t_1 (ref), reactModule (ref), controlStateModule (ref), reactOtterModule (ref), endAlignedIconsModule (ref), useTokensModule (ref), usePresentationContext (ref), useButtonVariantsModule (ref), useButtonMotionStatesModule (ref), constantsModule (ref), useMotion (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), fillBehaviorModule (ref), animatePresence (ref), spinnerModule (ref), flagsModule (ref), buttonIconModule (ref), textModule (ref), onProgressChange (ref)
 	local var43
 	local var23 = withDefaultsModule(p4, t_1)
 	local inputDelay = var23.inputDelay
@@ -129,7 +129,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 100 |
 	end, { var23.text, var23.variant, var40 })
 	local createElement = reactModule.createElement
 	local t_2 = {
-		AutomaticSize = if flagsModule.FoundationButtonFillBehaviorEqualSize and var23.fillBehavior == fillBehaviorModule.Fill or (var23.width.Scale ~= 0 or var23.width.Offset ~= 0) then nil else Enum.AutomaticSize.X,
+		AutomaticSize = if var23.width.Scale == 0 and var23.width.Offset == 0 then Enum.AutomaticSize.X else nil,
 		cornerRadius = UDim.new(0, var33.container.radius)
 	}
 	
@@ -138,7 +138,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 100 |
 		var43 = var35.transparency:map(function(p8) --[[ line: 65 ]]
 			-- upvalues: transparency (ref)
 			return if transparency == nil then p8 else transparency + (1 - transparency) * p8
-		end):map(function(p7) --[[ line: 194 ]]
+		end):map(function(p7) --[[ line: 188 ]]
 			-- upvalues: var33 (ref)
 			return { Color3 = var33.container.style.Color3, Transparency = p7 }
 		end)
@@ -183,7 +183,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 100 |
 			PresenceWrapper = reactModule.createElement(animatePresence, {}, {
 				Spinner = reactModule.createElement(spinnerModule, {
 					Size = var33.icon.size - (if flagsModule.FoundationUsePath2DSpinner then UDim2.fromOffset(var31.Padding.XSmall, var31.Padding.XSmall) else UDim2.fromOffset(0, 0)),
-					style = var35.transparency:map(function(p10) --[[ line: 248 ]]
+					style = var35.transparency:map(function(p10) --[[ line: 242 ]]
 						-- upvalues: var33 (ref)
 						return { Color3 = var33.content.style.Color3, Transparency = p10 }
 					end),
@@ -211,7 +211,7 @@ return reactModule.memo(reactModule.forwardRef(function(p4, p5) --[[ line: 100 |
 			Text = var24:map(var41),
 			RichText = t[var23.variant] == nil,
 			tag = var33.text.tag,
-			textStyle = reactModule.joinBindings({ var35.transparency, var37.textTransparency }):map(function(p11) --[[ line: 286 ]]
+			textStyle = reactModule.joinBindings({ var35.transparency, var37.textTransparency }):map(function(p11) --[[ line: 280 ]]
 				-- upvalues: var33 (ref)
 				return {
 					Color3 = var33.content.style.Color3,

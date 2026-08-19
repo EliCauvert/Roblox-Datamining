@@ -5,7 +5,7 @@ local _ = require(script.Parent.Parent.networkingSquadTypes)
 
 return function(p0) --[[ line: 9 ]]
 	-- upvalues: cryoModule (ref), url (ref)
-	return p0.roduxNetworking.POST({ Name = "SendSquadVoiceAbuseReport" }, function(p1, p2) --[[ line: 14 ]]
+	return p0.roduxNetworking.POST("SendSquadVoiceAbuseReport", function(p1, p2) --[[ line: 14 ]]
 		-- upvalues: cryoModule (copy), url (copy)
 		assert(p2.voiceChannelId, "Missing voiceChannelId")
 		

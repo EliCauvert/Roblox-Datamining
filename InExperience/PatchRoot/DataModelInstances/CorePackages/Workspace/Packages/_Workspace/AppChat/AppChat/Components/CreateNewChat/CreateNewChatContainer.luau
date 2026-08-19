@@ -27,6 +27,7 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
 local fFlagAppIaScrollAwayFixSocial = sharedFlagsModule.FFlagAppIaScrollAwayFixSocial
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
+local fFlagFixPaginatedChatMembersCutoffModule = require(appChat.Flags.FFlagFixPaginatedChatMembersCutoff)
 local t = {
 	topBarHeight = nil,
 	minSelections = 1,
@@ -35,91 +36,92 @@ local t = {
 	systemButtonText = if getFFlagIsSquadEnabled() then "Feature.Chat.Action.Create" else "Feature.Chat.Action.StartChatWithFriends",
 	pageHeaderText = if getFFlagIsSquadEnabled() then if require(parent.SocialExperiments).ArgoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then if sharedFlagsModule.FFlagAppChatNewChatFixEnabled then "Feature.Chat.Title.NewChat" else "Feature.Chat.Heading.ChatWithFriends" else "Feature.Chat.Heading.PartyWithFriends" elseif sharedFlagsModule.FFlagConnectionsToFriendsRename then "Feature.Chat.Heading.PartyWithFriends" else "Feature.Chat.Heading.PartyWithConnections" else "Feature.Chat.Heading.ChatWithConnections",
 	conversation = conversationModule.empty(),
-	setSystemButtonActivated = function(_) --[[ line: 87 ]] end,
-	setSystemButtonEnabled = function(_) --[[ line: 88 ]] end
+	setSystemButtonActivated = function(_) --[[ line: 88 ]] end,
+	setSystemButtonEnabled = function(_) --[[ line: 89 ]] end
 }
 
-function CreateNewChatContainer(p0) --[[ line: 92 ]]
-	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useState (ref), fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayFixSocial (ref), useIsInExperienceModule (ref), useIsGroupChatEnabledModule (ref), useDispatch (ref), useCallback (ref), useAnalyticsModule (ref), promiseModule (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), eventNamesModule (ref), createConversationErrorModule (ref), useEffect (ref), reactModule (ref), appNavBarModule (ref), responseIndicator (ref), selectChatMembersContainerModule (ref)
-	local var17 = cryoModule.Dictionary.join(t, p0)
-	local var18 = useRef({})
-	local var19 = useRef(false)
-	local var20, var21 = useState(false)
-	local var22 = if fFlagAppIaScrollAway and not fFlagAppIaScrollAwayFixSocial then useIsInExperienceModule() else nil
-	local maxSelections = var17.maxSelections
-	local maxConversationSize = var17.maxConversationSize
-	local var23 = false
+function CreateNewChatContainer(p0) --[[ line: 93 ]]
+	-- upvalues: cryoModule (ref), t (ref), useRef (ref), useState (ref), fFlagAppIaScrollAway (ref), fFlagAppIaScrollAwayFixSocial (ref), useIsInExperienceModule (ref), useIsGroupChatEnabledModule (ref), useDispatch (ref), useCallback (ref), useAnalyticsModule (ref), promiseModule (ref), createConversationModule (ref), parseCreateConversationErrorsModule (ref), eventNamesModule (ref), createConversationErrorModule (ref), useEffect (ref), reactModule (ref), fFlagFixPaginatedChatMembersCutoffModule (ref), appNavBarModule (ref), responseIndicator (ref), selectChatMembersContainerModule (ref)
+	local var18 = cryoModule.Dictionary.join(t, p0)
+	local var19 = useRef({})
+	local var20 = useRef(false)
+	local var21, var22 = useState(false)
+	local var23 = if fFlagAppIaScrollAway and not fFlagAppIaScrollAwayFixSocial then useIsInExperienceModule() else nil
+	local maxSelections = var18.maxSelections
+	local maxConversationSize = var18.maxConversationSize
+	local var24 = false
 	
 	if not useIsGroupChatEnabledModule() then
 		maxSelections = 1
 		maxConversationSize = 1
-		var23 = true
+		var24 = true
 	end
-	local var24 = useDispatch()
-	local var25 = useCallback(function(p1) --[[ line: 113 ]]
-		-- upvalues: var17 (ref)
-		var17.navigateToToast({ toastProps = { toastContent = { toastTitle = p1 } } })
-	end, { var17.navigateToToast })
+	local var25 = useDispatch()
+	local var26 = useCallback(function(p1) --[[ line: 114 ]]
+		-- upvalues: var18 (ref)
+		var18.navigateToToast({ toastProps = { toastContent = { toastTitle = p1 } } })
+	end, { var18.navigateToToast })
 	
-	local var26 = function(p2, p3) --[[ line: 123 ]]
-		-- upvalues: var18 (ref), cryoModule (copy), var19 (ref), var17 (ref)
-		var18.current = cryoModule.List.map(p2, function(p4) --[[ line: 124 ]]
+	local var27 = function(p2, p3) --[[ line: 124 ]]
+		-- upvalues: var19 (ref), cryoModule (copy), var20 (ref), var18 (ref)
+		var19.current = cryoModule.List.map(p2, function(p4) --[[ line: 125 ]]
 			return p4.id
 		end)
-		local var29 = p3 <= #p2
+		local var30 = p3 <= #p2
 		
-		if var19.current ~= var29 then
-			var19.current = var29
-			var17.setSystemButtonEnabled(var29)
+		if var20.current ~= var30 then
+			var20.current = var30
+			var18.setSystemButtonEnabled(var30)
 		end
 	end
 	
-	local var27 = useAnalyticsModule()
-	local var28 = useCallback(function(p5) --[[ line: 137 ]]
-		-- upvalues: var20 (ref), var18 (ref), promiseModule (copy), var21 (ref), var24 (ref), createConversationModule (copy), var27 (ref), var17 (ref), parseCreateConversationErrorsModule (copy), var25 (ref), eventNamesModule (copy), createConversationErrorModule (copy)
-		if var20 or not var18.current then
+	local var28 = useAnalyticsModule()
+	local var29 = useCallback(function(p5) --[[ line: 138 ]]
+		-- upvalues: var21 (ref), var19 (ref), promiseModule (copy), var22 (ref), var25 (ref), createConversationModule (copy), var28 (ref), var18 (ref), parseCreateConversationErrorsModule (copy), var26 (ref), eventNamesModule (copy), createConversationErrorModule (copy)
+		if var21 or not var19.current then
 			return promiseModule.resolve()
 		end
-		var21(true)
+		var22(true)
 		
-		return var24(createConversationModule(if #var18.current == 1 then "one_to_one" else "group", var18.current, var27, "userCreatedNewConversation")):andThen(function(p7) --[[ line: 158 ]]
-			-- upvalues: var17 (copy)
-			var17.navigateToConversation(p7.id)
-		end):catch(function(p6) --[[ line: 162 ]]
-			-- upvalues: parseCreateConversationErrorsModule (copy), p5 (ref), var25 (copy), var21 (copy), var27 (copy), eventNamesModule (copy), createConversationErrorModule (copy)
-			var25(if parseCreateConversationErrorsModule(p6) == "participant_chat_disabled" then p5.invalidParticipantText else p5.networkErrorText)
-			var21(false)
+		return var25(createConversationModule(if #var19.current == 1 then "one_to_one" else "group", var19.current, var28, "userCreatedNewConversation")):andThen(function(p7) --[[ line: 159 ]]
+			-- upvalues: var18 (copy)
+			var18.navigateToConversation(p7.id)
+		end):catch(function(p6) --[[ line: 163 ]]
+			-- upvalues: parseCreateConversationErrorsModule (copy), p5 (ref), var26 (copy), var22 (copy), var28 (copy), eventNamesModule (copy), createConversationErrorModule (copy)
+			var26(if parseCreateConversationErrorsModule(p6) == "participant_chat_disabled" then p5.invalidParticipantText else p5.networkErrorText)
+			var22(false)
 			
-			if var27 then
-				var27.fireAnalyticsEvent(eventNamesModule.NewConversationCreated, {
+			if var28 then
+				var28.fireAnalyticsEvent(eventNamesModule.NewConversationCreated, {
 					createConversationResult = createConversationErrorModule.FetchConversationError
 				})
 			end
 		end)
 	end, {
-		var24, var20, var21, var18, var17.navigateToConversation, var25, var27
+		var25, var21, var22, var19, var18.navigateToConversation, var26, var28
 	})
-	useEffect(function() --[[ line: 192 ]]
-		-- upvalues: var17 (ref), var28 (ref)
-		var17.setSystemButtonActivated(var28)
-	end, { var17.setSystemButtonActivated, var28 })
+	useEffect(function() --[[ line: 193 ]]
+		-- upvalues: var18 (ref), var29 (ref)
+		var18.setSystemButtonActivated(var29)
+	end, { var18.setSystemButtonActivated, var29 })
 	
 	return reactModule.createElement("ImageButton", {
 		BackgroundTransparency = 1,
 		Active = true,
 		AutoButtonColor = false,
-		Size = UDim2.new(1, 0, 1, 0)
+		Size = UDim2.new(1, 0, 1, 0),
+		Selectable = if fFlagFixPaginatedChatMembersCutoffModule then false else nil
 	}, {
-		UIPadding = if fFlagAppIaScrollAway and not fFlagAppIaScrollAwayFixSocial and (not var22 and appNavBarModule.getScrollAwayEnabled()) and var17.topBarHeight ~= nil then reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var17.topBarHeight) }) else nil,
-		responseIndicator = var20 and reactModule.createElement(responseIndicator, {
+		UIPadding = if fFlagAppIaScrollAway and not fFlagAppIaScrollAwayFixSocial and (not var23 and appNavBarModule.getScrollAwayEnabled()) and var18.topBarHeight ~= nil then reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var18.topBarHeight) }) else nil,
+		responseIndicator = var21 and reactModule.createElement(responseIndicator, {
 			soakAreaTransparency = 0.8,
 			soakAreaColor3 = Color3.fromRGB(25, 25, 25)
 		}),
-		selectChatMembers = reactModule.createElement(selectChatMembersContainerModule, cryoModule.Dictionary.join(var17, {
-			selectedUsersChanged = var26,
+		selectChatMembers = reactModule.createElement(selectChatMembersContainerModule, cryoModule.Dictionary.join(var18, {
+			selectedUsersChanged = var27,
 			maxSelections = maxSelections,
 			maxConversationSize = maxConversationSize,
-			canOnlyCreateOneToOneChat = var23
+			canOnlyCreateOneToOneChat = var24
 		}))
 	})
 end

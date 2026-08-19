@@ -96,13 +96,13 @@ local function createHeadWithAsset(value, p5, p6, p7) --[[ line: 112 ]]
 	return nil
 end
 
-function t.createMakeupHeadPreview(p8, p9, p10) --[[ line: 150 ]]
+function t.createMakeupHeadPreview(p8, p9, p10) --[[ line: 157 ]]
 	-- upvalues: playersService (ref), createHeadWithAsset (ref)
 	local var17 = nil
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
-		local ok, status = pcall(function() --[[ line: 158 ]]
+		local ok, status = pcall(function() --[[ line: 165 ]]
 			-- upvalues: playersService (copy), localPlayer (ref)
 			return playersService:GetHumanoidDescriptionFromUserIdAsync(localPlayer.UserId)
 		end)
@@ -114,33 +114,29 @@ function t.createMakeupHeadPreview(p8, p9, p10) --[[ line: 150 ]]
 	return createHeadWithAsset(var17 or Instance.new("HumanoidDescription"), p8, p9, p10)
 end
 
-function t.createMakeupThumbnailPreview(p11, p12) --[[ line: 176 ]]
-	-- upvalues: addAssetToDescription (ref), playersService (ref), t (ref), brickColor (ref)
+function t.createMakeupThumbnailPreview(p11, p12) --[[ line: 183 ]]
+	-- upvalues: createHeadWithAsset (ref), brickColor (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
 	humanoidDescription.Head = 103273511207307
+	local var19 = createHeadWithAsset(humanoidDescription, p11, p12)
 	
-	if p11 then
-		addAssetToDescription(humanoidDescription, p11, p12)
-	end
-	local bodyColors = nil
-	local var20 = nil
-	if not var20 then
+	if not var19 then
 		return nil
 	end
-	bodyColors = var20:FindFirstChildOfClass("BodyColors")
+	local bodyColors = var19:FindFirstChildOfClass("BodyColors")
 	
 	if bodyColors then
 		bodyColors.HeadColor = brickColor
 	end
-	local head = var20:FindFirstChild("Head")
+	local head = var19:FindFirstChild("Head")
 	
 	if head then
 		head.Color = brickColor.Color
 	end
-	return var20
+	return var19
 end
 
-function t.compositeMakeupFolder(p13, p14) --[[ line: 204 ]]
+function t.compositeMakeupFolder(p13, p14) --[[ line: 211 ]]
 	-- upvalues: assetService (ref)
 	local t = {}
 	
@@ -157,7 +153,7 @@ function t.compositeMakeupFolder(p13, p14) --[[ line: 204 ]]
 	if not object then
 		return nil
 	elseif p14 then
-		table.sort(t, function(p15, p16) --[[ line: 222 ]]
+		table.sort(t, function(p15, p16) --[[ line: 229 ]]
 			-- upvalues: p14 (ref)
 			return (p14[p15.Name] or 0) < (p14[p16.Name] or 0)
 		end)
@@ -194,7 +190,7 @@ function t.compositeMakeupFolder(p13, p14) --[[ line: 204 ]]
 					local object_1 = var30.Object
 					
 					if not object_1 and var30.Uri and var30.Uri ~= "" then
-						local ok, status = pcall(function() --[[ line: 261 ]]
+						local ok, status = pcall(function() --[[ line: 268 ]]
 							-- upvalues: assetService (copy), var30 (ref)
 							return assetService:CreateEditableImageAsync(var30)
 						end)

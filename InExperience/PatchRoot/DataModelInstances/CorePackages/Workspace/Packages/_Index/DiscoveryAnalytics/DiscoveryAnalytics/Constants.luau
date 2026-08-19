@@ -7,6 +7,7 @@
 		GamePlayIntentInPlacesList = "gamePlayIntentInPlacesList",
 		PlayerContextualMenu = "PlayerContextualMenu",
 		HoldToPlayLauncher = "HoldToPlayLauncher",
-		InExpHistoryTile = "InExpHistoryTile"
+		InExpHistoryTile = "InExpHistoryTile",
+		InstantPlay = "InstantPlay"
 	}
 }

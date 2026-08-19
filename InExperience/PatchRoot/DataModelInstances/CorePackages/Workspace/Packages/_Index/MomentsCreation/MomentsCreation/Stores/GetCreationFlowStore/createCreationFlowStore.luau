@@ -2,6 +2,7 @@
 local parent = momentsCreation.Parent
 local signalsModule = require(parent.Signals)
 local _ = require(parent.MomentsTypes)
+local momentsCommonModule = require(parent.MomentsCommon)
 local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
 local createNavigationMachineModule = require(momentsCreation.Stores.createNavigationMachine)
 local createSelectionStoreModule = require(momentsCreation.Stores.createSelectionStore)
@@ -9,91 +10,110 @@ local createDescriptionStoreModule = require(momentsCreation.Stores.createDescri
 local createEditsStoreModule = require(momentsCreation.Stores.createEditsStore)
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
+local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 
-return function() --[[ line: 87 | named "createCreationFlowStore" ]]
-	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref)
-	local var7 = createNavigationMachineModule(creationFlowStateModule.Gallery)
-	local var8 = createSelectionStoreModule()
-	local var9 = createDescriptionStoreModule()
-	local var10 = createEditsStoreModule()
-	local var11, var12 = createSignal(false)
-	local var13, var14 = createSignal({})
-	local var15, var16 = createSignal(nil)
-	local var17, var18 = createSignal(false)
-	local var19, var20 = createSignal(nil)
+return function() --[[ line: 97 | named "createCreationFlowStore" ]]
+	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref)
+	local var8 = createNavigationMachineModule(creationFlowStateModule.Gallery)
+	local var9 = createSelectionStoreModule()
+	local var10 = createDescriptionStoreModule()
+	local var11 = createEditsStoreModule()
+	local var12, var13 = createSignal(false)
+	local var14, var15 = createSignal({})
+	local var16, var17 = createSignal(nil)
+	local var18, var19 = createSignal(false)
+	local var20, var21 = createSignal(nil)
+	local var22, var23 = createSignal(nil)
 	
 	return {
-		getStep = var7.getStep,
-		getCurrentState = var7.getStep,
-		canNavigate = var7.canNavigate,
-		navigate = var7.navigate,
-		getActive = var11,
-		getSelectedCapture = var8.getSelectedCapture,
-		getDescription = var9.getDescription,
-		getGeneratedDescription = var9.getGeneratedDescription,
-		getMusicList = var13,
-		getMusicEdit = createComputed(function(p0) --[[ line: 115 ]]
-			-- upvalues: var10 (ref)
-			return var10.getMap(p0).music
+		getStep = var8.getStep,
+		getCurrentState = var8.getStep,
+		canNavigate = var8.canNavigate,
+		navigate = var8.navigate,
+		getActive = var12,
+		getSelectedCapture = var9.getSelectedCapture,
+		getDescription = var10.getDescription,
+		getGeneratedDescription = var10.getGeneratedDescription,
+		getGenerationToken = var10.getGenerationToken,
+		getGeneratedTextFeedback = var10.getGeneratedTextFeedback,
+		getMusicList = var14,
+		getMusicEdit = createComputed(function(p0) --[[ line: 128 ]]
+			-- upvalues: var11 (ref)
+			return var11.getMap(p0).music
 		end),
-		getTextOverlayEdits = createComputed(function(p1) --[[ line: 118 ]]
-			-- upvalues: var10 (ref)
-			return var10.getMap(p1).text
+		getTextOverlayEdits = createComputed(function(p1) --[[ line: 131 ]]
+			-- upvalues: var11 (ref)
+			return var11.getMap(p1).text
 		end),
-		getTrimEdit = createComputed(function(p2) --[[ line: 112 ]]
-			-- upvalues: var10 (ref)
-			return var10.getMap(p2).trim
+		getTrimEdit = createComputed(function(p2) --[[ line: 125 ]]
+			-- upvalues: var11 (ref)
+			return var11.getMap(p2).trim
 		end),
-		getEditsMap = var10.getMap,
-		getActiveSession = var15,
-		getIsGenerating = var17,
-		getActiveGeneration = var19,
-		updateCurrentState = function(p3) --[[ line: 124 ]]
-			-- upvalues: var7 (ref)
-			var7.reset(p3)
-		end,
-		onSelectedCaptureUpdated = function(p4) --[[ line: 129 ]]
+		getEditsMap = var11.getMap,
+		getActiveSession = var16,
+		getIsGenerating = var18,
+		getActiveGeneration = var20,
+		getTTSAudio = var22,
+		updateCurrentState = function(p3) --[[ line: 137 ]]
 			-- upvalues: var8 (ref)
-			var8.setSelectedCapture(p4)
+			var8.reset(p3)
 		end,
-		updateDescription = function(p5) --[[ line: 134 ]]
+		onSelectedCaptureUpdated = function(p4) --[[ line: 142 ]]
 			-- upvalues: var9 (ref)
-			var9.setDescription(p5)
+			var9.setSelectedCapture(p4)
 		end,
-		setGeneratedDescription = function(value) --[[ line: 138 ]]
-			-- upvalues: var9 (ref)
-			var9.setGeneratedDescription(value)
-		end,
-		updateTrimEdit = function(p6) --[[ line: 143 ]]
+		updateDescription = function(p5) --[[ line: 147 ]]
 			-- upvalues: var10 (ref)
-			var10.setCommitted("trim", p6)
+			var10.setDescription(p5)
 		end,
-		updateMusicEdit = function(p7) --[[ line: 148 ]]
+		setGeneratedDescription = function(value) --[[ line: 151 ]]
 			-- upvalues: var10 (ref)
-			var10.setCommitted("music", p7)
+			var10.setGeneratedDescription(value)
 		end,
-		updateTextOverlayEdits = function(p8) --[[ line: 153 ]]
+		setGenerationToken = function(value) --[[ line: 155 ]]
 			-- upvalues: var10 (ref)
-			var10.setCommitted("text", p8)
+			var10.setGenerationToken(value)
 		end,
-		setCommittedEdit = var10.setCommitted,
-		setActiveSession = var16,
-		setIsGenerating = var18,
-		setActiveGeneration = var20,
-		onMusicSearchRetrieved = function(p9) --[[ line: 158 ]]
-			-- upvalues: var14 (ref)
-			var14(p9)
+		setGeneratedTextFeedback = function(value) --[[ line: 159 ]]
+			-- upvalues: var10 (ref)
+			var10.setGeneratedTextFeedback(value)
 		end,
-		clearEdits = function(p10) --[[ line: 163 ]]
-			-- upvalues: var12 (ref), var8 (ref), var7 (ref), var9 (ref), var14 (ref), var10 (ref), var16 (ref)
-			var12(true)
-			var8.setSelectedCapture(nil)
-			var7.reset(p10)
-			var9.setDescription("")
-			var9.setGeneratedDescription(nil)
-			var14({})
-			var10.clear()
-			var16(nil)
+		updateTrimEdit = function(p6) --[[ line: 164 ]]
+			-- upvalues: var11 (ref)
+			var11.setCommitted("trim", p6)
+		end,
+		updateMusicEdit = function(p7) --[[ line: 169 ]]
+			-- upvalues: var11 (ref)
+			var11.setCommitted("music", p7)
+		end,
+		updateTextOverlayEdits = function(p8) --[[ line: 174 ]]
+			-- upvalues: var11 (ref)
+			var11.setCommitted("text", p8)
+		end,
+		setCommittedEdit = var11.setCommitted,
+		setActiveSession = var17,
+		setIsGenerating = var19,
+		setActiveGeneration = var21,
+		setTTSAudio = var23,
+		onMusicSearchRetrieved = function(p9) --[[ line: 179 ]]
+			-- upvalues: var15 (ref)
+			var15(p9)
+		end,
+		clearEdits = function(p10) --[[ line: 184 ]]
+			-- upvalues: var13 (ref), var9 (ref), var8 (ref), var10 (ref), fFlagMomentTextGenerationFilteredSignal (copy), var15 (ref), var11 (ref), var17 (ref)
+			var13(true)
+			var9.setSelectedCapture(nil)
+			var8.reset(p10)
+			var10.setDescription("")
+			
+			if fFlagMomentTextGenerationFilteredSignal then
+				var10.setGeneratedDescription(nil)
+				var10.setGenerationToken(nil)
+				var10.setGeneratedTextFeedback(nil)
+			end
+			var15({})
+			var11.clear()
+			var17(nil)
 		end
 	}
 end

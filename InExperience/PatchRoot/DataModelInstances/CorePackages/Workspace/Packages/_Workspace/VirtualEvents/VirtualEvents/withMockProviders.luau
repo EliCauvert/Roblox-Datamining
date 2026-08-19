@@ -11,39 +11,41 @@ local UIBloxModule = require(virtualEvents.Parent.UIBlox)
 local designTokenProvider = require(virtualEvents.Parent.Style).DesignTokenProvider
 local virtualEventsStateModule = require(virtualEvents.Parent.VirtualEventsState)
 local mockContentProvider = UIBloxModule.UnitTestHelpers.MockContentProvider
-local foundationProvider = require(virtualEvents.Parent.Foundation).FoundationProvider
+local foundationModule = require(virtualEvents.Parent.Foundation)
+local foundationProvider = foundationModule.FoundationProvider
+local colorMode = foundationModule.Enums.ColorMode
 local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local constants = UIBloxModule.App.Style.Constants
 local contentProvider = UIBloxModule.App.Context.ContentProvider
-local var11 = roduxModule.combineReducers({
+local var12 = roduxModule.combineReducers({
 	VirtualEvents = virtualEventsStateModule.installReducer()
 })
 
-return function(p0, p1) --[[ line: 32 | named "withMockProviders" ]]
-	-- upvalues: roduxModule (ref), var11 (ref), reactModule (ref), roactRoduxModule (ref), contentProvider (ref), mockContentProvider (ref), localizationModule (ref), robloxAppLocalesModule (ref), foundationProvider (ref), appStyleProvider (ref), constants (ref), roactNavigationModule (ref), designTokenProvider (ref), graphQLServerModule (ref), apolloClientModule (ref)
+return function(p0, p1) --[[ line: 34 | named "withMockProviders" ]]
+	-- upvalues: roduxModule (ref), var12 (ref), reactModule (ref), roactRoduxModule (ref), contentProvider (ref), mockContentProvider (ref), localizationModule (ref), robloxAppLocalesModule (ref), foundationProvider (ref), colorMode (ref), appStyleProvider (ref), constants (ref), roactNavigationModule (ref), designTokenProvider (ref), graphQLServerModule (ref), apolloClientModule (ref)
 	local t = {
 		StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
-			store = (if p1 then p1.store else nil) or roduxModule.Store.new(var11, if p1 then p1.initialStoreState else nil, { roduxModule.thunkMiddleware })
+			store = (if p1 then p1.store else nil) or roduxModule.Store.new(var12, if p1 then p1.initialStoreState else nil, { roduxModule.thunkMiddleware })
 		}, {
 			ContentProvider = reactModule.createElement(contentProvider.Provider, { value = mockContentProvider.new() }, {
 				LocalizationProvider = reactModule.createElement(localizationModule.LocalizationProvider, {
 					localization = robloxAppLocalesModule.Localization.new("en-us")
 				}, {
-					FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
+					FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
 						StyleProvider = reactModule.createElement(appStyleProvider, {
 							style = {
-								themeName = constants.ThemeName.Dark,
+								themeName = colorMode.Dark,
 								fontName = constants.FontName.Gotham
 							}
 						}, {
 							NavigationProvider = reactModule.createElement(roactNavigationModule.Provider, {
 								value = {
-									isFocused = function() --[[ line: 61 ]]
+									isFocused = function() --[[ line: 63 ]]
 										return true
 									end,
-									goBack = function() --[[ line: 64 ]] end,
-									addListener = function() --[[ line: 65 ]]
-										return { remove = function() --[[ line: 67 ]] end }
+									goBack = function() --[[ line: 66 ]] end,
+									addListener = function() --[[ line: 67 ]]
+										return { remove = function() --[[ line: 69 ]] end }
 									end
 								}
 							}, {
@@ -60,16 +62,16 @@ return function(p0, p1) --[[ line: 32 | named "withMockProviders" ]]
 	
 	if p1 then
 		if p1.mockResolvers then
-			local var13 = graphQLServerModule.GraphQLServer.new({ mockResolvers = p1.mockResolvers })
+			local var14 = graphQLServerModule.GraphQLServer.new({ mockResolvers = p1.mockResolvers })
 			t = {
 				ApolloProvider = reactModule.createElement(apolloClientModule.ApolloProvider, {
 					client = apolloClientModule.ApolloClient.new({
 						cache = apolloClientModule.InMemoryCache.new({}),
 						link = apolloClientModule.HttpLink.new({
 							uri = "/api",
-							fetch = function(_, p2) --[[ line: 95 ]]
-								-- upvalues: var13 (ref)
-								return var13:fetchLocal(p2)
+							fetch = function(_, p2) --[[ line: 97 ]]
+								-- upvalues: var14 (ref)
+								return var14:fetchLocal(p2)
 							end
 						})
 					})

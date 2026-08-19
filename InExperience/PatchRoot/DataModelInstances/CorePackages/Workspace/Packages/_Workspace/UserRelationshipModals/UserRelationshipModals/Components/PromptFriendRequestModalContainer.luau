@@ -10,12 +10,15 @@ local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
 local userProfilesModule = require(parent.UserProfiles)
 local myFriendsNetworkingModule = require(userRelationshipModals.Networking.myFriendsNetworking)
 local friendshipOriginSourceType = require(parent.FriendsNetworking).Enums.FriendshipOriginSourceType
+local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
+local var7 = require(parent.DataHydration).Friends.FriendsStore.get()
+local enums = require(parent.DataHydration).Friends.Enums
 local analyticsModule = require(userRelationshipModals.Analytics)
 local useLocalization = require(parent.Localization).Hooks.useLocalization
 local notificationModalsManagerModule = require(parent.NotificationModalsManager)
 local promptFriendRequestModalModule = require(script.Parent.PromptFriendRequestModal)
 
-function triggerToast(p0) --[[ line: 29 ]]
+function triggerToast(p0) --[[ line: 34 ]]
 	-- upvalues: notificationModalsManagerModule (ref)
 	notificationModalsManagerModule.SetUIBloxToast({
 		toastTitle = p0,
@@ -23,28 +26,28 @@ function triggerToast(p0) --[[ line: 29 ]]
 	})
 end
 
-local var10 = userProfilesModule.Stores.UserProfileStore.get()
+local var11 = userProfilesModule.Stores.UserProfileStore.get()
 
-return function(p1) --[[ line: 44 | named "PromptFriendRequestModalContainer" ]]
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), analyticsModule (ref), useEffect (ref), useLocalization (ref), reactModule (ref), signalsModule (ref), var10 (ref), signalsReactModule (ref), playersService (ref), myFriendsNetworkingModule (ref), friendshipOriginSourceType (ref), promptFriendRequestModalModule (ref)
-	local var11 = useDispatch()
-	local var12 = useLocalUserId()
-	local fireAnalyticsEvent = analyticsModule.useUserRelationshipModalAnalytics(analyticsModule.RelationshipTypes.Friends, tonumber(var12) or 0, p1.userId).fireAnalyticsEvent
-	useEffect(function() --[[ line: 54 ]]
+return function(p1) --[[ line: 49 | named "PromptFriendRequestModalContainer" ]]
+	-- upvalues: useDispatch (ref), useLocalUserId (ref), analyticsModule (ref), useEffect (ref), useLocalization (ref), reactModule (ref), signalsModule (ref), var11 (ref), signalsReactModule (ref), playersService (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var7 (ref), enums (ref), myFriendsNetworkingModule (ref), friendshipOriginSourceType (ref), promptFriendRequestModalModule (ref)
+	local var12 = useDispatch()
+	local var13 = useLocalUserId()
+	local fireAnalyticsEvent = analyticsModule.useUserRelationshipModalAnalytics(analyticsModule.RelationshipTypes.Friends, tonumber(var13) or 0, p1.userId).fireAnalyticsEvent
+	useEffect(function() --[[ line: 59 ]]
 		-- upvalues: fireAnalyticsEvent (ref), analyticsModule (copy)
 		fireAnalyticsEvent(analyticsModule.EventNames.ModalSeen)
 	end, { fireAnalyticsEvent })
-	local var13 = useLocalization({
+	local var14 = useLocalization({
 		friendRequestSent = "Feature.Friends.Action.FriendRequestSent",
 		somethingWentWrong = "CommonUI.Messages.Response.SomethingWentWrong"
 	})
-	local var14 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 63 ]]
-		-- upvalues: signalsModule (copy), var10 (copy), p1 (ref)
-		return signalsModule.createComputed(function(p2) --[[ line: 64 ]]
-			-- upvalues: var10 (copy), p1 (copy)
-			local var15 = var10.fetchNamesByUserIds({ tostring(p1.userId) })(p2)
-			local var16 = var15 and (var15.data and var15.data[1])
-			local names = var16 and var16.names
+	local var15 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 68 ]]
+		-- upvalues: signalsModule (copy), var11 (copy), p1 (ref)
+		return signalsModule.createComputed(function(p2) --[[ line: 69 ]]
+			-- upvalues: var11 (copy), p1 (copy)
+			local var16 = var11.fetchNamesByUserIds({ tostring(p1.userId) })(p2)
+			local var17 = var16 and (var16.data and var16.data[1])
+			local names = var17 and var17.names
 			
 			return {
 				combinedName = if names then names.getCombinedName(p2) else "",
@@ -55,41 +58,41 @@ return function(p1) --[[ line: 44 | named "PromptFriendRequestModalContainer" ]]
 	
 	return reactModule.createElement(promptFriendRequestModalModule, {
 		userId = p1.userId,
-		displayName = var14.combinedName,
-		username = var14.username,
-		onClose = function() --[[ line: 122 ]]
+		displayName = var15.combinedName,
+		username = var15.username,
+		onClose = function() --[[ line: 133 ]]
 			-- upvalues: fireAnalyticsEvent (ref), analyticsModule (copy), p1 (ref)
 			fireAnalyticsEvent(analyticsModule.EventNames.ModalClosed)
 			p1.onClose()
 		end,
-		onSendClicked = reactModule.useCallback(function() --[[ line: 78 ]]
-			-- upvalues: fireAnalyticsEvent (ref), analyticsModule (copy), playersService (copy), p1 (ref), var13 (ref), var11 (ref), myFriendsNetworkingModule (copy), var12 (ref), friendshipOriginSourceType (copy)
+		onSendClicked = reactModule.useCallback(function() --[[ line: 83 ]]
+			-- upvalues: fireAnalyticsEvent (ref), analyticsModule (copy), playersService (copy), p1 (ref), var14 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var7 (copy), enums (copy), var12 (ref), myFriendsNetworkingModule (copy), var13 (ref), friendshipOriginSourceType (copy)
 			fireAnalyticsEvent(analyticsModule.EventNames.CreateActionPressed)
 			local userIdPlayerByUserId = playersService:GetPlayerByUserId(p1.userId)
 			
 			if playersService.LocalPlayer == nil or userIdPlayerByUserId == nil then
-				var11(myFriendsNetworkingModule.RequestFriendshipFromUserId.API({
-					currentUserId = var12,
+				(if fFlagMigrateFriendshipStatusesRemainingActions then var7.RequestFriendship(tostring(p1.userId), enums.FriendshipOriginSourceType.InGame) else var12(myFriendsNetworkingModule.RequestFriendshipFromUserId.API({
+					currentUserId = var13,
 					targetUserId = tostring(p1.userId),
 					friendshipOriginSourceType = friendshipOriginSourceType.InGame.rawValue()
-				})):andThen(function() --[[ line: 98 ]]
-					-- upvalues: var13 (copy)
-					triggerToast(var13.friendRequestSent)
-				end):catch(function(_) --[[ line: 101 ]]
-					-- upvalues: var13 (copy)
-					triggerToast(var13.somethingWentWrong)
+				}))):andThen(function() --[[ line: 109 ]]
+					-- upvalues: var14 (copy)
+					triggerToast(var14.friendRequestSent)
+				end):catch(function(_) --[[ line: 112 ]]
+					-- upvalues: var14 (copy)
+					triggerToast(var14.somethingWentWrong)
 				end)
 			else
-				local ok, _ = pcall(function() --[[ line: 88 ]]
+				local ok, _ = pcall(function() --[[ line: 93 ]]
 					-- upvalues: playersService (copy), userIdPlayerByUserId (ref)
 					playersService.LocalPlayer:RequestFriendship(userIdPlayerByUserId)
 				end)
-				triggerToast(if ok then var13.friendRequestSent else var13.somethingWentWrong)
+				triggerToast(if ok then var14.friendRequestSent else var14.somethingWentWrong)
 			end
 			p1.onClose()
 		end, {
-			var12, p1.userId, var11, p1.onClose, var13.friendRequestSent,
-			var13.somethingWentWrong, fireAnalyticsEvent
+			var13, p1.userId, var12, p1.onClose, var14.friendRequestSent,
+			var14.somethingWentWrong, fireAnalyticsEvent
 		}),
 		inputDelay = p1.inputDelay
 	})

@@ -20,7 +20,8 @@
 		SquadLobbyPageUASessionInfo = "squadLobbyPageUASessionInfo",
 		SquadLobbyPageInExpSessionInfo = "squadLobbyPageInExpSessionInfo",
 		ProfilePlatformPage = "ProfilePlatformPage",
-		AddFriendsPage = "AddFriendsPage"
+		AddFriendsPage = "AddFriendsPage",
+		GamePlayFromInstantPlay = "gamePlayFromInstantPlay"
 	},
 	Tag = {
 		Level1 = { Default = "LoggedIn", LoggedOut = "LoggedOut" },

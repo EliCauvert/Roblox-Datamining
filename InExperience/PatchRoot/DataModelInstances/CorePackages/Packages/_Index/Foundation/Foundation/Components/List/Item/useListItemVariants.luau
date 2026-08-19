@@ -1,12 +1,13 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
+local flagsModule = require(foundation.Utility.Flags)
 local iconSizeModule = require(foundation.Enums.IconSize)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
 local _ = require(foundation.Providers.Style.Tokens)
 local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(_) --[[ line: 24 ]]
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
+local function variantsFactory(_) --[[ line: 26 ]]
+	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), flagsModule (ref)
 	return {
 		common = {
 			title = {
@@ -23,7 +24,9 @@ local function variantsFactory(_) --[[ line: 24 ]]
 				icon = { size = iconSizeModule.XSmall }
 			},
 			[inputSizeModule.Small] = {
-				title = { tag = "text-title-small" },
+				title = {
+					tag = if flagsModule.FoundationListItemTypographySpacing then "text-title-medium" else "text-title-small"
+				},
 				metadata = { tag = "text-body-small" },
 				description = { tag = "text-body-small" },
 				icon = { size = iconSizeModule.Small }
@@ -44,7 +47,7 @@ local function variantsFactory(_) --[[ line: 24 ]]
 	}
 end
 
-return function(p0, p1) --[[ line: 64 ]]
+return function(p0, p1) --[[ line: 68 ]]
 	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
 	local listItem = variantsContextModule.useVariants("ListItem", variantsFactory, p0)
 	

@@ -1,20 +1,19 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local luaSocialLibrariesDepsModule = require(parent_1.LuaSocialLibrariesDeps)
-local socialLuaAnalyticsModule = require(parent_1.SocialLuaAnalytics)
-local _ = require(parent_1.React)
-local friendsLanding = require(parent_1.Lumberyak).Logger.new(nil, "FriendsLanding")
+﻿local parent = script.Parent.Parent
+local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
+local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
+local _ = require(parent.React)
+local friendsLanding = require(parent.Lumberyak).Logger.new(nil, "FriendsLanding")
 local var3 = friendsLanding:new("FriendsLanding Networking")
 local friendsLandingHttpRetryCount = game:DefineFastInt("FriendsLandingHttpRetryCount", 3)
 local coreGuiService = game:GetService("CoreGui")
 local playersService = game:GetService("Players")
 local localizationService = game:GetService("LocalizationService")
 local textService = game:GetService("TextService")
-local otterModule = require(parent_1.Otter)
-local getFStringSocialAddFriendsPageLayer = require(parent_1.SharedFlags).getFStringSocialAddFriendsPageLayer
-local getFStringSocialFriendsLandingLayer = require(parent_1.SharedFlags).getFStringSocialFriendsLandingLayer
-local getFStringSocialFriendsLayer = require(parent_1.SharedFlags).getFStringSocialFriendsLayer
-local challengeRequestWrapper = require(parent_1.GenericChallenges).Middleware.ChallengeRequestWrapper
+local otterModule = require(parent.Otter)
+local getFStringSocialAddFriendsPageLayer = require(parent.SharedFlags).getFStringSocialAddFriendsPageLayer
+local getFStringSocialFriendsLandingLayer = require(parent.SharedFlags).getFStringSocialFriendsLandingLayer
+local getFStringSocialFriendsLayer = require(parent.SharedFlags).getFStringSocialFriendsLayer
+local challengeRequestWrapper = require(parent.GenericChallenges).Middleware.ChallengeRequestWrapper
 local enableFriendsLandingChallengeInterceptor = game:DefineFastFlag("EnableFriendsLandingChallengeInterceptor", false)
 local httpRequest = luaSocialLibrariesDepsModule.httpRequest
 local var11 = httpRequest.config({
@@ -34,59 +33,50 @@ local var12 = luaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = "FriendsLanding.NetworkStatus",
 	networkImpl = if enableFriendsLandingChallengeInterceptor then challengeRequestWrapper(var11) else var11
 })
-local roduxPresence = luaSocialLibrariesDepsModule.RoduxPresence
-local roduxUsers = luaSocialLibrariesDepsModule.RoduxUsers
-local fFlagFriendsLandingDeprecateUnusedMapToUsersModule = require(parent.Flags.FFlagFriendsLandingDeprecateUnusedMapToUsers)
-local contactImporterModule = require(parent_1.ContactImporter)
+local contactImporterModule = require(parent.ContactImporter)
 
 return {
-	Promise = require(parent_1.Promise),
+	Promise = require(parent.Promise),
 	llama = luaSocialLibrariesDepsModule.llama,
-	Roact = require(parent_1.Roact),
-	Rodux = require(parent_1.Rodux),
-	React = require(parent_1.React),
-	RoactNavigation = require(parent_1.RoactNavigation),
-	RoactRodux = require(parent_1.RoactRodux),
-	RoactAppExperiment = require(parent_1.RoactAppExperiment),
+	Roact = require(parent.Roact),
+	Rodux = require(parent.Rodux),
+	React = require(parent.React),
+	RoactNavigation = require(parent.RoactNavigation),
+	RoactRodux = require(parent.RoactRodux),
+	RoactAppExperiment = require(parent.RoactAppExperiment),
 	Logger = friendsLanding,
-	Text = require(parent_1.AppCommonLib).Text,
-	t = require(parent_1.t),
-	UIBlox = require(parent_1.UIBlox),
-	withLocalization = require(parent_1.Localization).withLocalization,
-	memoize = require(parent_1.AppCommonLib).memoize,
-	enumerate = require(parent_1.enumerate),
-	LocalizationProvider = require(parent_1.Localization).LocalizationProvider,
-	Url = require(parent_1.Http).Url,
-	Lumberyak = require(parent_1.Lumberyak),
-	FormFactor = require(parent_1.FormFactor).Enums.FormFactor,
+	Text = require(parent.AppCommonLib).Text,
+	t = require(parent.t),
+	UIBlox = require(parent.UIBlox),
+	withLocalization = require(parent.Localization).withLocalization,
+	memoize = require(parent.AppCommonLib).memoize,
+	enumerate = require(parent.enumerate),
+	LocalizationProvider = require(parent.Localization).LocalizationProvider,
+	Url = require(parent.Http).Url,
+	Lumberyak = require(parent.Lumberyak),
+	FormFactor = require(parent.FormFactor).Enums.FormFactor,
 	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
 	SocialLuaAnalytics = socialLuaAnalyticsModule,
-	ProfileQRCode = require(parent_1.ProfileQRCode),
-	SocialCommon = require(parent_1.SocialCommon),
-	ReactFocusNavigation = require(parent_1.ReactFocusNavigation),
-	FocusNavigationUtils = require(parent_1.FocusNavigationUtils),
-	InputHandlers = require(parent_1.InputHandlers),
-	BuilderIcons = require(parent_1.BuilderIcons),
-	Foundation = require(parent_1.Foundation),
-	UniversalAppPolicy = require(parent_1.UniversalAppPolicy).UniversalAppPolicy,
-	tutils = require(parent_1.tutils),
-	AnalyticsService = require(parent_1.Analytics).Analytics.new(game:GetService("RbxAnalyticsService")),
+	ProfileQRCode = require(parent.ProfileQRCode),
+	SocialCommon = require(parent.SocialCommon),
+	ReactFocusNavigation = require(parent.ReactFocusNavigation),
+	FocusNavigationUtils = require(parent.FocusNavigationUtils),
+	InputHandlers = require(parent.InputHandlers),
+	BuilderIcons = require(parent.BuilderIcons),
+	Foundation = require(parent.Foundation),
+	UniversalAppPolicy = require(parent.UniversalAppPolicy).UniversalAppPolicy,
+	tutils = require(parent.tutils),
+	AnalyticsService = require(parent.Analytics).Analytics.new(game:GetService("RbxAnalyticsService")),
 	RoduxNetworking = var12,
-	RoduxFriends = require(parent_1.FriendsRodux).config({ keyPath = "FriendsLanding.Friends" }),
-	Dash = require(parent_1.Dash),
-	RoduxUsers = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else roduxUsers.config({ keyPath = "FriendsLanding.Users" }),
-	RoduxPresence = roduxPresence.config({ keyPath = "FriendsLanding.Presence" }),
-	RoduxUserPermissions = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else luaSocialLibrariesDepsModule.RoduxUserPermissions.config({ keyPath = "FriendsLanding.UserPermissions" }),
-	RoduxAnalytics = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else socialLuaAnalyticsModule.Analytics.RoduxAnalytics.config({ keyPath = "FriendsLanding.Analytics" }),
+	RoduxFriends = require(parent.FriendsRodux).config({ keyPath = "FriendsLanding.Friends" }),
+	Dash = require(parent.Dash),
+	RoduxPresence = luaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = "FriendsLanding.Presence" }),
 	CoreGui = coreGuiService,
 	Players = playersService,
 	LocalizationService = localizationService,
 	TextService = textService,
-	NetworkingFriendsEnums = require(parent_1.FriendsNetworking).Enums,
-	FriendsNetworking = require(parent_1.FriendsNetworking).config({ roduxNetworking = var12 }),
-	GamesNetworking = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else luaSocialLibrariesDepsModule.NetworkingGames.config({ roduxNetworking = var12 }),
-	NetworkingUserSettings = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else luaSocialLibrariesDepsModule.NetworkingUserSettings.config({ roduxNetworking = var12 }),
-	NetworkingAccountInformation = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else luaSocialLibrariesDepsModule.NetworkingAccountInformation.config({ roduxNetworking = var12 }),
+	NetworkingFriendsEnums = require(parent.FriendsNetworking).Enums,
+	FriendsNetworking = require(parent.FriendsNetworking).config({ roduxNetworking = var12 }),
 	Otter = otterModule,
 	CollisionMatchers = luaSocialLibrariesDepsModule.CollisionMatchers,
 	getFStringSocialAddFriendsPageLayer = getFStringSocialAddFriendsPageLayer,
@@ -95,23 +85,22 @@ return {
 	FindFriendsModal = contactImporterModule.FindFriendsModal,
 	ContactsList = contactImporterModule.ContactsList,
 	ContactsRevokedAccessDialog = contactImporterModule.ContactsRevokedAccessDialog,
-	updateOptedInUsers = require(parent_1.SocialModalsCommon).Utils.updateOptedInUsers,
-	fetchOSPermissionsForContacts = require(parent_1.ContactImporter).Utils.fetchOSPermissionsForContacts,
-	PermissionsProtocol = require(parent_1.PermissionsProtocol).PermissionsProtocol,
+	updateOptedInUsers = require(parent.SocialModalsCommon).Utils.updateOptedInUsers,
+	fetchOSPermissionsForContacts = require(parent.ContactImporter).Utils.fetchOSPermissionsForContacts,
+	PermissionsProtocol = require(parent.PermissionsProtocol).PermissionsProtocol,
 	AppStorageService = game:GetService("AppStorageService"),
-	ContactImporterConstants = require(parent_1.ContactImporter).Constants,
+	ContactImporterConstants = require(parent.ContactImporter).Constants,
 	ShowContactImporterParams = contactImporterModule.ShowContactImporterParams,
-	FetchUserSettingsMetadata = if fFlagFriendsLandingDeprecateUnusedMapToUsersModule then nil else require(parent_1.DiscoverabilityModal).FetchUserSettingsMetadata,
-	DiscoverabilityOverlay = require(parent_1.DiscoverabilityModal).DiscoverabilityOverlay,
-	DiscoverabilityAnalytics = require(parent_1.DiscoverabilityModal).Analytics,
+	DiscoverabilityOverlay = require(parent.DiscoverabilityModal).DiscoverabilityOverlay,
+	DiscoverabilityAnalytics = require(parent.DiscoverabilityModal).Analytics,
 	Hooks = {
-		useLocalization = require(parent_1.Localization).Hooks.useLocalization
+		useLocalization = require(parent.Localization).Hooks.useLocalization
 	},
-	getRbxthumbWithTypeSizeAndOptions = require(parent_1.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions,
-	UserLibConstants = require(parent_1.UserLib).Utils.Constants,
-	useFocusGuiObject = require(parent_1.ReactFocusNavigation).useFocusGuiObject,
-	AppHeaderBar = require(parent_1.AppHeaderBar),
-	GetFFlagFixConnectTabSearchBarHeight = require(parent_1.SharedFlags).GetFFlagFixConnectTabSearchBarHeight,
-	FFlagEnableLeftNavOnConsole = require(parent_1.SharedFlags).FFlagEnableLeftNavOnConsole,
+	getRbxthumbWithTypeSizeAndOptions = require(parent.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions,
+	UserLibConstants = require(parent.UserLib).Utils.Constants,
+	useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject,
+	AppHeaderBar = require(parent.AppHeaderBar),
+	GetFFlagFixConnectTabSearchBarHeight = require(parent.SharedFlags).GetFFlagFixConnectTabSearchBarHeight,
+	FFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole,
 	GuiService = game:GetService("GuiService")
 }

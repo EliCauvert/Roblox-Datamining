@@ -3,7 +3,10 @@ local parent = buildExperience.Parent
 local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
+local useLocalization = require(parent.Localization).Hooks.useLocalization
 local localizationStringsModule = require(buildExperience.LocalizationStrings)
+local fFlagBuildLocalization = sharedFlagsModule.FFlagBuildLocalization
 local chatConstantsModule = require(buildExperience.Chat.chatConstants)
 local _ = require(buildExperience.Chat.chatTypes)
 local buildEmptyStateModule = require(buildExperience.Components.BuildEmptyState.BuildEmptyState)
@@ -18,9 +21,10 @@ local subagentStatusModule = require(buildExperience.Components.SubagentStatus)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local _ = require(buildExperience.Chat.useChatSessionCore)
+local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
 local fFlagEnableBuildExperienceScrollPerformanceTrackingModule = require(buildExperience.Flags.FFlagEnableBuildExperienceScrollPerformanceTracking)
 local fFlagEnableBuildOverflowMenuForNewGamesModule = require(buildExperience.Flags.FFlagEnableBuildOverflowMenuForNewGames)
-local var17 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
+local var19 = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then require(buildExperience.Telemetry.useScrollPerformanceTracker) else nil
 local divider = foundationModule.Divider
 local iconButton = foundationModule.IconButton
 local scrollView = foundationModule.ScrollView
@@ -32,7 +36,7 @@ local inputSize = foundationModule.Enums.InputSize
 local useTokens = foundationModule.Hooks.useTokens
 local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
 
-local function _(p0, p1) --[[ line: 108 | named "findGroup" ]]
+local function _(p0, p1) --[[ line: 113 | named "findGroup" ]]
 	if p0 == nil or p1 == nil then
 		return nil
 	end
@@ -44,12 +48,12 @@ local function _(p0, p1) --[[ line: 108 | named "findGroup" ]]
 	return nil
 end
 
-local _ = function(p2) --[[ line: 120 | named "getGroupStatus" ]]
+local _ = function(p2) --[[ line: 125 | named "getGroupStatus" ]]
 	-- upvalues: subagentTaskStatus (ref)
 	return if p2.isLoading then subagentTaskStatus.InProgress elseif p2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 end
 
-local function toTodoItems(p3) --[[ line: 130 ]]
+local function toTodoItems(p3) --[[ line: 135 ]]
 	local t = {}
 	
 	if p3 == nil then
@@ -66,32 +70,35 @@ local function toTodoItems(p3) --[[ line: 130 ]]
 	return t
 end
 
-return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var17 (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), pushNotificationsUpsellCardModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), chatConstantsModule (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), localizationStringsModule (ref), toTodoItems (ref)
-	local var20 = useTokens()
-	local var21 = reactModule.useRef(nil)
+return function(p4) --[[ line: 151 | named "BuildChatPageView" ]]
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var19 (ref), chatMessageListModule (ref), buildEmptyStateModule (ref), pushNotificationsUpsellCardModule (ref), subagentTaskStatus (ref), subagentStatusModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), buyMoreRobuxCardModule (ref), chatActionsModule (ref), iconButton (ref), iconName (ref), inputSize (ref), text (ref), chatConstantsModule (ref), playButtonModule (ref), buttonVariant (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), fFlagEnableBuildOverflowMenuForNewGamesModule (ref), scrollView (ref), foundationModule (ref), divider (ref), toTodoItems (ref)
+	local var22 = if fFlagBuildLocalization then useLocalization({
+		composerPlaceholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
+	}) else nil
+	local var23 = useTokens()
+	local var24 = reactModule.useRef(nil)
 	
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
-		var17("LuaApp_Build_Chat_Scroll", var21)
+		var19("LuaApp_Build_Chat_Scroll", var24)
 	end
-	local var23
-	local var22 = reactModule.useCallback(function(p5) --[[ line: 154 ]]
-		-- upvalues: var21 (ref), p4 (ref)
-		var21.current = p5
+	local var26
+	local var25 = reactModule.useCallback(function(p5) --[[ line: 164 ]]
+		-- upvalues: var24 (ref), p4 (ref)
+		var24.current = p5
 		p4.scrollingFrameRef(p5)
 	end, { p4.scrollingFrameRef })
 	local taskState = p4.taskState
 	local selectedChipGroupName = p4.selectedChipGroupName
 	
 	if taskState == nil or selectedChipGroupName == nil then
-		var23 = nil
+		var26 = nil
 	else
 		for i, v in taskState.groups do
 			if v.name == selectedChipGroupName then
-				var23 = v
+				var26 = v
 			end
 		end
-		var23 = nil
+		var26 = nil
 	end
 	taskState = chatMessageListModule({
 		messages = p4.messages,
@@ -124,24 +131,56 @@ return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
 	
 	if p4.taskState ~= nil then
 		for v, v_2 in p4.taskState.groups do
-			local var25 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
+			local var28 = if v_2.isLoading then subagentTaskStatus.InProgress elseif v_2.isComplete then subagentTaskStatus.Done else subagentTaskStatus.Pending
 			t[`Group{v}`] = reactModule.createElement(subagentStatusModule.Root, {
 				layoutOrder = v,
 				text = v_2.name,
 				isChecked = v_2.isComplete,
-				onActivated = function() --[[ line: 204 ]]
+				onActivated = function() --[[ line: 214 ]]
 					-- upvalues: p4 (ref), v_2 (ref)
 					p4.onChipActivated(v_2.name)
 				end,
 				testId = `BuildChatPage.SubagentStatus.{v_2.name}`
 			}, {
-				Indicator = if var25 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
-					status = var25,
+				Indicator = if var28 ~= subagentTaskStatus.Pending then nil else reactModule.createElement(subagentStatusModule.LoadingIndicator, {
+					status = var28,
 					testId = `BuildChatPage.SubagentStatus.{v_2.name}.Indicator`
 				})
 			})
 		end
 	end
+	local var29 = reactModule.createElement(view, {
+		testId = "BuildChatPage.ActionBody",
+		LayoutOrder = if fFlagBuildDesktopReadinessModule then nil else 3,
+		tag = {
+			["composition-content-body size-full-0 auto-y"] = true,
+			["col gap-medium"] = p4.showBuyMoreRobuxCard
+		}
+	}, {
+		BuyMoreRobux = if p4.showBuyMoreRobuxCard then reactModule.createElement(buyMoreRobuxCardModule, {
+			LayoutOrder = 1,
+			title = p4.buyMoreRobuxCardTitle,
+			description = p4.buyMoreRobuxCardDescription,
+			primaryActionText = p4.buyMoreRobuxCardPrimaryActionText,
+			onPrimaryAction = p4.onBuyMoreRobuxCardPrimaryAction,
+			secondaryActionText = p4.buyMoreRobuxCardSecondaryActionText,
+			onSecondaryAction = p4.onBuyMoreRobuxCardSecondaryAction
+		}) else nil,
+		Footer = reactModule.createElement(chatActionsModule, {
+			LayoutOrder = if p4.showBuyMoreRobuxCard then 2 else nil,
+			composerText = p4.composerText,
+			composerErrorText = p4.composerErrorText,
+			onComposerChanged = p4.onComposerChanged,
+			placeholder = if fFlagBuildLocalization then var22.composerPlaceholder else localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
+			textBoxRef = p4.textBoxRef,
+			isAssistantResponding = p4.isAssistantResponding,
+			canStopAssistantResponse = p4.canStopAssistantResponse,
+			canSendWhileResponding = p4.canSendWhileResponding,
+			onSend = p4.onSend,
+			onStop = p4.onStop
+		})
+	})
+	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center size-full bg-surface-0",
 		onAbsolutePositionChanged = p4.onPageMetricsChanged,
@@ -163,7 +202,7 @@ return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
 					testId = "BuildChatPage.BackButton",
 					icon = iconName.ChevronLargeLeft,
 					onActivated = p4.onClose,
-					size = inputSize.Medium
+					size = if fFlagBuildDesktopReadinessModule then inputSize.Large else inputSize.Medium
 				}),
 				Title = reactModule.createElement(text, {
 					LayoutOrder = 2,
@@ -221,10 +260,13 @@ return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
 		}),
 		Messages = reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
-			tag = "fill size-full-0",
-			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var22 else p4.scrollingFrameRef,
+			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var25 else p4.scrollingFrameRef,
 			onAbsoluteCanvasSizeChanged = p4.onChatViewportChanged,
 			onAbsoluteWindowSizeChanged = p4.onChatViewportChanged,
+			tag = {
+				["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
+				["fill size-full-0"] = true
+			},
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
@@ -235,7 +277,7 @@ return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
 				testId = "BuildChatPage.MessageBody",
 				layout = {
 					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, var20.Size.Size_800)
+					Padding = UDim.new(0, var23.Size.Size_800)
 				},
 				tag = {
 					["composition-content-body"] = true,
@@ -244,42 +286,18 @@ return function(p4) --[[ line: 146 | named "BuildChatPageView" ]]
 				}
 			}, taskState)
 		}),
-		Actions = reactModule.createElement(view, {
+		Actions = if fFlagBuildDesktopReadinessModule then reactModule.createElement(view, {
 			LayoutOrder = 3,
-			testId = "BuildChatPage.ActionBody",
+			testId = "BuildChatPage.ActionLayout",
 			tag = {
-				["composition-content-body"] = true,
-				["size-full-0 auto-y"] = true,
-				["col gap-medium"] = p4.showBuyMoreRobuxCard
+				["composition-layout-detail"] = true,
+				["size-full-0 auto-y"] = true
 			}
-		}, {
-			BuyMoreRobux = if p4.showBuyMoreRobuxCard then reactModule.createElement(buyMoreRobuxCardModule, {
-				LayoutOrder = 1,
-				title = p4.buyMoreRobuxCardTitle,
-				description = p4.buyMoreRobuxCardDescription,
-				primaryActionText = p4.buyMoreRobuxCardPrimaryActionText,
-				onPrimaryAction = p4.onBuyMoreRobuxCardPrimaryAction,
-				secondaryActionText = p4.buyMoreRobuxCardSecondaryActionText,
-				onSecondaryAction = p4.onBuyMoreRobuxCardSecondaryAction
-			}) else nil,
-			Footer = reactModule.createElement(chatActionsModule, {
-				LayoutOrder = if p4.showBuyMoreRobuxCard then 2 else nil,
-				composerText = p4.composerText,
-				composerErrorText = p4.composerErrorText,
-				onComposerChanged = p4.onComposerChanged,
-				placeholder = localizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
-				textBoxRef = p4.textBoxRef,
-				isAssistantResponding = p4.isAssistantResponding,
-				canStopAssistantResponse = p4.canStopAssistantResponse,
-				canSendWhileResponding = p4.canSendWhileResponding,
-				onSend = p4.onSend,
-				onStop = p4.onStop
-			})
-		}),
+		}, { ActionBody = var29 }) else var29,
 		TodoBottomSheet = reactModule.createElement(subagentStatusModule.TodoBottomSheet, {
-			title = if var23 ~= nil then "" else var23.name,
-			items = toTodoItems(var23),
-			isOpen = var23 ~= nil,
+			title = if var26 ~= nil then "" else var26.name,
+			items = toTodoItems(var26),
+			isOpen = var26 ~= nil,
 			onClose = p4.onChipBottomSheetClose
 		})
 	})

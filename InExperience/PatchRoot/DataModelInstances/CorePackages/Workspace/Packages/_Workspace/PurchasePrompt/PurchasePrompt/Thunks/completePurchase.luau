@@ -8,18 +8,22 @@ local thunkModule = require(parent.Thunk)
 local completeRequestModule = require(parent.Thunks.completeRequest)
 local fFlagEnableUnifiedProductPurchaseFlow = require(parent.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagSkipCompletionModalForMarketplace = require(parent.Parent.SharedFlags).FFlagSkipCompletionModalForMarketplace
+local AXEnsureOfferBannerRefetchUnified = game:DefineFastFlag("AXEnsureOfferBannerRefetchUnified", false)
 local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnifiedPurchaseTelemetryCounter)
 local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTelemetry)
 local sendUnifiedPurchaseEventLogModule = require(parent.Utils.sendUnifiedPurchaseEventLog)
 local unifiedPurchaseEventNameEnumModule = require(parent.Enums.UnifiedPurchaseEventNameEnum)
 
-return function(p0) --[[ line: 30 | named "completePurchase" ]]
-	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
-	return thunkModule.new(script.Name, {}, function(p1, _) --[[ line: 31 ]]
-		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p0 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
-		local var10 = workspaceService.DistributedGameTime - p1:getState().purchasingStartTime
+return function(p0) --[[ line: 31 | named "completePurchase" ]]
+	-- upvalues: thunkModule (ref), workspaceService (ref), purchaseCompleteRecievedModule (ref), AXEnsureOfferBannerRefetchUnified (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref), sendUnifiedPurchaseEventLogModule (ref), unifiedPurchaseEventNameEnumModule (ref), fFlagSkipCompletionModalForMarketplace (ref), setPromptStateModule (ref), promptStateModule (ref), completeRequestModule (ref)
+	return thunkModule.new(script.Name, {}, function(p1, _) --[[ line: 32 ]]
+		-- upvalues: workspaceService (copy), purchaseCompleteRecievedModule (copy), AXEnsureOfferBannerRefetchUnified (copy), fFlagEnableUnifiedProductPurchaseFlow (copy), p0 (ref), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), sendUnifiedPurchaseEventLogModule (copy), unifiedPurchaseEventNameEnumModule (copy), fFlagSkipCompletionModalForMarketplace (copy), setPromptStateModule (copy), promptStateModule (copy), completeRequestModule (copy)
+		local var11 = workspaceService.DistributedGameTime - p1:getState().purchasingStartTime
 		p1:dispatch(purchaseCompleteRecievedModule())
 		
+		if AXEnsureOfferBannerRefetchUnified then
+			p1:flush()
+		end
 		if fFlagEnableUnifiedProductPurchaseFlow and p1:getState().isUserEligibleForUnifiedPurchaseFlow then
 			local state = p1:getState()
 			local postPurchaseActions = state.postPurchaseActions
@@ -58,10 +62,10 @@ return function(p0) --[[ line: 30 | named "completePurchase" ]]
 				p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 				
 				return p1:dispatch(completeRequestModule())
-			elseif var10 >= 1 then
+			elseif var11 >= 1 then
 				return p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 			end
-			delay(1 - var10, function() --[[ line: 87 ]]
+			delay(1 - var11, function() --[[ line: 93 ]]
 				-- upvalues: p1 (ref), setPromptStateModule (copy), promptStateModule (copy)
 				return p1:dispatch(setPromptStateModule(promptStateModule.PurchaseComplete))
 			end)

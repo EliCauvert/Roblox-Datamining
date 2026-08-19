@@ -1,5 +1,7 @@
 ﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
 local parent = buildExperience.Parent
+local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
+local var2 = if fFlagBuildDesktopReadinessModule then require(parent.Display) else nil
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
 local reactRobloxModule = require(parent.ReactRoblox)
@@ -10,104 +12,143 @@ local getBuildPillMenuPortalStoreModule = require(buildExperience.Stores.GetBuil
 local view = foundationModule.View
 local useOverlay = foundationModule.Hooks.useOverlay
 local useStyleSheet = foundationModule.Hooks.useStyleSheet
+local useTokens = foundationModule.Hooks.useTokens
 
-local function _(p0, p1) --[[ line: 27 | named "getOverlayPosition" ]]
-	local var8 = p0.AbsolutePosition - (if p1:IsA("GuiObject") then p1.AbsolutePosition else Vector2.zero)
-	
-	return UDim2.fromOffset(var8.X, var8.Y)
+local function _(p0, p1) --[[ line: 31 | named "isSideSheet" ]]
+	return if p0 == Enum.DisplaySize.Small then p1.Y < p1.X else true
 end
 
-return reactModule.memo(function(p2) --[[ line: 34 | named "BuildPillMenuPortal" ]]
-	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), reactModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref)
-	local var9 = signalsReactModule.useSignalState(getBuildPillMenuPortalStoreModule().getPortalTarget)
-	local var10 = useOverlay()
-	local var11 = useStyleSheet()
-	local var12 = reactModule.useRef(nil)
-	local var13, var14 = reactModule.useState(nil)
-	local var15 = reactModule.useCallback(function() --[[ line: 42 ]]
-		-- upvalues: var12 (ref), var9 (ref), var10 (ref)
-		local current = var12.current
+local _ = function(p2, p3) --[[ line: 35 | named "getOverlayPosition" ]]
+	local var10 = p2.AbsolutePosition - (if p3:IsA("GuiObject") then p3.AbsolutePosition else Vector2.zero)
+	
+	return UDim2.fromOffset(var10.X, var10.Y)
+end
+
+return reactModule.memo(function(p4) --[[ line: 42 | named "BuildPillMenuPortal" ]]
+	-- upvalues: getBuildPillMenuPortalStoreModule (ref), signalsReactModule (ref), useOverlay (ref), useStyleSheet (ref), fFlagBuildDesktopReadinessModule (ref), useTokens (ref), var2 (ref), reactModule (ref), view (ref), buildPillMenuModule (ref), reactRobloxModule (ref), buildPillMenuPageHostModule (ref)
+	local var11 = signalsReactModule.useSignalState(getBuildPillMenuPortalStoreModule().getPortalTarget)
+	local var12 = useOverlay()
+	local var13 = useStyleSheet()
+	local var14 = if fFlagBuildDesktopReadinessModule then useTokens() else nil
+	local var15 = if fFlagBuildDesktopReadinessModule then var2.GetDisplayStore(false) else nil
+	local var16 = if fFlagBuildDesktopReadinessModule then signalsReactModule.useSignalState(var15.getDisplaySize) else nil
+	local var17 = if fFlagBuildDesktopReadinessModule then signalsReactModule.useSignalState(var15.getViewportSize) else nil
+	local var18 = reactModule.useRef(nil)
+	local var19, var20 = reactModule.useState(nil)
+	local var21 = if fFlagBuildDesktopReadinessModule and p4.sheet ~= nil and (if var16 == Enum.DisplaySize.Small then var17.Y < var17.X else true) then p4.sheet else nil
+	local var22 = reactModule.useCallback(function() --[[ line: 62 ]]
+		-- upvalues: var18 (ref), var11 (ref), var12 (ref)
+		local current = var18.current
 		
-		if var9 == nil or var10 == nil or current == nil then
+		if var11 == nil or var12 == nil or current == nil then
 			return
 		end
-		local var23 = var9.AbsolutePosition - (if var10:IsA("GuiObject") then var10.AbsolutePosition else Vector2.zero)
-		current.Position = UDim2.fromOffset(var23.X, var23.Y)
-	end, { var9, var10 })
-	local var16 = reactModule.useCallback(function(p3) --[[ line: 51 ]]
-		-- upvalues: var12 (ref), var15 (ref)
-		var12.current = p3
-		var15()
-	end, { var15 })
-	local var17 = reactModule.useCallback(function(p4) --[[ line: 56 ]]
-		-- upvalues: var14 (ref)
-		var14({ type = "overflow", page = p4 })
+		local var30 = var11.AbsolutePosition - (if var12:IsA("GuiObject") then var12.AbsolutePosition else Vector2.zero)
+		current.Position = UDim2.fromOffset(var30.X, var30.Y)
+	end, { var11, var12 })
+	local var23 = reactModule.useCallback(function(p5) --[[ line: 71 ]]
+		-- upvalues: var18 (ref), var22 (ref)
+		var18.current = p5
+		var22()
+	end, { var22 })
+	local var24 = reactModule.useCallback(function(p6) --[[ line: 76 ]]
+		-- upvalues: var20 (ref)
+		var20({ type = "overflow", page = p6 })
 	end, {})
-	local var18 = reactModule.useCallback(function() --[[ line: 63 ]]
-		-- upvalues: var14 (ref)
-		var14({ type = "agents" })
+	local var25 = reactModule.useCallback(function() --[[ line: 83 ]]
+		-- upvalues: var20 (ref)
+		var20({ type = "agents" })
 	end, {})
-	local var19 = reactModule.useCallback(function() --[[ line: 69 ]]
-		-- upvalues: var14 (ref)
-		var14({ type = "invitePicker" })
+	local var26 = reactModule.useCallback(function() --[[ line: 89 ]]
+		-- upvalues: var20 (ref)
+		var20({ type = "invitePicker" })
 	end, {})
-	local var20 = reactModule.useCallback(function() --[[ line: 75 ]]
-		-- upvalues: var14 (ref)
-		var14({ type = "playtestManagement" })
+	local var27 = reactModule.useCallback(function() --[[ line: 95 ]]
+		-- upvalues: var20 (ref)
+		var20({ type = "playtestManagement" })
 	end, {})
-	local var21 = reactModule.useCallback(function() --[[ line: 81 ]]
-		-- upvalues: var14 (ref)
-		var14({ type = "creator-credit" })
+	local var28 = reactModule.useCallback(function() --[[ line: 101 ]]
+		-- upvalues: var20 (ref)
+		var20({ type = "creator-credit" })
 	end, {})
-	local var22 = reactModule.useCallback(function() --[[ line: 87 ]]
-		-- upvalues: var14 (ref)
-		var14(nil)
+	local var29 = reactModule.useCallback(function() --[[ line: 107 ]]
+		-- upvalues: var20 (ref)
+		var20(nil)
 	end, {})
-	reactModule.useLayoutEffect(function() --[[ line: 91 ]]
-		-- upvalues: var9 (ref), var10 (ref), var15 (ref)
-		if var9 == nil or var10 == nil then
-			return
-		end
-		var15()
-		local var24 = var9:GetPropertyChangedSignal("AbsolutePosition"):Connect(var15)
-		local var25 = if var10:IsA("GuiObject") then var10:GetPropertyChangedSignal("AbsolutePosition"):Connect(var15) else nil
-		
-		return function() --[[ line: 104 ]]
-			-- upvalues: var24 (ref), var25 (ref)
-			var24:Disconnect()
+	
+	if fFlagBuildDesktopReadinessModule then
+		reactModule.useLayoutEffect(function() --[[ line: 112 ]]
+			-- upvalues: var21 (write)
+			if var21 == nil then
+				return
+			end
+			local clipsDescendants = var21.ClipsDescendants
+			var21.ClipsDescendants = false
 			
-			if var25 ~= nil then
-				var25:Disconnect()
+			return function() --[[ line: 121 ]]
+				-- upvalues: var21 (copy), clipsDescendants (ref)
+				var21.ClipsDescendants = clipsDescendants
+			end
+		end, { var21 })
+	end
+	reactModule.useLayoutEffect(function() --[[ line: 128 ]]
+		-- upvalues: fFlagBuildDesktopReadinessModule (copy), var21 (write), var11 (ref), var12 (ref), var22 (ref)
+		if fFlagBuildDesktopReadinessModule and var21 ~= nil then return end
+		if var11 == nil or var12 == nil then
+			return
+		end
+		var22()
+		local var31 = var11:GetPropertyChangedSignal("AbsolutePosition"):Connect(var22)
+		local var32 = if var12:IsA("GuiObject") then var12:GetPropertyChangedSignal("AbsolutePosition"):Connect(var22) else nil
+		
+		return function() --[[ line: 144 ]]
+			-- upvalues: var31 (ref), var32 (ref)
+			var31:Disconnect()
+			
+			if var32 ~= nil then
+				var32:Disconnect()
 			end
 		end
-	end, { var9, var10, var15 })
+	end, {
+		if fFlagBuildDesktopReadinessModule then var21 else nil,
+		var11,
+		var12,
+		var22
+	})
 	
-	return if var9 == nil or var10 == nil then nil else reactModule.createElement(reactModule.Fragment, nil, {
-		Pill = reactRobloxModule.createPortal(reactModule.createElement(reactModule.Fragment, nil, {
-			StyleLink = reactModule.createElement("StyleLink", { StyleSheet = var11 }),
-			Container = reactModule.createElement(view, {
-				ZIndex = 999,
-				tag = "auto-xy",
-				testId = "build-pill-menu-overlay-container",
-				AnchorPoint = var9.AnchorPoint,
-				ref = var16
-			}, {
-				Pill = reactModule.createElement(buildPillMenuModule, {
-					target = p2.target,
-					testId = p2.testId,
-					onOpenPage = var17,
-					onOpenInvitePicker = var19,
-					onOpenAgentsPage = var18,
-					onOpenCreatorCreditPage = var21
-				})
+	if var11 == nil or var12 == nil then
+		return nil
+	end
+	local createElement = reactModule.createElement
+	createElement = createElement(reactModule.Fragment, nil, {
+		StyleLink = reactModule.createElement("StyleLink", { StyleSheet = var13 }),
+		Container = reactModule.createElement(view, {
+			ZIndex = 999,
+			tag = "auto-xy",
+			testId = "build-pill-menu-overlay-container",
+			AnchorPoint = if fFlagBuildDesktopReadinessModule and var21 ~= nil then Vector2.new(1, 0) else var11.AnchorPoint,
+			Position = if fFlagBuildDesktopReadinessModule and var21 ~= nil then UDim2.fromOffset(-var14.Padding.Large, 0) else nil,
+			ref = if fFlagBuildDesktopReadinessModule and var21 ~= nil then nil else var23
+		}, {
+			Pill = reactModule.createElement(buildPillMenuModule, {
+				target = p4.target,
+				testId = p4.testId,
+				onOpenPage = var24,
+				onOpenInvitePicker = var26,
+				onOpenAgentsPage = var25,
+				onOpenCreatorCreditPage = var28
 			})
-		}), var10),
+		})
+	})
+	
+	return reactModule.createElement(reactModule.Fragment, nil, {
+		Pill = reactRobloxModule.createPortal(createElement, if fFlagBuildDesktopReadinessModule and var21 ~= nil then var21 else var12),
 		Page = reactModule.createElement(buildPillMenuPageHostModule, {
-			activePage = var13,
-			target = p2.target,
-			onClose = var22,
-			onInvitesSent = var20,
-			onOpenInvitePicker = var19
+			activePage = var19,
+			target = p4.target,
+			onClose = var29,
+			onInvitesSent = var27,
+			onOpenInvitePicker = var26
 		})
 	})
 end)

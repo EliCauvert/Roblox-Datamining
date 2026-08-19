@@ -43,6 +43,7 @@ local blockingModule = require(playerContextualMenu.Http.Blocking)
 local playerContextualMenuComponentModule = require(playerContextualMenu.Components.PlayerContextualMenuComponent)
 local useHttpRequestModule = require(script.Parent.HttpRequest.useHttpRequest)
 local _ = require(parent.FriendsNetworking).Enums
+local var21 = require(parent.DataHydration).Friends.FriendsStore.get()
 local fFlagUserProfileConsoleUseNewReportFlowModule = require(playerContextualMenu.Flags.FFlagUserProfileConsoleUseNewReportFlow)
 local closeCentralOverlay = nil
 local abuseVectorModule = nil
@@ -57,23 +58,24 @@ local playerContextualMenuVendorImagePath = game:DefineFastString("PlayerContext
 local fFlagUserBlockingApiPlayerContextMenuEnabledModule = require(playerContextualMenu.Flags.FFlagUserBlockingApiPlayerContextMenuEnabled)
 local fFlagPCMAcceptWidthAsProp = game:DefineFastFlag("FFlagPCMAcceptWidthAsProp", false)
 local fFlagSkipBlockModal = require(parent.SharedFlags).FFlagSkipBlockModal
-local var27 = if game:GetEngineFeature("PlatformFriendsService") and game:GetEngineFeature("PlatformFriendsProfile") then game:GetService("PlatformFriendsService") else nil
+local fFlagMigrateFriendshipStatusesRemainingActions = require(parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
+local var28 = if game:GetEngineFeature("PlatformFriendsService") and game:GetEngineFeature("PlatformFriendsProfile") then game:GetService("PlatformFriendsService") else nil
 
-local function NO_OPT_CALLBACK() --[[ line: 104 ]] end
+local function NO_OPT_CALLBACK() --[[ line: 108 ]] end
 
-local function launchGameWithAnalytics(p0, p1, p2, p3, p4) --[[ line: 106 ]]
+local function launchGameWithAnalytics(p0, p1, p2, p3, p4) --[[ line: 110 ]]
 	-- upvalues: setGamePlaySession (ref), sessionType (ref), eventNames (ref), httpService (ref), discoveryAnalyticsModule (ref), analyticsService (ref), experienceService (ref)
 	setGamePlaySession(p4, sessionType.StructuralIdentifier.GamePlayFromFriendsList, true)
 	p0(eventNames.JoinExperience, { profileUserId = p2 })
-	local var32 = httpService:GenerateGUID(false)
+	local var33 = httpService:GenerateGUID(false)
 	discoveryAnalyticsModule.Events.gamePlayIntent(analyticsService.EventStream, discoveryAnalyticsModule.Constants.Context.PlayerContextualMenu, {
 		friendId = p2,
 		pageName = p1,
 		placeId = if p3 then p3.locationPlaceId else nil,
 		rootPlaceId = if p3 then p3.locationRootPlaceId else nil,
-		joinAttemptId = var32
+		joinAttemptId = var33
 	})
-	experienceService:LaunchExperience({ userId = p2, joinAttemptId = var32 }, "PlayerContextualMenu")
+	experienceService:LaunchExperience({ userId = p2, joinAttemptId = var33 }, "PlayerContextualMenu")
 end
 
 local t = { enableExperienceCTAs = true, width = UDim.new(0, 400) }
@@ -98,64 +100,64 @@ local t_1 = {
 	ConnectionRemoved = if fFlagConnectionsToFriendsRename then "Feature.Friends.Action.FriendRemoved" else "Feature.Friends.Label.ConnectionRemoved"
 }
 
-return function(p5) --[[ line: 210 | named "PlayerContextualMenuContainer" ]]
-	-- upvalues: cryoModule (ref), t (ref), roactRodux (ref), robloxAppHooksModule (ref), navigationModule (ref), appSessionService (ref), useLocalization (ref), t_1 (ref), toastRoduxModule (ref), reactModule (ref), setupFireEvent (ref), analyticsService (ref), useHttpRequestModule (ref), url (ref), getFFlagAppChatPCMFixBlocking (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), blockingModule (ref), name (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), userProfilesModule (ref), var27 (ref), recommendationContextType (ref), getPresenceIconModule (ref), getPresenceTextModule (ref), useRecommendationContextualInfoDisplay (ref), eventNames (ref), setGamePlaySession (ref), sessionType (ref), discoveryAnalyticsModule (ref), getCurrentRouteState (ref), appPage (ref), button (ref), buttonType (ref), launchGameWithAnalytics (ref), fFlagUserProfileConsoleUseNewReportFlowModule (ref), openDynamicAbuseReportModule (write), abuseVectorModule (write), closeCentralOverlay (write), fFlagSkipBlockModal (ref), friendsModule (ref), images (ref), playerContextualMenuVendorImagePath (ref), NO_OPT_CALLBACK (ref), dashModule (ref), playerContextualMenuComponentModule (ref), fFlagPCMAcceptWidthAsProp (ref)
-	local var33 = cryoModule.Dictionary.union(t, p5)
-	local var34 = roactRodux.useDispatch()
-	local var35 = robloxAppHooksModule.useLocalUserId()
-	local var36 = navigationModule.useNavigation()
-	local var37 = robloxAppHooksModule.useRoactService(appSessionService)
-	local var38 = useLocalization(t_1)
+return function(p5) --[[ line: 214 | named "PlayerContextualMenuContainer" ]]
+	-- upvalues: cryoModule (ref), t (ref), roactRodux (ref), robloxAppHooksModule (ref), navigationModule (ref), appSessionService (ref), useLocalization (ref), t_1 (ref), toastRoduxModule (ref), reactModule (ref), setupFireEvent (ref), analyticsService (ref), useHttpRequestModule (ref), url (ref), getFFlagAppChatPCMFixBlocking (ref), fFlagUserBlockingApiPlayerContextMenuEnabledModule (ref), blockingModule (ref), name (ref), useDesignTokens (ref), fFlagRenameDeprecatedUIBloxTokens (ref), userProfilesModule (ref), var28 (ref), recommendationContextType (ref), getPresenceIconModule (ref), getPresenceTextModule (ref), useRecommendationContextualInfoDisplay (ref), eventNames (ref), setGamePlaySession (ref), sessionType (ref), discoveryAnalyticsModule (ref), getCurrentRouteState (ref), appPage (ref), button (ref), buttonType (ref), launchGameWithAnalytics (ref), fFlagUserProfileConsoleUseNewReportFlowModule (ref), openDynamicAbuseReportModule (write), abuseVectorModule (write), closeCentralOverlay (write), fFlagSkipBlockModal (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref), var21 (ref), friendsModule (ref), images (ref), playerContextualMenuVendorImagePath (ref), NO_OPT_CALLBACK (ref), dashModule (ref), playerContextualMenuComponentModule (ref), fFlagPCMAcceptWidthAsProp (ref)
+	local var34 = cryoModule.Dictionary.union(t, p5)
+	local var35 = roactRodux.useDispatch()
+	local var36 = robloxAppHooksModule.useLocalUserId()
+	local var37 = navigationModule.useNavigation()
+	local var38 = robloxAppHooksModule.useRoactService(appSessionService)
+	local var39 = useLocalization(t_1)
 	local t_2 = {
 		isLocalized = true,
-		toastMessage = var38.SomethingIsWrong,
+		toastMessage = var39.SomethingIsWrong,
 		toastType = toastRoduxModule.Enums.ToastType.NetworkingError
 	}
-	local var40 = reactModule.useMemo(function() --[[ line: 226 ]]
-		-- upvalues: setupFireEvent (copy), analyticsService (copy), var35 (ref)
+	local var41 = reactModule.useMemo(function() --[[ line: 230 ]]
+		-- upvalues: setupFireEvent (copy), analyticsService (copy), var36 (ref)
 		return setupFireEvent({
 			analytics = analyticsService,
-			infoForAllEvents = { uid = var35 }
+			infoForAllEvents = { uid = var36 }
 		})
-	end, { var35 })
-	local var41 = useHttpRequestModule()
-	local var42, var43 = reactModule.useState({ status = "NotStarted", isPlayable = false })
-	reactModule.useEffect(function() --[[ line: 242 ]]
-		-- upvalues: var33 (ref), var43 (ref), var41 (ref), url (copy)
-		if var33.subjectPresence and var33.subjectPresence.locationUniverseId then
-			var43({ status = "Fetching", isPlayable = false })
-			var41(url.GAME_URL .. "v1/games/multiget-playability-status?universeIds=" .. var33.subjectPresence.locationUniverseId, "GET"):andThen(function(p6) --[[ line: 254 ]]
-				-- upvalues: var43 (copy)
+	end, { var36 })
+	local var42 = useHttpRequestModule()
+	local var43, var44 = reactModule.useState({ status = "NotStarted", isPlayable = false })
+	reactModule.useEffect(function() --[[ line: 246 ]]
+		-- upvalues: var34 (ref), var44 (ref), var42 (ref), url (copy)
+		if var34.subjectPresence and var34.subjectPresence.locationUniverseId then
+			var44({ status = "Fetching", isPlayable = false })
+			var42(url.GAME_URL .. "v1/games/multiget-playability-status?universeIds=" .. var34.subjectPresence.locationUniverseId, "GET"):andThen(function(p6) --[[ line: 258 ]]
+				-- upvalues: var44 (copy)
 				if p6.responseBody and p6.responseBody[1] then
-					var43({
+					var44({
 						status = "Finished",
 						isPlayable = p6.responseBody[1].isPlayable
 					})
 				end
-			end):catch(function(_) --[[ line: 262 ]]
-				-- upvalues: var43 (copy)
-				var43({ status = "Failed", isPlayable = false })
+			end):catch(function(_) --[[ line: 266 ]]
+				-- upvalues: var44 (copy)
+				var44({ status = "Failed", isPlayable = false })
 			end)
 		end
-	end, { tostring(var33.subjectPresence) })
-	local var44 = nil
+	end, { tostring(var34.subjectPresence) })
+	local var45 = nil
 	
 	if getFFlagAppChatPCMFixBlocking() then
-		var44 = roactRodux.useSelector(function(p7) --[[ line: 274 ]]
-			-- upvalues: fFlagUserBlockingApiPlayerContextMenuEnabledModule (copy), var33 (ref)
-			return (if fFlagUserBlockingApiPlayerContextMenuEnabledModule then p7.PlayerContextualMenu.UserBlocking.isBlockedByMe else p7.PlayerContextualMenu.IsBlockedByMe)[var33.subjectUserId] == nil
+		var45 = roactRodux.useSelector(function(p7) --[[ line: 278 ]]
+			-- upvalues: fFlagUserBlockingApiPlayerContextMenuEnabledModule (copy), var34 (ref)
+			return (if fFlagUserBlockingApiPlayerContextMenuEnabledModule then p7.PlayerContextualMenu.UserBlocking.isBlockedByMe else p7.PlayerContextualMenu.IsBlockedByMe)[var34.subjectUserId] == nil
 		end)
-		reactModule.useEffect(function() --[[ line: 282 ]]
-			-- upvalues: var44 (write), var34 (ref), blockingModule (copy), var33 (ref), name (copy)
-			if var44 then
-				var34(blockingModule.IsBlockedById.API({ userId = var33.subjectUserId })):andThen(function() --[[ line: 287 ]] end):catch(function() --[[ line: 288 ]]
+		reactModule.useEffect(function() --[[ line: 286 ]]
+			-- upvalues: var45 (write), var35 (ref), blockingModule (copy), var34 (ref), name (copy)
+			if var45 then
+				var35(blockingModule.IsBlockedById.API({ userId = var34.subjectUserId })):andThen(function() --[[ line: 291 ]] end):catch(function() --[[ line: 292 ]]
 					-- upvalues: name (copy)
 					name:warning("Failed to check if subject user is blocked")
 				end)
 			end
-		end, { var44, var34, var33.subjectUserId })
+		end, { var45, var35, var34.subjectUserId })
 	end
-	local var45 = useDesignTokens(function(p8) --[[ line: 295 ]]
+	local var46 = useDesignTokens(function(p8) --[[ line: 299 ]]
 		-- upvalues: fFlagRenameDeprecatedUIBloxTokens (copy)
 		return {
 			iconEmphasis = if fFlagRenameDeprecatedUIBloxTokens then p8.Color.Content.Emphasis else p8.Semantic.Icon.Emphasis,
@@ -163,431 +165,433 @@ return function(p5) --[[ line: 210 | named "PlayerContextualMenuContainer" ]]
 			joinEventButtonHeight = p8.Size.Size_1200
 		}
 	end)
-	local var46 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { var33.subjectUserId },
+	local var47 = userProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { var34.subjectUserId },
 		query = userProfilesModule.Queries.userProfilesDisplayUserPlatformNamesByUserIds
 	})
-	local var47 = ""
-	local _ = ""
 	local var48 = ""
+	local _ = ""
 	local var49 = ""
+	local var50 = ""
 	
-	if var46.data then
-		local var50
-		var47 = userProfilesModule.Selectors.getUsernameFromId(var46.data, var33.subjectUserId)
-		local _ = userProfilesModule.Selectors.getDisplayNameFromId(var46.data, var33.subjectUserId)
-		var48 = userProfilesModule.Selectors.getPlatformNameFromId(var46.data, var33.subjectUserId)
+	if var47.data then
+		local var51
+		var48 = userProfilesModule.Selectors.getUsernameFromId(var47.data, var34.subjectUserId)
+		local _ = userProfilesModule.Selectors.getDisplayNameFromId(var47.data, var34.subjectUserId)
+		var49 = userProfilesModule.Selectors.getPlatformNameFromId(var47.data, var34.subjectUserId)
 		
-		if var27 then
-			var49 = userProfilesModule.Selectors.getPlatformProfileIdFromId(var46.data, var33.subjectUserId)
+		if var28 then
+			var50 = userProfilesModule.Selectors.getPlatformProfileIdFromId(var47.data, var34.subjectUserId)
 		end
 	end
-	if var48 then
-		var50 = var48 ~= ""
-		var50 = nil
-	else
-		var50 = false
-	end
-	local recommendationContext = var33.recommendationContext
-	local _ = recommendationContext ~= recommendationContextType.Contacts and ((if recommendationContext ~= recommendationContextType.Contacts then var33.contactName else nil) or "")
-	local var51, var52 = getPresenceIconModule(var33.subjectPresence, var45)
-	
-	if var33.robloxFriendshipStatus ~= Enum.FriendStatus.Friend then
+	if var49 then
+		var51 = var49 ~= ""
 		var51 = nil
-		var52 = nil
+	else
+		var51 = false
 	end
-	local var53 = if var33.robloxFriendshipStatus == Enum.FriendStatus.Friend then getPresenceTextModule(var33.subjectPresence) else nil
+	local recommendationContext = var34.recommendationContext
+	local _ = recommendationContext ~= recommendationContextType.Contacts and ((if recommendationContext ~= recommendationContextType.Contacts then var34.contactName else nil) or "")
+	local var52, var53 = getPresenceIconModule(var34.subjectPresence, var46)
 	
-	if var33.recommendationContext then
-		local var54 = useRecommendationContextualInfoDisplay({
-			contextType = var33.recommendationContext,
-			mutualFriendsCount = var33.mutualFriendsCount
-		})
-		var53 = var54.text
-		var51 = var54.icon
+	if var34.robloxFriendshipStatus ~= Enum.FriendStatus.Friend then
+		var52 = nil
+		var53 = nil
 	end
-	local var55 = reactModule.useCallback(function() --[[ line: 348 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var34 (ref), var37 (ref), setGamePlaySession (copy), sessionType (copy), discoveryAnalyticsModule (copy), analyticsService (copy), getCurrentRouteState (copy), var36 (ref), appPage (copy)
-		var40(eventNames.ViewExperienceDetails, { profileUserId = var33.subjectUserId })
-		var34(var33.closeCentralOverlayThunk())
+	local var54 = if var34.robloxFriendshipStatus == Enum.FriendStatus.Friend then getPresenceTextModule(var34.subjectPresence) else nil
+	
+	if var34.recommendationContext then
+		local var55 = useRecommendationContextualInfoDisplay({
+			contextType = var34.recommendationContext,
+			mutualFriendsCount = var34.mutualFriendsCount
+		})
+		var54 = var55.text
+		var52 = var55.icon
+	end
+	local var56 = reactModule.useCallback(function() --[[ line: 352 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), var35 (ref), var38 (ref), setGamePlaySession (copy), sessionType (copy), discoveryAnalyticsModule (copy), analyticsService (copy), getCurrentRouteState (copy), var37 (ref), appPage (copy)
+		var41(eventNames.ViewExperienceDetails, { profileUserId = var34.subjectUserId })
+		var35(var34.closeCentralOverlayThunk())
 		
-		if var33.subjectPresence and var33.subjectPresence.locationUniverseId then
-			local var68 = tostring(var33.subjectPresence.locationUniverseId)
+		if var34.subjectPresence and var34.subjectPresence.locationUniverseId then
+			local var69 = tostring(var34.subjectPresence.locationUniverseId)
 			
-			if var37 then
-				setGamePlaySession(var37, sessionType.StructuralIdentifier.GameDetailSource, false)
+			if var38 then
+				setGamePlaySession(var38, sessionType.StructuralIdentifier.GameDetailSource, false)
 			end
 			discoveryAnalyticsModule.Events.gameDetailReferral(analyticsService.EventStream, discoveryAnalyticsModule.Constants.Context.PlayerContextualMenu, {
-				pg = getCurrentRouteState(var36).routeName,
-				universeId = var68,
-				pid = var33.subjectPresence.locationPlaceId,
-				friendId = var33.subjectUserId
+				pg = getCurrentRouteState(var37).routeName,
+				universeId = var69,
+				pid = var34.subjectPresence.locationPlaceId,
+				friendId = var34.subjectUserId
 			})
-			var36.navigate(appPage.ExperienceDetail, { detail = var68 })
+			var37.navigate(appPage.ExperienceDetail, { detail = var69 })
 		end
 	end, {
-		var40, var33.subjectUserId, var33.closeCentralOverlayThunk,
-		var33.subjectPresence, var36, var37
+		var41, var34.subjectUserId, var34.closeCentralOverlayThunk,
+		var34.subjectPresence, var37, var38
 	})
-	local var56 = reactModule.useMemo(function() --[[ line: 386 ]]
-		-- upvalues: var33 (ref), var42 (ref), reactModule (copy), button (copy), buttonType (copy), var55 (ref), var45 (ref), var38 (ref)
+	local var57 = reactModule.useMemo(function() --[[ line: 390 ]]
+		-- upvalues: var34 (ref), var43 (ref), reactModule (copy), button (copy), buttonType (copy), var56 (ref), var46 (ref), var39 (ref)
 		local isInGame
-		if not var33.enableExperienceCTAs then
-			return function() --[[ line: 411 ]]
+		if not var34.enableExperienceCTAs then
+			return function() --[[ line: 415 ]]
 				-- upvalues: reactModule (copy)
 				return reactModule.createElement("Folder")
 			end
-		elseif var33.subjectPresence then
-			isInGame = var33.subjectPresence.status == "InGame"
+		elseif var34.subjectPresence then
+			isInGame = var34.subjectPresence.status == "InGame"
 			isInGame = nil
 		else
 			isInGame = false
 		end
-		return if isInGame and not var42.isPlayable then function() --[[ line: 394 ]]
-			-- upvalues: reactModule (copy), button (copy), buttonType (copy), var55 (copy), var45 (copy), var38 (copy)
+		return if isInGame and not var43.isPlayable then function() --[[ line: 398 ]]
+			-- upvalues: reactModule (copy), button (copy), buttonType (copy), var56 (copy), var46 (copy), var39 (copy)
 			return reactModule.createElement(button, {
 				isLoading = false,
 				layoutOrder = 100,
 				buttonType = buttonType.PrimarySystem,
-				onActivated = var55,
-				size = UDim2.new(1, 0, 0, var45.joinEventButtonHeight),
-				text = var38.ViewDetails
+				onActivated = var56,
+				size = UDim2.new(1, 0, 0, var46.joinEventButtonHeight),
+				text = var39.ViewDetails
 			})
 		end else nil
 	end, {
-		var42,
-		tostring(var33.subjectPresence),
-		var33.enableExperienceCTAs
+		var43,
+		tostring(var34.subjectPresence),
+		var34.enableExperienceCTAs
 	})
-	local var57 = if var33.robloxFriendshipStatus == Enum.FriendStatus.Friend and var33.subjectPresence and var33.subjectPresence.status == "InGame" then var38.Join else nil
-	local var58 = reactModule.useCallback(function() --[[ line: 429 ]]
-		-- upvalues: launchGameWithAnalytics (copy), var40 (ref), getCurrentRouteState (copy), var36 (ref), var33 (ref), var37 (ref)
-		launchGameWithAnalytics(var40, getCurrentRouteState(var36).routeName, var33.subjectUserId, var33.subjectPresence, var37)
+	local var58 = if var34.robloxFriendshipStatus == Enum.FriendStatus.Friend and var34.subjectPresence and var34.subjectPresence.status == "InGame" then var39.Join else nil
+	local var59 = reactModule.useCallback(function() --[[ line: 433 ]]
+		-- upvalues: launchGameWithAnalytics (copy), var41 (ref), getCurrentRouteState (copy), var37 (ref), var34 (ref), var38 (ref)
+		launchGameWithAnalytics(var41, getCurrentRouteState(var37).routeName, var34.subjectUserId, var34.subjectPresence, var38)
 	end, {
-		var40,
-		var36,
-		var33.subjectUserId,
-		var33.subjectPresence,
-		var37
+		var41,
+		var37,
+		var34.subjectUserId,
+		var34.subjectPresence,
+		var38
 	})
-	local var59 = reactModule.useCallback(function() --[[ line: 439 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var34 (ref), fFlagUserProfileConsoleUseNewReportFlowModule (copy), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), var36 (ref), appPage (copy)
-		var40(eventNames.ReportPlayer, { profileUserId = var33.subjectUserId })
+	local var60 = reactModule.useCallback(function() --[[ line: 443 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), var35 (ref), fFlagUserProfileConsoleUseNewReportFlowModule (copy), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy), var37 (ref), appPage (copy)
+		var41(eventNames.ReportPlayer, { profileUserId = var34.subjectUserId })
 		
-		if var33.onReportActivated then
-			var33.onReportActivated()
+		if var34.onReportActivated then
+			var34.onReportActivated()
 			
 			return
 		end
-		var34(var33.closeCentralOverlayThunk())
+		var35(var34.closeCentralOverlayThunk())
 		
 		if fFlagUserProfileConsoleUseNewReportFlowModule then
-			var34(openDynamicAbuseReportModule({
+			var35(openDynamicAbuseReportModule({
 				abuseVector = abuseVectorModule.UserProfile,
-				targetId = var33.subjectUserId,
-				onClose = function() --[[ line: 450 ]]
-					-- upvalues: var34 (copy), closeCentralOverlay (copy)
-					var34(closeCentralOverlay())
+				targetId = var34.subjectUserId,
+				onClose = function() --[[ line: 454 ]]
+					-- upvalues: var35 (copy), closeCentralOverlay (copy)
+					var35(closeCentralOverlay())
 				end
 			}))
 			
 			return
 		end
-		var36.navigate(appPage.ReportScreen, {
+		var37.navigate(appPage.ReportScreen, {
 			reportData = {
 				reportAbuseVector = "user",
 				context = "profile",
 				platform = "console",
-				assetId = var33.subjectUserId
+				assetId = var34.subjectUserId
 			}
 		})
 	end, {
-		var34,
-		var36,
-		var33.subjectUserId,
-		var33.closeCentralOverlayThunk,
-		var33.onReportActivated
+		var35,
+		var37,
+		var34.subjectUserId,
+		var34.closeCentralOverlayThunk,
+		var34.onReportActivated
 	})
-	local var60 = if var27 then reactModule.useCallback(function() --[[ line: 475 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var27 (copy), var49 (write)
-		var40(eventNames.ViewPlatformProfile, { profileUserId = var33.subjectUserId })
-		var27:ShowProfile(var49)
+	local var61 = if var28 then reactModule.useCallback(function() --[[ line: 479 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), var28 (copy), var50 (write)
+		var41(eventNames.ViewPlatformProfile, { profileUserId = var34.subjectUserId })
+		var28:ShowProfile(var50)
 	end, {
-		var49,
-		var34,
-		var36,
-		var33.subjectUserId,
-		var33.closeCentralOverlayThunk
+		var50,
+		var35,
+		var37,
+		var34.subjectUserId,
+		var34.closeCentralOverlayThunk
 	}) else nil
-	local var61 = reactModule.useCallback(function() --[[ line: 483 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), fFlagSkipBlockModal (copy), var34 (ref), var36 (ref), appPage (copy), toastRoduxModule (copy), var38 (ref), blockingModule (copy), var35 (ref), t_2 (ref)
-		var40(eventNames.BlockPlayer, { profileUserId = var33.subjectUserId })
+	local var62 = reactModule.useCallback(function() --[[ line: 487 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), fFlagSkipBlockModal (copy), var35 (ref), var37 (ref), appPage (copy), toastRoduxModule (copy), var39 (ref), blockingModule (copy), var36 (ref), t_2 (ref)
+		var41(eventNames.BlockPlayer, { profileUserId = var34.subjectUserId })
 		
-		if fFlagSkipBlockModal and var33.skipBlockModal then
-			var34(blockingModule.BlockUserById.API({ userId = var33.subjectUserId, currentUserId = var35 })):andThen(function() --[[ line: 509 ]]
-				-- upvalues: var34 (copy), toastRoduxModule (copy), var38 (copy), var33 (copy)
-				var34(toastRoduxModule.Actions.SetCurrentToastMessage({
+		if fFlagSkipBlockModal and var34.skipBlockModal then
+			var35(blockingModule.BlockUserById.API({ userId = var34.subjectUserId, currentUserId = var36 })):andThen(function() --[[ line: 513 ]]
+				-- upvalues: var35 (copy), toastRoduxModule (copy), var39 (copy), var34 (copy)
+				var35(toastRoduxModule.Actions.SetCurrentToastMessage({
 					isLocalized = true,
-					toastMessage = var38.UserBlocked,
+					toastMessage = var39.UserBlocked,
 					toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation
 				}))
-				var34(var33.closeCentralOverlayThunk())
-			end):catch(function(_) --[[ line: 517 ]]
-				-- upvalues: var34 (copy), toastRoduxModule (copy), t_2 (copy)
-				var34(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
+				var35(var34.closeCentralOverlayThunk())
+			end):catch(function(_) --[[ line: 521 ]]
+				-- upvalues: var35 (copy), toastRoduxModule (copy), t_2 (copy)
+				var35(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
 			end)
 			
 			return
-		elseif var33.onBlockActivated then
-			var33.onBlockActivated()
+		elseif var34.onBlockActivated then
+			var34.onBlockActivated()
 			
 			return
 		end
-		var34(var33.closeCentralOverlayThunk())
-		var36.push(appPage.BlockingModal, {
+		var35(var34.closeCentralOverlayThunk())
+		var37.push(appPage.BlockingModal, {
 			navProps = {
-				userId = var33.subjectUserId,
-				onBlockSuccess = function() --[[ line: 494 ]]
-					-- upvalues: var34 (copy), toastRoduxModule (copy), var38 (copy)
-					var34(toastRoduxModule.Actions.SetCurrentToastMessage({
+				userId = var34.subjectUserId,
+				onBlockSuccess = function() --[[ line: 498 ]]
+					-- upvalues: var35 (copy), toastRoduxModule (copy), var39 (copy)
+					var35(toastRoduxModule.Actions.SetCurrentToastMessage({
 						isLocalized = true,
-						toastMessage = var38.UserBlocked,
+						toastMessage = var39.UserBlocked,
 						toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation
 					}))
 				end
 			}
 		})
 	end, {
-		var38, var35, var34, var33.closeCentralOverlayThunk, var33.subjectUserId,
-		var33.onBlockActivated,
-		if fFlagSkipBlockModal then var33.skipBlockModal else nil
+		var39, var36, var35, var34.closeCentralOverlayThunk, var34.subjectUserId,
+		var34.onBlockActivated,
+		if fFlagSkipBlockModal then var34.skipBlockModal else nil
 	})
-	local var62 = reactModule.useCallback(function() --[[ line: 531 ]]
-		-- upvalues: var34 (ref), blockingModule (copy), var33 (ref), var35 (ref), toastRoduxModule (copy), t_2 (ref)
-		var34(blockingModule.UnblockUserById.API({ userId = var33.subjectUserId, currentUserId = var35 })):andThen(function() --[[ line: 536 ]]
-			-- upvalues: var34 (copy), var33 (copy)
-			var34(var33.closeCentralOverlayThunk())
-		end):catch(function(_) --[[ line: 539 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), t_2 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
+	local var63 = reactModule.useCallback(function() --[[ line: 535 ]]
+		-- upvalues: var35 (ref), blockingModule (copy), var34 (ref), var36 (ref), toastRoduxModule (copy), t_2 (ref)
+		var35(blockingModule.UnblockUserById.API({ userId = var34.subjectUserId, currentUserId = var36 })):andThen(function() --[[ line: 540 ]]
+			-- upvalues: var35 (copy), var34 (copy)
+			var35(var34.closeCentralOverlayThunk())
+		end):catch(function(_) --[[ line: 543 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), t_2 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
 		end)
 	end, {
+		var36,
 		var35,
-		var34,
-		var33.closeCentralOverlayThunk,
-		var33.subjectUserId
+		var34.closeCentralOverlayThunk,
+		var34.subjectUserId
 	})
-	local var63 = reactModule.useCallback(function() --[[ line: 544 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var34 (ref), friendsModule (copy), var35 (ref), toastRoduxModule (copy), var38 (ref), t_2 (ref)
-		var40(eventNames.Unfriend, { profileUserId = var33.subjectUserId })
-		var34(friendsModule.UnfriendTargetUserId.API({
-			targetUserId = var33.subjectUserId,
-			currentUserId = var35
-		})):andThen(function() --[[ line: 551 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), var38 (copy), var33 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage({
+	local var64 = reactModule.useCallback(function() --[[ line: 548 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var21 (copy), var35 (ref), friendsModule (copy), var36 (ref), toastRoduxModule (copy), var39 (ref), t_2 (ref)
+		var41(eventNames.Unfriend, { profileUserId = var34.subjectUserId });
+		(if fFlagMigrateFriendshipStatusesRemainingActions then var21.Unfriend(var34.subjectUserId) else var35(friendsModule.UnfriendTargetUserId.API({
+			targetUserId = var34.subjectUserId,
+			currentUserId = var36
+		}))):andThen(function() --[[ line: 558 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), var39 (copy), var34 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = var38.ConnectionRemoved,
+				toastMessage = var39.ConnectionRemoved,
 				toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation
 			}))
-			var34(var33.closeCentralOverlayThunk())
-		end):catch(function() --[[ line: 559 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), t_2 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
+			var35(var34.closeCentralOverlayThunk())
+		end):catch(function() --[[ line: 566 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), t_2 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
 		end)
 	end, {
-		var38,
+		var39,
+		var36,
 		var35,
-		var34,
-		var33.subjectUserId,
-		var33.closeCentralOverlayThunk
+		var34.subjectUserId,
+		var34.closeCentralOverlayThunk
 	})
-	local var64 = reactModule.useCallback(function() --[[ line: 565 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var34 (ref), recommendationContextType (copy), friendsModule (copy), var35 (ref), toastRoduxModule (copy), var38 (ref), t_2 (ref)
-		var40(eventNames.RequestFriendship, { profileUserId = var33.subjectUserId })
-		var34(if var33.recommendationContext == recommendationContextType.Contacts and var33.contactId then friendsModule.RequestFriendshipFromContactId.API({ contactId = var33.contactId, currentUserId = var35 }) else friendsModule.RequestFriendshipFromUserId.API({
-			targetUserId = var33.subjectUserId,
-			currentUserId = var35,
-			friendshipOriginSourceType = var33.friendshipOriginSourceType
-		})):andThen(function() --[[ line: 577 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), var38 (copy), var33 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage({
+	local var65 = reactModule.useCallback(function() --[[ line: 572 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), recommendationContextType (copy), fFlagMigrateFriendshipStatusesRemainingActions (copy), var21 (copy), var35 (ref), friendsModule (copy), var36 (ref), toastRoduxModule (copy), var39 (ref), t_2 (ref)
+		var41(eventNames.RequestFriendship, { profileUserId = var34.subjectUserId })
+		local contactId = var34.contactId
+		local var71 = var34.recommendationContext == recommendationContextType.Contacts and contactId;
+		(if fFlagMigrateFriendshipStatusesRemainingActions then if var71 then var21.RequestFriendship(contactId, var34.friendshipOriginSourceType, { isContact = true }) else var21.RequestFriendship(var34.subjectUserId, var34.friendshipOriginSourceType) else var35(if var71 then friendsModule.RequestFriendshipFromContactId.API({ contactId = contactId, currentUserId = var36 }) else friendsModule.RequestFriendshipFromUserId.API({
+			targetUserId = var34.subjectUserId,
+			currentUserId = var36,
+			friendshipOriginSourceType = var34.friendshipOriginSourceType
+		}))):andThen(function() --[[ line: 595 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), var39 (copy), var34 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = var38.ConnectionRequestSent,
+				toastMessage = var39.ConnectionRequestSent,
 				toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation
 			}))
-			var34(var33.closeCentralOverlayThunk())
-		end):catch(function() --[[ line: 585 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), t_2 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
+			var35(var34.closeCentralOverlayThunk())
+		end):catch(function() --[[ line: 603 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), t_2 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
 		end)
 	end, {
-		var38, var35, var34, var33.closeCentralOverlayThunk, var33.subjectUserId,
-		var33.recommendationContext, var33.contactId, var33.friendshipOriginSourceType
+		var39, var36, var35, var34.closeCentralOverlayThunk, var34.subjectUserId,
+		var34.recommendationContext, var34.contactId, var34.friendshipOriginSourceType
 	})
-	local var65 = reactModule.useCallback(function() --[[ line: 601 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var34 (ref), friendsModule (copy), var35 (ref), toastRoduxModule (copy), var38 (ref), t_2 (ref)
-		var40(eventNames.AcceptFriendRequest, { profileUserId = var33.subjectUserId })
-		var34(friendsModule.AcceptFriendRequestFromUserId.API({
-			targetUserId = var33.subjectUserId,
-			currentUserId = var35
-		})):andThen(function() --[[ line: 608 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), var38 (copy), var33 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage({
+	local var66 = reactModule.useCallback(function() --[[ line: 619 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var21 (copy), var35 (ref), friendsModule (copy), var36 (ref), toastRoduxModule (copy), var39 (ref), t_2 (ref)
+		var41(eventNames.AcceptFriendRequest, { profileUserId = var34.subjectUserId });
+		(if fFlagMigrateFriendshipStatusesRemainingActions then var21.AcceptFriendRequest(var34.subjectUserId) else var35(friendsModule.AcceptFriendRequestFromUserId.API({
+			targetUserId = var34.subjectUserId,
+			currentUserId = var36
+		}))):andThen(function() --[[ line: 629 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), var39 (copy), var34 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = var38.ConnectionAdded,
+				toastMessage = var39.ConnectionAdded,
 				toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation
 			}))
-			var34(var33.closeCentralOverlayThunk())
-		end):catch(function() --[[ line: 616 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), t_2 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
+			var35(var34.closeCentralOverlayThunk())
+		end):catch(function() --[[ line: 637 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), t_2 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
 		end)
 	end, {
-		var38,
+		var39,
+		var36,
 		var35,
-		var34,
-		var33.closeCentralOverlayThunk,
-		var33.subjectUserId
+		var34.closeCentralOverlayThunk,
+		var34.subjectUserId
 	})
-	local var66 = reactModule.useCallback(function() --[[ line: 621 ]]
-		-- upvalues: var40 (ref), eventNames (copy), var33 (ref), var34 (ref), friendsModule (copy), var35 (ref), toastRoduxModule (copy), var38 (ref), t_2 (ref)
-		var40(eventNames.IgnoreFriendRequest, { profileUserId = var33.subjectUserId })
-		var34(friendsModule.DeclineFriendRequestFromUserId.API({
-			targetUserId = var33.subjectUserId,
-			currentUserId = var35
-		})):andThen(function() --[[ line: 628 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), var38 (copy), var33 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage({
+	local var67 = reactModule.useCallback(function() --[[ line: 642 ]]
+		-- upvalues: var41 (ref), eventNames (copy), var34 (ref), fFlagMigrateFriendshipStatusesRemainingActions (copy), var21 (copy), var35 (ref), friendsModule (copy), var36 (ref), toastRoduxModule (copy), var39 (ref), t_2 (ref)
+		var41(eventNames.IgnoreFriendRequest, { profileUserId = var34.subjectUserId });
+		(if fFlagMigrateFriendshipStatusesRemainingActions then var21.DeclineFriendRequest(var34.subjectUserId) else var35(friendsModule.DeclineFriendRequestFromUserId.API({
+			targetUserId = var34.subjectUserId,
+			currentUserId = var36
+		}))):andThen(function() --[[ line: 652 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), var39 (copy), var34 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage({
 				isLocalized = true,
-				toastMessage = var38.FriendRequestIgnored,
+				toastMessage = var39.FriendRequestIgnored,
 				toastType = toastRoduxModule.Enums.ToastType.SuccessConfirmation
 			}))
-			var34(var33.closeCentralOverlayThunk())
-		end):catch(function() --[[ line: 636 ]]
-			-- upvalues: var34 (copy), toastRoduxModule (copy), t_2 (copy)
-			var34(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
+			var35(var34.closeCentralOverlayThunk())
+		end):catch(function() --[[ line: 660 ]]
+			-- upvalues: var35 (copy), toastRoduxModule (copy), t_2 (copy)
+			var35(toastRoduxModule.Actions.SetCurrentToastMessage(t_2))
 		end)
 	end, {
-		var38,
+		var39,
+		var36,
 		var35,
-		var34,
-		var33.closeCentralOverlayThunk,
-		var33.subjectUserId
+		var34.closeCentralOverlayThunk,
+		var34.subjectUserId
 	})
-	local var67 = roactRodux.useSelector(function(p9) --[[ line: 641 ]]
-		-- upvalues: fFlagUserBlockingApiPlayerContextMenuEnabledModule (copy), var33 (ref)
-		return (if fFlagUserBlockingApiPlayerContextMenuEnabledModule then p9.PlayerContextualMenu.UserBlocking.isBlockedByMe else p9.PlayerContextualMenu.IsBlockedByMe)[var33.subjectUserId] or false
+	local var68 = roactRodux.useSelector(function(p9) --[[ line: 665 ]]
+		-- upvalues: fFlagUserBlockingApiPlayerContextMenuEnabledModule (copy), var34 (ref)
+		return (if fFlagUserBlockingApiPlayerContextMenuEnabledModule then p9.PlayerContextualMenu.UserBlocking.isBlockedByMe else p9.PlayerContextualMenu.IsBlockedByMe)[var34.subjectUserId] or false
 	end)
 	
 	return reactModule.createElement(playerContextualMenuComponentModule, {
-		headerProps = reactModule.useMemo(function() --[[ line: 783 ]]
-			-- upvalues: ? (write), var46 (ref), var33 (ref), recommendationContextType (copy), var47 (write), var48 (write), var50 (ref), playerContextualMenuVendorImagePath (copy), var53 (write), var51 (write), var52 (write), var57 (ref), var58 (ref), var56 (ref)
+		headerProps = reactModule.useMemo(function() --[[ line: 807 ]]
+			-- upvalues: ? (write), var47 (ref), var34 (ref), recommendationContextType (copy), var48 (write), var49 (write), var51 (ref), playerContextualMenuVendorImagePath (copy), var54 (write), var52 (write), var53 (write), var58 (ref), var59 (ref), var57 (ref)
 			return {
-				displayNameItem = { icon = nil, labelText = u382, isLoading = var46.loading },
-				userNameItem = if var33.recommendationContext == recommendationContextType.Contacts then nil else {
+				displayNameItem = { icon = nil, labelText = u392, isLoading = var47.loading },
+				userNameItem = if var34.recommendationContext == recommendationContextType.Contacts then nil else {
 					icon = nil,
-					labelText = "@" .. var47,
-					isLoading = var46.loading
+					labelText = "@" .. var48,
+					isLoading = var47.loading
 				},
-				vendorNameItem = if var48 == "" then nil else {
-					labelText = var48 or "",
-					icon = var50 and ({
+				vendorNameItem = if var49 == "" then nil else {
+					labelText = var49 or "",
+					icon = var51 and ({
 						Image = playerContextualMenuVendorImagePath,
 						ImageRectOffset = Vector2.zero,
 						ImageRectSize = Vector2.zero
 					} or nil),
-					isLoading = var46.loading
+					isLoading = var47.loading
 				},
-				contextText = var53,
-				contextIcon = var51,
-				contextIconColor = if var52 then var52.Color3 else nil,
-				contextIconTransparency = if var52 then var52.Transparency else nil,
-				joinEventText = var57,
-				joinEventOnActivated = var58,
-				renderJoinEventButton = var56
+				contextText = var54,
+				contextIcon = var52,
+				contextIconColor = if var53 then var53.Color3 else nil,
+				contextIconTransparency = if var53 then var53.Transparency else nil,
+				joinEventText = var58,
+				joinEventOnActivated = var59,
+				renderJoinEventButton = var57
 			}
 		end, {
-			var46, u845, var47, var48, var50, var51, var53, var52, var56, var57, var58,
-			var33.recommendationContext
+			var47, u870, var48, var49, var51, var52, var54, var53, var57, var58, var59,
+			var34.recommendationContext
 		}),
-		buttonProps = reactModule.useMemo(function() --[[ line: 650 ]]
-			-- upvalues: images (copy), var38 (ref), var59 (ref), playerContextualMenuVendorImagePath (copy), var60 (ref), var61 (ref), var44 (write), var62 (ref), var63 (ref), var64 (ref), NO_OPT_CALLBACK (copy), var65 (ref), var66 (ref), var67 (ref), var33 (ref), getFFlagAppChatPCMFixBlocking (copy), cryoModule (copy), var27 (copy), var49 (write), dashModule (copy)
+		buttonProps = reactModule.useMemo(function() --[[ line: 674 ]]
+			-- upvalues: images (copy), var39 (ref), var60 (ref), playerContextualMenuVendorImagePath (copy), var61 (ref), var62 (ref), var45 (write), var63 (ref), var64 (ref), var65 (ref), NO_OPT_CALLBACK (copy), var66 (ref), var67 (ref), var68 (ref), var34 (ref), getFFlagAppChatPCMFixBlocking (copy), cryoModule (copy), var28 (copy), var50 (write), dashModule (copy)
 			local t = {
 				icon = images["icons/actions/feedback"],
-				text = var38.Report,
-				onActivated = var59
+				text = var39.Report,
+				onActivated = var60
 			}
 			local t_1 = {
 				icon = playerContextualMenuVendorImagePath,
-				text = var38.ViewPlatformProfile,
-				onActivated = var60
+				text = var39.ViewPlatformProfile,
+				onActivated = var61
 			}
 			local t_2 = {
 				icon = images["icons/actions/block"],
-				text = var38.Block,
-				onActivated = var61,
-				disabled = var44
+				text = var39.Block,
+				onActivated = var62,
+				disabled = var45
 			}
 			local t_3 = {
 				icon = images["icons/actions/block"],
-				text = var38.Unblock,
-				onActivated = var62
+				text = var39.Unblock,
+				onActivated = var63
 			}
 			local t_4 = {
 				icon = images["icons/actions/friends/friendRemove"],
-				text = var38.RemoveConnection,
-				onActivated = var63
+				text = var39.RemoveConnection,
+				onActivated = var64
 			}
 			local t_5 = {
 				icon = images["icons/actions/friends/friendAdd"],
-				text = var38.AddConnection,
-				onActivated = var64
+				text = var39.AddConnection,
+				onActivated = var65
 			}
 			local t_6 = {
 				icon = images["icons/actions/friends/friendpending"],
-				text = var38.PendingRequest,
+				text = var39.PendingRequest,
 				onActivated = NO_OPT_CALLBACK
 			}
 			local t_7 = {
 				icon = images["icons/actions/friends/friendpending"],
-				text = var38.AcceptConnection,
-				onActivated = var65
+				text = var39.AcceptConnection,
+				onActivated = var66
 			}
 			local t_8 = {
 				icon = images["icons/actions/reject"],
-				text = var38.IgnoreConnectionRequest,
-				onActivated = var66
+				text = var39.IgnoreConnectionRequest,
+				onActivated = var67
 			}
 			
-			local function makeCtas() --[[ line: 706 ]]
-				-- upvalues: var67 (copy), t_3 (ref), t_2 (ref), var33 (copy), t (ref), getFFlagAppChatPCMFixBlocking (copy), t_4 (ref), t_5 (ref), t_6 (ref), t_7 (ref), t_8 (ref), cryoModule (copy)
-				local var80 = if var67 then t_3 else t_2
-				local var81 = if var33.robloxFriendshipStatus == Enum.FriendStatus.Friend then {
+			local function makeCtas() --[[ line: 730 ]]
+				-- upvalues: var68 (copy), t_3 (ref), t_2 (ref), var34 (copy), t (ref), getFFlagAppChatPCMFixBlocking (copy), t_4 (ref), t_5 (ref), t_6 (ref), t_7 (ref), t_8 (ref), cryoModule (copy)
+				local var82 = if var68 then t_3 else t_2
+				local var83 = if var34.robloxFriendshipStatus == Enum.FriendStatus.Friend then {
 					t,
-					if getFFlagAppChatPCMFixBlocking() then var80 else t_2,
+					if getFFlagAppChatPCMFixBlocking() then var82 else t_2,
 					t_4
-				} elseif var33.robloxFriendshipStatus == Enum.FriendStatus.NotFriend then if var33.contactId then { t_5 } else { t_5, t, var80 } elseif var33.robloxFriendshipStatus == Enum.FriendStatus.FriendRequestSent then { t_6, t, var80 } elseif var33.robloxFriendshipStatus == Enum.FriendStatus.FriendRequestReceived then { t_7, t_8, t, var80 } else { t, var80 }
+				} elseif var34.robloxFriendshipStatus == Enum.FriendStatus.NotFriend then if var34.contactId then { t_5 } else { t_5, t, var82 } elseif var34.robloxFriendshipStatus == Enum.FriendStatus.FriendRequestSent then { t_6, t, var82 } elseif var34.robloxFriendshipStatus == Enum.FriendStatus.FriendRequestReceived then { t_7, t_8, t, var82 } else { t, var82 }
 				
-				if var33.additionalButtons then
-					var81 = cryoModule.List.join(var81, var33.additionalButtons)
+				if var34.additionalButtons then
+					var83 = cryoModule.List.join(var83, var34.additionalButtons)
 				end
-				return var81
+				return var83
 			end
 			
-			return if var27 and var27:IsProfileEnabled() and (var49 and var49 ~= "") then dashModule.append({ t_1 }, makeCtas()) else makeCtas()
-		end, cryoModule.Dictionary.union(if var27 then {
-			var33.robloxFriendshipStatus,
-			var67,
-			var49,
-			var33.contactId,
-			var33.additionalButtons
+			return if var28 and var28:IsProfileEnabled() and (var50 and var50 ~= "") then dashModule.append({ t_1 }, makeCtas()) else makeCtas()
+		end, cryoModule.Dictionary.union(if var28 then {
+			var34.robloxFriendshipStatus,
+			var68,
+			var50,
+			var34.contactId,
+			var34.additionalButtons
 		} else {
-			var33.robloxFriendshipStatus,
-			var67,
-			var33.contactId,
-			var33.additionalButtons
-		}, if getFFlagAppChatPCMFixBlocking() then { var44 } else {})),
-		width = if fFlagPCMAcceptWidthAsProp then var33.width else UDim.new(0, 400)
+			var34.robloxFriendshipStatus,
+			var68,
+			var34.contactId,
+			var34.additionalButtons
+		}, if getFFlagAppChatPCMFixBlocking() then { var45 } else {})),
+		width = if fFlagPCMAcceptWidthAsProp then var34.width else UDim.new(0, 400)
 	})
 end

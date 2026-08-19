@@ -5,8 +5,6 @@ return {
 	AudioPlayer = require(script.Components.AudioPlayer),
 	AudioPlayerActions = require(script.Components.AudioPlayerActions),
 	ChromeWindowWrapper = require(script.Components.ChromeWindowWrapper),
-	ReportAudioPopup = require(script.Components.ReportAudioPopup),
-	ReportAudioPopupContext = require(script.Components.ReportAudioPopupContext),
 	ReportSongDialog = require(script.Components.ReportSongDialog),
 	DebugAudioEmitters = require(script.Components.DebugAudioEmitters),
 	useCurrentSong = require(script.Hooks.useCurrentSong),

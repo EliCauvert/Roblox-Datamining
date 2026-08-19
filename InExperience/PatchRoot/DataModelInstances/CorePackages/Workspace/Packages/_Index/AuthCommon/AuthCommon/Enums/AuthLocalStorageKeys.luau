@@ -16,7 +16,6 @@
 	AccountBlob = "AccountBlob",
 	SignupActionRequired = "SignupActionRequired",
 	AccountSwitcherMetadataMap = "AccountSwitcherMetadataMap",
-	AccountSwitcherExperimentVariantId = "AccountSwitcherExperimentVariantId",
 	ActivePartyId = "ActivePartyId",
 	LastSuccessfulSignInMethod = "LastSuccessfulSignInMethod",
 	DiscoveryClientFallbackCache = "DiscoveryClientFallbackCache",

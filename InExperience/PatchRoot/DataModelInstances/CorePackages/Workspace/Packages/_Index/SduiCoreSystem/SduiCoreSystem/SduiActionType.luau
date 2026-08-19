@@ -66,5 +66,6 @@
 	OpenIncomingTransferUpsell = "OpenIncomingTransferUpsell",
 	PinExperienceShortcut = "PinExperienceShortcut",
 	ShowToast = "ShowToast",
-	JoinCommunity = "JoinCommunity"
+	JoinCommunity = "JoinCommunity",
+	ActionSequence = "ActionSequence"
 }

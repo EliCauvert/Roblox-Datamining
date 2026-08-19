@@ -27,7 +27,7 @@ local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFrie
 local fFlagQRCodeFriendRequestNotificationV2Module = require(profileQRCode.Flags.FFlagQRCodeFriendRequestNotificationV2)
 local friendAdd = images["icons/actions/friends/friendAdd"]
 
-return roactAppExperimentModule.connectUserLayer({ getFStringProfileQRCodeFriendRequestAlertsLayerModule() }, function(p7, _) --[[ line: 246 ]]
+return roactAppExperimentModule.connectUserLayer({ getFStringProfileQRCodeFriendRequestAlertsLayerModule() }, function(p7, _) --[[ line: 248 ]]
 	-- upvalues: getFStringProfileQRCodeFriendRequestAlertsLayerModule (ref), getFStringProfileQRCodeFriendRequestAlertsExperimentKeyModule (ref)
 	return {
 		profileQRCodeFriendRequestAlertsEnabled = (p7[getFStringProfileQRCodeFriendRequestAlertsLayerModule()] or {})[getFStringProfileQRCodeFriendRequestAlertsExperimentKeyModule()]
@@ -183,17 +183,17 @@ end, false)(function(p0) --[[ line: 53 ]]
 				notificationQueueSize = #var38,
 				onAccept = function(p6) --[[ line: 212 ]]
 					-- upvalues: var42 (ref), var40 (ref), var39 (ref), fFlagQRCodeFriendRequestNotificationV2Module (copy), var24 (ref), var22 (ref), eventNamesModule (copy), var38 (ref)
-					var42(var40, p6):andThen(function() --[[ line: 213 ]]
+					var42(var40, p6):andThen(function() --[[ line: 214 ]]
 						-- upvalues: var39 (copy), fFlagQRCodeFriendRequestNotificationV2Module (copy), var24 (copy)
 						var39({ type = "removeItemFromQueue", newUserId = "0" })
 						
 						if not fFlagQRCodeFriendRequestNotificationV2Module then
 							var24(true)
 						end
-					end)
+					end):catch(function() --[[ line: 220 ]] end)
 					var22.fireEvent(eventNamesModule.QRPageFriendRequestBannerAccepted, { qrCodeBannerQueueSize = #var38 })
 				end,
-				onClose = function() --[[ line: 223 ]]
+				onClose = function() --[[ line: 225 ]]
 					-- upvalues: var39 (ref), var22 (ref), eventNamesModule (copy), var38 (ref)
 					var39({ type = "removeItemFromQueue", newUserId = "0" })
 					var22.fireEvent(eventNamesModule.QRPageFriendRequestBannerDismissed, { qrCodeBannerQueueSize = #var38 })

@@ -11,6 +11,7 @@ local voiceUpsellV2ExperimentLayerLua = game:DefineFastString("VoiceUpsellV2Expe
 game:DefineFastString("MobileSoundAndHapticsLayer", "Mobile.UI.Shell")
 
 return {
+	UniversalAppPageLoadLayer = "UniversalApp.PageLoad",
 	ServeThumbnailsFromEdge = "CoreServices.Thumbnail.ServeThumbnailsFromEdge",
 	GameTileLayer = "PlayerApp.HomeGamePage.UX",
 	OmniSearchLayer = game:GetFastString("LuaAppOmniSearchLayer"),

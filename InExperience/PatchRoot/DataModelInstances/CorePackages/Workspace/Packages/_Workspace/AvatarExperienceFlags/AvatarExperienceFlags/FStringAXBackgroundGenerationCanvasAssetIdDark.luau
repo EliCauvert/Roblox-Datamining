@@ -1,0 +1,1 @@
+﻿return game:DefineFastString("AXBackgroundGenerationCanvasAssetIdDark", "127184800371578")

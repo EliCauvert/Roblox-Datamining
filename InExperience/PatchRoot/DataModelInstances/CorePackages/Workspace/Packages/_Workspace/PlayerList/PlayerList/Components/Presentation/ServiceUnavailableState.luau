@@ -6,34 +6,38 @@ local useLocalization = require(parent_1.Localization).Hooks.useLocalization
 local view = foundationModule.View
 local empty = foundationModule.Empty
 local iconSize = foundationModule.Enums.IconSize
-local constantsModule = require(parent.Common.Constants)
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
+local useLegacyAndTransparencyAwarePanelStyleModule = require(parent.Hooks.useLegacyAndTransparencyAwarePanelStyle)
 
 local var4 = function() --[[ line: 16 ]] end
 
 return reactModule.memo(function(p0) --[[ line: 25 | named "ServiceUnavailableStateImpl" ]]
-	-- upvalues: constantsModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), empty (ref), iconSize (ref), var4 (ref)
-	local var6, var7
-	local var5 = if p0.useLegacyPanelStyling then constantsModule.LEGACY_STATE_PANEL_TAG else constantsModule.STATE_PANEL_TAG
+	-- upvalues: useLegacyAndTransparencyAwarePanelStyleModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), empty (ref), iconSize (ref), var4 (ref)
+	local body, retry
+	local var5 = useLegacyAndTransparencyAwarePanelStyleModule(p0.useLegacyPanelStyling)
 	local _ = nil
 	local _ = nil
 	
 	if fFlagPlayerListLocalizeGameTextModule then
-		local var8 = useLocalization({
+		local var6 = useLocalization({
 			body = "InGame.PlayerList.LeaderboardUnavailable",
 			retry = "InGame.PlayerList.Retry"
 		})
-		var6 = var8.body
-		var7 = var8.retry
+		body = var6.body
+		retry = var6.retry
 	else
-		var6 = "Leaderboard unavailable. Please try again later."
-		var7 = "Retry"
+		body = "Leaderboard unavailable. Please try again later."
+		retry = "Retry"
 	end
-	return reactModule.createElement(view, { tag = var5, LayoutOrder = p0.layoutOrder }, {
+	return reactModule.createElement(view, {
+		tag = var5.panelTag,
+		LayoutOrder = p0.layoutOrder,
+		backgroundStyle = var5.backgroundStyle
+	}, {
 		Content = reactModule.createElement(empty, {
 			icon = { name = "triangle-exclamation", size = iconSize.Large },
-			text = var6,
-			button = { text = var7, onActivated = p0.onRetry or var4 }
+			text = body,
+			button = { text = retry, onActivated = p0.onRetry or var4 }
 		})
 	})
 end)

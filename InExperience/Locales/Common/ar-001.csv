@@ -1094,9 +1094,6 @@ CoreScripts.TopBar.GameNamePlaceHolder,تجربة
 CoreScripts.TopBar.HideChat,إخفاء الدردشة
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,احصل على المحادثة الصوتية
-CoreScripts.TopBar.Label.InappropriateAudio,صوت غير لائق
-CoreScripts.TopBar.Label.Report,
-CoreScripts.TopBar.Label.ReportAudio,الإبلاغ عن الصوت
 CoreScripts.TopBar.Label.UILessHintDescription,اضغط على مفتاح ESC لفتح قائمة Roblox
 CoreScripts.TopBar.Label.UILessHintTitle,طريقة جديدة لتشغيل قائمة Roblox
 CoreScripts.TopBar.Leaderboard,
@@ -1765,6 +1762,255 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,هل تريد حظر {DisplayName}؟
 Feature.BlockingModal.Message.BlockConfirmation,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة جهات تواصلك أو متابعيك، ولن يتمكّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,سيؤدي حظر هذا المستخدم إلى إزالته من قائمة أصدقائك أو متابعيك، ولن يتمكَّن من إرسال أي رسائل أو طلبات أو دعوات إليك.<br /><br />لن يتم إعلامه بأنك قمت بحظره.
+Feature.Build.Action.AddFriends,إضافة أصدقاء
+Feature.Build.Action.AddPlaytester,إضافة مختبر لعب
+Feature.Build.Action.AddPlaytesters,إضافة مختبري لعب
+Feature.Build.Action.AddToPlaytest,إضافة إلى اختبار اللعب
+Feature.Build.Action.Archive,أرشفة
+Feature.Build.Action.ArchiveGame,أرشفة اللعبة
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,شراء
+Feature.Build.Action.BuyRobux,شراء عملات Robux
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,نسخ النص
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,إخفاء ما تم حفظه تلقائيًا
+Feature.Build.Action.ManageLimit,إدارة الحد
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,قم بإشعاري
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,فتح الإعدادات
+Feature.Build.Action.Playtest,اختبار اللعب
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,
+Feature.Build.Action.PublishLatest,نشر الإصدار الأحدث
+Feature.Build.Action.Restore,استعادة
+Feature.Build.Action.Revert,تراجع
+Feature.Build.Action.SetDailyLimit,تعيين حد يومي
+Feature.Build.Action.SetLimit,تعيين الحد
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,مشاركة الرابط
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,تحديث التصنيف
+Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
+Feature.Build.Action.View,عرض
+Feature.Build.Action.ViewUsage,عرض الاستخدام
+Feature.Build.Content.NewGame,لعبة جديدة
+Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
+Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
+Feature.Build.Description.BuildIdeaGame,حوّل أفكارك إلى لعبة
+Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما يكون لدى ميزة Build رد لك.
+Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
+Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
+Feature.Build.Description.ChoosePlaytesters,اختر الأصدقاء لمساعدتك في اختبار اللعب.
+Feature.Build.Description.EnableBuildNotifs,يمكنك تشغيل الإشعارات من إعدادات جهازك للحصول على التحديثات من ميزة Build.
+Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك الوصول إلى هذا الرابط. غيّر إعدادات الجمهور للعبتك إذا كنت تريد أن يلعبها المزيد من الأشخاص.
+Feature.Build.Description.GameCreationDone,لقد أكملت إنشاء لعبتك ونشرها. يمكنك فتحها لاختبار اللعب.
+Feature.Build.Description.GameSavedPlaytest,لقد أكملتُ إنشاء لعبتك وحفظت إصدارًا جديدًا. يمكنك فتحها لاختبار اللعب.
+Feature.Build.Description.HubSettings,يمكنك إدارة جميع الإعدادات في مركز المصمم
+Feature.Build.Description.MakeAudienceAvail,انشر تجربتك لتكون متاحة لهذا الجمهور.
+Feature.Build.Description.ManageAppearance,يمكنك إدارة كيفية ظهور لعبتك للآخرين.
+Feature.Build.Description.PlayAfterPublish,اختر من يمكنه اللعب بعد نشر هذه التجربة.
+Feature.Build.Description.PlaytestLatest,أنت تختبر اللعب لأحدث إصدار لديك. انشره عندما تكون مستعدًا لمشاركته.
+Feature.Build.Description.PlaytestLocked,يمكنك بدء اختبار اللعب بعد إنشاء لعبتك الأولى.
+Feature.Build.Description.PlaytesterAccess,أضف الأصدقاء كمختبري لعب أو غيّر إعدادات الجمهور للعبتك للسماح للمزيد من الأشخاص باللعب.
+Feature.Build.Description.PrivateShare,غيّر إعدادات الجمهور للعبتك لمشاركتها.
+Feature.Build.Description.RaiseLimitOrWait,قم بزيادة الحد اليومي لديك من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيينه غدًا.
+Feature.Build.Description.RatingAgreement,من خلال النشر، فإنك توافق على دقة تصنيف هذا المحتوى.
+Feature.Build.Description.RestoreLatest,سيصبح هذا الإصدار أحدث إصدار منشور لك.
+Feature.Build.Description.VersionChanges,أخبر اللاعبين بما تغير في هذا الإصدار.
+Feature.Build.Header.AccessSharing,إمكانية الوصول والمشاركة
+Feature.Build.Header.ContentMaturity,حساسية المحتوى
+Feature.Build.Header.CustomAnswer,إجابة مخصصة
+Feature.Build.Header.GameDetails,تفاصيل اللعبة
+Feature.Build.Header.Overview,نظرة عامة
+Feature.Build.Label.Access,الوصول
+Feature.Build.Label.AdditionalUsage,استخدام إضافي لميزة Build
+Feature.Build.Label.All,
+Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
+Feature.Build.Label.Available,المتاح
+Feature.Build.Label.BackToBuild,الرجوع إلى البناء
+Feature.Build.Label.Building,جارٍ البناء...
+Feature.Build.Label.CaptureLibrary,مكتبة اللقطات
+Feature.Build.Label.ContentRating,تصنيف المحتوى
+Feature.Build.Label.CreatorHub,مركز المصمم
+Feature.Build.Label.Deleted,تم الحذف
+Feature.Build.Label.DescribeIdea,صِف فكرتك
+Feature.Build.Label.Description,
+Feature.Build.Label.Done,
+Feature.Build.Label.Error,
+Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
+Feature.Build.Label.Friends,
+Feature.Build.Label.FriendsOnly,
+Feature.Build.Label.GetMoreBuildUsage,احصل على المزيد من استخدام ميزة Build
+Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
+Feature.Build.Label.InProgress,قيد التقدم
+Feature.Build.Label.InputNeeded,الإدخال مطلوب
+Feature.Build.Label.Limited,محدودة
+Feature.Build.Label.Loading,
+Feature.Build.Label.NoLimit,لا يوجد حدّ
+Feature.Build.Label.NotStarted,لم يتم البدء
+Feature.Build.Label.Pending,معلّق
+Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
+Feature.Build.Label.Private,خاص
+Feature.Build.Label.Public,عامّ
+Feature.Build.Label.PubliclyUnavailable,غير متاحة علنًا
+Feature.Build.Label.Published,منشور
+Feature.Build.Label.Ready,جاهزة
+Feature.Build.Label.ResetsDaily,تتم إعادة التعيين يوميًا
+Feature.Build.Label.Search,بحث
+Feature.Build.Label.SearchGames,البحث في الألعاب
+Feature.Build.Label.SearchTasks,البحث في المهام
+Feature.Build.Label.SelectOption,حدّد خيارًا
+Feature.Build.Label.ShareAddedFriends,مشاركة مع الأصدقاء الذين أضفتهم
+Feature.Build.Label.Thinking,جارٍ التفكير
+Feature.Build.Label.Title,العنوان
+Feature.Build.Label.TitleDescription,العنوان والوصف
+Feature.Build.Label.Tool,أداة
+Feature.Build.Label.ToolAssetDone,تم إدراج الأصل
+Feature.Build.Label.ToolAssetFailed,تعذَّر إدراج الأصل
+Feature.Build.Label.ToolAssetRunning,جارٍ إدراج الأصل
+Feature.Build.Label.ToolAssetSearchDone,تم البحث في مكتبة الأصول
+Feature.Build.Label.ToolAssetSearchFailed,تعذَّر البحث في مكتبة الأصول
+Feature.Build.Label.ToolAssetSearchRunning,جارٍ البحث في مكتبة الأصول
+Feature.Build.Label.ToolClientDMDone,تم البحث في DataModel للعميل
+Feature.Build.Label.ToolClientDMFailed,تعذَّر البحث في DataModel للعميل
+Feature.Build.Label.ToolClientDMRunning,جارٍ البحث في DataModel للعميل
+Feature.Build.Label.ToolGameInfoDone,تم تحديث معلومات اللعبة
+Feature.Build.Label.ToolGameInfoFailed,تعذَّر تحديث معلومات اللعبة
+Feature.Build.Label.ToolGameInfoRunning,جارٍ تحديث معلومات اللعبة
+Feature.Build.Label.ToolGameSaveDone,تم حفظ اللعبة
+Feature.Build.Label.ToolGameSaveFailed,تعذَّر حفظ اللعبة
+Feature.Build.Label.ToolGameSaveRunning,جارٍ حفظ اللعبة
+Feature.Build.Label.ToolImageDone,تم إنشاء الصورة
+Feature.Build.Label.ToolImageFailed,تعذَّر إنشاء الصورة
+Feature.Build.Label.ToolImageRunning,جارٍ إنشاء الصورة
+Feature.Build.Label.ToolInspectDone,تم فحص حالة العميل
+Feature.Build.Label.ToolInspectFailed,تعذَّر فحص حالة العميل
+Feature.Build.Label.ToolInspectRunning,جارٍ فحص حالة العميل
+Feature.Build.Label.ToolLogsDone,تم طلب السجلات
+Feature.Build.Label.ToolLogsFailed,تعذَّر طلب السجلات
+Feature.Build.Label.ToolLogsRunning,جارٍ طلب السجلات
+Feature.Build.Label.ToolLuauDone,تم تنفيذ Luau
+Feature.Build.Label.ToolLuauFailed,تعذَّر تنفيذ Luau
+Feature.Build.Label.ToolLuauRunning,جارٍ تنفيذ Luau
+Feature.Build.Label.ToolModelDone,تم إنشاء النموذج ثلاثي الأبعاد
+Feature.Build.Label.ToolModelFailed,تعذَّر إنشاء النموذج ثلاثي الأبعاد
+Feature.Build.Label.ToolModelRunning,جارٍ إنشاء النموذج ثلاثي الأبعاد
+Feature.Build.Label.ToolPlanPresentDone,تم تقديم الخطة
+Feature.Build.Label.ToolPlanPresentFailed,تعذَّر تقديم الخطة
+Feature.Build.Label.ToolPlanPresentRunning,جارٍ تقديم الخطة
+Feature.Build.Label.ToolPlanUpdateDone,تم تحديث الخطة
+Feature.Build.Label.ToolPlanUpdateFailed,تعذَّر تحديث الخطة
+Feature.Build.Label.ToolPlanUpdateRunning,جارٍ تحديث الخطة
+Feature.Build.Label.ToolPrimitiveDone,تم إنشاء الشكل البدائي
+Feature.Build.Label.ToolPrimitiveFailed,تعذَّر إنشاء الشكل البدائي
+Feature.Build.Label.ToolPrimitiveRunning,جارٍ إنشاء الشكل البدائي
+Feature.Build.Label.ToolQuestionDone,تم طرح سؤال
+Feature.Build.Label.ToolQuestionFailed,تعذَّر طرح سؤال
+Feature.Build.Label.ToolQuestionRunning,جارٍ طرح سؤال
+Feature.Build.Label.ToolReqUpdateDone,تم تحديث المتطلبات
+Feature.Build.Label.ToolReqUpdateFailed,تعذَّر تحديث المتطلبات
+Feature.Build.Label.ToolReqUpdateRunning,جارٍ تحديث المتطلبات
+Feature.Build.Label.ToolScriptDone,تم تشغيل النص البرمجي
+Feature.Build.Label.ToolScriptFailed,تعذَّر تشغيل النص البرمجي
+Feature.Build.Label.ToolScriptRunning,جارٍ تشغيل النص البرمجي
+Feature.Build.Label.ToolSkillLoadDone,تم تحميل المهارة
+Feature.Build.Label.ToolSkillLoadFailed,تعذَّر تحميل المهارة
+Feature.Build.Label.ToolSkillLoadRunning,جارٍ تحميل المهارة
+Feature.Build.Label.ToolSkillsDone,تم إدراج المهارات المتاحة
+Feature.Build.Label.ToolSkillsFailed,تعذَّر إدراج المهارات المتاحة
+Feature.Build.Label.ToolSkillsRunning,جارٍ إدراج المهارات المتاحة
+Feature.Build.Label.ToolTasksPlanDone,تم التخطيط للمهام
+Feature.Build.Label.ToolTasksPlanFailed,تعذَّر التخطيط للمهام
+Feature.Build.Label.ToolTasksPlanRunning,جارٍ التخطيط لمهامك
+Feature.Build.Label.ToolThumbnailDone,تم إعداد الصورة المصغرة للعبة
+Feature.Build.Label.ToolThumbnailFailed,تعذّر إعداد الصورة المصغرة للعبة
+Feature.Build.Label.ToolThumbnailRunning,جارٍ إعداد الصورة المصغرة للعبة
+Feature.Build.Label.Unknown,غير معروف
+Feature.Build.Label.Usage,الاستخدام
+Feature.Build.Label.Version,الإصدار
+Feature.Build.Label.VersionTitleDesc,عنوان الإصدار ووصفه
+Feature.Build.Label.Video,فيديو
+Feature.Build.Message.AccountRequirements,لا يفي حسابك بمتطلبات استخدام ميزة Build.
+Feature.Build.Message.AccountTooNew,حسابك جديد جدًا بحيث لا يمكن النشر. حاول مرة أخرى بعد يومين من إنشائه.
+Feature.Build.Message.AllFriendsAdded,لقد أضفت جميع أصدقائك كمختبري لعب.
+Feature.Build.Message.AnswerBuildQuestion,أجب عن سؤال ميزة Build أدناه.
+Feature.Build.Message.AudienceIneligible,غير مؤهل لهذا الجمهور
+Feature.Build.Message.BuildAccountBlocked,ميزة Build غير متاحة لحسابك في الوقت الحالي.
+Feature.Build.Message.BuildBusy,ميزة Build مشغولة حاليًا. انتظر دقيقة وحاول مرة أخرى.
+Feature.Build.Message.BuildConnectFailed,تعذر الاتصال بميزة Build. يُرجى المحاولة مرة أخرى.
+Feature.Build.Message.BuildInternalError,واجهت ميزة Build مشكلة. حاول مرة أخرى.
+Feature.Build.Message.BuildResponseFailed,تعذَّر على ميزة Build الاستجابة. حاول مرة أخرى.
+Feature.Build.Message.BuildStillWorking,جارٍ العمل على ذلك. يمكنك مغادرة التطبيق أو تشغيل منصّة Roblox أو بدء مشروع آخر أثناء الانتظار.
+Feature.Build.Message.BuildStopped,لقد أوقفت ميزة Build.
+Feature.Build.Message.BuildTemporarilyDown,ميزة Build غير متوفرة مؤقتًا. حاول مرة أخرى بعد دقيقة.
+Feature.Build.Message.ConversationGone,لم تعد هذه المحادثة متوفرة. ابدأ محادثة جديدة.
+Feature.Build.Message.ConversationNotFound,تعذَّر العثور على هذه المحادثة. ابدأ محادثة جديدة.
+Feature.Build.Message.CreateGameToUseBuild,أنشئ لعبة جديدة لبدء استخدام ميزة Build.
+Feature.Build.Message.CreatedRevertedVer,تم إنشاء إصدار تم التراجع عنه.
+Feature.Build.Message.ExpandAudience,يمكنك توسيع نطاق أهلية جمهورك في مركز المصمم
+Feature.Build.Message.ExperiencesLoadFailed,تعذَّر تحميل التجارب
+Feature.Build.Message.FailedTitle,تعذَّرت عملية {TITLE}
+Feature.Build.Message.FinishedTitle,انتهت عملية {TITLE}
+Feature.Build.Message.FriendsLoadFailed,تعذَّر تحميل الأصدقاء. حاول مرة أخرى.
+Feature.Build.Message.GameNotCreated,لم يتم إنشاء لعبتك. حاوِل مرة أخرى.
+Feature.Build.Message.GamePublishFailed,تعذَّر نشر لعبتك. حاول مرة أخرى.
+Feature.Build.Message.InvalidMessage,حدث خطأ ما في رسالتك. يُرجى تعديلها والمحاولة مرة أخرى.
+Feature.Build.Message.InvitesLoadFailed,تعذَّر تحميل الدعوات
+Feature.Build.Message.LinkCopied,تم نسخ الرابط إلى الحافظة.
+Feature.Build.Message.LoadingVersions,جارٍ تحميل سجل الإصدارات...
+Feature.Build.Message.NoDescriptionProvided,لم يتم تقديم وصف.
+Feature.Build.Message.NoFriendsToAdd,ليس لديك أي أصدقاء لإضافتهم حتى الآن. ابحث عن أشخاص للتواصل معهم على منصّة Roblox أولًا.
+Feature.Build.Message.NoResults,
+Feature.Build.Message.NoVersionHistory,لا يوجد سجل إصدارات حتى الآن.
+Feature.Build.Message.OutOfBuildUsage,لقد نفد رصيدك من استخدام ميزة Build. اعرض خياراتك لاستخدام عملات Robux لمواصلة الإنشاء.
+Feature.Build.Message.PublicPublishFailed,تم نشر لعبتك، ولكن تعذَّر جعلها عامة. حاول مرة أخرى.
+Feature.Build.Message.PublishExpandAudience,يمكنك النشر لتوسيع نطاق جمهورك
+Feature.Build.Message.PublishNotReverted,لم يتم التراجع عن عملية النشر. حاوِل مرة أخرى.
+Feature.Build.Message.PublishReverted,تم التراجع عن النشر.
+Feature.Build.Message.QuestionnaireNeeded,تم تحرير هذه اللعبة خارج ميزة Build. أكمل استبيان المحتوى للنشر.
+Feature.Build.Message.ReadyToPlay,لعبتك جاهزة للتشغيل على منصّة Roblox!
+Feature.Build.Message.RestoreVersionFailed,تعذَّرت استعادة هذا الإصدار. حاول مرة أخرى.
+Feature.Build.Message.RevertVersionFail,لم يتم إنشاء إصدار تم التراجع عنه. حاوِل مرة أخرى.
+Feature.Build.Message.RunningTitle,جارٍ إجراء {title}
+Feature.Build.Message.SafetyPolicy,تنتهك هذه الرسالة سياسة السلامة السارية لدينا. يُرجى تعديلها والمحاولة مرة أخرى.
+Feature.Build.Message.SaveChangesFailed,تعذَّر حفظ التغييرات. حاول مرة أخرى.
+Feature.Build.Message.ShareLinkFailed,تعذَّر إنشاء رابط المشاركة. حاول مرة أخرى.
+Feature.Build.Message.SignedOut,لقد تم تسجيل خروجك. سجّل الدخول وحاول مرة أخرى.
+Feature.Build.Message.TryAgain,حاول مرة أخرى.
+Feature.Build.Message.TurnToPortrait,حوّل جهازك إلى الوضع العمودي لمواصلة العمل على لعبتك.
+Feature.Build.Message.VersionHistoryLoad,تعذَّر تحميل سجل الإصدارات.
+Feature.Build.Message.WhatToCreate,ما الذي تريد إنشاؤه اليوم؟
+Feature.Build.Message.WorkingOnTasks,جارٍ العمل على مهامك
+Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
+Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
+Feature.Build.Title.Audience,الجمهور
+Feature.Build.Title.BuildQuestion,لدى ميزة Build سؤال
+Feature.Build.Title.BuildQuestions,لدى ميزة Build بعض الأسئلة
+Feature.Build.Title.BuildUnavailable,ميزة Build غير متاحة
+Feature.Build.Title.BuildUsage,استخدام ميزة Build
+Feature.Build.Title.ChangesNotLive,تغييراتك لم تُنشر بعد
+Feature.Build.Title.ChatBuildUnavailable,ميزة Build غير متوفرة.
+Feature.Build.Title.Content,المحتوى
+Feature.Build.Title.DailyRobuxReached,تم الوصول إلى الحد اليومي المسموح به من عملات Robux
+Feature.Build.Title.ExperienceAudience,جمهور التجربة
+Feature.Build.Title.FreeUsageReached,تم الوصول إلى حد استخدام ميزة Build المجاني
+Feature.Build.Title.FriendsOnlyPlay,يمكن للأصدقاء فقط اللعب
+Feature.Build.Title.GameCreationDone,اكتمل إنشاء اللعبة
+Feature.Build.Title.GamePrivate,هذه اللعبة خاصة
+Feature.Build.Title.GenericError,
+Feature.Build.Title.NoRobuxForUsage,لم يتبقَ أي عملات Robux لاستخدام ميزة Build
+Feature.Build.Title.Playtesters,مختبرو اللعب
+Feature.Build.Title.PlaytestersOnlyPlay,يمكن لمختبري اللعب فقط تشغيل اللعبة
+Feature.Build.Title.PushNotifications,الإشعارات الفورية
+Feature.Build.Title.RevertLastChange,هل تريد التراجع عن التغيير الأخير؟
+Feature.Build.Title.Tasks,المهام
+Feature.Build.Title.TurnActivity,نشاط الدور
+Feature.Build.Title.VersionHistory,سجل الإصدارات
+Feature.Build.Title.VersionInformation,معلومات الإصدار
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,السماح
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -1780,7 +2026,7 @@ Feature.Captures.Action.Save,
 Feature.Captures.Action.SelectAllCaptures,تحديد الكل
 Feature.Captures.Action.Share,
 Feature.Captures.Action.ShareYourCapture,شارك لقطاتك
-Feature.Captures.Action.ViewCapture,عرض
+Feature.Captures.Action.ViewCapture,
 Feature.Captures.Body.AllowAccessToCaptures,ترغب هذه التجربة في عرض لقطاتك واستخدامها.
 Feature.Captures.Body.SaveCapturesPrompt,هل تريد حفظ لقطاتك؟
 Feature.Captures.Body.ShareCapturePrompt,هل ترغب في مشاركة لقطتك؟
@@ -1818,7 +2064,7 @@ Feature.Captures.Title.DeleteMultipleCapturesWarning,حذف اللقطات
 Feature.Captures.Title.Gallery,المعرض
 Feature.Captures.Title.SaveCapturesPrompt,حفظ اللقطات
 Feature.Captures.Title.ShareCapturePrompt,مشاركة اللقطة
-Feature.Captures.Title.VideoCTA,فيديو
+Feature.Captures.Title.VideoCTA,
 Feature.Captures.Title.VideoCaptureInProgressTooltip,جارٍ التقاط الفيديو بالفعل
 Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip,يتم كتم صوت المحادثة الصوتية أثناء الالتقاط
 Feature.Captures.Toast.CaptureSaved,تم حفظ اللقطة
@@ -1832,7 +2078,7 @@ Feature.Captures.Toast.VideoCaptureInitializationNoDeviceSupportError,لا يد�
 Feature.Captures.Toast.VideoCaptureInitializationNoSpaceOnDeviceError,لا يحتوي الجهاز على مساحة كافية لالتقاط الفيديو
 Feature.Captures.Toast.VideoCaptureInitializationOtherError,حدث خطأ أثناء بدء الفيديو
 Feature.Captures.Toast.VideoCaptureOtherError,حدث خطأ أثناء تسجيل الفيديو
-Feature.Catalog.Action.Buy,شراء
+Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,الانتقال إلى التخصيص
 Feature.Catalog.Action.Checkout.ManageInCustomize,إدارة العناصر في التخصيص
@@ -1891,7 +2137,7 @@ Feature.Catalog.Heading.ItemInfo,معلومات العنصر
 Feature.Catalog.Heading.ItemRemoved,تم حذف العنصر
 Feature.Catalog.Heading.ItemsOnSale,عناصر للبيع
 Feature.Catalog.Heading.NotForSale,
-Feature.Catalog.Heading.Overview,نظرة عامة
+Feature.Catalog.Heading.Overview,
 Feature.Catalog.Heading.PremiumOnly,لمشتركي Roblox Plus فقط
 Feature.Catalog.Heading.QuantityLimitReached,وصول للحد الأقصى
 Feature.Catalog.Heading.QuickMenu,القائمة السريعة
@@ -1997,7 +2243,7 @@ Feature.Catalog.Label.HD,HD
 Feature.Catalog.Label.Hair,الشعر
 Feature.Catalog.Label.HeadShape,
 Feature.Catalog.Label.HighDefinitionInfo,تُصمَّم عناصر HD بإتقان عالٍ من حيث التفاصيل والمواد والتناسق.
-Feature.Catalog.Label.Holding,معلّق
+Feature.Catalog.Label.Holding,
 Feature.Catalog.Label.InExperienceOnly,البيع الأصلي لهذا العنصر متاح فقط داخل التجربة.
 Feature.Catalog.Label.InMultipleExperiences,في {NUM_EXPERIENCES} (تجربة)
 Feature.Catalog.Label.InSingleExperience,في التجربة
@@ -2013,7 +2259,7 @@ Feature.Catalog.Label.ItemInAHold,عنصر معلّق؟
 Feature.Catalog.Label.ItemOwnedCount,العناصر المملوكة ({itemCount})
 Feature.Catalog.Label.ItemsCount,{itemCount} عناصر
 Feature.Catalog.Label.LeftArm,اليد اليسرى
-Feature.Catalog.Label.Limited,محدودة
+Feature.Catalog.Label.Limited,
 Feature.Catalog.Label.LimitedU,Limited U
 Feature.Catalog.Label.LipMakeup,
 Feature.Catalog.Label.Makeup,
@@ -2255,7 +2501,7 @@ Feature.Chat.Heading.UserInvitedYouToJoin,تمت دعوتك من {combinedName} 
 Feature.Chat.Heading.UserInvitedYouToJoinAGroup,تمت دعوتك من {combinedName} للانضمام إلى مجموعة
 Feature.Chat.Heading.YouWereInvitedToGroup,لقد تلقيتَ دعوة للانضمام إلى المجموعة
 Feature.Chat.Label.AddConnections,إضافة جهات تواصل
-Feature.Chat.Label.AddFriends,إضافة أصدقاء
+Feature.Chat.Label.AddFriends,
 Feature.Chat.Label.Available,متاحة
 Feature.Chat.Label.Blocked,محظور
 Feature.Chat.Label.ChatDetails,تفاصيل المحادثة
@@ -2309,6 +2555,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1د
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1أ
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}أ
 Feature.Chat.Label.Unavailable,غير متاحة
+Feature.Chat.Label.UnfilteredChat,الدردشة غير خاضعة للفلترة
 Feature.Chat.Label.UnknownUser,مستخدم غير معروف
 Feature.Chat.Label.User,المستخدم
 Feature.Chat.Label.ViewProfile,عرض الملف الشخصي
@@ -2694,11 +2941,12 @@ Feature.FriendsMenu.Label.SelectedConnectionsCount,تم تحديد {numerator}/{
 Feature.FriendsMenu.Label.SelectedConnectionsCountNoLimit,تم تحديد {selectedCount} من جهات الاتصال
 Feature.FriendsMenu.Label.SelectedFriendsCount,تم تحديد {numerator}/{denominator} من الأصدقاء
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,تم تحديد {selectedCount} من الأصدقاء
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,تقديم الملاحظات
 Feature.GameDetails.Action.NotInterested,غير مهتم
 Feature.GameDetails.Action.Report,
 Feature.GameDetails.Action.ReportAd,
-Feature.GameDetails.Action.Undo,تراجع
+Feature.GameDetails.Action.Undo,
 Feature.GameDetails.Action.Unlock,
 Feature.GameDetails.Action.WhyThisAd,لماذا يظهر لي هذا الإعلان؟
 Feature.GameDetails.Heading.PurchaseGame,فتح هذه التجربة
@@ -2903,6 +3151,7 @@ Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,تشغيل اكت�
 Feature.Moments.Action.AddMusic,أضِف موسيقى
 Feature.Moments.Action.AddSticker,إضافة ملصق
 Feature.Moments.Action.AddText,أضِف نص
+Feature.Moments.Action.AddVoice,إضافة صوت
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -2964,6 +3213,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,أنت على اطلاع بكل جديد حاليًا
 Feature.Moments.Label.Photos,الصور
+Feature.Moments.Label.PostDeleted,تم حذف اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.
 Feature.Moments.Label.PublishingRodeoBody,لن يستغرق الأمر وقتًا طويلاً.
 Feature.Moments.Label.Reactions,التفاعلات
@@ -2973,16 +3223,18 @@ Feature.Moments.Label.ReportSubmittedBody,شكرًا لك على ملاحظات�
 Feature.Moments.Label.ReportSubmittedTitle,تم إرسال البلاغ
 Feature.Moments.Label.RobloxPartnerContent,محتوى شريك Roblox
 Feature.Moments.Label.RodeoPublishingTitle,نشر لحظتك
-Feature.Moments.Label.Search,بحث
+Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,لحظات على منصّة Roblox
 Feature.Moments.Label.StayFriendlyModeration,
+Feature.Moments.Label.TextGenerateInProgressBody,يُرجى الانتظار حتى يتم إنشاء النص بواسطة الذكاء الاصطناعي قبل تحرير التراكب يدويًا.
+Feature.Moments.Label.TextGenerateInProgressTitle,جارٍ الإنشاء
 Feature.Moments.Label.TextGenerateOverrideBody,سيحل الإنشاء محل تراكب النص والوصف الحاليين.
 Feature.Moments.Label.TextGenerateOverrideTitle,سيتم استبدال النص
-Feature.Moments.Label.TextGeneratedBody,تمت إضافة تراكب ووصف من إنشاء الذكاء الاصطناعي
+Feature.Moments.Label.TextGeneratedBody,تمت إضافة تراكب نص ووصف من إنشاء الذكاء الاصطناعي
 Feature.Moments.Label.TextGeneratedTitle,تم إنشاء النص
 Feature.Moments.Label.TextGenerationFailedBody,تعذّر إنشاء النص. يُرجى المحاولة مرة أخرى.
 Feature.Moments.Label.TextGenerationFailedTitle,تعذَّر الإنشاء
-Feature.Moments.Label.TextGenerationFilteredBody,تعذَّر إجراء الإنشاء لهذه اللقطة، وتمت فلترة المحتوى.
+Feature.Moments.Label.TextGenerationFilteredBody,تعذَّر إجراء الإنشاء لهذا الفيديو الذي تم التقاطه، وتمت فلترة المحتوى.
 Feature.Moments.Label.TextGenerationFilteredTitle,تمت فلترة الإنشاء
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
@@ -3380,7 +3632,7 @@ Feature.SettingsHub.Action.InviteFriendsBack,
 Feature.SettingsHub.Action.MuteAll,كتم الجميع
 Feature.SettingsHub.Action.NotNow,
 Feature.SettingsHub.Action.Ok,
-Feature.SettingsHub.Action.OpenSettings,فتح الإعدادات
+Feature.SettingsHub.Action.OpenSettings,
 Feature.SettingsHub.Action.Report.Done,
 Feature.SettingsHub.Action.TurnOn,
 Feature.SettingsHub.Action.Unblock,
@@ -3448,6 +3700,7 @@ Feature.SettingsHub.Label.NoConnectionsPageMessage,أضِف جهات اتصال 
 Feature.SettingsHub.Label.NoConnectionsScreen,أنشئ جهات اتصال حتى تتمكن من دعوتهم للانضمام إليك!
 Feature.SettingsHub.Label.NoFriendsPageMessage,أضف أصدقاءك حتى تتمكن من الاستكشاف واللعب معهم.
 Feature.SettingsHub.Label.NoFriendsScreen,أنشئ صداقات لكي تتمكن من دعوتهم للانضمام إليك.
+Feature.SettingsHub.Label.QuitButton,إنهاء
 Feature.SettingsHub.Label.ReasonForAbuse,سبب الإساءة؟
 Feature.SettingsHub.Label.Report.BlockDisplayName,حظر {DISPLAY_NAME} (@{RBX_NAME})
 Feature.SettingsHub.Label.Report.OtherActionsHeader,خطوات أخرى يمكنك اتخاذها
@@ -3650,7 +3903,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,هل تريد بالتأكيد إزالة هذا الشخص من المجموعة؟
 Feature.Squads.Description.RemoveFromParty,ستتم إزالة {displayName} من الدردشة الجماعية.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,هناك فرقة مجدولة بالفعل في الوقت الذي حددته
-Feature.Squads.Description.Title,العنوان
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,لقد أضفت {username} و{userCountMinusOne} آخرين إلى المجموعة
 Feature.Squads.Description.YouAddedToChat,لقد أضفت {username} إلى المجموعة
@@ -3995,7 +4248,7 @@ IAPExperience.PurchasePrompt.Title.BuyItemV2,
 IAPExperience.PurchasePrompt.Title.BuyItems,
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItem,شراء Robux والعنصر
 IAPExperience.PurchasePrompt.Title.BuyRobuxAndItems,شراء Robux والعناصر
-IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,شراء عملات Robux
+IAPExperience.PurchasePrompt.Title.BuyRobuxOnly,
 IAPExperience.PurchasePrompt.Title.PurchaseCompleted,
 IAPExperience.PurchaseSuccess.Action.BackToGame,العودة إلى اللعبة
 IAPExperience.PurchaseSuccess.Action.BackToShop,العودة إلى المتجر

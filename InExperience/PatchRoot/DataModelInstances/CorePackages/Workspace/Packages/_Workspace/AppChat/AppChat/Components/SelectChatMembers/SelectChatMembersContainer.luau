@@ -8,6 +8,7 @@ local reactModule = require(parent.React)
 local signalsModule = require(parent.Signals)
 local view = require(parent.Foundation).View
 local useLocalization = require(parent.Localization).Hooks.useLocalization
+local useNavigation = require(parent.Navigation).useNavigation
 local useAppChatIsWideModeModule = require(appChat.Hooks.useAppChatIsWideMode)
 local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
 local isUserInConversationModule = require(script.Parent.Utils.isUserInConversation)
@@ -17,6 +18,7 @@ local useFetchPaginatedFriendIdsModule = require(script.Parent.useFetchPaginated
 local selectChatMembersModule = require(script.Parent.SelectChatMembers)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+local fFlagFixPaginatedChatMembersCutoffModule = require(appChat.Flags.FFlagFixPaginatedChatMembersCutoff)
 local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
 local t = {
 	minSelections = 1,
@@ -27,41 +29,42 @@ local t = {
 	filterPredicate = searchFilterPredicateModule,
 	sortComparator = sortComparatorModule,
 	conversation = { participants = {} },
-	navigateToToast = function(_) --[[ line: 63 ]] end,
-	selectedUsersChanged = function(_, _) --[[ line: 64 ]] end
+	navigateToToast = function(_) --[[ line: 65 ]] end,
+	selectedUsersChanged = function(_, _) --[[ line: 66 ]] end
 }
 
-function SelectChatMembersContainer(p0) --[[ line: 69 ]]
-	-- upvalues: cryoModule (ref), t (ref), getSelectedUsersStoreModule (ref), reactModule (ref), signalsModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getFFlagIsSquadEnabled (ref), constantsModule (ref), useFetchPaginatedFriendIdsModule (ref), isUserInConversationModule (ref), useIsInExperienceModule (ref), useAppChatIsWideModeModule (ref), view (ref), selectChatMembersModule (ref)
-	local var14 = cryoModule.Dictionary.union(t, p0)
-	local var15 = getSelectedUsersStoreModule(false)
-	reactModule.useEffect(function() --[[ line: 73 ]]
-		-- upvalues: var15 (ref), var14 (ref)
-		var15.setMaxSize(var14.maxSelections)
+function SelectChatMembersContainer(p0) --[[ line: 71 ]]
+	-- upvalues: cryoModule (ref), t (ref), getSelectedUsersStoreModule (ref), fFlagFixPaginatedChatMembersCutoffModule (ref), useNavigation (ref), reactModule (ref), signalsModule (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), getFFlagIsSquadEnabled (ref), constantsModule (ref), useFetchPaginatedFriendIdsModule (ref), isUserInConversationModule (ref), useIsInExperienceModule (ref), useAppChatIsWideModeModule (ref), view (ref), selectChatMembersModule (ref)
+	local var15 = cryoModule.Dictionary.union(t, p0)
+	local var16 = getSelectedUsersStoreModule(false)
+	local var17 = if fFlagFixPaginatedChatMembersCutoffModule then useNavigation().getScreenProps("topBarHeight", 0) else nil
+	reactModule.useEffect(function() --[[ line: 81 ]]
+		-- upvalues: var16 (ref), var15 (ref)
+		var16.setMaxSize(var15.maxSelections)
 		
-		return function() --[[ line: 75 ]]
-			-- upvalues: var15 (copy)
-			var15.clearStore()
+		return function() --[[ line: 83 ]]
+			-- upvalues: var16 (copy)
+			var16.clearStore()
 		end
-	end, { var14.maxSelections })
-	reactModule.useEffect(function() --[[ line: 80 ]]
-		-- upvalues: signalsModule (copy), var15 (ref), cryoModule (copy), var14 (ref)
-		local var21 = signalsModule.createEffect(function(p1) --[[ line: 81 ]]
-			-- upvalues: var15 (copy), cryoModule (copy), var14 (copy)
-			var14.selectedUsersChanged(cryoModule.List.map(var15.getSelectedUserIdsArray()(p1), function(p2) --[[ line: 86 ]]
+	end, { var15.maxSelections })
+	reactModule.useEffect(function() --[[ line: 88 ]]
+		-- upvalues: signalsModule (copy), var16 (ref), cryoModule (copy), var15 (ref)
+		local var23 = signalsModule.createEffect(function(p1) --[[ line: 89 ]]
+			-- upvalues: var16 (copy), cryoModule (copy), var15 (copy)
+			var15.selectedUsersChanged(cryoModule.List.map(var16.getSelectedUserIdsArray()(p1), function(p2) --[[ line: 94 ]]
 				return { id = p2 }
-			end), var14.minSelections)
+			end), var15.minSelections)
 		end)
 		
-		return function() --[[ line: 92 ]]
-			-- upvalues: var21 (ref)
-			var21()
+		return function() --[[ line: 100 ]]
+			-- upvalues: var23 (ref)
+			var23()
 		end
-	end, { var14.minSelections })
-	local var16 = useLocalization({
+	end, { var15.minSelections })
+	local var18 = useLocalization({
 		networkErrorText = "Feature.Chat.Response.NetworkError",
-		systemButtonText = var14.systemButtonText,
-		pageHeaderText = var14.pageHeaderText,
+		systemButtonText = var15.systemButtonText,
+		pageHeaderText = var15.pageHeaderText,
 		searchFriendsText = if fFlagConnectionsToFriendsRename then "Feature.Chat.Label.SearchFriends" else "Feature.Chat.Label.SearchConnections",
 		tooManyFriendsText = {
 			if getFFlagIsSquadEnabled() then if fFlagConnectionsToFriendsRename then "Feature.Chat.Message.AddFriendsPartyLimit" else "Feature.Chat.Message.AddConnectionsPartyLimit" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Message.AddFriendsLimit" else "Feature.Chat.Message.AddConnectionsLimit",
@@ -70,52 +73,52 @@ function SelectChatMembersContainer(p0) --[[ line: 69 ]]
 		},
 		tooManyFriendsTextSingular = if getFFlagIsSquadEnabled() then if fFlagConnectionsToFriendsRename then "Feature.Chat.Message.AddFriendsPartyLimitSingular" else "Feature.Chat.Message.AddConnectionsPartyLimitSingular" elseif fFlagConnectionsToFriendsRename then "Feature.Chat.Message.GroupFriendLimitSingular" else "Feature.Chat.Message.GroupConnectionLimitSingular"
 	})
-	local var17 = reactModule.useCallback(function() --[[ line: 125 ]]
-		-- upvalues: var14 (ref), var16 (ref)
-		var14.navigateToToast({
+	local var19 = reactModule.useCallback(function() --[[ line: 133 ]]
+		-- upvalues: var15 (ref), var18 (ref)
+		var15.navigateToToast({
 			toastProps = {
 				toastContent = {
-					toastTitle = if var14.canOnlyCreateOneToOneChat then var16.tooManyFriendsTextSingular else var16.tooManyFriendsText
+					toastTitle = if var15.canOnlyCreateOneToOneChat then var18.tooManyFriendsTextSingular else var18.tooManyFriendsText
 				}
 			}
 		})
 	end, {
-		var14.canOnlyCreateOneToOneChat,
-		var14.navigateToToast,
-		var16
+		var15.canOnlyCreateOneToOneChat,
+		var15.navigateToToast,
+		var18
 	})
-	reactModule.useEffect(function() --[[ line: 131 ]]
-		-- upvalues: var15 (ref), var17 (ref)
-		local var22 = var15.onMaxSizeExceeded(var17)
+	reactModule.useEffect(function() --[[ line: 139 ]]
+		-- upvalues: var16 (ref), var19 (ref)
+		local var24 = var16.onMaxSizeExceeded(var19)
 		
-		return function() --[[ line: 133 ]]
-			-- upvalues: var22 (ref)
-			var22()
+		return function() --[[ line: 141 ]]
+			-- upvalues: var24 (ref)
+			var24()
 		end
-	end, { var17 })
-	local var18, var19, var20 = useFetchPaginatedFriendIdsModule()
+	end, { var19 })
+	local var20, var21, var22 = useFetchPaginatedFriendIdsModule()
 	
 	return reactModule.createElement(view, {
-		Size = UDim2.new(1, 0, 1, if not useAppChatIsWideModeModule(useIsInExperienceModule()) then 0 else -56)
+		Size = UDim2.new(1, 0, 1, if not useAppChatIsWideModeModule(useIsInExperienceModule()) then 0 else -(if fFlagFixPaginatedChatMembersCutoffModule then var17 else 56))
 	}, {
 		SelectMembers = reactModule.createElement(selectChatMembersModule, {
-			friendIds = reactModule.useMemo(function() --[[ line: 140 ]]
-				-- upvalues: cryoModule (copy), var18 (ref), isUserInConversationModule (copy), var14 (ref)
-				return cryoModule.List.filter(var18, function(p3) --[[ line: 141 ]]
-					-- upvalues: isUserInConversationModule (copy), var14 (copy)
-					return not isUserInConversationModule(p3, var14.conversation)
+			friendIds = reactModule.useMemo(function() --[[ line: 148 ]]
+				-- upvalues: cryoModule (copy), var20 (ref), isUserInConversationModule (copy), var15 (ref)
+				return cryoModule.List.filter(var20, function(p3) --[[ line: 149 ]]
+					-- upvalues: isUserInConversationModule (copy), var15 (copy)
+					return not isUserInConversationModule(p3, var15.conversation)
 				end)
-			end, { var18, var14.conversation }),
-			fetchMoreFriends = reactModule.useCallback(function() --[[ line: 146 ]]
-				-- upvalues: var19 (ref), var20 (ref)
-				if var19 and not var20 then
-					var19()
+			end, { var20, var15.conversation }),
+			fetchMoreFriends = reactModule.useCallback(function() --[[ line: 154 ]]
+				-- upvalues: var21 (ref), var22 (ref)
+				if var21 and not var22 then
+					var21()
 				end
-			end, { var19, var20 }),
-			searchFriendsText = var16.searchFriendsText,
-			shouldShowSelectChatMembersBar = not var14.canOnlyCreateOneToOneChat,
-			conversation = var14.conversation,
-			isDebugEnabled = var14.isDebugEnabled
+			end, { var21, var22 }),
+			searchFriendsText = var18.searchFriendsText,
+			shouldShowSelectChatMembersBar = not var15.canOnlyCreateOneToOneChat,
+			conversation = var15.conversation,
+			isDebugEnabled = var15.isDebugEnabled
 		})
 	})
 end
