@@ -137,6 +137,7 @@ Authentication.CrossDevice.Label.QrCodeError,"Возникла проблема 
 Authentication.CrossDevice.Label.QrCodeLogin,Вход с QR-кодом
 Authentication.CrossDevice.Label.QrHeader,Вариант 1
 Authentication.CrossDevice.Label.QrInstructions,"Отсканируй этот QR-код c устройства, на котором выполнен вход."
+Authentication.CrossDevice.Label.QrTroubleshooting,Возникла проблема?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,"Перейди по адресу <b>roblox.com/quest</b> на компьютере или телефоне, чтобы ввести этот код и завершить вход."
 Authentication.CrossDevice.Label.Warning1,"• Вводи только коды, запрошенные тобой."
 Authentication.CrossDevice.Label.Warning2,• Никогда не вводи коды других пользователей.
@@ -145,6 +146,7 @@ Authentication.CrossDevice.Response.LoginFail,Не удалось войти
 Authentication.CrossDevice.Response.LoginSuccess,Вход выполнен
 Authentication.Login.Action.ConnectionError.RetryReady,Повторно
 Authentication.Login.Action.ConnectionError.RetryWait,Повторите в: {WaitTime}
+Authentication.Login.Action.Continue,Продолжить
 Authentication.Login.Action.DownloadNow,Загрузить сейчас
 Authentication.Login.Action.EmailACode,Отправить код по электронной почте
 Authentication.Login.Action.EmailOtpWaitTime,Отправить код повторно через {WaitTime}с
@@ -232,7 +234,7 @@ Authentication.Login.Response.UnverifiedEmailLoginWithUsername,"Этот адр�
 Authentication.Login.WeChat.AntiAddictionText,"Не участвуй в плохих и пиратских проектах. Будь начеку, чтобы избежать обмана. Не проводи слишком много времени в сети, это может навредить здоровью. Разумно распределяй своё время и наслаждайся правильным образом жизни."
 Authentication.Login.WeChat.NotInstalled,WeChat не установлен
 Authentication.OneTimePasscode.Action.ChangeEmailV2,Изменить адрес эл. почты
-Authentication.OneTimePasscode.Action.Continue,Продолжить
+Authentication.OneTimePasscode.Action.Continue,
 Authentication.OneTimePasscode.Action.GetHelp,Нужна помощь
 Authentication.OneTimePasscode.Action.Resend,Отправить заново
 Authentication.OneTimePasscode.Description.DidntReceiveCode,Код не получен?
@@ -708,9 +710,6 @@ CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[От: {RBX_NAME}]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[Для: {RBX_NAME}]
 CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
-CoreScripts.TopBar.Label.InappropriateAudio,Недопустимое аудио
-CoreScripts.TopBar.Label.Report,Пожаловаться
-CoreScripts.TopBar.Label.ReportAudio,Пожаловаться на аудио
 CoreScripts.TopBar.Music,Музыка
 CoreScripts.TopBar.MusicLoading,Аудио не воспроизводится
 CoreScripts.TopBar.MusicNotVerified,Воспроизведимое аудио не проверено
@@ -1373,7 +1372,7 @@ Feature.Catalog.Action.PreviewAndPost,
 Feature.Catalog.Action.Remove,Убрать
 Feature.Catalog.Action.RemoveFavorite,Из избранного
 Feature.Catalog.Action.Rent,Взять напрокат
-Feature.Catalog.Action.Report,
+Feature.Catalog.Action.Report,Пожаловаться
 Feature.Catalog.Action.Sell,Продать
 Feature.Catalog.Action.ShareVia,Поделиться в...
 Feature.Catalog.Action.Submit,
@@ -2815,19 +2814,18 @@ Feature.SocialShare.Response.Error.Subtext,Повтори попытку поз�
 Feature.SocialShare.ShareWithPeopleYouKnow,"Поделиться с людьми, которых ты знаешь"
 Feature.SocialTab.Label.AddFriendHint,"Нажми здесь, чтобы добавить друзей"
 Feature.SocialTab.Label.AddFriendHintBody,С друзьями в Roblox ещё веселее!
-Feature.SocialTab.Label.Chats,Чаты
 Feature.SocialTab.Label.Connect,Общение
 Feature.SocialTab.Label.CreateAndExploreGroups,Создавай и исследуй сообщества
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,
+Feature.SongDetails.Action.ReportAudio,Пожаловаться на аудио
 Feature.SongDetails.Body.DescriptionTitle,Информация
 Feature.SongDetails.Label.DateUploaded,Дата загрузки
 Feature.SongDetails.Label.ExperiencesFeaturing,Плейсы с треком
 Feature.SongDetails.Label.ExperiencesFeaturingTrack,"Плейсы, в которых играет {trackName}"
 Feature.SongDetails.Label.Genre,
-Feature.SongDetails.Label.InappropriateAudio,
+Feature.SongDetails.Label.InappropriateAudio,Недопустимое аудио
 Feature.SongDetails.Label.Length,Длина
 Feature.SongDetails.Label.MonthlyListeners,Ежемесячные слушатели
 Feature.SongDetails.Label.SongsAvailableBy,Песни от {artistName}

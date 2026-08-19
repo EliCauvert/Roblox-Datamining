@@ -1,6 +1,7 @@
 ﻿local parent = script.Parent.Parent
 local parent_1 = parent.Parent.Parent
 local parent_2 = parent_1.Parent
+local UIBloxConfigModule = require(parent_1.UIBloxConfig)
 local reactModule = require(parent_2.React)
 local object = require(parent_2.LuauPolyfill).Object
 local useStyleModule = require(parent_1.Core.Style.useStyle)
@@ -22,47 +23,47 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 45 | named "IconTab" ]]
-	-- upvalues: object (ref), t (ref), controlStateModule (ref), useStyleModule (ref), getIconSizeModule (ref), iconSizeModule (ref), constantsModule (ref), horizontalContainerModule (ref), reactModule (ref), label (ref), placementModule (ref), genericTextLabelModule (ref)
-	local var10 = object.assign({}, t, p0)
-	local item = var10.item
-	local var11 = var10.controlState == controlStateModule.SelectedPressed
-	local selected = var10.selected
-	local var12 = useStyleModule()
-	local var13 = if selected then var12.Tokens.Semantic.Color.Icon.Emphasis else var12.Tokens.Semantic.Color.Icon.Default
-	local var14 = getIconSizeModule(iconSizeModule.Medium, var12)
-	local var15 = constantsModule.ICON_TAB_HEIGHT - constantsModule.ICON_TAB_PADDING * 2
+return function(p0) --[[ line: 46 | named "IconTab" ]]
+	-- upvalues: object (ref), t (ref), controlStateModule (ref), useStyleModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), constantsModule (ref), horizontalContainerModule (ref), reactModule (ref), label (ref), placementModule (ref), genericTextLabelModule (ref)
+	local var11 = object.assign({}, t, p0)
+	local item = var11.item
+	local var12 = var11.controlState == controlStateModule.SelectedPressed
+	local selected = var11.selected
+	local var13 = useStyleModule()
+	local var14 = if selected then if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Color.Content.Emphasis else var13.Tokens.Semantic.Color.Icon.Emphasis elseif UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Color.Content.Default else var13.Tokens.Semantic.Color.Icon.Default
+	local var15 = getIconSizeModule(iconSizeModule.Medium, var13)
+	local var16 = constantsModule.ICON_TAB_HEIGHT - constantsModule.ICON_TAB_PADDING * 2
 	assert(if item.icon ~= nil then item.iconComponent == nil else true, "icon or iconComponent cannot be assigned at same time")
 	
 	return horizontalContainerModule({
 		size = UDim2.new(0, 0, 0, constantsModule.ICON_TAB_HEIGHT),
 		automaticSize = Enum.AutomaticSize.X,
-		roundedBackgroundSize = UDim2.new(1, -(constantsModule.ICON_TAB_PADDING * 2), 0, var15),
+		roundedBackgroundSize = UDim2.new(1, -(constantsModule.ICON_TAB_PADDING * 2), 0, var16),
 		roundedBackgroundPosition = UDim2.fromOffset(constantsModule.ICON_TAB_PADDING, constantsModule.ICON_TAB_PADDING),
-		roundedBackgroundColor = var12.Theme.Divider.Color,
+		roundedBackgroundColor = var13.Theme.Divider.Color,
 		roundedBackgroundTransparency = constantsModule.ICON_TAB_SELECTED_TRANSPARENCY,
 		spacing = if item.icon == nil and item.iconComponent == nil then 0 else constantsModule.ICON_TAB_ITEM_ICON_TITLE_SPACING,
-		padding = var10.padding,
+		padding = var11.padding,
 		showRoundedBackground = if item.showRoundedBackground ~= nil then selected else item.showRoundedBackground,
-		showOverlay = if item.showOverlay ~= nil then var11 else item.showOverlay
+		showOverlay = if item.showOverlay ~= nil then var12 else item.showOverlay
 	}, {
 		Icon = if item.icon ~= nil then if item.iconComponent ~= nil then nil else reactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(0, var14, 0, var14)
+			Size = UDim2.new(0, var15, 0, var15)
 		}, reactModule.createElement(item.iconComponent, {
 			hovered = false,
 			placement = placementModule.Bottom,
 			selected = selected,
-			pressed = var11
+			pressed = var12
 		})) else reactModule.createElement(label, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, var14, 0, var14),
+			Size = UDim2.new(0, var15, 0, var15),
 			Image = item.icon,
 			ScaleType = Enum.ScaleType.Fit,
-			ImageColor3 = var13.Color3,
-			ImageTransparency = var13.Transparency
+			ImageColor3 = var14.Color3,
+			ImageTransparency = var14.Transparency
 		}),
 		Title = reactModule.createElement(genericTextLabelModule, {
 			LayoutOrder = 2,
@@ -75,9 +76,9 @@ return function(p0) --[[ line: 45 | named "IconTab" ]]
 			TextXAlignment = Enum.TextXAlignment.Left,
 			colorStyle = {
 				Transparency = 0,
-				Color = if selected then var12.Theme.TextEmphasis.Color else var12.Theme.TextDefault.Color
+				Color = if selected then var13.Theme.TextEmphasis.Color else var13.Theme.TextDefault.Color
 			},
-			fontStyle = var12.Tokens.Semantic.Typography.Header,
+			fontStyle = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then var13.Tokens.Typography.HeadingSmall else var13.Tokens.Semantic.Typography.Header,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

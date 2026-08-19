@@ -93,7 +93,7 @@ local function addRegisteredStyleSheetTags(p9, p10) --[[ line: 127 ]]
 	end
 end
 
-local function resolveStyleSheet(p11, p12, p13, p14, p15) --[[ line: 163 ]]
+local function resolveStyleSheet(p11, p12, p13, p14, p15) --[[ line: 161 ]]
 	-- upvalues: deviceModule (ref), themeNameModule (ref), t (ref), flagsModule (ref), t_1 (ref), createStyleSheet (ref)
 	p12 = p12 or deviceModule.Desktop
 	p13 = p13 or 1
@@ -113,7 +113,7 @@ local function resolveStyleSheet(p11, p12, p13, p14, p15) --[[ line: 163 ]]
 	return var33.instance
 end
 
-local function addStyleTags(p16, p17) --[[ line: 195 ]]
+local function addStyleTags(p16, p17) --[[ line: 193 ]]
 	-- upvalues: t (ref), addRegisteredStyleSheetTags (ref)
 	local var34 = t[p16]
 	
@@ -123,7 +123,7 @@ local function addStyleTags(p16, p17) --[[ line: 195 ]]
 	addRegisteredStyleSheetTags(var34, p17)
 end
 
-local function _(p18) --[[ line: 213 | named "destroyStyleSheet" ]]
+local function _(p18) --[[ line: 211 | named "destroyStyleSheet" ]]
 	-- upvalues: t (ref)
 	local var35 = t[p18]
 	
@@ -134,7 +134,7 @@ local function _(p18) --[[ line: 213 | named "destroyStyleSheet" ]]
 	p18:Destroy()
 end
 
-local function flushPendingCleanup() --[[ line: 222 ]]
+local function flushPendingCleanup() --[[ line: 220 ]]
 	-- upvalues: var10 (write), t_1 (ref), t (ref)
 	var10 = false
 	
@@ -149,7 +149,7 @@ local function flushPendingCleanup() --[[ line: 222 ]]
 	end
 end
 
-local _ = function(p19) --[[ line: 230 | named "scheduleCleanup" ]]
+local _ = function(p19) --[[ line: 228 | named "scheduleCleanup" ]]
 	-- upvalues: t_1 (ref), var10 (write), flushPendingCleanup (ref)
 	t_1[p19] = true
 	
@@ -162,7 +162,7 @@ end
 
 return {
 	resolveStyleSheet = resolveStyleSheet,
-	getStyleSheet = function(p20, p21, p22, p23, p24) --[[ line: 280 ]]
+	getStyleSheet = function(p20, p21, p22, p23, p24) --[[ line: 278 ]]
 		-- upvalues: resolveStyleSheet (ref), flagsModule (ref), t (ref), t_1 (ref)
 		local var37 = resolveStyleSheet(p20, p21, p22, p23, p24)
 		
@@ -180,7 +180,7 @@ return {
 		return var37
 	end,
 	addStyleTags = addStyleTags,
-	acquireStyleSheet = function(p25) --[[ line: 239 ]]
+	acquireStyleSheet = function(p25) --[[ line: 237 ]]
 		-- upvalues: flagsModule (ref), t (ref), t_1 (ref)
 		if not flagsModule.FoundationStyleSheetRefCounting then return end
 		local var39 = t[p25]
@@ -191,7 +191,7 @@ return {
 		var39.refCount += 1
 		t_1[p25] = nil
 	end,
-	releaseStyleSheet = function(p26) --[[ line: 252 ]]
+	releaseStyleSheet = function(p26) --[[ line: 250 ]]
 		-- upvalues: flagsModule (ref), t (ref), t_1 (ref), var10 (write), flushPendingCleanup (ref)
 		if not flagsModule.FoundationStyleSheetRefCounting then return end
 		local var40 = t[p26]

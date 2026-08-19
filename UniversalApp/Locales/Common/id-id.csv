@@ -277,7 +277,9 @@ Authentication.CrossDevice.Label.QrCodeError,Kami mengalami masalah saat menampi
 Authentication.CrossDevice.Label.QrCodeLogin,Kode QR Log In
 Authentication.CrossDevice.Label.QrHeader,Opsi 1
 Authentication.CrossDevice.Label.QrInstructions,Scan kode QR ini dengan kamera perangkat kamu yang sudah log in.
+Authentication.CrossDevice.Label.QrTroubleshooting,Mengalami masalah?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Buka <b>roblox.com/quest</b> di komputer atau ponsel kamu untuk memasukkan kode ini dan selesaikan log in.
+Authentication.CrossDevice.Label.QuickSignInInstructions,"Scan kode QR. Atau, dari perangkat yang sudah kamu gunakan untuk log in, buka <b>Lainnya > Log in cepat</b> dan masukkan kode."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Demi keamananmu, hanya masukkan kode yang kamu buat dari perangkat barumu."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Untuk log in sebagai {username} di perangkat baru:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. Di perangkat barumu, buka halaman log in"
@@ -290,11 +292,13 @@ Authentication.CrossDevice.Response.LoginFail,Gagal Log In
 Authentication.CrossDevice.Response.LoginSuccess,Berhasil Log In
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Coba lagi dalam: {WaitTime}
+Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Download Sekarang
 Authentication.Login.Action.EmailACode,Kirim kode via email
 Authentication.Login.Action.EmailOtpWaitTime,Kirim ulang kode dalam {WaitTime}
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Lupa Password atau Nama Pengguna?
 Authentication.Login.Action.ForgotUsername,Lupa nama pengguna?
+Authentication.Login.Action.ForgotUsernameOrPassword,Lupa nama pengguna atau password?
 Authentication.Login.Action.LogInEmailOneTimeCode,Kirimi Saya Kode Sekali Pakai
 Authentication.Login.Action.NeedHelp,Butuh bantuan?
 Authentication.Login.Action.Next,
@@ -304,6 +308,7 @@ Authentication.Login.Action.ResendCode,
 Authentication.Login.Action.SendCodeSentenceCase,Kirim kode
 Authentication.Login.Action.SendVerificationEmail,Kirim Email Verifikasi
 Authentication.Login.Action.SignIn,Log In
+Authentication.Login.Action.SignInSentenceCase,Log in
 Authentication.Login.Action.UsePasskey,Gunakan Passkey
 Authentication.Login.Action.WeChatLogin,Log In WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
@@ -315,16 +320,19 @@ Authentication.Login.Description.GetOneTimeCodeHelp,Masukkan email terverifikasi
 Authentication.Login.Description.PasskeyDescription,"Akunmu memiliki passkey, yaitu metode log in yang lebih aman daripada password. Kamu bisa menggunakan sidik jari, wajah, atau kunci layar untuk log in di perangkat ini."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,Kami tidak bisa menentukan apakah perangkatmu mendukung passkey. Coba lagi atau ketuk “Masalah log in” untuk memulihkan akunmu dengan email atau nomor ponsel.
 Authentication.Login.Description.PasskeyMobileOnly,Passkey hanya tersedia di ponsel. Pilih cara lain untuk log in.
+Authentication.Login.Description.SigningInWith,Log in dengan <b>{identifier}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Jika ada akun Roblox, kamu akan menerima kode verifikasi di {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
+Authentication.Login.Heading.EnterPassword,Masukkan password
 Authentication.Login.Heading.EnterYourCode,Masukkan kodemu
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
-Authentication.Login.Heading.Login,Log in
+Authentication.Login.Heading.Login,
 Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Log In ke Akun yang Sudah Ada
 Authentication.Login.Heading.NewAppAvailable,Download Aplikasi Roblox Baru
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInToRoblox,
 Authentication.Login.Label.AccountSelectorTitle,Pilih Akun untuk Log In
 Authentication.Login.Label.AgedUpUsername,Tambahkan @namapengguna yang unik
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Maaf, terjadi eror saat menghubungi server kami.
@@ -342,8 +350,10 @@ Authentication.Login.Label.EmailNeedsVerification,Email kamu perlu diverifikasi
 Authentication.Login.Label.EmailOrPhone,Alamat email atau nomor ponsel
 Authentication.Login.Label.EnterCode,
 Authentication.Login.Label.EnterEmail,Masukkan alamat email
+Authentication.Login.Label.EnterHere,Masukkan di sini
 Authentication.Login.Label.EnterOneTimeCode,Masukkan Kode Sekali Pakai
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Masukkan kode yang baru saja kami kirim ke email kamu
+Authentication.Login.Label.EnterPassword,
 Authentication.Login.Label.ForgotYourPassword,Lupa kata sandi?
 Authentication.Login.Label.GetOneTimeCode,Dapatkan Kode Sekali Pakai
 Authentication.Login.Label.LearnMore,Pelajari selengkapnya
@@ -352,6 +362,7 @@ Authentication.Login.Label.PasskeyIncompatible,Passkey tidak kompatibel
 Authentication.Login.Label.Password,Password
 Authentication.Login.Label.Phone,
 Authentication.Login.Label.QQUserCancel,Kamu sudah log out dari QQ. Harap log in ke QQ.
+Authentication.Login.Label.SelectAnAccount,Pilih akun
 Authentication.Login.Label.TroubleSigningIn,Masalah saat log in?
 Authentication.Login.Label.UnverifiedEmailInstructions,"Untuk log in menggunakan email, email harus diverifikasi terlebih dahulu. Kamu juga dapat log in menggunakan nama pengguna kamu."
 Authentication.Login.Label.Username,Nama pengguna
@@ -1136,9 +1147,6 @@ CoreScripts.TextChat.WhisperChat.PrefixText.Incoming,[Dari {RBX_NAME}]
 CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing,[Kepada {RBX_NAME}]
 CoreScripts.TopBar.Back,
 CoreScripts.TopBar.Chat,
-CoreScripts.TopBar.Label.InappropriateAudio,Audio Tidak Pantas
-CoreScripts.TopBar.Label.Report,Laporkan
-CoreScripts.TopBar.Label.ReportAudio,Laporkan Audio
 CoreScripts.TopBar.LoadingScreen.AutoTranslate,Diterjemahkan Otomatis
 CoreScripts.TopBar.Music,Musik
 CoreScripts.TopBar.MusicLoading,Tidak ada audio yang diputar
@@ -1149,8 +1157,6 @@ Feature.Accessibility.Action.ScrollDown,Scroll ke Bawah
 Feature.Accessibility.Action.ScrollUp,Scroll ke Atas
 Feature.Accessibility.AppTheme.CategoryCalm,Tenang
 Feature.Accessibility.AppTheme.CategoryDynamic,Dinamis
-Feature.Accessibility.AppTheme.CategoryEnergetic,Energetik
-Feature.Accessibility.AppTheme.CategoryKinetic,Kinetik
 Feature.Accessibility.AppTheme.CircuitRush,Lesat Sirkuit
 Feature.Accessibility.AppTheme.CosmicDust,Debu Kosmik
 Feature.Accessibility.AppTheme.Default,
@@ -2035,6 +2041,7 @@ Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplikasi Tampilan
 Feature.Avatar.Title.EnhancedAvatarHeads,Kepala Avatar yang Disempurnakan
+Feature.Avatar.Title.FindYourStyle,Temukan Gayamu
 Feature.Avatar.Title.GetOutfit,Dapatkan Pakaian
 Feature.Avatar.Title.LCSortPage,Urutkan Pakaian
 Feature.Avatar.Title.LCSortReset,Reset ke Default
@@ -2107,7 +2114,256 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Blokir {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation,"Memblokir pengguna ini akan menghapusnya sebagai Koneksi atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Memblokir pengguna ini akan menghapusnya sebagai teman atau pengikut. Dia tidak akan dapat mengirim pesan, permintaan, atau undangan kepadamu.<br /><br />Dia tidak akan diberi tahu bahwa kamu memblokirnya."
-Feature.BuyRobux.Heading.Banner,Beli Robux
+Feature.Build.Action.AddFriends,
+Feature.Build.Action.AddPlaytester,Tambahkan playtester
+Feature.Build.Action.AddPlaytesters,
+Feature.Build.Action.AddToPlaytest,Tambahkan ke playtest
+Feature.Build.Action.Archive,Arsipkan
+Feature.Build.Action.ArchiveGame,Arsipkan game
+Feature.Build.Action.Build,
+Feature.Build.Action.Buy,Beli
+Feature.Build.Action.BuyRobux,Beli Robux
+Feature.Build.Action.Cancel,
+Feature.Build.Action.CopyText,Salin teks
+Feature.Build.Action.Delete,
+Feature.Build.Action.HideAutosaved,Sembunyikan yang disimpan otomatis
+Feature.Build.Action.ManageLimit,Kelola batas
+Feature.Build.Action.Next,
+Feature.Build.Action.NotNow,
+Feature.Build.Action.NotifyMe,Beri saya notifikasi
+Feature.Build.Action.OK,
+Feature.Build.Action.OpenSettings,Buka pengaturan
+Feature.Build.Action.Playtest,Playtest
+Feature.Build.Action.Preview,
+Feature.Build.Action.Publish,Publikasikan
+Feature.Build.Action.PublishLatest,Publikasikan yang terbaru
+Feature.Build.Action.Restore,Pulihkan
+Feature.Build.Action.Revert,
+Feature.Build.Action.SetDailyLimit,Atur batas harian
+Feature.Build.Action.SetLimit,Atur batas
+Feature.Build.Action.Settings,
+Feature.Build.Action.Share,
+Feature.Build.Action.ShareLink,Bagikan link
+Feature.Build.Action.Submit,
+Feature.Build.Action.UpdateRating,Perbarui rating
+Feature.Build.Action.UpdateWithChanges,Perbarui dengan perubahan
+Feature.Build.Action.View,
+Feature.Build.Action.ViewUsage,Lihat penggunaan
+Feature.Build.Content.NewGame,Game baru
+Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
+Feature.Build.Description.AutoBuyUsage,Gunakan Robux-mu untuk membeli kuota penggunaan Build tambahan secara otomatis saat kamu berkreasi. Kamu dapat menetapkan batas pemakaian uang harian kapan saja.
+Feature.Build.Description.BuildIdeaGame,Ubah idemu menjadi game
+Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memiliki balasan untukmu.
+Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
+Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
+Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk membantumu melakukan playtest.
+Feature.Build.Description.EnableBuildNotifs,Aktifkan notifikasi di pengaturan perangkatmu untuk mendapatkan update dari Build.
+Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses link ini. Ubah pengaturan Audiens game-mu jika kamu ingin lebih banyak pengguna memainkannya.
+Feature.Build.Description.GameCreationDone,Saya telah selesai membuat dan memublikasikan game-mu. Kamu dapat membukanya untuk melakukan playtest.
+Feature.Build.Description.GameSavedPlaytest,Saya telah selesai membuat game-mu dan menyimpan versi baru. Kamu dapat membukanya untuk melakukan playtest.
+Feature.Build.Description.HubSettings,Kelola semua pengaturan di Pusat Kreator
+Feature.Build.Description.MakeAudienceAvail,Publikasikan pengalaman virtualmu agar tersedia bagi audiens ini.
+Feature.Build.Description.ManageAppearance,Kelola tampilan game-mu bagi pengguna lain.
+Feature.Build.Description.PlayAfterPublish,Pilih siapa yang bisa bermain setelah kamu memublikasikan pengalaman virtual ini.
+Feature.Build.Description.PlaytestLatest,Kamu sedang melakukan playtest pada versi terbarumu. Publikasikan saat kamu siap untuk membagikannya.
+Feature.Build.Description.PlaytestLocked,Kamu dapat memulai playtest setelah membuat game pertamamu.
+Feature.Build.Description.PlaytesterAccess,Tambahkan teman sebagai playtester atau ubah pengaturan Audiens game-mu agar lebih banyak pengguna dapat memainkannya.
+Feature.Build.Description.PrivateShare,Ubah pengaturan Audiens game-mu untuk membagikannya.
+Feature.Build.Description.RaiseLimitOrWait,"Tingkatkan batas harian Robux-mu untuk terus berkreasi, atau tunggu hingga direset besok."
+Feature.Build.Description.RatingAgreement,"Dengan memublikasikan, kamu menyetujui bahwa rating konten ini akurat."
+Feature.Build.Description.RestoreLatest,Versi ini akan menjadi versi publikasi terbarumu.
+Feature.Build.Description.VersionChanges,Beri tahu pemain perubahan pada versi ini.
+Feature.Build.Header.AccessSharing,Akses & berbagi
+Feature.Build.Header.ContentMaturity,Kedewasaan konten
+Feature.Build.Header.CustomAnswer,Jawaban kustom
+Feature.Build.Header.GameDetails,Detail game
+Feature.Build.Header.Overview,Ringkasan
+Feature.Build.Label.Access,Akses
+Feature.Build.Label.AdditionalUsage,Kuota penggunaan Build tambahan
+Feature.Build.Label.All,
+Feature.Build.Label.Autosaved,Disimpan otomatis
+Feature.Build.Label.Available,tersedia
+Feature.Build.Label.BackToBuild,Kembali ke Build
+Feature.Build.Label.Building,Membangun...
+Feature.Build.Label.CaptureLibrary,Perpustakaan Media
+Feature.Build.Label.ContentRating,Rating konten
+Feature.Build.Label.CreatorHub,Pusat Kreator
+Feature.Build.Label.Deleted,Dihapus
+Feature.Build.Label.DescribeIdea,Deskripsikan ide
+Feature.Build.Label.Description,Deskripsi
+Feature.Build.Label.Done,
+Feature.Build.Label.Error,Kesalahan
+Feature.Build.Label.FreeBuildUsage,Penggunaan Build gratis
+Feature.Build.Label.Friends,
+Feature.Build.Label.FriendsOnly,Khusus teman
+Feature.Build.Label.GetMoreBuildUsage,Dapatkan lebih banyak kuota penggunaan Build
+Feature.Build.Label.IconThumbnails,Ikon & thumbnail
+Feature.Build.Label.InProgress,Sedang berlangsung
+Feature.Build.Label.InputNeeded,Input diperlukan
+Feature.Build.Label.Limited,Terbatas
+Feature.Build.Label.Loading,
+Feature.Build.Label.NoLimit,Tidak ada batas
+Feature.Build.Label.NotStarted,Belum dimulai
+Feature.Build.Label.Pending,Pending
+Feature.Build.Label.PreviouslyPublished,Dipublikasikan sebelumnya
+Feature.Build.Label.Private,Privat
+Feature.Build.Label.Public,Publik
+Feature.Build.Label.PubliclyUnavailable,Tidak tersedia untuk umum
+Feature.Build.Label.Published,Dipublikasikan
+Feature.Build.Label.Ready,Siap
+Feature.Build.Label.ResetsDaily,Reset setiap hari
+Feature.Build.Label.Search,
+Feature.Build.Label.SearchGames,Cari game
+Feature.Build.Label.SearchTasks,Cari tugas
+Feature.Build.Label.SelectOption,Pilih opsi
+Feature.Build.Label.ShareAddedFriends,Bagikan kepada teman yang kamu tambahkan
+Feature.Build.Label.Thinking,Sedang memproses
+Feature.Build.Label.Title,Judul
+Feature.Build.Label.TitleDescription,Judul & deskripsi
+Feature.Build.Label.Tool,alat
+Feature.Build.Label.ToolAssetDone,Selesai memasukkan aset
+Feature.Build.Label.ToolAssetFailed,Tidak dapat memasukkan aset
+Feature.Build.Label.ToolAssetRunning,Memasukkan aset
+Feature.Build.Label.ToolAssetSearchDone,Selesai mencari daftar aset
+Feature.Build.Label.ToolAssetSearchFailed,Tidak dapat mencari daftar aset
+Feature.Build.Label.ToolAssetSearchRunning,Mencari daftar aset
+Feature.Build.Label.ToolClientDMDone,Selesai mencari DataModel klien
+Feature.Build.Label.ToolClientDMFailed,Tidak dapat mencari DataModel klien
+Feature.Build.Label.ToolClientDMRunning,Mencari DataModel klien
+Feature.Build.Label.ToolGameInfoDone,Selesai memperbarui info game
+Feature.Build.Label.ToolGameInfoFailed,Tidak dapat memperbarui info game
+Feature.Build.Label.ToolGameInfoRunning,Memperbarui info game
+Feature.Build.Label.ToolGameSaveDone,Selesai menyimpan game
+Feature.Build.Label.ToolGameSaveFailed,Tidak dapat menyimpan game
+Feature.Build.Label.ToolGameSaveRunning,Menyimpan game
+Feature.Build.Label.ToolImageDone,Selesai membuat gambar
+Feature.Build.Label.ToolImageFailed,Tidak dapat membuat gambar
+Feature.Build.Label.ToolImageRunning,Membuat gambar
+Feature.Build.Label.ToolInspectDone,Instance klien yang diperiksa
+Feature.Build.Label.ToolInspectFailed,Tidak dapat memeriksa instance klien
+Feature.Build.Label.ToolInspectRunning,Memeriksa instance klien
+Feature.Build.Label.ToolLogsDone,Selesai meminta log
+Feature.Build.Label.ToolLogsFailed,Tidak dapat meminta log
+Feature.Build.Label.ToolLogsRunning,Meminta log
+Feature.Build.Label.ToolLuauDone,Selesai menjalankan Luau
+Feature.Build.Label.ToolLuauFailed,Tidak dapat menjalankan Luau
+Feature.Build.Label.ToolLuauRunning,Menjalankan Luau
+Feature.Build.Label.ToolModelDone,Selesai membuat model 3D
+Feature.Build.Label.ToolModelFailed,Tidak dapat membuat model 3D
+Feature.Build.Label.ToolModelRunning,Membuat model 3D
+Feature.Build.Label.ToolPlanPresentDone,Selesai menampilkan rencana
+Feature.Build.Label.ToolPlanPresentFailed,Tidak dapat menampilkan rencana
+Feature.Build.Label.ToolPlanPresentRunning,Menampilkan rencana
+Feature.Build.Label.ToolPlanUpdateDone,Memperbarui rencana
+Feature.Build.Label.ToolPlanUpdateFailed,Tidak dapat memperbarui rencana
+Feature.Build.Label.ToolPlanUpdateRunning,
+Feature.Build.Label.ToolPrimitiveDone,Selesai membuat bentuk primitif
+Feature.Build.Label.ToolPrimitiveFailed,Tidak dapat membuat bentuk primitif
+Feature.Build.Label.ToolPrimitiveRunning,Membuat bentuk primitif
+Feature.Build.Label.ToolQuestionDone,Selesai mengajukan pertanyaan
+Feature.Build.Label.ToolQuestionFailed,Tidak dapat mengajukan pertanyaan
+Feature.Build.Label.ToolQuestionRunning,Mengajukan pertanyaan
+Feature.Build.Label.ToolReqUpdateDone,Selesai memperbarui persyaratan
+Feature.Build.Label.ToolReqUpdateFailed,Tidak dapat memperbarui persyaratan
+Feature.Build.Label.ToolReqUpdateRunning,Memperbarui persyaratan
+Feature.Build.Label.ToolScriptDone,Selesai menjalankan skrip
+Feature.Build.Label.ToolScriptFailed,Tidak dapat menjalankan skrip
+Feature.Build.Label.ToolScriptRunning,Menjalankan skrip
+Feature.Build.Label.ToolSkillLoadDone,Selesai me-load skill
+Feature.Build.Label.ToolSkillLoadFailed,Tidak dapat me-load skill
+Feature.Build.Label.ToolSkillLoadRunning,Me-load skill
+Feature.Build.Label.ToolSkillsDone,Selesai membuat daftar skill yang tersedia
+Feature.Build.Label.ToolSkillsFailed,Tidak dapat membuat daftar skill yang tersedia
+Feature.Build.Label.ToolSkillsRunning,Membuat daftar skill yang tersedia
+Feature.Build.Label.ToolTasksPlanDone,Selesai merencanakan tugas
+Feature.Build.Label.ToolTasksPlanFailed,Tidak dapat merencanakan tugas
+Feature.Build.Label.ToolTasksPlanRunning,Merencanakan tugas
+Feature.Build.Label.ToolThumbnailDone,Selesai mengatur thumbnail game
+Feature.Build.Label.ToolThumbnailFailed,Tidak dapat mengatur thumbnail game
+Feature.Build.Label.ToolThumbnailRunning,Mengatur thumbnail game
+Feature.Build.Label.Unknown,Tidak Diketahui
+Feature.Build.Label.Usage,Penggunaan
+Feature.Build.Label.Version,
+Feature.Build.Label.VersionTitleDesc,Judul & deskripsi versi
+Feature.Build.Label.Video,
+Feature.Build.Message.AccountRequirements,Akunmu tidak memenuhi persyaratan untuk menggunakan Build.
+Feature.Build.Message.AccountTooNew,Akunmu terlalu baru untuk dipublikasikan. Coba lagi setelah 2 hari.
+Feature.Build.Message.AllFriendsAdded,Kamu telah menambahkan semua temanmu sebagai playtester.
+Feature.Build.Message.AnswerBuildQuestion,Jawab pertanyaan Build di bawah ini.
+Feature.Build.Message.AudienceIneligible,Tidak memenuhi syarat untuk audiens ini
+Feature.Build.Message.BuildAccountBlocked,Build tidak tersedia untuk akunmu saat ini.
+Feature.Build.Message.BuildBusy,"Build sibuk. Tunggu sebentar, lalu coba lagi."
+Feature.Build.Message.BuildConnectFailed,Build tidak dapat terhubung. Coba lagi.
+Feature.Build.Message.BuildInternalError,Build mengalami masalah. Coba lagi.
+Feature.Build.Message.BuildResponseFailed,Build tidak dapat merespons. Coba lagi.
+Feature.Build.Message.BuildStillWorking,"Sedang diproses. Kamu dapat keluar dari aplikasi, bermain Roblox, atau memulai proyek lain sambil menunggu."
+Feature.Build.Message.BuildStopped,Kamu menghentikan Build.
+Feature.Build.Message.BuildTemporarilyDown,Build tidak tersedia untuk sementara. Coba lagi dalam 1 menit.
+Feature.Build.Message.ConversationGone,Percakapan ini tidak lagi tersedia. Mulai yang baru.
+Feature.Build.Message.ConversationNotFound,Percakapan ini tidak dapat ditemukan. Mulai yang baru.
+Feature.Build.Message.CreateGameToUseBuild,Buat game baru untuk mulai menggunakan Build.
+Feature.Build.Message.CreatedRevertedVer,Selesai membuat versi yang dibatalkan.
+Feature.Build.Message.ExpandAudience,Perluas kelayakan audiensmu di Pusat Kreator
+Feature.Build.Message.ExperiencesLoadFailed,Tidak dapat me-load pengalaman virtual
+Feature.Build.Message.FailedTitle,{TITLE} Gagal
+Feature.Build.Message.FinishedTitle,{TITLE} Selesai
+Feature.Build.Message.FriendsLoadFailed,Tidak dapat me-load teman. Coba lagi.
+Feature.Build.Message.GameNotCreated,Game-mu gagal dibuat. Coba lagi.
+Feature.Build.Message.GamePublishFailed,Game-mu tidak dapat dipublikasikan. Coba lagi.
+Feature.Build.Message.InvalidMessage,"Terjadi kesalahan pada pesanmu. Edit pesan, lalu coba lagi."
+Feature.Build.Message.InvitesLoadFailed,Tidak dapat me-load undangan
+Feature.Build.Message.LinkCopied,Link disalin ke clipboard.
+Feature.Build.Message.LoadingVersions,Me-load riwayat versi...
+Feature.Build.Message.NoDescriptionProvided,Tidak ada deskripsi yang diberikan.
+Feature.Build.Message.NoFriendsToAdd,Kamu belum memiliki teman untuk ditambahkan. Temukan pengguna untuk terhubung di Roblox terlebih dahulu.
+Feature.Build.Message.NoResults,
+Feature.Build.Message.NoVersionHistory,Belum ada riwayat versi.
+Feature.Build.Message.OutOfBuildUsage,Kuota penggunaan Build-mu sudah habis. Lihat opsi untuk menggunakan Robux agar bisa terus berkreasi.
+Feature.Build.Message.PublicPublishFailed,"Game-mu telah dipublikasikan, tetapi tidak dapat dibuat publik. Coba lagi."
+Feature.Build.Message.PublishExpandAudience,Publikasikan untuk memperluas audiensmu
+Feature.Build.Message.PublishNotReverted,Publikasimu gagal dibatalkan. Coba lagi.
+Feature.Build.Message.PublishReverted,Membatalkan publikasi.
+Feature.Build.Message.QuestionnaireNeeded,Game ini diedit di luar Build. Selesaikan kuesioner konten untuk memublikasikannya.
+Feature.Build.Message.ReadyToPlay,Game-mu siap dimainkan di Roblox!
+Feature.Build.Message.RestoreVersionFailed,Tidak dapat memulihkan versi ini. Coba lagi.
+Feature.Build.Message.RevertVersionFail,Versi yang dibatalkan gagal dibuat. Coba lagi.
+Feature.Build.Message.RunningTitle,Menjalankan {title}
+Feature.Build.Message.SafetyPolicy,"Pesan ini bertentangan dengan kebijakan keamanan kami. Edit pesan, lalu coba lagi."
+Feature.Build.Message.SaveChangesFailed,Tidak dapat menyimpan perubahan. Coba lagi.
+Feature.Build.Message.ShareLinkFailed,Tidak dapat membuat link referensi. Coba lagi.
+Feature.Build.Message.SignedOut,Kamu sudah log out. Log in dan coba lagi.
+Feature.Build.Message.TryAgain,Coba lagi.
+Feature.Build.Message.TurnToPortrait,Ubah perangkatmu ke mode potret untuk terus mengerjakan game-mu.
+Feature.Build.Message.VersionHistoryLoad,Riwayat versi tidak dapat di-load.
+Feature.Build.Message.WhatToCreate,Apa yang ingin kamu buat hari ini?
+Feature.Build.Message.WorkingOnTasks,Mengerjakan tugasmu
+Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
+Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?
+Feature.Build.Title.Audience,Audiens
+Feature.Build.Title.BuildQuestion,Build memiliki pertanyaan
+Feature.Build.Title.BuildQuestions,Build memiliki beberapa pertanyaan
+Feature.Build.Title.BuildUnavailable,Build tidak tersedia
+Feature.Build.Title.BuildUsage,Penggunaan Build
+Feature.Build.Title.ChangesNotLive,Perubahanmu belum tayang
+Feature.Build.Title.ChatBuildUnavailable,Build tidak tersedia.
+Feature.Build.Title.Content,Konten
+Feature.Build.Title.DailyRobuxReached,Batas Robux harian tercapai
+Feature.Build.Title.ExperienceAudience,Audiens pengalaman virtual
+Feature.Build.Title.FreeUsageReached,Batas penggunaan Build gratis tercapai
+Feature.Build.Title.FriendsOnlyPlay,Hanya teman yang bisa memainkannya
+Feature.Build.Title.GameCreationDone,Pembuatan game selesai
+Feature.Build.Title.GamePrivate,Game ini privat
+Feature.Build.Title.GenericError,Terjadi kesalahan
+Feature.Build.Title.NoRobuxForUsage,Tidak ada Robux yang tersisa untuk penggunaan Build
+Feature.Build.Title.Playtesters,Playtester
+Feature.Build.Title.PlaytestersOnlyPlay,Hanya playtester yang bisa memainkannya
+Feature.Build.Title.PushNotifications,Notifikasi Push
+Feature.Build.Title.RevertLastChange,Batalkan perubahan terakhir?
+Feature.Build.Title.Tasks,Tugas
+Feature.Build.Title.TurnActivity,Aktivitas chat saat ini
+Feature.Build.Title.VersionHistory,Riwayat versi
+Feature.Build.Title.VersionInformation,Informasi Versi
+Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"Tidak, terima kasih"
 Feature.Captures.Action.Share,
@@ -2118,7 +2374,7 @@ Feature.Captures.Title.AllowPhotoAccessInfo,Izinkan Akses ke Foto
 Feature.Captures.Title.ShareCapturePrompt,Bagikan Media
 Feature.Captures.Toast.CaptureSaved,Media Disimpan
 Feature.Captures.Toast.CaptureSavedToDevice,Disimpan ke Perangkat
-Feature.Catalog.Action.Buy,Beli
+Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
 Feature.Catalog.Action.Checkout.GoToCustomize,Buka Kustomisasi
 Feature.Catalog.Action.Checkout.ManageInCustomize,Kelola di Kustomisasi
@@ -2146,7 +2402,7 @@ Feature.Catalog.Action.Remove,
 Feature.Catalog.Action.RemoveFavorite,
 Feature.Catalog.Action.Rent,Sewa
 Feature.Catalog.Action.Replace,
-Feature.Catalog.Action.Report,
+Feature.Catalog.Action.Report,Laporkan
 Feature.Catalog.Action.Sell,Jual
 Feature.Catalog.Action.ShareVia,Bagikan via...
 Feature.Catalog.Action.Submit,
@@ -2299,7 +2555,7 @@ Feature.Catalog.Label.ItemInAHold,Item sedang ditahan?
 Feature.Catalog.Label.ItemOwnedCount,Item yang Dimiliki ({itemCount})
 Feature.Catalog.Label.ItemsCount,
 Feature.Catalog.Label.LeftArm,
-Feature.Catalog.Label.Limited,Terbatas
+Feature.Catalog.Label.Limited,
 Feature.Catalog.Label.LimitedU,U Terbatas
 Feature.Catalog.Label.LipMakeup,
 Feature.Catalog.Label.Makeup,
@@ -2576,7 +2832,7 @@ Feature.Chat.Label.NotSet,Belum Diatur
 Feature.Chat.Label.OneToOne.ThemRepliedToThem,Membalas ke dirinya sendiri
 Feature.Chat.Label.OneToOne.ThemRepliedToYou,Membalas ke kamu
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Kamu membalas
-Feature.Chat.Label.Pending,Pending
+Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Pengaturan Privasi
 Feature.Chat.Label.ReplyChatInputPlaceholder,Balas ke {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Balas ke diri sendiri
@@ -2600,6 +2856,7 @@ Feature.Chat.Label.TimestampOneMinuteAbbreviated,1mnt
 Feature.Chat.Label.TimestampOneWeekAbbreviated,1mg
 Feature.Chat.Label.TimestampWeeksAbbreviatedPlural,{num_weeks}mg
 Feature.Chat.Label.Unavailable,Tidak tersedia
+Feature.Chat.Label.UnfilteredChat,Chat tanpa filter
 Feature.Chat.Label.UnknownUser,pengguna tidak diketahui
 Feature.Chat.Label.User,
 Feature.Chat.Label.ViewProfile,Lihat Profil
@@ -2790,7 +3047,7 @@ Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,
 Feature.ExperienceDetails.AskYourParentModal.Label.Title,Minta izin orang tuamu
 Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Kamu memerlukan izin orang tua untuk bergabung ke game ini.
-Feature.ExperienceDetails.Body.DescriptionTitle,Deskripsi
+Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Catatan
 Feature.ExperienceDetails.Body.StatsInfoTitle,Statistik & Info
 Feature.ExperienceDetails.Label.NotPlayable,Tidak Dapat Dimainkan
@@ -3031,7 +3288,7 @@ Feature.Friends.TCEducation.Modal.TextOutro,Cara baru untuk menambahkan orang la
 Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus,"Saat kamu menambahkan pengguna lain yang usianya telah diperiksa melalui kode QR atau Kontak, dia akan menjadi Koneksi Tepercaya. Opsi lain akan segera tersedia."
 Feature.Friends.TCEducation.Title,Tambahkan orang yang kamu kenal
 Feature.Friends.TCFeature.AndMore,dan banyak lagi yang akan tersedia
-Feature.Friends.TCFeature.ChatWithoutFilters,Chat tanpa filter
+Feature.Friends.TCFeature.ChatWithoutFilters,
 Feature.Friends.TCFeature.PartyVoice,Chat suara Party
 Feature.Friends.TFEducation.Banner.Text,"Tambahkan teman tepercaya dengan kode QR atau Kontak untuk menggunakan Chat tanpa filter, chat suara Party, dan banyak lagi."
 Feature.Friends.TFEducation.Modal.TextIntro,"Main Roblox lebih seru dengan pengguna yang kamu kenal. Pengguna yang usianya telah diperiksa yang kamu tambahkan melalui Kode QR atau Kontak akan menjadi teman tepercaya, sehingga membuka manfaat ekstra, seperti:"
@@ -3079,6 +3336,7 @@ Feature.GameDetails.Action.BuyRobux,
 Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.CopyLink,
 Feature.GameDetails.Action.CreatePrivateGame,Buat Server Privat
+Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Berikan masukan
 Feature.GameDetails.Action.InviteFriends,
 Feature.GameDetails.Action.JoinFriendsInGame,Bergabung dengan Teman
@@ -3288,7 +3546,7 @@ Feature.Home.ActionSeeAll,
 Feature.Home.AddProviderFriendHintTitle,Tekan di Sini untuk Menambah Teman {provider}
 Feature.Home.Button.Join,
 Feature.Home.ClientCacheFallbackBanner.Action.Refresh,
-Feature.Home.ClientCacheFallbackBanner.Label.Error,Kesalahan
+Feature.Home.ClientCacheFallbackBanner.Label.Error,
 Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle,
 Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents,Refresh halaman untuk load konten
 Feature.Home.Experiment.Reminders.BodyPositiveVariant,Ingatlah untuk menjaga Roblox tetap aman dan menyenangkan bagi semua orang. Bersikap adil dan perlakukan pengguna lain dengan hormat.
@@ -3415,6 +3673,7 @@ Feature.Moderation.Link.SupportForm,Formulir Bantuan
 Feature.Moments.Action.AddMusic,Tambahkan Musik
 Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
+Feature.Moments.Action.AddVoice,Tambahkan Suara
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Cancel,
 Feature.Moments.Action.Continue,
@@ -3474,6 +3733,7 @@ Feature.Moments.Label.MomentsExperienceName,
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Kamu sudah melihat semuanya
 Feature.Moments.Label.Photos,Foto
+Feature.Moments.Label.PostDeleted,Moment dihapus
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
 Feature.Moments.Label.Reactions,Reaksi
@@ -3486,13 +3746,18 @@ Feature.Moments.Label.RodeoPublishingTitle,Memublikasikan Moment-mu
 Feature.Moments.Label.Search,
 Feature.Moments.Label.ShareLinkTitle,Moment di Roblox
 Feature.Moments.Label.StayFriendlyModeration,Mari kita selalu bersikap ramah
-Feature.Moments.Label.TextGeneratedBody,Overlay dan deskripsi buatan AI ditambahkan
+Feature.Moments.Label.TextGenerateInProgressBody,Tunggu hingga AI selesai menghasilkan teks sebelum mengedit overlay secara manual.
+Feature.Moments.Label.TextGenerateInProgressTitle,Pembuatan Sedang Berlangsung
+Feature.Moments.Label.TextGenerateOverrideBody,Pembuatan akan menggantikan overlay teks dan deskripsi Anda saat ini.
+Feature.Moments.Label.TextGenerateOverrideTitle,Teks Akan Diganti
+Feature.Moments.Label.TextGeneratedBody,Overlay teks dan deskripsi buatan AI ditambahkan
 Feature.Moments.Label.TextGeneratedTitle,Teks Berhasil Dibuat
 Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba lagi.
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
+Feature.Moments.Label.TextGenerationFilteredTitle,Pembuatan Difilter
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
-Feature.Moments.Title.MomentRemoved,Moment dihapus
+Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Laporkan postingan
 Feature.MusicPlayer.Action.GoToSongDetails,Buka Detail Lagu
 Feature.MusicPlayer.Action.Report,
@@ -4184,7 +4449,7 @@ Feature.RobloxSubscription.Label.month,bulan
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Title.AgeCheckTrial,Dapatkan uji coba Plus gratis selama 1 minggu
 Feature.RobloxSubscription.Title.AlreadySubscribed,Kabar baik
-Feature.RobloxSubscription.Title.GenericError,Terjadi kesalahan
+Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Dapatkan Roblox Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus tidak tersedia di sini
 Feature.SafetyDashboard.Heading.AccountStatus,Status akun
@@ -4210,7 +4475,7 @@ Feature.Schools.Description.InviteFriendsExclusiveItem,Undang pengguna lain untu
 Feature.Schools.Description.InviteFriendsUnlockSooner,Bantu luncurkan grup alumni sekolahmu lebih cepat.
 Feature.Schools.Description.InviteOthersToVerify,Undang pengguna lain untuk melakukan verifikasi
 Feature.Schools.Description.MoreVerifiedAlumniNeeded,Perlu lebih banyak alumni terverifikasi
-Feature.Schools.Description.NotAvailableInRegion,Fitur sekolah belum tersedia di wilayahmu.
+Feature.Schools.Description.NotAvailableInRegion,Fitur sekolah belum tersedia.
 Feature.Schools.Description.RemoveSchoolBody,Kamu harus memverifikasi ulang alamat email sekolahmu untuk bergabung kembali dengan sekolahmu. Semua item hadiah yang telah kamu terima akan dihapus.
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.UpsellDisclaimer,Sekolahmu hanya akan terlihat oleh orang-orang dari sekolah yang sama. Kamu bisa memperbarui atau menghapus sekolahmu kapan saja.
@@ -4349,19 +4614,18 @@ Feature.SocialShare.Response.Error.Subtext,Coba lagi nanti.
 Feature.SocialShare.ShareWithPeopleYouKnow,Bagikan kepada orang yang kamu kenal
 Feature.SocialTab.Label.AddFriendHint,Tekan di Sini untuk Menambah Teman
 Feature.SocialTab.Label.AddFriendHintBody,Teman bikin Roblox jadi seru!
-Feature.SocialTab.Label.Chats,
 Feature.SocialTab.Label.Connect,Hubungkan
 Feature.SocialTab.Label.CreateAndExploreGroups,Buat dan jelajahi komunitas
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,Favoritkan
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,
+Feature.SongDetails.Action.ReportAudio,Laporkan Audio
 Feature.SongDetails.Body.DescriptionTitle,
 Feature.SongDetails.Label.DateUploaded,Tanggal upload
 Feature.SongDetails.Label.ExperiencesFeaturing,Pengalaman virtual yang diiringi
 Feature.SongDetails.Label.ExperiencesFeaturingTrack,Pengalaman virtual yang diiringi {trackName}
 Feature.SongDetails.Label.Genre,
-Feature.SongDetails.Label.InappropriateAudio,
+Feature.SongDetails.Label.InappropriateAudio,Audio Tidak Pantas
 Feature.SongDetails.Label.InappropriateThumbnail,Thumbnail Tidak Pantas
 Feature.SongDetails.Label.Length,Durasi
 Feature.SongDetails.Label.MonthlyListeners,Pendengar bulanan
@@ -4425,7 +4689,7 @@ Feature.Squads.Description.PleaseTryAgain,
 Feature.Squads.Description.RemoveFromChat,Yakin ingin menghapus pengguna ini dari grup?
 Feature.Squads.Description.RemoveFromParty,{displayName} akan dikeluarkan dari chat grup.
 Feature.Squads.Description.ScheduledPartyAlreadyExists,Sudah ada Party yang dijadwalkan untuk waktu yang dipilih
-Feature.Squads.Description.Title,Judul
+Feature.Squads.Description.Title,
 Feature.Squads.Description.User,
 Feature.Squads.Description.YouAddedMoreThanTwoToChat,Kamu menambahkan {username} dan {userCountMinusOne} pengguna lain ke grup
 Feature.Squads.Description.YouAddedToChat,Kamu menambahkan {username} ke grup

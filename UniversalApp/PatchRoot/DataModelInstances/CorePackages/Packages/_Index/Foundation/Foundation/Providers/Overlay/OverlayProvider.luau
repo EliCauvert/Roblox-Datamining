@@ -19,21 +19,26 @@ return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
 	local var12, var13 = reactModule.useState(var11.gui)
 	local var14, var15 = reactModule.useState(false)
 	local var16 = if not var11.gui then var12 and var12.Parent else nil
-	local var17 = if not flagsModule.FoundationOverlayResilientMainGui then if var11.gui == nil and var14 then getMainGuiModule() else nil else var10
+	local var17 = useKeyboardAwareSizeModule(var16)
+	local var18 = useStyleSheet()
+	local var19 = reactModule.useCallback(function() --[[ line: 38 ]]
+		-- upvalues: var11 (ref), var15 (ref)
+		if var11.gui == nil then
+			var15(true)
+		end
+	end, { var11.gui })
+	local var20 = if not flagsModule.FoundationOverlayResilientMainGui then if var11.gui == nil and var14 then getMainGuiModule() else nil else var10
+	local var21 = var11.gui == nil and (var20 ~= nil and var14)
+	local var22 = if var11.gui ~= nil then var12 else var11.gui
+	local var23 = if var11.gui ~= nil then var16 else var11.gui
 	
 	return reactModule.createElement(overlayContextModule.Provider, {
-		value = {
-			requestOverlay = reactModule.useCallback(function() --[[ line: 38 ]]
-				-- upvalues: var11 (ref), var15 (ref)
-				if var11.gui == nil then
-					var15(true)
-				end
-			end, { var11.gui }),
-			instance = if var11.gui ~= nil then var12 else var11.gui,
-			screen = if var11.gui ~= nil then var16 else var11.gui
-		}
+		value = if flagsModule.FoundationStableContextValues then if flagsModule.FoundationStableContextValues then reactModule.useMemo(function() --[[ line: 53 ]]
+			-- upvalues: var19 (ref), var22 (ref), var23 (ref)
+			return { requestOverlay = var19, instance = var22, screen = var23 }
+		end, { var19, var22, var23 }) else nil else { requestOverlay = var19, instance = var22, screen = var23 }
 	}, {
-		FoundationOverlay = if var11.gui == nil and (var17 ~= nil and var14) then reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
+		FoundationOverlay = if var21 then reactRobloxModule.createPortal(reactModule.createElement("ScreenGui", {
 			Enabled = true,
 			ClipToDeviceSafeArea = false,
 			DisplayOrder = var11.DisplayOrder,
@@ -44,11 +49,11 @@ return function(p0) --[[ line: 30 | named "OverlayProvider" ]]
 			SafeAreaFrame = reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = useKeyboardAwareSizeModule(var16),
+				Size = var17,
 				ref = var13
 			}),
-			FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() })
-		}), var17) else nil,
+			FoundationStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var18 })
+		}), var20) else nil,
 		Children = reactModule.createElement(reactModule.Fragment, nil, var11.children)
 	})
 end

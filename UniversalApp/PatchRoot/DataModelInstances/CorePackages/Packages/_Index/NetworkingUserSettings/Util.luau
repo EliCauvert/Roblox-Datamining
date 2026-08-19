@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index["Util-31ab8d40-0.7.0"].Util)
+﻿return require(script.Parent.Parent.Parent._Index.Util.Util)

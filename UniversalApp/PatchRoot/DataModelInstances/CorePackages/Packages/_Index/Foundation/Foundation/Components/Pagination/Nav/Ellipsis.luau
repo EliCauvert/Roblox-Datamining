@@ -8,7 +8,7 @@ local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 return reactModule.memo(function(p0) --[[ line: 21 | named "Ellipsis" ]]
 	-- upvalues: reactModule (ref), viewModule (ref), paginationUtilsModule (ref), textModule (ref)
 	return reactModule.createElement(viewModule, {
-		LayoutOrder = p0.layoutOrder,
+		LayoutOrder = p0.LayoutOrder,
 		tag = paginationUtilsModule.getCircularSlotTag(p0.slotSize),
 		testId = p0.testId
 	}, {
