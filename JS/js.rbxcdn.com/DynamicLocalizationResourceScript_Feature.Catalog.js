@@ -524,6 +524,7 @@ Roblox.LangDynamic["Feature.Catalog"] = {
     "Label.ParticleEffects": "Particle Effects",
     "Label.EmissiveInfo": "Emissive item glows and gives off its own light, so it stays bright and visible even in dark environments.",
     "Label.ParticleEffectsInfo": "An item with particle effects gives off animated visuals, making it feel dynamic and alive.",
-    "Action.Owned": "{count} owned"
+    "Action.Owned": "{count} owned",
+    "Action.Try": "Try"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Catalog");

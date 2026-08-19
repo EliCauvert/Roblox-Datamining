@@ -1290,7 +1290,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.RequirementTwoStep": "2-step verification",
     "Description.RequirementTwoStep": "Keep your account secure.",
     "Label.RequirementQualifiedMembers": "Qualified members",
-    "Description.RequirementQualifiedMembers": "Reach 500 highly engaged users",
+    "Description.RequirementQualifiedMembers": "Reach 250 highly engaged users",
     "Heading.ForumsNotAvailable": "Forums are not available for your community",
     "Label.ActiveMembership": "Active membership",
     "Description.TierGatedForumWrite": "You must be 16+ to post. Complete an age-check to continue to post a comment.",
@@ -1319,6 +1319,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.NoSearchResultsText": "Try different keywords or adjust your filters",
     "Label.MemberSearchHint": "Start typing to search members",
     "Label.NoMembersFound": "No members found",
-    "Label.MemberSearchError": "Something went wrong. Please try again."
+    "Label.MemberSearchError": "Something went wrong. Please try again.",
+    "Description.UnrestrictedMessagesCategory": "Members can send unrestricted messages and attach images in this category."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Groups");
