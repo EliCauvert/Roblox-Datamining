@@ -146,53 +146,76 @@ return function() --[[ line: 45 | named "createGameInfoStore" ]]
 		getGameInfos = var11.getCachedItems,
 		getAndFetchGameInfo = var11.getAndFetchItem,
 		getAndFetchGameInfos = var11.getAndFetchItems,
-		updateGameInfo = if fFlagLuaAppDataHydrationUpdateItem then if fFlagMigrateGameInfoToStore then function(p8, p9) --[[ line: 209 | named "updateGameInfo" ]]
-			-- upvalues: t (ref), var10 (ref)
+		updateGameInfo = if fFlagLuaAppDataHydrationUpdateItem then if fFlagMigrateGameInfoToStore then function(p8, p9, p10) --[[ line: 216 | named "updateGameInfo" ]]
+			-- upvalues: t (ref), fFlagMigrateGameInfoToStore (copy), var10 (ref)
 			if p9 and p9.rootPlaceId then
 				t[tostring(p9.rootPlaceId)] = p8
 			end
+			if fFlagMigrateGameInfoToStore then
+				var10.updateItem(p8, p9, p10)
+				
+				return
+			end
 			var10.updateItem(p8, p9)
 		end else var10.updateItem else nil,
-		updateGameInfos = if fFlagMigrateGameInfoToStore then function(p10) --[[ line: 214 | named "updateGameInfos" ]]
-			-- upvalues: t (ref), var10 (ref)
-			for i, v in p10 do
+		updateGameInfos = if fFlagMigrateGameInfoToStore then function(p11, p12) --[[ line: 225 | named "updateGameInfos" ]]
+			-- upvalues: t (ref), fFlagMigrateGameInfoToStore (copy), var10 (ref)
+			for i, v in p11 do
 				if v and v.rootPlaceId then
 					t[tostring(v.rootPlaceId)] = i
 				end
 			end
-			var10.updateItems(p10)
+			if fFlagMigrateGameInfoToStore then
+				var10.updateItems(p11, p12)
+				
+				return
+			end
+			var10.updateItems(p11)
 		end else var10.updateItems,
-		getUniverseIdForPlaceId = if fFlagMigrateGameInfoToStore then function(p11) --[[ line: 221 | named "getUniverseIdForPlaceId" ]]
+		getUniverseIdForPlaceId = if fFlagMigrateGameInfoToStore then function(p13) --[[ line: 236 | named "getUniverseIdForPlaceId" ]]
 			-- upvalues: t (ref)
-			return t[tostring(p11)]
+			return t[tostring(p13)]
 		end else nil,
-		applyVoteChange = if fFlagSduiExperienceDetailsSupport then function(p12, p13, p14) --[[ line: 183 | named "applyVoteChange" ]]
-			-- upvalues: var11 (ref), var10 (ref)
-			local cachedItem = var11.getCachedItem(p12)
+		applyVoteChange = if fFlagSduiExperienceDetailsSupport then function(p14, p15, p16) --[[ line: 183 | named "applyVoteChange" ]]
+			-- upvalues: var11 (ref), fFlagMigrateGameInfoToStore (copy), var10 (ref)
+			local cachedItem = var11.getCachedItem(p14)
 			local var17 = cachedItem and cachedItem.data(false)
 			
-			if var17 and var17.totalUpVotes ~= nil then
-				local t = {
-					totalUpVotes = var17.totalUpVotes,
-					totalDownVotes = var17.totalDownVotes
-				}
-				var10.updateItem(p12, {
-					totalUpVotes = tostring(math.max(0, (tonumber(var17.totalUpVotes) or 0) + ((if p14 == true then 1 else 0) - (if p13 == true then 1 else 0)))),
-					totalDownVotes = tostring(math.max(0, (tonumber(var17.totalDownVotes) or 0) + ((if p14 == false then 1 else 0) - (if p13 == false then 1 else 0))))
-				})
+			if not var17 or var17.totalUpVotes == nil then
+				return nil
+			end
+			local totalUpVotes = tonumber(var17.totalUpVotes) or 0
+			local totalDownVotes = tonumber(var17.totalDownVotes) or 0
+			local t = {
+				totalUpVotes = var17.totalUpVotes,
+				totalDownVotes = var17.totalDownVotes
+			}
+			local var21 = (if p16 == true then 1 else 0) - (if p15 == true then 1 else 0)
+			local var22 = (if p16 == false then 1 else 0) - (if p15 == false then 1 else 0)
+			
+			if fFlagMigrateGameInfoToStore then
+				var10.updateItem(p14, {
+					totalUpVotes = tostring(math.max(0, totalUpVotes + var21)),
+					totalDownVotes = tostring(math.max(0, totalDownVotes + var22))
+				}, false)
 				
 				return t
 			end
-			return nil
+			var10.updateItem(p14, {
+				totalUpVotes = tostring(math.max(0, totalUpVotes + var21)),
+				totalDownVotes = tostring(math.max(0, totalDownVotes + var22))
+			})
+			
+			return t
 		end else nil,
-		clear = if fFlagLuaAppInExperienceDetailsPrompt then var11.clear else function() --[[ line: 225 | named "clear" ]]
+		clear = if fFlagLuaAppInExperienceDetailsPrompt then var11.clear else function() --[[ line: 240 | named "clear" ]]
 			-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var10 (ref), var11 (ref)
 			if not fFlagLuaAppInExperienceDetailsPrompt then
 				var10.clear()
 				var11.clear()
 			end
 		end,
-		dispose = if fFlagLuaAppInExperienceDetailsPrompt then var11.dispose else function() --[[ line: 232 | named "dispose" ]]
+		dispose = if fFlagLuaAppInExperienceDetailsPrompt then var11.dispose else function() --[[ line: 247 | named "dispose" ]]
 			-- upvalues: fFlagLuaAppInExperienceDetailsPrompt (copy), var10 (ref), var11 (ref)
 			if not fFlagLuaAppInExperienceDetailsPrompt then
 				var10.dispose()

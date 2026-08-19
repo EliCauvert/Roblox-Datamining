@@ -261,6 +261,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} 메시의 {a
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} 메시의 {axis}축 크기가 '{currentSize}' 스터드로, 허용되는 최소 개별 부품 크기인 '{minSize}' 스터드보다 작습니다. 메시 크기를 늘리세요."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,첨부 파일({attName})은 {partName} 하위 항목에 정확히 한 번만 존재해야 합니다.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}'(또는 하위 항목)에 속성이 포함되어 있습니다. 다음({InstanceNameList})에서 속성을 제거해야 합니다.
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}'에 유효하지 않은 속성({ProblematicProperties})이 있습니다. 표시된 바이트 제한을 초과했습니다(제한이 0이면 속성이 비어 있어야 함). 다른 속성에는 NaN/Inf 값이 포함되어 있거나 기본 크기 제한을 초과합니다.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox에 애셋을 업로드하려면 정확히 1개의 인스턴스와 관련된 업로드 유형을 선택해야 합니다.
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,인스턴스 {ProblematicDescendantPath}에는 태그가 없어야 합니다.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Hub 우선 번역 동기화 워크플로우를 엔드투엔드로 확인하는 데 사용되는 두 번째 테스트 오류 문자열.
@@ -1792,7 +1793,9 @@ Feature.Build.Action.Buy,구매하기
 Feature.Build.Action.BuyRobux,Robux 구매하기
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,텍스트 복사
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,다시 묻지 않음
 Feature.Build.Action.HideAutosaved,자동 저장된 버전 숨기기
 Feature.Build.Action.ManageLimit,한도 관리
 Feature.Build.Action.Next,
@@ -4550,6 +4553,7 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
+InGame.PlayerDropDown.Decline,거절
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 님의 친구 수가 최대 한도에 도달했어요.
 InGame.PlayerDropDown.Report,

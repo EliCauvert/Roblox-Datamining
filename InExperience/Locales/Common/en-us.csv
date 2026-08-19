@@ -1294,12 +1294,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Update existing look
 Feature.Avatar.Action.UpdateMakeupLook,Update look
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Explore Styles
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publish
+Feature.Avatar.BackgroundGeneration.Action.View,View
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Your creation is ready to use.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"This background was generated with AI. By publishing, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory, and published items can't be edited."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item didn’t meet Community Standards
 Feature.Avatar.BackgroundGeneration.Error.Moderation,That prompt doesn't follow our guidelines. Try describing something else.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"This background doesn't follow the Roblox Community Standards, so it wasn't added to your inventory. Try generating a new one."
 Feature.Avatar.BackgroundGeneration.Error.System,Something went wrong generating your background. Please try again.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background…
 Feature.Avatar.BackgroundGeneration.Title,Create Background
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publish to inventory
 Feature.Avatar.Backgrounds.Title,Backgrounds
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Adjustment is not available for this body style.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Default to original body colors
@@ -1806,7 +1820,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Open settings
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publish
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publish latest
 Feature.Build.Action.Restore,Restore
 Feature.Build.Action.Revert,
@@ -1818,7 +1832,7 @@ Feature.Build.Action.ShareLink,Share link
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
-Feature.Build.Action.View,View
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,View usage
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."

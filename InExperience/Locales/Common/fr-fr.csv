@@ -4549,6 +4549,7 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
+InGame.PlayerDropDown.Decline,Refuser
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} a atteint la limite d'amis.
 InGame.PlayerDropDown.Report,

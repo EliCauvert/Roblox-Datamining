@@ -991,6 +991,7 @@ return {
 	FFlagTraversalHistoryDiscoveryTelemetry = game:DefineFastFlag("TraversalHistoryDiscoveryTelemetry", false),
 	FFlagLuaAppTileVideoCandidateOnly = require(script.FFlagLuaAppTileVideoCandidateOnly),
 	FFlagLuaAppTileVideoKeepPlayingOnScroll = require(script.FFlagLuaAppTileVideoKeepPlayingOnScroll),
+	FFlagLuaAppEmphasisGameTileVideo = require(script.FFlagLuaAppEmphasisGameTileVideo),
 	FFlagLuaAppSearchResultsPageGameTileVideo = require(script.FFlagLuaAppSearchResultsPageGameTileVideo),
 	FFlagLuaAppHomeReduceRenders = game:DefineFastFlag("LuaAppHomeReduceRenders", false),
 	FFlagLuaAppVideoTileDisableActivation = game:DefineFastFlag("LuaAppVideoTileDisableActivation", false),

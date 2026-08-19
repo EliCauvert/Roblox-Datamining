@@ -244,6 +244,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,ขนาดของเ
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,ขนาดของเมช {partName} ตามแกน {axis} ซึ่งมีขนาด '{currentSize}' Stud เล็กกว่าขนาดขั้นต่ำที่อนุญาตสำหรับแต่ละชิ้นส่วน ซึ่งอยู่ที่ '{minSize}' โปรดปรับขนาดเมชให้ใหญ่ขึ้น
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,ต้องมีจุดเชื่อมต่อ {attName} อยู่เพียง 1 จุดภายใน Descendant {partName}
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (หรือ Descendant) มีคุณลักษณะแอตทริบิวต์อยู่ คุณต้องลบแอตทริบิวต์ออกจากรายการต่อไปนี้: {InstanceNameList}
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' มีคุณสมบัติที่ไม่ถูกต้อง: {ProblematicProperties} เกินขีดจำกัดไบต์ที่แสดง (ขีดจำกัด 0 หมายความว่าคุณสมบัติต้องว่างเปล่า) คุณสมบัติอื่นใดมีค่า NaN/Inf หรือเกินขีดจำกัดขนาดเริ่มต้น
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,หากต้องการอัปโหลดทรัพยากรไปยัง Roblox คุณต้องเลือก 1 อินสแตนซ์และประเภทการอัปโหลดที่เกี่ยวข้อง
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,อินสแตนซ์ {ProblematicDescendantPath} ไม่ควรมีแท็ก
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,มีการใช้สตริงแสดงข้อผิดพลาดของการทดสอบครั้งที่สองในการตรวจสอบยืนยันเวิร์กโฟลว์การซิงค์การแปลแบบ Hub-first ตั้งแต่ต้นจนจบ
@@ -1776,7 +1777,9 @@ Feature.Build.Action.Buy,ซื้อ
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,คัดลอกข้อความ
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,ไม่ต้องถามอีก
 Feature.Build.Action.HideAutosaved,ซ่อนรายการที่บันทึกอัตโนมัติ
 Feature.Build.Action.ManageLimit,จัดการวงเงิน
 Feature.Build.Action.Next,
@@ -4532,6 +4535,7 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,คำขอเป็นเพื่อน
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,ยกเลิกคำขอแล้ว
+InGame.PlayerDropDown.Decline,ปฏิเสธ
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} มีเพื่อนถึงจำนวนสูงสุดแล้ว
 InGame.PlayerDropDown.Report,

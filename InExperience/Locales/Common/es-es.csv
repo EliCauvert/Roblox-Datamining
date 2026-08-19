@@ -3666,6 +3666,9 @@ Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,El acceso al chat con
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. Selecciona Permiso
 2. Selecciona Contactos
 3. Permite que Roblox acceda a tus contactos"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. Ve a Configuración > Permiso
+2. Selecciona Contactos
+3. Permite que Roblox acceda a tus contactos"
 Feature.SettingsHub.Description.ContactsPermissionIOS,"Para conectar con amigos, permite que Roblox acceda a tus contactos."
 Feature.SettingsHub.Description.ContactsPermissionRequest,Necesitamos acceso a tus contactos para que puedas interactuar con tus amistades.
 Feature.SettingsHub.Description.PeoplesNames,Muestra u oculta tus insignias a otras personas en los juegos.

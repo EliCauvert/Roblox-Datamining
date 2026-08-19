@@ -260,6 +260,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,「{partName}」網格�
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,「{partName}」網格在 {axis} 軸上的大小為 {currentSize} 個磚塊，小於允許的單一零件最小尺寸 {minSize} 個磚塊。請放大網格。
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,附件 {attName} 必須且只能在 {partName} 的後代中出現一次。
 Common.UGCValidation.ErrorLabel.NoAttributes,「{RootInstanceName}」（或其子物件）包含屬性。請從以下項目中移除屬性：{InstanceNameList}
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName}「{InstancePath}」具有無效的屬性：{ProblematicProperties}。屬性超過顯示的位元組上限（上限為 0 表示屬性必須為空白）；其他屬性則包含 NaN/Inf 值，或超過其預設大小上限。
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,若要將素材上傳至 Roblox，你必須選擇 1 個實例和關聯的上傳類型。
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,個體{ProblematicDescendantPath}不應有標註。
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,第二個測試錯誤字串，用於驗證 Hub-first 翻譯同步工作流程的端到端程序。
@@ -1792,7 +1793,9 @@ Feature.Build.Action.Buy,購買
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,複製文字
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,不要再詢問
 Feature.Build.Action.HideAutosaved,隱藏自動儲存
 Feature.Build.Action.ManageLimit,管理上限
 Feature.Build.Action.Next,
@@ -3665,6 +3668,9 @@ Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,由於您的行為可
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. 選擇「權限」
 2. 選擇「聯絡人」
 3. 允許 Roblox 存取您的聯絡人"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. 前往「設定」>「權限」
+2. 選擇「聯絡人」
+3. 允許 Roblox 存取聯絡人"
 Feature.SettingsHub.Description.ContactsPermissionIOS,請先允許 Roblox 存取您的聯絡人，才能尋找好友。
 Feature.SettingsHub.Description.ContactsPermissionRequest,我們需要存取你的通訊錄，以便你與好友交流。
 Feature.SettingsHub.Description.PeoplesNames,在遊戲中向其他人員顯示或隱藏你的徽章。
@@ -4539,6 +4545,7 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,取消邀請
+InGame.PlayerDropDown.Decline,拒絕
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 已達好友人數上限。
 InGame.PlayerDropDown.Report,

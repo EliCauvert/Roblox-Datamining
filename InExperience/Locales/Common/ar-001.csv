@@ -3646,6 +3646,9 @@ Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,تم تعطيل وص�
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. حدِّد ""الإذن""
 2. حدِّد ""جهات الاتصال""
 3. اسمح لمنصة Roblox بالوصول إلى جهات اتصالك"
+Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. انتقِل إلى ""الإعدادات"" > ""الإذن""
+2. حدِّد ""جهات الاتصال""
+3. اسمح لمنصّة Roblox بالوصول إلى جهات اتصالك"
 Feature.SettingsHub.Description.ContactsPermissionIOS,للتواصل مع الأصدقاء، اسمح لمنصة Roblox بالوصول إلى جهات اتصالك.
 Feature.SettingsHub.Description.ContactsPermissionRequest,نحتاج إلى الوصول إلى جهات اتصالك لتتمكن من التواصل مع الأصدقاء.
 Feature.SettingsHub.Description.PeoplesNames,إظهار الأوسمة لديك أو إخفاؤها عن الأشخاص في الألعاب.

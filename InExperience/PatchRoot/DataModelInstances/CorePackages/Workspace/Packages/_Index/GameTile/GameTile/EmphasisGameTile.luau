@@ -14,9 +14,13 @@ local gridTileTextFooterModule = require(gameTile.Footer.GridTileTextFooter)
 local itemLayoutDataParsingUtilsModule = require(gameTile.ItemLayoutDataParsingUtils)
 local hoverTileCoordinatorModule = require(gameTile.HoverTileCoordinator)
 local getTileBadgeByPositionConfigFromEntryModule = require(gameTile.getTileBadgeByPositionConfigFromEntry)
+local gameTileVideoThumbnailModule = require(gameTile.GameTileVideoThumbnail)
+local gameVideoPlaybackDetectorModule = require(gameTile.Video.GameVideoPlaybackDetector)
 local parent = gameTile.Parent
 local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
 local reactModule = require(parent.React)
+local responsiveModule = require(parent.Responsive)
+local usePreferredInput = responsiveModule.usePreferredInput
 local roactUtilsModule = require(parent.RoactUtils)
 local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
 local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
@@ -31,69 +35,86 @@ local useTokens = require(parent.Foundation).Hooks.useTokens
 local useDesignTokens = require(parent.Style).useDesignTokens
 local isVRAppBuild = require(parent.AppCommonLib).IsVRAppBuild
 local sponsoredGamesRecordClick = require(parent.DiscoveryAnalytics).Requests.sponsoredGamesRecordClick
-local useTagAsViewportAutoplayCandidate = require(parent.VideoUtils).useTagAsViewportAutoplayCandidate
+local videoUtilsModule = require(parent.VideoUtils)
+local useTagAsViewportAutoplayCandidate = videoUtilsModule.useTagAsViewportAutoplayCandidate
+local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
+local videoEndReason = videoUtilsModule.AnalyticsEnums.VideoEndReason
 local gameTileThumbnailBadgesModule = require(gameTile.Overlays.GameTileThumbnailBadges)
 local wrapEmphasisTileDescriptionText = game:DefineFastFlag("WrapEmphasisTileDescriptionText", false)
 local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
 local fFlagLuaAppTileVideoCandidateOnly = require(parent.SharedFlags).FFlagLuaAppTileVideoCandidateOnly
 local fFlagLuaAppHomeThumbnailPrefetch = require(parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch
 local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
-local var20 = if fFlagLuaAppHomeThumbnailPrefetch then require(gameTile.resolveGameTileThumbnailUri) else nil
+local fFlagLuaAppEdpMediaGalleryVideoPreview = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryVideoPreview
+local fFlagLuaAppEmphasisGameTileVideo = require(parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
+local fIntLuaAppGameTileVideoDwellTimeInSec = require(parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
+local fIntLuaAppGameTileVideoVisiblePercent = require(parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
+local fFlagLuaAppGameTileSelectionVideoPlayback = require(parent.SharedFlags).FFlagLuaAppGameTileSelectionVideoPlayback
+local var24 = if fFlagLuaAppHomeThumbnailPrefetch then require(gameTile.resolveGameTileThumbnailUri) else nil
 
-return function(p0) --[[ line: 92 ]]
-	-- upvalues: useDesignTokens (ref), useTokens (ref), useSelector (ref), gameInfosReducer (ref), useRoactService (ref), roactNetworking (ref), useDispatch (ref), reactModule (ref), apiFetchGameDetails (ref), getGameTileLayoutDataModule (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), bigGameIconReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var20 (ref), itemLayoutDataParsingUtilsModule (ref), formatExperienceThumbnailModule (ref), gameTileViewConfigModule (ref), isVRAppBuild (ref), useIsHoveredTileModule (ref), hoverTileCoordinatorModule (ref), gameCollectionItemTypes (ref), sponsoredGamesRecordClick (ref), appExperienceActionRowModule (ref), gridTileTextFooterModule (ref), creatorNameMetadataModule (ref), gameStatsModule (ref), gameTileConstantsModule (ref), wrapEmphasisTileDescriptionText (ref), impressionsTagUtility (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), getTileBadgeByPositionConfigFromEntryModule (ref), gameTileThumbnailBadgesModule (ref), gameTileViewModule (ref), userGameSettingsService (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref)
-	local var34
-	local var21 = useDesignTokens()
-	local var22 = useTokens()
+return function(p0) --[[ line: 108 ]]
+	-- upvalues: useDesignTokens (ref), useTokens (ref), useSelector (ref), gameInfosReducer (ref), useRoactService (ref), roactNetworking (ref), useDispatch (ref), reactModule (ref), apiFetchGameDetails (ref), getGameTileLayoutDataModule (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), bigGameIconReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var24 (ref), itemLayoutDataParsingUtilsModule (ref), formatExperienceThumbnailModule (ref), gameTileViewConfigModule (ref), isVRAppBuild (ref), useIsHoveredTileModule (ref), fFlagLuaAppEmphasisGameTileVideo (ref), videoPlaybackCoordinator (ref), hoverTileCoordinatorModule (ref), videoEndReason (ref), gameCollectionItemTypes (ref), sponsoredGamesRecordClick (ref), appExperienceActionRowModule (ref), gridTileTextFooterModule (ref), creatorNameMetadataModule (ref), gameStatsModule (ref), gameTileConstantsModule (ref), wrapEmphasisTileDescriptionText (ref), impressionsTagUtility (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), fFlagLuaAppEdpMediaGalleryVideoPreview (ref), usePreferredInput (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), gameTileVideoThumbnailModule (ref), gameVideoPlaybackDetectorModule (ref), responsiveModule (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref), getTileBadgeByPositionConfigFromEntryModule (ref), gameTileThumbnailBadgesModule (ref), gameTileViewModule (ref), userGameSettingsService (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref)
+	local var38
+	local var25 = useDesignTokens()
+	local var26 = useTokens()
 	local universeId = p0.entry.universeId
-	local var23 = useSelector(function(p1) --[[ line: 100 ]]
+	local var27 = useSelector(function(p1) --[[ line: 116 ]]
 		-- upvalues: gameInfosReducer (copy), universeId (ref)
 		return p1.Personalization[gameInfosReducer.key][universeId]
 	end)
-	local var24 = useSelector(function(p2) --[[ line: 103 ]]
+	local var28 = useSelector(function(p2) --[[ line: 119 ]]
 		-- upvalues: universeId (ref)
 		return p2.GameDetails[universeId]
 	end)
-	local var25 = useRoactService(roactNetworking)
-	local var26 = useDispatch()
-	reactModule.useEffect(function() --[[ line: 109 ]]
-		-- upvalues: var24 (ref), var26 (ref), apiFetchGameDetails (copy), var25 (ref), universeId (ref)
-		if var24 then
+	local var29 = useRoactService(roactNetworking)
+	local var30 = useDispatch()
+	reactModule.useEffect(function() --[[ line: 125 ]]
+		-- upvalues: var28 (ref), var30 (ref), apiFetchGameDetails (copy), var29 (ref), universeId (ref)
+		if var28 then
 			return
 		end
-		var26(apiFetchGameDetails.Fetch(var25, { universeId }))
-	end, { var24, universeId, var25, var26 })
-	local var27 = getGameTileLayoutDataModule(var23, p0.topicId)
+		var30(apiFetchGameDetails.Fetch(var29, { universeId }))
+	end, { var28, universeId, var29, var30 })
+	local var31 = getGameTileLayoutDataModule(var27, p0.topicId)
 	local gameTileLayoutType = p0.gameTileLayoutType or "Narrow"
-	local var29 = if gameTileLayoutType ~= "Wide" then gameTileLayoutType == "Event" else true
-	local var30 = if fFlagMigrateGameIconsToStore then gameHydrationReactModule.useLargeGameIcon(universeId) or "" else useSelector(function(p3) --[[ line: 127 ]]
+	local var33 = if gameTileLayoutType ~= "Wide" then gameTileLayoutType == "Event" else true
+	local var34 = if fFlagMigrateGameIconsToStore then gameHydrationReactModule.useLargeGameIcon(universeId) or "" else useSelector(function(p3) --[[ line: 143 ]]
 		-- upvalues: bigGameIconReducer (copy), universeId (ref)
 		return if p3[bigGameIconReducer.key][universeId] then p3[bigGameIconReducer.key][universeId].url else ""
 	end)
 	local _ = nil
-	local var31 = if fFlagLuaAppHomeThumbnailPrefetch then var20({
+	local var35 = if fFlagLuaAppHomeThumbnailPrefetch then var24({
 		isEmphasized = true,
-		iconUrl = var30,
+		iconUrl = var34,
 		universeId = universeId,
 		placeId = p0.entry.placeId,
-		useGridTile = var29,
+		useGridTile = var33,
 		perEntryWideAssetId = p0.entry.primaryWideImageAssetId,
-		game = var23,
+		game = var27,
 		topicId = p0.topicId
-	}) elseif var29 then formatExperienceThumbnailModule((if p0.entry.primaryWideImageAssetId then p0.entry.primaryWideImageAssetId else itemLayoutDataParsingUtilsModule.getWideImageAssetId(var27)) or (if var23 then var23.primaryWideAssetId else nil), p0.entry.placeId, true) else var30
+	}) elseif var33 then formatExperienceThumbnailModule((if p0.entry.primaryWideImageAssetId then p0.entry.primaryWideImageAssetId else itemLayoutDataParsingUtilsModule.getWideImageAssetId(var31)) or (if var27 then var27.primaryWideAssetId else nil), p0.entry.placeId, true) else var34
 	local imageAspectRatio = gameTileViewConfigModule.getImageAspectRatio(gameTileLayoutType)
-	local var33 = if var27 then var27.title elseif var23 then var23.name else ""
+	local var37 = if var31 then var31.title elseif var27 then var27.name else ""
 	
 	if not isVRAppBuild() and p0.useHoverTile then
-		var34 = p0.impressionsTag ~= nil
+		var38 = p0.impressionsTag ~= nil
+	end
+	local var39 = reactModule.useRef(nil)
+	local var40 = `{p0.impressionsTag or ""}_{p0.index}_{gameTileLayoutType}`
+	var40 = useIsHoveredTileModule(var39, var40, var38)
+	local var41 = nil
+	
+	if fFlagLuaAppEmphasisGameTileVideo then
+		var41 = if p0.videoPlaybackContext and p0.videoPlaybackContext.videoPlaybackCoordinator then p0.videoPlaybackContext.videoPlaybackCoordinator else videoPlaybackCoordinator.default
 	end
 	local creatorName
-	local var35 = reactModule.useRef(nil)
-	local var36 = useIsHoveredTileModule(var35, `{p0.impressionsTag or ""}_{p0.index}_{gameTileLayoutType}`, var34)
-	local var37 = reactModule.useCallback(function() --[[ line: 165 ]]
-		-- upvalues: var36 (ref), hoverTileCoordinatorModule (copy), p0 (ref), gameCollectionItemTypes (copy), universeId (ref), sponsoredGamesRecordClick (copy), var25 (ref)
-		if var36 then
+	local var42 = reactModule.useCallback(function() --[[ line: 189 ]]
+		-- upvalues: var40 (ref), hoverTileCoordinatorModule (copy), fFlagLuaAppEmphasisGameTileVideo (copy), var41 (write), videoEndReason (copy), universeId (ref), p0 (ref), gameCollectionItemTypes (copy), sponsoredGamesRecordClick (copy), var29 (ref)
+		if var40 then
 			hoverTileCoordinatorModule.default:reset()
+		end
+		if fFlagLuaAppEmphasisGameTileVideo then
+			var41:reset(videoEndReason.TileClicked, nil, universeId, nil)
 		end
 		p0.navigateToGameDetails(universeId, {
 			source = p0.source,
@@ -108,62 +129,72 @@ return function(p0) --[[ line: 92 ]]
 		p0.reportGameDetailOpened(p0.index, universeId)
 		
 		if p0.entry.isSponsored then
-			sponsoredGamesRecordClick(var25, p0.entry.adId)
+			sponsoredGamesRecordClick(var29, p0.entry.adId)
 		end
 	end, {
 		universeId, p0.source, p0.onPeekViewClosed, p0.entry.isSponsored,
-		p0.entry.adId, p0.reportGameDetailOpened, var25, p0.navigateToGameDetails,
-		p0.referralSource, p0.index, var36
+		p0.entry.adId,
+		if fFlagLuaAppEmphasisGameTileVideo then p0.entry.tileType else nil,
+		p0.reportGameDetailOpened, var29, p0.navigateToGameDetails, p0.referralSource,
+		p0.index, var40, if fFlagLuaAppEmphasisGameTileVideo then var41 else nil
 	})
 	local showDescription = p0.showDescription or false
-	local var39 = if var23 then var23.totalUpVotes else 0
-	local var40 = if var23 then var23.totalDownVotes else 0
-	local hasVerifiedBadge = var24 and (var24.creator and var24.creator.hasVerifiedBadge)
-	local var42 = if var24 then var24.description else ""
-	local var43 = (if var24 then var24.licenseDescription else nil) or (if var24 then var24.localizedFiatPrice else nil)
-	local hideGameStats = p0.hideGameStats or (showDescription or var43 ~= nil)
+	local var44 = if var27 then var27.totalUpVotes else 0
+	local var45 = if var27 then var27.totalDownVotes else 0
+	local hasVerifiedBadge = var28 and (var28.creator and var28.creator.hasVerifiedBadge)
+	local var47 = if var28 then var28.description else ""
+	local var48 = (if var28 then var28.licenseDescription else nil) or (if var28 then var28.localizedFiatPrice else nil)
+	local hideGameStats = p0.hideGameStats or (showDescription or var48 ~= nil)
 	
-	if var23 and var23.creatorName ~= "" then
-		creatorName = var23.creatorName or var24 and (var24.creator and var24.creator.name)
+	if var27 and var27.creatorName ~= "" then
+		creatorName = var27.creatorName or var28 and (var28.creator and var28.creator.name)
 	end
-	local var46 = if var43 then 2 else 3
-	local var47 = reactModule.useMemo(function() --[[ line: 227 ]]
-		-- upvalues: creatorName (ref), showDescription (ref), var46 (ref), hideGameStats (ref), var43 (ref)
-		local var58 = 0
+	local var51 = if var48 then 2 else 3
+	local var52 = reactModule.useMemo(function() --[[ line: 262 ]]
+		-- upvalues: creatorName (ref), showDescription (ref), var51 (ref), hideGameStats (ref), var48 (ref)
+		local var83 = 0
 		
 		if creatorName and creatorName ~= "" then
-			var58 += 1
+			var83 += 1
 		end
 		if showDescription then
-			var58 += var46
+			var83 += var51
 		end
 		if not hideGameStats then
-			var58 += 1
+			var83 += 1
 		end
-		if var43 then
-			var58 += 1
+		if var48 then
+			var83 += 1
 		end
-		return var58
+		return var83
 	end, {
 		creatorName,
 		showDescription,
 		hideGameStats,
-		var43,
-		var46
+		var48,
+		var51
 	})
 	local isContained = p0.isContained or false
-	local playButtonHeight = gameTileViewConfigModule.getElementSizes(var21, p0.textSizeOffset, 1, var22, true, var47).playButtonHeight
-	local var49 = reactModule.useCallback(function(...) --[[ line: 260 ]]
-		-- upvalues: var36 (ref), hoverTileCoordinatorModule (copy), p0 (ref)
-		if var36 then
+	local playButtonHeight = gameTileViewConfigModule.getElementSizes(var25, p0.textSizeOffset, 1, var26, true, var52).playButtonHeight
+	local var54 = reactModule.useCallback(function(...) --[[ line: 296 ]]
+		-- upvalues: var40 (ref), hoverTileCoordinatorModule (copy), p0 (ref), fFlagLuaAppEmphasisGameTileVideo (copy), var41 (write), videoEndReason (copy), universeId (ref)
+		if var40 then
 			hoverTileCoordinatorModule.default:reset()
 		end
 		if p0.reportExperienceLaunched then
 			p0.reportExperienceLaunched(...)
 		end
-	end, { var36, p0.reportExperienceLaunched })
-	local var50 = reactModule.useMemo(function() --[[ line: 271 ]]
-		-- upvalues: reactModule (copy), appExperienceActionRowModule (copy), universeId (ref), p0 (ref), var49 (ref), var37 (ref), imageAspectRatio (ref), playButtonHeight (ref)
+		if fFlagLuaAppEmphasisGameTileVideo then
+			var41:reset(videoEndReason.ExperienceLaunched, nil, universeId, nil)
+		end
+	end, {
+		var40,
+		p0.reportExperienceLaunched,
+		if fFlagLuaAppEmphasisGameTileVideo then universeId else nil,
+		if fFlagLuaAppEmphasisGameTileVideo then var41 else nil
+	})
+	local var55 = reactModule.useMemo(function() --[[ line: 323 ]]
+		-- upvalues: reactModule (copy), appExperienceActionRowModule (copy), universeId (ref), p0 (ref), var54 (ref), var42 (ref), imageAspectRatio (ref), playButtonHeight (ref)
 		return reactModule.createElement(appExperienceActionRowModule, {
 			launchSource = "FeaturedSearchTile",
 			horizontalPadding = 0,
@@ -171,8 +202,8 @@ return function(p0) --[[ line: 92 ]]
 			isUnifiedGameTileEnabled = true,
 			universeId = universeId,
 			referralSource = p0.referralSource,
-			reportExperienceLaunched = var49,
-			openGameDetails = var37,
+			reportExperienceLaunched = var54,
+			openGameDetails = var42,
 			entry = p0.entry,
 			launchExperienceEventContext = p0.launchExperienceEventContext,
 			showButtonText = imageAspectRatio > 1,
@@ -180,21 +211,21 @@ return function(p0) --[[ line: 92 ]]
 			index = p0.index
 		})
 	end, {
-		universeId, p0.referralSource, var49, var37, p0.entry,
+		universeId, p0.referralSource, var54, var42, p0.entry,
 		p0.launchExperienceEventContext, playButtonHeight, p0.index, imageAspectRatio
 	})
-	local var51 = reactModule.useMemo(function() --[[ line: 302 ]]
-		-- upvalues: reactModule (copy), var43 (ref), gridTileTextFooterModule (copy), creatorNameMetadataModule (copy), creatorName (ref), hasVerifiedBadge (ref), gameStatsModule (copy), var39 (ref), var40 (ref), p0 (ref), gameTileConstantsModule (copy), var29 (ref), hideGameStats (ref), gameTileLayoutType (ref), showDescription (ref), var42 (ref), var46 (ref), wrapEmphasisTileDescriptionText (copy)
+	local var56 = reactModule.useMemo(function() --[[ line: 354 ]]
+		-- upvalues: reactModule (copy), var48 (ref), gridTileTextFooterModule (copy), creatorNameMetadataModule (copy), creatorName (ref), hasVerifiedBadge (ref), gameStatsModule (copy), var44 (ref), var45 (ref), p0 (ref), gameTileConstantsModule (copy), var33 (ref), hideGameStats (ref), gameTileLayoutType (ref), showDescription (ref), var47 (ref), var51 (ref), wrapEmphasisTileDescriptionText (copy)
 		return reactModule.createElement(reactModule.Fragment, {}, {
 			UIListLayout = reactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			ExtraMetadata = if var43 then reactModule.createElement(gridTileTextFooterModule, {
+			ExtraMetadata = if var48 then reactModule.createElement(gridTileTextFooterModule, {
 				LayoutOrder = 1,
 				useLargerFont = true,
 				isUnifiedGameTile = true,
-				text = var43
+				text = var48
 			}) else nil,
 			CreatorName = reactModule.createElement(creatorNameMetadataModule, {
 				LayoutOrder = 2,
@@ -206,11 +237,11 @@ return function(p0) --[[ line: 92 ]]
 				useLargerFont = true,
 				isUnifiedGameTile = true,
 				stats = {
-					totalUpVotes = var39,
-					totalDownVotes = var40,
+					totalUpVotes = var44,
+					totalDownVotes = var45,
 					playerCount = if p0.playerCountStyle == gameTileConstantsModule.PlayerCountStyleValues.Footer then p0.entry.playerCount else nil
 				},
-				isGridTile = var29,
+				isGridTile = var33,
 				hideGameStats = hideGameStats,
 				gameTileLayoutType = gameTileLayoutType
 			}),
@@ -219,41 +250,148 @@ return function(p0) --[[ line: 92 ]]
 				useLargerFont = true,
 				isUnifiedGameTile = true,
 				ClipsDescendants = true,
-				text = var42,
-				linesOfText = var46,
+				text = var47,
+				linesOfText = var51,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextWrapped = if wrapEmphasisTileDescriptionText then true else nil
 			}) else nil
 		})
 	end, {
-		creatorName, var39, var40, p0.playerCountStyle, p0.entry.playerCount, var29,
-		hideGameStats, gameTileLayoutType, showDescription, var42, var43,
-		hasVerifiedBadge, var46
+		creatorName, var44, var45, p0.playerCountStyle, p0.entry.playerCount, var33,
+		hideGameStats, gameTileLayoutType, showDescription, var47, var48,
+		hasVerifiedBadge, var51
 	})
-	local var52, var53 = reactModule.useState(Vector2.new(0, 0))
-	local var54 = reactModule.useMemo(function() --[[ line: 371 ]]
-		-- upvalues: gameTileViewConfigModule (copy), var21 (ref), var52 (ref), gameTileLayoutType (ref), isContained (ref), p0 (ref), var47 (ref), var22 (ref)
-		return var52.Y - gameTileViewConfigModule.getTileHeight(var21, var52.X, gameTileLayoutType, isContained, false, false, p0.textSizeOffset, nil, 1, var47, var22, true)
+	local var57, var58 = reactModule.useState(Vector2.new(0, 0))
+	local var59 = reactModule.useMemo(function() --[[ line: 423 ]]
+		-- upvalues: gameTileViewConfigModule (copy), var25 (ref), var57 (ref), gameTileLayoutType (ref), isContained (ref), p0 (ref), var52 (ref), var26 (ref)
+		return var57.Y - gameTileViewConfigModule.getTileHeight(var25, var57.X, gameTileLayoutType, isContained, false, false, p0.textSizeOffset, nil, 1, var52, var26, true)
 	end, {
-		var21, var52, gameTileLayoutType, isContained, p0.textSizeOffset, 1, var47,
-		var22
+		var25, var57, gameTileLayoutType, isContained, p0.textSizeOffset, 1, var52,
+		var26
 	})
-	local var55 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 402 ]]
-		-- upvalues: impressionsTagUtility (copy), var55 (ref), p0 (ref)
-		impressionsTagUtility.AddTag(var55, p0.impressionsTag, p0.index)
+	local var60 = reactModule.useRef(nil)
+	reactModule.useEffect(function() --[[ line: 454 ]]
+		-- upvalues: impressionsTagUtility (copy), var60 (ref), p0 (ref)
+		impressionsTagUtility.AddTag(var60, p0.impressionsTag, p0.index)
 		
-		return function() --[[ line: 404 ]]
-			-- upvalues: impressionsTagUtility (copy), var55 (copy), p0 (copy)
-			impressionsTagUtility.RemoveTag(var55, p0.impressionsTag, p0.index)
+		return function() --[[ line: 456 ]]
+			-- upvalues: impressionsTagUtility (copy), var60 (copy), p0 (copy)
+			impressionsTagUtility.RemoveTag(var60, p0.impressionsTag, p0.index)
 		end
 	end, { p0.impressionsTag, p0.index })
-	useTagAsViewportAutoplayCandidate(var55, p0.videoPlaybackContext, if fFlagLuaAppTileVideoCandidateOnly then false else nil)
-	local var56 = nil
-	local var57 = getTileBadgeByPositionConfigFromEntryModule(p0.entry)
+	local var61 = nil
+	local _ = nil
+	local var62 = nil
+	local var63 = nil
+	local var64 = nil
+	local _ = nil
+	local var65 = nil
+	local var66 = nil
+	local var67 = nil
+	local var68 = nil
 	
-	if var57 then
-		var56 = reactModule.createElement(gameTileThumbnailBadgesModule, { tileBadgesByPosition = var57 })
+	if fFlagLuaAppEmphasisGameTileVideo then
+		var67 = p0.videoPlaybackContext ~= nil and p0.videoPlaybackContext.disablePlayback == true
+		local var69, var70 = reactModule.useState(false)
+		var61 = var69
+		local var71 = var70
+		var62 = reactModule.useCallback(function(p4) --[[ line: 473 ]]
+			-- upvalues: var71 (write)
+			var71(p4)
+		end, {})
+		var63 = if p0.entry.primaryWideVideoAssetId then p0.entry.primaryWideVideoAssetId else var31 and (var31.primaryMediaAsset and var31.primaryMediaAsset.wideVideoAssetId)
+		
+		if fFlagLuaAppGameTileSelectionVideoPlayback then
+			local var72, var73 = reactModule.useState(false)
+			var64 = var72
+			local var74 = var73
+			var65 = reactModule.useCallback(function(...) --[[ line: 483 ]]
+				-- upvalues: var74 (write), p0 (ref)
+				var74(true)
+				
+				if p0.onSelectionGained then
+					p0.onSelectionGained(...)
+				end
+			end, { p0.onSelectionGained })
+			var66 = reactModule.useCallback(function(...) --[[ line: 491 ]]
+				-- upvalues: var74 (write), p0 (ref)
+				var74(false)
+				
+				if p0.onSelectionLost then
+					p0.onSelectionLost(...)
+				end
+			end, { p0.onSelectionLost })
+		end
+		if not fFlagLuaAppGameTileSelectionVideoPlayback then
+			var68 = if fFlagLuaAppEdpMediaGalleryVideoPreview then usePreferredInput() else nil
+		end
+		reactModule.useEffect(function() --[[ line: 504 ]]
+			-- upvalues: var67 (write), var71 (write)
+			if var67 then
+				var71(false)
+			end
+		end, { var67 })
+	end
+	local var75 = fFlagLuaAppEmphasisGameTileVideo and var63 ~= nil
+	useTagAsViewportAutoplayCandidate(if fFlagLuaAppEmphasisGameTileVideo then var39 else var60, p0.videoPlaybackContext, if fFlagLuaAppTileVideoCandidateOnly then if fFlagLuaAppEmphasisGameTileVideo then var75 else false else nil)
+	local var76 = nil
+	local var77 = nil
+	
+	if fFlagLuaAppEmphasisGameTileVideo then
+		var76 = if var75 then reactModule.createElement(gameTileVideoThumbnailModule, {
+			looped = true,
+			ZIndex = -2,
+			video = `rbxassetid://{var63}`,
+			image = var35,
+			playing = var61,
+			Size = UDim2.fromScale(1, 1),
+			isTileContained = isContained,
+			cornerRadius = var26.Radius.Medium,
+			itemIndex = p0.index,
+			videoAnalytics = p0.videoAnalytics,
+			universeId = universeId,
+			videoPlaybackCoordinator = var41
+		}) else nil
+		
+		if var75 and not var67 then
+			local var80
+			local createElement = reactModule.createElement
+			local var78 = gameVideoPlaybackDetectorModule
+			local t = {
+				videoKey = var40,
+				itemIndex = p0.index,
+				universeId = tostring(universeId),
+				tileRef = var39,
+				isHoverSupported = var38,
+				isHovered = var40,
+				isSelected = if fFlagLuaAppGameTileSelectionVideoPlayback then var64 else nil
+			}
+			
+			if fFlagLuaAppGameTileSelectionVideoPlayback then
+				var80 = nil
+			elseif fFlagLuaAppEdpMediaGalleryVideoPreview then
+				var80 = var68 == responsiveModule.Input.Touch
+				var80 = nil
+			else
+				var80 = nil
+			end
+			t.autoplay = var80
+			t.onPlaybackChange = var62
+			t.videoAnalytics = p0.videoAnalytics
+			t.videoDwellTimeInSec = fIntLuaAppGameTileVideoDwellTimeInSec
+			t.videoVisiblePercent = fIntLuaAppGameTileVideoVisiblePercent
+			t.pageContext = p0.appPage
+			t.videoPlaybackContext = p0.videoPlaybackContext
+			var77 = createElement(var78, t)
+		else
+			var77 = nil
+		end
+	end
+	local var81 = nil
+	local var82 = getTileBadgeByPositionConfigFromEntryModule(p0.entry)
+	
+	if var82 then
+		var81 = reactModule.createElement(gameTileThumbnailBadgesModule, { tileBadgesByPosition = var82 })
 	end
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -265,35 +403,37 @@ return function(p0) --[[ line: 92 ]]
 			Position = UDim2.fromScale(0, 0),
 			Size = p0.size,
 			BackgroundTransparency = 1,
-			ref = var55,
-			[reactModule.Change.AbsoluteSize] = function(p4) --[[ line: 437 ]]
-				-- upvalues: var53 (ref)
-				var53(p4.AbsoluteSize)
+			ref = var60,
+			[reactModule.Change.AbsoluteSize] = function(p5) --[[ line: 584 ]]
+				-- upvalues: var58 (ref)
+				var58(p5.AbsoluteSize)
 			end
 		}, {
 			GameTileView = reactModule.createElement(gameTileViewModule, {
 				numLinesForTitle = 1,
 				isUnifiedGameTile = true,
 				hidePlayButton = true,
-				forwardRef = var35,
+				forwardRef = var39,
 				SelectionOrder = p0.SelectionOrder,
 				isDisabled = p0.isDisabled,
-				onActivated = var37,
-				onSelectionGained = p0.onSelectionGained,
-				onSelectionLost = p0.onSelectionLost,
-				image = var31,
-				title = var33,
-				numLinesForMetadata = var47,
-				isHovered = var36,
-				footerMetadata = var51,
+				onActivated = var42,
+				onSelectionGained = if fFlagLuaAppEmphasisGameTileVideo and fFlagLuaAppGameTileSelectionVideoPlayback then var65 else p0.onSelectionGained,
+				onSelectionLost = if fFlagLuaAppEmphasisGameTileVideo and fFlagLuaAppGameTileSelectionVideoPlayback then var66 else p0.onSelectionLost,
+				image = var35,
+				thumbnailComponent = if fFlagLuaAppEmphasisGameTileVideo then var76 else nil,
+				title = var37,
+				numLinesForMetadata = var52,
+				isHovered = var40,
+				footerMetadata = var56,
 				imageAspectRatio = imageAspectRatio,
 				isContained = isContained,
-				extraFooterContent = if showDescription then nil else var50,
-				extraFooterSpace = if showDescription then nil else var54,
+				extraFooterContent = if showDescription then nil else var55,
+				extraFooterSpace = if showDescription then nil else var59,
 				reducedMotion = userGameSettingsService.ReducedMotion,
-				thumbnailOverlay = var56,
+				thumbnailOverlay = var81,
 				onTileImageLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p0.onTileImageLoaded else nil
-			})
+			}),
+			VideoPlaybackDetector = if fFlagLuaAppEmphasisGameTileVideo then var77 else nil
 		})
 	})
 end

@@ -326,6 +326,7 @@
 	FFlagAXFixWidgetHydrationPermanentPrice = require(script.FFlagAXFixWidgetHydrationPermanentPrice),
 	FFlagAXFixBadgeStatusConfigOptions = require(script.FFlagAXFixBadgeStatusConfigOptions),
 	FFlagAXHideEmptySponsoredRow = require(script.FFlagAXHideEmptySponsoredRow),
+	FFlagAXFixEmptyCatalogSearchChrome = require(script.FFlagAXFixEmptyCatalogSearchChrome),
 	FFlagAXCatalogItemInformationPopover = require(script.FFlagAXCatalogItemInformationPopover),
 	FFlagPurchasePromptCartPricingSkipFreeItems = require(script.FFlagPurchasePromptCartPricingSkipFreeItems),
 	FFlagPurchasePromptCartPricingSkipLimitedCollectibles = require(script.FFlagPurchasePromptCartPricingSkipLimitedCollectibles),
