@@ -260,9 +260,7 @@ Authentication.CrossDevice.Label.QrCodeError,เรากำลังประ�
 Authentication.CrossDevice.Label.QrCodeLogin,ลงชื่อเข้าใช้ด้วยรหัส QR
 Authentication.CrossDevice.Label.QrHeader,ตัวเลือกที่ 1
 Authentication.CrossDevice.Label.QrInstructions,สแกนรหัส QR นี้ด้วยกล้องของอุปกรณ์ที่ลงชื่อเข้าใช้อยู่ของคุณ
-Authentication.CrossDevice.Label.QrTroubleshooting,หากประสบปัญหา
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,ไปที่ <b>roblox.com/quest</b> บนคอมพิวเตอร์หรือโทรศัพท์ของคุณเพื่อกรอกรหัสนี้แล้วลงชื่อเข้าใช้ให้เสร็จสิ้น
-Authentication.CrossDevice.Label.QuickSignInInstructions,สแกนรหัส QR หรือใช้อุปกรณ์ที่คุณลงชื่อเข้าใช้อยู่ ไปที่ <b>เพิ่มเติม > ลงชื่อเข้าใช้ด่วน</b> แล้วกรอกรหัส
 Authentication.CrossDevice.Label.QuickSignInWarning,เพื่อความปลอดภัย โปรดกรอกเฉพาะรหัสที่สร้างขึ้นจากอุปกรณ์ใหม่ของคุณเท่านั้น
 Authentication.CrossDevice.Label.SigninInstructionHeading,หากต้องการลงชื่อเข้าใช้เป็น {username} บนอุปกรณ์ใหม่:
 Authentication.CrossDevice.Label.SigninInstructionOne,1. ใช้อุปกรณ์ใหม่เปิดหน้าลงชื่อเข้าใช้
@@ -278,6 +276,7 @@ Authentication.Login.Action.ConnectionError.RetryWait,ลองอีกคร�
 Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,ดาวน์โหลดตอนนี้
 Authentication.Login.Action.EmailACode,ส่งรหัสทางอีเมล
+Authentication.Login.Action.EmailMeCode,ส่งรหัสให้ฉันทางอีเมล
 Authentication.Login.Action.EmailOtpWaitTime,ส่งรหัสอีกครั้งในอีก {WaitTime} วินาที
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,ลืมรหัสผ่านหรือชื่อผู้ใช้ใช่ไหม?
 Authentication.Login.Action.ForgotUsername,ลืมชื่อผู้ใช้ใช่ไหม?
@@ -307,7 +306,6 @@ Authentication.Login.Description.SigningInWith,กำลังลงชื่อ
 Authentication.Login.Description.VerificationCodeSentTo,หากมีบัญชี Roblox คุณจะได้รับรหัสการตรวจสอบยืนยันที่ {email}
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
-Authentication.Login.Heading.EnterPassword,กรอกรหัสผ่าน
 Authentication.Login.Heading.EnterYourCode,กรอกรหัสของคุณ
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
 Authentication.Login.Heading.Login,
@@ -336,7 +334,8 @@ Authentication.Login.Label.EnterEmail,กรอกอีเมล
 Authentication.Login.Label.EnterHere,กรอกที่นี่
 Authentication.Login.Label.EnterOneTimeCode,กรอกรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,กรอกรหัสที่เราเพิ่งส่งไปยังอีเมลของคุณ
-Authentication.Login.Label.EnterPassword,
+Authentication.Login.Label.EnterPassword,กรอกรหัสผ่าน
+Authentication.Login.Label.EnterYourPassword,กรอกรหัสผ่านของคุณ
 Authentication.Login.Label.ForgotYourPassword,ลืมรหัสผ่านหรือไม่?
 Authentication.Login.Label.GetOneTimeCode,รับรหัสแบบใช้ครั้งเดียว
 Authentication.Login.Label.LearnMore,เรียนรู้เพิ่มเติม
@@ -2139,6 +2138,7 @@ Feature.Build.Action.ViewUsage,ดูการใช้งาน
 Feature.Build.Content.NewGame,เกมใหม่
 Feature.Build.Description.ArchiveRemoval,หากเก็บเกมนี้ถาวร เกมจะถูกลบออกจาก Build แต่คุณยังสามารถเข้าถึงและกู้คืนเกมได้จากศูนย์กลางครีเอเตอร์หรือ Roblox Studio
 Feature.Build.Description.AutoBuyUsage,ใช้ Robux ของคุณเพื่อซื้อโควต้าการใช้งาน Build เพิ่มเติมโดยอัตโนมัติในขณะที่คุณสร้าง คุณสามารถกำหนดวงเงินใช้จ่ายต่อวันได้ตลอดเวลา
+Feature.Build.Description.BoostGameAudience,เพิ่มกลุ่มเป้าหมายของเกมคุณ
 Feature.Build.Description.BuildIdeaGame,เปลี่ยนไอเดียของคุณให้เป็นเกม
 Feature.Build.Description.BuildReplyNotif,รับการแจ้งเตือนเมื่อ Build ตอบคุณ
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
@@ -2149,6 +2149,7 @@ Feature.Build.Description.FriendsLinkOnly,มีเพียงเพื่อ�
 Feature.Build.Description.GameCreationDone,ฉันสร้างและเผยแพร่เกมของคุณเรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
 Feature.Build.Description.GameSavedPlaytest,ฉันสร้างเกมของคุณและบันทึกเวอร์ชันใหม่เรียบร้อยแล้ว คุณสามารถเปิดเพื่อทดลองเล่นได้
 Feature.Build.Description.HubSettings,จัดการการตั้งค่าทั้งหมดในศูนย์กลางครีเอเตอร์
+Feature.Build.Description.InviteFriendLimit,เลือกเพื่อนได้สูงสุด {MAX_INVITES} คน จากนั้นแชร์ลิงก์ไปยังเกม
 Feature.Build.Description.MakeAudienceAvail,เผยแพร่ประสบการณ์ของคุณเพื่อให้กลุ่มเป้าหมายนี้สามารถใช้งานได้
 Feature.Build.Description.ManageAppearance,จัดการวิธีแสดงเกมของคุณให้ผู้อื่นเห็น
 Feature.Build.Description.PlayAfterPublish,เลือกผู้ที่สามารถเล่นได้หลังจากที่คุณเผยแพร่ประสบการณ์นี้
@@ -2159,6 +2160,7 @@ Feature.Build.Description.PrivateShare,เปลี่ยนการตั้�
 Feature.Build.Description.RaiseLimitOrWait,เพิ่มวงเงิน Robux รายวันของคุณเพื่อสร้างต่อ หรือรอให้รีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.RatingAgreement,การเผยแพร่จะถือว่าคุณยอมรับว่าการจัดระดับเนื้อหานี้ถูกต้อง
 Feature.Build.Description.RestoreLatest,เวอร์ชันนี้จะกลายเป็นเวอร์ชันที่เผยแพร่ล่าสุดของคุณ
+Feature.Build.Description.RevertToVersion,ยืนยันเพื่อย้อนการเปลี่ยนแปลงล่าสุดและกลับไปใช้เวอร์ชัน {VERSION}
 Feature.Build.Description.VersionChanges,บอกผู้เล่นว่าเวอร์ชันนี้มีอะไรเปลี่ยนแปลงไปบ้าง
 Feature.Build.Header.AccessSharing,การเข้าถึงและการแชร์
 Feature.Build.Header.ContentMaturity,ระดับความเหมาะสมของเนื้อหา
@@ -2167,6 +2169,7 @@ Feature.Build.Header.GameDetails,รายละเอียดเกม
 Feature.Build.Header.Overview,ภาพรวม
 Feature.Build.Label.Access,การเข้าถึง
 Feature.Build.Label.AdditionalUsage,โควต้าการใช้งาน Build เพิ่มเติม
+Feature.Build.Label.AdditionalUsed,ใช้ไปแล้ว {USED} จาก {LIMIT}
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,บันทึกอัตโนมัติ
 Feature.Build.Label.Available,พร้อมใช้งาน
@@ -2174,6 +2177,7 @@ Feature.Build.Label.BackToBuild,ย้อนกลับไปยังการ
 Feature.Build.Label.Building,กำลังสร้าง...
 Feature.Build.Label.CaptureLibrary,คลังภาพที่จับไว้
 Feature.Build.Label.ContentRating,การจัดระดับความเหมาะสมของเนื้อหา
+Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
@@ -2184,14 +2188,17 @@ Feature.Build.Label.FreeBuildUsage,โควต้าการใช้งาน
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
+Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,จำกัด
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
 Feature.Build.Label.Pending,รอดำเนินการ
+Feature.Build.Label.PercentUsed,ใช้ไปแล้ว {PERCENT}%
 Feature.Build.Label.PreviouslyPublished,เผยแพร่ไปก่อนหน้านี้
 Feature.Build.Label.Private,ส่วนตัว
 Feature.Build.Label.Public,สาธารณะ
@@ -2199,6 +2206,8 @@ Feature.Build.Label.PubliclyUnavailable,ไม่สามารถเข้า�
 Feature.Build.Label.Published,เผยแพร่แล้ว
 Feature.Build.Label.Ready,พร้อม
 Feature.Build.Label.ResetsDaily,รีเซ็ตทุกวัน
+Feature.Build.Label.RestoredVersion,กู้คืน {VERSION} แล้ว
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,ค้นหาเกม
 Feature.Build.Label.SearchTasks,ค้นหางาน
@@ -2268,9 +2277,16 @@ Feature.Build.Label.ToolTasksPlanRunning,กำลังวางแผนงา
 Feature.Build.Label.ToolThumbnailDone,ตั้งค่าภาพขนาดย่อของเกมแล้ว
 Feature.Build.Label.ToolThumbnailFailed,ไม่สามารถตั้งค่าภาพขนาดย่อของเกมได้
 Feature.Build.Label.ToolThumbnailRunning,กำลังตั้งค่าภาพขนาดย่อของเกม
+Feature.Build.Label.UniverseNumber,ยูนิเวิร์ส {UNIVERSE_ID}
 Feature.Build.Label.Unknown,ไม่ทราบ
+Feature.Build.Label.UnlimitedUsed,ใช้ไปแล้ว {USED} • ไม่จำกัด
 Feature.Build.Label.Usage,โควต้าการใช้งาน
+Feature.Build.Label.UsageUsed,ใช้ไปแล้ว {USED}
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,ชื่อและคำอธิบายเวอร์ชัน
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,บัญชีของคุณมีคุณสมบัติไม่ตรงตามข้อกำหนดในการใช้ Build
@@ -2286,10 +2302,12 @@ Feature.Build.Message.BuildResponseFailed,Build ไม่ตอบสนอง �
 Feature.Build.Message.BuildStillWorking,กำลังดำเนินการ คุณสามารถออกจากแอป เล่น Roblox หรือเริ่มโปรเจกต์อื่นระหว่างรอได้
 Feature.Build.Message.BuildStopped,คุณหยุด Build แล้ว
 Feature.Build.Message.BuildTemporarilyDown,ไม่สามารถใช้ Build ได้ชั่วคราว โปรดลองอีกครั้งในอีกสักครู่
+Feature.Build.Message.CompletedTasks,{COUNT} งานที่เสร็จแล้ว
 Feature.Build.Message.ConversationGone,การสนทนานี้ใช้ไม่ได้อีกต่อไป โปรดเริ่มการสนทนาใหม่
 Feature.Build.Message.ConversationNotFound,ไม่พบการสนทนานี้ โปรดเริ่มการสนทนาใหม่
 Feature.Build.Message.CreateGameToUseBuild,สร้างเกมใหม่เพื่อเริ่มใช้ Build
 Feature.Build.Message.CreatedRevertedVer,สร้างเวอร์ชันที่แปลงกลับแล้ว
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,ขยายคุณสมบัติของกลุ่มเป้าหมายของคุณในศูนย์กลางครีเอเตอร์
 Feature.Build.Message.ExperiencesLoadFailed,ไม่สามารถโหลดประสบการณ์ได้
 Feature.Build.Message.FailedTitle,{TITLE}ไม่สำเร็จ
@@ -2297,32 +2315,45 @@ Feature.Build.Message.FinishedTitle,{TITLE}เสร็จแล้ว
 Feature.Build.Message.FriendsLoadFailed,ไม่สามารถโหลดเพื่อนได้ โปรดลองอีกครั้ง
 Feature.Build.Message.GameNotCreated,สร้างเกมของคุณไม่สำเร็จ โปรดลองอีกครั้ง
 Feature.Build.Message.GamePublishFailed,ไม่สามารถเผยแพร่เกมของคุณได้ โปรดลองอีกครั้ง
+Feature.Build.Message.GameShared,แชร์เกมแล้ว
+Feature.Build.Message.GameSharedWith,แชร์เกมกับ {DISPLAY_NAME} แล้ว
+Feature.Build.Message.HiDisplayName,สวัสดี {DISPLAY_NAME}
 Feature.Build.Message.InvalidMessage,มีปัญหาบางอย่างเกิดขึ้นกับข้อความของคุณ โปรดแก้ไขแล้วลองอีกครั้ง
 Feature.Build.Message.InvitesLoadFailed,ไม่สามารถโหลดคำเชิญได้
+Feature.Build.Message.LimitBelowSpend,วงเงินต้องไม่น้อยกว่า {ALREADY_SPENT} Robux ที่ใช้ไปแล้วในวันนี้
 Feature.Build.Message.LinkCopied,คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว
 Feature.Build.Message.LoadingVersions,กำลังโหลดประวัติเวอร์ชัน...
 Feature.Build.Message.NoDescriptionProvided,ไม่มีคำอธิบาย
 Feature.Build.Message.NoFriendsToAdd,คุณยังไม่มีเพื่อนให้เพิ่ม ลองหาคนที่จะเชื่อมต่อด้วยบน Roblox ก่อน
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,ยังไม่มีประวัติเวอร์ชัน
+Feature.Build.Message.OneTaskCompleted,เสร็จแล้ว 1 งาน
 Feature.Build.Message.OutOfBuildUsage,คุณใช้โควต้าการใช้งาน Build หมดแล้ว ดูตัวเลือกของคุณเพื่อใช้ Robux สร้างต่อ
+Feature.Build.Message.PlaytestersAdded,เพิ่มผู้ทดสอบเกมไป {INVITED_COUNT} จาก {MAX_INVITES} คนแล้ว
 Feature.Build.Message.PublicPublishFailed,เผยแพร่เกมของคุณแล้ว แต่ไม่สามารถตั้งค่าเป็นสาธารณะได้ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishExpandAudience,เผยแพร่เพื่อขยายกลุ่มเป้าหมายของคุณ
 Feature.Build.Message.PublishNotReverted,ย้อนกลับการเผยแพร่ของคุณไม่สำเร็จ โปรดลองอีกครั้ง
 Feature.Build.Message.PublishReverted,แปลงการเผยแพร่กลับแล้ว
 Feature.Build.Message.QuestionnaireNeeded,เกมนี้ได้รับการแก้ไขนอก Build กรอกแบบสอบถามเกี่ยวกับเนื้อหาให้ครบถ้วนเพื่อเผยแพร่
 Feature.Build.Message.ReadyToPlay,เกมของคุณพร้อมให้เล่นบน Roblox แล้ว!
+Feature.Build.Message.ResetHours,รีเซ็ตใน {HOURS} ชั่วโมง
+Feature.Build.Message.ResetOneHour,รีเซ็ตใน 1 ชั่วโมง
 Feature.Build.Message.RestoreVersionFailed,ไม่สามารถกู้คืนเวอร์ชันนี้ได้ โปรดลองอีกครั้ง
 Feature.Build.Message.RevertVersionFail,สร้างเวอร์ชันที่แปลงกลับไม่สำเร็จ โปรดลองอีกครั้ง
 Feature.Build.Message.RunningTitle,กำลังดำเนินการ{title}
 Feature.Build.Message.SafetyPolicy,ข้อความนี้ขัดต่อนโยบายความปลอดภัยของเรา โปรดแก้ไขแล้วลองอีกครั้ง
 Feature.Build.Message.SaveChangesFailed,ไม่สามารถบันทึกการเปลี่ยนแปลงได้ โปรดลองอีกครั้ง
+Feature.Build.Message.ShareExperience,แชร์ {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,ไม่สามารถสร้างลิงก์สำหรับแชร์ได้ โปรดลองอีกครั้ง
 Feature.Build.Message.SignedOut,คุณออกจากระบบแล้ว โปรดลงชื่อเข้าใช้แล้วลองอีกครั้ง
+Feature.Build.Message.TasksCompleted,เสร็จแล้ว {NUM_COMPLETED_TASKS} งาน
+Feature.Build.Message.ThinkingSeconds,ใช้เวลาคิดไป {SECONDS} วินาที
 Feature.Build.Message.TryAgain,
 Feature.Build.Message.TurnToPortrait,หมุนอุปกรณ์ของคุณเป็นแนวตั้งเพื่อพัฒนาเกมของคุณต่อ
 Feature.Build.Message.VersionHistoryLoad,ไม่สามารถโหลดประวัติเวอร์ชันได้
 Feature.Build.Message.WhatToCreate,วันนี้คุณอยากสร้างอะไร?
+Feature.Build.Message.WorkedMinutesSeconds,ใช้เวลาทำงานไป {MINUTES} นาที {REM_SECONDS} วินาที
+Feature.Build.Message.WorkedSeconds,ใช้เวลาทำงานไป {SECONDS} วินาที
 Feature.Build.Message.WorkingOnTasks,กำลังทำงานของคุณ
 Feature.Build.Title.AddFriendsToPlaytest,เพิ่มเพื่อนที่จะช่วยคุณทดลองเล่น
 Feature.Build.Title.ArchiveThisGame,เก็บเกมนี้ถาวรใช่ไหม?
@@ -2344,12 +2375,14 @@ Feature.Build.Title.GenericError,มีบางอย่างผิดปก�
 Feature.Build.Title.NoRobuxForUsage,ไม่มี Robux เหลือสำหรับโควต้าการใช้งาน Build
 Feature.Build.Title.Playtesters,ผู้ทดลองเล่น
 Feature.Build.Title.PlaytestersOnlyPlay,เฉพาะผู้ทดลองเล่นเท่านั้นที่เล่นได้
+Feature.Build.Title.PromoteGameFree,โปรโมตเกมของคุณฟรี
 Feature.Build.Title.PushNotifications,การแจ้งเตือนแบบพุช
 Feature.Build.Title.RevertLastChange,แปลงกลับการเปลี่ยนแปลงล่าสุดไหม?
 Feature.Build.Title.Tasks,งาน
 Feature.Build.Title.TurnActivity,เปลี่ยนกิจกรรม
 Feature.Build.Title.VersionHistory,ประวัติเวอร์ชัน
 Feature.Build.Title.VersionInformation,ข้อมูลเวอร์ชัน
+Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,ไม่ล่ะ ขอบคุณ
@@ -3027,6 +3060,7 @@ Feature.Durables.TimeRemaining.Minutes,{number} นาที
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} วัน (เริ่มหลังจากซื้อเสร็จ)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,หากต้องการรายงานเกี่ยวกับเนื้อหาที่ผิดกฎหมายภายใต้กฎหมายการให้บริการดิจิทัล (DSA) ของสหภาพยุโรป โปรดไปที่: https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,ไม่มีการเชื่อมต่ออินเทอร์เน็ต
+Feature.EnhancedVideo.Label.Ad,
 Feature.ExperienceDetails.Action.ExitFullScreen,ออกจากโหมดเต็มหน้าจอ
 Feature.ExperienceDetails.Action.FullScreen,เต็มหน้าจอ
 Feature.ExperienceDetails.Action.Mute,
@@ -3575,6 +3609,20 @@ Feature.Home.Experiment.Reminders.ViolationThreatsOrAbuseOfRobloxEmployeesOrAffi
 Feature.Home.Experiment.Reminders.ViolationTrademark,
 Feature.Home.Experiment.Reminders.ViolationViolentContentAndGore,เนื้อหารุนแรงและนองเลือด
 Feature.Home.Experiment.Reminders.ViolationVirtualCasino,คาสิโนเสมือน
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Modified,เพื่อไม่ให้สูญเสียการเข้าถึงการแชท โปรดเก็บข้อมูลส่วนบุคคลของคุณไว้เป็นความลับ
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Warning,เราต้องเปลี่ยนหรือบล็อคบางข้อความของคุณ โปรดจำไว้ว่าให้เก็บข้อมูลส่วนบุคคลของคุณไว้เป็นความลับ
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Modified,เพื่อไม่ให้สูญเสียการเข้าถึงการแชท โปรดส่งข้อความอย่างให้เกียรติกันเสมอ
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Warning,เราต้องเปลี่ยนหรือบล็อคบางข้อความของคุณ โปรดจำไว้ว่าให้ส่งข้อความอย่างให้เกียรติกันเสมอ
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Modified,เพื่อไม่ให้สูญเสียการเข้าถึงการแชท โปรดอย่าพูดถึงเรื่องชู้สาวหรือการออกเดท
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Warning,เราต้องเปลี่ยนหรือบล็อคบางข้อความของคุณ โปรดจำไว้ว่าอย่าพูดถึงเรื่องชู้สาวหรือการออกเดท
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Modified,เพื่อไม่ให้สูญเสียการเข้าถึงการแชท โปรดส่งแต่ละข้อความเพียงครั้งเดียวเท่านั้น
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Warning,เราต้องเปลี่ยนหรือบล็อคบางข้อความของคุณ โปรดจำไว้ว่าให้ส่งแต่ละข้อความเพียงครั้งเดียวเท่านั้น
+Feature.Home.Experiment.TextFilterEducation.General.Title.Warning,อีกนิดเดียวคุณจะเสียสิทธิ์ในการแชท
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Pii,โปรดจำไว้ว่าให้เก็บชื่อ โรงเรียน และที่อยู่ของคุณไว้เป็นความลับ
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Respect,โปรดจำไว้ว่าให้ใช้คำพูดที่สุภาพเสมอ
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Spam,โปรดจำไว้ว่าให้ส่งแต่ละข้อความเพียงครั้งเดียวเท่านั้น
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Modified,เราต้องเปลี่ยนหรือบล็อคบางข้อความของคุณ
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Warning,แชทของคุณอาจหายไป
 Feature.Home.Heading.JoinYourFriends,
 Feature.Home.HeadingFriends,เพื่อน ({friendCount} คน)
 Feature.Home.Label.HappeningNow,จัดกิจกรรมอยู่ในตอนนี้
@@ -4266,6 +4314,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,สถิติ
 Feature.Profile.Heading.Username,

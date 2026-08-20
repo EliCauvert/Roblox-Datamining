@@ -261,9 +261,7 @@ Authentication.CrossDevice.Label.QrCodeError,"Stiamo avendo problemi a visualizz
 Authentication.CrossDevice.Label.QrCodeLogin,Codice QR Log In
 Authentication.CrossDevice.Label.QrHeader,Opzione 1
 Authentication.CrossDevice.Label.QrInstructions,Scansiona questo codice QR dalla telecamera del dispositivo di accesso.
-Authentication.CrossDevice.Label.QrTroubleshooting,Stai avendo problemi?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Vai a <b>roblox.com/quest</b> sul tuo computer o telefono per inserire questo codice e completare il login.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Scansiona il codice QR o, sul dispositivo da cui hai effettuato l'accesso, vai su <b>Altro > Accesso rapido</b> e inserisci il codice."
 Authentication.CrossDevice.Label.QuickSignInWarning,"Per motivi di sicurezza, inserisci solo i codici che hai generato dal tuo nuovo dispositivo."
 Authentication.CrossDevice.Label.SigninInstructionHeading,Per accedere come {username} su un nuovo dispositivo:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. Sul nuovo dispositivo, apri la pagina di accesso"
@@ -279,6 +277,7 @@ Authentication.Login.Action.ConnectionError.RetryWait,Riprova in: {WaitTime}
 Authentication.Login.Action.Continue,Prosegui
 Authentication.Login.Action.DownloadNow,Scarica ora
 Authentication.Login.Action.EmailACode,Invia un codice via email
+Authentication.Login.Action.EmailMeCode,Inviami un codice via email
 Authentication.Login.Action.EmailOtpWaitTime,Invia nuovamente il codice in {WaitTime}
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Hai dimenticato la password o il nome utente?
 Authentication.Login.Action.ForgotUsername,Hai dimenticato il tuo nome utente?
@@ -308,7 +307,6 @@ Authentication.Login.Description.SigningInWith,Accesso con <b>{identifier}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Se esiste un account Roblox associato, riceverai un codice di verifica all'indirizzo {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Il tuo account dispone solo di una passkey configurata per l'accesso. Prova ad accedere con la passkey o ripristina l'account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossibile verificare l'account della piattaforma. Riprova più tardi.
-Authentication.Login.Heading.EnterPassword,Inserisci la password
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,Account incompatibili
 Authentication.Login.Heading.Login,Accesso
@@ -337,7 +335,8 @@ Authentication.Login.Label.EnterEmail,Inserisci email
 Authentication.Login.Label.EnterHere,Inserisci qui
 Authentication.Login.Label.EnterOneTimeCode,Inserisci Codice Unico
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Inserisci il codice che ti abbiamo inviato tramite email
-Authentication.Login.Label.EnterPassword,
+Authentication.Login.Label.EnterPassword,Inserisci la password
+Authentication.Login.Label.EnterYourPassword,Inserisci la tua password
 Authentication.Login.Label.ForgotYourPassword,Hai dimenticato la password?
 Authentication.Login.Label.GetOneTimeCode,Ottieni Il Codice Unico
 Authentication.Login.Label.LearnMore,Maggiori informazioni
@@ -1071,7 +1070,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Roblox genera automaticamen
 CoreScripts.TextChat.ChatWindow.Transcribing,Trascrizione in corso...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Non abbiamo capito! Riprova.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Non supportiamo ancora quella lingua!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, tocca qui per aggiornare le impostazioni del tuo dispositivo."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Per utilizzare il microfono, vai alle impostazioni del tuo dispositivo e concedi a Roblox l'autorizzazione ad accedervi."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Impossibile accedere al microfono
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Per inviare messaggi con la tua voce, elaboreremo il tuo audio e lo cancelleremo subito, in conformità con la nostra informativa sulla privacy."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Hai abilitato la chat vocale
@@ -2138,6 +2137,7 @@ Feature.Build.Action.ViewUsage,Visualizza utilizzo
 Feature.Build.Content.NewGame,Nuovo gioco
 Feature.Build.Description.ArchiveRemoval,"Se archivi questo gioco, verrà rimosso da Costruisci. Puoi ancora accedervi e ripristinarlo dall'Hub Creatore o da Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Usa i tuoi Robux per acquistare automaticamente un utilizzo aggiuntivo di Build mentre crei. Puoi impostare un limite di spesa giornaliero in qualsiasi momento.
+Feature.Build.Description.BoostGameAudience,Aumenta il pubblico del tuo gioco
 Feature.Build.Description.BuildIdeaGame,Trasforma le tue idee in un gioco
 Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha una risposta per te.
 Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
@@ -2148,6 +2148,7 @@ Feature.Build.Description.FriendsLinkOnly,Solo i tuoi amici possono accedere a q
 Feature.Build.Description.GameCreationDone,Ho completato la creazione e la pubblicazione del tuo gioco. Puoi aprirlo per eseguire il test di giocabilità.
 Feature.Build.Description.GameSavedPlaytest,Ho completato la creazione del tuo gioco e ho salvato una nuova versione. Puoi aprirlo per eseguire il test di giocabilità.
 Feature.Build.Description.HubSettings,Gestisci tutte le impostazioni sull'Hub Creatore.
+Feature.Build.Description.InviteFriendLimit,"Scegli fino a {MAX_INVITES} amici, poi condividi il link al gioco."
 Feature.Build.Description.MakeAudienceAvail,Pubblica la tua esperienza per renderla disponibile a questo pubblico.
 Feature.Build.Description.ManageAppearance,Gestisci il modo in cui il tuo gioco appare agli altri.
 Feature.Build.Description.PlayAfterPublish,Scegli chi può giocare a questa esperienza dopo la pubblicazione.
@@ -2158,6 +2159,7 @@ Feature.Build.Description.PrivateShare,Modifica l'impostazione Pubblico del tuo 
 Feature.Build.Description.RaiseLimitOrWait,Aumenta il tuo limite giornaliero di Robux per continuare a creare o attendi che venga ripristinato domani.
 Feature.Build.Description.RatingAgreement,"Pubblicando, confermi che questa classificazione dei contenuti è corretta."
 Feature.Build.Description.RestoreLatest,Questa versione diventerà la tua ultima versione pubblicata.
+Feature.Build.Description.RevertToVersion,Conferma per ripristinare l'ultima modifica e tornare a {VERSION}.
 Feature.Build.Description.VersionChanges,Spiega ai giocatori cosa è cambiato in questa versione.
 Feature.Build.Header.AccessSharing,Accesso e condivisione
 Feature.Build.Header.ContentMaturity,Maturità contenuti
@@ -2166,6 +2168,7 @@ Feature.Build.Header.GameDetails,Dettagli del gioco
 Feature.Build.Header.Overview,Panoramica
 Feature.Build.Label.Access,
 Feature.Build.Label.AdditionalUsage,Utilizzo aggiuntivo di Costruisci
+Feature.Build.Label.AdditionalUsed,{USED} di {LIMIT} utilizzato
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,Salvato automaticamente
 Feature.Build.Label.Available,disponibile
@@ -2173,6 +2176,7 @@ Feature.Build.Label.BackToBuild,Torna a Costruisci
 Feature.Build.Label.Building,Costruzione in corso...
 Feature.Build.Label.CaptureLibrary,Libreria delle acquisizioni
 Feature.Build.Label.ContentRating,Classificazione del contenuto
+Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Hub Creatore
 Feature.Build.Label.Deleted,Eliminato
 Feature.Build.Label.DescribeIdea,Descrivi un'idea
@@ -2183,14 +2187,17 @@ Feature.Build.Label.FreeBuildUsage,Utilizzo gratuito di Build
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Riservata agli amici
 Feature.Build.Label.GetMoreBuildUsage,Ottieni più utilizzo di Build
+Feature.Build.Label.Hi,Ciao
 Feature.Build.Label.IconThumbnails,Icona e miniature
 Feature.Build.Label.InProgress,In corso
 Feature.Build.Label.InputNeeded,Input necessario
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitata
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,Senza limiti
 Feature.Build.Label.NotStarted,Non iniziata
 Feature.Build.Label.Pending,In sospeso
+Feature.Build.Label.PercentUsed,{PERCENT}% utilizzata
 Feature.Build.Label.PreviouslyPublished,Pubblicato in precedenza
 Feature.Build.Label.Private,Privata
 Feature.Build.Label.Public,
@@ -2198,6 +2205,8 @@ Feature.Build.Label.PubliclyUnavailable,Non disponibile pubblicamente
 Feature.Build.Label.Published,Pubblicata
 Feature.Build.Label.Ready,Pronto
 Feature.Build.Label.ResetsDaily,Si ripristina giornalmente
+Feature.Build.Label.RestoredVersion,Ripristinato {VERSION}
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Cerca giochi
 Feature.Build.Label.SearchTasks,Cerca attività
@@ -2267,9 +2276,16 @@ Feature.Build.Label.ToolTasksPlanRunning,Pianificazione delle tue attività
 Feature.Build.Label.ToolThumbnailDone,Imposta miniatura del gioco
 Feature.Build.Label.ToolThumbnailFailed,Impossibile impostare la miniatura del gioco
 Feature.Build.Label.ToolThumbnailRunning,Impostazione miniatura del gioco in corso
+Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Sconosciuto
+Feature.Build.Label.UnlimitedUsed,{USED} utilizzati • Senza limiti
 Feature.Build.Label.Usage,Utilizzo
+Feature.Build.Label.UsageUsed,{USED} utilizzato
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Titolo e descrizione della versione
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Il tuo account non soddisfa i requisiti per l'utilizzo di Build.
@@ -2285,10 +2301,12 @@ Feature.Build.Message.BuildResponseFailed,Build non ha risposto. Riprova.
 Feature.Build.Message.BuildStillWorking,"Ci stiamo lavorando. Mentre aspetti, puoi uscire dall'app, giocare a Roblox o avviare un altro progetto."
 Feature.Build.Message.BuildStopped,Hai interrotto Build.
 Feature.Build.Message.BuildTemporarilyDown,Build è temporaneamente non disponibile. Riprova tra un minuto.
+Feature.Build.Message.CompletedTasks,{COUNT} attività completate
 Feature.Build.Message.ConversationGone,Questa conversazione non è più disponibile. Avvia una nuova conversazione.
 Feature.Build.Message.ConversationNotFound,Impossibile trovare questa conversazione. Avvia una nuova conversazione.
 Feature.Build.Message.CreateGameToUseBuild,Crea un nuovo gioco per iniziare a usare Build.
 Feature.Build.Message.CreatedRevertedVer,È stata creata una versione ripristinata.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Espandi l'idoneità del tuo pubblico sull'Hub Creatore
 Feature.Build.Message.ExperiencesLoadFailed,Impossibile caricare le esperienze
 Feature.Build.Message.FailedTitle,{TITLE} non riuscito
@@ -2296,32 +2314,45 @@ Feature.Build.Message.FinishedTitle,{TITLE} terminato
 Feature.Build.Message.FriendsLoadFailed,Impossibile caricare gli amici. Riprova.
 Feature.Build.Message.GameNotCreated,Il tuo gioco non è stato creato. Riprova.
 Feature.Build.Message.GamePublishFailed,Non è stato possibile pubblicare il gioco. Riprova.
+Feature.Build.Message.GameShared,Gioco condiviso
+Feature.Build.Message.GameSharedWith,Gioco condiviso con {DISPLAY_NAME}
+Feature.Build.Message.HiDisplayName,"Ciao, {DISPLAY_NAME}"
 Feature.Build.Message.InvalidMessage,Qualcosa è andato storto con il tuo messaggio. Modificalo e riprova.
 Feature.Build.Message.InvitesLoadFailed,Impossibile caricare gli inviti
+Feature.Build.Message.LimitBelowSpend,Il limite non può essere inferiore ai {ALREADY_SPENT} Robux già spesi oggi.
 Feature.Build.Message.LinkCopied,Link copiato negli appunti.
 Feature.Build.Message.LoadingVersions,Caricamento della cronologia delle versioni in corso...
 Feature.Build.Message.NoDescriptionProvided,Nessuna descrizione fornita.
 Feature.Build.Message.NoFriendsToAdd,Non hai ancora amici da aggiungere. Trova prima persone con cui connetterti su Roblox.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Non è ancora presente alcuna cronologia delle versioni.
+Feature.Build.Message.OneTaskCompleted,1 attività completata
 Feature.Build.Message.OutOfBuildUsage,Hai esaurito l'utilizzo di Costruisci. Visualizza le opzioni per utilizzare Robux e continuare a creare.
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} di {MAX_INVITES} playtester aggiunti
 Feature.Build.Message.PublicPublishFailed,"Il tuo gioco è stato pubblicato, ma non è stato possibile renderlo pubblico. Riprova."
 Feature.Build.Message.PublishExpandAudience,Pubblica per ampliare il tuo pubblico
 Feature.Build.Message.PublishNotReverted,La tua pubblicazione non è stata ripristinata. Riprova.
 Feature.Build.Message.PublishReverted,Pubblicazione ripristinata.
 Feature.Build.Message.QuestionnaireNeeded,Questo gioco è stato modificato al di fuori di Build. Compila il questionario sui contenuti per pubblicarlo.
 Feature.Build.Message.ReadyToPlay,Il tuo gioco è pronto per essere giocato su Roblox!
+Feature.Build.Message.ResetHours,Si ripristina tra {HOURS} ore
+Feature.Build.Message.ResetOneHour,Si ripristina tra 1 ora
 Feature.Build.Message.RestoreVersionFailed,Non è stato possibile ripristinare questa versione. Riprova.
 Feature.Build.Message.RevertVersionFail,Non è stata creata una versione ripristinata. Riprova.
 Feature.Build.Message.RunningTitle,{title} in esecuzione
 Feature.Build.Message.SafetyPolicy,Questo messaggio viola la nostra politica di sicurezza. Modificalo e riprova.
 Feature.Build.Message.SaveChangesFailed,Non è stato possibile salvare le modifiche. Riprova.
+Feature.Build.Message.ShareExperience,Condividi {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Non è stato possibile creare il link di condivisione. Riprova.
 Feature.Build.Message.SignedOut,Hai effettuato la disconnessione. Accedi e riprova.
+Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} attività completate
+Feature.Build.Message.ThinkingSeconds,Sto pensando da {SECONDS} sec
 Feature.Build.Message.TryAgain,
 Feature.Build.Message.TurnToPortrait,Passa il dispositivo in modalità verticale per continuare a lavorare al tuo gioco.
 Feature.Build.Message.VersionHistoryLoad,Impossibile caricare la cronologia versioni.
 Feature.Build.Message.WhatToCreate,Cosa vuoi creare oggi?
+Feature.Build.Message.WorkedMinutesSeconds,Ha lavorato per {MINUTES} m {REM_SECONDS} s
+Feature.Build.Message.WorkedSeconds,Ha lavorato per {SECONDS} sec
 Feature.Build.Message.WorkingOnTasks,Lavori in corso sulle tue attività
 Feature.Build.Title.AddFriendsToPlaytest,Aggiungi gli amici che ti aiuteranno nel test di giocabilità
 Feature.Build.Title.ArchiveThisGame,Archiviare questo gioco?
@@ -2343,12 +2374,14 @@ Feature.Build.Title.GenericError,Si è verificato un errore
 Feature.Build.Title.NoRobuxForUsage,Nessun Robux rimasto per l'utilizzo di Build
 Feature.Build.Title.Playtesters,Tester di gioco
 Feature.Build.Title.PlaytestersOnlyPlay,Solo i playtester possono giocare
+Feature.Build.Title.PromoteGameFree,Promuovi il tuo gioco gratuitamente
 Feature.Build.Title.PushNotifications,Notifiche push
 Feature.Build.Title.RevertLastChange,Ripristinare l'ultima modifica?
 Feature.Build.Title.Tasks,Attività
 Feature.Build.Title.TurnActivity,Gira attività
 Feature.Build.Title.VersionHistory,Cronologia versioni
 Feature.Build.Title.VersionInformation,Informazioni sulla versione
+Feature.Build.Title.VersionNumber,Versione {VERSION}
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,"No, grazie"
@@ -3026,6 +3059,7 @@ Feature.Durables.TimeRemaining.Minutes,{number}m
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} giorni (inizia dopo l'acquisto)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"Per segnalare contenuti illegali ai sensi della legge sui servizi digitali dell'UE, visita: https:// www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,Nessuna connessione a Internet
+Feature.EnhancedVideo.Label.Ad,
 Feature.ExperienceDetails.Action.ExitFullScreen,
 Feature.ExperienceDetails.Action.FullScreen,Schermo intero
 Feature.ExperienceDetails.Action.Mute,Silenzia
@@ -3574,6 +3608,20 @@ Feature.Home.Experiment.Reminders.ViolationThreatsOrAbuseOfRobloxEmployeesOrAffi
 Feature.Home.Experiment.Reminders.ViolationTrademark,
 Feature.Home.Experiment.Reminders.ViolationViolentContentAndGore,Violenza e scene cruente
 Feature.Home.Experiment.Reminders.ViolationVirtualCasino,Casinò virtuale
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Modified,"Per evitare di perdere l'accesso alla chat, non condividere le tue informazioni personali."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Warning,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi. Ricorda: non condividere le tue informazioni personali.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Modified,"Per evitare di perdere l'accesso alla chat, mantieni sempre un tono rispettoso nei messaggi."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Warning,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi. Ricorda: mantieni sempre un tono rispettoso nelle tue comunicazioni.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Modified,"Per evitare di perdere l'accesso alla chat, evita di parlare di relazioni o appuntamenti."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Warning,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi. Ricorda: evita di parlare di relazioni o appuntamenti.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Modified,"Per evitare di perdere l'accesso alla chat, invia ogni messaggio una sola volta."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Warning,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi. Ricorda: invia ogni messaggio una sola volta.
+Feature.Home.Experiment.TextFilterEducation.General.Title.Warning,Stai per perdere l'accesso alla chat
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Pii,"Ricorda: non divulgare a terzi il tuo nome, la scuola che frequenti e il luogo in cui vivi."
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Respect,Ricorda: usa sempre parole gentili.
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Spam,Ricorda: invia ogni messaggio una sola volta.
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Modified,Abbiamo dovuto modificare o bloccare alcuni dei tuoi messaggi
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Warning,Potresti perdere l'accesso alla chat
 Feature.Home.Heading.JoinYourFriends,Unisciti ai tuoi amici
 Feature.Home.HeadingFriends,Amici ({friendCount})
 Feature.Home.Label.HappeningNow,Sta accadendo ora
@@ -3669,6 +3717,8 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Espandi
 Feature.Moments.Action.GenerateText,Genera
+Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Non utile
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriato o in violazione delle linee guida
 Feature.Moments.Action.Hide,Nascondi dettagli
 Feature.Moments.Action.HowToCapture,Come usare Acquisisci
 Feature.Moments.Action.Join,
@@ -3686,6 +3736,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Ritaglia video
 Feature.Moments.Description.CommunityStandards,Consulta le norme della community per saperne di più su ciò che ti è permesso dire.
 Feature.Moments.Description.EmptyCapturesLibrary,Qui è dove appariranno le tue acquisizioni.
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,Testo generato dall'IA. Ricontrollalo prima di utilizzarlo: sei responsabile di ciò che viene pubblicato.
 Feature.Moments.Description.HowToCaptureStep1,Partecipa a un'esperienza con le acquisizioni abilitate e seleziona il menu a tre linee
 Feature.Moments.Description.HowToCaptureStep2,Abilita i controlli per l'acquisizione
 Feature.Moments.Description.HowToCaptureStep3,Acquisisci foto e video della partita
@@ -3746,6 +3797,7 @@ Feature.Moments.Label.TextGenerationFailedTitle,Generazione non riuscita
 Feature.Moments.Label.TextGenerationFilteredBody,Impossibile eseguire la generazione per questo video acquisito: contenuto filtrato.
 Feature.Moments.Label.TextGenerationFilteredTitle,Generazione filtrata
 Feature.Moments.Label.Videos,
+Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
 Feature.Moments.Title.ReportPost,Segnala post
@@ -4261,6 +4313,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Modifica nome
 Feature.Profile.Heading.EditDisplayName,Modifica Nome visualizzato
 Feature.Profile.Heading.InsufficientFunds,Fondi Insufficienti
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,Immagine del profilo salvata correttamente
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Statistiche
 Feature.Profile.Heading.Username,Nome Utente
@@ -4376,7 +4429,7 @@ Feature.ReportAbuse.Label.TellUsWhatHappened,Raccontaci cosa è successo. (Facol
 Feature.ReportAbuse.Label.TellUsWhatHappenedNoOptional,Raccontaci cosa è successo:
 Feature.ReportAbuse.Label.UserTextMuted,Abbiamo bloccato i messaggi di {name}
 Feature.ReportAbuse.Label.UserTextMutedError,Non ci è stato possibile bloccare i messaggi di {name}
-Feature.ReportAbuse.Label.WhatWasWrong,Cosa è andato storto?
+Feature.ReportAbuse.Label.WhatWasWrong,
 Feature.ReportAbuse.Label.WhereDidItHappen,Dov'è successo?
 Feature.ReportAbuse.Label.YourReportCode,Il tuo codice di segnalazione univoco:
 Feature.ReportAbuse.Message.ChatLineReportingInfoText,La tua segnalazione includerà tutti i messaggi in questo canale e non solo quelli da te selezionati.
@@ -4782,6 +4835,8 @@ Feature.Toast.VoteError.AssetNotVoteable,L'esperienza non può essere votata in 
 Feature.Toast.VoteError.Default,Azione non disponibile
 Feature.Toast.VoteError.FloodCheckThresholdMet,Stai votando troppo velocemente.
 Feature.Toast.VoteError.PlayGame,Devi visitare l'esperienza prima di poterla votare.
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Non puoi verificare la tua età in questo momento perché hai ripetutamente violato le nostre norme della community. Puoi riprovare al termine della restrizione.
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Verifiche dell'età sospese
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,Hai ricevuto un ban da questo gioco a causa di ripetute o gravi violazioni delle regole.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Non puoi giocare a questo gioco perché hai violato le regole.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox ti ha bandito da questo gioco

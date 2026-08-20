@@ -278,9 +278,7 @@ Authentication.CrossDevice.Label.QrCodeError,"QR 코드를 표시하는 데 문�
 Authentication.CrossDevice.Label.QrCodeLogin,QR 코드 로그인
 Authentication.CrossDevice.Label.QrHeader,옵션 1
 Authentication.CrossDevice.Label.QrInstructions,로그인 중인 기기의 카메라로 이 QR 코드를 스캔하세요.
-Authentication.CrossDevice.Label.QrTroubleshooting,문제가 발생했나요?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,컴퓨터나 휴대폰에서 <b>roblox.com/quest</b>로 이동해 이 코드를 입력하고 로그인을 완료하세요.
-Authentication.CrossDevice.Label.QuickSignInInstructions,QR 코드를 스캔하거나 로그인된 기기에서 <b>더 보기 > 빠른 로그인</b>으로 이동하여 코드를 입력하세요.
 Authentication.CrossDevice.Label.QuickSignInWarning,보안을 위해 새 기기에서 생성한 코드만 입력해 주세요.
 Authentication.CrossDevice.Label.SigninInstructionHeading,새로운 기기에서 {username} 계정으로 로그인하려면
 Authentication.CrossDevice.Label.SigninInstructionOne,1. 새로운 기기에서 로그인 페이지를 엽니다.
@@ -296,6 +294,7 @@ Authentication.Login.Action.ConnectionError.RetryWait,잠시 후 다시 시도: 
 Authentication.Login.Action.Continue,계속
 Authentication.Login.Action.DownloadNow,지금 다운로드
 Authentication.Login.Action.EmailACode,이메일로 로그인 코드 받기
+Authentication.Login.Action.EmailMeCode,이메일로 코드 받기
 Authentication.Login.Action.EmailOtpWaitTime,{WaitTime}초 후 코드 다시 보내기
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,비밀번호 또는 사용자 이름을 잊으셨나요?
 Authentication.Login.Action.ForgotUsername,사용자 이름을 잊어버리셨나요?
@@ -325,7 +324,6 @@ Authentication.Login.Description.SigningInWith,로그인 방법: <b>{identifier}
 Authentication.Login.Description.VerificationCodeSentTo,Roblox 계정이 있는 경우 이메일 주소({email})로 인증 코드가 전송됩니다.
 Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
 Authentication.Login.Error.PlatformAccountConnectionFailure,플랫폼 계정을 인증할 수 없습니다. 나중에 다시 시도하세요.
-Authentication.Login.Heading.EnterPassword,비밀번호 입력
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.IncompatibleAccounts,계정이 호환되지 않음
 Authentication.Login.Heading.Login,
@@ -355,6 +353,7 @@ Authentication.Login.Label.EnterHere,여기에 입력
 Authentication.Login.Label.EnterOneTimeCode,일회용 코드 입력
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,방금 이메일로 전송된 코드를 입력하세요
 Authentication.Login.Label.EnterPassword,비밀번호를 입력하세요.
+Authentication.Login.Label.EnterYourPassword,비밀번호를 입력하세요
 Authentication.Login.Label.ForgotYourPassword,비밀번호를 잊으셨나요?
 Authentication.Login.Label.GetOneTimeCode,일회용 코드 받기
 Authentication.Login.Label.LearnMore,더 알아보기
@@ -2157,6 +2156,7 @@ Feature.Build.Action.ViewUsage,사용량 보기
 Feature.Build.Content.NewGame,새 게임
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
 Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
+Feature.Build.Description.BoostGameAudience,게임의 오디언스 확대
 Feature.Build.Description.BuildIdeaGame,나만의 아이디어로 게임을 만들어 보세요
 Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알림을 받으세요.
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
@@ -2167,6 +2167,7 @@ Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 �
 Feature.Build.Description.GameCreationDone,게임 생성 및 게시가 완료되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
 Feature.Build.Description.GameSavedPlaytest,게임 생성이 완료되었으며 새 버전이 저장되었습니다. 게임을 열어 플레이테스트할 수 있습니다.
 Feature.Build.Description.HubSettings,크리에이터 허브에서 모든 설정을 관리하세요
+Feature.Build.Description.InviteFriendLimit,친구를 최대 {MAX_INVITES}명 선택한 후 게임 링크를 공유하세요.
 Feature.Build.Description.MakeAudienceAvail,이 대상에게 체험을 제공하려면 게시하세요.
 Feature.Build.Description.ManageAppearance,게임이 다른 사람에게 표시되는 방식을 관리하세요.
 Feature.Build.Description.PlayAfterPublish,이 체험을 게시한 후 플레이할 수 있는 사람을 선택하세요.
@@ -2177,6 +2178,7 @@ Feature.Build.Description.PrivateShare,게임을 공유하려면 게임의 대�
 Feature.Build.Description.RaiseLimitOrWait,"계속 제작하려면 일일 Robux 한도를 늘리거나, 내일 초기화될 때까지 기다리세요."
 Feature.Build.Description.RatingAgreement,게시하면 이 콘텐츠 등급이 정확하다는 데 동의하는 것으로 간주됩니다.
 Feature.Build.Description.RestoreLatest,이 버전이 최신 게시 버전이 됩니다.
+Feature.Build.Description.RevertToVersion,확인을 눌러 최신 변경 사항을 복구하고 {VERSION} 버전으로 돌아가세요.
 Feature.Build.Description.VersionChanges,이 버전에서 변경된 사항을 플레이어에게 알려주세요.
 Feature.Build.Header.AccessSharing,액세스 및 공유
 Feature.Build.Header.ContentMaturity,콘텐츠 수위
@@ -2185,6 +2187,7 @@ Feature.Build.Header.GameDetails,게임 세부 정보
 Feature.Build.Header.Overview,개요
 Feature.Build.Label.Access,액세스
 Feature.Build.Label.AdditionalUsage,추가 Build 사용량
+Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
@@ -2192,6 +2195,7 @@ Feature.Build.Label.BackToBuild,빌드로 돌아가기
 Feature.Build.Label.Building,제작 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
 Feature.Build.Label.ContentRating,콘텐츠 등급
+Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
@@ -2202,14 +2206,17 @@ Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
+Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
 Feature.Build.Label.Pending,보류 중
+Feature.Build.Label.PercentUsed,{PERCENT}% 사용됨
 Feature.Build.Label.PreviouslyPublished,이전에 게시됨
 Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
@@ -2217,6 +2224,8 @@ Feature.Build.Label.PubliclyUnavailable,공개적으로 이용 불가
 Feature.Build.Label.Published,게시됨
 Feature.Build.Label.Ready,준비
 Feature.Build.Label.ResetsDaily,매일 재설정
+Feature.Build.Label.RestoredVersion,{VERSION} 복원됨
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,게임 검색
 Feature.Build.Label.SearchTasks,작업 검색
@@ -2286,9 +2295,16 @@ Feature.Build.Label.ToolTasksPlanRunning,작업 계획 중
 Feature.Build.Label.ToolThumbnailDone,게임 섬네일 설정
 Feature.Build.Label.ToolThumbnailFailed,게임 섬네일을 설정하지 못함
 Feature.Build.Label.ToolThumbnailRunning,게임 섬네일 설정 중
+Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
+Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
 Feature.Build.Label.Usage,사용량
+Feature.Build.Label.UsageUsed,{USED} 사용됨
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,버전 이름 및 설명
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 요건을 충족하지 않습니다.
@@ -2304,10 +2320,12 @@ Feature.Build.Message.BuildResponseFailed,Build가 응답하지 않았습니다.
 Feature.Build.Message.BuildStillWorking,"작업 진행 중입니다. 기다리는 동안 앱을 종료하거나, Roblox를 플레이하거나, 다른 프로젝트를 시작할 수 있습니다."
 Feature.Build.Message.BuildStopped,Build를 중단했습니다.
 Feature.Build.Message.BuildTemporarilyDown,Build를 일시적으로 이용할 수 없습니다. 1분 후 다시 시도해 보세요.
+Feature.Build.Message.CompletedTasks,완료한 작업 {COUNT}개
 Feature.Build.Message.ConversationGone,이 대화는 더 이상 이용할 수 없습니다. 새 대화를 시작하세요.
 Feature.Build.Message.ConversationNotFound,이 대화를 찾지 못했습니다. 새 대화를 시작하세요.
 Feature.Build.Message.CreateGameToUseBuild,Build 사용을 시작하려면 새 게임을 만드세요.
 Feature.Build.Message.CreatedRevertedVer,되돌린 버전을 생성했습니다.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,크리에이터 허브에서 오디언스 자격을 확대하세요
 Feature.Build.Message.ExperiencesLoadFailed,체험을 불러오지 못함
 Feature.Build.Message.FailedTitle,{TITLE} 실패
@@ -2315,32 +2333,45 @@ Feature.Build.Message.FinishedTitle,{TITLE} 완료
 Feature.Build.Message.FriendsLoadFailed,친구를 불러오지 못했습니다. 다시 시도해 보세요.
 Feature.Build.Message.GameNotCreated,게임이 만들어지지 않았습니다. 다시 시도하세요.
 Feature.Build.Message.GamePublishFailed,게임을 게시하지 못했습니다. 다시 시도하세요.
+Feature.Build.Message.GameShared,게임 공유됨
+Feature.Build.Message.GameSharedWith,{DISPLAY_NAME} 님에게 게임 공유됨
+Feature.Build.Message.HiDisplayName,"{DISPLAY_NAME} 님, 안녕하세요"
 Feature.Build.Message.InvalidMessage,메시지에 문제가 발생했어요. 메시지를 수정하고 다시 시도하세요.
 Feature.Build.Message.InvitesLoadFailed,초대를 불러오지 못함
+Feature.Build.Message.LimitBelowSpend,오늘 이미 사용한 {ALREADY_SPENT} Robux 미만으로 한도를 설정할 수 없습니다.
 Feature.Build.Message.LinkCopied,링크가 클립보드에 복사되었습니다.
 Feature.Build.Message.LoadingVersions,버전 기록을 불러오는 중...
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
 Feature.Build.Message.NoFriendsToAdd,아직 추가할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,아직 버전 기록이 없습니다.
+Feature.Build.Message.OneTaskCompleted,1개 작업 완료
 Feature.Build.Message.OutOfBuildUsage,Build 사용량이 소진되었습니다. 계속 제작하려면 Robux 사용 옵션을 확인하세요.
+Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}명 중 {INVITED_COUNT}명의 플레이테스터가 추가됨
 Feature.Build.Message.PublicPublishFailed,게임이 게시되었지만 공개되지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishExpandAudience,오디언스를 확대하려면 게시하세요
 Feature.Build.Message.PublishNotReverted,게시한 내용을 되돌리지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.PublishReverted,게시를 되돌렸습니다.
 Feature.Build.Message.QuestionnaireNeeded,이 게임은 Build 외부에서 편집되었습니다. 게시하려면 콘텐츠 설문지를 작성해 주세요.
 Feature.Build.Message.ReadyToPlay,게임을 Roblox에서 플레이할 준비가 되었습니다!
+Feature.Build.Message.ResetHours,{HOURS}시간 후 재설정
+Feature.Build.Message.ResetOneHour,1시간 후 재설정
 Feature.Build.Message.RestoreVersionFailed,이 버전을 복원하지 못했습니다. 다시 시도하세요.
 Feature.Build.Message.RevertVersionFail,되돌린 버전이 만들어지지 않았습니다. 다시 시도하세요.
 Feature.Build.Message.RunningTitle,{title} 실행 중
 Feature.Build.Message.SafetyPolicy,이 메시지는 Roblox 안전 정책에 위배됩니다. 메시지를 수정하고 다시 시도하세요.
 Feature.Build.Message.SaveChangesFailed,변경 사항을 저장하지 못했습니다. 다시 시도해 보세요.
+Feature.Build.Message.ShareExperience,{EXPERIENCE_NAME} 공유
 Feature.Build.Message.ShareLinkFailed,공유 링크를 생성하지 못했습니다. 다시 시도해 보세요.
 Feature.Build.Message.SignedOut,로그아웃되었습니다. 로그인한 후 다시 시도해 주세요.
+Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS}개 작업 완료
+Feature.Build.Message.ThinkingSeconds,{SECONDS}초 동안 생각 중
 Feature.Build.Message.TryAgain,다시 시도하세요.
 Feature.Build.Message.TurnToPortrait,게임을 계속 진행하려면 기기를 세로 모드로 전환하세요.
 Feature.Build.Message.VersionHistoryLoad,버전 기록을 불러오지 못했습니다.
 Feature.Build.Message.WhatToCreate,오늘 무엇을 만들어 보시겠어요?
+Feature.Build.Message.WorkedMinutesSeconds,{MINUTES}분 {REM_SECONDS}초 동안 작업함
+Feature.Build.Message.WorkedSeconds,{SECONDS}초 동안 작업함
 Feature.Build.Message.WorkingOnTasks,작업 진행 중
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
@@ -2362,12 +2393,14 @@ Feature.Build.Title.GenericError,오류 발생
 Feature.Build.Title.NoRobuxForUsage,Build 사용량을 위한 Robux가 남아 있지 않음
 Feature.Build.Title.Playtesters,플레이테스터
 Feature.Build.Title.PlaytestersOnlyPlay,플레이테스터만 플레이할 수 있습니다
+Feature.Build.Title.PromoteGameFree,게임을 무료로 홍보하세요
 Feature.Build.Title.PushNotifications,푸시 알림
 Feature.Build.Title.RevertLastChange,마지막 변경 사항을 되돌리시겠어요?
 Feature.Build.Title.Tasks,작업
 Feature.Build.Title.TurnActivity,턴 활동
 Feature.Build.Title.VersionHistory,버전 기록
 Feature.Build.Title.VersionInformation,버전 정보
+Feature.Build.Title.VersionNumber,{VERSION} 버전
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,아니요 안 할래요
@@ -3046,6 +3079,7 @@ Feature.Durables.TimeRemaining.Minutes,{number}분
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}일(구매 후 시작)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,유럽 연합 디지털 서비스법에 따른 불법 콘텐츠를 신고하려면 다음 페이지를 방문하세요. https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,인터넷에 연결되지 않음
+Feature.EnhancedVideo.Label.Ad,
 Feature.ExperienceDetails.Action.ExitFullScreen,
 Feature.ExperienceDetails.Action.FullScreen,전체 화면
 Feature.ExperienceDetails.Action.Mute,
@@ -3594,6 +3628,20 @@ Feature.Home.Experiment.Reminders.ViolationThreatsOrAbuseOfRobloxEmployeesOrAffi
 Feature.Home.Experiment.Reminders.ViolationTrademark,
 Feature.Home.Experiment.Reminders.ViolationViolentContentAndGore,폭력 및 고어 콘텐츠
 Feature.Home.Experiment.Reminders.ViolationVirtualCasino,가상 카지노
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Modified,채팅 액세스 권한을 잃지 않으려면 개인 정보를 타인에게 공개하지 마세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Warning,회원님이 보낸 메시지 일부를 불가피하게 변경하거나 차단하였습니다. 개인 정보를 타인에게 공개하면 안 된다는 것을 잊지 마세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Modified,채팅 액세스 권한을 잃지 않으려면 항상 메시지에 정중한 표현을 사용하세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Warning,회원님이 보낸 메시지 일부를 불가피하게 변경하거나 차단하였습니다. 항상 메시지에 정중한 표현을 사용하세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Modified,채팅 액세스 권한을 잃지 않으려면 로맨스나 연애에 관련된 메시지를 보내지 마세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Warning,회원님이 보낸 메시지 일부를 불가피하게 변경하거나 차단하였습니다. 로맨스나 연애에 관련된 메시지를 보내면 안 된다는 것을 잊지 마세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Modified,채팅 액세스 권한을 잃지 않으려면 같은 메시지를 한 번만 보내세요.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Warning,회원님이 보낸 메시지 일부를 불가피하게 변경하거나 차단하였습니다. 같은 메시지를 한 번만 보내야 한다는 것을 잊지 마세요.
+Feature.Home.Experiment.TextFilterEducation.General.Title.Warning,곧 채팅 액세스 권한을 잃게 될 수 있습니다.
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Pii,"이름, 학교, 거주지를 타인에게 공유하면 안 된다는 것을 잊지 마세요."
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Respect,항상 친절한 단어를 사용해야 한다는 것을 잊지 마세요.
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Spam,같은 메시지를 한 번만 보내야 한다는 것을 잊지 마세요.
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Modified,회원님이 보낸 메시지 일부를 불가피하게 변경하거나 차단하였습니다.
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Warning,채팅을 못하게 될 수 있습니다.
 Feature.Home.Heading.JoinYourFriends,친구와 합류
 Feature.Home.HeadingFriends,친구 ({friendCount}명)
 Feature.Home.Label.HappeningNow,지금 진행 중
@@ -4286,6 +4334,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,통계
 Feature.Profile.Heading.Username,

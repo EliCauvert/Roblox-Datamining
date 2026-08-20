@@ -246,13 +246,18 @@ Authentication.CrossDevice.Action.Enter,Enter
 Authentication.CrossDevice.Action.GoBack,Go Back
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,Try Again
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirm on your signed-in device to continue.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"On your signed-in device, scan the QR code or go to <b>More > Quick sign in</b> and enter the code below."
+Authentication.CrossDevice.Description.SigningInAs,Signing in as {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,then enter this code
 Authentication.CrossDevice.GoToInstruction,On your computer or phone go to:
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Log in to another Device
 Authentication.CrossDevice.Heading.LoginCode,Quick Sign In Code
 Authentication.CrossDevice.Heading.LoginWarning,"TO LOG IN, MAKE SURE YOU:"
 Authentication.CrossDevice.Heading.QuickLogin,Quick Sign-in
+Authentication.CrossDevice.Heading.SignInWithQrCode,Sign in with QR code
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Sign in on another device
+Authentication.CrossDevice.Heading.WaitingForConfirmation,Waiting for confirmation
 Authentication.CrossDevice.Heading.Warning,WARNING!
 Authentication.CrossDevice.Label.CodeHeader,Option 2
 Authentication.CrossDevice.Label.CodeNotVerified,The Quick Sign In code was not verified.
@@ -278,9 +283,7 @@ Authentication.CrossDevice.Label.QrCodeError,"We are having problems displaying 
 Authentication.CrossDevice.Label.QrCodeLogin,QR Code Log In
 Authentication.CrossDevice.Label.QrHeader,Option 1
 Authentication.CrossDevice.Label.QrInstructions,Scan this QR code from your logged in device's camera.
-Authentication.CrossDevice.Label.QrTroubleshooting,Having trouble?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,Go to <b>roblox.com/quest</b> on your computer or phone to enter this code and complete login.
-Authentication.CrossDevice.Label.QuickSignInInstructions,"Scan the QR code or on your signed in device, go to <b>More > Quick sign in</b> and enter the code."
 Authentication.CrossDevice.Label.QuickSignInWarning,"For your security, only enter codes you generated from your new device."
 Authentication.CrossDevice.Label.SigninInstructionHeading,To sign in as {username} on a new device:
 Authentication.CrossDevice.Label.SigninInstructionOne,"1. On your new device, open the login page"
@@ -296,6 +299,7 @@ Authentication.Login.Action.ConnectionError.RetryWait,Retry in: {WaitTime}
 Authentication.Login.Action.Continue,
 Authentication.Login.Action.DownloadNow,Download Now
 Authentication.Login.Action.EmailACode,Email a code
+Authentication.Login.Action.EmailMeCode,Email me a code
 Authentication.Login.Action.EmailOtpWaitTime,Resend code in {WaitTime}s
 Authentication.Login.Action.ForgotPasswordOrUsernameQuestionCapitalized,Forgot Password or Username?
 Authentication.Login.Action.ForgotUsername,Forgot username?
@@ -310,6 +314,7 @@ Authentication.Login.Action.SendCodeSentenceCase,Send code
 Authentication.Login.Action.SendVerificationEmail,Send Verification Email
 Authentication.Login.Action.SignIn,Sign In
 Authentication.Login.Action.SignInSentenceCase,Sign in
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Use passkey
 Authentication.Login.Action.WeChatLogin,WeChat Login
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
@@ -322,10 +327,10 @@ Authentication.Login.Description.PasskeyDescription,"Your account has passkey, a
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"We cannot determine whether your device supports passkey. Try again, or tap “Trouble signing in” to recover your account with an email or phone number."
 Authentication.Login.Description.PasskeyMobileOnly,Passkeys are only available on mobile. Choose another way to sign in.
 Authentication.Login.Description.SigningInWith,Signing in with <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"If a Roblox account exists, you'll receive a verification code at {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
-Authentication.Login.Heading.EnterPassword,Enter password
 Authentication.Login.Heading.EnterYourCode,Enter your code
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
 Authentication.Login.Heading.Login,Login
@@ -333,7 +338,9 @@ Authentication.Login.Heading.LoginRoblox,Login to Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Login To Existing Account
 Authentication.Login.Heading.NewAppAvailable,Download New Roblox App
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Sign in another way
 Authentication.Login.Heading.SignInToRoblox,Sign in to Roblox
+Authentication.Login.Heading.SignInWithRoblox,Sign in with Roblox
 Authentication.Login.Label.AccountSelectorTitle,Select Account to Log In
 Authentication.Login.Label.AgedUpUsername,Add a unique @username
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Sorry, there was a problem reaching our servers.
@@ -347,6 +354,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, there was a problem
 Please wait and try again."
 Authentication.Login.Label.ConnectionError.Title,Connection Error
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,Email address
 Authentication.Login.Label.EmailNeedsVerification,Your email needs verification
 Authentication.Login.Label.EmailOrPhone,Email or phone
 Authentication.Login.Label.EnterCode,
@@ -354,7 +362,9 @@ Authentication.Login.Label.EnterEmail,Enter email
 Authentication.Login.Label.EnterHere,Enter here
 Authentication.Login.Label.EnterOneTimeCode,Enter One-Time Code
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Enter the code we just sent to your email
-Authentication.Login.Label.EnterPassword,
+Authentication.Login.Label.EnterPassword,Enter password
+Authentication.Login.Label.EnterYourPassword,Enter your password
+Authentication.Login.Label.ForgotPassword,Forgot password?
 Authentication.Login.Label.ForgotYourPassword,Forgot your password?
 Authentication.Login.Label.GetOneTimeCode,Get One-Time Code
 Authentication.Login.Label.LearnMore,Learn more
@@ -371,6 +381,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Username, email, or phone
 Authentication.Login.Label.UsernameEmailPhone,Username/Email/Phone
 Authentication.Login.Label.UsernameOrEmail,Username or email
 Authentication.Login.Label.UsernameOrPhone,Username or phone
+Authentication.Login.Label.VerificationCode,Verification code
 Authentication.Login.Label.WeChatUserCancel,You are logged out of WeChat. Please log in to WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat version is not supported
 Authentication.Login.LinkIllegalChildAccountLinking,This Roblox account could not be linked to an Xbox child account. Please try another account or check your settings.
@@ -2177,16 +2188,20 @@ Feature.Build.Action.ViewUsage,View usage
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
+Feature.Build.Description.BoostAudienceForPlays,Boost your audience for more plays.
+Feature.Build.Description.BoostGameAudience,Boost your game's audience
 Feature.Build.Description.BuildIdeaGame,Turn your ideas into a game
 Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply for you.
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
+Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Choose friends to help you playtest.
 Feature.Build.Description.EnableBuildNotifs,Turn on notifications in your device settings to get updates from Build.
 Feature.Build.Description.FriendsLinkOnly,Only your friends can access this link. Change your game's Audience setting if you want more people to play.
 Feature.Build.Description.GameCreationDone,I've completed creating and publishing your game. You can open it to playtest.
 Feature.Build.Description.GameSavedPlaytest,I've completed creating your game and saved a new version. You can open it to playtest.
 Feature.Build.Description.HubSettings,Manage all settings on Creator Hub
+Feature.Build.Description.InviteFriendLimit,"Choose up to {MAX_INVITES} friends, then share the link to the game."
 Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
 Feature.Build.Description.ManageAppearance,Manage how your game appears to others.
 Feature.Build.Description.PlayAfterPublish,Choose who can play after you publish this experience.
@@ -2197,6 +2212,7 @@ Feature.Build.Description.PrivateShare,Change your game's Audience setting to sh
 Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
 Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
 Feature.Build.Description.RestoreLatest,This version will become your latest published version.
+Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
 Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
 Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.ContentMaturity,Content maturity
@@ -2205,13 +2221,16 @@ Feature.Build.Header.GameDetails,Game details
 Feature.Build.Header.Overview,Overview
 Feature.Build.Label.Access,Access
 Feature.Build.Label.AdditionalUsage,Additional Build usage
+Feature.Build.Label.AdditionalUsed,{USED} of {LIMIT} used
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} available
 Feature.Build.Label.Autosaved,Autosaved
 Feature.Build.Label.Available,available
 Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.ContentRating,Content rating
+Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
@@ -2222,14 +2241,17 @@ Feature.Build.Label.FreeBuildUsage,Free Build usage
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Friends only
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
+Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limited
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
 Feature.Build.Label.Pending,Pending
+Feature.Build.Label.PercentUsed,{PERCENT}% used
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
@@ -2237,6 +2259,8 @@ Feature.Build.Label.PubliclyUnavailable,Publicly unavailable
 Feature.Build.Label.Published,Published
 Feature.Build.Label.Ready,Ready
 Feature.Build.Label.ResetsDaily,Resets daily
+Feature.Build.Label.RestoredVersion,Restored {VERSION}
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Search games
 Feature.Build.Label.SearchTasks,Search tasks
@@ -2306,9 +2330,16 @@ Feature.Build.Label.ToolTasksPlanRunning,Planning your tasks
 Feature.Build.Label.ToolThumbnailDone,Set game thumbnail
 Feature.Build.Label.ToolThumbnailFailed,Couldn't set game thumbnail
 Feature.Build.Label.ToolThumbnailRunning,Setting game thumbnail
+Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
+Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
 Feature.Build.Label.Usage,Usage
+Feature.Build.Label.UsageUsed,{USED} used
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Version title & description
 Feature.Build.Label.Video,
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
@@ -2324,10 +2355,12 @@ Feature.Build.Message.BuildResponseFailed,Build couldn't respond. Try again.
 Feature.Build.Message.BuildStillWorking,"Working on it. You can leave the app, play Roblox, or start another project while you wait."
 Feature.Build.Message.BuildStopped,You stopped Build.
 Feature.Build.Message.BuildTemporarilyDown,Build is temporarily unavailable. Try again in a minute.
+Feature.Build.Message.CompletedTasks,{COUNT} completed tasks
 Feature.Build.Message.ConversationGone,This conversation is no longer available. Start a new one.
 Feature.Build.Message.ConversationNotFound,This conversation couldn't be found. Start a new one.
 Feature.Build.Message.CreateGameToUseBuild,Create a new game to start using Build.
 Feature.Build.Message.CreatedRevertedVer,Created a reverted version.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
 Feature.Build.Message.FailedTitle,Failed {TITLE}
@@ -2335,33 +2368,47 @@ Feature.Build.Message.FinishedTitle,Finished {TITLE}
 Feature.Build.Message.FriendsLoadFailed,Couldn't load friends. Try again.
 Feature.Build.Message.GameNotCreated,Your game wasn't created. Try again.
 Feature.Build.Message.GamePublishFailed,Your game couldn't be published. Try again.
+Feature.Build.Message.GameShared,Game shared
+Feature.Build.Message.GameSharedWith,Game shared with {DISPLAY_NAME}
+Feature.Build.Message.HiDisplayName,"Hi, {DISPLAY_NAME}"
 Feature.Build.Message.InvalidMessage,Something went wrong with your message. Edit it and try again.
 Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
+Feature.Build.Message.LimitBelowSpend,Limit can't be below the {ALREADY_SPENT} Robux already spent today.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to add yet. Find people to connect with on Roblox first.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,No version history yet.
+Feature.Build.Message.OneTaskCompleted,1 task completed
 Feature.Build.Message.OutOfBuildUsage,You're out of Build usage. View your options to use Robux to keep creating.
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} playtesters added
 Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
 Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
 Feature.Build.Message.PublishReverted,Reverted publish.
 Feature.Build.Message.QuestionnaireNeeded,This game was edited outside of Build. Complete the content questionnaire to publish.
 Feature.Build.Message.ReadyToPlay,Your game is ready to play on Roblox!
+Feature.Build.Message.ResetHours,Resets in {HOURS} hours
+Feature.Build.Message.ResetOneHour,Resets in 1 hour
 Feature.Build.Message.RestoreVersionFailed,Couldn't restore this version. Try again.
 Feature.Build.Message.RevertVersionFail,A reverted version wasn't created. Try again.
 Feature.Build.Message.RunningTitle,Running {title}
 Feature.Build.Message.SafetyPolicy,This message goes against our safety policy. Edit it and try again.
 Feature.Build.Message.SaveChangesFailed,Couldn't save changes. Try again.
+Feature.Build.Message.ShareExperience,Share {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
+Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
+Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
 Feature.Build.Message.TryAgain,Try again.
 Feature.Build.Message.TurnToPortrait,Turn your device to portrait mode to continue working on your game.
 Feature.Build.Message.VersionHistoryLoad,Version history couldn't load.
 Feature.Build.Message.WhatToCreate,What do you want to create today?
+Feature.Build.Message.WorkedMinutesSeconds,Worked for {MINUTES}m{REM_SECONDS}s
+Feature.Build.Message.WorkedSeconds,Worked for {SECONDS}s
 Feature.Build.Message.WorkingOnTasks,Working on your tasks
+Feature.Build.Title.AdCampaignActive,Ad campaign is active
 Feature.Build.Title.AddFriendsToPlaytest,Add friends to help you playtest
 Feature.Build.Title.ArchiveThisGame,Archive this game?
 Feature.Build.Title.Audience,Audience
@@ -2382,12 +2429,14 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.Playtesters,Playtesters
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
+Feature.Build.Title.PromoteGameFree,Promote your game for free
 Feature.Build.Title.PushNotifications,Push notifications
 Feature.Build.Title.RevertLastChange,Revert last change?
 Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
 Feature.Build.Title.VersionHistory,Version history
 Feature.Build.Title.VersionInformation,Version Information
+Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.BuyRobux.Heading.Banner,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.NoThanks,No thanks
@@ -2431,6 +2480,7 @@ Feature.Catalog.Action.Report,Report
 Feature.Catalog.Action.Sell,Sell
 Feature.Catalog.Action.ShareVia,Share via...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Upgrade
 Feature.Catalog.Action.ViewDetailsPage,View Details Page
 Feature.Catalog.Action.ViewExperienceDetails,View Experience Details
@@ -3065,6 +3115,7 @@ Feature.Durables.TimeRemaining.Minutes,{number}m
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} days (Starts after purchase)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"To report illegal content under the EU Digital Services Act, visit: https://www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,No internet connection
+Feature.EnhancedVideo.Label.Ad,
 Feature.ExperienceDetails.Action.ExitFullScreen,Exit Fullscreen
 Feature.ExperienceDetails.Action.FullScreen,Fullscreen
 Feature.ExperienceDetails.Action.Mute,Mute
@@ -3613,6 +3664,20 @@ Feature.Home.Experiment.Reminders.ViolationThreatsOrAbuseOfRobloxEmployeesOrAffi
 Feature.Home.Experiment.Reminders.ViolationTrademark,
 Feature.Home.Experiment.Reminders.ViolationViolentContentAndGore,Violent Content and Gore
 Feature.Home.Experiment.Reminders.ViolationVirtualCasino,Virtual Casino
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Modified,"To avoid losing access to chat, keep your personal info to yourself."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Pii.Warning,We had to change or block some of your messages. Remember: keep your personal info to yourself.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Modified,"To avoid losing access to chat, always keep messages respectful."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Respect.Warning,We had to change or block some of your messages. Remember: always keep messages respectful.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Modified,"To avoid losing access to chat, stay away from romance or dating."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Romance.Warning,We had to change or block some of your messages. Remember: stay away from romance or dating.
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Modified,"To avoid losing access to chat, send each message only once."
+Feature.Home.Experiment.TextFilterEducation.General.Body.Spam.Warning,We had to change or block some of your messages. Remember: send each message only once.
+Feature.Home.Experiment.TextFilterEducation.General.Title.Warning,You’re close to losing chat
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Pii,"Remember: keep your name, school, and where you live to yourself."
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Respect,Remember: Always use kind words.
+Feature.Home.Experiment.TextFilterEducation.Kids.Body.Spam,Remember: Send each message only once.
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Modified,We had to change or block some of your messages
+Feature.Home.Experiment.TextFilterEducation.Kids.Title.Warning,Your chat could go away
 Feature.Home.Heading.JoinYourFriends,Join Your Friends
 Feature.Home.HeadingFriends,Friends ({friendCount})
 Feature.Home.Label.HappeningNow,Happening now
@@ -4310,6 +4375,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,
@@ -4505,6 +4571,7 @@ Feature.Schools.Action.TermsOfService,Terms of service
 Feature.Schools.Body.EnterCode,UNiDAYS sent an email with your one-time code to {user_email}. Enter the code below to confirm your school.
 Feature.Schools.Body.UnidaysShare,Your email address won't be visible to others.
 Feature.Schools.Body.UnidaysTerms,"We partner with UNiDAYS to verify your school email address. By clicking ""Continue,"" you agree to UNiDAYS' terms of service and privacy policy."
+Feature.Schools.Caption.AlumniGroupOnGraduate,"Once you graduate, you'll be in the {school} alumni group."
 Feature.Schools.Caption.RemovedOnGraduate,"Once you graduate, you'll be removed from {school}."
 Feature.Schools.Description.CantFindSchoolNotify,We'll notify you when your school is on Roblox.
 Feature.Schools.Description.CantVerifySchool,"Based on the information you’ve provided, we couldn’t verify your school."

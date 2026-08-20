@@ -137,7 +137,6 @@ Authentication.CrossDevice.Label.QrCodeError,"Возникла проблема 
 Authentication.CrossDevice.Label.QrCodeLogin,Вход с QR-кодом
 Authentication.CrossDevice.Label.QrHeader,Вариант 1
 Authentication.CrossDevice.Label.QrInstructions,"Отсканируй этот QR-код c устройства, на котором выполнен вход."
-Authentication.CrossDevice.Label.QrTroubleshooting,Возникла проблема?
 Authentication.CrossDevice.Label.QuestCDLShortLinkInstruction,"Перейди по адресу <b>roblox.com/quest</b> на компьютере или телефоне, чтобы ввести этот код и завершить вход."
 Authentication.CrossDevice.Label.Warning1,"• Вводи только коды, запрошенные тобой."
 Authentication.CrossDevice.Label.Warning2,• Никогда не вводи коды других пользователей.
@@ -194,6 +193,7 @@ Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailNeedsVerification,Нужно подтвердить эл. почту
 Authentication.Login.Label.EnterOneTimeCode,Введи одноразовый код
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,"Введи код, отправленный по эл. почте"
+Authentication.Login.Label.EnterYourPassword,Введи пароль
 Authentication.Login.Label.ForgotYourPassword,Не помню пароль
 Authentication.Login.Label.GetOneTimeCode,Получить одноразовый код
 Authentication.Login.Label.LearnMore,Подробнее
@@ -1857,6 +1857,7 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.Infinite,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"Чтобы сообщить о незаконном контенте в соответствии с определением Закона о цифровых услугах (ЕС), посети: https://www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,Нет подключения к интернету
+Feature.EnhancedVideo.Label.Ad,Реклама
 Feature.ExperienceDetails.AskYourParentModal.Action.AskNow,
 Feature.ExperienceDetails.AskYourParentModal.Action.Cancel,
 Feature.ExperienceDetails.AskYourParentModal.Label.Body,"Чтобы присоединиться к этому плейсу, необходимо разрешение родителя."
@@ -2356,7 +2357,7 @@ Feature.NotApproved.Heading.SuspendedThreeDays,Блокировка на 3 дн�
 Feature.NotApproved.Heading.Warning,
 Feature.NotApproved.Label.AbuseType.AccountTheft,Кража аккаунта
 Feature.NotApproved.Label.AbuseType.AdultContent,Материалы для взрослых
-Feature.NotApproved.Label.AbuseType.Advertisement,Реклама
+Feature.NotApproved.Label.AbuseType.Advertisement,
 Feature.NotApproved.Label.AbuseType.Advertising,
 Feature.NotApproved.Label.AbuseType.AssetOwnership,Владение активом
 Feature.NotApproved.Label.AbuseType.Billing,Платежи
