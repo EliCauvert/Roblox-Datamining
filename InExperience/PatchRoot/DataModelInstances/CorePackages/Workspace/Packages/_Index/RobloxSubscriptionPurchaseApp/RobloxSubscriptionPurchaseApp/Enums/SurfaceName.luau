@@ -11,5 +11,6 @@
 	InGameRobuxUpsell = "InGameRobuxUpsell",
 	SettingsAppThemeUpsell = "SettingsAppThemeUpsell",
 	ProfileFramesUpsell = "ProfileFramesUpsell",
-	AiBackgroundUpsell = "AiBackgroundUpsell"
+	AiBackgroundUpsell = "AiBackgroundUpsell",
+	AvatarBackgrounds = "AvatarBackgrounds"
 }

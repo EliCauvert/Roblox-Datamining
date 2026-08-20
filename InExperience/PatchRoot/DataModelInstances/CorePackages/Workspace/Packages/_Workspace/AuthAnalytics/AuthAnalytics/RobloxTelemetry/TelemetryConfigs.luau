@@ -13,6 +13,7 @@ local var11 = if game:DefineFastFlag("FixIosAuthServiceCredentialSheetBackends",
 	loggingProtocolModule.TelemetryBackends.Counter,
 	loggingProtocolModule.TelemetryBackends.EventIngest
 }
+local list = { loggingProtocolModule.TelemetryBackends.EventIngest }
 
 return {
 	LandingPageMountTelemetryConfig = {
@@ -326,6 +327,70 @@ return {
 		backends = var11,
 		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
 		lastUpdated = { 26, 6, 24 }
+	},
+	IosAuthServiceLoginCredentialSheetShownEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetShown",
+		description = "EventStream twin: the iOS credential sheet was shown during login.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetPasswordSelectedEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetPasswordSelected",
+		description = "EventStream twin: a user selected a password from the iOS credential sheet during login.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetPasskeySelectedEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetPasskeySelected",
+		description = "EventStream twin: a user selected a passkey from the iOS credential sheet during login.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetErrorEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetError",
+		description = "EventStream twin: the iOS credential sheet returned an error during login.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetDismissedEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetDismissed",
+		description = "EventStream twin: the iOS credential sheet was dismissed without selection during login.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetLoginSuccessEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetLoginSuccess",
+		description = "EventStream twin: a login using a credential selected from the iOS credential sheet succeeded.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetLoginFailureEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetLoginFailure",
+		description = "EventStream twin: a login using a credential selected from the iOS credential sheet failed.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
+	},
+	IosAuthServiceLoginCredentialSheetUnavailableEventConfig = {
+		eventName = "iosAuthServiceLoginCredentialSheetUnavailable",
+		description = "EventStream twin: the iOS credential sheet could not be shown during login.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = list,
+		throttlingPercentage = iosAuthServiceLoginThrottlingHundredthsPercent,
+		lastUpdated = { 26, 8, 18 }
 	},
 	IosAuthServiceLoginSuccessConfig = {
 		eventName = "iosAuthServiceLoginSuccess",

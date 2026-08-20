@@ -1824,6 +1824,7 @@ Feature.Build.Action.ViewUsage,Xem mức sử dụng
 Feature.Build.Content.NewGame,Trò chơi mới
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
+Feature.Build.Description.BoostGameAudience,Giúp trò chơi tiếp cận được nhiều đối tượng hơn
 Feature.Build.Description.BuildIdeaGame,Biến ý tưởng thành trò chơi
 Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi phản hồi cho bạn.
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
@@ -1834,6 +1835,7 @@ Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có 
 Feature.Build.Description.GameCreationDone,Tôi đã tạo xong và đăng trò chơi của bạn. Bạn đã có thể mở lên để chơi thử.
 Feature.Build.Description.GameSavedPlaytest,Tôi đã tạo xong trò chơi của bạn và lưu phiên bản mới. Bạn có thể mở lên để chơi thử nhé.
 Feature.Build.Description.HubSettings,Quản lý tất cả cài đặt trong Trung tâm nhà sáng tạo
+Feature.Build.Description.InviteFriendLimit,"Chọn tối đa {MAX_INVITES} người bạn, sau đó chia sẻ đường liên kết đến trò chơi."
 Feature.Build.Description.MakeAudienceAvail,Đăng trải nghiệm của bạn để cho phép đối tượng này tham gia.
 Feature.Build.Description.ManageAppearance,Quản lý giao diện hiển thị của trò chơi với người khác.
 Feature.Build.Description.PlayAfterPublish,Chọn đối tượng người chơi có thể tham gia sau khi bạn đăng trải nghiệm này.
@@ -1844,6 +1846,7 @@ Feature.Build.Description.PrivateShare,Hãy thay đổi cài đặt Đối tư�
 Feature.Build.Description.RaiseLimitOrWait,"Tăng hạn mức Robux hằng ngày của bạn để tiếp tục sáng tạo, hoặc đợi hạn mức làm mới vào ngày mai."
 Feature.Build.Description.RatingAgreement,"Bằng việc đăng, bạn đồng ý rằng mức phân loại nội dung này là chính xác."
 Feature.Build.Description.RestoreLatest,Phiên bản này sẽ trở thành phiên bản mới nhất được đăng của bạn.
+Feature.Build.Description.RevertToVersion,Xác nhận trả về bản thay đổi gần nhất và quay lại {VERSION}.
 Feature.Build.Description.VersionChanges,Cho người chơi biết điều gì đã thay đổi trong phiên bản này.
 Feature.Build.Header.AccessSharing,Quyền truy cập và chia sẻ
 Feature.Build.Header.ContentMaturity,Mức độ nội dung người lớn
@@ -1852,6 +1855,7 @@ Feature.Build.Header.GameDetails,Chi tiết về trò chơi
 Feature.Build.Header.Overview,Tổng quan
 Feature.Build.Label.Access,Quyền truy cập
 Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
+Feature.Build.Label.AdditionalUsed,Đã dùng {USED}/{LIMIT}
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
@@ -1859,6 +1863,7 @@ Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang xây dựng...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
+Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
@@ -1869,14 +1874,17 @@ Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Chỉ bạn bè
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
+Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
 Feature.Build.Label.Pending,Đang chờ xử lý
+Feature.Build.Label.PercentUsed,Đã dùng {PERCENT}%
 Feature.Build.Label.PreviouslyPublished,Đã đăng trước đây
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
@@ -1884,6 +1892,8 @@ Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
 Feature.Build.Label.Published,Đã đăng
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
+Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
 Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
@@ -1953,9 +1963,16 @@ Feature.Build.Label.ToolTasksPlanRunning,Đang lên kế hoạch cho tác vụ
 Feature.Build.Label.ToolThumbnailDone,Đã đặt hình nhỏ cho trò chơi
 Feature.Build.Label.ToolThumbnailFailed,Không thể đặt hình nhỏ cho trò chơi
 Feature.Build.Label.ToolThumbnailRunning,Đang đặt hình nhỏ cho trò chơi
+Feature.Build.Label.UniverseNumber,Vũ trụ {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Không xác định
+Feature.Build.Label.UnlimitedUsed,Đã dùng {USED} • Không giới hạn
 Feature.Build.Label.Usage,Sử dụng
+Feature.Build.Label.UsageUsed,Đã dùng {USED}
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,Phiên bản
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Tiêu đề và mô tả phiên bản
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp ứng các yêu cầu để sử dụng Build.
@@ -1971,10 +1988,12 @@ Feature.Build.Message.BuildResponseFailed,Build không phản hồi. Vui lòng t
 Feature.Build.Message.BuildStillWorking,"Đang xử lý. Bạn có thể thoát ứng dụng, chơi Roblox hoặc bắt đầu một dự án khác trong lúc chờ đợi."
 Feature.Build.Message.BuildStopped,Bạn đã dừng Build.
 Feature.Build.Message.BuildTemporarilyDown,Build tạm thời không sử dụng được. Hãy thử lại sau ít phút.
+Feature.Build.Message.CompletedTasks,{COUNT} nhiệm vụ đã hoàn thành
 Feature.Build.Message.ConversationGone,Cuộc trò chuyện này không còn nữa. Hãy bắt đầu cuộc trò chuyện mới.
 Feature.Build.Message.ConversationNotFound,Không tìm thấy cuộc trò chuyện này. Hãy bắt đầu cuộc trò chuyện mới.
 Feature.Build.Message.CreateGameToUseBuild,Hãy tạo trò chơi mới để bắt đầu sử dụng Build.
 Feature.Build.Message.CreatedRevertedVer,Đã tạo phiên bản trả về.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Mở rộng đối tượng người chơi trong Trung tâm nhà sáng tạo
 Feature.Build.Message.ExperiencesLoadFailed,Không tải được trải nghiệm
 Feature.Build.Message.FailedTitle,{TITLE} không thành công
@@ -1982,32 +2001,45 @@ Feature.Build.Message.FinishedTitle,Đã hoàn tất {TITLE}
 Feature.Build.Message.FriendsLoadFailed,Không tải được danh sách bạn bè. Vui lòng thử lại.
 Feature.Build.Message.GameNotCreated,Không tạo được trò chơi của bạn. Vui lòng thử lại.
 Feature.Build.Message.GamePublishFailed,Trò chơi của bạn chưa thể đăng. Vui lòng thử lại.
+Feature.Build.Message.GameShared,Đã chia sẻ trò chơi
+Feature.Build.Message.GameSharedWith,Đã chia sẻ trò chơi với {DISPLAY_NAME}
+Feature.Build.Message.HiDisplayName,Xin chào {DISPLAY_NAME}!
 Feature.Build.Message.InvalidMessage,Đã có lỗi xảy ra với tin nhắn của bạn. Hãy chỉnh sửa và thử lại.
 Feature.Build.Message.InvitesLoadFailed,Không tải được lời mời
+Feature.Build.Message.LimitBelowSpend,Giới hạn không được thấp hơn con số {ALREADY_SPENT} Robux đã chi tiêu hôm nay.
 Feature.Build.Message.LinkCopied,Đã sao chép đường liên kết vào bộ nhớ tạm.
 Feature.Build.Message.LoadingVersions,Đang tải lịch sử phiên bản...
 Feature.Build.Message.NoDescriptionProvided,Không có mô tả nào được cung cấp.
 Feature.Build.Message.NoFriendsToAdd,Bạn chưa có người bạn nào để thêm. Hãy tìm mọi người để kết nối trên Roblox trước.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Chưa có lịch sử phiên bản.
+Feature.Build.Message.OneTaskCompleted,Đã hoàn thành 1 nhiệm vụ
 Feature.Build.Message.OutOfBuildUsage,Bạn đã hết lượt sử dụng Build. Hãy xem các lựa chọn sử dụng Robux để tiếp tục sáng tạo.
+Feature.Build.Message.PlaytestersAdded,Đã thêm {INVITED_COUNT} trên {MAX_INVITES} người chơi thử
 Feature.Build.Message.PublicPublishFailed,Trò chơi của bạn đã được đăng nhưng chưa đăng công khai. Vui lòng thử lại.
 Feature.Build.Message.PublishExpandAudience,Đăng để mở rộng đối tượng của bạn
 Feature.Build.Message.PublishNotReverted,Không hủy đăng được. Vui lòng thử lại.
 Feature.Build.Message.PublishReverted,Đã hủy đăng.
 Feature.Build.Message.QuestionnaireNeeded,Trò chơi này đã được chỉnh sửa bên ngoài Build. Vui lòng trả lời khảo sát nội dung để đăng.
 Feature.Build.Message.ReadyToPlay,Trò chơi của bạn đã sẵn sàng để chơi trên Roblox!
+Feature.Build.Message.ResetHours,Làm mới sau {HOURS} giờ
+Feature.Build.Message.ResetOneHour,Làm mới sau 1 giờ
 Feature.Build.Message.RestoreVersionFailed,Không thể khôi phục phiên bản này. Vui lòng thử lại.
 Feature.Build.Message.RevertVersionFail,Không tạo được phiên bản trả về. Vui lòng thử lại.
 Feature.Build.Message.RunningTitle,Đang chạy {title}
 Feature.Build.Message.SafetyPolicy,Tin nhắn này vi phạm chính sách an toàn của chúng tôi. Vui lòng chỉnh sửa rồi thử lại.
 Feature.Build.Message.SaveChangesFailed,Không thể lưu các thay đổi. Vui lòng thử lại.
+Feature.Build.Message.ShareExperience,Chia sẻ {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Không thể tạo đường liên kết chia sẻ. Vui lòng thử lại.
 Feature.Build.Message.SignedOut,Bạn đã đăng xuất. Hãy đăng nhập và thử lại.
+Feature.Build.Message.TasksCompleted,Đã hoàn thành {NUM_COMPLETED_TASKS} nhiệm vụ
+Feature.Build.Message.ThinkingSeconds,Suy nghĩ trong {SECONDS}giây
 Feature.Build.Message.TryAgain,Hãy thử lại.
 Feature.Build.Message.TurnToPortrait,Hãy xoay thiết bị sang chế độ dọc để tiếp tục thao tác trên trò chơi của bạn.
 Feature.Build.Message.VersionHistoryLoad,Không thể tải lịch sử phiên bản.
 Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
+Feature.Build.Message.WorkedMinutesSeconds,Đã xử lý trong {MINUTES} phút {REM_SECONDS} giây
+Feature.Build.Message.WorkedSeconds,Đã xử lý trong {SECONDS} giây
 Feature.Build.Message.WorkingOnTasks,Đang thực hiện nhiệm vụ bạn giao
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
@@ -2029,12 +2061,14 @@ Feature.Build.Title.GenericError,Đã xảy ra lỗi
 Feature.Build.Title.NoRobuxForUsage,Không còn Robux để sử dụng Build
 Feature.Build.Title.Playtesters,Người chơi thử
 Feature.Build.Title.PlaytestersOnlyPlay,Chỉ người chơi thử mới có thể chơi
+Feature.Build.Title.PromoteGameFree,Quảng bá trò chơi của bạn miễn phí
 Feature.Build.Title.PushNotifications,Thông báo đẩy
 Feature.Build.Title.RevertLastChange,Trả về bản thay đổi gần nhất?
 Feature.Build.Title.Tasks,Nhiệm vụ
 Feature.Build.Title.TurnActivity,Hoạt động trong lượt
 Feature.Build.Title.VersionHistory,Lịch sử phiên bản
 Feature.Build.Title.VersionInformation,Thông tin phiên bản
+Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Cho phép
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2685,6 +2719,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Tên hiển thị không dùng
 Feature.DisplayName.ErrorMessage.NameTooLong,Tên hiển thị chỉ được tối đa 20 ký tự
 Feature.DisplayName.ErrorMessage.NameTooShort,Tên hiển thị phải có ít nhất 3 ký tự
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Tên hiển thị chứa các ký tự không được hỗ trợ
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Trong {num} ngày
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,Chọn số ngày bạn muốn sở hữu vật phẩm. Bắt đầu tính thời gian từ thời điểm mua.
@@ -2695,6 +2730,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} ngày
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Tùy chọn
 Feature.Durables.Label.ItemExpires,Vật phẩm hết hạn
+Feature.Durables.PartiallyExpiredItems.BodyText,Một số vật phẩm trong avatar đã lưu này đã hết hạn và bị xóa.
+Feature.Durables.PartiallyExpiredItems.TitleText,Vật phẩm đã hết hạn
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} ngày (Bắt đầu tính từ thời điểm mua)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,Không có kết nối internet
@@ -3430,6 +3467,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Chỉnh Sửa Tên
 Feature.Profile.Heading.EditDisplayName,Chỉnh Sửa Tên Hiển Thị
 Feature.Profile.Heading.InsufficientFunds,Số Dư Không Đủ
 Feature.Profile.Heading.NicknameRequestSent,Đã Gửi Yêu Cầu Thêm Bạn Bè
+Feature.Profile.Heading.ProfilePictureSaved,Đã lưu ảnh đại diện thành công
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Số Liệu
 Feature.Profile.Heading.Username,
@@ -4009,6 +4047,7 @@ Feature.Subscription.Text.PerMonth,/tháng
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Avatar của bạn đã được trả về mặc định để đảm bảo {rule}. Bạn vẫn có thể sử dụng Chợ, nhưng các thay đổi đối với avatar của bạn sẽ chưa được lưu cho đến {time}."
 Feature.Timeout.Prompt.SaveTitleText,Tính năng lưu đang bị tắt
+Feature.Timeout.Prompt.TitleText,Chúng tôi đã trả avatar của bạn về mặc định
 Feature.Timeout.WarningBanner.DisabledMessage,Tính năng lưu avatar đã bị vô hiệu hóa
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Tính năng lưu avatar bị vô hiệu hóa cho đến {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Đã Mở Khoá
@@ -4554,11 +4593,13 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,Hủy Bỏ Yêu Cầu
+InGame.PlayerDropDown.ConfirmUnfriend,Chạm để xác nhận hủy kết bạn
 InGame.PlayerDropDown.Decline,Từ chối
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} đã đạt giới hạn bạn bè tối đa.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,Lần cập nhật gần nhất cách đây {minutes} phút
 InGame.PlayerList.FooterUnableToLoad,Không thể tải
 InGame.PlayerList.FriendsEmpty,Chưa có bạn bè nào của bạn chơi trải nghiệm này.

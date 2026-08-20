@@ -12,6 +12,7 @@ local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlw
 local fFlagSduiExperienceDetailsSupport = sharedFlagsModule.FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = sharedFlagsModule.FFlagSduiEventDetailsSupport
 local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
+local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local t = {
 	numColumns = 3,
 	fractionalItemAmount = 0,
@@ -20,22 +21,22 @@ local t = {
 	verticalPadding = 16
 }
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 48 | named "useCreateClientBindingSduiContext" ]]
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 50 | named "useCreateClientBindingSduiContext" ]]
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref)
 	p6 = p6 or p0
 	local _ = nil
 	local var6 = nil
 	
 	if not fFlagLuaAppCompositionAlways then
 		local var7 = useCollectionLayoutConfig(p1, p2)
-		var6 = reactModule.useCallback(function(p8) --[[ line: 66 ]]
+		var6 = reactModule.useCallback(function(p9) --[[ line: 69 ]]
 			-- upvalues: signalsModule (copy), p5 (ref), t (copy), var7 (write), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (ref)
-			return signalsModule.createComputed(function(p9) --[[ line: 67 ]]
-				-- upvalues: p5 (copy), t (copy), var7 (copy), p8 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (copy)
+			return signalsModule.createComputed(function(p10) --[[ line: 70 ]]
+				-- upvalues: p5 (copy), t (copy), var7 (copy), p9 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p0 (copy)
 				if p5 ~= false then
 					return t
 				elseif var7 then
-					return (var7[p8] or var7[collectionItemSize.Small])(p9)
+					return (var7[p9] or var7[collectionItemSize.Small])(p10)
 				end
 				sduiLogger.reportError(sduiErrors.SduiErrorType.NoPageLayoutConfig, {
 					message = `No page layout config available for {p0}, returning default config`
@@ -45,8 +46,8 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 48 | named "useCreate
 			end)
 		end, { var7, p0, p5 })
 	end
-	return reactModule.useMemo(function() --[[ line: 94 ]]
-		-- upvalues: getSduiServiceDependenciesStore (copy), p0 (ref), p6 (ref), var6 (write), p5 (ref), p3 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), p4 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), p7 (ref)
+	return reactModule.useMemo(function() --[[ line: 97 ]]
+		-- upvalues: getSduiServiceDependenciesStore (copy), p0 (ref), p6 (ref), var6 (write), p5 (ref), p3 (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), p4 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), p7 (ref), fFlagLuaAppSduiVideoThumbnail (copy), p8 (ref)
 		return {
 			dependencies = getSduiServiceDependenciesStore().getDependencies(p0),
 			appPage = p0,
@@ -55,11 +56,13 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7) --[[ line: 48 | named "useCreate
 			appCompositionEnabled = p5 ~= nil or p5,
 			dataUpdatedTimestamp = p3,
 			configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p4 else nil,
-			scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p7 else nil
+			scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p7 else nil,
+			videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail then p8 else nil
 		}
 	end, {
 		p0, p6, var6, p3,
 		if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then p4 else nil,
-		p5, if fFlagLuaAppSduiStickyHeaderScrollAway then p7 else nil
+		p5, if fFlagLuaAppSduiStickyHeaderScrollAway then p7 else nil,
+		if fFlagLuaAppSduiVideoThumbnail then p8 else nil
 	})
 end

@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local parent = flyoutSidePanel.Parent
 local foundationModule = require(parent.Foundation)
 local builderIconsModule = require(parent.BuilderIcons)
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
@@ -17,8 +18,9 @@ local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
 local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local getFFlagEnableCommunityListExperimentation = sharedFlagsModule.GetFFlagEnableCommunityListExperimentation
-local communityListExperimentation = require(parent.Groups).Experiments.CommunityListExperimentation
+local fFlagEnableLuaCommunityList = sharedFlagsModule.FFlagEnableLuaCommunityList
+local fFlagFlyoutResolveItemContextOnActivationModule = require(flyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
+local communityListRouting = require(parent.Groups).CommunityListRouting
 local t = {
 	Favorites = "Favorites",
 	ContinuePlaying = "ContinuePlaying",
@@ -72,6 +74,7 @@ local t_2 = {
 	[t.Terms] = "CommonUI.Features.Label.Terms",
 	[t.Privacy] = "CommonUI.Features.Label.Privacy"
 }
+local fFlagFlyoutResolveItemContextOnActivationModule_1 = fFlagEnableLuaCommunityList and fFlagFlyoutResolveItemContextOnActivationModule
 local t_3 = {
 	[t.Favorites] = {
 		itemType = t.Favorites,
@@ -90,7 +93,7 @@ local t_3 = {
 		textKey = t_2[t.Inventory],
 		icon = builderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p0) --[[ line: 120 ]]
+			urlGenerator = function(p0) --[[ line: 132 ]]
 				-- upvalues: urlBuilder (ref)
 				return p0 and urlBuilder.user.inventory({ userId = p0 }) or nil
 			end
@@ -108,7 +111,11 @@ local t_3 = {
 		itemType = t.Communities,
 		textKey = t_2[t.Communities],
 		icon = builderIconsModule.Icon.ThreePeople,
-		context = if getFFlagEnableCommunityListExperimentation() and communityListExperimentation.getCommunityListEnabled() then { appPage = appPage.Groups } else { url = urlBuilder.static.groups() }
+		context = if fFlagFlyoutResolveItemContextOnActivationModule_1 then nil else { url = urlBuilder.static.groups() },
+		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then function() --[[ line: 102 | named "getCommunitiesContext" ]]
+			-- upvalues: communityListRouting (ref), appPage (ref), urlBuilder (ref)
+			return if communityListRouting.getShouldUseLuaCommunityList() then { appPage = appPage.Groups } else { url = urlBuilder.static.groups() }
+		end else nil
 	},
 	[t.Messages] = {
 		itemType = t.Messages,
@@ -151,7 +158,7 @@ local t_3 = {
 		textKey = t_2[t.CreateGames],
 		icon = builderIconsModule.Icon.Studio,
 		context = {
-			urlGenerator = function(p1) --[[ line: 193 ]]
+			urlGenerator = function(p1) --[[ line: 203 ]]
 				return p1({ utm_content = "side_panel" })
 			end
 		}
@@ -167,7 +174,7 @@ local t_3 = {
 		textKey = t_2[t.GiftCards],
 		icon = builderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p2) --[[ line: 211 ]]
+			urlGenerator = function(p2) --[[ line: 221 ]]
 				-- upvalues: urlBuilder (ref)
 				return urlBuilder.static.giftCards(p2)
 			end
@@ -191,14 +198,14 @@ local t_3 = {
 		itemType = t.Terms,
 		textKey = t_2[t.Terms],
 		context = {
-			urlGenerator = function(_, p3) --[[ line: 238 ]]
+			urlGenerator = function(_, p3) --[[ line: 248 ]]
 				-- upvalues: urlBuilder (ref)
-				local var10 = if p3 then p3.getTermsOfUseLink() else nil
+				local var13 = if p3 then p3.getTermsOfUseLink() else nil
 				
-				if var10 == nil or var10 == "" then
-					var10 = urlBuilder.static.about.terms({ useGameQQUrls = true })
+				if var13 == nil or var13 == "" then
+					var13 = urlBuilder.static.about.terms({ useGameQQUrls = true })
 				end
-				return var10
+				return var13
 			end
 		}
 	},
@@ -206,14 +213,14 @@ local t_3 = {
 		itemType = t.Privacy,
 		textKey = t_2[t.Privacy],
 		context = {
-			urlGenerator = function(_, p4) --[[ line: 254 ]]
+			urlGenerator = function(_, p4) --[[ line: 264 ]]
 				-- upvalues: urlBuilder (ref)
-				local var11 = if p4 then p4.getPrivacyPolicyLink() else nil
+				local var14 = if p4 then p4.getPrivacyPolicyLink() else nil
 				
-				if var11 == nil or var11 == "" then
-					var11 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
+				if var14 == nil or var14 == "" then
+					var14 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
 				end
-				return var11
+				return var14
 			end
 		}
 	}

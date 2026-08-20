@@ -1039,7 +1039,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,正在轉錄…
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,我們沒聽清楚，請再試一次。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,我們尚未支援該語言。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,若要使用麥克風，請輕觸此處以更新裝置設定。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,若要使用麥克風，請前往裝置設定，並授予 Roblox 麥克風權限。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,無法存取麥克風
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,若要使用語音傳送訊息，我們會依據《隱私權政策》處理你的音訊，並立即將其刪除。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,你已啟用語音轉文字聊天
@@ -1823,6 +1823,7 @@ Feature.Build.Action.ViewUsage,查看使用量
 Feature.Build.Content.NewGame,新遊戲
 Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
 Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
+Feature.Build.Description.BoostGameAudience,增加遊戲的受眾
 Feature.Build.Description.BuildIdeaGame,將想法化為遊戲
 Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
@@ -1833,6 +1834,7 @@ Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結�
 Feature.Build.Description.GameCreationDone,我已建立完成並發佈你的遊戲。你可以打開遊戲試玩。
 Feature.Build.Description.GameSavedPlaytest,我已建立遊戲並儲存了新版本。你可以打開遊戲試玩。
 Feature.Build.Description.HubSettings,在創作者中心管理所有設定
+Feature.Build.Description.InviteFriendLimit,選擇最多 {MAX_INVITES} 位好友，然後分享遊戲連結。
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
 Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
 Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
@@ -1843,6 +1845,7 @@ Feature.Build.Description.PrivateShare,變更遊戲的受眾設定以分享。
 Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
 Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
+Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
 Feature.Build.Description.VersionChanges,告訴玩家此版本有哪些變更。
 Feature.Build.Header.AccessSharing,存取權與分享
 Feature.Build.Header.ContentMaturity,成年適宜內容
@@ -1851,6 +1854,7 @@ Feature.Build.Header.GameDetails,遊戲詳情
 Feature.Build.Header.Overview,概覽
 Feature.Build.Label.Access,存取權
 Feature.Build.Label.AdditionalUsage,額外組建使用量
+Feature.Build.Label.AdditionalUsed,已使用 {USED}，上限 {LIMIT}
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
@@ -1858,6 +1862,7 @@ Feature.Build.Label.BackToBuild,返回建立
 Feature.Build.Label.Building,建立中...
 Feature.Build.Label.CaptureLibrary,截圖資料庫
 Feature.Build.Label.ContentRating,內容分級
+Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
@@ -1868,14 +1873,17 @@ Feature.Build.Label.FreeBuildUsage,免費組建使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,僅限好友
 Feature.Build.Label.GetMoreBuildUsage,取得更多組建使用量
+Feature.Build.Label.Hi,嗨
 Feature.Build.Label.IconThumbnails,圖示和縮圖
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,受限
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
 Feature.Build.Label.Pending,擱置
+Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
 Feature.Build.Label.PreviouslyPublished,先前已發佈
 Feature.Build.Label.Private,私人
 Feature.Build.Label.Public,公開
@@ -1883,6 +1891,8 @@ Feature.Build.Label.PubliclyUnavailable,尚未開放大眾遊玩
 Feature.Build.Label.Published,已發佈
 Feature.Build.Label.Ready,就緒
 Feature.Build.Label.ResetsDaily,每日重置
+Feature.Build.Label.RestoredVersion,已還原 {VERSION}
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,搜尋遊戲
 Feature.Build.Label.SearchTasks,搜尋任務
@@ -1952,9 +1962,16 @@ Feature.Build.Label.ToolTasksPlanRunning,正在規劃你的任務
 Feature.Build.Label.ToolThumbnailDone,設定遊戲縮圖
 Feature.Build.Label.ToolThumbnailFailed,無法設定遊戲縮圖
 Feature.Build.Label.ToolThumbnailRunning,正在設定遊戲縮圖
+Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
+Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 無上限
 Feature.Build.Label.Usage,使用量
+Feature.Build.Label.UsageUsed,已使用 {USED}
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,版本
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,版本標題和說明
 Feature.Build.Label.Video,影片
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
@@ -1970,10 +1987,12 @@ Feature.Build.Message.BuildResponseFailed,組建系統無法回應，請再試�
 Feature.Build.Message.BuildStillWorking,正在處理。在等待期間，你可以離開 App、玩 Roblox 或開始另一項專案。
 Feature.Build.Message.BuildStopped,你已停止組建。
 Feature.Build.Message.BuildTemporarilyDown,暫時無法使用組建，請 1 分鐘後再試。
+Feature.Build.Message.CompletedTasks,已完成 {COUNT} 項任務
 Feature.Build.Message.ConversationGone,此對話已無法使用。請開始新的對話。
 Feature.Build.Message.ConversationNotFound,找不到此對話。請開始新的對話。
 Feature.Build.Message.CreateGameToUseBuild,建立新遊戲以開始使用組建。
 Feature.Build.Message.CreatedRevertedVer,已建立還原的版本。
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,在創作者中心擴大你的受眾資格
 Feature.Build.Message.ExperiencesLoadFailed,無法載入體驗
 Feature.Build.Message.FailedTitle,{TITLE}失敗
@@ -1981,32 +2000,45 @@ Feature.Build.Message.FinishedTitle,{TITLE}完成
 Feature.Build.Message.FriendsLoadFailed,無法載入好友，請再試一次。
 Feature.Build.Message.GameNotCreated,無法建立遊戲，請再試一次。
 Feature.Build.Message.GamePublishFailed,無法發佈遊戲，請再試一次。
+Feature.Build.Message.GameShared,已分享遊戲
+Feature.Build.Message.GameSharedWith,遊戲已分享給 {DISPLAY_NAME}
+Feature.Build.Message.HiDisplayName,{DISPLAY_NAME}，你好：
 Feature.Build.Message.InvalidMessage,你的訊息發生錯誤。請編輯後再試一次。
 Feature.Build.Message.InvitesLoadFailed,無法載入邀請
+Feature.Build.Message.LimitBelowSpend,上限不能低於今天已消費的 {ALREADY_SPENT} Robux。
 Feature.Build.Message.LinkCopied,連結已複製到剪貼簿。
 Feature.Build.Message.LoadingVersions,正在載入版本紀錄...
 Feature.Build.Message.NoDescriptionProvided,未提供說明。
 Feature.Build.Message.NoFriendsToAdd,你沒有可新增的好友。請先在 Roblox 上尋找可交流的對象。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
+Feature.Build.Message.OneTaskCompleted,已完成 1 項任務
 Feature.Build.Message.OutOfBuildUsage,你的組建使用量已用完。查看你的選項，使用 Robux 以繼續創作。
+Feature.Build.Message.PlaytestersAdded,已新增 {INVITED_COUNT} 位遊戲測試員，共 {MAX_INVITES} 位
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
 Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
 Feature.Build.Message.PublishReverted,已還原發佈版本。
 Feature.Build.Message.QuestionnaireNeeded,此遊戲是在組建之外編輯的。請完成內容問卷以發佈。
 Feature.Build.Message.ReadyToPlay,你的遊戲已可在 Roblox 上遊玩！
+Feature.Build.Message.ResetHours,{HOURS} 小時後重置
+Feature.Build.Message.ResetOneHour,1 小時後重置
 Feature.Build.Message.RestoreVersionFailed,無法還原此版本，請再試一次。
 Feature.Build.Message.RevertVersionFail,無法建立還原的版本，請再試一次。
 Feature.Build.Message.RunningTitle,執行{title}
 Feature.Build.Message.SafetyPolicy,此訊息違反我們的安全政策。請編輯後再試一次。
 Feature.Build.Message.SaveChangesFailed,無法儲存變更，請再試一次。
+Feature.Build.Message.ShareExperience,分享 {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,無法建立分享連結，請再試一次。
 Feature.Build.Message.SignedOut,已登出，請登入後再試一次。
+Feature.Build.Message.TasksCompleted,已完成 {NUM_COMPLETED_TASKS} 項任務
+Feature.Build.Message.ThinkingSeconds,思考了 {SECONDS} 秒
 Feature.Build.Message.TryAgain,再試一次。
 Feature.Build.Message.TurnToPortrait,將裝置切換為直放模式，以繼續進行遊戲。
 Feature.Build.Message.VersionHistoryLoad,無法載入版本歷史紀錄。
 Feature.Build.Message.WhatToCreate,今天你想要建立什麼呢？
+Feature.Build.Message.WorkedMinutesSeconds,已運作 {MINUTES} 分 {REM_SECONDS} 秒
+Feature.Build.Message.WorkedSeconds,已運作 {SECONDS} 秒
 Feature.Build.Message.WorkingOnTasks,正在處理你的任務
 Feature.Build.Title.AddFriendsToPlaytest,新增好友協助你試玩
 Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
@@ -2028,12 +2060,14 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.Playtesters,遊戲測試員
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
+Feature.Build.Title.PromoteGameFree,免費宣傳你的遊戲
 Feature.Build.Title.PushNotifications,推播通知
 Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
 Feature.Build.Title.Tasks,任務
 Feature.Build.Title.TurnActivity,回合活動
 Feature.Build.Title.VersionHistory,版本歷史紀錄
 Feature.Build.Title.VersionInformation,版本資訊
+Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,允許
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2684,6 +2718,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,顯示名稱無法使用
 Feature.DisplayName.ErrorMessage.NameTooLong,顯示名稱應含有 20 個字元以下
 Feature.DisplayName.ErrorMessage.NameTooShort,顯示名稱至少要有 3 個字元
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,顯示名稱含有未支援的字元
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num} 天
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,選擇想擁有該物品的天數。計時器會在購買後開始。
@@ -2694,6 +2729,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,選項
 Feature.Durables.Label.ItemExpires,物品有效期限
+Feature.Durables.PartiallyExpiredItems.BodyText,此已儲存虛擬人偶的部分道具已過期並已移除。
+Feature.Durables.PartiallyExpiredItems.TitleText,道具已過期
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（購買後開始計算）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要依據歐盟《數位服務法》 檢舉違法內容，請前往：https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,沒有網路連線
@@ -3182,6 +3219,8 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,生成
+Feature.Moments.Action.GenerateTextFeedbackNotHelpful,沒有幫助
+Feature.Moments.Action.GenerateTextFeedbackPolicy,內容不當或違反準則
 Feature.Moments.Action.Hide,隱藏詳細資訊
 Feature.Moments.Action.HowToCapture,如何截圖
 Feature.Moments.Action.Join,
@@ -3199,6 +3238,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪影片
 Feature.Moments.Description.CommunityStandards,查看社群標準，瞭解哪些內容可以或不能發佈。
 Feature.Moments.Description.EmptyCapturesLibrary,這裡會顯示你的截圖。
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,對於 AI 生成的文字，張貼前請先審核，你必須對發佈的內容負責。
 Feature.Moments.Description.HowToCaptureStep1,加入已啟用截圖功能的體驗，並選擇漢堡選單
 Feature.Moments.Description.HowToCaptureStep2,啟用截圖控制項
 Feature.Moments.Description.HowToCaptureStep3,擷取遊戲遊玩的照片和影片
@@ -3261,6 +3301,7 @@ Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
 Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
 Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
 Feature.Moments.Label.Videos,
+Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
 Feature.Moments.Title.ReportPost,檢舉貼文
@@ -3425,6 +3466,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,編輯名稱
 Feature.Profile.Heading.EditDisplayName,編輯顯示名稱
 Feature.Profile.Heading.InsufficientFunds,資金不足
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,已成功儲存個人檔案照片
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,數據
 Feature.Profile.Heading.Username,
@@ -4004,6 +4046,7 @@ Feature.Subscription.Text.PerMonth,/ 月
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,由於{rule}，你的虛擬人偶已重置。你仍然可以使用市集，但虛擬人偶的變更將不會儲存，時間持續至 {time} 為止。
 Feature.Timeout.Prompt.SaveTitleText,目前已停用儲存功能
+Feature.Timeout.Prompt.TitleText,你的虛擬人偶已重置
 Feature.Timeout.WarningBanner.DisabledMessage,已停用虛擬人偶儲存功能
 Feature.Timeout.WarningBanner.DisabledUntilMessage,虛擬人偶儲存功能已停用，時間持續至 {time} 為止
 Feature.Toast.Heading.PurchaseMessage.Success,已解鎖
@@ -4021,6 +4064,8 @@ Feature.Toast.VoteError.AssetNotVoteable,無法為此體驗投票。
 Feature.Toast.VoteError.Default,無法進行此動作。
 Feature.Toast.VoteError.FloodCheckThresholdMet,您的投票頻率過高。
 Feature.Toast.VoteError.PlayGame,若要評價，請先參訪此體驗。
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,由於你屢次違反我們的《社群標準》，目前無法驗證你的年齡。你可以在限制結束後重試。
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年齡驗證已暫停
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,由於屢次或嚴重違規，你已遭停權無法玩此遊戲。
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,你的行為違反了規範，因此無法玩此遊戲。
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Roblox 已禁止你加入此遊戲
@@ -4547,11 +4592,13 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,取消邀請
+InGame.PlayerDropDown.ConfirmUnfriend,輕觸以確認解除好友關係
 InGame.PlayerDropDown.Decline,拒絕
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} 已達好友人數上限。
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,最後更新時間為 {minutes} 分鐘前
 InGame.PlayerList.FooterUnableToLoad,無法載入
 InGame.PlayerList.FriendsEmpty,你的好友都沒玩過這項體驗。

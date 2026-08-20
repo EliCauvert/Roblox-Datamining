@@ -4,6 +4,7 @@ local url = require(parent.Http).Url
 local httpService = game:GetService("HttpService")
 local discoveryUtilsModule = require(parent.DiscoveryUtils)
 local fFlagEnableContextFeaturesForOmniRecommendations = require(parent.SharedFlags).FFlagEnableContextFeaturesForOmniRecommendations
+local getFFlagHomePYMKUseProfileFrameThumbnail = require(parent.SharedFlags).GetFFlagHomePYMKUseProfileFrameThumbnail
 local addSystemInfoToArgs = discoveryUtilsModule.AddSystemInfoToArgs
 local omniRecommendationsPageType = discoveryUtilsModule.OmniRecommendationsPageType
 local var2 = urlBuilder.new({
@@ -11,8 +12,8 @@ local var2 = urlBuilder.new({
 	base = url.APIS_URL
 })
 
-return function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 54 ]]
-	-- upvalues: omniRecommendationsPageType (ref), fFlagEnableContextFeaturesForOmniRecommendations (ref), addSystemInfoToArgs (ref), var2 (ref), httpService (ref)
+return function(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ line: 55 ]]
+	-- upvalues: omniRecommendationsPageType (ref), fFlagEnableContextFeaturesForOmniRecommendations (ref), getFFlagHomePYMKUseProfileFrameThumbnail (ref), addSystemInfoToArgs (ref), var2 (ref), httpService (ref)
 	local t = {
 		pageType = omniRecommendationsPageType.fromAppPage(p1),
 		sessionId = p2,
@@ -25,6 +26,9 @@ return function(p0, p1, p2, p3, p4, p5, p6, p7, p8) --[[ line: 54 ]]
 	
 	if fFlagEnableContextFeaturesForOmniRecommendations and p8 then
 		t.contextFeatures = p8
+	end
+	if getFFlagHomePYMKUseProfileFrameThumbnail() and p9 then
+		t.includePymkSortProfileFrame = p9
 	end
 	addSystemInfoToArgs(t)
 	

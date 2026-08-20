@@ -5,7 +5,7 @@ local reactModule = require(parent.React)
 local oneByTwoTileModule = require(sponsoredTiles.OneByTwoTile)
 local getTileBadgeByPositionConfigFromEntry = require(parent.GameTile).getTileBadgeByPositionConfigFromEntry
 local _ = require(parent.VideoUtils)
-local var3 = reactModule.memo(function(p0) --[[ line: 47 ]]
+local var3 = reactModule.memo(function(p0) --[[ line: 46 ]]
 	-- upvalues: getTileBadgeByPositionConfigFromEntry (ref), reactModule (ref), oneByTwoTileModule (ref)
 	local var4 = -((p0.maxItemIndex or 0) + 1)
 	
@@ -19,16 +19,19 @@ local var3 = reactModule.memo(function(p0) --[[ line: 47 ]]
 		placeIdOverride = p0.item.placeIdOverride,
 		launchDataOverride = p0.item.launchDataOverride,
 		referralSource = p0.appPage,
+		reportGameDetailOpened = p0.reportGameDetailOpened,
 		reportExperienceLaunched = p0.reportExperienceLaunched,
 		launchExperienceEventContext = p0.launchExperienceEventContext,
 		topicId = p0.topicId,
 		badgeOverride = getTileBadgeByPositionConfigFromEntry(p0.item),
 		primaryImageAssetId = p0.item.primaryImageAssetId,
 		primaryVideoAssetId = p0.item.primaryVideoAssetId,
+		attributionThumbnailAssetId = p0.item.attributionThumbnailAssetId,
 		logoImageAssetId = p0.item.logoAssetId,
 		logoAspectRatio = p0.item.logoAspectRatio,
 		headline = p0.item.headline,
 		subtitle = p0.item.subtitle,
+		ctaText = p0.item.ctaText or "",
 		adId = p0.item.adId,
 		impressionsTag = p0.impressionsTag,
 		index = p0.index,
@@ -43,7 +46,7 @@ local var3 = reactModule.memo(function(p0) --[[ line: 47 ]]
 		enableSponsoredFeedback = p0.enableSponsoredFeedback,
 		enableReportAd = p0.enableReportAd,
 		enableExplicitFeedback = p0.enableExplicitFeedback,
-		onSelectionGained = reactModule.useCallback(function() --[[ line: 55 ]]
+		onSelectionGained = reactModule.useCallback(function() --[[ line: 54 ]]
 			-- upvalues: p0 (ref)
 			if p0.onSelectionGained then
 				p0.onSelectionGained(p0.item, p0.index, p0.item.universeId)
@@ -54,7 +57,7 @@ local var3 = reactModule.memo(function(p0) --[[ line: 47 ]]
 	})
 end)
 
-return function(p1) --[[ line: 103 ]]
+return function(p1) --[[ line: 105 ]]
 	-- upvalues: reactModule (ref), var3 (ref), gameCollectionItemTypes (ref)
 	return reactModule.createElement(var3, p1), gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile
 end

@@ -3,5 +3,6 @@
 	GetFFlagEnablePartyVoiceOnlyForUnfilteredThreads = require(script.GetFFlagEnablePartyVoiceOnlyForUnfilteredThreads),
 	GetFStringPartyVoiceEligibilityAllowList = require(script.GetFStringPartyVoiceEligibilityAllowList),
 	FFlagEncodeSquadMembersUpdated = require(script.FFlagEncodeSquadMembersUpdated),
-	FFlagSquadsPresenceStoreMigration = require(script.FFlagSquadsPresenceStoreMigration)
+	FFlagSquadsPresenceStoreMigration = require(script.FFlagSquadsPresenceStoreMigration),
+	FFlagSquadExperienceInviteRetryAfter = require(script.FFlagSquadExperienceInviteRetryAfter)
 }

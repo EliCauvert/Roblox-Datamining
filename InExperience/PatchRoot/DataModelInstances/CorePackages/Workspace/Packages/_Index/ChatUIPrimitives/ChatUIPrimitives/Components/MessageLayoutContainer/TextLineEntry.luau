@@ -13,7 +13,7 @@ local rewriteToggleModule = require(script.Parent.RewriteToggle)
 local iconName = foundationModule.Enums.IconName
 local useSignalBinding = signalsReactModule.useSignalBinding
 
-local function _(value) --[[ line: 28 | named "ceilToEven" ]]
+local function _(value) --[[ line: 31 | named "ceilToEven" ]]
 	local ceiled = math.ceil(value)
 	
 	if ceiled % 2 == 1 then
@@ -22,7 +22,7 @@ local function _(value) --[[ line: 28 | named "ceilToEven" ]]
 	return math.max(0, ceiled)
 end
 
-local _ = function(value) --[[ line: 36 | named "getPresetBoltIconAttributes" ]]
+local _ = function(value) --[[ line: 39 | named "getPresetBoltIconAttributes" ]]
 	local t = { weight = "700" }
 	local ceiled = math.ceil(value * 3 / 4)
 	
@@ -34,19 +34,19 @@ local _ = function(value) --[[ line: 36 | named "getPresetBoltIconAttributes" ]]
 	return t
 end
 
-return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
+return reactModule.memo(function(p0) --[[ line: 43 | named "TextLineEntry" ]]
 	-- upvalues: foundationModule (ref), reactModule (ref), signalsModule (ref), useStableSignalModule (ref), signalsReactModule (ref), textChannelWindowPerfTrackerModule (ref), useSignalBinding (ref), fFlagExpChatPresetBoltInMessageLayoutModule (ref), formatInlineIconModule (ref), iconName (ref), rewriteToggleModule (ref)
 	local var24, var25
 	local var13 = foundationModule.Hooks.useTokens()
-	local var14 = reactModule.useMemo(function() --[[ line: 45 ]]
+	local var14 = reactModule.useMemo(function() --[[ line: 48 ]]
 		-- upvalues: var13 (ref)
 		local color3 = var13.DarkMode.Content.Muted.Color3
 		
 		return string.format("<font color=\"rgb(%d,%d,%d)\">", math.round(color3.R * 255), math.round(color3.G * 255), math.round(color3.B * 255))
 	end, { var13 })
-	local var15 = reactModule.useMemo(function() --[[ line: 55 ]]
+	local var15 = reactModule.useMemo(function() --[[ line: 58 ]]
 		-- upvalues: signalsModule (copy), p0 (ref)
-		return signalsModule.createComputed(function(p1) --[[ line: 56 ]]
+		return signalsModule.createComputed(function(p1) --[[ line: 59 ]]
 			-- upvalues: p0 (copy)
 			local messageId = p0.getMessageId(p1)
 			
@@ -55,11 +55,11 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
 	end, { p0.getMessageId, p0.getMessagesMap })
 	local var16, var17 = useStableSignalModule(false)
 	local var18 = signalsReactModule.useSignalState(p0.getMessageId)
-	reactModule.useEffect(function() --[[ line: 70 ]]
+	reactModule.useEffect(function() --[[ line: 73 ]]
 		-- upvalues: var17 (ref)
 		var17(false)
 	end, { var18, var17 })
-	reactModule.useEffect(function() --[[ line: 73 ]]
+	reactModule.useEffect(function() --[[ line: 76 ]]
 		-- upvalues: var18 (ref), textChannelWindowPerfTrackerModule (copy)
 		if var18 then
 			textChannelWindowPerfTrackerModule.finishMessageIntervals(var18)
@@ -75,7 +75,7 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
 	
 	if fFlagExpChatPresetBoltInMessageLayoutModule then
 		local var22 = signalsReactModule.useSignalState(var15)
-		local var23 = reactModule.useMemo(function() --[[ line: 91 ]]
+		local var23 = reactModule.useMemo(function() --[[ line: 94 ]]
 			-- upvalues: var22 (write), formatInlineIconModule (copy), iconName (copy), var13 (ref)
 			if not var22 or not var22.presetId or var22.presetId == "" then
 				return ""
@@ -92,7 +92,7 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
 			
 			return var27(lightningBolt, t)
 		end, { var22, var13 })
-		var24 = reactModule.useMemo(function() --[[ line: 104 ]]
+		var24 = reactModule.useMemo(function() --[[ line: 107 ]]
 			-- upvalues: var22 (write), var23 (write), var14 (ref)
 			if not var22 then
 				return ""
@@ -108,10 +108,10 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
 		end, { var22, var23, var14 })
 		local _ = var22 ~= nil
 	else
-		var25 = var19:map(function(p2) --[[ line: 124 ]]
+		var25 = var19:map(function(p2) --[[ line: 127 ]]
 			return p2 ~= nil
 		end)
-		var24 = var19:map(function(p3) --[[ line: 131 ]]
+		var24 = var19:map(function(p3) --[[ line: 134 ]]
 			-- upvalues: var14 (ref)
 			return if p3 then if p3.messageType == "user" then (p3.prefixText or "") .. " " .. p3.content elseif p3.messageType == "system-roblox" then p3.content else var14 .. p3.content .. "</font>" else ""
 		end)
@@ -128,6 +128,10 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
 			RichText = true,
 			LayoutOrder = 1,
 			Text = var24,
+			fontStyle = reactModule.useMemo(function() --[[ line: 154 ]]
+				-- upvalues: p0 (ref)
+				return if p0.fontFace then { Font = p0.fontFace } else nil
+			end, { p0.fontFace or false }),
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}),
@@ -135,7 +139,7 @@ return reactModule.memo(function(p0) --[[ line: 40 | named "TextLineEntry" ]]
 			LayoutOrder = 2,
 			messageBinding = var19,
 			showOriginal = var21,
-			onToggle = reactModule.useCallback(function() --[[ line: 146 ]]
+			onToggle = reactModule.useCallback(function() --[[ line: 149 ]]
 				-- upvalues: var17 (ref), var16 (ref)
 				var17(not var16())
 			end, { var16, var17 })

@@ -1039,7 +1039,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,
 CoreScripts.TextChat.ChatWindow.Transcribing,Transcrevendo...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,Não entendemos! Tente novamente.
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,Ainda não suportamos esse idioma!
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Para usar seu microfone, toque aqui para atualizar as configurações do seu dispositivo."
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,"Para usar o microfone, acesse as configurações do seu dispositivo e dê permissão para a Roblox usar o microfone."
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,Não é possível acessar o microfone
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,"Para enviar mensagens com sua voz, processaremos o áudio e o excluiremos imediatamente, de acordo com nossa política de privacidade."
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,Você ativou a voz ao bate-papo de texto
@@ -1831,6 +1831,7 @@ Feature.Build.Description.FriendsLinkOnly,Só suas amizades podem acessar este l
 Feature.Build.Description.GameCreationDone,Finalizei a criação e a publicação do seu jogo. Você pode abri-lo para fazer testes.
 Feature.Build.Description.GameSavedPlaytest,Finalizei a criação do seu jogo e salvei uma nova versão. Você pode abri-lo para testar.
 Feature.Build.Description.HubSettings,Gerencie todas as configurações no Salão dos Criadores
+Feature.Build.Description.InviteFriendLimit,"Escolha até {MAX_INVITES} amizades e, em seguida, compartilhe o link para o jogo."
 Feature.Build.Description.MakeAudienceAvail,Publique sua experiência para disponibilizá-la para este público.
 Feature.Build.Description.ManageAppearance,Gerencie como seu jogo aparece para outras pessoas.
 Feature.Build.Description.PlayAfterPublish,Escolha quem poderá jogar depois que você publicar esta experiência.
@@ -1841,6 +1842,7 @@ Feature.Build.Description.PrivateShare,Altere a configuração de público do se
 Feature.Build.Description.RaiseLimitOrWait,Aumente seu limite diário de Robux para continuar criando ou aguarde até amanhã para que seja restabelecido.
 Feature.Build.Description.RatingAgreement,"Ao publicar, você concorda que esta classificação de conteúdo está correta."
 Feature.Build.Description.RestoreLatest,Esta versão se tornará sua versão mais recente publicada.
+Feature.Build.Description.RevertToVersion,Confirme para reverter a última alteração e voltar para {VERSION}.
 Feature.Build.Description.VersionChanges,Diga aos jogadores o que mudou nesta versão.
 Feature.Build.Header.AccessSharing,Acesso e compartilhamento
 Feature.Build.Header.ContentMaturity,Maturidade do conteúdo
@@ -1849,6 +1851,7 @@ Feature.Build.Header.GameDetails,Detalhes do jogo
 Feature.Build.Header.Overview,Visão geral
 Feature.Build.Label.Access,Acesso
 Feature.Build.Label.AdditionalUsage,Limite de uso adicional da função Criar
+Feature.Build.Label.AdditionalUsed,{USED} de {LIMIT} usado(s)
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,Salvo automaticamente
 Feature.Build.Label.Available,disponível(is)
@@ -1856,6 +1859,7 @@ Feature.Build.Label.BackToBuild,"Voltar para ""Construir"""
 Feature.Build.Label.Building,Criando…
 Feature.Build.Label.CaptureLibrary,Biblioteca de capturas
 Feature.Build.Label.ContentRating,Classificação de conteúdo
+Feature.Build.Label.CreatedDate,{DAY} de {MONTH} de {YEAR}
 Feature.Build.Label.CreatorHub,Salão dos Criadores
 Feature.Build.Label.Deleted,Excluído
 Feature.Build.Label.DescribeIdea,Descreva uma ideia
@@ -1866,14 +1870,17 @@ Feature.Build.Label.FreeBuildUsage,Limite de uso gratuito da função Criar
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Apenas amizades
 Feature.Build.Label.GetMoreBuildUsage,Obtenha mais limite de uso para a função Criar
+Feature.Build.Label.Hi,Olá
 Feature.Build.Label.IconThumbnails,Ícone e miniaturas
 Feature.Build.Label.InProgress,Em andamento
 Feature.Build.Label.InputNeeded,Informações necessárias
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitado
 Feature.Build.Label.Loading,Carregando…
 Feature.Build.Label.NoLimit,Sem limite
 Feature.Build.Label.NotStarted,Não iniciado
 Feature.Build.Label.Pending,Pendente
+Feature.Build.Label.PercentUsed,Uso: {PERCENT}%
 Feature.Build.Label.PreviouslyPublished,Publicado anteriormente
 Feature.Build.Label.Private,Privada
 Feature.Build.Label.Public,Pública
@@ -1881,6 +1888,8 @@ Feature.Build.Label.PubliclyUnavailable,Indisponível para o público
 Feature.Build.Label.Published,Publicada
 Feature.Build.Label.Ready,
 Feature.Build.Label.ResetsDaily,Reinicia diariamente
+Feature.Build.Label.RestoredVersion,Versão {VERSION} restaurada
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Pesquisar jogos
 Feature.Build.Label.SearchTasks,Pesquisar tarefas
@@ -1950,9 +1959,16 @@ Feature.Build.Label.ToolTasksPlanRunning,Planejando suas tarefas
 Feature.Build.Label.ToolThumbnailDone,Miniatura do jogo definida
 Feature.Build.Label.ToolThumbnailFailed,Não foi possível definir a miniatura do jogo
 Feature.Build.Label.ToolThumbnailRunning,Definindo a miniatura do jogo
+Feature.Build.Label.UniverseNumber,Universo {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Desconhecido
+Feature.Build.Label.UnlimitedUsed,{USED} usado(s) • Sem limite
 Feature.Build.Label.Usage,Limite de uso
+Feature.Build.Label.UsageUsed,Uso: {USED}
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,Versão
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Título e descrição da versão
 Feature.Build.Label.Video,Vídeo
 Feature.Build.Message.AccountRequirements,Sua conta não atende aos requisitos para usar a função Criar.
@@ -1968,10 +1984,12 @@ Feature.Build.Message.BuildResponseFailed,A função Criar não respondeu. Tente
 Feature.Build.Message.BuildStillWorking,"Estamos resolvendo isso. Você pode sair do aplicativo, jogar Roblox ou iniciar outro projeto enquanto espera."
 Feature.Build.Message.BuildStopped,Você interrompeu a função Criar.
 Feature.Build.Message.BuildTemporarilyDown,A função Criar está temporariamente indisponível. Tente novamente em um minuto.
+Feature.Build.Message.CompletedTasks,{COUNT} tarefas concluídas
 Feature.Build.Message.ConversationGone,Esta conversa não está mais disponível. Inicie uma nova.
 Feature.Build.Message.ConversationNotFound,Não foi possível encontrar esta conversa. Inicie uma nova.
 Feature.Build.Message.CreateGameToUseBuild,Crie um jogo novo para começar a usar a função Criar.
 Feature.Build.Message.CreatedRevertedVer,Uma versão revertida foi criada.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Aumente a elegibilidade do seu público no Salão dos Criadores
 Feature.Build.Message.ExperiencesLoadFailed,Não foi possível carregar as experiências
 Feature.Build.Message.FailedTitle,Houve um erro em {TITLE}
@@ -1979,32 +1997,45 @@ Feature.Build.Message.FinishedTitle,{TITLE} concluído
 Feature.Build.Message.FriendsLoadFailed,Não foi possível carregar suas amizades. Tente novamente.
 Feature.Build.Message.GameNotCreated,Seu jogo não foi criado. Tente novamente.
 Feature.Build.Message.GamePublishFailed,Não foi possível publicar seu jogo. Tente novamente.
+Feature.Build.Message.GameShared,Jogo compartilhado
+Feature.Build.Message.GameSharedWith,Jogo compartilhado com {DISPLAY_NAME}
+Feature.Build.Message.HiDisplayName,"Olá, {DISPLAY_NAME}!"
 Feature.Build.Message.InvalidMessage,Algo deu errado com sua mensagem. Escreva outra e tente novamente.
 Feature.Build.Message.InvitesLoadFailed,Não foi possível carregar os convites
+Feature.Build.Message.LimitBelowSpend,O limite não pode ser inferior ao(s) {ALREADY_SPENT} Robux que você já gastou hoje.
 Feature.Build.Message.LinkCopied,Link copiado para área de transferência.
 Feature.Build.Message.LoadingVersions,Carregando o histórico de versões...
 Feature.Build.Message.NoDescriptionProvided,Nenhuma descrição foi fornecida.
 Feature.Build.Message.NoFriendsToAdd,"Você ainda não tem amizades para adicionar. Primeiro, encontre pessoas para se conectar no Roblox."
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Ainda não há histórico de versões.
+Feature.Build.Message.OneTaskCompleted,1 tarefa concluída
 Feature.Build.Message.OutOfBuildUsage,Você esgotou o limite de uso da função Criar. Veja suas opções para utilizar Robux e continuar criando.
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} de {MAX_INVITES} testadores adicionados
 Feature.Build.Message.PublicPublishFailed,"Seu jogo foi publicado, mas não foi possível torná-lo público. Tente novamente."
 Feature.Build.Message.PublishExpandAudience,Publique para ampliar seu público
 Feature.Build.Message.PublishNotReverted,Sua publicação não foi revertida. Tente novamente.
 Feature.Build.Message.PublishReverted,Publicação revertida.
 Feature.Build.Message.QuestionnaireNeeded,Este jogo foi editado fora da função Criar. Preencha o questionário de conteúdo para publicar.
 Feature.Build.Message.ReadyToPlay,Seu jogo está pronto para ser jogado na Roblox!
+Feature.Build.Message.ResetHours,Reinicia em {HOURS} horas
+Feature.Build.Message.ResetOneHour,Reinicia em 1 hora
 Feature.Build.Message.RestoreVersionFailed,Não foi possível restaurar esta versão. Tente novamente.
 Feature.Build.Message.RevertVersionFail,Uma versão revertida não foi criada. Tente novamente.
 Feature.Build.Message.RunningTitle,Executando {title}
 Feature.Build.Message.SafetyPolicy,Esta mensagem vai contra a nossa política de segurança. Escreva outra e tente novamente.
 Feature.Build.Message.SaveChangesFailed,Não foi possível salvar as alterações. Tente novamente.
+Feature.Build.Message.ShareExperience,Compartilhar {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Não foi possível criar o link de compartilhamento. Tente novamente.
 Feature.Build.Message.SignedOut,Você saiu. Entre e tente novamente.
+Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tarefas concluídas
+Feature.Build.Message.ThinkingSeconds,Pensando há {SECONDS} segundos
 Feature.Build.Message.TryAgain,Tente novamente
 Feature.Build.Message.TurnToPortrait,Coloque seu dispositivo no modo retrato para continuar trabalhando no jogo.
 Feature.Build.Message.VersionHistoryLoad,Não foi possível carregar o histórico de versões.
 Feature.Build.Message.WhatToCreate,O que você quer criar hoje?
+Feature.Build.Message.WorkedMinutesSeconds,Trabalhou por {MINUTES} min e {REM_SECONDS} segundos
+Feature.Build.Message.WorkedSeconds, Trabalhou por {SECONDS} segundos
 Feature.Build.Message.WorkingOnTasks,Executando suas tarefas
 Feature.Build.Title.AddFriendsToPlaytest,Adicione amizades para ajudar você a testar o jogo
 Feature.Build.Title.ArchiveThisGame,Arquivar este jogo?
@@ -2032,6 +2063,7 @@ Feature.Build.Title.Tasks,Tarefas
 Feature.Build.Title.TurnActivity,Ações do assistente durante a resposta
 Feature.Build.Title.VersionHistory,Histórico do lançamento
 Feature.Build.Title.VersionInformation,Informações da versão
+Feature.Build.Title.VersionNumber,Versão {VERSION}
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
 Feature.Captures.Action.Allow,Permitir
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2682,6 +2714,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,O nome de exibição não est�
 Feature.DisplayName.ErrorMessage.NameTooLong,O nome de exibição deve ter no máximo 20 caracteres
 Feature.DisplayName.ErrorMessage.NameTooShort,
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,O nome de exibição contém caracteres incompatíveis
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,Por {num} dia
 Feature.Durables.BottomBar.RentalDurationPlural,Por {num} dias
 Feature.Durables.FTUX.Tooltip,Escolha por quantos dias você quer ter o item. A contagem de tempo começa após a compra.
@@ -2692,6 +2725,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} dia
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} dias
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Opções
 Feature.Durables.Label.ItemExpires,O item expira
+Feature.Durables.PartiallyExpiredItems.BodyText,Alguns itens deste avatar salvo expiraram e foram removidos.
+Feature.Durables.PartiallyExpiredItems.TitleText,Itens expirados
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} dias (começa após a compra)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,"Para denunciar conteúdo ilegal de acordo com o Regulamento Serviços Digitais da UE, visite: https:// www.roblox.com/illegal-content-reporting"
 Feature.EmptyStatePage.Message.NoInternet,Sem conexão com a internet
@@ -3180,6 +3215,8 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expandir
 Feature.Moments.Action.GenerateText,Gerar
+Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Não é útil
+Feature.Moments.Action.GenerateTextFeedbackPolicy,É inapropriado ou viola as diretrizes
 Feature.Moments.Action.Hide,
 Feature.Moments.Action.HowToCapture,Como capturar
 Feature.Moments.Action.Join,
@@ -3196,6 +3233,7 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cortar vídeo
 Feature.Moments.Description.CommunityStandards,Consulte as Regras da Comunidade para obter mais informações sobre o que você pode e não pode dizer.
 Feature.Moments.Description.EmptyCapturesLibrary,É aqui que você encontrará suas capturas.
+Feature.Moments.Description.GenerateTextFeedbackDisclosure,Texto gerado por IA. Revise antes de publicar. Você é responsável pelo que é publicado.
 Feature.Moments.Description.HowToCaptureStep1,Entre em uma experiência com o recurso de captura habilitado e selecione o menu com o ícone de três linhas
 Feature.Moments.Description.HowToCaptureStep2,Habilite os controles de captura
 Feature.Moments.Description.HowToCaptureStep3,Capture fotos e vídeos enquanto joga
@@ -3255,8 +3293,10 @@ Feature.Moments.Label.TextGeneratedBody,Sobreposição de texto gerada por IA e 
 Feature.Moments.Label.TextGeneratedTitle,Texto gerado
 Feature.Moments.Label.TextGenerationFailedBody,Não foi possível gerar o texto. Tente novamente.
 Feature.Moments.Label.TextGenerationFailedTitle,Falha na geração
+Feature.Moments.Label.TextGenerationFilteredBody,Não é possível gerar um texto para esta captura de vídeo porque o conteúdo foi bloqueado.
 Feature.Moments.Label.TextGenerationFilteredTitle,Geração filtrada
 Feature.Moments.Label.Videos,
+Feature.Moments.Title.GenerateTextFeedbackReason,O que deu errado?
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
 Feature.Moments.Title.ReportPost,Denunciar publicação
@@ -3422,6 +3462,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Editar nome
 Feature.Profile.Heading.EditDisplayName,Editar nome de exibição
 Feature.Profile.Heading.InsufficientFunds,Saldo insuficiente
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,Imagem de perfil salva com sucesso
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,Estatísticas
 Feature.Profile.Heading.Username,
@@ -3557,7 +3598,7 @@ Feature.ReportAbuse.Label.TellUsWhatHappenedNoOptional,Conte-nos o que aconteceu
 Feature.ReportAbuse.Label.TextChat,Bate-papo de texto
 Feature.ReportAbuse.Label.UserTextMuted,Bloqueamos bate-papos de {name}
 Feature.ReportAbuse.Label.UserTextMutedError,Não foi possível bloquear bate-papos de {name}
-Feature.ReportAbuse.Label.WhatWasWrong,O que deu errado?
+Feature.ReportAbuse.Label.WhatWasWrong,
 Feature.ReportAbuse.Label.WhereDidItHappen,Onde isso aconteceu?
 Feature.ReportAbuse.Label.YourReportCode,Seu código de denúncia único:
 Feature.ReportAbuse.Message.ChatLineReportingInfoText,"Sua denúncia incluirá todas as mensagens deste canal, incluindo a que você selecionar."
@@ -3999,6 +4040,7 @@ Feature.Subscription.Text.PerMonth,/mês
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Seu avatar foi redefinido por {rule}. Você ainda pode usar o Mercado, mas as alterações no avatar não serão salvas até {time}."
 Feature.Timeout.Prompt.SaveTitleText,Você não pode salvar no momento
+Feature.Timeout.Prompt.TitleText,Redefinimos seu avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Salvamento de avatar desativado
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Salvamento de avatar desativado até {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Desbloqueado
@@ -4016,6 +4058,8 @@ Feature.Toast.VoteError.AssetNotVoteable,Você não pode votar nesta experiênci
 Feature.Toast.VoteError.Default,Ação indisponível.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Você está votando rápido demais.
 Feature.Toast.VoteError.PlayGame,Você precisa explorar a experiência para poder votar.
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Você não pode fazer a verificação da sua idade no momento porque violou as Regras da Comunidade mais de uma vez. Você pode tentar novamente após o término da restrição.
+Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Verificações de idade suspensas
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,"Você não pode mais jogar este jogo, porque algumas regras foram violadas muitas vezes ou houve violações sérias."
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,Você não pode jogar este jogo porque seu comportamento violou as regras.
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,A Roblox baniu você deste jogo
@@ -4546,6 +4590,7 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} alcançou o limite máximo de amizades.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerDropDown.Unfriend,Remover amigo
 InGame.PlayerList.FooterLastUpdated,Última atualização há {minutes} minutos
 InGame.PlayerList.FooterUnableToLoad,Não foi possível carregar
 InGame.PlayerList.FriendsEmpty,Nenhum dos seus amigos jogou esta experiência ainda.

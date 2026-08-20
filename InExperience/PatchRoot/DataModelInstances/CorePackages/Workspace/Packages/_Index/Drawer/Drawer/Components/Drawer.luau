@@ -19,8 +19,9 @@ local focusNavigableSurfaceWrapper = nil
 local focusNavigableSurfaceIdentifierEnum = nil
 local focusNavigationEventNameEnum = nil
 local inputHandlersModule = nil
-local fFlagEnableDrawerFocusNav = require(parent.SharedFlags).FFlagEnableDrawerFocusNav
-local fFlagEnableDrawerAnimatingHook = require(drawer.Flags).FFlagEnableDrawerAnimatingHook
+local sharedFlagsModule = require(parent.SharedFlags)
+local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
+local fFlagEnableDrawerAnimatingHook = sharedFlagsModule.FFlagEnableDrawerAnimatingHook
 local fFlagFixDrawerNavigateBackWhileClosing = require(drawer.Flags).FFlagFixDrawerNavigateBackWhileClosing
 
 if fFlagEnableDrawerFocusNav then
@@ -32,27 +33,27 @@ if fFlagEnableDrawerFocusNav then
 end
 return reactModule.memo(function(p0) --[[ line: 40 ]]
 	-- upvalues: useSetDrawerVisibleModule (ref), useSetDrawerShouldMountModule (ref), fFlagEnableDrawerAnimatingHook (ref), useSetDrawerAnimatingModule (ref), reactModule (ref), drawerPanelStatus (ref), fFlagEnableDrawerFocusNav (ref), reactIsModule (ref), reactOtterModule (ref), constantsModule (ref), getDrawerVisibleStoreModule (ref), signalsModule (ref), userInputService (ref), focusNavigationEventNameEnum (write), inputHandlersModule (write), fFlagFixDrawerNavigateBackWhileClosing (ref), foundationModule (ref), scrimModule (ref), focusNavigableSurfaceWrapper (write), focusNavigableSurfaceIdentifierEnum (write)
-	local var15 = useSetDrawerVisibleModule()
-	local var16 = useSetDrawerShouldMountModule()
-	local var17 = if fFlagEnableDrawerAnimatingHook then useSetDrawerAnimatingModule() else function(_) --[[ line: 45 ]] end
-	local var18 = reactModule.useRef(nil)
+	local var16 = useSetDrawerVisibleModule()
+	local var17 = useSetDrawerShouldMountModule()
+	local var18 = if fFlagEnableDrawerAnimatingHook then useSetDrawerAnimatingModule() else function(_) --[[ line: 45 ]] end
 	local var19 = reactModule.useRef(nil)
-	local var20, var21 = reactModule.useBinding(drawerPanelStatus.Scrollable)
-	local var22 = reactModule.useMemo(function() --[[ line: 49 ]]
-		-- upvalues: var20 (ref), drawerPanelStatus (copy)
-		return var20:map(function(p1) --[[ line: 50 ]]
+	local var20 = reactModule.useRef(nil)
+	local var21, var22 = reactModule.useBinding(drawerPanelStatus.Scrollable)
+	local var23 = reactModule.useMemo(function() --[[ line: 49 ]]
+		-- upvalues: var21 (ref), drawerPanelStatus (copy)
+		return var21:map(function(p1) --[[ line: 50 ]]
 			-- upvalues: drawerPanelStatus (copy)
 			return p1 == drawerPanelStatus.Scrollable
 		end)
 	end, {})
-	local var23 = reactModule.useMemo(function() --[[ line: 55 ]]
-		-- upvalues: var20 (ref), drawerPanelStatus (copy)
-		return var20:map(function(p2) --[[ line: 56 ]]
+	local var24 = reactModule.useMemo(function() --[[ line: 55 ]]
+		-- upvalues: var21 (ref), drawerPanelStatus (copy)
+		return var21:map(function(p2) --[[ line: 56 ]]
 			-- upvalues: drawerPanelStatus (copy)
 			return if p2 == drawerPanelStatus.Movable then 3 else 1
 		end)
 	end, {})
-	local var24 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function() --[[ line: 68 ]]
+	local var25 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function() --[[ line: 68 ]]
 		-- upvalues: p0 (ref), reactIsModule (copy)
 		local backgroundStyle = p0.backgroundStyle
 		
@@ -60,7 +61,7 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			return p3.Color3
 		end) else backgroundStyle.Color3
 	end, { p0.backgroundStyle }) else nil
-	local var25 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function() --[[ line: 83 ]]
+	local var26 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function() --[[ line: 83 ]]
 		-- upvalues: p0 (ref), reactIsModule (copy)
 		local backgroundStyle = p0.backgroundStyle
 		
@@ -71,118 +72,118 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 	local topOffset = p0.topOffset or 0
 	local bottomOffset = p0.bottomOffset or 0
 	local leftOffset = p0.leftOffset or 0
-	local var29 = p0.menuWidth + leftOffset
-	local var30, var31 = reactOtterModule.useAnimatedBinding(-var29, reactModule.useCallback(function(p5) --[[ line: 102 ]]
-		-- upvalues: fFlagEnableDrawerAnimatingHook (copy), var17 (ref), var20 (ref), drawerPanelStatus (copy), var21 (ref), var29 (ref), var16 (ref)
+	local var30 = p0.menuWidth + leftOffset
+	local var31, var32 = reactOtterModule.useAnimatedBinding(-var30, reactModule.useCallback(function(p5) --[[ line: 102 ]]
+		-- upvalues: fFlagEnableDrawerAnimatingHook (copy), var18 (ref), var21 (ref), drawerPanelStatus (copy), var22 (ref), var30 (ref), var17 (ref)
 		if fFlagEnableDrawerAnimatingHook then
+			var18(false)
+		end
+		if var21:getValue() == drawerPanelStatus.Closing then
+			var22(drawerPanelStatus.Scrollable)
+		end
+		if p5 == -var30 then
 			var17(false)
 		end
-		if var20:getValue() == drawerPanelStatus.Closing then
-			var21(drawerPanelStatus.Scrollable)
-		end
-		if p5 == -var29 then
-			var16(false)
-		end
-	end, if fFlagEnableDrawerAnimatingHook then { var29, var17, var16 } else {}))
-	local var32 = reactModule.useRef(var29)
-	var32.current = var29
-	local var33 = reactModule.useRef(false)
-	local var34, var35 = reactOtterModule.useAnimatedBinding(1)
-	local var36 = reactModule.useCallback(function(p6) --[[ line: 125 ]]
-		-- upvalues: var15 (ref), var21 (ref), drawerPanelStatus (copy), p0 (ref)
-		var15(false)
-		var21(drawerPanelStatus.Closing)
+	end, if fFlagEnableDrawerAnimatingHook then { var30, var18, var17 } else {}))
+	local var33 = reactModule.useRef(var30)
+	var33.current = var30
+	local var34 = reactModule.useRef(false)
+	local var35, var36 = reactOtterModule.useAnimatedBinding(1)
+	local var37 = reactModule.useCallback(function(p6) --[[ line: 125 ]]
+		-- upvalues: var16 (ref), var22 (ref), drawerPanelStatus (copy), p0 (ref)
+		var16(false)
+		var22(drawerPanelStatus.Closing)
 		
 		if p0.onDrawerClosedAnalytics then
 			p0.onDrawerClosedAnalytics({ source = p6 })
 		end
 	end, { p0.onDrawerClosedAnalytics })
-	local var37 = reactModule.useCallback(function(p7) --[[ line: 133 ]]
-		-- upvalues: var33 (ref), var20 (ref), drawerPanelStatus (copy), var18 (ref), var19 (ref), var21 (ref)
-		if not var33.current then return end
-		if var20:getValue() == drawerPanelStatus.Closing then
+	local var38 = reactModule.useCallback(function(p7) --[[ line: 133 ]]
+		-- upvalues: var34 (ref), var21 (ref), drawerPanelStatus (copy), var19 (ref), var20 (ref), var22 (ref)
+		if not var34.current then return end
+		if var21:getValue() == drawerPanelStatus.Closing then
 			return
 		end
-		var18.current = p7.Position
-		var19.current = DateTime.now().UnixTimestampMillis
-		var21(drawerPanelStatus.Static)
+		var19.current = p7.Position
+		var20.current = DateTime.now().UnixTimestampMillis
+		var22(drawerPanelStatus.Static)
 	end, {})
-	local var38 = reactModule.useCallback(function(p8) --[[ line: 145 ]]
-		-- upvalues: var33 (ref), var18 (ref), var19 (ref), var20 (ref), drawerPanelStatus (copy), var32 (ref), constantsModule (copy), var36 (ref), fFlagEnableDrawerAnimatingHook (copy), var17 (ref), var31 (ref), reactOtterModule (copy), var21 (ref)
-		if not var33.current then
-			var18.current = nil
+	local var39 = reactModule.useCallback(function(p8) --[[ line: 145 ]]
+		-- upvalues: var34 (ref), var19 (ref), var20 (ref), var21 (ref), drawerPanelStatus (copy), var33 (ref), constantsModule (copy), var37 (ref), fFlagEnableDrawerAnimatingHook (copy), var18 (ref), var32 (ref), reactOtterModule (copy), var22 (ref)
+		if not var34.current then
 			var19.current = nil
+			var20.current = nil
 			
 			return
-		elseif var18.current == nil or var19.current == nil or var20:getValue() ~= drawerPanelStatus.Movable then
-			var18.current = nil
+		elseif var19.current == nil or var20.current == nil or var21:getValue() ~= drawerPanelStatus.Movable then
 			var19.current = nil
+			var20.current = nil
 			
 			return
 		end
-		local var41 = var18.current.X - p8.Position.X
+		local var42 = var19.current.X - p8.Position.X
 		
-		if var32.current * constantsModule.DRAWER_SWIPE_THRESHOLD_PERCENT <= var41 then
-			var36("swipe")
-		elseif var41 > 0 then
-			local var42 = (DateTime.now().UnixTimestampMillis - var19.current) / 1000
+		if var33.current * constantsModule.DRAWER_SWIPE_THRESHOLD_PERCENT <= var42 then
+			var37("swipe")
+		elseif var42 > 0 then
+			local var43 = (DateTime.now().UnixTimestampMillis - var20.current) / 1000
 			
-			if var42 > 0.01 and constantsModule.DRAWER_VELOCITY_THRESHOLD <= var41 / var42 then
-				var36("swipe")
+			if var43 > 0.01 and constantsModule.DRAWER_VELOCITY_THRESHOLD <= var42 / var43 then
+				var37("swipe")
 			end
 		end
-		if var20:getValue() ~= drawerPanelStatus.Closing then
+		if var21:getValue() ~= drawerPanelStatus.Closing then
 			if fFlagEnableDrawerAnimatingHook then
-				var17(true)
+				var18(true)
 			end
-			var31(reactOtterModule.ease(0, constantsModule.DRAWER_ANIM_SETTINGS))
-			var21(drawerPanelStatus.Scrollable)
+			var32(reactOtterModule.ease(0, constantsModule.DRAWER_ANIM_SETTINGS))
+			var22(drawerPanelStatus.Scrollable)
 		end
-		var18.current = nil
 		var19.current = nil
-	end, if fFlagEnableDrawerAnimatingHook then { var36, var17 } else {})
-	local var39 = reactModule.useCallback(function(p9) --[[ line: 186 ]]
-		-- upvalues: var33 (ref), var18 (ref), var20 (ref), drawerPanelStatus (copy), var21 (ref), var31 (ref), reactOtterModule (copy)
-		if not var33.current then return end
-		if var18.current == nil or var20:getValue() == drawerPanelStatus.Closing then return end
-		local var43 = p9.Position.X - var18.current.X
+		var20.current = nil
+	end, if fFlagEnableDrawerAnimatingHook then { var37, var18 } else {})
+	local var40 = reactModule.useCallback(function(p9) --[[ line: 186 ]]
+		-- upvalues: var34 (ref), var19 (ref), var21 (ref), drawerPanelStatus (copy), var22 (ref), var32 (ref), reactOtterModule (copy)
+		if not var34.current then return end
+		if var19.current == nil or var21:getValue() == drawerPanelStatus.Closing then return end
+		local var44 = p9.Position.X - var19.current.X
 		
-		if var20:getValue() == drawerPanelStatus.Static then
-			if math.abs(p9.Position.Y - var18.current.Y) < math.abs(var43) then
-				var21(drawerPanelStatus.Movable)
+		if var21:getValue() == drawerPanelStatus.Static then
+			if math.abs(p9.Position.Y - var19.current.Y) < math.abs(var44) then
+				var22(drawerPanelStatus.Movable)
 			else
-				var21(drawerPanelStatus.Scrollable)
+				var22(drawerPanelStatus.Scrollable)
 			end
 		end
-		if var20:getValue() == drawerPanelStatus.Movable and var43 < 0 then
-			var31(reactOtterModule.instant(var43))
+		if var21:getValue() == drawerPanelStatus.Movable and var44 < 0 then
+			var32(reactOtterModule.instant(var44))
 		end
-		if var18.current.X < p9.Position.X then
-			var18.current = p9.Position
+		if var19.current.X < p9.Position.X then
+			var19.current = p9.Position
 		end
 	end, {})
 	reactModule.useEffect(function() --[[ line: 213 ]]
-		-- upvalues: getDrawerVisibleStoreModule (copy), signalsModule (copy), var33 (ref), var32 (ref), fFlagEnableDrawerAnimatingHook (copy), var17 (ref), var31 (ref), reactOtterModule (copy), constantsModule (copy), var35 (ref)
+		-- upvalues: getDrawerVisibleStoreModule (copy), signalsModule (copy), var34 (ref), var33 (ref), fFlagEnableDrawerAnimatingHook (copy), var18 (ref), var32 (ref), reactOtterModule (copy), constantsModule (copy), var36 (ref)
 		local getDrawerVisible = getDrawerVisibleStoreModule(false).getDrawerVisible
 		
 		return signalsModule.createEffect(function(p10) --[[ line: 215 ]]
-			-- upvalues: getDrawerVisible (ref), var33 (copy), var32 (copy), fFlagEnableDrawerAnimatingHook (copy), var17 (copy), var31 (copy), reactOtterModule (copy), constantsModule (copy), var35 (copy)
-			local var44 = getDrawerVisible(p10)
-			var33.current = var44
-			local var45 = if var44 then 0 else -var32.current
+			-- upvalues: getDrawerVisible (ref), var34 (copy), var33 (copy), fFlagEnableDrawerAnimatingHook (copy), var18 (copy), var32 (copy), reactOtterModule (copy), constantsModule (copy), var36 (copy)
+			local var45 = getDrawerVisible(p10)
+			var34.current = var45
+			local var46 = if var45 then 0 else -var33.current
 			
 			if fFlagEnableDrawerAnimatingHook then
-				var17(true)
+				var18(true)
 			end
-			var31(reactOtterModule.ease(var45, constantsModule.DRAWER_ANIM_SETTINGS))
-			var35(reactOtterModule.ease(if var44 then constantsModule.SCRIM_TRANSPARENCY else 1, constantsModule.DRAWER_ANIM_SETTINGS))
+			var32(reactOtterModule.ease(var46, constantsModule.DRAWER_ANIM_SETTINGS))
+			var36(reactOtterModule.ease(if var45 then constantsModule.SCRIM_TRANSPARENCY else 1, constantsModule.DRAWER_ANIM_SETTINGS))
 		end)
-	end, if fFlagEnableDrawerAnimatingHook then { var17 } else {})
+	end, if fFlagEnableDrawerAnimatingHook then { var18 } else {})
 	reactModule.useEffect(function() --[[ line: 230 ]]
-		-- upvalues: userInputService (copy), var37 (ref), var38 (ref), var39 (ref)
-		local touchStartedConnection = userInputService.TouchStarted:Connect(var37)
-		local touchEndedConnection = userInputService.TouchEnded:Connect(var38)
-		local touchMovedConnection = userInputService.TouchMoved:Connect(var39)
+		-- upvalues: userInputService (copy), var38 (ref), var39 (ref), var40 (ref)
+		local touchStartedConnection = userInputService.TouchStarted:Connect(var38)
+		local touchEndedConnection = userInputService.TouchEnded:Connect(var39)
+		local touchMovedConnection = userInputService.TouchMoved:Connect(var40)
 		
 		return function() --[[ line: 234 ]]
 			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), touchMovedConnection (ref)
@@ -203,9 +204,9 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			Size = UDim2.new(0, p0.menuWidth, 1, (-topOffset) - bottomOffset),
 			Position = UDim2.new(0, leftOffset, 0, topOffset),
 			CanvasSize = UDim2.new(0, p0.menuWidth, 0, 0),
-			Active = var22,
+			Active = var23,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			ScrollingEnabled = var22
+			ScrollingEnabled = var23
 		}, p0.children),
 		SinkInput = reactModule.createElement("ImageButton", {
 			BackgroundTransparency = 1,
@@ -213,27 +214,27 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 			Selectable = false,
 			AutoButtonColor = false,
 			Size = UDim2.fromScale(1, 1),
-			ZIndex = var23
+			ZIndex = var24
 		})
 	}
 	
 	return reactModule.createElement(foundationModule.View, {
 		Size = UDim2.fromScale(1, 1),
 		backgroundStyle = { Transparency = 1 },
-		Visible = var34:map(function(p11) --[[ line: 252 ]]
+		Visible = var35:map(function(p11) --[[ line: 252 ]]
 			return p11 < 1
 		end)
 	}, {
 		Scrim = reactModule.createElement(scrimModule, {
 			zIndex = 1,
 			onActivated = reactModule.useCallback(function() --[[ line: 241 ]]
-				-- upvalues: var20 (ref), drawerPanelStatus (copy), var36 (ref)
-				if var20:getValue() == drawerPanelStatus.Closing then return end
-				if var20:getValue() ~= drawerPanelStatus.Movable then
-					var36("shield")
+				-- upvalues: var21 (ref), drawerPanelStatus (copy), var37 (ref)
+				if var21:getValue() == drawerPanelStatus.Closing then return end
+				if var21:getValue() ~= drawerPanelStatus.Movable then
+					var37("shield")
 				end
-			end, { var20, var36 }),
-			transparencyBinding = var34,
+			end, { var21, var37 }),
+			transparencyBinding = var35,
 			isModal = p0.scrimIsModal
 		}),
 		DrawerAnimatedFrame = if fFlagEnableDrawerFocusNav then reactModule.createElement(focusNavigableSurfaceWrapper, {
@@ -243,37 +244,37 @@ return reactModule.memo(function(p0) --[[ line: 40 ]]
 				ZIndex = 2,
 				BorderSizePixel = 0,
 				Selectable = false,
-				Position = var30:map(function(p13) --[[ line: 319 ]]
+				Position = var31:map(function(p13) --[[ line: 319 ]]
 					return UDim2.fromOffset(p13, 0)
 				end),
-				Size = UDim2.new(0, var29, 1, 0),
-				BackgroundColor3 = var24,
-				BackgroundTransparency = var25
+				Size = UDim2.new(0, var30, 1, 0),
+				BackgroundColor3 = var25,
+				BackgroundTransparency = var26
 			},
 			customEventHandlers = reactModule.useMemo(function() --[[ line: 282 ]]
-				-- upvalues: fFlagEnableDrawerFocusNav (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), fFlagFixDrawerNavigateBackWhileClosing (copy), var20 (ref), drawerPanelStatus (copy), var36 (ref)
+				-- upvalues: fFlagEnableDrawerFocusNav (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), fFlagFixDrawerNavigateBackWhileClosing (copy), var21 (ref), drawerPanelStatus (copy), var37 (ref)
 				return if fFlagEnableDrawerFocusNav then {
 					[focusNavigationEventNameEnum.NavigateBack] = {
 						handler = inputHandlersModule.onRelease(function(p14) --[[ line: 288 ]]
-							-- upvalues: fFlagFixDrawerNavigateBackWhileClosing (copy), var20 (copy), drawerPanelStatus (copy), var36 (copy)
+							-- upvalues: fFlagFixDrawerNavigateBackWhileClosing (copy), var21 (copy), drawerPanelStatus (copy), var37 (copy)
 							if not fFlagFixDrawerNavigateBackWhileClosing then
-								var36("focus-navigation-back")
-							elseif var20:getValue() ~= drawerPanelStatus.Closing then
-								var36("focus-navigation-back")
+								var37("focus-navigation-back")
+							elseif var21:getValue() ~= drawerPanelStatus.Closing then
+								var37("focus-navigation-back")
 							end
 							p14:cancel()
 						end)
 					}
 				} else {}
-			end, { var36 })
+			end, { var37 })
 		}, t) else reactModule.createElement(foundationModule.View, {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Selectable = false,
-			Position = var30:map(function(p12) --[[ line: 333 ]]
+			Position = var31:map(function(p12) --[[ line: 333 ]]
 				return UDim2.fromOffset(p12, 0)
 			end),
-			Size = UDim2.new(0, var29, 1, 0),
+			Size = UDim2.new(0, var30, 1, 0),
 			backgroundStyle = p0.backgroundStyle
 		}, t)
 	})

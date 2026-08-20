@@ -13,8 +13,9 @@ return function(value, p0) --[[ line: 18 | named "useTagAsSponsoredAdViewability
 	local var5 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.mediaType else nil
 	local var6 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.videoPlaybackStateRef else nil
 	local var7 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.videoSource else nil
-	reactModule.useEffect(function() --[[ line: 30 ]]
-		-- upvalues: var3 (ref), var4 (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), var5 (ref), value (ref), sponsoredAdViewabilityRegistryModule (copy), var6 (ref), var7 (ref)
+	local var8 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p0 then p0.isFullscreen else nil
+	reactModule.useEffect(function() --[[ line: 33 ]]
+		-- upvalues: var3 (ref), var4 (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), var5 (ref), value (ref), sponsoredAdViewabilityRegistryModule (copy), var6 (ref), var7 (ref), var8 (ref)
 		if var3 == nil or var4 == nil or fFlagLuaAppSponsoredAdVideoViewabilityEnabled and var5 == nil then return end
 		local current = value.current
 		
@@ -24,12 +25,14 @@ return function(value, p0) --[[ line: 18 | named "useTagAsSponsoredAdViewability
 			tileType = var4,
 			mediaType = var5,
 			videoPlaybackStateRef = var6,
-			videoSource = var7
+			videoSource = var7,
+			isFullscreen = var8
 		}) else sponsoredAdViewabilityRegistryModule.bind(current, { encryptedAdTrackingData = var3, tileType = var4 })
 	end, {
 		var3, var4, value,
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var5 else nil,
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var6 else nil,
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var7 else nil
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var7 else nil,
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then var8 else nil
 	})
 end

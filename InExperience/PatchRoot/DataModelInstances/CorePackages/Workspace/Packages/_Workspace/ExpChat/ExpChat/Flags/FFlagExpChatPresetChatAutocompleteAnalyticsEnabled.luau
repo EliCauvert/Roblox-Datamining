@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("ExpChatPresetChatAutocompleteAnalyticsEnabled", false) and require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatPresetChatAutocompleteEnabled)

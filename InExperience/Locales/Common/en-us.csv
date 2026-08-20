@@ -1838,16 +1838,20 @@ Feature.Build.Action.ViewUsage,View usage
 Feature.Build.Content.NewGame,New game
 Feature.Build.Description.ArchiveRemoval,"If you archive this game, it will be removed from Build. You can still access and restore it from Creator Hub or Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use your Robux to automatically buy additional Build usage as you create. You can set a daily spend limit anytime.
+Feature.Build.Description.BoostAudienceForPlays,Boost your audience for more plays.
+Feature.Build.Description.BoostGameAudience,Boost your game's audience
 Feature.Build.Description.BuildIdeaGame,Turn your ideas into a game
 Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply for you.
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
+Feature.Build.Description.CampaignRunDates,Your campaign will run {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Choose friends to help you playtest.
 Feature.Build.Description.EnableBuildNotifs,Turn on notifications in your device settings to get updates from Build.
 Feature.Build.Description.FriendsLinkOnly,Only your friends can access this link. Change your game's Audience setting if you want more people to play.
 Feature.Build.Description.GameCreationDone,I've completed creating and publishing your game. You can open it to playtest.
 Feature.Build.Description.GameSavedPlaytest,I've completed creating your game and saved a new version. You can open it to playtest.
 Feature.Build.Description.HubSettings,Manage all settings on Creator Hub
+Feature.Build.Description.InviteFriendLimit,"Choose up to {MAX_INVITES} friends, then share the link to the game."
 Feature.Build.Description.MakeAudienceAvail,Publish your experience to make it available to this audience.
 Feature.Build.Description.ManageAppearance,Manage how your game appears to others.
 Feature.Build.Description.PlayAfterPublish,Choose who can play after you publish this experience.
@@ -1858,6 +1862,7 @@ Feature.Build.Description.PrivateShare,Change your game's Audience setting to sh
 Feature.Build.Description.RaiseLimitOrWait,"Increase your daily Robux limit to keep creating, or wait for it to reset tomorrow."
 Feature.Build.Description.RatingAgreement,"By publishing, you agree that this content rating is accurate."
 Feature.Build.Description.RestoreLatest,This version will become your latest published version.
+Feature.Build.Description.RevertToVersion,Confirm to revert the latest change and go back to {VERSION}.
 Feature.Build.Description.VersionChanges,Tell players what's changed in this version.
 Feature.Build.Header.AccessSharing,Access & sharing
 Feature.Build.Header.ContentMaturity,Content maturity
@@ -1866,13 +1871,16 @@ Feature.Build.Header.GameDetails,Game details
 Feature.Build.Header.Overview,Overview
 Feature.Build.Label.Access,Access
 Feature.Build.Label.AdditionalUsage,Additional Build usage
+Feature.Build.Label.AdditionalUsed,{USED} of {LIMIT} used
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} available
 Feature.Build.Label.Autosaved,Autosaved
 Feature.Build.Label.Available,available
 Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.ContentRating,Content rating
+Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
@@ -1883,14 +1891,17 @@ Feature.Build.Label.FreeBuildUsage,Free Build usage
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Friends only
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
+Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limited
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
 Feature.Build.Label.Pending,Pending
+Feature.Build.Label.PercentUsed,{PERCENT}% used
 Feature.Build.Label.PreviouslyPublished,Previously published
 Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
@@ -1898,6 +1909,8 @@ Feature.Build.Label.PubliclyUnavailable,Publicly unavailable
 Feature.Build.Label.Published,Published
 Feature.Build.Label.Ready,Ready
 Feature.Build.Label.ResetsDaily,Resets daily
+Feature.Build.Label.RestoredVersion,Restored {VERSION}
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Search games
 Feature.Build.Label.SearchTasks,Search tasks
@@ -1967,9 +1980,16 @@ Feature.Build.Label.ToolTasksPlanRunning,Planning your tasks
 Feature.Build.Label.ToolThumbnailDone,Set game thumbnail
 Feature.Build.Label.ToolThumbnailFailed,Couldn't set game thumbnail
 Feature.Build.Label.ToolThumbnailRunning,Setting game thumbnail
+Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
+Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
 Feature.Build.Label.Usage,Usage
+Feature.Build.Label.UsageUsed,{USED} used
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,Version
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Version title & description
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirements to use Build.
@@ -1985,10 +2005,12 @@ Feature.Build.Message.BuildResponseFailed,Build couldn't respond. Try again.
 Feature.Build.Message.BuildStillWorking,"Working on it. You can leave the app, play Roblox, or start another project while you wait."
 Feature.Build.Message.BuildStopped,You stopped Build.
 Feature.Build.Message.BuildTemporarilyDown,Build is temporarily unavailable. Try again in a minute.
+Feature.Build.Message.CompletedTasks,{COUNT} completed tasks
 Feature.Build.Message.ConversationGone,This conversation is no longer available. Start a new one.
 Feature.Build.Message.ConversationNotFound,This conversation couldn't be found. Start a new one.
 Feature.Build.Message.CreateGameToUseBuild,Create a new game to start using Build.
 Feature.Build.Message.CreatedRevertedVer,Created a reverted version.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
 Feature.Build.Message.FailedTitle,Failed {TITLE}
@@ -1996,33 +2018,47 @@ Feature.Build.Message.FinishedTitle,Finished {TITLE}
 Feature.Build.Message.FriendsLoadFailed,Couldn't load friends. Try again.
 Feature.Build.Message.GameNotCreated,Your game wasn't created. Try again.
 Feature.Build.Message.GamePublishFailed,Your game couldn't be published. Try again.
+Feature.Build.Message.GameShared,Game shared
+Feature.Build.Message.GameSharedWith,Game shared with {DISPLAY_NAME}
+Feature.Build.Message.HiDisplayName,"Hi, {DISPLAY_NAME}"
 Feature.Build.Message.InvalidMessage,Something went wrong with your message. Edit it and try again.
 Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
+Feature.Build.Message.LimitBelowSpend,Limit can't be below the {ALREADY_SPENT} Robux already spent today.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to add yet. Find people to connect with on Roblox first.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,No version history yet.
+Feature.Build.Message.OneTaskCompleted,1 task completed
 Feature.Build.Message.OutOfBuildUsage,You're out of Build usage. View your options to use Robux to keep creating.
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} of {MAX_INVITES} playtesters added
 Feature.Build.Message.PublicPublishFailed,"Your game was published, but couldn't be made public. Try again."
 Feature.Build.Message.PublishExpandAudience,Publish to expand your audience
 Feature.Build.Message.PublishNotReverted,Your publish wasn't reverted. Try again.
 Feature.Build.Message.PublishReverted,Reverted publish.
 Feature.Build.Message.QuestionnaireNeeded,This game was edited outside of Build. Complete the content questionnaire to publish.
 Feature.Build.Message.ReadyToPlay,Your game is ready to play on Roblox!
+Feature.Build.Message.ResetHours,Resets in {HOURS} hours
+Feature.Build.Message.ResetOneHour,Resets in 1 hour
 Feature.Build.Message.RestoreVersionFailed,Couldn't restore this version. Try again.
 Feature.Build.Message.RevertVersionFail,A reverted version wasn't created. Try again.
 Feature.Build.Message.RunningTitle,Running {title}
 Feature.Build.Message.SafetyPolicy,This message goes against our safety policy. Edit it and try again.
 Feature.Build.Message.SaveChangesFailed,Couldn't save changes. Try again.
+Feature.Build.Message.ShareExperience,Share {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
+Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
+Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
 Feature.Build.Message.TryAgain,Try again.
 Feature.Build.Message.TurnToPortrait,Turn your device to portrait mode to continue working on your game.
 Feature.Build.Message.VersionHistoryLoad,Version history couldn't load.
 Feature.Build.Message.WhatToCreate,What do you want to create today?
+Feature.Build.Message.WorkedMinutesSeconds,Worked for {MINUTES}m{REM_SECONDS}s
+Feature.Build.Message.WorkedSeconds,Worked for {SECONDS}s
 Feature.Build.Message.WorkingOnTasks,Working on your tasks
+Feature.Build.Title.AdCampaignActive,Ad campaign is active
 Feature.Build.Title.AddFriendsToPlaytest,Add friends to help you playtest
 Feature.Build.Title.ArchiveThisGame,Archive this game?
 Feature.Build.Title.Audience,Audience
@@ -2043,12 +2079,14 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
 Feature.Build.Title.Playtesters,Playtesters
 Feature.Build.Title.PlaytestersOnlyPlay,Only playtesters can play
+Feature.Build.Title.PromoteGameFree,Promote your game for free
 Feature.Build.Title.PushNotifications,Push notifications
 Feature.Build.Title.RevertLastChange,Revert last change?
 Feature.Build.Title.Tasks,Tasks
 Feature.Build.Title.TurnActivity,Turn activity
 Feature.Build.Title.VersionHistory,Version history
 Feature.Build.Title.VersionInformation,Version Information
+Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Allow
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2148,6 +2186,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Sell
 Feature.Catalog.Action.ShareVia,Share via...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,Try
 Feature.Catalog.Action.Upgrade,Upgrade
 Feature.Catalog.Action.ViewDetailsPage,View Details Page
 Feature.Catalog.Action.ViewExperienceDetails,View Experience Details
@@ -2700,6 +2739,7 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Display name is not available
 Feature.DisplayName.ErrorMessage.NameTooLong,Display name should have 20 characters at the most
 Feature.DisplayName.ErrorMessage.NameTooShort,Display name should have at least 3 characters
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Display name contains unsupported characters
+Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,For {num} day
 Feature.Durables.BottomBar.RentalDurationPlural,For {num} days
 Feature.Durables.FTUX.Tooltip,Choose how many days you want to own the item. The timer starts after purchase.
@@ -2710,6 +2750,8 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} day
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} days
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Options
 Feature.Durables.Label.ItemExpires,Item expires
+Feature.Durables.PartiallyExpiredItems.BodyText,Some items in this saved avatar expired and were removed.
+Feature.Durables.PartiallyExpiredItems.TitleText,Items expired
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} days (Starts after purchase)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,No internet connection
@@ -3445,6 +3487,7 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
+Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,
@@ -4029,6 +4072,7 @@ Feature.Subscription.Text.PerMonth,/month
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Your avatar was reset for {rule}. You can still use the Marketplace, but changes to your avatar will not save until {time}."
 Feature.Timeout.Prompt.SaveTitleText,Saving is disabled for now
+Feature.Timeout.Prompt.TitleText,We reset your avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Avatar saving disabled
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Avatar saving disabled until {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Unlocked
@@ -4574,11 +4618,13 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,Friend Request
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,Cancel Request
+InGame.PlayerDropDown.ConfirmUnfriend,Tap to confirm unfriend
 InGame.PlayerDropDown.Decline,Decline
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} is at the max friends limit.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,Last updated {minutes} mins ago
 InGame.PlayerList.FooterUnableToLoad,Unable to load
 InGame.PlayerList.FriendsEmpty,None of your friends have played this experience yet.

@@ -21,12 +21,13 @@ local constantsModule = require(moments.Constants)
 local _ = require(script.Parent.MomentsHeaderView)
 
 return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
-	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), plusLarge (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), navigationMenuModule (ref), view (ref), foundationProvider (ref), colorMode (ref), gradientBackdrop (ref), constantsModule (ref)
+	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), buttonVariant (ref), inputSize (ref), view (ref), plusLarge (ref), foundationModule (ref), coachmark (ref), text (ref), threeBarsHorizontal (ref), navigationMenuModule (ref), foundationProvider (ref), colorMode (ref), gradientBackdrop (ref), constantsModule (ref)
 	local t = nil
 	
 	if p0.variant == "back" then
-		t = {
+		local t_1 = {
 			BackButton = reactModule.createElement(iconButton, {
+				LayoutOrder = 1,
 				isCircular = true,
 				Selectable = true,
 				testId = "--moments-back-header-back",
@@ -36,8 +37,23 @@ return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
 				size = inputSize.Medium
 			})
 		}
+		
+		if p0.showInteractiveButtons and p0.showCreateButton then
+			t_1.Spacer = reactModule.createElement(view, { LayoutOrder = 2, tag = "grow auto-y" })
+			t_1.CreateButton = reactModule.createElement(iconButton, {
+				LayoutOrder = 3,
+				isCircular = true,
+				Selectable = true,
+				testId = "--moments-top-bar-create",
+				icon = plusLarge,
+				onActivated = p0.onCreateMomentButtonPressed,
+				variant = buttonVariant.OverMedia,
+				size = inputSize.Medium
+			})
+		end
+		t = t_1
 	elseif p0.variant == "base" then
-		local var8 = reactModule.createElement(iconButton, {
+		local var9 = reactModule.createElement(iconButton, {
 			LayoutOrder = 1,
 			isCircular = true,
 			Selectable = true,
@@ -47,7 +63,7 @@ return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
 			variant = buttonVariant.OverMedia,
 			size = inputSize.Medium
 		})
-		local var9 = if p0.showFtuxTooltip then reactModule.createElement(coachmark, {
+		local var10 = if p0.showFtuxTooltip then reactModule.createElement(coachmark, {
 			LayoutOrder = 1,
 			title = "Share Your First Moment",
 			text = "Tap + to share a moment from your captures",
@@ -55,7 +71,7 @@ return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
 			onClose = p0.onFtuxTooltipClosed,
 			side = foundationModule.Enums.PopoverSide.Bottom,
 			align = foundationModule.Enums.PopoverAlign.End
-		}, var8) else var8
+		}, var9) else var9
 		local t_1 = {
 			MomentsTitle = reactModule.createElement(text, {
 				LayoutOrder = 2,
@@ -86,7 +102,7 @@ return function(p0) --[[ line: 34 | named "MomentsLegacyHeaderView" ]]
 				LayoutOrder = 2,
 				tag = "row align-x-right align-y-center gap-medium auto-xy"
 			}, if p0.showInteractiveButtons then {
-				CreateMomentButton = var9,
+				CreateMomentButton = var10,
 				NavigationMenu = reactModule.createElement(navigationMenuModule, {
 					layoutOrder = 2,
 					onNavigateToTrending = p0.onNavigateToTrending,

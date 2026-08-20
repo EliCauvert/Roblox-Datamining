@@ -2,6 +2,8 @@
 local parent = buildExperience.Parent
 local foundationModule = require(parent.Foundation)
 local reactModule = require(parent.React)
+local verifiedBadgeModule = require(parent.VerifiedBadges.VerifiedBadge)
+local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
 local _ = require(buildExperience.Chat.chatTypes)
 local icon = foundationModule.Icon
 local image = foundationModule.Image
@@ -11,12 +13,12 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local iconVariant = foundationModule.Enums.IconVariant
 
-local function _(p0) --[[ line: 29 | named "getGameIconUrl" ]]
+local function _(p0) --[[ line: 31 | named "getGameIconUrl" ]]
 	return p0.gameIcon or `rbxthumb://type=GameIcon&id={p0.universeId}&w=150&h=150`
 end
 
-return function(p1) --[[ line: 33 | named "PublishExperienceTitle" ]]
-	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref)
+return function(p1) --[[ line: 35 | named "PublishExperienceTitle" ]]
+	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref)
 	local testId = p1.testId or "publish-experience-title"
 	local target = p1.target
 	
@@ -44,10 +46,14 @@ return function(p1) --[[ line: 33 | named "PublishExperienceTitle" ]]
 			}, {
 				CreatorName = reactModule.createElement(text, {
 					LayoutOrder = 1,
-					tag = "fill auto-y text-body-medium text-wrap text-align-x-left content-default",
-					Text = target.creatorName or ""
+					Text = target.creatorName or "",
+					tag = {
+						["text-body-medium text-align-x-left content-default"] = true,
+						["shrink auto-xy text-wrap"] = fFlagUnifyVerifiedBadgeComponent,
+						["fill auto-y text-wrap"] = not fFlagUnifyVerifiedBadgeComponent
+					}
 				}),
-				VerifiedBadge = if p1.isCreatorVerified == true then reactModule.createElement(view, {
+				VerifiedBadge = if p1.isCreatorVerified == true then if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule, { LayoutOrder = 2, testId = `{testId}-verified-badge` }) else reactModule.createElement(view, {
 					LayoutOrder = 2,
 					tag = "size-400-400",
 					testId = `{testId}-verified-badge`

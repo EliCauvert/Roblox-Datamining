@@ -13,6 +13,7 @@ local inExperienceAppChatProvidersModule = require(appChat.App.InExperienceAppCh
 local fFlagAppChatSignalsMessageStoreModule = require(appChat.Flags.FFlagAppChatSignalsMessageStore)
 local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
 local fFlagAppChatFriendsTabIxpEnabledModule = require(appChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
+local fFlagAppChatUnreadMessageCountStoreModule = require(appChat.Flags.FFlagAppChatUnreadMessageCountStore)
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
 local chatModerationStatusHydrationMiddlewareModule = require(appChat.Middleware.ChatModerationStatusHydrationMiddleware)
 local signalsConversationMiddlewareModule = require(appChat.Middleware.SignalsConversationMiddleware)
@@ -21,8 +22,8 @@ local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTra
 local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
 local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
 
-return function(p0, p1, p2) --[[ line: 31 ]]
-	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
+return function(p0, p1, p2) --[[ line: 32 ]]
+	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
 	local appChat_1 = Instance.new("Folder")
 	appChat_1.Name = "AppChat"
 	appChat_1.Parent = coreGuiService
@@ -32,7 +33,7 @@ return function(p0, p1, p2) --[[ line: 31 ]]
 			placement = chatPlacementContextModule.Enum.InExperienceDefault
 		})
 	end
-	local var20 = reactRobloxModule.createRoot(appChat_1)
+	local var21 = reactRobloxModule.createRoot(appChat_1)
 	local list = { roduxModule.thunkMiddleware }
 	
 	if fFlagAppChatSignalsMessageStoreModule then
@@ -47,14 +48,17 @@ return function(p0, p1, p2) --[[ line: 31 ]]
 	if fFlagExpChatEnableFriendsTab then
 		table.insert(list, chatModerationStatusHydrationMiddlewareModule)
 	end
-	local var22 = roduxModule.Store.new(appChatReducerModule, nil, list)
-	local var23 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-	var20:render((function() --[[ line: 75 | named "AppChatMainWithFocusRoot" ]]
-		-- upvalues: reactModule (copy), reactFocusNavigationModule (copy), var23 (ref), provider (copy), inExperienceAppChatProvidersModule (copy), var22 (ref), p2 (ref), p1 (ref), p0 (ref), inExperienceAppChatModule (copy)
-		return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var23 }, {
+	if fFlagAppChatUnreadMessageCountStoreModule then
+		table.insert(list, require(appChat.Middleware.SignalsUnreadMessageCountMiddleware))
+	end
+	local var23 = roduxModule.Store.new(appChatReducerModule, nil, list)
+	local var24 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+	var21:render((function() --[[ line: 79 | named "AppChatMainWithFocusRoot" ]]
+		-- upvalues: reactModule (copy), reactFocusNavigationModule (copy), var24 (ref), provider (copy), inExperienceAppChatProvidersModule (copy), var23 (ref), p2 (ref), p1 (ref), p0 (ref), inExperienceAppChatModule (copy)
+		return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var24 }, {
 			FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
 				InExperienceAppChatProviders = reactModule.createElement(inExperienceAppChatProvidersModule, {
-					store = var22,
+					store = var23,
 					updateAppChatUnreadMessagesCount = p2,
 					parentContainerContext = p1,
 					apolloClient = p0
@@ -65,5 +69,5 @@ return function(p0, p1, p2) --[[ line: 31 ]]
 		})
 	end)())
 	
-	return var20
+	return var21
 end

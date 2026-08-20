@@ -6,12 +6,14 @@ local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogCons
 local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
 local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local isRunningInStudio = require(parent.AppCommonLib).isRunningInStudio
-local fFlagAXMISEnableMultiShoppingUnifiedEvents = require(parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents
+local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
+local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
 local fFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 
-return function(p0, p1, p2) --[[ line: 25 ]]
-	-- upvalues: sessionService (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), fFlagAllowCustomUnifiedEventFilterModule (ref), AXUnifiedEventFilterModule (ref), sendUnifiedEventLogModule (ref)
+return function(p0, p1, p2) --[[ line: 27 ]]
+	-- upvalues: sessionService (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), fFlagAllowCustomUnifiedEventFilterModule (ref), AXUnifiedEventFilterModule (ref), sendUnifiedEventLogModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref)
 	if sessionService:GetSessionTag("level2a") ~= p0:GetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME) and not isRunningInStudio() then return end
 	p2 = p2 or {}
 	local t = {}
@@ -32,7 +34,7 @@ return function(p0, p1, p2) --[[ line: 25 ]]
 	if p2.includeElementSizeAndPosition then
 		t = cryoModule.Dictionary.join(t, unifiedEventLoggingUtilsModule.getElementSizeAndPosition(p0))
 	end
-	local var11 = cryoModule.Dictionary.join(t, p1);
-	(if fFlagAllowCustomUnifiedEventFilterModule and p2.filter then p2.filter else AXUnifiedEventFilterModule.filter)(var11)
-	sendUnifiedEventLogModule(var11)
+	local var12 = cryoModule.Dictionary.join(t, p1);
+	(if fFlagAllowCustomUnifiedEventFilterModule and p2.filter then p2.filter else AXUnifiedEventFilterModule.filter)(var12)
+	sendUnifiedEventLogModule(var12, if fFlagAXSendUnifiedEventLogWithInstance then p0 else nil)
 end

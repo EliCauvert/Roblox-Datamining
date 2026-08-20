@@ -16,12 +16,27 @@ local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 
 return function(p0) --[[ line: 39 | named "UserPickerRow" ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), useUserProfileInfoModule (ref), reactModule (ref), icon (ref), iconName (ref), iconSize (ref), list (ref), accessoryType (ref), view (ref)
-	local var6 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
-		unknownUser = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
-	}) else nil).unknownUser else localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
-	local var7 = useTokens()
-	local var8 = useUserProfileInfoModule(p0.userId)
+	-- upvalues: useUserProfileInfoModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), icon (ref), iconName (ref), iconSize (ref), list (ref), accessoryType (ref), view (ref)
+	local PRIVATE_INVITES_UNKNOWN_USER, var8
+	local var6 = useUserProfileInfoModule(p0.userId)
+	local var7 = if fFlagBuildLocalization then useLocalization({
+		unknownUser = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER,
+		username = {
+			localizationStringsModule.USER_PICKER_USERNAME,
+			USERNAME = var6.username
+		}
+	}) else nil
+	local _ = nil
+	local _ = nil
+	
+	if fFlagBuildLocalization then
+		PRIVATE_INVITES_UNKNOWN_USER = var7.unknownUser
+		var8 = var7.username
+	else
+		PRIVATE_INVITES_UNKNOWN_USER = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER
+		var8 = localizationStringsModule.formatUserPickerUsername(var6.username)
+	end
+	local var9 = useTokens()
 	
 	return reactModule.createElement(view, {
 		tag = "size-full-0 auto-y",
@@ -39,12 +54,12 @@ return function(p0) --[[ line: 39 | named "UserPickerRow" ]]
 		}, {
 			Item = reactModule.createElement(list.Item, {
 				leading = { type = accessoryType.Avatar, userId = p0.userId },
-				title = if var8.displayName ~= "" then var6 else var8.displayName,
-				description = localizationStringsModule.formatUserPickerUsername(var8.username),
+				title = if var6.displayName ~= "" then PRIVATE_INVITES_UNKNOWN_USER else var6.displayName,
+				description = var8,
 				trailing = if p0.isSelected then reactModule.createElement(icon, {
 					name = iconName.CheckLarge,
 					size = iconSize.Medium,
-					style = var7.Color.Content.Emphasis
+					style = var9.Color.Content.Emphasis
 				}) else nil
 			}),
 			Scrim = if p0.isDisabled then reactModule.createElement("Frame", {
@@ -52,7 +67,7 @@ return function(p0) --[[ line: 39 | named "UserPickerRow" ]]
 				BorderSizePixel = 0,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = var7.Color.Surface.Surface_100.Color3
+				BackgroundColor3 = var9.Color.Surface.Surface_100.Color3
 			}) else nil
 		})
 	})
