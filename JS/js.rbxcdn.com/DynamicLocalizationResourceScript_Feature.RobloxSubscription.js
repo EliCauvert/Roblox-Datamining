@@ -163,6 +163,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.BannerBodyArrivedSubscriber": "It's in your inventory now. Get ready for it to open on August 14.",
     "Description.BannerTitleArrivedPurchase": "There's still time to get the Plus gift!",
     "Description.BannerBodyArrivedPurchase": "Become a Plus subscriber before {date} to get the exclusive gift in your inventory before it opens.",
-    "Action.BannerEquip": "Equip"
+    "Action.BannerEquip": "Equip",
+    "Description.Benefit.Discounts": "Discounts off in-game items, avatars, and more"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");
