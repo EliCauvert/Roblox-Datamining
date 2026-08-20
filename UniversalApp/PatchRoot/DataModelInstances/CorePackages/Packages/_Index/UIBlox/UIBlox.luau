@@ -1,6 +1,6 @@
 ﻿local makeConfigurableModule = require(script.Core.Config.makeConfigurable)
 local UIBloxDefaultConfigModule = require(script.UIBloxDefaultConfig)
-local createLazyComponent = require(script.Parent.LazyRequire).createLazyComponent
+local createLazyComponentModule = require(script.Utility.createLazyComponent)
 local _ = require(script.App.Style.Fonts)
 local _ = require(script.App.ImageSet.ImagesTypes)
 local _ = require(script.App.Style.StyleTypes)
@@ -9,13 +9,13 @@ local overlayModule = require(script.App.Dialog.Overlay.Overlay)
 local controlStateModule = require(script.Core.Control.Enum.ControlState)
 local _ = require(script.Parent.React)
 
-return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibrary" ]]
-	-- upvalues: createLazyComponent (ref), controlStateModule (ref), overlayModule (ref)
+return makeConfigurableModule(function(p0) --[[ line: 33 | named "initializeLibrary" ]]
+	-- upvalues: createLazyComponentModule (ref), controlStateModule (ref), overlayModule (ref)
 	local strictModule = require(script.Utility.strict)
 	
-	local function _(p1) --[[ line: 37 | named "lazify" ]]
-		-- upvalues: createLazyComponent (copy)
-		return createLazyComponent(p1)
+	local function _(p1) --[[ line: 36 | named "lazify" ]]
+		-- upvalues: createLazyComponentModule (copy)
+		return createLazyComponentModule(p1)
 	end
 	
 	local t = {
@@ -45,10 +45,10 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 			}),
 			Control = strictModule({
 				Enum = strictModule({ ControlState = controlStateModule }),
-				Interactable = createLazyComponent(function() --[[ line: 74 ]]
+				Interactable = createLazyComponentModule(function() --[[ line: 73 ]]
 					return require(script.Core.Control.Interactable)
 				end),
-				StateLayer = createLazyComponent(function() --[[ line: 77 ]]
+				StateLayer = createLazyComponentModule(function() --[[ line: 76 ]]
 					return require(script.Core.Control.StateLayer)
 				end),
 				FeedbackManagerInjectionContext = require(script.Core.Control.FeedbackManagerInjectionContext)
@@ -62,11 +62,11 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 				useStyleMetadata = require(script.Core.Style.useStyleMetadata)
 			}),
 			VR = strictModule({
-				Panel3D = createLazyComponent(function() --[[ line: 94 ]]
+				Panel3D = createLazyComponentModule(function() --[[ line: 93 ]]
 					return require(script.Core.VR.Panel3D)
 				end),
 				Constants = require(script.Core.VR.Constants),
-				PointerOverlay = createLazyComponent(function() --[[ line: 98 ]]
+				PointerOverlay = createLazyComponentModule(function() --[[ line: 97 ]]
 					return require(script.Core.VR.PointerOverlay)
 				end)
 			}),
@@ -74,7 +74,7 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 				ExpandableText = strictModule({
 					GetCanExpand = require(script.Core.Text.ExpandableText.ExpandableTextUtils).getCanExpand
 				}),
-				EmojiTextLabel = createLazyComponent(function() --[[ line: 107 ]]
+				EmojiTextLabel = createLazyComponentModule(function() --[[ line: 106 ]]
 					return require(script.Core.Text.EmojiTextLabel.EmojiTextLabel)
 				end)
 			}),
@@ -94,13 +94,13 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 				Enum = strictModule({ IconSize = require(script.App.ImageSet.Enum.IconSize) })
 			}),
 			Bar = strictModule({
-				HeaderBar = createLazyComponent(function() --[[ line: 138 ]]
+				HeaderBar = createLazyComponentModule(function() --[[ line: 137 ]]
 					return require(script.App.Bar.HeaderBar)
 				end),
-				FullscreenTitleBar = createLazyComponent(function() --[[ line: 141 ]]
+				FullscreenTitleBar = createLazyComponentModule(function() --[[ line: 140 ]]
 					return require(script.App.Bar.FullscreenTitleBar)
 				end),
-				ControllerBar = createLazyComponent(function() --[[ line: 144 ]]
+				ControllerBar = createLazyComponentModule(function() --[[ line: 143 ]]
 					return require(script.App.Bar.ControllerBar)
 				end)
 			}),
@@ -109,45 +109,45 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 					ButtonType = require(script.App.Button.Enum.ButtonType),
 					StandardButtonSize = require(script.Core.Button.Enum.StandardButtonSize)
 				}),
-				Button = createLazyComponent(function() --[[ line: 154 ]]
+				Button = createLazyComponentModule(function() --[[ line: 153 ]]
 					return require(script.App.Button.Button)
 				end),
-				ButtonStack = createLazyComponent(function() --[[ line: 157 ]]
+				ButtonStack = createLazyComponentModule(function() --[[ line: 156 ]]
 					return require(script.App.Button.ButtonStack)
 				end),
-				TextButton = createLazyComponent(function() --[[ line: 160 ]]
+				TextButton = createLazyComponentModule(function() --[[ line: 159 ]]
 					return require(script.App.Button.TextButton)
 				end),
-				LinkButton = createLazyComponent(function() --[[ line: 163 ]]
+				LinkButton = createLazyComponentModule(function() --[[ line: 162 ]]
 					return require(script.App.Button.LinkButton)
 				end),
-				IconButton = createLazyComponent(function() --[[ line: 166 ]]
+				IconButton = createLazyComponentModule(function() --[[ line: 165 ]]
 					return require(script.App.Button.IconButton)
 				end),
-				ActionBar = createLazyComponent(function() --[[ line: 169 ]]
+				ActionBar = createLazyComponentModule(function() --[[ line: 168 ]]
 					return require(script.App.Button.ActionBar)
 				end),
-				UtilityActionIcon = createLazyComponent(function() --[[ line: 172 ]]
+				UtilityActionIcon = createLazyComponentModule(function() --[[ line: 171 ]]
 					return require(script.App.Button.UtilityActionIcon)
 				end),
-				ComboButton = createLazyComponent(function() --[[ line: 175 ]]
+				ComboButton = createLazyComponentModule(function() --[[ line: 174 ]]
 					return require(script.App.Button.ComboButton)
 				end)
 			}),
 			Cell = strictModule({
 				Small = strictModule({
 					SelectionGroup = strictModule({
-						SmallRadioButtonGroup = createLazyComponent(function() --[[ line: 183 ]]
+						SmallRadioButtonGroup = createLazyComponentModule(function() --[[ line: 182 ]]
 							return require(script.App.Cell.Small.SelectionGroup.SmallRadioButtonGroup)
 						end)
 					})
 				})
 			}),
 			Text = strictModule({
-				ExpandableTextArea = createLazyComponent(function() --[[ line: 191 ]]
+				ExpandableTextArea = createLazyComponentModule(function() --[[ line: 190 ]]
 					return require(script.App.Text.ExpandableTextArea.ExpandableTextArea)
 				end),
-				StyledTextLabel = createLazyComponent(function() --[[ line: 194 ]]
+				StyledTextLabel = createLazyComponentModule(function() --[[ line: 193 ]]
 					return require(script.App.Text.StyledTextLabel)
 				end)
 			}),
@@ -156,12 +156,12 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 					RetrievalStatus = require(script.App.Loading.Enum.RetrievalStatus),
 					LoadingStrategy = require(script.App.Loading.Enum.LoadingStrategy)
 				}),
-				LoadableImage = createLazyComponent(function() --[[ line: 204 ]]
+				LoadableImage = createLazyComponentModule(function() --[[ line: 203 ]]
 					return require(script.App.Loading.LoadableImage)
 				end)
 			}),
 			InputButton = strictModule({
-				RadioButtonList = createLazyComponent(function() --[[ line: 210 ]]
+				RadioButtonList = createLazyComponentModule(function() --[[ line: 209 ]]
 					return require(script.App.InputButton.RadioButtonList)
 				end)
 			}),
@@ -170,35 +170,35 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 					ScrollBarType = require(script.App.Container.Enum.ScrollBarType)
 				}),
 				Carousel = strictModule({
-					FreeFlowCarousel = createLazyComponent(function() --[[ line: 220 ]]
+					FreeFlowCarousel = createLazyComponentModule(function() --[[ line: 219 ]]
 						return require(script.App.Container.Carousel.FreeFlowCarousel)
 					end)
 				}),
 				Grid = strictModule({
-					ResponsiveGrid = createLazyComponent(function() --[[ line: 225 ]]
+					ResponsiveGrid = createLazyComponentModule(function() --[[ line: 224 ]]
 						return require(script.App.Container.Grid.ResponsiveGrid)
 					end)
 				}),
-				VerticalScrollView = createLazyComponent(function() --[[ line: 229 ]]
+				VerticalScrollView = createLazyComponentModule(function() --[[ line: 228 ]]
 					return require(script.App.Container.VerticalScrollView)
 				end),
 				VerticalScrollViewWithMargin = require(script.App.Container.VerticalScrollViewWithMargin),
 				getPageMargin = require(script.App.Container.getPageMargin),
-				LoadingStateContainer = createLazyComponent(function() --[[ line: 234 ]]
+				LoadingStateContainer = createLazyComponentModule(function() --[[ line: 233 ]]
 					return require(script.App.Container.LoadingStateContainer)
 				end),
-				LoadingStatePage = createLazyComponent(function() --[[ line: 237 ]]
+				LoadingStatePage = createLazyComponentModule(function() --[[ line: 236 ]]
 					return require(script.App.Container.LoadingStatePage)
 				end),
-				HorizontalPageMargin = createLazyComponent(function() --[[ line: 240 ]]
+				HorizontalPageMargin = createLazyComponentModule(function() --[[ line: 239 ]]
 					return require(script.App.Container.HorizontalPageMargin)
 				end)
 			}),
 			Slider = strictModule({
-				ContextualSlider = createLazyComponent(function() --[[ line: 246 ]]
+				ContextualSlider = createLazyComponentModule(function() --[[ line: 245 ]]
 					return require(script.App.Slider.ContextualSlider)
 				end),
-				SystemSlider = createLazyComponent(function() --[[ line: 249 ]]
+				SystemSlider = createLazyComponentModule(function() --[[ line: 248 ]]
 					return require(script.App.Slider.SystemSlider)
 				end)
 			}),
@@ -206,68 +206,68 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 				Enum = strictModule({ Emoji = require(script.Core.Emoji.Enum.Emoji) })
 			}),
 			Grid = strictModule({
-				GridView = createLazyComponent(function() --[[ line: 261 ]]
+				GridView = createLazyComponentModule(function() --[[ line: 260 ]]
 					return require(script.App.Grid.GridView)
 				end),
 				GridMetrics = require(script.App.Grid.GridMetrics),
-				DefaultMetricsGridView = createLazyComponent(function() --[[ line: 265 ]]
+				DefaultMetricsGridView = createLazyComponentModule(function() --[[ line: 264 ]]
 					return require(script.App.Grid.DefaultMetricsGridView)
 				end)
 			}),
 			Tile = strictModule({
-				MenuTile = createLazyComponent(function() --[[ line: 271 ]]
+				MenuTile = createLazyComponentModule(function() --[[ line: 270 ]]
 					return require(script.App.Tile.MenuTile.MenuTile)
 				end),
-				PlayerTile = createLazyComponent(function() --[[ line: 274 ]]
+				PlayerTile = createLazyComponentModule(function() --[[ line: 273 ]]
 					return require(script.App.Tile.PlayerTile.PlayerTile)
 				end),
-				ExperienceTileV3 = createLazyComponent(function() --[[ line: 277 ]]
+				ExperienceTileV3 = createLazyComponentModule(function() --[[ line: 276 ]]
 					return require(script.App.Tile.SplitTile.ExperienceTile.ExperienceTileV3)
 				end),
 				AspectRatioModeEnum = require(script.App.Tile.SplitTile.ExperienceTile.Enum.AspectRatioMode),
 				getExperienceTileRelativeHeight = require(script.App.Tile.SplitTile.ExperienceTile.getExperienceTileRelativeHeight),
-				ExperienceActionRow = createLazyComponent(function() --[[ line: 284 ]]
+				ExperienceActionRow = createLazyComponentModule(function() --[[ line: 283 ]]
 					return require(script.App.Tile.SplitTile.ExperienceTile.ExperienceActionRow)
 				end),
-				VerticalTile = createLazyComponent(function() --[[ line: 287 ]]
+				VerticalTile = createLazyComponentModule(function() --[[ line: 286 ]]
 					return require(script.App.Tile.SplitTile.VerticalTile.VerticalTile)
 				end),
-				VerticalTileThumbnail = createLazyComponent(function() --[[ line: 290 ]]
+				VerticalTileThumbnail = createLazyComponentModule(function() --[[ line: 289 ]]
 					return require(script.App.Tile.SplitTile.VerticalTile.VerticalTileThumbnail)
 				end),
 				ExperienceTileMetadata = strictModule({
-					SocialProofFooter = createLazyComponent(function() --[[ line: 294 ]]
+					SocialProofFooter = createLazyComponentModule(function() --[[ line: 293 ]]
 						return require(script.App.Tile.ExperienceTileMetadata.SocialProofFooter)
 					end),
-					CoPlayFooter = createLazyComponent(function() --[[ line: 297 ]]
+					CoPlayFooter = createLazyComponentModule(function() --[[ line: 296 ]]
 						return require(script.App.Tile.ExperienceTileMetadata.CoPlayFooter)
 					end),
-					TextFooter = createLazyComponent(function() --[[ line: 300 ]]
+					TextFooter = createLazyComponentModule(function() --[[ line: 299 ]]
 						return require(script.App.Tile.ExperienceTileMetadata.TextFooter)
 					end)
 				})
 			}),
 			Dialog = strictModule({
 				Modal = strictModule({
-					FullPageModal = createLazyComponent(function() --[[ line: 308 ]]
+					FullPageModal = createLazyComponentModule(function() --[[ line: 307 ]]
 						return require(script.App.Dialog.Modal.FullPageModal)
 					end),
 					getPartialPageModalMiddleContentWidth = require(script.App.Dialog.Modal.getPartialPageModalMiddleContentWidth),
-					PartialPageModal = createLazyComponent(function() --[[ line: 314 ]]
+					PartialPageModal = createLazyComponentModule(function() --[[ line: 313 ]]
 						return require(script.App.Dialog.Modal.PartialPageModal)
 					end),
-					EducationalModal = createLazyComponent(function() --[[ line: 317 ]]
+					EducationalModal = createLazyComponentModule(function() --[[ line: 316 ]]
 						return require(script.App.Dialog.Modal.EducationalModal)
 					end),
-					ModalWindow = createLazyComponent(function() --[[ line: 320 ]]
+					ModalWindow = createLazyComponentModule(function() --[[ line: 319 ]]
 						return require(script.App.Dialog.Modal.ModalWindow)
 					end)
 				}),
 				Alert = strictModule({
-					InteractiveAlert = createLazyComponent(function() --[[ line: 325 ]]
+					InteractiveAlert = createLazyComponentModule(function() --[[ line: 324 ]]
 						return require(script.App.Dialog.Alert.InteractiveAlert)
 					end),
-					LoadingAlert = createLazyComponent(function() --[[ line: 328 ]]
+					LoadingAlert = createLazyComponentModule(function() --[[ line: 327 ]]
 						return require(script.App.Dialog.Alert.LoadingAlert)
 					end)
 				}),
@@ -275,14 +275,14 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 					CloseButtonIcon = require(script.App.Dialog.Modal.Enum.CloseButtonIcon),
 					TooltipOrientation = require(script.App.Dialog.Tooltip.Enum.TooltipOrientation)
 				}),
-				Toast = createLazyComponent(function() --[[ line: 336 ]]
+				Toast = createLazyComponentModule(function() --[[ line: 335 ]]
 					return require(script.App.Dialog.Toast.Toast)
 				end),
-				Tooltip = createLazyComponent(function() --[[ line: 339 ]]
+				Tooltip = createLazyComponentModule(function() --[[ line: 338 ]]
 					return require(script.App.Dialog.Tooltip.Tooltip)
 				end),
 				TooltipV2 = require(script.App.Dialog.TooltipV2.Controllers),
-				TooltipCallout = createLazyComponent(function() --[[ line: 343 ]]
+				TooltipCallout = createLazyComponentModule(function() --[[ line: 342 ]]
 					return require(script.App.Dialog.TooltipV2.TooltipCallout)
 				end),
 				TooltipOrientation = require(script.App.Dialog.Tooltip.Enum.TooltipOrientation),
@@ -300,10 +300,10 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 				Tokens = require(script.App.Style.Tokens)
 			}),
 			Indicator = strictModule({
-				Badge = createLazyComponent(function() --[[ line: 367 ]]
+				Badge = createLazyComponentModule(function() --[[ line: 366 ]]
 					return require(script.App.Indicator.Badge)
 				end),
-				EmptyState = createLazyComponent(function() --[[ line: 370 ]]
+				EmptyState = createLazyComponentModule(function() --[[ line: 369 ]]
 					return require(script.App.Indicator.EmptyState)
 				end),
 				Enum = strictModule({
@@ -312,54 +312,54 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 					VoteStates = require(script.App.Indicator.Enum.VoteStates)
 				}),
 				PlayerContext = require(script.App.Indicator.PlayerContext),
-				PlayerCount = createLazyComponent(function() --[[ line: 379 ]]
+				PlayerCount = createLazyComponentModule(function() --[[ line: 378 ]]
 					return require(script.App.Indicator.PlayerCount)
 				end),
-				RateCount = createLazyComponent(function() --[[ line: 382 ]]
+				RateCount = createLazyComponentModule(function() --[[ line: 381 ]]
 					return require(script.App.Indicator.RateCount)
 				end),
-				StatWidget = createLazyComponent(function() --[[ line: 385 ]]
+				StatWidget = createLazyComponentModule(function() --[[ line: 384 ]]
 					return require(script.App.Indicator.StatWidget)
 				end),
-				StatGroup = createLazyComponent(function() --[[ line: 388 ]]
+				StatGroup = createLazyComponentModule(function() --[[ line: 387 ]]
 					return require(script.App.Indicator.StatGroup)
 				end),
-				PlayerName = createLazyComponent(function() --[[ line: 391 ]]
+				PlayerName = createLazyComponentModule(function() --[[ line: 390 ]]
 					return require(script.App.Indicator.PlayerName)
 				end)
 			}),
 			Menu = strictModule({
-				BaseMenu = createLazyComponent(function() --[[ line: 397 ]]
+				BaseMenu = createLazyComponentModule(function() --[[ line: 396 ]]
 					return require(script.App.Menu.BaseMenu)
 				end),
-				ContextualMenu = createLazyComponent(function() --[[ line: 400 ]]
+				ContextualMenu = createLazyComponentModule(function() --[[ line: 399 ]]
 					return require(script.App.Menu.ContextualMenu)
 				end),
 				MenuDirection = require(script.App.Menu.MenuDirection),
-				DropdownMenu = createLazyComponent(function() --[[ line: 406 ]]
+				DropdownMenu = createLazyComponentModule(function() --[[ line: 405 ]]
 					return require(script.App.Menu.DropdownMenu)
 				end),
-				KeyLabel = createLazyComponent(function() --[[ line: 410 ]]
+				KeyLabel = createLazyComponentModule(function() --[[ line: 409 ]]
 					return require(script.App.Menu.KeyLabel.KeyLabel)
 				end),
 				KeyLabelUtilities = require(script.App.Menu.KeyLabel.Utilities)
 			}),
 			Control = strictModule({
-				SegmentedControl = createLazyComponent(function() --[[ line: 417 ]]
+				SegmentedControl = createLazyComponentModule(function() --[[ line: 416 ]]
 					return require(script.App.Control.SegmentedControl)
 				end),
-				Pill = createLazyComponent(function() --[[ line: 420 ]]
+				Pill = createLazyComponentModule(function() --[[ line: 419 ]]
 					return require(script.App.Control.Pill.Pill)
 				end),
-				Pillv2 = createLazyComponent(function() --[[ line: 423 ]]
+				Pillv2 = createLazyComponentModule(function() --[[ line: 422 ]]
 					return require(script.App.Control.Pill.Pillv2)
 				end),
 				Slot = strictModule({
-					SlotTray = createLazyComponent(function() --[[ line: 427 ]]
+					SlotTray = createLazyComponentModule(function() --[[ line: 426 ]]
 						return require(script.App.Control.Slot.SlotTray)
 					end)
 				}),
-				PillGroup = createLazyComponent(function() --[[ line: 431 ]]
+				PillGroup = createLazyComponentModule(function() --[[ line: 430 ]]
 					return require(script.App.Control.Pill.PillGroup)
 				end)
 			}),
@@ -370,25 +370,25 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 					NavigationRailAlignment = require(script.App.Navigation.Enum.NavigationRailAlignment),
 					NavigationTabLayout = require(script.App.Navigation.Enum.NavigationTabLayout)
 				}),
-				SystemBar = createLazyComponent(function() --[[ line: 443 ]]
+				SystemBar = createLazyComponentModule(function() --[[ line: 442 ]]
 					return require(script.App.Navigation.SystemBar)
 				end),
-				NavigationBar = createLazyComponent(function() --[[ line: 446 ]]
+				NavigationBar = createLazyComponentModule(function() --[[ line: 445 ]]
 					return require(script.App.Navigation.NavigationBar)
 				end),
-				NavigationRailV2 = createLazyComponent(function() --[[ line: 449 ]]
+				NavigationRailV2 = createLazyComponentModule(function() --[[ line: 448 ]]
 					return require(script.App.Navigation.NavigationRailV2)
 				end),
 				NavigationTab = require(script.App.Navigation.NavigationTab),
 				PrimaryNavBar = strictModule({
-					IconTabGroup = createLazyComponent(function() --[[ line: 454 ]]
+					IconTabGroup = createLazyComponentModule(function() --[[ line: 453 ]]
 						return require(script.App.Navigation.PrimaryNavBar.IconTabGroup)
 					end)
 				}),
-				ShortcutBar = createLazyComponent(function() --[[ line: 458 ]]
+				ShortcutBar = createLazyComponentModule(function() --[[ line: 457 ]]
 					return require(script.App.Navigation.ShortcutBar.ShortcutBar)
 				end),
-				Shortcut = createLazyComponent(function() --[[ line: 461 ]]
+				Shortcut = createLazyComponentModule(function() --[[ line: 460 ]]
 					return require(script.App.Navigation.ShortcutBar.Shortcut)
 				end)
 			}),
@@ -405,24 +405,24 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 				CursorType = require(script.App.SelectionCursor.CursorType)
 			}),
 			Table = strictModule({
-				ListTable = createLazyComponent(function() --[[ line: 481 ]]
+				ListTable = createLazyComponentModule(function() --[[ line: 480 ]]
 					return require(script.App.Table.ListTable)
 				end),
-				ScrollingListTable = createLazyComponent(function() --[[ line: 484 ]]
+				ScrollingListTable = createLazyComponentModule(function() --[[ line: 483 ]]
 					return require(script.App.Table.ScrollingListTable)
 				end),
-				Cell = createLazyComponent(function() --[[ line: 487 ]]
+				Cell = createLazyComponentModule(function() --[[ line: 486 ]]
 					return require(script.App.Table.Cell)
 				end),
-				CellHeadDetail = createLazyComponent(function() --[[ line: 490 ]]
+				CellHeadDetail = createLazyComponentModule(function() --[[ line: 489 ]]
 					return require(script.App.Table.CellHeadDetail)
 				end),
-				CellTailDescription = createLazyComponent(function() --[[ line: 493 ]]
+				CellTailDescription = createLazyComponentModule(function() --[[ line: 492 ]]
 					return require(script.App.Table.CellTailDescription)
 				end)
 			}),
 			Input = strictModule({
-				TextField = createLazyComponent(function() --[[ line: 499 ]]
+				TextField = createLazyComponentModule(function() --[[ line: 498 ]]
 					return require(script.App.Input.TextField)
 				end)
 			})
@@ -442,14 +442,14 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 		},
 		Context = require(script.Core.Style.StyleContext)
 	}
-	t.AccordionView = createLazyComponent(function() --[[ line: 522 ]]
+	t.AccordionView = createLazyComponentModule(function() --[[ line: 521 ]]
 		return require(script.App.Accordion.AccordionView)
 	end)
 	t.Tile = {
-		SaveTile = createLazyComponent(function() --[[ line: 527 ]]
+		SaveTile = createLazyComponentModule(function() --[[ line: 526 ]]
 			return require(script.App.Tile.SaveTile.SaveTile)
 		end),
-		ItemTile = createLazyComponent(function() --[[ line: 530 ]]
+		ItemTile = createLazyComponentModule(function() --[[ line: 529 ]]
 			return require(script.App.Tile.ItemTile.ItemTile)
 		end),
 		ItemTileEnums = require(script.App.Tile.Enum.ItemTileEnums)
@@ -458,7 +458,7 @@ return makeConfigurableModule(function(p0) --[[ line: 34 | named "initializeLibr
 		SpringAnimatedItem = require(script.Utility.SpringAnimatedItem),
 		OpenTypeSupport = require(script.Utility.OpenTypeSupport)
 	}
-	t.ModalBottomSheet = createLazyComponent(function() --[[ line: 545 ]]
+	t.ModalBottomSheet = createLazyComponentModule(function() --[[ line: 544 ]]
 		return require(script.ModalBottomSheet.ModalBottomSheet)
 	end)
 	

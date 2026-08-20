@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("LazyRequire").Parent
+﻿local parent = script.Parent.Parent.Parent
 local cryoModule = require(parent.Cryo)
 local reactModule = require(parent.React)
 
-return function(p0) --[[ line: 13 | named "createLazyComponent" ]]
+return function(p0) --[[ line: 15 | named "createLazyComponent" ]]
 	-- upvalues: reactModule (ref), cryoModule (ref)
-	return reactModule.forwardRef(function(p1, p2) --[[ line: 16 ]]
+	return reactModule.forwardRef(function(p1, p2) --[[ line: 18 ]]
 		-- upvalues: reactModule (copy), p0 (ref), cryoModule (copy)
 		return reactModule.createElement(p0(), cryoModule.Dictionary.join(p1, { ref = p2 }))
 	end)
