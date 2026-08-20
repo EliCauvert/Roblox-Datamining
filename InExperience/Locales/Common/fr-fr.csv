@@ -1296,12 +1296,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Mettre à jour le look existant
 Feature.Avatar.Action.UpdateMakeupLook,Mettre à jour le look
 Feature.Avatar.Action.Zoom,Zoomer
 Feature.Avatar.AvatarWidgetTitle,Explorer les styles
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publier
+Feature.Avatar.BackgroundGeneration.Action.View,Voir
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Ta création est prête à l'emploi.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Cet arrière-plan a été généré avec l'IA. En le publiant, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire et les items publiés ne pourront plus être modifiés."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,L'item n'est pas conforme aux Normes de la communauté
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Cette invite ne respecte pas nos directives. Rédiges-en une autre.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Cet arrière-plan n'est pas conforme aux Normes de la communauté Roblox et n'a donc pas été ajouté à ton inventaire. Essaie d'en générer un nouveau.
 Feature.Avatar.BackgroundGeneration.Error.System,Une erreur s'est produite lors de la génération de ton arrière-plan. Réessaie.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Décris ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Génération de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Préparation de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Title,Créer un arrière-plan
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publier dans l'inventaire
 Feature.Avatar.Backgrounds.Title,Arrière-plans
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,L'ajustement n'est pas disponible pour ce style de corps.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Couleurs du corps d'origine par défaut
@@ -1807,7 +1821,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Ouvrir les paramètres
 Feature.Build.Action.Playtest,Test de jeu
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publier
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publier la dernière version
 Feature.Build.Action.Restore,Restaurer
 Feature.Build.Action.Revert,Rétablir
@@ -1819,16 +1833,18 @@ Feature.Build.Action.ShareLink,Partager le lien
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Mettre à jour la classification
 Feature.Build.Action.UpdateWithChanges,Mettre à jour avec les modifications
-Feature.Build.Action.View,Voir
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Voir l'utilisation
 Feature.Build.Content.NewGame,Nouveau jeu
 Feature.Build.Description.ArchiveRemoval,"Si tu archives ce jeu, il sera supprimé dans Construire. Tu peux toujours y accéder et le restaurer depuis le Hub Création ou Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Utilise tes Robux pour acheter automatiquement des capacités d'utilisation supplémentaires de Construire au fur et à mesure que tu crées. Tu peux définir une limite de dépenses quotidienne à tout moment.
+Feature.Build.Description.BoostAudienceForPlays,Élargis ton audience pour attirer plus de joueurs.
 Feature.Build.Description.BoostGameAudience,Atteins un plus grand nombre de joueurs
 Feature.Build.Description.BuildIdeaGame,Transforme tes idées en un jeu
 Feature.Build.Description.BuildReplyNotif,Recevoir une notification lorsque tu reçois une réponse dans Construire.
 Feature.Build.Description.BuyRobuxToCreate,"Achète plus de Robux pour continuer à créer, ou attends que ton utilisation gratuite de la fonctionnalité Construire soit réinitialisée demain."
 Feature.Build.Description.BuyUsageOrWait,Achète plus de capacités d'utilisation de Construire avec des Robux ou attends que ta limite quotidienne soit réinitialisée.
+Feature.Build.Description.CampaignRunDates,Ta campagne se déroulera du {startDate} au {endDate} 
 Feature.Build.Description.ChoosePlaytesters,Choisis des amis pour t'aider à tester le jeu.
 Feature.Build.Description.EnableBuildNotifs,Active les notifications dans les paramètres de ton appareil pour recevoir les mises à jour de Construire.
 Feature.Build.Description.FriendsLinkOnly,Seuls tes amis peuvent accéder à ce lien. Modifie le paramètre Public de ton jeu si tu souhaites que davantage de personnes y jouent.
@@ -1857,6 +1873,7 @@ Feature.Build.Label.Access,Accès
 Feature.Build.Label.AdditionalUsage,Utilisation supplémentaire de Construire
 Feature.Build.Label.AdditionalUsed,{USED} sur {LIMIT} utilisé(s)
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,Montant disponible : {AMOUNT}
 Feature.Build.Label.Autosaved,Sauvegarde automatique
 Feature.Build.Label.Available,disponible
 Feature.Build.Label.BackToBuild,Retour à la construction
@@ -2041,6 +2058,7 @@ Feature.Build.Message.WhatToCreate,Que veux-tu créer aujourd'hui ?
 Feature.Build.Message.WorkedMinutesSeconds,A travaillé pendant {MINUTES} m {REM_SECONDS} s
 Feature.Build.Message.WorkedSeconds,A travaillé pendant {SECONDS} s
 Feature.Build.Message.WorkingOnTasks,Travail en cours sur tes tâches
+Feature.Build.Title.AdCampaignActive,La campagne publicitaire est active
 Feature.Build.Title.AddFriendsToPlaytest,Ajoute des amis pour t'aider à tester le jeu
 Feature.Build.Title.ArchiveThisGame,Archiver ce jeu ?
 Feature.Build.Title.Audience,
@@ -2168,6 +2186,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Vendre
 Feature.Catalog.Action.ShareVia,Partager via...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,Essayer
 Feature.Catalog.Action.Upgrade,Améliorer
 Feature.Catalog.Action.ViewDetailsPage,Voir la page de détails
 Feature.Catalog.Action.ViewExperienceDetails,Voir les détails de l'expérience

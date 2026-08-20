@@ -1296,12 +1296,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Mevcut görünümü güncelle
 Feature.Avatar.Action.UpdateMakeupLook,Görünümü güncelle
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Tarzları Keşfet
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Yayınla
+Feature.Avatar.BackgroundGeneration.Action.View,Görüntüle
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Yaratımın kullanıma hazır.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,Bu arka plan yapay zekâ ile oluşturulmuştur. Yayınlayarak Roblox Topluluk Standartları'na uyduğunu ve hak sahibi olmadığın içerikler kullanmadığını onaylamış olursun. Envanterinde görünmeden önce incelenecek ve yayınlanan öğeler düzenlenemeyecektir.
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"Öğe, Topluluk Standartları'na uymuyor"
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor…
 Feature.Avatar.BackgroundGeneration.Title,Arka Plan Oluştur
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Envanterde yayınla
 Feature.Avatar.Backgrounds.Title,Arka planlar
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Düzenlemeler bu vücut stilinde kullanılamıyor.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Varsayılan orijinal vücut renklerine dön
@@ -1807,7 +1821,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Ayarları aç
 Feature.Build.Action.Playtest,Oynanış testi
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Yayınla
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,En sonuncuyu yayınla
 Feature.Build.Action.Restore,Geri Yükle
 Feature.Build.Action.Revert,Geri döndür
@@ -1819,16 +1833,18 @@ Feature.Build.Action.ShareLink,Bağlantıyı paylaş
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Derecelendirmeyi güncelle
 Feature.Build.Action.UpdateWithChanges,Değişikliklerle güncelle
-Feature.Build.Action.View,Görüntüle
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Kullanımı görüntüle
 Feature.Build.Content.NewGame,Yeni oyun
 Feature.Build.Description.ArchiveRemoval,Bu oyunu arşivlersen oyun İnşa Et'ten kaldırılır. Yaratıcı Merkezi'nde veya Roblox Studio'da oyuna erişmeye ve oyunu geri yüklemeye devam edebilirsin.
 Feature.Build.Description.AutoBuyUsage,Bir şeyler oluştururken otomatik olarak ek İnşa Et kullanım hakkı satın almak için Robux'unu kullan. İstediğin zaman günlük harcama limiti belirleyebilirsin.
+Feature.Build.Description.BoostAudienceForPlays,Daha fazla oyun için kitleni genişlet.
 Feature.Build.Description.BoostGameAudience,Oyununun kitlesini genişlet
 Feature.Build.Description.BuildIdeaGame,Fikirlerini oyuna dönüştür
 Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiğinde haberdar ol.
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
 Feature.Build.Description.BuyUsageOrWait,Robux ile daha fazla İnşa Et kullanım hakkı satın al veya günlük sınırının sıfırlanmasını bekle.
+Feature.Build.Description.CampaignRunDates,Kampanyanız {startDate}-{endDate} arasında yayınlanacak
 Feature.Build.Description.ChoosePlaytesters,Oynanış testinde sana yardımcı olacak arkadaşları seç.
 Feature.Build.Description.EnableBuildNotifs,İnşa Et'ten güncellemeler almak için cihaz ayarlarında bildirimleri aç.
 Feature.Build.Description.FriendsLinkOnly,Bu bağlantıya yalnızca arkadaşların erişebilir. Daha fazla insanın oynamasını istiyorsan oyununun Kitle ayarını değiştir.
@@ -1857,6 +1873,7 @@ Feature.Build.Label.Access,Erişim
 Feature.Build.Label.AdditionalUsage,Ek İnşa Et kullanım hakkı
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT} kullanıldı
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
 Feature.Build.Label.Autosaved,Otomatik kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.BackToBuild,Oluşturmaya Dön
@@ -2041,6 +2058,7 @@ Feature.Build.Message.WhatToCreate,Bugün ne yaratmak istiyorsun?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} dk. {REM_SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkedSeconds,{SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkingOnTasks,Görevlerin üzerinde çalışıyor
+Feature.Build.Title.AdCampaignActive,Reklam kampanyası aktif
 Feature.Build.Title.AddFriendsToPlaytest,Oynanış testinde sana yardımcı olacak arkadaşları ekle
 Feature.Build.Title.ArchiveThisGame,Bu oyun arşivlensin mi?
 Feature.Build.Title.Audience,Kitle
@@ -2168,6 +2186,7 @@ Feature.Catalog.Action.Report,Bildirim
 Feature.Catalog.Action.Sell,Sat
 Feature.Catalog.Action.ShareVia,Paylaş...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,Dene
 Feature.Catalog.Action.Upgrade,Yükselt
 Feature.Catalog.Action.ViewDetailsPage,Ayrıntılar Sayfasını Görüntüle
 Feature.Catalog.Action.ViewExperienceDetails,Deneyim Detaylarını Görüntüle

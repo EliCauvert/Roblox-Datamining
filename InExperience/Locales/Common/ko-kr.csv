@@ -1295,12 +1295,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,기존 룩 업데이트
 Feature.Avatar.Action.UpdateMakeupLook,룩 업데이트
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,스타일 탐색
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,보기
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,작품을 사용할 준비가 되었습니다.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경은 AI로 생성되었습니다. 게시하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거치며, 게시된 아이템은 수정할 수 없습니다."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,아이템이 커뮤니티 규정을 충족하지 않습니다
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{max}개 중 {count}개
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세요...
 Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
 Feature.Avatar.BackgroundGeneration.Title,배경 만들기
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,인벤토리에 게시
 Feature.Avatar.Backgrounds.Title,배경
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,이 신체 스타일은 조정할 수 없습니다.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,원래 신체의 색상으로 설정
@@ -1818,16 +1832,18 @@ Feature.Build.Action.ShareLink,링크 공유
 Feature.Build.Action.Submit,제출하기
 Feature.Build.Action.UpdateRating,등급 업데이트
 Feature.Build.Action.UpdateWithChanges,변경 사항으로 업데이트
-Feature.Build.Action.View,보기
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,사용량 보기
 Feature.Build.Content.NewGame,새 게임
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
 Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
+Feature.Build.Description.BoostAudienceForPlays,오디언스를 확대하여 더 많은 플레이를 확보하세요.
 Feature.Build.Description.BoostGameAudience,게임의 오디언스 확대
 Feature.Build.Description.BuildIdeaGame,나만의 아이디어로 게임을 만들어 보세요
 Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알림을 받으세요.
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
+Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
 Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
 Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
 Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
@@ -1856,6 +1872,7 @@ Feature.Build.Label.Access,액세스
 Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
 Feature.Build.Label.BackToBuild,빌드로 돌아가기
@@ -2040,6 +2057,7 @@ Feature.Build.Message.WhatToCreate,오늘 무엇을 만들어 보시겠어요?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES}분 {REM_SECONDS}초 동안 작업함
 Feature.Build.Message.WorkedSeconds,{SECONDS}초 동안 작업함
 Feature.Build.Message.WorkingOnTasks,작업 진행 중
+Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
 Feature.Build.Title.Audience,오디언스
@@ -2167,6 +2185,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,판매
 Feature.Catalog.Action.ShareVia,공유...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,사용해 보기
 Feature.Catalog.Action.Upgrade,업그레이드
 Feature.Catalog.Action.ViewDetailsPage,세부 정보 페이지 보기
 Feature.Catalog.Action.ViewExperienceDetails,체험 세부 정보 보기

@@ -10,17 +10,18 @@ local buildUserSeenCollectionPayload = socialLuaAnalyticsModule.Analytics.buildU
 local useBatchedImpressions = impressionsModule.useBatchedImpressions
 local fIntUserSeenCollectionBatchTimeMs = sharedFlagsModule.FIntUserSeenCollectionBatchTimeMs
 local fFlagLuaAppPYMKSendUserSeenCollection = sharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection
+local fFlagLuaAppUserSeenCollectionUnifiedFields = sharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local _ = { Friend = "Friend", NotFriend = "NotFriend" }
 
-return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
-	-- upvalues: useSocialCarouselAnalyticsModule (ref), fFlagLuaAppPYMKSendUserSeenCollection (ref), reactModule (ref), tile (ref), buildUserSeenCollectionPayload (ref), useBatchedImpressions (ref), fIntUserSeenCollectionBatchTimeMs (ref)
+return function() --[[ line: 49 | named "useTilesSeenCollection" ]]
+	-- upvalues: useSocialCarouselAnalyticsModule (ref), fFlagLuaAppPYMKSendUserSeenCollection (ref), reactModule (ref), tile (ref), buildUserSeenCollectionPayload (ref), useBatchedImpressions (ref), fIntUserSeenCollectionBatchTimeMs (ref), fFlagLuaAppUserSeenCollectionUnifiedFields (ref)
 	local var6 = useSocialCarouselAnalyticsModule()
 	
 	if fFlagLuaAppPYMKSendUserSeenCollection then
 		local tilesSeenCollection = var6.tilesSeenCollection
 		local var7 = useBatchedImpressions({
 			batchTimeMs = fIntUserSeenCollectionBatchTimeMs,
-			mapItem = reactModule.useCallback(function(p0, p1, p2) --[[ line: 53 ]]
+			mapItem = reactModule.useCallback(function(p0, p1, p2) --[[ line: 54 ]]
 				-- upvalues: tile (copy)
 				return {
 					userId = p0,
@@ -33,7 +34,7 @@ return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
 					universeId = if p2 and p2.presence and (p2.presence.universeId and p2.presence.universeId ~= "") then p2.presence.universeId else -1
 				}
 			end, {}),
-			onFlush = if tilesSeenCollection then reactModule.useCallback(function(p3, p4) --[[ line: 82 ]]
+			onFlush = if tilesSeenCollection then reactModule.useCallback(function(p3, p4) --[[ line: 83 ]]
 				-- upvalues: tilesSeenCollection (ref), buildUserSeenCollectionPayload (copy)
 				if tilesSeenCollection then
 					tilesSeenCollection(buildUserSeenCollectionPayload(p3, p4))
@@ -43,7 +44,7 @@ return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
 			end, { tilesSeenCollection }) else nil
 		})
 		
-		return reactModule.useMemo(function() --[[ line: 96 ]]
+		return reactModule.useMemo(function() --[[ line: 97 ]]
 			-- upvalues: var7 (ref)
 			return { addTileToCollection = var7.addImpression }
 		end, { var7.addImpression })
@@ -53,8 +54,8 @@ return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
 	local var10 = reactModule.useRef({})
 	local var11 = reactModule.useRef({})
 	local var12 = reactModule.useRef(0)
-	local var13 = reactModule.useCallback(function() --[[ line: 110 ]]
-		-- upvalues: var8 (ref), var10 (ref), var6 (ref), var12 (ref), var11 (ref)
+	local var13 = reactModule.useCallback(function() --[[ line: 111 ]]
+		-- upvalues: var8 (ref), var10 (ref), var6 (ref), var12 (ref), fFlagLuaAppUserSeenCollectionUnifiedFields (copy), buildUserSeenCollectionPayload (copy), var11 (ref)
 		local current = var8.current
 		
 		if #current == 0 then return end
@@ -82,7 +83,7 @@ return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
 		end
 		if var6.tilesSeenCollection then
 			var12.current += 1
-			var6.tilesSeenCollection({
+			var6.tilesSeenCollection(if fFlagLuaAppUserSeenCollectionUnifiedFields then buildUserSeenCollectionPayload(current, var12.current) else {
 				userIds = table.concat(t, ","),
 				absolutePositions = table.concat(t_1, ","),
 				presences = table.concat(t_2, ","),
@@ -98,7 +99,7 @@ return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
 		var8.current = {}
 		var11.current = {}
 	end, { var6 })
-	local var14 = reactModule.useCallback(function(p5, p6, p7) --[[ line: 166 ]]
+	local var14 = reactModule.useCallback(function(p5, p6, p7) --[[ line: 170 ]]
 		-- upvalues: var10 (ref), var11 (ref), var8 (ref), tile (copy), var9 (ref), fIntUserSeenCollectionBatchTimeMs (copy), var13 (ref)
 		if not p5 or not p6 or (var10.current[p5] or var11.current[p5]) then return end
 		var11.current[p5] = true
@@ -118,9 +119,9 @@ return function() --[[ line: 48 | named "useTilesSeenCollection" ]]
 		end
 		var9.current = task.delay(fIntUserSeenCollectionBatchTimeMs * 0.001, var13)
 	end, { var13 })
-	reactModule.useEffect(function() --[[ line: 206 ]]
+	reactModule.useEffect(function() --[[ line: 210 ]]
 		-- upvalues: var9 (ref), var13 (ref)
-		return function() --[[ line: 207 ]]
+		return function() --[[ line: 211 ]]
 			-- upvalues: var9 (copy), var13 (copy)
 			if var9.current then
 				pcall(task.cancel, var9.current)

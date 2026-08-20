@@ -2,17 +2,20 @@
 local parent = sponsoredTiles.Parent
 local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
 local reactModule = require(parent.React)
+local gameTileModule = require(parent.GameTile)
 local twoByOneGameTileModule = require(sponsoredTiles.TwoByOneGameTile)
-local getTileBadgeByPositionConfigFromEntry = require(parent.GameTile).getTileBadgeByPositionConfigFromEntry
+local getTileBadgeByPositionConfigFromEntry = gameTileModule.getTileBadgeByPositionConfigFromEntry
+local resolveWideAssetId = gameTileModule.resolveWideAssetId
 local _ = require(parent.VideoUtils)
-local var3 = reactModule.memo(function(p0) --[[ line: 39 ]]
-	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref)
-	local var4 = -((p0.maxItemIndex or 0) + 1)
+local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
+local var4 = reactModule.memo(function(p0) --[[ line: 41 ]]
+	-- upvalues: reactModule (ref), getTileBadgeByPositionConfigFromEntry (ref), twoByOneGameTileModule (ref), fFlagMigrateGameInfoToStore (ref), resolveWideAssetId (ref)
+	local var5 = -((p0.maxItemIndex or 0) + 1)
 	
 	return reactModule.createElement(twoByOneGameTileModule, {
 		size = p0.item.sizeOverride,
 		layoutOrder = p0.index,
-		zIndex = if p0.zIndex then p0.zIndex + var4 else var4,
+		zIndex = if p0.zIndex then p0.zIndex + var5 else var5,
 		universeId = p0.item.universeId,
 		placeId = p0.item.placeId,
 		topicId = p0.topicId,
@@ -40,20 +43,22 @@ local var3 = reactModule.memo(function(p0) --[[ line: 39 ]]
 		enableExplicitFeedback = p0.enableExplicitFeedback,
 		placeIdOverride = p0.item.placeIdOverride,
 		launchDataOverride = p0.item.launchDataOverride,
-		onSelectionGained = reactModule.useCallback(function() --[[ line: 44 ]]
+		onSelectionGained = reactModule.useCallback(function() --[[ line: 46 ]]
 			-- upvalues: p0 (ref)
 			if p0.onSelectionGained then
 				p0.onSelectionGained(p0.item, p0.index, p0.item.universeId)
 			end
 		end, { p0.onSelectionGained, p0.item, p0.index }),
 		onSelectionLost = p0.onSelectionLost,
-		primaryWideImageAssetId = p0.item.primaryWideImageAssetId,
+		primaryWideImageAssetId = if fFlagMigrateGameInfoToStore then nil else p0.item.primaryWideImageAssetId,
+		wideAssetId = if fFlagMigrateGameInfoToStore then resolveWideAssetId(p0.item.primaryWideImageAssetId, p0.item, p0.topicId) else nil,
+		ageRatingLabel = if fFlagMigrateGameInfoToStore then p0.item.ageRecommendationDisplayName else nil,
 		videoPlaybackContext = p0.videoPlaybackContext,
 		SelectionOrder = p0.SelectionOrder
 	})
 end)
 
-return function(p1) --[[ line: 93 ]]
-	-- upvalues: reactModule (ref), var3 (ref), gameCollectionItemTypes (ref)
-	return reactModule.createElement(var3, p1), gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
+return function(p1) --[[ line: 102 ]]
+	-- upvalues: reactModule (ref), var4 (ref), gameCollectionItemTypes (ref)
+	return reactModule.createElement(var4, p1), gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile
 end

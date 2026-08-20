@@ -1277,12 +1277,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Aggiorna un look esistente
 Feature.Avatar.Action.UpdateMakeupLook,Aggiorna look
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Esplora gli stili
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,Visualizza
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,La tua creazione è pronta per l'uso.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Questo sfondo è stato generato con l'intelligenza artificiale. Pubblicandolo, confermi che rispetta le Norme della community di Roblox e che non impiega contenuti per i quali non disponi dei diritti. Sarà sottoposto a verifica prima di apparire nel tuo inventario e gli articoli pubblicati non possono essere modificati."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,L'articolo non rispettava le norme della community
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Questo prompt non rispetta le nostre linee guida. Prova a descrivere qualcos'altro.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Questo sfondo non rispetta le norme comunitarie Roblox, quindi non è stato aggiunto al tuo inventario. Prova a generarne uno nuovo."
 Feature.Avatar.BackgroundGeneration.Error.System,Si è verificato un errore durante la generazione del tuo sfondo. Riprova.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Descrivi il tuo sfondo...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generazione dello sfondo in corso...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparazione dello sfondo in corso...
 Feature.Avatar.BackgroundGeneration.Title,Crea sfondo
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Pubblica nell'inventario
 Feature.Avatar.Backgrounds.Title,Sfondi
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Non è possibile apportare modifiche a questo stile del corpo.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Ripristina i colori originali del corpo
@@ -1800,16 +1814,18 @@ Feature.Build.Action.ShareLink,Condividi link
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Aggiorna classificazione
 Feature.Build.Action.UpdateWithChanges,Aggiorna con modifiche
-Feature.Build.Action.View,Visualizza
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Visualizza utilizzo
 Feature.Build.Content.NewGame,Nuovo gioco
 Feature.Build.Description.ArchiveRemoval,"Se archivi questo gioco, verrà rimosso da Costruisci. Puoi ancora accedervi e ripristinarlo dall'Hub Creatore o da Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Usa i tuoi Robux per acquistare automaticamente un utilizzo aggiuntivo di Build mentre crei. Puoi impostare un limite di spesa giornaliero in qualsiasi momento.
+Feature.Build.Description.BoostAudienceForPlays,Aumenta il tuo pubblico per ottenere più riproduzioni.
 Feature.Build.Description.BoostGameAudience,Aumenta il pubblico del tuo gioco
 Feature.Build.Description.BuildIdeaGame,Trasforma le tue idee in un gioco
 Feature.Build.Description.BuildReplyNotif,Ricevi una notifica quando Build ha una risposta per te.
 Feature.Build.Description.BuyRobuxToCreate,Acquista più Robux per continuare a creare o attendi che il tuo utilizzo gratuito di Costruisci venga ripristinato domani.
 Feature.Build.Description.BuyUsageOrWait,Acquista più utilizzo di Build con Robux o attendi il ripristino del limite giornaliero.
+Feature.Build.Description.CampaignRunDates,La tua campagna sarà attiva dal giorno {startDate} al giorno {endDate}
 Feature.Build.Description.ChoosePlaytesters,Scegli gli amici che ti aiuteranno nel test di giocabilità.
 Feature.Build.Description.EnableBuildNotifs,Attiva le notifiche dalle impostazioni del tuo dispositivo per ricevere aggiornamenti da Build.
 Feature.Build.Description.FriendsLinkOnly,Solo i tuoi amici possono accedere a questo link. Modifica l'impostazione Pubblico del tuo gioco se vuoi che più persone possano giocare.
@@ -1838,6 +1854,7 @@ Feature.Build.Label.Access,Accesso
 Feature.Build.Label.AdditionalUsage,Utilizzo aggiuntivo di Costruisci
 Feature.Build.Label.AdditionalUsed,{USED} di {LIMIT} utilizzato
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} a disposizione
 Feature.Build.Label.Autosaved,Salvato automaticamente
 Feature.Build.Label.Available,disponibile
 Feature.Build.Label.BackToBuild,Torna a Costruisci
@@ -2022,6 +2039,7 @@ Feature.Build.Message.WhatToCreate,Cosa vuoi creare oggi?
 Feature.Build.Message.WorkedMinutesSeconds,Ha lavorato per {MINUTES} m {REM_SECONDS} s
 Feature.Build.Message.WorkedSeconds,Ha lavorato per {SECONDS} sec
 Feature.Build.Message.WorkingOnTasks,Lavori in corso sulle tue attività
+Feature.Build.Title.AdCampaignActive,La campagna pubblicitaria è attiva
 Feature.Build.Title.AddFriendsToPlaytest,Aggiungi gli amici che ti aiuteranno nel test di giocabilità
 Feature.Build.Title.ArchiveThisGame,Archiviare questo gioco?
 Feature.Build.Title.Audience,Pubblico
@@ -2149,6 +2167,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Vendi
 Feature.Catalog.Action.ShareVia,Condividi tramite...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,
 Feature.Catalog.Action.ViewDetailsPage,Visualizza la pagina dei dettagli
 Feature.Catalog.Action.ViewExperienceDetails,Vedi dettagli esperienza

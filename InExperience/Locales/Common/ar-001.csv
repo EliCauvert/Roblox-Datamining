@@ -1276,12 +1276,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,تحديث الإطلالة ال�
 Feature.Avatar.Action.UpdateMakeupLook,تحديث الإطلالة
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,استكشاف الأنماط
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,عرض
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,منتجك جاهز للاستخدام.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال النشر، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المنشورة.
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,لم يستوفِ العنصر معايير المجتمع
 Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,هذه الخلفية لا تتوافق مع معايير مجتمع Roblox، لذا لم تتم إضافتها إلى مقتنياتك. حاول إنشاء خلفية جديدة.
 Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخلفية...
 Feature.Avatar.BackgroundGeneration.Title,إنشاء خلفية
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,النشر في المقتنيات
 Feature.Avatar.Backgrounds.Title,الخلفيات
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,التعديل غير متاح لنمط الجسد هذا.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,الرجوع إلى ألوان الجسد الأصلية
@@ -1799,16 +1813,18 @@ Feature.Build.Action.ShareLink,مشاركة الرابط
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,تحديث التصنيف
 Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
-Feature.Build.Action.View,عرض
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,عرض الاستخدام
 Feature.Build.Content.NewGame,لعبة جديدة
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
 Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
+Feature.Build.Description.BoostAudienceForPlays,زوِّد أعداد جمهورك لتحقيق المزيد من عمليات التشغيل.
 Feature.Build.Description.BoostGameAudience,عزّز جمهور لعبتك
 Feature.Build.Description.BuildIdeaGame,حوّل أفكارك إلى لعبة
 Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما يكون لدى ميزة Build رد لك.
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
+Feature.Build.Description.CampaignRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.ChoosePlaytesters,اختر الأصدقاء لمساعدتك في اختبار اللعب.
 Feature.Build.Description.EnableBuildNotifs,يمكنك تشغيل الإشعارات من إعدادات جهازك للحصول على التحديثات من ميزة Build.
 Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك الوصول إلى هذا الرابط. غيّر إعدادات الجمهور للعبتك إذا كنت تريد أن يلعبها المزيد من الأشخاص.
@@ -1837,6 +1853,7 @@ Feature.Build.Label.Access,الوصول
 Feature.Build.Label.AdditionalUsage,استخدام إضافي لميزة Build
 Feature.Build.Label.AdditionalUsed,تم استخدام {USED} من {LIMIT}
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
 Feature.Build.Label.BackToBuild,الرجوع إلى البناء
@@ -2021,6 +2038,7 @@ Feature.Build.Message.WhatToCreate,ما الذي تريد إنشاؤه اليو�
 Feature.Build.Message.WorkedMinutesSeconds,استغرق العمل {MINUTES} من الدقائق و{REM_SECONDS} من الثواني
 Feature.Build.Message.WorkedSeconds,استغرق العمل {SECONDS} من الثواني
 Feature.Build.Message.WorkingOnTasks,جارٍ العمل على مهامك
+Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
 Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
 Feature.Build.Title.Audience,الجمهور
@@ -2148,6 +2166,7 @@ Feature.Catalog.Action.Report,تبليغ
 Feature.Catalog.Action.Sell,بيع
 Feature.Catalog.Action.ShareVia,شارك عبر...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,جرِّب الآن
 Feature.Catalog.Action.Upgrade,ترقية
 Feature.Catalog.Action.ViewDetailsPage,عرض صفحة التفاصيل
 Feature.Catalog.Action.ViewExperienceDetails,عرض تفاصيل التجربة

@@ -2,6 +2,8 @@
 local socialCarousel = script:FindFirstAncestor("SocialCarousel")
 local parent = socialCarousel.Parent
 local reactModule = require(parent.React)
+local sharedFlagsModule = require(parent.SharedFlags)
+local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
 local UIBloxModule = require(parent.UIBlox)
 local useSocialCarouselContextModule = require(socialCarousel.Contexts.useSocialCarouselContext)
 local initializeSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.initializeSocialCarouselAnalytics)
@@ -10,20 +12,22 @@ local tile = require(socialCarousel.Common.Enums).Tile
 local _ = require(socialCarousel.Common.Types)
 local retrievalStatus = UIBloxModule.App.Loading.Enum.RetrievalStatus
 local fFlagSocialCarouselEnableUserSeenEvents = require(socialCarousel.Flags).FFlagSocialCarouselEnableUserSeenEvents
-local fFlagLuaAppAddSortDataToSocialCarouselClicks = require(parent.SharedFlags).FFlagLuaAppAddSortDataToSocialCarouselClicks
-local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+local fFlagLuaAppAddSortDataToSocialCarouselClicks = sharedFlagsModule.FFlagLuaAppAddSortDataToSocialCarouselClicks
+local fFlagSocialCarouselShareQREnabled = sharedFlagsModule.FFlagSocialCarouselShareQREnabled
+local fFlagLuaAppUserSeenCollectionUnifiedFields = sharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
+local repeatValue = socialLuaAnalyticsModule.Analytics.Formatters.repeatValue
 
-return function() --[[ line: 22 ]]
-	-- upvalues: fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), useSocialCarouselContextModule (ref), reactModule (ref), initializeSocialCarouselAnalyticsModule (ref), eventNamesModule (ref), tile (ref), httpService (ref), fFlagSocialCarouselEnableUserSeenEvents (ref), fFlagSocialCarouselShareQREnabled (ref), retrievalStatus (ref)
-	local var7, var8
+return function() --[[ line: 26 ]]
+	-- upvalues: fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), useSocialCarouselContextModule (ref), reactModule (ref), initializeSocialCarouselAnalyticsModule (ref), eventNamesModule (ref), tile (ref), httpService (ref), fFlagSocialCarouselEnableUserSeenEvents (ref), fFlagLuaAppUserSeenCollectionUnifiedFields (ref), repeatValue (ref), fFlagSocialCarouselShareQREnabled (ref), retrievalStatus (ref)
+	local var9, var10
 	local _ = nil
 	local _ = nil
 	
 	if fFlagLuaAppAddSortDataToSocialCarouselClicks then
-		var7 = useSocialCarouselContextModule()
-		var8 = reactModule.useMemo(function() --[[ line: 28 ]]
-			-- upvalues: var7 (write), initializeSocialCarouselAnalyticsModule (copy)
-			local sortAnalyticsData = var7.sortAnalyticsData
+		var9 = useSocialCarouselContextModule()
+		var10 = reactModule.useMemo(function() --[[ line: 32 ]]
+			-- upvalues: var9 (write), initializeSocialCarouselAnalyticsModule (copy)
+			local sortAnalyticsData = var9.sortAnalyticsData
 			
 			return initializeSocialCarouselAnalyticsModule({
 				infoForAllEvents = {
@@ -34,17 +38,17 @@ return function() --[[ line: 22 ]]
 					feedRowNumber = if sortAnalyticsData then sortAnalyticsData.startRow else nil
 				}
 			})
-		end, { var7.sortAnalyticsData })
+		end, { var9.sortAnalyticsData })
 	else
-		var8 = initializeSocialCarouselAnalyticsModule()
-		var7 = useSocialCarouselContextModule()
+		var10 = initializeSocialCarouselAnalyticsModule()
+		var9 = useSocialCarouselContextModule()
 	end
-	local source = var7.source or ""
+	local source = var9.source or ""
 	
 	return {
-		userPressed = reactModule.useCallback(function(p0, p1) --[[ line: 53 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), fFlagLuaAppAddSortDataToSocialCarouselClicks (copy), tile (copy), source (ref), httpService (copy)
-			var8.fireAnalyticsEvent(eventNamesModule.UserPressed, {
+		userPressed = reactModule.useCallback(function(p0, p1) --[[ line: 57 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), fFlagLuaAppAddSortDataToSocialCarouselClicks (copy), tile (copy), source (ref), httpService (copy)
+			var10.fireAnalyticsEvent(eventNamesModule.UserPressed, {
 				presence = if p0.presence then p0.presence.userPresenceType else "Offline",
 				absolutePosition = p1.absolutePosition,
 				positionInRow = if fFlagLuaAppAddSortDataToSocialCarouselClicks then p1.absolutePosition else nil,
@@ -59,11 +63,11 @@ return function() --[[ line: 22 ]]
 			})
 		end, {
 			source,
-			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var8 else nil
+			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var10 else nil
 		}),
-		userSeen = if fFlagSocialCarouselEnableUserSeenEvents then if fFlagSocialCarouselEnableUserSeenEvents then reactModule.useCallback(function(p2, p3) --[[ line: 79 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), tile (copy), source (ref)
-			var8.fireAnalyticsEvent(eventNamesModule.UserSeen, {
+		userSeen = if fFlagSocialCarouselEnableUserSeenEvents then if fFlagSocialCarouselEnableUserSeenEvents then reactModule.useCallback(function(p2, p3) --[[ line: 83 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), tile (copy), source (ref)
+			var10.fireAnalyticsEvent(eventNamesModule.UserSeen, {
 				userId = p2.id,
 				presence = if p2.presence then p2.presence.userPresenceType else "Offline",
 				absolutePosition = p3.absolutePosition,
@@ -75,9 +79,11 @@ return function() --[[ line: 22 ]]
 				universeId = if p2.presence then p2.presence.universeId else nil
 			})
 		end, { source }) else nil else nil,
-		tilesSeenCollection = reactModule.useCallback(function(p4) --[[ line: 97 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), source (ref)
-			var8.fireAnalyticsEvent(eventNamesModule.TilesSeenCollection, {
+		tilesSeenCollection = reactModule.useCallback(function(p4) --[[ line: 101 ]]
+			-- upvalues: fFlagLuaAppUserSeenCollectionUnifiedFields (copy), var9 (write), var10 (write), eventNamesModule (copy), source (ref), httpService (copy), repeatValue (copy)
+			local var12 = if fFlagLuaAppUserSeenCollectionUnifiedFields then var9.sortAnalyticsData else nil
+			local var13 = if fFlagLuaAppUserSeenCollectionUnifiedFields and var12 then var12.startRow else nil
+			var10.fireAnalyticsEvent(eventNamesModule.TilesSeenCollection, {
 				userId = p4.userIds,
 				absolutePosition = p4.absolutePositions,
 				presence = p4.presences,
@@ -88,46 +94,56 @@ return function() --[[ line: 22 ]]
 				universeId = p4.universeIds,
 				tileCount = p4.tileCount,
 				source = source,
-				sessionEventCount = p4.sessionEventCount
+				sessionEventCount = p4.sessionEventCount,
+				contentType = if fFlagLuaAppUserSeenCollectionUnifiedFields then p4.contentType else nil,
+				interactionUuid = if fFlagLuaAppUserSeenCollectionUnifiedFields then httpService:GenerateGUID(false) else nil,
+				collectionId = if fFlagLuaAppUserSeenCollectionUnifiedFields and var12 then var12.sortId else nil,
+				collectionPosition = if fFlagLuaAppUserSeenCollectionUnifiedFields and var12 then var12.sortIndex else nil,
+				positionsInRow = if fFlagLuaAppUserSeenCollectionUnifiedFields then p4.absolutePositions else nil,
+				rowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields then repeatValue(1, p4.tileCount) else nil,
+				feedRowNumbers = if fFlagLuaAppUserSeenCollectionUnifiedFields and var13 then repeatValue(var13, p4.tileCount) else nil,
+				totalNumberOfItems = if fFlagLuaAppUserSeenCollectionUnifiedFields then #var9.tiles else nil
 			})
 		end, {
 			source,
-			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var8 else nil
+			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var10 else nil,
+			if fFlagLuaAppUserSeenCollectionUnifiedFields then var9.sortAnalyticsData else nil,
+			if fFlagLuaAppUserSeenCollectionUnifiedFields then var9.tiles else nil
 		}),
-		addFriendsPressed = reactModule.useCallback(function(p5) --[[ line: 158 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), var7 (write), source (ref), httpService (copy)
-			var8.fireAnalyticsEvent(eventNamesModule.ViewAddFriends, {
-				friendCount = var7.friendCount,
+		addFriendsPressed = reactModule.useCallback(function(p5) --[[ line: 193 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), var9 (write), source (ref), httpService (copy)
+			var10.fireAnalyticsEvent(eventNamesModule.ViewAddFriends, {
+				friendCount = var9.friendCount,
 				absolutePosition = p5,
 				positionInRow = p5,
-				recommendationCount = var7.recommendationCount,
-				requestCount = var7.friendRequestCount,
+				recommendationCount = var9.recommendationCount,
+				requestCount = var9.friendRequestCount,
 				source = source,
 				interactionUuid = httpService:GenerateGUID(false)
 			})
 		end, {
-			var7.friendCount,
-			var7.recommendationCount,
-			var7.friendRequestCount,
+			var9.friendCount,
+			var9.recommendationCount,
+			var9.friendRequestCount,
 			source,
-			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var8 else nil
+			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var10 else nil
 		}),
-		friendsHeaderPressed = reactModule.useCallback(function() --[[ line: 179 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), var7 (write), source (ref)
-			var8.fireAnalyticsEvent(eventNamesModule.ViewAllFriends, {
-				friendCount = var7.friendCount,
-				recommendationCount = var7.recommendationCount,
+		friendsHeaderPressed = reactModule.useCallback(function() --[[ line: 214 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), var9 (write), source (ref)
+			var10.fireAnalyticsEvent(eventNamesModule.ViewAllFriends, {
+				friendCount = var9.friendCount,
+				recommendationCount = var9.recommendationCount,
 				source = source
 			})
 		end, {
-			var7.friendCount,
-			var7.recommendationCount,
+			var9.friendCount,
+			var9.recommendationCount,
 			source,
-			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var8 else nil
+			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var10 else nil
 		}),
-		reportLoadingEvent = reactModule.useCallback(function(p6, p7) --[[ line: 195 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), retrievalStatus (copy), source (ref)
-			var8.fireAnalyticsEvent(eventNamesModule.FriendsCarouselUILoadingTime, {
+		reportLoadingEvent = reactModule.useCallback(function(p6, p7) --[[ line: 230 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), retrievalStatus (copy), source (ref)
+			var10.fireAnalyticsEvent(eventNamesModule.FriendsCarouselUILoadingTime, {
 				loadingTime = if p7 and typeof(p7) == "number" and p7 >= 0 then p7 else 0,
 				fetch = p6,
 				status = retrievalStatus.Done.rawValue(),
@@ -135,18 +151,18 @@ return function() --[[ line: 22 ]]
 			})
 		end, {
 			source,
-			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var8 else nil
+			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var10 else nil
 		}),
-		startSquadPressed = reactModule.useCallback(function(p8) --[[ line: 130 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), source (ref)
-			var8.fireAnalyticsEvent(eventNamesModule.StartSquadPressed, { absolutePosition = p8, source = source })
+		startSquadPressed = reactModule.useCallback(function(p8) --[[ line: 165 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), source (ref)
+			var10.fireAnalyticsEvent(eventNamesModule.StartSquadPressed, { absolutePosition = p8, source = source })
 		end, {
 			source,
-			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var8 else nil
+			if fFlagLuaAppAddSortDataToSocialCarouselClicks then var10 else nil
 		}),
-		shareQRPressed = if fFlagSocialCarouselShareQREnabled then if fFlagSocialCarouselShareQREnabled then reactModule.useCallback(function(p9) --[[ line: 144 ]]
-			-- upvalues: var8 (write), eventNamesModule (copy), source (ref)
-			var8.fireAnalyticsEvent(eventNamesModule.ShareQRPressed, { absolutePosition = p9, source = source })
-		end, { source, var8 }) else nil else nil
+		shareQRPressed = if fFlagSocialCarouselShareQREnabled then if fFlagSocialCarouselShareQREnabled then reactModule.useCallback(function(p9) --[[ line: 179 ]]
+			-- upvalues: var10 (write), eventNamesModule (copy), source (ref)
+			var10.fireAnalyticsEvent(eventNamesModule.ShareQRPressed, { absolutePosition = p9, source = source })
+		end, { source, var10 }) else nil else nil
 	}
 end

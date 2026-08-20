@@ -1277,12 +1277,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,更新现有造型
 Feature.Avatar.Action.UpdateMakeupLook,更新造型
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,探索风格
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,查看
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -1800,16 +1814,18 @@ Feature.Build.Action.ShareLink,分享链接
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,更新评级
 Feature.Build.Action.UpdateWithChanges,应用更改
-Feature.Build.Action.View,查看
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用额度
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
 Feature.Build.Description.AutoBuyUsage,在创建过程中使用你的 Robux 自动购买额外的 Build 使用额度。你可以随时设置每日消费限额。
+Feature.Build.Description.BoostAudienceForPlays,扩大受众群体，吸引更多玩家。
 Feature.Build.Description.BoostGameAudience,增加游戏的受众
 Feature.Build.Description.BuildIdeaGame,将你的创意转化为游戏
 Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
+Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
 Feature.Build.Description.ChoosePlaytesters,选择好友来帮助你进行游戏测试。
 Feature.Build.Description.EnableBuildNotifs,在设备设置中启用通知，获取来自 Build 的最新动态。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友才能访问此链接。如果你希望更多人游玩，请更改游戏的受众设置。
@@ -1838,6 +1854,7 @@ Feature.Build.Label.Access,访问权限
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
 Feature.Build.Label.Autosaved,自动保存版本
 Feature.Build.Label.Available,可用
 Feature.Build.Label.BackToBuild,返回构建
@@ -2022,6 +2039,7 @@ Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
 Feature.Build.Message.WorkedSeconds,已完成（{SECONDS} 秒）
 Feature.Build.Message.WorkingOnTasks,正在处理你的任务
+Feature.Build.Title.AdCampaignActive,广告活动已启动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
 Feature.Build.Title.Audience,受众
@@ -2149,6 +2167,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,出售
 Feature.Catalog.Action.ShareVia,分享方式：
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,试一试
 Feature.Catalog.Action.Upgrade,升级
 Feature.Catalog.Action.ViewDetailsPage,查看详情页面
 Feature.Catalog.Action.ViewExperienceDetails,查看体验详情

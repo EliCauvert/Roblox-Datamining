@@ -1794,7 +1794,9 @@ Feature.Build.Action.Buy,買う
 Feature.Build.Action.BuyRobux,Robuxを買う
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,テキストをコピー
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,今後表示しない
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
 Feature.Build.Action.ManageLimit,限度額を管理
 Feature.Build.Action.Next,
@@ -1821,6 +1823,7 @@ Feature.Build.Action.ViewUsage,使用量を表示
 Feature.Build.Content.NewGame,新規のゲーム
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
 Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
+Feature.Build.Description.BoostGameAudience,ゲームのオーディエンスを増やしましょう
 Feature.Build.Description.BuildIdeaGame,アイデアをゲームに変えよう
 Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたときに通知を受け取りましょう。
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
@@ -2057,6 +2060,7 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.Playtesters,プレイテスター
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
+Feature.Build.Title.PromoteGameFree,ゲームを無料で宣伝する
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.Tasks,タスク
@@ -3220,6 +3224,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
@@ -4581,6 +4586,8 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
+InGame.PlayerDropDown.ConfirmUnfriend,タップして友達解除を確定
+InGame.PlayerDropDown.Decline,拒否
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} さんで友達の数が上限に達しました。
 InGame.PlayerDropDown.Report,

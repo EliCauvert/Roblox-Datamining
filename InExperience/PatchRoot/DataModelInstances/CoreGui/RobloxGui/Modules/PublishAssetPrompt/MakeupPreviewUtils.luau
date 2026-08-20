@@ -77,80 +77,96 @@ function t.stripToHead(p6) --[[ line: 80 ]]
 	end
 end
 
-function t.getFolderAccessories(p7, p8) --[[ line: 106 ]]
+function t.anchorRigidPreviewParts(p7) --[[ line: 101 ]]
+	for i, v in ipairs(p7:GetDescendants()) do
+		if v:IsA("BasePart") then
+			local accessory = v:FindFirstAncestorWhichIsA("Accessory")
+			
+			if not accessory or accessory:FindFirstChildWhichIsA("WrapLayer", true) == nil then
+				v.Anchored = true
+			end
+		end
+	end
+end
+
+function t.getFolderAccessories(p8, p9) --[[ line: 119 ]]
 	local t = {}
 	
-	for i, v in ipairs(p7:GetChildren()) do
+	for i, v in ipairs(p8:GetChildren()) do
 		if v:IsA("Accessory") then
 			table.insert(t, {
 				asset = v,
-				assetType = if p8 and p8[i] then p8[i].assetType else nil
+				assetType = if p9 and p9[i] then p9[i].assetType else nil
 			})
 		end
 	end
 	return t
 end
 
-local function createHeadWithAsset(value, p9, p10, p11) --[[ line: 120 ]]
+local function createHeadWithAsset(value, p10, p11, p12) --[[ line: 133 ]]
 	-- upvalues: addAssetToDescription (ref), playersService (ref), t (ref)
-	if p9 then
-		addAssetToDescription(value, p9, p10)
+	if p10 then
+		addAssetToDescription(value, p10, p11)
 	end
-	if p11 then
-		for i, v in ipairs(p11) do
+	if p12 then
+		for i, v in ipairs(p12) do
 			addAssetToDescription(value, v.asset, v.assetType)
 		end
 	end
-	local var17 = nil
+	local var18 = nil
 	
 	return nil
 end
 
-function t.createMakeupHeadPreview(p12, p13, p14) --[[ line: 165 ]]
+function t.createMakeupHeadPreview(p13, p14, p15) --[[ line: 175 ]]
 	-- upvalues: playersService (ref), createHeadWithAsset (ref)
-	local var18 = nil
+	local var19 = nil
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
-		local ok, status = pcall(function() --[[ line: 173 ]]
+		local ok, status = pcall(function() --[[ line: 183 ]]
 			-- upvalues: playersService (copy), localPlayer (ref)
 			return playersService:GetHumanoidDescriptionFromUserIdAsync(localPlayer.UserId)
 		end)
 		
 		if ok and status then
-			var18 = status
+			var19 = status
 		end
 	end
-	return createHeadWithAsset(var18 or Instance.new("HumanoidDescription"), p12, p13, p14)
+	return createHeadWithAsset(var19 or Instance.new("HumanoidDescription"), p13, p14, p15)
 end
 
-function t.createMakeupThumbnailPreview(p15, p16) --[[ line: 191 ]]
-	-- upvalues: createHeadWithAsset (ref), brickColor (ref)
+function t.createMakeupThumbnailPreview(p16, p17) --[[ line: 201 ]]
+	-- upvalues: addAssetToDescription (ref), playersService (ref), t (ref), brickColor (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
 	humanoidDescription.Head = 103273511207307
-	local var20 = createHeadWithAsset(humanoidDescription, p15, p16)
 	
-	if not var20 then
+	if p16 then
+		addAssetToDescription(humanoidDescription, p16, p17)
+	end
+	local bodyColors = nil
+	local var22 = nil
+	if not var22 then
 		return nil
 	end
-	local bodyColors = var20:FindFirstChildOfClass("BodyColors")
+	bodyColors = var22:FindFirstChildOfClass("BodyColors")
 	
 	if bodyColors then
 		bodyColors.HeadColor = brickColor
 	end
-	local head = var20:FindFirstChild("Head")
+	local head = var22:FindFirstChild("Head")
 	
 	if head then
 		head.Color = brickColor.Color
 	end
-	return var20
+	return var22
 end
 
-function t.compositeMakeupFolder(p17, p18) --[[ line: 219 ]]
+function t.compositeMakeupFolder(p18, p19) --[[ line: 229 ]]
 	-- upvalues: assetService (ref)
 	local t = {}
 	
-	for i, v in ipairs(p17:GetChildren()) do
+	for i, v in ipairs(p18:GetChildren()) do
 		if v:IsA("Decal") then
 			table.insert(t, v)
 		end
@@ -162,13 +178,13 @@ function t.compositeMakeupFolder(p17, p18) --[[ line: 219 ]]
 	
 	if not object then
 		return nil
-	elseif p18 then
-		table.sort(t, function(p19, p20) --[[ line: 237 ]]
-			-- upvalues: p18 (ref)
-			return (p18[p19.Name] or 0) < (p18[p20.Name] or 0)
+	elseif p19 then
+		table.sort(t, function(p20, p21) --[[ line: 247 ]]
+			-- upvalues: p19 (ref)
+			return (p19[p20.Name] or 0) < (p19[p21.Name] or 0)
 		end)
 	end
-	local var28
+	local var29
 	local size = object.Size
 	local vector2 = Vector2.new(size.X, size.Y)
 	local decal = Instance.new("Decal")
@@ -179,30 +195,30 @@ function t.compositeMakeupFolder(p17, p18) --[[ line: 219 ]]
 		"MetalnessMapContent",
 		"NormalMapContent"
 	}) do
-		var28 = false
+		var29 = false
 		
 		for i_2, v_2 in ipairs(t) do
 			local i_3 = v_2[v_1]
 			
 			if i_3 and (i_3.Object or i_3.Uri) then
-				var28 = true
+				var29 = true
 				break
 			end
 		end
-		if var28 then
-			local var29 = assetService:CreateEditableImage({ Size = vector2 })
-			local var30 = false
+		if var29 then
+			local var30 = assetService:CreateEditableImage({ Size = vector2 })
+			local var31 = false
 			
 			for i_3, v_3 in ipairs(t) do
-				local var31 = v_3[v_1]
+				local var32 = v_3[v_1]
 				
-				if var31 then
-					local object_1 = var31.Object
+				if var32 then
+					local object_1 = var32.Object
 					
-					if not object_1 and var31.Uri and var31.Uri ~= "" then
-						local ok, status = pcall(function() --[[ line: 276 ]]
-							-- upvalues: assetService (copy), var31 (ref)
-							return assetService:CreateEditableImageAsync(var31)
+					if not object_1 and var32.Uri and var32.Uri ~= "" then
+						local ok, status = pcall(function() --[[ line: 286 ]]
+							-- upvalues: assetService (copy), var32 (ref)
+							return assetService:CreateEditableImageAsync(var32)
 						end)
 						
 						if ok then
@@ -210,12 +226,12 @@ function t.compositeMakeupFolder(p17, p18) --[[ line: 219 ]]
 						end
 					end
 					if object_1 then
-						var29:DrawImage(Vector2.new(0, 0), object_1, if not var30 then Enum.ImageCombineType.Overwrite else Enum.ImageCombineType.AlphaBlend)
-						var30 = true
+						var30:DrawImage(Vector2.new(0, 0), object_1, if not var31 then Enum.ImageCombineType.Overwrite else Enum.ImageCombineType.AlphaBlend)
+						var31 = true
 					end
 				end
 			end
-			decal[v_1] = Content.fromObject(var29)
+			decal[v_1] = Content.fromObject(var30)
 		end
 	end
 	local wrapTextureTransfer = t[1]:FindFirstChildWhichIsA("WrapTextureTransfer")

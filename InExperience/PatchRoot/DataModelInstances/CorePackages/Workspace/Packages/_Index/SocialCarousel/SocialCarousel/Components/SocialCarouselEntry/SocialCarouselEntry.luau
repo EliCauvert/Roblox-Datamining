@@ -15,12 +15,13 @@ local useSocialCarouselLoadTimerModule = require(socialCarousel.Analytics.useSoc
 local _ = require(socialCarousel.Analytics.AnalyticsTypes)
 local friendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarouselRefreshThrottleInterval", 3)
 local fFlagLuaAppAddSortDataToSocialCarouselClicks = require(parent.SharedFlags).FFlagLuaAppAddSortDataToSocialCarouselClicks
+local fFlagLuaAppUserSeenCollectionUnifiedFields = require(parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
 local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 local fFlagEnableDesktopGameJoinCard = require(parent.SharedFlags).FFlagEnableDesktopGameJoinCard
 local carouselModule = require(socialCarousel.Components.Carousel)
 
-return function(p0) --[[ line: 54 ]]
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
+return function(p0) --[[ line: 56 ]]
+	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), fFlagEnableDesktopGameJoinCard (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagLuaAppAddSortDataToSocialCarouselClicks (ref), fFlagLuaAppUserSeenCollectionUnifiedFields (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
 	local var10 = useRoactService(roactAnalytics)
 	local var11 = useRoactService(appEventIngestService)
 	local var12 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
@@ -35,11 +36,11 @@ return function(p0) --[[ line: 54 ]]
 		var16 = var18
 	end
 	local var19 = useSocialCarouselUnifiedLoggingModule(var10, var11, p0.unifiedLogging, var14, var13)
-	local var20 = useThrottledCallback(function() --[[ line: 73 ]]
+	local var20 = useThrottledCallback(function() --[[ line: 75 ]]
 		-- upvalues: var14 (ref)
 		var14.refreshFriendsList()
 	end, friendCarouselRefreshThrottleInterval)
-	reactModule.useEffect(function() --[[ line: 77 ]]
+	reactModule.useEffect(function() --[[ line: 79 ]]
 		-- upvalues: p0 (ref), var20 (ref)
 		if p0.refreshSignal then
 			p0.refreshSignal:connect(var20)
@@ -56,7 +57,7 @@ return function(p0) --[[ line: 54 ]]
 			openGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var15 else nil,
 			setOpenGameJoinCardUserId = if fFlagEnableDesktopGameJoinCard then var16 else nil,
 			unifiedLogging = var19,
-			sortAnalyticsData = if fFlagLuaAppAddSortDataToSocialCarouselClicks then p0.sortAnalyticsData else nil,
+			sortAnalyticsData = if fFlagLuaAppAddSortDataToSocialCarouselClicks or fFlagLuaAppUserSeenCollectionUnifiedFields then p0.sortAnalyticsData else nil,
 			friendRequestCount = var14.friendRequestCount,
 			recommendationCount = var14.recommendationCount,
 			friendCount = var14.friendCount,

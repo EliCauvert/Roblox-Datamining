@@ -1296,12 +1296,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.UpdateMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.Zoom,Thu Phóng
 Feature.Avatar.AvatarWidgetTitle,Khám phá phong cách
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,Xem
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Sản phẩm sáng tạo của bạn đã sẵn sàng để sử dụng.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Hình nền này được tạo bằng AI. Khi đăng tải, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn và các vật phẩm đã đăng sẽ không thể chỉnh sửa."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Vật phẩm không đáp ứng Tiêu chuẩn cộng đồng
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Hình nền này không tuân thủ Tiêu chuẩn cộng đồng Roblox nên đã không được thêm vào kho của bạn. Hãy thử tạo hình nền mới.
 Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Mô tả
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Title,Tạo hình nền
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Đăng vào kho
 Feature.Avatar.Backgrounds.Title,Hình nền
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Không thể điều chỉnh kiểu thân này.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Chuyển về màu thân mặc định ban đầu
@@ -1819,16 +1833,18 @@ Feature.Build.Action.ShareLink,Chia sẻ đường liên kết
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Cập nhật mức phân loại
 Feature.Build.Action.UpdateWithChanges,Cập nhật các thay đổi
-Feature.Build.Action.View,Xem
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Xem mức sử dụng
 Feature.Build.Content.NewGame,Trò chơi mới
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
+Feature.Build.Description.BoostAudienceForPlays,Thu hút thêm đối tượng để tăng số lượt chơi.
 Feature.Build.Description.BoostGameAudience,Giúp trò chơi tiếp cận được nhiều đối tượng hơn
 Feature.Build.Description.BuildIdeaGame,Biến ý tưởng thành trò chơi
 Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi phản hồi cho bạn.
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
+Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để giúp bạn chơi thử.
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
@@ -1857,6 +1873,7 @@ Feature.Build.Label.Access,Quyền truy cập
 Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
 Feature.Build.Label.AdditionalUsed,Đã dùng {USED}/{LIMIT}
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
 Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
@@ -1867,7 +1884,7 @@ Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
-Feature.Build.Label.Description,Mô tả
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,Hoàn tất
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
@@ -2041,6 +2058,7 @@ Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
 Feature.Build.Message.WorkedMinutesSeconds,Đã xử lý trong {MINUTES} phút {REM_SECONDS} giây
 Feature.Build.Message.WorkedSeconds,Đã xử lý trong {SECONDS} giây
 Feature.Build.Message.WorkingOnTasks,Đang thực hiện nhiệm vụ bạn giao
+Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
 Feature.Build.Title.Audience,Đối tượng
@@ -2168,6 +2186,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Bán
 Feature.Catalog.Action.ShareVia,Chia sẻ qua...
 Feature.Catalog.Action.Submit,Nộp
+Feature.Catalog.Action.Try,Dùng thử
 Feature.Catalog.Action.Upgrade,Nâng Cấp
 Feature.Catalog.Action.ViewDetailsPage,Xem Trang Chi Tiết
 Feature.Catalog.Action.ViewExperienceDetails,Xem Chi Tiết Trải Nghiệm
