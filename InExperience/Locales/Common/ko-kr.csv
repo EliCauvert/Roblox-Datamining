@@ -2719,7 +2719,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,표시 이름을 사용할 수
 Feature.DisplayName.ErrorMessage.NameTooLong,표시 이름의 최대 길이는 20자입니다
 Feature.DisplayName.ErrorMessage.NameTooShort,표시 이름의 길이는 최소 3자 이상이어야 합니다
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,표시 이름에 지원되지 않는 문자가 있습니다
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,{num}일 동안
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,아이템을 보유할 기간을 선택하세요. 구매 후 타이머가 시작됩니다.
@@ -2730,8 +2729,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num}일
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,옵션
 Feature.Durables.Label.ItemExpires,아이템 만료 일자
-Feature.Durables.PartiallyExpiredItems.BodyText,저장된 아바타의 일부 아이템이 만료되어 삭제되었습니다.
-Feature.Durables.PartiallyExpiredItems.TitleText,만료된 아이템
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days}일(구매 후 시작)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,인터넷에 연결되지 않음
@@ -3468,7 +3465,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,이름 편집
 Feature.Profile.Heading.EditDisplayName,표시 이름 편집
 Feature.Profile.Heading.InsufficientFunds,비용 부족
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfilePictureSaved,프로필 사진이 성공적으로 저장되었습니다
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,통계
 Feature.Profile.Heading.Username,
@@ -4048,7 +4044,6 @@ Feature.Subscription.Text.PerMonth,/월
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,아바타가 {rule}에 따라 재설정되었습니다. 마켓플레이스는 계속 사용할 수 있지만 {time}까지 아바타 변경 사항은 저장되지 않습니다.
 Feature.Timeout.Prompt.SaveTitleText,현재 저장 기능이 비활성화되어 있습니다
-Feature.Timeout.Prompt.TitleText,아바타를 재설정했습니다
 Feature.Timeout.WarningBanner.DisabledMessage,아바타 저장이 비활성화됨
 Feature.Timeout.WarningBanner.DisabledUntilMessage,{time}까지 아바타 저장이 비활성화됨
 Feature.Toast.Heading.PurchaseMessage.Success,

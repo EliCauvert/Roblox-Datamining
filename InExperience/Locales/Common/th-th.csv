@@ -2702,7 +2702,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,ชื่อที่แสด
 Feature.DisplayName.ErrorMessage.NameTooLong,ชื่อที่แสดงควรมีความยาวไม่เกิน 20 อักขระ
 Feature.DisplayName.ErrorMessage.NameTooShort,ชื่อที่แสดงควรมีความยาวอย่างน้อย 3 อักขระ
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,ชื่อที่แสดงมีอักขระที่ไม่ได้รับการรองรับ
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,เป็นเวลา {num} วัน
 Feature.Durables.BottomBar.RentalDurationPlural,
 Feature.Durables.FTUX.Tooltip,เลือกว่าต้องการเป็นเจ้าของไอเท็มกี่วัน เวลาจะเริ่มเดินหลังจากซื้อเสร็จ
@@ -2713,8 +2712,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} วัน
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,
 Feature.Durables.ItemDetails.WearTimeOptions.Title,ตัวเลือก
 Feature.Durables.Label.ItemExpires,ไอเท็มหมดอายุ
-Feature.Durables.PartiallyExpiredItems.BodyText,บางไอเท็มในอวาตาร์ที่บันทึกไว้หมดอายุและถูกลบออกแล้ว
-Feature.Durables.PartiallyExpiredItems.TitleText,ไอเท็มหมดอายุแล้ว
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} วัน (เริ่มหลังจากซื้อเสร็จ)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,ไม่มีการเชื่อมต่ออินเทอร์เน็ต
@@ -3450,7 +3447,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,แก้ไขชื่อ
 Feature.Profile.Heading.EditDisplayName,แก้ไขชื่อที่แสดง
 Feature.Profile.Heading.InsufficientFunds,เงินไม่เพียงพอ
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfilePictureSaved,บันทึกภาพโปรไฟล์เรียบร้อยแล้ว
 Feature.Profile.Heading.ProfileQRCode,
 Feature.Profile.Heading.Statistics,สถิติ
 Feature.Profile.Heading.Username,
@@ -4030,7 +4026,6 @@ Feature.Subscription.Text.PerMonth,/เดือน
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,อวาตาร์ของคุณถูกรีเซ็ตตาม{rule} คุณยังคงใช้มาร์เก็ตเพลสได้ แต่จะไม่มีการบันทึกการเปลี่ยนแปลงอวาตาร์จนกว่าจะถึง {time}
 Feature.Timeout.Prompt.SaveTitleText,การบันทึกถูกปิดใช้งานอยู่ในขณะนี้
-Feature.Timeout.Prompt.TitleText,เรารีเซ็ตอวาตาร์ของคุณ
 Feature.Timeout.WarningBanner.DisabledMessage,การบันทึกอวาตาร์ถูกปิดใช้งาน
 Feature.Timeout.WarningBanner.DisabledUntilMessage,การบันทึกอวาตาร์ถูกปิดใช้งานจนถึง {time}
 Feature.Toast.Heading.PurchaseMessage.Success,

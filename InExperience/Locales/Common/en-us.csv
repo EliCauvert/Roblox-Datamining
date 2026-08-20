@@ -2739,7 +2739,6 @@ Feature.DisplayName.ErrorMessage.NameNotAvailable,Display name is not available
 Feature.DisplayName.ErrorMessage.NameTooLong,Display name should have 20 characters at the most
 Feature.DisplayName.ErrorMessage.NameTooShort,Display name should have at least 3 characters
 Feature.DisplayName.ErrorMessage.NameUnsupportedChars,Display name contains unsupported characters
-Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Durables.BottomBar.RentalDuration,For {num} day
 Feature.Durables.BottomBar.RentalDurationPlural,For {num} days
 Feature.Durables.FTUX.Tooltip,Choose how many days you want to own the item. The timer starts after purchase.
@@ -2750,8 +2749,6 @@ Feature.Durables.ItemDetails.WearTimeOptions.Button.XDay,{num} day
 Feature.Durables.ItemDetails.WearTimeOptions.Button.XDays,{num} days
 Feature.Durables.ItemDetails.WearTimeOptions.Title,Options
 Feature.Durables.Label.ItemExpires,Item expires
-Feature.Durables.PartiallyExpiredItems.BodyText,Some items in this saved avatar expired and were removed.
-Feature.Durables.PartiallyExpiredItems.TitleText,Items expired
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} days (Starts after purchase)
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,
 Feature.EmptyStatePage.Message.NoInternet,No internet connection
@@ -3487,7 +3484,6 @@ Feature.Profile.Heading.EditAgedUpDisplayName,Edit Name
 Feature.Profile.Heading.EditDisplayName,Edit Display Name
 Feature.Profile.Heading.InsufficientFunds,Insufficient Funds
 Feature.Profile.Heading.NicknameRequestSent,
-Feature.Profile.Heading.ProfilePictureSaved,Profile picture saved successfully
 Feature.Profile.Heading.ProfileQRCode,Share QR Code
 Feature.Profile.Heading.Statistics,Statistics
 Feature.Profile.Heading.Username,
@@ -4072,7 +4068,6 @@ Feature.Subscription.Text.PerMonth,/month
 Feature.Timeout.Label.OK,
 Feature.Timeout.Prompt.BodyText,"Your avatar was reset for {rule}. You can still use the Marketplace, but changes to your avatar will not save until {time}."
 Feature.Timeout.Prompt.SaveTitleText,Saving is disabled for now
-Feature.Timeout.Prompt.TitleText,We reset your avatar
 Feature.Timeout.WarningBanner.DisabledMessage,Avatar saving disabled
 Feature.Timeout.WarningBanner.DisabledUntilMessage,Avatar saving disabled until {time}
 Feature.Toast.Heading.PurchaseMessage.Success,Unlocked

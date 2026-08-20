@@ -1,4 +1,0 @@
-﻿return {
-	FETCH_CATALOG_V2_SEARCH_ITEM_DETAILS_LATENCY_COUNTER_NAME = "NetworkFetchCatalogV2SearchItemDetailsLatency",
-	FETCH_CATALOG_V2_SEARCH_ITEM_DETAILS_MODEL_MISMATCH_COUNTER_NAME = "NetworkFetchCatalogV2SearchItemDetailsModelMismatch"
-}
