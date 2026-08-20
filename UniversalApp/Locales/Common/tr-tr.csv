@@ -245,13 +245,18 @@ Authentication.CrossDevice.Action.Enter,Gir
 Authentication.CrossDevice.Action.GoBack,Geri Dön
 Authentication.CrossDevice.Action.Next,İleri
 Authentication.CrossDevice.Action.TryAgain,Tekrar Dene
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Devam etmek için giriş yaptığın cihazında onayla.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Giriş yaptığın cihazda QR kodunu okut ya da <b>Daha Fazla > Hızlı giriş</b>'e git ve aşağıdaki kodu gir.
+Authentication.CrossDevice.Description.SigningInAs,{identifier} olarak giriş yapılıyor
 Authentication.CrossDevice.EnterCodeInstruction,sonra bu kodu gir
 Authentication.CrossDevice.GoToInstruction,Bilgisayarından veya telefonundan aşağıdaki adrese git:
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Başka bir Cihaza giriş yap
 Authentication.CrossDevice.Heading.LoginCode,Hızlı Giriş Kodu
 Authentication.CrossDevice.Heading.LoginWarning,GİRİŞ YAPMAK İÇİN AŞAĞIDAKİLERİ YAPTIĞINDAN EMİN OL:
 Authentication.CrossDevice.Heading.QuickLogin,Hızlı giriş
+Authentication.CrossDevice.Heading.SignInWithQrCode,QR kodu ile giriş yap
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Başka bir cihazda giriş yap
+Authentication.CrossDevice.Heading.WaitingForConfirmation,Onay bekleniyor
 Authentication.CrossDevice.Heading.Warning,UYARI!
 Authentication.CrossDevice.Label.CodeHeader,2. Seçenek
 Authentication.CrossDevice.Label.CodeNotVerified,Hızlı Giriş kodu doğrulanmadı.
@@ -308,6 +313,7 @@ Authentication.Login.Action.SendCodeSentenceCase,Kod gönder
 Authentication.Login.Action.SendVerificationEmail,Doğrulama E-postası Gönder
 Authentication.Login.Action.SignIn,Giriş Yap
 Authentication.Login.Action.SignInSentenceCase,Giriş yap
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Geçiş anahtarı kullan
 Authentication.Login.Action.WeChatLogin,WeChat Girişi
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
@@ -320,6 +326,7 @@ Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha g
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Cihazının geçiş anahtarlarını destekleyip desteklemediğini belirleyemiyoruz. Tekrar dene ya da hesabını e-posta veya telefon numarasıyla kurtarmak için ""Giriş yaparken sorun mu yaşıyorsun"" seçeneğine dokun."
 Authentication.Login.Description.PasskeyMobileOnly,Geçiş anahtarları yalnızca mobil cihazlarda kullanılabilir. Giriş yapmak için başka bir yöntem seç.
 Authentication.Login.Description.SigningInWith,<b>{identifier}</b> ile giriş yapılıyor
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,Bir Roblox hesabı varsa {email} adresine bir doğrulama kodu alacaksın
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
@@ -330,7 +337,9 @@ Authentication.Login.Heading.LoginRoblox,Roblox'a Giriş Yap
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Mevcut Hesaba Giriş
 Authentication.Login.Heading.NewAppAvailable,Yeni Roblox Uygulamasını İndir
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Başka bir yöntemle giriş yap
 Authentication.Login.Heading.SignInToRoblox,Roblox'a giriş yap
+Authentication.Login.Heading.SignInWithRoblox,Roblox ile giriş yap
 Authentication.Login.Label.AccountSelectorTitle,Giriş Yapılacak Hesabı Seç
 Authentication.Login.Label.AgedUpUsername,Eşsiz bir @kullanıcıadı ekle
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Üzgünüz, sunucularımıza ulaşırken bir sorun oluştu.
@@ -344,6 +353,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Üzgünüz, sunucularımı
 Lütfen biraz bekleyip tekrar dene."
 Authentication.Login.Label.ConnectionError.Title,Bağlantı Hatası
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,E-posta adresi
 Authentication.Login.Label.EmailNeedsVerification,E-postanın doğrulanması gerekiyor
 Authentication.Login.Label.EmailOrPhone,E-posta veya telefon
 Authentication.Login.Label.EnterCode,
@@ -353,7 +363,8 @@ Authentication.Login.Label.EnterOneTimeCode,Tek Kullanımlık Kodu Gir
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Az önce e-postana gönderdiğimiz kodu gir
 Authentication.Login.Label.EnterPassword,Şifreyi gir
 Authentication.Login.Label.EnterYourPassword,Şifreni gir
-Authentication.Login.Label.ForgotYourPassword,Şifreni mi unuttun?
+Authentication.Login.Label.ForgotPassword,Şifreni mi unuttun?
+Authentication.Login.Label.ForgotYourPassword,
 Authentication.Login.Label.GetOneTimeCode,Tek Kullanımlık Kod Al
 Authentication.Login.Label.LearnMore,Daha fazla bilgi edin
 Authentication.Login.Label.LinkAccountWarning,"Roblox hesabın, {platform} için hesap bağlanacak ve bir sonraki katılımında otomatik olarak giriş yapacaksın! Bu bağlantıyı Ayarlar ekranından istediğin zaman kaldırabilirsin. Yeni bir hesaba bağlanmadan önce bir bekleme süresi olabilir."
@@ -369,6 +380,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Kullanıcı adı, e-posta
 Authentication.Login.Label.UsernameEmailPhone,Kullanıcı Adı/E-posta/Telefon
 Authentication.Login.Label.UsernameOrEmail,Kullanıcı adı veya e-posta
 Authentication.Login.Label.UsernameOrPhone,Kullanıcı adı veya telefon
+Authentication.Login.Label.VerificationCode,Doğrulama kodu
 Authentication.Login.Label.WeChatUserCancel,WeChat'ten çıkış yaptın. Lütfen WeChat'e giriş yap.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat sürümü desteklenmiyor
 Authentication.Login.LinkIllegalChildAccountLinking,Bu Roblox hesabı bir Xbox çocuk hesabına bağlanamadı. Lütfen başka bir hesabı dene veya ayarlarını kontrol et.
@@ -1636,12 +1648,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Mevcut görünümü güncelle
 Feature.Avatar.Action.UpdateMakeupLook,Görünümü güncelle
 Feature.Avatar.Action.Zoom,Yakınlaştır
 Feature.Avatar.AvatarWidgetTitle,Tarzları Keşfet
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Yayınla
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Yaratımın kullanıma hazır.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,Bu arka plan yapay zekâ ile oluşturulmuştur. Yayınlayarak Roblox Topluluk Standartları'na uyduğunu ve hak sahibi olmadığın içerikler kullanmadığını onaylamış olursun. Envanterinde görünmeden önce incelenecek ve yayınlanan öğeler düzenlenemeyecektir.
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"Öğe, Topluluk Standartları'na uymuyor"
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Açıklama
+Feature.Avatar.BackgroundGeneration.Label.Name,Ad
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor…
 Feature.Avatar.BackgroundGeneration.Title,Arka Plan Oluştur
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Envanterde yayınla
 Feature.Avatar.Backgrounds.Title,Arka planlar
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Düzenlemeler bu vücut stilinde kullanılamıyor.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Varsayılan orijinal vücut renklerine dön
@@ -1825,7 +1851,7 @@ Feature.Avatar.Label.ModerationFailed,Denetimden Geçmedi
 Feature.Avatar.Label.Mood,Duygu
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,Bu varlıklar artık bu koleksiyonda mevcut olmayacak:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Gönderilen Avatarlar herkese açık bir şekilde Pazar Yeri'nde görüntülenecek
-Feature.Avatar.Label.Name,Ad
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Boyun
 Feature.Avatar.Label.Newest,En yeni
 Feature.Avatar.Label.NoExpiredItems,Süresi dolmuş {itemType} yok
@@ -2138,7 +2164,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Ayarları aç
 Feature.Build.Action.Playtest,Oynanış testi
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Yayınla
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,En sonuncuyu yayınla
 Feature.Build.Action.Restore,Geri Yükle
 Feature.Build.Action.Revert,Geri döndür
@@ -2155,11 +2181,13 @@ Feature.Build.Action.ViewUsage,Kullanımı görüntüle
 Feature.Build.Content.NewGame,Yeni oyun
 Feature.Build.Description.ArchiveRemoval,Bu oyunu arşivlersen oyun İnşa Et'ten kaldırılır. Yaratıcı Merkezi'nde veya Roblox Studio'da oyuna erişmeye ve oyunu geri yüklemeye devam edebilirsin.
 Feature.Build.Description.AutoBuyUsage,Bir şeyler oluştururken otomatik olarak ek İnşa Et kullanım hakkı satın almak için Robux'unu kullan. İstediğin zaman günlük harcama limiti belirleyebilirsin.
+Feature.Build.Description.BoostAudienceForPlays,Daha fazla oyun için kitleni genişlet.
 Feature.Build.Description.BoostGameAudience,Oyununun kitlesini genişlet
 Feature.Build.Description.BuildIdeaGame,Fikirlerini oyuna dönüştür
 Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiğinde haberdar ol.
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
 Feature.Build.Description.BuyUsageOrWait,Robux ile daha fazla İnşa Et kullanım hakkı satın al veya günlük sınırının sıfırlanmasını bekle.
+Feature.Build.Description.CampaignRunDates,Kampanyanız {startDate}-{endDate} arasında yayınlanacak
 Feature.Build.Description.ChoosePlaytesters,Oynanış testinde sana yardımcı olacak arkadaşları seç.
 Feature.Build.Description.EnableBuildNotifs,İnşa Et'ten güncellemeler almak için cihaz ayarlarında bildirimleri aç.
 Feature.Build.Description.FriendsLinkOnly,Bu bağlantıya yalnızca arkadaşların erişebilir. Daha fazla insanın oynamasını istiyorsan oyununun Kitle ayarını değiştir.
@@ -2188,6 +2216,7 @@ Feature.Build.Label.Access,Erişim
 Feature.Build.Label.AdditionalUsage,Ek İnşa Et kullanım hakkı
 Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT} kullanıldı
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
 Feature.Build.Label.Autosaved,Otomatik kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.BackToBuild,Oluşturmaya Dön
@@ -2198,7 +2227,7 @@ Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
-Feature.Build.Label.Description,Açıklama
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,Sorun
 Feature.Build.Label.FreeBuildUsage,Ücretsiz İnşa Et kullanım hakkı
@@ -2372,6 +2401,7 @@ Feature.Build.Message.WhatToCreate,Bugün ne yaratmak istiyorsun?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} dk. {REM_SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkedSeconds,{SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkingOnTasks,Görevlerin üzerinde çalışıyor
+Feature.Build.Title.AdCampaignActive,Reklam kampanyası aktif
 Feature.Build.Title.AddFriendsToPlaytest,Oynanış testinde sana yardımcı olacak arkadaşları ekle
 Feature.Build.Title.ArchiveThisGame,Bu oyun arşivlensin mi?
 Feature.Build.Title.Audience,Kitle
@@ -2443,6 +2473,7 @@ Feature.Catalog.Action.Report,Bildirim
 Feature.Catalog.Action.Sell,Sat
 Feature.Catalog.Action.ShareVia,Paylaş...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Yükselt
 Feature.Catalog.Action.ViewDetailsPage,Ayrıntılar Sayfasını Görüntüle
 Feature.Catalog.Action.ViewExperienceDetails,Deneyim Detaylarını Görüntüle
@@ -4527,6 +4558,7 @@ Feature.Schools.Action.TermsOfService,
 Feature.Schools.Body.EnterCode,"UNiDAYS, tek kullanımlık kodunu içeren bir e-postayı {user_email} adresine gönderdi. Okulunu onaylamak için kodu aşağıya gir."
 Feature.Schools.Body.UnidaysShare,E-posta adresin başkaları tarafından görülmeyecek.
 Feature.Schools.Body.UnidaysTerms,"Okul e-posta adresini doğrulamak için UNiDAYS ile iş birliği yapıyoruz. ""Devam Et"" düğmesine tıklayarak UNiDAYS'in hizmet koşullarını ve gizlilik politikasını kabul etmiş olursun."
+Feature.Schools.Caption.AlumniGroupOnGraduate,Mezun olduğunda {school} mezunlar grubuna katılacaksın.
 Feature.Schools.Caption.RemovedOnGraduate,Mezun olduğunda {school} okulundan çıkarılacaksın.
 Feature.Schools.Description.CantFindSchoolNotify,Okulun Roblox'ta olduğunda seni bilgilendireceğiz.
 Feature.Schools.Description.CantVerifySchool,Sağladığın bilgilere dayanarak okulunu doğrulayamadık.

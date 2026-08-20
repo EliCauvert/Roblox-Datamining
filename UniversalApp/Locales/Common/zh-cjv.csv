@@ -237,18 +237,18 @@ Authentication.CrossDevice.Action.Enter,输入
 Authentication.CrossDevice.Action.GoBack,返回
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
-Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,
-Authentication.CrossDevice.Description.QuickSignInInstructionsModal,
-Authentication.CrossDevice.Description.SigningInAs,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,在你已登录的设备上确认以继续。
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,在已登录的设备上扫描二维码，或依次前往<b>更多 > 快速登录</b>，然后输入以下代码。
+Authentication.CrossDevice.Description.SigningInAs,正在以 {identifier} 身份登录
 Authentication.CrossDevice.EnterCodeInstruction,然后输入此验证码
 Authentication.CrossDevice.GoToInstruction,在你的电脑或手机上前往：
 Authentication.CrossDevice.Heading.LoginAnotherDevice,登录至另一设备
 Authentication.CrossDevice.Heading.LoginCode,快速登录码
 Authentication.CrossDevice.Heading.LoginWarning,登录时请确保：
 Authentication.CrossDevice.Heading.QuickLogin,快速登录
-Authentication.CrossDevice.Heading.SignInWithQrCode,
+Authentication.CrossDevice.Heading.SignInWithQrCode,使用二维码登录
 Authentication.CrossDevice.Heading.SigninAnotherDevice,在其他设备上登录
-Authentication.CrossDevice.Heading.WaitingForConfirmation,
+Authentication.CrossDevice.Heading.WaitingForConfirmation,等待确认中
 Authentication.CrossDevice.Heading.Warning,警告！
 Authentication.CrossDevice.Label.CodeHeader,选项 2
 Authentication.CrossDevice.Label.CodeNotVerified,未验证快速登录码。
@@ -318,7 +318,7 @@ Authentication.Login.Description.PasskeyDescription,你的帐户有通行密钥�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,我们无法确定你的设备是否支持通行密钥。请重试，或点按“登录有问题”来使用电子邮件或手机号码恢复你的帐户。
 Authentication.Login.Description.PasskeyMobileOnly,通行密钥仅适用于移动设备。请选择其他方式登录。
 Authentication.Login.Description.SigningInWith,通过 <b>{identifier}</b> 登录
-Authentication.Login.Description.UsernameHandle,
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,如果 Roblox 帐户存在，你将通过 {email} 收到验证码
 Authentication.Login.Error.PasskeyOnlyAccount,你的帐户只设置了登录密码。请尝试使用你的通行密钥登录，或恢复你的帐户。
 Authentication.Login.Error.PlatformAccountConnectionFailure,无法验证平台帐户。请稍后重试。
@@ -329,9 +329,9 @@ Authentication.Login.Heading.LoginRoblox,登录罗布乐思
 Authentication.Login.Heading.LoginRobloxAccountSwitching,登录至现有帐户
 Authentication.Login.Heading.NewAppAvailable,下载新的 Roblox App
 Authentication.Login.Heading.SignIn,
-Authentication.Login.Heading.SignInAnotherWay,
+Authentication.Login.Heading.SignInAnotherWay,以其他方式登录
 Authentication.Login.Heading.SignInToRoblox,登录 Roblox
-Authentication.Login.Heading.SignInWithRoblox,
+Authentication.Login.Heading.SignInWithRoblox,使用 Roblox 登录
 Authentication.Login.Label.AccountSelectorTitle,选择要登录的帐户
 Authentication.Login.Label.AgedUpUsername,添加一个独特的 @username
 Authentication.Login.Label.ConnectionError.RetryDisabled,"抱歉，连接服务器时发生问题。
@@ -345,7 +345,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"抱歉，连接服务器�
 请稍候重试。"
 Authentication.Login.Label.ConnectionError.Title,连接错误
 Authentication.Login.Label.Email,
-Authentication.Login.Label.EmailAddress,
+Authentication.Login.Label.EmailAddress,电子邮件地址
 Authentication.Login.Label.EmailNeedsVerification,你的电子邮件需要验证
 Authentication.Login.Label.EmailOrPhone,电子邮箱或手机号码
 Authentication.Login.Label.EnterCode,
@@ -355,7 +355,7 @@ Authentication.Login.Label.EnterOneTimeCode,输入一次性验证码
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,请输入我们刚发送至你电子邮件的验证码
 Authentication.Login.Label.EnterPassword,输入密码
 Authentication.Login.Label.EnterYourPassword,请输入你的密码
-Authentication.Login.Label.ForgotPassword,
+Authentication.Login.Label.ForgotPassword,忘记了密码？
 Authentication.Login.Label.ForgotYourPassword,忘记密码？
 Authentication.Login.Label.GetOneTimeCode,获取一次性验证码
 Authentication.Login.Label.LearnMore,了解更多
@@ -372,7 +372,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,用户名、电子邮箱�
 Authentication.Login.Label.UsernameEmailPhone,用户名/电子邮件/手机
 Authentication.Login.Label.UsernameOrEmail,用户名或电子邮箱
 Authentication.Login.Label.UsernameOrPhone,用户名或手机号码
-Authentication.Login.Label.VerificationCode,
+Authentication.Login.Label.VerificationCode,验证码
 Authentication.Login.Label.WeChatUserCancel,你已登出微信，请重新登录。
 Authentication.Login.Label.WeChatVersionNotSupported,不支持微信版本
 Authentication.Login.LinkIllegalChildAccountLinking,此 Roblox 帐户无法关联到 Xbox 儿童帐户。请改用其他帐户或检查你的设置。
@@ -504,7 +504,7 @@ Authentication.SignUp.Label.BirthdayWithAge,生日（{yearsOld} 岁）
 Authentication.SignUp.Label.ConfirmBirthday,确认生日
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,日
-Authentication.SignUp.Label.EmailAddress,电子邮件地址
+Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,输入你的电子邮箱
 Authentication.SignUp.Label.EnterYourParentsEmail,输入你家长的电子邮箱
 Authentication.SignUp.Label.Error.MinimumAge5,注册的新帐户必须年满五周岁
@@ -1650,21 +1650,21 @@ Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
 Feature.Avatar.BackgroundGeneration.Action.View,
-Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,
-Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
-Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
-Feature.Avatar.BackgroundGeneration.Label.CharacterCount,
-Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.Name,
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,描述
+Feature.Avatar.BackgroundGeneration.Label.Name,名称
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
-Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -1849,7 +1849,7 @@ Feature.Avatar.Label.ModerationFailed,内容审查失败
 Feature.Avatar.Label.Mood,心情
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,将从此收藏中删除以下素材:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,已发布的虚拟形象将在商城中公开
-Feature.Avatar.Label.Name,名称
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,颈部
 Feature.Avatar.Label.Newest,最新
 Feature.Avatar.Label.NoExpiredItems,没有已过期的{itemType}道具
@@ -2180,13 +2180,13 @@ Feature.Build.Action.ViewUsage,查看使用额度
 Feature.Build.Content.NewGame,新游戏
 Feature.Build.Description.ArchiveRemoval,如果你将此游戏存档，它将从 Build 中移除。你仍可在创作者中心或 Roblox Studio 中访问和恢复此游戏。
 Feature.Build.Description.AutoBuyUsage,在创建过程中使用你的 Robux 自动购买额外的 Build 使用额度。你可以随时设置每日消费限额。
-Feature.Build.Description.BoostAudienceForPlays,
+Feature.Build.Description.BoostAudienceForPlays,扩大受众群体，吸引更多玩家。
 Feature.Build.Description.BoostGameAudience,增加游戏的受众
 Feature.Build.Description.BuildIdeaGame,将你的创意转化为游戏
 Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
-Feature.Build.Description.CampaignRunDates,
+Feature.Build.Description.CampaignRunDates,你的广告活动将在 {startDate} – {endDate}期间投放
 Feature.Build.Description.ChoosePlaytesters,选择好友来帮助你进行游戏测试。
 Feature.Build.Description.EnableBuildNotifs,在设备设置中启用通知，获取来自 Build 的最新动态。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友才能访问此链接。如果你希望更多人游玩，请更改游戏的受众设置。
@@ -2215,7 +2215,7 @@ Feature.Build.Label.Access,访问权限
 Feature.Build.Label.AdditionalUsage,额外的 Build 使用额度
 Feature.Build.Label.AdditionalUsed,已使用 {USED}，共 {LIMIT}
 Feature.Build.Label.All,
-Feature.Build.Label.AmountAvailable,
+Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
 Feature.Build.Label.Autosaved,自动保存版本
 Feature.Build.Label.Available,可用
 Feature.Build.Label.BackToBuild,返回构建
@@ -2226,7 +2226,7 @@ Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
-Feature.Build.Label.Description,描述
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,免费 Build 使用额度
@@ -2400,7 +2400,7 @@ Feature.Build.Message.WhatToCreate,你今天想创作什么？
 Feature.Build.Message.WorkedMinutesSeconds,已完成（{MINUTES} 分 {REM_SECONDS} 秒）
 Feature.Build.Message.WorkedSeconds,已完成（{SECONDS} 秒）
 Feature.Build.Message.WorkingOnTasks,正在处理你的任务
-Feature.Build.Title.AdCampaignActive,
+Feature.Build.Title.AdCampaignActive,广告活动已启动
 Feature.Build.Title.AddFriendsToPlaytest,添加好友来帮助你进行游戏测试
 Feature.Build.Title.ArchiveThisGame,要将此游戏存档吗？
 Feature.Build.Title.Audience,受众
@@ -4560,7 +4560,7 @@ Feature.Schools.Action.TermsOfService,
 Feature.Schools.Body.EnterCode,UNiDAYS 已将一封包含一次性验证码的电子邮件发送至 {user_email}。请在下方输入验证码，以确认你的学校。
 Feature.Schools.Body.UnidaysShare,其他人不会看到你的电子邮件地址。
 Feature.Schools.Body.UnidaysTerms,我们与 UNiDAYS 合作，以验证你学校的电子邮件地址。点按“继续”即表示你同意 UNiDAYS 的服务条款和隐私政策。
-Feature.Schools.Caption.AlumniGroupOnGraduate,
+Feature.Schools.Caption.AlumniGroupOnGraduate,毕业后，你将加入{school}的校友群组。
 Feature.Schools.Caption.RemovedOnGraduate,毕业后，系统会将你从{school}移除。
 Feature.Schools.Description.CantFindSchoolNotify,你的学校加入 Roblox 时，我们会通知你。
 Feature.Schools.Description.CantVerifySchool,根据你提供的信息，我们无法验证你的学校。
@@ -4947,7 +4947,7 @@ Feature.VerificationUpsell.Heading.AddEmail,请先验证你的帐户
 Feature.VerificationUpsell.Heading.FinishAccountSetup,完成帐户设置
 Feature.VerificationUpsell.Heading.PhoneNumberVerified,电话号码已验证！
 Feature.VerificationUpsell.Heading.TryVoiceChat,试试语音聊天
-Feature.VerificationUpsell.Heading.VerificationCode,验证码
+Feature.VerificationUpsell.Heading.VerificationCode,
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,验证成功！
 Feature.VerificationUpsell.Heading.VerifyEmail,检查您的电子邮箱
 Feature.VerificationUpsell.Heading.VerifyOnLogout,防止账号被锁定！

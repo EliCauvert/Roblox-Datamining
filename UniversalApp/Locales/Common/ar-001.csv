@@ -228,13 +228,18 @@ Authentication.CrossDevice.Action.Enter,إدخال
 Authentication.CrossDevice.Action.GoBack,الرجوع
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,حاول مرة أخرى
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,أكّد على جهازك المُسجّل الدخول إليه للمتابعة.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,على جهازك المُسجَّل الدخول إليه، امسح كود الاستجابة السريعة (QR) أو انتقل إلى <b>المزيد > تسجيل الدخول السريع</b> وأدخل الكود أدناه.
+Authentication.CrossDevice.Description.SigningInAs,جارٍ تسجيل الدخول بصفتك {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,ثم أدخل هذا الرمز
 Authentication.CrossDevice.GoToInstruction,على حاسوبك أو هاتفك، انتقل إلى:
 Authentication.CrossDevice.Heading.LoginAnotherDevice,تسجيل الدخول إلى جهاز آخر
 Authentication.CrossDevice.Heading.LoginCode,رمز تسجيل الدخول السريع
 Authentication.CrossDevice.Heading.LoginWarning,لتسجيل الدخول، تحقق أنك:
 Authentication.CrossDevice.Heading.QuickLogin,تسجيل دخول سريع
+Authentication.CrossDevice.Heading.SignInWithQrCode,تسجيل الدخول باستخدام كود QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,تسجيل الدخول على جهاز آخر
+Authentication.CrossDevice.Heading.WaitingForConfirmation,في انتظار التأكيد
 Authentication.CrossDevice.Heading.Warning,تحذير!
 Authentication.CrossDevice.Label.CodeHeader,الخيار 2
 Authentication.CrossDevice.Label.CodeNotVerified,لم يتم التحقق من رمز تسجيل الدخول السريع.
@@ -291,6 +296,7 @@ Authentication.Login.Action.SendCodeSentenceCase,إرسال الكود
 Authentication.Login.Action.SendVerificationEmail,إرسال بريد إلكتروني للتحقق
 Authentication.Login.Action.SignIn,تسجيل الدخول
 Authentication.Login.Action.SignInSentenceCase,
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,استخدام مفتاح مرور
 Authentication.Login.Action.WeChatLogin,تسجيل دخول عبر WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
@@ -303,6 +309,7 @@ Authentication.Login.Description.PasskeyDescription,يحتوي حسابك على
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"لا يمكننا تحديد ما إذا كان جهازك يدعم مفتاح المرور. حاول مرة أخرى، أو اضغط على ""مشكلة في تسجيل الدخول"" لاسترداد حسابك باستخدام بريد إلكتروني أو رقم هاتف."
 Authentication.Login.Description.PasskeyMobileOnly,مفاتيح المرور متاحة فقط على الهاتف المحمول. اختر طريقة أخرى لتسجيل الدخول.
 Authentication.Login.Description.SigningInWith,جارٍ تسجيل الدخول باستخدام <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,إذا كان هناك حساب على منصّة Roblox، فستتلقى كود تحقق على البريد الإلكتروني {email}
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
@@ -313,7 +320,9 @@ Authentication.Login.Heading.LoginRoblox,تسجيل الدخول إلى Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,تسجيل الدخول إلى حساب حاليّ
 Authentication.Login.Heading.NewAppAvailable,تنزيل تطبيق Roblox الجديد
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,تسجيل الدخول بطريقة أخرى
 Authentication.Login.Heading.SignInToRoblox,تسجيل الدخول إلى منصّة Roblox
+Authentication.Login.Heading.SignInWithRoblox,تسجيل الدخول باستخدام Roblox
 Authentication.Login.Label.AccountSelectorTitle,حدد حسابًا لتسجيل الدخول إليه
 Authentication.Login.Label.AgedUpUsername,أضف username@ فريد
 Authentication.Login.Label.ConnectionError.RetryDisabled,"عذراً، حدثت مشكلة في الوصول إلى خوادمنا.
@@ -326,6 +335,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"عذراً، حدثت مش
 الرجاء الانتظار والمحاولة مرة أخرى."
 Authentication.Login.Label.ConnectionError.Title,خطأ في الاتصال
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,عنوان البريد الإلكتروني
 Authentication.Login.Label.EmailNeedsVerification,نحتاج للتحقق من بريدك الإلكتروني
 Authentication.Login.Label.EmailOrPhone,البريد الإلكتروني أو الهاتف
 Authentication.Login.Label.EnterCode,
@@ -335,6 +345,7 @@ Authentication.Login.Label.EnterOneTimeCode,أدخل رمز مرة واحدة
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,أدخل الرمز الذي أرسلناه للتو إلى بريدك الإلكتروني
 Authentication.Login.Label.EnterPassword,أدخِل كلمة المرور
 Authentication.Login.Label.EnterYourPassword,
+Authentication.Login.Label.ForgotPassword,هل نسيت كلمة المرور؟
 Authentication.Login.Label.ForgotYourPassword,هل نسيت كلمة مرورك؟
 Authentication.Login.Label.GetOneTimeCode,احصل على رمز مرة واحدة
 Authentication.Login.Label.LearnMore,اعرف المزيد
@@ -351,6 +362,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,اسم المستخدم أ
 Authentication.Login.Label.UsernameEmailPhone,اسم المستخدم/البريد/الهاتف
 Authentication.Login.Label.UsernameOrEmail,اسم المستخدم أو البريد الإلكتروني
 Authentication.Login.Label.UsernameOrPhone,اسم المستخدم أو الهاتف
+Authentication.Login.Label.VerificationCode,كود التحقق
 Authentication.Login.Label.WeChatUserCancel,تم تسجيل خروجك من WeChat. الرجاء تسجيل الدخول إلى WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,إصدار WeChat غير معتمد
 Authentication.Login.LinkIllegalChildAccountLinking,لا يمكن ربط هذا الحساب على منصّة Roblox بحساب طفل على Xbox. يُرجى تجربة حساب آخر أو التحقُّق من إعداداتك.
@@ -482,7 +494,7 @@ Authentication.SignUp.Label.BirthdayWithAge,تاريخ الميلاد ({yearsOld
 Authentication.SignUp.Label.ConfirmBirthday,تأكيد تاريخ الميلاد
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,يوم
-Authentication.SignUp.Label.EmailAddress,عنوان البريد الإلكتروني
+Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,أدخل بريدك الإلكتروني
 Authentication.SignUp.Label.EnterYourParentsEmail,إدخال البريد الإلكتروني لوالديك
 Authentication.SignUp.Label.Error.MinimumAge5,ينبغي أن تكون الحسابات الجديدة للأعمار فوق الخامسة
@@ -1616,12 +1628,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,تحديث الإطلالة ال�
 Feature.Avatar.Action.UpdateMakeupLook,تحديث الإطلالة
 Feature.Avatar.Action.Zoom,تكبير
 Feature.Avatar.AvatarWidgetTitle,استكشاف الأنماط
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,منتجك جاهز للاستخدام.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,تم إنشاء هذه الخلفية باستخدام الذكاء الاصطناعي. ومن خلال النشر، فإنك تؤكد أنها تتبع معايير مجتمع منصّة Roblox ولا تستخدم محتوى لا تملك الحق في استخدامه. ستتم مراجعتها قبل ظهورها في مقتنياتك، ولا يمكن تحرير العناصر المنشورة.
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,لم يستوفِ العنصر معايير المجتمع
 Feature.Avatar.BackgroundGeneration.Error.Moderation,هذه المطالبة لا تتبع قواعدنا الإرشادية. حاوِل وصف شيء آخر.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,هذه الخلفية لا تتوافق مع معايير مجتمع Roblox، لذا لم تتم إضافتها إلى مقتنياتك. حاول إنشاء خلفية جديدة.
 Feature.Avatar.BackgroundGeneration.Error.System,حدث خطأ ما أثناء إنشاء الخلفية. يُرجى المحاولة مرة أخرى.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,الوصف
+Feature.Avatar.BackgroundGeneration.Label.Name,الاسم
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,صِف الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Generating,جارٍ إنشاء الخلفية...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,جارٍ تحضير الخلفية...
 Feature.Avatar.BackgroundGeneration.Title,إنشاء خلفية
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,النشر في المقتنيات
 Feature.Avatar.Backgrounds.Title,الخلفيات
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,التعديل غير متاح لنمط الجسد هذا.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,الرجوع إلى ألوان الجسد الأصلية
@@ -1805,7 +1831,7 @@ Feature.Avatar.Label.ModerationFailed,تعذر الإشراف
 Feature.Avatar.Label.Mood,مزاج
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,لن تكون متاحة في هذه التشكيلة بعد الآن:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,ستكون مجموعة الأفاتار المنشورة متاحة للجميع في المتجر
-Feature.Avatar.Label.Name,الاسم
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,رقبة
 Feature.Avatar.Label.Newest,الأحدث
 Feature.Avatar.Label.NoExpiredItems,لا توجد {itemType} منتهية الصلاحية
@@ -2135,11 +2161,13 @@ Feature.Build.Action.ViewUsage,عرض الاستخدام
 Feature.Build.Content.NewGame,لعبة جديدة
 Feature.Build.Description.ArchiveRemoval,إذا قمت بأرشفة هذه اللعبة، فستتم إزالتها من ميزة Build. سيظل بإمكانك الوصول إليها واستعادتها من مركز المصمم أو من Roblox Studio.
 Feature.Build.Description.AutoBuyUsage,استخدم عملات Robux لشراء المزيد من استخدام ميزة Build تلقائيًا أثناء الإنشاء. يمكنك تعيين حد الإنفاق اليومي في أي وقت.
+Feature.Build.Description.BoostAudienceForPlays,زوِّد أعداد جمهورك لتحقيق المزيد من عمليات التشغيل.
 Feature.Build.Description.BoostGameAudience,عزّز جمهور لعبتك
 Feature.Build.Description.BuildIdeaGame,حوّل أفكارك إلى لعبة
 Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما يكون لدى ميزة Build رد لك.
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
+Feature.Build.Description.CampaignRunDates,سيتم تشغيل حملتك من {startDate} إلى {endDate}
 Feature.Build.Description.ChoosePlaytesters,اختر الأصدقاء لمساعدتك في اختبار اللعب.
 Feature.Build.Description.EnableBuildNotifs,يمكنك تشغيل الإشعارات من إعدادات جهازك للحصول على التحديثات من ميزة Build.
 Feature.Build.Description.FriendsLinkOnly,يمكن فقط لأصدقائك الوصول إلى هذا الرابط. غيّر إعدادات الجمهور للعبتك إذا كنت تريد أن يلعبها المزيد من الأشخاص.
@@ -2168,6 +2196,7 @@ Feature.Build.Label.Access,الوصول
 Feature.Build.Label.AdditionalUsage,استخدام إضافي لميزة Build
 Feature.Build.Label.AdditionalUsed,تم استخدام {USED} من {LIMIT}
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
 Feature.Build.Label.BackToBuild,الرجوع إلى البناء
@@ -2178,7 +2207,7 @@ Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
 Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
-Feature.Build.Label.Description,الوصف
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,استخدام ميزة Build المجاني
@@ -2352,6 +2381,7 @@ Feature.Build.Message.WhatToCreate,ما الذي تريد إنشاؤه اليو�
 Feature.Build.Message.WorkedMinutesSeconds,استغرق العمل {MINUTES} من الدقائق و{REM_SECONDS} من الثواني
 Feature.Build.Message.WorkedSeconds,استغرق العمل {SECONDS} من الثواني
 Feature.Build.Message.WorkingOnTasks,جارٍ العمل على مهامك
+Feature.Build.Title.AdCampaignActive,الحملة الإعلانية نشطة
 Feature.Build.Title.AddFriendsToPlaytest,أضف الأصدقاء لمساعدتك في اختبار اللعب
 Feature.Build.Title.ArchiveThisGame,هل تريد أرشفة هذه اللعبة؟
 Feature.Build.Title.Audience,الجمهور
@@ -2423,6 +2453,7 @@ Feature.Catalog.Action.Report,تبليغ
 Feature.Catalog.Action.Sell,بيع
 Feature.Catalog.Action.ShareVia,شارك عبر...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,جرِّب الآن
 Feature.Catalog.Action.Upgrade,ترقية
 Feature.Catalog.Action.ViewDetailsPage,عرض صفحة التفاصيل
 Feature.Catalog.Action.ViewExperienceDetails,عرض تفاصيل التجربة
@@ -4507,6 +4538,7 @@ Feature.Schools.Action.TermsOfService,
 Feature.Schools.Body.EnterCode,أرسلت UNiDAYS بريدًا إلكترونيًا يحتوي على كود لمرة واحدة إلى {user_email}. أدخِل الكود أدناه لتأكيد مدرستك.
 Feature.Schools.Body.UnidaysShare,لن يكون عنوان بريدك الإلكتروني مرئيًا للآخرين.
 Feature.Schools.Body.UnidaysTerms,"نتعاون مع UNiDAYS للتحقق من عنوان بريدك الإلكتروني المدرسي. بالضغط على ""متابعة""، فإنك توافق على شروط الخدمة وسياسة الخصوصية السارية لدى شركة UNiDAYS."
+Feature.Schools.Caption.AlumniGroupOnGraduate,بمجرد تخرجك، ستكون في مجموعة خريجي {school}.
 Feature.Schools.Caption.RemovedOnGraduate,بمجرد تخرجك، ستتم إزالتك من {school}.
 Feature.Schools.Description.CantFindSchoolNotify,سنُعلمك عندما تنضم مدرستك إلى منصّة Roblox.
 Feature.Schools.Description.CantVerifySchool,بناءً على المعلومات التي قدمتها، لم نتمكن من التحقق من مدرستك.

@@ -245,13 +245,18 @@ Authentication.CrossDevice.Action.Enter,Nhập
 Authentication.CrossDevice.Action.GoBack,Quay Lại
 Authentication.CrossDevice.Action.Next,Tiếp Theo
 Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Xác nhận trên thiết bị đã đăng nhập để tiếp tục.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Trên thiết bị đã đăng nhập, hãy quét mã QR hoặc mở <b>Thêm > Đăng nhập nhanh</b> rồi nhập mã bên dưới."
+Authentication.CrossDevice.Description.SigningInAs,Đang đăng nhập dưới tên {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,sau đó nhập mã này
 Authentication.CrossDevice.GoToInstruction,"Trên máy tính hoặc điện thoại của bạn, đi đến:"
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Đăng nhập vào một Thiết Bị khác
 Authentication.CrossDevice.Heading.LoginCode,Mã Đăng Nhập Nhanh
 Authentication.CrossDevice.Heading.LoginWarning,"ĐỂ ĐĂNG NHẬP, CHẮC CHẮN RẰNG BẠN:"
 Authentication.CrossDevice.Heading.QuickLogin,Đăng Nhập Nhanh
+Authentication.CrossDevice.Heading.SignInWithQrCode,Đăng nhập bằng mã QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Đăng nhập trên thiết bị khác
+Authentication.CrossDevice.Heading.WaitingForConfirmation,Đang chờ xác nhận
 Authentication.CrossDevice.Heading.Warning,CẢNH BÁO!
 Authentication.CrossDevice.Label.CodeHeader,Tùy Chọn 2
 Authentication.CrossDevice.Label.CodeNotVerified,Mã Đăng Nhập Nhanh chưa được xác minh.
@@ -308,6 +313,7 @@ Authentication.Login.Action.SendCodeSentenceCase,Gửi mã
 Authentication.Login.Action.SendVerificationEmail,Gửi email xác minh
 Authentication.Login.Action.SignIn,Đăng nhập
 Authentication.Login.Action.SignInSentenceCase,
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Sử dụng mã xác nhận
 Authentication.Login.Action.WeChatLogin,Đăng nhập bằng WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
@@ -320,6 +326,7 @@ Authentication.Login.Description.PasskeyDescription,"Tài khoản của bạn c�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Chúng tôi không thể xác định thiết bị của bạn có hỗ trợ mã xác nhận hay không. Hãy thử lại hoặc chạm vào ""Lỗi Đăng Nhập"" để khôi phục tài khoản của bạn bằng email hoặc số điện thoại."
 Authentication.Login.Description.PasskeyMobileOnly,Mã xác nhận chỉ dùng được trên thiết bị di động. Vui lòng chọn cách đăng nhập khác.
 Authentication.Login.Description.SigningInWith,Đăng nhập bằng <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Nếu tài khoản Roblox tồn tại, bạn sẽ nhận được mã xác minh tại địa chỉ {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
@@ -330,7 +337,9 @@ Authentication.Login.Heading.LoginRoblox,Đăng nhập vào Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Đăng nhập vào tài khoản hiện có
 Authentication.Login.Heading.NewAppAvailable,Tải ứng dụng Roblox mới
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Đăng nhập bằng cách khác
 Authentication.Login.Heading.SignInToRoblox,
+Authentication.Login.Heading.SignInWithRoblox,Đăng nhập bằng Roblox
 Authentication.Login.Label.AccountSelectorTitle,Chọn tài khoản để đăng nhập
 Authentication.Login.Label.AgedUpUsername,Thêm một @ten_nguoi_dung độc nhất
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Rất tiếc, tiến trình kết nối với máy chủ của chúng tôi đã xảy ra vấn đề.
@@ -344,6 +353,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Rất tiếc, tiến trìn
 Vui lòng chờ và thử lại."
 Authentication.Login.Label.ConnectionError.Title,Lỗi kết nối
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,Địa chỉ email
 Authentication.Login.Label.EmailNeedsVerification,Email của bạn cần xác minh
 Authentication.Login.Label.EmailOrPhone,Email hoặc điện thoại
 Authentication.Login.Label.EnterCode,
@@ -353,6 +363,7 @@ Authentication.Login.Label.EnterOneTimeCode,Nhập mã một lần
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Hãy nhập mã chúng tôi vừa gửi tới email của bạn
 Authentication.Login.Label.EnterPassword,Nhập mật khẩu
 Authentication.Login.Label.EnterYourPassword,Nhập mật khẩu của bạn
+Authentication.Login.Label.ForgotPassword,Quên mật khẩu?
 Authentication.Login.Label.ForgotYourPassword,Bạn đã quên mật khẩu?
 Authentication.Login.Label.GetOneTimeCode,Nhận mã một lần
 Authentication.Login.Label.LearnMore,Tìm hiểu thêm
@@ -369,6 +380,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Tên người dùng, emai
 Authentication.Login.Label.UsernameEmailPhone,Tên người dùng/Địa chỉ email/Số điện thoại
 Authentication.Login.Label.UsernameOrEmail,Tên tài khoản hoặc email
 Authentication.Login.Label.UsernameOrPhone,Tên tài khoản hoặc điện thoại
+Authentication.Login.Label.VerificationCode,Mã xác minh
 Authentication.Login.Label.WeChatUserCancel,Bạn đã đăng xuất khỏi WeChat. Vui lòng đăng nhập vào WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,Phiên bản WeChat không được hỗ trợ
 Authentication.Login.LinkIllegalChildAccountLinking,Không thể liên kết tài khoản Roblox này với tài khoản Xbox của trẻ em. Vui lòng thử dùng một tài khoản khác hoặc kiểm tra tùy chọn cài đặt của bạn.
@@ -1636,12 +1648,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.UpdateMakeupLook,Cập nhật kiểu trang điểm
 Feature.Avatar.Action.Zoom,Thu Phóng
 Feature.Avatar.AvatarWidgetTitle,Khám phá phong cách
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Sản phẩm sáng tạo của bạn đã sẵn sàng để sử dụng.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Hình nền này được tạo bằng AI. Khi đăng tải, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn và các vật phẩm đã đăng sẽ không thể chỉnh sửa."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Vật phẩm không đáp ứng Tiêu chuẩn cộng đồng
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Hình nền này không tuân thủ Tiêu chuẩn cộng đồng Roblox nên đã không được thêm vào kho của bạn. Hãy thử tạo hình nền mới.
 Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Mô tả
+Feature.Avatar.BackgroundGeneration.Label.Name,Tên
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Title,Tạo hình nền
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Đăng vào kho
 Feature.Avatar.Backgrounds.Title,Hình nền
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Không thể điều chỉnh kiểu thân này.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Chuyển về màu thân mặc định ban đầu
@@ -1825,7 +1851,7 @@ Feature.Avatar.Label.ModerationFailed,Kiểm duyệt không thành công
 Feature.Avatar.Label.Mood,Tâm Trạng
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,Những tài sản này sẽ không còn có sẵn trong bộ sưu tập này:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Các Avatar đã đăng sẽ được hiển thị công khai trên Chợ
-Feature.Avatar.Label.Name,Tên
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Cổ
 Feature.Avatar.Label.Newest,Mới nhất
 Feature.Avatar.Label.NoExpiredItems,Không có {itemType} đã hết hạn
@@ -2155,11 +2181,13 @@ Feature.Build.Action.ViewUsage,Xem mức sử dụng
 Feature.Build.Content.NewGame,Trò chơi mới
 Feature.Build.Description.ArchiveRemoval,"Nếu bạn lưu trữ trò chơi này, trò chơi sẽ bị gỡ khỏi Build. Bạn vẫn có thể truy cập và khôi phục trò chơi từ Trung tâm nhà sáng tạo hoặc Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Dùng Robux của bạn để tự động mua thêm lượt sử dụng Build trong quá trình sáng tạo. Bạn có thể cài đặt hạn mức chi tiêu hằng ngày bất cứ lúc nào.
+Feature.Build.Description.BoostAudienceForPlays,Thu hút thêm đối tượng để tăng số lượt chơi.
 Feature.Build.Description.BoostGameAudience,Giúp trò chơi tiếp cận được nhiều đối tượng hơn
 Feature.Build.Description.BuildIdeaGame,Biến ý tưởng thành trò chơi
 Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi phản hồi cho bạn.
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
+Feature.Build.Description.CampaignRunDates,Chiến dịch của bạn sẽ diễn ra từ {startDate} – {endDate}
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để giúp bạn chơi thử.
 Feature.Build.Description.EnableBuildNotifs,Bật thông báo trong phần cài đặt của thiết bị để nhận thông tin cập nhật từ Build.
 Feature.Build.Description.FriendsLinkOnly,Chỉ bạn bè của bạn mới có thể truy cập đường liên kết này. Hãy thay đổi cài đặt Đối tượng của trò chơi nếu bạn muốn có nhiều người chơi hơn.
@@ -2188,6 +2216,7 @@ Feature.Build.Label.Access,Quyền truy cập
 Feature.Build.Label.AdditionalUsage,Lượt sử dụng Build bổ sung
 Feature.Build.Label.AdditionalUsed,Đã dùng {USED}/{LIMIT}
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
 Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
@@ -2198,7 +2227,7 @@ Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
-Feature.Build.Label.Description,Mô tả
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,Hoàn tất
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Lượt sử dụng Build miễn phí
@@ -2372,6 +2401,7 @@ Feature.Build.Message.WhatToCreate,Hôm nay bạn muốn tạo nội dung gì?
 Feature.Build.Message.WorkedMinutesSeconds,Đã xử lý trong {MINUTES} phút {REM_SECONDS} giây
 Feature.Build.Message.WorkedSeconds,Đã xử lý trong {SECONDS} giây
 Feature.Build.Message.WorkingOnTasks,Đang thực hiện nhiệm vụ bạn giao
+Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
 Feature.Build.Title.Audience,Đối tượng
@@ -2443,6 +2473,7 @@ Feature.Catalog.Action.Report,Báo Cáo
 Feature.Catalog.Action.Sell,Bán
 Feature.Catalog.Action.ShareVia,Chia sẻ qua...
 Feature.Catalog.Action.Submit,Nộp
+Feature.Catalog.Action.Try,Dùng thử
 Feature.Catalog.Action.Upgrade,Nâng Cấp
 Feature.Catalog.Action.ViewDetailsPage,Xem Trang Chi Tiết
 Feature.Catalog.Action.ViewExperienceDetails,Xem Chi Tiết Trải Nghiệm
@@ -4527,6 +4558,7 @@ Feature.Schools.Action.TermsOfService,
 Feature.Schools.Body.EnterCode,UNiDAYS đã gửi email chứa mã dùng một lần dành cho bạn đến {user_email}. Hãy nhập mã đó vào phần bên dưới để xác nhận trường học của bạn.
 Feature.Schools.Body.UnidaysShare,Người khác sẽ không nhìn thấy địa chỉ email của bạn.
 Feature.Schools.Body.UnidaysTerms,"Chúng tôi hợp tác với UNiDAYS để xác minh địa chỉ email do trường bạn học cấp. Khi nhấp chuột vào ""Tiếp tục"", bạn đồng ý với điều khoản dịch vụ và chính sách quyền riêng tư của UNiDAYS."
+Feature.Schools.Caption.AlumniGroupOnGraduate,"Sau khi tốt nghiệp, bạn sẽ ở trong nhóm cựu học sinh {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Sau khi tốt nghiệp, bạn sẽ bị xóa khỏi {school}."
 Feature.Schools.Description.CantFindSchoolNotify,Chúng tôi sẽ thông báo cho bạn khi trường học của bạn có trên Roblox.
 Feature.Schools.Description.CantVerifySchool,"Dựa trên thông tin bạn đã cung cấp, chúng tôi không xác minh được trường học của bạn."

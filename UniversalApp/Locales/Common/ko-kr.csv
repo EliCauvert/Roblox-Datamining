@@ -246,13 +246,18 @@ Authentication.CrossDevice.Action.Enter,입력
 Authentication.CrossDevice.Action.GoBack,돌아가기
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,계속하려면 로그인한 기기에서 확인하세요.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,로그인된 기기에서 QR 코드를 스캔하거나 <b>더 보기 > 빠른 로그인</b>으로 이동하여 아래 코드를 입력하세요.
+Authentication.CrossDevice.Description.SigningInAs,{identifier}(으)로 로그인
 Authentication.CrossDevice.EnterCodeInstruction,그런 다음 이 코드를 입력하세요
 Authentication.CrossDevice.GoToInstruction,컴퓨터나 휴대폰에서 다음으로 이동하세요.
 Authentication.CrossDevice.Heading.LoginAnotherDevice,다른 기기에 로그인하기
 Authentication.CrossDevice.Heading.LoginCode,빠른 로그인 코드
 Authentication.CrossDevice.Heading.LoginWarning,로그인하려면 다음 사항을 따르세요.
 Authentication.CrossDevice.Heading.QuickLogin,빠른 로그인
+Authentication.CrossDevice.Heading.SignInWithQrCode,QR 코드로 로그인
 Authentication.CrossDevice.Heading.SigninAnotherDevice,다른 기기에서 로그인
+Authentication.CrossDevice.Heading.WaitingForConfirmation,확인을 기다리는 중
 Authentication.CrossDevice.Heading.Warning,주의!
 Authentication.CrossDevice.Label.CodeHeader,옵션 2
 Authentication.CrossDevice.Label.CodeNotVerified,빠른 로그인 코드가 인증되지 않았습니다.
@@ -309,6 +314,7 @@ Authentication.Login.Action.SendCodeSentenceCase,코드 전송
 Authentication.Login.Action.SendVerificationEmail,인증 이메일 보내기
 Authentication.Login.Action.SignIn,로그인
 Authentication.Login.Action.SignInSentenceCase,
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,패스키 사용
 Authentication.Login.Action.WeChatLogin,WeChat 로그인
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
@@ -321,6 +327,7 @@ Authentication.Login.Description.PasskeyDescription,"이 계정은 비밀번호�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,내 기기가 패스키를 지원하는지 확인할 수 없습니다. 다시 시도하거나 '로그인할 수 없음'을 탭하여 이메일 또는 전화번호를 통해 계정을 복구하세요.
 Authentication.Login.Description.PasskeyMobileOnly,패스키는 모바일에서만 사용할 수 있습니다. 다른 방법으로 로그인하세요.
 Authentication.Login.Description.SigningInWith,로그인 방법: <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,Roblox 계정이 있는 경우 이메일 주소({email})로 인증 코드가 전송됩니다.
 Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
 Authentication.Login.Error.PlatformAccountConnectionFailure,플랫폼 계정을 인증할 수 없습니다. 나중에 다시 시도하세요.
@@ -331,7 +338,9 @@ Authentication.Login.Heading.LoginRoblox,Roblox에 로그인
 Authentication.Login.Heading.LoginRobloxAccountSwitching,
 Authentication.Login.Heading.NewAppAvailable,새로운 Roblox 앱 다운로드
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,다른 방법으로 로그인
 Authentication.Login.Heading.SignInToRoblox,
+Authentication.Login.Heading.SignInWithRoblox,Roblox로 로그인
 Authentication.Login.Label.AccountSelectorTitle,로그인할 계정 선택
 Authentication.Login.Label.AgedUpUsername,고유한 @사용자 이름을 추가하세요
 Authentication.Login.Label.ConnectionError.RetryDisabled,"죄송합니다. 서버에 접속하는 동안 문제가 발생했습니다.
@@ -345,6 +354,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에
 잠시 기다렸다가 다시 시도하세요."
 Authentication.Login.Label.ConnectionError.Title,연결 오류
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,이메일 주소
 Authentication.Login.Label.EmailNeedsVerification,이메일 인증이 필요합니다
 Authentication.Login.Label.EmailOrPhone,이메일 또는 전화번호
 Authentication.Login.Label.EnterCode,
@@ -354,7 +364,8 @@ Authentication.Login.Label.EnterOneTimeCode,일회용 코드 입력
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,방금 이메일로 전송된 코드를 입력하세요
 Authentication.Login.Label.EnterPassword,비밀번호를 입력하세요.
 Authentication.Login.Label.EnterYourPassword,비밀번호를 입력하세요
-Authentication.Login.Label.ForgotYourPassword,비밀번호를 잊으셨나요?
+Authentication.Login.Label.ForgotPassword,비밀번호를 잊으셨나요?
+Authentication.Login.Label.ForgotYourPassword,
 Authentication.Login.Label.GetOneTimeCode,일회용 코드 받기
 Authentication.Login.Label.LearnMore,더 알아보기
 Authentication.Login.Label.LinkAccountWarning,"Roblox 계정이 {platform}에서 사용하는 계정에 연결되며, 다음 번 참가 시 자동으로 로그인됩니다! 언제든지 설정 화면에서 연결을 해제할 수 있습니다. 새 계정에 연결하기 전에 잠시 지연이 발생할 수 있습니다."
@@ -370,6 +381,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"사용자 이름, 이메�
 Authentication.Login.Label.UsernameEmailPhone,사용자 이름/이메일/전화번호
 Authentication.Login.Label.UsernameOrEmail,사용자 이름 또는 이메일
 Authentication.Login.Label.UsernameOrPhone,사용자 이름 또는 전화번호
+Authentication.Login.Label.VerificationCode,인증 코드
 Authentication.Login.Label.WeChatUserCancel,WeChat에서 로그아웃하셨어요. WeChat에 다시 로그인하세요.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat 버전이 지원되지 않습니다
 Authentication.Login.LinkIllegalChildAccountLinking,이 Roblox 계정을 Xbox 자녀 계정에 연결할 수 없습니다. 다른 계정을 사용하거나 설정을 확인하세요.
@@ -501,7 +513,7 @@ Authentication.SignUp.Label.BirthdayWithAge,생년월일({yearsOld}세)
 Authentication.SignUp.Label.ConfirmBirthday,생년월일 확인
 Authentication.SignUp.Label.Continue,
 Authentication.SignUp.Label.Day,일
-Authentication.SignUp.Label.EmailAddress,이메일 주소
+Authentication.SignUp.Label.EmailAddress,
 Authentication.SignUp.Label.EnterYourEmail,
 Authentication.SignUp.Label.EnterYourParentsEmail,보호자 이메일 입력
 Authentication.SignUp.Label.Error.MinimumAge5,새 계정은 5세 이상이어야 합니다
@@ -1637,12 +1649,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,기존 룩 업데이트
 Feature.Avatar.Action.UpdateMakeupLook,룩 업데이트
 Feature.Avatar.Action.Zoom,줌
 Feature.Avatar.AvatarWidgetTitle,스타일 탐색
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,작품을 사용할 준비가 되었습니다.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경은 AI로 생성되었습니다. 게시하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거치며, 게시된 아이템은 수정할 수 없습니다."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,아이템이 커뮤니티 규정을 충족하지 않습니다
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{max}개 중 {count}개
+Feature.Avatar.BackgroundGeneration.Label.Description,설명
+Feature.Avatar.BackgroundGeneration.Label.Name,이름
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세요...
 Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
 Feature.Avatar.BackgroundGeneration.Title,배경 만들기
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,인벤토리에 게시
 Feature.Avatar.Backgrounds.Title,배경
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,이 신체 스타일은 조정할 수 없습니다.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,원래 신체의 색상으로 설정
@@ -1826,7 +1852,7 @@ Feature.Avatar.Label.ModerationFailed,규정에 맞지 않습니다
 Feature.Avatar.Label.Mood,기분
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,이 애셋은 이 컬렉션에서 더 이상 사용할 수 없게 됩니다:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,게시된 아바타는 마켓플레이스에 공개됩니다
-Feature.Avatar.Label.Name,이름
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,
 Feature.Avatar.Label.Newest,최신
 Feature.Avatar.Label.NoExpiredItems,만료된 {itemType} 없음
@@ -2156,11 +2182,13 @@ Feature.Build.Action.ViewUsage,사용량 보기
 Feature.Build.Content.NewGame,새 게임
 Feature.Build.Description.ArchiveRemoval,이 게임을 보관하면 해당 게임이 Build에서 삭제됩니다. 크리에이터 허브 또는 Roblox Studio에서 계속 액세스하고 복원할 수 있습니다.
 Feature.Build.Description.AutoBuyUsage,Robux를 사용하여 제작할 때 추가 Build 사용량을 자동으로 구매하세요. 언제든지 일일 지출 한도를 설정할 수 있습니다.
+Feature.Build.Description.BoostAudienceForPlays,오디언스를 확대하여 더 많은 플레이를 확보하세요.
 Feature.Build.Description.BoostGameAudience,게임의 오디언스 확대
 Feature.Build.Description.BuildIdeaGame,나만의 아이디어로 게임을 만들어 보세요
 Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알림을 받으세요.
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
+Feature.Build.Description.CampaignRunDates,캠페인은 {startDate}~{endDate} 에 실행됩니다.
 Feature.Build.Description.ChoosePlaytesters,플레이테스트를 도와줄 친구를 선택하세요.
 Feature.Build.Description.EnableBuildNotifs,Build에서 보내는 최신 소식을 받으려면 기기 설정에서 알림을 켜세요.
 Feature.Build.Description.FriendsLinkOnly,친구만 이 링크에 액세스할 수 있습니다. 더 많은 사람이 플레이하기를 원하시면 게임의 대상 설정을 변경하세요.
@@ -2189,6 +2217,7 @@ Feature.Build.Label.Access,액세스
 Feature.Build.Label.AdditionalUsage,추가 Build 사용량
 Feature.Build.Label.AdditionalUsed,{LIMIT} 중 {USED} 사용됨
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
 Feature.Build.Label.BackToBuild,빌드로 돌아가기
@@ -2199,7 +2228,7 @@ Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
-Feature.Build.Label.Description,설명
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,무료 Build 사용량
@@ -2373,6 +2402,7 @@ Feature.Build.Message.WhatToCreate,오늘 무엇을 만들어 보시겠어요?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES}분 {REM_SECONDS}초 동안 작업함
 Feature.Build.Message.WorkedSeconds,{SECONDS}초 동안 작업함
 Feature.Build.Message.WorkingOnTasks,작업 진행 중
+Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
 Feature.Build.Title.Audience,오디언스
@@ -2444,6 +2474,7 @@ Feature.Catalog.Action.Report,신고하기
 Feature.Catalog.Action.Sell,판매
 Feature.Catalog.Action.ShareVia,공유...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,업그레이드
 Feature.Catalog.Action.ViewDetailsPage,세부 정보 페이지 보기
 Feature.Catalog.Action.ViewExperienceDetails,체험 세부 정보 보기
@@ -4530,6 +4561,7 @@ Feature.Schools.Action.TermsOfService,
 Feature.Schools.Body.EnterCode,UNiDAYS에서 일회용 코드가 포함된 이메일을 {user_email} 주소로 전송했습니다. 학교를 확인하려면 아래에 해당 코드를 입력하세요.
 Feature.Schools.Body.UnidaysShare,이메일 주소는 다른 사람에게 표시되지 않습니다.
 Feature.Schools.Body.UnidaysTerms,학교 이메일 주소를 확인하기 위해 UNiDAYS와 파트너십을 맺고 있습니다. '계속'을 클릭하면 UNiDAYS의 서비스 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
+Feature.Schools.Caption.AlumniGroupOnGraduate,졸업하면 {school} 동문 그룹에 속하게 됩니다.
 Feature.Schools.Caption.RemovedOnGraduate,졸업하면 {school}에서 제거됩니다.
 Feature.Schools.Description.CantFindSchoolNotify,내 학교가 Roblox에 등록되면 알려드리겠습니다.
 Feature.Schools.Description.CantVerifySchool,제공해주신 정보로는 학교를 확인할 수 없습니다.
@@ -4915,7 +4947,7 @@ Feature.VerificationUpsell.Heading.AddEmail,먼저 계정을 인증하세요
 Feature.VerificationUpsell.Heading.FinishAccountSetup,계정 설정 완료
 Feature.VerificationUpsell.Heading.PhoneNumberVerified,휴대폰 번호 인증 완료!
 Feature.VerificationUpsell.Heading.TryVoiceChat,음성 채팅 이용해 보기
-Feature.VerificationUpsell.Heading.VerificationCode,인증 코드
+Feature.VerificationUpsell.Heading.VerificationCode,
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,인증 완료!
 Feature.VerificationUpsell.Heading.VerifyEmail,
 Feature.VerificationUpsell.Heading.VerifyOnLogout,계정 잠김을 방지하세요!

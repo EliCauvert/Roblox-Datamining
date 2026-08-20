@@ -759,6 +759,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"A dimensão da malha de
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"A dimensão da malha de {partName} no eixo {axis}, de '{currentSize}' rebites, é menor que a dimensão mínima permitida para uma peça individual, de '{minSize}' rebites. Aumente a escala da malha."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,O anexo {attName} deve existir exatamente uma vez dentro dos descendentes de {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (ou seus descendentes) contêm Atributos. Você precisa remover os Atributos do seguinte: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' tem propriedades inválidas: {ProblematicProperties}. Um limite de bytes mostrado foi excedido (um limite de 0 significa que a propriedade deve estar vazia); qualquer outra propriedade contém valores NaN/Inf ou excede o limite de tamanho padrão.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Para fazer upload de um ativo no Roblox, você deve selecionar exatamente 1 instância e o tipo de upload associado."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,A instância {ProblematicDescendantPath} não deve ter marcadores.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Segunda string de erro de teste usada para verificar o fluxo completo de sincronização de tradução Hub-first.
@@ -2125,7 +2126,9 @@ Feature.Build.Action.Buy,Comprar
 Feature.Build.Action.BuyRobux,Comprar Robux
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Copiar texto
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,Não perguntar novamente
 Feature.Build.Action.HideAutosaved,Ocultar versões salvas automaticamente
 Feature.Build.Action.ManageLimit,Gerenciar limite
 Feature.Build.Action.Next,Avançar
@@ -2152,6 +2155,7 @@ Feature.Build.Action.ViewUsage,Ver uso
 Feature.Build.Content.NewGame,Novo jogo
 Feature.Build.Description.ArchiveRemoval,"Se você arquivar este jogo, ele será removido da aba Criar. Você ainda poderá acessá-lo e restaurá-lo no Salão dos Criadores ou no Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Use seu Robux para comprar mais limite para função Criar automaticamente enquanto cria. Você pode definir um limite de gastos diários a qualquer momento.
+Feature.Build.Description.BoostGameAudience,Aumente o público do seu jogo
 Feature.Build.Description.BuildIdeaGame,Transforme suas ideias em um jogo
 Feature.Build.Description.BuildReplyNotif,Receba uma notificação quando a função Criar tiver uma resposta para você.
 Feature.Build.Description.BuyRobuxToCreate,"Compre mais Robux para continuar criando ou aguarde até amanhã, quando o seu limite gratuito da função Criar será restabelecido."
@@ -2388,6 +2392,7 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,Não há mais Robux para usar a função Criar
 Feature.Build.Title.Playtesters,Testadores de jogos
 Feature.Build.Title.PlaytestersOnlyPlay,Apenas testadores podem jogar
+Feature.Build.Title.PromoteGameFree,Promova seu jogo de graça
 Feature.Build.Title.PushNotifications,Notificações push
 Feature.Build.Title.RevertLastChange,Reverter a última alteração?
 Feature.Build.Title.Tasks,Tarefas
@@ -3738,6 +3743,7 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimizar
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,

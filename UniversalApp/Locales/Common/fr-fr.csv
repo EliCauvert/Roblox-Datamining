@@ -245,13 +245,18 @@ Authentication.CrossDevice.Action.Enter,Entrer
 Authentication.CrossDevice.Action.GoBack,Retour
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Confirme sur ton appareil connecté pour continuer.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Sur ton appareil déjà connecté, scanne le code QR ou accède à <b>Plus > Connexion rapide</b>, puis saisis le code ci-dessous."
+Authentication.CrossDevice.Description.SigningInAs,Connexion en tant que {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,puis entre ce code
 Authentication.CrossDevice.GoToInstruction,"Sur ton ordinateur ou ton téléphone, accède à :"
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Connexion dans un autre appareil
 Authentication.CrossDevice.Heading.LoginCode,Code de connexion rapide
 Authentication.CrossDevice.Heading.LoginWarning,"POUR TE CONNECTER, ASSURE-TOI QUE TU :"
 Authentication.CrossDevice.Heading.QuickLogin,Connexion rapide
+Authentication.CrossDevice.Heading.SignInWithQrCode,Se connecter avec un code QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Connexion depuis un nouvel appareil
+Authentication.CrossDevice.Heading.WaitingForConfirmation,En attente de confirmation
 Authentication.CrossDevice.Heading.Warning,AVERTISSEMENT !
 Authentication.CrossDevice.Label.CodeHeader,Option 2
 Authentication.CrossDevice.Label.CodeNotVerified,Le code de connexion rapide n'a pas été vérifié.
@@ -308,6 +313,7 @@ Authentication.Login.Action.SendCodeSentenceCase,Envoyer le code
 Authentication.Login.Action.SendVerificationEmail,Envoyer l'e-mail de vérification
 Authentication.Login.Action.SignIn,Se connecter
 Authentication.Login.Action.SignInSentenceCase,
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Utiliser le passkey
 Authentication.Login.Action.WeChatLogin,Connexion WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Quitter Roblox pour changer de compte pour {platformAccountName}
@@ -320,6 +326,7 @@ Authentication.Login.Description.PasskeyDescription,"Ton compte dispose de passk
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Nous ne pouvons pas déterminer si ton appareil prend en charge le passkey. Essaie à nouveau, ou appuie sur « Problème de connexion » pour récupérer ton compte avec un email ou un numéro de téléphone."
 Authentication.Login.Description.PasskeyMobileOnly,Les passkeys sont uniquement disponibles sur mobile. Choisis une autre méthode de connexion.
 Authentication.Login.Description.SigningInWith,Connexion avec <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Si tu as déjà un compte Roblox, un code de vérification te sera envoyé à l'adresse {email} "
 Authentication.Login.Error.PasskeyOnlyAccount,Ton compte n'a qu'un passkey configuré pour te connecter. Essaie de te connecter avec ton mot de passe ou de récupérer ton compte.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Impossible de vérifier le compte de la plateforme. Réessayer plus tard.
@@ -330,7 +337,9 @@ Authentication.Login.Heading.LoginRoblox,Connexion à Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Se connecter au compte existant
 Authentication.Login.Heading.NewAppAvailable,Télécharge la nouvelle application Roblox
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Se connecter d'une autre manière
 Authentication.Login.Heading.SignInToRoblox,Connecte-toi à Roblox
+Authentication.Login.Heading.SignInWithRoblox,Se connecter avec Roblox
 Authentication.Login.Label.AccountSelectorTitle,Sélectionner le compte pour te connecter
 Authentication.Login.Label.AgedUpUsername,Ajouter un @nomdutilisateur unique
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Désolé, il y a un problème pour atteindre nos serveurs.
@@ -344,6 +353,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Désolé, il y a un probl�
 Patienter et réessayer."
 Authentication.Login.Label.ConnectionError.Title,Erreur de connexion
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,Vous devez vérifier votre adresse e-mail
 Authentication.Login.Label.EmailOrPhone,E-mail ou téléphone
 Authentication.Login.Label.EnterCode,Saisis ton code ici
@@ -353,6 +363,7 @@ Authentication.Login.Label.EnterOneTimeCode,Entrer le code à usage unique
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Saisir le code que nous venons juste de t'envoyer par email
 Authentication.Login.Label.EnterPassword,Saisis ton mot de passe
 Authentication.Login.Label.EnterYourPassword,Entrer ton mot de passe
+Authentication.Login.Label.ForgotPassword,Mot de passe oublié ?
 Authentication.Login.Label.ForgotYourPassword,Mot de passe oublié ?
 Authentication.Login.Label.GetOneTimeCode,Obtenir un code unique
 Authentication.Login.Label.LearnMore,En savoir plus
@@ -369,6 +380,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Nom d'utilisateur, e-mail
 Authentication.Login.Label.UsernameEmailPhone,Identifiant/E-mail/Téléphone
 Authentication.Login.Label.UsernameOrEmail,Nom d'utilisateur ou e-mail
 Authentication.Login.Label.UsernameOrPhone,Nom d'utilisateur ou téléphone
+Authentication.Login.Label.VerificationCode,Code de vérification
 Authentication.Login.Label.WeChatUserCancel,Vous n'êtes pas connecté(e) à WeChat. Veuillez vous connecter.
 Authentication.Login.Label.WeChatVersionNotSupported,Version de WeChat non prise en charge
 Authentication.Login.LinkIllegalChildAccountLinking,Ce compte Roblox n'a pas pu être lié à un compte enfant Xbox. Veuillez essayer un autre compte ou vérifier vos paramètres.
@@ -1636,12 +1648,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Mettre à jour le look existant
 Feature.Avatar.Action.UpdateMakeupLook,Mettre à jour le look
 Feature.Avatar.Action.Zoom,Zoomer
 Feature.Avatar.AvatarWidgetTitle,Explorer les styles
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,D'accord
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publier
+Feature.Avatar.BackgroundGeneration.Action.View,Voir
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Ta création est prête à l'emploi.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Cet arrière-plan a été généré avec l'IA. En le publiant, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire et les items publiés ne pourront plus être modifiés."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,L'item n'est pas conforme aux Normes de la communauté
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Cette invite ne respecte pas nos directives. Rédiges-en une autre.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Cet arrière-plan n'est pas conforme aux Normes de la communauté Roblox et n'a donc pas été ajouté à ton inventaire. Essaie d'en générer un nouveau.
 Feature.Avatar.BackgroundGeneration.Error.System,Une erreur s'est produite lors de la génération de ton arrière-plan. Réessaie.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Description
+Feature.Avatar.BackgroundGeneration.Label.Name,Nom
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Décris ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Génération de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Préparation de ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Title,Créer un arrière-plan
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publier dans l'inventaire
 Feature.Avatar.Backgrounds.Title,Arrière-plans
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,L'ajustement n'est pas disponible pour ce style de corps.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Couleurs du corps d'origine par défaut
@@ -1825,7 +1851,7 @@ Feature.Avatar.Label.ModerationFailed,La modération a échoué
 Feature.Avatar.Label.Mood,Mood
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,Ces actifs ne seront plus disponibles dans cette collection :
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Les avatars publiés seront publics sur le Marketplace
-Feature.Avatar.Label.Name,Nom
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Cou
 Feature.Avatar.Label.Newest,Plus récent
 Feature.Avatar.Label.NoExpiredItems,Aucun item {itemType} expiré
@@ -2138,7 +2164,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Ouvrir les paramètres
 Feature.Build.Action.Playtest,Test de jeu
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publier
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publier la dernière version
 Feature.Build.Action.Restore,Restaurer
 Feature.Build.Action.Revert,Rétablir
@@ -2150,16 +2176,18 @@ Feature.Build.Action.ShareLink,Partager le lien
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Mettre à jour la classification
 Feature.Build.Action.UpdateWithChanges,Mettre à jour avec les modifications
-Feature.Build.Action.View,Voir
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Voir l'utilisation
 Feature.Build.Content.NewGame,Nouveau jeu
 Feature.Build.Description.ArchiveRemoval,"Si tu archives ce jeu, il sera supprimé dans Construire. Tu peux toujours y accéder et le restaurer depuis le Hub Création ou Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Utilise tes Robux pour acheter automatiquement des capacités d'utilisation supplémentaires de Construire au fur et à mesure que tu crées. Tu peux définir une limite de dépenses quotidienne à tout moment.
+Feature.Build.Description.BoostAudienceForPlays,Élargis ton audience pour attirer plus de joueurs.
 Feature.Build.Description.BoostGameAudience,Atteins un plus grand nombre de joueurs
 Feature.Build.Description.BuildIdeaGame,Transforme tes idées en un jeu
 Feature.Build.Description.BuildReplyNotif,Recevoir une notification lorsque tu reçois une réponse dans Construire.
 Feature.Build.Description.BuyRobuxToCreate,"Achète plus de Robux pour continuer à créer, ou attends que ton utilisation gratuite de la fonctionnalité Construire soit réinitialisée demain."
 Feature.Build.Description.BuyUsageOrWait,Achète plus de capacités d'utilisation de Construire avec des Robux ou attends que ta limite quotidienne soit réinitialisée.
+Feature.Build.Description.CampaignRunDates,Ta campagne se déroulera du {startDate} au {endDate} 
 Feature.Build.Description.ChoosePlaytesters,Choisis des amis pour t'aider à tester le jeu.
 Feature.Build.Description.EnableBuildNotifs,Active les notifications dans les paramètres de ton appareil pour recevoir les mises à jour de Construire.
 Feature.Build.Description.FriendsLinkOnly,Seuls tes amis peuvent accéder à ce lien. Modifie le paramètre Public de ton jeu si tu souhaites que davantage de personnes y jouent.
@@ -2188,6 +2216,7 @@ Feature.Build.Label.Access,Accès
 Feature.Build.Label.AdditionalUsage,Utilisation supplémentaire de Construire
 Feature.Build.Label.AdditionalUsed,{USED} sur {LIMIT} utilisé(s)
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,Montant disponible : {AMOUNT}
 Feature.Build.Label.Autosaved,Sauvegarde automatique
 Feature.Build.Label.Available,disponible
 Feature.Build.Label.BackToBuild,Retour à la construction
@@ -2198,7 +2227,7 @@ Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Hub Création
 Feature.Build.Label.Deleted,Supprimé
 Feature.Build.Label.DescribeIdea,Décris une idée
-Feature.Build.Label.Description,Description
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Utilisation gratuite de Construire
@@ -2372,6 +2401,7 @@ Feature.Build.Message.WhatToCreate,Que veux-tu créer aujourd'hui ?
 Feature.Build.Message.WorkedMinutesSeconds,A travaillé pendant {MINUTES} m {REM_SECONDS} s
 Feature.Build.Message.WorkedSeconds,A travaillé pendant {SECONDS} s
 Feature.Build.Message.WorkingOnTasks,Travail en cours sur tes tâches
+Feature.Build.Title.AdCampaignActive,La campagne publicitaire est active
 Feature.Build.Title.AddFriendsToPlaytest,Ajoute des amis pour t'aider à tester le jeu
 Feature.Build.Title.ArchiveThisGame,Archiver ce jeu ?
 Feature.Build.Title.Audience,
@@ -2443,6 +2473,7 @@ Feature.Catalog.Action.Report,Signaler
 Feature.Catalog.Action.Sell,Vendre
 Feature.Catalog.Action.ShareVia,Partager via...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Améliorer
 Feature.Catalog.Action.ViewDetailsPage,Voir la page de détails
 Feature.Catalog.Action.ViewExperienceDetails,Voir les détails de l'expérience
@@ -2774,7 +2805,7 @@ Feature.Catalog.Toast.UnfavoritedLook,Avatar retiré des favoris
 Feature.Catalog.TrustedConnection.Label.Trusted,
 Feature.Chat.Action.Add,
 Feature.Chat.Action.Cancel,
-Feature.Chat.Action.Confirm,D'accord
+Feature.Chat.Action.Confirm,
 Feature.Chat.Action.Continue,
 Feature.Chat.Action.Copy,Copier
 Feature.Chat.Action.Create,
@@ -4527,6 +4558,7 @@ Feature.Schools.Action.TermsOfService,
 Feature.Schools.Body.EnterCode,UNiDAYS a envoyé ton code unique par e-mail à {user_email}. Saisis-le ci-dessous pour confirmer ton établissement.
 Feature.Schools.Body.UnidaysShare,Les autres utilisateurs ne pourront pas voir ton adresse e-mail.
 Feature.Schools.Body.UnidaysTerms,"Nous travaillons en partenariat avec UNiDAYS pour vérifier ton adresse e-mail fournie par ton établissement. En cliquant sur « Continuer », tu acceptes les Conditions d'utilisation et la Politique de confidentialité d'UNiDAYS."
+Feature.Schools.Caption.AlumniGroupOnGraduate,"Une fois ton diplôme en poche, tu feras partie du groupe des anciens élèves de {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Une fois ton diplôme en poche, tu ne feras plus partie de cet établissement ({school})."
 Feature.Schools.Description.CantFindSchoolNotify,Nous te préviendrons lorsque ton école sera sur Roblox.
 Feature.Schools.Description.CantVerifySchool,"Sur la base des informations que tu as fournies, nous n'avons pas pu vérifier ton école."
@@ -4912,7 +4944,7 @@ Feature.VerificationUpsell.Heading.AddEmail,"Premièrement, vérifie ton compte"
 Feature.VerificationUpsell.Heading.FinishAccountSetup,Terminer la configuration du compte
 Feature.VerificationUpsell.Heading.PhoneNumberVerified,Numéro de téléphone vérifié !
 Feature.VerificationUpsell.Heading.TryVoiceChat,Essayer le chat vocal
-Feature.VerificationUpsell.Heading.VerificationCode,Code de vérification
+Feature.VerificationUpsell.Heading.VerificationCode,
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,Vérifié avec succès !
 Feature.VerificationUpsell.Heading.VerifyEmail,Vérifie ton courriel
 Feature.VerificationUpsell.Heading.VerifyOnLogout,Ne perds pas l'accès au compte.
