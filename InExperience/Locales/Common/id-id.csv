@@ -390,6 +390,7 @@ CommonUI.Features.Label.Terms,Ketentuan
 CommonUI.Features.Label.TermsOfUse,Ketentuan Penggunaan
 CommonUI.Features.Label.Thanks,Terima Kasih
 CommonUI.Features.Label.TheHunt,Acara Roblox
+CommonUI.Features.Label.Trades,Penukaran
 CommonUI.Features.Label.Unchecked,Belum diperiksa
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1296,12 +1297,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Update tampilan yang sudah ada
 Feature.Avatar.Action.UpdateMakeupLook,Update tampilan
 Feature.Avatar.Action.Zoom,Memperbesar
 Feature.Avatar.AvatarWidgetTitle,Jelajahi Gaya
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publikasikan
+Feature.Avatar.BackgroundGeneration.Action.View,Lihat
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Kreasimu siap digunakan.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Latar belakang ini dibuat dengan AI. Dengan memublikasikan, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu, dan item yang dipublikasikan tidak dapat diedit."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item tidak memenuhi Standar Komunitas
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Prompt itu tidak mengikuti pedoman kami. Coba deskripsikan sesuatu yang lain.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Latar belakang ini tidak mengikuti Standar Komunitas Roblox, jadi tidak ditambahkan ke inventarismu. Coba buat yang baru."
 Feature.Avatar.BackgroundGeneration.Error.System,Terjadi kesalahan saat membuat latar belakangmu. Coba lagi.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Deskripsikan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Membuat latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Mempersiapkan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Title,Buat Latar Belakang
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publikasikan ke inventaris
 Feature.Avatar.Backgrounds.Title,Latar Belakang
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Penyesuaian tidak tersedia untuk gaya tubuh ini.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Kembali ke warna tubuh asli
@@ -1807,7 +1822,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Buka pengaturan
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publikasikan
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publikasikan yang terbaru
 Feature.Build.Action.Restore,Pulihkan
 Feature.Build.Action.Revert,
@@ -1824,11 +1839,13 @@ Feature.Build.Action.ViewUsage,Lihat penggunaan
 Feature.Build.Content.NewGame,Game baru
 Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Gunakan Robux-mu untuk membeli kuota penggunaan Build tambahan secara otomatis saat kamu berkreasi. Kamu dapat menetapkan batas pemakaian uang harian kapan saja.
+Feature.Build.Description.BoostAudienceForPlays,Jangkau lebih banyak audiens agar game-mu makin ramai.
 Feature.Build.Description.BoostGameAudience,Tambah audiens game-mu
 Feature.Build.Description.BuildIdeaGame,Ubah idemu menjadi game
 Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memiliki balasan untukmu.
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
+Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk membantumu melakukan playtest.
 Feature.Build.Description.EnableBuildNotifs,Aktifkan notifikasi di pengaturan perangkatmu untuk mendapatkan update dari Build.
 Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses link ini. Ubah pengaturan Audiens game-mu jika kamu ingin lebih banyak pengguna memainkannya.
@@ -1857,6 +1874,7 @@ Feature.Build.Label.Access,Akses
 Feature.Build.Label.AdditionalUsage,Kuota penggunaan Build tambahan
 Feature.Build.Label.AdditionalUsed,{USED} dari {LIMIT} digunakan
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
 Feature.Build.Label.BackToBuild,Kembali ke Build
@@ -2041,6 +2059,7 @@ Feature.Build.Message.WhatToCreate,Apa yang ingin kamu buat hari ini?
 Feature.Build.Message.WorkedMinutesSeconds,Bekerja selama {MINUTES}mnt{REM_SECONDS}dtk
 Feature.Build.Message.WorkedSeconds,Bekerja selama {SECONDS}dtk
 Feature.Build.Message.WorkingOnTasks,Mengerjakan tugasmu
+Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
 Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
 Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?
 Feature.Build.Title.Audience,Audiens
@@ -2084,7 +2103,7 @@ Feature.Captures.Action.Save,
 Feature.Captures.Action.SelectAllCaptures,Pilih Semua
 Feature.Captures.Action.Share,
 Feature.Captures.Action.ShareYourCapture,Bagikan media kamu
-Feature.Captures.Action.ViewCapture,Lihat
+Feature.Captures.Action.ViewCapture,
 Feature.Captures.Body.AllowAccessToCaptures,Pengalaman virtual ini perlu melihat dan menggunakan mediamu.
 Feature.Captures.Body.SaveCapturesPrompt,Kamu ingin menyimpan media kamu?
 Feature.Captures.Body.ShareCapturePrompt,Kamu ingin membagikan media kamu?
@@ -2168,6 +2187,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Jual
 Feature.Catalog.Action.ShareVia,Bagikan via...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Upgrade
 Feature.Catalog.Action.ViewDetailsPage,Lihat Halaman Detail
 Feature.Catalog.Action.ViewExperienceDetails,Lihat Detail Pengalaman Virtual
@@ -3296,8 +3316,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba la
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
 Feature.Moments.Label.TextGenerationFilteredBody,"Tidak dapat melakukan pembuatan untuk video yang direkam ini, konten difilter."
 Feature.Moments.Label.TextGenerationFilteredTitle,Pembuatan Difilter
+Feature.Moments.Label.Tone,Gaya
+Feature.Moments.Label.Tone.Cinematic,Sinematik
+Feature.Moments.Label.Tone.Funny,Lucu
+Feature.Moments.Label.Tone.Hype,Seru
+Feature.Moments.Label.Tone.Neutral,Netral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
+Feature.Moments.Title.GenerateTextOptions,Buat Teks
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Laporkan postingan

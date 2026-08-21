@@ -391,6 +391,7 @@ CommonUI.Features.Label.Terms,Terms
 CommonUI.Features.Label.TermsOfUse,Terms of Use
 CommonUI.Features.Label.Thanks,Thanks
 CommonUI.Features.Label.TheHunt,Roblox Events
+CommonUI.Features.Label.Trades,Trades
 CommonUI.Features.Label.Unchecked,Unchecked
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1299,15 +1300,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publish
+Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
 Feature.Avatar.BackgroundGeneration.Action.View,View
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Create backgrounds with Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Your creation is ready to use.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"This background was generated with AI. By publishing, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory, and published items can't be edited."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"This background was generated with AI. By uploading, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory. Uploaded items can't be edited."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Unlock free exclusive backgrounds with Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item didn’t meet Community Standards
 Feature.Avatar.BackgroundGeneration.Error.Moderation,That prompt doesn't follow our guidelines. Try describing something else.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"This background doesn't follow the Roblox Community Standards, so it wasn't added to your inventory. Try generating a new one."
 Feature.Avatar.BackgroundGeneration.Error.System,Something went wrong generating your background. Please try again.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusive with Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
@@ -1315,6 +1321,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background�
 Feature.Avatar.BackgroundGeneration.Title,Create Background
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publish to inventory
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Upload to inventory
 Feature.Avatar.Backgrounds.Title,Backgrounds
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Adjustment is not available for this body style.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Default to original body colors
@@ -2602,6 +2610,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Long press to reply
 Feature.Chat.Label.Members,Members
 Feature.Chat.Label.MessageNotAvailable,This message is not available
 Feature.Chat.Label.MuteInGameChatToastNotifications,Mute in game chat notifications
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Mute in game party notifications
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,No chats found
 Feature.Chat.Label.NoDescriptionYet,No description yet.
@@ -3236,7 +3245,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
-Feature.Moments.Action.GenerateText,Generate
+Feature.Moments.Action.GenerateText,Generate Text
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or violates guidelines
 Feature.Moments.Action.Hide,Hide details
@@ -3318,8 +3327,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Couldn't generate text. Please tr
 Feature.Moments.Label.TextGenerationFailedTitle,Generation Failed
 Feature.Moments.Label.TextGenerationFilteredBody,"Can't perform generation for this captured video, content filtered."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generation Filtered
+Feature.Moments.Label.Tone,Tone
+Feature.Moments.Label.Tone.Cinematic,Cinematic
+Feature.Moments.Label.Tone.Funny,Funny
+Feature.Moments.Label.Tone.Hype,Hype
+Feature.Moments.Label.Tone.Neutral,Neutral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.ReportPost,Report post
@@ -3684,6 +3699,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Your Plus subscription already
 Feature.RobloxSubscription.Body.GenericError,We couldn't complete this right now. Please try again.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,This subscription isn't available to purchase on this device.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age check and get 1 free week of Roblox Plus as our thank you. No payment method is needed to enjoy this free trial.
+Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers

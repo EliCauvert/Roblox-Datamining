@@ -187,6 +187,7 @@ CommonUI.Features.Label.Terms,Условия
 CommonUI.Features.Label.TermsOfUse,Условия использования
 CommonUI.Features.Label.Thanks,Спасибо
 CommonUI.Features.Label.TheHunt,События Roblox
+CommonUI.Features.Label.Trades,Обмен
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.StudioCTA.Tooltip.Body,Скачать Studio бесплатно!
 CommonUI.Features.StudioCTA.Tooltip.Title,Начать создавать в Roblox
@@ -1470,7 +1471,7 @@ Feature.Catalog.Label.TakeOffResaleConfirmation,Действительно сн�
 Feature.Catalog.Label.Tops,Верх
 Feature.Catalog.Label.Torso,
 Feature.Catalog.Label.TotalUnformatted,Всего
-Feature.Catalog.Label.Tradable,Обмен
+Feature.Catalog.Label.Tradable,
 Feature.Catalog.Label.TryOns,Примерка
 Feature.Catalog.Label.TryOnsMultiple,Примерка ({numItems})
 Feature.Catalog.Label.Unlimited,Неограниченные предметы

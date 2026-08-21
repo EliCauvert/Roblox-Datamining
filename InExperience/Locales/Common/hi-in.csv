@@ -372,6 +372,7 @@ CommonUI.Features.Label.Terms,शर्तें
 CommonUI.Features.Label.TermsOfUse,उपयोग की शर्तें
 CommonUI.Features.Label.Thanks,धन्यवाद
 CommonUI.Features.Label.TheHunt,Roblox इवेंट्स
+CommonUI.Features.Label.Trades,ट्रेड
 CommonUI.Features.Label.Unchecked,अनचेक किया गया
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3298,8 +3299,14 @@ Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेन�
 Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
 Feature.Moments.Label.TextGenerationFilteredBody,"कैप्चर किए गए इस वीडियो के लिए टेक्स्ट जेनरेट नहीं हो सकता, कॉन्टेंट फ़िल्टर किया गया."
 Feature.Moments.Label.TextGenerationFilteredTitle,जेनरेशन फ़िल्टर किया गया
+Feature.Moments.Label.Tone,टोन
+Feature.Moments.Label.Tone.Cinematic,सिनेमैटिक
+Feature.Moments.Label.Tone.Funny,मज़ेदार
+Feature.Moments.Label.Tone.Hype,हाइप
+Feature.Moments.Label.Tone.Neutral,न्यूट्रल
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
+Feature.Moments.Title.GenerateTextOptions,टेक्स्ट जेनरेट करें
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें

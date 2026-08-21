@@ -1,13 +1,14 @@
 ﻿local parent = script:FindFirstAncestor("GameDetailRodux").Parent
 local dateTime = require(parent.Time).DateTime
 local getZendeskUrl = require(parent.DiscoveryUtils).getZendeskUrl
+local fFlagLuaAppEdpNonSduiBuildAttribution = require(parent.SharedFlags).FFlagLuaAppEdpNonSduiBuildAttribution
 local t = {
-	new = function() --[[ line: 52 ]]
+	new = function() --[[ line: 53 ]]
 		return {}
 	end
 }
 
-function t.mock(p0, p1, p2) --[[ line: 58 ]]
+function t.mock(p0, p1, p2) --[[ line: 59 ]]
 	-- upvalues: t (ref), dateTime (ref)
 	local var1 = t.new()
 	local var2 = dateTime.new()
@@ -41,8 +42,8 @@ function t.mock(p0, p1, p2) --[[ line: 58 ]]
 	return var1
 end
 
-function t.fromJsonData(p3) --[[ line: 92 ]]
-	-- upvalues: t (ref), getZendeskUrl (ref)
+function t.fromJsonData(p3) --[[ line: 93 ]]
+	-- upvalues: t (ref), getZendeskUrl (ref), fFlagLuaAppEdpNonSduiBuildAttribution (ref)
 	local var4 = t.new()
 	var4.id = tostring(p3.id)
 	var4.rootPlaceId = tostring(p3.rootPlaceId)
@@ -78,6 +79,9 @@ function t.fromJsonData(p3) --[[ line: 92 ]]
 			policyText = p3.refundPolicy.policyText,
 			learnMoreUrl = getZendeskUrl(p3.refundPolicy.learnMoreBaseUrl, p3.refundPolicy.locale, p3.refundPolicy.articleId)
 		}
+	end
+	if fFlagLuaAppEdpNonSduiBuildAttribution then
+		var4.creationSource = p3.creationSource
 	end
 	return var4
 end

@@ -373,6 +373,7 @@ CommonUI.Features.Label.Terms,条款
 CommonUI.Features.Label.TermsOfUse,使用条款
 CommonUI.Features.Label.Thanks,谢谢
 CommonUI.Features.Label.TheHunt,Roblox 活动
+CommonUI.Features.Label.Trades,交易
 CommonUI.Features.Label.Unchecked,未验证
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3295,8 +3296,14 @@ Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
 Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
+Feature.Moments.Label.Tone,语气
+Feature.Moments.Label.Tone.Cinematic,电影感
+Feature.Moments.Label.Tone.Funny,搞笑
+Feature.Moments.Label.Tone.Hype,活力
+Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
+Feature.Moments.Title.GenerateTextOptions,生成文本
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子

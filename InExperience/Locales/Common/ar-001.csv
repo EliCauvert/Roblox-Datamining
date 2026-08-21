@@ -373,6 +373,7 @@ CommonUI.Features.Label.Terms,الشروط
 CommonUI.Features.Label.TermsOfUse,شروط الاستخدام
 CommonUI.Features.Label.Thanks,شكرًا
 CommonUI.Features.Label.TheHunt,أحداث Roblox
+CommonUI.Features.Label.Trades,مهن
 CommonUI.Features.Label.Unchecked,لم يتم التحقُّق
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3297,8 +3298,14 @@ Feature.Moments.Label.TextGenerationFailedBody,تعذّر إنشاء النص. �
 Feature.Moments.Label.TextGenerationFailedTitle,تعذَّر الإنشاء
 Feature.Moments.Label.TextGenerationFilteredBody,تعذَّر إجراء الإنشاء لهذا الفيديو الذي تم التقاطه، وتمت فلترة المحتوى.
 Feature.Moments.Label.TextGenerationFilteredTitle,تمت فلترة الإنشاء
+Feature.Moments.Label.Tone,النبرة
+Feature.Moments.Label.Tone.Cinematic,سينمائي
+Feature.Moments.Label.Tone.Funny,مضحك
+Feature.Moments.Label.Tone.Hype,حماسي
+Feature.Moments.Label.Tone.Neutral,محايد
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
+Feature.Moments.Title.GenerateTextOptions,إنشاء نص
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور

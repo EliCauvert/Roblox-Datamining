@@ -47,43 +47,42 @@ local var17 = false
 local var18 = 0
 
 local function closeContextMenu() --[[ line: 88 ]]
-	-- upvalues: var8 (write), var5 (write), var18 (write), var13 (write), var9 (write), var16 (write)
+	-- upvalues: var8 (write), var18 (write), var13 (write), var5 (write), var9 (write), var16 (write)
 	local var27 = var8(false)
-	
-	if var27 ~= nil then
-		if var5 == nil then
-			var5 = require(script.Parent.PlayerListContextMenuTelemetry)
-		end
-		var5.logAction("menu_close", var27.telemetry)
-	end
 	var18 += 1
 	var13(nil)
-	var9(nil)
+	
+	if var27 == nil then return end
+	if var5 == nil then
+		var5 = require(script.Parent.PlayerListContextMenuTelemetry)
+	end
+	var5.logAction("menu_close", var27.telemetry)
 	var13(nil)
+	var9(nil)
 	
 	if var16 then
 		var16()
 	end
 end
 
-local function setOnDismiss(value) --[[ line: 103 ]]
+local function setOnDismiss(value) --[[ line: 106 ]]
 	-- upvalues: var16 (write)
 	var16 = value
 end
 
-local function setSuppressNextDismissRestore(value) --[[ line: 107 ]]
+local function setSuppressNextDismissRestore(value) --[[ line: 110 ]]
 	-- upvalues: var17 (write)
 	var17 = value
 end
 
-local function takeSuppressNextDismissRestore() --[[ line: 111 ]]
+local function takeSuppressNextDismissRestore() --[[ line: 114 ]]
 	-- upvalues: var17 (write)
 	var17 = false
 	
 	return var17
 end
 
-local function setMenuDataIfCurrent(value, p0) --[[ line: 117 ]]
+local function setMenuDataIfCurrent(value, p0) --[[ line: 120 ]]
 	-- upvalues: var18 (write), var8 (write), var13 (write), var9 (write), var5 (write)
 	if p0 ~= var18 then
 		return false
@@ -101,7 +100,7 @@ local function setMenuDataIfCurrent(value, p0) --[[ line: 117 ]]
 	return true
 end
 
-local function buildMenuHeader(p1) --[[ line: 125 ]]
+local function buildMenuHeader(p1) --[[ line: 128 ]]
 	-- upvalues: resolveDisplayNameModule (ref), getHeadshotThumbnailModule (ref)
 	return {
 		displayName = resolveDisplayNameModule(p1),
@@ -110,7 +109,7 @@ local function buildMenuHeader(p1) --[[ line: 125 ]]
 	}
 end
 
-local function fallbackMenuData(p2, p3) --[[ line: 133 ]]
+local function fallbackMenuData(p2, p3) --[[ line: 136 ]]
 	-- upvalues: guiService (ref), closeContextMenu (ref), playersService (ref), resolveDisplayNameModule (ref), getHeadshotThumbnailModule (ref)
 	local t = {}
 	
@@ -119,7 +118,7 @@ local function fallbackMenuData(p2, p3) --[[ line: 133 ]]
 			key = "examine",
 			label = "Examine avatar",
 			telemetryAction = "avatar_examine",
-			onActivated = function() --[[ line: 140 ]]
+			onActivated = function() --[[ line: 143 ]]
 				-- upvalues: guiService (copy), p2 (ref), closeContextMenu (copy)
 				guiService:InspectPlayerFromUserIdWithCtx(p2.UserId, "leaderBoard")
 				closeContextMenu()
@@ -141,7 +140,7 @@ local function fallbackMenuData(p2, p3) --[[ line: 133 ]]
 	}
 end
 
-local _ = function(p4) --[[ line: 187 | named "logItemActivated" ]]
+local _ = function(p4) --[[ line: 190 | named "logItemActivated" ]]
 	-- upvalues: var8 (write), var5 (write)
 	if p4.telemetryAction ~= nil then
 		local var30 = var8(false)
@@ -157,7 +156,7 @@ return {
 	getMenuData = var8,
 	setMenuData = setMenuData,
 	setMenuDataIfCurrent = setMenuDataIfCurrent,
-	openContextMenu = function(p5, p6) --[[ line: 159 ]]
+	openContextMenu = function(p5, p6) --[[ line: 162 ]]
 		-- upvalues: var18 (write), var13 (write), var15 (write), fallbackMenuData (ref), var8 (write), var9 (write), var5 (write)
 		var18 += 1
 		var13(nil)
@@ -180,7 +179,7 @@ return {
 		end
 	end,
 	closeContextMenu = closeContextMenu,
-	setContextMenuOpener = function(value) --[[ line: 172 ]]
+	setContextMenuOpener = function(value) --[[ line: 175 ]]
 		-- upvalues: var15 (write)
 		var15 = value
 	end,
@@ -188,7 +187,7 @@ return {
 	setSuppressNextDismissRestore = setSuppressNextDismissRestore,
 	takeSuppressNextDismissRestore = takeSuppressNextDismissRestore,
 	buildMenuHeader = buildMenuHeader,
-	reset = function() --[[ line: 176 ]]
+	reset = function() --[[ line: 179 ]]
 		-- upvalues: var18 (write), var13 (write), var9 (write), var15 (write), var16 (write), var17 (write)
 		var18 += 1
 		var13(nil)
@@ -199,7 +198,7 @@ return {
 		var17 = false
 	end,
 	getPendingConfirmKey = var12,
-	activateMenuItem = function(p7) --[[ line: 194 ]]
+	activateMenuItem = function(p7) --[[ line: 197 ]]
 		-- upvalues: var12 (write), var13 (write), var8 (write), var5 (write)
 		if p7.requiresConfirm then
 			if var12() == p7.key then

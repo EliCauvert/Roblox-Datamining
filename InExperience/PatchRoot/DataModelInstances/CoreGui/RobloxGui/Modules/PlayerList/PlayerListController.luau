@@ -416,17 +416,16 @@ function t:_setupReskin() --[[ line: 349 ]]
 		end)
 	end
 	playerContextualMenuStore.setContextMenuOpener(function(p8, p9, p10) --[[ line: 395 ]]
-		-- upvalues: contextMenuControllerModule (ref), playerContextualMenuStore (copy), status (ref), playerListVisibilityStore (copy)
+		-- upvalues: contextMenuControllerModule (ref), playerContextualMenuStore (copy), status (ref)
 		task.spawn(function() --[[ line: 396 ]]
-			-- upvalues: contextMenuControllerModule (copy), p8 (ref), playerContextualMenuStore (copy), status (copy), p9 (ref), p10 (ref), playerListVisibilityStore (copy)
+			-- upvalues: contextMenuControllerModule (copy), p8 (ref), playerContextualMenuStore (copy), status (copy), p9 (ref), p10 (ref)
 			local var73 = contextMenuControllerModule.buildMenuData(p8, playerContextualMenuStore.closeContextMenu, status)
 			
-			if p8.Parent == nil then return end
-			var73.anchorPosition = p9
-			
-			if playerContextualMenuStore.setMenuDataIfCurrent(var73, p10) and status then
-				playerListVisibilityStore.setVisible(false)
+			if p8.Parent == nil then
+				return
 			end
+			var73.anchorPosition = p9
+			playerContextualMenuStore.setMenuDataIfCurrent(var73, p10)
 		end)
 	end)
 	local playerListInitialVisibleStateModule = require(parent.PlayerListInitialVisibleState)
@@ -435,7 +434,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 	if fFlagPlatformLeaderboardPersistStoreOnRemount then
 		platformLeaderboardsClientModule.reset()
 	end
-	local _ = function() --[[ line: 421 | named "setStorePersistVisibility" ]]
+	local _ = function() --[[ line: 418 | named "setStorePersistVisibility" ]]
 		-- upvalues: playerListVisibilityStore (copy), fFlagPlayerListPersistVisibilityModule (copy), status (ref), ok (ref)
 		playerListVisibilityStore.setShouldPersistVisibility(fFlagPlayerListPersistVisibilityModule and (not status and not ok))
 	end
@@ -445,10 +444,10 @@ function t:_setupReskin() --[[ line: 349 ]]
 	self.SetVisibleChangedEvent = Instance.new("BindableEvent")
 	self.VisibilityChangedEvent = Instance.new("BindableEvent")
 	
-	local function setupVisibilityEffect() --[[ line: 432 ]]
+	local function setupVisibilityEffect() --[[ line: 429 ]]
 		-- upvalues: self (ref), signalsModule (copy), playerListVisibilityStore (copy)
 		local var74 = false
-		self._reskinSetVisibleEffect = signalsModule.createEffect(function(p11) --[[ line: 434 ]]
+		self._reskinSetVisibleEffect = signalsModule.createEffect(function(p11) --[[ line: 431 ]]
 			-- upvalues: playerListVisibilityStore (copy), var74 (write), self (copy)
 			local visible = playerListVisibilityStore.getVisible(p11)
 			
@@ -460,7 +459,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 			var74 = true
 		end)
 		local var75 = false
-		self._reskinVisibilityEffect = signalsModule.createEffect(function(p12) --[[ line: 444 ]]
+		self._reskinVisibilityEffect = signalsModule.createEffect(function(p12) --[[ line: 441 ]]
 			-- upvalues: playerListVisibilityStore (copy), var75 (write), self (copy)
 			local effectiveVisible = playerListVisibilityStore.getEffectiveVisible(p12)
 			
@@ -475,14 +474,14 @@ function t:_setupReskin() --[[ line: 349 ]]
 	
 	local topBarHeight = constantsModule.TopBarHeight
 	
-	local _ = function() --[[ line: 457 | named "computeMobileTopInset" ]]
+	local _ = function() --[[ line: 454 | named "computeMobileTopInset" ]]
 		-- upvalues: constants_1 (copy), constantsModule (ref)
 		local MOBILE_EDGE_GAP = constants_1.MOBILE_EDGE_GAP
 		
 		return math.max(MOBILE_EDGE_GAP, constantsModule.ApplyDisplayScale(MOBILE_EDGE_GAP))
 	end
 	
-	local function computeMobilePosition() --[[ line: 461 ]]
+	local function computeMobilePosition() --[[ line: 458 ]]
 		-- upvalues: topBarHeight (ref), constants_1 (copy), constantsModule (ref)
 		local MOBILE_EDGE_GAP = constants_1.MOBILE_EDGE_GAP
 		
@@ -491,7 +490,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 	
 	local var65, var66 = reactModule.createBinding(computeMobilePosition())
 	
-	local function resolveContainerProps() --[[ line: 465 ]]
+	local function resolveContainerProps() --[[ line: 462 ]]
 		-- upvalues: status (ref), var65 (ref), constantsModule (ref), topBarHeight (ref)
 		if status then
 			return {
@@ -511,7 +510,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 		}
 	end
 	
-	local function buildReskinElement() --[[ line: 483 ]]
+	local function buildReskinElement() --[[ line: 480 ]]
 		-- upvalues: reactModule (ref), foundationProvider (ref), colorMode (ref), var61 (ref), userGameSettingsService (copy), leaderboardScrim (ref), status (ref), foundationModule (ref), resolveContainerProps (ref), playerListContainer (copy), leaderboardStoreInstanceManager (copy), constantsModule (ref), ok (ref), playerListPanel (ref), var58 (ref), playerContextualMenuView (ref)
 		return reactModule.createElement(foundationProvider, {
 			colorMode = colorMode.Dark,
@@ -534,14 +533,14 @@ function t:_setupReskin() --[[ line: 349 ]]
 		})
 	end
 	
-	local function setupPlayerInfoRequests() --[[ line: 518 ]]
+	local function setupPlayerInfoRequests() --[[ line: 515 ]]
 		-- upvalues: playersService (copy), playerRelationshipStore (copy), makePlayerInfoRequestsModule (copy), self (ref), playerIconInfoStore (copy), blockingUtilityModule (copy), fFlagBadgeVisibilitySettingEnabled (copy), robloxReplicatedStorageService (copy)
 		local t = {
-			getState = function() --[[ line: 520 ]]
+			getState = function() --[[ line: 517 ]]
 				-- upvalues: playersService (copy)
 				return { players = playersService:GetPlayers() }
 			end,
-			dispatch = function(_, p13) --[[ line: 523 ]]
+			dispatch = function(_, p13) --[[ line: 520 ]]
 				-- upvalues: playerRelationshipStore (copy)
 				if type(p13) ~= "table" then return end
 				if p13.type == "SetPlayerIsBlocked" and p13.userId then
@@ -554,7 +553,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 			end
 		}
 		
-		local function request(p14) --[[ line: 538 ]]
+		local function request(p14) --[[ line: 535 ]]
 			-- upvalues: makePlayerInfoRequestsModule (copy), t (ref)
 			makePlayerInfoRequestsModule(p14)(t)
 		end
@@ -563,12 +562,12 @@ function t:_setupReskin() --[[ line: 349 ]]
 			makePlayerInfoRequestsModule(v)(t)
 		end
 		self._reskinPlayerAddedConn = playersService.PlayerAdded:Connect(request)
-		self._reskinPlayerRemovingConn = playersService.PlayerRemoving:Connect(function(p15) --[[ line: 545 ]]
+		self._reskinPlayerRemovingConn = playersService.PlayerRemoving:Connect(function(p15) --[[ line: 542 ]]
 			-- upvalues: playerIconInfoStore (copy), playerRelationshipStore (copy)
 			playerIconInfoStore.removePlayer(p15.UserId)
 			playerRelationshipStore.removePlayer(p15.UserId)
 		end)
-		self._reskinBlockedStatusConn = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p16, p17) --[[ line: 550 ]]
+		self._reskinBlockedStatusConn = blockingUtilityModule:GetBlockedStatusChangedEvent():Connect(function(p16, p17) --[[ line: 547 ]]
 			-- upvalues: playerRelationshipStore (copy)
 			local var81 = tonumber(p16)
 			
@@ -576,15 +575,15 @@ function t:_setupReskin() --[[ line: 349 ]]
 				playerRelationshipStore.patchPlayerRelationship(var81, { isBlocked = p17 })
 			end
 		end)
-		self._reskinFriendStatusConn = playersService.LocalPlayer.FriendStatusChanged:Connect(function(p18, p19) --[[ line: 556 ]]
+		self._reskinFriendStatusConn = playersService.LocalPlayer.FriendStatusChanged:Connect(function(p18, p19) --[[ line: 553 ]]
 			-- upvalues: playerRelationshipStore (copy)
 			playerRelationshipStore.patchPlayerRelationship(p18.UserId, { friendStatus = p19 })
 		end)
 		
 		if fFlagBadgeVisibilitySettingEnabled then
-			task.spawn(function() --[[ line: 562 ]]
+			task.spawn(function() --[[ line: 559 ]]
 				-- upvalues: robloxReplicatedStorageService (copy), self (copy), playersService (copy), makePlayerInfoRequestsModule (copy), t (ref)
-				self._reskinProfileSettingsConn = robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p20) --[[ line: 565 ]]
+				self._reskinProfileSettingsConn = robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p20) --[[ line: 562 ]]
 					-- upvalues: playersService (copy), makePlayerInfoRequestsModule (copy), t (copy)
 					local var82 = playersService:GetPlayerByUserId(tonumber(p20))
 					
@@ -596,7 +595,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 		end
 	end
 	
-	local function teardownPlayerInfoRequests() --[[ line: 575 ]]
+	local function teardownPlayerInfoRequests() --[[ line: 572 ]]
 		-- upvalues: self (ref), playerRelationshipStore (copy)
 		if self._reskinPlayerAddedConn then
 			self._reskinPlayerAddedConn:Disconnect()
@@ -621,7 +620,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 		playerRelationshipStore.cleanUp()
 	end
 	
-	local function mountReskin() --[[ line: 599 ]]
+	local function mountReskin() --[[ line: 596 ]]
 		-- upvalues: playerListVisibilityStore (copy), fFlagPlayerListPersistVisibilityModule (copy), status (ref), ok (ref), coreGuiService (copy), reactRobloxModule (ref), buildReskinElement (ref), self (ref), var66 (ref), computeMobilePosition (ref), setupPlayerInfoRequests (ref)
 		playerListVisibilityStore.setShouldPersistVisibility(fFlagPlayerListPersistVisibilityModule and (not status and not ok))
 		local playerListReskin = Instance.new("ScreenGui")
@@ -637,14 +636,14 @@ function t:_setupReskin() --[[ line: 349 ]]
 		self._reskinScreenGui = playerListReskin
 		
 		if status then
-			local function connectViewport(p21) --[[ line: 617 ]]
+			local function connectViewport(p21) --[[ line: 614 ]]
 				-- upvalues: self (copy), var66 (copy), computeMobilePosition (copy)
 				if self._reskinViewportConn then
 					self._reskinViewportConn:Disconnect()
 					self._reskinViewportConn = nil
 				end
 				if p21 then
-					self._reskinViewportConn = p21:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 623 ]]
+					self._reskinViewportConn = p21:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ line: 620 ]]
 						-- upvalues: var66 (copy), computeMobilePosition (copy)
 						var66(computeMobilePosition())
 					end)
@@ -652,7 +651,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 				end
 			end
 			
-			self._reskinCameraConn = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 629 ]]
+			self._reskinCameraConn = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ line: 626 ]]
 				-- upvalues: connectViewport (ref)
 				connectViewport(workspace.CurrentCamera)
 			end)
@@ -661,7 +660,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 		setupPlayerInfoRequests()
 	end
 	
-	local function unmountReskin() --[[ line: 637 ]]
+	local function unmountReskin() --[[ line: 634 ]]
 		-- upvalues: playerListVisibilityStore (copy), teardownPlayerInfoRequests (ref), self (ref)
 		playerListVisibilityStore.setShouldPersistVisibility(false)
 		teardownPlayerInfoRequests()
@@ -708,14 +707,14 @@ function t:_setupReskin() --[[ line: 349 ]]
 	else
 		self.mounted = false
 	end
-	self._reskinCoreGuiConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p22, p23) --[[ line: 684 ]]
+	self._reskinCoreGuiConn = starterGuiService.CoreGuiChangedSignal:Connect(function(p22, p23) --[[ line: 681 ]]
 		-- upvalues: self (ref)
 		if p22 == Enum.CoreGuiType.All or p22 == Enum.CoreGuiType.PlayerList then
 			self.coreGuiEnabled = p23
 			self:SetTopBarEnabled(self.topBarEnabled)
 		end
 	end)
-	contextActionService:BindCoreAction("RbxPlayerListToggle", function(_, p24, _) --[[ line: 691 ]]
+	contextActionService:BindCoreAction("RbxPlayerListToggle", function(_, p24, _) --[[ line: 688 ]]
 		-- upvalues: self (ref), status (ref), guiService (copy)
 		if not self.mounted then
 			return Enum.ContextActionResult.Pass
@@ -732,7 +731,7 @@ function t:_setupReskin() --[[ line: 349 ]]
 	end, false, Enum.KeyCode.Tab)
 	
 	if fFlagTopBarSignalizeSetCores then
-		self._reskinTopBarEffect = signalsModule.createEffect(function(p25) --[[ line: 709 ]]
+		self._reskinTopBarEffect = signalsModule.createEffect(function(p25) --[[ line: 706 ]]
 			-- upvalues: inExperienceTopBarModule (copy), self (ref)
 			local getTopBarStore = inExperienceTopBarModule.Stores.GetTopBarStore
 			
@@ -744,26 +743,26 @@ function t:_setupReskin() --[[ line: 349 ]]
 	return self
 end
 
-function t:GetVisibility() --[[ line: 720 ]]
+function t:GetVisibility() --[[ line: 717 ]]
 	-- upvalues: fFlagPlayerListReskin (ref), playerListVisibilityStore (ref)
 	return if fFlagPlayerListReskin then playerListVisibilityStore.getEffectiveVisible(false) else self.store:getState().displayOptions.isVisible
 end
 
 if fFlagAddNewPlayerListFocusNav then
-	function t:GetVisibilityChangedEvent() --[[ line: 728 ]]
+	function t:GetVisibilityChangedEvent() --[[ line: 725 ]]
 		return self.VisibilityChangedEvent
 	end
 end
-function t:GetSetVisible() --[[ line: 733 ]]
+function t:GetSetVisible() --[[ line: 730 ]]
 	-- upvalues: fFlagPlayerListReskin (ref), playerListVisibilityStore (ref)
 	return if fFlagPlayerListReskin then playerListVisibilityStore.getVisible(false) else self.store:getState().displayOptions.setVisible
 end
 
-function t:GetSetVisibleChangedEvent() --[[ line: 740 ]]
+function t:GetSetVisibleChangedEvent() --[[ line: 737 ]]
 	return self.SetVisibleChangedEvent
 end
 
-function t:SetVisibility(p26) --[[ line: 744 ]]
+function t:SetVisibility(p26) --[[ line: 741 ]]
 	-- upvalues: fFlagPlayerListReskin (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), setPlayerListVisibilityModule (ref)
 	if not fFlagPlayerListReskin then
 		self.store:dispatch(setPlayerListVisibilityModule(p26))
@@ -775,7 +774,7 @@ function t:SetVisibility(p26) --[[ line: 744 ]]
 	playerListVisibilityStore.setVisible(p26)
 end
 
-function t:HideTemp(p27, p28) --[[ line: 755 ]]
+function t:HideTemp(p27, p28) --[[ line: 752 ]]
 	-- upvalues: fFlagPlayerListReskin (ref), playerContextualMenuStore (ref), playerListVisibilityStore (ref), setTempHideKeyModule (ref)
 	if fFlagPlayerListReskin then
 		if p28 and playerContextualMenuStore.getMenuData(false) ~= nil then
@@ -790,7 +789,7 @@ function t:HideTemp(p27, p28) --[[ line: 755 ]]
 	self.store:dispatch(setTempHideKeyModule(p27, p28))
 end
 
-function t:SetTopBarEnabled(p29) --[[ line: 774 ]]
+function t:SetTopBarEnabled(p29) --[[ line: 771 ]]
 	-- upvalues: fFlagPlayerListReskin (ref), leaderboardStoreInstanceManager (ref)
 	if not fFlagPlayerListReskin then
 		self.topBarEnabled = p29
@@ -815,7 +814,7 @@ function t:SetTopBarEnabled(p29) --[[ line: 774 ]]
 	end
 end
 
-function t:SetMinimized(b) --[[ line: 794 ]]
+function t:SetMinimized(b) --[[ line: 791 ]]
 	-- upvalues: fFlagPlayerListReskin (ref), setMinimizedModule (ref)
 	if fFlagPlayerListReskin then
 		return

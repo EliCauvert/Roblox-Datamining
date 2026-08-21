@@ -10,6 +10,7 @@ local configModule = require(expChat.Config)
 local useStyle = require(parent.UIBlox).Core.Style.useStyle
 local debounceModule = require(expChat.ChatWindow.Helpers.debounce)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
+local fFlagFriendsChatOsaSystemMessage = sharedFlagsModule.FFlagFriendsChatOsaSystemMessage
 local getFFlagExpChatSendWindowScrollEventModule = require(expChat.Flags.getFFlagExpChatSendWindowScrollEvent)
 local expChatWindowScrollV3Debounce = game:DefineFastInt("ExpChatWindowScrollV3Debounce", 0)
 local fFlagExpChatLimitScrollingV2WindowModule = require(expChat.Flags.FFlagExpChatLimitScrollingV2Window)
@@ -20,7 +21,7 @@ local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FF
 local _ = require(parent.SocialLuaAnalytics)
 local var13 = game:DefineFastInt("ExpChatScrollLockThreshold", 90) / 100
 
-local function _(p0) --[[ line: 48 | named "isScrollbarNearBottom" ]]
+local function _(p0) --[[ line: 50 | named "isScrollbarNearBottom" ]]
 	-- upvalues: var13 (ref)
 	local absoluteWindowSize = p0.AbsoluteWindowSize
 	local absoluteCanvasSize = p0.AbsoluteCanvasSize
@@ -28,71 +29,81 @@ local function _(p0) --[[ line: 48 | named "isScrollbarNearBottom" ]]
 	return absoluteCanvasSize.Y <= absoluteWindowSize.Y or var13 <= p0.CanvasPosition.Y / (absoluteCanvasSize - absoluteWindowSize).Y
 end
 
-local _ = function(p1) --[[ line: 63 | named "isMouseMovementOrTouch" ]]
+local _ = function(p1) --[[ line: 65 | named "isMouseMovementOrTouch" ]]
 	return if p1 ~= Enum.PreferredInput.KeyboardAndMouse then p1 == Enum.PreferredInput.Touch else true
 end
 
-local var14 = debounceModule(function() --[[ line: 67 ]]
+local var14 = debounceModule(function() --[[ line: 69 ]]
 	-- upvalues: textChatService (ref)
 	textChatService:SendExpChatWindowScroll()
 end, expChatWindowScrollV3Debounce)
 
-return reactModule.memo(function(p2) --[[ line: 74 | named "BottomLockedScrollViewV3" ]]
-	-- upvalues: useStyle (ref), reactModule (ref), signalsReactModule (ref), userInputService (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), var13 (ref), getFFlagExpChatSendWindowScrollEventModule (ref), var14 (ref), fFlagExpChatEnableFriendsTab (ref), configModule (ref), fFlagExpChatScrollbarInsetModule (ref), fFlagExpChatLimitScrollingV2WindowModule (ref), fFlagExpChatFixWarmMountBottomLockModule (ref)
+return reactModule.memo(function(p2) --[[ line: 76 | named "BottomLockedScrollViewV3" ]]
+	-- upvalues: useStyle (ref), reactModule (ref), fFlagFriendsChatOsaSystemMessage (ref), signalsReactModule (ref), userInputService (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), var13 (ref), getFFlagExpChatSendWindowScrollEventModule (ref), var14 (ref), fFlagExpChatEnableFriendsTab (ref), configModule (ref), fFlagExpChatScrollbarInsetModule (ref), fFlagExpChatLimitScrollingV2WindowModule (ref), fFlagExpChatFixWarmMountBottomLockModule (ref)
 	local theme = useStyle().Theme
 	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useRef(true)
-	local var17, var18 = reactModule.useBinding(false)
+	local var16 = fFlagFriendsChatOsaSystemMessage and p2.scrollToTopOnReset == true
+	local var17 = reactModule.useRef(not var16)
+	local var18 = reactModule.useRef(nil)
 	local var19 = reactModule.useRef(false)
-	local var20 = signalsReactModule.useSignalState(p2.messageComponentsSignal)
-	local var21 = reactModule.useCallback(function() --[[ line: 85 ]]
-		-- upvalues: userInputService (copy), var18 (ref), var19 (ref)
+	local var20 = reactModule.useRef(nil)
+	local var21, var22 = reactModule.useBinding(false)
+	local var23 = reactModule.useRef(false)
+	local var24 = signalsReactModule.useSignalState(p2.messageComponentsSignal)
+	local var25 = reactModule.useCallback(function() --[[ line: 91 ]]
+		-- upvalues: userInputService (copy), var22 (ref), var23 (ref)
 		local preferredInput = userInputService.PreferredInput
 		
 		if if preferredInput ~= Enum.PreferredInput.KeyboardAndMouse then preferredInput == Enum.PreferredInput.Touch else true then
-			var18(true)
+			var22(true)
 		end
 		if preferredInput == Enum.PreferredInput.Touch then
-			var19.current = true
+			var23.current = true
 		end
 	end, { userInputService.PreferredInput })
-	local var22 = reactModule.useCallback(function() --[[ line: 96 ]]
-		-- upvalues: userInputService (copy), var18 (ref), var19 (ref)
+	local var26 = reactModule.useCallback(function() --[[ line: 102 ]]
+		-- upvalues: userInputService (copy), var22 (ref), var23 (ref), var20 (ref), var18 (ref), var15 (ref), var19 (ref)
 		local preferredInput = userInputService.PreferredInput
 		
 		if if preferredInput ~= Enum.PreferredInput.KeyboardAndMouse then preferredInput == Enum.PreferredInput.Touch else true then
-			var18(false)
+			var22(false)
 		end
 		if preferredInput == Enum.PreferredInput.Touch then
-			var19.current = false
+			var23.current = false
+			
+			if var20.current ~= nil and var20.current == var18.current and var15.current then
+				var15.current.CanvasPosition = Vector2.new(0, 0)
+				var19.current = true
+				var20.current = nil
+			end
 		end
 	end, { userInputService.PreferredInput })
-	local var23 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 108 ]]
-		-- upvalues: var23 (ref)
-		return function() --[[ line: 109 ]]
-			-- upvalues: var23 (copy)
-			if var23.current then
-				var23.current.cleanup()
+	local var27 = reactModule.useRef(nil)
+	reactModule.useEffect(function() --[[ line: 125 ]]
+		-- upvalues: var27 (ref)
+		return function() --[[ line: 126 ]]
+			-- upvalues: var27 (copy)
+			if var27.current then
+				var27.current.cleanup()
 			end
 		end
 	end, {})
-	local var24 = reactModule.useRef(p2.selectedChannelName)
-	var24.current = p2.selectedChannelName
-	local var25 = reactModule.useCallback(function(p3) --[[ line: 119 ]]
-		-- upvalues: var23 (ref), var24 (ref), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), var16 (ref), var13 (copy), getFFlagExpChatSendWindowScrollEventModule (copy), var14 (copy), fFlagExpChatEnableFriendsTab (copy), p2 (ref)
-		if var23.current == nil then
-			local current = var24.current
-			var23.current = expChatPerfTracker.startChatWindowScrollInterval(expChatPerfTracker.Events.ChatWindowScrollInterval, p3, {}, if fFlagExpChatPerfTrackerTabName and current then { tabName = current } else nil)
+	local var28 = reactModule.useRef(p2.selectedChannelName)
+	var28.current = p2.selectedChannelName
+	local var29 = reactModule.useCallback(function(p3) --[[ line: 136 ]]
+		-- upvalues: var27 (ref), var28 (ref), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), var17 (ref), var13 (copy), getFFlagExpChatSendWindowScrollEventModule (copy), var14 (copy), fFlagExpChatEnableFriendsTab (copy), p2 (ref)
+		if var27.current == nil then
+			local current = var28.current
+			var27.current = expChatPerfTracker.startChatWindowScrollInterval(expChatPerfTracker.Events.ChatWindowScrollInterval, p3, {}, if fFlagExpChatPerfTrackerTabName and current then { tabName = current } else nil)
 		end
-		if var23.current then
-			var23.current.onScrollTick()
+		if var27.current then
+			var27.current.onScrollTick()
 		end
 		local absoluteWindowSize = p3.AbsoluteWindowSize
 		local absoluteCanvasSize = p3.AbsoluteCanvasSize
-		var16.current = absoluteCanvasSize.Y <= absoluteWindowSize.Y or var13 <= p3.CanvasPosition.Y / (absoluteCanvasSize - absoluteWindowSize).Y
+		var17.current = absoluteCanvasSize.Y <= absoluteWindowSize.Y or var13 <= p3.CanvasPosition.Y / (absoluteCanvasSize - absoluteWindowSize).Y
 		
-		if getFFlagExpChatSendWindowScrollEventModule() and not var16.current then
+		if getFFlagExpChatSendWindowScrollEventModule() and not var17.current then
 			var14()
 		end
 		if fFlagExpChatEnableFriendsTab and p2.onCanvasPositionChanged then
@@ -101,55 +112,75 @@ return reactModule.memo(function(p2) --[[ line: 74 | named "BottomLockedScrollVi
 	end, {
 		if fFlagExpChatEnableFriendsTab then p2.onCanvasPositionChanged else nil
 	})
-	local var26 = reactModule.useCallback(function(p4) --[[ line: 142 ]]
-		-- upvalues: var16 (ref), var19 (ref)
-		if var16.current and not var19.current then
+	local var30 = reactModule.useCallback(function(p4) --[[ line: 159 ]]
+		-- upvalues: var17 (ref), var23 (ref)
+		if var17.current and not var23.current then
 			p4.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
 	local scrollResetKey = p2.scrollResetKey
-	reactModule.useEffect(function() --[[ line: 152 ]]
-		-- upvalues: p2 (ref), scrollResetKey (ref), var16 (ref), var19 (ref), var15 (ref)
-		if p2.isChannelBarVisible and scrollResetKey then
-			var16.current = true
+	reactModule.useEffect(function() --[[ line: 169 ]]
+		-- upvalues: var18 (ref), scrollResetKey (ref), var19 (ref), var20 (ref), var16 (ref), p2 (ref), var17 (ref), var23 (ref), var15 (ref)
+		if var18.current ~= scrollResetKey then
+			var18.current = scrollResetKey
+			var19.current = false
+			var20.current = nil
+		end
+		local var32 = scrollResetKey and (p2.isChannelBarVisible and (not var16 and not var19.current))
+		
+		if scrollResetKey and (var16 and not var19.current) then
+			var17.current = false
 			
-			if not var19.current and var15.current then
+			if var23.current or not var15.current then
+				var20.current = scrollResetKey
+				
+				return
+			end
+			var15.current.CanvasPosition = Vector2.new(0, 0)
+			var19.current = true
+			var20.current = nil
+			
+			return
+		elseif var32 then
+			var17.current = true
+			
+			if not var23.current and var15.current then
 				var15.current.CanvasPosition = Vector2.new(0, 9007199254740992)
 			end
 		end
-	end, { scrollResetKey, p2.isChannelBarVisible })
-	reactModule.useEffect(function() --[[ line: 162 ]]
-		-- upvalues: var15 (ref), var16 (ref), var19 (ref)
+	end, { scrollResetKey, p2.isChannelBarVisible, var16 })
+	reactModule.useEffect(function() --[[ line: 199 ]]
+		-- upvalues: var15 (ref), var17 (ref), var23 (ref)
 		local current = var15.current
 		
 		if current then
-			local var28 = current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ line: 170 ]]
-				-- upvalues: var16 (copy), var19 (copy), var15 (copy)
-				if var16.current and not var19.current and var15.current then
+			local var33 = current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ line: 207 ]]
+				-- upvalues: var17 (copy), var23 (copy), var15 (copy)
+				if var17.current and not var23.current and var15.current then
 					var15.current.CanvasPosition = Vector2.new(0, 9007199254740992)
 				end
 			end)
 			
-			return function() --[[ line: 179 ]]
-				-- upvalues: var28 (ref)
-				var28:Disconnect()
+			return function() --[[ line: 216 ]]
+				-- upvalues: var33 (ref)
+				var33:Disconnect()
 			end
 		end
 	end, {
-		var16.current,
-		var19.current,
+		var17.current,
+		var23.current,
 		var15.current,
 		scrollResetKey
 	})
-	local var27 = if fFlagExpChatEnableFriendsTab and type(p2.contentTopPadding) == "number" then UDim.new(0, p2.contentTopPadding) elseif fFlagExpChatEnableFriendsTab and p2.contentTopPadding ~= nil then p2.contentTopPadding:map(function(p5) --[[ line: 193 ]]
+	local var31 = if fFlagExpChatEnableFriendsTab and type(p2.contentTopPadding) == "number" then UDim.new(0, p2.contentTopPadding) elseif fFlagExpChatEnableFriendsTab and p2.contentTopPadding ~= nil then p2.contentTopPadding:map(function(p5) --[[ line: 230 ]]
 		return UDim.new(0, p5)
 	end) else nil
 	
 	return reactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p2.Size,
-		[reactModule.Event.InputBegan] = var21,
-		[reactModule.Event.InputEnded] = var22
+		[reactModule.Event.InputBegan] = var25,
+		[reactModule.Event.InputEnded] = var26
 	}, {
 		padding = reactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 0),
@@ -162,7 +193,7 @@ return reactModule.memo(function(p2) --[[ line: 74 | named "BottomLockedScrollVi
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			BorderSizePixel = 0,
 			ScrollBarImageColor3 = theme.UIEmphasis.Color,
-			ScrollBarImageTransparency = var17:map(function(p6) --[[ line: 218 ]]
+			ScrollBarImageTransparency = var21:map(function(p6) --[[ line: 255 ]]
 				return if p6 then 0 else 1
 			end),
 			ScrollBarThickness = configModule.ChatWindowScrollBarThickness,
@@ -172,11 +203,11 @@ return reactModule.memo(function(p2) --[[ line: 74 | named "BottomLockedScrollVi
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			CanvasSize = UDim2.new(),
-			[reactModule.Change.CanvasPosition] = var25,
-			[reactModule.Change.AbsoluteWindowSize] = if fFlagExpChatFixWarmMountBottomLockModule then var26 else nil
+			[reactModule.Change.CanvasPosition] = var29,
+			[reactModule.Change.AbsoluteWindowSize] = if fFlagExpChatFixWarmMountBottomLockModule then var30 else nil
 		}, if fFlagExpChatEnableFriendsTab then {
-			contentPadding = if var27 ~= nil then nil else reactModule.createElement("UIPadding", { PaddingTop = var27 }),
-			messages = reactModule.createElement(reactModule.Fragment, nil, var20)
-		} else var20)
+			contentPadding = if var31 ~= nil then nil else reactModule.createElement("UIPadding", { PaddingTop = var31 }),
+			messages = reactModule.createElement(reactModule.Fragment, nil, var24)
+		} else var24)
 	})
 end)

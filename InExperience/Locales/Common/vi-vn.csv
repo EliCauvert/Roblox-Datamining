@@ -390,6 +390,7 @@ CommonUI.Features.Label.Terms,Điều khoản
 CommonUI.Features.Label.TermsOfUse,Điều khoản sử dụng
 CommonUI.Features.Label.Thanks,Cảm ơn
 CommonUI.Features.Label.TheHunt,Sự kiện Roblox
+CommonUI.Features.Label.Trades,Trao đổi
 CommonUI.Features.Label.Unchecked,Chưa được kiểm tra
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3317,8 +3318,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Không tạo được văn bản.
 Feature.Moments.Label.TextGenerationFailedTitle,Tạo không thành công
 Feature.Moments.Label.TextGenerationFilteredBody,Không thể tạo văn bản cho video đã quay này vì nội dung đã bị lọc.
 Feature.Moments.Label.TextGenerationFilteredTitle,Nội dung tạo sinh bị chặn
+Feature.Moments.Label.Tone,Giọng điệu
+Feature.Moments.Label.Tone.Cinematic,Điện ảnh
+Feature.Moments.Label.Tone.Funny,Hài hước
+Feature.Moments.Label.Tone.Hype,Sôi động
+Feature.Moments.Label.Tone.Neutral,Trung tính
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
+Feature.Moments.Title.GenerateTextOptions,Tạo văn bản
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng

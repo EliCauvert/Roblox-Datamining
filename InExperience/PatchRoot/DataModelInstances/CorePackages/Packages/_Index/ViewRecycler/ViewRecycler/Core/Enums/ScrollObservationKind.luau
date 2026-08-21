@@ -1,0 +1,1 @@
+﻿return table.freeze({ User = "User", Programmatic = "Programmatic" })

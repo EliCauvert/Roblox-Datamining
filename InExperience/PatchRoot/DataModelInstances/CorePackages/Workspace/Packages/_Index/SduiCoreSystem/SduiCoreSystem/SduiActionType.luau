@@ -49,6 +49,7 @@
 	OpenAddConnectionsPage = "OpenAddConnectionsPage",
 	RequestFriendship = "RequestFriendship",
 	OpenMarketplace = "OpenMarketplace",
+	Navigate = "Navigate",
 	OpenMarketplaceCatalogFilters = "OpenMarketplaceCatalogFilters",
 	SelectMarketplaceCatalogCategory = "SelectMarketplaceCatalogCategory",
 	SelectMarketplaceCatalogSubcategory = "SelectMarketplaceCatalogSubcategory",

@@ -6,5 +6,6 @@ return {
 	NodeRenderers = require(script.Renderer.NodeRenderers),
 	Renderer = require(script.Renderer.InlineRichTextRenderer),
 	escapeRichFormatting = require(script.Utils.escapeRichFormatting),
+	prepareRichTextCopy = require(script.Utils.prepareRichTextCopy),
 	["jest.config"] = script["jest.config"]
 }

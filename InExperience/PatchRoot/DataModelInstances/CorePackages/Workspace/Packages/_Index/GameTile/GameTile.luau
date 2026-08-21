@@ -40,6 +40,7 @@ return {
 	ItemLayoutDataParsingUtils = require(script.ItemLayoutDataParsingUtils),
 	useIsHoveredTile = require(script.useIsHoveredTile),
 	useValidTileBadges = require(script.Overlays.useValidTileBadges),
+	GameTileContextualActions = require(script.GameTileContextualActions),
 	GameTileOverflowMenu = require(script.GameTileOverflowMenu),
 	getAvailableGameTileOverflowMenuItems = require(script.getAvailableGameTileOverflowMenuItems),
 	ZoomAnimatedFrame = require(script.ZoomAnimatedFrame),

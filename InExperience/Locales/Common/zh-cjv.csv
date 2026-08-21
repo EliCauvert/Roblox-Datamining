@@ -382,6 +382,7 @@ CommonUI.Features.Label.Terms,条款
 CommonUI.Features.Label.TermsOfUse,使用条款
 CommonUI.Features.Label.Thanks,谢谢
 CommonUI.Features.Label.TheHunt,Roblox 活动
+CommonUI.Features.Label.Trades,交易
 CommonUI.Features.Label.Unchecked,未验证
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1290,15 +1291,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.Upload,
 Feature.Avatar.BackgroundGeneration.Action.View,查看
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
@@ -1306,6 +1312,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -2592,6 +2600,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,长按以回复
 Feature.Chat.Label.Members,成员
 Feature.Chat.Label.MessageNotAvailable,此信息不可用
 Feature.Chat.Label.MuteInGameChatToastNotifications,将游戏内聊天通知静音
+Feature.Chat.Label.MuteInGamePartyToastNotifications,
 Feature.Chat.Label.New,全新
 Feature.Chat.Label.NoChatFound,未找到聊天记录
 Feature.Chat.Label.NoDescriptionYet,尚无描述。
@@ -3307,8 +3316,14 @@ Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
 Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
+Feature.Moments.Label.Tone,语气
+Feature.Moments.Label.Tone.Cinematic,电影感
+Feature.Moments.Label.Tone.Funny,搞笑
+Feature.Moments.Label.Tone.Hype,活力
+Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
+Feature.Moments.Title.GenerateTextOptions,生成文本
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
@@ -3673,6 +3688,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Plus 订阅已为你提供了�
 Feature.RobloxSubscription.Body.GenericError,我们目前无法完成此操作。请重试。
 Feature.RobloxSubscription.Body.UnsupportedPlatform,此订阅无法在此设备上购买。
 Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，完成年龄验证即可免费使用 Roblox Plus 一周。无需提供付款方式即可享受此免费试用。
+Feature.RobloxSubscription.Description.Benefit.Customize,
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器

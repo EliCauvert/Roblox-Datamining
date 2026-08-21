@@ -390,6 +390,7 @@ CommonUI.Features.Label.Terms,Koşullar
 CommonUI.Features.Label.TermsOfUse,Kullanım Koşulları
 CommonUI.Features.Label.Thanks,Teşekkürler
 CommonUI.Features.Label.TheHunt,Roblox Etkinlikleri
+CommonUI.Features.Label.Trades,Takaslar
 CommonUI.Features.Label.Unchecked,Kontrol edilmedi
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3317,8 +3318,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Metin oluşturulamadı. Lütfen t
 Feature.Moments.Label.TextGenerationFailedTitle,Oluşturma Başarısız
 Feature.Moments.Label.TextGenerationFilteredBody,"Bu yakalanan video için oluşturma işlemi gerçekleştirilemiyor, içerik filtrelendi."
 Feature.Moments.Label.TextGenerationFilteredTitle,Oluşturma Filtrelendi
+Feature.Moments.Label.Tone,Üslup
+Feature.Moments.Label.Tone.Cinematic,Sinematik
+Feature.Moments.Label.Tone.Funny,Komik
+Feature.Moments.Label.Tone.Hype,Heyecan verici
+Feature.Moments.Label.Tone.Neutral,Nötr
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
+Feature.Moments.Title.GenerateTextOptions,Metin Oluştur
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla

@@ -389,6 +389,7 @@ CommonUI.Features.Label.Terms,條款
 CommonUI.Features.Label.TermsOfUse,使用條款
 CommonUI.Features.Label.Thanks,感謝
 CommonUI.Features.Label.TheHunt,Roblox 活動
+CommonUI.Features.Label.Trades,交易
 CommonUI.Features.Label.Unchecked,尚未驗證
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3297,8 +3298,14 @@ Feature.Moments.Label.TextGenerationFailedBody,無法生成文字，請再試一
 Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
 Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
 Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
+Feature.Moments.Label.Tone,語氣
+Feature.Moments.Label.Tone.Cinematic,電影感
+Feature.Moments.Label.Tone.Funny,搞笑
+Feature.Moments.Label.Tone.Hype,充滿活力
+Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
+Feature.Moments.Title.GenerateTextOptions,生成文字
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
 Feature.Moments.Title.ReportPost,檢舉貼文

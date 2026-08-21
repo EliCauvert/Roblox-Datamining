@@ -390,6 +390,7 @@ CommonUI.Features.Label.Terms,Warunki
 CommonUI.Features.Label.TermsOfUse,Warunki użytkowania
 CommonUI.Features.Label.Thanks,Dziękujemy
 CommonUI.Features.Label.TheHunt,Wydarzenia Roblox
+CommonUI.Features.Label.Trades,Wymiany
 CommonUI.Features.Label.Unchecked,Niezaznaczone
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3298,8 +3299,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Nie udało się wygenerować teks
 Feature.Moments.Label.TextGenerationFailedTitle,Nie udało się wygenerować
 Feature.Moments.Label.TextGenerationFilteredBody,"Nie można wygenerować tekstu dla tego przechwyconego filmu, treść jest filtrowana."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generowanie przefiltrowane
+Feature.Moments.Label.Tone,Ton
+Feature.Moments.Label.Tone.Cinematic,Kinowy
+Feature.Moments.Label.Tone.Funny,Zabawny
+Feature.Moments.Label.Tone.Hype,Ekscytujący
+Feature.Moments.Label.Tone.Neutral,Neutralny
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
+Feature.Moments.Title.GenerateTextOptions,Generowanie tekstu
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta

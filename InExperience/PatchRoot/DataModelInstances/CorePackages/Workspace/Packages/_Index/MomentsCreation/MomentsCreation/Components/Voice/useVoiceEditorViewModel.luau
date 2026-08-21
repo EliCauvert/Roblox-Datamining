@@ -14,7 +14,7 @@ local getFIntMomentsTTSDefaultVoiceIdModule = require(momentsCreation.Flags.GetF
 local getFIntMomentsTTSMaxCharactersModule = require(momentsCreation.Flags.GetFIntMomentsTTSMaxCharacters)
 local dialogTypeModule = require(momentsCreation.Enums.DialogType)
 local _ = require(momentsCreation.Types.CreationFlowTypes)
-local var9 = tostring(getFIntMomentsTTSDefaultVoiceIdModule())
+local var9 = getFIntMomentsTTSDefaultVoiceIdModule()
 
 local function _(p0) --[[ line: 39 | named "trimWhitespace" ]]
 	return p0:gsub("^%s*(.-)%s*$", "%1")

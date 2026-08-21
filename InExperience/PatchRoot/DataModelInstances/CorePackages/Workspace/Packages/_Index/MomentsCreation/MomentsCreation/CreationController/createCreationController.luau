@@ -526,7 +526,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 			fireAnalyticsEventModule(eventNames.MomentsEditingFlowExited, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowExited)))
 			dismiss()
 		end,
-		generateText = function() --[[ line: 642 ]]
+		generateText = function(p17) --[[ line: 642 ]]
 			-- upvalues: getIsGenerating (write), host (ref), store (ref), getFFlagEnableMomentTextGeneration (copy), setIsGenerating (write), setActiveGeneration (write), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), makeDefaultTextOverlayEditModule (copy)
 			if getIsGenerating(false) then return end
 			if host.generateMomentText == nil then return end
@@ -541,7 +541,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 				end
 			end
 			setIsGenerating(true)
-			local var95 = host.generateMomentText(selectedCapture)
+			local var95 = host.generateMomentText(selectedCapture, p17)
 			
 			if var95 == nil then
 				setIsGenerating(false)
@@ -550,12 +550,12 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 			elseif getFFlagEnableMomentTextGeneration() then
 				setActiveGeneration({ promise = var95, capture = selectedCapture })
 			end
-			var95:andThen(function(p17) --[[ line: 669 ]]
+			var95:andThen(function(p18) --[[ line: 669 ]]
 				-- upvalues: getFFlagEnableMomentTextGeneration (copy), setActiveGeneration (copy), fFlagMomentTextGenerationFilteredSignal (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (copy), fFlagMomentsContentStatsTelemetry (copy), momentsCommonModule (copy), host (copy), setIsGenerating (copy), store (copy), makeDefaultTextOverlayEditModule (copy)
 				if getFFlagEnableMomentTextGeneration() then
 					setActiveGeneration(nil)
 				end
-				if fFlagMomentTextGenerationFilteredSignal and p17 ~= nil and p17.error == "CONTENT_FILTERED" then
+				if fFlagMomentTextGenerationFilteredSignal and p18 ~= nil and p18.error == "CONTENT_FILTERED" then
 					fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFiltered, withCreationSession({}))
 					
 					if fFlagMomentsContentStatsTelemetry then
@@ -567,7 +567,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 					setIsGenerating(false)
 					
 					return
-				elseif p17 == nil or p17.error ~= nil then
+				elseif p18 == nil or p18.error ~= nil then
 					fireAnalyticsEventModule(eventNames.EditingFlowGenerateTextFailed, withCreationSession({}))
 					
 					if fFlagMomentsContentStatsTelemetry then
@@ -579,7 +579,7 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 					setIsGenerating(false)
 					
 					return
-				elseif p17.summary ~= nil and p17.summary ~= "" then
+				elseif p18.summary ~= nil and p18.summary ~= "" then
 					local var98
 					local textOverlayEdits = store.getTextOverlayEdits(false)
 					local var97 = if textOverlayEdits ~= nil then nil else textOverlayEdits[1]
@@ -587,10 +587,10 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 					
 					if getFFlagEnableMomentTextGeneration() and var97 ~= nil then
 						var98 = table.clone(var97)
-						var98.text = p17.summary
+						var98.text = p18.summary
 					else
 						var98 = makeDefaultTextOverlayEditModule()
-						var98.text = p17.summary
+						var98.text = p18.summary
 					end
 					if textOverlayEdits == nil or #textOverlayEdits == 0 then
 						store.updateTextOverlayEdits({ var98 })
@@ -600,15 +600,15 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 						store.updateTextOverlayEdits(cloned)
 					end
 					if getFFlagEnableMomentTextGeneration() then
-						store.setGeneratedSummary(p17.summary)
+						store.setGeneratedSummary(p18.summary)
 					end
 				end
-				if p17.description ~= nil and p17.description ~= "" then
-					store.updateDescription(p17.description)
+				if p18.description ~= nil and p18.description ~= "" then
+					store.updateDescription(p18.description)
 					
 					if fFlagMomentTextGenerationFilteredSignal or getFFlagEnableMomentTextGeneration() then
-						store.setGeneratedDescription(p17.description)
-						store.setGenerationToken(p17.generationToken)
+						store.setGeneratedDescription(p18.description)
+						store.setGenerationToken(p18.generationToken)
 						store.setGeneratedTextFeedback(nil)
 					end
 				end
@@ -638,16 +638,16 @@ return function(p0) --[[ line: 72 | named "createCreationController" ]]
 			end)
 		end,
 		getIsGenerating = getIsGenerating,
-		submitGeneratedTextFeedback = function(p18) --[[ line: 525 ]]
+		submitGeneratedTextFeedback = function(p19) --[[ line: 525 ]]
 			-- upvalues: fFlagMomentTextGenerationFilteredSignal (copy), store (ref), emitGeneratedTextFeedback (ref)
 			if not fFlagMomentTextGenerationFilteredSignal then return end
-			if p18 == "policy_violation" then
+			if p19 == "policy_violation" then
 				store.setGeneratedTextFeedback(nil)
-				emitGeneratedTextFeedback(p18)
+				emitGeneratedTextFeedback(p19)
 				
 				return
 			end
-			store.setGeneratedTextFeedback(p18)
+			store.setGeneratedTextFeedback(p19)
 		end,
 		preview = preview,
 		ttsAudio = var35

@@ -390,6 +390,7 @@ CommonUI.Features.Label.Terms,이용 약관
 CommonUI.Features.Label.TermsOfUse,
 CommonUI.Features.Label.Thanks,감사합니다
 CommonUI.Features.Label.TheHunt,Roblox 이벤트
+CommonUI.Features.Label.Trades,거래
 CommonUI.Features.Label.Unchecked,선택 해제됨
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -3318,8 +3319,14 @@ Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했�
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
 Feature.Moments.Label.TextGenerationFilteredBody,콘텐츠 필터링으로 인해 이 캡처된 동영상에서 생성 기능을 사용할 수 없습니다.
 Feature.Moments.Label.TextGenerationFilteredTitle,생성이 차단되었습니다
+Feature.Moments.Label.Tone,어조
+Feature.Moments.Label.Tone.Cinematic,시네마틱함
+Feature.Moments.Label.Tone.Funny,유쾌함
+Feature.Moments.Label.Tone.Hype,활기참
+Feature.Moments.Label.Tone.Neutral,무난함
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
+Feature.Moments.Title.GenerateTextOptions,텍스트 생성
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고

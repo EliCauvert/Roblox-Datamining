@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXTallTilesForMakeupLooks", false) and require(script.Parent.FFlagAXCatalogMakeupSupport)
