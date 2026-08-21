@@ -245,13 +245,18 @@ Authentication.CrossDevice.Action.Enter,Eingabe
 Authentication.CrossDevice.Action.GoBack,Zurück
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,"Bestätige die Anmeldung auf deinem angemeldeten Gerät, um fortzufahren."
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,Scanne den QR-Code auf deinem angemeldeten Gerät oder gehe zu <b>Mehr > Schnellanmeldung</b> und gib den unten stehenden Code ein.
+Authentication.CrossDevice.Description.SigningInAs,Anmeldung als {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,und gib dann diesen Code ein
 Authentication.CrossDevice.GoToInstruction,Gehe auf deinem Computer oder Telefon zu:
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Melde dich mit einem anderen Gerät an
 Authentication.CrossDevice.Heading.LoginCode,Code für Schnellanmeldung
 Authentication.CrossDevice.Heading.LoginWarning,"STELLE FOLGENDES SICHER, UM DICH ANZUMELDEN:"
 Authentication.CrossDevice.Heading.QuickLogin,Schnellanmeldung
+Authentication.CrossDevice.Heading.SignInWithQrCode,Mit QR-Code anmelden
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Auf einem anderen Gerät anmelden
+Authentication.CrossDevice.Heading.WaitingForConfirmation,Bestätigung ausstehend
 Authentication.CrossDevice.Heading.Warning,WARNUNG!
 Authentication.CrossDevice.Label.CodeHeader,Option 2
 Authentication.CrossDevice.Label.CodeNotVerified,Code für Schnellanmeldung wurde nicht verifiziert.
@@ -308,6 +313,7 @@ Authentication.Login.Action.SendCodeSentenceCase,
 Authentication.Login.Action.SendVerificationEmail,E-Mail zur Verifizierung senden
 Authentication.Login.Action.SignIn,Anmelden
 Authentication.Login.Action.SignInSentenceCase,
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Passkey nutzen
 Authentication.Login.Action.WeChatLogin,WeChat-Anmeldung
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Roblox verlassen, um dich bei einem anderen {platformAccountName}-Konto anzumelden"
@@ -320,6 +326,7 @@ Authentication.Login.Description.PasskeyDescription,"Dein Konto hat Passkey. Die
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Wir können nicht feststellen, ob dein Gerät Passkey unterstützt. Versuche es erneut oder tippe auf ""Probleme bei der Anmeldung"", um dein Konto mit einer E-Mail-Adresse oder Telefonnummer wiederherzustellen."
 Authentication.Login.Description.PasskeyMobileOnly,"Passkeys sind nur auf Mobilgeräten verfügbar. Versuche, dich auf eine andere Weise anzumelden."
 Authentication.Login.Description.SigningInWith,Mit <b>{identifier}</b> anmelden
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Wenn das Roblox-Konto existiert, erhältst du einen Verifizierungscode an {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,"Für dein Konto ist nur ein Passkey für die Anmeldung eingerichtet. Versuche, dich mit deinem Passkey anzumelden, oder stelle dein Konto wieder her."
 Authentication.Login.Error.PlatformAccountConnectionFailure,Das Plattform-Konto kann nicht verifiziert werden. Bitte versuche es später erneut.
@@ -330,7 +337,9 @@ Authentication.Login.Heading.LoginRoblox,Bei Roblox anmelden
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Bei vorhandenem Konto anmelden
 Authentication.Login.Heading.NewAppAvailable,Neue Roblox-App herunterladen
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Auf andere Weise anmelden
 Authentication.Login.Heading.SignInToRoblox,
+Authentication.Login.Heading.SignInWithRoblox,Mit Roblox anmelden
 Authentication.Login.Label.AccountSelectorTitle,Wähle Konto zum Anmelden
 Authentication.Login.Label.AgedUpUsername,Füge einen eindeutigen @Benutzernamen hinzu
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Sorry, es gab ein Problem mit der Verbindung zu den Servern.
@@ -344,6 +353,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, es gab ein Problem 
 Bitte warte eine Weile und versuche es erneut."
 Authentication.Login.Label.ConnectionError.Title,Verbindungsfehler
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,
 Authentication.Login.Label.EmailNeedsVerification,Deine E-Mail-Adresse muss verifiziert werden.
 Authentication.Login.Label.EmailOrPhone,E-Mail-Adresse oder Telefon
 Authentication.Login.Label.EnterCode,
@@ -353,7 +363,8 @@ Authentication.Login.Label.EnterOneTimeCode,Einmaligen Code eingeben
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,"Gib den Code ein, den wir dir gerade per E-Mail geschickt haben"
 Authentication.Login.Label.EnterPassword,Passwort eingeben
 Authentication.Login.Label.EnterYourPassword,Gib dein Passwort ein
-Authentication.Login.Label.ForgotYourPassword,Passwort vergessen?
+Authentication.Login.Label.ForgotPassword,Passwort vergessen?
+Authentication.Login.Label.ForgotYourPassword,
 Authentication.Login.Label.GetOneTimeCode,Einmaligen Code erhalten
 Authentication.Login.Label.LearnMore,Mehr erfahren
 Authentication.Login.Label.LinkAccountWarning,"Dein Roblox-Konto wird mit deinem Konto auf {platform} verknüpft und du wirst beim nächsten Mal automatisch eingeloggt! Du kannst die Verknüpfung jederzeit in den Einstellungen aufheben. Es kann eine Wartezeit geben, bevor die Verknüpfung mit einem neuen Konto möglich ist."
@@ -369,6 +380,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Benutzername, E-Mail-Adre
 Authentication.Login.Label.UsernameEmailPhone,Benutzer/E-Mail/Telefon
 Authentication.Login.Label.UsernameOrEmail,Benutzername oder E-Mail-Adresse
 Authentication.Login.Label.UsernameOrPhone,Benutzername oder Telefon
+Authentication.Login.Label.VerificationCode,Verifizierungscode
 Authentication.Login.Label.WeChatUserCancel,Du hast dich von WeChat abgemeldet. Bitte melde dich bei WeChat ein.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat-Version wird nicht unterstützt
 Authentication.Login.LinkIllegalChildAccountLinking,Dieses Roblox-Konto konnte nicht mit einem Xbox-Kinderkonto verknüpft werden. Bitte versuche es mit einem anderen Konto oder überprüfe deine Einstellungen.
@@ -649,6 +661,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Objektqualität: Textu
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Objektqualität: {partName} hat {intersecting_tri_face_percent} % sich überschneidende Dreiecksflächen (Score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Objektqualität: {partName} hat {uv_outside_bound_vert_percent} % UV-Eckpunkte außerhalb der Grenzen (Score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Objektqualität: {partName} hat {similar_vertex_percent} % ähnliche Eckpunkte (Score: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"Der Accessoire-Anhang ""{AttachmentName}"" in ""{PartName}"" muss in der Nähe der Oberfläche des Meshes platziert werden. Die aktuelle Position [{CurrentPosition}] liegt außerhalb des gültigen Bereichs. Bewege den Accessoire-Anhang näher an [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Der Ziehpunkt ist mit einem Skin für die Verbindung {jointName} versehen, die nicht Teil des zulässigen Schemas ist. Es sind nur Standard-R15-Verbindungen und Verbindungen für die Skinning-Übertragung zulässig."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} muss Skinning-Übertragung verwenden, aber dir fehlt die erforderliche Verbindung {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Der Ziehpunkt hat einen Skin für die Verbindung {jointName}, aber für dieses Objekt muss ein automatischer Skin erstellt werden. Du kannst nur einen Skin für {validJointNameList} erstellen."
@@ -662,6 +675,7 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Die gesuchte {ExpectedCla
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Die folgenden Instanzen sind nicht Teil des genehmigten Schemas und sollten entfernt werden: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Das hochgeladene Objekt sollte ein {ExpectedClass} sein, ist aber ein {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Das hochgeladene Objekt sollte den Namen {ExpectedClass} haben, hat aber stattdessen den Namen {RootClass}."
+Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} enthält noch nicht gespeicherte bearbeitbare Inhalte. Speichere sie vor der Veröffentlichung als Objekt und versuche es erneut.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"Das Körperteil ""{bodyPartName}"" in CurveAnimation hat eine Positionsspur (Übersetzung). Körperteile in Animationen dürfen nur rotiert werden. Positionspuren sind nicht erlaubt. Bitte entferne die Positionsspur von diesem Körperteil."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"Der Körperteil ""{bodyPartName}"" in CurveAnimation bewegt sich um {distance} Noppen von seiner Startposition. Die maximal zulässige Verschiebung beträgt {maxDistance} Noppen. Bitte reduziere die Positionsbewegung des Körperteils."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation enthält HRD/DRD-Knochen und das Körperteil ""{bodyPartName}"" hat eine Positionsspur (Übersetzung). Wenn in der Animation Knochen vorhanden sind, dürfen keine Körperteile verschoben werden, um eine Trennung der Verbindungen zu verhindern. Bitte entferne alle Positionsspuren von Körperteilen."
@@ -760,7 +774,9 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Die {axis}-Achsen-Größ
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Der Anhang {attName} darf in Unterelemente von {partName} genau einmal vorhanden sein.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (oder untergeordnete Instanzen) enthalten Attribute. Du musst Attribute aus den folgenden Instanzen entfernen: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" hat ungültige Eigenschaften: {ProblematicProperties}. Ein angezeigtes Byte-Limit wurde überschritten (ein Limit von 0 bedeutet, dass die Eigenschaft leer sein muss). Eine andere Eigenschaft enthält NaN/Inf-Werte oder überschreitet ihr Standardgrößenlimit."
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Der Rig-Anhang ""{AttachmentName}"" in ""{PartName}"" muss in der Nähe der Gelenkbegrenzung platziert werden, wo dieses Körperteil mit einem benachbarten Teil verbunden ist. Die aktuelle Position [{CurrentPosition}] ist zu weit von der Verbindungsebene entfernt. Bewege den Rig-Anhang ihn näher an [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Um ein Objekt auf Roblox hochzuladen, musst du genau 1 Instanz und die zugehörige Upload-Art auswählen."
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Dieses Objekt ist zu groß, um es hochzuladen ({sizeBytes} Bytes überschreiten das Maximum von {maxSizeBytes} Bytes). Bitte reduziere seine Größe und versuche es erneut."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Die Instanz {ProblematicDescendantPath} darf keine Tags aufweisen.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,"Zweite Test-Fehlerzeichenfolge, die verwendet wird, um den Hub-first-Übersetzungs-Synchronisierungs-Workflow durchgängig zu verifizieren."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Das Kopf-Mesh-Teil enthält Gesichtsanimationen für {jointName}, die in FACS nicht verwendet werden können. Bitte benenne diese Verbindung um und importiere deinen Kopf dann erneut."
@@ -1630,12 +1646,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Bestehenden Look aktualisieren
 Feature.Avatar.Action.UpdateMakeupLook,Look aktualisieren
 Feature.Avatar.Action.Zoom,Zoomen
 Feature.Avatar.AvatarWidgetTitle,Stile entdecken
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Veröffentlichen
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Deine Kreation kann jetzt genutzt werden.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Dieser Hintergrund wurde mit KI generiert. Durch die Veröffentlichung bestätigst du, dass er den Community-Regeln von Roblox entspricht und keine Inhalte verwendet, an denen du keine Rechte hast. Er wird überprüft, bevor er in deinem Inventar erscheint. Veröffentlichte Artikel können nicht bearbeitet werden."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Der Artikel entsprach nicht den Community-Regeln
 Feature.Avatar.BackgroundGeneration.Error.Moderation,"Dieser Prompt entspricht nicht unseren Richtlinien. Versuche, etwas anderes zu beschreiben."
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Dieser Hintergrund entspricht nicht den Community-Regeln von Roblox, daher wurde er deinem Inventar nicht hinzugefügt. Versuche, einen neuen Hintergrund zu generieren."
 Feature.Avatar.BackgroundGeneration.Error.System,Beim Generieren deines Hintergrunds ist etwas schiefgelaufen. Bitte versuche es erneut.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Beschreibung
+Feature.Avatar.BackgroundGeneration.Label.Name,Name
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
 Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
 Feature.Avatar.BackgroundGeneration.Title,Hintergrund erstellen
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Im Inventar veröffentlichen
 Feature.Avatar.Backgrounds.Title,Hintergründe
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Für diesen Körperstil ist keine Anpassung verfügbar.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Zur Standard-Körperfarbe zurückkehren
@@ -1819,7 +1849,7 @@ Feature.Avatar.Label.ModerationFailed,Moderation fehlgeschlagen
 Feature.Avatar.Label.Mood,Stimmung
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,Diese Assets werden nicht mehr in dieser Kollektion verfügbar sein:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Gepostete Avatare sind auf dem Marktplatz öffentlich sichtbar
-Feature.Avatar.Label.Name,Name
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Hals
 Feature.Avatar.Label.Newest,Neueste
 Feature.Avatar.Label.NoExpiredItems,Keine abgelaufenen {itemType}
@@ -2132,7 +2162,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Einstellungen öffnen
 Feature.Build.Action.Playtest,Spiel testen
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Veröffentlichen
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Neueste Version veröffentlichen
 Feature.Build.Action.Restore,Wiederherstellen
 Feature.Build.Action.Revert,
@@ -2149,11 +2179,13 @@ Feature.Build.Action.ViewUsage,Kontingent anzeigen
 Feature.Build.Content.NewGame,Neues Spiel
 Feature.Build.Description.ArchiveRemoval,"Wenn du dieses Spiel archivierst, wird es aus Build entfernt. Du kannst weiterhin im Creator Hub oder in Roblox Studio darauf zugreifen und es wiederherstellen."
 Feature.Build.Description.AutoBuyUsage,"Verwende deine Robux, um beim Erstellen automatisch zusätzliches Build-Kontingent zu kaufen. Du kannst jederzeit ein tägliches Ausgabenlimit festlegen."
+Feature.Build.Description.BoostAudienceForPlays,Vergrößere deine Zielgruppe für mehr Spieler.
 Feature.Build.Description.BoostGameAudience,Vergrößere die Zielgruppe deines Spiels
 Feature.Build.Description.BuildIdeaGame,Mache aus deinen Ideen ein Spiel
 Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Build eine Antwort für dich hat."
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
+Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die dir beim Spieltest helfen."
 Feature.Build.Description.EnableBuildNotifs,"Aktiviere Benachrichtigungen in deinen Geräteeinstellungen, um Updates von Build zu erhalten."
 Feature.Build.Description.FriendsLinkOnly,"Nur deine Freunde können auf diesen Link zugreifen. Ändere die Zielgruppeneinstellung deines Spiels, wenn du möchtest, dass mehr Personen spielen."
@@ -2182,17 +2214,19 @@ Feature.Build.Label.Access,Zugriff
 Feature.Build.Label.AdditionalUsage,Zusätzliches Build-Kontingent
 Feature.Build.Label.AdditionalUsed,{USED} von {LIMIT} verwendet
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} verfügbar
 Feature.Build.Label.Autosaved,Automatisch gespeichert
 Feature.Build.Label.Available,Verfügbar
 Feature.Build.Label.BackToBuild,Zurück zu Build
 Feature.Build.Label.Building,Wird erstellt …
 Feature.Build.Label.CaptureLibrary,Aufnahmen-Bibliothek
 Feature.Build.Label.ContentRating,Altersfreigabe
+Feature.Build.Label.Created,Erstellt
 Feature.Build.Label.CreatedDate,{DAY}. {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
-Feature.Build.Label.Description,Beschreibung
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,
 Feature.Build.Label.FreeBuildUsage,Kostenloses Build-Kontingent
@@ -2201,11 +2235,13 @@ Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
 Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
+Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitiert
 Feature.Build.Label.Loading,Wird geladen …
+Feature.Build.Label.Models3D,3D-Modelle
 Feature.Build.Label.NoLimit,Kein Limit
 Feature.Build.Label.NotStarted,Nicht begonnen
 Feature.Build.Label.Pending,Ausstehend
@@ -2215,15 +2251,19 @@ Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Öffentlich
 Feature.Build.Label.PubliclyUnavailable,Öffentlich nicht verfügbar
 Feature.Build.Label.Published,Veröffentlicht
+Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Bereit
 Feature.Build.Label.ResetsDaily,Wird täglich zurückgesetzt
 Feature.Build.Label.RestoredVersion,{VERSION} wurde wiederhergestellt
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
+Feature.Build.Label.SearchAssets,Objekte durchsuchen
 Feature.Build.Label.SearchGames,Spiele suchen
 Feature.Build.Label.SearchTasks,Aufgaben suchen
 Feature.Build.Label.SelectOption,Wähle eine Option
 Feature.Build.Label.ShareAddedFriends,"Mit Freunden teilen, die du hinzugefügt hast"
+Feature.Build.Label.Shared,Geteilt
+Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.Thinking,Denkt nach
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel und Beschreibung
@@ -2291,6 +2331,7 @@ Feature.Build.Label.ToolThumbnailRunning,Vorschaubild des Spiels wird festgelegt
 Feature.Build.Label.UniverseNumber,Universum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unbekannt
 Feature.Build.Label.UnlimitedUsed,{USED} verwendet • Kein Limit
+Feature.Build.Label.Updated,Aktualisiert
 Feature.Build.Label.Usage,Kontingent
 Feature.Build.Label.UsageUsed,{USED} verwendet
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2304,6 +2345,8 @@ Feature.Build.Message.AccountRequirements,Dein Konto erfüllt nicht die Anforder
 Feature.Build.Message.AccountTooNew,"Dein Konto ist zu neu, um etwas zu veröffentlichen. Bitte versuche es erneut, wenn es 2 Tage alt ist."
 Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Spieletester hinzugefügt.
 Feature.Build.Message.AnswerBuildQuestion,Beantworte unten die Frage von Build.
+Feature.Build.Message.AssetDetailsUnavailable,Objekt-Infos sind nicht verfügbar.
+Feature.Build.Message.AssetsLoadFailed,Objekte können nicht geladen werden.
 Feature.Build.Message.AudienceIneligible,Nicht für diese Zielgruppe zulässig
 Feature.Build.Message.BuildAccountBlocked,Build ist derzeit für dein Konto nicht verfügbar.
 Feature.Build.Message.BuildBusy,Build ist ausgelastet. Warte eine Minute und versuche es dann erneut.
@@ -2334,6 +2377,7 @@ Feature.Build.Message.InvitesLoadFailed,Einladungen konnten nicht geladen werden
 Feature.Build.Message.LimitBelowSpend,"Das Limit darf nicht unter den {ALREADY_SPENT} Robux liegen, die heute bereits ausgegeben wurden."
 Feature.Build.Message.LinkCopied,Link in Zwischenablage kopiert
 Feature.Build.Message.LoadingVersions,Versionsverlauf wird geladen …
+Feature.Build.Message.NoAssetsFound,Keine Objekte gefunden.
 Feature.Build.Message.NoDescriptionProvided,Keine Beschreibung vorhanden.
 Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du hinzufügen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
 Feature.Build.Message.NoResults,
@@ -2366,8 +2410,10 @@ Feature.Build.Message.WhatToCreate,Was möchtest du heute erstellen?
 Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} Min. {REM_SECONDS} Sek. funktioniert
 Feature.Build.Message.WorkedSeconds,{SECONDS} Sek. funktioniert
 Feature.Build.Message.WorkingOnTasks,Deine Aufgaben werden bearbeitet
+Feature.Build.Title.AdCampaignActive,Werbekampagne ist aktiv
 Feature.Build.Title.AddFriendsToPlaytest,"Füge Freunde hinzu, die dir beim Spieltest helfen"
 Feature.Build.Title.ArchiveThisGame,Dieses Spiel archivieren?
+Feature.Build.Title.AssetLibrary,Bibliothek
 Feature.Build.Title.Audience,Zielgruppe
 Feature.Build.Title.BuildQuestion,Build hat eine Frage
 Feature.Build.Title.BuildQuestions,Build hat ein paar Fragen
@@ -2437,6 +2483,7 @@ Feature.Catalog.Action.Report,Melden
 Feature.Catalog.Action.Sell,Verkaufen
 Feature.Catalog.Action.ShareVia,Teilen über ...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,Jetzt testen
 Feature.Catalog.Action.Upgrade,Aufwerten
 Feature.Catalog.Action.ViewDetailsPage,Infoseite anzeigen
 Feature.Catalog.Action.ViewExperienceDetails,Experience-Infos anzeigen
@@ -3395,7 +3442,7 @@ Feature.GameDetails.Label.ChatFeatures,Chat-Funktionen
 Feature.GameDetails.Label.Community,Community
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,Enthält Kraftausdrücke
 Feature.GameDetails.Label.ContentMaturity,
-Feature.GameDetails.Label.Created,Erstellt
+Feature.GameDetails.Label.Created,
 Feature.GameDetails.Label.Developer,Entwickler
 Feature.GameDetails.Label.DontLikeGame,Ich mag dieses Spiel nicht
 Feature.GameDetails.Label.DontLikeImage,Ich mag dieses Bild nicht
@@ -3443,7 +3490,7 @@ Feature.GameDetails.Label.Supported,Unterstützt
 Feature.GameDetails.Label.TellUsMorePlaceholder,Erzähle uns mehr
 Feature.GameDetails.Label.TooRepetitive,Zu repetitiv
 Feature.GameDetails.Label.Unavailable,
-Feature.GameDetails.Label.Updated,Aktualisiert
+Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.Upvoted,Für gut befunden
 Feature.GameDetails.Label.Visits,Besuche
 Feature.GameDetails.Label.VoiceChat,
@@ -4524,9 +4571,12 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS-Datenschutzrichtlinie
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS-Nutzungsbedingungen
 Feature.Schools.Body.EnterCode,"UNiDAYS hat eine E-Mail mit deinem einmaligen Code an {user_email} gesendet. Gib den Code unten ein, um deine Schule zu bestätigen."
 Feature.Schools.Body.UnidaysShare,Deine E-Mail-Adresse ist für andere nicht sichtbar.
 Feature.Schools.Body.UnidaysTerms,"Wir arbeiten mit UNiDAYS zusammen, um deine Schul-E-Mail-Adresse zu verifizieren. Indem du auf ""Weiter"" klickst, stimmst du den Nutzungsbedingungen und der Datenschutzrichtlinie von UNiDAYS zu."
+Feature.Schools.Caption.AlumniGroupOnGraduate,"Sobald du deinen Abschluss gemacht hast, kommst du in die Alumni-Gruppe von {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Sobald du deinen Abschluss gemacht hast, wirst du von {school} entfernt."
 Feature.Schools.Description.CantFindSchoolNotify,"Wir werden dich benachrichtigen, sobald deine Schule auf Roblox ist."
 Feature.Schools.Description.CantVerifySchool,Anhand der von dir angegebenen Informationen konnten wir deine Schule nicht verifizieren.
@@ -4910,7 +4960,7 @@ Feature.VerificationUpsell.Heading.AddEmail,Verifiziere bitte zuerst dein Konto.
 Feature.VerificationUpsell.Heading.FinishAccountSetup,Kontoeinrichtung abschließen
 Feature.VerificationUpsell.Heading.PhoneNumberVerified,Telefonnummer verifiziert!
 Feature.VerificationUpsell.Heading.TryVoiceChat,Sprachchat probieren
-Feature.VerificationUpsell.Heading.VerificationCode,Verifizierungscode
+Feature.VerificationUpsell.Heading.VerificationCode,
 Feature.VerificationUpsell.Heading.VerifiedSuccessfully.V2,Erfolgreich verifiziert!
 Feature.VerificationUpsell.Heading.VerifyEmail,
 Feature.VerificationUpsell.Heading.VerifyOnLogout,Verliere nie den Zugriff auf dein Konto!

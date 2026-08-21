@@ -171,12 +171,12 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		var65,
 		var55
 	})
-	local var71 = reactModule.useCallback(function(p3, p4, p5, p6) --[[ line: 211 ]]
-		-- upvalues: var33 (ref), var31 (ref)
-		return var31.registerPopoverAsync(p3, p4, p5, p6, var33)
-	end, { var31.registerPopoverAsync, var33 })
+	local var71 = reactModule.useCallback(function(p3, p4, p5, p6, p7, p8) --[[ line: 211 ]]
+		-- upvalues: var31 (ref), flagsModule (copy)
+		return var31.registerPopoverAsync(p3, p4, p5, p6, p7, if flagsModule.FoundationPopoverPluginFocusable then p8 else nil)
+	end, { var31.registerPopoverAsync })
 	local var72 = reactModule.useRef(false)
-	reactModule.useEffect(function() --[[ line: 219 ]]
+	reactModule.useEffect(function() --[[ line: 232 ]]
 		-- upvalues: var30 (ref), var72 (ref), loggerModule (copy)
 		if not var30.onPressedOutside and not var72.current then
 			var72.current = true
@@ -185,7 +185,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, { var30.onPressedOutside })
 	local var73 = usePanelModule({
 		isOpen = if flagsModule.FoundationPopoverPluginOverlayMeasurement then ready else var34.isOpen and var64.isReady,
-		onClose = reactModule.useCallback(function() --[[ line: 230 ]]
+		onClose = reactModule.useCallback(function() --[[ line: 243 ]]
 			-- upvalues: var30 (ref), flagsModule (copy), var34 (ref)
 			if var30.onPressedOutside then
 				if flagsModule.FoundationPopoverClickOutsideInGuiShadow and typeof(var34.anchor) == "Instance" and var34.anchor.GuiState ~= Enum.GuiState.Idle then return end
@@ -196,7 +196,8 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		registerPanelAsync = var71,
 		position = var70,
 		depth = if relativeIndex ~= nil then 0 else relativeIndex,
-		parentPopoverId = var33
+		parentPopoverId = var33,
+		isFocusable = if flagsModule.FoundationPopoverPluginFocusable then var30.isFocusable else nil
 	})
 	local _ = nil
 	local _ = nil
@@ -209,20 +210,20 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 		var76 = var74
 		var77 = var75
 	end
-	reactModule.useEffect(function() --[[ line: 269 ]]
+	reactModule.useEffect(function() --[[ line: 283 ]]
 		-- upvalues: flagsModule (copy), var73 (ref), var30 (ref), var39 (ref), isPointInGuiObjectBoundsModule (copy)
 		if not flagsModule.FoundationPopoverClickOutsideInGuiShadow then return end
 		if var73 and var73.container and var30.onPressedOutside then
-			local inputBeganConnection = var73.container.InputBegan:Connect(function(p7) --[[ line: 278 ]]
+			local inputBeganConnection = var73.container.InputBegan:Connect(function(p9) --[[ line: 292 ]]
 				-- upvalues: var39 (copy), isPointInGuiObjectBoundsModule (copy), var30 (copy)
-				if p7.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
+				if p9.UserInputType ~= Enum.UserInputType.MouseButton1 then return end
 				if not var39 then return end
-				if not isPointInGuiObjectBoundsModule(var39, Vector2.new(p7.Position.X, p7.Position.Y)) then
+				if not isPointInGuiObjectBoundsModule(var39, Vector2.new(p9.Position.X, p9.Position.Y)) then
 					var30.onPressedOutside()
 				end
 			end)
 			
-			return function() --[[ line: 290 ]]
+			return function() --[[ line: 304 ]]
 				-- upvalues: inputBeganConnection (ref)
 				inputBeganConnection:Disconnect()
 			end
@@ -230,7 +231,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	end, { var73, var39, var30.onPressedOutside })
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useLayoutEffect(function() --[[ line: 297 ]]
+		reactModule.useLayoutEffect(function() --[[ line: 311 ]]
 			-- upvalues: var68 (write), var39 (ref), var48 (write)
 			if not var68 or var39 == nil then return end
 			local absoluteSize = var39.AbsoluteSize
@@ -240,7 +241,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 			end
 		end, { var68, var39 })
 	end
-	local var78 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 310 ]]
+	local var78 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 324 ]]
 		-- upvalues: var47 (write), positioningModule (copy), var61 (write), var59 (write), var60 (write), var65 (ref), var55 (ref), SHADOW_SIZE (copy)
 		return if var47 then positioningModule.calculatePopoverBounds(var61, var59, var60, if var65 then var55 else 0, var47) + Vector2.new(SHADOW_SIZE * 2, SHADOW_SIZE * 2) else nil
 	end, {
@@ -248,7 +249,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	}) else nil
 	
 	if flagsModule.FoundationPopoverPluginOverlayMeasurement then
-		reactModule.useLayoutEffect(function() --[[ line: 328 ]]
+		reactModule.useLayoutEffect(function() --[[ line: 342 ]]
 			-- upvalues: var47 (write), var78 (ref), var46 (write), var44 (write), var73 (ref)
 			if var47 == nil or var78 == nil then
 				var46(UDim2.new())
@@ -263,7 +264,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 				var73.setSizeAsync(var78)
 			end
 		end, { var47, var78, var73 })
-		reactModule.useLayoutEffect(function() --[[ line: 344 ]]
+		reactModule.useLayoutEffect(function() --[[ line: 358 ]]
 			-- upvalues: var67 (write), var42 (ref), var73 (ref), var78 (ref), var41 (ref)
 			if not var67 then
 				var42.Parent = nil
@@ -304,7 +305,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 68 | named "PopoverCon
 	local var84
 	local var81 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var67 else var73 ~= nil
 	local var82 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then var42 elseif var73 then var73.container else nil
-	local var83 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 382 ]]
+	local var83 = if flagsModule.FoundationPopoverPluginOverlayMeasurement then reactModule.useMemo(function() --[[ line: 396 ]]
 		-- upvalues: var73 (ref), var80 (ref)
 		return {
 			id = if var73 then var73.popoverId else nil,

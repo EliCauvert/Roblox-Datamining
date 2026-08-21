@@ -44,45 +44,49 @@ function t:setReportingInstance(p4) --[[ line: 52 ]]
 	self._currentInstance = p4
 end
 
-function t:fail(p5, p6, p7) --[[ line: 56 ]]
+function t:setReportingRoot(p5) --[[ line: 58 ]]
+	self._rootInstance = p5
+end
+
+function t:fail(p6, p7, p8) --[[ line: 62 ]]
 	-- upvalues: validationEnumsModule (ref), getRelativePath (ref)
 	self._status = validationEnumsModule.Status.FAIL
 	table.insert(self._failures, {
-		failureStringKey = p5,
-		failureStringParams = p6 or {},
-		instancePath = getRelativePath(self._rootInstance, p7 or self._currentInstance)
+		failureStringKey = p6,
+		failureStringParams = p7 or {},
+		instancePath = getRelativePath(self._rootInstance, p8 or self._currentInstance)
 	})
 end
 
-function t:warn(p8, p9, p10) --[[ line: 65 ]]
+function t:warn(p9, p10, p11) --[[ line: 71 ]]
 	-- upvalues: getRelativePath (ref)
 	table.insert(self._warnings, {
-		failureStringKey = p8,
-		failureStringParams = p9 or {},
-		instancePath = getRelativePath(self._rootInstance, p10 or self._currentInstance)
+		failureStringKey = p9,
+		failureStringParams = p10 or {},
+		instancePath = getRelativePath(self._rootInstance, p11 or self._currentInstance)
 	})
 end
 
-function t.forceError(_, p11) --[[ line: 74 ]]
-	error({ __forceError = true, message = p11 })
+function t.forceError(_, p12) --[[ line: 80 ]]
+	error({ __forceError = true, message = p12 })
 end
 
-function t.fetchError(_, p12) --[[ line: 81 ]]
-	error({ __fetchError = true, message = p12 })
+function t.fetchError(_, p13) --[[ line: 87 ]]
+	error({ __fetchError = true, message = p13 })
 end
 
-function t:err(p13) --[[ line: 85 ]]
+function t:err(p14) --[[ line: 91 ]]
 	-- upvalues: getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), validationEnumsModule (ref)
 	if getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
-		print("Reporting:", self._testEnum, "has error:", p13)
+		print("Reporting:", self._testEnum, "has error:", p14)
 	end
 	self._status = validationEnumsModule.Status.ERROR
-	self._telemetryContext = p13
+	self._telemetryContext = p14
 	self._failures = {}
 	self._warnings = {}
 end
 
-function t:complete() --[[ line: 96 ]]
+function t:complete() --[[ line: 102 ]]
 	-- upvalues: validationEnumsModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref), getFFlagUGCValidationLogFailureInfoModule (ref), UGCValidationLogFailureLength (ref)
 	local var9 = if self._startTime then 1000 * (os.clock() - self._startTime) else 0
 	

@@ -662,6 +662,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Asset quality: texture
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Asset quality: {partName} has {intersecting_tri_face_percent}% intersecting triangle faces (score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Asset quality: {partName} has {uv_outside_bound_vert_percent}% UV vertices outside bounds (score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Asset quality: {partName} has {similar_vertex_percent}% similar vertices (score: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Accessory attachment '{AttachmentName}' in '{PartName}' must be placed close to the surface of the mesh. Current position [{CurrentPosition}] is outside the valid region. Move it closer to [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle is skinned to joint {jointName}, which is not part of the allowed schema. Only standard R15 joints and skinning transfer joints are permitted."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} must use skinning transfer, but you are missing the required joint {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handle is skinned to joint {jointName}, but this asset must be auto skinned. You may only skin to {validJointNameList}."
@@ -675,6 +676,7 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Could not find required {
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,The following instances are not part of the approved schema and should be removed: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,Uploaded asset should be a {ExpectedClass} but is a {RootClass}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Uploaded asset should be named {ExpectedClass} but is instead named {RootClass}.
+Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} still holds unsaved editable content. Save it as an asset before publishing and try again.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Body part '{bodyPartName}' in CurveAnimation has a Position (translation) track. Animation body parts may only be rotated; position tracks are not allowed. Please remove the Position track from this body part.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Body part '{bodyPartName}' in CurveAnimation moves {distance} studs from its start position. Maximum allowed translation is {maxDistance} studs. Please reduce the body part's positional movement.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation contains HRD/DRD bones and body part '{bodyPartName}' has a Position (translation) track. When any bones are present in the animation, no body parts may translate to prevent joint separation. Please remove all Position tracks from body parts."
@@ -716,6 +718,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation has 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contains Curves with too many keys. {maxAllowed} is the maximum per Curve. Please fix the animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contains more than {maxAllowed} MarkerCurve(s). Please ensure there is no more than {maxAllowed} MarkerCurve descendant(s).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contains a MarkerCurve with {count} Markers. {maxAllowed} is the maximum per MarkerCurve. Please fix the animation.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"The published animation specifies a maximum part translation of {taggedTranslation} studs, but its animation data calculates to {calculatedTranslation} studs. Please republish the animation."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contains unexpected child: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Dynamic Heads on the marketplace must be properly caged so that the eyes and mouth vertices on the cage line up with the mesh vertices. Please improve your caging and its alignment with the mesh.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Cannot detect smile expression for the Dynamic Head. Please adjust cage landmarks for the mouth to match where the mouth on the head and make sure it can show smile expression.
@@ -774,7 +777,9 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,{partName} mesh {axis} a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Attachment {attName} must exist exactly once within {partName} descendants.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (or its descendants) contain Attributes. You need to remove Attributes from the following: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' has invalid properties: {ProblematicProperties}. A shown byte limit was exceeded (a limit of 0 means the property must be empty); any other property contains NaN/Inf values or exceeds its default size limit.
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,Rig attachment '{AttachmentName}' in '{PartName}' must be placed near the joint boundary where this body part connects to an adjacent part. Current position [{CurrentPosition}] is too far from the connection plane. Move it closer to [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"To upload an asset to Roblox, you must select exactly 1 instance and the associated upload type."
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,This asset is too large to upload ({sizeBytes} bytes exceeds the maximum of {maxSizeBytes} bytes). Please reduce its size and try again.
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instance {ProblematicDescendantPath} should not have tags.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Second test error string used to verify the Hub-first translation sync workflow end-to-end.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Head meshpart has facial animations for {jointName}, which cannot be used in FACs. Please rename this joint then reimport your head."
@@ -1669,6 +1674,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"This backgr
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"This background was generated with AI. By uploading, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory. Uploaded items can't be edited."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Unlock free exclusive backgrounds with Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item didn’t meet Community Standards
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,You have reached your usage limit. Try again later to keep customizing.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,You have reached your usage limit. Try again tomorrow to keep customizing.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,You have reached your usage limit. Try again in 1 hour to keep customizing.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,You have reached your usage limit. Try again in 1 minute to keep customizing.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,That prompt doesn't follow our guidelines. Try describing something else.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"This background doesn't follow the Roblox Community Standards, so it wasn't added to your inventory. Try generating a new one."
 Feature.Avatar.BackgroundGeneration.Error.System,Something went wrong generating your background. Please try again.
@@ -2240,6 +2249,7 @@ Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Building...
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.ContentRating,Content rating
+Feature.Build.Label.Created,Created
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,Deleted
@@ -2253,11 +2263,13 @@ Feature.Build.Label.FriendsOnly,Friends only
 Feature.Build.Label.GetMoreBuildUsage,Get more Build usage
 Feature.Build.Label.Hi,Hi
 Feature.Build.Label.IconThumbnails,Icon & thumbnails
+Feature.Build.Label.Images2D,2D Images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limited
 Feature.Build.Label.Loading,
+Feature.Build.Label.Models3D,3D Models
 Feature.Build.Label.NoLimit,No limit
 Feature.Build.Label.NotStarted,Not started
 Feature.Build.Label.Pending,Pending
@@ -2267,15 +2279,19 @@ Feature.Build.Label.Private,Private
 Feature.Build.Label.Public,Public
 Feature.Build.Label.PubliclyUnavailable,Publicly unavailable
 Feature.Build.Label.Published,Published
+Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Ready
 Feature.Build.Label.ResetsDaily,Resets daily
 Feature.Build.Label.RestoredVersion,Restored {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
+Feature.Build.Label.SearchAssets,Search assets
 Feature.Build.Label.SearchGames,Search games
 Feature.Build.Label.SearchTasks,Search tasks
 Feature.Build.Label.SelectOption,Select an option
 Feature.Build.Label.ShareAddedFriends,Share with friends you added
+Feature.Build.Label.Shared,Shared
+Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.Thinking,Thinking
 Feature.Build.Label.Title,Title
 Feature.Build.Label.TitleDescription,Title & description
@@ -2343,6 +2359,7 @@ Feature.Build.Label.ToolThumbnailRunning,Setting game thumbnail
 Feature.Build.Label.UniverseNumber,Universe {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unknown
 Feature.Build.Label.UnlimitedUsed,{USED} used • No limit
+Feature.Build.Label.Updated,Updated
 Feature.Build.Label.Usage,Usage
 Feature.Build.Label.UsageUsed,{USED} used
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2356,6 +2373,8 @@ Feature.Build.Message.AccountRequirements,Your account doesn't meet the requirem
 Feature.Build.Message.AccountTooNew,Your account is too new to publish. Try again when it's 2 days old.
 Feature.Build.Message.AllFriendsAdded,You've added all your friends as playtesters.
 Feature.Build.Message.AnswerBuildQuestion,Answer Build's question below.
+Feature.Build.Message.AssetDetailsUnavailable,Asset details are unavailable.
+Feature.Build.Message.AssetsLoadFailed,Unable to load assets.
 Feature.Build.Message.AudienceIneligible,Not eligible for this audience
 Feature.Build.Message.BuildAccountBlocked,Build isn't available for your account right now.
 Feature.Build.Message.BuildBusy,Build is busy. Wait a minute and try again.
@@ -2386,6 +2405,7 @@ Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
 Feature.Build.Message.LimitBelowSpend,Limit can't be below the {ALREADY_SPENT} Robux already spent today.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
+Feature.Build.Message.NoAssetsFound,No assets found.
 Feature.Build.Message.NoDescriptionProvided,No description provided.
 Feature.Build.Message.NoFriendsToAdd,You don't have any friends to add yet. Find people to connect with on Roblox first.
 Feature.Build.Message.NoResults,
@@ -2421,6 +2441,7 @@ Feature.Build.Message.WorkingOnTasks,Working on your tasks
 Feature.Build.Title.AdCampaignActive,Ad campaign is active
 Feature.Build.Title.AddFriendsToPlaytest,Add friends to help you playtest
 Feature.Build.Title.ArchiveThisGame,Archive this game?
+Feature.Build.Title.AssetLibrary,Library
 Feature.Build.Title.Audience,Audience
 Feature.Build.Title.BuildQuestion,Build has a question
 Feature.Build.Title.BuildQuestions,Build has some questions
@@ -3450,7 +3471,7 @@ Feature.GameDetails.Label.ChatFeatures,Chat Features
 Feature.GameDetails.Label.Community,Community
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,Contains strong language
 Feature.GameDetails.Label.ContentMaturity,Content Maturity
-Feature.GameDetails.Label.Created,Created
+Feature.GameDetails.Label.Created,
 Feature.GameDetails.Label.Developer,Developer
 Feature.GameDetails.Label.DontLikeGame,Don't like this game
 Feature.GameDetails.Label.DontLikeImage,Don't like this image
@@ -3498,7 +3519,7 @@ Feature.GameDetails.Label.Supported,Supported
 Feature.GameDetails.Label.TellUsMorePlaceholder,Tell us more
 Feature.GameDetails.Label.TooRepetitive,Too repetitive
 Feature.GameDetails.Label.Unavailable,
-Feature.GameDetails.Label.Updated,Updated
+Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.Upvoted,Upvoted
 Feature.GameDetails.Label.Visits,Visits
 Feature.GameDetails.Label.VoiceChat,
@@ -4234,6 +4255,8 @@ Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Toys and Games
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Weapons, Firearms, and Related Products"
 Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,Inaccurate Maturity & Compliance Questionnaire submission
 Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
 Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
 Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
@@ -4612,6 +4635,7 @@ Feature.Schools.Description.MoreVerifiedAlumniNeeded,More verified alumni needed
 Feature.Schools.Description.NotAvailableInRegion,The school feature is not available yet.
 Feature.Schools.Description.RemoveSchoolBody,You’ll have to re-verify your school email address to rejoin your school. Any reward items you’ve received will be deleted.
 Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.SchoolUnavailableBody,This school isn't currently available on Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Your school will only be visible to people from the same school. You can update or remove your school anytime.
 Feature.Schools.Description.UpsellTagline,"Discover, connect, and play with verified students from your school."
 Feature.Schools.Description.WaitlistAlumniBody,You're all set. We'll notify you as soon as your school's alumni group is launched.
@@ -4641,6 +4665,7 @@ Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} members
 Feature.Schools.Heading.RemoveYourSchool,Remove your school
 Feature.Schools.Heading.SchoolIsLive,Your school is now open
+Feature.Schools.Heading.SchoolUnavailable,Your school is unavailable
 Feature.Schools.Heading.SelectGraduationYear,Select graduation year
 Feature.Schools.Heading.ShareWithFriends,Share with friends
 Feature.Schools.Heading.ThanksForInterest,Thanks for your interest
@@ -4656,6 +4681,7 @@ Feature.Schools.Label.ResendInSeconds,Resend in {time}
 Feature.Schools.Label.SchoolLaunches,School launches
 Feature.Schools.Label.SchoolVerified,You're verified
 Feature.Schools.Label.Search,
+Feature.Schools.Label.SuggestedEmail,Did you mean {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Alumni group pending
 Feature.Schools.Label.UpsellPerkFindFriends,Find friends from your school
 Feature.Schools.Label.UpsellPerkPlayAndChat,See who's online and play together easily

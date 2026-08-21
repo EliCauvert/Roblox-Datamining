@@ -21,7 +21,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSystemEmphasisColor3",
-				value = Color3.new(0.286275, 0.301961, 0.352941)
+				value = Color3.new(0.2, 0.372549, 1)
 			},
 			[2] = { name = "ColorSystemEmphasisTransparency", value = 0 }
 		}
@@ -34,7 +34,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorOverMediaOverMedia100Color3",
-				value = Color3.new(0.721569, 0.811765, 1)
+				value = Color3.new(0.72549, 0.811765, 1)
 			},
 			[2] = {
 				name = "ColorOverMediaOverMedia100Transparency",
@@ -346,7 +346,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionSubEmphasisBackgroundColor3",
-				value = Color3.new(0.0980392, 0.101961, 0.121569)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = {
 				name = "ColorActionSubEmphasisBackgroundTransparency",
@@ -648,7 +648,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorOverMediaOverMedia300Color3",
-				value = Color3.new(0.721569, 0.811765, 1)
+				value = Color3.new(0.72549, 0.811765, 1)
 			},
 			[2] = {
 				name = "ColorOverMediaOverMedia300Transparency",
@@ -740,7 +740,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSystemEmphasisColor3",
-				value = Color3.new(0.286275, 0.301961, 0.352941)
+				value = Color3.new(0.2, 0.372549, 1)
 			},
 			[2] = { name = "ColorSystemEmphasisTransparency", value = 0 }
 		}
@@ -755,7 +755,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSystemEmphasisColor3",
-				value = Color3.new(0.286275, 0.301961, 0.352941)
+				value = Color3.new(0.2, 0.372549, 1)
 			},
 			[2] = { name = "ColorSystemEmphasisTransparency", value = 0 }
 		}
@@ -768,7 +768,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionEmphasisBackgroundColor3",
-				value = Color3.new(0.286275, 0.301961, 0.352941)
+				value = Color3.new(0.2, 0.372549, 1)
 			},
 			[2] = {
 				name = "ColorActionEmphasisBackgroundTransparency",
@@ -936,7 +936,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionSubtleBorderColor3",
-				value = Color3.new(0.207843, 0.215686, 0.254902)
+				value = Color3.new(0.286275, 0.301961, 0.352941)
 			},
 			[2] = { name = "ColorActionSubtleBorderTransparency", value = 0 }
 		}
@@ -951,7 +951,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionSubtleForegroundColor3",
-				value = Color3.new(0.0980392, 0.101961, 0.121569)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = {
 				name = "ColorActionSubtleForegroundTransparency",
@@ -1278,7 +1278,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorSystemEmphasisColor3",
-				value = Color3.new(0.286275, 0.301961, 0.352941)
+				value = Color3.new(0.2, 0.372549, 1)
 			},
 			[2] = { name = "ColorSystemEmphasisTransparency", value = 0 }
 		}

@@ -38,7 +38,7 @@ local t_1 = {
 local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
 local SHADOW_SIZE = constantsModule.SHADOW_SIZE
 
-return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverContent" ]]
+return reactModule.forwardRef(function(p0, p1) --[[ line: 79 | named "PopoverContent" ]]
 	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), popoverContextModule (ref), useOverlayModule (ref), useTokensModule (ref), useElevationModule (ref), elevationLayerModule (ref), usePointerPositionModule (ref), useFloatingModule (ref), isPointInGuiObjectBoundsModule (ref), flagsModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), imageModule (ref), SHADOW_IMAGE (ref), SHADOW_SIZE (ref), dashModule (ref), t_1 (ref), elevationOwnerScope (ref), reactRobloxModule (ref)
 	local var46
 	local var23 = withDefaultsModule(p0, t)
@@ -54,13 +54,13 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverCon
 	local var32, var33 = reactModule.useState(nil)
 	local var34, var35 = reactModule.useState(nil)
 	local var36 = usePointerPositionModule(var34)
-	reactModule.useImperativeHandle(p1, function() --[[ line: 96 ]]
+	reactModule.useImperativeHandle(p1, function() --[[ line: 98 ]]
 		-- upvalues: var32 (ref)
 		return var32
 	end, { var32 })
 	local var37, var38, var39, var40, var41, var42 = useFloatingModule(var24.isOpen, var24.anchor, var32, var27, var23.side, var23.align, if var26 then var30 else 0)
 	local var43 = reactModule.useRef(nil)
-	local var44 = reactModule.useCallback(function(p2) --[[ line: 112 ]]
+	local var44 = reactModule.useCallback(function(p2) --[[ line: 114 ]]
 		-- upvalues: var43 (ref), var35 (ref), var23 (ref), var24 (ref), isInstance (ref), var36 (ref), isPointInGuiObjectBoundsModule (copy)
 		if var43.current then
 			var43.current:Disconnect()
@@ -68,7 +68,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverCon
 		var35(p2)
 		
 		if p2 ~= nil and var23.onPressedOutside then
-			var43.current = p2:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ line: 119 ]]
+			var43.current = p2:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ line: 121 ]]
 				-- upvalues: p2 (ref), var24 (copy), isInstance (copy), var36 (copy), isPointInGuiObjectBoundsModule (copy), var23 (copy)
 				if p2.GuiState == Enum.GuiState.Press then
 					if var24.anchor and isInstance then
@@ -82,16 +82,16 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverCon
 			end)
 		end
 	end, { var23.onPressedOutside, var24.anchor })
-	reactModule.useEffect(function() --[[ line: 142 ]]
+	reactModule.useEffect(function() --[[ line: 144 ]]
 		-- upvalues: var43 (ref)
-		return function() --[[ line: 143 ]]
+		return function() --[[ line: 145 ]]
 			-- upvalues: var43 (copy)
 			if var43.current then
 				var43.current:Disconnect()
 			end
 		end
 	end, {})
-	local var45 = if flagsModule.FoundationPopoverContentAnchorFix then reactModule.joinBindings({ var37, var42, var39 }):map(function(p3) --[[ line: 156 ]]
+	local var45 = if flagsModule.FoundationPopoverContentAnchorFix then reactModule.joinBindings({ var37, var42, var39 }):map(function(p3) --[[ line: 158 ]]
 		local var47 = p3[1]
 		local var48 = p3[2]
 		local var49 = p3[3]
@@ -119,11 +119,11 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverCon
 				ZIndex = 2,
 				AnchorPoint = var42,
 				Image = SHADOW_IMAGE,
-				Size = var39:map(function(p4) --[[ line: 190 ]]
+				Size = var39:map(function(p4) --[[ line: 192 ]]
 					-- upvalues: SHADOW_SIZE (copy)
 					return p4 + UDim2.fromOffset(SHADOW_SIZE, SHADOW_SIZE)
 				end),
-				Position = reactModule.joinBindings({ var37, var42 }):map(function(p5) --[[ line: 193 ]]
+				Position = reactModule.joinBindings({ var37, var42 }):map(function(p5) --[[ line: 195 ]]
 					-- upvalues: SHADOW_SIZE (copy)
 					return UDim2.fromOffset(p5[1].X + SHADOW_SIZE / 2 * (if p5[2].X == 0 then -1 else 1), p5[1].Y + SHADOW_SIZE / 2 * (if p5[2].Y == 0 then -1 else 1) + 2)
 				end),
@@ -138,7 +138,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverCon
 				ZIndex = 3,
 				tag = "anchor-center-center",
 				Size = UDim2.fromOffset(size200, size200),
-				Position = var40:map(function(p6) --[[ line: 211 ]]
+				Position = var40:map(function(p6) --[[ line: 213 ]]
 					return UDim2.fromOffset(p6.X, p6.Y)
 				end),
 				backgroundStyle = backgroundStyle,
@@ -147,7 +147,7 @@ return reactModule.forwardRef(function(p0, p1) --[[ line: 77 | named "PopoverCon
 			Content = reactModule.createElement(viewModule, {
 				ZIndex = 4,
 				AnchorPoint = if flagsModule.FoundationPopoverContentAnchorFix then Vector2.zero else var42,
-				Position = if flagsModule.FoundationPopoverContentAnchorFix then var45 else var37:map(function(p7) --[[ line: 225 ]]
+				Position = if flagsModule.FoundationPopoverContentAnchorFix then var45 else var37:map(function(p7) --[[ line: 227 ]]
 					return UDim2.fromOffset(p7.X, p7.Y)
 				end),
 				selection = var23.selection,

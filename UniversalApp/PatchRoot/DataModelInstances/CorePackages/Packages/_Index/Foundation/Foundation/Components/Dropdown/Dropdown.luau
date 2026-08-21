@@ -3,7 +3,6 @@ local reactModule = require(foundation.Parent.React)
 local baseMenuModule = require(foundation.Components.BaseMenu)
 local popoverModule = require(foundation.Components.Popover)
 local _ = require(foundation.Components.Types)
-local flagsModule = require(foundation.Utility.Flags)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local inputSizeModule = require(foundation.Enums.InputSize)
@@ -21,91 +20,85 @@ local t = {
 }
 local t_1 = { offset = 5, position = popoverSideModule.Bottom }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 83 | named "Dropdown" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), flagsModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
-	local var16 = withDefaultsModule(p0, t)
-	local var17, var18 = reactModule.useState(false)
-	local var19 = reactModule.useRef(nil)
-	local var20, var21 = reactModule.useState(nil)
-	local var22 = reactModule.useCallback(function(p2) --[[ line: 88 ]]
-		-- upvalues: var19 (ref), var21 (ref)
-		var19.current = p2
-		var21(p2)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 82 | named "Dropdown" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
+	local var15 = withDefaultsModule(p0, t)
+	local var16, var17 = reactModule.useState(false)
+	local var18 = reactModule.useRef(nil)
+	local var19, var20 = reactModule.useState(nil)
+	local var21 = reactModule.useCallback(function(p2) --[[ line: 87 ]]
+		-- upvalues: var18 (ref), var20 (ref)
+		var18.current = p2
+		var20(p2)
 	end, {})
-	
-	if flagsModule.FoundationDropdownSelectionProps then
-		reactModule.useImperativeHandle(p1, function() --[[ line: 94 ]]
-			-- upvalues: var20 (ref)
-			return var20
-		end, { var20 })
-	end
-	local var23, var24 = reactModule.useBinding(var16.width)
-	local var25, var26 = markSelectedItemModule(var16.items, var16.value)
-	local var27 = reactModule.useCallback(function() --[[ line: 104 ]]
-		-- upvalues: var18 (ref)
-		var18(function(p3) --[[ line: 105 ]]
+	reactModule.useImperativeHandle(p1, function() --[[ line: 91 ]]
+		-- upvalues: var19 (ref)
+		return var19
+	end, { var19 })
+	local var22, var23 = reactModule.useBinding(var15.width)
+	local var24, var25 = markSelectedItemModule(var15.items, var15.value)
+	local var26 = reactModule.useCallback(function() --[[ line: 100 ]]
+		-- upvalues: var17 (ref)
+		var17(function(p3) --[[ line: 101 ]]
 			return not p3
 		end)
 	end, {})
-	local var28 = reactModule.useCallback(function() --[[ line: 110 ]]
-		-- upvalues: var18 (ref)
-		var18(false)
+	local var27 = reactModule.useCallback(function() --[[ line: 106 ]]
+		-- upvalues: var17 (ref)
+		var17(false)
 	end, {})
-	local var29 = reactModule.useCallback(function(p4) --[[ line: 114 ]]
-		-- upvalues: var18 (ref), var16 (ref)
-		var18(false)
-		var16.onItemChanged(p4)
-	end, { var16.onItemChanged })
-	var16.onAbsoluteSizeChanged = reactModule.useCallback(function(p5) --[[ line: 119 ]]
-		-- upvalues: p0 (ref), var24 (ref)
+	local var28 = reactModule.useCallback(function(p4) --[[ line: 110 ]]
+		-- upvalues: var17 (ref), var15 (ref)
+		var17(false)
+		var15.onItemChanged(p4)
+	end, { var15.onItemChanged })
+	var15.onAbsoluteSizeChanged = reactModule.useCallback(function(p5) --[[ line: 115 ]]
+		-- upvalues: p0 (ref), var23 (ref)
 		if p0.onAbsoluteSizeChanged then
 			p0.onAbsoluteSizeChanged(p5)
 		end
-		var24(UDim.new(0, p5.AbsoluteSize.X))
-	end, { var24, p0.onAbsoluteSizeChanged })
+		var23(UDim.new(0, p5.AbsoluteSize.X))
+	end, { var23, p0.onAbsoluteSizeChanged })
 	
-	return reactModule.createElement(popoverModule.Root, {
-		isOpen = var17,
-		ref = if flagsModule.FoundationDropdownSelectionProps then nil else p1
-	}, {
-		DropdownControl = reactModule.createElement(dropdownControlModule, withCommonPropsModule(var16, {
-			variant = var16.variant,
-			onActivated = var27,
-			hasError = var16.hasError,
-			isDisabled = var16.isDisabled,
-			item = var26,
-			placeholder = var16.placeholder,
-			isMenuOpen = var17,
-			width = var16.width,
-			size = var16.size,
-			label = var16.label,
-			hint = var16.hint,
-			inputRef = if flagsModule.FoundationDropdownSelectionProps then var22 else var19,
-			Selectable = if flagsModule.FoundationDropdownSelectionProps then var16.Selectable else nil,
-			NextSelectionUp = if flagsModule.FoundationDropdownSelectionProps then var16.NextSelectionUp else nil,
-			NextSelectionDown = if flagsModule.FoundationDropdownSelectionProps then var16.NextSelectionDown else nil,
-			NextSelectionLeft = if flagsModule.FoundationDropdownSelectionProps then var16.NextSelectionLeft else nil,
-			NextSelectionRight = if flagsModule.FoundationDropdownSelectionProps then var16.NextSelectionRight else nil
+	return reactModule.createElement(popoverModule.Root, { isOpen = var16 }, {
+		DropdownControl = reactModule.createElement(dropdownControlModule, withCommonPropsModule(var15, {
+			variant = var15.variant,
+			onActivated = var26,
+			hasError = var15.hasError,
+			isDisabled = var15.isDisabled,
+			item = var25,
+			placeholder = var15.placeholder,
+			isMenuOpen = var16,
+			width = var15.width,
+			size = var15.size,
+			label = var15.label,
+			hint = var15.hint,
+			inputRef = var21,
+			Selectable = var15.Selectable,
+			NextSelectionUp = var15.NextSelectionUp,
+			NextSelectionDown = var15.NextSelectionDown,
+			NextSelectionLeft = var15.NextSelectionLeft,
+			NextSelectionRight = var15.NextSelectionRight
 		})),
-		Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var19 }),
+		Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var18 }),
 		Menu = reactModule.createElement(popoverModule.Content, {
 			hasArrow = false,
 			align = popoverAlignModule.End,
 			side = t_1,
-			onPressedOutside = var28,
+			onPressedOutside = var27,
 			radius = radiusModule.Medium,
-			selection = var16.selection,
-			selectionGroup = var16.selectionGroup
+			selection = var15.selection,
+			selectionGroup = var15.selectionGroup
 		}, reactModule.createElement(baseMenuModule.Root, {
 			couldGrow = true,
-			size = var16.size,
-			width = var23,
-			items = var25,
-			maxHeight = var16.maxHeight,
-			onActivated = var29,
+			size = var15.size,
+			width = var22,
+			items = var24,
+			maxHeight = var15.maxHeight,
+			onActivated = var28,
 			radius = radiusModule.Medium,
-			scrollingFrameRef = var16.scrollingFrameRef,
-			testId = `{var16.testId}--menu`
+			scrollingFrameRef = var15.scrollingFrameRef,
+			testId = `{var15.testId}--menu`
 		}))
 	})
 end))

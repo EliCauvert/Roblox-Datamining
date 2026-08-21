@@ -661,6 +661,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Varlık kalitesi: {tex
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Varlık kalitesi: {partName} için kesişen üçgen yüzü oranı yüzde {intersecting_tri_face_percent} (skor: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Varlık kalitesi: {partName} için sınır değerleri dışındaki UV köşesi oranı yüzde {uv_outside_bound_vert_percent} (skor: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Varlık kalitesi: {partName} için benzer köşe oranı yüzde {similar_vertex_percent} (skor: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"""{PartName}"" içindeki ""{AttachmentName}"" aksesuar eklentisi, mesh yüzeyine yakın yerleştirilmelidir. Mevcut konum [{CurrentPosition}], geçerli bölgenin dışında. [{ClosestValidPosition}] konumuna yaklaştır."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Tutamak, izin verilen şemada olmayan {jointName} eklemine giydirildi. Yalnızca standart R15 eklemlerine ve soyma aktarımı eklemlerine izin verilir."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType}, soyma aktarımı kullanmalıdır fakat gerekli olan {requiredJointName} eklemi eksik."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,İşleyici {jointName} eklemine giydirildi ancak bu varlığın otomatik olarak giydirilmesi gerekir. Yalnızca {validJointNameList} eklemine giydirebilirsin.
@@ -674,6 +675,7 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,{ParentPath} içinde adı
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Aşağıdaki durumlar onaylanmış şemanın bir parçası değildir ve kaldırılmalıdır: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,Yüklenen varlık bir {ExpectedClass} olmalıdır ancak yüklemeye çalıştığın varlığın türü {RootClass}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Yüklenen varlığın adı {ExpectedClass} olmalıdır ancak yüklemeye çalıştığın varlığın adı {RootClass}.
+Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} hâlâ kaydedilmemiş düzenlenebilir içerik barındırıyor. Yayınlamadan önce varlık olarak kaydedip tekrar dene.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"CurveAnimation'daki ""{bodyPartName}"" vücut parçası bir Pozisyon (çeviri) izine sahip. Animasyon vücut parçaları yalnızca döndürülebilir; pozisyon izlerine izin verilmez. Lütfen bu vücut parçasından Pozisyon izini kaldır."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"CurveAnimation'daki ""{bodyPartName}"" vücut parçası, başlangıç konumundan {distance} birim kare hareket ediyor. En fazla {maxDistance} birim karelik öteleme hareketine izin verilir. Lütfen vücut parçasının pozisyonel hareketini azalt."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation, HRD/DRD kemikleri içeriyor ve ""{bodyPartName}"" vücut parçası bir Pozisyon (çeviri) izine sahip. Animasyonda herhangi bir kemik olduğunda, eklem ayrılmasını önlemek için hiçbir vücut parçası çevrilemez. Lütfen tüm Pozisyon izlerini vücut parçalarından kaldır."
@@ -714,6 +716,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation'ın 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,"CurveAnimation, çok fazla anahtarı bulunan Eğriler içeriyor. Eğri başına maksimum {maxAllowed} anahtar olabilir. Lütfen animasyonu düzelt."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"CurveAnimation, {maxAllowed} taneden fazla MarkerCurve içeriyor. Lütfen en fazla {maxAllowed} MarkerCurve alt öğesi bulunmasına dikkat et."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,"CurveAnimation, {count} İşaretçili bir MarkerCurve içeriyor. MarkerCurve başına maksimum {maxAllowed} işaretçi olabilir. Lütfen animasyonu düzelt."
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Yayınlanan animasyon, maksimum {taggedTranslation} birim karelik parça ötelemesi belirtiyor, ancak animasyon verileri {calculatedTranslation} birim kare olarak hesaplanıyor. Lütfen animasyonu yeniden yayınla."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation beklenmedik bir alt öğe içeriyor: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Pazar yerindeki Dinamik Kafalar, kafes üzerindeki gözler ve ağız köşeleri mesh köşeleriyle hizalanacak şekilde düzgünce kafeslenmelidir. Lütfen kafeslemeni ve mesh ile hizalamasını iyileştir."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Dinamik Kafa için gülümseme ifadesi algılanamıyor. Kafada ağzın bulunduğu yerle eşleşmesi için lütfen ağzın kafes işaretlerini ayarla ve gülümseme ifadesini gösterebildiğinden emin ol.
@@ -772,7 +775,9 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} mesh'inin {a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,{attName} eklentisinin {partName} alt öğeleri içinde tam bir kez bulunması gerekir.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (veya alt öğeleri) Öznitelikler içeriyor. Öznitelikleri şunlardan kaldırman gerekir: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" geçersiz özelliklere sahip: {ProblematicProperties}. Gösterilen bayt sınırı aşıldı (0 sınırı, özelliğin boş olması gerektiği anlamına gelir); diğer tüm özellikler NaN/Inf değerleri içeriyor veya varsayılan boyut sınırını aşıyor."
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"""{PartName}"" içindeki ""{AttachmentName}"" düzenek eklentisi, bu vücut parçasının bitişik bir parçaya bağlandığı eklem sınırının yakınına yerleştirilmelidir. Mevcut konum [{CurrentPosition}], bağlantı düzleminden çok uzak. [{ClosestValidPosition}] konumuna yaklaştır."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox'a varlık yüklemek için tam olarak 1 durum ve ilişkili yükleme türünü seçmelisin.
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Bu varlık yüklenemeyecek kadar büyük ({sizeBytes} bayt, oysa üst sınır {maxSizeBytes} bayt). Lütfen küçültüp tekrar dene."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} durumu etiket içermemelidir.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Merkez öncelikli çeviri senkronizasyonu iş akışını uçtan uca doğrulamak için kullanılan ikinci test sorun dizisi.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Kafa mesh parçası, {jointName} için Yüz Hareketi Kodlama Sistemi'nde (FACS) kullanılamayan yüz animasyonlarına sahip. Lütfen bu eklemi yeniden adlandır, ardından kafanı tekrar içe aktar."
@@ -1362,6 +1367,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,X hesap adı geçersiz.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube url'si geçersiz.
 Feature.AddFriends.Action.FriendAdded,Arkadaş Eklendi
 Feature.AddFriends.Action.IgnoreAll,Tümünü Yok Say
+Feature.AddFriends.Action.IgnoreAllAltCase,Tümünü yok say
 Feature.AddFriends.Action.IgnoreConnectionRequest,Bağlantı Talebini Yok Say
 Feature.AddFriends.Action.IgnoreFriendRequest,Arkadaşlık isteğini yok say
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Güvenilir arkadaş olarak ekleme talebini yok say
@@ -1530,6 +1536,7 @@ Feature.AppealsPortal.Label.Type.LookText,Paylaşılan Avatar Adı ve Açıklama
 Feature.AppealsPortal.Label.Type.Mesh,Mesh
 Feature.AppealsPortal.Label.Type.Model,Model
 Feature.AppealsPortal.Label.Type.Plugin,Eklenti
+Feature.AppealsPortal.Label.Type.Post,Paylaşım
 Feature.AppealsPortal.Label.Type.Screenshot,Ekran Görüntüsü
 Feature.AppealsPortal.Label.Type.UserProfile,Kullanıcı profili
 Feature.AppealsPortal.Label.Type.Video,Video
@@ -1559,6 +1566,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,mesh
 Feature.AppealsPortal.Label.TypeLower.Model,model
 Feature.AppealsPortal.Label.TypeLower.PlaceId,
 Feature.AppealsPortal.Label.TypeLower.Plugin,eklenti
+Feature.AppealsPortal.Label.TypeLower.Post,paylaşım
 Feature.AppealsPortal.Label.TypeLower.Screenshot,ekran görüntüsü
 Feature.AppealsPortal.Label.TypeLower.UserProfile,kullanıcı profili
 Feature.AppealsPortal.Label.TypeLower.Video,video
@@ -1652,15 +1660,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Yayınla
+Feature.Avatar.BackgroundGeneration.Action.Upload,Yükle
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plus ile arka planlar oluştur.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Yaratımın kullanıma hazır.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,Bu arka plan yapay zekâ ile oluşturulmuştur. Yayınlayarak Roblox Topluluk Standartları'na uyduğunu ve hak sahibi olmadığın içerikler kullanmadığını onaylamış olursun. Envanterinde görünmeden önce incelenecek ve yayınlanan öğeler düzenlenemeyecektir.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,Bu arka plan yapay zekâ ile oluşturulmuştur. Yükleyerek Roblox Topluluk Standartları'na uyduğunu ve hak sahibi olmadığın içerikler kullanmadığını onaylamış olursun. Envanterinde görünmeden önce incelenecektir. Yüklenen öğeler düzenlenemez.
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus ile ücretsiz özel arka planların kilidini aç.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"Öğe, Topluluk Standartları'na uymuyor"
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Açıklama
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus'a özel
 Feature.Avatar.BackgroundGeneration.Label.Name,Ad
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
@@ -1668,6 +1681,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor
 Feature.Avatar.BackgroundGeneration.Title,Arka Plan Oluştur
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Envanterde yayınla
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Envantere yükle
 Feature.Avatar.Backgrounds.Title,Arka planlar
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Düzenlemeler bu vücut stilinde kullanılamıyor.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Varsayılan orijinal vücut renklerine dön
@@ -1679,7 +1694,7 @@ Feature.Avatar.Feature.Avatar.BackgroundGeneration.Title,
 Feature.Avatar.Feature.DisplayName.ErrorMessage.SomethingWentWrong,
 Feature.Avatar.Generic.Error,
 Feature.Avatar.GetInspired,İlham Al
-Feature.Avatar.Header.Post,Paylaşım
+Feature.Avatar.Header.Post,
 Feature.Avatar.Heading.AccessoryAdjustmentTitle,Aksesuar Ayarları
 Feature.Avatar.Heading.Active,Aktif
 Feature.Avatar.Heading.All,Tümü
@@ -2223,6 +2238,7 @@ Feature.Build.Label.BackToBuild,Oluşturmaya Dön
 Feature.Build.Label.Building,İnşa ediliyor...
 Feature.Build.Label.CaptureLibrary,Yakalama kütüphanesi
 Feature.Build.Label.ContentRating,İçerik derecelendirmesi
+Feature.Build.Label.Created,Oluşturma Tarihi
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
 Feature.Build.Label.Deleted,Silindi
@@ -2236,11 +2252,13 @@ Feature.Build.Label.FriendsOnly,Yalnızca arkadaşlar
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
 Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
+Feature.Build.Label.Images2D,2 Boyutlu Görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
 Feature.Build.Label.Loading,
+Feature.Build.Label.Models3D,3 Boyutlu Modeller
 Feature.Build.Label.NoLimit,Sınır yok
 Feature.Build.Label.NotStarted,Başlamadı
 Feature.Build.Label.Pending,Beklemede
@@ -2250,15 +2268,19 @@ Feature.Build.Label.Private,
 Feature.Build.Label.Public,Herkese Açık
 Feature.Build.Label.PubliclyUnavailable,Herkese açık değil
 Feature.Build.Label.Published,Yayınlandı
+Feature.Build.Label.Purchased,Satın alındı
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.ResetsDaily,Her gün sıfırlanır
 Feature.Build.Label.RestoredVersion,{VERSION} geri yüklendi
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
+Feature.Build.Label.SearchAssets,Varlık ara
 Feature.Build.Label.SearchGames,Oyun ara
 Feature.Build.Label.SearchTasks,Görev ara
 Feature.Build.Label.SelectOption,Bir seçenek belirle
 Feature.Build.Label.ShareAddedFriends,Eklediğin arkadaşlarla paylaş
+Feature.Build.Label.Shared,Paylaşıldı
+Feature.Build.Label.Sounds,Sesler
 Feature.Build.Label.Thinking,Düşünüyor
 Feature.Build.Label.Title,Başlık
 Feature.Build.Label.TitleDescription,Başlık ve açıklama
@@ -2326,6 +2348,7 @@ Feature.Build.Label.ToolThumbnailRunning,Oyun küçük resmi ayarlanıyor
 Feature.Build.Label.UniverseNumber,Evren {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Bilinmeyen
 Feature.Build.Label.UnlimitedUsed,{USED} kullanıldı • Sınır yok
+Feature.Build.Label.Updated,Güncelleme Tarihi
 Feature.Build.Label.Usage,Kullanım
 Feature.Build.Label.UsageUsed,{USED} kullanıldı
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2339,6 +2362,8 @@ Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekl
 Feature.Build.Message.AccountTooNew,Hesabın yayınlanamayacak kadar yeni. 2 günü doldurduğunda tekrar dene.
 Feature.Build.Message.AllFriendsAdded,Tüm arkadaşlarını oynanış testçisi olarak ekledin.
 Feature.Build.Message.AnswerBuildQuestion,İnşa Et'in sorusunu aşağıda yanıtla.
+Feature.Build.Message.AssetDetailsUnavailable,Varlık ayrıntıları kullanılamıyor.
+Feature.Build.Message.AssetsLoadFailed,Varlıklar yüklenemiyor.
 Feature.Build.Message.AudienceIneligible,Bu kitle için gerekli şartları karşılamıyor
 Feature.Build.Message.BuildAccountBlocked,İnşa Et şu anda hesabında kullanılamıyor.
 Feature.Build.Message.BuildBusy,İnşa Et meşgul. Bir dakika bekle ve tekrar dene.
@@ -2369,6 +2394,7 @@ Feature.Build.Message.InvitesLoadFailed,Davetler yüklenemedi
 Feature.Build.Message.LimitBelowSpend,"Sınır, bugün harcanmış olan {ALREADY_SPENT} Robux'un altında olamaz."
 Feature.Build.Message.LinkCopied,"Bağlantı, panoya kopyalandı."
 Feature.Build.Message.LoadingVersions,Sürüm geçmişi yükleniyor...
+Feature.Build.Message.NoAssetsFound,Varlık bulunamadı.
 Feature.Build.Message.NoDescriptionProvided,Açıklama sağlanmadı.
 Feature.Build.Message.NoFriendsToAdd,Henüz ekleyecek arkadaşın yok. Önce Roblox'ta bağlantı kurabileceğin insanlar bul.
 Feature.Build.Message.NoResults,
@@ -2404,6 +2430,7 @@ Feature.Build.Message.WorkingOnTasks,Görevlerin üzerinde çalışıyor
 Feature.Build.Title.AdCampaignActive,Reklam kampanyası aktif
 Feature.Build.Title.AddFriendsToPlaytest,Oynanış testinde sana yardımcı olacak arkadaşları ekle
 Feature.Build.Title.ArchiveThisGame,Bu oyun arşivlensin mi?
+Feature.Build.Title.AssetLibrary,Kütüphane
 Feature.Build.Title.Audience,Kitle
 Feature.Build.Title.BuildQuestion,İnşa Et'in bir sorusu var
 Feature.Build.Title.BuildQuestions,İnşa Et'in bazı soruları var
@@ -2894,6 +2921,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Yanıtlamak için uzun bas
 Feature.Chat.Label.Members,Üyeler
 Feature.Chat.Label.MessageNotAvailable,Bu mesaj gösterilemiyor
 Feature.Chat.Label.MuteInGameChatToastNotifications,Oyun içi sohbet bildirimlerini sustur
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Oyun içi parti bildirimlerini sustur
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Sohbet bulunamadı
 Feature.Chat.Label.NoDescriptionYet,Henüz açıklama yok.
@@ -3432,7 +3460,7 @@ Feature.GameDetails.Label.ChatFeatures,Sohbet Özellikleri
 Feature.GameDetails.Label.Community,Topluluk
 Feature.GameDetails.Label.ContainsStrongLanguagePillWarning,Sert bir dil içerir
 Feature.GameDetails.Label.ContentMaturity,
-Feature.GameDetails.Label.Created,Oluşturma Tarihi
+Feature.GameDetails.Label.Created,
 Feature.GameDetails.Label.Developer,Geliştirici
 Feature.GameDetails.Label.DontLikeGame,Bu oyunu beğenmedim
 Feature.GameDetails.Label.DontLikeImage,Bu görseli beğenmedim
@@ -3768,7 +3796,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Genişlet
-Feature.Moments.Action.GenerateText,
+Feature.Moments.Action.GenerateText,Metin Oluştur
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Yararlı değil
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Uygunsuz veya kuralları ihlal ediyor
 Feature.Moments.Action.Hide,Ayrıntıları gizle
@@ -3855,7 +3883,7 @@ Feature.Moments.Label.Tone.Hype,Heyecan verici
 Feature.Moments.Label.Tone.Neutral,Nötr
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
-Feature.Moments.Title.GenerateTextOptions,Metin Oluştur
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
@@ -4209,6 +4237,12 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,Hizmetler
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,Tütün ve Entojenler
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Oyuncaklar ve Oyunlar
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Silahlar, Ateşli Silahlar ve İlgili Ürünler"
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,Yanlış Olgunluk Düzeyi ve Uyumluluk Anketi gönderimi
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,Spam Yayınlama
@@ -4534,6 +4568,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Plus aboneliğin zaten oyun i�
 Feature.RobloxSubscription.Body.GenericError,İşlemi şu anda tamamlayamadık. Lütfen tekrar dene.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Bu abonelik bu cihazda satın alınamaz.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını doğrula ve bizden sana bir teşekkür hediyesi olarak 1 haftalık ücretsiz Roblox Plus kullanım hakkı kazan. Bu ücretsiz denemeden yararlanmak için herhangi bir ödeme şekli gerekmez.
+Feature.RobloxSubscription.Description.Benefit.Customize,Profil çerçeveleri ve uygulama temaları ile özelleştir
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10, ardından öğeler ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
@@ -4611,6 +4647,7 @@ Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} üye
 Feature.Schools.Heading.RemoveYourSchool,Okulunu kaldır
 Feature.Schools.Heading.SchoolIsLive,Okulun artık açık
+Feature.Schools.Heading.SchoolUnavailable,Okulun kullanılamıyor
 Feature.Schools.Heading.SelectGraduationYear,Mezuniyet yılını seç
 Feature.Schools.Heading.ShareWithFriends,Arkadaşlarla paylaş
 Feature.Schools.Heading.ThanksForInterest,İlgin için teşekkürler
