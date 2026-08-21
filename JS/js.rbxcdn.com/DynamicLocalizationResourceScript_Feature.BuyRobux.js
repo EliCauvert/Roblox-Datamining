@@ -53,6 +53,9 @@ Roblox.LangDynamic["Feature.BuyRobux"] = {
     "Heading.LimitedTimeBonus": "Limited-time avatar items",
     "Label.PeopleWithCount": "People ({count})",
     "Label.Search": "Search",
-    "Label.Loading": "Loading"
+    "Label.Loading": "Loading",
+    "Label.PendingRequestsSummary.Plural": "{count} pending requests",
+    "Label.PendingRequestsSummary.Singular": "{count} pending request",
+    "Heading.ReviewPendingRequests": "Review pending requests"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.BuyRobux");

@@ -53,6 +53,7 @@ Roblox.LangDynamic["Feature.ExperienceDetails"] = {
     "CommunitySection.EmptyDescription": "Join the official community for exclusive sneak peeks and early updates!",
     "Label.MadeByCreator": "Made by {creatorName}",
     "Label.MadeByCreatorWithBuild": "Made by {creatorName} with Build",
-    "Description.MadeWithBuild": "Build games are AI generated"
+    "Description.MadeWithBuild": "Build games are AI generated",
+    "Label.MadeByVerifiedCreatorWithBuild": "Made by {creatorName} with Build"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.ExperienceDetails");

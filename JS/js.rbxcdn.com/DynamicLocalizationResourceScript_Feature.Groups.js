@@ -1302,7 +1302,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Label.HiddenPostHeader": "Post below is hidden",
     "Action.Reset": "Reset",
     "Label.NoSearchResults": "No results found",
-    "Action.SearchForums": "Search for keywords or @users",
+    "Action.SearchForums": "Search for keywords",
     "Action.SearchFilters": "Filters",
     "Action.Filters": "Filters",
     "Action.Apply": "Apply",
