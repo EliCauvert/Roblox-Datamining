@@ -3103,6 +3103,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Hai bisogno d
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,
 Feature.ExperienceDetails.Body.StatsInfoTitle,Statistiche & Informazioni
+Feature.ExperienceDetails.Description.MadeWithBuild,I giochi Build sono generati dall'IA
+Feature.ExperienceDetails.Label.MadeByCreator,Realizzato da {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Realizzato da {creatorName} con Build
 Feature.ExperienceDetails.Label.NotPlayable,Non Giocabile
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Potrebbe esserci un'opzione per acquistare articoli che possono essere scambiati con altri articoli o funzionalità mediante Robux (""token dell'esperienza""). I token dell'esperienza servono esclusivamente a fruire di quest'ultima, non possono essere utilizzati al di fuori di essa e non costituiscono strumenti di pagamento prepagati. L'acquisto di token dell'esperienza è definitivo e in nessun caso non rimborsabile. Altri articoli e funzionalità che possono essere scambiati con token dell'esperienza possono essere modificati come richiesto a discrezione del creatore."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Confermo di accettare l'avviso giocando a questa esperienza
@@ -3827,8 +3830,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Non è stato possibile generare i
 Feature.Moments.Label.TextGenerationFailedTitle,Generazione non riuscita
 Feature.Moments.Label.TextGenerationFilteredBody,Impossibile eseguire la generazione per questo video acquisito: contenuto filtrato.
 Feature.Moments.Label.TextGenerationFilteredTitle,Generazione filtrata
+Feature.Moments.Label.Tone,Tono
+Feature.Moments.Label.Tone.Cinematic,Da film
+Feature.Moments.Label.Tone.Funny,Divertente
+Feature.Moments.Label.Tone.Hype,Entusiasmo
+Feature.Moments.Label.Tone.Neutral,Neutro
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Cosa è andato storto?
+Feature.Moments.Title.GenerateTextOptions,Genera testo
 Feature.Moments.Title.LeaveMomentCreation,Vuoi interrompere la creazione del Momento?
 Feature.Moments.Title.MomentRemoved,Momento rimosso
 Feature.Moments.Title.ReportPost,Segnala post
@@ -4537,6 +4546,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,Informativa sulla privacy di UNiDAYS
+Feature.Schools.Action.UnidaysTermsOfService,Termini di servizio UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS ha inviato un'email con il tuo codice una tantum a {user_email}. Inseriscilo qui sotto per confermare la tua scuola.
 Feature.Schools.Body.UnidaysShare,Il tuo indirizzo email non sarà visibile agli altri.
 Feature.Schools.Body.UnidaysTerms,"Collaboriamo con UNiDAYS per verificare il tuo indirizzo email scolastico. Cliccando su ""Continua"", accetti i termini di servizio e l'informativa sulla privacy di UNiDAYS."

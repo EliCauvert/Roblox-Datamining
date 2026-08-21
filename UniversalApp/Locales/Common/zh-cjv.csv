@@ -1359,6 +1359,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,X 句柄无效。
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,YouTube 网址无效。
 Feature.AddFriends.Action.FriendAdded,好友已添加
 Feature.AddFriends.Action.IgnoreAll,全部忽略
+Feature.AddFriends.Action.IgnoreAllAltCase,
 Feature.AddFriends.Action.IgnoreConnectionRequest,忽略联系人请求
 Feature.AddFriends.Action.IgnoreFriendRequest,忽略好友邀请
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,忽略可信好友请求
@@ -1527,6 +1528,7 @@ Feature.AppealsPortal.Label.Type.LookText,已分享的虚拟形象名称和描�
 Feature.AppealsPortal.Label.Type.Mesh,网格
 Feature.AppealsPortal.Label.Type.Model,模型
 Feature.AppealsPortal.Label.Type.Plugin,插件
+Feature.AppealsPortal.Label.Type.Post,
 Feature.AppealsPortal.Label.Type.Screenshot,屏幕截图
 Feature.AppealsPortal.Label.Type.UserProfile,用户个人资料
 Feature.AppealsPortal.Label.Type.Video,视频
@@ -1556,6 +1558,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,
 Feature.AppealsPortal.Label.TypeLower.Model,
 Feature.AppealsPortal.Label.TypeLower.PlaceId,
 Feature.AppealsPortal.Label.TypeLower.Plugin,
+Feature.AppealsPortal.Label.TypeLower.Post,
 Feature.AppealsPortal.Label.TypeLower.Screenshot,
 Feature.AppealsPortal.Label.TypeLower.UserProfile,用户资料
 Feature.AppealsPortal.Label.TypeLower.Video,
@@ -1649,15 +1652,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.Upload,
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,你的作品已可供使用。
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景由 AI 生成。发布即表示你确认其符合 Roblox 社区准则，且未使用你无权使用的内容。在出现在你的道具栏中之前，需要先经过审核，且已发布的道具无法编辑。
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社区准则
 Feature.Avatar.BackgroundGeneration.Error.Moderation,该指令不符合我们的指南。请尝试描述其他内容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社区准则，因此未添加至你的道具栏。请尝试生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,为你生成背景时出错。请重试。
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,描述
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,
 Feature.Avatar.BackgroundGeneration.Label.Name,名称
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,描述背景需求…
 Feature.Avatar.BackgroundGeneration.Status.Generating,正在为你生成背景…
@@ -1665,6 +1673,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,正在为你准备背景…
 Feature.Avatar.BackgroundGeneration.Title,创建背景
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,发布到道具栏
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,
 Feature.Avatar.Backgrounds.Title,背景
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,此身体样式无法进行调整。
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,默认使用原始身体肤色
@@ -2891,6 +2901,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,长按以回复
 Feature.Chat.Label.Members,成员
 Feature.Chat.Label.MessageNotAvailable,此信息不可用
 Feature.Chat.Label.MuteInGameChatToastNotifications,将游戏内聊天通知静音
+Feature.Chat.Label.MuteInGamePartyToastNotifications,
 Feature.Chat.Label.New,全新
 Feature.Chat.Label.NoChatFound,未找到聊天记录
 Feature.Chat.Label.NoDescriptionYet,尚无描述。
@@ -3118,6 +3129,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,你需要获�
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,注意事项
 Feature.ExperienceDetails.Body.StatsInfoTitle,统计资料与信息
+Feature.ExperienceDetails.Description.MadeWithBuild,构建游戏由 AI 生成
+Feature.ExperienceDetails.Label.MadeByCreator,由{creatorName}打造
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,由{creatorName}使用构建功能打造
 Feature.ExperienceDetails.Label.NotPlayable,无法开始游戏
 Feature.ExperienceDetails.Notes.InExperiencePurchase,体验中可能提供可使用 Robux 购买、用于兑换其他道具或功能的道具（“体验内代币”）。体验内代币仅用于增强该体验的乐趣，不能在体验之外使用，亦不构成预付类支付工具。你对体验内代币的购买为最终交易，任何情况下均不予退款。可通过体验内代币兑换的其他道具或功能，可能会根据创作者的需要进行调整。
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,游玩此体验即表示我同意注意事项
@@ -3841,8 +3855,14 @@ Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
 Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
+Feature.Moments.Label.Tone,语气
+Feature.Moments.Label.Tone.Cinematic,电影感
+Feature.Moments.Label.Tone.Funny,
+Feature.Moments.Label.Tone.Hype,活力
+Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
+Feature.Moments.Title.GenerateTextOptions,生成文本
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
@@ -4201,6 +4221,10 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,服务
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,烟草与神经学
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,玩具和游戏
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,武器、火器和相关产品
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,发布垃圾信息
@@ -4527,6 +4551,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Plus 订阅已为你提供了�
 Feature.RobloxSubscription.Body.GenericError,我们目前无法完成此操作。请重试。
 Feature.RobloxSubscription.Body.UnsupportedPlatform,此订阅无法在此设备上购买。
 Feature.RobloxSubscription.Description.AgeCheckTrial,为表达我们的谢意，完成年龄验证即可免费使用 Roblox Plus 一周。无需提供付款方式即可享受此免费试用。
+Feature.RobloxSubscription.Description.Benefit.Customize,
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,
 Feature.RobloxSubscription.Description.ExclusiveBenefits,以更少的 Robux 享受更多乐趣。订阅 Roblox Plus。
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,免费私人服务器
@@ -4557,6 +4583,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS 隐私政策
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 服务条款
 Feature.Schools.Body.EnterCode,UNiDAYS 已将一封包含一次性验证码的电子邮件发送至 {user_email}。请在下方输入验证码，以确认你的学校。
 Feature.Schools.Body.UnidaysShare,其他人不会看到你的电子邮件地址。
 Feature.Schools.Body.UnidaysTerms,我们与 UNiDAYS 合作，以验证你学校的电子邮件地址。点按“继续”即表示你同意 UNiDAYS 的服务条款和隐私政策。

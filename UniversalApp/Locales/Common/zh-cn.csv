@@ -3100,6 +3100,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,你需要获�
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,注意事项
 Feature.ExperienceDetails.Body.StatsInfoTitle,统计资料与信息
+Feature.ExperienceDetails.Description.MadeWithBuild,构建游戏由 AI 生成
+Feature.ExperienceDetails.Label.MadeByCreator,由{creatorName}打造
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,由{creatorName}使用构建功能打造
 Feature.ExperienceDetails.Label.NotPlayable,无法开始游戏
 Feature.ExperienceDetails.Notes.InExperiencePurchase,体验中可能提供可使用 Robux 购买、用于兑换其他道具或功能的道具（“体验内代币”）。体验内代币仅用于增强该体验的乐趣，不能在体验之外使用，亦不构成预付类支付工具。你对体验内代币的购买为最终交易，任何情况下均不予退款。可通过体验内代币兑换的其他道具或功能，可能会根据创作者的需要进行调整。
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,游玩此体验即表示我同意注意事项
@@ -3823,8 +3826,14 @@ Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
 Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
+Feature.Moments.Label.Tone,语气
+Feature.Moments.Label.Tone.Cinematic,电影感
+Feature.Moments.Label.Tone.Funny,
+Feature.Moments.Label.Tone.Hype,活力
+Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
+Feature.Moments.Title.GenerateTextOptions,生成文本
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？
 Feature.Moments.Title.MomentRemoved,精彩瞬间已移除
 Feature.Moments.Title.ReportPost,举报帖子
@@ -4532,6 +4541,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS 隐私政策
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 服务条款
 Feature.Schools.Body.EnterCode,UNiDAYS 已将一封包含一次性验证码的电子邮件发送至 {user_email}。请在下方输入验证码，以确认你的学校。
 Feature.Schools.Body.UnidaysShare,其他人不会看到你的电子邮件地址。
 Feature.Schools.Body.UnidaysTerms,我们与 UNiDAYS 合作，以验证你学校的电子邮件地址。点按“继续”即表示你同意 UNiDAYS 的服务条款和隐私政策。

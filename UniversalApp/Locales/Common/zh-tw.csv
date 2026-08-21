@@ -3089,6 +3089,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,你必須取�
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,注意事項
 Feature.ExperienceDetails.Body.StatsInfoTitle,統計資料與資訊
+Feature.ExperienceDetails.Description.MadeWithBuild,組建遊戲由 AI 生成
+Feature.ExperienceDetails.Label.MadeByCreator,創作者：{creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,由 {creatorName} 使用組建製作
 Feature.ExperienceDetails.Label.NotPlayable,無法遊玩
 Feature.ExperienceDetails.Notes.InExperiencePurchase,使用者可選擇向 Robux 購買可交易其他道具或功能的物品（下稱「體驗內代幣」）。體驗內代幣僅限用於享受體驗，不得於體驗外使用，亦不得作為預付型支付工具。體驗內代幣一旦購買後，該交易即視為最終決定，無論任何情況均不予退款。可使用體驗內代幣交易的其他道具與功能，得由創作者依需求自行調整或變更。
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,遊玩這項體驗即表示我同意注意事項
@@ -3813,8 +3816,14 @@ Feature.Moments.Label.TextGenerationFailedBody,無法生成文字，請再試一
 Feature.Moments.Label.TextGenerationFailedTitle,生成失敗
 Feature.Moments.Label.TextGenerationFilteredBody,無法為此截圖影片執行生成程序，內容已遭到過濾。
 Feature.Moments.Label.TextGenerationFilteredTitle,已過濾生成文字
+Feature.Moments.Label.Tone,語氣
+Feature.Moments.Label.Tone.Cinematic,電影感
+Feature.Moments.Label.Tone.Funny,
+Feature.Moments.Label.Tone.Hype,充滿活力
+Feature.Moments.Label.Tone.Neutral,中性
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
+Feature.Moments.Title.GenerateTextOptions,生成文字
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
 Feature.Moments.Title.MomentRemoved,「美好時光」已移除
 Feature.Moments.Title.ReportPost,檢舉貼文

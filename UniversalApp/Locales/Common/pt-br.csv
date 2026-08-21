@@ -3090,6 +3090,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Você precisa
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Notas
 Feature.ExperienceDetails.Body.StatsInfoTitle,Estatísticas & informações
+Feature.ExperienceDetails.Description.MadeWithBuild,Os jogos do Build são gerados por IA
+Feature.ExperienceDetails.Label.MadeByCreator,Criado por {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Criado por {creatorName} com a função Build
 Feature.ExperienceDetails.Label.NotPlayable,Não jogável
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Pode haver uma opção para comprar itens que podem ser trocados por outros itens ou funções com Robux (""tokens de experiência""). Tokens de experiência são apenas para aproveitar a experiência, não podem ser utilizados fora da experiência e não constituem instrumentos de pagamento pré-pago. Sua compra de tokens de experiência é final e nenhum reembolso será feito. Outros itens e funções que podem ser trocados por tokens em experiência podem ser alterados conforme necessário a critério do criador."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Concordo com o aviso ao jogar esta experiência
@@ -3814,8 +3817,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Não foi possível gerar o texto.
 Feature.Moments.Label.TextGenerationFailedTitle,Falha na geração
 Feature.Moments.Label.TextGenerationFilteredBody,Não é possível gerar um texto para esta captura de vídeo porque o conteúdo foi bloqueado.
 Feature.Moments.Label.TextGenerationFilteredTitle,Geração filtrada
+Feature.Moments.Label.Tone,Tom
+Feature.Moments.Label.Tone.Cinematic,Modo cinema
+Feature.Moments.Label.Tone.Funny,Engraçado
+Feature.Moments.Label.Tone.Hype,Entusiasmado
+Feature.Moments.Label.Tone.Neutral,Neutro
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,O que deu errado?
+Feature.Moments.Title.GenerateTextOptions,Gerar texto
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
 Feature.Moments.Title.ReportPost,Denunciar publicação

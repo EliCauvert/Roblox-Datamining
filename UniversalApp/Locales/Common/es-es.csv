@@ -3091,6 +3091,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Necesitas per
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Notas
 Feature.ExperienceDetails.Body.StatsInfoTitle,Estadísticas e información
+Feature.ExperienceDetails.Description.MadeWithBuild,Los juegos de Build son generados por IA
+Feature.ExperienceDetails.Label.MadeByCreator,Creado por {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Creado por {creatorName} con Build
 Feature.ExperienceDetails.Label.NotPlayable,No jugable
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Es posible que exista la opción de comprar objetos que podrán canjearse por otros o funciones con Robux (“tokens de la experiencia”). Estos tokens de la experiencia sirven exclusivamente para el disfrute dentro de la misma, no pueden utilizarse fuera de ella y no constituyen instrumentos de pago anticipado. La compra de tokens de la experiencia es definitiva y bajo ninguna circunstancia se realizarán reembolsos. Otros objetos y funciones que puedan canjearse por tokens de la experiencia podrán ser modificados según lo requiera el creador y a su discreción."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Estoy de acuerdo con las notas al jugar esta experiencia
@@ -3815,8 +3818,14 @@ Feature.Moments.Label.TextGenerationFailedBody,No se pudo generar el texto. Int�
 Feature.Moments.Label.TextGenerationFailedTitle,Error en la generación
 Feature.Moments.Label.TextGenerationFilteredBody,"No se puede realizar la generación de este video capturado, contenido filtrado."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generación filtrada
+Feature.Moments.Label.Tone,Tono
+Feature.Moments.Label.Tone.Cinematic,Cinemática
+Feature.Moments.Label.Tone.Funny,Divertido
+Feature.Moments.Label.Tone.Hype,Emocionante
+Feature.Moments.Label.Tone.Neutral,Neutro
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,¿Qué salió mal?
+Feature.Moments.Title.GenerateTextOptions,Generar texto
 Feature.Moments.Title.LeaveMomentCreation,¿Salir de la creación de Momento?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Reportar publicación

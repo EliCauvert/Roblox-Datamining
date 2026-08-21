@@ -3101,6 +3101,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,इस गे
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,नोट्स
 Feature.ExperienceDetails.Body.StatsInfoTitle,आँकड़े और जानकारी
+Feature.ExperienceDetails.Description.MadeWithBuild,'बिल्ड' गेम्स AI से जेनरेट किए जाते हैं
+Feature.ExperienceDetails.Label.MadeByCreator,{creatorName} ने बनाया
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,{creatorName} ने बिल्ड के साथ बनाया
 Feature.ExperienceDetails.Label.NotPlayable,खेलने लायक नहीं है
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"आपको ऐसे आइटम खरीदने का विकल्प मिल सकता है जिन्हें अन्य आइटम या Robux (""इन-एक्सपीरिएंस टोकन"") वाले फ़ंक्शंस के साथ एक्सचेंज किया जा सकता है. ये इन-एक्सपीरिएंस टोकन सिर्फ़ एक्सपीरिएंस का आनंद लेने के लिए हैं और एक्सपीरिएंस के बाहर इनका उपयोग नहीं किया जा सकता. साथ ही, इनका इस्तेमाल प्रीपेड भुगतान इंस्ट्रूमेंट्स के रूप में भी नहीं किया जा सकता है. इन-एक्सपीरिएंस टोकन की आपकी खरीदारी अंतिम होती है और किसी भी मामले में कोई रिफ़ंड नहीं दिया जाएगा. इन-एक्सपीरिएंस टोकन के लिए एक्सचेंज किए जा सकने वाले अन्य आइटम और फ़ंक्शंस को ज़रूरत के मुताबिक क्रिएटर की मर्ज़ी से बदला जा सकता है."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,इस एक्सपीरिएंस को खेलने का मतलब है कि मैं इस नोट्स से सहमत हूँ
@@ -3825,8 +3828,14 @@ Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेन�
 Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
 Feature.Moments.Label.TextGenerationFilteredBody,"कैप्चर किए गए इस वीडियो के लिए टेक्स्ट जेनरेट नहीं हो सकता, कॉन्टेंट फ़िल्टर किया गया."
 Feature.Moments.Label.TextGenerationFilteredTitle,जेनरेशन फ़िल्टर किया गया
+Feature.Moments.Label.Tone,टोन
+Feature.Moments.Label.Tone.Cinematic,सिनेमैटिक
+Feature.Moments.Label.Tone.Funny,मज़ेदार
+Feature.Moments.Label.Tone.Hype,हाइप
+Feature.Moments.Label.Tone.Neutral,न्यूट्रल
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
+Feature.Moments.Title.GenerateTextOptions,टेक्स्ट जेनरेट करें
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
@@ -4535,6 +4544,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS की प्राइवेसी पॉलिसी
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS की सेवा की शर्तें
 Feature.Schools.Body.EnterCode,UNiDAYS ने {user_email} पर आपको वन-टाइम कोड वाला ईमेल भेजा है. अपने स्कूल को कन्फ़र्म करने के लिए नीचे कोड डालें.
 Feature.Schools.Body.UnidaysShare,आपका ईमेल एड्रेस दूसरों को नहीं दिखेगा.
 Feature.Schools.Body.UnidaysTerms,"हम आपके स्कूल के ईमेल एड्रेस को वेरिफ़ाई करने के लिए UNiDAYS के साथ पार्टनरशिप करते हैं. ""जारी रखें"" पर क्लिक करने का मतलब है कि आप UNiDAYS की सेवा की शर्तों और प्राइवेसी पॉलिसी से सहमत हैं."

@@ -3073,6 +3073,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,คุณต�
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,
 Feature.ExperienceDetails.Body.StatsInfoTitle,สถิติและข้อมูล
+Feature.ExperienceDetails.Description.MadeWithBuild,เกม Build สร้างโดย AI
+Feature.ExperienceDetails.Label.MadeByCreator,จัดทำโดย {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,สร้างโดย {creatorName} ด้วย Build
 Feature.ExperienceDetails.Label.NotPlayable,ไม่สามารถเล่นได้
 Feature.ExperienceDetails.Notes.InExperiencePurchase,อาจมีตัวเลือกในการซื้อไอเท็มที่สามารถแลกเปลี่ยนเป็นไอเท็มหรือฟังก์ชันอื่นๆ ด้วย Robux (“โทเค็นในประสบการณ์”) โทเค็นในประสบการณ์มีไว้เพื่อความสนุกสนานในประสบการณ์เท่านั้น ไม่สามารถใช้นอกประสบการณ์ และไม่ถือเป็นเครื่องมือชำระเงินล่วงหน้า การซื้อโทเค็นในประสบการณ์ถือเป็นที่สิ้นสุดและจะไม่มีการคืนเงินไม่ว่าในกรณีใด ไอเท็มและฟังก์ชันอื่นๆ ที่สามารถแลกเปลี่ยนเป็นโทเค็นในประสบการณ์อาจเปลี่ยนแปลงได้ตามความจำเป็น ขึ้นอยู่กับดุลยพินิจของครีเอเตอร์
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,การเล่นประสบการณ์นี้ถือเป็นการยอมรับการแจ้งเตือน
@@ -3797,8 +3800,14 @@ Feature.Moments.Label.TextGenerationFailedBody,ไม่สามารถสร
 Feature.Moments.Label.TextGenerationFailedTitle,สร้างไม่สำเร็จ
 Feature.Moments.Label.TextGenerationFilteredBody,ไม่สามารถสร้างข้อความบนวิดีโอนี้ได้ เนื่องจากเนื้อหาถูกกรอง
 Feature.Moments.Label.TextGenerationFilteredTitle,มีการกรองการสร้าง
+Feature.Moments.Label.Tone,น้ำเสียง
+Feature.Moments.Label.Tone.Cinematic,ภาพยนตร์
+Feature.Moments.Label.Tone.Funny,
+Feature.Moments.Label.Tone.Hype,ตื่นเต้น
+Feature.Moments.Label.Tone.Neutral,ปกติ
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
+Feature.Moments.Title.GenerateTextOptions,สร้างข้อความ
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,รายงานโพสต์

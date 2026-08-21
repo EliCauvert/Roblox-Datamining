@@ -3090,6 +3090,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,"Potrzebujesz
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Uwagi
 Feature.ExperienceDetails.Body.StatsInfoTitle,Statystyki i informacje
+Feature.ExperienceDetails.Description.MadeWithBuild,Gry stworzone za pomocą funkcji Buduj są generowane przez AI
+Feature.ExperienceDetails.Label.MadeByCreator,Twórcą jest {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Twórcą za pomocą funkcji Buduj jest {creatorName}
 Feature.ExperienceDetails.Label.NotPlayable,Nie można grać
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Może istnieć opcja zakupu przedmiotów, które można wymienić na inne przedmioty lub funkcje za pomocą Robuxów („tokeny projektowe”). Tokeny projektowe mają zapewnić dobrą zabawę w projekcie, są przeznaczone do użytku wyłącznie w ramach tego projektu, nie mogą być wykorzystywane poza projektem i nie stanowią instrumentu przedpłaconego. Zakup tokenów projektowych jest ostateczny i nie podlega zwrotowi w żadnym wypadku. Inne przedmioty lub funkcje, które można wymienić na tokeny projektowe, mogą się zmienić według uznania twórcy."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,"Granie w ten projekt oznacza, że akceptuję te uwagi"
@@ -3814,8 +3817,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Nie udało się wygenerować teks
 Feature.Moments.Label.TextGenerationFailedTitle,Nie udało się wygenerować
 Feature.Moments.Label.TextGenerationFilteredBody,"Nie można wygenerować tekstu dla tego przechwyconego filmu, treść jest filtrowana."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generowanie przefiltrowane
+Feature.Moments.Label.Tone,Ton
+Feature.Moments.Label.Tone.Cinematic,Kinowy
+Feature.Moments.Label.Tone.Funny,Zabawny
+Feature.Moments.Label.Tone.Hype,Ekscytujący
+Feature.Moments.Label.Tone.Neutral,Neutralny
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
+Feature.Moments.Title.GenerateTextOptions,Generowanie tekstu
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta

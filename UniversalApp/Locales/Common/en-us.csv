@@ -1368,6 +1368,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,The X handle is invalid.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,The YouTube url is invalid.
 Feature.AddFriends.Action.FriendAdded,Friend Added
 Feature.AddFriends.Action.IgnoreAll,Ignore All
+Feature.AddFriends.Action.IgnoreAllAltCase,Ignore all
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignore Connection Request
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignore friend request
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignore trusted friend request
@@ -1536,6 +1537,7 @@ Feature.AppealsPortal.Label.Type.LookText,Shared Avatar Name and Description
 Feature.AppealsPortal.Label.Type.Mesh,Mesh
 Feature.AppealsPortal.Label.Type.Model,Model
 Feature.AppealsPortal.Label.Type.Plugin,Plugin
+Feature.AppealsPortal.Label.Type.Post,Post
 Feature.AppealsPortal.Label.Type.Screenshot,Screenshot
 Feature.AppealsPortal.Label.Type.UserProfile,User profile
 Feature.AppealsPortal.Label.Type.Video,Video
@@ -1565,6 +1567,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,mesh
 Feature.AppealsPortal.Label.TypeLower.Model,model
 Feature.AppealsPortal.Label.TypeLower.PlaceId,place ID
 Feature.AppealsPortal.Label.TypeLower.Plugin,plugin
+Feature.AppealsPortal.Label.TypeLower.Post,post
 Feature.AppealsPortal.Label.TypeLower.Screenshot,screenshot
 Feature.AppealsPortal.Label.TypeLower.UserProfile,user profile
 Feature.AppealsPortal.Label.TypeLower.Video,video
@@ -1597,7 +1600,7 @@ Feature.Avatar.Action.AddNewMakeupLook,Add new look
 Feature.Avatar.Action.Cancel,
 Feature.Avatar.Action.CancelSelection,Cancel selection
 Feature.Avatar.Action.Clear,Clear
-Feature.Avatar.Action.ComposerPost,Post
+Feature.Avatar.Action.ComposerPost,
 Feature.Avatar.Action.ComposerPreviewAndPost,Preview & Post
 Feature.Avatar.Action.CreateSet,
 Feature.Avatar.Action.CreateSetFirstRun,Create set
@@ -1658,15 +1661,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,Okay
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publish
+Feature.Avatar.BackgroundGeneration.Action.Upload,Upload
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Create backgrounds with Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Your creation is ready to use.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"This background was generated with AI. By publishing, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory, and published items can't be edited."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"This background was generated with AI. By uploading, you confirm it follows the Roblox Community Standards and doesn't use content you don't have rights to. It'll be reviewed before it appears in your inventory. Uploaded items can't be edited."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Unlock free exclusive backgrounds with Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item didn’t meet Community Standards
 Feature.Avatar.BackgroundGeneration.Error.Moderation,That prompt doesn't follow our guidelines. Try describing something else.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"This background doesn't follow the Roblox Community Standards, so it wasn't added to your inventory. Try generating a new one."
 Feature.Avatar.BackgroundGeneration.Error.System,Something went wrong generating your background. Please try again.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Description
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusive with Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Name
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Describe your background…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generating your background…
@@ -1674,6 +1682,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparing your background�
 Feature.Avatar.BackgroundGeneration.Title,Create Background
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publish to inventory
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Upload to inventory
 Feature.Avatar.Backgrounds.Title,Backgrounds
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Adjustment is not available for this body style.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Default to original body colors
@@ -2901,6 +2911,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Long press to reply
 Feature.Chat.Label.Members,Members
 Feature.Chat.Label.MessageNotAvailable,This message is not available
 Feature.Chat.Label.MuteInGameChatToastNotifications,Mute in game chat notifications
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Mute in game party notifications
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,No chats found
 Feature.Chat.Label.NoDescriptionYet,No description yet.
@@ -3128,6 +3139,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,You need pare
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Notes
 Feature.ExperienceDetails.Body.StatsInfoTitle,Stats & Info
+Feature.ExperienceDetails.Description.MadeWithBuild,Build games are AI generated
+Feature.ExperienceDetails.Label.MadeByCreator,Made by {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Made by {creatorName} with Build
 Feature.ExperienceDetails.Label.NotPlayable,Not Playable
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"There may be an option to purchase items that may be exchanged for other items or functions with Robux (“in-experience tokens”) in-experience tokens are solely to enjoy the experience, cannot be used outside the experience and do not constitute prepaid payment instruments.  Your purchase of in-experience tokens is final and no refunds will be made in any case.  Other items and functions that may be exchanged for in-experience tokens may be changed as required at the creator’s discretion."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,I agree to the notes by playing this experience
@@ -3772,7 +3786,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
-Feature.Moments.Action.GenerateText,Generate
+Feature.Moments.Action.GenerateText,Generate Text
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or violates guidelines
 Feature.Moments.Action.Hide,Hide details
@@ -3852,8 +3866,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Couldn't generate text. Please tr
 Feature.Moments.Label.TextGenerationFailedTitle,Generation Failed
 Feature.Moments.Label.TextGenerationFilteredBody,"Can't perform generation for this captured video, content filtered."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generation Filtered
+Feature.Moments.Label.Tone,Tone
+Feature.Moments.Label.Tone.Cinematic,Cinematic
+Feature.Moments.Label.Tone.Funny,Funny
+Feature.Moments.Label.Tone.Hype,Hype
+Feature.Moments.Label.Tone.Neutral,Neutral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
 Feature.Moments.Title.MomentRemoved,Moment removed
 Feature.Moments.Title.ReportPost,Report post
@@ -4212,6 +4232,10 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,Services
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,Tobacco and Entheogens
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Toys and Games
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Weapons, Firearms, and Related Products"
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,Inaccurate Maturity & Compliance Questionnaire submission
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,Publishing Spam
@@ -4538,6 +4562,8 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Your Plus subscription already
 Feature.RobloxSubscription.Body.GenericError,We couldn't complete this right now. Please try again.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,This subscription isn't available to purchase on this device.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age check and get 1 free week of Roblox Plus as our thank you. No payment method is needed to enjoy this free trial.
+Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
@@ -4568,6 +4594,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,Terms of service
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS Privacy Policy
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS Terms of Service
 Feature.Schools.Body.EnterCode,UNiDAYS sent an email with your one-time code to {user_email}. Enter the code below to confirm your school.
 Feature.Schools.Body.UnidaysShare,Your email address won't be visible to others.
 Feature.Schools.Body.UnidaysTerms,"We partner with UNiDAYS to verify your school email address. By clicking ""Continue,"" you agree to UNiDAYS' terms of service and privacy policy."

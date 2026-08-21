@@ -3121,6 +3121,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Bạn cần c
 Feature.ExperienceDetails.Body.DescriptionTitle,Mô Tả
 Feature.ExperienceDetails.Body.NotesTitle,Ghi chú
 Feature.ExperienceDetails.Body.StatsInfoTitle,Số Liệu & Thông Tin
+Feature.ExperienceDetails.Description.MadeWithBuild,Trò chơi làm bằng công cụ Tạo dựng là do AI tạo
+Feature.ExperienceDetails.Label.MadeByCreator,Được tạo bởi {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Được {creatorName} tạo với Build
 Feature.ExperienceDetails.Label.NotPlayable,Không Thể Chơi
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Trải nghiệm này có thể cho phép bạn dùng Robux để mua những vật phẩm dùng để đổi lấy vật phẩm hoặc chức năng khác (""vé trong trải nghiệm""). Vé trong trải nghiệm nào chỉ có giá trị sử dụng trong trải nghiệm đó, không thể dùng bên ngoài trải nghiệm và không cấu thành công cụ thanh toán trả trước. Giao dịch mua vé trong trải nghiệm là cuối cùng và sẽ không được hoàn tiền trong bất kỳ trường hợp nào. Nhà sáng tạo có quyền thay đổi những vật phẩm và chức năng có thể dùng vé trong trải nghiệm để đổi lấy theo quyết định riêng của họ."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Tôi đồng ý với các ghi chú khi tham gia trải nghiệm này
@@ -3845,8 +3848,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Không tạo được văn bản.
 Feature.Moments.Label.TextGenerationFailedTitle,Tạo không thành công
 Feature.Moments.Label.TextGenerationFilteredBody,Không thể tạo văn bản cho video đã quay này vì nội dung đã bị lọc.
 Feature.Moments.Label.TextGenerationFilteredTitle,Nội dung tạo sinh bị chặn
+Feature.Moments.Label.Tone,Giọng điệu
+Feature.Moments.Label.Tone.Cinematic,Điện ảnh
+Feature.Moments.Label.Tone.Funny,Hài hước
+Feature.Moments.Label.Tone.Hype,Sôi động
+Feature.Moments.Label.Tone.Neutral,Trung tính
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
+Feature.Moments.Title.GenerateTextOptions,Tạo văn bản
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
@@ -4555,6 +4564,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,Chính sách quyền riêng tư của UNiDAYS
+Feature.Schools.Action.UnidaysTermsOfService,Điều khoản dịch vụ của UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS đã gửi email chứa mã dùng một lần dành cho bạn đến {user_email}. Hãy nhập mã đó vào phần bên dưới để xác nhận trường học của bạn.
 Feature.Schools.Body.UnidaysShare,Người khác sẽ không nhìn thấy địa chỉ email của bạn.
 Feature.Schools.Body.UnidaysTerms,"Chúng tôi hợp tác với UNiDAYS để xác minh địa chỉ email do trường bạn học cấp. Khi nhấp chuột vào ""Tiếp tục"", bạn đồng ý với điều khoản dịch vụ và chính sách quyền riêng tư của UNiDAYS."

@@ -3101,6 +3101,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,أنت بحا
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,الملاحظات
 Feature.ExperienceDetails.Body.StatsInfoTitle,الإحصائيات والمعلومات
+Feature.ExperienceDetails.Description.MadeWithBuild,يتم إنشاء ألعاب Build بواسطة الذكاء الاصطناعي
+Feature.ExperienceDetails.Label.MadeByCreator,تم إنشاؤها بواسطة {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,تم إنشاؤها بواسطة {creatorName} باستخدام ميزة Build
 Feature.ExperienceDetails.Label.NotPlayable,غير قابلة للتشغيل
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"قد يتاح لك الخيار لشراء العناصر التي يمكن استبدالها بعناصر أو وظائف أخرى باستخدام عملات Robux (""توكن داخل التجربة""). وتقتصر التوكن داخل التجربة على الاستخدام في التجربة المحددة ولا يمكن استخدامها خارجها، كما أنها لا تعتبر أدوات دفع مسبق. ويعتبر شراء التوكن داخل التجربة نهائي ولن تتم إعادة أي مبالغ مدفوعة مقابلها بأي حال من الأحوال. بالإضافة إلى ذلك، فإن العناصر والوظائف الأخرى التي يمكن استبدالها بهذه التوكن داخل التجربة قد تخضع للتغيير حسب الحاجة ووفقًا لتقدير المصمّم."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,أوافق على الملاحظات من خلال تشغيل هذه التجربة
@@ -3825,8 +3828,14 @@ Feature.Moments.Label.TextGenerationFailedBody,تعذّر إنشاء النص. �
 Feature.Moments.Label.TextGenerationFailedTitle,تعذَّر الإنشاء
 Feature.Moments.Label.TextGenerationFilteredBody,تعذَّر إجراء الإنشاء لهذا الفيديو الذي تم التقاطه، وتمت فلترة المحتوى.
 Feature.Moments.Label.TextGenerationFilteredTitle,تمت فلترة الإنشاء
+Feature.Moments.Label.Tone,النبرة
+Feature.Moments.Label.Tone.Cinematic,سينمائي
+Feature.Moments.Label.Tone.Funny,مضحك
+Feature.Moments.Label.Tone.Hype,حماسي
+Feature.Moments.Label.Tone.Neutral,محايد
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
+Feature.Moments.Title.GenerateTextOptions,إنشاء نص
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
 Feature.Moments.Title.MomentRemoved,تمت إزالة اللحظة
 Feature.Moments.Title.ReportPost,الإبلاغ عن المنشور
@@ -4535,6 +4544,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,سياسة الخصوصية السارية لدى UNiDAYS
+Feature.Schools.Action.UnidaysTermsOfService,شروط خدمة UNiDAYS
 Feature.Schools.Body.EnterCode,أرسلت UNiDAYS بريدًا إلكترونيًا يحتوي على كود لمرة واحدة إلى {user_email}. أدخِل الكود أدناه لتأكيد مدرستك.
 Feature.Schools.Body.UnidaysShare,لن يكون عنوان بريدك الإلكتروني مرئيًا للآخرين.
 Feature.Schools.Body.UnidaysTerms,"نتعاون مع UNiDAYS للتحقق من عنوان بريدك الإلكتروني المدرسي. بالضغط على ""متابعة""، فإنك توافق على شروط الخدمة وسياسة الخصوصية السارية لدى شركة UNiDAYS."

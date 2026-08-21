@@ -3121,6 +3121,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Bu oyuna kat�
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Notlar
 Feature.ExperienceDetails.Body.StatsInfoTitle,İstatistikler ve Bilgiler
+Feature.ExperienceDetails.Description.MadeWithBuild,İnşa Etme oyunları yapay zekâ tarafından oluşturulur
+Feature.ExperienceDetails.Label.MadeByCreator,{creatorName} tarafından yapıldı
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,İnşa Et işleviyle {creatorName} tarafından yapıldı
 Feature.ExperienceDetails.Label.NotPlayable,Oynanabilir Değil
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Robux deneyim içi jetonları ile başka öğeler veya işlevlerle takas edilebilecek öğeleri satın alma seçeneği söz konusu olabilir ancak bunlar yalnızca deneyimin keyfini çıkarmak içindir, deneyim dışında kullanılamaz ve ön ödeme yapmada kullanılabilecek ödeme araçları oluşturmaz. Deneyim içi jeton satın alma işlemi kesindir ve hiçbir durumda iade kabul edilmez. Deneyim içi jetonlarla takas edilebilecek diğer öğeler ve işlevler, yaratıcının takdirine bağlı olarak gerektiği şekilde değiştirilebilir."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,Bu deneyimi oynayarak notları kabul ediyorum
@@ -3845,8 +3848,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Metin oluşturulamadı. Lütfen t
 Feature.Moments.Label.TextGenerationFailedTitle,Oluşturma Başarısız
 Feature.Moments.Label.TextGenerationFilteredBody,"Bu yakalanan video için oluşturma işlemi gerçekleştirilemiyor, içerik filtrelendi."
 Feature.Moments.Label.TextGenerationFilteredTitle,Oluşturma Filtrelendi
+Feature.Moments.Label.Tone,Üslup
+Feature.Moments.Label.Tone.Cinematic,Sinematik
+Feature.Moments.Label.Tone.Funny,Komik
+Feature.Moments.Label.Tone.Hype,Heyecan verici
+Feature.Moments.Label.Tone.Neutral,Nötr
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
+Feature.Moments.Title.GenerateTextOptions,Metin Oluştur
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
@@ -4555,6 +4564,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS Gizlilik Politikası
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS Hizmet Koşulları
 Feature.Schools.Body.EnterCode,"UNiDAYS, tek kullanımlık kodunu içeren bir e-postayı {user_email} adresine gönderdi. Okulunu onaylamak için kodu aşağıya gir."
 Feature.Schools.Body.UnidaysShare,E-posta adresin başkaları tarafından görülmeyecek.
 Feature.Schools.Body.UnidaysTerms,"Okul e-posta adresini doğrulamak için UNiDAYS ile iş birliği yapıyoruz. ""Devam Et"" düğmesine tıklayarak UNiDAYS'in hizmet koşullarını ve gizlilik politikasını kabul etmiş olursun."

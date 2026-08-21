@@ -245,13 +245,18 @@ Authentication.CrossDevice.Action.Enter,Masuk
 Authentication.CrossDevice.Action.GoBack,Kembali
 Authentication.CrossDevice.Action.Next,
 Authentication.CrossDevice.Action.TryAgain,
+Authentication.CrossDevice.Description.ConfirmOnSignedInDevice,Konfirmasikan di perangkat tempat kamu sedang log in untuk melanjutkan.
+Authentication.CrossDevice.Description.QuickSignInInstructionsModal,"Di perangkat tempat kamu sedang log in, scan kode QR atau buka <b>Lainnya > Log in cepat</b> dan masukkan kode di bawah ini."
+Authentication.CrossDevice.Description.SigningInAs,Log in sebagai {identifier}
 Authentication.CrossDevice.EnterCodeInstruction,lalu masukkan kode ini
 Authentication.CrossDevice.GoToInstruction,"Di komputer atau ponselmu, buka:"
 Authentication.CrossDevice.Heading.LoginAnotherDevice,Log In ke Perangkat Lain
 Authentication.CrossDevice.Heading.LoginCode,Kode Log In Cepat
 Authentication.CrossDevice.Heading.LoginWarning,"UNTUK LOG IN, PASTIKAN KAMU:"
 Authentication.CrossDevice.Heading.QuickLogin,Log In Cepat
+Authentication.CrossDevice.Heading.SignInWithQrCode,Log in dengan kode QR
 Authentication.CrossDevice.Heading.SigninAnotherDevice,Log in di perangkat lain
+Authentication.CrossDevice.Heading.WaitingForConfirmation,Menunggu konfirmasi
 Authentication.CrossDevice.Heading.Warning,PERINGATAN!
 Authentication.CrossDevice.Label.CodeHeader,Opsi 2
 Authentication.CrossDevice.Label.CodeNotVerified,Kode Log In Cepat tidak terverifikasi.
@@ -308,6 +313,7 @@ Authentication.Login.Action.SendCodeSentenceCase,Kirim kode
 Authentication.Login.Action.SendVerificationEmail,Kirim Email Verifikasi
 Authentication.Login.Action.SignIn,Log In
 Authentication.Login.Action.SignInSentenceCase,Log in
+Authentication.Login.Action.SignInWithQrCode,
 Authentication.Login.Action.UsePasskey,Gunakan Passkey
 Authentication.Login.Action.WeChatLogin,Log In WeChat
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
@@ -320,6 +326,7 @@ Authentication.Login.Description.PasskeyDescription,"Akunmu memiliki passkey, ya
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,Kami tidak bisa menentukan apakah perangkatmu mendukung passkey. Coba lagi atau ketuk “Masalah log in” untuk memulihkan akunmu dengan email atau nomor ponsel.
 Authentication.Login.Description.PasskeyMobileOnly,Passkey hanya tersedia di ponsel. Pilih cara lain untuk log in.
 Authentication.Login.Description.SigningInWith,Log in dengan <b>{identifier}</b>
+Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Jika ada akun Roblox, kamu akan menerima kode verifikasi di {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
@@ -330,7 +337,9 @@ Authentication.Login.Heading.LoginRoblox,Log in ke Roblox
 Authentication.Login.Heading.LoginRobloxAccountSwitching,Log In ke Akun yang Sudah Ada
 Authentication.Login.Heading.NewAppAvailable,Download Aplikasi Roblox Baru
 Authentication.Login.Heading.SignIn,
+Authentication.Login.Heading.SignInAnotherWay,Log in dengan cara lain
 Authentication.Login.Heading.SignInToRoblox,
+Authentication.Login.Heading.SignInWithRoblox,Log in dengan Roblox
 Authentication.Login.Label.AccountSelectorTitle,Pilih Akun untuk Log In
 Authentication.Login.Label.AgedUpUsername,Tambahkan @namapengguna yang unik
 Authentication.Login.Label.ConnectionError.RetryDisabled,"Maaf, terjadi eror saat menghubungi server kami.
@@ -344,6 +353,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Maaf, terjadi eror saat me
 Tunggu dan coba lagi."
 Authentication.Login.Label.ConnectionError.Title,Kesalahan koneksi
 Authentication.Login.Label.Email,
+Authentication.Login.Label.EmailAddress,Alamat email
 Authentication.Login.Label.EmailNeedsVerification,Email kamu perlu diverifikasi
 Authentication.Login.Label.EmailOrPhone,Alamat email atau nomor ponsel
 Authentication.Login.Label.EnterCode,
@@ -353,7 +363,8 @@ Authentication.Login.Label.EnterOneTimeCode,Masukkan Kode Sekali Pakai
 Authentication.Login.Label.EnterOneTimeCodeLoginHelp,Masukkan kode yang baru saja kami kirim ke email kamu
 Authentication.Login.Label.EnterPassword,Masukkan password
 Authentication.Login.Label.EnterYourPassword,
-Authentication.Login.Label.ForgotYourPassword,Lupa kata sandi?
+Authentication.Login.Label.ForgotPassword,Lupa kata sandi?
+Authentication.Login.Label.ForgotYourPassword,
 Authentication.Login.Label.GetOneTimeCode,Dapatkan Kode Sekali Pakai
 Authentication.Login.Label.LearnMore,Pelajari selengkapnya
 Authentication.Login.Label.LinkAccountWarning,"Akun Roblox kamu akan terhubung dengan akunmu di {platform}. Saat kamu bergabung lagi nanti, akun kamu akan log in secara otomatis. Kamu dapat memutuskan hubungan akun dari Pengaturan kapan saja. Mungkin akan ada jeda waktu sebelum kamu dapat menghubungkan dengan akun baru lagi."
@@ -369,6 +380,7 @@ Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Nama pengguna, alamat ema
 Authentication.Login.Label.UsernameEmailPhone,Nama Pengguna/Email/Nomor Ponsel
 Authentication.Login.Label.UsernameOrEmail,Nama pengguna atau alamat email
 Authentication.Login.Label.UsernameOrPhone,Nama pengguna atau nomor ponsel
+Authentication.Login.Label.VerificationCode,Kode verifikasi
 Authentication.Login.Label.WeChatUserCancel,Kamu sudah log out dari WeChat. Log in ke WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,Versi WeChat tidak didukung
 Authentication.Login.LinkIllegalChildAccountLinking,Akun Roblox ini tidak bisa dihubungkan ke akun anak Xbox. Coba akun lain atau periksa pengaturanmu.
@@ -1636,12 +1648,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Update tampilan yang sudah ada
 Feature.Avatar.Action.UpdateMakeupLook,Update tampilan
 Feature.Avatar.Action.Zoom,Memperbesar
 Feature.Avatar.AvatarWidgetTitle,Jelajahi Gaya
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Publikasikan
+Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Kreasimu siap digunakan.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Latar belakang ini dibuat dengan AI. Dengan memublikasikan, kamu mengonfirmasi bahwa latar belakang ini mematuhi Standar Komunitas Roblox dan tidak menggunakan konten yang haknya tidak kamu miliki. Latar belakang ini akan di-review sebelum muncul di inventarismu, dan item yang dipublikasikan tidak dapat diedit."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Item tidak memenuhi Standar Komunitas
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Prompt itu tidak mengikuti pedoman kami. Coba deskripsikan sesuatu yang lain.
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Latar belakang ini tidak mengikuti Standar Komunitas Roblox, jadi tidak ditambahkan ke inventarismu. Coba buat yang baru."
 Feature.Avatar.BackgroundGeneration.Error.System,Terjadi kesalahan saat membuat latar belakangmu. Coba lagi.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,Deskripsi
+Feature.Avatar.BackgroundGeneration.Label.Name,Nama
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Deskripsikan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Membuat latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Mempersiapkan latar belakangmu…
 Feature.Avatar.BackgroundGeneration.Title,Buat Latar Belakang
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publikasikan ke inventaris
 Feature.Avatar.Backgrounds.Title,Latar Belakang
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Penyesuaian tidak tersedia untuk gaya tubuh ini.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Kembali ke warna tubuh asli
@@ -1825,7 +1851,7 @@ Feature.Avatar.Label.ModerationFailed,Moderasi Gagal
 Feature.Avatar.Label.Mood,Mood
 Feature.Avatar.Label.MultiNoLongerAvailableInCollection,Aset ini tidak akan lagi tersedia di koleksi ini:
 Feature.Avatar.Label.MyPostedAvatars.Tooltip,Avatar yang diposting akan dipublikasikan di Marketplace
-Feature.Avatar.Label.Name,Nama
+Feature.Avatar.Label.Name,
 Feature.Avatar.Label.Neck,Leher
 Feature.Avatar.Label.Newest,Terbaru
 Feature.Avatar.Label.NoExpiredItems,Tidak Ada {itemType} yang Kedaluwarsa
@@ -2138,7 +2164,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Buka pengaturan
 Feature.Build.Action.Playtest,Playtest
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Publikasikan
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Publikasikan yang terbaru
 Feature.Build.Action.Restore,Pulihkan
 Feature.Build.Action.Revert,
@@ -2155,11 +2181,13 @@ Feature.Build.Action.ViewUsage,Lihat penggunaan
 Feature.Build.Content.NewGame,Game baru
 Feature.Build.Description.ArchiveRemoval,"Jika kamu mengarsipkan game ini, game ini akan dihapus dari Build. Kamu masih dapat mengakses dan memulihkannya dari Pusat Kreator atau Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,Gunakan Robux-mu untuk membeli kuota penggunaan Build tambahan secara otomatis saat kamu berkreasi. Kamu dapat menetapkan batas pemakaian uang harian kapan saja.
+Feature.Build.Description.BoostAudienceForPlays,Jangkau lebih banyak audiens agar game-mu makin ramai.
 Feature.Build.Description.BoostGameAudience,Tambah audiens game-mu
 Feature.Build.Description.BuildIdeaGame,Ubah idemu menjadi game
 Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memiliki balasan untukmu.
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
+Feature.Build.Description.CampaignRunDates,Kampanyemu akan berlangsung {startDate}—{endDate}
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk membantumu melakukan playtest.
 Feature.Build.Description.EnableBuildNotifs,Aktifkan notifikasi di pengaturan perangkatmu untuk mendapatkan update dari Build.
 Feature.Build.Description.FriendsLinkOnly,Hanya temanmu yang dapat mengakses link ini. Ubah pengaturan Audiens game-mu jika kamu ingin lebih banyak pengguna memainkannya.
@@ -2188,6 +2216,7 @@ Feature.Build.Label.Access,Akses
 Feature.Build.Label.AdditionalUsage,Kuota penggunaan Build tambahan
 Feature.Build.Label.AdditionalUsed,{USED} dari {LIMIT} digunakan
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
 Feature.Build.Label.BackToBuild,Kembali ke Build
@@ -2198,7 +2227,7 @@ Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
-Feature.Build.Label.Description,Deskripsi
+Feature.Build.Label.Description,
 Feature.Build.Label.Done,
 Feature.Build.Label.Error,Kesalahan
 Feature.Build.Label.FreeBuildUsage,Penggunaan Build gratis
@@ -2372,6 +2401,7 @@ Feature.Build.Message.WhatToCreate,Apa yang ingin kamu buat hari ini?
 Feature.Build.Message.WorkedMinutesSeconds,Bekerja selama {MINUTES}mnt{REM_SECONDS}dtk
 Feature.Build.Message.WorkedSeconds,Bekerja selama {SECONDS}dtk
 Feature.Build.Message.WorkingOnTasks,Mengerjakan tugasmu
+Feature.Build.Title.AdCampaignActive,Kampanye iklan aktif
 Feature.Build.Title.AddFriendsToPlaytest,Tambahkan teman untuk membantumu melakukan playtest
 Feature.Build.Title.ArchiveThisGame,Arsipkan game ini?
 Feature.Build.Title.Audience,Audiens
@@ -2443,6 +2473,7 @@ Feature.Catalog.Action.Report,Laporkan
 Feature.Catalog.Action.Sell,Jual
 Feature.Catalog.Action.ShareVia,Bagikan via...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,
 Feature.Catalog.Action.Upgrade,Upgrade
 Feature.Catalog.Action.ViewDetailsPage,Lihat Halaman Detail
 Feature.Catalog.Action.ViewExperienceDetails,Lihat Detail Pengalaman Virtual
@@ -3088,6 +3119,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Kamu memerluk
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Catatan
 Feature.ExperienceDetails.Body.StatsInfoTitle,Statistik & Info
+Feature.ExperienceDetails.Description.MadeWithBuild,Game Build adalah buatan AI
+Feature.ExperienceDetails.Label.MadeByCreator,Dibuat oleh {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Dibuat oleh {creatorName} dengan Build
 Feature.ExperienceDetails.Label.NotPlayable,Tidak Dapat Dimainkan
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Mungkin ada opsi untuk membeli item yang boleh ditukar dengan item atau fungsi lain dengan Robux (“token dalam pengalaman virtual”). Token dalam pengalaman virtual hanya ditujukan untuk menikmati pengalaman virtual yang bersangkutan, tidak dapat digunakan di luar pengalaman virtual yang bersangkutan, dan bukan merupakan metode pembayaran prabayar. Pembelian token pengalaman virtual bersifat final dan tidak akan ada pengembalian dana dengan alasan apa pun. Item dan fungsi lain yang boleh ditukar dengan token pengalaman virtual mungkin berubah sesuai kebijakan kreator."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,"Dengan memainkan pengalaman virtual ini, saya menyetujui catatan tersebut"
@@ -3812,8 +3846,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba la
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
 Feature.Moments.Label.TextGenerationFilteredBody,"Tidak dapat melakukan pembuatan untuk video yang direkam ini, konten difilter."
 Feature.Moments.Label.TextGenerationFilteredTitle,Pembuatan Difilter
+Feature.Moments.Label.Tone,Gaya
+Feature.Moments.Label.Tone.Cinematic,Sinematik
+Feature.Moments.Label.Tone.Funny,Lucu
+Feature.Moments.Label.Tone.Hype,Seru
+Feature.Moments.Label.Tone.Neutral,Netral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
+Feature.Moments.Title.GenerateTextOptions,Buat Teks
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Laporkan postingan
@@ -4522,9 +4562,12 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,Ketentuan layanan
+Feature.Schools.Action.UnidaysPrivacyPolicy,Kebijakan Privasi UNiDAYS
+Feature.Schools.Action.UnidaysTermsOfService,Ketentuan Layanan UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS sudah mengirim email berisi kode sekali pakai untukmu ke {user_email}. Masukkan kode di bawah ini untuk mengonfirmasi sekolahmu.
 Feature.Schools.Body.UnidaysShare,Alamat emailmu tidak akan terlihat oleh orang lain.
 Feature.Schools.Body.UnidaysTerms,"Kami bermitra dengan UNiDAYS untuk memverifikasi alamat email sekolahmu. Dengan mengeklik ""Lanjutkan"", kamu menyetujui ketentuan layanan dan kebijakan privasi UNiDAYS."
+Feature.Schools.Caption.AlumniGroupOnGraduate,"Setelah kamu lulus, kamu akan masuk di grup alumni {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Setelah kamu lulus, kamu akan dihapus dari {school}."
 Feature.Schools.Description.CantFindSchoolNotify,Kami akan beri tahu saat sekolahmu ada di Roblox.
 Feature.Schools.Description.CantVerifySchool,"Berdasarkan informasi yang kamu berikan, kami tidak dapat memverifikasi sekolahmu."

@@ -3121,6 +3121,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,Tu as besoin 
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,Notes
 Feature.ExperienceDetails.Body.StatsInfoTitle,Stats et Infos
+Feature.ExperienceDetails.Description.MadeWithBuild,Les jeux créés dans Construire sont générés par l'IA
+Feature.ExperienceDetails.Label.MadeByCreator,Créé par {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,Créé par {creatorName} avec Construire
 Feature.ExperienceDetails.Label.NotPlayable,Non jouable
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"Il peut exister une option permettant d'acheter des items pouvant être échangés contre d'autres items ou fonctions avec des Robux (« tolkens d'expérience »). Les tokens d'expérience sont uniquement destinés à profiter de l'expérience, ne peuvent pas être utilisés en dehors de l'expérience et ne constituent pas des instruments de paiement prépayés. Votre achat de tokens d'expérience est définitif et aucun remboursement ne sera effectué dans aucun cas. Les autres items et fonctions pouvant être échangés contre des jetons d'expérience peuvent être modifiés à la discrétion du créateur."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,J'accepte les notes en jouant cette expérience
@@ -3845,8 +3848,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Impossible de générer du texte.
 Feature.Moments.Label.TextGenerationFailedTitle,Échec de la génération
 Feature.Moments.Label.TextGenerationFilteredBody,Impossible de générer du contenu à partir de cette vidéo capturée : contenu filtré.
 Feature.Moments.Label.TextGenerationFilteredTitle,Génération filtrée
+Feature.Moments.Label.Tone,Ton
+Feature.Moments.Label.Tone.Cinematic,Dramatique
+Feature.Moments.Label.Tone.Funny,Amusant
+Feature.Moments.Label.Tone.Hype,Énergique
+Feature.Moments.Label.Tone.Neutral,Neutre
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Que s'est-il passé ?
+Feature.Moments.Title.GenerateTextOptions,Générer du texte
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Signaler un post
@@ -4555,6 +4564,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,Politique de confidentialité d'UNiDAYS
+Feature.Schools.Action.UnidaysTermsOfService,Conditions d'utilisation d'UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS a envoyé ton code unique par e-mail à {user_email}. Saisis-le ci-dessous pour confirmer ton établissement.
 Feature.Schools.Body.UnidaysShare,Les autres utilisateurs ne pourront pas voir ton adresse e-mail.
 Feature.Schools.Body.UnidaysTerms,"Nous travaillons en partenariat avec UNiDAYS pour vérifier ton adresse e-mail fournie par ton établissement. En cliquant sur « Continuer », tu acceptes les Conditions d'utilisation et la Politique de confidentialité d'UNiDAYS."

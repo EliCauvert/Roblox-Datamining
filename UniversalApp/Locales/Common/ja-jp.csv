@@ -3089,6 +3089,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,このゲー�
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,【留意事項】
 Feature.ExperienceDetails.Body.StatsInfoTitle,統計と情報
+Feature.ExperienceDetails.Description.MadeWithBuild,ビルドで作成されたゲームはAI生成です
+Feature.ExperienceDetails.Label.MadeByCreator,{creatorName}さんが作成
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,{creatorName}さんがビルドを使って作成
 Feature.ExperienceDetails.Label.NotPlayable,プレイ不可
 Feature.ExperienceDetails.Notes.InExperiencePurchase,他のアイテムや機能と交換できるアイテム（「バーチャル（仮想）空間内トークン」）をRobuxを用いて購入できる場合がありますが、バーチャル空間内トークンは、ゲームを楽しむためのみのものであって、ゲーム外で利用することはできず、前払式支払手段ではありません。バーチャル空間内トークンの購入により、取引が完了し、いかなる場合であっても返金が行われることはありません。バーチャル空間内トークンを用いて交換できる他のアイテムや機能は、クリエーター（制作者）の裁量により、変更される可能性があります。
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,このバーチャル空間をプレイすることにより、私は留意事項に同意します
@@ -3813,8 +3816,14 @@ Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませ
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
 Feature.Moments.Label.TextGenerationFilteredBody,この切り抜きビデオの生成を実行できません。コンテンツが内容規制されています。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成が内容規制されました
+Feature.Moments.Label.Tone,トーン
+Feature.Moments.Label.Tone.Cinematic,シネマモード
+Feature.Moments.Label.Tone.Funny,面白い
+Feature.Moments.Label.Tone.Hype,エネルギッシュ
+Feature.Moments.Label.Tone.Neutral,客観的
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
+Feature.Moments.Title.GenerateTextOptions,テキストを生成
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告

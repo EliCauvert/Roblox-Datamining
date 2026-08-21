@@ -3123,6 +3123,9 @@ Feature.ExperienceDetails.AskYourParentToAllowGameModal.Label.Body,이 게임에
 Feature.ExperienceDetails.Body.DescriptionTitle,
 Feature.ExperienceDetails.Body.NotesTitle,참고
 Feature.ExperienceDetails.Body.StatsInfoTitle,통계 및 정보
+Feature.ExperienceDetails.Description.MadeWithBuild,빌드 게임은 AI로 생성됩니다
+Feature.ExperienceDetails.Label.MadeByCreator,제작: {creatorName}
+Feature.ExperienceDetails.Label.MadeByCreatorWithBuild,빌드로 제작: {creatorName}
 Feature.ExperienceDetails.Label.NotPlayable,플레이할 수 없음
 Feature.ExperienceDetails.Notes.InExperiencePurchase,"아이템을 구매하여 Robux(""체험 내 토큰"")와 기타 아이템 또는 기능을 교환할 수 있는 옵션이 존재할 수 있습니다. 체험 내 토큰은 체험을 즐기기 위한 목적으로만 사용되며, 체험 밖에선 사용이 불가하고, 선불형 결제 수단으로 간주되지 않습니다. 체험 내 토큰 구매는 최종적이며 어떤 경우에도 환불이 불가합니다. 체험 내 토큰과 교환 가능한 기타 아이템 및 기능은 크리에이터의 재량에 따라 필요한 경우 변경될 수 있습니다."
 Feature.ExperienceDetails.PlayButtonMessage.AgreeToNotice,이 체험을 플레이함으로써 참고 사항에 동의합니다
@@ -3848,8 +3851,14 @@ Feature.Moments.Label.TextGenerationFailedBody,텍스트를 생성하지 못했�
 Feature.Moments.Label.TextGenerationFailedTitle,생성 실패
 Feature.Moments.Label.TextGenerationFilteredBody,콘텐츠 필터링으로 인해 이 캡처된 동영상에서 생성 기능을 사용할 수 없습니다.
 Feature.Moments.Label.TextGenerationFilteredTitle,생성이 차단되었습니다
+Feature.Moments.Label.Tone,어조
+Feature.Moments.Label.Tone.Cinematic,시네마틱함
+Feature.Moments.Label.Tone.Funny,유쾌함
+Feature.Moments.Label.Tone.Hype,활기참
+Feature.Moments.Label.Tone.Neutral,무난함
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
+Feature.Moments.Title.GenerateTextOptions,텍스트 생성
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고
@@ -4558,6 +4567,8 @@ Feature.Schools.Action.Remove,
 Feature.Schools.Action.ResendCode,코드 재전송
 Feature.Schools.Action.Share,
 Feature.Schools.Action.TermsOfService,
+Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS 개인정보 처리방침
+Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 서비스 약관
 Feature.Schools.Body.EnterCode,UNiDAYS에서 일회용 코드가 포함된 이메일을 {user_email} 주소로 전송했습니다. 학교를 확인하려면 아래에 해당 코드를 입력하세요.
 Feature.Schools.Body.UnidaysShare,이메일 주소는 다른 사람에게 표시되지 않습니다.
 Feature.Schools.Body.UnidaysTerms,학교 이메일 주소를 확인하기 위해 UNiDAYS와 파트너십을 맺고 있습니다. '계속'을 클릭하면 UNiDAYS의 서비스 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
