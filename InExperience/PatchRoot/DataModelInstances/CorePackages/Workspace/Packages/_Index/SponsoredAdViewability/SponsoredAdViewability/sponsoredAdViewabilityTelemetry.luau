@@ -59,17 +59,12 @@ return {
 			viewportHeight = var8.viewportHeight
 		}
 		
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			if p1.mediaType == "video" then
-				t_1.isFullScreen = p1.isFullscreen == true
-			end
-			if p4 ~= nil then
-				t_1.videoLengthMs = p4.videoLengthMs
-			end
+		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and p4 ~= nil then
+			t_1.videoLengthMs = p4.videoLengthMs
 		end
 		telemetryService:LogEvent(t, { standardizedFields = list, customFields = t_1 })
 	end,
-	logSponsoredAdViewableImpression = function(p5, p6) --[[ line: 134 ]]
+	logSponsoredAdViewableImpression = function(p5, p6) --[[ line: 129 ]]
 		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t_1 (ref), list (ref)
 		local var10 = buildGeometryFields(p6.geometry)
 		local t = {
@@ -90,15 +85,12 @@ return {
 		}
 		
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			t.isFullScreen = p6.isFullScreen
 			t.videoLengthMs = p6.videoLengthMs
-			t.maxAudioLevel = p6.maxAudioLevel
 			t.cumulativeInGridViewDurationMs = p6.cumulativeInGridViewDurationMs
-			t.cumulativeFullScreenViewDurationMs = p6.cumulativeFullScreenViewDurationMs
 		end
 		telemetryService:LogEvent(t_1, { standardizedFields = list, customFields = t })
 	end,
-	logSponsoredAdVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then function(p7, p8) --[[ line: 166 | named "logSponsoredAdVideoProgress" ]]
+	logSponsoredAdVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then function(p7, p8) --[[ line: 158 | named "logSponsoredAdVideoProgress" ]]
 		-- upvalues: buildGeometryFields (ref), telemetryService (ref), var6 (ref), list (ref)
 		local var12 = buildGeometryFields(p8.geometry)
 		telemetryService:LogEvent(var6, {
@@ -106,7 +98,6 @@ return {
 			customFields = {
 				encryptedAdTrackingData = p7.encryptedAdTrackingData,
 				tileType = p7.tileType,
-				isFullScreen = p8.isFullScreen,
 				adWidth = var12.adWidth,
 				adHeight = var12.adHeight,
 				viewportWidth = var12.viewportWidth,
@@ -121,16 +112,11 @@ return {
 				videoProgress = p8.videoProgress,
 				videoLengthMs = p8.videoLengthMs,
 				videoCumulativePlaytimeMs = p8.videoCumulativePlaytimeMs,
-				cumulativeAudioPlaybackDurationMs = p8.cumulativeAudioPlaybackDurationMs,
-				cumulative100PercentAudibleTimeMs = p8.cumulative100PercentAudibleTimeMs,
-				maxAudioLevel = p8.maxAudioLevel,
-				audioOnAtEvent = p8.audioOnAtEvent,
-				cumulativeInGridViewDurationMs = p8.cumulativeInGridViewDurationMs,
-				cumulativeFullScreenViewDurationMs = p8.cumulativeFullScreenViewDurationMs
+				cumulativeInGridViewDurationMs = p8.cumulativeInGridViewDurationMs
 			}
 		})
 	end else nil,
-	logSponsoredAdUnload = function(p9, p10, p11) --[[ line: 199 ]]
+	logSponsoredAdUnload = function(p9, p10, p11) --[[ line: 185 ]]
 		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t_2 (ref), list (ref)
 		local var13 = buildGeometryFields(p10.geometry)
 		local t = {
@@ -157,16 +143,10 @@ return {
 		}
 		
 		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			t.isFullScreen = p10.isFullScreen
 			t.videoProgress = p10.videoProgress
 			t.videoLengthMs = p10.videoLengthMs
 			t.videoCumulativePlaytimeMs = p10.videoCumulativePlaytimeMs
-			t.cumulativeAudioPlaybackDurationMs = p10.cumulativeAudioPlaybackDurationMs
-			t.cumulative100PercentAudibleTimeMs = p10.cumulative100PercentAudibleTimeMs
-			t.maxAudioLevel = p10.maxAudioLevel
-			t.audioOnAtEvent = p10.audioOnAtEvent
 			t.cumulativeInGridViewDurationMs = p10.cumulativeInGridViewDurationMs
-			t.cumulativeFullScreenViewDurationMs = p10.cumulativeFullScreenViewDurationMs
 		end
 		telemetryService:LogEvent(t_2, { standardizedFields = list, customFields = t })
 	end

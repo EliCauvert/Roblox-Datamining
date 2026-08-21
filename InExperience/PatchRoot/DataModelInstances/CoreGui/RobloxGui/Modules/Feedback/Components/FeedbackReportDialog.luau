@@ -196,7 +196,7 @@ function feedbackReportDialog.init(p0) --[[ line: 70 ]]
 				return
 			end
 			feedbackOriginalText = match
-			feedbackIdentifier = game.GameId .. "#" .. match
+			feedbackIdentifier = game.GameId .. ":" .. match
 			text = constantsModule.ContentType.Image
 		end
 		p0.props.sendFeedback(text, feedbackOriginalText, p0.state.feedbackText, feedbackIdentifier, p0.state.correctTranslationText, p0.state.additionalCommentsText, p0.props.feedbackReason, p0.state.numFeedbackSubmissionAttempts)

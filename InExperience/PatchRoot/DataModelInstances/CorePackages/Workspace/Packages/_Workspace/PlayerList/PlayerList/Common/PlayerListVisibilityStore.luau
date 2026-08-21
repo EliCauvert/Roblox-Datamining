@@ -1,62 +1,44 @@
 ﻿local signalsModule = require(script.Parent.Parent.Parent.Signals)
 local var1, var2 = signalsModule.createSignal(true)
-local var3 = false
-
-local function setShouldPersistVisibility(value) --[[ line: 19 ]]
-	-- upvalues: var3 (write)
-	var3 = value
-end
-
-local function setVisible(value) --[[ line: 23 ]]
-	-- upvalues: var2 (ref), var3 (write)
-	var2(value)
-	
-	if var3 then
-		UserSettings().GameSettings.PlayerListVisible = value
-	end
-end
-
-local var6, var7 = signalsModule.createSignal({})
-local var8 = nil
+local var3, var4 = signalsModule.createSignal({})
+local var5 = nil
 
 return {
 	getVisible = var1,
-	setVisible = setVisible,
-	setShouldPersistVisibility = setShouldPersistVisibility,
-	getEffectiveVisible = signalsModule.createComputed(function(p0) --[[ line: 37 ]]
-		-- upvalues: var1 (ref), var6 (ref)
-		return var1(p0) and next(var6(p0)) == nil
+	setVisible = var2,
+	getEffectiveVisible = signalsModule.createComputed(function(p0) --[[ line: 24 ]]
+		-- upvalues: var1 (ref), var3 (ref)
+		return var1(p0) and next(var3(p0)) == nil
 	end),
-	setTempHide = function(value, p1) --[[ line: 43 ]]
-		-- upvalues: var6 (ref), var7 (ref), var8 (write), var1 (ref), var2 (ref)
-		local var9 = next(var6(false)) == nil
-		var7(function(p2) --[[ line: 45 ]]
+	setTempHide = function(value, p1) --[[ line: 30 ]]
+		-- upvalues: var3 (ref), var4 (ref), var5 (write), var1 (ref), var2 (ref)
+		local var6 = next(var3(false)) == nil
+		var4(function(p2) --[[ line: 32 ]]
 			-- upvalues: value (ref), p1 (ref)
 			local cloned = table.clone(p2)
 			cloned[value] = if p1 then true else nil
 			
 			return cloned
 		end)
-		local var10 = next(var6(false)) == nil
+		local var7 = next(var3(false)) == nil
 		
-		if var9 and not var10 then
-			var8 = var1(false)
+		if var6 and not var7 then
+			var5 = var1(false)
 			
 			return
-		elseif not var9 and var10 and var8 ~= nil then
-			local var11 = var8
-			var8 = nil
+		elseif not var6 and var7 and var5 ~= nil then
+			local var8 = var5
+			var5 = nil
 			
-			if var1(false) ~= var11 then
-				var2(var11)
+			if var1(false) ~= var8 then
+				var2(var8)
 			end
 		end
 	end,
-	reset = function() --[[ line: 64 ]]
-		-- upvalues: var3 (write), var8 (write), var7 (ref), var2 (ref)
-		var3 = false
-		var8 = nil
-		var7({})
+	reset = function() --[[ line: 51 ]]
+		-- upvalues: var5 (write), var4 (ref), var2 (ref)
+		var5 = nil
+		var4({})
 		var2(true)
 	end
 }

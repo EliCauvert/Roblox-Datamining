@@ -19,6 +19,8 @@
 		failedLoginIncorrectPassword = "failedLoginIncorrectPassword",
 		redirectToLandingPage = "redirectToLandingPage",
 		redirectToLoginPage = "redirectToLoginPage",
+		autoPopulatedUsername = "autoPopulatedUsername",
+		autoPopulatedPassword = "autoPopulatedPassword",
 		saveCredentialsControlGroup = "saveCredentialsControlGroup",
 		saveCredentialsExperimentGroup = "saveCredentialsExperimentGroup",
 		saveCredentials = "saveCredentials",

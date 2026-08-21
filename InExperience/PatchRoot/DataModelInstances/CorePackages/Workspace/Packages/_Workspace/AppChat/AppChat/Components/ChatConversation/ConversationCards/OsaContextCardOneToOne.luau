@@ -13,18 +13,17 @@ local fFlagAppChatContextCardNameLoadingShimmerModule = require(appChat.Flags.FF
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
 local fFlagAppChatDisclosureUpdateEnabled = sharedFlagsModule.FFlagAppChatDisclosureUpdateEnabled
-local fFlagAppChatDiscloseUpdateSecondVersion = sharedFlagsModule.FFlagAppChatDiscloseUpdateSecondVersion
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 38 ]]
-	-- upvalues: useTokens (ref), useFoundationPresenceModule (ref), useLocalization (ref), fFlagAppChatDisclosureUpdateEnabled (ref), fFlagAppChatDiscloseUpdateSecondVersion (ref), universalAppPolicyModule (ref), fFlagAppChatContextCardNameLoadingShimmerModule (ref), reactModule (ref), foundationModule (ref), skeleton (ref), userTile (ref), layoutMode (ref), fFlagEnableBlackbirdCheck (ref)
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 37 ]]
+	-- upvalues: useTokens (ref), useFoundationPresenceModule (ref), useLocalization (ref), fFlagAppChatDisclosureUpdateEnabled (ref), universalAppPolicyModule (ref), fFlagAppChatContextCardNameLoadingShimmerModule (ref), reactModule (ref), foundationModule (ref), skeleton (ref), userTile (ref), layoutMode (ref), fFlagEnableBlackbirdCheck (ref)
 	local var7 = useTokens()
 	local size = var7.Size
 	local var8 = useFoundationPresenceModule(p0.userId)
 	local var9 = useLocalization({
 		firstInteractionWithThisPersonHeadingText = "Feature.Chat.Heading.FirstInteractionWithThisPerson",
 		user = "Feature.Chat.Label.User",
-		firstConversationWithThisUserHeadingText = if fFlagAppChatDisclosureUpdateEnabled and not fFlagAppChatDiscloseUpdateSecondVersion then "Feature.Chat.Heading.SafeChattingWithThisUser" else "Feature.Chat.Heading.FirstConversationWithThisUser",
-		firstConversationWithHeadingText = if fFlagAppChatDisclosureUpdateEnabled and not fFlagAppChatDiscloseUpdateSecondVersion then {
+		firstConversationWithThisUserHeadingText = if fFlagAppChatDisclosureUpdateEnabled then "Feature.Chat.Heading.SafeChattingWithThisUser" else "Feature.Chat.Heading.FirstConversationWithThisUser",
+		firstConversationWithHeadingText = if fFlagAppChatDisclosureUpdateEnabled then {
 			"Feature.Chat.Heading.SafeChattingWithUsername",
 			displayName = p0.displayName
 		} else {

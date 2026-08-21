@@ -94,7 +94,6 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,Hatalı telefon veya şif
 Authentication.Login.Response.IncorrectUsernamePassword,Hatalı kullanıcı adı veya şifre.
 Authentication.Login.Response.InvalidPasskeyCredential,"Bu geçiş anahtarıyla giriş yapılamıyor. Yeniden erişim sağlamak için şuraya git: ""Şifreyi veya Kullanıcı Adını Unuttum""."
 Authentication.Login.Response.MoreThanOneUsername,E-postan birden fazla kullanıcı adıyla ilişkilendirilmiş. Lütfen kullanıcı adınla giriş yap.
-Authentication.Login.Response.PlatformAlreadyLinked,Bu {platform} hesabı zaten başka bir Roblox hesabına bağlı. Lütfen bağlı Roblox hesabıyla giriş yap.
 Authentication.Login.Response.RelinkingFreeze,Bu Roblox hesabı son 90 gün içinde {platform} için hesap bir hesaba bağlandı. Lütfen farklı bir Roblox hesabıyla giriş yapmayı dene.
 Authentication.Login.Response.Require2FA,"2 Aşamalı Doğrulama, konsolda desteklenmiyor. Güvenli bir şekilde oturum açmak için lütfen sağdaki talimatları izle."
 Authentication.Login.Response.Require2FAGeneric,"Gerekli ek doğrulama, bu cihazda desteklenmiyor. Güvenli bir şekilde oturum açmak için lütfen sağdaki talimatları izle."
@@ -262,7 +261,6 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} mesh'inin {a
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} mesh'inin {axis} ekseninde ""{currentSize}"" birim kare olan boyutu, izin verilen minimum tekil parça boyutu olan ""{minSize}"" birim kareden küçüktür. Mesh'i ölçeklendir."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,{attName} eklentisinin {partName} alt öğeleri içinde tam bir kez bulunması gerekir.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (veya alt öğeleri) Öznitelikler içeriyor. Öznitelikleri şunlardan kaldırman gerekir: {InstanceNameList}"
-Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" geçersiz özelliklere sahip: {ProblematicProperties}. Gösterilen bayt sınırı aşıldı (0 sınırı, özelliğin boş olması gerektiği anlamına gelir); diğer tüm özellikler NaN/Inf değerleri içeriyor veya varsayılan boyut sınırını aşıyor."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox'a varlık yüklemek için tam olarak 1 durum ve ilişkili yükleme türünü seçmelisin.
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} durumu etiket içermemelidir.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Merkez öncelikli çeviri senkronizasyonu iş akışını uçtan uca doğrulamak için kullanılan ikinci test sorun dizisi.
@@ -390,7 +388,6 @@ CommonUI.Features.Label.Terms,Koşullar
 CommonUI.Features.Label.TermsOfUse,Kullanım Koşulları
 CommonUI.Features.Label.Thanks,Teşekkürler
 CommonUI.Features.Label.TheHunt,Roblox Etkinlikleri
-CommonUI.Features.Label.Trades,Takaslar
 CommonUI.Features.Label.Unchecked,Kontrol edilmedi
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1116,6 +1113,9 @@ CoreScripts.TopBar.GameNamePlaceHolder,
 CoreScripts.TopBar.HideChat,Sohbeti gizle
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,Sesli Sohbet Et
+CoreScripts.TopBar.Label.InappropriateAudio,Uygunsuz Ses
+CoreScripts.TopBar.Label.Report,
+CoreScripts.TopBar.Label.ReportAudio,Sesi Bildir
 CoreScripts.TopBar.Label.UILessHintDescription,Roblox menüsünü açmak için ESC tuşuna bas
 CoreScripts.TopBar.Label.UILessHintTitle,Roblox menüsünü başlatmanın yeni yolu
 CoreScripts.TopBar.Leaderboard,
@@ -1297,26 +1297,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Mevcut görünümü güncelle
 Feature.Avatar.Action.UpdateMakeupLook,Görünümü güncelle
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Tarzları Keşfet
-Feature.Avatar.BackgroundGeneration.Action.Cancel,
-Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.Okay,
-Feature.Avatar.BackgroundGeneration.Action.Publish,Yayınla
-Feature.Avatar.BackgroundGeneration.Action.View,Görüntüle
-Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Yaratımın kullanıma hazır.
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,Bu arka plan yapay zekâ ile oluşturulmuştur. Yayınlayarak Roblox Topluluk Standartları'na uyduğunu ve hak sahibi olmadığın içerikler kullanmadığını onaylamış olursun. Envanterinde görünmeden önce incelenecek ve yayınlanan öğeler düzenlenemeyecektir.
-Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"Öğe, Topluluk Standartları'na uymuyor"
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
-Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
-Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
-Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Arka planını tarif et…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Arka planın oluşturuluyor…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Arka planın hazırlanıyor…
 Feature.Avatar.BackgroundGeneration.Title,Arka Plan Oluştur
-Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
-Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Envanterde yayınla
 Feature.Avatar.Backgrounds.Title,Arka planlar
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Düzenlemeler bu vücut stilinde kullanılamıyor.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Varsayılan orijinal vücut renklerine dön
@@ -1810,9 +1796,7 @@ Feature.Build.Action.Buy,
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Metni kopyala
-Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
-Feature.Build.Action.DontAskAgain,Bir daha sorma
 Feature.Build.Action.HideAutosaved,Otomatik kaydedilenleri gizle
 Feature.Build.Action.ManageLimit,Sınırı yönet
 Feature.Build.Action.Next,Sonraki
@@ -1822,7 +1806,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Ayarları aç
 Feature.Build.Action.Playtest,Oynanış testi
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,
+Feature.Build.Action.Publish,Yayınla
 Feature.Build.Action.PublishLatest,En sonuncuyu yayınla
 Feature.Build.Action.Restore,Geri Yükle
 Feature.Build.Action.Revert,Geri döndür
@@ -1834,25 +1818,21 @@ Feature.Build.Action.ShareLink,Bağlantıyı paylaş
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Derecelendirmeyi güncelle
 Feature.Build.Action.UpdateWithChanges,Değişikliklerle güncelle
-Feature.Build.Action.View,
+Feature.Build.Action.View,Görüntüle
 Feature.Build.Action.ViewUsage,Kullanımı görüntüle
 Feature.Build.Content.NewGame,Yeni oyun
 Feature.Build.Description.ArchiveRemoval,Bu oyunu arşivlersen oyun İnşa Et'ten kaldırılır. Yaratıcı Merkezi'nde veya Roblox Studio'da oyuna erişmeye ve oyunu geri yüklemeye devam edebilirsin.
 Feature.Build.Description.AutoBuyUsage,Bir şeyler oluştururken otomatik olarak ek İnşa Et kullanım hakkı satın almak için Robux'unu kullan. İstediğin zaman günlük harcama limiti belirleyebilirsin.
-Feature.Build.Description.BoostAudienceForPlays,Daha fazla oyun için kitleni genişlet.
-Feature.Build.Description.BoostGameAudience,Oyununun kitlesini genişlet
 Feature.Build.Description.BuildIdeaGame,Fikirlerini oyuna dönüştür
 Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiğinde haberdar ol.
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
 Feature.Build.Description.BuyUsageOrWait,Robux ile daha fazla İnşa Et kullanım hakkı satın al veya günlük sınırının sıfırlanmasını bekle.
-Feature.Build.Description.CampaignRunDates,Kampanyanız {startDate}-{endDate} arasında yayınlanacak
 Feature.Build.Description.ChoosePlaytesters,Oynanış testinde sana yardımcı olacak arkadaşları seç.
 Feature.Build.Description.EnableBuildNotifs,İnşa Et'ten güncellemeler almak için cihaz ayarlarında bildirimleri aç.
 Feature.Build.Description.FriendsLinkOnly,Bu bağlantıya yalnızca arkadaşların erişebilir. Daha fazla insanın oynamasını istiyorsan oyununun Kitle ayarını değiştir.
 Feature.Build.Description.GameCreationDone,Oyununun oluşturulmasını ve yayınlanmasını tamamladım. Oynanış testini yapmak için açabilirsin.
 Feature.Build.Description.GameSavedPlaytest,Oyununun oluşturulmasını tamamladım ve yeni bir versiyon kaydettim. Oynanış testini yapmak için açabilirsin.
 Feature.Build.Description.HubSettings,Yaratıcı Merkezi'nde tüm ayarları yönet
-Feature.Build.Description.InviteFriendLimit,"En fazla {MAX_INVITES} arkadaş seç, ardından oyunun bağlantısını paylaş."
 Feature.Build.Description.MakeAudienceAvail,Bu kitleye sunmak için deneyimini yayınla.
 Feature.Build.Description.ManageAppearance,Oyununun başkalarına nasıl görüneceğini yönet.
 Feature.Build.Description.PlayAfterPublish,Bu deneyimi yayınladıktan sonra kimlerin oynayabileceğini seç.
@@ -1863,7 +1843,6 @@ Feature.Build.Description.PrivateShare,Oyununu paylaşmak için Kitle ayarını 
 Feature.Build.Description.RaiseLimitOrWait,Bir şeyler oluşturmaya devam etmek için günlük Robux sınırını artır veya yarın sıfırlanmasını bekle.
 Feature.Build.Description.RatingAgreement,Yayınlayarak bu içerik derecelendirmesinin doğru olduğunu kabul etmiş olursun.
 Feature.Build.Description.RestoreLatest,"Bu versiyon, en son yayınlanan versiyonun olacak."
-Feature.Build.Description.RevertToVersion,En son değişikliği geri döndürmek ve {VERSION} versiyonuna geri dönmek için onayla.
 Feature.Build.Description.VersionChanges,Oyunculara bu versiyonda nelerin değiştiğini söyle.
 Feature.Build.Header.AccessSharing,Erişim ve paylaşım
 Feature.Build.Header.ContentMaturity,İçerik Olgunluk Düzeyi
@@ -1872,16 +1851,13 @@ Feature.Build.Header.GameDetails,Oyun ayrıntıları
 Feature.Build.Header.Overview,Genel Bakış
 Feature.Build.Label.Access,Erişim
 Feature.Build.Label.AdditionalUsage,Ek İnşa Et kullanım hakkı
-Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT} kullanıldı
 Feature.Build.Label.All,
-Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
 Feature.Build.Label.Autosaved,Otomatik kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.BackToBuild,Oluşturmaya Dön
 Feature.Build.Label.Building,İnşa ediliyor...
 Feature.Build.Label.CaptureLibrary,Yakalama kütüphanesi
 Feature.Build.Label.ContentRating,İçerik derecelendirmesi
-Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
@@ -1892,17 +1868,14 @@ Feature.Build.Label.FreeBuildUsage,Ücretsiz İnşa Et kullanım hakkı
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Yalnızca arkadaşlar
 Feature.Build.Label.GetMoreBuildUsage,Daha fazla İnşa Et kullanım hakkı al
-Feature.Build.Label.Hi,Merhaba
 Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
-Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Sınırlı
 Feature.Build.Label.Loading,
 Feature.Build.Label.NoLimit,Sınır yok
 Feature.Build.Label.NotStarted,Başlamadı
 Feature.Build.Label.Pending,Beklemede
-Feature.Build.Label.PercentUsed,Yüzde {PERCENT} kullanıldı
 Feature.Build.Label.PreviouslyPublished,Daha önce yayınlanan
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,Herkese Açık
@@ -1910,8 +1883,6 @@ Feature.Build.Label.PubliclyUnavailable,Herkese açık değil
 Feature.Build.Label.Published,Yayınlandı
 Feature.Build.Label.Ready,Hazır
 Feature.Build.Label.ResetsDaily,Her gün sıfırlanır
-Feature.Build.Label.RestoredVersion,{VERSION} geri yüklendi
-Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Oyun ara
 Feature.Build.Label.SearchTasks,Görev ara
@@ -1981,16 +1952,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Görevlerin planlanıyor
 Feature.Build.Label.ToolThumbnailDone,Oyun küçük resmini ayarla
 Feature.Build.Label.ToolThumbnailFailed,Oyun küçük resmi ayarlanamadı
 Feature.Build.Label.ToolThumbnailRunning,Oyun küçük resmi ayarlanıyor
-Feature.Build.Label.UniverseNumber,Evren {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Bilinmeyen
-Feature.Build.Label.UnlimitedUsed,{USED} kullanıldı • Sınır yok
 Feature.Build.Label.Usage,Kullanım
-Feature.Build.Label.UsageUsed,{USED} kullanıldı
-Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,Sürüm
-Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
-Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
-Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Versiyon başlığı ve açıklaması
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,"Hesabın, İnşa Et'i kullanma gerekliliklerini karşılamıyor."
@@ -2006,12 +1970,10 @@ Feature.Build.Message.BuildResponseFailed,İnşa Et yanıt veremedi. Tekrar dene
 Feature.Build.Message.BuildStillWorking,"Üzerinde çalışıyor. Beklerken uygulamadan çıkabilir, Roblox oynayabilir veya başka bir projeye başlayabilirsin."
 Feature.Build.Message.BuildStopped,İnşa Et'i durdurdun.
 Feature.Build.Message.BuildTemporarilyDown,İnşa Et geçici olarak kullanım dışı. Bir dakika içinde tekrar dene.
-Feature.Build.Message.CompletedTasks,{COUNT} tamamlanan görev
 Feature.Build.Message.ConversationGone,Bu sohbet artık mevcut değil. Yeni bir sohbet başlat.
 Feature.Build.Message.ConversationNotFound,Bu sohbet bulunamadı. Yeni bir sohbet başlat.
 Feature.Build.Message.CreateGameToUseBuild,İnşa Et'i kullanmaya başlamak için yeni bir oyun oluştur.
 Feature.Build.Message.CreatedRevertedVer,Geri döndürülmüş bir versiyon oluşturuldu.
-Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Yaratıcı Merkezi'nde gerekli şartları karşılama açısından kitleni genişlet
 Feature.Build.Message.ExperiencesLoadFailed,Deneyimler yüklenemedi
 Feature.Build.Message.FailedTitle,{TITLE} başarısız oldu
@@ -2019,47 +1981,33 @@ Feature.Build.Message.FinishedTitle,{TITLE} tamamlandı
 Feature.Build.Message.FriendsLoadFailed,Arkadaşlar yüklenemedi. Tekrar dene.
 Feature.Build.Message.GameNotCreated,Oyunun oluşturulmadı. Tekrar dene.
 Feature.Build.Message.GamePublishFailed,Oyunun yayınlanamadı. Tekrar dene.
-Feature.Build.Message.GameShared,Oyun paylaşıldı
-Feature.Build.Message.GameSharedWith,Oyun {DISPLAY_NAME} ile paylaşıldı
-Feature.Build.Message.HiDisplayName,Merhaba {DISPLAY_NAME}
 Feature.Build.Message.InvalidMessage,Mesajınla ilgili bir şeyler yanlış gitti. Düzenle ve tekrar dene.
 Feature.Build.Message.InvitesLoadFailed,Davetler yüklenemedi
-Feature.Build.Message.LimitBelowSpend,"Sınır, bugün harcanmış olan {ALREADY_SPENT} Robux'un altında olamaz."
 Feature.Build.Message.LinkCopied,"Bağlantı, panoya kopyalandı."
 Feature.Build.Message.LoadingVersions,Sürüm geçmişi yükleniyor...
 Feature.Build.Message.NoDescriptionProvided,Açıklama sağlanmadı.
 Feature.Build.Message.NoFriendsToAdd,Henüz ekleyecek arkadaşın yok. Önce Roblox'ta bağlantı kurabileceğin insanlar bul.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Henüz sürüm geçmişi yok.
-Feature.Build.Message.OneTaskCompleted,1 görev tamamlandı
 Feature.Build.Message.OutOfBuildUsage,İnşa Et kullanım hakkın tükendi. Bir şeyler oluşturmaya devam etmek için Robux kullanma seçeneklerini görüntüle.
-Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT}/{MAX_INVITES} oynanış testçisi eklendi
 Feature.Build.Message.PublicPublishFailed,Oyunun yayınlandı ancak herkese açık hâle getirilemedi. Tekrar dene.
 Feature.Build.Message.PublishExpandAudience,Kitleni genişletmek için yayınla
 Feature.Build.Message.PublishNotReverted,Yayınlaman geri döndürülmedi. Tekrar dene.
 Feature.Build.Message.PublishReverted,Yayınlama geri döndürüldü.
 Feature.Build.Message.QuestionnaireNeeded,Bu oyun İnşa Et dışında düzenlendi. Yayınlamak için içerik anketini tamamla.
 Feature.Build.Message.ReadyToPlay,Oyunun Roblox'ta oynamaya hazır!
-Feature.Build.Message.ResetHours,{HOURS} saat içinde sıfırlanacak
-Feature.Build.Message.ResetOneHour,1 saat içinde sıfırlanacak
 Feature.Build.Message.RestoreVersionFailed,Bu versiyon geri yüklenemedi. Tekrar dene.
 Feature.Build.Message.RevertVersionFail,Geri döndürülmüş bir versiyon oluşturulmadı. Tekrar dene.
 Feature.Build.Message.RunningTitle,{title} çalıştırılıyor
 Feature.Build.Message.SafetyPolicy,Bu mesaj güvenlik politikamıza aykırı. Düzenle ve tekrar dene.
 Feature.Build.Message.SaveChangesFailed,Değişiklikler kaydedilemedi. Tekrar dene.
-Feature.Build.Message.ShareExperience,{EXPERIENCE_NAME} deneyimini paylaş
 Feature.Build.Message.ShareLinkFailed,Paylaşım bağlantısı oluşturulamadı. Tekrar dene.
 Feature.Build.Message.SignedOut,Çıkış yaptın. Giriş yapıp tekrar dene.
-Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} görev tamamlandı
-Feature.Build.Message.ThinkingSeconds,{SECONDS} saniyedir düşünülüyor
 Feature.Build.Message.TryAgain,Tekrar dene.
 Feature.Build.Message.TurnToPortrait,Oyunun üzerinde çalışmaya devam etmek için cihazını portre moduna getir.
 Feature.Build.Message.VersionHistoryLoad,Versiyon geçmişi yüklenemedi.
 Feature.Build.Message.WhatToCreate,Bugün ne yaratmak istiyorsun?
-Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} dk. {REM_SECONDS} sn. çalışıldı
-Feature.Build.Message.WorkedSeconds,{SECONDS} sn. çalışıldı
 Feature.Build.Message.WorkingOnTasks,Görevlerin üzerinde çalışıyor
-Feature.Build.Title.AdCampaignActive,Reklam kampanyası aktif
 Feature.Build.Title.AddFriendsToPlaytest,Oynanış testinde sana yardımcı olacak arkadaşları ekle
 Feature.Build.Title.ArchiveThisGame,Bu oyun arşivlensin mi?
 Feature.Build.Title.Audience,Kitle
@@ -2080,14 +2028,12 @@ Feature.Build.Title.GenericError,Bir şeyler ters gitti
 Feature.Build.Title.NoRobuxForUsage,İnşa Et kullanım hakkı için Robux kalmadı
 Feature.Build.Title.Playtesters,Oynanış Testçileri
 Feature.Build.Title.PlaytestersOnlyPlay,Yalnızca oynanış testçileri oynayabilir
-Feature.Build.Title.PromoteGameFree,Oyununun tanıtımını ücretsiz yap
 Feature.Build.Title.PushNotifications,Anlık bildirimler
 Feature.Build.Title.RevertLastChange,Son değişiklik geri döndürülsün mü?
 Feature.Build.Title.Tasks,Görevler
 Feature.Build.Title.TurnActivity,Etkinliği aç
 Feature.Build.Title.VersionHistory,Sürüm geçmişi
 Feature.Build.Title.VersionInformation,Versiyon Bilgileri
-Feature.Build.Title.VersionNumber,Sürüm {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,İzin ver
 Feature.Captures.Action.AllowPhotoAccessAccepted,İzin Ver
@@ -2187,7 +2133,6 @@ Feature.Catalog.Action.Report,Bildirim
 Feature.Catalog.Action.Sell,Sat
 Feature.Catalog.Action.ShareVia,Paylaş...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,Dene
 Feature.Catalog.Action.Upgrade,Yükselt
 Feature.Catalog.Action.ViewDetailsPage,Ayrıntılar Sayfasını Görüntüle
 Feature.Catalog.Action.ViewExperienceDetails,Deneyim Detaylarını Görüntüle
@@ -3245,7 +3190,6 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Küçült
 Feature.Moments.Action.Ok,
-Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,Raporla
 Feature.Moments.Action.Retry,Tekrar Dene
@@ -3318,14 +3262,8 @@ Feature.Moments.Label.TextGenerationFailedBody,Metin oluşturulamadı. Lütfen t
 Feature.Moments.Label.TextGenerationFailedTitle,Oluşturma Başarısız
 Feature.Moments.Label.TextGenerationFilteredBody,"Bu yakalanan video için oluşturma işlemi gerçekleştirilemiyor, içerik filtrelendi."
 Feature.Moments.Label.TextGenerationFilteredTitle,Oluşturma Filtrelendi
-Feature.Moments.Label.Tone,Üslup
-Feature.Moments.Label.Tone.Cinematic,Sinematik
-Feature.Moments.Label.Tone.Funny,Komik
-Feature.Moments.Label.Tone.Hype,Heyecan verici
-Feature.Moments.Label.Tone.Neutral,Nötr
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
-Feature.Moments.Title.GenerateTextOptions,Metin Oluştur
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?
 Feature.Moments.Title.MomentRemoved,An kaldırıldı
 Feature.Moments.Title.ReportPost,Paylaşımı raporla
@@ -3937,8 +3875,8 @@ Feature.SocialTab.Label.CreateAndExploreGroups,Topluluklar oluştur ve keşfet
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,Sesi Bildir
-Feature.SongDetails.Label.InappropriateAudio,Uygunsuz Ses
+Feature.SongDetails.Action.ReportAudio,
+Feature.SongDetails.Label.InappropriateAudio,
 Feature.SongDetails.Label.InappropriateThumbnail,Uygunsuz Küçük Resim
 Feature.SongDetails.Label.SongPreview,Şarkı Ön İzlemesi
 Feature.Squads.Action.Add,
@@ -4614,13 +4552,10 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,Arkadaşlık İsteği
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,İsteği İptal Et
-InGame.PlayerDropDown.ConfirmUnfriend,Arkadaşlıktan çıkarmayı onaylamak için dokun
-InGame.PlayerDropDown.Decline,Reddet
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,"{RBX_NAME}, maksimum arkadaş sınırına ulaşmış durumda."
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
-InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,En son {minutes} dakika önce güncellendi
 InGame.PlayerList.FooterUnableToLoad,Yüklenemiyor
 InGame.PlayerList.FriendsEmpty,Henüz hiçbir arkadaşın bu deneyimi oynamadı.

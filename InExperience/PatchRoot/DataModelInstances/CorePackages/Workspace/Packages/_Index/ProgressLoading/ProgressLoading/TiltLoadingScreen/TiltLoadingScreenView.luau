@@ -5,46 +5,29 @@ local view = foundationModule.View
 local progress = foundationModule.Progress
 local progressShape = foundationModule.Enums.ProgressShape
 local badge = foundationModule.Badge
-local icon = foundationModule.Icon
 local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
 local enums = foundationModule.Enums
-local iconSize = enums.IconSize
 local useTokens = foundationModule.Hooks.useTokens
 local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagDebugEnablePioneerUX = require(parent.SharedFlags).FFlagDebugEnablePioneerUX
 local tiltLockupModule = require(script.Parent.Components.TiltLockup)
 local tiltLoadingScreenStatusPanelModule = require(script.Parent.Components.TiltLoadingScreenStatusPanel)
-local fFlagTiltLoadingScreenConsoleHints = require(parent.SharedFlags).FFlagTiltLoadingScreenConsoleHints
 local _ = require(script.Parent.Types)
 
-return reactModule.memo(function(p0) --[[ line: 27 | named "TiltLoadingScreenView" ]]
-	-- upvalues: useTokens (ref), useLocalization (ref), fFlagTiltLoadingScreenConsoleHints (ref), reactModule (ref), view (ref), fFlagDebugEnablePioneerUX (ref), iconButton (ref), enums (ref), icon (ref), iconSize (ref), text (ref), tiltLockupModule (ref), badge (ref), tiltLoadingScreenStatusPanelModule (ref), progress (ref), progressShape (ref)
-	local var8
-	local var4 = useTokens()
-	local var5 = useLocalization({
-		autoTranslate = "CoreScripts.TopBar.LoadingScreen.AutoTranslate",
-		back = if fFlagTiltLoadingScreenConsoleHints then "CoreScripts.TopBar.Back" else nil
-	})
-	local createElement = reactModule.createElement
-	local t = {
+return reactModule.memo(function(p0) --[[ line: 22 | named "TiltLoadingScreenView" ]]
+	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), iconButton (ref), enums (ref), tiltLockupModule (ref), badge (ref), tiltLoadingScreenStatusPanelModule (ref), progress (ref), progressShape (ref)
+	return reactModule.createElement(view, {
 		tag = "size-full bg-surface-0",
 		testId = "tilt-loading-screen-root",
-		GroupTransparency = p0.chromeReveal:map(function(p1) --[[ line: 36 ]]
+		GroupTransparency = p0.chromeReveal:map(function(p1) --[[ line: 30 ]]
 			return 1 - p1
 		end)
-	}
-	local t_1 = {
+	}, {
 		Overlay = reactModule.createElement(view, {
 			tag = "size-full",
 			ZIndex = 0,
-			backgroundStyle = var4.Color.Extended.Black.Black_50
-		})
-	}
-	
-	if p0.showContent then
-		var8 = reactModule.createElement
-		var8 = var8(view, {
+			backgroundStyle = useTokens().Color.Extended.Black.Black_50
+		}),
+		SafeArea = if p0.showContent then reactModule.createElement(view, {
 			tag = "size-full",
 			ZIndex = 1,
 			testId = "tilt-loading-screen-safe-area",
@@ -55,7 +38,7 @@ return reactModule.memo(function(p0) --[[ line: 27 | named "TiltLoadingScreenVie
 				bottom = UDim.new(0, p0.safeAreaInsets.bottom)
 			}
 		}, {
-			CancelButton = if fFlagDebugEnablePioneerUX or p0.isDirectionalInput then nil else reactModule.createElement(view, {
+			CancelButton = reactModule.createElement(view, {
 				tag = "col align-x-left align-y-top size-full padding-xlarge",
 				ZIndex = 2
 			}, {
@@ -66,27 +49,6 @@ return reactModule.memo(function(p0) --[[ line: 27 | named "TiltLoadingScreenVie
 					variant = enums.ButtonVariant.Standard,
 					size = enums.InputSize.Large,
 					onActivated = p0.onCancel
-				})
-			}),
-			GamepadCancelHint = if fFlagDebugEnablePioneerUX or not p0.isDirectionalInput then nil else reactModule.createElement(view, {
-				tag = "col align-x-left align-y-bottom size-full padding-xlarge",
-				ZIndex = 2,
-				testId = "tilt-loading-screen-gamepad-cancel-hint"
-			}, {
-				Hint = reactModule.createElement(view, {
-					tag = "row align-y-center gap-small auto-xy padding-x-medium"
-				}, {
-					ButtonIcon = reactModule.createElement(icon, {
-						LayoutOrder = 1,
-						name = p0.gamepadCancelIcon,
-						size = iconSize.Medium,
-						style = var4.Color.System.Contrast
-					}),
-					Label = reactModule.createElement(text, {
-						LayoutOrder = 2,
-						tag = "auto-xy text-title-large content-system-contrast",
-						Text = var5.back
-					})
 				})
 			}),
 			Layout = reactModule.createElement(view, { tag = "col size-full", ZIndex = 1 }, {
@@ -106,12 +68,14 @@ return reactModule.memo(function(p0) --[[ line: 27 | named "TiltLoadingScreenVie
 					AutoTranslate = if p0.isAutoTranslated then reactModule.createElement(view, {
 						LayoutOrder = 2,
 						tag = "auto-xy",
-						GroupTransparency = p0.animation.creator.reveal:map(function(p2) --[[ line: 117 ]]
+						GroupTransparency = p0.animation.creator.reveal:map(function(p2) --[[ line: 86 ]]
 							return 1 - p2
 						end)
 					}, {
 						Badge = reactModule.createElement(badge, {
-							text = var5.autoTranslate,
+							text = useLocalization({
+								autoTranslate = "CoreScripts.TopBar.LoadingScreen.AutoTranslate"
+							}).autoTranslate,
 							variant = enums.BadgeVariant.Neutral,
 							shape = enums.BadgeShape.Box,
 							icon = {
@@ -149,11 +113,6 @@ return reactModule.memo(function(p0) --[[ line: 27 | named "TiltLoadingScreenVie
 					})
 				}) else nil
 			})
-		})
-	else
-		var8 = nil
-	end
-	t_1.SafeArea = var8
-	
-	return createElement(view, t, t_1)
+		}) else nil
+	})
 end)

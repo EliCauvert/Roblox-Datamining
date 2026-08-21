@@ -9,6 +9,5 @@
 	GetConversationMessageListStore = require(script.GetConversationMessageListStore),
 	GetConversationViewModelStore = require(script.GetConversationViewModelStore),
 	GetConversationMessageViewModelStore = require(script.GetConversationMessageViewModelStore),
-	GetReplyingToStore = require(script.GetReplyingToStore),
-	GetUnreadMessageCountStore = require(script.GetUnreadMessageCountStore)
+	GetReplyingToStore = require(script.GetReplyingToStore)
 }

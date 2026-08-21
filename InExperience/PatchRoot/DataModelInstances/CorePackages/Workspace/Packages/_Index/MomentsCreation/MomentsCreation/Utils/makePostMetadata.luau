@@ -1,7 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
-local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
-local function convertTextOverlayStyle(p0) --[[ line: 14 ]]
+local function convertTextOverlayStyle(p0) --[[ line: 12 ]]
 	return {
 		font = p0.font.Name,
 		fontColor = { p0.fontColor.R, p0.fontColor.G, p0.fontColor.B },
@@ -10,7 +9,7 @@ local function convertTextOverlayStyle(p0) --[[ line: 14 ]]
 	}
 end
 
-local function convertTextOverlay(p1) --[[ line: 23 ]]
+local function convertTextOverlay(p1) --[[ line: 21 ]]
 	-- upvalues: convertTextOverlayStyle (ref)
 	return {
 		text = p1.text,
@@ -22,8 +21,8 @@ local function convertTextOverlay(p1) --[[ line: 23 ]]
 	}
 end
 
-return function(p2) --[[ line: 34 | named "makePostMetadata" ]]
-	-- upvalues: convertTextOverlay (ref), momentsPostCtaUseCaptureUniverse (ref)
+return function(p2) --[[ line: 32 | named "makePostMetadata" ]]
+	-- upvalues: convertTextOverlay (ref)
 	local t = { caption = p2.description }
 	
 	if p2.edits then
@@ -48,14 +47,10 @@ return function(p2) --[[ line: 34 | named "makePostMetadata" ]]
 			t.textOverlays = t_1
 		end
 	end
-	local var5 = p2.universeIdOverride or p2.universeId
+	local universeIdOverride = p2.universeIdOverride or p2.universeId
 	
-	if momentsPostCtaUseCaptureUniverse then
-		local universeId = p2.universeId
-		var5 = if universeId == nil or universeId <= 0 then p2.universeIdOverride else universeId
-	end
-	if var5 and p2.placeId then
-		t.primaryCta = { experienceId = var5, placeId = p2.placeId }
+	if universeIdOverride and p2.placeId then
+		t.primaryCta = { experienceId = universeIdOverride, placeId = p2.placeId }
 	end
 	if p2.captureType == Enum.CaptureType.Video then
 		t.durationSeconds = p2.assetTotalDuration

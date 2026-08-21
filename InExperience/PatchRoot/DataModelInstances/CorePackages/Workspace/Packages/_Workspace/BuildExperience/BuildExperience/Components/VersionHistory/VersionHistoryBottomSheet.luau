@@ -16,7 +16,7 @@ local sheet = foundationModule.Sheet
 local text = foundationModule.Text
 local view = foundationModule.View
 
-local function VersionHistoryContent(p0) --[[ line: 48 ]]
+local function VersionHistoryContent(p0) --[[ line: 47 ]]
 	-- upvalues: fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var9 (ref), reactModule (ref), sheet (ref)
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
 		var9("LuaApp_Build_VersionHistory_Scroll", p0.scrollingFrameRef)
@@ -24,7 +24,7 @@ local function VersionHistoryContent(p0) --[[ line: 48 ]]
 	return reactModule.createElement(sheet.Content, { scrollingFrameRef = p0.scrollingFrameRef }, p0.children)
 end
 
-return function(p1) --[[ line: 62 | named "VersionHistoryBottomSheet" ]]
+return function(p1) --[[ line: 61 | named "VersionHistoryBottomSheet" ]]
 	-- upvalues: reactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), versionHistoryUtilsModule (ref), versionHistoryCardModule (ref), sheet (ref), text (ref), VersionHistoryContent (ref), view (ref), checkbox (ref), restoreVersionDialogModule (ref)
 	local VERSION_HISTORY_HIDE_AUTOSAVED, VERSION_HISTORY_TITLE
 	local testId = p1.testId or "version-history-bottom-sheet"
@@ -45,7 +45,7 @@ return function(p1) --[[ line: 62 | named "VersionHistoryBottomSheet" ]]
 		VERSION_HISTORY_HIDE_AUTOSAVED = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED
 		VERSION_HISTORY_TITLE = localizationStringsModule.VERSION_HISTORY_TITLE
 	end
-	local var18 = reactModule.useCallback(function(p2) --[[ line: 89 ]]
+	local var18 = reactModule.useCallback(function(p2) --[[ line: 88 ]]
 		-- upvalues: var14 (ref)
 		var14(p2)
 	end, {})
@@ -55,7 +55,7 @@ return function(p1) --[[ line: 62 | named "VersionHistoryBottomSheet" ]]
 			defaultSnapPointIndex = 2,
 			isOpen = p1.isOpen == nil or p1.isOpen,
 			snapPoints = { 0.5, 1 },
-			onClose = reactModule.useCallback(function() --[[ line: 84 ]]
+			onClose = reactModule.useCallback(function() --[[ line: 83 ]]
 				-- upvalues: var14 (ref), p1 (ref)
 				var14(nil)
 				p1.onClose()
@@ -86,14 +86,12 @@ return function(p1) --[[ line: 62 | named "VersionHistoryBottomSheet" ]]
 				Cards = reactModule.createElement(view, {
 					LayoutOrder = 3,
 					tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
-				}, reactModule.useMemo(function() --[[ line: 105 ]]
-					-- upvalues: p1 (ref), fFlagBuildLocalization (copy), var15 (ref), versionHistoryUtilsModule (copy), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var18 (ref)
+				}, reactModule.useMemo(function() --[[ line: 104 ]]
+					-- upvalues: p1 (ref), versionHistoryUtilsModule (copy), var15 (ref), testId (ref), reactModule (copy), versionHistoryCardModule (copy), var18 (ref)
 					local t = {}
 					
 					for i, v in p1.entries do
-						local _ = nil
-						
-						if if fFlagBuildLocalization then if var15 then not v.isAutosaved else not var15 else versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var15) then
+						if versionHistoryUtilsModule.shouldShowEntry(v.badgeText, var15) then
 							t[v.id] = reactModule.createElement(versionHistoryCardModule, {
 								layoutOrder = i,
 								versionLabel = v.versionLabel,
@@ -101,7 +99,7 @@ return function(p1) --[[ line: 62 | named "VersionHistoryBottomSheet" ]]
 								description = v.description,
 								badgeText = v.badgeText,
 								isRestoreDisabled = p1.isRestoreDisabled,
-								onRestore = function() --[[ line: 123 ]]
+								onRestore = function() --[[ line: 116 ]]
 									-- upvalues: var18 (copy), v (ref)
 									var18(v)
 								end,
@@ -123,14 +121,14 @@ return function(p1) --[[ line: 62 | named "VersionHistoryBottomSheet" ]]
 			isOpen = true,
 			title = var13.versionLabel,
 			description = var13.description,
-			onRestore = reactModule.useCallback(function() --[[ line: 97 ]]
+			onRestore = reactModule.useCallback(function() --[[ line: 96 ]]
 				-- upvalues: var13 (ref), p1 (ref), var14 (ref)
 				if var13 and not p1.isRestoreDisabled then
 					p1.onRestore(var13)
 				end
 				var14(nil)
 			end, { var13, p1.isRestoreDisabled, p1.onRestore }),
-			onCancel = reactModule.useCallback(function() --[[ line: 93 ]]
+			onCancel = reactModule.useCallback(function() --[[ line: 92 ]]
 				-- upvalues: var14 (ref)
 				var14(nil)
 			end, {})

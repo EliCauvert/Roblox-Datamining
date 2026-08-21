@@ -94,7 +94,6 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,電話番号またはパ�
 Authentication.Login.Response.IncorrectUsernamePassword,ユーザーネーム、またはパスワードが間違っています。
 Authentication.Login.Response.InvalidPasskeyCredential,このパスキーではログインできません。アクセスを回復するには、「パスワードまたはユーザーネームを忘れた場合」にアクセスしてください。
 Authentication.Login.Response.MoreThanOneUsername,メールアドレスが複数のユーザーネームに関連付けられています。ユーザーネームでログインしてください。
-Authentication.Login.Response.PlatformAlreadyLinked,この{platform}アカウントは、すでに別のRobloxアカウントに紐づけられています。紐づけられているRobloxアカウントでログインしてください。
 Authentication.Login.Response.RelinkingFreeze,このRobloxアカウントは過去90日間に {platform} で別のアカウントに紐づけられています。別のRobloxアカウントでログインしてみてください。
 Authentication.Login.Response.Require2FA,2段階認証はコンソールには対応していません。右の手順に従って安全にログインしてください。
 Authentication.Login.Response.Require2FAGeneric,このデバイス上では追加の認証には対応していません。右側にある手順に従って安全にログインしてください。
@@ -389,7 +388,6 @@ CommonUI.Features.Label.Terms,規約
 CommonUI.Features.Label.TermsOfUse,利用規約
 CommonUI.Features.Label.Thanks,ありがとうございます
 CommonUI.Features.Label.TheHunt,Robloxイベント
-CommonUI.Features.Label.Trades,取引
 CommonUI.Features.Label.Unchecked,未チェック
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1040,7 +1038,7 @@ CoreScripts.TextChat.ChatWindow.SummarySystemMessage,Robloxが、プレイヤー
 CoreScripts.TextChat.ChatWindow.Transcribing,文字起こし中...
 CoreScripts.TextChat.ChatWindow.TranscriptionFailed,認識できませんでした。もう一度お試しください。
 CoreScripts.TextChat.ChatWindow.TranscriptionLanguageUnsupported,その言語にはまだ対応していません。
-CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,マイクを使用するには、デバイスの設定を開き、Robloxにマイクへのアクセスを許可してください。
+CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody,マイクを使用するには、こちらをタップしてデバイス設定を更新してください。
 CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastHeader,マイクにアクセスできません
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastBody,音声でメッセージを送信する場合、その音声は当社のプライバシーポリシーに従って処理され、すぐに削除されます。
 CoreScripts.TextChat.ChatWindow.TranscriptionU13MicAccessToastHeader,音声文字起こしによるテキストチャットを有効化しました
@@ -1115,6 +1113,9 @@ CoreScripts.TopBar.GameNamePlaceHolder,
 CoreScripts.TopBar.HideChat,チャットを隠す
 CoreScripts.TopBar.Inventory,持ち物リスト
 CoreScripts.TopBar.JoinVoice,ボイスチャット開始
+CoreScripts.TopBar.Label.InappropriateAudio,不適切な音声
+CoreScripts.TopBar.Label.Report,
+CoreScripts.TopBar.Label.ReportAudio,音声を報告
 CoreScripts.TopBar.Label.UILessHintDescription,ESCキーを押してRobloxメニューを開く
 CoreScripts.TopBar.Label.UILessHintTitle,Robloxメニューを開く新しい方法
 CoreScripts.TopBar.Leaderboard,
@@ -1795,9 +1796,7 @@ Feature.Build.Action.Buy,買う
 Feature.Build.Action.BuyRobux,Robuxを買う
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,テキストをコピー
-Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
-Feature.Build.Action.DontAskAgain,今後表示しない
 Feature.Build.Action.HideAutosaved,自動保存済みバージョンを非表示
 Feature.Build.Action.ManageLimit,限度額を管理
 Feature.Build.Action.Next,
@@ -1824,7 +1823,6 @@ Feature.Build.Action.ViewUsage,使用量を表示
 Feature.Build.Content.NewGame,新規のゲーム
 Feature.Build.Description.ArchiveRemoval,このゲームをアーカイブすると、[ビルド]から削除されます。これは、クリエーターハブまたはRoblox Studioから引き続きアクセスして復元できます。
 Feature.Build.Description.AutoBuyUsage,Robuxを使って、作成中に追加のビルド使用量を自動的に購入しましょう。1日あたりの課金限度額はいつでも設定できます。
-Feature.Build.Description.BoostGameAudience,ゲームのオーディエンスを増やしましょう
 Feature.Build.Description.BuildIdeaGame,アイデアをゲームに変えよう
 Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたときに通知を受け取りましょう。
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
@@ -1835,7 +1833,6 @@ Feature.Build.Description.FriendsLinkOnly,このリンクにアクセスでき�
 Feature.Build.Description.GameCreationDone,ゲームの作成と公開が完了しました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.GameSavedPlaytest,ゲームの作成が完了し、新しいバージョンが保存されました。ゲームを開いてプレイテストできます。
 Feature.Build.Description.HubSettings,クリエーターハブですべての設定を管理します
-Feature.Build.Description.InviteFriendLimit,友達を{MAX_INVITES}人まで選択して、ゲームへのリンクをシェアしましょう。
 Feature.Build.Description.MakeAudienceAvail,このオーディエンスが利用できるようにするには、バーチャル空間を公開してください。
 Feature.Build.Description.ManageAppearance,他のユーザーへのゲームの表示のされ方を管理しましょう。
 Feature.Build.Description.PlayAfterPublish,このバーチャル空間を公開した後、誰がプレイできるかを選択します。
@@ -1846,7 +1843,6 @@ Feature.Build.Description.PrivateShare,ゲームのオーディエンス設定�
 Feature.Build.Description.RaiseLimitOrWait,作成を続けるには、1日あたりのRobux限度額を増やすか、明日になってリセットされるのをお待ちください。
 Feature.Build.Description.RatingAgreement,公開することで、このコンテンツレーティングが正確であることに同意したものとみなされます。
 Feature.Build.Description.RestoreLatest,このバージョンが、公開済みの最新バージョンになります。
-Feature.Build.Description.RevertToVersion,確認して最後の変更を元に戻し、{VERSION}に戻ります。
 Feature.Build.Description.VersionChanges,このバージョンで変更された点をプレイヤーに伝えましょう。
 Feature.Build.Header.AccessSharing,アクセスとシェア
 Feature.Build.Header.ContentMaturity,コンテンツ成熟度
@@ -1855,7 +1851,6 @@ Feature.Build.Header.GameDetails,ゲームの詳細
 Feature.Build.Header.Overview,
 Feature.Build.Label.Access,アクセス
 Feature.Build.Label.AdditionalUsage,追加のビルド使用量
-Feature.Build.Label.AdditionalUsed,{USED}/{LIMIT}使用済み
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,自動保存済み
 Feature.Build.Label.Available,利用可能
@@ -1863,7 +1858,6 @@ Feature.Build.Label.BackToBuild,ビルドに戻る
 Feature.Build.Label.Building,制作中…
 Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
 Feature.Build.Label.ContentRating,コンテンツのレーティング
-Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
@@ -1874,17 +1868,14 @@ Feature.Build.Label.FreeBuildUsage,無料のビルド使用量
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,友達限定
 Feature.Build.Label.GetMoreBuildUsage,もっとビルド使用量を獲得
-Feature.Build.Label.Hi,こんにちは
 Feature.Build.Label.IconThumbnails,アイコンとサムネイル
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
-Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,限定
 Feature.Build.Label.Loading,読み込み中...
 Feature.Build.Label.NoLimit,制限なし
 Feature.Build.Label.NotStarted,開始していません
 Feature.Build.Label.Pending,保留中
-Feature.Build.Label.PercentUsed,{PERCENT}%使用済み
 Feature.Build.Label.PreviouslyPublished,以前に公開済み
 Feature.Build.Label.Private,
 Feature.Build.Label.Public,公開
@@ -1892,8 +1883,6 @@ Feature.Build.Label.PubliclyUnavailable,公開不可
 Feature.Build.Label.Published,公開済み
 Feature.Build.Label.Ready,準備完了
 Feature.Build.Label.ResetsDaily,毎日リセット
-Feature.Build.Label.RestoredVersion,復元済みの{VERSION}
-Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,ゲームをサーチ
 Feature.Build.Label.SearchTasks,タスクをサーチ
@@ -1963,16 +1952,9 @@ Feature.Build.Label.ToolTasksPlanRunning,タスクを計画しています
 Feature.Build.Label.ToolThumbnailDone,ゲームのサムネイルを設定しました
 Feature.Build.Label.ToolThumbnailFailed,ゲームのサムネイルを設定できませんでした
 Feature.Build.Label.ToolThumbnailRunning,ゲームのサムネイルを設定しています
-Feature.Build.Label.UniverseNumber,ユニバース{UNIVERSE_ID}
 Feature.Build.Label.Unknown,不明
-Feature.Build.Label.UnlimitedUsed,{USED}使用済み • 制限なし
 Feature.Build.Label.Usage,使用量
-Feature.Build.Label.UsageUsed,{USED}使用済み
-Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,バージョン
-Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
-Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
-Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,バージョンタイトルと詳細
 Feature.Build.Label.Video,ビデオ
 Feature.Build.Message.AccountRequirements,アカウントがビルドを使用するための要件を満たしていません。
@@ -1988,12 +1970,10 @@ Feature.Build.Message.BuildResponseFailed,ビルドが応答しませんでし�
 Feature.Build.Message.BuildStillWorking,処理中です。待機中でもアプリを終了したり、Robloxをプレイしたり、別のプロジェクトを開始したりできます。
 Feature.Build.Message.BuildStopped,ビルドを停止しました。
 Feature.Build.Message.BuildTemporarilyDown,ビルドは一時的に利用できません。しばらくしてからもう一度お試しください。
-Feature.Build.Message.CompletedTasks,{COUNT}件の完了したタスク
 Feature.Build.Message.ConversationGone,この会話は利用できなくなりました。新しい会話を始めてください。
 Feature.Build.Message.ConversationNotFound,この会話は見つかりませんでした。新しい会話を始めてください。
 Feature.Build.Message.CreateGameToUseBuild,ゲームを新規作成して、ビルドの使用を開始してください。
 Feature.Build.Message.CreatedRevertedVer,元に戻したバージョンが作成されました。
-Feature.Build.Message.ErrorCodeText,（{ERROR_CODE}）{ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,クリエーターハブでオーディエンスの適格性を拡大
 Feature.Build.Message.ExperiencesLoadFailed,バーチャル空間を読み込めませんでした
 Feature.Build.Message.FailedTitle,{TITLE}に失敗しました
@@ -2001,45 +1981,32 @@ Feature.Build.Message.FinishedTitle,{TITLE}が完了しました
 Feature.Build.Message.FriendsLoadFailed,友達を読み込めませんでした。もう一度お試しください。
 Feature.Build.Message.GameNotCreated,ゲームは作成されませんでした。もう一度お試しください。
 Feature.Build.Message.GamePublishFailed,ゲームを公開できませんでした。もう一度お試しください。
-Feature.Build.Message.GameShared,ゲームをシェアしました
-Feature.Build.Message.GameSharedWith,{DISPLAY_NAME}さんとゲームをシェアしました
-Feature.Build.Message.HiDisplayName,こんにちは、{DISPLAY_NAME}さん
 Feature.Build.Message.InvalidMessage,メッセージに問題が発生しました。編集してから、もう一度お試しください。
 Feature.Build.Message.InvitesLoadFailed,招待を読み込めませんでした
-Feature.Build.Message.LimitBelowSpend,限度額は、今日すでに使用した{ALREADY_SPENT}Robux未満にすることはできません。
 Feature.Build.Message.LinkCopied,リンクをクリップボードにコピーしました。
 Feature.Build.Message.LoadingVersions,バージョン履歴を読み込み中...
 Feature.Build.Message.NoDescriptionProvided,詳細がありません。
 Feature.Build.Message.NoFriendsToAdd,まだ追加する友達がいません。まずはRobloxでつながる人を見つけましょう。
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,まだバージョン履歴はありません。
-Feature.Build.Message.OneTaskCompleted,1つのタスクが完了しました
 Feature.Build.Message.OutOfBuildUsage,ビルド使用量がなくなりました。作成を続けるには、Robuxを使用するためのオプションをご確認ください。
-Feature.Build.Message.PlaytestersAdded,{MAX_INVITES}人中{INVITED_COUNT}人のプレイテスターが追加されました
 Feature.Build.Message.PublicPublishFailed,ゲームは公開手続きが行われましたが、公開できませんでした。もう一度お試しください。
 Feature.Build.Message.PublishExpandAudience,公開してオーディエンスを拡大
 Feature.Build.Message.PublishNotReverted,公開は元に戻りませんでした。もう一度お試しください。
 Feature.Build.Message.PublishReverted,公開を元に戻しました。
 Feature.Build.Message.QuestionnaireNeeded,このゲームはビルド外で編集されました。公開するには、コンテンツに関する質問フォームに回答してください。
 Feature.Build.Message.ReadyToPlay,あなたのゲームをRobloxでプレイするための準備完了です！
-Feature.Build.Message.ResetHours,{HOURS}時間後にリセット
-Feature.Build.Message.ResetOneHour,1時間後にリセット
 Feature.Build.Message.RestoreVersionFailed,このバージョンを復元できませんでした。もう一度お試しください。
 Feature.Build.Message.RevertVersionFail,元に戻したバージョンは作成されませんでした。もう一度お試しください。
 Feature.Build.Message.RunningTitle,{title}を実行中
 Feature.Build.Message.SafetyPolicy,このメッセージは安全ポリシーに違反しています。編集してから、もう一度お試しください。
 Feature.Build.Message.SaveChangesFailed,変更を保存できませんでした。もう一度お試しください。
-Feature.Build.Message.ShareExperience,{EXPERIENCE_NAME}をシェア
 Feature.Build.Message.ShareLinkFailed,共有リンクを作成できませんでした。もう一度お試しください。
 Feature.Build.Message.SignedOut,ログアウトしました。ログインしてもう一度お試しください。
-Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS}のタスクが完了しました
-Feature.Build.Message.ThinkingSeconds,思考時間{SECONDS}秒
 Feature.Build.Message.TryAgain,やり直してください。
 Feature.Build.Message.TurnToPortrait,ゲームの作業を続けるには、デバイスをポートレートモードにしてください。
 Feature.Build.Message.VersionHistoryLoad,バージョン履歴を読み込めませんでした。
 Feature.Build.Message.WhatToCreate,今日は何を制作したいですか？
-Feature.Build.Message.WorkedMinutesSeconds,作業時間{MINUTES}分{REM_SECONDS}秒
-Feature.Build.Message.WorkedSeconds,作業時間{SECONDS}秒
 Feature.Build.Message.WorkingOnTasks,タスクを処理中
 Feature.Build.Title.AddFriendsToPlaytest,プレイテストに協力してもらう友達を追加してください
 Feature.Build.Title.ArchiveThisGame,このゲームをアーカイブしますか？
@@ -2061,14 +2028,12 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,ビルド使用量に使えるRobuxが残っていません
 Feature.Build.Title.Playtesters,プレイテスター
 Feature.Build.Title.PlaytestersOnlyPlay,プレイテスターだけがプレイできます
-Feature.Build.Title.PromoteGameFree,ゲームを無料で宣伝する
 Feature.Build.Title.PushNotifications,プッシュ通知
 Feature.Build.Title.RevertLastChange,最後の変更を元に戻しますか？
 Feature.Build.Title.Tasks,タスク
 Feature.Build.Title.TurnActivity,ターン内のアクティビティ
 Feature.Build.Title.VersionHistory,バージョン履歴
 Feature.Build.Title.VersionInformation,バージョン情報
-Feature.Build.Title.VersionNumber,バージョン{VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,許可
 Feature.Captures.Action.AllowPhotoAccessAccepted,許可する
@@ -3217,15 +3182,12 @@ Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,生成
-Feature.Moments.Action.GenerateTextFeedbackNotHelpful,役に立たなかった
-Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはガイドラインに違反する内容だった
 Feature.Moments.Action.Hide,詳細を非表示
 Feature.Moments.Action.HowToCapture,切り抜き方法
 Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
-Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
@@ -3236,7 +3198,6 @@ Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
-Feature.Moments.Description.GenerateTextFeedbackDisclosure,AIが生成したテキストです。投稿前にご確認ください。公開された内容に対する責任はご自身にあります。
 Feature.Moments.Description.HowToCaptureStep1,切り抜きが有効になっているバーチャル空間に参加し、ハンバーガーメニューを選択します
 Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化します
 Feature.Moments.Description.HowToCaptureStep3,ゲームプレイの写真とビデオを切り抜きます
@@ -3298,14 +3259,7 @@ Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませ
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
 Feature.Moments.Label.TextGenerationFilteredBody,この切り抜きビデオの生成を実行できません。コンテンツが内容規制されています。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成が内容規制されました
-Feature.Moments.Label.Tone,トーン
-Feature.Moments.Label.Tone.Cinematic,シネマモード
-Feature.Moments.Label.Tone.Funny,面白い
-Feature.Moments.Label.Tone.Hype,エネルギッシュ
-Feature.Moments.Label.Tone.Neutral,客観的
 Feature.Moments.Label.Videos,
-Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
-Feature.Moments.Title.GenerateTextOptions,テキストを生成
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,投稿の規約違反を報告
@@ -3714,9 +3668,6 @@ Feature.SettingsHub.Description.ChatWithVoiceDisabledUntil,「音声でチャッ
 Feature.SettingsHub.Description.ContactsPermissionAndroid,"1. [権限] を選択
 2. [連絡先] を選択
 3. Robloxに [連絡先] へのアクセスを許可"
-Feature.SettingsHub.Description.ContactsPermissionAndroidDeeplinkNotSupported,"1. [設定] > [権限] に移動
-2. 連絡先を選択
-3. Robloxに連絡先へのアクセスを許可"
 Feature.SettingsHub.Description.ContactsPermissionIOS,友達とつながるには、Robloxが連絡先にアクセスできるようにします。
 Feature.SettingsHub.Description.ContactsPermissionRequest,友達とつながるには、連絡先へのアクセスが必要です。
 Feature.SettingsHub.Description.PeoplesNames,ゲーム内で他の人に対して自分のバッジを表示または非表示にします。
@@ -3916,8 +3867,8 @@ Feature.SocialTab.Label.CreateAndExploreGroups,コミュニティを作って活
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,お気に入り登録
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,音声を報告
-Feature.SongDetails.Label.InappropriateAudio,不適切な音声
+Feature.SongDetails.Action.ReportAudio,
+Feature.SongDetails.Label.InappropriateAudio,
 Feature.SongDetails.Label.InappropriateThumbnail,不適切なサムネイル画像
 Feature.SongDetails.Label.SongPreview,曲のプレビュー
 Feature.Squads.Action.Add,追加する
@@ -4065,8 +4016,6 @@ Feature.Toast.VoteError.AssetNotVoteable,バーチャル空間には投票でき
 Feature.Toast.VoteError.Default,動作が利用できません。
 Feature.Toast.VoteError.FloodCheckThresholdMet,頻繁に投票しすぎです。
 Feature.Toast.VoteError.PlayGame,評価する前に、このバーチャル空間に行くことが必須です。
-Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,当社のコミュニティ基準に繰り返し違反したため、現在、年齢チェックを利用できません。制限が解除された後、もう一度お試しください。
-Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年齢チェックの利用停止
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Banned,度重なるルール違反または重大なルール違反により、このゲームへのアクセスが停止されました。
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogBody.Suspended,あなたの言動にルール違反があったため、このゲームをプレイすることはできません。
 Feature.UniversalFeatureRestrictions.AbuseVector.RobloxKick.DialogTitle.Banned,Robloxにより、このゲームの利用が停止されました
@@ -4593,13 +4542,10 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
-InGame.PlayerDropDown.ConfirmUnfriend,タップして友達解除を確定
-InGame.PlayerDropDown.Decline,拒否
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} さんで友達の数が上限に達しました。
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
-InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,最終更新：{minutes}分前
 InGame.PlayerList.FooterUnableToLoad,読み込めません
 InGame.PlayerList.FriendsEmpty,まだこのバーチャル空間をプレイした友達はいません。

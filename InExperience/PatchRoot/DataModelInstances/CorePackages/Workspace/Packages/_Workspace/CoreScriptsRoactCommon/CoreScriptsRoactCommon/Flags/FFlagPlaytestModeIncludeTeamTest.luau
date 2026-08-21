@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("PlaytestModeIncludeTeamTest", false) and game:GetEngineFeature("RunServiceIsTeamTestEnabled")

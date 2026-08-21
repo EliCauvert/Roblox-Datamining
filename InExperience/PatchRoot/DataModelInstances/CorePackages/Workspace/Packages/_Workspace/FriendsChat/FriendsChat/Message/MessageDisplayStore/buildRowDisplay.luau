@@ -107,9 +107,9 @@ end
 local function buildUserText(p9, p10) --[[ line: 202 ]]
 	-- upvalues: fFlagChatModeratedMaskRandomLength (ref), getModeratedMaskTextModule (ref), escapeRichText (ref), computeNameColor (ref), color (ref)
 	local var20 = if not p9.moderated then if fFlagChatModeratedMaskRandomLength then getModeratedMaskTextModule(p9.messageId or p9.body) else string.gsub(p9.body, "[^%s]", "#") else escapeRichText(p9.body)
-	local name = p10.name
+	local displayNameOverride = p9.displayNameOverride or p10.name
 	
-	if name == nil or name == "" then
+	if displayNameOverride == nil or displayNameOverride == "" then
 		return {
 			skeletonWidth = "prefix",
 			displayStyle = "user",
@@ -121,11 +121,11 @@ local function buildUserText(p9, p10) --[[ line: 202 ]]
 	return {
 		skeletonWidth = "none",
 		displayStyle = "user",
-		content = string.format("<font color=\"#%s\">%s</font>: %s", (if username == nil or username == "" then color else computeNameColor(username)):ToHex(), escapeRichText(name), var20)
+		content = string.format("<font color=\"#%s\">%s</font>: %s", (if username == nil or username == "" then color else computeNameColor(username)):ToHex(), escapeRichText(displayNameOverride), var20)
 	}
 end
 
-return function(p11, p12, p13) --[[ line: 235 | named "buildRowDisplay" ]]
+return function(p11, p12, p13) --[[ line: 241 | named "buildRowDisplay" ]]
 	-- upvalues: iconName (ref), makeSystemRow (ref), buildHiddenUser (ref), buildReplyHeader (ref), buildUserText (ref)
 	local localize = p13.localize
 	local systemTextSize = p13.systemTextSize

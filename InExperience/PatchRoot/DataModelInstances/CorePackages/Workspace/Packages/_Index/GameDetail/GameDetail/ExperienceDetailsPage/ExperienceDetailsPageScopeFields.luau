@@ -1,4 +1,1 @@
-﻿return {
-	FilterPlayWithReward = "filterPlayWithReward",
-	IsTenFoot = "isTenFoot"
-}
+﻿return { FilterPlayWithReward = "filterPlayWithReward" }

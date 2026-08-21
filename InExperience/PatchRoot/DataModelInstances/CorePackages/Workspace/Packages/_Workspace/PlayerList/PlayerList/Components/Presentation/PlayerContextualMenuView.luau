@@ -1,8 +1,6 @@
 ﻿local parent = script.Parent.Parent.Parent
 local parent_1 = parent.Parent
 local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
 local reactModule = require(parent_1.React)
 local signalsReactModule = require(parent_1.SignalsReact)
 local foundationModule = require(parent_1.Foundation)
@@ -14,44 +12,25 @@ local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMe
 local playerContextMenuHeaderModule = require(parent.Components.Presentation.PlayerContextMenuHeader)
 local menuActionRowModule = require(parent.Components.Presentation.MenuActionRow)
 local usePreferredBackgroundStyleModule = require(parent.Hooks.usePreferredBackgroundStyle)
-local useSlideOpenCloseAnimationModule = require(parent.Hooks.useSlideOpenCloseAnimation)
-local useSlideOpenCloseAnimation = useSlideOpenCloseAnimationModule.useSlideOpenCloseAnimation
-local MENU_SLIDE_CONFIG = useSlideOpenCloseAnimationModule.MENU_SLIDE_CONFIG
-local MENU_ZOOM_CLOSED_SCALE = useSlideOpenCloseAnimationModule.MENU_ZOOM_CLOSED_SCALE
 local t = { Transparency = 1, Color3 = Color3.new(0, 0, 0) }
 local t_1 = { affordance = stateLayerAffordance.None }
-local t_2 = {
-	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
-	SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
-	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
-	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
-}
 
-local function _() --[[ line: 46 | named "isGamepad" ]]
-	-- upvalues: userInputService (ref)
-	return userInputService:GetLastInputType().Name:find("Gamepad") ~= nil
-end
-
-return reactModule.memo(function(p0) --[[ line: 50 | named "PlayerContextualMenuView" ]]
-	-- upvalues: signalsReactModule (ref), playerContextualMenuStoreModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), reactModule (ref), useSlideOpenCloseAnimation (ref), MENU_SLIDE_CONFIG (ref), userInputService (ref), contextActionService (ref), guiService (ref), MENU_ZOOM_CLOSED_SCALE (ref), playerContextMenuHeaderModule (ref), divider (ref), menuActionRowModule (ref), view (ref), t (ref), t_1 (ref), t_2 (ref)
-	local var14 = signalsReactModule.useSignalState(playerContextualMenuStoreModule.getMenuData)
-	local var15 = useTokens()
-	local var16 = usePreferredBackgroundStyleModule(var15.Color.OverMedia.OverMedia_100)
-	local var17 = reactModule.useRef(var14)
-	
-	if var14 ~= nil then
-		var17.current = var14
-	end
-	local var18 = useSlideOpenCloseAnimation(var14 ~= nil, MENU_SLIDE_CONFIG, if var14 then var14.player.UserId else nil)
-	local var19 = var14 ~= nil
-	local var20 = reactModule.useRef(nil)
+return reactModule.memo(function(p0) --[[ line: 30 | named "PlayerContextualMenuView" ]]
+	-- upvalues: signalsReactModule (ref), playerContextualMenuStoreModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), reactModule (ref), contextActionService (ref), playerContextMenuHeaderModule (ref), divider (ref), menuActionRowModule (ref), view (ref), t (ref), t_1 (ref)
+	local var10 = signalsReactModule.useSignalState(playerContextualMenuStoreModule.getMenuData)
+	local var11 = useTokens()
+	local var12 = usePreferredBackgroundStyleModule(var11.Color.OverMedia.OverMedia_100)
+	local var13, var14 = reactModule.useBinding(false)
+	local var15 = reactModule.useRef(false)
+	local var16 = reactModule.useRef(nil)
+	local var17 = reactModule.useRef(nil)
+	local var18 = var10 ~= nil
 	local contextActionServiceOverride = p0.contextActionServiceOverride
-	local var21 = if p0.isGamepadOverride ~= nil then userInputService:GetLastInputType().Name:find("Gamepad") ~= nil else p0.isGamepadOverride
-	reactModule.useEffect(function() --[[ line: 84 ]]
-		-- upvalues: p0 (ref), var19 (ref), contextActionServiceOverride (ref), contextActionService (copy), playerContextualMenuStoreModule (copy)
-		if p0.isSmallTouchDevice and var19 then
+	reactModule.useEffect(function() --[[ line: 61 ]]
+		-- upvalues: p0 (ref), var18 (ref), contextActionServiceOverride (ref), contextActionService (copy), playerContextualMenuStoreModule (copy)
+		if p0.isSmallTouchDevice and var18 then
 			local contextActionServiceOverride_1 = contextActionServiceOverride or contextActionService
-			contextActionServiceOverride_1:BindCoreAction("RbxPlayerListReskinGamepadMenuClose", function(_, p1, _) --[[ line: 89 ]]
+			contextActionServiceOverride_1:BindCoreAction("RbxPlayerListReskinGamepadMenuClose", function(_, p1, _) --[[ line: 66 ]]
 				-- upvalues: playerContextualMenuStoreModule (copy)
 				if p1 == Enum.UserInputState.Begin then
 					playerContextualMenuStoreModule.closeContextMenu()
@@ -61,59 +40,62 @@ return reactModule.memo(function(p0) --[[ line: 50 | named "PlayerContextualMenu
 				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonB)
 			
-			return function() --[[ line: 96 ]]
+			return function() --[[ line: 73 ]]
 				-- upvalues: contextActionServiceOverride_1 (ref)
 				contextActionServiceOverride_1:UnbindCoreAction("RbxPlayerListReskinGamepadMenuClose")
 			end
 		end
-		return function() --[[ line: 86 ]] end
+		return function() --[[ line: 63 ]] end
 	end, {
-		var19,
+		var18,
 		p0.isSmallTouchDevice,
 		contextActionServiceOverride
 	})
-	reactModule.useEffect(function() --[[ line: 101 ]]
-		-- upvalues: p0 (ref), var19 (ref), var21 (ref), var20 (ref), guiService (copy)
-		if not p0.isSmallTouchDevice or not var19 or not var21 then
-			return function() --[[ line: 103 ]] end
-		elseif var20.current then
-			guiService.SelectedCoreObject = var20.current
-		end
-		return function() --[[ line: 108 ]] end
-	end, { var19, p0.isSmallTouchDevice, var21 })
-	local var22 = reactModule.useMemo(function() --[[ line: 111 ]]
-		-- upvalues: p0 (ref), var18 (ref), MENU_ZOOM_CLOSED_SCALE (copy)
-		return if p0.isSmallTouchDevice then var18.offset:map(function(p2) --[[ line: 115 ]]
-			-- upvalues: MENU_ZOOM_CLOSED_SCALE (copy)
-			return 1 + (MENU_ZOOM_CLOSED_SCALE - 1) * p2
-		end) else nil
-	end, { p0.isSmallTouchDevice, var18.offset })
-	local var23 = reactModule.useMemo(function() --[[ line: 120 ]]
-		-- upvalues: p0 (ref), var15 (ref), var18 (ref)
-		if p0.isSmallTouchDevice then
-			local transparency = var15.Color.Stroke.Default.Transparency
+	reactModule.useEffect(function() --[[ line: 78 ]]
+		-- upvalues: var14 (ref), var15 (ref), var10 (ref), var16 (ref), var17 (ref)
+		var14(false)
+		var15.current = false
+		
+		if var10 == nil then return end
+		local current = var16.current
+		
+		if current ~= nil and current.AbsoluteSize.Y > 0 then
+			var14(true)
+			var15.current = true
 			
-			return var18.offset:map(function(p3) --[[ line: 125 ]]
-				-- upvalues: transparency (ref)
-				return transparency + (1 - transparency) * p3
-			end)
+			return
+		elseif current == nil then
+			return
 		end
-		return nil
-	end, {
-		p0.isSmallTouchDevice,
-		var18.offset,
-		var15.Color.Stroke.Default.Transparency
-	})
+		var17.current = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ line: 93 ]]
+			-- upvalues: var16 (copy), var17 (copy), var15 (copy), var14 (copy)
+			local current = var16.current
+			
+			if current ~= nil and current.AbsoluteSize.Y > 0 then
+				if var17.current then
+					var17.current:Disconnect()
+					var17.current = nil
+				end
+				if not var15.current then
+					var15.current = true
+					var14(true)
+				end
+			end
+		end)
+		
+		return function() --[[ line: 106 ]]
+			-- upvalues: var17 (copy)
+			if var17.current then
+				var17.current:Disconnect()
+				var17.current = nil
+			end
+		end
+	end, { var10 })
 	
-	if not var18.shouldMount then
+	if var10 == nil then
 		return nil
 	end
-	local current = var17.current
-	
-	if current == nil then
-		return nil
-	end
-	local anchorPosition = current.anchorPosition
+	local anchorPosition = var10.anchorPosition
 	local vector2 = Vector2.new(0.5, 0.5)
 	local uDim2 = UDim2.fromScale(0.5, 0.5)
 	
@@ -121,66 +103,35 @@ return reactModule.memo(function(p0) --[[ line: 50 | named "PlayerContextualMenu
 		vector2 = Vector2.new(1, 0)
 		uDim2 = UDim2.fromOffset(anchorPosition.X - 8, anchorPosition.Y)
 	end
-	local t_3 = {
+	local t_2 = {
 		Header = reactModule.createElement(playerContextMenuHeaderModule, {
 			layoutOrder = 1,
-			header = current.header,
-			player = current.player
+			header = var10.header,
+			player = var10.player
 		}),
 		HeaderDivider = reactModule.createElement(divider, { LayoutOrder = 2 })
 	}
 	
-	for i, v in ipairs(current.items) do
-		t_3[`Action_{tostring(v.key)}`] = reactModule.createElement(menuActionRowModule, {
-			item = v,
-			layoutOrder = 2 + i,
-			isInteractable = var19,
-			rowRef = if i == 1 then var20 else nil
-		})
-	end
-	local t_4
-	local _ = nil
-	
-	if p0.isSmallTouchDevice then
-		t_4 = table.clone(t_3)
-		t_4.UIScale = reactModule.createElement("UIScale", { Scale = var22 })
-		t_4.UIStroke = reactModule.createElement("UIStroke", {
-			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = var15.Color.Stroke.Default.Color3,
-			Transparency = var23,
-			Thickness = var15.Stroke.Standard
-		})
-	else
-		t_4 = {
-			SlideOffset = reactModule.createElement(view, {
-				tag = "col align-x-left gap-xxsmall auto-y padding-small stroke-standard stroke-default radius-large",
-				Position = var18.position,
-				Size = UDim2.fromOffset(260, 0),
-				backgroundStyle = var16
-			}, t_3)
-		}
+	for i, v in ipairs(var10.items) do
+		t_2[`Action_{tostring(v.key)}`] = reactModule.createElement(menuActionRowModule, { item = v, layoutOrder = 2 + i })
 	end
 	return reactModule.createElement(view, { ZIndex = 10, tag = "size-full", backgroundStyle = t }, {
 		Backdrop = reactModule.createElement(view, {
 			tag = "size-full",
 			ZIndex = 1,
-			backgroundStyle = t,
-			onActivated = if var19 then playerContextualMenuStoreModule.closeContextMenu else nil,
+			backgroundStyle = if p0.isSmallTouchDevice then var11.Color.Common.Scrim else t,
+			onActivated = playerContextualMenuStoreModule.closeContextMenu,
 			stateLayer = t_1
 		}),
 		Menu = reactModule.createElement(view, {
 			ZIndex = 2,
-			Visible = true,
+			tag = "col align-x-left gap-xxsmall auto-y padding-small stroke-standard stroke-default radius-large",
 			AnchorPoint = vector2,
 			Position = uDim2,
 			Size = UDim2.fromOffset(260, 0),
-			GroupTransparency = if p0.isSmallTouchDevice then var18.offset else nil,
-			selectionGroup = if p0.isSmallTouchDevice and var19 then t_2 else nil,
-			tag = {
-				["auto-y clip"] = not p0.isSmallTouchDevice,
-				["col align-x-left gap-xxsmall auto-y padding-small radius-large"] = p0.isSmallTouchDevice
-			},
-			backgroundStyle = if p0.isSmallTouchDevice then var16 else nil
-		}, t_4)
+			Visible = var13,
+			ref = var16,
+			backgroundStyle = var12
+		}, t_2)
 	})
 end)

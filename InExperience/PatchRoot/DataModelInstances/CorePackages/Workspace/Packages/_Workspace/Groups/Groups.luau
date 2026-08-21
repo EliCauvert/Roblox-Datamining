@@ -9,6 +9,6 @@ return {
 	Contexts = require(_script.Contexts),
 	Hooks = require(_script.Hooks),
 	Navigation = require(_script.Navigation),
-	CommunityListRouting = require(_script.CommunityListRouting),
+	Experiments = require(_script.Experiments),
 	["jest.config"] = script["jest.config"]
 }

@@ -57,10 +57,8 @@
 		Next = "next",
 		UsePasskey = "usePasskey",
 		QuickLogin = "quickLogin",
-		QuickLoginBack = "quickLoginBack",
 		Skip = "skip",
 		Back = "back",
-		DismissSheet = "dismissSheet",
 		PrimaryButton = "primaryButton",
 		SecondaryButton = "secondaryButton",
 		PrefilledNext = "prefilledNext",
@@ -114,9 +112,7 @@
 		TosCheckbox = "tosCheckbox",
 		BirthdayDropdown = "birthdayDropdown",
 		BirthdayPicker = "birthdayPicker",
-		BirthdayPickerAgeCalculatorShown = "birthdayPickerAgeCalculatorShown",
-		LoginV2Modal = "loginV2Modal",
-		LoginV2QuickLoginModal = "loginV2QuickLoginModal"
+		BirthdayPickerAgeCalculatorShown = "birthdayPickerAgeCalculatorShown"
 	},
 	Context = {
 		AccountPickerLandingScreen = "accountPickerLandingScreen",
@@ -165,7 +161,6 @@
 		LoginFormV2Username = "loginFormV2Username",
 		LoginFormV2Auth = "loginFormV2Auth",
 		LoginFormV2EmailOtp = "loginFormV2EmailOtp",
-		LoginFormV2EnterEmail = "loginFormV2EnterEmail",
 		PasskeyLoginV2 = "passkeyLoginV2",
 		CMPasswordPasskeySignup = "cmPasswordPasskeySignup",
 		CMPasswordPasskeyFallback = "cmPasswordPasskeyFallback",
@@ -218,9 +213,7 @@
 		Logout = "logout",
 		LandingScreen = "landingScreen",
 		MoreMenu = "moreMenu",
-		FlyoutSidePanel = "flyoutSidePanel",
-		LoginV2Fullscreen = "loginV2Fullscreen",
-		LoginV2Modalized = "loginV2Modalized"
+		FlyoutSidePanel = "flyoutSidePanel"
 	},
 	AuthEventName = {
 		AuthButtonShown = "authButtonShown",

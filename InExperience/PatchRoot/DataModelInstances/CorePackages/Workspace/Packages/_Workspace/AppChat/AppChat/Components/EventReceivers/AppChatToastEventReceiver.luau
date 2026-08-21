@@ -18,26 +18,25 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
 local getFFlagAppChatInExpToastSnoozeMenuDismissFix = sharedFlagsModule.GetFFlagAppChatInExpToastSnoozeMenuDismissFix
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
-local fFlagAppChatToastChatTerminologyFixEnabled = sharedFlagsModule.FFlagAppChatToastChatTerminologyFixEnabled
 local t = {
 	hideAllChatToasts = false,
 	isAppChatVisible = false,
 	isInExperience = false,
-	navigateToChat = function() --[[ line: 41 ]] end
+	navigateToChat = function() --[[ line: 40 ]] end
 }
 
-return function(p0) --[[ line: 44 ]]
-	-- upvalues: cryoModule (ref), t (ref), useLocalization (ref), fFlagAppChatToastChatTerminologyFixEnabled (ref), fFlagExpChatEnableFriendsTab (ref), universalAppPolicyModule (ref), getFFlagIsSquadEnabled (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), useIsChatEnabledModule (ref), reactModule (ref), lifecycleEvents (ref), notificationTypeEnum (ref), httpService (ref), default (ref), showNotificationSnoozeMenuSignal (ref), notificationGroups (ref), shouldHideFriendsChatToastModule (ref), dismissNotificationSnoozeMenuSignal (ref)
+return function(p0) --[[ line: 43 ]]
+	-- upvalues: cryoModule (ref), t (ref), useLocalization (ref), fFlagExpChatEnableFriendsTab (ref), getFFlagIsSquadEnabled (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref), universalAppPolicyModule (ref), useIsChatEnabledModule (ref), reactModule (ref), lifecycleEvents (ref), notificationTypeEnum (ref), httpService (ref), default (ref), showNotificationSnoozeMenuSignal (ref), notificationGroups (ref), shouldHideFriendsChatToastModule (ref), dismissNotificationSnoozeMenuSignal (ref)
 	local var10 = cryoModule.Dictionary.join(t, p0)
 	local var11 = useLocalization({
 		snoozeDescription = "Feature.Chat.Description.SnoozeDescription",
-		snoozeTitle = if fFlagAppChatToastChatTerminologyFixEnabled and fFlagExpChatEnableFriendsTab then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Label.MuteInGameChatToastNotifications" else "Feature.Chat.Label.MuteInGamePartyToastNotifications" elseif fFlagExpChatEnableFriendsTab then "Feature.Chat.Label.MuteInGameChatToastNotifications" elseif getFFlagIsSquadEnabled() then "Feature.Chat.Label.SnoozePartyNotifications" else "Feature.Chat.Label.SnoozeChatNotifications"
+		snoozeTitle = if fFlagExpChatEnableFriendsTab then "Feature.Chat.Label.MuteInGameChatToastNotifications" elseif getFFlagIsSquadEnabled() then "Feature.Chat.Label.SnoozePartyNotifications" else "Feature.Chat.Label.SnoozeChatNotifications"
 	})
 	local canSeeChatTab = universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTab()
 	local var13 = (if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then var10.isAppChatVisible else var10.hideAllChatToasts) or not useIsChatEnabledModule()
-	reactModule.useEffect(function() --[[ line: 67 ]]
+	reactModule.useEffect(function() --[[ line: 63 ]]
 		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), httpService (copy), default (copy), var10 (ref), showNotificationSnoozeMenuSignal (copy), var11 (ref), notificationGroups (copy)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.ChatNewMessage, function(p1) --[[ line: 71 ]]
+		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.ChatNewMessage, function(p1) --[[ line: 67 ]]
 			-- upvalues: httpService (copy), default (copy), var10 (copy), showNotificationSnoozeMenuSignal (copy), var11 (copy), notificationGroups (copy)
 			if p1 and p1.userActionType == "click" and (p1.notificationData and p1.visualItem) and (p1.visualItem.eventName == "ChatMessageBody" and p1.visualItem.actionEventParams) then
 				local actionEventParams = httpService:JSONDecode(p1.visualItem.actionEventParams)
@@ -54,14 +53,14 @@ return function(p0) --[[ line: 44 ]]
 			end
 		end)
 		
-		return function() --[[ line: 103 ]]
+		return function() --[[ line: 99 ]]
 			-- upvalues: userAction (ref)
 			userAction()
 		end
 	end, { var10.navigateToChat, var11 })
-	reactModule.useEffect(function() --[[ line: 108 ]]
+	reactModule.useEffect(function() --[[ line: 104 ]]
 		-- upvalues: default (copy), notificationTypeEnum (copy), fFlagExpChatEnableFriendsTab (copy), var10 (ref), shouldHideFriendsChatToastModule (copy), var13 (write), canSeeChatTab (ref)
-		local var16 = default:listenToDisplayNotification(function(p2) --[[ line: 110 ]]
+		local var16 = default:listenToDisplayNotification(function(p2) --[[ line: 106 ]]
 			-- upvalues: notificationTypeEnum (copy), fFlagExpChatEnableFriendsTab (copy), var10 (copy), shouldHideFriendsChatToastModule (copy), var13 (copy), canSeeChatTab (copy), default (copy)
 			if p2.notificationType == notificationTypeEnum.ChatNewMessage then
 				if var13 or not canSeeChatTab or (fFlagExpChatEnableFriendsTab and (var10.visibleFriendsConversationId ~= nil and shouldHideFriendsChatToastModule(p2, var10.visibleFriendsConversationId))) then
@@ -70,14 +69,14 @@ return function(p0) --[[ line: 44 ]]
 			end
 		end)
 		
-		return function() --[[ line: 122 ]]
+		return function() --[[ line: 118 ]]
 			-- upvalues: var16 (ref)
 			var16:Disconnect()
 		end
 	end, { var13, canSeeChatTab, var10.visibleFriendsConversationId })
 	
 	if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then
-		reactModule.useEffect(function() --[[ line: 128 ]]
+		reactModule.useEffect(function() --[[ line: 124 ]]
 			-- upvalues: var10 (ref), dismissNotificationSnoozeMenuSignal (copy)
 			if not var10.isAppChatVisible and dismissNotificationSnoozeMenuSignal then
 				dismissNotificationSnoozeMenuSignal:fire()

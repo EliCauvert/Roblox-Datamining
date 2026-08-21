@@ -1,11 +1,11 @@
 ﻿local authCommon = script:FindFirstAncestor("AuthCommon")
 local parent = authCommon.Parent
 local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
 local useRoactService = require(parent.RobloxAppHooks).useRoactService
 local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
+local useSignalState = require(parent.SignalsReact).useSignalState
 local roactServiceTagsModule = require(parent.RoactServiceTags)
 local roactNetworking = roactServiceTagsModule.RoactNetworking
 local roactAnalytics = roactServiceTagsModule.RoactAnalytics
@@ -21,18 +21,16 @@ local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagEnableDeepLinkHistoryWithModalAPI = sharedFlagsModule.FFlagEnableDeepLinkHistoryWithModalAPI
 local fFlagUseSignalsForAuthenticationStatus = sharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
 local var5 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
-local fFlagUseSignalsForStartup = sharedFlagsModule.FFlagUseSignalsForStartup
-local var6 = if fFlagUseSignalsForStartup then require(parent.StartupStore).GetStartupStore else nil
 local postAuthDeepLinkAvailableSignalModule = require(script.Parent.PostAuthDeepLinkAvailableSignal)
 local postAuthPendingLuaUrlAvailableSignalModule = require(script.Parent.PostAuthPendingLuaUrlAvailableSignal)
 local preAuthDeepLinkHandlerModule = require(script.Parent.PreAuthDeepLinkHandler)
 local preAuthDeepLinkUrlStore = require(authCommon.Stores).PreAuthDeepLinkUrlStore
 local fFlagEnablePreAuthDeepLinkHandlerModule = require(authCommon.Flags.FFlagEnablePreAuthDeepLinkHandler)
 
-return function(p0) --[[ line: 47 ]]
-	-- upvalues: useRoactService (ref), appLinking (ref), roactNetworking (ref), useDispatch (ref), appOmniRecommendationsRequest (ref), roactAnalytics (ref), useAppPolicy (ref), useState (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var5 (ref), loginStatus (ref), useSelector (ref), fFlagUseSignalsForStartup (ref), var6 (ref), retrievalStatus (ref), fFlagEnableDeepLinkHistoryWithModalAPI (ref), deepLinkModule (ref), useCallback (ref), preAuthDeepLinkUrlStore (ref), postAuthDeepLinkAvailableSignalModule (ref), postAuthPendingLuaUrlAvailableSignalModule (ref), fFlagEnablePreAuthDeepLinkHandlerModule (ref), preAuthDeepLinkHandlerModule (ref), useEffect (ref)
-	local var17
-	local var11 = useRoactService(appLinking)
+return function(p0) --[[ line: 41 ]]
+	-- upvalues: useRoactService (ref), appLinking (ref), roactNetworking (ref), useDispatch (ref), appOmniRecommendationsRequest (ref), roactAnalytics (ref), useAppPolicy (ref), useState (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var5 (ref), loginStatus (ref), useSelector (ref), retrievalStatus (ref), fFlagEnableDeepLinkHistoryWithModalAPI (ref), deepLinkModule (ref), useCallback (ref), preAuthDeepLinkUrlStore (ref), postAuthDeepLinkAvailableSignalModule (ref), postAuthPendingLuaUrlAvailableSignalModule (ref), fFlagEnablePreAuthDeepLinkHandlerModule (ref), preAuthDeepLinkHandlerModule (ref), useEffect (ref)
+	local var16
+	local var10 = useRoactService(appLinking)
 	local monoDeps = p0.monoDeps
 	local t = {
 		networking = useRoactService(roactNetworking),
@@ -40,89 +38,89 @@ return function(p0) --[[ line: 47 ]]
 		dispatch = useDispatch(),
 		omniRecommendationsRequest = useRoactService(appOmniRecommendationsRequest),
 		analytics = useRoactService(roactAnalytics),
-		appPolicy = useAppPolicy(function(p1) --[[ line: 59 ]]
+		appPolicy = useAppPolicy(function(p1) --[[ line: 53 ]]
 			return p1
 		end),
 		resetAppState = monoDeps.ResetAppState
 	}
-	local var13, var14 = useState({ url = nil, attributionUrl = nil })
-	local var15, var16 = useState({ hasPendingUrl = false, attributionUrl = nil, url = nil })
+	local var12, var13 = useState({ url = nil, attributionUrl = nil })
+	local var14, var15 = useState({ hasPendingUrl = false, attributionUrl = nil, url = nil })
 	
 	if fFlagUseSignalsForAuthenticationStatus then
-		var17 = useSignalState(var5(false).getStatus) == loginStatus.LOGGED_OUT
-		var17 = nil
+		var16 = useSignalState(var5(false).getStatus) == loginStatus.LOGGED_OUT
+		var16 = nil
 	else
-		var17 = useSelector(function(p2) --[[ line: 95 ]]
+		var16 = useSelector(function(p2) --[[ line: 89 ]]
 			-- upvalues: loginStatus (copy)
 			return p2.AuthenticationStatus.status == loginStatus.LOGGED_OUT
 		end)
 	end
-	local var18 = if fFlagUseSignalsForStartup then useSignalState(var6(false).getAppLoadingStarted) else useSelector(function(p3) --[[ line: 101 ]]
+	local var17 = useSelector(function(p3) --[[ line: 93 ]]
 		-- upvalues: retrievalStatus (copy)
 		return p3.Startup.AppDataStatus ~= retrievalStatus.NotStarted
 	end)
-	local var19 = if fFlagEnableDeepLinkHistoryWithModalAPI then deepLinkModule.DeepLinkLuaReceiverStatusStore(false) else nil
-	local var20 = useCallback(function() --[[ line: 110 ]]
-		-- upvalues: var11 (ref), var17 (ref), var18 (ref), preAuthDeepLinkUrlStore (copy), fFlagEnableDeepLinkHistoryWithModalAPI (copy), var19 (write), deepLinkModule (copy), var13 (ref), postAuthDeepLinkAvailableSignalModule (copy), var14 (ref), var15 (ref), postAuthPendingLuaUrlAvailableSignalModule (copy), var16 (ref), fFlagEnablePreAuthDeepLinkHandlerModule (copy), preAuthDeepLinkHandlerModule (copy), t (ref)
-		if not var11 then return end
-		local var18_1 = not var17 and var18
+	local var18 = if fFlagEnableDeepLinkHistoryWithModalAPI then deepLinkModule.DeepLinkLuaReceiverStatusStore(false) else nil
+	local var19 = useCallback(function() --[[ line: 102 ]]
+		-- upvalues: var10 (ref), var16 (ref), var17 (ref), preAuthDeepLinkUrlStore (copy), fFlagEnableDeepLinkHistoryWithModalAPI (copy), var18 (write), deepLinkModule (copy), var12 (ref), postAuthDeepLinkAvailableSignalModule (copy), var13 (ref), var14 (ref), postAuthPendingLuaUrlAvailableSignalModule (copy), var15 (ref), fFlagEnablePreAuthDeepLinkHandlerModule (copy), preAuthDeepLinkHandlerModule (copy), t (ref)
+		if not var10 then return end
+		local var17_1 = not var16 and var17
 		
-		if var18_1 then
+		if var17_1 then
 			preAuthDeepLinkUrlStore.setUrl(nil)
 			
 			if fFlagEnableDeepLinkHistoryWithModalAPI then
-				var19.setDeepLinkLuaPostAuthReceiverStatus(deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Ready, var13 and var13.url)
+				var18.setDeepLinkLuaPostAuthReceiverStatus(deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Ready, var12 and var12.url)
 			end
-			if var13 and var13.url then
-				postAuthDeepLinkAvailableSignalModule:fire(var13)
-				var14({ url = nil, attributionUrl = nil })
+			if var12 and var12.url then
+				postAuthDeepLinkAvailableSignalModule:fire(var12)
+				var13({ url = nil, attributionUrl = nil })
 			end
-			if var15 and var15.hasPendingUrl then
-				postAuthPendingLuaUrlAvailableSignalModule:fire(var15)
-				var16({ hasPendingUrl = false, attributionUrl = nil, url = nil })
+			if var14 and var14.hasPendingUrl then
+				postAuthPendingLuaUrlAvailableSignalModule:fire(var14)
+				var15({ hasPendingUrl = false, attributionUrl = nil, url = nil })
 			end
 		elseif fFlagEnableDeepLinkHistoryWithModalAPI then
-			var19.setDeepLinkLuaPostAuthReceiverStatus(deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Disconnected, nil)
+			var18.setDeepLinkLuaPostAuthReceiverStatus(deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Disconnected, nil)
 		end
-		var11:getAndClearLastPendingURL():andThen(function(p4) --[[ line: 152 ]]
-			-- upvalues: var18_1 (ref), preAuthDeepLinkUrlStore (copy), var16 (copy), postAuthPendingLuaUrlAvailableSignalModule (copy)
+		var10:getAndClearLastPendingURL():andThen(function(p4) --[[ line: 144 ]]
+			-- upvalues: var17_1 (ref), preAuthDeepLinkUrlStore (copy), var15 (copy), postAuthPendingLuaUrlAvailableSignalModule (copy)
 			if not p4 or not p4.hasPendingUrl then return end
-			if var18_1 then
+			if var17_1 then
 				postAuthPendingLuaUrlAvailableSignalModule:fire(p4)
 				
 				return
 			end
 			preAuthDeepLinkUrlStore.setUrl(p4.url)
-			var16(p4)
+			var15(p4)
 		end)
-		var11:listenForLuaURLs(function(p5, p6) --[[ line: 169 ]]
-			-- upvalues: fFlagEnablePreAuthDeepLinkHandlerModule (copy), preAuthDeepLinkHandlerModule (copy), t (copy), var18_1 (ref), preAuthDeepLinkUrlStore (copy), var14 (copy), postAuthDeepLinkAvailableSignalModule (copy)
+		var10:listenForLuaURLs(function(p5, p6) --[[ line: 161 ]]
+			-- upvalues: fFlagEnablePreAuthDeepLinkHandlerModule (copy), preAuthDeepLinkHandlerModule (copy), t (copy), var17_1 (ref), preAuthDeepLinkUrlStore (copy), var13 (copy), postAuthDeepLinkAvailableSignalModule (copy)
 			if fFlagEnablePreAuthDeepLinkHandlerModule and preAuthDeepLinkHandlerModule.isPreauthDeeplink(p5) then
 				preAuthDeepLinkHandlerModule.firePreauthDeeplink(p5, t)
 				
 				return
-			elseif var18_1 then
+			elseif var17_1 then
 				postAuthDeepLinkAvailableSignalModule:fire({ url = p5, attributionUrl = p6 })
 				
 				return
 			end
 			preAuthDeepLinkUrlStore.setUrl(p5)
-			var14({ url = p5, attributionUrl = p6 })
+			var13({ url = p5, attributionUrl = p6 })
 		end)
 	end, {
-		var11, var17, var18, postAuthDeepLinkAvailableSignalModule, var13, var15
+		var10, var16, var17, postAuthDeepLinkAvailableSignalModule, var12, var14
 	})
-	useEffect(function() --[[ line: 202 ]]
-		-- upvalues: var20 (ref), var11 (ref)
-		var20()
+	useEffect(function() --[[ line: 194 ]]
+		-- upvalues: var19 (ref), var10 (ref)
+		var19()
 		
-		return function() --[[ line: 206 ]]
-			-- upvalues: var11 (copy)
-			if var11 then
-				var11:stopListeningForLuaURLs()
+		return function() --[[ line: 198 ]]
+			-- upvalues: var10 (copy)
+			if var10 then
+				var10:stopListeningForLuaURLs()
 			end
 		end
-	end, { var20 })
+	end, { var19 })
 	
 	return nil
 end

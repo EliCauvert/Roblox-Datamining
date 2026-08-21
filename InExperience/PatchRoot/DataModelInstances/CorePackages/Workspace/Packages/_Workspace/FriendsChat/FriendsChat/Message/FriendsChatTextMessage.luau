@@ -16,7 +16,7 @@ local _ = function(p2) --[[ line: 64 | named "isSystemDisplay" ]]
 	return p2 ~= nil and p2.displayStyle == "system"
 end
 
-return reactModule.memo(function(p3) --[[ line: 91 | named "FriendsChatTextMessage" ]]
+return reactModule.memo(function(p3) --[[ line: 88 | named "FriendsChatTextMessage" ]]
 	-- upvalues: foundationModule (ref), getMessageTextSize (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), useFinishChatWindowMessageRenderIntervals (ref), textService (ref)
 	local var5 = foundationModule.Hooks.useTokens()
 	local chatWindowSettings = p3.chatWindowSettings
@@ -33,48 +33,48 @@ return reactModule.memo(function(p3) --[[ line: 91 | named "FriendsChatTextMessa
 	local getDisplayId = p3.getDisplayId
 	local getDisplayFromId = p3.getDisplayFromId
 	local localize = p3.localize
-	local var15 = reactModule.useMemo(function() --[[ line: 129 ]]
+	local var15 = reactModule.useMemo(function() --[[ line: 126 ]]
 		-- upvalues: maxValue (ref), localize (ref)
 		return { systemTextSize = maxValue, localize = localize }
 	end, { maxValue, localize })
-	local var16 = signalsReactModule.useSignalBinding(reactModule.useMemo(function() --[[ line: 132 ]]
+	local var16 = signalsReactModule.useSignalBinding(reactModule.useMemo(function() --[[ line: 129 ]]
 		-- upvalues: signalsModule (copy), getDisplayFromId (ref), getDisplayId (ref), var15 (ref)
-		return signalsModule.createComputed(function(p4) --[[ line: 133 ]]
+		return signalsModule.createComputed(function(p4) --[[ line: 130 ]]
 			-- upvalues: getDisplayFromId (copy), getDisplayId (copy), var15 (copy)
 			return getDisplayFromId(getDisplayId(p4), p4, var15)
 		end)
 	end, { getDisplayId, getDisplayFromId, var15 }))
 	local var17 = signalsReactModule.useSignalBinding(p3.getLayoutOrder)
-	local var18 = useFinishChatWindowMessageRenderIntervals(reactModule.useCallback(function() --[[ line: 147 ]]
+	local var18 = useFinishChatWindowMessageRenderIntervals(reactModule.useCallback(function() --[[ line: 144 ]]
 		-- upvalues: getDisplayId (ref)
 		return getDisplayId(false)
 	end, { getDisplayId }))
-	local var19 = reactModule.useCallback(function(p5) --[[ line: 151 ]]
+	local var19 = reactModule.useCallback(function(p5) --[[ line: 148 ]]
 		-- upvalues: var18 (ref)
 		if p5 and p5.Text and p5.Text ~= "" then
 			var18()
 		end
 	end, { var18 })
-	local var20 = reactModule.useMemo(function() --[[ line: 163 ]]
+	local var20 = reactModule.useMemo(function() --[[ line: 160 ]]
 		-- upvalues: var9 (ref)
 		return UDim2.fromOffset(math.floor(var9 * 3 / 2), var9)
 	end, { var9 })
 	local var21, var22 = reactModule.useBinding(var20)
-	reactModule.useEffect(function() --[[ line: 170 ]]
+	reactModule.useEffect(function() --[[ line: 167 ]]
 		-- upvalues: var22 (ref), var20 (ref)
 		var22(var20)
 	end, { var20 })
-	reactModule.useEffect(function() --[[ line: 174 ]]
+	reactModule.useEffect(function() --[[ line: 171 ]]
 		-- upvalues: var7 (ref), var9 (ref), textService (copy), var22 (ref)
 		local var28 = false
-		task.spawn(function() --[[ line: 176 ]]
+		task.spawn(function() --[[ line: 173 ]]
 			-- upvalues: var7 (copy), var9 (copy), textService (copy), var28 (write), var22 (copy)
 			local getTextBoundsParams = Instance.new("GetTextBoundsParams")
 			getTextBoundsParams.Text = "          "
 			getTextBoundsParams.Font = var7
 			getTextBoundsParams.Size = var9
 			getTextBoundsParams.Width = 1e999
-			local ok, status = pcall(function() --[[ line: 182 ]]
+			local ok, status = pcall(function() --[[ line: 179 ]]
 				-- upvalues: textService (copy), getTextBoundsParams (ref)
 				return textService:GetTextBoundsAsync(getTextBoundsParams)
 			end)
@@ -85,21 +85,21 @@ return reactModule.memo(function(p3) --[[ line: 91 | named "FriendsChatTextMessa
 			var22(UDim2.fromOffset(status.X, status.Y))
 		end)
 		
-		return function() --[[ line: 190 ]]
+		return function() --[[ line: 187 ]]
 			-- upvalues: var28 (write)
 			var28 = true
 		end
 	end, { var7, var9 })
-	local var23 = var16:map(function(p6) --[[ line: 195 ]]
+	local var23 = var16:map(function(p6) --[[ line: 192 ]]
 		return if p6 == nil then "" elseif p6.skeletonWidth == "prefix" then `          {p6.content}` else p6.content
 	end)
 	local t = { font = var7, textSize = var9, textColor = var11 }
 	local t_1 = { font = font, textSize = maxValue, textColor = color3 }
-	local var26 = var16:map(function(p7) --[[ line: 221 ]]
+	local var26 = var16:map(function(p7) --[[ line: 218 ]]
 		-- upvalues: t_1 (ref), t (ref)
 		return if p7 ~= nil and p7.displayStyle == "system" then t_1 else t
 	end)
-	local var27 = textTransparency:map(function(p8) --[[ line: 237 ]]
+	local var27 = textTransparency:map(function(p8) --[[ line: 234 ]]
 		-- upvalues: var13 (ref)
 		return var13 + p8 * (1 - var13)
 	end)
@@ -109,22 +109,21 @@ return reactModule.memo(function(p3) --[[ line: 91 | named "FriendsChatTextMessa
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		LayoutOrder = var17,
-		Visible = var16:map(function(p9) --[[ line: 269 ]]
+		Visible = var16:map(function(p9) --[[ line: 266 ]]
 			return p9 ~= nil
-		end),
-		ref = p3.guiObjectRef
+		end)
 	}, {
 		body = reactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			FontFace = var26:map(function(p10) --[[ line: 225 ]]
+			FontFace = var26:map(function(p10) --[[ line: 222 ]]
 				return p10.font
 			end),
-			TextSize = var26:map(function(p11) --[[ line: 229 ]]
+			TextSize = var26:map(function(p11) --[[ line: 226 ]]
 				return p11.textSize
 			end),
-			TextColor3 = var26:map(function(p12) --[[ line: 233 ]]
+			TextColor3 = var26:map(function(p12) --[[ line: 230 ]]
 				return p12.textColor
 			end),
 			TextStrokeColor3 = var12,
@@ -144,14 +143,14 @@ return reactModule.memo(function(p3) --[[ line: 91 | named "FriendsChatTextMessa
 			})
 		}),
 		skeleton = reactModule.createElement(foundationModule.Skeleton, {
-			Size = reactModule.joinBindings({ display = var16, placeholder = var21 }):map(function(p13) --[[ line: 261 ]]
+			Size = reactModule.joinBindings({ display = var16, placeholder = var21 }):map(function(p13) --[[ line: 258 ]]
 				local display = p13.display
 				
 				return if display == nil or display.skeletonWidth ~= "full" then p13.placeholder else UDim2.new(1, 0, 0, p13.placeholder.Y.Offset)
 			end),
 			Position = UDim2.fromOffset(0, 0),
 			AnchorPoint = Vector2.new(0, 0),
-			Visible = reactModule.joinBindings({ display = var16, textTransparency = textTransparency }):map(function(p14) --[[ line: 247 ]]
+			Visible = reactModule.joinBindings({ display = var16, textTransparency = textTransparency }):map(function(p14) --[[ line: 244 ]]
 				if p14.textTransparency >= 0.9 then
 					return false
 				end

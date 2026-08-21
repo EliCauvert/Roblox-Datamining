@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddFriendsRefreshRequestOrder", false) and require(script.Parent.FFlagAddFriendsPageHighlightUnseenRequests)

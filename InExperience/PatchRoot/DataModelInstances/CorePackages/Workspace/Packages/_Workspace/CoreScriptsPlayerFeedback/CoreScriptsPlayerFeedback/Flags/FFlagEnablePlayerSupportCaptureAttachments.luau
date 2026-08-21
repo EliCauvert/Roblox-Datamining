@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePlayerSupportCaptureAttachments2", false)
+﻿return game:DefineFastFlag("EnablePlayerSupportCaptureAttachments", false)

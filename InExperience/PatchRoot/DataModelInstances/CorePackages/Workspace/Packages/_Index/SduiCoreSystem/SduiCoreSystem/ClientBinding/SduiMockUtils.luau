@@ -1,156 +1,106 @@
-﻿local function createLiteralKind(p0) --[[ line: 16 ]]
-	return { type = "literal", value = p0 }
-end
-
-local function createBindingPathKind(p1) --[[ line: 26 ]]
-	return { type = "binding_path", value = p1 }
-end
-
-local _ = nil
-
-local function createStructValue(p2) --[[ line: 42 ]]
-	-- upvalues: createStructValue (write)
-	local var3 = typeof(p2)
-	
-	if p2 == nil then
-		return { kind = { type = "null_value", value = 0 } }
-	elseif var3 == "string" then
-		return { kind = { type = "string_value", value = p2 } }
-	elseif var3 == "number" then
-		return { kind = { type = "number_value", value = p2 } }
-	elseif var3 == "boolean" then
-		return { kind = { type = "bool_value", value = p2 } }
-	elseif var3 ~= "table" then
-		error(`createStructValue cannot represent a {var3}`)
-	end
-	if next(p2) == nil or p2[1] ~= nil then
-		local t = {}
-		
-		for i, v in p2 do
-			t[i] = createStructValue(v)
-		end
-		return { kind = { type = "list_value", value = { values = t } } }
-	else
-		local t = {}
-		
-		for i, v in p2 do
-			t[i] = createStructValue(v)
-		end
-		return { kind = { type = "struct_value", value = { fields = t } } }
-	end
-end
-
-return {
-	createLiteralKind = createLiteralKind,
-	createBindingPathKind = createBindingPathKind,
-	createStructValue = createStructValue,
-	createMockStruct = function(p3) --[[ line: 84 ]]
-		-- upvalues: createStructValue (write)
-		local t = {}
-		
-		for i, v in p3 do
-			t[i] = createStructValue(v)
-		end
-		return { fields = t }
+﻿return {
+	createLiteralKind = function(p0) --[[ line: 16 ]]
+		return { type = "literal", value = p0 }
 	end,
-	createLiteralProp = function(p4, p5) --[[ line: 104 ]]
+	createBindingPathKind = function(p1) --[[ line: 26 ]]
+		return { type = "binding_path", value = p1 }
+	end,
+	createLiteralProp = function(p2, p3) --[[ line: 42 ]]
 		return {
-			kind = { type = "literal", value = p4 },
+			kind = { type = "literal", value = p2 },
+			descriptor = { name = p3, fullName = p3 }
+		}
+	end,
+	createBindingPathProp = function(p4, p5) --[[ line: 70 ]]
+		return {
+			kind = { type = "binding_path", value = p4 },
 			descriptor = { name = p5, fullName = p5 }
 		}
 	end,
-	createBindingPathProp = function(p6, p7) --[[ line: 132 ]]
+	createTokenProp = function(p6, p7) --[[ line: 56 ]]
 		return {
-			kind = { type = "binding_path", value = p6 },
+			kind = { type = "token", value = p6 },
 			descriptor = { name = p7, fullName = p7 }
 		}
 	end,
-	createTokenProp = function(p8, p9) --[[ line: 118 ]]
+	createMockInlineComponent = function(p8, p9) --[[ line: 113 ]]
 		return {
-			kind = { type = "token", value = p8 },
-			descriptor = { name = p9, fullName = p9 }
+			kind = { value = { props = p9, shared = { component_type = p8 } } }
 		}
 	end,
-	createMockInlineComponent = function(p10, p11) --[[ line: 175 ]]
+	createMockInputForNestedComponent = function(p10, p11) --[[ line: 133 ]]
+		return if p10 == "literal" then {
+			kind = { type = "literal", value = { kind = { value = p11 } } }
+		} elseif p10 == "translation" then { kind = { type = "translation", value = p11 } } else { kind = { type = "binding_path", value = p11 } }
+	end,
+	createMockConditionalPropValue = function(p12, p13) --[[ line: 186 ]]
 		return {
-			kind = {
-				value = { props = p11, shared = { component_type = p10 } }
-			}
+			kind = { type = "conditional", value = { options = p12 } },
+			descriptor = { fullName = p13, name = p13 }
 		}
 	end,
-	createMockInputForNestedComponent = function(p12, p13) --[[ line: 195 ]]
-		return if p12 == "literal" then {
-			kind = { type = "literal", value = { kind = { value = p13 } } }
-		} elseif p12 == "translation" then { kind = { type = "translation", value = p13 } } else { kind = { type = "binding_path", value = p13 } }
+	createMockConditionalOptions = function(p14) --[[ line: 318 ]]
+		return { options = p14 }
 	end,
-	createMockConditionalPropValue = function(p14, p15) --[[ line: 248 ]]
-		return {
-			kind = { type = "conditional", value = { options = p14 } },
-			descriptor = { fullName = p15, name = p15 }
-		}
-	end,
-	createMockConditionalOptions = function(p16) --[[ line: 380 ]]
-		return { options = p16 }
-	end,
-	createMockComparisonConditionOption = function(p17, p18, p19, p20) --[[ line: 267 ]]
+	createMockComparisonConditionOption = function(p15, p16, p17, p18) --[[ line: 205 ]]
 		return {
 			condition = {
 				kind = {
 					type = "comparison",
-					value = { op = p17, field = p18, kind = { value = p19 } }
+					value = { op = p15, field = p16, kind = { value = p17 } }
 				}
 			},
+			kind = p18
+		}
+	end,
+	createMockIsNullConditionOption = function(p19, p20) --[[ line: 228 ]]
+		return {
+			condition = { kind = { type = "is_null", value = { field = p19 } } },
 			kind = p20
 		}
 	end,
-	createMockIsNullConditionOption = function(p21, p22) --[[ line: 290 ]]
+	createMockIsNotNullConditionOption = function(p21, p22) --[[ line: 242 ]]
 		return {
-			condition = { kind = { type = "is_null", value = { field = p21 } } },
+			condition = { kind = { type = "is_not_null", value = { field = p21 } } },
 			kind = p22
 		}
 	end,
-	createMockIsNotNullConditionOption = function(p23, p24) --[[ line: 304 ]]
+	createMockIsEmptyConditionOption = function(p23, p24) --[[ line: 256 ]]
 		return {
-			condition = { kind = { type = "is_not_null", value = { field = p23 } } },
+			condition = { kind = { type = "is_empty", value = { field = p23 } } },
 			kind = p24
 		}
 	end,
-	createMockIsEmptyConditionOption = function(p25, p26) --[[ line: 318 ]]
+	createMockIsNotEmptyConditionOption = function(p25, p26) --[[ line: 270 ]]
 		return {
-			condition = { kind = { type = "is_empty", value = { field = p25 } } },
+			condition = {
+				kind = { type = "is_not_empty", value = { field = p25 } }
+			},
 			kind = p26
 		}
 	end,
-	createMockIsNotEmptyConditionOption = function(p27, p28) --[[ line: 332 ]]
+	createMockAndConditionOption = function(p27, p28) --[[ line: 284 ]]
 		return {
 			condition = {
-				kind = { type = "is_not_empty", value = { field = p27 } }
+				kind = { type = "and_condition", value = { conditions = p27 } }
 			},
 			kind = p28
 		}
 	end,
-	createMockAndConditionOption = function(p29, p30) --[[ line: 346 ]]
+	createMockOrConditionOption = function(p29, p30) --[[ line: 298 ]]
 		return {
 			condition = {
-				kind = { type = "and_condition", value = { conditions = p29 } }
+				kind = { type = "or_condition", value = { conditions = p29 } }
 			},
 			kind = p30
 		}
 	end,
-	createMockOrConditionOption = function(p31, p32) --[[ line: 360 ]]
+	createMockNestedComponentConditionalOption = function(p31, p32, p33) --[[ line: 169 ]]
 		return {
-			condition = {
-				kind = { type = "or_condition", value = { conditions = p31 } }
-			},
-			kind = p32
-		}
-	end,
-	createMockNestedComponentConditionalOption = function(p33, p34, p35) --[[ line: 231 ]]
-		return {
-			condition = p33,
+			condition = p31,
 			kind = {
 				type = "literal",
-				value = { roblox_component = p34, inputs = p35 }
+				value = { roblox_component = p32, inputs = p33 }
 			}
 		}
 	end

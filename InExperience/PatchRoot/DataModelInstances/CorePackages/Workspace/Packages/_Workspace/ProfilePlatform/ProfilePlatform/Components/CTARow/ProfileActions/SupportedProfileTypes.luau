@@ -9,7 +9,6 @@ local fFlagProfilePlatformEnableEditLookModule = require(profilePlatform.Flags.F
 local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
 local fFlagEnablePlatformProfileContextualMenuOption = sharedFlagsModule.FFlagEnablePlatformProfileContextualMenuOption
 local fFlagProfilePlatformEnableCurrencyTransfer = sharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
 local fFlagPendingIncomingTrustedConnectionModule = require(profilePlatform.Flags.FFlagPendingIncomingTrustedConnection)
 local list = {
@@ -45,9 +44,6 @@ if fFlagProfilePlatformEnableEditLookModule then
 end
 if fFlagProfilePlatformEnableCurrencyTransfer then
 	table.insert(list, enumsModule.ProfileActions.CurrencyTransfer)
-end
-if fFlagProfilePlatformEnableTradeItemsModule then
-	table.insert(list, enumsModule.ProfileActions.TradeItems)
 end
 if fFlagProfilePlatformAddTC then
 	table.insert(list, enumsModule.ProfileActions.AddTrustedConnection)

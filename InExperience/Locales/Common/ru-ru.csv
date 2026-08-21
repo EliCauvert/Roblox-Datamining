@@ -187,7 +187,6 @@ CommonUI.Features.Label.Terms,Условия
 CommonUI.Features.Label.TermsOfUse,Условия использования
 CommonUI.Features.Label.Thanks,Спасибо
 CommonUI.Features.Label.TheHunt,События Roblox
-CommonUI.Features.Label.Trades,Обмен
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.StudioCTA.Tooltip.Body,Скачать Studio бесплатно!
 CommonUI.Features.StudioCTA.Tooltip.Title,Начать создавать в Roblox
@@ -732,6 +731,9 @@ CoreScripts.TopBar.GameNamePlaceHolder,
 CoreScripts.TopBar.HideChat,Спрятать чат
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,Включить голосовой чат
+CoreScripts.TopBar.Label.InappropriateAudio,Недопустимое аудио
+CoreScripts.TopBar.Label.Report,
+CoreScripts.TopBar.Label.ReportAudio,Пожаловаться на аудио
 CoreScripts.TopBar.Label.UILessHintDescription,"Нажми ESC, чтобы открыть меню Roblox"
 CoreScripts.TopBar.Label.UILessHintTitle,Новый способ открыть меню Roblox
 CoreScripts.TopBar.Leaderboard,
@@ -1471,7 +1473,7 @@ Feature.Catalog.Label.TakeOffResaleConfirmation,Действительно сн�
 Feature.Catalog.Label.Tops,Верх
 Feature.Catalog.Label.Torso,
 Feature.Catalog.Label.TotalUnformatted,Всего
-Feature.Catalog.Label.Tradable,
+Feature.Catalog.Label.Tradable,Обмен
 Feature.Catalog.Label.TryOns,Примерка
 Feature.Catalog.Label.TryOnsMultiple,Примерка ({numItems})
 Feature.Catalog.Label.Unlimited,Неограниченные предметы
@@ -2503,8 +2505,8 @@ Feature.SocialTab.Label.CreateAndExploreGroups,Создавай и исслед�
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,Пожаловаться на аудио
-Feature.SongDetails.Label.InappropriateAudio,Недопустимое аудио
+Feature.SongDetails.Action.ReportAudio,
+Feature.SongDetails.Label.InappropriateAudio,
 Feature.Squads.Action.Add,
 Feature.Squads.Action.AddOthers,Добавить других
 Feature.Squads.Action.ConnectToVoice,Подключиться к голосу
@@ -3009,7 +3011,6 @@ InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,Максимальное количество друзей: {RBX_NAME}
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
-InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.Leaderboard,
 InGame.PlayerList.Players,
 InGame.Presence.Label.InGame,

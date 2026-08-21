@@ -20,7 +20,7 @@ local fIntLinkingProtocolFetchTimeoutMS = sharedFlagsModule.FIntLinkingProtocolF
 local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local fFlagExpChatDictationFTUXModule = require(expChat.Flags.FFlagExpChatDictationFTUX)
 local fFlagExpChatDictationU13PolicyToastModule = require(expChat.Flags.FFlagExpChatDictationU13PolicyToast)
-local linkingResumeOnDataModelThread = require(expChat.Flags.FFlagExpChatDictationMicToastFix) and game:GetEngineFeature("LinkingResumeOnDataModelThread")
+local fFlagExpChatDictationMicToastFixModule = require(expChat.Flags.FFlagExpChatDictationMicToastFix)
 local localizationModule = require(expChat.Localization)
 local universeChatSystemMessageAddedModule = require(expChat.Actions.UniverseChatSystemMessageAdded)
 local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
@@ -39,23 +39,23 @@ local dictationState = parentModule.DictationState
 local dictationErrorReason = parentModule.DictationErrorReason
 local useDictation = parentModule.useDictation
 
-local function _() --[[ line: 90 | named "getTapDictationMode" ]]
+local function _() --[[ line: 88 | named "getTapDictationMode" ]]
 	-- upvalues: fFlagExpChatLongPressContinuousDictation (ref), dictationModeModule (ref), fFlagExpChatContinuousDictation (ref)
 	return if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Standard elseif fFlagExpChatContinuousDictation then dictationModeModule.Continuous else dictationModeModule.Standard
 end
 
-local _ = function() --[[ line: 100 | named "getLongPressDictationMode" ]]
+local _ = function() --[[ line: 98 | named "getLongPressDictationMode" ]]
 	-- upvalues: fFlagExpChatLongPressContinuousDictation (ref), dictationModeModule (ref)
 	return if fFlagExpChatLongPressContinuousDictation then dictationModeModule.Continuous else nil
 end
 
-local _ = function(p0, p1) --[[ line: 108 | named "getSystemMessageChannelName" ]]
+local _ = function(p0, p1) --[[ line: 106 | named "getSystemMessageChannelName" ]]
 	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref)
 	return if getFFlagTextChatEnableUniverseChatTabs() and p1 then "RBXGlobal" elseif p0 then p0.Name else "RBXGeneral"
 end
 
-return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDispatch (ref), useDictationTelemetryModule (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), linkingResumeOnDataModelThread (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), universeChatSystemMessageAddedModule (ref), dictationErrorReason (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), dictationAnalyticsModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
+return function(p2) --[[ line: 157 | named "useDictationInputBar" ]]
+	-- upvalues: foundationModule (ref), reactModule (ref), fFlagExpChatDictationFTUXModule (ref), useDispatch (ref), useDictationTelemetryModule (ref), useDictationEligibilityModule (ref), useIsLocalUserUnder13Module (ref), u13PolicyToastStorageModule (ref), useAsync (ref), fFlagExpChatDictationMicToastFixModule (ref), fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref), localizationModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatUseMessagesStore (ref), getMessagesStoreModule (ref), universeChatSystemMessageAddedModule (ref), dictationErrorReason (ref), setUIBloxToast (ref), useTranscribedSamplesModule (ref), dictationModeModule (ref), dictationAnalyticsModule (ref), fFlagExpChatDictationU13PolicyToastModule (ref), permissionStatus (ref), useDictation (ref), signalsReactModule (ref), dictationState (ref), fFlagExpChatLongPressContinuousDictation (ref), fFlagExpChatContinuousDictation (ref), useDictationFTUXModule (ref), useLongPressModule (ref)
 	local var24 = foundationModule.Hooks.useTokens()
 	local var25 = foundationModule.Hooks.useCursor({
 		radius = UDim.new(0, var24.Radius.Circle),
@@ -71,10 +71,10 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 	local var32 = useDictationEligibilityModule()
 	local var33 = useIsLocalUserUnder13Module()
 	local var34 = reactModule.useRef(u13PolicyToastStorageModule.hasBeenShown())
-	local var35 = useAsync(function() --[[ line: 182 ]]
-		-- upvalues: linkingResumeOnDataModelThread (copy), fFlagEnableRetryForLinkingProtocolFetch (copy), fIntLinkingProtocolFetchRetries (copy), default (copy), settingsRoute (copy), fIntLinkingProtocolFetchTimeoutMS (copy)
+	local var35 = useAsync(function() --[[ line: 180 ]]
+		-- upvalues: fFlagExpChatDictationMicToastFixModule (copy), fFlagEnableRetryForLinkingProtocolFetch (copy), fIntLinkingProtocolFetchRetries (copy), default (copy), settingsRoute (copy), fIntLinkingProtocolFetchTimeoutMS (copy)
 		local var61, var62
-		if not linkingResumeOnDataModelThread then
+		if not fFlagExpChatDictationMicToastFixModule then
 			return false
 		elseif not fFlagEnableRetryForLinkingProtocolFetch then
 			var61, var62 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
@@ -85,7 +85,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 		var62 = nil
 		
 		for _ = 0, fIntLinkingProtocolFetchRetries do
-			local thread = task.spawn(function() --[[ line: 190 ]]
+			local thread = task.spawn(function() --[[ line: 188 ]]
 				-- upvalues: var61 (write), var62 (write), default (copy), settingsRoute (copy)
 				local var64, var65 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
 				var61 = var64
@@ -116,7 +116,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 	local var42 = if var36.u13PolicyToastBody and var36.u13PolicyToastBody ~= "" then var36.u13PolicyToastBody else "To send messages with your voice, we'll process your audio and delete it right away, per our privacy policy."
 	local var43 = if var36.u13MicAccessToastHeader and var36.u13MicAccessToastHeader ~= "" then var36.u13MicAccessToastHeader else "Microphone enabled"
 	local var44 = if var36.u13MicAccessToastBody and var36.u13MicAccessToastBody ~= "" then var36.u13MicAccessToastBody else "Your voice is converted to text and never shared with other players."
-	local var45 = reactModule.useCallback(function(p3) --[[ line: 257 ]]
+	local var45 = reactModule.useCallback(function(p3) --[[ line: 255 ]]
 		-- upvalues: p2 (ref)
 		local var66 = if p2.customTextBoxRef.current then p2.customTextBoxRef.current else p2.textBoxRef.current
 		
@@ -133,7 +133,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 		p2.textBoxRef,
 		p2.chatInputBarSettings.TextBox
 	})
-	local var46 = reactModule.useCallback(function(p4) --[[ line: 281 ]]
+	local var46 = reactModule.useCallback(function(p4) --[[ line: 279 ]]
 		-- upvalues: p2 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatUseMessagesStore (copy), getMessagesStoreModule (copy), var30 (ref), universeChatSystemMessageAddedModule (copy)
 		local targetTextChannel = p2.targetTextChannel
 		local var67 = if getFFlagTextChatEnableUniverseChatTabs() and p2.isGlobalChatTabActive then "RBXGlobal" elseif targetTextChannel then targetTextChannel.Name else "RBXGeneral"
@@ -145,16 +145,16 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 		end
 		var30(universeChatSystemMessageAddedModule(p4, var67, "Roblox.Dictation.Error", true))
 	end, { var30, p2.targetTextChannel, p2.isGlobalChatTabActive })
-	local var47 = reactModule.useCallback(function(p5, p6) --[[ line: 298 ]]
-		-- upvalues: var26 (ref), dictationErrorReason (copy), setUIBloxToast (copy), var39 (ref), var40 (ref), linkingResumeOnDataModelThread (copy), var35 (ref), default (copy), settingsRoute (copy), var31 (ref), var46 (ref), var38 (ref), var37 (ref)
+	local var47 = reactModule.useCallback(function(p5, p6) --[[ line: 296 ]]
+		-- upvalues: var26 (ref), dictationErrorReason (copy), setUIBloxToast (copy), var39 (ref), var40 (ref), fFlagExpChatDictationMicToastFixModule (copy), var35 (ref), default (copy), settingsRoute (copy), var31 (ref), var46 (ref), var38 (ref), var37 (ref)
 		var26.current = false
 		
 		if p6 == dictationErrorReason.PermissionDenied then
 			setUIBloxToast({
 				toastTitle = var39,
 				toastSubtitle = var40,
-				sequenceNumber = if linkingResumeOnDataModelThread then DateTime.now().UnixTimestamp else nil,
-				onActivated = if linkingResumeOnDataModelThread and var35.status == "ok" and var35.value then function() --[[ line: 313 ]]
+				sequenceNumber = if fFlagExpChatDictationMicToastFixModule then DateTime.now().UnixTimestamp else nil,
+				onActivated = if fFlagExpChatDictationMicToastFixModule and var35.status == "ok" and var35.value then function() --[[ line: 311 ]]
 					-- upvalues: default (copy), settingsRoute (copy)
 					default:switchToSettingsApp(settingsRoute.Microphone)
 				end else nil
@@ -175,13 +175,13 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 	})
 	local var48 = useTranscribedSamplesModule()
 	local var49 = reactModule.useRef(nil)
-	local var50 = reactModule.useCallback(function(p7, _) --[[ line: 347 ]]
+	local var50 = reactModule.useCallback(function(p7, _) --[[ line: 345 ]]
 		-- upvalues: var49 (ref)
 		var49.current = p7
 	end, {})
 	local var51 = reactModule.useRef(false)
 	local var52 = useDictation({
-		onTranscription = reactModule.useCallback(function(p8, p9) --[[ line: 364 ]]
+		onTranscription = reactModule.useCallback(function(p8, p9) --[[ line: 362 ]]
 			-- upvalues: dictationModeModule (copy), var49 (ref), var48 (ref), var45 (ref), var31 (ref), p2 (ref), dictationAnalyticsModule (copy), var26 (ref)
 			if p9 == dictationModeModule.Continuous then
 				if var49.current ~= nil then
@@ -221,7 +221,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 			var48,
 			var31.logTranscription
 		}),
-		onSpeechStarted = reactModule.useCallback(function(p10) --[[ line: 351 ]]
+		onSpeechStarted = reactModule.useCallback(function(p10) --[[ line: 349 ]]
 			-- upvalues: dictationModeModule (copy), var49 (ref), var48 (ref), var31 (ref)
 			if p10 ~= dictationModeModule.Continuous then return end
 			if var49.current ~= nil then
@@ -229,7 +229,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 			end
 			var31.logSpeechStarted()
 		end, { var48, var31.logSpeechStarted }),
-		onActivityChanged = reactModule.useCallback(function(p11) --[[ line: 412 ]]
+		onActivityChanged = reactModule.useCallback(function(p11) --[[ line: 410 ]]
 			-- upvalues: fFlagExpChatDictationFTUXModule (copy), var28 (ref), var29 (ref), fFlagExpChatDictationU13PolicyToastModule (copy), var33 (ref), var34 (ref), u13PolicyToastStorageModule (copy), setUIBloxToast (copy), var41 (ref), var42 (ref), var49 (ref), var48 (ref), p2 (ref)
 			if p11 then
 				if fFlagExpChatDictationFTUXModule and var28.current and var29.current then
@@ -243,7 +243,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 						duration = 5,
 						toastTitle = var41,
 						toastSubtitle = var42,
-						onActivated = function() --[[ line: 429 ]] end
+						onActivated = function() --[[ line: 427 ]] end
 					})
 				end
 			else
@@ -262,7 +262,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 			var42,
 			var41
 		}),
-		onPermissionResolved = reactModule.useCallback(function(p12, p13) --[[ line: 456 ]]
+		onPermissionResolved = reactModule.useCallback(function(p12, p13) --[[ line: 454 ]]
 			-- upvalues: var31 (ref), fFlagExpChatDictationU13PolicyToastModule (copy), permissionStatus (copy), var51 (ref), var33 (ref), var34 (ref), setUIBloxToast (copy), var43 (ref), var44 (ref)
 			var31.logPermissionResolved(p13, p12)
 			
@@ -295,7 +295,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 	if var28 then
 		var28.current = var59
 	end
-	local var60 = reactModule.useCallback(function() --[[ line: 526 ]]
+	local var60 = reactModule.useCallback(function() --[[ line: 524 ]]
 		-- upvalues: var52 (ref), dictationState (copy), var26 (ref), stopDictation (ref), var31 (ref), var57 (ref), dictationAnalyticsModule (copy), fFlagExpChatDictationFTUXModule (copy), var59 (ref), var29 (ref), startDictation (ref)
 		if var52.getDictationState(false) == dictationState.Recording then
 			var26.current = true
@@ -326,7 +326,7 @@ return function(p2) --[[ line: 159 | named "useDictationInputBar" ]]
 		dictation = var52,
 		onMicTap = var60,
 		micGestureHandlers = useLongPressModule({
-			onLongPress = if var58 == dictationModeModule.Continuous then reactModule.useCallback(function() --[[ line: 563 ]]
+			onLongPress = if var58 == dictationModeModule.Continuous then reactModule.useCallback(function() --[[ line: 561 ]]
 				-- upvalues: var52 (ref), dictationState (copy), var31 (ref), dictationModeModule (copy), dictationAnalyticsModule (copy), fFlagExpChatDictationFTUXModule (copy), var59 (ref), startDictation (ref)
 				if var52.getDictationState(false) == dictationState.Idle then
 					var31.logMicClick(dictationModeModule.Continuous, dictationAnalyticsModule.EntryPoints.LongPress)

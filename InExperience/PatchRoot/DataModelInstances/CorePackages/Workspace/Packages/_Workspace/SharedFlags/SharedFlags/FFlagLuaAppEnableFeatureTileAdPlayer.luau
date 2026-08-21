@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppEnableFeatureTileAdPlayer", false)
+﻿return game:DefineFastFlag("LuaAppEnableFeatureTileAdPlayerDev", false)

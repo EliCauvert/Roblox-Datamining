@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExpChatTextChannelWindowFontOverride", false) and game:GetEngineFeature("EnableTextChannelWindowFontOverride")

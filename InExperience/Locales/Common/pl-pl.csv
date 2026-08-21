@@ -94,7 +94,6 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,Nieprawidłowy numer tele
 Authentication.Login.Response.IncorrectUsernamePassword,Nieprawidłowa nazwa użytkownika lub hasło.
 Authentication.Login.Response.InvalidPasskeyCredential,"Nie można zalogować się za pomocą tego klucza dostępu. Aby odzyskać dostęp, kliknij „Nie pamiętam hasła lub nazwy użytkownika”."
 Authentication.Login.Response.MoreThanOneUsername,Twój adres e-mail jest powiązany z więcej niż jedną nazwą użytkownika. Zaloguj się za pomocą nazwy użytkownika.
-Authentication.Login.Response.PlatformAlreadyLinked,To konto {platform} jest już powiązane z innym kontem Roblox. Zaloguj się na powiązane konto Roblox.
 Authentication.Login.Response.RelinkingFreeze,To konto Roblox zostało już powiązane z innym konto w {platform} w ciągu ostatnich 90 dni. Zaloguj się na inne konto Roblox.
 Authentication.Login.Response.Require2FA,"Weryfikacja dwuetapowa nie jest obsługiwana na konsoli. Aby bezpiecznie się zalogować, postępuj zgodnie z instrukcjami po prawej stronie."
 Authentication.Login.Response.Require2FAGeneric,"Wymagana dodatkowa weryfikacja nie jest obsługiwana na tym urządzeniu. Aby bezpiecznie się zalogować, postępuj zgodnie z instrukcjami po prawej stronie."
@@ -262,7 +261,6 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"Rozmiar osi {axis} siat
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"Rozmiar osi {axis} siatki {partName} wynoszący w studach „{currentSize}” jest mniejszy niż minimalny dozwolony rozmiar pojedynczej części, który w studach wynosi „{minSize}”. Zwiększ siatkę."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Zaczepienie {attName} musi występować dokładnie raz w ramach elementów podrzędnych {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,„{RootInstanceName}” (lub jego elementy podrzędne) zawierają atrybuty. Musisz usunąć atrybuty z następujących elementów: {InstanceNameList}
-Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} „{InstancePath}” ma nieprawidłowe właściwości: {ProblematicProperties}. Przekroczono wskazany limit bajtów (limit 0 oznacza, że właściwość musi być pusta); każda inna właściwość zawiera wartości NaN/Inf lub przekracza swój domyślny limit rozmiaru."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Aby przesłać zasób do Robloxa, musisz wybrać dokładnie 1 instancję i skojarzony typ przesyłania."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instancja {ProblematicDescendantPath} nie powinna zawierać tagów.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Drugi testowy ciąg błędu używany do weryfikacji pełnego cyklu przepływu pracy synchronizacji tłumaczeń Hub-first.
@@ -390,7 +388,6 @@ CommonUI.Features.Label.Terms,Warunki
 CommonUI.Features.Label.TermsOfUse,Warunki użytkowania
 CommonUI.Features.Label.Thanks,Dziękujemy
 CommonUI.Features.Label.TheHunt,Wydarzenia Roblox
-CommonUI.Features.Label.Trades,Wymiany
 CommonUI.Features.Label.Unchecked,Niezaznaczone
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1116,6 +1113,9 @@ CoreScripts.TopBar.GameNamePlaceHolder,
 CoreScripts.TopBar.HideChat,Ukryj czat
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,Skorzystaj z czatu głosowego
+CoreScripts.TopBar.Label.InappropriateAudio,Nieodpowiedni dźwięk
+CoreScripts.TopBar.Label.Report,
+CoreScripts.TopBar.Label.ReportAudio,Zgłoś dźwięk
 CoreScripts.TopBar.Label.UILessHintDescription,"Naciśnij ESC, aby otworzyć menu aplikacji Roblox"
 CoreScripts.TopBar.Label.UILessHintTitle,Nowy sposób uruchamiania menu aplikacji Roblox
 CoreScripts.TopBar.Leaderboard,
@@ -1796,9 +1796,7 @@ Feature.Build.Action.Buy,
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Kopiuj tekst
-Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
-Feature.Build.Action.DontAskAgain,Nie pytaj ponownie
 Feature.Build.Action.HideAutosaved,Ukryj automatycznie zapisane
 Feature.Build.Action.ManageLimit,Zarządzaj limitem
 Feature.Build.Action.Next,
@@ -1825,7 +1823,6 @@ Feature.Build.Action.ViewUsage,Wyświetl wykorzystanie
 Feature.Build.Content.NewGame,Nowa gra
 Feature.Build.Description.ArchiveRemoval,"Jeśli zarchiwizujesz tę grę, zostanie ona usunięta z funkcji Buduj. Nadal możesz uzyskać do niej dostęp i przywrócić ją w Centrum dla twórców lub Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,"Użyj Robuxów, aby automatycznie kupować dodatkowe użycia funkcji Buduj podczas tworzenia. W dowolnym momencie możesz ustawić dzienny limit wydatków."
-Feature.Build.Description.BoostGameAudience,Zwiększ liczbę odbiorców swojej gry
 Feature.Build.Description.BuildIdeaGame,Zamień swoje pomysły w grę
 Feature.Build.Description.BuildReplyNotif,"Otrzymuj powiadomienia, gdy funkcja Buduj ma dla Ciebie odpowiedź."
 Feature.Build.Description.BuyRobuxToCreate,"Kup więcej Robuxów, aby kontynuować tworzenie, lub poczekaj, aż jutro zresetują się bezpłatne użycia funkcji Buduj."
@@ -1836,7 +1833,6 @@ Feature.Build.Description.FriendsLinkOnly,"Tylko Twoje kontakty mają dostęp do
 Feature.Build.Description.GameCreationDone,"Ukończyłem(-am) tworzenie i publikowanie Twojej gry. Możesz ją otworzyć, aby przetestować."
 Feature.Build.Description.GameSavedPlaytest,"Ukończyłem tworzenie Twojej gry i zapisałem nową wersję. Możesz ją otworzyć, aby przetestować."
 Feature.Build.Description.HubSettings,Zarządzaj wszystkimi ustawieniami w Centrum dla twórców
-Feature.Build.Description.InviteFriendLimit,"Wybierz do {MAX_INVITES} znajomych, a następnie udostępnij link do gry."
 Feature.Build.Description.MakeAudienceAvail,"Opublikuj swój projekt, aby udostępnić go tym odbiorcom."
 Feature.Build.Description.ManageAppearance,"Zarządzaj tym, jak Twoja gra wygląda dla innych."
 Feature.Build.Description.PlayAfterPublish,"Wybierz, kto może grać po opublikowaniu tego projektu."
@@ -1847,7 +1843,6 @@ Feature.Build.Description.PrivateShare,"Zmień ustawienie Odbiorcy swojej gry, a
 Feature.Build.Description.RaiseLimitOrWait,"Zwiększ swój dzienny limit Robuxów, aby kontynuować tworzenie, lub poczekaj, aż jutro się zresetuje."
 Feature.Build.Description.RatingAgreement,"Publikując, potwierdzasz, że ta ocena treści jest prawidłowa."
 Feature.Build.Description.RestoreLatest,Ta wersja stanie się Twoją najnowszą opublikowaną wersją.
-Feature.Build.Description.RevertToVersion,"Potwierdź, aby cofnąć ostatnią zmianę i wrócić do wersji {VERSION}."
 Feature.Build.Description.VersionChanges,"Powiedz graczom, co zmieniło się w tej wersji."
 Feature.Build.Header.AccessSharing,Dostęp i udostępnianie
 Feature.Build.Header.ContentMaturity,Poziom treści dla dorosłych
@@ -1856,7 +1851,6 @@ Feature.Build.Header.GameDetails,Szczegóły gry
 Feature.Build.Header.Overview,Przegląd
 Feature.Build.Label.Access,Dostęp
 Feature.Build.Label.AdditionalUsage,Dodatkowe użycia funkcji Buduj
-Feature.Build.Label.AdditionalUsed,Wykorzystano {USED} z {LIMIT}
 Feature.Build.Label.All,
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
@@ -1864,7 +1858,6 @@ Feature.Build.Label.BackToBuild,Powrót do budowania
 Feature.Build.Label.Building,Buduję...
 Feature.Build.Label.CaptureLibrary,Biblioteka przechwyconych elementów
 Feature.Build.Label.ContentRating,Ocena zawartości
-Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Centrum dla twórców
 Feature.Build.Label.Deleted,Usunięty
 Feature.Build.Label.DescribeIdea,Opisz pomysł
@@ -1875,17 +1868,14 @@ Feature.Build.Label.FreeBuildUsage,Bezpłatne użycia funkcji Buduj
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,Zdobądź więcej użyć funkcji Buduj
-Feature.Build.Label.Hi,Cześć
 Feature.Build.Label.IconThumbnails,Ikona i miniatury
 Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
-Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Z ograniczeniami
 Feature.Build.Label.Loading,Wczytuję...
 Feature.Build.Label.NoLimit,Brak limitu
 Feature.Build.Label.NotStarted,Nie rozpoczęto
 Feature.Build.Label.Pending,Oczekujące
-Feature.Build.Label.PercentUsed,Wykorzystano {PERCENT}%
 Feature.Build.Label.PreviouslyPublished,Wcześniej opublikowane
 Feature.Build.Label.Private,Prywatny
 Feature.Build.Label.Public,Publiczny
@@ -1893,8 +1883,6 @@ Feature.Build.Label.PubliclyUnavailable,Niedostępna publicznie
 Feature.Build.Label.Published,
 Feature.Build.Label.Ready,
 Feature.Build.Label.ResetsDaily,Resetuje się codziennie
-Feature.Build.Label.RestoredVersion,Przywrócono {VERSION}
-Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,Szukaj gier
 Feature.Build.Label.SearchTasks,Wyszukaj zadania
@@ -1964,16 +1952,9 @@ Feature.Build.Label.ToolTasksPlanRunning,Planuję Twoje zadania
 Feature.Build.Label.ToolThumbnailDone,Ustaw miniaturę gry
 Feature.Build.Label.ToolThumbnailFailed,Nie udało się ustawić miniatury gry
 Feature.Build.Label.ToolThumbnailRunning,Ustawiam miniaturę gry
-Feature.Build.Label.UniverseNumber,Uniwersum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Brak informacji
-Feature.Build.Label.UnlimitedUsed,Wykorzystano {USED} • Brak limitu
 Feature.Build.Label.Usage,Użycie
-Feature.Build.Label.UsageUsed,Wykorzystano {USED}
-Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,Wersja
-Feature.Build.Label.VersionCompact,wersja {VERSION_NUMBER}
-Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
-Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Tytuł i opis wersji
 Feature.Build.Label.Video,Film
 Feature.Build.Message.AccountRequirements,Twoje konto nie spełnia wymagań dotyczących korzystania z funkcji Buduj.
@@ -1989,12 +1970,10 @@ Feature.Build.Message.BuildResponseFailed,Funkcja Buduj nie odpowiada. Spróbuj 
 Feature.Build.Message.BuildStillWorking,"Pracujemy nad tym. W międzyczasie możesz opuścić aplikację, grać na platformie Roblox lub rozpocząć inny projekt."
 Feature.Build.Message.BuildStopped,Zatrzymano funkcję Buduj.
 Feature.Build.Message.BuildTemporarilyDown,Funcja Buduj jest tymczasowo niedostępna. Spróbuj ponownie za chwilę.
-Feature.Build.Message.CompletedTasks,Liczba ukończonych zadań: {COUNT}
 Feature.Build.Message.ConversationGone,Ta rozmowa nie jest już dostępna. Rozpocznij nową.
 Feature.Build.Message.ConversationNotFound,Nie udało się znaleźć tej rozmowy. Rozpocznij nową.
 Feature.Build.Message.CreateGameToUseBuild,"Utwórz nową grę, aby zacząć korzystać z funkcji Buduj."
 Feature.Build.Message.CreatedRevertedVer,Utworzono cofniętą wersję.
-Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Zwiększ liczbę kwalifikujących się odbiorców w Centrum dla twórców
 Feature.Build.Message.ExperiencesLoadFailed,Nie udało się wczytać projektów
 Feature.Build.Message.FailedTitle,{TITLE} – niepowodzenie
@@ -2002,45 +1981,32 @@ Feature.Build.Message.FinishedTitle,{TITLE} – ukończono
 Feature.Build.Message.FriendsLoadFailed,Nie udało się wczytać znajomych. Spróbuj ponownie.
 Feature.Build.Message.GameNotCreated,Twoja gra nie została utworzona. Spróbuj ponownie.
 Feature.Build.Message.GamePublishFailed,Nie udało się opublikować Twojej gry. Spróbuj ponownie.
-Feature.Build.Message.GameShared,Gra udostępniona
-Feature.Build.Message.GameSharedWith,Gra udostępniona: {DISPLAY_NAME}
-Feature.Build.Message.HiDisplayName,"Cześć, {DISPLAY_NAME}"
 Feature.Build.Message.InvalidMessage,Coś poszło nie tak z Twoją wiadomością. Edytuj ją i spróbuj ponownie.
 Feature.Build.Message.InvitesLoadFailed,Nie udało się wczytać zaproszeń
-Feature.Build.Message.LimitBelowSpend,Limit nie może być niższy niż liczba Robuxów wydanych dzisiaj ({ALREADY_SPENT}).
 Feature.Build.Message.LinkCopied,Skopiowano link do schowka.
 Feature.Build.Message.LoadingVersions,Wczytuję historię wersji…
 Feature.Build.Message.NoDescriptionProvided,Brak opisu.
 Feature.Build.Message.NoFriendsToAdd,"Nie masz jeszcze żadnych znajomych do dodania. Najpierw znajdź osoby, z którymi możesz się połączyć na Robloxie."
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Nie ma jeszcze historii wersji.
-Feature.Build.Message.OneTaskCompleted,1 zadanie ukończone
 Feature.Build.Message.OutOfBuildUsage,"Skończyły Ci się użycia funkcji Buduj. Zobacz opcje użycia Robuxów, aby kontynuować tworzenie."
-Feature.Build.Message.PlaytestersAdded,Dodano {INVITED_COUNT} z {MAX_INVITES} testerów gry
 Feature.Build.Message.PublicPublishFailed,"Twoja gra została opublikowana, ale nie udało się jej udostępnić publicznie. Spróbuj ponownie."
 Feature.Build.Message.PublishExpandAudience,"Opublikuj, aby zwiększyć liczbę odbiorców"
 Feature.Build.Message.PublishNotReverted,Twoja publikacja nie została cofnięta. Spróbuj ponownie.
 Feature.Build.Message.PublishReverted,Cofnięto publikację.
 Feature.Build.Message.QuestionnaireNeeded,"Ta gra została edytowana poza funkcją Buduj. Wypełnij kwestionariusz dotyczący treści, aby ją opublikować."
 Feature.Build.Message.ReadyToPlay,Twoja gra jest gotowa do uruchomienia na Robloxie
-Feature.Build.Message.ResetHours,Reset za {HOURS} godz.
-Feature.Build.Message.ResetOneHour,Reset się za 1 godz.
 Feature.Build.Message.RestoreVersionFailed,Nie udało się przywrócić tej wersji. Spróbuj ponownie.
 Feature.Build.Message.RevertVersionFail,Nie utworzono cofniętej wersji. Spróbuj ponownie.
 Feature.Build.Message.RunningTitle,{title} – uruchomiono
 Feature.Build.Message.SafetyPolicy,Ta wiadomość jest niezgodna z naszą polityką bezpieczeństwa. Edytuj ją i spróbuj ponownie.
 Feature.Build.Message.SaveChangesFailed,Nie udało się zapisać zmian. Spróbuj ponownie.
-Feature.Build.Message.ShareExperience,Udostępnij {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Nie udało się utworzyć linku do udostępniania. Spróbuj ponownie.
 Feature.Build.Message.SignedOut,Wylogowano Cię. Zaloguj się i spróbuj ponownie.
-Feature.Build.Message.TasksCompleted,Ukończone zadania – {NUM_COMPLETED_TASKS}
-Feature.Build.Message.ThinkingSeconds,Myślenie trwało {SECONDS} s
 Feature.Build.Message.TryAgain,Spróbuj ponownie.
 Feature.Build.Message.TurnToPortrait,"Przełącz urządzenie w tryb pionowy, aby dalej pracować nad grą."
 Feature.Build.Message.VersionHistoryLoad,Nie udało się wczytać historii wersji.
 Feature.Build.Message.WhatToCreate,Co chcesz dziś stworzyć?
-Feature.Build.Message.WorkedMinutesSeconds,Działanie trwało {MINUTES} min {REM_SECONDS} s
-Feature.Build.Message.WorkedSeconds,Działanie trwało {SECONDS} s
 Feature.Build.Message.WorkingOnTasks,Praca nad Twoimi zadaniami
 Feature.Build.Title.AddFriendsToPlaytest,"Dodaj znajomych, którzy pomogą Ci przetestować grę"
 Feature.Build.Title.ArchiveThisGame,Zarchiwizować tę grę?
@@ -2062,14 +2028,12 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,Nie masz już Robuxów na użycia funkcji Buduj
 Feature.Build.Title.Playtesters,Testerzy
 Feature.Build.Title.PlaytestersOnlyPlay,Tylko testerzy mogą grać
-Feature.Build.Title.PromoteGameFree,Promuj swoją grę za darmo
 Feature.Build.Title.PushNotifications,Powiadomienia push
 Feature.Build.Title.RevertLastChange,Cofnąć ostatnią zmianę?
 Feature.Build.Title.Tasks,Zadania
 Feature.Build.Title.TurnActivity,Obróć aktywność
 Feature.Build.Title.VersionHistory,Historia wersji
 Feature.Build.Title.VersionInformation,Informacje o wersji
-Feature.Build.Title.VersionNumber,Wersja {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Zezwól
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -3226,7 +3190,6 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimalizuj
 Feature.Moments.Action.Ok,
-Feature.Moments.Action.Play,Odtwórz
 Feature.Moments.Action.Post,Zamieść
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
@@ -3299,14 +3262,8 @@ Feature.Moments.Label.TextGenerationFailedBody,Nie udało się wygenerować teks
 Feature.Moments.Label.TextGenerationFailedTitle,Nie udało się wygenerować
 Feature.Moments.Label.TextGenerationFilteredBody,"Nie można wygenerować tekstu dla tego przechwyconego filmu, treść jest filtrowana."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generowanie przefiltrowane
-Feature.Moments.Label.Tone,Ton
-Feature.Moments.Label.Tone.Cinematic,Kinowy
-Feature.Moments.Label.Tone.Funny,Zabawny
-Feature.Moments.Label.Tone.Hype,Ekscytujący
-Feature.Moments.Label.Tone.Neutral,Neutralny
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
-Feature.Moments.Title.GenerateTextOptions,Generowanie tekstu
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta
@@ -3918,7 +3875,7 @@ Feature.SocialTab.Label.CreateAndExploreGroups,Twórz i eksploruj społeczności
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,Zgłoś dźwięk
+Feature.SongDetails.Action.ReportAudio,
 Feature.SongDetails.Label.InappropriateAudio,Niewłaściwy dźwięk
 Feature.SongDetails.Label.InappropriateThumbnail,Niewłaściwa miniatura
 Feature.SongDetails.Label.SongPreview,Podgląd utworu
@@ -4595,13 +4552,10 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
-InGame.PlayerDropDown.ConfirmUnfriend,"Dotknij, aby potwierdzić usunięcie z listy znajomych"
-InGame.PlayerDropDown.Decline,
 InGame.PlayerDropDown.Examine,Zbadaj awatara
 InGame.PlayerDropDown.OtherPlayerFriendLimit,Użytkownik {RBX_NAME} osiągnął limit liczby znajomych.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
-InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,Ostatnia aktualizacja {minutes} min temu
 InGame.PlayerList.FooterUnableToLoad,
 InGame.PlayerList.FriendsEmpty,Żaden z Twoich znajomych nie grał jeszcze w ten projekt.

@@ -16,7 +16,6 @@ local screenSizeImpressionsTracker = impressionsModule.ScreenSizeImpressionsTrac
 local hoverTileCoordinator = require(parent.GameTile).HoverTileCoordinator
 local scrollDetector = require(parent.ScrollTelemetry).ScrollDetector
 local useTokens = require(parent.Foundation).Hooks.useTokens
-local _ = require(parent.VideoUtils)
 local sduiCoreSystemModule = require(parent.SduiCoreSystem)
 local findAnalyticsField = sduiCoreSystemModule.findAnalyticsField
 local getImpressionsTagModule = require(serverDrivenUi.Analytics.getImpressionsTag)
@@ -41,16 +40,14 @@ local fFlagLuaAppUseFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseFra
 local fFlagSduiCollectionCarouselOverrides = sharedFlagsModule.FFlagSduiCollectionCarouselOverrides
 local fFlagSduiEdpStoreImpressionsLogging = sharedFlagsModule.FFlagSduiEdpStoreImpressionsLogging
 local fFlagSduiCarouselUseNestedImpressionsFeedContext = sharedFlagsModule.FFlagSduiCarouselUseNestedImpressionsFeedContext
-local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local t = {}
 
-return reactModule.memo(function(p0) --[[ line: 138 | named "SduiCollectionCarousel" ]]
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), fFlagLuaAppSduiVideoThumbnail (ref), reactModule (ref), cryoModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), findAnalyticsField (ref), t (ref), sduiBuilder (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), fFlagSduiCarouselUseNestedImpressionsFeedContext (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), fFlagSduiEdpStoreImpressionsLogging (ref), sendLegacyGameImpressionsForSduiModule (ref), useTokens (ref), itemHeightModeModule (ref), useUniformItemHeightModule (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), hoverTileCoordinator (ref), useScrollTelemetryCallbackModule (ref), collectionCarousel (ref), fFlagSduiCollectionCarouselOverrides (ref), sduiFeedContext (ref), waitForPropWrapper (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), screenSizeImpressionsTracker (ref), scrollDetector (ref)
+return reactModule.memo(function(p0) --[[ line: 135 | named "SduiCollectionCarousel" ]]
+	-- upvalues: fFlagLuaAppCompositionAlways (ref), reactModule (ref), cryoModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsReactModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), findAnalyticsField (ref), t (ref), sduiBuilder (ref), useCollectionAnalyticsContext (ref), useCollectionImpressionsSignal (ref), fFlagSduiCarouselUseNestedImpressionsFeedContext (ref), getImpressionsTagModule (ref), sduiParseHelpers (ref), sduiErrors (ref), reportUnifiedLoggingImpressions (ref), fFlagSduiEdpStoreImpressionsLogging (ref), sendLegacyGameImpressionsForSduiModule (ref), useTokens (ref), itemHeightModeModule (ref), useUniformItemHeightModule (ref), sduiCollectionAnalyticsBuilder (ref), getSduiComponentWrapper (ref), sduiCollectionItemModule (ref), hoverTileCoordinator (ref), useScrollTelemetryCallbackModule (ref), collectionCarousel (ref), fFlagSduiCollectionCarouselOverrides (ref), sduiFeedContext (ref), waitForPropWrapper (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), screenSizeImpressionsTracker (ref), scrollDetector (ref)
 	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or (p0.appCompositionEnabled or p0.sduiContext.appCompositionEnabled)
 	local layoutOrder = p0.layoutOrder
 	local sduiContext = p0.sduiContext
-	local var16 = if fFlagLuaAppSduiVideoThumbnail then sduiContext.videoPlaybackContext else nil
-	local var17 = reactModule.useMemo(function() --[[ line: 150 ]]
+	local var16 = reactModule.useMemo(function() --[[ line: 144 ]]
 		-- upvalues: p0 (ref)
 		if not p0.items then
 			return {}
@@ -82,91 +79,73 @@ return reactModule.memo(function(p0) --[[ line: 138 | named "SduiCollectionCarou
 		p0.maxItemsToShow,
 		p0.overflowItem
 	})
-	local var18, var19 = reactModule.useState(nil)
-	local var20 = reactModule.useRef(nil)
+	local var17, var18 = reactModule.useState(nil)
+	local var19 = reactModule.useRef(nil)
+	local var20 = if p0.layoutOverrides then cryoModule.Dictionary.join(p0.layoutOverrides, { sideMargin = p0.pageSideMargin }) else { sideMargin = p0.pageSideMargin }
 	local var21 = nil
-	local var22 = nil
-	
-	if fFlagLuaAppSduiVideoThumbnail then
-		local var23 = if var16 then var16.viewportVideoAutoplayController else nil
-		var21 = reactModule.useCallback(function() --[[ line: 190 ]]
-			-- upvalues: var23 (ref)
-			if var23 then
-				var23:onScrollStart()
-			end
-		end, { var23 })
-		var22 = reactModule.useCallback(function(p1) --[[ line: 195 ]]
-			-- upvalues: var23 (ref), var20 (ref)
-			if var23 then
-				var23:onScrollSettled("X", p1, { current = var20.current })
-			end
-		end, { var23, var20 })
-	end
-	local var24 = if p0.layoutOverrides then cryoModule.Dictionary.join(p0.layoutOverrides, { sideMargin = p0.pageSideMargin }) else { sideMargin = p0.pageSideMargin }
-	local var25 = nil
 	
 	if not fFlagLuaAppCompositionAlways then
-		var25 = if fFlagLuaAppLayoutParamsInContext then signalsReactModule.useSignalState(reactModule.useCallback(function(p2) --[[ line: 212 ]]
+		var21 = if fFlagLuaAppLayoutParamsInContext then signalsReactModule.useSignalState(reactModule.useCallback(function(p1) --[[ line: 185 ]]
 			-- upvalues: sduiContext (ref), p0 (ref)
-			return sduiContext.getPageLayoutConfig(p0.collectionItemSize)(p2)
-		end, { p0.collectionItemSize, sduiContext.getPageLayoutConfig })) else useCollectionLayoutParams(p0.collectionItemSize or collectionItemSize.Small, var18, false, var24)
+			return sduiContext.getPageLayoutConfig(p0.collectionItemSize)(p1)
+		end, { p0.collectionItemSize, sduiContext.getPageLayoutConfig })) else useCollectionLayoutParams(p0.collectionItemSize or collectionItemSize.Small, var17, false, var20)
 	end
-	local var37
-	local var26 = if var17 then #var17 else 0
-	local var27, var28 = useCollectionAnalyticsContext(p0.analyticsContext, findAnalyticsField("componentType", p0.analyticsContext.analyticsData or t) or sduiBuilder.getComponentType(p0.componentConfig, sduiContext), var26, var26, sduiContext, p0.startRow, p0.componentConfig.__isClientBinding)
-	local var29 = reactModule.useRef({})
-	local var30, var31 = useCollectionImpressionsSignal(p0.scrollViewPositionChangedSignal)
-	local var32 = if fFlagSduiCarouselUseNestedImpressionsFeedContext then reactModule.useMemo(function() --[[ line: 258 ]]
-		-- upvalues: var30 (ref), p0 (ref), var20 (ref)
+	local var33
+	local var22 = if var16 then #var16 else 0
+	local var23, var24 = useCollectionAnalyticsContext(p0.analyticsContext, findAnalyticsField("componentType", p0.analyticsContext.analyticsData or t) or sduiBuilder.getComponentType(p0.componentConfig, sduiContext), var22, var22, sduiContext, p0.startRow, p0.componentConfig.__isClientBinding)
+	local var25 = reactModule.useRef({})
+	local var26, var27 = useCollectionImpressionsSignal(p0.scrollViewPositionChangedSignal)
+	local var28 = if fFlagSduiCarouselUseNestedImpressionsFeedContext then reactModule.useMemo(function() --[[ line: 231 ]]
+		-- upvalues: var26 (ref), p0 (ref), var19 (ref)
 		return {
-			scrollViewPositionChangedSignal = var30,
+			scrollViewPositionChangedSignal = var26,
 			verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-			impressionsParentScrollingFrameRef = var20
+			impressionsParentScrollingFrameRef = var19
 		}
-	end, { var30, p0.verticalScrollingFrameRef, var20 }) else nil
-	local var33 = getImpressionsTagModule(p0.index, var28.current, sduiContext, p0.debugName)
-	local var34 = reactModule.useCallback(function(p3) --[[ line: 276 ]]
-		-- upvalues: var17 (ref), var27 (ref), sduiParseHelpers (copy), sduiContext (ref), sduiErrors (copy), var33 (ref), p0 (ref), var28 (ref), reportUnifiedLoggingImpressions (copy), var29 (ref), fFlagSduiEdpStoreImpressionsLogging (copy), sendLegacyGameImpressionsForSduiModule (copy)
-		if var17 == nil or #var17 == 0 then
-			if p3 and #p3 > 0 then
+	end, { var26, p0.verticalScrollingFrameRef, var19 }) else nil
+	local var29 = getImpressionsTagModule(p0.index, var24.current, sduiContext, p0.debugName)
+	local var30 = reactModule.useCallback(function(p2) --[[ line: 249 ]]
+		-- upvalues: var16 (ref), var23 (ref), sduiParseHelpers (copy), sduiContext (ref), sduiErrors (copy), var29 (ref), p0 (ref), var24 (ref), reportUnifiedLoggingImpressions (copy), var25 (ref), fFlagSduiEdpStoreImpressionsLogging (copy), sendLegacyGameImpressionsForSduiModule (copy)
+		if var16 == nil or #var16 == 0 then
+			if p2 and #p2 > 0 then
 				sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogImpressions, {
 					componentType = "CollectionCarousel",
-					name = var33,
-					message = `Failed to log impressions. No configs. indexes: {table.concat(p3, ",")} analytics: {if var27 then sduiParseHelpers.stringifyValue(var27.analyticsData) else nil}`
+					name = var29,
+					message = `Failed to log impressions. No configs. indexes: {table.concat(p2, ",")} analytics: {if var23 then sduiParseHelpers.stringifyValue(var23.analyticsData) else nil}`
 				}, sduiContext.appPage)
 			end
 			return
 		else
-			assert(var17, "itemConfigs must exist")
+			assert(var16, "itemConfigs must exist")
 			
-			if p0.impressionEventName or not var28.current or var28.current.contentType ~= "Game" then
-				reportUnifiedLoggingImpressions(sduiContext, p3, var29.current, var28.current, p0.startRow, p0.impressionEventName, p0.skipItemImpressionsLog, if fFlagSduiEdpStoreImpressionsLogging then var33 else nil)
+			if p0.impressionEventName or not var24.current or var24.current.contentType ~= "Game" then
+				reportUnifiedLoggingImpressions(sduiContext, p2, var25.current, var24.current, p0.startRow, p0.impressionEventName, p0.skipItemImpressionsLog, if fFlagSduiEdpStoreImpressionsLogging then var29 else nil)
 				
 				return
-			elseif var28.current and var28.current.contentType == "Game" then
-				sendLegacyGameImpressionsForSduiModule(p3, var29.current, var17, var27, var28.current, p0.startRow, sduiContext, nil, nil, var33)
+			elseif var24.current and var24.current.contentType == "Game" then
+				sendLegacyGameImpressionsForSduiModule(p2, var25.current, var16, var23, var24.current, p0.startRow, sduiContext, nil, nil, var29)
 			end
-			reportUnifiedLoggingImpressions(sduiContext, p3, var29.current, var28.current, p0.startRow)
+			reportUnifiedLoggingImpressions(sduiContext, p2, var25.current, var24.current, p0.startRow)
 		end
 	end, {
-		var17, p0.startRow, sduiContext, var28, var29, var27, var33,
+		var16, p0.startRow, sduiContext, var24, var25, var23, var29,
 		p0.impressionEventName, p0.skipItemImpressionsLog
 	})
 	local scale = useTokens().Config.UI.Scale
-	local var35 = p0.itemHeightMode == itemHeightModeModule.Uniform
-	local var36 = useUniformItemHeightModule(var35)
-	local onItemSizeChanged = var36.onItemSizeChanged
+	local var31 = p0.itemHeightMode == itemHeightModeModule.Uniform
+	local var32 = useUniformItemHeightModule(var31)
+	local onItemSizeChanged = var32.onItemSizeChanged
 	
-	if var36 then
-		var37 = var36.measuredMaxHeight ~= nil
-		var37 = nil
+	if var32 then
+		var33 = var32.measuredMaxHeight ~= nil
+		var33 = nil
 	else
-		var37 = false
+		var33 = false
 	end
 	local itemHeightFromWidth = nil
 	
-	if var35 then
-		local measuredMaxHeight = var36.measuredMaxHeight
+	if var31 then
+		local measuredMaxHeight = var32.measuredMaxHeight
 		
 		if measuredMaxHeight and measuredMaxHeight > 0 then
 			itemHeightFromWidth = UDim.new(0, measuredMaxHeight / scale)
@@ -174,101 +153,101 @@ return reactModule.memo(function(p0) --[[ line: 138 | named "SduiCollectionCarou
 	elseif p0.itemHeightMode ~= itemHeightModeModule.Auto then
 		itemHeightFromWidth = p0.itemHeightFromWidth
 	end
-	local var38 = itemHeightFromWidth == nil and #var17 > 0
-	local var39 = reactModule.useCallback(function(p4) --[[ line: 370 ]]
-		-- upvalues: var35 (ref), var36 (ref), itemHeightFromWidth (write), scale (ref)
-		if var35 then
-			local measuredMaxHeight = var36.measuredMaxHeight
+	local var34 = itemHeightFromWidth == nil and #var16 > 0
+	local var35 = reactModule.useCallback(function(p3) --[[ line: 343 ]]
+		-- upvalues: var31 (ref), var32 (ref), itemHeightFromWidth (write), scale (ref)
+		if var31 then
+			local measuredMaxHeight = var32.measuredMaxHeight
 			
 			return if measuredMaxHeight and measuredMaxHeight > 0 then measuredMaxHeight else 0
 		end
-		return if itemHeightFromWidth then p4 * itemHeightFromWidth.Scale + itemHeightFromWidth.Offset * scale else 0
+		return if itemHeightFromWidth then p3 * itemHeightFromWidth.Scale + itemHeightFromWidth.Offset * scale else 0
 	end, {
-		var35,
+		var31,
 		itemHeightFromWidth,
-		var36.measuredMaxHeight,
+		var32.measuredMaxHeight,
 		scale
 	})
-	local var40 = reactModule.useCallback(function(p5, p6, p7, _) --[[ line: 393 ]]
-		-- upvalues: sduiContext (ref), sduiErrors (copy), var33 (ref), reactModule (copy), findAnalyticsField (copy), t (copy), sduiBuilder (copy), var29 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var27 (ref), p0 (ref), var35 (ref), var37 (ref), sduiCollectionItemModule (copy), var38 (ref), onItemSizeChanged (ref), var36 (ref)
-		if not p5 then
+	local var36 = reactModule.useCallback(function(p4, p5, p6, _) --[[ line: 366 ]]
+		-- upvalues: sduiContext (ref), sduiErrors (copy), var29 (ref), reactModule (copy), findAnalyticsField (copy), t (copy), sduiBuilder (copy), var25 (ref), sduiCollectionAnalyticsBuilder (copy), getSduiComponentWrapper (copy), var23 (ref), p0 (ref), var31 (ref), var33 (ref), sduiCollectionItemModule (copy), var34 (ref), onItemSizeChanged (ref), var32 (ref)
+		if not p4 then
 			sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilItem, {
 				componentType = "CollectionCarousel",
-				name = var33,
-				message = `Nil item in CollectionCarousel.renderItem at index {p6}`
+				name = var29,
+				message = `Nil item in CollectionCarousel.renderItem at index {p5}`
 			}, sduiContext.appPage)
 			
 			return reactModule.createElement(reactModule.Fragment), "nil"
 		end
-		local componentType = findAnalyticsField("componentType", p5.analyticsData or t) or sduiBuilder.getComponentType(p5, sduiContext)
+		local componentType = findAnalyticsField("componentType", p4.analyticsData or t) or sduiBuilder.getComponentType(p4, sduiContext)
 		
 		if not componentType then
 			sduiContext.dependencies.logger.reportError(sduiErrors.SduiErrorType.NilComponentType, {
 				componentType = "CollectionCarousel",
-				name = var33,
-				message = `Nil componentType in CollectionCarousel.renderItem at index {p6}`
+				name = var29,
+				message = `Nil componentType in CollectionCarousel.renderItem at index {p5}`
 			}, sduiContext.appPage)
 			
 			return reactModule.createElement(reactModule.Fragment), "nil"
 		end
 		local t_1 = {
-			itemPosition = p6,
+			itemPosition = p5,
 			itemComponentType = componentType,
 			componentType = componentType
 		}
-		var29.current[p6] = sduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(sduiContext, p5.analyticsData, nil, t_1, componentType)
+		var25.current[p5] = sduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(sduiContext, p4.analyticsData, nil, t_1, componentType)
 		local createElement = reactModule.createElement
-		createElement = createElement(getSduiComponentWrapper(p5), {
-			componentConfig = p5,
+		createElement = createElement(getSduiComponentWrapper(p4), {
+			componentConfig = p4,
 			sduiContext = sduiContext,
-			parentAnalyticsContext = if p5.__isClientBinding then nil else var27,
+			parentAnalyticsContext = if p4.__isClientBinding then nil else var23,
 			extraLocalProps = {
 				scrollViewPositionChangedSignal = p0.scrollViewPositionChangedSignal,
 				verticalScrollingFrameRef = p0.verticalScrollingFrameRef,
-				index = p6,
-				selectionOrder = if p0.disableSelectionOrder or not p0.selectionOrderBase then nil else p0.selectionOrderBase + p6,
-				size = if var35 and var37 then UDim2.new(1, 0, 1, 0) else nil
+				index = p5,
+				selectionOrder = if p0.disableSelectionOrder or not p0.selectionOrderBase then nil else p0.selectionOrderBase + p5,
+				size = if var31 and var33 then UDim2.new(1, 0, 1, 0) else nil
 			},
-			debugName = `{componentType}_{p6}`,
+			debugName = `{componentType}_{p5}`,
 			localAnalyticsData = t_1
 		})
 		
 		return reactModule.createElement(sduiCollectionItemModule, {
-			index = p6,
-			impressionsTag = var33,
-			automaticSize = if var38 or var35 then Enum.AutomaticSize.Y else nil,
-			size = p7,
-			onItemSizeChanged = if var35 then onItemSizeChanged else nil,
-			minHeightBinding = if var35 then var36.measuredMaxHeightBinding else nil
+			index = p5,
+			impressionsTag = var29,
+			automaticSize = if var34 or var31 then Enum.AutomaticSize.Y else nil,
+			size = p6,
+			onItemSizeChanged = if var31 then onItemSizeChanged else nil,
+			minHeightBinding = if var31 then var32.measuredMaxHeightBinding else nil
 		}, { Item = createElement }), componentType or "unknown"
 	end, {
 		sduiContext, p0.analyticsContext, p0.scrollViewPositionChangedSignal,
-		p0.verticalScrollingFrameRef, var27, var38, var33, p0.index,
-		p0.disableSelectionOrder, p0.selectionOrderBase, var35, onItemSizeChanged,
-		var37, var36.measuredMaxHeightBinding
+		p0.verticalScrollingFrameRef, var23, var34, var29, p0.index,
+		p0.disableSelectionOrder, p0.selectionOrderBase, var31, onItemSizeChanged,
+		var33, var32.measuredMaxHeightBinding
 	})
-	local var41 = reactModule.useMemo(function() --[[ line: 485 ]]
-		-- upvalues: p0 (ref), reactModule (copy), var27 (ref)
+	local var37 = reactModule.useMemo(function() --[[ line: 458 ]]
+		-- upvalues: p0 (ref), reactModule (copy), var23 (ref)
 		local t = nil
 		
 		if p0.children then
 			t = {}
 			
 			for i, v in p0.children do
-				t[i] = reactModule.cloneElement(v, { parentAnalyticsContext = var27 })
+				t[i] = reactModule.cloneElement(v, { parentAnalyticsContext = var23 })
 			end
 		end
 		return t
-	end, { var27, p0.children })
-	local var42 = reactModule.useCallback(function() --[[ line: 501 ]]
+	end, { var23, p0.children })
+	local var38 = reactModule.useCallback(function() --[[ line: 474 ]]
 		-- upvalues: hoverTileCoordinator (copy)
 		hoverTileCoordinator.default:reset()
 	end, {})
-	local var43 = useScrollTelemetryCallbackModule(var20, var28, sduiContext)
-	local var44 = reactModule.useMemo(function() --[[ line: 508 ]]
-		-- upvalues: p0 (ref), reactModule (copy), var27 (ref), fFlagLuaAppCompositionAlways_1 (ref)
+	local var39 = useScrollTelemetryCallbackModule(var19, var24, sduiContext)
+	local var40 = reactModule.useMemo(function() --[[ line: 481 ]]
+		-- upvalues: p0 (ref), reactModule (copy), var23 (ref), fFlagLuaAppCompositionAlways_1 (ref)
 		return if p0.headerComponent then reactModule.cloneElement(p0.headerComponent, {
-			parentAnalyticsContext = var27,
+			parentAnalyticsContext = var23,
 			extraLocalProps = {
 				sideMargin = 0,
 				appCompositionEnabled = fFlagLuaAppCompositionAlways_1,
@@ -280,72 +259,67 @@ return reactModule.memo(function(p0) --[[ line: 138 | named "SduiCollectionCarou
 			}
 		}) else nil
 	end, {
-		var27, p0.headerComponent, fFlagLuaAppCompositionAlways_1,
+		var23, p0.headerComponent, fFlagLuaAppCompositionAlways_1,
 		p0.scrollViewPositionChangedSignal, p0.verticalScrollingFrameRef, p0.startRow,
 		p0.numUpdatesToDelayImpressions, p0.index
 	})
-	local var45 = reactModule.useMemo(function() --[[ line: 539 ]]
-		-- upvalues: p0 (ref), reactModule (copy), var27 (ref), var18 (ref)
+	local var41 = reactModule.useMemo(function() --[[ line: 512 ]]
+		-- upvalues: p0 (ref), reactModule (copy), var23 (ref), var17 (ref)
 		return if p0.focusNavActionsComponent then reactModule.cloneElement(p0.focusNavActionsComponent, {
-			parentAnalyticsContext = var27,
-			extraLocalProps = { guiObject = var18 }
+			parentAnalyticsContext = var23,
+			extraLocalProps = { guiObject = var17 }
 		}) else nil
-	end, { var27, p0.focusNavActionsComponent, var18 })
+	end, { var23, p0.focusNavActionsComponent, var17 })
 	local createElement = reactModule.createElement
 	createElement = createElement(collectionCarousel, {
 		collectionItemSize = if fFlagLuaAppCompositionAlways_1 then p0.collectionItemSize else nil,
 		onReachedThresholdFromEnd = p0.onScrollToEnd,
 		thresholdFromEnd = p0.scrollThresholdFromEnd,
-		containerRef = var19,
-		scrollingFrameRef = var20,
-		getItemHeight = var39,
-		items = var17,
-		renderItem = var40,
-		numColumns = if fFlagLuaAppCompositionAlways_1 then if fFlagSduiCollectionCarouselOverrides then p0.numColumnsOverride else nil else var25.numColumns,
-		fractionalItemAmount = if fFlagLuaAppCompositionAlways_1 then nil else var25.fractionalItemAmount,
-		columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var25.columnGap,
-		sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var25.sideMargin,
-		onViewableItemsChanged = var31,
-		onChangeCanvasPosition = var31,
+		containerRef = var18,
+		scrollingFrameRef = var19,
+		getItemHeight = var35,
+		items = var16,
+		renderItem = var36,
+		numColumns = if fFlagLuaAppCompositionAlways_1 then if fFlagSduiCollectionCarouselOverrides then p0.numColumnsOverride else nil else var21.numColumns,
+		fractionalItemAmount = if fFlagLuaAppCompositionAlways_1 then nil else var21.fractionalItemAmount,
+		columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var21.columnGap,
+		sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var21.sideMargin,
+		onViewableItemsChanged = var27,
+		onChangeCanvasPosition = var27,
 		LayoutOrder = layoutOrder,
 		scrollingEnabledOverride = p0.scrollingEnabledOverride,
-		AutomaticSize = if var38 or var35 then Enum.AutomaticSize.Y else nil,
-		headerComponent = var44,
+		AutomaticSize = if var34 or var31 then Enum.AutomaticSize.Y else nil,
+		headerComponent = var40,
 		backgroundMuralUrl = p0.backgroundMuralUrl,
-		onScrollButtonEnter = var42,
+		onScrollButtonEnter = var38,
 		numItemsToRenderOffScreen = p0.numItemsToRenderOffScreen,
 		enableHoverOverflow = p0.enableHoverOverflow,
 		testId = if p0.testId then p0.testId else "--sdui-collection-carousel"
 	})
 	
-	return reactModule.createElement(reactModule.Fragment, nil, cryoModule.Dictionary.join(var41 or t, {
-		CollectionCarousel = if fFlagSduiCarouselUseNestedImpressionsFeedContext and var32 then reactModule.createElement(sduiFeedContext.Provider, { value = var32 }, createElement) else createElement,
+	return reactModule.createElement(reactModule.Fragment, nil, cryoModule.Dictionary.join(var37 or t, {
+		CollectionCarousel = if fFlagSduiCarouselUseNestedImpressionsFeedContext and var28 then reactModule.createElement(sduiFeedContext.Provider, { value = var28 }, createElement) else createElement,
 		ImpressionDetector = reactModule.createElement(waitForPropWrapper, {
 			waitForProp = p0.startRow,
 			maxUpdatesToDelay = p0.numUpdatesToDelayImpressions,
 			wrappedComponent = if fFlagLuaAppUseFrameBoundsImpressions or p0.shouldUseFrameBoundsForImpressions then reactModule.createElement(frameBoundsImpressionsTracker, {
-				parentRef = var20,
+				parentRef = var19,
 				pageContext = sduiContext.routeName or sduiContext.appPage,
-				impressionsTag = var33,
-				scrollViewPositionChangedSignal = var30,
-				sendImpressions = var34,
+				impressionsTag = var29,
+				scrollViewPositionChangedSignal = var26,
+				sendImpressions = var30,
 				dataUpdatedTimestamp = p0.sduiContext.dataUpdatedTimestamp,
 				respectClipAncestors = if fFlagLuaAppRespectClipAncestorImpressions then p0.respectClipAncestors else nil
 			}) else reactModule.createElement(screenSizeImpressionsTracker, {
-				parentRef = var20,
+				parentRef = var19,
 				pageContext = sduiContext.routeName or sduiContext.appPage,
-				impressionsTag = var33,
-				scrollViewPositionChangedSignal = var30,
-				sendImpressions = var34,
+				impressionsTag = var29,
+				scrollViewPositionChangedSignal = var26,
+				sendImpressions = var30,
 				dataUpdatedTimestamp = p0.sduiContext.dataUpdatedTimestamp
 			})
 		}),
-		ScrollDetector = reactModule.createElement(scrollDetector, {
-			scrollingFrameRef = var20,
-			sendScrollEvent = var43,
-			onScrollStart = if fFlagLuaAppSduiVideoThumbnail then var21 else nil,
-			onScrollSettled = if fFlagLuaAppSduiVideoThumbnail then var22 else nil
-		}),
-		FocusNavActions = var45
+		ScrollDetector = reactModule.createElement(scrollDetector, { scrollingFrameRef = var19, sendScrollEvent = var39 }),
+		FocusNavActions = var41
 	}))
 end)

@@ -1,12 +1,11 @@
 ﻿local parent = script:FindFirstAncestor("GameCollections").Parent
 local gameCollectionItemTypes = require(parent.DiscoveryTypes).GameCollectionItemTypes
 local fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone = require(parent.SharedFlags).FFlagLuaAppHomeFirstTileThumbnailLoadedMilestone
-local fFlagLuaAppEmphasisGameTileVideo = require(parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
 local reactModule = require(parent.React)
 local emphasisGameTile = require(parent.GameTile).EmphasisGameTile
 local _ = require(parent.VideoUtils)
-local var1 = reactModule.memo(function(p0) --[[ line: 53 ]]
-	-- upvalues: reactModule (ref), emphasisGameTile (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref), fFlagLuaAppEmphasisGameTileVideo (ref)
+local var1 = reactModule.memo(function(p0) --[[ line: 49 ]]
+	-- upvalues: reactModule (ref), emphasisGameTile (ref), fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone (ref)
 	return reactModule.createElement(emphasisGameTile, {
 		size = p0.item.sizeOverride,
 		index = p0.index,
@@ -34,13 +33,11 @@ local var1 = reactModule.memo(function(p0) --[[ line: 53 ]]
 		showDescription = p0.item.showDescription,
 		zIndex = p0.zIndex,
 		onTileImageLoaded = if fFlagLuaAppHomeFirstTileThumbnailLoadedMilestone then p0.onTileImageLoaded else nil,
-		videoPlaybackContext = p0.videoPlaybackContext,
-		appPage = if fFlagLuaAppEmphasisGameTileVideo then p0.appPage else nil,
-		videoAnalytics = if fFlagLuaAppEmphasisGameTileVideo then p0.videoAnalytics else nil
+		videoPlaybackContext = p0.videoPlaybackContext
 	})
 end)
 
-return function(p1) --[[ line: 88 ]]
+return function(p1) --[[ line: 82 ]]
 	-- upvalues: reactModule (ref), var1 (ref), gameCollectionItemTypes (ref)
 	return reactModule.createElement(var1, p1), gameCollectionItemTypes.GameCollectionItemType.EmphasisTile
 end

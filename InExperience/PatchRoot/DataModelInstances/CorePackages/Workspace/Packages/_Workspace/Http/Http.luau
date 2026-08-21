@@ -8,7 +8,6 @@ return {
 	Reducers = require(script.Reducers),
 	PerformFetch = require(script.PerformFetch),
 	StatusCodes = require(script.StatusCodes),
-	MrRouterHeaders = require(script.MrRouterHeaders),
 	createPerformFetchMiddleware = require(script.createPerformFetchMiddleware),
 	NetworkLayers = require(script.NetworkLayers),
 	NetworkProfiler = require(script.NetworkProfiler),

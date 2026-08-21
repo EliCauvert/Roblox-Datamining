@@ -10,8 +10,8 @@
 	FLYOUT_DEFAULT_POLICY = {
 		MyLibrary = {
 			"Favorites", "ContinuePlaying", "Connections", "Communities", "Inventory",
-			"Trades", "Messages", "Blackbird", "Premium", "GiftCards", "Redeem",
-			"Settings", "HelpAndSafety"
+			"Messages", "Blackbird", "Premium", "GiftCards", "Redeem", "Settings",
+			"HelpAndSafety"
 		},
 		AdditionalNavigation = { "Events", "Moments", "Learn", "CreateGames" }
 	}

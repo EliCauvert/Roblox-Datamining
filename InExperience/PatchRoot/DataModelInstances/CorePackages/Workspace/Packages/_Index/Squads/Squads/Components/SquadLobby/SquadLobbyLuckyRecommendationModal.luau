@@ -34,12 +34,10 @@ local squadLuckyRecommendationPhase = enumsModule.SquadLuckyRecommendationPhase
 local hooksModule = require(parent.SquadsCore.Hooks)
 local useLuckyRecommendation = hooksModule.useLuckyRecommendation
 local useLuckyRecommendationAnalytics = hooksModule.useLuckyRecommendationAnalytics
-local useIsExperienceInviteRetryBlocked = hooksModule.useIsExperienceInviteRetryBlocked
-local fFlagSquadExperienceInviteRetryAfter = require(parent.SquadsCore.Flags).FFlagSquadExperienceInviteRetryAfter
 local eventNamesModule = require(parent.SquadsCore.EventNames)
 
-return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]]
-	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), fFlagSquadExperienceInviteRetryAfter (ref), useIsExperienceInviteRetryBlocked (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
+return function(p0) --[[ line: 67 | named "SquadLobbyLuckyRecommendationModal" ]]
+	-- upvalues: useTokens (ref), useDispatch (ref), react (ref), squadExternalContractContext (ref), useLuckyRecommendation (ref), useLuckyRecommendationAnalytics (ref), useLocalization (ref), squadLuckyRecommendationPhase (ref), getRbxthumbWithTypeSizeAndOptions (ref), constants (ref), useSelector (ref), eventNamesModule (ref), createExperienceInviteModule (ref), squadExperienceInviteSource (ref), setTimeout (ref), clearTimeout (ref), reactOtterModule (ref), text (ref), view (ref), image (ref), progress (ref), progressShape (ref), progressSize (ref), overlayProvider (ref), dialog (ref), dialogSize (ref), button (ref), buttonVariant (ref), icon (ref), iconSize (ref)
 	local var7 = useTokens()
 	local var8 = useDispatch()
 	local size300 = var7.Size.Size_300
@@ -66,24 +64,23 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 	local universeId = var16 and var16.universeId
 	local rootPlaceId = var16 and var16.rootPlaceId
 	local var19 = if universeId ~= nil then nil else getRbxthumbWithTypeSizeAndOptions(tostring(universeId), constants.RbxthumbTypes.GameIcon, 150, false)
-	local var20 = useSelector(react.useCallback(function(p1) --[[ line: 109 ]]
+	local var20 = useSelector(react.useCallback(function(p1) --[[ line: 107 ]]
 		return p1.Squad and (p1.Squad.Squad and (p1.Squad.Squad.currentSquad and p1.Squad.Squad.currentSquad.squadId))
 	end, {}))
-	local var21 = useSelector(react.useCallback(function(p2) --[[ line: 117 ]]
+	local var21 = useSelector(react.useCallback(function(p2) --[[ line: 115 ]]
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {}))
-	local var22 = if fFlagSquadExperienceInviteRetryAfter then useIsExperienceInviteRetryBlocked(var20) else false
-	local var23 = react.useCallback(function() --[[ line: 125 ]]
+	local var22 = react.useCallback(function() --[[ line: 120 ]]
 		-- upvalues: var11 (ref), eventNamesModule (copy), phase (ref), p0 (ref)
 		var11.fire(eventNamesModule.LuckyRecommendationDismissed, { phaseAtDismiss = phase })
 		p0.onClose()
 	end, { var11, phase, p0.onClose })
-	local var24 = react.useCallback(function() --[[ line: 132 ]]
+	local var23 = react.useCallback(function() --[[ line: 127 ]]
 		-- upvalues: var11 (ref), eventNamesModule (copy), phase (ref), actions (ref), var20 (ref)
 		var11.fire(eventNamesModule.LuckyRecommendationRerolled, { phaseAtReroll = phase })
 		actions.startRoll(var20, false)
 	end, { actions.startRoll, var20, var11, phase })
-	local var25 = react.useCallback(function() --[[ line: 139 ]]
+	local var24 = react.useCallback(function() --[[ line: 134 ]]
 		-- upvalues: var11 (ref), eventNamesModule (copy), rootPlaceId (ref), var8 (ref), createExperienceInviteModule (copy), var9 (ref), squadExperienceInviteSource (copy)
 		local context = var11.getContext()
 		var11.fire(eventNamesModule.LuckyRecommendationJoinTapped, { rootPlaceId = rootPlaceId })
@@ -91,7 +88,7 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 		if rootPlaceId == nil then
 			return
 		end
-		var8(createExperienceInviteModule(tostring(rootPlaceId), var9, squadExperienceInviteSource.LuckyRecommendation)):andThen(function(p3) --[[ line: 149 ]]
+		var8(createExperienceInviteModule(tostring(rootPlaceId), var9, squadExperienceInviteSource.LuckyRecommendation)):andThen(function(p3) --[[ line: 144 ]]
 			-- upvalues: var11 (copy), eventNamesModule (copy), context (ref), rootPlaceId (copy)
 			if p3 then
 				var11.fire(eventNamesModule.LuckyRecommendationExperienceInviteCreated, {
@@ -103,29 +100,29 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 			end
 		end)
 	end, { var8, rootPlaceId, var9, var11 })
-	react.useLayoutEffect(function() --[[ line: 161 ]]
+	react.useLayoutEffect(function() --[[ line: 156 ]]
 		-- upvalues: actions (ref), var20 (ref)
 		actions.startRoll(var20, true)
 	end, { actions.startRoll, var20 })
-	react.useEffect(function() --[[ line: 165 ]]
+	react.useEffect(function() --[[ line: 160 ]]
 		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), setTimeout (copy), actions (ref), clearTimeout (copy)
 		if phase == squadLuckyRecommendationPhase.Rolling then
-			local var32 = setTimeout(actions.endRoll, 1000)
+			local var31 = setTimeout(actions.endRoll, 1000)
 			
-			return function() --[[ line: 170 ]]
-				-- upvalues: clearTimeout (copy), var32 (ref)
-				clearTimeout(var32)
+			return function() --[[ line: 165 ]]
+				-- upvalues: clearTimeout (copy), var31 (ref)
+				clearTimeout(var31)
 			end
 		end
 	end, { phase, actions.endRoll })
-	react.useEffect(function() --[[ line: 175 ]]
+	react.useEffect(function() --[[ line: 170 ]]
 		-- upvalues: actions (ref)
-		return function() --[[ line: 176 ]]
+		return function() --[[ line: 171 ]]
 			-- upvalues: actions (copy)
 			actions.cancelFetch()
 		end
 	end, { actions.cancelFetch })
-	react.useEffect(function() --[[ line: 181 ]]
+	react.useEffect(function() --[[ line: 176 ]]
 		-- upvalues: phase (ref), squadLuckyRecommendationPhase (copy), var11 (ref), eventNamesModule (copy), universeId (ref), state (ref)
 		if phase == squadLuckyRecommendationPhase.Revealed then
 			var11.fire(eventNamesModule.LuckyRecommendationRevealShown, { universeId = universeId })
@@ -135,11 +132,11 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 			var11.fire(eventNamesModule.LuckyRecommendationErrorShown, { errorType = state.error })
 		end
 	end, { phase, var11, state, universeId })
-	local var26, var27 = reactOtterModule.useAnimatedBinding(0)
-	react.useEffect(function() --[[ line: 195 ]]
-		-- upvalues: var13 (ref), var27 (ref), reactOtterModule (copy), var14_1 (ref)
+	local var25, var26 = reactOtterModule.useAnimatedBinding(0)
+	react.useEffect(function() --[[ line: 190 ]]
+		-- upvalues: var13 (ref), var26 (ref), reactOtterModule (copy), var14_1 (ref)
 		if var13 then
-			var27(reactOtterModule.ease(100, {
+			var26(reactOtterModule.ease(100, {
 				duration = 1,
 				startingValue = 0,
 				easingStyle = Enum.EasingStyle.Quad
@@ -147,38 +144,38 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 			
 			return
 		elseif var14_1 then
-			var27(reactOtterModule.ease(100, { duration = 0 }))
+			var26(reactOtterModule.ease(100, { duration = 0 }))
 		end
-	end, { var13, var14_1, var27 })
-	local var28 = if var14 then {
+	end, { var13, var14_1, var26 })
+	local var27 = if var14 then {
 		title = var12.revealedTitle,
 		subtitle = var12.revealedSubtitle,
 		actionText = var12.joinText,
-		onAction = var25,
-		isActionDisabled = if var21 == nil then var22 else true
+		onAction = var24,
+		isActionDisabled = var21 ~= nil
 	} elseif not var14_1 then {
 		title = var12.rollingTitle,
 		subtitle = var12.rollingSubtitle,
 		actionText = var12.cancelText,
-		onAction = var23
+		onAction = var22
 	} else {
 		title = var12.errorTitle,
 		actionText = var12.retryText,
-		onAction = var24
+		onAction = var23
 	}
 	local t = {
 		Title = react.createElement(text, {
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 			LayoutOrder = 1,
-			Text = var28.title
+			Text = var27.title
 		})
 	}
 	
-	if var28.subtitle ~= nil then
+	if var27.subtitle ~= nil then
 		t.Subtitle = react.createElement(text, {
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 			LayoutOrder = 2,
-			Text = var28.subtitle
+			Text = var27.subtitle
 		})
 	end
 	local t_1 = {
@@ -221,14 +218,14 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 			Bar = react.createElement(progress, {
 				shape = progressShape.Bar,
 				size = progressSize.Medium,
-				value = var26,
+				value = var25,
 				width = UDim.new(1, 0)
 			})
 		})
 	end
 	return react.createElement(overlayProvider, { DisplayOrder = 11 }, {
 		Dialog = react.createElement(dialog.Root, {
-			onClose = var23,
+			onClose = var22,
 			size = dialogSize.Small,
 			hasBackdrop = p0.hasBackdrop ~= nil or p0.hasBackdrop,
 			disablePortal = if p0.disablePortal ~= nil then false else p0.disablePortal
@@ -244,17 +241,17 @@ return function(p0) --[[ line: 69 | named "SquadLobbyLuckyRecommendationModal" ]
 					}, t_1),
 					ActionButton = react.createElement(button, {
 						LayoutOrder = 2,
-						onActivated = var28.onAction,
-						text = var28.actionText,
+						onActivated = var27.onAction,
+						text = var27.actionText,
 						variant = buttonVariant.Standard,
 						width = UDim.new(1, 0),
-						isDisabled = var28.isActionDisabled
+						isDisabled = var27.isActionDisabled
 					})
 				}),
 				ResetButton = if var14 then react.createElement(view, {
 					tag = "row align-x-center align-y-center auto-xy padding-small radius-circle clip bg-over-media-100",
 					ZIndex = 2,
-					onActivated = var24,
+					onActivated = var23,
 					Size = UDim2.fromOffset(var7.Size.Size_1000, var7.Size.Size_1000),
 					AnchorPoint = Vector2.new(1, 0),
 					Position = UDim2.new(1, -var7.Size.Size_1000, 0, size300)

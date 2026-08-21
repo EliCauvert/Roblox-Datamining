@@ -7,7 +7,7 @@ local platformAccountName = getAppFeaturePolicies().getPlatformAccountName()
 local t = {
 	[loginErrorCodeSSOModule.AuthError] = "Authentication.Login.Response.SomethingWentWrong",
 	[loginErrorCodeSSOModule.ExternalIdentityAlreadyConnected] = {
-		"Authentication.Login.Response.PlatformAlreadyLinked",
+		"Authentication.Login.Response.AlreadyLinked",
 		platform = platformAccountName
 	},
 	[loginErrorCodeSSOModule.IncorrectCValueOrPassword] = "Authentication.Login.Response.IncorrectUsernamePassword",
@@ -24,7 +24,7 @@ local t = {
 		platform = platformAccountName
 	},
 	[loginErrorCodeSSOModule.ExternalIdentityAlreadyConnectedXbox] = {
-		"Authentication.Login.Response.PlatformAlreadyLinked",
+		"Authentication.Login.Response.AlreadyLinked",
 		platform = platformAccountName
 	}
 }

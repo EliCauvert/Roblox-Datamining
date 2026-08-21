@@ -33,7 +33,6 @@ function scrollingView.render(p0) --[[ line: 15 ]]
 			Size = UDim2.fromScale(1, 1),
 			isChannelBarVisible = p0.props.isChannelBarVisible,
 			scrollResetKey = p0.props.scrollResetKey,
-			scrollToTopOnReset = if fFlagExpChatEnableFriendsTab then p0.props.scrollToTopOnReset else nil,
 			onCanvasPositionChanged = if fFlagExpChatEnableFriendsTab then p0.props.onCanvasPositionChanged else nil,
 			contentTopPadding = if fFlagExpChatEnableFriendsTab then p0.props.contentTopPadding else nil
 		}, var6))

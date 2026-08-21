@@ -21,46 +21,50 @@ end
 return {
 	ITEM_ID = "creator-credit-ai-usage",
 	useCreatorCreditMenuItem = function(p1) --[[ line: 44 ]]
-		-- upvalues: reactModule (ref), getCreatorCreditStore (ref), signalsReactModule (ref), fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceCreatorCreditUsageBadgeModule (ref), numberLocalization (ref), localizationService (ref), iconName (ref), formatNumber (ref)
-		local var9 = if p1 ~= nil then nil else p1.onOpenCreatorCreditPage
-		local var10 = reactModule.useCallback(function() --[[ line: 47 ]]
-			-- upvalues: var9 (ref)
-			if var9 then
-				var9()
+		-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), getCreatorCreditStore (ref), signalsReactModule (ref), fFlagBuildExperienceCreatorCreditUsageBadgeModule (ref), iconName (ref), numberLocalization (ref), localizationService (ref), formatNumber (ref)
+		local var9 = if fFlagBuildLocalization then (if fFlagBuildLocalization then useLocalization({
+			menuItem = localizationStringsModule.CREATOR_CREDIT_MENU_ITEM
+		}) else nil).menuItem else localizationStringsModule.CREATOR_CREDIT_MENU_ITEM
+		local var10 = if p1 ~= nil then nil else p1.onOpenCreatorCreditPage
+		local var11 = reactModule.useCallback(function() --[[ line: 55 ]]
+			-- upvalues: var10 (ref)
+			if var10 then
+				var10()
 			end
-		end, { var9 })
-		local var11 = getCreatorCreditStore(false)
-		local var12 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 58 ]]
-			-- upvalues: var11 (ref)
-			return var11.getQuotaSummary()
-		end, { var11 }).data)
-		local var13 = if fFlagBuildLocalization then useLocalization({
-			menuItem = localizationStringsModule.CREATOR_CREDIT_MENU_ITEM,
-			usage = if var12 == nil then nil elseif fFlagBuildExperienceCreatorCreditUsageBadgeModule and var12.freeTrialPctUsed >= 100 and var12.limitSettings.additionalUsageEnabled then if var12.limitSettings.dailyLimitSet then {
-				localizationStringsModule.CREATOR_CREDIT_ROBUX_USAGE,
-				USED = numberLocalization.localize(string.format("%.0f", math.floor(var12.robuxSpentToday)), localizationService.RobloxLocaleId),
-				LIMIT = numberLocalization.localize(string.format("%.0f", math.floor(var12.limitSettings.dailyLimit)), localizationService.RobloxLocaleId)
-			} else {
-				localizationStringsModule.CREATOR_CREDIT_USAGE_USED,
-				USED = numberLocalization.localize(string.format("%.0f", math.floor(var12.robuxSpentToday)), localizationService.RobloxLocaleId)
-			} else {
-				localizationStringsModule.CREATOR_CREDIT_PERCENT_USED,
-				PERCENT = math.clamp(math.floor(var12.freeTrialPctUsed + 0.5), 0, 100)
-			}
-		}) else nil
-		local var14 = if fFlagBuildLocalization then var13.menuItem else localizationStringsModule.CREATOR_CREDIT_MENU_ITEM
+		end, { var10 })
+		local var12 = getCreatorCreditStore(false)
+		local var13 = signalsReactModule.useSignalState(reactModule.useMemo(function() --[[ line: 66 ]]
+			-- upvalues: var12 (ref)
+			return var12.getQuotaSummary()
+		end, { var12 }).data)
 		
 		return {
-			item = reactModule.useMemo(function() --[[ line: 90 ]]
-				-- upvalues: var12 (ref), fFlagBuildExperienceCreatorCreditUsageBadgeModule (copy), iconName (copy), fFlagBuildLocalization (copy), var13 (ref), localizationStringsModule (copy), numberLocalization (copy), localizationService (copy), formatNumber (copy), var14 (ref)
--- FATAL: Failed to generate AST for `unnamed` function:
-runtime : [KeyError] :11990: 15
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
-			end, { var12, var13, var14 }),
-			activate = var10
+			item = reactModule.useMemo(function() --[[ line: 71 ]]
+				-- upvalues: var13 (ref), fFlagBuildExperienceCreatorCreditUsageBadgeModule (copy), iconName (copy), localizationStringsModule (copy), numberLocalization (copy), localizationService (copy), formatNumber (copy), var9 (ref)
+				local t = nil
+				
+				if var13 ~= nil then
+					if fFlagBuildExperienceCreatorCreditUsageBadgeModule then
+						local var15 = var13.freeTrialPctUsed >= 100 and var13.limitSettings.additionalUsageEnabled
+						t = {
+							type = "Badge",
+							icon = if var15 then iconName.Robux else nil,
+							text = if var15 then if var13.limitSettings.dailyLimitSet then localizationStringsModule.formatCreatorCreditRobuxUsage(numberLocalization.localize(string.format("%.0f", math.floor(var13.robuxSpentToday)), localizationService.RobloxLocaleId), formatNumber(var13.limitSettings.dailyLimit)) else localizationStringsModule.formatCreatorCreditRobuxUsageUnlimited(formatNumber(var13.robuxSpentToday)) else localizationStringsModule.formatCreatorCreditPercentUsed(var13.freeTrialPctUsed)
+						}
+					else
+						t = {
+							type = "Hint",
+							text = localizationStringsModule.formatCreatorCreditPercentUsed(var13.freeTrialPctUsed)
+						}
+					end
+				end
+				return {
+					id = "creator-credit-ai-usage",
+					text = var9,
+					trailing = t
+				}
+			end, { var13, var9 }),
+			activate = var11
 		}
 	end
 }

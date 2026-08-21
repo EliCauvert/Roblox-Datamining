@@ -33,7 +33,7 @@ local function getFriendLabelAndIcon(p2) --[[ line: 55 ]]
 	-- upvalues: robloxTranslatorModule (ref), var11 (ref), var10 (ref)
 	local ok, status
 	if p2 == Enum.FriendStatus.Friend then
-		local var18 = "InGame.PlayerDropDown.Unfriend"
+		local var18 = "InGame.PlayerDropDown.UnFriend"
 		ok, status = pcall(function() --[[ line: 46 ]]
 			-- upvalues: robloxTranslatorModule (copy), var18 (ref)
 			return robloxTranslatorModule:FormatByKey(var18)
@@ -99,7 +99,7 @@ local function assembleMenuItems(p5) --[[ line: 99 ]]
 		t_1.requiresConfirm = if var25 then true else nil
 		
 		if var25 then
-			local var28 = "InGame.PlayerDropDown.ConfirmUnfriend"
+			local var28 = "InGame.PlayerDropDown.ConfirmUnFriend"
 			ok, status = pcall(function() --[[ line: 46 ]]
 				-- upvalues: robloxTranslatorModule (copy), var28 (ref)
 				return robloxTranslatorModule:FormatByKey(var28)

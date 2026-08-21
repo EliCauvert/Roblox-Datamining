@@ -1,17 +1,11 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
+﻿local parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
 local reactModule = require(parent.React)
 local interactiveAlert = require(parent.UIBlox).App.Dialog.Alert.InteractiveAlert
 local useScreenSize = require(parent.EconomyCommonCoreScriptHooks).useScreenSize
-local useCloseOnEscapeEffectModule = require(bulkPurchaseApp.Hooks.useCloseOnEscapeEffect)
-local fFlagBulkPurchaseCloseOnEscapeModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseCloseOnEscape)
 local scrimModule = require(script.Parent.Scrim)
 
-return function(p0) --[[ line: 22 | named "AlertPrompt" ]]
-	-- upvalues: fFlagBulkPurchaseCloseOnEscapeModule (ref), useCloseOnEscapeEffectModule (ref), useScreenSize (ref), reactModule (ref), scrimModule (ref), interactiveAlert (ref)
-	if fFlagBulkPurchaseCloseOnEscapeModule then
-		useCloseOnEscapeEffectModule("BulkPurchaseCloseAlertPrompt", p0.onDismiss)
-	end
+return function(p0) --[[ line: 18 | named "AlertPrompt" ]]
+	-- upvalues: useScreenSize (ref), reactModule (ref), scrimModule (ref), interactiveAlert (ref)
 	return reactModule.createElement(scrimModule, {}, reactModule.createElement(interactiveAlert, {
 		title = p0.title,
 		bodyText = p0.bodyText,

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SocialEnableProfileInspectAndBuyAnalyticsV3", false)
+﻿return game:DefineFastFlag("SocialEnableProfileInspectAndBuyAnalyticsV2", false)

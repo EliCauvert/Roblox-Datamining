@@ -2,7 +2,6 @@
 local parent = profilePlatform.Parent
 local fFlagAddIEMProfilePage = require(parent.SharedFlags).FFlagAddIEMProfilePage
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagEnableProfileCompletion = require(parent.SharedFlags).FFlagEnableProfileCompletion
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
@@ -77,7 +76,6 @@ return {
 		ViewPlatformProfile = "ViewPlatformProfile",
 		ViewAbout = "ViewAbout",
 		CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then "CurrencyTransfer" else "",
-		TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then "TradeItems" else "",
 		ContextualOverflow = if require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor) then "ContextualOverflow" else "",
 		UnlockChat = "UnlockChat"
 	},

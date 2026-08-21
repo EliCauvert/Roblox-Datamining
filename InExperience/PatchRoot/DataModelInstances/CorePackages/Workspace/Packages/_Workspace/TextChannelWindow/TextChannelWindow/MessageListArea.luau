@@ -7,7 +7,7 @@ local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindow
 local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local messageLayoutContainer = chatUIPrimitivesModule.MessageLayoutContainer
 
-return function(p0) --[[ line: 28 | named "MessageListArea" ]]
+return function(p0) --[[ line: 29 | named "MessageListArea" ]]
 	-- upvalues: foundationModule (ref), useInExperienceLocalization (ref), reactModule (ref), textChannelWindowAnalyticsModule (ref), messageLayoutContainer (ref)
 	local var4 = foundationModule.Hooks.useTokens()
 	local var5 = useInExperienceLocalization()
@@ -21,15 +21,14 @@ return function(p0) --[[ line: 28 | named "MessageListArea" ]]
 	}) elseif p0.channelState == "member" then reactModule.createElement(messageLayoutContainer, {
 		layoutStyle = "textLine",
 		messagesSignal = p0.messagesSignal,
-		fontFace = p0.fontFace,
 		Size = UDim2.fromScale(1, 1),
 		contentPadding = {
 			top = UDim.new(0, var4.Size.Size_100),
 			bottom = UDim.new(0, var4.Size.Size_100),
 			left = UDim.new(0, var4.Size.Size_200),
-			right = UDim.new(0, var4.Size.Size_1400)
+			right = UDim.new(0, 56)
 		},
-		onScroll = reactModule.useMemo(function() --[[ line: 32 ]]
+		onScroll = reactModule.useMemo(function() --[[ line: 33 ]]
 			-- upvalues: textChannelWindowAnalyticsModule (copy), p0 (ref)
 			return textChannelWindowAnalyticsModule.createOnScrollCallback(p0.windowName)
 		end, { p0.windowName })

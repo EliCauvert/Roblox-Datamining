@@ -1,5 +1,4 @@
-﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
-local parent = flyoutSidePanel.Parent
+﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
 local foundationModule = require(parent.Foundation)
 local builderIconsModule = require(parent.BuilderIcons)
 local urlBuilder = require(parent.UrlBuilder).UrlBuilder
@@ -18,10 +17,8 @@ local fFlagArgusTabImpliesFlyout = sharedFlagsModule.FFlagArgusTabImpliesFlyout
 local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
 local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
-local fFlagEnableLuaCommunityList = sharedFlagsModule.FFlagEnableLuaCommunityList
-local fFlagFlyoutResolveItemContextOnActivationModule = require(flyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
-local communityListRouting = require(parent.Groups).CommunityListRouting
+local getFFlagEnableCommunityListExperimentation = sharedFlagsModule.GetFFlagEnableCommunityListExperimentation
+local communityListExperimentation = require(parent.Groups).Experiments.CommunityListExperimentation
 local t = {
 	Favorites = "Favorites",
 	ContinuePlaying = "ContinuePlaying",
@@ -38,7 +35,6 @@ local t = {
 	Premium = "Premium",
 	GiftCards = "GiftCards",
 	Redeem = "Redeem",
-	Trades = "Trades",
 	Events = "Events",
 	RobuxPill = "RobuxPill",
 	QuickSignin = "QuickSignin",
@@ -72,12 +68,10 @@ local t_2 = {
 	[t.Premium] = "CommonUI.Features.Label.Premium",
 	[t.GiftCards] = "CommonUI.Features.Label.GiftCards",
 	[t.Redeem] = "CommonUI.Features.Label.Redeem",
-	[t.Trades] = "CommonUI.Features.Label.Trades",
 	[t.Events] = "CommonUI.Features.Label.TheHunt",
 	[t.Terms] = "CommonUI.Features.Label.Terms",
 	[t.Privacy] = "CommonUI.Features.Label.Privacy"
 }
-local fFlagFlyoutResolveItemContextOnActivationModule_1 = fFlagEnableLuaCommunityList and fFlagFlyoutResolveItemContextOnActivationModule
 local t_3 = {
 	[t.Favorites] = {
 		itemType = t.Favorites,
@@ -96,7 +90,7 @@ local t_3 = {
 		textKey = t_2[t.Inventory],
 		icon = builderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p0) --[[ line: 135 ]]
+			urlGenerator = function(p0) --[[ line: 120 ]]
 				-- upvalues: urlBuilder (ref)
 				return p0 and urlBuilder.user.inventory({ userId = p0 }) or nil
 			end
@@ -114,11 +108,7 @@ local t_3 = {
 		itemType = t.Communities,
 		textKey = t_2[t.Communities],
 		icon = builderIconsModule.Icon.ThreePeople,
-		context = if fFlagFlyoutResolveItemContextOnActivationModule_1 then nil else { url = urlBuilder.static.groups() },
-		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then function() --[[ line: 105 | named "getCommunitiesContext" ]]
-			-- upvalues: communityListRouting (ref), appPage (ref), urlBuilder (ref)
-			return if communityListRouting.getShouldUseLuaCommunityList() then { appPage = appPage.Groups } else { url = urlBuilder.static.groups() }
-		end else nil
+		context = if getFFlagEnableCommunityListExperimentation() and communityListExperimentation.getCommunityListEnabled() then { appPage = appPage.Groups } else { url = urlBuilder.static.groups() }
 	},
 	[t.Messages] = {
 		itemType = t.Messages,
@@ -161,7 +151,7 @@ local t_3 = {
 		textKey = t_2[t.CreateGames],
 		icon = builderIconsModule.Icon.Studio,
 		context = {
-			urlGenerator = function(p1) --[[ line: 206 ]]
+			urlGenerator = function(p1) --[[ line: 193 ]]
 				return p1({ utm_content = "side_panel" })
 			end
 		}
@@ -177,7 +167,7 @@ local t_3 = {
 		textKey = t_2[t.GiftCards],
 		icon = builderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p2) --[[ line: 224 ]]
+			urlGenerator = function(p2) --[[ line: 211 ]]
 				-- upvalues: urlBuilder (ref)
 				return urlBuilder.static.giftCards(p2)
 			end
@@ -189,12 +179,6 @@ local t_3 = {
 		icon = builderIconsModule.Icon.Wallet,
 		context = { url = urlBuilder.static.redeem() }
 	},
-	[t.Trades] = if fFlagFlyoutSidePanelTradesEntryModule then {
-		itemType = t.Trades,
-		textKey = t_2[t.Trades],
-		icon = builderIconsModule.Icon.HandTwoArrowsHorizontal,
-		context = { url = urlBuilder.static.trades() }
-	} else nil,
 	[t.Events] = {
 		itemType = t.Events,
 		textKey = t_2[t.Events],
@@ -207,14 +191,14 @@ local t_3 = {
 		itemType = t.Terms,
 		textKey = t_2[t.Terms],
 		context = {
-			urlGenerator = function(_, p3) --[[ line: 261 ]]
+			urlGenerator = function(_, p3) --[[ line: 238 ]]
 				-- upvalues: urlBuilder (ref)
-				local var14 = if p3 then p3.getTermsOfUseLink() else nil
+				local var10 = if p3 then p3.getTermsOfUseLink() else nil
 				
-				if var14 == nil or var14 == "" then
-					var14 = urlBuilder.static.about.terms({ useGameQQUrls = true })
+				if var10 == nil or var10 == "" then
+					var10 = urlBuilder.static.about.terms({ useGameQQUrls = true })
 				end
-				return var14
+				return var10
 			end
 		}
 	},
@@ -222,14 +206,14 @@ local t_3 = {
 		itemType = t.Privacy,
 		textKey = t_2[t.Privacy],
 		context = {
-			urlGenerator = function(_, p4) --[[ line: 277 ]]
+			urlGenerator = function(_, p4) --[[ line: 254 ]]
 				-- upvalues: urlBuilder (ref)
-				local var15 = if p4 then p4.getPrivacyPolicyLink() else nil
+				local var11 = if p4 then p4.getPrivacyPolicyLink() else nil
 				
-				if var15 == nil or var15 == "" then
-					var15 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
+				if var11 == nil or var11 == "" then
+					var11 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
 				end
-				return var15
+				return var11
 			end
 		}
 	}

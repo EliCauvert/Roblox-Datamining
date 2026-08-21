@@ -19,7 +19,7 @@ local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSide
 local navigationMenuModule = require(moments.Components.NavigationMenu)
 local constantsModule = require(moments.Constants)
 
-local function renderAction(p0, p1, p2, p3) --[[ line: 61 ]]
+local function renderAction(p0, p1, p2, p3) --[[ line: 60 ]]
 	-- upvalues: reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref)
 	return reactModule.createElement(iconButton, {
 		isCircular = true,
@@ -33,28 +33,21 @@ local function renderAction(p0, p1, p2, p3) --[[ line: 61 ]]
 	})
 end
 
-return function(p4) --[[ line: 74 | named "MomentsHeaderView" ]]
-	-- upvalues: renderAction (ref), chevronLargeLeft (ref), plusLarge (ref), flyoutSidePanelIXP (ref), reactModule (ref), flyoutLeftHeader (ref), view (ref), text (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref), coachmark (ref), navigationMenuModule (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
+return function(p4) --[[ line: 73 | named "MomentsHeaderView" ]]
+	-- upvalues: renderAction (ref), chevronLargeLeft (ref), flyoutSidePanelIXP (ref), reactModule (ref), flyoutLeftHeader (ref), view (ref), text (ref), plusLarge (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref), coachmark (ref), navigationMenuModule (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
 	local var8 = nil
 	local var9 = nil
 	
 	if p4.variant == "back" then
-		var8 = function() --[[ line: 79 ]]
+		var8 = function() --[[ line: 78 ]]
 			-- upvalues: renderAction (copy), chevronLargeLeft (copy), p4 (ref)
 			return renderAction("back", chevronLargeLeft, p4.onBack, 1)
-		end
-		
-		if p4.showInteractiveButtons and p4.showCreateButton then
-			var9 = function() --[[ line: 83 ]]
-				-- upvalues: renderAction (copy), plusLarge (copy), p4 (ref)
-				return renderAction("create", plusLarge, p4.onCreateMomentButtonPressed, 1)
-			end
 		end
 	elseif p4.variant == "base" then
 		local var10 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 		local var10_1 = p4.showInteractiveButtons and (p4.showHamburger and var10)
 		
-		var8 = function() --[[ line: 93 ]]
+		var8 = function() --[[ line: 87 ]]
 			-- upvalues: var10_1 (ref), reactModule (copy), flyoutLeftHeader (copy), p4 (ref), var10 (ref), flyoutSidePanelIXP (copy), view (copy), text (copy)
 			return if var10_1 then reactModule.createElement(flyoutLeftHeader, {
 				isRobloxLogoEnabled = false,
@@ -91,7 +84,7 @@ return function(p4) --[[ line: 74 | named "MomentsHeaderView" ]]
 				align = foundationModule.Enums.PopoverAlign.End
 			}, var12) else reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy" }, { Action = var12 })
 			
-			var9 = function() --[[ line: 145 ]]
+			var9 = function() --[[ line: 139 ]]
 				-- upvalues: reactModule (copy), view (copy), var13 (write), navigationMenuModule (copy), buttonVariant (copy), p4 (ref)
 				return reactModule.createElement(view, { tag = "row align-y-center gap-xsmall auto-xy" }, {
 					CreateMomentButton = var13,
@@ -106,7 +99,7 @@ return function(p4) --[[ line: 74 | named "MomentsHeaderView" ]]
 			end
 		end
 	elseif p4.variant == "close" then
-		var9 = function() --[[ line: 161 ]]
+		var9 = function() --[[ line: 155 ]]
 			-- upvalues: renderAction (copy), p4 (ref)
 			return renderAction("close", "icons/navigation/close_small", p4.onClose, 1)
 		end

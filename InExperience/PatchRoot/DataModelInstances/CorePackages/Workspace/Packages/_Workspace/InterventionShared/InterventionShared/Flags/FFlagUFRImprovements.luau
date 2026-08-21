@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("UFRImprovements3", false)
+﻿return game:DefineFastFlag("UFRImprovements2", false)

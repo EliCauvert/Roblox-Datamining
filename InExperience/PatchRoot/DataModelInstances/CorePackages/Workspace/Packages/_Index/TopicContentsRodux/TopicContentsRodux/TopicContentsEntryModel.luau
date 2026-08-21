@@ -41,14 +41,13 @@ local t = {
 		t.primaryWideVideoAssetId = nil
 		t.primaryImageAssetId = nil
 		t.primaryVideoAssetId = nil
-		t.attributionThumbnailAssetId = nil
 		t.clickoutUrl = nil
 		
 		return t
 	end
 }
 
-function t.fromGamesApiData(p1) --[[ line: 57 ]]
+function t.fromGamesApiData(p1) --[[ line: 56 ]]
 	-- upvalues: resultModule (ref), t (ref), omniRecommendationsContentType (ref)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
 		return resultModule.error("TopicContentsEntryModel.fromGamesApiData expects universeId to be a number or a string")
@@ -79,7 +78,7 @@ function t.fromGamesApiData(p1) --[[ line: 57 ]]
 end
 
 if fFlagSearchOmniAutocompletePage then
-	function t.fromOmniAutocompleteApi(p2) --[[ line: 90 ]]
+	function t.fromOmniAutocompleteApi(p2) --[[ line: 89 ]]
 		-- upvalues: resultModule (ref), t (ref), omniRecommendationsContentType (ref)
 		if type(p2.universeId) ~= "number" and type(p2.universeId) ~= "string" then
 			return resultModule.error("TopicContentsEntryModel.fromOmniAutocomplete expects universeId to be a number or a string")
@@ -100,7 +99,7 @@ if fFlagSearchOmniAutocompletePage then
 		return resultModule.success(var4)
 	end
 end
-function t.fromExploreApiData(p3) --[[ line: 117 ]]
+function t.fromExploreApiData(p3) --[[ line: 116 ]]
 	-- upvalues: resultModule (ref), t (ref), omniRecommendationsContentType (ref)
 	if type(p3.universeId) ~= "number" and type(p3.universeId) ~= "string" then
 		return resultModule.error("TopicContentsEntryModel.fromExploreApiData expects universeId to be a number or a string")
@@ -125,7 +124,7 @@ function t.fromExploreApiData(p3) --[[ line: 117 ]]
 end
 
 if fFlagEnableTopSongsSort then
-	function t.songFromExploreApiData(p4) --[[ line: 143 ]]
+	function t.songFromExploreApiData(p4) --[[ line: 142 ]]
 		-- upvalues: resultModule (ref), t (ref), omniRecommendationsContentType (ref)
 		if type(p4.assetId) == "number" or type(p4.assetId) == "string" then
 			local var6 = t.new()
@@ -138,7 +137,7 @@ if fFlagEnableTopSongsSort then
 		return resultModule.error("TopicContentsEntryModel.songFromExploreApiData expects assetId to be a number or a string")
 	end
 end
-function t.fromOmniRecommendations(p5) --[[ line: 158 ]]
+function t.fromOmniRecommendations(p5) --[[ line: 157 ]]
 	-- upvalues: t (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), resultModule (ref)
 	local var7 = t.new()
 	var7.contentType = p5.contentType
@@ -171,7 +170,6 @@ function t.fromOmniRecommendations(p5) --[[ line: 158 ]]
 		var7.primaryWideVideoAssetId = p5.contentMetadata.PrimaryWideVideoAssetId
 		var7.primaryImageAssetId = if fFlagLuaAppEnableHomepageOneByTwoTile then p5.contentMetadata.PrimaryImageAssetId else nil
 		var7.primaryVideoAssetId = if fFlagLuaAppEnableHomepageOneByTwoTile then p5.contentMetadata.PrimaryVideoAssetId else nil
-		var7.attributionThumbnailAssetId = if fFlagLuaAppEnableHomepageOneByTwoTile then p5.contentMetadata.AttributionThumbnailAssetId else nil
 		var7.clickoutUrl = if fFlagLuaAppEnableHomepageOneByTwoTile then p5.contentMetadata.ClickoutUrl else nil
 	else
 		var7.adId = nil

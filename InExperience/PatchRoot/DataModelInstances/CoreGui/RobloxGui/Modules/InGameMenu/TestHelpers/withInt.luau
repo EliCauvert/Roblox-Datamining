@@ -2,8 +2,5 @@
 	local var0 = game:SetFastIntForTesting(p0, p1)
 	local ok, status = pcall(p2)
 	game:SetFastIntForTesting(p0, var0)
-	
-	if not ok then
-		error(status)
-	end
+	assert(ok, status)
 end

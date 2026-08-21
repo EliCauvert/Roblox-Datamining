@@ -8,7 +8,6 @@ return {
 	CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS = sharedFlagsModule.FFlagSduiHydrationClientHints,
 	CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton,
 	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = sharedFlagsModule.FFlagSduiCommunitySectionSupport,
-	CAPABILITY_SUPPORTS_EDP_BUILD_TAG = sharedFlagsModule.FFlagLuaAppEdpShowBuildTag,
 	CAPABILITY_SUPPORTS_OPEN_EXPERIENCE_STORE_SEE_ALL_WITH_WEBVIEW_FALLBACK_ACTION = sharedFlagsModule.FFlagSduiCapabilityDevStoreSeeAllWebviewFallback,
 	CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION = (function() --[[ line: 17 | named "isPinShortcutAvailable" ]]
 		-- upvalues: sharedFlagsModule (ref)

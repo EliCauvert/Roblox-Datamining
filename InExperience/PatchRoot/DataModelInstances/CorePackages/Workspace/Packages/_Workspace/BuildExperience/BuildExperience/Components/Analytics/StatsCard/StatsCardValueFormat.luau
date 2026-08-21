@@ -1,1 +1,0 @@
-﻿return { Abbreviated = "Abbreviated", Regular = "Regular" }

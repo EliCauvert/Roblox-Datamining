@@ -50,7 +50,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 	local var22, var23 = createSignal(0)
 	local var24, var25 = createSignal(false)
 	local var26, var27 = createSignal("")
-	local var28, var29 = createSignal(0)
+	local var28, var29 = createSignal("")
 	local var30, var31 = createSignal({})
 	local var32 = nil
 	local var33 = nil
@@ -111,7 +111,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 	local function failGeneration(p1) --[[ line: 154 ]]
 		-- upvalues: var27 (ref), var29 (ref), var25 (ref), var21 (ref), var31 (ref), var19 (ref), var17 (ref)
 		var27("")
-		var29(0)
+		var29("")
 		var25(false)
 		var21(0)
 		var31({})
@@ -176,12 +176,12 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 			var23(0)
 			var31({})
 			var27("")
-			var29(0)
+			var29("")
 			task.spawn(function() --[[ line: 195 ]]
 				-- upvalues: var37 (copy), var40 (ref), p2 (ref), p3 (ref), var34 (copy), var42 (ref), failGeneration (copy), classifyTTSErrorModule (copy), getFIntMomentsTTSWaveformSamplesPerSecondModule (copy), getFIntMomentsTTSWaveformMinSamplesModule (copy), getFIntMomentsTTSWaveformMaxSamplesModule (copy), var27 (copy), var29 (copy), var21 (copy), var25 (copy), var23 (copy), var31 (copy), normalizeWaveformModule (copy), var17 (copy)
 				if var37 then return end
 				var40.Text = p2
-				var40.VoiceId = tostring(p3)
+				var40.VoiceId = p3
 				local ok, status = pcall(function() --[[ line: 203 ]]
 					-- upvalues: var40 (copy)
 					return var40:LoadPlatformAsync()
@@ -284,7 +284,7 @@ return function(p0) --[[ line: 91 | named "createTTSAudioManager" ]]
 			var21(0)
 			var25(false)
 			var27("")
-			var29(0)
+			var29("")
 			var31({})
 		end,
 		destroy = function() --[[ line: 322 ]]

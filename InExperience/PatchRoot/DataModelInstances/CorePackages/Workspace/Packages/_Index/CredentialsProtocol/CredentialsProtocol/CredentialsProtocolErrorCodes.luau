@@ -10,10 +10,5 @@
 		[6] = "NO_CREDENTIALS_FOUND",
 		[7] = "CREDENTIAL_UNSUPPORTED",
 		[11] = "INVALID_STATE_ERROR"
-	},
-	RegisterCredentialsErrorCodes = {
-		PASSWORD_SAVE_FAILED = "PasswordSaveFailed",
-		PASSWORD_AUTOFILL_DISABLED = "PasswordAutoFillDisabled",
-		INVALID_PARAMETERS = "InvalidParameters"
 	}
 }

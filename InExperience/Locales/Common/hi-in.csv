@@ -77,7 +77,6 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,फ़ोन नंबर
 Authentication.Login.Response.IncorrectUsernamePassword,यूज़रनेम या पासवर्ड गलत है.
 Authentication.Login.Response.InvalidPasskeyCredential,"इस पास-की से साइन-इन नहीं किया जा सका. ऐक्सेस फिर से पाने के लिए, ""पासवर्ड या यूज़रनेम याद नहीं है"" पर जाएँ."
 Authentication.Login.Response.MoreThanOneUsername,आपका ईमेल एक से ज़्यादा यूज़रनेम से जुड़ा हुआ है. अपने यूज़रनेम से लॉग इन करें.
-Authentication.Login.Response.PlatformAlreadyLinked,यह {platform} अकाउंट पहले से ही किसी दूसरे Roblox अकाउंट से जुड़ा है. कृपया उस Roblox अकाउंट से लॉग इन करें.
 Authentication.Login.Response.RelinkingFreeze,"इस Roblox अकाउंट को पिछले 90 दिनों में, {platform} पर किसी दूसरे अकाउंट से लिंक किया गया है. किसी दूसरे Roblox अकाउंट से लॉग इन करने की कोशिश करें."
 Authentication.Login.Response.Require2FA,कंसोल पर 2-स्टेप वेरिफ़िकेशन सपोर्टेड नहीं है. सुरक्षित रूप से लॉग इन करने के लिए दाईं ओर दिए गए निर्देश फ़ॉलो करें.
 Authentication.Login.Response.Require2FAGeneric,डिवाइस पर अतिरिक्त ज़रूरी वेरिफ़िकेशन नहीं किया जा सकता. सुरक्षित रूप से लॉग-इन करने के लिए दाईं ओर दिए गए निर्देशों का पालन करें.
@@ -244,7 +243,6 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,"{partName} मेश �
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} मेश के {axis} ऐक्सिस पर '{currentSize}' स्टड्स का साइज़, किसी अलग हिस्से के लिए मंज़ूर किए गए न्यूनतम साइज़ '{minSize}' स्टड्स से छोटा है. मेश का साइज़ बढ़ाएँ."
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,अटैचमेंट {attName} को {partName} डिसेंडेंट के अंदर सिर्फ़ एक बार मौजूद होना चाहिए.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (या इसके डिसेंडेंट) में ऐट्रिब्यूट हैं. आपको इनसे ऐट्रिब्यूट हटाने होंगे: {InstanceNameList}
-Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' में अमान्य प्रॉपर्टी हैं : {ProblematicProperties}. दिखाई गई बाइट लिमिट पार हो गई है (0 की लिमिट का मतलब है कि प्रॉपर्टी खाली होनी चाहिए); किसी भी अन्य प्रॉपर्टी में NaN/Inf वैल्यू हैं या वह अपनी डिफ़ॉल्ट साइज़ लिमिट से ज़्यादा है.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Roblox पर कोई ऐसेट अपलोड करने के लिए, आपको ठीक 1 इंस्टैंस और उससे जुड़ा अपलोड टाइप चुनना होगा."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,{ProblematicDescendantPath} इंस्टैंस में टैग नहीं होने चाहिए.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,दूसरे टेस्ट की एरर स्ट्रिंग का इस्तेमाल हब-फ़र्स्ट अनुवाद सिंक वर्कफ़्लो को एंड-टू-एंड वेरिफ़ाई करने के लिए किया जाता है.
@@ -372,7 +370,6 @@ CommonUI.Features.Label.Terms,शर्तें
 CommonUI.Features.Label.TermsOfUse,उपयोग की शर्तें
 CommonUI.Features.Label.Thanks,धन्यवाद
 CommonUI.Features.Label.TheHunt,Roblox इवेंट्स
-CommonUI.Features.Label.Trades,ट्रेड
 CommonUI.Features.Label.Unchecked,अनचेक किया गया
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
@@ -1097,6 +1094,9 @@ CoreScripts.TopBar.GameNamePlaceHolder,
 CoreScripts.TopBar.HideChat,चैट छिपाएँ
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,वॉइस चैट चालू करें
+CoreScripts.TopBar.Label.InappropriateAudio,अनुचित ऑडियो
+CoreScripts.TopBar.Label.Report,
+CoreScripts.TopBar.Label.ReportAudio,ऑडियो रिपोर्ट करें
 CoreScripts.TopBar.Label.UILessHintDescription,Roblox मेन्यू खोलने के लिए ESC दबाएँ
 CoreScripts.TopBar.Label.UILessHintTitle,Roblox मेन्यू को ट्रिगर करने का नया तरीका
 CoreScripts.TopBar.Leaderboard,
@@ -1278,26 +1278,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,मौजूदा लुक अ�
 Feature.Avatar.Action.UpdateMakeupLook,लुक अपडेट करें
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,स्टाइल एक्सप्लोर करें
-Feature.Avatar.BackgroundGeneration.Action.Cancel,
-Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.Okay,
-Feature.Avatar.BackgroundGeneration.Action.Publish,पब्लिश करें
-Feature.Avatar.BackgroundGeneration.Action.View,देखें
-Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,आपका क्रिएशन इस्तेमाल के लिए तैयार है.
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"यह बैकग्राउंड AI से जनरेट किया गया था. इसे पब्लिश करने का मतलब है कि आपने यह कन्फ़र्म किया है कि यह Roblox कम्यूनिटी स्टैंडर्ड के मुताबिक है और इसमें ऐसा कॉन्टेंट इस्तेमाल नहीं किया गया है, जिसके अधिकार आपके पास नहीं हैं. आपकी इन्वेंट्री में दिखने से पहले इसका रिव्यू किया जाएगा और पब्लिश किए गए आइटम एडिट नहीं किए जा सकते."
-Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"आइटम, कम्यूनिटी स्टैंडर्ड्स के मुताबिक नहीं था"
 Feature.Avatar.BackgroundGeneration.Error.Moderation,वह प्रॉम्प्ट हमारी गाइडलाइन के मुताबिक नहीं है. कोई और प्रॉम्प्ट आज़माएँ.
-Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"यह बैकग्राउंड Roblox कम्यूनिटी स्टैंडर्ड्स के मुताबिक नहीं है, इसलिए इसे आपकी इन्वेंट्री में नहीं जोड़ा गया. नया बैकग्राउंड जेनरेट करने की कोशिश करें."
 Feature.Avatar.BackgroundGeneration.Error.System,आपका बैकग्राउंड जेनरेट नहीं हो सका. फिर से कोशिश करें.
-Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
-Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,अपने बैकग्राउंड के बारे में बताएँ…
 Feature.Avatar.BackgroundGeneration.Status.Generating,आपका बैकग्राउंड जेनरेट हो रहा है…
 Feature.Avatar.BackgroundGeneration.Status.Preparing,आपका बैकग्राउंड तैयार हो रहा है…
 Feature.Avatar.BackgroundGeneration.Title,बैकग्राउंड क्रिएट करें
-Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
-Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,इन्वेंट्री में पब्लिश करें
 Feature.Avatar.Backgrounds.Title,बैकग्राउंड
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,इस बॉडी स्टाइल के लिए एडजस्टमेंट उपलब्ध नहीं है.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,डिफ़ॉल्ट रूप से ओरिजनल बॉडी कलर
@@ -1791,9 +1777,7 @@ Feature.Build.Action.Buy,
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,टेक्स्ट कॉपी करें
-Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
-Feature.Build.Action.DontAskAgain,दोबारा न पूछें
 Feature.Build.Action.HideAutosaved,ऑटो-सेव किए गए छिपाएँ
 Feature.Build.Action.ManageLimit,लिमिट मैनेज करें
 Feature.Build.Action.Next,
@@ -1803,7 +1787,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,सेटिंग्स खोलें
 Feature.Build.Action.Playtest,प्लेटेस्ट
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,
+Feature.Build.Action.Publish,पब्लिश करें
 Feature.Build.Action.PublishLatest,सबसे नया पब्लिश करें
 Feature.Build.Action.Restore,रीस्टोर करें
 Feature.Build.Action.Revert,
@@ -1815,25 +1799,21 @@ Feature.Build.Action.ShareLink,लिंक शेयर करें
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,रेटिंग अपडेट करें
 Feature.Build.Action.UpdateWithChanges,बदलावों के साथ अपडेट करें
-Feature.Build.Action.View,
+Feature.Build.Action.View,देखें
 Feature.Build.Action.ViewUsage,इस्तेमाल देखें
 Feature.Build.Content.NewGame,नया गेम
 Feature.Build.Description.ArchiveRemoval,"अगर इस गेम को आर्काइव किया जाता है, तो इसे 'बिल्ड' से हटा दिया जाएगा. आपके पास अभी भी Creator Hub या Roblox Studio से इसे ऐक्सेस और रीस्टोर करने की सुविधा रहेगी."
 Feature.Build.Description.AutoBuyUsage,"क्रिएट करते समय, बिल्ड का अतिरिक्त इस्तेमाल अपने-आप खरीदने के लिए अपने Robux का इस्तेमाल करें. आप जब चाहें, रोज़ाना खर्च की लिमिट सेट की जा सकती है."
-Feature.Build.Description.BoostAudienceForPlays,"ज़्यादा प्ले पाने के लिए, अपनी ऑडियंस बढ़ाएँ."
-Feature.Build.Description.BoostGameAudience,अपने गेम की ऑडियंस बढ़ाएँ
 Feature.Build.Description.BuildIdeaGame,अपने आइडिया को गेम में बदलें
 Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके लिए कोई जवाब आने पर नोटिफ़िकेशन पाएँ.
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
-Feature.Build.Description.CampaignRunDates,आपका कैंपेन {startDate} – {endDate} तक चलेगा
 Feature.Build.Description.ChoosePlaytesters,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स चुनें.
 Feature.Build.Description.EnableBuildNotifs,"बिल्ड से अपडेट्स पाने के लिए, अपने डिवाइस की सेटिंग्स में नोटिफ़िकेशंस चालू करें."
 Feature.Build.Description.FriendsLinkOnly,"सिर्फ़ आपके फ़्रेंड्स ही इस लिंक को ऐक्सेस कर सकते हैं. अगर आपका मन है कि ज़्यादा लोग खेलें, तो अपने गेम की ऑडियंस सेटिंग बदलें."
 Feature.Build.Description.GameCreationDone,मैंने आपका गेम बनाने और पब्लिश करने का काम पूरा कर लिया है. इसे प्ले-टेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.GameSavedPlaytest,मैंने आपका गेम बनाने का काम पूरा कर लिया है और एक नया वर्ज़न सेव कर लिया है. इसे प्लेटेस्ट करने के लिए खोला जा सकता है.
 Feature.Build.Description.HubSettings,Creator Hub पर सभी सेटिंग्स मैनेज करें
-Feature.Build.Description.InviteFriendLimit,"{MAX_INVITES} फ़्रेंड्स तक चुनें, फिर गेम का लिंक शेयर करें."
 Feature.Build.Description.MakeAudienceAvail,"अपने एक्सपीरिएंस को इस ऑडियंस के लिए उपलब्ध कराने के लिए, उसे पब्लिश करें."
 Feature.Build.Description.ManageAppearance,यह मैनेज करें कि आपका गेम दूसरों को कैसा दिखता है.
 Feature.Build.Description.PlayAfterPublish,यह चुनें कि इस एक्सपीरिएंस के पब्लिश होने के बाद इसे कौन-कौन खेल सकता है.
@@ -1844,7 +1824,6 @@ Feature.Build.Description.PrivateShare,"इसे शेयर करने क�
 Feature.Build.Description.RaiseLimitOrWait,"क्रिएट करना जारी रखने के लिए, अपनी रोज़ाना की Robux लिमिट बढ़ाएँ या कल उसके रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.RatingAgreement,पब्लिश करने का मतलब है कि आपने सहमति दी है कि यह कॉन्टेंट रेटिंग सटीक है.
 Feature.Build.Description.RestoreLatest,यह वर्ज़न आपका सबसे हाल में पब्लिश किया गया वर्ज़न बन जाएगा.
-Feature.Build.Description.RevertToVersion,सबसे नए बदलाव को रिवर्ट करने के लिए कन्फ़र्म करें और {VERSION} पर वापस जाएँ.
 Feature.Build.Description.VersionChanges,खिलाड़ियों को इस वर्ज़न में हुए बदलावों के बारे में बताएँ.
 Feature.Build.Header.AccessSharing,ऐक्सेस और शेयरिंग
 Feature.Build.Header.ContentMaturity,कॉन्टेंट मैच्योरिटी
@@ -1853,16 +1832,13 @@ Feature.Build.Header.GameDetails,गेम की जानकारी
 Feature.Build.Header.Overview,ओवरव्यू
 Feature.Build.Label.Access,ऐक्सेस
 Feature.Build.Label.AdditionalUsage,अतिरिक्त बिल्ड का इस्तेमाल
-Feature.Build.Label.AdditionalUsed,{LIMIT} में से {USED} इस्तेमाल किया गया
 Feature.Build.Label.All,
-Feature.Build.Label.AmountAvailable,{AMOUNT} उपलब्ध हैं
 Feature.Build.Label.Autosaved,ऑटो-सेव किया गया
 Feature.Build.Label.Available,उपलब्ध है
 Feature.Build.Label.BackToBuild,बिल्ड पर वापस जाएँ
 Feature.Build.Label.Building,बना रहा है...
 Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
 Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
-Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
@@ -1873,17 +1849,14 @@ Feature.Build.Label.FreeBuildUsage,मुफ़्त बिल्ड का इ
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,सिर्फ़ फ़्रेंड्स के लिए
 Feature.Build.Label.GetMoreBuildUsage,बिल्ड का और इस्तेमाल पाएँ
-Feature.Build.Label.Hi,हैलो
 Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
 Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
-Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,सीमित
 Feature.Build.Label.Loading,लोड किया जा रहा है...
 Feature.Build.Label.NoLimit,कोई लिमिट नहीं
 Feature.Build.Label.NotStarted,शुरू नहीं हुआ
 Feature.Build.Label.Pending,पेंडिंग
-Feature.Build.Label.PercentUsed,{PERCENT}% इस्तेमाल किया गया
 Feature.Build.Label.PreviouslyPublished,पहले पब्लिश किया गया
 Feature.Build.Label.Private,प्राइवेट
 Feature.Build.Label.Public,पब्लिक
@@ -1891,8 +1864,6 @@ Feature.Build.Label.PubliclyUnavailable,सभी के लिए उपलब�
 Feature.Build.Label.Published,पब्लिश किया गया
 Feature.Build.Label.Ready,तैयार
 Feature.Build.Label.ResetsDaily,रोज़ाना रीसेट होता है
-Feature.Build.Label.RestoredVersion,{VERSION} रीस्टोर किया गया
-Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
 Feature.Build.Label.SearchGames,गेम्स सर्च करें
 Feature.Build.Label.SearchTasks,टास्क सर्च करें
@@ -1962,16 +1933,9 @@ Feature.Build.Label.ToolTasksPlanRunning,आपके टास्क प्ल�
 Feature.Build.Label.ToolThumbnailDone,गेम थंबनेल सेट हो गया
 Feature.Build.Label.ToolThumbnailFailed,गेम थंबनेल सेट नहीं किया जा सका
 Feature.Build.Label.ToolThumbnailRunning,गेम थंबनेल सेट किया जा रहा है
-Feature.Build.Label.UniverseNumber,यूनिवर्स {UNIVERSE_ID}
 Feature.Build.Label.Unknown,अज्ञात
-Feature.Build.Label.UnlimitedUsed,{USED} इस्तेमाल किए गए • कोई लिमिट नहीं
 Feature.Build.Label.Usage,इस्तेमाल
-Feature.Build.Label.UsageUsed,{USED} इस्तेमाल किया गया
-Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,वर्ज़न
-Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
-Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
-Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,वर्ज़न का टाइटल और विवरण
 Feature.Build.Label.Video,वीडियो
 Feature.Build.Message.AccountRequirements,"आपका अकाउंट, बिल्ड इस्तेमाल करने की शर्तों को पूरा नहीं करता."
@@ -1987,12 +1951,10 @@ Feature.Build.Message.BuildResponseFailed,Build ने जवाब नहीं
 Feature.Build.Message.BuildStillWorking,"इस पर काम चल रहा है. इंतज़ार करते समय ऐप से बाहर निकला जा सकता है, Roblox खेला जा सकता है या कोई दूसरा प्रोजेक्ट शुरू किया जा सकता है."
 Feature.Build.Message.BuildStopped,आपने बिल्ड रोक दिया.
 Feature.Build.Message.BuildTemporarilyDown,बिल्ड फ़िलहाल उपलब्ध नहीं है. एक मिनट बाद फिर से कोशिश करें.
-Feature.Build.Message.CompletedTasks,पूरे हो चुके {COUNT} टास्क
 Feature.Build.Message.ConversationGone,यह बातचीत अब उपलब्ध नहीं है. नई बातचीत शुरू करें.
 Feature.Build.Message.ConversationNotFound,यह बातचीत नहीं मिली. नई बातचीत शुरू करें.
 Feature.Build.Message.CreateGameToUseBuild,"बिल्ड का इस्तेमाल शुरू करने के लिए, नया गेम क्रिएट करें."
 Feature.Build.Message.CreatedRevertedVer,रिवर्ट किया गया वर्ज़न क्रिएट हुआ.
-Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Creator Hub पर अपने कॉन्टेंट के लिए ऑडियंस के दायरे को बड़ा करें
 Feature.Build.Message.ExperiencesLoadFailed,एक्सपीरिएंस लोड नहीं हो सके
 Feature.Build.Message.FailedTitle,{TITLE} नहीं हो सका
@@ -2000,47 +1962,33 @@ Feature.Build.Message.FinishedTitle,{TITLE} पूरा हो गया
 Feature.Build.Message.FriendsLoadFailed,फ़्रेंड्स लोड नहीं हो सके. फिर से कोशिश करें.
 Feature.Build.Message.GameNotCreated,आपका गेम क्रिएट नहीं हुआ. फिर से कोशिश करें.
 Feature.Build.Message.GamePublishFailed,आपका गेम पब्लिश नहीं किया जा सका. फिर से कोशिश करें.
-Feature.Build.Message.GameShared,गेम शेयर किया गया
-Feature.Build.Message.GameSharedWith,गेम इनके साथ शेयर किया गया {DISPLAY_NAME}
-Feature.Build.Message.HiDisplayName,"हैलो, {DISPLAY_NAME}"
 Feature.Build.Message.InvalidMessage,आपके मैसेज में कुछ गड़बड़ी हुई. इसे एडिट करके फिर से कोशिश करें.
 Feature.Build.Message.InvitesLoadFailed,इनवाइट्स लोड नहीं हो सके
-Feature.Build.Message.LimitBelowSpend,लिमिट आज पहले से खर्च किए गए {ALREADY_SPENT} Robux से कम नहीं हो सकती.
 Feature.Build.Message.LinkCopied,लिंक को क्लिपबोर्ड पर कॉपी किया गया.
 Feature.Build.Message.LoadingVersions,वर्ज़न हिस्ट्री लोड हो रही है...
 Feature.Build.Message.NoDescriptionProvided,कोई जानकारी नहीं दी गई.
 Feature.Build.Message.NoFriendsToAdd,फ़िलहाल आपके पास जोड़ने के लिए कोई दोस्त नहीं है. पहले Roblox पर लोगों से जुड़ें.
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,अभी तक कोई वर्ज़न हिस्ट्री नहीं है.
-Feature.Build.Message.OneTaskCompleted,1 टास्क पूरा हुआ
 Feature.Build.Message.OutOfBuildUsage,"आपके बिल्ड का इस्तेमाल खत्म हो गया है. क्रिएट करना जारी रखने के लिए, Robux का इस्तेमाल करने के अपने विकल्प देखें."
-Feature.Build.Message.PlaytestersAdded,{MAX_INVITES} में से {INVITED_COUNT} प्लेटेस्टर्स जोड़े गए
 Feature.Build.Message.PublicPublishFailed,"आपका गेम पब्लिश किया गया, लेकिन पब्लिक नहीं किया जा सका. फिर से कोशिश करें."
 Feature.Build.Message.PublishExpandAudience,अपनी ऑडियंस बढ़ाने के लिए पब्लिश करें
 Feature.Build.Message.PublishNotReverted,आपका पब्लिश रिवर्ट नहीं हुआ. फिर से कोशिश करें.
 Feature.Build.Message.PublishReverted,पब्लिश कॉन्टेंट रिवर्ट किया गया.
 Feature.Build.Message.QuestionnaireNeeded,"इस गेम को बिल्ड के बाहर एडिट किया गया था. पब्लिश करने के लिए, कॉन्टेंट क्वेश्चनेयर पूरा करें."
 Feature.Build.Message.ReadyToPlay,आपका गेम Roblox पर खेलने के लिए तैयार है!
-Feature.Build.Message.ResetHours,{HOURS} घंटे में रीसेट होगा
-Feature.Build.Message.ResetOneHour,1 घंटे में रीसेट होगा
 Feature.Build.Message.RestoreVersionFailed,यह वर्ज़न रीस्टोर नहीं किया जा सका. फिर से कोशिश करें.
 Feature.Build.Message.RevertVersionFail,रिवर्ट किया गया वर्ज़न क्रिएट नहीं हुआ. फिर से कोशिश करें.
 Feature.Build.Message.RunningTitle,{title} चल रहा है
 Feature.Build.Message.SafetyPolicy,यह मैसेज हमारी सुरक्षा नीति के मुताबिक नहीं है. इसे एडिट करके फिर से कोशिश करें.
 Feature.Build.Message.SaveChangesFailed,बदलाव सेव नहीं किए जा सके. फिर से कोशिश करें.
-Feature.Build.Message.ShareExperience,{EXPERIENCE_NAME} शेयर करें
 Feature.Build.Message.ShareLinkFailed,शेयर लिंक नहीं बनाया जा सका. फिर से कोशिश करें.
 Feature.Build.Message.SignedOut,आपको साइन-आउट कर दिया गया है. साइन-इन करके फिर से कोशिश करें.
-Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} टास्क पूरे हुए
-Feature.Build.Message.ThinkingSeconds,{SECONDS} सेकंड तक प्रोसेस कर रहा है
 Feature.Build.Message.TryAgain,फिर से कोशिश करें.
 Feature.Build.Message.TurnToPortrait,"अपने गेम पर काम जारी रखने के लिए, अपने डिवाइस को पोर्ट्रेट मोड पर रखें."
 Feature.Build.Message.VersionHistoryLoad,वर्ज़न हिस्ट्री लोड नहीं हो सकी.
 Feature.Build.Message.WhatToCreate,आपको आज क्या क्रिएट करना है?
-Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} मिनट {REM_SECONDS} सेकंड तक काम किया
-Feature.Build.Message.WorkedSeconds,{SECONDS} सेकंड तक काम किया
 Feature.Build.Message.WorkingOnTasks,आपके टास्क पर काम चल रहा है
-Feature.Build.Title.AdCampaignActive,ऐड कैंपेन ऐक्टिव है
 Feature.Build.Title.AddFriendsToPlaytest,प्ले-टेस्ट में आपकी मदद करने के लिए फ़्रेंड्स जोड़ें
 Feature.Build.Title.ArchiveThisGame,इस गेम को आर्काइव में भेजना है?
 Feature.Build.Title.Audience,ऑडियंस
@@ -2061,14 +2009,12 @@ Feature.Build.Title.GenericError,
 Feature.Build.Title.NoRobuxForUsage,बिल्ड के इस्तेमाल के लिए कोई Robux नहीं बचा
 Feature.Build.Title.Playtesters,प्लेटेस्टर्स
 Feature.Build.Title.PlaytestersOnlyPlay,सिर्फ़ प्लेटेस्टर्स खेल सकते हैं
-Feature.Build.Title.PromoteGameFree,अपने गेम को फ़्री में प्रमोट करें
 Feature.Build.Title.PushNotifications,पुश नोटिफ़िकेशंस
 Feature.Build.Title.RevertLastChange,पिछला बदलाव रिवर्ट करना है?
 Feature.Build.Title.Tasks,टास्क
 Feature.Build.Title.TurnActivity,टर्न ऐक्टिविटी
 Feature.Build.Title.VersionHistory,वर्ज़न हिस्ट्री
 Feature.Build.Title.VersionInformation,वर्ज़न की जानकारी
-Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,अनुमति दें
 Feature.Captures.Action.AllowPhotoAccessAccepted,परमिशन दें
@@ -2168,7 +2114,6 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,बेचें
 Feature.Catalog.Action.ShareVia,इसके ज़रिए शेयर करें...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,आज़माएँ
 Feature.Catalog.Action.Upgrade,अपग्रेड करें
 Feature.Catalog.Action.ViewDetailsPage,जानकारी पेज देखें
 Feature.Catalog.Action.ViewExperienceDetails,एक्सपीरिएंस की जानकारी देखें
@@ -3226,7 +3171,6 @@ Feature.Moments.Action.Join,
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,छोटा करें
 Feature.Moments.Action.Ok,
-Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
@@ -3299,14 +3243,8 @@ Feature.Moments.Label.TextGenerationFailedBody,टेक्स्ट जेन�
 Feature.Moments.Label.TextGenerationFailedTitle,जेनरेट नहीं हो सका
 Feature.Moments.Label.TextGenerationFilteredBody,"कैप्चर किए गए इस वीडियो के लिए टेक्स्ट जेनरेट नहीं हो सकता, कॉन्टेंट फ़िल्टर किया गया."
 Feature.Moments.Label.TextGenerationFilteredTitle,जेनरेशन फ़िल्टर किया गया
-Feature.Moments.Label.Tone,टोन
-Feature.Moments.Label.Tone.Cinematic,सिनेमैटिक
-Feature.Moments.Label.Tone.Funny,मज़ेदार
-Feature.Moments.Label.Tone.Hype,हाइप
-Feature.Moments.Label.Tone.Neutral,न्यूट्रल
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
-Feature.Moments.Title.GenerateTextOptions,टेक्स्ट जेनरेट करें
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?
 Feature.Moments.Title.MomentRemoved,Moment हटा दिया गया
 Feature.Moments.Title.ReportPost,पोस्ट की रिपोर्ट करें
@@ -3919,8 +3857,8 @@ Feature.SocialTab.Label.CreateAndExploreGroups,कम्यूनिटी ब�
 Feature.SocialTab.Label.Groups,
 Feature.SongDetails.Action.Favorite,
 Feature.SongDetails.Action.Report,
-Feature.SongDetails.Action.ReportAudio,ऑडियो रिपोर्ट करें
-Feature.SongDetails.Label.InappropriateAudio,अनुचित ऑडियो
+Feature.SongDetails.Action.ReportAudio,
+Feature.SongDetails.Label.InappropriateAudio,
 Feature.SongDetails.Label.InappropriateThumbnail,अनुचित थंबनेल
 Feature.SongDetails.Label.SongPreview,गाने का प्रीव्यू
 Feature.Squads.Action.Add,
@@ -4596,13 +4534,10 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
-InGame.PlayerDropDown.ConfirmUnfriend,पक्के तौर पर अनफ़्रेंड करने के लिए टैप करें
-InGame.PlayerDropDown.Decline,अस्वीकार करें
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} की फ़्रेंड लिस्ट फ़ुल हो चुकी है.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
-InGame.PlayerDropDown.Unfriend,
 InGame.PlayerList.FooterLastUpdated,पिछली बार {minutes} मिनट पहले अपडेट किया गया
 InGame.PlayerList.FooterUnableToLoad,
 InGame.PlayerList.FriendsEmpty,आपके किसी भी फ़्रेंड ने अभी तक यह एक्सपीरिएंस नहीं खेला है.

@@ -1,7 +1,4 @@
-﻿local fFlagLuaAppUserSeenCollectionUnifiedFields = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
-
-return function(p0, p1) --[[ line: 32 | named "buildUserSeenCollectionPayload" ]]
-	-- upvalues: fFlagLuaAppUserSeenCollectionUnifiedFields (ref)
+﻿return function(p0, p1) --[[ line: 25 | named "buildUserSeenCollectionPayload" ]]
 	local t = {}
 	local t_1 = {}
 	local t_2 = {}
@@ -31,7 +28,6 @@ return function(p0, p1) --[[ line: 32 | named "buildUserSeenCollectionPayload" ]
 		isRecommendations = table.concat(t_6, ","),
 		universeIds = table.concat(t_7, ","),
 		tileCount = #t,
-		sessionEventCount = p1,
-		contentType = if fFlagLuaAppUserSeenCollectionUnifiedFields then "User" else nil
+		sessionEventCount = p1
 	}
 end

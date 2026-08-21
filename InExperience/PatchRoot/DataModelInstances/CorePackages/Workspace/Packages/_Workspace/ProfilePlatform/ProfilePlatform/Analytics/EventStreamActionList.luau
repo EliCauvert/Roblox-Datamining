@@ -9,12 +9,11 @@ local fFlagProfilePlatformUseProfileTypeContextModule = require(profilePlatform.
 local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
 local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
 local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
 local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
 local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
 
-local var8 = function(p0) --[[ line: 28 ]]
+local var7 = function(p0) --[[ line: 27 ]]
 	return p0
 end
 
@@ -23,24 +22,24 @@ return {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.PageLoad,
 		formatRulesForAdditionalInfo = {
-			friendStatus = var8,
-			playerPresence = var8,
-			absolutePosition = var8,
-			isHomePageCarousel = var8,
-			isRecommendation = var8,
-			recommendationContextType = var8,
-			recommendationRank = var8,
-			recommendationSessionId = var8,
-			source = var8,
-			profileType = var8,
-			shareLinkId = var8,
-			primaryAction = var8
+			friendStatus = var7,
+			playerPresence = var7,
+			absolutePosition = var7,
+			isHomePageCarousel = var7,
+			isRecommendation = var7,
+			recommendationContextType = var7,
+			recommendationRank = var7,
+			recommendationSessionId = var7,
+			source = var7,
+			profileType = var7,
+			shareLinkId = var7,
+			primaryAction = var7
 		}
 	},
 	[eventNamesModule.ProfilePresenceLoaded] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.PresenceLoaded,
-		formatRulesForAdditionalInfo = { presenceType = var8, universeId = var8 }
+		formatRulesForAdditionalInfo = { presenceType = var7, universeId = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonChat] = {
 		context = contexts.PlayerProfile,
@@ -49,7 +48,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.Chat
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonIgnoreFriendRequest] = {
 		context = contexts.PlayerProfile,
@@ -58,7 +57,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.IgnoreFriendRequest
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonReport] = {
 		context = contexts.PlayerProfile,
@@ -67,7 +66,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.Report
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonUnfriend] = {
 		context = contexts.PlayerProfile,
@@ -76,7 +75,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.Unfriend
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonBlock] = {
 		context = contexts.PlayerProfile,
@@ -85,7 +84,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.Block
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonSetAlias] = {
 		context = contexts.PlayerProfile,
@@ -94,7 +93,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.SetAlias
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonCopyLink] = {
 		context = contexts.PlayerProfile,
@@ -103,7 +102,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.CopyLink
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonLeaveCommunity] = {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
@@ -112,7 +111,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.LeaveCommunity
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonUnfollow] = {
 		context = contexts.PlayerProfile,
@@ -121,7 +120,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.Unfollow
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonRemoveTrustedConnection] = {
 		context = contexts.PlayerProfile,
@@ -130,7 +129,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.RemoveTrustedConnection
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonAddTrustedConnection] = {
 		context = contexts.PlayerProfile,
@@ -139,7 +138,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.AddTrustedConnection
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, modalVariantOverride = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, modalVariantOverride = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection] = {
 		context = contexts.PlayerProfile,
@@ -148,7 +147,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.AddIncomingTrustedConnection
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonMakePrimaryCommunity] = {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
@@ -157,7 +156,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.MakePrimaryCommunity
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonRemovePrimaryCommunity] = {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
@@ -166,7 +165,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.RemovePrimaryCommunity
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.ContextualMenuButtonCurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
 		context = contexts.PlayerProfile,
@@ -175,16 +174,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.CurrencyTransfer
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
-	} else nil,
-	[eventNamesModule.ContextualMenuButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.TradeItems
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.CTAButtonOpenEditProfilePage] = {
 		context = contexts.PlayerProfile,
@@ -192,47 +182,47 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.CTAButtons.OpenEditProfilePage
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonChat] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Chat },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonUnlockChat] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.UnlockChat },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonUnfriend] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Unfriend },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonUnblock] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Unblock },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonAddFriend] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.AddFriend },
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var8,
-			isHomePageCarousel = var8,
-			isRecommendation = var8,
-			recommendationContextType = var8,
-			recommendationRank = var8,
-			recommendationSessionId = var8,
-			source = var8,
-			contextualInfoType = var8,
-			shareLinkId = var8,
-			profileType = var8
+			absolutePosition = var7,
+			isHomePageCarousel = var7,
+			isRecommendation = var7,
+			recommendationContextType = var7,
+			recommendationRank = var7,
+			recommendationSessionId = var7,
+			source = var7,
+			contextualInfoType = var7,
+			shareLinkId = var7,
+			profileType = var7
 		}
 	},
 	[eventNamesModule.CTAButtonAddFriendFromContacts] = {
@@ -241,7 +231,7 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.CTAButtons.AddFriendFromContacts
 		},
-		formatRulesForAdditionalInfo = { shareLinkId = var8 }
+		formatRulesForAdditionalInfo = { shareLinkId = var7 }
 	},
 	[eventNamesModule.CTAButtonAcceptFriendRequest] = {
 		context = contexts.PlayerProfile,
@@ -250,36 +240,36 @@ return {
 			btn = analyticsConstantsModule.CTAButtons.AcceptFriendRequest
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var8,
-			contextualInfoType = var8,
-			isHomePageCarousel = var8,
-			isRecommendation = var8,
-			recommendationContextType = var8,
-			recommendationRank = var8,
-			recommendationSessionId = var8,
-			source = var8,
-			buttonSurface = var8,
-			shareLinkId = var8,
-			profileType = var8
+			absolutePosition = var7,
+			contextualInfoType = var7,
+			isHomePageCarousel = var7,
+			isRecommendation = var7,
+			recommendationContextType = var7,
+			recommendationRank = var7,
+			recommendationSessionId = var7,
+			source = var7,
+			buttonSurface = var7,
+			shareLinkId = var7,
+			profileType = var7
 		}
 	},
 	[eventNamesModule.CTAButtonEditAvatar] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.EditAvatar },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonEditLook] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.EditLook },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonShareProfile] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.ShareProfile },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonShareProfileQRCode] = {
 		context = contexts.PlayerProfile,
@@ -287,7 +277,7 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.CTAButtons.ShareProfileQRCode
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonJoinCommunity] = {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
@@ -296,7 +286,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.CTAButtons.JoinCommunity
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.CTAButtonFollow] = {
 		context = contexts.PlayerProfile,
@@ -305,7 +295,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.CTAButtons.Follow
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	},
 	[eventNamesModule.CTAButtonViewCommunity] = {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
@@ -314,7 +304,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.CTAButtons.ViewCommunity
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.CTAButtonViewFullProfile] = {
 		context = contexts.PlayerProfile,
@@ -323,7 +313,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.CTAButtons.ViewFullProfile
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.CTAButtonCurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
 		context = contexts.PlayerProfile,
@@ -332,16 +322,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.CTAButtons.CurrencyTransfer
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
-	} else nil,
-	[eventNamesModule.CTAButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.TradeItems
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.CTAButtonCancelJoinCommunityRequest] = {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
@@ -350,7 +331,7 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.CTAButtons.CancelJoinCommunityRequest
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8, btnContext = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7, btnContext = var7 }
 	},
 	[eventNamesModule.SchoolButton] = {
 		context = contexts.PlayerProfile,
@@ -382,15 +363,15 @@ return {
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.ViewPlayerProfile },
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var8,
-			friendStatus = var8,
-			isHomePageCarousel = var8,
-			isRecommendation = var8,
-			recommendationContextType = var8,
-			recommendationRank = var8,
-			recommendationSessionId = var8,
-			source = var8,
-			buttonSurface = var8
+			absolutePosition = var7,
+			friendStatus = var7,
+			isHomePageCarousel = var7,
+			isRecommendation = var7,
+			recommendationContextType = var7,
+			recommendationRank = var7,
+			recommendationSessionId = var7,
+			source = var7,
+			buttonSurface = var7
 		}
 	},
 	[eventNamesModule.ContextualMenuButton] = {
@@ -407,7 +388,7 @@ return {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.EditDisplayName },
-		formatRulesForAdditionalInfo = { canSetDisplayName = var8 }
+		formatRulesForAdditionalInfo = { canSetDisplayName = var7 }
 	},
 	[eventNamesModule.SetAliasButton] = {
 		context = contexts.PlayerProfile,
@@ -427,7 +408,7 @@ return {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.FavoriteExperience },
-		formatRulesForAdditionalInfo = { experienceId = var8, positionInComponent = var8 }
+		formatRulesForAdditionalInfo = { experienceId = var7, positionInComponent = var7 }
 	},
 	[eventNamesModule.FavoriteExperienceSeeAll] = {
 		context = contexts.PlayerProfile,
@@ -440,38 +421,38 @@ return {
 		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.Experience },
-		formatRulesForAdditionalInfo = { experienceId = var8, positionInComponent = var8 }
+		formatRulesForAdditionalInfo = { experienceId = var7, positionInComponent = var7 }
 	},
 	[eventNamesModule.EventOpened] = {
 		context = contexts.CommunityProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.Event },
-		formatRulesForAdditionalInfo = { virtualEventId = var8 }
+		formatRulesForAdditionalInfo = { virtualEventId = var7 }
 	},
 	[eventNamesModule.EventRSVP] = {
 		context = contexts.CommunityProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.EventRSVP },
-		formatRulesForAdditionalInfo = { virtualEventId = var8, status = var8 }
+		formatRulesForAdditionalInfo = { virtualEventId = var7, status = var7 }
 	},
 	[eventNamesModule.EventJoined] = {
 		context = contexts.CommunityProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.EventJoin },
-		formatRulesForAdditionalInfo = { virtualEventId = var8 }
+		formatRulesForAdditionalInfo = { virtualEventId = var7 }
 	},
 	[eventNamesModule.CatalogItemOpened] = {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.ViewCatalogItem },
 		formatRulesForAdditionalInfo = if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-			btnContext = var8,
-			btnUnitId = var8,
-			btnSortPosition = var8
+			btnContext = var7,
+			btnUnitId = var7,
+			btnSortPosition = var7
 		} else {
-			itemId = var8,
-			positionInComponent = var8,
-			component = var8
+			itemId = var7,
+			positionInComponent = var7,
+			component = var7
 		}
 	},
 	[eventNamesModule.UsernameCopied] = {
@@ -486,13 +467,13 @@ return {
 			optionType = "CTAType",
 			btn = analyticsConstantsModule.ContextualMenuButtons.ViewPlatformProfile
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.CTAButtonEditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.EditAppearance },
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.EditAppearanceMenuEditAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		context = contexts.PlayerProfile,
@@ -500,7 +481,7 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.Btns.EditAppearanceEditAvatar
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.EditAppearanceMenuEditEmote] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		context = contexts.PlayerProfile,
@@ -508,7 +489,7 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.Btns.EditAppearanceEditEmote
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.EditAppearanceMenuSwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		context = contexts.PlayerProfile,
@@ -516,7 +497,7 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.Btns.EditAppearanceSwitchAvatar
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.EditAppearanceMenuEditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then {
 		context = contexts.PlayerProfile,
@@ -524,13 +505,13 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.Btns.EditAppearanceEditBackground
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var8 }
+		formatRulesForAdditionalInfo = { buttonSurface = var7 }
 	} else nil,
 	[eventNamesModule.InspectAvatarOpened] = if fFlagSocialEnableProfileInspectAndBuyAnalytics then {
 		context = contexts.PlayerProfile,
 		eventType = eventTypes.ButtonClick,
 		additionalInfo = { btn = analyticsConstantsModule.Btns.InspectAvatar },
-		formatRulesForAdditionalInfo = { profileSessionId = var8 }
+		formatRulesForAdditionalInfo = { profileSessionId = var7 }
 	} else nil,
 	[eventNamesModule.InspectAvatarBuyClicked] = if fFlagSocialEnableProfileInspectAndBuyAnalytics then {
 		context = contexts.PlayerProfile,
@@ -539,9 +520,9 @@ return {
 			btn = analyticsConstantsModule.Btns.InspectAvatarBuyItems
 		},
 		formatRulesForAdditionalInfo = {
-			profileSessionId = var8,
-			itemIds = var8,
-			totalPrice = var8
+			profileSessionId = var7,
+			itemIds = var7,
+			totalPrice = var7
 		}
 	} else nil,
 	[eventNamesModule.InspectAvatarPurchaseConfirmed] = if fFlagSocialEnableProfileInspectAndBuyAnalytics then {
@@ -550,7 +531,7 @@ return {
 		additionalInfo = {
 			btn = analyticsConstantsModule.Btns.InspectAvatarConfirmBuy
 		},
-		formatRulesForAdditionalInfo = { profileSessionId = var8 }
+		formatRulesForAdditionalInfo = { profileSessionId = var7 }
 	} else nil,
 	[eventNamesModule.MomentsSeeAll] = {
 		context = contexts.PlayerProfile,

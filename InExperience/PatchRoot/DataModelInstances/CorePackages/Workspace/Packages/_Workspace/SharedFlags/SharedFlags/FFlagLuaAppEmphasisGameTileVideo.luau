@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppEmphasisGameTileVideo", false) and require(script.Parent.FFlagLuaAppSearchResultsPageGameTileVideo)

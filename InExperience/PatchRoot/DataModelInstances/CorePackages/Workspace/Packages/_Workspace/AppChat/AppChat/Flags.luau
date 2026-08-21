@@ -5,6 +5,5 @@
 	FFlagAppChatConversationStore = require(script.FFlagAppChatConversationStore),
 	FFlagAppChatSignalsMessageStore = require(script.FFlagAppChatSignalsMessageStore),
 	FFlagAppChatSignalsReplyStore = require(script.FFlagAppChatSignalsReplyStore),
-	FFlagAppChatPresenceStoreMigration = require(script.FFlagAppChatPresenceStoreMigration),
-	FFlagAppChatUnreadMessageCountStore = require(script.FFlagAppChatUnreadMessageCountStore)
+	FFlagAppChatPresenceStoreMigration = require(script.FFlagAppChatPresenceStoreMigration)
 }

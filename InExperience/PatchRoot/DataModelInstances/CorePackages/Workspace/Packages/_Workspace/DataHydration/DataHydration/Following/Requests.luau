@@ -1,1 +1,0 @@
-﻿return { GetFollowingExists = require(script.GetFollowingExists) }

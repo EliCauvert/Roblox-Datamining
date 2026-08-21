@@ -14,7 +14,6 @@ local pendingFriendRequestActionModule = require(script.PendingFriendRequestActi
 local qrCodeActionModule = require(script.QrCodeAction)
 local reportActionModule = require(script.ReportAction)
 local shareProfileActionModule = require(script.ShareProfileAction)
-local tradeItemsActionModule = require(script.TradeItemsAction)
 local trustedConnectionActionsModule = require(script.TrustedConnectionActions)
 local unfriendActionModule = require(script.UnfriendAction)
 local unlockChatActionModule = require(script.UnlockChatAction)
@@ -26,21 +25,21 @@ local _ = require(profilePlatform.Components.CTARow.Types)
 local supportedProfileTypesModule = require(script.SupportedProfileTypes)
 local t = {}
 
-local function _(p0, p1) --[[ line: 56 | named "withValidation" ]]
+local function _(p0, p1) --[[ line: 54 | named "withValidation" ]]
 	-- upvalues: supportedProfileTypesModule (ref)
-	return function(p2) --[[ line: 57 ]]
+	return function(p2) --[[ line: 55 ]]
 		-- upvalues: p1 (ref), p0 (ref), supportedProfileTypesModule (copy)
-		local var25 = p1(p2)
+		local var24 = p1(p2)
 		
-		if var25 ~= nil then
-			assert(type(var25.onActivated) == "table", p0 .. " has onActivated as " .. type(var25.onActivated) .. ", expected table")
+		if var24 ~= nil then
+			assert(type(var24.onActivated) == "table", p0 .. " has onActivated as " .. type(var24.onActivated) .. ", expected table")
 			
-			for i in var25.onActivated do
-				local var26 = supportedProfileTypesModule[i]
-				assert(var26 and table.find(var26, p0), p0 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
+			for i in var24.onActivated do
+				local var25 = supportedProfileTypesModule[i]
+				assert(var25 and table.find(var25, p0), p0 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
 			end
 		end
-		return var25
+		return var24
 	end
 end
 
@@ -51,25 +50,25 @@ for i, v in {
 	followActionsModule, ignoreFriendRequestActionModule,
 	joinExperienceActionModule, pendingFriendRequestActionModule,
 	qrCodeActionModule, reportActionModule, shareProfileActionModule,
-	tradeItemsActionModule, trustedConnectionActionsModule, unfriendActionModule,
-	unlockChatActionModule, viewAboutActionModule, viewPlatformProfileActionModule
+	trustedConnectionActionsModule, unfriendActionModule, unlockChatActionModule,
+	viewAboutActionModule, viewPlatformProfileActionModule
 } do
 	for i_1, v_1 in v do
 		assert(t[i_1] == nil, "Duplicate ProfileAction key: " .. tostring(i_1))
 		
-		t[i_1] = function(p3) --[[ line: 57 ]]
+		t[i_1] = function(p3) --[[ line: 55 ]]
 			-- upvalues: v_1 (ref), i_1 (ref), supportedProfileTypesModule (ref)
-			local var25 = v_1(p3)
+			local var24 = v_1(p3)
 			
-			if var25 ~= nil then
-				assert(type(var25.onActivated) == "table", i_1 .. " has onActivated as " .. type(var25.onActivated) .. ", expected table")
+			if var24 ~= nil then
+				assert(type(var24.onActivated) == "table", i_1 .. " has onActivated as " .. type(var24.onActivated) .. ", expected table")
 				
-				for i in var25.onActivated do
-					local var26 = supportedProfileTypesModule[i]
-					assert(var26 and table.find(var26, i_1), i_1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
+				for i in var24.onActivated do
+					local var25 = supportedProfileTypesModule[i]
+					assert(var25 and table.find(var25, i_1), i_1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
 				end
 			end
-			return var25
+			return var24
 		end
 	end
 end

@@ -9,6 +9,7 @@ return {
 		"**/initShopGlobalIcon.test"
 	},
 	setupFilesAfterEnv = {
+		jestConfigsModule.setupFiles.ErrorLogHandler,
 		jestConfigsModule.setupFiles.UIBloxInitializer,
 		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		jestConfigsModule.setupFiles.RetryTimes
