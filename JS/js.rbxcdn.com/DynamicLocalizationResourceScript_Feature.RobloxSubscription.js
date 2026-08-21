@@ -164,7 +164,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Description.BannerTitleArrivedPurchase": "There's still time to get the Plus gift!",
     "Description.BannerBodyArrivedPurchase": "Become a Plus subscriber before {date} to get the exclusive gift in your inventory before it opens.",
     "Action.BannerEquip": "Equip",
-    "Description.Benefit.DiscountV2": "10% first 60 days, then 20% off items and avatars",
+    "Description.Benefit.DiscountV2": "10% off first 60 days, then 20% off items and avatars",
     "Description.Benefit.Discounts": "Discounts off in-game items, avatars, and more",
     "Description.Benefit.Customize": "Customize with profile frames and app themes",
     "Label.ReferralRewardRobux": "{amount} Robux",

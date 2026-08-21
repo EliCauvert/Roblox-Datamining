@@ -87,7 +87,7 @@ Roblox.LangDynamic["Common.GameSorts"] = {
     "Faq.Title": "Frequently Asked Questions",
     "Title.CohortCCUCoachmark": "Viewing active user counts",
     "Description.CohortCCUCoachmark": "Active user counts are based on your current filters. To view all active users, set your filters to 'All devices' and 'All locations'",
-    "Label.ItemsPickedForYou": "Items Picked For You",
+    "Label.ItemsPickedForYou": "Items For You",
     "SubtitleRecommendedItems": "Enhance play with these recommended items"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Common.GameSorts");
