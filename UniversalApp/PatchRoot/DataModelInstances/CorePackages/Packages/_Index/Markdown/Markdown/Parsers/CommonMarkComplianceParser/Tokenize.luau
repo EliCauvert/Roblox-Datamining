@@ -46,7 +46,8 @@ local t_1 = {
 		{ "CODE_BLOCK", "^~~~[ \t]*([^\n]*)[ \t]*\n(.-)~~~" },
 		{ "CODE_BLOCK", "^~~~[ \t]*([^\n]*)[ \t]*\n(.+)$" },
 		{ "QUOTE", "^%s*>" },
-		{ "ORDERED_LIST_ITEM", "^(%s*)([0-9A-Za-z]+)%." },
+		{ "ORDERED_LIST_ITEM", "^(%s*)([0-9]+)%.[ \t]+" },
+		{ "ORDERED_LIST_ITEM", "^(%s*)([A-Za-z])%.[ \t]+" },
 		{ "TABLE_ROW", "^|" }
 	},
 	["\\"] = list,
@@ -84,14 +85,14 @@ local t_2 = {
 		startToken = "LINK_START",
 		endToken = "LINK_END",
 		textStartOffset = 1,
-		mapToText = function(p0) --[[ line: 102 ]]
+		mapToText = function(p0) --[[ line: 103 ]]
 			return if p0.capture then p0.capture[1] else ""
 		end
 	}
 }
 local list_7 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
 
-local function tokenizeTextSpan(p1, p2, p3, p4) --[[ line: 116 ]]
+local function tokenizeTextSpan(p1, p2, p3, p4) --[[ line: 117 ]]
 	-- upvalues: t (ref), t_1 (ref), list_7 (ref), utilsModule (ref), constantsModule (ref), insert (ref), postProcessTokensModule (ref)
 	local var19, var21, var22, substring, var27, var28, characterContext, matchIndex_2
 	local var15 = 0
@@ -169,7 +170,7 @@ local function tokenizeTextSpan(p1, p2, p3, p4) --[[ line: 116 ]]
 	return postProcessTokensModule(t_2)
 end
 
-return function(p5, p6) --[[ line: 218 | named "tokenize" ]]
+return function(p5, p6) --[[ line: 219 | named "tokenize" ]]
 	-- upvalues: tokenizeTextSpan (ref), t_2 (ref), insert (ref)
 	local t = {}
 	
