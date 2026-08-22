@@ -7,7 +7,7 @@ return function() --[[ line: 6 ]]
 		-- upvalues: playersService (copy)
 		local ok, status = pcall(function() --[[ line: 8 ]]
 			-- upvalues: playersService (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromUserIdAsync(playersService.LocalPlayer.UserId) else playersService:GetHumanoidDescriptionFromUserId(playersService.LocalPlayer.UserId)
+			return playersService:GetHumanoidDescriptionFromUserIdAsync(playersService.LocalPlayer.UserId)
 		end)
 		
 		if ok then

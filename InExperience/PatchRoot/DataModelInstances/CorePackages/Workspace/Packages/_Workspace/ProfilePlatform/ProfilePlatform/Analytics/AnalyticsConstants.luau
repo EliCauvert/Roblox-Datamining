@@ -22,6 +22,7 @@
 		ViewFullProfile = "ViewFullProfile",
 		Follow = "Follow",
 		CurrencyTransfer = "CurrencyTransfer",
+		TradeItems = "TradeItems",
 		EditAppearance = "editAppearance",
 		UnlockChat = "unlockChat"
 	},
@@ -41,7 +42,8 @@
 		AddTrustedConnection = "contextualMenu_addTrustedConnection",
 		AddIncomingTrustedConnection = "contextualMenu_addIncomingTrustedConnection",
 		ViewPlatformProfile = "contextualMenu_viewPlatformProfile",
-		CurrencyTransfer = "contextualMenu_currencyTransfer"
+		CurrencyTransfer = "contextualMenu_currencyTransfer",
+		TradeItems = "contextualMenu_tradeItems"
 	},
 	Btns = {
 		Friends = "friends",

@@ -95,7 +95,7 @@ local function getProductInfo(p13) --[[ line: 85 ]]
 		-- upvalues: marketplaceService (copy), p13 (ref)
 		local ok, status = pcall(function() --[[ line: 87 ]]
 			-- upvalues: marketplaceService (copy), p13 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p13) else marketplaceService:GetProductInfo(p13)
+			return marketplaceService:GetProductInfoAsync(p13)
 		end)
 		
 		if ok then
@@ -107,13 +107,13 @@ local function getProductInfo(p13) --[[ line: 85 ]]
 	end)
 end
 
-local function getBatchItemDetails(p16, p17) --[[ line: 106 ]]
+local function getBatchItemDetails(p16, p17) --[[ line: 102 ]]
 	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p18, p19) --[[ line: 107 ]]
+	return promiseModule.new(function(p18, p19) --[[ line: 103 ]]
 		-- upvalues: avatarEditorService (copy), p16 (ref), p17 (ref)
-		local ok, status = pcall(function() --[[ line: 108 ]]
+		local ok, status = pcall(function() --[[ line: 104 ]]
 			-- upvalues: avatarEditorService (copy), p16 (copy), p17 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetBatchItemDetailsAsync(p16, p17) else avatarEditorService:GetBatchItemDetails(p16, p17)
+			return avatarEditorService:GetBatchItemDetailsAsync(p16, p17)
 		end)
 		
 		if ok then
@@ -125,7 +125,7 @@ local function getBatchItemDetails(p16, p17) --[[ line: 106 ]]
 	end)
 end
 
-local function getBatchItemDetailsV2(p20) --[[ line: 129 ]]
+local function getBatchItemDetailsV2(p20) --[[ line: 121 ]]
 	-- upvalues: url (ref), httpService (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "POST",
@@ -135,13 +135,13 @@ local function getBatchItemDetailsV2(p20) --[[ line: 129 ]]
 	}, true)
 end
 
-local function getItemDetails(p21, p22) --[[ line: 147 ]]
+local function getItemDetails(p21, p22) --[[ line: 139 ]]
 	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p23, p24) --[[ line: 148 ]]
+	return promiseModule.new(function(p23, p24) --[[ line: 140 ]]
 		-- upvalues: avatarEditorService (copy), p21 (ref), p22 (ref)
-		local ok, status = pcall(function() --[[ line: 149 ]]
+		local ok, status = pcall(function() --[[ line: 141 ]]
 			-- upvalues: avatarEditorService (copy), p21 (copy), p22 (copy)
-			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetItemDetailsAsync(p21, p22) else avatarEditorService:GetItemDetails(p21, p22)
+			return avatarEditorService:GetItemDetailsAsync(p21, p22)
 		end)
 		
 		if ok then
@@ -153,11 +153,11 @@ local function getItemDetails(p21, p22) --[[ line: 147 ]]
 	end)
 end
 
-local function getPlayerName(p25) --[[ line: 168 ]]
+local function getPlayerName(p25) --[[ line: 156 ]]
 	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p26, p27) --[[ line: 169 ]]
+	return promiseModule.new(function(p26, p27) --[[ line: 157 ]]
 		-- upvalues: playersService (copy), p25 (ref)
-		local ok, status = pcall(function() --[[ line: 170 ]]
+		local ok, status = pcall(function() --[[ line: 158 ]]
 			-- upvalues: playersService (copy), p25 (copy)
 			return playersService:GetNameFromUserIdAsync(p25)
 		end)
@@ -171,7 +171,7 @@ local function getPlayerName(p25) --[[ line: 168 ]]
 	end)
 end
 
-local function getAssetBundles(value) --[[ line: 185 ]]
+local function getAssetBundles(value) --[[ line: 173 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -179,13 +179,13 @@ local function getAssetBundles(value) --[[ line: 185 ]]
 	}, true)
 end
 
-local function getHumanoidDescriptionFromCostumeId(p28) --[[ line: 198 ]]
+local function getHumanoidDescriptionFromCostumeId(p28) --[[ line: 186 ]]
 	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p29, _) --[[ line: 199 ]]
+	return promiseModule.new(function(p29, _) --[[ line: 187 ]]
 		-- upvalues: playersService (copy), p28 (ref)
-		spawn(function() --[[ line: 200 ]]
+		spawn(function() --[[ line: 188 ]]
 			-- upvalues: playersService (copy), p28 (copy), p29 (ref)
-			local var33 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromOutfitIdAsync(p28) else playersService:GetHumanoidDescriptionFromOutfitId(p28)
+			local var33 = playersService:GetHumanoidDescriptionFromOutfitIdAsync(p28)
 			
 			if var33 then
 				p29(var33)
@@ -194,7 +194,7 @@ local function getHumanoidDescriptionFromCostumeId(p28) --[[ line: 198 ]]
 	end)
 end
 
-local function getAssetFavoriteCount(value) --[[ line: 215 ]]
+local function getAssetFavoriteCount(value) --[[ line: 201 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -202,7 +202,7 @@ local function getAssetFavoriteCount(value) --[[ line: 215 ]]
 	}, false)
 end
 
-local function getBundleFavoriteCount(p30) --[[ line: 228 ]]
+local function getBundleFavoriteCount(p30) --[[ line: 214 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -210,7 +210,7 @@ local function getBundleFavoriteCount(p30) --[[ line: 228 ]]
 	}, false)
 end
 
-local function getFavoriteForAsset(value) --[[ line: 241 ]]
+local function getFavoriteForAsset(value) --[[ line: 227 ]]
 	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -218,7 +218,7 @@ local function getFavoriteForAsset(value) --[[ line: 241 ]]
 	}, true)
 end
 
-local function getFavoriteForBundle(p31) --[[ line: 260 ]]
+local function getFavoriteForBundle(p31) --[[ line: 246 ]]
 	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -226,7 +226,7 @@ local function getFavoriteForBundle(p31) --[[ line: 260 ]]
 	}, true)
 end
 
-local function createFavoriteForAsset(value) --[[ line: 279 ]]
+local function createFavoriteForAsset(value) --[[ line: 265 ]]
 	-- upvalues: playersService (ref), url (ref), httpService (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "POST",
@@ -235,7 +235,7 @@ local function createFavoriteForAsset(value) --[[ line: 279 ]]
 	}, true)
 end
 
-local function deleteFavoriteForAsset(value) --[[ line: 299 ]]
+local function deleteFavoriteForAsset(value) --[[ line: 285 ]]
 	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "DELETE",
@@ -243,7 +243,7 @@ local function deleteFavoriteForAsset(value) --[[ line: 299 ]]
 	}, true)
 end
 
-local function createFavoriteForBundle(p32) --[[ line: 318 ]]
+local function createFavoriteForBundle(p32) --[[ line: 304 ]]
 	-- upvalues: playersService (ref), url (ref), httpService (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "POST",
@@ -252,7 +252,7 @@ local function createFavoriteForBundle(p32) --[[ line: 318 ]]
 	}, true)
 end
 
-local function deleteFavoriteForBundle(p33) --[[ line: 338 ]]
+local function deleteFavoriteForBundle(p33) --[[ line: 324 ]]
 	-- upvalues: playersService (ref), url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "DELETE",
@@ -260,7 +260,7 @@ local function deleteFavoriteForBundle(p33) --[[ line: 338 ]]
 	}, true)
 end
 
-local function getEconomyProductInfo(p34) --[[ line: 357 ]]
+local function getEconomyProductInfo(p34) --[[ line: 343 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -268,13 +268,13 @@ local function getEconomyProductInfo(p34) --[[ line: 357 ]]
 	}, true)
 end
 
-local function getModelFromUserId(p35) --[[ line: 370 ]]
+local function getModelFromUserId(p35) --[[ line: 356 ]]
 	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p36, p37) --[[ line: 371 ]]
+	return promiseModule.new(function(p36, p37) --[[ line: 357 ]]
 		-- upvalues: playersService (copy), p35 (ref)
-		spawn(function() --[[ line: 372 ]]
+		spawn(function() --[[ line: 358 ]]
 			-- upvalues: playersService (copy), p35 (copy), p36 (ref), p37 (ref)
-			local var34 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromUserIdAsync(p35) else playersService:CreateHumanoidModelFromUserId(p35)
+			local var34 = playersService:CreateHumanoidModelFromUserIdAsync(p35)
 			
 			if var34 then
 				p36(var34)
@@ -286,7 +286,7 @@ local function getModelFromUserId(p35) --[[ line: 370 ]]
 	end)
 end
 
-local function getCollectibleResellableInstances(p38, p39) --[[ line: 389 ]]
+local function getCollectibleResellableInstances(p38, p39) --[[ line: 373 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -299,7 +299,7 @@ local function getCollectibleResellableInstances(p38, p39) --[[ line: 389 ]]
 	}, true)
 end
 
-local function getVersionInfo(p40) --[[ line: 406 ]]
+local function getVersionInfo(p40) --[[ line: 390 ]]
 	-- upvalues: formattedText (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -307,7 +307,7 @@ local function getVersionInfo(p40) --[[ line: 406 ]]
 	}, true)
 end
 
-local function getExperiencePlayability(p41) --[[ line: 415 ]]
+local function getExperiencePlayability(p41) --[[ line: 399 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -315,7 +315,7 @@ local function getExperiencePlayability(p41) --[[ line: 415 ]]
 	}, true)
 end
 
-local function getExperienceInfo(p42) --[[ line: 424 ]]
+local function getExperienceInfo(p42) --[[ line: 408 ]]
 	-- upvalues: url (ref), createYieldingPromise (ref)
 	return createYieldingPromise({
 		Method = "GET",
@@ -324,7 +324,7 @@ local function getExperienceInfo(p42) --[[ line: 424 ]]
 end
 
 return {
-	new = function() --[[ line: 435 ]]
+	new = function() --[[ line: 419 ]]
 		-- upvalues: getProductInfo (ref), getEconomyProductInfo (ref), getPlayerName (ref), getAssetBundles (ref), getHumanoidDescriptionFromCostumeId (ref), getAssetFavoriteCount (ref), getBundleFavoriteCount (ref), getFavoriteForAsset (ref), getFavoriteForBundle (ref), createFavoriteForAsset (ref), deleteFavoriteForAsset (ref), createFavoriteForBundle (ref), deleteFavoriteForBundle (ref), getModelFromUserId (ref), getCollectibleResellableInstances (ref), getVersionInfo (ref), getExperiencePlayability (ref), getExperienceInfo (ref), getItemDetails (ref), getPreviewAvatar (ref), getBatchItemDetails (ref), getBatchItemDetailsV2 (ref)
 		local t = {
 			getProductInfo = getProductInfo,
@@ -351,7 +351,7 @@ return {
 			getBatchItemDetailsV2 = getBatchItemDetailsV2
 		}
 		setmetatable(t, {
-			__tostring = function() --[[ line: 468 ]]
+			__tostring = function() --[[ line: 452 ]]
 				return "Service(Network)"
 			end
 		})

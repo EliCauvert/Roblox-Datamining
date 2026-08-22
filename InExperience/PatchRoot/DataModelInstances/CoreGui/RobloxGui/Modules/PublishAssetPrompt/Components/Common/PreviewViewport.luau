@@ -161,9 +161,9 @@ function previewViewport.processAsset(value) --[[ line: 230 ]]
 			-- upvalues: playersService (copy), value (ref), asset (ref), animationClipProviderService (copy)
 			local ok, status = pcall(function() --[[ line: 240 ]]
 				-- upvalues: playersService (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078) else playersService:GetHumanoidDescriptionFromOutfitId(1342485078)
+				return playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078)
 			end)
-			local var25 = if ok then if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15) else playersService:CreateHumanoidModelFromDescription(status, Enum.HumanoidRigType.R15) else nil
+			local var25 = if ok then playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15) else nil
 			
 			if not value.isMounted or asset ~= value.props.asset then return end
 			if not var25 then
@@ -199,7 +199,7 @@ function previewViewport.processAsset(value) --[[ line: 230 ]]
 	end
 end
 
-function previewViewport.addModelToViewportIfNeeded(p10) --[[ line: 305 ]]
+function previewViewport.addModelToViewportIfNeeded(p10) --[[ line: 293 ]]
 	if p10.model ~= nil and p10.model.Parent ~= nil then return end
 	if p10.worldModelRef:getValue() and p10.model ~= nil then
 		p10.model.Parent = p10.worldModelRef:getValue()
@@ -215,15 +215,15 @@ function previewViewport.addModelToViewportIfNeeded(p10) --[[ line: 305 ]]
 	end
 end
 
-local _ = function(p11, p12) --[[ line: 327 | named "getCameraDistance" ]]
+local _ = function(p11, p12) --[[ line: 315 | named "getCameraDistance" ]]
 	return math.max(p12.X, p12.Y) / 2 * (1 / math.tan(math.rad(p11) / 2)) + p12.Z / 2
 end
 
-local _ = function(value, p13, p14) --[[ line: 337 | named "rotateVectorAround" ]]
+local _ = function(value, p13, p14) --[[ line: 325 | named "rotateVectorAround" ]]
 	return CFrame.fromAxisAngle(p14, p13):VectorToWorldSpace(value)
 end
 
-function previewViewport.resetCameraPosition(value) --[[ line: 341 ]]
+function previewViewport.resetCameraPosition(value) --[[ line: 329 ]]
 	if not value.model then return end
 	value.modelCFrame = value.model:GetModelCFrame()
 	value.initialLookVector = value.modelCFrame.lookVector
@@ -251,11 +251,11 @@ function previewViewport.resetCameraPosition(value) --[[ line: 341 ]]
 	end
 end
 
-function previewViewport.pointsToPixelsFactor(p15) --[[ line: 375 ]]
+function previewViewport.pointsToPixelsFactor(p15) --[[ line: 363 ]]
 	return if p15.absoluteSize == nil or p15.modelExtentsSize == nil or (p15.absoluteSize.Y == 0 or p15.modelExtentsSize.Y == 0) or p15.modelExtentsSize.X == 0 then 1 else math.max(p15.modelExtentsSize.X, p15.modelExtentsSize.Y) / p15.absoluteSize.Y
 end
 
-function previewViewport.updateCameraPosition(p16) --[[ line: 390 ]]
+function previewViewport.updateCameraPosition(p16) --[[ line: 378 ]]
 	if p16.absoluteSize == nil or p16.cameraDistance == nil then
 		return
 	end
@@ -270,7 +270,7 @@ local t = {
 	loadingFailedText = robloxTranslatorModule:FormatByKey("CoreScripts.AssetPreviewView.Label.LoadingFailed")
 }
 
-function previewViewport.render(p17) --[[ line: 424 ]]
+function previewViewport.render(p17) --[[ line: 412 ]]
 	-- upvalues: inputType (ref), images (ref), robloxTranslatorModule (ref), roactModule (ref), guiService (ref), externalEventConnection (ref), userInputService (ref), getInputGroup (ref), inputTypeConstants (ref), button (ref), buttonType (ref), reset (ref), previewShrink (ref), shortcutBar (ref), skeleton (ref), emptyState (ref), t (ref), interactionFrameModule (ref), constantsModule (ref)
 	local loadingState = p17.state.loadingState
 	
@@ -280,19 +280,19 @@ function previewViewport.render(p17) --[[ line: 424 ]]
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		[roactModule.Ref] = p17.ref,
-		[roactModule.Change.AbsoluteSize] = function(p18) --[[ line: 469 ]]
+		[roactModule.Change.AbsoluteSize] = function(p18) --[[ line: 457 ]]
 			-- upvalues: p17 (ref)
 			p17.absoluteSize = p18.AbsoluteSize
 			p17:updateCameraPosition()
 		end,
-		[roactModule.Change.AbsolutePosition] = function(p19) --[[ line: 473 ]]
+		[roactModule.Change.AbsolutePosition] = function(p19) --[[ line: 461 ]]
 			-- upvalues: guiService (copy), p17 (ref)
 			p17.absolutePosition = p19.absolutePosition + guiService:GetGuiInset()
 		end
 	}, {
 		LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 			event = userInputService.LastInputTypeChanged,
-			callback = function(p20) --[[ line: 480 ]]
+			callback = function(p20) --[[ line: 468 ]]
 				-- upvalues: p17 (ref), getInputGroup (copy), inputTypeConstants (copy)
 				p17:setState({
 					isGamepad = getInputGroup(p20) == inputTypeConstants.Gamepad
@@ -409,18 +409,18 @@ function previewViewport.render(p17) --[[ line: 424 ]]
 	})
 end
 
-function previewViewport.setUpGamepad(value) --[[ line: 580 ]]
+function previewViewport.setUpGamepad(value) --[[ line: 568 ]]
 	-- upvalues: contextActionService (ref), runService (ref), gamepadUtils (ref)
 	contextActionService:UnbindCoreAction("PreviewViewportClose")
 	contextActionService:UnbindCoreAction("PreviewViewportReset")
 	contextActionService:UnbindCoreAction("PreviewViewportRotateAndZoom")
 	contextActionService:BindCoreAction("PreviewViewportClose", value.props.closePreviewView, false, Enum.KeyCode.ButtonB)
-	contextActionService:BindCoreAction("PreviewViewportReset", function() --[[ line: 591 ]]
+	contextActionService:BindCoreAction("PreviewViewportReset", function() --[[ line: 579 ]]
 		-- upvalues: value (ref)
 		value:resetCameraPosition()
 	end, false, Enum.KeyCode.ButtonY)
 	contextActionService:BindCoreAction("PreviewViewportRotateAndZoom", value.storeInput, false, Enum.KeyCode.Thumbstick2)
-	value.gamePadConnection = runService.RenderStepped:Connect(function(p21) --[[ line: 601 ]]
+	value.gamePadConnection = runService.RenderStepped:Connect(function(p21) --[[ line: 589 ]]
 		-- upvalues: value (ref), gamepadUtils (copy)
 		if value.inputState == Enum.UserInputState.Change and value.inputObject then
 			gamepadUtils.rotateAndZoom(value.inputObject, p21, value.setAngularVelocityByPixels, value.rotateByRadians, value.zoomToPoint)
@@ -428,7 +428,7 @@ function previewViewport.setUpGamepad(value) --[[ line: 580 ]]
 	end)
 end
 
-function previewViewport.didMount(p22) --[[ line: 614 ]]
+function previewViewport.didMount(p22) --[[ line: 602 ]]
 	-- upvalues: guiService (ref)
 	local guiInset = guiService:GetGuiInset()
 	p22.isMounted = true
@@ -437,7 +437,7 @@ function previewViewport.didMount(p22) --[[ line: 614 ]]
 	p22:setUpGamepad()
 end
 
-function previewViewport.cleanupGamepad(p23) --[[ line: 622 ]]
+function previewViewport.cleanupGamepad(p23) --[[ line: 610 ]]
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("PreviewViewportClose")
 	contextActionService:UnbindCoreAction("PreviewViewportReset")
@@ -448,12 +448,12 @@ function previewViewport.cleanupGamepad(p23) --[[ line: 622 ]]
 	end
 end
 
-function previewViewport.willUnmount(p24) --[[ line: 631 ]]
+function previewViewport.willUnmount(p24) --[[ line: 619 ]]
 	p24.isMounted = false
 	p24:cleanupGamepad()
 end
 
-function previewViewport.didUpdate(p25, p26) --[[ line: 636 ]]
+function previewViewport.didUpdate(p25, p26) --[[ line: 624 ]]
 	if p25.props.asset ~= p26.asset then
 		if p25.model ~= nil then
 			p25.model.Parent = nil

@@ -1,4 +1,5 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
+﻿local localizationService = game:GetService("LocalizationService")
+local sharedFlagsModule = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags)
 local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
 local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
 local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
@@ -108,137 +109,14 @@ if fFlagBuildExperienceClientDataModelTools then
 		running = "Searching client DataModel"
 	}
 end
-local function formatBuildGreeting(p0) --[[ line: 124 ]]
-	return if p0 == "" then "Hi" else `Hi, {p0}`
-end
-
-local function formatShareExperience(p1) --[[ line: 128 ]]
-	return `Share {p1}`
-end
-
-local function formatGameSharedWithTarget(p2) --[[ line: 132 ]]
-	return if p2 == "" then "Game shared" else `Game shared with {p2}`
-end
-
-local function formatMyCreationsUniverseName(p3) --[[ line: 139 ]]
-	return `Universe {p3}`
-end
-
-local function formatSubagentStatusCompletedTasks(p4) --[[ line: 143 ]]
-	return `{p4} completed tasks`
-end
-
-local function formatChatTurnFailureMessage(p5, p6) --[[ line: 147 ]]
-	return if p6 == nil then p5 else `({p6}) {p5}`
-end
-
-local function formatChatTaskCount(p7) --[[ line: 151 ]]
-	return if p7 == 1 then "1 task completed" else `{p7} tasks completed`
-end
-
-local function formatChatWorkedDuration(p8) --[[ line: 155 ]]
-	local maxValue = math.max(0, math.floor(p8 + 0.5))
+local function formatCampaignDate(p0) --[[ line: 279 ]]
+	-- upvalues: localizationService (ref)
+	local robloxLocaleId = localizationService.RobloxLocaleId
 	
-	return if maxValue < 60 then `Worked for {maxValue}s` else `Worked for {math.floor(maxValue / 60)}m{maxValue % 60}s`
-end
-
-local function formatChatThinkingDuration(p9) --[[ line: 165 ]]
-	return `Thinking for {math.max(0, math.floor(p9))}s`
-end
-
-local function formatChatFinishedTool(p10) --[[ line: 170 ]]
-	return `Finished {p10}`
-end
-
-local function formatChatFailedTool(p11) --[[ line: 174 ]]
-	return `Failed {p11}`
-end
-
-local function formatChatRunningTool(p12) --[[ line: 178 ]]
-	return `Running {p12}`
-end
-
-local function getChatToolActivityLabel(p13, p14) --[[ line: 182 ]]
-	-- upvalues: t (ref)
-	local var35 = t[p13]
-	
-	return if var35 == nil then nil elseif p14 == "completed" then var35.completed elseif p14 == "failed" then var35.failed else var35.running
-end
-
-local function formatVersionHistoryVersionNumber(p15) --[[ line: 196 ]]
-	return if p15 < 10 then `v0{p15}` else `v{p15}`
-end
-
-local function formatChatRevertConfirmationDescription(p16) --[[ line: 203 ]]
-	return `Confirm to revert the latest change and go back to {if p16 < 10 then `v0{p16}` else `v{p16}`}.`
-end
-
-local function formatVersionHistoryRestoredBadge(p17) --[[ line: 207 ]]
-	return `Restored {if p17 < 10 then `v0{p17}` else `v{p17}`}`
-end
-
-local function formatVersionHistoryCreatedDate(p18, p19, p20) --[[ line: 211 ]]
-	return `{p18} {p19}, {p20}`
-end
-
-local function formatVersionHistoryVersionTitle(p21) --[[ line: 215 ]]
-	return `Version {p21}`
-end
-
-local function formatVersionHistoryVersionLabel(p22, p23) --[[ line: 219 ]]
-	return `{if p22 < 10 then `v0{p22}` else `v{p22}`} \194\183 {p23}`
-end
-
-local function formatPrivateInvitesSubtitle(p24) --[[ line: 223 ]]
-	return `Choose up to {p24} friends, then share the link to the game.`
-end
-
-local function formatPrivateInvitesSent(p25, p26) --[[ line: 227 ]]
-	return `{p25} of {p26} playtesters added`
-end
-
-local function formatPrivateInvitesCount(p27, p28) --[[ line: 231 ]]
-	return `{p27}/{p28}`
-end
-
-local function formatUserPickerUsername(p29) --[[ line: 235 ]]
-	return `@{p29}`
-end
-
-local function formatCreatorCreditPercentUsed(p30) --[[ line: 239 ]]
-	local floored = math.floor(p30 + 0.5)
-	
-	if floored < 0 then
-		floored = 0
+	if robloxLocaleId == "" then
+		robloxLocaleId = "en-us"
 	end
-	if floored > 100 then
-		floored = 100
-	end
-	return `{floored}% used`
-end
-
-local function formatCreatorCreditRobuxUsage(p31, p32) --[[ line: 250 ]]
-	return `{p31}/{p32}`
-end
-
-local function formatCreatorCreditRobuxUsageUnlimited(p33) --[[ line: 254 ]]
-	return `{p33} used`
-end
-
-local function formatCreatorCreditResetHours(value) --[[ line: 258 ]]
-	return if value == 1 then "Resets in 1 hour" else `Resets in {value} hours`
-end
-
-local function formatCreatorCreditAdditionalUsed(p34, p35) --[[ line: 265 ]]
-	return `{p34} of {p35} used`
-end
-
-local function formatCreatorCreditAdditionalUsedNoLimit(p36) --[[ line: 269 ]]
-	return `{p36} used \226\128\162 No limit`
-end
-
-local function formatCreatorCreditLimitBelowSpend(p37) --[[ line: 273 ]]
-	return `Limit can't be below the {p37} Robux already spent today.`
+	return DateTime.fromUnixTimestampMillis(p0):FormatLocalTime("MMM D", robloxLocaleId)
 end
 
 local t_1 = {
@@ -248,6 +126,14 @@ local t_1 = {
 	AGENT_PLAN_BUILD = "Build",
 	AGENT_PLAN_OVERVIEW = "Overview",
 	AGENT_PLAN_VIEW = "View",
+	ANALYTICS_DURATION_TEMPLATE = "{number} hrs",
+	ANALYTICS_METRIC_TITLE_ARPPU = "ARPPU",
+	ANALYTICS_METRIC_TITLE_D1_RETENTION = "D1 retention",
+	ANALYTICS_METRIC_TITLE_DAILY_ACTIVE_USERS = "Daily active users",
+	ANALYTICS_METRIC_TITLE_PAYER_CONVERSION = "Payer conversion",
+	ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE = "Playthrough rate",
+	ANALYTICS_METRIC_TITLE_TOTAL_PLAYTIME = "Total playtime",
+	ANALYTICS_PERCENT_TEMPLATE = "{number}%",
 	ANSWER_STACK_CUSTOM_ANSWER = "Custom answer",
 	ANSWER_STACK_NEXT = "Next",
 	ANSWER_STACK_SELECT_AN_OPTION = "Select an option",
@@ -328,6 +214,7 @@ local t_1 = {
 	CHAT_NOTIFICATION_DISABLED_DESCRIPTION = "Turn on notifications in your device settings to get updates from Build.",
 	CHAT_NOTIFICATION_PROMPT_DESCRIPTION = "Get notified when Build has a reply for you.",
 	CHAT_NOTIFICATION_PROMPT_TITLE = "Push notifications",
+	CHAT_DONT_ASK_AGAIN = "Don't ask again",
 	CHAT_NOT_NOW = "Not now",
 	CHAT_NOTIFY_ME = "Notify me",
 	CHAT_OPEN_SETTINGS = "Open settings",
@@ -345,6 +232,11 @@ local t_1 = {
 	CHAT_TOOL = "tool",
 	CHAT_TURN_ACTIVITY = "Turn activity",
 	CHAT_UPDATE_WITH_CHANGES = "Update with changes",
+	AD_CAMPAIGN_CARD_TITLE_FREE = "Feature.Build.Title.PromoteGameFree",
+	AD_CAMPAIGN_CARD_TITLE_ACTIVE = "Feature.Build.Title.AdCampaignActive",
+	AD_CAMPAIGN_CARD_DESC_FREE = "Feature.Build.Description.BoostAudienceForPlays",
+	AD_CAMPAIGN_CARD_ACTIVE_DESC = "Feature.Build.Description.CampaignRunDates",
+	AD_CAMPAIGN_CARD_VIEW = "Feature.Build.Action.View",
 	GAME_CONFIGURATION_ACCESS = "Access",
 	GAME_CONFIGURATION_ACCESS_AND_SHARING = "Access & sharing",
 	GAME_CONFIGURATION_ACCESS_BODY = "Choose who can play after you publish this experience.",
@@ -457,36 +349,110 @@ local t_1 = {
 	VERSION_HISTORY_RESTORE = "Restore",
 	VERSION_HISTORY_RESTORE_FAILED = "Couldn't restore this version. Try again.",
 	VERSION_HISTORY_TITLE = "Version history",
-	formatBuildGreeting = formatBuildGreeting,
-	formatChatRevertConfirmationDescription = formatChatRevertConfirmationDescription,
-	formatGameSharedWithTarget = formatGameSharedWithTarget,
-	formatShareExperience = formatShareExperience,
-	formatChatFailedTool = formatChatFailedTool,
-	formatChatFinishedTool = formatChatFinishedTool,
-	formatChatRunningTool = formatChatRunningTool,
-	formatChatTaskCount = formatChatTaskCount,
-	formatChatThinkingDuration = formatChatThinkingDuration,
-	formatChatTurnFailureMessage = formatChatTurnFailureMessage,
-	formatChatWorkedDuration = formatChatWorkedDuration,
-	getChatToolActivityLabel = getChatToolActivityLabel,
-	formatMyCreationsUniverseName = formatMyCreationsUniverseName,
-	formatPrivateInvitesCount = formatPrivateInvitesCount,
-	formatPrivateInvitesSent = formatPrivateInvitesSent,
-	formatPrivateInvitesSubtitle = formatPrivateInvitesSubtitle,
-	formatSubagentStatusCompletedTasks = formatSubagentStatusCompletedTasks,
-	formatUserPickerUsername = formatUserPickerUsername,
-	formatVersionHistoryCreatedDate = formatVersionHistoryCreatedDate,
-	formatVersionHistoryRestoredBadge = formatVersionHistoryRestoredBadge,
-	formatVersionHistoryVersionLabel = formatVersionHistoryVersionLabel,
-	formatVersionHistoryVersionNumber = formatVersionHistoryVersionNumber,
-	formatVersionHistoryVersionTitle = formatVersionHistoryVersionTitle,
-	formatCreatorCreditAdditionalUsed = formatCreatorCreditAdditionalUsed,
-	formatCreatorCreditAdditionalUsedNoLimit = formatCreatorCreditAdditionalUsedNoLimit,
-	formatCreatorCreditLimitBelowSpend = formatCreatorCreditLimitBelowSpend,
-	formatCreatorCreditPercentUsed = formatCreatorCreditPercentUsed,
-	formatCreatorCreditRobuxUsage = formatCreatorCreditRobuxUsage,
-	formatCreatorCreditRobuxUsageUnlimited = formatCreatorCreditRobuxUsageUnlimited,
-	formatCreatorCreditResetHours = formatCreatorCreditResetHours
+	formatBuildGreeting = function(p1) --[[ line: 127 ]]
+		return if p1 == "" then "Hi" else `Hi, {p1}`
+	end,
+	formatChatRevertConfirmationDescription = function(p2) --[[ line: 204 ]]
+		return `Confirm to revert the latest change and go back to {if p2 < 10 then `v0{p2}` else `v{p2}`}.`
+	end,
+	formatGameSharedWithTarget = function(p3) --[[ line: 135 ]]
+		return if p3 == "" then "Game shared" else `Game shared with {p3}`
+	end,
+	formatShareExperience = function(p4) --[[ line: 131 ]]
+		return `Share {p4}`
+	end,
+	formatChatFailedTool = function(p5) --[[ line: 177 ]]
+		return `Failed {p5}`
+	end,
+	formatChatFinishedTool = function(p6) --[[ line: 173 ]]
+		return `Finished {p6}`
+	end,
+	formatChatRunningTool = function(p7) --[[ line: 181 ]]
+		return `Running {p7}`
+	end,
+	formatChatTaskCount = function(p8) --[[ line: 154 ]]
+		return if p8 == 1 then "1 task completed" else `{p8} tasks completed`
+	end,
+	formatChatThinkingDuration = function(p9) --[[ line: 168 ]]
+		return `Thinking for {math.max(0, math.floor(p9))}s`
+	end,
+	formatChatTurnFailureMessage = function(p10, p11) --[[ line: 150 ]]
+		return if p11 == nil then p10 else `({p11}) {p10}`
+	end,
+	formatChatWorkedDuration = function(p12) --[[ line: 158 ]]
+		local maxValue = math.max(0, math.floor(p12 + 0.5))
+		
+		return if maxValue < 60 then `Worked for {maxValue}s` else `Worked for {math.floor(maxValue / 60)}m{maxValue % 60}s`
+	end,
+	getChatToolActivityLabel = function(p13, p14) --[[ line: 185 ]]
+		-- upvalues: t (ref)
+		local var7 = t[p13]
+		
+		return if var7 == nil then nil elseif p14 == "completed" then var7.completed elseif p14 == "failed" then var7.failed else var7.running
+	end,
+	formatMyCreationsUniverseName = function(p15) --[[ line: 142 ]]
+		return `Universe {p15}`
+	end,
+	formatPrivateInvitesCount = function(p16, p17) --[[ line: 232 ]]
+		return `{p16}/{p17}`
+	end,
+	formatPrivateInvitesSent = function(p18, p19) --[[ line: 228 ]]
+		return `{p18} of {p19} playtesters added`
+	end,
+	formatPrivateInvitesSubtitle = function(p20) --[[ line: 224 ]]
+		return `Choose up to {p20} friends, then share the link to the game.`
+	end,
+	formatSubagentStatusCompletedTasks = function(p21) --[[ line: 146 ]]
+		return `{p21} completed tasks`
+	end,
+	formatUserPickerUsername = function(p22) --[[ line: 236 ]]
+		return `@{p22}`
+	end,
+	formatVersionHistoryCreatedDate = function(p23, p24, p25) --[[ line: 212 ]]
+		return `{p23} {p24}, {p25}`
+	end,
+	formatVersionHistoryRestoredBadge = function(p26) --[[ line: 208 ]]
+		return `Restored {if p26 < 10 then `v0{p26}` else `v{p26}`}`
+	end,
+	formatVersionHistoryVersionLabel = function(p27, p28) --[[ line: 220 ]]
+		return `{if p27 < 10 then `v0{p27}` else `v{p27}`} \194\183 {p28}`
+	end,
+	formatVersionHistoryVersionNumber = function(p29) --[[ line: 197 ]]
+		return if p29 < 10 then `v0{p29}` else `v{p29}`
+	end,
+	formatVersionHistoryVersionTitle = function(p30) --[[ line: 216 ]]
+		return `Version {p30}`
+	end,
+	formatCreatorCreditAdditionalUsed = function(p31, p32) --[[ line: 266 ]]
+		return `{p31} of {p32} used`
+	end,
+	formatCreatorCreditAdditionalUsedNoLimit = function(p33) --[[ line: 270 ]]
+		return `{p33} used \226\128\162 No limit`
+	end,
+	formatCreatorCreditLimitBelowSpend = function(p34) --[[ line: 274 ]]
+		return `Limit can't be below the {p34} Robux already spent today.`
+	end,
+	formatCreatorCreditPercentUsed = function(p35) --[[ line: 240 ]]
+		local floored = math.floor(p35 + 0.5)
+		
+		if floored < 0 then
+			floored = 0
+		end
+		if floored > 100 then
+			floored = 100
+		end
+		return `{floored}% used`
+	end,
+	formatCreatorCreditRobuxUsage = function(p36, p37) --[[ line: 251 ]]
+		return `{p36}/{p37}`
+	end,
+	formatCreatorCreditRobuxUsageUnlimited = function(p38) --[[ line: 255 ]]
+		return `{p38} used`
+	end,
+	formatCreatorCreditResetHours = function(value) --[[ line: 259 ]]
+		return if value == 1 then "Resets in 1 hour" else `Resets in {value} hours`
+	end,
+	formatCampaignDate = formatCampaignDate
 }
 
 if fFlagBuildLocalization then
@@ -602,6 +568,14 @@ if fFlagBuildLocalization then
 		AGENT_PLAN_BUILD = "Feature.Build.Action.Build",
 		AGENT_PLAN_OVERVIEW = "Feature.Build.Header.Overview",
 		AGENT_PLAN_VIEW = "Feature.Build.Action.View",
+		ANALYTICS_DURATION_TEMPLATE = "Feature.Build.Analytics.DurationHours",
+		ANALYTICS_METRIC_TITLE_ARPPU = "Feature.Build.Analytics.Title.Arppu",
+		ANALYTICS_METRIC_TITLE_D1_RETENTION = "Feature.Build.Analytics.Title.D1Retention",
+		ANALYTICS_METRIC_TITLE_DAILY_ACTIVE_USERS = "Feature.Build.Analytics.Title.DailyActiveUsers",
+		ANALYTICS_METRIC_TITLE_PAYER_CONVERSION = "Feature.Build.Analytics.Title.PayerConversion",
+		ANALYTICS_METRIC_TITLE_PLAYTHROUGH_RATE = "Feature.Build.Analytics.Title.PlaythroughRate",
+		ANALYTICS_METRIC_TITLE_TOTAL_PLAYTIME = "Feature.Build.Analytics.Title.TotalPlaytime",
+		ANALYTICS_PERCENT_TEMPLATE = "Feature.Build.Analytics.Percent",
 		ANSWER_STACK_CUSTOM_ANSWER = "Feature.Build.Header.CustomAnswer",
 		ANSWER_STACK_NEXT = "Feature.Build.Action.Next",
 		ANSWER_STACK_SELECT_AN_OPTION = "Feature.Build.Label.SelectOption",
@@ -616,6 +590,8 @@ if fFlagBuildLocalization then
 		BUILD_ELIGIBILITY_ERROR_TITLE = "Feature.Build.Title.GenericError",
 		BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION = "Feature.Build.Message.AccountRequirements",
 		BUILD_ELIGIBILITY_INELIGIBLE_TITLE = "Feature.Build.Title.BuildUnavailable",
+		BUILD_GREETING = "Feature.Build.Label.Hi",
+		BUILD_GREETING_WITH_NAME = "Feature.Build.Message.HiDisplayName",
 		BUILD_HEADER_TITLE = "Feature.Build.Action.Build",
 		BUILD_SEARCH_PLACEHOLDER = "Feature.Build.Label.SearchGames",
 		BUILD_SUBLINE = "Feature.Build.Message.WhatToCreate",
@@ -633,6 +609,8 @@ if fFlagBuildLocalization then
 		CREATOR_CREDIT_FREE_USAGE_CAPTION = "Feature.Build.Label.ResetsDaily",
 		CREATOR_CREDIT_ADDITIONAL_USAGE_LABEL = "Feature.Build.Label.GetMoreBuildUsage",
 		CREATOR_CREDIT_ADDITIONAL_DAILY_USAGE_LABEL = "Feature.Build.Label.AdditionalUsage",
+		CREATOR_CREDIT_ADDITIONAL_USED = "Feature.Build.Label.AdditionalUsed",
+		CREATOR_CREDIT_AMOUNT_AVAILABLE = "Feature.Build.Label.AmountAvailable",
 		CREATOR_CREDIT_AVAILABLE_SUFFIX = "Feature.Build.Label.Available",
 		CREATOR_CREDIT_ADDITIONAL_USAGE_DESCRIPTION = "Feature.Build.Description.AutoBuyUsage",
 		CREATOR_CREDIT_SET_DAILY_LIMIT = "Feature.Build.Action.SetDailyLimit",
@@ -640,7 +618,14 @@ if fFlagBuildLocalization then
 		CREATOR_CREDIT_SETTINGS_SAVE_ERROR = "Feature.Build.Message.SaveChangesFailed",
 		CREATOR_CREDIT_LIMIT_SHEET_TITLE = "Feature.Build.Action.SetDailyLimit",
 		CREATOR_CREDIT_LIMIT_SHEET_CONFIRM = "Feature.Build.Action.SetLimit",
+		CREATOR_CREDIT_LIMIT_BELOW_SPEND = "Feature.Build.Message.LimitBelowSpend",
 		CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT = "Feature.Build.Label.NoLimit",
+		CREATOR_CREDIT_PERCENT_USED = "Feature.Build.Label.PercentUsed",
+		CREATOR_CREDIT_RESET_HOURS = "Feature.Build.Message.ResetHours",
+		CREATOR_CREDIT_RESET_ONE_HOUR = "Feature.Build.Message.ResetOneHour",
+		CREATOR_CREDIT_ROBUX_USAGE = "Feature.Build.Label.RobuxUsage",
+		CREATOR_CREDIT_USAGE_USED = "Feature.Build.Label.UsageUsed",
+		CREATOR_CREDIT_UNLIMITED_USED = "Feature.Build.Label.UnlimitedUsed",
 		CREATOR_CREDIT_BUY_ROBUX_BUTTON = "Feature.Build.Action.BuyRobux",
 		CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE = "Feature.Build.Title.NoRobuxForUsage",
 		CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION = "Feature.Build.Description.BuyRobuxToCreate",
@@ -670,6 +655,7 @@ if fFlagBuildLocalization then
 		CHAT_CREATE_UNIVERSE_ERROR = "Feature.Build.Message.GameNotCreated",
 		CHAT_DEFAULT_FAILURE = "Feature.Build.Message.BuildConnectFailed",
 		CHAT_ERROR_CONFLICT = "Feature.Build.Message.BuildBusy",
+		CHAT_ERROR_CODE_TEXT = "Feature.Build.Message.ErrorCodeText",
 		CHAT_ERROR_FORBIDDEN = "Feature.Build.Message.BuildAccountBlocked",
 		CHAT_ERROR_GONE = "Feature.Build.Message.ConversationGone",
 		CHAT_ERROR_INTERNAL = "Feature.Build.Message.BuildInternalError",
@@ -682,8 +668,10 @@ if fFlagBuildLocalization then
 		CHAT_NOTIFICATION_DISABLED_DESCRIPTION = "Feature.Build.Description.EnableBuildNotifs",
 		CHAT_NOTIFICATION_PROMPT_DESCRIPTION = "Feature.Build.Description.BuildReplyNotif",
 		CHAT_NOTIFICATION_PROMPT_TITLE = "Feature.Build.Title.PushNotifications",
+		CHAT_DONT_ASK_AGAIN = "Feature.Build.Action.DontAskAgain",
 		CHAT_NOT_NOW = "Feature.Build.Action.NotNow",
 		CHAT_NOTIFY_ME = "Feature.Build.Action.NotifyMe",
+		CHAT_ONE_TASK_COMPLETED = "Feature.Build.Message.OneTaskCompleted",
 		CHAT_OPEN_SETTINGS = "Feature.Build.Action.OpenSettings",
 		CHAT_PLAYTEST = "Feature.Build.Action.Playtest",
 		CHAT_POLICY_REJECTION = "Feature.Build.Message.SafetyPolicy",
@@ -694,14 +682,19 @@ if fFlagBuildLocalization then
 		CHAT_REVERT_CONFIRMATION_ACTION = "Feature.Build.Action.Revert",
 		CHAT_REVERT_CONFIRMATION_DESCRIPTION = "Feature.Build.Description.RestoreLatest",
 		CHAT_REVERT_CONFIRMATION_TITLE = "Feature.Build.Title.RevertLastChange",
+		CHAT_REVERT_TO_VERSION = "Feature.Build.Description.RevertToVersion",
 		CHAT_REVERT_FAILURE = if fFlagEnableTeamTestLua then "Feature.Build.Message.RevertVersionFail" else "Feature.Build.Message.PublishNotReverted",
 		CHAT_REVERT_SUCCESS = if fFlagEnableTeamTestLua then "Feature.Build.Message.CreatedRevertedVer" else "Feature.Build.Message.PublishReverted",
 		CHAT_TOOL = "Feature.Build.Label.Tool",
 		CHAT_TOOL_FAILED = "Feature.Build.Message.FailedTitle",
 		CHAT_TOOL_FINISHED = "Feature.Build.Message.FinishedTitle",
 		CHAT_TOOL_RUNNING = "Feature.Build.Message.RunningTitle",
+		CHAT_TASKS_COMPLETED = "Feature.Build.Message.TasksCompleted",
+		CHAT_THINKING_SECONDS = "Feature.Build.Message.ThinkingSeconds",
 		CHAT_TURN_ACTIVITY = "Feature.Build.Title.TurnActivity",
 		CHAT_UPDATE_WITH_CHANGES = "Feature.Build.Action.UpdateWithChanges",
+		CHAT_WORKED_MINUTES_SECONDS = "Feature.Build.Message.WorkedMinutesSeconds",
+		CHAT_WORKED_SECONDS = "Feature.Build.Message.WorkedSeconds",
 		GAME_CONFIGURATION_ACCESS = "Feature.Build.Label.Access",
 		GAME_CONFIGURATION_ACCESS_AND_SHARING = "Feature.Build.Header.AccessSharing",
 		GAME_CONFIGURATION_ACCESS_BODY = "Feature.Build.Description.PlayAfterPublish",
@@ -751,6 +744,7 @@ if fFlagBuildLocalization then
 		MY_CREATIONS_PUBLICLY_UNAVAILABLE = "Feature.Build.Label.PubliclyUnavailable",
 		MY_CREATIONS_READY = "Feature.Build.Label.Ready",
 		MY_CREATIONS_RESTRICTED = "Feature.Build.Label.Limited",
+		MY_CREATIONS_UNIVERSE_NAME = "Feature.Build.Label.UniverseNumber",
 		PLAYTEST_DISABLED_TOOLTIP = "Feature.Build.Description.PlaytestLocked",
 		PLAYTEST_TITLE = "Feature.Build.Action.Playtest",
 		PRIVATE_INVITES_ADD_PLAYTESTER = "Feature.Build.Action.AddPlaytester",
@@ -758,6 +752,7 @@ if fFlagBuildLocalization then
 		PRIVATE_INVITES_ALL_FRIENDS_ADDED = "Feature.Build.Message.AllFriendsAdded",
 		PRIVATE_INVITES_FRIENDS_LOAD_ERROR = "Feature.Build.Message.FriendsLoadFailed",
 		PRIVATE_INVITES_INVITE_BUTTON = "Feature.Build.Action.AddFriends",
+		PRIVATE_INVITES_COUNT = "Feature.Build.Label.InviteCount",
 		PRIVATE_INVITES_NO_FRIENDS = "Feature.Build.Message.NoFriendsToAdd",
 		PRIVATE_INVITES_PAGE_TITLE = "Feature.Build.Title.Playtesters",
 		PRIVATE_INVITES_ROW_DESCRIPTION = "Feature.Build.Description.ChoosePlaytesters",
@@ -765,10 +760,12 @@ if fFlagBuildLocalization then
 		PRIVATE_INVITES_ROW_TITLE = "Feature.Build.Title.Playtesters",
 		PRIVATE_INVITES_ROW_TITLE_EMPTY = "Feature.Build.Action.AddToPlaytest",
 		PRIVATE_INVITES_SEARCH_PLACEHOLDER = "Feature.Build.Label.Search",
+		PRIVATE_INVITES_SENT = "Feature.Build.Message.PlaytestersAdded",
 		PRIVATE_INVITES_SHARE_LINK = "Feature.Build.Action.ShareLink",
 		PRIVATE_INVITES_SHARE_LINK_ERROR = "Feature.Build.Message.ShareLinkFailed",
 		PRIVATE_INVITES_SHARE_WITH_FRIENDS = "Feature.Build.Label.ShareAddedFriends",
 		PRIVATE_INVITES_SHARE_WITH_FRIENDS_BUTTON = "Feature.Build.Action.Share",
+		PRIVATE_INVITES_SUBTITLE = "Feature.Build.Description.InviteFriendLimit",
 		PRIVATE_INVITES_TITLE = "Feature.Build.Title.AddFriendsToPlaytest",
 		PRIVATE_INVITES_UNKNOWN_USER = "Feature.Build.Label.Unknown",
 		PUBLISH_CONTENT_BODY = "Feature.Build.Description.RatingAgreement",
@@ -785,9 +782,13 @@ if fFlagBuildLocalization then
 		SHARE_AUDIENCE_PRIVATE_DESCRIPTION = "Feature.Build.Description.PrivateShare",
 		SHARE_AUDIENCE_PRIVATE_TITLE = "Feature.Build.Title.GamePrivate",
 		SHARE_AUDIENCE_SHARE = "Feature.Build.Action.Share",
+		SHARE_EXPERIENCE = "Feature.Build.Message.ShareExperience",
+		SHARE_GAME_SHARED = "Feature.Build.Message.GameShared",
+		SHARE_GAME_SHARED_WITH_TARGET = "Feature.Build.Message.GameSharedWith",
 		SUBAGENT_STATUS_AGENTS = "Feature.Build.Title.Tasks",
 		SUBAGENT_STATUS_ALL = "Feature.Build.Label.All",
 		SUBAGENT_STATUS_BUILDING = "Feature.Build.Label.Building",
+		SUBAGENT_STATUS_COMPLETED_TASKS = "Feature.Build.Message.CompletedTasks",
 		SUBAGENT_STATUS_DELETED = "Feature.Build.Label.Deleted",
 		SUBAGENT_STATUS_DONE = "Feature.Build.Label.Done",
 		SUBAGENT_STATUS_ERROR = "Feature.Build.Label.Error",
@@ -802,8 +803,10 @@ if fFlagBuildLocalization then
 		UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_DESCRIPTION = "Feature.Build.Description.PlaytestLatest",
 		UNPUBLISHED_PLAYTEST_MODE_TOOLTIP_TITLE = "Feature.Build.Title.ChangesNotLive",
 		USER_PICKER_NO_RESULTS = "Feature.Build.Message.NoResults",
+		USER_PICKER_USERNAME = "Feature.Build.Label.UsernameHandle",
 		VERSION_HISTORY_AUTOSAVED = "Feature.Build.Label.Autosaved",
 		VERSION_HISTORY_CANCEL = "Feature.Build.Action.Cancel",
+		VERSION_HISTORY_CREATED_DATE = "Feature.Build.Label.CreatedDate",
 		VERSION_HISTORY_EMPTY = "Feature.Build.Message.NoVersionHistory",
 		VERSION_HISTORY_FALLBACK_DESCRIPTION = "Feature.Build.Message.NoDescriptionProvided",
 		VERSION_HISTORY_HIDE_AUTOSAVED = "Feature.Build.Action.HideAutosaved",
@@ -811,48 +814,29 @@ if fFlagBuildLocalization then
 		VERSION_HISTORY_LOADING = "Feature.Build.Message.LoadingVersions",
 		VERSION_HISTORY_PREVIOUSLY_PUBLISHED = "Feature.Build.Label.PreviouslyPublished",
 		VERSION_HISTORY_PUBLISHED = "Feature.Build.Label.Published",
+		VERSION_HISTORY_RESTORED_BADGE = "Feature.Build.Label.RestoredVersion",
 		VERSION_HISTORY_RESTORE = "Feature.Build.Action.Restore",
 		VERSION_HISTORY_RESTORE_FAILED = "Feature.Build.Message.RestoreVersionFailed",
 		VERSION_HISTORY_TITLE = "Feature.Build.Title.VersionHistory",
-		formatBuildGreeting = formatBuildGreeting,
-		formatChatRevertConfirmationDescription = formatChatRevertConfirmationDescription,
-		formatGameSharedWithTarget = formatGameSharedWithTarget,
-		formatShareExperience = formatShareExperience,
-		formatChatFailedTool = formatChatFailedTool,
-		formatChatFinishedTool = formatChatFinishedTool,
-		formatChatRunningTool = formatChatRunningTool,
-		formatChatTaskCount = formatChatTaskCount,
-		formatChatThinkingDuration = formatChatThinkingDuration,
-		formatChatTurnFailureMessage = formatChatTurnFailureMessage,
-		formatChatWorkedDuration = formatChatWorkedDuration,
-		getChatToolActivityLabel = getChatToolActivityLabel,
-		getChatToolActivityLocalizationKey = function(p38, p39) --[[ line: 670 ]]
+		VERSION_HISTORY_VERSION_COMPACT = "Feature.Build.Label.VersionCompact",
+		VERSION_HISTORY_VERSION_LABEL = "Feature.Build.Label.VersionDate",
+		VERSION_HISTORY_VERSION_PADDED = "Feature.Build.Label.VersionPadded",
+		VERSION_HISTORY_VERSION_TITLE = "Feature.Build.Title.VersionNumber",
+		AD_CAMPAIGN_CARD_TITLE_FREE = "Feature.Build.Title.PromoteGameFree",
+		AD_CAMPAIGN_CARD_TITLE_ACTIVE = "Feature.Build.Title.AdCampaignActive",
+		AD_CAMPAIGN_CARD_DESC_FREE = "Feature.Build.Description.BoostAudienceForPlays",
+		AD_CAMPAIGN_CARD_ACTIVE_DESC = "Feature.Build.Description.CampaignRunDates",
+		AD_CAMPAIGN_CARD_VIEW = "Feature.Build.Action.View",
+		getChatToolActivityLocalizationKey = function(p39, p40) --[[ line: 697 ]]
 			-- upvalues: t_2 (ref)
-			if p38 == nil then
+			if p39 == nil then
 				return nil
 			end
-			local var37 = t_2[p38]
+			local var9 = t_2[p39]
 			
-			return if var37 == nil then nil elseif p39 == "completed" then var37.completed elseif p39 == "failed" then var37.failed else var37.running
+			return if var9 == nil then nil elseif p40 == "completed" then var9.completed elseif p40 == "failed" then var9.failed else var9.running
 		end,
-		formatMyCreationsUniverseName = formatMyCreationsUniverseName,
-		formatPrivateInvitesCount = formatPrivateInvitesCount,
-		formatPrivateInvitesSent = formatPrivateInvitesSent,
-		formatPrivateInvitesSubtitle = formatPrivateInvitesSubtitle,
-		formatSubagentStatusCompletedTasks = formatSubagentStatusCompletedTasks,
-		formatUserPickerUsername = formatUserPickerUsername,
-		formatVersionHistoryCreatedDate = formatVersionHistoryCreatedDate,
-		formatVersionHistoryRestoredBadge = formatVersionHistoryRestoredBadge,
-		formatVersionHistoryVersionLabel = formatVersionHistoryVersionLabel,
-		formatVersionHistoryVersionNumber = formatVersionHistoryVersionNumber,
-		formatVersionHistoryVersionTitle = formatVersionHistoryVersionTitle,
-		formatCreatorCreditAdditionalUsed = formatCreatorCreditAdditionalUsed,
-		formatCreatorCreditAdditionalUsedNoLimit = formatCreatorCreditAdditionalUsedNoLimit,
-		formatCreatorCreditLimitBelowSpend = formatCreatorCreditLimitBelowSpend,
-		formatCreatorCreditPercentUsed = formatCreatorCreditPercentUsed,
-		formatCreatorCreditRobuxUsage = formatCreatorCreditRobuxUsage,
-		formatCreatorCreditRobuxUsageUnlimited = formatCreatorCreditRobuxUsageUnlimited,
-		formatCreatorCreditResetHours = formatCreatorCreditResetHours
+		formatCampaignDate = formatCampaignDate
 	}
 end
 return t_1

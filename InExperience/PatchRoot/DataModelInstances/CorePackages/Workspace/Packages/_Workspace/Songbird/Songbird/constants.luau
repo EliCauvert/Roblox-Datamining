@@ -1,7 +1,6 @@
 ﻿local _ = require(script:FindFirstAncestor("Songbird").Parent.ReactOtter)
 
 return {
-	AUDIO_ANALYTICS_CONTEXT = "Audio",
 	BIG_VECTOR = Vector2.new(1e999, 1e999),
 	ARTIST_NAME_HEIGHT = 14,
 	TRACK_NAME_HEIGHT = 16,

@@ -1,4 +1,6 @@
-﻿return {
+﻿local parent = script.Parent
+
+return {
 	AppExperienceActionRow = require(script.AppExperienceActionRow),
 	AppGameTile = require(script.AppGameTile),
 	ExperienceFooter = require(script.Footer.ExperienceFooter),
@@ -27,7 +29,8 @@
 	formatExperienceIcon = require(script.formatExperienceIcon),
 	formatExperienceRating = require(script.formatExperienceRating),
 	formatExperienceThumbnail = require(script.formatExperienceThumbnail),
-	resolveGameTileThumbnailUri = if require(script.Parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch then require(script.resolveGameTileThumbnailUri) else nil,
+	resolveGameTileThumbnailUri = if require(parent.SharedFlags).FFlagLuaAppHomeThumbnailPrefetch then require(script.resolveGameTileThumbnailUri) else nil,
+	resolveWideAssetId = if require(parent.SharedFlags).FFlagMigrateGameInfoToStore then require(script.resolveWideAssetId) else nil,
 	useNavigateToGameDetails = require(script.useNavigateToGameDetails),
 	NotInterestedUserSignalTelemetryEventConfigs = require(script.NotInterestedUserSignalTelemetryEventConfigs),
 	getGameTileHiddenStore = require(script.HiddenGameTile.getGameTileHiddenStore),
@@ -37,6 +40,7 @@
 	ItemLayoutDataParsingUtils = require(script.ItemLayoutDataParsingUtils),
 	useIsHoveredTile = require(script.useIsHoveredTile),
 	useValidTileBadges = require(script.Overlays.useValidTileBadges),
+	GameTileContextualActions = require(script.GameTileContextualActions),
 	GameTileOverflowMenu = require(script.GameTileOverflowMenu),
 	getAvailableGameTileOverflowMenuItems = require(script.getAvailableGameTileOverflowMenuItems),
 	ZoomAnimatedFrame = require(script.ZoomAnimatedFrame),

@@ -296,7 +296,7 @@ function SocialContextToastDispatcher(p25) --[[ line: 288 ]]
 		if p27.FollowUserId == localPlayer.UserId then
 			local ok, status = pcall(function() --[[ line: 358 ]]
 				-- upvalues: localPlayer (ref), p27 (ref)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then localPlayer:IsFriendsWithAsync(p27.UserId) else localPlayer:IsFriendsWith(p27.UserId)
+				return localPlayer:IsFriendsWithAsync(p27.UserId)
 			end)
 			
 			if ok and status then
@@ -311,7 +311,7 @@ function SocialContextToastDispatcher(p25) --[[ line: 288 ]]
 						actionType = socialContextToastAnalyticsActionTypesModule.Shown
 					})
 				end
-				getNames(services.apolloClient, { p27.UserId }):andThen(function(p28) --[[ line: 380 ]]
+				getNames(services.apolloClient, { p27.UserId }):andThen(function(p28) --[[ line: 376 ]]
 					-- upvalues: p27 (ref), var29 (copy), setToastContentModule (copy), toastTypesModule (copy)
 					local name = p28[1].name
 					
@@ -329,7 +329,7 @@ function SocialContextToastDispatcher(p25) --[[ line: 288 ]]
 	end
 	
 	if fFlagEnablePartyNudgeAfterJoin then
-		useOneToOnePartyNudgeStartPartyRejected(function(p29) --[[ line: 398 ]]
+		useOneToOnePartyNudgeStartPartyRejected(function(p29) --[[ line: 394 ]]
 			-- upvalues: playersService (ref), onPlayerAdded (ref)
 			if p29 and p29.inviterId then
 				local inviterIdPlayerByUserId = playersService:GetPlayerByUserId(p29.inviterId)
@@ -340,7 +340,7 @@ function SocialContextToastDispatcher(p25) --[[ line: 288 ]]
 			end
 		end)
 	end
-	local var32 = if getFFlagEnableReferredPlayerJoinRemoteEvent() then reactModule.useCallback(function(p30) --[[ line: 410 ]]
+	local var32 = if getFFlagEnableReferredPlayerJoinRemoteEvent() then reactModule.useCallback(function(p30) --[[ line: 406 ]]
 		-- upvalues: var28 (ref), getFIntMaxReferredPlayerJoinToasts (copy), var29 (ref), setToastContentModule (copy), toastTypesModule (copy)
 		if getFIntMaxReferredPlayerJoinToasts() <= var28.current then
 			return
@@ -352,18 +352,18 @@ function SocialContextToastDispatcher(p25) --[[ line: 288 ]]
 			joinerName = p30.DisplayName
 		}))
 	end, {}) else nil
-	reactModule.useEffect(function() --[[ line: 425 ]]
+	reactModule.useEffect(function() --[[ line: 421 ]]
 		-- upvalues: fFlagEnablePartyNudgeAfterJoin (copy), services (ref), var26 (ref), socialContextToastDelay (copy), var24 (ref), playersService (ref), showToastOnJoin (ref), var25 (ref), onPlayerAdded (ref), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var12 (copy), var27 (ref), var32 (write)
 		local var37 = true
 		
 		if fFlagEnablePartyNudgeAfterJoin and services.showPlayerJoinedFriendsToastRemoteEvent then
 			var37 = false
-			var26.current = services.showPlayerJoinedFriendsToastRemoteEvent.OnClientEvent:Connect(function() --[[ line: 430 ]]
+			var26.current = services.showPlayerJoinedFriendsToastRemoteEvent.OnClientEvent:Connect(function() --[[ line: 426 ]]
 				-- upvalues: var37 (write)
 				var37 = true
 			end)
 		end
-		task.delay(socialContextToastDelay, function() --[[ line: 438 ]]
+		task.delay(socialContextToastDelay, function() --[[ line: 434 ]]
 			-- upvalues: var24 (copy), playersService (copy), var37 (write), showToastOnJoin (copy), fFlagEnablePartyNudgeAfterJoin (copy), services (copy), var25 (copy), onPlayerAdded (copy), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var12 (copy), var27 (copy), var32 (copy)
 			if not var24.current then
 				if #playersService:GetPlayers() > 0 and var37 then
@@ -380,7 +380,7 @@ function SocialContextToastDispatcher(p25) --[[ line: 288 ]]
 			end
 		end)
 		
-		return function() --[[ line: 465 ]]
+		return function() --[[ line: 461 ]]
 			-- upvalues: var24 (copy), var25 (copy), fFlagEnablePartyNudgeAfterJoin (copy), var26 (copy), getFFlagEnableReferredPlayerJoinRemoteEvent (copy), var27 (copy)
 			var24.current = true
 			

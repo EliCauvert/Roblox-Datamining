@@ -84,5 +84,6 @@
 	Unknown = "Unknown",
 	VariableItemWidthCarousel = "VariableItemWidthCarousel",
 	VerticalFeed = "VerticalFeed",
+	VideoPlayer = "VideoPlayer",
 	View = "View"
 }

@@ -5,16 +5,17 @@ local capabilityModule = require(script.Parent.capability)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 43 ]]
-	-- upvalues: t_1 (ref)
+function t_1.new(p0) --[[ line: 49 ]]
+	-- upvalues: t (ref), t_1 (ref)
 	return setmetatable({
 		enabled_capabilities = if p0 == nil or p0.enabled_capabilities == nil then {} else p0.enabled_capabilities,
-		proto_version = if p0 == nil or p0.proto_version == nil then "" else p0.proto_version
+		proto_version = if p0 == nil or p0.proto_version == nil then "" else p0.proto_version,
+		platform = if p0 == nil or p0.platform == nil then assert(t.Platform.fromNumber(0), "Enum has no 0 default") else p0.platform
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 52 ]]
-	-- upvalues: protoModule (ref), capabilityModule (ref)
+function t_1:encode() --[[ line: 61 ]]
+	-- upvalues: protoModule (ref), capabilityModule (ref), t (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
 	
@@ -32,111 +33,129 @@ function t_1:encode() --[[ line: 52 ]]
 		buff = var9
 		var6 = var10
 	end
+	if self.platform ~= nil and (self.platform ~= nil and self.platform ~= 0 or self.platform ~= t.Platform.fromNumber(0)) then
+		local var11, var12 = protoModule.writeTag(buff, var6, 3, protoModule.wireTypes.varint)
+		var11, var12 = protoModule.writeVarInt(var11, var12, t.Platform.toNumber(self.platform))
+		buff = var11
+		var6 = var12
+	end
 	local buff_1 = buffer.create(var6)
 	buffer.copy(buff_1, 0, buff, 0, var6)
 	
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 77 ]]
-	-- upvalues: t_1 (ref), protoModule (ref), capabilityModule (ref)
-	local var12 = t_1.new()
-	local var13 = 0
-	while var13 < buffer.len(p1) do
+function t_1.decode(p1) --[[ line: 94 ]]
+	-- upvalues: t_1 (ref), protoModule (ref), capabilityModule (ref), t (ref)
+	local var14 = t_1.new()
+	local var15 = 0
+	while var15 < buffer.len(p1) do
 		local _ = nil
-		local var14 = nil
-		local var15, var16, var17 = protoModule.readTag(p1, var13)
-		local var18 = var15
-		var14 = var16
-		var13 = var17
+		local var16 = nil
+		local var17, var18, var19 = protoModule.readTag(p1, var15)
+		local var20 = var17
+		var16 = var18
+		var15 = var19
 		
-		if var14 == protoModule.wireTypes.varint then
-			if var18 == 1 then
+		if var16 == protoModule.wireTypes.varint then
+			if var20 == 1 then
 				local _ = nil
-				local var19, var20 = protoModule.readVarIntI32(p1, var13)
-				local var21 = var19
-				var13 = var20
-				table.insert(var12.enabled_capabilities, capabilityModule.Capability.fromNumber(var21) or var21)
+				local var21, var22 = protoModule.readVarIntI32(p1, var15)
+				local var23 = var21
+				var15 = var22
+				table.insert(var14.enabled_capabilities, capabilityModule.Capability.fromNumber(var23) or var23)
+			elseif var20 == 3 then
+				local _ = nil
+				local var24, var25 = protoModule.readVarIntI32(p1, var15)
+				local var26 = var24
+				var15 = var25
+				var14.platform = t.Platform.fromNumber(var26) or var26
 			else
 				local _ = nil
-				local var22, var23 = protoModule.readVarInt(p1, var13)
-				local _ = var22
-				var13 = var23
+				local var27, var28 = protoModule.readVarInt(p1, var15)
+				local _ = var27
+				var15 = var28
 			end
 		end
-		if var14 == protoModule.wireTypes.lengthDelimited then
-			if var18 == 2 then
+		if var16 == protoModule.wireTypes.lengthDelimited then
+			if var20 == 2 then
 				local _ = nil
-				local var24, var25 = protoModule.readBuffer(p1, var13)
-				var13 = var25
-				var12.proto_version = buffer.tostring(var24)
+				local var29, var30 = protoModule.readBuffer(p1, var15)
+				var15 = var30
+				var14.proto_version = buffer.tostring(var29)
 			else
 				local _ = nil
-				local var26, var27 = protoModule.readVarInt(p1, var13)
-				var13 = var27 + var26
+				local var31, var32 = protoModule.readVarInt(p1, var15)
+				var15 = var32 + var31
 			end
-		elseif var14 == protoModule.wireTypes.i32 then
+		elseif var16 == protoModule.wireTypes.i32 then
 			local _ = nil
-			local var28, var29 = protoModule.readFixed32(p1, var13)
-			local _ = var28
-			var13 = var29
-		elseif var14 == protoModule.wireTypes.i64 then
+			local var33, var34 = protoModule.readFixed32(p1, var15)
+			local _ = var33
+			var15 = var34
+		elseif var16 == protoModule.wireTypes.i64 then
 			local _ = nil
-			local var30, var31 = protoModule.readFixed64(p1, var13)
-			local _ = var30
-			var13 = var31
+			local var35, var36 = protoModule.readFixed64(p1, var15)
+			local _ = var35
+			var15 = var36
 		else
-			error("Unsupported wire type: " .. var14)
+			error("Unsupported wire type: " .. var16)
 		end
 	end
-	return var12
+	return var14
 end
 
-function t_1:jsonEncode() --[[ line: 128 ]]
-	-- upvalues: capabilityModule (ref)
-	local t = {}
+function t_1:jsonEncode() --[[ line: 150 ]]
+	-- upvalues: capabilityModule (ref), t (ref)
+	local t_1 = {}
 	
 	if self.enabled_capabilities ~= nil and #self.enabled_capabilities > 0 then
-		local t_1 = {}
+		local t_2 = {}
 		
 		for i, v in self.enabled_capabilities do
-			table.insert(t_1, if typeof(v) == "number" then v else capabilityModule.Capability.toNumber(v))
+			table.insert(t_2, if typeof(v) == "number" then v else capabilityModule.Capability.toNumber(v))
 		end
-		t.enabledCapabilities = t_1
+		t_1.enabledCapabilities = t_2
 	end
 	if self.proto_version ~= nil and self.proto_version ~= "" then
-		t.protoVersion = self.proto_version
+		t_1.protoVersion = self.proto_version
 	end
-	return t
+	if self.platform ~= nil and (self.platform ~= nil and self.platform ~= 0 or self.platform ~= t.Platform.fromNumber(0)) then
+		t_1.platform = if typeof(self.platform) == "number" then self.platform else t.Platform.toNumber(self.platform)
+	end
+	return t_1
 end
 
-function t_1:jsonDecode() --[[ line: 151 ]]
-	-- upvalues: t_1 (ref), capabilityModule (ref)
-	local var34 = t_1.new()
+function t_1:jsonDecode() --[[ line: 182 ]]
+	-- upvalues: t_1 (ref), capabilityModule (ref), t (ref)
+	local var39 = t_1.new()
 	
 	if self.enabled_capabilities ~= nil then
-		local t = {}
+		local t_2 = {}
 		
 		for i, v in self.enabled_capabilities do
-			table.insert(t, if typeof(v) == "number" then capabilityModule.Capability.fromNumber(v) or v else capabilityModule.Capability.fromName(v) or v)
+			table.insert(t_2, if typeof(v) == "number" then capabilityModule.Capability.fromNumber(v) or v else capabilityModule.Capability.fromName(v) or v)
 		end
-		var34.enabled_capabilities = t
+		var39.enabled_capabilities = t_2
 	end
 	if self.enabledCapabilities ~= nil then
-		local t = {}
+		local t_2 = {}
 		
 		for i, v in self.enabledCapabilities do
-			table.insert(t, if typeof(v) == "number" then capabilityModule.Capability.fromNumber(v) or v else capabilityModule.Capability.fromName(v) or v)
+			table.insert(t_2, if typeof(v) == "number" then capabilityModule.Capability.fromNumber(v) or v else capabilityModule.Capability.fromName(v) or v)
 		end
-		var34.enabled_capabilities = t
+		var39.enabled_capabilities = t_2
 	end
 	if self.proto_version ~= nil then
-		var34.proto_version = self.proto_version
+		var39.proto_version = self.proto_version
 	end
 	if self.protoVersion ~= nil then
-		var34.proto_version = self.protoVersion
+		var39.proto_version = self.protoVersion
 	end
-	return var34
+	if self.platform ~= nil then
+		var39.platform = if typeof(self.platform) == "number" then t.Platform.fromNumber(self.platform) or self.platform else t.Platform.fromName(self.platform) or self.platform
+	end
+	return var39
 end
 
 t_1.descriptor = {
@@ -145,5 +164,19 @@ t_1.descriptor = {
 }
 t.ClientCapabilities = t_1
 typeRegistryModule.default:register(t.ClientCapabilities)
+t.Platform = {
+	fromNumber = function(p2) --[[ line: 241 ]]
+		return if p2 == 0 then "PLATFORM_INVALID" elseif p2 == 1 then "PLATFORM_WEB" elseif p2 == 2 then "PLATFORM_APP" else nil
+	end,
+	toNumber = function(p3) --[[ line: 253 ]]
+		return if p3 == "PLATFORM_INVALID" then 0 elseif p3 == "PLATFORM_WEB" then 1 elseif p3 == "PLATFORM_APP" then 2 else p3
+	end,
+	fromName = function(p4) --[[ line: 265 ]]
+		return if p4 == "PLATFORM_INVALID" then "PLATFORM_INVALID" elseif p4 == "PLATFORM_WEB" then "PLATFORM_WEB" elseif p4 == "PLATFORM_APP" then "PLATFORM_APP" else nil
+	end
+}
 
-return { ClientCapabilities = t.ClientCapabilities }
+return {
+	ClientCapabilities = t.ClientCapabilities,
+	Platform = t.Platform
+}

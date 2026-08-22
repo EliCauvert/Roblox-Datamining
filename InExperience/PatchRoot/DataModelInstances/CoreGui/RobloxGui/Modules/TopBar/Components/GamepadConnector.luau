@@ -40,20 +40,23 @@ local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreG
 local fFlagEnableUISelector = coreGuiCommonModule.Flags.FFlagEnableUISelector
 local var22 = if fFlagEnableUISelector then coreGuiCommonModule.Stores.GetUiSelectorSignalStore else nil
 local focusNavigationStore = require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetFocusNavigationStore(false)
+local fFlagEnableSideSheet = sharedFlagsModule.FFlagEnableSideSheet
+local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
+local getSideSheetVisibility = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
 local var24 = nil
 local var25 = nil
 local var26 = nil
-task.spawn(function() --[[ line: 69 ]]
+task.spawn(function() --[[ line: 73 ]]
 	-- upvalues: var24 (write), coreGuiService (ref), var25 (write), var26 (write)
 	var24 = coreGuiService:WaitForChild("ToastNotification", 3)
 	var25 = if var24 ~= nil then nil else var24:WaitForChild("ToastNotificationWrapper", 3)
 	var26 = if var25 ~= nil then nil else var25:FindFirstChild("Toast", true)
 end)
 
-local function _() --[[ line: 127 | named "createSelectedCoreObject" ]]
+local function _() --[[ line: 131 | named "createSelectedCoreObject" ]]
 	-- upvalues: var17 (ref), guiService (ref)
 	local var28 = var17.new(guiService.SelectedCoreObject)
-	guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 129 ]]
+	guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 133 ]]
 		-- upvalues: var28 (ref), guiService (copy)
 		var28:set(guiService.SelectedCoreObject)
 	end)
@@ -61,7 +64,7 @@ local function _() --[[ line: 127 | named "createSelectedCoreObject" ]]
 	return var28
 end
 
-local _ = function(p0) --[[ line: 136 | named "isInputGamepad" ]]
+local _ = function(p0) --[[ line: 140 | named "isInputGamepad" ]]
 	-- upvalues: constantsModule (ref)
 	for i, v in constantsModule.GamepadInputTypes do
 		if p0 == v then
@@ -74,7 +77,7 @@ end
 local t = {}
 t.__index = t
 
-function t.new() --[[ line: 149 ]]
+function t.new() --[[ line: 153 ]]
 	-- upvalues: guiService (ref), var16 (ref), fFlagUseObservableDefaultForChromeFocusedModule (ref), var17 (ref), var15 (ref), fFlagEnableConsoleExpControls (ref), userInputService (ref), constantsModule (ref), fFlagAddNewPlayerListFocusNav (ref), settingsShowSignal (ref), playerListManagerModule (ref), fFlagAddNewPlayerListMobileFocusNav (ref), isSpatial (ref), fFlagEnableUISelector (ref), var22 (ref), fFlagShowUnibarOnVirtualCursor (ref), gamepadService (ref), menuIconSelectedSignal (ref), fFlagAddTopBarScrimModule (ref), signalsModule (ref), t (ref)
 	local var30
 	local t_1 = {
@@ -87,7 +90,7 @@ function t.new() --[[ line: 149 ]]
 	
 	if var15 and fFlagEnableConsoleExpControls then
 		local var31 = var17.new(guiService.SelectedCoreObject)
-		guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 129 ]]
+		guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ line: 133 ]]
 			-- upvalues: var31 (ref), guiService (copy)
 			var31:set(guiService.SelectedCoreObject)
 		end)
@@ -111,7 +114,7 @@ function t.new() --[[ line: 149 ]]
 				t_1._tiltMenuOpen = var17.new(false)
 				t_1._playerListModalOpen = if fFlagAddNewPlayerListFocusNav then var17.new(false) else nil
 				t_1._showTopBar = var17.new(true)
-				userInputService.LastInputTypeChanged:Connect(function(p1) --[[ line: 171 ]]
+				userInputService.LastInputTypeChanged:Connect(function(p1) --[[ line: 175 ]]
 					-- upvalues: t_1 (ref), constantsModule (copy)
 					local var36
 					local gamepadActive = t_1._gamepadActive
@@ -126,19 +129,19 @@ function t.new() --[[ line: 149 ]]
 					end
 					var36 = false
 				end)
-				settingsShowSignal:connect(function(p2) --[[ line: 175 ]]
+				settingsShowSignal:connect(function(p2) --[[ line: 179 ]]
 					-- upvalues: t_1 (ref)
 					t_1._tiltMenuOpen:set(p2)
 				end)
 				
 				if fFlagAddNewPlayerListFocusNav then
-					playerListManagerModule:GetVisibilityChangedEvent().Event:Connect(function() --[[ line: 180 ]]
+					playerListManagerModule:GetVisibilityChangedEvent().Event:Connect(function() --[[ line: 184 ]]
 						-- upvalues: fFlagAddNewPlayerListMobileFocusNav (copy), playerListManagerModule (copy), t_1 (ref)
 						t_1._playerListModalOpen:set((if fFlagAddNewPlayerListMobileFocusNav then playerListManagerModule:GetIsModal() else true) and playerListManagerModule:GetVisibility())
 					end)
 				end
 				if not isSpatial() then
-					local var34 = function() --[[ line: 187 ]]
+					local var34 = function() --[[ line: 191 ]]
 						-- upvalues: t_1 (ref), fFlagEnableUISelector (copy), var22 (copy), userInputService (copy), fFlagAddNewPlayerListFocusNav (copy), fFlagShowUnibarOnVirtualCursor (copy), gamepadService (copy), guiService (copy)
 						local var37 = not t_1._gamepadActive:get()
 						
@@ -170,12 +173,12 @@ function t.new() --[[ line: 149 ]]
 		var33 = false
 	end
 	if fFlagEnableConsoleExpControls then
-		guiService:GetPropertyChangedSignal("CoreGuiNavigationEnabled"):Connect(function() --[[ line: 213 ]]
+		guiService:GetPropertyChangedSignal("CoreGuiNavigationEnabled"):Connect(function() --[[ line: 217 ]]
 			-- upvalues: t_1 (ref), guiService (copy)
 			t_1._devSetCoreGuiNavEnabled = guiService.CoreGuiNavigationEnabled
 		end)
 	end
-	function t_1._isTopBarFocused() --[[ line: 217 ]]
+	function t_1._isTopBarFocused() --[[ line: 221 ]]
 		-- upvalues: gamepadService (copy), t_1 (ref), menuIconSelectedSignal (copy)
 		return if gamepadService.GamepadCursorEnabled then false else t_1._chromeFocused:get() or menuIconSelectedSignal:get()
 	end
@@ -188,7 +191,7 @@ function t.new() --[[ line: 149 ]]
 	return setmetatable(t_1, t)
 end
 
-function t:connectToTopbar() --[[ line: 232 ]]
+function t:connectToTopbar() --[[ line: 236 ]]
 	-- upvalues: var15 (ref), fFlagEnableConsoleExpControls (ref), contextActionService (ref), PTFBackButtonAlwaysAsButtonBEngineFeature (ref), guiService (ref), fFlagAddTopBarScrimModule (ref), var16 (ref), var18 (ref), menuIconSelectedSignal (ref)
 	if var15 then
 		if fFlagEnableConsoleExpControls then
@@ -199,7 +202,7 @@ function t:connectToTopbar() --[[ line: 232 ]]
 		if PTFBackButtonAlwaysAsButtonBEngineFeature then
 			contextActionService:BindCoreAction("ToggleUISelector", self:_bindSelf(self._toggleUiSelector), false, Enum.KeyCode.ButtonB)
 		end
-		local var38 = function() --[[ line: 251 ]]
+		local var38 = function() --[[ line: 255 ]]
 			-- upvalues: self (ref), guiService (copy), fFlagAddTopBarScrimModule (copy), var16 (copy), var18 (copy)
 			local var39 = self:_isTopBarFocused()
 			guiService:SetMenuIsOpen(var39, "TopbarMenu")
@@ -221,7 +224,7 @@ function t:connectToTopbar() --[[ line: 232 ]]
 	end
 end
 
-function t:disconnectFromTopbar() --[[ line: 271 ]]
+function t:disconnectFromTopbar() --[[ line: 275 ]]
 	-- upvalues: contextActionService (ref), PTFBackButtonAlwaysAsButtonBEngineFeature (ref)
 	for i, v in self._connections do
 		v:disconnect()
@@ -235,29 +238,29 @@ function t:disconnectFromTopbar() --[[ line: 271 ]]
 	end
 end
 
-function t:getSelectedCoreObject() --[[ line: 284 ]]
+function t:getSelectedCoreObject() --[[ line: 288 ]]
 	return self._selectedCoreObject
 end
 
-function t:getShowTopBar() --[[ line: 288 ]]
+function t:getShowTopBar() --[[ line: 292 ]]
 	return self._showTopBar
 end
 
-function t:getGamepadActive() --[[ line: 292 ]]
+function t:getGamepadActive() --[[ line: 296 ]]
 	return self._gamepadActive
 end
 
-function t:topBarFocused(p3) --[[ line: 296 ]]
+function t:topBarFocused(p3) --[[ line: 300 ]]
 	-- upvalues: fFlagAddTopBarScrimModule (ref)
 	if fFlagAddTopBarScrimModule then
 		return self._topBarFocused(p3)
 	end
 end
 
-function t:_addDismissFocusConnections() --[[ line: 304 ]]
+function t:_addDismissFocusConnections() --[[ line: 308 ]]
 	-- upvalues: userInputService (ref), inputModeStore (ref), responsiveModule (ref)
 	self._dismissFocusConnections = {
-		userInputService.InputEnded:Connect(function(p4, p5) --[[ line: 306 ]]
+		userInputService.InputEnded:Connect(function(p4, p5) --[[ line: 310 ]]
 			-- upvalues: inputModeStore (copy), responsiveModule (copy), self (ref)
 			local lastInputType = inputModeStore.getLastInputType(false)
 			
@@ -268,21 +271,23 @@ function t:_addDismissFocusConnections() --[[ line: 304 ]]
 	}
 end
 
-function t:_removeDismissFocusConnections() --[[ line: 322 ]]
+function t:_removeDismissFocusConnections() --[[ line: 326 ]]
 	for i, v in self._dismissFocusConnections do
 		v:Disconnect()
 	end
 	self._dismissFocusConnections = {}
 end
 
-function t:_toggleTopbar(p6, p7, p8) --[[ line: 329 ]]
-	-- upvalues: var15 (ref), fFlagEnableConsoleExpControls (ref), PTFBackButtonAlwaysAsButtonBEngineFeature (ref), fFlagEnableUISelector (ref), userInputService (ref), var16 (ref), focusNavigationStore (ref), logGamepadOpenExperienceControlsMenu (ref), fFlagAddNewPlayerListMobileFocusNav (ref), playerListManagerModule (ref)
+function t:_toggleTopbar(p6, p7, p8) --[[ line: 333 ]]
+	-- upvalues: var15 (ref), fFlagEnableConsoleExpControls (ref), PTFBackButtonAlwaysAsButtonBEngineFeature (ref), fFlagEnableUISelector (ref), userInputService (ref), var16 (ref), fFlagEnableSideSheet (ref), fFlagSideSheetFocusNav (ref), getSideSheetVisibility (ref), focusNavigationStore (ref), logGamepadOpenExperienceControlsMenu (ref), fFlagAddNewPlayerListMobileFocusNav (ref), playerListManagerModule (ref)
 	if not var15 or self:_focusToastNotification(p7) or (fFlagEnableConsoleExpControls or p7 ~= Enum.UserInputState.End) and (not fFlagEnableConsoleExpControls or p7 ~= Enum.UserInputState.Begin) then
 		return Enum.ContextActionResult.Pass
 	elseif not PTFBackButtonAlwaysAsButtonBEngineFeature and fFlagEnableUISelector and not userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.ButtonSelect) then
 		return self:_toggleUiSelector(p6, p7, p8)
 	elseif fFlagEnableConsoleExpControls then
 		if var16:integrations().nine_dot == nil then
+			return Enum.ContextActionResult.Pass
+		elseif fFlagEnableSideSheet and fFlagSideSheetFocusNav and getSideSheetVisibility() then
 			return Enum.ContextActionResult.Pass
 		end
 		local var41 = not (self:_isTopBarFocused() or focusNavigationStore.getChatInputBarFocused(false))
@@ -303,7 +308,7 @@ function t:_toggleTopbar(p6, p7, p8) --[[ line: 329 ]]
 	return Enum.ContextActionResult.Sink
 end
 
-function t:_toggleUiSelector(_, p9, _) --[[ line: 372 ]]
+function t:_toggleUiSelector(_, p9, _) --[[ line: 379 ]]
 	-- upvalues: fFlagEnableUISelector (ref), var15 (ref), fFlagEnableConsoleExpControls (ref), userInputService (ref), gamepadService (ref), guiService (ref), var22 (ref)
 	if fFlagEnableUISelector and var15 and not self:_focusToastNotification(p9) and (not fFlagEnableConsoleExpControls and p9 == Enum.UserInputState.End or fFlagEnableConsoleExpControls and p9 == Enum.UserInputState.Begin) and not userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.ButtonSelect) then
 		if gamepadService.GamepadCursorEnabled or guiService.SelectedObject ~= nil then
@@ -328,7 +333,7 @@ function t:_toggleUiSelector(_, p9, _) --[[ line: 372 ]]
 	end
 end
 
-function t:_toggleUnibarMenu() --[[ line: 400 ]]
+function t:_toggleUnibarMenu() --[[ line: 407 ]]
 	-- upvalues: fFlagEnableConsoleExpControls (ref), var16 (ref), logGamepadOpenExperienceControlsMenu (ref)
 	local var43 = self._chromeFocused:get()
 	
@@ -347,14 +352,14 @@ function t:_toggleUnibarMenu() --[[ line: 400 ]]
 	logGamepadOpenExperienceControlsMenu(var43)
 end
 
-function t._focusGamepadToTopBar(_) --[[ line: 419 ]]
+function t._focusGamepadToTopBar(_) --[[ line: 426 ]]
 	-- upvalues: focusUtils (ref)
 	focusUtils.FocusOnChrome()
 end
 
-function t._unfocusGamepadFromTopBar(_) --[[ line: 423 ]]
+function t._unfocusGamepadFromTopBar(_) --[[ line: 430 ]]
 	-- upvalues: focusUtils (ref), fFlagConsoleChatUseChromeFocusUtils (ref), focusNavigationStore (ref), guiService (ref)
-	focusUtils.FocusOffChrome(function() --[[ line: 424 ]]
+	focusUtils.FocusOffChrome(function() --[[ line: 431 ]]
 		-- upvalues: fFlagConsoleChatUseChromeFocusUtils (copy), focusNavigationStore (copy), guiService (copy)
 		if fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
 			focusNavigationStore.unfocusChatInputBar()
@@ -363,9 +368,9 @@ function t._unfocusGamepadFromTopBar(_) --[[ line: 423 ]]
 	end)
 end
 
-function t:_focusToastNotification(p10) --[[ line: 432 ]]
+function t:_focusToastNotification(p10) --[[ line: 439 ]]
 	-- upvalues: var26 (write), toastNotificationConstants (ref)
-	local function _() --[[ line: 433 | named "buttonHoldTime" ]]
+	local function _() --[[ line: 440 | named "buttonHoldTime" ]]
 		-- upvalues: self (ref)
 		return tick() - self._lastMenuButtonPress
 	end
@@ -380,7 +385,7 @@ function t:_focusToastNotification(p10) --[[ line: 432 ]]
 	return p10 == Enum.UserInputState.End and (var44 and tick() - self._lastMenuButtonPress < toastNotificationConstants.MenuButtonPressHoldTime)
 end
 
-function t:_logExperienceMenuGamepadExposure() --[[ line: 448 ]]
+function t:_logExperienceMenuGamepadExposure() --[[ line: 455 ]]
 	-- upvalues: fFlagExperienceMenuGamepadExposureEnabled (ref), IXPServiceWrapper (ref), appUserLayers (ref)
 	if fFlagExperienceMenuGamepadExposureEnabled and not self._loggedExperienceMenuGamepadExposure then
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(appUserLayers.ExperienceMenuGamepadExposureLayer)
@@ -388,8 +393,8 @@ function t:_logExperienceMenuGamepadExposure() --[[ line: 448 ]]
 	end
 end
 
-function t._bindSelf(p11, p12) --[[ line: 455 ]]
-	return function(...) --[[ line: 456 ]]
+function t._bindSelf(p11, p12) --[[ line: 462 ]]
+	return function(...) --[[ line: 463 ]]
 		-- upvalues: p12 (ref), p11 (ref)
 		return p12(p11, ...)
 	end

@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXSlotsFixLeftScroll", false)

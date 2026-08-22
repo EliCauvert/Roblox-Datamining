@@ -1,11 +1,12 @@
 ﻿local createSignal = require(script:FindFirstAncestor("MomentsCreation").Parent.Signals).createSignal
 
-return function() --[[ line: 29 | named "createDescriptionStore" ]]
+return function() --[[ line: 33 | named "createDescriptionStore" ]]
 	-- upvalues: createSignal (ref)
 	local var0, var1 = createSignal("")
 	local var2, var3 = createSignal(nil)
 	local var4, var5 = createSignal(nil)
 	local var6, var7 = createSignal(nil)
+	local var8, var9 = createSignal(nil)
 	
 	return {
 		getDescription = var0,
@@ -15,6 +16,8 @@ return function() --[[ line: 29 | named "createDescriptionStore" ]]
 		getGenerationToken = var4,
 		setGenerationToken = var5,
 		getGeneratedTextFeedback = var6,
-		setGeneratedTextFeedback = var7
+		setGeneratedTextFeedback = var7,
+		getGeneratedSummary = var8,
+		setGeneratedSummary = var9
 	}
 end

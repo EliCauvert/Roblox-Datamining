@@ -108,12 +108,7 @@ function humanoidViewport.loadHumanoidModel(p8) --[[ line: 143 ]]
 		local var25 = nil
 		pcall(function() --[[ line: 149 ]]
 			-- upvalues: var25 (write), playersService (copy), humanoidDescription (copy), rigType (copy)
-			if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-				var25 = playersService:CreateHumanoidModelFromDescriptionAsync(humanoidDescription, rigType)
-				
-				return
-			end
-			var25 = playersService:CreateHumanoidModelFromDescription(humanoidDescription, rigType)
+			var25 = playersService:CreateHumanoidModelFromDescriptionAsync(humanoidDescription, rigType)
 		end)
 		
 		if not p8.mounted then return end
@@ -145,7 +140,7 @@ function humanoidViewport.loadHumanoidModel(p8) --[[ line: 143 ]]
 	end)()
 end
 
-function humanoidViewport.render(p9) --[[ line: 205 ]]
+function humanoidViewport.render(p9) --[[ line: 201 ]]
 	-- upvalues: roactModule (ref), skeleton (ref), emptyState (ref), robloxTranslatorModule (ref)
 	local loadingFailed = p9.props.loadingFailed or p9.state.loadingFailed
 	
@@ -192,7 +187,7 @@ function humanoidViewport.render(p9) --[[ line: 205 ]]
 	})
 end
 
-function humanoidViewport.didMount(p10) --[[ line: 261 ]]
+function humanoidViewport.didMount(p10) --[[ line: 257 ]]
 	p10.mounted = true
 	
 	if p10.props.humanoidDescription then
@@ -200,7 +195,7 @@ function humanoidViewport.didMount(p10) --[[ line: 261 ]]
 	end
 end
 
-function humanoidViewport.didUpdate(p11, p12) --[[ line: 269 ]]
+function humanoidViewport.didUpdate(p11, p12) --[[ line: 265 ]]
 	if p11.worldModelRef:getValue() and p11.humanoidModel then
 		p11.humanoidModel.Parent = p11.worldModelRef:getValue()
 	end
@@ -213,7 +208,7 @@ function humanoidViewport.didUpdate(p11, p12) --[[ line: 269 ]]
 	end
 end
 
-function humanoidViewport.willUnmount(p13) --[[ line: 291 ]]
+function humanoidViewport.willUnmount(p13) --[[ line: 287 ]]
 	p13.mounted = false
 end
 

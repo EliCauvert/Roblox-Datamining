@@ -101,15 +101,18 @@ end
 
 local function AgentCard(p5) --[[ line: 145 ]]
 	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), t (ref), reactModule (ref), view (ref), text (ref), loadingIndicatorModule (ref), icon (ref), iconSize (ref), AgentTaskList (ref)
+	local group = p5.group
 	local var16 = if fFlagBuildLocalization then useLocalization({
 		building = localizationStringsModule.SUBAGENT_STATUS_BUILDING,
+		completedTasks = {
+			localizationStringsModule.SUBAGENT_STATUS_COMPLETED_TASKS,
+			COUNT = #group.tasks
+		},
 		notStarted = localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED
 	}) else nil
-	local group = p5.group
-	local var17 = if #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
-	local var18 = if fFlagBuildLocalization and var17 == localizationStringsModule.SUBAGENT_STATUS_BUILDING then var16.building elseif fFlagBuildLocalization and var17 == localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED then var16.notStarted else var17
+	local var17 = if fFlagBuildLocalization then if #group.tasks == 0 then var16.notStarted elseif group.isComplete then var16.completedTasks else var16.building elseif #group.tasks == 0 then localizationStringsModule.SUBAGENT_STATUS_NOT_STARTED elseif group.isComplete then localizationStringsModule.formatSubagentStatusCompletedTasks(#group.tasks) else localizationStringsModule.SUBAGENT_STATUS_BUILDING
 	local name = t[group.name]
-	local var19 = reactModule.useCallback(function() --[[ line: 162 ]]
+	local var18 = reactModule.useCallback(function() --[[ line: 170 ]]
 		-- upvalues: p5 (ref), group (ref)
 		p5.onAgentActivated(group)
 	end, { p5.onAgentActivated, group })
@@ -136,7 +139,7 @@ local function AgentCard(p5) --[[ line: 145 ]]
 	return reactModule.createElement(view, {
 		tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-emphasis radius-large",
 		LayoutOrder = p5.index,
-		onActivated = if #group.tasks > 0 then var19 else nil,
+		onActivated = if #group.tasks > 0 then var18 else nil,
 		sizeConstraint = { MaxSize = Vector2.new(1e999, p5.maxHeight) },
 		testId = `{p5.testId}-card-{p5.index}-container`
 	}, {
@@ -160,22 +163,22 @@ local function AgentCard(p5) --[[ line: 145 ]]
 			Status = reactModule.createElement(text, {
 				LayoutOrder = 3,
 				tag = "auto-xy padding-left-large text-body-small text-align-x-right content-emphasis",
-				Text = var18
+				Text = var17
 			})
 		}),
 		Tasks = if #group.tasks > 0 then reactModule.createElement(AgentTaskList, {
 			LayoutOrder = 2,
-			onActivated = var19,
+			onActivated = var18,
 			taskGap = p5.taskGap,
 			testId = `{p5.testId}-card-{p5.index}-tasks`
 		}, t_1) else nil
 	})
 end
 
-return reactModule.memo(function(p6) --[[ line: 231 | named "AgentsList" ]]
+return reactModule.memo(function(p6) --[[ line: 239 | named "AgentsList" ]]
 	-- upvalues: useTokens (ref), useScaledValue (ref), getDisplayGroups (ref), reactModule (ref), AgentCard (ref), view (ref)
-	local var21 = useTokens()
-	local var22 = useScaledValue(156)
+	local var20 = useTokens()
+	local var21 = useScaledValue(156)
 	local testId = p6.testId or "build-agent-list"
 	local t = {}
 	
@@ -183,9 +186,9 @@ return reactModule.memo(function(p6) --[[ line: 231 | named "AgentsList" ]]
 		t[`Card{i}`] = reactModule.createElement(AgentCard, {
 			group = v,
 			index = i,
-			maxHeight = var22,
+			maxHeight = var21,
 			onAgentActivated = p6.onAgentActivated,
-			taskGap = var21.Gap.Small,
+			taskGap = var20.Gap.Small,
 			testId = testId
 		})
 	end

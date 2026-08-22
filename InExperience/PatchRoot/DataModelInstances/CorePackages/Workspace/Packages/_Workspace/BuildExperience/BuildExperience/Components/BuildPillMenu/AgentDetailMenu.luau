@@ -6,13 +6,13 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 19 | named "AgentDetailMenu" ]]
+return function(p0) --[[ line: 20 | named "AgentDetailMenu" ]]
 	-- upvalues: reactModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
 	return reactModule.createElement(iconButton, {
 		isCircular = true,
 		testId = "build-header-agent-detail-menu",
 		LayoutOrder = p0.layoutOrder,
-		icon = iconName.RectangleList,
+		icon = p0.icon or iconName.RectangleList,
 		isDisabled = p0.isDisabled,
 		onActivated = p0.onActivated,
 		size = inputSize.Medium,

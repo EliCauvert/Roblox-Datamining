@@ -1,35 +1,6 @@
 ﻿local parent = script.Parent
-local lazyRequire = require(parent.LazyRequire).lazyRequire
 
-return if game:DefineFastFlag("LuaAppLazyRequireSocialLibsDeps", false) then {
-	CollisionMatchers = lazyRequire(parent.CollisionMatchers),
-	GenericPagination = lazyRequire(parent.GenericPagination),
-	httpRequest = lazyRequire(parent.httpRequest),
-	llama = lazyRequire(parent.llama),
-	Mock = lazyRequire(parent.Mock),
-	NetworkingAccountInformation = lazyRequire(parent.NetworkingAccountInformation),
-	NetworkingAccountSettings = lazyRequire(parent.NetworkingAccountSettings),
-	NetworkingAliases = lazyRequire(parent.NetworkingAliases),
-	NetworkingBlocking = lazyRequire(parent.NetworkingBlocking),
-	NetworkingCall = lazyRequire(parent.NetworkingCall),
-	NetworkingChat = lazyRequire(parent.NetworkingChat),
-	NetworkingContacts = lazyRequire(parent.NetworkingContacts),
-	NetworkingCurrentlyWearing = lazyRequire(parent.NetworkingCurrentlyWearing),
-	NetworkingGames = lazyRequire(parent.NetworkingGames),
-	NetworkingPremiumFeatures = lazyRequire(parent.NetworkingPremiumFeatures),
-	NetworkingPresence = lazyRequire(parent.NetworkingPresence),
-	NetworkingUsers = lazyRequire(parent.NetworkingUsers),
-	NetworkingUserSettings = lazyRequire(parent.NetworkingUserSettings),
-	RoactFitComponents = lazyRequire(parent.RoactFitComponents),
-	RoduxAliases = lazyRequire(parent.RoduxAliases),
-	RoduxCall = lazyRequire(parent.RoduxCall),
-	RoduxGames = lazyRequire(parent.RoduxGames),
-	RoduxNetworking = lazyRequire(parent.RoduxNetworking),
-	RoduxPresence = lazyRequire(parent.RoduxPresence),
-	RoduxUserPermissions = lazyRequire(parent.RoduxUserPermissions),
-	RoduxUsers = lazyRequire(parent.RoduxUsers),
-	SocialLibraries = lazyRequire(parent.SocialLibraries)
-} else {
+return {
 	CollisionMatchers = require(parent.CollisionMatchers),
 	GenericPagination = require(parent.GenericPagination),
 	httpRequest = require(parent.httpRequest),

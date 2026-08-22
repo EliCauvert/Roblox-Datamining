@@ -5,15 +5,15 @@ local var3 = nil
 
 local function removeDefaultClothing(p0, p1, p2) --[[ line: 14 ]]
 	-- upvalues: avatarEditorService (ref)
-	local var5 = if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetAvatarRulesAsync() else avatarEditorService:GetAvatarRules()
+	local avatarRulesAsync = avatarEditorService:GetAvatarRulesAsync()
 	
-	if not var5.DefaultClothingAssetLists then
+	if not avatarRulesAsync.DefaultClothingAssetLists then
 		p2("No default clothing in avatar rules")
 		
 		return
 	end
-	local defaultShirtAssetIds = var5.DefaultClothingAssetLists.DefaultShirtAssetIds
-	local defaultPantAssetIds = var5.DefaultClothingAssetLists.DefaultPantAssetIds
+	local defaultShirtAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultShirtAssetIds
+	local defaultPantAssetIds = avatarRulesAsync.DefaultClothingAssetLists.DefaultPantAssetIds
 	
 	if not defaultShirtAssetIds or not defaultPantAssetIds then
 		p2("No default clothing ids in avatar rules")
@@ -37,18 +37,18 @@ local function removeDefaultClothing(p0, p1, p2) --[[ line: 14 ]]
 	p1(var6 or p0)
 end
 
-return function(p3, p4) --[[ line: 53 | named "GetConformedHumanoidDescription" ]]
+return function(p3, p4) --[[ line: 48 | named "GetConformedHumanoidDescription" ]]
 	-- upvalues: var2 (write), promiseModule (ref), var3 (write), removeDefaultClothing (ref), avatarEditorService (ref)
-	return if p3 == var2 then if p4 then promiseModule.resolve(var3) else promiseModule.new(function(p7, p8) --[[ line: 58 ]]
+	return if p3 == var2 then if p4 then promiseModule.resolve(var3) else promiseModule.new(function(p7, p8) --[[ line: 53 ]]
 		-- upvalues: removeDefaultClothing (copy), var3 (copy)
 		removeDefaultClothing(var3, p7, p8)
-	end) else promiseModule.new(function(p5, p6) --[[ line: 64 ]]
+	end) else promiseModule.new(function(p5, p6) --[[ line: 59 ]]
 		-- upvalues: avatarEditorService (copy), p3 (ref), var2 (copy), var3 (copy), p4 (ref), removeDefaultClothing (copy)
-		coroutine.wrap(function() --[[ line: 65 ]]
+		coroutine.wrap(function() --[[ line: 60 ]]
 			-- upvalues: avatarEditorService (copy), p3 (copy), var2 (copy), var3 (copy), p4 (copy), p5 (ref), removeDefaultClothing (copy), p6 (ref)
-			local ok, status = pcall(function() --[[ line: 66 ]]
+			local ok, status = pcall(function() --[[ line: 61 ]]
 				-- upvalues: avatarEditorService (copy), p3 (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:ConformToAvatarRulesAsync(p3) else avatarEditorService:ConformToAvatarRules(p3)
+				return avatarEditorService:ConformToAvatarRulesAsync(p3)
 			end)
 			
 			if not ok then

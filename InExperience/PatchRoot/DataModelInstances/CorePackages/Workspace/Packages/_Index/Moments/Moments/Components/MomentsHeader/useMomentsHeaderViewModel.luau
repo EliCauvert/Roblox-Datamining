@@ -91,6 +91,7 @@ return function(p0, p1, p2) --[[ line: 56 | named "useMomentsHeaderViewModel" ]]
 		showTopScrim = p0.showTopScrim == true,
 		showInteractiveButtons = not (getFFlagMomentsAndroidTvEnabledModule() and var13),
 		showHamburger = p2,
+		showCreateButton = p0.onCreatePressed ~= nil,
 		headerHeight = var17,
 		headerPadding = {
 			left = UDim.new(0, math.max(var11.left, var22)),

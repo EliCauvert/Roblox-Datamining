@@ -22,7 +22,6 @@ local fFlagExtendScrollingFramesBySafeInsets = require(parent.SharedFlags).FFlag
 local fFlagEnableLeftNavOnConsole = require(parent.SharedFlags).FFlagEnableLeftNavOnConsole
 local fixConsoleEDPDirectionalNavigation = game:DefineFastFlag("FixConsoleEDPDirectionalNavigation", false)
 local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 local fixDeviceSafePaddingAccess = game:DefineFastFlag("FixDeviceSafePaddingAccess", false)
 local t = {
 	itemPadding = 36,
@@ -31,25 +30,25 @@ local t = {
 	safeAreaSize = Vector2.new(96, 144)
 }
 
-return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), fFlagLuaAppDemoModePlayButton (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
+return function(p0) --[[ line: 164 | named "DetailsPageTenfootTemplate" ]]
+	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), fixDeviceSafePaddingAccess (ref), fFlagEnableLeftNavOnConsole (ref), fFlagExtendScrollingFramesBySafeInsets (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref), fixConsoleEDPDirectionalNavigation (ref)
 	local var14 = t
 	
 	if p0.tokens then
 		var14 = cryoModule.Dictionary.join(var14, p0.tokens)
 	end
 	local var15, var16 = reactModule.useState(true)
-	local var17 = reactModule.useMemo(function() --[[ line: 176 ]]
+	local var17 = reactModule.useMemo(function() --[[ line: 175 ]]
 		-- upvalues: getPlatformConfigModule (copy), p0 (ref)
 		return getPlatformConfigModule(p0.deviceType)
 	end, { p0.deviceType })
 	local var18 = reactModule.useRef(nil)
 	local var19, var20 = reactModule.useState(Vector2.new(0, 0))
-	local var21 = reactModule.useCallback(function(p1) --[[ line: 182 ]]
+	local var21 = reactModule.useCallback(function(p1) --[[ line: 181 ]]
 		-- upvalues: var20 (ref)
 		var20(p1.AbsoluteSize)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 185 ]]
+	reactModule.useEffect(function() --[[ line: 184 ]]
 		-- upvalues: var18 (ref), var20 (ref)
 		if var18.current then
 			var20(var18.current.AbsoluteSize)
@@ -58,14 +57,14 @@ return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
 	local var22 = if p0.thumbnailHeight then p0.thumbnailHeight else var17.thumbnailHeight
 	local var23 = if p0.headerBarBackgroundHeight ~= nil then var17.headerBarBackgroundHeight else p0.headerBarBackgroundHeight
 	local var24 = if p0.sideMargin then p0.sideMargin else var17.sideMargin
-	local var25 = reactModule.useMemo(function() --[[ line: 197 ]]
+	local var25 = reactModule.useMemo(function() --[[ line: 196 ]]
 		-- upvalues: signal (copy)
 		return signal.new()
 	end, {})
 	local renderFullscreenContent = p0.renderFullscreenContent
 	local var26, var27 = useAnimateFullscreenModule(if p0.isFullscreen == nil then false else p0.isFullscreen, renderFullscreenContent, var14.animationConfig)
-	local var28 = useDetailsPageRenderItemsModule(p0.componentList, reactModule.useMemo(function() --[[ line: 209 ]]
-		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p0 (ref), var22 (ref), var25 (ref), var24 (ref), var23 (ref), var14 (write), fFlagLuaAppDemoModePlayButton (copy)
+	local var28 = useDetailsPageRenderItemsModule(p0.componentList, reactModule.useMemo(function() --[[ line: 208 ]]
+		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p0 (ref), var22 (ref), var25 (ref), var24 (ref), var23 (ref), var14 (write)
 		return reactModule.createElement(detailsPageHeaderModule, {
 			thumbnailImageUrl = p0.thumbnailImageUrl,
 			thumbnailAspectRatio = p0.thumbnailAspectRatio,
@@ -83,7 +82,7 @@ return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
 			thumbnailShadowHeight = var14.thumbnailShadowHeight,
 			gradientHeight = var14.headerGradientHeight,
 			actionBarHeight = var14.actionBarHeight,
-			actionBarWidth = if fFlagLuaAppDemoModePlayButton then p0.actionBarWidth or var14.actionBarWidth else var14.actionBarWidth,
+			actionBarWidth = p0.actionBarWidth or var14.actionBarWidth,
 			itemPadding = var14.thumbnailMargin,
 			bottomMargin = var14.headerBottomMargin
 		})
@@ -92,8 +91,7 @@ return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
 		p0.subTitleText, p0.actionBarLabelText, p0.renderInfoContent,
 		p0.actionBarProps, var24, var23, p0.deviceType, var14.thumbnailShadowHeight,
 		var14.headerGradientHeight, var14.thumbnailMargin, var14.headerBottomMargin,
-		var14.actionBarHeight, var14.actionBarWidth,
-		if fFlagLuaAppDemoModePlayButton then p0.actionBarWidth else nil,
+		var14.actionBarHeight, var14.actionBarWidth, p0.actionBarWidth,
 		p0.renderActionBarLabelImpressionsDetector, var25
 	}), var19, var14.safeAreaSize)
 	local var29 = if not fixDeviceSafePaddingAccess then if fFlagEnableLeftNavOnConsole or fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil elseif fFlagExtendScrollingFramesBySafeInsets then useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding) else nil
@@ -132,7 +130,7 @@ return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
 		Content = reactModule.createElement(animatedFlatList, {
 			animated = true,
 			UNSTABLE_forceSiblingLayoutUpdate = true,
-			onSelectedIndexChanged = reactModule.useCallback(function(p2) --[[ line: 279 ]]
+			onSelectedIndexChanged = reactModule.useCallback(function(p2) --[[ line: 276 ]]
 				-- upvalues: var25 (ref), var28 (ref), var16 (ref)
 				var25:fire()
 				
@@ -145,7 +143,7 @@ return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
 			end, { var28, var25 }),
 			initialNumToRender = #var28,
 			data = var28,
-			renderItem = reactModule.useCallback(function(p3) --[[ line: 262 ]]
+			renderItem = reactModule.useCallback(function(p3) --[[ line: 259 ]]
 				-- upvalues: reactModule (copy), detailsPageRenderItemModule (copy), var14 (write)
 				return reactModule.createElement(detailsPageRenderItemModule, {
 					item = p3.item,
@@ -153,7 +151,7 @@ return function(p0) --[[ line: 165 | named "DetailsPageTenfootTemplate" ]]
 					safeArea = var14.safeAreaSize
 				})
 			end, { var14.itemPadding, var14.safeAreaSize }),
-			ItemSeparatorComponent = reactModule.useCallback(function() --[[ line: 270 ]]
+			ItemSeparatorComponent = reactModule.useCallback(function() --[[ line: 267 ]]
 				-- upvalues: reactModule (copy), var14 (write)
 				return reactModule.createElement("Frame", {
 					BackgroundTransparency = 1,

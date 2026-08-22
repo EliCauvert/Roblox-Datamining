@@ -32,12 +32,12 @@ local t_1 = {
 }
 local t_2 = { FlexMode = Enum.UIFlexMode.Fill }
 
-local function CategoryMenuButtonGroup(p0) --[[ line: 76 ]]
+local function CategoryMenuButtonGroup(p0) --[[ line: 75 ]]
 	-- upvalues: AXCategoryMenuBadgePositionTokens2 (ref), foundationModule (ref), reactModule (ref), fFlagAXMigrateAllTabToSduiDev (ref), iconVariant (ref), view (ref), iconButton (ref), inputSize (ref), badge (ref), badgeVariant (ref)
 	local var11 = if AXCategoryMenuBadgePositionTokens2 then foundationModule.Hooks.useTokens() else nil
 	local backgroundColor3 = p0.BackgroundColor3
 	local backgroundTransparency = p0.BackgroundTransparency
-	local var12 = reactModule.useMemo(function() --[[ line: 80 ]]
+	local var12 = reactModule.useMemo(function() --[[ line: 79 ]]
 		-- upvalues: reactModule (copy), p0 (ref), AXCategoryMenuBadgePositionTokens2 (copy), fFlagAXMigrateAllTabToSduiDev (copy), iconVariant (copy), view (copy), iconButton (copy), inputSize (copy), backgroundColor3 (ref), backgroundTransparency (ref), badge (copy), badgeVariant (copy), var11 (ref)
 		local t = {
 			FlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None }),
@@ -99,7 +99,7 @@ local function CategoryMenuButtonGroup(p0) --[[ line: 76 ]]
 	
 	if AXCategoryMenuBadgePositionTokens2 then
 		local paddingRight = p0.paddingRight
-		var13 = reactModule.useMemo(function() --[[ line: 155 ]]
+		var13 = reactModule.useMemo(function() --[[ line: 154 ]]
 			-- upvalues: paddingRight (ref)
 			return if paddingRight then { right = paddingRight } else nil
 		end, { paddingRight })
@@ -111,7 +111,7 @@ local function CategoryMenuButtonGroup(p0) --[[ line: 76 ]]
 	}, var12)
 end
 
-return reactModule.forwardRef(function(p1, p2) --[[ line: 210 | named "CategoryMenu" ]]
+return reactModule.forwardRef(function(p1, p2) --[[ line: 205 | named "CategoryMenu" ]]
 	-- upvalues: reactModule (ref), foundationModule (ref), fFlagAXCategoryMenuVisualFixes (ref), categoryMenuButtonsLocationEnumModule (ref), AXCategoryMenuBadgePositionTokens2 (ref), view (ref), t_1 (ref), t (ref), CategoryMenuButtonGroup (ref), t_2 (ref), tabGroupModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref)
 	local var16 = reactModule.useRef(nil)
 	local var17 = foundationModule.Hooks.useTokens()
@@ -121,7 +121,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 210 | named "CategoryM
 		local var19 = reactModule.useRef(nil)
 		var18 = var19
 		local var20 = reactModule.useRef(false)
-		reactModule.useEffect(function() --[[ line: 223 ]]
+		reactModule.useEffect(function() --[[ line: 218 ]]
 			-- upvalues: var20 (ref), var19 (ref)
 			if not var20.current then
 				var20.current = true
@@ -139,7 +139,7 @@ return reactModule.forwardRef(function(p1, p2) --[[ line: 210 | named "CategoryM
 	local activeTooltipIdx = p1.activeTooltipIdx
 	local tooltips = p1.tooltips
 	local var21 = if activeTooltipIdx and tooltips then tooltips[activeTooltipIdx] else nil
-	local var22 = reactModule.useMemo(function() --[[ line: 238 ]]
+	local var22 = reactModule.useMemo(function() --[[ line: 233 ]]
 		-- upvalues: var21 (ref), p1 (ref), var16 (ref)
 		local t = {}
 		

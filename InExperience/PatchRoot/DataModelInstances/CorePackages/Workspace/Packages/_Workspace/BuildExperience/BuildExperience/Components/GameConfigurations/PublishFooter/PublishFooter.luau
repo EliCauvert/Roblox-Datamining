@@ -211,7 +211,10 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 			var40(p6.target.placeId)
 			
 			return
-		elseif sharePublishedExperience(p6.target.placeId).copiedToClipboard and GAME_CONFIGURATION_LINK_COPIED ~= nil then
+		end
+		local var63 = sharePublishedExperience(p6.target.placeId)
+		
+		if var63 ~= nil and var63.copiedToClipboard and GAME_CONFIGURATION_LINK_COPIED ~= nil then
 			var54(GAME_CONFIGURATION_LINK_COPIED)
 		end
 	end, { GAME_CONFIGURATION_LINK_COPIED, p6.target.placeId, var40 })
@@ -297,7 +300,7 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 						title = var43.title
 						description = var43.description
 					end
-					local var66
+					local var67
 					sendBuildExperienceEventModule("PUBLISH_CLICK", {
 						universeId = p6.target.universeId,
 						placeId = placeId,
@@ -305,11 +308,11 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 					})
 					var52(true)
 					var58()
-					local var64 = "save_and_publish"
+					local var65 = "save_and_publish"
 					
 					local function publish(p7) --[[ line: 320 ]]
-						-- upvalues: var64 (write), var45 (copy), fFlagEnableProvisionalRatingModule (copy), gameConfigurationActionsModule (copy), p6 (copy), placeId (ref), title (write), description (write), buildPublicAudiences (copy)
-						var64 = "save_and_publish"
+						-- upvalues: var65 (write), var45 (copy), fFlagEnableProvisionalRatingModule (copy), gameConfigurationActionsModule (copy), p6 (copy), placeId (ref), title (write), description (write), buildPublicAudiences (copy)
+						var65 = "save_and_publish"
 						p7 = p7 or var45
 						
 						return if fFlagEnableProvisionalRatingModule then gameConfigurationActionsModule.publishExperience({
@@ -329,9 +332,9 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 					local _ = nil
 					
 					if fFlagEnableProvisionalRatingModule and fFlagBuildRehydrateOnPublishModule and var48 ~= nil then
-						var64 = "refresh_eligibility"
-						var66 = var48.refreshEligibility(p6.target.universeId):andThen(function() --[[ line: 341 ]]
-							-- upvalues: contentMaturityUtilsModule (copy), p6 (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var64 (write), var44 (copy), publish (ref)
+						var65 = "refresh_eligibility"
+						var67 = var48.refreshEligibility(p6.target.universeId):andThen(function() --[[ line: 341 ]]
+							-- upvalues: contentMaturityUtilsModule (copy), p6 (copy), experienceGuidelinesModule (copy), t (copy), debug (copy), var65 (write), var44 (copy), publish (ref)
 							if contentMaturityUtilsModule.isSealBroken(p6.target.universeId) and contentMaturityUtilsModule.isContentUnrated(p6.target.universeId) then
 								return experienceGuidelinesModule.getExperienceGuidelinesStore().refreshDetailedGuidelines(p6.target.universeId):andThen(function() --[[ line: 348 ]]
 									-- upvalues: t (copy)
@@ -346,7 +349,7 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 									return t
 								end)
 							end
-							var64 = "refresh_summary"
+							var65 = "refresh_summary"
 							
 							return var44.refreshSummary(p6.target.universeId):andThen(function(p9) --[[ line: 365 ]]
 								-- upvalues: publish (copy)
@@ -354,9 +357,9 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 							end)
 						end)
 					else
-						var66 = publish()
+						var67 = publish()
 					end
-					var66:andThen(function(p11) --[[ line: 373 ]]
+					var67:andThen(function(p11) --[[ line: 373 ]]
 						-- upvalues: t (copy), getVersionInformationStoreModule (copy), placeId (ref), var41 (copy), var54 (copy), GAME_CONFIGURATION_PUBLISH_SUCCESS (copy)
 						if p11 == t then return end
 						if not (typeof(p11) ~= "table" and (p11.status == "success" and (typeof(p11.version) == "string" and p11.version ~= ""))) then
@@ -368,18 +371,18 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 						var41.fetchHistory(placeId)
 						var54(GAME_CONFIGURATION_PUBLISH_SUCCESS)
 					end):catch(function(p10) --[[ line: 387 ]]
-						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), fFlagBuildPublishAccountTooNewErrorModule (copy), GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR (copy), getVersionInformationStoreModule (copy), placeId (ref), var41 (copy), debug (copy), var64 (write), p6 (copy), var54 (copy)
+						-- upvalues: fFlagBuildRehydrateOnPublishModule (copy), gameConfigurationActionsModule (copy), fFlagBuildPublishAccountTooNewErrorModule (copy), GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ERROR (copy), GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR (copy), getVersionInformationStoreModule (copy), placeId (ref), var41 (copy), debug (copy), var65 (write), p6 (copy), var54 (copy)
 						local isTable = typeof(p10) == "table"
-						local var69 = fFlagBuildRehydrateOnPublishModule and (isTable and p10.stage == gameConfigurationActionsModule.PublishFailureStage.SetAudience)
-						local var70 = var69
+						local var70 = fFlagBuildRehydrateOnPublishModule and (isTable and p10.stage == gameConfigurationActionsModule.PublishFailureStage.SetAudience)
+						local var71 = var70
 						
-						if var70 then
+						if var71 then
 							local publishResult = p10.publishResult
-							var70 = typeof(publishResult) ~= "table" and (publishResult.status == "success" and (typeof(publishResult.version) == "string" and publishResult.version ~= ""))
+							var71 = typeof(publishResult) ~= "table" and (publishResult.status == "success" and (typeof(publishResult.version) == "string" and publishResult.version ~= ""))
 						end
-						local var71 = if fFlagBuildPublishAccountTooNewErrorModule and (isTable and p10.responseCode == 16) then GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR elseif var70 then GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR else GAME_CONFIGURATION_PUBLISH_ERROR
+						local var72 = if fFlagBuildPublishAccountTooNewErrorModule and (isTable and p10.responseCode == 16) then GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR elseif var71 then GAME_CONFIGURATION_PUBLISH_AUDIENCE_ERROR else GAME_CONFIGURATION_PUBLISH_ERROR
 						
-						if var70 then
+						if var71 then
 							getVersionInformationStoreModule().clearDraft(placeId)
 							var41.fetchHistory(placeId)
 						end
@@ -387,10 +390,10 @@ return function(p6) --[[ line: 146 | named "PublishFooter" ]]
 							errorMessage = if isTable and p10.errorMessage ~= nil then tostring(p10.errorMessage) else tostring(p10),
 							placeId = placeId,
 							responseCode = if isTable then p10.responseCode else nil,
-							stage = if var69 then gameConfigurationActionsModule.PublishFailureStage.SetAudience else var64,
+							stage = if var70 then gameConfigurationActionsModule.PublishFailureStage.SetAudience else var65,
 							universeId = p6.target.universeId
 						})
-						var54(var71)
+						var54(var72)
 					end):finally(function() --[[ line: 421 ]]
 						-- upvalues: var52 (copy)
 						var52(false)

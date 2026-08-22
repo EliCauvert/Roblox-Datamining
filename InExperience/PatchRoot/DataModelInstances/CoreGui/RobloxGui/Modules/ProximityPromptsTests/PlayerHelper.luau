@@ -20,13 +20,9 @@ function t.Init() --[[ line: 15 ]]
 	t.player = var4
 	
 	if var4.Character == nil and runService:IsServer() then
-		if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-			var4:LoadCharacterAsync()
-		else
-			var4:LoadCharacter()
-		end
+		var4:LoadCharacterAsync()
 	end
-	t.WaitForExpression(function() --[[ line: 37 ]]
+	t.WaitForExpression(function() --[[ line: 33 ]]
 		-- upvalues: var4 (ref)
 		return var4.Character
 	end, 10, "LocalPlayer.Character not found")
@@ -41,7 +37,7 @@ function t.Init() --[[ line: 15 ]]
 	t.PlayerGui = playersService.LocalPlayer:WaitForChild("PlayerGui")
 end
 
-function t.AddInstance(p0) --[[ line: 54 ]]
+function t.AddInstance(p0) --[[ line: 50 ]]
 	-- upvalues: t (ref)
 	local var5 = Instance.new(p0)
 	var5.Parent = t.TestModel
@@ -49,35 +45,35 @@ function t.AddInstance(p0) --[[ line: 54 ]]
 	return var5
 end
 
-function t.CleanUpAfterTest() --[[ line: 61 ]]
+function t.CleanUpAfterTest() --[[ line: 57 ]]
 	-- upvalues: t (ref)
 	t.TestModel:ClearAllChildren()
 end
 
-function t.SetCameraFOV(value) --[[ line: 65 ]]
+function t.SetCameraFOV(value) --[[ line: 61 ]]
 	workspace.CurrentCamera.FieldOfView = value
 end
 
-function t.IsPartOnscreen(p1) --[[ line: 69 ]]
+function t.IsPartOnscreen(p1) --[[ line: 65 ]]
 	local _, position = workspace.CurrentCamera:WorldToViewportPoint(p1.Position)
 	
 	return position
 end
 
-function t.GetPartViewportPixelPosition(p2) --[[ line: 75 ]]
+function t.GetPartViewportPixelPosition(p2) --[[ line: 71 ]]
 	local position, _ = workspace.CurrentCamera:WorldToViewportPoint(p2.Position)
 	
 	return Vector2.new(position.x, position.y)
 end
 
-function t.MovePlayerToPosition(p3) --[[ line: 82 ]]
+function t.MovePlayerToPosition(p3) --[[ line: 78 ]]
 	-- upvalues: t (ref)
 	if t.hrp ~= nil then
 		t.hrp.CFrame = CFrame.new() + p3 + Vector3.new(0, 1 + t.humanoid.HipHeight, 0)
 	end
 end
 
-function t.SetPlayerCamera(value, p4) --[[ line: 91 ]]
+function t.SetPlayerCamera(value, p4) --[[ line: 87 ]]
 	-- upvalues: t (ref)
 	local var8 = CFrame.new(Vector3.new(), value) + t.player.Character:WaitForChild("Head", 10).Position - p4 * value.Unit
 	local currentCamera = workspace.CurrentCamera
@@ -85,14 +81,14 @@ function t.SetPlayerCamera(value, p4) --[[ line: 91 ]]
 	currentCamera.CFrame = var8
 end
 
-function t.WaitNFrames(p5) --[[ line: 102 ]]
+function t.WaitNFrames(p5) --[[ line: 98 ]]
 	-- upvalues: runService (ref)
 	for _ = 1, p5 do
 		runService.RenderStepped:Wait()
 	end
 end
 
-function t.WaitWallTime(p6) --[[ line: 111 ]]
+function t.WaitWallTime(p6) --[[ line: 107 ]]
 	-- upvalues: t (ref)
 	local currentTime = tick()
 	
@@ -108,7 +104,7 @@ function t.WaitWallTime(p6) --[[ line: 111 ]]
 	end
 end
 
-function t.WaitGameTime(p7) --[[ line: 129 ]]
+function t.WaitGameTime(p7) --[[ line: 125 ]]
 	-- upvalues: runService (ref)
 	local var10, var11 = runService.Stepped:Wait()
 	local var12 = var10
@@ -119,7 +115,7 @@ function t.WaitGameTime(p7) --[[ line: 129 ]]
 	end
 end
 
-function t.WaitForExpression(p8, p9, p10) --[[ line: 138 ]]
+function t.WaitForExpression(p8, p9, p10) --[[ line: 134 ]]
 	-- upvalues: t (ref)
 	local currentTime = tick()
 	local var16 = p8()
@@ -133,7 +129,7 @@ function t.WaitForExpression(p8, p9, p10) --[[ line: 138 ]]
 	return var16
 end
 
-function t.GetCornersOfBillboardGui(p11) --[[ line: 156 ]]
+function t.GetCornersOfBillboardGui(p11) --[[ line: 152 ]]
 	-- upvalues: t (ref), guiService (ref)
 	local var17 = t.GetPartViewportPixelPosition(p11.Adornee) - guiService:GetGuiInset() + Vector2.new(p11.SizeOffset.x * p11.AbsoluteSize.x, p11.SizeOffset.y * p11.AbsoluteSize.y)
 	local absoluteSize = p11.AbsoluteSize

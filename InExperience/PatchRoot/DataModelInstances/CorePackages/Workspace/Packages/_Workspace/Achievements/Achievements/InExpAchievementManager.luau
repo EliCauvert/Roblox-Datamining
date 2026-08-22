@@ -82,14 +82,14 @@ local t = {
 		if p8.achievementStrengthInNumbers.hasAchieved == false then
 			local localPlayer = p8.playersService.LocalPlayer
 			
-			if localPlayer and localPlayer.FollowUserId ~= 0 and ((if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) else localPlayer:IsFriendsWith(localPlayer.FollowUserId)) and p8.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
+			if localPlayer and localPlayer.FollowUserId ~= 0 and (localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) and p8.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
 				p9(0)
 			end
 		end
 	end
 }
 
-function t.new(p10, p11, p12, p13, p14, p15) --[[ line: 142 ]]
+function t.new(p10, p11, p12, p13, p14, p15) --[[ line: 140 ]]
 	-- upvalues: var9 (ref), var10 (write), var11 (write), var12 (write), playersService (ref), var14 (write), t (ref)
 	return setmetatable({
 		requestImpl = p10 or var9,

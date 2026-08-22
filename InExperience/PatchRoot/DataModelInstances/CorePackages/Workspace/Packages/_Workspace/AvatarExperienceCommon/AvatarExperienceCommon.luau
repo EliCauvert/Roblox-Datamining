@@ -245,6 +245,8 @@ return {
 		previewImageRegistry = require(script.Backgrounds.previewImageRegistry),
 		buildOutfitProfileConfiguration = require(script.Backgrounds.buildOutfitProfileConfiguration),
 		normalizeBackgroundId = require(script.Backgrounds.normalizeBackgroundId),
+		getTemporaryPlusBackgroundIds = require(script.Backgrounds.getTemporaryPlusBackgroundIds),
+		isPlusExclusiveBackground = require(script.Backgrounds.isPlusExclusiveBackground),
 		NO_BACKGROUND_ASSET_ID = require(script.Backgrounds.constants).NO_BACKGROUND_ASSET_ID
 	},
 	Constants = require(script.Constants),

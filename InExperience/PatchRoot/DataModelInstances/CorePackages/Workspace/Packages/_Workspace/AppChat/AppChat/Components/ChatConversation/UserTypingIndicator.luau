@@ -5,6 +5,7 @@ local otterModule = require(parent.Otter)
 local UIBloxModule = require(parent.UIBlox)
 local images = UIBloxModule.App.ImageSet.Images
 local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local messageCharacterLimitModule = require(script.Parent.MessageCharacterLimit)
 local userTypingIndicator = roactModule.PureComponent:extend("UserTypingIndicator")
 local t = { dampingRatio = 1.5, frequency = 1.6 }
 userTypingIndicator.defaultProps = {
@@ -13,29 +14,29 @@ userTypingIndicator.defaultProps = {
 	oneUserTyping = "PLACEHOLDER {DISPLAY_NAME} is typing...",
 	twoUsersTyping = "PLACEHOLDER {DISPLAY_NAME_1} and {DISPLAY_NAME_2} are typing...",
 	severalUsersTyping = "PLACEHOLDER Several users are typing...",
-	maxCharacterLength = 160,
 	height = 40,
 	AnchorPoint = Vector2.new(0, 0),
 	Position = UDim2.new(0, 0, 0, 0),
-	usersTyping = {}
+	usersTyping = {},
+	maxCharacterLength = messageCharacterLimitModule
 }
 
-function userTypingIndicator.init(p0) --[[ line: 32 ]]
+function userTypingIndicator.init(p0) --[[ line: 33 ]]
 	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
-	function p0.getDisplayText() --[[ line: 33 ]]
+	function p0.getDisplayText() --[[ line: 34 ]]
 		-- upvalues: p0 (ref)
 		if p0.props.usersTyping then
 			return if #p0.props.usersTyping == 1 then p0.props.oneUserTyping elseif #p0.props.usersTyping == 2 then p0.props.twoUsersTyping elseif #p0.props.usersTyping > 2 then p0.props.severalUsersTyping else ""
 		end
 	end
 	
-	local var5, var6 = roactModule.createBinding(1)
+	local var6, var7 = roactModule.createBinding(1)
 	p0.motor = otterModule.createSingleMotor(1)
 	p0.motor:start()
-	p0.motor:onStep(var6)
-	p0.animationProgress = var5
+	p0.motor:onStep(var7)
+	p0.animationProgress = var6
 	
-	function p0.updateAnimationGoal() --[[ line: 54 ]]
+	function p0.updateAnimationGoal() --[[ line: 55 ]]
 		-- upvalues: p0 (ref), otterModule (copy), t (copy)
 		p0.motor:setGoal(otterModule.spring(if #p0.props.usersTyping > 0 then 0 else 1, t))
 	end
@@ -43,15 +44,15 @@ function userTypingIndicator.init(p0) --[[ line: 32 ]]
 	p0.updateAnimationGoal()
 end
 
-function userTypingIndicator.didUpdate(p1, p2, _) --[[ line: 62 ]]
+function userTypingIndicator.didUpdate(p1, p2, _) --[[ line: 63 ]]
 	if #p2.usersTyping ~= #p1.props.usersTyping then
 		p1.updateAnimationGoal()
 	end
 end
 
-function userTypingIndicator.render(p3) --[[ line: 68 ]]
+function userTypingIndicator.render(p3) --[[ line: 69 ]]
 	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref)
-	return withStyle(function(p4) --[[ line: 69 ]]
+	return withStyle(function(p4) --[[ line: 70 ]]
 		-- upvalues: roactModule (copy), p3 (ref), imageSetLabel (copy), images (copy)
 		local font = p4.Font
 		
@@ -83,10 +84,10 @@ function userTypingIndicator.render(p3) --[[ line: 68 ]]
 				SliceCenter = Rect.new(8, 8, 9, 9),
 				Image = images["component_assets/circle_17"],
 				ImageColor3 = p4.Theme.BackgroundUIDefault.Color,
-				ImageTransparency = p3.animationProgress:map(function(p5) --[[ line: 104 ]]
+				ImageTransparency = p3.animationProgress:map(function(p5) --[[ line: 105 ]]
 					return p5
 				end),
-				Position = p3.animationProgress:map(function(p6) --[[ line: 107 ]]
+				Position = p3.animationProgress:map(function(p6) --[[ line: 108 ]]
 					return UDim2.new(0, 0, p6, 0)
 				end)
 			}, {
@@ -110,7 +111,7 @@ function userTypingIndicator.render(p3) --[[ line: 68 ]]
 					TextColor3 = p4.Theme.TextMuted.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					TextTransparency = p3.animationProgress:map(function(p7) --[[ line: 133 ]]
+					TextTransparency = p3.animationProgress:map(function(p7) --[[ line: 134 ]]
 						return p7
 					end)
 				})
@@ -119,7 +120,7 @@ function userTypingIndicator.render(p3) --[[ line: 68 ]]
 	end)
 end
 
-function userTypingIndicator.willUnmount(p8) --[[ line: 142 ]]
+function userTypingIndicator.willUnmount(p8) --[[ line: 143 ]]
 	if p8.motor then
 		p8.motor:destroy()
 	end

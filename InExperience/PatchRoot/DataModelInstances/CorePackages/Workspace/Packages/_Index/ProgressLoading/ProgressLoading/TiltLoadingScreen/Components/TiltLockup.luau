@@ -7,6 +7,8 @@ local text = foundationModule.Text
 local useTokens = foundationModule.Hooks.useTokens
 local tiltKeyartModule = require(tiltLoadingScreen.Components.TiltKeyart)
 local verifiedBadgeModule = require(tiltLoadingScreen.Components.VerifiedBadge)
+local verifiedBadgeModule_1 = require(parent.VerifiedBadges.VerifiedBadge)
+local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
 local _ = require(tiltLoadingScreen.Types)
 local TILT_DEGREES = require(tiltLoadingScreen.Constants).KEYART.TILT_DEGREES
 local t = {
@@ -31,29 +33,62 @@ local t = {
 	verified = { reveal = reactModule.createBinding(1) }
 }
 
-local function _(value) --[[ line: 47 | named "clamp01" ]]
+local function _(value) --[[ line: 49 | named "clamp01" ]]
 	return math.clamp(value, 0, 1)
 end
 
-local _ = function(p0) --[[ line: 51 | named "clipWindowHeight" ]]
+local _ = function(p0) --[[ line: 53 | named "clipWindowHeight" ]]
 	return math.ceil(p0.FontSize * p0.LineHeight)
 end
 
-local _ = function(p1) --[[ line: 55 | named "clippingFromReveal" ]]
-	return p1:map(function(p2) --[[ line: 56 ]]
+local _ = function(p1) --[[ line: 57 | named "clippingFromReveal" ]]
+	return p1:map(function(p2) --[[ line: 58 ]]
 		return p2 < 0.999
 	end)
 end
 
-return reactModule.memo(function(p3) --[[ line: 61 | named "TiltLockup" ]]
-	-- upvalues: useTokens (ref), t (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), verifiedBadgeModule (ref)
-	local var6 = useTokens()
+return reactModule.memo(function(p3) --[[ line: 63 | named "TiltLockup" ]]
+	-- upvalues: useTokens (ref), t (ref), reactModule (ref), view (ref), tiltKeyartModule (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule_1 (ref), verifiedBadgeModule (ref)
+	local var7 = useTokens()
 	local animation = p3.animation or t
-	local color3 = var6.Color.Content.Emphasis.Color3
-	local color3_1 = var6.Color.Content.Default.Color3
-	local color3_2 = var6.Color.System.Emphasis.Color3
-	local headingLarge = var6.Typography.HeadingLarge
-	local bodyMedium = var6.Typography.BodyMedium
+	local color3 = var7.Color.Content.Emphasis.Color3
+	local color3_1 = var7.Color.Content.Default.Color3
+	local color3_2 = var7.Color.System.Emphasis.Color3
+	local headingLarge = var7.Typography.HeadingLarge
+	local ceiled = math.ceil(headingLarge.FontSize * headingLarge.LineHeight)
+	local bodyMedium = var7.Typography.BodyMedium
+	local ceiled_1 = math.ceil(bodyMedium.FontSize * bodyMedium.LineHeight)
+	local var11 = animation.title.reveal:map(function(p4) --[[ line: 58 ]]
+		return p4 < 0.999
+	end)
+	local var12 = animation.creator.reveal:map(function(p5) --[[ line: 58 ]]
+		return p5 < 0.999
+	end)
+	local var13 = animation.title.reveal:map(function(p6) --[[ line: 76 ]]
+		-- upvalues: color3 (ref)
+		return { Color3 = color3, Transparency = 1 - math.clamp(p6, 0, 1) }
+	end)
+	local var14 = animation.creator.reveal:map(function(p7) --[[ line: 80 ]]
+		-- upvalues: color3_1 (ref)
+		return {
+			Color3 = color3_1,
+			Transparency = 1 - math.clamp(p7, 0, 1) * 0.6
+		}
+	end)
+	local var15 = animation.verified.reveal:map(function(p8) --[[ line: 84 ]]
+		-- upvalues: color3_2 (ref)
+		return {
+			Color3 = color3_2,
+			Transparency = 1 - math.clamp(p8, 0, 1)
+		}
+	end)
+	local var16 = animation.verified.reveal:map(function(p9) --[[ line: 88 ]]
+		-- upvalues: var7 (ref)
+		return {
+			Color3 = var7.Color.Content.Emphasis.Color3,
+			Transparency = 1 - math.clamp(p9, 0, 1)
+		}
+	end)
 	
 	return reactModule.createElement(view, {
 		tag = "col align-x-center gap-large size-full-0 auto-y",
@@ -75,28 +110,21 @@ return reactModule.memo(function(p3) --[[ line: 61 | named "TiltLockup" ]]
 			}, {
 				TitleWrap = reactModule.createElement(view, {
 					LayoutOrder = 1,
-					ClipsDescendants = animation.title.reveal:map(function(p4) --[[ line: 56 ]]
-						return p4 < 0.999
-					end),
-					Size = UDim2.new(1, 0, 0, math.ceil(headingLarge.FontSize * headingLarge.LineHeight)),
+					ClipsDescendants = var11,
+					Size = UDim2.new(1, 0, 0, ceiled),
 					padding = { top = animation.title.slide }
 				}, {
 					Title = reactModule.createElement(text, {
 						tag = "size-full text-heading-large text-no-wrap text-align-x-center text-align-y-center text-truncate-end",
 						Text = p3.gameName or "",
-						textStyle = animation.title.reveal:map(function(p5) --[[ line: 74 ]]
-							-- upvalues: color3 (ref)
-							return { Color3 = color3, Transparency = 1 - math.clamp(p5, 0, 1) }
-						end)
+						textStyle = var13
 					})
 				}),
 				SubWrap = reactModule.createElement(view, {
 					tag = "col align-x-center align-y-center",
 					LayoutOrder = 2,
-					ClipsDescendants = animation.creator.reveal:map(function(p6) --[[ line: 56 ]]
-						return p6 < 0.999
-					end),
-					Size = UDim2.new(1, 0, 0, math.ceil(bodyMedium.FontSize * bodyMedium.LineHeight)),
+					ClipsDescendants = var12,
+					Size = UDim2.new(1, 0, 0, ceiled_1),
 					padding = { top = animation.creator.slide }
 				}, {
 					Row = reactModule.createElement(view, {
@@ -106,30 +134,17 @@ return reactModule.memo(function(p3) --[[ line: 61 | named "TiltLockup" ]]
 							tag = "shrink auto-xy text-body-medium text-no-wrap text-truncate-end",
 							LayoutOrder = 1,
 							Text = p3.creatorName or "",
-							textStyle = animation.creator.reveal:map(function(p7) --[[ line: 78 ]]
-								-- upvalues: color3_1 (ref)
-								return {
-									Color3 = color3_1,
-									Transparency = 1 - math.clamp(p7, 0, 1) * 0.6
-								}
-							end)
+							textStyle = var14
 						}),
-						Verified = if p3.isCreatorVerified then reactModule.createElement(verifiedBadgeModule, {
+						Verified = if p3.isCreatorVerified then if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule_1, {
 							LayoutOrder = 2,
-							backplateStyle = animation.verified.reveal:map(function(p8) --[[ line: 82 ]]
-								-- upvalues: color3_2 (ref)
-								return {
-									Color3 = color3_2,
-									Transparency = 1 - math.clamp(p8, 0, 1)
-								}
-							end),
-							checkStyle = animation.verified.reveal:map(function(p9) --[[ line: 86 ]]
-								-- upvalues: var6 (ref)
-								return {
-									Color3 = var6.Color.Content.Emphasis.Color3,
-									Transparency = 1 - math.clamp(p9, 0, 1)
-								}
-							end)
+							testId = "tilt-verified-badge",
+							backplateStyle = var15,
+							checkStyle = var16
+						}) else reactModule.createElement(verifiedBadgeModule, {
+							LayoutOrder = 2,
+							backplateStyle = var15,
+							checkStyle = var16
 						}) else nil
 					})
 				})

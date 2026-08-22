@@ -93,6 +93,7 @@ Authentication.Login.Response.IncorrectPhoneOrPassword,Telefonnummer oder Passwo
 Authentication.Login.Response.IncorrectUsernamePassword,Falscher Benutzername oder falsches Passwort.
 Authentication.Login.Response.InvalidPasskeyCredential,"Die Anmeldung mit diesem Passkey ist nicht möglich. Um wieder Zugang zu erhalten, wähle ""Passwort oder Benutzernamen vergessen?"" aus."
 Authentication.Login.Response.MoreThanOneUsername,Deine E-Mail-Adresse ist mehr als 1 Benutzernamen zugeordnet. Melde dich bitte mit deinem Benutzernamen an.
+Authentication.Login.Response.PlatformAlreadyLinked,Dieses {platform}-Konto ist bereits mit einem anderen Roblox-Konto verknüpft. Bitte melde dich mit dem verknüpften Roblox-Konto an.
 Authentication.Login.Response.RelinkingFreeze,Dieses Roblox-Konto wurde in den letzten 90 Tagen bereits mit einem anderen Konto auf {platform} verknüpft. Bitte versuche dich mit einem anderen Roblox-Konto anzumelden.
 Authentication.Login.Response.Require2FA,"Zweistufige Verifizierung wird auf Konsolen nicht unterstützt. Bitte folge den Anweisungen rechts, um dich sicher anzumelden."
 Authentication.Login.Response.Require2FAGeneric,"Eine zusätzlich erforderliche Verifizierung wird auf diesem Gerät nicht unterstützt. Bitte folge den Anweisungen rechts, um dich sicher anzumelden."
@@ -150,6 +151,7 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Objektqualität: Textu
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Objektqualität: {partName} hat {intersecting_tri_face_percent} % sich überschneidende Dreiecksflächen (Score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Objektqualität: {partName} hat {uv_outside_bound_vert_percent} % UV-Eckpunkte außerhalb der Grenzen (Score: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Objektqualität: {partName} hat {similar_vertex_percent} % ähnliche Eckpunkte (Score: {score}).
+Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"Der Accessoire-Anhang ""{AttachmentName}"" in ""{PartName}"" muss in der Nähe der Oberfläche des Meshes platziert werden. Die aktuelle Position [{CurrentPosition}] liegt außerhalb des gültigen Bereichs. Bewege den Accessoire-Anhang näher an [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Der Ziehpunkt ist mit einem Skin für die Verbindung {jointName} versehen, die nicht Teil des zulässigen Schemas ist. Es sind nur Standard-R15-Verbindungen und Verbindungen für die Skinning-Übertragung zulässig."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} muss Skinning-Übertragung verwenden, aber dir fehlt die erforderliche Verbindung {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Der Ziehpunkt hat einen Skin für die Verbindung {jointName}, aber für dieses Objekt muss ein automatischer Skin erstellt werden. Du kannst nur einen Skin für {validJointNameList} erstellen."
@@ -163,6 +165,7 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Die gesuchte {ExpectedCla
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Die folgenden Instanzen sind nicht Teil des genehmigten Schemas und sollten entfernt werden: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Das hochgeladene Objekt sollte ein {ExpectedClass} sein, ist aber ein {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Das hochgeladene Objekt sollte den Namen {ExpectedClass} haben, hat aber stattdessen den Namen {RootClass}."
+Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} enthält noch nicht gespeicherte bearbeitbare Inhalte. Speichere sie vor der Veröffentlichung als Objekt und versuche es erneut.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"Das Körperteil ""{bodyPartName}"" in CurveAnimation hat eine Positionsspur (Übersetzung). Körperteile in Animationen dürfen nur rotiert werden. Positionspuren sind nicht erlaubt. Bitte entferne die Positionsspur von diesem Körperteil."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"Der Körperteil ""{bodyPartName}"" in CurveAnimation bewegt sich um {distance} Noppen von seiner Startposition. Die maximal zulässige Verschiebung beträgt {maxDistance} Noppen. Bitte reduziere die Positionsbewegung des Körperteils."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation enthält HRD/DRD-Knochen und das Körperteil ""{bodyPartName}"" hat eine Positionsspur (Übersetzung). Wenn in der Animation Knochen vorhanden sind, dürfen keine Körperteile verschoben werden, um eine Trennung der Verbindungen zu verhindern. Bitte entferne alle Positionsspuren von Körperteilen."
@@ -260,7 +263,10 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooLarge,Die {axis}-Achsen-Größ
 Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,Die {axis}-Achsen-Größe des Mesh von {partName} beträgt {currentSize} Noppen und ist daher kleiner als die zulässige minimale Einzelteilgröße von {minSize} Noppen. Skaliere das Mesh.
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Der Anhang {attName} darf in Unterelemente von {partName} genau einmal vorhanden sein.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (oder untergeordnete Instanzen) enthalten Attribute. Du musst Attribute aus den folgenden Instanzen entfernen: {InstanceNameList}"
+Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" hat ungültige Eigenschaften: {ProblematicProperties}. Ein angezeigtes Byte-Limit wurde überschritten (ein Limit von 0 bedeutet, dass die Eigenschaft leer sein muss). Eine andere Eigenschaft enthält NaN/Inf-Werte oder überschreitet ihr Standardgrößenlimit."
+Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Der Rig-Anhang ""{AttachmentName}"" in ""{PartName}"" muss in der Nähe der Gelenkbegrenzung platziert werden, wo dieses Körperteil mit einem benachbarten Teil verbunden ist. Die aktuelle Position [{CurrentPosition}] ist zu weit von der Verbindungsebene entfernt. Bewege den Rig-Anhang ihn näher an [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Um ein Objekt auf Roblox hochzuladen, musst du genau 1 Instanz und die zugehörige Upload-Art auswählen."
+Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Dieses Objekt ist zu groß, um es hochzuladen ({sizeBytes} Bytes überschreiten das Maximum von {maxSizeBytes} Bytes). Bitte reduziere seine Größe und versuche es erneut."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Die Instanz {ProblematicDescendantPath} darf keine Tags aufweisen.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,"Zweite Test-Fehlerzeichenfolge, die verwendet wird, um den Hub-first-Übersetzungs-Synchronisierungs-Workflow durchgängig zu verifizieren."
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Das Kopf-Mesh-Teil enthält Gesichtsanimationen für {jointName}, die in FACS nicht verwendet werden können. Bitte benenne diese Verbindung um und importiere deinen Kopf dann erneut."
@@ -387,10 +393,12 @@ CommonUI.Features.Label.Terms,Bedingungen
 CommonUI.Features.Label.TermsOfUse,Nutzungsbedingungen
 CommonUI.Features.Label.Thanks,Danke
 CommonUI.Features.Label.TheHunt,Roblox-Events
+CommonUI.Features.Label.Trades,Tauschaktionen
 CommonUI.Features.Label.Unchecked,Nicht verifiziert
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Verbinden mit
+CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,Build
 CommonUI.Features.StudioCTA.Tooltip.Body,Lade Studio KOSTENLOS herunter!
 CommonUI.Features.StudioCTA.Tooltip.Title,Erstelle jetzt auf Roblox
@@ -1055,9 +1063,6 @@ CoreScripts.TopBar.GameNamePlaceHolder,Experience
 CoreScripts.TopBar.HideChat,Chat ausblenden
 CoreScripts.TopBar.Inventory,
 CoreScripts.TopBar.JoinVoice,Sprachchat aktivieren
-CoreScripts.TopBar.Label.InappropriateAudio,Unangemessene Audiodatei
-CoreScripts.TopBar.Label.Report,
-CoreScripts.TopBar.Label.ReportAudio,Audiodatei melden
 CoreScripts.TopBar.Label.UILessHintDescription,"Drücke ESC, um das Roblox-Menü zu öffnen"
 CoreScripts.TopBar.Label.UILessHintTitle,"Neue Möglichkeit, das Roblox-Menü zu öffnen"
 CoreScripts.TopBar.Leaderboard,
@@ -1239,12 +1244,26 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Bestehenden Look aktualisieren
 Feature.Avatar.Action.UpdateMakeupLook,Look aktualisieren
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Stile entdecken
+Feature.Avatar.BackgroundGeneration.Action.Cancel,
+Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
+Feature.Avatar.BackgroundGeneration.Action.Okay,
+Feature.Avatar.BackgroundGeneration.Action.Publish,Veröffentlichen
+Feature.Avatar.BackgroundGeneration.Action.View,Anzeigen
+Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Deine Kreation kann jetzt genutzt werden.
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Dieser Hintergrund wurde mit KI generiert. Durch die Veröffentlichung bestätigst du, dass er den Community-Regeln von Roblox entspricht und keine Inhalte verwendet, an denen du keine Rechte hast. Er wird überprüft, bevor er in deinem Inventar erscheint. Veröffentlichte Artikel können nicht bearbeitet werden."
+Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Der Artikel entsprach nicht den Community-Regeln
 Feature.Avatar.BackgroundGeneration.Error.Moderation,"Dieser Prompt entspricht nicht unseren Richtlinien. Versuche, etwas anderes zu beschreiben."
+Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Dieser Hintergrund entspricht nicht den Community-Regeln von Roblox, daher wurde er deinem Inventar nicht hinzugefügt. Versuche, einen neuen Hintergrund zu generieren."
 Feature.Avatar.BackgroundGeneration.Error.System,Beim Generieren deines Hintergrunds ist etwas schiefgelaufen. Bitte versuche es erneut.
+Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
+Feature.Avatar.BackgroundGeneration.Label.Description,
+Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Beschreibe deinen Hintergrund …
 Feature.Avatar.BackgroundGeneration.Status.Generating,Dein Hintergrund wird generiert …
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Dein Hintergrund wird vorbereitet …
 Feature.Avatar.BackgroundGeneration.Title,Hintergrund erstellen
+Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
+Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Im Inventar veröffentlichen
 Feature.Avatar.Backgrounds.Title,Hintergründe
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Für diesen Körperstil ist keine Anpassung verfügbar.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Zur Standard-Körperfarbe zurückkehren
@@ -1738,7 +1757,9 @@ Feature.Build.Action.Buy,Kaufen
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Text kopieren
+Feature.Build.Action.Create,
 Feature.Build.Action.Delete,
+Feature.Build.Action.DontAskAgain,Nicht erneut fragen
 Feature.Build.Action.HideAutosaved,Automatisch gespeicherte Elemente verbergen
 Feature.Build.Action.ManageLimit,Limit verwalten
 Feature.Build.Action.Next,
@@ -1748,7 +1769,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,Einstellungen öffnen
 Feature.Build.Action.Playtest,Spiel testen
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,Veröffentlichen
+Feature.Build.Action.Publish,
 Feature.Build.Action.PublishLatest,Neueste Version veröffentlichen
 Feature.Build.Action.Restore,Wiederherstellen
 Feature.Build.Action.Revert,
@@ -1760,21 +1781,25 @@ Feature.Build.Action.ShareLink,Freigabelink
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Bewertung aktualisieren
 Feature.Build.Action.UpdateWithChanges,Mit Änderungen aktualisieren
-Feature.Build.Action.View,Anzeigen
+Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Kontingent anzeigen
 Feature.Build.Content.NewGame,Neues Spiel
 Feature.Build.Description.ArchiveRemoval,"Wenn du dieses Spiel archivierst, wird es aus Build entfernt. Du kannst weiterhin im Creator Hub oder in Roblox Studio darauf zugreifen und es wiederherstellen."
 Feature.Build.Description.AutoBuyUsage,"Verwende deine Robux, um beim Erstellen automatisch zusätzliches Build-Kontingent zu kaufen. Du kannst jederzeit ein tägliches Ausgabenlimit festlegen."
+Feature.Build.Description.BoostAudienceForPlays,Vergrößere deine Zielgruppe für mehr Spieler.
+Feature.Build.Description.BoostGameAudience,Vergrößere die Zielgruppe deines Spiels
 Feature.Build.Description.BuildIdeaGame,Mache aus deinen Ideen ein Spiel
 Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Build eine Antwort für dich hat."
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
+Feature.Build.Description.CampaignRunDates,Deine Kampagne läuft von {startDate}–{endDate}.
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die dir beim Spieltest helfen."
 Feature.Build.Description.EnableBuildNotifs,"Aktiviere Benachrichtigungen in deinen Geräteeinstellungen, um Updates von Build zu erhalten."
 Feature.Build.Description.FriendsLinkOnly,"Nur deine Freunde können auf diesen Link zugreifen. Ändere die Zielgruppeneinstellung deines Spiels, wenn du möchtest, dass mehr Personen spielen."
 Feature.Build.Description.GameCreationDone,"Ich habe die Erstellung und Veröffentlichung deines Spiels abgeschlossen. Du kannst es öffnen, um es zu testen."
 Feature.Build.Description.GameSavedPlaytest,"Ich habe die Erstellung deines Spiels abgeschlossen und eine neue Version gespeichert. Du kannst es öffnen, um es zu testen."
 Feature.Build.Description.HubSettings,Verwalte alle Einstellungen im Creator Hub
+Feature.Build.Description.InviteFriendLimit,Wähle bis zu {MAX_INVITES} Freunde aus und teile dann den Link zum Spiel.
 Feature.Build.Description.MakeAudienceAvail,"Veröffentliche deine Experience, um sie für diese Zielgruppe verfügbar zu machen."
 Feature.Build.Description.ManageAppearance,"Verwalte, wie dein Spiel für andere angezeigt wird."
 Feature.Build.Description.PlayAfterPublish,"Wähle aus, wer diese Experience spielen kann, nachdem du sie veröffentlicht hast."
@@ -1785,6 +1810,7 @@ Feature.Build.Description.PrivateShare,"Ändere die Zielgruppeneinstellung deine
 Feature.Build.Description.RaiseLimitOrWait,"Erhöhe dein tägliches Robux-Limit, um weiter zu erstellen, oder warte, bis es morgen zurückgesetzt wird."
 Feature.Build.Description.RatingAgreement,"Durch die Veröffentlichung erklärst du dich damit einverstanden, dass diese Inhaltseinstufung korrekt ist."
 Feature.Build.Description.RestoreLatest,Diese Version wird zu Ihrer neuesten veröffentlichten Version.
+Feature.Build.Description.RevertToVersion,"Bestätige, dass du die letzte Änderung rückgängig machen und zu {VERSION} zurückzukehren möchtest."
 Feature.Build.Description.VersionChanges,"Teile den Spielern mit, was sich in dieser Version geändert hat."
 Feature.Build.Header.AccessSharing,Zugriff und Teilen
 Feature.Build.Header.ContentMaturity,Inhaltseinstufung
@@ -1793,13 +1819,17 @@ Feature.Build.Header.GameDetails,Spielinfos
 Feature.Build.Header.Overview,Übersicht
 Feature.Build.Label.Access,Zugriff
 Feature.Build.Label.AdditionalUsage,Zusätzliches Build-Kontingent
+Feature.Build.Label.AdditionalUsed,{USED} von {LIMIT} verwendet
 Feature.Build.Label.All,
+Feature.Build.Label.AmountAvailable,{AMOUNT} verfügbar
 Feature.Build.Label.Autosaved,Automatisch gespeichert
 Feature.Build.Label.Available,Verfügbar
 Feature.Build.Label.BackToBuild,Zurück zu Build
 Feature.Build.Label.Building,Wird erstellt …
 Feature.Build.Label.CaptureLibrary,Aufnahmen-Bibliothek
 Feature.Build.Label.ContentRating,Altersfreigabe
+Feature.Build.Label.Created,Erstellt
+Feature.Build.Label.CreatedDate,{DAY}. {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Creator Hub
 Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
@@ -1810,26 +1840,37 @@ Feature.Build.Label.FreeBuildUsage,Kostenloses Build-Kontingent
 Feature.Build.Label.Friends,
 Feature.Build.Label.FriendsOnly,Nur Freunde
 Feature.Build.Label.GetMoreBuildUsage,Mehr Build-Kontingent holen
+Feature.Build.Label.Hi,Hallo
 Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
+Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
+Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limitiert
 Feature.Build.Label.Loading,Wird geladen …
+Feature.Build.Label.Models3D,3D-Modelle
 Feature.Build.Label.NoLimit,Kein Limit
 Feature.Build.Label.NotStarted,Nicht begonnen
 Feature.Build.Label.Pending,Ausstehend
+Feature.Build.Label.PercentUsed,{PERCENT} % verwendet
 Feature.Build.Label.PreviouslyPublished,Zuvor veröffentlicht
 Feature.Build.Label.Private,Privat
 Feature.Build.Label.Public,Öffentlich
 Feature.Build.Label.PubliclyUnavailable,Öffentlich nicht verfügbar
 Feature.Build.Label.Published,Veröffentlicht
+Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Bereit
 Feature.Build.Label.ResetsDaily,Wird täglich zurückgesetzt
+Feature.Build.Label.RestoredVersion,{VERSION} wurde wiederhergestellt
+Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
+Feature.Build.Label.SearchAssets,Objekte durchsuchen
 Feature.Build.Label.SearchGames,Spiele suchen
 Feature.Build.Label.SearchTasks,Aufgaben suchen
 Feature.Build.Label.SelectOption,Wähle eine Option
 Feature.Build.Label.ShareAddedFriends,"Mit Freunden teilen, die du hinzugefügt hast"
+Feature.Build.Label.Shared,Geteilt
+Feature.Build.Label.Sounds,Sounds
 Feature.Build.Label.Thinking,Denkt nach
 Feature.Build.Label.Title,Titel
 Feature.Build.Label.TitleDescription,Titel und Beschreibung
@@ -1894,15 +1935,25 @@ Feature.Build.Label.ToolTasksPlanRunning,Deine Aufgaben werden geplant
 Feature.Build.Label.ToolThumbnailDone,Vorschaubild des Spiels wurde festgelegt
 Feature.Build.Label.ToolThumbnailFailed,Vorschaubild des Spiels konnte nicht festgelegt werden
 Feature.Build.Label.ToolThumbnailRunning,Vorschaubild des Spiels wird festgelegt
+Feature.Build.Label.UniverseNumber,Universum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Unbekannt
+Feature.Build.Label.UnlimitedUsed,{USED} verwendet • Kein Limit
+Feature.Build.Label.Updated,Aktualisiert
 Feature.Build.Label.Usage,Kontingent
+Feature.Build.Label.UsageUsed,{USED} verwendet
+Feature.Build.Label.UsernameHandle,@{USERNAME}
 Feature.Build.Label.Version,Version
+Feature.Build.Label.VersionCompact,v{VERSION_NUMBER}
+Feature.Build.Label.VersionDate,{VERSION} · {CREATED_DATE}
+Feature.Build.Label.VersionPadded,v0{VERSION_NUMBER}
 Feature.Build.Label.VersionTitleDesc,Versionstitel und Beschreibung
 Feature.Build.Label.Video,Video
 Feature.Build.Message.AccountRequirements,Dein Konto erfüllt nicht die Anforderungen für die Nutzung von Build.
 Feature.Build.Message.AccountTooNew,"Dein Konto ist zu neu, um etwas zu veröffentlichen. Bitte versuche es erneut, wenn es 2 Tage alt ist."
 Feature.Build.Message.AllFriendsAdded,Du hast alle deine Freunde als Spieletester hinzugefügt.
 Feature.Build.Message.AnswerBuildQuestion,Beantworte unten die Frage von Build.
+Feature.Build.Message.AssetDetailsUnavailable,Objekt-Infos sind nicht verfügbar.
+Feature.Build.Message.AssetsLoadFailed,Objekte können nicht geladen werden.
 Feature.Build.Message.AudienceIneligible,Nicht für diese Zielgruppe zulässig
 Feature.Build.Message.BuildAccountBlocked,Build ist derzeit für dein Konto nicht verfügbar.
 Feature.Build.Message.BuildBusy,Build ist ausgelastet. Warte eine Minute und versuche es dann erneut.
@@ -1912,10 +1963,12 @@ Feature.Build.Message.BuildResponseFailed,Build konnte nicht antworten. Bitte ve
 Feature.Build.Message.BuildStillWorking,"Wir arbeiten daran. Du kannst die App verlassen, auf Roblox spielen oder ein anderes Projekt starten, während du wartest."
 Feature.Build.Message.BuildStopped,Du hast Build gestoppt.
 Feature.Build.Message.BuildTemporarilyDown,Build ist vorübergehend nicht verfügbar. Versuche es in einer Minute erneut.
+Feature.Build.Message.CompletedTasks,{COUNT} abgeschlossene Aufgaben
 Feature.Build.Message.ConversationGone,Diese Unterhaltung ist nicht mehr verfügbar. Starte eine neue.
 Feature.Build.Message.ConversationNotFound,Diese Unterhaltung konnte nicht gefunden werden. Starte eine neue.
 Feature.Build.Message.CreateGameToUseBuild,"Erstelle ein neues Spiel, um Build zu verwenden."
 Feature.Build.Message.CreatedRevertedVer,Zurückgesetzte Version erstellt.
+Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Erweitere deine Zielgruppen-Berechtigung im Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Experiences konnten nicht geladen werden
 Feature.Build.Message.FailedTitle,{TITLE} fehlgeschlagen
@@ -1923,35 +1976,51 @@ Feature.Build.Message.FinishedTitle,{TITLE} abgeschlossen
 Feature.Build.Message.FriendsLoadFailed,Freunde konnten nicht geladen werden. Bitte versuche es erneut.
 Feature.Build.Message.GameNotCreated,Dein Spiel wurde nicht erstellt. Bitte versuche es erneut.
 Feature.Build.Message.GamePublishFailed,Dein Spiel konnten nicht veröffentlicht werden. Bitte versuche es erneut.
+Feature.Build.Message.GameShared,Spiel wurde geteilt
+Feature.Build.Message.GameSharedWith,Spiel wurde mit {DISPLAY_NAME} geteilt
+Feature.Build.Message.HiDisplayName,"Hallo {DISPLAY_NAME},"
 Feature.Build.Message.InvalidMessage,Bei deiner Nachricht ist etwas schiefgelaufen. Bearbeite sie und versuche es erneut.
 Feature.Build.Message.InvitesLoadFailed,Einladungen konnten nicht geladen werden
+Feature.Build.Message.LimitBelowSpend,"Das Limit darf nicht unter den {ALREADY_SPENT} Robux liegen, die heute bereits ausgegeben wurden."
 Feature.Build.Message.LinkCopied,Link in Zwischenablage kopiert
 Feature.Build.Message.LoadingVersions,Versionsverlauf wird geladen …
+Feature.Build.Message.NoAssetsFound,Keine Objekte gefunden.
 Feature.Build.Message.NoDescriptionProvided,Keine Beschreibung vorhanden.
 Feature.Build.Message.NoFriendsToAdd,"Du hast noch keine Freunde, die du hinzufügen kannst. Finde zuerst Personen, mit denen du dich auf Roblox verbinden kannst."
 Feature.Build.Message.NoResults,
 Feature.Build.Message.NoVersionHistory,Noch kein Versionsverlauf.
+Feature.Build.Message.OneTaskCompleted,1 Aufgabe abgeschlossen
 Feature.Build.Message.OutOfBuildUsage,"Dein Build-Kontingent ist aufgebraucht. Sieh dir deine Optionen an, um Robux zu verwenden und weiter zu erstellen."
+Feature.Build.Message.PlaytestersAdded,{INVITED_COUNT} von {MAX_INVITES} Spieletestern hinzugefügt
 Feature.Build.Message.PublicPublishFailed,"Dein Spiel wurde veröffentlicht, konnte aber nicht öffentlich gemacht werden. Bitte versuche es erneut."
 Feature.Build.Message.PublishExpandAudience,"Veröffentliche, um deine Zielgruppe zu vergrößern"
 Feature.Build.Message.PublishNotReverted,Deine Veröffentlichung wurde nicht rückgängig gemacht. Bitte versuche es erneut.
 Feature.Build.Message.PublishReverted,Veröffentlichung zurückgesetzt.
 Feature.Build.Message.QuestionnaireNeeded,"Dieses Spiel wurde außerhalb von Build bearbeitet. Fülle den Inhaltsfragebogen aus, um es zu veröffentlichen."
 Feature.Build.Message.ReadyToPlay,"Dein Spiel ist bereit, auf Roblox gespielt zu werden!"
+Feature.Build.Message.ResetHours,Wird in {HOURS} Stunden zurückgesetzt
+Feature.Build.Message.ResetOneHour,Wird in 1 Stunde zurückgesetzt
 Feature.Build.Message.RestoreVersionFailed,Diese Version konnte nicht wiederhergestellt werden. Bitte versuche es erneut.
 Feature.Build.Message.RevertVersionFail,Es wurde keine zurückgesetzte Version erstellt. Bitte versuche es erneut.
 Feature.Build.Message.RunningTitle,{title} wird ausgeführt
 Feature.Build.Message.SafetyPolicy,Diese Nachricht verstößt gegen unsere Sicherheitsrichtlinien. Bearbeite sie und versuche es erneut.
 Feature.Build.Message.SaveChangesFailed,Änderungen konnten nicht gespeichert werden. Bitte versuche es erneut.
+Feature.Build.Message.ShareExperience,{EXPERIENCE_NAME} teilen
 Feature.Build.Message.ShareLinkFailed,Der Freigabelink konnte nicht erstellt werden. Bitte versuche es erneut.
 Feature.Build.Message.SignedOut,Du bist abgemeldet. Melde dich an und versuche es erneut.
+Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} Aufgaben abgeschlossen
+Feature.Build.Message.ThinkingSeconds,Denkt {SECONDS} Sek. nach
 Feature.Build.Message.TryAgain,Versuche es erneut.
 Feature.Build.Message.TurnToPortrait,"Wechsle ins Hochformat, um weiter an deinem Spiel zu arbeiten."
 Feature.Build.Message.VersionHistoryLoad,Versionsverlauf konnte nicht geladen werden.
 Feature.Build.Message.WhatToCreate,Was möchtest du heute erstellen?
+Feature.Build.Message.WorkedMinutesSeconds,{MINUTES} Min. {REM_SECONDS} Sek. funktioniert
+Feature.Build.Message.WorkedSeconds,{SECONDS} Sek. funktioniert
 Feature.Build.Message.WorkingOnTasks,Deine Aufgaben werden bearbeitet
+Feature.Build.Title.AdCampaignActive,Werbekampagne ist aktiv
 Feature.Build.Title.AddFriendsToPlaytest,"Füge Freunde hinzu, die dir beim Spieltest helfen"
 Feature.Build.Title.ArchiveThisGame,Dieses Spiel archivieren?
+Feature.Build.Title.AssetLibrary,Bibliothek
 Feature.Build.Title.Audience,Zielgruppe
 Feature.Build.Title.BuildQuestion,Build hat eine Frage
 Feature.Build.Title.BuildQuestions,Build hat ein paar Fragen
@@ -1970,12 +2039,14 @@ Feature.Build.Title.GenericError,Etwas ist schiefgelaufen
 Feature.Build.Title.NoRobuxForUsage,Keine Robux mehr für das Build-Kontingent übrig
 Feature.Build.Title.Playtesters,Spieletester
 Feature.Build.Title.PlaytestersOnlyPlay,Nur Spieletester können spielen
+Feature.Build.Title.PromoteGameFree,Bewirb dein Spiel kostenlos
 Feature.Build.Title.PushNotifications,Push-Benachrichtigungen
 Feature.Build.Title.RevertLastChange,Letzte Änderung rückgängig machen?
 Feature.Build.Title.Tasks,Aufgaben
 Feature.Build.Title.TurnActivity,Aktivität drehen
 Feature.Build.Title.VersionHistory,Versionsverlauf
 Feature.Build.Title.VersionInformation,Versionsinformationen
+Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Erlauben
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -2075,6 +2146,7 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Verkaufen
 Feature.Catalog.Action.ShareVia,Teilen über ...
 Feature.Catalog.Action.Submit,
+Feature.Catalog.Action.Try,Jetzt testen
 Feature.Catalog.Action.Upgrade,Aufwerten
 Feature.Catalog.Action.ViewDetailsPage,Infoseite anzeigen
 Feature.Catalog.Action.ViewExperienceDetails,Experience-Infos anzeigen
@@ -2929,7 +3001,7 @@ Feature.GameDetails.Label.SomethingElse,Etwas anderes
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.TellUsMorePlaceholder,Erzähle uns mehr
 Feature.GameDetails.Label.TooRepetitive,Zu repetitiv
-Feature.GameDetails.Label.Updated,Aktualisiert
+Feature.GameDetails.Label.Updated,
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,Warum erscheint diese Anzeige?
 Feature.GameDetails.Label.Yes,
@@ -3132,6 +3204,7 @@ Feature.Moments.Action.Join,Mitmachen
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimieren
 Feature.Moments.Action.Ok,
+Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
 Feature.Moments.Action.Retry,
@@ -3204,8 +3277,14 @@ Feature.Moments.Label.TextGenerationFailedBody,Der Text konnte nicht generiert w
 Feature.Moments.Label.TextGenerationFailedTitle,Generierung fehlgeschlagen
 Feature.Moments.Label.TextGenerationFilteredBody,"Generierung für dieses aufgenommene Video nicht möglich, Inhalt gefiltert."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generierung gefiltert
+Feature.Moments.Label.Tone,Tonfall
+Feature.Moments.Label.Tone.Cinematic,Cinematisch
+Feature.Moments.Label.Tone.Funny,Lustig
+Feature.Moments.Label.Tone.Hype,Hype
+Feature.Moments.Label.Tone.Neutral,Neutral
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
+Feature.Moments.Title.GenerateTextOptions,Text generieren
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
 Feature.Moments.Title.MomentRemoved,Moment entfernt
 Feature.Moments.Title.ReportPost,Post melden
@@ -4491,10 +4570,13 @@ InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
 InGame.PlayerDropDown.CancelRequest,
+InGame.PlayerDropDown.ConfirmUnfriend,"Tippen, um das Entfreunden zu bestätigen"
+InGame.PlayerDropDown.Decline,Ablehnen
 InGame.PlayerDropDown.Examine,
 InGame.PlayerDropDown.OtherPlayerFriendLimit,{RBX_NAME} hat die max. Anzahl an Freunden erreicht.
 InGame.PlayerDropDown.Report,
 InGame.PlayerDropDown.UnBlock,
+InGame.PlayerDropDown.Unfriend,Von der Freundschaftsliste entfernen
 InGame.PlayerList.FooterLastUpdated,Zuletzt aktualisiert vor {minutes} Minuten
 InGame.PlayerList.FooterUnableToLoad,Kann nicht geladen werden
 InGame.PlayerList.FriendsEmpty,Noch keiner deiner Freunde hat diese Experience gespielt.

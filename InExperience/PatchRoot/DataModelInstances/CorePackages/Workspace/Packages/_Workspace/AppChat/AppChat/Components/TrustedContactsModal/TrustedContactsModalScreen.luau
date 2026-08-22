@@ -6,20 +6,20 @@ local setTabBarVisibleFromChat = require(parent.AppTabBarRodux).Thunks.SetTabBar
 local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local trustedFriendsModalEntry = trustedContactsModule.TrustedFriendsModalEntry
 
-return function(p0) --[[ line: 37 | named "TrustedContactsModalScreen" ]]
+return function(p0) --[[ line: 40 | named "TrustedContactsModalScreen" ]]
 	-- upvalues: useDispatch (ref), reactModule (ref), setTabBarVisibleFromChat (ref), trustedFriendsModalEntry (ref), cryoModule (ref)
 	local navigation = p0.navigation
 	local props = navigation.getParam("props")
 	local var4 = useDispatch()
-	local var5 = reactModule.useCallback(function() --[[ line: 42 ]]
+	local var5 = reactModule.useCallback(function() --[[ line: 45 ]]
 		-- upvalues: navigation (ref)
 		navigation.pop()
 	end, { navigation })
-	reactModule.useEffect(function() --[[ line: 46 ]]
+	reactModule.useEffect(function() --[[ line: 49 ]]
 		-- upvalues: var4 (ref), setTabBarVisibleFromChat (copy)
 		var4(setTabBarVisibleFromChat(false))
 		
-		return function() --[[ line: 48 ]]
+		return function() --[[ line: 51 ]]
 			-- upvalues: var4 (copy), setTabBarVisibleFromChat (copy)
 			var4(setTabBarVisibleFromChat(true))
 		end

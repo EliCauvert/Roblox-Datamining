@@ -4,20 +4,20 @@ local _ = require(parent.Signals)
 local useChatWindowModule = require(script.Parent.Parent.Bridge.useChatWindow)
 local name = require(parent.ExpChatShared).Logger:new(script.Name)
 
-return function(p0) --[[ line: 43 | named "FriendsChatMessageList" ]]
+return function(p0) --[[ line: 44 | named "FriendsChatMessageList" ]]
 	-- upvalues: useChatWindowModule (ref), reactModule (ref), name (ref)
 	local var3 = useChatWindowModule()
-	local var4 = reactModule.useCallback(function() --[[ line: 50 ]]
+	local var4 = reactModule.useCallback(function() --[[ line: 51 ]]
 		-- upvalues: name (copy)
 		name:warning("resetTargetChannel called on FriendsChatMessageList; not supported")
 	end, {})
-	local var5 = reactModule.useCallback(function() --[[ line: 53 ]]
+	local var5 = reactModule.useCallback(function() --[[ line: 54 ]]
 		-- upvalues: name (copy)
 		name:warning("activateWhisperMode called on FriendsChatMessageList; not supported")
 	end, {})
 	local var6 = reactModule.useRef(nil)
 	local onViewportAbsoluteSizeChanged = p0.onViewportAbsoluteSizeChanged
-	reactModule.useEffect(function() --[[ line: 62 ]]
+	reactModule.useEffect(function() --[[ line: 63 ]]
 		-- upvalues: var6 (ref), onViewportAbsoluteSizeChanged (ref)
 		local current = var6.current
 		
@@ -52,9 +52,10 @@ return function(p0) --[[ line: 43 | named "FriendsChatMessageList" ]]
 				size = UDim2.fromScale(1, 1),
 				isChannelBarVisible = p0.isChannelBarVisible,
 				scrollResetKey = "FriendsChat:" .. p0.conversationId,
+				scrollToTopOnReset = p0.scrollToTopOnReset,
 				onCanvasPositionChanged = p0.onCanvasPositionChanged,
 				contentTopPadding = p0.contentTopPadding,
-				messageComponentsSignal = p0.messageComponentsSignal,
+				messageComponentsSignal = p0.scrollViewChildrenSignal,
 				chatWindowSettings = p0.chatWindowSettings,
 				transparencyValue = p0.transparencyValue,
 				textTransparency = p0.textTransparency,

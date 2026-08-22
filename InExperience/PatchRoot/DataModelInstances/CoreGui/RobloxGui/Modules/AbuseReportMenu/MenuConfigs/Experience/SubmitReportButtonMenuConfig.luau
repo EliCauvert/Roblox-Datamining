@@ -50,16 +50,9 @@ return {
 				local var10 = "N/A"
 				pcall(function() --[[ line: 51 ]]
 					-- upvalues: marketplaceService (copy), var9 (write), var10 (write)
-					if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-						local placeIdProductInfoAsync = marketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
-						var9 = placeIdProductInfoAsync.Name
-						var10 = placeIdProductInfoAsync.Description
-						
-						return
-					end
-					local placeIdProductInfo = marketplaceService:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
-					var9 = placeIdProductInfo.Name
-					var10 = placeIdProductInfo.Description
+					local placeIdProductInfoAsync = marketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
+					var9 = placeIdProductInfoAsync.Name
+					var10 = placeIdProductInfoAsync.Description
 				end)
 				playersService:ReportAbuse(nil, abuseReason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p0.comment, var9, var8, var10))
 			end)

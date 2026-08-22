@@ -13,26 +13,26 @@ local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
 local getScaleModule = require(momentsCommon.Utils.getScale)
 local _ = require(parent.MomentsTypes)
 
-local function getAbsoluteSize(value, p0) --[[ line: 39 ]]
+local function getAbsoluteSize(value, p0) --[[ line: 43 ]]
 	return Vector2.new(p0.X * value.X.Scale + value.X.Offset, p0.Y * value.Y.Scale + value.Y.Offset)
 end
 
-local function getVisibleBounds(p1, p2) --[[ line: 43 ]]
+local function getVisibleBounds(p1, p2) --[[ line: 47 ]]
 	return Vector2.new(math.max((p1.X - p2.X) / 2, 0), math.max((p1.Y - p2.Y) / 2, 0)), Vector2.new(math.min(p1.X, p2.X), math.min(p1.Y, p2.Y))
 end
 
-local function arePositionsEqual(p3, p4) --[[ line: 48 ]]
+local function arePositionsEqual(p3, p4) --[[ line: 52 ]]
 	return math.abs(p3.X.Scale - p4.X.Scale) < 0.0001 and (math.abs(p3.X.Offset - p4.X.Offset) < 0.0001 and (math.abs(p3.Y.Scale - p4.Y.Scale) < 0.0001 and math.abs(p3.Y.Offset - p4.Y.Offset) < 0.0001))
 end
 
-return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
+return function(p5) --[[ line: 59 | named "TextOverlayDisplay" ]]
 	-- upvalues: reactModule (ref), useMemo (ref), getFitSizeModule (ref), getCropSizeModule (ref), getScaleModule (ref), getAbsoluteSize (ref), getVisibleBounds (ref), useCallback (ref), clampOverlayPositionModule (ref), dashModule (ref), arePositionsEqual (ref), textOverlayModule (ref), view (ref)
 	local var12 = reactModule.useRef(nil)
 	local var13 = reactModule.useRef(nil)
 	local var14 = reactModule.useRef(nil)
 	local var15, var16 = reactModule.useState(Vector2.new(0, 0))
 	local var17 = if p5.textOverlayEdits then p5.textOverlayEdits[1] else nil
-	local var18, var19 = useMemo(function() --[[ line: 63 ]]
+	local var18, var19 = useMemo(function() --[[ line: 67 ]]
 		-- upvalues: p5 (ref), getFitSizeModule (copy), getCropSizeModule (copy), getScaleModule (copy)
 		if not p5.itemResolution then
 			return UDim2.fromScale(1, 1), 1
@@ -46,15 +46,15 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 		end
 		return var27, var28
 	end, { p5.scaleType, p5.itemResolution, p5.itemSize })
-	local var20 = useMemo(function() --[[ line: 79 ]]
+	local var20 = useMemo(function() --[[ line: 83 ]]
 		-- upvalues: getAbsoluteSize (copy), var18 (ref), p5 (ref)
 		return getAbsoluteSize(var18, p5.itemSize)
 	end, { var18, p5.itemSize })
-	local var21, var22 = useMemo(function() --[[ line: 82 ]]
+	local var21, var22 = useMemo(function() --[[ line: 86 ]]
 		-- upvalues: getVisibleBounds (copy), var20 (ref), p5 (ref)
 		return getVisibleBounds(var20, p5.itemSize)
 	end, { var20, p5.itemSize })
-	local var23 = useCallback(function(p6) --[[ line: 87 ]]
+	local var23 = useCallback(function(p6) --[[ line: 91 ]]
 		-- upvalues: var17 (ref), p5 (ref), clampOverlayPositionModule (copy), var20 (ref), var15 (ref), var21 (ref), var22 (ref), dashModule (copy)
 		return if var17 then dashModule.joinDeep(var17, {
 			position = if p5.clampToBoundsEnabled == true then clampOverlayPositionModule(p6, var20, var15, var21, var22) else p6
@@ -62,7 +62,7 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 	end, {
 		var17, p5.clampToBoundsEnabled, var20, var15, var21, var22
 	})
-	local var24 = useCallback(function() --[[ line: 105 ]]
+	local var24 = useCallback(function() --[[ line: 109 ]]
 		-- upvalues: var14 (ref), p5 (ref), var23 (ref)
 		if not var14.current or not p5.onTextOverlayDragEnd then return end
 		local var29 = var23(var14.current.Position)
@@ -73,11 +73,11 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			return
 		end
 	end, { p5.onTextOverlayDragEnd, var23 })
-	local var25 = useCallback(function(p7) --[[ line: 118 ]]
+	local var25 = useCallback(function(p7) --[[ line: 122 ]]
 		-- upvalues: p5 (ref), var16 (ref)
 		if p5.clampToBoundsEnabled == true then
 			local absoluteSize = p7.AbsoluteSize
-			var16(function(p8) --[[ line: 124 ]]
+			var16(function(p8) --[[ line: 128 ]]
 				-- upvalues: absoluteSize (ref)
 				return if p8 == absoluteSize then p8 else absoluteSize
 			end)
@@ -85,7 +85,7 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			return
 		end
 	end, { p5.clampToBoundsEnabled })
-	reactModule.useEffect(function() --[[ line: 134 ]]
+	reactModule.useEffect(function() --[[ line: 138 ]]
 		-- upvalues: p5 (ref), var17 (ref), var20 (ref), var15 (ref), clampOverlayPositionModule (copy), var21 (ref), var22 (ref), arePositionsEqual (copy), dashModule (copy)
 		if p5.clampToBoundsEnabled ~= true or not p5.onTextOverlayDragEnd or (not var17 or var20.X <= 0) or (var20.Y <= 0 or var15.X <= 0 or var15.Y <= 0) then return end
 		local var30 = clampOverlayPositionModule(var17.position, var20, var15, var21, var22)
@@ -113,19 +113,25 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			ref = var13,
 			Size = UDim2.fromOffset(var22.X, var22.Y)
 		}) else nil,
-		TextOverlay = useCallback(function(p9) --[[ line: 176 ]]
-			-- upvalues: p5 (ref), reactModule (copy), textOverlayModule (copy), var19 (ref), var13 (ref), var12 (ref), var14 (ref), var25 (ref), var24 (ref)
+		TextOverlay = useCallback(function(p9) --[[ line: 180 ]]
+			-- upvalues: p5 (ref), var19 (ref), reactModule (copy), textOverlayModule (copy), var13 (ref), var12 (ref), var14 (ref), var25 (ref), var24 (ref)
 			if p9 then
 				local var31 = p5.clampToBoundsEnabled == true
+				local visualScale = p5.visualScale
 				
 				return reactModule.createElement(textOverlayModule, {
-					additionalScale = var19,
+					additionalScale = if visualScale == nil then var19 elseif typeof(visualScale) == "number" then var19 * visualScale else visualScale:map(function(p10) --[[ line: 193 ]]
+						-- upvalues: var19 (copy)
+						return var19 * p10
+					end),
 					boundingUI = if var31 then var13.current else var12.current,
 					containerRef = var14,
 					draggable = p5.draggable,
 					editable = p5.editable,
 					onActivated = p5.onTextOverlayActivated,
 					onAbsoluteSizeChanged = if var31 then var25 else nil,
+					onDragBegin = p5.onTextOverlayDragBegin,
+					onDragContinue = p5.onTextOverlayDragContinue,
 					onDragEnd = var24,
 					referenceUI = if var31 then var12.current else nil,
 					textOverlayEdit = p9
@@ -134,7 +140,8 @@ return function(p5) --[[ line: 55 | named "TextOverlayDisplay" ]]
 			return nil
 		end, {
 			p5.clampToBoundsEnabled, p5.draggable, p5.editable, p5.onTextOverlayActivated,
-			var19, var25, var24
+			p5.onTextOverlayDragBegin, p5.onTextOverlayDragContinue, p5.visualScale, var19,
+			var25, var24
 		})(var17)
 	}) else nil
 end

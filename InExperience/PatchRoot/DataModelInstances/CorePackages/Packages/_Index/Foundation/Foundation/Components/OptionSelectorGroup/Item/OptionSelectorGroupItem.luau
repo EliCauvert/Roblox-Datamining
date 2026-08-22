@@ -1,6 +1,7 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
 local parent = foundation.Parent
 local reactModule = require(parent.React)
+local icon = require(parent.BuilderIcons).Icon
 local useMotion = require(parent.Motion).useMotion
 local components = foundation.Components
 local iconModule = require(components.Icon)
@@ -26,22 +27,22 @@ local optionSelectorGroupSizeModule = require(foundation.Enums.OptionSelectorGro
 local orientationModule = require(foundation.Enums.Orientation)
 local useOptionSelectorGroupModule = require(script.Parent.Parent.useOptionSelectorGroup)
 
-local function _(p0, p1) --[[ line: 46 | named "getTransparency" ]]
-	return p1:map(function(p2) --[[ line: 50 ]]
+local function _(p0, p1) --[[ line: 49 | named "getTransparency" ]]
+	return p1:map(function(p2) --[[ line: 53 ]]
 		-- upvalues: p0 (ref)
 		return if p0 == nil then p2 else p0 + (1 - p0) * p2
 	end)
 end
 
-local function getTextStyle(p3, p4, p5) --[[ line: 58 ]]
+local function getTextStyle(p3, p4, p5) --[[ line: 61 ]]
 	-- upvalues: reactModule (ref)
-	return reactModule.joinBindings({ p3, p4 }):map(function(p6) --[[ line: 63 ]]
+	return reactModule.joinBindings({ p3, p4 }):map(function(p6) --[[ line: 66 ]]
 		-- upvalues: p5 (ref)
 		return { Color3 = p5, Transparency = p6[2] }
 	end)
 end
 
-local function renderIcon(p7) --[[ line: 72 ]]
+local function renderIcon(p7) --[[ line: 75 ]]
 	-- upvalues: flagsModule (ref), isBuilderOrMigratedIcon (ref), reactModule (ref), imageModule (ref), normalizeIconName (ref), iconModule (ref)
 	if not p7.icon then
 		return nil
@@ -51,7 +52,7 @@ local function renderIcon(p7) --[[ line: 72 ]]
 		return reactModule.createElement(imageModule, {
 			Image = p7.icon,
 			Size = UDim2.fromOffset(iconExtent, iconExtent),
-			imageStyle = p7.transparency:map(function(p8) --[[ line: 92 ]]
+			imageStyle = p7.transparency:map(function(p8) --[[ line: 95 ]]
 				-- upvalues: p7 (ref)
 				return { Color3 = p7.contentColor, Transparency = p8 }
 			end),
@@ -63,7 +64,7 @@ local function renderIcon(p7) --[[ line: 72 ]]
 	local t = {
 		name = var23.name,
 		size = p7.iconSize,
-		style = p7.transparency:map(function(p9) --[[ line: 109 ]]
+		style = p7.transparency:map(function(p9) --[[ line: 112 ]]
 			-- upvalues: p7 (ref)
 			return { Color3 = p7.contentColor, Transparency = p9 }
 		end),
@@ -83,8 +84,8 @@ local t = {
 	width = UDim.new(0, 0)
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162 | named "OptionSelectorGroupItem" ]]
-	-- upvalues: withDefaultsModule (ref), t (ref), useOptionSelectorGroupModule (ref), flagsModule (ref), inputSizeModule (ref), optionSelectorGroupSizeModule (ref), orientationModule (ref), fillBehaviorModule (ref), useTokensModule (ref), useOptionSelectorGroupItemVariantsModule (ref), useOptionSelectorGroupItemMotionStatesModule (ref), constantsModule (ref), useMotion (ref), reactModule (ref), renderIcon (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), getTextStyle (ref), withCommonPropsModule (ref), iconModule (ref)
+return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 165 | named "OptionSelectorGroupItem" ]]
+	-- upvalues: withDefaultsModule (ref), t (ref), useOptionSelectorGroupModule (ref), flagsModule (ref), inputSizeModule (ref), optionSelectorGroupSizeModule (ref), orientationModule (ref), fillBehaviorModule (ref), useTokensModule (ref), useOptionSelectorGroupItemVariantsModule (ref), useOptionSelectorGroupItemMotionStatesModule (ref), constantsModule (ref), useMotion (ref), reactModule (ref), renderIcon (ref), viewModule (ref), textModule (ref), escapeRichTextModule (ref), getTextStyle (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref)
 	local var25 = withDefaultsModule(p10, t)
 	local var26 = useOptionSelectorGroupModule()
 	local var27 = var26.value == var25.value
@@ -103,7 +104,7 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 	local var38 = useOptionSelectorGroupItemMotionStatesModule(0, constantsModule.DISABLED_TRANSPARENCY)
 	local var39, var40 = useMotion(var38.Default)
 	local var41, _ = useMotion(var38.Default)
-	reactModule.useEffect(function() --[[ line: 228 ]]
+	reactModule.useEffect(function() --[[ line: 231 ]]
 		-- upvalues: var25 (ref), var40 (ref), var38 (ref)
 		if var25.isDisabled then
 			var40(var38.Disabled)
@@ -112,7 +113,7 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 		end
 		var40(var38.Default)
 	end, { var25.isDisabled })
-	local var42 = reactModule.useCallback(function() --[[ line: 237 ]]
+	local var42 = reactModule.useCallback(function() --[[ line: 240 ]]
 		-- upvalues: var26 (ref), var25 (ref)
 		var26.onValueChanged(if var26.value == var25.value then nil else var25.value)
 	end, {
@@ -122,7 +123,7 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 		var26.value
 	})
 	var25.testId = `{var26.testId}--item-{var25.value}`
-	local var43 = reactModule.useMemo(function() --[[ line: 247 ]]
+	local var43 = reactModule.useMemo(function() --[[ line: 250 ]]
 		-- upvalues: var35 (ref), var34 (ref)
 		return {
 			radius = UDim.new(0, var35.container.radius),
@@ -185,7 +186,7 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 		local t_2 = {}
 		local t_3 = { Color = var37.Color3 }
 		local transparency = var37.Transparency
-		t_3.Transparency = var39.transparency:map(function(p12) --[[ line: 50 ]]
+		t_3.Transparency = var39.transparency:map(function(p12) --[[ line: 53 ]]
 			-- upvalues: transparency (ref)
 			return if transparency == nil then p12 else transparency + (1 - transparency) * p12
 		end)
@@ -223,7 +224,7 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 	local t_1 = {}
 	local t_2 = { Color = var37.Color3 }
 	local transparency = var37.Transparency
-	t_2.Transparency = var39.transparency:map(function(p13) --[[ line: 50 ]]
+	t_2.Transparency = var39.transparency:map(function(p13) --[[ line: 53 ]]
 		-- upvalues: transparency (ref)
 		return if transparency == nil then p13 else transparency + (1 - transparency) * p13
 	end)
@@ -252,7 +253,7 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 					LayoutOrder = 0,
 					name = var25.icon,
 					size = var35.icon.size,
-					style = var39.transparency:map(function(p14) --[[ line: 394 ]]
+					style = var39.transparency:map(function(p14) --[[ line: 397 ]]
 						-- upvalues: color3 (ref)
 						return { Color3 = color3, Transparency = p14 }
 					end),
@@ -261,10 +262,10 @@ return reactModule.memo(reactModule.forwardRef(function(p10, p11) --[[ line: 162
 				Label = if var29 == orientationModule.Horizontal then var48 elseif flagsModule.FoundationOptionSelectorGroupFixes and var32 then nil else reactModule.createElement(viewModule, { tag = "grow" }),
 				LeadingSpacer = if flagsModule.FoundationOptionSelectorGroupFixes and var32 and not var25.icon then reactModule.createElement(viewModule, { LayoutOrder = 0, Size = UDim2.fromOffset(0, 0) }) else nil,
 				Checkmark = reactModule.createElement(iconModule, {
-					name = "check-large",
 					LayoutOrder = 3,
+					name = icon.CheckLarge,
 					size = var35.icon.size,
-					style = var39.transparency:map(function(p15) --[[ line: 421 ]]
+					style = var39.transparency:map(function(p15) --[[ line: 424 ]]
 						-- upvalues: color3 (ref), var27 (ref)
 						return { Color3 = color3, Transparency = if var27 then p15 else 1 }
 					end),

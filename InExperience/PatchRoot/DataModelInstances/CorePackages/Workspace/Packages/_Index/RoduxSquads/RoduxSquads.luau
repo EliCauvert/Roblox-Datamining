@@ -10,24 +10,25 @@ local roduxModule = require(parent.Rodux)
 local cryoModule = require(parent.Cryo)
 local roduxNetworkingModule = require(parent.RoduxNetworking)
 local networkingSquadsModule = require(parent.NetworkingSquads)
+local fFlagUseSignalsForSquadExperienceInviteStatus = require(parent.SharedFlags).FFlagUseSignalsForSquadExperienceInviteStatus
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p0) --[[ line: 21 ]]
-		-- upvalues: cryoModule (ref), networkingSquadsModule (ref), roduxNetworkingModule (ref), reducersModule (ref), roduxModule (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
+	config = function(p0) --[[ line: 24 ]]
+		-- upvalues: cryoModule (ref), networkingSquadsModule (ref), roduxNetworkingModule (ref), reducersModule (ref), roduxModule (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
 		p0 = cryoModule.Dictionary.join(p0, {
 			NetworkingSquads = networkingSquadsModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
 		})
 		local var11, var12, var13 = reducersModule.currentSquad(p0)
 		
 		return {
-			installReducer = function() --[[ line: 30 ]]
-				-- upvalues: roduxModule (copy), var11 (ref), var12 (ref), reducersModule (copy), p0 (write)
+			installReducer = function() --[[ line: 33 ]]
+				-- upvalues: roduxModule (copy), var11 (ref), var12 (ref), reducersModule (copy), p0 (write), fFlagUseSignalsForSquadExperienceInviteStatus (copy)
 				return roduxModule.combineReducers({
 					currentSquad = var11,
 					currentSquadPersist = var12,
 					currentExperienceInvite = reducersModule.currentExperienceInvite(p0),
-					currentExperienceInviteStatus = reducersModule.currentExperienceInviteStatus()
+					currentExperienceInviteStatus = if fFlagUseSignalsForSquadExperienceInviteStatus then nil else reducersModule.currentExperienceInviteStatus()
 				})
 			end,
 			PersistManagers = { currentSquadPersistManager = var13 },

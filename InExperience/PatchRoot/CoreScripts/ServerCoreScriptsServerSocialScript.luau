@@ -145,15 +145,15 @@ local function getPlayerGroupDetails(p3) --[[ line: 194 ]]
 	
 	for i, v in pairs(t_1) do
 		if v.GroupRank == nil then
-			local ok, status = pcall(function() --[[ line: 208 ]]
+			local ok, status = pcall(function() --[[ line: 204 ]]
 				-- upvalues: p3 (ref), v (ref)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then p3:IsInGroupAsync(v.GroupId) else p3:IsInGroup(v.GroupId)
+				return p3:IsInGroupAsync(v.GroupId)
 			end)
 			t[i] = ok and status
 		else
 			local ok, status = pcall(function() --[[ line: 198 ]]
 				-- upvalues: p3 (ref), v (ref)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then v.GroupRank <= p3:GetRankInGroupAsync(v.GroupId) else v.GroupRank <= p3:GetRankInGroup(v.GroupId)
+				return v.GroupRank <= p3:GetRankInGroupAsync(v.GroupId)
 			end)
 			t[i] = ok and status
 		end
@@ -165,20 +165,20 @@ local function getPlayerGroupDetails(p3) --[[ line: 194 ]]
 	end
 end
 
-local function sendCanChatWith(p4) --[[ line: 229 ]]
+local function sendCanChatWith(p4) --[[ line: 221 ]]
 	-- upvalues: playersService (ref), useNewDirectChatAPI (ref), textChatService (ref), canChatWith (ref), chatService (ref)
 	local t = {}
 	
 	for i, v in ipairs(playersService:GetPlayers()) do
 		if useNewDirectChatAPI then
-			local ok, status = pcall(function() --[[ line: 234 ]]
+			local ok, status = pcall(function() --[[ line: 226 ]]
 				-- upvalues: textChatService (copy), p4 (ref), v (ref)
 				return textChatService:CanUsersDirectChatAsync(p4.UserId, { v.UserId })
 			end)
 			t[v.UserId] = ok and #status > 0
 			canChatWith:FireClient(v, { [p4.UserId] = ok and #status > 0 })
 		else
-			local ok, status = pcall(function() --[[ line: 243 ]]
+			local ok, status = pcall(function() --[[ line: 235 ]]
 				-- upvalues: chatService (copy), p4 (ref), v (ref)
 				return chatService:CanUsersChatAsync(p4.UserId, v.UserId)
 			end)
@@ -189,14 +189,14 @@ local function sendCanChatWith(p4) --[[ line: 229 ]]
 	canChatWith:FireClient(p4, t)
 end
 
-local function sendPlayerAllCanManage(p5) --[[ line: 257 ]]
+local function sendPlayerAllCanManage(p5) --[[ line: 249 ]]
 	-- upvalues: t_3 (ref), newPlayerCanManageDetails (ref)
 	for i, v in pairs(t_3) do
 		newPlayerCanManageDetails:FireClient(p5, i, v)
 	end
 end
 
-local function getPlayerCanManage(p6) --[[ line: 263 ]]
+local function getPlayerCanManage(p6) --[[ line: 255 ]]
 	-- upvalues: luaGetCanManageAsync (ref), t_3 (ref), newPlayerCanManageDetails (ref), url (ref), httpService (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (ref), httpRbxApiService (ref)
 	if luaGetCanManageAsync then
 		if p6.UserId <= 0 or not p6.Parent then return end
@@ -215,7 +215,7 @@ local function getPlayerCanManage(p6) --[[ line: 263 ]]
 		local var63 = false
 		
 		if p6.UserId > 0 then
-			local ok, status = pcall(function() --[[ line: 282 ]]
+			local ok, status = pcall(function() --[[ line: 274 ]]
 				-- upvalues: url (copy), httpService (copy), p6 (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy)
 				local formattedText = string.format(url.APIS_URL .. "asset-permissions-api/v1/rcc/assets/check-permissions")
 				local var66 = httpService:JSONEncode({
@@ -247,20 +247,20 @@ local function getPlayerCanManage(p6) --[[ line: 263 ]]
 	end
 end
 
-local _ = function(p7, p8) --[[ line: 323 ]]
+local _ = function(p7, p8) --[[ line: 315 ]]
 	-- upvalues: url (ref), httpService (ref), httpRbxApiService (ref)
-	return pcall(function() --[[ line: 324 ]]
+	return pcall(function() --[[ line: 316 ]]
 		-- upvalues: url (copy), httpService (copy), p8 (ref), p7 (ref), httpRbxApiService (copy)
 		return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), httpService:JSONEncode({ userIds = p8, requesterUserId = p7.UserId })))
 	end)
 end
 
-local function sendPlayerBlockList_1(p9) --[[ line: 338 | named "sendPlayerBlockList" ]]
+local function sendPlayerBlockList_1(p9) --[[ line: 330 | named "sendPlayerBlockList" ]]
 	-- upvalues: globalUserBlockingLuaReadsFromSCMCache (ref), playersService (ref), updateLocalPlayerBlockList (ref), sendPlayerBlockList (ref), url (ref), httpService (ref), httpRbxApiService (ref)
 	local t
 	if p9.UserId <= 0 then return end
 	if globalUserBlockingLuaReadsFromSCMCache then
-		local function scanAndSendBlockList(p10) --[[ line: 344 ]]
+		local function scanAndSendBlockList(p10) --[[ line: 336 ]]
 			-- upvalues: p9 (ref), playersService (copy), updateLocalPlayerBlockList (copy), sendPlayerBlockList (copy)
 			if not p9.Parent then return end
 			local t = {}
@@ -279,7 +279,7 @@ local function sendPlayerBlockList_1(p9) --[[ line: 338 | named "sendPlayerBlock
 		end
 		
 		t = false
-		p9.BlockListChanged:Connect(function() --[[ line: 369 ]]
+		p9.BlockListChanged:Connect(function() --[[ line: 361 ]]
 			-- upvalues: t (write), scanAndSendBlockList (ref)
 			if t then
 				scanAndSendBlockList(false)
@@ -303,7 +303,7 @@ local function sendPlayerBlockList_1(p9) --[[ line: 338 | named "sendPlayerBlock
 				table.insert(t, v.UserId)
 			end
 		end
-		local ok, status = pcall(function() --[[ line: 324 ]]
+		local ok, status = pcall(function() --[[ line: 316 ]]
 			-- upvalues: url (copy), httpService (copy), t (ref), p9 (ref), httpRbxApiService (copy)
 			return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "user-blocking-api/v1/users/rcc/batch-check-reciprocal-block"), httpService:JSONEncode({ userIds = t, requesterUserId = p9.UserId })))
 		end)
@@ -332,28 +332,28 @@ local function sendPlayerBlockList_1(p9) --[[ line: 338 | named "sendPlayerBlock
 	end
 end
 
-local function sendPlayerAllInExperienceNameEnabled(p11) --[[ line: 419 ]]
+local function sendPlayerAllInExperienceNameEnabled(p11) --[[ line: 411 ]]
 	-- upvalues: t_4 (ref), sendPlayerProfileSettings (ref)
 	for i, v in pairs(t_4) do
 		sendPlayerProfileSettings:FireClient(p11, i, { isInExperienceNameEnabled = v })
 	end
 end
 
-local _ = function(p12) --[[ line: 429 ]]
+local _ = function(p12) --[[ line: 421 ]]
 	-- upvalues: url (ref), httpRbxApiService (ref), httpService (ref)
-	return pcall(function() --[[ line: 430 ]]
+	return pcall(function() --[[ line: 422 ]]
 		-- upvalues: p12 (ref), url (copy), httpRbxApiService (copy), httpService (copy)
 		return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(url.APIS_URL .. `user-profile-api/v1/user/profiles/rcc/settings?userId={p12.UserId}`, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players))
 	end)
 end
 
-local var53 = function(p13) --[[ line: 440 ]]
+local var53 = function(p13) --[[ line: 432 ]]
 	-- upvalues: fStringRccInExperienceNameEnabledAllowListModule (ref), disableRCCAntiHarrasmentAllowList (ref), url (ref), httpRbxApiService (ref), httpService (ref), t_4 (ref), sendPlayerProfileSettings (ref)
 	if p13.UserId <= 0 then return end
 	local var73 = false
 	
 	if fStringRccInExperienceNameEnabledAllowListModule.isAllowListedUserId(p13.UserId) or disableRCCAntiHarrasmentAllowList then
-		local ok, status = pcall(function() --[[ line: 430 ]]
+		local ok, status = pcall(function() --[[ line: 422 ]]
 			-- upvalues: p13 (ref), url (copy), httpRbxApiService (copy), httpService (copy)
 			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(url.APIS_URL .. `user-profile-api/v1/user/profiles/rcc/settings?userId={p13.UserId}`, Enum.ThrottlingPriority.Default, Enum.HttpRequestType.Players))
 		end)
@@ -370,7 +370,7 @@ local var53 = function(p13) --[[ line: 440 ]]
 end
 
 if fFlagInExperienceRequestProfileSettingsModule then
-	requestPlayerProfileSettings.OnServerEvent:Connect(function(p14) --[[ line: 467 ]]
+	requestPlayerProfileSettings.OnServerEvent:Connect(function(p14) --[[ line: 459 ]]
 		-- upvalues: t_4 (ref), sendPlayerProfileSettings (ref), var53 (ref)
 		local var76 = tostring(p14.UserId)
 		local var77 = t_4[var76]
@@ -383,9 +383,9 @@ if fFlagInExperienceRequestProfileSettingsModule then
 		sendPlayerProfileSettings:FireClient(p14, var76, { isInExperienceNameEnabled = var77 })
 	end)
 end
-local _ = function(p15, p16, p17) --[[ line: 484 ]]
+local _ = function(p15, p16, p17) --[[ line: 476 ]]
 	-- upvalues: url (ref), httpService (ref), enableCreatePartyNudgeWithVersion (ref), gatePrivateServerNudge (ref), httpRbxApiService (ref)
-	return pcall(function() --[[ line: 485 ]]
+	return pcall(function() --[[ line: 477 ]]
 		-- upvalues: url (copy), httpService (copy), p15 (ref), p16 (ref), p17 (ref), enableCreatePartyNudgeWithVersion (copy), gatePrivateServerNudge (copy), httpRbxApiService (copy)
 		return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "group-up/v1/create-party-nudge"), httpService:JSONEncode({
 			inviterId = p15,
@@ -401,7 +401,7 @@ local _ = function(p15, p16, p17) --[[ line: 484 ]]
 	end)
 end
 
-local function canCreatePartyNudge(p18) --[[ line: 506 ]]
+local function canCreatePartyNudge(p18) --[[ line: 498 ]]
 	return if p18 then p18.PartyId == "" and (p18.VRDevice == "" and (typeof(p18.OsPlatform) == "string" and ({
 		Windows = true,
 		iOS = true,
@@ -412,7 +412,7 @@ local function canCreatePartyNudge(p18) --[[ line: 506 ]]
 	})[p18.OsPlatform])) else false
 end
 
-local var55 = function(p19) --[[ line: 528 ]]
+local var55 = function(p19) --[[ line: 520 ]]
 	-- upvalues: playersService (ref), enableCreatePartyNudge (ref), canCreatePartyNudge (ref), url (ref), httpService (ref), enableCreatePartyNudgeWithVersion (ref), gatePrivateServerNudge (ref), httpRbxApiService (ref), createOrJoinParty (ref), showFriendJoinedPlayerToast (write), showPlayerJoinedFriendsToast (write)
 	local v
 	local var78 = nil
@@ -431,7 +431,7 @@ local var55 = function(p19) --[[ line: 528 ]]
 		v = p19.UserId
 		local userId = var78.UserId
 		local var81 = "OneToOneNudgeInExperience"
-		local ok, status = pcall(function() --[[ line: 485 ]]
+		local ok, status = pcall(function() --[[ line: 477 ]]
 			-- upvalues: url (copy), httpService (copy), v (ref), userId (ref), var81 (ref), enableCreatePartyNudgeWithVersion (copy), gatePrivateServerNudge (copy), httpRbxApiService (copy)
 			return httpService:JSONDecode(httpRbxApiService:PostAsyncFullUrl(string.format(url.APIS_URL .. "group-up/v1/create-party-nudge"), httpService:JSONEncode({
 				inviterId = v,
@@ -460,7 +460,7 @@ local var55 = function(p19) --[[ line: 528 ]]
 	end
 end
 
-local function onPlayerAdded(p20) --[[ line: 558 ]]
+local function onPlayerAdded(p20) --[[ line: 550 ]]
 	-- upvalues: sendPlayerBlockList_1 (ref), newPlayerGroupDetails (ref), t_2 (ref), getPlayerGroupDetails (ref), fFlagInExperienceUserProfileSettingsEnabledModule (ref), sendPlayerAllInExperienceNameEnabled (ref), var53 (ref), sendPlayerAllCanManage (ref), getPlayerCanManage (ref), sendCanChatWith (ref), fFlagEnablePartyNudgeAfterJoin (ref), var55 (ref)
 	coroutine.wrap(sendPlayerBlockList_1)(p20)
 	newPlayerGroupDetails:FireClient(p20, t_2)
@@ -481,7 +481,7 @@ local function onPlayerAdded(p20) --[[ line: 558 ]]
 	end
 end
 
-setPlayerBlockList.OnServerEvent:Connect(function(p21, p22) --[[ line: 579 ]]
+setPlayerBlockList.OnServerEvent:Connect(function(p21, p22) --[[ line: 571 ]]
 	-- upvalues: verifyBlockList (ref)
 	if game:GetFastFlag("EnableSetUserBlocklistInitialized") then
 		p21:SetBlockListInitialized()
@@ -490,14 +490,14 @@ setPlayerBlockList.OnServerEvent:Connect(function(p21, p22) --[[ line: 579 ]]
 		p21:AddToBlockList(p22)
 	end
 end)
-updatePlayerBlockList.OnServerEvent:Connect(function(p23, p24, p25) --[[ line: 590 ]]
+updatePlayerBlockList.OnServerEvent:Connect(function(p23, p24, p25) --[[ line: 582 ]]
 	if type(p25) == "boolean" and type(p24) == "number" then
 		p23:UpdatePlayerBlocked(p24, p25)
 	end
 end)
 
 if fFlagBadgeVisibilitySettingEnabled then
-	updatePlayerProfileSettings.OnServerEvent:Connect(function(p26, p27) --[[ line: 599 ]]
+	updatePlayerProfileSettings.OnServerEvent:Connect(function(p26, p27) --[[ line: 591 ]]
 		-- upvalues: profileSettingsSlidingWindowRateLimit (ref), t_6 (ref), profileSettingsRateLimitWindowSeconds (ref), profileSettingsMaxRequestsPerWindow (ref), t_5 (ref), profileSettingsRateLimitSeconds (ref), t_4 (ref), sendPlayerProfileSettings (ref)
 		if type(p27) ~= "table" then return end
 		local t = {}
@@ -535,7 +535,7 @@ if fFlagBadgeVisibilitySettingEnabled then
 	end)
 end
 if fFlagEnableModerateChatRemoteEvent then
-	moderateChatSettingUpdated.OnServerEvent:Connect(function(p28, p29) --[[ line: 647 ]]
+	moderateChatSettingUpdated.OnServerEvent:Connect(function(p28, p29) --[[ line: 639 ]]
 		-- upvalues: textChatService (ref), moderateChatSettingUpdated (write)
 		if typeof(p29) == "boolean" and textChatService:setModerationModeEnabled(p28.UserId, p29) then
 			moderateChatSettingUpdated:FireClient(p28, p29)
@@ -543,7 +543,7 @@ if fFlagEnableModerateChatRemoteEvent then
 	end)
 end
 if fFlagEnableSummarySystemMessageOnLua or fFlagAIRephraseSettingEnabled or fFlagChatSummariesSettingEnabled then
-	textChatService.ExpChatFeatureValueChanged:Connect(function(p30, p31, p32) --[[ line: 657 ]]
+	textChatService.ExpChatFeatureValueChanged:Connect(function(p30, p31, p32) --[[ line: 649 ]]
 		-- upvalues: playersService (ref), expChatFeatureValueChanged (write)
 		local var89 = playersService:GetPlayerByUserId(p30)
 		
@@ -557,7 +557,7 @@ playersService.PlayerAdded:connect(onPlayerAdded)
 for i, v in pairs(playersService:GetPlayers()) do
 	onPlayerAdded(v)
 end
-playersService.PlayerRemoving:connect(function(p33) --[[ line: 671 ]]
+playersService.PlayerRemoving:connect(function(p33) --[[ line: 663 ]]
 	-- upvalues: t (ref), t_7 (ref), t_2 (ref), t_3 (ref), t_4 (ref), fFlagBadgeVisibilitySettingEnabled (ref), profileSettingsSlidingWindowRateLimit (ref), t_6 (ref), t_5 (ref)
 	local var90 = tostring(p33.UserId)
 	
@@ -589,7 +589,7 @@ playersService.PlayerRemoving:connect(function(p33) --[[ line: 671 ]]
 	end
 end)
 
-local var57 = function() --[[ line: 699 ]] end
+local var57 = function() --[[ line: 691 ]] end
 
 for i_1, v_1 in ipairs(robloxReplicatedStorageService:GetChildren()) do
 	if v_1:IsA("RemoteEvent") then

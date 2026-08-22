@@ -42,9 +42,10 @@ local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSuppor
 local fFlagLuaAppSduiPageEntryScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiPageEntryScrollAway
 local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
 local fFlagSduiSrpScrollAway = require(parent.SharedFlags).FFlagSduiSrpScrollAway
+local fFlagLuaAppSduiVideoThumbnail = require(parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 
-local function SduiPageEntryPoint(p0, p1) --[[ line: 150 ]]
-	-- upvalues: useTokens (ref), useDispatch (ref), fFlagSduiPageEntryUseSharedHooks (ref), useComponentConfigModule (ref), reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), uiStatus (ref), dataHydrationTypes (ref), fFlagSduiPageEntryPointResolvedSlot (ref), useComponentLifecycleTimingModule (ref), useLocalAnalyticsDataModule (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var7 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagLuaAppSduiPageEntryPointSnackbar (ref), usePageEntrySnackbarModule (ref), fFlagSduiChartsSupport (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), getSduiComponentWrapper (ref), fFlagSduiSrpScrollAway (ref), sduiPageNavigationHeaderModule (ref), compositionTags (ref), navButtonType (ref), fFlagLuaAppSduiPageEntryScrollAway (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
+local function SduiPageEntryPoint(p0, p1) --[[ line: 154 ]]
+	-- upvalues: useTokens (ref), useDispatch (ref), fFlagSduiPageEntryUseSharedHooks (ref), useComponentConfigModule (ref), reactModule (ref), getSduiApiStoreModule (ref), signalsReactModule (ref), fFlagSduiUseSharedUiStatusHook (ref), useUiStatusModule (ref), uiStatus (ref), dataHydrationTypes (ref), fFlagSduiPageEntryPointResolvedSlot (ref), useComponentLifecycleTimingModule (ref), useLocalAnalyticsDataModule (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var7 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagLuaAppSduiPageEntryPointSnackbar (ref), usePageEntrySnackbarModule (ref), fFlagSduiChartsSupport (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref), getSduiComponentWrapper (ref), fFlagSduiSrpScrollAway (ref), sduiPageNavigationHeaderModule (ref), compositionTags (ref), navButtonType (ref), fFlagLuaAppSduiPageEntryScrollAway (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
 	local var28, var29
 	local appPage = p0.appPage
 	local configKey = p0.configKey or appPage
@@ -52,11 +53,11 @@ local function SduiPageEntryPoint(p0, p1) --[[ line: 150 ]]
 	local pageTimer = p0.pageTimer
 	local var23 = useTokens()
 	local var24 = useDispatch()
-	local var25 = if fFlagSduiPageEntryUseSharedHooks then useComponentConfigModule(configKey, p0.identifier) else signalsReactModule.useSignalState(reactModule.useCallback(function(p2) --[[ line: 164 ]]
+	local var25 = if fFlagSduiPageEntryUseSharedHooks then useComponentConfigModule(configKey, p0.identifier) else signalsReactModule.useSignalState(reactModule.useCallback(function(p2) --[[ line: 168 ]]
 		-- upvalues: getSduiApiStoreModule (copy), configKey (ref), p0 (ref)
 		return getSduiApiStoreModule().getRootConfig(configKey, p2, p0.identifier)
 	end, { configKey, p0.identifier }))
-	local var26 = signalsReactModule.useSignalState(reactModule.useCallback(function(p3) --[[ line: 171 ]]
+	local var26 = signalsReactModule.useSignalState(reactModule.useCallback(function(p3) --[[ line: 175 ]]
 		-- upvalues: getSduiApiStoreModule (copy), configKey (ref)
 		return getSduiApiStoreModule().getTitle(configKey, p3)
 	end, { configKey })) or p0.pageTitle
@@ -80,15 +81,15 @@ local function SduiPageEntryPoint(p0, p1) --[[ line: 150 ]]
 		local _ = true
 		local var34 = typeof(var25)
 		local _ = var34 == "table" and ((if var34 == "table" then fFlagSduiPageEntryPointResolvedSlot else nil) and var31)
-		var32(var33, u375)
+		var32(var33, u381)
 	else
-		reactModule.useEffect(function() --[[ line: 198 ]]
+		reactModule.useEffect(function() --[[ line: 202 ]]
 			-- upvalues: pageTimer (ref)
 			if pageTimer then
 				pageTimer.logComponentMounted()
 			end
 		end, { pageTimer })
-		reactModule.useEffect(function() --[[ line: 205 ]]
+		reactModule.useEffect(function() --[[ line: 209 ]]
 			-- upvalues: pageTimer (ref), var25 (write), fFlagSduiPageEntryPointResolvedSlot (copy), var31 (ref)
 			if pageTimer and (var25 or fFlagSduiPageEntryPointResolvedSlot and var31) then
 				pageTimer.logComponentReady()
@@ -100,7 +101,7 @@ local function SduiPageEntryPoint(p0, p1) --[[ line: 150 ]]
 		})
 	end
 	local var38, var39
-	local var35 = if fFlagSduiPageEntryUseSharedHooks then useLocalAnalyticsDataModule(configKey, appPage, p0.additionalAnalyticsData) else reactModule.useMemo(function() --[[ line: 220 ]]
+	local var35 = if fFlagSduiPageEntryUseSharedHooks then useLocalAnalyticsDataModule(configKey, appPage, p0.additionalAnalyticsData) else reactModule.useMemo(function() --[[ line: 224 ]]
 		-- upvalues: configKey (ref), appPage (ref)
 		return { configKey = configKey, appPage = appPage }
 	end, { configKey, appPage })
@@ -118,7 +119,7 @@ local function SduiPageEntryPoint(p0, p1) --[[ line: 150 ]]
 		reactModule.useRef(var38).current = var38
 	end
 	local createElement_1
-	local var42 = reactModule.useCallback(function() --[[ line: 237 ]]
+	local var42 = reactModule.useCallback(function() --[[ line: 241 ]]
 		-- upvalues: p0 (ref), fFlagSignalsNavP3Dispatch (copy), var7 (copy), var24 (ref), navigateBack (copy)
 		if p0.onCloseActivated then
 			p0.onCloseActivated()
@@ -136,9 +137,9 @@ local function SduiPageEntryPoint(p0, p1) --[[ line: 150 ]]
 	local var45 = if fFlagLuaAppSduiPageEntryPointSnackbar then usePageEntrySnackbarModule(configKey) else nil
 	local var46 = if fFlagSduiChartsSupport then useDataUpdatedTimestampModule(configKey, p0.identifier) else nil
 	local var47, var48 = reactModule.useState(nil)
-	local var49 = useCreateClientBindingSduiContextModule(appPage, var47, nil, if fFlagSduiChartsSupport then var46 else nil, if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then configKey else nil, nil, p0.routeName, if fFlagLuaAppSduiStickyHeaderScrollAway then p0.scrollAway else nil)
+	local var49 = useCreateClientBindingSduiContextModule(appPage, var47, nil, if fFlagSduiChartsSupport then var46 else nil, if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport then configKey else nil, nil, p0.routeName, if fFlagLuaAppSduiStickyHeaderScrollAway then p0.scrollAway else nil, if fFlagLuaAppSduiVideoThumbnail then p0.videoPlaybackContext else nil)
 	local var50 = var38 == nil
-	local var51 = reactModule.useMemo(function() --[[ line: 275 ]]
+	local var51 = reactModule.useMemo(function() --[[ line: 280 ]]
 		-- upvalues: var25 (write), getSduiComponentWrapper (copy), reactModule (copy), var22 (ref), var49 (ref), var35 (ref), p0 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagSduiSrpScrollAway (copy), fFlagSduiChartsSupport (copy)
 		return if var25 == nil then nil else reactModule.createElement(getSduiComponentWrapper(var25), {
 			debugName = var22,

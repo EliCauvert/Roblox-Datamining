@@ -175,7 +175,7 @@ function t:update(p11) --[[ line: 202 ]]
 			
 			for i_1, v in pairs(playersService:GetPlayers()) do
 				if v.Character and v ~= playersService.LocalPlayer then
-					if self.mode == Enum.VRSafetyBubbleMode.OnlyFriends and (if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService.LocalPlayer:IsFriendsWithAsync(v.UserId) else playersService.LocalPlayer:IsFriendsWith(v.UserId)) then
+					if self.mode == Enum.VRSafetyBubbleMode.OnlyFriends and playersService.LocalPlayer:IsFriendsWithAsync(v.UserId) then
 						local characterSubjectIndex = self:GetSubjectIndex(v.Character)
 						
 						if characterSubjectIndex > 0 then

@@ -233,7 +233,7 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 				return var22
 			end
 		end,
-		updateVoteItem = if fFlagLuaAppDataHydrationUpdateItem then function(p10, p11, p12) --[[ line: 330 ]]
+		updateVoteItem = if fFlagLuaAppDataHydrationUpdateItem then function(p10, p11, p12) --[[ line: 343 ]]
 			-- upvalues: var16 (ref), votesUtilsModule (copy)
 			var16.updateItem(p10, {
 				downVotes = p11,
@@ -241,16 +241,29 @@ return function() --[[ line: 42 | named "createVotesStore" ]]
 				rating = votesUtilsModule.calculateRating(p12, p11)
 			})
 		end else nil,
+		updateVoteItems = function(p13) --[[ line: 292 ]]
+			-- upvalues: votesUtilsModule (copy), var16 (ref)
+			local t = {}
+			
+			for i, v in p13 do
+				t[i] = {
+					upVotes = v.upVotes,
+					downVotes = v.downVotes,
+					rating = votesUtilsModule.calculateRating(v.upVotes, v.downVotes)
+				}
+			end
+			var16.updateItems(t)
+		end,
 		updateUserVoteItem = if fFlagLuaAppDataHydrationUpdateItem then var18.updateItem else nil,
 		updateUserVoteItems = var18.updateItems,
-		clear = function() --[[ line: 292 ]]
+		clear = function() --[[ line: 305 ]]
 			-- upvalues: var16 (ref), var17 (ref), var18 (ref), var19 (ref)
 			var16.clear()
 			var17.clear()
 			var18.clear()
 			var19.clear()
 		end,
-		dispose = function() --[[ line: 299 ]]
+		dispose = function() --[[ line: 312 ]]
 			-- upvalues: var16 (ref), var17 (ref), var19 (ref)
 			var16.dispose()
 			var17.dispose()

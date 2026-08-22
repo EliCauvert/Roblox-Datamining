@@ -65,7 +65,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionSubEmphasisForegroundColor3",
-				value = Color3.new(0.0980392, 0.101961, 0.121569)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = {
 				name = "ColorActionSubEmphasisForegroundTransparency",
@@ -177,7 +177,7 @@
 		attributes = {
 			[1] = {
 				name = "ColorActionOverMediaForegroundColor3",
-				value = Color3.new(0.0980392, 0.101961, 0.121569)
+				value = Color3.new(0.12549, 0.133333, 0.152941)
 			},
 			[2] = {
 				name = "ColorActionOverMediaForegroundTransparency",

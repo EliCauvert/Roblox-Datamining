@@ -6,38 +6,39 @@ local _ = require(script.Parent.types)
 return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 	-- upvalues: createSignal (ref), turnStateModule (ref), acpProtocolModule (ref)
 	local var2, var3 = createSignal(p3 or turnStateModule.createEmptyTurnState(p0, p1))
+	local var4 = nil
 	local t = {}
-	local var5 = 1
+	local var6 = 1
 	local t_1 = {}
-	local var7 = nil
 	local var8 = nil
-	local var9 = 0
+	local var9 = nil
+	local var10 = 0
 	
-	local function noteProcessedSequenceNumber(p5) --[[ line: 49 ]]
-		-- upvalues: t_1 (ref), var7 (write), var8 (write), var9 (write)
+	local function noteProcessedSequenceNumber(p5) --[[ line: 50 ]]
+		-- upvalues: t_1 (ref), var8 (write), var9 (write), var10 (write)
 		if t_1[p5] == true then
 			return false
 		end
 		t_1[p5] = true
 		
-		if var7 == nil then
-			var7 = p5
+		if var8 == nil then
 			var8 = p5
-		elseif var7 < p5 then
-			var9 += p5 - var7 - 1
-			var7 = p5
-		elseif p5 < var8 then
-			var9 += var8 - p5 - 1
+			var9 = p5
+		elseif var8 < p5 then
+			var10 += p5 - var8 - 1
 			var8 = p5
+		elseif p5 < var9 then
+			var10 += var9 - p5 - 1
+			var9 = p5
 		else
-			var9 -= 1
+			var10 -= 1
 		end
 		return true
 	end
 	
-	local function hasSequenceGap() --[[ line: 70 ]]
-		-- upvalues: var9 (write)
-		return var9 > 0
+	local function hasSequenceGap() --[[ line: 71 ]]
+		-- upvalues: var10 (write)
+		return var10 > 0
 	end
 	
 	if p4 ~= nil then
@@ -45,35 +46,35 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 			if typeof(v) == "number" and t_1[v] ~= true then
 				t_1[v] = true
 				
-				if var7 == nil then
-					var7 = v
+				if var8 == nil then
 					var8 = v
-				elseif var7 < v then
-					var9 += v - var7 - 1
-					var7 = v
-				elseif v < var8 then
-					var9 += var8 - v - 1
+					var9 = v
+				elseif var8 < v then
+					var10 += v - var8 - 1
 					var8 = v
+				elseif v < var9 then
+					var10 += var9 - v - 1
+					var9 = v
 				else
-					var9 -= 1
+					var10 -= 1
 				end
 			end
 		end
 	end
-	local function onNotification(p6) --[[ line: 83 ]]
-		-- upvalues: var5 (write), t (ref)
-		var5 += 1
-		t[var5] = p6
+	local function onNotification(p6) --[[ line: 84 ]]
+		-- upvalues: var6 (write), t (ref)
+		var6 += 1
+		t[var6] = p6
 		
-		return function() --[[ line: 87 ]]
-			-- upvalues: t (copy), var5 (ref)
-			t[var5] = nil
+		return function() --[[ line: 88 ]]
+			-- upvalues: t (copy), var6 (ref)
+			t[var6] = nil
 		end
 	end
 	
-	local function _(p7) --[[ line: 93 | named "mutate" ]]
+	local function _(p7) --[[ line: 94 | named "mutate" ]]
 		-- upvalues: var3 (ref)
-		var3(function(p8) --[[ line: 94 ]]
+		var3(function(p8) --[[ line: 95 ]]
 			-- upvalues: p7 (ref)
 			if p8.isDone then
 				return p8
@@ -85,10 +86,10 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		end)
 	end
 	
-	local function fireHandlers(p9) --[[ line: 104 ]]
+	local function fireHandlers(p9) --[[ line: 105 ]]
 		-- upvalues: t (ref)
 		for i, v in t do
-			local ok, status = pcall(function() --[[ line: 107 ]]
+			local ok, status = pcall(function() --[[ line: 108 ]]
 				-- upvalues: v (ref), p9 (ref)
 				v(p9)
 			end)
@@ -99,12 +100,12 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 		end
 	end
 	
-	local function i(p10) --[[ line: 116 | named "completeFromResponse" ]]
+	local function i(p10) --[[ line: 117 | named "completeFromResponse" ]]
 		-- upvalues: var3 (ref)
 		if p10.error then
 			local error = p10.error
 			
-			local var15 = function(p11) --[[ line: 119 ]]
+			local var16 = function(p11) --[[ line: 120 ]]
 				-- upvalues: error (ref)
 				p11.error = tostring(error.message or "JSON-RPC error")
 				p11.errorCode = tonumber(error.code)
@@ -112,55 +113,55 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				p11.isDone = true
 			end
 			
-			var3(function(p12) --[[ line: 94 ]]
-				-- upvalues: var15 (ref)
+			var3(function(p12) --[[ line: 95 ]]
+				-- upvalues: var16 (ref)
 				if p12.isDone then
 					return p12
 				end
 				local cloned = table.clone(p12)
-				var15(cloned)
+				var16(cloned)
 				
 				return cloned
 			end)
 		end
 	end
 	
-	local _ = function(p13, p14) --[[ line: 128 | named "getEventSequenceId" ]]
+	local _ = function(p13, p14) --[[ line: 129 | named "getEventSequenceId" ]]
 		local sequenceId = p13.sequenceId
 		
 		if typeof(sequenceId) == "number" then
 			return sequenceId
 		end
-		local var16 = if p14 ~= nil then nil else p14.sequenceNumber
+		local var17 = if p14 ~= nil then nil else p14.sequenceNumber
 		
-		return if typeof(var16) == "number" then var16 else nil
+		return if typeof(var17) == "number" then var17 else nil
 	end
 	
-	local _ = function(a) --[[ line: 142 | named "applyTerminalUpdate" ]]
+	local _ = function(a) --[[ line: 143 | named "applyTerminalUpdate" ]]
 		-- upvalues: var2 (ref), var3 (ref)
-		local var17 = a.sessionUpdate == "state_change" and a.state == "idle"
+		local var18 = a.sessionUpdate == "state_change" and a.state == "idle"
 		
-		if var17 or var2(false).status == "queued" then
-			local var18 = function(p15) --[[ line: 147 ]]
-				-- upvalues: var17 (ref), a (ref)
+		if var18 or var2(false).status == "queued" then
+			local var19 = function(p15) --[[ line: 148 ]]
+				-- upvalues: var18 (ref), a (ref)
 				if p15.status == "queued" then
 					p15.status = "streaming"
 				end
-				if var17 then
-					local var19 = if typeof(a.stop_reason) == "string" then a.stop_reason else "end_turn"
-					p15.stopReason = var19
-					p15.status = if var19 == "cancelled" then "cancelled" else "succeeded"
+				if var18 then
+					local var20 = if typeof(a.stop_reason) == "string" then a.stop_reason else "end_turn"
+					p15.stopReason = var20
+					p15.status = if var20 == "cancelled" then "cancelled" else "succeeded"
 					p15.isDone = true
 				end
 			end
 			
-			var3(function(p16) --[[ line: 94 ]]
-				-- upvalues: var18 (ref)
+			var3(function(p16) --[[ line: 95 ]]
+				-- upvalues: var19 (ref)
 				if p16.isDone then
 					return p16
 				end
 				local cloned = table.clone(p16)
-				var18(cloned)
+				var19(cloned)
 				
 				return cloned
 			end)
@@ -171,117 +172,124 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 	
 	return {
 		state = var2,
+		getTurnId = function() --[[ line: 216 ]]
+			-- upvalues: var4 (write)
+			return var4
+		end,
 		onNotification = onNotification,
-		getLatestProcessedSequenceNumber = function() --[[ line: 213 ]]
-			-- upvalues: var7 (write)
-			return var7
+		getLatestProcessedSequenceNumber = function() --[[ line: 220 ]]
+			-- upvalues: var8 (write)
+			return var8
 		end,
 		hasSequenceGap = hasSequenceGap,
-		noteProcessedSequenceNumber = function(p17) --[[ line: 217 ]]
-			-- upvalues: t_1 (ref), var7 (write), var8 (write), var9 (write)
+		noteProcessedSequenceNumber = function(p17) --[[ line: 224 ]]
+			-- upvalues: t_1 (ref), var8 (write), var9 (write), var10 (write)
 			if t_1[p17] == true then return end
 			t_1[p17] = true
 			
-			if var7 == nil then
-				var7 = p17
+			if var8 == nil then
+				var8 = p17
+				var9 = p17
+				
+				return
+			elseif var8 < p17 then
+				var10 += p17 - var8 - 1
 				var8 = p17
 				
 				return
-			elseif var7 < p17 then
-				var9 += p17 - var7 - 1
-				var7 = p17
-				
-				return
-			elseif p17 < var8 then
-				var9 += var8 - p17 - 1
-				var8 = p17
+			elseif p17 < var9 then
+				var10 += var9 - p17 - 1
+				var9 = p17
 				
 				return
 			end
-			var9 -= 1
+			var10 -= 1
 		end,
 		cancel = p2
 	}, {
-		dispatchFrame = function(p18, p19, p20) --[[ line: 160 ]]
-			-- upvalues: var2 (ref), acpProtocolModule (copy), t_1 (ref), var7 (write), var8 (write), var9 (write), var3 (ref), fireHandlers (ref)
+		dispatchFrame = function(p18, p19, p20) --[[ line: 161 ]]
+			-- upvalues: var2 (ref), acpProtocolModule (copy), t_1 (ref), var8 (write), var9 (write), var10 (write), var4 (write), turnStateModule (copy), var3 (ref), fireHandlers (ref)
 			if var2(false).isDone then
 				return false
 			end
-			local var20 = false
+			local var21 = false
 			
 			if p18.kind == "notification" then
 				if p18.notification.method == acpProtocolModule.Notifications.SessionUpdate then
 					local update = p18.notification.params and p18.notification.params.update
 					
 					if update ~= nil then
-						local var22
+						local var23
 						local sequenceId = update.sequenceId
 						
 						if typeof(sequenceId) == "number" then
-							var22 = sequenceId
+							var23 = sequenceId
 						else
-							local var23 = if p19 ~= nil then nil else p19.sequenceNumber
-							var22 = if typeof(var23) == "number" then var23 else nil
+							local var24 = if p19 ~= nil then nil else p19.sequenceNumber
+							var23 = if typeof(var24) == "number" then var24 else nil
 						end
-						local var24 = true
+						local var25 = true
 						
-						if var22 ~= nil then
-							if t_1[var22] == true then
-								var24 = false
+						if var23 ~= nil then
+							if t_1[var23] == true then
+								var25 = false
 							else
-								t_1[var22] = true
+								t_1[var23] = true
 								
-								if var7 == nil then
-									var7 = var22
-									var8 = var22
-								elseif var7 < var22 then
-									var9 += var22 - var7 - 1
-									var7 = var22
-								elseif var22 < var8 then
-									var9 += var8 - var22 - 1
-									var8 = var22
+								if var8 == nil then
+									var8 = var23
+									var9 = var23
+								elseif var8 < var23 then
+									var10 += var23 - var8 - 1
+									var8 = var23
+								elseif var23 < var9 then
+									var10 += var9 - var23 - 1
+									var9 = var23
 								else
-									var9 -= 1
+									var10 -= 1
 								end
-								var24 = true
+								var25 = true
 							end
 						end
-						local var25 = update.sessionUpdate == "state_change" and update.state == "idle"
+						if var4 == nil then
+							var4 = turnStateModule.extractTurnId(update)
+						end
+						local var26 = update.sessionUpdate == "state_change" and update.state == "idle"
 						
-						if var25 or var2(false).status == "queued" then
-							local var26 = function(p21) --[[ line: 147 ]]
-								-- upvalues: var25 (ref), update (ref)
+						if var26 or var2(false).status == "queued" then
+							local var27 = function(p21) --[[ line: 148 ]]
+								-- upvalues: var26 (ref), update (ref)
 								if p21.status == "queued" then
 									p21.status = "streaming"
 								end
-								if var25 then
-									local var19 = if typeof(update.stop_reason) == "string" then update.stop_reason else "end_turn"
-									p21.stopReason = var19
-									p21.status = if var19 == "cancelled" then "cancelled" else "succeeded"
+								if var26 then
+									local var20 = if typeof(update.stop_reason) == "string" then update.stop_reason else "end_turn"
+									p21.stopReason = var20
+									p21.status = if var20 == "cancelled" then "cancelled" else "succeeded"
 									p21.isDone = true
 								end
 							end
 							
-							var3(function(p22) --[[ line: 94 ]]
-								-- upvalues: var26 (ref)
+							var3(function(p22) --[[ line: 95 ]]
+								-- upvalues: var27 (ref)
 								if p22.isDone then
 									return p22
 								end
 								local cloned = table.clone(p22)
-								var26(cloned)
+								var27(cloned)
 								
 								return cloned
 							end)
 						end
-						var20 = var24
+						var21 = var25
 					end
 				end
 				if p20 == false then
-					return var20
+					return var21
 				else
 					fireHandlers(p18.notification)
 					
-					return var20
+					return var21
 				end
 			elseif p18.kind == "response" then
 				local response = p18.response
@@ -289,7 +297,7 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				if response.error then
 					local error = response.error
 					
-					local var27 = function(p23) --[[ line: 119 ]]
+					local var28 = function(p23) --[[ line: 120 ]]
 						-- upvalues: error (ref)
 						p23.error = tostring(error.message or "JSON-RPC error")
 						p23.errorCode = tonumber(error.code)
@@ -297,24 +305,24 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 						p23.isDone = true
 					end
 					
-					var3(function(p24) --[[ line: 94 ]]
-						-- upvalues: var27 (ref)
+					var3(function(p24) --[[ line: 95 ]]
+						-- upvalues: var28 (ref)
 						if p24.isDone then
 							return p24
 						end
 						local cloned = table.clone(p24)
-						var27(cloned)
+						var28(cloned)
 						
 						return cloned
 					end)
 				end
-				var20 = p18.response.error ~= nil
+				var21 = p18.response.error ~= nil
 			end
 		end,
 		noteProcessedSequenceNumber = noteProcessedSequenceNumber,
-		fail = function(p25, p26) --[[ line: 193 ]]
+		fail = function(p25, p26) --[[ line: 197 ]]
 			-- upvalues: var3 (ref)
-			local var28 = function(p27) --[[ line: 194 ]]
+			local var29 = function(p27) --[[ line: 198 ]]
 				-- upvalues: p25 (ref), p26 (ref)
 				p27.error = p25
 				p27.errorCode = p26
@@ -322,37 +330,37 @@ return function(p0, p1, p2, p3, p4) --[[ line: 33 | named "createTurnHandle" ]]
 				p27.isDone = true
 			end
 			
-			var3(function(p28) --[[ line: 94 ]]
-				-- upvalues: var28 (ref)
+			var3(function(p28) --[[ line: 95 ]]
+				-- upvalues: var29 (ref)
 				if p28.isDone then
 					return p28
 				end
 				local cloned = table.clone(p28)
-				var28(cloned)
-				
-				return cloned
-			end)
-		end,
-		markCancelled = function() --[[ line: 202 ]]
-			-- upvalues: var3 (ref)
-			local var29 = function(p29) --[[ line: 203 ]]
-				p29.status = "cancelled"
-				p29.stopReason = "cancelled"
-				p29.isDone = true
-			end
-			
-			var3(function(p30) --[[ line: 94 ]]
-				-- upvalues: var29 (ref)
-				if p30.isDone then
-					return p30
-				end
-				local cloned = table.clone(p30)
 				var29(cloned)
 				
 				return cloned
 			end)
 		end,
-		isDone = function() --[[ line: 228 ]]
+		markCancelled = function() --[[ line: 206 ]]
+			-- upvalues: var3 (ref)
+			local var30 = function(p29) --[[ line: 207 ]]
+				p29.status = "cancelled"
+				p29.stopReason = "cancelled"
+				p29.isDone = true
+			end
+			
+			var3(function(p30) --[[ line: 95 ]]
+				-- upvalues: var30 (ref)
+				if p30.isDone then
+					return p30
+				end
+				local cloned = table.clone(p30)
+				var30(cloned)
+				
+				return cloned
+			end)
+		end,
+		isDone = function() --[[ line: 235 ]]
 			-- upvalues: var2 (ref)
 			return var2(false).isDone
 		end,

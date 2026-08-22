@@ -65,7 +65,11 @@ function t.fromContentList(p1, p2, p3, p4) --[[ line: 59 ]]
 						
 						return
 					elseif fFlagLuaAppEnableHomepageOneByTwoTile and p6.contentType == omniRecommendationsContentType.AdLink then
-						if p6.universeId ~= nil then
+						if not p6.clickoutUrl or p6.clickoutUrl == "" then
+							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkMissingClickoutUrl", "AdLink entry dropped: missing clickoutUrl")
+							
+							return
+						elseif p6.universeId ~= nil then
 							discoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkUnexpectedUniverseId", "AdLink entry unexpectedly has universe ID")
 						end
 						table.insert(var6.entries, p6)
@@ -85,7 +89,7 @@ function t.fromContentList(p1, p2, p3, p4) --[[ line: 59 ]]
 							var6.hasMoreRows = true
 						end
 					end
-				end):matchError(function(p5) --[[ line: 121 ]]
+				end):matchError(function(p5) --[[ line: 129 ]]
 					warn(p5)
 				end)
 				continue

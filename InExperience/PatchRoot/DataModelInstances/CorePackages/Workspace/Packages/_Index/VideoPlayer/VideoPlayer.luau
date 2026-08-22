@@ -1,1 +1,4 @@
-﻿return { VideoDisplay = require(script.VideoDisplay) }
+﻿return {
+	VideoDisplay = require(script.VideoDisplay),
+	VideoLoadingState = require(script.VideoLoadingState)
+}

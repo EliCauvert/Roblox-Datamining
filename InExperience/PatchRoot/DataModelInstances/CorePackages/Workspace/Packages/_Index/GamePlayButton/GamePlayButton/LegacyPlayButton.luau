@@ -14,7 +14,6 @@ local fFlagLuaAppEnablePlaySquadButton = require(parent.SharedFlags).FFlagLuaApp
 local getFFlagUIBloxUseFoundationButton = require(parent.SharedFlags).UIBlox.GetFFlagUIBloxUseFoundationButton
 local fFlagLuaAppPlayButtonOptOutFoundationButton = require(parent.SharedFlags).FFlagLuaAppPlayButtonOptOutFoundationButton
 local fFlagLuaAppPlayLoadingClickTelemetryMobile = require(parent.SharedFlags).FFlagLuaAppPlayLoadingClickTelemetryMobile
-local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 local fFlagLuaAppTextOnlyPlayButton = require(parent.SharedFlags).FFlagLuaAppTextOnlyPlayButton
 local fFlagLuaAppIconTextPlayButton = require(parent.SharedFlags).FFlagLuaAppIconTextPlayButton
 local fFlagLuaAppUpdatePlayButtonText = require(parent.SharedFlags).FFlagLuaAppUpdatePlayButtonText
@@ -35,8 +34,8 @@ playButton.validateProps = tModule.strictInterface({
 	testId = tModule.optional(tModule.string)
 })
 
-function playButton.renderWithLocalization(p0, p1) --[[ line: 47 ]]
-	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), fFlagLuaAppDemoModePlayButton (ref), unavailable (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
+function playButton.renderWithLocalization(p0, p1) --[[ line: 46 ]]
+	-- upvalues: fFlagLuaAppEnablePlaySquadButton (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingPrimary (ref), buttonType (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), play (ref), getFFlagIsSquadEnabled (ref), robux (ref), unavailable (ref), roactModule (ref), comboButton (ref), truncationCollapse (ref), button (ref), fFlagLuaAppPlayLoadingClickTelemetryMobile (ref), reactModule (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref)
 	local size = p0.props.Size
 	local layoutOrder = p0.props.LayoutOrder
 	local price = p0.props.price
@@ -80,7 +79,7 @@ function playButton.renderWithLocalization(p0, p1) --[[ line: 47 ]]
 	elseif playButtonState == playButtonStatesModule.FiatPaidAccess then
 		secondary = buttonType.PrimaryContextual
 		unavailable_1 = p0.props.localizedFiatPrice
-	elseif fFlagLuaAppDemoModePlayButton and playButtonState == playButtonStatesModule.DemoMode then
+	elseif playButtonState == playButtonStatesModule.DemoMode then
 		secondary = buttonType.PrimarySystem
 		unavailable_1 = p1.playDemo
 	elseif playButtonState == playButtonStatesModule.ActionNeeded then
@@ -102,12 +101,12 @@ function playButton.renderWithLocalization(p0, p1) --[[ line: 47 ]]
 				icon = var10,
 				text = unavailable_1,
 				isDisabled = var7,
-				onActivated = if not var7 then onPlayButtonActivated else function() --[[ line: 113 ]] end
+				onActivated = if not var7 then onPlayButtonActivated else function() --[[ line: 112 ]] end
 			},
 			overflow = {
 				icon = truncationCollapse,
 				isDisabled = var9,
-				onActivated = if not var9 then onPlaySquadButtonActivated else function() --[[ line: 118 ]] end
+				onActivated = if not var9 then onPlaySquadButtonActivated else function() --[[ line: 117 ]] end
 			},
 			testId = p0.props.testId
 		})
@@ -122,7 +121,7 @@ function playButton.renderWithLocalization(p0, p1) --[[ line: 47 ]]
 		buttonType = secondary,
 		userInteractionEnabled = not var7,
 		isDisabled = var7,
-		onActivated = if not var7 then onPlayButtonActivated else function() --[[ line: 132 ]] end,
+		onActivated = if not var7 then onPlayButtonActivated else function() --[[ line: 131 ]] end,
 		[reactModule.Tag] = if p0.props.testId then `data-testid={p0.props.testId}` else nil,
 		DO_NOT_USE_useUIBloxButton = if getFFlagUIBloxUseFoundationButton() or fFlagLuaAppPlayButtonOptOutFoundationButton then true else nil
 	})
@@ -146,17 +145,17 @@ function playButton.renderWithLocalization(p0, p1) --[[ line: 47 ]]
 	}) else createElement
 end
 
-function playButton.render(p2) --[[ line: 166 ]]
-	-- upvalues: withLocalization (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), fFlagLuaAppDemoModePlayButton (ref)
+function playButton.render(p2) --[[ line: 165 ]]
+	-- upvalues: withLocalization (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppUpdatePlayButtonText (ref)
 	return withLocalization({
 		join = "Feature.ExperienceDetails.PlayButtonText.ActionNeeded",
 		unlock = "Feature.ExperienceDetails.PlayButtonText.Unlock",
 		joinWithParty = "Feature.Squads.Action.JoinWithParty",
 		unavailable = "Feature.ExperienceDetails.PlayButtonText.Unavailable",
 		waitingForParty = "Feature.Squads.Action.WaitingForParty",
-		play = if (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
-		playDemo = if fFlagLuaAppDemoModePlayButton then "Feature.ExperienceDetails.PlayButtonText.PlayDemo" else nil
-	})(function(p3) --[[ line: 178 ]]
+		playDemo = "Feature.ExperienceDetails.PlayButtonText.PlayDemo",
+		play = if (fFlagLuaAppTextOnlyPlayButton or fFlagLuaAppIconTextPlayButton) and fFlagLuaAppUpdatePlayButtonText then "Feature.ExperienceDetails.PlayButtonText.Play" else nil
+	})(function(p3) --[[ line: 177 ]]
 		-- upvalues: p2 (ref)
 		return p2:renderWithLocalization(p3)
 	end)

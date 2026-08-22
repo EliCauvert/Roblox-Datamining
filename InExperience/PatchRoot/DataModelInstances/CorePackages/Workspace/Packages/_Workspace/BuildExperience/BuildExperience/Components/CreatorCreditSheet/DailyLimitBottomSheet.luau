@@ -31,9 +31,14 @@ local function formatNumber(p0) --[[ line: 87 ]]
 end
 
 local function DailyLimitBottomSheetContent(p1) --[[ line: 91 ]]
-	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), formatNumber (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), list (ref), numberLocalization (ref), localizationService (ref), sheet (ref), text (ref), view (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), icon (ref), iconSize (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), button (ref), fillBehavior (ref)
-	local CREATOR_CREDIT_LIMIT_SHEET_CONFIRM, CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT, CREATOR_CREDIT_SETTINGS_SAVE_ERROR, CREATOR_CREDIT_LIMIT_SHEET_TITLE
-	local var9 = if fFlagBuildLocalization then useLocalization({
+	-- upvalues: fFlagBuildLocalization (ref), useLocalization (ref), localizationStringsModule (ref), numberLocalization (ref), localizationService (ref), formatNumber (ref), reactModule (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), list (ref), sheet (ref), text (ref), view (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), icon (ref), iconSize (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), button (ref), fillBehavior (ref)
+	local var11, CREATOR_CREDIT_LIMIT_SHEET_CONFIRM, CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT, CREATOR_CREDIT_SETTINGS_SAVE_ERROR, CREATOR_CREDIT_LIMIT_SHEET_TITLE
+	local additionalUsed = p1.additionalUsed or 0
+	local var10 = if fFlagBuildLocalization then useLocalization({
+		belowSpend = {
+			localizationStringsModule.CREATOR_CREDIT_LIMIT_BELOW_SPEND,
+			ALREADY_SPENT = numberLocalization.localize(string.format("%.0f", math.floor(additionalUsed)), localizationService.RobloxLocaleId)
+		},
 		confirm = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_CONFIRM,
 		noLimit = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT,
 		saveError = localizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR,
@@ -43,50 +48,51 @@ local function DailyLimitBottomSheetContent(p1) --[[ line: 91 ]]
 	local _ = nil
 	local _ = nil
 	local _ = nil
+	local _ = nil
 	
 	if fFlagBuildLocalization then
-		CREATOR_CREDIT_LIMIT_SHEET_CONFIRM = var9.confirm
-		CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT = var9.noLimit
-		CREATOR_CREDIT_SETTINGS_SAVE_ERROR = var9.saveError
-		CREATOR_CREDIT_LIMIT_SHEET_TITLE = var9.title
+		var11 = var10.belowSpend
+		CREATOR_CREDIT_LIMIT_SHEET_CONFIRM = var10.confirm
+		CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT = var10.noLimit
+		CREATOR_CREDIT_SETTINGS_SAVE_ERROR = var10.saveError
+		CREATOR_CREDIT_LIMIT_SHEET_TITLE = var10.title
 	else
+		var11 = localizationStringsModule.formatCreatorCreditLimitBelowSpend(formatNumber(additionalUsed))
 		CREATOR_CREDIT_LIMIT_SHEET_CONFIRM = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_CONFIRM
 		CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT
 		CREATOR_CREDIT_SETTINGS_SAVE_ERROR = localizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR
 		CREATOR_CREDIT_LIMIT_SHEET_TITLE = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_TITLE
 	end
 	local testId = p1.testId or "creator-credit-limit-sheet"
-	local maxValue = math.max(p1.initialValue or 500, 100)
-	local additionalUsed = p1.additionalUsed or 0
 	local var13 = p1.isSaving == true
-	local var14, var15 = reactModule.useState(maxValue)
+	local var14, var15 = reactModule.useState(math.max(p1.initialValue or 500, 100))
 	local var16, var17 = reactModule.useState(p1.initialIsNoLimit == true)
-	local var18 = reactModule.useCallback(function() --[[ line: 124 ]]
+	local var18 = reactModule.useCallback(function() --[[ line: 131 ]]
 		-- upvalues: var17 (ref), var15 (ref)
 		var17(false)
-		var15(function(p2) --[[ line: 126 ]]
+		var15(function(p2) --[[ line: 133 ]]
 			return math.max(p2 - 500, 100)
 		end)
 	end, {})
-	local var19 = reactModule.useCallback(function() --[[ line: 131 ]]
+	local var19 = reactModule.useCallback(function() --[[ line: 138 ]]
 		-- upvalues: var17 (ref), var15 (ref)
 		var17(false)
-		var15(function(p3) --[[ line: 133 ]]
+		var15(function(p3) --[[ line: 140 ]]
 			return p3 + 500
 		end)
 	end, {})
-	local var20 = reactModule.useCallback(function(p4) --[[ line: 138 ]]
+	local var20 = reactModule.useCallback(function(p4) --[[ line: 145 ]]
 		-- upvalues: var17 (ref), var15 (ref)
 		var17(false)
 		var15(math.max(p4, 100))
 	end, {})
-	local var21 = reactModule.useCallback(function() --[[ line: 143 ]]
+	local var21 = reactModule.useCallback(function() --[[ line: 150 ]]
 		-- upvalues: var17 (ref)
 		var17(true)
 	end, {})
 	local var22 = not var16 and var14 < additionalUsed
-	local var23 = if var22 then localizationStringsModule.formatCreatorCreditLimitBelowSpend(formatNumber(additionalUsed)) elseif p1.saveError then CREATOR_CREDIT_SETTINGS_SAVE_ERROR else nil
-	local var24 = reactModule.useCallback(function() --[[ line: 155 ]]
+	local var23 = if var22 then var11 elseif p1.saveError then CREATOR_CREDIT_SETTINGS_SAVE_ERROR else nil
+	local var24 = reactModule.useCallback(function() --[[ line: 159 ]]
 		-- upvalues: var16 (ref), p1 (ref), var14 (ref), additionalUsed (ref)
 		if var16 then
 			p1.onConfirm(nil)
@@ -117,7 +123,7 @@ local function DailyLimitBottomSheetContent(p1) --[[ line: 91 ]]
 			leading = iconName.Robux,
 			variant = chipVariant.Standard,
 			size = chipSize.Medium,
-			onActivated = function() --[[ line: 195 ]]
+			onActivated = function() --[[ line: 199 ]]
 				-- upvalues: var20 (ref), v (ref)
 				var20(v)
 			end,
@@ -207,7 +213,7 @@ local function DailyLimitBottomSheetContent(p1) --[[ line: 91 ]]
 	})
 end
 
-return function(p5) --[[ line: 307 | named "DailyLimitBottomSheet" ]]
+return function(p5) --[[ line: 311 | named "DailyLimitBottomSheet" ]]
 	-- upvalues: reactModule (ref), DailyLimitBottomSheetContent (ref)
 	return if p5.isOpen then reactModule.createElement(DailyLimitBottomSheetContent, p5) else nil
 end

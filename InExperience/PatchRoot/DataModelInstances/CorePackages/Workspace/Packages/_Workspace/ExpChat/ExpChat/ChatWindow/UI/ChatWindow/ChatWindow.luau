@@ -178,14 +178,14 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 		Size = var24.size,
 		Visible = var24.visible,
 		BackgroundTransparency = if fFlagExpChatEnableFriendsTab and var24.suppressBackground then 1 else var31(backgroundTransparency, var24.transparencyValue),
-		[reactModule.Change.AbsoluteSize] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p10) --[[ line: 265 ]]
+		[reactModule.Change.AbsoluteSize] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p10) --[[ line: 266 ]]
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
 			if chatWindowConfiguration and var24.onAbsoluteSizeChanged then
 				var24.onAbsoluteSizeChanged(p10, chatWindowConfiguration)
 			end
-		end, { textChatService, var24.onAbsoluteSizeChanged }) else function(p9) --[[ line: 271 ]]
+		end, { textChatService, var24.onAbsoluteSizeChanged }) else function(p9) --[[ line: 272 ]]
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
@@ -193,14 +193,14 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 				var24.onAbsoluteSizeChanged(p9, chatWindowConfiguration)
 			end
 		end,
-		[reactModule.Change.AbsolutePosition] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p12) --[[ line: 278 ]]
+		[reactModule.Change.AbsolutePosition] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p12) --[[ line: 279 ]]
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
 			if chatWindowConfiguration and var24.onAbsoluteSizeChanged then
 				var24.onAbsolutePositionChanged(p12, chatWindowConfiguration)
 			end
-		end, { textChatService, var24.onAbsolutePositionChanged }) else function(p11) --[[ line: 284 ]]
+		end, { textChatService, var24.onAbsolutePositionChanged }) else function(p11) --[[ line: 285 ]]
 			-- upvalues: textChatService (copy), var24 (ref)
 			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
@@ -239,6 +239,7 @@ return reactModule.memo(function(p0) --[[ line: 60 ]]
 				size = var24.size,
 				isChannelBarVisible = var24.isChannelBarVisible,
 				scrollResetKey = var24.scrollResetKey,
+				scrollToTopOnReset = if fFlagExpChatEnableFriendsTab then var24.scrollToTopOnReset else nil,
 				onCanvasPositionChanged = if fFlagExpChatEnableFriendsTab then var24.onCanvasPositionChanged else nil,
 				contentTopPadding = if fFlagExpChatEnableFriendsTab then var24.contentTopPadding else nil
 			}, var35))

@@ -36,19 +36,20 @@ local containerModule = require(appChat.Components.ExternalNavigationHandler.Con
 local toggleChatPausedModule = require(appChat.Actions.ToggleChatPaused)
 local useExternalNavigationByScreenModule = require(appChat.Hooks.useExternalNavigationByScreen)
 local useAppChatIsWideModeModule = require(appChat.Hooks.useAppChatIsWideMode)
+local fFlagAppChatRemoveToggleChatPaused = sharedFlagsModule.FFlagAppChatRemoveToggleChatPaused
 local fFlagSquadAppChatRTNFix = sharedFlagsModule.FFlagSquadAppChatRTNFix
 local fFlagAppChatInExpSelectChatMembersMobileHeightModule = require(appChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
 local t = {}
 
-function AppChatEntryPointUA(p0) --[[ line: 61 ]]
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useDispatch (ref), useEarlyIsFocused (ref), fFlagAppChatInExpSelectChatMembersMobileHeightModule (ref), useAppChatIsWideModeModule (ref), useIsWideMode (ref), useNavigation (ref), useAppPolicy (ref), useState (ref), useExternalNavigationByScreenModule (ref), useRoactService (ref), appNotificationService (ref), useMemo (ref), signal (ref), useCallback (ref), setTabBarVisibleFromChat (ref), useSelector (ref), useEffect (ref), toggleChatPausedModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref), appChatEntryPointModule (ref), containerModule (ref), chatEventReceiverModule (ref), fFlagSquadAppChatRTNFix (ref), squadAppChatEventReceiver (ref)
+function AppChatEntryPointUA(p0) --[[ line: 62 ]]
+	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useDispatch (ref), useEarlyIsFocused (ref), fFlagAppChatInExpSelectChatMembersMobileHeightModule (ref), useAppChatIsWideModeModule (ref), useIsWideMode (ref), useNavigation (ref), useAppPolicy (ref), useState (ref), useExternalNavigationByScreenModule (ref), useRoactService (ref), appNotificationService (ref), useMemo (ref), signal (ref), useCallback (ref), setTabBarVisibleFromChat (ref), useSelector (ref), fFlagAppChatRemoveToggleChatPaused (ref), useEffect (ref), toggleChatPausedModule (ref), reactModule (ref), fullscreenPageWithSafeArea (ref), appChatEntryPointModule (ref), containerModule (ref), chatEventReceiverModule (ref), fFlagSquadAppChatRTNFix (ref), squadAppChatEventReceiver (ref)
 	local var22 = cryoModule.Dictionary.join(t, p0)
 	local var23 = useStyle()
 	local var24 = useDispatch()
 	local var25 = useEarlyIsFocused()
 	local var26 = if fFlagAppChatInExpSelectChatMembersMobileHeightModule then useAppChatIsWideModeModule(false) else useIsWideMode()
 	local var27 = useNavigation()
-	local var28 = useAppPolicy(function(p1) --[[ line: 71 ]]
+	local var28 = useAppPolicy(function(p1) --[[ line: 72 ]]
 		return {
 			shouldSystemBarUsuallyBePresent = p1.getShouldSystemBarUsuallyBePresent()
 		}
@@ -56,29 +57,31 @@ function AppChatEntryPointUA(p0) --[[ line: 61 ]]
 	local var29, var30 = useState(0)
 	local var31, var32 = useExternalNavigationByScreenModule()
 	local var33 = useRoactService(appNotificationService)
-	local var34 = useMemo(function() --[[ line: 81 ]]
+	local var34 = useMemo(function() --[[ line: 82 ]]
 		-- upvalues: signal (copy)
 		return signal.new()
 	end)
-	local var35 = useMemo(function() --[[ line: 85 ]]
+	local var35 = useMemo(function() --[[ line: 86 ]]
 		-- upvalues: var22 (ref), var33 (ref)
 		return var22.RobloxEventReceiver.new(var33)
 	end)
-	local var36 = useCallback(function(p2) --[[ line: 89 ]]
+	local var36 = useCallback(function(p2) --[[ line: 90 ]]
 		-- upvalues: var24 (ref), setTabBarVisibleFromChat (copy), var28 (ref)
 		var24(setTabBarVisibleFromChat(p2 or var28.shouldSystemBarUsuallyBePresent))
 	end, { var24, var28.shouldSystemBarUsuallyBePresent })
-	local var37 = useMemo(function() --[[ line: 93 ]]
+	local var37 = useMemo(function() --[[ line: 94 ]]
 		return {}
 	end)
-	local var38 = useSelector(function(p3) --[[ line: 97 ]]
+	local var38 = useSelector(function(p3) --[[ line: 98 ]]
 		return p3.NotificationBadgeCounts.TopBarNotificationIcon
 	end)
-	useEffect(function() --[[ line: 101 ]]
-		-- upvalues: var24 (ref), toggleChatPausedModule (copy), var25 (ref)
-		var24(toggleChatPausedModule(not var25))
-	end, { var25, var24 })
 	
+	if not fFlagAppChatRemoveToggleChatPaused then
+		useEffect(function() --[[ line: 103 ]]
+			-- upvalues: var24 (ref), toggleChatPausedModule (copy), var25 (ref)
+			var24(toggleChatPausedModule(not var25))
+		end, { var25, var24 })
+	end
 	return reactModule.createElement(reactModule.Fragment, {}, {
 		FullscreenPageWithSafeArea = reactModule.createElement(fullscreenPageWithSafeArea, {
 			includeStatusBar = true,

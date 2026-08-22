@@ -11,7 +11,7 @@ local t_1 = {
 			-- upvalues: playersService (copy), p0 (ref)
 			local ok, status = pcall(function() --[[ line: 17 ]]
 				-- upvalues: playersService (copy), p0 (copy)
-				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromUserIdAsync(p0) else game.Players:CreateHumanoidModelFromUserId(p0)
+				return playersService:CreateHumanoidModelFromUserIdAsync(p0)
 			end)
 			
 			if ok and status then
@@ -24,7 +24,7 @@ local t_1 = {
 	end
 }
 
-function t_1.get(p3) --[[ line: 32 ]]
+function t_1.get(p3) --[[ line: 28 ]]
 	-- upvalues: t (ref), t_1 (ref)
 	if t[p3] then
 		return t[p3]
@@ -34,7 +34,7 @@ function t_1.get(p3) --[[ line: 32 ]]
 	return t[p3]
 end
 
-function t_1.clear(p4) --[[ line: 41 ]]
+function t_1.clear(p4) --[[ line: 37 ]]
 	-- upvalues: t (ref)
 	t[p4] = nil
 end

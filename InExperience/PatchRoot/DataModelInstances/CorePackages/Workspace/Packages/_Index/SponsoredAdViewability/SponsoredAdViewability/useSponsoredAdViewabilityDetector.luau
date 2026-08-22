@@ -46,22 +46,24 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 	end, { p0 })
 	reactModule.useEffect(function() --[[ line: 67 ]]
 		-- upvalues: p2 (ref), var5 (ref)
-		if p2 == nil then
+		if p2 == nil then return end
+		local current = var5.current
+		
+		if current == nil then
 			return
 		end
-		local var7 = assert(var5.current, "detector must exist before effects run")
 		local list = {
-			p2.OnHide:Connect(function() --[[ line: 74 ]]
-				-- upvalues: var7 (ref)
-				var7:pause()
+			p2.OnHide:Connect(function() --[[ line: 77 ]]
+				-- upvalues: current (ref)
+				current:pause()
 			end),
-			p2.OnUnhide:Connect(function() --[[ line: 77 ]]
-				-- upvalues: var7 (ref)
-				var7:resume()
+			p2.OnUnhide:Connect(function() --[[ line: 80 ]]
+				-- upvalues: current (ref)
+				current:resume()
 			end)
 		}
 		
-		return function() --[[ line: 81 ]]
+		return function() --[[ line: 84 ]]
 			-- upvalues: list (ref)
 			for i, v in list do
 				v:Disconnect()
@@ -69,7 +71,7 @@ return function(p0, p1, p2) --[[ line: 19 | named "useSponsoredAdViewabilityDete
 		end
 	end, { p2 })
 	local var6 = reactModule.useRef(p1)
-	reactModule.useEffect(function() --[[ line: 92 ]]
+	reactModule.useEffect(function() --[[ line: 95 ]]
 		-- upvalues: var5 (ref), var6 (ref), p1 (ref)
 		local current = var5.current
 		local current_1 = var6.current

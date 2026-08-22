@@ -18,28 +18,29 @@ local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLan
 local chatSnoozeMenuDescriptionFixEnabled = game:DefineFastFlag("ChatSnoozeMenuDescriptionFixEnabled", false)
 local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
 local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local fFlagAppChatToastChatTerminologyFixEnabled = require(parent.SharedFlags).FFlagAppChatToastChatTerminologyFixEnabled
 local argoPartyExperimentation = require(parent.SocialExperiments).ArgoPartyExperimentation
 
-return function(p0) --[[ line: 37 | named "SnoozeToastNotificationsButton" ]]
-	-- upvalues: useLocalization (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), chatSnoozeMenuDescriptionFixEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), default (ref), toastNotificationTypeModule (ref), notificationSnoozedSignal (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), iconButton (ref), images (ref), notificationGroups (ref), showNotificationSnoozeMenuSignal (ref), chatLandingTelemetryEventsModule (ref)
+return function(p0) --[[ line: 39 | named "SnoozeToastNotificationsButton" ]]
+	-- upvalues: useLocalization (ref), argoPartyExperimentation (ref), universalAppPolicyModule (ref), chatSnoozeMenuDescriptionFixEnabled (ref), fFlagAppChatToastChatTerminologyFixEnabled (ref), fFlagExpChatEnableFriendsTab (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), default (ref), toastNotificationTypeModule (ref), notificationSnoozedSignal (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), iconButton (ref), images (ref), notificationGroups (ref), showNotificationSnoozeMenuSignal (ref), chatLandingTelemetryEventsModule (ref)
 	local var9 = useLocalization({
 		party = "Feature.Squads.Label.Party",
 		unmuteFeedback = "Feature.Notifications.Heading.RemoveSnoozeFeedback",
 		chat = if argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "CommonUI.Features.Label.Chat" else "Feature.Squads.Label.Party" else "Feature.Chat.Heading.ChatWithConnections",
 		snoozeDescription = if chatSnoozeMenuDescriptionFixEnabled then "Feature.Chat.Description.SnoozeDescription" else nil,
-		snoozeTitle = if fFlagExpChatEnableFriendsTab then "Feature.Chat.Label.MuteInGameChatToastNotifications" elseif argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.MuteChatNotifications" else "Feature.Chat.Label.SnoozePartyNotifications" elseif getFFlagIsSquadEnabled() then "Feature.Chat.Label.SnoozePartyNotifications" else "Feature.Chat.Label.SnoozeChatNotifications"
+		snoozeTitle = if fFlagAppChatToastChatTerminologyFixEnabled and fFlagExpChatEnableFriendsTab then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Label.MuteInGameChatToastNotifications" else "Feature.Chat.Label.MuteInGamePartyToastNotifications" elseif fFlagExpChatEnableFriendsTab then "Feature.Chat.Label.MuteInGameChatToastNotifications" elseif argoPartyExperimentation.getIsRenameEnabled() then if universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.MuteChatNotifications" else "Feature.Chat.Label.SnoozePartyNotifications" elseif getFFlagIsSquadEnabled() then "Feature.Chat.Label.SnoozePartyNotifications" else "Feature.Chat.Label.SnoozeChatNotifications"
 	})
 	local var10, var11 = reactModule.useState(default:isSnoozedNotificationType(toastNotificationTypeModule.NotificationTypeEnum.ChatNewMessage))
-	reactModule.useEffect(function() --[[ line: 65 ]]
+	reactModule.useEffect(function() --[[ line: 70 ]]
 		-- upvalues: notificationSnoozedSignal (copy), toastNotificationTypeModule (copy), var11 (ref)
-		local var13 = notificationSnoozedSignal:connect(function(p1) --[[ line: 66 ]]
+		local var13 = notificationSnoozedSignal:connect(function(p1) --[[ line: 71 ]]
 			-- upvalues: toastNotificationTypeModule (copy), var11 (copy)
 			if p1.notificationType == toastNotificationTypeModule.NotificationTypeEnum.ChatNewMessage then
 				var11(p1.actionType == toastNotificationTypeModule.SnoozeActionEnum.Mute)
 			end
 		end)
 		
-		return function() --[[ line: 77 ]]
+		return function() --[[ line: 82 ]]
 			-- upvalues: var13 (ref)
 			var13:disconnect()
 		end
@@ -50,7 +51,7 @@ return function(p0) --[[ line: 37 | named "SnoozeToastNotificationsButton" ]]
 		size = p0.size,
 		icon = if var10 then images["icons/common/snoozeNotificationsOn"] else images["icons/common/snoozeNotificationsOff"],
 		layoutOrder = p0.layoutOrder,
-		onActivated = function() --[[ line: 90 ]]
+		onActivated = function() --[[ line: 95 ]]
 			-- upvalues: var10 (ref), var9 (ref), argoPartyExperimentation (copy), getFFlagIsSquadEnabled (copy), default (copy), notificationGroups (copy), showNotificationSnoozeMenuSignal (copy), chatSnoozeMenuDescriptionFixEnabled (copy), var12 (ref), chatLandingTelemetryEventsModule (copy)
 			if var10 then
 				default:unmuteNotification({

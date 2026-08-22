@@ -1,37 +1,65 @@
 ﻿local parent = script.Parent.Parent
 local reactModule = require(parent.React)
 local useEventConnection = require(parent.ReactUtils).useEventConnection
+local fFlagExpChatTextChannelWindowFontOverrideModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFontOverride)
 
-local function _(p0) --[[ line: 19 | named "resolveTarget" ]]
+local function _(p0) --[[ line: 23 | named "resolveTarget" ]]
 	local target = p0.Target
 	
 	return if target and target:IsA("TextChannel") then target else nil
 end
 
-return function(value) --[[ line: 27 | named "useTextChannelWindowProps" ]]
-	-- upvalues: reactModule (ref), useEventConnection (ref)
-	local var1, var2 = reactModule.useState(function() --[[ line: 28 ]]
+local _ = function(p1) --[[ line: 33 | named "resolveFontOverride" ]]
+	-- upvalues: fFlagExpChatTextChannelWindowFontOverrideModule (ref)
+	return if fFlagExpChatTextChannelWindowFontOverrideModule then if p1.UseDefaultFont then nil else p1.FontFace else nil
+end
+
+return function(value) --[[ line: 43 | named "useTextChannelWindowProps" ]]
+	-- upvalues: reactModule (ref), useEventConnection (ref), fFlagExpChatTextChannelWindowFontOverrideModule (ref)
+	local var2, var3 = reactModule.useState(function() --[[ line: 44 ]]
 		-- upvalues: value (ref)
 		local target = value.Target
 		
 		return if target and target:IsA("TextChannel") then target else nil
 	end)
-	local var3, var4 = reactModule.useState(function() --[[ line: 32 ]]
+	local var4, var5 = reactModule.useState(function() --[[ line: 48 ]]
 		-- upvalues: value (ref)
 		return value.BackgroundColor3
 	end)
-	local var5 = reactModule.useRef(var1)
-	useEventConnection(value:GetPropertyChangedSignal("Target"), function() --[[ line: 38 ]]
-		-- upvalues: value (ref), var5 (ref), var2 (ref)
+	local var6 = reactModule.useRef(var2)
+	useEventConnection(value:GetPropertyChangedSignal("Target"), function() --[[ line: 54 ]]
+		-- upvalues: value (ref), var6 (ref), var3 (ref)
 		local target = value.Target
-		local var6 = if target and target:IsA("TextChannel") then target else nil
-		var5.current = var6
-		var2(var6)
+		local var11 = if target and target:IsA("TextChannel") then target else nil
+		var6.current = var11
+		var3(var11)
 	end, { value })
-	useEventConnection(value:GetPropertyChangedSignal("BackgroundColor3"), function() --[[ line: 45 ]]
-		-- upvalues: var4 (ref), value (ref)
-		var4(value.BackgroundColor3)
+	useEventConnection(value:GetPropertyChangedSignal("BackgroundColor3"), function() --[[ line: 61 ]]
+		-- upvalues: var5 (ref), value (ref)
+		var5(value.BackgroundColor3)
 	end, { value })
+	local var7 = nil
 	
-	return { target = var1, backgroundColor = var3 }
+	if fFlagExpChatTextChannelWindowFontOverrideModule then
+		local _ = nil
+		local var8, var9 = reactModule.useState(function() --[[ line: 69 ]]
+			-- upvalues: value (ref), fFlagExpChatTextChannelWindowFontOverrideModule (copy)
+			return if fFlagExpChatTextChannelWindowFontOverrideModule then if value.UseDefaultFont then nil else value.FontFace else nil
+		end)
+		var7 = var8
+		local var10 = var9
+		useEventConnection(value:GetPropertyChangedSignal("FontFace"), function() --[[ line: 74 ]]
+			-- upvalues: var10 (write), value (ref), fFlagExpChatTextChannelWindowFontOverrideModule (copy)
+			var10(if not fFlagExpChatTextChannelWindowFontOverrideModule then nil elseif value.UseDefaultFont then nil else value.FontFace)
+		end, { value })
+		useEventConnection(value:GetPropertyChangedSignal("UseDefaultFont"), function() --[[ line: 79 ]]
+			-- upvalues: var10 (write), value (ref), fFlagExpChatTextChannelWindowFontOverrideModule (copy)
+			var10(if not fFlagExpChatTextChannelWindowFontOverrideModule then nil elseif value.UseDefaultFont then nil else value.FontFace)
+		end, { value })
+	end
+	return {
+		target = var2,
+		backgroundColor = var4,
+		fontOverride = var7
+	}
 end

@@ -11,9 +11,10 @@ local createEditsStoreModule = require(momentsCreation.Stores.createEditsStore)
 local createComputed = signalsModule.createComputed
 local createSignal = signalsModule.createSignal
 local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
+local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 
-return function() --[[ line: 97 | named "createCreationFlowStore" ]]
-	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref)
+return function() --[[ line: 100 | named "createCreationFlowStore" ]]
+	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref)
 	local var8 = createNavigationMachineModule(creationFlowStateModule.Gallery)
 	local var9 = createSelectionStoreModule()
 	local var10 = createDescriptionStoreModule()
@@ -36,16 +37,17 @@ return function() --[[ line: 97 | named "createCreationFlowStore" ]]
 		getGeneratedDescription = var10.getGeneratedDescription,
 		getGenerationToken = var10.getGenerationToken,
 		getGeneratedTextFeedback = var10.getGeneratedTextFeedback,
+		getGeneratedSummary = var10.getGeneratedSummary,
 		getMusicList = var14,
-		getMusicEdit = createComputed(function(p0) --[[ line: 128 ]]
+		getMusicEdit = createComputed(function(p0) --[[ line: 131 ]]
 			-- upvalues: var11 (ref)
 			return var11.getMap(p0).music
 		end),
-		getTextOverlayEdits = createComputed(function(p1) --[[ line: 131 ]]
+		getTextOverlayEdits = createComputed(function(p1) --[[ line: 134 ]]
 			-- upvalues: var11 (ref)
 			return var11.getMap(p1).text
 		end),
-		getTrimEdit = createComputed(function(p2) --[[ line: 125 ]]
+		getTrimEdit = createComputed(function(p2) --[[ line: 128 ]]
 			-- upvalues: var11 (ref)
 			return var11.getMap(p2).trim
 		end),
@@ -54,39 +56,43 @@ return function() --[[ line: 97 | named "createCreationFlowStore" ]]
 		getIsGenerating = var18,
 		getActiveGeneration = var20,
 		getTTSAudio = var22,
-		updateCurrentState = function(p3) --[[ line: 137 ]]
+		updateCurrentState = function(p3) --[[ line: 140 ]]
 			-- upvalues: var8 (ref)
 			var8.reset(p3)
 		end,
-		onSelectedCaptureUpdated = function(p4) --[[ line: 142 ]]
+		onSelectedCaptureUpdated = function(p4) --[[ line: 145 ]]
 			-- upvalues: var9 (ref)
 			var9.setSelectedCapture(p4)
 		end,
-		updateDescription = function(p5) --[[ line: 147 ]]
+		updateDescription = function(p5) --[[ line: 150 ]]
 			-- upvalues: var10 (ref)
 			var10.setDescription(p5)
 		end,
-		setGeneratedDescription = function(value) --[[ line: 151 ]]
+		setGeneratedDescription = function(value) --[[ line: 154 ]]
 			-- upvalues: var10 (ref)
 			var10.setGeneratedDescription(value)
 		end,
-		setGenerationToken = function(value) --[[ line: 155 ]]
+		setGenerationToken = function(value) --[[ line: 162 ]]
 			-- upvalues: var10 (ref)
 			var10.setGenerationToken(value)
 		end,
-		setGeneratedTextFeedback = function(value) --[[ line: 159 ]]
+		setGeneratedTextFeedback = function(value) --[[ line: 166 ]]
 			-- upvalues: var10 (ref)
 			var10.setGeneratedTextFeedback(value)
 		end,
-		updateTrimEdit = function(p6) --[[ line: 164 ]]
+		setGeneratedSummary = function(value) --[[ line: 158 ]]
+			-- upvalues: var10 (ref)
+			var10.setGeneratedSummary(value)
+		end,
+		updateTrimEdit = function(p6) --[[ line: 171 ]]
 			-- upvalues: var11 (ref)
 			var11.setCommitted("trim", p6)
 		end,
-		updateMusicEdit = function(p7) --[[ line: 169 ]]
+		updateMusicEdit = function(p7) --[[ line: 176 ]]
 			-- upvalues: var11 (ref)
 			var11.setCommitted("music", p7)
 		end,
-		updateTextOverlayEdits = function(p8) --[[ line: 174 ]]
+		updateTextOverlayEdits = function(p8) --[[ line: 181 ]]
 			-- upvalues: var11 (ref)
 			var11.setCommitted("text", p8)
 		end,
@@ -95,21 +101,22 @@ return function() --[[ line: 97 | named "createCreationFlowStore" ]]
 		setIsGenerating = var19,
 		setActiveGeneration = var21,
 		setTTSAudio = var23,
-		onMusicSearchRetrieved = function(p9) --[[ line: 179 ]]
+		onMusicSearchRetrieved = function(p9) --[[ line: 186 ]]
 			-- upvalues: var15 (ref)
 			var15(p9)
 		end,
-		clearEdits = function(p10) --[[ line: 184 ]]
-			-- upvalues: var13 (ref), var9 (ref), var8 (ref), var10 (ref), fFlagMomentTextGenerationFilteredSignal (copy), var15 (ref), var11 (ref), var17 (ref)
+		clearEdits = function(p10) --[[ line: 191 ]]
+			-- upvalues: var13 (ref), var9 (ref), var8 (ref), var10 (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy), var15 (ref), var11 (ref), var17 (ref)
 			var13(true)
 			var9.setSelectedCapture(nil)
 			var8.reset(p10)
 			var10.setDescription("")
 			
-			if fFlagMomentTextGenerationFilteredSignal then
+			if fFlagMomentTextGenerationFilteredSignal or getFFlagEnableMomentTextGeneration() then
 				var10.setGeneratedDescription(nil)
 				var10.setGenerationToken(nil)
 				var10.setGeneratedTextFeedback(nil)
+				var10.setGeneratedSummary(nil)
 			end
 			var15({})
 			var11.clear()

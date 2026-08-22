@@ -1,8 +1,9 @@
 ﻿local parent = script.Parent.Parent
 local constantsModule = require(parent.Constants)
 local getFFlagUGCValidationAnimationPackFolderStructureModule = require(parent.flags.getFFlagUGCValidationAnimationPackFolderStructure)
+local getFFlagUGCValidationAnimationAssetDisableModelStructureModule = require(parent.flags.getFFlagUGCValidationAnimationAssetDisableModelStructure)
 
-local function createAnimationEntry(p0, p1) --[[ line: 6 ]]
+local function createAnimationEntry(p0, p1) --[[ line: 8 ]]
 	local t = { ClassName = "Animation" }
 	
 	if p0 then
@@ -20,7 +21,7 @@ local function createAnimationEntry(p0, p1) --[[ line: 6 ]]
 	return t
 end
 
-local function createStringValueWithAnimations(p2, p3, p4) --[[ line: 25 ]]
+local function createStringValueWithAnimations(p2, p3, p4) --[[ line: 27 ]]
 	-- upvalues: createAnimationEntry (ref)
 	local t = {}
 	table.insert(t, createAnimationEntry(false, p4))
@@ -31,16 +32,16 @@ local function createStringValueWithAnimations(p2, p3, p4) --[[ line: 25 ]]
 	return { ClassName = "StringValue", Name = p2, _children = t }
 end
 
-return function(p5, p6) --[[ line: 44 | named "createAnimationSchema" ]]
-	-- upvalues: constantsModule (ref), createStringValueWithAnimations (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref)
-	local var6 = constantsModule.ANIMATION_ASSET_INFO[p5]
-	assert(var6, `No ANIMATION_ASSET_INFO for {p5}`)
+return function(p5, p6) --[[ line: 46 | named "createAnimationSchema" ]]
+	-- upvalues: constantsModule (ref), createStringValueWithAnimations (ref), getFFlagUGCValidationAnimationAssetDisableModelStructureModule (ref), getFFlagUGCValidationAnimationPackFolderStructureModule (ref)
+	local var7 = constantsModule.ANIMATION_ASSET_INFO[p5]
+	assert(var7, `No ANIMATION_ASSET_INFO for {p5}`)
 	local t = {}
 	
 	if p5 == Enum.AssetType.IdleAnimation then
 		table.insert(t, createStringValueWithAnimations("idle", 2, true))
 	else
-		for i, v in var6.stringValueNames do
+		for i, v in var7.stringValueNames do
 			local t_1 = {}
 			table.insert(t_1, { ClassName = "Animation" })
 			table.insert(t, { ClassName = "StringValue", Name = v, _children = t_1 })
@@ -48,9 +49,9 @@ return function(p5, p6) --[[ line: 44 | named "createAnimationSchema" ]]
 	end
 	local t_1 = { Name = "R15Anim", ClassName = "Folder", _children = t }
 	
-	return if getFFlagUGCValidationAnimationPackFolderStructureModule() and p6 and p6.Name == "R15Anim" then t_1 else {
+	return if getFFlagUGCValidationAnimationAssetDisableModelStructureModule() or getFFlagUGCValidationAnimationPackFolderStructureModule() and p6 and p6.Name == "R15Anim" then t_1 else {
 		ClassName = "Model",
-		Name = var6.modelName,
+		Name = var7.modelName,
 		_children = { t_1 }
 	}
 end

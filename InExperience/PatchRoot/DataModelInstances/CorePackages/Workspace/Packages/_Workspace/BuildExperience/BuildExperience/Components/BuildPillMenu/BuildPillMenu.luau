@@ -9,10 +9,11 @@ local buildOverflowMenuButtonModule = require(script.Parent.BuildOverflowMenuBut
 local getBuildOverflowMenuStoreModule = require(buildExperience.Stores.GetBuildOverflowMenuStore)
 local _ = require(buildExperience.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local publishStatusModule = require(buildExperience.Chat.PublishStatus)
+local fFlagBuildExperienceAssetLibraryModule = require(buildExperience.Flags.FFlagBuildExperienceAssetLibrary)
 
-return function(p0) --[[ line: 46 | named "BuildPillMenu" ]]
-	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), view (ref), agentDetailMenuModule (ref), buildOverflowMenuButtonModule (ref), iconName (ref)
-	local var7 = publishStatusModule.usePublishStatus(p0.target)
+return function(p0) --[[ line: 48 | named "BuildPillMenu" ]]
+	-- upvalues: getBuildOverflowMenuStoreModule (ref), publishStatusModule (ref), reactModule (ref), fFlagBuildExperienceAssetLibraryModule (ref), view (ref), agentDetailMenuModule (ref), iconName (ref), buildOverflowMenuButtonModule (ref)
+	local var8 = publishStatusModule.usePublishStatus(p0.target)
 	
 	return reactModule.createElement(reactModule.Fragment, nil, {
 		Pill = reactModule.createElement(view, {
@@ -24,21 +25,26 @@ return function(p0) --[[ line: 46 | named "BuildPillMenu" ]]
 		}, {
 			AgentDetail = reactModule.createElement(agentDetailMenuModule, {
 				layoutOrder = 1,
-				onActivated = reactModule.useCallback(function() --[[ line: 64 ]]
-					-- upvalues: p0 (ref)
-					if p0.onOpenAgentsPage then
+				icon = if fFlagBuildExperienceAssetLibraryModule then iconName.SquaresGridPlus else nil,
+				onActivated = reactModule.useCallback(function() --[[ line: 66 ]]
+					-- upvalues: fFlagBuildExperienceAssetLibraryModule (copy), p0 (ref)
+					if fFlagBuildExperienceAssetLibraryModule and p0.onOpenAssetLibraryPage then
+						p0.onOpenAssetLibraryPage()
+						
+						return
+					elseif p0.onOpenAgentsPage then
 						p0.onOpenAgentsPage()
 					end
-				end, { p0.onOpenAgentsPage })
+				end, { p0.onOpenAgentsPage, p0.onOpenAssetLibraryPage })
 			}),
 			Overflow = reactModule.createElement(buildOverflowMenuButtonModule, {
 				layoutOrder = 2,
 				icon = iconName.ThreeDotsHorizontal,
 				store = p0.store or getBuildOverflowMenuStoreModule(),
 				target = p0.target,
-				hasPublishedTurn = var7.hasPublishedTurn,
-				hasPublishedVersion = var7.hasPublishedVersion,
-				onAction = reactModule.useCallback(function(p1) --[[ line: 50 ]]
+				hasPublishedTurn = var8.hasPublishedTurn,
+				hasPublishedVersion = var8.hasPublishedVersion,
+				onAction = reactModule.useCallback(function(p1) --[[ line: 52 ]]
 					-- upvalues: p0 (ref)
 					if p1.type == "openPage" then
 						if p0.onOpenPage then

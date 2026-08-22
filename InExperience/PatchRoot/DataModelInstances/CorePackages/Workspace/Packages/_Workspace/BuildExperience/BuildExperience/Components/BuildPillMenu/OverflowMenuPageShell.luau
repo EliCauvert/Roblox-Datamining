@@ -15,7 +15,7 @@ local buttonVariant = foundationModule.Enums.ButtonVariant
 local iconName = foundationModule.Enums.IconName
 local inputSize = foundationModule.Enums.InputSize
 
-return function(p0) --[[ line: 37 | named "OverflowMenuPageShell" ]]
+return function(p0) --[[ line: 39 | named "OverflowMenuPageShell" ]]
 	-- upvalues: reactModule (ref), fFlagEnableBuildExperienceScrollPerformanceTrackingModule (ref), var6 (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), fFlagBuildBackButtonChevronModule (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), scrollView (ref), divider (ref)
 	local testId = p0.testId or "overflow-menu-page"
 	local var8 = reactModule.useRef(nil)
@@ -23,6 +23,15 @@ return function(p0) --[[ line: 37 | named "OverflowMenuPageShell" ]]
 	if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then
 		var6(p0.scrollPerformanceIntervalName, var8)
 	end
+	local var9 = reactModule.createElement(view, {
+		tag = {
+			["composition-content-body"] = true,
+			["col size-full"] = p0.disableScrolling == true,
+			["col size-full-0 auto-y"] = p0.disableScrolling ~= true
+		},
+		testId = `{testId}-content-body`
+	}, { Content = p0.content })
+	
 	return reactModule.createElement(view, {
 		LayoutOrder = p0.layoutOrder,
 		tag = {
@@ -33,7 +42,10 @@ return function(p0) --[[ line: 37 | named "OverflowMenuPageShell" ]]
 	}, {
 		Header = reactModule.createElement(view, {
 			LayoutOrder = 1,
-			tag = "composition-content-header row align-y-center gap-small size-full-0 auto-y padding-y-small",
+			tag = {
+				["composition-content-header"] = true,
+				["row align-y-center gap-small size-full-0 auto-y padding-y-small"] = true
+			},
 			testId = `{testId}-header`
 		}, {
 			Close = reactModule.createElement(iconButton, {
@@ -45,18 +57,26 @@ return function(p0) --[[ line: 37 | named "OverflowMenuPageShell" ]]
 				testId = `{testId}-close`,
 				variant = buttonVariant.Utility
 			}),
-			Title = reactModule.createElement(text, {
+			Title = if p0.headerContent ~= nil then reactModule.createElement(text, {
 				LayoutOrder = 2,
 				tag = "fill text-heading-medium text-align-x-left text-truncate-end content-emphasis",
 				Text = p0.title
-			}),
+			}) else reactModule.createElement(view, {
+				LayoutOrder = 2,
+				tag = "grow auto-y",
+				testId = `{testId}-header-content`
+			}, { Content = p0.headerContent }),
 			Trailing = if p0.headerTrailing ~= nil then nil else reactModule.createElement(view, {
 				LayoutOrder = 3,
 				tag = "auto-xy",
 				testId = `{testId}-header-trailing`
 			}, { Content = p0.headerTrailing })
 		}),
-		Body = reactModule.createElement(scrollView, {
+		Body = if p0.disableScrolling then reactModule.createElement(view, {
+			LayoutOrder = 2,
+			tag = "fill size-full-0 bg-surface-0",
+			testId = `{testId}-body`
+		}, { ContentBody = var9 }) else reactModule.createElement(scrollView, {
 			LayoutOrder = 2,
 			tag = "fill size-full-0 bg-surface-0",
 			scrollingFrameRef = if fFlagEnableBuildExperienceScrollPerformanceTrackingModule then var8 else nil,
@@ -66,16 +86,14 @@ return function(p0) --[[ line: 37 | named "OverflowMenuPageShell" ]]
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
-		}, {
-			ContentBody = reactModule.createElement(view, {
-				tag = "composition-content-body col size-full-0 auto-y",
-				testId = `{testId}-content-body`
-			}, { Content = p0.content })
-		}),
+		}, { ContentBody = var9 }),
 		FooterDivider = if p0.footer ~= nil then nil else reactModule.createElement(divider, { LayoutOrder = 3 }),
 		Footer = if p0.footer ~= nil then nil else reactModule.createElement(view, {
 			LayoutOrder = 4,
-			tag = "composition-content-body size-full-0 auto-y",
+			tag = {
+				["composition-content-body"] = true,
+				["size-full-0 auto-y"] = true
+			},
 			testId = `{testId}-footer-body`
 		}, { Footer = p0.footer })
 	})

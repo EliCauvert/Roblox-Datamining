@@ -40,6 +40,7 @@ return {
 	RemoveTrustedConnection = if fFlagConnectionsToFriendsRename then "Feature.Friends.TrustedFriend.Action.RemoveTrustedFriend" else "Feature.Friends.TrustedConnection.Action.RemoveTrustedConnection",
 	ViewPlatformProfile = "Feature.Friends.Action.ViewPlatformProfile",
 	CurrencyTransfer = "Features.Transfers.RobuxTransfer.Heading.SendRobux",
+	TradeItems = "CommonUI.Features.Label.Trades",
 	BlockLimitReached = "Feature.Profile.Message.BlockError",
 	BlockTargetAlreadyBlocked = "Feature.Friends.Error.TargetAlreadyBlockedError",
 	UnblockTargetNotBlocked = "Feature.Friends.Error.UnblockTargetNotBlockedError",

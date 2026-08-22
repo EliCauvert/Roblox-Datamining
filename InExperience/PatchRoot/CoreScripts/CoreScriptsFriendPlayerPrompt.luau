@@ -76,9 +76,7 @@ end
 
 function DoPromptRequestFriendPlayer(p5) --[[ line: 94 ]]
 	-- upvalues: localPlayer (write), friendRequestModalIxpEnabled (ref), IXPService (ref), friendRequestModalIxpLayer (ref), friendRequestModalRevampV4 (ref), userRelationshipModalsModule (ref), fFlagRemoveHardCodedFriendLimitPromptModule (ref), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref), robloxTranslatorModule (ref)
-	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-		if localPlayer:IsFriendsWithAsync(p5.UserId) then return end
-	elseif localPlayer:IsFriendsWith(p5.UserId) then return end
+	if localPlayer:IsFriendsWithAsync(p5.UserId) then return end
 	if friendRequestModalIxpEnabled then
 		IXPService:LogFlagLinkedUserLayerExposure(friendRequestModalIxpLayer)
 	end
@@ -97,7 +95,7 @@ function DoPromptRequestFriendPlayer(p5) --[[ line: 94 ]]
 		MainText = string.format("Would you like to send %s a Friend Request?", p5.Name),
 		FetchImageFunction = createFetchImageFunction(p5.UserId, size150x150, headShot),
 		FetchImageFunctionConsoleVR = createFetchImageFunction(p5.UserId, size352x352, avatarThumbnail),
-		PromptCompletedCallback = function(p6) --[[ line: 117 ]]
+		PromptCompletedCallback = function(p6) --[[ line: 111 ]]
 			-- upvalues: fFlagRemoveHardCodedFriendLimitPromptModule (copy), localPlayer (copy), promptCreatorModule (copy), p5 (ref), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
 			if p6 then
 				if fFlagRemoveHardCodedFriendLimitPromptModule or not AtFriendLimit(localPlayer) then
@@ -154,7 +152,7 @@ function DoPromptRequestFriendPlayer(p5) --[[ line: 94 ]]
 	})
 end
 
-function PromptRequestFriendPlayer(p7) --[[ line: 230 ]]
+function PromptRequestFriendPlayer(p7) --[[ line: 224 ]]
 	-- upvalues: localPlayer (write)
 	if localPlayer.UserId < 0 then
 		error("PromptSendFriendRequest can not be called for guests!")
@@ -172,59 +170,53 @@ function PromptRequestFriendPlayer(p7) --[[ line: 230 ]]
 	DoPromptRequestFriendPlayer(p7)
 end
 
-function UnFriendPlayer(p8) --[[ line: 247 ]]
+function UnFriendPlayer(p8) --[[ line: 241 ]]
 	-- upvalues: localPlayer (write)
-	return pcall(function() --[[ line: 248 ]]
+	return pcall(function() --[[ line: 242 ]]
 		-- upvalues: localPlayer (copy), p8 (ref)
 		localPlayer:RevokeFriendship(p8)
 	end)
 end
 
-function DoPromptUnfriendPlayer(p9) --[[ line: 254 ]]
+function DoPromptUnfriendPlayer(p9) --[[ line: 248 ]]
 	-- upvalues: localPlayer (write), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref)
-	if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
-		if localPlayer:IsFriendsWithAsync(p9.UserId) then
-			promptCreatorModule:CreatePrompt({
-				WindowTitle = "Unfriend Person?",
-				ConfirmationText = "Unfriend",
-				CancelText = "Cancel",
-				CancelActive = true,
-				Image = "",
-				ImageConsoleVR = "",
-				MainText = string.format("Would you like to remove %s from your friends list?", p9.Name),
-				FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
-				FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
-				PromptCompletedCallback = function(p10) --[[ line: 268 ]]
-					-- upvalues: p9 (ref), promptCreatorModule (copy), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
-					if p10 and not UnFriendPlayer(p9) then
-						while promptCreatorModule:IsCurrentlyPrompting() do
-							wait()
-						end
-						promptCreatorModule:CreatePrompt({
-							WindowTitle = "Error Unfriending Person",
-							ConfirmationText = "Okay",
-							CancelActive = false,
-							Image = "",
-							ImageConsoleVR = "",
-							MainText = string.format("An error occurred while unfriending %s. Please try again later.", p9.Name),
-							FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
-							FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
-							StripeColor = Color3.fromRGB(183, 34, 54)
-						})
+	if localPlayer:IsFriendsWithAsync(p9.UserId) then
+		promptCreatorModule:CreatePrompt({
+			WindowTitle = "Unfriend Person?",
+			ConfirmationText = "Unfriend",
+			CancelText = "Cancel",
+			CancelActive = true,
+			Image = "",
+			ImageConsoleVR = "",
+			MainText = string.format("Would you like to remove %s from your friends list?", p9.Name),
+			FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
+			FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
+			PromptCompletedCallback = function(p10) --[[ line: 256 ]]
+				-- upvalues: p9 (ref), promptCreatorModule (copy), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
+				if p10 and not UnFriendPlayer(p9) then
+					while promptCreatorModule:IsCurrentlyPrompting() do
+						wait()
 					end
+					promptCreatorModule:CreatePrompt({
+						WindowTitle = "Error Unfriending Person",
+						ConfirmationText = "Okay",
+						CancelActive = false,
+						Image = "",
+						ImageConsoleVR = "",
+						MainText = string.format("An error occurred while unfriending %s. Please try again later.", p9.Name),
+						FetchImageFunction = createFetchImageFunction(p9.UserId, size150x150, headShot),
+						FetchImageFunctionConsoleVR = createFetchImageFunction(p9.UserId, size352x352, avatarThumbnail),
+						StripeColor = Color3.fromRGB(183, 34, 54)
+					})
 				end
-			})
-			
-			return
-		else
-			return
-		end
-	elseif localPlayer:IsFriendsWith(p9.UserId) then
-	else
+			end
+		})
+		
+		return
 	end
 end
 
-function PromptUnfriendPlayer(p11) --[[ line: 328 ]]
+function PromptUnfriendPlayer(p11) --[[ line: 316 ]]
 	-- upvalues: localPlayer (write)
 	if localPlayer.UserId < 0 then
 		error("PromptUnfriend can not be called for guests!")

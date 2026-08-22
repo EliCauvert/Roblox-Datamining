@@ -11,15 +11,16 @@ local devAssertModule = require(foundation.Utility.devAssert)
 local withCommonPropsModule = require(foundation.Utility.withCommonProps)
 local withDefaultsModule = require(foundation.Utility.withDefaults)
 local t = {
+	maxButtonCount = 3,
 	testId = "--foundation-button-group",
 	orientation = orientationModule.Horizontal,
 	size = inputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 54 | named "ButtonGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 57 | named "ButtonGroup" ]]
 	-- upvalues: withDefaultsModule (ref), t (ref), devAssertModule (ref), orientationModule (ref), fillBehaviorModule (ref), reactModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
 	local var11 = withDefaultsModule(p0, t)
-	devAssertModule(#var11.buttons <= 3, `ButtonGroup: a maximum of 3 buttons is supported, got {#var11.buttons}.`)
+	devAssertModule(#var11.buttons <= var11.maxButtonCount, `ButtonGroup: a maximum of {var11.maxButtonCount} buttons is supported, got {#var11.buttons}.`)
 	local var12 = var11.orientation == orientationModule.Vertical
 	local var12_1 = var12 or var11.fillBehavior == fillBehaviorModule.Fill
 	local var14 = if var12 or not var12_1 then nil else fillBehaviorModule.Fill
