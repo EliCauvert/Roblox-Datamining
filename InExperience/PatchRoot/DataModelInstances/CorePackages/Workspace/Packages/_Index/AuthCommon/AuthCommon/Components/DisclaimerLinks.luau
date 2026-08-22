@@ -252,4 +252,4 @@ function disclaimerLinks.render(p2) --[[ line: 95 ]]
 	end)
 end
 
--- [0.043s] <RUNTIME-ERROR> : Error block 0 analysis at pc 40 ('luna.Call' object has no attribute 'name')
+-- [0.046s] <RUNTIME-ERROR> : Error block 0 analysis at pc 40 ('luna.Call' object has no attribute 'name')
