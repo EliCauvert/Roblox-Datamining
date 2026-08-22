@@ -1882,6 +1882,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Heading.RenameSecurityKey": "Rename Security Key",
     "Action.Rename": "Rename",
     "Description.SecurityKey.RenameKey": "Name your key descriptively so that you will know which one it is.",
-    "Heading.IARCRatingSetting": "Content maturity setting"
+    "Heading.IARCRatingSetting": "Content maturity setting",
+    "Label.RobuxTransferLimits": "robux transfer limits"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

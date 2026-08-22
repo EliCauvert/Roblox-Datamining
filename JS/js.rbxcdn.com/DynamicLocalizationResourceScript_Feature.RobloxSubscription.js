@@ -178,7 +178,7 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Message.ReferralLinkError": "We could not create your link. Please try again later.",
     "Label.ReferralLinkCopied": "Link copied",
     "Action.CopyReferralLink": "Copy link",
-    "Description.ReferralEntry": "Invite someone to Plus and you both get {amount} Robux.",
+    "Description.ReferralEntry": "Invite someone to Plus",
     "Heading.ReferralEntry": "Share Plus to get {amount} Robux",
     "Heading.ReferralCard": "Share Plus, get {amount} Robux",
     "Action.ReferralInvite": "Invite",
