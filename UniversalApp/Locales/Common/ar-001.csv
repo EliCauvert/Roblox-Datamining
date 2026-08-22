@@ -524,7 +524,9 @@ Authentication.SignUp.Label.OptionalGenderShort,اختياري
 Authentication.SignUp.Label.ParentEmailAddress,عنوان البريد الإلكتروني للوالدين
 Authentication.SignUp.Label.PasswordError1,طول 8 أحرف على الأقل
 Authentication.SignUp.Label.PasswordError2,لا تتطابق مع اسم المستخدم
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,ليست كلمة مرور بسيطة
+Authentication.SignUp.Label.PasswordError3.V2,كلمة المرور ليست بسيطة
 Authentication.SignUp.Label.PasswordErrorLengthNew,يجب أن يكون طول كلمة المرور بين 8 و200 حرف
 Authentication.SignUp.Label.PasswordErrorSimple,يجب ألا تكون كلمة المرور بسيطة للغاية
 Authentication.SignUp.Label.PasswordPlaceholder,8 أحرف على الأقل
@@ -3743,6 +3745,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,تبقى {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
+Feature.Landing.Action.PlayNow,العب الآن
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,من خلال المتابعة، فإنك توافق على {startTermsTag}شروطنا{endTermsTag}، بما في ذلك بند التحكيم، وتقر {startPrivacyTag}بسياسة الخصوصية{endPrivacyTag} السارية لدينا. إذا كان عمرك أقل من 18 عامًا، يجب على أحد والديك أو الوصي عليك السماح بحسابك والموافقة على شروطنا.
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,لغة غير لائقة
 Feature.Landing.Label.BrazilContentDescriptorViolence,العنف
 Feature.Landing.Label.BrazilContentRatingLogoTitle,تصنيف العمر: 12 سنة
@@ -3750,6 +3755,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,تصنيف العمر 
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,عمليات الشراء داخل اللعبة (تشمل العناصر العشوائية)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,تفاعل المستخدمين
 Feature.Landing.Label.InvitedBy,مدعو بواسطة {name}
+Feature.Landing.Label.PoweredBy,بدعم من
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,ساعِد الأشخاص الذين لديهم رقم هاتفك على إضافتك كصديق على منصّة Roblox

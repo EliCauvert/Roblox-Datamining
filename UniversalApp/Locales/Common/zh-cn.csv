@@ -525,7 +525,9 @@ Authentication.SignUp.Label.OptionalGenderShort,可选
 Authentication.SignUp.Label.ParentEmailAddress,家长电子邮件地址
 Authentication.SignUp.Label.PasswordError1,8 个字符以上
 Authentication.SignUp.Label.PasswordError2,与用户名不匹配
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,不容易被猜到
+Authentication.SignUp.Label.PasswordError3.V2,不是简单密码
 Authentication.SignUp.Label.PasswordErrorLengthNew,密码长度应在 8 到 200 个字符之间
 Authentication.SignUp.Label.PasswordErrorSimple,密码不能太简单
 Authentication.SignUp.Label.PasswordPlaceholder,最少 8 个字符
@@ -3745,6 +3747,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,剩余 {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,确定要从你的道具栏中永久删除此道具吗？如果你改变主意，需要通过体验再次获得该道具。
 Feature.Item.Label.DeleteItemUndercase,删除道具
+Feature.Landing.Action.PlayNow,立即游玩
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,继续操作即表示你同意我们的{startTermsTag}条款{endTermsTag}（包括仲裁条款），并确认已知悉我们的{startPrivacyTag}隐私政策{endPrivacyTag}。若你未满 18 岁，则你的父母或监护人必须同意你创建帐户，并同意我们的条款。
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,不当语言
 Feature.Landing.Label.BrazilContentDescriptorViolence,暴力
 Feature.Landing.Label.BrazilContentRatingLogoTitle,建议评级：12 岁
@@ -3752,6 +3757,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,建议评级：16 岁
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,游戏内购买（包括随机道具）
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,用户互动
 Feature.Landing.Label.InvitedBy,由“{name}”邀请
+Feature.Landing.Label.PoweredBy,技术支持：
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,开启
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,允许拥有你手机号码的人在 Roblox 上将你添加为好友

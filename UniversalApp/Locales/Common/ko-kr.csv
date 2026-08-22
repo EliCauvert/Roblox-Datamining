@@ -543,7 +543,9 @@ Authentication.SignUp.Label.OptionalGenderShort,선택 사항
 Authentication.SignUp.Label.ParentEmailAddress,보호자 이메일 주소
 Authentication.SignUp.Label.PasswordError1,최소 8자여야 합니다
 Authentication.SignUp.Label.PasswordError2,사용자 이름과 동일하지 않아야 합니다
+Authentication.SignUp.Label.PasswordError2.V2,사용자 이름과 일치하지 않습니다.
 Authentication.SignUp.Label.PasswordError3,
+Authentication.SignUp.Label.PasswordError3.V2,유추하기 어려운 비밀번호여야 합니다.
 Authentication.SignUp.Label.PasswordErrorLengthNew,비밀번호는 8자에서 200자 사이여야 합니다.
 Authentication.SignUp.Label.PasswordErrorSimple,비밀번호가 너무 단순합니다.
 Authentication.SignUp.Label.PasswordPlaceholder,영문 알파벳 최소 8자 이상
@@ -3770,6 +3772,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} 남음
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
+Feature.Landing.Action.PlayNow,지금 플레이
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"계속하면 중재를 포함한 당사의 {startTermsTag}약관{endTermsTag}에 동의하고 {startPrivacyTag}개인정보 처리방침{endPrivacyTag}의 내용을 인정하는 것으로 간주됩니다. 만 18세 미만인 경우, 부모나 보호자가 계정 생성 및 당사의 약관에 동의해야 합니다."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,부적절한 언어
 Feature.Landing.Label.BrazilContentDescriptorViolence,폭력
 Feature.Landing.Label.BrazilContentRatingLogoTitle,권장 등급: 12세
@@ -3777,6 +3782,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,권장 등급: 만 16�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,게임 내 구매(랜덤 아이템 포함)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,사용자 상호작용
 Feature.Landing.Label.InvitedBy,초대한 사람: {name}
+Feature.Landing.Label.PoweredBy,제공:
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,켜기
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,내 전화번호를 알고 있는 사람들이 Roblox에서 나를 친구로 추가할 수 있도록 도와줍니다

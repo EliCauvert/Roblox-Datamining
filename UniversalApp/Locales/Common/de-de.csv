@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Optional
 Authentication.SignUp.Label.ParentEmailAddress,E-Mail-Adresse deiner Eltern
 Authentication.SignUp.Label.PasswordError1,Ist mindestens 8 Zeichen lang
 Authentication.SignUp.Label.PasswordError2,Stimmt nicht mit dem Benutzernamen überein
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,Ist kein einfaches Passwort
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,Das Passwort muss zwischen 8 und 200 Zeichen lang sein
 Authentication.SignUp.Label.PasswordErrorSimple,Das Passwort sollte nicht zu einfach sein.
 Authentication.SignUp.Label.PasswordPlaceholder,Mindestens 8 Zeichen
@@ -3749,6 +3751,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Noch {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Möchtest du diesen Artikel wirklich dauerhaft aus deinem Inventar löschen? Wenn du deine Meinung änderst, musst du ihn erneut in einer Experience verdienen."
 Feature.Item.Label.DeleteItemUndercase,Artikel löschen
+Feature.Landing.Action.PlayNow,Jetzt spielen
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"Wenn du fortfährst, stimmst du unseren {startTermsTag}Bedingungen{endTermsTag}, einschließlich Schiedsverfahren, zu und erkennst unsere {startPrivacyTag}Datenschutzrichtlinie{endPrivacyTag} an. Wenn du unter 18 Jahre alt bist, muss ein Elternteil oder Erziehungsberechtigter dein Konto genehmigen und unseren Bedingungen zustimmen."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Unangemessene Sprache
 Feature.Landing.Label.BrazilContentDescriptorViolence,Gewalt
 Feature.Landing.Label.BrazilContentRatingLogoTitle,VORGESCHLAGENE ALTERSEINSTUFUNG: 12 JAHRE
@@ -3756,6 +3761,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,EMPFOHLENE ALTERSFREIG
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Käufe im Spiel (einschließlich zufälliger Artikel)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Benutzer interagieren
 Feature.Landing.Label.InvitedBy,Eingeladen von {name}
+Feature.Landing.Label.PoweredBy,Unterstützt von
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Einschalten
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"Hilf Personen, die bereits deine Telefonnummer kennen, dich als Freund auf Roblox hinzuzufügen"

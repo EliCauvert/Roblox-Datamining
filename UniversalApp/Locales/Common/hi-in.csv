@@ -525,7 +525,9 @@ Authentication.SignUp.Label.OptionalGenderShort,ज़रूरी नहीं
 Authentication.SignUp.Label.ParentEmailAddress,पेरेंट का ईमेल एड्रेस
 Authentication.SignUp.Label.PasswordError1,कम से कम 8 कैरेक्टर लंबा है
 Authentication.SignUp.Label.PasswordError2,यूज़रनेम से मेल नहीं खाता
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,आसान पासवर्ड नहीं है
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,पासवर्ड 8 से 200 कैरेक्टर के बीच होना चाहिए
 Authentication.SignUp.Label.PasswordErrorSimple,पासवर्ड बहुत आसान नहीं होना चाहिए
 Authentication.SignUp.Label.PasswordPlaceholder,कम से कम 8 कैरेक्टर
@@ -3747,6 +3749,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} बाकी हैं
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
+Feature.Landing.Action.PlayNow,अभी खेलें
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"जारी रखने का मतलब है कि आप आर्बिट्रेशन सहित हमारी {startTermsTag}शर्तों{endTermsTag} से सहमत हैं और आपको हमारी {startPrivacyTag}प्राइवेसी पॉलिसी{endPrivacyTag} स्वीकार है. अगर आपकी उम्र 18 साल से कम है, तो आपके पेरेंट या गार्जियन को आपके अकाउंट के लिए परमिशन देनी होगी और हमारी शर्तों से सहमत होना होगा."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,अनुचित भाषा
 Feature.Landing.Label.BrazilContentDescriptorViolence,हिंसा
 Feature.Landing.Label.BrazilContentRatingLogoTitle,एडवाइज़री रेटिंग : 12 साल
@@ -3754,6 +3759,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,एडवाइज़�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,इन-एक्सपीरिएंस खरीदारियाँ (रैंडम आइटम सहित)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,यूज़र्स इंटरैक्ट
 Feature.Landing.Label.InvitedBy,{name} ने इनवाइट किया है
+Feature.Landing.Label.PoweredBy,इसे बनाया है
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,चालू करें
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"जिन लोगों के पास आपका फ़ोन नंबर है, उन्हें आपको Roblox पर फ़्रेंड के तौर पर जोड़ने में मदद करें."

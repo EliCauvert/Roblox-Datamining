@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Opsional
 Authentication.SignUp.Label.ParentEmailAddress,Alamat Email Orang Tua
 Authentication.SignUp.Label.PasswordError1,Panjangnya minimal 8 karakter
 Authentication.SignUp.Label.PasswordError2,Berbeda dengan nama pengguna
+Authentication.SignUp.Label.PasswordError2.V2,Tidak sesuai dengan nama pengguna
 Authentication.SignUp.Label.PasswordError3,Bukan password yang simpel
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,Password harus terdiri dari 8 sampai 200 karakter
 Authentication.SignUp.Label.PasswordErrorSimple,Password tidak boleh terlalu sederhana
 Authentication.SignUp.Label.PasswordPlaceholder,Minimal 8 karakter
@@ -3765,6 +3767,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} lagi
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
 Feature.Item.Label.DeleteItemUndercase,Hapus item
+Feature.Landing.Action.PlayNow,Main sekarang
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"Dengan melanjutkan, kamu menyetujui {startTermsTag}Ketentuan{endTermsTag} kami, termasuk arbitrase, dan memahami {startPrivacyTag}Kebijakan Privasi{endPrivacyTag} kami. Jika kamu berusia di bawah 18 tahun, orang tua atau wali sahmu harus mengizinkan akunmu dan menyetujui Ketentuan kami."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Bahasa Tidak Pantas
 Feature.Landing.Label.BrazilContentDescriptorViolence,Kekerasan
 Feature.Landing.Label.BrazilContentRatingLogoTitle,PANDUAN RATING: 12 TAHUN
@@ -3772,6 +3777,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,PANDUAN RATING: 16 TAH
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Pembelian Dalam Game (Termasuk Item Acak)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Pengguna Berinteraksi
 Feature.Landing.Label.InvitedBy,Diundang oleh {name}
+Feature.Landing.Label.PoweredBy,Didukung oleh
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Nyalakan
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Bantu pengguna yang memiliki nomor ponselmu untuk menambahkanmu sebagai teman di Roblox

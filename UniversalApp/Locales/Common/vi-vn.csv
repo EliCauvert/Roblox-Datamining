@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Không bắt buộc
 Authentication.SignUp.Label.ParentEmailAddress,Địa chỉ email của cha mẹ
 Authentication.SignUp.Label.PasswordError1,Dài tối thiểu 8 ký tự
 Authentication.SignUp.Label.PasswordError2,Không trùng với tên người dùng
+Authentication.SignUp.Label.PasswordError2.V2,Không trùng với tên tài khoản
 Authentication.SignUp.Label.PasswordError3,Không phải là mật khẩu dễ đoán
+Authentication.SignUp.Label.PasswordError3.V2,Không phải mật khẩu quá đơn giản
 Authentication.SignUp.Label.PasswordErrorLengthNew,Mật khẩu nên dài từ 8 đến 200 ký tự
 Authentication.SignUp.Label.PasswordErrorSimple,
 Authentication.SignUp.Label.PasswordPlaceholder,Tối thiểu 8 ký tự
@@ -3767,6 +3769,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Còn {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
+Feature.Landing.Action.PlayNow,Chơi ngay
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"Khi tiếp tục, bạn đồng ý với {startTermsTag}Điều khoản{endTermsTag} của chúng tôi (bao gồm điều khoản trọng tài) và xác nhận {startPrivacyTag}Chính sách quyền riêng tư{endPrivacyTag} của chúng tôi. Nếu bạn dưới 18 tuổi, cha mẹ hoặc người giám hộ của bạn phải cho phép bạn tạo tài khoản và đồng ý với Điều khoản của chúng tôi."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Ngôn ngữ không phù hợp
 Feature.Landing.Label.BrazilContentDescriptorViolence,Bạo lực
 Feature.Landing.Label.BrazilContentRatingLogoTitle,ĐỘ TUỔI KHUYẾN NGHỊ: 12 TUỔI
@@ -3774,6 +3779,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,ĐỘ TUỔI KHUYẾN 
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Mua hàng trong trò chơi (Có vật phẩm ngẫu nhiên)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Tương tác với người dùng
 Feature.Landing.Label.InvitedBy,Được {name} mời
+Feature.Landing.Label.PoweredBy,Được cung cấp bởi
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,Không phải bây giờ
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Bật
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Giúp những người có số điện thoại của bạn có thể thêm bạn làm bạn bè trên Roblox

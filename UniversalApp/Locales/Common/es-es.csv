@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Opcional
 Authentication.SignUp.Label.ParentEmailAddress,Dirección de correo electrónico de un progenitor
 Authentication.SignUp.Label.PasswordError1,Contiene un mínimo de 8 caracteres
 Authentication.SignUp.Label.PasswordError2,No coincide con tu nombre de usuario
+Authentication.SignUp.Label.PasswordError2.V2,No coincide con el nombre de usuario
 Authentication.SignUp.Label.PasswordError3,No es una contraseña sencilla
+Authentication.SignUp.Label.PasswordError3.V2,No es cualquier contraseña
 Authentication.SignUp.Label.PasswordErrorLengthNew,La contraseña debe tener entre 8 y 200 caracteres
 Authentication.SignUp.Label.PasswordErrorSimple,La contraseña no debe ser demasiado simple
 Authentication.SignUp.Label.PasswordPlaceholder,Por lo menos 8 caracteres
@@ -3768,6 +3770,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,Quedan {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"¿Confirmas que quieres eliminar este objeto de tu inventario para siempre? Si cambias de opinión, tendrás que volver a obtenerlo en una experiencia."
 Feature.Item.Label.DeleteItemUndercase,Eliminar objeto
+Feature.Landing.Action.PlayNow,
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"Al continuar, aceptas nuestros {startTermsTag}Términos{endTermsTag}, incluido el arbitraje, y reconoces nuestra {startPrivacyTag}Política de privacidad{endPrivacyTag}. Si eres menor de 18 años, tu padre, madre o tutor debe autorizar tu cuenta y aceptar nuestros Términos."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Lenguaje inapropiado
 Feature.Landing.Label.BrazilContentDescriptorViolence,Violencia
 Feature.Landing.Label.BrazilContentRatingLogoTitle,CLASIFICACIÓN: 12 AÑOS
@@ -3775,6 +3780,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,CLASIFICACIÓN: 16 AÑ
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Compras en el juego (incluye objetos aleatorios)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Interacción entre usuarios
 Feature.Landing.Label.InvitedBy,Invitatión enviada por {name}
+Feature.Landing.Label.PoweredBy,Desarrollado por
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Activar
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Ayuda a las personas que tienen tu número de teléfono a agregarte como amistad en Roblox.

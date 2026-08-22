@@ -1,3 +1,9 @@
+## 12534 - 2026-08-22 11:16
+
+### Removed files
+- `UniversalApp/PatchRoot/DataModelInstances/CorePackages/LuauForgeChunks/deferred.luau`
+
+
 ## 12515 - 2026-08-21 23:50
 
 ### New files

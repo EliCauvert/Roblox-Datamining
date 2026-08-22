@@ -525,7 +525,9 @@ Authentication.SignUp.Label.OptionalGenderShort,ไม่จําเป็น�
 Authentication.SignUp.Label.ParentEmailAddress,ที่อยู่อีเมลของผู้ปกครอง
 Authentication.SignUp.Label.PasswordError1,มีความยาวอย่างน้อย 8 อักขระ
 Authentication.SignUp.Label.PasswordError2,ต้องไม่ตรงกับชื่อผู้ใช้
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,ไม่ใช่รหัสผ่านที่คาดเดาได้ง่าย
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,รหัสผ่านต้องมีความยาวระหว่าง 8 ถึง 200 อักขระ
 Authentication.SignUp.Label.PasswordErrorSimple,รหัสผ่านไม่ควรเดาง่ายเกินไป
 Authentication.SignUp.Label.PasswordPlaceholder,อย่างน้อย 8 อักขระ
@@ -3750,6 +3752,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,เหลืออีก {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
+Feature.Landing.Action.PlayNow,เล่นเลย
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,การดำเนินการต่อถือว่าคุณยอมรับ{startTermsTag}ข้อกำหนด{endTermsTag}ของเรา รวมถึงอนุญาโตตุลาการ และรับทราบ{startPrivacyTag}นโยบายความเป็นส่วนตัว{endPrivacyTag}ของเรา หากคุณมีอายุต่ำกว่า 18 ปี พ่อแม่หรือผู้ปกครองของคุณต้องอนุญาตให้คุณสร้างบัญชีและยอมรับข้อกำหนดของเรา
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,ภาษาที่ไม่เหมาะสม
 Feature.Landing.Label.BrazilContentDescriptorViolence,ความรุนแรง
 Feature.Landing.Label.BrazilContentRatingLogoTitle,เหมาะสำหรับอายุ: 12 ปี
@@ -3757,6 +3762,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,เหมาะสำ�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,การซื้อในเกม (รวมไอเท็มแบบสุ่มด้วย)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,โต้ตอบกับผู้ใช้อื่น
 Feature.Landing.Label.InvitedBy,เชิญโดย {name}
+Feature.Landing.Label.PoweredBy,ดำเนินการโดย
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,เปิด
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,ช่วยให้ผู้ใช้ที่มีหมายเลขโทรศัพท์ของคุณเพิ่มคุณเป็นเพื่อนใน Roblox ได้

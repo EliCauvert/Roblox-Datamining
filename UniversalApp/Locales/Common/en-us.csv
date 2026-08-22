@@ -543,7 +543,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Optional
 Authentication.SignUp.Label.ParentEmailAddress,Parent's Email Address
 Authentication.SignUp.Label.PasswordError1,Is at least 8 characters long
 Authentication.SignUp.Label.PasswordError2,Does not match username
+Authentication.SignUp.Label.PasswordError2.V2,Doesn't match username
 Authentication.SignUp.Label.PasswordError3,Is not a simple password
+Authentication.SignUp.Label.PasswordError3.V2,Isn't a simple password
 Authentication.SignUp.Label.PasswordErrorLengthNew,Password should be between 8 and 200 characters long
 Authentication.SignUp.Label.PasswordErrorSimple,Password should not be too simple
 Authentication.SignUp.Label.PasswordPlaceholder,At least 8 characters
@@ -3778,6 +3780,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} left
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
 Feature.Item.Label.DeleteItemUndercase,Delete item
+Feature.Landing.Action.PlayNow,Play now
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"By continuing, you agree to our {startTermsTag}Terms{endTermsTag}, including arbitration, and acknowledge our {startPrivacyTag}Privacy Policy{endPrivacyTag}. If you’re under 18, your parent or guardian must permit your account and agree to our Terms."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Inappropriate Language
 Feature.Landing.Label.BrazilContentDescriptorViolence,Violence
 Feature.Landing.Label.BrazilContentRatingLogoTitle,ADVISORY RATING: 12 YEARS OLD
@@ -3785,6 +3790,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,ADVISORY RATING: 16 YE
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,In-Game Purchases (Includes Random Items)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Users Interact
 Feature.Landing.Label.InvitedBy,Invited by {name}
+Feature.Landing.Label.PoweredBy,Powered by
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Turn on
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Help people who have your phone number add you as a friend on Roblox

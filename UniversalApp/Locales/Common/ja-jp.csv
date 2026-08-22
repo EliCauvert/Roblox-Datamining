@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,任意
 Authentication.SignUp.Label.ParentEmailAddress,保護者のメールアドレス
 Authentication.SignUp.Label.PasswordError1,半角英字8文字以上
 Authentication.SignUp.Label.PasswordError2,ユーザーネームと同一ではないこと
+Authentication.SignUp.Label.PasswordError2.V2,ユーザーネームと一致するものは使用できません
 Authentication.SignUp.Label.PasswordError3,分かりやすいパスワードではないこと
+Authentication.SignUp.Label.PasswordError3.V2,推測されやすいパスワードは使用できません
 Authentication.SignUp.Label.PasswordErrorLengthNew,パスワードは8～200文字で入力してください
 Authentication.SignUp.Label.PasswordErrorSimple,パスワードは単純すぎないものにしてください。
 Authentication.SignUp.Label.PasswordPlaceholder,半角英数字で8文字以上
@@ -3766,6 +3768,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,残り{time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
+Feature.Landing.Action.PlayNow,今すぐプレイ
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,続行すると、仲裁条項を含む当社の{startTermsTag}利用規約{endTermsTag}に同意し、当社の{startPrivacyTag}プライバシーポリシー{endPrivacyTag}を確認したものとみなされます。18歳未満の場合は、保護者がアカウントの作成を許可し、当社の利用規約に同意する必要があります。
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,不適切な表現
 Feature.Landing.Label.BrazilContentDescriptorViolence,暴力
 Feature.Landing.Label.BrazilContentRatingLogoTitle,推奨レーティング：12歳
@@ -3773,6 +3778,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,推奨レーティン�
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,ゲーム内購入（ランダムアイテムを含む）
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,ユーザーが交流・接触
 Feature.Landing.Label.InvitedBy,招待者: {name}
+Feature.Landing.Label.PoweredBy,運営：
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,オンにする
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,あなたの電話番号を持っている人に、Roblox上で友達として追加してもらいやすくします

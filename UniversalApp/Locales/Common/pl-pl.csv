@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,Opcjonalne
 Authentication.SignUp.Label.ParentEmailAddress,Adres e-mail rodzica
 Authentication.SignUp.Label.PasswordError1,Zawiera co najmniej 8 znaków
 Authentication.SignUp.Label.PasswordError2,Nie jest zgodne z nazwą użytkownika
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,Nie jest prostym hasłem
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,Hasło powinno zawierać od 8 do 200 znaków
 Authentication.SignUp.Label.PasswordErrorSimple,Hasło nie powinno być zbyt proste
 Authentication.SignUp.Label.PasswordPlaceholder,Co najmniej 8 znaków
@@ -3767,6 +3769,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,pozostało {time}
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Czy na pewno chcesz trwale usunąć ten przedmiot ze swojego wyposażenia? Jeżeli zmienisz zdanie, trzeba będzie go ponownie zdobyć w projekcie."
 Feature.Item.Label.DeleteItemUndercase,Usuń przedmiot
+Feature.Landing.Action.PlayNow,Zagraj teraz
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,"Kontynuując, akceptujesz nasze {startTermsTag}Warunki{endTermsTag}, w tym klauzulę arbitrażową, oraz {startPrivacyTag}Zasady ochrony prywatności{endPrivacyTag}. Jeśli nie masz ukończonych 18 lat, Twój rodzic lub opiekun musi wyrazić zgodę na utworzenie Twojego konta i zaakceptować nasze Warunki."
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Nieodpowiedni język
 Feature.Landing.Label.BrazilContentDescriptorViolence,Przemoc
 Feature.Landing.Label.BrazilContentRatingLogoTitle,KLASYFIKACJA WIEKOWA: 12 LAT
@@ -3774,6 +3779,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,KLASYFIKACJA WIEKOWA: 
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Zakupy w grze (w tym przedmioty losowe)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Z interakcją użytkowników
 Feature.Landing.Label.InvitedBy,Osoba zapraszająca: {name}
+Feature.Landing.Label.PoweredBy,Obsługiwane przez
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Włącz
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"Ułatw osobom, które mają Twój numer telefonu, dodanie Cię do znajomych na Robloxie"

@@ -542,7 +542,9 @@ Authentication.SignUp.Label.OptionalGenderShort,İsteğe Bağlı
 Authentication.SignUp.Label.ParentEmailAddress,Ebeveynin E-posta Adresi
 Authentication.SignUp.Label.PasswordError1,En az 8 karakter uzunluğunda
 Authentication.SignUp.Label.PasswordError2,Kullanıcı adı ile eşleşmiyor
+Authentication.SignUp.Label.PasswordError2.V2,
 Authentication.SignUp.Label.PasswordError3,Basit bir şifre değil
+Authentication.SignUp.Label.PasswordError3.V2,
 Authentication.SignUp.Label.PasswordErrorLengthNew,Şifre 8 ila 200 karakter uzunluğunda olmalıdır
 Authentication.SignUp.Label.PasswordErrorSimple,Şifre çok basit olmamalı
 Authentication.SignUp.Label.PasswordPlaceholder,En az 8 karakter
@@ -3767,6 +3769,9 @@ Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular,
 Feature.InExperienceIntervention.Label.TimeLeft.Hours,{time} kaldı
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
+Feature.Landing.Action.PlayNow,Hemen oyna
+Feature.Landing.Action.SignInWithRoblox,
+Feature.Landing.Description.ContinuedTermsDisclaimer,Devam ederek tahkim dâhil olmak üzere {startTermsTag}Koşullarımızı{endTermsTag} kabul etmiş ve {startPrivacyTag}Gizlilik Politikamızı{endPrivacyTag} onaylamış olursun. 18 yaşından küçüksen ebeveyninin veya vasinin hesap açmana izin vermesi ve Koşullarımızı kabul etmesi gerekir.
 Feature.Landing.Label.BrazilContentDescriptorInappropriateLanguage,Uygunsuz Dil
 Feature.Landing.Label.BrazilContentDescriptorViolence,Şiddet
 Feature.Landing.Label.BrazilContentRatingLogoTitle,TAVSİYE EDİLEN YAŞ SINIRLAMASI: 12 YAŞ
@@ -3774,6 +3779,7 @@ Feature.Landing.Label.BrazilContentRatingLogoTitleSixteen,TAVSİYE EDİLEN YAŞ 
 Feature.Landing.Label.BrazilInteractiveElementDescriptorInGamePurchases,Oyun İçi Satın Alımlar (Rastgele öğeleri içerir)
 Feature.Landing.Label.BrazilInteractiveElementDescriptorUsersInteract,Kullanıcılar Etkileşimde
 Feature.Landing.Label.InvitedBy,Davet eden: {name}
+Feature.Landing.Label.PoweredBy,Destekleyen:
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Aç
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,Telefon numaranı bilen insanların seni Roblox'ta arkadaş olarak eklemesini kolaylaştır
