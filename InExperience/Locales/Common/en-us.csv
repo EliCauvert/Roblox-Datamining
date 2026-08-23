@@ -3269,7 +3269,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
 Feature.Moments.Action.GenerateText,Generate Text
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or violates guidelines
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or Violative
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,How to Capture
 Feature.Moments.Action.Join,
@@ -3722,7 +3722,7 @@ Feature.RobloxSubscription.Body.GenericError,We couldn't complete this right now
 Feature.RobloxSubscription.Body.UnsupportedPlatform,This subscription isn't available to purchase on this device.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age check and get 1 free week of Roblox Plus as our thank you. No payment method is needed to enjoy this free trial.
 Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% first 60 days, then 20% off items and avatars"
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
