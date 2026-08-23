@@ -446,6 +446,7 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Description.VPCRequestIarcEsrbE10": "Content is generally suitable for ages 10 and up. May contain more cartoon, fantasy or mild violence, mild language and/or minimal suggestive themes.",
     "Description.VPCRequestIarcEsrbT": "Content is generally suitable for ages 13 and up. May contain violence, suggestive themes, crude humor, minimal blood, simulated gambling and/or infrequent use of strong language.",
     "Description.VPCRequestIarcEsrbM": "Content is generally suitable for ages 17 and up. May contain intense violence, blood and gore, sexual content and/or strong language.",
-    "Description.VPCRequestIarcEsrbAo": "Content suitable only for adults ages 18 and up. May include prolonged scenes of intense violence, graphic sexual content and/or gambling with real currency."
+    "Description.VPCRequestIarcEsrbAo": "Content suitable only for adults ages 18 and up. May include prolonged scenes of intense violence, graphic sexual content and/or gambling with real currency.",
+    "Description.VPCRequestRobuxTransferLimits": "This will update the daily and monthly limits on the amount of Robux your child can transfer."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");
