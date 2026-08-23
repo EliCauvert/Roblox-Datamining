@@ -1349,6 +1349,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,مقبض X غير صالح.
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,رابط YouTube غير صالح.
 Feature.AddFriends.Action.FriendAdded,تمت إضافة صديق
 Feature.AddFriends.Action.IgnoreAll,تجاهل الكل
+Feature.AddFriends.Action.IgnoreAllAltCase,
 Feature.AddFriends.Action.IgnoreConnectionRequest,تجاهل طلب الاتصال
 Feature.AddFriends.Action.IgnoreFriendRequest,تجاهل طلب الصداقة
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,تجاهل طلب الصديق الموثوق به
@@ -1517,6 +1518,7 @@ Feature.AppealsPortal.Label.Type.LookText,اسم ووصف الأفاتار ال�
 Feature.AppealsPortal.Label.Type.Mesh,Mesh
 Feature.AppealsPortal.Label.Type.Model,Model
 Feature.AppealsPortal.Label.Type.Plugin,مكوَّن إضافي
+Feature.AppealsPortal.Label.Type.Post,منشور
 Feature.AppealsPortal.Label.Type.Screenshot,لقطة شاشة
 Feature.AppealsPortal.Label.Type.UserProfile,الملف الشخصي للمستخدم
 Feature.AppealsPortal.Label.Type.Video,فيديو
@@ -1546,6 +1548,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,mesh
 Feature.AppealsPortal.Label.TypeLower.Model,model
 Feature.AppealsPortal.Label.TypeLower.PlaceId,
 Feature.AppealsPortal.Label.TypeLower.Plugin,
+Feature.AppealsPortal.Label.TypeLower.Post,
 Feature.AppealsPortal.Label.TypeLower.Screenshot,
 Feature.AppealsPortal.Label.TypeLower.UserProfile,
 Feature.AppealsPortal.Label.TypeLower.Video,
@@ -2246,7 +2249,7 @@ Feature.Build.Label.PreviouslyPublished,تم النشر سابقًا
 Feature.Build.Label.Private,خاص
 Feature.Build.Label.Public,عامّ
 Feature.Build.Label.PubliclyUnavailable,غير متاحة علنًا
-Feature.Build.Label.Published,منشور
+Feature.Build.Label.Published,
 Feature.Build.Label.Purchased,تم الشراء
 Feature.Build.Label.Ready,جاهزة
 Feature.Build.Label.ResetsDaily,تتم إعادة التعيين يوميًا
@@ -2900,6 +2903,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,اضغط مطولًا للرد
 Feature.Chat.Label.Members,الأعضاء
 Feature.Chat.Label.MessageNotAvailable,هذه الرسالة غير متوفرة
 Feature.Chat.Label.MuteInGameChatToastNotifications,كتم إشعارات الدردشة داخل اللعبة
+Feature.Chat.Label.MuteInGamePartyToastNotifications,كتم إشعارات الفرقة داخل اللعبة
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,لم يتم العثور على أي رسائل دردشة
 Feature.Chat.Label.NoDescriptionYet,لا يوجد وصف حتى الآن.
@@ -4219,6 +4223,12 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,الخدمات
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,التبغ والعقاقير المُخدرة
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,الدمى والألعاب
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,الأسلحة والأسلحة النارية والمنتجات ذات الصلة
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,إرسال تفاصيل غير دقيقة لاستبيان حساسية المحتوى والامتثال
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,نشر محتوى غير مرغوب به

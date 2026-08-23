@@ -3815,7 +3815,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expand
 Feature.Moments.Action.GenerateText,Generate Text
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or violates guidelines
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or Violative
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,How to Capture
 Feature.Moments.Action.Join,
@@ -4592,7 +4592,7 @@ Feature.RobloxSubscription.Body.GenericError,We couldn't complete this right now
 Feature.RobloxSubscription.Body.UnsupportedPlatform,This subscription isn't available to purchase on this device.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Verify your age with an age check and get 1 free week of Roblox Plus as our thank you. No payment method is needed to enjoy this free trial.
 Feature.RobloxSubscription.Description.Benefit.Customize,Customize with profile frames and app themes
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% first 60 days, then 20% off items and avatars"
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% off first 60 days, then 20% off items and avatars"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,More fun for less Robux. Subscribe to Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Free private servers
@@ -4627,7 +4627,7 @@ Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS Privacy Policy
 Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS Terms of Service
 Feature.Schools.Body.EnterCode,UNiDAYS sent an email with your one-time code to {user_email}. Enter the code below to confirm your school.
 Feature.Schools.Body.UnidaysShare,Your email address won't be visible to others.
-Feature.Schools.Body.UnidaysTerms,"We partner with UNiDAYS to verify your school email address. By clicking ""Continue,"" you agree to UNiDAYS' terms of service and privacy policy."
+Feature.Schools.Body.UnidaysTerms,"We partner with UNiDAYS to verify your school email address. By clicking ""Continue,"" you agree to UNiDAYS' Terms of Service and Privacy Policy."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Once you graduate, you'll be in the {school} alumni group."
 Feature.Schools.Caption.RemovedOnGraduate,"Once you graduate, you'll be removed from {school}."
 Feature.Schools.Description.CantFindSchoolNotify,We'll notify you when your school is on Roblox.

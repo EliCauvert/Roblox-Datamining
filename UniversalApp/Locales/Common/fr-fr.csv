@@ -1369,6 +1369,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,Le gestionnaire X n'est pas va
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,L'URL YouTube n'est pas valide.
 Feature.AddFriends.Action.FriendAdded,Ami ajouté
 Feature.AddFriends.Action.IgnoreAll,Tout ignorer
+Feature.AddFriends.Action.IgnoreAllAltCase,
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignorer la demande de connexion
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorer la demande d'amitié
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorer la demande d'ajout aux amis de confiance
@@ -1537,6 +1538,7 @@ Feature.AppealsPortal.Label.Type.LookText,Nom et description de l'avatar partag�
 Feature.AppealsPortal.Label.Type.Mesh,Maillage
 Feature.AppealsPortal.Label.Type.Model,Modèle
 Feature.AppealsPortal.Label.Type.Plugin,Plug-in
+Feature.AppealsPortal.Label.Type.Post,Post
 Feature.AppealsPortal.Label.Type.Screenshot,Capture d'écran
 Feature.AppealsPortal.Label.Type.UserProfile,Profil de l'utilisateur
 Feature.AppealsPortal.Label.Type.Video,Vidéo
@@ -1566,6 +1568,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,maillage
 Feature.AppealsPortal.Label.TypeLower.Model,modèle
 Feature.AppealsPortal.Label.TypeLower.PlaceId,id. du lieu
 Feature.AppealsPortal.Label.TypeLower.Plugin,plug-in
+Feature.AppealsPortal.Label.TypeLower.Post,post
 Feature.AppealsPortal.Label.TypeLower.Screenshot,capture d'écran
 Feature.AppealsPortal.Label.TypeLower.UserProfile,profil de l'utilisateur
 Feature.AppealsPortal.Label.TypeLower.Video,vidéo
@@ -1659,15 +1662,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,D'accord
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publier
+Feature.Avatar.BackgroundGeneration.Action.Upload,Importer
 Feature.Avatar.BackgroundGeneration.Action.View,Voir
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Crée des arrière-plans avec Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Ta création est prête à l'emploi.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Cet arrière-plan a été généré avec l'IA. En le publiant, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire et les items publiés ne pourront plus être modifiés."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Cet arrière-plan a été généré avec l'IA. En l'important, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire. Une fois importés, les items ne peuvent plus être modifiés."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Débloque des arrière-plans exclusifs gratuits avec Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,L'item n'est pas conforme aux Normes de la communauté
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Cette invite ne respecte pas nos directives. Rédiges-en une autre.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Cet arrière-plan n'est pas conforme aux Normes de la communauté Roblox et n'a donc pas été ajouté à ton inventaire. Essaie d'en générer un nouveau.
 Feature.Avatar.BackgroundGeneration.Error.System,Une erreur s'est produite lors de la génération de ton arrière-plan. Réessaie.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Description
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivité Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Nom
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Décris ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Génération de ton arrière-plan…
@@ -1675,6 +1683,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Préparation de ton arrièr
 Feature.Avatar.BackgroundGeneration.Title,Créer un arrière-plan
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publier dans l'inventaire
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Importer dans l'inventaire
 Feature.Avatar.Backgrounds.Title,Arrière-plans
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,L'ajustement n'est pas disponible pour ce style de corps.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Couleurs du corps d'origine par défaut
@@ -2482,7 +2492,7 @@ Feature.Catalog.Action.LoadMore,Télécharger davantage
 Feature.Catalog.Action.Next,
 Feature.Catalog.Action.OpenDetails,Ouvrir les détails
 Feature.Catalog.Action.Owned,{count} possédés
-Feature.Catalog.Action.Post,Post
+Feature.Catalog.Action.Post,
 Feature.Catalog.Action.PreviewAndPost,Aperçu et publication
 Feature.Catalog.Action.Remove,
 Feature.Catalog.Action.RemoveFavorite,
@@ -2913,6 +2923,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Appuyez longuement pour répondre
 Feature.Chat.Label.Members,Membres
 Feature.Chat.Label.MessageNotAvailable,Ce message n'est pas disponible
 Feature.Chat.Label.MuteInGameChatToastNotifications,Mettre en sourdine les notifications de chat pendant le jeu
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Mettre en sourdine les notifications de Party dans le jeu
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Aucun chat
 Feature.Chat.Label.NoDescriptionYet,Aucune description pour le moment.
@@ -4232,6 +4243,12 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,Services
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,Tabac et enthéogènes
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Jouets et jeux
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Armes, armes à feu et produits associés"
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,Réponses inexactes au questionnaire de maturité et de conformité
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,Publication de spam
