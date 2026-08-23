@@ -59,7 +59,7 @@ return {
 		if not var8.keep_danger_placeholders then
 			local t_2 = {}
 			local var14 = 0
-			-- [0.000s] <RUNTIME-ERROR> : Error block 44 analysis at pc 0 (34)
+			-- [0.001s] <RUNTIME-ERROR> : Error block 44 analysis at pc 0 (34)
 		end
 		local var16 = 0
 		local var17 = elementNodeModule:new(var16, _tostring(var9))
