@@ -1883,6 +1883,8 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Action.Rename": "Rename",
     "Description.SecurityKey.RenameKey": "Name your key descriptively so that you will know which one it is.",
     "Heading.IARCRatingSetting": "Content maturity setting",
-    "Label.RobuxTransferLimits": "robux transfer limits"
+    "Label.RobuxTransferLimits": "robux transfer limits",
+    "Description.ExperienceChatOnlyDisclaimer": "This setting only applies to experience chat, not to chat features added by the creator of a game",
+    "Description.DirectChatOnlyDisclaimer": "This setting only applies to direct chat, not to chat features added by the creator of a game"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");
