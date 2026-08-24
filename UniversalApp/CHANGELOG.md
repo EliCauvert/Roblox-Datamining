@@ -1,3 +1,9 @@
+## 12555 - 2026-08-24 21:57
+
+### New files
+- `UniversalApp/PatchRoot/DataModelInstances/CorePackages/LuauForgeChunks/bundled.luau`
+
+
 ## 12555 - 2026-08-24 21:25
 
 ### `UniversalApp/PatchRoot/DataModelInstances/CorePackages/LuauForgeChunks/deferred.luau`
