@@ -13,16 +13,16 @@ return {
 	variant = "primary",
 	fieldLabel = "",
 	componentName = "SubmitButton",
-	getIsVisible = function(_) --[[ line: 14 ]]
+	getIsVisible = function(_)
 		return true
 	end,
-	getIconSrc = function(_) --[[ line: 18 ]]
+	getIconSrc = function(_)
 		return ""
 	end,
-	getButtonLabel = function(_) --[[ line: 21 ]]
+	getButtonLabel = function(_)
 		return "SubmitButton"
 	end,
-	onClick = function(p0, _, p1) --[[ line: 24 ]]
+	onClick = function(p0, _, p1)
 		-- upvalues: playersService (ref), tnSIXPWrapperModule (ref), abuseReportBuilderModule (ref), reportAbuseAnalyticsModule (ref), constantsModule (ref), getToastMessageFromAbuseReasonModule (ref), marketplaceService (ref)
 		local abuseReason = p0.abuseReason
 		
@@ -43,16 +43,23 @@ return {
 				
 				return
 			end
-			spawn(function() --[[ line: 49 ]]
+			spawn(function()
 				-- upvalues: marketplaceService (copy), p0 (ref), playersService (copy), abuseReason (ref)
 				local var8 = tostring(game.PlaceId)
 				local var9 = "N/A"
 				local var10 = "N/A"
-				pcall(function() --[[ line: 51 ]]
+				pcall(function()
 					-- upvalues: marketplaceService (copy), var9 (write), var10 (write)
-					local placeIdProductInfoAsync = marketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
-					var9 = placeIdProductInfoAsync.Name
-					var10 = placeIdProductInfoAsync.Description
+					if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
+						local placeIdProductInfoAsync = marketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
+						var9 = placeIdProductInfoAsync.Name
+						var10 = placeIdProductInfoAsync.Description
+						
+						return
+					end
+					local placeIdProductInfo = marketplaceService:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
+					var9 = placeIdProductInfo.Name
+					var10 = placeIdProductInfo.Description
 				end)
 				playersService:ReportAbuse(nil, abuseReason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p0.comment, var9, var8, var10))
 			end)

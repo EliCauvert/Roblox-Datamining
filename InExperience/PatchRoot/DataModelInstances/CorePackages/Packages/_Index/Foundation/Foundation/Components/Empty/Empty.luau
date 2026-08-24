@@ -1,7 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
+local reactModule = require(foundation.Parent.React)
 local buttonModule = require(foundation.Components.Button)
 local iconModule = require(foundation.Components.Icon)
 local iconSizeModule = require(foundation.Enums.IconSize)
@@ -20,13 +18,13 @@ local t = {
 	},
 	text = translatorModule:FormatByKey("CommonUI.Controls.NoResultsFound"),
 	button = {
+		icon = "icons/common/refresh",
 		onActivated = nil,
-		icon = icon.TwoArrowsSpinClockwise,
 		text = translatorModule:FormatByKey("CommonUI.Controls.Action.Refresh")
 	}
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p0, p1) --[[ line: 49 | named "Empty" ]]
+return reactModule.memo(reactModule.forwardRef(function(p0, p1)
 	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), textModule (ref), buttonModule (ref)
 	local var12 = withDefaultsModule(p0, t)
 	

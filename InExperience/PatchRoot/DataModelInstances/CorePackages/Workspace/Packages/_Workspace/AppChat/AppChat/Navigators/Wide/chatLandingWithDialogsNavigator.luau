@@ -23,7 +23,6 @@ local learnMorePartialModalScreenModule = require(chatConversation.PartialModal.
 local squadVoiceAbuseReportScreenModule = require(parent.Squads.SquadVoiceAbuseReportScreen)
 local conversationOverlayScreenModule = require(chatConversation.PartialModal.ConversationOverlayScreen)
 local trustedConnectionsUpsellScreenModule = require(appChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellScreen)
-local trustedFriendsUpsellScreenModule = require(appChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellScreen)
 local groupOSADialogScreenModule = require(appChat.Components.OSA.GroupOSADialogScreen)
 local makeDialogScreenTelemetryWrapperModule = require(appChat.Navigators.makeDialogScreenTelemetryWrapper)
 local isolatedAutoFocusNavigationModule = require(appChat.Navigators.isolatedAutoFocusNavigation)
@@ -32,12 +31,11 @@ local getFFlagEnableCrossExpVoice = sharedFlagsModule.GetFFlagEnableCrossExpVoic
 local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
 local fFlagEnablePartyVoiceChangersInLua = sharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
 local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local fFlagAppChatConsolidateTrustedFriendsModalModule = require(appChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
 local chatLandingStackNavigatorModule = require(script.Parent.chatLandingStackNavigator)
 local chatLandingStackNavigatorConnector = roactModule.Component:extend("ChatLandingStackNavigatorConnector")
 chatLandingStackNavigatorConnector.router = chatLandingStackNavigatorModule.router
 
-function chatLandingStackNavigatorConnector.render(p0) --[[ line: 50 ]]
+function chatLandingStackNavigatorConnector.render(p0)
 	-- upvalues: roactModule (ref), chatLandingStackNavigatorModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -137,10 +135,10 @@ table.insert(list, {
 	}
 })
 
-if fFlagAppChatEnableDoubleOptIn or fFlagAppChatConsolidateTrustedFriendsModalModule then
+if fFlagAppChatEnableDoubleOptIn then
 	table.insert(list, {
 		[enumScreensModule.TrustedConnectionsUpsell] = {
-			screen = if fFlagAppChatConsolidateTrustedFriendsModalModule then isolatedAutoFocusNavigationModule(trustedFriendsUpsellScreenModule, focusNavigableSurfaceIdentifierEnum.PopUp) else trustedConnectionsUpsellScreenModule,
+			screen = trustedConnectionsUpsellScreenModule,
 			navigationOptions = {
 				transparent = true,
 				overlayTransparency = 0.5,

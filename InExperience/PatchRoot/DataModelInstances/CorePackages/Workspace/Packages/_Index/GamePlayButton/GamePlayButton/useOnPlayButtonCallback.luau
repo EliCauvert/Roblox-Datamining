@@ -56,253 +56,259 @@ local fFlagEnablePrivatePartyStartJoin = require(parent.SharedFlags).FFlagEnable
 local fFlagLuaAppPlayButtonLoadingDurationTelemetry = require(parent.SharedFlags).FFlagLuaAppPlayButtonLoadingDurationTelemetry
 local fFlagLuaAppLaunchWhenLoadingEdp = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingEdp
 local fFlagLuaAppLaunchWhenLoadingForce = require(parent.SharedFlags).FFlagLuaAppLaunchWhenLoadingForce
+local fFlagLuaAppDemoModePlayButton = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton
 local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
 
-return function(p0, p1, p2, _, p3, p4, p5, p6) --[[ line: 79 ]]
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), appEventIngestService (ref), useDispatch (ref), useSelector (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagMigrateGameIconsToStore (ref), useGameIconSelector (ref), useRouteName (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), squadExternalContractContext (ref), getFFlagLuaAppEnableVirtualEventPlaceId (ref), usePlayButtonLaunchGameModule (ref), fFlagLuaAppPlayableUxTreatment (ref), usePlayButtonLaunchWithUxTreatmentModule (ref), usePlayButtonLaunchAfterSeventeenPlusUpsellModule (ref), useAgeVerificationOverlayCallbackModule (ref), roactNetworking (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), fFlagCheckForUpdatePromise (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), checkForUpdate (ref), joinGamePlayButton (ref), playButtonReferralSourceModule (ref), gamePlayButtonShareLinkAnalyticsModule (ref), playButtonStatesModule (ref), closeCentralOverlay (ref), fetchGamePlayabilityAndProductInfo (ref), openCentralOverlayForPurchaseGameModule (ref), fFlagShipUnifiedPurchaseFlowToPaidAccess (ref), openCentralOverlayForUnifiedPurchasePromptModule (ref), productPurchaseSurface (ref), getIsUserEligibleForUnifiedPurchaseFlow (ref), apiPostPreparePurchaseModule (ref), unlockPlayIntent (ref), invalidPlayIntent (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), createExperienceInvite (ref), fFlagEnableSquadRegroupExperimentation (ref), squadExperienceInviteSource (ref), fFlagEnablePrivatePartyStartJoin (ref), squadExperienceInviteType (ref), includeWaitingForPartyInCondition (ref)
+return function(p0, p1, p2, _, p3, p4, p5, p6)
+	-- upvalues: useRoactService (ref), roactAnalytics (ref), appUpdateService (ref), appEventIngestService (ref), useDispatch (ref), useSelector (ref), useGameInfosSelector (ref), useGameProductInfoSelector (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagMigrateGameIconsToStore (ref), gameHydrationReactModule (ref), useGameIconSelector (ref), useRouteName (ref), getFFlagIsSquadEnabled (ref), reactModule (ref), squadExternalContractContext (ref), getFFlagLuaAppEnableVirtualEventPlaceId (ref), usePlayButtonLaunchGameModule (ref), fFlagLuaAppPlayableUxTreatment (ref), usePlayButtonLaunchWithUxTreatmentModule (ref), usePlayButtonLaunchAfterSeventeenPlusUpsellModule (ref), useAgeVerificationOverlayCallbackModule (ref), roactNetworking (ref), fFlagLuaAppLaunchWhenLoadingForce (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagLuaAppDemoModePlayButton (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), autoUpgradeEngineFeatureOnlyEngineFeature (ref), fFlagCheckForUpdatePromise (ref), handleUpdate (ref), canPerformBinaryUpdateEnabledEngineFeature (ref), checkForUpdate (ref), joinGamePlayButton (ref), playButtonReferralSourceModule (ref), gamePlayButtonShareLinkAnalyticsModule (ref), playButtonStatesModule (ref), closeCentralOverlay (ref), fetchGamePlayabilityAndProductInfo (ref), openCentralOverlayForPurchaseGameModule (ref), fFlagShipUnifiedPurchaseFlowToPaidAccess (ref), openCentralOverlayForUnifiedPurchasePromptModule (ref), productPurchaseSurface (ref), getIsUserEligibleForUnifiedPurchaseFlow (ref), apiPostPreparePurchaseModule (ref), unlockPlayIntent (ref), invalidPlayIntent (ref), fFlagLuaAppPlayButtonLoadingDurationTelemetry (ref), createExperienceInvite (ref), fFlagEnableSquadRegroupExperimentation (ref), squadExperienceInviteSource (ref), fFlagEnablePrivatePartyStartJoin (ref), squadExperienceInviteType (ref), includeWaitingForPartyInCondition (ref)
 	local var20 = useRoactService(roactAnalytics)
 	local var21 = useRoactService(appUpdateService)
 	local var22 = useRoactService(appEventIngestService)
 	local var23 = useDispatch()
-	local var24 = useSelector(function(p7) --[[ line: 94 ]]
+	local var24 = useSelector(function(p7)
 		-- upvalues: p0 (ref)
 		return p7.GameDetails[p0]
 	end)
-	local var25 = nil
-	local var26 = nil
-	
-	if fFlagMigrateGameInfoToStore then
-		var26 = gameHydrationReactModule.useGameInfo(p0)
-	else
-		var25 = useGameInfosSelector(p0)
-	end
-	local var27 = useGameProductInfoSelector(p0)
-	local var28 = useSelector(function(p8) --[[ line: 105 ]]
+	local var25 = useGameInfosSelector(p0)
+	local var26 = useGameProductInfoSelector(p0)
+	local var27 = useSelector(function(p8)
 		-- upvalues: p0 (ref)
 		return p8.PlayabilityStatus[p0]
 	end)
+	local var28 = nil
 	local var29 = nil
-	local var30 = nil
 	
 	if fFlagEnableUnifiedProductPurchaseFlow then
 		if fFlagMigrateGameIconsToStore then
-			var30 = gameHydrationReactModule.useGameIcon(p0)
+			var29 = gameHydrationReactModule.useGameIcon(p0)
 		else
-			var29 = useGameIconSelector(p0)
+			var28 = useGameIconSelector(p0)
 		end
 	end
-	local rootPlaceId
-	local var31 = useRouteName()
-	local var32 = if getFFlagIsSquadEnabled() then reactModule.useContext(squadExternalContractContext) else nil
-	
-	if var24 then
-		rootPlaceId = var24.rootPlaceId
-		
-		if not rootPlaceId then
-			rootPlaceId = if fFlagMigrateGameInfoToStore then var26 and var26.rootPlaceId else var25 and var25.placeId
-			rootPlaceId = rootPlaceId or nil
+	local var30 = useRouteName()
+	local var31 = if getFFlagIsSquadEnabled() then reactModule.useContext(squadExternalContractContext) else nil
+	local var32 = if var24 then var24.rootPlaceId elseif var25 then var25.placeId else nil
+	p5 = if getFFlagLuaAppEnableVirtualEventPlaceId() and p5 ~= "0" then p5 or var32 else var32
+	local var33 = if var24 then var24.name elseif var25 then var25.name else nil
+	local var34 = usePlayButtonLaunchGameModule(p0, p5, var32, p1, p2, p3, p4)
+	local var35 = usePlayButtonLaunchAfterSeventeenPlusUpsellModule(var27, p0, if fFlagLuaAppPlayableUxTreatment then if fFlagLuaAppPlayableUxTreatment then usePlayButtonLaunchWithUxTreatmentModule(var27, p0, var34, var30) else nil else var34, var30)
+	local var36 = useAgeVerificationOverlayCallbackModule(p0, var34, var35)
+	local var37 = useRoactService(roactNetworking)
+	local fFlagLuaAppLaunchWhenLoadingForce_1 = fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp and p6 == true
+	local var39 = if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp or fFlagLuaAppDemoModePlayButton then reactModule.useCallback(function(p9, p10)
+		-- upvalues: var36 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), var35 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), fFlagCheckForUpdatePromise (copy), handleUpdate (copy), var23 (ref), var21 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var20 (ref), p2 (ref), checkForUpdate (copy)
+		local _ = nil
+		local var40 = if game:GetEngineFeature("VoiceChatSupported") then function()
+			-- upvalues: var36 (copy), p9 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p10 (ref)
+			var36(p9, if fFlagLuaAppDemoModePlayButtonTelemetry then p10 else nil)
+		end else function()
+			-- upvalues: var35 (copy), p9 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p10 (ref)
+			var35(p9, if fFlagLuaAppDemoModePlayButtonTelemetry then p10 else nil)
 		end
-		local name
-		p5 = if getFFlagLuaAppEnableVirtualEventPlaceId() and p5 ~= "0" then p5 or rootPlaceId else rootPlaceId
 		
-		if var24 then
-			name = var24.name
+		if not autoUpgradeEngineFeatureOnlyEngineFeature then
+			var40()
 			
-			if not name then
-				name = if fFlagMigrateGameInfoToStore then var26 and var26.name else var25 and var25.name
-				name = name or nil
+			return
+		elseif fFlagCheckForUpdatePromise then
+			handleUpdate(var23, var21, canPerformBinaryUpdateEnabledEngineFeature, var20, p2, var40)
+			
+			return
+		end
+		var23(checkForUpdate(var21, canPerformBinaryUpdateEnabledEngineFeature, var20, var40, { ctx = p2 }))
+	end, {
+		var20, var21, canPerformBinaryUpdateEnabledEngineFeature, p2, var36, var35,
+		var23
+	}) else nil
+	
+	return reactModule.useCallback(function(p11, p12, p13)
+		-- upvalues: joinGamePlayButton (copy), var20 (ref), p1 (ref), var32 (ref), p2 (ref), playButtonReferralSourceModule (copy), gamePlayButtonShareLinkAnalyticsModule (copy), getFFlagLuaAppEnableVirtualEventPlaceId (copy), p5 (write), p0 (ref), playButtonStatesModule (copy), fFlagLuaAppLaunchWhenLoadingForce (copy), fFlagLuaAppLaunchWhenLoadingEdp (copy), fFlagLuaAppDemoModePlayButton (copy), var39 (ref), var36 (ref), var35 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), fFlagCheckForUpdatePromise (copy), handleUpdate (copy), var23 (ref), var21 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), checkForUpdate (copy), var26 (ref), fFlagEnableUnifiedProductPurchaseFlow (copy), closeCentralOverlay (copy), fetchGamePlayabilityAndProductInfo (copy), var37 (ref), openCentralOverlayForPurchaseGameModule (copy), var33 (ref), var30 (ref), fFlagShipUnifiedPurchaseFlowToPaidAccess (copy), openCentralOverlayForUnifiedPurchasePromptModule (copy), fFlagMigrateGameIconsToStore (copy), var29 (write), var28 (write), productPurchaseSurface (copy), getIsUserEligibleForUnifiedPurchaseFlow (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy), apiPostPreparePurchaseModule (copy), unlockPlayIntent (copy), var22 (ref), var27 (ref), invalidPlayIntent (copy), fFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), fFlagLuaAppLaunchWhenLoadingForce_1 (ref), getFFlagIsSquadEnabled (copy), createExperienceInvite (copy), var31 (ref), fFlagEnableSquadRegroupExperimentation (copy), squadExperienceInviteSource (copy), fFlagEnablePrivatePartyStartJoin (copy), squadExperienceInviteType (copy), includeWaitingForPartyInCondition (copy)
+		joinGamePlayButton(var20.InfluxDb, "playButtonClicked", {
+			isUniversalApp = true,
+			referralSource = p1,
+			placeId = var32,
+			buttonState = p11 or "Invalid",
+			ctx = p2
+		})
+		
+		if p1 == playButtonReferralSourceModule.ExperienceDetailsLink then
+			gamePlayButtonShareLinkAnalyticsModule(var20, {
+				placeId = if getFFlagLuaAppEnableVirtualEventPlaceId() then p5 else var32,
+				playButtonState = p11,
+				universeId = p0
+			})
+		end
+		if p11 == playButtonStatesModule.Playable or p11 == playButtonStatesModule.ActionNeeded then
+			if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp or fFlagLuaAppDemoModePlayButton then
+				var39(p12)
+				
+				return
 			end
-			local var33 = usePlayButtonLaunchGameModule(p0, p5, rootPlaceId, p1, p2, p3, p4)
-			local var34 = usePlayButtonLaunchAfterSeventeenPlusUpsellModule(var28, p0, if fFlagLuaAppPlayableUxTreatment then if fFlagLuaAppPlayableUxTreatment then usePlayButtonLaunchWithUxTreatmentModule(var28, p0, var33, var31) else nil else var33, var31)
-			local var35 = useAgeVerificationOverlayCallbackModule(p0, var33, var34)
-			local var36 = useRoactService(roactNetworking)
-			local fFlagLuaAppLaunchWhenLoadingForce_1 = fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp and p6 == true
-			local var38 = reactModule.useCallback(function(p9, p10) --[[ line: 173 ]]
-				-- upvalues: var35 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), var34 (ref), autoUpgradeEngineFeatureOnlyEngineFeature (copy), fFlagCheckForUpdatePromise (copy), handleUpdate (copy), var23 (ref), var21 (ref), canPerformBinaryUpdateEnabledEngineFeature (copy), var20 (ref), p2 (ref), checkForUpdate (copy)
-				local _ = nil
-				local var39 = if game:GetEngineFeature("VoiceChatSupported") then function() --[[ line: 176 ]]
-					-- upvalues: var35 (copy), p9 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p10 (ref)
-					var35(p9, if fFlagLuaAppDemoModePlayButtonTelemetry then p10 else nil)
-				end else function() --[[ line: 183 ]]
-					-- upvalues: var34 (copy), p9 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy), p10 (ref)
-					var34(p9, if fFlagLuaAppDemoModePlayButtonTelemetry then p10 else nil)
+			local _ = nil
+			local var41 = if game:GetEngineFeature("VoiceChatSupported") then function()
+				-- upvalues: var36 (copy), p12 (ref)
+				var36(p12)
+			end else function()
+				-- upvalues: var35 (copy), p12 (ref)
+				var35(p12)
+			end
+			
+			if autoUpgradeEngineFeatureOnlyEngineFeature then
+				if fFlagCheckForUpdatePromise then
+					handleUpdate(var23, var21, canPerformBinaryUpdateEnabledEngineFeature, var20, p2, var41)
+					
+					return
+				end
+				var23(checkForUpdate(var21, canPerformBinaryUpdateEnabledEngineFeature, var20, var41, { ctx = p2 }))
+				
+				return
+			else
+				var41()
+				
+				return
+			end
+		elseif p11 == playButtonStatesModule.PaidAccess then
+			local var42 = if var26 then var26.price else nil
+			local var43 = if var26 then var26.productId else nil
+			local var44 = if var26 then var26.sellerId else nil
+			
+			if fFlagEnableUnifiedProductPurchaseFlow then
+				local var45 = if var26 then var26.universeId else nil
+				
+				local function onFlowComplete()
+					-- upvalues: var23 (copy), closeCentralOverlay (copy)
+					var23(closeCentralOverlay())
 				end
 				
-				if not autoUpgradeEngineFeatureOnlyEngineFeature then
-					var39()
-					
-					return
-				elseif fFlagCheckForUpdatePromise then
-					handleUpdate(var23, var21, canPerformBinaryUpdateEnabledEngineFeature, var20, p2, var39)
+				local function onPurchaseSuccess()
+					-- upvalues: var23 (copy), fetchGamePlayabilityAndProductInfo (copy), var37 (copy), var45 (ref)
+					var23(fetchGamePlayabilityAndProductInfo.Fetch(var37, var45))
+				end
+				
+				local function _()
+					-- upvalues: var23 (copy), openCentralOverlayForPurchaseGameModule (copy), var45 (ref), var33 (copy), var42 (ref), var43 (ref), var44 (ref), var30 (copy)
+					var23(openCentralOverlayForPurchaseGameModule(var45, var33, var42, var43, var44, { var30 }))
+				end
+				
+				if fFlagShipUnifiedPurchaseFlowToPaidAccess then
+					var23(openCentralOverlayForUnifiedPurchasePromptModule({
+						productPayload = {
+							kind = "Experience",
+							universeId = var45,
+							experienceName = var33,
+							experienceIconUrl = if fFlagMigrateGameIconsToStore then var29 elseif var28 then var28.url else nil
+						},
+						purchaseCallbacks = {
+							onFlowComplete = onFlowComplete,
+							onPurchaseSuccess = onPurchaseSuccess
+						},
+						purchaseAnalyticsMetadata = { surface = productPurchaseSurface.PaidAccess }
+					}))
 					
 					return
 				end
-				var23(checkForUpdate(var21, canPerformBinaryUpdateEnabledEngineFeature, var20, var39, { ctx = p2 }))
-			end, {
-				var20, var21, canPerformBinaryUpdateEnabledEngineFeature, p2, var35, var34,
-				var23
-			})
+				getIsUserEligibleForUnifiedPurchaseFlow(var37):andThen(function(p14)
+					-- upvalues: var23 (copy), openCentralOverlayForUnifiedPurchasePromptModule (copy), var45 (ref), var33 (copy), fFlagMigrateGameIconsToStore (copy), var29 (copy), var28 (copy), onFlowComplete (ref), onPurchaseSuccess (ref), productPurchaseSurface (copy), openCentralOverlayForPurchaseGameModule (copy), var42 (ref), var43 (ref), var44 (ref), var30 (copy)
+					if p14 then
+						var23(openCentralOverlayForUnifiedPurchasePromptModule({
+							productPayload = {
+								kind = "Experience",
+								universeId = var45,
+								experienceName = var33,
+								experienceIconUrl = if fFlagMigrateGameIconsToStore then var29 elseif var28 then var28.url else nil
+							},
+							purchaseCallbacks = {
+								onFlowComplete = onFlowComplete,
+								onPurchaseSuccess = onPurchaseSuccess
+							},
+							purchaseAnalyticsMetadata = { surface = productPurchaseSurface.PaidAccess }
+						}))
+						
+						return
+					end
+					var23(openCentralOverlayForPurchaseGameModule(var45, var33, var42, var43, var44, { var30 }))
+				end):catch(function(_)
+					-- upvalues: var23 (copy), openCentralOverlayForPurchaseGameModule (copy), var45 (ref), var33 (copy), var42 (ref), var43 (ref), var44 (ref), var30 (copy)
+					var23(openCentralOverlayForPurchaseGameModule(var45, var33, var42, var43, var44, { var30 }))
+				end)
+				
+				return
+			else
+				var23(openCentralOverlayForPurchaseGameModule(p0, var33, var42, var43, var44, { var30 }))
+				
+				return
+			end
+		elseif fFlagLuaAppDemoModePlayButton and p11 == playButtonStatesModule.DemoMode then
+			if fFlagLuaAppDemoModePlayButtonTelemetry then
+				var39(p12, "DemoPlayButtonClick")
+				
+				return
+			end
+			var39(p12)
 			
-			return reactModule.useCallback(function(p11, p12, p13) --[[ line: 220 ]]
-				-- upvalues: joinGamePlayButton (copy), var20 (ref), p1 (ref), rootPlaceId (ref), p2 (ref), playButtonReferralSourceModule (copy), gamePlayButtonShareLinkAnalyticsModule (copy), getFFlagLuaAppEnableVirtualEventPlaceId (copy), p5 (write), p0 (ref), playButtonStatesModule (copy), var38 (ref), var27 (ref), fFlagEnableUnifiedProductPurchaseFlow (copy), var23 (ref), closeCentralOverlay (copy), fetchGamePlayabilityAndProductInfo (copy), var36 (ref), openCentralOverlayForPurchaseGameModule (copy), name (ref), var31 (ref), fFlagShipUnifiedPurchaseFlowToPaidAccess (copy), openCentralOverlayForUnifiedPurchasePromptModule (copy), fFlagMigrateGameIconsToStore (copy), var30 (write), var29 (write), productPurchaseSurface (copy), getIsUserEligibleForUnifiedPurchaseFlow (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy), apiPostPreparePurchaseModule (copy), unlockPlayIntent (copy), var22 (ref), var28 (ref), invalidPlayIntent (copy), fFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), fFlagLuaAppLaunchWhenLoadingForce_1 (ref), getFFlagIsSquadEnabled (copy), createExperienceInvite (copy), var32 (ref), fFlagEnableSquadRegroupExperimentation (copy), squadExperienceInviteSource (copy), fFlagEnablePrivatePartyStartJoin (copy), squadExperienceInviteType (copy), includeWaitingForPartyInCondition (copy)
-				joinGamePlayButton(var20.InfluxDb, "playButtonClicked", {
-					isUniversalApp = true,
-					referralSource = p1,
-					placeId = rootPlaceId,
-					buttonState = p11 or "Invalid",
-					ctx = p2
+			return
+		elseif p11 == playButtonStatesModule.FiatPaidAccess then
+			if var32 and var26 and var26.fiatBasePriceId then
+				var23(apiPostPreparePurchaseModule.Fetch(var37, var32, p0, var26.fiatBasePriceId))
+				unlockPlayIntent(var22, {
+					upsellName = "FiatPurchase",
+					universeId = p0,
+					playabilityStatus = if var27 then var27.playabilityStatus else nil,
+					pageName = var30
 				})
 				
-				if p1 == playButtonReferralSourceModule.ExperienceDetailsLink then
-					gamePlayButtonShareLinkAnalyticsModule(var20, {
-						placeId = if getFFlagLuaAppEnableVirtualEventPlaceId() then p5 else rootPlaceId,
-						playButtonState = p11,
-						universeId = p0
-					})
-				end
-				if p11 == playButtonStatesModule.Playable or p11 == playButtonStatesModule.ActionNeeded then
-					var38(p12)
-					
-					return
-				elseif p11 == playButtonStatesModule.PaidAccess then
-					local var40 = if var27 then var27.price else nil
-					local var41 = if var27 then var27.productId else nil
-					local var42 = if var27 then var27.sellerId else nil
-					
-					if fFlagEnableUnifiedProductPurchaseFlow then
-						local var43 = if var27 then var27.universeId else nil
-						
-						local function onFlowComplete() --[[ line: 245 ]]
-							-- upvalues: var23 (copy), closeCentralOverlay (copy)
-							var23(closeCentralOverlay())
-						end
-						
-						local function onPurchaseSuccess() --[[ line: 248 ]]
-							-- upvalues: var23 (copy), fetchGamePlayabilityAndProductInfo (copy), var36 (copy), var43 (ref)
-							var23(fetchGamePlayabilityAndProductInfo.Fetch(var36, var43))
-						end
-						
-						local function _() --[[ line: 251 | named "initiateLegacyPurchaseFlow" ]]
-							-- upvalues: var23 (copy), openCentralOverlayForPurchaseGameModule (copy), var43 (ref), name (copy), var40 (ref), var41 (ref), var42 (ref), var31 (copy)
-							var23(openCentralOverlayForPurchaseGameModule(var43, name, var40, var41, var42, { var31 }))
-						end
-						
-						if fFlagShipUnifiedPurchaseFlowToPaidAccess then
-							var23(openCentralOverlayForUnifiedPurchasePromptModule({
-								productPayload = {
-									kind = "Experience",
-									universeId = var43,
-									experienceName = name,
-									experienceIconUrl = if fFlagMigrateGameIconsToStore then var30 elseif var29 then var29.url else nil
-								},
-								purchaseCallbacks = {
-									onFlowComplete = onFlowComplete,
-									onPurchaseSuccess = onPurchaseSuccess
-								},
-								purchaseAnalyticsMetadata = { surface = productPurchaseSurface.PaidAccess }
-							}))
-							
-							return
-						end
-						getIsUserEligibleForUnifiedPurchaseFlow(var36):andThen(function(p14) --[[ line: 284 ]]
-							-- upvalues: var23 (copy), openCentralOverlayForUnifiedPurchasePromptModule (copy), var43 (ref), name (copy), fFlagMigrateGameIconsToStore (copy), var30 (copy), var29 (copy), onFlowComplete (ref), onPurchaseSuccess (ref), productPurchaseSurface (copy), openCentralOverlayForPurchaseGameModule (copy), var40 (ref), var41 (ref), var42 (ref), var31 (copy)
-							if p14 then
-								var23(openCentralOverlayForUnifiedPurchasePromptModule({
-									productPayload = {
-										kind = "Experience",
-										universeId = var43,
-										experienceName = name,
-										experienceIconUrl = if fFlagMigrateGameIconsToStore then var30 elseif var29 then var29.url else nil
-									},
-									purchaseCallbacks = {
-										onFlowComplete = onFlowComplete,
-										onPurchaseSuccess = onPurchaseSuccess
-									},
-									purchaseAnalyticsMetadata = { surface = productPurchaseSurface.PaidAccess }
-								}))
-								
-								return
-							end
-							var23(openCentralOverlayForPurchaseGameModule(var43, name, var40, var41, var42, { var31 }))
-						end):catch(function(_) --[[ line: 307 ]]
-							-- upvalues: var23 (copy), openCentralOverlayForPurchaseGameModule (copy), var43 (ref), name (copy), var40 (ref), var41 (ref), var42 (ref), var31 (copy)
-							var23(openCentralOverlayForPurchaseGameModule(var43, name, var40, var41, var42, { var31 }))
-						end)
-						
-						return
-					else
-						var23(openCentralOverlayForPurchaseGameModule(p0, name, var40, var41, var42, { var31 }))
-						
-						return
-					end
-				elseif p11 == playButtonStatesModule.DemoMode then
-					if fFlagLuaAppDemoModePlayButtonTelemetry then
-						var38(p12, "DemoPlayButtonClick")
-						
-						return
-					end
-					var38(p12)
-					
-					return
-				elseif p11 == playButtonStatesModule.FiatPaidAccess then
-					if rootPlaceId and var27 and var27.fiatBasePriceId then
-						var23(apiPostPreparePurchaseModule.Fetch(var36, rootPlaceId, p0, var27.fiatBasePriceId))
-						unlockPlayIntent(var22, {
-							upsellName = "FiatPurchase",
-							universeId = p0,
-							playabilityStatus = if var28 then var28.playabilityStatus else nil,
-							pageName = var31
-						})
-						
-						return
-					end
-				elseif p11 == playButtonStatesModule.Loading then
-					invalidPlayIntent(p2, {
-						universeId = p0,
-						playButtonState = p11,
-						playabilityStatus = if var28 then var28.playabilityStatus else nil,
-						pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var31 else nil
-					})
-					
-					if fFlagLuaAppLaunchWhenLoadingForce_1 then
-						var38(p12)
-					end
-					return
-				elseif getFFlagIsSquadEnabled() and p11 == playButtonStatesModule.PlayableWithParty then
-					if not rootPlaceId then return end
-					var23(createExperienceInvite(rootPlaceId, var32, if fFlagEnableSquadRegroupExperimentation then squadExperienceInviteSource.Default else nil, if fFlagEnablePrivatePartyStartJoin and p13 and p13.isPrivateParty then squadExperienceInviteType.PlayWithPartyInPrivatePartyServer else nil))
-					
-					return
-				elseif includeWaitingForPartyInCondition and p11 == playButtonStatesModule.WaitingForParty then
-					invalidPlayIntent(p2, {
-						universeId = p0,
-						playButtonState = p11,
-						playabilityStatus = if var28 then var28.playabilityStatus else nil,
-						pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var31 else nil
-					})
-					
-					return
-				elseif p11 == playButtonStatesModule.UnplayableOther then
-					invalidPlayIntent(p2, {
-						universeId = p0,
-						playButtonState = p11,
-						playabilityStatus = if var28 then var28.playabilityStatus else nil,
-						pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var31 else nil
-					})
-					
-					return
-				end
-				error(`invalid play button state {p11}!`)
-			end, {
-				var20, var21, canPerformBinaryUpdateEnabledEngineFeature, p0,
-				if getFFlagLuaAppEnableVirtualEventPlaceId() then p5 else nil, rootPlaceId,
-				name, p1, p2, var38, var27, var31,
-				if getFFlagIsSquadEnabled() then var32 else nil, var28, var23, var22,
-				if fFlagMigrateGameIconsToStore then var30 else var29, var36,
-				if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp then fFlagLuaAppLaunchWhenLoadingForce_1 else nil
+				return
+			end
+		elseif p11 == playButtonStatesModule.Loading then
+			invalidPlayIntent(p2, {
+				universeId = p0,
+				playButtonState = p11,
+				playabilityStatus = if var27 then var27.playabilityStatus else nil,
+				pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var30 else nil
 			})
+			
+			if fFlagLuaAppLaunchWhenLoadingForce_1 then
+				var39(p12)
+			end
+			return
+		elseif getFFlagIsSquadEnabled() and p11 == playButtonStatesModule.PlayableWithParty then
+			if not var32 then return end
+			var23(createExperienceInvite(var32, var31, if fFlagEnableSquadRegroupExperimentation then squadExperienceInviteSource.Default else nil, if fFlagEnablePrivatePartyStartJoin and p13 and p13.isPrivateParty then squadExperienceInviteType.PlayWithPartyInPrivatePartyServer else nil))
+			
+			return
+		elseif includeWaitingForPartyInCondition and p11 == playButtonStatesModule.WaitingForParty then
+			invalidPlayIntent(p2, {
+				universeId = p0,
+				playButtonState = p11,
+				playabilityStatus = if var27 then var27.playabilityStatus else nil,
+				pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var30 else nil
+			})
+			
+			return
+		elseif p11 == playButtonStatesModule.UnplayableOther then
+			invalidPlayIntent(p2, {
+				universeId = p0,
+				playButtonState = p11,
+				playabilityStatus = if var27 then var27.playabilityStatus else nil,
+				pageName = if fFlagLuaAppPlayButtonLoadingDurationTelemetry then var30 else nil
+			})
+			
+			return
 		end
-	end
+		error(`invalid play button state {p11}!`)
+	end, {
+		var20, var21, canPerformBinaryUpdateEnabledEngineFeature, p0,
+		if getFFlagLuaAppEnableVirtualEventPlaceId() then p5 else nil, var32, var33,
+		p1, p2,
+		if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp or fFlagLuaAppDemoModePlayButton then var39 else nil,
+		if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp or fFlagLuaAppDemoModePlayButton then nil else var36,
+		if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp or fFlagLuaAppDemoModePlayButton then nil else var35,
+		var26, var30, if getFFlagIsSquadEnabled() then var31 else nil, var27,
+		if fFlagLuaAppDemoModePlayButton then var23 else nil,
+		if fFlagLuaAppDemoModePlayButton then var22 else nil,
+		if fFlagLuaAppDemoModePlayButton then if fFlagMigrateGameIconsToStore then var29 else var28 else nil,
+		if fFlagLuaAppDemoModePlayButton then var37 else nil,
+		if fFlagLuaAppLaunchWhenLoadingForce or fFlagLuaAppLaunchWhenLoadingEdp then fFlagLuaAppLaunchWhenLoadingForce_1 else nil
+	})
 end

@@ -8,7 +8,7 @@ local t = {
 	lastUpdated = { 2026, 7, 23 }
 }
 
-return function(p0, p1, p2) --[[ line: 44 | named "sendBuildExperienceEvent" ]]
+return function(p0, p1, p2)
 	-- upvalues: httpService (ref), telemetryService (ref), t (ref)
 	telemetryService:LogEvent(t, {
 		standardizedFields = { "addUserId", "addSessionId" },

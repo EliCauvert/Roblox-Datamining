@@ -1,13 +1,13 @@
 ﻿local avatarEditorService = game:GetService("AvatarEditorService")
 local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 7 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: avatarEditorService (copy), p0 (ref)
-		local ok, status = pcall(function() --[[ line: 8 ]]
+		local ok, status = pcall(function()
 			-- upvalues: avatarEditorService (copy), p0 (copy)
-			return avatarEditorService:GetBatchItemDetailsAsync(p0, Enum.AvatarItemType.Asset)
+			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetBatchItemDetailsAsync(p0, Enum.AvatarItemType.Asset) else avatarEditorService:GetBatchItemDetails(p0, Enum.AvatarItemType.Asset)
 		end)
 		
 		if not ok then

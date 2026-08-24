@@ -10,24 +10,21 @@ local skeleton = foundationModule.Skeleton
 local iconName = foundationModule.Enums.IconName
 local iconSize = foundationModule.Enums.IconSize
 local radius = foundationModule.Enums.Radius
-local fFlagAppChatMomentShareCardUseFoundationImageModule = require(appChat.Flags.FFlagAppChatMomentShareCardUseFoundationImage)
 local fFlagAppChatNativeFoundationCornerRadiiModule = require(appChat.Flags.FFlagAppChatNativeFoundationCornerRadii)
-local fFlagAppChatMomentShareCardLoadingSkeletonsModule = require(appChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
-local fFlagAppChatMomentShareCardUseFoundationImageModule_1 = fFlagAppChatNativeFoundationCornerRadiiModule and (foundationModule.Utility.Flags.FoundationImageContentSupport and fFlagAppChatMomentShareCardUseFoundationImageModule)
+local fFlagAppChatMomentShareCardUseFoundationImage = fFlagAppChatNativeFoundationCornerRadiiModule and (foundationModule.Utility.Flags.FoundationImageContentSupport and require(appChat.Flags.FFlagAppChatMomentShareCardUseFoundationImage))
 local gameCardErrorModule = require(script.Parent.Parent.GameCardComponents.GameCardError)
-local momentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 
-local function _(p0) --[[ line: 57 | named "toUDim" ]]
+local function _(p0)
 	return if type(p0) == "number" then UDim.new(0, p0) else p0
 end
 
-local function roundedCorner(value) --[[ line: 61 ]]
+local function roundedCorner(value)
 	-- upvalues: reactModule (ref)
 	if value == nil then
 		return nil
 	end
 	local createElement = reactModule.createElement
-	local var10 = "UICorner"
+	local var7 = "UICorner"
 	local t = {}
 	local topLeft = value.topLeft
 	t.TopLeftRadius = if type(topLeft) == "number" then UDim.new(0, topLeft) else topLeft
@@ -38,23 +35,17 @@ local function roundedCorner(value) --[[ line: 61 ]]
 	local bottomRight = value.bottomRight
 	t.BottomRightRadius = if type(bottomRight) == "number" then UDim.new(0, bottomRight) else bottomRight
 	
-	return createElement(var10, t)
+	return createElement(var7, t)
 end
 
-return reactModule.memo(function(p1) --[[ line: 73 | named "MomentShareCardView" ]]
-	-- upvalues: momentDetailsStatusModule (ref), reactModule (ref), gameCardErrorModule (ref), view (ref), roundedCorner (ref), skeleton (ref), radius (ref), fFlagAppChatMomentShareCardUseFoundationImageModule_1 (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), fFlagAppChatMomentShareCardLoadingSkeletonsModule (ref), text (ref)
-	if p1.status == momentDetailsStatusModule.Error then
-		return reactModule.createElement(gameCardErrorModule)
-	end
-	local var16
-	local createElement = reactModule.createElement
-	local t = {
+return reactModule.memo(function(p1)
+	-- upvalues: reactModule (ref), gameCardErrorModule (ref), view (ref), roundedCorner (ref), skeleton (ref), radius (ref), fFlagAppChatMomentShareCardUseFoundationImage (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), fFlagAppChatNativeFoundationCornerRadiiModule (ref), text (ref)
+	return if p1.status == "error" then reactModule.createElement(gameCardErrorModule) else reactModule.createElement(view, {
 		tag = "col auto-y",
 		testId = "MomentShareCardView",
 		Size = UDim2.fromOffset(p1.mediaSize, 0),
 		LayoutOrder = p1.LayoutOrder
-	}
-	local t_1 = {
+	}, {
 		MomentSharePlaceholder = reactModule.createElement(view, {
 			tag = "clip",
 			testId = "MomentSharePlaceholder",
@@ -72,7 +63,7 @@ return reactModule.memo(function(p1) --[[ line: 73 | named "MomentShareCardView"
 					Corner = roundedCorner(p1.cornerRadii),
 					Shimmer = reactModule.createElement(skeleton, { radius = radius.None, Size = UDim2.fromScale(1, 1) })
 				}) else nil,
-				Poster = if p1.posterContent ~= nil then nil elseif fFlagAppChatMomentShareCardUseFoundationImageModule_1 then reactModule.createElement(image, {
+				Poster = if p1.posterContent ~= nil then nil elseif fFlagAppChatMomentShareCardUseFoundationImage then reactModule.createElement(image, {
 					tag = "size-full",
 					ZIndex = 2,
 					testId = "MomentShareCardPosterImage",
@@ -109,60 +100,34 @@ return reactModule.memo(function(p1) --[[ line: 73 | named "MomentShareCardView"
 			}, {
 				Corner = if not fFlagAppChatNativeFoundationCornerRadiiModule then roundedCorner(p1.cornerRadii) else nil
 			})
-		})
-	}
-	local createElement_1 = reactModule.createElement
-	local t_2 = {
-		tag = "col size-full-0 auto-y padding-medium",
-		testId = "MomentShareFooter",
-		LayoutOrder = 2
-	}
-	local t_3 = {
-		Username = if fFlagAppChatMomentShareCardLoadingSkeletonsModule and p1.isUsernameLoading then reactModule.createElement(view, {
-			tag = "row align-y-center size-full-500",
-			LayoutOrder = 1
-		}, {
-			Skeleton = reactModule.createElement(skeleton, {
-				testId = "MomentShareUsernameSkeleton",
-				Size = UDim2.fromScale(0.6, 1),
-				radius = radius.Small
-			})
-		}) elseif p1.username then reactModule.createElement(text, {
-			tag = "size-full-500 text-title-medium text-align-x-left text-truncate-end content-emphasis",
-			LayoutOrder = 1,
-			Text = p1.username
-		}) else nil
-	}
-	
-	if p1.metadataText or fFlagAppChatMomentShareCardLoadingSkeletonsModule and p1.isMetadataLoading then
-		var16 = reactModule.createElement
-		var16 = var16(view, {
-			tag = "row align-y-center gap-xsmall size-full-500",
-			testId = "MomentShareMetadata",
+		}),
+		Footer = reactModule.createElement(view, {
+			tag = "col size-full-0 auto-y padding-medium",
+			testId = "MomentShareFooter",
 			LayoutOrder = 2
 		}, {
-			MomentsGlyph = reactModule.createElement(icon, {
-				testId = "MomentShareMomentsGlyph",
+			Username = if p1.username then reactModule.createElement(text, {
+				tag = "size-full-500 text-title-medium text-align-x-left text-truncate-end content-emphasis",
 				LayoutOrder = 1,
-				name = iconName.Moments,
-				size = iconSize.Small
-			}),
-			MetadataText = if fFlagAppChatMomentShareCardLoadingSkeletonsModule and p1.isMetadataLoading then reactModule.createElement(skeleton, {
-				testId = "MomentShareMetadataSkeleton",
-				LayoutOrder = 2,
-				Size = UDim2.fromScale(0.7, 1),
-				radius = radius.Small
-			}) else reactModule.createElement(text, {
-				tag = "fill auto-y text-body-medium text-align-x-left text-truncate-end content-default",
-				LayoutOrder = 2,
-				Text = p1.metadataText
-			})
+				Text = p1.username
+			}) else nil,
+			Metadata = if p1.metadataText then reactModule.createElement(view, {
+				tag = "row align-y-center gap-xsmall size-full-500",
+				testId = "MomentShareMetadata",
+				LayoutOrder = 2
+			}, {
+				MomentsGlyph = reactModule.createElement(icon, {
+					testId = "MomentShareMomentsGlyph",
+					LayoutOrder = 1,
+					name = iconName.Moments,
+					size = iconSize.Small
+				}),
+				MetadataText = reactModule.createElement(text, {
+					tag = "fill auto-y text-body-medium text-align-x-left text-truncate-end content-default",
+					LayoutOrder = 2,
+					Text = p1.metadataText
+				})
+			}) else nil
 		})
-	else
-		var16 = nil
-	end
-	t_3.Metadata = var16
-	t_1.Footer = createElement_1(view, t_2, t_3)
-	
-	return createElement(view, t, t_1)
+	})
 end)

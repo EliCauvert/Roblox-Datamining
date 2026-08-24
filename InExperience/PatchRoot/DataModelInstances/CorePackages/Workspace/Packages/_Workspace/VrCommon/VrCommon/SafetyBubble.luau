@@ -9,7 +9,7 @@ local create = require(parent.AppCommonLib).Create
 local fIntSafetyBubbleRadiusModule = require(script.Parent.FIntSafetyBubbleRadius)
 local var6 = require(script.Parent.FIntSafetyBubbleTransparencyPercent) * 0.01
 
-function t.new() --[[ line: 26 ]]
+function t.new()
 	-- upvalues: t (ref), userGameSettingsService (ref), create (ref), rbxAnalyticsService (ref)
 	local tbl = setmetatable({}, t)
 	tbl.subjects = {}
@@ -17,7 +17,7 @@ function t.new() --[[ line: 26 ]]
 	tbl.enabled = tbl.mode ~= Enum.VRSafetyBubbleMode.Anyone
 	tbl.updateCadence = 0.2
 	tbl.Toggled = create("BindableEvent")({ Name = "SafetyBubbleToggled" })
-	userGameSettingsService:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function() --[[ line: 39 ]]
+	userGameSettingsService:GetPropertyChangedSignal("VRSafetyBubbleMode"):Connect(function()
 		-- upvalues: tbl (ref), userGameSettingsService (copy), rbxAnalyticsService (copy)
 		tbl.mode = userGameSettingsService.VRSafetyBubbleMode
 		local var8 = tbl.mode ~= Enum.VRSafetyBubbleMode.Anyone
@@ -32,20 +32,20 @@ function t.new() --[[ line: 26 ]]
 	return tbl
 end
 
-function t:ToggleEnabled() --[[ line: 54 ]]
+function t:ToggleEnabled()
 	-- upvalues: userGameSettingsService (ref)
 	userGameSettingsService.VRSafetyBubbleMode = if self.enabled then Enum.VRSafetyBubbleMode.Anyone else Enum.VRSafetyBubbleMode.NoOne
 end
 
-function t:HasToolAncestor(p0) --[[ line: 59 ]]
+function t:HasToolAncestor(p0)
 	return if p0 == nil or p0.Parent == nil then false else p0.Parent:IsA("Tool") or self:HasToolAncestor(p0.Parent)
 end
 
-function t:IsValidPartToModify(p1) --[[ line: 66 ]]
+function t:IsValidPartToModify(p1)
 	return if p1:IsA("BasePart") or p1:IsA("Decal") then not self:HasToolAncestor(p1) else false
 end
 
-function t:CachePartsRecursive(p2, p3) --[[ line: 73 ]]
+function t:CachePartsRecursive(p2, p3)
 	if p2 then
 		if self:IsValidPartToModify(p2) then
 			self.subjects[p3].cachedParts[p2] = true
@@ -57,7 +57,7 @@ function t:CachePartsRecursive(p2, p3) --[[ line: 73 ]]
 	end
 end
 
-function t:TeardownTransparency(p4) --[[ line: 85 ]]
+function t:TeardownTransparency(p4)
 	for i, v in pairs(self.subjects[p4].cachedParts) do
 		i.LocalTransparencyModifier = 0
 	end
@@ -83,7 +83,7 @@ function t:TeardownTransparency(p4) --[[ line: 85 ]]
 	end
 end
 
-function t:GetSubjectIndex(p5) --[[ line: 111 ]]
+function t:GetSubjectIndex(p5)
 	local subjectsCount = #self.subjects
 	local var10 = 1
 	while var10 <= subjectsCount do
@@ -96,18 +96,18 @@ function t:GetSubjectIndex(p5) --[[ line: 111 ]]
 	return 0
 end
 
-function t:SubjectExists(p6) --[[ line: 125 ]]
+function t:SubjectExists(p6)
 	return self:GetSubjectIndex(p6) > 0
 end
 
-function t:SetupTransparency(p7) --[[ line: 131 ]]
+function t:SetupTransparency(p7)
 	local var11 = self:GetSubjectIndex(p7)
 	
 	if var11 == 0 then return end
 	if self.subjects[var11].descendantAddedConn then
 		self.subjects[var11].descendantAddedConn:disconnect()
 	end
-	self.subjects[var11].descendantAddedConn = p7.DescendantAdded:Connect(function(p8) --[[ line: 140 ]]
+	self.subjects[var11].descendantAddedConn = p7.DescendantAdded:Connect(function(p8)
 		-- upvalues: var11 (write), self (ref), p7 (ref)
 		var11 = self:GetSubjectIndex(p7)
 		
@@ -121,7 +121,7 @@ function t:SetupTransparency(p7) --[[ line: 131 ]]
 	if self.descendantRemovingConn then
 		self.descendantRemovingConn:disconnect()
 	end
-	self.descendantRemovingConn = p7.DescendantRemoving:connect(function(p9) --[[ line: 156 ]]
+	self.descendantRemovingConn = p7.DescendantRemoving:connect(function(p9)
 		-- upvalues: var11 (write), self (ref), p7 (ref)
 		var11 = self:GetSubjectIndex(p7)
 		
@@ -134,7 +134,7 @@ function t:SetupTransparency(p7) --[[ line: 131 ]]
 	self:CachePartsRecursive(p7, var11)
 end
 
-function t:AddSubject(p10) --[[ line: 172 ]]
+function t:AddSubject(p10)
 	local subjectsCount = #self.subjects
 	local var13 = 1
 	while var13 <= subjectsCount do
@@ -158,7 +158,7 @@ function t:AddSubject(p10) --[[ line: 172 ]]
 	self:SetupTransparency(p10)
 end
 
-function t:update(p11) --[[ line: 202 ]]
+function t:update(p11)
 	-- upvalues: fIntSafetyBubbleRadiusModule (ref), VRService (ref), playersService (ref), var6 (ref)
 	local currentCamera = workspace.CurrentCamera
 	
@@ -175,7 +175,7 @@ function t:update(p11) --[[ line: 202 ]]
 			
 			for i_1, v in pairs(playersService:GetPlayers()) do
 				if v.Character and v ~= playersService.LocalPlayer then
-					if self.mode == Enum.VRSafetyBubbleMode.OnlyFriends and playersService.LocalPlayer:IsFriendsWithAsync(v.UserId) then
+					if self.mode == Enum.VRSafetyBubbleMode.OnlyFriends and (if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService.LocalPlayer:IsFriendsWithAsync(v.UserId) else playersService.LocalPlayer:IsFriendsWith(v.UserId)) then
 						local characterSubjectIndex = self:GetSubjectIndex(v.Character)
 						
 						if characterSubjectIndex > 0 then

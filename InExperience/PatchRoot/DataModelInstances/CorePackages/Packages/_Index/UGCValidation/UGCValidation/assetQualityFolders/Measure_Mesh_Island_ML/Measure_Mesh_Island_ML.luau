@@ -2,12 +2,12 @@
 local _ = require(parent.util.Types)
 local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
 local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local UGCValidationMeshIslandMLMinScore = game:DefineFastInt("UGCValidationMeshIslandMLMinScore", 9)
+local UGCValidationMeshIslandMLMinScore = game:DefineFastInt("UGCValidationMeshIslandMLMinScore", 92)
 
 return {
 	categories = { validationEnumsModule.UploadCategory.FULL_BODY },
 	fflag = require(parent.flags.getFFlagUGCValidateAQMeshIslandML),
-	run = function(p0, p1) --[[ line: 19 ]]
+	run = function(p0, p1)
 		-- upvalues: UGCValidationMeshIslandMLMinScore (ref), errorSourceStringsModule (ref)
 		local measureMeshIslandML = p1.aqsSummaryData.Measure_Mesh_Island_ML
 		

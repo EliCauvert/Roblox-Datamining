@@ -30,17 +30,23 @@ local fFlagLuaAppTextOnlyPlayButton = sharedFlagsModule.FFlagLuaAppTextOnlyPlayB
 local fFlagLuaAppIconTextPlayButton = sharedFlagsModule.FFlagLuaAppIconTextPlayButton
 local fFlagLuaAppUpdatePlayButtonText = sharedFlagsModule.FFlagLuaAppUpdatePlayButtonText
 local fFlagLuaAppUseTokenHeightForPlayButton = sharedFlagsModule.FFlagLuaAppUseTokenHeightForPlayButton
+local fFlagLuaAppDemoModePlayButton = sharedFlagsModule.FFlagLuaAppDemoModePlayButton
 local var5 = if fFlagLuaAppIconPlayButton then "play-xlarge" else nil
 local play = images["icons/common/play"]
 local truncationCollapse = images["icons/actions/truncationCollapse"]
 local truncationExpand = images["icons/actions/truncationExpand"]
 
-local var6 = function() --[[ line: 53 ]] end
+local var6 = function() end
 
-local buttonHeightSizeKeyByInputSizeModule = require(script.Parent.ButtonHeightSizeKeyByInputSize)
+local var7 = if fFlagLuaAppDemoModePlayButton then require(script.Parent.ButtonHeightSizeKeyByInputSize) else {
+	[inputSize.XSmall] = "Size_600",
+	[inputSize.Small] = "Size_800",
+	[inputSize.Medium] = "Size_1000",
+	[inputSize.Large] = "Size_1200"
+}
 
-return reactModule.memo(function(p0) --[[ line: 102 | named "PlayButtonView" ]]
-	-- upvalues: inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), buttonHeightSizeKeyByInputSizeModule (ref), fillBehavior (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), reactModule (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), var5 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), comboButton (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var6 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref), fFlagSduiExperienceDetailsSupport (ref)
+return reactModule.memo(function(p0)
+	-- upvalues: inputSize (ref), fFlagLuaAppUseTokenHeightForPlayButton (ref), var7 (ref), fillBehavior (ref), playButtonStatesModule (ref), fFlagLuaAppPlayButtonLoadingSkeleton (ref), fFlagLuaAppUnifyPlayButtonAllSurfacesIxp (ref), reactModule (ref), skeleton (ref), radius (ref), buttonVariant (ref), fFlagLuaAppIconTextPlayButton (ref), fFlagLuaAppTextOnlyPlayButton (ref), fFlagLuaAppJoinTextPlayableButton (ref), fFlagLuaAppUpdatePlayButtonText (ref), var5 (ref), fFlagLuaAppIconPlayButton (ref), getFFlagIsSquadEnabled (ref), play (ref), fFlagLuaAppDemoModePlayButton (ref), comboButton (ref), fFlagLuaAppUnifiedPlayButtonSquadMenuDirection (ref), menuDirection (ref), truncationExpand (ref), truncationCollapse (ref), buttonType (ref), images (ref), button (ref), var6 (ref), getFFlagUIBloxUseFoundationButton (ref), fFlagLuaAppPlayButtonOptOutFoundationButton (ref), iconButton (ref), button_1 (ref), fFlagSduiExperienceDetailsSupport (ref)
 	local tokens = p0.tokens
 	local playButtonState = p0.playButtonState
 	local localized = p0.localized
@@ -51,7 +57,7 @@ return reactModule.memo(function(p0) --[[ line: 102 | named "PlayButtonView" ]]
 	local var12 = nil
 	
 	if fFlagLuaAppUseTokenHeightForPlayButton then
-		local var13 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
+		local var13 = var7[buttonSize] or "Size_1000"
 		var12 = if tokens and tokens.Size[var13] then tokens.Size[var13] else 40
 	end
 	local var14 = if p0.width then fillBehavior.Fill else p0.fillBehavior
@@ -66,7 +72,7 @@ return reactModule.memo(function(p0) --[[ line: 102 | named "PlayButtonView" ]]
 			return nil
 		elseif fFlagLuaAppPlayButtonLoadingSkeleton and (not p0.useUIBloxButton and (not fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or p0.hasPlayButtonLoadingSkeletonIxp)) then
 			local _ = nil
-			local var19 = if fFlagLuaAppUseTokenHeightForPlayButton then var12 else tokens and tokens.Size[buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"]
+			local var19 = if fFlagLuaAppUseTokenHeightForPlayButton then var12 else tokens and tokens.Size[var7[buttonSize] or "Size_1000"]
 			var18 = if var14 == "Fill" then UDim.new(1, 0) else UDim.new(0, var19)
 			local uDim2 = UDim2.new(var18, UDim.new(0, var19))
 			local fFlagLuaAppUnifyPlayButtonAllSurfacesIxp_1 = fFlagLuaAppUnifyPlayButtonAllSurfacesIxp or (p0.shouldLaunchWhenLoading or p0.shouldLaunchOnReleaseAfterUnmount)
@@ -122,7 +128,7 @@ return reactModule.memo(function(p0) --[[ line: 102 | named "PlayButtonView" ]]
 	elseif playButtonState == playButtonStatesModule.FiatPaidAccess then
 		subtle = buttonVariant.Emphasis
 		var16 = p0.fiatText or (if p0.gameProductInfo then p0.gameProductInfo.localizedFiatPrice else "")
-	elseif playButtonState == playButtonStatesModule.DemoMode then
+	elseif fFlagLuaAppDemoModePlayButton and playButtonState == playButtonStatesModule.DemoMode then
 		subtle = buttonVariant.SubEmphasis
 		var16 = localized.playDemo
 	elseif playButtonState == playButtonStatesModule.ActionNeeded then
@@ -144,7 +150,7 @@ return reactModule.memo(function(p0) --[[ line: 102 | named "PlayButtonView" ]]
 	
 	if var8 then
 		if not fFlagLuaAppUseTokenHeightForPlayButton then
-			local var23 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
+			local var23 = var7[buttonSize] or "Size_1000"
 			var12 = if tokens and tokens.Size[var23] then tokens.Size[var23] else 40
 		end
 		var24 = reactModule.createElement(comboButton, {
@@ -153,18 +159,18 @@ return reactModule.memo(function(p0) --[[ line: 102 | named "PlayButtonView" ]]
 				icon = var15,
 				text = var16,
 				isDisabled = var10,
-				onActivated = if not var10 then p0.onPlayButtonActivated else function() --[[ line: 258 ]] end
+				onActivated = if not var10 then p0.onPlayButtonActivated else function() end
 			},
 			overflow = {
 				icon = if fFlagLuaAppUnifiedPlayButtonSquadMenuDirection and p0.squadButtonMenuDirection == menuDirection.Down then truncationExpand else truncationCollapse,
 				isDisabled = var9,
-				onActivated = if not var9 then p0.onPlaySquadButtonActivated else function() --[[ line: 266 ]] end
+				onActivated = if not var9 then p0.onPlaySquadButtonActivated else function() end
 			},
 			testId = p0.testId
 		})
 	elseif p0.useUIBloxButton then
 		if not fFlagLuaAppUseTokenHeightForPlayButton then
-			local var25 = buttonHeightSizeKeyByInputSizeModule[buttonSize] or "Size_1000"
+			local var25 = var7[buttonSize] or "Size_1000"
 			var12 = if tokens and tokens.Size[var25] then tokens.Size[var25] else 40
 		end
 		local isFit = var14 == "Fit"

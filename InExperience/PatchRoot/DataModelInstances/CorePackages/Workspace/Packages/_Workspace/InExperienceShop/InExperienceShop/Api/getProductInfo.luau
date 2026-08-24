@@ -4,24 +4,24 @@ local promiseModule = require(inExperienceShop.Parent.Promise)
 local errorsModule = require(script.Parent.Errors)
 local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
 
-return function(p0, p1) --[[ line: 18 | named "getProductInfo" ]]
+return function(p0, p1)
 	-- upvalues: promiseModule (ref), shopDebugLoggerModule (ref), marketplaceService (ref), errorsModule (ref)
-	return promiseModule.new(function(p2, p3) --[[ line: 19 ]]
+	return promiseModule.new(function(p2, p3)
 		-- upvalues: shopDebugLoggerModule (copy), p0 (ref), p1 (ref), marketplaceService (copy), errorsModule (copy)
-		task.spawn(function() --[[ line: 20 ]]
+		task.spawn(function()
 			-- upvalues: shopDebugLoggerModule (copy), p0 (copy), p1 (copy), marketplaceService (copy), p2 (ref), p3 (ref), errorsModule (copy)
-			shopDebugLoggerModule.logLazy(function() --[[ line: 21 ]]
+			shopDebugLoggerModule.logLazy(function()
 				-- upvalues: p0 (copy), p1 (copy)
 				return "getProductInfo: call id=" .. p0 .. " infoType=" .. tostring(p1)
 			end)
 			local var5 = shopDebugLoggerModule.startTimer()
-			local ok, status = pcall(function() --[[ line: 25 ]]
+			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), p0 (copy), p1 (copy)
 				return marketplaceService:GetProductInfoAsync(p0, p1)
 			end)
 			
 			if ok then
-				shopDebugLoggerModule.logElapsedLazy(function() --[[ line: 29 ]]
+				shopDebugLoggerModule.logElapsedLazy(function()
 					-- upvalues: p0 (copy)
 					return "getProductInfo: success id=" .. p0
 				end, var5)
@@ -29,11 +29,11 @@ return function(p0, p1) --[[ line: 18 | named "getProductInfo" ]]
 				
 				return
 			end
-			shopDebugLoggerModule.logElapsedLazy(function() --[[ line: 34 ]]
+			shopDebugLoggerModule.logElapsedLazy(function()
 				-- upvalues: p0 (copy)
 				return "getProductInfo: error id=" .. p0
 			end, var5)
-			shopDebugLoggerModule.logLazy(function() --[[ line: 37 ]]
+			shopDebugLoggerModule.logLazy(function()
 				-- upvalues: status (ref)
 				return "getProductInfo: error detail=" .. tostring(status)
 			end)

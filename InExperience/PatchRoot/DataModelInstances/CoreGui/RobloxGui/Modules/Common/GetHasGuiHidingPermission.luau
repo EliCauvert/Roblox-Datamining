@@ -1,9 +1,9 @@
 ﻿local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
 local getFIntCanHideGuiGroupIdModule = require(game:GetService("CoreGui").RobloxGui.Modules.Flags.GetFIntCanHideGuiGroupId)
 
-return function(_, p0, _) --[[ line: 11 ]]
+return function(_, p0, _)
 	-- upvalues: promiseModule (ref), getFIntCanHideGuiGroupIdModule (ref)
-	return promiseModule.new(function(p1, p2) --[[ line: 12 ]]
+	return promiseModule.new(function(p1, p2)
 		-- upvalues: p0 (ref), getFIntCanHideGuiGroupIdModule (copy)
 		if not game:GetEngineFeature("GuiHidingApiSupport") then
 			p1(false)
@@ -15,9 +15,16 @@ return function(_, p0, _) --[[ line: 11 ]]
 			return
 		end
 		local var2 = false
-		local ok, status = pcall(function() --[[ line: 24 ]]
+		local ok, status = pcall(function()
 			-- upvalues: getFIntCanHideGuiGroupIdModule (copy), var2 (write), p0 (copy)
-			var2 = p0:IsInGroupAsync(getFIntCanHideGuiGroupIdModule())
+			local var3 = getFIntCanHideGuiGroupIdModule()
+			
+			if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
+				var2 = p0:IsInGroupAsync(var3)
+				
+				return
+			end
+			var2 = p0:IsInGroup(var3)
 		end)
 		
 		if ok then

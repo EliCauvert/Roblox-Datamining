@@ -24,7 +24,7 @@ local _ = require(avatarSwitcher.types)
 local text = url.AVATAR_URL .. "v1/avatar-inventory?"
 local text_1 = url.AVATAR_URL .. "v2/avatar/experience/get-experience-avatar-support"
 
-return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
+return function()
 	-- upvalues: createSignal (ref), createComputed (ref), avatarEditorService (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref), cryoModule (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (ref), fFlagAXInventoryIncludeUnavailableItems (ref), text (ref), url (ref), httpRbxApiService (ref), httpService (ref), fFlagAvatarSwitcherCounters (ref), sendAXCounterV2 (ref), constantsModule (ref), inventoryItemAvailability (ref), fFlagAvatarSwitcherExpiredItemsWarning (ref), avatarSwitcherPcallApplyOutfit (ref), applyOutfitModule (ref), text_1 (ref), experienceAvatarSupportTypeModule (ref), playersService (ref)
 	local var13, var14 = createSignal({})
 	local var15, var16 = createSignal({})
@@ -35,27 +35,27 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 	local var25, var26 = createSignal(nil)
 	local var27, var28 = createSignal(nil)
 	local var29, var30 = createSignal(nil)
-	local var31 = createComputed(function(p0) --[[ line: 54 ]]
+	local var31 = createComputed(function(p0)
 		-- upvalues: var17 (ref), var13 (ref)
 		return var17(p0) and #var13(p0) == 0
 	end)
-	local var32 = createComputed(function(p1) --[[ line: 58 ]]
+	local var32 = createComputed(function(p1)
 		-- upvalues: var19 (ref), var15 (ref)
 		local var44 = var19(p1)
 		
 		return if var44 == nil then nil else var15(p1)[var44]
 	end)
 	
-	local function toggleRespawnPrompt(p2) --[[ line: 67 ]]
+	local function toggleRespawnPrompt(p2)
 		-- upvalues: var22 (ref)
 		var22(p2)
 	end
 	
-	local function fetchOutfitDetails(p3) --[[ line: 71 ]]
+	local function fetchOutfitDetails(p3)
 		-- upvalues: avatarEditorService (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var16 (ref), cryoModule (copy)
-		local ok, status = pcall(function() --[[ line: 72 ]]
+		local ok, status = pcall(function()
 			-- upvalues: avatarEditorService (copy), p3 (ref)
-			return avatarEditorService:GetOutfitDetailsAsync(p3)
+			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetOutfitDetailsAsync(p3) else avatarEditorService:GetOutfitDetails(p3)
 		end)
 		
 		if not ok then
@@ -80,13 +80,13 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 			rigType = if status.PlayerAvatarType == "R6" then Enum.HumanoidRigType.R6 else Enum.HumanoidRigType.R15,
 			assetIds = if fFlagAvatarSwitcherAccurateAvatarWarning then t else nil
 		}
-		var16(function(p4) --[[ line: 92 ]]
+		var16(function(p4)
 			-- upvalues: cryoModule (copy), p3 (ref), t_1 (ref)
 			return cryoModule.Dictionary.join(p4, { [p3] = t_1 })
 		end)
 	end
 	
-	local function selectOutfit(p5) --[[ line: 101 ]]
+	local function selectOutfit(p5)
 		-- upvalues: var20 (ref), fFlagAvatarSwitcherUseAvatarInventoryEndpoint (copy), var32 (ref), fetchOutfitDetails (ref)
 		var20(p5)
 		
@@ -98,14 +98,14 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 	local var36 = nil
 	local var37 = false
 	
-	local function fetchNextOutfitsPage_DEPRECATED() --[[ line: 118 ]]
+	local function fetchNextOutfitsPage_DEPRECATED()
 		-- upvalues: var37 (write), var17 (ref), var36 (write), var18 (ref), avatarEditorService (copy), var14 (ref)
 		if var37 or var17(false) then return end
 		var37 = true
 		
 		if var36 then
 			if var36.IsFinished then return end
-			local ok, status = pcall(function() --[[ line: 128 ]]
+			local ok, status = pcall(function()
 				-- upvalues: var36 (copy)
 				var36:AdvanceToNextPageAsync()
 			end)
@@ -115,9 +115,9 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 				var18(true)
 			end
 		else
-			local ok, status = pcall(function() --[[ line: 136 ]]
+			local ok, status = pcall(function()
 				-- upvalues: avatarEditorService (copy)
-				return avatarEditorService:GetOutfitsAsync(Enum.OutfitSource.Created, Enum.OutfitType.Avatar)
+				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then avatarEditorService:GetOutfitsAsync(Enum.OutfitSource.Created, Enum.OutfitType.Avatar) else avatarEditorService:GetOutfits(Enum.OutfitSource.Created, Enum.OutfitType.Avatar)
 			end)
 			
 			if ok then
@@ -129,7 +129,7 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 		end
 		if var36 then
 			local currentPage = var36:GetCurrentPage()
-			var14(function(p6) --[[ line: 149 ]]
+			var14(function(p6)
 				-- upvalues: currentPage (ref)
 				local cloned = table.clone(p6)
 				
@@ -148,7 +148,7 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 	
 	local var39 = nil
 	
-	local function fetchNextOutfitsPage() --[[ line: 168 ]]
+	local function fetchNextOutfitsPage()
 		-- upvalues: var37 (write), var17 (ref), var39 (write), fFlagAXInventoryIncludeUnavailableItems (copy), text (copy), url (copy), httpRbxApiService (copy), httpService (copy), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var18 (ref), var27 (ref), inventoryItemAvailability (copy), fFlagAvatarSwitcherExpiredItemsWarning (copy), fFlagAvatarSwitcherAccurateAvatarWarning (copy), var14 (ref), cryoModule (copy), var16 (ref)
 		if var37 or var17(false) then return end
 		var37 = true
@@ -160,7 +160,7 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 			["itemCategories[0].itemSubType"] = 3,
 			includeUnavailableItems = if fFlagAXInventoryIncludeUnavailableItems then true else nil
 		})
-		local ok, status = pcall(function() --[[ line: 184 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpRbxApiService (copy), text_1 (ref), httpService (copy)
 			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(text_1))
 		end)
@@ -206,11 +206,11 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 					}
 				end
 			end
-			var14(function(p7) --[[ line: 254 ]]
+			var14(function(p7)
 				-- upvalues: cryoModule (copy), t (ref)
 				return cryoModule.List.join(p7, t)
 			end)
-			var16(function(p8) --[[ line: 257 ]]
+			var16(function(p8)
 				-- upvalues: cryoModule (copy), t_1 (ref)
 				return cryoModule.Dictionary.join(p8, t_1)
 			end)
@@ -228,7 +228,7 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 		end
 	end
 	
-	local function switchAvatar() --[[ line: 265 ]]
+	local function switchAvatar()
 		-- upvalues: var32 (ref), var24 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), avatarSwitcherPcallApplyOutfit (copy), applyOutfitModule (copy), var30 (ref)
 		local var58 = var32(false)
 		
@@ -239,7 +239,7 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 			sendAXCounterV2(constantsModule.Counters.SwitchAvatar)
 		end
 		if avatarSwitcherPcallApplyOutfit then
-			local ok, status = pcall(function() --[[ line: 277 ]]
+			local ok, status = pcall(function()
 				-- upvalues: applyOutfitModule (copy), var58 (ref)
 				applyOutfitModule(var58.id, var58.rigType)
 			end)
@@ -254,9 +254,9 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 		var24(false)
 	end
 	
-	local function fetchExperienceAvatarSupportType() --[[ line: 291 ]]
+	local function fetchExperienceAvatarSupportType()
 		-- upvalues: httpRbxApiService (copy), text_1 (copy), httpService (copy), experienceAvatarSupportTypeModule (copy), var26 (ref), var28 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy)
-		local ok, status = pcall(function() --[[ line: 292 ]]
+		local ok, status = pcall(function()
 			-- upvalues: httpRbxApiService (copy), text_1 (copy), httpService (copy)
 			return httpService:JSONDecode(httpRbxApiService:GetAsyncFullUrl(text_1))
 		end)
@@ -285,13 +285,13 @@ return function() --[[ line: 42 | named "createAvatarSwitcherStore" ]]
 		end
 	end
 	
-	local function clearPendingAvatarName() --[[ line: 327 ]]
+	local function clearPendingAvatarName()
 		-- upvalues: var30 (ref)
 		var30(nil)
 	end
 	
 	if playersService.LocalPlayer then
-		playersService.LocalPlayer.CharacterAdded:Connect(function() --[[ line: 332 ]]
+		playersService.LocalPlayer.CharacterAdded:Connect(function()
 			-- upvalues: var30 (ref)
 			var30(nil)
 		end)

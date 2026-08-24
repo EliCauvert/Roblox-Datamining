@@ -24,13 +24,13 @@ local t_1 = {
 	[playabilityStatusEnum.ContextualPlayabilityAgeGated] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityAgeGated",
 	[playabilityStatusEnum.ContextualPlayabilityUnrated] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated",
 	[playabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityAgeGatedByDescriptor",
-	[playabilityStatusEnum.FiatPurchaseDeviceRestricted] = "Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted",
+	[playabilityStatusEnum.FiatPurchaseDeviceRestricted] = if require(parent.SharedFlags).FFlagLuaAppDemoModePlayButton then "Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted" else "Feature.ExperienceDetails.UnplayableError.DeviceRestrictedDefault",
 	[playabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls] = if require(parent.SharedFlags).FFlagLuaAppBlockedUnplayableError then "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityExperienceBlockedParentalControls" else nil,
 	Default = "Feature.ExperienceDetails.UnplayableError.UnplayableOther"
 }
 setmetatable(t, {
-	__newindex = function(_, _, _) --[[ line: 42 ]] end,
-	__index = function(_, p0) --[[ line: 43 ]]
+	__newindex = function(_, _, _) end,
+	__index = function(_, p0)
 		-- upvalues: t_1 (ref)
 		assert(p0 ~= nil, "LaunchErrorLocalizationKeys needs a key")
 		

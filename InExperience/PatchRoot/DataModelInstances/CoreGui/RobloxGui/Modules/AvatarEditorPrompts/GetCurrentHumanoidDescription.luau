@@ -1,13 +1,13 @@
 ﻿local playersService = game:GetService("Players")
 local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
 
-return function() --[[ line: 6 ]]
+return function()
 	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p0, p1) --[[ line: 7 ]]
+	return promiseModule.new(function(p0, p1)
 		-- upvalues: playersService (copy)
-		local ok, status = pcall(function() --[[ line: 8 ]]
+		local ok, status = pcall(function()
 			-- upvalues: playersService (copy)
-			return playersService:GetHumanoidDescriptionFromUserIdAsync(playersService.LocalPlayer.UserId)
+			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromUserIdAsync(playersService.LocalPlayer.UserId) else playersService:GetHumanoidDescriptionFromUserId(playersService.LocalPlayer.UserId)
 		end)
 		
 		if ok then

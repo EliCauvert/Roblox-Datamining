@@ -20,7 +20,7 @@ return {
 	ActionInterface = {
 		actionType = tModule.string,
 		actionParams = tModule.optional(tModule.table),
-		telemetryHandler = tModule.optional(tModule.string),
+		telemetryHandler = if require(parent.SharedFlags).FFlagSduiActionTelemetryHandler then tModule.optional(tModule.string) else nil,
 		skipUnifiedLogging = if require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging then tModule.optional(tModule.boolean) else nil
 	},
 	UiComponentInterface = t,

@@ -152,7 +152,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Qualité du contenu :
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Qualité du contenu : {partName} a {intersecting_tri_face_percent} % de faces triangulaires qui se croisent (score : {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Qualité du contenu : {partName} a {uv_outside_bound_vert_percent} % de sommets UV en dehors des limites (score : {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Qualité du contenu : {partName} a {similar_vertex_percent} % de sommets similaires (score : {score}).
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,L'attachement d'accessoire « {AttachmentName} » dans « {PartName} » doit être placé près de la surface du maillage. La position actuelle [{CurrentPosition}] est en dehors de la zone valide. Rapproche-le de [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Le contrôleur est associé via skinning à l'articulation {jointName}, qui ne fait pas partie du schéma autorisé. Seules les articulations R15 standard et les articulations de transfert via skinning sont autorisées."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} doit utiliser le transfert via skinning, mais il te manque l'articulation requise : {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Le contrôleur est associé via skinning à l'articulation {jointName}, mais ce contenu doit faire l'objet d'un skinning automatique. Tu ne peux effectuer de skinning que vers {validJointNameList}."
@@ -166,7 +165,6 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Impossible de trouver l'�
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Les instances suivantes ne font pas partie du schéma approuvé et doivent être retirées : {UnexpectedDescendantPaths}
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"L'élément importé devrait appartenir à la catégorie « {ExpectedClass} », mais il appartient à la catégorie « {RootClass} »."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"L'élément importé devrait être nommé « {ExpectedClass} », mais il est nommé « {RootClass} »."
-Common.UGCValidation.ErrorLabel.ContentNotEditable,"{InstanceFullName}. {FieldName} contient encore du contenu modifiable non enregistré. Enregistre-le en tant qu'élément avant de publier, puis réessaie."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,La partie du corps « {bodyPartName} » dans CurveAnimation possède une piste de position (translation). Les parties du corps d'animation ne peuvent être que pivotées ; les pistes de position ne sont pas autorisées. Supprime la piste de position de cette partie du corps.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,La partie du corps « {bodyPartName} » dans CurveAnimation se déplace de {distance} studs depuis sa position de départ. La translation maximale autorisée est de {maxDistance} studs. Réduis le mouvement de positionnement de la partie du corps.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation contient des os HRD/DRD et la partie du corps « {bodyPartName} » a une piste Position (translation). Lorsque des os sont présents dans l'animation, aucune partie du corps ne peut être translatée pour éviter la séparation des articulations. Supprime toutes les pistes Position des parties du corps."
@@ -207,7 +205,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation a {c
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation contient des Curves avec trop de clés. Le maximum par Curve est de {maxAllowed}. Merci de corriger l'animation.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation contient plus de {maxAllowed} descendants MarkerCurve. Veille à ce qu'il n'en contienne pas plus de {maxAllowed}.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation contient un MarkerCurve avec {count} marqueurs. Le maximum par MarkerCurve est de {maxAllowed}. Merci de corriger l'animation.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"L'animation publiée spécifie une translation maximale de {taggedTranslation} studs, mais ses données d'animation donnent une valeur de {calculatedTranslation} studs. Republie l'animation."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation contient un enfant inattendu : {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Les têtes dynamiques du Marketplace doivent être correctement placées afin que les sommets des yeux et de la bouche sur la cage soient alignés avec les sommets du maillage. Améliore ta cage et son alignement avec le maillage.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Impossible de détecter le sourire pour la tête dynamique. Ajuste les points de repère de la cage pour que la bouche soit correctement positionnée et puisse sourire.
@@ -266,9 +263,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,La taille de l'axe {axis
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Le point d'attache {attName} doit absolument exister une fois parmi les descendants de {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,« {RootInstanceName} » ou ses descendants contiennent des attributs. Tu dois supprimer les attributs des éléments suivants : {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} « {InstancePath} » possède des propriétés non valides : {ProblematicProperties}. Une des limites d'octets affichées a été dépassée (une limite de 0 signifie que la propriété doit être vide) ; toute autre propriété contient des valeurs NaN/Inf ou dépasse sa limite de taille par défaut.
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,L'attachement de plateforme « {AttachmentName} » dans « {PartName} » doit être placé près de la limite de l'articulation où cette partie du corps se connecte à une partie adjacente. La position actuelle [{CurrentPosition}] est trop éloignée du plan de connexion. Rapproche-le de [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Pour importer un contenu sur Roblox, tu dois sélectionner exactement 1 instance et le type d'importation associé."
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Cet élément est trop volumineux pour être importé ({sizeBytes} octets au-dessus de la taille maximale autorisée de {maxSizeBytes} octets). Réduis sa taille, puis réessaie."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,L'instance {ProblematicDescendantPath} ne doit pas avoir d'étiquettes.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Chaîne d'erreur du deuxième test utilisée pour vérifier de bout en bout le flux de travail de synchronisation de la traduction centré sur le Hub.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"La partie maillée de la tête possède des animations faciales pour {jointName}, qui ne peuvent pas être utilisées dans le système FACs (Système de codage facial). Veuillez renommer cette articulation puis réimporter votre tête."
@@ -400,7 +395,6 @@ CommonUI.Features.Label.Unchecked,Non vérifié
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Connexion via
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,Construire
 CommonUI.Features.StudioCTA.Tooltip.Body,Télécharge Studio GRATUITEMENT !
 CommonUI.Features.StudioCTA.Tooltip.Title,Commence à créer sur Roblox
@@ -1307,20 +1301,15 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,Publier
-Feature.Avatar.BackgroundGeneration.Action.Upload,Importer
 Feature.Avatar.BackgroundGeneration.Action.View,Voir
-Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Crée des arrière-plans avec Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Ta création est prête à l'emploi.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Cet arrière-plan a été généré avec l'IA. En le publiant, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire et les items publiés ne pourront plus être modifiés."
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Cet arrière-plan a été généré avec l'IA. En l'important, tu confirmes qu'il respecte les normes de la communauté Roblox et qu'il n'utilise aucun contenu dont tu n'as pas les droits. Il sera examiné avant d'apparaître dans ton inventaire. Une fois importés, les items ne peuvent plus être modifiés."
-Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Débloque des arrière-plans exclusifs gratuits avec Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,L'item n'est pas conforme aux Normes de la communauté
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Cette invite ne respecte pas nos directives. Rédiges-en une autre.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Cet arrière-plan n'est pas conforme aux Normes de la communauté Roblox et n'a donc pas été ajouté à ton inventaire. Essaie d'en générer un nouveau.
 Feature.Avatar.BackgroundGeneration.Error.System,Une erreur s'est produite lors de la génération de ton arrière-plan. Réessaie.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivité Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Décris ton arrière-plan…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Génération de ton arrière-plan…
@@ -1328,8 +1317,6 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Préparation de ton arrièr
 Feature.Avatar.BackgroundGeneration.Title,Créer un arrière-plan
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publier dans l'inventaire
-Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
-Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Importer dans l'inventaire
 Feature.Avatar.Backgrounds.Title,Arrière-plans
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,L'ajustement n'est pas disponible pour ce style de corps.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Couleurs du corps d'origine par défaut
@@ -1894,7 +1881,6 @@ Feature.Build.Label.BackToBuild,Retour à la construction
 Feature.Build.Label.Building,Construction...
 Feature.Build.Label.CaptureLibrary,Bibliothèque de captures
 Feature.Build.Label.ContentRating,Classification du contenu
-Feature.Build.Label.Created,Créé
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Hub Création
 Feature.Build.Label.Deleted,Supprimé
@@ -1908,13 +1894,11 @@ Feature.Build.Label.FriendsOnly,Amis uniquement
 Feature.Build.Label.GetMoreBuildUsage,Obtenir plus de capacités d'utilisation de Construire
 Feature.Build.Label.Hi,Bonjour
 Feature.Build.Label.IconThumbnails,Icône et miniatures
-Feature.Build.Label.Images2D,Images 2D
 Feature.Build.Label.InProgress,En cours
 Feature.Build.Label.InputNeeded,Saisie requise
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Limité
 Feature.Build.Label.Loading,Chargement…
-Feature.Build.Label.Models3D,Modèles 3D
 Feature.Build.Label.NoLimit,Pas de limite
 Feature.Build.Label.NotStarted,Non commencé
 Feature.Build.Label.Pending,En attente
@@ -1924,19 +1908,15 @@ Feature.Build.Label.Private,Privé
 Feature.Build.Label.Public,Public
 Feature.Build.Label.PubliclyUnavailable,Non disponible au public
 Feature.Build.Label.Published,Publié
-Feature.Build.Label.Purchased,Acheté
 Feature.Build.Label.Ready,Prêt
 Feature.Build.Label.ResetsDaily,Réinitialisation quotidienne
 Feature.Build.Label.RestoredVersion,{VERSION} restaurée
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,Chercher
-Feature.Build.Label.SearchAssets,Rechercher des contenus
 Feature.Build.Label.SearchGames,Rechercher des jeux
 Feature.Build.Label.SearchTasks,Rechercher des tâches
 Feature.Build.Label.SelectOption,Sélectionner une option
 Feature.Build.Label.ShareAddedFriends,Partager avec les amis que tu as ajoutés
-Feature.Build.Label.Shared,Partagé
-Feature.Build.Label.Sounds,Sons
 Feature.Build.Label.Thinking,Réflexion
 Feature.Build.Label.Title,Titre
 Feature.Build.Label.TitleDescription,Titre et description
@@ -2004,7 +1984,6 @@ Feature.Build.Label.ToolThumbnailRunning,Définition de la miniature du jeu
 Feature.Build.Label.UniverseNumber,Univers {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Inconnu
 Feature.Build.Label.UnlimitedUsed,{USED} utilisé(s) • Pas de limite
-Feature.Build.Label.Updated,Mis à jour
 Feature.Build.Label.Usage,Utilisation
 Feature.Build.Label.UsageUsed,{USED} utilisé(s)
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2018,8 +1997,6 @@ Feature.Build.Message.AccountRequirements,Ton compte ne répond pas aux exigence
 Feature.Build.Message.AccountTooNew,Ton compte est trop récent pour publier. Réessaye lorsqu'il aura 2 jours.
 Feature.Build.Message.AllFriendsAdded,Tu as ajouté tous tes amis en tant que testeurs.
 Feature.Build.Message.AnswerBuildQuestion,Réponds à la question de la fonctionnalité Construire ci-dessous.
-Feature.Build.Message.AssetDetailsUnavailable,Les détails du contenu sont indisponibles.
-Feature.Build.Message.AssetsLoadFailed,Impossible de charger les contenus.
 Feature.Build.Message.AudienceIneligible,Non éligible pour ce public
 Feature.Build.Message.BuildAccountBlocked,Construire n'est pas disponible pour ton compte pour le moment.
 Feature.Build.Message.BuildBusy,Construire est occupé. Patiente une minute et réessaye.
@@ -2050,7 +2027,6 @@ Feature.Build.Message.InvitesLoadFailed,Impossible de charger les invitations
 Feature.Build.Message.LimitBelowSpend,La limite ne peut pas être inférieure aux {ALREADY_SPENT} Robux déjà dépensés aujourd'hui.
 Feature.Build.Message.LinkCopied,Lien copié dans le presse-papiers.
 Feature.Build.Message.LoadingVersions,Chargement de l'historique des versions…
-Feature.Build.Message.NoAssetsFound,Aucun contenu trouvé.
 Feature.Build.Message.NoDescriptionProvided,Aucune description fournie.
 Feature.Build.Message.NoFriendsToAdd,Tu n'as pas encore d'amis à ajouter. Trouve d'abord des personnes avec qui te connecter sur Roblox.
 Feature.Build.Message.NoResults,
@@ -2086,7 +2062,6 @@ Feature.Build.Message.WorkingOnTasks,Travail en cours sur tes tâches
 Feature.Build.Title.AdCampaignActive,La campagne publicitaire est active
 Feature.Build.Title.AddFriendsToPlaytest,Ajoute des amis pour t'aider à tester le jeu
 Feature.Build.Title.ArchiveThisGame,Archiver ce jeu ?
-Feature.Build.Title.AssetLibrary,Bibliothèque
 Feature.Build.Title.Audience,
 Feature.Build.Title.BuildQuestion,La fonctionnalité Construire a une question
 Feature.Build.Title.BuildQuestions,La fonctionnalité Construire a quelques questions
@@ -2628,7 +2603,6 @@ Feature.Chat.Label.LongPressToReplyTooltip,Appuyez longuement pour répondre
 Feature.Chat.Label.Members,Membres
 Feature.Chat.Label.MessageNotAvailable,Ce message n'est pas disponible
 Feature.Chat.Label.MuteInGameChatToastNotifications,Mettre en sourdine les notifications de chat pendant le jeu
-Feature.Chat.Label.MuteInGamePartyToastNotifications,Mettre en sourdine les notifications de Party dans le jeu
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Aucun chat
 Feature.Chat.Label.NoDescriptionYet,Aucune description pour le moment.
@@ -3068,7 +3042,7 @@ Feature.GameDetails.Label.SomethingElse,Autre chose
 Feature.GameDetails.Label.Store,
 Feature.GameDetails.Label.TellUsMorePlaceholder,Dis-nous en plus
 Feature.GameDetails.Label.TooRepetitive,Trop répétitif
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,Mis à jour
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
@@ -3262,7 +3236,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Développer
-Feature.Moments.Action.GenerateText,Générer du texte
+Feature.Moments.Action.GenerateText,Générer
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Peu utile
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Inapproprié ou contraire aux directives
 Feature.Moments.Action.Hide,Masquer les détails
@@ -3351,7 +3325,7 @@ Feature.Moments.Label.Tone.Hype,Énergique
 Feature.Moments.Label.Tone.Neutral,Neutre
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Que s'est-il passé ?
-Feature.Moments.Title.GenerateTextOptions,
+Feature.Moments.Title.GenerateTextOptions,Générer du texte
 Feature.Moments.Title.LeaveMomentCreation,Quitter la création de Moment ?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Signaler un post
@@ -3712,8 +3686,6 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Ton abonnement à Roblox Plus
 Feature.RobloxSubscription.Body.GenericError,Nous n'avons pas pu finaliser cette opération pour le moment. Réessaie.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Cet abonnement n'est pas disponible à l'achat sur cet appareil.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Confirme ton âge avec la vérification de l'âge et profite d'une semaine gratuite de Roblox Plus en guise de remerciement. Aucun moyen de paiement n'est nécessaire pour profiter de cet essai gratuit.
-Feature.RobloxSubscription.Description.Benefit.Customize,Personnalise avec des cadres de profil et des thèmes de l'app
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Items et avatars à -10 % les 60 premiers jours, puis à -20 %"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Plus de fun pour moins de Robux. Abonne-toi à Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"En cliquant sur \u{201C}{ctaText}\u{201D}, tu acceptes les <a href=""{termsUrl}"">Conditions d'abonnement de Roblox</a>. L'abonnement sera facturé automatiquement chaque mois jusqu'à sa résiliation."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Serveurs privés gratuits

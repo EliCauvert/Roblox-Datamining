@@ -59,6 +59,7 @@ local fFlagLuaAppHapticTriggeredTelemetry = sharedFlagsModule.FFlagLuaAppHapticT
 local fFlagLuaAppTileVideoCandidateOnly = sharedFlagsModule.FFlagLuaAppTileVideoCandidateOnly
 local fFlagLuaAppSponsoredAdViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdViewabilityEnabled
 local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
+local fFlagLuaAppDemoModePlayButton = sharedFlagsModule.FFlagLuaAppDemoModePlayButton
 local fFlagLuaAppDemoModePlayButtonTelemetry = sharedFlagsModule.FFlagLuaAppDemoModePlayButtonTelemetry
 local fFlagLuaAppHomeThumbnailPrefetch = sharedFlagsModule.FFlagLuaAppHomeThumbnailPrefetch
 local fFlagLuaAppGameTileNotInterestedDirectAction = sharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
@@ -98,8 +99,8 @@ local t = {
 	}
 }
 
-return function(p0) --[[ line: 175 ]]
-	-- upvalues: useNavigateToGameDetails (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useLocalization (ref), t (ref), useTokens (ref), responsiveModule (ref), luaAppTwoByOneTileSmallScreenBreakpoint (ref), buttonSize (ref), reactModule (ref), getTextSize (ref), var22 (ref), var23 (ref), useValidTileBadges (ref), useTriggerFeedback (ref), useOverflowMenuOpen (ref), useIsHoveredTile (ref), sponsoredGamesRecordClick (ref), gameCollectionItemTypes (ref), twoByOneGameTileTelemetryModule (ref), getAvailableGameTileOverflowMenuItems (ref), luaAppUseSpanTileOverflowMenuTwoByOne2 (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), fFlagMigrateGameInfoToStore (ref), useSelector (ref), gameInfosReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var19 (ref), formatExperienceThumbnail (ref), getGameTileLayoutData (ref), itemLayoutDataParsingUtils (ref), impressionsTagUtility (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppSponsoredAdViewabilityEnabled (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsSponsoredAdViewabilityCandidate (ref), hiddenTileContent (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), var26 (ref), color3 (ref), var24 (ref), var25 (ref), color3_1 (ref), gameTileThumbnailBadges (ref), image (ref), playButton (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref)
+return function(p0)
+	-- upvalues: useNavigateToGameDetails (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useLocalization (ref), t (ref), useTokens (ref), responsiveModule (ref), luaAppTwoByOneTileSmallScreenBreakpoint (ref), buttonSize (ref), reactModule (ref), getTextSize (ref), var22 (ref), var23 (ref), useValidTileBadges (ref), useTriggerFeedback (ref), useOverflowMenuOpen (ref), useIsHoveredTile (ref), sponsoredGamesRecordClick (ref), gameCollectionItemTypes (ref), twoByOneGameTileTelemetryModule (ref), getAvailableGameTileOverflowMenuItems (ref), luaAppUseSpanTileOverflowMenuTwoByOne2 (ref), fFlagLuaAppFixExplicitFeedbackTelemetry (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), fFlagMigrateGameInfoToStore (ref), useSelector (ref), gameInfosReducer (ref), fFlagLuaAppHomeThumbnailPrefetch (ref), var19 (ref), formatExperienceThumbnail (ref), getGameTileLayoutData (ref), itemLayoutDataParsingUtils (ref), impressionsTagUtility (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppSponsoredAdViewabilityEnabled (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsSponsoredAdViewabilityCandidate (ref), hiddenTileContent (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), var26 (ref), color3 (ref), var24 (ref), var25 (ref), color3_1 (ref), gameTileThumbnailBadges (ref), image (ref), playButton (ref), fFlagLuaAppDemoModePlayButton (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref)
 	local large, large_1, headingMedium, bodyMedium, captionMedium, xSmall, medium, size1000, titleMedium
 	local var28 = useNavigateToGameDetails()
 	local var29 = useRoactService(roactNetworking)
@@ -150,7 +151,7 @@ return function(p0) --[[ line: 175 ]]
 	end
 	local var57
 	local var36 = var33.Padding.Large * 4
-	local var37 = reactModule.useMemo(function() --[[ line: 222 ]]
+	local var37 = reactModule.useMemo(function()
 		-- upvalues: getTextSize (copy), var31 (ref), titleMedium (write), var36 (ref)
 		return UDim.new(0, getTextSize(var31, titleMedium.FontSize, titleMedium.Font, Vector2.new(1e999, 1e999)).X + var36)
 	end, { var31, titleMedium, var36 })
@@ -169,17 +170,17 @@ return function(p0) --[[ line: 175 ]]
 	local var48 = useOverflowMenuOpen(hoverKey)
 	local var49 = useIsHoveredTile(var46, hoverKey, true)
 	local var50 = reactModule.useRef(false)
-	local var51 = reactModule.useCallback(function() --[[ line: 267 ]]
+	local var51 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), sponsoredGamesRecordClick (copy), var29 (ref)
 		if p0.isSponsored and p0.adId then
 			sponsoredGamesRecordClick(var29, p0.adId)
 		end
 	end, { var29, p0.isSponsored, p0.adId })
-	local var52 = reactModule.useCallback(function() --[[ line: 273 ]]
+	local var52 = reactModule.useCallback(function()
 		-- upvalues: var50 (ref)
 		var50.current = false
 	end, {})
-	local var53 = reactModule.useCallback(function() --[[ line: 278 ]]
+	local var53 = reactModule.useCallback(function()
 		-- upvalues: p0 (ref), gameCollectionItemTypes (copy), var28 (ref), universeId (ref), twoByOneGameTileTelemetryModule (copy)
 		var28(universeId, {
 			index = p0.index,
@@ -199,7 +200,7 @@ return function(p0) --[[ line: 175 ]]
 		var28, universeId, p0.index, p0.placeIdOverride, p0.launchDataOverride,
 		p0.reportGameDetailOpened, p0.adId
 	})
-	local var54 = reactModule.useCallback(function() --[[ line: 309 ]]
+	local var54 = reactModule.useCallback(function()
 		-- upvalues: var45 (ref), p0 (ref)
 		var45(true)
 		
@@ -207,7 +208,7 @@ return function(p0) --[[ line: 175 ]]
 			p0.onSelectionGained()
 		end
 	end, { p0.onSelectionGained })
-	local var55 = reactModule.useCallback(function() --[[ line: 321 ]]
+	local var55 = reactModule.useCallback(function()
 		-- upvalues: var45 (ref), p0 (ref)
 		var45(false)
 		
@@ -216,7 +217,7 @@ return function(p0) --[[ line: 175 ]]
 		end
 	end, { p0.onSelectionLost })
 	local isSponsored = p0.isSponsored
-	local var56 = reactModule.useMemo(function() --[[ line: 333 ]]
+	local var56 = reactModule.useMemo(function()
 		-- upvalues: getAvailableGameTileOverflowMenuItems (copy), isSponsored (ref), p0 (ref)
 		return getAvailableGameTileOverflowMenuItems({
 			isSponsored = isSponsored,
@@ -236,7 +237,7 @@ return function(p0) --[[ line: 175 ]]
 	elseif not var49 and not var44 then
 		var57 = var48 and next(var56) ~= nil
 	end
-	local var58 = if luaAppUseSpanTileOverflowMenuTwoByOne2 then nil else reactModule.useCallback(function(p1, p2) --[[ line: 348 ]]
+	local var58 = if luaAppUseSpanTileOverflowMenuTwoByOne2 then nil else reactModule.useCallback(function(p1, p2)
 		-- upvalues: fFlagLuaAppFixExplicitFeedbackTelemetry (copy), p0 (ref), universeId (ref), gameTileOverflowMenuAction (copy)
 		gameTileOverflowMenuAction({
 			ctx = if fFlagLuaAppFixExplicitFeedbackTelemetry then nil else p0.appPage,
@@ -246,7 +247,7 @@ return function(p0) --[[ line: 175 ]]
 			availableMenuItems = p2
 		}, if fFlagLuaAppFixExplicitFeedbackTelemetry then p0.appPage or "Unknown" else nil)
 	end, { universeId, p0.appPage, p0.topicId })
-	local var59 = reactModule.useCallback(function() --[[ line: 366 ]]
+	local var59 = reactModule.useCallback(function()
 		-- upvalues: var50 (ref), var56 (ref), var47 (ref), var48 (ref), fFlagLuaAppHapticTriggeredTelemetry (copy), universeId (ref), p0 (ref), getOverflowMenuSignalStore (copy), hoverKey (ref), luaAppUseSpanTileOverflowMenuTwoByOne2 (copy), var58 (ref)
 		local current = var50.current
 		var50.current = true
@@ -270,7 +271,7 @@ return function(p0) --[[ line: 175 ]]
 		hoverKey, p0.appPage, p0.topicId, var47, var56, var48, universeId,
 		if luaAppUseSpanTileOverflowMenuTwoByOne2 then nil else var58
 	})
-	local var60 = reactModule.useCallback(function(p3) --[[ line: 409 ]]
+	local var60 = reactModule.useCallback(function(p3)
 		-- upvalues: var30 (ref), setGamePlaySession (copy), sessionType (copy), var49 (ref), hoverTileCoordinator (copy), p0 (ref), placeId (ref), universeId (ref), gameCollectionItemTypes (copy), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
 		if var30 then
 			setGamePlaySession(var30, sessionType.StructuralIdentifier.GamePlayFromHoverTile, true)
@@ -298,24 +299,24 @@ return function(p0) --[[ line: 175 ]]
 		tileType = gameCollectionItemTypes.GameCollectionItemType.TwoByOneTile,
 		nativeAdData = p0.adId
 	}, if p0.placeIdOverride then p0.placeIdOverride else p0.placeId)
-	local var63 = reactModule.useCallback(function() --[[ line: 467 ]]
+	local var63 = reactModule.useCallback(function()
 		-- upvalues: twoByOneGameTileTelemetryModule (copy), var51 (ref)
 		twoByOneGameTileTelemetryModule.logTwoByOneTileGameJoinInitiated()
 		twoByOneGameTileTelemetryModule.logTwoByOneTileCtaActivated()
 		var51()
 	end, { var51 })
-	local var64 = reactModule.useCallback(function() --[[ line: 473 ]]
+	local var64 = reactModule.useCallback(function()
 		-- upvalues: twoByOneGameTileTelemetryModule (copy), var51 (ref), var53 (ref)
 		twoByOneGameTileTelemetryModule.logTwoByOneTileCtaActivated()
 		var51()
 		var53()
 	end, { var51, var53 })
-	local var65 = reactModule.useCallback(function() --[[ line: 479 ]]
+	local var65 = reactModule.useCallback(function()
 		-- upvalues: twoByOneGameTileTelemetryModule (copy), var62 (ref), var61 (ref), var60 (ref)
 		twoByOneGameTileTelemetryModule.logTwoByOneTileGameJoinInitiated()
 		var62(var61.playButtonState, var60)
 	end, { var62, var61.playButtonState, var60 })
-	local var66 = reactModule.useCallback(function() --[[ line: 491 ]]
+	local var66 = reactModule.useCallback(function()
 		-- upvalues: var50 (ref), var49 (ref), hoverTileCoordinator (copy), twoByOneGameTileTelemetryModule (copy), var51 (ref), tileVariant (ref), var53 (ref), var65 (ref)
 		if var50.current then
 			var50.current = false
@@ -341,7 +342,7 @@ return function(p0) --[[ line: 175 ]]
 		var65,
 		var51
 	})
-	local var67 = if fFlagMigrateGameInfoToStore then nil else useSelector(function(p4) --[[ line: 523 ]]
+	local var67 = if fFlagMigrateGameInfoToStore then nil else useSelector(function(p4)
 		-- upvalues: gameInfosReducer (copy), universeId (ref)
 		return p4.Personalization[gameInfosReducer.key][universeId]
 	end)
@@ -356,11 +357,11 @@ return function(p0) --[[ line: 175 ]]
 	}) elseif fFlagMigrateGameInfoToStore then formatExperienceThumbnail(p0.wideAssetId, placeId, true) else formatExperienceThumbnail((if p0.primaryWideImageAssetId then p0.primaryWideImageAssetId else itemLayoutDataParsingUtils.getWideImageAssetId(getGameTileLayoutData(var67, p0.topicId))) or (if var67 then var67.primaryWideAssetId else nil), placeId, true)
 	local var69 = if fFlagMigrateGameInfoToStore then p0.ageRatingLabel elseif var67 then var67.ageRecommendationDisplayName else nil
 	local var70 = reactModule.useRef(nil)
-	reactModule.useEffect(function() --[[ line: 558 ]]
+	reactModule.useEffect(function()
 		-- upvalues: impressionsTagUtility (copy), var70 (ref), p0 (ref)
 		impressionsTagUtility.AddTag(var70, p0.impressionsTag, p0.index)
 		
-		return function() --[[ line: 560 ]]
+		return function()
 			-- upvalues: impressionsTagUtility (copy), var70 (copy), p0 (copy)
 			impressionsTagUtility.RemoveTag(var70, p0.impressionsTag, p0.index)
 		end
@@ -546,13 +547,13 @@ return function(p0) --[[ line: 175 ]]
 						eventContext = "TwoByOneTile",
 						launchSource = "TwoByOneTile",
 						hidePlayableIcon = true,
-						preferSecondaryPlayButton = true,
 						universeId = universeId,
 						placeId = if p0.placeIdOverride then p0.placeIdOverride else placeId,
 						referralSource = p0.appPage,
 						playableText = var31,
 						buttonSize = medium,
 						width = var37,
+						preferSecondaryPlayButton = if fFlagLuaAppDemoModePlayButton then true else nil,
 						onActivated = var63,
 						reportExperienceLaunched = var60,
 						experienceJoinData = if p0.launchDataOverride then { launchData = p0.launchDataOverride } else nil
@@ -598,7 +599,7 @@ return function(p0) --[[ line: 175 ]]
 				appPage = p0.appPage,
 				topicId = p0.topicId,
 				isSponsored = p0.isSponsored,
-				setGameHidden = p0.setGameHidden or function() --[[ line: 847 ]] end,
+				setGameHidden = p0.setGameHidden or function() end,
 				isHovered = var49,
 				isSelected = var44,
 				availableMenuItems = var56
@@ -615,7 +616,7 @@ return function(p0) --[[ line: 175 ]]
 					placeId = if fFlagLuaAppNotInterestedReportPlaceId then placeId else nil,
 					collectionId = p0.topicId,
 					appPage = p0.appPage,
-					setGameHidden = p0.setGameHidden or function() --[[ line: 870 ]] end,
+					setGameHidden = p0.setGameHidden or function() end,
 					menuKey = hoverKey,
 					menuOpen = var48,
 					onMenuOpenChanged = var58,

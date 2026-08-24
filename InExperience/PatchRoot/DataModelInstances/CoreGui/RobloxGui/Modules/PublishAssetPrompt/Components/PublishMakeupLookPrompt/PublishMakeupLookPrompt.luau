@@ -12,7 +12,6 @@ local labeledTextBoxModule = require(parent.Common.LabeledTextBox)
 local publishInfoListModule = require(parent.Common.PublishInfoList)
 local makeupPartGridModule = require(parent.Common.MakeupPartGrid)
 local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
-local getFFlagUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Flags.GetFFlagUploadMakeupSupport)
 local purchasePromptModule = require(corePackagesService.Workspace.Packages.PurchasePrompt)
 local publishAssetAnalytics = purchasePromptModule.PublishAssetAnalytics
 local setPromptVisibilityModule = require(script.Parent.Parent.Parent.Actions.SetPromptVisibility)
@@ -28,7 +27,7 @@ publishMakeupLookPrompt.validateProps = tModule.strictInterface({
 	SetPromptVisibility = tModule.callback
 })
 
-function publishMakeupLookPrompt.init(p0) --[[ line: 48 ]]
+function publishMakeupLookPrompt.init(p0)
 	-- upvalues: playersService (ref), publishAssetAnalytics (ref), purchasePromptModule (ref), mutedError (ref)
 	local localPlayer = playersService.LocalPlayer
 	assert(localPlayer, "LocalPlayer must not be nil")
@@ -43,23 +42,23 @@ function publishMakeupLookPrompt.init(p0) --[[ line: 48 ]]
 		description = localPlayer.Name .. "'s Makeup"
 	})
 	
-	function p0.openPreviewView() --[[ line: 63 ]]
+	function p0.openPreviewView()
 		-- upvalues: publishAssetAnalytics (copy), p0 (ref)
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Expand)
 		p0:setState({ showingPreviewView = true })
 	end
 	
-	function p0.closePreviewView() --[[ line: 68 ]]
+	function p0.closePreviewView()
 		-- upvalues: p0 (ref)
 		p0:setState({ showingPreviewView = false })
 	end
 	
-	function p0.canSubmit() --[[ line: 72 ]]
+	function p0.canSubmit()
 		-- upvalues: p0 (ref)
 		return p0.state.isNameValid and (p0.state.isDescValid and (p0.props.accessoryInstance ~= nil and p0.state.purchasePromptReady))
 	end
 	
-	function p0.onSubmit() --[[ line: 79 ]]
+	function p0.onSubmit()
 		-- upvalues: publishAssetAnalytics (copy), p0 (ref), purchasePromptModule (copy), mutedError (copy)
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Buy)
 		local t = { name = p0.state.name, description = p0.state.description }
@@ -72,7 +71,7 @@ function publishMakeupLookPrompt.init(p0) --[[ line: 48 ]]
 		mutedError("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
 	end
 	
-	function p0.onNameUpdated(p1, p2) --[[ line: 99 ]]
+	function p0.onNameUpdated(p1, p2)
 		-- upvalues: p0 (ref), publishAssetAnalytics (copy)
 		p0:setState({ name = p1, isNameValid = p2 })
 		
@@ -82,7 +81,7 @@ function publishMakeupLookPrompt.init(p0) --[[ line: 48 ]]
 		end
 	end
 	
-	function p0.onDescriptionUpdated(p3, p4) --[[ line: 107 ]]
+	function p0.onDescriptionUpdated(p3, p4)
 		-- upvalues: p0 (ref), publishAssetAnalytics (copy)
 		p0:setState({ description = p3, isDescValid = p4 })
 		
@@ -92,7 +91,7 @@ function publishMakeupLookPrompt.init(p0) --[[ line: 48 ]]
 		end
 	end
 	
-	function p0.onWindowStateChanged(p5) --[[ line: 115 ]]
+	function p0.onWindowStateChanged(p5)
 		-- upvalues: p0 (ref)
 		local isShown = p5.isShown
 		
@@ -108,29 +107,29 @@ function publishMakeupLookPrompt.init(p0) --[[ line: 48 ]]
 		end
 	end
 	
-	function p0.onPromptStateSetToNone() --[[ line: 129 ]]
+	function p0.onPromptStateSetToNone()
 		-- upvalues: p0 (ref)
 		p0:setState({ purchasePromptReady = true })
 	end
 end
 
-function publishMakeupLookPrompt.updatePreviewModel(p6) --[[ line: 134 ]]
+function publishMakeupLookPrompt.updatePreviewModel(p6)
 	-- upvalues: makeupPreviewUtilsModule (ref)
 	local accessoryInstance = p6.props.accessoryInstance
 	
 	if accessoryInstance and accessoryInstance:IsA("Folder") then
 		local makeupEntries = p6.props.makeupEntries
-		task.spawn(function() --[[ line: 142 ]]
+		task.spawn(function()
 			-- upvalues: makeupPreviewUtilsModule (copy), accessoryInstance (ref), makeupEntries (ref), p6 (ref)
-			local var18 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
+			local var17 = makeupPreviewUtilsModule.compositeMakeupFolder(accessoryInstance)
 			local folderAccessories = makeupPreviewUtilsModule.getFolderAccessories(accessoryInstance, makeupEntries)
 			
-			if not var18 and #folderAccessories == 0 or not p6.isMounted then return end
-			local var20 = makeupPreviewUtilsModule.createMakeupHeadPreview(var18, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
+			if not var17 and #folderAccessories == 0 or not p6.isMounted then return end
+			local var19 = makeupPreviewUtilsModule.createMakeupHeadPreview(var17, Enum.AvatarAssetType.FaceMakeup, folderAccessories)
 			
-			if var20 and p6.isMounted then
+			if var19 and p6.isMounted then
 				local previewModel = p6.state.previewModel
-				p6:setState({ previewModel = var20 }, function() --[[ line: 153 ]]
+				p6:setState({ previewModel = var19 }, function()
 					-- upvalues: previewModel (ref)
 					if previewModel then
 						previewModel:Destroy()
@@ -143,7 +142,7 @@ function publishMakeupLookPrompt.updatePreviewModel(p6) --[[ line: 134 ]]
 	end
 end
 
-function publishMakeupLookPrompt.didMount(p7) --[[ line: 162 ]]
+function publishMakeupLookPrompt.didMount(p7)
 	-- upvalues: purchasePromptModule (ref), mutedError (ref), publishAssetAnalytics (ref)
 	p7.isMounted = true
 	p7:updatePreviewModel()
@@ -161,13 +160,13 @@ function publishMakeupLookPrompt.didMount(p7) --[[ line: 162 ]]
 	publishAssetAnalytics.sendPageLoad(publishAssetAnalytics.Section.BuyCreationPage)
 end
 
-function publishMakeupLookPrompt.didUpdate(p8, p9) --[[ line: 183 ]]
+function publishMakeupLookPrompt.didUpdate(p8, p9)
 	if p9.accessoryInstance ~= p8.props.accessoryInstance then
 		p8:updatePreviewModel()
 	end
 end
 
-function publishMakeupLookPrompt.willUnmount(p10) --[[ line: 189 ]]
+function publishMakeupLookPrompt.willUnmount(p10)
 	-- upvalues: mutedError (ref)
 	p10.isMounted = false
 	
@@ -187,8 +186,8 @@ function publishMakeupLookPrompt.willUnmount(p10) --[[ line: 189 ]]
 	mutedError("promptStateSetToNoneConnection was not established")
 end
 
-function publishMakeupLookPrompt.renderPromptBody(p11) --[[ line: 209 ]]
-	-- upvalues: roactModule (ref), uDim (ref), objectViewportModule (ref), getFFlagUploadMakeupSupportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref)
+function publishMakeupLookPrompt.renderPromptBody(p11)
+	-- upvalues: roactModule (ref), uDim (ref), objectViewportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref)
 	local previewModel = p11.state.previewModel
 	
 	return roactModule.createFragment({
@@ -205,8 +204,7 @@ function publishMakeupLookPrompt.renderPromptBody(p11) --[[ line: 209 ]]
 			LayoutOrder = 1,
 			openPreviewView = p11.openPreviewView,
 			model = previewModel,
-			isLoading = previewModel == nil,
-			isMakeupPreview = getFFlagUploadMakeupSupportModule()
+			isLoading = previewModel == nil
 		}),
 		DescriptionInput = roactModule.createElement(labeledTextBoxModule, {
 			LayoutOrder = 2,
@@ -232,15 +230,14 @@ function publishMakeupLookPrompt.renderPromptBody(p11) --[[ line: 209 ]]
 	})
 end
 
-function publishMakeupLookPrompt.render(p12) --[[ line: 256 ]]
-	-- upvalues: roactModule (ref), basePublishPromptModule (ref), getFFlagUploadMakeupSupportModule (ref), robloxTranslatorModule (ref)
+function publishMakeupLookPrompt.render(p12)
+	-- upvalues: roactModule (ref), basePublishPromptModule (ref), robloxTranslatorModule (ref)
 	return roactModule.createElement(basePublishPromptModule, {
 		delayInputSeconds = 3,
 		promptBody = p12:renderPromptBody(),
 		screenSize = p12.props.screenSize,
 		showingPreviewView = p12.state.showingPreviewView,
 		closePreviewView = p12.closePreviewView,
-		isMakeupPreview = getFFlagUploadMakeupSupportModule(),
 		asset = p12.state.previewModel,
 		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
 		defaultName = p12.state.name,
@@ -253,7 +250,7 @@ function publishMakeupLookPrompt.render(p12) --[[ line: 256 ]]
 	})
 end
 
-return roactRoduxModule.connect(function(p13) --[[ line: 276 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p13)
 	return {
 		accessoryInstance = p13.promptRequest.promptInfo.accessoryInstance,
 		guid = p13.promptRequest.promptInfo.guid,
@@ -261,10 +258,10 @@ return roactRoduxModule.connect(function(p13) --[[ line: 276 | named "mapStateTo
 		priceInRobux = p13.promptRequest.promptInfo.priceInRobux,
 		makeupEntries = p13.promptRequest.promptInfo.makeupEntries
 	}
-end, function(p14) --[[ line: 286 | named "mapDispatchToProps" ]]
+end, function(p14)
 	-- upvalues: setPromptVisibilityModule (ref)
 	return {
-		SetPromptVisibility = function(value) --[[ line: 288 ]]
+		SetPromptVisibility = function(value)
 			-- upvalues: p14 (ref), setPromptVisibilityModule (copy)
 			p14(setPromptVisibilityModule(value))
 		end

@@ -2,11 +2,10 @@
 local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
 local timestampModule = require(script.Parent.Parent.Parent.Parent.Parent.google.protobuf.timestamp)
-local _ = require(script.Parent.custom_options)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 64 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		id = if p0 == nil or p0.id == nil then 0 else p0.id,
@@ -24,7 +23,7 @@ function t_1.new(p0) --[[ line: 64 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 89 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -110,7 +109,7 @@ function t_1:encode() --[[ line: 89 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 161 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref), timestampModule (ref)
 	local var35 = t_1.new()
 	local var36 = 0
@@ -213,7 +212,7 @@ function t_1.decode(p1) --[[ line: 161 ]]
 	return var35
 end
 
-function t_1:jsonEncode() --[[ line: 259 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.id ~= nil and self.id ~= 0 then
@@ -255,7 +254,7 @@ function t_1:jsonEncode() --[[ line: 259 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 313 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref), timestampModule (ref)
 	local var75 = t_1.new()
 	

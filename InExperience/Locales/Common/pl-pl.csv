@@ -152,7 +152,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Jakość zasobu: tekst
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Jakość zasobu: {partName} ma {intersecting_tri_face_percent}% przecinających się powierzchni trójkątnych (wynik: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Jakość zasobu: {partName} ma {uv_outside_bound_vert_percent}% wierzchołków UV poza granicami (wynik: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Jakość zasobu: {partName} ma {similar_vertex_percent}% podobnych wierzchołków (wynik: {score}).
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,Punkt zaczepienia akcesorium „{AttachmentName}” w „{PartName}” musi być umieszczony blisko powierzchni siatki. Bieżąca pozycja [{CurrentPosition}] znajduje się poza prawidłowym obszarem. Przybliż ją do [{ClosestValidPosition}].
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Uchwyt jest połączony skórką ze stawem {jointName}, który nie jest częścią dozwolonego schematu. Dozwolone są wyłącznie standardowe stawy R15 oraz stawy do przenoszenia skinningu."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} musi używać transferu skinningu, ale brakuje wymaganego stawu {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Uchwyt jest połączony skórką ze stawem {jointName}, ale ten zasób musi być połączony skórką automatycznie. Możesz połączyć skórką wyłącznie ze stawem {validJointNameList}."
@@ -166,7 +165,6 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Nie można znaleźć wyma
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Następujące instancje nie są częścią zatwierdzonego schematu i należy je usunąć: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,"Przesłany zasób powinien być typu {ExpectedClass}, a jest typu {RootClass}."
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"Przesłany zasób powinien mieć nazwę {ExpectedClass}, a zamiast tego ma nazwę {RootClass}."
-Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} nadal zawiera niezapisaną edytowalną treść. Zapisz ją jako zasób przed opublikowaniem i spróbuj ponownie.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,Część ciała „{bodyPartName}” w CurveAnimation ma ścieżkę pozycji (translacji). Części ciała w animacji mogą być tylko obracane; ścieżki pozycji nie są dozwolone. Usuń ścieżkę pozycji z tej części ciała.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,Część ciała „{bodyPartName}” w CurveAnimation przemieszcza się o {distance} studów od pozycji początkowej. Maksymalna dozwolona translacja to {maxDistance} studów. Zmniejsz ruch pozycyjny części ciała.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation zawiera kości HRD/DRD, a część ciała „{bodyPartName}” ma ścieżkę pozycji (translacji). Gdy w animacji znajdują się jakiekolwiek kości, żadne części ciała nie mogą być przesuwane, aby zapobiec rozdzieleniu stawów. Usuń wszystkie ścieżki pozycji z części ciała."
@@ -207,7 +205,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,Animacja CurveAnima
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation zawiera krzywe (Curves) ze zbyt dużą liczbą kluczy. Maksymalna liczba kluczy na krzywą (Curve) to {maxAllowed}. Popraw animację.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,"Liczba elementów MarkerCurve zawartych w CurveAnimation przekracza {maxAllowed}. Upewnij się, że liczba elementów podrzędnych MarkerCurve nie przekracza {maxAllowed}."
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation zawiera MarkerCurve z {count} markerami. Maksymalna liczba markerów na MarkerCurve to {maxAllowed}. Popraw animację.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Opublikowana animacja określa maksymalną translację części wynoszącą {taggedTranslation} studów, ale jej dane animacji dają w obliczeniach {calculatedTranslation} studów. Opublikuj animację ponownie."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation zawiera nieoczekiwany element podrzędny: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,"Dynamiczne głowy na rynku muszą być prawidłowo umieszczone w klatce, tak aby wierzchołki oczu i ust na klatce pokrywały się z wierzchołkami siatki. Popraw klatkę i jej wyrównanie z siatką."
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,"Nie można wykryć mimiki obejmującej uśmiech przeznaczonej dla dynamicznej głowy. Dostosuj punkty orientacyjne obramowania dla ust, aby pasowały do miejsca, w którym usta znajdują się na głowie, i upewnij się, że mogą one wyrażać mimikę uśmiechu."
@@ -266,9 +263,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"Rozmiar osi {axis} siat
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Zaczepienie {attName} musi występować dokładnie raz w ramach elementów podrzędnych {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,„{RootInstanceName}” (lub jego elementy podrzędne) zawierają atrybuty. Musisz usunąć atrybuty z następujących elementów: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} „{InstancePath}” ma nieprawidłowe właściwości: {ProblematicProperties}. Przekroczono wskazany limit bajtów (limit 0 oznacza, że właściwość musi być pusta); każda inna właściwość zawiera wartości NaN/Inf lub przekracza swój domyślny limit rozmiaru."
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Punkt zaczepienia szkieletu „{AttachmentName}” w „{PartName}” musi być umieszczony w pobliżu granicy stawu, gdzie ta część ciała łączy się z sąsiednią częścią. Bieżąca pozycja [{CurrentPosition}] znajduje się zbyt daleko od płaszczyzny połączenia. Przybliż ją do [{ClosestValidPosition}]."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Aby przesłać zasób do Robloxa, musisz wybrać dokładnie 1 instancję i skojarzony typ przesyłania."
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Ten zasób jest zbyt duży, aby go przesłać ({sizeBytes} B przekracza maksymalny rozmiar {maxSizeBytes} B). Zmniejsz jego rozmiar i spróbuj ponownie."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Instancja {ProblematicDescendantPath} nie powinna zawierać tagów.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Drugi testowy ciąg błędu używany do weryfikacji pełnego cyklu przepływu pracy synchronizacji tłumaczeń Hub-first.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Część siatki głowy zawiera animacje twarzy dla stawu {jointName}, których nie można używać w FAC. Zmień nazwę tego stawu, a następnie ponownie zaimportuj głowę."
@@ -400,7 +395,6 @@ CommonUI.Features.Label.Unchecked,Niezaznaczone
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Połącz z
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,Twórz
 CommonUI.Features.StudioCTA.Tooltip.Body,Pobierz Studio ZA DARMO!
 CommonUI.Features.StudioCTA.Tooltip.Title,Zacznij tworzyć na platformie Roblox
@@ -1303,33 +1297,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,Zaktualizuj istniejący wygląd
 Feature.Avatar.Action.UpdateMakeupLook,Zaktualizuj wygląd
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,Poznawaj style
-Feature.Avatar.BackgroundGeneration.Action.Cancel,
-Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.Okay,
-Feature.Avatar.BackgroundGeneration.Action.Publish,
-Feature.Avatar.BackgroundGeneration.Action.Upload,
-Feature.Avatar.BackgroundGeneration.Action.View,Wyświetl
-Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Twórz tła dzięki subskrypcji Plus.
-Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Twoje dzieło jest gotowe do użycia.
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"To tło zostało wygenerowane przez sztuczną inteligencję. Publikując, potwierdzasz, że jest ono zgodne ze Standardami społeczności Robloxa i nie wykorzystuje treści, do których nie masz praw. Zanim pojawi się w Twoim wyposażeniu, zostanie zweryfikowane. Opublikowanych przedmiotów nie można edytować."
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"To tło zostało wygenerowane przez sztuczną inteligencję. Przesyłając, potwierdzasz, że jest ono zgodne ze Standardami społeczności Robloxa i nie wykorzystuje treści, do których nie masz praw. Zanim pojawi się w Twoim wyposażeniu, zostanie zweryfikowane. Przesłanych przedmiotów nie można edytować."
-Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Odblokuj bezpłatne ekskluzywne tła dzięki subskrypcji Plus.
-Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Przedmiot nie spełniał Standardów społeczności
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Ten prompt nie jest zgodny z naszymi wytycznymi. Spróbuj opisać coś innego.
-Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"To tło nie jest zgodne ze Standardami społeczności Robloxa, dlatego nie dodano go do Twojego wyposażenia. Spróbuj wygenerować nowe."
 Feature.Avatar.BackgroundGeneration.Error.System,Podczas generowania Twojego tła coś poszło nie tak. Spróbuj ponownie.
-Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
-Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Wyłącznie w ramach subskrypcji Plus
-Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Opisz swoje tło...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Generowanie Twojego tła...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,Przygotowywanie Twojego tła...
 Feature.Avatar.BackgroundGeneration.Title,Utwórz tło
-Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
-Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Opublikuj w wyposażeniu
-Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
-Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Prześlij do wyposażenia
 Feature.Avatar.Backgrounds.Title,Tła
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Modyfikacja nie jest dostępna dla tego stylu ciała.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Powróć do oryginalnych kolorów ciała
@@ -1847,18 +1820,16 @@ Feature.Build.Action.ShareLink,Udostępnij link
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,Zaktualizuj ocenę
 Feature.Build.Action.UpdateWithChanges,Zaktualizuj ze zmianami
-Feature.Build.Action.View,
+Feature.Build.Action.View,Wyświetl
 Feature.Build.Action.ViewUsage,Wyświetl wykorzystanie
 Feature.Build.Content.NewGame,Nowa gra
 Feature.Build.Description.ArchiveRemoval,"Jeśli zarchiwizujesz tę grę, zostanie ona usunięta z funkcji Buduj. Nadal możesz uzyskać do niej dostęp i przywrócić ją w Centrum dla twórców lub Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,"Użyj Robuxów, aby automatycznie kupować dodatkowe użycia funkcji Buduj podczas tworzenia. W dowolnym momencie możesz ustawić dzienny limit wydatków."
-Feature.Build.Description.BoostAudienceForPlays,"Zwiększ liczbę odbiorców, aby uzyskać więcej odtworzeń."
 Feature.Build.Description.BoostGameAudience,Zwiększ liczbę odbiorców swojej gry
 Feature.Build.Description.BuildIdeaGame,Zamień swoje pomysły w grę
 Feature.Build.Description.BuildReplyNotif,"Otrzymuj powiadomienia, gdy funkcja Buduj ma dla Ciebie odpowiedź."
 Feature.Build.Description.BuyRobuxToCreate,"Kup więcej Robuxów, aby kontynuować tworzenie, lub poczekaj, aż jutro zresetują się bezpłatne użycia funkcji Buduj."
 Feature.Build.Description.BuyUsageOrWait,"Kup więcej użyć funkcji Buduj za pomocą Robuxów lub poczekaj, aż zresetuje się Twój dzienny limit."
-Feature.Build.Description.CampaignRunDates,Twoja kampania będzie trwać od {startDate} do {endDate}
 Feature.Build.Description.ChoosePlaytesters,"Wybierz znajomych, którzy pomogą Ci przetestować grę."
 Feature.Build.Description.EnableBuildNotifs,"Włącz powiadomienia w ustawieniach urządzenia, aby otrzymywać aktualności od funkcji Buduj."
 Feature.Build.Description.FriendsLinkOnly,"Tylko Twoje kontakty mają dostęp do tego linku. Zmień ustawienie Odbiorcy swojej gry, jeśli chcesz, aby więcej osób mogło grać."
@@ -1887,14 +1858,12 @@ Feature.Build.Label.Access,Dostęp
 Feature.Build.Label.AdditionalUsage,Dodatkowe użycia funkcji Buduj
 Feature.Build.Label.AdditionalUsed,Wykorzystano {USED} z {LIMIT}
 Feature.Build.Label.All,
-Feature.Build.Label.AmountAvailable,Dostępne {AMOUNT}
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
 Feature.Build.Label.BackToBuild,Powrót do budowania
 Feature.Build.Label.Building,Buduję...
 Feature.Build.Label.CaptureLibrary,Biblioteka przechwyconych elementów
 Feature.Build.Label.ContentRating,Ocena zawartości
-Feature.Build.Label.Created,Utworzono
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Centrum dla twórców
 Feature.Build.Label.Deleted,Usunięty
@@ -1908,13 +1877,11 @@ Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,Zdobądź więcej użyć funkcji Buduj
 Feature.Build.Label.Hi,Cześć
 Feature.Build.Label.IconThumbnails,Ikona i miniatury
-Feature.Build.Label.Images2D,Obrazy 2D
 Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Z ograniczeniami
 Feature.Build.Label.Loading,Wczytuję...
-Feature.Build.Label.Models3D,Modele 3D
 Feature.Build.Label.NoLimit,Brak limitu
 Feature.Build.Label.NotStarted,Nie rozpoczęto
 Feature.Build.Label.Pending,Oczekujące
@@ -1924,19 +1891,15 @@ Feature.Build.Label.Private,Prywatny
 Feature.Build.Label.Public,Publiczny
 Feature.Build.Label.PubliclyUnavailable,Niedostępna publicznie
 Feature.Build.Label.Published,
-Feature.Build.Label.Purchased,Kupiono
 Feature.Build.Label.Ready,
 Feature.Build.Label.ResetsDaily,Resetuje się codziennie
 Feature.Build.Label.RestoredVersion,Przywrócono {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Wyszukaj zasoby
 Feature.Build.Label.SearchGames,Szukaj gier
 Feature.Build.Label.SearchTasks,Wyszukaj zadania
 Feature.Build.Label.SelectOption,Wybierz opcję
 Feature.Build.Label.ShareAddedFriends,Udostępnij dodanym znajomym
-Feature.Build.Label.Shared,Udostępniono
-Feature.Build.Label.Sounds,Dźwięki
 Feature.Build.Label.Thinking,Myślę
 Feature.Build.Label.Title,Tytuł
 Feature.Build.Label.TitleDescription,Tytuł i opis
@@ -2004,7 +1967,6 @@ Feature.Build.Label.ToolThumbnailRunning,Ustawiam miniaturę gry
 Feature.Build.Label.UniverseNumber,Uniwersum {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Brak informacji
 Feature.Build.Label.UnlimitedUsed,Wykorzystano {USED} • Brak limitu
-Feature.Build.Label.Updated,Zaktualizowano
 Feature.Build.Label.Usage,Użycie
 Feature.Build.Label.UsageUsed,Wykorzystano {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2018,8 +1980,6 @@ Feature.Build.Message.AccountRequirements,Twoje konto nie spełnia wymagań doty
 Feature.Build.Message.AccountTooNew,"Twoje konto jest zbyt nowe, aby publikować. Spróbuj ponownie za 2 dni."
 Feature.Build.Message.AllFriendsAdded,Dodano wszystkich znajomych jako testerów gry.
 Feature.Build.Message.AnswerBuildQuestion,Odpowiedz na poniższe pytanie od funkcji Buduj.
-Feature.Build.Message.AssetDetailsUnavailable,Szczegóły zasobu są niedostępne.
-Feature.Build.Message.AssetsLoadFailed,Nie udało się wczytać zasobów.
 Feature.Build.Message.AudienceIneligible,Nie kwalifikuje się do tej grupy odbiorców
 Feature.Build.Message.BuildAccountBlocked,Funkcja Buduj nie jest teraz dostępna na Twoim koncie.
 Feature.Build.Message.BuildBusy,Funkcja Buduj jest zajęta. Odczekaj chwilę i spróbuj ponownie.
@@ -2050,7 +2010,6 @@ Feature.Build.Message.InvitesLoadFailed,Nie udało się wczytać zaproszeń
 Feature.Build.Message.LimitBelowSpend,Limit nie może być niższy niż liczba Robuxów wydanych dzisiaj ({ALREADY_SPENT}).
 Feature.Build.Message.LinkCopied,Skopiowano link do schowka.
 Feature.Build.Message.LoadingVersions,Wczytuję historię wersji…
-Feature.Build.Message.NoAssetsFound,Nie znaleziono zasobów.
 Feature.Build.Message.NoDescriptionProvided,Brak opisu.
 Feature.Build.Message.NoFriendsToAdd,"Nie masz jeszcze żadnych znajomych do dodania. Najpierw znajdź osoby, z którymi możesz się połączyć na Robloxie."
 Feature.Build.Message.NoResults,
@@ -2083,10 +2042,8 @@ Feature.Build.Message.WhatToCreate,Co chcesz dziś stworzyć?
 Feature.Build.Message.WorkedMinutesSeconds,Działanie trwało {MINUTES} min {REM_SECONDS} s
 Feature.Build.Message.WorkedSeconds,Działanie trwało {SECONDS} s
 Feature.Build.Message.WorkingOnTasks,Praca nad Twoimi zadaniami
-Feature.Build.Title.AdCampaignActive,Kampania reklamowa jest aktywna
 Feature.Build.Title.AddFriendsToPlaytest,"Dodaj znajomych, którzy pomogą Ci przetestować grę"
 Feature.Build.Title.ArchiveThisGame,Zarchiwizować tę grę?
-Feature.Build.Title.AssetLibrary,Biblioteka
 Feature.Build.Title.Audience,Odbiorcy
 Feature.Build.Title.BuildQuestion,Funkcja Buduj ma pytanie
 Feature.Build.Title.BuildQuestions,Funkcja Buduj ma kilka pytań
@@ -2212,7 +2169,6 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,Sprzedaj
 Feature.Catalog.Action.ShareVia,Udostępnij przez...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,Wypróbuj
 Feature.Catalog.Action.Upgrade,Zmień poziom na wyższy
 Feature.Catalog.Action.ViewDetailsPage,Wyświetl stronę szczegółów
 Feature.Catalog.Action.ViewExperienceDetails,Wyświetl szczegóły projektu
@@ -2628,7 +2584,6 @@ Feature.Chat.Label.LongPressToReplyTooltip,"Naciśnij i przytrzymaj, aby odpowie
 Feature.Chat.Label.Members,Członkowie
 Feature.Chat.Label.MessageNotAvailable,Ta wiadomość jest niedostępna
 Feature.Chat.Label.MuteInGameChatToastNotifications,Wycisz powiadomienia czatu w grze
-Feature.Chat.Label.MuteInGamePartyToastNotifications,Wycisz powiadomienia o Party w grze
 Feature.Chat.Label.New,Nowość
 Feature.Chat.Label.NoChatFound,Nie znaleziono czatów
 Feature.Chat.Label.NoDescriptionYet,Nie ma jeszcze opisu.
@@ -3068,7 +3023,7 @@ Feature.GameDetails.Label.SomethingElse,Coś innego
 Feature.GameDetails.Label.Store,Sklep
 Feature.GameDetails.Label.TellUsMorePlaceholder,Opowiedz nam więcej
 Feature.GameDetails.Label.TooRepetitive,Zbyt powtarzalna
-Feature.GameDetails.Label.Updated,
+Feature.GameDetails.Label.Updated,Zaktualizowano
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
@@ -3262,7 +3217,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Rozwiń
-Feature.Moments.Action.GenerateText,Generowanie tekstu
+Feature.Moments.Action.GenerateText,Wygeneruj
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Nieprzydatny
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Niewłaściwy lub niezgodny z zaleceniami
 Feature.Moments.Action.Hide,Ukryj szczegóły
@@ -3351,7 +3306,7 @@ Feature.Moments.Label.Tone.Hype,Ekscytujący
 Feature.Moments.Label.Tone.Neutral,Neutralny
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
-Feature.Moments.Title.GenerateTextOptions,
+Feature.Moments.Title.GenerateTextOptions,Generowanie tekstu
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta
@@ -3712,8 +3667,6 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Twoja subskrypcja Plus już te
 Feature.RobloxSubscription.Body.GenericError,Nie udało się teraz tego zrealizować. Spróbuj ponownie.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Tej subskrypcji nie można kupić na tym urządzeniu.
 Feature.RobloxSubscription.Description.AgeCheckTrial,"Przeprowadź weryfikację wieku i odbierz bezpłatny tydzień subskrypcji Roblox Plus w ramach podziękowania. Nie musisz podawać formy płatności, aby skorzystać z bezpłatnego okresu próbnego."
-Feature.RobloxSubscription.Description.Benefit.Customize,Dostosuj za pomocą ramek profilu i motywów aplikacji
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pierwsze 60 dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Więcej zabawy za mniej Robuxów. Wykup subskrypcję Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Klikając przycisk \u{201C}{ctaText}\u{201D}, akceptujesz <a href=""{termsUrl}"">Warunki subskrypcji Robloxa</a>. Opłata będzie pobierana automatycznie co miesiąc do momentu anulowania subskrypcji."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Darmowe serwery prywatne

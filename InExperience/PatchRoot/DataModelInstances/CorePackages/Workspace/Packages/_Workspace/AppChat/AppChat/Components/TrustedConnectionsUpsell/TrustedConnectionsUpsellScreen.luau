@@ -6,12 +6,12 @@ local enumScreensModule = require(appChat.EnumScreens)
 local useNavigation = require(parent.Navigation).useNavigation
 local trustedConnectionsUpsellContainerModule = require(script.Parent.TrustedConnectionsUpsellContainer)
 
-return function(_) --[[ line: 15 ]]
+return function(_)
 	-- upvalues: useNavigation (ref), reactModule (ref), enumScreensModule (ref), name (ref), trustedConnectionsUpsellContainerModule (ref)
 	local var5 = useNavigation()
 	local conversationId = var5 and var5.getParam("conversationId", nil)
 	local modalVariant = var5 and var5.getParam("modalVariant", nil)
-	local var8 = reactModule.useCallback(function() --[[ line: 19 ]]
+	local var8 = reactModule.useCallback(function()
 		-- upvalues: var5 (ref), enumScreensModule (copy)
 		if var5 and var5.state.routeName == enumScreensModule.TrustedConnectionsUpsell then
 			var5.goBack(var5.state.key)

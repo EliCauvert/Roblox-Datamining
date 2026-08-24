@@ -44,34 +44,34 @@ return {
 	useUidRefString = require(script.useUidRefString),
 	validateInterface = require(script.validateInterface),
 	validateSduiComponentConfig = require(script.validateSduiComponentConfig),
-	getSduiClientBindingBuilder = function() --[[ line: 101 ]]
+	getSduiClientBindingBuilder = function()
 		return require(script.ClientBinding.SduiClientBindingBuilder)
 	end,
-	getSduiDataBinder = function() --[[ line: 104 ]]
+	getSduiDataBinder = function()
 		return require(script.ClientBinding.SduiDataBinder)
 	end,
-	getProtoVariableMapper = function() --[[ line: 107 ]]
+	getProtoVariableMapper = function()
 		return require(script.ClientBinding.ProtoVariableMapper)
 	end,
-	createBuilderConfig = function(p0) --[[ line: 110 ]]
+	createBuilderConfig = function(p0)
 		return require(script.ClientBinding.createBuilderConfig)(p0)
 	end,
-	getSduiActionHandlerRegistry = function() --[[ line: 114 ]]
+	getSduiActionHandlerRegistry = function()
 		return require(script.getSduiActionHandlerRegistry)()
 	end,
-	getSduiImpressionHandlerRegistry = function() --[[ line: 117 ]]
+	getSduiImpressionHandlerRegistry = function()
 		return require(script.getSduiImpressionHandlerRegistry)()
 	end,
-	getSduiTelemetryHandlerNameRegistry = function() --[[ line: 120 ]]
+	getSduiTelemetryHandlerNameRegistry = if require(script.Parent.SharedFlags).FFlagSduiActionTelemetryHandler then function()
 		return require(script.getSduiTelemetryHandlerNameRegistry)()
-	end,
-	getSduiServiceDependenciesStore = function() --[[ line: 123 ]]
+	end else nil,
+	getSduiServiceDependenciesStore = function()
 		return require(script.ClientBinding.getSduiServiceDependenciesStore)()
 	end,
-	getSduiTokensStore = function() --[[ line: 126 ]]
+	getSduiTokensStore = function()
 		return require(script.ClientBinding.getSduiTokensStore)()
 	end,
-	getSduiPolicyStore = function() --[[ line: 129 ]]
+	getSduiPolicyStore = function()
 		return require(script.ClientBinding.getSduiPolicyStore)()
 	end,
 	getSduiComponentRegistry = require(script.getSduiComponentRegistry),

@@ -8,7 +8,7 @@ local iconButton = foundationModule.IconButton
 local useLocalization = require(parent_1.Localization).Hooks.useLocalization
 local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
 
-return reactModule.memo(function(p0) --[[ line: 13 | named "PanelHeader" ]]
+return reactModule.memo(function(p0)
 	-- upvalues: fFlagPlayerListLocalizeGameTextModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), iconButton (ref), foundationModule (ref)
 	return reactModule.createElement(view, {
 		tag = "row flex-x-between align-y-center auto-y padding-x-large",
@@ -24,8 +24,7 @@ return reactModule.memo(function(p0) --[[ line: 13 | named "PanelHeader" ]]
 			LayoutOrder = 2,
 			icon = { name = foundationModule.Enums.IconName.X },
 			size = foundationModule.Enums.InputSize.XSmall,
-			onActivated = p0.onClose,
-			isDisabled = p0.isDisabled == true
+			onActivated = p0.onClose
 		})
 	})
 end)

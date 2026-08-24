@@ -6,6 +6,7 @@ local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
 local getSduiActionHandlerRegistryModule = require(sduiCoreSystem.getSduiActionHandlerRegistry)
 local getSduiServiceDependenciesStoreModule = require(sduiCoreSystem.ClientBinding.getSduiServiceDependenciesStore)
 local logActionTelemetryModule = require(sduiCoreSystem.Analytics.logActionTelemetry)
+local reportUnifiedLoggingActionModule = require(sduiCoreSystem.Analytics.reportUnifiedLoggingAction)
 local _ = require(sduiCoreSystem.SduiBuilderTypes)
 local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
@@ -17,26 +18,27 @@ local _ = require(sduiCoreSystem.SduiConfigTypes)
 local _ = require(sduiCoreSystem.SduiComponentType)
 local fFlagSduiChartsSupport = require(parent.SharedFlags).FFlagSduiChartsSupport
 local fFlagSduiChartsSortDetailGenreFilter = require(parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
+local fFlagSduiActionTelemetryHandler = require(parent.SharedFlags).FFlagSduiActionTelemetryHandler
 local fFlagSduiActionSkipUnifiedLogging = require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging
 local fFlagSduiImprovedErrorDimensions = require(parent.SharedFlags).FFlagSduiImprovedErrorDimensions
 local fFlagSduiExperienceDetailsSupport = require(parent.SharedFlags).FFlagSduiExperienceDetailsSupport
 local fFlagSduiEventDetailsSupport = require(parent.SharedFlags).FFlagSduiEventDetailsSupport
 local fFlagSduiOptionSelectorCollection = require(parent.SharedFlags).FFlagSduiOptionSelectorCollection
 
-local function mergeTemplateParamsWithOverrides(p0, p1) --[[ line: 44 ]]
+local function mergeTemplateParamsWithOverrides(p0, p1)
 	if typeof(p1) ~= "table" then
 		return p0
 	end
-	local var11 = if p0 then table.clone(p0) else {}
+	local var12 = if p0 then table.clone(p0) else {}
 	
 	for i, v in p1 do
-		var11[i] = v
+		var12[i] = v
 	end
-	return var11
+	return var12
 end
 
-local function buildActionProp(p2, p3, p4, p5, p6, p7) --[[ line: 58 ]]
-	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), protoVariableMapperModule (ref), getSduiActionHandlerRegistryModule (ref), getSduiServiceDependenciesStoreModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiActionSkipUnifiedLogging (ref), buildPropTable (ref), mergeTemplateParamsWithOverrides (ref), logActionTelemetryModule (ref), fFlagSduiChartsSupport (ref), fFlagSduiOptionSelectorCollection (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), sduiPropUtilsModule (ref), buildActionProp (ref)
+local function buildActionProp(p2, p3, p4, p5, p6, p7)
+	-- upvalues: fFlagSduiImprovedErrorDimensions (ref), protoVariableMapperModule (ref), getSduiActionHandlerRegistryModule (ref), getSduiServiceDependenciesStoreModule (ref), fFlagSduiExperienceDetailsSupport (ref), fFlagSduiEventDetailsSupport (ref), fFlagSduiChartsSortDetailGenreFilter (ref), fFlagSduiActionTelemetryHandler (ref), sduiClientBindingBuilderModule (ref), propResultCategory (ref), fFlagSduiActionSkipUnifiedLogging (ref), buildPropTable (ref), mergeTemplateParamsWithOverrides (ref), logActionTelemetryModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref), reportUnifiedLoggingActionModule (ref), fFlagSduiChartsSupport (ref), fFlagSduiOptionSelectorCollection (ref), sduiPropUtilsModule (ref), buildActionProp (ref)
 	local currentComponentType = nil
 	local currentParserName = nil
 	
@@ -45,69 +47,82 @@ local function buildActionProp(p2, p3, p4, p5, p6, p7) --[[ line: 58 ]]
 		currentParserName = p6.currentParserName
 	end
 	if p2 == "value" then
-		local var12 = nil
-		local ok, status = pcall(function() --[[ line: 75 ]]
-			-- upvalues: p6 (ref), p3 (ref), var12 (write), protoVariableMapperModule (copy), getSduiActionHandlerRegistryModule (copy), getSduiServiceDependenciesStoreModule (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), sduiClientBindingBuilderModule (copy), p4 (ref), p5 (ref), p7 (ref), propResultCategory (copy), fFlagSduiActionSkipUnifiedLogging (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy), fFlagSduiChartsSupport (copy), fFlagSduiOptionSelectorCollection (copy)
+		local var13 = nil
+		local ok, status = pcall(function()
+			-- upvalues: p6 (ref), p3 (ref), var13 (write), protoVariableMapperModule (copy), getSduiActionHandlerRegistryModule (copy), getSduiServiceDependenciesStoreModule (copy), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), fFlagSduiActionTelemetryHandler (copy), sduiClientBindingBuilderModule (copy), p4 (ref), p5 (ref), p7 (ref), propResultCategory (copy), fFlagSduiActionSkipUnifiedLogging (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write), reportUnifiedLoggingActionModule (copy), fFlagSduiChartsSupport (copy), fFlagSduiOptionSelectorCollection (copy)
 			local appPage = p6.appPage
 			local value = typeof(p3) == "table" and (p3.kind and (p3.kind.value or nil))
-			var12 = if value and value.action_type then protoVariableMapperModule.mapActionTypeToLua(value.action_type) else nil
+			var13 = if value and value.action_type then protoVariableMapperModule.mapActionTypeToLua(value.action_type) else nil
 			
-			if not var12 then
+			if not var13 then
 				error(`Could not map actionType: {value and value.action_type}`)
 			end
-			local actionHandlerConfig = getSduiActionHandlerRegistryModule().getActionHandlerConfig(var12)
+			local actionHandlerConfig = getSduiActionHandlerRegistryModule().getActionHandlerConfig(var13)
 			
 			if not actionHandlerConfig then
-				error(`Could not find action for actionType: {var12}`)
+				error(`Could not find action for actionType: {var13}`)
 			end
-			return function(_, p8, p9) --[[ line: 98 ]]
-				-- upvalues: getSduiServiceDependenciesStoreModule (copy), appPage (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), p6 (copy), p3 (copy), sduiClientBindingBuilderModule (copy), p4 (copy), p5 (copy), p7 (copy), propResultCategory (copy), fFlagSduiActionSkipUnifiedLogging (copy), value (ref), var12 (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy), actionHandlerConfig (ref), fFlagSduiChartsSupport (copy), fFlagSduiOptionSelectorCollection (copy)
+			return function(_, p8, p9)
+				-- upvalues: getSduiServiceDependenciesStoreModule (copy), appPage (ref), fFlagSduiExperienceDetailsSupport (copy), fFlagSduiEventDetailsSupport (copy), fFlagSduiChartsSortDetailGenreFilter (copy), p6 (copy), fFlagSduiActionTelemetryHandler (copy), p3 (copy), sduiClientBindingBuilderModule (copy), p4 (copy), p5 (copy), p7 (copy), propResultCategory (copy), fFlagSduiActionSkipUnifiedLogging (copy), value (ref), var13 (copy), buildPropTable (copy), mergeTemplateParamsWithOverrides (copy), logActionTelemetryModule (copy), actionHandlerConfig (ref), sduiLoggerModule (copy), sduiErrorsModule (copy), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (copy), currentParserName (copy), reportUnifiedLoggingActionModule (copy), fFlagSduiChartsSupport (copy), fFlagSduiOptionSelectorCollection (copy)
 				local t = {
 					dependencies = getSduiServiceDependenciesStoreModule().getDependencies(appPage),
 					appPage = appPage,
 					configKey = if fFlagSduiExperienceDetailsSupport or fFlagSduiEventDetailsSupport or fFlagSduiChartsSortDetailGenreFilter then p6.configKey else nil
 				}
-				local var16 = nil
+				local var17 = nil
 				
-				if p3 and p3.telemetry_handler then
+				if fFlagSduiActionTelemetryHandler and p3 and p3.telemetry_handler then
 					local telemetryHandler = p3.telemetry_handler
 					
 					if telemetryHandler.kind and telemetryHandler.kind.type then
-						local var17, var18 = sduiClientBindingBuilderModule.buildProp(telemetryHandler, p4, p5, p6, p7)
-						var16 = if var18 == propResultCategory.PropSignal then var17(false).data else var17
+						local var18, var19 = sduiClientBindingBuilderModule.buildProp(telemetryHandler, p4, p5, p6, p7)
+						var17 = if var19 == propResultCategory.PropSignal then var18(false).data else var18
 					end
 				end
-				local var19 = nil
+				local var20 = nil
 				
 				if fFlagSduiActionSkipUnifiedLogging and p3 and p3.skip_unified_logging then
 					local skipUnifiedLogging = p3.skip_unified_logging
 					
 					if skipUnifiedLogging.kind and skipUnifiedLogging.kind.type then
-						local var20, var21 = sduiClientBindingBuilderModule.buildProp(skipUnifiedLogging, p4, p5, p6, p7)
-						var19 = if var21 == propResultCategory.PropSignal then var20(false).data else var20
+						local var21, var22 = sduiClientBindingBuilderModule.buildProp(skipUnifiedLogging, p4, p5, p6, p7)
+						var20 = if var22 == propResultCategory.PropSignal then var21(false).data else var21
 					end
 				end
 				local actionParams = value and value.action_params
 				local t_1 = {
-					actionType = var12,
-					telemetryHandler = var16,
-					skipUnifiedLogging = var19
+					actionType = var13,
+					telemetryHandler = var17,
+					skipUnifiedLogging = var20
 				}
-				local var24 = nil
+				local var25 = nil
 				
 				if actionParams and next(actionParams) then
-					local var25, var26 = buildPropTable(actionParams, p4, p5, p6, p7)
+					local var26, var27 = buildPropTable(actionParams, p4, p5, p6, p7)
 					
-					if var26 then
-						for i, v in var26 do
-							var25[i] = v(false).data
+					if var27 then
+						for i, v in var27 do
+							var26[i] = v(false).data
 						end
 					end
-					var24 = var25
+					var25 = var26
 				end
-				t_1.actionParams = mergeTemplateParamsWithOverrides(var24, p9)
-				logActionTelemetryModule(var16, actionHandlerConfig, t_1, p7, t)
+				t_1.actionParams = mergeTemplateParamsWithOverrides(var25, p9)
 				
+				if fFlagSduiActionTelemetryHandler then
+					logActionTelemetryModule(var17, actionHandlerConfig, t_1, p7, t)
+				elseif not actionHandlerConfig.skipUnifiedLogging then
+					if p7 == nil then
+						sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.NilAnalyticsContext, {
+							message = `Could not reportUnifiedLoggingAction. Missing analyticsContext {var13}`,
+							name = var13,
+							componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
+							parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else nil
+						}, appPage)
+					else
+						reportUnifiedLoggingActionModule(t, t_1, p7)
+					end
+				end
 				if actionHandlerConfig.handler then
 					if fFlagSduiChartsSupport or fFlagSduiOptionSelectorCollection then
 						return actionHandlerConfig.handler(t_1, p7, t, p8)
@@ -120,10 +135,10 @@ local function buildActionProp(p2, p3, p4, p5, p6, p7) --[[ line: 58 ]]
 		if ok then
 			return status, propResultCategory.Literal
 		end
-		return function(_, _, _) --[[ line: 196 ]]
-			-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), var12 (write), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
+		return function(_, _, _)
+			-- upvalues: sduiLoggerModule (copy), sduiErrorsModule (copy), var13 (write), fFlagSduiImprovedErrorDimensions (copy), currentComponentType (write), currentParserName (write)
 			sduiLoggerModule.reportCounter(sduiErrorsModule.SduiCounterName.ExecutedInvalidAction, {
-				name = var12,
+				name = var13,
 				componentType = if fFlagSduiImprovedErrorDimensions then currentComponentType else nil,
 				parserName = if fFlagSduiImprovedErrorDimensions then currentParserName else "buildActionProp"
 			})

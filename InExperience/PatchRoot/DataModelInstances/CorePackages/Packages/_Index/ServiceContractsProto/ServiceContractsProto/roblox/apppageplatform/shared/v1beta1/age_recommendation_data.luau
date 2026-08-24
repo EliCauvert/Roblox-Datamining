@@ -1,11 +1,10 @@
 ﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
 local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
-local _ = require(script.Parent.custom_options)
 local t_1 = {}
 t_1.__index = t_1
 
-function t_1.new(p0) --[[ line: 86 ]]
+function t_1.new(p0)
 	-- upvalues: t_1 (ref)
 	return setmetatable({
 		name = if p0 == nil or p0.name == nil then "" else p0.name,
@@ -14,7 +13,7 @@ function t_1.new(p0) --[[ line: 86 ]]
 	}, t_1)
 end
 
-function t_1:encode() --[[ line: 96 ]]
+function t_1:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var6 = 0
@@ -43,7 +42,7 @@ function t_1:encode() --[[ line: 96 ]]
 	return buff_1
 end
 
-function t_1.decode(p1) --[[ line: 120 ]]
+function t_1.decode(p1)
 	-- upvalues: t_1 (ref), protoModule (ref)
 	local var14 = t_1.new()
 	local var15 = 0
@@ -101,7 +100,7 @@ function t_1.decode(p1) --[[ line: 120 ]]
 	return var14
 end
 
-function t_1:jsonEncode() --[[ line: 173 ]]
+function t_1:jsonEncode()
 	local t = {}
 	
 	if self.name ~= nil and self.name ~= "" then
@@ -116,7 +115,7 @@ function t_1:jsonEncode() --[[ line: 173 ]]
 	return t
 end
 
-function t_1:jsonDecode() --[[ line: 191 ]]
+function t_1:jsonDecode()
 	-- upvalues: t_1 (ref)
 	local var36 = t_1.new()
 	
@@ -144,7 +143,7 @@ typeRegistryModule.default:register(t.AgeRecommendationDescriptor)
 local t_2 = {}
 t_2.__index = t_2
 
-function t_2.new(p2) --[[ line: 227 ]]
+function t_2.new(p2)
 	-- upvalues: t_2 (ref)
 	return setmetatable({
 		display_name = if p2 == nil or p2.display_name == nil then "" else p2.display_name,
@@ -156,7 +155,7 @@ function t_2.new(p2) --[[ line: 227 ]]
 	}, t_2)
 end
 
-function t_2:encode() --[[ line: 244 ]]
+function t_2:encode()
 	-- upvalues: protoModule (ref)
 	local buff = buffer.create(0)
 	local var38 = 0
@@ -206,7 +205,7 @@ function t_2:encode() --[[ line: 244 ]]
 	return buff_1
 end
 
-function t_2.decode(p3) --[[ line: 286 ]]
+function t_2.decode(p3)
 	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
 	local var53 = t_2.new()
 	local var54 = 0
@@ -278,7 +277,7 @@ function t_2.decode(p3) --[[ line: 286 ]]
 	return var53
 end
 
-function t_2:jsonEncode() --[[ line: 354 ]]
+function t_2:jsonEncode()
 	local t = {}
 	
 	if self.display_name ~= nil and self.display_name ~= "" then
@@ -307,7 +306,7 @@ function t_2:jsonEncode() --[[ line: 354 ]]
 	return t
 end
 
-function t_2:jsonDecode() --[[ line: 388 ]]
+function t_2:jsonDecode()
 	-- upvalues: t_2 (ref), t (ref)
 	local var82 = t_2.new()
 	

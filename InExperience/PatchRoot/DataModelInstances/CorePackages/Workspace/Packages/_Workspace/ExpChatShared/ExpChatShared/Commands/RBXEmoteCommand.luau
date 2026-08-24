@@ -12,7 +12,7 @@ local t = {
 	cheer = true
 }
 
-local function _(p0) --[[ line: 18 | named "getDanceBasedOnRigType" ]]
+local function _(p0)
 	local text = nil
 	local humanoid = p0:FindFirstChildOfClass("Humanoid")
 	
@@ -28,9 +28,9 @@ local function _(p0) --[[ line: 18 | named "getDanceBasedOnRigType" ]]
 	return text
 end
 
-local function handleLegacyEmote(p1, p2) --[[ line: 33 ]]
+local function handleLegacyEmote(p1, p2)
 	-- upvalues: emote (ref)
-	local ok, status = pcall(function() --[[ line: 34 ]]
+	local ok, status = pcall(function()
 		-- upvalues: p2 (ref), p1 (write), emote (copy)
 		local animate = p2:FindFirstChild("Animate")
 		
@@ -72,7 +72,7 @@ local function handleLegacyEmote(p1, p2) --[[ line: 33 ]]
 	}
 end
 
-local function getValidEmoteOrResponse(p3, p4) --[[ line: 63 ]]
+local function getValidEmoteOrResponse(p3, p4)
 	local var11 = tonumber(p4, 10)
 	
 	if var11 then
@@ -106,7 +106,7 @@ end
 return {
 	name = script.Name,
 	alias = { "/emote", "/e" },
-	clientRun = function(p5, _, p6) --[[ line: 105 ]]
+	clientRun = function(p5, _, p6)
 		-- upvalues: emote (ref), t (ref), handleLegacyEmote (ref), starterPlayerService (ref), getValidEmoteOrResponse (ref)
 		local substring = nil
 		
@@ -186,9 +186,9 @@ return {
 			
 			return var18
 		end
-		local ok, status = pcall(function() --[[ line: 192 ]]
+		local ok, status = pcall(function()
 			-- upvalues: humanoid (ref), var17 (ref)
-			return humanoid:PlayEmoteAsync(var17)
+			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then humanoid:PlayEmoteAsync(var17) else humanoid:PlayEmote(var17)
 		end)
 		
 		if ok and status then

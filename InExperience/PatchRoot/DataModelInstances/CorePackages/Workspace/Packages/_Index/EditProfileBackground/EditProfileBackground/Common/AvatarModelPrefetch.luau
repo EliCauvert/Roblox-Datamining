@@ -2,16 +2,16 @@
 local playersService = game:GetService("Players")
 local t = {}
 local t_1 = {
-	prefetch = function(p0) --[[ line: 11 ]]
+	prefetch = function(p0)
 		-- upvalues: t (ref), promiseModule (ref), playersService (ref)
 		if t[p0] then
 			return
 		end
-		t[p0] = promiseModule.new(function(p1, p2) --[[ line: 16 ]]
+		t[p0] = promiseModule.new(function(p1, p2)
 			-- upvalues: playersService (copy), p0 (ref)
-			local ok, status = pcall(function() --[[ line: 17 ]]
+			local ok, status = pcall(function()
 				-- upvalues: playersService (copy), p0 (copy)
-				return playersService:CreateHumanoidModelFromUserIdAsync(p0)
+				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:CreateHumanoidModelFromUserIdAsync(p0) else game.Players:CreateHumanoidModelFromUserId(p0)
 			end)
 			
 			if ok and status then
@@ -24,7 +24,7 @@ local t_1 = {
 	end
 }
 
-function t_1.get(p3) --[[ line: 28 ]]
+function t_1.get(p3)
 	-- upvalues: t (ref), t_1 (ref)
 	if t[p3] then
 		return t[p3]
@@ -34,7 +34,7 @@ function t_1.get(p3) --[[ line: 28 ]]
 	return t[p3]
 end
 
-function t_1.clear(p4) --[[ line: 37 ]]
+function t_1.clear(p4)
 	-- upvalues: t (ref)
 	t[p4] = nil
 end

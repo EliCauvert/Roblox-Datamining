@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("LuaAppVideoAutoplayElectOnNewCandidate", false) and require(script:FindFirstAncestor("VideoUtils").Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection

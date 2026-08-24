@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnablePioneerLandingPageLayout2", false)
+﻿return game:DefineFastFlag("EnablePioneerLandingPageLayout", false)

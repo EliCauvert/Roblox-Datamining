@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AXSduiProcessCatalogDeepLink", false) and require(script.Parent.FFlagAXMigrateAllTabToSduiDev)

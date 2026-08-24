@@ -30,17 +30,16 @@ local scrollDetector = require(parent.ScrollTelemetry).ScrollDetector
 local viewportVideoAutoplaySync = require(parent.VideoUtils).ViewportVideoAutoplaySync
 local sharedFlagsModule = require(parent.SharedFlags)
 local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
-local fFlagLuaAppSduiHomeFriendCarousel = sharedFlagsModule.FFlagLuaAppSduiHomeFriendCarousel
 local fFlagSduiPoolBackedFeed = sharedFlagsModule.FFlagSduiPoolBackedFeed
 local fFlagSduiSrpScrollAway = sharedFlagsModule.FFlagSduiSrpScrollAway
 local sduiEnableBackToTop = game:DefineFastFlag("SduiEnableBackToTop", false)
 local sduiVerticalFeedBottomSpacerLayoutOrderConstant = game:DefineFastFlag("SduiVerticalFeedBottomSpacerLayoutOrderConstant", false)
 local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 
-local function PoolStoreLayoutStoreWiring(p0) --[[ line: 120 ]]
+local function PoolStoreLayoutStoreWiring(p0)
 	-- upvalues: reactModule (ref), collectionLayoutStoreContext (ref), sduiPoolStore (ref)
 	local var20 = reactModule.useContext(collectionLayoutStoreContext)
-	reactModule.useEffect(function() --[[ line: 122 ]]
+	reactModule.useEffect(function()
 		-- upvalues: var20 (ref), sduiPoolStore (copy), p0 (ref)
 		if var20 == nil then
 			return
@@ -48,7 +47,7 @@ local function PoolStoreLayoutStoreWiring(p0) --[[ line: 120 ]]
 		local sduiPoolStore_1 = sduiPoolStore.getSduiPoolStore(p0.configKey)
 		sduiPoolStore_1.setLayoutStore(var20)
 		
-		return function() --[[ line: 128 ]]
+		return function()
 			-- upvalues: sduiPoolStore_1 (ref)
 			sduiPoolStore_1.setLayoutStore(nil)
 		end
@@ -57,8 +56,8 @@ local function PoolStoreLayoutStoreWiring(p0) --[[ line: 120 ]]
 	return nil
 end
 
-return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]]
-	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), appCommonLibModule (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinnerModule (ref)
+return reactModule.memo(function(p1)
+	-- upvalues: fFlagLuaAppSduiVideoThumbnail (ref), useTokens (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), useNavBarPlacement (ref), appNavBarModule (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), appCommonLibModule (ref), fFlagSduiSrpScrollAway (ref), scrollMovementDirection (ref), sduiEnableBackToTop (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useProgressiveRowCapModule (ref), useVerticalScrolledToEndThresholdModule (ref), sduiVerticalFeedBottomSpacerLayoutOrderConstant (ref), backToTopButtonModule (ref), fFlagSduiPoolBackedFeed (ref), PoolStoreLayoutStoreWiring (ref), sduiFeedImpressionsDetectorModule (ref), buildSduiFeedChildrenModule (ref), sduiFeedContextModule (ref), collectionLayoutStoreProvider (ref), view (ref), viewportVideoAutoplaySync (ref), scrollDetector (ref), sduiStickyHeaderModule (ref), pullToRefreshSpinnerModule (ref)
 	local var26
 	local analyticsContext = p1.analyticsContext
 	local sduiContext = p1.sduiContext
@@ -96,31 +95,14 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 	if var41.current == nil then
 		var41.current = appCommonLibModule.Signal.new()
 	end
-	local var42 = reactModule.useCallback(function() --[[ line: 184 ]]
+	local var42 = reactModule.useCallback(function()
 		-- upvalues: var41 (ref)
 		var41.current:fire()
 	end, {})
-	local var43 = nil
-	local var44 = nil
-	
-	if fFlagLuaAppSduiHomeFriendCarousel then
-		var43 = reactModule.useRef(nil)
-		
-		if var43.current == nil then
-			var43.current = appCommonLibModule.Signal.new()
-		end
-		var44 = reactModule.useCallback(function() --[[ line: 196 ]]
-			-- upvalues: var43 (write), p1 (ref)
-			if var43.current then
-				var43.current:fire()
-			end
-			return if p1.onRefresh then p1.onRefresh() else nil
-		end, { p1.onRefresh, var43 })
-	end
-	local var45 = if fFlagSduiSrpScrollAway then reactModule.useRef(0) else nil
-	local var46 = if fFlagSduiSrpScrollAway then reactModule.useRef(scrollMovementDirection.Backward) else nil
-	local var47 = if fFlagSduiSrpScrollAway then reactModule.useCallback(function(p2) --[[ line: 215 ]]
-		-- upvalues: var42 (ref), p1 (ref), var45 (ref), scrollMovementDirection (copy), var46 (ref)
+	local var43 = if fFlagSduiSrpScrollAway then reactModule.useRef(0) else nil
+	local var44 = if fFlagSduiSrpScrollAway then reactModule.useRef(scrollMovementDirection.Backward) else nil
+	local var45 = if fFlagSduiSrpScrollAway then reactModule.useCallback(function(p2)
+		-- upvalues: var42 (ref), p1 (ref), var43 (ref), scrollMovementDirection (copy), var44 (ref)
 		var42()
 		local onScrollDirectionChanged = p1.onScrollDirectionChanged
 		
@@ -128,16 +110,16 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 		local y = p2.CanvasPosition.Y
 		
 		if y < 0 then return end
-		if y == var45.current then return end
-		local var67 = if var45.current < y then scrollMovementDirection.Forward else scrollMovementDirection.Backward
+		if y == var43.current then return end
+		local var65 = if var43.current < y then scrollMovementDirection.Forward else scrollMovementDirection.Backward
 		
-		if var67 ~= var46.current then
-			onScrollDirectionChanged(var67)
-			var46.current = var67
+		if var65 ~= var44.current then
+			onScrollDirectionChanged(var65)
+			var44.current = var65
 		end
-		var45.current = y
+		var43.current = y
 	end, { var42, p1.onScrollDirectionChanged }) else nil
-	local var48 = reactModule.useMemo(function() --[[ line: 243 ]]
+	local var46 = reactModule.useMemo(function()
 		-- upvalues: var41 (ref), var40 (ref)
 		return {
 			scrollViewPositionChangedSignal = var41.current,
@@ -145,30 +127,29 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 		}
 	end, { var41, var40 })
 	local gapBetweenFeedItems = p1.gapBetweenFeedItems or var25.Gap.Large
-	local var50 = reactModule.useMemo(function() --[[ line: 253 ]]
-		-- upvalues: var41 (ref), var40 (ref), fFlagLuaAppSduiHomeFriendCarousel (copy), var43 (write)
+	local var48 = reactModule.useMemo(function()
+		-- upvalues: var41 (ref), var40 (ref)
 		return {
 			scrollViewPositionChangedSignal = var41.current,
-			verticalScrollingFrameRef = var40,
-			refreshSignal = if fFlagLuaAppSduiHomeFriendCarousel then var43.current else nil
+			verticalScrollingFrameRef = var40
 		}
 	end, { var41, var40 })
 	local scrollingFrameRef = p1.scrollingFrameRef or var40
-	local var52 = nil
+	local var50 = nil
 	local _ = nil
 	
 	if sduiEnableBackToTop then
-		local var53, var54 = reactModule.useState(false)
-		var52 = var53
-		local var55 = var54
-		reactModule.useEffect(function() --[[ line: 275 ]]
-			-- upvalues: p1 (ref), scrollingFrameRef (ref), var55 (write)
+		local var51, var52 = reactModule.useState(false)
+		var50 = var51
+		local var53 = var52
+		reactModule.useEffect(function()
+			-- upvalues: p1 (ref), scrollingFrameRef (ref), var53 (write)
 			if not p1.enableBackToTop then return end
 			local current = scrollingFrameRef.current
 			
 			if not current then return end
-			local function updateIsScrollable() --[[ line: 284 ]]
-				-- upvalues: current (ref), var55 (copy)
+			local function updateIsScrollable()
+				-- upvalues: current (ref), var53 (copy)
 				local y = current.AbsoluteWindowSize.Y
 				local y_1 = current.AbsoluteCanvasSize.Y
 				
@@ -176,7 +157,7 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 				if y_1 < 0 then
 					return
 				end
-				var55(y < y_1)
+				var53(y < y_1)
 			end
 			
 			local list = {
@@ -187,9 +168,9 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 			local y_1 = current.AbsoluteCanvasSize.Y
 			
 			if y >= 0 and y_1 >= 0 then
-				var55(y < y_1)
+				var53(y < y_1)
 			end
-			return function() --[[ line: 302 ]]
+			return function()
 				-- upvalues: list (ref)
 				for i, v in list do
 					v:Disconnect()
@@ -197,20 +178,20 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 			end
 		end, { scrollingFrameRef, p1.enableBackToTop })
 	end
-	reactModule.useEffect(function() --[[ line: 310 ]]
-		-- upvalues: p1 (ref), fFlagSduiSrpScrollAway (copy), var45 (ref), var47 (ref), var42 (ref)
+	reactModule.useEffect(function()
+		-- upvalues: p1 (ref), fFlagSduiSrpScrollAway (copy), var43 (ref), var45 (ref), var42 (ref)
 		if not p1.scrollingFrameRef or not p1.scrollingFrameRef.current then
 			return nil
 		end
 		local current = p1.scrollingFrameRef.current
 		
 		if fFlagSduiSrpScrollAway then
-			var45.current = current.CanvasPosition.Y
+			var43.current = current.CanvasPosition.Y
 		end
-		local var70 = if fFlagSduiSrpScrollAway then {
-			current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ line: 323 ]]
-				-- upvalues: var47 (copy), current (ref)
-				var47(current)
+		local var68 = if fFlagSduiSrpScrollAway then {
+			current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+				-- upvalues: var45 (copy), current (ref)
+				var45(current)
 			end),
 			current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var42)
 		} else {
@@ -218,49 +199,49 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 			current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var42)
 		}
 		
-		return function() --[[ line: 333 ]]
-			-- upvalues: var70 (ref)
-			for i, v in var70 do
+		return function()
+			-- upvalues: var68 (ref)
+			for i, v in var68 do
 				v:Disconnect()
 			end
 		end
 	end, {
 		p1.scrollingFrameRef,
 		var42,
-		if fFlagSduiSrpScrollAway then var47 else nil
+		if fFlagSduiSrpScrollAway then var45 else nil
 	})
 	useAnimateScrollViewToSelection(scrollingFrameRef, 0.4)
 	local isNotCursor = useLastInputMode() ~= "Cursor"
 	local thresholdFromEnd = p1.thresholdFromEnd or 600
+	local var56 = nil
+	local var57 = nil
 	local var58 = nil
-	local var59 = nil
-	local var60 = nil
 	
 	if fFlagLuaAppSduiVideoThumbnail then
-		var58 = if var22 then var22.viewportVideoAutoplayController else nil
-		var59 = reactModule.useCallback(function() --[[ line: 360 ]]
-			-- upvalues: var58 (write)
-			if var58 then
-				var58:onScrollStart()
+		var56 = if var22 then var22.viewportVideoAutoplayController else nil
+		var57 = reactModule.useCallback(function()
+			-- upvalues: var56 (write)
+			if var56 then
+				var56:onScrollStart()
 			end
-		end, { var58 })
-		var60 = reactModule.useCallback(function(p3) --[[ line: 365 ]]
-			-- upvalues: var58 (write)
-			if var58 then
-				var58:onScrollSettled("Y", p3)
+		end, { var56 })
+		var58 = reactModule.useCallback(function(p3)
+			-- upvalues: var56 (write)
+			if var56 then
+				var56:onScrollSettled("Y", p3)
 			end
-		end, { var58 })
+		end, { var56 })
 	end
-	local var61, var62 = useProgressiveRowCapModule(if feedItems then #feedItems else 0, p1.initialNumToRender, p1.progressiveFillRate, p1.progressiveFillIntervalMs)
-	useVerticalScrolledToEndThresholdModule(scrollingFrameRef, thresholdFromEnd, if var62 then nil else p1.onScrollToEnd)
-	local var63 = reactModule.useMemo(function() --[[ line: 388 ]]
-		-- upvalues: feedItems (ref), p1 (ref), sduiEnableBackToTop (copy), var52 (write), reactModule (copy), sduiVerticalFeedBottomSpacerLayoutOrderConstant (copy), backToTopButtonModule (copy), scrollingFrameRef (ref), sduiContext (ref), gapBetweenFeedItems (ref), var26 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagSduiPoolBackedFeed (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var41 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var50 (ref), var61 (ref)
+	local var59, var60 = useProgressiveRowCapModule(if feedItems then #feedItems else 0, p1.initialNumToRender, p1.progressiveFillRate, p1.progressiveFillIntervalMs)
+	useVerticalScrolledToEndThresholdModule(scrollingFrameRef, thresholdFromEnd, if var60 then nil else p1.onScrollToEnd)
+	local var61 = reactModule.useMemo(function()
+		-- upvalues: feedItems (ref), p1 (ref), sduiEnableBackToTop (copy), var50 (write), reactModule (copy), sduiVerticalFeedBottomSpacerLayoutOrderConstant (copy), backToTopButtonModule (copy), scrollingFrameRef (ref), sduiContext (ref), gapBetweenFeedItems (ref), var26 (ref), gapAfterStickyItems (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), fFlagSduiPoolBackedFeed (copy), PoolStoreLayoutStoreWiring (copy), impressionsTag (ref), sduiFeedImpressionsDetectorModule (copy), var41 (ref), buildSduiFeedChildrenModule (copy), debugName (ref), selectionBehaviorLeft (ref), selectionBehaviorRight (ref), var48 (ref), var59 (ref)
 		if feedItems == nil then
 			return nil
 		end
 		local pageBottomPadding = p1.pageBottomPadding or 80
 		local t = {
-			BottomSpacer = if sduiEnableBackToTop and p1.enableBackToTop and var52 then reactModule.createElement("Frame", {
+			BottomSpacer = if sduiEnableBackToTop and p1.enableBackToTop and var50 then reactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -319,8 +300,8 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 			impressionsTag = impressionsTag,
 			selectionBehaviorLeft = selectionBehaviorLeft,
 			selectionBehaviorRight = selectionBehaviorRight,
-			extraLocalProps = var50,
-			maxConfigs = var61
+			extraLocalProps = var48,
+			maxConfigs = var59
 		}) do
 			t[i] = v
 		end
@@ -329,34 +310,34 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 		feedItems, debugName, var40, var41, sduiContext, analyticsContext,
 		gapBetweenFeedItems, impressionsTag, selectionBehaviorLeft,
 		selectionBehaviorRight, var26, gapAfterStickyItems,
-		if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil, var50,
+		if fFlagLuaAppSduiStickyHeaderScrollAway then p1.feedTopMargin else nil, var48,
 		var24, p1.pageBottomPadding,
 		if sduiEnableBackToTop then p1.enableBackToTop else nil,
-		if sduiEnableBackToTop then var52 else nil, scrollingFrameRef, var61
+		if sduiEnableBackToTop then var50 else nil, scrollingFrameRef, var59
 	})
 	
-	if var48 then
-		var63 = reactModule.createElement(sduiFeedContextModule.Provider, { value = var48 }, var63)
+	if var46 then
+		var61 = reactModule.createElement(sduiFeedContextModule.Provider, { value = var46 }, var61)
 	end
-	local var64 = reactModule.createElement(collectionLayoutStoreProvider, { container = var38 }, var63)
+	local var62 = reactModule.createElement(collectionLayoutStoreProvider, { container = var38 }, var61)
 	local t = { ["size-full-0 auto-y"] = true }
 	
 	if var24 then
 		t[contentTag] = true
 	end
-	local var66 = reactModule.createElement(view, { tag = t, LayoutOrder = p1.layoutOrder, ref = var39 }, var64)
+	local var64 = reactModule.createElement(view, { tag = t, LayoutOrder = p1.layoutOrder, ref = var39 }, var62)
 	
 	if fFlagLuaAppSduiVideoThumbnail then
-		var66 = reactModule.createElement(reactModule.Fragment, nil, {
-			Content = var66,
-			ViewportVideoAutoplaySync = if var58 then reactModule.createElement(viewportVideoAutoplaySync, {
-				viewportAutoplayController = var58,
+		var64 = reactModule.createElement(reactModule.Fragment, nil, {
+			Content = var64,
+			ViewportVideoAutoplaySync = if var56 then reactModule.createElement(viewportVideoAutoplaySync, {
+				viewportAutoplayController = var56,
 				scrollingFrameRef = scrollingFrameRef
 			}) else nil,
-			ScrollDetector = if var58 then reactModule.createElement(scrollDetector, {
+			ScrollDetector = if var56 then reactModule.createElement(scrollDetector, {
 				scrollingFrameRef = scrollingFrameRef,
-				onScrollStart = var59,
-				onScrollSettled = var60
+				onScrollStart = var57,
+				onScrollSettled = var58
 			}) else nil
 		})
 	end
@@ -378,21 +359,21 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 			paddingTop = var30,
 			paddingBottom = var31,
 			gapBetweenItems = gapBetweenStickyItems,
-			extraLocalProps = var50,
+			extraLocalProps = var48,
 			impressionsTag = impressionsTag,
 			selectionBehaviorLeft = selectionBehaviorLeft,
 			selectionBehaviorRight = selectionBehaviorRight
 		}) else nil,
 		RefreshSpinner = if var27 then reactModule.createElement(pullToRefreshSpinnerModule, {
 			LayoutOrder = 2,
-			onRefresh = if fFlagLuaAppSduiHomeFriendCarousel then var44 else p1.onRefresh,
+			onRefresh = p1.onRefresh,
 			scrollingFrameRef = var40,
 			appEventName = sduiContext.appPage
 		}) else nil,
 		Scroll = reactModule.createElement("ScrollingFrame", {
 			LayoutOrder = 3,
 			ref = var40,
-			[reactModule.Change.CanvasPosition] = if fFlagSduiSrpScrollAway then var47 else var42,
+			[reactModule.Change.CanvasPosition] = if fFlagSduiSrpScrollAway then var45 else var42,
 			[reactModule.Change.CanvasSize] = var42,
 			BackgroundColor3 = if p1.backgroundStyle then p1.backgroundStyle.Color3 else var25.Color.Surface.Surface_0.Color3,
 			BackgroundTransparency = if p1.backgroundStyle then p1.backgroundStyle.Transparency else nil,
@@ -408,7 +389,7 @@ return reactModule.memo(function(p1) --[[ line: 135 | named "SduiVerticalFeed" ]
 			ClipsDescendants = false
 		}, {
 			FlexFill = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Content = var66
+			Content = var64
 		})
-	}) else var66
+	}) else var64
 end)

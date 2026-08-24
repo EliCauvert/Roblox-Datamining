@@ -10,14 +10,14 @@ local gameInviteRewardsInfoModalModule = require(gameInvite.Components.GameInvit
 local groupService = game:GetService("GroupService")
 local playersService = game:GetService("Players")
 
-local var7 = function(p0) --[[ line: 29 ]]
+local var7 = function(p0)
 	-- upvalues: groupService (ref), playersService (ref)
 	local var8 = ""
 	
 	if p0 == nil or p0 == 0 then
 		return ""
 	elseif game.CreatorType == Enum.CreatorType.Group then
-		local ok, status = pcall(function() --[[ line: 35 ]]
+		local ok, status = pcall(function()
 			-- upvalues: groupService (copy), p0 (ref)
 			return groupService:GetGroupInfoAsync(p0)
 		end)
@@ -32,7 +32,7 @@ local var7 = function(p0) --[[ line: 29 ]]
 		end
 	elseif game.CreatorType == Enum.CreatorType.User then
 		local _ = nil
-		local ok, status = pcall(function() --[[ line: 46 ]]
+		local ok, status = pcall(function()
 			-- upvalues: playersService (copy), p0 (ref)
 			return playersService:GetNameFromUserIdAsync(p0)
 		end)
@@ -41,7 +41,7 @@ local var7 = function(p0) --[[ line: 29 ]]
 	return var8
 end
 
-return function(p1) --[[ line: 56 ]]
+return function(p1)
 	-- upvalues: useLocalization (ref), marketplaceService (ref), var7 (ref), reactModule (ref), gameInviteRewardsInfoModalModule (ref), foundationModule (ref), iconButton (ref), iconSize (ref)
 	local creatorId
 	local t = {
@@ -56,7 +56,7 @@ return function(p1) --[[ line: 56 ]]
 		},
 		rewardsBody = {
 			"Roblox.ReferralRewards.RewardBannerBody",
-			gameName = if game.PlaceId == nil or game.PlaceId == 0 then "" else marketplaceService:GetProductInfoAsync(game.PlaceId).Name,
+			gameName = if game.PlaceId == nil or game.PlaceId == 0 then "" elseif game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(game.PlaceId).Name else marketplaceService:GetProductInfo(game.PlaceId).Name,
 			rewardName = if p1.rewardMetadata then p1.rewardMetadata.name else ""
 		}
 	}
@@ -65,7 +65,7 @@ return function(p1) --[[ line: 56 ]]
 	if game.CreatorId ~= nil and game.CreatorId ~= 0 then
 		creatorId = var7(game.CreatorId) or ""
 	end
-	local var17
+	local image
 	list.creatorName = creatorId
 	t.rewardsCreatorSupportText = list
 	local var12 = useLocalization(t)
@@ -73,10 +73,8 @@ return function(p1) --[[ line: 56 ]]
 	local createElement = reactModule.createElement
 	local fragment = reactModule.Fragment
 	local var15 = nil
-	local t_1 = {}
-	
-	if var13 then
-		var17 = p1.rewardMetadata and (var12 and (reactModule.createElement(gameInviteRewardsInfoModalModule, {
+	local t_1 = {
+		RewardInfoModal = var13 and (p1.rewardMetadata and (var12 and (reactModule.createElement(gameInviteRewardsInfoModalModule, {
 			title = var12.rewardsModalTitle,
 			rewardDetailsTitle = var12.rewardsDetailsTitle,
 			rewardDetailsBody = p1.rewardMetadata.description or "",
@@ -88,10 +86,8 @@ return function(p1) --[[ line: 56 ]]
 			expiryUtc = p1.rewardMetadata.rewardTimeOffset.endUtc or "",
 			modalOpen = var13,
 			setModalOpen = var14
-		}) or nil))
-	end
-	local image
-	t_1.RewardInfoModal = var17
+		}) or nil)))
+	}
 	local createElement_1 = reactModule.createElement
 	local view = foundationModule.View
 	local t_2 = {
@@ -131,7 +127,7 @@ return function(p1) --[[ line: 56 ]]
 			testId = "RewardInfoButton",
 			icon = "icons/actions/info_small",
 			size = iconSize.Small,
-			onActivated = function() --[[ line: 140 ]]
+			onActivated = function()
 				-- upvalues: var14 (ref)
 				var14(true)
 			end

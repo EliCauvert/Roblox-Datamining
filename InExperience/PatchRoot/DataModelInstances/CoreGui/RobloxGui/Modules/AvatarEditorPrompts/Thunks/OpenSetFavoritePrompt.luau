@@ -5,16 +5,16 @@ local parent = script.Parent.Parent
 local openPromptModule = require(parent.Actions.OpenPrompt)
 local promptTypeModule = require(parent.PromptType)
 
-return function(p0, p1, p2) --[[ line: 12 ]]
+return function(p0, p1, p2)
 	-- upvalues: promiseModule (ref), marketplaceService (ref), openPromptModule (ref), promptTypeModule (ref), avatarEditorService (ref)
-	return function(p3) --[[ line: 13 ]]
+	return function(p3)
 		-- upvalues: promiseModule (copy), p1 (ref), marketplaceService (copy), p0 (ref), openPromptModule (copy), promptTypeModule (copy), p2 (ref), avatarEditorService (copy)
-		return promiseModule.new(function(p4, p5) --[[ line: 14 ]]
+		return promiseModule.new(function(p4, p5)
 			-- upvalues: p1 (copy), marketplaceService (copy), p0 (copy), p3 (ref), openPromptModule (copy), promptTypeModule (copy), p2 (copy), avatarEditorService (copy)
 			local var5 = if p1 == Enum.AvatarItemType.Asset then Enum.InfoType.Asset else Enum.InfoType.Bundle
-			local ok, status = pcall(function() --[[ line: 22 ]]
+			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), p0 (copy), var5 (write)
-				return marketplaceService:GetProductInfoAsync(p0, var5)
+				return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then marketplaceService:GetProductInfoAsync(p0, var5) else marketplaceService:GetProductInfo(p0, var5)
 			end)
 			
 			if ok then

@@ -40,7 +40,6 @@
 	FilterPillsCarousel = "FilterPillsCarousel",
 	FocusNavActions = "FocusNavActions",
 	Fragment = "Fragment",
-	FriendCarousel = "FriendCarousel",
 	FriendRequestButton = "FriendRequestButton",
 	VirtualGameItemText = "VirtualGameItemText",
 	GameSortDropDown = "GameSortDropDown",

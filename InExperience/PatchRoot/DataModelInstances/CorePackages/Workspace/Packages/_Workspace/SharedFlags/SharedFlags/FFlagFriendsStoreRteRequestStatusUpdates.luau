@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FriendsStoreRteRequestStatusUpdates", false) and require(script.Parent.FFlagEnableGetFriendshipStatus)

@@ -1,3 +1,1780 @@
+## 12510 - 2026-08-25 00:25
+
+### New files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/Default.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/Default/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/Default/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/Kids.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/Kids/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/Kids/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/enums.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.1/RbxDesignFoundations/types.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FFlagAXSlotsFixLeftScroll.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PeopleReactView/GameLaunch.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PeopleReactView/PeopleReactView/Components/SwitchServerConfirmation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PeopleReactView/PeopleReactView/Telemetry/SwitchServerTelemetry.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Flags/FFlagAXFixRobuxUpsellSoftLock.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagEnableCoreContentThemeUseGuacForTokenOverrides.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagEnableDemoModeRegionalAvailability.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagLuaAppPlayButtonViewRefactor.luau`
+
+### Removed files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/ViewRecyclerReact.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Stepper.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Stepper/StepItem.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Stepper/Stepper.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Stepper/useStepperVariants.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Enums/StepperStepState.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/CircuitRush/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/CircuitRush/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/CosmicDust/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/CosmicDust/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/ElectricLime/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/ElectricLime/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/HyperPlum/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/HyperPlum/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/InfernoBlast/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/InfernoBlast/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/KineticEnergy/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/KineticEnergy/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/LavaGlow/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/LavaGlow/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/NebulaDrift/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/NebulaDrift/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/NitroFrost/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/NitroFrost/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/PixelPop/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/PixelPop/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/PolarFreeze/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/PolarFreeze/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/QuantumPulse/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/QuantumPulse/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/StarBurst/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/StarBurst/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/SuperCharge/DarkAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Generated/StyleRules/SuperCharge/LightAttribute.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CircuitRush.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CircuitRush/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CircuitRush/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CosmicDust.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CosmicDust/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/CosmicDust/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Default.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Default/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Default/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/ElectricLime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/ElectricLime/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/ElectricLime/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/HyperPlum.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/HyperPlum/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/HyperPlum/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/InfernoBlast.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/InfernoBlast/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/InfernoBlast/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Kids.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Kids/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/Kids/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/KineticEnergy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/KineticEnergy/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/KineticEnergy/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/LavaGlow.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/LavaGlow/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/LavaGlow/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NebulaDrift.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NebulaDrift/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NebulaDrift/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NitroFrost.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NitroFrost/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/NitroFrost/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PixelPop.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PixelPop/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PixelPop/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PolarFreeze.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PolarFreeze/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/PolarFreeze/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/QuantumPulse.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/QuantumPulse/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/QuantumPulse/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/StarBurst.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/StarBurst/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/StarBurst/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/SuperCharge.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/SuperCharge/Dark.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/SuperCharge/Light.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/enums.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/RbxDesignFoundations-31ab8d40-4.0.4/RbxDesignFoundations/types.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/templates/v1beta1.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/templates/v1beta1/template_api_messages.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getEngineFeatureEngineUGCValidateInstanceTreesEquivalent.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getEngineFeatureEngineUGCValidateMeshPartBoundsFromRules.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateAttachmentBoundsErrorMessage.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateBackendContentNotEditable.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateCurveAnimAttributes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateMakeupCategoryParity.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateNoExtraTagsRequireHsrAssets.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateR15FixedAttributes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateSerializedAssetSizeBounded.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidateWrapDataCaps.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFFlagUGCValidationAnimationAssetDisableModelStructure.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFIntUGCValidateMaxHSRMeshIdDataLen.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFIntUGCValidateMaxSerializedAssetSizeBytesDefault.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFIntUGCValidateMaxSerializedAssetSizeBytesDynamicHead.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFIntUGCValidateMaxSerializedAssetSizeBytesLayeredClothing.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFIntUGCValidateMaxSerializedAssetSizeBytesRigidAccessory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/flags/getFIntUGCValidateMaxSerializedAssetSizeBytesTorsoAndLimbs.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/util/shouldValidateR15LegacyDuplicate.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/ArchivableRequired/ArchivableRequired.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/ContentNotEditable/ContentNotEditable.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/CurveAnimTranslationTagAccurate/CurveAnimTranslationTagAccurate.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/PropertiesSensible/describeProblematicProperties.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/SerializedAssetSizeBounded/SerializedAssetSizeBounded.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/Signal.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/Signals.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/SignalsExperimental.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataPrefetch.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataPrefetch/DataPrefetch.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/ArrayDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/ConcatDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/DequeDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/ItemKeyRegistry.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/KeyUtils.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/MapDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/MutationController.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/ReconcileSnapshot.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/ReverseDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/RingBufferDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/SequenceDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/DataSource/TranslatedDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/Diagnostics.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/__benchmarks__/BenchmarkContract.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/__benchmarks__/BenchmarkStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/__benchmarks__/CoreTiming.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/__benchmarks__/PrimitiveTiming.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/__benchmarks__/ResponsibilityCatalog.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Diagnostics/__tests__/CoreScenarios.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/AutoScrollPolicy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/AutoScrollTarget.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/Axis.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/DataSourceChangeType.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/ScrollAlignment.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/ScrollObservationKind.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/VirtualizerCommandType.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/VirtualizerEffectType.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Enums/VirtualizerQueryType.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/LayoutRuntime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/Policies/AveragePropagation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/Policies/DetachedMeasurementCache.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/SizeTree/ISizeTree.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/SizeTree/OrderStatisticTree.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/create.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/grid.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/masonry.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/measured.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/staticParts.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Layout/uniform.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/OverscanPolicy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/OverscanPolicy/OverscanPolicy.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/PinnedItems.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/PinnedItems/StickyIndexResolver.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/PinnedItems/buildPlacementPlan.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/PinnedItems/createPinnedItemPlanner.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Placement/PlacementTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/RecyclingScope.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Types.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/ViewportBehavior.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/ViewportBehavior/AutoScroll.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/ViewportBehavior/ChatPreset.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/ViewportBehavior/InitialScrollPosition.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/ViewportBehavior/PaginationEdges.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/ViewportBehavior/ScrollPolicyCoordinator.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/DataPrefetchController.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/ItemRevisionTracker.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/ItemViewPresentation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/RangeState.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/ScrollPositionController.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/ViewportModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/Virtualizer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/VirtualizerEngine.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/VirtualizerSnapshot.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/VirtualizerSnapshotProjection.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Core/Virtualizer/createItemViewRecyclingScope.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Internal/DebugFlags.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Internal/Record.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Internal/createDebugLogger.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/Internal/createEvent.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/TestDependencies.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecycler/ViewRecycler/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/React.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ReactRoblox.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/Signals.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/SignalsExperimental.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/SignalsReact.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecycler.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/ItemHooks.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/ListItemViewHost.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/CompositionPlacementContext.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/CompositionPlacementManager.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/CompositionPlacementSuspended.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/RecyclableViewRecord.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/RecyclableViewRegistry.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/RecyclingRuntime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/RecyclingScopeContext.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/RecyclingViewportContext.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/VirtualListShell.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/createReactAdapter.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/useCompositionPlacement.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/useReconciledDataSource.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/Private/useVirtualListRuntime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/RecyclingScope.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/RecyclingViewport.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/VirtualList.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/__benchmarks__/LifecycleWorkloads.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/__benchmarks__/ReactTiming.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/createPinnedItem.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/createRecyclableComponent.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ReactAdapter/createRecyclableView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/JumpControls.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/RecyclingStats.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/RowFixtures.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/ScenarioBanner.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/StoryControls.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/StoryShell.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/Harness/useManagedLayout.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/Stories/LayoutScrollPlayground.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/TestDependencies.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/ViewRecycler.storybook.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerReact/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerReact/ViewRecyclerRoblox.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/Signals.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/SignalsExperimental.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecycler.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/CanvasItemPlacer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/CanvasItemViewRuntime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/MeasurementBatcher.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/Measurer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/ReparentableHost.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/ScrollHostCoordinator.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/ScrollListHostRuntime.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/SlotGeometry.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/ViewportCoordinator.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/__benchmarks__/RobloxTiming.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/axisMap.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/createRecyclingScope.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/RobloxAdapter/createVirtualizer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/TestDependencies.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ViewRecyclerRoblox/ViewRecyclerRoblox/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Badges/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ContactImporter/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/EditProfile/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsCommon/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsHydrationReact/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/FriendsLanding/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/SharedFlags.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameInfosRodux/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameJoinCard/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/Flags/FFlagEnablePlayButtonWizardVPCPrologue.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/PlayButtonUpsellBody.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Moments/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayerContextualMenu/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileCtaService/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProfileQRCode/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedContent/SduiSharedContent/Actions/SduiNavigateAction.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedUtilities/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialExperienceJoin/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DiscoveryTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SharedExperimentDefinition.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialCarousel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/Components/SduiFriendCarousel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/System/OpenProfileQRCodePageBridge.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialTabsPage/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/Squads/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/CoreScriptsCommon.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/ExperienceService.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/Foundation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/GameLaunch.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/Localization.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/React.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/ReactRoblox.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/Signals.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/SwitchServer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/SwitchServer/Constants.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/SwitchServer/SwitchServerConfirmation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/SwitchServer/Telemetry/SwitchServerTelemetry.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SwitchServer/SwitchServer/jest.config.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/TrustedContacts/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserList/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/UserTile/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/VideoUtils/VideoUtils/FFlagLuaAppVideoAutoplayElectOnNewCandidate.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ShareLinkComponents/MomentShareCard/MomentDetailsStatus.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/TrustedFriendsUpsell/TrustedFriendsUpsellContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/TrustedFriendsUpsell/TrustedFriendsUpsellScreen.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Flags/FFlagAppChatConsolidateTrustedFriendsModal.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Flags/FFlagAppChatMomentShareCardLoadingSkeletons.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FFlagAXFavoritePillRequireItemId.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FFlagAXSduiProcessCatalogDeepLink.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FIntAXBackgroundPublishDescriptionMaxLength.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FIntAXBackgroundPublishMaxConsecutivePollFailures.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FIntAXBackgroundPublishNameMaxLength.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FIntAXBackgroundPublishPollIntervalSeconds.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FIntAXBackgroundPublishPollTimeoutSeconds.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryAudioPlayer/AssetLibraryAudioPlayerContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryAudioPlayer/AssetLibraryAudioPlayerView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryAudioPlayer/useAssetLibraryAudioPlayerViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryBrowser/AssetLibraryBrowserContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryBrowser/AssetLibraryBrowserView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryBrowser/useAssetLibraryBrowserViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryCategory/AssetLibraryCategoryContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryCategory/AssetLibraryCategoryView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryCategory/AssetLibraryGridView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryCategory/useAssetLibraryCategoryViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryDetail/AssetLibraryDetailContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryDetail/AssetLibraryDetailView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryDetail/useAssetLibraryDetailViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryScreens.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryTile.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/AssetLibraryTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/getAssetTileSubtitle.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/AssetLibrary/useAssetLibraryStrings.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/ExperienceResultsList.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/ExperienceResultsLoadingSkeleton.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/useMyCreationsResults.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/SearchBarContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/SearchBarView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/useDefaultSearchQuery.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/useSearchBarViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchEmptyState/SearchEmptyState.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchPage/SearchPageContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchPage/SearchPageView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchPage/useSearchPageViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildAddSearchIconAndMoveSearchbar.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildExperienceAssetLibrary.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildExperienceFocusNewGameComposer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FIntMyCreationsSessionListPollingIntervalSeconds.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/AssetLibrary.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/AssetLibrary/createAssetLibraryBrowseStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/FoundationCloudAssets.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/MediaPlayback.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/Responsive.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/SignalsExperimental.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/CoreScriptsRoactCommon/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorInventory/CreatorInventoryStoreTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorInventory/createCreatorInventoryStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorInventory/fetchCreatorInventorySearch.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/DataHydration/DataHydration/CreatorInventory/getCreatorInventoryStore.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GameDetailRodux/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericChallenges/GenericChallenges/Middleware/ChallengeNetworkWrapper.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericChallenges/GenericChallenges/Middleware/createChallengeNetwork.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericChallenges/HttpClient.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceDetailsPrompt/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/InExperienceSideSheet/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PeopleReactView/SwitchServer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/PlayerList/Hooks/useSlideOpenCloseAnimation.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/ReactOtter.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ProfilePlatform/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagFriendsStoreRteRequestStatusUpdates.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagLuaAppVideoAutoplayFeedElection.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SquadsCore/DataHydration/CreatorInventory.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UserRelationshipModals/DataHydration/CreatorInventory.luau`
+
+### `InExperience/PatchRoot/CoreScripts/Connection.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `v_1`
+- Removed function: `safeGetFInt`
+- Removed function: `safeGetFString`
+- Removed function: `computeAutoReconnectDelaySeconds`
+- Removed function: `pushErrorToPrompt`
+- Removed function: `ensureAutoReconnectTicker`
+- Removed function: `cancelAutoReconnect`
+- Removed function: `autoReconnectAttemptBucket`
+- Removed function: `onExit`
+- Removed function: `onErrorMessageChanged`
+- Removed variable: `fFlagConnectionParentalApprovalLeaveOnly`
+
+### `InExperience/PatchRoot/CoreScripts/CoreScriptsFriendPlayerPrompt.luau`
+- New function: `_`
+- Removed function: `LocalizedGetString`
+
+### `InExperience/PatchRoot/CoreScripts/ServerCoreScriptsServerSocialScript.luau`
+- Parameter removed from `_` (2 -> 1 params)
+- Upvalue no longer captured by `_`: `httpRbxApiService`
+- Upvalue no longer captured by `_`: `httpService`
+- Upvalue no longer captured by `_`: `url`
+- New upvalue captured by `_`: `newPlayerGroupDetails`
+- Upvalue no longer captured by `_`: `httpRbxApiService`
+- Upvalue no longer captured by `_`: `httpService`
+- Upvalue no longer captured by `_`: `url`
+- Parameter removed from `_` (3 -> 2 params)
+- Upvalue no longer captured by `_`: `enableCreatePartyNudgeWithVersion`
+- Upvalue no longer captured by `_`: `gatePrivateServerNudge`
+- New function: `sendPlayerBlockList_1`
+- New function: `_`
+- New function: `_`
+- Removed function: `verifyUserId`
+- Removed function: `sendPlayerAllGroupDetails`
+- Removed function: `sendPlayerBlockList`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/AvatarEditorPrompts/Components/HumanoidViewport.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Removed function: `rotateLookVector`
+- Removed function: `getCameraOffset`
+- Removed function: `zoomExtents`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/InspectAndBuy/CharacterModelPool.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `hasWrapLayer`
+- Removed function: `cancelPromise`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/InspectAndBuy/Services/Network.luau`
+- New function: `_`
+- Removed function: `request`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PlayerList/PlayerListController.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Removed function: `isUnderTestEZ`
+- Removed function: `isTouchOrGamepadInput`
+- Removed function: `isReskinConsoleMobileRoute`
+- Removed function: `resolveIsTenFoot`
+- Removed function: `isLargeConsoleLayout`
+- Removed function: `isSmallTouchScreen`
+- Removed function: `updateSettings`
+- Removed function: `translate`
+- Removed function: `setStorePersistVisibility`
+- Removed function: `computeMobileTopInset`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/BasePublishPrompt.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `isGamepadInput`
+- Removed function: `GetLocalizedStrings`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/Common/ObjectViewport.luau`
+- New function: `_`
+- Upvalue no longer captured by `setupViewportForAsset`: `makeupPreviewUtilsModule`
+- Removed function: `getCameraDistance`
+- Removed variable: `makeupPreviewUtilsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/Common/PreviewViewport.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Upvalue no longer captured by `resetCameraPosition`: `makeupPreviewUtilsModule`
+- Removed function: `isGamepadInput`
+- Removed function: `getCameraDistance`
+- Removed function: `rotateVectorAround`
+- Removed variable: `makeupPreviewUtilsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/PublishAvatarPrompt/AvatarParts/AvatarPartViewport.luau`
+- New upvalue captured by `addMakeupDecalToViewport`: `cameraUtility`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/PublishMakeupLookPrompt/PublishMakeupLookPrompt.luau`
+- Upvalue no longer captured by `renderPromptBody`: `getFFlagUploadMakeupSupportModule`
+- Upvalue no longer captured by `render`: `getFFlagUploadMakeupSupportModule`
+- Removed variable: `getFFlagUploadMakeupSupportModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/MakeupPreviewUtils.luau`
+- Removed function: `makeCameraCFrame`
+- Removed function: `getHeadPreviewCameraData`
+- Removed function: `setupMakeupThumbnailCamera`
+- Removed variable: `lookAtCFrame`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/Settings/Pages/Players.luau`
+- New upvalue captured by `_`: `localPlayer`
+- Upvalue no longer captured by `_`: `guiService`
+- Upvalue no longer captured by `_`: `nameLabel`
+- Upvalue no longer captured by `_`: `rightSideButtons`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `var104`: `correctlyPositionMuteButton`
+- Upvalue no longer captured by `var104`: `checkShareGameButtonInMuteAllLayout`
+- Removed function: `getFriendStatus`
+- Removed function: `showRightSideButtons`
+- Removed function: `useOptimizedPortraitLayout`
+- Removed function: `getIsBlocked`
+- Removed function: `getDisplayNameLabel`
+- Removed function: `getInExperienceCombinedName`
+- Removed function: `updateBlockButton`
+- Removed function: `updateButtonPosition`
+- Removed function: `muteButtonReset`
+- Removed function: `updateMuteSelfButtonIcon`
+- Removed function: `muteAllButtonRemove`
+- Removed function: `muteSelfButtonRemove`
+- Removed function: `joinVoiceButtonRemove`
+- Removed function: `setIsHighlighted`
+- Removed function: `setIsHighlighted`
+- Removed function: `setIsHighlighted`
+- Removed function: `updatePlayerMuteText`
+- Removed function: `addMuteButtonExperience`
+- Removed function: `setIsHighlighted`
+- Removed function: `addJoinVoiceButton`
+- Removed function: `createInspectButtonImage`
+- Removed function: `canShareCurrentGame`
+- New variable: `correctlyPositionMuteButton`
+- Removed variable: `checkShareGameButtonInMuteAllLayout`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/VoiceChat/VoiceChatServiceManager.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Upvalue no longer captured by `createPromptInstance`: `voiceChatPermissionPromptUseMicrophoneRoute`
+- Removed function: `shorten`
+- Removed function: `bind`
+- Removed function: `startFTUX`
+- Removed variable: `voiceChatPermissionPromptUseMicrophoneRoute`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Accordion/Item/AccordionItem.luau`
+- New function: `_`
+- Removed function: `getCommonEaseConfig`
+- Removed variable: `builderIconsModule`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/AlertActions/AlertConstants.luau`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/AvatarGroup/AvatarGroup.luau`
+- Upvalue no longer captured by `AvatarOverflow`: `icon`
+- Removed variable: `parent`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Button/useButtonVariants.luau`
+- New function: `var7`
+- Removed function: `var6`
+- New variable: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Coachmark/Coachmark.luau`
+- New function: `_`
+- Removed function: `stepsText`
+- Removed variable: `constantsModule`
+- Removed variable: `buttonGroupModule`
+- Removed variable: `orientationModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Dropdown/Dropdown.luau`
+- New variable: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Dropdown/DropdownControl.luau`
+- New upvalue captured by `input`: `flagsModule`
+- New variable: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Dropdown/useDropdownVariants.luau`
+- New upvalue captured by `variantsFactory`: `flagsModule`
+- New variable: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Empty/Empty.luau`
+- Removed variable: `parent`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/InternalAvatarGroup/InternalAvatarGroup.luau`
+- Upvalue no longer captured by `AvatarOverflow`: `icon`
+- Removed variable: `builderIconsModule`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/NumberInput/NumberInput.luau`
+- New function: `_`
+- Removed function: `round`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/OptionSelectorGroup/Item/OptionSelectorGroupItem.luau`
+- New function: `_`
+- Removed function: `getTransparency`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Slider/Slider.luau`
+- Removed variable: `cursorTypeModule`
+- Removed variable: `cursorComponentModule`
+- Removed variable: `getKnobSizeModule`
+- Removed variable: `usePresentationContext`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Tabs/OverflowScrollContainer.luau`
+- Removed variable: `builderIconsModule`
+- Removed variable: `icon`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Components/Tooltip/Tooltip.luau`
+- Removed variable: `constantsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Providers/StudioPanels/Managers/PopoverManager.luau`
+- New function: `_`
+- New function: `_`
+- Parameter removed from `openAtAsync` (6 -> 5 params)
+- Parameter removed from `_createPanelAsync` (4 -> 3 params)
+- Upvalue no longer captured by `_createPanelAsync`: `flagsModule`
+- Parameter removed from `_createPopoverAsync` (4 -> 3 params)
+- New function: `var12`
+- Parameter removed from `_tryAcquireFromPool` (5 -> 4 params)
+- Upvalue no longer captured by `_tryAcquireFromPool`: `flagsModule`
+- Parameter removed from `_acquirePanelAsync` (5 -> 4 params)
+- Removed function: `bindToClose`
+- Removed function: `isStrictDescendantOf`
+- Removed function: `var14`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/Stories/Shared/MatrixGrid.luau`
+- Upvalue no longer captured by `MatrixGrid`: `renderCells`
+- New function: `_`
+- Parameter removed from `renderCells` (3 -> 1 params)
+- Removed function: `getCellColumnWidth`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/getGeneratedRules.luau`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+- Removed function: `Dark`
+- Removed function: `Light`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/Foundation/Foundation/Utility/useAnimatedHighlight.luau`
+- Removed variable: `flagsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/shared/v1beta1/ui_component_schema.luau`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `catalogSortPropTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `catalogSortPropTypesModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `catalogSortPropTypesModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `catalogSortPropTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `hydrationDataSpecModule`
+- New upvalue captured by `jsonDecode`: `hydrationDataSpecModule`
+- New upvalue captured by `decode`: `pageEntryContentModule`
+- New upvalue captured by `jsonDecode`: `pageEntryContentModule`
+- Upvalue no longer captured by `decode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `jsonDecode`: `hydrationDataSpecModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `pageEntryContentModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `pageEntryContentModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `pageEntryContentModule`
+- New upvalue captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `hydrationDataSpecModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Removed function: `new`
+- Removed function: `encode`
+- Removed function: `decode`
+- Removed function: `jsonEncode`
+- Removed function: `jsonDecode`
+- Removed function: `new`
+- Removed function: `encode`
+- Removed function: `decode`
+- Removed function: `jsonEncode`
+- Removed function: `jsonDecode`
+- Removed variable: `FriendCarouselSchema`
+- Removed variable: `FriendCarouselSchema_Props`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/Constants.luau`
+- New function: `_`
+- Removed function: `convertArrayToTable`
+- Removed variable: `getFFlagUGCValidateMakeupCategoryParityModule`
+- Removed variable: `CONTENT_TYPED_PROPERTIES_BY_CLASS`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/assetQualityFolders/Measure_Mesh_Manifold/Measure_Mesh_Manifold.luau`
+- New upvalue captured by `run`: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+- New variable: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/assetQualityFolders/Measure_Mesh_Watertight/Measure_Mesh_Watertight.luau`
+- New upvalue captured by `run`: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+- New variable: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/assetQualityFolders/Measure_Triangle_Intersection/Measure_Triangle_Intersection.luau`
+- New upvalue captured by `run`: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+- Upvalue no longer captured by `run`: `UGCValidationTriangleIntersectionMaxPercent`
+- New variable: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+- Removed variable: `UGCValidationTriangleIntersectionMaxPercent`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/assetQualityFolders/Measure_Vertex_Similarity/Measure_Vertex_Similarity.luau`
+- New upvalue captured by `run`: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+- Upvalue no longer captured by `run`: `UGCValidationVertexSimilarityMaxPercent`
+- New variable: `getFFlagUGCValidateAQMeshQualityBlockUploadModule`
+- Removed variable: `UGCValidationVertexSimilarityMaxPercent`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/util/createAnimationSchema.luau`
+- Removed variable: `getFFlagUGCValidationAnimationAssetDisableModelStructureModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validation/validateMakeupAsset.luau`
+- Removed variable: `getFFlagUGCValidateMakeupCategoryParityModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/AttachmentBoundsValid/AttachmentBoundsValid.luau`
+- Parameter removed from `validateInMeshSpace` (6 -> 5 params)
+- Upvalue no longer captured by `validateInMeshSpace`: `getFFlagUGCValidateAttachmentBoundsErrorMessageModule`
+- Removed variable: `getFFlagUGCValidateMigrateSchemaPropertiesModule`
+- Removed variable: `getFFlagUGCValidateAttachmentBoundsErrorMessageModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/AttributesAllowed/AttributesAllowed.luau`
+- New function: `_`
+- Upvalue no longer captured by `run`: `getFFlagUGCValidateCurveAnimAttributesModule`
+- Upvalue no longer captured by `run`: `getFFlagUGCValidateR15FixedAttributesModule`
+- Removed function: `reportInstanceWithDisallowedAttributes`
+- Removed variable: `getFFlagUGCValidateMigrateSchemaPropertiesModule`
+- Removed variable: `getFFlagUGCValidateCurveAnimAttributesModule`
+- Removed variable: `getFFlagUGCValidateR15FixedAttributesModule`
+- Removed variable: `fflag`
+- Removed variable: `expectedFailures`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/DescendantIdsAllowed/DescendantIdsAllowed.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `collectContentIdsArray`
+- Removed function: `buildOwnerLookup`
+- Removed variable: `getFFlagUGCValidateMakeupCategoryParityModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/ExpectedRootSchema/ExpectedRootSchema.luau`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `run`: `validateInstancesFromSchema`
+- New upvalue captured by `run`: `validateNoInstancesOutsideSchema`
+- Upvalue no longer captured by `run`: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Upvalue no longer captured by `run`: `shouldValidateR15LegacyDuplicateModule`
+- Upvalue no longer captured by `run`: `validateRootAgainstSchema`
+- Removed function: `checkName`
+- Removed function: `getReadableName`
+- Removed function: `validateRootAgainstSchema`
+- Removed variable: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Removed variable: `shouldValidateR15LegacyDuplicateModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/HrdBonesFollowSchema/HrdBonesFollowSchema.luau`
+- New upvalue captured by `run`: `fillBoneTreeFlatList`
+- New upvalue captured by `run`: `getAllInstancesIsAModule`
+- New upvalue captured by `run`: `nameIsMappedInRigDescriptions`
+- New upvalue captured by `run`: `r15plusUtilsModule`
+- New upvalue captured by `run`: `UGCValidationRemoveHRDBlocker`
+- Upvalue no longer captured by `run`: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Upvalue no longer captured by `run`: `shouldValidateR15LegacyDuplicateModule`
+- Upvalue no longer captured by `run`: `validateBonesForRoot`
+- Removed function: `validateBonesForRoot`
+- Removed variable: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Removed variable: `shouldValidateR15LegacyDuplicateModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/IndividualMeshPartBoundsValid/IndividualMeshPartBoundsValid.luau`
+- Upvalue no longer captured by `run`: `getEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule`
+- Upvalue no longer captured by `run`: `validationRulesUtilModule`
+- Upvalue no longer captured by `checkAxis`: `meshPartBoundsMax (write)`
+- Upvalue no longer captured by `checkAxis`: `meshPartBoundsMin (write)`
+- New variable: `getFFlagUGCValidateIndividualMeshPartBoundsModule`
+- Removed variable: `validationRulesUtilModule`
+- Removed variable: `getEngineFeatureEngineUGCValidateMeshPartBoundsFromRulesModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/NoExtraTags/NoExtraTags.luau`
+- Upvalue no longer captured by `run`: `getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule`
+- Removed variable: `getFFlagUGCValidateNoExtraTagsRequireHsrAssetsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/PropertiesSensible/PropertiesSensible.luau`
+- Upvalue no longer captured by `walkInstanceTree`: `describeProblematicPropertiesModule`
+- Upvalue no longer captured by `run`: `getFFlagUGCValidateWrapDataCapsModule`
+- Upvalue no longer captured by `run`: `getFIntUGCValidateMaxHSRMeshIdDataLenModule`
+- Upvalue no longer captured by `run`: `list`
+- Upvalue no longer captured by `run`: `validationEnumsModule`
+- Removed variable: `getFFlagUGCValidateWrapDataCapsModule`
+- Removed variable: `getFIntUGCValidateMaxHSRMeshIdDataLenModule`
+- Removed variable: `describeProblematicPropertiesModule`
+- Removed variable: `list`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationFolders/SingleInstanceSelected/SingleInstanceSelected.luau`
+- New function: `_`
+- Upvalue no longer captured by `run`: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Upvalue no longer captured by `run`: `UGCValidationService`
+- Upvalue no longer captured by `run`: `validationEnumsModule`
+- Removed function: `deepEquals`
+- Removed variable: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Removed variable: `UGCValidationService`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationSystem/ValidationManager.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Upvalue no longer captured by `ValidateAsset`: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Upvalue no longer captured by `ValidateFinalizedBundle`: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+- Upvalue no longer captured by `ValidateFinalizedBundle`: `synthesizeRootFromFolders`
+- Removed function: `capture`
+- Removed function: `getDebugLabel`
+- Removed function: `getRootInstance`
+- Removed function: `findFolderByName`
+- Removed function: `synthesizeRootFromFolders`
+- Removed variable: `getEngineFeatureEngineUGCValidateInstanceTreesEquivalentModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/UGCValidation/UGCValidation/validationSystem/ValidationReporter.luau`
+- Removed function: `setReportingRoot`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/AuthCommon/AuthCommon/Hooks/useOpenDisclaimerLinks.luau`
+- Removed variable: `sharedFlagsModule`
+- Removed variable: `fFlagEnablePioneerLandingPageLayout`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/Fallback/ExperienceDetailsFallbackAttributionRow.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameDetail/GameDetail/ExperienceDetailsPage/Fallback/ExperienceDetailsFallbackFeed.luau`
+- Upvalue no longer captured by `ExperienceDetailsFeedSkeleton`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `ExperienceDetailsFeedSkeleton`: `useGameInfoModule`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/GameHydrationReact/useGameIconsForSize.luau`
+- Removed variable: `signalsModule`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameHydrationReact/GameHydrationReact/useGameInfos.luau`
+- Removed variable: `signalsModule`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/FetchGamePlayButtonData.luau`
+- New upvalue captured by `IsLoading`: `gameInfosReducer`
+- Upvalue no longer captured by `IsLoading`: `hasContentMaturity`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `playButtonDataFetchPromises`: `gameInfosReducer`
+- Upvalue no longer captured by `playButtonDataFetchPromises`: `hasContentMaturity`
+- Removed function: `hasContentMaturity`
+- Removed function: `shouldFetchAgeRecommendations`
+- Removed variable: `dataHydrationModule`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/LegacyPlayButton.luau`
+- New upvalue captured by `renderWithLocalization`: `fFlagLuaAppDemoModePlayButton`
+- New upvalue captured by `render`: `fFlagLuaAppDemoModePlayButton`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/LegacyPlayButtonContainer.luau`
+- New upvalue captured by `init`: `fFlagLuaAppDemoModePlayButton`
+- New upvalue captured by `render`: `fFlagLuaAppDemoModePlayButton`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/PlayButton.luau`
+- New function: `var16`
+- Removed function: `var12`
+- New variable: `UIBloxModule`
+- New variable: `button`
+- New variable: `buttonType`
+- New variable: `comboButton`
+- New variable: `images`
+- New variable: `foundationModule`
+- New variable: `button_1`
+- New variable: `iconButton`
+- New variable: `skeleton`
+- New variable: `buttonVariant`
+- New variable: `inputSize`
+- New variable: `radius`
+- New variable: `playButtonViewModule`
+- New variable: `getFFlagIsSquadEnabled`
+- New variable: `fFlagLuaAppJoinTextPlayableButton`
+- New variable: `fFlagLuaAppIconPlayButton`
+- New variable: `fFlagLuaAppPlayButtonLoadingSkeleton`
+- New variable: `getFFlagUIBloxUseFoundationButton`
+- New variable: `fFlagLuaAppPlayButtonOptOutFoundationButton`
+- New variable: `fFlagLuaAppTextOnlyPlayButton`
+- New variable: `fFlagLuaAppIconTextPlayButton`
+- New variable: `fFlagLuaAppUseTokenHeightForPlayButton`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+- New variable: `fFlagLuaAppPlayButtonViewRefactor`
+- New variable: `play`
+- New variable: `truncationCollapse`
+- New variable: `truncationExpand`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/PlayButtonLaunchChecks/useContextualParentalControlsUpsell.luau`
+- Removed function: `onConfirm`
+- Removed function: `onCancel`
+- Removed variable: `playButtonUpsellBodyModule`
+- Removed variable: `gameHydrationReactModule`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+- Removed variable: `fFlagEnablePlayButtonWizardVPCPrologueModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/PlayButtonUpsellDialog.luau`
+- Removed variable: `gamePlayButton`
+- Removed variable: `playButtonUpsellBodyModule`
+- Removed variable: `fFlagEnablePlayButtonWizardVPCPrologueModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/PlayButtonView.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+- Removed variable: `buttonHeightSizeKeyByInputSizeModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/useOnPlayButtonCallback.luau`
+- New function: `_`
+- Removed function: `initiateLegacyPurchaseFlow`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/usePlayButtonContextualMessage.luau`
+- New function: `var2`
+- Removed function: `var3`
+- Removed variable: `gameHydrationReactModule`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GamePlayButton/GamePlayButton/usePlayButtonState.luau`
+- New function: `_`
+- Removed function: `selectSecondaryPlayButtonState`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+- New variable: `fFlagEnableDemoModeRegionalAvailability`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameProductInfoRodux/GameProductInfoRodux/GameProductInfo.luau`
+- New upvalue captured by `fromJsonData`: `fixFiatPaidAccessPlayButton`
+- New variable: `fixFiatPaidAccessPlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/GameTile/AppExperienceActionRow.luau`
+- New function: `_`
+- New upvalue captured by `render`: `fFlagLuaAppDemoModePlayButton`
+- New upvalue captured by `isButtonEnabled`: `fFlagLuaAppDemoModePlayButton`
+- New upvalue captured by `getButtonText`: `fFlagLuaAppDemoModePlayButton`
+- New upvalue captured by `getButtonType`: `fFlagLuaAppDemoModePlayButton`
+- New upvalue captured by `getButtonIcon`: `fFlagLuaAppDemoModePlayButton`
+- Removed function: `modifyPlayButtonState`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/GameTile/AppGameTile.luau`
+- New function: `_`
+- Upvalue no longer captured by `init`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `init`: `gameHydrationReactModule`
+- Upvalue no longer captured by `init`: `none`
+- Upvalue no longer captured by `init`: `toLegacyGameInfoModel`
+- Upvalue no longer captured by `onFriendFooterActivated`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `onFriendFooterActivated`: `toLegacyGameInfoModel`
+- New function: `LuaAppGameTileHoverDelayMs`
+- New function: `_`
+- Upvalue no longer captured by `renderGridTilesFooter`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `renderContent`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `willUnmount`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `didUpdate`: `fFlagMigrateGameInfoToStore`
+- New function: `_`
+- New function: `_`
+- Removed function: `getHoverDelay`
+- Removed function: `onChange`
+- Removed function: `onSelectionLost`
+- Removed function: `getTextLiteralForTextFooter`
+- Removed function: `formatRating`
+- Removed function: `resolveThumbnail`
+- Removed variable: `none`
+- Removed variable: `toLegacyGameInfoModel`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/GameTile/GameTile/EmphasisGameTile.luau`
+- Removed variable: `fFlagMigrateGameInfoToStore`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/IAPExperience/IAPExperience/Generic/ModelViewport.luau`
+- New variable: `purchasePromptPreviewMakeupHead`
+- Removed variable: `purchasePromptPreviewMakeupHead2`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Utils/makePostMetadata.luau`
+- Removed variable: `momentsCreation`
+- Removed variable: `getFFlagMomentsTTSAudioOverlayModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/PlayabilityRodux/PlayabilityRodux/PlayabilityStatus/PlayabilityStatusModel.luau`
+- New upvalue captured by `fromJsonData`: `fFlagLuaAppDemoModePlayButton`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ProgressLoading/ProgressLoading/TiltLoadingScreen/Models/createTiltLoadingScreenModel.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Removed function: `getQueueTreatment`
+- Removed function: `readServerStatusText`
+- Removed function: `cancel`
+- Removed function: `disconnect`
+- Removed function: `readFollowUserId`
+- Removed function: `readExposureFollowUserId`
+- Removed function: `readQueuePosition`
+- Removed function: `logQueueExposureIfNeeded`
+- Removed function: `resolveUniverseId`
+- Removed function: `fetchUniverseIdForPlace`
+- Removed function: `fetchGameDataForPlace`
+- Removed function: `resolveChinaPolicy`
+- Removed function: `beginRequests`
+- Removed function: `resolvePlaceId`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem.luau`
+- Removed function: `getSduiTelemetryHandlerNameRegistry`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/PropBuilder/buildActionProp.luau`
+- New upvalue captured by `buildActionProp`: `fFlagSduiActionTelemetryHandler`
+- New upvalue captured by `buildActionProp`: `reportUnifiedLoggingActionModule`
+- New variable: `reportUnifiedLoggingActionModule`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/ClientBinding/SduiDataBinder.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Removed function: `updateBadgesInfoStore`
+- Removed function: `updateCreatorInfoStore`
+- Removed function: `updateGameInfos`
+- Removed function: `updateAgeRecommendations`
+- Removed function: `updateSocialLinkInfos`
+- Removed function: `updateMediaAssetStore`
+- Removed function: `updateExperienceEventInfoStore`
+- Removed function: `updateMarketplaceCatalogCategoryStore`
+- Removed function: `updateMarketplaceCatalogSortStore`
+- Removed function: `updateMarketplaceAssetInfoStore`
+- Removed function: `updateMarketplaceBundleInfoStore`
+- Removed function: `updateMarketplaceLookInfoStore`
+- Removed function: `updateGamePassStore`
+- Removed function: `updatePlayabilityStore`
+- Removed function: `updateGameDeveloperProductStore`
+- Removed function: `updateGameSubscriptionStore`
+- Removed function: `updateFavoritesStore`
+- Removed function: `updateUserVoteStore`
+- Removed function: `updateCommunityInfoStore`
+- Removed function: `updateCommunityUserMembershipStore`
+- Removed function: `getUniverseVoteRatingText`
+- Removed function: `resolveFieldFromData`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/SduiParsers.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New upvalue captured by `isValidActionConfig`: `fFlagSduiActionTelemetryHandler`
+- New function: `_`
+- New upvalue captured by `parseCallback`: `isValidActionConfig`
+- Upvalue no longer captured by `parseCallback`: `getSduiActionHandlerRegistryModule`
+- Removed function: `withErrorHandling`
+- Removed function: `makeLuaTableEnumParser`
+- Removed function: `makeEngineEnumParser`
+- Removed function: `isValidIconString`
+- Removed function: `isCallableTable`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/executeAction.luau`
+- New variable: `reportUnifiedLoggingActionModule`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiCoreSystem/SduiCoreSystem/getSduiActionHandlerRegistry.luau`
+- New upvalue captured by `createSduiActionHandlerRegistry`: `fFlagSduiActionTelemetryHandler`
+- New upvalue captured by `getActionHandlerConfig`: `fFlagSduiActionTelemetryHandler`
+- New variable: `parent`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedContent/SduiSharedContent/Components/SduiPlayButton.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedContent/SduiSharedContent/Components/SduiVerticalFeed.luau`
+- Removed variable: `fFlagLuaAppSduiHomeFriendCarousel`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedContent/SduiSharedContent/SduiSharedRegister.luau`
+- Upvalue no longer captured by `registerSharedActions`: `fFlagSduiNavigate`
+- Removed function: `lazyHandler`
+- Removed variable: `fFlagSduiNavigate`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/ServerDrivenUi/Actions/SduiOpenSocialLinkAction.luau`
+- New function: `var5`
+- Removed function: `continueFunc`
+- New variable: `fFlagSduiActionTelemetryHandler`
+- New variable: `discoveryAnalyticsModule`
+- New variable: `sendOpenLeavingRobloxModalEvent`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/ServerDrivenUi/Actions/registerDiscoveryActions.luau`
+- Removed function: `lazyTelemetryHandler`
+- Removed function: `lazyTelemetryHandler`
+- Removed function: `lazyTelemetryHandler`
+- Removed function: `lazyTelemetryHandler`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/ServerDrivenUi/Content/SduiGameTile.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/ServerDrivenUi/ServerDrivenUi/System/SduiDiscoveryDependencyUpdater.luau`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/System/SduiSocialRegister.luau`
+- New variable: `parent`
+- New variable: `fFlagSduiActionTelemetryHandler`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/System/registerSocialComponents.luau`
+- Removed function: `getLazyComponent`
+- Removed variable: `sharedFlagsModule`
+- Removed variable: `fFlagLuaAppSduiHomeFriendCarousel`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SponsoredTiles/SponsoredTiles/OneByTwoTile.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SponsoredTiles/SponsoredTiles/TwoByOneGameTile.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/VideoUtils/VideoUtils/FeedVideoPlaybackContext.luau`
+- Parameter removed from `new` (3 -> 1 params)
+- Upvalue no longer captured by `new`: `fFlagLuaAppVideoAutoplayFeedElection`
+- Removed variable: `parent`
+- Removed variable: `fFlagLuaAppVideoAutoplayFeedElection`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/VideoUtils/VideoUtils/ViewportVideoAutoplayController.luau`
+- Parameter removed from `new` (3 -> 1 params)
+- Upvalue no longer captured by `new`: `fFlagLuaAppVideoAutoplayFeedElection`
+- Upvalue no longer captured by `_maybeScheduleInitialWinnerUpdate`: `fFlagLuaAppVideoAutoplayFeedElection`
+- Parameter removed from `scheduleUpdateWinner` (5 -> 4 params)
+- Upvalue no longer captured by `scheduleUpdateWinner`: `fFlagLuaAppVideoAutoplayFeedElection`
+- Parameter removed from `_updateWinner` (5 -> 4 params)
+- Upvalue no longer captured by `_updateWinner`: `fFlagLuaAppVideoAutoplayElectOnNewCandidateModule`
+- Upvalue no longer captured by `_updateWinner`: `fFlagLuaAppVideoAutoplayFeedElection`
+- Upvalue no longer captured by `_updateWinner`: `videoEndReason`
+- Parameter removed from `_selectWinner` (4 -> 3 params)
+- Upvalue no longer captured by `_selectWinner`: `fFlagLuaAppVideoAutoplayFeedElection`
+- Upvalue no longer captured by `_selectWinner`: `reportCandidateOverlap`
+- Removed function: `reportCandidateOverlap`
+- Removed function: `onCandidateRegistered`
+- Removed function: `forceScheduleInitialWinnerUpdate`
+- Removed function: `shouldReplaceByLeftmostX`
+- Removed function: `considerFoldXCandidate`
+- Removed variable: `fFlagLuaAppVideoAutoplayFeedElection`
+- Removed variable: `fFlagLuaAppVideoAutoplayElectOnNewCandidateModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/VideoUtils/VideoUtils/useFeedVideoPlaybackContext.luau`
+- Removed variable: `fFlagLuaAppVideoAutoplayFeedElection`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/VideoUtils/VideoUtils/useTagAsViewportAutoplayCandidate.luau`
+- Removed variable: `fFlagLuaAppVideoAutoplayFeedElection`
+- Removed variable: `fFlagLuaAppVideoAutoplayElectOnNewCandidateModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppBlox/AppBlox/DetailsPage/DetailsPageTenfootTemplate.luau`
+- New variable: `fFlagLuaAppDemoModePlayButton`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ConversationBanner/ConversationBannerContainer.luau`
+- Removed variable: `useGetOneToOneFriendIdFromConversationIdModule`
+- Removed variable: `fFlagAppChatConsolidateTrustedFriendsModalModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/PartialModal/ConversationOverlayContainer.luau`
+- Removed variable: `trustedFriendsUpsellContainerModule`
+- Removed variable: `useGetOneToOneFriendIdFromConversationIdModule`
+- Removed variable: `fFlagAppChatConsolidateTrustedFriendsModalModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ShareLinkComponents/MomentShareCard/MomentShareCardView.luau`
+- New function: `_`
+- Removed function: `toUDim`
+- New variable: `fFlagAppChatMomentShareCardUseFoundationImage`
+- Removed variable: `fFlagAppChatMomentShareCardUseFoundationImageModule`
+- Removed variable: `fFlagAppChatMomentShareCardLoadingSkeletonsModule`
+- Removed variable: `fFlagAppChatMomentShareCardUseFoundationImageModule_1`
+- Removed variable: `momentDetailsStatusModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ShareLinkComponents/MomentShareCard/useExperienceName.luau`
+- Removed variable: `appChat`
+- Removed variable: `dataStatus`
+- Removed variable: `fFlagAppChatMomentShareCardLoadingSkeletonsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ShareLinkComponents/MomentShareCard/useMomentDetails.luau`
+- Removed variable: `momentDetailsStatusModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatConversation/ShareLinkComponents/MomentShareCard/useMomentShareCardViewModel.luau`
+- Removed variable: `momentDetailsStatusModule`
+- Removed variable: `fFlagAppChatMomentShareCardLoadingSkeletonsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Components/ChatDetails/ParticipantDialog/ParticipantDialogContainer.luau`
+- Upvalue no longer captured by `ParticipantDialogContainer`: `fFlagAppChatConsolidateTrustedFriendsModalModule`
+- New function: `var59`
+- Removed function: `var60`
+- Removed variable: `fFlagAppChatConsolidateTrustedFriendsModalModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Navigators/Compact/chatLandingWithDialogsNavigator.luau`
+- New function: `_`
+- Removed function: `getActiveRouteName`
+- Removed variable: `trustedFriendsUpsellScreenModule`
+- Removed variable: `fFlagAppChatConsolidateTrustedFriendsModalModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AppChat/AppChat/Navigators/Wide/chatLandingWithDialogsNavigator.luau`
+- Removed variable: `trustedFriendsUpsellScreenModule`
+- Removed variable: `fFlagAppChatConsolidateTrustedFriendsModalModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/BuildPage.luau`
+- New function: `_`
+- New upvalue captured by `screen`: `buildPageHeaderModule`
+- New upvalue captured by `screen`: `buildSearchBarModule`
+- New upvalue captured by `screen`: `fFlagBuildLocalization`
+- New upvalue captured by `screen`: `localizationStringsModule`
+- New upvalue captured by `screen`: `myCreationsTabModule`
+- New upvalue captured by `screen`: `resumeBuildChatModule`
+- New upvalue captured by `screen`: `useLocalization`
+- New upvalue captured by `screen`: `useNavigationFocus`
+- New upvalue captured by `screen`: `view`
+- Upvalue no longer captured by `screen`: `buildChatPageModule`
+- Upvalue no longer captured by `screen`: `buildNavigationParamsModule`
+- Upvalue no longer captured by `screen`: `buildOverflowMenuScreensModule`
+- Upvalue no longer captured by `screen`: `fFlagBuildExperienceAssetLibraryModule`
+- Upvalue no longer captured by `screen`: `getBuildExperienceRefreshStoreModule`
+- Upvalue no longer captured by `screen`: `privateInvitesPickerHostModule`
+- Upvalue no longer captured by `screen`: `useOnScreenKeyboardVisibleModule`
+- New upvalue captured by `screen`: `buildChatPageModule`
+- New upvalue captured by `screen`: `buildOverflowMenuScreensModule`
+- New upvalue captured by `screen`: `getBuildExperienceRefreshStoreModule`
+- New upvalue captured by `screen`: `privateInvitesPickerHostModule`
+- New upvalue captured by `screen`: `useOnScreenKeyboardVisibleModule`
+- Upvalue no longer captured by `screen`: `fFlagBuildBackButtonChevronModule`
+- Upvalue no longer captured by `screen`: `fFlagBuildLocalization`
+- Upvalue no longer captured by `screen`: `fFlagEnableBuildExperienceScrollPerformanceTrackingModule`
+- Upvalue no longer captured by `screen`: `iconName`
+- Upvalue no longer captured by `screen`: `localizationStringsModule`
+- Upvalue no longer captured by `screen`: `overflowMenuPageShellModule`
+- Upvalue no longer captured by `screen`: `subagentStatusModule`
+- Upvalue no longer captured by `screen`: `useLiveSubagentTaskState`
+- Upvalue no longer captured by `screen`: `useLocalization`
+- Upvalue no longer captured by `screen`: `view`
+- New upvalue captured by `screen`: `buildNavigationParamsModule`
+- New upvalue captured by `screen`: `subagentStatusModule`
+- New upvalue captured by `screen`: `useLiveSubagentTaskState`
+- New upvalue captured by `screen`: `view`
+- Upvalue no longer captured by `screen`: `creatorCreditBalanceChipContainerModule`
+- Upvalue no longer captured by `screen`: `creatorCreditPageContainerModule`
+- New function: `screen`
+- Removed function: `shouldShowSearchEmptyState`
+- Removed function: `findGroup`
+- Removed function: `useOpenBuildChat`
+- Removed function: `BuildHomeScreen`
+- Removed function: `BuildSearchResults`
+- Removed function: `BuildSearchScreen`
+- Removed variable: `fFlagBuildAddSearchIconAndMoveSearchbarModule`
+- Removed variable: `fFlagBuildExperienceAssetLibraryModule`
+- Removed variable: `list`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/BuildChatPageView.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `findGroup`
+- Removed function: `getGroupStatus`
+- Removed variable: `fFlagBuildExperienceAssetLibraryModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/useBuildChatPageViewModel.luau`
+- Removed variable: `fFlagBuildExperienceAssetLibraryModule`
+- Removed variable: `fFlagBuildExperienceFocusNewGameComposerModule`
+- Removed variable: `iconName`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildPageHeader/BuildPageHeader.luau`
+- Removed function: `renderEmptyRight`
+- Removed function: `AgentSpec`
+- Removed function: `HeaderSearch`
+- Removed function: `HeaderCenter`
+- Removed variable: `displayModule`
+- Removed variable: `signalsReactModule`
+- Removed variable: `fFlagBuildAddSearchIconAndMoveSearchbarModule`
+- Removed variable: `button`
+- Removed variable: `useScaledValue`
+- Removed variable: `useTokens`
+- Removed variable: `searchBarContainerModule`
+- Removed variable: `getSearchQueryStoreModule`
+- Removed variable: `buildSearchBarWidth`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildPillMenu/BuildPillMenu.luau`
+- Removed variable: `fFlagBuildExperienceAssetLibraryModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildPillMenu/BuildPillMenuPageHost.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Removed function: `findGroup`
+- Removed function: `getOverlayScreenGui`
+- Removed function: `getInitialPage`
+- Removed function: `getInitialScreen`
+- Removed variable: `fFlagBuildExperienceAssetLibraryModule`
+- Removed variable: `list`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildPillMenu/BuildPillMenuPortal.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `isSideSheet`
+- Removed function: `getOverlayPosition`
+- Removed variable: `fFlagBuildExperienceAssetLibraryModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/MyCreationsTab.luau`
+- New function: `_`
+- New function: `privacyLabelForSummary`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `requestHandleToPromise`
+- New function: `ignorePromiseRejection`
+- New function: `_`
+- New function: `buildExperienceMetadataByUniverseId`
+- New function: `buildSessionItems`
+- New function: `buildLatestSessionByUniverseId`
+- New function: `buildUniverseItems`
+- New function: `useUniverseSearchList`
+- New function: `useLegacySessionList`
+- New function: `renderLoadingExperienceSkeleton`
+- New function: `scheduleNextPoll`
+- New variable: `appLifecycleObserverService`
+- New variable: `myCreationsSessionListPollingIntervalSeconds`
+- New variable: `promiseModule`
+- New variable: `signalsModule`
+- New variable: `signalsReactModule`
+- New variable: `localizationRoactContext`
+- New variable: `creatorAgentChatModule`
+- New variable: `universeActivationModule`
+- New variable: `universeConfigurationModule`
+- New variable: `universeSearchModule`
+- New variable: `badge`
+- New variable: `privacyType`
+- New variable: `skeleton`
+- New variable: `badgeShape`
+- New variable: `badgeSize`
+- New variable: `badgeVariant`
+- New variable: `radius`
+- New variable: `useTokens`
+- New variable: `contentMaturityUtilsModule`
+- New variable: `matchesSearchQueryModule`
+- New variable: `getBuildExperienceRefreshStoreModule`
+- New variable: `fFlagBuildExperienceMyCreationsUseAudiencesModule`
+- New variable: `fFlagBuildRehydrateOnPublishModule`
+- New variable: `fFlagBuildExperienceStableMyCreationsListItemsModule`
+- New variable: `useSignalState`
+- Removed variable: `fFlagBuildAddSearchIconAndMoveSearchbarModule`
+- Removed variable: `useMyCreationsResultsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/GetSearchQueryStore/createSearchQueryStore.luau`
+- New function: `_`
+- New upvalue captured by `setQuery`: `var11 (write)`
+- Upvalue no longer captured by `setQuery`: `var14 (write)`
+- New upvalue captured by `clear`: `var11 (write)`
+- Upvalue no longer captured by `clear`: `var14 (write)`
+- New upvalue captured by `destroy`: `var11 (write)`
+- Upvalue no longer captured by `destroy`: `var14 (write)`
+- Removed function: `cancelPending`
+- Removed function: `useIsSearchActive`
+- Removed function: `useShowEmptyState`
+- Removed function: `beginSearch`
+- Removed function: `endSearch`
+- Removed function: `endSearchIfEmpty`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChat/ExpChat/mountClientApp.luau`
+- New function: `_`
+- New function: `var110`
+- New function: `t_2`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `var133`
+- New function: `_`
+- Removed function: `getHumanoidBinding`
+- Removed function: `onCharacterRemoving`
+- Removed function: `_processIncomingMessageCore`
+- Removed function: `processIncomingMessage`
+- Removed function: `processIncomingMessageWithOptions`
+- Removed function: `watchTextChatCommand`
+- Removed function: `tryLogExposureNewSystemMessages`
+- Removed function: `connectSendingUniverseChatMessage`
+- Removed function: `isInstanceALocalTextChannelParticipant`
+- Removed function: `getChannelTabIndex`
+- Removed function: `findCommandInstance`
+- Removed function: `shouldConnectToUserMessageIntentSent`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExpChatShared/ExpChatShared/Commands/RBXEmoteCommand.luau`
+- New function: `_`
+- Removed function: `getDanceBasedOnRigType`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/ExperienceLoadingScript/ExperienceLoadingScript/LoadingScreen3D.luau`
+- New function: `_`
+- Removed function: `CleanUp`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PeopleReactView/PeopleReactView/Configs/CoreButtonConfigs.luau`
+- New function: `_`
+- Removed function: `sendSwitchServerButtonImpressionOnce`
+- New variable: `switchServerTelemetryModule`
+- Removed variable: `constants`
+- Removed variable: `switchServerTelemetry`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PeopleReactView/PeopleReactView/PeopleReactView.luau`
+- New variable: `switchServerConfirmationModule`
+- New variable: `switchServerTelemetryModule`
+- Removed variable: `switchServerModule`
+- Removed variable: `switchServerConfirmation`
+- Removed variable: `switchServerTelemetry`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/PlayerList/Common/PlayerContextualMenuStore.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `getContextMenuTelemetry`
+- Removed function: `logItemActivated`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/PlayerList/Components/Presentation/ConsoleFocusScrollView.luau`
+- New function: `_`
+- Removed function: `isGamepad`
+- Removed function: `restoreHud`
+- Removed function: `releaseRosterSelection`
+- New variable: `openContextMenu`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/PlayerList/Components/Presentation/PlayerContextualMenuView.luau`
+- Removed function: `isGamepad`
+- Removed variable: `guiService`
+- Removed variable: `userInputService`
+- Removed variable: `useSlideOpenCloseAnimationModule`
+- Removed variable: `useSlideOpenCloseAnimation`
+- Removed variable: `MENU_SLIDE_CONFIG`
+- Removed variable: `MENU_ZOOM_CLOSED_SCALE`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/PlayerList/Components/Presentation/PlayerListPanel.luau`
+- Upvalue no longer captured by `PlayerListPanelContent`: `createZoomDecorations`
+- Upvalue no longer captured by `PlayerListPanelContent`: `MENU_ZOOM_CLOSED_SCALE`
+- Upvalue no longer captured by `PlayerListPanelContent`: `MOBILE_ZOOM_SPRING`
+- Upvalue no longer captured by `PlayerListPanelContent`: `PANEL_RECESS_SCALE`
+- Upvalue no longer captured by `PlayerListPanelContent`: `PANEL_RECESS_TRANSPARENCY`
+- Upvalue no longer captured by `PlayerListPanelContent`: `reactOtterModule`
+- Upvalue no longer captured by `PlayerListPanelContent`: `renderWithSlideAndZoomDecorations`
+- Removed function: `wrapWithSlide`
+- Removed function: `createZoomDecorations`
+- Removed function: `renderWithSlideAndZoomDecorations`
+- Removed variable: `cryoModule`
+- Removed variable: `reactOtterModule`
+- Removed variable: `useSlideOpenCloseAnimationModule`
+- Removed variable: `useSlideOpenCloseAnimation`
+- Removed variable: `PANEL_SLIDE_CONFIG`
+- Removed variable: `PANEL_ZOOM_CONFIG`
+- Removed variable: `MOBILE_ZOOM_SPRING`
+- Removed variable: `MENU_ZOOM_CLOSED_SCALE`
+- Removed variable: `PANEL_RECESS_SCALE`
+- Removed variable: `PANEL_RECESS_TRANSPARENCY`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PlayerList/PlayerList/Components/Presentation/TabbedLeaderboardBody.luau`
+- Removed variable: `cryoModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Thunks/resolvePromptState.luau`
+- New variable: `fFlagAXFixRobuxUpsellSoftLockModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags.luau`
+- New variable: `sduiEdpActionBarJitterFix`
+- New variable: `fFlagLuaAppPlayButtonViewRefactorModule`
+- Removed variable: `connectionAmpParentalApprovalUpsell_1`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SocialContextToasts/SocialContextToasts/SocialContextToastDispatcher.luau`
+- New function: `_`
+- Removed function: `sortFriendsList`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/UniversalAppPolicy/UniversalAppPolicy/AppFeaturePolicies.luau`
+- New function: `_`
+- Removed function: `getVRDefaultPolicy`
+- New variable: `fFlagEnableCoreContentThemeUseGuacForTokenOverrides`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/WhatsNew/WhatsNew/components/WhatsNewTourtip.luau`
+- New function: `_`
+- Removed function: `isRectReady`
+
+
 ## 12504 - 2026-08-24 23:54
 
 ### New files

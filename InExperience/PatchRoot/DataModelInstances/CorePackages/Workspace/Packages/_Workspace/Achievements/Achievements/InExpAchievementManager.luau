@@ -9,35 +9,35 @@ local dashModule = require(parent.Dash)
 local timeRefresherModule = require(achievements.AchievementDataRefresher.TimeRefresher)
 local friendCountRefresherModule = require(achievements.AchievementDataRefresher.FriendCountRefresher)
 local var9 = httpRequestModule.config({
-	requestFunction = function(p0, p1, p2) --[[ line: 19 ]]
+	requestFunction = function(p0, p1, p2)
 		-- upvalues: httpRequestModule (ref)
 		return httpRequestModule.requestFunctions.HttpRbxApi(p0, p1, p2)
 	end,
 	maxRetryCount = if require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InExpAchievementManagerHttpRetryCount", 4) else nil
 })
 local var10 = nil
-pcall(function() --[[ line: 29 ]]
+pcall(function()
 	-- upvalues: var10 (write)
 	var10 = game:GetService("PlatformFriendsService")
 end)
 local var11 = nil
-pcall(function() --[[ line: 34 ]]
+pcall(function()
 	-- upvalues: var11 (write)
 	var11 = game:GetService("PlatformCloudStorageService")
 end)
 local var12 = nil
-pcall(function() --[[ line: 39 ]]
+pcall(function()
 	-- upvalues: var12 (write)
 	var12 = game:GetService("AchievementService")
 end)
 local playersService = game:GetService("Players")
 local var14 = nil
-pcall(function() --[[ line: 47 ]]
+pcall(function()
 	-- upvalues: var14 (write)
 	var14 = game:GetService("PlatformService")
 end)
 local t = {
-	startUp = function(p3) --[[ line: 56 ]]
+	startUp = function(p3)
 		-- upvalues: signalModule (ref), timeRefresherModule (ref), friendCountRefresherModule (ref), achievementModule (ref)
 		local var16, var17 = signalModule.createReadableSignal(0)
 		local var18, var19 = signalModule.createReadableSignal(0)
@@ -54,7 +54,7 @@ local t = {
 		p3:_checkStrengthInNumbers(var21)
 		p3:_checkJoinExperienceAchievements(var19)
 	end,
-	_checkJoinExperienceAchievements = function(p4, p5) --[[ line: 98 ]]
+	_checkJoinExperienceAchievements = function(p4, p5)
 		-- upvalues: dashModule (ref), getUserRecentExperiencesModule (ref), loggerModule (ref)
 		if p4.achievementScout.hasAchieved == false or p4.achievementExplorer.hasAchieved == false or p4.achievementTrailblazer.hasAchieved == false then
 			if p4.platformCloudStorageService and p4.platformCloudStorageService:IsUserDataAvailable() then
@@ -68,28 +68,28 @@ local t = {
 				
 				return
 			else
-				getUserRecentExperiencesModule(p4.requestImpl):andThen(function(p7) --[[ line: 116 ]]
+				getUserRecentExperiencesModule(p4.requestImpl):andThen(function(p7)
 					-- upvalues: p5 (ref)
 					p5(p7)
-				end):catch(function(p6) --[[ line: 118 ]]
+				end):catch(function(p6)
 					-- upvalues: loggerModule (copy)
 					loggerModule:warning(p6)
 				end)
 			end
 		end
 	end,
-	_checkStrengthInNumbers = function(p8, p9) --[[ line: 125 ]]
+	_checkStrengthInNumbers = function(p8, p9)
 		if p8.achievementStrengthInNumbers.hasAchieved == false then
 			local localPlayer = p8.playersService.LocalPlayer
 			
-			if localPlayer and localPlayer.FollowUserId ~= 0 and (localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) and p8.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
+			if localPlayer and localPlayer.FollowUserId ~= 0 and ((if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) else localPlayer:IsFriendsWith(localPlayer.FollowUserId)) and p8.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
 				p9(0)
 			end
 		end
 	end
 }
 
-function t.new(p10, p11, p12, p13, p14, p15) --[[ line: 140 ]]
+function t.new(p10, p11, p12, p13, p14, p15)
 	-- upvalues: var9 (ref), var10 (write), var11 (write), var12 (write), playersService (ref), var14 (write), t (ref)
 	return setmetatable({
 		requestImpl = p10 or var9,

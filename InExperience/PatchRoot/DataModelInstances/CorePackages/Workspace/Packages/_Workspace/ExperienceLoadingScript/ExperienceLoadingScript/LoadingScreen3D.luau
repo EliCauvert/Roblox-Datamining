@@ -8,7 +8,7 @@ local splashScreenManager = require(parent.SplashScreenManager).SplashScreenMana
 local loadingRemoveRemoteCallErrorPrint = game:DefineFastFlag("LoadingRemoveRemoteCallErrorPrint", false)
 local create = require(parent.AppCommonLib).Create
 
-local function FadeElements(p0, p1, p2) --[[ line: 22 ]]
+local function FadeElements(p0, p1, p2)
 	-- upvalues: tweenService (ref), FadeElements (ref)
 	p2 = p2 or 0.5
 	
@@ -33,28 +33,33 @@ local t = { Finished = false, GameAssetInfo = nil }
 local bindableEvent = Instance.new("BindableEvent")
 t.LoadingFinishedEvent = bindableEvent.Event
 
-function t.GetGameName(p3) --[[ line: 51 ]]
+function t.GetGameName(p3)
 	return if p3.GameAssetInfo == nil then "" else p3.GameAssetInfo.Name
 end
 
-function t.GetCreatorName(p4) --[[ line: 59 ]]
+function t.GetCreatorName(p4)
 	return if p4.GameAssetInfo == nil then "" else p4.GameAssetInfo.Creator.Name
 end
 
-function t.IsReady(p5) --[[ line: 67 ]]
+function t.IsReady(p5)
 	return p5.Finished
 end
 
-function t.LoadAssetsAsync(value) --[[ line: 71 ]]
+function t.LoadAssetsAsync(value)
 	-- upvalues: marketplaceService (ref), loadingRemoveRemoteCallErrorPrint (ref), bindableEvent (ref)
-	spawn(function() --[[ line: 72 ]]
+	spawn(function()
 		-- upvalues: value (ref), marketplaceService (copy), loadingRemoveRemoteCallErrorPrint (copy), bindableEvent (copy)
 		while game.PlaceId <= 0 do
 			wait()
 		end
-		local ok, status = pcall(function() --[[ line: 78 ]]
+		local ok, status = pcall(function()
 			-- upvalues: value (copy), marketplaceService (copy)
-			value.GameAssetInfo = marketplaceService:GetProductInfoAsync(game.PlaceId)
+			if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
+				value.GameAssetInfo = marketplaceService:GetProductInfoAsync(game.PlaceId)
+				
+				return
+			end
+			value.GameAssetInfo = marketplaceService:GetProductInfo(game.PlaceId)
 		end)
 		
 		if not loadingRemoveRemoteCallErrorPrint and not ok then
@@ -135,12 +140,12 @@ local var17 = create("TextLabel")({
 })
 local var18 = false
 local var19 = true
-delay(2.5, function() --[[ line: 169 ]]
+delay(2.5, function()
 	-- upvalues: var19 (write)
 	var19 = false
 end)
 
-local function UpdateLayout(p6) --[[ line: 172 ]]
+local function UpdateLayout(p6)
 	-- upvalues: var17 (ref), var15 (ref), var19 (write), var16 (write), tweenService (ref), var18 (write), var14 (ref), var12 (ref), var13 (ref)
 	if var17.TextBounds.X < var15.AbsoluteSize.X then
 		var17.Position = UDim2.new(0, 0, 0, 0)
@@ -153,7 +158,7 @@ local function UpdateLayout(p6) --[[ line: 172 ]]
 			
 			if var25 + var17.AbsoluteSize.X < var15.AbsoluteSize.X then
 				var19 = true
-				spawn(function() --[[ line: 182 ]]
+				spawn(function()
 					-- upvalues: tweenService (copy), var17 (copy), var18 (copy), var16 (copy), var19 (copy)
 					local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
 					tweenService:Create(var17, tweenInfo, { TextTransparency = 1 }):Play()
@@ -183,7 +188,7 @@ local function UpdateLayout(p6) --[[ line: 172 ]]
 	end
 end
 
-local function _() --[[ line: 213 | named "CleanUp" ]]
+local function _()
 	-- upvalues: var18 (write), FadeElements (ref), var9 (ref), runService (ref)
 	if var18 then
 		return
@@ -195,7 +200,7 @@ local function _() --[[ line: 213 | named "CleanUp" ]]
 	var9.Parent = nil
 end
 
-local function OnGameInfoLoaded() --[[ line: 226 ]]
+local function OnGameInfoLoaded()
 	-- upvalues: t (ref), var14 (ref), var17 (ref)
 	local creatorName = t:GetCreatorName()
 	
@@ -206,7 +211,7 @@ local function OnGameInfoLoaded() --[[ line: 226 ]]
 	var17.Text = creatorName
 end
 
-local function OnDefaultLoadingGuiRemoved() --[[ line: 235 ]]
+local function OnDefaultLoadingGuiRemoved()
 	-- upvalues: var18 (write), FadeElements (ref), var9 (ref), runService (ref)
 	if var18 then
 		return
@@ -219,7 +224,7 @@ local function OnDefaultLoadingGuiRemoved() --[[ line: 235 ]]
 end
 
 local currentTime = tick()
-runService:BindToRenderStep("LoadingGui3D", Enum.RenderPriority.Last.Value, function() --[[ line: 241 ]]
+runService:BindToRenderStep("LoadingGui3D", Enum.RenderPriority.Last.Value, function()
 	-- upvalues: currentTime (write), UpdateLayout (ref), var11 (write), var12 (ref)
 	local currentTime_1 = tick()
 	local var29 = currentTime_1 - currentTime
@@ -251,9 +256,9 @@ if replicatedFirstService:IsDefaultLoadingGuiRemoved() then
 else
 	replicatedFirstService.RemoveDefaultLoadingGuiSignal:connect(OnDefaultLoadingGuiRemoved)
 end
-guiService.ErrorMessageChanged:connect(function() --[[ line: 268 ]] end)
-guiService.UiMessageChanged:connect(function(_, _) --[[ line: 272 ]] end)
-splashScreenManager.addStatusChangeListener(function(p7) --[[ line: 276 ]]
+guiService.ErrorMessageChanged:connect(function() end)
+guiService.UiMessageChanged:connect(function(_, _) end)
+splashScreenManager.addStatusChangeListener(function(p7)
 	-- upvalues: var18 (write), FadeElements (ref), var9 (ref), runService (ref)
 	if p7 then
 		if var18 then return end

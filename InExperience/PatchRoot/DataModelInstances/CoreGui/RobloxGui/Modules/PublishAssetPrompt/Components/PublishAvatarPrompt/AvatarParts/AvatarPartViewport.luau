@@ -15,7 +15,7 @@ avatarPartViewport.validateProps = tModule.strictInterface({
 	viewportSize = tModule.optional(tModule.Vector2)
 })
 
-function avatarPartViewport.init(p0) --[[ line: 38 ]]
+function avatarPartViewport.init(p0)
 	-- upvalues: roactModule (ref)
 	p0.camera = nil
 	p0.modelRef = roactModule.createRef()
@@ -24,7 +24,7 @@ function avatarPartViewport.init(p0) --[[ line: 38 ]]
 	p0.updateCamera = var8
 end
 
-function avatarPartViewport.createViewportCamera(p1) --[[ line: 44 ]]
+function avatarPartViewport.createViewportCamera(p1)
 	local camera = Instance.new("Camera")
 	camera.Parent = p1.modelRef:getValue()
 	camera.CameraType = Enum.CameraType.Scriptable
@@ -34,7 +34,7 @@ function avatarPartViewport.createViewportCamera(p1) --[[ line: 44 ]]
 	return camera
 end
 
-function avatarPartViewport.addBodyPartMannequinToViewport(p2) --[[ line: 55 ]]
+function avatarPartViewport.addBodyPartMannequinToViewport(p2)
 	-- upvalues: mannequinUtility (ref), cameraUtility (ref)
 	local var10, var11, var12 = mannequinUtility.CreateBodyPartMannequin(p2.props.asset, false)
 	local var13, var14 = mannequinUtility.SetupBodyPartMannequin(var10, var11, var12, p2.props.asset)
@@ -44,7 +44,7 @@ function avatarPartViewport.addBodyPartMannequinToViewport(p2) --[[ line: 55 ]]
 	p2.updateCamera(var15)
 end
 
-function avatarPartViewport.addHeadModelToViewport(p3) --[[ line: 67 ]]
+function avatarPartViewport.addHeadModelToViewport(p3)
 	-- upvalues: mannequinUtility (ref), cameraUtility (ref)
 	local var16 = mannequinUtility.CreateHeadModel(p3.props.asset)
 	var16.Parent = p3.modelRef:getValue()
@@ -53,7 +53,7 @@ function avatarPartViewport.addHeadModelToViewport(p3) --[[ line: 67 ]]
 	p3.updateCamera(var17)
 end
 
-function avatarPartViewport.addAccessoryToViewport(p4) --[[ line: 76 ]]
+function avatarPartViewport.addAccessoryToViewport(p4)
 	-- upvalues: cameraUtility (ref)
 	local model = Instance.new("Model")
 	p4.props.asset.Parent = model
@@ -63,20 +63,21 @@ function avatarPartViewport.addAccessoryToViewport(p4) --[[ line: 76 ]]
 	p4.updateCamera(var19)
 end
 
-function avatarPartViewport.addMakeupDecalToViewport(p5) --[[ line: 86 ]]
-	-- upvalues: makeupPreviewUtilsModule (ref)
+function avatarPartViewport.addMakeupDecalToViewport(p5)
+	-- upvalues: makeupPreviewUtilsModule (ref), cameraUtility (ref)
 	local var20 = makeupPreviewUtilsModule.createMakeupThumbnailPreview(p5.props.asset, p5.props.assetType)
 	
-	if not var20 then return end
-	var20.Parent = p5.modelRef:getValue()
-	local var21 = p5:createViewportCamera()
-	
-	if makeupPreviewUtilsModule.setupMakeupThumbnailCamera(var20, var21, p5.props.assetType) then
+	if var20 then
+		var20.Parent = p5.modelRef:getValue()
+		local var21 = p5:createViewportCamera()
+		cameraUtility.SetupHeadCamera(var20, var21)
 		p5.updateCamera(var21)
+		
+		return
 	end
 end
 
-function avatarPartViewport.didMount(p6) --[[ line: 99 ]]
+function avatarPartViewport.didMount(p6)
 	-- upvalues: getFFlagSingleUploadMakeupSupportModule (ref), makeupPreviewUtilsModule (ref)
 	local asset = p6.props.asset
 	
@@ -96,9 +97,9 @@ function avatarPartViewport.didMount(p6) --[[ line: 99 ]]
 	p6:addAccessoryToViewport()
 end
 
-function avatarPartViewport.render(p7) --[[ line: 120 ]]
+function avatarPartViewport.render(p7)
 	-- upvalues: withStyle (ref), constantsModule (ref), roactModule (ref)
-	return withStyle(function(p8) --[[ line: 121 ]]
+	return withStyle(function(p8)
 		-- upvalues: p7 (ref), constantsModule (copy), roactModule (copy)
 		local theme = p8.Theme
 		local var22 = if p7.props.viewportSize then p7.props.viewportSize else constantsModule.ItemCardWidthLandscape

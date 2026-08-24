@@ -152,7 +152,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,Chất lượng tài s
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,Chất lượng tài sản: {partName} có {intersecting_tri_face_percent}% mặt tam giác giao nhau (điểm: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,Chất lượng tài sản: {partName} có {uv_outside_bound_vert_percent}% đỉnh UV nằm ngoài giới hạn (điểm: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,Chất lượng tài sản: {partName} có {similar_vertex_percent}% đỉnh tương đồng (điểm: {score}).
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,"Chỗ đính ""{AttachmentName}"" của phụ kiện trong ""{PartName}"" phải đặt gần bề mặt của lưới. Vị trí hiện tại [{CurrentPosition}] nằm ngoài vùng hợp lệ. Hãy di chuyển đến gần [{ClosestValidPosition}] hơn."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,"Handle được gắn kết bề mặt vào khớp {jointName}, là khớp không thuộc lược đồ được cho phép sử dụng. Chỉ được phép sử dụng các khớp R15 tiêu chuẩn và các khớp chuyển phần gắn kết bề mặt."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType} phải sử dụng tính năng chuyển phần gắn kết bề mặt, nhưng bạn đang thiếu khớp bắt buộc là {requiredJointName}."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"Handle được gắn kết bề mặt vào khớp nối {jointName}, tuy nhiên tài sản này phải được gắn kết bề mặt tự động. Bạn chỉ được gắn kết bề mặt vào {validJointNameList}."
@@ -166,7 +165,6 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,Không tìm thấy {Expec
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,Các trường hợp sau không thuộc giản đồ được duyệt nên cần được xóa bỏ: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,Tài sản tải lên phải là {ExpectedClass} chứ không phải là {RootClass}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,Tài sản tải lên phải được đặt tên là {ExpectedClass} chứ không phải là {RootClass}.
-Common.UGCValidation.ErrorLabel.ContentNotEditable,"{InstanceFullName}.{FieldName} còn chứa nội dung có thể chỉnh sửa chưa được lưu. Trước khi đăng, hãy lưu nội dung này thành một tài sản rồi thử lại."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,"Bộ phận cơ thể ""{bodyPartName}"" trong CurveAnimation có một rãnh Vị trí (tịnh tiến). Bộ phận cơ thể trong hiệu ứng động chỉ có thể xoay; rãnh vị trí không được phép xoay. Vui lòng xóa rãnh Vị trí khỏi bộ phận cơ thể này."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,"Bộ phận cơ thể ""{bodyPartName}"" trong CurveAnimation đã di chuyển {distance} stud so với vị trí ban đầu. Khoảng cách dịch chuyển tối đa cho phép là {maxDistance} stud. Vui lòng giảm khoảng cách dịch chuyển vị trí của bộ phận cơ thể này."
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation chứa các xương HRD/DRD và bộ phận cơ thể ""{bodyPartName}"" có một rãnh Vị trí (tịnh tiến). Khi có bất kỳ xương nào xuất hiện trong hiệu ứng động, để tránh bị tách khớp, các bộ phận cơ thể không được phép tịnh tiến. Vui lòng xóa tất cả các rãnh Vị trí khỏi bộ phận cơ thể."
@@ -207,7 +205,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation có 
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation chứa các Đường cong có quá nhiều khóa. Mỗi Đường cong chỉ được phép có tối đa {maxAllowed} khóa. Vui lòng sửa lại hiệu ứng động này.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation chứa nhiều hơn {maxAllowed} MarkerCurve. Đảm bảo không có quá {maxAllowed} mục con MarkerCurve.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation chứa một MarkerCurve có {count} Điểm mốc. Mỗi MarkerCurve chỉ được phép có tối đa {maxAllowed} Điểm mốc. Vui lòng sửa lại hiệu ứng động này.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"Hiệu ứng động đã đăng chỉ định độ dịch chuyển tối đa của bộ phận là {taggedTranslation} stud, nhưng dữ liệu hiệu ứng động của nó lại được tính thành {calculatedTranslation} stud. Vui lòng đăng lại hiệu ứng động này."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation chứa mục con ngoài dự kiến: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,Đầu hiệu ứng động trên chợ phải được căn khung bao đúng chuẩn sao cho các đỉnh của mắt và miệng trên khung bao khớp với các đỉnh của lưới bề mặt. Vui lòng căn khung bao chính xác hơn sao cho khớp với lưới bề mặt.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Không phát hiện được biểu cảm mỉm cười cho Đầu hiệu ứng động. Hãy điều chỉnh các điểm mốc của khung bao cho miệng để khớp với vị trí miệng trên đầu và đảm bảo miệng thể hiện được biểu cảm mỉm cười.
@@ -266,9 +263,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"Lưới bề mặt {par
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,Chỗ đính {attName} phải tồn tại duy nhất một lần trong các mục con của {partName}.
 Common.UGCValidation.ErrorLabel.NoAttributes,"""{RootInstanceName}"" (hoặc các mục con) có chứa Thuộc tính. Bạn cần xóa Thuộc tính khỏi các mục sau: {InstanceNameList}"
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,"{ClassName} ""{InstancePath}"" có các thuộc tính không hợp lệ: {ProblematicProperties}. Đã vượt quá giới hạn số byte được hiển thị (giới hạn 0 có nghĩa là thuộc tính phải trống). Bất kỳ thuộc tính nào khác đều có thể chứa các giá trị NaN/Inf hoặc vượt quá giới hạn kích thước mặc định của nó."
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,"Chỗ đính ""{AttachmentName}"" của bộ khung trong ""{PartName}"" phải đặt gần vùng tiếp giáp của khớp kết nối bộ phận cơ thể này với bộ phận liền kề. Vị trí hiện tại [{CurrentPosition}] quá xa mặt phẳng kết nối. Hãy di chuyển đến gần [{ClosestValidPosition}] hơn."
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,"Để tải một tài sản lên Roblox, bạn phải chọn chính xác 1 trường hợp và loại tải lên tương ứng."
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,"Tài sản này quá lớn để tải lên ({sizeBytes} byte, vượt mức tối đa là {maxSizeBytes} byte). Vui lòng giảm kích thước rồi thử lại."
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,Phiên bản {ProblematicDescendantPath} không được phép gắn thẻ.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Chuỗi lỗi thử nghiệm thứ hai được sử dụng để xác minh quy trình đồng bộ hóa bản dịch Hub-first (ưu tiên xử lý tại Trung tâm) từ đầu đến cuối.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"Bộ phận meshpart đầu có các hiệu ứng khuôn mặt cho khớp {jointName}, là khớp không thể sử dụng được trong FAC. Vui lòng đổi tên khớp này, sau đó nhập lại phần đầu của bạn."
@@ -400,7 +395,6 @@ CommonUI.Features.Label.Unchecked,Chưa được kiểm tra
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,Kết nối với
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,Dựng
 CommonUI.Features.StudioCTA.Tooltip.Body,Tải Studio MIỄN PHÍ!
 CommonUI.Features.StudioCTA.Tooltip.Title,Bắt đầu sáng tạo trên Roblox
@@ -1307,24 +1301,15 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
-Feature.Avatar.BackgroundGeneration.Action.Upload,Tải lên
 Feature.Avatar.BackgroundGeneration.Action.View,Xem
-Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Tạo hình nền với Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Sản phẩm sáng tạo của bạn đã sẵn sàng để sử dụng.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Hình nền này được tạo bằng AI. Khi đăng tải, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn và các vật phẩm đã đăng sẽ không thể chỉnh sửa."
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Hình nền này được tạo bằng AI. Khi tải lên, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn. Không thể chỉnh sửa vật phẩm sau khi tải lên."
-Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Mở khóa miễn phí các hình nền dành riêng cho Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Vật phẩm không đáp ứng Tiêu chuẩn cộng đồng
-Feature.Avatar.BackgroundGeneration.Error.LimitReached,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau để tiếp tục tùy chỉnh.
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Bạn đã đạt hạn mức sử dụng. Hãy thử lại vào ngày mai để tiếp tục tùy chỉnh.
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau 1 giờ để tiếp tục tùy chỉnh.
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau 1 phút để tiếp tục tùy chỉnh.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Hình nền này không tuân thủ Tiêu chuẩn cộng đồng Roblox nên đã không được thêm vào kho của bạn. Hãy thử tạo hình nền mới.
 Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Mô tả
-Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Dành riêng cho Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Mô tả hình nền của bạn…
 Feature.Avatar.BackgroundGeneration.Status.Generating,Đang tạo hình nền của bạn…
@@ -1332,8 +1317,6 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Đang chuẩn bị hình n�
 Feature.Avatar.BackgroundGeneration.Title,Tạo hình nền
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Đăng vào kho
-Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
-Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Tải lên kho
 Feature.Avatar.Backgrounds.Title,Hình nền
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,Không thể điều chỉnh kiểu thân này.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Chuyển về màu thân mặc định ban đầu
@@ -1898,7 +1881,6 @@ Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang xây dựng...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
-Feature.Build.Label.Created,Thời gian tạo
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
 Feature.Build.Label.Deleted,Đã xóa
@@ -1912,13 +1894,11 @@ Feature.Build.Label.FriendsOnly,Chỉ bạn bè
 Feature.Build.Label.GetMoreBuildUsage,Mua thêm lượt sử dụng Build
 Feature.Build.Label.Hi,Xin chào
 Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
-Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,Giới hạn
 Feature.Build.Label.Loading,
-Feature.Build.Label.Models3D,Mô hình 3D
 Feature.Build.Label.NoLimit,Không giới hạn
 Feature.Build.Label.NotStarted,Chưa bắt đầu
 Feature.Build.Label.Pending,Đang chờ xử lý
@@ -1928,19 +1908,15 @@ Feature.Build.Label.Private,
 Feature.Build.Label.Public,Công khai
 Feature.Build.Label.PubliclyUnavailable,Chưa phát hành công khai
 Feature.Build.Label.Published,Đã đăng
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,Sẵn sàng
 Feature.Build.Label.ResetsDaily,Làm mới hằng ngày
 Feature.Build.Label.RestoredVersion,Đã khôi phục {VERSION}
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,Tìm kiếm tài sản
 Feature.Build.Label.SearchGames,Tìm kiếm trò chơi
 Feature.Build.Label.SearchTasks,Tìm kiếm nhiệm vụ
 Feature.Build.Label.SelectOption,Chọn một tùy chọn
 Feature.Build.Label.ShareAddedFriends,Chia sẻ với bạn bè mà bạn đã thêm
-Feature.Build.Label.Shared,Đã chia sẻ
-Feature.Build.Label.Sounds,
 Feature.Build.Label.Thinking,Đang tư duy
 Feature.Build.Label.Title,Tiêu đề
 Feature.Build.Label.TitleDescription,Tiêu đề và mô tả
@@ -2008,7 +1984,6 @@ Feature.Build.Label.ToolThumbnailRunning,Đang đặt hình nhỏ cho trò chơi
 Feature.Build.Label.UniverseNumber,Vũ trụ {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Không xác định
 Feature.Build.Label.UnlimitedUsed,Đã dùng {USED} • Không giới hạn
-Feature.Build.Label.Updated,Thời gian cập nhật
 Feature.Build.Label.Usage,Sử dụng
 Feature.Build.Label.UsageUsed,Đã dùng {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2022,8 +1997,6 @@ Feature.Build.Message.AccountRequirements,Tài khoản của bạn không đáp 
 Feature.Build.Message.AccountTooNew,Tài khoản của bạn còn quá mới nên chưa thể đăng. Hãy thử lại khi bạn đã tạo tài khoản được 2 ngày.
 Feature.Build.Message.AllFriendsAdded,Bạn đã thêm tất cả bạn bè làm người chơi thử.
 Feature.Build.Message.AnswerBuildQuestion,Trả lời câu hỏi của Build ở bên dưới.
-Feature.Build.Message.AssetDetailsUnavailable,Không có chi tiết về tài sản.
-Feature.Build.Message.AssetsLoadFailed,Không thể tải tài sản.
 Feature.Build.Message.AudienceIneligible,Không đủ điều kiện cho đối tượng này
 Feature.Build.Message.BuildAccountBlocked,Tài khoản của bạn chưa sử dụng được Build vào lúc này.
 Feature.Build.Message.BuildBusy,Build đang bận. Hãy đợi một lát rồi thử lại.
@@ -2054,7 +2027,6 @@ Feature.Build.Message.InvitesLoadFailed,Không tải được lời mời
 Feature.Build.Message.LimitBelowSpend,Giới hạn không được thấp hơn con số {ALREADY_SPENT} Robux đã chi tiêu hôm nay.
 Feature.Build.Message.LinkCopied,Đã sao chép đường liên kết vào bộ nhớ tạm.
 Feature.Build.Message.LoadingVersions,Đang tải lịch sử phiên bản...
-Feature.Build.Message.NoAssetsFound,Không tìm thấy tài sản nào.
 Feature.Build.Message.NoDescriptionProvided,Không có mô tả nào được cung cấp.
 Feature.Build.Message.NoFriendsToAdd,Bạn chưa có người bạn nào để thêm. Hãy tìm mọi người để kết nối trên Roblox trước.
 Feature.Build.Message.NoResults,
@@ -2090,7 +2062,6 @@ Feature.Build.Message.WorkingOnTasks,Đang thực hiện nhiệm vụ bạn giao
 Feature.Build.Title.AdCampaignActive,Chiến dịch quảng cáo đang hoạt động
 Feature.Build.Title.AddFriendsToPlaytest,Thêm bạn bè để giúp bạn chơi thử
 Feature.Build.Title.ArchiveThisGame,Lưu trữ trò chơi này?
-Feature.Build.Title.AssetLibrary,Thư viện
 Feature.Build.Title.Audience,Đối tượng
 Feature.Build.Title.BuildQuestion,Build có một câu hỏi
 Feature.Build.Title.BuildQuestions,Build có một số câu hỏi
@@ -2632,7 +2603,6 @@ Feature.Chat.Label.LongPressToReplyTooltip,Nhấn giữ để trả lời
 Feature.Chat.Label.Members,Thành Viên
 Feature.Chat.Label.MessageNotAvailable,Tin nhắn này không khả dụng
 Feature.Chat.Label.MuteInGameChatToastNotifications,Tắt thông báo trò chuyện trong trò chơi
-Feature.Chat.Label.MuteInGamePartyToastNotifications,Tắt thông báo về party trong trò chơi
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Không tìm thấy cuộc trò chuyện nào
 Feature.Chat.Label.NoDescriptionYet,Chưa có miêu tả.
@@ -3266,9 +3236,9 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Mở rộng
-Feature.Moments.Action.GenerateText,Tạo văn bản
+Feature.Moments.Action.GenerateText,
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Không hữu ích
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Không phù hợp hoặc vi phạm quy định
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Không phù hợp hoặc vi phạm hướng dẫn
 Feature.Moments.Action.Hide,Ẩn chi tiết
 Feature.Moments.Action.HowToCapture,Cách Chụp ảnh/quay màn hình
 Feature.Moments.Action.Join,
@@ -3355,7 +3325,7 @@ Feature.Moments.Label.Tone.Hype,Sôi động
 Feature.Moments.Label.Tone.Neutral,Trung tính
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
-Feature.Moments.Title.GenerateTextOptions,
+Feature.Moments.Title.GenerateTextOptions,Tạo văn bản
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
 Feature.Moments.Title.MomentRemoved,Đã xóa Khoảnh khắc
 Feature.Moments.Title.ReportPost,Báo cáo bài đăng
@@ -3716,8 +3686,6 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Gói đăng ký Plus của b�
 Feature.RobloxSubscription.Body.GenericError,Chúng tôi hiện không thể hoàn tất việc này. Vui lòng thử lại.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Không hỗ trợ mua gói đăng ký này trên thiết bị này.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Hãy xác minh tuổi bằng quy trình kiểm tra độ tuổi để nhận ngay 1 tuần sử dụng Roblox Plus miễn phí thay lời tri ân của chúng tôi. Bạn không cần thêm phương thức thanh toán để nhận ưu đãi dùng thử này.
-Feature.RobloxSubscription.Description.Benefit.Customize,Tùy chỉnh bằng khung hồ sơ và chủ đề của ứng dụng
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"Giảm 10% trong 60 ngày đầu, sau đó giảm 20% cho vật phẩm và avatar"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,"Vui hơn, tốn ít Robux hơn. Đăng ký Roblox Plus ngay."
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Máy chủ riêng miễn phí

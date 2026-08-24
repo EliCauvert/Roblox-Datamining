@@ -10,9 +10,8 @@ local getFFlagUGCValidationAnimationPackSupportModule = require(parent.flags.get
 local UGCValidateMakeupDecalUVProperties = game:DefineFastFlag("UGCValidateMakeupDecalUVProperties", false)
 local getFFlagUGCValidationAllowEngineDefaultPartSurfacesModule = require(parent.flags.getFFlagUGCValidationAllowEngineDefaultPartSurfaces)
 local getFFlagUGCValidateAllowEmissivesModule = require(parent.flags.getFFlagUGCValidateAllowEmissives)
-local getFFlagUGCValidateMakeupCategoryParityModule = require(parent.flags.getFFlagUGCValidateMakeupCategoryParity)
 
-local function _(p0) --[[ line: 20 | named "convertArrayToTable" ]]
+local function _(p0)
 	local t = {}
 	
 	for i, v in pairs(p0) do
@@ -61,7 +60,7 @@ for i_1, v_1 in t.R15_BODY_PARTS do
 end
 t.NAMED_R15_BODY_PARTS.Head = "Head"
 setmetatable(t.NAMED_R15_BODY_PARTS, {
-	__index = function() --[[ line: 109 ]]
+	__index = function()
 		error("NAMED_R15_BODY_PARTS key does not exist")
 		
 		return nil
@@ -200,7 +199,7 @@ t.COMPARISON_METHODS = {
 	FOUND_IN = "one of the following:"
 }
 setmetatable(t.COMPARISON_METHODS, {
-	__index = function(_, p1) --[[ line: 307 ]]
+	__index = function(_, p1)
 		return error("Invalid COMPARISON_METHOD " .. tostring(p1))
 	end
 })
@@ -210,7 +209,7 @@ t.INCLUSION_METHODS = {
 	EXCLUSION_LIST = "EXCLUSION_LIST"
 }
 setmetatable(t.INCLUSION_METHODS, {
-	__index = function(_, p2) --[[ line: 322 ]]
+	__index = function(_, p2)
 		return error("Invalid INCLUSION_METHOD " .. tostring(p2))
 	end
 })
@@ -367,25 +366,6 @@ t.CONTENT_ID_EDITABLE_PROPERTY = {
 		RoughnessMap = "RoughnessMapContent"
 	}
 }
-t.CONTENT_TYPED_PROPERTIES_BY_CLASS = {
-	MeshPart = { "MeshContent", "TextureContent" },
-	WrapTarget = { "CageMeshContent" },
-	WrapLayer = { "CageMeshContent", "ReferenceMeshContent" },
-	SurfaceAppearance = {
-		"ColorMapContent",
-		"MetalnessMapContent",
-		"NormalMapContent",
-		"RoughnessMapContent",
-		"EmissiveMaskContent"
-	},
-	Decal = {
-		"ColorMapContent",
-		"MetalnessMapContent",
-		"NormalMapContent",
-		"RoughnessMapContent"
-	},
-	WrapTextureTransfer = { "ReferenceCageMeshContent" }
-}
 t.MESH_CONTENT_ID_FIELDS = {
 	SpecialMesh = { "MeshId" },
 	MeshPart = { "MeshId" },
@@ -507,10 +487,6 @@ for i_5, v_5 in t.AllAssetUploadCategories do
 	table.insert(t.AllAssetUploadCategoriesIncludingMakeup, v_5)
 end
 table.insert(t.AllAssetUploadCategoriesIncludingMakeup, validationEnumsModule.UploadCategory.MAKEUP)
-
-if getFFlagUGCValidateMakeupCategoryParityModule() then
-	table.insert(t.AllAssetUploadCategories, validationEnumsModule.UploadCategory.MAKEUP)
-end
 t.AllBundleUploadCategories = {
 	validationEnumsModule.UploadCategory.FULL_BODY,
 	validationEnumsModule.UploadCategory.BOTH_SHOES

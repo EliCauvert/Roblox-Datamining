@@ -13,7 +13,7 @@ emoteThumbnailView.validateProps = tModule.strictInterface({
 	size = tModule.optional(tModule.UDim2)
 })
 
-function emoteThumbnailView.updateCameraAndCharacterPose(p0) --[[ line: 32 ]]
+function emoteThumbnailView.updateCameraAndCharacterPose(p0)
 	-- upvalues: emoteUtility (ref), runService (ref)
 	if p0.character == nil then return end
 	local props = p0.props
@@ -34,7 +34,7 @@ function emoteThumbnailView.updateCameraAndCharacterPose(p0) --[[ line: 32 ]]
 	end
 	emoteUtility.SetPlayerCharacterNeutralPose(character)
 	emoteUtility.ApplyKeyframe(character, thumbnailKeyframe_1)
-	task.spawn(function() --[[ line: 64 ]]
+	task.spawn(function()
 		-- upvalues: runService (copy), character (ref), emoteUtility (copy), thumbnailParameters (ref), p0 (ref)
 		runService.PreAnimation:Wait()
 		runService.PostSimulation:Wait()
@@ -47,7 +47,7 @@ function emoteThumbnailView.updateCameraAndCharacterPose(p0) --[[ line: 32 ]]
 	end)
 end
 
-function emoteThumbnailView.addCharacterToViewportIfNeeded(p1) --[[ line: 90 ]]
+function emoteThumbnailView.addCharacterToViewportIfNeeded(p1)
 	if p1.character ~= nil and p1.character.Parent ~= nil then return end
 	if p1.worldModelRef:getValue() and p1.character ~= nil then
 		p1.character.Parent = p1.worldModelRef:getValue()
@@ -55,7 +55,7 @@ function emoteThumbnailView.addCharacterToViewportIfNeeded(p1) --[[ line: 90 ]]
 	end
 end
 
-function emoteThumbnailView.init(p2) --[[ line: 101 ]]
+function emoteThumbnailView.init(p2)
 	-- upvalues: roactModule (ref), playersService (ref)
 	p2.cameraRef = roactModule.createRef()
 	p2.worldModelRef = roactModule.createRef()
@@ -65,22 +65,26 @@ function emoteThumbnailView.init(p2) --[[ line: 101 ]]
 	local var11, var12 = roactModule.createBinding(CFrame.new())
 	p2.cameraFocusBinding = var11
 	p2.updateCameraFocusBinding = var12
-	task.spawn(function() --[[ line: 108 ]]
+	task.spawn(function()
 		-- upvalues: playersService (copy), p2 (ref)
-		local ok, status = pcall(function() --[[ line: 110 ]]
+		local ok, status = pcall(function()
 			-- upvalues: playersService (copy)
-			return playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078)
+			return if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then playersService:GetHumanoidDescriptionFromOutfitIdAsync(1342485078) else playersService:GetHumanoidDescriptionFromOutfitId(1342485078)
 		end)
 		
 		if not ok then
 			status = Instance.new("HumanoidDescription")
 		end
-		p2.character = playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15)
+		if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
+			p2.character = playersService:CreateHumanoidModelFromDescriptionAsync(status, Enum.HumanoidRigType.R15)
+		else
+			p2.character = playersService:CreateHumanoidModelFromDescription(status, Enum.HumanoidRigType.R15)
+		end
 		p2:addCharacterToViewportIfNeeded()
 	end)
 end
 
-function emoteThumbnailView.render(p3) --[[ line: 123 ]]
+function emoteThumbnailView.render(p3)
 	-- upvalues: roactModule (ref)
 	return roactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
@@ -116,11 +120,11 @@ function emoteThumbnailView.render(p3) --[[ line: 123 ]]
 	})
 end
 
-function emoteThumbnailView.didMount(p4) --[[ line: 172 ]]
+function emoteThumbnailView.didMount(p4)
 	p4:addCharacterToViewportIfNeeded()
 end
 
-function emoteThumbnailView.didUpdate(p5, _) --[[ line: 176 ]]
+function emoteThumbnailView.didUpdate(p5, _)
 	p5:updateCameraAndCharacterPose()
 end
 

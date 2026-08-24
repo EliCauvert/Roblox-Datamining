@@ -1,7 +1,5 @@
 ﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local icon = require(parent.BuilderIcons).Icon
+local reactModule = require(foundation.Parent.React)
 local avatarModule = require(foundation.Components.Avatar)
 local inputSizeModule = require(foundation.Enums.InputSize)
 local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
@@ -28,8 +26,8 @@ local t = {
 	size = inputSizeModule.Medium
 }
 
-local function AvatarOverflow(p0) --[[ line: 56 ]]
-	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
+local function AvatarOverflow(p0)
+	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), iconSizeModule (ref), textModule (ref)
 	local var20 = usePresentationContext()
 	local emphasis = useTokensModule()[var20.colorNamespace or colorNamespaceModule.Color].Content.Emphasis
 	
@@ -38,7 +36,7 @@ local function AvatarOverflow(p0) --[[ line: 56 ]]
 		Size = p0.Size,
 		backgroundStyle = useCumulativeBackgroundModule(p0.backplateStyle, p0.backgroundStyle)
 	}), if var20.isIconSize and (if p0.size ~= inputSizeModule.XSmall then p0.size == inputSizeModule.Small else true) then reactModule.createElement(iconModule, {
-		name = icon.ThreeDotsHorizontal,
+		name = "three-dots-horizontal",
 		size = iconSizeModule.XSmall,
 		style = emphasis
 	}) else reactModule.createElement(textModule, {
@@ -48,7 +46,7 @@ local function AvatarOverflow(p0) --[[ line: 56 ]]
 	}))
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 92 | named "AvatarGroup" ]]
+return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 	-- upvalues: withDefaultsModule (ref), t (ref), usePresentationContext (ref), useTokensModule (ref), avatarGroupTypeModule (ref), inputSizeModule (ref), colorNamespaceModule (ref), getAvatarSizeModule (ref), flagsModule (ref), reactModule (ref), avatarModule (ref), internalAvatarGroupModule (ref), withCommonPropsModule (ref), getBindableValueModule (ref), AvatarOverflow (ref), viewModule (ref)
 	local var21 = withDefaultsModule(p1, t)
 	local var22 = usePresentationContext()
@@ -70,7 +68,7 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2) --[[ line: 92 | 
 			gap = var24,
 			backplateStyle = backplateStyle,
 			avatars = var21.avatars,
-			renderAvatar = reactModule.useCallback(function(p3, p4) --[[ line: 115 ]]
+			renderAvatar = reactModule.useCallback(function(p3, p4)
 				-- upvalues: reactModule (copy), avatarModule (copy), var21 (ref)
 				local userId
 				local userPresence = nil

@@ -135,7 +135,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,คุณภาพข�
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,คุณภาพของทรัพยากร: {partName} มีหน้าสามเหลี่ยมที่ตัดกัน {intersecting_tri_face_percent}% (คะแนน: {score})
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,คุณภาพของทรัพยากร: {partName} มีจุดตัด UV นอกขอบเขต {uv_outside_bound_vert_percent}% (คะแนน: {score})
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,คุณภาพของทรัพยากร: {partName} มีจุดตัดที่คล้ายกัน {similar_vertex_percent}% (คะแนน: {score})
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อไอเท็มเสริม '{AttachmentName}' ใน '{PartName}' ไว้ใกล้ๆ พื้นผิวของเมช ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่นอกพื้นที่ที่ถูกต้อง โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,Handle นี้ Skin อยู่กับข้อต่อ {jointName} ซึ่งไม่ได้เป็นส่วนหนึ่งของ Schema ที่อนุญาต จะอนุญาตเฉพาะข้อต่อแบบ R15 มาตรฐานและข้อต่อถ่ายโอนการ Skinning เท่านั้น
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,{assetType} ต้องใช้การถ่ายโอนการ Skinning แต่คุณไม่มีข้อต่อ {requiredJointName} ที่จำเป็น
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,Handle นี้ Skin อยู่กับข้อต่อ {jointName} แต่แอสเซทนี้ต้อง Skin โดยอัตโนมัติ คุณสามารถ Skin กับ {validJointNameList} เท่านั้น
@@ -149,7 +148,6 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,ไม่พบ {Expected
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,อินสแตนซ์ต่อไปนี้ไม่ได้เป็นส่วนหนึ่งของ Schema ที่ได้รับอนุมัติและควรลบออก: {UnexpectedDescendantPaths}
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,แอสเซทที่อัปโหลดควรเป็น {ExpectedClass} แต่กลับเป็น {RootClass}
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,แอสเซทที่อัปโหลดควรมีชื่อว่า {ExpectedClass} แต่กลับมีชื่อว่า {RootClass}
-Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName} ยังมีเนื้อหาที่แก้ไขได้ที่ยังไม่ได้บันทึก โปรดบันทึกเป็นทรัพยากรก่อนเผยแพร่แล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,ส่วนของร่างกาย '{bodyPartName}' ใน CurveAnimation มีแทร็ก Position (การเคลื่อนที่) ส่วนของร่างกายในแอนิเมชันสามารถเปลี่ยนได้เฉพาะการหมุนเท่านั้น ไม่อนุญาตให้ใช้แทร็ก Position โปรดลบแทร็ก Position ออกจากส่วนของร่างกายนี้
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,ชิ้นส่วนร่างกาย '{bodyPartName}' ใน CurveAnimation เคลื่อนที่จากตำแหน่งเริ่มต้นเป็นระยะ {distance} Stud แต่ระยะการเลื่อนตำแหน่งสูงสุดที่อนุญาตคือ {maxDistance} Stud โปรดลดการเคลื่อนที่เชิงตำแหน่งของส่วนของร่างกาย
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,CurveAnimation มีกระดูก HRD/DRD และส่วนของร่างกาย '{bodyPartName}' มีแทร็ก Position (การเคลื่อนที่) เมื่อมีการใช้กระดูกในแอนิเมชัน จะต้องไม่มีส่วนใดของร่างกายที่เคลื่อนได้ เพื่อป้องกันไม่ให้ข้อต่อแยกออก โปรดลบแทร็ก Position ทั้งหมดออกจากส่วนของร่างกาย
@@ -190,7 +188,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation ม�
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation มี Curve ที่มีคีย์มากเกินไป จำนวนสูงสุดที่อนุญาตคือ {maxAllowed} คีย์ โปรดแก้ไขแอนิเมชัน
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation มี MarkerCurve มากกว่า {maxAllowed} รายการ โปรดเช็คให้แน่ใจว่ามี descendant MarkerCurve ไม่เกิน {maxAllowed} รายการ
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation มี MarkerCurve ที่มี Marker {count} ตัว ทว่าจำนวนสูงสุดที่อนุญาตคือ {maxAllowed} ตัว โปรดแก้ไขแอนิเมชัน
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,แอนิเมชันที่เผยแพร่ระบุระยะการขยับชิ้นส่วนสูงสุดไว้ที่ {taggedTranslation} Stud แต่ข้อมูลแอนิเมชันคำนวณได้เป็น {calculatedTranslation} Stud โปรดเผยแพร่แอนิเมชันอีกครั้ง
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation มีส่วนรองที่ไม่คาดคิด: {childName}
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,ต้องสร้าง Cage ศีรษะแบบเคลื่อนไหวที่ลงในมาร์เก็ตเพลสอย่างเหมาะสม เพื่อให้จุดสูงสุดของดวงตาและปากใน Cage นั้นอยู่ในแนวเดียวกับจุดสูงสุดของเมช โปรดปรับปรุงโครงสร้าง Cage และการจัดตำแหน่งให้ตรงกับเมช
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,ตรวจไม่พบท่ายิ้มสำหรับศีรษะแบบเคลื่อนไหว โปรดปรับจุดสังเกต Cage สำหรับปากให้ตรงกับตำแหน่งของปากบนศีรษะ และตรวจสอบให้แน่ใจว่ายิ้มได้
@@ -249,9 +246,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,ขนาดของเ
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,ต้องมีจุดเชื่อมต่อ {attName} อยู่เพียง 1 จุดภายใน Descendant {partName}
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}' (หรือ Descendant) มีคุณลักษณะแอตทริบิวต์อยู่ คุณต้องลบแอตทริบิวต์ออกจากรายการต่อไปนี้: {InstanceNameList}
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}' มีคุณสมบัติที่ไม่ถูกต้อง: {ProblematicProperties} เกินขีดจำกัดไบต์ที่แสดง (ขีดจำกัด 0 หมายความว่าคุณสมบัติต้องว่างเปล่า) คุณสมบัติอื่นใดมีค่า NaN/Inf หรือเกินขีดจำกัดขนาดเริ่มต้น
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,ต้องวางจุดเชื่อมต่อ Rig '{AttachmentName}' ใน '{PartName}' ใกล้ขอบเขตข้อต่อที่ชิ้นส่วนร่างกายนี้เชื่อมต่อกับส่วนที่อยู่ติดกัน ตำแหน่งปัจจุบัน [{CurrentPosition}] อยู่ห่างจากระนาบการเชื่อมต่อเกินไป โปรดย้ายไปอยู่ใกล้ๆ [{ClosestValidPosition}]
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,หากต้องการอัปโหลดทรัพยากรไปยัง Roblox คุณต้องเลือก 1 อินสแตนซ์และประเภทการอัปโหลดที่เกี่ยวข้อง
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,ทรัพยากรนี้มีขนาดใหญ่เกินกว่าจะอัปโหลด ({sizeBytes} ไบต์เกินขนาดสูงสุดที่กำหนดไว้ที่ {maxSizeBytes} ไบต์) โปรดลดขนาดแล้วลองอีกครั้ง
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,อินสแตนซ์ {ProblematicDescendantPath} ไม่ควรมีแท็ก
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,มีการใช้สตริงแสดงข้อผิดพลาดของการทดสอบครั้งที่สองในการตรวจสอบยืนยันเวิร์กโฟลว์การซิงค์การแปลแบบ Hub-first ตั้งแต่ต้นจนจบ
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,Meshpart ของศีรษะมีการเคลื่อนไหวใบหน้าสำหรับ {jointName} ซึ่งไม่สามารถใช้ใน FACs ได้ โปรดตั้งชื่อข้อต่อนี้ใหม่แล้วนำเข้าศีรษะของคุณอีกครั้ง
@@ -383,7 +378,6 @@ CommonUI.Features.Label.Unchecked,ไม่ได้ตรวจสอบ
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,เชื่อมต่อกับ
-CommonUI.Features.Labels.Retry,
 CommonUI.Features.NavBar.Build,สร้าง
 CommonUI.Features.StudioCTA.Tooltip.Body,ดาวน์โหลด Studio ฟรี!
 CommonUI.Features.StudioCTA.Tooltip.Title,เริ่มสร้างประสบการณ์บน Roblox
@@ -1286,33 +1280,12 @@ Feature.Avatar.Action.UpdateExistingMakeupLook,อัปเดตลุคที
 Feature.Avatar.Action.UpdateMakeupLook,อัปเดตลุค
 Feature.Avatar.Action.Zoom,
 Feature.Avatar.AvatarWidgetTitle,สำรวจสไตล์ต่างๆ
-Feature.Avatar.BackgroundGeneration.Action.Cancel,
-Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
-Feature.Avatar.BackgroundGeneration.Action.Okay,
-Feature.Avatar.BackgroundGeneration.Action.Publish,เผยแพร่
-Feature.Avatar.BackgroundGeneration.Action.Upload,อัปโหลด
-Feature.Avatar.BackgroundGeneration.Action.View,ดู
-Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,สร้างพื้นหลังเมื่อสมัคร Plus
-Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,การสร้างสรรค์ของคุณพร้อมให้ใช้แล้ว
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,พื้นหลังนี้สร้างขึ้นด้วย AI เมื่อมีการเผยแพร่ จะถือว่าคุณยืนยันว่าพื้นหลังนี้เป็นไปตามมาตรฐานชุมชนของ Roblox และไม่ได้ใช้เนื้อหาที่คุณไม่มีสิทธิ์ การดำเนินการดังกล่าวจะต้องผ่านการตรวจสอบก่อนที่พื้นหลังนี้จะปรากฏในคลังไอเท็มของคุณ ไอเท็มที่เผยแพร่แล้วจะไม่สามารถแก้ไขได้
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,พื้นหลังนี้สร้างขึ้นด้วย AI เมื่อมีการอัปโหลด จะถือว่าคุณยืนยันว่าพื้นหลังนี้เป็นไปตามมาตรฐานชุมชนของ Roblox และไม่ได้ใช้เนื้อหาที่คุณไม่มีสิทธิ์ การดำเนินการดังกล่าวจะต้องผ่านการตรวจสอบก่อนที่พื้นหลังนี้จะปรากฏในคลังไอเท็มของคุณ ไอเท็มที่อัปโหลดแล้วจะไม่สามารถแก้ไขได้
-Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,ปลดล็อคพื้นหลังสุดพิเศษฟรีเมื่อสมัคร Plus
-Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,ไอเท็มไม่เป็นไปตามมาตรฐานชุมชน
 Feature.Avatar.BackgroundGeneration.Error.Moderation,พรอมต์นั้นไม่เป็นไปตามแนวทางของเรา ลองอธิบายอย่างอื่น
-Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,พื้นหลังนี้ไม่เป็นไปตามมาตรฐานชุมชนของ Roblox จึงไม่ได้เพิ่มไปยังคลังไอเท็มของคุณ ลองสร้างใหม่
 Feature.Avatar.BackgroundGeneration.Error.System,มีบางอย่างผิดปกติขณะสร้างพื้นหลัง โปรดลองอีกครั้ง
-Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
-Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,พื้นหลังสุดพิเศษเมื่อสมัคร Plus
-Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,อธิบายพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Generating,กำลังสร้างพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Status.Preparing,กำลังเตรียมพื้นหลังของคุณ...
 Feature.Avatar.BackgroundGeneration.Title,สร้างพื้นหลัง
-Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
-Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,เผยแพร่ไปยังคลังไอเท็ม
-Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
-Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,อัปโหลดไปยังคลังไอเท็ม
 Feature.Avatar.Backgrounds.Title,พื้นหลัง
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,รูปแบบของร่างกายนี้ไม่สามารถทำการปรับแต่งได้
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,ใช้ตามสีเดิมของร่างกาย
@@ -1818,7 +1791,7 @@ Feature.Build.Action.OK,
 Feature.Build.Action.OpenSettings,เปิดการตั้งค่า
 Feature.Build.Action.Playtest,ทดลองเล่น
 Feature.Build.Action.Preview,
-Feature.Build.Action.Publish,
+Feature.Build.Action.Publish,เผยแพร่
 Feature.Build.Action.PublishLatest,เผยแพร่เวอร์ชันล่าสุด
 Feature.Build.Action.Restore,กู้คืน
 Feature.Build.Action.Revert,
@@ -1830,18 +1803,16 @@ Feature.Build.Action.ShareLink,แชร์ลิงก์
 Feature.Build.Action.Submit,
 Feature.Build.Action.UpdateRating,อัปเดตระดับความเหมาะสม
 Feature.Build.Action.UpdateWithChanges,อัปเดตตามการเปลี่ยนแปลง
-Feature.Build.Action.View,
+Feature.Build.Action.View,ดู
 Feature.Build.Action.ViewUsage,ดูการใช้งาน
 Feature.Build.Content.NewGame,เกมใหม่
 Feature.Build.Description.ArchiveRemoval,หากเก็บเกมนี้ถาวร เกมจะถูกลบออกจาก Build แต่คุณยังสามารถเข้าถึงและกู้คืนเกมได้จากศูนย์กลางครีเอเตอร์หรือ Roblox Studio
 Feature.Build.Description.AutoBuyUsage,ใช้ Robux ของคุณเพื่อซื้อโควต้าการใช้งาน Build เพิ่มเติมโดยอัตโนมัติในขณะที่คุณสร้าง คุณสามารถกำหนดวงเงินใช้จ่ายต่อวันได้ตลอดเวลา
-Feature.Build.Description.BoostAudienceForPlays,เพิ่มกลุ่มเป้าหมายของคุณเพื่อให้มีคนเล่นมากขึ้น
 Feature.Build.Description.BoostGameAudience,เพิ่มกลุ่มเป้าหมายของเกมคุณ
 Feature.Build.Description.BuildIdeaGame,เปลี่ยนไอเดียของคุณให้เป็นเกม
 Feature.Build.Description.BuildReplyNotif,รับการแจ้งเตือนเมื่อ Build ตอบคุณ
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
-Feature.Build.Description.CampaignRunDates,แคมเปญของคุณจะใช้งานได้ในช่วงวันที่ {startDate} - {endDate}
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยคุณทดลองเล่น
 Feature.Build.Description.EnableBuildNotifs,เปิดการแจ้งเตือนในการตั้งค่าอุปกรณ์ของคุณเพื่อรับอัปเดตจาก Build
 Feature.Build.Description.FriendsLinkOnly,มีเพียงเพื่อนของคุณเท่านั้นที่สามารถเข้าถึงลิงก์นี้ได้ หากต้องการให้มีคนเล่นมากขึ้น ให้เปลี่ยนการตั้งค่ากลุ่มเป้าหมายของเกม
@@ -1870,14 +1841,12 @@ Feature.Build.Label.Access,การเข้าถึง
 Feature.Build.Label.AdditionalUsage,โควต้าการใช้งาน Build เพิ่มเติม
 Feature.Build.Label.AdditionalUsed,ใช้ไปแล้ว {USED} จาก {LIMIT}
 Feature.Build.Label.All,
-Feature.Build.Label.AmountAvailable,พร้อมใช้งาน {AMOUNT} ครั้ง
 Feature.Build.Label.Autosaved,บันทึกอัตโนมัติ
 Feature.Build.Label.Available,พร้อมใช้งาน
 Feature.Build.Label.BackToBuild,ย้อนกลับไปยังการสร้าง
 Feature.Build.Label.Building,กำลังสร้าง...
 Feature.Build.Label.CaptureLibrary,คลังภาพที่จับไว้
 Feature.Build.Label.ContentRating,การจัดระดับความเหมาะสมของเนื้อหา
-Feature.Build.Label.Created,สร้างแล้ว
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
 Feature.Build.Label.Deleted,ลบแล้ว
@@ -1891,13 +1860,11 @@ Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,รับโควต้าการใช้งาน Build เพิ่ม
 Feature.Build.Label.Hi,สวัสดี
 Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาดย่อ
-Feature.Build.Label.Images2D,ภาพ 2D
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,จำกัด
 Feature.Build.Label.Loading,
-Feature.Build.Label.Models3D,โมเดล 3D
 Feature.Build.Label.NoLimit,ไม่จำกัด
 Feature.Build.Label.NotStarted,ยังไม่ได้เริ่ม
 Feature.Build.Label.Pending,รอดำเนินการ
@@ -1907,19 +1874,15 @@ Feature.Build.Label.Private,ส่วนตัว
 Feature.Build.Label.Public,สาธารณะ
 Feature.Build.Label.PubliclyUnavailable,ไม่สามารถเข้าถึงได้แบบสาธารณะ
 Feature.Build.Label.Published,เผยแพร่แล้ว
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,พร้อม
 Feature.Build.Label.ResetsDaily,รีเซ็ตทุกวัน
 Feature.Build.Label.RestoredVersion,กู้คืน {VERSION} แล้ว
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,ค้นหาทรัพยากร
 Feature.Build.Label.SearchGames,ค้นหาเกม
 Feature.Build.Label.SearchTasks,ค้นหางาน
 Feature.Build.Label.SelectOption,เลือก 1 ข้อ
 Feature.Build.Label.ShareAddedFriends,แชร์กับเพื่อนที่คุณเพิ่ม
-Feature.Build.Label.Shared,แชร์แล้ว
-Feature.Build.Label.Sounds,
 Feature.Build.Label.Thinking,กำลังคิด
 Feature.Build.Label.Title,
 Feature.Build.Label.TitleDescription,ชื่อและคำอธิบาย
@@ -1987,7 +1950,6 @@ Feature.Build.Label.ToolThumbnailRunning,กำลังตั้งค่าภ
 Feature.Build.Label.UniverseNumber,ยูนิเวิร์ส {UNIVERSE_ID}
 Feature.Build.Label.Unknown,ไม่ทราบ
 Feature.Build.Label.UnlimitedUsed,ใช้ไปแล้ว {USED} • ไม่จำกัด
-Feature.Build.Label.Updated,อัปเดตเมื่อ
 Feature.Build.Label.Usage,โควต้าการใช้งาน
 Feature.Build.Label.UsageUsed,ใช้ไปแล้ว {USED}
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2001,8 +1963,6 @@ Feature.Build.Message.AccountRequirements,บัญชีของคุณม�
 Feature.Build.Message.AccountTooNew,บัญชีของคุณยังใหม่เกินไปที่จะเผยแพร่ ลองอีกครั้งเมื่อบัญชีมีอายุ 2 วัน
 Feature.Build.Message.AllFriendsAdded,คุณเพิ่มเพื่อนทั้งหมดของคุณเป็นผู้ทดลองเล่นแล้ว
 Feature.Build.Message.AnswerBuildQuestion,ตอบคำถามของ Build ด้านล่าง
-Feature.Build.Message.AssetDetailsUnavailable,รายละเอียดทรัพยากรไม่พร้อมใช้งาน
-Feature.Build.Message.AssetsLoadFailed,ไม่สามารถโหลดทรัพยากรได้
 Feature.Build.Message.AudienceIneligible,ไม่มีสิทธิ์เผยแพร่ให้กลุ่มเป้าหมายนี้
 Feature.Build.Message.BuildAccountBlocked,บัญชีของคุณไม่สามารถใช้ Build ได้ในขณะนี้
 Feature.Build.Message.BuildBusy,Build ยุ่งอยู่ โปรดรอสักครู่แล้วลองอีกครั้ง
@@ -2033,7 +1993,6 @@ Feature.Build.Message.InvitesLoadFailed,ไม่สามารถโหลด�
 Feature.Build.Message.LimitBelowSpend,วงเงินต้องไม่น้อยกว่า {ALREADY_SPENT} Robux ที่ใช้ไปแล้วในวันนี้
 Feature.Build.Message.LinkCopied,คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว
 Feature.Build.Message.LoadingVersions,กำลังโหลดประวัติเวอร์ชัน...
-Feature.Build.Message.NoAssetsFound,ไม่พบทรัพยากร
 Feature.Build.Message.NoDescriptionProvided,ไม่มีคำอธิบาย
 Feature.Build.Message.NoFriendsToAdd,คุณยังไม่มีเพื่อนให้เพิ่ม ลองหาคนที่จะเชื่อมต่อด้วยบน Roblox ก่อน
 Feature.Build.Message.NoResults,
@@ -2066,10 +2025,8 @@ Feature.Build.Message.WhatToCreate,วันนี้คุณอยากสร
 Feature.Build.Message.WorkedMinutesSeconds,ใช้เวลาทำงานไป {MINUTES} นาที {REM_SECONDS} วินาที
 Feature.Build.Message.WorkedSeconds,ใช้เวลาทำงานไป {SECONDS} วินาที
 Feature.Build.Message.WorkingOnTasks,กำลังทำงานของคุณ
-Feature.Build.Title.AdCampaignActive,แคมเปญโฆษณาเปิดใช้งานอยู่
 Feature.Build.Title.AddFriendsToPlaytest,เพิ่มเพื่อนที่จะช่วยคุณทดลองเล่น
 Feature.Build.Title.ArchiveThisGame,เก็บเกมนี้ถาวรใช่ไหม?
-Feature.Build.Title.AssetLibrary,คลัง
 Feature.Build.Title.Audience,กลุ่มเป้าหมาย
 Feature.Build.Title.BuildQuestion,Build มีคำถาม
 Feature.Build.Title.BuildQuestions,Build มีอะไรจะถาม
@@ -2195,7 +2152,6 @@ Feature.Catalog.Action.Report,
 Feature.Catalog.Action.Sell,ขาย
 Feature.Catalog.Action.ShareVia,แชร์ผ่าน...
 Feature.Catalog.Action.Submit,
-Feature.Catalog.Action.Try,ลองเลย
 Feature.Catalog.Action.Upgrade,อัปเกรด
 Feature.Catalog.Action.ViewDetailsPage,ดูหน้ารายละเอียด
 Feature.Catalog.Action.ViewExperienceDetails,ดูรายละเอียดประสบการณ์
@@ -2611,7 +2567,6 @@ Feature.Chat.Label.LongPressToReplyTooltip,กดค้างเพื่อต�
 Feature.Chat.Label.Members,สมาชิก
 Feature.Chat.Label.MessageNotAvailable,ไม่สามารถใช้ข้อความนี้ได้
 Feature.Chat.Label.MuteInGameChatToastNotifications,ปิดเสียงแจ้งเตือนแชทในเกม
-Feature.Chat.Label.MuteInGamePartyToastNotifications,ปิดเสียงแจ้งเตือน Party ในเกม
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,ไม่พบแชท
 Feature.Chat.Label.NoDescriptionYet,ยังไม่มีคำอธิบาย
@@ -3245,7 +3200,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,ขยาย
-Feature.Moments.Action.GenerateText,สร้างข้อความ
+Feature.Moments.Action.GenerateText,
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,ไม่มีประโยชน์
 Feature.Moments.Action.GenerateTextFeedbackPolicy,ไม่เหมาะสมหรือละเมิดแนวทางปฏิบัติ
 Feature.Moments.Action.Hide,ซ่อนรายละเอียด
@@ -3334,7 +3289,7 @@ Feature.Moments.Label.Tone.Hype,ตื่นเต้น
 Feature.Moments.Label.Tone.Neutral,ปกติ
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
-Feature.Moments.Title.GenerateTextOptions,
+Feature.Moments.Title.GenerateTextOptions,สร้างข้อความ
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,รายงานโพสต์
@@ -3695,8 +3650,6 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,การสมัครสม
 Feature.RobloxSubscription.Body.GenericError,เราไม่สามารถดำเนินการให้เสร็จได้ในขณะนี้ โปรดลองอีกครั้ง
 Feature.RobloxSubscription.Body.UnsupportedPlatform,การสมัครสมาชิกนี้ไม่สามารถซื้อบนอุปกรณ์นี้ได้
 Feature.RobloxSubscription.Description.AgeCheckTrial,ตรวจสอบยืนยันอายุของคุณ แล้วรับสิทธิ์ทดลองใช้ Roblox Plus ฟรี 1 สัปดาห์แทนคำขอบคุณ ไม่ต้องระบุวิธีการชำระเงิน ก็สนุกกับสิทธิ์ทดลองใช้ฟรีนี้ได้เลย
-Feature.RobloxSubscription.Description.Benefit.Customize,ปรับแต่งด้วยกรอบโปรไฟล์และธีมแอป
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,ส่วนลด 10% ใน 60 วันแรก จากนั้นลด 20% สำหรับไอเท็มและอวาตาร์
 Feature.RobloxSubscription.Description.ExclusiveBenefits,สนุกมากขึ้น แต่ใช้ Robux น้อยลง สมัครสมาชิก Roblox Plus เลย
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,เซิร์ฟเวอร์ส่วนตัวฟรี

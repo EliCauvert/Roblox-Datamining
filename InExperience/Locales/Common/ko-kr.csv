@@ -152,7 +152,6 @@ Common.UGCValidation.ErrorLabel.AQSWarn_TextureResolution,애셋 품질: 텍스�
 Common.UGCValidation.ErrorLabel.AQSWarn_TriangleIntersection,애셋 품질: {partName}에는 교차하는 삼각형 면이 {intersecting_tri_face_percent}% 존재합니다(점수: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_UVBound,애셋 품질: {partName}에는 경계 밖에 있는 UV 버텍스가 {uv_outside_bound_vert_percent}% 존재합니다(점수: {score}).
 Common.UGCValidation.ErrorLabel.AQSWarn_VertexSimilarity,애셋 품질: {partName}에는 유사한 버텍스가 {similar_vertex_percent}% 존재합니다(점수: {score}).
-Common.UGCValidation.ErrorLabel.AccessoryAttachmentOutOfBounds,'{AttachmentName}'의 액세서리 부착물 '{PartName}'은(는) 메쉬 표면 근처에 배치해야 합니다. 현재 위치 [{CurrentPosition}]이(가) 유효 영역을 벗어났습니다. [{ClosestValidPosition}]에 더 가깝게 이동하세요.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_ExtraJoint,핸들에 허용되는 스키마에 포함되지 않는 조인트 {jointName}에 대한 스킨이 적용되어 있습니다. 표준 R15 조인트와 스키닝 전달 조인트만 허용됩니다.
 Common.UGCValidation.ErrorLabel.AccessorySkinning_MissingTransferJoint,"{assetType}에서는 스키닝 전달을 사용해야 하지만, 필요한 조인트 {requiredJointName}이(가) 없습니다."
 Common.UGCValidation.ErrorLabel.AccessorySkinning_NotLeaderOrFollower,"핸들에 조인트 {jointName}에 대한 스킨이 적용되어 있지만, 이 애셋에는 자동 스킨이 적용되어야 합니다. {validJointNameList}에 대해서만 스킨을 적용할 수 있습니다."
@@ -166,7 +165,6 @@ Common.UGCValidation.ErrorLabel.AssetSchemaMissingItem,필요한 {ExpectedClass}
 Common.UGCValidation.ErrorLabel.AssetSchemaUnexpectedItems,다음 인스턴스는 승인된 스키마의 일부가 아니며 제거되어야 합니다: {UnexpectedDescendantPaths}.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootClass,업로드할 애셋 조건은 {ExpectedClass}인 반면 현재 애셋은 {RootClass}입니다.
 Common.UGCValidation.ErrorLabel.AssetSchemaWrongRootName,"업로드할 애셋의 이름이 {ExpectedClass}여(이어)야 하지만, 현재 애셋의 이름은 {RootClass}입니다."
-Common.UGCValidation.ErrorLabel.ContentNotEditable,{InstanceFullName}.{FieldName}에는 아직 저장되지 않은 편집 가능한 콘텐츠가 있습니다. 게시하기 전에 애셋으로 저장한 후 다시 시도하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartHasPosition,CurveAnimation의 신체 부위 '{bodyPartName}'에 위치(이동) 트랙이 있습니다. 애니메이션 신체 부위는 회전만 가능합니다. 위치 트랙은 허용되지 않습니다. 이 신체 부위에서 위치 트랙을 제거하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartTranslationExceedsThreshold,CurveAnimation의 신체 부위 '{bodyPartName}'이(가) 시작 위치에서 {distance} 스터드 만큼 움직입니다. 허용되는 최대 이동 거리는 {maxDistance} 스터드 입니다. 신체 부위의 위치 이동을 줄이세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_BodyPartWithBoneHasPosition,"CurveAnimation에 HRD/DRD 뼈대가 포함되어 있으며 신체 부위 '{bodyPartName}'에 위치(이동) 트랙이 있습니다. 애니메이션에 뼈대가 있는 경우, 관절 분리를 방지하기 위해 신체 부위를 이동할 수 없습니다. 신체 부위에서 모든 위치 트랙을 제거하세요."
@@ -207,7 +205,6 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,CurveAnimation에 {
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,CurveAnimation의 Curve에 대한 키 개수가 너무 많습니다. Curve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,CurveAnimation에 {maxAllowed}개 이상의 MarkerCurve가 포함되어 있습니다. MarkerCurve 하위 항목은 {maxAllowed}개 이하여야 합니다.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,CurveAnimation에 마커 {count}개가 포함된 MarkerCurve가 있습니다. MarkerCurve당 최대 개수는 {maxAllowed}개입니다. 애니메이션을 수정하세요.
-Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"게시된 애니메이션은 최대 부위 이동 거리를 {taggedTranslation} 스터드로 지정했지만, 애니메이션 데이터에서는 {calculatedTranslation} 스터드로 계산됩니다. 애니메이션을 다시 게시하세요."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,CurveAnimation에 예상치 못한 자식 항목({childName})이 포함되어 있습니다.
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,마켓플레이스의 다이내믹 헤드는 케이징을 적절히 처리하여 케이지의 눈과 입 정점이 메시 정점과 일치해야 합니다. 케이징과 메시의 정렬을 개선하세요.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,다이내믹 헤드의 미소 표정을 감지할 수 없습니다. 입의 케이지 랜드마크를 조정하여 머리에서 입이 있는 위치와 일치시키고 미소 표정을 지을 수 있는지 확인하세요.
@@ -266,9 +263,7 @@ Common.UGCValidation.ErrorLabel.MeshPartBounds_TooSmall,"{partName} 메시의 {a
 Common.UGCValidation.ErrorLabel.MissingRequiredAttachment,첨부 파일({attName})은 {partName} 하위 항목에 정확히 한 번만 존재해야 합니다.
 Common.UGCValidation.ErrorLabel.NoAttributes,'{RootInstanceName}'(또는 하위 항목)에 속성이 포함되어 있습니다. 다음({InstanceNameList})에서 속성을 제거해야 합니다.
 Common.UGCValidation.ErrorLabel.PropertiesNotSensible,{ClassName} '{InstancePath}'에 유효하지 않은 속성({ProblematicProperties})이 있습니다. 표시된 바이트 제한을 초과했습니다(제한이 0이면 속성이 비어 있어야 함). 다른 속성에는 NaN/Inf 값이 포함되어 있거나 기본 크기 제한을 초과합니다.
-Common.UGCValidation.ErrorLabel.RigAttachmentOutOfBounds,'{AttachmentName}'의 리그 부착물 '{PartName}'은(는) 이 신체 부위가 인접 부위에 연결되는 조인트 경계 근처에 배치해야 합니다. 현재 위치 [{CurrentPosition}]가 연결 평면에서 너무 멀리 떨어져 있습니다. [{ClosestValidPosition}]에 더 가깝게 이동하세요.
 Common.UGCValidation.ErrorLabel.SelectionCountNotOne,Roblox에 애셋을 업로드하려면 정확히 1개의 인스턴스와 관련된 업로드 유형을 선택해야 합니다.
-Common.UGCValidation.ErrorLabel.SerializedAssetTooLarge,이 애셋은 너무 커서 업로드할 수 없습니다({sizeBytes}바이트가 최대치인 {maxSizeBytes}바이트를 초과합니다). 크기를 줄이고 다시 시도해 주세요.
 Common.UGCValidation.ErrorLabel.TagsFoundOnSingleInstance,인스턴스 {ProblematicDescendantPath}에는 태그가 없어야 합니다.
 Common.UGCValidation.ErrorLabel.TestWorkflowMessageV2,Hub 우선 번역 동기화 워크플로우를 엔드투엔드로 확인하는 데 사용되는 두 번째 테스트 오류 문자열.
 Common.UGCValidation.ErrorLabel.UnallowedFacsJoints,"머리 메쉬 파트에 {jointName}의 얼굴 애니메이션이 있으며, 이는 FACS(표정 코딩 시스템)에서 사용할 수 없습니다. 이 조인트의 이름을 변경한 후 머리를 다시 가져오세요."
@@ -400,7 +395,6 @@ CommonUI.Features.Label.Unchecked,선택 해제됨
 CommonUI.Features.Label.X,Roblox Plus
 CommonUI.Features.Label.sGroups,
 CommonUI.Features.Labels.ConnectTo,연결 대상
-CommonUI.Features.Labels.Retry,재시도
 CommonUI.Features.NavBar.Build,빌드
 CommonUI.Features.StudioCTA.Tooltip.Body,Studio를 무료로 다운로드하세요!
 CommonUI.Features.StudioCTA.Tooltip.Title,Roblox에서 체험 제작을 시작하세요
@@ -1306,24 +1300,15 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,
 Feature.Avatar.BackgroundGeneration.Action.Publish,
-Feature.Avatar.BackgroundGeneration.Action.Upload,업로드하기
 Feature.Avatar.BackgroundGeneration.Action.View,보기
-Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Plus로 배경을 만드세요.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,작품을 사용할 준비가 되었습니다.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경은 AI로 생성되었습니다. 게시하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거치며, 게시된 아이템은 수정할 수 없습니다."
-Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,이 배경은 AI로 생성되었습니다. 업로드하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거칩니다. 업로드된 아이템은 수정할 수 없습니다.
-Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus로 무료 전용 배경을 잠금 해제하세요.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,아이템이 커뮤니티 규정을 충족하지 않습니다
-Feature.Avatar.BackgroundGeneration.Error.LimitReached,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 나중에 다시 시도하세요.
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 내일 다시 시도하세요.
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 1시간 후에 다시 시도하세요.
-Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 1분 후에 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{max}개 중 {count}개
 Feature.Avatar.BackgroundGeneration.Label.Description,
-Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Plus 독점 제공
 Feature.Avatar.BackgroundGeneration.Label.Name,
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,배경을 설명해 주세요...
 Feature.Avatar.BackgroundGeneration.Status.Generating,배경 생성 중...
@@ -1331,8 +1316,6 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,배경 준비 중...
 Feature.Avatar.BackgroundGeneration.Title,배경 만들기
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,인벤토리에 게시
-Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
-Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,인벤토리에 업로드
 Feature.Avatar.Backgrounds.Title,배경
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,이 신체 스타일은 조정할 수 없습니다.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,원래 신체의 색상으로 설정
@@ -1897,7 +1880,6 @@ Feature.Build.Label.BackToBuild,빌드로 돌아가기
 Feature.Build.Label.Building,제작 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
 Feature.Build.Label.ContentRating,콘텐츠 등급
-Feature.Build.Label.Created,제작 정보
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
 Feature.Build.Label.Deleted,삭제됨
@@ -1911,13 +1893,11 @@ Feature.Build.Label.FriendsOnly,
 Feature.Build.Label.GetMoreBuildUsage,Build 사용량 더 구매하기
 Feature.Build.Label.Hi,안녕하세요
 Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
-Feature.Build.Label.Images2D,2D 이미지
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
 Feature.Build.Label.Limited,제한됨
 Feature.Build.Label.Loading,
-Feature.Build.Label.Models3D,3D 모델
 Feature.Build.Label.NoLimit,한도 없음
 Feature.Build.Label.NotStarted,시작 전
 Feature.Build.Label.Pending,보류 중
@@ -1927,19 +1907,15 @@ Feature.Build.Label.Private,비공개
 Feature.Build.Label.Public,공개
 Feature.Build.Label.PubliclyUnavailable,공개적으로 이용 불가
 Feature.Build.Label.Published,게시됨
-Feature.Build.Label.Purchased,
 Feature.Build.Label.Ready,준비
 Feature.Build.Label.ResetsDaily,매일 재설정
 Feature.Build.Label.RestoredVersion,{VERSION} 복원됨
 Feature.Build.Label.RobuxUsage,{USED}/{LIMIT}
 Feature.Build.Label.Search,
-Feature.Build.Label.SearchAssets,애셋 검색
 Feature.Build.Label.SearchGames,게임 검색
 Feature.Build.Label.SearchTasks,작업 검색
 Feature.Build.Label.SelectOption,옵션 선택
 Feature.Build.Label.ShareAddedFriends,추가한 친구와 공유
-Feature.Build.Label.Shared,공유 완료
-Feature.Build.Label.Sounds,사운드
 Feature.Build.Label.Thinking,생각 중
 Feature.Build.Label.Title,제목
 Feature.Build.Label.TitleDescription,제목 및 설명
@@ -2007,7 +1983,6 @@ Feature.Build.Label.ToolThumbnailRunning,게임 섬네일 설정 중
 Feature.Build.Label.UniverseNumber,{UNIVERSE_ID} 유니버스
 Feature.Build.Label.Unknown,알 수 없음
 Feature.Build.Label.UnlimitedUsed,{USED} 사용됨 • 한도 없음
-Feature.Build.Label.Updated,업데이트 시간
 Feature.Build.Label.Usage,사용량
 Feature.Build.Label.UsageUsed,{USED} 사용됨
 Feature.Build.Label.UsernameHandle,@{USERNAME}
@@ -2021,8 +1996,6 @@ Feature.Build.Message.AccountRequirements,회원님의 계정이 Build 사용 �
 Feature.Build.Message.AccountTooNew,계정을 새로 만든 지 얼마 안 돼서 게시할 수 없습니다. 2일 후에 다시 시도해 보세요.
 Feature.Build.Message.AllFriendsAdded,모든 친구를 플레이테스터로 추가했습니다.
 Feature.Build.Message.AnswerBuildQuestion,아래에서 Build의 질문에 답하세요.
-Feature.Build.Message.AssetDetailsUnavailable,애셋 세부 정보를 이용할 수 없습니다.
-Feature.Build.Message.AssetsLoadFailed,애셋을 불러오지 못했습니다.
 Feature.Build.Message.AudienceIneligible,이 오디언스에 대한 자격 없음
 Feature.Build.Message.BuildAccountBlocked,현재 회원님의 계정에서는 Build를 이용할 수 없습니다.
 Feature.Build.Message.BuildBusy,Build 사용량이 많습니다. 잠시 후 다시 시도하세요.
@@ -2053,7 +2026,6 @@ Feature.Build.Message.InvitesLoadFailed,초대를 불러오지 못함
 Feature.Build.Message.LimitBelowSpend,오늘 이미 사용한 {ALREADY_SPENT} Robux 미만으로 한도를 설정할 수 없습니다.
 Feature.Build.Message.LinkCopied,링크가 클립보드에 복사되었습니다.
 Feature.Build.Message.LoadingVersions,버전 기록을 불러오는 중...
-Feature.Build.Message.NoAssetsFound,애셋을 찾을 수 없습니다.
 Feature.Build.Message.NoDescriptionProvided,설명을 입력하지 않았습니다.
 Feature.Build.Message.NoFriendsToAdd,아직 추가할 친구가 없습니다. 먼저 Roblox에서 친구를 찾아보세요.
 Feature.Build.Message.NoResults,
@@ -2089,7 +2061,6 @@ Feature.Build.Message.WorkingOnTasks,작업 진행 중
 Feature.Build.Title.AdCampaignActive,광고 캠페인이 활성화되었습니다
 Feature.Build.Title.AddFriendsToPlaytest,플레이테스트를 도와줄 친구 추가
 Feature.Build.Title.ArchiveThisGame,이 게임을 보관하시겠어요?
-Feature.Build.Title.AssetLibrary,라이브러리
 Feature.Build.Title.Audience,오디언스
 Feature.Build.Title.BuildQuestion,Build에 질문이 있습니다
 Feature.Build.Title.BuildQuestions,Build에 몇 가지 질문이 있습니다
@@ -2632,7 +2603,6 @@ Feature.Chat.Label.LongPressToReplyTooltip,답장하려면 길게 누르세요
 Feature.Chat.Label.Members,멤버
 Feature.Chat.Label.MessageNotAvailable,이 메시지는 이용할 수 없습니다
 Feature.Chat.Label.MuteInGameChatToastNotifications,게임 내 채팅 알림 음소거
-Feature.Chat.Label.MuteInGamePartyToastNotifications,게임 내 파티 알림 음소거
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,채팅을 찾을 수 없음
 Feature.Chat.Label.NoDescriptionYet,설명이 아직 없습니다.
@@ -3267,9 +3237,9 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,펼치기
-Feature.Moments.Action.GenerateText,텍스트 생성
+Feature.Moments.Action.GenerateText,생성
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,도움이 되지 않음
-Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 규정을 위반함
+Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 가이드라인을 위반함
 Feature.Moments.Action.Hide,세부 정보 숨기기
 Feature.Moments.Action.HowToCapture,캡처 방법
 Feature.Moments.Action.Join,
@@ -3279,7 +3249,7 @@ Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
 Feature.Moments.Action.Post,
 Feature.Moments.Action.Report,
-Feature.Moments.Action.Retry,
+Feature.Moments.Action.Retry,재시도
 Feature.Moments.Action.Return,갤러리로 돌아가기
 Feature.Moments.Action.ReturnToEditing,편집으로 돌아가기
 Feature.Moments.Action.ShowDetails,세부 정보 표시
@@ -3356,7 +3326,7 @@ Feature.Moments.Label.Tone.Hype,활기참
 Feature.Moments.Label.Tone.Neutral,무난함
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
-Feature.Moments.Title.GenerateTextOptions,
+Feature.Moments.Title.GenerateTextOptions,텍스트 생성
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,게시물 신고
@@ -3717,8 +3687,6 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,이미 Plus 구독을 통해 �
 Feature.RobloxSubscription.Body.GenericError,현재 이 작업을 완료하지 못했습니다. 다시 시도해 보세요.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,현재 기기에서는 이 구독을 구매할 수 없습니다.
 Feature.RobloxSubscription.Description.AgeCheckTrial,나이 확인을 완료하고 감사 선물로 Roblox Plus 1주일 무료 체험 혜택을 받으세요. 무료 체험은 결제 수단 입력 없이 이용하실 수 있습니다.
-Feature.RobloxSubscription.Description.Benefit.Customize,프로필 프레임 및 앱 테마로 사용자 정의하기
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"아이템 및 아바타 첫 60일 동안 10% 할인, 이후 20% 할인"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Roblox Plus 구독을 통해 적은 Robux로 더 큰 즐거움을 누리세요.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,무료 비공개 서버

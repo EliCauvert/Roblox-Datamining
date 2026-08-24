@@ -1,11 +1,11 @@
 ﻿local marketplaceService = game:GetService("MarketplaceService")
 local setGameProductInfoModule = require(script:FindFirstAncestor("ExperienceLoadingScript").Actions.SetGameProductInfo)
 
-return function(p0) --[[ line: 6 ]]
+return function(p0)
 	-- upvalues: marketplaceService (ref), setGameProductInfoModule (ref)
-	return function(p1) --[[ line: 7 ]]
+	return function(p1)
 		-- upvalues: p0 (ref), marketplaceService (copy), setGameProductInfoModule (copy)
-		coroutine.wrap(function() --[[ line: 8 ]]
+		coroutine.wrap(function()
 			-- upvalues: p0 (copy), marketplaceService (copy), p1 (ref), setGameProductInfoModule (copy)
 			local var2 = p0
 			
@@ -15,9 +15,14 @@ return function(p0) --[[ line: 6 ]]
 				end
 				var2 = game.PlaceId
 			end
-			local ok, status = pcall(function() --[[ line: 16 ]]
+			local ok, status = pcall(function()
 				-- upvalues: marketplaceService (copy), var2 (write), p1 (copy), setGameProductInfoModule (copy)
-				p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfoAsync(var2)))
+				if game:GetEngineFeature("AsyncRenamesUsedInLuaApps") then
+					p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfoAsync(var2)))
+					
+					return
+				end
+				p1:dispatch(setGameProductInfoModule(marketplaceService:GetProductInfo(var2)))
 			end)
 			
 			if not ok then
