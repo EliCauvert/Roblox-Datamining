@@ -718,6 +718,7 @@ Common.UGCValidation.ErrorLabel.CurveAnim_TooManyDescendants,A CurveAnimation te
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyKeys,A CurveAnimation contém Curvas com chaves em excesso. O máximo por Curva é {maxAllowed}. Corrija a animação.
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkerCurves,A CurveAnimation contém mais de {maxAllowed} MarkerCurve(s). Confirme se não há mais de {maxAllowed} MarkerCurve(s) descendente(s).
 Common.UGCValidation.ErrorLabel.CurveAnim_TooManyMarkers,A CurveAnimation contém uma MarkerCurve com {count} marcadores. O máximo por MarkerCurve é {maxAllowed}. Corrija a animação.
+Common.UGCValidation.ErrorLabel.CurveAnim_TranslationTagMismatch,"A animação publicada indica uma translação máxima da parte de {taggedTranslation} rebites, mas seus dados de animação resultam em {calculatedTranslation} rebites. Publique a animação novamente."
 Common.UGCValidation.ErrorLabel.CurveAnim_UnexpectedChild,A CurveAnimation contém um elemento filho inesperado: {childName} 
 Common.UGCValidation.ErrorLabel.DynamicHeadCageMisaligned,As cabeças dinâmicas disponíveis no mercado devem ser devidamente organizadas em gaiolas para que os vértices dos olhos e da boca na gaiola estejam alinhados com os vértices da malha. Aprimore a organização em gaiolas e seu alinhamento com a malha.
 Common.UGCValidation.ErrorLabel.DynamicHeadHappyNotShown,Não é possível identificar a expressão de sorriso para a cabeça dinâmica. Ajuste os pontos de referência da gaiola para que a boca corresponda ao local da boca na cabeça e confira se ela pode mostrar a expressão de sorriso.
@@ -1368,6 +1369,7 @@ Feature.AccountSettings.Message.Error.InvalidXUrl,O identificador X é inválido
 Feature.AccountSettings.Message.Error.InvalidYouTubeUrl,Canal do YouTube inválido.
 Feature.AddFriends.Action.FriendAdded,Amizade adicionada
 Feature.AddFriends.Action.IgnoreAll,Ignorar tudo
+Feature.AddFriends.Action.IgnoreAllAltCase,
 Feature.AddFriends.Action.IgnoreConnectionRequest,Ignorar solicitação de conexão
 Feature.AddFriends.Action.IgnoreFriendRequest,Ignorar pedido de amizade
 Feature.AddFriends.Action.IgnoreTrustedFriendRequest,Ignorar pedido de amizade confiável
@@ -1536,6 +1538,7 @@ Feature.AppealsPortal.Label.Type.LookText,Nome e descrição do avatar compartil
 Feature.AppealsPortal.Label.Type.Mesh,Malha
 Feature.AppealsPortal.Label.Type.Model,Modelo
 Feature.AppealsPortal.Label.Type.Plugin,Plugin
+Feature.AppealsPortal.Label.Type.Post,Publicar
 Feature.AppealsPortal.Label.Type.Screenshot,Captura de tela
 Feature.AppealsPortal.Label.Type.UserProfile,Perfil de usuário
 Feature.AppealsPortal.Label.Type.Video,Vídeo
@@ -1565,6 +1568,7 @@ Feature.AppealsPortal.Label.TypeLower.Mesh,malha
 Feature.AppealsPortal.Label.TypeLower.Model,modelo
 Feature.AppealsPortal.Label.TypeLower.PlaceId,
 Feature.AppealsPortal.Label.TypeLower.Plugin,plugin
+Feature.AppealsPortal.Label.TypeLower.Post,publicar
 Feature.AppealsPortal.Label.TypeLower.Screenshot,captura de tela
 Feature.AppealsPortal.Label.TypeLower.UserProfile,perfil de usuário
 Feature.AppealsPortal.Label.TypeLower.Video,vídeo
@@ -1597,7 +1601,7 @@ Feature.Avatar.Action.AddNewMakeupLook,Adicionar novo visual
 Feature.Avatar.Action.Cancel,
 Feature.Avatar.Action.CancelSelection,Cancelar seleção
 Feature.Avatar.Action.Clear,
-Feature.Avatar.Action.ComposerPost,Publicar
+Feature.Avatar.Action.ComposerPost,
 Feature.Avatar.Action.ComposerPreviewAndPost,Pré-visualizar e publicar
 Feature.Avatar.Action.CreateSet,
 Feature.Avatar.Action.CreateSetFirstRun,Criar conjunto
@@ -1658,15 +1662,20 @@ Feature.Avatar.BackgroundGeneration.Action.Cancel,
 Feature.Avatar.BackgroundGeneration.Action.DeleteBackground,
 Feature.Avatar.BackgroundGeneration.Action.Okay,Ok
 Feature.Avatar.BackgroundGeneration.Action.Publish,
+Feature.Avatar.BackgroundGeneration.Action.Upload,
 Feature.Avatar.BackgroundGeneration.Action.View,
+Feature.Avatar.BackgroundGeneration.Description.CreateBackgroundsWithPlus,Crie planos de fundo com o Plus.
 Feature.Avatar.BackgroundGeneration.Description.ReadyToUse,Sua criação está pronta para ser usada.
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Este plano de fundo foi gerado com IA. Ao publicar, você confirma que ele segue as Regras da Comunidade Roblox e não usa conteúdo sobre o qual você não tem direitos. Ele será analisado antes de aparecer no seu inventário, e os itens publicados não podem ser editados."
+Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Este plano de fundo foi gerado com IA. Ao enviar, você confirma que ele segue as Regras da Comunidade Roblox e não usa conteúdo sobre o qual você não tem direitos. Ele será analisado antes de aparecer no seu inventário. Os itens enviados não podem ser editados."
+Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Desbloqueie planos de fundo exclusivos gratuitos com o Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,O item não atendeu às Regras da Comunidade
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Esse prompt não segue nossas diretrizes. Tente descrever outra coisa.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,"Este plano de fundo não segue as Regras da Comunidade Roblox, por isso não foi adicionado ao seu inventário. Tente gerar um novo."
 Feature.Avatar.BackgroundGeneration.Error.System,Algo deu errado ao gerar seu plano de fundo. Tente novamente.
 Feature.Avatar.BackgroundGeneration.Label.CharacterCount,{count}/{max}
 Feature.Avatar.BackgroundGeneration.Label.Description,Descrição
+Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus,Exclusivo com o Plus
 Feature.Avatar.BackgroundGeneration.Label.Name,Nome
 Feature.Avatar.BackgroundGeneration.PromptPlaceholder,Descreva seu plano de fundo...
 Feature.Avatar.BackgroundGeneration.Status.Generating,Gerando seu plano de fundo...
@@ -1674,6 +1683,8 @@ Feature.Avatar.BackgroundGeneration.Status.Preparing,Preparando seu plano de fun
 Feature.Avatar.BackgroundGeneration.Title,Criar plano de fundo
 Feature.Avatar.BackgroundGeneration.Title.PublishBackground,
 Feature.Avatar.BackgroundGeneration.Title.PublishToInventory,Publicar no inventário
+Feature.Avatar.BackgroundGeneration.Title.UploadBackground,
+Feature.Avatar.BackgroundGeneration.Title.UploadToInventory,Enviar para o inventário
 Feature.Avatar.Backgrounds.Title,Planos de fundo
 Feature.Avatar.ColorAdjustmentPage.AdjustmentNotAvailableForBody,O ajuste não está disponível para este estilo de corpo.
 Feature.Avatar.ColorAdjustmentPage.Label.SelectDefaultColors,Voltar para as cores originais do corpo
@@ -2912,6 +2923,7 @@ Feature.Chat.Label.LongPressToReplyTooltip,Pressione e segure para responder
 Feature.Chat.Label.Members,Membros
 Feature.Chat.Label.MessageNotAvailable,Esta mensagem não está disponível
 Feature.Chat.Label.MuteInGameChatToastNotifications,Silenciar notificações de chat no jogo
+Feature.Chat.Label.MuteInGamePartyToastNotifications,Silenciar notificações de grupo no jogo
 Feature.Chat.Label.New,
 Feature.Chat.Label.NoChatFound,Nenhum chat encontrado
 Feature.Chat.Label.NoDescriptionYet,Ainda sem descrição.
@@ -3790,7 +3802,7 @@ Feature.Moments.Action.Continue,
 Feature.Moments.Action.Delete,
 Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Expandir
-Feature.Moments.Action.GenerateText,Gerar
+Feature.Moments.Action.GenerateText,Gerar texto
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Não é útil
 Feature.Moments.Action.GenerateTextFeedbackPolicy,É inapropriado ou viola as diretrizes
 Feature.Moments.Action.Hide,
@@ -3877,7 +3889,7 @@ Feature.Moments.Label.Tone.Hype,Entusiasmado
 Feature.Moments.Label.Tone.Neutral,Neutro
 Feature.Moments.Label.Videos,
 Feature.Moments.Title.GenerateTextFeedbackReason,O que deu errado?
-Feature.Moments.Title.GenerateTextOptions,Gerar texto
+Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?
 Feature.Moments.Title.MomentRemoved,Momento removido
 Feature.Moments.Title.ReportPost,Denunciar publicação
@@ -4231,6 +4243,12 @@ Feature.NotApproved.Label.Sublabel.CommerceServices,Serviços
 Feature.NotApproved.Label.Sublabel.CommerceTobaccoAndEntheogens,Tabaco e enteógenos
 Feature.NotApproved.Label.Sublabel.CommerceToysAndGames,Brinquedos e jogos
 Feature.NotApproved.Label.Sublabel.CommerceWeaponsFirearmsAndRelatedProducts,"Armas, armas de fogo e produtos relacionados"
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingDescriptor,Envio incorreto do Questionário de maturidade e conformidade
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingModeratePlusDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingSensitiveDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityMissingUnplayableDescriptor,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByMoreThanOneBucket,
+Feature.NotApproved.Label.Sublabel.ContentMaturityOffByOneBucket,
 Feature.NotApproved.Label.Sublabel.EconomicOpportunity,
 Feature.NotApproved.Label.Sublabel.Emissive,
 Feature.NotApproved.Label.Sublabel.ExperienceSpam,Publicação de spam
@@ -4555,6 +4573,7 @@ Feature.RobloxSubscription.Body.AlreadySubscribed,Sua assinatura Plus já oferec
 Feature.RobloxSubscription.Body.GenericError,Não foi possível concluir esta ação no momento. Tente novamente.
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Esta assinatura não está disponível para compra neste dispositivo.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Faça a verificação de idade e ganhe 1 semana grátis do Roblox Plus como agradecimento. Não é necessário informar um método de pagamento para aproveitar esse teste grátis.
+Feature.RobloxSubscription.Description.Benefit.Customize,Personalize com molduras de perfil e temas do aplicativo
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Mais diversão por menos Robux. Assine o Roblox Plus.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Ao clicar em \u{201C}{ctaText}\u{201D}, você concorda com os <a href=""{termsUrl}"">Termos de assinatura da Roblox</a>. A cobrança será feita automaticamente todo mês até você cancelar."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Servidores privados gratuitos
@@ -4632,6 +4651,7 @@ Feature.Schools.Heading.JoinClassmates,
 Feature.Schools.Heading.MembersWithCount,{count} membros
 Feature.Schools.Heading.RemoveYourSchool,Remover sua escola
 Feature.Schools.Heading.SchoolIsLive,Sua escola agora está aberta
+Feature.Schools.Heading.SchoolUnavailable,Sua escola não está disponível
 Feature.Schools.Heading.SelectGraduationYear,Selecione o ano de formatura
 Feature.Schools.Heading.ShareWithFriends,Compartilhe com suas amizades
 Feature.Schools.Heading.ThanksForInterest,Agradecemos seu interesse

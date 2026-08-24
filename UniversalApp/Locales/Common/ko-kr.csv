@@ -1671,6 +1671,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경�
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,이 배경은 AI로 생성되었습니다. 업로드하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거칩니다. 업로드된 아이템은 수정할 수 없습니다.
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus로 무료 전용 배경을 잠금 해제하세요.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,아이템이 커뮤니티 규정을 충족하지 않습니다
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 나중에 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 내일 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 1시간 후에 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 1분 후에 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
@@ -3807,7 +3811,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,펼치기
 Feature.Moments.Action.GenerateText,텍스트 생성
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,도움이 되지 않음
-Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 가이드라인을 위반함
+Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 규정을 위반함
 Feature.Moments.Action.Hide,세부 정보 숨기기
 Feature.Moments.Action.HowToCapture,캡처 방법
 Feature.Moments.Action.Join,
@@ -4627,6 +4631,7 @@ Feature.Schools.Description.MoreVerifiedAlumniNeeded,인증된 동문이 더 필
 Feature.Schools.Description.NotAvailableInRegion,아직 이용할 수 없는 학교 기능입니다.
 Feature.Schools.Description.RemoveSchoolBody,학교에 다시 가입하려면 학교 이메일 주소를 재확인해야 합니다. 지금까지 받은 보상 아이템은 전부 삭제됩니다.
 Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.SchoolUnavailableBody,이 학교는 현재 Roblox에서 이용할 수 없습니다.
 Feature.Schools.Description.UpsellDisclaimer,학교는 같은 학교 출신인 사람들에게만 표시됩니다. 언제든지 학교를 변경하거나 삭제할 수 있습니다.
 Feature.Schools.Description.UpsellTagline,같은 학교의 인증된 학생들을 찾아 소통하고 함께 플레이하세요.
 Feature.Schools.Description.WaitlistAlumniBody,모든 준비가 끝났습니다. 학교 동문 그룹이 개설되는 대로 알려드리겠습니다.
@@ -4672,6 +4677,7 @@ Feature.Schools.Label.ResendInSeconds,{time}초 후 재전송
 Feature.Schools.Label.SchoolLaunches,학교 개설됨
 Feature.Schools.Label.SchoolVerified,인증 완료
 Feature.Schools.Label.Search,
+Feature.Schools.Label.SuggestedEmail,{email}을(를) 입력하려 하셨습니까?
 Feature.Schools.Label.UnlockAlumniGroup,동문 그룹 보류 중
 Feature.Schools.Label.UpsellPerkFindFriends,내 학교에서 친구 찾기
 Feature.Schools.Label.UpsellPerkPlayAndChat,누가 온라인 상태인지 확인하고 쉽게 같이 플레이하기

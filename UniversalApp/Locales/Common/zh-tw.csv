@@ -1669,6 +1669,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,此背景是
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,此背景由 AI 生成。上傳即表示您確認此背景符合 Roblox 社群標準，且未使用您無權使用的內容。此背景顯示在您的道具欄之前會先經過審核。已上傳的物品無法編輯。
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,透過 Plus 解鎖免費專屬背景。
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,道具不符合社群標準
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,你已達到使用量上限。若要繼續自訂，請稍後再試。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,你已達到使用量上限。若要繼續自訂，請於明天再試。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,你已達到使用量上限。若要繼續自訂，請於 1 小時後再試。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,你已達到使用量上限。若要繼續自訂，請於 1 分鐘後再試。
 Feature.Avatar.BackgroundGeneration.Error.Moderation,該提示不符合我們的準則。請嘗試描述其他內容。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,此背景不符合 Roblox 社群標準，因此未新增到你的道具欄。請嘗試生成新背景。
 Feature.Avatar.BackgroundGeneration.Error.System,生成背景時發生錯誤，請再試一次。
@@ -3803,7 +3807,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,生成文字
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,沒有幫助
-Feature.Moments.Action.GenerateTextFeedbackPolicy,內容不當或違反準則
+Feature.Moments.Action.GenerateTextFeedbackPolicy,不當或違規
 Feature.Moments.Action.Hide,隱藏詳細資訊
 Feature.Moments.Action.HowToCapture,如何截圖
 Feature.Moments.Action.Join,
@@ -4623,6 +4627,7 @@ Feature.Schools.Description.MoreVerifiedAlumniNeeded,需要更多通過驗證的
 Feature.Schools.Description.NotAvailableInRegion,尚未提供學校功能。
 Feature.Schools.Description.RemoveSchoolBody,你必須重新驗證學校的電子郵件地址，才能重新加入學校。你收到的所有獎勵物品都會被刪除。
 Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.SchoolUnavailableBody,此學校目前無法用於 Roblox。
 Feature.Schools.Description.UpsellDisclaimer,只有同所學校的使用者會看到你的校名。你可以隨時更新或移除學校。
 Feature.Schools.Description.UpsellTagline,探索、交流並與校內經驗證的學生一起遊玩。
 Feature.Schools.Description.WaitlistAlumniBody,你已準備就緒。學校的校友群組設立後，我們會立即通知你。
@@ -4668,6 +4673,7 @@ Feature.Schools.Label.ResendInSeconds,{time}後重新傳送
 Feature.Schools.Label.SchoolLaunches,學校群組已設立
 Feature.Schools.Label.SchoolVerified,你已通過驗證
 Feature.Schools.Label.Search,
+Feature.Schools.Label.SuggestedEmail,是否想輸入「{email}」？
 Feature.Schools.Label.UnlockAlumniGroup,校友群組擱置
 Feature.Schools.Label.UpsellPerkFindFriends,尋找校內的好友
 Feature.Schools.Label.UpsellPerkPlayAndChat,查看誰在線上，輕輕鬆鬆就能一起遊玩

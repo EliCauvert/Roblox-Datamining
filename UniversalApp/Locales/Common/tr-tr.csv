@@ -1670,6 +1670,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,Bu arka plan
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,Bu arka plan yapay zekâ ile oluşturulmuştur. Yükleyerek Roblox Topluluk Standartları'na uyduğunu ve hak sahibi olmadığın içerikler kullanmadığını onaylamış olursun. Envanterinde görünmeden önce incelenecektir. Yüklenen öğeler düzenlenemez.
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus ile ücretsiz özel arka planların kilidini aç.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,"Öğe, Topluluk Standartları'na uymuyor"
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Kullanım sınırına ulaştın. Özelleştirmeye devam etmek için daha sonra tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Kullanım sınırına ulaştın. Özelleştirmeye devam etmek için yarın tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Kullanım sınırına ulaştın. Özelleştirmeye devam etmek için 1 saat sonra tekrar dene.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Kullanım sınırına ulaştın. Özelleştirmeye devam etmek için 1 dakika sonra tekrar dene.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Bu istem yönergelerimize uygun değil. Başka bir şey tarif etmeyi dene.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Bu arka plan Roblox Topluluk Standartları'na uygun olmadığı için envanterine eklenmedi. Yeni bir tane oluşturmayı dene.
 Feature.Avatar.BackgroundGeneration.Error.System,Arka planın oluşturulurken bir şeyler yanlış gitti. Lütfen tekrar dene.
@@ -3804,7 +3808,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Genişlet
 Feature.Moments.Action.GenerateText,Metin Oluştur
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Yararlı değil
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Uygunsuz veya kuralları ihlal ediyor
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Uygunsuz veya Kural Dışı
 Feature.Moments.Action.Hide,Ayrıntıları gizle
 Feature.Moments.Action.HowToCapture,Nasıl Yakalama Yapılır?
 Feature.Moments.Action.Join,
@@ -4575,7 +4579,7 @@ Feature.RobloxSubscription.Body.GenericError,İşlemi şu anda tamamlayamadık. 
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Bu abonelik bu cihazda satın alınamaz.
 Feature.RobloxSubscription.Description.AgeCheckTrial,Yaş kontrolüyle yaşını doğrula ve bizden sana bir teşekkür hediyesi olarak 1 haftalık ücretsiz Roblox Plus kullanım hakkı kazan. Bu ücretsiz denemeden yararlanmak için herhangi bir ödeme şekli gerekmez.
 Feature.RobloxSubscription.Description.Benefit.Customize,Profil çerçeveleri ve uygulama temaları ile özelleştir
-Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10, ardından öğeler ve avatarlarda %20 indirim"
+Feature.RobloxSubscription.Description.Benefit.DiscountV2,"İlk 60 gün %10 indirim, ardından öğeler ve avatarlarda %20 indirim"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Daha az Robux karşılığında daha fazla eğlence. Roblox Plus'a abone ol.
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Label.BlackbirdPSDiscount,Ücretsiz özel sunucular
@@ -4610,7 +4614,7 @@ Feature.Schools.Action.UnidaysPrivacyPolicy,UNiDAYS Gizlilik Politikası
 Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS Hizmet Koşulları
 Feature.Schools.Body.EnterCode,"UNiDAYS, tek kullanımlık kodunu içeren bir e-postayı {user_email} adresine gönderdi. Okulunu onaylamak için kodu aşağıya gir."
 Feature.Schools.Body.UnidaysShare,E-posta adresin başkaları tarafından görülmeyecek.
-Feature.Schools.Body.UnidaysTerms,"Okul e-posta adresini doğrulamak için UNiDAYS ile iş birliği yapıyoruz. ""Devam Et"" düğmesine tıklayarak UNiDAYS'in hizmet koşullarını ve gizlilik politikasını kabul etmiş olursun."
+Feature.Schools.Body.UnidaysTerms,"Okul e-posta adresini doğrulamak için UNiDAYS ile iş birliği yapıyoruz. ""Devam Et"" düğmesine tıklayarak UNiDAYS'in Hizmet Koşullarını ve Gizlilik Politikasını kabul etmiş olursun."
 Feature.Schools.Caption.AlumniGroupOnGraduate,Mezun olduğunda {school} mezunlar grubuna katılacaksın.
 Feature.Schools.Caption.RemovedOnGraduate,Mezun olduğunda {school} okulundan çıkarılacaksın.
 Feature.Schools.Description.CantFindSchoolNotify,Okulun Roblox'ta olduğunda seni bilgilendireceğiz.
@@ -4624,6 +4628,7 @@ Feature.Schools.Description.MoreVerifiedAlumniNeeded,Daha fazla doğrulanmış m
 Feature.Schools.Description.NotAvailableInRegion,Okul özelliği henüz kullanılamıyor.
 Feature.Schools.Description.RemoveSchoolBody,Okuluna yeniden katılmak için okul e-posta adresini yeniden doğrulaman gerekecek. Aldığın tüm ödül öğeleri silinecek.
 Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.SchoolUnavailableBody,Bu okul şu anda Roblox'ta mevcut değil.
 Feature.Schools.Description.UpsellDisclaimer,Okulun yalnızca aynı okuldan insanlar tarafından görülebilir. Okulunu istediğin zaman güncelleyebilir veya kaldırabilirsin.
 Feature.Schools.Description.UpsellTagline,"Okulundaki doğrulanmış öğrencileri keşfet, onlarla bağlantı kur ve oyna."
 Feature.Schools.Description.WaitlistAlumniBody,Artık tamamen hazırsın. Okulunun mezunlar grubu kullanıma sunulur sunulmaz seni bilgilendireceğiz.
@@ -4669,6 +4674,7 @@ Feature.Schools.Label.ResendInSeconds,{time} içinde tekrar gönder
 Feature.Schools.Label.SchoolLaunches,Okul kullanıma sunuluyor
 Feature.Schools.Label.SchoolVerified,Doğrulandın
 Feature.Schools.Label.Search,
+Feature.Schools.Label.SuggestedEmail,Bunu mu demek istedin: {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Mezun grubu beklemede
 Feature.Schools.Label.UpsellPerkFindFriends,Okulundan arkadaşlarını bul
 Feature.Schools.Label.UpsellPerkPlayAndChat,Kimin çevrimiçi olduğunu gör ve kolayca birlikte oyna

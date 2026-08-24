@@ -1669,6 +1669,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,この背景
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,この背景はAIで生成されました。アップロードすると、この背景がRobloxコミュニティ基準に準拠し、利用する権利のないコンテンツを使用していないことを確認したものとみなされます。アップロードしたアイテムは持ち物に表示される前に審査が行われ、編集はできません。
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plusで無料の限定背景を獲得。
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,アイテムがコミュニティ基準を満たしていません
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,使用量の上限に達しました。カスタマイズを続けるには、後でもう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,使用量の上限に達しました。カスタマイズを続けるには、明日もう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,使用量の上限に達しました。カスタマイズを続けるには、1時間後にもう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,使用量の上限に達しました。カスタマイズを続けるには、1分後にもう一度お試しください。
 Feature.Avatar.BackgroundGeneration.Error.Moderation,そのプロンプトは当社のガイドラインに沿っていません。別の内容を入力してみてください。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,この背景はRobloxコミュニティ基準に準拠していないため、持ち物に追加されませんでした。新しい背景を生成してみてください。
 Feature.Avatar.BackgroundGeneration.Error.System,背景の生成中に問題が発生しました。もう一度お試しください。
@@ -3803,7 +3807,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,テキストを生成
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,役に立たなかった
-Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはガイドラインに違反する内容だった
+Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはコミュニティガイドライン違反
 Feature.Moments.Action.Hide,詳細を非表示
 Feature.Moments.Action.HowToCapture,切り抜き方法
 Feature.Moments.Action.Join,
@@ -4621,6 +4625,7 @@ Feature.Schools.Description.MoreVerifiedAlumniNeeded,認証済みの卒業生が
 Feature.Schools.Description.NotAvailableInRegion,学校機能はまだ利用できません。
 Feature.Schools.Description.RemoveSchoolBody,学校に再参加するには、学校のメールアドレスを再確認する必要があります。受け取った報酬アイテムはすべて削除されます。
 Feature.Schools.Description.SchoolIsLiveBody,
+Feature.Schools.Description.SchoolUnavailableBody,現在、この学校はRobloxでは利用できません。
 Feature.Schools.Description.UpsellDisclaimer,学校の表示はその学校の人だけに行われます。学校の変更や削除はいつでも可能です。
 Feature.Schools.Description.UpsellTagline,あなたと同じ学校の認証済みの生徒を見つけて、つながり、プレイしましょう。
 Feature.Schools.Description.WaitlistAlumniBody,準備が整いました。該当校の卒業生グループが立ち上がり次第、通知します。
@@ -4666,6 +4671,7 @@ Feature.Schools.Label.ResendInSeconds,{time}後に再送信
 Feature.Schools.Label.SchoolLaunches,学校の立ち上げ
 Feature.Schools.Label.SchoolVerified,認証済みです
 Feature.Schools.Label.Search,
+Feature.Schools.Label.SuggestedEmail,もしかして：{email}
 Feature.Schools.Label.UnlockAlumniGroup,保留中の卒業生グループ
 Feature.Schools.Label.UpsellPerkFindFriends,学校の友達を見つける
 Feature.Schools.Label.UpsellPerkPlayAndChat,オンライン状況を確認して、簡単に一緒にプレイ

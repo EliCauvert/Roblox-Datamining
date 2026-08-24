@@ -1,3 +1,12121 @@
+## 12554 - 2026-08-24 20:49
+
+### New files
+- `UniversalApp/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/templates/v1beta1.luau`
+- `UniversalApp/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/templates/v1beta1/template_api_messages.luau`
+
+### `UniversalApp/PatchRoot/DataModelInstances/CorePackages/LuauForgeChunks/deferred.luau`
+- New function: `cYG`
+- New function: `cYL`
+- New function: `cYI`
+- New upvalue captured by `updateNotifications`: `dbg`
+- Upvalue no longer captured by `updateNotifications`: `dbf`
+- New function: `dcY`
+- New function: `ddh`
+- New function: `ddm`
+- New upvalue captured by `ddt`: `var1 (write)`
+- Upvalue no longer captured by `ddu`: `var1 (write)`
+- Upvalue no longer captured by `ddx`: `var1 (write)`
+- New upvalue captured by `ddw`: `var1 (write)`
+- New function: `cYB`
+- New function: `drw`
+- New function: `drv`
+- New function: `dCl`
+- Upvalue no longer captured by `dCD`: `var1 (write)`
+- New function: `dCE`
+- New function: `dCH`
+- New function: `dCI`
+- New function: `dCJ`
+- New function: `dCL`
+- New function: `dCG`
+- New function: `dCQ`
+- New function: `dCR`
+- New function: `dCS`
+- New function: `dCT`
+- New function: `dCU`
+- New function: `dCO`
+- New function: `dCN`
+- Upvalue no longer captured by `dCX`: `var1 (write)`
+- New function: `dCW`
+- New upvalue captured by `getImageRect`: `dCX`
+- Upvalue no longer captured by `getImageRect`: `dyT`
+- New upvalue captured by `getGradientRotation`: `dCX`
+- Upvalue no longer captured by `getGradientRotation`: `dyT`
+- New upvalue captured by `getRadialGradientPosition`: `dCX`
+- Upvalue no longer captured by `getRadialGradientPosition`: `dyT`
+- New function: `dCZ`
+- New function: `dDa`
+- New function: `dDc`
+- New function: `dDb`
+- New upvalue captured by `connect`: `dDc`
+- Upvalue no longer captured by `connect`: `dyY`
+- New upvalue captured by `Disconnect`: `dDc`
+- Upvalue no longer captured by `Disconnect`: `dyY`
+- New upvalue captured by `disconnect`: `dDc`
+- Upvalue no longer captured by `disconnect`: `dyY`
+- New function: `dDe`
+- New function: `dDf`
+- New function: `dDg`
+- New function: `dDd`
+- New function: `dCY`
+- New function: `dDh`
+- New function: `dCF`
+- New function: `dDk`
+- New function: `dDl`
+- New function: `dDj`
+- New function: `dDm`
+- New function: `dDr`
+- New function: `dDv`
+- New function: `dDy`
+- New function: `dDx`
+- New function: `dDw`
+- New function: `dDz`
+- New function: `dDA`
+- New function: `dDB`
+- New function: `dDC`
+- New function: `dDD`
+- New function: `dDF`
+- New function: `dDE`
+- New function: `dDG`
+- New function: `dDH`
+- New function: `dDu`
+- New function: `dDt`
+- New function: `dDs`
+- New function: `dDq`
+- New function: `dDI`
+- New function: `dDp`
+- New upvalue captured by `makeThumbnailRequest`: `dDk`
+- New upvalue captured by `makeThumbnailRequest`: `dDl`
+- Upvalue no longer captured by `makeThumbnailRequest`: `dzg`
+- Upvalue no longer captured by `makeThumbnailRequest`: `dzh`
+- New function: `dDn`
+- New function: `dDK`
+- New function: `dDJ`
+- New function: `dDM`
+- New function: `dDN`
+- New function: `dDL`
+- New upvalue captured by `dCC`: `var1 (write)`
+- New function: `dDO`
+- New function: `dDP`
+- New function: `dDQ`
+- New function: `dDR`
+- New function: `dDS`
+- New function: `dDT`
+- New function: `dDU`
+- New function: `dDV`
+- New function: `dDW`
+- New function: `dDX`
+- New function: `dDZ`
+- New function: `dEa`
+- New function: `dDY`
+- New function: `dEb`
+- New function: `dEe`
+- New function: `dEf`
+- New function: `dEg`
+- New function: `dEh`
+- New function: `dEl`
+- New function: `dEm`
+- New function: `dEn`
+- New function: `dEk`
+- New function: `dEq`
+- New function: `dEr`
+- New function: `dEu`
+- New function: `dEv`
+- New function: `dEw`
+- New function: `dEz`
+- New function: `dEA`
+- New function: `dEB`
+- New function: `dEy`
+- New upvalue captured by `var480`: `dEA`
+- New upvalue captured by `var480`: `dEu`
+- Upvalue no longer captured by `var480`: `dAq`
+- Upvalue no longer captured by `var480`: `dAw`
+- New upvalue captured by `var481`: `dEu`
+- Upvalue no longer captured by `var481`: `dAq`
+- New function: `dEx`
+- New function: `dEt`
+- New upvalue captured by `config`: `dEu`
+- New upvalue captured by `config`: `dEv`
+- New upvalue captured by `config`: `dEw`
+- New upvalue captured by `config`: `dEx`
+- Upvalue no longer captured by `config`: `dAq`
+- Upvalue no longer captured by `config`: `dAr`
+- Upvalue no longer captured by `config`: `dAs`
+- Upvalue no longer captured by `config`: `dAt`
+- New upvalue captured by `installReducer`: `dEx`
+- Upvalue no longer captured by `installReducer`: `dAt`
+- New function: `dEs`
+- New function: `dEC`
+- New function: `dED`
+- New function: `dEE`
+- New function: `dEG`
+- New function: `dEI`
+- New function: `dEJ`
+- New function: `dEp`
+- New function: `dEK`
+- New function: `dEo`
+- New function: `dEj`
+- New function: `dEi`
+- New function: `dEL`
+- New function: `dEM`
+- New function: `dEO`
+- New function: `dEN`
+- New function: `dEP`
+- New function: `dEd`
+- New function: `dEc`
+- New function: `dER`
+- New function: `dES`
+- New function: `dET`
+- New function: `dEU`
+- New function: `dEW`
+- New function: `dEV`
+- New function: `dEX`
+- New function: `dEZ`
+- New function: `dFb`
+- New function: `dFc`
+- New function: `dFd`
+- New function: `dFe`
+- New function: `dFf`
+- New function: `dFg`
+- New function: `dFh`
+- New function: `dFa`
+- New function: `dFi`
+- New function: `dFl`
+- New function: `dFk`
+- New function: `dFn`
+- New function: `dFp`
+- New function: `dFo`
+- New upvalue captured by `onActivated`: `dEU`
+- New upvalue captured by `onActivated`: `dFp`
+- Upvalue no longer captured by `onActivated`: `dAQ`
+- Upvalue no longer captured by `onActivated`: `dBl`
+- New function: `dFs`
+- New function: `dFr`
+- New function: `dFq`
+- New upvalue captured by `onActivated`: `dEU`
+- New upvalue captured by `onActivated`: `dFr`
+- Upvalue no longer captured by `onActivated`: `dAQ`
+- Upvalue no longer captured by `onActivated`: `dBn`
+- New function: `dFt`
+- New function: `dFu`
+- New function: `dFv`
+- New function: `dFw`
+- New function: `dFm`
+- New function: `dFy`
+- New function: `dFx`
+- New function: `dFj`
+- New function: `dFz`
+- New function: `dFA`
+- New function: `dFC`
+- New function: `dFD`
+- New function: `dFB`
+- New function: `dEY`
+- New function: `dFE`
+- New function: `dFG`
+- New function: `dFH`
+- New function: `dFI`
+- New function: `dFF`
+- New function: `dFL`
+- New function: `dFK`
+- New function: `dFJ`
+- New function: `dFM`
+- New function: `dFN`
+- New function: `dFO`
+- New function: `dFQ`
+- New function: `dFP`
+- New function: `dFR`
+- New function: `dFT`
+- New function: `dFS`
+- New upvalue captured by `var769`: `dFG`
+- Upvalue no longer captured by `var769`: `dBC`
+- New upvalue captured by `var798`: `dEX`
+- New upvalue captured by `var798`: `dFO`
+- Upvalue no longer captured by `var798`: `dAT`
+- Upvalue no longer captured by `var798`: `dBK`
+- New function: `dFU`
+- New function: `dFV`
+- New function: `dEQ`
+- New upvalue captured by `var826`: `dDS`
+- New upvalue captured by `var826`: `dEY`
+- New upvalue captured by `var826`: `dFE`
+- New upvalue captured by `var826`: `dFi`
+- New upvalue captured by `var826`: `dFL`
+- Upvalue no longer captured by `var826`: `dAU`
+- Upvalue no longer captured by `var826`: `dBA`
+- Upvalue no longer captured by `var826`: `dBe`
+- Upvalue no longer captured by `var826`: `dBH`
+- Upvalue no longer captured by `var826`: `dzO`
+- New upvalue captured by `var827`: `dFJ`
+- Upvalue no longer captured by `var827`: `dBF`
+- New upvalue captured by `_`: `dFV`
+- Upvalue no longer captured by `_`: `dBR`
+- New upvalue captured by `_`: `dFV`
+- Upvalue no longer captured by `_`: `dBR`
+- New function: `dFW`
+- New function: `dFX`
+- New function: `dFY`
+- New function: `dGa`
+- New function: `dGc`
+- New function: `dGb`
+- New function: `dGd`
+- New function: `dFZ`
+- New function: `dGe`
+- Upvalue no longer captured by `dGg`: `var1 (write)`
+- New function: `dCz`
+- New function: `dCy`
+- New function: `dCx`
+- New function: `dGh`
+- New function: `dHa`
+- New function: `dJC`
+- New function: `dJB`
+- New function: `dJD`
+- New upvalue captured by `_`: `cQu`
+- Upvalue no longer captured by `_`: `cQt`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dJE`
+- New upvalue captured by `init`: `dJL`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dGL`
+- Upvalue no longer captured by `init`: `dGS`
+- New upvalue captured by `fetchPlayerSearch`: `dJE`
+- Upvalue no longer captured by `fetchPlayerSearch`: `dGL`
+- New upvalue captured by `dispatchInitialSearch`: `cQu`
+- New upvalue captured by `dispatchInitialSearch`: `dJE`
+- Upvalue no longer captured by `dispatchInitialSearch`: `cQt`
+- Upvalue no longer captured by `dispatchInitialSearch`: `dGL`
+- New upvalue captured by `PlayerSearchPageLoaded`: `cbw`
+- New upvalue captured by `PlayerSearchPageLoaded`: `dJA`
+- New upvalue captured by `PlayerSearchPageLoaded`: `dJN`
+- New upvalue captured by `PlayerSearchPageLoaded`: `dJO`
+- New upvalue captured by `PlayerSearchPageLoaded`: `dKn`
+- Upvalue no longer captured by `PlayerSearchPageLoaded`: `cbv`
+- Upvalue no longer captured by `PlayerSearchPageLoaded`: `dGH`
+- Upvalue no longer captured by `PlayerSearchPageLoaded`: `dGU`
+- Upvalue no longer captured by `PlayerSearchPageLoaded`: `dGV`
+- Upvalue no longer captured by `PlayerSearchPageLoaded`: `dHu`
+- New upvalue captured by `renderOnLoaded`: `cbw`
+- New upvalue captured by `renderOnLoaded`: `dJA`
+- New upvalue captured by `renderOnLoaded`: `dJL`
+- New upvalue captured by `renderOnLoaded`: `dJN`
+- New upvalue captured by `renderOnLoaded`: `dJO`
+- New upvalue captured by `renderOnLoaded`: `dKn`
+- New upvalue captured by `renderOnLoaded`: `dKQ`
+- Upvalue no longer captured by `renderOnLoaded`: `cbv`
+- Upvalue no longer captured by `renderOnLoaded`: `dGH`
+- Upvalue no longer captured by `renderOnLoaded`: `dGS`
+- Upvalue no longer captured by `renderOnLoaded`: `dGU`
+- Upvalue no longer captured by `renderOnLoaded`: `dGV`
+- Upvalue no longer captured by `renderOnLoaded`: `dHu`
+- Upvalue no longer captured by `renderOnLoaded`: `dHX`
+- New upvalue captured by `renderOnFailed`: `dJA`
+- Upvalue no longer captured by `renderOnFailed`: `dGH`
+- New upvalue captured by `renderOnLoading`: `dJA`
+- Upvalue no longer captured by `renderOnLoading`: `dGH`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New upvalue captured by `didUpdate`: `cQG`
+- Upvalue no longer captured by `didUpdate`: `cQF`
+- New upvalue captured by `dKY`: `var1 (write)`
+- New upvalue captured by `Fetch`: `dJE`
+- New upvalue captured by `Fetch`: `dKY`
+- Upvalue no longer captured by `Fetch`: `dGL`
+- Upvalue no longer captured by `Fetch`: `dIf`
+- New upvalue captured by `_`: `cQu`
+- Upvalue no longer captured by `_`: `cQt`
+- New upvalue captured by `fetchPlayerSearch`: `dJD`
+- New upvalue captured by `fetchPlayerSearch`: `dKX`
+- Upvalue no longer captured by `fetchPlayerSearch`: `dGK`
+- Upvalue no longer captured by `fetchPlayerSearch`: `dIe`
+- New upvalue captured by `removeUserSearchResults`: `cVZ`
+- Upvalue no longer captured by `removeUserSearchResults`: `cVY`
+- New upvalue captured by `renderChild`: `dJA`
+- New upvalue captured by `renderChild`: `dJI`
+- Upvalue no longer captured by `renderChild`: `dGH`
+- Upvalue no longer captured by `renderChild`: `dGP`
+- New function: `dGT`
+- New upvalue captured by `init`: `cQj`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dHa`
+- New upvalue captured by `init`: `dJy`
+- New upvalue captured by `init`: `dJz`
+- New upvalue captured by `init`: `dKZ`
+- New upvalue captured by `init`: `dLb`
+- Upvalue no longer captured by `init`: `cQi`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dCW`
+- Upvalue no longer captured by `init`: `dGF`
+- Upvalue no longer captured by `init`: `dGG`
+- Upvalue no longer captured by `init`: `dIg`
+- Upvalue no longer captured by `init`: `dIi`
+- New upvalue captured by `viewUserProfile`: `dLb`
+- Upvalue no longer captured by `viewUserProfile`: `dIi`
+- New upvalue captured by `render`: `cWl`
+- New upvalue captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `cWk`
+- Upvalue no longer captured by `render`: `dCU`
+- New upvalue captured by `joinExperience`: `dLi`
+- Upvalue no longer captured by `joinExperience`: `dIp`
+- New upvalue captured by `navigateDownToFriendRequests`: `dLf`
+- Upvalue no longer captured by `navigateDownToFriendRequests`: `dIm`
+- New upvalue captured by `openProfilePeekView`: `dKL`
+- Upvalue no longer captured by `openProfilePeekView`: `dHS`
+- New upvalue captured by `openPlayerContextualMenu`: `dLh`
+- Upvalue no longer captured by `openPlayerContextualMenu`: `dIo`
+- New upvalue captured by `navigateToUserInfo`: `dKv`
+- Upvalue no longer captured by `navigateToUserInfo`: `dHC`
+- New upvalue captured by `openLearnMoreLink`: `dLg`
+- Upvalue no longer captured by `openLearnMoreLink`: `dIn`
+- New upvalue captured by `navigateTo3DQRCodePage`: `dLk`
+- Upvalue no longer captured by `navigateTo3DQRCodePage`: `dIr`
+- New function: `dGQ`
+- Upvalue no longer captured by `dLK`: `var1 (write)`
+- Upvalue no longer captured by `dMz`: `var1 (write)`
+- New upvalue captured by `dMF`: `var1 (write)`
+- New upvalue captured by `dMI`: `var1 (write)`
+- New upvalue captured by `dML`: `var1 (write)`
+- Upvalue no longer captured by `dMP`: `var1 (write)`
+- New upvalue captured by `dNc`: `var1 (write)`
+- Upvalue no longer captured by `dNp`: `var1 (write)`
+- New upvalue captured by `isBannerHiddenInitState`: `dNo`
+- New upvalue captured by `isBannerHiddenInitState`: `dNp`
+- Upvalue no longer captured by `isBannerHiddenInitState`: `dKv`
+- Upvalue no longer captured by `isBannerHiddenInitState`: `dKw`
+- New function: `dNj`
+- New upvalue captured by `render`: `dMV`
+- Upvalue no longer captured by `render`: `dKc`
+- New upvalue captured by `dNx`: `var1 (write)`
+- New upvalue captured by `ConnectionChannelsTile`: `dLx`
+- New upvalue captured by `ConnectionChannelsTile`: `dNx`
+- Upvalue no longer captured by `ConnectionChannelsTile`: `dIE`
+- Upvalue no longer captured by `ConnectionChannelsTile`: `dKE`
+- Upvalue no longer captured by `dNB`: `var1 (write)`
+- New function: `dNK`
+- New function: `dNL`
+- New function: `dNN`
+- New function: `dNM`
+- New function: `dNP`
+- Upvalue no longer captured by `dNR`: `var1 (write)`
+- Upvalue no longer captured by `dNS`: `var1 (write)`
+- New function: `dNU`
+- New function: `dNV`
+- New function: `dNW`
+- New upvalue captured by `dOa`: `var1 (write)`
+- Upvalue no longer captured by `dOg`: `var1 (write)`
+- New upvalue captured by `decodeSchoolVerification`: `dOg`
+- New function: `dNZ`
+- New upvalue captured by `decode`: `dOf`
+- Upvalue no longer captured by `decode`: `dLm`
+- Upvalue no longer captured by `dOh`: `var1 (write)`
+- New function: `dNY`
+- New upvalue captured by `fetchFn`: `dNM`
+- New upvalue captured by `fetchFn`: `dNZ`
+- New upvalue captured by `fetchFn`: `dOh`
+- Upvalue no longer captured by `fetchFn`: `dKT`
+- Upvalue no longer captured by `fetchFn`: `dLg`
+- Upvalue no longer captured by `fetchFn`: `dLn`
+- New function: `dNX`
+- New function: `dNT`
+- New upvalue captured by `isShown`: `dNQ`
+- Upvalue no longer captured by `isShown`: `dKX`
+- New upvalue captured by `markShown`: `dNQ`
+- Upvalue no longer captured by `markShown`: `dKX`
+- New function: `dNO`
+- New function: `dNJ`
+- New function: `dNI`
+- New upvalue captured by `dOv`: `var1 (write)`
+- Upvalue no longer captured by `dOw`: `var1 (write)`
+- New upvalue captured by `cancelActiveRequest`: `var1299 (write)`
+- Upvalue no longer captured by `cancelActiveRequest`: `var1298 (write)`
+- New upvalue captured by `loadMoreForRole`: `dOy`
+- New upvalue captured by `loadMoreForRole`: `var1299 (write)`
+- Upvalue no longer captured by `loadMoreForRole`: `dLE`
+- Upvalue no longer captured by `loadMoreForRole`: `var1297 (write)`
+- New upvalue captured by `loadMoreAllMembers`: `dOy`
+- New upvalue captured by `loadMoreAllMembers`: `var1294 (write)`
+- New upvalue captured by `loadMoreAllMembers`: `var1299 (write)`
+- Upvalue no longer captured by `loadMoreAllMembers`: `dLE`
+- Upvalue no longer captured by `loadMoreAllMembers`: `var1293 (write)`
+- Upvalue no longer captured by `loadMoreAllMembers`: `var1297 (write)`
+- New upvalue captured by `fetchFn`: `dOw`
+- New upvalue captured by `fetchFn`: `dOx`
+- New upvalue captured by `fetchFn`: `dOy`
+- New upvalue captured by `fetchFn`: `var1294 (write)`
+- New upvalue captured by `fetchFn`: `var1298 (write)`
+- Upvalue no longer captured by `fetchFn`: `dLC`
+- Upvalue no longer captured by `fetchFn`: `dLD`
+- Upvalue no longer captured by `fetchFn`: `dLE`
+- Upvalue no longer captured by `fetchFn`: `var1293 (write)`
+- Upvalue no longer captured by `fetchFn`: `var1297 (write)`
+- New upvalue captured by `loadMore`: `var1298 (write)`
+- Upvalue no longer captured by `loadMore`: `var1297 (write)`
+- New upvalue captured by `refresh`: `var1294 (write)`
+- New upvalue captured by `refresh`: `var1299 (write)`
+- Upvalue no longer captured by `refresh`: `var1293 (write)`
+- Upvalue no longer captured by `refresh`: `var1298 (write)`
+- New upvalue captured by `clear`: `var1294 (write)`
+- New upvalue captured by `clear`: `var1299 (write)`
+- Upvalue no longer captured by `clear`: `var1293 (write)`
+- Upvalue no longer captured by `clear`: `var1297 (write)`
+- New function: `dOA`
+- Upvalue no longer captured by `dOD`: `var1 (write)`
+- New upvalue captured by `dOE`: `var1 (write)`
+- New upvalue captured by `decode`: `dOf`
+- Upvalue no longer captured by `decode`: `dLm`
+- New upvalue captured by `setSubmitResult`: `dOg`
+- New upvalue captured by `clearSuggestedEmail`: `dOg`
+- New upvalue captured by `reset`: `dOg`
+- New upvalue captured by `useSchoolVerificationFlow`: `dNK`
+- Upvalue no longer captured by `useSchoolVerificationFlow`: `dKR`
+- New upvalue captured by `updateCountdown`: `var1420 (write)`
+- Upvalue no longer captured by `updateCountdown`: `var1418 (write)`
+- New function: `dOJ`
+- New function: `dOI`
+- New function: `dOK`
+- New function: `dOL`
+- New function: `dNq`
+- New function: `dOS`
+- New function: `dOT`
+- New function: `dOU`
+- New function: `dOV`
+- New function: `dOW`
+- New function: `dOX`
+- New function: `dOZ`
+- New function: `dOY`
+- New function: `dPa`
+- New function: `dPb`
+- New function: `dPc`
+- New function: `dOQ`
+- New function: `dOP`
+- New function: `dPf`
+- New function: `dPe`
+- New function: `dPd`
+- New function: `dPg`
+- New function: `dPh`
+- New function: `dOM`
+- New function: `dPm`
+- New function: `dPn`
+- New upvalue captured by `isHiddenOnInit`: `dPm`
+- Upvalue no longer captured by `isHiddenOnInit`: `dMs`
+- New function: `dPl`
+- New upvalue captured by `isHiddenOnInit`: `dPm`
+- Upvalue no longer captured by `isHiddenOnInit`: `dMs`
+- New function: `dPk`
+- New function: `dPo`
+- New function: `dPj`
+- New function: `dPi`
+- New function: `dPq`
+- New function: `dPp`
+- New function: `dPt`
+- New function: `dPv`
+- New function: `dPu`
+- New function: `dPs`
+- New function: `dPr`
+- New function: `dPx`
+- New function: `dPw`
+- New upvalue captured by `isAlreadyShownInitState`: `dPx`
+- Upvalue no longer captured by `isAlreadyShownInitState`: `dMD`
+- New upvalue captured by `tryDispatchFAEUpsell`: `var1813 (write)`
+- Upvalue no longer captured by `tryDispatchFAEUpsell`: `var1811 (write)`
+- New function: `dPy`
+- New function: `dPz`
+- New function: `var1862`
+- New function: `dPB`
+- New function: `dPA`
+- New function: `LUAUFORGE_MODULE_GLOBALS_dLw_AddFriendsScreen`
+- New upvalue captured by `renderChild`: `dLD`
+- New upvalue captured by `renderChild`: `dLx`
+- New upvalue captured by `renderChild`: `dLy`
+- Upvalue no longer captured by `renderChild`: `dIE`
+- Upvalue no longer captured by `renderChild`: `dIF`
+- Upvalue no longer captured by `renderChild`: `dIK`
+- New function: `dPG`
+- New function: `dPH`
+- New function: `dPI`
+- New function: `dPK`
+- New function: `dPL`
+- New function: `dPM`
+- New function: `dPN`
+- New function: `dPO`
+- New function: `dPP`
+- New function: `dPQ`
+- New function: `dPJ`
+- New function: `dPW`
+- New function: `dPV`
+- New function: `dPU`
+- New function: `dPT`
+- New function: `dPS`
+- New function: `dPR`
+- New function: `dPY`
+- New function: `dPX`
+- New function: `dPF`
+- New function: `dPE`
+- New function: `dPD`
+- New function: `dQf`
+- New function: `dQh`
+- New function: `dQi`
+- New function: `dQo`
+- New function: `dQp`
+- New function: `dQn`
+- New function: `dQm`
+- New function: `dQl`
+- New function: `dQr`
+- New function: `dQs`
+- New function: `dQu`
+- New function: `dQv`
+- New function: `dQw`
+- New function: `dQt`
+- New function: `dQy`
+- New function: `dQx`
+- New upvalue captured by `scheduleUpdate`: `var1937 (write)`
+- New upvalue captured by `scheduleUpdate`: `var1938 (write)`
+- Upvalue no longer captured by `scheduleUpdate`: `var1935 (write)`
+- Upvalue no longer captured by `scheduleUpdate`: `var1936 (write)`
+- New function: `dQq`
+- New function: `dQk`
+- New function: `dQC`
+- New function: `dQV`
+- New function: `dQW`
+- New function: `dQB`
+- New function: `dQA`
+- New function: `dQz`
+- New function: `dRa`
+- New function: `dQZ`
+- New function: `dQY`
+- New function: `dQX`
+- New function: `dQj`
+- New function: `dRb`
+- New function: `dRc`
+- New function: `dRe`
+- New function: `dRg`
+- New function: `dRh`
+- New function: `dRf`
+- New upvalue captured by `runFetch`: `dRg`
+- New upvalue captured by `runFetch`: `var2023 (write)`
+- New upvalue captured by `runFetch`: `var2024 (write)`
+- Upvalue no longer captured by `runFetch`: `dOm`
+- Upvalue no longer captured by `runFetch`: `var2020 (write)`
+- Upvalue no longer captured by `runFetch`: `var2021 (write)`
+- New upvalue captured by `loadMore`: `dRg`
+- New upvalue captured by `loadMore`: `dRh`
+- New upvalue captured by `loadMore`: `var2023 (write)`
+- New upvalue captured by `loadMore`: `var2024 (write)`
+- Upvalue no longer captured by `loadMore`: `dOm`
+- Upvalue no longer captured by `loadMore`: `dOn`
+- Upvalue no longer captured by `loadMore`: `var2020 (write)`
+- Upvalue no longer captured by `loadMore`: `var2021 (write)`
+- New upvalue captured by `dispose`: `var2022 (write)`
+- Upvalue no longer captured by `dispose`: `var2020 (write)`
+- New function: `dRk`
+- New function: `dRl`
+- New function: `dRm`
+- New function: `dRn`
+- New function: `dRo`
+- New function: `dRp`
+- New function: `dRj`
+- New function: `dRt`
+- New function: `dRu`
+- New function: `dRs`
+- New upvalue captured by `counterConfig`: `dRt`
+- Upvalue no longer captured by `counterConfig`: `dOz`
+- New upvalue captured by `eventIngestConfig`: `dRt`
+- Upvalue no longer captured by `eventIngestConfig`: `dOz`
+- New function: `dRr`
+- New upvalue captured by `fireAnalyticsEvent`: `dRs`
+- Upvalue no longer captured by `fireAnalyticsEvent`: `dOy`
+- New function: `dRq`
+- New function: `dRi`
+- New function: `dRv`
+- New function: `dRw`
+- New function: `dRy`
+- New function: `dRx`
+- New upvalue captured by `scheduleNextMidnightUpdate`: `dRy`
+- New upvalue captured by `scheduleNextMidnightUpdate`: `var2070 (write)`
+- New upvalue captured by `scheduleNextMidnightUpdate`: `var2071 (write)`
+- Upvalue no longer captured by `scheduleNextMidnightUpdate`: `dOE`
+- Upvalue no longer captured by `scheduleNextMidnightUpdate`: `var2068 (write)`
+- Upvalue no longer captured by `scheduleNextMidnightUpdate`: `var2069 (write)`
+- New function: `dRz`
+- New function: `dRB`
+- New function: `dRA`
+- New function: `dRd`
+- New upvalue captured by `prefetchItemNames`: `dQC`
+- New upvalue captured by `prefetchItemNames`: `dRA`
+- Upvalue no longer captured by `prefetchItemNames`: `dNI`
+- Upvalue no longer captured by `prefetchItemNames`: `dOG`
+- New function: `var2109`
+- New function: `var2109`
+- New function: `var2109`
+- New function: `dQg`
+- New upvalue captured by `CenteredState`: `dQf`
+- Upvalue no longer captured by `CenteredState`: `dNl`
+- New upvalue captured by `renderRow`: `dQf`
+- New upvalue captured by `renderRow`: `dQj`
+- New upvalue captured by `renderRow`: `dRb`
+- Upvalue no longer captured by `renderRow`: `dNl`
+- Upvalue no longer captured by `renderRow`: `dNp`
+- Upvalue no longer captured by `renderRow`: `dOh`
+- New function: `dQe`
+- New function: `dQb`
+- New function: `dQa`
+- New function: `dPZ`
+- New function: `dPC`
+- New function: `var2137`
+- New function: `dRH`
+- New function: `dRI`
+- New upvalue captured by `showToast`: `cWd`
+- Upvalue no longer captured by `showToast`: `cWc`
+- New upvalue captured by `onClose`: `dLo`
+- Upvalue no longer captured by `onClose`: `dIv`
+- New upvalue captured by `openProfilePeekView`: `dKL`
+- Upvalue no longer captured by `openProfilePeekView`: `dHS`
+- New upvalue captured by `openLearnMoreLink`: `dLg`
+- Upvalue no longer captured by `openLearnMoreLink`: `dIn`
+- New function: `dRL`
+- New function: `dUX`
+- New function: `dVc`
+- New function: `elJ`
+- Upvalue no longer captured by `eof`: `var1 (write)`
+- Upvalue no longer captured by `eol`: `var1 (write)`
+- New upvalue captured by `overrideName`: `dNQ`
+- Upvalue no longer captured by `overrideName`: `dKX`
+- New upvalue captured by `format`: `eoh`
+- Upvalue no longer captured by `format`: `emk`
+- New function: `eoq`
+- New upvalue captured by `useSchoolsEntrySource`: `dNK`
+- Upvalue no longer captured by `useSchoolsEntrySource`: `dKR`
+- New function: `eov`
+- New function: `eow`
+- New function: `eou`
+- New upvalue captured by `PerkRow`: `dNK`
+- Upvalue no longer captured by `PerkRow`: `dKR`
+- New function: `eoC`
+- New function: `eoD`
+- New function: `eoF`
+- New function: `eoE`
+- New function: `eoB`
+- New function: `eoA`
+- New function: `eoz`
+- New function: `eoI`
+- New function: `eoH`
+- New function: `eoG`
+- New function: `eoJ`
+- New function: `eoy`
+- New function: `eox`
+- New function: `eoM`
+- New function: `eoO`
+- New function: `eoP`
+- New function: `eoN`
+- New function: `eoQ`
+- New function: `eoR`
+- New upvalue captured by `decode`: `dOf`
+- Upvalue no longer captured by `decode`: `dLm`
+- New function: `eoL`
+- New function: `eoK`
+- New function: `eoU`
+- New function: `eoW`
+- New function: `eoV`
+- New function: `eoT`
+- New function: `eoY`
+- New function: `eoX`
+- New function: `epa`
+- New function: `eoZ`
+- New function: `eoS`
+- New function: `epc`
+- New function: `epe`
+- New function: `epf`
+- New function: `epd`
+- New function: `eph`
+- New function: `epj`
+- New function: `epi`
+- New function: `epk`
+- New function: `epg`
+- New function: `epb`
+- New upvalue captured by `getRewardMediaImage`: `epa`
+- Upvalue no longer captured by `getRewardMediaImage`: `enf`
+- New upvalue captured by `onError`: `eoI`
+- Upvalue no longer captured by `onError`: `emL`
+- New function: `epo`
+- New function: `epp`
+- New function: `epq`
+- New function: `epn`
+- New function: `epm`
+- New function: `epl`
+- New function: `epu`
+- New function: `epv`
+- New function: `ept`
+- New function: `epw`
+- New function: `eps`
+- New function: `epr`
+- New function: `epA`
+- New function: `epz`
+- New function: `epy`
+- New function: `epx`
+- New upvalue captured by `SchoolsNavigatorContent`: `dNK`
+- New upvalue captured by `SchoolsNavigatorContent`: `dOG`
+- New upvalue captured by `SchoolsNavigatorContent`: `dOH`
+- Upvalue no longer captured by `SchoolsNavigatorContent`: `dKR`
+- Upvalue no longer captured by `SchoolsNavigatorContent`: `dLM`
+- Upvalue no longer captured by `SchoolsNavigatorContent`: `dLN`
+- New upvalue captured by `SchoolsNavigatorWithEntrySource`: `dNK`
+- New upvalue captured by `SchoolsNavigatorWithEntrySource`: `eop`
+- New upvalue captured by `SchoolsNavigatorWithEntrySource`: `eoq`
+- Upvalue no longer captured by `SchoolsNavigatorWithEntrySource`: `dKR`
+- Upvalue no longer captured by `SchoolsNavigatorWithEntrySource`: `ems`
+- Upvalue no longer captured by `SchoolsNavigatorWithEntrySource`: `emt`
+- New upvalue captured by `SchoolsNavigatorWithProviders`: `dNK`
+- New upvalue captured by `SchoolsNavigatorWithProviders`: `eol`
+- Upvalue no longer captured by `SchoolsNavigatorWithProviders`: `dKR`
+- Upvalue no longer captured by `SchoolsNavigatorWithProviders`: `emo`
+- New upvalue captured by `render`: `dNK`
+- Upvalue no longer captured by `render`: `dKR`
+- New function: `epC`
+- New function: `epI`
+- New function: `epH`
+- New function: `epK`
+- New function: `epL`
+- New function: `epM`
+- New function: `epN`
+- New function: `epO`
+- New function: `epP`
+- New function: `epQ`
+- New function: `epR`
+- New function: `epS`
+- New function: `epT`
+- New function: `epU`
+- New function: `epV`
+- New function: `epW`
+- New function: `epX`
+- New function: `epY`
+- New function: `epZ`
+- New function: `eqa`
+- New function: `eqb`
+- New function: `eqc`
+- New function: `eqd`
+- New function: `eqe`
+- New function: `eqf`
+- New function: `eqg`
+- New function: `eqh`
+- New function: `eqi`
+- New function: `eqj`
+- New function: `eqk`
+- New function: `epJ`
+- New upvalue captured by `onActivated`: `epR`
+- New upvalue captured by `onActivated`: `epS`
+- Upvalue no longer captured by `onActivated`: `enW`
+- Upvalue no longer captured by `onActivated`: `enX`
+- New function: `epG`
+- New function: `epF`
+- New function: `eqn`
+- New function: `eqo`
+- New function: `ezQ`
+- New function: `ezS`
+- New function: `ezT`
+- New upvalue captured by `navigateBackInAppRoute`: `dLo`
+- Upvalue no longer captured by `navigateBackInAppRoute`: `dIv`
+- New function: `ezV`
+- New upvalue captured by `disconnect`: `var2735 (write)`
+- New upvalue captured by `disconnect`: `var2736 (write)`
+- Upvalue no longer captured by `disconnect`: `var2733 (write)`
+- Upvalue no longer captured by `disconnect`: `var2734 (write)`
+- New upvalue captured by `connect`: `var2735 (write)`
+- New upvalue captured by `connect`: `var2736 (write)`
+- Upvalue no longer captured by `connect`: `var2733 (write)`
+- Upvalue no longer captured by `connect`: `var2734 (write)`
+- New upvalue captured by `showExitDialog`: `ezW`
+- Upvalue no longer captured by `showExitDialog`: `eyb`
+- New function: `ezU`
+- New upvalue captured by `androidBackButtonConnection`: `ezV`
+- Upvalue no longer captured by `androidBackButtonConnection`: `eya`
+- New function: `ezR`
+- New function: `ezX`
+- Upvalue no longer captured by `eES`: `var1 (write)`
+- Upvalue no longer captured by `eET`: `var1 (write)`
+- New function: `ezZ`
+- New upvalue captured by `render`: `cQF`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `eES`
+- Upvalue no longer captured by `render`: `cQE`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `eCX`
+- Upvalue no longer captured by `render`: `eyf`
+- New upvalue captured by `renderPage`: `eAa`
+- Upvalue no longer captured by `renderPage`: `eyf`
+- New function: `eFb`
+- New function: `eFc`
+- New upvalue captured by `useWebView`: `eFa`
+- New upvalue captured by `useWebView`: `eFb`
+- New upvalue captured by `useWebView`: `eFc`
+- Upvalue no longer captured by `useWebView`: `eDf`
+- Upvalue no longer captured by `useWebView`: `eDg`
+- Upvalue no longer captured by `useWebView`: `eDh`
+- New function: `eFe`
+- New function: `ezY`
+- New upvalue captured by `didUpdate`: `eFf`
+- Upvalue no longer captured by `didUpdate`: `eDk`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `ezZ`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `eye`
+- New upvalue captured by `eFo`: `var1 (write)`
+- New function: `eqm`
+- New function: `var2861`
+- New upvalue captured by `qRCodePage`: `dLk`
+- Upvalue no longer captured by `qRCodePage`: `dIr`
+- New upvalue captured by `itemDetails`: `dwu`
+- New upvalue captured by `itemDetails`: `eFj`
+- New upvalue captured by `itemDetails`: `eFk`
+- Upvalue no longer captured by `itemDetails`: `dsq`
+- Upvalue no longer captured by `itemDetails`: `eDo`
+- Upvalue no longer captured by `itemDetails`: `eDp`
+- New upvalue captured by `editAvatar`: `eFq`
+- Upvalue no longer captured by `editAvatar`: `eDv`
+- New upvalue captured by `editUsername`: `cWl`
+- New upvalue captured by `editUsername`: `dKM`
+- New upvalue captured by `editUsername`: `ezY`
+- Upvalue no longer captured by `editUsername`: `cWk`
+- Upvalue no longer captured by `editUsername`: `dHT`
+- Upvalue no longer captured by `editUsername`: `eyd`
+- New upvalue captured by `wearAfterPurchase`: `dyz`
+- Upvalue no longer captured by `wearAfterPurchase`: `duv`
+- New upvalue captured by `refreshRobuxBalance`: `eFm`
+- Upvalue no longer captured by `refreshRobuxBalance`: `eDr`
+- New upvalue captured by `eFS`: `var1 (write)`
+- New function: `var2892`
+- New upvalue captured by `eGq`: `var1 (write)`
+- New function: `var2937`
+- New function: `var2968`
+- New function: `var2969`
+- New upvalue captured by `launchFallback`: `eGl`
+- Upvalue no longer captured by `launchFallback`: `eEq`
+- New upvalue captured by `eGh`: `var1 (write)`
+- New upvalue captured by `eGE`: `var1 (write)`
+- Upvalue no longer captured by `eHD`: `var1 (write)`
+- Upvalue no longer captured by `eHJ`: `var1 (write)`
+- New upvalue captured by `getUnpublishedPlaytestModeTooltipDisplayCount`: `var3006 (write)`
+- Upvalue no longer captured by `getUnpublishedPlaytestModeTooltipDisplayCount`: `var3004 (write)`
+- New upvalue captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `var3006 (write)`
+- Upvalue no longer captured by `incrementUnpublishedPlaytestModeTooltipDisplayCount`: `var3004 (write)`
+- New upvalue captured by `wasPushNotificationsUpsellShownToday`: `var3004 (write)`
+- Upvalue no longer captured by `wasPushNotificationsUpsellShownToday`: `var3002 (write)`
+- New upvalue captured by `markPushNotificationsUpsellShown`: `var3004 (write)`
+- Upvalue no longer captured by `markPushNotificationsUpsellShown`: `var3002 (write)`
+- New upvalue captured by `isPushNotificationsUpsellDismissedPermanently`: `var3005 (write)`
+- Upvalue no longer captured by `isPushNotificationsUpsellDismissedPermanently`: `var3003 (write)`
+- New upvalue captured by `markPushNotificationsUpsellDismissedPermanently`: `var3005 (write)`
+- Upvalue no longer captured by `markPushNotificationsUpsellDismissedPermanently`: `var3003 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var3005 (write)`
+- New upvalue captured by `clearSessionCacheForTests`: `var3006 (write)`
+- Upvalue no longer captured by `clearSessionCacheForTests`: `var3002 (write)`
+- Upvalue no longer captured by `clearSessionCacheForTests`: `var3003 (write)`
+- Upvalue no longer captured by `eHK`: `var1 (write)`
+- Upvalue no longer captured by `eHM`: `var1 (write)`
+- Upvalue no longer captured by `eHQ`: `var1 (write)`
+- New function: `eHW`
+- New function: `eHZ`
+- New function: `eIa`
+- New function: `eIb`
+- New function: `eIc`
+- New function: `eHY`
+- New upvalue captured by `useStableBottomSafeAreaPadding`: `eIa`
+- Upvalue no longer captured by `useStableBottomSafeAreaPadding`: `eGc`
+- New upvalue captured by `updateBottomInset`: `eIa`
+- Upvalue no longer captured by `updateBottomInset`: `eGc`
+- New upvalue captured by `onActivated`: `var3153 (write)`
+- Upvalue no longer captured by `onActivated`: `var3151 (write)`
+- New function: `eId`
+- New function: `eIf`
+- New function: `eIe`
+- New function: `eHX`
+- New upvalue captured by `onActivated`: `eGI`
+- New upvalue captured by `onActivated`: `eHJ`
+- Upvalue no longer captured by `onActivated`: `eEN`
+- Upvalue no longer captured by `onActivated`: `eFL`
+- New function: `eIg`
+- New function: `eIh`
+- New function: `eIj`
+- New function: `eIk`
+- New function: `eIi`
+- New function: `eIn`
+- New upvalue captured by `cancelPending`: `var3378 (write)`
+- Upvalue no longer captured by `cancelPending`: `var5437 (write)`
+- New upvalue captured by `useDraftQuery`: `eHE`
+- Upvalue no longer captured by `useDraftQuery`: `eGA`
+- New upvalue captured by `useDebouncedQuery`: `eHE`
+- Upvalue no longer captured by `useDebouncedQuery`: `eGA`
+- New function: `useIsSearchActive`
+- New function: `useShowEmptyState`
+- New upvalue captured by `setQuery`: `var3378 (write)`
+- Upvalue no longer captured by `setQuery`: `var5437 (write)`
+- New function: `beginSearch`
+- New function: `endSearch`
+- New function: `endSearchIfEmpty`
+- New upvalue captured by `clear`: `cancel`
+- New upvalue captured by `clear`: `var3378 (write)`
+- Upvalue no longer captured by `clear`: `t_1 (write)`
+- Upvalue no longer captured by `clear`: `var3569 (write)`
+- New upvalue captured by `destroy`: `var3378 (write)`
+- Upvalue no longer captured by `destroy`: `var5437 (write)`
+- New function: `eIl`
+- New upvalue captured by `renderFlyoutLeftHeader`: `eGC`
+- New upvalue captured by `renderFlyoutLeftHeader`: `eGG`
+- Upvalue no longer captured by `renderFlyoutLeftHeader`: `eEH`
+- Upvalue no longer captured by `renderFlyoutLeftHeader`: `eEL`
+- New function: `renderEmptyRight`
+- New function: `AgentSpec`
+- New function: `HeaderSearch`
+- New function: `HeaderCenter`
+- New function: `eIq`
+- New function: `eIr`
+- New function: `eIs`
+- New function: `eIv`
+- New function: `eIy`
+- New function: `eIA`
+- New function: `eIB`
+- New upvalue captured by `resolveMutatingNetwork`: `md`
+- New upvalue captured by `resolveMutatingNetwork`: `rv`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `mc`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `ru`
+- New upvalue captured by `revertVersion`: `md`
+- New upvalue captured by `revertVersion`: `rv`
+- Upvalue no longer captured by `revertVersion`: `mc`
+- Upvalue no longer captured by `revertVersion`: `ru`
+- New upvalue captured by `rollbackPlace`: `md`
+- New upvalue captured by `rollbackPlace`: `rv`
+- Upvalue no longer captured by `rollbackPlace`: `mc`
+- Upvalue no longer captured by `rollbackPlace`: `ru`
+- New upvalue captured by `addVersionNote`: `md`
+- New upvalue captured by `addVersionNote`: `rv`
+- Upvalue no longer captured by `addVersionNote`: `mc`
+- Upvalue no longer captured by `addVersionNote`: `ru`
+- New function: `eIz`
+- New upvalue captured by `fetchPageHistory`: `eIB`
+- Upvalue no longer captured by `fetchPageHistory`: `eGy`
+- New upvalue captured by `revertVersion`: `eIB`
+- Upvalue no longer captured by `revertVersion`: `eGy`
+- New upvalue captured by `rollbackPlace`: `eIB`
+- Upvalue no longer captured by `rollbackPlace`: `eGy`
+- New upvalue captured by `addVersionNote`: `eIB`
+- Upvalue no longer captured by `addVersionNote`: `eGy`
+- New function: `eIC`
+- New function: `eIx`
+- New function: `eIw`
+- New function: `eID`
+- New function: `eIE`
+- New function: `eIG`
+- New upvalue captured by `getLoadingSignal`: `eIm`
+- Upvalue no longer captured by `getLoadingSignal`: `eGo`
+- New function: `eIF`
+- New function: `eII`
+- New function: `eIH`
+- New upvalue captured by `copyVersionNoteAfterRollback`: `eII`
+- Upvalue no longer captured by `copyVersionNoteAfterRollback`: `eGG`
+- New upvalue captured by `waitForRetry`: `eII`
+- Upvalue no longer captured by `waitForRetry`: `eGG`
+- New upvalue captured by `rollbackWithRetry`: `eII`
+- Upvalue no longer captured by `rollbackWithRetry`: `eGG`
+- New function: `eIK`
+- New function: `eIL`
+- New upvalue captured by `localizeBadgeText`: `eGG`
+- Upvalue no longer captured by `localizeBadgeText`: `eEL`
+- New function: `eIN`
+- New function: `eIM`
+- New upvalue captured by `formatVersionNumber`: `eGG`
+- Upvalue no longer captured by `formatVersionNumber`: `eEL`
+- New upvalue captured by `getBadgeText`: `eGG`
+- New upvalue captured by `getBadgeText`: `eIN`
+- Upvalue no longer captured by `getBadgeText`: `eEL`
+- Upvalue no longer captured by `getBadgeText`: `eGL`
+- New upvalue captured by `shouldShowEntry`: `eIN`
+- Upvalue no longer captured by `shouldShowEntry`: `eGL`
+- Upvalue no longer captured by `eIO`: `var1 (write)`
+- New function: `eIQ`
+- New function: `eIP`
+- New function: `eIJ`
+- New upvalue captured by `VersionHistoryContent`: `eGC`
+- New upvalue captured by `VersionHistoryContent`: `eIO`
+- Upvalue no longer captured by `VersionHistoryContent`: `eEH`
+- Upvalue no longer captured by `VersionHistoryContent`: `eGM`
+- New function: `eIR`
+- New function: `eIS`
+- New function: `eIu`
+- New upvalue captured by `formatCreatedDate`: `eGG`
+- Upvalue no longer captured by `formatCreatedDate`: `eEL`
+- New upvalue captured by `mapVersionToEntry`: `eGG`
+- New upvalue captured by `mapVersionToEntry`: `eIM`
+- Upvalue no longer captured by `mapVersionToEntry`: `eEL`
+- Upvalue no longer captured by `mapVersionToEntry`: `eGK`
+- New upvalue captured by `formatLocalizedVersionNumber`: `eGG`
+- Upvalue no longer captured by `formatLocalizedVersionNumber`: `eEL`
+- New upvalue captured by `formatLocalizedCreatedDate`: `eGG`
+- Upvalue no longer captured by `formatLocalizedCreatedDate`: `eEL`
+- New upvalue captured by `formatLocalizedBadge`: `eGG`
+- Upvalue no longer captured by `formatLocalizedBadge`: `eEL`
+- New upvalue captured by `mapLocalizedVersionToEntry`: `eGG`
+- New upvalue captured by `mapLocalizedVersionToEntry`: `eIM`
+- Upvalue no longer captured by `mapLocalizedVersionToEntry`: `eEL`
+- Upvalue no longer captured by `mapLocalizedVersionToEntry`: `eGK`
+- New upvalue captured by `getStatusText`: `eGG`
+- Upvalue no longer captured by `getStatusText`: `eEL`
+- New upvalue captured by `localizeStatusText`: `eGG`
+- Upvalue no longer captured by `localizeStatusText`: `eEL`
+- New function: `eIU`
+- New function: `eIT`
+- New function: `eIV`
+- New function: `eIX`
+- New function: `eIZ`
+- New function: `eJc`
+- New function: `eJe`
+- New function: `eJd`
+- New function: `eJg`
+- New upvalue captured by `resolveMutatingNetwork`: `md`
+- New upvalue captured by `resolveMutatingNetwork`: `rv`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `mc`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `ru`
+- New upvalue captured by `patchConfiguration`: `md`
+- New upvalue captured by `patchConfiguration`: `rv`
+- Upvalue no longer captured by `patchConfiguration`: `mc`
+- Upvalue no longer captured by `patchConfiguration`: `ru`
+- New upvalue captured by `setTeamCreate`: `md`
+- New upvalue captured by `setTeamCreate`: `rv`
+- Upvalue no longer captured by `setTeamCreate`: `mc`
+- Upvalue no longer captured by `setTeamCreate`: `ru`
+- New function: `eJf`
+- New upvalue captured by `getSummaryPatch`: `eJd`
+- Upvalue no longer captured by `getSummaryPatch`: `eHb`
+- New upvalue captured by `refreshSummary`: `eJg`
+- Upvalue no longer captured by `refreshSummary`: `eHe`
+- New upvalue captured by `updateSummary`: `KX`
+- Upvalue no longer captured by `updateSummary`: `KW`
+- New upvalue captured by `refreshConfiguration`: `eJg`
+- Upvalue no longer captured by `refreshConfiguration`: `eHe`
+- New upvalue captured by `updateConfiguration`: `KX`
+- Upvalue no longer captured by `updateConfiguration`: `KW`
+- New upvalue captured by `patchConfiguration`: `eJg`
+- New upvalue captured by `patchConfiguration`: `KX`
+- New upvalue captured by `patchConfiguration`: `var3616 (write)`
+- Upvalue no longer captured by `patchConfiguration`: `eHe`
+- Upvalue no longer captured by `patchConfiguration`: `KW`
+- Upvalue no longer captured by `patchConfiguration`: `var3569 (write)`
+- New upvalue captured by `setTeamCreate`: `eJg`
+- Upvalue no longer captured by `setTeamCreate`: `eHe`
+- New upvalue captured by `clear`: `t_1 (write)`
+- New upvalue captured by `clear`: `var3616 (write)`
+- New function: `eJh`
+- New function: `eJb`
+- New function: `eJa`
+- New function: `eJl`
+- New function: `eJn`
+- New function: `eJo`
+- New upvalue captured by `syncGuidelinesAgeToGameStores`: `LK`
+- New upvalue captured by `syncGuidelinesAgeToGameStores`: `MJ`
+- Upvalue no longer captured by `syncGuidelinesAgeToGameStores`: `LJ`
+- Upvalue no longer captured by `syncGuidelinesAgeToGameStores`: `MI`
+- New function: `eJm`
+- New upvalue captured by `refreshDetailedGuidelines`: `eJn`
+- Upvalue no longer captured by `refreshDetailedGuidelines`: `eHl`
+- New function: `eJp`
+- New function: `eJk`
+- New function: `eJj`
+- New function: `eJt`
+- New upvalue captured by `resolveMutatingNetwork`: `md`
+- New upvalue captured by `resolveMutatingNetwork`: `rv`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `mc`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `ru`
+- New upvalue captured by `activate`: `md`
+- New upvalue captured by `activate`: `rv`
+- Upvalue no longer captured by `activate`: `mc`
+- Upvalue no longer captured by `activate`: `ru`
+- New upvalue captured by `deactivate`: `md`
+- New upvalue captured by `deactivate`: `rv`
+- Upvalue no longer captured by `deactivate`: `mc`
+- Upvalue no longer captured by `deactivate`: `ru`
+- New upvalue captured by `setAudiences`: `md`
+- New upvalue captured by `setAudiences`: `rv`
+- Upvalue no longer captured by `setAudiences`: `mc`
+- Upvalue no longer captured by `setAudiences`: `ru`
+- New function: `eJs`
+- New upvalue captured by `refreshEligibility`: `eJt`
+- Upvalue no longer captured by `refreshEligibility`: `eHr`
+- New upvalue captured by `activate`: `eJt`
+- Upvalue no longer captured by `activate`: `eHr`
+- New upvalue captured by `deactivate`: `eJt`
+- Upvalue no longer captured by `deactivate`: `eHr`
+- New upvalue captured by `setAudiences`: `eJt`
+- Upvalue no longer captured by `setAudiences`: `eHr`
+- Upvalue no longer captured by `clear`: `var3726 (write)`
+- Upvalue no longer captured by `clear`: `var3727 (write)`
+- New function: `eJu`
+- New function: `eJr`
+- New function: `eJq`
+- New function: `eJi`
+- New upvalue captured by `getAudience`: `eJa`
+- Upvalue no longer captured by `getAudience`: `eGY`
+- New upvalue captured by `getAudienceText`: `eJa`
+- Upvalue no longer captured by `getAudienceText`: `eGY`
+- New function: `eJw`
+- New function: `eJx`
+- New function: `eJv`
+- New upvalue captured by `formatSuccessSnackbarText`: `eGG`
+- Upvalue no longer captured by `formatSuccessSnackbarText`: `eEL`
+- New upvalue captured by `sharePublishedExperience`: `eGG`
+- Upvalue no longer captured by `sharePublishedExperience`: `eEL`
+- New upvalue captured by `ffn`: `var1 (write)`
+- New upvalue captured by `ffo`: `var1 (write)`
+- New upvalue captured by `ffm`: `var1 (write)`
+- Upvalue no longer captured by `ffp`: `var1 (write)`
+- New function: `eIY`
+- New function: `eIW`
+- New upvalue captured by `ffx`: `var1 (write)`
+- New upvalue captured by `fetchQuotaSummary`: `ffy`
+- New upvalue captured by `fetchQuotaSummary`: `KV`
+- New upvalue captured by `fetchQuotaSummary`: `var3773 (write)`
+- New upvalue captured by `fetchQuotaSummary`: `var3774 (write)`
+- New upvalue captured by `fetchQuotaSummary`: `var3775 (write)`
+- New upvalue captured by `fetchQuotaSummary`: `var3778 (write)`
+- Upvalue no longer captured by `fetchQuotaSummary`: `ffk`
+- Upvalue no longer captured by `fetchQuotaSummary`: `KU`
+- Upvalue no longer captured by `fetchQuotaSummary`: `var3726 (write)`
+- Upvalue no longer captured by `fetchQuotaSummary`: `var3727 (write)`
+- Upvalue no longer captured by `fetchQuotaSummary`: `var3728 (write)`
+- Upvalue no longer captured by `fetchQuotaSummary`: `var3731 (write)`
+- New upvalue captured by `fetchDailyLimit`: `ffy`
+- New upvalue captured by `fetchDailyLimit`: `KV`
+- New upvalue captured by `fetchDailyLimit`: `var3773 (write)`
+- New upvalue captured by `fetchDailyLimit`: `var3774 (write)`
+- New upvalue captured by `fetchDailyLimit`: `var3776 (write)`
+- New upvalue captured by `fetchDailyLimit`: `var3778 (write)`
+- Upvalue no longer captured by `fetchDailyLimit`: `ffk`
+- Upvalue no longer captured by `fetchDailyLimit`: `KU`
+- Upvalue no longer captured by `fetchDailyLimit`: `var3726 (write)`
+- Upvalue no longer captured by `fetchDailyLimit`: `var3727 (write)`
+- Upvalue no longer captured by `fetchDailyLimit`: `var3729 (write)`
+- Upvalue no longer captured by `fetchDailyLimit`: `var3731 (write)`
+- New upvalue captured by `refreshQuotaSummary`: `KV`
+- New upvalue captured by `refreshQuotaSummary`: `var3773 (write)`
+- New upvalue captured by `refreshQuotaSummary`: `var3778 (write)`
+- Upvalue no longer captured by `refreshQuotaSummary`: `KU`
+- Upvalue no longer captured by `refreshQuotaSummary`: `var3726 (write)`
+- Upvalue no longer captured by `refreshQuotaSummary`: `var3731 (write)`
+- New upvalue captured by `refreshDailyLimit`: `KV`
+- New upvalue captured by `refreshDailyLimit`: `var3773 (write)`
+- New upvalue captured by `refreshDailyLimit`: `var3778 (write)`
+- Upvalue no longer captured by `refreshDailyLimit`: `KU`
+- Upvalue no longer captured by `refreshDailyLimit`: `var3726 (write)`
+- Upvalue no longer captured by `refreshDailyLimit`: `var3731 (write)`
+- New upvalue captured by `setDailyLimit`: `ffy`
+- New upvalue captured by `setDailyLimit`: `KV`
+- New upvalue captured by `setDailyLimit`: `var3773 (write)`
+- New upvalue captured by `setDailyLimit`: `var3774 (write)`
+- New upvalue captured by `setDailyLimit`: `var3777 (write)`
+- New upvalue captured by `setDailyLimit`: `var3778 (write)`
+- Upvalue no longer captured by `setDailyLimit`: `ffk`
+- Upvalue no longer captured by `setDailyLimit`: `KU`
+- Upvalue no longer captured by `setDailyLimit`: `var3726 (write)`
+- Upvalue no longer captured by `setDailyLimit`: `var3727 (write)`
+- Upvalue no longer captured by `setDailyLimit`: `var3730 (write)`
+- Upvalue no longer captured by `setDailyLimit`: `var3731 (write)`
+- New upvalue captured by `clear`: `var3773 (write)`
+- New upvalue captured by `clear`: `var3774 (write)`
+- New upvalue captured by `dispose`: `var3773 (write)`
+- New upvalue captured by `dispose`: `var3774 (write)`
+- New upvalue captured by `dispose`: `var3778 (write)`
+- Upvalue no longer captured by `dispose`: `var3726 (write)`
+- Upvalue no longer captured by `dispose`: `var3727 (write)`
+- Upvalue no longer captured by `dispose`: `var3731 (write)`
+- New upvalue captured by `scheduleAutoPopulate`: `lt`
+- New upvalue captured by `scheduleAutoPopulate`: `var3797 (write)`
+- New upvalue captured by `scheduleAutoPopulate`: `var3798 (write)`
+- Upvalue no longer captured by `scheduleAutoPopulate`: `ls`
+- Upvalue no longer captured by `scheduleAutoPopulate`: `var3750 (write)`
+- Upvalue no longer captured by `scheduleAutoPopulate`: `var3751 (write)`
+- New upvalue captured by `getQuotaSummary`: `lt`
+- New upvalue captured by `getQuotaSummary`: `var3797 (write)`
+- New upvalue captured by `getQuotaSummary`: `var3798 (write)`
+- Upvalue no longer captured by `getQuotaSummary`: `ls`
+- Upvalue no longer captured by `getQuotaSummary`: `var3750 (write)`
+- Upvalue no longer captured by `getQuotaSummary`: `var3751 (write)`
+- New upvalue captured by `refreshQuotaSummary`: `KV`
+- New upvalue captured by `refreshQuotaSummary`: `var3797 (write)`
+- Upvalue no longer captured by `refreshQuotaSummary`: `KU`
+- Upvalue no longer captured by `refreshQuotaSummary`: `var3750 (write)`
+- New upvalue captured by `refreshDailyLimit`: `KV`
+- Upvalue no longer captured by `refreshDailyLimit`: `KU`
+- New upvalue captured by `setDailyLimit`: `KV`
+- Upvalue no longer captured by `setDailyLimit`: `KU`
+- New upvalue captured by `_setAutoPopulate`: `var3797 (write)`
+- New upvalue captured by `_setAutoPopulate`: `var3798 (write)`
+- Upvalue no longer captured by `_setAutoPopulate`: `var3750 (write)`
+- Upvalue no longer captured by `_setAutoPopulate`: `var3751 (write)`
+- New upvalue captured by `fft`: `var1 (write)`
+- Upvalue no longer captured by `ffA`: `var1 (write)`
+- New upvalue captured by `useCreatorCreditMenuItem`: `eGC`
+- New upvalue captured by `useCreatorCreditMenuItem`: `eGG`
+- New upvalue captured by `useCreatorCreditMenuItem`: `eHE`
+- New upvalue captured by `useCreatorCreditMenuItem`: `ffA`
+- Upvalue no longer captured by `useCreatorCreditMenuItem`: `eEH`
+- Upvalue no longer captured by `useCreatorCreditMenuItem`: `eEL`
+- Upvalue no longer captured by `useCreatorCreditMenuItem`: `eGA`
+- Upvalue no longer captured by `useCreatorCreditMenuItem`: `ffm`
+- Upvalue no longer captured by `ffH`: `var1 (write)`
+- New upvalue captured by `flushActiveTurn`: `var3830 (write)`
+- New upvalue captured by `flushActiveTurn`: `var3831 (write)`
+- New upvalue captured by `flushActiveTurn`: `var3832 (write)`
+- New upvalue captured by `flushActiveTurn`: `var3834 (write)`
+- Upvalue no longer captured by `flushActiveTurn`: `var3783 (write)`
+- Upvalue no longer captured by `flushActiveTurn`: `var3784 (write)`
+- Upvalue no longer captured by `flushActiveTurn`: `var3785 (write)`
+- Upvalue no longer captured by `flushActiveTurn`: `var3787 (write)`
+- New upvalue captured by `usePublishStatus`: `eGC`
+- New upvalue captured by `usePublishStatus`: `eGI`
+- New upvalue captured by `usePublishStatus`: `eHE`
+- New upvalue captured by `usePublishStatus`: `eJa`
+- New upvalue captured by `usePublishStatus`: `ffF`
+- Upvalue no longer captured by `usePublishStatus`: `eEH`
+- Upvalue no longer captured by `usePublishStatus`: `eEN`
+- Upvalue no longer captured by `usePublishStatus`: `eGA`
+- Upvalue no longer captured by `usePublishStatus`: `eGY`
+- Upvalue no longer captured by `usePublishStatus`: `ffr`
+- Upvalue no longer captured by `ffL`: `var1 (write)`
+- Upvalue no longer captured by `ffP`: `var1 (write)`
+- New upvalue captured by `getRemote`: `ffP`
+- New upvalue captured by `getRemote`: `var3884 (write)`
+- Upvalue no longer captured by `getRemote`: `ffB`
+- Upvalue no longer captured by `getRemote`: `var3837 (write)`
+- New function: `var3898`
+- New function: `var3897`
+- Upvalue no longer captured by `ffQ`: `var1 (write)`
+- New upvalue captured by `resolveMutatingNetwork`: `md`
+- New upvalue captured by `resolveMutatingNetwork`: `rv`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `mc`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `ru`
+- New upvalue captured by `addPlaytester`: `md`
+- New upvalue captured by `addPlaytester`: `rv`
+- Upvalue no longer captured by `addPlaytester`: `mc`
+- Upvalue no longer captured by `addPlaytester`: `ru`
+- New upvalue captured by `removePlaytester`: `md`
+- New upvalue captured by `removePlaytester`: `rv`
+- Upvalue no longer captured by `removePlaytester`: `mc`
+- Upvalue no longer captured by `removePlaytester`: `ru`
+- New upvalue captured by `ffW`: `var1 (write)`
+- New upvalue captured by `getFor`: `KR`
+- Upvalue no longer captured by `getFor`: `KQ`
+- Upvalue no longer captured by `clear`: `cancel`
+- Upvalue no longer captured by `clear`: `var5437 (write)`
+- New upvalue captured by `fetchFn`: `ffV`
+- Upvalue no longer captured by `fetchFn`: `ffH`
+- New upvalue captured by `sendInvites`: `ffV`
+- New upvalue captured by `sendInvites`: `KV`
+- Upvalue no longer captured by `sendInvites`: `ffH`
+- Upvalue no longer captured by `sendInvites`: `KU`
+- New upvalue captured by `removeInvite`: `ffV`
+- Upvalue no longer captured by `removeInvite`: `ffH`
+- New upvalue captured by `ffS`: `var1 (write)`
+- New upvalue captured by `ffR`: `var1 (write)`
+- New upvalue captured by `getPublishText`: `eGG`
+- New upvalue captured by `getPublishText`: `ffE`
+- Upvalue no longer captured by `getPublishText`: `eEL`
+- Upvalue no longer captured by `getPublishText`: `ffq`
+- New upvalue captured by `onShareActivated`: `eJa`
+- New upvalue captured by `onShareActivated`: `eJi`
+- Upvalue no longer captured by `onShareActivated`: `eGY`
+- Upvalue no longer captured by `onShareActivated`: `eHg`
+- New upvalue captured by `onPlaytestActivated`: `drH`
+- New upvalue captured by `onPlaytestActivated`: `ffI`
+- Upvalue no longer captured by `onPlaytestActivated`: `dnD`
+- Upvalue no longer captured by `onPlaytestActivated`: `ffu`
+- New upvalue captured by `onActivated`: `ffp`
+- Upvalue no longer captured by `onActivated`: `ffb`
+- New upvalue captured by `onActivated`: `drH`
+- Upvalue no longer captured by `onActivated`: `dnD`
+- New upvalue captured by `useItems`: `eGC`
+- New upvalue captured by `useItems`: `eHE`
+- New upvalue captured by `useItems`: `eIm`
+- New upvalue captured by `useItems`: `ffp`
+- Upvalue no longer captured by `useItems`: `eEH`
+- Upvalue no longer captured by `useItems`: `eGA`
+- Upvalue no longer captured by `useItems`: `eGo`
+- Upvalue no longer captured by `useItems`: `ffb`
+- New function: `eIt`
+- New upvalue captured by `ffY`: `var1 (write)`
+- New upvalue captured by `fga`: `var1 (write)`
+- New upvalue captured by `ffZ`: `var1 (write)`
+- New upvalue captured by `fgb`: `var1 (write)`
+- Upvalue no longer captured by `fgg`: `var1 (write)`
+- Upvalue no longer captured by `fgk`: `var1 (write)`
+- New upvalue captured by `setEnabled`: `var4029 (write)`
+- Upvalue no longer captured by `setEnabled`: `var3982 (write)`
+- New upvalue captured by `isEnabled`: `var4029 (write)`
+- Upvalue no longer captured by `isEnabled`: `var3982 (write)`
+- New upvalue captured by `log`: `var4029 (write)`
+- Upvalue no longer captured by `log`: `var3982 (write)`
+- Upvalue no longer captured by `fgm`: `var1 (write)`
+- Upvalue no longer captured by `fgn`: `var1 (write)`
+- Upvalue no longer captured by `fgo`: `var1 (write)`
+- New upvalue captured by `input`: `fgj`
+- Upvalue no longer captured by `input`: `ffV`
+- Upvalue no longer captured by `fgt`: `var1 (write)`
+- New upvalue captured by `fgy`: `var1 (write)`
+- New upvalue captured by `applyItemPatches`: `KX`
+- Upvalue no longer captured by `applyItemPatches`: `KW`
+- New upvalue captured by `fetchFn`: `fgz`
+- Upvalue no longer captured by `fetchFn`: `fgl`
+- New upvalue captured by `refreshSearch`: `fgz`
+- Upvalue no longer captured by `refreshSearch`: `fgl`
+- New upvalue captured by `updateSearchItem`: `KX`
+- Upvalue no longer captured by `updateSearchItem`: `KW`
+- New upvalue captured by `createUniverse`: `fgv`
+- Upvalue no longer captured by `createUniverse`: `fgh`
+- New upvalue captured by `fgs`: `var1 (write)`
+- New upvalue captured by `fgr`: `var1 (write)`
+- Upvalue no longer captured by `fgD`: `var1 (write)`
+- Upvalue no longer captured by `fgE`: `var1 (write)`
+- Upvalue no longer captured by `fgF`: `var1 (write)`
+- New upvalue captured by `setAnswerFlow`: `var4278 (write)`
+- Upvalue no longer captured by `setAnswerFlow`: `var4231 (write)`
+- New upvalue captured by `setCurrentAnswerStackPrompt`: `var4278 (write)`
+- Upvalue no longer captured by `setCurrentAnswerStackPrompt`: `var4231 (write)`
+- New function: `var4287`
+- New upvalue captured by `submitAskUserResponses`: `eIq`
+- New upvalue captured by `submitAskUserResponses`: `fgF`
+- New upvalue captured by `submitAskUserResponses`: `var4278 (write)`
+- Upvalue no longer captured by `submitAskUserResponses`: `eGm`
+- Upvalue no longer captured by `submitAskUserResponses`: `fgq`
+- Upvalue no longer captured by `submitAskUserResponses`: `var4231 (write)`
+- New upvalue captured by `submitAskUserCancellation`: `eIq`
+- New upvalue captured by `submitAskUserCancellation`: `var4278 (write)`
+- Upvalue no longer captured by `submitAskUserCancellation`: `eGm`
+- Upvalue no longer captured by `submitAskUserCancellation`: `var4231 (write)`
+- New upvalue captured by `onAnswerSelectedImpl`: `var4278 (write)`
+- Upvalue no longer captured by `onAnswerSelectedImpl`: `var4231 (write)`
+- New upvalue captured by `onAnswerConfirmedImpl`: `var4278 (write)`
+- Upvalue no longer captured by `onAnswerConfirmedImpl`: `var4231 (write)`
+- New upvalue captured by `syncAnswerStack`: `var4284 (write)`
+- Upvalue no longer captured by `syncAnswerStack`: `var4237 (write)`
+- New upvalue captured by `hasDisplayedAnswerStack`: `var4284 (write)`
+- Upvalue no longer captured by `hasDisplayedAnswerStack`: `var4237 (write)`
+- New upvalue captured by `stopPendingAnswer`: `var4278 (write)`
+- Upvalue no longer captured by `stopPendingAnswer`: `var4231 (write)`
+- New upvalue captured by `trySubmitComposerText`: `var4278 (write)`
+- Upvalue no longer captured by `trySubmitComposerText`: `var4231 (write)`
+- Upvalue no longer captured by `fgN`: `var1 (write)`
+- New upvalue captured by `collectResult`: `fgN`
+- Upvalue no longer captured by `collectResult`: `fgy`
+- New upvalue captured by `submitResult`: `eIq`
+- New upvalue captured by `submitResult`: `fgL`
+- Upvalue no longer captured by `submitResult`: `eGm`
+- Upvalue no longer captured by `submitResult`: `fgw`
+- New upvalue captured by `fgP`: `var1 (write)`
+- New upvalue captured by `pushCapped`: `fgQ`
+- Upvalue no longer captured by `pushCapped`: `fgB`
+- New upvalue captured by `collectClientLogs`: `fgQ`
+- Upvalue no longer captured by `collectClientLogs`: `fgB`
+- New upvalue captured by `trimServerLogs`: `fgQ`
+- Upvalue no longer captured by `trimServerLogs`: `fgB`
+- New upvalue captured by `stopServerLogCollection`: `var4436 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4437 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4438 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4440 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4441 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4442 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4443 (write)`
+- New upvalue captured by `stopServerLogCollection`: `var4444 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4389 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4390 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4391 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4393 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4394 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4395 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4396 (write)`
+- Upvalue no longer captured by `stopServerLogCollection`: `var4397 (write)`
+- New upvalue captured by `startServerLogCollection`: `fgG`
+- New upvalue captured by `startServerLogCollection`: `fgQ`
+- New upvalue captured by `startServerLogCollection`: `var4436 (write)`
+- New upvalue captured by `startServerLogCollection`: `var4437 (write)`
+- New upvalue captured by `startServerLogCollection`: `var4438 (write)`
+- New upvalue captured by `startServerLogCollection`: `var4444 (write)`
+- New upvalue captured by `startServerLogCollection`: `var4445 (write)`
+- Upvalue no longer captured by `startServerLogCollection`: `fgB`
+- Upvalue no longer captured by `startServerLogCollection`: `fgr`
+- Upvalue no longer captured by `startServerLogCollection`: `var4389 (write)`
+- Upvalue no longer captured by `startServerLogCollection`: `var4390 (write)`
+- Upvalue no longer captured by `startServerLogCollection`: `var4391 (write)`
+- Upvalue no longer captured by `startServerLogCollection`: `var4397 (write)`
+- Upvalue no longer captured by `startServerLogCollection`: `var4398 (write)`
+- New upvalue captured by `getCollectedServerLogs`: `fgQ`
+- Upvalue no longer captured by `getCollectedServerLogs`: `fgB`
+- New function: `var4445`
+- New upvalue captured by `collectToolResultContent`: `fgG`
+- Upvalue no longer captured by `collectToolResultContent`: `fgr`
+- New upvalue captured by `fgO`: `var1 (write)`
+- New upvalue captured by `submitClientLogsResult`: `eIq`
+- New upvalue captured by `submitClientLogsResult`: `fgG`
+- New upvalue captured by `submitClientLogsResult`: `fgP`
+- Upvalue no longer captured by `submitClientLogsResult`: `eGm`
+- Upvalue no longer captured by `submitClientLogsResult`: `fgA`
+- Upvalue no longer captured by `submitClientLogsResult`: `fgr`
+- New upvalue captured by `fgR`: `var1 (write)`
+- New upvalue captured by `setPlanFlow`: `var4528 (write)`
+- Upvalue no longer captured by `setPlanFlow`: `var4481 (write)`
+- New upvalue captured by `submitPlanResult`: `eIq`
+- New upvalue captured by `submitPlanResult`: `fgF`
+- New upvalue captured by `submitPlanResult`: `var4528 (write)`
+- Upvalue no longer captured by `submitPlanResult`: `eGm`
+- Upvalue no longer captured by `submitPlanResult`: `fgq`
+- Upvalue no longer captured by `submitPlanResult`: `var4481 (write)`
+- New upvalue captured by `submitPlanFeedback`: `fgF`
+- Upvalue no longer captured by `submitPlanFeedback`: `fgq`
+- New upvalue captured by `setCurrentPlanProposal`: `var4528 (write)`
+- Upvalue no longer captured by `setCurrentPlanProposal`: `var4481 (write)`
+- New upvalue captured by `onPlanAcceptedImpl`: `var4528 (write)`
+- Upvalue no longer captured by `onPlanAcceptedImpl`: `var4481 (write)`
+- New upvalue captured by `syncPlanProposal`: `var4535 (write)`
+- New upvalue captured by `syncPlanProposal`: `var4536 (write)`
+- New upvalue captured by `syncPlanProposal`: `var4537 (write)`
+- Upvalue no longer captured by `syncPlanProposal`: `var4488 (write)`
+- Upvalue no longer captured by `syncPlanProposal`: `var4489 (write)`
+- Upvalue no longer captured by `syncPlanProposal`: `var4490 (write)`
+- New upvalue captured by `stopPendingPlan`: `var4528 (write)`
+- Upvalue no longer captured by `stopPendingPlan`: `var4481 (write)`
+- New upvalue captured by `trySubmitComposerText`: `fgF`
+- New upvalue captured by `trySubmitComposerText`: `var4528 (write)`
+- Upvalue no longer captured by `trySubmitComposerText`: `fgq`
+- Upvalue no longer captured by `trySubmitComposerText`: `var4481 (write)`
+- New upvalue captured by `fgI`: `var1 (write)`
+- New upvalue captured by `getPromptFailureComposerError`: `eGG`
+- Upvalue no longer captured by `getPromptFailureComposerError`: `eEL`
+- New upvalue captured by `getToolResultFailureComposerError`: `eGG`
+- Upvalue no longer captured by `getToolResultFailureComposerError`: `eEL`
+- New upvalue captured by `formatSetupErrorMessage`: `eGG`
+- Upvalue no longer captured by `formatSetupErrorMessage`: `eEL`
+- New upvalue captured by `createLocalToolControllers`: `fgJ`
+- New upvalue captured by `createLocalToolControllers`: `fgK`
+- New upvalue captured by `createLocalToolControllers`: `fgO`
+- New upvalue captured by `createLocalToolControllers`: `fgR`
+- Upvalue no longer captured by `createLocalToolControllers`: `fgC`
+- Upvalue no longer captured by `createLocalToolControllers`: `fgu`
+- Upvalue no longer captured by `createLocalToolControllers`: `fgv`
+- Upvalue no longer captured by `createLocalToolControllers`: `fgz`
+- New upvalue captured by `createLiveAssistantTurn`: `drH`
+- New upvalue captured by `createLiveAssistantTurn`: `eGG`
+- New upvalue captured by `createLiveAssistantTurn`: `fgS`
+- Upvalue no longer captured by `createLiveAssistantTurn`: `dnD`
+- Upvalue no longer captured by `createLiveAssistantTurn`: `eEL`
+- Upvalue no longer captured by `createLiveAssistantTurn`: `fgD`
+- New upvalue captured by `onDroppedChatMessage`: `drH`
+- Upvalue no longer captured by `onDroppedChatMessage`: `dnD`
+- New upvalue captured by `onCompleted`: `drH`
+- New upvalue captured by `onCompleted`: `var4574 (write)`
+- Upvalue no longer captured by `onCompleted`: `dnD`
+- Upvalue no longer captured by `onCompleted`: `var4527 (write)`
+- New upvalue captured by `getSetupErrorText`: `eGG`
+- New upvalue captured by `getSetupErrorText`: `var4574 (write)`
+- Upvalue no longer captured by `getSetupErrorText`: `eEL`
+- Upvalue no longer captured by `getSetupErrorText`: `var4527 (write)`
+- New upvalue captured by `start`: `var4574 (write)`
+- Upvalue no longer captured by `start`: `var4527 (write)`
+- New upvalue captured by `stop`: `var4574 (write)`
+- Upvalue no longer captured by `stop`: `var4527 (write)`
+- New upvalue captured by `createResumedAssistantTurn`: `drH`
+- New upvalue captured by `createResumedAssistantTurn`: `eIm`
+- Upvalue no longer captured by `createResumedAssistantTurn`: `dnD`
+- Upvalue no longer captured by `createResumedAssistantTurn`: `eGo`
+- New upvalue captured by `cleanupObservers`: `var4582 (write)`
+- New upvalue captured by `cleanupObservers`: `var4583 (write)`
+- Upvalue no longer captured by `cleanupObservers`: `var4535 (write)`
+- Upvalue no longer captured by `cleanupObservers`: `var4536 (write)`
+- New upvalue captured by `finish`: `var4581 (write)`
+- New upvalue captured by `finish`: `var4582 (write)`
+- New upvalue captured by `finish`: `var4583 (write)`
+- Upvalue no longer captured by `finish`: `var4534 (write)`
+- Upvalue no longer captured by `finish`: `var4535 (write)`
+- Upvalue no longer captured by `finish`: `var4536 (write)`
+- New upvalue captured by `start`: `drH`
+- New upvalue captured by `start`: `eIm`
+- New upvalue captured by `start`: `var4580 (write)`
+- New upvalue captured by `start`: `var4581 (write)`
+- New upvalue captured by `start`: `var4582 (write)`
+- New upvalue captured by `start`: `var4583 (write)`
+- Upvalue no longer captured by `start`: `dnD`
+- Upvalue no longer captured by `start`: `eGo`
+- Upvalue no longer captured by `start`: `var4533 (write)`
+- Upvalue no longer captured by `start`: `var4534 (write)`
+- Upvalue no longer captured by `start`: `var4535 (write)`
+- Upvalue no longer captured by `start`: `var4536 (write)`
+- New upvalue captured by `onDroppedChatMessage`: `drH`
+- Upvalue no longer captured by `onDroppedChatMessage`: `dnD`
+- New upvalue captured by `stop`: `var4581 (write)`
+- New upvalue captured by `stop`: `var4582 (write)`
+- New upvalue captured by `stop`: `var4583 (write)`
+- Upvalue no longer captured by `stop`: `var4534 (write)`
+- Upvalue no longer captured by `stop`: `var4535 (write)`
+- Upvalue no longer captured by `stop`: `var4536 (write)`
+- New upvalue captured by `detach`: `var4581 (write)`
+- New upvalue captured by `detach`: `var4582 (write)`
+- New upvalue captured by `detach`: `var4583 (write)`
+- Upvalue no longer captured by `detach`: `var4534 (write)`
+- Upvalue no longer captured by `detach`: `var4535 (write)`
+- Upvalue no longer captured by `detach`: `var4536 (write)`
+- New function: `shouldOptimisticallyDisplay`
+- New upvalue captured by `isScrolledToBottom`: `eIq`
+- Upvalue no longer captured by `isScrolledToBottom`: `eGm`
+- New upvalue captured by `syncScrollFromBottom`: `eIq`
+- Upvalue no longer captured by `syncScrollFromBottom`: `eGm`
+- Upvalue no longer captured by `fgW`: `var1 (write)`
+- New upvalue captured by `onScrollViewportChanged`: `fgW`
+- Upvalue no longer captured by `onScrollViewportChanged`: `fgG`
+- Upvalue no longer captured by `fgX`: `var1 (write)`
+- Upvalue no longer captured by `fgY`: `var1 (write)`
+- New upvalue captured by `refreshVersionHistoryAfterPublish`: `eIw`
+- Upvalue no longer captured by `refreshVersionHistoryAfterPublish`: `eGt`
+- New upvalue captured by `tryFocus`: `var4651 (write)`
+- Upvalue no longer captured by `tryFocus`: `var4601 (write)`
+- New upvalue captured by `getLiveAssistantMessage`: `fgH`
+- Upvalue no longer captured by `getLiveAssistantMessage`: `fgs`
+- New function: `var4725`
+- New upvalue captured by `setHistoryLoading`: `fgY`
+- New upvalue captured by `setHistoryLoading`: `var4726 (write)`
+- Upvalue no longer captured by `setHistoryLoading`: `fgI`
+- Upvalue no longer captured by `setHistoryLoading`: `var4676 (write)`
+- New upvalue captured by `isHydrateCancelled`: `var4726 (write)`
+- Upvalue no longer captured by `isHydrateCancelled`: `var4676 (write)`
+- New upvalue captured by `continueAfterSessionReady`: `var4726 (write)`
+- Upvalue no longer captured by `continueAfterSessionReady`: `var4676 (write)`
+- New upvalue captured by `hydrateKnownSession`: `fgY`
+- New upvalue captured by `hydrateKnownSession`: `var4726 (write)`
+- Upvalue no longer captured by `hydrateKnownSession`: `fgI`
+- Upvalue no longer captured by `hydrateKnownSession`: `var4676 (write)`
+- New upvalue captured by `refreshKnownSession`: `var4738 (write)`
+- Upvalue no longer captured by `refreshKnownSession`: `var4688 (write)`
+- New upvalue captured by `attachResumedTurn`: `fgF`
+- New upvalue captured by `attachResumedTurn`: `fgI`
+- Upvalue no longer captured by `attachResumedTurn`: `fgq`
+- Upvalue no longer captured by `attachResumedTurn`: `fgt`
+- New function: `var4764`
+- New upvalue captured by `tryFocus`: `var4765 (write)`
+- Upvalue no longer captured by `tryFocus`: `var4715 (write)`
+- New upvalue captured by `fgd`: `var1 (write)`
+- Upvalue no longer captured by `fhe`: `var1 (write)`
+- New upvalue captured by `fhg`: `var1 (write)`
+- New upvalue captured by `formatTurnFailureMessage`: `eGG`
+- Upvalue no longer captured by `formatTurnFailureMessage`: `eEL`
+- New upvalue captured by `formatStepCount`: `eGG`
+- Upvalue no longer captured by `formatStepCount`: `eEL`
+- New upvalue captured by `formatWorkedDuration`: `eGG`
+- Upvalue no longer captured by `formatWorkedDuration`: `eEL`
+- New upvalue captured by `getTurnWorkedDurationLabel`: `eGG`
+- Upvalue no longer captured by `getTurnWorkedDurationLabel`: `eEL`
+- New upvalue captured by `getToolActivityLabel`: `eGG`
+- Upvalue no longer captured by `getToolActivityLabel`: `eEL`
+- New upvalue captured by `getActiveActivityLabel`: `eGG`
+- Upvalue no longer captured by `getActiveActivityLabel`: `eEL`
+- New upvalue captured by `getAskUserActivityLabel`: `eGG`
+- Upvalue no longer captured by `getAskUserActivityLabel`: `eEL`
+- New upvalue captured by `makeActiveActivitySummary`: `eGG`
+- Upvalue no longer captured by `makeActiveActivitySummary`: `eEL`
+- New upvalue captured by `flushActivity`: `var4892 (write)`
+- New upvalue captured by `flushActivity`: `var4893 (write)`
+- Upvalue no longer captured by `flushActivity`: `var4842 (write)`
+- Upvalue no longer captured by `flushActivity`: `var4843 (write)`
+- New upvalue captured by `makeTurnWorkSegment`: `eGG`
+- Upvalue no longer captured by `makeTurnWorkSegment`: `eEL`
+- New upvalue captured by `projectTurnSegments`: `eGG`
+- New upvalue captured by `projectTurnSegments`: `ffH`
+- New upvalue captured by `projectTurnSegments`: `fhg`
+- New upvalue captured by `projectTurnSegments`: `fhh`
+- Upvalue no longer captured by `projectTurnSegments`: `eEL`
+- Upvalue no longer captured by `projectTurnSegments`: `fft`
+- Upvalue no longer captured by `projectTurnSegments`: `fgQ`
+- Upvalue no longer captured by `projectTurnSegments`: `fgR`
+- New upvalue captured by `projectLoadingTurnSegments`: `eGG`
+- Upvalue no longer captured by `projectLoadingTurnSegments`: `eEL`
+- Upvalue no longer captured by `fhi`: `var1 (write)`
+- Upvalue no longer captured by `fhj`: `var1 (write)`
+- New upvalue captured by `fhm`: `var1 (write)`
+- New upvalue captured by `AgentPlanSheet`: `eGA`
+- New upvalue captured by `AgentPlanSheet`: `eGC`
+- New upvalue captured by `AgentPlanSheet`: `eGG`
+- New upvalue captured by `AgentPlanSheet`: `fhk`
+- Upvalue no longer captured by `AgentPlanSheet`: `eEF`
+- Upvalue no longer captured by `AgentPlanSheet`: `eEH`
+- Upvalue no longer captured by `AgentPlanSheet`: `eEL`
+- Upvalue no longer captured by `AgentPlanSheet`: `fgU`
+- New upvalue captured by `getFeedbackIcons`: `fhr`
+- Upvalue no longer captured by `getFeedbackIcons`: `fhb`
+- New upvalue captured by `getVersionNote`: `eII`
+- Upvalue no longer captured by `getVersionNote`: `eGG`
+- New upvalue captured by `rollbackPublishedVersion`: `eIE`
+- New upvalue captured by `rollbackPublishedVersion`: `eIH`
+- New upvalue captured by `rollbackPublishedVersion`: `eIS`
+- New upvalue captured by `rollbackPublishedVersion`: `eIw`
+- Upvalue no longer captured by `rollbackPublishedVersion`: `eGC`
+- Upvalue no longer captured by `rollbackPublishedVersion`: `eGF`
+- Upvalue no longer captured by `rollbackPublishedVersion`: `eGQ`
+- Upvalue no longer captured by `rollbackPublishedVersion`: `eGt`
+- New upvalue captured by `useAgentMessageCopy`: `eGC`
+- Upvalue no longer captured by `useAgentMessageCopy`: `eEH`
+- New upvalue captured by `getRollbackInProgressSignal`: `eIm`
+- Upvalue no longer captured by `getRollbackInProgressSignal`: `eGo`
+- New upvalue captured by `onRestore`: `fhr`
+- New upvalue captured by `onRestore`: `fht`
+- New upvalue captured by `onRestore`: `fhu`
+- Upvalue no longer captured by `onRestore`: `fhb`
+- Upvalue no longer captured by `onRestore`: `fhd`
+- Upvalue no longer captured by `onRestore`: `fhe`
+- Upvalue no longer captured by `fhx`: `var1 (write)`
+- New upvalue captured by `useEscapedRichText`: `eGC`
+- Upvalue no longer captured by `useEscapedRichText`: `eEH`
+- New upvalue captured by `UserMessageBubble`: `eGC`
+- New upvalue captured by `UserMessageBubble`: `fhw`
+- Upvalue no longer captured by `UserMessageBubble`: `eEH`
+- Upvalue no longer captured by `UserMessageBubble`: `fhg`
+- New upvalue captured by `CopyableUserMessageBubble`: `eGC`
+- New upvalue captured by `CopyableUserMessageBubble`: `eGG`
+- New upvalue captured by `CopyableUserMessageBubble`: `fhx`
+- Upvalue no longer captured by `CopyableUserMessageBubble`: `eEH`
+- Upvalue no longer captured by `CopyableUserMessageBubble`: `eEL`
+- Upvalue no longer captured by `CopyableUserMessageBubble`: `fhh`
+- New upvalue captured by `onSecondaryActivated`: `fhx`
+- Upvalue no longer captured by `onSecondaryActivated`: `fhh`
+- New upvalue captured by `useReactiveValue`: `eGC`
+- New upvalue captured by `useReactiveValue`: `eHE`
+- Upvalue no longer captured by `useReactiveValue`: `eEH`
+- Upvalue no longer captured by `useReactiveValue`: `eGA`
+- New upvalue captured by `createThinkingGradient`: `eGC`
+- New upvalue captured by `createThinkingGradient`: `eIq`
+- Upvalue no longer captured by `createThinkingGradient`: `eEH`
+- Upvalue no longer captured by `createThinkingGradient`: `eGm`
+- New upvalue captured by `createActivityText`: `eGC`
+- Upvalue no longer captured by `createActivityText`: `eEH`
+- New upvalue captured by `createActivityItem`: `fhg`
+- Upvalue no longer captured by `createActivityItem`: `fgQ`
+- New upvalue captured by `createActivitySummaryActionText`: `eGC`
+- Upvalue no longer captured by `createActivitySummaryActionText`: `eEH`
+- New upvalue captured by `getActivitySummaryActionText`: `eGG`
+- New upvalue captured by `getActivitySummaryActionText`: `eIq`
+- Upvalue no longer captured by `getActivitySummaryActionText`: `eEL`
+- Upvalue no longer captured by `getActivitySummaryActionText`: `eGm`
+- New upvalue captured by `localizeActivityLabel`: `eGG`
+- Upvalue no longer captured by `localizeActivityLabel`: `eEL`
+- New function: `var5114`
+- New upvalue captured by `useReactiveValue`: `eGC`
+- New upvalue captured by `useReactiveValue`: `eHE`
+- Upvalue no longer captured by `useReactiveValue`: `eEH`
+- Upvalue no longer captured by `useReactiveValue`: `eGA`
+- New upvalue captured by `AnswerStackSection`: `eGC`
+- New upvalue captured by `AnswerStackSection`: `eGG`
+- New upvalue captured by `AnswerStackSection`: `fho`
+- New upvalue captured by `AnswerStackSection`: `fhp`
+- Upvalue no longer captured by `AnswerStackSection`: `eEH`
+- Upvalue no longer captured by `AnswerStackSection`: `eEL`
+- Upvalue no longer captured by `AnswerStackSection`: `fgY`
+- Upvalue no longer captured by `AnswerStackSection`: `fgZ`
+- New upvalue captured by `PlanProposalSection`: `eGC`
+- New upvalue captured by `PlanProposalSection`: `fhl`
+- New upvalue captured by `PlanProposalSection`: `fhv`
+- Upvalue no longer captured by `PlanProposalSection`: `eEH`
+- Upvalue no longer captured by `PlanProposalSection`: `fgV`
+- Upvalue no longer captured by `PlanProposalSection`: `fhf`
+- New upvalue captured by `AgentMessageSegment`: `eGA`
+- New upvalue captured by `AgentMessageSegment`: `eGC`
+- New upvalue captured by `AgentMessageSegment`: `eGG`
+- New upvalue captured by `AgentMessageSegment`: `fhk`
+- Upvalue no longer captured by `AgentMessageSegment`: `eEF`
+- Upvalue no longer captured by `AgentMessageSegment`: `eEH`
+- Upvalue no longer captured by `AgentMessageSegment`: `eEL`
+- Upvalue no longer captured by `AgentMessageSegment`: `fgU`
+- New upvalue captured by `renderClientToolSegment`: `eGC`
+- Upvalue no longer captured by `renderClientToolSegment`: `eEH`
+- New upvalue captured by `renderWorkSegment`: `eGC`
+- New upvalue captured by `renderWorkSegment`: `fhA`
+- Upvalue no longer captured by `renderWorkSegment`: `eEH`
+- Upvalue no longer captured by `renderWorkSegment`: `fhk`
+- New upvalue captured by `TurnWorkSegment`: `eGA`
+- New upvalue captured by `TurnWorkSegment`: `eGC`
+- New upvalue captured by `TurnWorkSegment`: `eGG`
+- Upvalue no longer captured by `TurnWorkSegment`: `eEF`
+- Upvalue no longer captured by `TurnWorkSegment`: `eEH`
+- Upvalue no longer captured by `TurnWorkSegment`: `eEL`
+- New upvalue captured by `fhb`: `var1 (write)`
+- Upvalue no longer captured by `fhC`: `var1 (write)`
+- New upvalue captured by `fhB`: `var1 (write)`
+- New upvalue captured by `createTrailingIndicator`: `eGC`
+- New upvalue captured by `createTrailingIndicator`: `fhG`
+- Upvalue no longer captured by `createTrailingIndicator`: `eEH`
+- Upvalue no longer captured by `createTrailingIndicator`: `fhq`
+- Upvalue no longer captured by `fhH`: `var1 (write)`
+- New upvalue captured by `fhE`: `var1 (write)`
+- New upvalue captured by `taskMatchesSearch`: `fhH`
+- Upvalue no longer captured by `taskMatchesSearch`: `fhr`
+- New upvalue captured by `shouldIncludeTask`: `fhH`
+- Upvalue no longer captured by `shouldIncludeTask`: `fhr`
+- New upvalue captured by `buildStatusMenuItems`: `var5253 (write)`
+- Upvalue no longer captured by `buildStatusMenuItems`: `var5203 (write)`
+- New upvalue captured by `getStatusText`: `eGG`
+- Upvalue no longer captured by `getStatusText`: `eEL`
+- New upvalue captured by `AgentTaskList`: `eGC`
+- Upvalue no longer captured by `AgentTaskList`: `eEH`
+- New upvalue captured by `AgentCard`: `eGC`
+- New upvalue captured by `AgentCard`: `eGG`
+- New upvalue captured by `AgentCard`: `fhG`
+- Upvalue no longer captured by `AgentCard`: `eEH`
+- Upvalue no longer captured by `AgentCard`: `eEL`
+- Upvalue no longer captured by `AgentCard`: `fhq`
+- New function: `eIp`
+- New upvalue captured by `getIsPlaytestLoadingForPlaceId`: `eIF`
+- Upvalue no longer captured by `getIsPlaytestLoadingForPlaceId`: `eGD`
+- Upvalue no longer captured by `fhR`: `var1 (write)`
+- New upvalue captured by `fhT`: `var1 (write)`
+- New upvalue captured by `fhS`: `var1 (write)`
+- New upvalue captured by `getPurchaseRobuxUrl`: `fhU`
+- Upvalue no longer captured by `getPurchaseRobuxUrl`: `fhE`
+- New upvalue captured by `getQuotaBlockReason`: `fhR`
+- Upvalue no longer captured by `getQuotaBlockReason`: `fhB`
+- New upvalue captured by `useUniverseSummary`: `eGC`
+- New upvalue captured by `useUniverseSummary`: `eHE`
+- New upvalue captured by `useUniverseSummary`: `eIm`
+- New upvalue captured by `useUniverseSummary`: `eJa`
+- Upvalue no longer captured by `useUniverseSummary`: `eEH`
+- Upvalue no longer captured by `useUniverseSummary`: `eGA`
+- Upvalue no longer captured by `useUniverseSummary`: `eGo`
+- Upvalue no longer captured by `useUniverseSummary`: `eGY`
+- New function: `eIo`
+- New upvalue captured by `fic`: `var1 (write)`
+- New upvalue captured by `fia`: `var1 (write)`
+- Upvalue no longer captured by `fih`: `var1 (write)`
+- Upvalue no longer captured by `fij`: `var1 (write)`
+- Upvalue no longer captured by `fin`: `var1 (write)`
+- New upvalue captured by `getEligibility`: `eJq`
+- Upvalue no longer captured by `getEligibility`: `eHo`
+- New upvalue captured by `isSealBroken`: `eJq`
+- Upvalue no longer captured by `isSealBroken`: `eHo`
+- New upvalue captured by `isContentUnrated`: `eJq`
+- Upvalue no longer captured by `isContentUnrated`: `eHo`
+- Upvalue no longer captured by `fir`: `var1 (write)`
+- Upvalue no longer captured by `fis`: `var1 (write)`
+- New upvalue captured by `privacyLabelForSummary`: `eJa`
+- New upvalue captured by `privacyLabelForSummary`: `fir`
+- New upvalue captured by `privacyLabelForSummary`: `fis`
+- Upvalue no longer captured by `privacyLabelForSummary`: `eGY`
+- Upvalue no longer captured by `privacyLabelForSummary`: `fhS`
+- Upvalue no longer captured by `privacyLabelForSummary`: `fhT`
+- New upvalue captured by `privacyLabelForSearchItem`: `eJa`
+- New upvalue captured by `privacyLabelForSearchItem`: `fir`
+- Upvalue no longer captured by `privacyLabelForSearchItem`: `eGY`
+- Upvalue no longer captured by `privacyLabelForSearchItem`: `fhS`
+- New upvalue captured by `requestHandleToPromise`: `eII`
+- Upvalue no longer captured by `requestHandleToPromise`: `eGG`
+- New upvalue captured by `buildSessionItems`: `eGG`
+- Upvalue no longer captured by `buildSessionItems`: `eEL`
+- New upvalue captured by `buildUniverseItems`: `eGG`
+- New upvalue captured by `buildUniverseItems`: `eJa`
+- New upvalue captured by `buildUniverseItems`: `fir`
+- Upvalue no longer captured by `buildUniverseItems`: `eEL`
+- Upvalue no longer captured by `buildUniverseItems`: `eGY`
+- Upvalue no longer captured by `buildUniverseItems`: `fhS`
+- New upvalue captured by `useUniverseSearchList`: `eGC`
+- New upvalue captured by `useUniverseSearchList`: `eIm`
+- Upvalue no longer captured by `useUniverseSearchList`: `eEH`
+- Upvalue no longer captured by `useUniverseSearchList`: `eGo`
+- New upvalue captured by `useLegacySessionList`: `eGC`
+- New upvalue captured by `useLegacySessionList`: `eIm`
+- New upvalue captured by `useLegacySessionList`: `fhH`
+- New upvalue captured by `useLegacySessionList`: `fio`
+- New upvalue captured by `useLegacySessionList`: `fis`
+- Upvalue no longer captured by `useLegacySessionList`: `eEH`
+- Upvalue no longer captured by `useLegacySessionList`: `eGo`
+- Upvalue no longer captured by `useLegacySessionList`: `fhP`
+- Upvalue no longer captured by `useLegacySessionList`: `fhr`
+- Upvalue no longer captured by `useLegacySessionList`: `fhT`
+- New upvalue captured by `scheduleNextPoll`: `var5656 (write)`
+- Upvalue no longer captured by `scheduleNextPoll`: `var5615 (write)`
+- New upvalue captured by `onActivated`: `experienceName`
+- New upvalue captured by `onActivated`: `gameIcon`
+- New upvalue captured by `onActivated`: `placeId`
+- Upvalue no longer captured by `onActivated`: `value`
+- Upvalue no longer captured by `fiy`: `var1 (write)`
+- New upvalue captured by `onActivated`: `value`
+- Upvalue no longer captured by `fiA`: `var1 (write)`
+- New upvalue captured by `AssetLibrarySearchField`: `eGC`
+- Upvalue no longer captured by `AssetLibrarySearchField`: `eEH`
+- New upvalue captured by `renderLoadingTiles`: `eGC`
+- Upvalue no longer captured by `renderLoadingTiles`: `eEH`
+- New upvalue captured by `renderCategory`: `eGA`
+- New upvalue captured by `renderCategory`: `eGC`
+- New upvalue captured by `renderCategory`: `fix`
+- Upvalue no longer captured by `renderCategory`: `eEF`
+- Upvalue no longer captured by `renderCategory`: `eEH`
+- Upvalue no longer captured by `renderCategory`: `fhZ`
+- New upvalue captured by `createGeneration`: `fiG`
+- New upvalue captured by `createGeneration`: `KW`
+- New upvalue captured by `createGeneration`: `lc`
+- New upvalue captured by `createGeneration`: `var5768 (write)`
+- New upvalue captured by `createGeneration`: `var5770 (write)`
+- New upvalue captured by `createGeneration`: `var5771 (write)`
+- Upvalue no longer captured by `createGeneration`: `fii`
+- Upvalue no longer captured by `createGeneration`: `KV`
+- Upvalue no longer captured by `createGeneration`: `lb`
+- Upvalue no longer captured by `createGeneration`: `var5669 (write)`
+- Upvalue no longer captured by `createGeneration`: `var5671 (write)`
+- Upvalue no longer captured by `createGeneration`: `var5672 (write)`
+- New upvalue captured by `fetchFn`: `fiG`
+- Upvalue no longer captured by `fetchFn`: `fii`
+- New upvalue captured by `retireGeneration`: `var5768 (write)`
+- New upvalue captured by `retireGeneration`: `var5770 (write)`
+- New upvalue captured by `retireGeneration`: `var5771 (write)`
+- Upvalue no longer captured by `retireGeneration`: `var5669 (write)`
+- Upvalue no longer captured by `retireGeneration`: `var5671 (write)`
+- Upvalue no longer captured by `retireGeneration`: `var5672 (write)`
+- New upvalue captured by `getSearch`: `var5767 (write)`
+- New upvalue captured by `getSearch`: `var5771 (write)`
+- Upvalue no longer captured by `getSearch`: `var5668 (write)`
+- Upvalue no longer captured by `getSearch`: `var5672 (write)`
+- New upvalue captured by `fetchSearch`: `var5767 (write)`
+- New upvalue captured by `fetchSearch`: `var5771 (write)`
+- Upvalue no longer captured by `fetchSearch`: `var5668 (write)`
+- Upvalue no longer captured by `fetchSearch`: `var5672 (write)`
+- New upvalue captured by `getAndFetchSearch`: `var5767 (write)`
+- New upvalue captured by `getAndFetchSearch`: `var5771 (write)`
+- Upvalue no longer captured by `getAndFetchSearch`: `var5668 (write)`
+- Upvalue no longer captured by `getAndFetchSearch`: `var5672 (write)`
+- New upvalue captured by `getAsset`: `var5767 (write)`
+- New upvalue captured by `getAsset`: `var5770 (write)`
+- Upvalue no longer captured by `getAsset`: `var5668 (write)`
+- Upvalue no longer captured by `getAsset`: `var5671 (write)`
+- New upvalue captured by `getAssets`: `var5767 (write)`
+- New upvalue captured by `getAssets`: `var5770 (write)`
+- Upvalue no longer captured by `getAssets`: `var5668 (write)`
+- Upvalue no longer captured by `getAssets`: `var5671 (write)`
+- New upvalue captured by `invalidateAll`: `var5767 (write)`
+- New upvalue captured by `invalidateAll`: `var5768 (write)`
+- New upvalue captured by `invalidateAll`: `var5770 (write)`
+- New upvalue captured by `invalidateAll`: `var5771 (write)`
+- Upvalue no longer captured by `invalidateAll`: `var5668 (write)`
+- Upvalue no longer captured by `invalidateAll`: `var5669 (write)`
+- Upvalue no longer captured by `invalidateAll`: `var5671 (write)`
+- Upvalue no longer captured by `invalidateAll`: `var5672 (write)`
+- New upvalue captured by `dispose`: `var5767 (write)`
+- New upvalue captured by `dispose`: `var5768 (write)`
+- New upvalue captured by `dispose`: `var5770 (write)`
+- New upvalue captured by `dispose`: `var5771 (write)`
+- Upvalue no longer captured by `dispose`: `var5668 (write)`
+- Upvalue no longer captured by `dispose`: `var5669 (write)`
+- Upvalue no longer captured by `dispose`: `var5671 (write)`
+- Upvalue no longer captured by `dispose`: `var5672 (write)`
+- New upvalue captured by `cancelPending`: `var5808 (write)`
+- Upvalue no longer captured by `cancelPending`: `var5709 (write)`
+- New upvalue captured by `commitQuery`: `fiL`
+- Upvalue no longer captured by `commitQuery`: `fin`
+- New upvalue captured by `setQuery`: `fiL`
+- New upvalue captured by `setQuery`: `var5808 (write)`
+- Upvalue no longer captured by `setQuery`: `fin`
+- Upvalue no longer captured by `setQuery`: `var5709 (write)`
+- New upvalue captured by `clearQuery`: `fiL`
+- New upvalue captured by `clearQuery`: `var5808 (write)`
+- Upvalue no longer captured by `clearQuery`: `fin`
+- Upvalue no longer captured by `clearQuery`: `var5709 (write)`
+- New upvalue captured by `reset`: `fiL`
+- New upvalue captured by `reset`: `var5808 (write)`
+- Upvalue no longer captured by `reset`: `fin`
+- Upvalue no longer captured by `reset`: `var5709 (write)`
+- New upvalue captured by `destroy`: `var5808 (write)`
+- Upvalue no longer captured by `destroy`: `var5709 (write)`
+- New upvalue captured by `useCategoryState`: `eGC`
+- New upvalue captured by `useCategoryState`: `eHE`
+- New upvalue captured by `useCategoryState`: `eIm`
+- New upvalue captured by `useCategoryState`: `fiI`
+- Upvalue no longer captured by `useCategoryState`: `eEH`
+- Upvalue no longer captured by `useCategoryState`: `eGA`
+- Upvalue no longer captured by `useCategoryState`: `eGo`
+- Upvalue no longer captured by `useCategoryState`: `fik`
+- New upvalue captured by `reportFailure`: `drH`
+- Upvalue no longer captured by `reportFailure`: `dnD`
+- New upvalue captured by `fiO`: `var1 (write)`
+- New upvalue captured by `fja`: `var1 (write)`
+- New upvalue captured by `FullscreenAssetLibraryPage`: `eGC`
+- New upvalue captured by `FullscreenAssetLibraryPage`: `fiY`
+- Upvalue no longer captured by `FullscreenAssetLibraryPage`: `eEH`
+- Upvalue no longer captured by `FullscreenAssetLibraryPage`: `fiA`
+- New upvalue captured by `wrapPage`: `eGC`
+- Upvalue no longer captured by `wrapPage`: `eEH`
+- New upvalue captured by `BrowserScreen`: `drH`
+- New upvalue captured by `BrowserScreen`: `eGC`
+- New upvalue captured by `BrowserScreen`: `fiu`
+- New upvalue captured by `BrowserScreen`: `fiX`
+- Upvalue no longer captured by `BrowserScreen`: `dnD`
+- Upvalue no longer captured by `BrowserScreen`: `eEH`
+- Upvalue no longer captured by `BrowserScreen`: `fhW`
+- Upvalue no longer captured by `BrowserScreen`: `fiz`
+- New upvalue captured by `CategoryScreen`: `drH`
+- New upvalue captured by `CategoryScreen`: `eGC`
+- New upvalue captured by `CategoryScreen`: `fiM`
+- New upvalue captured by `CategoryScreen`: `fiX`
+- Upvalue no longer captured by `CategoryScreen`: `dnD`
+- Upvalue no longer captured by `CategoryScreen`: `eEH`
+- Upvalue no longer captured by `CategoryScreen`: `fio`
+- Upvalue no longer captured by `CategoryScreen`: `fiz`
+- New upvalue captured by `DetailScreen`: `eGC`
+- New upvalue captured by `DetailScreen`: `fiQ`
+- New upvalue captured by `DetailScreen`: `fiX`
+- Upvalue no longer captured by `DetailScreen`: `eEH`
+- Upvalue no longer captured by `DetailScreen`: `fis`
+- Upvalue no longer captured by `DetailScreen`: `fiz`
+- New upvalue captured by `resolveMutatingNetwork`: `md`
+- New upvalue captured by `resolveMutatingNetwork`: `rv`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `mc`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `ru`
+- New upvalue captured by `post`: `md`
+- New upvalue captured by `post`: `rv`
+- Upvalue no longer captured by `post`: `mc`
+- Upvalue no longer captured by `post`: `ru`
+- New upvalue captured by `fetchFn`: `fjh`
+- Upvalue no longer captured by `fetchFn`: `fiJ`
+- New upvalue captured by `saveSubmission`: `fjh`
+- Upvalue no longer captured by `saveSubmission`: `fiJ`
+- New upvalue captured by `validateResponses`: `fjh`
+- Upvalue no longer captured by `validateResponses`: `fiJ`
+- New upvalue captured by `previewSubmission`: `fjh`
+- Upvalue no longer captured by `previewSubmission`: `fiJ`
+- New upvalue captured by `saveAndPublishPlace`: `eGI`
+- New upvalue captured by `saveAndPublishPlace`: `ffn`
+- Upvalue no longer captured by `saveAndPublishPlace`: `eEN`
+- Upvalue no longer captured by `saveAndPublishPlace`: `feZ`
+- New upvalue captured by `archiveGame`: `eJa`
+- New upvalue captured by `archiveGame`: `fii`
+- New upvalue captured by `archiveGame`: `fip`
+- Upvalue no longer captured by `archiveGame`: `eGY`
+- Upvalue no longer captured by `archiveGame`: `fhO`
+- Upvalue no longer captured by `archiveGame`: `fhQ`
+- New upvalue captured by `updateTitleDescription`: `eIv`
+- New upvalue captured by `updateTitleDescription`: `eJa`
+- New upvalue captured by `updateTitleDescription`: `fii`
+- Upvalue no longer captured by `updateTitleDescription`: `eGs`
+- Upvalue no longer captured by `updateTitleDescription`: `eGY`
+- Upvalue no longer captured by `updateTitleDescription`: `fhO`
+- New upvalue captured by `updateAudienceSummary`: `eJa`
+- Upvalue no longer captured by `updateAudienceSummary`: `eGY`
+- New upvalue captured by `buildPublicAudiences`: `eJq`
+- Upvalue no longer captured by `buildPublicAudiences`: `eHo`
+- New upvalue captured by `updateCachedAudience`: `eJa`
+- Upvalue no longer captured by `updateCachedAudience`: `eGY`
+- New upvalue captured by `hasPublicAudience`: `eJq`
+- Upvalue no longer captured by `hasPublicAudience`: `eHo`
+- New upvalue captured by `setAudiencesForPublish`: `eII`
+- New upvalue captured by `setAudiencesForPublish`: `eJq`
+- New upvalue captured by `setAudiencesForPublish`: `fis`
+- Upvalue no longer captured by `setAudiencesForPublish`: `eGG`
+- Upvalue no longer captured by `setAudiencesForPublish`: `eHo`
+- Upvalue no longer captured by `setAudiencesForPublish`: `fhT`
+- New upvalue captured by `publishExperience`: `eII`
+- New upvalue captured by `publishExperience`: `eJa`
+- New upvalue captured by `publishExperience`: `eJq`
+- New upvalue captured by `publishExperience`: `fis`
+- New upvalue captured by `publishExperience`: `fjk`
+- Upvalue no longer captured by `publishExperience`: `eGG`
+- Upvalue no longer captured by `publishExperience`: `eGY`
+- Upvalue no longer captured by `publishExperience`: `eHo`
+- Upvalue no longer captured by `publishExperience`: `fhT`
+- Upvalue no longer captured by `publishExperience`: `fiM`
+- Upvalue no longer captured by `fjm`: `var1 (write)`
+- New upvalue captured by `fjn`: `var1 (write)`
+- New upvalue captured by `getSelectedAudience`: `eJa`
+- Upvalue no longer captured by `getSelectedAudience`: `eGY`
+- New upvalue captured by `isVisibilityAudience`: `eJq`
+- Upvalue no longer captured by `isVisibilityAudience`: `eHo`
+- New upvalue captured by `getAudiencesForValue`: `eJq`
+- Upvalue no longer captured by `getAudiencesForValue`: `eHo`
+- New upvalue captured by `AudienceRow`: `eGC`
+- Upvalue no longer captured by `AudienceRow`: `eEH`
+- New upvalue captured by `getSelectedAudienceFromState`: `eJa`
+- Upvalue no longer captured by `getSelectedAudienceFromState`: `eGY`
+- New upvalue captured by `getUniverseActivationStore`: `eJq`
+- Upvalue no longer captured by `getUniverseActivationStore`: `eHo`
+- New upvalue captured by `getQuestionnaireStore`: `fjd`
+- Upvalue no longer captured by `getQuestionnaireStore`: `fiF`
+- New upvalue captured by `getUniverseConfigurationStore`: `eJa`
+- Upvalue no longer captured by `getUniverseConfigurationStore`: `eGY`
+- New upvalue captured by `useAudienceStores`: `eHE`
+- Upvalue no longer captured by `useAudienceStores`: `eGA`
+- New upvalue captured by `useAudienceData`: `eGC`
+- New upvalue captured by `useAudienceData`: `eHE`
+- New upvalue captured by `useAudienceData`: `eJa`
+- New upvalue captured by `useAudienceData`: `fis`
+- New upvalue captured by `useAudienceData`: `fjm`
+- New upvalue captured by `useAudienceData`: `fjn`
+- Upvalue no longer captured by `useAudienceData`: `eEH`
+- Upvalue no longer captured by `useAudienceData`: `eGA`
+- Upvalue no longer captured by `useAudienceData`: `eGY`
+- Upvalue no longer captured by `useAudienceData`: `fhP`
+- Upvalue no longer captured by `useAudienceData`: `fhT`
+- Upvalue no longer captured by `useAudienceData`: `fiP`
+- New upvalue captured by `useQuestionnaireHandler`: `eGC`
+- New upvalue captured by `useQuestionnaireHandler`: `eGG`
+- New upvalue captured by `useQuestionnaireHandler`: `fis`
+- New upvalue captured by `useQuestionnaireHandler`: `fjj`
+- New upvalue captured by `useQuestionnaireHandler`: `fjl`
+- Upvalue no longer captured by `useQuestionnaireHandler`: `eEH`
+- Upvalue no longer captured by `useQuestionnaireHandler`: `eEL`
+- Upvalue no longer captured by `useQuestionnaireHandler`: `fhT`
+- Upvalue no longer captured by `useQuestionnaireHandler`: `fiL`
+- Upvalue no longer captured by `useQuestionnaireHandler`: `fiN`
+- New upvalue captured by `useAudienceController`: `eGC`
+- New upvalue captured by `useAudienceController`: `eIU`
+- New upvalue captured by `useAudienceController`: `eJa`
+- New upvalue captured by `useAudienceController`: `fis`
+- New upvalue captured by `useAudienceController`: `fjj`
+- New upvalue captured by `useAudienceController`: `fjm`
+- New upvalue captured by `useAudienceController`: `fjn`
+- Upvalue no longer captured by `useAudienceController`: `eEH`
+- Upvalue no longer captured by `useAudienceController`: `eGS`
+- Upvalue no longer captured by `useAudienceController`: `eGY`
+- Upvalue no longer captured by `useAudienceController`: `fhP`
+- Upvalue no longer captured by `useAudienceController`: `fhT`
+- Upvalue no longer captured by `useAudienceController`: `fiL`
+- Upvalue no longer captured by `useAudienceController`: `fiP`
+- New upvalue captured by `applyAudienceChange`: `eJa`
+- New upvalue captured by `applyAudienceChange`: `fis`
+- New upvalue captured by `applyAudienceChange`: `fjj`
+- New upvalue captured by `applyAudienceChange`: `fjm`
+- Upvalue no longer captured by `applyAudienceChange`: `eGY`
+- Upvalue no longer captured by `applyAudienceChange`: `fhT`
+- Upvalue no longer captured by `applyAudienceChange`: `fiL`
+- Upvalue no longer captured by `applyAudienceChange`: `fiO`
+- New upvalue captured by `AudienceHeader`: `eGC`
+- New upvalue captured by `AudienceHeader`: `eGG`
+- Upvalue no longer captured by `AudienceHeader`: `eEH`
+- Upvalue no longer captured by `AudienceHeader`: `eEL`
+- New upvalue captured by `AudienceList`: `eGC`
+- New upvalue captured by `AudienceList`: `eGG`
+- Upvalue no longer captured by `AudienceList`: `eEH`
+- Upvalue no longer captured by `AudienceList`: `eEL`
+- New upvalue captured by `EligibilityTooltip`: `eGC`
+- New upvalue captured by `EligibilityTooltip`: `eGG`
+- New upvalue captured by `EligibilityTooltip`: `eIU`
+- New upvalue captured by `EligibilityTooltip`: `fjn`
+- Upvalue no longer captured by `EligibilityTooltip`: `eEH`
+- Upvalue no longer captured by `EligibilityTooltip`: `eEL`
+- Upvalue no longer captured by `EligibilityTooltip`: `eGS`
+- Upvalue no longer captured by `EligibilityTooltip`: `fiP`
+- New upvalue captured by `EligibilityBanner`: `eGC`
+- New upvalue captured by `EligibilityBanner`: `eGG`
+- Upvalue no longer captured by `EligibilityBanner`: `eEH`
+- Upvalue no longer captured by `EligibilityBanner`: `eEL`
+- New upvalue captured by `renderSkeletonRow`: `eGC`
+- Upvalue no longer captured by `renderSkeletonRow`: `eEH`
+- New upvalue captured by `fjw`: `var1 (write)`
+- Upvalue no longer captured by `fjy`: `var1 (write)`
+- New upvalue captured by `GameConfigurationListItem`: `eGC`
+- Upvalue no longer captured by `GameConfigurationListItem`: `eEH`
+- Upvalue no longer captured by `fjL`: `var1 (write)`
+- New upvalue captured by `buildPublicAudiences`: `eJq`
+- Upvalue no longer captured by `buildPublicAudiences`: `eHo`
+- New upvalue captured by `PreviewButton`: `eGC`
+- New upvalue captured by `PreviewButton`: `eGG`
+- Upvalue no longer captured by `PreviewButton`: `eEH`
+- Upvalue no longer captured by `PreviewButton`: `eEL`
+- New upvalue captured by `publish`: `fjj`
+- New upvalue captured by `publish`: `fjL`
+- New upvalue captured by `publish`: `var6473 (write)`
+- Upvalue no longer captured by `publish`: `fiL`
+- Upvalue no longer captured by `publish`: `fjn`
+- Upvalue no longer captured by `publish`: `var6374 (write)`
+- New upvalue captured by `fjY`: `var1 (write)`
+- New upvalue captured by `getPublishPreview`: `fjV`
+- New upvalue captured by `getPublishPreview`: `fjY`
+- Upvalue no longer captured by `getPublishPreview`: `fjA`
+- Upvalue no longer captured by `getPublishPreview`: `fjx`
+- New upvalue captured by `PublishPreview`: `eGC`
+- New upvalue captured by `PublishPreview`: `eGG`
+- New upvalue captured by `PublishPreview`: `ffE`
+- New upvalue captured by `PublishPreview`: `fjV`
+- New upvalue captured by `PublishPreview`: `fjY`
+- Upvalue no longer captured by `PublishPreview`: `eEH`
+- Upvalue no longer captured by `PublishPreview`: `eEL`
+- Upvalue no longer captured by `PublishPreview`: `ffq`
+- Upvalue no longer captured by `PublishPreview`: `fjA`
+- Upvalue no longer captured by `PublishPreview`: `fjx`
+- New upvalue captured by `resolveMutatingNetwork`: `md`
+- New upvalue captured by `resolveMutatingNetwork`: `rv`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `mc`
+- Upvalue no longer captured by `resolveMutatingNetwork`: `ru`
+- New upvalue captured by `patchAssetIcon`: `md`
+- New upvalue captured by `patchAssetIcon`: `rv`
+- Upvalue no longer captured by `patchAssetIcon`: `mc`
+- Upvalue no longer captured by `patchAssetIcon`: `ru`
+- New upvalue captured by `updateIcon`: `md`
+- New upvalue captured by `updateIcon`: `rv`
+- Upvalue no longer captured by `updateIcon`: `mc`
+- Upvalue no longer captured by `updateIcon`: `ru`
+- New upvalue captured by `updatePreviews`: `md`
+- New upvalue captured by `updatePreviews`: `rv`
+- Upvalue no longer captured by `updatePreviews`: `mc`
+- Upvalue no longer captured by `updatePreviews`: `ru`
+- New upvalue captured by `createImageAsset`: `md`
+- New upvalue captured by `createImageAsset`: `rv`
+- Upvalue no longer captured by `createImageAsset`: `mc`
+- Upvalue no longer captured by `createImageAsset`: `ru`
+- New upvalue captured by `fetchFn`: `fkk`
+- Upvalue no longer captured by `fetchFn`: `fjM`
+- New upvalue captured by `patchAssetIcon`: `fkk`
+- Upvalue no longer captured by `patchAssetIcon`: `fjM`
+- New upvalue captured by `updateIcon`: `fkk`
+- Upvalue no longer captured by `updateIcon`: `fjM`
+- New upvalue captured by `getPreviews`: `fkk`
+- Upvalue no longer captured by `getPreviews`: `fjM`
+- New upvalue captured by `updatePreviews`: `fkk`
+- Upvalue no longer captured by `updatePreviews`: `fjM`
+- New upvalue captured by `createImageAsset`: `fkk`
+- Upvalue no longer captured by `createImageAsset`: `fjM`
+- New upvalue captured by `pollUntilDone`: `fkk`
+- New upvalue captured by `pollUntilDone`: `KV`
+- Upvalue no longer captured by `pollUntilDone`: `fjM`
+- Upvalue no longer captured by `pollUntilDone`: `KU`
+- New upvalue captured by `poll`: `fkk`
+- New upvalue captured by `poll`: `var6568 (write)`
+- New upvalue captured by `poll`: `var6569 (write)`
+- Upvalue no longer captured by `poll`: `fjM`
+- Upvalue no longer captured by `poll`: `var6469 (write)`
+- Upvalue no longer captured by `poll`: `var6470 (write)`
+- New upvalue captured by `refreshOperation`: `fkk`
+- Upvalue no longer captured by `refreshOperation`: `fjM`
+- New upvalue captured by `fkh`: `var1 (write)`
+- New upvalue captured by `poll`: `var6599 (write)`
+- Upvalue no longer captured by `poll`: `var6500 (write)`
+- New upvalue captured by `cropToSquareAsync`: `eII`
+- Upvalue no longer captured by `cropToSquareAsync`: `eGG`
+- Upvalue no longer captured by `fks`: `var1 (write)`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- New upvalue captured by `renderEmptyState`: `eGC`
+- Upvalue no longer captured by `renderEmptyState`: `eEH`
+- New upvalue captured by `CaptureSelectionView`: `eGA`
+- New upvalue captured by `CaptureSelectionView`: `eGC`
+- New upvalue captured by `CaptureSelectionView`: `fkr`
+- New upvalue captured by `CaptureSelectionView`: `fkt`
+- Upvalue no longer captured by `CaptureSelectionView`: `eEF`
+- Upvalue no longer captured by `CaptureSelectionView`: `eEH`
+- Upvalue no longer captured by `CaptureSelectionView`: `fjT`
+- Upvalue no longer captured by `CaptureSelectionView`: `fjV`
+- New upvalue captured by `fkv`: `var1 (write)`
+- Upvalue no longer captured by `fkw`: `var1 (write)`
+- New upvalue captured by `fkx`: `var1 (write)`
+- New upvalue captured by `fkz`: `var1 (write)`
+- New upvalue captured by `fkA`: `var1 (write)`
+- New upvalue captured by `getTargetWithGameInfo`: `eGG`
+- Upvalue no longer captured by `getTargetWithGameInfo`: `eEL`
+- New upvalue captured by `useGameInfo`: `eGC`
+- New upvalue captured by `useGameInfo`: `eHE`
+- New upvalue captured by `useGameInfo`: `eIm`
+- New upvalue captured by `useGameInfo`: `eIv`
+- Upvalue no longer captured by `useGameInfo`: `eEH`
+- Upvalue no longer captured by `useGameInfo`: `eGA`
+- Upvalue no longer captured by `useGameInfo`: `eGo`
+- Upvalue no longer captured by `useGameInfo`: `eGs`
+- New upvalue captured by `BuildFullscreenPage`: `eGC`
+- New upvalue captured by `BuildFullscreenPage`: `fiY`
+- Upvalue no longer captured by `BuildFullscreenPage`: `eEH`
+- Upvalue no longer captured by `BuildFullscreenPage`: `fiA`
+- New upvalue captured by `BuildSheetPage`: `eGC`
+- Upvalue no longer captured by `BuildSheetPage`: `eEH`
+- New upvalue captured by `ConfigurationScreen`: `eGC`
+- New upvalue captured by `ConfigurationScreen`: `eGG`
+- New upvalue captured by `ConfigurationScreen`: `fiX`
+- New upvalue captured by `ConfigurationScreen`: `fjF`
+- New upvalue captured by `ConfigurationScreen`: `fjz`
+- Upvalue no longer captured by `ConfigurationScreen`: `eEH`
+- Upvalue no longer captured by `ConfigurationScreen`: `eEL`
+- Upvalue no longer captured by `ConfigurationScreen`: `fiz`
+- Upvalue no longer captured by `ConfigurationScreen`: `fjb`
+- Upvalue no longer captured by `ConfigurationScreen`: `fjh`
+- New upvalue captured by `BuildTitleDescriptionContent`: `eGC`
+- New upvalue captured by `BuildTitleDescriptionContent`: `eGG`
+- New upvalue captured by `BuildTitleDescriptionContent`: `fjZ`
+- Upvalue no longer captured by `BuildTitleDescriptionContent`: `eEH`
+- Upvalue no longer captured by `BuildTitleDescriptionContent`: `eEL`
+- Upvalue no longer captured by `BuildTitleDescriptionContent`: `fjB`
+- New upvalue captured by `BuildAudienceScreen`: `eGC`
+- New upvalue captured by `BuildAudienceScreen`: `eGG`
+- New upvalue captured by `BuildAudienceScreen`: `eIO`
+- New upvalue captured by `BuildAudienceScreen`: `fiA`
+- New upvalue captured by `BuildAudienceScreen`: `fiX`
+- New upvalue captured by `BuildAudienceScreen`: `fjc`
+- Upvalue no longer captured by `BuildAudienceScreen`: `eEH`
+- Upvalue no longer captured by `BuildAudienceScreen`: `eEL`
+- Upvalue no longer captured by `BuildAudienceScreen`: `eGM`
+- Upvalue no longer captured by `BuildAudienceScreen`: `fib`
+- Upvalue no longer captured by `BuildAudienceScreen`: `fic`
+- Upvalue no longer captured by `BuildAudienceScreen`: `fiE`
+- New upvalue captured by `BuildPrivateInvitesPickerScreen`: `eGC`
+- New upvalue captured by `BuildPrivateInvitesPickerScreen`: `fiX`
+- New upvalue captured by `BuildPrivateInvitesPickerScreen`: `fjo`
+- Upvalue no longer captured by `BuildPrivateInvitesPickerScreen`: `eEH`
+- Upvalue no longer captured by `BuildPrivateInvitesPickerScreen`: `fiQ`
+- Upvalue no longer captured by `BuildPrivateInvitesPickerScreen`: `fiz`
+- New upvalue captured by `BuildPlaytestInviteManagementScreen`: `eGC`
+- New upvalue captured by `BuildPlaytestInviteManagementScreen`: `eGG`
+- New upvalue captured by `BuildPlaytestInviteManagementScreen`: `fiA`
+- New upvalue captured by `BuildPlaytestInviteManagementScreen`: `fiX`
+- New upvalue captured by `BuildPlaytestInviteManagementScreen`: `fjA`
+- New upvalue captured by `BuildPlaytestInviteManagementScreen`: `fjz`
+- Upvalue no longer captured by `BuildPlaytestInviteManagementScreen`: `eEH`
+- Upvalue no longer captured by `BuildPlaytestInviteManagementScreen`: `eEL`
+- Upvalue no longer captured by `BuildPlaytestInviteManagementScreen`: `fib`
+- Upvalue no longer captured by `BuildPlaytestInviteManagementScreen`: `fic`
+- Upvalue no longer captured by `BuildPlaytestInviteManagementScreen`: `fjb`
+- Upvalue no longer captured by `BuildPlaytestInviteManagementScreen`: `fjc`
+- New upvalue captured by `BuildTitleDescriptionScreen`: `eGC`
+- New upvalue captured by `BuildTitleDescriptionScreen`: `fiX`
+- New upvalue captured by `BuildTitleDescriptionScreen`: `fkx`
+- Upvalue no longer captured by `BuildTitleDescriptionScreen`: `eEH`
+- Upvalue no longer captured by `BuildTitleDescriptionScreen`: `fiz`
+- Upvalue no longer captured by `BuildTitleDescriptionScreen`: `fjZ`
+- New upvalue captured by `BuildVersionTitleDescriptionScreen`: `eGC`
+- New upvalue captured by `BuildVersionTitleDescriptionScreen`: `fiX`
+- New upvalue captured by `BuildVersionTitleDescriptionScreen`: `fkx`
+- Upvalue no longer captured by `BuildVersionTitleDescriptionScreen`: `eEH`
+- Upvalue no longer captured by `BuildVersionTitleDescriptionScreen`: `fiz`
+- Upvalue no longer captured by `BuildVersionTitleDescriptionScreen`: `fjZ`
+- New upvalue captured by `BuildMediaSelectionScreen`: `eGC`
+- New upvalue captured by `BuildMediaSelectionScreen`: `fiX`
+- New upvalue captured by `BuildMediaSelectionScreen`: `fiY`
+- New upvalue captured by `BuildMediaSelectionScreen`: `fka`
+- Upvalue no longer captured by `BuildMediaSelectionScreen`: `eEH`
+- Upvalue no longer captured by `BuildMediaSelectionScreen`: `fiA`
+- Upvalue no longer captured by `BuildMediaSelectionScreen`: `fiz`
+- Upvalue no longer captured by `BuildMediaSelectionScreen`: `fjC`
+- New upvalue captured by `FreeUsageCard`: `eGC`
+- New upvalue captured by `FreeUsageCard`: `eGG`
+- Upvalue no longer captured by `FreeUsageCard`: `eEH`
+- Upvalue no longer captured by `FreeUsageCard`: `eEL`
+- New upvalue captured by `RobuxLine`: `eGC`
+- New upvalue captured by `RobuxLine`: `eGG`
+- Upvalue no longer captured by `RobuxLine`: `eEH`
+- Upvalue no longer captured by `RobuxLine`: `eEL`
+- New upvalue captured by `AdditionalUsageCard`: `eGC`
+- New upvalue captured by `AdditionalUsageCard`: `eGG`
+- Upvalue no longer captured by `AdditionalUsageCard`: `eEH`
+- Upvalue no longer captured by `AdditionalUsageCard`: `eEL`
+- New parameter added to `onActivated` (0 -> 1 params)
+- New upvalue captured by `fkD`: `var1 (write)`
+- New upvalue captured by `DailyLimitBottomSheetContent`: `eGC`
+- New upvalue captured by `DailyLimitBottomSheetContent`: `eGG`
+- Upvalue no longer captured by `DailyLimitBottomSheetContent`: `eEH`
+- Upvalue no longer captured by `DailyLimitBottomSheetContent`: `eEL`
+- Upvalue no longer captured by `fkF`: `var1 (write)`
+- New upvalue captured by `fkB`: `var1 (write)`
+- New upvalue captured by `getConfigurationStore`: `eJa`
+- Upvalue no longer captured by `getConfigurationStore`: `eGY`
+- New upvalue captured by `useBuildPageEligibility`: `eGC`
+- New upvalue captured by `useBuildPageEligibility`: `fkP`
+- Upvalue no longer captured by `useBuildPageEligibility`: `eEH`
+- Upvalue no longer captured by `useBuildPageEligibility`: `fkr`
+- New function: `shouldShowSearchEmptyState`
+- New upvalue captured by `useLiveSubagentTaskState`: `eGC`
+- New upvalue captured by `useLiveSubagentTaskState`: `eGI`
+- New upvalue captured by `useLiveSubagentTaskState`: `ffF`
+- New upvalue captured by `useLiveSubagentTaskState`: `fiX`
+- Upvalue no longer captured by `useLiveSubagentTaskState`: `eEH`
+- Upvalue no longer captured by `useLiveSubagentTaskState`: `eEN`
+- Upvalue no longer captured by `useLiveSubagentTaskState`: `ffr`
+- Upvalue no longer captured by `useLiveSubagentTaskState`: `fiz`
+- New function: `useOpenBuildChat`
+- New function: `BuildHomeScreen`
+- New function: `BuildSearchResults`
+- New function: `BuildSearchScreen`
+- New upvalue captured by `screen`: `eGC`
+- New upvalue captured by `screen`: `eIo`
+- New upvalue captured by `screen`: `fhM`
+- New upvalue captured by `screen`: `fip`
+- New upvalue captured by `screen`: `fiX`
+- New upvalue captured by `screen`: `fiY`
+- New upvalue captured by `screen`: `fjb`
+- New upvalue captured by `screen`: `fjz`
+- New upvalue captured by `screen`: `fkx`
+- Upvalue no longer captured by `screen`: `eEH`
+- Upvalue no longer captured by `screen`: `eEL`
+- Upvalue no longer captured by `screen`: `eFI`
+- Upvalue no longer captured by `screen`: `fFlagBuildLocalization`
+- Upvalue no longer captured by `screen`: `fhI`
+- Upvalue no longer captured by `screen`: `fhL`
+- Upvalue no longer captured by `screen`: `fiA`
+- Upvalue no longer captured by `screen`: `fkl`
+- Upvalue no longer captured by `screen`: `useLocalization`
+- Upvalue no longer captured by `screen`: `useNavigationFocus`
+- Upvalue no longer captured by `screen`: `view`
+- New upvalue captured by `screen`: `eGC`
+- New upvalue captured by `screen`: `eGG`
+- New upvalue captured by `screen`: `eIO`
+- New upvalue captured by `screen`: `fFlagBuildLocalization`
+- New upvalue captured by `screen`: `fhD`
+- New upvalue captured by `screen`: `fiX`
+- New upvalue captured by `screen`: `fiY`
+- New upvalue captured by `screen`: `iconName`
+- New upvalue captured by `screen`: `useLiveSubagentTaskState`
+- New upvalue captured by `screen`: `useLocalization`
+- Upvalue no longer captured by `screen`: `eEH`
+- Upvalue no longer captured by `screen`: `eGk`
+- Upvalue no longer captured by `screen`: `fhQ`
+- Upvalue no longer captured by `screen`: `fhw`
+- Upvalue no longer captured by `screen`: `fiD`
+- Upvalue no longer captured by `screen`: `fjb`
+- Upvalue no longer captured by `screen`: `fjZ`
+- New upvalue captured by `screen`: `eGC`
+- New upvalue captured by `screen`: `eGG`
+- New upvalue captured by `screen`: `eIO`
+- New upvalue captured by `screen`: `fhD`
+- New upvalue captured by `screen`: `fiX`
+- New upvalue captured by `screen`: `fiY`
+- New upvalue captured by `screen`: `view`
+- Upvalue no longer captured by `screen`: `eEH`
+- Upvalue no longer captured by `screen`: `eEL`
+- Upvalue no longer captured by `screen`: `eGM`
+- Upvalue no longer captured by `screen`: `fhn`
+- Upvalue no longer captured by `screen`: `fib`
+- Upvalue no longer captured by `screen`: `fic`
+- New upvalue captured by `screen`: `eGC`
+- New upvalue captured by `screen`: `eGG`
+- New upvalue captured by `screen`: `eIO`
+- New upvalue captured by `screen`: `fiY`
+- New upvalue captured by `screen`: `fkB`
+- New upvalue captured by `screen`: `fkG`
+- Upvalue no longer captured by `screen`: `eEH`
+- Upvalue no longer captured by `screen`: `eEL`
+- Upvalue no longer captured by `screen`: `eGM`
+- Upvalue no longer captured by `screen`: `fhn`
+- Upvalue no longer captured by `screen`: `fib`
+- Upvalue no longer captured by `screen`: `fic`
+- Upvalue no longer captured by `screen`: `useLiveSubagentTaskState`
+- Upvalue no longer captured by `screen`: `view`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJR`
+- New upvalue captured by `render`: `eAP`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `eyU`
+- New upvalue captured by `renderBadge`: `dJA`
+- New upvalue captured by `renderBadge`: `dJR`
+- New upvalue captured by `renderBadge`: `eAP`
+- Upvalue no longer captured by `renderBadge`: `dGH`
+- Upvalue no longer captured by `renderBadge`: `dGY`
+- Upvalue no longer captured by `renderBadge`: `eyU`
+- New function: `fkX`
+- Upvalue no longer captured by `fkY`: `var1 (write)`
+- Upvalue no longer captured by `fkZ`: `var1 (write)`
+- Upvalue no longer captured by `flb`: `var1 (write)`
+- New function: `var7183`
+- New upvalue captured by `urlGenerator`: `eDs`
+- Upvalue no longer captured by `urlGenerator`: `eBx`
+- New upvalue captured by `urlGenerator`: `eDs`
+- Upvalue no longer captured by `urlGenerator`: `eBx`
+- New function: `var7185`
+- New upvalue captured by `GetItemsInPage`: `cWl`
+- New upvalue captured by `GetItemsInPage`: `dBZ`
+- New upvalue captured by `GetItemsInPage`: `fkY`
+- New upvalue captured by `GetItemsInPage`: `flb`
+- Upvalue no longer captured by `GetItemsInPage`: `cWk`
+- Upvalue no longer captured by `GetItemsInPage`: `dxV`
+- Upvalue no longer captured by `GetItemsInPage`: `fkA`
+- Upvalue no longer captured by `GetItemsInPage`: `fkD`
+- New upvalue captured by `render`: `cQG`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dBZ`
+- Upvalue no longer captured by `render`: `cQF`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dxV`
+- New function: `var7201`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJR`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `dHs`
+- New function: `var7221`
+- New upvalue captured by `init`: `dBZ`
+- New upvalue captured by `init`: `fkX`
+- New upvalue captured by `init`: `flh`
+- Upvalue no longer captured by `init`: `dxV`
+- Upvalue no longer captured by `init`: `fkJ`
+- Upvalue no longer captured by `init`: `fkz`
+- New upvalue captured by `navigateDown`: `dBZ`
+- New upvalue captured by `navigateDown`: `fkX`
+- New upvalue captured by `navigateDown`: `flh`
+- Upvalue no longer captured by `navigateDown`: `dxV`
+- Upvalue no longer captured by `navigateDown`: `fkJ`
+- Upvalue no longer captured by `navigateDown`: `fkz`
+- New upvalue captured by `render`: `cQF`
+- New upvalue captured by `render`: `dBZ`
+- New upvalue captured by `render`: `fkR`
+- New upvalue captured by `render`: `fle`
+- New upvalue captured by `render`: `flg`
+- Upvalue no longer captured by `render`: `cQE`
+- Upvalue no longer captured by `render`: `dxV`
+- Upvalue no longer captured by `render`: `fkG`
+- Upvalue no longer captured by `render`: `fkI`
+- Upvalue no longer captured by `render`: `fkt`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `renderItem`: `fld`
+- Upvalue no longer captured by `renderItem`: `fkF`
+- Upvalue no longer captured by `flq`: `var1 (write)`
+- New upvalue captured by `makeEventConfig`: `bDp`
+- Upvalue no longer captured by `makeEventConfig`: `bDo`
+- Upvalue no longer captured by `flt`: `var1 (write)`
+- New upvalue captured by `WithHooksComponent`: `flt`
+- Upvalue no longer captured by `WithHooksComponent`: `fkV`
+- New upvalue captured by `flw`: `var1 (write)`
+- Upvalue no longer captured by `flU`: `var1 (write)`
+- Upvalue no longer captured by `onActivated`: `i`
+- New upvalue captured by `buildCategories`: `flZ`
+- Upvalue no longer captured by `buildCategories`: `flB`
+- New upvalue captured by `findCategoryIndex`: `flZ`
+- Upvalue no longer captured by `findCategoryIndex`: `flB`
+- New upvalue captured by `fmi`: `var1 (write)`
+- New upvalue captured by `onActivated`: `i`
+- Upvalue no longer captured by `onActivated`: `onGameActivated`
+- New upvalue captured by `handleSubscribe`: `fme`
+- Upvalue no longer captured by `handleSubscribe`: `flG`
+- New upvalue captured by `fmn`: `var1 (write)`
+- New upvalue captured by `httpClientNetworkImpl`: `fmo`
+- Upvalue no longer captured by `httpClientNetworkImpl`: `flQ`
+- New upvalue captured by `fml`: `var1 (write)`
+- New upvalue captured by `init`: `eDA`
+- New upvalue captured by `init`: `flp`
+- New upvalue captured by `init`: `flq`
+- New upvalue captured by `init`: `flr`
+- Upvalue no longer captured by `init`: `eBF`
+- Upvalue no longer captured by `init`: `fkR`
+- Upvalue no longer captured by `init`: `fkS`
+- Upvalue no longer captured by `init`: `fkT`
+- New upvalue captured by `onReducedMotionActivated`: `eDA`
+- New upvalue captured by `onReducedMotionActivated`: `flq`
+- Upvalue no longer captured by `onReducedMotionActivated`: `eBF`
+- Upvalue no longer captured by `onReducedMotionActivated`: `fkS`
+- New upvalue captured by `onReadAloudActivated`: `eDA`
+- New upvalue captured by `onReadAloudActivated`: `flp`
+- New upvalue captured by `onReadAloudActivated`: `flq`
+- Upvalue no longer captured by `onReadAloudActivated`: `eBF`
+- Upvalue no longer captured by `onReadAloudActivated`: `fkR`
+- Upvalue no longer captured by `onReadAloudActivated`: `fkS`
+- New upvalue captured by `onPreferredTransparencyValueChanged`: `eDA`
+- New upvalue captured by `onPreferredTransparencyValueChanged`: `flq`
+- Upvalue no longer captured by `onPreferredTransparencyValueChanged`: `eBF`
+- Upvalue no longer captured by `onPreferredTransparencyValueChanged`: `fkS`
+- New upvalue captured by `onPreferredTextSizeValueChanged`: `eDA`
+- New upvalue captured by `onPreferredTextSizeValueChanged`: `flq`
+- Upvalue no longer captured by `onPreferredTextSizeValueChanged`: `eBF`
+- Upvalue no longer captured by `onPreferredTextSizeValueChanged`: `fkS`
+- New upvalue captured by `onUiNavigationKeyBindActivated`: `eDA`
+- New upvalue captured by `onUiNavigationKeyBindActivated`: `flq`
+- Upvalue no longer captured by `onUiNavigationKeyBindActivated`: `eBF`
+- Upvalue no longer captured by `onUiNavigationKeyBindActivated`: `fkS`
+- New upvalue captured by `onAppThemeSubscribeClicked`: `flr`
+- Upvalue no longer captured by `onAppThemeSubscribeClicked`: `fkT`
+- New upvalue captured by `onAppThemeSelected`: `flr`
+- Upvalue no longer captured by `onAppThemeSelected`: `fkT`
+- New upvalue captured by `getThemeDropdownProperties`: `flE`
+- New upvalue captured by `getThemeDropdownProperties`: `flV`
+- Upvalue no longer captured by `getThemeDropdownProperties`: `flg`
+- Upvalue no longer captured by `getThemeDropdownProperties`: `flx`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- New upvalue captured by `renderWithProviders`: `flo`
+- New upvalue captured by `renderWithProviders`: `flp`
+- New upvalue captured by `renderWithProviders`: `flR`
+- New upvalue captured by `renderWithProviders`: `fls`
+- New upvalue captured by `renderWithProviders`: `flU`
+- New upvalue captured by `renderWithProviders`: `fly`
+- New upvalue captured by `renderWithProviders`: `flz`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- Upvalue no longer captured by `renderWithProviders`: `fkQ`
+- Upvalue no longer captured by `renderWithProviders`: `fkR`
+- Upvalue no longer captured by `renderWithProviders`: `fkU`
+- Upvalue no longer captured by `renderWithProviders`: `fkV`
+- Upvalue no longer captured by `renderWithProviders`: `fkW`
+- Upvalue no longer captured by `renderWithProviders`: `fkY`
+- Upvalue no longer captured by `renderWithProviders`: `flb`
+- Upvalue no longer captured by `renderWithProviders`: `flc`
+- New function: `var7561`
+- New function: `var7575`
+- New upvalue captured by `onMenuOpenChange`: `flp`
+- Upvalue no longer captured by `onMenuOpenChange`: `fkR`
+- New upvalue captured by `onMenuOpenChange`: `flp`
+- Upvalue no longer captured by `onMenuOpenChange`: `fkR`
+- New upvalue captured by `onMenuOpenChange`: `flp`
+- Upvalue no longer captured by `onMenuOpenChange`: `fkR`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `willUnmount`: `flr`
+- Upvalue no longer captured by `willUnmount`: `fkT`
+- New upvalue captured by `getPadding`: `bDy`
+- New upvalue captured by `getPadding`: `cQu`
+- New upvalue captured by `getPadding`: `flt`
+- Upvalue no longer captured by `getPadding`: `bDx`
+- Upvalue no longer captured by `getPadding`: `cQt`
+- Upvalue no longer captured by `getPadding`: `fkV`
+- New upvalue captured by `WithHooksComponent`: `cQu`
+- New upvalue captured by `WithHooksComponent`: `eAa`
+- New upvalue captured by `WithHooksComponent`: `eDG`
+- New upvalue captured by `WithHooksComponent`: `fli`
+- New upvalue captured by `WithHooksComponent`: `fln`
+- New upvalue captured by `WithHooksComponent`: `fmr`
+- Upvalue no longer captured by `WithHooksComponent`: `cQt`
+- Upvalue no longer captured by `WithHooksComponent`: `eBL`
+- Upvalue no longer captured by `WithHooksComponent`: `eyf`
+- Upvalue no longer captured by `WithHooksComponent`: `fkK`
+- Upvalue no longer captured by `WithHooksComponent`: `fkP`
+- Upvalue no longer captured by `WithHooksComponent`: `fkV`
+- New upvalue captured by `AppInformationPage`: `eAa`
+- New upvalue captured by `AppInformationPage`: `fli`
+- Upvalue no longer captured by `AppInformationPage`: `eyf`
+- Upvalue no longer captured by `AppInformationPage`: `fkK`
+- Upvalue no longer captured by `fmu`: `var1 (write)`
+- Upvalue no longer captured by `fmz`: `var1 (write)`
+- New function: `fmy`
+- New upvalue captured by `mock`: `fmu`
+- New upvalue captured by `mock`: `fmz`
+- Upvalue no longer captured by `mock`: `flW`
+- Upvalue no longer captured by `mock`: `fmb`
+- New upvalue captured by `fromJsonData`: `fmy`
+- Upvalue no longer captured by `fromJsonData`: `fma`
+- New upvalue captured by `getSubscriptionData`: `fmx`
+- New upvalue captured by `getSubscriptionData`: `fmy`
+- Upvalue no longer captured by `getSubscriptionData`: `flZ`
+- Upvalue no longer captured by `getSubscriptionData`: `fma`
+- New upvalue captured by `getAllSubscriptionData`: `fmu`
+- Upvalue no longer captured by `getAllSubscriptionData`: `flW`
+- New upvalue captured by `Fetch`: `dJE`
+- New upvalue captured by `Fetch`: `dzO`
+- New upvalue captured by `Fetch`: `fmA`
+- New upvalue captured by `Fetch`: `fmu`
+- New upvalue captured by `Fetch`: `fmw`
+- Upvalue no longer captured by `Fetch`: `dGL`
+- Upvalue no longer captured by `Fetch`: `dvK`
+- Upvalue no longer captured by `Fetch`: `flW`
+- Upvalue no longer captured by `Fetch`: `flY`
+- Upvalue no longer captured by `Fetch`: `fmc`
+- New upvalue captured by `render`: `dJR`
+- Upvalue no longer captured by `render`: `dGY`
+- New upvalue captured by `fmB`: `var1 (write)`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `fmC`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `fme`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- New upvalue captured by `onActivated`: `onGameActivated`
+- Upvalue no longer captured by `onActivated`: `onDevSubActivated`
+- New upvalue captured by `render`: `dJR`
+- New upvalue captured by `render`: `dJY`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `fmu`
+- New upvalue captured by `render`: `fmz`
+- Upvalue no longer captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `dHf`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `flW`
+- Upvalue no longer captured by `render`: `fmb`
+- Upvalue no longer captured by `fmG`: `var1 (write)`
+- New upvalue captured by `willDevSubExpire`: `fmz`
+- Upvalue no longer captured by `willDevSubExpire`: `fmb`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `fmE`
+- New upvalue captured by `render`: `fmz`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `fmb`
+- Upvalue no longer captured by `render`: `fmi`
+- New upvalue captured by `addDevSub`: `fmE`
+- New upvalue captured by `addDevSub`: `var7738 (write)`
+- Upvalue no longer captured by `addDevSub`: `fmg`
+- Upvalue no longer captured by `addDevSub`: `var7608 (write)`
+- New parameter added to `onActivated` (0 -> 1 params)
+- New upvalue captured by `onActivated`: `onDevSubActivated`
+- Upvalue no longer captured by `onActivated`: `cWk`
+- Upvalue no longer captured by `onActivated`: `fmq`
+- New upvalue captured by `fmt`: `var1 (write)`
+- New upvalue captured by `isSubActive`: `fmu`
+- Upvalue no longer captured by `isSubActive`: `flW`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `onGameActivated`: `cWl`
+- Upvalue no longer captured by `onGameActivated`: `cWk`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `fmB`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fmf`
+- New upvalue captured by `getGamesById`: `fmu`
+- Upvalue no longer captured by `getGamesById`: `flW`
+- New upvalue captured by `didMount`: `cRs`
+- Upvalue no longer captured by `didMount`: `cRr`
+- New upvalue captured by `dispatchFetchDevSubs`: `fmv`
+- Upvalue no longer captured by `dispatchFetchDevSubs`: `flX`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `dispatchDevSubMoreMenuOverlay`: `dKx`
+- New upvalue captured by `dispatchDevSubMoreMenuOverlay`: `dKy`
+- Upvalue no longer captured by `dispatchDevSubMoreMenuOverlay`: `dHE`
+- Upvalue no longer captured by `dispatchDevSubMoreMenuOverlay`: `dHF`
+- Upvalue no longer captured by `fmJ`: `var1 (write)`
+- New upvalue captured by `render`: `fmJ`
+- Upvalue no longer captured by `render`: `fml`
+- Upvalue no longer captured by `fmL`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `fmO`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `fmq`
+- New upvalue captured by `onActivated`: `cWl`
+- New upvalue captured by `onActivated`: `fmO`
+- New upvalue captured by `fireNoticeIdHasRead`: `fmP`
+- Upvalue no longer captured by `fireNoticeIdHasRead`: `fmr`
+- New upvalue captured by `render`: `fmL`
+- Upvalue no longer captured by `render`: `fmn`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `decrementUnreadTencentNoticeCount`: `fmM`
+- Upvalue no longer captured by `decrementUnreadTencentNoticeCount`: `fmo`
+- New upvalue captured by `readTencentNoticeId`: `fmN`
+- Upvalue no longer captured by `readTencentNoticeId`: `fmp`
+- New upvalue captured by `fmH`: `var1 (write)`
+- New upvalue captured by `init`: `fmK`
+- Upvalue no longer captured by `init`: `fmm`
+- New upvalue captured by `renderItem`: `fmK`
+- Upvalue no longer captured by `renderItem`: `fmm`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `fli`
+- New upvalue captured by `render`: `fmI`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fkK`
+- Upvalue no longer captured by `render`: `fmk`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `fli`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fkK`
+- New upvalue captured by `renderContent`: `eAP`
+- New upvalue captured by `renderContent`: `fmO`
+- Upvalue no longer captured by `renderContent`: `eyU`
+- Upvalue no longer captured by `renderContent`: `fmq`
+- New upvalue captured by `openNoticeDetail`: `eDt`
+- Upvalue no longer captured by `openNoticeDetail`: `eBy`
+- New upvalue captured by `fCo`: `var1 (write)`
+- New upvalue captured by `WrappedItem`: `dJW`
+- Upvalue no longer captured by `WrappedItem`: `dHd`
+- New upvalue captured by `render`: `dJW`
+- Upvalue no longer captured by `render`: `dHd`
+- New upvalue captured by `fCn`: `var1 (write)`
+- New upvalue captured by `render`: `dGY`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `fCo`
+- New upvalue captured by `render`: `fCp`
+- New upvalue captured by `render`: `fyf`
+- Upvalue no longer captured by `render`: `dCU`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `fBP`
+- Upvalue no longer captured by `render`: `fBQ`
+- Upvalue no longer captured by `render`: `fxG`
+- New function: `var7875`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `flf`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `fkH`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `init`: `eDA`
+- Upvalue no longer captured by `init`: `eBF`
+- New upvalue captured by `onContinueButtonActivated`: `eDA`
+- Upvalue no longer captured by `onContinueButtonActivated`: `eBF`
+- New upvalue captured by `onCloseButtonClicked`: `eDA`
+- Upvalue no longer captured by `onCloseButtonClicked`: `eBF`
+- New upvalue captured by `didMount`: `eDA`
+- Upvalue no longer captured by `didMount`: `eBF`
+- New upvalue captured by `render`: `dGY`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `fCn`
+- New upvalue captured by `render`: `fCq`
+- New upvalue captured by `render`: `fCr`
+- New upvalue captured by `render`: `fpA`
+- Upvalue no longer captured by `render`: `dCU`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `fBO`
+- Upvalue no longer captured by `render`: `fBR`
+- Upvalue no longer captured by `render`: `fBS`
+- Upvalue no longer captured by `render`: `fpc`
+- New upvalue captured by `renderWidget`: `dJW`
+- New upvalue captured by `renderWidget`: `dKl`
+- New upvalue captured by `renderWidget`: `fCq`
+- Upvalue no longer captured by `renderWidget`: `dHd`
+- Upvalue no longer captured by `renderWidget`: `dHs`
+- Upvalue no longer captured by `renderWidget`: `fBR`
+- New upvalue captured by `setSignUpBirthday`: `cRH`
+- Upvalue no longer captured by `setSignUpBirthday`: `cRG`
+- New upvalue captured by `navigateToSinglePageSignUp`: `cWl`
+- New upvalue captured by `navigateToSinglePageSignUp`: `fCl`
+- Upvalue no longer captured by `navigateToSinglePageSignUp`: `cWk`
+- Upvalue no longer captured by `navigateToSinglePageSignUp`: `fBM`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New function: `fCK`
+- Upvalue no longer captured by `fCM`: `var1 (write)`
+- New function: `fCO`
+- New function: `var8062`
+- New function: `var8063`
+- New function: `var8064`
+- New function: `var8065`
+- New function: `var8066`
+- New upvalue captured by `_`: `foa`
+- Upvalue no longer captured by `_`: `fnC`
+- New function: `var8067`
+- New function: `var8082`
+- New function: `var8068`
+- New function: `var8069`
+- New upvalue captured by `resetNavigationHistory`: `eDA`
+- New upvalue captured by `resetNavigationHistory`: `flE`
+- New upvalue captured by `resetNavigationHistory`: `fmS`
+- New upvalue captured by `resetNavigationHistory`: `foa`
+- New upvalue captured by `resetNavigationHistory`: `foe`
+- Upvalue no longer captured by `resetNavigationHistory`: `eBF`
+- Upvalue no longer captured by `resetNavigationHistory`: `flg`
+- Upvalue no longer captured by `resetNavigationHistory`: `fmu`
+- Upvalue no longer captured by `resetNavigationHistory`: `fnC`
+- Upvalue no longer captured by `resetNavigationHistory`: `fnG`
+- Upvalue no longer captured by `onActivated`: `eBF`
+- Upvalue no longer captured by `onActivated`: `passkeySignupUsername`
+- New upvalue captured by `onActivated`: `eDA`
+- New upvalue captured by `onActivated`: `passkeySignupUsername`
+- Upvalue no longer captured by `onActivated`: `eBF`
+- Upvalue no longer captured by `onActivated`: `passkeySignupUsername`
+- New upvalue captured by `onActivated`: `eDA`
+- New upvalue captured by `onActivated`: `passkeySignupUsername`
+- Upvalue no longer captured by `onActivated`: `authButtonClick`
+- Upvalue no longer captured by `onActivated`: `eventStreamConstants`
+- New upvalue captured by `fDh`: `var1 (write)`
+- New upvalue captured by `fDj`: `var1 (write)`
+- Upvalue no longer captured by `onActivated`: `consoleDisconnect`
+- Upvalue no longer captured by `onActivated`: `logoutReasonNames`
+- New upvalue captured by `onActivated`: `authButtonClick`
+- New upvalue captured by `onActivated`: `consoleDisconnect`
+- New upvalue captured by `onActivated`: `eventStreamConstants`
+- New upvalue captured by `onActivated`: `logoutReasonNames`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppEdpBackendV2HydrateLegacyIxp`
+- Upvalue no longer captured by `onActivated`: `fFlagMigrateGameInfoToStore`
+- Upvalue no longer captured by `onActivated`: `openContextualMenu`
+- Upvalue no longer captured by `fDn`: `var1 (write)`
+- Upvalue no longer captured by `fDo`: `var1 (write)`
+- New upvalue captured by `willUnmount`: `cQv`
+- Upvalue no longer captured by `willUnmount`: `cQu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dzX`
+- New upvalue captured by `render`: `eFe`
+- New upvalue captured by `render`: `ezY`
+- New upvalue captured by `render`: `fDn`
+- New upvalue captured by `render`: `fDo`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dvT`
+- Upvalue no longer captured by `render`: `eDj`
+- Upvalue no longer captured by `render`: `eyd`
+- Upvalue no longer captured by `render`: `fCO`
+- Upvalue no longer captured by `render`: `fCP`
+- New upvalue captured by `windowClosedCallback`: `eFe`
+- Upvalue no longer captured by `windowClosedCallback`: `eDj`
+- New upvalue captured by `javaScriptCallback`: `fDn`
+- Upvalue no longer captured by `javaScriptCallback`: `fCO`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `setBackNavigationDisabled`: `eFf`
+- Upvalue no longer captured by `setBackNavigationDisabled`: `eDk`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fDA_sendNotApprovedPageEvent`
+- New upvalue captured by `renderPageItemsFromList`: `fDx`
+- Upvalue no longer captured by `renderPageItemsFromList`: `fCY`
+- Upvalue no longer captured by `fDG`: `var1 (write)`
+- Upvalue no longer captured by `fDO`: `var1 (write)`
+- New upvalue captured by `fDP`: `var1 (write)`
+- New upvalue captured by `NotApprovedPageProvider`: `fDM`
+- New upvalue captured by `NotApprovedPageProvider`: `fDS`
+- New upvalue captured by `NotApprovedPageProvider`: `fDx`
+- Upvalue no longer captured by `NotApprovedPageProvider`: `fCY`
+- Upvalue no longer captured by `NotApprovedPageProvider`: `fDn`
+- Upvalue no longer captured by `NotApprovedPageProvider`: `fDt`
+- New upvalue captured by `useNotApprovedPageContext`: `fDC`
+- Upvalue no longer captured by `useNotApprovedPageContext`: `fDd`
+- New upvalue captured by `BadUtterancesContent`: `fDx`
+- Upvalue no longer captured by `BadUtterancesContent`: `fCY`
+- New upvalue captured by `getIsVisible`: `fDM`
+- Upvalue no longer captured by `getIsVisible`: `fDn`
+- Upvalue no longer captured by `fEh`: `var1 (write)`
+- New upvalue captured by `getIsVisible`: `fDM`
+- Upvalue no longer captured by `getIsVisible`: `fDn`
+- New upvalue captured by `getIsVisible`: `fDM`
+- Upvalue no longer captured by `getIsVisible`: `fDn`
+- Upvalue no longer captured by `fEv`: `var1 (write)`
+- Upvalue no longer captured by `fEy`: `var1 (write)`
+- New function: `fEE`
+- New function: `fEI`
+- New upvalue captured by `getEducationalPages`: `fDB`
+- New upvalue captured by `getEducationalPages`: `fDG`
+- New upvalue captured by `getEducationalPages`: `fEM`
+- New upvalue captured by `getEducationalPages`: `fEr`
+- Upvalue no longer captured by `getEducationalPages`: `fDc`
+- Upvalue no longer captured by `getEducationalPages`: `fDi`
+- Upvalue no longer captured by `getEducationalPages`: `fDS`
+- Upvalue no longer captured by `getEducationalPages`: `fEn`
+- New upvalue captured by `generatePages`: `fDU`
+- New upvalue captured by `generatePages`: `fEi`
+- New upvalue captured by `generatePages`: `fEk`
+- New upvalue captured by `generatePages`: `fEM`
+- New upvalue captured by `generatePages`: `fEo`
+- New upvalue captured by `generatePages`: `fEp`
+- New upvalue captured by `generatePages`: `fEq`
+- New upvalue captured by `generatePages`: `fEr`
+- New upvalue captured by `generatePages`: `fEz`
+- Upvalue no longer captured by `generatePages`: `fDJ`
+- Upvalue no longer captured by `generatePages`: `fDL`
+- Upvalue no longer captured by `generatePages`: `fDO`
+- Upvalue no longer captured by `generatePages`: `fDP`
+- Upvalue no longer captured by `generatePages`: `fDQ`
+- Upvalue no longer captured by `generatePages`: `fDR`
+- Upvalue no longer captured by `generatePages`: `fDS`
+- Upvalue no longer captured by `generatePages`: `fDw`
+- Upvalue no longer captured by `generatePages`: `fEb`
+- Upvalue no longer captured by `generatePages`: `fEj`
+- New upvalue captured by `getReviewedEvidencePageItemConfigs`: `fDK`
+- New upvalue captured by `getReviewedEvidencePageItemConfigs`: `fEl`
+- New upvalue captured by `getReviewedEvidencePageItemConfigs`: `fEm`
+- Upvalue no longer captured by `getReviewedEvidencePageItemConfigs`: `fDl`
+- Upvalue no longer captured by `getReviewedEvidencePageItemConfigs`: `fDM`
+- Upvalue no longer captured by `getReviewedEvidencePageItemConfigs`: `fDN`
+- New upvalue captured by `PageNavigationProvider`: `fDG`
+- New upvalue captured by `PageNavigationProvider`: `fDx`
+- New upvalue captured by `PageNavigationProvider`: `fEy`
+- Upvalue no longer captured by `PageNavigationProvider`: `fCY`
+- Upvalue no longer captured by `PageNavigationProvider`: `fDh`
+- Upvalue no longer captured by `PageNavigationProvider`: `fDZ`
+- New upvalue captured by `usePageNavigation`: `fDC`
+- Upvalue no longer captured by `usePageNavigation`: `fDd`
+- New upvalue captured by `fDz`: `var1 (write)`
+- New upvalue captured by `PageAnalyticsProvider`: `fDA`
+- New upvalue captured by `PageAnalyticsProvider`: `fDx`
+- Upvalue no longer captured by `PageAnalyticsProvider`: `fCY`
+- Upvalue no longer captured by `PageAnalyticsProvider`: `fDc`
+- New upvalue captured by `usePageAnalytics`: `fDC`
+- Upvalue no longer captured by `usePageAnalytics`: `fDd`
+- New upvalue captured by `fDw`: `var1 (write)`
+- New upvalue captured by `fEP`: `var1 (write)`
+- New function: `fES`
+- New function: `fET`
+- New upvalue captured by `fEO`: `var1 (write)`
+- New upvalue captured by `fEV`: `var1 (write)`
+- New upvalue captured by `fEW`: `var1 (write)`
+- New upvalue captured by `fFb`: `var1 (write)`
+- New upvalue captured by `render`: `cQu`
+- Upvalue no longer captured by `render`: `cQt`
+- New function: `var8604`
+- New upvalue captured by `render`: `fFj`
+- Upvalue no longer captured by `render`: `fEK`
+- New function: `fFm`
+- New function: `fFn`
+- Upvalue no longer captured by `fFo`: `var1 (write)`
+- New upvalue captured by `getEdpStoreKey`: `cQj`
+- Upvalue no longer captured by `getEdpStoreKey`: `cQi`
+- New upvalue captured by `getUnprocessedEdpStoreKey`: `cQj`
+- Upvalue no longer captured by `getUnprocessedEdpStoreKey`: `cQi`
+- New upvalue captured by `_`: `fFv`
+- Upvalue no longer captured by `_`: `fEW`
+- New upvalue captured by `safeParseData`: `fFp`
+- Upvalue no longer captured by `safeParseData`: `fEQ`
+- New upvalue captured by `parseGameDetails`: `fFp`
+- Upvalue no longer captured by `parseGameDetails`: `fEQ`
+- New upvalue captured by `parseGameMedia`: `fFp`
+- Upvalue no longer captured by `parseGameMedia`: `fEQ`
+- New upvalue captured by `parseRecommendedGames`: `fFp`
+- Upvalue no longer captured by `parseRecommendedGames`: `fEQ`
+- New upvalue captured by `parseGamePasses`: `fFp`
+- Upvalue no longer captured by `parseGamePasses`: `fEQ`
+- New upvalue captured by `parseFollowingStatus`: `fFp`
+- Upvalue no longer captured by `parseFollowingStatus`: `fEQ`
+- New upvalue captured by `parseCommunityLinks`: `fFp`
+- Upvalue no longer captured by `parseCommunityLinks`: `fEQ`
+- New upvalue captured by `parseAgeRecommendations`: `fFp`
+- Upvalue no longer captured by `parseAgeRecommendations`: `fEQ`
+- New upvalue captured by `updateDataHydrationStores`: `dzO`
+- Upvalue no longer captured by `updateDataHydrationStores`: `dvK`
+- New upvalue captured by `parseEdpServerIxpVariables`: `fFp`
+- Upvalue no longer captured by `parseEdpServerIxpVariables`: `fEQ`
+- New upvalue captured by `parseEdpServerVariables`: `fFp`
+- Upvalue no longer captured by `parseEdpServerVariables`: `fEQ`
+- New upvalue captured by `Fetch`: `cSh`
+- New upvalue captured by `Fetch`: `cSj`
+- New upvalue captured by `Fetch`: `cSn`
+- New upvalue captured by `Fetch`: `cSp`
+- New upvalue captured by `Fetch`: `cTt`
+- New upvalue captured by `Fetch`: `cTx`
+- New upvalue captured by `Fetch`: `cUQ`
+- New upvalue captured by `Fetch`: `cUZ`
+- New upvalue captured by `Fetch`: `dJE`
+- New upvalue captured by `Fetch`: `dzO`
+- New upvalue captured by `Fetch`: `fFn`
+- New upvalue captured by `Fetch`: `fFo`
+- New upvalue captured by `Fetch`: `fFp`
+- New upvalue captured by `Fetch`: `fFq`
+- New upvalue captured by `Fetch`: `fFr`
+- New upvalue captured by `Fetch`: `fFt`
+- New upvalue captured by `Fetch`: `var8653 (write)`
+- Upvalue no longer captured by `Fetch`: `cSF`
+- Upvalue no longer captured by `Fetch`: `cSi`
+- Upvalue no longer captured by `Fetch`: `cSl`
+- Upvalue no longer captured by `Fetch`: `cSo`
+- Upvalue no longer captured by `Fetch`: `cTs`
+- Upvalue no longer captured by `Fetch`: `cTw`
+- Upvalue no longer captured by `Fetch`: `cUP`
+- Upvalue no longer captured by `Fetch`: `cUY`
+- Upvalue no longer captured by `Fetch`: `dGL`
+- Upvalue no longer captured by `Fetch`: `dvK`
+- Upvalue no longer captured by `Fetch`: `fEO`
+- Upvalue no longer captured by `Fetch`: `fEP`
+- Upvalue no longer captured by `Fetch`: `fEQ`
+- Upvalue no longer captured by `Fetch`: `fER`
+- Upvalue no longer captured by `Fetch`: `fES`
+- Upvalue no longer captured by `Fetch`: `fEU`
+- Upvalue no longer captured by `Fetch`: `var8523 (write)`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `openContextualMenu`: `fFz`
+- Upvalue no longer captured by `openContextualMenu`: `fFa`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `onActivated`: `fFlagLuaAppEdpBackendV2HydrateLegacyIxp`
+- New upvalue captured by `onActivated`: `fFlagMigrateGameInfoToStore`
+- New upvalue captured by `onActivated`: `openContextualMenu`
+- Upvalue no longer captured by `onActivated`: `appPage`
+- Upvalue no longer captured by `onActivated`: `eDb`
+- Upvalue no longer captured by `onActivated`: `fEX`
+- Upvalue no longer captured by `onActivated`: `fFlagEnableBlackbirdPageCloseCallback`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppAddUniverseIdToGameDetailsEvents`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppBadgesSeeAllEnabled`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppBadgesSeeAllLogExposure`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppDevStoreSeeAllSduiEnabled`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppDevStoreSeeAllSduiLogExposure`
+- Upvalue no longer captured by `onActivated`: `fFu`
+- Upvalue no longer captured by `onActivated`: `fFv`
+- Upvalue no longer captured by `onActivated`: `fStringLuaAppBadgesSeeAllIxpLayer`
+- Upvalue no longer captured by `onActivated`: `fStringLuaAppDevStoreSeeAllSduiIxpLayer`
+- Upvalue no longer captured by `onActivated`: `gameDetailsSubpage`
+- Upvalue no longer captured by `onActivated`: `IXPService`
+- Upvalue no longer captured by `onActivated`: `luaAppRemoveDeadGameInfoRowTooltipBranch`
+- Upvalue no longer captured by `onActivated`: `navigateToBadgesSeeAll`
+- Upvalue no longer captured by `onActivated`: `navigateToDevStoreSeeAll`
+- New upvalue captured by `openContextualMenu`: `fFB`
+- Upvalue no longer captured by `openContextualMenu`: `fFc`
+- New upvalue captured by `render`: `fFA`
+- New upvalue captured by `render`: `fFi`
+- New upvalue captured by `render`: `fFk`
+- Upvalue no longer captured by `render`: `fEJ`
+- Upvalue no longer captured by `render`: `fEL`
+- Upvalue no longer captured by `render`: `fFb`
+- New function: `fFG`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `fyB`
+- New upvalue captured by `render`: `fyE`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `fyc`
+- Upvalue no longer captured by `render`: `fyf`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `fyB`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `fyc`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `fFJ`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `fFk`
+- New function: `fFO`
+- New function: `fFP`
+- New function: `fFR`
+- New function: `fFT`
+- New function: `fFN`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `fFT`
+- New upvalue captured by `init`: `fFw`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fEX`
+- Upvalue no longer captured by `init`: `fFv`
+- New upvalue captured by `onActivated`: `appPage`
+- New upvalue captured by `onActivated`: `eEW`
+- New upvalue captured by `onActivated`: `fFlagEnableBlackbirdPageCloseCallback`
+- New upvalue captured by `onActivated`: `fFlagLuaAppAddUniverseIdToGameDetailsEvents`
+- New upvalue captured by `onActivated`: `fFlagLuaAppBadgesSeeAllEnabled`
+- New upvalue captured by `onActivated`: `fFlagLuaAppBadgesSeeAllLogExposure`
+- New upvalue captured by `onActivated`: `fFlagLuaAppDevStoreSeeAllSduiEnabled`
+- New upvalue captured by `onActivated`: `fFlagLuaAppDevStoreSeeAllSduiLogExposure`
+- New upvalue captured by `onActivated`: `fFT`
+- New upvalue captured by `onActivated`: `fFU`
+- New upvalue captured by `onActivated`: `fFw`
+- New upvalue captured by `onActivated`: `fStringLuaAppBadgesSeeAllIxpLayer`
+- New upvalue captured by `onActivated`: `fStringLuaAppDevStoreSeeAllSduiIxpLayer`
+- New upvalue captured by `onActivated`: `gameDetailsSubpage`
+- New upvalue captured by `onActivated`: `IXPService`
+- New upvalue captured by `onActivated`: `luaAppRemoveDeadGameInfoRowTooltipBranch`
+- New upvalue captured by `onActivated`: `navigateToBadgesSeeAll`
+- New upvalue captured by `onActivated`: `navigateToDevStoreSeeAll`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppAddSocialLinkClickTelemetryToEdp`
+- Upvalue no longer captured by `onActivated`: `sendOpenLeavingRobloxModalEvent`
+- New upvalue captured by `render`: `eEf`
+- New upvalue captured by `render`: `fFQ`
+- Upvalue no longer captured by `render`: `eCk`
+- Upvalue no longer captured by `render`: `fFr`
+- Upvalue no longer captured by `fGt`: `var1 (write)`
+- New upvalue captured by `fGv`: `var1 (write)`
+- New upvalue captured by `fGx`: `var1 (write)`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `fGA`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dzO`
+- New upvalue captured by `init`: `eDs`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `fGs`
+- New upvalue captured by `init`: `fGt`
+- New upvalue captured by `init`: `fGz`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dvK`
+- Upvalue no longer captured by `init`: `eBx`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fFT`
+- Upvalue no longer captured by `init`: `fFU`
+- Upvalue no longer captured by `init`: `fGb`
+- New upvalue captured by `promptPurchase`: `dzO`
+- New upvalue captured by `promptPurchase`: `fGs`
+- New upvalue captured by `promptPurchase`: `fGz`
+- Upvalue no longer captured by `promptPurchase`: `dvK`
+- Upvalue no longer captured by `promptPurchase`: `fFT`
+- Upvalue no longer captured by `promptPurchase`: `fGb`
+- New upvalue captured by `onPurchaseSuccess`: `dzO`
+- Upvalue no longer captured by `onPurchaseSuccess`: `dvK`
+- New upvalue captured by `viewPassDetails`: `cWl`
+- New upvalue captured by `viewPassDetails`: `eDs`
+- New upvalue captured by `viewPassDetails`: `eEW`
+- New upvalue captured by `viewPassDetails`: `fGA`
+- New upvalue captured by `viewPassDetails`: `fGs`
+- Upvalue no longer captured by `viewPassDetails`: `cWk`
+- Upvalue no longer captured by `viewPassDetails`: `eBx`
+- Upvalue no longer captured by `viewPassDetails`: `eDb`
+- Upvalue no longer captured by `viewPassDetails`: `fFT`
+- Upvalue no longer captured by `viewPassDetails`: `fGb`
+- New upvalue captured by `render`: `fGt`
+- New upvalue captured by `render`: `fGy`
+- Upvalue no longer captured by `render`: `fFU`
+- Upvalue no longer captured by `render`: `fFZ`
+- New upvalue captured by `didMount`: `fGt`
+- Upvalue no longer captured by `didMount`: `fFv`
+- New upvalue captured by `requestPurchasePass`: `fFX`
+- Upvalue no longer captured by `requestPurchasePass`: `fFy`
+- New upvalue captured by `requestPurchasePassWithUnifiedPurchasePrompt`: `fGu`
+- Upvalue no longer captured by `requestPurchasePassWithUnifiedPurchasePrompt`: `fFV`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `init`: `fFW`
+- New upvalue captured by `init`: `fGt`
+- Upvalue no longer captured by `init`: `fFU`
+- Upvalue no longer captured by `init`: `fFx`
+- New upvalue captured by `renderPass`: `fFW`
+- Upvalue no longer captured by `renderPass`: `fFx`
+- New upvalue captured by `render`: `cWl`
+- New upvalue captured by `render`: `fGt`
+- Upvalue no longer captured by `render`: `cWk`
+- Upvalue no longer captured by `render`: `fFU`
+- New upvalue captured by `pageFilter`: `cWl`
+- Upvalue no longer captured by `pageFilter`: `cWk`
+- New upvalue captured by `fGB`: `var1 (write)`
+- Upvalue no longer captured by `fGE`: `var1 (write)`
+- New upvalue captured by `init`: `fFv`
+- Upvalue no longer captured by `init`: `fEW`
+- New upvalue captured by `onActivated`: `fFlagLuaAppAddSocialLinkClickTelemetryToEdp`
+- New upvalue captured by `onActivated`: `sendOpenLeavingRobloxModalEvent`
+- New upvalue captured by `getUriParams`: `fFv`
+- Upvalue no longer captured by `getUriParams`: `fEW`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `fGE`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `fGf`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `fGD`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `fGe`
+- New function: `var8958`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fGJ_LogoTrayItem`
+- Upvalue no longer captured by `onActivated`: `var9619 (write)`
+- New upvalue captured by `fGI`: `var1 (write)`
+- New function: `var8974`
+- New upvalue captured by `init`: `fFv`
+- Upvalue no longer captured by `init`: `fEW`
+- New upvalue captured by `_`: `fFv`
+- Upvalue no longer captured by `_`: `fEW`
+- New upvalue captured by `getItemClickCallback`: `fFv`
+- Upvalue no longer captured by `getItemClickCallback`: `fEW`
+- New upvalue captured by `render`: `fGJ`
+- Upvalue no longer captured by `render`: `fGk`
+- Upvalue no longer captured by `fGL`: `var1 (write)`
+- New upvalue captured by `fGM`: `var1 (write)`
+- New upvalue captured by `init`: `bDG`
+- New upvalue captured by `init`: `dJA`
+- New upvalue captured by `init`: `fFN`
+- New upvalue captured by `init`: `fFU`
+- New upvalue captured by `init`: `fGA`
+- Upvalue no longer captured by `init`: `bDF`
+- Upvalue no longer captured by `init`: `dGH`
+- Upvalue no longer captured by `init`: `fFo`
+- Upvalue no longer captured by `init`: `fFw`
+- Upvalue no longer captured by `init`: `fGb`
+- New upvalue captured by `createGamePassPreviewRow`: `bDG`
+- New upvalue captured by `createGamePassPreviewRow`: `dJA`
+- New upvalue captured by `createGamePassPreviewRow`: `fFN`
+- New upvalue captured by `createGamePassPreviewRow`: `fFU`
+- New upvalue captured by `createGamePassPreviewRow`: `fGA`
+- Upvalue no longer captured by `createGamePassPreviewRow`: `bDF`
+- Upvalue no longer captured by `createGamePassPreviewRow`: `dGH`
+- Upvalue no longer captured by `createGamePassPreviewRow`: `fFo`
+- Upvalue no longer captured by `createGamePassPreviewRow`: `fFw`
+- Upvalue no longer captured by `createGamePassPreviewRow`: `fGb`
+- New upvalue captured by `makeGameInfoListData`: `cWl`
+- New upvalue captured by `makeGameInfoListData`: `eDs`
+- New upvalue captured by `makeGameInfoListData`: `fFD`
+- New upvalue captured by `makeGameInfoListData`: `fFw`
+- New upvalue captured by `makeGameInfoListData`: `fGF`
+- Upvalue no longer captured by `makeGameInfoListData`: `cWk`
+- Upvalue no longer captured by `makeGameInfoListData`: `eBx`
+- Upvalue no longer captured by `makeGameInfoListData`: `fEX`
+- Upvalue no longer captured by `makeGameInfoListData`: `fFe`
+- Upvalue no longer captured by `makeGameInfoListData`: `fGi`
+- New upvalue captured by `createSocialMediaRow`: `bDG`
+- New upvalue captured by `createSocialMediaRow`: `cWl`
+- New upvalue captured by `createSocialMediaRow`: `dJA`
+- New upvalue captured by `createSocialMediaRow`: `fGB`
+- New upvalue captured by `createSocialMediaRow`: `fGI`
+- Upvalue no longer captured by `createSocialMediaRow`: `bDF`
+- Upvalue no longer captured by `createSocialMediaRow`: `cWk`
+- Upvalue no longer captured by `createSocialMediaRow`: `dGH`
+- Upvalue no longer captured by `createSocialMediaRow`: `fGd`
+- Upvalue no longer captured by `createSocialMediaRow`: `fGj`
+- New upvalue captured by `createCommunityRow`: `dJA`
+- Upvalue no longer captured by `createCommunityRow`: `dGH`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `fFN`
+- New upvalue captured by `render`: `fFw`
+- New upvalue captured by `render`: `fGL`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `fEX`
+- Upvalue no longer captured by `render`: `fFo`
+- Upvalue no longer captured by `render`: `fGn`
+- New upvalue captured by `didUpdate`: `cWl`
+- New upvalue captured by `didUpdate`: `dzO`
+- Upvalue no longer captured by `didUpdate`: `cWk`
+- Upvalue no longer captured by `didUpdate`: `dvK`
+- New upvalue captured by `SendGameFollow`: `cQv`
+- New upvalue captured by `SendGameFollow`: `cSk`
+- New upvalue captured by `SendGameFollow`: `cSm`
+- New upvalue captured by `SendGameFollow`: `cWd`
+- New upvalue captured by `SendGameFollow`: `dJE`
+- New upvalue captured by `SendGameFollow`: `dJF`
+- New upvalue captured by `SendGameFollow`: `dzO`
+- New upvalue captured by `SendGameFollow`: `fGQ`
+- Upvalue no longer captured by `SendGameFollow`: `cQu`
+- Upvalue no longer captured by `SendGameFollow`: `cSj`
+- Upvalue no longer captured by `SendGameFollow`: `cSl`
+- Upvalue no longer captured by `SendGameFollow`: `cWc`
+- Upvalue no longer captured by `SendGameFollow`: `dGL`
+- Upvalue no longer captured by `SendGameFollow`: `dGM`
+- Upvalue no longer captured by `SendGameFollow`: `dvK`
+- Upvalue no longer captured by `SendGameFollow`: `fGs`
+- New function: `var9126`
+- Upvalue no longer captured by `fGU`: `var1 (write)`
+- Upvalue no longer captured by `fGV`: `var1 (write)`
+- New upvalue captured by `_`: `var9142 (write)`
+- Upvalue no longer captured by `_`: `var9012 (write)`
+- New upvalue captured by `onClose`: `dLo`
+- Upvalue no longer captured by `onClose`: `dIv`
+- New upvalue captured by `onConfirm`: `cWl`
+- New upvalue captured by `onConfirm`: `fGZ`
+- Upvalue no longer captured by `onConfirm`: `cWk`
+- Upvalue no longer captured by `onConfirm`: `fGA`
+- New upvalue captured by `fHa`: `var1 (write)`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `openLeaveRobloxAlertUIBlox`: `eEp`
+- Upvalue no longer captured by `openLeaveRobloxAlertUIBlox`: `eCu`
+- New upvalue captured by `openMoreContextualMenu`: `fFz`
+- Upvalue no longer captured by `openMoreContextualMenu`: `fFa`
+- New upvalue captured by `openShareContextualMenu`: `fFB`
+- Upvalue no longer captured by `openShareContextualMenu`: `fFc`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `openVerifiedBadgeModal`: `fGY`
+- Upvalue no longer captured by `openVerifiedBadgeModal`: `fGz`
+- New upvalue captured by `openCreatorPage`: `dKM`
+- Upvalue no longer captured by `openCreatorPage`: `dHT`
+- New upvalue captured by `openExperienceGuidelinesExplained`: `fFR`
+- Upvalue no longer captured by `openExperienceGuidelinesExplained`: `fFs`
+- New upvalue captured by `openRefundPolicyLearnMorePage`: `fHa`
+- Upvalue no longer captured by `openRefundPolicyLearnMorePage`: `fGB`
+- New upvalue captured by `openWebview`: `eDt`
+- Upvalue no longer captured by `openWebview`: `eBy`
+- New upvalue captured by `openUserProfilePage`: `dKM`
+- Upvalue no longer captured by `openUserProfilePage`: `dHT`
+- Upvalue no longer captured by `fHb`: `var1 (write)`
+- Upvalue no longer captured by `fHc`: `var1 (write)`
+- Upvalue no longer captured by `fHd`: `var1 (write)`
+- New upvalue captured by `init`: `eAK`
+- New upvalue captured by `init`: `eEf`
+- New upvalue captured by `init`: `fFD`
+- New upvalue captured by `init`: `fGL`
+- New upvalue captured by `init`: `fGW`
+- New upvalue captured by `init`: `fHb`
+- New upvalue captured by `init`: `fHc`
+- New upvalue captured by `init`: `fHd`
+- Upvalue no longer captured by `init`: `eCk`
+- Upvalue no longer captured by `init`: `eyP`
+- Upvalue no longer captured by `init`: `fFe`
+- Upvalue no longer captured by `init`: `fGC`
+- Upvalue no longer captured by `init`: `fGD`
+- Upvalue no longer captured by `init`: `fGE`
+- Upvalue no longer captured by `init`: `fGm`
+- Upvalue no longer captured by `init`: `fGx`
+- New upvalue captured by `renderSubtitle`: `eEf`
+- New upvalue captured by `renderSubtitle`: `fFD`
+- New upvalue captured by `renderSubtitle`: `fGL`
+- New upvalue captured by `renderSubtitle`: `fGW`
+- New upvalue captured by `renderSubtitle`: `fHb`
+- New upvalue captured by `renderSubtitle`: `fHc`
+- New upvalue captured by `renderSubtitle`: `fHd`
+- Upvalue no longer captured by `renderSubtitle`: `eCk`
+- Upvalue no longer captured by `renderSubtitle`: `fFe`
+- Upvalue no longer captured by `renderSubtitle`: `fGC`
+- Upvalue no longer captured by `renderSubtitle`: `fGD`
+- Upvalue no longer captured by `renderSubtitle`: `fGE`
+- Upvalue no longer captured by `renderSubtitle`: `fGm`
+- Upvalue no longer captured by `renderSubtitle`: `fGx`
+- New function: `var9199`
+- New upvalue captured by `render`: `fFD`
+- New upvalue captured by `render`: `fGS`
+- Upvalue no longer captured by `render`: `fFe`
+- Upvalue no longer captured by `render`: `fGt`
+- New upvalue captured by `sendGameFollow`: `fGP`
+- Upvalue no longer captured by `sendGameFollow`: `fGq`
+- New upvalue captured by `gameHeader`: `fFD`
+- New upvalue captured by `gameHeader`: `fFG`
+- New upvalue captured by `gameHeader`: `fGX`
+- New upvalue captured by `gameHeader`: `fHb`
+- Upvalue no longer captured by `gameHeader`: `fFe`
+- Upvalue no longer captured by `gameHeader`: `fFh`
+- Upvalue no longer captured by `gameHeader`: `fGC`
+- Upvalue no longer captured by `gameHeader`: `fGy`
+- New upvalue captured by `GetMinimumWidth`: `eAP`
+- Upvalue no longer captured by `GetMinimumWidth`: `eyU`
+- New upvalue captured by `GetMinimumWidthRethemed`: `eAP`
+- Upvalue no longer captured by `GetMinimumWidthRethemed`: `eyU`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJR`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dGY`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJR`
+- New upvalue captured by `render`: `dJY`
+- New upvalue captured by `render`: `fyB`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `dHf`
+- Upvalue no longer captured by `render`: `fyc`
+- New function: `fHg`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `render`: `dJR`
+- New upvalue captured by `render`: `fHf`
+- New upvalue captured by `render`: `fHh`
+- Upvalue no longer captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `fGG`
+- Upvalue no longer captured by `render`: `fGI`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `getLayoutInfo`: `fHf`
+- Upvalue no longer captured by `getLayoutInfo`: `fGG`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `fHf`
+- New upvalue captured by `render`: `fHg`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `fGG`
+- Upvalue no longer captured by `render`: `fGH`
+- New upvalue captured by `_`: `fFv`
+- Upvalue no longer captured by `_`: `fEW`
+- New upvalue captured by `Fetch`: `cTx`
+- New upvalue captured by `Fetch`: `fHt`
+- Upvalue no longer captured by `Fetch`: `cTw`
+- Upvalue no longer captured by `Fetch`: `fGU`
+- New upvalue captured by `Fetch`: `cUZ`
+- New upvalue captured by `Fetch`: `dJE`
+- New upvalue captured by `Fetch`: `dJF`
+- New upvalue captured by `Fetch`: `fHv`
+- Upvalue no longer captured by `Fetch`: `cUY`
+- Upvalue no longer captured by `Fetch`: `dGL`
+- Upvalue no longer captured by `Fetch`: `dGM`
+- Upvalue no longer captured by `Fetch`: `fGW`
+- Upvalue no longer captured by `fHy`: `var1 (write)`
+- Upvalue no longer captured by `fHz`: `var1 (write)`
+- New upvalue captured by `logMissingDataMetrics`: `fFp`
+- Upvalue no longer captured by `logMissingDataMetrics`: `fEQ`
+- New upvalue captured by `startFirstClassFetchPromises`: `dzO`
+- New upvalue captured by `startFirstClassFetchPromises`: `fFl`
+- New upvalue captured by `startFirstClassFetchPromises`: `fFp`
+- New upvalue captured by `startFirstClassFetchPromises`: `fFq`
+- New upvalue captured by `startFirstClassFetchPromises`: `fHy`
+- New upvalue captured by `startFirstClassFetchPromises`: `fHz`
+- Upvalue no longer captured by `startFirstClassFetchPromises`: `dvK`
+- Upvalue no longer captured by `startFirstClassFetchPromises`: `fEM`
+- Upvalue no longer captured by `startFirstClassFetchPromises`: `fEQ`
+- Upvalue no longer captured by `startFirstClassFetchPromises`: `fER`
+- Upvalue no longer captured by `startFirstClassFetchPromises`: `fGZ`
+- Upvalue no longer captured by `startFirstClassFetchPromises`: `fHa`
+- New upvalue captured by `startSecondClassFetchPromises`: `cbw`
+- New upvalue captured by `startSecondClassFetchPromises`: `dzO`
+- New upvalue captured by `startSecondClassFetchPromises`: `fFL`
+- New upvalue captured by `startSecondClassFetchPromises`: `fFZ`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHk`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHm`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHo`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHq`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHs`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHu`
+- New upvalue captured by `startSecondClassFetchPromises`: `fHw`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `cbv`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `dvK`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fFA`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fFm`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fGN`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fGP`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fGR`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fGT`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fGV`
+- Upvalue no longer captured by `startSecondClassFetchPromises`: `fGX`
+- New upvalue captured by `connect`: `eAK`
+- New upvalue captured by `connect`: `eCq`
+- Upvalue no longer captured by `connect`: `eAv`
+- Upvalue no longer captured by `connect`: `eyP`
+- New upvalue captured by `fHB`: `var1 (write)`
+- New function: `var9441`
+- New function: `var9442`
+- New function: `fHG`
+- New function: `var9503`
+- New function: `var9506`
+- New function: `var9509`
+- New function: `var9512`
+- New function: `var9515`
+- New function: `var9518`
+- New function: `var9521`
+- New function: `var9523`
+- New function: `var9525`
+- New function: `var9528`
+- Upvalue no longer captured by `fHL`: `var1 (write)`
+- New upvalue captured by `fHM`: `var1 (write)`
+- New upvalue captured by `connectRenderStepIfVisible`: `var9652 (write)`
+- Upvalue no longer captured by `connectRenderStepIfVisible`: `var9522 (write)`
+- New upvalue captured by `onScrollingFrameLayoutChange`: `var9652 (write)`
+- New upvalue captured by `onScrollingFrameLayoutChange`: `var9653 (write)`
+- Upvalue no longer captured by `onScrollingFrameLayoutChange`: `var9522 (write)`
+- Upvalue no longer captured by `onScrollingFrameLayoutChange`: `var9523 (write)`
+- New upvalue captured by `MediaGallerySnapping`: `bDy`
+- New upvalue captured by `MediaGallerySnapping`: `fHR`
+- Upvalue no longer captured by `MediaGallerySnapping`: `bDx`
+- Upvalue no longer captured by `MediaGallerySnapping`: `fHv`
+- New function: `var9720`
+- New function: `var9729`
+- New function: `var9730`
+- New function: `var9731`
+- New function: `var9735`
+- New function: `var9701`
+- New function: `var9702`
+- New function: `var9703`
+- New upvalue captured by `onActivated`: `var9749 (write)`
+- Upvalue no longer captured by `onActivated`: `cQt`
+- New function: `fHZ`
+- Upvalue no longer captured by `fIa`: `var1 (write)`
+- New function: `var9842`
+- New upvalue captured by `render`: `fIa`
+- Upvalue no longer captured by `render`: `fHB`
+- New upvalue captured by `renderPreview`: `fHL`
+- New upvalue captured by `renderPreview`: `fHQ`
+- New upvalue captured by `renderPreview`: `fHX`
+- New upvalue captured by `renderPreview`: `fIa`
+- Upvalue no longer captured by `renderPreview`: `fHB`
+- Upvalue no longer captured by `renderPreview`: `fHm`
+- Upvalue no longer captured by `renderPreview`: `fHr`
+- Upvalue no longer captured by `renderPreview`: `fHy`
+- New upvalue captured by `renderFullscreen`: `fHS`
+- New upvalue captured by `renderFullscreen`: `fHW`
+- Upvalue no longer captured by `renderFullscreen`: `fHt`
+- Upvalue no longer captured by `renderFullscreen`: `fHx`
+- New upvalue captured by `fIq`: `var1 (write)`
+- New upvalue captured by `fIG`: `var1 (write)`
+- New upvalue captured by `fIO`: `var1 (write)`
+- Upvalue no longer captured by `fIP`: `var1 (write)`
+- New upvalue captured by `fIR`: `var1 (write)`
+- New upvalue captured by `renderComponent`: `fIh`
+- Upvalue no longer captured by `renderComponent`: `fHI`
+- New upvalue captured by `renderComponent`: `fIh`
+- Upvalue no longer captured by `renderComponent`: `fHI`
+- New upvalue captured by `renderComponent`: `fIh`
+- New upvalue captured by `renderComponent`: `fIQ`
+- Upvalue no longer captured by `renderComponent`: `fHI`
+- Upvalue no longer captured by `renderComponent`: `fIr`
+- New upvalue captured by `renderComponent`: `fIg`
+- New upvalue captured by `renderComponent`: `fIh`
+- Upvalue no longer captured by `renderComponent`: `fHH`
+- Upvalue no longer captured by `renderComponent`: `fHI`
+- New upvalue captured by `renderComponent`: `fIh`
+- Upvalue no longer captured by `renderComponent`: `fHI`
+- New upvalue captured by `fJc`: `var1 (write)`
+- New function: `var10084`
+- New function: `var10083`
+- New upvalue captured by `init`: `cQG`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `cQF`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `renderOnLoading`: `fFI`
+- Upvalue no longer captured by `renderOnLoading`: `fFj`
+- New upvalue captured by `renderOnLoaded`: `cQu`
+- New upvalue captured by `renderOnLoaded`: `fFD`
+- New upvalue captured by `renderOnLoaded`: `fFK`
+- New upvalue captured by `renderOnLoaded`: `fGN`
+- New upvalue captured by `renderOnLoaded`: `fHA`
+- New upvalue captured by `renderOnLoaded`: `fHG`
+- New upvalue captured by `renderOnLoaded`: `fHI`
+- New upvalue captured by `renderOnLoaded`: `fHN`
+- New upvalue captured by `renderOnLoaded`: `fIb`
+- New upvalue captured by `renderOnLoaded`: `fIc`
+- New upvalue captured by `renderOnLoaded`: `fId`
+- New upvalue captured by `renderOnLoaded`: `fIY`
+- Upvalue no longer captured by `renderOnLoaded`: `cQt`
+- Upvalue no longer captured by `renderOnLoaded`: `fFe`
+- Upvalue no longer captured by `renderOnLoaded`: `fFl`
+- Upvalue no longer captured by `renderOnLoaded`: `fGF`
+- Upvalue no longer captured by `renderOnLoaded`: `fGo`
+- Upvalue no longer captured by `renderOnLoaded`: `fHb`
+- Upvalue no longer captured by `renderOnLoaded`: `fHC`
+- Upvalue no longer captured by `renderOnLoaded`: `fHD`
+- Upvalue no longer captured by `renderOnLoaded`: `fHf`
+- Upvalue no longer captured by `renderOnLoaded`: `fHh`
+- Upvalue no longer captured by `renderOnLoaded`: `fHj`
+- Upvalue no longer captured by `renderOnLoaded`: `fHo`
+- Upvalue no longer captured by `renderOnLoaded`: `fIz`
+- New function: `var10108`
+- New upvalue captured by `onActivated`: `cQu`
+- Upvalue no longer captured by `onActivated`: `appPage`
+- Upvalue no longer captured by `onActivated`: `eDb`
+- Upvalue no longer captured by `onActivated`: `fEX`
+- Upvalue no longer captured by `onActivated`: `fFlagEnableBlackbirdPageCloseCallback`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppAddUniverseIdToGameDetailsEvents`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppBadgesSeeAllLogExposure`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppDevStoreSeeAllSduiLogExposure`
+- Upvalue no longer captured by `onActivated`: `fStringLuaAppBadgesSeeAllIxpLayer`
+- Upvalue no longer captured by `onActivated`: `fStringLuaAppDevStoreSeeAllSduiIxpLayer`
+- Upvalue no longer captured by `onActivated`: `gameDetailsSubpage`
+- Upvalue no longer captured by `onActivated`: `IXPService`
+- New upvalue captured by `fetchGameDetailsPageData`: `fHj`
+- Upvalue no longer captured by `fetchGameDetailsPageData`: `fGK`
+- New upvalue captured by `openRefundPolicyLearnMorePage`: `fHa`
+- Upvalue no longer captured by `openRefundPolicyLearnMorePage`: `fGB`
+- New upvalue captured by `openWebview`: `eDt`
+- Upvalue no longer captured by `openWebview`: `eBy`
+- New upvalue captured by `gameDetailsCard`: `cUQ`
+- New upvalue captured by `gameDetailsCard`: `fFG`
+- New upvalue captured by `gameDetailsCard`: `fFp`
+- New upvalue captured by `gameDetailsCard`: `fFq`
+- Upvalue no longer captured by `gameDetailsCard`: `cUP`
+- Upvalue no longer captured by `gameDetailsCard`: `fEQ`
+- Upvalue no longer captured by `gameDetailsCard`: `fER`
+- Upvalue no longer captured by `gameDetailsCard`: `fFi`
+- New upvalue captured by `gameDetailsCard`: `fFD`
+- New upvalue captured by `gameDetailsCard`: `fJb`
+- Upvalue no longer captured by `gameDetailsCard`: `fFe`
+- Upvalue no longer captured by `gameDetailsCard`: `fIC`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `fFC`
+- New upvalue captured by `render`: `fFf`
+- New upvalue captured by `render`: `fFg`
+- New upvalue captured by `render`: `var10161 (write)`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `fEG`
+- Upvalue no longer captured by `render`: `fEH`
+- Upvalue no longer captured by `render`: `fFe`
+- Upvalue no longer captured by `render`: `var10031 (write)`
+- New upvalue captured by `setGameDetailsPeekViewState`: `cTA`
+- Upvalue no longer captured by `setGameDetailsPeekViewState`: `cTz`
+- New upvalue captured by `gameDetailsPeekView`: `fFH`
+- Upvalue no longer captured by `gameDetailsPeekView`: `fFi`
+- Upvalue no longer captured by `fJf`: `var1 (write)`
+- New upvalue captured by `fetchGameDetailsPageData`: `fHj`
+- Upvalue no longer captured by `fetchGameDetailsPageData`: `fGK`
+- Upvalue no longer captured by `fJn`: `var1 (write)`
+- New upvalue captured by `fJm`: `var1 (write)`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `fFw`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fEX`
+- New upvalue captured by `onActivated`: `appPage`
+- New upvalue captured by `onActivated`: `eEW`
+- New upvalue captured by `onActivated`: `fFlagEnableBlackbirdPageCloseCallback`
+- New upvalue captured by `onActivated`: `fFlagLuaAppAddUniverseIdToGameDetailsEvents`
+- New upvalue captured by `onActivated`: `fFlagLuaAppBadgesSeeAllLogExposure`
+- New upvalue captured by `onActivated`: `fFlagLuaAppDevStoreSeeAllSduiLogExposure`
+- New upvalue captured by `onActivated`: `fFw`
+- New upvalue captured by `onActivated`: `fStringLuaAppBadgesSeeAllIxpLayer`
+- New upvalue captured by `onActivated`: `fStringLuaAppDevStoreSeeAllSduiIxpLayer`
+- New upvalue captured by `onActivated`: `gameDetailsSubpage`
+- New upvalue captured by `onActivated`: `IXPService`
+- Upvalue no longer captured by `onActivated`: `universeId`
+- New upvalue captured by `render`: `fHL`
+- Upvalue no longer captured by `render`: `fHm`
+- Upvalue no longer captured by `fJq`: `var1 (write)`
+- New upvalue captured by `init`: `bDG`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dCj`
+- New upvalue captured by `init`: `eEf`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `fFD`
+- New upvalue captured by `init`: `fGB`
+- New upvalue captured by `init`: `fGI`
+- New upvalue captured by `init`: `fGM`
+- New upvalue captured by `init`: `fGU`
+- New upvalue captured by `init`: `fGW`
+- New upvalue captured by `init`: `fHA`
+- New upvalue captured by `init`: `fHG`
+- New upvalue captured by `init`: `fHI`
+- New upvalue captured by `init`: `fHL`
+- New upvalue captured by `init`: `fHN`
+- New upvalue captured by `init`: `fHS`
+- New upvalue captured by `init`: `fIb`
+- New upvalue captured by `init`: `fIc`
+- New upvalue captured by `init`: `fId`
+- New upvalue captured by `init`: `fIY`
+- New upvalue captured by `init`: `fJl`
+- New upvalue captured by `init`: `flh`
+- Upvalue no longer captured by `init`: `bDF`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dyf`
+- Upvalue no longer captured by `init`: `eCk`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fFe`
+- Upvalue no longer captured by `init`: `fGC`
+- Upvalue no longer captured by `init`: `fGD`
+- Upvalue no longer captured by `init`: `fGE`
+- Upvalue no longer captured by `init`: `fGj`
+- Upvalue no longer captured by `init`: `fGn`
+- Upvalue no longer captured by `init`: `fGv`
+- Upvalue no longer captured by `init`: `fGx`
+- Upvalue no longer captured by `init`: `fHE`
+- Upvalue no longer captured by `init`: `fHh`
+- Upvalue no longer captured by `init`: `fHj`
+- Upvalue no longer captured by `init`: `fHm`
+- Upvalue no longer captured by `init`: `fHo`
+- Upvalue no longer captured by `init`: `fHt`
+- Upvalue no longer captured by `init`: `fIM`
+- Upvalue no longer captured by `init`: `fIz`
+- Upvalue no longer captured by `init`: `fkJ`
+- New upvalue captured by `openMoreContextualMenu`: `dCj`
+- Upvalue no longer captured by `openMoreContextualMenu`: `dyf`
+- New upvalue captured by `toggleFollowExperience`: `fGU`
+- Upvalue no longer captured by `toggleFollowExperience`: `fGv`
+- New upvalue captured by `renderSubtitleTextOverride`: `eEf`
+- New upvalue captured by `renderSubtitleTextOverride`: `eEW`
+- New upvalue captured by `renderSubtitleTextOverride`: `fGW`
+- New upvalue captured by `renderSubtitleTextOverride`: `fHb`
+- New upvalue captured by `renderSubtitleTextOverride`: `fHc`
+- New upvalue captured by `renderSubtitleTextOverride`: `fHd`
+- New upvalue captured by `renderSubtitleTextOverride`: `fHL`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `eCk`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `eDb`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `fGC`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `fGD`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `fGE`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `fGx`
+- Upvalue no longer captured by `renderSubtitleTextOverride`: `fHm`
+- New function: `var10432`
+- New upvalue captured by `renderTextOverride`: `eEf`
+- New upvalue captured by `renderTextOverride`: `fHL`
+- Upvalue no longer captured by `renderTextOverride`: `eCk`
+- Upvalue no longer captured by `renderTextOverride`: `fHm`
+- New upvalue captured by `_`: `fHL`
+- Upvalue no longer captured by `_`: `fHm`
+- New upvalue captured by `renderBriefDescription`: `fHL`
+- Upvalue no longer captured by `renderBriefDescription`: `fHm`
+- New upvalue captured by `renderInfoContent`: `fHb`
+- Upvalue no longer captured by `renderInfoContent`: `fGC`
+- New upvalue captured by `didMount`: `fGU`
+- Upvalue no longer captured by `didMount`: `fGw`
+- New upvalue captured by `renderOnLoading`: `fJq`
+- Upvalue no longer captured by `renderOnLoading`: `fIR`
+- New upvalue captured by `willUnmount`: `fGU`
+- Upvalue no longer captured by `willUnmount`: `fGv`
+- New upvalue captured by `renderOnLoaded`: `fFD`
+- New upvalue captured by `renderOnLoaded`: `fGL`
+- New upvalue captured by `renderOnLoaded`: `fGT`
+- Upvalue no longer captured by `renderOnLoaded`: `fFe`
+- Upvalue no longer captured by `renderOnLoaded`: `fGm`
+- Upvalue no longer captured by `renderOnLoaded`: `fGv`
+- New upvalue captured by `onActivated`: `universeId`
+- Upvalue no longer captured by `onActivated`: `cQu`
+- Upvalue no longer captured by `onActivated`: `cWc`
+- Upvalue no longer captured by `onActivated`: `fJa`
+- Upvalue no longer captured by `onActivated`: `subscriptionProduct`
+- New upvalue captured by `onDidFocus`: `var10544 (write)`
+- Upvalue no longer captured by `onDidFocus`: `var10414 (write)`
+- New function: `fFc`
+- New upvalue captured by `renderGameDetailsPeekView`: `fFe`
+- Upvalue no longer captured by `renderGameDetailsPeekView`: `fEF`
+- New upvalue captured by `renderExperienceDetailsPage`: `fJd`
+- Upvalue no longer captured by `renderExperienceDetailsPage`: `fIE`
+- New function: `var10629`
+- New function: `var10630`
+- New function: `fJB`
+- New function: `fJA`
+- New upvalue captured by `onActivated`: `cQv`
+- New upvalue captured by `onActivated`: `cWd`
+- New upvalue captured by `onActivated`: `fJz`
+- New upvalue captured by `onActivated`: `subscriptionProduct`
+- New upvalue captured by `onFlowComplete`: `eFl`
+- Upvalue no longer captured by `onFlowComplete`: `eDq`
+- New upvalue captured by `onPurchaseSuccess`: `cSx`
+- Upvalue no longer captured by `onPurchaseSuccess`: `cSw`
+- Upvalue no longer captured by `onActivated`: `constants`
+- Upvalue no longer captured by `onActivated`: `fFT`
+- Upvalue no longer captured by `onActivated`: `fGb`
+- Upvalue no longer captured by `onActivated`: `getIsUserEligibleForUnifiedPurchaseFlow`
+- Upvalue no longer captured by `onActivated`: `shipUnifiedPurchaseFlowToDeveloperProductEDP`
+- New upvalue captured by `renderItem`: `fJx`
+- Upvalue no longer captured by `renderItem`: `fIY`
+- New upvalue captured by `getItemHeight`: `fJB`
+- Upvalue no longer captured by `getItemHeight`: `fJc`
+- New function: `fJE`
+- New function: `fJF`
+- New function: `fJG`
+- New function: `fJH`
+- New function: `fJI`
+- Upvalue no longer captured by `fJL`: `var1 (write)`
+- New upvalue captured by `fromJsonData`: `cQF`
+- Upvalue no longer captured by `fromJsonData`: `cQE`
+- New function: `fJJ`
+- New upvalue captured by `updateRobux`: `cQF`
+- New upvalue captured by `updateRobux`: `fnw`
+- Upvalue no longer captured by `updateRobux`: `cQE`
+- Upvalue no longer captured by `updateRobux`: `fmY`
+- New upvalue captured by `Post`: `cQF`
+- New upvalue captured by `Post`: `dJE`
+- New upvalue captured by `Post`: `dJF`
+- New upvalue captured by `Post`: `fJK`
+- New upvalue captured by `Post`: `fJM`
+- New upvalue captured by `Post`: `fnw`
+- Upvalue no longer captured by `Post`: `cQE`
+- Upvalue no longer captured by `Post`: `dGL`
+- Upvalue no longer captured by `Post`: `dGM`
+- Upvalue no longer captured by `Post`: `fJl`
+- Upvalue no longer captured by `Post`: `fJn`
+- Upvalue no longer captured by `Post`: `fmY`
+- New function: `fJD`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `eDs`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `fGA`
+- New upvalue captured by `init`: `fGs`
+- New upvalue captured by `init`: `fGt`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `eBx`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fFT`
+- Upvalue no longer captured by `init`: `fFU`
+- Upvalue no longer captured by `init`: `fGb`
+- New upvalue captured by `viewDeveloperProductDetails`: `cWl`
+- New upvalue captured by `viewDeveloperProductDetails`: `eDs`
+- New upvalue captured by `viewDeveloperProductDetails`: `eEW`
+- New upvalue captured by `viewDeveloperProductDetails`: `fGA`
+- New upvalue captured by `viewDeveloperProductDetails`: `fGs`
+- Upvalue no longer captured by `viewDeveloperProductDetails`: `cWk`
+- Upvalue no longer captured by `viewDeveloperProductDetails`: `eBx`
+- Upvalue no longer captured by `viewDeveloperProductDetails`: `eDb`
+- Upvalue no longer captured by `viewDeveloperProductDetails`: `fFT`
+- Upvalue no longer captured by `viewDeveloperProductDetails`: `fGb`
+- New upvalue captured by `promptPurchase`: `cQu`
+- Upvalue no longer captured by `promptPurchase`: `cQt`
+- New upvalue captured by `onActivated`: `constants`
+- New upvalue captured by `onActivated`: `fGA`
+- New upvalue captured by `onActivated`: `fGs`
+- New upvalue captured by `onActivated`: `getIsUserEligibleForUnifiedPurchaseFlow`
+- New upvalue captured by `onActivated`: `shipUnifiedPurchaseFlowToDeveloperProductEDP`
+- Upvalue no longer captured by `onActivated`: `promiseModule`
+- New upvalue captured by `render`: `fGt`
+- New upvalue captured by `render`: `fJI`
+- Upvalue no longer captured by `render`: `fFU`
+- Upvalue no longer captured by `render`: `fJj`
+- New upvalue captured by `didMount`: `fGt`
+- Upvalue no longer captured by `didMount`: `fFv`
+- New upvalue captured by `requestPurchaseDeveloperProductWithUnifiedPurchasePrompt`: `fGu`
+- Upvalue no longer captured by `requestPurchaseDeveloperProductWithUnifiedPurchasePrompt`: `fFV`
+- New upvalue captured by `requestPurchaseDeveloperProduct`: `fJF`
+- Upvalue no longer captured by `requestPurchaseDeveloperProduct`: `fJg`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `navigateDownToRobuxUpsell`: `fJG`
+- Upvalue no longer captured by `navigateDownToRobuxUpsell`: `fJi`
+- New upvalue captured by `purchaseDeveloperProduct`: `fJJ`
+- Upvalue no longer captured by `purchaseDeveloperProduct`: `fJk`
+- New upvalue captured by `fetchGameDeveloperProducts`: `fFZ`
+- Upvalue no longer captured by `fetchGameDeveloperProducts`: `fFA`
+- New upvalue captured by `economicRestrictionErrorHandler`: `fJN`
+- Upvalue no longer captured by `economicRestrictionErrorHandler`: `fJo`
+- New upvalue captured by `fetchExperienceStoreProducts`: `fFY`
+- Upvalue no longer captured by `fetchExperienceStoreProducts`: `fFz`
+- New function: `fJC`
+- New upvalue captured by `init`: `fGt`
+- New upvalue captured by `init`: `fJD`
+- Upvalue no longer captured by `init`: `fFU`
+- Upvalue no longer captured by `init`: `fJe`
+- New upvalue captured by `renderDeveloperProduct`: `fJD`
+- Upvalue no longer captured by `renderDeveloperProduct`: `fJe`
+- New upvalue captured by `render`: `cWl`
+- New upvalue captured by `render`: `fGt`
+- Upvalue no longer captured by `render`: `cWk`
+- Upvalue no longer captured by `render`: `fFU`
+- New upvalue captured by `pageFilter`: `cWl`
+- Upvalue no longer captured by `pageFilter`: `cWk`
+- New upvalue captured by `init`: `bDG`
+- Upvalue no longer captured by `init`: `bDF`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `drE`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `fFU`
+- New upvalue captured by `render`: `fGA`
+- New upvalue captured by `render`: `fJB`
+- New upvalue captured by `render`: `fJw`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dnA`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fFw`
+- Upvalue no longer captured by `render`: `fGb`
+- Upvalue no longer captured by `render`: `fIX`
+- Upvalue no longer captured by `render`: `fJd`
+- New function: `var10832`
+- New function: `var10833`
+- New function: `var10834`
+- New function: `var10835`
+- New upvalue captured by `didMount`: `dzO`
+- Upvalue no longer captured by `didMount`: `dvK`
+- New upvalue captured by `fetchGameDeveloperProducts`: `fFZ`
+- Upvalue no longer captured by `fetchGameDeveloperProducts`: `fFA`
+- New upvalue captured by `fKp`: `var1 (write)`
+- New upvalue captured by `fKr`: `var1 (write)`
+- New upvalue captured by `fKs`: `var1 (write)`
+- New function: `fKu`
+- New function: `fKx`
+- New upvalue captured by `render`: `fKx`
+- Upvalue no longer captured by `render`: `fJY`
+- New function: `fKH`
+- New function: `fKK`
+- New function: `fKN`
+- New function: `fKC`
+- New function: `fKO`
+- Upvalue no longer captured by `fKQ`: `var1 (write)`
+- New upvalue captured by `fLn`: `var1 (write)`
+- New function: `fLu`
+- New upvalue captured by `onActivated`: `promiseModule`
+- Upvalue no longer captured by `onActivated`: `conversation`
+- Upvalue no longer captured by `onActivated`: `onSendButtonActivated`
+- New upvalue captured by `fLt`: `var1 (write)`
+- New upvalue captured by `onActivated`: `conversation`
+- New upvalue captured by `onActivated`: `onSendButtonActivated`
+- Upvalue no longer captured by `onActivated`: `appPage`
+- Upvalue no longer captured by `onActivated`: `clearThemeOverride`
+- Upvalue no longer captured by `onActivated`: `experienceService`
+- Upvalue no longer captured by `onActivated`: `fMt`
+- Upvalue no longer captured by `onActivated`: `tutorialUpsellPlaceId`
+- New function: `fLr`
+- New upvalue captured by `init`: `fLt`
+- Upvalue no longer captured by `init`: `fKU`
+- New upvalue captured by `renderConversationCell`: `fLt`
+- Upvalue no longer captured by `renderConversationCell`: `fKU`
+- New upvalue captured by `render`: `fLs`
+- Upvalue no longer captured by `render`: `fKT`
+- New upvalue captured by `render`: `fLr`
+- New upvalue captured by `render`: `fLw`
+- Upvalue no longer captured by `render`: `fKS`
+- Upvalue no longer captured by `render`: `fKX`
+- New upvalue captured by `render`: `eDw`
+- New upvalue captured by `render`: `fFQ`
+- Upvalue no longer captured by `render`: `eBB`
+- Upvalue no longer captured by `render`: `fFr`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `render`: `fLy`
+- Upvalue no longer captured by `render`: `fKZ`
+- Upvalue no longer captured by `fLA`: `var1 (write)`
+- New function: `fLD`
+- New function: `fLE`
+- New upvalue captured by `fLB`: `var1 (write)`
+- New function: `fLI`
+- New function: `fLJ`
+- New upvalue captured by `new`: `fLJ`
+- Upvalue no longer captured by `new`: `fLk`
+- New upvalue captured by `sendingMessagePayload`: `fLI`
+- Upvalue no longer captured by `sendingMessagePayload`: `fLj`
+- New upvalue captured by `fLK`: `var1 (write)`
+- New function: `fLG`
+- Upvalue no longer captured by `fLM`: `var1 (write)`
+- New upvalue captured by `fLN`: `var1 (write)`
+- New function: `var11006`
+- New upvalue captured by `sendGameLinkToConversation`: `fLG`
+- Upvalue no longer captured by `sendGameLinkToConversation`: `fLh`
+- New upvalue captured by `fetchGameData`: `dzO`
+- Upvalue no longer captured by `fetchGameData`: `dvK`
+- New upvalue captured by `setAppLoaded`: `fLL`
+- Upvalue no longer captured by `setAppLoaded`: `fLm`
+- New upvalue captured by `conversationListScrollTouchedBottom`: `fLM`
+- Upvalue no longer captured by `conversationListScrollTouchedBottom`: `fLn`
+- Upvalue no longer captured by `fLO`: `var1 (write)`
+- New upvalue captured by `fLp`: `var1 (write)`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `getDerivedStateFromProps`: `fLO`
+- Upvalue no longer captured by `getDerivedStateFromProps`: `fLp`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fLp_getChatRecipient`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `fLq`
+- New upvalue captured by `render`: `fLx`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `fKR`
+- Upvalue no longer captured by `render`: `fKY`
+- New upvalue captured by `renderFrame`: `fLq`
+- New upvalue captured by `renderFrame`: `fLx`
+- Upvalue no longer captured by `renderFrame`: `fKR`
+- Upvalue no longer captured by `renderFrame`: `fKY`
+- New upvalue captured by `render`: `fLn`
+- New upvalue captured by `render`: `fLp`
+- Upvalue no longer captured by `render`: `fKO`
+- Upvalue no longer captured by `render`: `fKQ`
+- New function: `fLR`
+- New upvalue captured by `getImageButtonAndTextWidth`: `eAP`
+- Upvalue no longer captured by `getImageButtonAndTextWidth`: `eyU`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJR`
+- New upvalue captured by `render`: `dJY`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dGY`
+- Upvalue no longer captured by `render`: `dHf`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJV`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `fLQ`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHc`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `fLs`
+- New function: `var11074`
+- New upvalue captured by `fetchAccountSettings`: `fLS`
+- Upvalue no longer captured by `fetchAccountSettings`: `fLt`
+- New upvalue captured by `launchApp`: `fmS`
+- New upvalue captured by `launchApp`: `fob`
+- Upvalue no longer captured by `launchApp`: `fmu`
+- Upvalue no longer captured by `launchApp`: `fnD`
+- New function: `fLU`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `ezW`
+- New upvalue captured by `render`: `ezZ`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `eyb`
+- Upvalue no longer captured by `render`: `eye`
+- New function: `var11082`
+- New upvalue captured by `render`: `eDs`
+- New upvalue captured by `render`: `fLU`
+- Upvalue no longer captured by `render`: `eBx`
+- Upvalue no longer captured by `render`: `fLv`
+- New function: `var11096`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `ezW`
+- New upvalue captured by `render`: `ezZ`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `eyb`
+- Upvalue no longer captured by `render`: `eye`
+- New function: `var11104`
+- New function: `fLY`
+- New function: `fMj`
+- New upvalue captured by `sendWebViewMetrics`: `bDp`
+- Upvalue no longer captured by `sendWebViewMetrics`: `bDo`
+- New upvalue captured by `onMount`: `bDp`
+- Upvalue no longer captured by `onMount`: `bDo`
+- New upvalue captured by `onApiResponse`: `bDp`
+- Upvalue no longer captured by `onApiResponse`: `bDo`
+- New upvalue captured by `onRender`: `bDp`
+- Upvalue no longer captured by `onRender`: `bDo`
+- New upvalue captured by `onWebViewLoad`: `bDp`
+- Upvalue no longer captured by `onWebViewLoad`: `bDo`
+- New function: `fMl`
+- Upvalue no longer captured by `fMm`: `var1 (write)`
+- New function: `fLX`
+- New upvalue captured by `init`: `foe`
+- Upvalue no longer captured by `init`: `fnG`
+- New upvalue captured by `getRobuxBalance`: `foe`
+- Upvalue no longer captured by `getRobuxBalance`: `fnG`
+- New upvalue captured by `didMount`: `fMl`
+- New upvalue captured by `didMount`: `foe`
+- Upvalue no longer captured by `didMount`: `fLM`
+- Upvalue no longer captured by `didMount`: `fnG`
+- New upvalue captured by `didUpdate`: `dwy`
+- New upvalue captured by `didUpdate`: `eDs`
+- New upvalue captured by `didUpdate`: `ezW`
+- New upvalue captured by `didUpdate`: `fCj`
+- New upvalue captured by `didUpdate`: `fLZ`
+- New upvalue captured by `didUpdate`: `fMi`
+- New upvalue captured by `didUpdate`: `fMm`
+- New upvalue captured by `didUpdate`: `fMn`
+- Upvalue no longer captured by `didUpdate`: `dsu`
+- Upvalue no longer captured by `didUpdate`: `eBx`
+- Upvalue no longer captured by `didUpdate`: `eyb`
+- Upvalue no longer captured by `didUpdate`: `fBK`
+- Upvalue no longer captured by `didUpdate`: `fLA`
+- Upvalue no longer captured by `didUpdate`: `fLJ`
+- Upvalue no longer captured by `didUpdate`: `fLN`
+- Upvalue no longer captured by `didUpdate`: `fLO`
+- New upvalue captured by `render`: `eEU`
+- New upvalue captured by `render`: `eFa`
+- New upvalue captured by `render`: `eFb`
+- New upvalue captured by `render`: `eFd`
+- New upvalue captured by `render`: `ezW`
+- New upvalue captured by `render`: `fCj`
+- New upvalue captured by `render`: `fLl`
+- New upvalue captured by `render`: `fMj`
+- New upvalue captured by `render`: `fMl`
+- Upvalue no longer captured by `render`: `eCZ`
+- Upvalue no longer captured by `render`: `eDf`
+- Upvalue no longer captured by `render`: `eDg`
+- Upvalue no longer captured by `render`: `eDi`
+- Upvalue no longer captured by `render`: `eyb`
+- Upvalue no longer captured by `render`: `fBK`
+- Upvalue no longer captured by `render`: `fKM`
+- Upvalue no longer captured by `render`: `fLK`
+- Upvalue no longer captured by `render`: `fLM`
+- New upvalue captured by `onNativePurchaseAttempt`: `fLZ`
+- New upvalue captured by `onNativePurchaseAttempt`: `fMa`
+- Upvalue no longer captured by `onNativePurchaseAttempt`: `fLA`
+- Upvalue no longer captured by `onNativePurchaseAttempt`: `fLB`
+- New function: `fMq`
+- New function: `fMp`
+- Upvalue no longer captured by `fMs`: `var1 (write)`
+- New upvalue captured by `getFeatureStringFromHybridEvent`: `fDn`
+- Upvalue no longer captured by `getFeatureStringFromHybridEvent`: `fCO`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `fDn`
+- New upvalue captured by `render`: `fMs`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `fCO`
+- Upvalue no longer captured by `render`: `fLT`
+- New upvalue captured by `javaScriptCallback`: `fDn`
+- New upvalue captured by `javaScriptCallback`: `fMs`
+- Upvalue no longer captured by `javaScriptCallback`: `fCO`
+- Upvalue no longer captured by `javaScriptCallback`: `fLT`
+- New function: `fMu`
+- New upvalue captured by `fMF`: `var1 (write)`
+- New upvalue captured by `handleEvent`: `cQq`
+- Upvalue no longer captured by `handleEvent`: `cQp`
+- New function: `fMx`
+- New upvalue captured by `init`: `eAa`
+- New upvalue captured by `init`: `fMF`
+- Upvalue no longer captured by `init`: `eyf`
+- Upvalue no longer captured by `init`: `fMg`
+- New upvalue captured by `render`: `dJV`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `fMy`
+- Upvalue no longer captured by `render`: `dHc`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fLZ`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `onError`: `cQv`
+- New upvalue captured by `onError`: `cWd`
+- Upvalue no longer captured by `onError`: `cQu`
+- Upvalue no longer captured by `onError`: `cWc`
+- New function: `fMv`
+- New upvalue captured by `render`: `flh`
+- Upvalue no longer captured by `render`: `fkJ`
+- New upvalue captured by `broadcastNotification`: `ezW`
+- New upvalue captured by `broadcastNotification`: `fmJ`
+- Upvalue no longer captured by `broadcastNotification`: `eyb`
+- Upvalue no longer captured by `broadcastNotification`: `fml`
+- New function: `fML`
+- New function: `fMM`
+- New function: `fMN`
+- New function: `fMO`
+- New function: `fMP`
+- New function: `fMQ`
+- Upvalue no longer captured by `fMS`: `var1 (write)`
+- New function: `fMT`
+- New function: `fMK`
+- New function: `var11268`
+- New function: `var11269`
+- New upvalue captured by `onActivated`: `experienceService`
+- New upvalue captured by `onActivated`: `fMS`
+- New upvalue captured by `onActivated`: `tutorialUpsellPlaceId`
+- Upvalue no longer captured by `onActivated`: `fMt`
+- New upvalue captured by `onActivated`: `appPage`
+- New upvalue captured by `onActivated`: `clearThemeOverride`
+- New upvalue captured by `onActivated`: `fMS`
+- New function: `fMJ`
+- New upvalue captured by `fMI`: `var1 (write)`
+- New function: `fMH`
+- New function: `fMU`
+- New upvalue captured by `getFeatureStringFromHybridEvent`: `fDn`
+- Upvalue no longer captured by `getFeatureStringFromHybridEvent`: `fCO`
+- New upvalue captured by `isCloseContactMethodUpsellWebviewEvent`: `fDn`
+- Upvalue no longer captured by `isCloseContactMethodUpsellWebviewEvent`: `fCO`
+- New upvalue captured by `isCompletedContactMethodUpsellWebviewEvent`: `fDn`
+- Upvalue no longer captured by `isCompletedContactMethodUpsellWebviewEvent`: `fCO`
+- New upvalue captured by `render`: `dzX`
+- New upvalue captured by `render`: `fDn`
+- Upvalue no longer captured by `render`: `dvT`
+- Upvalue no longer captured by `render`: `fCO`
+- New upvalue captured by `javaScriptCallback`: `fDn`
+- Upvalue no longer captured by `javaScriptCallback`: `fCO`
+- New function: `fMW`
+- New function: `fMV`
+- New function: `fMY`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `navigateToChallengeWebView`: `cWl`
+- New upvalue captured by `navigateToChallengeWebView`: `dKM`
+- Upvalue no longer captured by `navigateToChallengeWebView`: `cWk`
+- Upvalue no longer captured by `navigateToChallengeWebView`: `dHT`
+- Upvalue no longer captured by `fNc`: `var1 (write)`
+- Upvalue no longer captured by `fNd`: `var1 (write)`
+- Upvalue no longer captured by `fNe`: `var1 (write)`
+- Upvalue no longer captured by `fNf`: `var1 (write)`
+- Upvalue no longer captured by `fNg`: `var1 (write)`
+- Upvalue no longer captured by `fNh`: `var1 (write)`
+- New function: `fMZ`
+- New upvalue captured by `didMount`: `fNf`
+- New upvalue captured by `didMount`: `fNg`
+- New upvalue captured by `didMount`: `fNh`
+- Upvalue no longer captured by `didMount`: `fMG`
+- Upvalue no longer captured by `didMount`: `fMH`
+- Upvalue no longer captured by `didMount`: `fMI`
+- New upvalue captured by `willUnmount`: `fNb`
+- Upvalue no longer captured by `willUnmount`: `fMC`
+- New upvalue captured by `getChallengeTypeQueryParameters`: `fNa`
+- New upvalue captured by `getChallengeTypeQueryParameters`: `fNb`
+- New upvalue captured by `getChallengeTypeQueryParameters`: `fNi`
+- Upvalue no longer captured by `getChallengeTypeQueryParameters`: `fMB`
+- Upvalue no longer captured by `getChallengeTypeQueryParameters`: `fMC`
+- Upvalue no longer captured by `getChallengeTypeQueryParameters`: `fMJ`
+- New upvalue captured by `getBaseQueryParameters`: `fNb`
+- New upvalue captured by `getBaseQueryParameters`: `fNc`
+- New upvalue captured by `getBaseQueryParameters`: `fNd`
+- Upvalue no longer captured by `getBaseQueryParameters`: `fMC`
+- Upvalue no longer captured by `getBaseQueryParameters`: `fMD`
+- Upvalue no longer captured by `getBaseQueryParameters`: `fME`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dzX`
+- New upvalue captured by `render`: `eFe`
+- New upvalue captured by `render`: `ezY`
+- New upvalue captured by `render`: `fCi`
+- New upvalue captured by `render`: `fDn`
+- New upvalue captured by `render`: `fMs`
+- New upvalue captured by `render`: `fNe`
+- New upvalue captured by `render`: `var11333 (write)`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dvT`
+- Upvalue no longer captured by `render`: `eDj`
+- Upvalue no longer captured by `render`: `eyd`
+- Upvalue no longer captured by `render`: `fBJ`
+- Upvalue no longer captured by `render`: `fCO`
+- Upvalue no longer captured by `render`: `fLT`
+- Upvalue no longer captured by `render`: `fMF`
+- Upvalue no longer captured by `render`: `var11203 (write)`
+- New upvalue captured by `windowClosedCallback`: `eFe`
+- Upvalue no longer captured by `windowClosedCallback`: `eDj`
+- New upvalue captured by `javaScriptCallback`: `fDn`
+- New upvalue captured by `javaScriptCallback`: `fMs`
+- Upvalue no longer captured by `javaScriptCallback`: `fCO`
+- Upvalue no longer captured by `javaScriptCallback`: `fLT`
+- New upvalue captured by `setBackNavigationDisabled`: `eFf`
+- Upvalue no longer captured by `setBackNavigationDisabled`: `eDk`
+- Upvalue no longer captured by `fNo`: `var1 (write)`
+- New function: `fNA`
+- New upvalue captured by `fNE`: `var1 (write)`
+- New upvalue captured by `getZOffset`: `dwu`
+- Upvalue no longer captured by `getZOffset`: `dsq`
+- New upvalue captured by `render`: `fNk`
+- Upvalue no longer captured by `render`: `fML`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `getChildren`: `fND`
+- Upvalue no longer captured by `getChildren`: `fNe`
+- New upvalue captured by `render`: `fNE`
+- Upvalue no longer captured by `render`: `fNf`
+- New upvalue captured by `getEquippedDynamicHeadInfo`: `dwu`
+- Upvalue no longer captured by `getEquippedDynamicHeadInfo`: `dsq`
+- New upvalue captured by `logFacialAnimationChangeOnHeadSwap`: `dwu`
+- Upvalue no longer captured by `logFacialAnimationChangeOnHeadSwap`: `dsq`
+- New upvalue captured by `applyOutfitBackground`: `dvU`
+- New upvalue captured by `applyOutfitBackground`: `fNH`
+- Upvalue no longer captured by `applyOutfitBackground`: `drQ`
+- Upvalue no longer captured by `applyOutfitBackground`: `fNi`
+- New function: `fNK`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `fNK`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fNl`
+- New upvalue captured by `equipCostume`: `fNK`
+- Upvalue no longer captured by `equipCostume`: `fNl`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `equipOutfit`: `fNF`
+- Upvalue no longer captured by `equipOutfit`: `fNg`
+- New upvalue captured by `render`: `dwu`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `fNP`: `var1 (write)`
+- New upvalue captured by `fNL`: `var1 (write)`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `saveOutfitAsNew`: `dBR`
+- Upvalue no longer captured by `saveOutfitAsNew`: `dxN`
+- New upvalue captured by `updateExistingOutfit`: `dBR`
+- Upvalue no longer captured by `updateExistingOutfit`: `dxN`
+- New upvalue captured by `manageCharacters`: `dBR`
+- Upvalue no longer captured by `manageCharacters`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `renderLocalized`: `fNN`
+- New upvalue captured by `renderLocalized`: `fNP`
+- Upvalue no longer captured by `renderLocalized`: `fNo`
+- Upvalue no longer captured by `renderLocalized`: `fNq`
+- New upvalue captured by `render`: `dxY`
+- Upvalue no longer captured by `render`: `dtU`
+- New upvalue captured by `makeGetMySharedAvatarsApiCall`: `dwu`
+- New upvalue captured by `makeGetMySharedAvatarsApiCall`: `fym`
+- Upvalue no longer captured by `makeGetMySharedAvatarsApiCall`: `dsq`
+- Upvalue no longer captured by `makeGetMySharedAvatarsApiCall`: `fxN`
+- New upvalue captured by `fNQ`: `var1 (write)`
+- New upvalue captured by `init`: `cWj`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dyf`
+- New upvalue captured by `init`: `dyx`
+- New upvalue captured by `init`: `fNU`
+- Upvalue no longer captured by `init`: `cWi`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dub`
+- Upvalue no longer captured by `init`: `dut`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fNv`
+- New upvalue captured by `openAvatarPage`: `cWj`
+- New upvalue captured by `openAvatarPage`: `dBR`
+- New upvalue captured by `openAvatarPage`: `dwu`
+- New upvalue captured by `openAvatarPage`: `dyf`
+- New upvalue captured by `openAvatarPage`: `dyx`
+- New upvalue captured by `openAvatarPage`: `fNU`
+- Upvalue no longer captured by `openAvatarPage`: `cWi`
+- Upvalue no longer captured by `openAvatarPage`: `dsq`
+- Upvalue no longer captured by `openAvatarPage`: `dub`
+- Upvalue no longer captured by `openAvatarPage`: `dut`
+- Upvalue no longer captured by `openAvatarPage`: `dxN`
+- Upvalue no longer captured by `openAvatarPage`: `fNv`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `setCategoryAndSubcategory`: `fNT`
+- Upvalue no longer captured by `setCategoryAndSubcategory`: `fNu`
+- New function: `fNY`
+- New function: `fOa`
+- New function: `fOb`
+- New function: `fOc`
+- New function: `fOd`
+- New function: `var11598`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New function: `fOe`
+- Upvalue no longer captured by `fOk`: `var1 (write)`
+- New upvalue captured by `fOg`: `var1 (write)`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `renderMiddle`: `fOk`
+- Upvalue no longer captured by `renderMiddle`: `fNL`
+- New upvalue captured by `openPurchaseRobuxPage`: `eEl`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `eCq`
+- New upvalue captured by `openXboxUpsell`: `fOh`
+- Upvalue no longer captured by `openXboxUpsell`: `fNI`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `openPremiumPage`: `cWl`
+- New upvalue captured by `openPremiumPage`: `dKM`
+- Upvalue no longer captured by `openPremiumPage`: `cWk`
+- Upvalue no longer captured by `openPremiumPage`: `dHT`
+- Upvalue no longer captured by `fOr`: `var1 (write)`
+- New function: `fOw`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New function: `fOE`
+- New upvalue captured by `sliderInfoToVector3s`: `eFK`
+- Upvalue no longer captured by `sliderInfoToVector3s`: `eDP`
+- New upvalue captured by `vector3sToSliderInfo`: `eFK`
+- Upvalue no longer captured by `vector3sToSliderInfo`: `eDP`
+- New upvalue captured by `getTryOnSliderValues`: `eFJ`
+- Upvalue no longer captured by `getTryOnSliderValues`: `eDO`
+- New upvalue captured by `getSliderValuesWithDefault`: `eFJ`
+- Upvalue no longer captured by `getSliderValuesWithDefault`: `eDO`
+- New upvalue captured by `checkSliderValuesChanged`: `eFG`
+- Upvalue no longer captured by `checkSliderValuesChanged`: `eDL`
+- New upvalue captured by `getAdjustableAccessories`: `dwu`
+- New upvalue captured by `getAdjustableAccessories`: `eFG`
+- Upvalue no longer captured by `getAdjustableAccessories`: `dsq`
+- Upvalue no longer captured by `getAdjustableAccessories`: `eDL`
+- New function: `fOF`
+- New upvalue captured by `updateRobux`: `cQG`
+- New upvalue captured by `updateRobux`: `fnw`
+- Upvalue no longer captured by `updateRobux`: `cQF`
+- Upvalue no longer captured by `updateRobux`: `fmY`
+- New upvalue captured by `removeFromTryOn`: `dwu`
+- Upvalue no longer captured by `removeFromTryOn`: `dsq`
+- New upvalue captured by `purchaseProductKeyMapper`: `dwC`
+- Upvalue no longer captured by `purchaseProductKeyMapper`: `dsy`
+- New function: `fOG`
+- New upvalue captured by `renderMiddle`: `fOk`
+- Upvalue no longer captured by `renderMiddle`: `fNL`
+- New upvalue captured by `render`: `dwu`
+- Upvalue no longer captured by `render`: `dsq`
+- New function: `fOH`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `showWearAfterPurchase`: `dwu`
+- New upvalue captured by `showWearAfterPurchase`: `fOH`
+- Upvalue no longer captured by `showWearAfterPurchase`: `dsq`
+- Upvalue no longer captured by `showWearAfterPurchase`: `fOi`
+- New upvalue captured by `willUpdate`: `eFG`
+- Upvalue no longer captured by `willUpdate`: `eDL`
+- New upvalue captured by `renderMiddle`: `fOk`
+- Upvalue no longer captured by `renderMiddle`: `fNL`
+- New upvalue captured by `renderAlertLocalized`: `fOG`
+- Upvalue no longer captured by `renderAlertLocalized`: `fOh`
+- New upvalue captured by `purchaseProduct`: `fOo`
+- Upvalue no longer captured by `purchaseProduct`: `fNP`
+- New upvalue captured by `openEconomicRestrictionPrompt`: `fJN`
+- Upvalue no longer captured by `openEconomicRestrictionPrompt`: `fJo`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- Upvalue no longer captured by `fOM`: `var1 (write)`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `willUpdate`: `eFG`
+- Upvalue no longer captured by `willUpdate`: `eDL`
+- New upvalue captured by `renderOnLoaded`: `dzV`
+- New upvalue captured by `renderOnLoaded`: `fOk`
+- New upvalue captured by `renderOnLoaded`: `fOM`
+- Upvalue no longer captured by `renderOnLoaded`: `dvR`
+- Upvalue no longer captured by `renderOnLoaded`: `fNL`
+- Upvalue no longer captured by `renderOnLoaded`: `fOn`
+- New upvalue captured by `getMarketplaceFee`: `fOL`
+- Upvalue no longer captured by `getMarketplaceFee`: `fOm`
+- New upvalue captured by `sellAsset`: `fOK`
+- Upvalue no longer captured by `sellAsset`: `fOl`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New function: `fOP`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `fON`: `var1 (write)`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `willUpdate`: `eFG`
+- Upvalue no longer captured by `willUpdate`: `eDL`
+- New upvalue captured by `removeCurrentlySellingAsset`: `fOO`
+- Upvalue no longer captured by `removeCurrentlySellingAsset`: `fOp`
+- New upvalue captured by `removeCurrentlySellingCollectible`: `fOP`
+- Upvalue no longer captured by `removeCurrentlySellingCollectible`: `fOq`
+- New function: `fOQ`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `toggleEquipAsset`: `dyA`
+- Upvalue no longer captured by `toggleEquipAsset`: `duw`
+- New upvalue captured by `setCurrentSort`: `dBG`
+- Upvalue no longer captured by `setCurrentSort`: `dxC`
+- New upvalue captured by `addRemovedItem`: `dBI`
+- Upvalue no longer captured by `addRemovedItem`: `dxE`
+- New function: `fOS`
+- New upvalue captured by `get`: `dGV`
+- New upvalue captured by `get`: `dwC`
+- Upvalue no longer captured by `get`: `dCR`
+- Upvalue no longer captured by `get`: `dsy`
+- New upvalue captured by `avatarRefineGoBack`: `dwC`
+- Upvalue no longer captured by `avatarRefineGoBack`: `dsy`
+- New function: `fOR`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dyF`
+- New upvalue captured by `init`: `dyI`
+- Upvalue no longer captured by `init`: `duB`
+- Upvalue no longer captured by `init`: `duE`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `resetToDefault`: `dyF`
+- New upvalue captured by `resetToDefault`: `dyI`
+- Upvalue no longer captured by `resetToDefault`: `duB`
+- Upvalue no longer captured by `resetToDefault`: `duE`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `setCurrentSort`: `dBG`
+- Upvalue no longer captured by `setCurrentSort`: `dxC`
+- New upvalue captured by `clearRemovedItems`: `dBJ`
+- Upvalue no longer captured by `clearRemovedItems`: `dxF`
+- New upvalue captured by `equipOutfit`: `dyB`
+- Upvalue no longer captured by `equipOutfit`: `dux`
+- New upvalue captured by `sendAnalytics`: `fOT`
+- Upvalue no longer captured by `sendAnalytics`: `fOu`
+- Upvalue no longer captured by `fPh`: `var1 (write)`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `equipNewCharacter`: `dwu`
+- Upvalue no longer captured by `equipNewCharacter`: `dsq`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `fPj`: `var1 (write)`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fPj_closePrompt`
+- New upvalue captured by `updateRobux`: `cQG`
+- New upvalue captured by `updateRobux`: `fnw`
+- Upvalue no longer captured by `updateRobux`: `cQF`
+- Upvalue no longer captured by `updateRobux`: `fmY`
+- New function: `var12030`
+- New upvalue captured by `getPurchaseInfoForLookId`: `dwu`
+- Upvalue no longer captured by `getPurchaseInfoForLookId`: `dsq`
+- New upvalue captured by `purchaseProductKeyMapper`: `dwC`
+- Upvalue no longer captured by `purchaseProductKeyMapper`: `dsy`
+- New upvalue captured by `fPn`: `var1 (write)`
+- Upvalue no longer captured by `fPw`: `var1 (write)`
+- New upvalue captured by `fPk`: `var1 (write)`
+- New upvalue captured by `PurchaseResolveNav`: `dBR`
+- Upvalue no longer captured by `PurchaseResolveNav`: `dxN`
+- New upvalue captured by `formatItemForWearAfterPurchase`: `dwu`
+- Upvalue no longer captured by `formatItemForWearAfterPurchase`: `dsq`
+- New upvalue captured by `processItem`: `dwu`
+- Upvalue no longer captured by `processItem`: `dsq`
+- New upvalue captured by `ShowToasts`: `cQv`
+- New upvalue captured by `ShowToasts`: `cWd`
+- Upvalue no longer captured by `ShowToasts`: `cQu`
+- Upvalue no longer captured by `ShowToasts`: `cWc`
+- New function: `var12169`
+- New function: `var12170`
+- New function: `var12171`
+- New function: `var12172`
+- New upvalue captured by `handleWearAfterPurchase`: `dwu`
+- New upvalue captured by `handleWearAfterPurchase`: `dxY`
+- New upvalue captured by `handleWearAfterPurchase`: `fPn`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `dsq`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `dtU`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `fOO`
+- New upvalue captured by `handleSaveAsCharacter`: `dwu`
+- New upvalue captured by `handleSaveAsCharacter`: `fNH`
+- New upvalue captured by `handleSaveAsCharacter`: `fPl`
+- New upvalue captured by `handleSaveAsCharacter`: `fPw`
+- New upvalue captured by `handleSaveAsCharacter`: `var12167 (write)`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `dsq`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fNi`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOM`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOX`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `var12037 (write)`
+- New function: `var12184`
+- New function: `var12175`
+- New function: `var12176`
+- New function: `var12177`
+- New upvalue captured by `PurchaseResolveNav`: `dBR`
+- Upvalue no longer captured by `PurchaseResolveNav`: `dxN`
+- New upvalue captured by `formatItemForWearAfterPurchaseMIS`: `dwu`
+- Upvalue no longer captured by `formatItemForWearAfterPurchaseMIS`: `dsq`
+- New upvalue captured by `formatItemForWearAfterPurchaseLegacy`: `dwu`
+- Upvalue no longer captured by `formatItemForWearAfterPurchaseLegacy`: `dsq`
+- New upvalue captured by `processItemLegacy`: `dwu`
+- Upvalue no longer captured by `processItemLegacy`: `dsq`
+- New upvalue captured by `ShowToasts`: `cQv`
+- New upvalue captured by `ShowToasts`: `cWd`
+- Upvalue no longer captured by `ShowToasts`: `cQu`
+- Upvalue no longer captured by `ShowToasts`: `cWc`
+- New function: `var12249`
+- New function: `var12250`
+- New function: `var12251`
+- New function: `var12252`
+- New upvalue captured by `handleWearAfterPurchase`: `dwu`
+- New upvalue captured by `handleWearAfterPurchase`: `dxY`
+- New upvalue captured by `handleWearAfterPurchase`: `fPn`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `dsq`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `dtU`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `fOO`
+- New upvalue captured by `handleSaveAsCharacter`: `dwu`
+- New upvalue captured by `handleSaveAsCharacter`: `fPl`
+- New upvalue captured by `handleSaveAsCharacter`: `fPw`
+- New upvalue captured by `handleSaveAsCharacter`: `var12247 (write)`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `dsq`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOM`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOX`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `var12117 (write)`
+- New function: `var12263`
+- New function: `var12256`
+- New function: `var12257`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `purchaseResolveNav`: `dBR`
+- Upvalue no longer captured by `purchaseResolveNav`: `dxN`
+- New function: `var12290`
+- New upvalue captured by `getToast`: `cQv`
+- Upvalue no longer captured by `getToast`: `cQu`
+- New upvalue captured by `formatOwnedItemForWearAfterPurchase`: `dwu`
+- Upvalue no longer captured by `formatOwnedItemForWearAfterPurchase`: `dsq`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dzV`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `onCancel`: `dBR`
+- Upvalue no longer captured by `onCancel`: `dxN`
+- New upvalue captured by `onConfirm`: `dBR`
+- New upvalue captured by `onConfirm`: `dzV`
+- Upvalue no longer captured by `onConfirm`: `dvR`
+- Upvalue no longer captured by `onConfirm`: `dxN`
+- New upvalue captured by `renderAlertLocalized`: `fOG`
+- Upvalue no longer captured by `renderAlertLocalized`: `fOh`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `purchaseProduct`: `fOo`
+- Upvalue no longer captured by `purchaseProduct`: `fNP`
+- New upvalue captured by `wearAfterOutfitPurchase`: `fPn`
+- Upvalue no longer captured by `wearAfterOutfitPurchase`: `fOO`
+- New upvalue captured by `economicRestrictionErrorHandler`: `fJN`
+- Upvalue no longer captured by `economicRestrictionErrorHandler`: `fJo`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New function: `fPI`
+- New function: `fPH`
+- New function: `fPJ`
+- New function: `fPK`
+- New function: `fPL`
+- New function: `fPM`
+- New upvalue captured by `getIsFavorited`: `dwu`
+- Upvalue no longer captured by `getIsFavorited`: `dsq`
+- New upvalue captured by `getFavoritesFetchingState`: `dwC`
+- New upvalue captured by `getFavoritesFetchingState`: `dwu`
+- Upvalue no longer captured by `getFavoritesFetchingState`: `dsq`
+- Upvalue no longer captured by `getFavoritesFetchingState`: `dsy`
+- New upvalue captured by `init`: `cQv`
+- New upvalue captured by `init`: `cRs`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dwC`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dzX`
+- New upvalue captured by `init`: `fPJ`
+- New upvalue captured by `init`: `fPM`
+- Upvalue no longer captured by `init`: `cQu`
+- Upvalue no longer captured by `init`: `cRr`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dsy`
+- Upvalue no longer captured by `init`: `dvT`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fPl`
+- Upvalue no longer captured by `init`: `fPn`
+- New upvalue captured by `goToAvatarPage`: `dBR`
+- Upvalue no longer captured by `goToAvatarPage`: `dxN`
+- New upvalue captured by `openSellPage`: `dBR`
+- New upvalue captured by `openSellPage`: `fPM`
+- Upvalue no longer captured by `openSellPage`: `dxN`
+- Upvalue no longer captured by `openSellPage`: `fPn`
+- New upvalue captured by `favoriteItem`: `cRs`
+- New upvalue captured by `favoriteItem`: `dwu`
+- Upvalue no longer captured by `favoriteItem`: `cRr`
+- Upvalue no longer captured by `favoriteItem`: `dsq`
+- New upvalue captured by `shareItemViaShortLink`: `dwu`
+- Upvalue no longer captured by `shareItemViaShortLink`: `dsq`
+- New upvalue captured by `popupLinkCopiedToast`: `cQv`
+- New upvalue captured by `popupLinkCopiedToast`: `dwu`
+- Upvalue no longer captured by `popupLinkCopiedToast`: `cQu`
+- Upvalue no longer captured by `popupLinkCopiedToast`: `dsq`
+- New upvalue captured by `reportItem`: `cWl`
+- New upvalue captured by `reportItem`: `dBR`
+- New upvalue captured by `reportItem`: `dwC`
+- New upvalue captured by `reportItem`: `dwu`
+- New upvalue captured by `reportItem`: `dzX`
+- New upvalue captured by `reportItem`: `fPK`
+- Upvalue no longer captured by `reportItem`: `cWk`
+- Upvalue no longer captured by `reportItem`: `dsq`
+- Upvalue no longer captured by `reportItem`: `dsy`
+- Upvalue no longer captured by `reportItem`: `dvT`
+- Upvalue no longer captured by `reportItem`: `dxN`
+- Upvalue no longer captured by `reportItem`: `fPl`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `onViewDetailsPageActivate`: `dwu`
+- New upvalue captured by `onViewDetailsPageActivate`: `fPJ`
+- Upvalue no longer captured by `onViewDetailsPageActivate`: `dsq`
+- Upvalue no longer captured by `onViewDetailsPageActivate`: `fPk`
+- New upvalue captured by `didMount`: `dwu`
+- Upvalue no longer captured by `didMount`: `dsq`
+- New upvalue captured by `renderWithProviders`: `dwC`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dzV`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dsy`
+- Upvalue no longer captured by `renderWithProviders`: `dvR`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `getBundleFavorite`: `fPD`
+- Upvalue no longer captured by `getBundleFavorite`: `fPe`
+- New upvalue captured by `getAssetFavorite`: `fPB`
+- Upvalue no longer captured by `getAssetFavorite`: `fPc`
+- New upvalue captured by `setAssetFavorite`: `fPC`
+- Upvalue no longer captured by `setAssetFavorite`: `fPd`
+- New upvalue captured by `setBundleFavorite`: `fPE`
+- Upvalue no longer captured by `setBundleFavorite`: `fPf`
+- New upvalue captured by `getOrGenerateShortShareLink`: `dzW`
+- Upvalue no longer captured by `getOrGenerateShortShareLink`: `dvS`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `openItemDetails`: `fPF`
+- Upvalue no longer captured by `openItemDetails`: `fPg`
+- New upvalue captured by `reportBundle`: `fPN`
+- Upvalue no longer captured by `reportBundle`: `fPo`
+- New function: `var12451`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `openUnequipPrompt`: `dBR`
+- Upvalue no longer captured by `openUnequipPrompt`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `renderLocalized`: `dwu`
+- New upvalue captured by `renderLocalized`: `fPQ`
+- Upvalue no longer captured by `renderLocalized`: `dsq`
+- Upvalue no longer captured by `renderLocalized`: `fPr`
+- Upvalue no longer captured by `onActivated`: `name`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `onActivatedShop`: `dBR`
+- Upvalue no longer captured by `onActivatedShop`: `dxN`
+- New upvalue captured by `onActivatedEditProfilePicture`: `dBR`
+- Upvalue no longer captured by `onActivatedEditProfilePicture`: `dxN`
+- New upvalue captured by `onActivatedManage`: `dBR`
+- Upvalue no longer captured by `onActivatedManage`: `dxN`
+- New upvalue captured by `onActivatedCustomizeAvatar`: `dBR`
+- Upvalue no longer captured by `onActivatedCustomizeAvatar`: `dxN`
+- New upvalue captured by `onActivatedRefinement`: `dBR`
+- Upvalue no longer captured by `onActivatedRefinement`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `onActivated`: `name`
+- Upvalue no longer captured by `onActivated`: `currentList`
+- New upvalue captured by `render`: `eDI`
+- Upvalue no longer captured by `render`: `eBN`
+- New upvalue captured by `purchaseRobux`: `cWl`
+- New upvalue captured by `purchaseRobux`: `dKM`
+- Upvalue no longer captured by `purchaseRobux`: `cWk`
+- Upvalue no longer captured by `purchaseRobux`: `dHT`
+- New upvalue captured by `setEntryPage`: `dBL`
+- Upvalue no longer captured by `setEntryPage`: `dxH`
+- New upvalue captured by `get`: `dBm`
+- New upvalue captured by `get`: `dGV`
+- New upvalue captured by `get`: `dyg`
+- New upvalue captured by `get`: `fPU`
+- Upvalue no longer captured by `get`: `dCR`
+- Upvalue no longer captured by `get`: `duc`
+- Upvalue no longer captured by `get`: `dxi`
+- Upvalue no longer captured by `get`: `fPv`
+- New upvalue captured by `profilePictureEditorButton`: `fPU`
+- Upvalue no longer captured by `profilePictureEditorButton`: `fPv`
+- New upvalue captured by `profilePictureEditorOpenedFromLandingPage`: `fPU`
+- Upvalue no longer captured by `profilePictureEditorOpenedFromLandingPage`: `fPv`
+- New upvalue captured by `clickShopForMore`: `dyg`
+- New upvalue captured by `clickShopForMore`: `fPU`
+- Upvalue no longer captured by `clickShopForMore`: `duc`
+- Upvalue no longer captured by `clickShopForMore`: `fPv`
+- New upvalue captured by `clickFinalSave`: `dBm`
+- New upvalue captured by `clickFinalSave`: `fPU`
+- Upvalue no longer captured by `clickFinalSave`: `dxi`
+- Upvalue no longer captured by `clickFinalSave`: `fPv`
+- New upvalue captured by `clickNextFromEmotesPage`: `fPU`
+- Upvalue no longer captured by `clickNextFromEmotesPage`: `fPv`
+- New upvalue captured by `clickNextFromCameraPage`: `fPU`
+- Upvalue no longer captured by `clickNextFromCameraPage`: `fPv`
+- New upvalue captured by `clickDefaultPositionsFromCameraPage`: `fPU`
+- Upvalue no longer captured by `clickDefaultPositionsFromCameraPage`: `fPv`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `goToAvatarEditorPage`: `dBR`
+- Upvalue no longer captured by `goToAvatarEditorPage`: `dxN`
+- New upvalue captured by `goToCatalogPage`: `dBR`
+- Upvalue no longer captured by `goToCatalogPage`: `dxN`
+- New upvalue captured by `goToProfilePictureEditorPage`: `dBR`
+- Upvalue no longer captured by `goToProfilePictureEditorPage`: `dxN`
+- New upvalue captured by `onDismiss`: `dBR`
+- Upvalue no longer captured by `onDismiss`: `dxN`
+- New upvalue captured by `renderWithProviders`: `fNN`
+- Upvalue no longer captured by `renderWithProviders`: `fNo`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dzW`
+- Upvalue no longer captured by `init`: `dvS`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `sendReport`: `dzW`
+- Upvalue no longer captured by `sendReport`: `dvS`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `fPY`: `var1 (write)`
+- New upvalue captured by `getOutfit`: `dwu`
+- New upvalue captured by `getOutfit`: `eFG`
+- New upvalue captured by `getOutfit`: `fOA`
+- New upvalue captured by `getOutfit`: `fOY`
+- New upvalue captured by `getOutfit`: `fym`
+- Upvalue no longer captured by `getOutfit`: `dsq`
+- Upvalue no longer captured by `getOutfit`: `eDL`
+- Upvalue no longer captured by `getOutfit`: `fOb`
+- Upvalue no longer captured by `getOutfit`: `fOz`
+- Upvalue no longer captured by `getOutfit`: `fxN`
+- New upvalue captured by `failureHandler`: `cWj`
+- Upvalue no longer captured by `failureHandler`: `cWi`
+- New upvalue captured by `processPromises`: `dwV`
+- Upvalue no longer captured by `processPromises`: `dsR`
+- New function: `var12594`
+- New upvalue captured by `fetchInitialPage`: `dwu_1`
+- New upvalue captured by `fetchInitialPage`: `fOA`
+- Upvalue no longer captured by `fetchInitialPage`: `dsq_1`
+- Upvalue no longer captured by `fetchInitialPage`: `fOb`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dxM`
+- New upvalue captured by `init`: `fNH`
+- New upvalue captured by `init`: `fPX`
+- Upvalue no longer captured by `init`: `dtI`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fNi`
+- Upvalue no longer captured by `init`: `fPy`
+- New upvalue captured by `saveOutfit`: `dBR`
+- New upvalue captured by `saveOutfit`: `dxM`
+- New upvalue captured by `saveOutfit`: `fNH`
+- Upvalue no longer captured by `saveOutfit`: `dtI`
+- Upvalue no longer captured by `saveOutfit`: `dxN`
+- Upvalue no longer captured by `saveOutfit`: `fNi`
+- New upvalue captured by `renderMiddleContent`: `fPX`
+- Upvalue no longer captured by `renderMiddleContent`: `fPy`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `willUpdate`: `eFG`
+- Upvalue no longer captured by `willUpdate`: `eDL`
+- New upvalue captured by `createOutfit`: `fPl`
+- Upvalue no longer captured by `createOutfit`: `fOM`
+- New upvalue captured by `getEditableUserCostumes`: `fPZ`
+- Upvalue no longer captured by `getEditableUserCostumes`: `fPA`
+- New upvalue captured by `keyMapper`: `dxM`
+- Upvalue no longer captured by `keyMapper`: `dtI`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dxM`
+- New upvalue captured by `init`: `fNH`
+- New upvalue captured by `init`: `fPX`
+- Upvalue no longer captured by `init`: `dtI`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fNi`
+- Upvalue no longer captured by `init`: `fPy`
+- New upvalue captured by `renameOutfit`: `dBR`
+- New upvalue captured by `renameOutfit`: `dxM`
+- New upvalue captured by `renameOutfit`: `fNH`
+- Upvalue no longer captured by `renameOutfit`: `dtI`
+- Upvalue no longer captured by `renameOutfit`: `dxN`
+- Upvalue no longer captured by `renameOutfit`: `fNi`
+- New upvalue captured by `renderMiddleContent`: `fPX`
+- Upvalue no longer captured by `renderMiddleContent`: `fPy`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `willUpdate`: `eFG`
+- Upvalue no longer captured by `willUpdate`: `eDL`
+- New upvalue captured by `renameOutfit`: `fQn`
+- Upvalue no longer captured by `renameOutfit`: `fPO`
+- New upvalue captured by `getEditableUserCostumes`: `fPZ`
+- Upvalue no longer captured by `getEditableUserCostumes`: `fPA`
+- New upvalue captured by `keyMapper`: `dxM`
+- Upvalue no longer captured by `keyMapper`: `dtI`
+- New upvalue captured by `createBulletList`: `fQr`
+- Upvalue no longer captured by `createBulletList`: `fPS`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `fQq`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fPR`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `renderAlertMiddleContent`: `fQq`
+- Upvalue no longer captured by `renderAlertMiddleContent`: `fPR`
+- New upvalue captured by `deleteOutfit`: `fQp`
+- Upvalue no longer captured by `deleteOutfit`: `fPQ`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `goBack`: `dBR`
+- Upvalue no longer captured by `goBack`: `dxN`
+- New upvalue captured by `willUpdate`: `dBR`
+- New upvalue captured by `willUpdate`: `eFG`
+- Upvalue no longer captured by `willUpdate`: `dxN`
+- Upvalue no longer captured by `willUpdate`: `eDL`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `saveOutfit`: `dBR`
+- Upvalue no longer captured by `saveOutfit`: `dxN`
+- New upvalue captured by `updateExisting`: `dBR`
+- Upvalue no longer captured by `updateExisting`: `dxN`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `switchToR15`: `dwu`
+- Upvalue no longer captured by `switchToR15`: `dsq`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `setAvatarType`: `dxL`
+- Upvalue no longer captured by `setAvatarType`: `dtH`
+- New upvalue captured by `toggleEquipAsset`: `fOD`
+- Upvalue no longer captured by `toggleEquipAsset`: `fOe`
+- New function: `var12760`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `switchToR6`: `dwu`
+- Upvalue no longer captured by `switchToR6`: `dsq`
+- New upvalue captured by `closePrompt`: `dBR`
+- Upvalue no longer captured by `closePrompt`: `dxN`
+- New upvalue captured by `setAvatarType`: `dxL`
+- Upvalue no longer captured by `setAvatarType`: `dtH`
+- New upvalue captured by `removeLayeredClothing`: `fQw`
+- Upvalue no longer captured by `removeLayeredClothing`: `fPX`
+- New function: `fQB`
+- New upvalue captured by `onActivated`: `currentList`
+- New function: `fQO`
+- New upvalue captured by `Chat`: `fQF`
+- Upvalue no longer captured by `Chat`: `fQg`
+- New upvalue captured by `Profile`: `fQF`
+- Upvalue no longer captured by `Profile`: `fQg`
+- New upvalue captured by `ExperienceDetails`: `fQF`
+- Upvalue no longer captured by `ExperienceDetails`: `fQg`
+- New upvalue captured by `Notification`: `fQF`
+- Upvalue no longer captured by `Notification`: `fQg`
+- New function: `fQA`
+- New function: `var12885`
+- New function: `var12888`
+- New upvalue captured by `onSubmitReport`: `cWd`
+- New upvalue captured by `onSubmitReport`: `cWj`
+- New upvalue captured by `onSubmitReport`: `fQF`
+- New upvalue captured by `onSubmitReport`: `fQN`
+- New upvalue captured by `onSubmitReport`: `fQP`
+- Upvalue no longer captured by `onSubmitReport`: `cWc`
+- Upvalue no longer captured by `onSubmitReport`: `cWi`
+- Upvalue no longer captured by `onSubmitReport`: `fQg`
+- Upvalue no longer captured by `onSubmitReport`: `fQo`
+- Upvalue no longer captured by `onSubmitReport`: `fQq`
+- New upvalue captured by `_`: `cWd`
+- New upvalue captured by `_`: `fQF`
+- New upvalue captured by `_`: `fQP`
+- Upvalue no longer captured by `_`: `cWc`
+- Upvalue no longer captured by `_`: `fQg`
+- Upvalue no longer captured by `_`: `fQq`
+- New function: `var12916`
+- New upvalue captured by `init`: `fRi`
+- Upvalue no longer captured by `init`: `fQJ`
+- New upvalue captured by `failFlow`: `fRi`
+- Upvalue no longer captured by `failFlow`: `fQJ`
+- New upvalue captured by `purchasePremium`: `fRi`
+- Upvalue no longer captured by `purchasePremium`: `fQJ`
+- New upvalue captured by `cancelPurchase`: `fRi`
+- Upvalue no longer captured by `cancelPurchase`: `fQJ`
+- New upvalue captured by `sendCounter`: `fRi`
+- Upvalue no longer captured by `sendCounter`: `fQJ`
+- New upvalue captured by `didMount`: `fRi`
+- Upvalue no longer captured by `didMount`: `fQJ`
+- New upvalue captured by `didUpdate`: `cRs`
+- New upvalue captured by `didUpdate`: `fRi`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- Upvalue no longer captured by `didUpdate`: `fQJ`
+- New upvalue captured by `getFlowState`: `cRs`
+- Upvalue no longer captured by `getFlowState`: `cRr`
+- New upvalue captured by `Fetch`: `cQF`
+- New upvalue captured by `Fetch`: `fMe`
+- New upvalue captured by `Fetch`: `fRm`
+- New upvalue captured by `Fetch`: `fRn`
+- Upvalue no longer captured by `Fetch`: `cQE`
+- Upvalue no longer captured by `Fetch`: `fLF`
+- Upvalue no longer captured by `Fetch`: `fQN`
+- Upvalue no longer captured by `Fetch`: `fQO`
+- New function: `var12940`
+- New upvalue captured by `fRk`: `var1 (write)`
+- New upvalue captured by `fRp`: `var1 (write)`
+- New upvalue captured by `dispatchCentralOverlay`: `dKy`
+- Upvalue no longer captured by `dispatchCentralOverlay`: `dHF`
+- New upvalue captured by `dispatchFetchIAPProducts`: `fRl`
+- Upvalue no longer captured by `dispatchFetchIAPProducts`: `fQM`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `promptPremium`: `cWl`
+- New upvalue captured by `promptPremium`: `dKM`
+- New upvalue captured by `promptPremium`: `fRp`
+- Upvalue no longer captured by `promptPremium`: `cWk`
+- Upvalue no longer captured by `promptPremium`: `dHT`
+- Upvalue no longer captured by `promptPremium`: `fQQ`
+- New upvalue captured by `init`: `fRj`
+- Upvalue no longer captured by `init`: `fQK`
+- New upvalue captured by `sendCounter`: `fRj`
+- Upvalue no longer captured by `sendCounter`: `fQK`
+- New upvalue captured by `didMount`: `cRs`
+- Upvalue no longer captured by `didMount`: `cRr`
+- New upvalue captured by `render`: `fRh`
+- New upvalue captured by `render`: `fRj`
+- Upvalue no longer captured by `render`: `fQI`
+- Upvalue no longer captured by `render`: `fQK`
+- New upvalue captured by `status`: `dzX`
+- Upvalue no longer captured by `status`: `dvT`
+- New upvalue captured by `generate`: `dzX`
+- Upvalue no longer captured by `generate`: `dvT`
+- New upvalue captured by `redeem`: `dzX`
+- Upvalue no longer captured by `redeem`: `dvT`
+- Upvalue no longer captured by `fRw`: `var1 (write)`
+- New upvalue captured by `Fetch`: `dJE`
+- New upvalue captured by `Fetch`: `eEq`
+- New upvalue captured by `Fetch`: `eEu`
+- New upvalue captured by `Fetch`: `fRv`
+- New upvalue captured by `Fetch`: `fRw`
+- Upvalue no longer captured by `Fetch`: `dGL`
+- Upvalue no longer captured by `Fetch`: `eCv`
+- Upvalue no longer captured by `Fetch`: `eCz`
+- Upvalue no longer captured by `Fetch`: `fQW`
+- Upvalue no longer captured by `Fetch`: `fQX`
+- New upvalue captured by `Post`: `dJE`
+- New upvalue captured by `Post`: `fRy`
+- Upvalue no longer captured by `Post`: `dGL`
+- Upvalue no longer captured by `Post`: `fQZ`
+- New upvalue captured by `init`: `cRs`
+- New upvalue captured by `init`: `eEq`
+- New upvalue captured by `init`: `eEu`
+- New upvalue captured by `init`: `fRs`
+- New upvalue captured by `init`: `fRz`
+- Upvalue no longer captured by `init`: `cRr`
+- Upvalue no longer captured by `init`: `eCv`
+- Upvalue no longer captured by `init`: `eCz`
+- Upvalue no longer captured by `init`: `fQT`
+- Upvalue no longer captured by `init`: `fRa`
+- New upvalue captured by `failFlow`: `fRz`
+- Upvalue no longer captured by `failFlow`: `fRa`
+- New upvalue captured by `getRobuxUpsellProduct`: `cRs`
+- Upvalue no longer captured by `getRobuxUpsellProduct`: `cRr`
+- New upvalue captured by `attemptRobuxUpsell`: `cRs`
+- Upvalue no longer captured by `attemptRobuxUpsell`: `cRr`
+- New upvalue captured by `acceptPurchaseWarning`: `cRs`
+- Upvalue no longer captured by `acceptPurchaseWarning`: `cRr`
+- New upvalue captured by `attemptPurchaseItem`: `cRs`
+- New upvalue captured by `attemptPurchaseItem`: `fRz`
+- Upvalue no longer captured by `attemptPurchaseItem`: `cRr`
+- Upvalue no longer captured by `attemptPurchaseItem`: `fRa`
+- New upvalue captured by `cancelPurchase`: `fRz`
+- Upvalue no longer captured by `cancelPurchase`: `fRa`
+- New upvalue captured by `sendCounter`: `fRz`
+- Upvalue no longer captured by `sendCounter`: `fRa`
+- New upvalue captured by `isSettingsSupportedForPlatform`: `eEq`
+- New upvalue captured by `isSettingsSupportedForPlatform`: `eEu`
+- Upvalue no longer captured by `isSettingsSupportedForPlatform`: `eCv`
+- Upvalue no longer captured by `isSettingsSupportedForPlatform`: `eCz`
+- New upvalue captured by `dispatchFetchPurchaseWarning`: `fRu`
+- New upvalue captured by `dispatchFetchPurchaseWarning`: `fRz`
+- Upvalue no longer captured by `dispatchFetchPurchaseWarning`: `fQV`
+- Upvalue no longer captured by `dispatchFetchPurchaseWarning`: `fRa`
+- New upvalue captured by `dispatchPostAckPurchaseWarning`: `fRx`
+- New upvalue captured by `dispatchPostAckPurchaseWarning`: `fRz`
+- Upvalue no longer captured by `dispatchPostAckPurchaseWarning`: `fQY`
+- Upvalue no longer captured by `dispatchPostAckPurchaseWarning`: `fRa`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `cRs`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `eEq`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `eEu`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `fRs`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `fRz`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `cRr`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `eCv`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `eCz`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `fQT`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `fRa`
+- New upvalue captured by `purchaseItem`: `fRz`
+- Upvalue no longer captured by `purchaseItem`: `fRa`
+- New upvalue captured by `renderTwoStepChallenge`: `fNb`
+- New upvalue captured by `renderTwoStepChallenge`: `fNi`
+- New upvalue captured by `renderTwoStepChallenge`: `fRt`
+- New upvalue captured by `renderTwoStepChallenge`: `fRz`
+- Upvalue no longer captured by `renderTwoStepChallenge`: `fMC`
+- Upvalue no longer captured by `renderTwoStepChallenge`: `fMJ`
+- Upvalue no longer captured by `renderTwoStepChallenge`: `fQU`
+- Upvalue no longer captured by `renderTwoStepChallenge`: `fRc`
+- New upvalue captured by `onChallengeCompleted`: `fRt`
+- New upvalue captured by `onChallengeCompleted`: `fRz`
+- Upvalue no longer captured by `onChallengeCompleted`: `fQU`
+- Upvalue no longer captured by `onChallengeCompleted`: `fRa`
+- New upvalue captured by `onChallengeInvalidated`: `fRz`
+- Upvalue no longer captured by `onChallengeInvalidated`: `fRa`
+- New upvalue captured by `onChallengeAbandoned`: `fRz`
+- Upvalue no longer captured by `onChallengeAbandoned`: `fRa`
+- New upvalue captured by `onChallengeLoadFailed`: `fRz`
+- Upvalue no longer captured by `onChallengeLoadFailed`: `fRa`
+- New upvalue captured by `didMount`: `cRs`
+- New upvalue captured by `didMount`: `fRz`
+- Upvalue no longer captured by `didMount`: `cRr`
+- Upvalue no longer captured by `didMount`: `fRa`
+- New upvalue captured by `didUpdate`: `cRs`
+- New upvalue captured by `didUpdate`: `fLZ`
+- New upvalue captured by `didUpdate`: `fMh`
+- New upvalue captured by `didUpdate`: `fRz`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- Upvalue no longer captured by `didUpdate`: `fLA`
+- Upvalue no longer captured by `didUpdate`: `fLI`
+- Upvalue no longer captured by `didUpdate`: `fRa`
+- New upvalue captured by `getFlowState`: `cRs`
+- New upvalue captured by `getFlowState`: `fLZ`
+- New upvalue captured by `getFlowState`: `fMh`
+- New upvalue captured by `getFlowState`: `fRs`
+- Upvalue no longer captured by `getFlowState`: `cRr`
+- Upvalue no longer captured by `getFlowState`: `fLA`
+- Upvalue no longer captured by `getFlowState`: `fLI`
+- Upvalue no longer captured by `getFlowState`: `fQT`
+- New upvalue captured by `getErrorType`: `fLZ`
+- New upvalue captured by `getErrorType`: `fMh`
+- Upvalue no longer captured by `getErrorType`: `fLA`
+- Upvalue no longer captured by `getErrorType`: `fLI`
+- New upvalue captured by `fRG`: `var1 (write)`
+- New upvalue captured by `paymentPlatformToUpsellPlatform`: `eEu`
+- Upvalue no longer captured by `paymentPlatformToUpsellPlatform`: `eCz`
+- New upvalue captured by `paymentPlatformToUpsellPlatform`: `eEu`
+- Upvalue no longer captured by `paymentPlatformToUpsellPlatform`: `eCz`
+- Upvalue no longer captured by `fRJ`: `var1 (write)`
+- New function: `fRM`
+- New upvalue captured by `Post`: `dJE`
+- New upvalue captured by `Post`: `fRN`
+- Upvalue no longer captured by `Post`: `dGL`
+- Upvalue no longer captured by `Post`: `fRo`
+- New upvalue captured by `dispatchFetchRobuxProduct`: `fRF`
+- New upvalue captured by `dispatchFetchRobuxProduct`: `fRH`
+- Upvalue no longer captured by `dispatchFetchRobuxProduct`: `fRg`
+- Upvalue no longer captured by `dispatchFetchRobuxProduct`: `fRi`
+- New upvalue captured by `dispatchFetchIAPPurchaseWarning`: `fRu`
+- Upvalue no longer captured by `dispatchFetchIAPPurchaseWarning`: `fQV`
+- New upvalue captured by `dispatchPostAckPurchaseWarning`: `fRx`
+- Upvalue no longer captured by `dispatchPostAckPurchaseWarning`: `fQY`
+- New upvalue captured by `dispatchCentralOverlay`: `dKy`
+- Upvalue no longer captured by `dispatchCentralOverlay`: `dHF`
+- New upvalue captured by `endPurchase`: `fRE`
+- Upvalue no longer captured by `endPurchase`: `fRf`
+- New upvalue captured by `promptRobux`: `fRp`
+- Upvalue no longer captured by `promptRobux`: `fQQ`
+- New upvalue captured by `openTermsOfUse`: `cWl`
+- New upvalue captured by `openTermsOfUse`: `dKM`
+- New upvalue captured by `openTermsOfUse`: `eDs`
+- Upvalue no longer captured by `openTermsOfUse`: `cWk`
+- Upvalue no longer captured by `openTermsOfUse`: `dHT`
+- Upvalue no longer captured by `openTermsOfUse`: `eBx`
+- New upvalue captured by `openSecuritySettings`: `eDr`
+- Upvalue no longer captured by `openSecuritySettings`: `eBw`
+- New upvalue captured by `openBuyRobux`: `eEl`
+- Upvalue no longer captured by `openBuyRobux`: `eCq`
+- New upvalue captured by `renderChallenge`: `fRK`
+- Upvalue no longer captured by `renderChallenge`: `fRl`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `fRM`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `fRn`
+- New upvalue captured by `openSettingsPage`: `cWl`
+- New upvalue captured by `openSettingsPage`: `dKM`
+- New upvalue captured by `openSettingsPage`: `eDs`
+- Upvalue no longer captured by `openSettingsPage`: `cWk`
+- Upvalue no longer captured by `openSettingsPage`: `dHT`
+- Upvalue no longer captured by `openSettingsPage`: `eBx`
+- Upvalue no longer captured by `fRO`: `var1 (write)`
+- New upvalue captured by `init`: `eDs`
+- New upvalue captured by `init`: `eEq`
+- New upvalue captured by `init`: `eEu`
+- New upvalue captured by `init`: `fJH`
+- Upvalue no longer captured by `init`: `eBx`
+- Upvalue no longer captured by `init`: `eCv`
+- Upvalue no longer captured by `init`: `eCz`
+- Upvalue no longer captured by `init`: `fJi`
+- New upvalue captured by `sendCounter`: `eEq`
+- New upvalue captured by `sendCounter`: `eEu`
+- New upvalue captured by `sendCounter`: `fJH`
+- Upvalue no longer captured by `sendCounter`: `eCv`
+- Upvalue no longer captured by `sendCounter`: `eCz`
+- Upvalue no longer captured by `sendCounter`: `fJi`
+- New upvalue captured by `handleOpenTermsOfUseOpen`: `eDs`
+- Upvalue no longer captured by `handleOpenTermsOfUseOpen`: `eBx`
+- New upvalue captured by `render`: `eEq`
+- New upvalue captured by `render`: `fJH`
+- New upvalue captured by `render`: `fRI`
+- New upvalue captured by `render`: `fRO`
+- New upvalue captured by `render`: `fRr`
+- New upvalue captured by `render`: `fRw`
+- Upvalue no longer captured by `render`: `eCv`
+- Upvalue no longer captured by `render`: `fJi`
+- Upvalue no longer captured by `render`: `fQS`
+- Upvalue no longer captured by `render`: `fQX`
+- Upvalue no longer captured by `render`: `fRj`
+- Upvalue no longer captured by `render`: `fRp`
+- New upvalue captured by `fetchUpsellSuggestions`: `eEq`
+- New upvalue captured by `fetchUpsellSuggestions`: `fRI`
+- Upvalue no longer captured by `fetchUpsellSuggestions`: `eCv`
+- Upvalue no longer captured by `fetchUpsellSuggestions`: `fRj`
+- New upvalue captured by `dispatchFetchIAPPurchaseWarning`: `fRw`
+- Upvalue no longer captured by `dispatchFetchIAPPurchaseWarning`: `fQX`
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- New function: `fRW`
+- New function: `var13221`
+- New function: `var13222`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- New upvalue captured by `onActivated`: `dBR`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- New upvalue captured by `onActivated`: `dBR`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- Upvalue no longer captured by `onActivated`: `value`
+- New upvalue captured by `onActivated`: `dBR`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- New upvalue captured by `onActivated`: `dBR`
+- New upvalue captured by `onActivated`: `value`
+- Upvalue no longer captured by `onActivated`: `clearAll`
+- New upvalue captured by `fSa`: `var1 (write)`
+- New upvalue captured by `onActivated`: `clearAll`
+- New upvalue captured by `fSb`: `var1 (write)`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fSc_ItemInfoRowPrompt`
+- Upvalue no longer captured by `onActivated`: `onSelectFolder`
+- Upvalue no longer captured by `fSf`: `var1 (write)`
+- New function: `var13336`
+- New function: `var13337`
+- Upvalue no longer captured by `fSz`: `var1 (write)`
+- Upvalue no longer captured by `fSA`: `var1 (write)`
+- New upvalue captured by `decode`: `fSG`
+- Upvalue no longer captured by `decode`: `fSh`
+- New upvalue captured by `fSH`: `var1 (write)`
+- New upvalue captured by `decode`: `fSG`
+- Upvalue no longer captured by `decode`: `fSh`
+- New upvalue captured by `decode`: `fSG`
+- Upvalue no longer captured by `decode`: `fSh`
+- New upvalue captured by `decode`: `fSG`
+- Upvalue no longer captured by `decode`: `fSh`
+- New upvalue captured by `decode`: `fSG`
+- Upvalue no longer captured by `decode`: `fSh`
+- New upvalue captured by `syncFolder`: `var13468 (write)`
+- Upvalue no longer captured by `syncFolder`: `var13338 (write)`
+- New upvalue captured by `removeFolderLocal`: `var13468 (write)`
+- Upvalue no longer captured by `removeFolderLocal`: `var13338 (write)`
+- New upvalue captured by `loadFolders`: `fSB`
+- New upvalue captured by `loadFolders`: `fSz`
+- New upvalue captured by `loadFolders`: `var13466 (write)`
+- Upvalue no longer captured by `loadFolders`: `fSa`
+- Upvalue no longer captured by `loadFolders`: `fSc`
+- Upvalue no longer captured by `loadFolders`: `var13336 (write)`
+- New upvalue captured by `dropCacheIfFailed`: `fSz`
+- Upvalue no longer captured by `dropCacheIfFailed`: `fSa`
+- New upvalue captured by `getFolderById`: `fSN`
+- Upvalue no longer captured by `getFolderById`: `fSo`
+- New upvalue captured by `getFoldersForOutfit`: `fSN`
+- Upvalue no longer captured by `getFoldersForOutfit`: `fSo`
+- New upvalue captured by `refreshFolders`: `fSB`
+- New upvalue captured by `refreshFolders`: `fSz`
+- New upvalue captured by `refreshFolders`: `var13467 (write)`
+- New upvalue captured by `refreshFolders`: `var13468 (write)`
+- Upvalue no longer captured by `refreshFolders`: `fSa`
+- Upvalue no longer captured by `refreshFolders`: `fSc`
+- Upvalue no longer captured by `refreshFolders`: `var13337 (write)`
+- Upvalue no longer captured by `refreshFolders`: `var13338 (write)`
+- New upvalue captured by `createFolder`: `fSH`
+- Upvalue no longer captured by `createFolder`: `fSi`
+- New upvalue captured by `renameFolder`: `fSI`
+- Upvalue no longer captured by `renameFolder`: `fSj`
+- New upvalue captured by `deleteFolder`: `fSJ`
+- Upvalue no longer captured by `deleteFolder`: `fSk`
+- New upvalue captured by `addItemsToFolder`: `fSK`
+- Upvalue no longer captured by `addItemsToFolder`: `fSl`
+- New upvalue captured by `removeItemsFromFolder`: `fSL`
+- Upvalue no longer captured by `removeItemsFromFolder`: `fSm`
+- New upvalue captured by `removeOutfitFromAllFolders`: `var13468 (write)`
+- Upvalue no longer captured by `removeOutfitFromAllFolders`: `var13338 (write)`
+- New upvalue captured by `cleanup`: `fSz`
+- New upvalue captured by `cleanup`: `var13466 (write)`
+- New upvalue captured by `cleanup`: `var13467 (write)`
+- New upvalue captured by `cleanup`: `var13468 (write)`
+- Upvalue no longer captured by `cleanup`: `fSa`
+- Upvalue no longer captured by `cleanup`: `var13336 (write)`
+- Upvalue no longer captured by `cleanup`: `var13337 (write)`
+- Upvalue no longer captured by `cleanup`: `var13338 (write)`
+- New upvalue captured by `Provider`: `fSM`
+- New upvalue captured by `Provider`: `fSQ`
+- Upvalue no longer captured by `Provider`: `fSn`
+- Upvalue no longer captured by `Provider`: `fSr`
+- New upvalue captured by `useFoldersStore`: `fSM`
+- New upvalue captured by `useFoldersStore`: `fSQ`
+- Upvalue no longer captured by `useFoldersStore`: `fSn`
+- Upvalue no longer captured by `useFoldersStore`: `fSr`
+- Upvalue no longer captured by `fSU`: `var1 (write)`
+- New upvalue captured by `itemIdsFilter`: `fSU`
+- New upvalue captured by `itemIdsFilter`: `var13531 (write)`
+- Upvalue no longer captured by `itemIdsFilter`: `fSv`
+- Upvalue no longer captured by `itemIdsFilter`: `var13401 (write)`
+- New upvalue captured by `fSV`: `var1 (write)`
+- New upvalue captured by `fTa`: `var1 (write)`
+- New upvalue captured by `onActivated`: `onSelectFolder`
+- Upvalue no longer captured by `fTg`: `var1 (write)`
+- New upvalue captured by `fTv`: `var1 (write)`
+- New upvalue captured by `fTx`: `var1 (write)`
+- Upvalue no longer captured by `fTz`: `var1 (write)`
+- New upvalue captured by `fTD`: `var1 (write)`
+- New upvalue captured by `navigateDown`: `cWl`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `cWk`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `fTH`: `var1 (write)`
+- New upvalue captured by `getCustomActionCreators`: `dBS`
+- Upvalue no longer captured by `getCustomActionCreators`: `dxO`
+- New upvalue captured by `getStateForAction`: `dBS`
+- Upvalue no longer captured by `getStateForAction`: `dxO`
+- New upvalue captured by `navigateDownToAvatarScreen`: `dLl`
+- Upvalue no longer captured by `navigateDownToAvatarScreen`: `dIs`
+- New upvalue captured by `navigateIntoAvatarExperience`: `fTL`
+- Upvalue no longer captured by `navigateIntoAvatarExperience`: `fTm`
+- New upvalue captured by `fTS`: `var1 (write)`
+- New upvalue captured by `getAssetModel`: `dwz`
+- Upvalue no longer captured by `getAssetModel`: `dsv`
+- New upvalue captured by `getShoesModel`: `dwu`
+- Upvalue no longer captured by `getShoesModel`: `dsq`
+- New upvalue captured by `getAvatarModel`: `dwu`
+- Upvalue no longer captured by `getAvatarModel`: `dsq`
+- New upvalue captured by `getBundleModel`: `dwu`
+- Upvalue no longer captured by `getBundleModel`: `dsq`
+- New upvalue captured by `getCameraDistance`: `dwz`
+- Upvalue no longer captured by `getCameraDistance`: `dsv`
+- Upvalue no longer captured by `fTU`: `var1 (write)`
+- Upvalue no longer captured by `fTW`: `var1 (write)`
+- New upvalue captured by `fTY`: `var1 (write)`
+- New upvalue captured by `fUb`: `var1 (write)`
+- New function: `var14006`
+- Upvalue no longer captured by `fUc`: `var1 (write)`
+- New upvalue captured by `fUa`: `var1 (write)`
+- New upvalue captured by `onActivate`: `var14041 (write)`
+- New upvalue captured by `onActivate`: `var14043 (write)`
+- Upvalue no longer captured by `onActivate`: `var13911 (write)`
+- Upvalue no longer captured by `onActivate`: `var13913 (write)`
+- New upvalue captured by `fUe`: `var1 (write)`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- Upvalue no longer captured by `fUg`: `var1 (write)`
+- New upvalue captured by `fUh`: `var1 (write)`
+- New upvalue captured by `fTZ`: `var1 (write)`
+- New upvalue captured by `getGameJoinContext`: `dwu`
+- New upvalue captured by `getGameJoinContext`: `eFG`
+- Upvalue no longer captured by `getGameJoinContext`: `dsq`
+- Upvalue no longer captured by `getGameJoinContext`: `eDL`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `fUl`: `var1 (write)`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `render`: `dzV`
+- Upvalue no longer captured by `render`: `dvR`
+- New upvalue captured by `render`: `dwu`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `fUr`: `var1 (write)`
+- New upvalue captured by `init`: `dwC`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `fUm`
+- New upvalue captured by `init`: `fUr`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dsy`
+- Upvalue no longer captured by `init`: `fTN`
+- Upvalue no longer captured by `init`: `fTS`
+- New function: `var14284`
+- New function: `var14285`
+- New upvalue captured by `navigateToRecommendedItem`: `dwC`
+- New upvalue captured by `navigateToRecommendedItem`: `dwu`
+- Upvalue no longer captured by `navigateToRecommendedItem`: `dsq`
+- Upvalue no longer captured by `navigateToRecommendedItem`: `dsy`
+- New upvalue captured by `renderRecommendedItem`: `fUm`
+- Upvalue no longer captured by `renderRecommendedItem`: `fTN`
+- New upvalue captured by `fetchRecommended`: `dwu`
+- New upvalue captured by `fetchRecommended`: `fUr`
+- Upvalue no longer captured by `fetchRecommended`: `dsq`
+- Upvalue no longer captured by `fetchRecommended`: `fTS`
+- New upvalue captured by `render`: `dwu`
+- New upvalue captured by `render`: `dzV`
+- New upvalue captured by `render`: `fUo`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `render`: `dvR`
+- Upvalue no longer captured by `render`: `fTP`
+- New function: `var14292`
+- New upvalue captured by `getItemHeight`: `dzV`
+- Upvalue no longer captured by `getItemHeight`: `dvR`
+- New upvalue captured by `getItemHeight`: `dzV`
+- Upvalue no longer captured by `getItemHeight`: `dvR`
+- New upvalue captured by `getRecommendedAssets`: `fUk`
+- New upvalue captured by `getRecommendedAssets`: `fUr`
+- Upvalue no longer captured by `getRecommendedAssets`: `fTL`
+- Upvalue no longer captured by `getRecommendedAssets`: `fTS`
+- New upvalue captured by `getRecommendedBundles`: `fUl`
+- New upvalue captured by `getRecommendedBundles`: `fUr`
+- Upvalue no longer captured by `getRecommendedBundles`: `fTM`
+- Upvalue no longer captured by `getRecommendedBundles`: `fTS`
+- New upvalue captured by `sendDetailedCatalogAnalytics`: `fUp`
+- Upvalue no longer captured by `sendDetailedCatalogAnalytics`: `fTQ`
+- New upvalue captured by `maybePromptForR15Upgrade`: `fUq`
+- Upvalue no longer captured by `maybePromptForR15Upgrade`: `fTR`
+- New upvalue captured by `navigateDownToAvatarScreen`: `dLl`
+- Upvalue no longer captured by `navigateDownToAvatarScreen`: `dIs`
+- New upvalue captured by `init`: `fUm`
+- Upvalue no longer captured by `init`: `fTN`
+- New upvalue captured by `renderItemTile`: `fUm`
+- Upvalue no longer captured by `renderItemTile`: `fTN`
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `dvR`
+- Upvalue no longer captured by `onActivated`: `itemData`
+- Upvalue no longer captured by `onActivated`: `menuDirection`
+- New upvalue captured by `render`: `dwC`
+- New upvalue captured by `render`: `dwu`
+- New upvalue captured by `render`: `eFG`
+- New upvalue captured by `render`: `fUo`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `render`: `dsy`
+- Upvalue no longer captured by `render`: `eDL`
+- Upvalue no longer captured by `render`: `fTP`
+- New upvalue captured by `fetchBundleAssetsDetails`: `fPc`
+- Upvalue no longer captured by `fetchBundleAssetsDetails`: `fOD`
+- Upvalue no longer captured by `fUx`: `var1 (write)`
+- Upvalue no longer captured by `fUy`: `var1 (write)`
+- Upvalue no longer captured by `fUz`: `var1 (write)`
+- Upvalue no longer captured by `fUA`: `var1 (write)`
+- New upvalue captured by `write`: `fPC`
+- New upvalue captured by `write`: `fPE`
+- New upvalue captured by `write`: `fUB`
+- Upvalue no longer captured by `write`: `fPd`
+- Upvalue no longer captured by `write`: `fPf`
+- Upvalue no longer captured by `write`: `fUc`
+- New upvalue captured by `onCommitted`: `cQv`
+- New upvalue captured by `onCommitted`: `cWd`
+- Upvalue no longer captured by `onCommitted`: `cQu`
+- Upvalue no longer captured by `onCommitted`: `cWc`
+- New upvalue captured by `onGiveUp`: `dJF`
+- Upvalue no longer captured by `onGiveUp`: `dGM`
+- Upvalue no longer captured by `fUD`: `var1 (write)`
+- Upvalue no longer captured by `fUG`: `var1 (write)`
+- New upvalue captured by `init`: `dww`
+- New upvalue captured by `init`: `dwy`
+- New upvalue captured by `init`: `dzV`
+- New upvalue captured by `init`: `fUr`
+- Upvalue no longer captured by `init`: `dss`
+- Upvalue no longer captured by `init`: `dsu`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `fTS`
+- New upvalue captured by `onLevel2ItemDetailsTryOnButtonActivated`: `dzV`
+- Upvalue no longer captured by `onLevel2ItemDetailsTryOnButtonActivated`: `dvR`
+- New upvalue captured by `didUpdate`: `cRs`
+- New upvalue captured by `didUpdate`: `fUr`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- Upvalue no longer captured by `didUpdate`: `fTS`
+- New upvalue captured by `shouldShowRecommendedItems`: `dzV`
+- New upvalue captured by `shouldShowRecommendedItems`: `fUr`
+- Upvalue no longer captured by `shouldShowRecommendedItems`: `dvR`
+- Upvalue no longer captured by `shouldShowRecommendedItems`: `fTS`
+- New upvalue captured by `renderDetailsWithProviders`: `dBR`
+- New upvalue captured by `renderDetailsWithProviders`: `dwu`
+- New upvalue captured by `renderDetailsWithProviders`: `dww`
+- New upvalue captured by `renderDetailsWithProviders`: `dwz`
+- New upvalue captured by `renderDetailsWithProviders`: `dzV`
+- New upvalue captured by `renderDetailsWithProviders`: `fPM`
+- New upvalue captured by `renderDetailsWithProviders`: `fTR`
+- New upvalue captured by `renderDetailsWithProviders`: `fUC`
+- New upvalue captured by `renderDetailsWithProviders`: `fUG`
+- New upvalue captured by `renderDetailsWithProviders`: `fUj`
+- New upvalue captured by `renderDetailsWithProviders`: `fUr`
+- New upvalue captured by `renderDetailsWithProviders`: `fUs`
+- New upvalue captured by `renderDetailsWithProviders`: `fUu`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dsq`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dss`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dsv`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dvR`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dxN`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fPn`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTA`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTK`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTs`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTT`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fUe`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fUh`
+- New upvalue captured by `onActivated`: `dzV`
+- Upvalue no longer captured by `onActivated`: `dvR`
+- New upvalue captured by `renderOnFailed`: `dwC`
+- Upvalue no longer captured by `renderOnFailed`: `dsy`
+- New upvalue captured by `fetchAssetOrBundleInfo`: `fOz`
+- Upvalue no longer captured by `fetchAssetOrBundleInfo`: `fOa`
+- New upvalue captured by `navigateDownToAvatarScreen`: `dLl`
+- Upvalue no longer captured by `navigateDownToAvatarScreen`: `dIs`
+- New upvalue captured by `toggleTryOn`: `fOV`
+- Upvalue no longer captured by `toggleTryOn`: `fOw`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fTQ_checkCanItemDescriptionExpand`
+- New upvalue captured by `init`: `dww`
+- New upvalue captured by `init`: `dwy`
+- New upvalue captured by `init`: `fTW`
+- New upvalue captured by `init`: `fUr`
+- Upvalue no longer captured by `init`: `dss`
+- Upvalue no longer captured by `init`: `dsu`
+- Upvalue no longer captured by `init`: `fTS`
+- Upvalue no longer captured by `init`: `fTx`
+- New upvalue captured by `didUpdate`: `cRs`
+- New upvalue captured by `didUpdate`: `fUr`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- Upvalue no longer captured by `didUpdate`: `fTS`
+- New upvalue captured by `shouldShowRecommendedItems`: `dzV`
+- New upvalue captured by `shouldShowRecommendedItems`: `fUr`
+- Upvalue no longer captured by `shouldShowRecommendedItems`: `dvR`
+- Upvalue no longer captured by `shouldShowRecommendedItems`: `fTS`
+- New upvalue captured by `renderDetailsWithProviders`: `dwu`
+- New upvalue captured by `renderDetailsWithProviders`: `dww`
+- New upvalue captured by `renderDetailsWithProviders`: `dwz`
+- New upvalue captured by `renderDetailsWithProviders`: `dzV`
+- New upvalue captured by `renderDetailsWithProviders`: `fPM`
+- New upvalue captured by `renderDetailsWithProviders`: `fTR`
+- New upvalue captured by `renderDetailsWithProviders`: `fTV`
+- New upvalue captured by `renderDetailsWithProviders`: `fUG`
+- New upvalue captured by `renderDetailsWithProviders`: `fUj`
+- New upvalue captured by `renderDetailsWithProviders`: `fUr`
+- New upvalue captured by `renderDetailsWithProviders`: `fUs`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dsq`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dss`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dsv`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `dvR`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fPn`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTA`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTK`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTS`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fTT`
+- Upvalue no longer captured by `renderDetailsWithProviders`: `fUh`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- New upvalue captured by `onActivated`: `dzV`
+- New upvalue captured by `onActivated`: `itemData`
+- New upvalue captured by `onActivated`: `menuDirection`
+- New upvalue captured by `renderOnFailed`: `dwC`
+- Upvalue no longer captured by `renderOnFailed`: `dsy`
+- New upvalue captured by `fetchAssetOrBundleInfo`: `fOz`
+- Upvalue no longer captured by `fetchAssetOrBundleInfo`: `fOa`
+- New upvalue captured by `navigateDownToAvatarScreen`: `dLl`
+- Upvalue no longer captured by `navigateDownToAvatarScreen`: `dIs`
+- New upvalue captured by `toggleTryOn`: `fOV`
+- Upvalue no longer captured by `toggleTryOn`: `fOw`
+- New upvalue captured by `fUJ`: `var1 (write)`
+- New upvalue captured by `openPurchaseRobuxPage`: `cQu`
+- New upvalue captured by `openPurchaseRobuxPage`: `cWd`
+- New upvalue captured by `openPurchaseRobuxPage`: `eEl`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `cQt`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `cWc`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `eCq`
+- New upvalue captured by `requestRobuxInfo`: `fnw`
+- Upvalue no longer captured by `requestRobuxInfo`: `fmY`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dzV`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `closeFiltersAndItemDetails`: `dBR`
+- New upvalue captured by `closeFiltersAndItemDetails`: `dzV`
+- Upvalue no longer captured by `closeFiltersAndItemDetails`: `dvR`
+- Upvalue no longer captured by `closeFiltersAndItemDetails`: `dxN`
+- New upvalue captured by `isFirstItemDetailVisible`: `dBR`
+- Upvalue no longer captured by `isFirstItemDetailVisible`: `dxN`
+- New upvalue captured by `render`: `dBR`
+- New upvalue captured by `render`: `fUJ`
+- Upvalue no longer captured by `render`: `dxN`
+- Upvalue no longer captured by `render`: `fUk`
+- New upvalue captured by `closeFocusedScreen`: `fTP`
+- Upvalue no longer captured by `closeFocusedScreen`: `fTq`
+- New upvalue captured by `toggleTryOn`: `fOV`
+- Upvalue no longer captured by `toggleTryOn`: `fOw`
+- Upvalue no longer captured by `fUK`: `var1 (write)`
+- New function: `var14674`
+- New upvalue captured by `renderWith`: `cQu`
+- New upvalue captured by `renderWith`: `fUG`
+- Upvalue no longer captured by `renderWith`: `cQt`
+- Upvalue no longer captured by `renderWith`: `fUh`
+- New upvalue captured by `fUN`: `var1 (write)`
+- New function: `var14709`
+- New function: `fUP`
+- New function: `var14724`
+- New upvalue captured by `updateRobux`: `cQG`
+- New upvalue captured by `updateRobux`: `fnw`
+- Upvalue no longer captured by `updateRobux`: `cQF`
+- Upvalue no longer captured by `updateRobux`: `fmY`
+- New upvalue captured by `fUT`: `var1 (write)`
+- New function: `var14827`
+- New function: `var14832`
+- New upvalue captured by `purchaseItem`: `dzV`
+- New upvalue captured by `purchaseItem`: `fOo`
+- Upvalue no longer captured by `purchaseItem`: `dvR`
+- Upvalue no longer captured by `purchaseItem`: `fNP`
+- New function: `var14828`
+- New upvalue captured by `showWearAfterPurchase`: `dwu`
+- New upvalue captured by `showWearAfterPurchase`: `dzV`
+- Upvalue no longer captured by `showWearAfterPurchase`: `dsq`
+- Upvalue no longer captured by `showWearAfterPurchase`: `dvR`
+- New upvalue captured by `onPurchaseSuccess`: `dzV`
+- New upvalue captured by `onPurchaseSuccess`: `fUU`
+- Upvalue no longer captured by `onPurchaseSuccess`: `dvR`
+- Upvalue no longer captured by `onPurchaseSuccess`: `fUv`
+- New upvalue captured by `onBuyItemButtonMounted`: `dwu`
+- Upvalue no longer captured by `onBuyItemButtonMounted`: `dsq`
+- New upvalue captured by `onFlowComplete`: `eFl`
+- Upvalue no longer captured by `onFlowComplete`: `eDq`
+- New upvalue captured by `fetchRobuxBalance`: `fnw`
+- Upvalue no longer captured by `fetchRobuxBalance`: `fmY`
+- New upvalue captured by `clickDisabledButton`: `cWd`
+- New upvalue captured by `clickDisabledButton`: `dAa`
+- New upvalue captured by `clickDisabledButton`: `dzV`
+- New upvalue captured by `clickDisabledButton`: `fnw`
+- Upvalue no longer captured by `clickDisabledButton`: `cWc`
+- Upvalue no longer captured by `clickDisabledButton`: `dvR`
+- Upvalue no longer captured by `clickDisabledButton`: `dvW`
+- Upvalue no longer captured by `clickDisabledButton`: `fmY`
+- New upvalue captured by `fVa`: `var1 (write)`
+- New upvalue captured by `fVb`: `var1 (write)`
+- New upvalue captured by `renderWithStyle`: `dwC`
+- Upvalue no longer captured by `renderWithStyle`: `dsy`
+- Upvalue no longer captured by `fVi`: `var1 (write)`
+- New upvalue captured by `renderWithStyle`: `cQu`
+- New upvalue captured by `renderWithStyle`: `fVf`
+- New upvalue captured by `renderWithStyle`: `fVg`
+- New upvalue captured by `renderWithStyle`: `fVh`
+- New upvalue captured by `renderWithStyle`: `fVi`
+- Upvalue no longer captured by `renderWithStyle`: `cQt`
+- Upvalue no longer captured by `renderWithStyle`: `fUG`
+- Upvalue no longer captured by `renderWithStyle`: `fUH`
+- Upvalue no longer captured by `renderWithStyle`: `fUI`
+- Upvalue no longer captured by `renderWithStyle`: `fUJ`
+- Upvalue no longer captured by `fVm`: `var1 (write)`
+- New upvalue captured by `getAvailableInExperienceOnly`: `dwC`
+- Upvalue no longer captured by `getAvailableInExperienceOnly`: `dsy`
+- New upvalue captured by `getHasLimitedAmount`: `dwC`
+- Upvalue no longer captured by `getHasLimitedAmount`: `dsy`
+- New upvalue captured by `getUserHasReachedQuantityLimit`: `dwC`
+- Upvalue no longer captured by `getUserHasReachedQuantityLimit`: `dsy`
+- New upvalue captured by `getOriginalStockAvailable`: `dwC`
+- Upvalue no longer captured by `getOriginalStockAvailable`: `dsy`
+- New upvalue captured by `getButtonTypeIsPurchaseFromResale`: `dwC`
+- Upvalue no longer captured by `getButtonTypeIsPurchaseFromResale`: `dsy`
+- New upvalue captured by `getButtonTypeIsFree`: `dwC`
+- Upvalue no longer captured by `getButtonTypeIsFree`: `dsy`
+- New upvalue captured by `getButtonTypeIsExperienceLink`: `dwC`
+- New upvalue captured by `getButtonTypeIsExperienceLink`: `fVm`
+- Upvalue no longer captured by `getButtonTypeIsExperienceLink`: `dsy`
+- Upvalue no longer captured by `getButtonTypeIsExperienceLink`: `fUN`
+- New upvalue captured by `getButtonTypeIsSoldOut`: `dwC`
+- Upvalue no longer captured by `getButtonTypeIsSoldOut`: `dsy`
+- New upvalue captured by `getButtonTypeIsCustomizeLink`: `dwC`
+- Upvalue no longer captured by `getButtonTypeIsCustomizeLink`: `dsy`
+- New upvalue captured by `getButtonTypeIsPurchasableFromRoblox`: `dwC`
+- Upvalue no longer captured by `getButtonTypeIsPurchasableFromRoblox`: `dsy`
+- New upvalue captured by `useLocalizedPrice`: `dKk`
+- New upvalue captured by `useLocalizedPrice`: `dLp`
+- Upvalue no longer captured by `useLocalizedPrice`: `dHr`
+- Upvalue no longer captured by `useLocalizedPrice`: `dIw`
+- New upvalue captured by `selectIsLoadingState`: `cRs`
+- New upvalue captured by `selectIsLoadingState`: `dwC`
+- New upvalue captured by `selectIsLoadingState`: `dzV`
+- Upvalue no longer captured by `selectIsLoadingState`: `cRr`
+- Upvalue no longer captured by `selectIsLoadingState`: `dsy`
+- Upvalue no longer captured by `selectIsLoadingState`: `dvR`
+- New upvalue captured by `selectBuyActionBarStateWithItemIdAndType`: `fVl`
+- Upvalue no longer captured by `selectBuyActionBarStateWithItemIdAndType`: `fUM`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fVj_ActionBarWithTimedOptions`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fVp_ActionBarWithRentalOption`
+- New upvalue captured by `ShowShareButtonOnActionBar`: `dwu`
+- Upvalue no longer captured by `ShowShareButtonOnActionBar`: `dsq`
+- New upvalue captured by `fVr`: `var1 (write)`
+- New upvalue captured by `fVc`: `var1 (write)`
+- New upvalue captured by `redeemQRCodeItemKeyMapper`: `dwC`
+- Upvalue no longer captured by `redeemQRCodeItemKeyMapper`: `dsy`
+- Upvalue no longer captured by `fVz`: `var1 (write)`
+- Upvalue no longer captured by `fVA`: `var1 (write)`
+- New upvalue captured by `dummyTest`: `dwy`
+- Upvalue no longer captured by `dummyTest`: `dsu`
+- New function: `var15219`
+- New function: `var15220`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dzV`
+- New upvalue captured by `init`: `fUG`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fUh`
+- New upvalue captured by `updateTimedOptionSelection`: `dBR`
+- Upvalue no longer captured by `updateTimedOptionSelection`: `dxN`
+- New upvalue captured by `onTryOnSecondaryButtonActivated`: `dzV`
+- Upvalue no longer captured by `onTryOnSecondaryButtonActivated`: `dvR`
+- New upvalue captured by `getBriefViewHeight`: `cQu`
+- New upvalue captured by `getBriefViewHeight`: `dwC`
+- Upvalue no longer captured by `getBriefViewHeight`: `cQt`
+- Upvalue no longer captured by `getBriefViewHeight`: `dsy`
+- New upvalue captured by `renderTopBar`: `fUI`
+- New upvalue captured by `renderTopBar`: `fUK`
+- Upvalue no longer captured by `renderTopBar`: `fUj`
+- Upvalue no longer captured by `renderTopBar`: `fUl`
+- New upvalue captured by `renderActionBar`: `fVc`
+- New upvalue captured by `renderActionBar`: `var15216 (write)`
+- Upvalue no longer captured by `renderActionBar`: `fUD`
+- Upvalue no longer captured by `renderActionBar`: `var15086 (write)`
+- New upvalue captured by `renderContent`: `fTQ`
+- New upvalue captured by `renderContent`: `fUG`
+- Upvalue no longer captured by `renderContent`: `fTr`
+- Upvalue no longer captured by `renderContent`: `fUi`
+- New upvalue captured by `getItemDetailsComponent`: `fUM`
+- New upvalue captured by `getItemDetailsComponent`: `fUP`
+- Upvalue no longer captured by `getItemDetailsComponent`: `fUo`
+- Upvalue no longer captured by `getItemDetailsComponent`: `fUq`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dww`
+- New upvalue captured by `renderWithProviders`: `fND`
+- New upvalue captured by `renderWithProviders`: `fUG`
+- New upvalue captured by `renderWithProviders`: `fUP`
+- New upvalue captured by `renderWithProviders`: `fVB`
+- New upvalue captured by `renderWithProviders`: `fVx`
+- New upvalue captured by `renderWithProviders`: `fVy`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dss`
+- Upvalue no longer captured by `renderWithProviders`: `fNe`
+- Upvalue no longer captured by `renderWithProviders`: `fUh`
+- Upvalue no longer captured by `renderWithProviders`: `fUq`
+- Upvalue no longer captured by `renderWithProviders`: `fUY`
+- Upvalue no longer captured by `renderWithProviders`: `fUZ`
+- Upvalue no longer captured by `renderWithProviders`: `fVc`
+- New upvalue captured by `didMount`: `dzY`
+- Upvalue no longer captured by `didMount`: `dvU`
+- New upvalue captured by `willUnmount`: `dBR`
+- Upvalue no longer captured by `willUnmount`: `dxN`
+- New upvalue captured by `closeAllPeekViews`: `fUL`
+- Upvalue no longer captured by `closeAllPeekViews`: `fUm`
+- New upvalue captured by `closeFiltersAndItemDetails`: `fOt`
+- Upvalue no longer captured by `closeFiltersAndItemDetails`: `fNU`
+- New upvalue captured by `closeFocusedScreen`: `fTP`
+- Upvalue no longer captured by `closeFocusedScreen`: `fTq`
+- New upvalue captured by `setItemDetailsExpanded`: `dxw`
+- Upvalue no longer captured by `setItemDetailsExpanded`: `dts`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `openItemPrompt`: `fUR`
+- Upvalue no longer captured by `openItemPrompt`: `fUs`
+- New upvalue captured by `redeemQRCodeItemPrompt`: `fVw`
+- Upvalue no longer captured by `redeemQRCodeItemPrompt`: `fUX`
+- New upvalue captured by `setBoundInputs`: `cQJ`
+- Upvalue no longer captured by `setBoundInputs`: `cQI`
+- New upvalue captured by `maybeClearBoundInputs`: `cQK`
+- Upvalue no longer captured by `maybeClearBoundInputs`: `cQJ`
+- New upvalue captured by `render`: `fVF`
+- Upvalue no longer captured by `render`: `fVg`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dzV`
+- New upvalue captured by `init`: `fUG`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `fUh`
+- New upvalue captured by `updateTimedOptionSelection`: `dBR`
+- Upvalue no longer captured by `updateTimedOptionSelection`: `dxN`
+- New upvalue captured by `onTryOnSecondaryButtonActivated`: `dzV`
+- Upvalue no longer captured by `onTryOnSecondaryButtonActivated`: `dvR`
+- New upvalue captured by `getBriefViewHeight`: `cQu`
+- New upvalue captured by `getBriefViewHeight`: `dwC`
+- Upvalue no longer captured by `getBriefViewHeight`: `cQt`
+- Upvalue no longer captured by `getBriefViewHeight`: `dsy`
+- New upvalue captured by `renderTopBar`: `fUI`
+- New upvalue captured by `renderTopBar`: `fUK`
+- Upvalue no longer captured by `renderTopBar`: `fUj`
+- Upvalue no longer captured by `renderTopBar`: `fUl`
+- New upvalue captured by `renderActionBar`: `fVc`
+- New upvalue captured by `renderActionBar`: `var15352 (write)`
+- Upvalue no longer captured by `renderActionBar`: `fUD`
+- Upvalue no longer captured by `renderActionBar`: `var15222 (write)`
+- New upvalue captured by `renderContent`: `fTQ`
+- New upvalue captured by `renderContent`: `fUG`
+- Upvalue no longer captured by `renderContent`: `fTr`
+- Upvalue no longer captured by `renderContent`: `fUi`
+- New upvalue captured by `getItemDetailsComponent`: `fUM`
+- New upvalue captured by `getItemDetailsComponent`: `fUP`
+- Upvalue no longer captured by `getItemDetailsComponent`: `fUo`
+- Upvalue no longer captured by `getItemDetailsComponent`: `fUq`
+- New upvalue captured by `renderWithProviders`: `dBR`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dww`
+- New upvalue captured by `renderWithProviders`: `fND`
+- New upvalue captured by `renderWithProviders`: `fUG`
+- New upvalue captured by `renderWithProviders`: `fUP`
+- New upvalue captured by `renderWithProviders`: `fVB`
+- New upvalue captured by `renderWithProviders`: `fVD`
+- New upvalue captured by `renderWithProviders`: `fVx`
+- New upvalue captured by `renderWithProviders`: `fVy`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dss`
+- Upvalue no longer captured by `renderWithProviders`: `dxN`
+- Upvalue no longer captured by `renderWithProviders`: `fNe`
+- Upvalue no longer captured by `renderWithProviders`: `fUh`
+- Upvalue no longer captured by `renderWithProviders`: `fUq`
+- Upvalue no longer captured by `renderWithProviders`: `fUY`
+- Upvalue no longer captured by `renderWithProviders`: `fUZ`
+- Upvalue no longer captured by `renderWithProviders`: `fVc`
+- Upvalue no longer captured by `renderWithProviders`: `fVf`
+- New upvalue captured by `didUpdate`: `cQu`
+- Upvalue no longer captured by `didUpdate`: `cQt`
+- New upvalue captured by `didMount`: `cQu`
+- New upvalue captured by `didMount`: `dBR`
+- New upvalue captured by `didMount`: `dzY`
+- Upvalue no longer captured by `didMount`: `cQt`
+- Upvalue no longer captured by `didMount`: `dvU`
+- Upvalue no longer captured by `didMount`: `dxN`
+- New upvalue captured by `willUnmount`: `dBR`
+- Upvalue no longer captured by `willUnmount`: `dxN`
+- New upvalue captured by `closeAllPeekViews`: `fUL`
+- Upvalue no longer captured by `closeAllPeekViews`: `fUm`
+- New upvalue captured by `closeFiltersAndItemDetails`: `fOt`
+- Upvalue no longer captured by `closeFiltersAndItemDetails`: `fNU`
+- New upvalue captured by `closeFocusedScreen`: `fTP`
+- Upvalue no longer captured by `closeFocusedScreen`: `fTq`
+- New upvalue captured by `setItemDetailsExpanded`: `dxw`
+- Upvalue no longer captured by `setItemDetailsExpanded`: `dts`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `openItemPrompt`: `fUR`
+- Upvalue no longer captured by `openItemPrompt`: `fUs`
+- New upvalue captured by `redeemQRCodeItemPrompt`: `fVw`
+- Upvalue no longer captured by `redeemQRCodeItemPrompt`: `fUX`
+- New function: `fVI`
+- New upvalue captured by `render`: `fNE`
+- New upvalue captured by `render`: `fVI`
+- Upvalue no longer captured by `render`: `fNf`
+- Upvalue no longer captured by `render`: `fVj`
+- New upvalue captured by `didMount`: `ezW`
+- New upvalue captured by `didMount`: `fVI`
+- Upvalue no longer captured by `didMount`: `eyb`
+- Upvalue no longer captured by `didMount`: `fVj`
+- New upvalue captured by `didUpdate`: `ezW`
+- New upvalue captured by `didUpdate`: `fVI`
+- Upvalue no longer captured by `didUpdate`: `eyb`
+- Upvalue no longer captured by `didUpdate`: `fVj`
+- New upvalue captured by `fVN`: `var1 (write)`
+- New upvalue captured by `renderWithProviders`: `fVN`
+- Upvalue no longer captured by `renderWithProviders`: `fVo`
+- Upvalue no longer captured by `fVQ`: `var1 (write)`
+- Upvalue no longer captured by `fVR`: `var1 (write)`
+- New upvalue captured by `renderOutfitThumbnail`: `dxM`
+- New upvalue captured by `renderOutfitThumbnail`: `eFG`
+- Upvalue no longer captured by `renderOutfitThumbnail`: `dtI`
+- Upvalue no longer captured by `renderOutfitThumbnail`: `eDL`
+- New upvalue captured by `renderItem`: `dwu`
+- Upvalue no longer captured by `renderItem`: `dsq`
+- New upvalue captured by `renderItemsGrid`: `dwu`
+- New upvalue captured by `renderItemsGrid`: `eFG`
+- New upvalue captured by `renderItemsGrid`: `fUo`
+- Upvalue no longer captured by `renderItemsGrid`: `dsq`
+- Upvalue no longer captured by `renderItemsGrid`: `eDL`
+- Upvalue no longer captured by `renderItemsGrid`: `fTP`
+- New upvalue captured by `renderWithProviders`: `eFG`
+- New upvalue captured by `renderWithProviders`: `fTZ`
+- New upvalue captured by `renderWithProviders`: `fVP`
+- Upvalue no longer captured by `renderWithProviders`: `eDL`
+- Upvalue no longer captured by `renderWithProviders`: `fTA`
+- Upvalue no longer captured by `renderWithProviders`: `fVs`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `viewStateChanged`: `dBR`
+- Upvalue no longer captured by `viewStateChanged`: `dxN`
+- New upvalue captured by `onExitButtonPressed`: `dBR`
+- Upvalue no longer captured by `onExitButtonPressed`: `dxN`
+- New upvalue captured by `renderActionBar`: `fVM`
+- Upvalue no longer captured by `renderActionBar`: `fVn`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- New upvalue captured by `renderWithProviders`: `dBR`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `fVD`
+- New upvalue captured by `renderWithProviders`: `fVN`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dxN`
+- Upvalue no longer captured by `renderWithProviders`: `fVf`
+- Upvalue no longer captured by `renderWithProviders`: `fVp`
+- New upvalue captured by `setItemDetailsExpanded`: `dxw`
+- Upvalue no longer captured by `setItemDetailsExpanded`: `dts`
+- New upvalue captured by `fetchOutfitDetails`: `fOX`
+- Upvalue no longer captured by `fetchOutfitDetails`: `fOy`
+- New function: `var15566`
+- New function: `var15567`
+- New function: `var15568`
+- New function: `var15569`
+- New function: `var15570`
+- New upvalue captured by `fVV`: `var1 (write)`
+- New function: `var15617`
+- New upvalue captured by `fVK`: `var1 (write)`
+- Upvalue no longer captured by `fWa`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `eDs`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `eBx`
+- New upvalue captured by `viewProfile`: `cWl`
+- New upvalue captured by `viewProfile`: `eDs`
+- Upvalue no longer captured by `viewProfile`: `cWk`
+- Upvalue no longer captured by `viewProfile`: `eBx`
+- New upvalue captured by `render`: `eEf`
+- Upvalue no longer captured by `render`: `eCk`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `render`: `fWd`
+- Upvalue no longer captured by `render`: `fVE`
+- New upvalue captured by `render`: `fWd`
+- Upvalue no longer captured by `render`: `fVE`
+- New upvalue captured by `onScrollingFrameChanged`: `var15687 (write)`
+- Upvalue no longer captured by `onScrollingFrameChanged`: `var15557 (write)`
+- New upvalue captured by `onCanvasSizeChanged`: `var15687 (write)`
+- New upvalue captured by `onCanvasSizeChanged`: `var15688 (write)`
+- Upvalue no longer captured by `onCanvasSizeChanged`: `var15557 (write)`
+- Upvalue no longer captured by `onCanvasSizeChanged`: `var15558 (write)`
+- Upvalue no longer captured by `fWg`: `var1 (write)`
+- New upvalue captured by `init`: `dwC`
+- New upvalue captured by `init`: `fWc`
+- New upvalue captured by `init`: `fWe`
+- Upvalue no longer captured by `init`: `dsy`
+- Upvalue no longer captured by `init`: `fVD`
+- Upvalue no longer captured by `init`: `fVF`
+- New upvalue captured by `renderCard`: `fWc`
+- Upvalue no longer captured by `renderCard`: `fVD`
+- New upvalue captured by `renderCollectibleCard`: `fWe`
+- Upvalue no longer captured by `renderCollectibleCard`: `fVF`
+- New upvalue captured by `makeRenderItem`: `dwC`
+- Upvalue no longer captured by `makeRenderItem`: `dsy`
+- New upvalue captured by `renderOnLoaded`: `eAa`
+- Upvalue no longer captured by `renderOnLoaded`: `eyf`
+- New upvalue captured by `renderContent`: `dJQ`
+- New upvalue captured by `renderContent`: `dwC`
+- New upvalue captured by `renderContent`: `fWf`
+- New upvalue captured by `renderContent`: `fWg`
+- Upvalue no longer captured by `renderContent`: `dGX`
+- Upvalue no longer captured by `renderContent`: `dsy`
+- Upvalue no longer captured by `renderContent`: `fVG`
+- Upvalue no longer captured by `renderContent`: `fVH`
+- New upvalue captured by `render`: `fUO`
+- Upvalue no longer captured by `render`: `fUp`
+- New upvalue captured by `renderContents`: `eAa`
+- Upvalue no longer captured by `renderContents`: `eyf`
+- New upvalue captured by `clearResellerCursor`: `dAx`
+- Upvalue no longer captured by `clearResellerCursor`: `dwt`
+- New upvalue captured by `closeFocusedScreen`: `fTP`
+- Upvalue no longer captured by `closeFocusedScreen`: `fTq`
+- New function: `fWj`
+- New upvalue captured by `render`: `fWj`
+- Upvalue no longer captured by `render`: `fVK`
+- New upvalue captured by `createAvailableToSellLimitedUniqueList`: `fWk`
+- Upvalue no longer captured by `createAvailableToSellLimitedUniqueList`: `fVL`
+- New upvalue captured by `renderLocalized`: `dwC`
+- New upvalue captured by `renderLocalized`: `fWj`
+- Upvalue no longer captured by `renderLocalized`: `dsy`
+- Upvalue no longer captured by `renderLocalized`: `fVK`
+- Upvalue no longer captured by `fWm`: `var1 (write)`
+- New upvalue captured by `createRemovableList`: `dwC`
+- New upvalue captured by `createRemovableList`: `fWm`
+- Upvalue no longer captured by `createRemovableList`: `dsy`
+- Upvalue no longer captured by `createRemovableList`: `fVN`
+- New upvalue captured by `didUpdate`: `cRs`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- New upvalue captured by `renderOnLoaded`: `eAa`
+- Upvalue no longer captured by `renderOnLoaded`: `eyf`
+- New upvalue captured by `renderScrollingView`: `fWi`
+- New upvalue captured by `renderScrollingView`: `fWl`
+- Upvalue no longer captured by `renderScrollingView`: `fVJ`
+- Upvalue no longer captured by `renderScrollingView`: `fVM`
+- New upvalue captured by `render`: `fUO`
+- Upvalue no longer captured by `render`: `fUp`
+- New upvalue captured by `renderContents`: `cRs`
+- New upvalue captured by `renderContents`: `eAa`
+- New upvalue captured by `renderContents`: `fVE`
+- Upvalue no longer captured by `renderContents`: `cRr`
+- Upvalue no longer captured by `renderContents`: `eyf`
+- Upvalue no longer captured by `renderContents`: `fVf`
+- New upvalue captured by `fetchSellPageData`: `fOw`
+- Upvalue no longer captured by `fetchSellPageData`: `fNX`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- Upvalue no longer captured by `onActivated`: `dxN`
+- Upvalue no longer captured by `onActivated`: `fWd`
+- New upvalue captured by `fWn`: `var1 (write)`
+- New upvalue captured by `fWr`: `var1 (write)`
+- Upvalue no longer captured by `fWu`: `var1 (write)`
+- New upvalue captured by `getRobloxCommissionAmount`: `dzV`
+- New upvalue captured by `getRobloxCommissionAmount`: `fWu`
+- Upvalue no longer captured by `getRobloxCommissionAmount`: `dvR`
+- Upvalue no longer captured by `getRobloxCommissionAmount`: `fVV`
+- New upvalue captured by `fWv`: `var1 (write)`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `getItemSubTypeName`: `dwu`
+- Upvalue no longer captured by `getItemSubTypeName`: `dsq`
+- New upvalue captured by `fWA`: `var1 (write)`
+- New upvalue captured by `init`: `eFG`
+- Upvalue no longer captured by `init`: `eDL`
+- New upvalue captured by `onTileActivated`: `eFG`
+- Upvalue no longer captured by `onTileActivated`: `eDL`
+- New upvalue captured by `getItemIconType`: `dwu`
+- Upvalue no longer captured by `getItemIconType`: `dsq`
+- New upvalue captured by `renderElement`: `dwu`
+- New upvalue captured by `renderElement`: `dzV`
+- New upvalue captured by `renderElement`: `eEf`
+- New upvalue captured by `renderElement`: `eFG`
+- Upvalue no longer captured by `renderElement`: `dsq`
+- Upvalue no longer captured by `renderElement`: `dvR`
+- Upvalue no longer captured by `renderElement`: `eCk`
+- Upvalue no longer captured by `renderElement`: `eDL`
+- New upvalue captured by `setEquippedInTryOnManager`: `fWA`
+- Upvalue no longer captured by `setEquippedInTryOnManager`: `fWb`
+- New function: `fWC`
+- New upvalue captured by `isBlockyLookItem`: `dwu`
+- Upvalue no longer captured by `isBlockyLookItem`: `dsq`
+- New upvalue captured by `getPurchaseInfoForLookId`: `dwu`
+- Upvalue no longer captured by `getPurchaseInfoForLookId`: `dsq`
+- New upvalue captured by `updateRobux`: `cQG`
+- New upvalue captured by `updateRobux`: `fnw`
+- Upvalue no longer captured by `updateRobux`: `cQF`
+- Upvalue no longer captured by `updateRobux`: `fmY`
+- New function: `var16158`
+- New upvalue captured by `formatItemForWearAfterPurchase`: `dwu`
+- Upvalue no longer captured by `formatItemForWearAfterPurchase`: `dsq`
+- New upvalue captured by `handleWearAfterPurchase`: `dwu`
+- New upvalue captured by `handleWearAfterPurchase`: `dxY`
+- New upvalue captured by `handleWearAfterPurchase`: `fPn`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `dsq`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `dtU`
+- Upvalue no longer captured by `handleWearAfterPurchase`: `fOO`
+- New upvalue captured by `handleSaveAsCharacter`: `dwu`
+- New upvalue captured by `handleSaveAsCharacter`: `fPl`
+- New upvalue captured by `handleSaveAsCharacter`: `fPp`
+- New upvalue captured by `handleSaveAsCharacter`: `fPw`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `dsq`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOM`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOQ`
+- Upvalue no longer captured by `handleSaveAsCharacter`: `fOX`
+- New function: `fWH`
+- New upvalue captured by `getItemInfo`: `dwu`
+- Upvalue no longer captured by `getItemInfo`: `dsq`
+- New upvalue captured by `getPriceForItem`: `dzV`
+- Upvalue no longer captured by `getPriceForItem`: `dvR`
+- New upvalue captured by `getAvatarEditorCategoryIndexesByName`: `dyg`
+- Upvalue no longer captured by `getAvatarEditorCategoryIndexesByName`: `duc`
+- New function: `fWJ`
+- New upvalue captured by `fWB`: `var1 (write)`
+- New upvalue captured by `getAvatarEditorCategoryIndexesByName`: `dyg`
+- Upvalue no longer captured by `getAvatarEditorCategoryIndexesByName`: `duc`
+- New function: `var16341`
+- New upvalue captured by `onActivated`: `dBR`
+- New upvalue captured by `onActivated`: `fWC`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- Upvalue no longer captured by `onActivated`: `fWd`
+- New upvalue captured by `onActivated`: `dBR`
+- New upvalue captured by `onActivated`: `fWC`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- Upvalue no longer captured by `onActivated`: `fWd`
+- New parameter added to `onActivated` (0 -> 1 params)
+- New upvalue captured by `onActivated`: `dBR`
+- New upvalue captured by `onActivated`: `fWC`
+- Upvalue no longer captured by `onActivated`: `peekViewState`
+- Upvalue no longer captured by `onActivated`: `setTryOnManagerPeekViewState`
+- Upvalue no longer captured by `fWM`: `var1 (write)`
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `AXFixCommunityAvatarsPeekViewClose`
+- Upvalue no longer captured by `onActivated`: `cQu`
+- Upvalue no longer captured by `onActivated`: `cWc`
+- Upvalue no longer captured by `onActivated`: `dxN`
+- Upvalue no longer captured by `onActivated`: `fNs`
+- Upvalue no longer captured by `onActivated`: `fWm`
+- Upvalue no longer captured by `onActivated`: `navigateWithLock`
+- Upvalue no longer captured by `onActivated`: `supportShareButton`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- New upvalue captured by `onActivated`: `AXFixCommunityAvatarsPeekViewClose`
+- New upvalue captured by `onActivated`: `cQv`
+- New upvalue captured by `onActivated`: `cWd`
+- New upvalue captured by `onActivated`: `dBR`
+- New upvalue captured by `onActivated`: `fNR`
+- New upvalue captured by `onActivated`: `fWL`
+- New upvalue captured by `onActivated`: `navigateWithLock`
+- New upvalue captured by `onActivated`: `peekViewState`
+- New upvalue captured by `onActivated`: `setTryOnManagerPeekViewState`
+- New upvalue captured by `onActivated`: `supportShareButton`
+- Upvalue no longer captured by `fWQ`: `var1 (write)`
+- New upvalue captured by `fWP`: `var1 (write)`
+- New function: `fWO`
+- Upvalue no longer captured by `fWZ`: `var1 (write)`
+- New upvalue captured by `createHumanoidDescriptionFromLook`: `dwu`
+- Upvalue no longer captured by `createHumanoidDescriptionFromLook`: `dsq`
+- New upvalue captured by `createAvatarModel`: `fWZ`
+- Upvalue no longer captured by `createAvatarModel`: `fWA`
+- New upvalue captured by `hydratedLookToLookDetails`: `cWj`
+- Upvalue no longer captured by `hydratedLookToLookDetails`: `cWi`
+- Upvalue no longer captured by `fXa`: `var1 (write)`
+- New upvalue captured by `fXc`: `var1 (write)`
+- New upvalue captured by `getIconForModerationStatus`: `dwu`
+- Upvalue no longer captured by `getIconForModerationStatus`: `dsq`
+- New upvalue captured by `getDangerStyleForModerationStatus`: `dwu`
+- Upvalue no longer captured by `getDangerStyleForModerationStatus`: `dsq`
+- New function: `var16704`
+- New function: `var16705`
+- New function: `var16706`
+- New upvalue captured by `isMouseAndKeyboard`: `cQu`
+- Upvalue no longer captured by `isMouseAndKeyboard`: `cQt`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dsq`
+- New upvalue captured by `onCloseButtonPressed`: `dwu`
+- Upvalue no longer captured by `onCloseButtonPressed`: `dsq`
+- New upvalue captured by `getActionBarTotalHeight`: `cQu`
+- Upvalue no longer captured by `getActionBarTotalHeight`: `cQt`
+- New upvalue captured by `getBriefViewHeight`: `dwu`
+- Upvalue no longer captured by `getBriefViewHeight`: `dsq`
+- New upvalue captured by `renderActionBar`: `dwu`
+- New upvalue captured by `renderActionBar`: `fWB`
+- New upvalue captured by `renderActionBar`: `fWK`
+- Upvalue no longer captured by `renderActionBar`: `dsq`
+- Upvalue no longer captured by `renderActionBar`: `fWc`
+- Upvalue no longer captured by `renderActionBar`: `fWl`
+- New upvalue captured by `renderTopContent`: `dwu`
+- New upvalue captured by `renderTopContent`: `fWM`
+- Upvalue no longer captured by `renderTopContent`: `dsq`
+- Upvalue no longer captured by `renderTopContent`: `fWn`
+- New upvalue captured by `orderTryOns`: `dwu`
+- Upvalue no longer captured by `orderTryOns`: `dsq`
+- New upvalue captured by `renderTryOnManagerContents`: `dwu`
+- New upvalue captured by `renderTryOnManagerContents`: `eFG`
+- New upvalue captured by `renderTryOnManagerContents`: `fWz`
+- Upvalue no longer captured by `renderTryOnManagerContents`: `dsq`
+- Upvalue no longer captured by `renderTryOnManagerContents`: `eDL`
+- Upvalue no longer captured by `renderTryOnManagerContents`: `fWa`
+- New upvalue captured by `renderDetailsContents`: `fWR`
+- New upvalue captured by `renderDetailsContents`: `fWU`
+- Upvalue no longer captured by `renderDetailsContents`: `fWs`
+- Upvalue no longer captured by `renderDetailsContents`: `fWv`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `fWO`
+- New upvalue captured by `renderWithProviders`: `fWy`
+- New upvalue captured by `renderWithProviders`: `fXd`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `fVZ`
+- Upvalue no longer captured by `renderWithProviders`: `fWE`
+- Upvalue no longer captured by `renderWithProviders`: `fWp`
+- New function: `var16748`
+- New upvalue captured by `callback`: `cQu`
+- Upvalue no longer captured by `callback`: `cQt`
+- New upvalue captured by `callback`: `cQu`
+- Upvalue no longer captured by `callback`: `cQt`
+- New upvalue captured by `render`: `fWM`
+- Upvalue no longer captured by `render`: `fWn`
+- New upvalue captured by `closeFocusedScreen`: `fTP`
+- Upvalue no longer captured by `closeFocusedScreen`: `fTq`
+- New upvalue captured by `isDoubleTapToZoomEnabled`: `dxY`
+- Upvalue no longer captured by `isDoubleTapToZoomEnabled`: `dtU`
+- New upvalue captured by `doubleTapToggleFullView`: `var16786 (write)`
+- Upvalue no longer captured by `doubleTapToggleFullView`: `var16656 (write)`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `fXh`: `var1 (write)`
+- New upvalue captured by `rotate`: `var16825 (write)`
+- Upvalue no longer captured by `rotate`: `var16695 (write)`
+- New upvalue captured by `unbindRotate`: `var16825 (write)`
+- Upvalue no longer captured by `unbindRotate`: `var16695 (write)`
+- New upvalue captured by `bindRotate`: `var16825 (write)`
+- Upvalue no longer captured by `bindRotate`: `var16695 (write)`
+- New upvalue captured by `keyMapper`: `dzV`
+- Upvalue no longer captured by `keyMapper`: `dvR`
+- New function: `var16841`
+- Upvalue no longer captured by `fXo`: `var1 (write)`
+- New upvalue captured by `fXk`: `var1 (write)`
+- New upvalue captured by `keyMapper`: `dwC`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- New upvalue captured by `handleErrorCases`: `cQv`
+- New upvalue captured by `handleErrorCases`: `cWd`
+- New upvalue captured by `handleErrorCases`: `cWj`
+- New upvalue captured by `handleErrorCases`: `dBR`
+- Upvalue no longer captured by `handleErrorCases`: `cQu`
+- Upvalue no longer captured by `handleErrorCases`: `cWc`
+- Upvalue no longer captured by `handleErrorCases`: `cWi`
+- Upvalue no longer captured by `handleErrorCases`: `dxN`
+- New upvalue captured by `processAssetItem`: `eFG`
+- Upvalue no longer captured by `processAssetItem`: `eDL`
+- New upvalue captured by `processBundleItem`: `eFG`
+- Upvalue no longer captured by `processBundleItem`: `eDL`
+- New upvalue captured by `getAssetIds`: `dwu`
+- Upvalue no longer captured by `getAssetIds`: `dsq`
+- New upvalue captured by `renderWithCursor`: `dwu`
+- Upvalue no longer captured by `renderWithCursor`: `dsq`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New function: `fXx`
+- New upvalue captured by `keyBindingHasToggleMeta`: `dwu`
+- Upvalue no longer captured by `keyBindingHasToggleMeta`: `dsq`
+- New upvalue captured by `getDerivedStateFromProps`: `dwu`
+- Upvalue no longer captured by `getDerivedStateFromProps`: `dsq`
+- New function: `fXA`
+- Upvalue no longer captured by `fXB`: `var1 (write)`
+- New function: `fXC`
+- New function: `fXD`
+- New upvalue captured by `renderRobloxBalanceContainer`: `fUJ`
+- Upvalue no longer captured by `renderRobloxBalanceContainer`: `fUk`
+- New upvalue captured by `getRow1Children`: `fXC`
+- Upvalue no longer captured by `getRow1Children`: `fXe`
+- New upvalue captured by `render`: `fXB`
+- New upvalue captured by `render`: `fXz`
+- Upvalue no longer captured by `render`: `fXa`
+- Upvalue no longer captured by `render`: `fXc`
+- Upvalue no longer captured by `fXF`: `var1 (write)`
+- New upvalue captured by `useTopPanelRef`: `fPI`
+- Upvalue no longer captured by `useTopPanelRef`: `fPj`
+- New upvalue captured by `useButtonHeight`: `fPI`
+- Upvalue no longer captured by `useButtonHeight`: `fPj`
+- New function: `var17132`
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- New upvalue captured by `render`: `fNk`
+- New upvalue captured by `render`: `var17134 (write)`
+- New upvalue captured by `render`: `var17135 (write)`
+- New upvalue captured by `render`: `var17136 (write)`
+- New upvalue captured by `render`: `var17137 (write)`
+- Upvalue no longer captured by `render`: `fML`
+- Upvalue no longer captured by `render`: `var17004 (write)`
+- Upvalue no longer captured by `render`: `var17005 (write)`
+- Upvalue no longer captured by `render`: `var17006 (write)`
+- Upvalue no longer captured by `render`: `var17007 (write)`
+- Upvalue no longer captured by `fXJ`: `var1 (write)`
+- New upvalue captured by `adjustScrollingFramePosition`: `dwu`
+- New upvalue captured by `adjustScrollingFramePosition`: `var17175 (write)`
+- Upvalue no longer captured by `adjustScrollingFramePosition`: `dsq`
+- Upvalue no longer captured by `adjustScrollingFramePosition`: `var17045 (write)`
+- New upvalue captured by `onDidFocus`: `dwu`
+- New upvalue captured by `onDidFocus`: `dwy`
+- Upvalue no longer captured by `onDidFocus`: `dsq`
+- Upvalue no longer captured by `onDidFocus`: `dsu`
+- New upvalue captured by `getGamepadBottomBarHeight`: `cQu`
+- Upvalue no longer captured by `getGamepadBottomBarHeight`: `cQt`
+- New upvalue captured by `renderActionBar`: `fVc`
+- New upvalue captured by `renderActionBar`: `var17291 (write)`
+- New upvalue captured by `renderActionBar`: `var17292 (write)`
+- Upvalue no longer captured by `renderActionBar`: `fUD`
+- Upvalue no longer captured by `renderActionBar`: `var17161 (write)`
+- Upvalue no longer captured by `renderActionBar`: `var17162 (write)`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- New upvalue captured by `didUpdate`: `dwy`
+- New upvalue captured by `didUpdate`: `fVq`
+- Upvalue no longer captured by `didUpdate`: `dsu`
+- Upvalue no longer captured by `didUpdate`: `fUR`
+- New upvalue captured by `fetchItemData`: `fOz`
+- Upvalue no longer captured by `fetchItemData`: `fOa`
+- New function: `fXO`
+- Upvalue no longer captured by `fXS`: `var1 (write)`
+- New upvalue captured by `selectIsDynamicHeadEquipped`: `fNH`
+- Upvalue no longer captured by `selectIsDynamicHeadEquipped`: `fNi`
+- New upvalue captured by `selectIsTryingOnDynamicHead`: `eFG`
+- Upvalue no longer captured by `selectIsTryingOnDynamicHead`: `eDL`
+- New upvalue captured by `isVisible`: `eFG`
+- Upvalue no longer captured by `isVisible`: `eDL`
+- New upvalue captured by `fYg`: `var1 (write)`
+- New upvalue captured by `fYh`: `var1 (write)`
+- New function: `fYk`
+- New function: `fXV`
+- New upvalue captured by `init`: `cWj`
+- Upvalue no longer captured by `init`: `cWi`
+- New upvalue captured by `toggleCamera`: `cWj`
+- Upvalue no longer captured by `toggleCamera`: `cWi`
+- New upvalue captured by `isVisible`: `eFG`
+- Upvalue no longer captured by `isVisible`: `eDL`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New function: `fYl`
+- New upvalue captured by `ProfilePictureQuickButton`: `fYl`
+- Upvalue no longer captured by `ProfilePictureQuickButton`: `fXM`
+- New upvalue captured by `RefinementEntryQuickButton`: `dwy`
+- New upvalue captured by `RefinementEntryQuickButton`: `fXQ`
+- New upvalue captured by `RefinementEntryQuickButton`: `fYm`
+- New upvalue captured by `RefinementEntryQuickButton`: `fYn`
+- Upvalue no longer captured by `RefinementEntryQuickButton`: `dsu`
+- Upvalue no longer captured by `RefinementEntryQuickButton`: `fXN`
+- Upvalue no longer captured by `RefinementEntryQuickButton`: `fXO`
+- Upvalue no longer captured by `RefinementEntryQuickButton`: `fXr`
+- New upvalue captured by `CameraQuickButton`: `dwy`
+- New upvalue captured by `CameraQuickButton`: `dzL`
+- New upvalue captured by `CameraQuickButton`: `eFM`
+- New upvalue captured by `CameraQuickButton`: `fXV`
+- Upvalue no longer captured by `CameraQuickButton`: `dsu`
+- Upvalue no longer captured by `CameraQuickButton`: `dvH`
+- Upvalue no longer captured by `CameraQuickButton`: `eDR`
+- Upvalue no longer captured by `CameraQuickButton`: `fXw`
+- New function: `fYp`
+- New function: `fYr`
+- New function: `fYq`
+- New upvalue captured by `selectIsInHeadsSubcategory`: `dyg`
+- Upvalue no longer captured by `selectIsInHeadsSubcategory`: `duc`
+- New upvalue captured by `selectEquippedDynamicHeadAndTryOnBundle`: `dwu`
+- New upvalue captured by `selectEquippedDynamicHeadAndTryOnBundle`: `fYc`
+- Upvalue no longer captured by `selectEquippedDynamicHeadAndTryOnBundle`: `dsq`
+- Upvalue no longer captured by `selectEquippedDynamicHeadAndTryOnBundle`: `fXD`
+- New function: `fYo`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `cWk`
+- Upvalue no longer captured by `onActivated`: `eBx`
+- New function: `fYs`
+- New upvalue captured by `mapStateToProps`: `fXB`
+- Upvalue no longer captured by `mapStateToProps`: `fXc`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dxY`
+- New upvalue captured by `init`: `fXC`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dtU`
+- Upvalue no longer captured by `init`: `fXd`
+- New upvalue captured by `onSceneResized`: `dwu`
+- Upvalue no longer captured by `onSceneResized`: `dsq`
+- New upvalue captured by `calculatePortraitSceneHeight`: `dwu`
+- Upvalue no longer captured by `calculatePortraitSceneHeight`: `dsq`
+- New upvalue captured by `calculateSceneSize`: `dwu`
+- Upvalue no longer captured by `calculateSceneSize`: `dsq`
+- New upvalue captured by `isConsoleWithGamepad`: `cQu`
+- Upvalue no longer captured by `isConsoleWithGamepad`: `cQt`
+- New upvalue captured by `renderSceneFrame`: `fXB`
+- New upvalue captured by `renderSceneFrame`: `fXe`
+- New upvalue captured by `renderSceneFrame`: `fXH`
+- New upvalue captured by `renderSceneFrame`: `fXx`
+- New upvalue captured by `renderSceneFrame`: `fXy`
+- Upvalue no longer captured by `renderSceneFrame`: `fWF`
+- Upvalue no longer captured by `renderSceneFrame`: `fWY`
+- Upvalue no longer captured by `renderSceneFrame`: `fWZ`
+- Upvalue no longer captured by `renderSceneFrame`: `fXc`
+- Upvalue no longer captured by `renderSceneFrame`: `fXi`
+- New upvalue captured by `renderWithStyle`: `bDy`
+- New upvalue captured by `renderWithStyle`: `dwA`
+- New upvalue captured by `renderWithStyle`: `dwu`
+- New upvalue captured by `renderWithStyle`: `dxY`
+- New upvalue captured by `renderWithStyle`: `fNE`
+- New upvalue captured by `renderWithStyle`: `fPJ`
+- New upvalue captured by `renderWithStyle`: `fUJ`
+- New upvalue captured by `renderWithStyle`: `fXC`
+- New upvalue captured by `renderWithStyle`: `fXe`
+- New upvalue captured by `renderWithStyle`: `fXI`
+- New upvalue captured by `renderWithStyle`: `fXL`
+- New upvalue captured by `renderWithStyle`: `fXt`
+- New upvalue captured by `renderWithStyle`: `fYo`
+- New upvalue captured by `renderWithStyle`: `fYq`
+- Upvalue no longer captured by `renderWithStyle`: `bDx`
+- Upvalue no longer captured by `renderWithStyle`: `dsq`
+- Upvalue no longer captured by `renderWithStyle`: `dsw`
+- Upvalue no longer captured by `renderWithStyle`: `dtU`
+- Upvalue no longer captured by `renderWithStyle`: `fNf`
+- Upvalue no longer captured by `renderWithStyle`: `fPk`
+- Upvalue no longer captured by `renderWithStyle`: `fUk`
+- Upvalue no longer captured by `renderWithStyle`: `fWF`
+- Upvalue no longer captured by `renderWithStyle`: `fWK`
+- Upvalue no longer captured by `renderWithStyle`: `fWU`
+- Upvalue no longer captured by `renderWithStyle`: `fXd`
+- Upvalue no longer captured by `renderWithStyle`: `fXh`
+- Upvalue no longer captured by `renderWithStyle`: `fXo`
+- Upvalue no longer captured by `renderWithStyle`: `fXP`
+- Upvalue no longer captured by `renderWithStyle`: `fXR`
+- New upvalue captured by `selectEquippedDynamicHeadAndTryOnBundle`: `dwu`
+- New upvalue captured by `selectEquippedDynamicHeadAndTryOnBundle`: `fYc`
+- Upvalue no longer captured by `selectEquippedDynamicHeadAndTryOnBundle`: `dsq`
+- Upvalue no longer captured by `selectEquippedDynamicHeadAndTryOnBundle`: `fXD`
+- New upvalue captured by `NavigateToDeepLinkCatalogFilterThunk`: `dwk`
+- New upvalue captured by `NavigateToDeepLinkCatalogFilterThunk`: `dzK`
+- New upvalue captured by `NavigateToDeepLinkCatalogFilterThunk`: `dzL`
+- New upvalue captured by `NavigateToDeepLinkCatalogFilterThunk`: `dzS`
+- New upvalue captured by `NavigateToDeepLinkCatalogFilterThunk`: `dzV`
+- Upvalue no longer captured by `NavigateToDeepLinkCatalogFilterThunk`: `dsg`
+- Upvalue no longer captured by `NavigateToDeepLinkCatalogFilterThunk`: `dvG`
+- Upvalue no longer captured by `NavigateToDeepLinkCatalogFilterThunk`: `dvH`
+- Upvalue no longer captured by `NavigateToDeepLinkCatalogFilterThunk`: `dvO`
+- Upvalue no longer captured by `NavigateToDeepLinkCatalogFilterThunk`: `dvR`
+- New function: `fYt`
+- New upvalue captured by `navigateToScreen`: `eFG`
+- New upvalue captured by `navigateToScreen`: `fXn`
+- New upvalue captured by `navigateToScreen`: `fYu`
+- New upvalue captured by `navigateToScreen`: `fYw`
+- Upvalue no longer captured by `navigateToScreen`: `eDL`
+- Upvalue no longer captured by `navigateToScreen`: `fWO`
+- Upvalue no longer captured by `navigateToScreen`: `fXV`
+- Upvalue no longer captured by `navigateToScreen`: `fXX`
+- New function: `var17754`
+- New upvalue captured by `mapStateToProps`: `fNO`
+- Upvalue no longer captured by `mapStateToProps`: `fNp`
+- New upvalue captured by `mapDispatchToProps`: `dwj`
+- New upvalue captured by `mapDispatchToProps`: `dwk`
+- New upvalue captured by `mapDispatchToProps`: `eFo`
+- New upvalue captured by `mapDispatchToProps`: `fXk`
+- New upvalue captured by `mapDispatchToProps`: `fXn`
+- New upvalue captured by `mapDispatchToProps`: `fYv`
+- Upvalue no longer captured by `mapDispatchToProps`: `dsf`
+- Upvalue no longer captured by `mapDispatchToProps`: `dsg`
+- Upvalue no longer captured by `mapDispatchToProps`: `eDt`
+- Upvalue no longer captured by `mapDispatchToProps`: `fWL`
+- Upvalue no longer captured by `mapDispatchToProps`: `fWO`
+- Upvalue no longer captured by `mapDispatchToProps`: `fXW`
+- New upvalue captured by `completeExternalNavigation`: `dwj`
+- Upvalue no longer captured by `completeExternalNavigation`: `dsf`
+- New upvalue captured by `applyDeepLinkCatalogFilters`: `dwk`
+- New upvalue captured by `applyDeepLinkCatalogFilters`: `fYv`
+- Upvalue no longer captured by `applyDeepLinkCatalogFilters`: `dsg`
+- Upvalue no longer captured by `applyDeepLinkCatalogFilters`: `fXW`
+- New upvalue captured by `navigateToSearch`: `eFo`
+- Upvalue no longer captured by `navigateToSearch`: `eDt`
+- New function: `fXq`
+- New upvalue captured by `init`: `eAa`
+- Upvalue no longer captured by `init`: `eyf`
+- New upvalue captured by `renderTopBar`: `eAa`
+- Upvalue no longer captured by `renderTopBar`: `eyf`
+- New upvalue captured by `renderAvatarExperienceView`: `fVE`
+- New upvalue captured by `renderAvatarExperienceView`: `fXr`
+- New upvalue captured by `renderAvatarExperienceView`: `fYt`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `fVf`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `fWS`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `fXU`
+- New upvalue captured by `render`: `fND`
+- Upvalue no longer captured by `render`: `fNe`
+- New upvalue captured by `setPlayEmoteInBackground`: `dxy`
+- Upvalue no longer captured by `setPlayEmoteInBackground`: `dtu`
+- New upvalue captured by `navigateBackInAppRoute`: `dLo`
+- Upvalue no longer captured by `navigateBackInAppRoute`: `dIv`
+- New function: `fTM`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `ezX`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `eyc`
+- New function: `fNp`
+- New upvalue captured by `buildConfigTable`: `fNq`
+- New upvalue captured by `buildConfigTable`: `fTF`
+- Upvalue no longer captured by `buildConfigTable`: `fMR`
+- Upvalue no longer captured by `buildConfigTable`: `fTg`
+- New upvalue captured by `getPageName`: `cWl`
+- Upvalue no longer captured by `getPageName`: `cWk`
+- New upvalue captured by `isVisible`: `cWl`
+- New upvalue captured by `isVisible`: `dBR`
+- New upvalue captured by `isVisible`: `dpY`
+- Upvalue no longer captured by `isVisible`: `cWk`
+- Upvalue no longer captured by `isVisible`: `dlU`
+- Upvalue no longer captured by `isVisible`: `dxN`
+- New upvalue captured by `render`: `fNo`
+- New upvalue captured by `render`: `fYy`
+- Upvalue no longer captured by `render`: `fMP`
+- Upvalue no longer captured by `render`: `fXZ`
+- New upvalue captured by `fNj`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `ezR`
+- New upvalue captured by `init`: `ezX`
+- New upvalue captured by `init`: `fNl`
+- New upvalue captured by `init`: `fNn`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `exW`
+- Upvalue no longer captured by `init`: `eyc`
+- Upvalue no longer captured by `init`: `fMM`
+- Upvalue no longer captured by `init`: `fMO`
+- New upvalue captured by `render`: `eDo`
+- New upvalue captured by `render`: `fNk`
+- Upvalue no longer captured by `render`: `eBt`
+- Upvalue no longer captured by `render`: `fML`
+- New upvalue captured by `unlockNavigation`: `cQD`
+- Upvalue no longer captured by `unlockNavigation`: `cQC`
+- Upvalue no longer captured by `fYA`: `var1 (write)`
+- New function: `fYz`
+- New upvalue captured by `fYB`: `var1 (write)`
+- New upvalue captured by `render`: `cWl`
+- New upvalue captured by `render`: `eDs`
+- Upvalue no longer captured by `render`: `cWk`
+- Upvalue no longer captured by `render`: `eBx`
+- New upvalue captured by `onActivated`: `cWl`
+- New upvalue captured by `onActivated`: `eDs`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `dispatchFetchGameDetailsPageData`: `fHj`
+- Upvalue no longer captured by `dispatchFetchGameDetailsPageData`: `fGK`
+- New upvalue captured by `ageVerificationModal`: `fFD`
+- Upvalue no longer captured by `ageVerificationModal`: `fFe`
+- Upvalue no longer captured by `fYF`: `var1 (write)`
+- New upvalue captured by `isSettingsSupportedForPlatform`: `eEq`
+- New upvalue captured by `isSettingsSupportedForPlatform`: `eEu`
+- Upvalue no longer captured by `isSettingsSupportedForPlatform`: `eCv`
+- Upvalue no longer captured by `isSettingsSupportedForPlatform`: `eCz`
+- New upvalue captured by `useClearPurchaseResultsOnUnmount`: `fRE`
+- Upvalue no longer captured by `useClearPurchaseResultsOnUnmount`: `fRf`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fYE_SubscriptionPurchaseOverlay`
+- New upvalue captured by `purchaseSubscription`: `fLZ`
+- New upvalue captured by `purchaseSubscription`: `fMb`
+- New upvalue captured by `purchaseSubscription`: `fMd`
+- New upvalue captured by `purchaseSubscription`: `fYF`
+- Upvalue no longer captured by `purchaseSubscription`: `fLA`
+- Upvalue no longer captured by `purchaseSubscription`: `fLC`
+- Upvalue no longer captured by `purchaseSubscription`: `fLE`
+- Upvalue no longer captured by `purchaseSubscription`: `fYg`
+- New function: `fYG`
+- New upvalue captured by `promptSubscriptionPurchase`: `cSx`
+- New upvalue captured by `promptSubscriptionPurchase`: `dJE`
+- New upvalue captured by `promptSubscriptionPurchase`: `eFl`
+- New upvalue captured by `promptSubscriptionPurchase`: `fGu`
+- Upvalue no longer captured by `promptSubscriptionPurchase`: `cSw`
+- Upvalue no longer captured by `promptSubscriptionPurchase`: `dGL`
+- Upvalue no longer captured by `promptSubscriptionPurchase`: `eDq`
+- Upvalue no longer captured by `promptSubscriptionPurchase`: `fFV`
+- New upvalue captured by `onFlowComplete`: `eFl`
+- Upvalue no longer captured by `onFlowComplete`: `eDq`
+- New upvalue captured by `onPurchaseSuccess`: `cSx`
+- Upvalue no longer captured by `onPurchaseSuccess`: `cSw`
+- New upvalue captured by `onPurchaseSuccess`: `cSx`
+- Upvalue no longer captured by `onPurchaseSuccess`: `cSw`
+- New upvalue captured by `promptSubscriptionPurchase`: `fYD`
+- Upvalue no longer captured by `promptSubscriptionPurchase`: `fYe`
+- New upvalue captured by `onPurchaseSuccess`: `cSx`
+- Upvalue no longer captured by `onPurchaseSuccess`: `cSw`
+- New function: `fYI`
+- New function: `LUAUFORGE_MODULE_GLOBALS_fYI_calculateMoreAmount`
+- New function: `fYT`
+- New upvalue captured by `init`: `cRs`
+- New upvalue captured by `init`: `fRs`
+- New upvalue captured by `init`: `fYU`
+- Upvalue no longer captured by `init`: `cRr`
+- Upvalue no longer captured by `init`: `fQT`
+- Upvalue no longer captured by `init`: `fYv`
+- New upvalue captured by `failFlow`: `fYU`
+- Upvalue no longer captured by `failFlow`: `fYv`
+- New upvalue captured by `purchaseRobux`: `cRs`
+- Upvalue no longer captured by `purchaseRobux`: `cRr`
+- New upvalue captured by `acceptPurchaseWarning`: `cRs`
+- Upvalue no longer captured by `acceptPurchaseWarning`: `cRr`
+- New upvalue captured by `cancelPurchase`: `fYU`
+- Upvalue no longer captured by `cancelPurchase`: `fYv`
+- New upvalue captured by `sendCounter`: `fYU`
+- Upvalue no longer captured by `sendCounter`: `fYv`
+- New upvalue captured by `dispatchFetchPurchaseWarning`: `fRu`
+- New upvalue captured by `dispatchFetchPurchaseWarning`: `fYU`
+- Upvalue no longer captured by `dispatchFetchPurchaseWarning`: `fQV`
+- Upvalue no longer captured by `dispatchFetchPurchaseWarning`: `fYv`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `cRs`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `fRs`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `fYU`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `cRr`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `fQT`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `fYv`
+- New upvalue captured by `dispatchPostAckPurchaseWarning`: `fRx`
+- New upvalue captured by `dispatchPostAckPurchaseWarning`: `fYU`
+- Upvalue no longer captured by `dispatchPostAckPurchaseWarning`: `fQY`
+- Upvalue no longer captured by `dispatchPostAckPurchaseWarning`: `fYv`
+- New upvalue captured by `getFlowState`: `cRs`
+- New upvalue captured by `getFlowState`: `fLZ`
+- New upvalue captured by `getFlowState`: `fMh`
+- New upvalue captured by `getFlowState`: `fRs`
+- Upvalue no longer captured by `getFlowState`: `cRr`
+- Upvalue no longer captured by `getFlowState`: `fLA`
+- Upvalue no longer captured by `getFlowState`: `fLI`
+- Upvalue no longer captured by `getFlowState`: `fQT`
+- New upvalue captured by `getErrorType`: `fLZ`
+- Upvalue no longer captured by `getErrorType`: `fLA`
+- New upvalue captured by `render`: `fMh`
+- Upvalue no longer captured by `render`: `fLI`
+- New function: `fYV`
+- New function: `fYZ`
+- New function: `fYX`
+- New upvalue captured by `Fetch`: `fYY`
+- New upvalue captured by `Fetch`: `var18005 (write)`
+- Upvalue no longer captured by `Fetch`: `fYA`
+- Upvalue no longer captured by `Fetch`: `var17875 (write)`
+- New function: `var18007`
+- New upvalue captured by `dispatchClearNativePurchaseResult`: `fRE`
+- Upvalue no longer captured by `dispatchClearNativePurchaseResult`: `fRf`
+- New upvalue captured by `dispatchFetchIAPProducts`: `fRl`
+- Upvalue no longer captured by `dispatchFetchIAPProducts`: `fQM`
+- New upvalue captured by `dispatchFetchNativeIAPProducts`: `fYX`
+- Upvalue no longer captured by `dispatchFetchNativeIAPProducts`: `fYy`
+- New upvalue captured by `dispatchFetchIAPPurchaseWarning`: `fRu`
+- Upvalue no longer captured by `dispatchFetchIAPPurchaseWarning`: `fQV`
+- New upvalue captured by `dispatchPostAckPurchaseWarning`: `fRx`
+- Upvalue no longer captured by `dispatchPostAckPurchaseWarning`: `fQY`
+- New upvalue captured by `dispatchFetchUserBalance`: `fnw`
+- Upvalue no longer captured by `dispatchFetchUserBalance`: `fmY`
+- New upvalue captured by `promptRobux`: `fRp`
+- Upvalue no longer captured by `promptRobux`: `fQQ`
+- New upvalue captured by `dispatchNavigateBack`: `dLo`
+- Upvalue no longer captured by `dispatchNavigateBack`: `dIv`
+- New upvalue captured by `dispatchCentralOverlay`: `dKy`
+- Upvalue no longer captured by `dispatchCentralOverlay`: `dHF`
+- New upvalue captured by `dispatchCheckUserPurchaseSettings`: `fRM`
+- Upvalue no longer captured by `dispatchCheckUserPurchaseSettings`: `fRn`
+- Upvalue no longer captured by `fZa`: `var1 (write)`
+- New function: `fYH`
+- New upvalue captured by `didMount`: `cRs`
+- New upvalue captured by `didMount`: `fZa`
+- Upvalue no longer captured by `didMount`: `cRr`
+- Upvalue no longer captured by `didMount`: `fYB`
+- New upvalue captured by `didUpdate`: `cRs`
+- New upvalue captured by `didUpdate`: `fYU`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- Upvalue no longer captured by `didUpdate`: `fYv`
+- New upvalue captured by `render`: `fYT`
+- Upvalue no longer captured by `render`: `fYu`
+- New function: `var18047`
+- New upvalue captured by `openAccountSettings`: `cWl`
+- New upvalue captured by `openAccountSettings`: `dKM`
+- New upvalue captured by `openAccountSettings`: `eDs`
+- Upvalue no longer captured by `openAccountSettings`: `cWk`
+- Upvalue no longer captured by `openAccountSettings`: `dHT`
+- Upvalue no longer captured by `openAccountSettings`: `eBx`
+- New upvalue captured by `fZe`: `var1 (write)`
+- New upvalue captured by `gaf`: `var1 (write)`
+- Upvalue no longer captured by `gag`: `var1 (write)`
+- Upvalue no longer captured by `gah`: `var1 (write)`
+- New upvalue captured by `Provider`: `gad`
+- New upvalue captured by `Provider`: `gaf`
+- New upvalue captured by `Provider`: `gah`
+- Upvalue no longer captured by `Provider`: `fZE`
+- Upvalue no longer captured by `Provider`: `fZG`
+- Upvalue no longer captured by `Provider`: `fZI`
+- New upvalue captured by `gac`: `var1 (write)`
+- Upvalue no longer captured by `gam`: `var1 (write)`
+- New upvalue captured by `gab`: `var1 (write)`
+- New upvalue captured by `gaz`: `var1 (write)`
+- New upvalue captured by `AccountMismatchDialog`: `gaf`
+- Upvalue no longer captured by `AccountMismatchDialog`: `fZG`
+- New upvalue captured by `gaM`: `var1 (write)`
+- New upvalue captured by `gaX`: `var1 (write)`
+- Upvalue no longer captured by `gaY`: `var1 (write)`
+- Upvalue no longer captured by `gbb`: `var1 (write)`
+- New upvalue captured by `gaZ`: `var1 (write)`
+- New upvalue captured by `get`: `gaY`
+- New upvalue captured by `get`: `gba`
+- New upvalue captured by `get`: `gbb`
+- Upvalue no longer captured by `get`: `gaB`
+- Upvalue no longer captured by `get`: `gaC`
+- Upvalue no longer captured by `get`: `gaz`
+- New upvalue captured by `reportModalShownWithSection`: `gaY`
+- New upvalue captured by `reportModalShownWithSection`: `gba`
+- Upvalue no longer captured by `reportModalShownWithSection`: `gaB`
+- Upvalue no longer captured by `reportModalShownWithSection`: `gaz`
+- New upvalue captured by `reportModalShownWithSectionAndError`: `gaY`
+- New upvalue captured by `reportModalShownWithSectionAndError`: `gba`
+- Upvalue no longer captured by `reportModalShownWithSectionAndError`: `gaB`
+- Upvalue no longer captured by `reportModalShownWithSectionAndError`: `gaz`
+- New upvalue captured by `reportModalDismissedWithSection`: `gaY`
+- New upvalue captured by `reportModalDismissedWithSection`: `gba`
+- Upvalue no longer captured by `reportModalDismissedWithSection`: `gaB`
+- Upvalue no longer captured by `reportModalDismissedWithSection`: `gaz`
+- New upvalue captured by `reportModalActionWithSection`: `gba`
+- Upvalue no longer captured by `reportModalActionWithSection`: `gaB`
+- New upvalue captured by `reportInteractWithActionAndSection`: `gbb`
+- Upvalue no longer captured by `reportInteractWithActionAndSection`: `gaC`
+- Upvalue no longer captured by `gbc`: `var1 (write)`
+- Upvalue no longer captured by `gbe`: `var1 (write)`
+- New upvalue captured by `gbh`: `var1 (write)`
+- Upvalue no longer captured by `gbl`: `var1 (write)`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- New upvalue captured by `gbo`: `var1 (write)`
+- New upvalue captured by `gbn`: `var1 (write)`
+- New upvalue captured by `gbr`: `var1 (write)`
+- Upvalue no longer captured by `gbw`: `var1 (write)`
+- Upvalue no longer captured by `gby`: `var1 (write)`
+- Upvalue no longer captured by `gbz`: `var1 (write)`
+- Upvalue no longer captured by `gbG`: `var1 (write)`
+- New upvalue captured by `supportsVerifySNA`: `gbE`
+- New upvalue captured by `supportsVerifySNA`: `gbG`
+- Upvalue no longer captured by `supportsVerifySNA`: `gbf`
+- Upvalue no longer captured by `supportsVerifySNA`: `gbh`
+- New upvalue captured by `verifySNA`: `gbE`
+- New upvalue captured by `verifySNA`: `gbG`
+- Upvalue no longer captured by `verifySNA`: `gbf`
+- Upvalue no longer captured by `verifySNA`: `gbh`
+- New upvalue captured by `getPhoneNumber`: `gbE`
+- New upvalue captured by `getPhoneNumber`: `gbG`
+- Upvalue no longer captured by `getPhoneNumber`: `gbf`
+- Upvalue no longer captured by `getPhoneNumber`: `gbh`
+- New upvalue captured by `supportsGetPhoneNumber`: `gbE`
+- New upvalue captured by `supportsGetPhoneNumber`: `gbG`
+- Upvalue no longer captured by `supportsGetPhoneNumber`: `gbf`
+- Upvalue no longer captured by `supportsGetPhoneNumber`: `gbh`
+- New upvalue captured by `getSMSOTP`: `gbE`
+- New upvalue captured by `getSMSOTP`: `gbG`
+- Upvalue no longer captured by `getSMSOTP`: `gbf`
+- Upvalue no longer captured by `getSMSOTP`: `gbh`
+- New upvalue captured by `supportsGetSMSOTP`: `gbE`
+- New upvalue captured by `supportsGetSMSOTP`: `gbG`
+- Upvalue no longer captured by `supportsGetSMSOTP`: `gbf`
+- Upvalue no longer captured by `supportsGetSMSOTP`: `gbh`
+- New function: `var18260`
+- New upvalue captured by `setPhoneNumber`: `gbn`
+- Upvalue no longer captured by `setPhoneNumber`: `gaO`
+- New upvalue captured by `verifyPhoneCode`: `gbr`
+- Upvalue no longer captured by `verifyPhoneCode`: `gaS`
+- New upvalue captured by `resendPhoneCode`: `gbt`
+- Upvalue no longer captured by `resendPhoneCode`: `gaU`
+- New upvalue captured by `_`: `gbw`
+- Upvalue no longer captured by `_`: `gaX`
+- New upvalue captured by `handleSetPhone`: `gaY`
+- New upvalue captured by `handleSetPhone`: `gbe`
+- Upvalue no longer captured by `handleSetPhone`: `gaF`
+- Upvalue no longer captured by `handleSetPhone`: `gaz`
+- New upvalue captured by `handleVerifyPhone`: `gaY`
+- New upvalue captured by `handleVerifyPhone`: `gbe`
+- Upvalue no longer captured by `handleVerifyPhone`: `gaF`
+- Upvalue no longer captured by `handleVerifyPhone`: `gaz`
+- New upvalue captured by `handleResendCode`: `gaY`
+- New upvalue captured by `handleResendCode`: `gbe`
+- Upvalue no longer captured by `handleResendCode`: `gaF`
+- Upvalue no longer captured by `handleResendCode`: `gaz`
+- New upvalue captured by `returnToAddPhone`: `gaY`
+- New upvalue captured by `returnToAddPhone`: `gbe`
+- Upvalue no longer captured by `returnToAddPhone`: `gaF`
+- Upvalue no longer captured by `returnToAddPhone`: `gaz`
+- New upvalue captured by `proceedToAddPhone`: `gaY`
+- New upvalue captured by `proceedToAddPhone`: `gbe`
+- Upvalue no longer captured by `proceedToAddPhone`: `gaF`
+- Upvalue no longer captured by `proceedToAddPhone`: `gaz`
+- New upvalue captured by `navigateToSMSTerms`: `gaY`
+- Upvalue no longer captured by `navigateToSMSTerms`: `gaz`
+- New upvalue captured by `navigateToPrivacy`: `gaY`
+- Upvalue no longer captured by `navigateToPrivacy`: `gaz`
+- New function: `var18304`
+- New function: `var18305`
+- New function: `var18306`
+- New function: `var18308`
+- New function: `var18309`
+- Upvalue no longer captured by `gbM`: `var1 (write)`
+- New function: `var18334`
+- New upvalue captured by `_`: `gbn`
+- Upvalue no longer captured by `_`: `gaO`
+- New upvalue captured by `_`: `gbr`
+- Upvalue no longer captured by `_`: `gaS`
+- New upvalue captured by `_`: `gbt`
+- Upvalue no longer captured by `_`: `gaU`
+- New upvalue captured by `_`: `gbw`
+- Upvalue no longer captured by `_`: `gaX`
+- New upvalue captured by `handleSetPhone`: `gaY`
+- New upvalue captured by `handleSetPhone`: `gbe`
+- New upvalue captured by `handleSetPhone`: `gbn`
+- Upvalue no longer captured by `handleSetPhone`: `gaF`
+- Upvalue no longer captured by `handleSetPhone`: `gaO`
+- Upvalue no longer captured by `handleSetPhone`: `gaz`
+- New upvalue captured by `handleVerifyPhone`: `gaY`
+- New upvalue captured by `handleVerifyPhone`: `gbe`
+- New upvalue captured by `handleVerifyPhone`: `gbr`
+- Upvalue no longer captured by `handleVerifyPhone`: `gaF`
+- Upvalue no longer captured by `handleVerifyPhone`: `gaS`
+- Upvalue no longer captured by `handleVerifyPhone`: `gaz`
+- New upvalue captured by `handleResendCode`: `gaY`
+- New upvalue captured by `handleResendCode`: `gbe`
+- New upvalue captured by `handleResendCode`: `gbt`
+- Upvalue no longer captured by `handleResendCode`: `gaF`
+- Upvalue no longer captured by `handleResendCode`: `gaU`
+- Upvalue no longer captured by `handleResendCode`: `gaz`
+- New upvalue captured by `returnToAddPhone`: `gaY`
+- New upvalue captured by `returnToAddPhone`: `gbe`
+- Upvalue no longer captured by `returnToAddPhone`: `gaF`
+- Upvalue no longer captured by `returnToAddPhone`: `gaz`
+- New upvalue captured by `proceedToAddPhone`: `gaY`
+- New upvalue captured by `proceedToAddPhone`: `gbe`
+- Upvalue no longer captured by `proceedToAddPhone`: `gaF`
+- Upvalue no longer captured by `proceedToAddPhone`: `gaz`
+- New upvalue captured by `navigateToSMSTerms`: `gaY`
+- New upvalue captured by `navigateToSMSTerms`: `gbM`
+- Upvalue no longer captured by `navigateToSMSTerms`: `gaz`
+- Upvalue no longer captured by `navigateToSMSTerms`: `gbn`
+- New upvalue captured by `navigateToPrivacy`: `gaY`
+- New upvalue captured by `navigateToPrivacy`: `gbM`
+- Upvalue no longer captured by `navigateToPrivacy`: `gaz`
+- Upvalue no longer captured by `navigateToPrivacy`: `gbn`
+- New function: `var18384`
+- New function: `var18385`
+- New function: `var18386`
+- New function: `var18388`
+- New function: `var18389`
+- Upvalue no longer captured by `gbN`: `var1 (write)`
+- New function: `var18414`
+- New function: `gbO`
+- New function: `gbP`
+- Upvalue no longer captured by `gbQ`: `var1 (write)`
+- New upvalue captured by `onSuccess`: `gbQ`
+- Upvalue no longer captured by `onSuccess`: `gbr`
+- New upvalue captured by `onSuccess`: `gbQ`
+- Upvalue no longer captured by `onSuccess`: `gbr`
+- New upvalue captured by `middleContent`: `gaL`
+- Upvalue no longer captured by `middleContent`: `gam`
+- New upvalue captured by `gcb`: `var1 (write)`
+- New function: `var18488`
+- New upvalue captured by `middleContent`: `gaL`
+- Upvalue no longer captured by `middleContent`: `gam`
+- New function: `var18525`
+- New function: `var18536`
+- New upvalue captured by `openPhoneUpsell`: `gaL`
+- New upvalue captured by `openPhoneUpsell`: `gaS`
+- New upvalue captured by `openPhoneUpsell`: `gbT`
+- New upvalue captured by `openPhoneUpsell`: `gbY`
+- New upvalue captured by `openPhoneUpsell`: `var18535 (write)`
+- Upvalue no longer captured by `openPhoneUpsell`: `gam`
+- Upvalue no longer captured by `openPhoneUpsell`: `gat`
+- Upvalue no longer captured by `openPhoneUpsell`: `gbu`
+- Upvalue no longer captured by `openPhoneUpsell`: `gbz`
+- Upvalue no longer captured by `openPhoneUpsell`: `var18405 (write)`
+- New upvalue captured by `onSuccess`: `gaL`
+- Upvalue no longer captured by `onSuccess`: `gam`
+- New upvalue captured by `gch`: `var1 (write)`
+- New upvalue captured by `middleContent`: `gaL`
+- Upvalue no longer captured by `middleContent`: `gam`
+- New function: `gaI`
+- New function: `var18587`
+- New function: `var18588`
+- Upvalue no longer captured by `gdn`: `var1 (write)`
+- Upvalue no longer captured by `gdo`: `var1 (write)`
+- Upvalue no longer captured by `gdp`: `var1 (write)`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `ezW`
+- New upvalue captured by `init`: `gdn`
+- New upvalue captured by `init`: `gdo`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `eyb`
+- Upvalue no longer captured by `init`: `gcO`
+- Upvalue no longer captured by `init`: `gcP`
+- New upvalue captured by `onBackButtonPressed`: `dBR`
+- New upvalue captured by `onBackButtonPressed`: `ezW`
+- New upvalue captured by `onBackButtonPressed`: `gdn`
+- Upvalue no longer captured by `onBackButtonPressed`: `dxN`
+- Upvalue no longer captured by `onBackButtonPressed`: `eyb`
+- Upvalue no longer captured by `onBackButtonPressed`: `gcO`
+- New upvalue captured by `getBackButtonAction`: `gdn`
+- New upvalue captured by `getBackButtonAction`: `gdp`
+- Upvalue no longer captured by `getBackButtonAction`: `gcO`
+- Upvalue no longer captured by `getBackButtonAction`: `gcQ`
+- New upvalue captured by `resetNavigationHistory`: `drA`
+- Upvalue no longer captured by `resetNavigationHistory`: `dnw`
+- New upvalue captured by `instantResetNavigationHistory`: `gdq`
+- Upvalue no longer captured by `instantResetNavigationHistory`: `gcR`
+- New upvalue captured by `gdr`: `var1 (write)`
+- Upvalue no longer captured by `gdv`: `var1 (write)`
+- New upvalue captured by `onLeaveAvatarExperience`: `dAB`
+- New upvalue captured by `onLeaveAvatarExperience`: `gdt`
+- New upvalue captured by `onLeaveAvatarExperience`: `gdu`
+- New upvalue captured by `onLeaveAvatarExperience`: `gdv`
+- Upvalue no longer captured by `onLeaveAvatarExperience`: `dwx`
+- Upvalue no longer captured by `onLeaveAvatarExperience`: `gcU`
+- Upvalue no longer captured by `onLeaveAvatarExperience`: `gcV`
+- Upvalue no longer captured by `onLeaveAvatarExperience`: `gcW`
+- New upvalue captured by `gdw`: `var1 (write)`
+- New upvalue captured by `clearCurrentSort`: `dBH`
+- Upvalue no longer captured by `clearCurrentSort`: `dxD`
+- New upvalue captured by `clearRemovedItems`: `dBJ`
+- Upvalue no longer captured by `clearRemovedItems`: `dxF`
+- New upvalue captured by `trackTopLevelCounters`: `dBR`
+- New upvalue captured by `trackTopLevelCounters`: `dwu`
+- Upvalue no longer captured by `trackTopLevelCounters`: `dsq`
+- Upvalue no longer captured by `trackTopLevelCounters`: `dxN`
+- New upvalue captured by `sendAnalytics`: `gdJ`
+- Upvalue no longer captured by `sendAnalytics`: `gdk`
+- New upvalue captured by `setBodyColor3`: `gdI`
+- Upvalue no longer captured by `setBodyColor3`: `gdj`
+- New upvalue captured by `init`: `fNH`
+- Upvalue no longer captured by `init`: `fNi`
+- New upvalue captured by `onSliderChanged`: `fNH`
+- Upvalue no longer captured by `onSliderChanged`: `fNi`
+- New upvalue captured by `onDragEnd`: `fNH`
+- Upvalue no longer captured by `onDragEnd`: `fNi`
+- New upvalue captured by `getCustomKnobColorLower`: `fNH`
+- Upvalue no longer captured by `getCustomKnobColorLower`: `fNi`
+- New upvalue captured by `renderTrack`: `dxM`
+- Upvalue no longer captured by `renderTrack`: `dtI`
+- New upvalue captured by `renderWithProviders`: `dxM`
+- Upvalue no longer captured by `renderWithProviders`: `dtI`
+- New upvalue captured by `setBodyColor3`: `gdI`
+- Upvalue no longer captured by `setBodyColor3`: `gdj`
+- Upvalue no longer captured by `gdQ`: `var1 (write)`
+- New upvalue captured by `init`: `dxM`
+- New upvalue captured by `init`: `gdH`
+- Upvalue no longer captured by `init`: `dtI`
+- Upvalue no longer captured by `init`: `gdi`
+- New upvalue captured by `renderItem`: `gdH`
+- Upvalue no longer captured by `renderItem`: `gdi`
+- New upvalue captured by `onUIListLayoutContentSizeChanged`: `dxM`
+- Upvalue no longer captured by `onUIListLayoutContentSizeChanged`: `dtI`
+- New upvalue captured by `getBodyPartsListHeight`: `dxM`
+- Upvalue no longer captured by `getBodyPartsListHeight`: `dtI`
+- New upvalue captured by `getGridAndSidebarFrameSize`: `dxM`
+- New upvalue captured by `getGridAndSidebarFrameSize`: `fNH`
+- Upvalue no longer captured by `getGridAndSidebarFrameSize`: `dtI`
+- Upvalue no longer captured by `getGridAndSidebarFrameSize`: `fNi`
+- New upvalue captured by `renderBodyColorButtons`: `dwu`
+- New upvalue captured by `renderBodyColorButtons`: `eFG`
+- Upvalue no longer captured by `renderBodyColorButtons`: `dsq`
+- Upvalue no longer captured by `renderBodyColorButtons`: `eDL`
+- New upvalue captured by `renderUIPadding`: `dxM`
+- Upvalue no longer captured by `renderUIPadding`: `dtI`
+- New upvalue captured by `renderBodyPartsList`: `dxM`
+- Upvalue no longer captured by `renderBodyPartsList`: `dtI`
+- New parameter added to `onActivated` (0 -> 1 params)
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `fFlagAXMigrateAllTabToSduiDev`
+- New upvalue captured by `renderStandardView`: `dxM`
+- New upvalue captured by `renderStandardView`: `dxY`
+- Upvalue no longer captured by `renderStandardView`: `dtI`
+- Upvalue no longer captured by `renderStandardView`: `dtU`
+- New upvalue captured by `renderAdvancedView`: `dxM`
+- New upvalue captured by `renderAdvancedView`: `dxY`
+- Upvalue no longer captured by `renderAdvancedView`: `dtI`
+- Upvalue no longer captured by `renderAdvancedView`: `dtU`
+- New upvalue captured by `render`: `dxM`
+- New upvalue captured by `render`: `gdN`
+- New upvalue captured by `render`: `gdQ`
+- Upvalue no longer captured by `render`: `dtI`
+- Upvalue no longer captured by `render`: `gdo`
+- Upvalue no longer captured by `render`: `gdr`
+- New upvalue captured by `didMount`: `fNH`
+- Upvalue no longer captured by `didMount`: `fNi`
+- New upvalue captured by `setViewSetting`: `dzp`
+- Upvalue no longer captured by `setViewSetting`: `dvl`
+- New upvalue captured by `setBodyPartRangeIds`: `dxQ`
+- Upvalue no longer captured by `setBodyPartRangeIds`: `dtM`
+- New upvalue captured by `setSelectedBodyPartIndex`: `dzs`
+- Upvalue no longer captured by `setSelectedBodyPartIndex`: `dvo`
+- Upvalue no longer captured by `gdV`: `var1 (write)`
+- Upvalue no longer captured by `gdW`: `var1 (write)`
+- New upvalue captured by `gdX`: `var1 (write)`
+- New upvalue captured by `checkAndSendDuplicateItemCount`: `dwu`
+- Upvalue no longer captured by `checkAndSendDuplicateItemCount`: `dsq`
+- New upvalue captured by `getRequestItemCategoriesFromInfo`: `dwu`
+- New upvalue captured by `getRequestItemCategoriesFromInfo`: `dxM`
+- New upvalue captured by `getRequestItemCategoriesFromInfo`: `dxX`
+- Upvalue no longer captured by `getRequestItemCategoriesFromInfo`: `dsq`
+- Upvalue no longer captured by `getRequestItemCategoriesFromInfo`: `dtI`
+- Upvalue no longer captured by `getRequestItemCategoriesFromInfo`: `dtT`
+- New upvalue captured by `getOutfitInfoFromInventoryItem`: `dwu`
+- New upvalue captured by `getOutfitInfoFromInventoryItem`: `fOY`
+- Upvalue no longer captured by `getOutfitInfoFromInventoryItem`: `dsq`
+- Upvalue no longer captured by `getOutfitInfoFromInventoryItem`: `fOz`
+- New function: `var18837`
+- New upvalue captured by `fetchItems`: `dxX`
+- New upvalue captured by `fetchItems`: `fym`
+- New upvalue captured by `fetchItems`: `gdW`
+- Upvalue no longer captured by `fetchItems`: `dtT`
+- Upvalue no longer captured by `fetchItems`: `fxN`
+- Upvalue no longer captured by `fetchItems`: `gdy`
+- New function: `var18993`
+- New upvalue captured by `_`: `dxM`
+- Upvalue no longer captured by `_`: `dtI`
+- New function: `var19048`
+- New upvalue captured by `selectIsR6`: `dwu`
+- Upvalue no longer captured by `selectIsR6`: `dsq`
+- New upvalue captured by `equip`: `fNF`
+- Upvalue no longer captured by `equip`: `fNg`
+- New upvalue captured by `onActivatedWithRevokedItems`: `fNH`
+- New upvalue captured by `onActivatedWithRevokedItems`: `gef`
+- Upvalue no longer captured by `onActivatedWithRevokedItems`: `fNi`
+- Upvalue no longer captured by `onActivatedWithRevokedItems`: `gdG`
+- New upvalue captured by `onActivatedWithPartiallyExpiredItems`: `dwu`
+- New upvalue captured by `onActivatedWithPartiallyExpiredItems`: `fNH`
+- New upvalue captured by `onActivatedWithPartiallyExpiredItems`: `fOz`
+- New upvalue captured by `onActivatedWithPartiallyExpiredItems`: `gef`
+- Upvalue no longer captured by `onActivatedWithPartiallyExpiredItems`: `dsq`
+- Upvalue no longer captured by `onActivatedWithPartiallyExpiredItems`: `fNi`
+- Upvalue no longer captured by `onActivatedWithPartiallyExpiredItems`: `fOa`
+- Upvalue no longer captured by `onActivatedWithPartiallyExpiredItems`: `gdG`
+- New function: `var19072`
+- New function: `var19072`
+- New function: `var19072`
+- Upvalue no longer captured by `gei`: `var1 (write)`
+- New function: `var19105`
+- New upvalue captured by `fireTileLoadingLatencyTracker`: `dAZ`
+- New upvalue captured by `fireTileLoadingLatencyTracker`: `dwu`
+- Upvalue no longer captured by `fireTileLoadingLatencyTracker`: `dsq`
+- Upvalue no longer captured by `fireTileLoadingLatencyTracker`: `dwV`
+- New upvalue captured by `ges`: `var1 (write)`
+- New upvalue captured by `onImpressionsDetected`: `dAZ`
+- New upvalue captured by `onImpressionsDetected`: `dBb`
+- New upvalue captured by `onImpressionsDetected`: `ger`
+- Upvalue no longer captured by `onImpressionsDetected`: `dwV`
+- Upvalue no longer captured by `onImpressionsDetected`: `dwX`
+- Upvalue no longer captured by `onImpressionsDetected`: `gdS`
+- Upvalue no longer captured by `gew`: `var1 (write)`
+- New upvalue captured by `getAssetIds`: `dwu`
+- Upvalue no longer captured by `getAssetIds`: `dsq`
+- New upvalue captured by `onClose`: `eFl`
+- Upvalue no longer captured by `onClose`: `eDq`
+- New upvalue captured by `geM`: `var1 (write)`
+- New upvalue captured by `geN`: `var1 (write)`
+- New upvalue captured by `getLookStatusFromModerationStatus`: `dwu`
+- Upvalue no longer captured by `getLookStatusFromModerationStatus`: `dsq`
+- New upvalue captured by `isBodyBundle`: `dwu`
+- Upvalue no longer captured by `isBodyBundle`: `dsq`
+- New upvalue captured by `getItemInfoFromItemData`: `dwu`
+- Upvalue no longer captured by `getItemInfoFromItemData`: `dsq`
+- New upvalue captured by `getLookStatusFromModerationStatus`: `dwu`
+- Upvalue no longer captured by `getLookStatusFromModerationStatus`: `dsq`
+- New upvalue captured by `isValidThumbnailSize`: `dwu`
+- Upvalue no longer captured by `isValidThumbnailSize`: `dsq`
+- New upvalue captured by `selectCatalogItemCardState`: `dwu`
+- New upvalue captured by `selectCatalogItemCardState`: `dzL`
+- New upvalue captured by `selectCatalogItemCardState`: `dzV`
+- New upvalue captured by `selectCatalogItemCardState`: `geE`
+- Upvalue no longer captured by `selectCatalogItemCardState`: `dsq`
+- Upvalue no longer captured by `selectCatalogItemCardState`: `dvH`
+- Upvalue no longer captured by `selectCatalogItemCardState`: `dvR`
+- Upvalue no longer captured by `selectCatalogItemCardState`: `gef`
+- New function: `var19439`
+- Upvalue no longer captured by `geR`: `var1 (write)`
+- New upvalue captured by `onImpressionsDetected`: `geV`
+- Upvalue no longer captured by `onImpressionsDetected`: `gew`
+- New upvalue captured by `useItemCarouselWidgetViewModel`: `cRs`
+- New upvalue captured by `useItemCarouselWidgetViewModel`: `dJJ`
+- New upvalue captured by `useItemCarouselWidgetViewModel`: `dLp`
+- New upvalue captured by `useItemCarouselWidgetViewModel`: `gde`
+- New upvalue captured by `useItemCarouselWidgetViewModel`: `gdf`
+- Upvalue no longer captured by `useItemCarouselWidgetViewModel`: `cRr`
+- Upvalue no longer captured by `useItemCarouselWidgetViewModel`: `dGQ`
+- Upvalue no longer captured by `useItemCarouselWidgetViewModel`: `dIw`
+- Upvalue no longer captured by `useItemCarouselWidgetViewModel`: `gcF`
+- Upvalue no longer captured by `useItemCarouselWidgetViewModel`: `gcG`
+- New upvalue captured by `scheduleNextTimer`: `dwu`
+- Upvalue no longer captured by `scheduleNextTimer`: `dsq`
+- New function: `var19638`
+- New upvalue captured by `onImpressionsDetected`: `dwu`
+- New upvalue captured by `onImpressionsDetected`: `geV`
+- New upvalue captured by `onImpressionsDetected`: `var19622 (write)`
+- Upvalue no longer captured by `onImpressionsDetected`: `dsq`
+- Upvalue no longer captured by `onImpressionsDetected`: `gew`
+- Upvalue no longer captured by `onImpressionsDetected`: `var19492 (write)`
+- New function: `var19673`
+- New upvalue captured by `HeroUnitSpotlightCardView`: `gfe`
+- Upvalue no longer captured by `HeroUnitSpotlightCardView`: `geF`
+- New upvalue captured by `selectSpotlightCardTryOnState`: `dwu`
+- New upvalue captured by `selectSpotlightCardTryOnState`: `geE`
+- Upvalue no longer captured by `selectSpotlightCardTryOnState`: `dsq`
+- Upvalue no longer captured by `selectSpotlightCardTryOnState`: `gef`
+- New upvalue captured by `gfh`: `var1 (write)`
+- Upvalue no longer captured by `gfl`: `var1 (write)`
+- Upvalue no longer captured by `gfm`: `var1 (write)`
+- New upvalue captured by `fetchHydratedWidgetContent`: `gde`
+- Upvalue no longer captured by `fetchHydratedWidgetContent`: `gcF`
+- New upvalue captured by `fetchWidgetInfo`: `gdd`
+- Upvalue no longer captured by `fetchWidgetInfo`: `gcE`
+- New upvalue captured by `gfo`: `var1 (write)`
+- New upvalue captured by `gfn`: `var1 (write)`
+- New upvalue captured by `keyMapper`: `dwu`
+- Upvalue no longer captured by `keyMapper`: `dsq`
+- New upvalue captured by `fetchRecommendedItems`: `dwJ`
+- New upvalue captured by `fetchRecommendedItems`: `dwK`
+- New upvalue captured by `fetchRecommendedItems`: `dwu`
+- New upvalue captured by `fetchRecommendedItems`: `dze`
+- Upvalue no longer captured by `fetchRecommendedItems`: `dsF`
+- Upvalue no longer captured by `fetchRecommendedItems`: `dsG`
+- Upvalue no longer captured by `fetchRecommendedItems`: `dsq`
+- Upvalue no longer captured by `fetchRecommendedItems`: `dva`
+- New upvalue captured by `fetchRecommendedLooks`: `dwM`
+- New upvalue captured by `fetchRecommendedLooks`: `dwu`
+- New upvalue captured by `fetchRecommendedLooks`: `dze`
+- New upvalue captured by `fetchRecommendedLooks`: `dzW`
+- New upvalue captured by `fetchRecommendedLooks`: `vJ`
+- Upvalue no longer captured by `fetchRecommendedLooks`: `dsI`
+- Upvalue no longer captured by `fetchRecommendedLooks`: `dsq`
+- Upvalue no longer captured by `fetchRecommendedLooks`: `dva`
+- Upvalue no longer captured by `fetchRecommendedLooks`: `dvS`
+- Upvalue no longer captured by `fetchRecommendedLooks`: `vI`
+- New upvalue captured by `didUpdate`: `cRs`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- New upvalue captured by `render`: `dwC`
+- New upvalue captured by `render`: `dwu`
+- New upvalue captured by `render`: `geC`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `render`: `dsy`
+- Upvalue no longer captured by `render`: `ged`
+- New upvalue captured by `gfq`: `var1 (write)`
+- New upvalue captured by `gfr`: `var1 (write)`
+- New upvalue captured by `useNavigateToCatalogCategory`: `dzL`
+- New upvalue captured by `useNavigateToCatalogCategory`: `dzS`
+- Upvalue no longer captured by `useNavigateToCatalogCategory`: `dvH`
+- Upvalue no longer captured by `useNavigateToCatalogCategory`: `dvO`
+- New upvalue captured by `makeNavigateToCatalogCategory`: `dzL`
+- New upvalue captured by `makeNavigateToCatalogCategory`: `dzS`
+- Upvalue no longer captured by `makeNavigateToCatalogCategory`: `dvH`
+- Upvalue no longer captured by `makeNavigateToCatalogCategory`: `dvO`
+- New upvalue captured by `init`: `dxM`
+- New upvalue captured by `init`: `dxY`
+- New upvalue captured by `init`: `eFG`
+- Upvalue no longer captured by `init`: `dtI`
+- Upvalue no longer captured by `init`: `dtU`
+- Upvalue no longer captured by `init`: `eDL`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- New upvalue captured by `onActivated`: `fFlagAXMigrateAllTabToSduiDev`
+- Upvalue no longer captured by `onActivated`: `cQt`
+- Upvalue no longer captured by `onActivated`: `fFlagAXMigrateAXToGlobalAutofocus`
+- New upvalue captured by `getRecommendedItems`: `dxM`
+- New upvalue captured by `getRecommendedItems`: `dxY`
+- New upvalue captured by `getRecommendedItems`: `eFG`
+- Upvalue no longer captured by `getRecommendedItems`: `dtI`
+- Upvalue no longer captured by `getRecommendedItems`: `dtU`
+- Upvalue no longer captured by `getRecommendedItems`: `eDL`
+- New upvalue captured by `maybeFetchRecommendedItems`: `cRs`
+- Upvalue no longer captured by `maybeFetchRecommendedItems`: `cRr`
+- New upvalue captured by `didMount`: `dwy`
+- New upvalue captured by `didMount`: `dxM`
+- New upvalue captured by `didMount`: `gfo`
+- Upvalue no longer captured by `didMount`: `dsu`
+- Upvalue no longer captured by `didMount`: `dtI`
+- Upvalue no longer captured by `didMount`: `geP`
+- New upvalue captured by `didUpdate`: `eFG`
+- Upvalue no longer captured by `didUpdate`: `eDL`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dxM`
+- New upvalue captured by `renderWithProviders`: `dyv`
+- New upvalue captured by `renderWithProviders`: `eFG`
+- New upvalue captured by `renderWithProviders`: `fUo`
+- New upvalue captured by `renderWithProviders`: `gez`
+- New upvalue captured by `renderWithProviders`: `gfp`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dtI`
+- Upvalue no longer captured by `renderWithProviders`: `dur`
+- Upvalue no longer captured by `renderWithProviders`: `eDL`
+- Upvalue no longer captured by `renderWithProviders`: `fTP`
+- Upvalue no longer captured by `renderWithProviders`: `gea`
+- Upvalue no longer captured by `renderWithProviders`: `geQ`
+- New upvalue captured by `renderCarouselWithProviders`: `dyv`
+- New upvalue captured by `renderCarouselWithProviders`: `gfp`
+- Upvalue no longer captured by `renderCarouselWithProviders`: `dur`
+- Upvalue no longer captured by `renderCarouselWithProviders`: `geQ`
+- New upvalue captured by `render`: `dwy`
+- New upvalue captured by `render`: `gfo`
+- Upvalue no longer captured by `render`: `dsu`
+- Upvalue no longer captured by `render`: `geP`
+- New upvalue captured by `mapStateToProps`: `dwu`
+- New upvalue captured by `mapStateToProps`: `dxM`
+- New upvalue captured by `mapStateToProps`: `dyv`
+- New upvalue captured by `mapStateToProps`: `eFG`
+- Upvalue no longer captured by `mapStateToProps`: `dsq`
+- Upvalue no longer captured by `mapStateToProps`: `dtI`
+- Upvalue no longer captured by `mapStateToProps`: `dur`
+- Upvalue no longer captured by `mapStateToProps`: `eDL`
+- New upvalue captured by `mapDispatchToProps`: `cWj`
+- New upvalue captured by `mapDispatchToProps`: `eFG`
+- New upvalue captured by `mapDispatchToProps`: `gfn`
+- New upvalue captured by `mapDispatchToProps`: `gfq`
+- Upvalue no longer captured by `mapDispatchToProps`: `cWi`
+- Upvalue no longer captured by `mapDispatchToProps`: `eDL`
+- Upvalue no longer captured by `mapDispatchToProps`: `geO`
+- Upvalue no longer captured by `mapDispatchToProps`: `geR`
+- New upvalue captured by `getRecommendedItems`: `gfn`
+- Upvalue no longer captured by `getRecommendedItems`: `geO`
+- New upvalue captured by `setCatalogIndicies`: `cWj`
+- New upvalue captured by `setCatalogIndicies`: `eFG`
+- New upvalue captured by `setCatalogIndicies`: `gfq`
+- Upvalue no longer captured by `setCatalogIndicies`: `cWi`
+- Upvalue no longer captured by `setCatalogIndicies`: `eDL`
+- Upvalue no longer captured by `setCatalogIndicies`: `geR`
+- New upvalue captured by `OutfitSwitcherFrameContainer`: `gdT`
+- New upvalue captured by `OutfitSwitcherFrameContainer`: `gea`
+- Upvalue no longer captured by `OutfitSwitcherFrameContainer`: `gdB`
+- Upvalue no longer captured by `OutfitSwitcherFrameContainer`: `gdu`
+- New function: `noOp`
+- New function: `gfB`
+- New upvalue captured by `onSwitchSelected`: `fOD`
+- Upvalue no longer captured by `onSwitchSelected`: `fOe`
+- New upvalue captured by `shouldShowConfirmationDialog`: `dwu`
+- Upvalue no longer captured by `shouldShowConfirmationDialog`: `dsq`
+- New upvalue captured by `getItemIconType`: `eFG`
+- Upvalue no longer captured by `getItemIconType`: `eDL`
+- New upvalue captured by `getItemStatusStyle`: `eFG`
+- Upvalue no longer captured by `getItemStatusStyle`: `eDL`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dzV`
+- New upvalue captured by `init`: `eFG`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `eDL`
+- New upvalue captured by `activateDetailsButton`: `dBR`
+- New upvalue captured by `activateDetailsButton`: `dzV`
+- Upvalue no longer captured by `activateDetailsButton`: `dvR`
+- Upvalue no longer captured by `activateDetailsButton`: `dxN`
+- New upvalue captured by `onOverlayClosed`: `cQu`
+- Upvalue no longer captured by `onOverlayClosed`: `cQt`
+- New upvalue captured by `maybeShowNonBlockingR15Prompt`: `dwu`
+- Upvalue no longer captured by `maybeShowNonBlockingR15Prompt`: `dsq`
+- New upvalue captured by `onItemClick`: `dwu`
+- New upvalue captured by `onItemClick`: `eFG`
+- Upvalue no longer captured by `onItemClick`: `dsq`
+- Upvalue no longer captured by `onItemClick`: `eDL`
+- New upvalue captured by `toggleEquip`: `dwu`
+- New upvalue captured by `toggleEquip`: `dxM_1`
+- New upvalue captured by `toggleEquip`: `dxY`
+- Upvalue no longer captured by `toggleEquip`: `dsq`
+- Upvalue no longer captured by `toggleEquip`: `dtI_1`
+- Upvalue no longer captured by `toggleEquip`: `dtU`
+- New function: `var20200`
+- New upvalue captured by `renderDetailsButton`: `gfD`
+- Upvalue no longer captured by `renderDetailsButton`: `gfe`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `eFG`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `eDL`
+- New upvalue captured by `onActivated`: `cQu`
+- New upvalue captured by `onActivated`: `fFlagAXMigrateAXToGlobalAutofocus`
+- New upvalue captured by `checkFetchInfo`: `dwu`
+- Upvalue no longer captured by `checkFetchInfo`: `dsq`
+- New upvalue captured by `addUnifiedEventLogging`: `eFG`
+- Upvalue no longer captured by `addUnifiedEventLogging`: `eDL`
+- New upvalue captured by `fetchItemInfo`: `fOz`
+- Upvalue no longer captured by `fetchItemInfo`: `fOa`
+- New upvalue captured by `toggleEquipAsset`: `fOD`
+- Upvalue no longer captured by `toggleEquipAsset`: `fOe`
+- New upvalue captured by `equipOutfitThunk`: `fNF`
+- Upvalue no longer captured by `equipOutfitThunk`: `fNg`
+- New upvalue captured by `sendAnalytics`: `gdJ`
+- Upvalue no longer captured by `sendAnalytics`: `gdk`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `openItemDetails`: `fPF`
+- Upvalue no longer captured by `openItemDetails`: `fPg`
+- New function: `var20228`
+- New upvalue captured by `fetchInitialPage`: `dwu_1`
+- New upvalue captured by `fetchInitialPage`: `eFG`
+- New upvalue captured by `fetchInitialPage`: `fOA`
+- Upvalue no longer captured by `fetchInitialPage`: `dsq_1`
+- Upvalue no longer captured by `fetchInitialPage`: `eDL`
+- Upvalue no longer captured by `fetchInitialPage`: `fOb`
+- New upvalue captured by `isWearingAssetOrOutfit`: `dwu`
+- New upvalue captured by `isWearingAssetOrOutfit`: `dyN`
+- New upvalue captured by `isWearingAssetOrOutfit`: `fNH`
+- Upvalue no longer captured by `isWearingAssetOrOutfit`: `dsq`
+- Upvalue no longer captured by `isWearingAssetOrOutfit`: `duJ`
+- Upvalue no longer captured by `isWearingAssetOrOutfit`: `fNi`
+- Upvalue no longer captured by `gfG`: `var1 (write)`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dxM`
+- New upvalue captured by `init`: `dxY`
+- New upvalue captured by `init`: `dyr`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dtI`
+- Upvalue no longer captured by `init`: `dtU`
+- Upvalue no longer captured by `init`: `dun`
+- New upvalue captured by `loadMoreUserInventoryItems`: `dwu`
+- New upvalue captured by `loadMoreUserInventoryItems`: `dxM`
+- New upvalue captured by `loadMoreUserInventoryItems`: `dxY`
+- New upvalue captured by `loadMoreUserInventoryItems`: `dyr`
+- Upvalue no longer captured by `loadMoreUserInventoryItems`: `dsq`
+- Upvalue no longer captured by `loadMoreUserInventoryItems`: `dtI`
+- Upvalue no longer captured by `loadMoreUserInventoryItems`: `dtU`
+- Upvalue no longer captured by `loadMoreUserInventoryItems`: `dun`
+- New upvalue captured by `renderNonOutfitItemCard`: `cQu`
+- Upvalue no longer captured by `renderNonOutfitItemCard`: `cQt`
+- New upvalue captured by `getShowAddOutfitButton`: `dxM`
+- Upvalue no longer captured by `getShowAddOutfitButton`: `dtI`
+- New upvalue captured by `renderGenericItemCard`: `dxM`
+- Upvalue no longer captured by `renderGenericItemCard`: `dtI`
+- New upvalue captured by `renderOutfitItemCard`: `cQu`
+- Upvalue no longer captured by `renderOutfitItemCard`: `cQt`
+- Upvalue no longer captured by `onActivated`: `fFlagAXMigrateAXToGlobalAutofocus`
+- Upvalue no longer captured by `onActivated`: `wasLastInputGamepad`
+- New upvalue captured by `renderRecommendedItems`: `dxM`
+- New upvalue captured by `renderRecommendedItems`: `gey`
+- Upvalue no longer captured by `renderRecommendedItems`: `dtI`
+- Upvalue no longer captured by `renderRecommendedItems`: `gdZ`
+- New upvalue captured by `renderItemsList`: `cQu`
+- New upvalue captured by `renderItemsList`: `cRs`
+- New upvalue captured by `renderItemsList`: `dJQ`
+- New upvalue captured by `renderItemsList`: `dwu`
+- New upvalue captured by `renderItemsList`: `dxM`
+- New upvalue captured by `renderItemsList`: `dxY`
+- New upvalue captured by `renderItemsList`: `dyr`
+- New upvalue captured by `renderItemsList`: `eDK`
+- New upvalue captured by `renderItemsList`: `eFG`
+- New upvalue captured by `renderItemsList`: `fUo`
+- New upvalue captured by `renderItemsList`: `fWf`
+- New upvalue captured by `renderItemsList`: `geq`
+- New upvalue captured by `renderItemsList`: `gew`
+- New upvalue captured by `renderItemsList`: `gfs`
+- Upvalue no longer captured by `renderItemsList`: `cQt`
+- Upvalue no longer captured by `renderItemsList`: `cRr`
+- Upvalue no longer captured by `renderItemsList`: `dGX`
+- Upvalue no longer captured by `renderItemsList`: `dsq`
+- Upvalue no longer captured by `renderItemsList`: `dtI`
+- Upvalue no longer captured by `renderItemsList`: `dtU`
+- Upvalue no longer captured by `renderItemsList`: `dun`
+- Upvalue no longer captured by `renderItemsList`: `eBP`
+- Upvalue no longer captured by `renderItemsList`: `eDL`
+- Upvalue no longer captured by `renderItemsList`: `fTP`
+- Upvalue no longer captured by `renderItemsList`: `fVG`
+- Upvalue no longer captured by `renderItemsList`: `gdR`
+- Upvalue no longer captured by `renderItemsList`: `gdX`
+- Upvalue no longer captured by `renderItemsList`: `geT`
+- New upvalue captured by `renderWithProviders`: `cRs`
+- Upvalue no longer captured by `renderWithProviders`: `cRr`
+- New upvalue captured by `onActivated`: `fFlagAXMigrateAXToGlobalAutofocus`
+- New upvalue captured by `onActivated`: `wasLastInputGamepad`
+- Upvalue no longer captured by `onActivated`: `userInputService`
+- Upvalue no longer captured by `onActivated`: `value`
+- New upvalue captured by `getEquippedOutfit`: `fNH`
+- Upvalue no longer captured by `getEquippedOutfit`: `fNi`
+- New upvalue captured by `updateItems`: `dwu`
+- New upvalue captured by `updateItems`: `fNH`
+- Upvalue no longer captured by `updateItems`: `dsq`
+- Upvalue no longer captured by `updateItems`: `fNi`
+- New upvalue captured by `didMount`: `cRs`
+- Upvalue no longer captured by `didMount`: `cRr`
+- New upvalue captured by `didUpdate`: `cRs`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- New upvalue captured by `getUserInventory`: `gfE`
+- Upvalue no longer captured by `getUserInventory`: `gff`
+- New upvalue captured by `getUserInventoryV2`: `gdU`
+- Upvalue no longer captured by `getUserInventoryV2`: `gdv`
+- New upvalue captured by `getOutfits`: `fQa`
+- Upvalue no longer captured by `getOutfits`: `fPB`
+- New upvalue captured by `sendShopForMoreAnalytics`: `gfG`
+- Upvalue no longer captured by `sendShopForMoreAnalytics`: `gfh`
+- New upvalue captured by `dispatchSetOwnedItemIdsBySubtype`: `dxU`
+- Upvalue no longer captured by `dispatchSetOwnedItemIdsBySubtype`: `dtQ`
+- New upvalue captured by `selectCategoryInfo`: `eFG`
+- Upvalue no longer captured by `selectCategoryInfo`: `eDL`
+- New upvalue captured by `selectAssetTypeKey`: `fNH`
+- Upvalue no longer captured by `selectAssetTypeKey`: `fNi`
+- New upvalue captured by `makeSelectFetchStatus`: `cRs`
+- Upvalue no longer captured by `makeSelectFetchStatus`: `cRr`
+- New function: `var20435`
+- New function: `var20436`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `dsq`
+- New upvalue captured by `onSlotActivated`: `dwu`
+- Upvalue no longer captured by `onSlotActivated`: `dsq`
+- New function: `var20449`
+- New upvalue captured by `render`: `gfx`
+- New upvalue captured by `render`: `gfy`
+- Upvalue no longer captured by `render`: `geY`
+- Upvalue no longer captured by `render`: `geZ`
+- New upvalue captured by `setSelectedEmoteSlot`: `dyT`
+- Upvalue no longer captured by `setSelectedEmoteSlot`: `duP`
+- New upvalue captured by `PromptComposer`: `gfS`
+- Upvalue no longer captured by `PromptComposer`: `gfu`
+- New upvalue captured by `useResponsiveEdgeSurface`: `gfS`
+- Upvalue no longer captured by `useResponsiveEdgeSurface`: `gft`
+- New upvalue captured by `disconnectActiveInput`: `var20481 (write)`
+- New upvalue captured by `disconnectActiveInput`: `var20482 (write)`
+- New upvalue captured by `disconnectActiveInput`: `var20483 (write)`
+- Upvalue no longer captured by `disconnectActiveInput`: `var20351 (write)`
+- Upvalue no longer captured by `disconnectActiveInput`: `var20352 (write)`
+- Upvalue no longer captured by `disconnectActiveInput`: `var20353 (write)`
+- New upvalue captured by `maybeReleaseFocus`: `var20481 (write)`
+- New upvalue captured by `maybeReleaseFocus`: `var20482 (write)`
+- New upvalue captured by `maybeReleaseFocus`: `var20483 (write)`
+- Upvalue no longer captured by `maybeReleaseFocus`: `var20351 (write)`
+- Upvalue no longer captured by `maybeReleaseFocus`: `var20352 (write)`
+- Upvalue no longer captured by `maybeReleaseFocus`: `var20353 (write)`
+- New upvalue captured by `BackgroundGenerationComposerContentContainer`: `gfS`
+- New upvalue captured by `BackgroundGenerationComposerContentContainer`: `gfW`
+- New upvalue captured by `BackgroundGenerationComposerContentContainer`: `gfY`
+- Upvalue no longer captured by `BackgroundGenerationComposerContentContainer`: `gft`
+- Upvalue no longer captured by `BackgroundGenerationComposerContentContainer`: `gfx`
+- Upvalue no longer captured by `BackgroundGenerationComposerContentContainer`: `gfz`
+- New upvalue captured by `gfU`: `var1 (write)`
+- New upvalue captured by `onActivated`: `userInputService`
+- New upvalue captured by `onActivated`: `value`
+- Upvalue no longer captured by `onActivated`: `fFlagAXMigrateCategoryTooltip`
+- New upvalue captured by `ggi`: `var1 (write)`
+- New upvalue captured by `ggj`: `var1 (write)`
+- Upvalue no longer captured by `ggp`: `var1 (write)`
+- Upvalue no longer captured by `ggq`: `var1 (write)`
+- New upvalue captured by `reschedule`: `ggs`
+- New upvalue captured by `reschedule`: `var20556 (write)`
+- Upvalue no longer captured by `reschedule`: `gfT`
+- Upvalue no longer captured by `reschedule`: `var20426 (write)`
+- New function: `var20556`
+- Upvalue no longer captured by `ggt`: `var1 (write)`
+- New upvalue captured by `pollConfig`: `ggg`
+- Upvalue no longer captured by `pollConfig`: `gfH`
+- New upvalue captured by `emitDuration`: `ggt`
+- Upvalue no longer captured by `emitDuration`: `gfU`
+- New upvalue captured by `fail`: `ggt`
+- Upvalue no longer captured by `fail`: `gfU`
+- New upvalue captured by `succeed`: `ggt`
+- Upvalue no longer captured by `succeed`: `gfU`
+- New upvalue captured by `pollGenerationStatus`: `ggg`
+- New upvalue captured by `pollGenerationStatus`: `ggo`
+- Upvalue no longer captured by `pollGenerationStatus`: `gfH`
+- Upvalue no longer captured by `pollGenerationStatus`: `gfP`
+- New upvalue captured by `onGenerateError`: `ggn`
+- Upvalue no longer captured by `onGenerateError`: `gfO`
+- New function: `ggB`
+- New upvalue captured by `onFlowComplete`: `ggA`
+- Upvalue no longer captured by `onFlowComplete`: `ggb`
+- New upvalue captured by `maxPromptLength`: `ggg`
+- Upvalue no longer captured by `maxPromptLength`: `gfH`
+- New upvalue captured by `clampPrompt`: `ggg`
+- Upvalue no longer captured by `clampPrompt`: `gfH`
+- New upvalue captured by `isPromptSubmittable`: `ggg`
+- Upvalue no longer captured by `isPromptSubmittable`: `gfH`
+- Upvalue no longer captured by `ggH`: `var1 (write)`
+- Upvalue no longer captured by `ggI`: `var1 (write)`
+- Upvalue no longer captured by `ggK`: `var1 (write)`
+- Upvalue no longer captured by `ggL`: `var1 (write)`
+- New upvalue captured by `emitDuration`: `ggt`
+- Upvalue no longer captured by `emitDuration`: `gfU`
+- New upvalue captured by `fail`: `ggt`
+- Upvalue no longer captured by `fail`: `gfU`
+- New upvalue captured by `succeed`: `ggt`
+- Upvalue no longer captured by `succeed`: `gfU`
+- New upvalue captured by `pollUpload`: `ggg`
+- New upvalue captured by `pollUpload`: `ggJ`
+- Upvalue no longer captured by `pollUpload`: `gfH`
+- Upvalue no longer captured by `pollUpload`: `ggk`
+- Upvalue no longer captured by `ggM`: `var1 (write)`
+- New upvalue captured by `renderItem`: `gfP`
+- Upvalue no longer captured by `renderItem`: `gfq`
+- New upvalue captured by `gfN`: `var1 (write)`
+- New function: `var20715`
+- New upvalue captured by `_`: `dzg`
+- Upvalue no longer captured by `_`: `dvc`
+- New upvalue captured by `fetchItems`: `dzg`
+- New upvalue captured by `fetchItems`: `fym`
+- Upvalue no longer captured by `fetchItems`: `dvc`
+- Upvalue no longer captured by `fetchItems`: `fxN`
+- New upvalue captured by `selectIsR6`: `dwu`
+- Upvalue no longer captured by `selectIsR6`: `dsq`
+- New upvalue captured by `useBackgroundTileState`: `dwu`
+- Upvalue no longer captured by `useBackgroundTileState`: `dsq`
+- New function: `var20827`
+- New function: `var20827`
+- New upvalue captured by `dispatchDetailsFetchIfNeeded`: `fXl`
+- Upvalue no longer captured by `dispatchDetailsFetchIfNeeded`: `fWM`
+- New upvalue captured by `selectCurrentOwnedItemIdToIsWearing`: `fNH`
+- New upvalue captured by `selectCurrentOwnedItemIdToIsWearing`: `gfF`
+- Upvalue no longer captured by `selectCurrentOwnedItemIdToIsWearing`: `fNi`
+- Upvalue no longer captured by `selectCurrentOwnedItemIdToIsWearing`: `gfg`
+- New function: `var20983`
+- New upvalue captured by `renderItem`: `dwC`
+- New upvalue captured by `renderItem`: `dwu`
+- New upvalue captured by `renderItem`: `geC`
+- New upvalue captured by `renderItem`: `ggS`
+- New upvalue captured by `renderItem`: `var20960 (write)`
+- New upvalue captured by `renderItem`: `var20961 (write)`
+- New upvalue captured by `renderItem`: `var20979 (write)`
+- Upvalue no longer captured by `renderItem`: `dsq`
+- Upvalue no longer captured by `renderItem`: `dsy`
+- Upvalue no longer captured by `renderItem`: `ged`
+- Upvalue no longer captured by `renderItem`: `ggt`
+- Upvalue no longer captured by `renderItem`: `var20830 (write)`
+- Upvalue no longer captured by `renderItem`: `var20831 (write)`
+- Upvalue no longer captured by `renderItem`: `var20849 (write)`
+- New upvalue captured by `ghc`: `var1 (write)`
+- New upvalue captured by `selectScalesState`: `dxM`
+- Upvalue no longer captured by `selectScalesState`: `dtI`
+- New upvalue captured by `render`: `ghd`
+- Upvalue no longer captured by `render`: `ggE`
+- New upvalue captured by `setScales`: `dxO`
+- Upvalue no longer captured by `setScales`: `dtK`
+- New upvalue captured by `ghb`: `var1 (write)`
+- New upvalue captured by `selectScalesState`: `dxM`
+- Upvalue no longer captured by `selectScalesState`: `dtI`
+- New upvalue captured by `render`: `ghd`
+- Upvalue no longer captured by `render`: `ggE`
+- New upvalue captured by `setScales`: `dxO`
+- Upvalue no longer captured by `setScales`: `dtK`
+- New upvalue captured by `ghf`: `var1 (write)`
+- New upvalue captured by `ghi`: `var1 (write)`
+- New upvalue captured by `selectHeadState`: `dxM`
+- Upvalue no longer captured by `selectHeadState`: `dtI`
+- New function: `var21139`
+- New function: `var21140`
+- New upvalue captured by `init`: `cWj`
+- Upvalue no longer captured by `init`: `cWi`
+- New upvalue captured by `convertHeadValueToSliderValue`: `cWj`
+- Upvalue no longer captured by `convertHeadValueToSliderValue`: `cWi`
+- New upvalue captured by `render`: `dxM`
+- Upvalue no longer captured by `render`: `dtI`
+- New upvalue captured by `setScales`: `dxO`
+- Upvalue no longer captured by `setScales`: `dtK`
+- New upvalue captured by `sendAnalytics`: `gdJ`
+- Upvalue no longer captured by `sendAnalytics`: `gdk`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `fNH`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `fNi`
+- New upvalue captured by `toggleAvatarType`: `dwu`
+- New upvalue captured by `toggleAvatarType`: `fNH`
+- Upvalue no longer captured by `toggleAvatarType`: `dsq`
+- Upvalue no longer captured by `toggleAvatarType`: `fNi`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- New upvalue captured by `setAvatarType`: `dxL`
+- Upvalue no longer captured by `setAvatarType`: `dtH`
+- New upvalue captured by `sendAnalytics`: `gdJ`
+- Upvalue no longer captured by `sendAnalytics`: `gdk`
+- New upvalue captured by `render`: `dxM`
+- New upvalue captured by `render`: `ghb`
+- New upvalue captured by `render`: `ghf`
+- New upvalue captured by `render`: `ghk`
+- Upvalue no longer captured by `render`: `dtI`
+- Upvalue no longer captured by `render`: `ggC`
+- Upvalue no longer captured by `render`: `ggG`
+- Upvalue no longer captured by `render`: `ggL`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dxX`
+- New upvalue captured by `renderWithProviders`: `dxY`
+- New upvalue captured by `renderWithProviders`: `gdE`
+- New upvalue captured by `renderWithProviders`: `gdR`
+- New upvalue captured by `renderWithProviders`: `gfI`
+- New upvalue captured by `renderWithProviders`: `gfu`
+- New upvalue captured by `renderWithProviders`: `gfy`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dtT`
+- Upvalue no longer captured by `renderWithProviders`: `dtU`
+- Upvalue no longer captured by `renderWithProviders`: `gdf`
+- Upvalue no longer captured by `renderWithProviders`: `gds`
+- Upvalue no longer captured by `renderWithProviders`: `geV`
+- Upvalue no longer captured by `renderWithProviders`: `geZ`
+- Upvalue no longer captured by `renderWithProviders`: `gfj`
+- New upvalue captured by `toggleFilters`: `dBR`
+- New upvalue captured by `toggleFilters`: `gdX`
+- New upvalue captured by `toggleFilters`: `ghr`
+- Upvalue no longer captured by `toggleFilters`: `dxN`
+- Upvalue no longer captured by `toggleFilters`: `gdy`
+- Upvalue no longer captured by `toggleFilters`: `ggS`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `dsq`
+- New upvalue captured by `onPressHoldInputBegan`: `dwu`
+- Upvalue no longer captured by `onPressHoldInputBegan`: `dsq`
+- New upvalue captured by `getScrollToLocation`: `dwu`
+- Upvalue no longer captured by `getScrollToLocation`: `dsq`
+- Upvalue no longer captured by `ghA`: `var1 (write)`
+- New upvalue captured by `init`: `eFG`
+- Upvalue no longer captured by `init`: `eDL`
+- New upvalue captured by `checkShowGradient`: `eFG`
+- Upvalue no longer captured by `checkShowGradient`: `eDL`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `ghA`
+- New upvalue captured by `render`: `ghq`
+- New upvalue captured by `render`: `ghw`
+- New upvalue captured by `render`: `ghx`
+- New upvalue captured by `render`: `ghy`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `ggR`
+- Upvalue no longer captured by `render`: `ggX`
+- Upvalue no longer captured by `render`: `ggY`
+- Upvalue no longer captured by `render`: `ggZ`
+- Upvalue no longer captured by `render`: `ghb`
+- Upvalue no longer captured by `ghB`: `var1 (write)`
+- Upvalue no longer captured by `ghE`: `var1 (write)`
+- New upvalue captured by `renderButtonChild`: `ghE`
+- Upvalue no longer captured by `renderButtonChild`: `ghf`
+- New upvalue captured by `renderWithLocalized`: `dyr`
+- New upvalue captured by `renderWithLocalized`: `ghE`
+- Upvalue no longer captured by `renderWithLocalized`: `dun`
+- Upvalue no longer captured by `renderWithLocalized`: `ghf`
+- New upvalue captured by `init`: `dJN`
+- New upvalue captured by `init`: `dwy`
+- New upvalue captured by `init`: `dyr`
+- Upvalue no longer captured by `init`: `dGU`
+- Upvalue no longer captured by `init`: `dsu`
+- Upvalue no longer captured by `init`: `dun`
+- New upvalue captured by `onActivated`: `fFlagAXMigrateCategoryTooltip`
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `constants`
+- Upvalue no longer captured by `onActivated`: `duz`
+- Upvalue no longer captured by `onActivated`: `fRH`
+- Upvalue no longer captured by `onActivated`: `getAssetTypesByCategory`
+- Upvalue no longer captured by `ghH`: `var1 (write)`
+- New upvalue captured by `hasOutfitNotification`: `dwu`
+- New upvalue captured by `hasOutfitNotification`: `dxM`
+- Upvalue no longer captured by `hasOutfitNotification`: `dsq`
+- Upvalue no longer captured by `hasOutfitNotification`: `dtI`
+- New upvalue captured by `hasNewItemNotification`: `dwu`
+- New upvalue captured by `hasNewItemNotification`: `dxM`
+- New upvalue captured by `hasNewItemNotification`: `dxY`
+- New upvalue captured by `hasNewItemNotification`: `fNH`
+- Upvalue no longer captured by `hasNewItemNotification`: `dsq`
+- Upvalue no longer captured by `hasNewItemNotification`: `dtI`
+- Upvalue no longer captured by `hasNewItemNotification`: `dtU`
+- Upvalue no longer captured by `hasNewItemNotification`: `fNi`
+- New upvalue captured by `hasNewItemNotificationV2`: `dwu`
+- New upvalue captured by `hasNewItemNotificationV2`: `dxM`
+- New upvalue captured by `hasNewItemNotificationV2`: `dxY`
+- New upvalue captured by `hasNewItemNotificationV2`: `fNH`
+- Upvalue no longer captured by `hasNewItemNotificationV2`: `dsq`
+- Upvalue no longer captured by `hasNewItemNotificationV2`: `dtI`
+- Upvalue no longer captured by `hasNewItemNotificationV2`: `dtU`
+- Upvalue no longer captured by `hasNewItemNotificationV2`: `fNi`
+- New upvalue captured by `onTooltipDismiss`: `ghH`
+- Upvalue no longer captured by `onTooltipDismiss`: `ghi`
+- New upvalue captured by `renderCategoryButton`: `dwy`
+- New upvalue captured by `renderCategoryButton`: `dyr`
+- New upvalue captured by `renderCategoryButton`: `ghC`
+- New upvalue captured by `renderCategoryButton`: `ghH`
+- Upvalue no longer captured by `renderCategoryButton`: `dsu`
+- Upvalue no longer captured by `renderCategoryButton`: `dun`
+- Upvalue no longer captured by `renderCategoryButton`: `ghd`
+- Upvalue no longer captured by `renderCategoryButton`: `ghi`
+- New upvalue captured by `getScrollingListChildren`: `cQu`
+- New upvalue captured by `getScrollingListChildren`: `ghB`
+- Upvalue no longer captured by `getScrollingListChildren`: `cQt`
+- Upvalue no longer captured by `getScrollingListChildren`: `ghc`
+- New upvalue captured by `getSubNavigationChildren`: `ghv`
+- Upvalue no longer captured by `getSubNavigationChildren`: `ggW`
+- New upvalue captured by `render`: `dxY`
+- Upvalue no longer captured by `render`: `dtU`
+- New upvalue captured by `removeNewItemNotificationIfNeeded`: `dwu`
+- New upvalue captured by `removeNewItemNotificationIfNeeded`: `dxM`
+- New upvalue captured by `removeNewItemNotificationIfNeeded`: `dyg`
+- Upvalue no longer captured by `removeNewItemNotificationIfNeeded`: `dsq`
+- Upvalue no longer captured by `removeNewItemNotificationIfNeeded`: `dtI`
+- Upvalue no longer captured by `removeNewItemNotificationIfNeeded`: `duc`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dyg`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `duc`
+- New upvalue captured by `promptR15UpgradeIfNecessary`: `dwu`
+- Upvalue no longer captured by `promptR15UpgradeIfNecessary`: `dsq`
+- New upvalue captured by `selectCategory`: `dwu`
+- New upvalue captured by `selectCategory`: `dyg`
+- Upvalue no longer captured by `selectCategory`: `dsq`
+- Upvalue no longer captured by `selectCategory`: `duc`
+- New upvalue captured by `selectSubcategory`: `dwu`
+- New upvalue captured by `selectSubcategory`: `dyg`
+- Upvalue no longer captured by `selectSubcategory`: `dsq`
+- Upvalue no longer captured by `selectSubcategory`: `duc`
+- New upvalue captured by `willUpdate`: `dBR`
+- New upvalue captured by `willUpdate`: `fYu`
+- Upvalue no longer captured by `willUpdate`: `dxN`
+- Upvalue no longer captured by `willUpdate`: `fXV`
+- New upvalue captured by `render`: `dyg`
+- New upvalue captured by `render`: `gho`
+- Upvalue no longer captured by `render`: `duc`
+- Upvalue no longer captured by `render`: `ggP`
+- New upvalue captured by `processAvatarEditorDeepLink`: `fYu`
+- Upvalue no longer captured by `processAvatarEditorDeepLink`: `fXV`
+- New upvalue captured by `setCategoryAndSubcategory`: `fNT`
+- Upvalue no longer captured by `setCategoryAndSubcategory`: `fNu`
+- New upvalue captured by `removeNewAssetNotification`: `dzl`
+- Upvalue no longer captured by `removeNewAssetNotification`: `dvh`
+- New upvalue captured by `removeNewOutfitNotification`: `dzn`
+- Upvalue no longer captured by `removeNewOutfitNotification`: `dvj`
+- New upvalue captured by `exit3DFullView`: `ghr`
+- Upvalue no longer captured by `exit3DFullView`: `ggS`
+- New upvalue captured by `navigatedToDeepLinkAvatarEditor`: `dwq`
+- Upvalue no longer captured by `navigatedToDeepLinkAvatarEditor`: `dsm`
+- New upvalue captured by `ghP`: `var1 (write)`
+- New upvalue captured by `getSlotBasedEditorAnalyticsInner`: `fNz`
+- New upvalue captured by `getSlotBasedEditorAnalyticsInner`: `var21711 (write)`
+- Upvalue no longer captured by `getSlotBasedEditorAnalyticsInner`: `fNa`
+- Upvalue no longer captured by `getSlotBasedEditorAnalyticsInner`: `var21581 (write)`
+- New upvalue captured by `get`: `fNz`
+- New upvalue captured by `get`: `var21711 (write)`
+- Upvalue no longer captured by `get`: `fNa`
+- Upvalue no longer captured by `get`: `var21581 (write)`
+- New upvalue captured by `ghR`: `var1 (write)`
+- New upvalue captured by `ghT`: `var1 (write)`
+- New upvalue captured by `ghS`: `var1 (write)`
+- New upvalue captured by `ghV`: `var1 (write)`
+- New upvalue captured by `ghU`: `var1 (write)`
+- New function: `var21776`
+- New upvalue captured by `getCategoryIndices`: `dyg`
+- Upvalue no longer captured by `getCategoryIndices`: `duc`
+- New function: `var21838`
+- New function: `var21839`
+- New upvalue captured by `onActivated`: `constants`
+- New upvalue captured by `onActivated`: `dyD`
+- New upvalue captured by `onActivated`: `fSg`
+- New upvalue captured by `onActivated`: `getAssetTypesByCategory`
+- Upvalue no longer captured by `onActivated`: `duA`
+- Upvalue no longer captured by `onActivated`: `i`
+- Upvalue no longer captured by `onActivated`: `itemView`
+- Upvalue no longer captured by `onActivated`: `navigationParams`
+- New upvalue captured by `clearAll`: `dyD`
+- Upvalue no longer captured by `clearAll`: `duz`
+- New upvalue captured by `renderHeaderSlot`: `dxM`
+- New upvalue captured by `renderHeaderSlot`: `fWX`
+- Upvalue no longer captured by `renderHeaderSlot`: `dtI`
+- Upvalue no longer captured by `renderHeaderSlot`: `fWy`
+- New upvalue captured by `onActivated`: `dyE`
+- New upvalue captured by `onActivated`: `i`
+- New upvalue captured by `onActivated`: `itemView`
+- New upvalue captured by `onActivated`: `navigationParams`
+- New upvalue captured by `SubcategoryPill`: `dLp`
+- New upvalue captured by `SubcategoryPill`: `fNs`
+- New upvalue captured by `SubcategoryPill`: `fNT`
+- Upvalue no longer captured by `SubcategoryPill`: `dIw`
+- Upvalue no longer captured by `SubcategoryPill`: `fMT`
+- Upvalue no longer captured by `SubcategoryPill`: `fNu`
+- New function: `LUAUFORGE_MODULE_GLOBALS_ghZ_SubNavigationBar`
+- New upvalue captured by `init`: `dyg`
+- Upvalue no longer captured by `init`: `duc`
+- New upvalue captured by `navigate`: `dyg`
+- Upvalue no longer captured by `navigate`: `duc`
+- New upvalue captured by `render`: `cRs`
+- New upvalue captured by `render`: `dwu`
+- New upvalue captured by `render`: `gdD`
+- New upvalue captured by `render`: `ghN`
+- New upvalue captured by `render`: `ghZ`
+- Upvalue no longer captured by `render`: `cRr`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `render`: `gde`
+- Upvalue no longer captured by `render`: `ghA`
+- Upvalue no longer captured by `render`: `gho`
+- New upvalue captured by `didUpdate`: `dwy`
+- New upvalue captured by `didUpdate`: `dyr`
+- Upvalue no longer captured by `didUpdate`: `dsu`
+- Upvalue no longer captured by `didUpdate`: `dun`
+- New upvalue captured by `setCategoryAndSubcategory`: `fNT`
+- Upvalue no longer captured by `setCategoryAndSubcategory`: `fNu`
+- New upvalue captured by `exit3DFullView`: `ghr`
+- Upvalue no longer captured by `exit3DFullView`: `ggS`
+- New upvalue captured by `TwoTabSegmentedMenu`: `dLp`
+- New upvalue captured by `TwoTabSegmentedMenu`: `eFs`
+- New upvalue captured by `TwoTabSegmentedMenu`: `fNs`
+- Upvalue no longer captured by `TwoTabSegmentedMenu`: `dIw`
+- Upvalue no longer captured by `TwoTabSegmentedMenu`: `eDx`
+- Upvalue no longer captured by `TwoTabSegmentedMenu`: `fMT`
+- New upvalue captured by `gih`: `var1 (write)`
+- New upvalue captured by `gij`: `var1 (write)`
+- New upvalue captured by `render`: `eAa`
+- Upvalue no longer captured by `render`: `eyf`
+- New upvalue captured by `renderButton`: `eFG`
+- Upvalue no longer captured by `renderButton`: `eDL`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `dsq`
+- Upvalue no longer captured by `onActivated`: `selectCategoryId`
+- Upvalue no longer captured by `onActivated`: `selectSubcategoryId`
+- Upvalue no longer captured by `gio`: `var1 (write)`
+- Upvalue no longer captured by `giq`: `var1 (write)`
+- Upvalue no longer captured by `gir`: `var1 (write)`
+- Upvalue no longer captured by `gis`: `var1 (write)`
+- Upvalue no longer captured by `git`: `var1 (write)`
+- Upvalue no longer captured by `giu`: `var1 (write)`
+- New upvalue captured by `giw`: `var1 (write)`
+- New upvalue captured by `fetchInventory`: `var22126 (write)`
+- New upvalue captured by `fetchInventory`: `var22129 (write)`
+- Upvalue no longer captured by `fetchInventory`: `var21996 (write)`
+- Upvalue no longer captured by `fetchInventory`: `var21999 (write)`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `eFG`
+- New upvalue captured by `init`: `gir`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `eDL`
+- Upvalue no longer captured by `init`: `ghS`
+- New upvalue captured by `changeView`: `eFG`
+- Upvalue no longer captured by `changeView`: `eDL`
+- New upvalue captured by `didMount`: `dwy`
+- New upvalue captured by `didMount`: `git`
+- New upvalue captured by `didMount`: `giu`
+- Upvalue no longer captured by `didMount`: `dsu`
+- Upvalue no longer captured by `didMount`: `ghU`
+- Upvalue no longer captured by `didMount`: `ghV`
+- New upvalue captured by `getInputBindings`: `dBR`
+- Upvalue no longer captured by `getInputBindings`: `dxN`
+- New upvalue captured by `render`: `dwW`
+- New upvalue captured by `render`: `eFM`
+- New upvalue captured by `render`: `fND`
+- New upvalue captured by `render`: `fVx`
+- New upvalue captured by `render`: `fVy`
+- New upvalue captured by `render`: `fXL`
+- New upvalue captured by `render`: `fXr`
+- New upvalue captured by `render`: `gdC`
+- New upvalue captured by `render`: `gib`
+- New upvalue captured by `render`: `gid`
+- New upvalue captured by `render`: `giq`
+- Upvalue no longer captured by `render`: `dsS`
+- Upvalue no longer captured by `render`: `eDR`
+- Upvalue no longer captured by `render`: `fNe`
+- Upvalue no longer captured by `render`: `fUY`
+- Upvalue no longer captured by `render`: `fUZ`
+- Upvalue no longer captured by `render`: `fWS`
+- Upvalue no longer captured by `render`: `fXm`
+- Upvalue no longer captured by `render`: `gdd`
+- Upvalue no longer captured by `render`: `ghC`
+- Upvalue no longer captured by `render`: `ghE`
+- Upvalue no longer captured by `render`: `ghR`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- Upvalue no longer captured by `giG`: `var1 (write)`
+- Upvalue no longer captured by `giI`: `var1 (write)`
+- New upvalue captured by `getNext`: `var22201 (write)`
+- Upvalue no longer captured by `getNext`: `var22071 (write)`
+- New function: `var22294`
+- New upvalue captured by `renderItem`: `dwC`
+- New upvalue captured by `renderItem`: `geC`
+- New upvalue captured by `renderItem`: `var22291 (write)`
+- Upvalue no longer captured by `renderItem`: `dsy`
+- Upvalue no longer captured by `renderItem`: `ged`
+- Upvalue no longer captured by `renderItem`: `var22161 (write)`
+- Upvalue no longer captured by `giV`: `var1 (write)`
+- New upvalue captured by `constructWidgetAnalyticsInfo`: `giZ`
+- Upvalue no longer captured by `constructWidgetAnalyticsInfo`: `giA`
+- New upvalue captured by `constructWidgetRenderInfo`: `geS`
+- Upvalue no longer captured by `constructWidgetRenderInfo`: `get`
+- New function: `var22452`
+- New upvalue captured by `render`: `geS`
+- New upvalue captured by `render`: `var22452 (write)`
+- New upvalue captured by `render`: `var22453 (write)`
+- New upvalue captured by `render`: `var22454 (write)`
+- Upvalue no longer captured by `render`: `get`
+- Upvalue no longer captured by `render`: `var22322 (write)`
+- Upvalue no longer captured by `render`: `var22323 (write)`
+- Upvalue no longer captured by `render`: `var22324 (write)`
+- New upvalue captured by `maybeReserveWidgetRefCacheIndex`: `var22502 (write)`
+- New upvalue captured by `maybeReserveWidgetRefCacheIndex`: `var22505 (write)`
+- Upvalue no longer captured by `maybeReserveWidgetRefCacheIndex`: `var22372 (write)`
+- Upvalue no longer captured by `maybeReserveWidgetRefCacheIndex`: `var22375 (write)`
+- New upvalue captured by `render`: `var22509 (write)`
+- Upvalue no longer captured by `render`: `var22379 (write)`
+- New upvalue captured by `render`: `gfl`
+- New upvalue captured by `render`: `giJ`
+- New upvalue captured by `render`: `var22511 (write)`
+- New upvalue captured by `render`: `var22513 (write)`
+- Upvalue no longer captured by `render`: `geM`
+- Upvalue no longer captured by `render`: `gik`
+- Upvalue no longer captured by `render`: `var22381 (write)`
+- Upvalue no longer captured by `render`: `var22383 (write)`
+- New upvalue captured by `render`: `giT`
+- Upvalue no longer captured by `render`: `giu`
+- New upvalue captured by `render`: `giW`
+- Upvalue no longer captured by `render`: `gix`
+- New upvalue captured by `render`: `giV`
+- Upvalue no longer captured by `render`: `giw`
+- New upvalue captured by `render`: `giV`
+- Upvalue no longer captured by `render`: `giw`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gjd_useTallTileV2`
+- New upvalue captured by `gje`: `var1 (write)`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gje_useTallTileV3`
+- New upvalue captured by `gjf`: `var1 (write)`
+- New upvalue captured by `useCreatorNameTileFooterEnabledV2`: `dzL`
+- New upvalue captured by `useCreatorNameTileFooterEnabledV2`: `dzV`
+- New upvalue captured by `useCreatorNameTileFooterEnabledV2`: `eFG`
+- Upvalue no longer captured by `useCreatorNameTileFooterEnabledV2`: `dvH`
+- Upvalue no longer captured by `useCreatorNameTileFooterEnabledV2`: `dvR`
+- Upvalue no longer captured by `useCreatorNameTileFooterEnabledV2`: `eDL`
+- New function: `var22566`
+- New upvalue captured by `gjj`: `var1 (write)`
+- New upvalue captured by `keyMapper`: `dwC`
+- New upvalue captured by `keyMapper`: `dzV`
+- Upvalue no longer captured by `keyMapper`: `dsy`
+- Upvalue no longer captured by `keyMapper`: `dvR`
+- New upvalue captured by `useCachedTopics`: `dzV`
+- Upvalue no longer captured by `useCachedTopics`: `dvR`
+- New upvalue captured by `gjk`: `var1 (write)`
+- New upvalue captured by `onActivated`: `dwu`
+- New upvalue captured by `onActivated`: `selectCategoryId`
+- New upvalue captured by `onActivated`: `selectSubcategoryId`
+- Upvalue no longer captured by `onActivated`: `fOf`
+- Upvalue no longer captured by `onActivated`: `gkk`
+- Upvalue no longer captured by `onActivated`: `setAccessoryAdjustments`
+- New upvalue captured by `init`: `cWj`
+- New upvalue captured by `init`: `dwA`
+- Upvalue no longer captured by `init`: `cWi`
+- Upvalue no longer captured by `init`: `dsw`
+- New upvalue captured by `selectCategoryId`: `cWj`
+- New upvalue captured by `selectCategoryId`: `dwA`
+- Upvalue no longer captured by `selectCategoryId`: `cWi`
+- Upvalue no longer captured by `selectCategoryId`: `dsw`
+- New upvalue captured by `selectSubcategoryId`: `cWj`
+- Upvalue no longer captured by `selectSubcategoryId`: `cWi`
+- New upvalue captured by `processCatalogDeepLink`: `fYu`
+- Upvalue no longer captured by `processCatalogDeepLink`: `fXV`
+- New upvalue captured by `render`: `dwA`
+- New upvalue captured by `render`: `dzK`
+- New upvalue captured by `render`: `dzV`
+- New upvalue captured by `render`: `gho`
+- New upvalue captured by `render`: `gjn`
+- Upvalue no longer captured by `render`: `dsw`
+- Upvalue no longer captured by `render`: `dvG`
+- Upvalue no longer captured by `render`: `dvR`
+- Upvalue no longer captured by `render`: `ggP`
+- Upvalue no longer captured by `render`: `giO`
+- New upvalue captured by `setCategoryAndSubcategory`: `gfq`
+- Upvalue no longer captured by `setCategoryAndSubcategory`: `geR`
+- New upvalue captured by `setSearchCategoryAndSubcategory`: `cWj`
+- New upvalue captured by `setSearchCategoryAndSubcategory`: `dzL`
+- Upvalue no longer captured by `setSearchCategoryAndSubcategory`: `cWi`
+- Upvalue no longer captured by `setSearchCategoryAndSubcategory`: `dvH`
+- New upvalue captured by `exit3DFullView`: `ghr`
+- Upvalue no longer captured by `exit3DFullView`: `ggS`
+- New upvalue captured by `applyDeepLinkCatalogFilters`: `dwk`
+- New upvalue captured by `applyDeepLinkCatalogFilters`: `fYv`
+- Upvalue no longer captured by `applyDeepLinkCatalogFilters`: `dsg`
+- Upvalue no longer captured by `applyDeepLinkCatalogFilters`: `fXW`
+- New upvalue captured by `gjB`: `var1 (write)`
+- New upvalue captured by `init`: `cRs`
+- New upvalue captured by `init`: `cWj`
+- New upvalue captured by `init`: `dBb`
+- New upvalue captured by `init`: `eFp`
+- Upvalue no longer captured by `init`: `cRr`
+- Upvalue no longer captured by `init`: `cWi`
+- Upvalue no longer captured by `init`: `dwX`
+- Upvalue no longer captured by `init`: `eDu`
+- New upvalue captured by `loadMore`: `cRs`
+- New upvalue captured by `loadMore`: `cWj`
+- Upvalue no longer captured by `loadMore`: `cRr`
+- Upvalue no longer captured by `loadMore`: `cWi`
+- New upvalue captured by `shouldScrollBackToTopOfList`: `eFp`
+- Upvalue no longer captured by `shouldScrollBackToTopOfList`: `eDu`
+- New upvalue captured by `renderResultsList`: `cQu`
+- New upvalue captured by `renderResultsList`: `cRs`
+- New upvalue captured by `renderResultsList`: `dBb`
+- New upvalue captured by `renderResultsList`: `dwC`
+- New upvalue captured by `renderResultsList`: `eDK`
+- New upvalue captured by `renderResultsList`: `geq`
+- New upvalue captured by `renderResultsList`: `gew`
+- New upvalue captured by `renderResultsList`: `giC`
+- New upvalue captured by `renderResultsList`: `gjg`
+- New upvalue captured by `renderResultsList`: `gjs`
+- New upvalue captured by `renderResultsList`: `gjt`
+- New upvalue captured by `renderResultsList`: `gjx`
+- Upvalue no longer captured by `renderResultsList`: `cQt`
+- Upvalue no longer captured by `renderResultsList`: `cRr`
+- Upvalue no longer captured by `renderResultsList`: `dsy`
+- Upvalue no longer captured by `renderResultsList`: `dwX`
+- Upvalue no longer captured by `renderResultsList`: `eBP`
+- Upvalue no longer captured by `renderResultsList`: `gdR`
+- Upvalue no longer captured by `renderResultsList`: `gdX`
+- Upvalue no longer captured by `renderResultsList`: `gid`
+- Upvalue no longer captured by `renderResultsList`: `giH`
+- Upvalue no longer captured by `renderResultsList`: `giT`
+- Upvalue no longer captured by `renderResultsList`: `giU`
+- Upvalue no longer captured by `renderResultsList`: `giY`
+- New upvalue captured by `updateItems`: `dwu`
+- New upvalue captured by `updateItems`: `fYu`
+- Upvalue no longer captured by `updateItems`: `dsq`
+- Upvalue no longer captured by `updateItems`: `fXV`
+- New upvalue captured by `registerSduiFocusedSortHandler`: `dzV`
+- Upvalue no longer captured by `registerSduiFocusedSortHandler`: `dvR`
+- New upvalue captured by `didUpdate`: `cRs`
+- New upvalue captured by `didUpdate`: `dwu_1`
+- Upvalue no longer captured by `didUpdate`: `cRr`
+- Upvalue no longer captured by `didUpdate`: `dsq_1`
+- New upvalue captured by `_`: `dAW`
+- Upvalue no longer captured by `_`: `dwS`
+- New upvalue captured by `dispatchLoadMore`: `dJD`
+- New upvalue captured by `dispatchLoadMore`: `gcV`
+- Upvalue no longer captured by `dispatchLoadMore`: `dGK`
+- Upvalue no longer captured by `dispatchLoadMore`: `gcw`
+- New upvalue captured by `dispatchSetResultsListFocusedWidget`: `dAW`
+- Upvalue no longer captured by `dispatchSetResultsListFocusedWidget`: `dwS`
+- New upvalue captured by `dispatchClearResultsListFocusedWidget`: `dAX`
+- Upvalue no longer captured by `dispatchClearResultsListFocusedWidget`: `dwT`
+- New upvalue captured by `fetchItemData`: `fOz`
+- Upvalue no longer captured by `fetchItemData`: `fOa`
+- New upvalue captured by `handleDeepLinkEquipError`: `cWd`
+- New upvalue captured by `handleDeepLinkEquipError`: `dwp`
+- Upvalue no longer captured by `handleDeepLinkEquipError`: `cWc`
+- Upvalue no longer captured by `handleDeepLinkEquipError`: `dsl`
+- New upvalue captured by `equipCatalogDeepLinkItem`: `dwp`
+- New upvalue captured by `equipCatalogDeepLinkItem`: `fOV`
+- Upvalue no longer captured by `equipCatalogDeepLinkItem`: `dsl`
+- Upvalue no longer captured by `equipCatalogDeepLinkItem`: `fOw`
+- New function: `gjF`
+- New upvalue captured by `init`: `cQj`
+- New upvalue captured by `init`: `dzV`
+- New upvalue captured by `init`: `fPJ`
+- Upvalue no longer captured by `init`: `cQi`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `fPk`
+- New upvalue captured by `dispatchInitialSearch`: `cQj`
+- Upvalue no longer captured by `dispatchInitialSearch`: `cQi`
+- New upvalue captured by `fetchWidgetInfo`: `dzV`
+- Upvalue no longer captured by `fetchWidgetInfo`: `dvR`
+- New upvalue captured by `hasPrefetchedMarketplace`: `dBb`
+- New upvalue captured by `hasPrefetchedMarketplace`: `dwu`
+- New upvalue captured by `hasPrefetchedMarketplace`: `dwy`
+- Upvalue no longer captured by `hasPrefetchedMarketplace`: `dsq`
+- Upvalue no longer captured by `hasPrefetchedMarketplace`: `dsu`
+- Upvalue no longer captured by `hasPrefetchedMarketplace`: `dwX`
+- New upvalue captured by `updateSearchParams`: `dBb`
+- New upvalue captured by `updateSearchParams`: `dwu`
+- Upvalue no longer captured by `updateSearchParams`: `dsq`
+- Upvalue no longer captured by `updateSearchParams`: `dwX`
+- New upvalue captured by `willUpdate`: `gjD`
+- Upvalue no longer captured by `willUpdate`: `gje`
+- New upvalue captured by `renderWithStyle`: `dwC`
+- New upvalue captured by `renderWithStyle`: `giB`
+- Upvalue no longer captured by `renderWithStyle`: `dsy`
+- Upvalue no longer captured by `renderWithStyle`: `gic`
+- New upvalue captured by `handleExitAndReEnterAvatarExperience`: `dwu`
+- New upvalue captured by `handleExitAndReEnterAvatarExperience`: `dwy`
+- Upvalue no longer captured by `handleExitAndReEnterAvatarExperience`: `dsq`
+- Upvalue no longer captured by `handleExitAndReEnterAvatarExperience`: `dsu`
+- New upvalue captured by `didUpdate`: `dwu`
+- New upvalue captured by `didUpdate`: `dwy`
+- New upvalue captured by `didUpdate`: `fYu`
+- New upvalue captured by `didUpdate`: `gjE`
+- Upvalue no longer captured by `didUpdate`: `dsq`
+- Upvalue no longer captured by `didUpdate`: `dsu`
+- Upvalue no longer captured by `didUpdate`: `fXV`
+- Upvalue no longer captured by `didUpdate`: `gjf`
+- New upvalue captured by `setSearchType`: `eAG`
+- Upvalue no longer captured by `setSearchType`: `eyL`
+- New upvalue captured by `setSearchParameters`: `eAH`
+- Upvalue no longer captured by `setSearchParameters`: `eyM`
+- New upvalue captured by `dispatchSearch`: `gcU`
+- Upvalue no longer captured by `dispatchSearch`: `gcv`
+- New upvalue captured by `fetchWidgetInfo`: `gdd`
+- Upvalue no longer captured by `fetchWidgetInfo`: `gcE`
+- New upvalue captured by `dispatchRemoveSearch`: `gdi`
+- Upvalue no longer captured by `dispatchRemoveSearch`: `gcJ`
+- New upvalue captured by `clearSelectedTopics`: `dAN`
+- Upvalue no longer captured by `clearSelectedTopics`: `dwJ`
+- New upvalue captured by `resetSortAndFilters`: `dAB`
+- New upvalue captured by `resetSortAndFilters`: `gdt`
+- New upvalue captured by `resetSortAndFilters`: `gdv`
+- Upvalue no longer captured by `resetSortAndFilters`: `dwx`
+- Upvalue no longer captured by `resetSortAndFilters`: `gcU`
+- Upvalue no longer captured by `resetSortAndFilters`: `gcW`
+- Upvalue no longer captured by `gjI`: `var1 (write)`
+- Upvalue no longer captured by `gjJ`: `var1 (write)`
+- New upvalue captured by `gjL`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `eBm`
+- New upvalue captured by `init`: `eFG`
+- New upvalue captured by `init`: `gii`
+- New upvalue captured by `init`: `gim`
+- New upvalue captured by `init`: `gir`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `eDL`
+- Upvalue no longer captured by `init`: `ezr`
+- Upvalue no longer captured by `init`: `ghJ`
+- Upvalue no longer captured by `init`: `ghN`
+- Upvalue no longer captured by `init`: `ghS`
+- New upvalue captured by `changeView`: `eFG`
+- Upvalue no longer captured by `changeView`: `eDL`
+- New upvalue captured by `topBarBackButtonActivated`: `cWl`
+- Upvalue no longer captured by `topBarBackButtonActivated`: `cWk`
+- New upvalue captured by `onConfirmSearchCallback`: `eBm`
+- Upvalue no longer captured by `onConfirmSearchCallback`: `ezr`
+- New upvalue captured by `getInputBindings`: `dBR`
+- Upvalue no longer captured by `getInputBindings`: `dxN`
+- New upvalue captured by `didMount`: `dwy`
+- New upvalue captured by `didMount`: `fVI`
+- New upvalue captured by `didMount`: `git`
+- New upvalue captured by `didMount`: `giu`
+- Upvalue no longer captured by `didMount`: `dsu`
+- Upvalue no longer captured by `didMount`: `fVj`
+- Upvalue no longer captured by `didMount`: `ghU`
+- Upvalue no longer captured by `didMount`: `ghV`
+- New upvalue captured by `didUpdate`: `fVI`
+- Upvalue no longer captured by `didUpdate`: `fVj`
+- New upvalue captured by `willUpdate`: `gii`
+- Upvalue no longer captured by `willUpdate`: `ghJ`
+- New upvalue captured by `renderTopBar`: `cQj`
+- New upvalue captured by `renderTopBar`: `dBZ`
+- New upvalue captured by `renderTopBar`: `eAa`
+- New upvalue captured by `renderTopBar`: `eBm`
+- Upvalue no longer captured by `renderTopBar`: `cQi`
+- Upvalue no longer captured by `renderTopBar`: `dxV`
+- Upvalue no longer captured by `renderTopBar`: `eyf`
+- Upvalue no longer captured by `renderTopBar`: `ezr`
+- New upvalue captured by `render`: `dBa`
+- New upvalue captured by `render`: `eFM`
+- New upvalue captured by `render`: `fND`
+- New upvalue captured by `render`: `fVD`
+- New upvalue captured by `render`: `fVx`
+- New upvalue captured by `render`: `fVy`
+- New upvalue captured by `render`: `fVz`
+- New upvalue captured by `render`: `fXL`
+- New upvalue captured by `render`: `fXr`
+- New upvalue captured by `render`: `giA`
+- New upvalue captured by `render`: `gjI`
+- Upvalue no longer captured by `render`: `dwW`
+- Upvalue no longer captured by `render`: `eDR`
+- Upvalue no longer captured by `render`: `fNe`
+- Upvalue no longer captured by `render`: `fUY`
+- Upvalue no longer captured by `render`: `fUZ`
+- Upvalue no longer captured by `render`: `fVb`
+- Upvalue no longer captured by `render`: `fVf`
+- Upvalue no longer captured by `render`: `fWS`
+- Upvalue no longer captured by `render`: `fXm`
+- Upvalue no longer captured by `render`: `ghC`
+- Upvalue no longer captured by `render`: `gjk`
+- New upvalue captured by `openItemPrompt`: `fUR`
+- Upvalue no longer captured by `openItemPrompt`: `fUs`
+- New upvalue captured by `navigateIntoQuickMenu`: `gia`
+- Upvalue no longer captured by `navigateIntoQuickMenu`: `ghB`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `resetNavigationHistory`: `drA`
+- Upvalue no longer captured by `resetNavigationHistory`: `dnw`
+- New upvalue captured by `instantResetNavigationHistory`: `gdq`
+- Upvalue no longer captured by `instantResetNavigationHistory`: `gcR`
+- New upvalue captured by `resetSearchCategoryAndSubcategory`: `cWj`
+- New upvalue captured by `resetSearchCategoryAndSubcategory`: `dwu`
+- New upvalue captured by `resetSearchCategoryAndSubcategory`: `dzL`
+- Upvalue no longer captured by `resetSearchCategoryAndSubcategory`: `cWi`
+- Upvalue no longer captured by `resetSearchCategoryAndSubcategory`: `dsq`
+- Upvalue no longer captured by `resetSearchCategoryAndSubcategory`: `dvH`
+- New upvalue captured by `FetchPPEConfig`: `dzX`
+- Upvalue no longer captured by `FetchPPEConfig`: `dvT`
+- New upvalue captured by `WritePPEConfig`: `cQG`
+- New upvalue captured by `WritePPEConfig`: `dzX`
+- New upvalue captured by `WritePPEConfig`: `fRV`
+- Upvalue no longer captured by `WritePPEConfig`: `cQF`
+- Upvalue no longer captured by `WritePPEConfig`: `dvT`
+- Upvalue no longer captured by `WritePPEConfig`: `fRw`
+- New upvalue captured by `parseFetchPPEConfigResult`: `fRV`
+- Upvalue no longer captured by `parseFetchPPEConfigResult`: `fRw`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gjR_ProfilePictureEditorBottomBarHOC`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gjU_shouldProvideControlsToViewItemDetails`
+- New upvalue captured by `setEmoteAssetId`: `gjT`
+- Upvalue no longer captured by `setEmoteAssetId`: `gju`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dzV`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dvR`
+- New upvalue captured by `activateMoreButton`: `dwu`
+- New upvalue captured by `activateMoreButton`: `dzV`
+- Upvalue no longer captured by `activateMoreButton`: `dsq`
+- Upvalue no longer captured by `activateMoreButton`: `dvR`
+- New upvalue captured by `toggleSelectEmote`: `dwu`
+- Upvalue no longer captured by `toggleSelectEmote`: `dsq`
+- New upvalue captured by `renderMoreButton`: `cQu`
+- New upvalue captured by `renderMoreButton`: `gfD`
+- Upvalue no longer captured by `renderMoreButton`: `cQt`
+- Upvalue no longer captured by `renderMoreButton`: `gfe`
+- New upvalue captured by `render`: `dwu`
+- Upvalue no longer captured by `render`: `dsq`
+- New upvalue captured by `setEmoteAssetId`: `gjT`
+- Upvalue no longer captured by `setEmoteAssetId`: `gju`
+- New upvalue captured by `openItemDetails`: `fPF`
+- Upvalue no longer captured by `openItemDetails`: `fPg`
+- New upvalue captured by `init`: `fRV`
+- Upvalue no longer captured by `init`: `fRw`
+- New upvalue captured by `renderWithProviders`: `dJQ`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dxM`
+- New upvalue captured by `renderWithProviders`: `dxY`
+- New upvalue captured by `renderWithProviders`: `eFG`
+- New upvalue captured by `renderWithProviders`: `fUo`
+- New upvalue captured by `renderWithProviders`: `fWf`
+- New upvalue captured by `renderWithProviders`: `gey`
+- Upvalue no longer captured by `renderWithProviders`: `dGX`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dtI`
+- Upvalue no longer captured by `renderWithProviders`: `dtU`
+- Upvalue no longer captured by `renderWithProviders`: `eDL`
+- Upvalue no longer captured by `renderWithProviders`: `fTP`
+- Upvalue no longer captured by `renderWithProviders`: `fVG`
+- Upvalue no longer captured by `renderWithProviders`: `gdZ`
+- New upvalue captured by `setEmoteAssetId`: `gjT`
+- Upvalue no longer captured by `setEmoteAssetId`: `gju`
+- New function: `gjO`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `eAa`
+- New upvalue captured by `init`: `eFG`
+- New upvalue captured by `init`: `gim`
+- New upvalue captured by `init`: `gjR`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `eDL`
+- Upvalue no longer captured by `init`: `eyf`
+- Upvalue no longer captured by `init`: `ghN`
+- Upvalue no longer captured by `init`: `gjs`
+- New upvalue captured by `changeView`: `eFG`
+- Upvalue no longer captured by `changeView`: `eDL`
+- New upvalue captured by `onBackFromTopBar`: `cWl`
+- New upvalue captured by `onBackFromTopBar`: `dBR`
+- Upvalue no longer captured by `onBackFromTopBar`: `cWk`
+- Upvalue no longer captured by `onBackFromTopBar`: `dxN`
+- New upvalue captured by `onNext`: `dBR`
+- Upvalue no longer captured by `onNext`: `dxN`
+- New upvalue captured by `onDone`: `dBR`
+- Upvalue no longer captured by `onDone`: `dxN`
+- New upvalue captured by `renderBottomBar`: `gjR`
+- Upvalue no longer captured by `renderBottomBar`: `gjs`
+- New upvalue captured by `renderTopBar`: `eAa`
+- Upvalue no longer captured by `renderTopBar`: `eyf`
+- New upvalue captured by `render`: `fND`
+- New upvalue captured by `render`: `fXr`
+- New upvalue captured by `render`: `gjS`
+- Upvalue no longer captured by `render`: `fNe`
+- Upvalue no longer captured by `render`: `fWS`
+- Upvalue no longer captured by `render`: `gjt`
+- New upvalue captured by `renderOnLoaded`: `gjS`
+- Upvalue no longer captured by `renderOnLoaded`: `gjt`
+- New upvalue captured by `didMount`: `cRs`
+- Upvalue no longer captured by `didMount`: `cRr`
+- New upvalue captured by `fetchPPEConfig`: `gjP`
+- Upvalue no longer captured by `fetchPPEConfig`: `gjq`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `navigateIntoQuickMenu`: `gia`
+- Upvalue no longer captured by `navigateIntoQuickMenu`: `ghB`
+- Upvalue no longer captured by `gka`: `var1 (write)`
+- New upvalue captured by `renderSideThumbnail`: `gka`
+- Upvalue no longer captured by `renderSideThumbnail`: `gjB`
+- New upvalue captured by `renderThumbnail`: `dwu`
+- Upvalue no longer captured by `renderThumbnail`: `dsq`
+- New upvalue captured by `renderTextComponent`: `eFG`
+- Upvalue no longer captured by `renderTextComponent`: `eDL`
+- New upvalue captured by `renderWithSelectionCursor`: `dwu`
+- New upvalue captured by `renderWithSelectionCursor`: `gka`
+- Upvalue no longer captured by `renderWithSelectionCursor`: `dsq`
+- Upvalue no longer captured by `renderWithSelectionCursor`: `gjB`
+- New upvalue captured by `init`: `dwu`
+- Upvalue no longer captured by `init`: `dsq`
+- New upvalue captured by `getThumbnail`: `dwu`
+- Upvalue no longer captured by `getThumbnail`: `dsq`
+- New upvalue captured by `render`: `gjZ`
+- Upvalue no longer captured by `render`: `gjA`
+- Upvalue no longer captured by `gkc`: `var1 (write)`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dzL`
+- New upvalue captured by `init`: `eFG`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dvH`
+- Upvalue no longer captured by `init`: `eDL`
+- New upvalue captured by `fetchInitialCatalogItems`: `dwu`
+- New upvalue captured by `fetchInitialCatalogItems`: `dzL`
+- New upvalue captured by `fetchInitialCatalogItems`: `eFG`
+- Upvalue no longer captured by `fetchInitialCatalogItems`: `dsq`
+- Upvalue no longer captured by `fetchInitialCatalogItems`: `dvH`
+- Upvalue no longer captured by `fetchInitialCatalogItems`: `eDL`
+- New upvalue captured by `render`: `dwu`
+- New upvalue captured by `render`: `gjZ`
+- Upvalue no longer captured by `render`: `dsq`
+- Upvalue no longer captured by `render`: `gjA`
+- New upvalue captured by `checkFetchSortData`: `cRs`
+- New upvalue captured by `checkFetchSortData`: `fYu`
+- New upvalue captured by `checkFetchSortData`: `gkc`
+- Upvalue no longer captured by `checkFetchSortData`: `cRr`
+- Upvalue no longer captured by `checkFetchSortData`: `fXV`
+- Upvalue no longer captured by `checkFetchSortData`: `gjD`
+- New upvalue captured by `fetchCatalogData`: `dJD`
+- New upvalue captured by `fetchCatalogData`: `gcU`
+- Upvalue no longer captured by `fetchCatalogData`: `dGK`
+- Upvalue no longer captured by `fetchCatalogData`: `gcv`
+- New upvalue captured by `setSearchParameters`: `eAH`
+- Upvalue no longer captured by `setSearchParameters`: `eyM`
+- New upvalue captured by `renderWithProviders`: `gjZ`
+- New upvalue captured by `renderWithProviders`: `gka`
+- Upvalue no longer captured by `renderWithProviders`: `gjA`
+- Upvalue no longer captured by `renderWithProviders`: `gjB`
+- Upvalue no longer captured by `gke`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dKg`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dHn`
+- New upvalue captured by `renderTopBar`: `cQj`
+- New upvalue captured by `renderTopBar`: `eAa`
+- New upvalue captured by `renderTopBar`: `eBm`
+- New upvalue captured by `renderTopBar`: `gke`
+- Upvalue no longer captured by `renderTopBar`: `cQi`
+- Upvalue no longer captured by `renderTopBar`: `eyf`
+- Upvalue no longer captured by `renderTopBar`: `ezr`
+- Upvalue no longer captured by `renderTopBar`: `gjF`
+- New upvalue captured by `makeLeftFrame`: `gjY`
+- Upvalue no longer captured by `makeLeftFrame`: `gjz`
+- New upvalue captured by `makeRightFrame`: `gkb`
+- Upvalue no longer captured by `makeRightFrame`: `gjC`
+- New upvalue captured by `makeMiddleFrame`: `gkd`
+- Upvalue no longer captured by `makeMiddleFrame`: `gjE`
+- New upvalue captured by `renderAvatarExperienceView`: `dwu`
+- New upvalue captured by `renderAvatarExperienceView`: `fND`
+- New upvalue captured by `renderAvatarExperienceView`: `fXL`
+- New upvalue captured by `renderAvatarExperienceView`: `fXr`
+- New upvalue captured by `renderAvatarExperienceView`: `gib`
+- New upvalue captured by `renderAvatarExperienceView`: `gke`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `dsq`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `fNe`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `fWS`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `fXm`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `ghC`
+- Upvalue no longer captured by `renderAvatarExperienceView`: `gjF`
+- New upvalue captured by `didUpdate`: `fVI`
+- Upvalue no longer captured by `didUpdate`: `fVj`
+- New upvalue captured by `resetAvatarCategories`: `fNT`
+- Upvalue no longer captured by `resetAvatarCategories`: `fNu`
+- New upvalue captured by `resetCatalogCategories`: `gfq`
+- Upvalue no longer captured by `resetCatalogCategories`: `geR`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `startPercievedCatalogTTITracker`: `dAZ`
+- Upvalue no longer captured by `startPercievedCatalogTTITracker`: `dwV`
+- Upvalue no longer captured by `gkk`: `var1 (write)`
+- New upvalue captured by `getCategoryTitle`: `dyg`
+- Upvalue no longer captured by `getCategoryTitle`: `duc`
+- New function: `var23795`
+- New function: `var23796`
+- New upvalue captured by `gkz`: `var1 (write)`
+- New upvalue captured by `render`: `gkw`
+- Upvalue no longer captured by `render`: `gjX`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gdA_shouldEnableAlwaysRenderedScreensForUser`
+- New upvalue captured by `defaultNavigationOptions`: `dwy`
+- New upvalue captured by `defaultNavigationOptions`: `fYm`
+- New upvalue captured by `defaultNavigationOptions`: `fYn`
+- New upvalue captured by `defaultNavigationOptions`: `gdn`
+- Upvalue no longer captured by `defaultNavigationOptions`: `dsu`
+- Upvalue no longer captured by `defaultNavigationOptions`: `fXN`
+- Upvalue no longer captured by `defaultNavigationOptions`: `fXO`
+- Upvalue no longer captured by `defaultNavigationOptions`: `gcO`
+- New upvalue captured by `gkB`: `var1 (write)`
+- New upvalue captured by `selectMySharedAvatarsApiFetchStatus`: `dxM`
+- Upvalue no longer captured by `selectMySharedAvatarsApiFetchStatus`: `dtI`
+- New upvalue captured by `gkI`: `var1 (write)`
+- New upvalue captured by `avatarRefineAccessoryApply`: `eFK`
+- Upvalue no longer captured by `avatarRefineAccessoryApply`: `eDP`
+- New function: `gkH`
+- New upvalue captured by `selectAllowedAATypes`: `dxM`
+- Upvalue no longer captured by `selectAllowedAATypes`: `dtI`
+- New upvalue captured by `getChildren`: `dBB`
+- New upvalue captured by `getChildren`: `dLp`
+- New upvalue captured by `getChildren`: `fOE`
+- New upvalue captured by `getChildren`: `gkF`
+- New upvalue captured by `getChildren`: `gkI`
+- Upvalue no longer captured by `getChildren`: `dIw`
+- Upvalue no longer captured by `getChildren`: `dxx`
+- Upvalue no longer captured by `getChildren`: `fOf`
+- Upvalue no longer captured by `getChildren`: `gkg`
+- Upvalue no longer captured by `getChildren`: `gkk`
+- New upvalue captured by `init`: `eAa`
+- Upvalue no longer captured by `init`: `eyf`
+- New upvalue captured by `renderTopBar`: `eAa`
+- Upvalue no longer captured by `renderTopBar`: `eyf`
+- New upvalue captured by `renderWithProviders`: `dxY`
+- New upvalue captured by `renderWithProviders`: `fPQ`
+- New upvalue captured by `renderWithProviders`: `fXe`
+- New upvalue captured by `renderWithProviders`: `gkH`
+- New upvalue captured by `renderWithProviders`: `gkK`
+- Upvalue no longer captured by `renderWithProviders`: `dtU`
+- Upvalue no longer captured by `renderWithProviders`: `fPr`
+- Upvalue no longer captured by `renderWithProviders`: `fWF`
+- Upvalue no longer captured by `renderWithProviders`: `gki`
+- Upvalue no longer captured by `renderWithProviders`: `gkm`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `selectAllowedAATypes`: `dxM`
+- Upvalue no longer captured by `selectAllowedAATypes`: `dtI`
+- New function: `var24150`
+- New function: `var24151`
+- New function: `gkP`
+- New upvalue captured by `makeAxisLabel`: `eFJ`
+- Upvalue no longer captured by `makeAxisLabel`: `eDO`
+- New upvalue captured by `getAxisPositionLabelOffset`: `eFL`
+- Upvalue no longer captured by `getAxisPositionLabelOffset`: `eDQ`
+- New upvalue captured by `createPositionAxis`: `eFJ`
+- New upvalue captured by `createPositionAxis`: `eFL`
+- Upvalue no longer captured by `createPositionAxis`: `eDO`
+- Upvalue no longer captured by `createPositionAxis`: `eDQ`
+- New upvalue captured by `createBillboardRing`: `eFJ`
+- Upvalue no longer captured by `createBillboardRing`: `eDO`
+- New upvalue captured by `getAxisRotationLabelOffset`: `eFL`
+- Upvalue no longer captured by `getAxisRotationLabelOffset`: `eDQ`
+- New upvalue captured by `createRotationAxis`: `eFJ`
+- New upvalue captured by `createRotationAxis`: `eFL`
+- Upvalue no longer captured by `createRotationAxis`: `eDO`
+- Upvalue no longer captured by `createRotationAxis`: `eDQ`
+- New upvalue captured by `SliderImage`: `eFJ`
+- Upvalue no longer captured by `SliderImage`: `eDO`
+- New function: `var24241`
+- New upvalue captured by `convertStoredValueToSliderValue`: `cWj`
+- Upvalue no longer captured by `convertStoredValueToSliderValue`: `cWi`
+- New upvalue captured by `onValueChanged`: `var24250 (write)`
+- Upvalue no longer captured by `onValueChanged`: `var24120 (write)`
+- New upvalue captured by `Slider`: `gkX`
+- Upvalue no longer captured by `Slider`: `gky`
+- New upvalue captured by `getSliders`: `dBz`
+- New upvalue captured by `getSliders`: `eFK`
+- Upvalue no longer captured by `getSliders`: `dxv`
+- Upvalue no longer captured by `getSliders`: `eDP`
+- Upvalue no longer captured by `gkY`: `var1 (write)`
+- New upvalue captured by `onActivated`: `gkJ`
+- New upvalue captured by `onActivated`: `setAccessoryAdjustments`
+- Upvalue no longer captured by `onActivated`: `counters`
+- Upvalue no longer captured by `onActivated`: `dsq`
+- Upvalue no longer captured by `onActivated`: `fFlagDynamicHeadsMigration`
+- Upvalue no longer captured by `onActivated`: `sendAXCounterV2`
+- Upvalue no longer captured by `onActivated`: `setDynamicHeadShape`
+- Upvalue no longer captured by `onActivated`: `setLastSelectedHeadShape`
+- Upvalue no longer captured by `onActivated`: `tryOnClassicHeadShape`
+- Upvalue no longer captured by `gla`: `var1 (write)`
+- New upvalue captured by `exitCallback`: `fOE`
+- Upvalue no longer captured by `exitCallback`: `fOf`
+- New upvalue captured by `resetCallback`: `eFJ`
+- New upvalue captured by `resetCallback`: `fOE`
+- New upvalue captured by `resetCallback`: `gkJ`
+- Upvalue no longer captured by `resetCallback`: `eDO`
+- Upvalue no longer captured by `resetCallback`: `fOf`
+- Upvalue no longer captured by `resetCallback`: `gkk`
+- Upvalue no longer captured by `glh`: `var1 (write)`
+- New upvalue captured by `render`: `dwu`
+- Upvalue no longer captured by `render`: `dsq`
+- New upvalue captured by `render`: `fPQ`
+- Upvalue no longer captured by `render`: `fPr`
+- New upvalue captured by `moveTile`: `dyF`
+- Upvalue no longer captured by `moveTile`: `duB`
+- New upvalue captured by `render`: `fPQ`
+- Upvalue no longer captured by `render`: `fPr`
+- New upvalue captured by `setOrder`: `dyL`
+- Upvalue no longer captured by `setOrder`: `duH`
+- New upvalue captured by `setCurrentSort`: `dBG`
+- Upvalue no longer captured by `setCurrentSort`: `dxC`
+- New upvalue captured by `sendAnalytics`: `fOT`
+- Upvalue no longer captured by `sendAnalytics`: `fOu`
+- New upvalue captured by `renderSelectedTile`: `fPQ`
+- New upvalue captured by `renderSelectedTile`: `glk`
+- New upvalue captured by `renderSelectedTile`: `gll`
+- New upvalue captured by `renderSelectedTile`: `glm`
+- Upvalue no longer captured by `renderSelectedTile`: `fPr`
+- Upvalue no longer captured by `renderSelectedTile`: `gkL`
+- Upvalue no longer captured by `renderSelectedTile`: `gkM`
+- Upvalue no longer captured by `renderSelectedTile`: `gkN`
+- New upvalue captured by `renderUnselectedTile`: `fPQ`
+- New upvalue captured by `renderUnselectedTile`: `glk`
+- Upvalue no longer captured by `renderUnselectedTile`: `fPr`
+- Upvalue no longer captured by `renderUnselectedTile`: `gkL`
+- New upvalue captured by `mapValuesToProps`: `fPQ`
+- Upvalue no longer captured by `mapValuesToProps`: `fPr`
+- New upvalue captured by `init`: `fPQ`
+- Upvalue no longer captured by `init`: `fPr`
+- New upvalue captured by `isExceedingBottomThresh`: `fPQ`
+- Upvalue no longer captured by `isExceedingBottomThresh`: `fPr`
+- New upvalue captured by `selectTile`: `fPQ`
+- Upvalue no longer captured by `selectTile`: `fPr`
+- New upvalue captured by `moveTileDownOneGamepad`: `fPQ`
+- Upvalue no longer captured by `moveTileDownOneGamepad`: `fPr`
+- New upvalue captured by `moveTileUpOneGamepad`: `fPQ`
+- Upvalue no longer captured by `moveTileUpOneGamepad`: `fPr`
+- New upvalue captured by `getTileOffsetsTable`: `fPQ`
+- Upvalue no longer captured by `getTileOffsetsTable`: `fPr`
+- New upvalue captured by `normalizeDraggedPosition`: `cWj`
+- New upvalue captured by `normalizeDraggedPosition`: `fPQ`
+- Upvalue no longer captured by `normalizeDraggedPosition`: `cWi`
+- Upvalue no longer captured by `normalizeDraggedPosition`: `fPr`
+- New upvalue captured by `createScrollConnection`: `fPQ`
+- Upvalue no longer captured by `createScrollConnection`: `fPr`
+- New upvalue captured by `processDrag`: `fPQ`
+- Upvalue no longer captured by `processDrag`: `fPr`
+- New upvalue captured by `confirmAndSetOrder`: `dyF`
+- Upvalue no longer captured by `confirmAndSetOrder`: `duB`
+- New upvalue captured by `renderWithProviders`: `fPQ`
+- New upvalue captured by `renderWithProviders`: `glh`
+- New upvalue captured by `renderWithProviders`: `gli`
+- Upvalue no longer captured by `renderWithProviders`: `fPr`
+- Upvalue no longer captured by `renderWithProviders`: `gkI`
+- Upvalue no longer captured by `renderWithProviders`: `gkJ`
+- New upvalue captured by `setOrder`: `dyL`
+- Upvalue no longer captured by `setOrder`: `duH`
+- New upvalue captured by `setCurrentSort`: `dBG`
+- Upvalue no longer captured by `setCurrentSort`: `dxC`
+- New upvalue captured by `sendAnalytics`: `fOT`
+- Upvalue no longer captured by `sendAnalytics`: `fOu`
+- New upvalue captured by `ResetButtonDefault`: `fPQ`
+- Upvalue no longer captured by `ResetButtonDefault`: `fPr`
+- New upvalue captured by `ResetButtonVR`: `fPQ`
+- Upvalue no longer captured by `ResetButtonVR`: `fPr`
+- New upvalue captured by `sendAnalytics`: `fOT`
+- Upvalue no longer captured by `sendAnalytics`: `fOu`
+- New upvalue captured by `init`: `gii`
+- Upvalue no longer captured by `init`: `ghJ`
+- New upvalue captured by `renderTopBar`: `eAa`
+- Upvalue no longer captured by `renderTopBar`: `eyf`
+- New upvalue captured by `renderWithProviders`: `dxY`
+- New upvalue captured by `renderWithProviders`: `fPQ`
+- New upvalue captured by `renderWithProviders`: `fVD`
+- New upvalue captured by `renderWithProviders`: `fXe`
+- New upvalue captured by `renderWithProviders`: `fXj`
+- New upvalue captured by `renderWithProviders`: `gkH`
+- New upvalue captured by `renderWithProviders`: `gkL`
+- New upvalue captured by `renderWithProviders`: `gle`
+- New upvalue captured by `renderWithProviders`: `gln`
+- Upvalue no longer captured by `renderWithProviders`: `dtU`
+- Upvalue no longer captured by `renderWithProviders`: `fPr`
+- Upvalue no longer captured by `renderWithProviders`: `fVf`
+- Upvalue no longer captured by `renderWithProviders`: `fWF`
+- Upvalue no longer captured by `renderWithProviders`: `fWK`
+- Upvalue no longer captured by `renderWithProviders`: `gkF`
+- Upvalue no longer captured by `renderWithProviders`: `gki`
+- Upvalue no longer captured by `renderWithProviders`: `gkm`
+- Upvalue no longer captured by `renderWithProviders`: `gkO`
+- New upvalue captured by `setLastSavedSort`: `dBE`
+- Upvalue no longer captured by `setLastSavedSort`: `dxA`
+- New upvalue captured by `setCurrentSort`: `dBG`
+- Upvalue no longer captured by `setCurrentSort`: `dxC`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `sendAnalytics`: `fOT`
+- Upvalue no longer captured by `sendAnalytics`: `fOu`
+- New upvalue captured by `setEntryPage`: `dBL`
+- Upvalue no longer captured by `setEntryPage`: `dxH`
+- New upvalue captured by `clearRemovedItems`: `dBJ`
+- Upvalue no longer captured by `clearRemovedItems`: `dxF`
+- New upvalue captured by `unlockCharacterUpdates`: `dBO`
+- Upvalue no longer captured by `unlockCharacterUpdates`: `dxK`
+- New upvalue captured by `LayeredMakeupSortScreen`: `glr (write)`
+- New upvalue captured by `LayeredMakeupSortScreen`: `gls`
+- Upvalue no longer captured by `LayeredMakeupSortScreen`: `gkS (write)`
+- Upvalue no longer captured by `LayeredMakeupSortScreen`: `gkT`
+- New upvalue captured by `glp`: `var1 (write)`
+- New upvalue captured by `onActivated`: `counters`
+- New upvalue captured by `onActivated`: `dwu`
+- New upvalue captured by `onActivated`: `fFlagDynamicHeadsMigration`
+- New upvalue captured by `onActivated`: `fOD`
+- New upvalue captured by `onActivated`: `sendAXCounterV2`
+- New upvalue captured by `onActivated`: `setDynamicHeadShape`
+- New upvalue captured by `onActivated`: `setLastSelectedHeadShape`
+- New upvalue captured by `onActivated`: `tryOnClassicHeadShape`
+- Parameter removed from `screen` (1 -> 0 params)
+- New upvalue captured by `screen`: `glx`
+- New upvalue captured by `screen`: `reactModule`
+- Upvalue no longer captured by `screen`: `eEH`
+- Upvalue no longer captured by `screen`: `eEL`
+- Upvalue no longer captured by `screen`: `eGM`
+- Upvalue no longer captured by `screen`: `fFlagBuildLocalization`
+- Upvalue no longer captured by `screen`: `fiA`
+- Upvalue no longer captured by `screen`: `fib`
+- Upvalue no longer captured by `screen`: `fic`
+- Upvalue no longer captured by `screen`: `fkd`
+- Upvalue no longer captured by `screen`: `fki`
+- Upvalue no longer captured by `screen`: `fullscreenPageWithSafeArea`
+- Upvalue no longer captured by `screen`: `iconName`
+- Upvalue no longer captured by `screen`: `useLocalization`
+- New function: `var25031`
+- New function: `var25032`
+- New upvalue captured by `init`: `cQj`
+- New upvalue captured by `init`: `dBb`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `dyh`
+- New upvalue captured by `init`: `dzV`
+- New upvalue captured by `init`: `eAB`
+- New upvalue captured by `init`: `eBm`
+- New upvalue captured by `init`: `eFG`
+- New upvalue captured by `init`: `fPJ`
+- Upvalue no longer captured by `init`: `cQi`
+- Upvalue no longer captured by `init`: `dud`
+- Upvalue no longer captured by `init`: `dvR`
+- Upvalue no longer captured by `init`: `dwX`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `eDL`
+- Upvalue no longer captured by `init`: `eyG`
+- Upvalue no longer captured by `init`: `ezr`
+- Upvalue no longer captured by `init`: `fPk`
+- New upvalue captured by `dispatchInitialSearch`: `dzV`
+- Upvalue no longer captured by `dispatchInitialSearch`: `dvR`
+- New upvalue captured by `confirmSearchCallback`: `cQj`
+- New upvalue captured by `confirmSearchCallback`: `dBR`
+- New upvalue captured by `confirmSearchCallback`: `dyh`
+- New upvalue captured by `confirmSearchCallback`: `eAB`
+- New upvalue captured by `confirmSearchCallback`: `eBm`
+- Upvalue no longer captured by `confirmSearchCallback`: `cQi`
+- Upvalue no longer captured by `confirmSearchCallback`: `dud`
+- Upvalue no longer captured by `confirmSearchCallback`: `dxN`
+- Upvalue no longer captured by `confirmSearchCallback`: `eyG`
+- Upvalue no longer captured by `confirmSearchCallback`: `ezr`
+- New upvalue captured by `changeView`: `eFG`
+- Upvalue no longer captured by `changeView`: `eDL`
+- New upvalue captured by `dispatchWidgetSearch`: `dzV`
+- Upvalue no longer captured by `dispatchWidgetSearch`: `dvR`
+- New upvalue captured by `onCategoryOrSubcategoryChangeById`: `dBb`
+- New upvalue captured by `onCategoryOrSubcategoryChangeById`: `eFG`
+- Upvalue no longer captured by `onCategoryOrSubcategoryChangeById`: `dwX`
+- Upvalue no longer captured by `onCategoryOrSubcategoryChangeById`: `eDL`
+- New upvalue captured by `getInputBindings`: `dBR`
+- Upvalue no longer captured by `getInputBindings`: `dxN`
+- New upvalue captured by `renderSearchBar`: `cQj`
+- New upvalue captured by `renderSearchBar`: `eAJ`
+- New upvalue captured by `renderSearchBar`: `eBm`
+- Upvalue no longer captured by `renderSearchBar`: `cQi`
+- Upvalue no longer captured by `renderSearchBar`: `eyO`
+- Upvalue no longer captured by `renderSearchBar`: `ezr`
+- New upvalue captured by `render`: `dwC`
+- New upvalue captured by `render`: `dxY`
+- New upvalue captured by `render`: `fND`
+- New upvalue captured by `render`: `fVD`
+- New upvalue captured by `render`: `fXr`
+- New upvalue captured by `render`: `giB`
+- Upvalue no longer captured by `render`: `dsy`
+- Upvalue no longer captured by `render`: `dtU`
+- Upvalue no longer captured by `render`: `fNe`
+- Upvalue no longer captured by `render`: `fVf`
+- Upvalue no longer captured by `render`: `fWS`
+- Upvalue no longer captured by `render`: `gic`
+- New upvalue captured by `dispatchSearch`: `gcV`
+- Upvalue no longer captured by `dispatchSearch`: `gcw`
+- New upvalue captured by `dispatchSearchWithParameters`: `gcV`
+- Upvalue no longer captured by `dispatchSearchWithParameters`: `gcw`
+- New upvalue captured by `dispatchRemoveSearch`: `gdi`
+- Upvalue no longer captured by `dispatchRemoveSearch`: `gcJ`
+- New upvalue captured by `setSearchType`: `eAG`
+- Upvalue no longer captured by `setSearchType`: `eyL`
+- New upvalue captured by `setSearchParameters`: `eAH`
+- Upvalue no longer captured by `setSearchParameters`: `eyM`
+- New upvalue captured by `setSortAndFilters`: `dAC`
+- Upvalue no longer captured by `setSortAndFilters`: `dwy`
+- New upvalue captured by `openItemPrompt`: `fUR`
+- Upvalue no longer captured by `openItemPrompt`: `fUs`
+- New upvalue captured by `setFullView`: `fWI`
+- Upvalue no longer captured by `setFullView`: `fWj`
+- New upvalue captured by `navigateIntoQuickMenu`: `gia`
+- Upvalue no longer captured by `navigateIntoQuickMenu`: `ghB`
+- New upvalue captured by `resetSortAndFilters`: `dAB`
+- New upvalue captured by `resetSortAndFilters`: `gdt`
+- New upvalue captured by `resetSortAndFilters`: `gdv`
+- Upvalue no longer captured by `resetSortAndFilters`: `dwx`
+- Upvalue no longer captured by `resetSortAndFilters`: `gcU`
+- Upvalue no longer captured by `resetSortAndFilters`: `gcW`
+- New upvalue captured by `fetchWidgetInfo`: `gdd`
+- Upvalue no longer captured by `fetchWidgetInfo`: `gcE`
+- New upvalue captured by `mapItemsToWidgetContent`: `dwu`
+- Upvalue no longer captured by `mapItemsToWidgetContent`: `dsq`
+- New upvalue captured by `createWidgetInfo`: `dwu`
+- New upvalue captured by `createWidgetInfo`: `dwy`
+- Upvalue no longer captured by `createWidgetInfo`: `dsq`
+- Upvalue no longer captured by `createWidgetInfo`: `dsu`
+- New function: `var25124`
+- New function: `var25125`
+- New function: `var25126`
+- New function: `LUAUFORGE_MODULE_GLOBALS_glJ_ActionBarWithExpiredTimedOptions`
+- New function: `LUAUFORGE_MODULE_GLOBALS_glK_selectTopBarHeight`
+- New function: `LUAUFORGE_MODULE_GLOBALS_glK_selectWidgetState`
+- New function: `LUAUFORGE_MODULE_GLOBALS_glK_selectWidgetInfo`
+- Upvalue no longer captured by `glO`: `var1 (write)`
+- New upvalue captured by `deriveDetailsFromProps`: `glO`
+- Upvalue no longer captured by `deriveDetailsFromProps`: `glp`
+- New upvalue captured by `renderWithProviders`: `fXf`
+- Upvalue no longer captured by `renderWithProviders`: `fWG`
+- New upvalue captured by `setPeekabooLayoutDetails`: `dBo`
+- Upvalue no longer captured by `setPeekabooLayoutDetails`: `dxk`
+- New upvalue captured by `init`: `cWj`
+- Upvalue no longer captured by `init`: `cWi`
+- New upvalue captured by `convertPositionValueToSliderValue`: `cWj`
+- Upvalue no longer captured by `convertPositionValueToSliderValue`: `cWi`
+- New upvalue captured by `init`: `dBR`
+- New upvalue captured by `init`: `eAa`
+- New upvalue captured by `init`: `fPU`
+- Upvalue no longer captured by `init`: `dxN`
+- Upvalue no longer captured by `init`: `eyf`
+- Upvalue no longer captured by `init`: `fPv`
+- New upvalue captured by `goBack`: `dBR`
+- Upvalue no longer captured by `goBack`: `dxN`
+- New upvalue captured by `onNext`: `dBR`
+- Upvalue no longer captured by `onNext`: `dxN`
+- New upvalue captured by `zoomToPoint`: `fPU`
+- Upvalue no longer captured by `zoomToPoint`: `fPv`
+- New upvalue captured by `rotateByPixels`: `fPU`
+- Upvalue no longer captured by `rotateByPixels`: `fPv`
+- New upvalue captured by `renderMiddleContents`: `fPU`
+- Upvalue no longer captured by `renderMiddleContents`: `fPv`
+- New upvalue captured by `renderBottomContents`: `fPU`
+- New upvalue captured by `renderBottomContents`: `glP`
+- Upvalue no longer captured by `renderBottomContents`: `fPv`
+- Upvalue no longer captured by `renderBottomContents`: `glq`
+- New upvalue captured by `renderWithProviders`: `eAa`
+- New upvalue captured by `renderWithProviders`: `fXG`
+- New upvalue captured by `renderWithProviders`: `gjR`
+- New upvalue captured by `renderWithProviders`: `glN`
+- Upvalue no longer captured by `renderWithProviders`: `eyf`
+- Upvalue no longer captured by `renderWithProviders`: `fXh`
+- Upvalue no longer captured by `renderWithProviders`: `gjs`
+- Upvalue no longer captured by `renderWithProviders`: `glp`
+- New upvalue captured by `setCameraSliderZoom`: `dBq`
+- Upvalue no longer captured by `setCameraSliderZoom`: `dxm`
+- New upvalue captured by `setCameraSliderRotate`: `dBr`
+- Upvalue no longer captured by `setCameraSliderRotate`: `dxn`
+- New upvalue captured by `setFinalPageViewMode`: `dBm`
+- New upvalue captured by `setFinalPageViewMode`: `dBt`
+- Upvalue no longer captured by `setFinalPageViewMode`: `dxi`
+- Upvalue no longer captured by `setFinalPageViewMode`: `dxp`
+- New upvalue captured by `init`: `dBm`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `dxi`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `onSave`: `dBR`
+- Upvalue no longer captured by `onSave`: `dxN`
+- New upvalue captured by `toggleFinalPageViewMode`: `dBm`
+- Upvalue no longer captured by `toggleFinalPageViewMode`: `dxi`
+- New upvalue captured by `writePPEConfig`: `fRV`
+- Upvalue no longer captured by `writePPEConfig`: `fRw`
+- New upvalue captured by `renderBottomContents`: `dBm`
+- Upvalue no longer captured by `renderBottomContents`: `dxi`
+- New upvalue captured by `renderMiddleContents`: `dBm`
+- New upvalue captured by `renderMiddleContents`: `fPU`
+- Upvalue no longer captured by `renderMiddleContents`: `dxi`
+- Upvalue no longer captured by `renderMiddleContents`: `fPv`
+- New upvalue captured by `renderWithProviders`: `eAa`
+- New upvalue captured by `renderWithProviders`: `fXG`
+- New upvalue captured by `renderWithProviders`: `gjR`
+- New upvalue captured by `renderWithProviders`: `glN`
+- Upvalue no longer captured by `renderWithProviders`: `eyf`
+- Upvalue no longer captured by `renderWithProviders`: `fXh`
+- Upvalue no longer captured by `renderWithProviders`: `gjs`
+- Upvalue no longer captured by `renderWithProviders`: `glp`
+- New upvalue captured by `didUpdate`: `dBm`
+- Upvalue no longer captured by `didUpdate`: `dxi`
+- New upvalue captured by `writePPEConfig`: `dBm`
+- New upvalue captured by `writePPEConfig`: `fRW`
+- Upvalue no longer captured by `writePPEConfig`: `dxi`
+- Upvalue no longer captured by `writePPEConfig`: `fRx`
+- New upvalue captured by `setFinalPageViewMode`: `dBt`
+- Upvalue no longer captured by `setFinalPageViewMode`: `dxp`
+- New upvalue captured by `glT`: `var1 (write)`
+- New upvalue captured by `glW`: `var1 (write)`
+- New upvalue captured by `renderWithProviders`: `fNN`
+- New upvalue captured by `renderWithProviders`: `fVE`
+- Upvalue no longer captured by `renderWithProviders`: `fNo`
+- Upvalue no longer captured by `renderWithProviders`: `fVf`
+- New upvalue captured by `getItemIconType`: `eFG`
+- Upvalue no longer captured by `getItemIconType`: `eDL`
+- New upvalue captured by `init`: `dwu`
+- New upvalue captured by `init`: `dxM`
+- Upvalue no longer captured by `init`: `dsq`
+- Upvalue no longer captured by `init`: `dtI`
+- New upvalue captured by `checkCanScroll`: `dxM`
+- New upvalue captured by `checkCanScroll`: `var25612 (write)`
+- New upvalue captured by `checkCanScroll`: `var25613 (write)`
+- Upvalue no longer captured by `checkCanScroll`: `dtI`
+- Upvalue no longer captured by `checkCanScroll`: `var25482 (write)`
+- Upvalue no longer captured by `checkCanScroll`: `var25483 (write)`
+- New upvalue captured by `absoluteSizeChanged`: `dxM`
+- New upvalue captured by `absoluteSizeChanged`: `var25612 (write)`
+- New upvalue captured by `absoluteSizeChanged`: `var25613 (write)`
+- Upvalue no longer captured by `absoluteSizeChanged`: `dtI`
+- Upvalue no longer captured by `absoluteSizeChanged`: `var25482 (write)`
+- Upvalue no longer captured by `absoluteSizeChanged`: `var25483 (write)`
+- New upvalue captured by `contentSizeChanged`: `dxM`
+- New upvalue captured by `contentSizeChanged`: `var25612 (write)`
+- New upvalue captured by `contentSizeChanged`: `var25613 (write)`
+- Upvalue no longer captured by `contentSizeChanged`: `dtI`
+- Upvalue no longer captured by `contentSizeChanged`: `var25482 (write)`
+- Upvalue no longer captured by `contentSizeChanged`: `var25483 (write)`
+- New upvalue captured by `onLoadMoreButtonActivated`: `dwu`
+- Upvalue no longer captured by `onLoadMoreButtonActivated`: `dsq`
+- New upvalue captured by `renderItem`: `dwu`
+- New upvalue captured by `renderItem`: `gme`
+- Upvalue no longer captured by `renderItem`: `dsq`
+- Upvalue no longer captured by `renderItem`: `glF`
+- New upvalue captured by `toggleSelectOutfit`: `p10356 (write)`
+- Upvalue no longer captured by `toggleSelectOutfit`: `p10328 (write)`
+- New upvalue captured by `renderWithProviders`: `dJQ`
+- New upvalue captured by `renderWithProviders`: `dwu`
+- New upvalue captured by `renderWithProviders`: `dxM`
+- New upvalue captured by `renderWithProviders`: `eFG`
+- New upvalue captured by `renderWithProviders`: `fUo`
+- New upvalue captured by `renderWithProviders`: `fWf`
+- Upvalue no longer captured by `renderWithProviders`: `dGX`
+- Upvalue no longer captured by `renderWithProviders`: `dsq`
+- Upvalue no longer captured by `renderWithProviders`: `dtI`
+- Upvalue no longer captured by `renderWithProviders`: `eDL`
+- Upvalue no longer captured by `renderWithProviders`: `fTP`
+- Upvalue no longer captured by `renderWithProviders`: `fVG`
+- New upvalue captured by `renderWithProviders`: `fVD`
+- New upvalue captured by `renderWithProviders`: `gmc`
+- New upvalue captured by `renderWithProviders`: `gmd`
+- Upvalue no longer captured by `renderWithProviders`: `fVe`
+- Upvalue no longer captured by `renderWithProviders`: `glD`
+- Upvalue no longer captured by `renderWithProviders`: `glE`
+- New upvalue captured by `updateSavedOutfit`: `gef`
+- Upvalue no longer captured by `updateSavedOutfit`: `gdG`
+- New upvalue captured by `init`: `cWj`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `cWi`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `selectButtonPressed`: `dBR`
+- Upvalue no longer captured by `selectButtonPressed`: `dxN`
+- New upvalue captured by `renameOutfit`: `cWj`
+- Upvalue no longer captured by `renameOutfit`: `cWi`
+- New upvalue captured by `onToggleOutfitCard`: `dBR`
+- Upvalue no longer captured by `onToggleOutfitCard`: `dxN`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- New upvalue captured by `renderWithProviders`: `fVD`
+- New upvalue captured by `renderWithProviders`: `fVM`
+- New upvalue captured by `renderWithProviders`: `gmc`
+- New upvalue captured by `renderWithProviders`: `gmd`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- Upvalue no longer captured by `renderWithProviders`: `fVe`
+- Upvalue no longer captured by `renderWithProviders`: `fVn`
+- Upvalue no longer captured by `renderWithProviders`: `glD`
+- Upvalue no longer captured by `renderWithProviders`: `glE`
+- New upvalue captured by `didUpdate`: `dBR`
+- Upvalue no longer captured by `didUpdate`: `dxN`
+- New upvalue captured by `init`: `cWj`
+- New upvalue captured by `init`: `dBR`
+- Upvalue no longer captured by `init`: `cWi`
+- Upvalue no longer captured by `init`: `dxN`
+- New upvalue captured by `selectButtonPressed`: `dBR`
+- Upvalue no longer captured by `selectButtonPressed`: `dxN`
+- New upvalue captured by `renameOutfit`: `cWj`
+- Upvalue no longer captured by `renameOutfit`: `cWi`
+- New upvalue captured by `onToggleOutfitCard`: `dBR`
+- Upvalue no longer captured by `onToggleOutfitCard`: `dxN`
+- New upvalue captured by `renderWithProviders`: `cQu`
+- New upvalue captured by `renderWithProviders`: `fVD`
+- New upvalue captured by `renderWithProviders`: `fVM`
+- New upvalue captured by `renderWithProviders`: `gmc`
+- New upvalue captured by `renderWithProviders`: `gmd`
+- Upvalue no longer captured by `renderWithProviders`: `cQt`
+- Upvalue no longer captured by `renderWithProviders`: `fVe`
+- Upvalue no longer captured by `renderWithProviders`: `fVn`
+- Upvalue no longer captured by `renderWithProviders`: `glD`
+- Upvalue no longer captured by `renderWithProviders`: `glE`
+- New upvalue captured by `didUpdate`: `dBR`
+- Upvalue no longer captured by `didUpdate`: `dxN`
+- New upvalue captured by `gmk`: `var1 (write)`
+- Upvalue no longer captured by `gms`: `var1 (write)`
+- Upvalue no longer captured by `gmv`: `var1 (write)`
+- New upvalue captured by `gml`: `var1 (write)`
+- New function: `var25984`
+- New function: `var25987`
+- New function: `var25985`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gml_trimWhitespaceFromString`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- New upvalue captured by `RadioButtonItem`: `eFp`
+- Upvalue no longer captured by `RadioButtonItem`: `eDu`
+- New upvalue captured by `RadioButtonGroup`: `eFp`
+- New upvalue captured by `RadioButtonGroup`: `gmI`
+- Upvalue no longer captured by `RadioButtonGroup`: `eDu`
+- Upvalue no longer captured by `RadioButtonGroup`: `gmj`
+- Upvalue no longer captured by `onActivated`: `sortsController`
+- Upvalue no longer captured by `gmJ`: `var1 (write)`
+- Upvalue no longer captured by `gmK`: `var1 (write)`
+- New function: `gmL`
+- New upvalue captured by `getPriceSelection`: `dwC`
+- New upvalue captured by `getPriceSelection`: `gmK`
+- Upvalue no longer captured by `getPriceSelection`: `dsy`
+- Upvalue no longer captured by `getPriceSelection`: `gml`
+- New upvalue captured by `getCreatorSelection`: `gmJ`
+- Upvalue no longer captured by `getCreatorSelection`: `gmk`
+- New upvalue captured by `safeUpdateText`: `cWj`
+- Upvalue no longer captured by `safeUpdateText`: `cWi`
+- New upvalue captured by `onFocused`: `gmJ`
+- Upvalue no longer captured by `onFocused`: `gmk`
+- New upvalue captured by `onFocused`: `gmK`
+- Upvalue no longer captured by `onFocused`: `gml`
+- New parameter added to `onActivated` (0 -> 1 params)
+- New upvalue captured by `onActivated`: `sortsController`
+- Upvalue no longer captured by `onActivated`: `avatarScreen`
+- New upvalue captured by `apply`: `eFo`
+- New upvalue captured by `apply`: `gmR`
+- Upvalue no longer captured by `apply`: `eDt`
+- Upvalue no longer captured by `apply`: `gms`
+- New upvalue captured by `gmU`: `var1 (write)`
+- New upvalue captured by `apply`: `eFo`
+- New upvalue captured by `apply`: `gmR`
+- Upvalue no longer captured by `apply`: `eDt`
+- Upvalue no longer captured by `apply`: `gms`
+- New upvalue captured by `selectOwnedItemIdsWearing`: `dvU`
+- New upvalue captured by `selectOwnedItemIdsWearing`: `fNH`
+- Upvalue no longer captured by `selectOwnedItemIdsWearing`: `drQ`
+- Upvalue no longer captured by `selectOwnedItemIdsWearing`: `fNi`
+- New upvalue captured by `onActivated`: `avatarScreen`
+- Upvalue no longer captured by `onActivated`: `fFlagAXPhotoboothBugBashFixes`
+- Upvalue no longer captured by `onActivated`: `item`
+- New upvalue captured by `gnf`: `var1 (write)`
+- New upvalue captured by `onActivated`: `fFlagAXPhotoboothBugBashFixes`
+- New upvalue captured by `onActivated`: `item`
+- Upvalue no longer captured by `onActivated`: `onAnimationFilterChanged`
+- Upvalue no longer captured by `gnt`: `var1 (write)`
+- New upvalue captured by `onActivated`: `onAnimationFilterChanged`
+- Upvalue no longer captured by `onActivated`: `menuItemEnum`
+- New upvalue captured by `onActivated`: `menuItemEnum`
+- New function: `var26969`
+- New function: `var26970`
+- New upvalue captured by `var26972`: `isError_2`
+- Upvalue no longer captured by `var26972`: `useUnifiedEventListener`
+- New function: `var26973`
+- New upvalue captured by `setTabBarVisibility`: `gdp`
+- Upvalue no longer captured by `setTabBarVisibility`: `gcQ`
+- New upvalue captured by `render`: `gdz`
+- Upvalue no longer captured by `render`: `gda`
+- New upvalue captured by `avatarExperienceMainStackContainer`: `drE`
+- Upvalue no longer captured by `avatarExperienceMainStackContainer`: `dnA`
+- New upvalue captured by `gdx`: `var1 (write)`
+- New upvalue captured by `onDidFocus`: `dwy`
+- Upvalue no longer captured by `onDidFocus`: `dsu`
+- New upvalue captured by `gcq`: `var1 (write)`
+- New function: `var27102`
+- New upvalue captured by `init`: `fYy`
+- New upvalue captured by `init`: `gkg`
+- Upvalue no longer captured by `init`: `fXZ`
+- Upvalue no longer captured by `init`: `gjH`
+- New upvalue captured by `getProviders`: `gcr`
+- Upvalue no longer captured by `getProviders`: `gbS`
+- New upvalue captured by `render`: `eDo`
+- New upvalue captured by `render`: `fNk`
+- New upvalue captured by `render`: `fXL`
+- New upvalue captured by `render`: `gnB`
+- Upvalue no longer captured by `render`: `eBt`
+- Upvalue no longer captured by `render`: `fML`
+- Upvalue no longer captured by `render`: `fXm`
+- Upvalue no longer captured by `render`: `gnc`
+- New upvalue captured by `render`: `fNk`
+- New upvalue captured by `render`: `fXL`
+- New upvalue captured by `render`: `gnB`
+- Upvalue no longer captured by `render`: `fML`
+- Upvalue no longer captured by `render`: `fXm`
+- Upvalue no longer captured by `render`: `gnc`
+- New upvalue captured by `render`: `fXL`
+- New upvalue captured by `render`: `gnB`
+- Upvalue no longer captured by `render`: `fXm`
+- Upvalue no longer captured by `render`: `gnc`
+- New upvalue captured by `renderWithVisibility`: `fPI`
+- New upvalue captured by `renderWithVisibility`: `fYy`
+- New upvalue captured by `renderWithVisibility`: `gcC`
+- New upvalue captured by `renderWithVisibility`: `gdx`
+- Upvalue no longer captured by `renderWithVisibility`: `fPj`
+- Upvalue no longer captured by `renderWithVisibility`: `fXZ`
+- Upvalue no longer captured by `renderWithVisibility`: `gcd`
+- Upvalue no longer captured by `renderWithVisibility`: `gcY`
+- New upvalue captured by `getPageErrorCounterMap`: `dwu`
+- Upvalue no longer captured by `getPageErrorCounterMap`: `dsq`
+- New upvalue captured by `trackTopLevelErrorCounters`: `dBR`
+- New upvalue captured by `trackTopLevelErrorCounters`: `dwu`
+- Upvalue no longer captured by `trackTopLevelErrorCounters`: `dsq`
+- Upvalue no longer captured by `trackTopLevelErrorCounters`: `dxN`
+- New upvalue captured by `getPageLatencyCountersMap`: `dwu`
+- Upvalue no longer captured by `getPageLatencyCountersMap`: `dsq`
+- New upvalue captured by `trackTopLevelPageLatency`: `dBR`
+- New upvalue captured by `trackTopLevelPageLatency`: `dwu`
+- New upvalue captured by `trackTopLevelPageLatency`: `eFG`
+- New upvalue captured by `trackTopLevelPageLatency`: `fYy`
+- Upvalue no longer captured by `trackTopLevelPageLatency`: `dsq`
+- Upvalue no longer captured by `trackTopLevelPageLatency`: `dxN`
+- Upvalue no longer captured by `trackTopLevelPageLatency`: `eDL`
+- Upvalue no longer captured by `trackTopLevelPageLatency`: `fXZ`
+- New upvalue captured by `trackTopLevelPageFPS`: `gnA`
+- Upvalue no longer captured by `trackTopLevelPageFPS`: `gnb`
+- New upvalue captured by `componentDidCatch`: `fYy`
+- Upvalue no longer captured by `componentDidCatch`: `fXZ`
+- New upvalue captured by `didMount`: `dwy`
+- Upvalue no longer captured by `didMount`: `dsu`
+- New upvalue captured by `willUpdate`: `fYy`
+- Upvalue no longer captured by `willUpdate`: `fXZ`
+- New upvalue captured by `didUpdate`: `fYy`
+- Upvalue no longer captured by `didUpdate`: `fXZ`
+- Upvalue no longer captured by `gnE`: `var1 (write)`
+- New upvalue captured by `ShowResults`: `fLC`
+- New upvalue captured by `ShowResults`: `gnE`
+- Upvalue no longer captured by `ShowResults`: `fLd`
+- Upvalue no longer captured by `ShowResults`: `gnf`
+- New upvalue captured by `Stop`: `gnE`
+- Upvalue no longer captured by `Stop`: `gnf`
+- New upvalue captured by `Initialize`: `gnE`
+- Upvalue no longer captured by `Initialize`: `gnf`
+- New upvalue captured by `goi`: `var1 (write)`
+- New upvalue captured by `gov`: `var1 (write)`
+- New upvalue captured by `goz`: `var1 (write)`
+- New function: `goC`
+- New upvalue captured by `navigate`: `goB`
+- Upvalue no longer captured by `navigate`: `goc`
+- New upvalue captured by `buttonClick`: `goB`
+- Upvalue no longer captured by `buttonClick`: `goc`
+- New upvalue captured by `pageLoaded`: `goB`
+- Upvalue no longer captured by `pageLoaded`: `goc`
+- New upvalue captured by `goG`: `var1 (write)`
+- Upvalue no longer captured by `goH`: `var1 (write)`
+- New parameter added to `screen` (0 -> 1 params)
+- New upvalue captured by `screen`: `fFlagAppChatFixRootChatBackNavigation`
+- New upvalue captured by `screen`: `fFlagCreateConnectionsHub`
+- New upvalue captured by `screen`: `goD`
+- New upvalue captured by `screen`: `goH`
+- New upvalue captured by `screen`: `goI`
+- New upvalue captured by `screen`: `llama`
+- New upvalue captured by `screen`: `roact`
+- Upvalue no longer captured by `screen`: `gkY`
+- Upvalue no longer captured by `screen`: `reactModule`
+- New upvalue captured by `navigateToRootStack`: `goH`
+- Upvalue no longer captured by `navigateToRootStack`: `goi`
+- New upvalue captured by `init`: `goH`
+- Upvalue no longer captured by `init`: `goi`
+- New upvalue captured by `onBackButtonPressed`: `goH`
+- Upvalue no longer captured by `onBackButtonPressed`: `goi`
+- New upvalue captured by `isTabViewVisible`: `goH`
+- Upvalue no longer captured by `isTabViewVisible`: `goi`
+- New upvalue captured by `willUpdate`: `goD`
+- Upvalue no longer captured by `willUpdate`: `goe`
+- New upvalue captured by `render`: `goD`
+- New upvalue captured by `render`: `goG`
+- Upvalue no longer captured by `render`: `goe`
+- Upvalue no longer captured by `render`: `goi`
+- New upvalue captured by `showTabBar`: `goH`
+- Upvalue no longer captured by `showTabBar`: `goi`
+- New upvalue captured by `goToChat`: `goH`
+- Upvalue no longer captured by `goToChat`: `goi`
+- New function: `goJ`
+- New upvalue captured by `goL`: `var1 (write)`
+- New upvalue captured by `fetchChatSettings`: `goM`
+- Upvalue no longer captured by `fetchChatSettings`: `gon`
+- New upvalue captured by `navigateIntoChat`: `goN`
+- Upvalue no longer captured by `navigateIntoChat`: `goo`
+- New upvalue captured by `init`: `gnN`
+- New upvalue captured by `init`: `goD`
+- New upvalue captured by `init`: `goF`
+- New upvalue captured by `init`: `goH`
+- New upvalue captured by `init`: `gox`
+- New upvalue captured by `init`: `goy`
+- Upvalue no longer captured by `init`: `gno`
+- Upvalue no longer captured by `init`: `gnY`
+- Upvalue no longer captured by `init`: `gnZ`
+- Upvalue no longer captured by `init`: `goe`
+- Upvalue no longer captured by `init`: `gog`
+- Upvalue no longer captured by `init`: `goi`
+- New upvalue captured by `connectSocTabExternalDispatch`: `goH`
+- Upvalue no longer captured by `connectSocTabExternalDispatch`: `goi`
+- New upvalue captured by `renderRoactChat`: `goD`
+- Upvalue no longer captured by `renderRoactChat`: `goe`
+- New upvalue captured by `renderOnLoaded`: `goD`
+- New upvalue captured by `renderOnLoaded`: `goy`
+- Upvalue no longer captured by `renderOnLoaded`: `gnZ`
+- Upvalue no longer captured by `renderOnLoaded`: `goe`
+- New upvalue captured by `didMount`: `goH`
+- Upvalue no longer captured by `didMount`: `goi`
+- New upvalue captured by `render`: `goD`
+- New upvalue captured by `render`: `goy`
+- Upvalue no longer captured by `render`: `gnZ`
+- Upvalue no longer captured by `render`: `goe`
+- New function: `goT`
+- New function: `goS`
+- New upvalue captured by `disconnect`: `var27185 (write)`
+- New upvalue captured by `disconnect`: `var27186 (write)`
+- Upvalue no longer captured by `disconnect`: `var27055 (write)`
+- Upvalue no longer captured by `disconnect`: `var27056 (write)`
+- New upvalue captured by `connect`: `var27185 (write)`
+- New upvalue captured by `connect`: `var27186 (write)`
+- Upvalue no longer captured by `connect`: `var27055 (write)`
+- Upvalue no longer captured by `connect`: `var27056 (write)`
+- New function: `goU`
+- New function: `goX`
+- New function: `goW`
+- New function: `goY`
+- New function: `gpa`
+- New function: `goZ`
+- New function: `goV`
+- New function: `gpc`
+- New function: `gpe`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gpe_ExternalNavigationHandler`
+- New function: `var27198`
+- New function: `gpf`
+- New function: `gpg`
+- New upvalue captured by `completeExternalNavigation`: `gph`
+- Upvalue no longer captured by `completeExternalNavigation`: `goI`
+- New function: `gpd`
+- New upvalue captured by `renderSocialTab`: `goV`
+- Upvalue no longer captured by `renderSocialTab`: `gow`
+- New upvalue captured by `renderRoactChat`: `gpc`
+- Upvalue no longer captured by `renderRoactChat`: `goD`
+- New upvalue captured by `init`: `bDF`
+- New upvalue captured by `init`: `cRw`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dGV`
+- New upvalue captured by `init`: `dJz`
+- New upvalue captured by `init`: `dKM`
+- New upvalue captured by `init`: `dLi`
+- New upvalue captured by `init`: `dLp`
+- New upvalue captured by `init`: `dry`
+- New upvalue captured by `init`: `ezW`
+- New upvalue captured by `init`: `fLL`
+- New upvalue captured by `init`: `gnE`
+- New upvalue captured by `init`: `gnH`
+- New upvalue captured by `init`: `gpb`
+- New upvalue captured by `init`: `gpc`
+- New upvalue captured by `init`: `gpd`
+- Upvalue no longer captured by `init`: `bDE`
+- Upvalue no longer captured by `init`: `cRv`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dCR`
+- Upvalue no longer captured by `init`: `dGG`
+- Upvalue no longer captured by `init`: `dHT`
+- Upvalue no longer captured by `init`: `dIp`
+- Upvalue no longer captured by `init`: `dIw`
+- Upvalue no longer captured by `init`: `dnu`
+- Upvalue no longer captured by `init`: `eyb`
+- Upvalue no longer captured by `init`: `fLm`
+- Upvalue no longer captured by `init`: `gng`
+- Upvalue no longer captured by `init`: `gni`
+- Upvalue no longer captured by `init`: `goC`
+- Upvalue no longer captured by `init`: `goD`
+- Upvalue no longer captured by `init`: `goE`
+- New upvalue captured by `renderOnLoaded`: `gpd`
+- Upvalue no longer captured by `renderOnLoaded`: `goE`
+- New upvalue captured by `navigateToCoHubAddConnections`: `cWl`
+- Upvalue no longer captured by `navigateToCoHubAddConnections`: `cWk`
+- New function: `var27243`
+- New upvalue captured by `navigateToHomePage`: `cWl`
+- Upvalue no longer captured by `navigateToHomePage`: `cWk`
+- New upvalue captured by `openUserContextualMenu`: `gnH`
+- Upvalue no longer captured by `openUserContextualMenu`: `gni`
+- New upvalue captured by `navigateToUserInfo`: `gnH`
+- Upvalue no longer captured by `navigateToUserInfo`: `gni`
+- New upvalue captured by `isAndroidBackButtonHandlerDisabled`: `cWl`
+- Upvalue no longer captured by `isAndroidBackButtonHandlerDisabled`: `cWk`
+- New upvalue captured by `render`: `dGY`
+- New upvalue captured by `render`: `drE`
+- New upvalue captured by `render`: `gnI`
+- Upvalue no longer captured by `render`: `dCU`
+- Upvalue no longer captured by `render`: `dnA`
+- Upvalue no longer captured by `render`: `gnj`
+- New upvalue captured by `didUpdate`: `gnE`
+- Upvalue no longer captured by `didUpdate`: `gnf`
+- New upvalue captured by `getDerivedStateFromProps`: `cRs`
+- Upvalue no longer captured by `getDerivedStateFromProps`: `cRr`
+- New function: `gpk`
+- New function: `gpj`
+- New upvalue captured by `get`: `dGV`
+- New upvalue captured by `get`: `gpk`
+- Upvalue no longer captured by `get`: `dCR`
+- Upvalue no longer captured by `get`: `goL`
+- New upvalue captured by `reportAppReady`: `gpk`
+- Upvalue no longer captured by `reportAppReady`: `goL`
+- New function: `gpl`
+- New function: `gpL`
+- New function: `gpN`
+- New function: `gpm`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `navigateDownToAddFriends`: `gpo`
+- Upvalue no longer captured by `navigateDownToAddFriends`: `goP`
+- New upvalue captured by `navigateDownToFriendFinder`: `dLf`
+- Upvalue no longer captured by `navigateDownToFriendFinder`: `dIm`
+- New upvalue captured by `navigateDownToAddFriendsAccountProvider`: `gpp`
+- Upvalue no longer captured by `navigateDownToAddFriendsAccountProvider`: `goQ`
+- New upvalue captured by `openProfilePeekView`: `dKL`
+- Upvalue no longer captured by `openProfilePeekView`: `dHS`
+- New upvalue captured by `openGroupsListPage`: `gpn`
+- Upvalue no longer captured by `openGroupsListPage`: `goO`
+- New upvalue captured by `openGameDetailsPeekView`: `dry`
+- Upvalue no longer captured by `openGameDetailsPeekView`: `dnu`
+- New upvalue captured by `navigateToGameDetails`: `gpL`
+- Upvalue no longer captured by `navigateToGameDetails`: `gpm`
+- New upvalue captured by `navigateToUserInfo`: `dKv`
+- Upvalue no longer captured by `navigateToUserInfo`: `dHC`
+- New upvalue captured by `openVerifiedBadgeModal`: `fGY`
+- Upvalue no longer captured by `openVerifiedBadgeModal`: `fGz`
+- New upvalue captured by `openLearnMoreLink`: `dLg`
+- Upvalue no longer captured by `openLearnMoreLink`: `dIn`
+- New upvalue captured by `openDiscoverabilityModal`: `gpN`
+- Upvalue no longer captured by `openDiscoverabilityModal`: `gpo`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `showToast`: `cWd`
+- Upvalue no longer captured by `showToast`: `cWc`
+- New upvalue captured by `navigateTo3DQRCodePage`: `dLk`
+- Upvalue no longer captured by `navigateTo3DQRCodePage`: `dIr`
+- New upvalue captured by `openPlayerContextualMenu`: `dLh`
+- Upvalue no longer captured by `openPlayerContextualMenu`: `dIo`
+- New function: `gpP`
+- New function: `gpO`
+- New upvalue captured by `MomentsTabEntryContainer`: `dKL`
+- Upvalue no longer captured by `MomentsTabEntryContainer`: `dHS`
+- New upvalue captured by `submitMomentsIp`: `var27319 (write)`
+- Upvalue no longer captured by `submitMomentsIp`: `var27189 (write)`
+- New upvalue captured by `onSubmit`: `var27319 (write)`
+- Upvalue no longer captured by `onSubmit`: `var27189 (write)`
+- New upvalue captured by `submitMomentsIp`: `var27341 (write)`
+- Upvalue no longer captured by `submitMomentsIp`: `var27211 (write)`
+- New upvalue captured by `onSubmit`: `var27341 (write)`
+- Upvalue no longer captured by `onSubmit`: `var27211 (write)`
+- New function: `gqU`
+- Upvalue no longer captured by `gqX`: `var1 (write)`
+- New upvalue captured by `onRetrieveTokenFailure`: `gqW`
+- Upvalue no longer captured by `onRetrieveTokenFailure`: `gqy`
+- New upvalue captured by `init`: `gqW`
+- Upvalue no longer captured by `init`: `gqz`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New function: `gra`
+- New function: `grb`
+- New upvalue captured by `gqZ`: `var1 (write)`
+- New upvalue captured by `onWillBlur`: `gqX`
+- New upvalue captured by `onWillBlur`: `gra`
+- New upvalue captured by `onWillBlur`: `var27368 (write)`
+- New upvalue captured by `onWillBlur`: `var27370 (write)`
+- Upvalue no longer captured by `onWillBlur`: `gqB`
+- Upvalue no longer captured by `onWillBlur`: `gqy`
+- Upvalue no longer captured by `onWillBlur`: `var27238 (write)`
+- Upvalue no longer captured by `onWillBlur`: `var27240 (write)`
+- New function: `grd`
+- New function: `grc`
+- New upvalue captured by `init`: `gqX`
+- New upvalue captured by `init`: `grd`
+- Upvalue no longer captured by `init`: `gqE`
+- Upvalue no longer captured by `init`: `gqy`
+- New upvalue captured by `onRetrieveTokenFailure`: `gqX`
+- New upvalue captured by `onRetrieveTokenFailure`: `grd`
+- Upvalue no longer captured by `onRetrieveTokenFailure`: `gqE`
+- Upvalue no longer captured by `onRetrieveTokenFailure`: `gqy`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New function: `grf`
+- New function: `grg`
+- New function: `gre`
+- New function: `gri`
+- New function: `gqR`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gqR_canRenderNativeChallenge`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `gqS`
+- New upvalue captured by `render`: `gqV`
+- New upvalue captured by `render`: `gqZ`
+- New upvalue captured by `render`: `grc`
+- New upvalue captured by `render`: `gre`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `gqA`
+- Upvalue no longer captured by `render`: `gqD`
+- Upvalue no longer captured by `render`: `gqF`
+- Upvalue no longer captured by `render`: `gqt`
+- Upvalue no longer captured by `render`: `gqw`
+- New upvalue captured by `validateChallengeAndSetState`: `gqS`
+- New upvalue captured by `validateChallengeAndSetState`: `gqU`
+- New upvalue captured by `validateChallengeAndSetState`: `grb`
+- New upvalue captured by `validateChallengeAndSetState`: `grh`
+- Upvalue no longer captured by `validateChallengeAndSetState`: `gqC`
+- Upvalue no longer captured by `validateChallengeAndSetState`: `gqI`
+- Upvalue no longer captured by `validateChallengeAndSetState`: `gqt`
+- Upvalue no longer captured by `validateChallengeAndSetState`: `gqv`
+- New upvalue captured by `challengeContinue`: `dJE`
+- New upvalue captured by `challengeContinue`: `gqS`
+- New upvalue captured by `challengeContinue`: `gqU`
+- New upvalue captured by `challengeContinue`: `grb`
+- New upvalue captured by `challengeContinue`: `gri`
+- Upvalue no longer captured by `challengeContinue`: `dGL`
+- Upvalue no longer captured by `challengeContinue`: `gqC`
+- Upvalue no longer captured by `challengeContinue`: `gqJ`
+- Upvalue no longer captured by `challengeContinue`: `gqt`
+- Upvalue no longer captured by `challengeContinue`: `gqv`
+- New upvalue captured by `gwu`: `var1 (write)`
+- Upvalue no longer captured by `onActivated`: `onSearchTypeSelected`
+- Upvalue no longer captured by `onActivated`: `searchTypes`
+- New upvalue captured by `shouldHideGameStats`: `cWl`
+- Upvalue no longer captured by `shouldHideGameStats`: `cWk`
+- Upvalue no longer captured by `gwE`: `var1 (write)`
+- New upvalue captured by `gwi`: `var1 (write)`
+- New upvalue captured by `init`: `cbw`
+- Upvalue no longer captured by `init`: `cbv`
+- New upvalue captured by `loadMoreGames`: `cbw`
+- Upvalue no longer captured by `loadMoreGames`: `cbv`
+- New upvalue captured by `renderWithLocalized`: `dJO`
+- New upvalue captured by `renderWithLocalized`: `dJW`
+- New upvalue captured by `renderWithLocalized`: `drE`
+- New upvalue captured by `renderWithLocalized`: `eAO`
+- New upvalue captured by `renderWithLocalized`: `gwB`
+- New upvalue captured by `renderWithLocalized`: `gwj`
+- New upvalue captured by `renderWithLocalized`: `gwu`
+- New upvalue captured by `renderWithLocalized`: `gwv`
+- Upvalue no longer captured by `renderWithLocalized`: `dGV`
+- Upvalue no longer captured by `renderWithLocalized`: `dHd`
+- Upvalue no longer captured by `renderWithLocalized`: `dnA`
+- Upvalue no longer captured by `renderWithLocalized`: `eyT`
+- Upvalue no longer captured by `renderWithLocalized`: `gvK`
+- Upvalue no longer captured by `renderWithLocalized`: `gvV`
+- Upvalue no longer captured by `renderWithLocalized`: `gvW`
+- Upvalue no longer captured by `renderWithLocalized`: `gwf`
+- Upvalue no longer captured by `gwH`: `var1 (write)`
+- New upvalue captured by `render`: `dJR`
+- Upvalue no longer captured by `render`: `dGY`
+- New upvalue captured by `renderChildrenButtonsAndLayout`: `dJA`
+- New upvalue captured by `renderChildrenButtonsAndLayout`: `gwJ`
+- Upvalue no longer captured by `renderChildrenButtonsAndLayout`: `dGH`
+- Upvalue no longer captured by `renderChildrenButtonsAndLayout`: `gwk`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New function: `var27561`
+- New function: `var27563`
+- New function: `var27621`
+- New function: `gwV`
+- New upvalue captured by `renderOnLoaded`: `gwN`
+- New upvalue captured by `renderOnLoaded`: `var27660 (write)`
+- New upvalue captured by `renderOnLoaded`: `var27661 (write)`
+- New upvalue captured by `renderOnLoaded`: `var27665 (write)`
+- New upvalue captured by `renderOnLoaded`: `var27666 (write)`
+- New upvalue captured by `renderOnLoaded`: `var27667 (write)`
+- Upvalue no longer captured by `renderOnLoaded`: `gwo`
+- Upvalue no longer captured by `renderOnLoaded`: `var27530 (write)`
+- Upvalue no longer captured by `renderOnLoaded`: `var27531 (write)`
+- Upvalue no longer captured by `renderOnLoaded`: `var27535 (write)`
+- Upvalue no longer captured by `renderOnLoaded`: `var27536 (write)`
+- Upvalue no longer captured by `renderOnLoaded`: `var27537 (write)`
+- New function: `gwY`
+- New upvalue captured by `fireAutoSearchLoadingTimeEvent`: `gwH`
+- Upvalue no longer captured by `fireAutoSearchLoadingTimeEvent`: `gwi`
+- New upvalue captured by `init`: `dJL`
+- New upvalue captured by `init`: `dJP`
+- New upvalue captured by `init`: `drE`
+- New upvalue captured by `init`: `dyh`
+- New upvalue captured by `init`: `eAd`
+- Upvalue no longer captured by `init`: `dGS`
+- Upvalue no longer captured by `init`: `dGW`
+- Upvalue no longer captured by `init`: `dnA`
+- Upvalue no longer captured by `init`: `dud`
+- Upvalue no longer captured by `init`: `eyi`
+- New upvalue captured by `useSearchTypeSelector`: `dJL`
+- Upvalue no longer captured by `useSearchTypeSelector`: `dGS`
+- New upvalue captured by `updateSearchType`: `drE`
+- New upvalue captured by `updateSearchType`: `dyh`
+- New upvalue captured by `updateSearchType`: `eAd`
+- Upvalue no longer captured by `updateSearchType`: `dnA`
+- Upvalue no longer captured by `updateSearchType`: `dud`
+- Upvalue no longer captured by `updateSearchType`: `eyi`
+- New upvalue captured by `onScrollDirectionChanged`: `dJP`
+- Upvalue no longer captured by `onScrollDirectionChanged`: `dGW`
+- New upvalue captured by `renderWithLocalized`: `dJL`
+- New upvalue captured by `renderWithLocalized`: `drE`
+- New upvalue captured by `renderWithLocalized`: `eAa`
+- New upvalue captured by `renderWithLocalized`: `gwI`
+- Upvalue no longer captured by `renderWithLocalized`: `dGS`
+- Upvalue no longer captured by `renderWithLocalized`: `dnA`
+- Upvalue no longer captured by `renderWithLocalized`: `eyf`
+- Upvalue no longer captured by `renderWithLocalized`: `gwj`
+- New upvalue captured by `didMount`: `drE`
+- Upvalue no longer captured by `didMount`: `dnA`
+- New function: `gxa`
+- New upvalue captured by `onActivated`: `onSearchTypeSelected`
+- New upvalue captured by `onActivated`: `searchTypes`
+- Upvalue no longer captured by `onActivated`: `cWk`
+- Upvalue no longer captured by `onActivated`: `fFlagBlackbirdRequiresIAP`
+- Upvalue no longer captured by `onActivated`: `fFlagUnifyConsoleSettingsPage`
+- Upvalue no longer captured by `onActivated`: `fkt`
+- Upvalue no longer captured by `onActivated`: `gyc`
+- Upvalue no longer captured by `onActivated`: `sources`
+- New function: `gxb`
+- New function: `gxc`
+- New function: `var27763`
+- New function: `var27787`
+- New function: `var27797`
+- New function: `var27798`
+- New function: `gxd`
+- New function: `gwZ`
+- New function: `var27826`
+- New upvalue captured by `onSubmitSearch`: `dyh`
+- Upvalue no longer captured by `onSubmitSearch`: `dud`
+- New upvalue captured by `gwF`: `var1 (write)`
+- New function: `gxh`
+- New function: `gxi`
+- New function: `gxj`
+- Upvalue no longer captured by `gxn`: `var1 (write)`
+- New function: `gxr`
+- Upvalue no longer captured by `gxs`: `var1 (write)`
+- Upvalue no longer captured by `gxt`: `var1 (write)`
+- New function: `gxg`
+- New function: `gxf`
+- New function: `gxe`
+- New function: `var27921`
+- New function: `var27922`
+- New function: `var27924`
+- New upvalue captured by `renderOnLoaded`: `gwN`
+- New upvalue captured by `renderOnLoaded`: `var27911 (write)`
+- Upvalue no longer captured by `renderOnLoaded`: `gwo`
+- Upvalue no longer captured by `renderOnLoaded`: `var27781 (write)`
+- New upvalue captured by `gym`: `var1 (write)`
+- New function: `var27959`
+- New function: `gyo`
+- New function: `gyp`
+- New upvalue captured by `DeeplinkGamesListWrapper`: `bDp`
+- New upvalue captured by `DeeplinkGamesListWrapper`: `gwi`
+- Upvalue no longer captured by `DeeplinkGamesListWrapper`: `bDo`
+- Upvalue no longer captured by `DeeplinkGamesListWrapper`: `gvJ`
+- New upvalue captured by `renderOnLoaded`: `gwi`
+- Upvalue no longer captured by `renderOnLoaded`: `gvJ`
+- New upvalue captured by `SduiChartsDeeplinkRedirectGuard`: `bDp`
+- New upvalue captured by `SduiChartsDeeplinkRedirectGuard`: `gwy`
+- Upvalue no longer captured by `SduiChartsDeeplinkRedirectGuard`: `bDo`
+- Upvalue no longer captured by `SduiChartsDeeplinkRedirectGuard`: `gvZ`
+- New upvalue captured by `shouldAddToMorePageItem`: `cWl`
+- New upvalue captured by `shouldAddToMorePageItem`: `fkR`
+- New upvalue captured by `shouldAddToMorePageItem`: `gyu`
+- Upvalue no longer captured by `shouldAddToMorePageItem`: `cWk`
+- Upvalue no longer captured by `shouldAddToMorePageItem`: `fkt`
+- Upvalue no longer captured by `shouldAddToMorePageItem`: `gxV`
+- New upvalue captured by `updateMoreItemBadgeCount`: `fkR`
+- Upvalue no longer captured by `updateMoreItemBadgeCount`: `fkt`
+- New upvalue captured by `gyx`: `var1 (write)`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `gyz`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `fkR`
+- New upvalue captured by `init`: `flh`
+- New upvalue captured by `init`: `gyB`
+- New upvalue captured by `init`: `gyz`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `fkJ`
+- Upvalue no longer captured by `init`: `fkt`
+- Upvalue no longer captured by `init`: `gya`
+- Upvalue no longer captured by `init`: `gyc`
+- New upvalue captured by `navigateDown`: `cWl`
+- New upvalue captured by `navigateDown`: `fkR`
+- New upvalue captured by `navigateDown`: `flh`
+- New upvalue captured by `navigateDown`: `gyz`
+- Upvalue no longer captured by `navigateDown`: `cWk`
+- Upvalue no longer captured by `navigateDown`: `fkJ`
+- Upvalue no longer captured by `navigateDown`: `fkt`
+- Upvalue no longer captured by `navigateDown`: `gya`
+- New upvalue captured by `onActivated`: `cWl`
+- New upvalue captured by `onActivated`: `fFlagBlackbirdRequiresIAP`
+- New upvalue captured by `onActivated`: `fFlagUnifyConsoleSettingsPage`
+- New upvalue captured by `onActivated`: `fkR`
+- New upvalue captured by `onActivated`: `gyB`
+- New upvalue captured by `onActivated`: `sources`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `onActivated`: `eBF`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `showWebViewNotAvailableToastMessage`: `cQu`
+- New upvalue captured by `showWebViewNotAvailableToastMessage`: `cWd`
+- Upvalue no longer captured by `showWebViewNotAvailableToastMessage`: `cQt`
+- Upvalue no longer captured by `showWebViewNotAvailableToastMessage`: `cWc`
+- New upvalue captured by `openLeaveRobloxAlertUIBlox`: `eEp`
+- Upvalue no longer captured by `openLeaveRobloxAlertUIBlox`: `eCu`
+- New upvalue captured by `openReportLogConfirmation`: `gyA`
+- Upvalue no longer captured by `openReportLogConfirmation`: `gyb`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `navigateToItem`: `fkX`
+- New upvalue captured by `navigateToItem`: `flh`
+- Upvalue no longer captured by `navigateToItem`: `fkJ`
+- Upvalue no longer captured by `navigateToItem`: `fkz`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New function: `gyT`
+- New upvalue captured by `init`: `eDA`
+- Upvalue no longer captured by `init`: `eBF`
+- New upvalue captured by `onActivated`: `eDA`
+- Upvalue no longer captured by `onActivated`: `value`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `showAccountSwitcher`: `eDA`
+- New upvalue captured by `showAccountSwitcher`: `fAS`
+- Upvalue no longer captured by `showAccountSwitcher`: `eBF`
+- Upvalue no longer captured by `showAccountSwitcher`: `fAt`
+- Upvalue no longer captured by `gyV`: `var1 (write)`
+- New upvalue captured by `gyw`: `var1 (write)`
+- New upvalue captured by `init`: `dJA`
+- New upvalue captured by `init`: `gyy`
+- Upvalue no longer captured by `init`: `dGH`
+- Upvalue no longer captured by `init`: `gxZ`
+- New upvalue captured by `renderGridItem`: `dJA`
+- New upvalue captured by `renderGridItem`: `gyy`
+- Upvalue no longer captured by `renderGridItem`: `dGH`
+- Upvalue no longer captured by `renderGridItem`: `gxZ`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `drE`
+- New upvalue captured by `render`: `eDA`
+- New upvalue captured by `render`: `fmT`
+- New upvalue captured by `render`: `fpy`
+- New upvalue captured by `render`: `gyC`
+- New upvalue captured by `render`: `gyR`
+- New upvalue captured by `render`: `gyU`
+- New upvalue captured by `render`: `gyx`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dnA`
+- Upvalue no longer captured by `render`: `eBF`
+- Upvalue no longer captured by `render`: `fmv`
+- Upvalue no longer captured by `render`: `fpa`
+- Upvalue no longer captured by `render`: `gxY`
+- Upvalue no longer captured by `render`: `gyd`
+- Upvalue no longer captured by `render`: `gyt`
+- Upvalue no longer captured by `render`: `gyw`
+- New function: `gys`
+- New function: `var28249`
+- New function: `gyr`
+- New function: `gza`
+- New function: `gyZ`
+- New upvalue captured by `ComfortProfileSetting`: `fls`
+- New upvalue captured by `ComfortProfileSetting`: `gza`
+- Upvalue no longer captured by `ComfortProfileSetting`: `fkU`
+- Upvalue no longer captured by `ComfortProfileSetting`: `gyB`
+- New upvalue captured by `VignetteEnabledSetting`: `fls`
+- New upvalue captured by `VignetteEnabledSetting`: `gza`
+- Upvalue no longer captured by `VignetteEnabledSetting`: `fkU`
+- Upvalue no longer captured by `VignetteEnabledSetting`: `gyB`
+- New upvalue captured by `SteppedRotationEnabledSetting`: `fls`
+- New upvalue captured by `SteppedRotationEnabledSetting`: `gza`
+- Upvalue no longer captured by `SteppedRotationEnabledSetting`: `fkU`
+- Upvalue no longer captured by `SteppedRotationEnabledSetting`: `gyB`
+- New upvalue captured by `ThirdPersonFixedCamEnabledSetting`: `fls`
+- New upvalue captured by `ThirdPersonFixedCamEnabledSetting`: `gza`
+- Upvalue no longer captured by `ThirdPersonFixedCamEnabledSetting`: `fkU`
+- Upvalue no longer captured by `ThirdPersonFixedCamEnabledSetting`: `gyB`
+- New upvalue captured by `SafetyBubbleModeSetting`: `fls`
+- New upvalue captured by `SafetyBubbleModeSetting`: `gza`
+- Upvalue no longer captured by `SafetyBubbleModeSetting`: `fkU`
+- Upvalue no longer captured by `SafetyBubbleModeSetting`: `gyB`
+- Upvalue no longer captured by `gzb`: `var1 (write)`
+- New upvalue captured by `openLeaveRobloxAlertUIBlox`: `eEp`
+- Upvalue no longer captured by `openLeaveRobloxAlertUIBlox`: `eCu`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `onActivated`: `value`
+- New upvalue captured by `gzk`: `var1 (write)`
+- New upvalue captured by `gzg`: `var1 (write)`
+- New function: `gzd`
+- New function: `gzw`
+- New function: `gzv`
+- New function: `gzx`
+- New function: `gzA`
+- New function: `gzp`
+- New upvalue captured by `Section`: `gzn`
+- New upvalue captured by `Section`: `gzp`
+- Upvalue no longer captured by `Section`: `gyO`
+- Upvalue no longer captured by `Section`: `gyQ`
+- New function: `gzc`
+- New upvalue captured by `init`: `dKZ`
+- New upvalue captured by `init`: `fkR`
+- New upvalue captured by `init`: `fld`
+- New upvalue captured by `init`: `gzl`
+- Upvalue no longer captured by `init`: `dIg`
+- Upvalue no longer captured by `init`: `fkF`
+- Upvalue no longer captured by `init`: `fkt`
+- Upvalue no longer captured by `init`: `gyM`
+- New upvalue captured by `renderItem`: `fld`
+- Upvalue no longer captured by `renderItem`: `fkF`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `cWl`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `flc`
+- New upvalue captured by `render`: `fli`
+- New upvalue captured by `render`: `gzl`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `cWk`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fkE`
+- Upvalue no longer captured by `render`: `fkK`
+- Upvalue no longer captured by `render`: `gyM`
+- New function: `var28476`
+- New function: `gzF`
+- New upvalue captured by `finalize`: `p11337 (write)`
+- New upvalue captured by `finalize`: `var28507 (write)`
+- New upvalue captured by `finalize`: `var28508 (write)`
+- Upvalue no longer captured by `finalize`: `p11309 (write)`
+- Upvalue no longer captured by `finalize`: `var28377 (write)`
+- Upvalue no longer captured by `finalize`: `var28378 (write)`
+- New upvalue captured by `GetPercentComplete`: `var28508 (write)`
+- Upvalue no longer captured by `GetPercentComplete`: `var28378 (write)`
+- New upvalue captured by `IsFinished`: `var28507 (write)`
+- Upvalue no longer captured by `IsFinished`: `var28377 (write)`
+- New upvalue captured by `Finish`: `var28507 (write)`
+- Upvalue no longer captured by `Finish`: `var28377 (write)`
+- New upvalue captured by `Cancel`: `var28507 (write)`
+- Upvalue no longer captured by `Cancel`: `var28377 (write)`
+- New upvalue captured by `fire`: `var28522 (write)`
+- New upvalue captured by `fire`: `var28523 (write)`
+- Upvalue no longer captured by `fire`: `var28392 (write)`
+- Upvalue no longer captured by `fire`: `var28393 (write)`
+- New upvalue captured by `connect`: `var28522 (write)`
+- New upvalue captured by `connect`: `var28523 (write)`
+- Upvalue no longer captured by `connect`: `var28392 (write)`
+- Upvalue no longer captured by `connect`: `var28393 (write)`
+- New upvalue captured by `wait`: `var28522 (write)`
+- New upvalue captured by `wait`: `var28523 (write)`
+- Upvalue no longer captured by `wait`: `var28392 (write)`
+- Upvalue no longer captured by `wait`: `var28393 (write)`
+- New upvalue captured by `Upper`: `var28490 (write)`
+- Upvalue no longer captured by `Upper`: `var28360 (write)`
+- New function: `gzE`
+- New function: `gzG`
+- New upvalue captured by `LocStringUA`: `var28559 (write)`
+- New upvalue captured by `LocStringUA`: `var28560 (write)`
+- New upvalue captured by `LocStringUA`: `var28561 (write)`
+- Upvalue no longer captured by `LocStringUA`: `var28429 (write)`
+- Upvalue no longer captured by `LocStringUA`: `var28430 (write)`
+- Upvalue no longer captured by `LocStringUA`: `var28431 (write)`
+- New function: `gzH`
+- New function: `gzJ`
+- New function: `gzK`
+- New function: `gzI`
+- New upvalue captured by `init`: `gzF`
+- Upvalue no longer captured by `init`: `gzg`
+- New upvalue captured by `getCurrentEdgePercent`: `gzF`
+- Upvalue no longer captured by `getCurrentEdgePercent`: `gzg`
+- New upvalue captured by `getCurrentEdgeSize`: `gzF`
+- Upvalue no longer captured by `getCurrentEdgeSize`: `gzg`
+- New upvalue captured by `onAdjustThumbstick`: `gzF`
+- Upvalue no longer captured by `onAdjustThumbstick`: `gzg`
+- New upvalue captured by `onRenderStep`: `gzF`
+- Upvalue no longer captured by `onRenderStep`: `gzg`
+- New upvalue captured by `render`: `gzJ`
+- New upvalue captured by `render`: `var28573 (write)`
+- Upvalue no longer captured by `render`: `gzl`
+- Upvalue no longer captured by `render`: `var28443 (write)`
+- New function: `gzD`
+- Parameter removed from `onActivated` (1 -> 0 params)
+- Upvalue no longer captured by `onActivated`: `var28517 (write)`
+- New function: `gzL`
+- New upvalue captured by `init`: `fld`
+- Upvalue no longer captured by `init`: `fkF`
+- New upvalue captured by `renderItem`: `fld`
+- Upvalue no longer captured by `renderItem`: `fkF`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `eAa`
+- New upvalue captured by `render`: `fkR`
+- New upvalue captured by `render`: `flc`
+- New upvalue captured by `render`: `fli`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `eyf`
+- Upvalue no longer captured by `render`: `fkE`
+- Upvalue no longer captured by `render`: `fkK`
+- Upvalue no longer captured by `render`: `fkt`
+- New function: `var28630`
+- New parameter added to `onActivated` (0 -> 1 params)
+- New upvalue captured by `onActivated`: `var28647 (write)`
+- Upvalue no longer captured by `onActivated`: `props`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `gCq`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `gBR`
+- New upvalue captured by `init`: `dJA`
+- Upvalue no longer captured by `init`: `dGH`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New upvalue captured by `gCp`: `var1 (write)`
+- New upvalue captured by `init`: `eDA`
+- New upvalue captured by `init`: `gtg`
+- Upvalue no longer captured by `init`: `eBF`
+- Upvalue no longer captured by `init`: `gsH`
+- New upvalue captured by `onResendButtonActivated`: `eDA`
+- New upvalue captured by `onResendButtonActivated`: `gtg`
+- Upvalue no longer captured by `onResendButtonActivated`: `eBF`
+- Upvalue no longer captured by `onResendButtonActivated`: `gsH`
+- New upvalue captured by `handlePhoneNumberVerificationSequence`: `eDA`
+- Upvalue no longer captured by `handlePhoneNumberVerificationSequence`: `eBF`
+- New upvalue captured by `onContinueButtonActivated`: `eDA`
+- Upvalue no longer captured by `onContinueButtonActivated`: `eBF`
+- New upvalue captured by `onUseEmailClicked`: `eDA`
+- Upvalue no longer captured by `onUseEmailClicked`: `eBF`
+- New upvalue captured by `onInvisibleTextBoxFocused`: `eDA`
+- Upvalue no longer captured by `onInvisibleTextBoxFocused`: `eBF`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCq`
+- New upvalue captured by `render`: `gCr`
+- New upvalue captured by `render`: `gCs`
+- New upvalue captured by `render`: `gCv`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gBR`
+- Upvalue no longer captured by `render`: `gBS`
+- Upvalue no longer captured by `render`: `gBT`
+- Upvalue no longer captured by `render`: `gBW`
+- New upvalue captured by `setBackNavigationDisabled`: `eFf`
+- Upvalue no longer captured by `setBackNavigationDisabled`: `eDk`
+- New upvalue captured by `verifyCode`: `gCt`
+- Upvalue no longer captured by `verifyCode`: `gBU`
+- New upvalue captured by `navigateToPage`: `dKM`
+- Upvalue no longer captured by `navigateToPage`: `dHT`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `showTooManyAttemptsErrorToast`: `cQv`
+- New upvalue captured by `showTooManyAttemptsErrorToast`: `cWd`
+- Upvalue no longer captured by `showTooManyAttemptsErrorToast`: `cQu`
+- Upvalue no longer captured by `showTooManyAttemptsErrorToast`: `cWc`
+- New upvalue captured by `showErrorToast`: `dJF`
+- Upvalue no longer captured by `showErrorToast`: `dGM`
+- New upvalue captured by `get`: `dGV`
+- Upvalue no longer captured by `get`: `dCR`
+- Upvalue no longer captured by `gCA`: `var1 (write)`
+- New upvalue captured by `gCw`: `var1 (write)`
+- New upvalue captured by `init`: `gCz`
+- Upvalue no longer captured by `init`: `gCb`
+- New upvalue captured by `joinAnyways`: `gCA`
+- Upvalue no longer captured by `joinAnyways`: `gCb`
+- New upvalue captured by `onOverlayOptOutCheckBoxActivated`: `gCz`
+- Upvalue no longer captured by `onOverlayOptOutCheckBoxActivated`: `gCa`
+- New upvalue captured by `closeEnableVoiceModal`: `gCA`
+- Upvalue no longer captured by `closeEnableVoiceModal`: `gCb`
+- New upvalue captured by `didMount`: `gCA`
+- Upvalue no longer captured by `didMount`: `gCb`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCA`
+- New upvalue captured by `render`: `gCx`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gBY`
+- Upvalue no longer captured by `render`: `gCb`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `setNetworkingErrorToast`: `dJF`
+- Upvalue no longer captured by `setNetworkingErrorToast`: `dGM`
+- New upvalue captured by `openVoiceFAQ`: `cWl`
+- New upvalue captured by `openVoiceFAQ`: `dKM`
+- New upvalue captured by `openVoiceFAQ`: `dzX`
+- Upvalue no longer captured by `openVoiceFAQ`: `cWk`
+- Upvalue no longer captured by `openVoiceFAQ`: `dHT`
+- Upvalue no longer captured by `openVoiceFAQ`: `dvT`
+- New function: `gCC`
+- Upvalue no longer captured by `gCG`: `var1 (write)`
+- New upvalue captured by `init`: `gCE`
+- Upvalue no longer captured by `init`: `gCh`
+- New upvalue captured by `agreeAndClosePopup`: `gCE`
+- Upvalue no longer captured by `agreeAndClosePopup`: `gCh`
+- New upvalue captured by `getLayoutInfo`: `dJR`
+- Upvalue no longer captured by `getLayoutInfo`: `dGY`
+- New upvalue captured by `renderWithProviders`: `bDp`
+- New upvalue captured by `renderWithProviders`: `gCC`
+- New upvalue captured by `renderWithProviders`: `gCG`
+- Upvalue no longer captured by `renderWithProviders`: `bDo`
+- Upvalue no longer captured by `renderWithProviders`: `gCd`
+- Upvalue no longer captured by `renderWithProviders`: `gCh`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCG`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCh`
+- New upvalue captured by `closePopup`: `gCD`
+- Upvalue no longer captured by `closePopup`: `gCe`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `eDs`
+- New upvalue captured by `init`: `flh`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `eBx`
+- Upvalue no longer captured by `init`: `fkJ`
+- New upvalue captured by `supportFormActivated`: `cWl`
+- New upvalue captured by `supportFormActivated`: `eDs`
+- New upvalue captured by `supportFormActivated`: `flh`
+- Upvalue no longer captured by `supportFormActivated`: `cWk`
+- Upvalue no longer captured by `supportFormActivated`: `eBx`
+- Upvalue no longer captured by `supportFormActivated`: `fkJ`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `onActivated`: `props`
+- Upvalue no longer captured by `onActivated`: `agreementType`
+- Upvalue no longer captured by `onActivated`: `cWk`
+- Upvalue no longer captured by `onActivated`: `navigateDown`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `init`: `gCE`
+- Upvalue no longer captured by `init`: `gCf`
+- New upvalue captured by `tryAgree`: `gCE`
+- Upvalue no longer captured by `tryAgree`: `gCf`
+- New upvalue captured by `getLayoutInfo`: `dJR`
+- Upvalue no longer captured by `getLayoutInfo`: `dGY`
+- New upvalue captured by `renderBalanceTransferPrompt`: `gCJ`
+- Upvalue no longer captured by `renderBalanceTransferPrompt`: `gCk`
+- New upvalue captured by `renderWithProviders`: `bDp`
+- New upvalue captured by `renderWithProviders`: `gCC`
+- Upvalue no longer captured by `renderWithProviders`: `bDo`
+- Upvalue no longer captured by `renderWithProviders`: `gCd`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `closePopup`: `gCI`
+- Upvalue no longer captured by `closePopup`: `gCj`
+- New upvalue captured by `logout`: `foC`
+- New upvalue captured by `logout`: `foJ`
+- Upvalue no longer captured by `logout`: `fod`
+- Upvalue no longer captured by `logout`: `fok`
+- New upvalue captured by `gCK`: `var1 (write)`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `showFirstPrompt`: `dKx`
+- New upvalue captured by `showFirstPrompt`: `dKy`
+- Upvalue no longer captured by `showFirstPrompt`: `dHE`
+- Upvalue no longer captured by `showFirstPrompt`: `dHF`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dKx`
+- New upvalue captured by `init`: `ezW`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dHE`
+- Upvalue no longer captured by `init`: `eyb`
+- New upvalue captured by `onDissent`: `dKx`
+- New upvalue captured by `onDissent`: `ezW`
+- Upvalue no longer captured by `onDissent`: `dHE`
+- Upvalue no longer captured by `onDissent`: `eyb`
+- New upvalue captured by `renderAgreementsListItems`: `cWl`
+- Upvalue no longer captured by `renderAgreementsListItems`: `cWk`
+- New upvalue captured by `onActivated`: `agreementType`
+- New upvalue captured by `onActivated`: `cWl`
+- New upvalue captured by `onActivated`: `navigateDown`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `onActivated`: `hasValidDate`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `setAgreedUserAgreements`: `gAv`
+- Upvalue no longer captured by `setAgreedUserAgreements`: `gzW`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `showSecondPrompt`: `dKx`
+- New upvalue captured by `showSecondPrompt`: `dKy`
+- Upvalue no longer captured by `showSecondPrompt`: `dHE`
+- Upvalue no longer captured by `showSecondPrompt`: `dHF`
+- New upvalue captured by `gCO`: `var1 (write)`
+- New upvalue captured by `render`: `fmO`
+- Upvalue no longer captured by `render`: `fmq`
+- New upvalue captured by `renderContent`: `fmO`
+- Upvalue no longer captured by `renderContent`: `fmq`
+- New upvalue captured by `renderTextContent`: `eAP`
+- Upvalue no longer captured by `renderTextContent`: `eyU`
+- New upvalue captured by `init`: `fmP`
+- Upvalue no longer captured by `init`: `fmr`
+- New upvalue captured by `touchTapCallback`: `fmP`
+- Upvalue no longer captured by `touchTapCallback`: `fmr`
+- New upvalue captured by `render`: `dJY`
+- New upvalue captured by `render`: `gCO`
+- Upvalue no longer captured by `render`: `dHf`
+- Upvalue no longer captured by `render`: `gCp`
+- New upvalue captured by `openNoticeDetail`: `eDt`
+- Upvalue no longer captured by `openNoticeDetail`: `eBy`
+- New upvalue captured by `decrementUnreadTencentNoticeCount`: `fmM`
+- Upvalue no longer captured by `decrementUnreadTencentNoticeCount`: `fmo`
+- New upvalue captured by `readTencentNoticeId`: `fmN`
+- Upvalue no longer captured by `readTencentNoticeId`: `fmp`
+- New upvalue captured by `render`: `gCN`
+- Upvalue no longer captured by `render`: `gCo`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `gCR`: `var1 (write)`
+- New upvalue captured by `FoundationBirthdayPicker`: `dJA`
+- Upvalue no longer captured by `FoundationBirthdayPicker`: `dGH`
+- New upvalue captured by `reportClosedWithoutConfirmation`: `eDA`
+- Upvalue no longer captured by `reportClosedWithoutConfirmation`: `eBF`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dJA`
+- New upvalue captured by `init`: `eDA`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dGH`
+- Upvalue no longer captured by `init`: `eBF`
+- New upvalue captured by `updatePositionFromAnimation`: `cQu`
+- Upvalue no longer captured by `updatePositionFromAnimation`: `cQt`
+- New upvalue captured by `updateBirthday`: `eDA`
+- Upvalue no longer captured by `updateBirthday`: `eBF`
+- New upvalue captured by `shouldRequireManualSelection`: `gCR`
+- Upvalue no longer captured by `shouldRequireManualSelection`: `gCs`
+- New upvalue captured by `shouldShowAgeCalculator`: `gCR`
+- Upvalue no longer captured by `shouldShowAgeCalculator`: `gCs`
+- New upvalue captured by `shouldUseFoundationPicker`: `grT`
+- Upvalue no longer captured by `shouldUseFoundationPicker`: `gru`
+- New upvalue captured by `didMount`: `eDA`
+- Upvalue no longer captured by `didMount`: `eBF`
+- New upvalue captured by `renderFoundationSheet`: `dJA`
+- Upvalue no longer captured by `renderFoundationSheet`: `dGH`
+- New upvalue captured by `renderContent`: `dJA`
+- New upvalue captured by `renderContent`: `dJW`
+- New upvalue captured by `renderContent`: `dKl`
+- New upvalue captured by `renderContent`: `eAO`
+- New upvalue captured by `renderContent`: `grR`
+- New upvalue captured by `renderContent`: `grT`
+- Upvalue no longer captured by `renderContent`: `dGH`
+- Upvalue no longer captured by `renderContent`: `dHd`
+- Upvalue no longer captured by `renderContent`: `dHs`
+- Upvalue no longer captured by `renderContent`: `eyT`
+- Upvalue no longer captured by `renderContent`: `grs`
+- Upvalue no longer captured by `renderContent`: `gru`
+- New upvalue captured by `onActivated`: `hasValidDate`
+- Upvalue no longer captured by `onActivated`: `closeCallback`
+- Upvalue no longer captured by `onActivated`: `gameInviteAnalyticsManager`
+- Upvalue no longer captured by `onActivated`: `gameInviteConstants`
+- Upvalue no longer captured by `onActivated`: `gameInviteModalManager`
+- Upvalue no longer captured by `onActivated`: `var29193 (write)`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `eAO`
+- New upvalue captured by `render`: `eAP`
+- New upvalue captured by `render`: `flf`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `eyT`
+- Upvalue no longer captured by `render`: `eyU`
+- Upvalue no longer captured by `render`: `fkH`
+- New function: `var28961`
+- New upvalue captured by `gCS`: `var1 (write)`
+- New upvalue captured by `didMount`: `fLD`
+- Upvalue no longer captured by `didMount`: `fLe`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `fyE`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `fyf`
+- Upvalue no longer captured by `render`: `gCu`
+- New function: `var28976`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `openPurchaseRobuxPage`: `eEl`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `eCq`
+- New upvalue captured by `fromJsonData`: `cQF`
+- Upvalue no longer captured by `fromJsonData`: `cQE`
+- New upvalue captured by `Post`: `cQF`
+- New upvalue captured by `Post`: `dJE`
+- New upvalue captured by `Post`: `dJF`
+- New upvalue captured by `Post`: `fOp`
+- New upvalue captured by `Post`: `gCX`
+- Upvalue no longer captured by `Post`: `cQE`
+- Upvalue no longer captured by `Post`: `dGL`
+- Upvalue no longer captured by `Post`: `dGM`
+- Upvalue no longer captured by `Post`: `fNQ`
+- Upvalue no longer captured by `Post`: `gCz`
+- New upvalue captured by `init`: `dKm`
+- New upvalue captured by `init`: `fOq`
+- New upvalue captured by `init`: `fOr`
+- Upvalue no longer captured by `init`: `dHt`
+- Upvalue no longer captured by `init`: `fNR`
+- Upvalue no longer captured by `init`: `fNS`
+- New upvalue captured by `customPurchaseErrorHandler`: `fOq`
+- New upvalue captured by `customPurchaseErrorHandler`: `fOr`
+- Upvalue no longer captured by `customPurchaseErrorHandler`: `fNR`
+- Upvalue no longer captured by `customPurchaseErrorHandler`: `fNS`
+- New upvalue captured by `purchaseGame`: `dKm`
+- Upvalue no longer captured by `purchaseGame`: `dHt`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `fyE`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `fyf`
+- Upvalue no longer captured by `render`: `gCu`
+- New function: `var29020`
+- New upvalue captured by `openPurchaseGameRobuxShortfallPrompt`: `gCV`
+- Upvalue no longer captured by `openPurchaseGameRobuxShortfallPrompt`: `gCw`
+- New upvalue captured by `purchaseGame`: `gCW`
+- Upvalue no longer captured by `purchaseGame`: `gCx`
+- New upvalue captured by `setPurchaseErrorToast`: `fOp`
+- Upvalue no longer captured by `setPurchaseErrorToast`: `fNQ`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dJA`
+- New upvalue captured by `init`: `dLi`
+- New upvalue captured by `init`: `gDd`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dGH`
+- Upvalue no longer captured by `init`: `dIp`
+- Upvalue no longer captured by `init`: `gCE`
+- New upvalue captured by `onJoinButtonActivated`: `cQu`
+- New upvalue captured by `onJoinButtonActivated`: `dLi`
+- New upvalue captured by `onJoinButtonActivated`: `gDd`
+- Upvalue no longer captured by `onJoinButtonActivated`: `cQt`
+- Upvalue no longer captured by `onJoinButtonActivated`: `dIp`
+- Upvalue no longer captured by `onJoinButtonActivated`: `gCE`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `cRw`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `fLR`
+- New upvalue captured by `render`: `gDd`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `cRv`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `fLs`
+- Upvalue no longer captured by `render`: `gCE`
+- New function: `var29051`
+- New function: `var29052`
+- New upvalue captured by `CreateDivider`: `cQu`
+- New upvalue captured by `CreateDivider`: `dJA`
+- Upvalue no longer captured by `CreateDivider`: `cQt`
+- Upvalue no longer captured by `CreateDivider`: `dGH`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `gDf`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `gCG`
+- New function: `var29102`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `dLi`
+- New upvalue captured by `init`: `gDj`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dIp`
+- Upvalue no longer captured by `init`: `gCK`
+- New upvalue captured by `openGameDetailsFromButton`: `gDj`
+- Upvalue no longer captured by `openGameDetailsFromButton`: `gCK`
+- New upvalue captured by `joinGameByUser`: `cQu`
+- New upvalue captured by `joinGameByUser`: `dLi`
+- New upvalue captured by `joinGameByUser`: `gDj`
+- Upvalue no longer captured by `joinGameByUser`: `cQt`
+- Upvalue no longer captured by `joinGameByUser`: `dIp`
+- Upvalue no longer captured by `joinGameByUser`: `gCK`
+- New function: `var29110`
+- New function: `var29110`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJQ`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `fLR`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGX`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `fLs`
+- New function: `var29115`
+- New function: `var29116`
+- New upvalue captured by `openGameDetails`: `dry`
+- Upvalue no longer captured by `openGameDetails`: `dnu`
+- New upvalue captured by `init`: `cQu`
+- New upvalue captured by `init`: `eAK`
+- New upvalue captured by `init`: `eAP`
+- New upvalue captured by `init`: `gDj`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `eyP`
+- Upvalue no longer captured by `init`: `eyU`
+- Upvalue no longer captured by `init`: `gCK`
+- New upvalue captured by `toUrl`: `cQu`
+- Upvalue no longer captured by `toUrl`: `cQt`
+- New upvalue captured by `onChange`: `cQu`
+- Upvalue no longer captured by `onChange`: `cQt`
+- New upvalue captured by `openGameDetails`: `gDj`
+- Upvalue no longer captured by `openGameDetails`: `gCK`
+- New upvalue captured by `getGameTitleHeight`: `eAP`
+- Upvalue no longer captured by `getGameTitleHeight`: `eyU`
+- New upvalue captured by `renderPhone`: `dJW`
+- New upvalue captured by `renderPhone`: `dJY`
+- New upvalue captured by `renderPhone`: `gDi`
+- Upvalue no longer captured by `renderPhone`: `dHd`
+- Upvalue no longer captured by `renderPhone`: `dHf`
+- Upvalue no longer captured by `renderPhone`: `gCJ`
+- New upvalue captured by `renderTablet`: `dJW`
+- New upvalue captured by `renderTablet`: `dJY`
+- New upvalue captured by `renderTablet`: `gDi`
+- Upvalue no longer captured by `renderTablet`: `dHd`
+- Upvalue no longer captured by `renderTablet`: `dHf`
+- Upvalue no longer captured by `renderTablet`: `gCJ`
+- New upvalue captured by `openGameDetails`: `dry`
+- Upvalue no longer captured by `openGameDetails`: `dnu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `gwn`
+- New upvalue captured by `render`: `gwo`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `gvO`
+- Upvalue no longer captured by `render`: `gvP`
+- New upvalue captured by `closeContextualMenu`: `eFl`
+- Upvalue no longer captured by `closeContextualMenu`: `eDq`
+- New upvalue captured by `init`: `dJA`
+- Upvalue no longer captured by `init`: `dGH`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `gDa`
+- New upvalue captured by `render`: `gDh`
+- New upvalue captured by `render`: `gDj`
+- New upvalue captured by `render`: `gDk`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `gCB`
+- Upvalue no longer captured by `render`: `gCI`
+- Upvalue no longer captured by `render`: `gCK`
+- Upvalue no longer captured by `render`: `gCL`
+- New upvalue captured by `closeCallback`: `eFl`
+- Upvalue no longer captured by `closeCallback`: `eDq`
+- New upvalue captured by `init`: `cRw`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `dKN`
+- New upvalue captured by `init`: `dKz`
+- New upvalue captured by `init`: `ezW`
+- Upvalue no longer captured by `init`: `cRv`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `dHG`
+- Upvalue no longer captured by `init`: `dHU`
+- Upvalue no longer captured by `init`: `eyb`
+- New upvalue captured by `chatWithUser`: `ezW`
+- Upvalue no longer captured by `chatWithUser`: `eyb`
+- New upvalue captured by `viewProfile`: `cWl`
+- New upvalue captured by `viewProfile`: `dKN`
+- Upvalue no longer captured by `viewProfile`: `cWk`
+- Upvalue no longer captured by `viewProfile`: `dHU`
+- New upvalue captured by `didMount`: `dGX`
+- New upvalue captured by `didMount`: `dKJ`
+- New upvalue captured by `didMount`: `dKK`
+- Upvalue no longer captured by `didMount`: `dCT`
+- Upvalue no longer captured by `didMount`: `dHQ`
+- Upvalue no longer captured by `didMount`: `dHR`
+- New upvalue captured by `render`: `cRw`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `gDh`
+- New upvalue captured by `render`: `gDj`
+- New upvalue captured by `render`: `gDk`
+- New upvalue captured by `render`: `gws`
+- Upvalue no longer captured by `render`: `cRv`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `gCI`
+- Upvalue no longer captured by `render`: `gCK`
+- Upvalue no longer captured by `render`: `gCL`
+- Upvalue no longer captured by `render`: `gvT`
+- New function: `var29225`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `enteredChatFromEntryPoint`: `gDn`
+- Upvalue no longer captured by `enteredChatFromEntryPoint`: `gCO`
+- New upvalue captured by `init`: `cWl`
+- Upvalue no longer captured by `init`: `cWk`
+- New upvalue captured by `callback`: `cWl`
+- Upvalue no longer captured by `callback`: `cWk`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `goToSecurityNotificationPage`: `cWl`
+- New upvalue captured by `goToSecurityNotificationPage`: `dKM`
+- New upvalue captured by `goToSecurityNotificationPage`: `dzX`
+- New upvalue captured by `goToSecurityNotificationPage`: `eEW`
+- Upvalue no longer captured by `goToSecurityNotificationPage`: `cWk`
+- Upvalue no longer captured by `goToSecurityNotificationPage`: `dHT`
+- Upvalue no longer captured by `goToSecurityNotificationPage`: `dvT`
+- Upvalue no longer captured by `goToSecurityNotificationPage`: `eDb`
+- New upvalue captured by `navigateToPage`: `dKM`
+- Upvalue no longer captured by `navigateToPage`: `dHT`
+- New upvalue captured by `gDr`: `var1 (write)`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `verifyCredentials`: `gDq`
+- Upvalue no longer captured by `verifyCredentials`: `gCR`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `closeOverlay`: `dKy`
+- Upvalue no longer captured by `closeOverlay`: `dHF`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `gDw`: `var1 (write)`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `getItems`: `gDe`
+- Upvalue no longer captured by `getItems`: `gCF`
+- New upvalue captured by `onActivated`: `gameInviteAnalyticsManager`
+- New upvalue captured by `onActivated`: `gameInviteConstants`
+- New upvalue captured by `onActivated`: `gameInviteModalManager`
+- New upvalue captured by `onActivated`: `var29323 (write)`
+- Upvalue no longer captured by `onActivated`: `appPage`
+- Upvalue no longer captured by `onActivated`: `createPrivateGame`
+- Upvalue no longer captured by `onActivated`: `eventIngest`
+- Upvalue no longer captured by `onActivated`: `fFlagEnableBlackbirdPageCloseCallback`
+- Upvalue no longer captured by `onActivated`: `urlBuilder`
+- Upvalue no longer captured by `onActivated`: `var29193 (write)`
+- New upvalue captured by `onActivated`: `createPrivateGame`
+- New upvalue captured by `onActivated`: `var29323 (write)`
+- Upvalue no longer captured by `onActivated`: `fFlagLuaAppRenameFriendsToConnectionsEdp`
+- Upvalue no longer captured by `onActivated`: `joinFriendsInGame`
+- Upvalue no longer captured by `onActivated`: `var29193 (write)`
+- New upvalue captured by `onActivated`: `appPage`
+- New upvalue captured by `onActivated`: `closeCallback`
+- New upvalue captured by `onActivated`: `fFlagEnableBlackbirdPageCloseCallback`
+- New upvalue captured by `onActivated`: `fFlagLuaAppRenameFriendsToConnectionsEdp`
+- New upvalue captured by `onActivated`: `joinFriendsInGame`
+- New upvalue captured by `onActivated`: `urlBuilder`
+- New upvalue captured by `onActivated`: `var29323 (write)`
+- Upvalue no longer captured by `onActivated`: `favorite`
+- Upvalue no longer captured by `onActivated`: `networking`
+- Upvalue no longer captured by `onActivated`: `universeId`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `GamePostFavorite`: `cTt`
+- New upvalue captured by `GamePostFavorite`: `dJE`
+- New upvalue captured by `GamePostFavorite`: `dJF`
+- New upvalue captured by `GamePostFavorite`: `gDE`
+- Upvalue no longer captured by `GamePostFavorite`: `cTs`
+- Upvalue no longer captured by `GamePostFavorite`: `dGL`
+- Upvalue no longer captured by `GamePostFavorite`: `dGM`
+- Upvalue no longer captured by `GamePostFavorite`: `gDf`
+- New upvalue captured by `generateExperienceDetailsShareLinkUrl`: `gDH`
+- Upvalue no longer captured by `generateExperienceDetailsShareLinkUrl`: `gDi`
+- New upvalue captured by `init`: `eAK`
+- Upvalue no longer captured by `init`: `eyP`
+- New upvalue captured by `renderContextualMenuContent`: `cQu`
+- New upvalue captured by `renderContextualMenuContent`: `fFD`
+- New upvalue captured by `renderContextualMenuContent`: `fPK`
+- New upvalue captured by `renderContextualMenuContent`: `gDI`
+- New upvalue captured by `renderContextualMenuContent`: `vA`
+- Upvalue no longer captured by `renderContextualMenuContent`: `cQt`
+- Upvalue no longer captured by `renderContextualMenuContent`: `fFe`
+- Upvalue no longer captured by `renderContextualMenuContent`: `fPl`
+- Upvalue no longer captured by `renderContextualMenuContent`: `gDj`
+- Upvalue no longer captured by `renderContextualMenuContent`: `vz`
+- New upvalue captured by `onActivated`: `favorite`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `follow`
+- Upvalue no longer captured by `onActivated`: `toastType`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `onActivated`: `eventIngest`
+- New upvalue captured by `onActivated`: `follow`
+- New upvalue captured by `onActivated`: `networking`
+- New upvalue captured by `onActivated`: `toastType`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `gameInviteAnalyticsManager`
+- Upvalue no longer captured by `onActivated`: `gameInviteConstants`
+- Upvalue no longer captured by `onActivated`: `gameInviteModalManager`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `onActivated`: `gameInviteAnalyticsManager`
+- New upvalue captured by `onActivated`: `gameInviteConstants`
+- New upvalue captured by `onActivated`: `gameInviteModalManager`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `copyExperienceLink`
+- Upvalue no longer captured by `onActivated`: `eventIngest`
+- Upvalue no longer captured by `onActivated`: `generateExperienceDetailsShareLinkUrl`
+- Upvalue no longer captured by `onActivated`: `toastType`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `onActivated`: `copyExperienceLink`
+- New upvalue captured by `onActivated`: `toastType`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `appPage`
+- Upvalue no longer captured by `onActivated`: `shareExperienceLink`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `onActivated`: `eventIngest`
+- New upvalue captured by `onActivated`: `generateExperienceDetailsShareLinkUrl`
+- New upvalue captured by `onActivated`: `shareExperienceLink`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `cQt`
+- Upvalue no longer captured by `onActivated`: `fFlagAddThumbnailSelectorReport`
+- Upvalue no longer captured by `onActivated`: `fFlagEnableAbuseReportRevampFlow`
+- Upvalue no longer captured by `onActivated`: `fPl`
+- Upvalue no longer captured by `onActivated`: `getFFlagEnableAbuseReport10ft`
+- Upvalue no longer captured by `onActivated`: `guiService`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `onActivated`: `appPage`
+- New upvalue captured by `onActivated`: `cQu`
+- New upvalue captured by `onActivated`: `fFlagAddThumbnailSelectorReport`
+- New upvalue captured by `onActivated`: `fFlagEnableAbuseReportRevampFlow`
+- New upvalue captured by `onActivated`: `fPK`
+- New upvalue captured by `onActivated`: `getFFlagEnableAbuseReport10ft`
+- New upvalue captured by `onActivated`: `guiService`
+- New upvalue captured by `onActivated`: `universeId`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `requestRefundClick`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- New upvalue captured by `onActivated`: `requestRefundClick`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- Upvalue no longer captured by `onActivated`: `pinShortcutService`
+- Upvalue no longer captured by `onActivated`: `universeId`
+- Upvalue no longer captured by `onActivated`: `var29261 (write)`
+- Upvalue no longer captured by `onActivated`: `var29270 (write)`
+- New upvalue captured by `onActivated`: `pinShortcutService`
+- New upvalue captured by `onActivated`: `universeId`
+- New upvalue captured by `onActivated`: `var29391 (write)`
+- New upvalue captured by `onActivated`: `var29400 (write)`
+- Upvalue no longer captured by `onActivated`: `playButtonStates`
+- New upvalue captured by `gamePostFavorite`: `gDD`
+- Upvalue no longer captured by `gamePostFavorite`: `gDe`
+- New upvalue captured by `setGameFavorite`: `cTt`
+- Upvalue no longer captured by `setGameFavorite`: `cTs`
+- New upvalue captured by `sendGameFollow`: `fGP`
+- Upvalue no longer captured by `sendGameFollow`: `fGq`
+- New upvalue captured by `setGameFollow`: `cSk`
+- Upvalue no longer captured by `setGameFollow`: `cSj`
+- New upvalue captured by `setExperienceNotificationsEnabledCount`: `cSm`
+- Upvalue no longer captured by `setExperienceNotificationsEnabledCount`: `cSl`
+- New upvalue captured by `openRequestRefundPage`: `gDG`
+- Upvalue no longer captured by `openRequestRefundPage`: `gDh`
+- New upvalue captured by `fetchGameDetail`: `fFl`
+- Upvalue no longer captured by `fetchGameDetail`: `fEM`
+- New upvalue captured by `gDK`: `var1 (write)`
+- New upvalue captured by `onActivated`: `playButtonStates`
+- Upvalue no longer captured by `gDO`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `flh`
+- New upvalue captured by `init`: `gDO`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fkJ`
+- Upvalue no longer captured by `init`: `gDp`
+- New upvalue captured by `onLearnMoreActivated`: `cWl`
+- New upvalue captured by `onLearnMoreActivated`: `eEW`
+- New upvalue captured by `onLearnMoreActivated`: `flh`
+- Upvalue no longer captured by `onLearnMoreActivated`: `cWk`
+- Upvalue no longer captured by `onLearnMoreActivated`: `eDb`
+- Upvalue no longer captured by `onLearnMoreActivated`: `fkJ`
+- New upvalue captured by `render`: `gDN`
+- Upvalue no longer captured by `render`: `gDo`
+- New upvalue captured by `navigateDown`: `dKM`
+- Upvalue no longer captured by `navigateDown`: `dHT`
+- New upvalue captured by `navigateBack`: `dLo`
+- Upvalue no longer captured by `navigateBack`: `dIv`
+- New function: `gDQ`
+- Upvalue no longer captured by `gDS`: `var1 (write)`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `gDT`: `var1 (write)`
+- New upvalue captured by `init`: `dJW`
+- New upvalue captured by `init`: `eAO`
+- New upvalue captured by `init`: `gDU`
+- Upvalue no longer captured by `init`: `dHd`
+- Upvalue no longer captured by `init`: `eyT`
+- Upvalue no longer captured by `init`: `gDv`
+- New upvalue captured by `getLinks`: `gDU`
+- Upvalue no longer captured by `getLinks`: `gDv`
+- New upvalue captured by `getUpdatedModalMiddleContent`: `dJW`
+- New upvalue captured by `getUpdatedModalMiddleContent`: `eAO`
+- New upvalue captured by `getUpdatedModalMiddleContent`: `gDU`
+- Upvalue no longer captured by `getUpdatedModalMiddleContent`: `dHd`
+- Upvalue no longer captured by `getUpdatedModalMiddleContent`: `eyT`
+- Upvalue no longer captured by `getUpdatedModalMiddleContent`: `gDv`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `eAO`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `eyT`
+- Upvalue no longer captured by `gDV`: `var1 (write)`
+- Upvalue no longer captured by `gDW`: `var1 (write)`
+- New upvalue captured by `gDP`: `var1 (write)`
+- New upvalue captured by `init`: `cWl`
+- New upvalue captured by `init`: `eDA`
+- New upvalue captured by `init`: `eEW`
+- New upvalue captured by `init`: `fCN`
+- New upvalue captured by `init`: `gDQ`
+- New upvalue captured by `init`: `gDV`
+- Upvalue no longer captured by `init`: `cWk`
+- Upvalue no longer captured by `init`: `eBF`
+- Upvalue no longer captured by `init`: `eDb`
+- Upvalue no longer captured by `init`: `fCo`
+- Upvalue no longer captured by `init`: `gDr`
+- Upvalue no longer captured by `init`: `gDx`
+- New upvalue captured by `onUpdateEmailSecondaryButtonPressed`: `eDA`
+- Upvalue no longer captured by `onUpdateEmailSecondaryButtonPressed`: `eBF`
+- New upvalue captured by `onResendEmailPressed`: `eDA`
+- Upvalue no longer captured by `onResendEmailPressed`: `eBF`
+- New upvalue captured by `onUpdateEmailSelected`: `eDA`
+- New upvalue captured by `onUpdateEmailSelected`: `gDQ`
+- Upvalue no longer captured by `onUpdateEmailSelected`: `eBF`
+- Upvalue no longer captured by `onUpdateEmailSelected`: `gDr`
+- New upvalue captured by `onEmailFocused`: `eDA`
+- Upvalue no longer captured by `onEmailFocused`: `eBF`
+- New upvalue captured by `onEmailUpdated`: `eDA`
+- New upvalue captured by `onEmailUpdated`: `fCN`
+- New upvalue captured by `onEmailUpdated`: `gDQ`
+- Upvalue no longer captured by `onEmailUpdated`: `eBF`
+- Upvalue no longer captured by `onEmailUpdated`: `fCo`
+- Upvalue no longer captured by `onEmailUpdated`: `gDr`
+- New upvalue captured by `onPasswordEntered`: `gDQ`
+- Upvalue no longer captured by `onPasswordEntered`: `gDr`
+- New upvalue captured by `shouldShowPrivacyPolicyLink`: `gDQ`
+- New upvalue captured by `shouldShowPrivacyPolicyLink`: `gDW`
+- Upvalue no longer captured by `shouldShowPrivacyPolicyLink`: `gDr`
+- Upvalue no longer captured by `shouldShowPrivacyPolicyLink`: `gDx`
+- New upvalue captured by `onPrivacyPolicyLinkActivated`: `cWl`
+- New upvalue captured by `onPrivacyPolicyLinkActivated`: `eDA`
+- New upvalue captured by `onPrivacyPolicyLinkActivated`: `eEW`
+- New upvalue captured by `onPrivacyPolicyLinkActivated`: `gDV`
+- Upvalue no longer captured by `onPrivacyPolicyLinkActivated`: `cWk`
+- Upvalue no longer captured by `onPrivacyPolicyLinkActivated`: `eBF`
+- Upvalue no longer captured by `onPrivacyPolicyLinkActivated`: `eDb`
+- Upvalue no longer captured by `onPrivacyPolicyLinkActivated`: `gDw`
+- New upvalue captured by `onTermsOfServiceLinkActivated`: `cWl`
+- New upvalue captured by `onTermsOfServiceLinkActivated`: `eDA`
+- New upvalue captured by `onTermsOfServiceLinkActivated`: `eEW`
+- Upvalue no longer captured by `onTermsOfServiceLinkActivated`: `cWk`
+- Upvalue no longer captured by `onTermsOfServiceLinkActivated`: `eBF`
+- Upvalue no longer captured by `onTermsOfServiceLinkActivated`: `eDb`
+- New upvalue captured by `getLinks`: `gDQ`
+- Upvalue no longer captured by `getLinks`: `gDr`
+- New upvalue captured by `getTitleTextKey`: `gDQ`
+- Upvalue no longer captured by `getTitleTextKey`: `gDr`
+- New upvalue captured by `getBodyTextKey`: `gDQ`
+- Upvalue no longer captured by `getBodyTextKey`: `gDr`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gDT`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDu`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `updateUserEmail`: `fCL`
+- Upvalue no longer captured by `updateUserEmail`: `fCm`
+- New upvalue captured by `sendVerificationEmailToUser`: `gDR`
+- Upvalue no longer captured by `sendVerificationEmailToUser`: `gDs`
+- New upvalue captured by `navigateToPage`: `dKM`
+- Upvalue no longer captured by `navigateToPage`: `dHT`
+- New upvalue captured by `Patch`: `gDZ`
+- Upvalue no longer captured by `Patch`: `gDA`
+- New upvalue captured by `gDX`: `var1 (write)`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `fmu`
+- New upvalue captured by `render`: `gDk`
+- New upvalue captured by `render`: `gws`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `flW`
+- Upvalue no longer captured by `render`: `gCL`
+- Upvalue no longer captured by `render`: `gvT`
+- New upvalue captured by `onCancelSubscription`: `dKx`
+- New upvalue captured by `onCancelSubscription`: `dKy`
+- New upvalue captured by `onCancelSubscription`: `eFl`
+- Upvalue no longer captured by `onCancelSubscription`: `dHE`
+- Upvalue no longer captured by `onCancelSubscription`: `dHF`
+- Upvalue no longer captured by `onCancelSubscription`: `eDq`
+- New upvalue captured by `onRenewSubscription`: `eFl`
+- New upvalue captured by `onRenewSubscription`: `gAB`
+- New upvalue captured by `onRenewSubscription`: `gDY`
+- Upvalue no longer captured by `onRenewSubscription`: `eDq`
+- Upvalue no longer captured by `onRenewSubscription`: `gAc`
+- Upvalue no longer captured by `onRenewSubscription`: `gDz`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `onBack`: `eFl`
+- Upvalue no longer captured by `onBack`: `eDq`
+- New upvalue captured by `onConfirm`: `eFl`
+- New upvalue captured by `onConfirm`: `gAB`
+- New upvalue captured by `onConfirm`: `gDY`
+- Upvalue no longer captured by `onConfirm`: `eDq`
+- Upvalue no longer captured by `onConfirm`: `gAc`
+- Upvalue no longer captured by `onConfirm`: `gDz`
+- New upvalue captured by `gEb`: `var1 (write)`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gvZ`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gvA`
+- New upvalue captured by `closeCentralOverlay`: `eFl`
+- Upvalue no longer captured by `closeCentralOverlay`: `eDq`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `dKm`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `dHt`
+- Upvalue no longer captured by `render`: `gCu`
+- New function: `var29584`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `init`: `eDA`
+- Upvalue no longer captured by `init`: `eBF`
+- New upvalue captured by `onConfirm`: `eDA`
+- Upvalue no longer captured by `onConfirm`: `eBF`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- Upvalue no longer captured by `gEh`: `var1 (write)`
+- New upvalue captured by `render`: `gEh`
+- Upvalue no longer captured by `render`: `gDI`
+- New upvalue captured by `gEk`: `var1 (write)`
+- New upvalue captured by `Post`: `cQF`
+- New upvalue captured by `Post`: `dJE`
+- New upvalue captured by `Post`: `dJF`
+- New upvalue captured by `Post`: `fOp`
+- New upvalue captured by `Post`: `gCY`
+- New upvalue captured by `Post`: `gEl`
+- Upvalue no longer captured by `Post`: `cQE`
+- Upvalue no longer captured by `Post`: `dGL`
+- Upvalue no longer captured by `Post`: `dGM`
+- Upvalue no longer captured by `Post`: `fNQ`
+- Upvalue no longer captured by `Post`: `gCz`
+- Upvalue no longer captured by `Post`: `gDM`
+- New upvalue captured by `gEm`: `var1 (write)`
+- New upvalue captured by `init`: `cQv`
+- New upvalue captured by `init`: `dzO`
+- New upvalue captured by `init`: `fOq`
+- New upvalue captured by `init`: `fOr`
+- New upvalue captured by `init`: `gEm`
+- Upvalue no longer captured by `init`: `cQt`
+- Upvalue no longer captured by `init`: `dvK`
+- Upvalue no longer captured by `init`: `fNR`
+- Upvalue no longer captured by `init`: `fNS`
+- Upvalue no longer captured by `init`: `gDN`
+- New upvalue captured by `onPurchaseFailedWithRobuxShortfall`: `cQu`
+- New upvalue captured by `onPurchaseFailedWithRobuxShortfall`: `gEm`
+- Upvalue no longer captured by `onPurchaseFailedWithRobuxShortfall`: `cQt`
+- Upvalue no longer captured by `onPurchaseFailedWithRobuxShortfall`: `gDN`
+- New upvalue captured by `onPurchaseFailedWhenOwned`: `dzO`
+- Upvalue no longer captured by `onPurchaseFailedWhenOwned`: `dvK`
+- New upvalue captured by `customPurchaseErrorHandler`: `fOq`
+- New upvalue captured by `customPurchaseErrorHandler`: `fOr`
+- Upvalue no longer captured by `customPurchaseErrorHandler`: `fNR`
+- Upvalue no longer captured by `customPurchaseErrorHandler`: `fNS`
+- New upvalue captured by `purchasePass`: `cQv`
+- Upvalue no longer captured by `purchasePass`: `cQt`
+- New upvalue captured by `render`: `cRs`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `cRr`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `setCurrentToastMessage`: `cWd`
+- Upvalue no longer captured by `setCurrentToastMessage`: `cWc`
+- New upvalue captured by `openPurchasePassInsufficientRobux`: `gEj`
+- Upvalue no longer captured by `openPurchasePassInsufficientRobux`: `gDK`
+- New upvalue captured by `navigateDownToRobuxUpsell`: `eFl`
+- New upvalue captured by `navigateDownToRobuxUpsell`: `fJG`
+- Upvalue no longer captured by `navigateDownToRobuxUpsell`: `eDq`
+- Upvalue no longer captured by `navigateDownToRobuxUpsell`: `fJi`
+- New upvalue captured by `purchasePass`: `gEk`
+- Upvalue no longer captured by `purchasePass`: `gDL`
+- New upvalue captured by `economicRestrictionErrorHandler`: `eFl`
+- New upvalue captured by `economicRestrictionErrorHandler`: `fJN`
+- Upvalue no longer captured by `economicRestrictionErrorHandler`: `eDq`
+- Upvalue no longer captured by `economicRestrictionErrorHandler`: `fJo`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `setPurchaseErrorToast`: `fOp`
+- Upvalue no longer captured by `setPurchaseErrorToast`: `fNQ`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `openPurchaseRobuxPage`: `cWl`
+- New upvalue captured by `openPurchaseRobuxPage`: `dKM`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `cWk`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `dHT`
+- New upvalue captured by `gEp`: `var1 (write)`
+- New upvalue captured by `init`: `cQu`
+- Upvalue no longer captured by `init`: `cQt`
+- New upvalue captured by `purchaseDeveloperProduct`: `cQu`
+- Upvalue no longer captured by `purchaseDeveloperProduct`: `cQt`
+- New upvalue captured by `render`: `cRs`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `cRr`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `openPendingProductsLimitExceededPrompt`: `gEp`
+- Upvalue no longer captured by `openPendingProductsLimitExceededPrompt`: `gDQ`
+- New upvalue captured by `openPurchaseDeveloperProductSuccessPrompt`: `gEq`
+- Upvalue no longer captured by `openPurchaseDeveloperProductSuccessPrompt`: `gDR`
+- New upvalue captured by `purchaseDeveloperProduct`: `fJJ`
+- Upvalue no longer captured by `purchaseDeveloperProduct`: `fJk`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `apiFetchGameDeveloperProducts`: `fFZ`
+- Upvalue no longer captured by `apiFetchGameDeveloperProducts`: `fFA`
+- New upvalue captured by `economicRestrictionErrorHandler`: `eFl`
+- New upvalue captured by `economicRestrictionErrorHandler`: `fJN`
+- Upvalue no longer captured by `economicRestrictionErrorHandler`: `eDq`
+- Upvalue no longer captured by `economicRestrictionErrorHandler`: `fJo`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `openPurchaseRobuxPage`: `cWl`
+- New upvalue captured by `openPurchaseRobuxPage`: `dKM`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `cWk`
+- Upvalue no longer captured by `openPurchaseRobuxPage`: `dHT`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- New upvalue captured by `render`: `dJA`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gCT`
+- Upvalue no longer captured by `render`: `dGH`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gCu`
+- New upvalue captured by `closePrompt`: `eFl`
+- Upvalue no longer captured by `closePrompt`: `eDq`
+- Upvalue no longer captured by `gEw`: `var1 (write)`
+- Upvalue no longer captured by `gEx`: `var1 (write)`
+- New upvalue captured by `render`: `gCv`
+- Upvalue no longer captured by `render`: `gBW`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `eAO`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `eyT`
+- Upvalue no longer captured by `gEA`: `var1 (write)`
+- New function: `var29777`
+- New upvalue captured by `init`: `eDq`
+- New upvalue captured by `init`: `gEw`
+- Upvalue no longer captured by `init`: `eBv`
+- Upvalue no longer captured by `init`: `gDX`
+- New upvalue captured by `unlockAccountPin`: `eDq`
+- New upvalue captured by `unlockAccountPin`: `gEw`
+- Upvalue no longer captured by `unlockAccountPin`: `eBv`
+- Upvalue no longer captured by `unlockAccountPin`: `gDX`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `eDq`
+- New upvalue captured by `render`: `gEE`
+- New upvalue captured by `render`: `gEx`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `eBv`
+- Upvalue no longer captured by `render`: `gDY`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEc`
+- Upvalue no longer captured by `render`: `gEf`
+- New upvalue captured by `makeBodyFragment`: `gEB`
+- New upvalue captured by `makeBodyFragment`: `gEE`
+- New upvalue captured by `makeBodyFragment`: `gEx`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gDY`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- Upvalue no longer captured by `makeBodyFragment`: `gEc`
+- Upvalue no longer captured by `makeBodyFragment`: `gEf`
+- New upvalue captured by `updateAccountPinUnlockTimeout`: `gAO`
+- Upvalue no longer captured by `updateAccountPinUnlockTimeout`: `gAp`
+- New upvalue captured by `unlockAccountPin`: `gEC`
+- Upvalue no longer captured by `unlockAccountPin`: `gEd`
+- New upvalue captured by `init`: `eDu`
+- Upvalue no longer captured by `init`: `eBz`
+- New upvalue captured by `continueToAuthenticatorAppScreen`: `eDu`
+- Upvalue no longer captured by `continueToAuthenticatorAppScreen`: `eBz`
+- New upvalue captured by `closeCallback`: `eDu`
+- Upvalue no longer captured by `closeCallback`: `eBz`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gEx`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDY`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEb`
+- New upvalue captured by `makeBodyFragment`: `gEx`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gDY`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `navigateToSecuritySettings`: `eDr`
+- Upvalue no longer captured by `navigateToSecuritySettings`: `eBw`
+- New upvalue captured by `updatePromptAssignment`: `eDx`
+- Upvalue no longer captured by `updatePromptAssignment`: `eBC`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gEx`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDY`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEa`
+- New upvalue captured by `makeBodyFragment`: `gEx`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gDY`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- Upvalue no longer captured by `gEJ`: `var1 (write)`
+- Upvalue no longer captured by `gEL`: `var1 (write)`
+- Upvalue no longer captured by `gEO`: `var1 (write)`
+- New upvalue captured by `validator`: `gER`
+- Upvalue no longer captured by `validator`: `gEs`
+- New function: `var29884`
+- New upvalue captured by `init`: `dJE`
+- New upvalue captured by `init`: `eDq`
+- New upvalue captured by `init`: `gEJ`
+- Upvalue no longer captured by `init`: `dGL`
+- Upvalue no longer captured by `init`: `eBv`
+- Upvalue no longer captured by `init`: `gEk`
+- New upvalue captured by `changePassword`: `dJE`
+- New upvalue captured by `changePassword`: `eDq`
+- New upvalue captured by `changePassword`: `gEJ`
+- Upvalue no longer captured by `changePassword`: `dGL`
+- Upvalue no longer captured by `changePassword`: `eBv`
+- Upvalue no longer captured by `changePassword`: `gEk`
+- New upvalue captured by `didMount`: `eDq`
+- Upvalue no longer captured by `didMount`: `eBv`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gEE`
+- New upvalue captured by `render`: `gEL`
+- New upvalue captured by `render`: `gEO`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEc`
+- Upvalue no longer captured by `render`: `gEf`
+- Upvalue no longer captured by `render`: `gEm`
+- Upvalue no longer captured by `render`: `gEq`
+- New upvalue captured by `makeBodyFragment`: `gEB`
+- New upvalue captured by `makeBodyFragment`: `gEE`
+- New upvalue captured by `makeBodyFragment`: `gEL`
+- New upvalue captured by `makeBodyFragment`: `gEO`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- Upvalue no longer captured by `makeBodyFragment`: `gEc`
+- Upvalue no longer captured by `makeBodyFragment`: `gEf`
+- Upvalue no longer captured by `makeBodyFragment`: `gEm`
+- Upvalue no longer captured by `makeBodyFragment`: `gEq`
+- New upvalue captured by `changePassword`: `gEI`
+- Upvalue no longer captured by `changePassword`: `gEj`
+- New upvalue captured by `openWebView`: `eDt`
+- Upvalue no longer captured by `openWebView`: `eBy`
+- New upvalue captured by `lockAccountPin`: `gEM`
+- Upvalue no longer captured by `lockAccountPin`: `gEn`
+- New upvalue captured by `updateAccountPinUnlockTimeout`: `gAO`
+- Upvalue no longer captured by `updateAccountPinUnlockTimeout`: `gAp`
+- New upvalue captured by `updatePromptType`: `eDy`
+- Upvalue no longer captured by `updatePromptType`: `eBD`
+- New upvalue captured by `render`: `dJW`
+- New upvalue captured by `render`: `eAO`
+- Upvalue no longer captured by `render`: `dHd`
+- Upvalue no longer captured by `render`: `eyT`
+- New upvalue captured by `init`: `eDq`
+- New upvalue captured by `init`: `gEw`
+- Upvalue no longer captured by `init`: `eBv`
+- Upvalue no longer captured by `init`: `gDX`
+- New upvalue captured by `continueToChangePassword`: `eDq`
+- New upvalue captured by `continueToChangePassword`: `gEw`
+- Upvalue no longer captured by `continueToChangePassword`: `eBv`
+- Upvalue no longer captured by `continueToChangePassword`: `gDX`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `eDl`
+- New upvalue captured by `render`: `eDn`
+- New upvalue captured by `render`: `gEV`
+- New upvalue captured by `render`: `gEx`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `eBq`
+- Upvalue no longer captured by `render`: `eBs`
+- Upvalue no longer captured by `render`: `gDY`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEb`
+- Upvalue no longer captured by `render`: `gEw`
+- New upvalue captured by `makeBodyFragment`: `gEV`
+- New upvalue captured by `makeBodyFragment`: `gEx`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gDY`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- Upvalue no longer captured by `makeBodyFragment`: `gEw`
+- New upvalue captured by `getAccountPinState`: `gET`
+- Upvalue no longer captured by `getAccountPinState`: `gEu`
+- New upvalue captured by `updateAccountPinUnlockTimeout`: `gAO`
+- Upvalue no longer captured by `updateAccountPinUnlockTimeout`: `gAp`
+- New upvalue captured by `init`: `eDq`
+- New upvalue captured by `init`: `eDu`
+- Upvalue no longer captured by `init`: `eBv`
+- Upvalue no longer captured by `init`: `eBz`
+- New upvalue captured by `continueToAuthenticatorAppScreen`: `eDq`
+- Upvalue no longer captured by `continueToAuthenticatorAppScreen`: `eBv`
+- New upvalue captured by `closeCallback`: `eDu`
+- Upvalue no longer captured by `closeCallback`: `eBz`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEb`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `updatePromptAssignment`: `eDx`
+- Upvalue no longer captured by `updatePromptAssignment`: `eBC`
+- New function: `gEX`
+- New upvalue captured by `init`: `eDu`
+- New upvalue captured by `init`: `eDv`
+- Upvalue no longer captured by `init`: `eBA`
+- Upvalue no longer captured by `init`: `eBz`
+- New upvalue captured by `continueToAuthenticatorAppScreen`: `eDu`
+- New upvalue captured by `continueToAuthenticatorAppScreen`: `eDv`
+- Upvalue no longer captured by `continueToAuthenticatorAppScreen`: `eBA`
+- Upvalue no longer captured by `continueToAuthenticatorAppScreen`: `eBz`
+- New upvalue captured by `closeCallback`: `eDu`
+- Upvalue no longer captured by `closeCallback`: `eBz`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEb`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `openWebView`: `eDt`
+- Upvalue no longer captured by `openWebView`: `eBy`
+- New upvalue captured by `updatePromptAssignment`: `eDx`
+- Upvalue no longer captured by `updatePromptAssignment`: `eBC`
+- New function: `gEY`
+- New upvalue captured by `init`: `eDu`
+- New upvalue captured by `init`: `eDv`
+- Upvalue no longer captured by `init`: `eBA`
+- Upvalue no longer captured by `init`: `eBz`
+- New upvalue captured by `continueToSecuritySettingsPage`: `eDu`
+- New upvalue captured by `continueToSecuritySettingsPage`: `eDv`
+- Upvalue no longer captured by `continueToSecuritySettingsPage`: `eBA`
+- Upvalue no longer captured by `continueToSecuritySettingsPage`: `eBz`
+- New upvalue captured by `closeCallback`: `eDu`
+- Upvalue no longer captured by `closeCallback`: `eBz`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `gEx`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `gDY`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEb`
+- New upvalue captured by `makeBodyFragment`: `gEx`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gDY`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `openWebView`: `eDt`
+- Upvalue no longer captured by `openWebView`: `eBy`
+- New upvalue captured by `updatePromptAssignment`: `eDx`
+- Upvalue no longer captured by `updatePromptAssignment`: `eBC`
+- New function: `gEZ`
+- New upvalue captured by `init`: `eDn`
+- New upvalue captured by `init`: `eDq`
+- Upvalue no longer captured by `init`: `eBs`
+- Upvalue no longer captured by `init`: `eBv`
+- New upvalue captured by `updatePromptAssignment`: `eDn`
+- Upvalue no longer captured by `updatePromptAssignment`: `eBs`
+- New upvalue captured by `secureAccount`: `eDq`
+- Upvalue no longer captured by `secureAccount`: `eBv`
+- New upvalue captured by `render`: `dKl`
+- New upvalue captured by `render`: `eDu`
+- New upvalue captured by `render`: `gEV`
+- New upvalue captured by `render`: `gEx`
+- New upvalue captured by `render`: `gEy`
+- New upvalue captured by `render`: `gEz`
+- Upvalue no longer captured by `render`: `dHs`
+- Upvalue no longer captured by `render`: `eBz`
+- Upvalue no longer captured by `render`: `gDY`
+- Upvalue no longer captured by `render`: `gDZ`
+- Upvalue no longer captured by `render`: `gEb`
+- Upvalue no longer captured by `render`: `gEw`
+- New upvalue captured by `makeBodyFragment`: `gEV`
+- New upvalue captured by `makeBodyFragment`: `gEx`
+- New upvalue captured by `makeBodyFragment`: `gEz`
+- Upvalue no longer captured by `makeBodyFragment`: `gDY`
+- Upvalue no longer captured by `makeBodyFragment`: `gEa`
+- Upvalue no longer captured by `makeBodyFragment`: `gEw`
+- New upvalue captured by `closeOverlay`: `eFl`
+- Upvalue no longer captured by `closeOverlay`: `eDq`
+- New upvalue captured by `getPromptAssignments`: `eDp`
+- Upvalue no longer captured by `getPromptAssignments`: `eBu`
+- New upvalue captured by `updatePromptType`: `eDy`
+- Upvalue no longer captured by `updatePromptType`: `eBD`
+- New upvalue captured by `updatePromptAssignment`: `eDx`
+- Upvalue no longer captured by `updatePromptAssignment`: `eBC`
+- New upvalue captured by `didMount`: `eDA`
+- New upvalue captured by `didMount`: `eDn`
+- New upvalue captured by `didMount`: `eDq`
+- New upvalue captured by `didMount`: `eDz`
+- Upvalue no longer captured by `didMount`: `eBE`
+- Upvalue no longer captured by `didMount`: `eBF`
+- Upvalue no longer captured by `didMount`: `eBs`
+- Upvalue no longer captured by `didMount`: `eBv`
+- New upvalue captured by `didUpdate`: `eDA`
+- New upvalue captured by `didUpdate`: `eDn`
+- New upvalue captured by `didUpdate`: `eDq`
+- New upvalue captured by `didUpdate`: `eDz`
+- Upvalue no longer captured by `didUpdate`: `eBE`
+- Upvalue no longer captured by `didUpdate`: `eBF`
+- Upvalue no longer captured by `didUpdate`: `eBs`
+- Upvalue no longer captured by `didUpdate`: `eBv`
+- New upvalue captured by `willUnmount`: `eDA`
+- New upvalue captured by `willUnmount`: `eDn`
+- New upvalue captured by `willUnmount`: `eDz`
+- Upvalue no longer captured by `willUnmount`: `eBE`
+- Upvalue no longer captured by `willUnmount`: `eBF`
+- Upvalue no longer captured by `willUnmount`: `eBs`
+- New upvalue captured by `render`: `dJA`
+- Upvalue no longer captured by `render`: `dGH`
+- New upvalue captured by `render`: `cQu`
+- New upvalue captured by `render`: `dKl`
+- Upvalue no longer captured by `render`: `cQt`
+- Upvalue no longer captured by `render`: `dHs`
+- New upvalue captured by `closeAlert`: `eFl`
+- Upvalue no longer captured by `closeAlert`: `eDq`
+- New function: `gFc`
+- New function: `gFd`
+- New function: `gFe`
+- New function: `gFf`
+- New function: `gFb`
+- New upvalue captured by `didMount`: `gFc`
+- Upvalue no longer captured by `didMount`: `gED`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gFb_windowClosedCallback`
+- New upvalue captured by `render`: `gFe`
+- Upvalue no longer captured by `render`: `gEF`
+- New upvalue captured by `logout`: `foC`
+- New upvalue captured by `logout`: `foJ`
+- Upvalue no longer captured by `logout`: `fod`
+- Upvalue no longer captured by `logout`: `fok`
+- New upvalue captured by `openWebView`: `cWl`
+- New upvalue captured by `openWebView`: `dKM`
+- Upvalue no longer captured by `openWebView`: `cWk`
+- Upvalue no longer captured by `openWebView`: `dHT`
+- New upvalue captured by `exit`: `gFf`
+- Upvalue no longer captured by `exit`: `gEG`
+- New function: `gFg`
+- New function: `gFk`
+- New function: `gFl`
+- New function: `gFm`
+- New function: `gFn`
+- New function: `gFo`
+- New function: `gFp`
+- New function: `gFj`
+- Upvalue no longer captured by `onActivated`: `vngAppUpsellUrl`
+- New function: `gFi`
+- New function: `gFh`
+- New function: `gFq`
+- New function: `onActivated`
+- New function: `gFs`
+- New function: `gFu`
+- New function: `gFv`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gFv_SearchLandingPageSkeleton`
+- New function: `gFt`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gFt_SearchLandingPage`
+- New function: `gFr`
+- New function: `LUAUFORGE_MODULE_GLOBALS_gFr_SearchPageOverlay`
+- New function: `gFz`
+- New function: `gGK`
+- New function: `var30224`
+- New upvalue captured by `navigate`: `fpw`
+- Upvalue no longer captured by `navigate`: `foY`
+- New upvalue captured by `openDiscoverabilityModal`: `gpN`
+- Upvalue no longer captured by `openDiscoverabilityModal`: `gpo`
+- New upvalue captured by `onCloseDiscoverabilityModal`: `eFl`
+- Upvalue no longer captured by `onCloseDiscoverabilityModal`: `eDq`
+- New upvalue captured by `waitUntilIXPUserInit`: `fmY`
+- Upvalue no longer captured by `waitUntilIXPUserInit`: `fmA`
+- Removed function: `cYF`
+- Removed function: `cYK`
+- Removed function: `cYH`
+- Removed function: `cYA`
+- Removed function: `dyh`
+- Removed function: `dyz`
+- Removed function: `dyA`
+- Removed function: `dyD`
+- Removed function: `dyE`
+- Removed function: `dyF`
+- Removed function: `dyG`
+- Removed function: `dyH`
+- Removed function: `dyI`
+- Removed function: `dyC`
+- Removed function: `dyM`
+- Removed function: `dyN`
+- Removed function: `dyO`
+- Removed function: `dyP`
+- Removed function: `dyL`
+- Removed function: `dyQ`
+- Removed function: `dyK`
+- Removed function: `dyJ`
+- Removed function: `dyR`
+- Removed function: `dyT`
+- Removed function: `dyS`
+- Removed function: `dyV`
+- Removed function: `dyW`
+- Removed function: `dyY`
+- Removed function: `dyX`
+- Removed function: `dza`
+- Removed function: `dzb`
+- Removed function: `dzc`
+- Removed function: `dyZ`
+- Removed function: `dyU`
+- Removed function: `dze`
+- Removed function: `dzd`
+- Removed function: `dyB`
+- Removed function: `dzg`
+- Removed function: `dzh`
+- Removed function: `dzf`
+- Removed function: `dzi`
+- Removed function: `dzk`
+- Removed function: `dzn`
+- Removed function: `dzr`
+- Removed function: `dzu`
+- Removed function: `dzt`
+- Removed function: `dzs`
+- Removed function: `dzv`
+- Removed function: `dzw`
+- Removed function: `dzx`
+- Removed function: `dzy`
+- Removed function: `dzz`
+- Removed function: `dzB`
+- Removed function: `dzA`
+- Removed function: `dzC`
+- Removed function: `dzD`
+- Removed function: `dzq`
+- Removed function: `dzp`
+- Removed function: `dzo`
+- Removed function: `dzm`
+- Removed function: `dzE`
+- Removed function: `dzl`
+- Removed function: `dzj`
+- Removed function: `dzG`
+- Removed function: `dzF`
+- Removed function: `dzI`
+- Removed function: `dzJ`
+- Removed function: `dzH`
+- Removed function: `dyy`
+- Removed function: `dyx`
+- Removed function: `dzK`
+- Removed function: `dzL`
+- Removed function: `dzM`
+- Removed function: `dzN`
+- Removed function: `dzO`
+- Removed function: `dzP`
+- Removed function: `dzQ`
+- Removed function: `dzR`
+- Removed function: `dzS`
+- Removed function: `dzT`
+- Removed function: `dzV`
+- Removed function: `dzW`
+- Removed function: `dzU`
+- Removed function: `dzX`
+- Removed function: `dAa`
+- Removed function: `dAb`
+- Removed function: `dAc`
+- Removed function: `dAd`
+- Removed function: `dAh`
+- Removed function: `dAi`
+- Removed function: `dAj`
+- Removed function: `dAg`
+- Removed function: `dAm`
+- Removed function: `dAn`
+- Removed function: `dAq`
+- Removed function: `dAr`
+- Removed function: `dAs`
+- Removed function: `dAv`
+- Removed function: `dAw`
+- Removed function: `dAx`
+- Removed function: `dAu`
+- Removed function: `dAt`
+- Removed function: `dAp`
+- Removed function: `dAo`
+- Removed function: `dAy`
+- Removed function: `dAz`
+- Removed function: `dAA`
+- Removed function: `dAC`
+- Removed function: `dAE`
+- Removed function: `dAF`
+- Removed function: `dAl`
+- Removed function: `dAG`
+- Removed function: `dAk`
+- Removed function: `dAf`
+- Removed function: `dAe`
+- Removed function: `dAH`
+- Removed function: `dAI`
+- Removed function: `dAK`
+- Removed function: `dAJ`
+- Removed function: `dAL`
+- Removed function: `dzZ`
+- Removed function: `dzY`
+- Removed function: `dAN`
+- Removed function: `dAO`
+- Removed function: `dAP`
+- Removed function: `dAQ`
+- Removed function: `dAS`
+- Removed function: `dAR`
+- Removed function: `dAT`
+- Removed function: `dAV`
+- Removed function: `dAX`
+- Removed function: `dAY`
+- Removed function: `dAZ`
+- Removed function: `dBa`
+- Removed function: `dBb`
+- Removed function: `dBc`
+- Removed function: `dBd`
+- Removed function: `dAW`
+- Removed function: `dBe`
+- Removed function: `dBh`
+- Removed function: `dBg`
+- Removed function: `dBj`
+- Removed function: `dBl`
+- Removed function: `dBk`
+- Removed function: `dBo`
+- Removed function: `dBn`
+- Removed function: `dBm`
+- Removed function: `dBp`
+- Removed function: `dBq`
+- Removed function: `dBr`
+- Removed function: `dBs`
+- Removed function: `dBi`
+- Removed function: `dBu`
+- Removed function: `dBt`
+- Removed function: `dBf`
+- Removed function: `dBv`
+- Removed function: `dBw`
+- Removed function: `dBy`
+- Removed function: `dBz`
+- Removed function: `dBx`
+- Removed function: `dAU`
+- Removed function: `dBA`
+- Removed function: `dBC`
+- Removed function: `dBD`
+- Removed function: `dBE`
+- Removed function: `dBB`
+- Removed function: `dBH`
+- Removed function: `dBG`
+- Removed function: `dBF`
+- Removed function: `dBI`
+- Removed function: `dBJ`
+- Removed function: `dBK`
+- Removed function: `dBM`
+- Removed function: `dBL`
+- Removed function: `dBN`
+- Removed function: `dBP`
+- Removed function: `dBO`
+- Removed function: `dBQ`
+- Removed function: `dBR`
+- Removed function: `dAM`
+- Removed function: `dBS`
+- Removed function: `dBT`
+- Removed function: `dBU`
+- Removed function: `dBW`
+- Removed function: `dBY`
+- Removed function: `dBX`
+- Removed function: `dBZ`
+- Removed function: `dBV`
+- Removed function: `dyw`
+- Removed function: `dyv`
+- Removed function: `dyu`
+- Removed function: `dyt`
+- Removed function: `dGJ`
+- Removed function: `dGI`
+- Removed function: `dGK`
+- Removed function: `dHY`
+- Removed function: `dHX`
+- Removed function: `dGP`
+- Removed function: `dIf`
+- Removed function: `dIe`
+- Removed function: `dIi`
+- Removed function: `dIk`
+- Removed function: `dIm`
+- Removed function: `dIo`
+- Removed function: `dIl`
+- Removed function: `dIz`
+- Removed function: `dIE`
+- Removed function: `dIF`
+- Removed function: `dIG`
+- Removed function: `dIH`
+- Removed function: `dII`
+- Removed function: `dIJ`
+- Removed function: `dIM`
+- Removed function: `dIP`
+- Removed function: `dIR`
+- Removed function: `dIS`
+- Removed function: `dIQ`
+- Removed function: `dIT`
+- Removed function: `dIO`
+- Removed function: `dIU`
+- Removed function: `dIW`
+- Removed function: `dIY`
+- Removed function: `dIZ`
+- Removed function: `dJa`
+- Removed function: `dJG`
+- Removed function: `dIX`
+- Removed function: `dIV`
+- Removed function: `dIN`
+- Removed function: `dJJ`
+- Removed function: `dJK`
+- Removed function: `dJL`
+- Removed function: `dJM`
+- Removed function: `dJO`
+- Removed function: `dJN`
+- Removed function: `dJP`
+- Removed function: `dJR`
+- Removed function: `dJS`
+- Removed function: `dJQ`
+- Removed function: `dJV`
+- Removed function: `dJU`
+- Removed function: `dJT`
+- Removed function: `dJW`
+- Removed function: `dJX`
+- Removed function: `dKb`
+- Removed function: `dKc`
+- Removed function: `dKd`
+- Removed function: `dKe`
+- Removed function: `dKf`
+- Removed function: `dKg`
+- Removed function: `dKh`
+- Removed function: `dKi`
+- Removed function: `dKj`
+- Removed function: `dKl`
+- Removed function: `dKk`
+- Removed function: `dKo`
+- Removed function: `dKn`
+- Removed function: `dKm`
+- Removed function: `dKt`
+- Removed function: `dKs`
+- Removed function: `dKv`
+- Removed function: `dKw`
+- Removed function: `dKu`
+- Removed function: `dKp`
+- Removed function: `dKA`
+- Removed function: `dKz`
+- Removed function: `dKC`
+- Removed function: `dKB`
+- Removed function: `dKE`
+- Removed function: `dKD`
+- Removed function: `dKG`
+- Removed function: `dKH`
+- Removed function: `dKI`
+- Removed function: `dKF`
+- Removed function: `dKK`
+- Removed function: `dKJ`
+- Removed function: `dKR`
+- Removed function: `dKS`
+- Removed function: `dKU`
+- Removed function: `dKT`
+- Removed function: `dKW`
+- Removed function: `dKZ`
+- Removed function: `dKV`
+- Removed function: `dKQ`
+- Removed function: `dKP`
+- Removed function: `dKO`
+- Removed function: `dLC`
+- Removed function: `dLA`
+- Removed function: `dLG`
+- Removed function: `dLJ`
+- Removed function: `dLK`
+- Removed function: `dLL`
+- Removed function: `dLN`
+- Removed function: `dLM`
+- Removed function: `dLI`
+- Removed function: `dLP`
+- Removed function: `dLO`
+- Removed function: `dLQ`
+- Removed function: `dKN`
+- Removed function: `dKM`
+- Removed function: `dKL`
+- Removed function: `dLR`
+- Removed function: `dKy`
+- Removed function: `dKx`
+- Removed function: `dLU`
+- Removed function: `dLX`
+- Removed function: `dLY`
+- Removed function: `dLZ`
+- Removed function: `dLW`
+- Removed function: `dLV`
+- Removed function: `dMB`
+- Removed function: `dMA`
+- Removed function: `dKa`
+- Removed function: `dMD`
+- Removed function: `dMC`
+- Removed function: `dME`
+- Removed function: `dMF`
+- Removed function: `dIL`
+- Removed function: `var1860`
+- Removed function: `dIK`
+- Removed function: `dMH`
+- Removed function: `dMG`
+- Removed function: `dID`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_dID_AddFriendsScreen`
+- Removed function: `dIC`
+- Removed function: `dIB`
+- Removed function: `dIA`
+- Removed function: `dMM`
+- Removed function: `dMN`
+- Removed function: `dMO`
+- Removed function: `dMQ`
+- Removed function: `dMR`
+- Removed function: `dMS`
+- Removed function: `dMT`
+- Removed function: `dMU`
+- Removed function: `dMV`
+- Removed function: `dMW`
+- Removed function: `dMP`
+- Removed function: `dMY`
+- Removed function: `dMX`
+- Removed function: `dML`
+- Removed function: `dMK`
+- Removed function: `dMJ`
+- Removed function: `var2107`
+- Removed function: `var2107`
+- Removed function: `var2107`
+- Removed function: `dMI`
+- Removed function: `var2135`
+- Removed function: `dSd`
+- Removed function: `dSi`
+- Removed function: `emc`
+- Removed function: `emf`
+- Removed function: `emg`
+- Removed function: `emi`
+- Removed function: `emk`
+- Removed function: `eml`
+- Removed function: `emn`
+- Removed function: `emm`
+- Removed function: `emo`
+- Removed function: `emj`
+- Removed function: `emp`
+- Removed function: `emq`
+- Removed function: `emt`
+- Removed function: `ems`
+- Removed function: `emr`
+- Removed function: `emh`
+- Removed function: `eme`
+- Removed function: `emd`
+- Removed function: `emv`
+- Removed function: `emw`
+- Removed function: `emy`
+- Removed function: `emz`
+- Removed function: `emx`
+- Removed function: `emu`
+- Removed function: `emF`
+- Removed function: `emG`
+- Removed function: `emI`
+- Removed function: `emH`
+- Removed function: `emE`
+- Removed function: `emD`
+- Removed function: `emC`
+- Removed function: `emL`
+- Removed function: `emK`
+- Removed function: `emJ`
+- Removed function: `emM`
+- Removed function: `emB`
+- Removed function: `emA`
+- Removed function: `emP`
+- Removed function: `emR`
+- Removed function: `emS`
+- Removed function: `emQ`
+- Removed function: `emT`
+- Removed function: `emU`
+- Removed function: `emV`
+- Removed function: `emO`
+- Removed function: `emN`
+- Removed function: `emY`
+- Removed function: `ena`
+- Removed function: `emZ`
+- Removed function: `emX`
+- Removed function: `enc`
+- Removed function: `enb`
+- Removed function: `enf`
+- Removed function: `ene`
+- Removed function: `emW`
+- Removed function: `enh`
+- Removed function: `enj`
+- Removed function: `enk`
+- Removed function: `eni`
+- Removed function: `enm`
+- Removed function: `eno`
+- Removed function: `enn`
+- Removed function: `enp`
+- Removed function: `enl`
+- Removed function: `eng`
+- Removed function: `ent`
+- Removed function: `enu`
+- Removed function: `env`
+- Removed function: `ens`
+- Removed function: `enr`
+- Removed function: `enq`
+- Removed function: `enA`
+- Removed function: `enB`
+- Removed function: `enw`
+- Removed function: `enF`
+- Removed function: `enE`
+- Removed function: `enD`
+- Removed function: `enC`
+- Removed function: `emb`
+- Removed function: `ema`
+- Removed function: `enH`
+- Removed function: `enN`
+- Removed function: `enM`
+- Removed function: `enP`
+- Removed function: `enQ`
+- Removed function: `enR`
+- Removed function: `enS`
+- Removed function: `enT`
+- Removed function: `enU`
+- Removed function: `enV`
+- Removed function: `enW`
+- Removed function: `enX`
+- Removed function: `enY`
+- Removed function: `enZ`
+- Removed function: `enO`
+- Removed function: `enL`
+- Removed function: `enK`
+- Removed function: `exV`
+- Removed function: `exX`
+- Removed function: `exY`
+- Removed function: `eya`
+- Removed function: `exZ`
+- Removed function: `exW`
+- Removed function: `eyc`
+- Removed function: `eCX`
+- Removed function: `eCY`
+- Removed function: `eye`
+- Removed function: `eDa`
+- Removed function: `eDe`
+- Removed function: `eDg`
+- Removed function: `eDh`
+- Removed function: `eDc`
+- Removed function: `eCZ`
+- Removed function: `eDj`
+- Removed function: `eyd`
+- Removed function: `eDo`
+- Removed function: `eDp`
+- Removed function: `eDt`
+- Removed function: `eDv`
+- Removed function: `eDw`
+- Removed function: `var2859`
+- Removed function: `eDY`
+- Removed function: `eDX`
+- Removed function: `var2890`
+- Removed function: `eEo`
+- Removed function: `eEp`
+- Removed function: `eEq`
+- Removed function: `eEr`
+- Removed function: `eEw`
+- Removed function: `eEy`
+- Removed function: `eEA`
+- Removed function: `eEB`
+- Removed function: `eEC`
+- Removed function: `eEn`
+- Removed function: `var2935`
+- Removed function: `var2965`
+- Removed function: `var2966`
+- Removed function: `eEm`
+- Removed function: `eEl`
+- Removed function: `eEF`
+- Removed function: `eEG`
+- Removed function: `eEI`
+- Removed function: `eEJ`
+- Removed function: `eEK`
+- Removed function: `eEL`
+- Removed function: `eEM`
+- Removed function: `eFL`
+- Removed function: `eFM`
+- Removed function: `eFP`
+- Removed function: `eFU`
+- Removed function: `eFW`
+- Removed function: `eFV`
+- Removed function: `eFY`
+- Removed function: `eFX`
+- Removed function: `eGc`
+- Removed function: `eFZ`
+- Removed function: `eFN`
+- Removed function: `eFI`
+- Removed function: `eGB`
+- Removed function: `eGC`
+- Removed function: `eGE`
+- Removed function: `eGD`
+- Removed function: `eGF`
+- Removed function: `eGI`
+- Removed function: `eGJ`
+- Removed function: `eGM`
+- Removed function: `eGN`
+- Removed function: `eGP`
+- Removed function: `eGS`
+- Removed function: `eGR`
+- Removed function: `eGT`
+- Removed function: `eGV`
+- Removed function: `eGX`
+- Removed function: `eHa`
+- Removed function: `eHc`
+- Removed function: `eHb`
+- Removed function: `eHe`
+- Removed function: `eGZ`
+- Removed function: `eGY`
+- Removed function: `eGW`
+- Removed function: `eGU`
+- Removed function: `var3851`
+- Removed function: `var3850`
+- Removed function: `eGq`
+- Removed function: `var4240`
+- Removed function: `var4398`
+- Removed function: `var4675`
+- Removed function: `var4714`
+- Removed function: `var5064`
+- Removed function: `eGl`
+- Removed function: `eGk`
+- Removed function: `renderLoadingExperienceSkeleton`
+- Removed function: `eEE`
+- Removed function: `eED`
+- Removed function: `var7053`
+- Removed function: `var7055`
+- Removed function: `var7071`
+- Removed function: `var7091`
+- Removed function: `var7431`
+- Removed function: `var7445`
+- Removed function: `fBM`
+- Removed function: `fBP`
+- Removed function: `fBO`
+- Removed function: `var7745`
+- Removed function: `fBR`
+- Removed function: `fBS`
+- Removed function: `fBL`
+- Removed function: `fCj`
+- Removed function: `fCg`
+- Removed function: `var7932`
+- Removed function: `var7933`
+- Removed function: `var7934`
+- Removed function: `var7935`
+- Removed function: `var7936`
+- Removed function: `var7937`
+- Removed function: `var7952`
+- Removed function: `var7938`
+- Removed function: `var7939`
+- Removed function: `fCA`
+- Removed function: `fCB`
+- Removed function: `fCC`
+- Removed function: `fCD`
+- Removed function: `fCJ`
+- Removed function: `fCH`
+- Removed function: `fCG`
+- Removed function: `fCE`
+- Removed function: `fCM`
+- Removed function: `fCP`
+- Removed function: `fCN`
+- Removed function: `fCU`
+- Removed function: `fCV`
+- Removed function: `fCW`
+- Removed function: `fCT`
+- Removed function: `fCY`
+- Removed function: `fCZ`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fDb_sendNotApprovedPageEvent`
+- Removed function: `fCX`
+- Removed function: `fCQ`
+- Removed function: `var8474`
+- Removed function: `fFf`
+- Removed function: `fFh`
+- Removed function: `fFq`
+- Removed function: `fFs`
+- Removed function: `fFy`
+- Removed function: `fFY`
+- Removed function: `fFw`
+- Removed function: `var8828`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fGk_LogoTrayItem`
+- Removed function: `var8844`
+- Removed function: `var8996`
+- Removed function: `fGB`
+- Removed function: `fGC`
+- Removed function: `fGD`
+- Removed function: `fGE`
+- Removed function: `fGo`
+- Removed function: `var9069`
+- Removed function: `fGG`
+- Removed function: `fGI`
+- Removed function: `fGH`
+- Removed function: `fGJ`
+- Removed function: `fGF`
+- Removed function: `fGQ`
+- Removed function: `fGR`
+- Removed function: `fGW`
+- Removed function: `fGZ`
+- Removed function: `fGK`
+- Removed function: `var9311`
+- Removed function: `var9312`
+- Removed function: `var9373`
+- Removed function: `var9376`
+- Removed function: `var9379`
+- Removed function: `var9382`
+- Removed function: `var9385`
+- Removed function: `var9388`
+- Removed function: `var9391`
+- Removed function: `var9393`
+- Removed function: `var9395`
+- Removed function: `var9398`
+- Removed function: `var9590`
+- Removed function: `var9599`
+- Removed function: `var9600`
+- Removed function: `var9601`
+- Removed function: `var9605`
+- Removed function: `var9571`
+- Removed function: `var9572`
+- Removed function: `var9573`
+- Removed function: `var9712`
+- Removed function: `fHK`
+- Removed function: `fHL`
+- Removed function: `fHM`
+- Removed function: `fHN`
+- Removed function: `fHO`
+- Removed function: `fHW`
+- Removed function: `fHF`
+- Removed function: `fFd`
+- Removed function: `var9954`
+- Removed function: `var9953`
+- Removed function: `var9978`
+- Removed function: `var10302`
+- Removed function: `var10499`
+- Removed function: `var10500`
+- Removed function: `var10702`
+- Removed function: `var10703`
+- Removed function: `var10704`
+- Removed function: `var10705`
+- Removed function: `fJO`
+- Removed function: `fKs`
+- Removed function: `fKT`
+- Removed function: `fKS`
+- Removed function: `var10876`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fKQ_getChatRecipient`
+- Removed function: `var10944`
+- Removed function: `var10952`
+- Removed function: `var10966`
+- Removed function: `var10974`
+- Removed function: `fLz`
+- Removed function: `fLL`
+- Removed function: `fLM`
+- Removed function: `fLQ`
+- Removed function: `fLT`
+- Removed function: `fLV`
+- Removed function: `fLW`
+- Removed function: `var11138`
+- Removed function: `var11139`
+- Removed function: `fMB`
+- Removed function: `fMD`
+- Removed function: `fME`
+- Removed function: `fMG`
+- Removed function: `fMA`
+- Removed function: `fNB`
+- Removed function: `fNw`
+- Removed function: `var11468`
+- Removed function: `fNI`
+- Removed function: `fNL`
+- Removed function: `fNH`
+- Removed function: `fNM`
+- Removed function: `fNS`
+- Removed function: `fNT`
+- Removed function: `fNX`
+- Removed function: `fOI`
+- Removed function: `fOv`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fOK_closePrompt`
+- Removed function: `fON`
+- Removed function: `var11900`
+- Removed function: `fOX`
+- Removed function: `var12039`
+- Removed function: `var12040`
+- Removed function: `var12041`
+- Removed function: `var12042`
+- Removed function: `var12054`
+- Removed function: `var12045`
+- Removed function: `var12046`
+- Removed function: `var12047`
+- Removed function: `fOY`
+- Removed function: `var12119`
+- Removed function: `var12120`
+- Removed function: `var12121`
+- Removed function: `var12122`
+- Removed function: `var12133`
+- Removed function: `var12126`
+- Removed function: `var12127`
+- Removed function: `fOZ`
+- Removed function: `var12160`
+- Removed function: `var12321`
+- Removed function: `fPu`
+- Removed function: `fPC`
+- Removed function: `fPB`
+- Removed function: `var12464`
+- Removed function: `fPA`
+- Removed function: `fPO`
+- Removed function: `fPQ`
+- Removed function: `fPS`
+- Removed function: `fPR`
+- Removed function: `fPP`
+- Removed function: `fPT`
+- Removed function: `fPU`
+- Removed function: `var12630`
+- Removed function: `var12755`
+- Removed function: `var12758`
+- Removed function: `var12786`
+- Removed function: `fQJ`
+- Removed function: `fQI`
+- Removed function: `fQK`
+- Removed function: `var12810`
+- Removed function: `fQL`
+- Removed function: `fQH`
+- Removed function: `fRa`
+- Removed function: `fRe`
+- Removed function: `fQR`
+- Removed function: `var13091`
+- Removed function: `var13092`
+- Removed function: `fRA`
+- Removed function: `fRB`
+- Removed function: `fRD`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fRD_ItemInfoRowPrompt`
+- Removed function: `fRE`
+- Removed function: `fRK`
+- Removed function: `var13206`
+- Removed function: `var13207`
+- Removed function: `fRN`
+- Removed function: `fRV`
+- Removed function: `var13876`
+- Removed function: `fTL`
+- Removed function: `var14154`
+- Removed function: `var14155`
+- Removed function: `var14162`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fTr_checkCanItemDescriptionExpand`
+- Removed function: `var14544`
+- Removed function: `var14579`
+- Removed function: `var14594`
+- Removed function: `var14697`
+- Removed function: `var14702`
+- Removed function: `var14698`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fUK_ActionBarWithTimedOptions`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fUQ_ActionBarWithRentalOption`
+- Removed function: `var15089`
+- Removed function: `var15090`
+- Removed function: `var15436`
+- Removed function: `var15437`
+- Removed function: `var15438`
+- Removed function: `var15439`
+- Removed function: `var15440`
+- Removed function: `var15487`
+- Removed function: `fVH`
+- Removed function: `fVO`
+- Removed function: `var16028`
+- Removed function: `var16211`
+- Removed function: `var16574`
+- Removed function: `var16575`
+- Removed function: `var16576`
+- Removed function: `var16618`
+- Removed function: `fWI`
+- Removed function: `var16711`
+- Removed function: `var17002`
+- Removed function: `fXI`
+- Removed function: `fXG`
+- Removed function: `fXP`
+- Removed function: `fXW`
+- Removed function: `var17624`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fYf_SubscriptionPurchaseOverlay`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_fYj_calculateMoreAmount`
+- Removed function: `fYA`
+- Removed function: `var17877`
+- Removed function: `fYB`
+- Removed function: `fYC`
+- Removed function: `var17917`
+- Removed function: `fZG`
+- Removed function: `fZH`
+- Removed function: `fZI`
+- Removed function: `fZF`
+- Removed function: `fZJ`
+- Removed function: `fZK`
+- Removed function: `fZL`
+- Removed function: `fZN`
+- Removed function: `fZP`
+- Removed function: `fZO`
+- Removed function: `fZR`
+- Removed function: `fZQ`
+- Removed function: `fZT`
+- Removed function: `fZU`
+- Removed function: `fZV`
+- Removed function: `fZW`
+- Removed function: `fZX`
+- Removed function: `fZS`
+- Removed function: `fZM`
+- Removed function: `fZz`
+- Removed function: `gaA`
+- Removed function: `var18130`
+- Removed function: `var18174`
+- Removed function: `var18175`
+- Removed function: `var18176`
+- Removed function: `var18178`
+- Removed function: `var18179`
+- Removed function: `var18204`
+- Removed function: `var18254`
+- Removed function: `var18255`
+- Removed function: `var18256`
+- Removed function: `var18258`
+- Removed function: `var18259`
+- Removed function: `var18284`
+- Removed function: `var18358`
+- Removed function: `var18395`
+- Removed function: `var18406`
+- Removed function: `var18457`
+- Removed function: `var18458`
+- Removed function: `var18707`
+- Removed function: `var18863`
+- Removed function: `var18918`
+- Removed function: `var18942`
+- Removed function: `var18942`
+- Removed function: `var18942`
+- Removed function: `var18975`
+- Removed function: `var19309`
+- Removed function: `var19508`
+- Removed function: `var19543`
+- Removed function: `var20070`
+- Removed function: `var20098`
+- Removed function: `var20305`
+- Removed function: `var20306`
+- Removed function: `var20319`
+- Removed function: `var20426`
+- Removed function: `var20585`
+- Removed function: `var20697`
+- Removed function: `var20697`
+- Removed function: `var20853`
+- Removed function: `var21009`
+- Removed function: `var21010`
+- Removed function: `var21646`
+- Removed function: `var21708`
+- Removed function: `var21709`
+- Removed function: `ghA`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_ghA_SubNavigationBar`
+- Removed function: `var22164`
+- Removed function: `var22322`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_giE_useTallTileV2`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_giF_useTallTileV3`
+- Removed function: `var22436`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gjs_ProfilePictureEditorBottomBarHOC`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gjv_shouldProvideControlsToViewItemDetails`
+- Removed function: `gjE`
+- Removed function: `var23665`
+- Removed function: `var23666`
+- Removed function: `gjN`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gdb_shouldEnableAlwaysRenderedScreensForUser`
+- Removed function: `var24020`
+- Removed function: `var24021`
+- Removed function: `var24111`
+- Removed function: `gkG`
+- Removed function: `gkO`
+- Removed function: `var24901`
+- Removed function: `var24902`
+- Removed function: `var24994`
+- Removed function: `var24995`
+- Removed function: `var24996`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_glk_ActionBarWithExpiredTimedOptions`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gll_selectTopBarHeight`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gll_selectWidgetState`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gll_selectWidgetInfo`
+- Removed function: `var25854`
+- Removed function: `var25857`
+- Removed function: `var25855`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_glM_trimWhitespaceFromString`
+- Removed function: `var26839`
+- Removed function: `var26840`
+- Removed function: `var26842`
+- Removed function: `var26843`
+- Removed function: `screen`
+- Removed function: `gnk`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_goF_ExternalNavigationHandler`
+- Removed function: `var27068`
+- Removed function: `var27113`
+- Removed function: `gqB`
+- Removed function: `gqC`
+- Removed function: `gqA`
+- Removed function: `gqE`
+- Removed function: `gqD`
+- Removed function: `gqH`
+- Removed function: `gqF`
+- Removed function: `gqJ`
+- Removed function: `gqs`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gqs_canRenderNativeChallenge`
+- Removed function: `gvV`
+- Removed function: `gvZ`
+- Removed function: `gvJ`
+- Removed function: `gwm`
+- Removed function: `var27431`
+- Removed function: `var27433`
+- Removed function: `var27491`
+- Removed function: `gwB`
+- Removed function: `gwC`
+- Removed function: `gwD`
+- Removed function: `var27633`
+- Removed function: `var27657`
+- Removed function: `var27667`
+- Removed function: `var27668`
+- Removed function: `gwE`
+- Removed function: `gwA`
+- Removed function: `var27696`
+- Removed function: `gwJ`
+- Removed function: `gwK`
+- Removed function: `gwL`
+- Removed function: `gwM`
+- Removed function: `gwO`
+- Removed function: `gwQ`
+- Removed function: `gwR`
+- Removed function: `gwP`
+- Removed function: `gwS`
+- Removed function: `gwN`
+- Removed function: `gwT`
+- Removed function: `gwH`
+- Removed function: `gwG`
+- Removed function: `gwF`
+- Removed function: `var27791`
+- Removed function: `var27792`
+- Removed function: `var27794`
+- Removed function: `var27829`
+- Removed function: `gxU`
+- Removed function: `gxY`
+- Removed function: `gya`
+- Removed function: `gyc`
+- Removed function: `gxZ`
+- Removed function: `gxX`
+- Removed function: `var28119`
+- Removed function: `gyA`
+- Removed function: `gyC`
+- Removed function: `gyI`
+- Removed function: `gyH`
+- Removed function: `gyG`
+- Removed function: `gyF`
+- Removed function: `gyE`
+- Removed function: `gyD`
+- Removed function: `var28346`
+- Removed function: `var28500`
+- Removed function: `gBR`
+- Removed function: `gCo`
+- Removed function: `gCn`
+- Removed function: `var28831`
+- Removed function: `var28846`
+- Removed function: `var28890`
+- Removed function: `gCF`
+- Removed function: `var28921`
+- Removed function: `var28922`
+- Removed function: `var28972`
+- Removed function: `var28980`
+- Removed function: `var28980`
+- Removed function: `var28985`
+- Removed function: `var28986`
+- Removed function: `gCN`
+- Removed function: `var29095`
+- Removed function: `gCP`
+- Removed function: `gCS`
+- Removed function: `gCR`
+- Removed function: `gCT`
+- Removed function: `gCX`
+- Removed function: `gCW`
+- Removed function: `gDf`
+- Removed function: `gDA`
+- Removed function: `gDC`
+- Removed function: `gDD`
+- Removed function: `gDE`
+- Removed function: `var29454`
+- Removed function: `gDF`
+- Removed function: `gDG`
+- Removed function: `gDK`
+- Removed function: `gDL`
+- Removed function: `gDN`
+- Removed function: `gDJ`
+- Removed function: `gDP`
+- Removed function: `gDT`
+- Removed function: `gDU`
+- Removed function: `gDX`
+- Removed function: `gDY`
+- Removed function: `gDZ`
+- Removed function: `var29647`
+- Removed function: `var29754`
+- Removed function: `gEG`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gEC_windowClosedCallback`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gEW_SearchLandingPageSkeleton`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gEU_SearchLandingPage`
+- Removed function: `LUAUFORGE_MODULE_GLOBALS_gES_SearchPageOverlay`
+- Removed function: `gFa`
+- Removed function: `var30094`
+- Removed function: `gGp`
+
+### `UniversalApp/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/shared/v1beta1/ui_component_schema.luau`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `catalogSortPropTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `catalogSortPropTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `catalogSortPropTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `catalogSortPropTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `hydrationDataSpecModule`
+- New upvalue captured by `jsonDecode`: `hydrationDataSpecModule`
+- New upvalue captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `hydrationDataSpecModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `pageEntryContentModule`
+- New upvalue captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New function: `new`
+- New function: `encode`
+- New function: `decode`
+- New function: `jsonEncode`
+- New function: `jsonDecode`
+- New function: `new`
+- New function: `encode`
+- New function: `decode`
+- New function: `jsonEncode`
+- New function: `jsonDecode`
+- New variable: `FriendCarouselSchema`
+- New variable: `FriendCarouselSchema_Props`
+
+
 ## 12535 - 2026-08-22 21:17
 
 ### New files
