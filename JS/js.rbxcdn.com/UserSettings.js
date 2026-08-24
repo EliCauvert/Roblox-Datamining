@@ -2,10 +2,10 @@
     try {
         var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "396454aa9accdc49ff801fa835cf8caeedfa5f12"
+            id: "f5ef26333aa83c27857ff672e1db0ec65992f830"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "e3cb3ea0-5f29-41af-9fd7-fb8e94c150cc", e._sentryDebugIdIdentifier = "sentry-dbid-e3cb3ea0-5f29-41af-9fd7-fb8e94c150cc")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "52a29f16-7e1d-4c90-8db9-2bb507215646", e._sentryDebugIdIdentifier = "sentry-dbid-52a29f16-7e1d-4c90-8db9-2bb507215646")
     } catch (e) {}
 }(),
 function() {
@@ -52758,41 +52758,44 @@ function() {
                 }
             }
             var bF = function() {
-                    var e, t, n, r, i, o, a, s, l, u, c, d = d$(),
-                        f = eu().snackbarService,
-                        p = (0, ec.useTranslation)().translate,
-                        h = bN(fZ(db.title, db.body), 2),
-                        v = h[0],
-                        m = h[1],
-                        g = fD(),
-                        b = g.data,
-                        S = g.isLoading,
-                        w = null != (e = null == b ? void 0 : b.faeAvailable) && e,
-                        x = null != (t = null == b ? void 0 : b.idvAvailable) && t,
-                        A = null != (n = null == b ? void 0 : b.vpcForFaeAvailable) && n,
-                        C = null != (r = null == b ? void 0 : b.undoAgeVerificationAvailable) && r,
-                        O = null != (i = null == b ? void 0 : b.acceptDownageAvailable) && i,
-                        P = null != (o = null == b ? void 0 : b.requireIDReverification) && o,
-                        E = bP(),
-                        k = E.data,
-                        T = E.isLoading,
-                        j = fk().data,
-                        I = null != (a = null == j ? void 0 : j.faeDeeplinkFlowEnabled) && a,
-                        _ = null != (s = null == j ? void 0 : j.idvDeeplinkFlowEnabled) && s,
-                        D = null != (l = null == j ? void 0 : j.disableAndroidDeeplink) && l,
-                        R = null != (u = null == j ? void 0 : j.disableAndroidAccountInfoReturnpage) && u,
-                        N = null != (c = null == j ? void 0 : j.disableAndroidReturnpage) && c,
-                        M = bN(bE(), 1)[0],
-                        L = bN(bk(), 2),
-                        F = L[0],
-                        U = L[1].isLoading,
-                        V = function() {
+                    var e, t, n, r, i, o, a, s, l, u, c, d, f, p, h = d$(),
+                        v = eu().snackbarService,
+                        m = (0, ec.useTranslation)().translate,
+                        g = bN(fZ(db.title, db.body), 2),
+                        b = g[0],
+                        S = g[1],
+                        w = fD(),
+                        x = w.data,
+                        A = w.isLoading,
+                        C = null != (e = null == x ? void 0 : x.faeAvailable) && e,
+                        O = null != (t = null == x ? void 0 : x.idvAvailable) && t,
+                        P = null != (n = null == x ? void 0 : x.vpcForFaeAvailable) && n,
+                        E = null != (r = null == x ? void 0 : x.undoAgeVerificationAvailable) && r,
+                        k = null != (i = null == x ? void 0 : x.acceptDownageAvailable) && i,
+                        T = null != (o = null == x ? void 0 : x.requireIDReverification) && o,
+                        j = bP(),
+                        I = j.data,
+                        _ = j.isLoading,
+                        D = fk().data,
+                        R = null != (a = null == D ? void 0 : D.faeDeeplinkFlowEnabled) && a,
+                        N = null != (s = null == D ? void 0 : D.idvDeeplinkFlowEnabled) && s,
+                        M = null != (l = null == D ? void 0 : D.disableAndroidDeeplink) && l,
+                        L = null != (u = null == D ? void 0 : D.disableAndroidAccountInfoReturnpage) && u,
+                        F = null != (c = null == D ? void 0 : D.disableAndroidReturnpage) && c,
+                        U = null != (d = null == D ? void 0 : D.disableIosDeeplink) && d,
+                        V = null != (f = null == D ? void 0 : D.disableIosAccountInfoReturnpage) && f,
+                        B = null != (p = null == D ? void 0 : D.disableIosReturnpage) && p,
+                        q = bN(bE(), 1)[0],
+                        z = bN(bk(), 2),
+                        K = z[0],
+                        W = z[1].isLoading,
+                        G = function() {
                             return bD(function() {
                                 var e, t, n, r, i;
                                 return bL(this, function(o) {
                                     switch (o.label) {
                                         case 0:
-                                            return o.trys.push([0, 2, , 3]), [4, d(mx.initiate(void 0, {
+                                            return o.trys.push([0, 2, , 3]), [4, h(mx.initiate(void 0, {
                                                 forceRefetch: !0,
                                                 subscribe: !1
                                             })).unwrap()];
@@ -52808,31 +52811,31 @@ function() {
                                                 if ("undefined" != typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
                                             }(a) || bM(a) || function() {
                                                 throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
-                                            }(), [fp.UndoAgeVerificationEligibility]), d(fA.util.invalidateTags(t)), o.label = 4;
+                                            }(), [fp.UndoAgeVerificationEligibility]), h(fA.util.invalidateTags(t)), o.label = 4;
                                         case 4:
-                                            return o.trys.push([4, 8, , 9]), [4, d(fE.endpoints.getSettingsUiPolicy.initiate({
+                                            return o.trys.push([4, 8, , 9]), [4, h(fE.endpoints.getSettingsUiPolicy.initiate({
                                                 bustCache: !0
                                             }, {
                                                 forceRefetch: !0
                                             })).unwrap()];
                                         case 5:
-                                            return n = o.sent(), [4, d(bT.endpoints.getAgeGroup.initiate({
+                                            return n = o.sent(), [4, h(bT.endpoints.getAgeGroup.initiate({
                                                 bustCache: !0
                                             }, {
                                                 forceRefetch: !0
                                             })).unwrap()];
                                         case 6:
-                                            return r = o.sent(), [4, d(fE.endpoints.getAccountInfoAgeVerificationPolicy.initiate({
+                                            return r = o.sent(), [4, h(fE.endpoints.getAccountInfoAgeVerificationPolicy.initiate({
                                                 bustCache: !0
                                             }, {
                                                 forceRefetch: !0
                                             })).unwrap()];
                                         case 7:
-                                            return i = o.sent(), d(fE.util.updateQueryData("getSettingsUiPolicy", void 0, function() {
+                                            return i = o.sent(), h(fE.util.updateQueryData("getSettingsUiPolicy", void 0, function() {
                                                 return n
-                                            })), d(fE.util.updateQueryData("getAccountInfoAgeVerificationPolicy", void 0, function() {
+                                            })), h(fE.util.updateQueryData("getAccountInfoAgeVerificationPolicy", void 0, function() {
                                                 return i
-                                            })), d(bT.util.updateQueryData("getAgeGroup", {}, function() {
+                                            })), h(bT.util.updateQueryData("getAgeGroup", {}, function() {
                                                 return r
                                             })), [3, 9];
                                         case 8:
@@ -52843,12 +52846,12 @@ function() {
                                 })
                             })()
                         },
-                        B = (0, y.DeviceMeta)(),
-                        q = (B.isPhone || B.isTablet) && B.isInApp && !B.isAmazonApp && !(D && B.isAndroidApp),
-                        z = function(e, t, n, r) {
+                        Q = (0, y.DeviceMeta)(),
+                        H = (Q.isPhone || Q.isTablet) && Q.isInApp && !Q.isAmazonApp && !(M && Q.isAndroidApp) && !(U && Q.isIosApp),
+                        Y = function(e, t, n, r) {
                             var i = "roblox://navigation/amp_wizard?feature_name=".concat(e, "&namespace=").concat(t, "&entry_point=settings"),
                                 o = !n || !r;
-                            if (B.isAndroidApp && (N || R && o)) return i;
+                            if (Q.isAndroidApp && (F || L && o) || Q.isIosApp && (B || V && o)) return i;
                             var a = window.location.pathname.slice(1) + window.location.hash;
                             if (n && r) {
                                 var s = a.includes("?") ? "&" : "?";
@@ -52858,15 +52861,15 @@ function() {
                             return "".concat(i, "&returnpage=").concat(l)
                         };
                     return {
-                        faeAvailable: w,
-                        idvAvailable: x,
-                        vpcForFaeAvailable: A,
-                        undoAgeVerificationAvailable: C,
-                        acceptDownageAvailable: O,
-                        requireIDReverification: P,
-                        isLoading: S || T,
+                        faeAvailable: C,
+                        idvAvailable: O,
+                        vpcForFaeAvailable: P,
+                        undoAgeVerificationAvailable: E,
+                        acceptDownageAvailable: k,
+                        requireIDReverification: T,
+                        isLoading: A || _,
                         handleFAEClick: function(e) {
-                            if (I && q) return void y.DeepLinkService.navigateToDeepLink(z(va, vd));
+                            if (R && H) return void y.DeepLinkService.navigateToDeepLink(Y(va, vd));
                             g3.authButtonClickConfirmFae(e), bw();
                             y.AccessManagementUpsellV2Service.startAccessManagementUpsell({
                                 featureName: va,
@@ -52877,14 +52880,14 @@ function() {
                                     source: e
                                 }
                             }).catch(function() {
-                                return m.open()
+                                return S.open()
                             }).finally(function() {
-                                V()
+                                G()
                             })
                         },
                         handleIDVClick: function() {
-                            if (_ && q) {
-                                gJ("handleIDVClick"), bS(), y.DeepLinkService.navigateToDeepLink(z(vo, vu));
+                            if (N && H) {
+                                gJ("handleIDVClick"), bS(), y.DeepLinkService.navigateToDeepLink(Y(vo, vu));
                                 return
                             }
                             bb();
@@ -52892,9 +52895,9 @@ function() {
                                 featureName: vo,
                                 namespace: vu
                             }).catch(function() {
-                                return m.open()
+                                return S.open()
                             }).finally(function() {
-                                V()
+                                G()
                             })
                         },
                         handleVpcForFaeClick: function(e) {
@@ -52907,9 +52910,9 @@ function() {
                                     source: e
                                 }
                             }).catch(function() {
-                                return m.open()
+                                return S.open()
                             }).finally(function() {
-                                V()
+                                G()
                             })
                         },
                         handleAgeCheckUpsells: function(e) {
@@ -52927,10 +52930,10 @@ function() {
                                             if (s = hg(r), c = null == i || i, d = {
                                                     context: "settings"
                                                 }, e) {
-                                                if (I && q) return y.DeepLinkService.navigateToDeepLink(z(va, vd, t, n)), [2, !0];
+                                                if (R && H) return y.DeepLinkService.navigateToDeepLink(Y(va, vd, t, n)), [2, !0];
                                                 l = va, u = vd
                                             } else if (a) {
-                                                if (_ && q) return gJ(t), bS(), y.DeepLinkService.navigateToDeepLink(z(vo, vu, t, n)), [2, !0];
+                                                if (N && H) return gJ(t), bS(), y.DeepLinkService.navigateToDeepLink(Y(vo, vu, t, n)), [2, !0];
                                                 bb(), l = vo, u = vu
                                             }
                                             if (!l || !u) return [2, !1];
@@ -52942,10 +52945,10 @@ function() {
                                                 isAsyncCall: !1,
                                                 usePrologue: c
                                             }).catch(function() {
-                                                return m.open()
+                                                return S.open()
                                             })];
                                         case 1:
-                                            return f = h.sent(), [4, V()];
+                                            return f = h.sent(), [4, G()];
                                         case 2:
                                             if (p = h.sent(), !f) return [3, 4];
                                             return [4, null == o ? void 0 : o(p)];
@@ -52957,17 +52960,17 @@ function() {
                                 })
                             })()
                         },
-                        errorModal: v,
-                        eligibleForAgeVerificationUndo: void 0 !== k && k,
+                        errorModal: b,
+                        eligibleForAgeVerificationUndo: void 0 !== I && I,
                         handleUndoAgeVerificationClick: function(e) {
                             return bD(function() {
                                 return bL(this, function(t) {
                                     switch (t.label) {
                                         case 0:
-                                            return [4, M().unwrap().catch(function() {
-                                                f.warning(p(e))
+                                            return [4, q().unwrap().catch(function() {
+                                                v.warning(m(e))
                                             }).finally(function() {
-                                                V()
+                                                G()
                                             })];
                                         case 1:
                                             return t.sent(), [2]
@@ -52976,13 +52979,13 @@ function() {
                             })()
                         },
                         handleAcceptDownageClick: function(e) {
-                            F().unwrap().catch(function() {
-                                e ? f.warning(e) : m.open()
+                            K().unwrap().catch(function() {
+                                e ? v.warning(e) : S.open()
                             }).finally(function() {
-                                V()
+                                G()
                             })
                         },
-                        isAcceptingDownage: U
+                        isAcceptingDownage: W
                     }
                 },
                 bU = n(4317),
@@ -92221,4 +92224,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("UserSettings");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-514e319411d069ef.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-4feb4f97ef8e2000.js.map
