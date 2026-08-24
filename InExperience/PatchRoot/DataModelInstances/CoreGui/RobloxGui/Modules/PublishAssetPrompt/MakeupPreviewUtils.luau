@@ -16,25 +16,33 @@ local t = {
 	[Enum.AvatarAssetType.EyelashAccessory] = CFrame.lookAt(Vector3.new(4.593966007233, 0.279193401337, -7.37591791153), Vector3.new(4.047185897827, 0.259541749954, -6.538872241974))
 }
 local t_1 = {
-	setupMakeupThumbnailCamera = function(value, p2, p3) --[[ line: 48 ]]
+	getHeadPreviewCameraData = function(p2) --[[ line: 48 ]]
+		local head = p2:FindFirstChild("Head")
+		
+		if head and head:IsA("MeshPart") and not p2:FindFirstChild("HumanoidRootPart") then
+			return head.CFrame, head.Size
+		end
+		return nil, nil
+	end,
+	setupMakeupThumbnailCamera = function(value, p3, p4) --[[ line: 58 ]]
 		-- upvalues: lookAtCFrame (ref), t (ref)
 		local head = value:FindFirstChild("Head")
 		
 		if not head or not head:IsA("MeshPart") then
 			return false
 		end
-		local var14 = lookAtCFrame
+		local var15 = lookAtCFrame
 		
-		if p3 then
-			var14 = t[p3] or var14
+		if p4 then
+			var15 = t[p4] or var15
 		end
-		p2.CFrame = head.CFrame * var14
-		p2.Focus = head.CFrame
-		p2.FieldOfView = 5
+		p3.CFrame = head.CFrame * var15
+		p3.Focus = head.CFrame
+		p3.FieldOfView = 5
 		
 		return true
 	end,
-	isMakeupAssetType = function(value) --[[ line: 68 ]]
+	isMakeupAssetType = function(value) --[[ line: 78 ]]
 		-- upvalues: constantsModule (ref)
 		return constantsModule.MakeupAssetTypes[value] == true
 	end
@@ -56,48 +64,48 @@ local t_4 = {
 	[Enum.AccessoryType.Eyelash] = true
 }
 
-local function removeMatchingChildren(p4, p5) --[[ line: 93 ]]
-	for i, v in ipairs(p4:GetChildren()) do
-		if p5(v) then
+local function removeMatchingChildren(p5, p6) --[[ line: 103 ]]
+	for i, v in ipairs(p5:GetChildren()) do
+		if p6(v) then
 			v:Destroy()
 		end
 	end
 end
 
-local function addAssetToDescription(value, p6, p7) --[[ line: 102 ]]
+local function addAssetToDescription(value, p7, p8) --[[ line: 112 ]]
 	-- upvalues: t_2 (ref), t_3 (ref), removeMatchingChildren (ref)
-	local var15 = p7 and t_2[p7]
-	local var16 = p7 and t_3[p7]
+	local var16 = p8 and t_2[p8]
+	local var17 = p8 and t_3[p8]
 	
-	if var15 then
-		removeMatchingChildren(value, function(p8) --[[ line: 107 ]]
-			return p8:IsA("MakeupDescription")
+	if var16 then
+		removeMatchingChildren(value, function(p9) --[[ line: 117 ]]
+			return p9:IsA("MakeupDescription")
 		end)
 		local makeupDescription = Instance.new("MakeupDescription")
-		makeupDescription.MakeupType = var15
-		makeupDescription.Instance = p6
+		makeupDescription.MakeupType = var16
+		makeupDescription.Instance = p7
 		makeupDescription.Parent = value
 		
 		return
-	elseif var16 then
-		removeMatchingChildren(value, function(p9) --[[ line: 115 ]]
-			-- upvalues: var16 (ref)
-			return p9:IsA("AccessoryDescription") and p9.AccessoryType == var16
+	elseif var17 then
+		removeMatchingChildren(value, function(p10) --[[ line: 125 ]]
+			-- upvalues: var17 (ref)
+			return p10:IsA("AccessoryDescription") and p10.AccessoryType == var17
 		end)
 		local accessoryDescription = Instance.new("AccessoryDescription")
-		accessoryDescription.AccessoryType = var16
-		accessoryDescription.Instance = p6
+		accessoryDescription.AccessoryType = var17
+		accessoryDescription.Instance = p7
 		accessoryDescription.IsLayered = true
 		accessoryDescription.Parent = value
 	end
 end
 
-function t_1.stripToHead(p10) --[[ line: 132 ]]
+function t_1.stripToHead(p11) --[[ line: 142 ]]
 	-- upvalues: t_4 (ref)
-	local head = p10:FindFirstChild("Head")
+	local head = p11:FindFirstChild("Head")
 	
 	if not head then return end
-	for i, v in ipairs(p10:GetChildren()) do
+	for i, v in ipairs(p11:GetChildren()) do
 		if v:IsA("BasePart") then
 			if v ~= head then
 				v:Destroy()
@@ -108,8 +116,8 @@ function t_1.stripToHead(p10) --[[ line: 132 ]]
 	end
 end
 
-function t_1.anchorRigidPreviewParts(p11) --[[ line: 153 ]]
-	for i, v in ipairs(p11:GetDescendants()) do
+function t_1.anchorRigidPreviewParts(p12) --[[ line: 163 ]]
+	for i, v in ipairs(p12:GetDescendants()) do
 		if v:IsA("BasePart") then
 			local accessory = v:FindFirstAncestorWhichIsA("Accessory")
 			
@@ -120,84 +128,84 @@ function t_1.anchorRigidPreviewParts(p11) --[[ line: 153 ]]
 	end
 end
 
-function t_1.getFolderAccessories(p12, p13) --[[ line: 171 ]]
+function t_1.getFolderAccessories(p13, p14) --[[ line: 181 ]]
 	local t = {}
 	
-	for i, v in ipairs(p12:GetChildren()) do
+	for i, v in ipairs(p13:GetChildren()) do
 		if v:IsA("Accessory") then
 			table.insert(t, {
 				asset = v,
-				assetType = if p13 and p13[i] then p13[i].assetType else nil
+				assetType = if p14 and p14[i] then p14[i].assetType else nil
 			})
 		end
 	end
 	return t
 end
 
-local function createHeadWithAsset(value, p14, p15, p16) --[[ line: 185 ]]
+local function createHeadWithAsset(value, p15, p16, p17) --[[ line: 195 ]]
 	-- upvalues: addAssetToDescription (ref), playersService (ref), t_1 (ref)
-	if p14 then
-		addAssetToDescription(value, p14, p15)
+	if p15 then
+		addAssetToDescription(value, p15, p16)
 	end
-	if p16 then
-		for i, v in ipairs(p16) do
+	if p17 then
+		for i, v in ipairs(p17) do
 			addAssetToDescription(value, v.asset, v.assetType)
 		end
 	end
-	local var22 = nil
+	local var23 = nil
 	
 	return nil
 end
 
-function t_1.createMakeupHeadPreview(p17, p18, p19) --[[ line: 227 ]]
+function t_1.createMakeupHeadPreview(p18, p19, p20) --[[ line: 242 ]]
 	-- upvalues: playersService (ref), createHeadWithAsset (ref)
-	local var23 = nil
+	local var24 = nil
 	local localPlayer = playersService.LocalPlayer
 	
 	if localPlayer then
-		local ok, status = pcall(function() --[[ line: 235 ]]
+		local ok, status = pcall(function() --[[ line: 250 ]]
 			-- upvalues: playersService (copy), localPlayer (ref)
 			return playersService:GetHumanoidDescriptionFromUserIdAsync(localPlayer.UserId)
 		end)
 		
 		if ok and status then
-			var23 = status
+			var24 = status
 		end
 	end
-	return createHeadWithAsset(var23 or Instance.new("HumanoidDescription"), p17, p18, p19)
+	return createHeadWithAsset(var24 or Instance.new("HumanoidDescription"), p18, p19, p20)
 end
 
-function t_1.createMakeupThumbnailPreview(p20, p21) --[[ line: 253 ]]
+function t_1.createMakeupThumbnailPreview(p21, p22) --[[ line: 268 ]]
 	-- upvalues: addAssetToDescription (ref), playersService (ref), t_1 (ref), brickColor (ref)
 	local humanoidDescription = Instance.new("HumanoidDescription")
 	humanoidDescription.Head = 103273511207307
 	
-	if p20 then
-		addAssetToDescription(humanoidDescription, p20, p21)
+	if p21 then
+		addAssetToDescription(humanoidDescription, p21, p22)
 	end
 	local bodyColors = nil
-	local var26 = nil
-	if not var26 then
+	local var27 = nil
+	if not var27 then
 		return nil
 	end
-	bodyColors = var26:FindFirstChildOfClass("BodyColors")
+	bodyColors = var27:FindFirstChildOfClass("BodyColors")
 	
 	if bodyColors then
 		bodyColors.HeadColor = brickColor
 	end
-	local head = var26:FindFirstChild("Head")
+	local head = var27:FindFirstChild("Head")
 	
 	if head then
 		head.Color = brickColor.Color
 	end
-	return var26
+	return var27
 end
 
-function t_1.compositeMakeupFolder(p22, p23) --[[ line: 281 ]]
+function t_1.compositeMakeupFolder(p23, p24) --[[ line: 296 ]]
 	-- upvalues: assetService (ref)
 	local t = {}
 	
-	for i, v in ipairs(p22:GetChildren()) do
+	for i, v in ipairs(p23:GetChildren()) do
 		if v:IsA("Decal") then
 			table.insert(t, v)
 		end
@@ -209,13 +217,13 @@ function t_1.compositeMakeupFolder(p22, p23) --[[ line: 281 ]]
 	
 	if not object then
 		return nil
-	elseif p23 then
-		table.sort(t, function(p24, p25) --[[ line: 299 ]]
-			-- upvalues: p23 (ref)
-			return (p23[p24.Name] or 0) < (p23[p25.Name] or 0)
+	elseif p24 then
+		table.sort(t, function(p25, p26) --[[ line: 314 ]]
+			-- upvalues: p24 (ref)
+			return (p24[p25.Name] or 0) < (p24[p26.Name] or 0)
 		end)
 	end
-	local var33
+	local var34
 	local size = object.Size
 	local vector2 = Vector2.new(size.X, size.Y)
 	local decal = Instance.new("Decal")
@@ -226,30 +234,30 @@ function t_1.compositeMakeupFolder(p22, p23) --[[ line: 281 ]]
 		"MetalnessMapContent",
 		"NormalMapContent"
 	}) do
-		var33 = false
+		var34 = false
 		
 		for i_2, v_2 in ipairs(t) do
 			local i_3 = v_2[v_1]
 			
 			if i_3 and (i_3.Object or i_3.Uri) then
-				var33 = true
+				var34 = true
 				break
 			end
 		end
-		if var33 then
-			local var34 = assetService:CreateEditableImage({ Size = vector2 })
-			local var35 = false
+		if var34 then
+			local var35 = assetService:CreateEditableImage({ Size = vector2 })
+			local var36 = false
 			
 			for i_3, v_3 in ipairs(t) do
-				local var36 = v_3[v_1]
+				local var37 = v_3[v_1]
 				
-				if var36 then
-					local object_1 = var36.Object
+				if var37 then
+					local object_1 = var37.Object
 					
-					if not object_1 and var36.Uri and var36.Uri ~= "" then
-						local ok, status = pcall(function() --[[ line: 338 ]]
-							-- upvalues: assetService (copy), var36 (ref)
-							return assetService:CreateEditableImageAsync(var36)
+					if not object_1 and var37.Uri and var37.Uri ~= "" then
+						local ok, status = pcall(function() --[[ line: 353 ]]
+							-- upvalues: assetService (copy), var37 (ref)
+							return assetService:CreateEditableImageAsync(var37)
 						end)
 						
 						if ok then
@@ -257,12 +265,12 @@ function t_1.compositeMakeupFolder(p22, p23) --[[ line: 281 ]]
 						end
 					end
 					if object_1 then
-						var34:DrawImage(Vector2.new(0, 0), object_1, if not var35 then Enum.ImageCombineType.Overwrite else Enum.ImageCombineType.AlphaBlend)
-						var35 = true
+						var35:DrawImage(Vector2.new(0, 0), object_1, if not var36 then Enum.ImageCombineType.Overwrite else Enum.ImageCombineType.AlphaBlend)
+						var36 = true
 					end
 				end
 			end
-			decal[v_1] = Content.fromObject(var34)
+			decal[v_1] = Content.fromObject(var35)
 		end
 	end
 	local wrapTextureTransfer = t[1]:FindFirstChildWhichIsA("WrapTextureTransfer")

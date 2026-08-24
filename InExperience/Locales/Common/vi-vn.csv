@@ -1315,6 +1315,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"Hình nền
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,"Hình nền này được tạo bằng AI. Khi tải lên, bạn xác nhận hình nền này tuân thủ Tiêu chuẩn cộng đồng Roblox và không sử dụng nội dung mà bạn không có quyền sử dụng. Hình nền sẽ được xét duyệt trước khi xuất hiện trong kho của bạn. Không thể chỉnh sửa vật phẩm sau khi tải lên."
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Mở khóa miễn phí các hình nền dành riêng cho Plus.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,Vật phẩm không đáp ứng Tiêu chuẩn cộng đồng
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau để tiếp tục tùy chỉnh.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,Bạn đã đạt hạn mức sử dụng. Hãy thử lại vào ngày mai để tiếp tục tùy chỉnh.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau 1 giờ để tiếp tục tùy chỉnh.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,Bạn đã đạt hạn mức sử dụng. Hãy thử lại sau 1 phút để tiếp tục tùy chỉnh.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,Câu lệnh đó không tuân thủ hướng dẫn của chúng tôi. Hãy thử mô tả nội dung khác.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,Hình nền này không tuân thủ Tiêu chuẩn cộng đồng Roblox nên đã không được thêm vào kho của bạn. Hãy thử tạo hình nền mới.
 Feature.Avatar.BackgroundGeneration.Error.System,Đã xảy ra lỗi khi tạo nền của bạn. Vui lòng thử lại.
@@ -3264,7 +3268,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,Mở rộng
 Feature.Moments.Action.GenerateText,Tạo văn bản
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Không hữu ích
-Feature.Moments.Action.GenerateTextFeedbackPolicy,Không phù hợp hoặc vi phạm hướng dẫn
+Feature.Moments.Action.GenerateTextFeedbackPolicy,Không phù hợp hoặc vi phạm quy định
 Feature.Moments.Action.Hide,Ẩn chi tiết
 Feature.Moments.Action.HowToCapture,Cách Chụp ảnh/quay màn hình
 Feature.Moments.Action.Join,

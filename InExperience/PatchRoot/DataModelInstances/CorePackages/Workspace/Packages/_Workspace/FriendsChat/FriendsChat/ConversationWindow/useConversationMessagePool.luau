@@ -70,6 +70,7 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 			return reactModule.createElement(friendsChatTextMessageModule, {
 				getDisplayId = p4.getMessageId,
 				getDisplayFromId = var19.getDisplayFromId,
+				getMessageIdFromDisplayId = var19.getMessageIdFromDisplayId,
 				getLayoutOrder = p4.getLayoutOrder,
 				chatWindowSettings = p1.chatWindowSettings,
 				textTransparency = p1.textTransparency,
@@ -84,9 +85,9 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 			var18
 		})
 	})
-	local var21 = reactModule.useMemo(function() --[[ line: 145 ]]
+	local var21 = reactModule.useMemo(function() --[[ line: 146 ]]
 		-- upvalues: signalsModule (copy), var20 (ref), UIListLayout (copy), fFlagFriendsChatOsaSystemMessage (copy), getConversationStoreModule (copy), conversationId (ref), getOtherParticipantUserId (copy), reactModule (copy), friendsChatOsaSystemMessageModule (copy), p1 (ref), var18 (ref)
-		return signalsModule.createComputed(function(p5) --[[ line: 146 ]]
+		return signalsModule.createComputed(function(p5) --[[ line: 147 ]]
 			-- upvalues: var20 (copy), UIListLayout (copy), fFlagFriendsChatOsaSystemMessage (copy), getConversationStoreModule (copy), conversationId (copy), getOtherParticipantUserId (copy), reactModule (copy), friendsChatOsaSystemMessageModule (copy), p1 (copy), var18 (copy)
 			local cloned = table.clone(var20(p5))
 			cloned["$layout"] = UIListLayout
@@ -109,11 +110,11 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 		var20, conversationId, p1.chatWindowSettings, p1.textTransparency,
 		p1.isSpatialUIEnabled, var18
 	})
-	reactModule.useEffect(function() --[[ line: 187 ]]
+	reactModule.useEffect(function() --[[ line: 188 ]]
 		-- upvalues: shouldFetchMessages (ref), fetchMessagePageModule (copy), conversationId (ref), name (copy)
 		if shouldFetchMessages then
 			local var25 = false
-			fetchMessagePageModule(conversationId, nil):catch(function(p6) --[[ line: 202 ]]
+			fetchMessagePageModule(conversationId, nil):catch(function(p6) --[[ line: 203 ]]
 				-- upvalues: var25 (write), name (copy), conversationId (copy)
 				if var25 then
 					return
@@ -121,7 +122,7 @@ return function(p1) --[[ line: 74 | named "useConversationMessagePool" ]]
 				name:warning(`Failed to fetch conversation messages for {conversationId}: {tostring(p6)}`)
 			end)
 			
-			return function() --[[ line: 209 ]]
+			return function() --[[ line: 210 ]]
 				-- upvalues: var25 (write)
 				var25 = true
 			end

@@ -9,6 +9,7 @@ local getPreviewImageUrlModule = require(purchasePrompt.getPreviewImageUrl)
 local fFlagEnableUnifiedProductPurchaseFlow = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedProductPurchaseFlow
 local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local fFlagUnifiedPurchaseOptimizeTTIMarketplace = require(purchasePrompt.Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
+local fFlagAXFixMISUpsellDiscountSummary = require(purchasePrompt.Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
 local getFFlagTranslateDevProductsModule = require(purchasePrompt.Flags.GetFFlagTranslateDevProducts)
 local getFFlagFixBundlePromptThumbnailModule = require(purchasePrompt.Flags.GetFFlagFixBundlePromptThumbnail)
 local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
@@ -18,8 +19,8 @@ local var10 = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then require(purc
 local fFlagPurchasePromptFetchCartPricingForLooks = require(purchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 
 return rodux.createReducer({}, {
-	[productInfoReceivedModule.name] = function(_, p0) --[[ line: 35 ]]
-		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var10 (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
+	[productInfoReceivedModule.name] = function(_, p0) --[[ line: 36 ]]
+		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var10 (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedProductPurchaseFlow (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
 		local productInfo = p0.productInfo
 		local var11 = ""
 		local var12 = ""
@@ -38,6 +39,7 @@ return rodux.createReducer({}, {
 			basePrice = if fFlagEnableDiscountInfoInUnifiedPurchaseModal then productInfo.UserBasePriceInRobux or (productInfo.BasePriceInRobux or (productInfo.PriceInRobux or 0)) else nil,
 			price = productInfo.PriceInRobux or 0,
 			priceDiscountDetails = if var10 then var10(productInfo.PriceDiscountDetails) else nil,
+			savingsSummaryOverride = if fFlagAXFixMISUpsellDiscountSummary then productInfo.SavingsSummaryOverride else nil,
 			premiumPrice = productInfo.PremiumPriceInRobux,
 			imageUrl = getPreviewImageUrlModule(productInfo),
 			assetTypeId = productInfo.AssetTypeId,
@@ -54,7 +56,7 @@ return rodux.createReducer({}, {
 			displayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs and productInfo.ProductType == productTypeEnum.DeveloperSubscription then productInfo.DisplayPrice else nil
 		}
 	end,
-	[bundleProductInfoReceivedModule.name] = function(_, p1) --[[ line: 93 ]]
+	[bundleProductInfoReceivedModule.name] = function(_, p1) --[[ line: 97 ]]
 		-- upvalues: getFFlagFixBundlePromptThumbnailModule (ref), itemTypeModule (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), fFlagEnableDiscountInfoInUnifiedPurchaseModal (ref), var10 (ref), getPreviewImageUrlModule (ref)
 		local bundleProductInfo = p1.bundleProductInfo
 		local id = nil
@@ -81,7 +83,7 @@ return rodux.createReducer({}, {
 			itemType = bundleProductInfo.itemType
 		}
 	end,
-	[completeRequestModule.name] = function(_, _) --[[ line: 133 ]]
+	[completeRequestModule.name] = function(_, _) --[[ line: 137 ]]
 		return {}
 	end
 })

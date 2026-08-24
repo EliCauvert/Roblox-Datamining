@@ -184,7 +184,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 			fetchConversationDetailsSafe(channelId, fFlagFriendsChatRefreshListForNewConversationModule and (if p17.Type ~= "AddedToChannel" then p17.Type == "ChannelCreated" else true), requestConversationListRefresh)
 		end
 	end, {})
-	realtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(p18, p19) --[[ line: 253 ]]
+	realtimeDeliveryModule.useRealtimeConnectionStateChanged("CommunicationChannels", function(p18, p19) --[[ line: 254 ]]
 		-- upvalues: getFriendsChatRealtimeStoreModule (copy), fStringDebugFriendsChatConversationIdModule (copy), fetchNewerMessagesSafe (copy), onActiveConversationMessageReceived (ref)
 		if p18 ~= Enum.ConnectionState.Connected or not p19 then return end
 		local var43 = getFriendsChatRealtimeStoreModule(false).getActiveConversationId(false) or fStringDebugFriendsChatConversationIdModule
@@ -193,7 +193,7 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 			fetchNewerMessagesSafe(var43, onActiveConversationMessageReceived)
 		end
 	end, {})
-	realtimeDeliveryModule.useRealtimeNamespace("FriendshipNotifications", function(p20) --[[ line: 267 ]]
+	realtimeDeliveryModule.useRealtimeNamespace("FriendshipNotifications", function(p20) --[[ line: 268 ]]
 		-- upvalues: name (copy), var37 (ref), var38 (ref), expChatConversationListAdapterModule (copy)
 		if p20 == nil or p20.Type ~= "FriendshipCreated" then
 			return
@@ -233,9 +233,9 @@ return function(p13) --[[ line: 184 | named "FriendsChatRealtimeSubscriber" ]]
 		
 		attempt(3)
 	end, {})
-	reactModule.useEffect(function() --[[ line: 275 ]]
+	reactModule.useEffect(function() --[[ line: 276 ]]
 		-- upvalues: var38 (ref)
-		return function() --[[ line: 276 ]]
+		return function() --[[ line: 277 ]]
 			-- upvalues: var38 (copy)
 			var38.current += 1
 		end

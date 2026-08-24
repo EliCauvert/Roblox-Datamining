@@ -10,7 +10,7 @@ local buildRowDisplayModule = require(script.Parent.buildRowDisplay)
 local getLocalUserIdModule = require(script.Parent.Parent.Parent.Utils.getLocalUserId)
 local t = {}
 
-local function _(p0) --[[ line: 58 | named "messageSortTime" ]]
+local function _(p0) --[[ line: 59 | named "messageSortTime" ]]
 	local var11 = if p0 then p0.created_at else nil
 	
 	if var11 == nil then
@@ -26,7 +26,7 @@ local function _(p0) --[[ line: 58 | named "messageSortTime" ]]
 	return if var13 then var13 * 1000 else 1e999
 end
 
-local function resolveProfileNameInfo(p1, p2) --[[ line: 77 ]]
+local function resolveProfileNameInfo(p1, p2) --[[ line: 78 ]]
 	if p1 == nil or p1.names == nil then
 		return { name = nil, username = nil }
 	end
@@ -43,7 +43,7 @@ local function resolveProfileNameInfo(p1, p2) --[[ line: 77 ]]
 	}
 end
 
-local function resolveNameInfos(p3, p4) --[[ line: 105 ]]
+local function resolveNameInfos(p3, p4) --[[ line: 106 ]]
 	-- upvalues: userProfileStore (ref), resolveProfileNameInfo (ref)
 	local t = {}
 	local t_1 = {}
@@ -66,11 +66,11 @@ local function resolveNameInfos(p3, p4) --[[ line: 105 ]]
 	return t_3
 end
 
-return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
+return function(p5, p6) --[[ line: 128 | named "createMessageDisplayStore" ]]
 	-- upvalues: signalsModule (ref), getConversationStoreModule (ref), conversationModule (ref), resolveNameInfos (ref), getLocalUserIdModule (ref), getConversationMessageStoreModule (ref), t (ref), classifyMessageModule (ref), cryoModule (ref), buildRowDisplayModule (ref)
 	local t_1 = {}
 	local t_2 = {}
-	local var25 = signalsModule.createComputed(function(p7) --[[ line: 134 ]]
+	local var25 = signalsModule.createComputed(function(p7) --[[ line: 135 ]]
 		-- upvalues: p6 (ref), getConversationStoreModule (copy), conversationModule (copy)
 		if p6 == nil then
 			return false
@@ -80,7 +80,7 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 		return conversation ~= nil and conversation.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
 	end)
 	
-	local function resolveForRowSpec(p8, p9) --[[ line: 143 ]]
+	local function resolveForRowSpec(p8, p9) --[[ line: 144 ]]
 		-- upvalues: resolveNameInfos (copy), getLocalUserIdModule (copy), var25 (ref)
 		return if p8.kind == "userText" or p8.kind == "hiddenUser" then {
 			namesByUserId = resolveNameInfos({ p8.senderUserId }, p9)
@@ -91,12 +91,12 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 		} else {}
 	end
 	
-	local function _(p10) --[[ line: 157 | named "getMessageRowSpecs" ]]
+	local function _(p10) --[[ line: 158 | named "getMessageRowSpecs" ]]
 		-- upvalues: t_1 (ref), signalsModule (copy), getConversationMessageStoreModule (copy), t (copy), classifyMessageModule (copy)
 		local var29 = t_1[p10]
 		
 		if var29 == nil then
-			var29 = signalsModule.createComputed(function(p11) --[[ line: 160 ]]
+			var29 = signalsModule.createComputed(function(p11) --[[ line: 161 ]]
 				-- upvalues: getConversationMessageStoreModule (copy), p10 (ref), t (copy), classifyMessageModule (copy)
 				local message = getConversationMessageStoreModule(p11).getMessage(p10, p11)
 				
@@ -107,7 +107,7 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 		return var29
 	end
 	
-	local _ = function(p12, p13) --[[ line: 183 | named "getFrozenMessageSortTime" ]]
+	local _ = function(p12, p13) --[[ line: 184 | named "getFrozenMessageSortTime" ]]
 		-- upvalues: t_2 (ref), getConversationMessageStoreModule (copy)
 		local var31 = t_2[p12]
 		
@@ -139,7 +139,7 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 		return var34
 	end
 	
-	local var27 = signalsModule.createComputed(function(p14) --[[ line: 200 ]]
+	local var27 = signalsModule.createComputed(function(p14) --[[ line: 201 ]]
 		-- upvalues: p5 (ref), t_1 (ref), signalsModule (copy), getConversationMessageStoreModule (copy), t (copy), classifyMessageModule (copy), t_2 (ref)
 		local var37 = p5(p14)
 		local t_3 = {}
@@ -149,7 +149,7 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 			local var40 = t_1[v]
 			
 			if var40 == nil then
-				var40 = signalsModule.createComputed(function(p15) --[[ line: 160 ]]
+				var40 = signalsModule.createComputed(function(p15) --[[ line: 161 ]]
 					-- upvalues: getConversationMessageStoreModule (copy), v (ref), t (copy), classifyMessageModule (copy)
 					local message = getConversationMessageStoreModule(p15).getMessage(v, p15)
 					
@@ -197,7 +197,7 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 				table.insert(t_3, t_4)
 			end
 		end
-		table.sort(t_3, function(p16, p17) --[[ line: 226 ]]
+		table.sort(t_3, function(p16, p17) --[[ line: 227 ]]
 			return if p16.sortTime == p17.sortTime then p16.sourceId < p17.sourceId else p16.sortTime < p17.sortTime
 		end)
 		local t_4 = {}
@@ -214,11 +214,11 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 	end)
 	
 	return {
-		getDisplayIds = signalsModule.createComputed(function(p18) --[[ line: 246 ]]
+		getDisplayIds = signalsModule.createComputed(function(p18) --[[ line: 247 ]]
 			-- upvalues: var27 (ref)
 			return var27(p18).idList
 		end, cryoModule.List.equals),
-		getDisplayFromId = function(p19, p20, p21) --[[ line: 254 ]]
+		getDisplayFromId = function(p19, p20, p21) --[[ line: 255 ]]
 			-- upvalues: var27 (ref), t_1 (ref), signalsModule (copy), getConversationMessageStoreModule (copy), t (copy), classifyMessageModule (copy), buildRowDisplayModule (copy), resolveForRowSpec (ref)
 			if p19 == nil then
 				return nil
@@ -232,7 +232,7 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 			local var54 = t_1[messageId]
 			
 			if var54 == nil then
-				var54 = signalsModule.createComputed(function(p22) --[[ line: 160 ]]
+				var54 = signalsModule.createComputed(function(p22) --[[ line: 161 ]]
 					-- upvalues: getConversationMessageStoreModule (copy), messageId (ref), t (copy), classifyMessageModule (copy)
 					local message = getConversationMessageStoreModule(p22).getMessage(messageId, p22)
 					
@@ -243,6 +243,15 @@ return function(p5, p6) --[[ line: 127 | named "createMessageDisplayStore" ]]
 			local rowIndex = var54(p20)[var53.rowIndex]
 			
 			return if rowIndex == nil then nil else buildRowDisplayModule(rowIndex, resolveForRowSpec(rowIndex, p20), p21 or {})
+		end,
+		getMessageIdFromDisplayId = function(p23) --[[ line: 274 ]]
+			-- upvalues: var27 (ref)
+			if p23 == nil then
+				return nil
+			end
+			local var55 = var27(false).idToHandle[p23]
+			
+			return if var55 then var55.messageId else nil
 		end
 	}
 end

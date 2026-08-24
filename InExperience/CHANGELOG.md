@@ -1,3 +1,518 @@
+## 12498 - 2026-08-24 20:59
+
+### New files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/templates/v1beta1.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/templates/v1beta1/template_api_messages.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Flags/GetFFlagMomentsGenerateTextInTextOverlay.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/DiscoveryTypes.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SharedExperimentDefinition.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialCarousel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/Components/SduiFriendCarousel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/System/OpenProfileQRCodePageBridge.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/sessionPromptMessageFilter.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/ExperienceResultsList.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/ExperienceResultsLoadingSkeleton.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/useMyCreationsResults.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/SearchBarContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/SearchBarView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/useDefaultSearchQuery.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchBar/useSearchBarViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchEmptyState/SearchEmptyState.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchPage/SearchPageContainer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchPage/SearchPageView.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/SearchPage/useSearchPageViewModel.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildAddSearchIconAndMoveSearchbar.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildAgentRollback.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FIntMyCreationsSessionListPollingIntervalSeconds.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/FoundationCloudAssets.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/FriendsChat/Flags/FFlagFriendsChatMessageSendPerfTracking.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/SharedFlags/SharedFlags/FFlagAXFixMISUpsellDiscountSummary.luau`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/Common/ObjectViewport.luau`
+- New upvalue captured by `setupViewportForAsset`: `makeupPreviewUtilsModule`
+- New variable: `makeupPreviewUtilsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/Common/PreviewViewport.luau`
+- New upvalue captured by `resetCameraPosition`: `makeupPreviewUtilsModule`
+- New variable: `makeupPreviewUtilsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/Components/PublishMakeupLookPrompt/PublishMakeupLookPrompt.luau`
+- New upvalue captured by `renderPromptBody`: `getFFlagUploadMakeupSupportModule`
+- New upvalue captured by `render`: `getFFlagUploadMakeupSupportModule`
+- New variable: `getFFlagUploadMakeupSupportModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CoreGui/RobloxGui/Modules/PublishAssetPrompt/MakeupPreviewUtils.luau`
+- New function: `getHeadPreviewCameraData`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Packages/_Index/ServiceContractsProto/ServiceContractsProto/roblox/apppageplatform/shared/v1beta1/ui_component_schema.luau`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `catalogSortPropTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `catalogSortPropTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `catalogSortPropTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `catalogSortPropTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `hydrationDataSpecModule`
+- New upvalue captured by `jsonDecode`: `hydrationDataSpecModule`
+- New upvalue captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `hydrationDataSpecModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `pageEntryContentModule`
+- Upvalue no longer captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `hydrationDataSpecModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `pageEntryContentModule`
+- New upvalue captured by `jsonDecode`: `pageEntryContentModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesEngineModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `propTypesEngineModule`
+- New upvalue captured by `jsonDecode`: `propTypesEngineModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `propConditionModule`
+- Upvalue no longer captured by `jsonDecode`: `propConditionModule`
+- New upvalue captured by `decode`: `propConditionModule`
+- New upvalue captured by `jsonDecode`: `propConditionModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `actionsModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `actionsModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- Upvalue no longer captured by `decode`: `propTypesModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- Upvalue no longer captured by `jsonDecode`: `propTypesModule`
+- New upvalue captured by `decode`: `actionsModule`
+- New upvalue captured by `decode`: `propTypesModule`
+- Upvalue no longer captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `actionsModule`
+- New upvalue captured by `jsonDecode`: `propTypesModule`
+- Upvalue no longer captured by `jsonDecode`: `componentSharedModule`
+- New upvalue captured by `decode`: `componentSharedModule`
+- New upvalue captured by `jsonDecode`: `componentSharedModule`
+- New function: `new`
+- New function: `encode`
+- New function: `decode`
+- New function: `jsonEncode`
+- New function: `jsonDecode`
+- New function: `new`
+- New function: `encode`
+- New function: `decode`
+- New function: `jsonEncode`
+- New function: `jsonDecode`
+- New variable: `FriendCarouselSchema`
+- New variable: `FriendCarouselSchema_Props`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/IAPExperience/IAPExperience/Generic/ModelViewport.luau`
+- New variable: `purchasePromptPreviewMakeupHead2`
+- Removed variable: `purchasePromptPreviewMakeupHead`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/IAPExperience/IAPExperience/ProductPurchaseRobuxUpsell/v4/UnifiedRobuxUpsellModalV2.luau`
+- New upvalue captured by `UnifiedRobuxUpsellModalV2`: `fFlagAXFixMISUpsellDiscountSummary`
+- New variable: `fFlagAXFixMISUpsellDiscountSummary`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Components/TextOverlay/TextOverlayLayer.luau`
+- New function: `GenerateTextButton`
+- New variable: `builderIconsModule`
+- New variable: `button`
+- New variable: `useTokens`
+- New variable: `useCreationFlowStringsModule`
+- New variable: `getFFlagMomentsGenerateTextInTextOverlayModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/CreationController/createCreationController.luau`
+- New upvalue captured by `setActiveSession`: `var23 (write)`
+- Upvalue no longer captured by `setActiveSession`: `var22 (write)`
+- New upvalue captured by `returnToGallery`: `var36 (write)`
+- Upvalue no longer captured by `returnToGallery`: `var35 (write)`
+- New upvalue captured by `beginTool`: `var20 (write)`
+- Upvalue no longer captured by `beginTool`: `var19 (write)`
+- New upvalue captured by `commitActiveTool`: `var20 (write)`
+- Upvalue no longer captured by `commitActiveTool`: `var19 (write)`
+- New upvalue captured by `clearActiveTool`: `var36 (write)`
+- Upvalue no longer captured by `clearActiveTool`: `var35 (write)`
+- New upvalue captured by `discardActiveTool`: `var36 (write)`
+- Upvalue no longer captured by `discardActiveTool`: `var35 (write)`
+- New upvalue captured by `dismiss`: `var36 (write)`
+- Upvalue no longer captured by `dismiss`: `var35 (write)`
+- New upvalue captured by `generateText`: `getActiveSession (write)`
+- New upvalue captured by `generateText`: `getFFlagMomentsGenerateTextInTextOverlayModule`
+- New function: `getCanGenerateText`
+- New variable: `getFFlagMomentsGenerateTextInTextOverlayModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Tools/generateTextTool.luau`
+- New upvalue captured by `isAvailable`: `getFFlagMomentsGenerateTextInTextOverlayModule`
+- New variable: `getFFlagMomentsGenerateTextInTextOverlayModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SduiSharedContent/SduiSharedContent/Components/SduiVerticalFeed.luau`
+- New variable: `fFlagLuaAppSduiHomeFriendCarousel`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialServerDrivenUi/SocialServerDrivenUi/System/registerSocialComponents.luau`
+- New function: `getLazyComponent`
+- New variable: `sharedFlagsModule`
+- New variable: `fFlagLuaAppSduiHomeFriendCarousel`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/BuildPage.luau`
+- New function: `shouldShowSearchEmptyState`
+- New function: `useOpenBuildChat`
+- New function: `BuildHomeScreen`
+- New function: `BuildSearchResults`
+- New function: `BuildSearchScreen`
+- New upvalue captured by `screen`: `buildChatPageModule`
+- New upvalue captured by `screen`: `buildNavigationParamsModule`
+- New upvalue captured by `screen`: `buildOverflowMenuScreensModule`
+- New upvalue captured by `screen`: `fFlagBuildExperienceAssetLibraryModule`
+- New upvalue captured by `screen`: `getBuildExperienceRefreshStoreModule`
+- New upvalue captured by `screen`: `privateInvitesPickerHostModule`
+- New upvalue captured by `screen`: `useOnScreenKeyboardVisibleModule`
+- Upvalue no longer captured by `screen`: `buildPageHeaderModule`
+- Upvalue no longer captured by `screen`: `buildSearchBarModule`
+- Upvalue no longer captured by `screen`: `fFlagBuildLocalization`
+- Upvalue no longer captured by `screen`: `localizationStringsModule`
+- Upvalue no longer captured by `screen`: `myCreationsTabModule`
+- Upvalue no longer captured by `screen`: `resumeBuildChatModule`
+- Upvalue no longer captured by `screen`: `useLocalization`
+- Upvalue no longer captured by `screen`: `useNavigationFocus`
+- Upvalue no longer captured by `screen`: `view`
+- New upvalue captured by `screen`: `fFlagBuildBackButtonChevronModule`
+- New upvalue captured by `screen`: `fFlagBuildLocalization`
+- New upvalue captured by `screen`: `fFlagEnableBuildExperienceScrollPerformanceTrackingModule`
+- New upvalue captured by `screen`: `iconName`
+- New upvalue captured by `screen`: `localizationStringsModule`
+- New upvalue captured by `screen`: `overflowMenuPageShellModule`
+- New upvalue captured by `screen`: `subagentStatusModule`
+- New upvalue captured by `screen`: `useLiveSubagentTaskState`
+- New upvalue captured by `screen`: `useLocalization`
+- Upvalue no longer captured by `screen`: `buildChatPageModule`
+- Upvalue no longer captured by `screen`: `buildOverflowMenuScreensModule`
+- Upvalue no longer captured by `screen`: `fFlagBuildExperienceAssetLibraryModule`
+- Upvalue no longer captured by `screen`: `getBuildExperienceRefreshStoreModule`
+- Upvalue no longer captured by `screen`: `privateInvitesPickerHostModule`
+- Upvalue no longer captured by `screen`: `useOnScreenKeyboardVisibleModule`
+- New upvalue captured by `screen`: `view`
+- New upvalue captured by `screen`: `creatorCreditBalanceChipContainerModule`
+- New upvalue captured by `screen`: `creatorCreditPageContainerModule`
+- Upvalue no longer captured by `screen`: `buildNavigationParamsModule`
+- Upvalue no longer captured by `screen`: `subagentStatusModule`
+- Upvalue no longer captured by `screen`: `useLiveSubagentTaskState`
+- Upvalue no longer captured by `screen`: `view`
+- Removed function: `screen`
+- New variable: `fFlagBuildAddSearchIconAndMoveSearchbarModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Chat/useChatSessionCore.luau`
+- New upvalue captured by `tryFocus`: `var32 (write)`
+- Upvalue no longer captured by `tryFocus`: `var30 (write)`
+- New function: `var106`
+- New upvalue captured by `setHistoryLoading`: `var107 (write)`
+- Upvalue no longer captured by `setHistoryLoading`: `var105 (write)`
+- New upvalue captured by `isHydrateCancelled`: `var107 (write)`
+- Upvalue no longer captured by `isHydrateCancelled`: `var105 (write)`
+- New upvalue captured by `continueAfterSessionReady`: `var107 (write)`
+- Upvalue no longer captured by `continueAfterSessionReady`: `var105 (write)`
+- New upvalue captured by `hydrateKnownSession`: `var107 (write)`
+- Upvalue no longer captured by `hydrateKnownSession`: `var105 (write)`
+- New upvalue captured by `refreshKnownSession`: `var119 (write)`
+- Upvalue no longer captured by `refreshKnownSession`: `var117 (write)`
+- New function: `var145`
+- New upvalue captured by `tryFocus`: `var146 (write)`
+- Upvalue no longer captured by `tryFocus`: `var144 (write)`
+- Removed function: `var104`
+- Removed function: `var143`
+- New variable: `fFlagBuildAgentRollbackModule`
+- New variable: `sessionPromptMessageFilterModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildPageHeader/BuildPageHeader.luau`
+- New function: `renderEmptyRight`
+- New function: `AgentSpec`
+- New function: `HeaderSearch`
+- New function: `HeaderCenter`
+- New variable: `displayModule`
+- New variable: `signalsReactModule`
+- New variable: `fFlagBuildAddSearchIconAndMoveSearchbarModule`
+- New variable: `button`
+- New variable: `useScaledValue`
+- New variable: `useTokens`
+- New variable: `searchBarContainerModule`
+- New variable: `getSearchQueryStoreModule`
+- New variable: `buildSearchBarWidth`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/MyCreationsTab/MyCreationsTab.luau`
+- Removed function: `thumbForUniverseId`
+- Removed function: `privacyLabelForSummary`
+- Removed function: `privacyLabelForSearchItem`
+- Removed function: `universeSearchParamsForPage`
+- Removed function: `descriptionForSessionStatus`
+- Removed function: `requestHandleToPromise`
+- Removed function: `ignorePromiseRejection`
+- Removed function: `getSessionUniverseId`
+- Removed function: `buildExperienceMetadataByUniverseId`
+- Removed function: `buildSessionItems`
+- Removed function: `buildLatestSessionByUniverseId`
+- Removed function: `buildUniverseItems`
+- Removed function: `useUniverseSearchList`
+- Removed function: `useLegacySessionList`
+- Removed function: `renderLoadingExperienceSkeleton`
+- Removed function: `scheduleNextPoll`
+- New variable: `fFlagBuildAddSearchIconAndMoveSearchbarModule`
+- New variable: `useMyCreationsResultsModule`
+- Removed variable: `appLifecycleObserverService`
+- Removed variable: `myCreationsSessionListPollingIntervalSeconds`
+- Removed variable: `promiseModule`
+- Removed variable: `signalsModule`
+- Removed variable: `signalsReactModule`
+- Removed variable: `localizationRoactContext`
+- Removed variable: `creatorAgentChatModule`
+- Removed variable: `universeActivationModule`
+- Removed variable: `universeConfigurationModule`
+- Removed variable: `universeSearchModule`
+- Removed variable: `badge`
+- Removed variable: `privacyType`
+- Removed variable: `skeleton`
+- Removed variable: `badgeShape`
+- Removed variable: `badgeSize`
+- Removed variable: `badgeVariant`
+- Removed variable: `radius`
+- Removed variable: `useTokens`
+- Removed variable: `contentMaturityUtilsModule`
+- Removed variable: `matchesSearchQueryModule`
+- Removed variable: `getBuildExperienceRefreshStoreModule`
+- Removed variable: `fFlagBuildExperienceMyCreationsUseAudiencesModule`
+- Removed variable: `fFlagBuildRehydrateOnPublishModule`
+- Removed variable: `fFlagBuildExperienceStableMyCreationsListItemsModule`
+- Removed variable: `useSignalState`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Stores/GetSearchQueryStore/createSearchQueryStore.luau`
+- New upvalue captured by `cancelPending`: `var14 (write)`
+- Upvalue no longer captured by `cancelPending`: `var11 (write)`
+- New function: `useIsSearchActive`
+- New function: `useShowEmptyState`
+- New upvalue captured by `setQuery`: `var14 (write)`
+- Upvalue no longer captured by `setQuery`: `var11 (write)`
+- New function: `beginSearch`
+- New function: `endSearch`
+- New function: `endSearchIfEmpty`
+- New upvalue captured by `clear`: `var14 (write)`
+- Upvalue no longer captured by `clear`: `var11 (write)`
+- New upvalue captured by `destroy`: `var14 (write)`
+- Upvalue no longer captured by `destroy`: `var11 (write)`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/FriendsChat/ConversationWindow/FriendsChatInputBarHost.luau`
+- New variable: `expChatPerfTracker`
+- New variable: `fFlagFriendsChatMessageSendPerfTrackingModule`
+- New variable: `friendsChatTabNameModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/FriendsChat/Message/FriendsChatTextMessage.luau`
+- New variable: `friendsChat`
+- New variable: `fFlagFriendsChatMessageSendPerfTrackingModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/FriendsChat/FriendsChat/Message/MessageDisplayStore/createMessageDisplayStore.luau`
+- New function: `getMessageIdFromDisplayId`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Reducers/ProductInfoReducer.luau`
+- New variable: `fFlagAXFixMISUpsellDiscountSummary`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/PurchasePrompt/PurchasePrompt/Selectors/selectPrice.luau`
+- New variable: `parent`
+- New variable: `sharedFlagsModule`
+- New variable: `fFlagAXFixMISUpsellDiscountSummary`
+
+
 ## 12480 - 2026-08-22 11:37
 
 ### New files

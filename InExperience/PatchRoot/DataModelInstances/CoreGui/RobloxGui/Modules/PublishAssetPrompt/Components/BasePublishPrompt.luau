@@ -48,6 +48,7 @@ basePublishPrompt.validateProps = tModule.strictInterface({
 	titleText = tModule.string,
 	showingPreviewView = tModule.boolean,
 	closePreviewView = tModule.callback,
+	isMakeupPreview = tModule.optional(tModule.boolean),
 	asset = tModule.optional(tModule.union(tModule.instanceOf("Model"), tModule.instanceIsA("AnimationClip"))),
 	onNameUpdated = tModule.callback,
 	canSubmit = tModule.callback,
@@ -65,20 +66,20 @@ basePublishPrompt.validateProps = tModule.strictInterface({
 	SetPromptVisibility = tModule.callback
 })
 
-function basePublishPrompt.init(p1) --[[ line: 107 ]]
+function basePublishPrompt.init(p1) --[[ line: 108 ]]
 	-- upvalues: roactModule (ref), signalsModule (ref), displayModule (ref), userInputService (ref), getInputGroup (ref), inputTypeModule (ref), publishAssetAnalytics (ref), experienceAuthService (ref)
 	p1.swipeScrollingFrameRef = roactModule.createRef()
 	p1.inputState = nil
 	p1.inputObject = nil
 	p1.connection = nil
-	p1.disposeUiScaleEffect = signalsModule.createEffect(function(p2) --[[ line: 112 ]]
+	p1.disposeUiScaleEffect = signalsModule.createEffect(function(p2) --[[ line: 113 ]]
 		-- upvalues: displayModule (copy), p1 (ref)
 		p1:setState({
 			UiScale = displayModule.GetDisplayStore(p2).getUIScale(p2)
 		})
 	end)
 	
-	function p1.storeInput(_, p3, p4) --[[ line: 119 ]]
+	function p1.storeInput(_, p3, p4) --[[ line: 120 ]]
 		-- upvalues: p1 (ref)
 		p1.inputState = p3
 		p1.inputObject = p4
@@ -91,30 +92,30 @@ function basePublishPrompt.init(p1) --[[ line: 107 ]]
 		isGamepad = getInputGroup(userInputService:GetLastInputType()) == inputTypeModule.InputTypeConstants.Gamepad
 	})
 	
-	function p1.closePrompt() --[[ line: 133 ]]
+	function p1.closePrompt() --[[ line: 134 ]]
 		-- upvalues: p1 (ref)
 		p1.props.closePrompt()
 		p1.props.SetPromptVisibility(false)
 	end
 	
-	function p1.showUnsavedDataWarning() --[[ line: 138 ]]
+	function p1.showUnsavedDataWarning() --[[ line: 139 ]]
 		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
 		p1:setState({ showUnsavedDataWarning = true })
 		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.X)
 	end
 	
-	function p1.cancelClosePrompt() --[[ line: 146 ]]
+	function p1.cancelClosePrompt() --[[ line: 147 ]]
 		-- upvalues: p1 (ref)
 		p1:setState({ showUnsavedDataWarning = false })
 	end
 	
-	function p1.denyAndClose() --[[ line: 152 ]]
+	function p1.denyAndClose() --[[ line: 153 ]]
 		-- upvalues: experienceAuthService (copy), p1 (ref)
 		experienceAuthService:ScopeCheckUIComplete(p1.props.guid, p1.props.scopes, Enum.ScopeCheckResult.ConsentDenied, {})
 		p1.closePrompt()
 	end
 	
-	function p1.confirmAndUpload() --[[ line: 163 ]]
+	function p1.confirmAndUpload() --[[ line: 164 ]]
 		-- upvalues: p1 (ref)
 		if p1.props.canSubmit() then
 			p1.props.onSubmit()
@@ -122,12 +123,12 @@ function basePublishPrompt.init(p1) --[[ line: 107 ]]
 	end
 end
 
-function basePublishPrompt.setUpGamepad(value) --[[ line: 170 ]]
+function basePublishPrompt.setUpGamepad(value) --[[ line: 171 ]]
 	-- upvalues: userInputService (ref), contextActionService (ref), runService (ref), gamepadUtils (ref), uDim (ref)
 	if userInputService.GamepadEnabled then
 		contextActionService:UnbindCoreAction("ScrollPrompt")
 		contextActionService:BindCoreAction("ScrollPrompt", value.storeInput, false, Enum.KeyCode.Thumbstick2)
-		value.connection = runService.RenderStepped:Connect(function(p5) --[[ line: 174 ]]
+		value.connection = runService.RenderStepped:Connect(function(p5) --[[ line: 175 ]]
 			-- upvalues: value (ref), gamepadUtils (copy), uDim (copy)
 			if value.inputState == Enum.UserInputState.Change and value.inputObject then
 				local current = value.swipeScrollingFrameRef.current
@@ -143,7 +144,7 @@ function basePublishPrompt.setUpGamepad(value) --[[ line: 170 ]]
 	end
 end
 
-function basePublishPrompt.cleanupGamepad(p6) --[[ line: 194 ]]
+function basePublishPrompt.cleanupGamepad(p6) --[[ line: 195 ]]
 	-- upvalues: contextActionService (ref)
 	contextActionService:UnbindCoreAction("ClosePrompt")
 	contextActionService:UnbindCoreAction("ScrollPrompt")
@@ -153,23 +154,23 @@ function basePublishPrompt.cleanupGamepad(p6) --[[ line: 194 ]]
 	end
 end
 
-function basePublishPrompt.overrideMouseIconBehavior(p7) --[[ line: 202 ]]
+function basePublishPrompt.overrideMouseIconBehavior(p7) --[[ line: 203 ]]
 	-- upvalues: mouseIconOverrideService (ref)
 	mouseIconOverrideService.push("BasePublishPromptOverrideKey", if p7.state.isGamepad then Enum.OverrideMouseIconBehavior.ForceHide else Enum.OverrideMouseIconBehavior.ForceShow)
 end
 
-function basePublishPrompt.removeMouseIconBehaviorOverride(_) --[[ line: 210 ]]
+function basePublishPrompt.removeMouseIconBehaviorOverride(_) --[[ line: 211 ]]
 	-- upvalues: mouseIconOverrideService (ref)
 	mouseIconOverrideService.pop("BasePublishPromptOverrideKey")
 end
 
-function basePublishPrompt.didMount(p8) --[[ line: 214 ]]
+function basePublishPrompt.didMount(p8) --[[ line: 215 ]]
 	p8:setUpGamepad()
 	p8.props.SetPromptVisibility(true)
 	p8:overrideMouseIconBehavior()
 end
 
-function basePublishPrompt.didUpdate(p9, p10, p11) --[[ line: 223 ]]
+function basePublishPrompt.didUpdate(p9, p10, p11) --[[ line: 224 ]]
 	if p10.promptVisible ~= p9.props.promptVisible and p9.props.promptVisible == false then
 		p9.closePrompt()
 	end
@@ -178,9 +179,9 @@ function basePublishPrompt.didUpdate(p9, p10, p11) --[[ line: 223 ]]
 	end
 end
 
-function basePublishPrompt.renderMiddle(p12, p13) --[[ line: 237 ]]
+function basePublishPrompt.renderMiddle(p12, p13) --[[ line: 238 ]]
 	-- upvalues: withStyle (ref), roactModule (ref), constantsModule (ref), labeledTextBoxModule (ref)
-	return withStyle(function(p14) --[[ line: 238 ]]
+	return withStyle(function(p14) --[[ line: 239 ]]
 		-- upvalues: roactModule (copy), p12 (ref), constantsModule (copy), labeledTextBoxModule (copy), p13 (ref)
 		local font = p14.Font
 		local baseSize = font.BaseSize
@@ -267,21 +268,21 @@ function basePublishPrompt.renderMiddle(p12, p13) --[[ line: 237 ]]
 	end)
 end
 
-function basePublishPrompt.renderAlertLocalized(p15, p16) --[[ line: 329 ]]
+function basePublishPrompt.renderAlertLocalized(p15, p16) --[[ line: 330 ]]
 	-- upvalues: guiService (ref), constantsModule_1 (ref), withStyle (ref), roactModule (ref), externalEventConnection (ref), userInputService (ref), getInputGroup (ref), inputTypeModule (ref), overlay (ref), fullPageModal (ref), buttonType (ref), leaveCreationAlertModule (ref), validationErrorModalModule (ref), previewViewportModule (ref)
 	local guiInset, _ = guiService:GetGuiInset()
 	local uDim2 = UDim2.new(0, 0, 0, -guiInset.Y)
 	local uDim2_1 = UDim2.new(1, 0, 1, guiInset.Y)
 	local var30 = constantsModule_1.TopBarHeight * p15.state.UiScale
 	
-	return withStyle(function(p17) --[[ line: 335 ]]
+	return withStyle(function(p17) --[[ line: 336 ]]
 		-- upvalues: p15 (ref), p16 (ref), roactModule (copy), externalEventConnection (copy), userInputService (copy), getInputGroup (copy), inputTypeModule (copy), uDim2 (ref), uDim2_1 (ref), overlay (copy), var30 (ref), fullPageModal (copy), buttonType (copy), leaveCreationAlertModule (copy), validationErrorModalModule (copy), previewViewportModule (copy)
 		local theme = p17.Theme
 		
 		return roactModule.createFragment({
 			LastInputTypeConnection = roactModule.createElement(externalEventConnection, {
 				event = userInputService.LastInputTypeChanged,
-				callback = function(p18) --[[ line: 345 ]]
+				callback = function(p18) --[[ line: 346 ]]
 					-- upvalues: p15 (copy), getInputGroup (copy), inputTypeModule (copy)
 					p15:setState({
 						isGamepad = getInputGroup(p18) == inputTypeModule.InputTypeConstants.Gamepad
@@ -351,7 +352,8 @@ function basePublishPrompt.renderAlertLocalized(p15, p16) --[[ line: 329 ]]
 			}, {
 				PreviewViewport = roactModule.createElement(previewViewportModule, {
 					asset = p15.props.asset,
-					closePreviewView = p15.props.closePreviewView
+					closePreviewView = p15.props.closePreviewView,
+					isMakeupPreview = p15.props.isMakeupPreview
 				})
 			}) or nil,
 			TopScrim = roactModule.createElement("Frame", {
@@ -371,7 +373,7 @@ function basePublishPrompt.renderAlertLocalized(p15, p16) --[[ line: 329 ]]
 	end)
 end
 
-local _ = function() --[[ line: 450 | named "GetLocalizedStrings" ]]
+local _ = function() --[[ line: 452 | named "GetLocalizedStrings" ]]
 	-- upvalues: robloxTranslatorModule (ref)
 	return {
 		submit = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Submit"),
@@ -379,7 +381,7 @@ local _ = function() --[[ line: 450 | named "GetLocalizedStrings" ]]
 	}
 end
 
-function basePublishPrompt.render(p19) --[[ line: 458 ]]
+function basePublishPrompt.render(p19) --[[ line: 460 ]]
 	-- upvalues: robloxTranslatorModule (ref)
 	return p19:renderAlertLocalized({
 		submit = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Submit"),
@@ -387,7 +389,7 @@ function basePublishPrompt.render(p19) --[[ line: 458 ]]
 	})
 end
 
-function basePublishPrompt.willUnmount(p20) --[[ line: 463 ]]
+function basePublishPrompt.willUnmount(p20) --[[ line: 465 ]]
 	p20:removeMouseIconBehaviorOverride()
 	p20:cleanupGamepad()
 	
@@ -397,21 +399,21 @@ function basePublishPrompt.willUnmount(p20) --[[ line: 463 ]]
 	p20.props.SetPromptVisibility(false)
 end
 
-return roactRoduxModule.connect(function(p21) --[[ line: 476 | named "mapStateToProps" ]]
+return roactRoduxModule.connect(function(p21) --[[ line: 478 | named "mapStateToProps" ]]
 	return {
 		guid = p21.promptRequest.promptInfo.guid,
 		scopes = p21.promptRequest.promptInfo.scopes,
 		errorMessage = p21.promptRequest.promptInfo.errorMessage,
 		promptVisible = p21.promptRequest.promptInfo.promptVisible
 	}
-end, function(p22) --[[ line: 485 | named "mapDispatchToProps" ]]
+end, function(p22) --[[ line: 487 | named "mapDispatchToProps" ]]
 	-- upvalues: closeOpenPromptModule (ref), setPromptVisibilityModule (ref)
 	return {
-		closePrompt = function() --[[ line: 487 ]]
+		closePrompt = function() --[[ line: 489 ]]
 			-- upvalues: p22 (ref), closeOpenPromptModule (copy)
 			return p22(closeOpenPromptModule())
 		end,
-		SetPromptVisibility = function(value) --[[ line: 490 ]]
+		SetPromptVisibility = function(value) --[[ line: 492 ]]
 			-- upvalues: p22 (ref), setPromptVisibilityModule (copy)
 			return p22(setPromptVisibilityModule(value))
 		end

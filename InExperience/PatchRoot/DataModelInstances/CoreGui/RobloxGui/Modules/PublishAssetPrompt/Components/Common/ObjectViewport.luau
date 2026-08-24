@@ -8,6 +8,7 @@ local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local tModule = require(corePackagesService.Packages.t)
 local images = UIBloxModule.App.ImageSet.Images
 local constantsModule = require(script.Parent.Parent.Parent.Constants)
+local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
 local characterUtility = require(corePackagesService.Packages.Thumbnailing).CharacterUtility
 local cameraUtility = require(corePackagesService.Packages.Thumbnailing).CameraUtility
 local cFrameUtility = require(corePackagesService.Packages.Thumbnailing).CFrameUtility
@@ -26,10 +27,11 @@ objectViewport.validateProps = tModule.strictInterface({
 	useFullBodyCameraSettings = tModule.optional(tModule.boolean),
 	openPreviewView = tModule.optional(tModule.callback),
 	LayoutOrder = tModule.optional(tModule.number),
-	isHumanoidModel = tModule.optional(tModule.boolean)
+	isHumanoidModel = tModule.optional(tModule.boolean),
+	isMakeupPreview = tModule.optional(tModule.boolean)
 })
 
-function objectViewport.createCamera(p0) --[[ line: 48 ]]
+function objectViewport.createCamera(p0) --[[ line: 50 ]]
 	local camera = Instance.new("Camera")
 	camera.CameraType = Enum.CameraType.Scriptable
 	camera.Parent = p0.worldModelRef:getValue()
@@ -39,82 +41,91 @@ function objectViewport.createCamera(p0) --[[ line: 48 ]]
 	return camera
 end
 
-function objectViewport.init(p1) --[[ line: 58 ]]
+function objectViewport.init(p1) --[[ line: 60 ]]
 	-- upvalues: roactModule (ref)
 	p1.worldModelRef = roactModule.createRef()
-	local var10, var11 = roactModule.createBinding(nil)
-	p1.camera = var10
-	p1.updateCamera = var11
+	local var11, var12 = roactModule.createBinding(nil)
+	p1.camera = var11
+	p1.updateCamera = var12
 	p1.isMounted = false
 end
 
-local function _(p2, p3) --[[ line: 64 | named "getCameraDistance" ]]
+local function _(p2, p3) --[[ line: 66 | named "getCameraDistance" ]]
 	local z = p3.Z
 	
 	return math.max(p3.X, p3.Y, z) / 2 * (1 / math.tan(math.rad(p2) / 2)) + z / 2
 end
 
-function objectViewport.setupViewportForAsset(value) --[[ line: 72 ]]
+function objectViewport.setupViewportForAsset(value) --[[ line: 74 ]]
+	-- upvalues: makeupPreviewUtilsModule (ref)
 	if not value.props.model then return end
-	local modelCFrame, extentsSize
-	local var12 = value.props.model:Clone()
-	var12.Parent = value.worldModelRef:getValue()
+	local var14_1, var19
+	local var13 = value.props.model:Clone()
+	var13.Parent = value.worldModelRef:getValue()
 	local _ = nil
 	local _ = nil
 	
-	if var12:IsA("Model") then
-		var12:MoveTo(Vector3.new(0, 0, 0))
-		modelCFrame = var12:GetModelCFrame()
-		extentsSize = var12:GetExtentsSize()
+	if var13:IsA("Model") then
+		var13:MoveTo(Vector3.new(0, 0, 0))
+		local var14 = nil
+		local var15 = nil
+		
+		if value.props.isMakeupPreview then
+			local headPreviewCameraData, headPreviewCameraData_1 = makeupPreviewUtilsModule.getHeadPreviewCameraData(var13)
+			var14 = headPreviewCameraData
+			var15 = headPreviewCameraData_1
+		end
+		var14_1 = var14 or var13:GetModelCFrame()
+		var19 = var15 or var13:GetExtentsSize()
 	else
-		local meshPart = var12:FindFirstChildWhichIsA("MeshPart", true)
+		local meshPart = var13:FindFirstChildWhichIsA("MeshPart", true)
 		
 		if not meshPart then return end
 		meshPart.CFrame = CFrame.new(0, 0, 0)
-		modelCFrame = meshPart.CFrame
-		extentsSize = meshPart.Size
+		var14_1 = meshPart.CFrame
+		var19 = meshPart.Size
 	end
-	local lookVector = modelCFrame.lookVector
-	local var16 = value:createCamera()
-	local var17 = if value.props.fieldOfView then value.props.fieldOfView else 30
-	local z = extentsSize.Z
+	local lookVector = var14_1.lookVector
+	local var21 = value:createCamera()
+	local var22 = if value.props.fieldOfView then value.props.fieldOfView else 30
+	local z = var19.Z
 	local vector2 = Vector2.new(5, 20)
-	var16.CFrame = CFrame.new(modelCFrame.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(vector2.Y)):VectorToWorldSpace(CFrame.fromAxisAngle(Vector3.new(1, 0, 0), math.rad(vector2.X)):VectorToWorldSpace(lookVector)) * (math.max(extentsSize.X, extentsSize.Y, z) / 2 * (1 / math.tan(math.rad(var17) / 2)) + z / 2), modelCFrame.Position)
-	var16.FieldOfView = var17
-	value.updateCamera(var16)
+	var21.CFrame = CFrame.new(var14_1.Position + CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(vector2.Y)):VectorToWorldSpace(CFrame.fromAxisAngle(Vector3.new(1, 0, 0), math.rad(vector2.X)):VectorToWorldSpace(lookVector)) * (math.max(var19.X, var19.Y, z) / 2 * (1 / math.tan(math.rad(var22) / 2)) + z / 2), var14_1.Position)
+	var21.FieldOfView = var22
+	value.updateCamera(var21)
 end
 
-function objectViewport.setupViewport(value) --[[ line: 130 ]]
+function objectViewport.setupViewport(value) --[[ line: 137 ]]
 	-- upvalues: emoteUtility (ref), runService (ref), cFrameUtility (ref), characterUtility (ref), cameraUtility (ref)
-	local var19 = value.props.model:Clone()
-	assert(var19.PrimaryPart, "The Model should have a PrimaryPart for setting up Camera")
-	var19.Parent = value.worldModelRef:getValue()
-	var19:MoveTo(Vector3.new(0, 0, 0))
+	local var24 = value.props.model:Clone()
+	assert(var24.PrimaryPart, "The Model should have a PrimaryPart for setting up Camera")
+	var24.Parent = value.worldModelRef:getValue()
+	var24:MoveTo(Vector3.new(0, 0, 0))
 	local useFullBodyCameraSettings = value.props.useFullBodyCameraSettings
 	
 	if useFullBodyCameraSettings then
-		emoteUtility.SetPlayerCharacterPoseWithMoodFallback(var19)
+		emoteUtility.SetPlayerCharacterPoseWithMoodFallback(var24)
 		runService.PostSimulation:Wait()
 		
 		if not value.isMounted then return end
 	end
-	local var22
-	local var20 = value:createCamera()
+	local var27
+	local var25 = value:createCamera()
 	local _ = nil
 	
 	if useFullBodyCameraSettings then
-		local var21 = cFrameUtility.CalculateTargetCFrame(var19.Head.CFrame)
-		var22 = var21 - var21.Position + var19.PrimaryPart.CFrame.Position
+		local var26 = cFrameUtility.CalculateTargetCFrame(var24.Head.CFrame)
+		var27 = var26 - var26.Position + var24.PrimaryPart.CFrame.Position
 	else
-		var22 = var19.PrimaryPart.CFrame
+		var27 = var24.PrimaryPart.CFrame
 	end
-	local var23, var24 = characterUtility.CalculateModelExtents(var19, var22)
+	local var28, var29 = characterUtility.CalculateModelExtents(var24, var27)
 	local t = {
 		extentScale = 1,
 		optFieldOfView = if value.props.fieldOfView then value.props.fieldOfView else 30,
-		targetCFrame = var22,
-		minExtent = var23,
-		maxExtent = var24
+		targetCFrame = var27,
+		minExtent = var28,
+		maxExtent = var29
 	}
 	
 	if useFullBodyCameraSettings then
@@ -124,13 +135,13 @@ function objectViewport.setupViewport(value) --[[ line: 130 ]]
 	else
 		t.optCameraYRot = 25
 	end
-	cameraUtility.SetupCamera(var20, t)
-	value.updateCamera(var20)
+	cameraUtility.SetupCamera(var25, t)
+	value.updateCamera(var25)
 end
 
-function objectViewport.didMount(p4) --[[ line: 174 ]]
+function objectViewport.didMount(p4) --[[ line: 181 ]]
 	p4.isMounted = true
-	task.spawn(function() --[[ line: 176 ]]
+	task.spawn(function() --[[ line: 183 ]]
 		-- upvalues: p4 (ref)
 		if not p4.props.isLoading then
 			if p4.props.isHumanoidModel then
@@ -143,9 +154,9 @@ function objectViewport.didMount(p4) --[[ line: 174 ]]
 	end)
 end
 
-function objectViewport.didUpdate(p5, p6) --[[ line: 187 ]]
+function objectViewport.didUpdate(p5, p6) --[[ line: 194 ]]
 	if p6.isLoading and not p5.props.isLoading then
-		task.spawn(function() --[[ line: 190 ]]
+		task.spawn(function() --[[ line: 197 ]]
 			-- upvalues: p5 (ref)
 			if p5.props.isHumanoidModel then
 				p5:setupViewport()
@@ -157,9 +168,9 @@ function objectViewport.didUpdate(p5, p6) --[[ line: 187 ]]
 	end
 end
 
-function objectViewport.render(p7) --[[ line: 200 ]]
+function objectViewport.render(p7) --[[ line: 207 ]]
 	-- upvalues: withStyle (ref), roactModule (ref), constantsModule (ref), iconButton (ref), previewExpand (ref), iconSize (ref), imageSetLabel (ref), uDim2_1 (ref), dropshadow25 (ref), uDim2 (ref), skeleton (ref)
-	return withStyle(function(p8) --[[ line: 201 ]]
+	return withStyle(function(p8) --[[ line: 208 ]]
 		-- upvalues: p7 (ref), roactModule (copy), constantsModule (copy), iconButton (copy), previewExpand (copy), iconSize (copy), imageSetLabel (copy), uDim2_1 (copy), dropshadow25 (copy), uDim2 (copy), skeleton (copy)
 		local theme = p8.Theme
 		
@@ -220,7 +231,7 @@ function objectViewport.render(p7) --[[ line: 200 ]]
 	end)
 end
 
-function objectViewport.willUnmount(p9) --[[ line: 267 ]]
+function objectViewport.willUnmount(p9) --[[ line: 274 ]]
 	p9.isMounted = false
 end
 

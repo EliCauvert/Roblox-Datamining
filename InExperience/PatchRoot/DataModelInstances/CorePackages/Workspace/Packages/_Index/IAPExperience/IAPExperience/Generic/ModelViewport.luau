@@ -5,10 +5,10 @@ local characterUtility = require(parent.Thumbnailing).CharacterUtility
 local cameraUtility = require(parent.Thumbnailing).CameraUtility
 local cFrameUtility = require(parent.Thumbnailing).CFrameUtility
 local emoteUtility = require(parent.Thumbnailing).EmoteUtility
-local purchasePromptPreviewMakeupHead = game:DefineFastFlag("PurchasePromptPreviewMakeupHead", false)
+local purchasePromptPreviewMakeupHead2 = game:DefineFastFlag("PurchasePromptPreviewMakeupHead2", false)
 
 return function(p0) --[[ line: 27 | named "ModelViewport" ]]
-	-- upvalues: reactModule (ref), emoteUtility (ref), runService (ref), cFrameUtility (ref), characterUtility (ref), cameraUtility (ref), purchasePromptPreviewMakeupHead (ref)
+	-- upvalues: reactModule (ref), emoteUtility (ref), runService (ref), cFrameUtility (ref), characterUtility (ref), cameraUtility (ref), purchasePromptPreviewMakeupHead2 (ref)
 	local var3 = reactModule.useRef(nil)
 	local var4, var5 = reactModule.useBinding(nil)
 	local var6 = reactModule.useRef(false)
@@ -22,9 +22,9 @@ return function(p0) --[[ line: 27 | named "ModelViewport" ]]
 		end
 	end, {})
 	reactModule.useEffect(function() --[[ line: 39 ]]
-		-- upvalues: p0 (ref), var3 (ref), emoteUtility (copy), runService (copy), var6 (ref), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var5 (ref), purchasePromptPreviewMakeupHead (copy)
+		-- upvalues: p0 (ref), var3 (ref), emoteUtility (copy), runService (copy), var6 (ref), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var5 (ref), purchasePromptPreviewMakeupHead2 (copy)
 		task.spawn(function() --[[ line: 41 ]]
-			-- upvalues: p0 (copy), var3 (copy), emoteUtility (copy), runService (copy), var6 (copy), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var5 (copy), purchasePromptPreviewMakeupHead (copy)
+			-- upvalues: p0 (copy), var3 (copy), emoteUtility (copy), runService (copy), var6 (copy), cFrameUtility (copy), characterUtility (copy), cameraUtility (copy), var5 (copy), purchasePromptPreviewMakeupHead2 (copy)
 			local var7 = p0.model:Clone()
 			local camera = Instance.new("Camera")
 			camera.CameraType = Enum.CameraType.Scriptable
@@ -66,7 +66,7 @@ return function(p0) --[[ line: 27 | named "ModelViewport" ]]
 				var7.Parent = var13
 				var13.Parent = var3.current
 			end
-			if not purchasePromptPreviewMakeupHead then
+			if not purchasePromptPreviewMakeupHead2 then
 				cameraUtility.SetupAccessoryCamera(var13, camera)
 				var5(camera)
 				
@@ -74,10 +74,9 @@ return function(p0) --[[ line: 27 | named "ModelViewport" ]]
 			end
 			local head = var13:FindFirstChild("Head")
 			
-			if head and head:IsA("MeshPart") then
-				head.CFrame = CFrame.new()
+			if head and head:IsA("MeshPart") and not var13:FindFirstChild("HumanoidRootPart") then
 				local cFrame = head.CFrame
-				local var15, var16 = characterUtility.CalculateModelExtents(var13, cFrame)
+				local var15, var16 = characterUtility.CalculateBodyPartsExtents(cFrame, { head })
 				cameraUtility.SetupCamera(camera, {
 					optFieldOfView = 30,
 					extentScale = 1.2,

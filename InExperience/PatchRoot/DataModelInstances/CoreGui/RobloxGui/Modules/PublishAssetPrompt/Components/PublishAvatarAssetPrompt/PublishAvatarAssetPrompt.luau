@@ -178,7 +178,8 @@ return function(value) --[[ line: 47 | named "PublishAvatarAssetPrompt" ]]
 					openPreviewView = var41,
 					model = var36,
 					isLoading = var36 == nil,
-					useFullBodyCameraSettings = if getFFlagSingleUploadMakeupSupportModule() then not var33 else true
+					useFullBodyCameraSettings = if getFFlagSingleUploadMakeupSupportModule() then not var33 else true,
+					isMakeupPreview = var33
 				}),
 				DescriptionInput = reactModule.createElement(labeledTextBoxModule, {
 					LayoutOrder = 2,
@@ -207,6 +208,7 @@ return function(value) --[[ line: 47 | named "PublishAvatarAssetPrompt" ]]
 		screenSize = value.screenSize,
 		showingPreviewView = var19,
 		closePreviewView = var42,
+		isMakeupPreview = var33,
 		asset = var36,
 		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
 		defaultName = var21,

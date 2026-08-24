@@ -1314,6 +1314,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,この背景
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,この背景はAIで生成されました。アップロードすると、この背景がRobloxコミュニティ基準に準拠し、利用する権利のないコンテンツを使用していないことを確認したものとみなされます。アップロードしたアイテムは持ち物に表示される前に審査が行われ、編集はできません。
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plusで無料の限定背景を獲得。
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,アイテムがコミュニティ基準を満たしていません
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,使用量の上限に達しました。カスタマイズを続けるには、後でもう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,使用量の上限に達しました。カスタマイズを続けるには、明日もう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,使用量の上限に達しました。カスタマイズを続けるには、1時間後にもう一度お試しください。
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,使用量の上限に達しました。カスタマイズを続けるには、1分後にもう一度お試しください。
 Feature.Avatar.BackgroundGeneration.Error.Moderation,そのプロンプトは当社のガイドラインに沿っていません。別の内容を入力してみてください。
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,この背景はRobloxコミュニティ基準に準拠していないため、持ち物に追加されませんでした。新しい背景を生成してみてください。
 Feature.Avatar.BackgroundGeneration.Error.System,背景の生成中に問題が発生しました。もう一度お試しください。
@@ -3263,7 +3267,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,展開
 Feature.Moments.Action.GenerateText,テキストを生成
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,役に立たなかった
-Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはガイドラインに違反する内容だった
+Feature.Moments.Action.GenerateTextFeedbackPolicy,不適切またはコミュニティガイドライン違反
 Feature.Moments.Action.Hide,詳細を非表示
 Feature.Moments.Action.HowToCapture,切り抜き方法
 Feature.Moments.Action.Join,

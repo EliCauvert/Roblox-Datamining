@@ -1314,6 +1314,10 @@ Feature.Avatar.BackgroundGeneration.Description.ReviewBeforePublish,"이 배경�
 Feature.Avatar.BackgroundGeneration.Description.ReviewBeforeUpload,이 배경은 AI로 생성되었습니다. 업로드하면 Roblox 커뮤니티 규정을 준수하며 권한이 없는 콘텐츠를 사용하지 않는다고 확인하는 것으로 간주됩니다. 인벤토리에 표시되기 전에 검토를 거칩니다. 업로드된 아이템은 수정할 수 없습니다.
 Feature.Avatar.BackgroundGeneration.Description.UnlockExclusiveBackgrounds,Plus로 무료 전용 배경을 잠금 해제하세요.
 Feature.Avatar.BackgroundGeneration.Error.CouldntPublish,아이템이 커뮤니티 규정을 충족하지 않습니다
+Feature.Avatar.BackgroundGeneration.Error.LimitReached,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 나중에 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedDay,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 내일 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedHour,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 1시간 후에 다시 시도하세요.
+Feature.Avatar.BackgroundGeneration.Error.LimitReachedMinute,사용량 한도에 도달했습니다. 꾸미기를 계속하려면 1분 후에 다시 시도하세요.
 Feature.Avatar.BackgroundGeneration.Error.Moderation,해당 프롬프트는 가이드라인에 위배됩니다. 표현을 수정해 보세요.
 Feature.Avatar.BackgroundGeneration.Error.ModerationFailed,이 배경은 Roblox 커뮤니티 규정을 준수하지 않으므로 인벤토리에 추가되지 않았습니다. 새로운 배경을 생성해보세요.
 Feature.Avatar.BackgroundGeneration.Error.System,배경을 생성하는 중에 문제가 발생했습니다. 다시 시도하세요.
@@ -3265,7 +3269,7 @@ Feature.Moments.Action.Done,
 Feature.Moments.Action.Expand,펼치기
 Feature.Moments.Action.GenerateText,텍스트 생성
 Feature.Moments.Action.GenerateTextFeedbackNotHelpful,도움이 되지 않음
-Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 가이드라인을 위반함
+Feature.Moments.Action.GenerateTextFeedbackPolicy,부적절하거나 규정을 위반함
 Feature.Moments.Action.Hide,세부 정보 숨기기
 Feature.Moments.Action.HowToCapture,캡처 방법
 Feature.Moments.Action.Join,
