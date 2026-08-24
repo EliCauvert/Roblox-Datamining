@@ -339,6 +339,7 @@
 	FFlagAXSelectedBorderWrapsBackground = require(script.FFlagAXSelectedBorderWrapsBackground),
 	FFlagAXHeroUnitUIBloxDarkScope = require(script.FFlagAXHeroUnitUIBloxDarkScope),
 	FFlagAXFavoritePillOnItemDetails = require(script.FFlagAXFavoritePillOnItemDetails),
+	FFlagAXFavoritePillRequireItemId = require(script.FFlagAXFavoritePillRequireItemId),
 	FFlagAXFavoritesPillExposureLogging = require(script.FFlagAXFavoritesPillExposureLogging),
 	FFlagAXLookDetailsBottomBarFavoriteLogging = require(script.FFlagAXLookDetailsBottomBarFavoriteLogging),
 	FFlagAXFixItemDetailsDescriptionSpacing = require(script.FFlagAXFixItemDetailsDescriptionSpacing),

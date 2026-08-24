@@ -1,3 +1,34 @@
+## 12504 - 2026-08-24 23:54
+
+### New files
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/SocialCarousel/Flags/FFlagSocialCarouselRemoveStrokeForAddFriends.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/AvatarExperienceFlags/AvatarExperienceFlags/FFlagAXFavoritePillRequireItemId.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Flags/FFlagBuildExperienceFocusNewGameComposer.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericChallenges/GenericChallenges/Middleware/ChallengeNetworkWrapper.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericChallenges/GenericChallenges/Middleware/createChallengeNetwork.luau`
+- `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericChallenges/HttpClient.luau`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/SocialCarousel/SocialCarousel/BaseComponents/Tile/Tile.luau`
+- New variable: `fFlagSocialCarouselRemoveStrokeForAddFriendsModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/BuildExperience/BuildExperience/Components/BuildChatPage/useBuildChatPageViewModel.luau`
+- New function: `_`
+- New function: `_`
+- Removed function: `getKeyboardTop`
+- Removed function: `getHydratedExperienceName`
+- New variable: `fFlagBuildExperienceFocusNewGameComposerModule`
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Workspace/GenericAbuseReporting/GenericAbuseReporting/BeduiV2/Components/Nodes/InExpChatSelectionNode.luau`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- New function: `_`
+- Removed function: `useScrollToSelected`
+- Removed function: `performScroll`
+- Removed function: `performScroll`
+- Removed function: `performScroll`
+
+
 ## 12500 - 2026-08-24 21:43
 
 ### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Utils/makePostMetadata.luau`

@@ -16,20 +16,21 @@ local statusIndicator = foundationModule.StatusIndicator
 local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
 local radius = foundationModule.Enums.Radius
 local fFlagSocialCarouselShowLoadingSkeletonModule = require(socialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
+local fFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(socialCarousel.Flags.FFlagSocialCarouselRemoveStrokeForAddFriends)
 local fIntSocalCarouselMaxNewRequestsCountModule = require(socialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
-return function(p0) --[[ line: 43 | named "Tile" ]]
-	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), icon (ref), iconSize (ref)
+return function(p0)
+	-- upvalues: reactModule (ref), useTokens (ref), fFlagSocialCarouselShowLoadingSkeletonModule (ref), textService (ref), view (ref), image (ref), enums (ref), text (ref), statusIndicator (ref), flags (ref), statusIndicatorVariant (ref), fIntSocalCarouselMaxNewRequestsCountModule (ref), skeleton (ref), radius (ref), fFlagSocialCarouselRemoveStrokeForAddFriendsModule (ref), icon (ref), iconSize (ref)
 	local tileRef = p0.tileRef or reactModule.useRef(nil)
-	local var7 = useTokens()
-	local var8, var9 = reactModule.useState(false)
-	local titleSmall = var7.Typography.TitleSmall
+	local var8 = useTokens()
+	local var9, var10 = reactModule.useState(false)
+	local titleSmall = var8.Typography.TitleSmall
 	local isLoading = fFlagSocialCarouselShowLoadingSkeletonModule and p0.isLoading
-	local var11 = reactModule.useMemo(function() --[[ line: 50 ]]
+	local var12 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), textService (copy), titleSmall (ref)
 		return if p0.title then textService:GetTextSize(p0.title, titleSmall.FontSize, titleSmall.Font, Vector2.new(500, 500)) else Vector2.new(0, 0)
 	end, { p0.title })
-	local var12 = reactModule.useMemo(function() --[[ line: 58 ]]
+	local var13 = reactModule.useMemo(function()
 		-- upvalues: p0 (ref), reactModule (copy), view (copy), image (copy)
 		return if not (not p0.presenceIconEnabled and not p0.titleIcon) then if p0.presenceIconEnabled then reactModule.createElement(view, {
 			tag = "size-300-300 bg-system-success radius-circle",
@@ -46,9 +47,9 @@ return function(p0) --[[ line: 43 | named "Tile" ]]
 		Size = p0.itemSize,
 		LayoutOrder = p0.index,
 		ref = tileRef,
-		onStateChanged = reactModule.useCallback(function(p1) --[[ line: 91 ]]
-			-- upvalues: var9 (ref), enums (copy)
-			var9(if p1 ~= enums.ControlState.Hover then p1 == enums.ControlState.Pressed else true)
+		onStateChanged = reactModule.useCallback(function(p1)
+			-- upvalues: var10 (ref), enums (copy)
+			var10(if p1 ~= enums.ControlState.Hover then p1 == enums.ControlState.Pressed else true)
 		end, {}),
 		onActivated = if isLoading then nil else p0.onActivated,
 		stateLayer = { affordance = enums.StateLayerAffordance.None },
@@ -66,19 +67,19 @@ return function(p0) --[[ line: 43 | named "Tile" ]]
 				tag = {
 					["size-full"] = true,
 					["aspect-1-1"] = true,
-					["bg-shift-300"] = not var8 and not p0.altBackground,
-					["bg-system-neutral"] = not var8 and p0.altBackground,
+					["bg-shift-300"] = not var9 and not p0.altBackground,
+					["bg-system-neutral"] = not var9 and p0.altBackground,
 					["radius-circle"] = true,
-					["bg-shift-400"] = var8 and not p0.altBackground,
-					["bg-system-contrast"] = var8 and p0.altBackground,
+					["bg-shift-400"] = var9 and not p0.altBackground,
+					["bg-system-contrast"] = var9 and p0.altBackground,
 					["align-x-center"] = true,
 					["align-y-center"] = true,
 					row = true
 				},
-				stroke = {
-					Color = var7.Color.Stroke.Emphasis.Color3,
-					Transparency = var7.Color.Stroke.Emphasis.Transparency,
-					Thickness = var7.Stroke.Thick,
+				stroke = if fFlagSocialCarouselRemoveStrokeForAddFriendsModule then nil else {
+					Color = var8.Color.Stroke.Emphasis.Color3,
+					Transparency = var8.Color.Stroke.Emphasis.Transparency,
+					Thickness = var8.Stroke.Thick,
 					BorderStrokePosition = Enum.BorderStrokePosition.Inner
 				}
 			}, {
@@ -88,36 +89,36 @@ return function(p0) --[[ line: 43 | named "Tile" ]]
 				tag = "size-full-0 row auto-y gap-xsmall align-x-center align-y-center",
 				LayoutOrder = 2
 			}, {
-				TitleIcon = if isLoading then nil else var12,
+				TitleIcon = if isLoading then nil else var13,
 				Title = if p0.title and not isLoading then reactModule.createElement(text, {
 					tag = "auto-xy text-align-x-left clip text-truncate-end",
 					LayoutOrder = 2,
-					fontStyle = var7.Typography.TitleSmall,
+					fontStyle = var8.Typography.TitleSmall,
 					Text = p0.title
 				}, {
-					UISizeConstraint = reactModule.useMemo(function() --[[ line: 80 ]]
-						-- upvalues: tileRef (ref), var12 (ref), reactModule (copy), var11 (ref)
+					UISizeConstraint = reactModule.useMemo(function()
+						-- upvalues: tileRef (ref), var13 (ref), reactModule (copy), var12 (ref)
 						return if tileRef.current then reactModule.createElement("UISizeConstraint", {
-							MaxSize = Vector2.new(if var12 then tileRef.current.AbsoluteSize.X - 16 else tileRef.current.AbsoluteSize.X, var11.Y)
+							MaxSize = Vector2.new(if var13 then tileRef.current.AbsoluteSize.X - 16 else tileRef.current.AbsoluteSize.X, var12.Y)
 						}) else nil
-					end, { var11 })
+					end, { var12 })
 				}) else reactModule.createElement(skeleton, {
 					LayoutOrder = 2,
 					Size = UDim2.new(1, 0, 0, 16),
 					radius = if isLoading then radius.Small else nil
 				})
 			}),
-			Subtitle = if isLoading then nil else reactModule.useMemo(function() --[[ line: 95 ]]
-				-- upvalues: p0 (ref), reactModule (copy), text (copy), var7 (ref)
+			Subtitle = if isLoading then nil else reactModule.useMemo(function()
+				-- upvalues: p0 (ref), reactModule (copy), text (copy), var8 (ref)
 				return if p0.subtitle then reactModule.createElement(text, {
 					tag = "size-full-0 auto-y clip text-truncate-end",
 					LayoutOrder = 3,
-					fontStyle = var7.Typography.LabelSmall,
+					fontStyle = var8.Typography.LabelSmall,
 					Text = p0.subtitle
 				}) else nil
 			end, { p0.subtitle })
 		}),
-		Badge = if isLoading then nil else reactModule.useMemo(function() --[[ line: 108 ]]
+		Badge = if isLoading then nil else reactModule.useMemo(function()
 			-- upvalues: p0 (ref), reactModule (copy), statusIndicator (copy), flags (copy), statusIndicatorVariant (copy), fIntSocalCarouselMaxNewRequestsCountModule (copy)
 			return if p0.badge then reactModule.createElement(statusIndicator, {
 				Position = UDim2.new(0.9, 0, 0.1, 0),
