@@ -1,3 +1,10 @@
+## 12500 - 2026-08-24 21:43
+
+### `InExperience/PatchRoot/DataModelInstances/CorePackages/Workspace/Packages/_Index/MomentsCreation/MomentsCreation/Utils/makePostMetadata.luau`
+- New variable: `momentsCreation`
+- New variable: `getFFlagMomentsTTSAudioOverlayModule`
+
+
 ## 12498 - 2026-08-24 20:59
 
 ### New files

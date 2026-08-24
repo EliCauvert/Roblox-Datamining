@@ -1,7 +1,9 @@
-﻿local _ = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsTypes)
+﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(momentsCreation.Parent.MomentsTypes)
+local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
-local function convertTextOverlayStyle(p0) --[[ line: 14 ]]
+local function convertTextOverlayStyle(p0) --[[ line: 16 ]]
 	return {
 		font = p0.font.Name,
 		fontColor = { p0.fontColor.R, p0.fontColor.G, p0.fontColor.B },
@@ -10,7 +12,7 @@ local function convertTextOverlayStyle(p0) --[[ line: 14 ]]
 	}
 end
 
-local function convertTextOverlay(p1) --[[ line: 23 ]]
+local function convertTextOverlay(p1) --[[ line: 25 ]]
 	-- upvalues: convertTextOverlayStyle (ref)
 	return {
 		text = p1.text,
@@ -22,8 +24,8 @@ local function convertTextOverlay(p1) --[[ line: 23 ]]
 	}
 end
 
-return function(p2) --[[ line: 34 | named "makePostMetadata" ]]
-	-- upvalues: convertTextOverlay (ref), momentsPostCtaUseCaptureUniverse (ref)
+return function(p2) --[[ line: 36 | named "makePostMetadata" ]]
+	-- upvalues: convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref)
 	local t = { caption = p2.description }
 	
 	if p2.edits then
@@ -47,15 +49,27 @@ return function(p2) --[[ line: 34 | named "makePostMetadata" ]]
 			end
 			t.textOverlays = t_1
 		end
+		if getFFlagMomentsTTSAudioOverlayModule and p2.edits.tts and (p2.edits.tts.text ~= nil and p2.edits.tts.text ~= "") then
+			local tts = p2.edits.tts
+			t.textToSpeech = {
+				{
+					pitch = 0,
+					speed = 1,
+					text = tts.text,
+					voiceId = tts.voiceId,
+					startTime = tts.startTime
+				}
+			}
+		end
 	end
-	local var5 = p2.universeIdOverride or p2.universeId
+	local var7 = p2.universeIdOverride or p2.universeId
 	
 	if momentsPostCtaUseCaptureUniverse then
 		local universeId = p2.universeId
-		var5 = if universeId == nil or universeId <= 0 then p2.universeIdOverride else universeId
+		var7 = if universeId == nil or universeId <= 0 then p2.universeIdOverride else universeId
 	end
-	if var5 and p2.placeId then
-		t.primaryCta = { experienceId = var5, placeId = p2.placeId }
+	if var7 and p2.placeId then
+		t.primaryCta = { experienceId = var7, placeId = p2.placeId }
 	end
 	if p2.captureType == Enum.CaptureType.Video then
 		t.durationSeconds = p2.assetTotalDuration
