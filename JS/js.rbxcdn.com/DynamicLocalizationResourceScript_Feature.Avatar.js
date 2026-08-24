@@ -371,6 +371,16 @@ Roblox.LangDynamic["Feature.Avatar"] = {
     "Message.BackgroundsArentSupportedIn3D": "Backgrounds aren't supported in this view. Switch to 2D view.",
     "Label.ProfileFrames": "Frames",
     "Label.ProfileFramesUnlockBanner": "Unlock frames with Plus",
-    "Title.FindYourStyle": "Find Your Style"
+    "Title.FindYourStyle": "Find Your Style",
+    "Label.ProfileFrame.Pink": "Pink",
+    "Label.ProfileFrame.Ruins": "Ruins",
+    "Label.ProfileFrame.Scifi": "Scifi",
+    "Label.ProfileFrame.Wings": "Wings",
+    "Label.ProfileFrame.Gold": "Gold",
+    "Label.ProfileFrame.Silver": "Silver",
+    "Label.ProfileFrame.Black": "Black",
+    "Label.ProfileFrame.White": "White",
+    "Label.ProfileFrame.Turquoise": "Turquoise",
+    "Label.ProfileFrame.Redcliff": "Redcliff"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Avatar");

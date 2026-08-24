@@ -92,6 +92,7 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Label.PhoneNumber": "Phone Number",
     "Label.SignUpWith": "or sign up with",
     "Response.BadUsernameForWeChat": "Username is not appropriate",
+    "Label.UsernameError3": "Is not already in use",
     "Label.PasswordError1": "Is at least 8 characters long",
     "Label.PasswordError2": "Does not match username",
     "Label.PasswordError3": "Is not a simple password",
