@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "824270ee-58ff-9ab0-4992-1450228813f8")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "e9522cf6-1a77-8366-b75a-2b39538e9543")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 239328, e => {
@@ -118,7 +118,7 @@
             children: s
         } = e, {
             user: l
-        } = (0, r.useAuthentication)(), u = (0, o.useCurrentGroup)(), [m, f] = (0, a.useState)(void 0), [h, p] = (0, a.useState)(), [g, v] = (0, a.useState)(), [b, y] = (0, a.useState)(), [A, S] = (0, a.useState)(), x = (0, a.useMemo)(() => {
+        } = (0, r.useAuthentication)(), u = (0, o.useCurrentGroup)(), [m, f] = (0, a.useState)(void 0), [h, p] = (0, a.useState)(), [g, b] = (0, a.useState)(), [v, y] = (0, a.useState)(), [A, S] = (0, a.useState)(), x = (0, a.useMemo)(() => {
             var e;
             return (null != (e = null == u ? void 0 : u.id) ? e : 0) !== 0
         }, [u]), [T, E] = (0, a.useState)(void 0), _ = void 0 === m || void 0 === h || void 0 === g && x, w = (0, a.useCallback)(async () => {
@@ -149,14 +149,14 @@
         }, [T, x]), k = (0, a.useCallback)(async () => {
             if (x && (null == u ? void 0 : u.id)) try {
                 let e = await (0, c.getGroupEligibility)(u.id);
-                v(e.isEligible)
+                b(e.isEligible)
             } catch (e) {
-                v(!1)
+                b(!1)
             }
         }, [u, x]);
         (0, a.useEffect)(() => {
-            _ ? S(void 0) : x && !T ? S(!1) : S(!1 === b)
-        }, [x, T, b, _]), (0, a.useEffect)(() => {
+            _ ? S(void 0) : x && !T ? S(!1) : S(!1 === v)
+        }, [x, T, v, _]), (0, a.useEffect)(() => {
             (async () => {
                 if (x && (null == u ? void 0 : u.id)) {
                     var e;
@@ -177,12 +177,12 @@
         let C = (0, a.useMemo)(() => ({
             isAffiliateProgramLoading: _,
             requiresActionToJoinProgram: A,
-            compliantWithAllUserRequirements: b,
+            compliantWithAllUserRequirements: v,
             creatorMetadata: null != m ? m : void 0,
             requirements: null != h ? h : void 0,
             isCurrentUserGroupOwner: T,
             isGroupEligible: null != g ? g : void 0
-        }), [_, A, b, m, h, T, g]);
+        }), [_, A, v, m, h, T, g]);
         return (0, t.jsx)(d.Provider, {
             value: C,
             children: s
@@ -208,8 +208,8 @@
         h = e.i(823062),
         p = e.i(881670),
         g = e.i(486736),
-        v = e.i(906791);
-    let b = (0, e.i(706442).makeStyles)()(e => ({
+        b = e.i(906791);
+    let v = (0, e.i(706442).makeStyles)()(e => ({
         alertContainer: {
             marginBottom: "16px",
             [e.breakpoints.down("Medium")]: {
@@ -245,7 +245,7 @@
             backgroundColor: "rgba(255, 255, 255, 0.1)"
         }
     }));
-    e.s(["default", 0, b], 540082);
+    e.s(["default", 0, v], 540082);
     var y = ((t = {}).Home = "home", t.Creations = "creations", t);
     let A = (0, s.withTranslation)(e => {
         let t, p, y, A, {
@@ -265,10 +265,10 @@
                 isHighPriority: k,
                 variant: C,
                 dismissBanner: P
-            } = (0, v.useAgeVerificationUpsellContext)(),
+            } = (0, b.useAgeVerificationUpsellContext)(),
             {
                 classes: N
-            } = b(),
+            } = v(),
             M = (0, i.useRef)(null),
             {
                 unifiedLogger: D
@@ -423,7 +423,7 @@
         }), g = e => {
             let t = new Date(e);
             return new Date(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate())
-        }, v = async () => await d() ? "ageVerification" : "doNotShow";
+        }, b = async () => await d() ? "ageVerification" : "doNotShow";
     e.s(["AgeVerificationUpsellProvider", 0, e => {
         let {
             children: l
@@ -433,7 +433,7 @@
                 ageVerificationUpsellBannerEndDate: c,
                 ageVerificationUpsellBannerHighPriorityDate: d
             }
-        } = (0, n.useSettings)(), [u, m] = (0, a.useState)(!0), [b, y] = (0, a.useState)("doNotShow"), {
+        } = (0, n.useSettings)(), [u, m] = (0, a.useState)(!0), [v, y] = (0, a.useState)("doNotShow"), {
             isFetched: A,
             user: S
         } = (0, i.useRobloxAuthentication)(), {
@@ -470,7 +470,7 @@
                 m(e);
                 let t = "doNotShow";
                 try {
-                    t = await v()
+                    t = await b()
                 } catch (e) {
                     x.logErrorEvent({
                         eventName: s.default.AgeVerificationUpsellBannerError,
@@ -492,15 +492,15 @@
             })
         }, [E, A, S, x]);
         let w = (0, a.useMemo)(() => {
-            let e = E && "doNotShow" !== b;
+            let e = E && "doNotShow" !== v;
             return {
                 isBannerVisible: e && !u,
                 isBannerEligible: e,
                 isHighPriority: T,
-                variant: "doNotShow" !== b ? b : "ageVerification",
+                variant: "doNotShow" !== v ? v : "ageVerification",
                 dismissBanner: _
             }
-        }, [E, b, u, T, _]);
+        }, [E, v, u, T, _]);
         return (0, t.jsx)(p.Provider, {
             value: w,
             children: l
@@ -645,9 +645,9 @@
         h = e.i(114209),
         p = e.i(373736),
         g = e.i(917852),
-        v = e.i(576069),
-        b = e.i(351111);
-    let y = "".concat("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/assets", "/home/publish_eligibility_banner.webp"),
+        b = e.i(576069),
+        v = e.i(351111);
+    let y = "".concat("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/assets", "/home/publish_eligibility_banner.webp"),
         A = (0, l.withTranslation)(e => {
             var A;
             let {
@@ -664,7 +664,7 @@
                 data: N,
                 isLoading: M,
                 isFetching: D
-            } = (0, v.useCreatorEligibility)(), L = (0, a.useRef)(!1), [O, R] = (0, a.useState)(!1), F = (null == N ? void 0 : N.ageBracket) === s.AgeBracketEnum.Over18, j = (null == N ? void 0 : N.ageBracket) === s.AgeBracketEnum.Between13And18, U = null != (A = null == N ? void 0 : N.creatorEligibility.includes(s.CreatorEligibilityEnum.IdVerified)) && A, B = F || j, q = w && I && !(M || D) && !!N && !U;
+            } = (0, b.useCreatorEligibility)(), L = (0, a.useRef)(!1), [O, R] = (0, a.useState)(!1), F = (null == N ? void 0 : N.ageBracket) === s.AgeBracketEnum.Over18, j = (null == N ? void 0 : N.ageBracket) === s.AgeBracketEnum.Between13And18, U = null != (A = null == N ? void 0 : N.creatorEligibility.includes(s.CreatorEligibilityEnum.IdVerified)) && A, B = F || j, q = w && I && !(M || D) && !!N && !U;
             (0, a.useEffect)(() => {
                 q && !L.current && (L.current = !0, u.default.logImpressionEvent({
                     eventName: d.default.AudienceReachGrowthOpportunitiesBannerImpression,
@@ -698,7 +698,7 @@
                 direction: "row",
                 paddingBottom: 4,
                 children: [(0, t.jsxs)("div", {
-                    className: (0, n.clsx)(b.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
+                    className: (0, n.clsx)(v.default.heroBanner, "relative width-full flex items-center bg-surface-200 radius-large"),
                     children: [(0, t.jsx)("img", {
                         src: y,
                         alt: "",
@@ -712,7 +712,7 @@
                             e.currentTarget.style.display = "none"
                         }
                     }), (0, t.jsxs)("div", {
-                        className: (0, n.clsx)(b.default.heroTextContent, "dark-theme relative flex flex-col gap-medium padding-[32px]"),
+                        className: (0, n.clsx)(v.default.heroTextContent, "dark-theme relative flex flex-col gap-medium padding-[32px]"),
                         children: [(0, t.jsxs)("div", {
                             children: [(0, t.jsxs)("div", {
                                 className: "text-heading-medium content-emphasis",
@@ -722,7 +722,7 @@
                                 children: E(f.TranslationNamespace.AudienceReach, "Description.ExpandGrowthOpportunities")
                             })]
                         }), (0, t.jsx)("div", {
-                            className: (0, n.clsx)(b.default.buttonRow, "flex gap-small"),
+                            className: (0, n.clsx)(v.default.buttonRow, "flex gap-small"),
                             children: x ? F ? (0, t.jsx)(r.Button, {
                                 as: "a",
                                 href: g.idVerificationActionUrl,
@@ -957,14 +957,14 @@
             l1Options: u,
             categories: f,
             isLoading: h
-        } = m(e), p = (0, r.isAllAssetTypesActiveTab)(c) || (0, r.isRecentsActiveTab)(c) || (0, r.isAvatarLooksActiveTab)(c) ? void 0 : null != (n = (0, r.parseTaxonomyActiveTab)(c)) ? n : null == (o = u[0]) ? void 0 : o.taxonomyKey, g = (0, t.useMemo)(() => (0, s.findL1Category)(f, p), [f, p]), v = (0, t.useMemo)(() => (0, s.buildTaxonomyL2Options)(g), [g]), b = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), y = (0, i.isValidIndex)(b, v) ? b : 0, A = (0, t.useMemo)(() => {
-            if (g) return v.length > 0 ? v[y] : g.webStableId ? (0, s.categoryToDropdown)(g) : void 0
-        }, [g, v, y]);
+        } = m(e), p = (0, r.isAllAssetTypesActiveTab)(c) || (0, r.isRecentsActiveTab)(c) || (0, r.isAvatarLooksActiveTab)(c) ? void 0 : null != (n = (0, r.parseTaxonomyActiveTab)(c)) ? n : null == (o = u[0]) ? void 0 : o.taxonomyKey, g = (0, t.useMemo)(() => (0, s.findL1Category)(f, p), [f, p]), b = (0, t.useMemo)(() => (0, s.buildTaxonomyL2Options)(g), [g]), v = parseInt(null != (l = null == d ? void 0 : d.toString()) ? l : "", 10), y = (0, i.isValidIndex)(v, b) ? v : 0, A = (0, t.useMemo)(() => {
+            if (g) return b.length > 0 ? b[y] : g.webStableId ? (0, s.categoryToDropdown)(g) : void 0
+        }, [g, b, y]);
         return {
             l1Options: u,
             activeL1Key: p,
             activeL1Node: g,
-            l2Options: v,
+            l2Options: b,
             filterIndex: y,
             selection: A,
             isLoading: h
@@ -1515,66 +1515,66 @@
                 })
             }, t
         }(s.BaseAPI),
-        v = e.i(272593),
-        b = ((t = {}).Animation = "Animation", t.Audio = "Audio", t.Decal = "Decal", t.Image = "Image", t.Mesh = "Mesh", t.MeshPart = "MeshPart", t.Model = "Model", t.Plugin = "Plugin", t.Video = "Video", t),
+        b = e.i(272593),
+        v = ((t = {}).Animation = "Animation", t.Audio = "Audio", t.Decal = "Decal", t.Image = "Image", t.Mesh = "Mesh", t.MeshPart = "MeshPart", t.Model = "Model", t.Plugin = "Plugin", t.Video = "Video", t),
         y = ((a = {}).Group = "groups", a.User = "users", a);
-    let A = new g((0, v.createClientConfiguration)("creator-inventory-api", "bedev2"));
-    e.s(["CreatorInventoryAssetType", () => b, "CreatorInventoryScopeType", () => y, "default", 0, A], 899441), e.s(["CreatorInventorySourceType", 0, u], 59937);
+    let A = new g((0, b.createClientConfiguration)("creator-inventory-api", "bedev2"));
+    e.s(["CreatorInventoryAssetType", () => v, "CreatorInventoryScopeType", () => y, "default", 0, A], 899441), e.s(["CreatorInventorySourceType", 0, u], 59937);
     var S = e.i(671376),
         x = ((i = {}).All = "All", i);
-    let T = [b.Model, b.Plugin, b.Audio, b.Decal, b.Image, b.Video, b.Mesh, b.MeshPart, b.Animation],
-        E = new Set([b.Audio, b.Decal, b.MeshPart, b.Video]),
+    let T = [v.Model, v.Plugin, v.Audio, v.Decal, v.Image, v.Video, v.Mesh, v.MeshPart, v.Animation],
+        E = new Set([v.Audio, v.Decal, v.MeshPart, v.Video]),
         _ = {
-            [b.Animation]: S.Asset.Animation,
-            [b.Audio]: S.Asset.Audio,
-            [b.Decal]: S.Asset.Decal,
-            [b.Image]: S.Asset.Image,
-            [b.Mesh]: S.Asset.Mesh,
-            [b.MeshPart]: S.Asset.MeshPart,
-            [b.Model]: S.Asset.Model,
-            [b.Plugin]: S.Asset.Plugin,
-            [b.Video]: S.Asset.Video
+            [v.Animation]: S.Asset.Animation,
+            [v.Audio]: S.Asset.Audio,
+            [v.Decal]: S.Asset.Decal,
+            [v.Image]: S.Asset.Image,
+            [v.Mesh]: S.Asset.Mesh,
+            [v.MeshPart]: S.Asset.MeshPart,
+            [v.Model]: S.Asset.Model,
+            [v.Plugin]: S.Asset.Plugin,
+            [v.Video]: S.Asset.Video
         },
         w = new Set(T),
         I = new Set(["All", u.Created, u.Purchased, u.Shared]),
         k = new Set([S.Asset.Animation, S.Asset.Audio, S.Asset.Decal, S.Asset.Image, S.Asset.Mesh, S.Asset.MeshPart, S.Asset.Model, S.Asset.Plugin, S.Asset.Video]),
         C = {
-            [b.Animation]: o.Animation,
-            [b.Audio]: o.Audio,
-            [b.Decal]: o.Decal,
-            [b.Image]: o.Image,
-            [b.Mesh]: o.Mesh,
-            [b.MeshPart]: o.MeshPart,
-            [b.Model]: o.Model,
-            [b.Plugin]: o.Plugin,
-            [b.Video]: o.Video
+            [v.Animation]: o.Animation,
+            [v.Audio]: o.Audio,
+            [v.Decal]: o.Decal,
+            [v.Image]: o.Image,
+            [v.Mesh]: o.Mesh,
+            [v.MeshPart]: o.MeshPart,
+            [v.Model]: o.Model,
+            [v.Plugin]: o.Plugin,
+            [v.Video]: o.Video
         },
         P = {
-            3: b.Audio,
-            10: b.Model,
-            13: b.Decal,
-            24: b.Animation,
-            38: b.Plugin,
-            40: b.MeshPart,
-            62: b.Video,
-            ANIMATION: b.Animation,
-            ASSET_TYPE_ANIMATION: b.Animation,
-            ASSET_TYPE_AUDIO: b.Audio,
-            ASSET_TYPE_DECAL: b.Decal,
-            ASSET_TYPE_IMAGE: b.Image,
-            ASSET_TYPE_MESH: b.Mesh,
-            ASSET_TYPE_MESH_PART: b.MeshPart,
-            ASSET_TYPE_MODEL: b.Model,
-            ASSET_TYPE_PLUGIN: b.Plugin,
-            ASSET_TYPE_VIDEO: b.Video,
-            AUDIO: b.Audio,
-            DECAL: b.Decal,
-            IMAGE: b.Image,
-            MESH: b.Mesh,
-            MESHPART: b.MeshPart,
-            MODEL: b.Model,
-            PLUGIN: b.Plugin,
-            VIDEO: b.Video
+            3: v.Audio,
+            10: v.Model,
+            13: v.Decal,
+            24: v.Animation,
+            38: v.Plugin,
+            40: v.MeshPart,
+            62: v.Video,
+            ANIMATION: v.Animation,
+            ASSET_TYPE_ANIMATION: v.Animation,
+            ASSET_TYPE_AUDIO: v.Audio,
+            ASSET_TYPE_DECAL: v.Decal,
+            ASSET_TYPE_IMAGE: v.Image,
+            ASSET_TYPE_MESH: v.Mesh,
+            ASSET_TYPE_MESH_PART: v.MeshPart,
+            ASSET_TYPE_MODEL: v.Model,
+            ASSET_TYPE_PLUGIN: v.Plugin,
+            ASSET_TYPE_VIDEO: v.Video,
+            AUDIO: v.Audio,
+            DECAL: v.Decal,
+            IMAGE: v.Image,
+            MESH: v.Mesh,
+            MESHPART: v.MeshPart,
+            MODEL: v.Model,
+            PLUGIN: v.Plugin,
+            VIDEO: v.Video
         },
         N = {
             createdDetails: u.Created,
@@ -1733,12 +1733,12 @@
         m = a.Asset.Showcase;
     e.s(["default", 0, {
         isMenuItemEnabled(e, i, r, n, l, o, f, h, p) {
-            var g, v;
-            return (null == e ? void 0 : e.type) === a.Asset.AllCatalogAsset ? null != f && f : (null == e ? void 0 : e.type) === a.Asset.SharedExperiences ? null == r : (null == e ? void 0 : e.type) === a.Asset.Moments ? null != o && o : (null == e ? void 0 : e.itemType) === s.Item.Bundle || ((null == e ? void 0 : e.type) === d ? null != h && h : (null == e ? void 0 : e.type) === u ? i.enableAvatarBackgrounds && null != (g = null == l ? void 0 : l.has(e.type)) && g : (null == e ? void 0 : e.type) === m ? null != p && p : (null == e ? void 0 : e.type) === c ? i.enableMakeupAssets && null != (v = null == l ? void 0 : l.has(e.type)) && v : (null == e ? void 0 : e.type) === void 0 || !!(0, t.is2DAsset)(null == e ? void 0 : e.type) || (null == e ? void 0 : e.type) !== void 0 && void 0 === n || null != n && n)
+            var g, b;
+            return (null == e ? void 0 : e.type) === a.Asset.AllCatalogAsset ? null != f && f : (null == e ? void 0 : e.type) === a.Asset.SharedExperiences ? null == r : (null == e ? void 0 : e.type) === a.Asset.Moments ? null != o && o : (null == e ? void 0 : e.itemType) === s.Item.Bundle || ((null == e ? void 0 : e.type) === d ? null != h && h : (null == e ? void 0 : e.type) === u ? i.enableAvatarBackgrounds && null != (g = null == l ? void 0 : l.has(e.type)) && g : (null == e ? void 0 : e.type) === m ? null != p && p : (null == e ? void 0 : e.type) === c ? i.enableMakeupAssets && null != (b = null == l ? void 0 : l.has(e.type)) && b : (null == e ? void 0 : e.type) === void 0 || !!(0, t.is2DAsset)(null == e ? void 0 : e.type) || (null == e ? void 0 : e.type) !== void 0 && void 0 === n || null != n && n)
         },
         getValidMenuState(e, t, a, i, s, r, n, l, o, d) {
-            var m, f, h, p, g, v;
-            let b, y, A = (null == (m = t.submenuItem) ? void 0 : m.type) !== c && (null == (f = t.submenuItem) ? void 0 : f.type) !== u || void 0 !== r;
+            var m, f, h, p, g, b;
+            let v, y, A = (null == (m = t.submenuItem) ? void 0 : m.type) !== c && (null == (f = t.submenuItem) ? void 0 : f.type) !== u || void 0 !== r;
             if (void 0 === t.menuItem || this.isMenuItemEnabled(t.menuItem, a, i, s, r, n, l, o, d)) {
                 if (void 0 !== t.submenuItem && A && !this.isMenuItemEnabled(t.submenuItem, a, i, s, r, n, l, o, d))
                     if (void 0 !== t.menuItem.submenuItems) {
@@ -1751,11 +1751,11 @@
                             }
                             c += 1
                         }
-                        b = t.menuItem, y = null == (g = t.menuItem.submenuItems) ? void 0 : g[e]
-                    } else b = t.menuItem, y = null == (v = t.menuItem.submenuItems) ? void 0 : v[0]
-            } else [b] = e, y = null == (h = e[0].submenuItems) ? void 0 : h[0];
-            return b ? {
-                menuItem: b,
+                        v = t.menuItem, y = null == (g = t.menuItem.submenuItems) ? void 0 : g[e]
+                    } else v = t.menuItem, y = null == (b = t.menuItem.submenuItems) ? void 0 : b[0]
+            } else [v] = e, y = null == (h = e[0].submenuItems) ? void 0 : h[0];
+            return v ? {
+                menuItem: v,
                 submenuItem: y
             } : t
         },
@@ -1815,8 +1815,8 @@
             classes: {
                 alertStyle: g
             }
-        } = (0, o.default)(), [v, b] = (0, a.useState)(!0);
-        return v ? (0, t.jsxs)(i.Alert, {
+        } = (0, o.default)(), [b, v] = (0, a.useState)(!0);
+        return b ? (0, t.jsxs)(i.Alert, {
             severity: u,
             onClose: void 0,
             className: g,
@@ -1831,7 +1831,7 @@
                     color: "inherit",
                     size: "small",
                     onClick: () => {
-                        null == p || p(), b(!1)
+                        null == p || p(), v(!1)
                     },
                     children: (0, t.jsx)(n.CloseIcon, {
                         fontSize: "small"
@@ -1897,8 +1897,8 @@
         h = e.i(149209),
         p = e.i(152382),
         g = e.i(323377),
-        v = e.i(212940),
-        b = e.i(581403),
+        b = e.i(212940),
+        v = e.i(581403),
         y = e.i(527781),
         A = e.i(977079),
         S = e.i(402440),
@@ -1985,7 +1985,7 @@
         },
         decals: {
             light: y.default,
-            dark: b.default
+            dark: v.default
         },
         images: {
             light: _.default,
@@ -2004,7 +2004,7 @@
             dark: Q.default
         },
         noUsers: {
-            light: v.default,
+            light: b.default,
             dark: g.default
         },
         localization: {
@@ -2061,7 +2061,7 @@
         }
     };
     e.s(["default", 0, eo], 938429);
-    let ec = "".concat("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/assets", "/spot_illustrations"),
+    let ec = "".concat("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/assets", "/spot_illustrations"),
         ed = {
             small: {
                 analytics: "".concat(ec, "/small/analytics.svg"),
@@ -2279,12 +2279,12 @@
             medium: 16,
             large: 20
         },
-        v = {
+        b = {
             compact: 32,
             medium: 48,
             large: 64
         },
-        b = {
+        v = {
             compact: 4,
             medium: 6,
             large: 8
@@ -2304,10 +2304,10 @@
                     marginRight: g[a]
                 },
                 userBorderRadius: {
-                    borderRadius: v[a]
+                    borderRadius: b[a]
                 },
                 nonUserBorderRadius: {
-                    borderRadius: b[a]
+                    borderRadius: v[a]
                 },
                 thumbnailItemContainer: {
                     display: "flex",
@@ -2345,8 +2345,8 @@
     e.s(["default", 0, e => {
         let l, {
                 target: g,
-                targetType: v,
-                displayNameOverride: b,
+                targetType: b,
+                displayNameOverride: v,
                 adornment: A,
                 label: S,
                 disabled: x,
@@ -2378,20 +2378,20 @@
             {
                 translate: q
             } = (0, i.useTranslation)(),
-            V = (0, a.useMemo)(() => v === f.default.User ? s.ThumbnailTypes.avatarHeadshot : v === f.default.Group ? s.ThumbnailTypes.groupIcon : "Ugc" === v ? s.ThumbnailTypes.assetThumbnail : s.ThumbnailTypes.universeThumbnail, [v]),
+            V = (0, a.useMemo)(() => b === f.default.User ? s.ThumbnailTypes.avatarHeadshot : b === f.default.Group ? s.ThumbnailTypes.groupIcon : "Ugc" === b ? s.ThumbnailTypes.assetThumbnail : s.ThumbnailTypes.universeThumbnail, [b]),
             Y = (0, a.useMemo)(() => {
                 if (!E && g.id && !_) {
-                    if (v === f.default.User) return h.www.getUserUrl(g.id);
-                    if (v === f.default.Group) return h.www.getGroupUrl(g.id);
-                    if ("Experience" === v) {
+                    if (b === f.default.User) return h.www.getUserUrl(g.id);
+                    if (b === f.default.Group) return h.www.getGroupUrl(g.id);
+                    if ("Experience" === b) {
                         let e = "rootPlaceId" in g ? g.rootPlaceId : void 0;
                         return e ? h.www.getGameDetailsUrl(e) : void 0
                     }
-                    if ("Ugc" === v) return h.www.getCatalogUrl(g.id)
+                    if ("Ugc" === b) return h.www.getCatalogUrl(g.id)
                 }
-            }, [E, g, _, v]);
-        b ? l = b : v === f.default.User ? l = "displayName" in g ? g.displayName : void 0 : "Ugc" !== v && (l = "name" in g ? g.name : void 0);
-        let z = !b && (v === f.default.User && !("displayName" in g && g.displayName) || "Ugc" === v),
+            }, [E, g, _, b]);
+        v ? l = v : b === f.default.User ? l = "displayName" in g ? g.displayName : void 0 : "Ugc" !== b && (l = "name" in g ? g.name : void 0);
+        let z = !v && (b === f.default.User && !("displayName" in g && g.displayName) || "Ugc" === b),
             G = (0, a.useMemo)(() => (0, t.jsxs)(n.Grid, {
                 container: !0,
                 direction: "row",
@@ -2427,7 +2427,7 @@
                         })
                     })]
                 }), !I && (0, t.jsxs)(t.Fragment, {
-                    children: [v === f.default.User && (0, t.jsx)(t.Fragment, {
+                    children: [b === f.default.User && (0, t.jsx)(t.Fragment, {
                         children: "name" in g && !g.name ? (0, t.jsx)(d.Skeleton, {
                             animate: !0,
                             variant: "text",
@@ -2441,7 +2441,7 @@
                             color: x ? "disabled" : "inherit",
                             children: _ ? q("Label.Other") : "@".concat("name" in g ? g.name : "")
                         })
-                    }), (v === f.default.Group || "Experience" === v) && (0, t.jsx)(r.Typography, {
+                    }), (b === f.default.Group || "Experience" === b) && (0, t.jsx)(r.Typography, {
                         variant: "captionBody",
                         className: B(U, {
                             [F]: "secondary" === k || "compact" === T
@@ -2450,7 +2450,7 @@
                         children: _ ? q("Label.Other") : g.id
                     })]
                 })]
-            }), [z, l, v, g, U, x, _, q, S, I, B, F, k, T, C]);
+            }), [z, l, b, g, U, x, _, q, S, I, B, F, k, T, C]);
         return (0, t.jsx)(n.Grid, {
             container: !0,
             direction: "row",
@@ -2474,8 +2474,8 @@
                             variant: "rounded",
                             alt: "avatar",
                             className: B(N, {
-                                [L]: v === f.default.User,
-                                [O]: v !== f.default.User,
+                                [L]: b === f.default.User,
+                                [O]: b !== f.default.User,
                                 [j]: x
                             }),
                             children: (0, t.jsx)(s.Thumbnail2d, {
@@ -3162,121 +3162,121 @@
         return e
     }], 845592)
 }, 666554, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/alert_dark.1spa8ixzmujxs.svg")
 }, 318974, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/alert_light.3o6_fob3g_8zu.svg")
 }, 210436, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/api_key_dark.1k1v6y4zm3j28.svg")
 }, 872378, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/api_key_light.06t4q4202-77s.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/api_key_light.06t4q4202-77s.svg")
 }, 909935, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/audio_dark.16razgllw2ska.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/audio_dark.16razgllw2ska.svg")
 }, 587608, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/audio_light.3ra073_18pbj-.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/audio_light.3ra073_18pbj-.svg")
 }, 648550, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/avatar_setup_dark.0orjsl7i089hc.svg")
 }, 879556, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/avatar_setup_light.32r86q54d7kuh.svg")
 }, 156676, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/badge_dark.3m45r-3favo3f.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/badge_dark.3m45r-3favo3f.svg")
 }, 732097, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/badge_light.3fxfvj8ub7utb.svg")
 }, 149209, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/bar_graph_dark.01vf9sty52re2.svg")
 }, 152382, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/bar_graph_light.1iiixo_d8ur81.svg")
 }, 323377, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/collaborators_dark.30gxkwssilacj.svg")
 }, 212940, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/collaborators_light.3x7fovqhay1x5.svg")
 }, 581403, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/decals_dark.2jpntsljojhzc.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/decals_dark.2jpntsljojhzc.svg")
 }, 527781, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/decals_light.16_gp3tnuc5p_.svg")
 }, 977079, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/event_calendar_dark.3lx4_kse68by8.svg")
 }, 402440, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/event_calendar_light.1pq-t84d90ty1.svg")
 }, 620094, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/find_people_dark.220q6_cs04hcq.svg")
 }, 721267, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/find_people_light.1gkb3pmwc8s2n.svg")
 }, 788618, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/image_dark.2giew28wx4z86.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/image_dark.2giew28wx4z86.svg")
 }, 11730, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/image_light.0ouq8tcgpznz7.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/image_light.0ouq8tcgpznz7.svg")
 }, 334912, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/leaderboard_dark.301ypg94lbxpv.svg")
 }, 315072, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/leaderboard_light.43sjz_ibwkiq_.svg")
 }, 319700, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/line_chart_dark.0k7qf3mhepo6s.svg")
 }, 397367, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/line_chart_light.049gcvvmai0ax.svg")
 }, 339295, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/localization_dark.1ia7wat2mwyfi.svg")
 }, 26168, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/localization_light.2jss_xvx2fuq0.svg")
 }, 761562, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/lockSecrets_dark.0na6naigcbnkj.svg")
 }, 174990, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/lockSecrets_light.0rzix2i1i13lt.svg")
 }, 226572, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/makeup_look_dark.26-5-yn8598c9.svg")
 }, 41024, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/makeup_look_light.0rc05t5n5al4m.svg")
 }, 318682, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/managed_pricing_dark.2zdkf2-ctboa2.svg")
 }, 902904, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/managed_pricing_light.0sioq_hruq1qp.svg")
 }, 973248, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/meshes_dark.2tlm50ns1pq5o.svg")
 }, 699904, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/meshes_light.36wh96flp2o3r.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/meshes_light.36wh96flp2o3r.svg")
 }, 861406, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/models_dark.30suu5lj5-ua5.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/models_dark.30suu5lj5-ua5.svg")
 }, 659373, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/models_light.0kiw6k3ejw-rn.svg")
 }, 871908, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/models_plugins_parts_dark.3jp6jislnsqf8.svg")
 }, 712369, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/models_plugins_parts_light.2nj1xhv0bfg_u.svg")
 }, 761170, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/notifications_dark.2l_rf34_xo6o8.svg")
 }, 69008, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/notifications_light.3p-b4rzvwwfmj.svg")
 }, 610419, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/oauth_dark.42jv8--11_1i0.svg")
 }, 6938, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/oauth_light.17vwiebwrn8ox.svg")
 }, 931008, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/rights_manager_dark.0m7ca17sdbgim.svg")
 }, 132917, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/rights_manager_light.1moaenz1cbft0.svg")
 }, 999544, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/run_dark.1sun4tvxh_arh.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/run_dark.1sun4tvxh_arh.svg")
 }, 370502, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/run_light.29f-3jyw910_v.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/run_light.29f-3jyw910_v.svg")
 }, 779375, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/shareLinks_dark.1l5fwuv6cgzmy.svg")
 }, 179677, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/shareLinks_light.116igf-ldibmu.svg")
 }, 761534, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/signin_dark.1k_gzn1-5q0ca.svg")
 }, 935295, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/signin_light.1o1-jng_ct0y2.svg")
 }, 930283, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/token_dark.2qy4jy9ffjhax.svg")
 }, 892316, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/token_light.2xc00j5zp1q8_.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/token_light.2xc00j5zp1q8_.svg")
 }, 667509, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/video_dark.2-gdpodjtsjj3.svg")
 }, 285253, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/video_game_dark.0tuxtkttj8gcu.svg")
 }, 987596, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/video_game_light.3l155817mjupj.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/video_game_light.3l155817mjupj.svg")
 }, 969915, e => {
-    e.q("https://assets.create.roblox.com/5c3189e93485d69f4b30744ec9c8e4f913c25876/_next/static/media/video_light.1fum3vlxctp7w.svg")
+    e.q("https://assets.create.roblox.com/026b0f2241824c4d5ad0eaccb93c7f16d0a84572/_next/static/media/video_light.1fum3vlxctp7w.svg")
 }, 523586, e => {
     "use strict";
     var t = e.i(443967),
@@ -3334,7 +3334,7 @@
             Medium: "size-[var(--icon-size-small)]",
             Large: "size-[var(--icon-size-medium)]"
         },
-        v = e => {
+        b = e => {
             let {
                 iconName: t,
                 node: s,
@@ -3347,11 +3347,11 @@
                 className: (0, a.default)("inline-flex items-center justify-center shrink-0", g[n])
             }, s) : null
         },
-        b = (0, i.forwardRef)((e, r) => {
+        v = (0, i.forwardRef)((e, r) => {
             var {
                 className: l,
                 style: g,
-                text: b,
+                text: v,
                 isDisabled: y = !1,
                 size: A = "Medium",
                 variant: S = "Standard",
@@ -3363,13 +3363,13 @@
             let I = null != x || null != T,
                 k = null != E || null != _,
                 C = (0, a.default)(y ? n.disabledOpacity : [s.interactable, "cursor-pointer"], "relative flex justify-center items-center radius-circle stroke-none", I ? d[A] : c[A], k ? m[A] : u[A], o[A], l),
-                P = i.default.createElement(i.default.Fragment, null, i.default.createElement(s.StateLayer, null), i.default.createElement(v, {
+                P = i.default.createElement(i.default.Fragment, null, i.default.createElement(s.StateLayer, null), i.default.createElement(b, {
                     iconName: x,
                     node: T,
                     size: A
                 }), i.default.createElement("span", {
                     className: (0, a.default)("padding-y-xsmall text-no-wrap text-truncate-end", I && f[A], k && h[A])
-                }, b), i.default.createElement(v, {
+                }, v), i.default.createElement(b, {
                     iconName: E,
                     node: _,
                     size: A
@@ -3407,7 +3407,7 @@
                 onClick: null == L ? void 0 : () => L(!D)
             }), P)
         });
-    e.s(["Chip", 0, b])
+    e.s(["Chip", 0, v])
 }, 74706, e => {
     "use strict";
     var t = e.i(443967),
@@ -3453,8 +3453,8 @@
                 description: h,
                 linkLabel: p,
                 linkHref: g,
-                onLinkClick: v,
-                showIcon: b = !0,
+                onLinkClick: b,
+                showIcon: v = !0,
                 infoIconOverride: y,
                 layout: A = "Inline",
                 variant: S = "Standard",
@@ -3480,7 +3480,7 @@
                 U = j && i.default.createElement(i.default.Fragment, null, i.default.createElement("span", null, " · "), i.default.createElement("a", {
                     className: "shrink-0",
                     href: g,
-                    onClick: v
+                    onClick: b
                 }, j)),
                 B = null != I ? I : T && E || _ && w ? i.default.createElement("div", {
                     className: "flex items-center gap-small"
@@ -3520,7 +3520,7 @@
                 className: (0, a.default)("flex items-center gap-xsmall min-width-0")
             }, i.default.createElement("div", {
                 className: (0, a.default)("flex items-center gap-medium min-width-0")
-            }, b && O && i.default.createElement(s.Icon, {
+            }, v && O && i.default.createElement(s.Icon, {
                 name: O,
                 size: "Large",
                 className: "shrink-0",
@@ -3569,13 +3569,13 @@
                     size: h,
                     color: p = "Emphasis",
                     variant: g = "Standalone",
-                    underline: v = "hover",
-                    isExternal: b,
+                    underline: b = "hover",
+                    isExternal: v,
                     asChild: y
                 } = e,
                 A = (0, t._)(e, ["children", "className", "size", "color", "variant", "underline", "isExternal", "asChild"]);
-            let S = (c = null != (u = A.as) ? u : "a", d = "button" === A.as ? void 0 : A.target, void 0 !== b ? b : "button" !== c && void 0 !== d && !r.has(d)),
-                x = (0, a.default)("foundation-web-link", "button" === A.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === g || S) && "inline-flex items-center gap-xsmall", void 0 !== h && n[h], l[p], "always" === v ? "underline" : "no-underline", "hover" === v && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", f),
+            let S = (c = null != (u = A.as) ? u : "a", d = "button" === A.as ? void 0 : A.target, void 0 !== v ? v : "button" !== c && void 0 !== d && !r.has(d)),
+                x = (0, a.default)("foundation-web-link", "button" === A.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === g || S) && "inline-flex items-center gap-xsmall", void 0 !== h && n[h], l[p], "always" === b ? "underline" : "no-underline", "hover" === b && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", f),
                 T = S ? i.default.createElement("span", {
                     "aria-hidden": !0,
                     "data-testid": "foundation-web-icon",
@@ -3750,8 +3750,8 @@
                 mobileLandscapeClassName: h,
                 largeScreenClassName: p,
                 onOpenAutoFocus: g,
-                onCloseAutoFocus: v,
-                onPointerDownOutside: b,
+                onCloseAutoFocus: b,
+                onPointerDownOutside: v,
                 onEscapeKeyDown: y,
                 onInteractOutside: A
             } = e,
@@ -3776,8 +3776,8 @@
             centerSheetSize: s,
             contentClassName: E,
             onOpenAutoFocus: null != g ? g : u,
-            onCloseAutoFocus: v,
-            onPointerDownOutside: b,
+            onCloseAutoFocus: b,
+            onPointerDownOutside: v,
             onEscapeKeyDown: y,
             onInteractOutside: A
         }, i))
@@ -3900,7 +3900,7 @@
             }, d), r)))
         });
     g.displayName = "Table";
-    let v = (0, i.forwardRef)((e, s) => {
+    let b = (0, i.forwardRef)((e, s) => {
         var {
             children: r,
             className: n
@@ -3910,8 +3910,8 @@
             className: (0, a.default)("foundation-web-table-header", n)
         }, l), r)
     });
-    v.displayName = "TableHeader";
-    let b = (0, i.forwardRef)((e, s) => {
+    b.displayName = "TableHeader";
+    let v = (0, i.forwardRef)((e, s) => {
         var {
             children: r,
             className: n
@@ -3921,7 +3921,7 @@
             className: (0, a.default)("foundation-web-table-body", n)
         }, l), r)
     });
-    b.displayName = "TableBody";
+    v.displayName = "TableBody";
     let y = (0, i.forwardRef)((e, s) => {
         var {
             children: r,
@@ -3936,7 +3936,7 @@
             role: p
         } = e, g = (0, t._)(e, ["children", "className", "isInteractive", "isHoverable", "isSelected", "isDisabled", "onClick", "onKeyDown", "tabIndex", "role"]);
         o("TableRow");
-        let v = l ? {
+        let b = l ? {
             role: null != p ? p : "row",
             tabIndex: null != h ? h : 0,
             onClick: u ? void 0 : m,
@@ -3955,7 +3955,7 @@
             "aria-disabled": !(!l || !u) || void 0,
             "data-selected": d || void 0,
             className: (0, a.default)("foundation-web-table-row", (l || c) && "hover:bg-shift-100", l && !u && "cursor-pointer", l && u && "opacity-disabled pointer-events-none", d && "bg-shift-200", n)
-        }, v, g), r)
+        }, b, g), r)
     });
     y.displayName = "TableRow";
     let A = (0, i.forwardRef)((e, r) => {
@@ -3965,8 +3965,8 @@
             sortDirection: c,
             onSort: f,
             align: g = "start",
-            sortLabel: v,
-            scope: b
+            sortLabel: b,
+            scope: v
         } = e, y = (0, t._)(e, ["children", "className", "sortDirection", "onSort", "align", "sortLabel", "scope"]);
         let {
             size: A
@@ -3981,14 +3981,14 @@
         }, n), "end" !== g && T), _ = "string" == typeof n ? "Sort by ".concat(n) : void 0;
         return i.default.createElement("th", Object.assign({
             ref: r,
-            scope: null != b ? b : "col",
+            scope: null != v ? v : "col",
             "aria-sort": S ? x : void 0,
             className: (0, a.default)("foundation-web-table-header-cell foundation-web-table-header-cell-divider", u[A], d[A], h[g], "content-muted", l)
         }, y), S ? i.default.createElement("button", {
             type: "button",
             className: "bg-none stroke-none padding-none margin-none cursor-pointer width-full content-inherit [font:inherit] [text-align:inherit] focus-visible:outline-focus hover:content-default hover:bg-shift-100 radius-small",
             onClick: f,
-            "aria-label": null != v ? v : _
+            "aria-label": null != b ? b : _
         }, E) : E)
     });
     A.displayName = "TableHeaderCell";
@@ -4050,8 +4050,8 @@
                 firstPageLabel: h = "First page",
                 previousPageLabel: p = "Previous page",
                 nextPageLabel: g = "Next page",
-                lastPageLabel: v = "Last page",
-                rangeLabel: b,
+                lastPageLabel: b = "Last page",
+                rangeLabel: v,
                 className: y
             } = e, A = (0, t._)(e, ["size", "page", "rowsPerPage", "totalRows", "rowsPerPageOptions", "onPageChange", "onRowsPerPageChange", "rowsPerPageLabel", "firstPageLabel", "previousPageLabel", "nextPageLabel", "lastPageLabel", "rangeLabel", "className"]);
             let S = Math.max(1, Math.ceil(c / o)),
@@ -4087,7 +4087,7 @@
                 value: e
             }, e))))), i.default.createElement("span", {
                 className: (0, a.default)(_[n], "content-default")
-            }, b ? b(P, N, c) : "".concat(P, "-").concat(N, " of ").concat(c))), i.default.createElement("div", {
+            }, v ? v(P, N, c) : "".concat(P, "-").concat(N, " of ").concat(c))), i.default.createElement("div", {
                 className: (0, a.default)("flex items-center", w[n])
             }, i.default.createElement(r.IconButton, {
                 icon: "icon-regular-double-chevron-large-left",
@@ -4112,14 +4112,14 @@
                 onClick: () => u(l + 1)
             }), i.default.createElement(r.IconButton, {
                 icon: "icon-regular-double-chevron-large-right",
-                ariaLabel: v,
+                ariaLabel: b,
                 size: D,
                 variant: "Utility",
                 isDisabled: C,
                 onClick: () => u(S - 1)
             }))))
         });
-    k.displayName = "TablePagination", e.s(["Table", 0, g, "TableBody", 0, b, "TableCell", 0, S, "TableHeader", 0, v, "TableHeaderCell", 0, A, "TablePagination", 0, k, "TableRow", 0, y])
+    k.displayName = "TablePagination", e.s(["Table", 0, g, "TableBody", 0, v, "TableCell", 0, S, "TableHeader", 0, b, "TableHeaderCell", 0, A, "TablePagination", 0, k, "TableRow", 0, y])
 }, 258858, e => {
     "use strict";
     var t = e.i(443967),
@@ -4160,8 +4160,8 @@
                 label: h,
                 value: p,
                 defaultValue: g,
-                isDisabled: v,
-                hasError: b,
+                isDisabled: b,
+                hasError: v,
                 helperText: y,
                 className: A,
                 style: S,
@@ -4175,7 +4175,7 @@
                 C = null != m ? m : "Large";
             return i.default.createElement("div", {
                 className: (0, a.default)("flex fill flex-col width-full gap-small", {
-                    [r.disabledOpacity]: v
+                    [r.disabledOpacity]: b
                 }, A),
                 style: S
             }, h && i.default.createElement("label", {
@@ -4186,16 +4186,16 @@
                 id: I,
                 "data-testid": "text-area-container",
                 style: T,
-                className: (0, a.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[f], n.INPUT_STROKE_BY_VARIANT[f], b ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", d[C], l[C], o[C], x),
+                className: (0, a.default)("foundation-web-text-area foundation-web-input outline-none", "radius-medium content-emphasis placeholder:content-muted", n.INPUT_BACKGROUND_BY_VARIANT[f], n.INPUT_STROKE_BY_VARIANT[f], v ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis", d[C], l[C], o[C], x),
                 value: p,
                 defaultValue: null == p ? g : void 0,
-                disabled: v,
+                disabled: b,
                 "aria-describedby": y ? k : void 0
             }, _)), y && i.default.createElement("span", {
                 id: k,
                 className: (0, a.default)("text-caption-small", {
-                    "content-system-alert": b,
-                    "content-default": !b
+                    "content-system-alert": v,
+                    "content-default": !v
                 })
             }, y))
         });
@@ -4265,7 +4265,7 @@
                 })
             }
         }),
-        v = (0, a.forwardRef)(function(e, i) {
+        b = (0, a.forwardRef)(function(e, i) {
             var r = e.classes,
                 n = e.className,
                 l = (0, t.a)(e, ["classes", "className"]),
@@ -4279,7 +4279,7 @@
                 ref: i
             }))
         });
-    e.s(["AlertTitle", 0, v], 514455)
+    e.s(["AlertTitle", 0, b], 514455)
 }, 27281, e => {
     "use strict";
     var t = e.i(437272);
@@ -4307,14 +4307,14 @@
         g = (0, d.c)((0, u.jsx)("path", {
             d: "M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
         }), "RadioButtonChecked");
-    let v = (0, o.s)("span", {
+    let b = (0, o.s)("span", {
             name: "MuiRadioButtonIcon",
             shouldForwardProp: o.r
         })({
             position: "relative",
             display: "flex"
         }),
-        b = (0, o.s)(p, {
+        v = (0, o.s)(p, {
             name: "MuiRadioButtonIcon"
         })({
             transform: "scale(1)"
@@ -4351,10 +4351,10 @@
         } = e, s = (0, l._)({}, e, {
             checked: t
         });
-        return (0, u.jsxs)(v, {
+        return (0, u.jsxs)(b, {
             className: a.root,
             ownerState: s,
-            children: [(0, u.jsx)(b, {
+            children: [(0, u.jsx)(v, {
                 fontSize: i,
                 className: a.background,
                 ownerState: s
@@ -4418,8 +4418,8 @@
                 {
                     checked: p,
                     checkedIcon: g = _,
-                    color: v = "primary",
-                    icon: b = w,
+                    color: b = "primary",
+                    icon: v = w,
                     name: y,
                     onChange: A,
                     size: x = "medium",
@@ -4427,7 +4427,7 @@
                 } = d,
                 k = (0, n._)(d, T),
                 C = (0, l._)({}, d, {
-                    color: v,
+                    color: b,
                     size: x
                 }),
                 P = (e => {
@@ -4446,7 +4446,7 @@
                 L = y;
             return N && (void 0 === M && (r = N.value, M = "object" == typeof(c = d.value) && null !== c ? r === c : String(r) === String(c)), void 0 === L && (L = N.name)), (0, u.jsx)(E, (0, l._)({
                 type: "radio",
-                icon: a.cloneElement(b, {
+                icon: a.cloneElement(v, {
                     fontSize: null != (i = w.props.fontSize) ? i : x
                 }),
                 checkedIcon: a.cloneElement(g, {
@@ -4572,7 +4572,7 @@
                         pageParams: []
                     },
                     g = 0,
-                    v = async () => {
+                    b = async () => {
                         let r = !1,
                             n = (0, t.ensureQueryFn)(s.options, s.fetchOptions),
                             l = async (e, a, i) => {
@@ -4622,13 +4622,13 @@
                     };
                 s.options.persister ? s.fetchFn = () => {
                     var e, t;
-                    return null == (e = (t = s.options).persister) ? void 0 : e.call(t, v, {
+                    return null == (e = (t = s.options).persister) ? void 0 : e.call(t, b, {
                         client: s.client,
                         queryKey: s.queryKey,
                         meta: s.options.meta,
                         signal: s.signal
                     }, r)
-                } : s.fetchFn = v
+                } : s.fetchFn = b
             }
         }
     }])
@@ -4703,5 +4703,5 @@
     }], 630986)
 }]);
 
-//# debugId=824270ee-58ff-9ab0-4992-1450228813f8
-//# sourceMappingURL=1oznqolqmcg63.js.map
+//# debugId=e9522cf6-1a77-8366-b75a-2b39538e9543
+//# sourceMappingURL=0c0p7x4-awdjf.js.map

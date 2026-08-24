@@ -2,10 +2,10 @@
     try {
         var e = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof globalThis ? globalThis : "undefined" != typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "f5ef26333aa83c27857ff672e1db0ec65992f830"
+            id: "35f87875510b805545cfa8c44cf9d06830107f4f"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "52a29f16-7e1d-4c90-8db9-2bb507215646", e._sentryDebugIdIdentifier = "sentry-dbid-52a29f16-7e1d-4c90-8db9-2bb507215646")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "9ac7dfce-d7a5-462d-a35f-86d1738bfa20", e._sentryDebugIdIdentifier = "sentry-dbid-9ac7dfce-d7a5-462d-a35f-86d1738bfa20")
     } catch (e) {}
 }(),
 function() {
@@ -46145,6 +46145,7 @@ function() {
                 parentSideExperienceChatSettingDescriptionV2: "Description.ParentSide.ExperienceChatSettingV2",
                 parentSideExperienceChatSettingDescriptionV3: "Description.ParentSide.ExperienceChatSettingV3",
                 experienceChatDisclaimer: "Description.ExperienceChatDisclaimer",
+                experienceChatOnlyDisclaimer: "Description.ExperienceChatOnlyDisclaimer",
                 experienceChatCascadingUpdatesSuccessMessage: "Description.ExperienceChatUpdated",
                 directChatLabel: "Label.DirectChat",
                 directChatDescription: "Description.DirectChatV2",
@@ -46153,6 +46154,7 @@ function() {
                 parentSideDirectChatDescription: "Description.ParentSide.DirectChatV2",
                 parentSideDirectChatDescriptionV2: "Description.ParentSide.DirectChatSetting",
                 parentSideDirectChatDescriptionV3: "Description.ParentSide.DirectChatSettingV3",
+                directChatOnlyDisclaimer: "Description.DirectChatOnlyDisclaimer",
                 directChatCascadingUpdatesSuccessMessage: "Description.RobloxChatDirectChatUpdated",
                 partyPrivacyCascadingUpdatesSuccessMessage: "Description.PartyPrivacyUpdated",
                 partyLabel: "Label.Party",
@@ -52848,7 +52850,8 @@ function() {
                         },
                         Q = (0, y.DeviceMeta)(),
                         H = (Q.isPhone || Q.isTablet) && Q.isInApp && !Q.isAmazonApp && !(M && Q.isAndroidApp) && !(U && Q.isIosApp),
-                        Y = function(e, t, n, r) {
+                        Y = H && !Q.isTablet,
+                        X = function(e, t, n, r) {
                             var i = "roblox://navigation/amp_wizard?feature_name=".concat(e, "&namespace=").concat(t, "&entry_point=settings"),
                                 o = !n || !r;
                             if (Q.isAndroidApp && (F || L && o) || Q.isIosApp && (B || V && o)) return i;
@@ -52869,7 +52872,7 @@ function() {
                         requireIDReverification: T,
                         isLoading: A || _,
                         handleFAEClick: function(e) {
-                            if (R && H) return void y.DeepLinkService.navigateToDeepLink(Y(va, vd));
+                            if (R && H) return void y.DeepLinkService.navigateToDeepLink(X(va, vd));
                             g3.authButtonClickConfirmFae(e), bw();
                             y.AccessManagementUpsellV2Service.startAccessManagementUpsell({
                                 featureName: va,
@@ -52886,8 +52889,8 @@ function() {
                             })
                         },
                         handleIDVClick: function() {
-                            if (N && H) {
-                                gJ("handleIDVClick"), bS(), y.DeepLinkService.navigateToDeepLink(Y(vo, vu));
+                            if (N && Y) {
+                                gJ("handleIDVClick"), bS(), y.DeepLinkService.navigateToDeepLink(X(vo, vu));
                                 return
                             }
                             bb();
@@ -52930,10 +52933,10 @@ function() {
                                             if (s = hg(r), c = null == i || i, d = {
                                                     context: "settings"
                                                 }, e) {
-                                                if (R && H) return y.DeepLinkService.navigateToDeepLink(Y(va, vd, t, n)), [2, !0];
+                                                if (R && H) return y.DeepLinkService.navigateToDeepLink(X(va, vd, t, n)), [2, !0];
                                                 l = va, u = vd
                                             } else if (a) {
-                                                if (N && H) return gJ(t), bS(), y.DeepLinkService.navigateToDeepLink(Y(vo, vu, t, n)), [2, !0];
+                                                if (N && Y) return gJ(t), bS(), y.DeepLinkService.navigateToDeepLink(X(vo, vu, t, n)), [2, !0];
                                                 bb(), l = vo, u = vu
                                             }
                                             if (!l || !u) return [2, !1];
@@ -81976,7 +81979,8 @@ function() {
                         child: n
                     }),
                     j = VQ(l),
-                    I = (0, v.jsx)("span", {
+                    I = T && j ? fz.experienceChatDisclaimer : T ? fz.experienceChatOnlyDisclaimer : fz.directChatOnlyDisclaimer,
+                    _ = (0, v.jsx)("span", {
                         dangerouslySetInnerHTML: {
                             __html: r(o ? fz.tfRestrictedExperienceChatPageParentSide : fz.parentSideExperienceChatDescriptionV2, {
                                 linkStart: '<a class="text-link" href='.concat(pu, ' target="_blank" rel="noreferrer">'),
@@ -81984,7 +81988,7 @@ function() {
                             })
                         }
                     }),
-                    _ = (0, v.jsxs)("span", {
+                    D = (0, v.jsxs)("span", {
                         children: [r(o ? fz.tfRestrictedExperienceChatChildSide : fz.experienceChatSettingDescriptionV2), " ", (0, v.jsx)("a", {
                             className: "text-link",
                             href: pu,
@@ -81995,7 +81999,7 @@ function() {
                     });
                 return (0, v.jsxs)(g().Fragment, {
                     children: [(0, v.jsx)(ci, {
-                        description: (null == n ? void 0 : n.userId) ? I : _,
+                        description: (null == n ? void 0 : n.userId) ? _ : D,
                         children: (0, v.jsxs)(g().Fragment, {
                             children: [T && (0, v.jsx)(wk, {
                                 title: r(fz.experienceChatLabel),
@@ -82017,7 +82021,7 @@ function() {
                                 id: "experience-direct-chat-privacy"
                             }), (T || j) && (0, v.jsx)("div", {
                                 className: "small text experience-chat-disclaimer",
-                                children: r(fz.experienceChatDisclaimer)
+                                children: r(I)
                             })]
                         })
                     }), f, b, O, P]
@@ -92224,4 +92228,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("UserSettings");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-4feb4f97ef8e2000.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-c6becccff33a5af9.js.map
